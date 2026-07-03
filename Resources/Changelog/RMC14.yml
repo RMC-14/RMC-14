@@ -1,52 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: The consoles inside of lifeboats and the liaisons pod now check for access.
-    type: Fix
-  id: 2987
-  time: '2026-03-03T02:07:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9381
-- author: keegaroo65
-  changes:
-  - message: Fixed Hive Tracker to track targets upon your devolution, and the target's
-      evolution or devolution.
-    type: Fix
-  id: 2988
-  time: '2026-03-03T02:09:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9328
-- author: Pyromaniac365
-  changes:
-  - message: Added standard, golden and disabler underlays to sidearm pouch
-    type: Add
-  id: 2989
-  time: '2026-03-03T02:11:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9221
-- author: Drazamuffin
-  changes:
-  - message: Removed an extra letter T in the ABR40 Tactical hunting rifle description
-    type: Fix
-  id: 2990
-  time: '2026-03-03T02:11:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9351
-- author: keegaroo65
-  changes:
-  - message: Changed Xeno Watch UI to ignore dashes and digits when searching, for
-      convenience with postfixes.
-    type: Tweak
-  id: 2991
-  time: '2026-03-03T02:14:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9324
-- author: PursuitInAshes
-  changes:
-  - message: '[PVE] Dropships have received storage compartments the size of backpacks
-      both sides of the cockpit doors. These are capable of storing any item.'
-    type: Add
-  - message: '[PVE] Dropship phones are now named correctly and in the "Dropship"
-      category.'
-    type: Fix
-  id: 2992
-  time: '2026-03-03T02:13:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9301
 - author: TadJohnson00
   changes:
   - message: '[PVE] Added the M5A2 SHEL, a HE variant of the M5A1 SLAW.'
@@ -4634,5 +4586,59 @@
   id: 3486
   time: '2026-07-03T21:27:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10337
+- author: kleinerstation13
+  changes:
+  - message: Added Scandinavian language, which can be learned via traits or a pamphlet
+    type: Add
+  - message: SPP Airborne crashlanded survivors can no longer speak English, except
+      for their Team Leader.
+    type: Tweak
+  - message: Some survivor roles can now speak additional languages, such as Sorokyne
+      survivors, SPP SOF, RCM Paramarines, and some Liaison variants.
+    type: Tweak
+  id: 3487
+  time: '2026-07-03T21:53:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10208
+- author: kleinerstation13
+  changes:
+  - message: Added SOF leader and commander headset for FORECON survivors
+    type: Add
+  id: 3488
+  time: '2026-07-03T21:55:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10320
+- author: DrSmugleaf
+  changes:
+  - message: Fixed a small server performance issue that accounted for 5% of the total
+      server update time.
+    type: Fix
+  id: 3489
+  time: '2026-07-03T21:59:23.806062+00:00'
+  url: null
+- author: Drazamuffin
+  changes:
+  - message: removed the red cross from the turquoise EMT uniform
+    type: Tweak
+  id: 3490
+  time: '2026-07-03T22:47:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10336
+- author: DrSmugleaf
+  changes:
+  - message: Fixed rounds not ending automatically.
+    type: Fix
+  - message: Fixed landing zone UN-577 spaceborne gauss turrets blocking vehicles.
+    type: Fix
+  id: 3491
+  time: '2026-07-03T22:59:26.582900+00:00'
+  url: null
+- author: kleinerstation13
+  changes:
+  - message: Renamed the HG 37-12 to Model 12
+    type: Tweak
+  - message: The HG 37-12 (Now Model 12)'s description no longer erroneously mentions
+      being able to toggle the shotgun tube.
+    type: Fix
+  id: 3492
+  time: '2026-07-03T23:00:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10363
 Name: RMC14
 Order: -1

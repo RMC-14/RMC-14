@@ -160,12 +160,12 @@
     minMagazines: 1
     maxMagazines: 2
     prototypes: # Weighted
-    - RMCWeaponShotgunHG3712: RMCSpawnerRandomShotgunBoxes
-    - RMCWeaponShotgunHG3712: RMCSpawnerRandomShotgunBoxes
-    - RMCWeaponShotgunHG3712: RMCSpawnerRandomShotgunBoxes
-    - RMCWeaponShotgunHG3712: RMCSpawnerRandomShotgunBoxes
-    - RMCWeaponShotgunHG3712: RMCSpawnerRandomShotgunBoxes
-    - RMCWeaponShotgunHG3712: RMCSpawnerRandomShotgunBoxes
+    - RMCWeaponShotgunM12: RMCSpawnerRandomShotgunBoxes
+    - RMCWeaponShotgunM12: RMCSpawnerRandomShotgunBoxes
+    - RMCWeaponShotgunM12: RMCSpawnerRandomShotgunBoxes
+    - RMCWeaponShotgunM12: RMCSpawnerRandomShotgunBoxes
+    - RMCWeaponShotgunM12: RMCSpawnerRandomShotgunBoxes
+    - RMCWeaponShotgunM12: RMCSpawnerRandomShotgunBoxes
     # TODO 3 R4T rifle
     - WeaponShotgunCustomBuilt: RMCSpawnerRandomShotgunBoxes
     - RMCWeaponShotgunM3717: RMCSpawnerRandomShotgunBoxes
@@ -516,7 +516,7 @@
   - type: GunSpawner
     chanceToSpawn: 0.8
 
-# Civilian gun 
+# Civilian gun
 - type: entity
   parent: RMCSpawnerRandomGunBase
   id: RMCSpawnerRandomGunCiv
@@ -581,7 +581,7 @@
   - type: GunSpawner
     chanceToSpawn: 0.8
 
-# corporate gun 
+# corporate gun
 - type: entity
   parent: RMCSpawnerRandomGunBase
   id: RMCSpawnerRandomGunCorp
