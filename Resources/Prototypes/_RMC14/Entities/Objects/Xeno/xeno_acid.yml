@@ -1,5 +1,5 @@
 - type: entity
-  id: WeakAcid
+  id: RMCWeakLingeringAcid
   components:
   - type: XenoAcidType
     damage:
@@ -7,10 +7,10 @@
         Heat: 1.25
     armorPiercing: 40
     appearance: Weak
-    upgrade: NormalAcid
+    upgrade: RMCNormalLingeringAcid
 
 - type: entity
-  id: NormalAcid
+  id: RMCNormalLingeringAcid
   parent: WeakAcid
   components:
   - type: XenoAcidType
@@ -18,11 +18,11 @@
     maxDuration: 40
     durationAdd: 20
     appearance: Normal
-    upgrade: StrongAcid
+    upgrade: RMCStrongLingeringAcid
 
 - type: entity
-  id: StrongAcid
-  parent: NormalAcid
+  id: RMCStrongLingeringAcid
+  parent: RMCNormalLingeringAcid
   components:
   - type: XenoAcidType
     tier: 3

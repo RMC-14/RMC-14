@@ -78,7 +78,7 @@ public sealed partial class ActiveForTheHiveComponent : Component
     public FixedPoint2 SlowDown = FixedPoint2.New(0.45);
 
     [DataField]
-    public EntProtoId? MobAcid = "WeakAcid";
+    public EntProtoId? MobAcid = "RMCWeakLingeringAcid";
 }
 
 

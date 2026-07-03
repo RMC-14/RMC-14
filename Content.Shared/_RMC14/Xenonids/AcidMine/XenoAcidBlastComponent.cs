@@ -33,7 +33,7 @@ public sealed partial class XenoAcidBlastComponent : Component
     public bool Empowered;
 
     [DataField, AutoNetworkedField]
-    public EntProtoId Acid = "WeakAcid";
+    public EntProtoId Acid = "RMCWeakLingeringAcid";
 
     [DataField, AutoNetworkedField]
     public HashSet<EntityUid> AlreadyHit = new();

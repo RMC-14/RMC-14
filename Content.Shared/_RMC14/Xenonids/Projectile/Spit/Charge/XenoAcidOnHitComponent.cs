@@ -9,7 +9,7 @@ namespace Content.Shared._RMC14.Xenonids.Projectile.Spit.Charge;
 public sealed partial class XenoAcidOnHitComponent : Component
 {
     [DataField]
-    public EntProtoId Acid = "WeakAcid";
+    public EntProtoId Acid = "RMCWeakLingeringAcid";
 
     [DataField]
     public TimeSpan ProlongDuration = TimeSpan.FromSeconds(10);

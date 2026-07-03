@@ -8,5 +8,5 @@ namespace Content.Shared._RMC14.Xenonids.AcidSlash;
 public sealed partial class XenoAcidSlashComponent : Component
 {
     [DataField]
-    public EntProtoId Acid = "WeakAcid";
+    public EntProtoId Acid = "RMCWeakLingeringAcid";
 }
