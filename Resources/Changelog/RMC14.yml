@@ -1,45 +1,4 @@
 ﻿Entries:
-- author: SharkSnake98
-  changes:
-  - message: Added multiple ERT Bays for the various factions.
-    type: Add
-  - message: Added 2 new unbreakable windows
-    type: Add
-  - message: Removed the previous ERT area
-    type: Remove
-  - message: Changed the draw-depth of the coffee machine
-    type: Tweak
-  id: 2960
-  time: '2026-02-27T13:21:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9088
-- author: GNUtopia
-  changes:
-  - message: Weedbound resin doors are no longer capitalised
-    type: Fix
-  id: 2961
-  time: '2026-02-27T13:36:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9283
-- author: Dygon
-  changes:
-  - message: Fixed acid ball projectiles from the Praetorian not being deleted.
-    type: Fix
-  id: 2962
-  time: '2026-02-27T13:37:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9270
-- author: Dygon
-  changes:
-  - message: Fixed barbed barricades not stunning xenonids that leap against it
-    type: Fix
-  id: 2963
-  time: '2026-02-27T13:38:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9276
-- author: Dygon
-  changes:
-  - message: FIxed xeno projectiles having slightly less range than intended.
-    type: Fix
-  id: 2964
-  time: '2026-02-27T13:37:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9277
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed rocket launchers having incorrect melee damage. They now deal 15
@@ -4647,5 +4606,41 @@
   id: 3459
   time: '2026-07-03T01:19:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10221
+- author: Vixting
+  changes:
+  - message: Fixed the default radio channel not being accounted for.
+    type: Fix
+  id: 3460
+  time: '2026-07-03T01:29:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10270
+- author: Vermidia
+  changes:
+  - message: '[PVE] Added language:add, language:remove, and language:reset for modifying
+      an entities'' known languages.'
+    type: Add
+  id: 3461
+  time: '2026-07-03T01:27:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10213
+- author: Vixting
+  changes:
+  - message: Fixed language icon going out of position
+    type: Fix
+  id: 3462
+  time: '2026-07-03T01:28:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10203
+- author: Vixting
+  changes:
+  - message: Fixed being able to refill flamer tanks from any range
+    type: Fix
+  id: 3463
+  time: '2026-07-03T01:28:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10269
+- author: Ian321
+  changes:
+  - message: The tanks DRGN flamer now creates the fire centered on the target.
+    type: Fix
+  id: 3464
+  time: '2026-07-03T01:26:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10214
 Name: RMC14
 Order: -1
