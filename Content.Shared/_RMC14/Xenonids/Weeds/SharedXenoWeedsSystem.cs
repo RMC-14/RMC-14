@@ -206,8 +206,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
         // If `weedTile` is within the range of another node, set that as its new source.
         var weedCoords = _transform.GetMapCoordinates(weedTile);
-        var query = EntityQueryEnumerator<XenoWeedsComponent, XenoWeedNodeComponent>();
-        while (query.MoveNext(out var node, out var nodeWeeds, out var _))
+        var query = EntityQueryEnumerator<XenoWeedNodeComponent, XenoWeedsComponent>();
+        while (query.MoveNext(out var node, out var _, out var nodeWeeds))
         {
             // `node` is deleted, from a different hive, or isn't a high enough level to support `weedTile`.
             if (TerminatingOrDeleted(node) ||
