@@ -1,0 +1,34 @@
+- type: entity
+  id: WeakAcid
+  components:
+  - type: XenoAcidType
+    damage:
+      types:
+        Heat: 1.25
+    armorPiercing: 40
+    appearance: Weak
+    upgrade: NormalAcid
+
+- type: entity
+  id: NormalAcid
+  parent: WeakAcid
+  components:
+  - type: XenoAcidType
+    tier: 2
+    maxDuration: 40
+    durationAdd: 20
+    appearance: Normal
+    upgrade: StrongAcid
+
+- type: entity
+  id: StrongAcid
+  parent: NormalAcid
+  components:
+  - type: XenoAcidType
+    tier: 3
+    maxDuration: 80
+    durationAdd: 40
+    weakenArmor: 15
+    appearance: Strong
+    upgrade: null
+

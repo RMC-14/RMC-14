@@ -1,22 +1,12 @@
 using Content.Shared.Damage;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 
 namespace Content.Shared._RMC14.Xenonids.Projectile.Spit.Charge;
 
-[Prototype]
-public sealed partial class XenoAcidPrototype : IPrototype, IInheritingPrototype
+[RegisterComponent, NetworkedComponent]
+public sealed partial class XenoAcidTypeComponent : Component
 {
-    [IdDataField]
-    public string ID { get; private set; } = default!;
-
-    [ParentDataField(typeof(PrototypeIdArraySerializer<XenoAcidPrototype>))]
-    public string[]? Parents { get; private set; }
-
-    [AbstractDataField]
-    [NeverPushInheritance]
-    public bool Abstract { get; private set; }
-
     [DataField]
     public DamageSpecifier Damage = new();
 
@@ -41,7 +31,7 @@ public sealed partial class XenoAcidPrototype : IPrototype, IInheritingPrototype
     public TimeSpan MaxDuration = TimeSpan.FromSeconds(20);
 
     [DataField]
-    public ProtoId<XenoAcidPrototype>? Upgrade;
+    public EntProtoId Upgrade;
 
     [DataField]
     public UserAcidedEffects Appearance;

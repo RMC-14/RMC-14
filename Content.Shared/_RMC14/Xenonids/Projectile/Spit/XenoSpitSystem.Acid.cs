@@ -13,6 +13,7 @@ namespace Content.Shared._RMC14.Xenonids.Projectile.Spit;
 
 public sealed partial class XenoSpitSystem : EntitySystem
 {
+    [Dependency] private readonly IComponentFactory _compFactory = default!;
 
     private static readonly ProtoId<ReagentPrototype> AcidRemovedBy = "Water";
     public void InitializeAcid()
@@ -108,9 +109,9 @@ public sealed partial class XenoSpitSystem : EntitySystem
         Dirty(acided);
     }
 
-    public void ApplyOrExtendAcid(EntityUid ent, ProtoId<XenoAcidPrototype> acid, TimeSpan? extendTime = null)
+    public void ApplyOrExtendAcid(EntityUid ent, EntProtoId acid, TimeSpan? extendTime = null)
     {
-        if (!_prototypeManager.TryIndex(acid, out var acidProto))
+        if (!_prototypeManager.TryIndex(acid, out var acidProto) || !acidProto.TryGetComponent<XenoAcidTypeComponent>(out var acidType, _compFactory))
             return;
 
         extendTime ??= TimeSpan.FromSeconds(10);
@@ -118,16 +119,16 @@ public sealed partial class XenoSpitSystem : EntitySystem
         if (TryComp<UserAcidedComponent>(ent, out var acided))
             ProlongAcid((ent, acided), extendTime.Value);
         else
-            ApplyAcid(ent, acidProto);
+            ApplyAcid(ent, acidType);
     }
 
-    public void ApplyAcid(EntityUid ent, XenoAcidPrototype acid)
+    public void ApplyAcid(EntityUid ent, XenoAcidTypeComponent acid)
     {
         var acidComp = EnsureComp<UserAcidedComponent>(ent);
         UpdateAcid((ent, acidComp), acid);
     }
 
-    public void UpdateAcid(Entity<UserAcidedComponent> acided, XenoAcidPrototype newAcid)
+    public void UpdateAcid(Entity<UserAcidedComponent> acided, XenoAcidTypeComponent newAcid)
     {
         acided.Comp.Damage = newAcid.Damage;
         acided.Comp.ArmorPiercing = newAcid.ArmorPiercing;
@@ -167,11 +168,11 @@ public sealed partial class XenoSpitSystem : EntitySystem
             return true;
         }
 
-        if (!_prototypeManager.TryIndex(acided.Comp.Upgrade, out var acidProto))
+        if (!_prototypeManager.TryIndex(acided.Comp.Upgrade, out var acidProto) || !acidProto.TryGetComponent<XenoAcidTypeComponent>(out var acidType, _compFactory))
             return false;
 
         //Acid stuff
-        UpdateAcid((acided, acided.Comp), acidProto);
+        UpdateAcid((acided, acided.Comp), acidType);
 
         Dirty(acided);
         UpdateAppearance((acided, acided.Comp));

@@ -1,4 +1,3 @@
-using Content.Shared._RMC14.Xenonids.Projectile.Spit.Charge;
 using Content.Shared.Damage;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -34,7 +33,7 @@ public sealed partial class XenoAcidBlastComponent : Component
     public bool Empowered;
 
     [DataField, AutoNetworkedField]
-    public ProtoId<XenoAcidPrototype> Acid = "WeakAcid";
+    public EntProtoId Acid = "WeakAcid";
 
     [DataField, AutoNetworkedField]
     public HashSet<EntityUid> AlreadyHit = new();

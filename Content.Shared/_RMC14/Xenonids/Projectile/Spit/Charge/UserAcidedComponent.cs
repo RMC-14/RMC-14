@@ -60,7 +60,7 @@ public sealed partial class UserAcidedComponent : Component
     public TimeSpan ExtinguishAmount = TimeSpan.FromSeconds(27);
 
     [DataField, AutoNetworkedField]
-    public ProtoId<XenoAcidPrototype>? Upgrade;
+    public EntProtoId? Upgrade;
 }
 
 [Serializable, NetSerializable]
