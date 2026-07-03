@@ -15,7 +15,7 @@ public sealed class LoadoutComponentAddSystem : EntitySystem
 
     private void OnComponentAdd(ref LoadoutComponentAddEvent ev)
     {
-        if(!ev.Loadout.ComponentsAdd)
+        if (!ev.Loadout.ComponentsAdd)
             return;
 
         foreach (var entProtoId in ev.Loadout.Equipment.Values)
