@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed rocket launchers having incorrect melee damage. They now deal 15
-      damage, from 5.
-    type: Fix
-  id: 2965
-  time: '2026-03-03T00:35:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9379
 - author: TadJohnson00
   changes:
   - message: Added a sprite for the TSE's RTO packs.
@@ -4642,5 +4634,12 @@
   id: 3464
   time: '2026-07-03T01:26:27.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10214
+- author: TheFairyKings
+  changes:
+  - message: Magical Girl Queen.
+    type: Add
+  id: 3465
+  time: '2026-07-03T01:30:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10274
 Name: RMC14
 Order: -1
