@@ -31,7 +31,7 @@ public sealed partial class XenoAcidTypeComponent : Component
     public TimeSpan MaxDuration = TimeSpan.FromSeconds(20);
 
     [DataField]
-    public EntProtoId Upgrade;
+    public EntProtoId? Upgrade;
 
     [DataField]
     public UserAcidedEffects Appearance;
