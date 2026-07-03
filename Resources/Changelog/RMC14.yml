@@ -1,68 +1,4 @@
 ﻿Entries:
-- author: wheelwrightt
-  changes:
-  - message: Fixed UBE action icon appearing inactive after dropping and picking up
-      the flamer despite remaining active.
-    type: Fix
-  id: 2977
-  time: '2026-03-03T00:48:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9307
-- author: J C Denton
-  changes:
-  - message: Fixed PMC survivor Solaris insert Leader and FOL having wrong skills.
-    type: Fix
-  id: 2978
-  time: '2026-03-03T00:57:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9263
-- author: monomethylhydrazine
-  changes:
-  - message: Added jobs for 121/RECON, an SPP SOF investigating the Sorokyne Outpost
-      distress signal.
-    type: Add
-  id: 2979
-  time: '2026-03-03T01:00:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8690
-- author: Dygon
-  changes:
-  - message: Fire will no longer clip through walls when shot at diagonal angles.
-    type: Fix
-  - message: Doors now always block fire while closed.
-    type: Fix
-  id: 2980
-  time: '2026-03-03T01:02:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9357
-- author: DrSmugleaf
-  changes:
-  - message: Fixed melee, disarm, and tackles sometimes not registering on targets
-      that you are pulling and moving around, specially at high speeds.
-    type: Fix
-  id: 2981
-  time: '2026-03-03T01:57:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9400
-- author: Arykh
-  changes:
-  - message: Blood Packs now transfer blood every 2 seconds instead of 3. Very slightly
-      (10%) reduced the blood transfer amount from Packs and IV Drips.
-    type: Tweak
-  id: 2982
-  time: '2026-03-03T01:59:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9394
-- author: TadJohnson00
-  changes:
-  - message: '[PVE] fixed a visual error where having uniform and armour webbings
-      equipped simultaneously would result in permanent artifacts upon removing one
-      webbing.'
-    type: Fix
-  id: 2983
-  time: '2026-03-03T02:06:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9318
-- author: Thereisabear
-  changes:
-  - message: Empty resin traps can now be destroyed by the hive again.
-    type: Fix
-  id: 2984
-  time: '2026-03-03T02:06:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9192
 - author: Vixting
   changes:
   - message: Block synths from priming grenades
@@ -4647,5 +4583,65 @@
   id: 3476
   time: '2026-07-03T01:41:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10316
+- author: Vixting
+  changes:
+  - message: Fixed being able to learn language whilst dead
+    type: Fix
+  id: 3477
+  time: '2026-07-03T01:43:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10329
+- author: kleinerstation13
+  changes:
+  - message: Replaced the ship master comms encryption key with a damaged CMB encryption
+      key on Trijent Dam.
+    type: Tweak
+  id: 3478
+  time: '2026-07-03T01:46:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10347
+- author: SabreML
+  changes:
+  - message: Fixed APC lights staying on after being broken.
+    type: Fix
+  id: 3479
+  time: '2026-07-03T01:44:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10335
+- author: carccborg
+  changes:
+  - message: Failed disarm popup now displays the proper names
+    type: Fix
+  id: 3480
+  time: '2026-07-03T01:46:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10339
+- author: Thereisabear
+  changes:
+  - message: Fixed a console error resulting from trying to pick up invalid items.
+    type: Fix
+  id: 3481
+  time: '2026-07-03T01:44:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10332
+- author: Vixting
+  changes:
+  - message: Added examine text to the grenadier helemt for number of hits it can
+      take
+    type: Add
+  id: 3482
+  time: '2026-07-03T01:45:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10342
+- author: Thereisabear
+  changes:
+  - message: OnEntityTargetAttempt is now handled, less console spam.
+    type: Fix
+  id: 3483
+  time: '2026-07-03T01:44:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10330
+- author: Thereisabear
+  changes:
+  - message: Playing cards now have a Draw 5 or Draw All option as well.
+    type: Tweak
+  - message: fixed a source of console spam resulting from Playing Cards.
+    type: Fix
+  id: 3484
+  time: '2026-07-03T01:43:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10326
 Name: RMC14
 Order: -1
