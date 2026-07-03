@@ -183,11 +183,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             if (TerminatingOrDeleted(spread))
                 continue;
 
-            if (_weedsQuery.TryComp(spread, out var weeds))
-            {
-                weeds.Source = null;
-                Dirty(spread, weeds);
-            }
+            if (TryAvoidOrphanage(spread))
+                continue;
 
             var timed = EnsureComp<TimedDespawnComponent>(spread);
             var offset = _random.Next(ent.Comp.MinRandomDelete, ent.Comp.MaxRandomDelete);
@@ -196,6 +193,35 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
         ent.Comp.Spread.Clear();
         Dirty(ent);
+    }
+
+    private bool TryAvoidOrphanage(EntityUid weedEnt)
+    {
+        if (!_weedsQuery.TryComp(weedEnt, out var weeds))
+            return false;
+
+        weeds.Source = null;
+
+        // If `weedEnt` is within the range of another node, set that as its new source.
+        var weedCoords = Transform(weedEnt).Coordinates;
+        var query = EntityQueryEnumerator<XenoWeedsComponent, XenoWeedNodeComponent>();
+        while (query.MoveNext(out var nodeUid, out var nodeWeeds, out var _))
+        {
+            if (TerminatingOrDeleted(nodeUid))
+                continue;
+
+            if (_transform.InRange(weedCoords, Transform(nodeUid).Coordinates, nodeWeeds.Range))
+            {
+                weeds.Source = nodeUid;
+                nodeWeeds.Spread.Add(weedEnt);
+                Dirty(weedEnt, weeds);
+                Dirty(nodeUid, nodeWeeds);
+                return true;
+            }
+        }
+
+        Dirty(weedEnt, weeds);
+        return false;
     }
 
     private void OnWeedsRemove(Entity<XenoWeedsComponent> ent, ref ComponentRemove args)

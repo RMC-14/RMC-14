@@ -171,6 +171,7 @@
     healOnStopSpreading:
       groups:
         Brute: -6
+  - type: XenoWeedNode
   - type: Tag
     tags:
     - XenoWeedNode
@@ -198,6 +199,7 @@
     - XenoWeedNode
     - XenoWeedTile
   - type: RMCVisibleToGhostsOnly
+  - type: XenoWeedNode
 
 - type: entity # TODO RMC14 sound
   parent: XenoWeeds
@@ -324,6 +326,7 @@
     healOnStopSpreading:
       groups:
         Brute: -6
+  - type: XenoWeedNode
   - type: XenoConstructionPlasmaCost
     plasma: 75
   - type: Tag
@@ -353,6 +356,7 @@
     - XenoWeedNode
     - XenoWeedTile
   - type: RMCVisibleToGhostsOnly
+  - type: XenoWeedNode
 
 
 - type: entity
@@ -464,6 +468,7 @@
     healOnStopSpreading:
       groups:
         Brute: -6
+  - type: XenoWeedNode
   - type: Tag
     tags:
     - XenoWeedNode
@@ -485,6 +490,7 @@
     - XenoWeedNode
     - XenoWeedTile
   - type: RMCVisibleToGhostsOnly
+  - type: XenoWeedNode
 
 - type: Tag
   id: XenoWeedTile
