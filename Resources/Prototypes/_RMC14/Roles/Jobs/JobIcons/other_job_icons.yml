@@ -16,7 +16,7 @@
   parent: CMJobIconBase
   id: RMCJobIconExecutiveBodyguard
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/We-Ya/executive_bodyguard.rsi
     state: weya_bodyguard_ppo
 
 - type: jobIcon
