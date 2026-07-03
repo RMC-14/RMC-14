@@ -24,8 +24,6 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
 
-    private readonly ISawmill _sawmill = default!;
-
     public override void Initialize()
     {
         base.Initialize();
