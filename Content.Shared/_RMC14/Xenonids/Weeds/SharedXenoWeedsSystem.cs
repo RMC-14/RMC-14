@@ -195,32 +195,43 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         Dirty(ent);
     }
 
-    private bool TryAvoidOrphanage(EntityUid weedEnt)
+    private bool TryAvoidOrphanage(EntityUid weedTile)
     {
-        if (!_weedsQuery.TryComp(weedEnt, out var weeds))
+        if (!_weedsQuery.TryComp(weedTile, out var weeds))
             return false;
 
         weeds.Source = null;
 
-        // If `weedEnt` is within the range of another node, set that as its new source.
-        var weedCoords = Transform(weedEnt).Coordinates;
+        _hiveMemberQuery.TryComp(weedTile, out var weedHive);
+
+        // If `weedTile` is within the range of another node, set that as its new source.
+        var weedCoords = _transform.GetMapCoordinates(weedTile);
         var query = EntityQueryEnumerator<XenoWeedsComponent, XenoWeedNodeComponent>();
-        while (query.MoveNext(out var nodeUid, out var nodeWeeds, out var _))
+        while (query.MoveNext(out var node, out var nodeWeeds, out var _))
         {
-            if (TerminatingOrDeleted(nodeUid))
+            // `node` is deleted, from a different hive, or isn't a high enough level to support `weedTile`.
+            if (TerminatingOrDeleted(node) ||
+                weedHive != null && _hiveMemberQuery.HasComp(node) && !_hive.IsMember(node, weedHive.Hive) ||
+                weeds.Level > nodeWeeds.Level)
                 continue;
 
-            if (_transform.InRange(weedCoords, Transform(nodeUid).Coordinates, nodeWeeds.Range))
+            var nodeCoords = _transform.GetMapCoordinates(node);
+            if (weedCoords.MapId != nodeCoords.MapId)
+                continue;
+
+            // Can't use `weedCoords.InRange()` here because that checks in a circle; weeds grow in a big square.
+            var diff = Vector2.Abs(weedCoords.Position - nodeCoords.Position);
+            if (diff.X < nodeWeeds.Range && diff.Y < nodeWeeds.Range)
             {
-                weeds.Source = nodeUid;
-                nodeWeeds.Spread.Add(weedEnt);
-                Dirty(weedEnt, weeds);
-                Dirty(nodeUid, nodeWeeds);
+                weeds.Source = node;
+                nodeWeeds.Spread.Add(weedTile);
+                Dirty(weedTile, weeds);
+                Dirty(node, nodeWeeds);
                 return true;
             }
         }
 
-        Dirty(weedEnt, weeds);
+        Dirty(weedTile, weeds);
         return false;
     }
 
