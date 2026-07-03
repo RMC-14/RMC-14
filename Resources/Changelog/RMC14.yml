@@ -1,34 +1,4 @@
 ﻿Entries:
-- author: TadJohnson00
-  changes:
-  - message: Added a sprite for the TSE's RTO packs.
-    type: Fix
-  id: 2966
-  time: '2026-03-03T00:35:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9390
-- author: CatAndHats
-  changes:
-  - message: You can now use the spotter instructional pamphlet even if you have already
-      used a skill pamphlet
-    type: Fix
-  id: 2967
-  time: '2026-03-03T00:36:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9364
-- author: Dygon
-  changes:
-  - message: Barbed barricades now only block climbing over or buckling to objects
-      when in between the user and the object.
-    type: Fix
-  id: 2968
-  time: '2026-03-03T00:38:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9315
-- author: wheelwrightt
-  changes:
-  - message: Cutting up scarves no longer yields upstream cloth.
-    type: Fix
-  id: 2969
-  time: '2026-03-03T00:38:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9310
 - author: kleinerstation13
   changes:
   - message: Replaced mentions of CEC on Sorokyne Strata and SPP EC patch with MSC
@@ -4641,5 +4611,35 @@
   id: 3465
   time: '2026-07-03T01:30:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10274
+- author: Dygon
+  changes:
+  - message: Fixed the dazed overlay effect sometimes not being removed after the
+      effect ended.
+    type: Fix
+  id: 3466
+  time: '2026-07-03T01:33:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10294
+- author: IceNoobXD
+  changes:
+  - message: Added APCs to LV-624 landing zones!
+    type: Add
+  id: 3467
+  time: '2026-07-03T01:35:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10297
+- author: SabreML
+  changes:
+  - message: Fixed observers being unable to hear xenos talking if 'Ghost Hearing'
+      was disabled.
+    type: Fix
+  id: 3468
+  time: '2026-07-03T01:32:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10291
+- author: Thereisabear
+  changes:
+  - message: Console should have less Can't resolve Entity 0 now.
+    type: Fix
+  id: 3469
+  time: '2026-07-03T01:34:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10295
 Name: RMC14
 Order: -1
