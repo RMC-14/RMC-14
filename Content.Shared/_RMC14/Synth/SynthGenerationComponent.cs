@@ -1,3 +1,4 @@
+using Content.Shared.Damage.Prototypes;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -17,4 +18,7 @@ public sealed partial class SynthGenerationComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntityUid? SelectGenerationActionEntity;
+
+    [DataField]
+    public ProtoId<DamageModifierSetPrototype>? DamageModifier;
 }

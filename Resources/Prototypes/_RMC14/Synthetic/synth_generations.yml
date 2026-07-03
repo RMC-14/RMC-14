@@ -4,6 +4,7 @@
   components:
   - type: SynthGeneration
     generation: RMCSynthGenOne
+    damageModifier: RMCSynthGenOne
   - type: Skills
     skills:
       RMCSkillCqc: 3
@@ -46,6 +47,7 @@
   components:
   - type: SynthGeneration
     generation: RMCSynthGenTwo
+    damageModifier: RMCSynthGenTwo
   - type: Skills
     skills:
       RMCSkillCqc: 3

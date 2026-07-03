@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Humanoid;
 using Content.Shared._RMC14.Prototypes;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
+using Content.Shared.Damage;
 using Content.Shared.GameTicking;
 using Content.Shared.Prototypes;
 using Robust.Shared.Network;
@@ -20,6 +21,7 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
 
     private readonly ISawmill _sawmill = default!;
@@ -40,10 +42,22 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
         EnsureComp(ent, out SynthGenerationComponent comp);
 
         if (comp.Generation != null)
+        {
+            ApplyGenerationModifier((ent.Owner, comp));
             return;
+        }
 
         _actions.AddAction(ent, ref comp.SelectGenerationActionEntity, comp.GenerationAction);
         Dirty(ent.Owner, comp);
+    }
+
+    private void ApplyGenerationModifier(Entity<SynthGenerationComponent> ent)
+    {
+        if (ent.Comp.DamageModifier is { } mod &&
+            TryComp<DamageableComponent>(ent, out var dmg))
+        {
+            _damageable.SetDamageModifierSetId(ent, mod, dmg);
+        }
     }
 
     private void OnGenerationPlayerAttached(Entity<SynthGenerationComponent> ent, ref PlayerAttachedEvent args)
@@ -139,6 +153,10 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
         }
 
         EntityManager.AddComponents(ent, proto);
+
+        if (TryComp<SynthGenerationComponent>(ent, out var gen))
+            ApplyGenerationModifier((ent.Owner, gen));
+
         _actions.RemoveAction(ent.Owner, ent.Comp.SelectGenerationActionEntity);
     }
 }
