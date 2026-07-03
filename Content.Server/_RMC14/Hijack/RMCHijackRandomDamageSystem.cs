@@ -135,21 +135,14 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
 
     private void OnPipeRemove<T>(Entity<RMCHijackActivePipeComponent> ent, ref T args)
     {
+        QueueDel(ent.Comp.Warning);
+        ent.Comp.Warning = null;
+
         if (TerminatingOrDeleted(ent.Comp.Map))
             return;
 
         if (TryComp(ent.Comp.Map, out RMCHijackActiveMapComponent? map))
-        {
             map.Pipes.Remove(ent);
-            map.Explode.RemoveAll(pending =>
-            {
-                if (pending.Pipe != ent.Owner)
-                    return false;
-
-                QueueDel(pending.Warning);
-                return true;
-            });
-        }
     }
 
     private void OnPipeAnchorChanged(Entity<RMCHijackActivePipeComponent> ent, ref AnchorStateChangedEvent args)
@@ -269,16 +262,23 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
         var warning = Spawn(PipeExplosionWarning, _transform.GetMoverCoordinates(pipe, xform));
         _audio.PlayPvs(map.Comp.PipeHiss, pipe);
 
-        map.Comp.Explode.Add((pipe, warning));
+        if (TryComp(pipe, out RMCHijackActivePipeComponent? active))
+            active.Warning = warning;
+
+        map.Comp.Explode.Add(pipe);
         map.Comp.ExplodeAt = _timing.CurTime + map.Comp.ExplodeDelay;
     }
 
     /// <summary>
     ///     Explodes a warned pipe, starts local fire, and leaves a broken pipe visual in its place.
     /// </summary>
-    private void BurstPipe(EntityUid pipe, EntityUid warning)
+    private void BurstPipe(EntityUid pipe)
     {
-        QueueDel(warning);
+        if (TryComp(pipe, out RMCHijackActivePipeComponent? active))
+        {
+            QueueDel(active.Warning);
+            active.Warning = null;
+        }
 
         if (Deleted(pipe) ||
             !TryComp(pipe, out TransformComponent? xform) ||
@@ -326,8 +326,7 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
         var query = EntityQueryEnumerator<RMCHijackActiveMapComponent>();
         while (query.MoveNext(out var uid, out var active))
         {
-            if (active.ExplodeAt is { } explodeAt && time >= explodeAt)
-                BurstQueuedPipes(active);
+            TryBurstQueuedPipes(uid, active);
 
             if (time < active.Next)
                 continue;
@@ -343,15 +342,30 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
         }
     }
 
+    private void TryBurstQueuedPipes(EntityUid uid, RMCHijackActiveMapComponent active)
+    {
+        if (active.ExplodeAt is not { } explodeAt || _timing.CurTime < explodeAt)
+            return;
+
+        try
+        {
+            BurstQueuedPipes(active);
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Error while bursting hijack pipes on {ToPrettyString(uid)}:\n{e}");
+        }
+    }
+
     private void BurstQueuedPipes(RMCHijackActiveMapComponent active)
     {
         var burst = 0;
         while (burst < MaxPipeBurstsPerTick && active.Explode.Count > 0)
         {
             var last = active.Explode.Count - 1;
-            var (pipe, warning) = active.Explode[last];
+            var pipe = active.Explode[last];
             active.Explode.RemoveAt(last);
-            BurstPipe(pipe, warning);
+            BurstPipe(pipe);
             burst++;
         }
 

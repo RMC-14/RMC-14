@@ -19,7 +19,7 @@ public sealed partial class RMCHijackActiveMapComponent : Component
     public bool InitialPipeBarragePending;
 
     [DataField]
-    public List<(EntityUid Pipe, EntityUid Warning)> Explode = new();
+    public List<EntityUid> Explode = new();
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan? ExplodeAt;
