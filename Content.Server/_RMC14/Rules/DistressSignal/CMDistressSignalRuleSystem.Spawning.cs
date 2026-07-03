@@ -1,3 +1,4 @@
+﻿using System.Linq;
 using System.Numerics;
 using Content.Server.GameTicking;
 using Content.Server.Station.Components;
@@ -134,7 +135,7 @@ public sealed partial class CMDistressSignalRuleSystem
         // TODO RMC14 dont count survivors
         var totalSurvivors = (int) Math.Clamp((int) Math.Round(totalPlayers / _marinesPerSurvivor), _minimumSurvivors, _maximumSurvivors);
         var marines = totalPlayers - totalXenos - totalSurvivors;
-        var roundstartTank = totalPlayers >= vehicleThreshold;
+        var roundstartTank = _player.Sessions.Count() >= vehicleThreshold;
         var crewmanSlots = roundstartTank ? 2 : 0;
 
         // TODO RMC14: Move to component
