@@ -12,6 +12,7 @@ using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations;
 
 namespace Content.Client._RMC14.Ghost;
@@ -20,6 +21,7 @@ public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
 {
     [Dependency] private readonly DisplacementMapSystem _displacement = default!;
     [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IResourceCache _resourceCache = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
 
@@ -324,6 +326,12 @@ public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
         if (_clothingCache.TryGetValue(protoId, out var cached))
             return cached;
 
+        if (!_prototype.TryIndex<EntityPrototype>(protoId, out _))
+        {
+            _clothingCache[protoId] = null;
+            return null;
+        }
+
         var dummy = Spawn(protoId, MapCoordinates.Nullspace);
         try
         {
@@ -367,6 +375,12 @@ public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
     {
         if (_itemCache.TryGetValue(protoId, out var cached))
             return cached;
+
+        if (!_prototype.TryIndex<EntityPrototype>(protoId, out _))
+        {
+            _itemCache[protoId] = null;
+            return null;
+        }
 
         var dummy = Spawn(protoId, MapCoordinates.Nullspace);
         try

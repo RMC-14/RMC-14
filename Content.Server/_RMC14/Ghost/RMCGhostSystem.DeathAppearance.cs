@@ -274,28 +274,17 @@ public sealed partial class GhostSystem
 
     private bool TryCopyNonHumanoidDeathAppearance(EntityUid source, EntityUid ghost)
     {
-        var ghostAppearance = EnsureComp<GhostNonHumanoidAppearanceComponent>(ghost);
-
-        if (TryComp<GhostNonHumanoidAppearanceSourceComponent>(source, out var sourceAppearance))
+        if (TryComp(source, out MetaDataComponent? metaData) &&
+            metaData.EntityPrototype is { } prototype)
         {
-            ghostAppearance.Sprite = sourceAppearance.Sprite;
-            ghostAppearance.State = sourceAppearance.State;
-            ghostAppearance.SourcePrototype = null;
-        }
-        else if (TryComp(source, out MetaDataComponent? metaData) &&
-                 metaData.EntityPrototype is { } prototype)
-        {
+            var ghostAppearance = EnsureComp<GhostNonHumanoidAppearanceComponent>(ghost);
             ghostAppearance.Sprite = null;
             ghostAppearance.State = null;
             ghostAppearance.SourcePrototype = prototype.ID;
-        }
-        else
-        {
-            return false;
+            Dirty(ghost, ghostAppearance);
+            return true;
         }
 
-        Dirty(ghost, ghostAppearance);
-
-        return true;
+        return false;
     }
 }

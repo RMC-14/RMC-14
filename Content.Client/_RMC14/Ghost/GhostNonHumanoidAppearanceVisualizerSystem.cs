@@ -22,6 +22,7 @@ public sealed class GhostNonHumanoidAppearanceVisualizerSystem : EntitySystem
     {
         SubscribeLocalEvent<GhostNonHumanoidAppearanceComponent, ComponentStartup>(OnAppearanceStartup);
         SubscribeLocalEvent<GhostNonHumanoidAppearanceComponent, AfterAutoHandleStateEvent>(OnAppearanceState);
+        SubscribeLocalEvent<GhostNonHumanoidAppearanceComponent, ComponentShutdown>(OnAppearanceShutdown);
     }
 
     private void OnAppearanceStartup(Entity<GhostNonHumanoidAppearanceComponent> ent, ref ComponentStartup args)
@@ -42,18 +43,33 @@ public sealed class GhostNonHumanoidAppearanceVisualizerSystem : EntitySystem
         if (!TryResolveSprite(ent.Comp, out var baseSprite, out var state))
             return;
 
-        if (sprite.AllLayers.Any())
+        Entity<SpriteComponent?> spriteEnt = (ent.Owner, sprite);
+
+        if (!_sprite.LayerMapTryGet(spriteEnt, BaseLayerKey, out _, false) && sprite.AllLayers.Any())
             sprite[0].Visible = false;
 
-        var baseLayer = _sprite.LayerMapReserve((ent.Owner, sprite), BaseLayerKey);
+        var baseLayer = _sprite.LayerMapReserve(spriteEnt, BaseLayerKey);
         _sprite.LayerSetRsi((ent.Owner, sprite), baseLayer, baseSprite);
         _sprite.LayerSetVisible((ent.Owner, sprite), baseLayer, true);
 
         if (state != null)
             _sprite.LayerSetRsiState((ent.Owner, sprite), baseLayer, state);
 
-        var damageLayer = _sprite.LayerMapReserve((ent.Owner, sprite), RMCDamageVisualLayers.Base);
+        var damageLayer = _sprite.LayerMapReserve(spriteEnt, RMCDamageVisualLayers.Base);
         _sprite.LayerSetVisible((ent.Owner, sprite), damageLayer, false);
+    }
+
+    private void OnAppearanceShutdown(Entity<GhostNonHumanoidAppearanceComponent> ent, ref ComponentShutdown args)
+    {
+        if (!TryComp(ent, out SpriteComponent? sprite))
+            return;
+
+        Entity<SpriteComponent?> spriteEnt = (ent.Owner, sprite);
+        _sprite.RemoveLayer(spriteEnt, BaseLayerKey, false);
+        _sprite.RemoveLayer(spriteEnt, RMCDamageVisualLayers.Base, false);
+
+        if (sprite.AllLayers.Any())
+            sprite[0].Visible = true;
     }
 
     private bool TryResolveSprite(
