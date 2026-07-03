@@ -9,8 +9,7 @@ public sealed class LoadoutComponentAddSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<LoadoutComponentAddEvent>(OnComponentAdd, after: [typeof(MapInitEvent)]);
-
+        SubscribeLocalEvent<LoadoutComponentAddEvent>(OnComponentAdd);
     }
 
     private void OnComponentAdd(ref LoadoutComponentAddEvent ev)
