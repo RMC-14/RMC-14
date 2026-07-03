@@ -18,7 +18,7 @@
     - type: Language
       spokenLanguages:
       - English
-#     - Scandinavian # for when scandi gets added
+#     - Scandinavian # TODO RMC14: for when scandi gets added
       - Russian
       - Japanese
       - Chinese
@@ -27,7 +27,7 @@
       - Spanish
       understoodLanguages:
       - English
-#     - Scandinavian # for when scandi gets added
+#     - Scandinavian # TODO RMC14: for when scandi gets added
       - Russian
       - Japanese
       - Chinese
