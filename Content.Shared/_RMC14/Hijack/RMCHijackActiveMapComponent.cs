@@ -16,6 +16,9 @@ public sealed partial class RMCHijackActiveMapComponent : Component
     public TimeSpan NextDelay = TimeSpan.FromSeconds(15);
 
     [DataField]
+    public bool InitialPipeBarragePending;
+
+    [DataField]
     public List<EntityUid> Explode = new();
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]

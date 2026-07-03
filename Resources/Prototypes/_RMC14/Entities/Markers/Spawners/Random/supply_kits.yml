@@ -1,0 +1,32 @@
+- type: entity
+  abstract: true
+  parent: MarkerBase
+  id: RMCSpawnerRandomSupplyKitBase
+  name: random supply kit spawner
+  description: This is a random supply kit, for survivors.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: random_kit
+
+- type: entity
+  parent: RMCSpawnerRandomSupplyKitBase
+  id: RMCSpawnerRandomSupplyKit
+  components:
+  - type: RandomSpawner
+    offset: 0
+    chance: 1.0
+    prototypes: # MOU and HAR kit are less likely to be selected
+    - RMCSupplyKitPursuit
+    - RMCSupplyKitPursuit
+    - RMCSupplyKitPursuit
+    - RMCSupplyKitSelfDefense
+    - RMCSupplyKitSelfDefense
+    - RMCSupplyKitSelfDefense
+    - RMCSupplyKitMiniMedic
+    - RMCSupplyKitMiniMedic
+    - RMCSupplyKitMiniMedic
+    - RMCSupplyKitMOU53
+    - RMCSupplyKitMOU53
+    - RMCSupplyKitHeavySupport

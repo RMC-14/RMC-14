@@ -62,10 +62,10 @@ public sealed partial class CMDistressSignalRuleSystem
         }
 
         //TODO RMC14 only do main hive
-        var xenos = EntityQueryEnumerator<XenoComponent, MobStateComponent, InfectableComponent, TransformComponent>();
+        var xenos = EntityQueryEnumerator<XenoComponent, MobStateComponent, TransformComponent>();
         var xenoAmount = 0;
         var larva = 0;
-        while (xenos.MoveNext(out var xeno, out var comp, out _, out _, out var transformComp))
+        while (xenos.MoveNext(out var xeno, out var comp, out _, out var transformComp))
         {
             if (_mobState.IsDead(xeno))
                 continue;
@@ -98,6 +98,9 @@ public sealed partial class CMDistressSignalRuleSystem
 
                     var origin = _transform.GetMoverCoordinates(xeno);
                     _popup.PopupCoordinates(Loc.GetString("rmc-xeno-hibernation"), origin, Filter.SinglePlayer(session), true, PopupType.MediumXeno);
+
+                    if (comp.CountedInSlots && _hive.GetHive(xeno) is { } hive)
+                        _larvaQueue.AddToLarvaQueueFront(hive, actor.PlayerSession.UserId);
                 }
 
                 QueueDel(xeno);
@@ -149,7 +152,7 @@ public sealed partial class CMDistressSignalRuleSystem
             return;
 
         var hiveComp = EnsureComp<HiveComponent>(rule.Hive);
-        _hive.ChangeBurrowedLarva(larva);
+        _hive.ChangeBurrowedLarva((rule.Hive, hiveComp), larva);
         _hive.ResetHiveCoreCooldown((rule.Hive, hiveComp));
         var surge = EnsureComp<HijackBurrowedSurgeComponent>(rule.Hive);
         surge.PooledLarva = surgeAmount;

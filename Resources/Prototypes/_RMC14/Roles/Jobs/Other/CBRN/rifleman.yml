@@ -26,6 +26,15 @@
         RMCSkillFireman: 2
         RMCSkillConstruction: 2
         RMCSkillEngineer: 2
+    - type: Language
+      spokenLanguages:
+      - English
+      - SignLanguage
+      understoodLanguages:
+      - English
+      - SignLanguage
+      currentLanguage: English
+      defaultLanguage: English
     - type: NpcFactionMember
       factions:
       - UNMC

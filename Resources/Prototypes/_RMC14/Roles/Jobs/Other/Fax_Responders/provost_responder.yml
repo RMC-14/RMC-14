@@ -46,7 +46,7 @@
     shoes: CMBootsBlackFilled
     id: RMCIDCardProvostResponder
     belt: CMClipboard
-    back: CMSatchelSecurityFilledFaxResponder
+    back: CMSatchelSecurityFilledFaxResponderProvost
     pocket1: RMCPouchDocument
     pocket2: RMCPouchGeneralLarge
   inhand:
