@@ -27,11 +27,11 @@
   - type: RMCLeapProtection
     inherentStunDuration: 3
     fullProtection: true
-  - type: CMArmor
-    melee: 15
-    bullet: 15
-    bio: 15
-    explosionArmor: 15
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      399: Critical
+      400: Dead
   - type: MovementSpeedModifier
     baseSprintSpeed: 3.625
     baseWalkSpeed: 1.9575
