@@ -45,9 +45,9 @@ public sealed class IconCommand : ToolshedCommand
     {
         _marineSystem ??= GetSys<SharedMarineSystem>();
 
-        var icon = new SpriteSpecifier.Rsi(new("_RMC14/Interface/job_icons/"), rsiState);
+        var icon = new SpriteSpecifier.Rsi(new("_RMC14/Interface/job_icons/"), rsiState); // TODO RMC14: This needs to be fixed now that it isn't one super file path.
 
-        // TODO RMC14: Make this idiot proof. Right now it's very easy to cause this command to render a big ol' error on everyone's screen.
+        // TODO RMC14: Instead of having to input a sprite path this should probably instead be a UI that automatically populates from a folder.
 
         _marineSystem.SetMarineIcon(marine, icon);
 
