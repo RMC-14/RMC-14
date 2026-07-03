@@ -15,6 +15,4 @@ public sealed partial class GhostNonHumanoidAppearanceComponent : Component
     [DataField, AutoNetworkedField]
     public string? SourcePrototype;
 
-    [DataField, AutoNetworkedField]
-    public bool SpentParasite;
 }

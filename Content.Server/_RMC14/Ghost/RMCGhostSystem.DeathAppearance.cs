@@ -3,7 +3,6 @@ using Content.Shared._RMC14.Humanoid;
 using Content.Shared._RMC14.Item;
 using Content.Shared._RMC14.UniformAccessories;
 using Content.Shared._RMC14.Webbing;
-using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.DisplacementMap;
@@ -295,7 +294,6 @@ public sealed partial class GhostSystem
             return false;
         }
 
-        ghostAppearance.SpentParasite = HasComp<ParasiteSpentComponent>(source);
         Dirty(ghost, ghostAppearance);
 
         return true;
