@@ -20,3 +20,7 @@ ui-options-header-rmc-xeno = Xenonid
 
 ui-options-function-cm-xeno-wide-swing = Xenonid thrust attack
 ui-options-function-rmc-xeno-rest = Xenonid Rest
+
+ui-options-function-smart-equip-uniform = Smart-equip to uniform
+ui-options-function-smart-equip-armor = Smart-equip to armor
+ui-options-function-smart-equip-helmet = Smart-equip to helmet
