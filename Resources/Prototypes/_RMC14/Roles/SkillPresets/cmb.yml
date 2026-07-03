@@ -79,7 +79,7 @@
 
 - type: entity
   id: RMCSkillPresetSurvivorSupportSynth
-  name: Survivor CMB Support Synthetic Survivor
+  name: Survivor CMB Support Synthetic
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
