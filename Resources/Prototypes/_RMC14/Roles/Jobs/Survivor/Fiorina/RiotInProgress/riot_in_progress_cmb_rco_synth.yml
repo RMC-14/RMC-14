@@ -116,7 +116,8 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointCMBRiotInProgressCMBRiotControlSynth
-  name: special survivor fiorina riot in progress cmb riot control synthetic spawn point
+  name: cmb riot control synthetic spawn point
+  suffix: special survivor, fiorina riot
   components:
   - type: SpawnPoint
     job_id: RMCSurvivorFiorinaRiotInProgressCMBRiotControlSynth
