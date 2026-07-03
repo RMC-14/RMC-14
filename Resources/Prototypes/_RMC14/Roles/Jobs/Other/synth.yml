@@ -23,6 +23,33 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - English
+      - French
+      - Japanese
+      - Russian
+      - German
+      - Chinese
+      - Spanish
+      understoodLanguages:
+      - English
+      - French
+      - Japanese
+      - Russian
+      - German
+      - Chinese
+      - Spanish
+      currentLanguage: English
+      defaultLanguage: English
+    - type: LanguageLearning
+      learnableLanguages:
+      - Xeno
+      firstContactLanguages:
+      - Xeno
+      comprehensionThreshold: 0.8
+      learningRange: 8.0
+      baseWordLearningRate: 0.05
     - type: Skills
       skills:
         RMCSkillCqc: 5
@@ -74,7 +101,6 @@
           Blunt: 35
     - type: Synth
   hidden: true
-
 - type: startingGear
   id: RMCGearSyntheticEquipped
   equipment:

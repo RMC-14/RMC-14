@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Xenonids.Projectile;
+using Content.Shared._RMC14.Xenonids.Projectile;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
@@ -13,6 +13,7 @@ public sealed partial class ProjectileFixedDistanceComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan FlyEndTime;
+
     /// <summary>
     /// If true, the entity containing this component will ignore most collisions except for Impassable fixture layers.
     /// This is granted to a fired entity by the ShootAtFixedPointComponent based on its ShootArcProj boolean.

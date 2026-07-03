@@ -256,6 +256,18 @@ binds:
   type: State
   key: E
   mod1: Shift
+- function: SmartEquipPocket1
+  type: State
+  key: N
+  mod1: Shift
+- function: SmartEquipPocket2
+  type: State
+  key: M
+  mod1: Shift
+- function: SmartEquipSuitStorage
+  type: State
+  key: H
+  mod1: Shift
 - function: OpenBackpack
   type: State
   key: V
@@ -711,3 +723,15 @@ binds:
   key: Space
   mod1: Shift
   priority: -1
+- function: SmartEquipUniform
+  type: State
+  key: N
+  mod1: Alt
+- function: SmartEquipArmor
+  type: State
+  key: M
+  mod1: Alt
+- function: SmartEquipHelmet
+  type: State
+  key: H
+  mod1: Alt
