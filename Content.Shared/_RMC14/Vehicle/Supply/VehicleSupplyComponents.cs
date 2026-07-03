@@ -17,9 +17,6 @@ public sealed partial class VehicleSupplyEntry
     public EntProtoId Vehicle;
 
     [DataField]
-    public string? Unlock;
-
-    [DataField]
     public List<EntProtoId> Hardpoints = new();
 
     [DataField]
@@ -55,6 +52,9 @@ public sealed partial class VehicleSupplyConsoleComponent : Component
     [DataField]
     public float LiftSearchRange = 20f;
 
+    [NonSerialized]
+    public EntityUid? Lift;
+
     [DataField]
     public string SelectedVehicle = string.Empty;
 
@@ -63,13 +63,6 @@ public sealed partial class VehicleSupplyConsoleComponent : Component
 
     [AutoNetworkedField]
     public VehicleSupplyUiState Ui = new(null, false, null, null, 0, null, new List<VehicleSupplyEntryState>());
-}
-
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class VehicleSupplyTechComponent : Component
-{
-    [DataField, AutoNetworkedField]
-    public List<string> Unlocked = new();
 }
 
 [RegisterComponent]

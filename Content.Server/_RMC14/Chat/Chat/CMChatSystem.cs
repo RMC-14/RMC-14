@@ -9,6 +9,7 @@ using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Mentor.ImaginaryFriend;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chat;
+using Content.Shared.Ghost;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.Radio;
@@ -72,7 +73,9 @@ public sealed class CMChatSystem : SharedCMChatSystem
             if (data.Observer)
                 continue;
 
-            if (!HasComp<XenoComponent>(session.AttachedEntity))
+            // `data.Observer` only indicates whether the recipient has `GhostHearingComponent`.
+            // Disabling ghost hearing removes this component, so the `GhostComponent` check is needed to keep ghosts included.
+            if (!HasComp<XenoComponent>(session.AttachedEntity) && !HasComp<GhostComponent>(session.AttachedEntity))
                 _toRemove.Add(session);
         }
 
@@ -179,6 +182,9 @@ public sealed class CMChatSystem : SharedCMChatSystem
             prefix = SharedChatSystem.RadioChannelPrefix;
 
         var keycode = char.ToLowerInvariant(prefixPart[1]);
+
+        if (keycode == SharedChatSystem.DefaultChannelKey && keys.DefaultChannel != null)
+            return true;
 
         foreach (var ch in _proto.EnumeratePrototypes<RadioChannelPrototype>())
         {
