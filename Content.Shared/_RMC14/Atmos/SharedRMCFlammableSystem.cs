@@ -1009,7 +1009,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
                     TryIgnite((uid, apply), contact, true);
                 }
 
-                RemCompDeferred<DamageOnCollideComponent>(uid);
+                _onCollide.DisableDamageOnCollide(uid);
             }
         }
         catch (Exception e)
