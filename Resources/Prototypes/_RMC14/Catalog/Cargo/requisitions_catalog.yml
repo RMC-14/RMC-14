@@ -41,6 +41,8 @@
       - cost: 3000
         crate: RMCCrateBoxMagazinePistolM1984AP
       - cost: 3000
+        crate: RMCCrateBoxMagazinePistolM1984HP
+      - cost: 3000
         crate: RMCCrateBoxShellsShotgunSlugs
       - cost: 3000
         crate: RMCCrateBoxShellsShotgunBuckshot
@@ -86,6 +88,8 @@
         crate: RMCCrateMagazineML66DDrum
       - cost: 2500
         crate: RMCCrateMagazineM2C
+      - cost: 6000
+        crate: RMCCrateMagazineAmmoSurplus
     - name: Attachments
       entries:
       - cost: 3000
@@ -168,8 +172,8 @@
         crate: RMCCrateGlassSheets
       - cost: 2000
         crate: RMCCrateWoodenPlanks
-#      - cost: 2000
-#        crate: RMCCrateFoldingBarricades
+      - cost: 2000
+        crate: RMCCrateFoldingBarricades
 #      - cost: 3000
 #        crate: RMCCrateSuperconductingMagneticCoil
       - cost: 2000
@@ -199,6 +203,10 @@
       # leaving this commented, as it is not parity, but we might want it in the future
       #- cost: 2000
       #  crate: RMCCrateGrenadesSmoke
+      - cost: 3200
+        crate: RMCCrateExplosiveWhitePhosphorusCompound
+      - cost: 10800
+        crate: RMCCrateExplosiveWhitePhosphorusCompoundBox
       - cost: 4000
         crate: RMCCrateGrenadesFragOld
       - cost: 3000
@@ -227,6 +235,8 @@
         crate: RMCCrateGrenadesBatonSlug
       - cost: 3000
         crate: RMCCrateExplosiveClaymoreMine
+      - cost: 4000
+        crate: RMCCrateExplosivesSurplus
     - name: Food
       entries:
       - cost: 1000
@@ -311,8 +321,34 @@
         crate: RMCCrateSupplyJanitor
       - cost: 2000
         crate: RMCCrateSuppliesCrayons
-#    - name: Vehicle Ammo
-#      entries: []
+    - name: Vehicle Ammo
+      entries:
+      - cost: 3000
+        crate: RMCCrateVehicleAmmoLTBCannon
+      - cost: 3000
+        crate: RMCCrateVehicleAmmoLTAAAP
+      - cost: 3000
+        crate: RMCCrateVehicleAmmoAceAutocannon
+      - cost: 3000
+        crate: RMCCrateVehicleAmmoDragonFlamer
+      - cost: 3000
+        crate: RMCCrateVehicleAmmoBoyarsDualCannon
+      - cost: 2000
+        crate: RMCCrateVehicleAmmoGrenadeLauncher
+      - cost: 2000
+        crate: RMCCrateVehicleAmmoSmokeLauncher
+      - cost: 3000
+        crate: RMCCrateVehicleAmmoTowLauncher
+      - cost: 2000
+        crate: RMCCrateVehicleAmmoCupola
+      - cost: 2000
+        crate: RMCCrateVehicleAmmoLZRNFlamer
+      - cost: 2000
+        crate: RMCCrateVehicleAmmoFrontalCannon
+      - cost: 2000
+        crate: RMCCrateVehicleAmmoFlareLauncher
+      - cost: 2000
+        crate: RMCCrateVehicleAmmoRotaryCannon
     - name: Weapons
       entries:
       - cost: 4000
@@ -355,8 +391,8 @@
         crate: RMCCrateM5DemoSpecHighExplosive
       - cost: 3000
         crate: RMCCrateM5DemoSpecAntiArmor
-#      - cost: 3000
-#        crate: RMCCrateM5DemoSpecWhitePhosphorous
+      - cost: 3000
+        crate: RMCCrateM5DemoSpecWhitePhosphorus
       - cost: 4000
         crate: RMCCrateMagazineM4SPRCustomMixed
       - cost: 3000

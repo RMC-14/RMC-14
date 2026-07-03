@@ -4,6 +4,11 @@ using Content.Shared._RMC14.Interaction;
 using Content.Shared._RMC14.Item.Deploy;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.NPC;
+using Content.Shared._RMC14.Tools;
+using Content.Shared._RMC14.Vehicle;
+using Content.Shared._RMC14.Weapons.Ranged.Homing;
+using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
@@ -64,6 +69,7 @@ public sealed class SentrySystem : EntitySystem
         SubscribeLocalEvent<SentryComponent, EquipmentUnDeployedEvent>(OnSentryDisassembled);
         SubscribeLocalEvent<SentryComponent, ExaminedEvent>(OnSentryExamined);
         SubscribeLocalEvent<SentryComponent, CombatModeShouldHandInteractEvent>(OnSentryShouldInteract);
+        SubscribeLocalEvent<SentryComponent, BeforeDamageChangedEvent>(OnBeforeDamageChanged);
         SubscribeLocalEvent<SentrySpikesComponent, AttackedEvent>(OnSentrySpikesAttacked);
 
         Subs.BuiEvents<SentryComponent>(SentryUiKey.Key,
@@ -116,36 +122,8 @@ public sealed class SentrySystem : EntitySystem
 
         args.Handled = true;
 
-        var user = args.User;
-        switch (mode)
-        {
-            case SentryMode.Off:
-            {
-                foreach (var defense in _entityLookup.GetEntitiesInRange<SentryComponent>(_transform.GetMapCoordinates(sentry), sentry.Comp.DefenseCheckRange))
-                {
-                    if (sentry != defense && defense.Comp.Mode == SentryMode.On)
-                    {
-                        var ret = Loc.GetString("rmc-sentry-too-close", ("defense", defense));
-                        _popup.PopupClient(ret, sentry, user);
-                        return;
-                    }
-                }
-                mode = SentryMode.On;
-                var msg = Loc.GetString("rmc-sentry-on", ("sentry", sentry));
-                _popup.PopupClient(msg, sentry, user);
-                break;
-            }
-            default:
-            {
-                mode = SentryMode.Off;
-                var msg = Loc.GetString("rmc-sentry-off", ("sentry", sentry));
-                _popup.PopupClient(msg, sentry, user);
-                break;
-            }
-        }
-
-        Dirty(sentry);
-        UpdateState(sentry);
+        var newMode = mode == SentryMode.On ? SentryMode.Off : SentryMode.On;
+        TrySetMode(sentry, newMode, args.User);
     }
 
     private void OnSentryAttemptShoot(Entity<SentryComponent> ent, ref AttemptShootEvent args)
@@ -320,6 +298,15 @@ public sealed class SentrySystem : EntitySystem
         return true;
     }
 
+    private void OnBeforeDamageChanged(Entity<SentryComponent> ent, ref BeforeDamageChangedEvent args)
+    {
+        if (args.Damage.GetTotal() < 0)
+            return;
+
+        if (ent.Comp.Mode == SentryMode.Item)
+            args.Cancelled = true;
+    }
+
     private void UpdateState(Entity<SentryComponent> sentry)
     {
         var fixture = sentry.Comp.DeployFixture is { } fixtureId && TryComp(sentry, out FixturesComponent? fixtures)
@@ -437,10 +424,63 @@ public sealed class SentrySystem : EntitySystem
         return true;
     }
 
-    public bool TrySetMode(Entity<SentryComponent> sentry, SentryMode mode)
+    private void StartDisassemble(Entity<SentryComponent> sentry, EntityUid user)
+    {
+        if (sentry.Comp.Mode == SentryMode.Item)
+            return;
+
+        var ev = new SentryDisassembleDoAfterEvent();
+        var delay = sentry.Comp.UndeployDelay * _skills.GetSkillDelayMultiplier(user, sentry.Comp.DelaySkill);
+        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, sentry)
+        {
+            BreakOnMove = true,
+        };
+
+        if (_doAfter.TryStartDoAfter(doAfter))
+        {
+            var selfMsg = Loc.GetString("rmc-sentry-disassemble-start-self", ("sentry", sentry));
+            var othersMsg = Loc.GetString("rmc-sentry-disassemble-start-others", ("user", user), ("sentry", sentry));
+            _popup.PopupPredicted(selfMsg, othersMsg, sentry, user);
+        }
+    }
+
+    public bool TrySetMode(Entity<SentryComponent> sentry, SentryMode mode, EntityUid? user = null, bool remote = false)
     {
         if (sentry.Comp.Mode == mode)
             return false;
+
+        switch (mode)
+        {
+            case SentryMode.On:
+            {
+                foreach (var defense in _entityLookup.GetEntitiesInRange<SentryComponent>(_transform.GetMapCoordinates(sentry), sentry.Comp.DefenseCheckRange))
+                {
+                    if (sentry != defense && defense.Comp.Mode == SentryMode.On)
+                    {
+                        var ret = Loc.GetString("rmc-sentry-too-close", ("defense", defense));
+                        if (remote && user != null)
+                            _popup.PopupCursor(ret, user.Value, PopupType.SmallCaution);
+                        else
+                        {
+                            _popup.PopupClient(ret, sentry, user);
+                        }
+                        return false;
+                    }
+                }
+
+                mode = SentryMode.On;
+                var msg = Loc.GetString("rmc-sentry-on", ("sentry", sentry));
+                _popup.PopupClient(msg, sentry, user);
+                break;
+            }
+            default:
+            {
+                mode = SentryMode.Off;
+                var msg = Loc.GetString("rmc-sentry-off", ("sentry", sentry));
+                _popup.PopupClient(msg, sentry, user);
+                break;
+            }
+        }
 
         sentry.Comp.Mode = mode;
         UpdateState(sentry);

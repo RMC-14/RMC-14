@@ -14,9 +14,9 @@ namespace Content.Shared._RMC14.Xenonids.Designer;
 // - Construct nodes: Allow any hive member to donate plasma for collaborative building
 // - Design nodes can be walls or doors (cosmetic only; both allow same structures).
 // - Designers can remotely thicken walls/doors within range of their nodes every 60 seconds.
-// - Greater Resin Surge: Converts all nearby nodes into unstable resin. TODO: Make this reflective resin
+// - Greater Resin Surge: Converts all nearby nodes into reflective resin.
 [Access(typeof(SharedXenoConstructionSystem), typeof(DesignerGreaterResinSurgeSystem), typeof(DesignerNodeBindingSystem))]
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
 public sealed partial class DesignerStrainComponent : Component
 {
     // Runtime bookkeeping for placed design nodes.
@@ -54,5 +54,5 @@ public sealed partial class DesignerStrainComponent : Component
     public EntProtoId GreaterResinSurgeAnimationEffect = "RMCEffectWallXenoResinThick";
 
     [DataField, AutoNetworkedField]
-    public EntProtoId GreaterResinSurgeWallPrototype = "WallXenoResinThickSurge";
+    public EntProtoId GreaterResinSurgeWallPrototype = "WallXenoResinReflectiveUnstable";
 }

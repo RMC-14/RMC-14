@@ -1,0 +1,25 @@
+- type: entity
+  parent: BaseItem
+  id: RMCRemains
+  name: remains
+  description: ""
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/remains.rsi
+    state: remains
+  - type: Item
+    size: Small
+
+- type: entity
+  parent: RMCRemains
+  id: RMCRemainsRobot
+  components:
+  - type: Sprite
+    state: remainsrobot
+
+- type: entity
+  parent: RMCRemains
+  id: RMCRemainsXeno
+  components:
+  - type: Sprite
+    state: remainsxeno

@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Xenonids.AcidMine;
 using Content.Shared.Damage;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
@@ -6,7 +7,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Shared._RMC14.Xenonids.Projectile.Spit.Charge;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-[Access(typeof(XenoSpitSystem))]
+[Access(typeof(XenoSpitSystem), typeof(XenoAcidBlastSystem))]
 public sealed partial class UserAcidedComponent : Component
 {
     [DataField, AutoNetworkedField]

@@ -52,9 +52,14 @@
 
   <Box>
     <GuideEntityEmbed Entity="RMCIntelRetrieveHealthAnalyzer" />
+    <GuideEntityEmbed Entity="RMCIntelComputerDisk1" />
+    <GuideEntityEmbed Entity="RMCIntelDataTerminal" />
   </Box>
 
   - These devices must be stored in the intel room.
+  - Data disks must be brought to a SIGINT terminal, decrypted with the key found in your clues, and uploaded before they can be stored for retrieval credit.
+  - Data terminals are located planetside. They require the password from your clues, restored communications, and working colony power.
+  - Some safes may contain miscellaneous intelligence. Their combinations are found through document clues.
 
   ## Working in intelligence
 
@@ -87,11 +92,12 @@
 
   <Box>
     <GuideEntityEmbed Entity="RMCComputerIntel" />
+    <GuideEntityEmbed Entity="RMCSigintTerminal" />
     <GuideEntityEmbed Entity="RMCTechTreeConsole" />
   </Box>
 
   After getting geared up you should make yourself familiar with the devices in the intel room and CIC.
-  The intel computer is used to write down what you have read in documents and the tech tree console allows you to spend your collected intelligence.
+  The intel computer is used to write down what you have read in documents, the SIGINT terminal processes data disks, and the tech tree console allows you to spend collected intelligence. The View Intel Objectives action shows shared objective progress.
 
   [color=#A88B5E][bold]Deployment[/bold][/color]
 

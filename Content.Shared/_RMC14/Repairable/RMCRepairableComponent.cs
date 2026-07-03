@@ -37,4 +37,10 @@ public sealed partial class RMCRepairableComponent : Component
 
     [DataField, AutoNetworkedField]
     public float RepairableDamageLimit;
+
+    [DataField, AutoNetworkedField]
+    public float WeldDelayDamageStep = 200f;
+
+    [DataField, AutoNetworkedField]
+    public float WeldDelayMinimumSeconds = 2f;
 }

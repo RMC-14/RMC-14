@@ -20,6 +20,15 @@
     - type: NpcFactionMember
       factions:
       - WeYa
+    - type: Language
+      spokenLanguages:
+      - English
+      - Japanese
+      understoodLanguages:
+      - English
+      - Japanese
+      currentLanguage: English
+      defaultLanguage: English
     - type: Skills
       skills:
         RMCSkillCqc: 1
@@ -91,20 +100,20 @@
     id: RMCIDCardPMC
     ears: RMCHeadsetDistressPMC
     jumpsuit: RMCJumpsuitVeteranPMC
-    outerClothing: CMArmorM4PMCSniper
+    outerClothing: RMCArmorM4PMCBulletProof
     gloves: RMCHandsVeteranPMC
     head: RMCArmorHelmetPMCTactical
     mask: RMCMaskCoifPMC
     shoes: RMCBootsPMCFilled
-    eyes: CMGlassesM42ScoutSight
+    eyes: CMGlassesM96CSight
     back: RMCSatchelPMC
     belt: RMCBeltHolsterSMGFilledSMGM63B2
-    suitstorage: RMCXM43E1AntiMaterielRifle # TODO RMC14: PMC re-sprite
+    suitstorage: CMM96CSniperRifle
     pocket1: RMCPouchMagazineLargePMC
     pocket2: RMCPouchFirstAidPMCFill
   storage:
     back:
-    - CMCrowbar # TODO RMC14: tactical prybar
+    - RMCTacticalPrybar
     - RMCExplosivePlastic
     - CMMagazineSMGM63AP
     - CMMagazineSMGM63AP
@@ -113,13 +122,13 @@
     - RMCMREWeYaPMC
     - CMEmergencyAutoInjector
     outerClothing:
-    - RMCMagazineSniperXM43E1AntiMateriel
-    - RMCMagazineSniperXM43E1AntiMateriel
+    - CMMagazineSniperM96C
+    - CMMagazineSniperM96C
     pocket1:
-    - RMCMagazineSniperXM43E1AntiMateriel
-    - RMCMagazineSniperXM43E1AntiMateriel
-    - RMCMagazineSniperXM43E1AntiMateriel
-    - RMCMagazineSniperXM43E1AntiMateriel
+    - CMMagazineSniperM96C
+    - CMMagazineSniperM96C
+    - CMMagazineSniperM96C
+    - CMMagazineSniperM96C
 
 - type: playTimeTracker
   id: RMCJobPMCSniper

@@ -8,7 +8,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.OrbitalCannon;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), AutoGenerateComponentPause]
 [Access(typeof(OrbitalCannonSystem))]
 public sealed partial class OrbitalCannonComponent : Component
 {

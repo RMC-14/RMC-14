@@ -1,6 +1,16 @@
 ﻿rmc-dropship-pre-flight-fueling = The shuttle is still undergoing pre-flight fueling and cannot depart yet. Please wait another {$minutes} minutes before trying again.
 rmc-dropship-pre-hijack = This terminal won't be operational for another {$minutes} minutes.
 rmc-dropship-invalid-hijack = Lights flash from the terminal but you can't comprehend their meaning.
+rmc-dropship-terminal-clueless = You stare cluelessly at the {$terminal}.
+rmc-dropship-no-destinations-nearby = There are no dropship destinations near you!
+rmc-dropship-already-incoming = There is already a dropship coming here!
+rmc-dropship-already-here = There is already a dropship here!
+rmc-dropship-not-primary-shuttle = The shuttle isn't responding to prompts, it looks like this isn't the primary shuttle.
+rmc-dropship-call-to-location = You call down one of the dropships to your location.
+rmc-dropship-none-available = There are no available dropships! Wait a moment.
+rmc-dropship-no-remote-control = This dropship does not have remote-control enabled.
+rmc-dropship-busy = This dropship is currently busy. Please try again later.
+rmc-dropship-now-on-its-way = This dropship is now on its way.
 
 rmc-dropship-weapons-title = Weapons Console
 
@@ -17,6 +27,8 @@ rmc-dropship-weapons-weapon-selected-ammo = {$weapon}
 rmc-dropship-weapons-target-strike = Target Acquisition
 
   Strike mode: {$mode}
+
+  Target mode: {$targetMode}
 
   Strike configuration {$weapon}
 
@@ -55,6 +67,14 @@ rmc-dropship-weapons-offset-calibration-does-not-affect-direct-bombardment = Doe
 rmc-dropship-weapons-fire = FIRE
 rmc-dropship-weapons-strike = STRIKE
 rmc-dropship-weapons-vector = VECTOR
+rmc-dropship-weapons-quick = QUICK
+# TODO RMC14 fire missions: restore these labels with fire mission vector controls.
+# rmc-dropship-weapons-north = NORTH
+# rmc-dropship-weapons-south = SOUTH
+# rmc-dropship-weapons-east = EAST
+# rmc-dropship-weapons-west = WEST
+rmc-dropship-weapons-target-mode-quick = QUICK
+rmc-dropship-weapons-target-mode-standard = STANDARD
 
 rmc-dropship-weapons-night-vision-on = NV-ON
 rmc-dropship-weapons-night-vision-off = NV-OFF
@@ -88,6 +108,14 @@ rmc-dropship-fabricator-equipment = [bold]Equipment[/bold]
 rmc-dropship-fabricator-ammo = [bold]Ammo[/bold]
 rmc-dropship-fabricator-fabricate = Fabricate ({$cost})
 rmc-dropship-fabricator-busy = The dropship part fabricator is busy. Please wait for completion of previous operation.
+rmc-dropship-fabricator-current = [bold]Current:[/bold] {$item}
+rmc-dropship-fabricator-idle = [bold]Current:[/bold] Idle
+rmc-dropship-fabricator-queue = [bold]Queue:[/bold] {$count}/{$max}
+rmc-dropship-fabricator-queue-empty = No pending orders.
+rmc-dropship-fabricator-queue-entry = {$position}. {$item} ({$cost})
+rmc-dropship-fabricator-cancel = Cancel
+rmc-dropship-fabricator-queue-full = The dropship part fabricator queue is full.
+rmc-dropship-fabricator-insufficient-points = You don't have enough points to fabricate that.
 
 rmc-dropship-firemission-warning = A DROPSHIP FIRES TOWARDS THE {$direction}
 rmc-dropship-firemission-warning-above = A DROPSHIP FIRES RIGHT ONTOP OF YOU!
@@ -104,11 +132,13 @@ rmc-dropship-paradrop-target-screen-target-targeting = Locked to {$dropTarget}.
 rmc-dropship-paradrop-lock-no-target = No target selected.
 rmc-dropship-paradrop-lock-target-not-flying = You can only enable the paradrop module while in flight.
 
+rmc-dropship-paradrop-failed = Your harness got stuck and is preventing you from jumping
+
 rmc-dropship-medevac-system-screen-text = RMU-4M Medevac System
 
 rmc-dropship-fulton-system-screen-text = RMU-19 Fulton Recovery System
 
-rmc-dropship-locked= This bird is now ours for the next {$minutes} minutes.
+rmc-dropship-locked = This bird is now ours for the next {$minutes} minutes.
 rmc-dropship-locked-out = The shuttle is not responding, try again in {$minutes} minutes.
 rmc-dropship-locked-out-bypass = You partially bypassed the lockout, try again!
 rmc-dropship-locked-out-bypass-complete = You successfully removed the lockout!
@@ -126,3 +156,13 @@ rmc-dropship-equipment-undeployed = UNDEPLOYED
 rmc-dropship-equipment-operational = OPERATIONAL
 rmc-dropship-equipment-damaged = DAMAGED
 rmc-dropship-equipment-destroyed = DESTROYED
+
+rmc-dropship-launch-bay-fire-not-flying = You can only launch equipment while in flight.
+rmc-dropship-launch-bay-screen-text = LAG-14 Internal Sentry Launcher
+rmc-dropship-launch-bay-screen-text-loaded = LAG-14 Internal Sentry Launcher
+
+    Loaded: {$loaded}
+
+    Ammo: {$current} / {$max}
+
+rmc-dropship-launch-alarm-xeno-shutdown = We slash at {$console}, silencing its squawking!

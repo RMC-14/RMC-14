@@ -1,11 +1,16 @@
 - type: job
-  parent: RMCJobSyntheticColony
+  parent: RMCSyntheticColony
   id: RMCSyntheticColonyHybrisaXenoarch
   startingGear: RMCGearSyntheticColonistHybrisaXenoarch
   spawnMenuRoleName: Xenoarchaeologist Synthetic (Hybrisa Survivor)
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      preset: RMCLanguagePresetSynthColonist
+    - type: LanguageLearning
+      preset: RMCLanguageLearningPresetSynthColonist
+    - type: RMCAllowSuitStorage
     - type: Skills
       skills:
         RMCSkillCqc: 3
@@ -56,7 +61,7 @@
       preset: RMCSurvivorPresetHybrisaSynthXenoarch
     - type: Synth
       generation: rmc-species-synth-generation-second
-  useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
+  useLoadoutOfJob: RMCSyntheticColony # for inheritance
 
 - type: startingGear
   parent: RMCGearSyntheticColonistBase
@@ -71,7 +76,7 @@
   name: survivor synth hybrisa Xenoarch preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ CMSatchel, RMCLabcoatScience, RMCShoesBrown ]
     - [ RMCSatchelLightpack, RMCSuitBioWeYa, RMCHoodBioWeYa, RMCShoesBrown, RMCGlassesReagentHUDGlasses ]

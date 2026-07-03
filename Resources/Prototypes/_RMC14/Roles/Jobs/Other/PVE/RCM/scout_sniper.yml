@@ -20,6 +20,15 @@
       factions:
       - RoyalMarines
       - TSE
+    - type: Language
+      spokenLanguages:
+      - English
+      - Japanese
+      understoodLanguages:
+      - English
+      - Japanese
+      currentLanguage: English
+      defaultLanguage: English
     - type: Skills
       skills:
         RMCSkillConstruction: 1
@@ -38,9 +47,7 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-pve-scout-sniper
     - type: AssignSquad
-      whitelist:
-        tags:
-        - RMCSquadRoyalMarinesPVE
+      squad: SquadRoyalMarinesPVE
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi

@@ -40,6 +40,7 @@ public abstract class SharedDropshipElectronicSystemSystem : EntitySystem
                 args.Spread = Math.Max(MinSpread, args.Spread + targeting.SpreadModifier);
                 args.BulletSpread = Math.Max(MinBulletSpread, args.BulletSpread + targeting.BulletSpreadModifier);
                 args.TravelTime = TimeSpan.FromSeconds(Math.Max(MinTravelTime, args.TravelTime.TotalSeconds + targeting.TravelingTimeModifier.TotalSeconds));
+                return;
             }
         }
     }

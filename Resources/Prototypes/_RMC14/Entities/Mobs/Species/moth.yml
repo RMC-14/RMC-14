@@ -70,15 +70,16 @@
     - map: [ "outerClothing" ]
     - map: [ "enum.SquadArmorLayers.Armor" ]
     - map: [ "enum.WebbingVisualLayers.Base" ]
+    - map: [ "enum.UniformAccessoryLayer.Base" ]
     - map: [ "enum.MedalVisualLayers.Base" ]
     - map: [ "enum.MedalVisualLayers.Base1" ]
     - map: [ "eyes" ]
     - map: [ "belt" ]
     - map: [ "enum.HumanoidVisualLayers.Tail" ]
-    - map: [ "back" ]
     - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
     - map: [ "neck" ] # RMC14 re-arrange neck slot
     - map: [ "enum.HumanoidVisualLayers.Hair" ]
+    - map: [ "back" ] # RMC14 re-arrange back slot
     - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
     - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
     - map: [ "mask" ]

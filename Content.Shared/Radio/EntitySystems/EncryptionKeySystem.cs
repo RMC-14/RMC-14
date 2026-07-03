@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Shared._RMC14.Radio; // RMC14
 using Content.Shared.Chat;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
@@ -66,7 +67,9 @@ public sealed partial class EncryptionKeySystem : EntitySystem
             return;
 
         component.Channels.Clear();
-        component.DefaultChannel = null;
+
+        if (!HasComp<RMCStaticDefaultChannelComponent>(uid))
+            component.DefaultChannel = null; // RMC14
 
         //RMC14
         component.ReadOnlyChannels.Clear();
@@ -77,7 +80,9 @@ public sealed partial class EncryptionKeySystem : EntitySystem
             {
                 component.Channels.UnionWith(key.Channels);
                 component.ReadOnlyChannels.UnionWith(key.ReadOnlyChannels);
-                component.DefaultChannel ??= key.DefaultChannel;
+
+                if (!HasComp<RMCStaticDefaultChannelComponent>(uid))
+                    component.DefaultChannel ??= key.DefaultChannel;
             }
         }
         //RMC14
@@ -202,7 +207,7 @@ public sealed partial class EncryptionKeySystem : EntitySystem
         if (!args.IsInDetailsRange)
             return;
 
-        if(component.Channels.Count > 0)
+        if (component.Channels.Count > 0)
         {
             args.PushMarkup(Loc.GetString("examine-encryption-channels-prefix"));
             AddChannelsExamine(component.Channels, component.DefaultChannel, args, _protoManager, "examine-encryption-channel", component.ReadOnlyChannels);
@@ -220,6 +225,9 @@ public sealed partial class EncryptionKeySystem : EntitySystem
         RadioChannelPrototype? proto;
         foreach (var id in channels)
         {
+            if (string.IsNullOrEmpty(id) || !_protoManager.TryIndex(id, out proto))
+                continue;
+
             proto = _protoManager.Index<RadioChannelPrototype>(id);
 
             var key = id == SharedChatSystem.CommonChannel

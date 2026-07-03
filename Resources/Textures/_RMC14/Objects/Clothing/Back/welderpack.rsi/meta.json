@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/99b0ad8ee1a07006991300f4b2728dcea7392624/icons/obj/items/tank.dmi, https://github.com/cmss13-devs/cmss13/blob/99b0ad8ee1a07006991300f4b2728dcea7392624/icons/mob/humans/onmob/clothing/back/misc.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "equipped-BACKPACK",
+      "directions": 4
+    }
+  ]
+}

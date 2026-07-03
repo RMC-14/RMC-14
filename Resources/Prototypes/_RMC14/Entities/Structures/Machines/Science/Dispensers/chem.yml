@@ -18,12 +18,36 @@
         - MachineMask
         layer:
         - MachineLayer
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: null
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
   - type: Clickable
   - type: InteractionOutline
   - type: RMCChemicalDispenser
   - type: ApcPowerReceiver
-    needsPower: false # TODO RMC14
-    powerLoad: 0
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 20
+    activeLoad: 0
+    channel: Equipment
+  - type: ActivatableUIRequiresPower
   - type: ItemSlots
     slots:
       chemical_dispenser_slot:
@@ -147,6 +171,13 @@
     sprite: _RMC14/Structures/Machines/chemical_storage.rsi
     state: chemstorage
     offset: 0.5,0
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 1000
+    channel: Equipment
   - type: RMCChemicalStorage
 
 - type: entity
@@ -164,6 +195,7 @@
   components:
   - type: RMCChemicalStorage
     network: RMCChemStorageMedbay
+    populationEnergyScaling: true
 
 - type: entity
   parent: RMCChemStorageBase

@@ -21,6 +21,7 @@
         layer:
         - Opaque
         - XenoProjectileImpassable
+        - Marine
       fix2:
         shape:
           !type:PhysShapeCircle
@@ -33,6 +34,7 @@
   - type: InjectableSolution
     solution: chemicals
   - type: RMCStamina
+  - type: RMCPulse
   - type: Bloodstream
     bloodReagent: Blood
     bloodMaxVolume: 560
@@ -80,6 +82,7 @@
     - DoorBumpOpener
   - type: Marine
   - type: RMCSuitLight
+  - type: RMCLastBodyScanResult
   - type: HolocardState
   - type: Hunger
     baseDecayRate: 0.025
@@ -227,6 +230,13 @@
       whitelist:
         components:
         - RequisitionsCrate #Lockers/Crates
+  - type: Language
+    spokenLanguages:
+      - English
+    understoodLanguages:
+      - English
+    currentLanguage: English
+    defaultLanguage: English
   - type: MobThresholds
     thresholds:
       0: Alive

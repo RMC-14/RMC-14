@@ -1,0 +1,53 @@
+- type: trait
+  id: SpanishLanguage
+  name: rmc-trait-spanish-language-name
+  description: rmc-trait-spanish-language-desc
+  category: SpeechTraits
+  cost: 1
+  components: []
+  language: Spanish
+
+- type: trait
+  id: FrenchLanguage
+  name: rmc-trait-french-language-name
+  description: rmc-trait-french-language-desc
+  category: SpeechTraits
+  cost: 1
+  components: []
+  language: French
+
+- type: trait
+  id: JapaneseLanguage
+  name: rmc-trait-japanese-language-name
+  description: rmc-trait-japanese-language-desc
+  category: SpeechTraits
+  cost: 1
+  components: []
+  language: Japanese
+
+- type: trait
+  id: ChineseLanguage
+  name: rmc-trait-chinese-language-name
+  description: rmc-trait-chinese-language-desc
+  category: SpeechTraits
+  cost: 1
+  components: []
+  language: Chinese
+
+- type: trait
+  id: RussianLanguage
+  name: rmc-trait-russian-language-name
+  description: rmc-trait-russian-language-desc
+  category: SpeechTraits
+  cost: 1
+  components: []
+  language: Russian
+
+- type: trait
+  id: GermanLanguage
+  name: rmc-trait-german-language-name
+  description: rmc-trait-german-language-desc
+  category: SpeechTraits
+  cost: 1
+  components: []
+  language: German

@@ -243,7 +243,7 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/553029b58d42439bef45e30a593bdcf370d99f9a/sound/weapons/gun_mg.ogg"
 
-- files: ["gun_ak4047.ogg"]
+- files: ["gun_type77.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/48e570bd697f2476e28d89cd255d0539a5228228/sound/weapons/gun_ak4047.ogg"
@@ -322,3 +322,18 @@
   license: "CC-BY-SA-3.0"
   copyright: "Created by GreenFireSound, modified by kleinerstation13 (Github)"
   source: "https://freesound.org/people/GreenFireSound/sounds/396271/"
+
+- files: ["gun_m1911.ogg"]
+  license: "CC0-1.0"
+  copyright: "Created by nioczkus (freesound), modified by kleinerstation13 (Github)"
+  source: "https://freesound.org/people/nioczkus/sounds/346537/"
+
+- files: ["gun_mp27.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Taken from Pixabay and modified by kleinerstation13 (Github) (content license at https://pixabay.com/service/license-summary/)"
+  source: "https://pixabay.com/sound-effects/film-special-effects-9mm-pistol-shoot-short-reverb-7152/"
+
+- files: [ "gun_shotgun_automatic.ogg" ]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/07455a5f3986b610e7ccdc3096cad1d914fca2f9/sound/weapons/gun_shotgun_automatic.ogg"

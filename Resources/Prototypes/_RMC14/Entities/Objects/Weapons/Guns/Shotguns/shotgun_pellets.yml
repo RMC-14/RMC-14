@@ -201,3 +201,33 @@
     proto: RMCPelletShotgunBreaching
     count: 4
     spread: 8
+
+# RCM, PVE
+- type: entity
+  parent: CMPelletShotgunBase
+  id: RMCPelletShotgunL49B # RMC14 - separate from regular light breaching shells since the XM51 uses a GunDamageModifier to create its breaching effect and the L49 does not.
+  name: L49B pellets
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/shotgun_projectiles.rsi
+    layers:
+    - state: flechette
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 5
+        Structural: 245 # RMC14 - required for breaching effect.
+  - type: CMArmorPiercing
+    amount: 5
+  - type: ProjectileSpread
+    proto: RMCPelletShotgunL49B
+    count: 4
+    spread: 8
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 4
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 0
+      falloff: 1

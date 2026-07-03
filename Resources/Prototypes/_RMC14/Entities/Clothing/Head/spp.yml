@@ -105,6 +105,17 @@
     bullet: 35
     bio: 20
     explosionArmor: 30
+  - type: FoldableClothing
+    foldedHideLayers:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - Snout
+    unfoldedHideLayers:
+    - Snout
+  - type: HideLayerClothing
+    slots:
+    - Snout
 
 # SPP hats
 - type: entity
@@ -204,7 +215,6 @@
     sprite: _RMC14/Objects/Clothing/Head/SPP/kommisar_cap_black.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/SPP/kommisar_cap_black.rsi
-
 
 - type: entity
   parent: CMHeadCapSPP

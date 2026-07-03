@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/08/2026 21:29:20
+  time: 06/16/2026 10:13:56
   entityCount: 739
 maps: []
 grids:
@@ -4129,6 +4129,13 @@ entities:
     - type: Transform
       pos: 17.385706,20.65537
       parent: 1
+- proto: RMCIntelDataTerminal
+  entities:
+  - uid: 562
+    components:
+    - type: Transform
+      pos: 18.5,7.5
+      parent: 1
 - proto: RMCItemPoolBuckshot
   entities:
   - uid: 612
@@ -4834,13 +4841,6 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: RMCPersonalDesktop
-  entities:
-  - uid: 562
-    components:
-    - type: Transform
-      pos: 18.57551,7.6561403
-      parent: 1
 - proto: RMCPhotocopier
   entities:
   - uid: 531

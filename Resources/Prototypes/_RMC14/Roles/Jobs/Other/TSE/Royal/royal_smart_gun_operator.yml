@@ -19,19 +19,7 @@
       - RoyalMarines
       - TSE
     - type: Skills
-      skills:
-        RMCSkillCqc: 2
-        RMCSkillFirearms: 2
-        RMCSkillPolice: 2
-        RMCSkillFireman: 2
-        RMCSkillConstruction: 1
-        RMCSkillEngineer: 1
-        RMCSkillEndurance: 3
-        RMCSkillMedical: 2
-        RMCSkillMeleeWeapons: 1
-        RMCSkillJtac: 1
-        RMCSkillSmartGun: 1
-        RMCSkillVehicles: 1
+      preset: RMCSkillPresetRoyalSmartGunner
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-sgo
     - type: TacticalMapIcon
@@ -85,8 +73,8 @@
     shoes: RMCBootsRoyalFilled
     suitstorage: RMCSmartGunRoyal
     id: RMCIDRoyalMarinesSGO
-    belt: RMCMK80BeltRoyalFilled
-    back: RMCSatchelLightpackFilledRoyal # TODO RMC14 lightweight rmc backpack
+    belt: RMCBeltHolsterPistolRCML189
+    back: RMCBackpackRCMSmallPVPSmartgun
     pocket1: RMCPouchGeneralLargeFilledSmartGunDrums
     pocket2: RMCPouchMedkitFillRoyal
 

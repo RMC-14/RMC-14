@@ -18,24 +18,7 @@
       - RoyalMarines
       - TSE
     - type: Skills
-      skills:
-        RMCSkillCqc: 3
-        RMCSkillFirearms: 2 
-        RMCSkillPolice: 2
-        RMCSkillFireman: 3
-        RMCSkillConstruction: 2
-        RMCSkillEngineer: 2
-        RMCSkillEndurance: 3
-        RMCSkillMedical: 2
-        RMCSkillSurgery: 1
-        RMCSkillMeleeWeapons: 1
-        RMCSkillJtac: 3
-        RMCSkillVehicles: 2
-        RMCSkillLeadership: 3
-        RMCSkillPilot: 1
-        RMCSkillIntel: 2
-        RMCSkillPowerLoader: 1
-        RMCSkillOverwatch: 1
+      preset: RMCSkillPresetRoyalCaptain
     - type: MarineOrders
     - type: RMCPointing
     - type: CommandAccent
@@ -69,8 +52,8 @@
     shoes: RMCBootsRoyalFilled
     suitstorage: RMCWeaponRifleL24
     id: RMCIDRoyalMarines
-    belt: RMCBeltHolsterPistolFilledL54
-    back: RMCSatchelLightpackFilledRoyalMedic
+    belt: RMCBeltHolsterPistolRCML54
+    back: RMCBackpackRCMMediumPVPFilled
     pocket1: RMCPouchToolsFilledRCM
     pocket2: RMCPouchMedkitFillRoyal
 

@@ -197,6 +197,18 @@
   iconColor: "#b2976e"
   objectType: Item
 
+- type: construction
+  parent: RMC
+  name: Magazine Box (M1984 HP)
+  id: RMCBoxMagazinePistolM1984HP
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxMagazinePistolM1984HPEmpty
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain hollow point M1984 mags.
+  iconColor: "#b2976e"
+  objectType: Item
+
 # 88 mod 4 / 88m4
 - type: construction
   parent: RMC
@@ -567,8 +579,20 @@
         amount: 1
         doAfter: 0.25
 
-    # AK4047
-    - to: RMCBoxMagazineRifleAK4047Empty
+    # Type77
+    - to: RMCBoxMagazineRifleType77Empty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
+    - to: RMCBoxMagazineRifleType77APEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
+    - to: RMCBoxMagazineRifleType77RubberEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
@@ -704,6 +728,12 @@
         doAfter: 0.25
 
     - to: RMCBoxMagazinePistolM1984APEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
+    - to: RMCBoxMagazinePistolM1984HPEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
@@ -847,9 +877,13 @@
   - node: RMCBoxMagazineRifleSSG45APEmpty
     entity: RMCBoxMagazineRifleSSG45APEmpty
 
-  #AK4047
-  - node: RMCBoxMagazineRifleAK4047Empty
-    entity: RMCBoxMagazineRifleAK4047Empty
+  # Type77
+  - node: RMCBoxMagazineRifleType77Empty
+    entity: RMCBoxMagazineRifleType77Empty
+  - node: RMCBoxMagazineRifleType77APEmpty
+    entity: RMCBoxMagazineRifleType77APEmpty
+  - node: RMCBoxMagazineRifleType77RubberEmpty
+    entity: RMCBoxMagazineRifleType77RubberEmpty
 
   # M63
   - node: RMCBoxMagazineSMGM63Empty
@@ -902,6 +936,8 @@
     entity: RMCBoxMagazinePistolM1984Empty
   - node: RMCBoxMagazinePistolM1984APEmpty
     entity: RMCBoxMagazinePistolM1984APEmpty
+  - node: RMCBoxMagazinePistolM1984HPEmpty
+    entity: RMCBoxMagazinePistolM1984HPEmpty
 
   # M77AP
   - node: RMCBoxMagazinePistolM77APEmpty

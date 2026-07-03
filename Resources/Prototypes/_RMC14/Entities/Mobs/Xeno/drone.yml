@@ -12,8 +12,6 @@
   name: Drone
   description: An alien drone.
   components:
-  - type: GhostRole
-    name: cm-job-name-xeno-drone
   - type: MobState
     allowedStates:
     - Alive
@@ -94,10 +92,14 @@
     - CMXenoCarrier
     - CMXenoBurrower
     - CMXenoHivelord
+    earlyEvolvesTo:
+    - CMXenoLurker
+    - CMXenoSpitter
+    - CMXenoWarrior
     evolvesToWithoutPoints:
     - CMXenoQueen
   - type: Evasion
-    evasion: 20
+    evasion: 15
   - type: XenoInhands
     prefix: drone
   - type: IntelRecoverCorpseObjectiveOnDeath
@@ -146,6 +148,7 @@
     - DoorXenoResin
     - XenoStickyResin
     - XenoFastResin
+    - XenoResinSpikes
   - type: VentCrawler
     ventCrawlIcon: drone
   - type: RMCActionOrder

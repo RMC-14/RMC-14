@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/b828ded0c88e7b8183e03173be93b2c32decc8a1/icons/obj/structures/alien/structures.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "resin_spike",
+      "directions": 8
+    }
+  ]
+}

@@ -41,3 +41,29 @@
       - material: BarbedWire
         amount: 2
         doAfter: 3.0
+
+  - node: gate
+    entity: RMCFenceDoor
+    edges:
+    - to: gateBroken
+      steps:
+      - tool: Cutting
+        doAfter: 1.0
+
+  - node: gateBroken
+    entity: RMCFenceDoorBroken
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: CMRodMetal1
+        amount: 10
+      - !type:DeleteEntity
+      steps:
+      - tool: Cutting
+        doAfter: 5.0
+    - to: gate
+      steps:
+      - material: BarbedWire
+        amount: 2
+        doAfter: 3.0

@@ -61,6 +61,15 @@
             </BoxContainer>
             <cc:HSeparator Color="#02E74E" />
             <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="5">
+                <RichTextLabel Name="LaunchAlarmHeader" Access="Public" MinSize="350, 0"/>
+                <Control HorizontalExpand="True" />
+                <controls:DropshipButton Name="LaunchAlarmButton" Access="Public"
+                                         Margin="1" BackgroundColor="#004E25"
+                                         BorderColor="#02E74E" BorderThickness="1"
+                                         Text="Start Alarm" />
+            </BoxContainer>
+            <cc:HSeparator Color="#02E74E" />
+            <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="5">
                 <RichTextLabel Name="RemoteControlHeader" Access="Public" />
                 <Control HorizontalExpand="True" />
                 <controls:DropshipButton Name="RemoteControlButton" Access="Public"

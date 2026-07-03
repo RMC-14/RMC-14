@@ -16,6 +16,15 @@
     - type: NpcFactionMember
       factions:
       - CLF
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      understoodLanguages:
+      - Japanese
+      - English
+      currentLanguage: Japanese
+      defaultLanguage: Japanese
     - type: Skills
       skills:
         RMCSkillFirearms: 1

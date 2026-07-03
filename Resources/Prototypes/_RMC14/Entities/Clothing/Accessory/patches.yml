@@ -487,8 +487,8 @@
 - type: entity
   parent: RMCPatchBase
   id: RMCPatchTSEMarines
-  name: TSE Royal Crown Marines patch
-  description: A fire-resistant shoulder patch, worn by the men and women of the royal crown marines.
+  name: Royal Crown Marines patch
+  description: A fire-resistant shoulder patch, worn by the men and women of the Royal Crown Marines.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/Patches/TSE/crown_patch.rsi
@@ -506,7 +506,7 @@
   parent: RMCPatchBase
   id: RMCPatchTSE
   name: Three Suns Empire patch
-  description: A fire-resistant shoulder patch, worn by the men and women loyal to the Three Suns Empire, An older style symbol of the TSE.
+  description: A fire-resistant shoulder patch, worn by the men and women loyal to the Three Suns Empire.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/Patches/TSE/tse_patch.rsi
@@ -520,11 +520,10 @@
       sprite: _RMC14/Objects/Clothing/Accessory/Patches/TSE/tse_patch.rsi
       state: helmet
 
-
 - type: entity
   parent: RMCPatchBase
   id: RMCPatchTSEPara
-  name: TSE RCM Paramarines patch
+  name: RCM Paramarines patch
   description: A fire-resistant shoulder patch, worn by the men and women of the RCM's Paramarine regiments. The patch proudly boasts a silver knife with forest green wings, overlaid on a red background.
   components:
   - type: Sprite
@@ -537,6 +536,25 @@
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/Accessory/Patches/TSE/para_patch.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchTSEWhiskey
+  name: RCM Whiskey Troop patch
+  suffix: PVE, RCM
+  description: A fire-resistant shoulder patch, worn by the men and women of Whiskey Troop, stationed aboard the HMS Pratchett. The patch features a crown and two knives facing left and right, embroidered in gold.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/TSE/whiskey_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/TSE/whiskey_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/TSE/whiskey_patch.rsi
       state: helmet
 
 # CLF
@@ -562,8 +580,8 @@
 - type: entity
   parent: RMCPatchBase
   id: RMCPatchFreelancer
-  name: Freelancer's Guild patch
-  description: "A fire-resistant circular patch featuring a white skull on a vertically split black and blue background. Worn by a skilled mercenary of the Freelancers, a well-equipped group for hire across the outer colonies, known for their professionalism and neutrality. This patch is a personal memento from the wearer’s time with the group, representing a life spent navigating the dangerous world of mercenary contracts."
+  name: Freelancer's patch
+  description: "A fire-resistant circular patch featuring a white skull on a vertically split black and blue background. Worn by a skilled mercenary belonging to a freelance mercenary group, representing a life spent navigating the dangerous world of mercenary contracts and loyalty at a price."
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/merc_patch.rsi
@@ -637,4 +655,32 @@
   - type: UniformAccessory
     playerSprite:
       sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/peace_patch.rsi
+      state: patch
+
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchHalcyon
+  name: Halcyon Systems patch
+  description: A sleek corporate patch bearing the logo of the Halcyon Systems Corporation, a powerful conglomerate. Known for prosthetic manufacturing, weapons development, and ship-manufacturing. Wearing this patch implies ruthlessness and untempered ambition.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/halcyon.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/halcyon.rsi
+      state: patch
+
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchNovaris
+  name: Novaris Industries patch
+  description: A reliable-looking patch bearing the logo of Novaris Industries, an industry leader in affordable technology. Known for developing Average Joes and AI, it also produces other goods for the civilian market and utilitarian space-station. The patch itself was probably made and sold at an insanely cheap price.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/novaris.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/novaris.rsi
       state: patch

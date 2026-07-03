@@ -23,7 +23,7 @@
   sprite: /Textures/_RMC14/Tiles/planet/sand.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMTileBase
   id: CMPlanetWood
   name: tiles-cm-wood
   sprite: /Textures/_RMC14/Tiles/planet/wood/wood.png
@@ -85,7 +85,7 @@
   sprite: /Textures/_RMC14/Tiles/planet/shuttle/floor6.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMTileBase
   id: CMPlanetCorsatSquare
   name: corsat squares
   sprite: /Textures/_RMC14/Tiles/planet/corsat/squares.png
@@ -103,7 +103,7 @@
   canDig: false
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMTileBase
   id: CMPlanetCorsatPlate
   name: corsat plate
   sprite: /Textures/_RMC14/Tiles/planet/corsat/plate.png
@@ -186,7 +186,7 @@
   sprite: /Textures/_RMC14/Tiles/planet/auto_shale/shale_2.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMTileBase
   id: CMPlanetTatami
   name: tatami flooring
   sprite: /Textures/_RMC14/Tiles/planet/interior/tatami.png

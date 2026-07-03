@@ -368,6 +368,16 @@
       scatterFlat: 6
 
 - type: entity
+  parent: RMCAttachmentM890Stock
+  id: RMCAttachmentM890StockGuard
+  name: M890 Tactical Stock
+  suffix: Honor Guard
+  description: Standard Stock for the M890 tactical shotgun. Coated in a glossy red finish to signify its use with Military Police Honor Guards.
+  components:
+  - type: Sprite
+    state: tactical_stock_221_guard
+
+- type: entity
   parent: RMCStockAttachmentBase
   id: RMCAttachmentMK221Stock
   name: MK221 tactical stock
@@ -1223,9 +1233,9 @@
 
 - type: entity
   parent: RMCAttachmentM54CStockCollapsible
-  id: RMCAttachmentAK4047StockCollapsible
-  name: AK-4047 folding stock
-  description: The standard back end of any gun starting with 'AK'. Compatible with the AK-4047 series, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle, just like its ancestors.
+  id: RMCAttachmentType77StockCollapsible
+  name: Type 77 folding stock
+  description: The standard back end of any gun starting with 'AK'. Compatible with the Type 77 series, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle, just like its ancestors.
   components:
   - type: AttachableVisuals
     suffix: ""
@@ -1244,12 +1254,53 @@
     iconActive:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
       state: ak4047_stock-on
-    actionName: Toggle AK-4047 Folding Stock
+    actionName: Toggle Type 77 Folding Stock
   - type: Tag
     tags:
     - RMCAttachmentStock
-    - RMCAttachmentAK4047StockCollapsible
+    - RMCAttachmentType77StockCollapsible
 
+- type: entity
+  parent: RMCAttachableBase
+  id: RMCAttachmentL49Stock
+  name: L49 stock
+  description: A fixed stock for the L49 combat shotgun. Adds a bit of heft to the weapon, making it easier to make follow-up shots when shouldered - as well improving its performance as a melee weapon.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+    state: l49-stock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: AttachableSizeMods
+    modifiers:
+      - size: 1
+  - type: AttachableSpeedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      walk: -0.059
+      sprint: -0.101
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Blunt: 10
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: 0.25
+      recoilFlat: -3
+      scatterFlat: -3
+    - conditions:
+        unwieldedOnly: true
+      accuracyAddMult: -0.25
+      recoilFlat: 3
+      scatterFlat: 3
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentL49Stock
 
 - type: Tag
   id: RMCAttachmentHG3712Stock
@@ -1345,7 +1396,7 @@
   id: RMCAttachmentL24BStock
 
 - type: Tag
-  id: RMCAttachmentAK4047StockCollapsible
+  id: RMCAttachmentType77StockCollapsible
 
 - type: Tag
   id: RMCAttachmentMP5AltStockCollapsible
@@ -1361,3 +1412,6 @@
 
 - type: Tag
   id: RMCAttachmentLPO80Stock
+
+- type: Tag
+  id: RMCAttachmentL49Stock

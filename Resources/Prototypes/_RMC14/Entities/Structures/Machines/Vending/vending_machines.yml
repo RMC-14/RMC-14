@@ -63,8 +63,12 @@
     radius: 1.5
   - type: LitOnPowered
   - type: ApcPowerReceiver
-    needsPower: false # TODO RMC14
-    powerLoad: 0
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 10
+    activeLoad: 0
+    channel: Equipment # TODO RMC14 vend_power_usage: 150
   - type: Appearance
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/generic.rsi
@@ -87,6 +91,9 @@
   - type: Corrodible
     timeToApply: 4
     structure: true
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: null
   - type: ActivatableUIBlacklist
     blacklist:
       components:
@@ -95,14 +102,14 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100
+        damage: 50
       behaviors:
       - !type:DoActsBehavior
         acts: ["Breakage"]
       - !type:EjectVendorItems
     - trigger:
         !type:DamageTrigger
-        damage: 200
+        damage: 100
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
@@ -119,6 +126,60 @@
 - type: vendingMachineInventory
   id: CMVendomat
 
+- type: entity
+  parent: CMBaseStructure
+  id: VehicleHardpointVendor
+  name: vehicle hardpoint printer
+  description: A machine for printing vehicle hardpoints.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/vending_64x32.rsi
+    layers:
+    - state: "vehicle_gear_off"
+    - state: "vehicle_gear"
+      map: [ "rmc_flick_animation" ]
+      shader: unshaded
+    - state: vehicle_gear_panel
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.45,0.25,0.45"
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        density: 200
+  - type: ActivatableUI
+    key: enum.CMAutomatedVendorUI.Key
+  - type: ActivatableUIRequiresAccess
+  - type: AccessReader
+    access: [ [ "RMCAccessVehicleCrew" ] ]
+  - type: UserInterface
+    interfaces:
+      enum.CMAutomatedVendorUI.Key:
+        type: CMAutomatedVendorBui
+  - type: CMAutomatedVendor
+    scaling: false
+    sound:
+      path: /Audio/_RMC14/Machines/vending_drop.ogg
+      params:
+        maxDistance: 2
+        volume: -4
+    baseSprite:
+      sprite: _RMC14/Structures/Machines/VendingMachines/vending_64x32.rsi
+      state: vehicle_gear
+    animationSprite:
+      sprite: _RMC14/Structures/Machines/VendingMachines/vending_64x32.rsi
+      state: vehicle_gear_vend
+    sections: []
+  - type: VehicleHardpointVendor
+  - type: InteractionOutline
+  - type: RequireProjectileTarget
+
 
 # Coffee
 - type: entity
@@ -127,6 +188,7 @@
   name: Hot Drinks machine
   description: A vending machine which dispenses hot drinks.
   components:
+  - type: VehicleSmashable
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/coffee.rsi
   - type: VendingMachine
@@ -177,6 +239,7 @@
   name: Hot Foods Machine
   description: A vending machine full of ready to cook meals, mhmmmm taste the nutritional goodness!
   components:
+  - type: VehicleSmashable
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/snack.rsi
   - type: VendingMachine
@@ -188,6 +251,7 @@
     RMCFoodSnackCheeseburgerPackaged: 12
     RMCFoodSnackBurritoPackaged: 12
     RMCFoodSnackHotdogPackaged: 12
+    RMCFoodSnackSamosaPackaged: 12
     RMCFoodSnackKeplarCrisps: 12
     RMCFoodSnackKeplarFlamehotCrisps: 12
     RMCFoodSnackChipsPepper: 12
@@ -210,6 +274,7 @@
     RMCFoodSnackCheeseburgerPackaged: 40
     RMCFoodSnackBurritoPackaged: 40
     RMCFoodSnackHotdogPackaged: 40
+    RMCFoodSnackSamosaPackaged: 40
 
 - type: entity
   parent: CMVendorSnack
@@ -227,6 +292,7 @@
   name: Bobda Softdrinks
   description: A softdrink vendor provided by Bobda Soda Company, Havana.
   components:
+  - type: VehicleSmashable
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/cola.rsi
   - type: VendingMachine
@@ -530,6 +596,7 @@
     RMCMagazinePistolM1984Rubber: 40
     RMCMagazinePistolM77Rubber: 40
     RMCMagazineRifleM54CRubber: 40
+    RMCMagazineRifleM54CMK1Rubber: 10
     RMCMagazineRifleM4SPRRubber: 40
     CMArmorHelmetM10MP: 8
     RMCExplosiveBreachingChargeRubber: 6
@@ -565,6 +632,7 @@
     CMFirstAidKitFilled: 2
     CMBurnAidKitFilled: 2
     RMCRadiationAidKitFilled: 1
+    RMCCPRDummy: 5
     # Crew Monitor
 
 
@@ -668,6 +736,7 @@
   name: Dinnerware
   description: A kitchen and restaurant equipment vendor.
   components:
+  - type: VehicleSmashable
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/dinnerware.rsi
     snapCardinals: true
@@ -675,13 +744,18 @@
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
     - state: "normal-unshaded"
-      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
+      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
       shader: unshaded
     - state: "panel"
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: ApcPowerReceiver
-    needsPower: false # TODO RMC14
-    powerLoad: 0
+    needsPower: true # TODO RMC14
+    powerLoad: 250
+  - type: RMCPowerReceiver
+    idleLoad: 10
+    activeLoad: 0
+    channel: Equipment
+  - type: ActivatableUIRequiresPower
   - type: Appearance
   - type: LitOnPowered
   - type: Wires
@@ -689,6 +763,9 @@
     layoutId: Vending
   - type: WiresPanel
   - type: WiresVisuals
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
   - type: CMAutomatedVendor
     scaling: false
     sections:
@@ -702,8 +779,10 @@
         amount: 5
       - id: DrinkShaker
         amount: 5
-      - id: DrinkGlass
+      - id: RMCDrinkGlass
         amount: 8
+      - id: DrinkGlass
+        amount: 4
       - id: ClothingOuterApronChef
         amount: 2
       - id: RMCCondimentSmallSalt
@@ -822,9 +901,9 @@
         amount: 24
       - id: FoodMeatSausage
         amount: 18
-      - id: DrinkMilkCarton
+      - id: RMCDrinkMilkCarton
         amount: 24
-      - id: DrinkSoyMilkCarton
+      - id: RMCDrinkSoyMilkCarton
         amount: 12
       - id: RMCCondimentEnzyme
         amount: 12

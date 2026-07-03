@@ -75,7 +75,7 @@ public sealed class RMCStandingSystem : EntitySystem
                             if (_standing.IsDown(ent))
                                 _popup.PopupClient(Loc.GetString("rmc-standing-keep-lying"), ent, ent, PopupType.Medium);
 
-                            if (_standing.Down(ent))
+                            if (_standing.Down(ent, downedBy: ent))
                             {
                                 rest.Resting = true;
                                 Dirty(ent, rest);

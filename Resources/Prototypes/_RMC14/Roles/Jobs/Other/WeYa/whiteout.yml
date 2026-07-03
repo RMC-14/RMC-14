@@ -19,6 +19,35 @@
     - type: NpcFactionMember
       factions:
       - WeYa
+    - type: Language
+      spokenLanguages:
+      - English
+      - French
+      - Japanese
+      - Russian
+      - German
+      - Chinese
+      - Spanish
+      - SignLanguage
+      understoodLanguages:
+      - English
+      - French
+      - Japanese
+      - Russian
+      - German
+      - Chinese
+      - Spanish
+      - SignLanguage
+      currentLanguage: English
+      defaultLanguage: English
+    - type: LanguageLearning
+      learnableLanguages:
+      - Xeno
+      firstContactLanguages:
+      - Xeno
+      comprehensionThreshold: 0.8
+      learningRange: 8.0
+      baseWordLearningRate: 0.05
     - type: Skills
       skills:
         RMCSkillCqc: 5
@@ -113,7 +142,7 @@
     jumpsuit: RMCJumpsuitVeteranPMCCommando
     outerClothing: CMArmorM4PMCCommando
     gloves: RMCHandsVeteranPMCCommando
-    head: ArmorHelmetPMCCommando
+    head: RMCArmorHelmetPMCDeathsquad
     shoes: RMCBootsPMCCommandoFilled
     mask: RMCMaskCoifPMC
     ears: RMCHeadsetDistressPMC

@@ -45,3 +45,41 @@
     activatedPrefix: jacket
   - type: Clothing
     equippedPrefix: jacket
+
+# PJs
+- type: entity
+  parent: RMCUniformBase
+  id: RMCJumpsuitBluePjs
+  name: "blue pj's"
+  description: Sleepwear.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/blue_pj.rsi
+
+- type: entity
+  parent: RMCJumpsuitBluePjs
+  id: RMCJumpsuitRedPjs
+  name: "red pj's"
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/red_pj.rsi
+
+# Waiter
+- type: entity
+  parent: RMCUniformBase
+  id: RMCJumpsuitWaiter
+  name: waiter's outfit
+  description: It's a very smart uniform with a special pocket for tip.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/waiter.rsi
+
+# Checkered suit
+- type: entity
+  parent: RMCUniformBase
+  id: RMCJumpsuitCheckeredSuit
+  name: checkered suit
+  description: That's a very nice suit you have there. Shame if something were to happen to it, eh?
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/checkered.rsi

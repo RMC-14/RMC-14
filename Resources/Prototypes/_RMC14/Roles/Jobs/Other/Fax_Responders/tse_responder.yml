@@ -40,7 +40,7 @@
 - type: startingGear
   id: RMCGearTSEResponder
   equipment:
-    jumpsuit: CMJumpsuitBO
+    jumpsuit: RMCJumpsuitMarineRoyalService
     shoes: RMCBootsRoyal
     head: RMCHeadRoyalBeret
     id: RMCIDCardTSEResponder

@@ -1,0 +1,158 @@
+name: "Labels: Reviewed By Maintainer"
+
+on:
+  pull_request:
+    types:
+      - opened      # Labeler runs when a PR is filed
+      - synchronize # and when commits are added.
+
+  pull_request_review:
+    types:
+      - submitted   # Labeler also runs when a review is added.
+
+permissions:
+  pull-requests: write # Labeler must be able to read and write the pull request metadata.
+
+jobs:
+  label:
+    # A single-core machine will do: https://docs.github.com/en/actions/reference/runners/github-hosted-runners#standard-github-hosted-runners-for-public-repositories
+    runs-on: ubuntu-slim
+
+    env:
+      GH_TOKEN: ${{ github.token }} # Authenticate gh CLI which is pre-installed, see docs above.
+
+    steps:
+      - name: Update labels
+        shell: bash
+        run: |
+          # Enable bash strict mode.
+          set -euo pipefail
+
+          LABEL_CHANGES_REQUESTED="S: Awaiting Changes"
+          LABEL_NEEDS_APPROVAL="S: Needs Review"
+          LABEL_PARTIAL_APPROVAL="S: Partially Approved"
+          LABEL_APPROVED="S: Approved"
+
+          ALL_LABELS=(
+            "$LABEL_CHANGES_REQUESTED"
+            "$LABEL_NEEDS_APPROVAL"
+            "$LABEL_PARTIAL_APPROVAL"
+            "$LABEL_APPROVED"
+          )
+
+          PR_NUMBER="${{ github.event.pull_request.number }}"
+          EVENT_NAME="${{ github.event_name }}"
+          ACTION="${{ github.event.action }}"
+
+          # ------------------------------------------------------------
+          # Utility functions
+          # ------------------------------------------------------------
+          get_labels() {
+            gh pr -R "${{ github.repository }}" view "$PR_NUMBER" \
+              --json labels \
+              --jq '.labels[].name'
+          }
+
+          has_label() {
+            local target="$1"
+
+            while IFS= read -r label; do
+              [[ "$label" == "$target" ]] && return 0
+            done < <(get_labels)
+
+            return 1
+          }
+
+          set_status() {
+            local target_label="$1"
+
+            for other_label in "${ALL_LABELS[@]}"; do
+              if [[ "$target_label" != "$other_label" ]]; then
+                if has_label "$other_label"; then
+                  echo "Removing existing label: $other_label"
+                  gh pr -R "${{ github.repository }}" edit "$PR_NUMBER" --remove-label "$other_label"
+                fi
+              fi
+            done
+
+            gh pr -R "${{ github.repository }}" edit "$PR_NUMBER" --add-label "$target_label"
+
+            echo "Set PR status: $target_label"
+          }
+
+          ##############################################################
+          # BUSINESS LOGIC STARTS HERE                                 #
+          ##############################################################
+          echo "Processing event type: ${EVENT_NAME}"
+          echo "Processing action: ${ACTION}"
+
+          # ------------------------------------------------------------
+          # If a new commit is pushed, set to needs approval.
+          # (GitHub dismisses all reviews on the HEAD commit anyways.)
+          # ------------------------------------------------------------
+          if [[ "$EVENT_NAME" == "pull_request" && "$ACTION" == "synchronize" ]]; then
+            set_status "$LABEL_NEEDS_APPROVAL"
+            exit 0
+          fi
+
+          # ------------------------------------------------------------
+          # PR opened, keep the old status if it has one,
+          # otherwise set S: Needs Review.
+          # ------------------------------------------------------------
+          if [[ "$EVENT_NAME" == "pull_request" ]]; then
+            if [[ "$ACTION" == "opened" ]]; then
+
+              set_status "$LABEL_NEEDS_APPROVAL"
+
+              exit 0
+            fi
+          fi
+
+          # ------------------------------------------------------------
+          # Review submitted
+          # ------------------------------------------------------------
+          if [[ "$EVENT_NAME" == "pull_request_review" ]]; then
+            REVIEW_AUTHOR_ASSOCIATION="${{ github.event.review.author_association }}"
+
+            # Filter for write access
+            case "$REVIEW_AUTHOR_ASSOCIATION" in
+              OWNER|MEMBER|COLLABORATOR)
+                echo "Trusted reviewer (Association: $REVIEW_AUTHOR_ASSOCIATION )"
+                ;;
+              *)
+                echo "Ignoring review from non-writer (Association: $REVIEW_AUTHOR_ASSOCIATION )"
+                exit 0
+                ;;
+            esac
+
+            REVIEW_STATE="${{ github.event.review.state }}"
+
+            # changes_requested
+            if [[ "$REVIEW_STATE" == "changes_requested" ]]; then
+              set_status "$LABEL_CHANGES_REQUESTED"
+              exit 0
+            fi
+
+            # approved
+            if [[ "$REVIEW_STATE" == "approved" ]]; then
+
+              # Never move away from changes requested on a review,
+              # the label is there for a reason
+              if has_label "$LABEL_CHANGES_REQUESTED"; then
+                echo "PR is in Changes requested; ignoring approval"
+                exit 0
+              fi
+
+              # Needs approval -> Pre-approved
+              if has_label "$LABEL_NEEDS_APPROVAL"; then
+                set_status "$LABEL_PARTIAL_APPROVAL"
+                exit 0
+              fi
+
+              # Pre-approved -> Approved
+              if has_label "$LABEL_PARTIAL_APPROVAL"; then
+                set_status "$LABEL_APPROVED"
+                exit 0
+              fi
+            fi
+          fi

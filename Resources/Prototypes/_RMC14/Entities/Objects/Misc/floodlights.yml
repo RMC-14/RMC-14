@@ -4,6 +4,7 @@
   name: small floodlight
   description: A small bit of light in the darkness.
   components:
+  - type: VehicleSmashable
   - type: Transform
     anchored: true
   - type: Physics
@@ -94,7 +95,7 @@
     layers:
       - state: bigflood
       - state: bigfloodon
-        visible: false
+        visible: true
         map: [ "light" ]
     offset: "0.0,0.5"
     drawdepth: Mobs
@@ -360,7 +361,7 @@
     layers:
       - state: street_off
       - state: street_on
-        visible: false
+        visible: true
         map: [ "light" ]
     drawdepth: Mobs
   - type: Construction

@@ -49,6 +49,25 @@
   - type: SkillPamphlet
     addSkills:
       RMCSkillMedical: 1
+    skillCap:
+      RMCSkillMedical: 1
+    bypassLimit: true
+
+# gives science skill
+- type: entity
+  parent: CMPamphlet
+  id: RMCPamphletScience
+  name: scientific instructional pamphlet
+  description: A pamphlet used to quickly impart vital knowledge of science, and how to operate its various egg-headed machineries and other research-qualitative practices.
+  components:
+  - type: Sprite
+    state: pamphlet_science
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillResearch: 1
+    skillCap:
+      RMCSkillResearch: 1
+    bypassLimit: true
 
 # gives miniengie skill
 - type: entity
@@ -63,6 +82,10 @@
     addSkills:
       RMCSkillEngineer: 1
       RMCSkillConstruction: 1
+    skillCap:
+      RMCSkillEngineer: 2 # RMC14: In case they read another one first.
+      RMCSkillConstruction: 1
+    bypassLimit: true
 
 # gives jtac skill
 - type: entity
@@ -76,6 +99,9 @@
   - type: SkillPamphlet
     addSkills:
       RMCSkillJtac: 1
+    skillCap:
+      RMCSkillJtac: 2
+    bypassLimit: true
 
 # gives spotter skill / bypasses limit
 - type: entity
@@ -87,11 +113,13 @@
   - type: Sprite
     state: pamphlet_spotter
   - type: SkillPamphlet
+    bypassSkill: true
     addComps:
     - type: SpotterWhitelist
     addSkills:
       RMCSkillJtac: 1
-    bypassLimit: true
+    skillCap:
+      RMCSkillJtac: 2 # RMC14: In case they read another one first.
     giveJobTitle: rmc-job-name-spotter
     givePrefix: rmc-job-prefix-spotter
     isAppendPrefix: false
@@ -119,6 +147,8 @@
     - type: SkillPamphlet
       addSkills:
         RMCSkillPowerLoader: 1
+      skillCap:
+        RMCSkillPowerLoader: 2
       bypassLimit: true
 
 # gives police skill / bypasses limit
@@ -132,6 +162,8 @@
     state: pamphlet_jtac
   - type: SkillPamphlet
     addSkills:
+      RMCSkillPolice: 1
+    skillCap:
       RMCSkillPolice: 1
     bypassLimit: true
 
@@ -147,6 +179,8 @@
   - type: SkillPamphlet
     addSkills:
       RMCSkillSurgery: 1
+    skillCap:
+      RMCSkillSurgery: 2
     bypassLimit: true
 
 # gives intel skill / bypasses limit
@@ -161,6 +195,8 @@
   - type: SkillPamphlet
     addSkills:
       RMCSkillIntel: 1
+    skillCap:
+      RMCSkillIntel: 2
     addComps:
       - type: ViewIntelObjectives
     bypassLimit: true
@@ -174,10 +210,11 @@
   - type: Sprite
     state: pamphlet_loader
   - type: SkillPamphlet
+    bypassSkill: true
     addSkills:
       RMCSkillEngineer: 1
     skillCap:
-      RMCSkillEngineer: 1
+      RMCSkillEngineer: 2 # RMC14: In case they read another one first.
     giveJobTitle: rmc-job-name-loader
     givePrefix: rmc-job-prefix-loader
     isAppendPrefix: false
@@ -187,7 +224,6 @@
     giveMapBlip:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: loader
-    bypassLimit: true
     jobWhitelists:
     - popup: rmc-pamphlets-rifleman-warning
       jobProto: CMRifleman
@@ -203,11 +239,12 @@
   - type: Sprite
     state: pamphlet_mortar
   - type: SkillPamphlet
+    bypassSkill: true
     addSkills:
       RMCSkillEngineer: 1
       RMCSkillJtac: 2
     skillCap:
-      RMCSkillEngineer: 1
+      RMCSkillEngineer: 2 # RMC14: In case they read another one first.
       RMCSkillJtac: 2
     giveJobTitle: rmc-job-name-mortar-operator
     givePrefix: rmc-job-prefix-mortar-operator
@@ -218,25 +255,113 @@
     giveMapBlip:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: mortar
-    bypassLimit: true
     jobWhitelists:
     - popup: rmc-pamphlets-rifleman-warning
       jobProto: CMRifleman
     - popup: rmc-pamphlets-rifleman-warning
       jobProto: CMPVERifleman
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleMortar
 
 - type: entity
   parent: CMPamphlet
   id: RMCPamphletHeavyMachineGunner
   name: heavy machinegunner instructional pamphlet
-  description: A pamphlet used to quickly impart vital knowledge. This one has an engineering and a machinegun insignia
+  description: A pamphlet used to quickly impart vital knowledge. This one has an engineering and a machinegun insignia.
   components:
   - type: Sprite
     state: pamphlet_machinegunner
   - type: SkillPamphlet
     addSkills:
       RMCSkillEngineer: 1
+    skillCap:
+      RMCSkillEngineer: 2
     bypassLimit: true
+
+- type: entity
+  parent: CMPamphlet
+  id: RMCPamphletVehicles
+  name: vehicle training manual
+  description: A manual used to quickly impart vital knowledge on driving vehicles.
+  components:
+  - type: Sprite
+    state: pamphlet_vehicle
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillVehicles: 1
+    skillCap:
+      RMCSkillVehicles: 1
+    bypassLimit: true
+
+- type: entity
+  parent: CMPamphlet
+  id: RMCPamphletOverwatch
+  name: overwatch console manual
+  description: A manual used to quickly impart vital knowledge on operating overwatch consoles.
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillOverwatch: 1
+    skillCap:
+      RMCSkillOverwatch: 1
+    bypassLimit: true
+
+- type: entity
+  parent: CMPamphlet
+  id: RMCPamphletCanine
+  name: K9 handler instructional pamphlet
+  description: A pamphlet used to quickly impart vital knowledge of taking care of K9 units, even if they aren't exactly real dogs.
+  components:
+  - type: Sprite
+    state: pamphlet_k9_handler
+  - type: SkillPamphlet
+    bypassSkill: true
+    addSkills:
+      RMCSkillJtac: 1
+      RMCSkillEngineer: 1
+    skillCap:
+      RMCSkillJtac: 2     # RMC14: In case they read another one first.
+      RMCSkillEngineer: 2 # RMC14: In case they read another one first.
+    # TODO: custom icon and title dependent on if they are a medic or MP
+    jobWhitelists:
+    - popup: rmc-pamphlets-k9-warning
+      jobProto: CMHospitalCorpsman
+    - popup: rmc-pamphlets-k9-warning
+      jobProto: CMMilitaryPolice
+
+- type: entity
+  parent: CMPamphlet
+  id: RMCPamphletVehicleCrewman
+  name: Vehicle Crewman instructional pamphlet
+  description: A manual used to quickly impart vital knowledge of driving heavy-duty vehicles and its maintenance. It also imparts some deep knowledge on related engineering applications.
+  components:
+  - type: Sprite
+    state: pamphlet_vehicle
+  - type: SkillPamphlet
+    # TODO: should probably give and icon and title
+    addSkills:
+      RMCSkillVehicles: 3
+      RMCSkillEngineer: 2
+    skillCap:
+      RMCSkillVehicles: 3
+      RMCSkillEngineer: 2
+    bypassLimit: true
+
+- type: entity
+  parent: CMPamphlet
+  id: RMCPamphletVulture
+  name: vulture instructional pamphlet
+  description: A pamphlet used to quickly impart vital knowledge of how to shoot big guns and spot for them.
+  components:
+  - type: Sprite
+    state: pamphlet_vulture
+  - type: SkillPamphlet
+    # TODO: should probably give and icon and title
+    addSkills:
+      RMCSkillVulture: 1
+    skillCap:
+      RMCSkillVulture: 1
 
 # OTHER
 
@@ -260,7 +385,6 @@
     giveMapBlip:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: honorguard
-    bypassLimit: true
     jobWhitelists:
     - popup: rmc-pamphlets-mp-warning
       jobProto: CMMilitaryPolice
@@ -273,21 +397,30 @@
   id: CMPamphletLanguage
   name: translation pamphlet
   description: A pamphlet used by lazy Marine interpreters to quickly learn new languages on the spot.
-  suffix: NOT IMPLEMENTED
+  abstract: true
+  components:
+  - type: SkillPamphlet
+    bypassLimit: true
 
 # gives japanese language
 - type: entity
   parent: CMPamphletLanguage
   id: CMPamphletLanguageJapanese
   name: Pages of Turedobando Yohei Adobencha Zohuken
-  description: These are some torn pages from a famous isekai manga named 'Turedobando Yohei Adobencha Zohuken' or Japanese Mercenary Adventure Sequel about a travelling band of Freelancers sent into a fantasy world. Why do you even know this?
+  description: A dog-eared volume of a popular isekai manga. Even if you don’t care about the plot, the annotated sound effects and dialogue provide a surprisingly solid foundation in the language.
+  components:
+  - type: SkillPamphlet
+    language: Japanese
 
 # gives chinese language
 - type: entity
   parent: CMPamphletLanguage
   id: CMPamphletLanguageChinese
   name: Pages from the Little Red Book
-  description: Pages from the handbook to starting a famine that kills over 100 million of your people. Apparently this will help you learn Chinese.
+  description: A dense, laminated technical manual for SPP industrial hardware. Navigating the maintenance protocols is a trial by fire, but you’ll learn the script eventually.
+  components:
+  - type: SkillPamphlet
+    language: Chinese
   # desc starts with "没有共产党就没有新中国!" but RMC14 doesnt support chinese letters :(
 
 # gives german language
@@ -295,39 +428,71 @@
   parent: CMPamphletLanguage
   id: CMPamphletLanguageGerman
   name: Translated Lyrics to 99 Luftballons
-  description: These hastily scribbled translations of 99 Luftballons, an iconic German hit of the 80s, were meant for the yearly Battalion Karaoke Night. I guess you can get some better use out of this.
+  description: A beer-stained lyric sheet used for karaoke. It’s mostly 20th-century pop hits, but it’s enough to help you navigate a German-speaking mining colony without getting punched.
+  components:
+  - type: SkillPamphlet
+    language: German
 
 # gives spanish language
 - type: entity
   parent: CMPamphletLanguage
   id: CMPamphletLanguageSpanish
   name: America Latina - A Quick Translation Guide
-  description: This pamphlet was designed for Intelligence Officers to interact with the local populaces, but only for IOs who managed to sleep through Dialects and Mannerisms Class.
+  description: A "Inter-Colony Relations" pamphlet issued by the United Nations. It was intended for peace-keeping efforts, but mostly serves as a guide for Marines looking for the nearest bar.
+  components:
+  - type: SkillPamphlet
+    language: Spanish
+
+# gives french language
+- type: entity
+  parent: CMPamphletLanguage
+  id: CMPamphletLanguageFrench
+  name: Dog-eared Pages of Le Petit Prince
+  description: A few tattered pages from a fashion journal from the early 2100s. It teaches you just enough high-society vocabulary to sound sophisticated, or at least like an arrogant tourist.
+  components:
+  - type: SkillPamphlet
+    language: French
+
+# gives russian language
+- type: entity
+  parent: CMPamphletLanguage
+  id: CMPamphletLanguageRussian
+  name: Crumpled Transliteration Notes
+  description: Gritty field notes scribbled on the pages of an old journal. Between the phonetic spellings of how to follow orders, win a bar fight, and toast the fallen, there is enough grammar hidden in the margins to learn the basics.
+  components:
+  - type: SkillPamphlet
+    language: Russian
+
+# gives sign language
+- type: entity
+  parent: CMPamphletLanguage
+  id: CMPamphletLanguageSign
+  name: Illustrated Hand Signals Guide
+  description: A UNMC laminated guide to 'Tactical Hand Signs.' It covers the essential hand signals used for coordination when any noise is a death sentence, plus a few unofficial gestures for insulting your squadmates without the CO hearing you.
+  components:
+  - type: SkillPamphlet
+    language: SignLanguage
 
 
 # RESTRICTED LANGUAGES
 
-
-# gives sainja language
-- type: entity
-  parent: CMPamphletLanguage
-  id: CMPamphletLanguageYautja
-  name: stained parchment
-  description: A yellowed old piece of parchment covered in strange runes from an alien writing system. The letters seem to shift back and forth into place before your eyes.
 
 # gives xenonid language
 - type: entity
   parent: CMPamphletLanguage
   id: CMPamphletLanguageXenonid
   name: Xenobiologist's file
-  description: A xenobiologist's document recording and detailing observations on captive Xenonid communication via vocalisations and pheromones, as well as notes on attempting to reproduce them by human beings.
+  description: A heavily redacted Weston-Yamada research summary. It details the clicks, hisses, and pheromonal triggers of the 'Xenonid' in high detail. Attempting these sounds makes your throat ache and your skin crawl.
+  components:
+  - type: SkillPamphlet
+    language: Xeno
 
 # gives primitive language
 - type: entity
   parent: CMPamphletLanguage
-  id: CMPamphletLanguageMonkey
+  id: CMPamphletLanguagePrimitive
   name: scribbled drawings
-  description: A piece of paper covered in crude depictions of bananas and various types of primates. Probably drawn by a three-year-old child - or an unusually intelligent marine.
-
-- type: Tag
-  id: RMCSkillPamphlet
+  description: A collection of crude drawings involving bananas and apes. It is either a masterpiece of primal communication or the work of a Marine who found an unattended box of crayons.
+  components:
+  - type: SkillPamphlet
+    language: Primitive

@@ -26,6 +26,17 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
+  id: RMCFigurineDeveloper
+  name: developer figurine
+  components:
+  - type: Sprite
+    sprite: Mobs/Pets/corgi.rsi
+    state: real_mouse
+  - type: PatronFigurine
+    id: 00000000-0000-0000-0000-000000000000 # Change to your UID for testing.
+
+- type: entity
+  parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronFoxBridgeton
   name: Fox Bridgeton figurine
   description: This is like that book by George Orwell, Nineteen Eighty Fo'
@@ -1353,7 +1364,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronGregorCain
   name: Gregor Cain figurine
-  description: ""
+  #description: ""
   components:
   - type: Sprite
     state: gregor_cain
@@ -1590,17 +1601,6 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronCaineRuffRuffalo
-  name: Caine 'Ruff' Ruffalo figurine
-  description: "Ruff as a Ruffalo. Always Ruffs. Is always Rough as a Ruff."
-  components:
-  - type: Sprite
-    state: caine_ruff_ruffalo
-  - type: PatronFigurine
-    id: d4b8cf96-c8cd-4f23-9a52-744497ca6eb7
-
-- type: entity
-  parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronAnneTaylor
   name: Anne Taylor figurine
   description: "If you see her piloting the Alamo and it still looks normal, something is horribly wrong."
@@ -1624,16 +1624,16 @@
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronSoft-pawsLiona
-  name: Soft-paws Liona figurine
-  description: "Huh, seems like this squirrel action figure comes with its own miniature sentry gun as well."
+  name: Rano figurine
+  description: "A small Avali figurine, it's quite well made, written underneath the base is the word; \"Wacky.\""
   components:
   - type: Sprite
-    state: soft-paws_liona
+    state: rano
   - type: PatronFigurine
     id: e216a101-4951-462a-98c4-2b7de17585cb
   - type: EmitSoundOnUse
     sound:
-      path: /Audio/Animals/mouse_squeak.ogg
+      path: /Audio/_RMC14/Voice/Avali/avali_scream.ogg
       params:
         volume: 5
         maxDistance: 1
@@ -2140,6 +2140,14 @@
     state: olive_orr
   - type: PatronFigurine
     id: e1c32e3b-05ae-4684-beec-50b3ee32a5d8
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Animals/mouse_squeak.ogg
+      params:
+        volume: 5
+        maxDistance: 1
+  - type: UseDelay
+    delay: 30
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -2497,7 +2505,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronSethXi
   name: Seth Xi figurine
-  description: "As you gaze upon the figurine, a sudden surge of motivation stirs within you. From afar comes the clash of blades and the shatter of glass, drifting toward you like the warning of an approaching storm."
+  description: "Calm under pressure. Evil beyond measure.\n\nBuilt for operations where hope was optional and success was necessary.\n\nWhen others followed orders, he followed instinct. Where others followed the path, he forged his own.\n\nNormally found beyond the frontline - questioning the plan, not the outcome."
   components:
   - type: Sprite
     state: seth_xi
@@ -2530,7 +2538,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronJackieCrateheadTaylor
   name: Jackie 'Cratehead' Taylor figurine
-  description: "SEVEN MEDICS! It took SEVEN to put you back together, Jackie. For gods sake watch the skies!"
+  description: "\"It took seven medics to revive you, Jackie! SEVEN! For god's sake watch the skies!\""
   components:
   - type: Sprite
     state: jackie_cratehead_taylor
@@ -2549,14 +2557,452 @@
     id: a440be4b-5667-44f7-a375-cfc151fdf8f7
   - type: ParaDroppable
     dropScatter: 1
+  - type: CrashLandable
 
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronKaraHathaway
-  name: Kara Hathaway figurine
-  description: "\"You got a sandwich in there?\""
+  name: Kara 'Wild Boar' Hathaway figurine
+  description: "A figurine of Kara Hathaway, the 'Wild Boar' of Charlie Squad. You can tell by the slightly wonky shape that it's clearly been thrown a lot."
   components:
   - type: Sprite
     state: kara_hathaway
   - type: PatronFigurine
     id: 6e7476de-f328-4764-834c-7ac2478a5aab
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSelinaCavityAlara
+  name: Selina 'Cavity' Alara figurine
+  description: "This figure is covered in cookie crumbs and smells like pure sugar!"
+  components:
+  - type: Sprite
+    state: selina_cavity_alara
+  - type: PatronFigurine
+    id: e85c8c96-2258-43b3-914d-15f2466f7fee
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKaraLifelineGreenland
+  name: Kara 'Lifeline' Greenland figurine
+  description: "Smells faintly of... Blueberries???"
+  components:
+  - type: Sprite
+    state: kara_lifeline_greenland
+  - type: PatronFigurine
+    id: 1d7a863e-6004-4dda-ae4c-6c0ed0b58fcc
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronBorisScavmanchez
+  name: Boris Scavmanchez figurine
+  description: "Seems like this guy gets around just about everywhere. Though he's sporting his MP uniform, here, with a M42 shotgun held by his hip in one hand and a stun baton resting on his shoulder in the other. He truly IS the law!"
+  components:
+  - type: Sprite
+    state: boris_scavmanchez
+  - type: PatronFigurine
+    id: effa13df-5875-4437-a454-dbb70ce9f5da
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRodrickRoyal
+  name: Rodrick Royal figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: rodrick_royal
+  - type: PatronFigurine
+    id: c24bc8a5-2b7b-4f86-80ef-d06babdb8c17
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronBugsPaperboySwedersson
+  name: Bugs 'Paperboy' Swedersson figurine
+  description: "The figurine is warm to the touch."
+  components:
+  - type: Sprite
+    state: bugs_paperboy_swedersson
+  - type: PatronFigurine
+    id: 9db80593-fca7-46c8-8b59-f6b97933a309
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronErisVoltia
+  name: Eris Voltia figurine
+  description: "A tiny label on the bottom reads:  \"This figurine is not a replacement for a licensed Chemist, Surgeon, or Pilot. Please contact a trained professional if you are in need of life saving treatment or rescue.\""
+  components:
+  - type: Sprite
+    state: eris_voltia
+  - type: PatronFigurine
+    id: 752998c6-4831-4902-a4c1-446fc6ceb002
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSilasChitterCandlewing
+  name: Silas 'Chitter' Candlewing figurine
+  description: "You get the get the feeling that the gun is likely a lot smarter than he is."
+  components:
+  - type: Sprite
+    state: silas_chitter_candlewing
+  - type: PatronFigurine
+    id: 683521ca-1895-4094-8026-9592e0f9b288
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMichaelMikeyMcGoggins
+  name: Michael 'Mikey' McGoggins figurine
+  description: "Part of a series of figures meant to boost UNMC recruitment, found at most large Recruiting Centers. The base says \"McGoggins was an ordinary citizen just like you- until he joined the Marines! Enlist today!\" There is a code to call the UNMC recruitment hotline attached."
+  components:
+  - type: Sprite
+    state: michael_mikey_mcgoggins
+  - type: PatronFigurine
+    id: a1118024-80cd-47cb-81c2-b7e516960393
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronEdithHestiBClausell
+  name: Edith 'Hesti' B Clausell figurine
+  description: "\"Supply on 30, -197.\"\n\"Contacts rotating northeast.\"\n\nThe figurine, depicting a Delta FTL, wears a cheeky, confident smile that annoys you. You kinda want to throw it out the Alamo.\n\n\"Why does your figurine have an ATL?\"\n\"W-why not..?\"\n\nIt gives you confidence that you'll probably make it to tomorrow's sunrise.\n\nProbably."
+  components:
+  - type: Sprite
+    state: edith_hesti_b_clausell
+  - type: PatronFigurine
+    id: 13feb412-430f-4ecc-b279-dc88a628ab28
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronGuppyDeBoots
+  name: Guppy DeBoots figurine
+  description: "Goppy, Gupp, Goop... Gop? Gups? You can't quite remember his name, but you know it's something stupid."
+  components:
+  - type: Sprite
+    state: guppy_deboots
+  - type: PatronFigurine
+    id: 2fd7c5bb-6c13-426a-9a6a-af784e9b9209
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronZoeyKillerGrimshaw
+  name: Zoey 'Killer' Grimshaw figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: zoey_killer_grimshaw
+  - type: PatronFigurine
+    id: 0a34f101-1c8b-4929-b2bd-e5153cc9e4c0
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronDruMisinputKeller
+  name: Dru 'Misinput' Keller figurine
+  description: "\"It was a missinput, missinput! Calm down, YOU CALM THE FUCK DOWN! IT WAS A MISSINPUT!\""
+  components:
+  - type: Sprite
+    state: dru_misinput_keller
+  - type: PatronFigurine
+    id: ed33b3af-cf5d-4f1f-9fd2-12a6e6720168
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRenomi
+  name: Renomi figurine
+  description: "Typically spotted in medbay or crashing out in the FOB about her friends getting hurt.\n\nTotally normal about hot cocoa."
+  components:
+  - type: Sprite
+    state: renomi
+  - type: PatronFigurine
+    id: 8626d123-cf10-44ef-a35b-c6ad7233da37
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronCarlosKennedy
+  name: Carlos Kennedy figurine
+  description: "Small little thing, a label on the stand says \"MOEW YOU'RE GUNNA GET IT!!!\""
+  components:
+  - type: Sprite
+    state: carlos_kennedy
+  - type: PatronFigurine
+    id: 15901e45-af1b-4671-8818-ad8d0562bbe7
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronGunnerWilo
+  name: Gunner Wilo figurine
+  description: "\"Clogging arteries is my hobby. In the Corps, you only live once and not for long, so why not enjoy it?\""
+  components:
+  - type: Sprite
+    state: gunner_wilo
+  - type: PatronFigurine
+    id: e63137eb-1bdf-49cb-9f4c-be29bb2a7e0f
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKhaunami
+  name: Khaunami figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: khaunami
+  - type: PatronFigurine
+    id: 0412dc04-70e3-4ff2-8502-16dff8a09b9c
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronLyonSurgeonAugust
+  name: Lyon 'Surgeon' August figurine
+  description: "Smells awfully like tobacco, cinnamon, and a weird mix of chemicals."
+  components:
+  - type: Sprite
+    state: lyon_surgeon_august
+  - type: PatronFigurine
+    id: e5831b84-2e3d-4835-beec-860a9a62942a
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRileyTilterStone
+  name: Riley 'Tilter' Stone figurine
+  description: "It appears lightly chewed, with the right side's earpiece missing."
+  components:
+  - type: Sprite
+    state: riley_tilter_stone
+  - type: PatronFigurine
+    id: 24dc0608-8cd2-49d6-8d64-6da5e8a25cd3
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKalaLightseeker
+  name: Kala Lightseeker figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: kala_lightseeker
+  - type: PatronFigurine
+    id: 2ac9bac3-33f9-447c-8a26-ce07ddc05e0c
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronBigWhiskerfield
+  name: Big Whiskerfield figurine
+  description: "A greedy little Fobbit, jumping around the corner, looking for crumbs of scrap metal.."
+  components:
+  - type: Sprite
+    state: big_whiskerfield
+  - type: PatronFigurine
+    id: bc945f99-09ef-408f-94b0-aa2c8e506f43
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronBethanyAWXiphos
+  name: Bethany AW Xiphos figurine
+  description: "Peak!"
+  components:
+  - type: Sprite
+    state: bethany_aw_xiphos
+  - type: PatronFigurine
+    id: a81ab298-761a-4002-bf3b-e6859646a531
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronPatches-It-Up
+  name: Patches-It-Up figurine
+  description: "\"They don't call her Armory for nothing!\"\n\nThis figurine usually comes with a printed Submachine gun, Shotgun and M13 autopistols, with a hidden pistol in her boot. Additionally, it has a clip on the back of her armor to hang onto keychains or to attach an included parachute. Too bad it doesn't have any of those add-ons.\n\nHandle with care!"
+  components:
+  - type: Sprite
+    state: patches-it-up
+  - type: PatronFigurine
+    id: e744a05a-b40a-4294-9433-84ea428829d1
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronLumenLosinfobLamplight
+  name: Lumen 'Losinfob' Lamplight figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: lumen_losinfob_lamplight
+  - type: PatronFigurine
+    id: 9c07cea8-55f6-42ee-a1c3-0ef6051942d0
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronVeraWilliams
+  name: Vera Williams figurine
+  description: "Captured in her finest outdoors attire, this figurine reminds everyone that looking like a leader is far more cost-effective than actually managing the situation."
+  components:
+  - type: Sprite
+    state: vera_williams
+  - type: PatronFigurine
+    id: e27855b4-b1a5-48a5-8d25-2feede95fb8e
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAutumnCocktailSheauvern
+  name: Autumn 'Cocktail' Sheauvern figurine
+  description: "Try Cocktail's Cocktail™ today! Just add gauze, and they'll be walking in no time!"
+  components:
+  - type: Sprite
+    state: autumn_cocktail_sheauvern
+  - type: PatronFigurine
+    id: 5a057ad2-5f45-41fd-8104-14d0ef3cf715
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronTraces-The-Constellations
+  name: Traces-The-Constellations figurine
+  description: "\"If this is the lesson, it’s a rough one.\""
+  components:
+  - type: Sprite
+    state: traces-the-constellations
+  - type: PatronFigurine
+    id: d74bcdc9-2eb2-4a95-b6fb-a0b9f15de807
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSlyeWelding
+  name: Slye Welding figurine
+  description: "\"God where's a good bottle of Vodka when you need one...\""
+  components:
+  - type: Sprite
+    state: slye_welding
+  - type: PatronFigurine
+    id: 13fee242-b6bc-485e-8e89-868c7de21450
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMathewMothewLampyris
+  name: Mathew 'Mothew' Lampyris figurine
+  description: "He's a green moth that is fuzzy, he has a scar on his lip."
+  components:
+  - type: Sprite
+    state: mathew_mothew_lampyris
+  - type: PatronFigurine
+    id: 78bba465-2b9d-4f44-a8f7-52e80f94c378
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAmbroseMommaBearHelichrysum
+  name: Ambrose 'Momma Bear' Helichrysum figurine
+  description: "The everyday MP Ambrose. Just like the real one! Doesn't includes battle scars, PTSD and sweetness... or height."
+  components:
+  - type: Sprite
+    state: ambrose_momma_bear_helichrysum
+  - type: PatronFigurine
+    id: 9e2b0828-6696-412f-9e4c-32379b3ce5ca
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronReikaSweetToothInazuma
+  name: Reika 'SweetTooth' Inazuma figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: reika_sweettooth_inazuma
+  - type: PatronFigurine
+    id: 64b7e8a8-e4d8-44ad-8a50-75a671d816a0
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/_RMC14/Binoculars/nightvision.ogg
+      params:
+        volume: 5
+        maxDistance: 1
+  - type: UseDelay
+    delay: 30
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronNezuni-Arksai
+  name: Nezuni-Arksai figurine
+  description: "Intel? Pending. Order of operations? By the seat of their pants. Touching groundside? As if. Running around the Almayer doing a million jobs? 100%. This short bird does it all! (kinda)"
+  components:
+  - type: Sprite
+    state: nezuni-arksai
+  - type: PatronFigurine
+    id: da113641-3154-41f6-9a32-24bb265fc0ac
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSpits-The-Fire
+  name: Spits-The-Fire figurine
+  description: "It's Spits! He lives to set things on fire!\n\nHand this figurine to your squad SL to redeem for a B-gel tank!"
+  components:
+  - type: Sprite
+    state: spits-the-fire
+  - type: PatronFigurine
+    id: 502c8c14-0287-45cc-bc21-a342867dfc4d
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronDrejaScrapsKel
+  name: Dreja 'Scraps' Kel figurine
+  description: "Sometimes a point-man, sometimes a QRF, but most of the time support infantry. Stars save our precious Queen, wof!"
+  components:
+  - type: Sprite
+    state: dreja_scraps_kel
+  - type: PatronFigurine
+    id: 0c38014d-646a-494d-90ba-ee7900acaabb
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronElle
+  name: Elle figurine
+  description: "Ratcket launcher!"
+  components:
+  - type: Sprite
+    state: elle
+  - type: PatronFigurine
+    id: 350cb9a4-9299-458a-ac33-420e27b3a529
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronLiamPropertyDamageHarper
+  name: Liam 'Property Damage' Harper figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: liam_property_damage_harper
+  - type: PatronFigurine
+    id: 77123fd0-952d-4460-9910-bb49a31af632
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronPetraMeowMeowYork
+  name: Petra 'Meow Meow' York figurine
+  description: "Nyanyame nyanyajyuunyanya-do no nyarabi de nyakunyaku inyanyaku nyanyahan nyanyadai nyanynaku nyarabete nyaganyagame."
+  components:
+  - type: Sprite
+    state: petra_meow_meow_york
+  - type: PatronFigurine
+    id: 0e6adc84-9560-4ef8-b8b8-fec55d0a434f
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAriaShark-Scale
+  name: Aria Shark-Scale figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: aria_shark-scale
+  - type: PatronFigurine
+    id: 69c1ef81-edac-4d18-913d-43b5cd781747
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronWyattHossCross
+  name: Wyatt 'Hoss' Cross figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: wyatt_hoss_cross
+  - type: PatronFigurine
+    id: b9428c37-5698-4eab-8b7a-d59094b8cf81
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMixes-the-Fuel
+  name: Mixes-the-Fuel figurine
+  description: "Mixes is a small kobold with a positive attitude that always speaks in third person, but always tries to follow their duties to the letter. They always like be as friendly as they can be, and they are a bit silly and goofy at times, although they tend to be quite happy about completing their assigned tasks.\n\nWarning: Do not give them a flamer under any circumstance. It will only end up in a disaster."
+  components:
+  - type: Sprite
+    state: mixes-the-fuel
+  - type: PatronFigurine
+    id: d4b8cf96-c8cd-4f23-9a52-744497ca6eb7

@@ -20,6 +20,19 @@
     - type: NpcFactionMember
       factions:
       - WeYa
+    - type: Language
+      spokenLanguages:
+      - English
+      - Russian
+      - Chinese
+      - Japanese
+      understoodLanguages:
+      - English
+      - Russian
+      - Chinese
+      - Japanese
+      currentLanguage: English
+      defaultLanguage: English
     - type: Skills
       skills:
         RMCSkillFireman: 1

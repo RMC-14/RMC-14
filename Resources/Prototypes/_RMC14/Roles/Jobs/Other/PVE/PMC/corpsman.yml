@@ -34,9 +34,7 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-medic
     - type: AssignSquad
-      whitelist:
-        tags:
-        - RMCSquadPMC
+      squad: SquadPMC
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist

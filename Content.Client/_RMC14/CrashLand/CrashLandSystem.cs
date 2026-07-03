@@ -12,6 +12,7 @@ public sealed class CrashLandSystem : SharedCrashLandSystem
     [Dependency] private readonly AnimationPlayerSystem _animPlayer = default!;
     [Dependency] private readonly ParaDropSystem _paraDrop = default!;
     [Dependency] private readonly RMCSpriteSystem _rmcSprite = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
 
     private const string CrashingAnimationKey = "crashing-animation";
 
@@ -32,19 +33,27 @@ public sealed class CrashLandSystem : SharedCrashLandSystem
         if (!TryComp(ent, out SpriteComponent? sprite))
             return;
 
-        sprite.Offset = new Vector2();
+        var offset = new Vector2();
+
+        if (TryComp(ent, out CrashLandableComponent? crashLandable))
+            offset = crashLandable.OriginalSpriteOffset;
+
+        _sprite.SetOffset(ent.Owner, offset);
     }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
-        var query = EntityQueryEnumerator<CrashLandableComponent, CrashLandingComponent>();
-        while (query.MoveNext(out var uid, out var crashLandable, out var crashLanding))
+        var query = EntityQueryEnumerator<CrashLandableComponent, CrashLandingComponent, SpriteComponent>();
+        while (query.MoveNext(out var uid, out var crashLandable, out var crashLanding, out var sprite))
         {
             if (!HasComp<SkyFallingComponent>(uid))
             {
                 if (!_animPlayer.HasRunningAnimation(uid, CrashingAnimationKey) && crashLandable.LastCrash != null)
+                {
+                    crashLandable.OriginalSpriteOffset = sprite.Offset;
                     _paraDrop.PlayFallAnimation(uid, crashLandable.CrashDuration, crashLanding.RemainingTime, crashLandable.FallHeight, CrashingAnimationKey);
+                }
 
                 _rmcSprite.UpdatePosition(uid);
             }

@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 02/16/2026 02:09:59
-  entityCount: 483
+  time: 06/16/2026 10:14:39
+  entityCount: 487
 maps: []
 grids:
 - 2
@@ -469,6 +469,13 @@ entities:
     components:
     - type: Transform
       pos: 18.5,4.5
+      parent: 2
+- proto: CMFoldingBarricade
+  entities:
+  - uid: 486
+    components:
+    - type: Transform
+      pos: 20.5,5.5
       parent: 2
 - proto: CMJanitorialCart
   entities:
@@ -2023,6 +2030,13 @@ entities:
     - type: Transform
       pos: 18.5,14.8
       parent: 2
+- proto: RMCIntelDataTerminal
+  entities:
+  - uid: 487
+    components:
+    - type: Transform
+      pos: 18.5,5.5
+      parent: 2
 - proto: RMCItemPoolBuckshot
   entities:
   - uid: 294
@@ -2321,6 +2335,22 @@ entities:
     components:
     - type: Transform
       pos: 14.5,3.5
+      parent: 2
+- proto: RMCMarkerAreaLabel
+  entities:
+  - uid: 484
+    components:
+    - type: MetaData
+      name: Crisis Center
+    - type: Transform
+      pos: 12.5,14.5
+      parent: 2
+  - uid: 485
+    components:
+    - type: MetaData
+      name: Panic Room
+    - type: Transform
+      pos: 10.5,4.5
       parent: 2
 - proto: RMCPhotocopier
   entities:

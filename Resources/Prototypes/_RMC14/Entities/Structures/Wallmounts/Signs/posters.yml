@@ -116,7 +116,7 @@
 - type: entity
   parent: CMPosterBase
   id: CMPosterPathos
-  name: "Pathos Motion Tracker"
+  name: "motion tracker poster"
   description: "It's an ad for a civilian brand motion tracker, less reliable than the M314, but about half of the weight."
   components:
   - type: Sprite
@@ -166,15 +166,6 @@
   components:
   - type: Sprite
     state: f_100
-
-- type: entity
-  parent: CMPosterBase
-  id: CMPosterRememberIo
-  name: "'Remember Io'"
-  description: "This faded propaganda poster proudly demands you to, 'Remember Io,' with the titular moon in the middle. The surprise commando raid on the repair/refit yard on Jupiter's moon, Io, was the event that kicked off the war with the Arcturians over a decade ago. They may be your allies now, but old wounds run deep."
-  components:
-  - type: Sprite
-    state: remember_io
 
 - type: entity
   parent: CMPosterBase
@@ -435,15 +426,6 @@
   components:
   - type: Sprite
     state: pizza_galaxy
-
-- type: entity
-  parent: CMPosterBase
-  id: CMPosterTartarus
-  name: "Tartarus Mining co. poster"
-  description: "A simplified version of the Tartarus Mining co. logo. The Tartarus Mining Company is owned by Prospectia, a sub-division of the San Rei Corporation, which is in turn owned by the Weston-Yamada Corporation."
-  components:
-  - type: Sprite
-    state: tartarus
 
 - type: entity
   parent: CMPosterBase

@@ -10,14 +10,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
-        RMCSkillVehicles: 1
-        RMCSkillMeleeWeapons: 1
-        RMCSkillCqc: 2
+      preset: RMCSkillPresetSurvivor
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetBeachBum
     - type: RMCSurvivor
@@ -51,6 +44,8 @@
     mask: RMCCigarette
     shoes: RMCShoesSandals
     gloves: CMHandsBrown
+  inhand:
+  - RMCFishingPole
 
 - type: entity
   parent: CMSatchelFillSurvivor
@@ -62,6 +57,9 @@
     - id: RMCCigarettePackWeYaGold
     - id: RMCKitchenKnifeButcher
     - id: RMCBeerPack
+    - id: RMCFishingBait
+    - id: RMCFishingBait
+    - id: RMCFishingBait
 
 - type: entity
   parent: CMSpawnPointJobBase
