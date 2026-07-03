@@ -1,35 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Fixed xenonids not seeing the aimed shot visual.
-    type: Fix
-  id: 2972
-  time: '2026-03-03T00:41:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9267
-- author: Dygon
-  changes:
-  - message: Fixed marine minor wins from no Queen after 10 minutes triggering after
-      a hijack.
-    type: Fix
-  id: 2973
-  time: '2026-03-03T00:40:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9312
-- author: Dygon
-  changes:
-  - message: Fixed projectiles sometimes hitting through objects.
-    type: Fix
-  - message: Projectiles shot by guns now travel 12% slower.
-    type: Fix
-  id: 2974
-  time: '2026-03-03T00:42:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9262
-- author: noctyrnal
-  changes:
-  - message: TSEPA now have Blue HUD icons instead of red.
-    type: Tweak
-  id: 2975
-  time: '2026-03-03T00:44:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9247
 - author: Vixting
   changes:
   - message: Fixed xenonid tags not being hidden
@@ -4643,5 +4612,45 @@
   id: 3471
   time: '2026-07-03T01:36:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10298
+- author: MidZik
+  changes:
+  - message: Spammable xeno announcements (such as traps being destroyed) will use
+      the repeated message system when possible to reduce how much the chat window
+      gets flooded with messages, such as during an orbital bombardment.
+    type: Tweak
+  id: 3472
+  time: '2026-07-03T01:40:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10309
+- author: Dygon
+  changes:
+  - message: Xenonid players not on the dropship when a hijack is initiated now automatically
+      get added to the front of the larva queue.
+    type: Fix
+  id: 3473
+  time: '2026-07-03T01:40:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10307
+- author: Vixting
+  changes:
+  - message: Added pry sound to expanding a acid hole
+    type: Add
+  - message: Added acid sound to acid hole creation from acid
+    type: Add
+  id: 3474
+  time: '2026-07-03T01:39:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10302
+- author: Aurallianz
+  changes:
+  - message: CL safe being an Intel objective
+    type: Fix
+  - message: Incind mags being reloadable by normal 10x24
+    type: Fix
+  - message: Pouch, webbing, armour, backpack, helmet, smart equip keybinds
+    type: Add
+  - message: Armour vest can be defibbed through (this is because it's supposed to
+      be equivalent to jackets, etc.)
+    type: Fix
+  id: 3475
+  time: '2026-07-03T01:39:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10303
 Name: RMC14
 Order: -1
