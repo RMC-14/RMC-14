@@ -317,7 +317,7 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
             return 0;
 
         var percent = _random.NextFloat(minPercent, maxPercent);
-        return Math.Clamp((int) MathF.Round(poolCount * percent), 1, poolCount);
+        return Math.Clamp((int)MathF.Round(poolCount * percent), 1, poolCount);
     }
 
     public override void Update(float frameTime)
@@ -326,7 +326,7 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
         var query = EntityQueryEnumerator<RMCHijackActiveMapComponent>();
         while (query.MoveNext(out var uid, out var active))
         {
-            TryBurstQueuedPipes(uid, active);
+            TryBurstQueuedPipes(uid, active, time);
 
             if (time < active.Next)
                 continue;
@@ -342,9 +342,9 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
         }
     }
 
-    private void TryBurstQueuedPipes(EntityUid uid, RMCHijackActiveMapComponent active)
+    private void TryBurstQueuedPipes(EntityUid uid, RMCHijackActiveMapComponent active, TimeSpan time)
     {
-        if (active.ExplodeAt is not { } explodeAt || _timing.CurTime < explodeAt)
+        if (active.ExplodeAt is not { } explodeAt || time < explodeAt)
             return;
 
         try
