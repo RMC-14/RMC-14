@@ -1,96 +1,4 @@
 ﻿Entries:
-- author: PursuitinAshes
-  changes:
-  - message: '[PVE] Sentry Cases will now spawn with a Sentry Laptop stored inside.'
-    type: Add
-  id: 2949
-  time: '2026-02-14T19:56:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9242
-- author: Dutch-VanDerLinde
-  changes:
-  - message: The hive tracker now unwatches the xenonid you are currently watching
-      on click. If you are not watching anyone, it watches the target like normal.
-    type: Fix
-  id: 2950
-  time: '2026-02-14T19:56:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9241
-- author: KompaniLinge
-  changes:
-  - message: Adds SPP Command roles.
-    type: Add
-  - message: Adds SPP Political Kommissars, and SPP Political Ranks.
-    type: Add
-  - message: Adds SPP Officer IDcard.
-    type: Add
-  id: 2951
-  time: '2026-02-17T10:25:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8139
-- author: Gosera
-  changes:
-  - message: Pizzas are now a consistant size and will fit pizza boxes
-    type: Tweak
-  id: 2952
-  time: '2026-02-17T11:37:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8575
-- author: SharkSnake98
-  changes:
-  - message: Changed the vendors to SPP vendors on both Sorokyne maps
-    type: Tweak
-  id: 2953
-  time: '2026-02-20T13:06:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9148
-- author: kleinerstation13
-  changes:
-  - message: Ported Panic Room Insert on Shiva's Snowball
-    type: Add
-  id: 2954
-  time: '2026-02-20T13:08:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9274
-- author: CatAndHats
-  changes:
-  - message: Added Riot In Progress, a Fiorina survivor special scenario. A 15% chance
-      that a CMB Riot Control team respond first to the distress signal, can they
-      survive the xenonids before the marines arrive?
-    type: Add
-  - message: United Nations Riot Officers are now CMB Riot Control Officers, and fixed
-      them not having the correct hud icon.
-    type: Tweak
-  - message: The Fiorina armoury and flamer cabinets no longer have an access lock.
-    type: Fix
-  id: 2955
-  time: '2026-02-20T13:08:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8979
-- author: kleinerstation13
-  changes:
-  - message: Added a scenario for 121/RECON, an SPP SOF investigating the Sorokyne
-      Outpost distress signal.
-    type: Add
-  id: 2956
-  time: '2026-02-20T13:10:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9260
-- author: SharkSnake98
-  changes:
-  - message: 'Added 3 new Varadero inserts: Alt. Medical, Engi Hold, and Restaurant'
-    type: Add
-  id: 2957
-  time: '2026-02-20T13:12:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9228
-- author: PursuitInAshes
-  changes:
-  - message: The fog has been removed from the LV-624 bridge inserts.
-    type: Fix
-  id: 2958
-  time: '2026-02-20T13:12:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9280
-- author: MoonlightHollow
-  changes:
-  - message: Royal Paramarines roles and the equipment needed for them
-    type: Add
-  - message: Ported the RCM belts
-    type: Add
-  id: 2959
-  time: '2026-02-23T06:58:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9151
 - author: SharkSnake98
   changes:
   - message: Added multiple ERT Bays for the various factions.
@@ -4654,5 +4562,90 @@
   id: 3448
   time: '2026-07-03T01:14:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10254
+- author: IceNoobXD
+  changes:
+  - message: Added a search bar to the Intel UI, which allows you to search for any
+      word in the clues tab. Clues are now sorted alphabetically and received a visual
+      overhaul by shortening the text, making the IDs and codes bigger, and adding
+      color. Also added a button to hide the location information!
+    type: Add
+  - message: Data terminal now has a unpowered sprite and plays a small tune when
+      its done uploading. The SIGINT disk reader also now plays a tune when its done
+      uploading data!
+    type: Tweak
+  id: 3449
+  time: '2026-07-03T01:16:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10245
+- author: Vixting
+  changes:
+  - message: Synths can now bully xenos (pull, carry, throw the small ones)
+    type: Add
+  id: 3450
+  time: '2026-07-03T01:20:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8335
+- author: Vixting
+  changes:
+  - message: Fixed circumstance where hivemind was accessible when it shouldn't have
+      been
+    type: Fix
+  id: 3451
+  time: '2026-07-03T01:17:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10238
+- author: BreakpointDebug1234
+  changes:
+  - message: Added Provost Pen
+    type: Add
+  id: 3452
+  time: '2026-07-03T01:19:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8099
+- author: Vixting
+  changes:
+  - message: Fixed melee cooldown not being tracked in some circumstances
+    type: Fix
+  id: 3453
+  time: '2026-07-03T01:18:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10234
+- author: Vermidia
+  changes:
+  - message: Fixed Acider runner primed animation playing weirdly
+    type: Fix
+  id: 3454
+  time: '2026-07-03T01:19:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10223
+- author: kleinerstation13
+  changes:
+  - message: Fixed Type 71C being able to take laser sights and mini flamethrowers.
+    type: Fix
+  id: 3455
+  time: '2026-07-03T01:18:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10226
+- author: Vixting
+  changes:
+  - message: Fixed sentries targeting things inside of containers
+    type: Fix
+  id: 3456
+  time: '2026-07-03T01:16:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10239
+- author: kleinerstation13
+  changes:
+  - message: Forecon can now spawn with an M54C and additional fluff items
+    type: Tweak
+  id: 3457
+  time: '2026-07-03T01:20:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10220
+- author: Dygon
+  changes:
+  - message: Fixed the targeting overlay sometimes appearing at the wrong location.
+    type: Fix
+  id: 3458
+  time: '2026-07-03T01:19:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10222
+- author: Dygon
+  changes:
+  - message: Imaginary friends can no longer talk through radio channels.
+    type: Fix
+  id: 3459
+  time: '2026-07-03T01:19:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10221
 Name: RMC14
 Order: -1
