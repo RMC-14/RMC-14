@@ -233,6 +233,11 @@
   parent: VehicleHumveeLockerBase
   id: VehicleHumveeLockerMedical
   name: humvee locker (medical)
+  components:
+  - type: ContainerFill
+    containers:
+      entity_storage:
+      - RMCSurgicalTray
 
 - type: entity
   abstract: true
@@ -254,9 +259,40 @@
 - type: entity
   parent: VehicleHumveeWallMountedBase
   id: VehicleHumveeBloodVendorVend
+  name: blood vendor
+  description: The Avant Biomedical Blood Pack Dispensary is the premier, top-of-the-line blood dispenser! Get yours today! Made by Avant Biomedical.
   components:
   - type: Sprite
     state: blood_vend
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
+    - type: WallMount
+  - type: UserInterface
+    interfaces:
+      enum.CMAutomatedVendorUI.Key:
+        type: CMAutomatedVendorBui
+  - type: ActivatableUI
+    key: enum.CMAutomatedVendorUI.Key
+  - type: CMAutomatedVendor
+    baseSprite:
+      sprite: _RMC14/Structures/Vehicles/Interiors/general_humvee.rsi
+      state: blood
+    animationSprite:
+      sprite: _RMC14/Structures/Vehicles/Interiors/general_humvee.rsi
+      state: blood_vend
+    sections:
+    - name: Blood Packs
+      entries:
+      - id: CMBloodPackFull
+        amount: 30
+    - name: Miscellaneous
+      entries:
+      - id: CMBloodPack
+        amount: 5
+        name: empty blood pack
 
 - type: entity
   parent: VehicleHumveeWallMountedBase

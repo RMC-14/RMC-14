@@ -99,3 +99,11 @@
   files:
   - /Audio/_RMC14/Xeno/alien_ventpass1.ogg
   - /Audio/_RMC14/Xeno/alien_ventpass2.ogg
+
+- type: soundCollection
+  id: XenoPry
+  files:
+  - /Audio/_RMC14/Xeno/pry1.ogg
+  - /Audio/_RMC14/Xeno/pry2.ogg
+  - /Audio/_RMC14/Xeno/pry3.ogg
+  - /Audio/_RMC14/Xeno/pry4.ogg

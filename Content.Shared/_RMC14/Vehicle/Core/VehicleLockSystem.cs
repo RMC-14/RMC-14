@@ -155,6 +155,7 @@ public sealed class VehicleLockSystem : EntitySystem
         }
 
         lockComp.Locked = !lockComp.Locked;
+        Dirty(vehicle, lockComp);
         RefreshLockAction(vehicle, lockComp, ent.Comp);
 
         _popup.PopupEntity(

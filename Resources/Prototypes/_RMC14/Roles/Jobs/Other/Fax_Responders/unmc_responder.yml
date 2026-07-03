@@ -44,7 +44,7 @@
     id: RMCIDCardUNMCResponder
     ears: CMHeadsetHighCommand
     eyes: RMCGlassesMedicalHUDGlassesAdvanced
-    back: CMSatchelFilledFaxResponder
+    back: RMCSatchelFilledFaxResponderHighComm
     belt: CMClipboard
     pocket1: RMCPouchGeneralLarge
     pocket2: RMCPouchDocument
