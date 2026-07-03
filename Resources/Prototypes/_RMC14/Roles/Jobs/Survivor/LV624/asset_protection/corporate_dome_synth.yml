@@ -1,0 +1,123 @@
+- type: job
+  parent: CMSurvivorSecurity
+  id: CMSurvivorLV624CorporateDomeGoonSynth
+  name: rmc-job-name-pmc-corporate-goon-synth
+  description: cm-job-description-survivor
+  playTimeTracker: RMCJobSyntheticColony
+  spawnMenuRoleName: We-Ya Goon Synthetic (Survivor Special)
+  startingGear: RMCGearGoonSyntheticSurvivor
+  icon: "RMCJobIconWeYaGoonSynthetic"
+  greeting: rmc-job-greeting-corporate-dome-goon
+  hasIcon: true
+  ranks:
+    RMCRankCivilianOfficer: []
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Language
+      spokenLanguages:
+      - Russian
+#     - Scandinavian # for when scandi gets added
+      - English
+      - Japanese
+      - Chinese
+      - German
+      - French
+      - Spanish
+      understoodLanguages:
+      - Russian
+#     - Scandinavian # for when scandi gets added
+      - English
+      - Japanese
+      - Chinese
+      - German
+      - French
+      - Spanish
+    - type: LanguageLearning
+      learnableLanguages:
+      - Xeno
+      firstContactLanguages:
+      - Xeno
+      languages:
+        Xeno:
+          initialBoostedWordCount: 18
+          initialBoostedWordComprehension: 0.4
+      comprehensionThreshold: 0.8
+      learningRange: 8.0
+      baseWordLearningRate: 0.05
+    - type: Skills
+      preset: RMCSkillPresetSurvivorPMCSynth # TODO RMC14: Remove when we get synth gen skill presets
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: goon_synth
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pmc-synth
+    - type: MeleeWeapon
+      soundHit:
+        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
+        params:
+          variation: 0.15
+          volume: -1
+      angle: 30
+      animation: WeaponArcFist
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 35
+    - type: Synth
+
+- type: startingGear
+  id: RMCGearGoonSyntheticSurvivor
+  equipment:
+    head: RMCHeadCapWestonYamadaDark
+    ears: RMCHeadsetDistressWeYa
+    back: RMCSatchelLightpackWeYa
+    belt: CMBeltSecurityMPFilled # TODO RMC14: synth fill
+    jumpsuit: RMCJumpsuitVeteranPMCCorporate
+    outerClothing: CMArmorM4PMCCorporateSynth
+    shoes: RMCBootsPMCFilled
+    id: CMIDCardLiaisonColony
+    eyes: CMGlassesSecurity
+    gloves: RMCHandsBlack
+    pocket1: RMCPouchSurvivalSynthFill
+    pocket2: RMCPouchToolsFill
+  storage:
+    back:
+    - RMCHandcuffs
+    - RMCHandcuffs
+    outerClothing:
+    - RMCTelescopicBaton
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorLV624CorporateDomeSynth
+  name: special survivor lv624 weya goon synthetic spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivorLV624CorporateDomeGoonSynth
+  - type: Sprite
+    state: surv_wy
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconWeYaGoonSynthetic
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: weya_goon_synth

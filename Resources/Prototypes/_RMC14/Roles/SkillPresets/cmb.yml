@@ -1,3 +1,28 @@
+- type: entity
+  id: RMCSkillPresetCMBSynth
+  name: CMB Investigative Synthetic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillCqc: 5
+      RMCSkillEngineer: 4
+      RMCSkillConstruction: 3
+      RMCSkillFirearms: 1
+      RMCSkillOverwatch: 1
+      RMCSkillMedical: 2
+      RMCSkillSurgery: 1
+      RMCSkillResearch: 1
+      RMCSkillMeleeWeapons: 2
+      RMCSkillPilot: 1
+      RMCSkillPolice: 2
+      RMCSkillFireman: 3
+      RMCSkillPowerLoader: 2
+      RMCSkillVehicles: 2
+      RMCSkillJtac: 1
+      RMCSkillIntel: 2
+      RMCSkillDomestics: 2
+      RMCSkillLeadership: 2
 
 # Survivor skills
 
@@ -51,3 +76,28 @@
       RMCSkillCqc: 3
       RMCSkillJtac: 1
       RMCSkillEndurance: 3
+
+- type: entity
+  id: RMCSkillPresetSurvivorSupportSynth
+  name: Survivor CMB Support Synthetic Survivor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillCqc: 3
+      RMCSkillEngineer: 4
+      RMCSkillConstruction: 3
+      RMCSkillFirearms: 2
+      RMCSkillOverwatch: 1
+      RMCSkillMedical: 3
+      RMCSkillSurgery: 2
+      RMCSkillResearch: 1
+      RMCSkillMeleeWeapons: 2
+      RMCSkillPilot: 2
+      RMCSkillPolice: 2
+      RMCSkillFireman: 3
+      RMCSkillPowerLoader: 2
+      RMCSkillVehicles: 2
+      RMCSkillJtac: 1
+      RMCSkillIntel: 1
+      RMCSkillDomestics: 2

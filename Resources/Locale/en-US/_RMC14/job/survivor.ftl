@@ -351,6 +351,12 @@ cm-job-name-survivor-riot-officer = CMB Riot Control Officer
 CMSurvivorFiorinaRiotOfficer = CMB Riot Control Officer
 cm-job-prefix-survivor-riot-officer = CMB RCO
 
+cm-job-name-survivor-fiorina-cmb-synth = CMB Support Synthetic
+cm-job-prefix-survivor-fiorina-cmb-synth = CMB Syn
+
+cm-job-name-survivor-fiorina-cmb-riot-control-synth = CMB Riot Control Synthetic
+cm-job-prefix-survivor-fiorina-cmb-riot-control-synth = CMB RC Syn
+
 CMSurvivorFiorinaPrisonGuard = We-Ya Corporate Security
 
 rmc-job-greeting-riot-in-progress-CMB-RCTL = You are a CMB Riot Control Team Leader!

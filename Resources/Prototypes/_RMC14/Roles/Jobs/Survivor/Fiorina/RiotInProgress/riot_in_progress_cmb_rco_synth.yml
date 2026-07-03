@@ -1,0 +1,131 @@
+- type: job
+  parent: CMSurvivorFiorinaRiotOfficer
+  id: RMCSurvivorFiorinaRiotInProgressCMBRiotControlSynth
+  name: cm-job-name-survivor-fiorina-cmb-riot-control-synth
+  description: cm-job-description-survivor
+  playTimeTracker: RMCJobSyntheticColony
+  startingGear: RMCGearSurvivorFiorinaRiotInProgressCMBRiotControlSynth
+  icon: "RMCJobIconCMBRiotControlSynthetic"
+  accessGroups:
+  - ColonistSec
+  spawnMenuRoleName: CMB Riot Control Synthetic (Fiorina Special Survivor)
+  greeting: rmc-job-greeting-riot-in-progress-CMB-RCO
+  ranks:
+    RMCRankCMBRiotControlSynthetic: []
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Language
+      spokenLanguages:
+      - English
+#     - Scandinavian # for when scandi gets added
+      - Russian
+      - Japanese
+      - Chinese
+      - German
+      - French
+      - Spanish
+      understoodLanguages:
+      - English
+#     - Scandinavian # for when scandi gets added
+      - Russian
+      - Japanese
+      - Chinese
+      - German
+      - French
+      - Spanish
+    - type: LanguageLearning
+      learnableLanguages:
+      - Xeno
+      firstContactLanguages:
+      - Xeno
+      languages:
+        Xeno:
+          initialBoostedWordCount: 18
+          initialBoostedWordComprehension: 0.4
+      comprehensionThreshold: 0.8
+      learningRange: 8.0
+      baseWordLearningRate: 0.05
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: MarineOrders
+    - type: MeleeWeapon
+      soundHit:
+        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
+        params:
+          variation: 0.15
+          volume: -1
+      angle: 30
+      animation: WeaponArcFist
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 35
+    - type: Synth
+    - type: Skills
+      preset: RMCSkillPresetCMBSynth
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Bureau
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: JobPrefix
+      prefix: cm-job-prefix-survivor-fiorina-cmb-riot-control-synth
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: synth
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_cmb
+
+- type: startingGear
+  id: RMCGearSurvivorFiorinaRiotInProgressCMBRiotControlSynth
+  equipment:
+    jumpsuit: RMCSwatCMBUniform # TODO RMC14: Webbing fill
+    id: RMCIDCardCMBDeputySurvivor
+    back: CMBackpackMarine # TODO RMC14: MOLLE bag with no worn accesible
+    head: CMHeadBeretCMB
+    outerClothing: RMCCoatBureauDeputy
+    ears: RMCHeadsetDistressBureauDamaged
+    eyes: CMGlassesSecurity
+    gloves: RMCHandsVeteran
+    shoes: RMCBootsPMCFilled
+    belt: CMBeltSecurityMPFilled # TODO RMC14: synth fill
+    pocket1: RMCPouchSurvivalSynthFill
+    pocket2: RMCPouchToolsSocFilledSynthetic
+  storage:
+    pocket2:
+    - RMCWelderIndustrialHighCapacity
+    back:
+    - RMCWeaponRevolverSpearhead
+    - RMCSpeedLoader357
+    - RMCSpeedLoader357
+    - CMDefibrillator # TODO RMC14: Upgraded defib
+    - RMCUniversalRecorder
+    outerClothing:
+    - RMCRangefinder
+    - RMCTelescopicBaton
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointCMBRiotInProgressCMBRiotControlSynth
+  name: special survivor fiorina riot in progress cmb riot control synthetic spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorFiorinaRiotInProgressCMBRiotControlSynth
+  - type: Sprite
+    state: surv
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconCMBRiotControlSynthetic
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: cmb_syn

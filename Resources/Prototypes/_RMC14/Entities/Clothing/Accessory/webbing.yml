@@ -1028,6 +1028,17 @@
       - id: CMMRE
 
 - type: entity
+  parent: RMCWebbingDropPouchBlack
+  id: RMCWebbingPouchSurvivorPMCSynth
+  suffix: Filled, PMC Synthetic, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMWEYAFlask
+    - id: RMCZipties
+    - id: CMScalpelManager
+
+- type: entity
   parent: CMWebbingBase
   id: RMCWebbingSurgicalGreen
   name: surgical webbing vest

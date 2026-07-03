@@ -1,0 +1,124 @@
+- type: job
+  parent: RMCSurvivorPMCBase
+  id: RMCSurvivorPMCSupportSynthetic
+  name: rmc-job-name-pmc-synth
+  ranks:
+    RMCRankWeYaPMCSynthetic: [ ]
+  startingGear: RMCGearPMCSyntheticSurvivor
+  icon: "RMCJobIconPMCSynthetic"
+  playTimeTracker: RMCJobSyntheticColony
+  spawnMenuRoleName: Survivor — PMC Synthetic (Solaris Ridge special survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Language
+      spokenLanguages:
+      - Russian
+#     - Scandinavian # for when scandi gets added
+      - English
+      - Japanese
+      - Chinese
+      - German
+      - French
+      - Spanish
+      understoodLanguages:
+      - Russian
+#     - Scandinavian # for when scandi gets added
+      - English
+      - Japanese
+      - Chinese
+      - German
+      - French
+      - Spanish
+    - type: LanguageLearning
+      learnableLanguages:
+      - Xeno
+      firstContactLanguages:
+      - Xeno
+      languages:
+        Xeno:
+          initialBoostedWordCount: 18
+          initialBoostedWordComprehension: 0.4
+      comprehensionThreshold: 0.8
+      learningRange: 8.0
+      baseWordLearningRate: 0.05
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+      - Civilian
+    - type: RMCSurvivor
+    - type: RMCAllowSuitStorage
+    - type: IntelRescueSurvivorObjective
+    - type: MotionDetectorTracked
+    - type: Skills
+      preset: RMCSkillPresetSurvivorPMCSynth
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pmc_syn
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_pmc
+    - type: AssignSquad
+      squad: SquadPMC
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pmc-synth
+    - type: MeleeWeapon
+      soundHit:
+        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
+        params:
+          variation: 0.15
+          volume: -1
+      angle: 30
+      animation: WeaponArcFist
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 35
+    - type: Synth
+  useLoadoutOfJob: RMCSyntheticColony # for inheritance
+  hidden: true
+
+- type: startingGear
+  id: RMCGearPMCSyntheticSurvivor
+  equipment:
+    head: ArmorHelmetPMCOfficer
+    ears: RMCHeadsetHvHWeYaPMCLeader
+    back: RMCSmartpackA1White
+    belt: RMCBeltMedicBagPMCFilledPartial
+    jumpsuit: RMCJumpsuitVeteranPMCSurvivorSynth
+    outerClothing: CMArmorM4PMCSynth
+    shoes: RMCBootsPMCFilled
+    id: CMIDCardPMC
+    eyes: RMCSunglasses
+    gloves: RMCHandsVeteran
+    pocket1: RMCPouchToolsSocFilledSynthetic
+    pocket2: RMCPouchConstructionFillLowGrade # TODO RMC14: WY construction pouch
+  storage:
+    pocket1:
+    - RMCWelderIndustrialHighCapacity
+    back:
+    - CMRollerBedSpawnFolded
+    - CMPortableSurgicalBedSpawnFolded
+    - CMFireExtinguisherPortable
+    - CMDefibrillator # TODO RMC14: Upgraded defib, crew monitor
+    - RMCSynthResetKey
+    outerClothing:
+    - RMCMREWeYaPMC
+    - RMCTelescopicBaton
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPMCSynth
+  name: pmc support synthetic spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorParaSupportSynthetic
+  - type: Sprite
+    state: surv_wy
+
