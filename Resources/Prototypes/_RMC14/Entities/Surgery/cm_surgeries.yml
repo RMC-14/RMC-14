@@ -83,7 +83,7 @@
 
 - type: entity
   parent: CMSurgeryBase
-  id: RMCSurgeryOpenIncisionWithLaserScapel
+  id: RMCSurgeryOpenIncisionWithLaserScalpel
   name: Open Incision with Laser Scalpel
   components:
   - type: CMSurgery

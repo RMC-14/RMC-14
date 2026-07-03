@@ -296,7 +296,8 @@
   components:
   - type: Sprite
     state: pict_system
-    # as a note for future developers, the pict system doesnt actually do any cauterisation, despite the description. according to the cm13 code, its just a shit scalpel.
+  - type: CMCautery
+
 
 # - Manager
 - type: entity

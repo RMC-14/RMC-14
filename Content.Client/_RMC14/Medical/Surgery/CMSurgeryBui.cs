@@ -185,13 +185,15 @@ public sealed class CMSurgeryBui : BoundUserInterface
                 }
 
                 if (oldPart == part && oldSurgery?.Proto == effectiveSurgeryId.Value)
+                {
                     OnSurgeryPressed((surgery, surgeryComp), netPart, effectiveSurgeryId.Value);
+                    break;
+                }
             }
 
             if (oldPart == part && oldSurgery == null)
                 OnPartPressed(netPart, surgeries);
         }
-
         RefreshUI();
         UpdateDisabledPanel();
 
@@ -322,9 +324,9 @@ public sealed class CMSurgeryBui : BoundUserInterface
         return surgeryId switch
         {
             var id when id == "RMCSurgeryOpenIncisionWithIMS" => hasIMS ? surgeryId : (EntProtoId?) null,
-            var id when id == "RMCSurgeryOpenIncisionWithLaserScapel" => !hasIMS && hasLaserScalpel ? surgeryId : (EntProtoId?) null,
+            var id when id == "RMCSurgeryOpenIncisionWithLaserScalpel" => !hasIMS && hasLaserScalpel ? surgeryId : (EntProtoId?) null,
             var id when id == "CMSurgeryOpenIncision" && hasIMS => "RMCSurgeryOpenIncisionWithIMS",
-            var id when id == "CMSurgeryOpenIncision" && hasLaserScalpel => "RMCSurgeryOpenIncisionWithLaserScapel",
+            var id when id == "CMSurgeryOpenIncision" && hasLaserScalpel => "RMCSurgeryOpenIncisionWithLaserScalpel",
             _ => surgeryId,
         };
     }
@@ -351,14 +353,15 @@ public sealed class CMSurgeryBui : BoundUserInterface
         if (_window is not { Disposed: false, IsOpen: true })
             return;
 
+        if (_part == null)
+            return;
+
         var heldTools = GetHeldToolsSnapshot();
+
         if (_lastHeldTools != null && _lastHeldTools.SetEquals(heldTools))
             return;
 
         _lastHeldTools = heldTools;
-
-        if (_part == null)
-            return;
 
         if (!_entities.TryGetNetEntity(_part, out var netPart))
             return;
