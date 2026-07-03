@@ -5,7 +5,7 @@
   components:
   - type: Tag
    tags: 
-   - recorder
+   - Recorder
   - type: Sprite
     sprite: _RMC14/Objects/Devices/cassette_player.rsi
     layers:
@@ -78,7 +78,7 @@
   components:
   - type: Tag
    tags: 
-    - recorder
+    - Recorder
   - type: Sprite
     sprite: _RMC14/Objects/Devices/cassette_player.rsi
     layers:
