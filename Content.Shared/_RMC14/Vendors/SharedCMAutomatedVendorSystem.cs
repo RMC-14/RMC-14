@@ -1073,26 +1073,17 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         }
 
         _container.Remove(item, storage.Container);
-        // Refillable items (bottles, autoinjectors) use the CMRefillableSolutionSystem
+
         if (HasComp<CMRefillableSolutionComponent>(item))
         {
             var vendorCoords = Transform(vendor).Coordinates;
             _interaction.InteractUsing(args.User, item, vendor, vendorCoords, checkCanInteract: false, checkCanUse: false);
-
-            if (EntityManager.EntityExists(item))
-            {
-                _container.Insert(item, storage.Container);
-                args.FailedBulkRestockItems.Add(GetNetEntity(item));
-            }
         }
-        else
+
+        if (!TryRestockSingleItem(vendor, item, args.User, suppressPopup: true))
         {
-            // Standard vendor items: validate and restock directly
-            if (!TryRestockSingleItem(vendor, item, args.User, suppressPopup: true))
-            {
-                _container.Insert(item, storage.Container);
-                args.FailedBulkRestockItems.Add(GetNetEntity(item));
-            }
+            _container.Insert(item, storage.Container);
+            args.FailedBulkRestockItems.Add(GetNetEntity(item));
         }
 
         StartNextRestock(vendor, container, args.User, storage, args.FailedBulkRestockItems);
