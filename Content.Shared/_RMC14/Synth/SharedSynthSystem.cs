@@ -265,10 +265,10 @@ public abstract class SharedSynthSystem : EntitySystem
         }
     }
 
-    public bool HasAnyDamage(Entity<SynthComponent> synth)
-    {
-        return HasDamage(synth, synth.Comp.CableCoilDamageGroup) || HasDamage(synth, synth.Comp.WelderDamageGroup);
-    }
+    // public bool HasAnyDamage(Entity<SynthComponent> synth)
+    // {
+    //     return HasDamage(synth, synth.Comp.CableCoilDamageGroup) || HasDamage(synth, synth.Comp.WelderDamageGroup);
+    // }
 
     public bool HasDamage(EntityUid synth, ProtoId<DamageGroupPrototype> group)
     {
