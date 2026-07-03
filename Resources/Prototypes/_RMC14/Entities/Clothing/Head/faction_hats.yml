@@ -15,6 +15,7 @@
   parent: CMHeadBeretRed
   id: RMCHeadBeretProvost
   name: UNMC provost beret
+  suffix: Standard
   description: A beret with the UNMC Military Police insignia emblazoned on it.
   components:
   - type: Sprite
@@ -24,8 +25,9 @@
 
 - type: entity
   parent: RMCHeadBeretProvost
-  id: RMCHeadBeretProvostSenior
-  name: UNMC senior provost beret
+  id: RMCHeadBeretProvostGold
+  name: UNMC provost beret
+  suffix: Gold
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_black.rsi

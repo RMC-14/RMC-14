@@ -26,10 +26,10 @@
 
 ## Headwear
 - type: loadout
-  id: RMCHeadBeretProvostSenior
+  id: RMCHeadBeretProvostGold
   cost: 0
   equipment:
-    head: RMCHeadBeretProvostSenior
+    head: RMCHeadBeretProvostGold
 
 - type: loadout
   id: RMCHeadBeretProvostBlue
