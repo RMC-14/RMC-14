@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: wheelwrightt
-  changes:
-  - message: Typo in smart gun ammo switching
-    type: Fix
-  id: 2946
-  time: '2026-02-14T18:52:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9233
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed Corporate Liaison briefings not having any text on them.
@@ -4546,5 +4539,117 @@
   id: 3445
   time: '2026-07-03T01:04:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10011
+- author: Vixting
+  changes:
+  - message: Fixed being able to repair hardpoints that are fully destroyed.
+    type: Fix
+  - message: Added warp points to vehicles
+    type: Add
+  - message: Fixed ghosts not bypassing interior check
+    type: Fix
+  - message: Added access requirement to hardpoint printer
+    type: Add
+  - message: Tank grenade launcher using wrong ammo type
+    type: Fix
+  - message: Xenos now get the more detailed examine text
+    type: Tweak
+  - message: Binos are now blocked from being used whilst in a viewport, sideport,
+      gunner & drive seat
+    type: Fix
+  - message: ARC turret no longer continues firing after being broken
+    type: Fix
+  - message: Fixed tank flamer not be able to be reloaded
+    type: Fix
+  - message: Fixed ARC sensor not working correctly
+    type: Fix
+  - message: Fixed tank cupola one shotting resin
+    type: Fix
+  - message: You can now only pick up the tank turret & insert it with a power loader.
+      So be careful with where you decide to repair the tank
+    type: Add
+  - message: Increased the min speed needed to run someone over, tank will now push
+      people instead of running them over
+    type: Tweak
+  - message: ARC turret range has been lowered
+    type: Fix
+  - message: You can now fire hardpoints independent of them being directly where
+      you are currently aiming
+    type: Tweak
+  - message: Fixed some issues with the LTAAP minigun, should feel far better to fire
+      now
+    type: Fix
+  - message: Fixed being able to deploy bipod ontop of vehicle
+    type: Fix
+  - message: Fixed popup spam when trying to build near a vehicle
+    type: Fix
+  - message: Fixed tank now based on overall playercount instead of readied playercount
+    type: Fix
+  - message: Fixed vehicle ammo empty click sound playing when it shouldn't
+    type: Fix
+  - message: Fixed vehicle locked popup displaying it isn't
+    type: Fix
+  - message: Fixed mispredict issue with turret
+    type: Fix
+  - message: Fixed issue where cannon is not able to be destroyed
+    type: Fix
+  - message: Vehicle hardpoint printer no longer auto restocks
+    type: Fix
+  - message: Fixed issues with how vehicle armor was being applied
+    type: Fix
+  - message: Added the damaged sprites for vehicle hardpoints
+    type: Add
+  - message: Humvee gunner seat to ARC, cannon same restriction as deploying
+    type: Add
+  - message: Tank turret can now only be removed with a powerloader
+    type: Fix
+  - message: Blocked entry to vehicle popups now appear before the doafter starts
+      instead of doafter end
+    type: Tweak
+  - message: Fixed powerloaders being able to enter vehicle interiors
+    type: Fix
+  - message: Fixed humvee smoke launcher using incorrect ammo
+    type: Fix
+  - message: Fixed smoke ammo useing incorrect sprite
+    type: Fix
+  - message: Fixed ARC passenger seat not being easily able to be buckled in
+    type: Fix
+  - message: Rework how stabilization works, no more instant traverse speed, but turret
+      is unaffected by vehicle chaning directoin
+    type: Tweak
+  - message: Xeno melee attacks now get converted to fully slash damage on attacking
+      vehicles
+    type: Fix
+  - message: Fixed tank flamer crate giving incorrect ammo
+    type: Fix
+  - message: Fixed vehicles not taking explosion damage
+    type: Fix
+  - message: Fixed vehicles not spawned through the lift not being able to be lowered
+      into strorage
+    type: Fix
+  - message: Fixed LTAAP minigun & DRGN flamer not having IFF
+    type: Fix
+  - message: Fixed dead bodies blocking vehicles & vehicles pushing dead bodies
+    type: Fix
+  - message: Fixed ace autocannon AOE effec, removed shrapnel
+    type: Fix
+  - message: Removed tank spawning with treads
+    type: Remove
+  - message: Removed ARC spawning with hardpoints preinstalled
+    type: Remove
+  - message: Removed the port side gunner seats from commander & medical APC interior
+    type: Remove
+  - message: Aligned cupola & grenade launcher hardpoint offset
+    type: Tweak
+  - message: Blocked deployment of sentry / emplacement inside of vehicle interiors
+    type: Fix
+  - message: Fixed being able to open unbreakable podlocks
+    type: Fix
+  - message: Removed hardpoint will be set at your location
+    type: Tweak
+  - message: ': Fixed grenades capable of phasing through walls'
+    type: Fix
+  id: 3446
+  time: '2026-07-03T01:10:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10189
 Name: RMC14
 Order: -1
