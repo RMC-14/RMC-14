@@ -13,6 +13,7 @@ rmc-aslot-harness = Harness
 rmc-attachable-activation-fail-not-wielded = {CAPITALIZE(THE($holder))} must be wielded to activate {THE($attachable)}!
 rmc-attachable-activation-fail-not-held = {CAPITALIZE(THE($holder))} must be held to activate {THE($attachable)}!
 rmc-attachable-activation-fail-not-owned = {CAPITALIZE(THE($holder))} must be held or equipped by you to activate {THE($attachable)}!
+rmc-attachable-activation-fail-on-vehicle = You can't deploy {THE($attachable)} while riding on a vehicle!
 
 rmc-attachable-shoot-fail-not-wielded = {CAPITALIZE(THE($holder))} must be wielded to shoot {THE($attachable)}!
 
@@ -72,3 +73,10 @@ rmc-attachable-examine-speed-walk = [color={$colour}]{$sign}{TOSTRING($speed, "F
 rmc-attachable-examine-speed-sprint = [color={$colour}]{$sign}{TOSTRING($speed, "F2")}[/color] running speed multiplier.
 
 rmc-attachable-examine-wield-delay = [color={$colour}]{$sign}{$delay}[/color] seconds of wield delay.
+
+rmc-attachable-examine-verb-text = View Compatible Attachments
+rmc-attachable-examine-window-title = Compatible Attachments
+rmc-attachable-examine-no-slots = This weapon has no attachment slots.
+rmc-attachable-examine-header = [bold]Attachment slots:[/bold]
+rmc-attachable-examine-slot-filled = • [bold]{$slot}:[/bold] {$attachment}
+rmc-attachable-examine-slot-empty = • [bold]{$slot}:[/bold] [color=gray]empty[/color]

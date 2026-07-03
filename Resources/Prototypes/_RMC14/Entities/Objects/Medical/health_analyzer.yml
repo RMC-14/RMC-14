@@ -26,7 +26,7 @@
   - type: Appearance
   - type: GuideHelp
     guides:
-    - Medical Doctor
+    - MedicalDoctor
   - type: UseDelay
     delay: 1
   - type: MedicallyUnskilledDoAfter
@@ -38,6 +38,10 @@
   - type: PhysicalComposition
     materialComposition:
       CMSteel: 200
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMHealthAnalyzer

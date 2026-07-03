@@ -10,6 +10,7 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCAllowSuitStorage
     - type: RMCSurvivor
     - type: NpcFactionMember
       factions:
@@ -25,6 +26,7 @@
         sprite: _RMC14/Interface/job_icons/SPP/standard.rsi
         state: spp_sl_a
     - type: RMCTrackable
+    - type: QYJWhitelist
     - type: AssignSquad
       squad: SquadSPP
     #- type: SPPSpecWhitelist TODO RMC14: SPP special weapons whitelist
@@ -43,8 +45,8 @@
     - CMSheetMetal20
     outerClothing:
     - RMCTacticalPrybar
-    - RMCMagazineRifleAK4047
-    - RMCMagazineRifleAK4047
+    - RMCMagazineRifleType77
+    - RMCMagazineRifleType77
     - RMCRadioHandheldColony
 
 - type: entity

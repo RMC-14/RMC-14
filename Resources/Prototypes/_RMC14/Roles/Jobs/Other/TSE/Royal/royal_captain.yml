@@ -18,6 +18,7 @@
       - RoyalMarines
       - TSE
     - type: Skills
+<<<<<<< HEAD
       skills:
         RMCSkillCqc: 3
         RMCSkillFirearms: 2
@@ -36,6 +37,9 @@
         RMCSkillIntel: 2
         RMCSkillPowerLoader: 1
         RMCSkillOverwatch: 1
+=======
+      preset: RMCSkillPresetRoyalCaptain
+>>>>>>> master
     - type: MarineOrders
     - type: RMCPointing
     - type: CommandAccent
