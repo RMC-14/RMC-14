@@ -32,8 +32,12 @@ public sealed partial class XenoFightOrFlightComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan Jitter = TimeSpan.FromSeconds(1);
 
+    //TODO RMC14 move these effects over to the new status effect system
     [DataField, AutoNetworkedField]
-    public ProtoId<StatusEffectPrototype>[] AilmentsRemove = ["KnockedDown", "Stun", "Dazed", "Unconscious"];
+    public ProtoId<StatusEffectPrototype>[] AilmentsRemove = ["KnockedDown", "Stun", "Unconscious"];
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId[] AilmentsRemoveNew = ["Dazed"];
 
     [DataField]
     public ComponentRegistry ComponentsRemove;

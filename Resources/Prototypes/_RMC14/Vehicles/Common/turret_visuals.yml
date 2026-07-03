@@ -8,5 +8,7 @@
   - type: Sprite
     drawdepth: OverMobs
     sprite: _RMC14/Structures/Vehicles/hardpoints/humvee.rsi
-    state: humveeturret
+    layers:
+    - state: humveeturret
+      visible: false
   - type: VehicleTurretVisual
