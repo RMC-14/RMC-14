@@ -11,7 +11,7 @@
 
 - type: entity
   id: RMCNormalLingeringAcid
-  parent: WeakAcid
+  parent: RMCWeakLingeringAcid
   components:
   - type: XenoAcidType
     tier: 2
