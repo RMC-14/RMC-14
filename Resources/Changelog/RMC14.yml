@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Drazamuffin
-  changes:
-  - message: Removed an extra letter T in the ABR40 Tactical hunting rifle description
-    type: Fix
-  id: 2990
-  time: '2026-03-03T02:11:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9351
 - author: keegaroo65
   changes:
   - message: Changed Xeno Watch UI to ignore dashes and digits when searching, for
@@ -4640,5 +4633,12 @@
   id: 3489
   time: '2026-07-03T21:59:23.806062+00:00'
   url: null
+- author: Drazamuffin
+  changes:
+  - message: removed the red cross from the turquoise EMT uniform
+    type: Tweak
+  id: 3490
+  time: '2026-07-03T22:47:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10336
 Name: RMC14
 Order: -1
