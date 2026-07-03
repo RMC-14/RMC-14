@@ -129,6 +129,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
             if (candidate.CollisionClass == VehicleCollisionClass.SoftMob && candidate.IsXeno)
             {
+                if (candidate.MobState != null && _mobState.IsDead(candidate.Entity, candidate.MobState))
+                    continue;
+
                 var result = HandleSoftXenoCollision(
                     uid,
                     mover,
@@ -163,7 +166,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
                 continue;
             }
 
-            if (applyEffects && candidate.Door is { } door && !_net.IsClient)
+            if (applyEffects && candidate.Door is { } door && !_net.IsClient && candidate.CollisionClass == VehicleCollisionClass.Breakable)
             {
                 if (!candidate.IsUnpoweredDoor)
                 {
