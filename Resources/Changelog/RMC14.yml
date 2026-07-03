@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: The consoles inside of lifeboats and the liaisons pod now check for access.
-    type: Fix
-  id: 2987
-  time: '2026-03-03T02:07:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9381
 - author: keegaroo65
   changes:
   - message: Fixed Hive Tracker to track targets upon your devolution, and the target's
@@ -4634,5 +4627,18 @@
   id: 3486
   time: '2026-07-03T21:27:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10337
+- author: kleinerstation13
+  changes:
+  - message: Added Scandinavian language, which can be learned via traits or a pamphlet
+    type: Add
+  - message: SPP Airborne crashlanded survivors can no longer speak English, except
+      for their Team Leader.
+    type: Tweak
+  - message: Some survivor roles can now speak additional languages, such as Sorokyne
+      survivors, SPP SOF, RCM Paramarines, and some Liaison variants.
+    type: Tweak
+  id: 3487
+  time: '2026-07-03T21:53:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10208
 Name: RMC14
 Order: -1
