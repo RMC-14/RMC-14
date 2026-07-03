@@ -1,4 +1,0 @@
-author: DrSmugleaf
-changes:
-  - type: Fix
-    message: Fixed a small server performance issue that accounted for 5% of the total server update time.

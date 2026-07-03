@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Pyromaniac365
-  changes:
-  - message: Added standard, golden and disabler underlays to sidearm pouch
-    type: Add
-  id: 2989
-  time: '2026-03-03T02:11:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9221
 - author: Drazamuffin
   changes:
   - message: Removed an extra letter T in the ABR40 Tactical hunting rifle description
@@ -4639,5 +4632,13 @@
   id: 3488
   time: '2026-07-03T21:55:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10320
+- author: DrSmugleaf
+  changes:
+  - message: Fixed a small server performance issue that accounted for 5% of the total
+      server update time.
+    type: Fix
+  id: 3489
+  time: '2026-07-03T21:59:23.806062+00:00'
+  url: null
 Name: RMC14
 Order: -1
