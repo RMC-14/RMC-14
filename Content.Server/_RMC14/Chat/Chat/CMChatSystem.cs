@@ -180,6 +180,9 @@ public sealed class CMChatSystem : SharedCMChatSystem
 
         var keycode = char.ToLowerInvariant(prefixPart[1]);
 
+        if (keycode == SharedChatSystem.DefaultChannelKey && keys.DefaultChannel != null)
+            return true;
+
         foreach (var ch in _proto.EnumeratePrototypes<RadioChannelPrototype>())
         {
             if (!keys.Channels.Contains(ch.ID))

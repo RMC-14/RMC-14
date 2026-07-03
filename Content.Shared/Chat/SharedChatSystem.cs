@@ -207,7 +207,7 @@ public abstract class SharedChatSystem : EntitySystem
         var foundChannel = _channelLookup.TryGetValue(lookupKey, out channel);
         output = SanitizeMessageCapital(input[2..].TrimStart());
 
-        if (!foundChannel && isDefaultChannel)
+        if (isDefaultChannel)
         {
             var ev = new GetDefaultRadioChannelEvent();
             RaiseLocalEvent(source, ev);
