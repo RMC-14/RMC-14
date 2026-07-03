@@ -85,7 +85,7 @@
     Slash: 0.603
     Piercing: 0.603
     Structural: 0.9
-    Caustic: 0.9
+    Heat: 0.9
 
 - type: damageModifierSet
   id: VehicleArmorCaustic
@@ -94,7 +94,7 @@
     Slash: 0.9
     Piercing: 0.9
     Structural: 0.9
-    Caustic: 0.603
+    Heat: 0.603
 
 - type: damageModifierSet
   id: VehicleArmorConcussive
@@ -103,7 +103,7 @@
     Slash: 0.9
     Piercing: 0.9
     Structural: 0.9
-    Caustic: 0.9
+    Heat: 0.9
 
 - type: damageModifierSet
   id: VehicleArmorPaladin
@@ -112,7 +112,7 @@
     Slash: 0.9
     Piercing: 0.9
     Structural: 0.603
-    Caustic: 0.9
+    Heat: 0.9
 
 - type: damageModifierSet
   id: VehicleFrameTank
@@ -121,7 +121,7 @@
     Slash: 0.7
     Piercing: 0.4
     Structural: 0.8
-    Caustic: 1.5
+    Heat: 1.5
 
 - type: damageModifierSet
   id: VehicleFrameAPC
@@ -130,7 +130,7 @@
     Slash: 0.8
     Piercing: 0.6
     Structural: 0.7
-    Caustic: 1
+    Heat: 1
 
 - type: damageModifierSet
   id: VehicleFrameARC
@@ -139,7 +139,7 @@
     Slash: 1
     Piercing: 0.6
     Structural: 0.8
-    Caustic: 1
+    Heat: 1
 
 - type: damageModifierSet
   id: VehicleFrameCLFVan
@@ -148,3 +148,4 @@
     Slash: 0.9
     Piercing: 0.8
     Structural: 0.8
+    Heat: 1
