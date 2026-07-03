@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed Corporate Liaison briefings not having any text on them.
-    type: Fix
-  id: 2947
-  time: '2026-02-14T19:56:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9240
-- author: Dutch-VanDerLinde
-  changes:
-  - message: The ComTech squad tool vendor now has 4 sentry laptops.
-    type: Add
-  id: 2948
-  time: '2026-02-14T19:55:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9251
 - author: PursuitinAshes
   changes:
   - message: '[PVE] Sentry Cases will now spawn with a Sentry Laptop stored inside.'
@@ -4651,5 +4637,22 @@
   id: 3446
   time: '2026-07-03T01:10:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10189
+- author: Vermidia
+  changes:
+  - message: Fixed spray acid acid not showing up on damaged barricades
+    type: Fix
+  - message: Fixed upgraded barricades not showing damage on part of the sprite and
+      folding barricades having no damage overlay.
+    type: Fix
+  id: 3447
+  time: '2026-07-03T01:14:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10251
+- author: Vermidia
+  changes:
+  - message: Fixed broken platforms/ledges drawing above cades etc.
+    type: Fix
+  id: 3448
+  time: '2026-07-03T01:14:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10254
 Name: RMC14
 Order: -1
