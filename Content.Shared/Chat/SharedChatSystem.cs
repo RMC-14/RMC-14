@@ -233,6 +233,17 @@ public abstract class SharedChatSystem : EntitySystem
             _popup.PopupEntity(msg, source, source);
         }
 
+        // RMC14
+        if (channel?.ID == HivemindChannel.Id &&
+            !_xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1))
+        {
+            if (!quiet)
+                _popup.PopupEntity(Loc.GetString("rmc-no-queen-hivemind-chat"), source, source, PopupType.LargeCaution);
+
+            return false;
+        }
+        // RMC14
+
         var prefixEv = new ChatGetPrefixEvent(channel);
         RaiseLocalEvent(source, ref prefixEv);
         channel = prefixEv.Channel;
