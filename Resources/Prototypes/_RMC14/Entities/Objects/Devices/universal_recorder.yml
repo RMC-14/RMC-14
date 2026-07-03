@@ -3,6 +3,9 @@
   parent: BaseItem
   id: RMCUniversalRecorderBase
   components:
+  - type: Tag
+   tags: 
+   - Recorder
   - type: Sprite
     sprite: _RMC14/Objects/Devices/cassette_player.rsi
     layers:
@@ -73,6 +76,9 @@
   parent: BaseItem
   id: RMCUniversalRecorderTapeBase
   components:
+  - type: Tag
+   tags: 
+    - Recorder
   - type: Sprite
     sprite: _RMC14/Objects/Devices/cassette_player.rsi
     layers:
