@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: keegaroo65
-  changes:
-  - message: Fixed Hive Tracker to track targets upon your devolution, and the target's
-      evolution or devolution.
-    type: Fix
-  id: 2988
-  time: '2026-03-03T02:09:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9328
 - author: Pyromaniac365
   changes:
   - message: Added standard, golden and disabler underlays to sidearm pouch
@@ -4640,5 +4632,12 @@
   id: 3487
   time: '2026-07-03T21:53:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10208
+- author: kleinerstation13
+  changes:
+  - message: Added SOF leader and commander headset for FORECON survivors
+    type: Add
+  id: 3488
+  time: '2026-07-03T21:55:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10320
 Name: RMC14
 Order: -1
