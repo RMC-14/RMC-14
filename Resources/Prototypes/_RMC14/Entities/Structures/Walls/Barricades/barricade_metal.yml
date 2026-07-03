@@ -15,7 +15,9 @@
   - type: Sprite
     sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
     layers:
-    - state: metal
+    - state: DamageOverlay_0
+      map: [ "enum.RMCDamageOverlayVisuals.DamageOverlay" ]
+      sprite: _RMC14/Structures/Walls/Barricades/metal_barricade_cracks.rsi
     - map: [ "acided" ]
     drawdepth: WallTops
   - type: InteractionPopup
@@ -52,10 +54,13 @@
         acts: [ "Destruction" ]
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 25
+    damageDivisor: 28.125
     trackAllDamage: true
-    damageOverlay:
-      sprite: _RMC14/Structures/Walls/Barricades/metal_barricade_cracks.rsi
+    overlay: false
+    targetLayers:
+    - "enum.RMCDamageOverlayVisuals.DamageOverlay"
+    damageGroup: "Brute"
+    hideIfZero: false
   - type: Barbed
     thornsDamage:
       types:
@@ -89,18 +94,20 @@
     - type: Sprite
       sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
       layers:
-      - state: metal
-      - state: burn_upgrade
+      - state: DamageOverlay_0
+        map: [ "enum.RMCDamageOverlayVisuals.DamageOverlay" ]
+        sprite: _RMC14/Structures/Walls/Barricades/metal_barricade_cracks.rsi
+      - state: AdditionalDamageOverlay_0
+        map: [ "enum.RMCDamageOverlayVisuals.AdditionalDamageOverlay" ]
+        sprite: _RMC14/Structures/Walls/Barricades/burn_barricade_cracks.rsi
       - map: [ "acided" ]
+    - type: DamageVisuals
+      targetLayers:
+      - "enum.RMCDamageOverlayVisuals.DamageOverlay"
+      - "enum.RMCDamageOverlayVisuals.AdditionalDamageOverlay"
     - type: Damageable
       damageContainer: Inorganic
       damageModifierSet: CMBurnBarricade
-    - type: DamageVisuals
-      thresholds: [4, 8, 12]
-      damageDivisor: 25
-      trackAllDamage: true
-      damageOverlay:
-        sprite: _RMC14/Structures/Walls/Barricades/burn_barricade_cracks.rsi
     - type: RMCConstructionUpgradeTarget
       upgrades: null
       downgrade: RMCBiohazardUpgrade
@@ -117,18 +124,20 @@
     - type: Sprite
       sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
       layers:
-      - state: metal
-      - state: brute_upgrade
+      - state: DamageOverlay_0
+        map: [ "enum.RMCDamageOverlayVisuals.DamageOverlay" ]
+        sprite: _RMC14/Structures/Walls/Barricades/metal_barricade_cracks.rsi
+      - state: AdditionalDamageOverlay_0
+        map: [ "enum.RMCDamageOverlayVisuals.AdditionalDamageOverlay" ]
+        sprite: _RMC14/Structures/Walls/Barricades/brute_barricade_cracks.rsi
       - map: [ "acided" ]
+    - type: DamageVisuals
+      targetLayers:
+      - "enum.RMCDamageOverlayVisuals.DamageOverlay"
+      - "enum.RMCDamageOverlayVisuals.AdditionalDamageOverlay"
     - type: Damageable
       damageContainer: Inorganic
       damageModifierSet: CMBruteBarricade
-    - type: DamageVisuals
-      thresholds: [4, 8, 12]
-      damageDivisor: 25
-      trackAllDamage: true
-      damageOverlay:
-        sprite: _RMC14/Structures/Walls/Barricades/brute_barricade_cracks.rsi
     - type: RMCConstructionUpgradeTarget
       upgrades: null
       downgrade: RMCBruteUpgrade
@@ -142,16 +151,19 @@
       sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
       layers:
       - state: metal
-      - state: explosive_upgrade
+      - state: DamageOverlay_0
+        map: [ "enum.RMCDamageOverlayVisuals.DamageOverlay" ]
+        sprite: _RMC14/Structures/Walls/Barricades/metal_barricade_cracks.rsi
+      - state: AdditionalDamageOverlay_0
+        map: [ "enum.RMCDamageOverlayVisuals.AdditionalDamageOverlay" ]
+        sprite: _RMC14/Structures/Walls/Barricades/explosive_barricade_cracks.rsi
       - map: [ "acided" ]
+    - type: DamageVisuals
+      targetLayers:
+      - "enum.RMCDamageOverlayVisuals.DamageOverlay"
+      - "enum.RMCDamageOverlayVisuals.AdditionalDamageOverlay"
     - type: ExplosionResistance
       damageCoefficient: 0.5
-    - type: DamageVisuals
-      thresholds: [4, 8, 12]
-      damageDivisor: 25
-      trackAllDamage: true
-      damageOverlay:
-        sprite: _RMC14/Structures/Walls/Barricades/explosive_barricade_cracks.rsi
     - type: RMCConstructionUpgradeTarget
       upgrades: null
       downgrade: RMCExplosiveUpgrade
@@ -212,6 +224,7 @@
   name: handrail
   description: A railing, for your hands. Woooow.
   components:
+    - type: VehicleSmashable
     - type: Anchorable
     - type: Sprite
       drawdepth: WallTops
@@ -243,6 +256,9 @@
     - type: Construction
       graph: BarricadeHandrailGraph
       node: nodeHandrail
+    - type: XenoCrusherChargable
+      instantDestroy: true
+      passOnDestroy: true
 
 - type: entity
   parent: RMCBarricadeHandrail
@@ -413,6 +429,10 @@
     layers:
     - state: folding_metal
       map: ["enum.DoorVisualLayers.Base"]
+      visible: false
+    - state: DamageOverlay_0
+      map: [ "enum.RMCDamageOverlayVisuals.DamageOverlay" ]
+      sprite: _RMC14/Structures/Walls/Barricades/folding_metal_cracks.rsi
     - map: [ "acided" ]
     drawdepth: WallTops
   - type: RMCRepairable
@@ -458,6 +478,19 @@
             visible: true
           False:
             visible: false
+      enum.DoorVisuals.State:
+        enum.RMCDamageOverlayVisuals.DamageOverlay:
+          Open: { sprite: _RMC14/Structures/Walls/Barricades/folding_metal_closed_cracks.rsi }
+          Closed: { sprite: _RMC14/Structures/Walls/Barricades/folding_metal_cracks.rsi }       
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 25
+    trackAllDamage: true
+    overlay: false
+    targetLayers:
+    - "enum.RMCDamageOverlayVisuals.DamageOverlay"
+    damageGroup: "Brute"
+    hideIfZero: false
   - type: InteractionOutline
   - type: Door
     openSpriteState: folding_metal_closed
