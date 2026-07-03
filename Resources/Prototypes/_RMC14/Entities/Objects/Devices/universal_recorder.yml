@@ -3,9 +3,6 @@
   parent: BaseItem
   id: RMCUniversalRecorderBase
   components:
-  - type: Tag
-   tags: 
-   - Recorder
   - type: Sprite
     sprite: _RMC14/Objects/Devices/cassette_player.rsi
     layers:
@@ -41,6 +38,9 @@
     materialComposition:
       CMSteel: 60
       CMGlass: 30
+  - type: Tag
+    tags:
+    - Recorder
 
 - type: entity
   parent: RMCUniversalRecorderBase
@@ -76,9 +76,6 @@
   parent: BaseItem
   id: RMCUniversalRecorderTapeBase
   components:
-  - type: Tag
-   tags: 
-    - Recorder
   - type: Sprite
     sprite: _RMC14/Objects/Devices/cassette_player.rsi
     layers:
@@ -117,6 +114,9 @@
     materialComposition:
       CMSteel: 20
       CMGlass: 5
+  - type: Tag
+    tags:
+    - Recorder
 
 - type: entity
   parent: RMCUniversalRecorderTapeBase
@@ -142,3 +142,6 @@
     contents:
     - id: RMCUniversalRecorderTape
       amount: 5
+
+- type: Tag
+  id: Recorder

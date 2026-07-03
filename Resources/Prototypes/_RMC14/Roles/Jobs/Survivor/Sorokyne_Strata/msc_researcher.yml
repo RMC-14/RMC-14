@@ -13,6 +13,19 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - English
+      - Chinese
+      - German
+      understoodLanguages:
+      - Russian
+      - English
+      - Chinese
+      - German
+      currentLanguage: Russian
+      defaultLanguage: Russian
     - type: Skills
       preset: RMCSkillPresetSurvivorResearcher
     - type: EquipSurvivorPreset
