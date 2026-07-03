@@ -122,10 +122,7 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
         foreach (var proto in _prototype.EnumeratePrototypes<EntityPrototype>())
         {
             if (proto.HasComponent<SynthGenerationComponent>())
-            {
                 synthTypes.Add(proto.ID);
-                continue;
-            }
         }
 
         foreach (var synth in synthTypes)
