@@ -130,7 +130,7 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
 
         foreach (var synth in synthTypes)
         {
-            if(!_prototype.TryIndex(synth, out var proto))
+            if (!_prototype.TryIndex(synth, out var proto))
                 continue;
             options.Add(new DialogOption($"{proto.Name}", new GenerationSelectedActionEvent(synth)));
         }
