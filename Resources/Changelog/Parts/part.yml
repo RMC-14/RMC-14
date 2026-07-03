@@ -1,6 +1,0 @@
-author: DrSmugleaf
-changes:
-  - type: Fix
-    message: Fixed rounds not ending automatically.
-  - type: Fix
-    message: Fixed landing zone UN-577 spaceborne gauss turrets blocking vehicles.

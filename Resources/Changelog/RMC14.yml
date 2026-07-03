@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: keegaroo65
-  changes:
-  - message: Changed Xeno Watch UI to ignore dashes and digits when searching, for
-      convenience with postfixes.
-    type: Tweak
-  id: 2991
-  time: '2026-03-03T02:14:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9324
 - author: PursuitInAshes
   changes:
   - message: '[PVE] Dropships have received storage compartments the size of backpacks
@@ -4640,5 +4632,14 @@
   id: 3490
   time: '2026-07-03T22:47:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10336
+- author: DrSmugleaf
+  changes:
+  - message: Fixed rounds not ending automatically.
+    type: Fix
+  - message: Fixed landing zone UN-577 spaceborne gauss turrets blocking vehicles.
+    type: Fix
+  id: 3491
+  time: '2026-07-03T22:59:26.582900+00:00'
+  url: null
 Name: RMC14
 Order: -1
