@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Charge;
 using Content.Shared.Alert;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Mobs;
 using Content.Shared.Projectiles;
@@ -58,6 +59,14 @@ public sealed partial class XenoSpitSystem : EntitySystem
     private void OnUserAcidedRemove(Entity<UserAcidedComponent> ent, ref ComponentRemove args)
     {
         _appearance.SetData(ent, UserAcidedVisuals.Acided, UserAcidedEffects.None);
+
+        if (TryComp(ent, out FlammableComponent? flammable) &&
+    flammable.FireStacks > 0)
+        {
+            return;
+        }
+
+        _alerts.ClearAlert(ent, FireAlert);
     }
 
     private void OnUserAcidedRejuvenate(Entity<UserAcidedComponent> ent, ref RejuvenateEvent args)
@@ -152,6 +161,8 @@ public sealed partial class XenoSpitSystem : EntitySystem
 
         UpdateAppearance(acided);
         Dirty(acided);
+
+        _alerts.ShowAlert(acided, FireAlert);
     }
 
     /// <summary>
