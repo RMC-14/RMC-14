@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: kleinerstation13
-  changes:
-  - message: Replaced mentions of CEC on Sorokyne Strata and SPP EC patch with MSC
-      (Ministry of Space Colonisation)
-    type: Tweak
-  id: 2970
-  time: '2026-03-03T00:37:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9323
-- author: Dutch-VanDerLinde
-  changes:
-  - message: SSG-45 magazines are now correctly labelled as 10x24mm
-    type: Fix
-  id: 2971
-  time: '2026-03-03T00:40:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9303
 - author: Dygon
   changes:
   - message: Fixed xenonids not seeing the aimed shot visual.
@@ -4641,5 +4626,22 @@
   id: 3469
   time: '2026-07-03T01:34:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10295
+- author: Dygon
+  changes:
+  - message: You can no longer turn on a sentry through the sentry laptop if there
+      is an already turned on sentry nearby.
+    type: Fix
+  id: 3470
+  time: '2026-07-03T01:37:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10299
+- author: Dygon
+  changes:
+  - message: Area damage now always applies the visual hit effect on damaged targets.
+    type: Fix
+  - message: Area damage no longer hits entities inside containers.
+    type: Fix
+  id: 3471
+  time: '2026-07-03T01:36:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10298
 Name: RMC14
 Order: -1
