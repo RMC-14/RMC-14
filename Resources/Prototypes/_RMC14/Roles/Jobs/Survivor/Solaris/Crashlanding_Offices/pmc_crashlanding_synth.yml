@@ -118,7 +118,7 @@
   name: pmc support synthetic spawn point
   components:
   - type: SpawnPoint
-    job_id: RMCSurvivorParaSupportSynthetic
+    job_id: RMCSurvivorPMCSupportSynthetic
   - type: Sprite
     state: surv_wy
 
