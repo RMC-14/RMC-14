@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Structure damage modifiers now apply to airlocks.
-    type: Fix
-  id: 2945
-  time: '2026-02-14T18:52:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9252
 - author: wheelwrightt
   changes:
   - message: Typo in smart gun ammo switching
@@ -4546,5 +4539,12 @@
   id: 3444
   time: '2026-07-03T01:01:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8859
+- author: Bagietens
+  changes:
+  - message: 'Fixed #9881'
+    type: Fix
+  id: 3445
+  time: '2026-07-03T01:04:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10011
 Name: RMC14
 Order: -1
