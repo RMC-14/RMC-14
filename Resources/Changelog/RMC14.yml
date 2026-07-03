@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: TadJohnson00
-  changes:
-  - message: '[PVE] Drum armor webbing now correctly fits most large or smaller items.'
-    type: Fix
-  id: 2986
-  time: '2026-03-03T02:06:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9369
 - author: Ian321
   changes:
   - message: The consoles inside of lifeboats and the liaisons pod now check for access.
@@ -4633,5 +4626,13 @@
   id: 3485
   time: '2026-07-03T01:48:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9845
+- author: Sifb26
+  changes:
+  - message: The security belt is now able to hold the universal recorder and individual
+      tapes
+    type: Tweak
+  id: 3486
+  time: '2026-07-03T21:27:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10337
 Name: RMC14
 Order: -1
