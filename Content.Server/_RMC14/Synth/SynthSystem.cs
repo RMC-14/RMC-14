@@ -1,5 +1,4 @@
 using Content.Server.Body.Systems;
-using Content.Shared._RMC14.Attachable.Events;
 using Content.Server.Explosion.EntitySystems;
 using Content.Shared._RMC14.Humanoid;
 using Content.Shared._RMC14.Synth;
@@ -8,7 +7,6 @@ using Content.Shared.Body.Organ;
 using Content.Shared.Body.Part;
 using Content.Shared.Body.Systems;
 using Content.Shared.Damage;
-using Robust.Shared.Prototypes;
 using Content.Shared.Explosion.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Tag;
@@ -22,7 +20,6 @@ public sealed class SynthSystem : SharedSynthSystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
     [Dependency] private readonly SharedBodySystem _body = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly TagSystem _tags = default!;
 
     public override void Initialize()
@@ -47,10 +44,6 @@ public sealed class SynthSystem : SharedSynthSystem
 
         var repOverrideComp = EnsureComp<RMCHumanoidRepresentationOverrideComponent>(ent);
         repOverrideComp.Species = ent.Comp.SpeciesName;
-        if(TryComp<SynthGenerationComponent>(ent.Owner, out var comp) && _prototype.TryIndex(comp.Generation, out var proto))
-        {
-            repOverrideComp.Age = proto.Name;
-        }
         Dirty(ent, repOverrideComp);
 
         if (!HasComp<BodyComponent>(ent.Owner))
