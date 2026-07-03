@@ -10,6 +10,7 @@ using Content.Shared.Damage;
 using Content.Shared.Explosion.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Tag;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Synth;
 
@@ -83,16 +84,3 @@ public sealed class SynthSystem : SharedSynthSystem
         args.Handled = true;
     }
 }
-using Content.Server.Body.Systems;
-using Content.Server.Explosion.EntitySystems;
-using Content.Shared._RMC14.Humanoid;
-using Content.Shared._RMC14.Synth;
-using Content.Shared.Body.Components;
-using Content.Shared.Body.Organ;
-using Content.Shared.Body.Part;
-using Content.Shared.Body.Systems;
-using Content.Shared.Damage;
-using Content.Shared.Explosion.Components;
-using Content.Shared.Interaction.Events;
-using Content.Shared.Tag;
-using Robust.Shared.Prototypes;
