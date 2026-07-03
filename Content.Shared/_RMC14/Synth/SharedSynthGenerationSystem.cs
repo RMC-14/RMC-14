@@ -146,7 +146,7 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
 
         if (!_prototype.TryIndex(args.Generation, out var proto))
         {
-            _sawmill.Log(LogLevel.Warning, "attempting to index Entity prototype failed");
+            LogLevel.Warning("attempting to index Entity prototype failed");
             return;
         }
 
