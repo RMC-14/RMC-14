@@ -802,8 +802,8 @@
 
 - type: entity
   parent: CMHeadBeret
-  id: RMCHeadBeretProvostSeniorBlue
-  name: UNMC senior provost beret # Playtime reward for PvIs
+  id: RMCHeadBeretProvostBlue
+  name: UNMC provost beret # Playtime reward for PvIs
   description: A beret with the UNMC Military Police insignia emblazoned on it. The blue mark symbolizes extensive service in their division.
   components:
   - type: Sprite

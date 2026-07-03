@@ -32,7 +32,7 @@
     head: RMCHeadBeretProvostSenior
 
 - type: loadout
-  id: RMCHeadBeretProvostSeniorBlue
+  id: RMCHeadBeretProvostBlue
   cost: 0
   effects:
   - !type:JobRequirementLoadoutEffect
@@ -41,4 +41,4 @@
       role: CMJobProvostInspector
       time: 432000 # 120 hrs
   equipment:
-    head: RMCHeadBeretProvostSeniorBlue
+    head: RMCHeadBeretProvostBlue
