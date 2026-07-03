@@ -33,7 +33,7 @@
         RMCSkillPolice: 2
         RMCSkillPowerLoader: 2
         RMCSkillSmartGun: 1
-        RMCSkillVehicles: 2
+        RMCSkillVehicles: 3
     - type: MarineOrders
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
