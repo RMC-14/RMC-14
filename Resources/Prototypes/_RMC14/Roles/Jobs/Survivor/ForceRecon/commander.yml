@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: RMCSurvivorForeconBase
   id: RMCSurvivorForeconCommander
   name: rmc-job-name-forecon-commander
@@ -50,7 +50,6 @@
   parent: RMCGearForeconBase
   id: RMCGearForeconCommander
   equipment:
-    belt: RMCMatebaBeltForeconFilled
     outerClothing: RMCJacketWindbreakerForeconFilled
     back: RMCSatchelMarineForeconSurvivorCommanderFill
     id: CMIDCardGold

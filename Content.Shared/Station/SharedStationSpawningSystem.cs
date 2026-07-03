@@ -88,7 +88,7 @@ public abstract class SharedStationSpawningSystem : EntitySystem
     public void EquipStartingGear(EntityUid entity, LoadoutPrototype loadout, bool raiseEvent = true)
     {
         EquipStartingGear(entity, loadout.StartingGear, raiseEvent);
-        EquipStartingGear(entity, (IEquipmentLoadout) loadout, raiseEvent);
+        EquipStartingGear(entity, (IEquipmentLoadout)loadout, raiseEvent);
     }
 
     /// <summary>
@@ -105,7 +105,7 @@ public abstract class SharedStationSpawningSystem : EntitySystem
     /// </summary>
     public void EquipStartingGear(EntityUid entity, StartingGearPrototype? startingGear, bool raiseEvent = true)
     {
-        EquipStartingGear(entity, (IEquipmentLoadout?) startingGear, raiseEvent);
+        EquipStartingGear(entity, (IEquipmentLoadout?)startingGear, raiseEvent);
     }
 
     /// <summary>
@@ -125,12 +125,21 @@ public abstract class SharedStationSpawningSystem : EntitySystem
         {
             foreach (var slot in slotDefinitions)
             {
+                // RMC14: Loadouts get overriden by starting gear.
+                // Allows roles to prevent loadout items from spawning with the character.
                 var equipmentStr = startingGear.GetGear(slot.Name);
                 if (!string.IsNullOrEmpty(equipmentStr))
                 {
+                    if (InventorySystem.TryGetSlotEntity(entity, slot.Name, out var existing))
+                    {
+                        InventorySystem.TryUnequip(entity, slot.Name, force: true, silent: true);
+                        QueueDel(existing.Value);
+                    }
+
                     var equipmentEntity = Spawn(equipmentStr, xform.Coordinates);
                     InventorySystem.TryEquip(entity, equipmentEntity, slot.Name, silent: true, force: true);
                 }
+
             }
         }
 
@@ -207,7 +216,7 @@ public abstract class SharedStationSpawningSystem : EntitySystem
                 if (!PrototypeManager.TryIndex(items.Prototype, out var loadoutPrototype))
                     return null;
 
-                var gear = ((IEquipmentLoadout) loadoutPrototype).GetGear(slot);
+                var gear = ((IEquipmentLoadout)loadoutPrototype).GetGear(slot);
                 if (gear != string.Empty)
                     return gear;
             }

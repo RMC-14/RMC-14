@@ -1067,6 +1067,7 @@
   id: JobRMCSurvivorCommandingOfficer
   points: 7
   groups:
+  - SurvivorCommandingOfficerWeaponRMC
   - EyewearRMC
   - MasksRMC
   - PaperworkRMC

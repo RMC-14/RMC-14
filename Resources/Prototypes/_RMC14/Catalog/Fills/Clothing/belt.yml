@@ -724,6 +724,17 @@
 
 - type: entity
   parent: RMCBeltHolsterPistol
+  id: RMCD50WinterWyvernBeltForeconFilled
+  suffix: Filled, Winter Wyvern, Forecon
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolHandcannon
+      amount: 3
+    - id: RMCWeaponPistolHandcannonWinterWyvern
+
+- type: entity
+  parent: RMCBeltHolsterPistol
   id: GoldHandcannonBeltFilled
   suffix: Filled, Gold Handcannon
   components:
