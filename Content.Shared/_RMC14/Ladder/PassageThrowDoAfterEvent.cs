@@ -4,4 +4,4 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.Ladder;
 
 [Serializable, NetSerializable]
-public sealed partial class LadderThrowDoAfterEvent : SimpleDoAfterEvent;
+public sealed partial class PassageThrowDoAfterEvent : SimpleDoAfterEvent;

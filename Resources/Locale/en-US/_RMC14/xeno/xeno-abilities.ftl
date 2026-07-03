@@ -131,6 +131,10 @@ rmc-acid-hole-no-exit = There's no space to crawl through there.
 rmc-acid-hole-blocked = Something is blocking the other side.
 rmc-acid-hole-repair-blocked = The wall is breached and must be patched first.
 rmc-acid-hole-repair-requires-nailgun = You need a nailgun to fix this breach.
+rmc-acid-hole-throw-start-self = You take position to throw the {$thrown} through the {$hole}.
+rmc-acid-hole-throw-start-others = {$user} takes position to throw the {$thrown} through the {$hole}.
+rmc-acid-hole-throw-self = You throw the {$thrown} through the {$hole}.
+rmc-acid-hole-throw-others = {$user} throws the {$thrown} through the {$hole}.
 
 # Paralyzing Slash
 cm-xeno-paralyzing-slash-activate = Our next slash will apply neurotoxin!

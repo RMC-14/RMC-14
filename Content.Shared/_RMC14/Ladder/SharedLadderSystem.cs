@@ -54,10 +54,11 @@ public abstract class SharedLadderSystem : EntitySystem
         SubscribeLocalEvent<LadderComponent, CanDragEvent>(OnLadderCanDrag);
         SubscribeLocalEvent<LadderComponent, DragDropDraggedEvent>(OnLadderDragDropDragged);
         SubscribeLocalEvent<LadderComponent, InteractUsingEvent>(OnInteractUsing);
+        SubscribeLocalEvent<LadderComponent, GetThrowablePassageExitEvent>(OnLadderGetThrowableExit);
 
         SubscribeLocalEvent<LadderWatchingComponent, MoveInputEvent>(OnWatchingMoveInput);
 
-        SubscribeLocalEvent<LadderThrowableComponent, LadderThrowDoAfterEvent>(OnLadderThrowDoAfter);
+        SubscribeLocalEvent<PassageThrowableComponent, PassageThrowDoAfterEvent>(OnPassageThrowDoAfter);
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
@@ -280,10 +281,10 @@ public abstract class SharedLadderSystem : EntitySystem
 
     private void OnInteractUsing(Entity<LadderComponent> ent, ref InteractUsingEvent args)
     {
-        if (!TryComp(args.Used, out LadderThrowableComponent? throwable))
+        if (!TryComp(args.Used, out PassageThrowableComponent? throwable))
             return;
 
-        var doAfter = new DoAfterArgs(EntityManager, args.User, throwable.DoAfterDuration, new LadderThrowDoAfterEvent(), args.Used, target: ent)
+        var doAfter = new DoAfterArgs(EntityManager, args.User, throwable.DoAfterDuration, new PassageThrowDoAfterEvent(), args.Used, target: ent)
         {
             BreakOnMove = true,
             NeedHand = true,
@@ -297,18 +298,44 @@ public abstract class SharedLadderSystem : EntitySystem
         _doAfter.TryStartDoAfter(doAfter);
     }
 
-    private void OnLadderThrowDoAfter(Entity<LadderThrowableComponent> ent, ref LadderThrowDoAfterEvent args)
+    private void OnPassageThrowDoAfter(Entity<PassageThrowableComponent> ent, ref PassageThrowDoAfterEvent args)
     {
         if (args.Cancelled || args.Handled)
             return;
 
-        if (!TryComp(args.Target, out LadderComponent? ladder))
+        if (args.Target is not { } target)
             return;
 
-        var directionText = GetDirectionPopup((args.Target.Value, ladder));
-        var selfMessage = Loc.GetString("rmc-ladder-finish-throw-self", ("thrown", ent), ("direction", directionText), ("ladder", args.Target));
-        var othersMessage = Loc.GetString("rmc-ladder-finish-throw-others", ("user", args.User), ("thrown", ent), ("direction", directionText), ("ladder", args.Target));
-        TryMoveEntity(ladder.Other, ent, args.User, selfMessage, othersMessage);
+        var ev = new GetThrowablePassageExitEvent(args.User, ent.Owner);
+        RaiseLocalEvent(target, ref ev);
+
+        if (!ev.Handled || ev.Coordinates.MapId == MapId.Nullspace)
+            return;
+
+        args.Handled = true;
+
+        _transform.SetMapCoordinates(ent.Owner, ev.Coordinates);
+        _popup.PopupPredicted(ev.SelfMessage, ev.OthersMessage, args.User, args.User);
+
+        var movedEv = new MovedThroughPassageEvent(args.User);
+        RaiseLocalEvent(ent.Owner, ref movedEv);
+    }
+
+    private void OnLadderGetThrowableExit(Entity<LadderComponent> ent, ref GetThrowablePassageExitEvent args)
+    {
+        if (ent.Comp.Other is not { } other || TerminatingOrDeleted(other))
+            return;
+
+        var coordinates = _transform.GetMapCoordinates(other);
+        if (coordinates.MapId == MapId.Nullspace)
+            return;
+
+        var directionText = GetDirectionPopup(ent);
+        args.SelfMessage = Loc.GetString("rmc-ladder-finish-throw-self", ("thrown", args.Throwable), ("direction", directionText), ("ladder", ent.Owner));
+        args.OthersMessage = Loc.GetString("rmc-ladder-finish-throw-others", ("user", args.User), ("thrown", args.Throwable), ("direction", directionText), ("ladder", ent.Owner));
+        args.Coordinates = coordinates;
+
+        args.Handled = true;
     }
 
     private string GetDirectionPopup(Entity<LadderComponent> ent)
@@ -372,7 +399,7 @@ public abstract class SharedLadderSystem : EntitySystem
         _transform.SetMapCoordinates(moving, coordinates);
         _popup.PopupPredicted(selfMessage, othersMessage, user, user);
 
-        var ev = new MovedByLadderEvent(user);
+        var ev = new MovedThroughPassageEvent(user);
         RaiseLocalEvent(moving, ref ev);
 
         return true;
@@ -436,4 +463,13 @@ public abstract class SharedLadderSystem : EntitySystem
 }
 
 [ByRefEvent]
-public record struct MovedByLadderEvent(EntityUid User);
+public record struct MovedThroughPassageEvent(EntityUid User);
+
+[ByRefEvent]
+public record struct GetThrowablePassageExitEvent(EntityUid User, EntityUid Throwable)
+{
+    public bool Handled;
+    public MapCoordinates Coordinates;
+    public string? SelfMessage;
+    public string? OthersMessage;
+}

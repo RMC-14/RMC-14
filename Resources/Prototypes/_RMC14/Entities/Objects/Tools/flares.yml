@@ -105,7 +105,7 @@
     proto: RMCFlareBullet
   - type: RMCAirProjectile
     prototype: RMCAirFlare
-  - type: LadderThrowable
+  - type: PassageThrowable
 
 - type: entity
   parent: CMFlare

@@ -54,9 +54,8 @@ public sealed class RMCExplosionSystem : SharedRMCExplosionSystem
 
         SubscribeLocalEvent<RandomTimerTriggerComponent, ExaminedEvent>(OnRandomTimerTriggerExamined);
 
-        SubscribeLocalEvent<OnUseTimerTriggerComponent, MovedByLadderEvent>(OnMovedByLadder);
+        SubscribeLocalEvent<OnUseTimerTriggerComponent, MovedThroughPassageEvent>(OnMovedThroughPassage);
 
-        CacheDecals();
         CacheDecals("RMCScorch");
         CacheDecals("RMCScorchSmall");
     }
@@ -176,7 +175,7 @@ public sealed class RMCExplosionSystem : SharedRMCExplosionSystem
         }
     }
 
-    private void OnMovedByLadder(Entity<OnUseTimerTriggerComponent> ent, ref MovedByLadderEvent args)
+    private void OnMovedThroughPassage(Entity<OnUseTimerTriggerComponent> ent, ref MovedThroughPassageEvent args)
     {
         _trigger.StartTimer(ent.Owner, args.User);
     }

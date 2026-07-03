@@ -26,7 +26,7 @@
     thresholds: []
   - type: ChangeItemSizeOnTimerTrigger
   - type: CancelUseWithCloak
-  - type: LadderThrowable
+  - type: PassageThrowable
 
 - type: entity
   abstract: true

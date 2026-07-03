@@ -21,7 +21,7 @@ namespace Content.Server.Light.EntitySystems
 
             SubscribeLocalEvent<ExpendableLightComponent, ExaminedEvent>(OnExpendableLightExamined);
             SubscribeLocalEvent<ExpendableLightComponent, GrenadeContentThrownEvent>(OnGrenadeContentThrown);
-            SubscribeLocalEvent<ExpendableLightComponent, MovedByLadderEvent>(OnMovedByLadder);
+            SubscribeLocalEvent<ExpendableLightComponent, MovedThroughPassageEvent>(OnMovedByLadder);
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Content.Server.Light.EntitySystems
             _light.TryActivate((ent.Owner,ent.Comp));
         }
 
-        private void OnMovedByLadder(Entity<ExpendableLightComponent> ent, ref MovedByLadderEvent args)
+        private void OnMovedByLadder(Entity<ExpendableLightComponent> ent, ref MovedThroughPassageEvent args)
         {
             if(!ent.Comp.PickupWhileOn)
                 _physics.SetBodyType(ent, BodyType.Static);
