@@ -105,6 +105,8 @@ public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
         {
             AddHeldItemLayers((ent.Owner, sprite, visuals), heldItem, insertionIndices);
         }
+
+        RaiseLocalEvent(ent, new GhostHumanoidLayersRefreshedEvent());
     }
 
     private void AddClothingLayers(
