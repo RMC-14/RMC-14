@@ -37,6 +37,7 @@
     baseWalkSpeed: 1.9575
   - type: ShowHealthIcons
   - type: ShowHealthBars
+  - type: RMCAllowSuitStorage
   - type: RemoveComponents
     components:
     - type: HiddenAppearance
@@ -69,6 +70,7 @@
       RMCSkillDomestics: 2
   - type: ShowHealthIcons
   - type: ShowHealthBars
+  - type: RMCAllowSuitStorage
   - type: RemoveComponents
     components:
     - type: HiddenAppearance
@@ -107,6 +109,7 @@
     explosionArmor: -15
   - type: ShowHealthIcons
   - type: ShowHealthBars
+  - type: RMCAllowSuitStorage
   - type: RemoveComponents
     components:
     - type: HiddenAppearance

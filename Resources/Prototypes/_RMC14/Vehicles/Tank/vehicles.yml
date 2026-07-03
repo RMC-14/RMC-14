@@ -8,6 +8,9 @@
     movementKind: Grid
   - type: LagCompensation
   - type: Clickable
+  - type: WarpPoint
+    follow: true
+    location: Tank
   - type: RMCIgnoreGhostInteractionLimits
   - type: RequireProjectileTarget
   - type: GridVehicleMover
@@ -89,6 +92,7 @@
       visible: false
     - map: [ primary ]
       state: tank_turret_0
+      visible: false
     - map: [ secondary ]
       state: SECONDARY
       visible: false
@@ -147,7 +151,6 @@
           components:
           - HardpointItem
       wheel-1:
-        startingItem: VehicleTankTreads
         disableEject: true
         whitelist:
           components:
@@ -201,6 +204,15 @@
 
 - type: entity
   parent: VehicleTankBase
+  id: VehicleTankTest
+  name: test tank (autodrive)
+  description: A test tank that automatically drives east on spawn.
+  components:
+  - type: RMCVehicleAutopilot
+    direction: 1,0
+
+- type: entity
+  parent: VehicleTankBase
   id: VehicleTank
   components:
   - type: VehicleEnter
@@ -217,6 +229,12 @@
     - offset: 0,2
       radius: 1
       interiorCoords: 0.5,-1
+  - type: MarineMapTracked
+  - type: TacticalMapTracked
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips_large.rsi
+      state: tank
 
 - type: entity
   parent: VehicleTankBase
@@ -244,6 +262,7 @@
       visible: false
     - map: [ primary ]
       state: tank_turret_0
+      visible: false
     - map: [ secondary ]
       state: SECONDARY
       visible: false

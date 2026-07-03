@@ -8,6 +8,7 @@ using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Scoping;
 using Content.Shared._RMC14.Stealth;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Weapons.Ranged.Overheat;
 using Content.Shared._RMC14.Xenonids;
@@ -481,6 +482,12 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         {
             var msg = Loc.GetString("emplacement-mount-deploy-broken", ("mount", ent));
             _popup.PopupClient(msg, user, user, PopupType.SmallCaution);
+            return false;
+        }
+
+        if (HasComp<VehicleInteriorOccupantComponent>(user))
+        {
+            _popup.PopupClient(Loc.GetString("emplacement-mount-deploy-vehicle"), user, user, PopupType.SmallCaution);
             return false;
         }
 
