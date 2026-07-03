@@ -9,7 +9,7 @@ using Robust.Shared.GameObjects;
 
 namespace Content.Shared._RMC14.Vehicle;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(raiseAfterAutoHandleState: true)]
 [Access(typeof(VehicleWeaponsSystem))]
 public sealed partial class VehicleWeaponsComponent : Component
 {

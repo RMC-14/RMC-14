@@ -179,4 +179,5 @@ public enum RMCFishingRodVisuals : byte
 public enum RMCFishVisuals : byte
 {
     Gutted,
+    Scale,
 }

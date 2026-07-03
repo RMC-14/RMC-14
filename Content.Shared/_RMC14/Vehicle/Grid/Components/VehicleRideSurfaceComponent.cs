@@ -88,7 +88,7 @@ public sealed partial class VehicleRideSurfaceComponent : Component
 
 }
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(raiseAfterAutoHandleState: true)]
 [Access(typeof(VehicleRideSurfaceSystem), Other = AccessPermissions.ReadWrite)]
 public sealed partial class VehicleRideSurfaceRiderComponent : Component
 {
