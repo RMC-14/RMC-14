@@ -453,7 +453,7 @@ namespace Content.Server.Ghost
             bool canReturn = false)
         {
             _transformSystem.TryGetMapOrGridCoordinates(targetEntity, out var spawnPosition);
-            // RMC preserve the source entity so the ghost can inherit its rendered appearance snapshot.
+            // RMC
             return SpawnGhost(mind, spawnPosition, canReturn, targetEntity);
         }
 
@@ -501,7 +501,7 @@ namespace Content.Server.Ghost
             var ghost = SpawnAtPosition(GameTicker.ObserverPrototypeName, spawnPosition.Value);
             var ghostComponent = Comp<GhostComponent>(ghost);
 
-            // RMC apply copied humanoid / non-humanoid appearance data before the ghost is shown to clients.
+            // RMC
             if (appearanceSource is { } source)
             {
                 CopyDeathAppearance(source, ghost);
@@ -626,7 +626,7 @@ namespace Content.Server.Ghost
             if (playerEntity != null)
                 _adminLog.Add(LogType.Mind, $"{ToPrettyString(playerEntity.Value):player} ghosted{(!canReturn ? " (non-returnable)" : "")}");
 
-            // RMC pass the controlled entity through so the spawned ghost mirrors the body's appearance
+            // RMC
             var ghost = SpawnGhost((mindId, mind), position, canReturn, playerEntity);
 
             if (ghost == null)

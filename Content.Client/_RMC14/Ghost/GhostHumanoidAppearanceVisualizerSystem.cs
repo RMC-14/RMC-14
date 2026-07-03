@@ -171,7 +171,7 @@ public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
             var key = layer.MapKeys?.FirstOrDefault() ?? $"{snapshot.Slot}-{i}";
             var renderKey = $"ghosthum-clothing-{snapshot.Slot}-{key}";
 
-            var layerCopy = CopyLayer(layer);
+            var layerCopy = ClothingSystem.CopyLayer(layer);
             if (string.IsNullOrWhiteSpace(layerCopy.RsiPath))
                 layerCopy.RsiPath = rsiPath;
             layerCopy.Offset += snapshot.SlotOffset;
@@ -289,7 +289,7 @@ public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
         var i = 0;
         foreach (var layer in layers)
         {
-            var layerCopy = CopyLayer(layer);
+            var layerCopy = ClothingSystem.CopyLayer(layer);
             if (string.IsNullOrWhiteSpace(layerCopy.RsiPath))
                 layerCopy.RsiPath = rsiPath;
 
@@ -491,33 +491,6 @@ public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
 
         ent.Comp2.RenderedLayers.Clear();
         ent.Comp2.BoostedLayers.Clear();
-    }
-
-    private static PrototypeLayerData CopyLayer(PrototypeLayerData layer)
-    {
-        return new PrototypeLayerData
-        {
-            Shader = layer.Shader,
-            TexturePath = layer.TexturePath,
-            RsiPath = layer.RsiPath,
-            State = layer.State,
-            Scale = layer.Scale,
-            Rotation = layer.Rotation,
-            Offset = layer.Offset,
-            Visible = layer.Visible,
-            Color = layer.Color,
-            MapKeys = layer.MapKeys == null ? null : new(layer.MapKeys),
-            RenderingStrategy = layer.RenderingStrategy,
-            CopyToShaderParameters = layer.CopyToShaderParameters == null
-                ? null
-                : new()
-                {
-                    LayerKey = layer.CopyToShaderParameters.LayerKey,
-                    ParameterTexture = layer.CopyToShaderParameters.ParameterTexture,
-                    ParameterUV = layer.CopyToShaderParameters.ParameterUV,
-                },
-            Cycle = layer.Cycle,
-        };
     }
 
     private sealed class CachedClothingData

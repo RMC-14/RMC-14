@@ -11,7 +11,7 @@ using Robust.Shared.GameStates;
 
 namespace Content.Shared.Clothing.EntitySystems;
 
-// RMC shared equippedvisual resolution result used by both clothing rendering % ghost appearance snapshottin
+// RMC
 public enum ClothingVisualResolution
 {
     None,
@@ -343,6 +343,33 @@ public abstract partial class ClothingSystem : EntitySystem
         };
 
         return true;
+    }
+
+    public static PrototypeLayerData CopyLayer(PrototypeLayerData layer)
+    {
+        return new PrototypeLayerData
+        {
+            Shader = layer.Shader,
+            TexturePath = layer.TexturePath,
+            RsiPath = layer.RsiPath,
+            State = layer.State,
+            Scale = layer.Scale,
+            Rotation = layer.Rotation,
+            Offset = layer.Offset,
+            Visible = layer.Visible,
+            Color = layer.Color,
+            MapKeys = layer.MapKeys == null ? null : new(layer.MapKeys),
+            RenderingStrategy = layer.RenderingStrategy,
+            CopyToShaderParameters = layer.CopyToShaderParameters == null
+                ? null
+                : new()
+                {
+                    LayerKey = layer.CopyToShaderParameters.LayerKey,
+                    ParameterTexture = layer.CopyToShaderParameters.ParameterTexture,
+                    ParameterUV = layer.CopyToShaderParameters.ParameterUV,
+                },
+            Cycle = layer.Cycle,
+        };
     }
     // RMC end
 

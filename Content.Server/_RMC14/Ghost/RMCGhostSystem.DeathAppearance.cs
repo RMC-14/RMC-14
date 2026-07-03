@@ -5,6 +5,7 @@ using Content.Shared._RMC14.UniformAccessories;
 using Content.Shared._RMC14.Webbing;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Clothing.Components;
+using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.DisplacementMap;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -200,6 +201,7 @@ public sealed partial class GhostSystem
             Age = sourceHumanoid.Age,
             CustomBaseLayers = new(sourceHumanoid.CustomBaseLayers),
             Species = sourceHumanoid.Species,
+            Initial = sourceHumanoid.Initial,
             SkinColor = sourceHumanoid.SkinColor,
             HiddenLayers = new(sourceHumanoid.HiddenLayers),
             Sex = sourceHumanoid.Sex,
@@ -236,33 +238,6 @@ public sealed partial class GhostSystem
         };
     }
 
-    private static PrototypeLayerData CopyLayer(PrototypeLayerData layer)
-    {
-        return new PrototypeLayerData
-        {
-            Shader = layer.Shader,
-            TexturePath = layer.TexturePath,
-            RsiPath = layer.RsiPath,
-            State = layer.State,
-            Scale = layer.Scale,
-            Rotation = layer.Rotation,
-            Offset = layer.Offset,
-            Visible = layer.Visible,
-            Color = layer.Color,
-            MapKeys = layer.MapKeys == null ? null : new(layer.MapKeys),
-            RenderingStrategy = layer.RenderingStrategy,
-            CopyToShaderParameters = layer.CopyToShaderParameters == null
-                ? null
-                : new()
-                {
-                    LayerKey = layer.CopyToShaderParameters.LayerKey,
-                    ParameterTexture = layer.CopyToShaderParameters.ParameterTexture,
-                    ParameterUV = layer.CopyToShaderParameters.ParameterUV,
-                },
-            Cycle = layer.Cycle,
-        };
-    }
-
     private static DisplacementData? CopyDisplacement(DisplacementData? displacement)
     {
         if (displacement == null)
@@ -275,7 +250,7 @@ public sealed partial class GhostSystem
 
         foreach (var (size, layer) in displacement.SizeMaps)
         {
-            copy.SizeMaps[size] = CopyLayer(layer);
+            copy.SizeMaps[size] = ClothingSystem.CopyLayer(layer);
         }
 
         return copy;

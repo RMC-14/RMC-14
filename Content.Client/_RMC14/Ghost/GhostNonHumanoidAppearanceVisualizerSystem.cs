@@ -49,22 +49,8 @@ public sealed class GhostNonHumanoidAppearanceVisualizerSystem : EntitySystem
         _sprite.LayerSetRsi((ent.Owner, sprite), baseLayer, baseSprite);
         _sprite.LayerSetVisible((ent.Owner, sprite), baseLayer, true);
 
-        if (ent.Comp.SpentParasite && HasState((ent.Owner, sprite), baseLayer, "impregnated"))
-        {
-            _sprite.LayerSetRsiState((ent.Owner, sprite), baseLayer, "impregnated");
-        }
-        else if (state != null && HasState((ent.Owner, sprite), baseLayer, state))
-        {
+        if (state != null)
             _sprite.LayerSetRsiState((ent.Owner, sprite), baseLayer, state);
-        }
-        else if (HasState((ent.Owner, sprite), baseLayer, "alive"))
-        {
-            _sprite.LayerSetRsiState((ent.Owner, sprite), baseLayer, "alive");
-        }
-        else if (HasState((ent.Owner, sprite), baseLayer, "dead"))
-        {
-            _sprite.LayerSetRsiState((ent.Owner, sprite), baseLayer, "dead");
-        }
 
         var damageLayer = _sprite.LayerMapReserve((ent.Owner, sprite), RMCDamageVisualLayers.Base);
         _sprite.LayerSetVisible((ent.Owner, sprite), damageLayer, false);
@@ -120,7 +106,10 @@ public sealed class GhostNonHumanoidAppearanceVisualizerSystem : EntitySystem
         try
         {
             if (!TryComp(dummy, out SpriteComponent? sprite))
+            {
+                _prototypeSprites[prototypeId] = null;
                 return false;
+            }
 
             cached = ResolveVisibleSprite(sprite);
             _prototypeSprites[prototypeId] = cached;
@@ -149,12 +138,6 @@ public sealed class GhostNonHumanoidAppearanceVisualizerSystem : EntitySystem
             return new PrototypeSpriteData(baseRsi, null);
 
         return null;
-    }
-
-    private bool HasState(Entity<SpriteComponent> ent, int layer, string state)
-    {
-        Entity<SpriteComponent?> spriteEnt = (ent.Owner, ent.Comp);
-        return _sprite.LayerGetEffectiveRsi(spriteEnt, layer)?.TryGetState(state, out _) == true;
     }
 
     private sealed record PrototypeSpriteData(ResPath BaseSprite, string? State);

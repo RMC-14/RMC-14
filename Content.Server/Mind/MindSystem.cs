@@ -206,7 +206,7 @@ public sealed class MindSystem : SharedMindSystem
             // Transfer-to-null should just detach a mind.
             // If people want to create a ghost, that should be done explicitly via some TransferToGhost() method, not
             // not implicitly via optional arguments.
-            // RMC begin route through GhostSystem so the spawned ghost can inherit the body's copied appearance.
+            // RMC
             var appearanceSource = mind.OwnedEntity;
             var position = Deleted(appearanceSource)
                 ? _gameTicker.GetObserverSpawnPoint()
