@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken/modified from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/effects/blood.dmi",
+  "copyright": "Taken/modified from cmss13 at https://github.com/cmss13-devs/cmss13/blob/c24d75b4b790fd98f3f79c138ac953113741a31a/icons/effects/blood.dmi, https://github.com/cmss13-devs/cmss13/blob/c24d75b4b790fd98f3f79c138ac953113741a31a/icons/effects/effects.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -27,6 +27,9 @@
     },
     {
       "name": "mfloor7"
+    },
+    {
+      "name": "fuel"
     }
   ]
 }
