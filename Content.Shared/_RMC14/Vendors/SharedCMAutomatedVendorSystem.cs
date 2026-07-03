@@ -1123,7 +1123,9 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-item-finish", ("vendor", vendor), ("item", item)), vendor, user);
 
         vendor.Comp.Sections[sectionIndex].Entries[entryIndex].Amount++;
-        AmountUpdated(vendor, vendor.Comp.Sections[sectionIndex].Entries[entryIndex]);
+
+        var updatedEntry = vendor.Comp.Sections[sectionIndex].Entries[entryIndex];
+        AmountUpdated(vendor, updatedEntry);
         Dirty(vendor);
         QueueDel(item);
         return true;
@@ -1144,7 +1146,8 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         var amountToAdd = GetBoxRemoveAmount(matchingEntry);
         vendor.Comp.Sections[sectionIndex].Entries[entryIndex].Amount += amountToAdd;
 
-        AmountUpdated(vendor, vendor.Comp.Sections[sectionIndex].Entries[entryIndex]);
+        var updatedEntry = vendor.Comp.Sections[sectionIndex].Entries[entryIndex];
+        AmountUpdated(vendor, updatedEntry);
         Dirty(vendor);
 
         if (!suppressPopup)
