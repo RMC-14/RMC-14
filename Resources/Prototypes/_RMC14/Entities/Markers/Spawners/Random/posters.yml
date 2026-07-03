@@ -25,7 +25,6 @@
     - CMPosterSilicon
     - CMPosterMissJanuary
     - CMPosterF100
-    - CMPosterRememberIo
     - CMPosterAssaultRifle
     - CMPosterMissJuly
     - CMPosterMissApril
@@ -54,7 +53,6 @@
     - CMPosterFallingFalcons
     - CMPosterElectroMan
     - CMPosterPizzaGalaxy
-    - CMPosterTartarus
     - CMPosterEATBlue
     - CMPosterCola
     - CMPosterCMB1
@@ -96,9 +94,9 @@
     - CMPosterMarineCorp6
     - CMPosterMarineCorp7
     - CMPosterFORECON
-    - CMPosterZSPA1
-    - CMPosterZSPA2
-    - CMPosterZSPA3
+    - RMCPosterTSEPA1
+    - RMCPosterTSEPA2
+    - RMCPosterTSEPA3
     - CMPosterSPP1
     - CMPosterSPP2
     - CMPosterSPP3
@@ -144,7 +142,6 @@
     - CMPosterSilicon
     - CMPosterMissJanuary
     - CMPosterF100
-    - CMPosterRememberIo
     - CMPosterAssaultRifle
     - CMPosterMissJuly
     - CMPosterMissApril
@@ -173,7 +170,6 @@
     - CMPosterFallingFalcons
     - CMPosterElectroMan
     - CMPosterPizzaGalaxy
-    - CMPosterTartarus
     - CMPosterEATBlue
     - CMPosterCola
     - CMPosterCMB1
@@ -215,9 +211,9 @@
     - CMPosterMarineCorp6
     - CMPosterMarineCorp7
     - CMPosterFORECON
-    - CMPosterZSPA1
-    - CMPosterZSPA2
-    - CMPosterZSPA3
+    - RMCPosterTSEPA1
+    - RMCPosterTSEPA2
+    - RMCPosterTSEPA3
     chance: 0.95
     rarePrototypes:
     - PosterBroken

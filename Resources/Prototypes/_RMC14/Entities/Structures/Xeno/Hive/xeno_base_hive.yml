@@ -26,7 +26,6 @@
     priority: -1
     transparency: 0.2
   - type: XenoConstruct
-  - type: XenoFriendly
   - type: MeleeReceivedMultiplier
     otherMultiplier: 8.2
   - type: XenoAnnounceStructureDestruction
@@ -39,6 +38,7 @@
       types:
         Heat: 3.8
   - type: QueenEyeVision
+  - type: XenoChargeDontHit
 
 - type: entity
   abstract: true
@@ -58,3 +58,4 @@
     priority: -1
     transparency: 0.1
   - type: DeletedByWeedKiller
+  - type: XenoChargeDontHit

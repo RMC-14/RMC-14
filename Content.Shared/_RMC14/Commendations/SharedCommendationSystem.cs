@@ -1,4 +1,4 @@
-using System.Linq;
+﻿using System.Linq;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
@@ -22,13 +22,27 @@ public abstract class SharedCommendationSystem : EntitySystem
     /// List of entity prototype IDs for medals that can be awarded.
     /// This is the single source of truth for standard awardable medals.
     /// </summary>
-    protected static readonly IReadOnlyList<ProtoId<EntityPrototype>> AwardableMedalIds = new[]
+    protected static readonly IReadOnlyList<EntProtoId> AwardableMedalIds = new[]
     {
-        new ProtoId<EntityPrototype>("RMCMedalGoldExceptionalHeroism"),
-        new ProtoId<EntityPrototype>("RMCMedalSilverValor"),
-        new ProtoId<EntityPrototype>("RMCMedalBronzeDistinguishedConduct"),
-        new ProtoId<EntityPrototype>("RMCMedalBronzeHeart")
+        new EntProtoId("RMCMedalGoldExceptionalHeroism"),
+        new EntProtoId("RMCMedalSilverValor"),
+        new EntProtoId("RMCMedalBronzeDistinguishedConduct"),
+        new EntProtoId("RMCMedalBronzeHeart")
     };
+
+    /// <summary>
+    /// List of entity prototype IDs for special medals that can be awarded.
+    /// </summary>
+    protected static readonly IReadOnlyList<EntProtoId> SpecialMedalIds = new[]
+    {
+        new EntProtoId("RMCMedalHighCommandHonor")
+    };
+
+    /// <summary>
+    /// Dataset IDs for commendation jellies.
+    /// </summary>
+    public const string JellyDatasetId = "RMCXenoJellies";
+    public const string JellySpecialDatasetId = "RMCXenoJelliesSpecial";
 
     public override void Initialize()
     {
@@ -44,9 +58,17 @@ public abstract class SharedCommendationSystem : EntitySystem
     /// <summary>
     /// Gets the list of entity prototype IDs for standard medals that can be awarded.
     /// </summary>
-    public IReadOnlyList<ProtoId<EntityPrototype>> GetAwardableMedalIds()
+    public IReadOnlyList<EntProtoId> GetAwardableMedalIds()
     {
         return AwardableMedalIds;
+    }
+
+    /// <summary>
+    /// Gets the list of entity prototype IDs for special medals.
+    /// </summary>
+    public IReadOnlyList<EntProtoId> GetSpecialMedalIds()
+    {
+        return SpecialMedalIds;
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
@@ -84,7 +106,7 @@ public abstract class SharedCommendationSystem : EntitySystem
         string name,
         string text,
         CommendationType type,
-        ProtoId<EntityPrototype>? commendationPrototypeId = null)
+        EntProtoId? commendationPrototypeId = null)
     {
     }
 
@@ -95,7 +117,7 @@ public abstract class SharedCommendationSystem : EntitySystem
         string name,
         string text,
         CommendationType type,
-        ProtoId<EntityPrototype>? commendationPrototypeId = null)
+        EntProtoId? commendationPrototypeId = null)
     {
     }
 
@@ -107,5 +129,10 @@ public abstract class SharedCommendationSystem : EntitySystem
     public IReadOnlyList<RoundCommendationEntry> GetRoundCommendationEntries()
     {
         return RoundCommendations;
+    }
+
+    public void AddRoundCommendation(RoundCommendationEntry entry)
+    {
+        RoundCommendations.Add(entry);
     }
 }

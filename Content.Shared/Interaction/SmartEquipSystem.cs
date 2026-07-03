@@ -13,7 +13,10 @@ using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.Input.Binding;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Serialization;
+using Robust.Shared.Timing;
 
 namespace Content.Shared.Interaction;
 
@@ -33,12 +36,24 @@ public sealed class SmartEquipSystem : EntitySystem
     [Dependency] private readonly MotionDetectorSystem _motionDetectorSystem = default!;
     [Dependency] private readonly IntelDetectorSystem _intelDetectorSystem = default!;
 
+    // RMC14
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+
     /// <inheritdoc/>
     public override void Initialize()
     {
+        SubscribeAllEvent<SmartEquipEvent>(HandleSmartEquipEvent);
+
         CommandBinds.Builder
             .Bind(ContentKeyFunctions.SmartEquipBackpack, InputCmdHandler.FromDelegate(HandleSmartEquipBackpack, handle: false, outsidePrediction: false))
             .Bind(ContentKeyFunctions.SmartEquipBelt, InputCmdHandler.FromDelegate(HandleSmartEquipBelt, handle: false, outsidePrediction: false))
+            .Bind(ContentKeyFunctions.SmartEquipPocket1, InputCmdHandler.FromDelegate(HandleSmartEquipPocket1, handle: false, outsidePrediction: false))
+            .Bind(ContentKeyFunctions.SmartEquipPocket2, InputCmdHandler.FromDelegate(HandleSmartEquipPocket2, handle: false, outsidePrediction: false))
+            .Bind(ContentKeyFunctions.SmartEquipSuitStorage, InputCmdHandler.FromDelegate(HandleSmartEquipSuitStorage, handle: false, outsidePrediction: false))
+            .Bind(ContentKeyFunctions.SmartEquipUniform, InputCmdHandler.FromDelegate(HandleSmartEquipUniform, handle: false, outsidePrediction: false))
+            .Bind(ContentKeyFunctions.SmartEquipArmor, InputCmdHandler.FromDelegate(HandleSmartEquipArmor, handle: false, outsidePrediction: false))
+            .Bind(ContentKeyFunctions.SmartEquipHelmet, InputCmdHandler.FromDelegate(HandleSmartEquipHelmet, handle: false, outsidePrediction: false))
             .Register<SmartEquipSystem>();
     }
 
@@ -59,11 +74,59 @@ public sealed class SmartEquipSystem : EntitySystem
         HandleSmartEquip(session, "belt");
     }
 
+    private void HandleSmartEquipPocket1(ICommonSession? session)
+    {
+        HandleSmartEquip(session, "pocket1");
+    }
+
+    private void HandleSmartEquipPocket2(ICommonSession? session)
+    {
+        HandleSmartEquip(session, "pocket2");
+    }
+
+    private void HandleSmartEquipSuitStorage(ICommonSession? session)
+    {
+        HandleSmartEquip(session, "suitstorage");
+    }
+
+    private void HandleSmartEquipUniform(ICommonSession? session)
+    {
+        HandleSmartEquip(session, "jumpsuit");
+    }
+
+    private void HandleSmartEquipArmor(ICommonSession? session)
+    {
+        HandleSmartEquip(session, "outerClothing");
+    }
+
+    private void HandleSmartEquipHelmet(ICommonSession? session)
+    {
+        HandleSmartEquip(session, "head");
+    }
+
     private void HandleSmartEquip(ICommonSession? session, string equipmentSlot)
     {
-        if (session is not { } playerSession)
+        if (!_net.IsClient || !_timing.IsFirstTimePredicted)
             return;
 
+        var ev = new SmartEquipEvent(equipmentSlot);
+        RaisePredictiveEvent(ev);
+    }
+
+    [Serializable, NetSerializable]
+    private sealed class SmartEquipEvent(string equipmentSlot) : EntityEventArgs
+    {
+        public readonly string EquipmentSlot = equipmentSlot;
+    }
+
+    private void HandleSmartEquipEvent(SmartEquipEvent msg, EntitySessionEventArgs args)
+    {
+        if (args.SenderSession is not { } playerSession)
+            return;
+
+        // RMC14
+        var session = playerSession;
+        var equipmentSlot = msg.EquipmentSlot;
         if (playerSession.AttachedEntity is not { Valid: true } uid || !Exists(uid))
             return;
 
@@ -149,6 +212,13 @@ public sealed class SmartEquipSystem : EntitySystem
         // case 2 (storage item):
         if (TryComp<StorageComponent>(slotItem, out var storage))
         {
+            // RMC14
+            if (!_actionBlocker.CanInteract(uid, slotItem) ||
+                !_storage.CanInteract(uid, (slotItem, storage), silent: false))
+            {
+                return;
+            }
+
             switch (handItem)
             {
                 case null when storage.Container.ContainedEntities.Count == 0:

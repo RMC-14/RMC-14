@@ -6,6 +6,9 @@
   name: SMES
   description: A high-capacity superconducting magnetic energy storage (SMES) unit.
   components:
+    - type: GuideHelp
+      guides:
+      - RMCGuideRoleCombatTechnician
     - type: Sprite
       sprite: _RMC14/Structures/Power/smes.rsi
       layers:

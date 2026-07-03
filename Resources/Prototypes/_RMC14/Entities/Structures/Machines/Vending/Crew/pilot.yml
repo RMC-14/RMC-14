@@ -18,29 +18,51 @@
     - CMPilotDropship
     - CMPilotGunship
     sections:
+    # Pilots Section
     - name: Standard Equipment
+      jobs:
+      - CMPilotDropship
+      - CMPilotGunship
       takeAll: CMEquipment
       entries:
-      # - id: CMJumpsuitPilot TODO RMC14: split DCC and Pilot Officer equipment vendors
-      # - id: RMCJumpsuitPilotAlt
-      # - id: CMHandsInsulated
-      # - id: CMHandsBlackInsulated
+      - id: RMCJumpsuitPilotAlt
       - id: CMArmorHelmetM30
       - id: RMCHeadCapPatrol
-      - id: CMSatchel
       - id: CMMRE
+    # Dropship Crew Chief Section Start
+    - name: Standard Equipment
+      jobs:
+      - CMDropshipCrewChief
+      takeAll: CMEquipment
+      entries:
+      - id: CMArmorHelmetM30
+      - id: RMCHeadCapPatrol
+      - id: CMMRE
+    # Dropship Crew Chief Section End
     - name: Gloves
       choices: { CMHands: 1 }
       entries:
       - id: CMHandsInsulated
       - id: CMHandsBlackInsulated
+    # Pilots Section
     - name: Armour
+      jobs:
+      - CMPilotDropship
+      - CMPilotGunship
       choices: { CMArmour: 1 }
       entries:
-      # - id: RMCArmorVestFlak TODO RMC14: same as the one in line 24
+      - id: RMCArmorVestFlak
       - id: CMArmorM3VLFlakVest
-      # - id: RMCCoatPilot TODO RMC14: same as the one in line 24
-      - id: CMArmorM3VLBallistics
+      - id: RMCCoatPilot
+    # Dropship Crew Chief Section Start
+    - name: Armour
+      jobs:
+      - CMDropshipCrewChief
+      choices: { CMArmour: 1 }
+      entries:
+      - id: RMCArmorVestFlak
+      - id: CMArmorM3VLFlakVest
+    # Dropship Crew Chief Section End
     - name: Personal Sidearm
       choices: { CMSidearm: 1 }
       entries:
@@ -106,7 +128,7 @@
       entries:
       - id: RMCSunglasses
       - id: RMCGlassesMedicalHUDGlasses
-        recommended: true
+      - id: RMCGlassesAviatorsSilver
       - id: RMCGlassesAviators
     - name: Flight Visor
       choices: { CMFlightVisor: 1 }
@@ -140,6 +162,8 @@
       - id: RMCAttachmentU7UnderbarrelShotgun # This is called "Masterkey" in flight vend; not sure if accurate.
         points: 10
       - id: RMCAttachmentM13StockSolid
+        points: 10
+      - id: RMCAttachmentM13StockCollapsible
         points: 10
       - id: RMCAttachmentM42A2CollapsibleStock
         points: 10
@@ -211,6 +235,11 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
+    canManualRestock: true
+    ignoreBulkRestockById:
+    - RMCBoxShotgunBuckshot
+    - RMCBoxShotgunFlechette
+    - RMCBoxShotgunSlugs
     jobs:
     - CMDropshipCrewChief
     - CMPilotDropship
@@ -267,6 +296,8 @@
       - id: CMMagazinePistolMK80
         amount: 16
       - id: RMCMagazinePistolM13
+        amount: 10
+      - id: RMCMagazinePistolM13Ext
         amount: 10
     - name: Attachments
       entries:

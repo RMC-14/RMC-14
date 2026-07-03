@@ -8,7 +8,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Dropship.Utility.Components;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true)]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true, true)]
 public sealed partial class RMCEquipmentDeployerComponent : Component
 {
     /// <summary>
@@ -69,7 +69,7 @@ public sealed partial class RMCEquipmentDeployerComponent : Component
     ///     The minimum alert level required to activate the deployer.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public RMCAlertLevels AlertLevelRequired;
+    public RMCAlertLevels? AlertLevelRequired;
 
     /// <summary>
     ///     Blacklist for entities not allowed to use the deployer.

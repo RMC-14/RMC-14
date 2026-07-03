@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Numerics;
 using Content.Client.Weapons.Ranged.Systems;
+using Content.Shared._RMC14.Attachable.Systems;
 using Content.Shared._RMC14.Weapons.Ranged.Flamer;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared.Wieldable.Components;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
@@ -12,6 +14,7 @@ using Robust.Shared.IoC;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Maths;
+using Robust.Shared.Configuration;
 
 namespace Content.Client._RMC14.Weapons.Ranged.Flamer;
 
@@ -27,11 +30,13 @@ public sealed class RMCFlamerPreviewOverlay : Overlay
     private readonly IInputManager _input;
     private readonly IEyeManager _eye;
     private readonly IPlayerManager _player;
+    private readonly IConfigurationManager _config;
     private readonly GunSystem _guns;
     private readonly IMapManager _mapManager;
     private readonly SharedMapSystem _mapSystem;
     private readonly SharedTransformSystem _transform;
     private readonly SharedRMCFlamerSystem _flamer;
+    private readonly AttachableHolderSystem _attachableHolder;
     private readonly EntityQuery<RMCFlamerAmmoProviderComponent> _flamerQ;
     private readonly EntityQuery<WieldableComponent> _wieldableQ;
     private readonly EntityQuery<TransformComponent> _xformQ;
@@ -42,11 +47,13 @@ public sealed class RMCFlamerPreviewOverlay : Overlay
         _input = IoCManager.Resolve<IInputManager>();
         _eye = IoCManager.Resolve<IEyeManager>();
         _player = IoCManager.Resolve<IPlayerManager>();
+        _config = IoCManager.Resolve<IConfigurationManager>();
         _mapManager = IoCManager.Resolve<IMapManager>();
         _guns = ents.System<GunSystem>();
         _mapSystem = ents.System<SharedMapSystem>();
         _transform = ents.System<SharedTransformSystem>();
         _flamer = ents.System<SharedRMCFlamerSystem>();
+        _attachableHolder = ents.System<AttachableHolderSystem>();
         _flamerQ = ents.GetEntityQuery<RMCFlamerAmmoProviderComponent>();
         _wieldableQ = ents.GetEntityQuery<WieldableComponent>();
         _xformQ = ents.GetEntityQuery<TransformComponent>();
@@ -54,6 +61,9 @@ public sealed class RMCFlamerPreviewOverlay : Overlay
 
     protected override void Draw(in OverlayDrawArgs args)
     {
+        if (!_config.GetCVar(RMCCVars.RMCMarineEquipmentPreviews))
+            return;
+
         var player = _player.LocalEntity;
         if (player == null)
             return;
@@ -61,7 +71,19 @@ public sealed class RMCFlamerPreviewOverlay : Overlay
         if (!_guns.TryGetGun(player.Value, out var gunUid, out _))
             return;
 
-        if (!_wieldableQ.TryComp(gunUid, out var wieldable) || !wieldable.Wielded)
+        var wielded = false;
+        if (_wieldableQ.TryComp(gunUid, out var wieldable))
+        {
+            wielded = wieldable.Wielded;
+        }
+        else if (_attachableHolder.TryGetHolder(gunUid, out var holderUid) &&
+                 holderUid != null &&
+                 _wieldableQ.TryComp(holderUid.Value, out var holderWieldable))
+        {
+            wielded = holderWieldable.Wielded;
+        }
+
+        if (!wielded)
             return;
 
         if (!_flamerQ.TryComp(gunUid, out var flamer))

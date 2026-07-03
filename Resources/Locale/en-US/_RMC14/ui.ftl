@@ -3,6 +3,7 @@
 rmc-ui-options-cassettes-volume = Cassette volume:
 rmc-ui-options-hijack-song-volume = Hijack song volume:
 rmc-ui-options-xeno-ability-previews = Show xeno ability previews
+rmc-ui-options-marine-equipment-previews = Show marine equipment previews
 
 rmc-ui-voicelines = Voicelines
 rmc-ui-options-tab-voicelines = Voicelines
@@ -38,6 +39,7 @@ rmc-ui-audio-emotes-feroxi = Play emotes for feroxis
 rmc-ui-audio-emotes-skrell = Play emotes for skrells
 
 cm-ui-roadmap = Roadmap
+rmc-ui-roadmap-orbital-bombardment = Orbital bombardment
 
 rmc-ui-link-discord-account = Link Discord
 rmc-ui-link-discord-account-text = Click the button below to copy your code.
@@ -93,6 +95,11 @@ rmc-ui-auto-punctuate = Automatically punctuate in-character messages
 rmc-ui-auto-eject-magazines = Automatically eject magazines from guns
 rmc-ui-damage-yourself = Enable being able to hurt yourself with melee and guns
 rmc-ui-show-new-player-icons = Show new player icons as mentor or department head roles
+rmc-ui-xeno-night-vision-default = Xeno night vision default
+rmc-ui-xeno-night-vision-default-off = Off
+rmc-ui-xeno-night-vision-default-half = Half light
+rmc-ui-xeno-night-vision-default-full = Full
+rmc-night-vision-mode-verb = Set night vision: {$mode}
 
 rmc-area-info = {$area}{$restrictions}
 rmc-tacmap-alert-ceiling-level-0 = [color=green]✓[/color] All actions allowed
