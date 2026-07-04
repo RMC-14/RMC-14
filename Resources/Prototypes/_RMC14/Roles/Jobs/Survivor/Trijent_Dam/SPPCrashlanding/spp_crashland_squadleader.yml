@@ -27,6 +27,19 @@
         RMCSkillSpecialistWeapons: 1
         RMCSkillMedical: 2
         RMCSkillOverwatch: 1
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - English
+      - German
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - English
+      - German
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
     - type: MarineOrders
     - type: IntelRescueSurvivorObjective
     - type: AssignSquad
