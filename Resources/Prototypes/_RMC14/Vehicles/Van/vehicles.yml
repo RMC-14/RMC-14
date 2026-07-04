@@ -129,7 +129,6 @@
       visible: false
     - map: [ rmc-wheels ]
       state: wheels_1
-  - type: VehicleSound
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/van_interior.yml #TODO RMC14 add a dedicated CLF interior
     enterDoAfter: 1.0
@@ -146,6 +145,8 @@
     - offset: 0,2
       radius: 0.75
       interiorCoords: 0.25,-1
+
+## Box Vans
 
 - type: entity
   parent: VehicleVanBase
@@ -216,13 +217,14 @@
 - type: entity
   parent: VehicleBoxVanBase
   id: VehicleBoxVan
-  suffix: Vehicle, Unaffiliated
+  suffix: Drivable, Box Van, Base
 
 - type: entity
   parent: VehicleBoxVanBase
   id: VehiclePizzaVan
   name: pizza van
   description: A van repurposed for pizza delivery, still sturdy enough for transport.
+  suffix: Drivable, Box Van, Pizza
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/pizza_van.rsi
@@ -252,11 +254,14 @@
       radius: 0.75
       interiorCoords: -0.75,1.2
 
+## SPP Vans
+
 - type: entity
   parent: VehicleVanBase
   id: VehicleSPPVan
   name: SPP van
   description: A rugged transport van painted in SPP colors.
+  suffix: Drivable, Van, SPP, Transport
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/sppvan.rsi
@@ -298,6 +303,7 @@
   id: VehicleSPPVanArmed
   name: SPP van (armed)
   description: An SPP van fitted with a roof-mounted weapon.
+  suffix: Drivable, Van, SPP, Armed
   components:
   - type: Sprite
     layers:
@@ -356,6 +362,7 @@
   id: VehicleSPPVanMedical
   name: SPP van (medical)
   description: An SPP van marked for casualty evacuation and field treatment.
+  suffix: Drivable, Van, SPP, Medical
   components:
   - type: Sprite
     layers:
@@ -388,6 +395,7 @@
   id: VehicleSPPVanPrisoner
   name: SPP van (prisoner)
   description: An SPP van refitted for prisoner transport.
+  suffix: Drivable, Van, SPP, Prisoner
   components:
   - type: Sprite
     layers:
@@ -420,6 +428,7 @@
   id: VehicleSPPVanLogistics
   name: SPP van (logistics)
   description: An SPP logistics van fitted with an enlarged cargo body.
+  suffix: Drivable, Van, SPP, Logistics
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/sppvan_logistics.rsi
@@ -447,11 +456,3 @@
     - offset: -1.2,-0.3
       radius: 0.7
       interiorCoords: 2.5,-0.2
-  - type: HardpointSlots
-    vehicleFamily: HardpointVehicleFamilyVan
-    slots:
-    - id: wheel-1
-      hardpointType: HardpointTypeWheel
-      slotType: HardpointSlotTypeWheel
-      compatibilityId: HardpointCompatibilitySPPVan
-      insertDelay: 1.5
