@@ -87,7 +87,7 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
                 if (name == keep)
                     continue;
 
-                // RMC14 only remove comps the generation itself introduced
+                // only remove comps the generation itself introduced instead of everything
                 if (TryGetBaselineSynthComponentEntry(ent.Owner, name, out var baseEntry))
                 {
                     resetRegistry ??= new ComponentRegistry();
