@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.NightVision;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 
@@ -171,6 +172,13 @@ public sealed partial class VehicleRideSurfaceSystem
         rider.Comp.EdgeClimbDownAt = null;
         Dirty(rider);
         RemCompDeferred<VehicleRideSurfaceRiderComponent>(rider);
+
+        if (TryComp(rider.Owner, out RMCNightVisionVisibleComponent? nightVisionVisible) &&
+            nightVisionVisible.Priority == RiderNightVisionPriority)
+        {
+            nightVisionVisible.Priority = 0;
+            Dirty(rider.Owner, nightVisionVisible);
+        }
     }
 
     private void SetRiderLocalPosition(Entity<VehicleRideSurfaceRiderComponent> rider, System.Numerics.Vector2 local)

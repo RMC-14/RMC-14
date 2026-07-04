@@ -430,6 +430,7 @@
   description: An SPP van fitted with a roof-mounted weapon.
   components:
   - type: RMCNightVisionVisible
+    priority: -1
   - type: Sprite
     layers:
     - map: [ base ]

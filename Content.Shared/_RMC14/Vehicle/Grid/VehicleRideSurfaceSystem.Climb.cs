@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared._RMC14.NightVision;
 using Content.Shared.DoAfter;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Verbs;
@@ -188,6 +189,13 @@ public sealed partial class VehicleRideSurfaceSystem
         rider.EdgeClimbDownAt = null;
         Dirty(user, rider);
         TrackRider(vehicle, user);
+
+        if (TryComp(user, out RMCNightVisionVisibleComponent? nightVisionVisible) &&
+            nightVisionVisible.Priority != RiderNightVisionPriority)
+        {
+            nightVisionVisible.Priority = RiderNightVisionPriority;
+            Dirty(user, nightVisionVisible);
+        }
 
         var vehicleIdentity = Identity.Entity(vehicle, EntityManager);
         var selfMessage = Loc.GetString("rmc-vehicle-ride-climb-self", ("vehicle", vehicleIdentity));

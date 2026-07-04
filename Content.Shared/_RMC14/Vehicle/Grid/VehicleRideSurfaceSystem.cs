@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared._RMC14.NightVision;
 using Content.Shared.Buckle.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Mobs.Components;
@@ -26,6 +27,8 @@ public sealed partial class VehicleRideSurfaceSystem : EntitySystem
     private const float ClimbOntoSurfaceInset = 0.2f;
     private const float RiderLocalPositionEpsilon = 0.0001f;
     private const float RiderProjectileTargetRadius = 0.75f;
+
+    private const int RiderNightVisionPriority = 2;
 
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly INetManager _net = default!;

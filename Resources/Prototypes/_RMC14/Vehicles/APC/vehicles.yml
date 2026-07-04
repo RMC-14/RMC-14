@@ -14,6 +14,7 @@
   - type: RMCIgnoreGhostInteractionLimits
   - type: RequireProjectileTarget
   - type: RMCNightVisionVisible
+    priority: -1
   - type: GridVehicleMover
     maxSpeed: 5
     acceleration: 4
