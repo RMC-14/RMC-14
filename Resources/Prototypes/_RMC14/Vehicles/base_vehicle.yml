@@ -5,6 +5,7 @@
   description: An abstract vehicle. Make sure to replace this!
   components:
   - type: RMCNightVisionVisible
+    priority: -2
   - type: Vehicle
     movementKind: Grid
   - type: LagCompensation
