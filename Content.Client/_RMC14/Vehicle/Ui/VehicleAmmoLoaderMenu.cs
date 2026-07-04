@@ -119,23 +119,12 @@ public sealed partial class VehicleAmmoLoaderMenu : FancyWindow
                 HorizontalExpand = true
             };
 
-            var header = Loc.GetString(
-                "rmc-vehicle-ammo-loader-ui-slot",
-                ("slot", hardpoint.SlotPath.ToCompositeId()),
-                ("type", hardpoint.HardpointType));
-
-            var nameText = hardpoint.InstalledName ?? header;
+            var nameText = hardpoint.InstalledName ?? hardpoint.HardpointType;
 
             centerColumn.AddChild(new Label
             {
                 Text = nameText,
                 FontColorOverride = primaryText
-            });
-
-            centerColumn.AddChild(new Label
-            {
-                Text = header,
-                FontColorOverride = secondaryText
             });
 
             var ammoSlots = new BoxContainer
