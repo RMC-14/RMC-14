@@ -67,12 +67,12 @@
   components:
   - type: EntityPreset
     primaryWeapons:
-    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunM12 ]
-    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunM12 ]
-    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunM12 ]
-    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunM12 ]
-    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunM12 ]
-    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunM12 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
     - [ RMCPouchMagazineFilledM16, RMCWeaponRifleM16A5, RMCExplosiveBreachingCharge ]
     - [ RMCPouchMagazineFilledM16, RMCWeaponRifleM16A5, RMCExplosiveBreachingCharge ]
     - [ RMCPouchMagazineFilledMP5, RMCWeaponSMGMP5Alt, RMCMotionDetectorCompact ]
