@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/17/2026 18:12:26
+  time: 07/04/2026 10:18:42
   entityCount: 1542
 maps: []
 grids:
@@ -4785,14 +4785,14 @@ entities:
       parent: 1
 - proto: RMCVanWheel
   entities:
-  - uid: 64
+  - uid: 72
     components:
     - type: Transform
-      parent: 72
-    - type: Physics
-      canCollide: False
+      parent: 64
     - type: HardpointIntegrity
       integrity: 250
+    - type: Physics
+      canCollide: False
 - proto: RMCVendorCigsElectro
   entities:
   - uid: 479
@@ -10749,7 +10749,7 @@ entities:
     - type: Transform
       pos: 8.41104,15.6731825
       parent: 1
-- proto: RMCWeaponShotgunHG3712
+- proto: RMCWeaponShotgunM12
   entities:
   - uid: 513
     components:
@@ -10816,18 +10816,17 @@ entities:
       parent: 1
 - proto: VehicleCLFVan
   entities:
-  - uid: 72
+  - uid: 64
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 32,17
+      pos: 32.01944,16.921885
       parent: 1
     - type: ContainerContainer
       containers:
         wheel-1: !type:ContainerSlot
           showEnts: False
           occludes: True
-          ent: 64
+          ent: 72
     - type: VehicleLock
 - proto: WeaponRifleM16
   entities:
