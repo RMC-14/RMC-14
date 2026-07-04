@@ -299,7 +299,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
 
         // Loop through each nearby weed node, trying to find a valid one.
         HiveMemberQuery.TryComp(childEnt, out var weedHive);
-        foreach (var node in GetNearbyWeedNodes((gridUid, gridComp), coordinates))
+        foreach (var node in GetNearbyWeedNodes((gridUid, gridComp), coordinates, 4))
         {
             // Regular weed nodes can't support hive weeds or "hardy" weeds.
             if (childWeedsComp is { } weeds && weeds.Level > node.Comp.Level)
