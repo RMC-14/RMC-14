@@ -109,6 +109,8 @@
   id: VehicleVan
   suffix: Drivable, Van, Base
 
+## CLF
+
 - type: entity
   parent: VehicleVanBase
   id: VehicleCLFVan
