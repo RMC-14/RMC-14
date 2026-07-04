@@ -125,4 +125,4 @@
   id: RMCJobIconPMCGunner
   icon:
     sprite: _RMC14/Interface/job_icons/We-Ya/pmc.rsi
-    state: pmc_spec # RMC14 TODO: Custom Sprite
+    state: pmc_sg

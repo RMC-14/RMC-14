@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "pmc_commando_gun, pmc_ct, pmc_fol, pmc_gun, pmc_ld, we-ya sec from https://github.com/cmss13-devs/cmss13/blob/e453200c58c7fe247d5fa039da42c3b71c2a4b6e/icons/mob/hud/factions/wy.dmi, pmc md and td from previous path modified by UnicornOnLSD to be blue crosses. Spec taken from https://github.com/cmss13-devs/cmss13/blob/09583166e0082a417aef46dbb280675fa93a81e8/icons/mob/hud/marine_hud.dmi. pmc_tl added by noctyrnal (github).",
+  "copyright": "pmc_commando_gun, pmc_ct, pmc_fol, pmc_gun, pmc_ld, we-ya sec from https://github.com/cmss13-devs/cmss13/blob/e453200c58c7fe247d5fa039da42c3b71c2a4b6e/icons/mob/hud/factions/wy.dmi, pmc md and td from previous path modified by UnicornOnLSD to be blue crosses. Spec taken from https://github.com/cmss13-devs/cmss13/blob/09583166e0082a417aef46dbb280675fa93a81e8/icons/mob/hud/marine_hud.dmi. pmc_tl added by noctyrnal (github). pmc_sg from https://github.com/Blundir/cmss13/blob/c4bbf9f58ceea9b82d02e7d2bbe76c52209bdda8/icons/mob/hud/marine_hud.dmi",
   "size": {
     "x": 16,
     "y": 16
@@ -30,6 +30,9 @@
         },
         {
             "name": "pmc_spec"
+        },
+        {
+            "name": "pmc_sg"
         },
         {
             "name": "pmc_syn"
