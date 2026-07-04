@@ -14,4 +14,7 @@ public sealed partial class QueenEyeComponent : Component
 
     [DataField, AutoNetworkedField]
     public float SoftWeedDistance = 3f;
+
+    // Cache lives on comp for if ever multiple eyes. Do not set elsewhere.
+    public EntityUid? AnchorWeed;
 }
