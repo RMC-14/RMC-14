@@ -5,8 +5,7 @@
   description: Opens the ability shop.
   components:
   - type: Action
-    icon:
-      Interface/Actions/shop.png
+    icon: Interface/Actions/shop.png
   - type: InstantAction
     event: !type:RevenantShopActionEvent
 
@@ -18,8 +17,7 @@
   components:
   - type: Action
     useDelay: 15
-    icon:
-      Interface/Actions/defile.png
+    icon: Interface/Actions/defile.png
   - type: InstantAction
     event: !type:RevenantDefileActionEvent
 
@@ -30,8 +28,7 @@
   description: Costs 40 Essence.
   components:
   - type: Action
-    icon:
-      Interface/Actions/overloadlight.png
+    icon: Interface/Actions/overloadlight.png
     useDelay: 20
   - type: InstantAction
     event: !type:RevenantOverloadLightsActionEvent
@@ -55,8 +52,7 @@
   description: Costs 60 Essence.
   components:
   - type: Action
-    icon:
-      Interface/Actions/malfunction.png
+    icon: Interface/Actions/malfunction.png
     useDelay: 20
   - type: InstantAction
     event: !type:RevenantMalfunctionActionEvent
