@@ -78,6 +78,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
     private EntityQuery<AffectableByWeedsComponent> _affectedQuery;
     private EntityQuery<XenoWeedsComponent> _weedsQuery;
+    private EntityQuery<XenoWeedableComponent> _weedableQuery;
+    private EntityQuery<XenoWallWeedsComponent> _wallWeedsQuery;
     private EntityQuery<ResinSlowdownModifierComponent> _slowResinQuery;
     private EntityQuery<ResinSpeedupModifierComponent> _fastResinQuery;
     private EntityQuery<XenoComponent> _xenoQuery;
@@ -89,6 +91,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     {
         _affectedQuery = GetEntityQuery<AffectableByWeedsComponent>();
         _weedsQuery = GetEntityQuery<XenoWeedsComponent>();
+        _weedableQuery = GetEntityQuery<XenoWeedableComponent>();
+        _wallWeedsQuery = GetEntityQuery<XenoWallWeedsComponent>();
         _slowResinQuery = GetEntityQuery<ResinSlowdownModifierComponent>();
         _fastResinQuery = GetEntityQuery<ResinSpeedupModifierComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
@@ -190,14 +194,48 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             if (_weedsQuery.TryComp(spread, out var weeds))
             {
                 weeds.Source = null;
-
-                // Before despawning `spread`, check if there's a different source node in range which could take over as its parent.
-                if (TryAvoidOrphanage((spread, weeds)))
-                    continue;
-
                 Dirty(spread, weeds);
             }
 
+            // Before despawning `spread`, check if there's a different source node in range which could take over as its parent.
+            // `spread` can either be a regular weed tile, or an entity with `XenoWeedableComponent` which was in range of the node's weed spread.
+            //
+            // When they spawn, weed tiles will also check adjacent entities for `XenoWeedableComponent` and cover them up even if they aren't within range of the node itself.
+            // Those should be transferred over too since they're "attached" to the weed tile.
+            if (FindNewParentNode(spread, weeds) is { } newParent)
+            {
+                // The original source was destroyed, so stop spreading.
+                RemCompDeferred<XenoWeedsSpreadingComponent>(spread);
+
+                if (weeds != null)
+                {
+                    weeds.Source = newParent;
+                    Dirty(spread, weeds);
+
+                    // Transfer any wall weeds caused by this tile. These may be out of range of the original node if they were placed by an outer weed tile.
+                    foreach (var weededEnt in weeds.LocalWeeded)
+                    {
+                        if (_wallWeedsQuery.TryComp(weededEnt, out var localWallWeeds) && localWallWeeds.Weeds != newParent)
+                        {
+                            localWallWeeds.Weeds = newParent;
+                            Dirty(weededEnt, localWallWeeds);
+                        }
+                    }
+                }
+                if (_wallWeedsQuery.TryComp(spread, out var spreadWallWeeds)) // Wall weeds which are inside the range of the original source node.
+                {
+                    spreadWallWeeds.Weeds = newParent;
+                    Dirty(spread, spreadWallWeeds);
+                }
+
+                newParent.Comp.Spread.Add(spread);
+                Dirty(newParent, newParent.Comp);
+                continue;
+            }
+
+            // todo: maybe change the parent after a timer?
+            // that way you can stop weeds despawning by planting a new node before the old ones wither away
+            // (currently you can't stop it if it's already started)
             var timed = EnsureComp<TimedDespawnComponent>(spread);
             var offset = _random.Next(ent.Comp.MinRandomDelete, ent.Comp.MaxRandomDelete);
             timed.Lifetime = (float)offset.TotalSeconds;
@@ -207,43 +245,30 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         Dirty(ent);
     }
 
-    // todo: wall weeds, stop spread on reparent
-    private bool TryAvoidOrphanage(Entity<XenoWeedsComponent> weedTile)
+    private Entity<XenoWeedsComponent>? FindNewParentNode(EntityUid childEnt, XenoWeedsComponent? childWeedsComp)
     {
-        var coordinates = _transform.GetMoverCoordinates(weedTile).SnapToGrid(EntityManager, _map);
-        if (_transform.GetGrid(coordinates) is not { } gridUid || !TryComp<MapGridComponent>(gridUid, out var gridComp))
-            return false;
+        Entity<XenoWeedsComponent>? newParent = null;
 
-        var nodeList = GetNearbyWeedNodes((gridUid, gridComp), coordinates);
-        if (nodeList.Count < 1)
-            return false;
+        var coordinates = _transform.GetMoverCoordinates(childEnt).SnapToGrid(EntityManager, _map);
+        if (_transform.GetGrid(coordinates) is not { } gridUid || !TryComp<MapGridComponent>(gridUid, out var gridComp))
+            return newParent;
 
         // Loop through each nearby weed node, trying to find a valid one.
-        _hiveMemberQuery.TryComp(weedTile, out var weedHive);
-        Entity<XenoWeedsComponent>? validNode = null;
-        foreach (var node in nodeList)
+        _hiveMemberQuery.TryComp(childEnt, out var weedHive);
+        foreach (var node in GetNearbyWeedNodes((gridUid, gridComp), coordinates))
         {
             // Regular weed nodes can't support hive weeds or "hardy" weeds.
-            if (weedTile.Comp.Level > node.Comp.Level)
+            if (childWeedsComp is { } weeds && weeds.Level > node.Comp.Level)
                 continue;
 
             // If both weed entities are part of a hive, make sure they're in the same one.
             if (weedHive != null && _hiveMemberQuery.TryComp(node, out var nodeHive) && !_hive.IsMember((node, nodeHive), weedHive.Hive))
                 continue;
 
-            validNode = node;
+            newParent = node;
             break;
         }
-
-        if (validNode is not { } newParent)
-            return false;
-
-        weedTile.Comp.Source = newParent;
-        Dirty(weedTile, weedTile.Comp);
-
-        newParent.Comp.Spread.Add(weedTile);
-        Dirty(newParent, newParent.Comp);
-        return true;
+        return newParent;
     }
 
     private void OnWeedsRemove(Entity<XenoWeedsComponent> ent, ref ComponentRemove args)
