@@ -860,6 +860,7 @@
   id: JobRMCJobSynthetic
   points: 7
   groups:
+  - SynthGenRMC
   - SynthBackpackRMC
   - SynthHeadwearRMC
   - SynthGlassesRMC
