@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/17/2026 18:13:28
+  time: 07/04/2026 11:16:09
   entityCount: 1380
 maps: []
 grids:
@@ -9218,10 +9218,10 @@ entities:
     components:
     - type: Transform
       parent: 1379
-    - type: Physics
-      canCollide: False
     - type: HardpointIntegrity
       integrity: 250
+    - type: Physics
+      canCollide: False
 - proto: RMCWeaponMar50LMG
   entities:
   - uid: 825
@@ -9277,8 +9277,7 @@ entities:
   - uid: 1379
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 10,20.5
+      pos: 10.031859,20.486206
       parent: 1
     - type: ContainerContainer
       containers:
