@@ -19,4 +19,5 @@ public sealed class RepeatedMessage(
     public readonly ChatChannel Channel = channel;
     public readonly string? LanguageIcon = languageIcon;
     public int Count = 1;
+    internal LanguageIconTag.LanguageIconControl? IconControl;
 }

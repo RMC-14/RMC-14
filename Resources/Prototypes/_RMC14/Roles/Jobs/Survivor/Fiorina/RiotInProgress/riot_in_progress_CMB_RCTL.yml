@@ -13,6 +13,15 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      understoodLanguages:
+      - Japanese
+      - English
+      currentLanguage: English
+      defaultLanguage: English
     - type: Skills
       preset: RMCSkillPresetSurvivorRiotControlTeamLeader
     - type: RMCSurvivor
@@ -67,12 +76,12 @@
   components:
   - type: EntityPreset
     primaryWeapons:
-    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
-    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
-    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
-    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
-    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
-    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunM12 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunM12 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunM12 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunM12 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunM12 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunM12 ]
     - [ RMCPouchMagazineFilledM16, RMCWeaponRifleM16A5, RMCExplosiveBreachingCharge ]
     - [ RMCPouchMagazineFilledM16, RMCWeaponRifleM16A5, RMCExplosiveBreachingCharge ]
     - [ RMCPouchMagazineFilledMP5, RMCWeaponSMGMP5Alt, RMCMotionDetectorCompact ]
