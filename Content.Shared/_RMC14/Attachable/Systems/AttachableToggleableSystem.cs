@@ -718,7 +718,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
         _attachableHolderSystem.SetSupercedingAttachable(holder, attachable.Owner);
     }
 
-    private void Toggle(Entity<AttachableToggleableComponent> attachable, EntityUid? user, bool interrupted = false)
+    public void Toggle(Entity<AttachableToggleableComponent> attachable, EntityUid? user, bool interrupted = false)
     {
         // Prevent toggling if attachment is restricted to being attached only
         if (attachable.Comp.AttachedOnly && !attachable.Comp.Attached)
