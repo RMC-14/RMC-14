@@ -1,4 +1,5 @@
 using Content.Server.Light.EntitySystems;
+using Content.Shared._RMC14.Marines;
 using Content.Shared.Hands.Components;
 using Content.Shared.Light.Components;
 using Prometheus.DotNetRuntime.EventListening;
@@ -12,6 +13,9 @@ public sealed class RMCLightOutSystem : SharedRMCLightOutSystem
     protected override void TurnOffLights(EntityUid ent)
     {
         base.TurnOffLights(ent);
+
+        if (!HasComp<MarineComponent>(ent))
+            return;
 
         //Recheck flares only
 

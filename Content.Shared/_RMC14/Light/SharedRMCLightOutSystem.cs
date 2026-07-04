@@ -51,6 +51,9 @@ public abstract class SharedRMCLightOutSystem : EntitySystem
 
     protected virtual void TurnOffLights(EntityUid ent)
     {
+        if (!HasComp<MarineComponent>(ent))
+            return;
+
         var entsToCheck = new HashSet<EntityUid>();
 
         foreach (var held in _hands.EnumerateHeld(ent))
