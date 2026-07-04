@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Armor;
@@ -178,6 +179,9 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             return;
         }
 
+        if (_net.IsClient)
+            return;
+
         foreach (var spread in ent.Comp.Spread)
         {
             if (TerminatingOrDeleted(spread))
@@ -202,37 +206,33 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
         weeds.Source = null;
 
-        _hiveMemberQuery.TryComp(weedTile, out var weedHive);
-
-        // If `weedTile` is within the range of another node, set that as its new source.
-        var weedCoords = _transform.GetMapCoordinates(weedTile);
-        var query = EntityQueryEnumerator<XenoWeedNodeComponent, XenoWeedsComponent>();
-        while (query.MoveNext(out var node, out var _, out var nodeWeeds))
+        var coordinates = _transform.GetMoverCoordinates(weedTile).SnapToGrid(EntityManager, _map);
+        if (_transform.GetGrid(coordinates) is not { } gridUid || !TryComp<MapGridComponent>(gridUid, out var gridComp))
         {
-            // `node` is deleted, from a different hive, or isn't a high enough level to support `weedTile`.
-            if (TerminatingOrDeleted(node) ||
-                weedHive != null && _hiveMemberQuery.HasComp(node) && !_hive.IsMember(node, weedHive.Hive) ||
-                weeds.Level > nodeWeeds.Level)
-                continue;
-
-            var nodeCoords = _transform.GetMapCoordinates(node);
-            if (weedCoords.MapId != nodeCoords.MapId)
-                continue;
-
-            // Can't use `weedCoords.InRange()` here because that checks in a circle; weeds grow in a big square.
-            var diff = Vector2.Abs(weedCoords.Position - nodeCoords.Position);
-            if (diff.X < nodeWeeds.Range && diff.Y < nodeWeeds.Range)
-            {
-                weeds.Source = node;
-                nodeWeeds.Spread.Add(weedTile);
-                Dirty(weedTile, weeds);
-                Dirty(node, nodeWeeds);
-                return true;
-            }
+            Dirty(weedTile, weeds);
+            return false;
         }
 
+        // get the node
+        if (!TryFindNearbyWeedNode((gridUid, gridComp), coordinates, out var node))
+        {
+            Dirty(weedTile, weeds);
+            return false;
+        }
+
+        _hiveMemberQuery.TryComp(weedTile, out var weedHive);
+        if (weeds.Level > node.Value.Comp.Level ||
+            weedHive != null && _hiveMemberQuery.TryComp(node, out var nodeHive) && !_hive.IsMember((node.Value, nodeHive), weedHive.Hive))
+        {
+            Dirty(weedTile, weeds);
+            return false;
+        }
+
+        weeds.Source = node;
+        node.Value.Comp.Spread.Add(weedTile);
         Dirty(weedTile, weeds);
-        return false;
+        Dirty(node.Value, node.Value.Comp);
+        return true;
     }
 
     private void OnWeedsRemove(Entity<XenoWeedsComponent> ent, ref ComponentRemove args)
@@ -423,7 +423,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             _toUpdate.Add(ent);
     }
 
-    public bool HasWeedsNearby(Entity<MapGridComponent> grid, EntityCoordinates coordinates, int range = 5)
+    public bool TryFindNearbyWeedNode(Entity<MapGridComponent> grid, EntityCoordinates coordinates, [NotNullWhen(true)] out Entity<XenoWeedsComponent>? foundNode, int range = 5)
     {
         var position = _mapSystem.LocalToTile(grid, grid, coordinates);
         var checkArea = new Box2(position.X - range + 1, position.Y - range + 1, position.X + range, position.Y + range);
@@ -431,10 +431,14 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
         foreach (var anchored in enumerable)
         {
-            if (TryComp<XenoWeedsComponent>(anchored, out var weeds) && weeds.IsSource)
+            if (!TerminatingOrDeleted(anchored) && TryComp<XenoWeedsComponent>(anchored, out var weeds) && weeds.IsSource)
+            {
+                foundNode = (anchored, weeds);
                 return true;
+            }
         }
 
+        foundNode = default;
         return false;
     }
 
@@ -626,7 +630,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             }
         }
 
-        if (limitDistance && !HasWeedsNearby(grid, coordinates))
+        if (limitDistance && !TryFindNearbyWeedNode(grid, coordinates, out _))
         {
             _popup.PopupClient("We can only plant weed nodes near other weed nodes our hive owns!",
                 popupAt ?? xeno.ToCoordinates(),
