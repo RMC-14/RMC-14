@@ -1,4 +1,0 @@
-author: DrSmugleaf
-changes:
-  - type: Fix
-    message: Fix a few sources of server lag that amounted to 10% of the server's performance.
