@@ -12,3 +12,5 @@
     - state: humveeturret
       visible: false
   - type: VehicleTurretVisual
+  - type: RMCNightVisionVisible
+    priority: 1

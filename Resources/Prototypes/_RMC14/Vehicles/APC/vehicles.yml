@@ -13,6 +13,7 @@
     location: APC
   - type: RMCIgnoreGhostInteractionLimits
   - type: RequireProjectileTarget
+  - type: RMCNightVisionVisible
   - type: GridVehicleMover
     maxSpeed: 5
     acceleration: 4

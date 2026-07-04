@@ -7,6 +7,7 @@
     sprite: _RMC14/Structures/Vehicles/hardpoints/tank.rsi
   - type: Item
     size: Large
+  - type: RMCNightVisionVisible
 
 - type: entity
   parent: VehicleTankHardpointBase

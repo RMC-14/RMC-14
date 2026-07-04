@@ -429,6 +429,7 @@
   name: SPP van (armed)
   description: An SPP van fitted with a roof-mounted weapon.
   components:
+  - type: RMCNightVisionVisible
   - type: Sprite
     layers:
     - map: [ base ]

@@ -13,6 +13,7 @@
     location: Tank
   - type: RMCIgnoreGhostInteractionLimits
   - type: RequireProjectileTarget
+  - type: RMCNightVisionVisible
   - type: GridVehicleMover
     maxSpeed: 3
     acceleration: 1.154
