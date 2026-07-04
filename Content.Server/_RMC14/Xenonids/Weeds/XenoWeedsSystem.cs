@@ -10,6 +10,7 @@ using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Atmos;
 using Content.Shared.Coordinates;
+using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
@@ -44,6 +45,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
     private EntityQuery<AirtightComponent> _airtightQuery;
     private EntityQuery<AllowWeedSpreadComponent> _allowWeedSpreadQuery;
     private EntityQuery<MapGridComponent> _mapGridQuery;
+    private EntityQuery<XenoWallWeedsComponent> _wallWeedsQuery;
     private EntityQuery<XenoNestSurfaceComponent> _xenoNestSurfaceQuery;
     private EntityQuery<XenoWeedableComponent> _xenoWeedableQuery;
     private EntityQuery<XenoWeedsComponent> _xenoWeedsQuery;
@@ -57,6 +59,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
         _airtightQuery = GetEntityQuery<AirtightComponent>();
         _allowWeedSpreadQuery = GetEntityQuery<AllowWeedSpreadComponent>();
         _mapGridQuery = GetEntityQuery<MapGridComponent>();
+        _wallWeedsQuery = GetEntityQuery<XenoWallWeedsComponent>();
         _xenoNestSurfaceQuery = GetEntityQuery<XenoNestSurfaceComponent>();
         _xenoWeedableQuery = GetEntityQuery<XenoWeedableComponent>();
         _xenoWeedsQuery = GetEntityQuery<XenoWeedsComponent>();
@@ -208,7 +211,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
 
                         weedable.Entity = SpawnAtPosition(weedable.Spawn, anchoredId.ToCoordinates());
                         var wallWeeds = EnsureComp<XenoWallWeedsComponent>(weedable.Entity.Value);
-                        wallWeeds.Weeds = source;
+                        wallWeeds.Weeds = neighborWeeds;
                         Dirty(weedable.Entity.Value, wallWeeds);
 
                         if (_xenoNestSurfaceQuery.TryComp(weedable.Entity, out var surface))
@@ -220,6 +223,18 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                         sourceWeeds?.Spread.Add(weedable.Entity.Value);
                     }
                 }
+            }
+        }
+
+        var decayingQuery = EntityQueryEnumerator<XenoWeedsDecayingComponent>();
+        while (decayingQuery.MoveNext(out var uid, out var comp))
+        {
+            comp.Lifetime -= frameTime;
+
+            // Before despawning the weed entity, check to see if there's a different node in range which could take over as its parent.
+            if (comp.Lifetime <= 0 && !TryAvoidOrphanage(uid))
+            {
+                QueueDel(uid);
             }
         }
 
@@ -235,5 +250,56 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
             RemCompDeferred<XenoWeedsSpreadingComponent>(uid);
             _spread.Add((uid, weeds));
         }
+    }
+
+    private bool TryAvoidOrphanage(EntityUid weedEnt)
+    {
+        WeedsQuery.TryComp(weedEnt, out var weedsComp);
+        if (FindNewParentNode(weedEnt, weedsComp) is not { } newParent)
+            return false;
+
+        RemComp<XenoWeedsDecayingComponent>(weedEnt);
+
+        if (weedsComp != null)
+        {
+            weedsComp.Source = newParent;
+            Dirty(weedEnt, weedsComp);
+        }
+        // Wall weeds which are inside the range of the original source node.
+        if (_wallWeedsQuery.TryComp(weedEnt, out var spreadWallWeeds))
+        {
+            spreadWallWeeds.Weeds = newParent;
+            Dirty(weedEnt, spreadWallWeeds);
+        }
+
+        newParent.Comp.Spread.Add(weedEnt);
+        Dirty(newParent, newParent.Comp);
+        return true;
+    }
+
+    private Entity<XenoWeedsComponent>? FindNewParentNode(EntityUid childEnt, XenoWeedsComponent? childWeedsComp)
+    {
+        Entity<XenoWeedsComponent>? newParent = null;
+
+        var coordinates = _transform.GetMoverCoordinates(childEnt).SnapToGrid(EntityManager, Map);
+        if (_transform.GetGrid(coordinates) is not { } gridUid || !TryComp<MapGridComponent>(gridUid, out var gridComp))
+            return newParent;
+
+        // Loop through each nearby weed node, trying to find a valid one.
+        HiveMemberQuery.TryComp(childEnt, out var weedHive);
+        foreach (var node in GetNearbyWeedNodes((gridUid, gridComp), coordinates))
+        {
+            // Regular weed nodes can't support hive weeds or "hardy" weeds.
+            if (childWeedsComp is { } weeds && weeds.Level > node.Comp.Level)
+                continue;
+
+            // If both weed entities are part of a hive, make sure they're in the same one.
+            if (weedHive != null && HiveMemberQuery.TryComp(node, out var nodeHive) && !_hive.IsMember((node, nodeHive), weedHive.Hive))
+                continue;
+
+            newParent = node;
+            break;
+        }
+        return newParent;
     }
 }
