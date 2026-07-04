@@ -169,6 +169,12 @@
     - offset: -1.5,0
       radius: 0.7
       interiorCoords: 1.55,-1.2
+
+- type: entity
+  parent: VehicleAPC
+  id: VehicleAPCTracked
+  suffix: Drivable, APC, Base, Tracked
+  components:
   - type: MarineMapTracked
   - type: TacticalMapTracked
   - type: TacticalMapIcon
@@ -177,11 +183,11 @@
       state: apc
 
 - type: entity
-  parent: VehicleAPCBase
+  parent: VehicleAPCTracked
   id: VehicleAPCMed
   name: armored personnel carrier (medical)
   description: A medical-configured APC outfitted with triage markings.
-  suffix: Drivable, APC, Base, Medical
+  suffix: Drivable, APC, Base, Medical, Tracked
   components:
   - type: Sprite
     layers:
@@ -231,19 +237,13 @@
     - offset: 0,2
       radius: 0.85
       interiorCoords: 0.25,-1
-  - type: MarineMapTracked
-  - type: TacticalMapTracked
-  - type: TacticalMapIcon
-    icon:
-      sprite: /Textures/_RMC14/Interface/map_blips_large.rsi
-      state: apc
 
 - type: entity
-  parent: VehicleAPCBase
+  parent: VehicleAPCTracked
   id: VehicleAPCCommand
   name: armored personnel carrier (command)
   description: A command-configured APC bristling with sensors and comms gear.
-  suffix: Drivable, APC, Base, Command
+  suffix: Drivable, APC, Base, Command, Tracked
   components:
   - type: Sprite
     layers:
@@ -294,12 +294,8 @@
     - offset: 0,2
       radius: 0.85
       interiorCoords: 0.25,-1
-  - type: MarineMapTracked
-  - type: TacticalMapTracked
-  - type: TacticalMapIcon
-    icon:
-      sprite: /Textures/_RMC14/Interface/map_blips_large.rsi
-      state: apc
+
+## SPP
 
 - type: entity
   parent: VehicleAPCBase
