@@ -76,8 +76,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     private readonly HashSet<EntityUid> _toUpdate = new();
     private readonly HashSet<EntityUid> _intersecting = new();
 
-    protected EntityQuery<XenoWeedsComponent> WeedsQuery;
     protected EntityQuery<HiveMemberComponent> HiveMemberQuery;
+    protected EntityQuery<XenoWeedsComponent> WeedsQuery;
     private EntityQuery<AffectableByWeedsComponent> _affectedQuery;
     private EntityQuery<ResinSlowdownModifierComponent> _slowResinQuery;
     private EntityQuery<ResinSpeedupModifierComponent> _fastResinQuery;
@@ -87,13 +87,13 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
     public override void Initialize()
     {
-        _affectedQuery = GetEntityQuery<AffectableByWeedsComponent>();
+        HiveMemberQuery = GetEntityQuery<HiveMemberComponent>();
         WeedsQuery = GetEntityQuery<XenoWeedsComponent>();
+        _affectedQuery = GetEntityQuery<AffectableByWeedsComponent>();
         _slowResinQuery = GetEntityQuery<ResinSlowdownModifierComponent>();
         _fastResinQuery = GetEntityQuery<ResinSpeedupModifierComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
         _blockWeedsQuery = GetEntityQuery<BlockWeedsComponent>();
-        HiveMemberQuery = GetEntityQuery<HiveMemberComponent>();
 
         SubscribeLocalEvent<XenoWeedsComponent, AnchorStateChangedEvent>(OnWeedsAnchorChanged);
         SubscribeLocalEvent<XenoWeedsComponent, ComponentShutdown>(OnModifierShutdown);
@@ -182,6 +182,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        // If this was a source node with "child" weeds, set them all to decay.
         foreach (var spread in ent.Comp.Spread)
         {
             if (TerminatingOrDeleted(spread))

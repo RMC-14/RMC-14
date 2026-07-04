@@ -211,7 +211,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
 
                         weedable.Entity = SpawnAtPosition(weedable.Spawn, anchoredId.ToCoordinates());
                         var wallWeeds = EnsureComp<XenoWallWeedsComponent>(weedable.Entity.Value);
-                        wallWeeds.Weeds = neighborWeeds;
+                        wallWeeds.Weeds = source;
                         Dirty(weedable.Entity.Value, wallWeeds);
 
                         if (_xenoNestSurfaceQuery.TryComp(weedable.Entity, out var surface))
@@ -255,21 +255,33 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
     private bool TryAvoidOrphanage(EntityUid weedEnt)
     {
         WeedsQuery.TryComp(weedEnt, out var weedsComp);
+
         if (FindNewParentNode(weedEnt, weedsComp) is not { } newParent)
             return false;
+        // Found a new parent! (yippee)
 
         RemComp<XenoWeedsDecayingComponent>(weedEnt);
 
         if (weedsComp != null)
         {
             weedsComp.Source = newParent;
+
+            // Also preserve anything which was weeded due to being adjacent to this entity. (Weeded walls, comms tower, etc.)
+            // These may be out of range of the original node if they were placed by an outer weed tile, so they need to be handled separately.
+            foreach (var adjacentEnt in weedsComp.LocalWeeded)
+            {
+                if (!_xenoWeedableQuery.TryComp(adjacentEnt, out var weedable) || weedable.Entity is not { } weedableSpawnedEnt)
+                    continue;
+
+                RemComp<XenoWeedsDecayingComponent>(weedableSpawnedEnt);
+                if (_wallWeedsQuery.TryComp(weedableSpawnedEnt, out var wallWeeds))
+                {
+                    wallWeeds.Weeds = newParent;
+                    Dirty(weedableSpawnedEnt, wallWeeds);
+                    newParent.Comp.Spread.Add(weedableSpawnedEnt);
+                }
+            }
             Dirty(weedEnt, weedsComp);
-        }
-        // Wall weeds which are inside the range of the original source node.
-        if (_wallWeedsQuery.TryComp(weedEnt, out var spreadWallWeeds))
-        {
-            spreadWallWeeds.Weeds = newParent;
-            Dirty(weedEnt, spreadWallWeeds);
         }
 
         newParent.Comp.Spread.Add(weedEnt);
