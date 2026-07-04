@@ -151,7 +151,7 @@
 - type: entity
   parent: VehicleHumveeBase
   id: VehicleHumvee
-  suffix: Drivable, Humvee, Base
+  suffix: Drivable, Humvee, Base, Tracked
   components:
   - type: ItemSlots
     slots:
@@ -166,7 +166,7 @@
   id: VehicleHumveeMedical
   name: humvee (medical)
   description: A medical-configured humvee outfitted for field triage.
-  suffix: Drivable, Humvee, Base, Medical
+  suffix: Drivable, Humvee, Base, Medical, Tracked
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/humvee_medical.rsi
@@ -228,7 +228,7 @@
   id: VehicleHumveeTransport
   name: humvee (transport)
   description: A transport humvee configured for passenger movement.
-  suffix: Drivable, Humvee, Base, Transport (More passengers)
+  suffix: Drivable, Humvee, Base, Transport, Tracked
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/humvee_transport.rsi
@@ -290,7 +290,7 @@
   id: VehicleHumveeARC
   name: humvee (arc)
   description: A humvee configured for ARC interior layout.
-  suffix: Drivable, Humvee, Base, ARC
+  suffix: Drivable, Humvee, Base, ARC, Tracked
   components:
   - type: ItemSlots
     slots:
@@ -340,4 +340,3 @@
     - offset: 1,-0.1
       radius: 0.5
       interiorCoords: 3.56, -0.42
-
