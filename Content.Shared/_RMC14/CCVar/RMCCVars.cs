@@ -601,4 +601,10 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<bool> RMCLightningMaxAmountLightNearbyEnabled =
         CVarDef.Create("rmc.lighting_max_amount_light_nearby_enabled", true, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCWeedSpreadMaxProcessTimeMilliseconds =
+        CVarDef.Create("rmc.weed_spread_max_process_time_milliseconds", 1f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCDoAfterCancelMaxProcessTimeMilliseconds =
+        CVarDef.Create("rmc.do_after_cancel_max_process_time_milliseconds", 1f, CVar.REPLICATED | CVar.SERVER);
 }

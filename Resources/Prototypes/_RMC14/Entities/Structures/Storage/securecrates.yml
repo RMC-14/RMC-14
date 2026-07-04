@@ -104,7 +104,7 @@
     - RMCWeaponPistolHandcannon: RMCMagazinePistolHandcannon
     - RMCWeaponRevolver38Magnum: RMCSpeedLoader38
     - WeaponShotgunCustomBuilt: CMShellShotgunBuckshot
-    - RMCWeaponShotgunHG3712: CMShellShotgunBuckshot
+    - RMCWeaponShotgunM12: CMShellShotgunBuckshot
     - RMCWeaponSMGMP27: RMCMagazineSMGMP27
     - RMCWeaponSMGType64: RMCMagazineSMGType64
     - WeaponSMGMAC15: RMCMagazineSMGMAC15
