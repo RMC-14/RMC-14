@@ -8,6 +8,9 @@
     movementKind: Grid
   - type: LagCompensation
   - type: Clickable
+  - type: WarpPoint
+    follow: true
+    location: Humvee
   - type: RMCIgnoreGhostInteractionLimits
   - type: RequireProjectileTarget
   - type: GridVehicleMover
@@ -336,7 +339,6 @@
   - type: ItemSlots
     slots:
       turret:
-        startingItem: VehicleHumveeARCTurret
         whitelist:
           components:
           - HardpointItem
@@ -349,7 +351,7 @@
   - type: VehicleDeployable
     deployTime: 5
     undeployTime: 5
-    autoTargetRange: 10
+    autoTargetRange: 7
     autoTargetCooldown: 0.2
     autoTurretEnabled: true
   - type: VehicleSensor
