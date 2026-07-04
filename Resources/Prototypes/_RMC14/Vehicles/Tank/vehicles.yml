@@ -174,6 +174,7 @@
   id: VehicleTankTest
   name: test tank (autodrive)
   description: A test tank that automatically drives east on spawn.
+  suffix: Debug
   components:
   - type: RMCVehicleAutopilot
     direction: 1,0
@@ -181,7 +182,7 @@
 - type: entity
   parent: VehicleTankBase
   id: VehicleTank
-  suffix: Drivable, Tank, Base
+  suffix: Drivable, Tank, Base, Tracked
   components:
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/tank_interior.yml
@@ -203,6 +204,8 @@
     icon:
       sprite: /Textures/_RMC14/Interface/map_blips_large.rsi
       state: tank
+
+## SPP
 
 - type: entity
   parent: VehicleTankBase
