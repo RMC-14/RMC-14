@@ -294,6 +294,28 @@
     - SquadLeader
     - FORECONCommandingOfficer
 
+- type: entity
+  parent: RMCHeadsetForecon
+  id: RMCHeadsetForeconSL
+  name: UNMC SOF squad leader headset
+  suffix: Survivor, Recon SL
+  components:
+  - type: RMCHeadset
+    channels:
+    - MarineSOF
+    radioTextIncrease: 2
+
+- type: entity
+  parent: RMCHeadsetForecon
+  id: RMCHeadsetForeconCommander
+  name: UNMC SOF commander headset
+  suffix: Survivor, Recon Commander
+  components:
+  - type: RMCHeadset
+    channels:
+    - MarineSOF
+    radioTextIncrease: 3
+
 # Paramarine Hybrisa survivor insert
 - type: entity
   parent: RMCHeadsetIconsPara
