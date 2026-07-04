@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/17/2026 06:55:58
+  time: 07/04/2026 11:01:19
   entityCount: 357
 maps: []
 grids:
@@ -2298,8 +2298,7 @@ entities:
   - uid: 357
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 4,11.5
+      pos: 4.004206,11.3985815
       parent: 1
 - proto: WeaponSMGMP5
   entities:
