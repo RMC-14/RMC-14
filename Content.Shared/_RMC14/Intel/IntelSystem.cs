@@ -871,9 +871,17 @@ public sealed class IntelSystem : EntitySystem
     {
         if (_area.TryGetArea(ent, out var area, out _))
         {
-            ent.Comp.InitialArea = Name(area.Value);
+            ent.Comp.InitialArea = SanitizeAreaName(Name(area.Value));
             Dirty(ent);
         }
+    }
+
+    private static string SanitizeAreaName(string areaName)
+    {
+        var separatorIndex = areaName.IndexOf(" - ", System.StringComparison.Ordinal);
+        return separatorIndex == -1
+            ? areaName
+            : areaName[(separatorIndex + 3)..];
     }
 
     private void OnDataDiskMapInit(Entity<IntelDataDiskComponent> ent, ref MapInitEvent args)
