@@ -2,10 +2,6 @@ rmc-species-name-synth = Synthetic
 
 rmc-species-synth-programming-prevents-use = Your programming prevents you from using {THE($tool)}!
 
-rmc-species-synth-generation-first = First Generation
-rmc-species-synth-generation-second = Second Generation
-rmc-species-synth-generation-third = Third Generation
-
 rmc-species-synth-defib-attempt = You can't defibrilate {$target}. You need a synthetic reset key for reboot!
 rmc-species-synth-reset-key-invalid = You can't use the reset key on them, they aren't a synth!
 

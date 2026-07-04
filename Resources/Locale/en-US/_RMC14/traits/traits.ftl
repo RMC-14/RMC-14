@@ -7,7 +7,7 @@ rmc-trait-french-accent-name = French accent
 rmc-trait-french-accent-desc = You come from space France
 
 rmc-trait-mobster-accent-name = Mobster accent
-rmc-trait-mobster-accent-desc = ey gabagool fugeddaboutit I'm walkin here 
+rmc-trait-mobster-accent-desc = ey gabagool fugeddaboutit I'm walkin here
 
 rmc-trait-spanish-accent-name = Spanish accent
 rmc-trait-spanish-accent-desc = You come from space Spain
@@ -32,6 +32,9 @@ rmc-trait-russian-language-desc = You can speak and understand Russian.
 
 rmc-trait-german-language-name = German language
 rmc-trait-german-language-desc = You can speak and understand German.
+
+rmc-trait-scandinavian-language-name = Scandinavian language
+rmc-trait-scandinavian-language-desc = You can speak and understand Scandinavian.
 
 rmc-trait-group-languages = Languages
 rmc-trait-group-other-speech = Other speech traits
