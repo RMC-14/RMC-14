@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Humanoid;
@@ -79,18 +80,48 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
         if (ent.Comp.Generation is { } current && _prototype.TryIndex(current, out var proto))
         {
             var keep = _compFactory.GetComponentName(typeof(SynthGenerationComponent));
+            ComponentRegistry? resetRegistry = null;
+
             foreach (var (name, _) in proto.Components)
             {
                 if (name == keep)
                     continue;
 
+                // RMC14 only remove comps the generation itself introduced
+                if (TryGetBaselineSynthComponentEntry(ent.Owner, name, out var baseEntry))
+                {
+                    resetRegistry ??= new ComponentRegistry();
+                    resetRegistry[name] = baseEntry;
+                    continue;
+                }
+
                 EntityManager.RemoveComponent(ent.Owner, _compFactory.GetRegistration(name).Type);
             }
+
+            if (resetRegistry != null)
+                EntityManager.AddComponents(ent.Owner, resetRegistry);
         }
 
         ent.Comp.Generation = null;
         Dirty(ent);
         _actions.AddAction(ent.Owner, ref ent.Comp.SelectGenerationActionEntity, ent.Comp.GenerationAction);
+    }
+
+    private bool TryGetBaselineSynthComponentEntry(
+        EntityUid uid,
+        string componentName,
+        [NotNullWhen(true)] out EntityPrototype.ComponentRegistryEntry? entry)
+    {
+        if (Prototype(uid) is { } baseProto && baseProto.Components.TryGetValue(componentName, out entry))
+            return true;
+
+        if (TryComp<SynthComponent>(uid, out var synth) &&
+            _prototype.TryIndex(synth.AddComponents, out var addComponents) &&
+            addComponents.Components.TryGetValue(componentName, out entry))
+            return true;
+
+        entry = null;
+        return false;
     }
 
     private void OnGenerationSelectAction(Entity<SynthGenerationComponent> ent, ref GenerationSelectActionEvent args)
