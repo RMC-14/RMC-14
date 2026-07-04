@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: TadJohnson00
-  changes:
-  - message: '[PVE] Added the M5A2 SHEL, a HE variant of the M5A1 SLAW.'
-    type: Add
-  id: 2993
-  time: '2026-03-03T02:12:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9025
 - author: PursuitInAshes
   changes:
   - message: '[PVE] Royal Crown Marine Riflemen no longer have the pilot skill.'
@@ -4640,5 +4633,13 @@
   id: 3492
   time: '2026-07-03T23:00:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10363
+- author: DrSmugleaf
+  changes:
+  - message: Fix a few sources of server lag that amounted to 10% of the server's
+      performance.
+    type: Fix
+  id: 3493
+  time: '2026-07-04T04:17:01.956603+00:00'
+  url: null
 Name: RMC14
 Order: -1
