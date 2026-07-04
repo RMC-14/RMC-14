@@ -11,7 +11,7 @@
   icon: RMCJobIconPMCLeader
   greeting: rmc-job-greeting-solaris-pmc-leader
   playTimeTracker: RMCJobSurvivorMilitary
-  spawnMenuRoleName: Survivor — PMC Leader (Solaris Ridge special survivor)
+  spawnMenuRoleName: PMC Leader (Solaris Special Survivor)
   special:
   - !type:AddComponentSpecial
     components:

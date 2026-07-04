@@ -7,7 +7,7 @@
   startingGear: RMCGearParaAssaultEngineer
   icon: RMCJobIconParaAssaultEngineer
   playTimeTracker: RMCJobSurvivorMilitary
-  spawnMenuRoleName: Royal Paramarine Assault Engineer (Survivor)
+  spawnMenuRoleName: Royal Paramarine Assault Engineer (Hybrisa Special Survivor)
   special:
     - !type:AddComponentSpecial
       components:

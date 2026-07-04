@@ -6,7 +6,7 @@
   ranks:
     RMCRankSPPStarshiySerzhant: []
   icon: "RMCJobIconSPPLeader"
-  spawnMenuRoleName: SPP SOF Squad Leader (Survivor)
+  spawnMenuRoleName: SPP SOF Squad Leader (Sorokyne Special Survivor)
   special:
   - !type:AddComponentSpecial
     components:
