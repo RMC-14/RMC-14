@@ -319,16 +319,16 @@ public sealed class QueenEyeSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
+        if (_timing.ApplyingState || _isRevertingMove)
+        {
+            _movedQueenEyes.Clear();
+            return;
+        }
+
         foreach (var (ent, oldCoords, newCoords) in _movedQueenEyes)
         {
-            if (_timing.ApplyingState)
-                return;
-
-            if (_isRevertingMove)
-                return;
-
             if (TerminatingOrDeleted(ent))
-                return;
+                continue;
 
             _nearbyWeeds.Clear();
             _entityLookup.GetEntitiesInRange(newCoords, ent.Comp.SoftWeedDistance, _nearbyWeeds);
@@ -382,6 +382,7 @@ public sealed class QueenEyeSystem : EntitySystem
                 _isRevertingMove = false;
             }
         }
+        _movedQueenEyes.Clear();
     }
 
     /// <summary>
