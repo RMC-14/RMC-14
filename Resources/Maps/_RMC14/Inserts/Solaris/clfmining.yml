@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/17/2026 06:54:55
+  time: 07/04/2026 11:08:07
   entityCount: 682
 maps: []
 grids:
@@ -3836,7 +3836,7 @@ entities:
   - uid: 682
     components:
     - type: Transform
-      pos: 2.5,12.5
+      pos: 4.5,16.5
       parent: 1
     - type: HardpointIntegrity
       integrity: 250
