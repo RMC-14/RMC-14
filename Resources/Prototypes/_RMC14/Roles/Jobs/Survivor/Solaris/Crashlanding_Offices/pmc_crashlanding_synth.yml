@@ -87,6 +87,7 @@
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointPMCSynth
   name: pmc support synthetic spawn point
+  suffix: special survivor, solaris crashlanding
   components:
   - type: SpawnPoint
     job_id: RMCSurvivorPMCSupportSynthetic

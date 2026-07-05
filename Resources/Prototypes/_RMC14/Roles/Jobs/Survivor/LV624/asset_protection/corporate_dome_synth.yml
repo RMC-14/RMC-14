@@ -79,7 +79,8 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointSurvivorLV624CorporateDomeSynth
-  name: special survivor lv624 weya goon synthetic spawn point
+  name: weya goon synthetic spawn point
+  suffix: special survivor, lv624
   components:
   - type: SpawnPoint
     job_id: CMSurvivorLV624CorporateDomeGoonSynth
