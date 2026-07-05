@@ -221,7 +221,7 @@ public sealed class CMArmorSystem : EntitySystem
         var examineMarkup = GetArmorExamine(component);
 
         _examine.AddDetailedExamineVerb(args, component, examineMarkup,
-            Loc.GetString("armor-examinable-verb-text"), "/Textures/Interface/Actions/actions_fakemindshield.rsi/icon-on.png",
+            Loc.GetString("armor-examinable-verb-text"), "/Textures/_RMC14/Interface/VerbIcons/armor-examine.png",
             Loc.GetString("armor-examinable-verb-message"));
     }
 

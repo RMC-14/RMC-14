@@ -67,7 +67,7 @@ public sealed class RMCStethoscopeSystem : EntitySystem
             Comp<RMCStethoscopeComponent>(stethoscope),
             examineMarkup,
             Loc.GetString("rmc-stethoscope-verb-text"),
-            "/Textures/_RMC14/Objects/Medical/stethoscope.rsi/icon.png",
+            "/Textures/_RMC14/Interface/VerbIcons/Stethoscope.png",
             Loc.GetString("rmc-stethoscope-verb-message"));
     }
 
