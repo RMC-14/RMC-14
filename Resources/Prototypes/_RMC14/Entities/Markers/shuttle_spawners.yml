@@ -13,7 +13,7 @@
   - type: Sprite
     state: green
   - type: GridSpawner
-    spawn: "/Maps/_RMC14/Shuttles/ert_response_shuttle.yml"
+    spawn: "/Maps/_RMC14/Shuttles/ERT/ert_response_shuttle.yml"
 
 - type: entity
   parent: RMCSpawnerShuttle
@@ -37,7 +37,7 @@
   suffix: ERT Generic
   components:
   - type: GridSpawner
-    spawn: "/Maps/_RMC14/Shuttles/ert_response_shuttle.yml"
+    spawn: "/Maps/_RMC14/Shuttles/ERT/ert_response_shuttle.yml"
     offset: -0.5,-0.5
     spawnOnMapInit: false
 
@@ -47,7 +47,7 @@
   suffix: ERT PMC
   components:
   - type: GridSpawner
-    spawn: "/Maps/_RMC14/Shuttles/ert_pmc_shuttle.yml"
+    spawn: "/Maps/_RMC14/Shuttles/ERT/ert_pmc_shuttle.yml"
     spawnOnMapInit: false
 
 - type: entity
@@ -56,7 +56,7 @@
   suffix: ERT SPP
   components:
   - type: GridSpawner
-    spawn: "/Maps/_RMC14/Shuttles/ert_spp_shuttle.yml"
+    spawn: "/Maps/_RMC14/Shuttles/ERT/ert_spp_shuttle.yml"
     spawnOnMapInit: false
 
 - type: entity
@@ -65,7 +65,16 @@
   suffix: ERT TSE
   components:
   - type: GridSpawner
-    spawn: "/Maps/_RMC14/Shuttles/ert_tse_shuttle.yml"
+    spawn: "/Maps/_RMC14/Shuttles/ERT/ert_tse_shuttle.yml"
+    spawnOnMapInit: false
+
+- type: entity
+  parent: RMCSpawnerERTShuttle
+  id: RMCSpawnerERTShuttleCLF
+  suffix: ERT CLF
+  components:
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/Shuttles/ERT/ert_clf_shuttle.yml"
     spawnOnMapInit: false
 
 - type: entity
@@ -74,7 +83,7 @@
   suffix: CMB
   components:
   - type: GridSpawner
-    spawn: "/Maps/_RMC14/Shuttles/ert_cmb_shuttle.yml"
+    spawn: "/Maps/_RMC14/Shuttles/ERT/ert_cmb_shuttle.yml"
     spawnOnMapInit: false
 
 - type: entity
@@ -83,7 +92,7 @@
   suffix: ERT Pizza
   components:
   - type: GridSpawner
-    spawn: "/Maps/_RMC14/Shuttles/ert_pizza_shuttle.yml"
+    spawn: "/Maps/_RMC14/Shuttles/ERT/ert_pizza_shuttle.yml"
     spawnOnMapInit: false
 
 - type: entity
@@ -92,22 +101,22 @@
   suffix: ERT Big
   components:
   - type: GridSpawner
-    spawn: "/Maps/_RMC14/Shuttles/ert_shuttle_big.yml"
+    spawn: "/Maps/_RMC14/Shuttles/ERT/ert_shuttle_big.yml"
     spawnOnMapInit: false
 
 - type: entity
   parent: RMCSpawnerERTShuttle
   id: RMCSpawnerERTShuttleTSEPA
-  suffix: TSEPA, ERT
+  suffix: TSEPA
   components:
   - type: GridSpawner
-    spawn: "/Maps/_RMC14/Shuttles/ert_zspa_shuttle.yml"
+    spawn: "/Maps/_RMC14/Shuttles/ERT/ert_tsepa_shuttle.yml"
     spawnOnMapInit: false
 
 - type: entity
   parent: RMCSpawnerERTShuttle
   id: RMCSpawnerShuttleCMB
-  suffix: cmb
+  suffix: CMB
   components:
   - type: GridSpawner
     spawn: "/Maps/_RMC14/Shuttles/cmb_shuttle.yml"
@@ -119,7 +128,7 @@
   suffix: TSEPA
   components:
   - type: GridSpawner
-    spawn: "/Maps/_RMC14/Shuttles/zspa_shuttle.yml"
+    spawn: "/Maps/_RMC14/Shuttles/ERT/ert_tsepa_shuttle.yml"
     spawnOnMapInit: false
 
 - type: entity

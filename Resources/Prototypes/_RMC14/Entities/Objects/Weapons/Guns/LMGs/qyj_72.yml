@@ -2,7 +2,7 @@
   parent: RMCBaseWeaponLMG
   name: QYJ-72 General Purpose Machine Gun
   id: RMCWeaponLMGQYJ72
-  description: The QYJ-72 is the standard GPMG of the Socialists Progressive Peoples, chambered in 7.62x54mmR, it fires a hard-hitting cartridge with a high rate of fire. With an extremely large box at 250 rounds, the QJY-72 is designed with suppressing fire and accuracy by volume of fire at its forefront.
+  description: The QYJ-72 is the standard GPMG of the Socialists Progressive Peoples, chambered in 7.62x54mmR, it fires a hard-hitting cartridge with a high rate of fire. With an extremely large box at 250 rounds, the QYJ-72 is designed with suppressing fire and accuracy by volume of fire at its forefront.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/LMGs/qyj_72/qyj_72_inhands.rsi
@@ -41,24 +41,22 @@
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
   - type: RMCSelectiveFire
     baseFireModes:
-    - SemiAuto
     - Burst
     - FullAuto
-    recoilWielded: 0
-    recoilUnwielded: 0
+    recoilWielded: 1
     scatterWielded: 1
-    scatterUnwielded: 1
-    baseFireRate: 3
+    baseFireRate: 3.33
     burstScatterMult: 3
     modifiers:
       Burst:
-        fireDelay: 0.35
+        fireDelay: 0.233
         maxScatterModifier: 10
-        shotsToMaxScatter: 6
+        useBurstScatterMult: true
       FullAuto:
-        fireDelay: 0.01
-        maxScatterModifier: 3
-        shotsToMaxScatter: 6
+        maxScatterModifier: 6
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.2
+    accuracyMultiplierUnwielded: 0.65
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -82,19 +80,28 @@
   #       enum.BreechVisuals.Open:
   #         True: { state: cover-open }
   #         False: { state: cover-closed }
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 40 # im not kidding, this is correct, bipod brings it down to 30
   - type: AttachableHolder
     slots:
       rmc-aslot-underbarrel:
-        startingAttachable: RMCAttachmentBipod
+        locked: true
+        startingAttachable: RMCAttachmentBipodQYJ
         whitelist:
           tags:
-          - RMCAttachmentBipod
+          - RMCAttachmentBipodQYJ
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-underbarrel: 0.418, -0.283
+      rmc-aslot-underbarrel: 0.27, -0.09
   - type: Wieldable
   - type: GunRequiresWield
   - type: RMCMagneticItem
+  - type: GunUserWhitelist
+    whitelist:
+      components:
+      - QYJWhitelist
 
 - type: entity
   parent: RMCMagazineLMGBase

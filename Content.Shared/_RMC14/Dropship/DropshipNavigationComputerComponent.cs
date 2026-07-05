@@ -1,4 +1,7 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Robust.Shared.Audio;
+using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Maths;
@@ -58,6 +61,9 @@ public sealed partial class DropshipNavigationComputerComponent : Component
     /// <summary>
     /// Whether this console can control a shuttle remotely instead of from onboard.
     /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntProtoId<IFFFactionComponent> Faction = "FactionMarine";
+
     [DataField, AutoNetworkedField]
     public bool RemoteControl = false;
 
