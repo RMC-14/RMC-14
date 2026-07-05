@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Holiday;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Medical.Refill;
 using Content.Shared._RMC14.Vendors;
+using Content.Shared.Interaction.Components;
 using Content.Shared.Mind;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.Stacks;
@@ -171,6 +172,9 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
 
     private bool IsSectionValid(CMVendorSection section)
     {
+        if (_player.LocalEntity is { } localEntity && EntMan.HasComponent<BypassInteractionChecksComponent>(localEntity))
+            return true;
+
         var validJob = true;
         var validRank = true;
         if (_player.LocalSession != null && _mind.TryGetMind(_player.LocalSession.UserId, out var mindId))

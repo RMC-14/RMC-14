@@ -261,9 +261,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (HasComp<HiveConstructionSuppressAnnouncementsComponent>(ent))
             return;
 
-        if (_hive.GetHive(ent.Owner) is not { } hive)
-            return;
-
         var locationName = "Unknown";
         var structureName = "Unknown";
 
@@ -281,7 +278,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         }
 
         var msg = Loc.GetString(ent.Comp.MessageID, ("location", locationName), ("structureName", structureName), ("destructionVerb", ent.Comp.DestructionVerb));
-        _announce.AnnounceToHive(ent.Owner, hive, msg, color: ent.Comp.MessageColor);
+        _announce.AnnounceSameHive(ent.Owner, msg, color: ent.Comp.MessageColor, useHiveAsSource: true);
     }
 
     private void OnXenoPlantWeedsAction(Entity<XenoConstructionComponent> xeno, ref XenoPlantWeedsActionEvent args)
@@ -827,7 +824,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             areaName = areaProto.Name;
 
         msg = Loc.GetString("rmc-xeno-order-construction-structure-designated", ("construct", structureProto.Name), ("area", areaName));
-        _announce.AnnounceSameHive(xeno.Owner, msg, needsQueen: true);
+        _announce.AnnounceSameHive(xeno.Owner, msg, needsQueen: true, useHiveAsSource: true);
     }
 
     private void OnHiveConstructionNodeAddPlasmaDoAfter(Entity<XenoCanAddPlasmaToConstructComponent> xeno, ref XenoConstructionAddPlasmaDoAfterEvent args)
