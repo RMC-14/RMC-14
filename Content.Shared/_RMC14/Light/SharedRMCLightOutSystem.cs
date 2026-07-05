@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Attachable.Systems;
+using Content.Shared._RMC14.Light;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Actions;
@@ -26,42 +27,39 @@ public abstract class SharedRMCLightOutSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<XenoParasiteInfectEvent>(OnInfect);
-        SubscribeLocalEvent<MobStateChangedEvent>(OnDeath);
-        SubscribeLocalEvent<MarineComponent, DropHandItemsEvent>(OnDropItems, before: [typeof(SharedHandsSystem)]);
+        SubscribeLocalEvent<RMCLightsOutOnDeathComponent, XenoParasiteInfectEvent>(OnInfect);
+        SubscribeLocalEvent<RMCLightsOutOnDeathComponent, MobStateChangedEvent>(OnDeath);
+        SubscribeLocalEvent<RMCLightsOutOnDeathComponent, DropHandItemsEvent>(OnDropItems, before: [typeof(SharedHandsSystem)]);
     }
 
-    private void OnInfect(XenoParasiteInfectEvent args)
+    private void OnInfect(Entity<RMCLightsOutOnDeathComponent> ent, ref XenoParasiteInfectEvent args)
     {
-        TurnOffLights(args.Target);
+        TurnOffLights(ent);
     }
 
-    private void OnDeath(MobStateChangedEvent args)
+    private void OnDeath(Entity<RMCLightsOutOnDeathComponent> ent, ref MobStateChangedEvent args)
     {
         if (args.NewMobState == MobState.Dead)
-            TurnOffLights(args.Target);
+            TurnOffLights(ent);
     }
 
     //For guns etc as they drop too late on immediate death
-    private void OnDropItems(Entity<MarineComponent> ent, ref DropHandItemsEvent args)
+    private void OnDropItems(Entity<RMCLightsOutOnDeathComponent> ent, ref DropHandItemsEvent args)
     {
         if (_mob.IsDead(ent))
             TurnOffLights(ent);
     }
 
-    protected virtual void TurnOffLights(EntityUid ent)
+    protected virtual void TurnOffLights(Entity<RMCLightsOutOnDeathComponent> ent)
     {
-        if (!HasComp<MarineComponent>(ent))
-            return;
-
         var entsToCheck = new HashSet<EntityUid>();
 
-        foreach (var held in _hands.EnumerateHeld(ent))
+        foreach (var held in _hands.EnumerateHeld(ent.Owner))
         {
             entsToCheck.Add(held);
         }
 
-        var slots = _inventory.GetSlotEnumerator(ent);
+        var slots = _inventory.GetSlotEnumerator(ent.Owner);
 
         while (slots.MoveNext(out var slot))
         {

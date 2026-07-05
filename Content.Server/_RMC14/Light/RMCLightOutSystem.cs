@@ -1,4 +1,5 @@
 using Content.Server.Light.EntitySystems;
+using Content.Shared._RMC14.Light;
 using Content.Shared._RMC14.Marines;
 using Content.Shared.Hands.Components;
 using Content.Shared.Light.Components;
@@ -10,23 +11,20 @@ public sealed class RMCLightOutSystem : SharedRMCLightOutSystem
 {
     [Dependency] private readonly ExpendableLightSystem _expend = default!;
 
-    protected override void TurnOffLights(EntityUid ent)
+    protected override void TurnOffLights(Entity<RMCLightsOutOnDeathComponent> ent)
     {
         base.TurnOffLights(ent);
-
-        if (!HasComp<MarineComponent>(ent))
-            return;
 
         //Recheck flares only
 
         var entsToCheck = new HashSet<EntityUid>();
 
-        foreach (var held in _hands.EnumerateHeld(ent))
+        foreach (var held in _hands.EnumerateHeld(ent.Owner))
         {
             entsToCheck.Add(held);
         }
 
-        var slots = _inventory.GetSlotEnumerator(ent);
+        var slots = _inventory.GetSlotEnumerator(ent.Owner);
 
         while (slots.MoveNext(out var slot))
         {
