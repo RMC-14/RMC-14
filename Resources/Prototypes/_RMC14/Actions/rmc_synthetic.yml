@@ -1,0 +1,14 @@
+- type: entity
+  id: ActionChooseGen
+  parent: ActionMarineBase
+  name: Choose Synth Generation
+  description: Choose your synth generation
+  components:
+  - type: Action
+    checkCanInteract: false
+    icon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: hudsquad_syn
+    useDelay: 0.5
+  - type: InstantAction
+    event: !type:GenerationSelectActionEvent

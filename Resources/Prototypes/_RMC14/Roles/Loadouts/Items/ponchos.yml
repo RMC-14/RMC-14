@@ -1,29 +1,34 @@
 - type: loadout
   id: PonchoRMC
+  cost: 2
   storage:
     back:
     - RMCPoncho
 
 - type: loadout
   id: PonchoJungleRMC
+  cost: 2
   storage:
     back:
     - RMCPonchoJungle
 
 - type: loadout
   id: PonchoDesertRMC
+  cost: 2
   storage:
     back:
     - RMCPonchoDesert
 
 - type: loadout
   id: PonchoUrbanRMC
+  cost: 2
   storage:
     back:
     - RMCPonchoUrban
 
 - type: loadout
   id: PonchoSnowRMC
+  cost: 2
   storage:
     back:
     - RMCPonchoSnow
