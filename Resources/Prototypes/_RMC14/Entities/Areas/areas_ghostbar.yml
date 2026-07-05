@@ -1,0 +1,39 @@
+- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaGhostBarIndoors
+  name: Ghost Bar Indoors
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_varadero.rsi
+    state: varadero
+  - type: Area
+    avoidBioscan: true
+    alwaysPowered: true
+    CAS: false
+    Fulton: false
+    Lasing: false
+    WeatherEnabled: false
+    NoTunnel: true
+    SupplyDrop: false
+    MortarPlacecment: false
+    Medevac: false
+
+- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaGhostBarOutdoors
+  name: Ghost Bar Outdoors
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_varadero.rsi
+    state: varadero1
+  - type: Area
+    avoidBioscan: true
+    alwaysPowered: true
+    CAS: false
+    Fulton: false
+    Lasing: false
+    WeatherEnabled: true
+    NoTunnel: true
+    SupplyDrop: false
+    MortarPlacecment: false
+    Medevac: false
