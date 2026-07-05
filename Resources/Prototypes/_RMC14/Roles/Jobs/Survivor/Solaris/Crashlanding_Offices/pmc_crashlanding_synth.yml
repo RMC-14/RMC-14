@@ -50,8 +50,6 @@
     - type: RMCAllowSuitStorage
     - type: IntelRescueSurvivorObjective
     - type: MotionDetectorTracked
-    - type: Skills
-      preset: RMCSkillPresetSurvivorPMCSynth
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist

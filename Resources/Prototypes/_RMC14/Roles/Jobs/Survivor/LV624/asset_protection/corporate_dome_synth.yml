@@ -45,8 +45,6 @@
       comprehensionThreshold: 0.8
       learningRange: 8.0
       baseWordLearningRate: 0.05
-    - type: Skills
-      preset: RMCSkillPresetSurvivorPMCSynth # TODO RMC14: Remove when we get synth gen skill presets
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember

@@ -65,8 +65,6 @@
         types:
           Blunt: 35
     - type: Synth
-    - type: Skills
-      preset: RMCSkillPresetSurvivorSupportSynth
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
