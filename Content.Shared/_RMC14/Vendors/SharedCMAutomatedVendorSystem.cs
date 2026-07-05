@@ -1263,52 +1263,74 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     private bool TryResolveEntry(CMAutomatedVendorComponent vendor, EntityUid item, EntProtoId? itemProto, out int sectionIndex, out int entryIndex, out CMVendorEntry entry)
     {
+        if (itemProto != null &&
+            FindEntryByPrototype(vendor, itemProto.Value, out sectionIndex, out entryIndex, out entry))
+        {
+            return true;
+        }
+
+        if (TryComp<StackComponent>(item, out var stack) &&
+            FindEntryByStack(vendor, stack.StackTypeId, out sectionIndex, out entryIndex, out entry))
+        {
+            return true;
+        }
+
+        sectionIndex = -1;
+        entryIndex = -1;
+        entry = default!;
+        return false;
+    }
+
+    private bool FindEntryByPrototype(CMAutomatedVendorComponent vendor, EntProtoId protoId, out int sectionIndex, out int entryIndex, out CMVendorEntry entry)
+    {
         sectionIndex = -1;
         entryIndex = -1;
         entry = default!;
 
-        if (itemProto != null)
+        for (var s = 0; s < vendor.Sections.Count; s++)
         {
-            for (var s = 0; s < vendor.Sections.Count; s++)
+            var section = vendor.Sections[s];
+            for (var e = 0; e < section.Entries.Count; e++)
             {
-                var section = vendor.Sections[s];
-                for (var e = 0; e < section.Entries.Count; e++)
-                {
-                    if (section.Entries[e].Id != itemProto)
-                        continue;
+                var current = section.Entries[e];
+                if (current.Id != protoId)
+                    continue;
 
-                    sectionIndex = s;
-                    entryIndex = e;
-                    entry = section.Entries[e];
-                    return true;
-                }
+                sectionIndex = s;
+                entryIndex = e;
+                entry = current;
+                return true;
             }
         }
 
-        if (TryComp(item, out StackComponent? stack))
+        return false;
+    }
+
+    private bool FindEntryByStack(CMAutomatedVendorComponent vendor, string stackTypeId, out int sectionIndex, out int entryIndex, out CMVendorEntry entry)
+    {
+        sectionIndex = -1;
+        entryIndex = -1;
+        entry = default!;
+
+        for (var s = 0; s < vendor.Sections.Count; s++)
         {
-            var stackType = stack.StackTypeId;
-            for (var s = 0; s < vendor.Sections.Count; s++)
+            var section = vendor.Sections[s];
+            for (var e = 0; e < section.Entries.Count; e++)
             {
-                var section = vendor.Sections[s];
-                for (var e = 0; e < section.Entries.Count; e++)
-                {
-                    var entryProtoId = section.Entries[e].Id;
+                var current = section.Entries[e];
+                if (!_prototypes.TryIndex(current.Id, out var proto))
+                    continue;
 
-                    if (!_prototypes.TryIndex(entryProtoId, out var proto))
-                        continue;
+                if (!proto.TryGetComponent(out StackComponent? entryStack, _compFactory))
+                    continue;
 
-                    if (!proto.TryGetComponent(out StackComponent? entryStack, _compFactory))
-                        continue;
+                if (entryStack.StackTypeId != stackTypeId)
+                    continue;
 
-                    if (entryStack.StackTypeId != stackType)
-                        continue;
-
-                    sectionIndex = s;
-                    entryIndex = e;
-                    entry = section.Entries[e];
-                    return true;
-                }
+                sectionIndex = s;
+                entryIndex = e;
+                entry = current;
+                return true;
             }
         }
 
