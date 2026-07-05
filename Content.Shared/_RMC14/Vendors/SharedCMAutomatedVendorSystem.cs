@@ -1094,8 +1094,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (_net.IsClient)
             return false;
 
-        var itemProto = MetaData(item).EntityPrototype?.ID;
-        if (itemProto == null)
+        if (MetaData(item).EntityPrototype?.ID is not { } itemProto)
             return false;
 
         if (!TryFindEntry(vendor.Comp, itemProto, out var sectionIndex, out var entryIndex, out var matchingEntry))
@@ -1126,15 +1125,15 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     /// Handles restocking items that have a Box reference (magazine boxes, ammo boxes).
     /// When vending, these items deduct from the underlying box entry, so restocking should add them back.
     /// </summary>
-    private bool TryRestockBoxItem(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool suppressPopup, CMVendorEntry matchingEntry)
+    private bool TryRestockBoxItem(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool suppressPopup, CMVendorEntry entry)
     {
-        if (matchingEntry.Box is not { } boxId)
+        if (entry.Box is not { } boxId)
             return false;
 
         if (!TryFindEntry(vendor.Comp, boxId, out var sectionIndex, out var entryIndex, out _))
             return false;
 
-        var amountToAdd = GetBoxRemoveAmount(matchingEntry);
+        var amountToAdd = GetBoxRemoveAmount(entry);
         vendor.Comp.Sections[sectionIndex].Entries[entryIndex].Amount += amountToAdd;
 
         var updatedEntry = vendor.Comp.Sections[sectionIndex].Entries[entryIndex];
