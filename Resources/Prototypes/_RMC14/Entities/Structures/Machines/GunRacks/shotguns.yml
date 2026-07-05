@@ -120,12 +120,12 @@
   - type: ItemSlots
     slots:
       item_1:
-        name: HG 37-12
+        name: Model 12
         whitelist:
           tags:
           - RMCWeaponShotgunModel12
       item_2:
-        name: HG 37-12
+        name: Model 12
         whitelist:
           tags:
           - RMCWeaponShotgunModel12
@@ -150,6 +150,6 @@
   - type: ContainerFill
     containers:
       item_1:
-      - RMCWeaponShotgunModel12
+      - RMCWeaponShotgunM12
       item_2:
-      - RMCWeaponShotgunModel12
+      - RMCWeaponShotgunM12
