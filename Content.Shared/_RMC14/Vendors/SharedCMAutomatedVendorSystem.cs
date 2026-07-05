@@ -1097,24 +1097,25 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (MetaData(item).EntityPrototype?.ID is not { } itemProto)
             return false;
 
-        if (!TryFindEntry(vendor.Comp, itemProto, out var sectionIndex, out var entryIndex, out var matchingEntry))
+        if (!TryResolveEntry(vendor.Comp, item, itemProto, out var sectionIndex, out var entryIndex, out var entry))
             return false;
 
         if (!ValidateItemForRestock(vendor, item, user, itemProto, suppressPopup))
             return false;
 
-        if (TryRestockStackableItem(vendor, item, user, suppressPopup, matchingEntry))
+        if (TryRestockStackableItem(vendor, item, user, suppressPopup, entry))
             return true;
 
-        if (TryRestockBoxItem(vendor, item, user, suppressPopup, matchingEntry))
+        if (TryRestockBoxItem(vendor, item, user, suppressPopup, entry))
             return true;
 
         if (!suppressPopup)
             _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-item-finish", ("vendor", vendor), ("item", item)), vendor, user);
 
-        vendor.Comp.Sections[sectionIndex].Entries[entryIndex].Amount++;
-
         var updatedEntry = vendor.Comp.Sections[sectionIndex].Entries[entryIndex];
+        updatedEntry.Amount++;
+        vendor.Comp.Sections[sectionIndex].Entries[entryIndex] = updatedEntry;
+
         AmountUpdated(vendor, updatedEntry);
         Dirty(vendor);
         QueueDel(item);
@@ -1130,14 +1131,14 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (entry.Box is not { } boxId)
             return false;
 
-        if (!TryFindEntry(vendor.Comp, boxId, out var sectionIndex, out var entryIndex, out _))
+        if (!TryResolveEntry(vendor.Comp, item, boxId, out var boxSectionIndex, out var boxEntryIndex, out var boxEntry))
             return false;
 
         var amountToAdd = GetBoxRemoveAmount(entry);
-        vendor.Comp.Sections[sectionIndex].Entries[entryIndex].Amount += amountToAdd;
+        boxEntry.Amount += amountToAdd;
+        vendor.Comp.Sections[boxSectionIndex].Entries[boxEntryIndex] = boxEntry;
 
-        var updatedEntry = vendor.Comp.Sections[sectionIndex].Entries[entryIndex];
-        AmountUpdated(vendor, updatedEntry);
+        AmountUpdated(vendor, boxEntry);
         Dirty(vendor);
 
         if (!suppressPopup)
@@ -1260,26 +1261,57 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         return true;
     }
 
-    private bool TryFindEntry(CMAutomatedVendorComponent vendor, EntProtoId id, out int sectionIndex, out int entryIndex, out CMVendorEntry entry)
+    private bool TryResolveEntry(CMAutomatedVendorComponent vendor, EntityUid item, EntProtoId? itemProto, out int sectionIndex, out int entryIndex, out CMVendorEntry entry)
     {
-        for (var sIndex = 0; sIndex < vendor.Sections.Count; sIndex++)
-        {
-            var section = vendor.Sections[sIndex];
-            for (var eIndex = 0; eIndex < section.Entries.Count; eIndex++)
-            {
-                if (section.Entries[eIndex].Id != id)
-                    continue;
-
-                sectionIndex = sIndex;
-                entryIndex = eIndex;
-                entry = section.Entries[eIndex];
-                return true;
-            }
-        }
-
         sectionIndex = -1;
         entryIndex = -1;
         entry = default!;
+
+        if (itemProto != null)
+        {
+            for (var s = 0; s < vendor.Sections.Count; s++)
+            {
+                var section = vendor.Sections[s];
+                for (var e = 0; e < section.Entries.Count; e++)
+                {
+                    if (section.Entries[e].Id != itemProto)
+                        continue;
+
+                    sectionIndex = s;
+                    entryIndex = e;
+                    entry = section.Entries[e];
+                    return true;
+                }
+            }
+        }
+
+        if (TryComp(item, out StackComponent? stack))
+        {
+            var stackType = stack.StackTypeId;
+            for (var s = 0; s < vendor.Sections.Count; s++)
+            {
+                var section = vendor.Sections[s];
+                for (var e = 0; e < section.Entries.Count; e++)
+                {
+                    var entryProtoId = section.Entries[e].Id;
+
+                    if (!_prototypes.TryIndex(entryProtoId, out var proto))
+                        continue;
+
+                    if (!proto.TryGetComponent(out StackComponent? entryStack, _compFactory))
+                        continue;
+
+                    if (entryStack.StackTypeId != stackType)
+                        continue;
+
+                    sectionIndex = s;
+                    entryIndex = e;
+                    entry = section.Entries[e];
+                    return true;
+                }
+            }
+        }
+
         return false;
     }
 
