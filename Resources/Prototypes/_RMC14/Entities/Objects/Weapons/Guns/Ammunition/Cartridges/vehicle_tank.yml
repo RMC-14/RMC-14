@@ -155,6 +155,7 @@
   - type: DeleteOnTrigger
   - type: SpawnOnTerminate
     spawn: VehicleDragonFlameImpact
+    spawnOffset: 0.5
   - type: IgnoreArc
   - type: IgnorePredictionHide
   - type: Fixtures

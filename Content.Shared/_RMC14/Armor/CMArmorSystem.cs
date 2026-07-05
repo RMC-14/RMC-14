@@ -331,10 +331,10 @@ public sealed class CMArmorSystem : EntitySystem
         RaiseLocalEvent(ent, ref ev);
 
         var armorPiercing = args.ArmorPiercing;
-        if (args.Tool != null)
+        if (args.Tool is { } tool && Exists(tool))
         {
             var piercingEv = new CMGetArmorPiercingEvent(ent);
-            RaiseLocalEvent(args.Tool.Value, ref piercingEv);
+            RaiseLocalEvent(tool, ref piercingEv);
             armorPiercing += piercingEv.Piercing;
         }
 
@@ -359,6 +359,7 @@ public sealed class CMArmorSystem : EntitySystem
         }
 
         if (args.Origin is { } origin &&
+            Exists(origin) &&
             origin.IsValid() &&
             TryComp(origin, out TransformComponent? originXform) &&
             TryComp(ent, out TransformComponent? entXform))
