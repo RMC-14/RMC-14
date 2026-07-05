@@ -1,4 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Armor;
@@ -47,6 +46,7 @@ namespace Content.Shared._RMC14.Xenonids.Weeds;
 
 public abstract class SharedXenoWeedsSystem : EntitySystem
 {
+    [Dependency] protected readonly IMapManager Map = default!;
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
@@ -56,7 +56,6 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly SharedGameTicker _gameTicker = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] protected readonly IMapManager Map = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -257,11 +256,9 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             weedable.Entity = null;
             Dirty(ent.Comp.AttachedTo, weedable);
         }
-        if (WeedsQuery.TryComp(ent.Comp.Weeds, out var weeds))
-        {
-            weeds.LocalWeeded.Remove(ent.Comp.AttachedTo);
+
+        if (WeedsQuery.TryComp(ent.Comp.Weeds, out var weeds) && weeds.LocalWeeded.Remove(ent.Comp.AttachedTo))
             Dirty(ent.Comp.Weeds, weeds);
-        }
     }
 
     private void OnWeedableAnchorStateChanged(Entity<XenoWeedableComponent> weedable, ref AnchorStateChangedEvent args)
@@ -403,7 +400,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             _toUpdate.Add(ent);
     }
 
-    public List<Entity<XenoWeedsComponent>> GetNearbyWeedNodes(Entity<MapGridComponent> grid, EntityCoordinates coordinates, int range = 5)
+    public List<Entity<XenoWeedsComponent>> GetNearbyWeeds(Entity<MapGridComponent> grid, EntityCoordinates coordinates, int range = 5, bool sourceNodes = true)
     {
         var position = _mapSystem.LocalToTile(grid, grid, coordinates);
         var checkArea = new Box2(position.X - range + 1, position.Y - range + 1, position.X + range, position.Y + range);
@@ -412,7 +409,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         var nodeList = new List<Entity<XenoWeedsComponent>>();
         foreach (var anchored in enumerable)
         {
-            if (!TerminatingOrDeleted(anchored) && TryComp<XenoWeedsComponent>(anchored, out var weeds) && weeds.IsSource)
+            if (!TerminatingOrDeleted(anchored) && WeedsQuery.TryComp(anchored, out var weeds) && weeds.IsSource == sourceNodes)
             {
                 nodeList.Add((anchored, weeds));
             }
@@ -423,7 +420,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
     public bool HasWeedNodeNearby(Entity<MapGridComponent> grid, EntityCoordinates coordinates, int range = 5)
     {
-        return GetNearbyWeedNodes(grid, coordinates, range).Count > 1;
+        return GetNearbyWeeds(grid, coordinates, range).Count > 1;
     }
 
     public bool IsOnHiveWeeds(Entity<MapGridComponent> grid, EntityCoordinates coordinates, bool sourceOnly = false)

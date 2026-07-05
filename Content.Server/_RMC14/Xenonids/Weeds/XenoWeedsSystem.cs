@@ -258,11 +258,8 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
 
         RemComp<XenoWeedsDecayingComponent>(weedEnt);
 
-        if (weedsComp != null)
-        {
-            weedsComp.Source = newParent;
-            Dirty(weedEnt, weedsComp);
-        }
+        weedsComp.Source = newParent;
+        Dirty(weedEnt, weedsComp);
 
         newParent.Comp.Spread.Add(weedEnt);
         Dirty(newParent, newParent.Comp);
@@ -278,13 +275,14 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
             return newParent;
 
         HiveMemberQuery.TryComp(childEnt, out var weedHive);
-        foreach (var node in GetNearbyWeedNodes((gridUid, gridComp), coordinates, childEnt.Comp.Range - 1))
+        // "Re-parenting" (adoption?) range is deliberately one smaller than the standard growth range.
+        foreach (var node in GetNearbyWeeds((gridUid, gridComp), coordinates, childEnt.Comp.Range - 1))
         {
-            // Regular weed nodes can't support hive weeds or "hardy" weeds.
-            if (childEnt.Comp.Level > node.Comp.Level)
+            // Nodes can't support weeds which are too strong for them. (Hive weeds or "Hardy" weeds)
+            if (node.Comp.Level < childEnt.Comp.Level)
                 continue;
 
-            // If both weed entities are part of a hive, make sure they're in the same one.
+            // If both weed entities are part of a hive, make sure they're in the same one. (Hiveless weeds can be taken without issue)
             if (weedHive != null && HiveMemberQuery.TryComp(node, out var nodeHive) && !_hive.IsMember((node, nodeHive), weedHive.Hive))
                 continue;
 
