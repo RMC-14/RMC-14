@@ -68,7 +68,8 @@
   inhand:
     - RMCMotionDetector
     - CMFirstAidKitFilled
-  back:
+  storage:
+    back:
     - RMCSynthResetKey
 
 - type: entity
