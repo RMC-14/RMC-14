@@ -43,6 +43,8 @@ public sealed class QueenEyeSystem : EntitySystem
 
     private bool _isRevertingMove;
 
+    private readonly HashSet<(Entity<QueenEyeComponent> Eye, EntityCoordinates OldCoords, EntityCoordinates NewCoords)> _movedQueenEyes = new();
+
     public override void Initialize()
     {
         base.Initialize();
@@ -175,58 +177,7 @@ public sealed class QueenEyeSystem : EntitySystem
         if (!args.NewPosition.IsValid(EntityManager))
             return;
 
-        var newCoords = args.NewPosition;
-        _nearbyWeeds.Clear();
-        _entityLookup.GetEntitiesInRange(newCoords, ent.Comp.SoftWeedDistance, _nearbyWeeds);
-
-        if (_nearbyWeeds.Count == 0)
-        {
-            _isRevertingMove = true;
-            try
-            {
-                _anchorWeeds.Clear();
-                _entityLookup.GetEntitiesInRange(args.OldPosition, ent.Comp.MaxWeedDistance, _anchorWeeds);
-                if (_anchorWeeds.Count > 0)
-                {
-                    var newWorldPos = _transform.ToMapCoordinates(newCoords).Position;
-                    var oldWorldPos = _transform.ToMapCoordinates(args.OldPosition).Position;
-                    var closestDistSq = float.MaxValue;
-                    var closestWeedPos = oldWorldPos;
-
-                    foreach (var weed in _anchorWeeds)
-                    {
-                        var weedPos = _transform.GetWorldPosition(weed.Owner);
-                        var distSq = Vector2.DistanceSquared(oldWorldPos, weedPos);
-                        if (distSq < closestDistSq)
-                        {
-                            closestDistSq = distSq;
-                            closestWeedPos = weedPos;
-                        }
-                    }
-
-                    var offset = newWorldPos - closestWeedPos;
-                    var dist = offset.Length();
-                    var soft = ent.Comp.SoftWeedDistance;
-                    var max = ent.Comp.MaxWeedDistance;
-                    if (dist > soft)
-                    {
-                        var t = Math.Clamp((dist - soft) / (max - soft), 0f, 1f);
-                        var dampedDist = soft + (max - soft) * t * t;
-                        _transform.SetWorldPosition(ent, closestWeedPos + offset / dist * dampedDist);
-                    }
-                }
-                else if (ent.Comp.Queen is { } queen &&
-                         !TerminatingOrDeleted(queen) &&
-                         TryComp(queen, out QueenEyeActionComponent? queenAction))
-                {
-                    RemoveQueenEye((queen, queenAction));
-                }
-            }
-            finally
-            {
-                _isRevertingMove = false;
-            }
-        }
+        _movedQueenEyes.Add((ent, args.OldPosition, args.NewPosition));
     }
 
     /// <param name="expansionSize">How much to expand the bounds before to find vision intersecting it. Makes this the largest vision size + 1 tile.</param>
@@ -364,6 +315,73 @@ public sealed class QueenEyeSystem : EntitySystem
 
         var targetTile = _map.CoordinatesToTile(gridId, grid, target);
         return IsAccessible((gridId, broadphase, grid), targetTile);
+    }
+
+    public override void Update(float frameTime)
+    {
+        foreach (var (ent, oldCoords, newCoords) in _movedQueenEyes)
+        {
+            if (_timing.ApplyingState)
+                return;
+
+            if (_isRevertingMove)
+                return;
+
+            if (TerminatingOrDeleted(ent))
+                return;
+
+            _nearbyWeeds.Clear();
+            _entityLookup.GetEntitiesInRange(newCoords, ent.Comp.SoftWeedDistance, _nearbyWeeds);
+
+            if (_nearbyWeeds.Count != 0)
+                continue;
+
+            _isRevertingMove = true;
+            try
+            {
+                _anchorWeeds.Clear();
+                _entityLookup.GetEntitiesInRange(oldCoords, ent.Comp.MaxWeedDistance, _anchorWeeds);
+                if (_anchorWeeds.Count > 0)
+                {
+                    var newWorldPos = _transform.ToMapCoordinates(newCoords).Position;
+                    var oldWorldPos = _transform.ToMapCoordinates(oldCoords).Position;
+                    var closestDistSq = float.MaxValue;
+                    var closestWeedPos = oldWorldPos;
+
+                    foreach (var weed in _anchorWeeds)
+                    {
+                        var weedPos = _transform.GetWorldPosition(weed.Owner);
+                        var distSq = Vector2.DistanceSquared(oldWorldPos, weedPos);
+                        if (distSq < closestDistSq)
+                        {
+                            closestDistSq = distSq;
+                            closestWeedPos = weedPos;
+                        }
+                    }
+
+                    var offset = newWorldPos - closestWeedPos;
+                    var dist = offset.Length();
+                    var soft = ent.Comp.SoftWeedDistance;
+                    var max = ent.Comp.MaxWeedDistance;
+                    if (dist > soft)
+                    {
+                        var t = Math.Clamp((dist - soft) / (max - soft), 0f, 1f);
+                        var dampedDist = soft + (max - soft) * t * t;
+                        _transform.SetWorldPosition(ent, closestWeedPos + offset / dist * dampedDist);
+                    }
+                }
+                else if (ent.Comp.Queen is { } queen &&
+                         !TerminatingOrDeleted(queen) &&
+                         TryComp(queen, out QueenEyeActionComponent? queenAction))
+                {
+                    RemoveQueenEye((queen, queenAction));
+                }
+            }
+            finally
+            {
+                _isRevertingMove = false;
+            }
+        }
     }
 
     /// <summary>
