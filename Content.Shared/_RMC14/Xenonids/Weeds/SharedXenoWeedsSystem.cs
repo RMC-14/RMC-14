@@ -77,6 +77,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     private readonly HashSet<EntityUid> _intersecting = new();
 
     protected EntityQuery<HiveMemberComponent> HiveMemberQuery;
+    protected EntityQuery<XenoWeedableComponent> WeedableQuery;
     protected EntityQuery<XenoWeedsComponent> WeedsQuery;
     private EntityQuery<AffectableByWeedsComponent> _affectedQuery;
     private EntityQuery<ResinSlowdownModifierComponent> _slowResinQuery;
@@ -88,6 +89,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     public override void Initialize()
     {
         HiveMemberQuery = GetEntityQuery<HiveMemberComponent>();
+        WeedableQuery = GetEntityQuery<XenoWeedableComponent>();
         WeedsQuery = GetEntityQuery<XenoWeedsComponent>();
         _affectedQuery = GetEntityQuery<AffectableByWeedsComponent>();
         _slowResinQuery = GetEntityQuery<ResinSlowdownModifierComponent>();
@@ -174,13 +176,18 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             {
                 if (!HasComp<CommunicationsTowerComponent>(weededEntity))
                     _appearance.SetData(weededEntity, WeededEntityLayers.Layer, false);
+
+                // Clean up any other weed entities caused by this tile.
+                if (WeedableQuery.TryComp(weededEntity, out var weedable) && Exists(weedable.Entity))
+                {
+                    QueueDel(weedable.Entity);
+                    weedable.Entity = null;
+                    Dirty(weededEntity, weedable);
+                }
             }
 
             return;
         }
-
-        if (_net.IsClient)
-            return;
 
         // If this was a source node with "child" weeds, set them all to decay.
         foreach (var spread in ent.Comp.Spread)
@@ -245,11 +252,16 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
     private void OnWallWeedsRemove<T>(Entity<XenoWallWeedsComponent> ent, ref T args)
     {
-        if (!TryComp(ent.Comp.Weeds, out XenoWeedsComponent? weeds))
-            return;
-
-        weeds.Spread.Remove(ent);
-        Dirty(ent.Comp.Weeds.Value, weeds);
+        if (WeedableQuery.TryComp(ent.Comp.AttachedTo, out var weedable) && weedable.Entity == ent.Owner)
+        {
+            weedable.Entity = null;
+            Dirty(ent.Comp.AttachedTo, weedable);
+        }
+        if (WeedsQuery.TryComp(ent.Comp.Weeds, out var weeds))
+        {
+            weeds.LocalWeeded.Remove(ent.Comp.AttachedTo);
+            Dirty(ent.Comp.Weeds, weeds);
+        }
     }
 
     private void OnWeedableAnchorStateChanged(Entity<XenoWeedableComponent> weedable, ref AnchorStateChangedEvent args)

@@ -45,9 +45,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
     private EntityQuery<AirtightComponent> _airtightQuery;
     private EntityQuery<AllowWeedSpreadComponent> _allowWeedSpreadQuery;
     private EntityQuery<MapGridComponent> _mapGridQuery;
-    private EntityQuery<XenoWallWeedsComponent> _wallWeedsQuery;
     private EntityQuery<XenoNestSurfaceComponent> _xenoNestSurfaceQuery;
-    private EntityQuery<XenoWeedableComponent> _xenoWeedableQuery;
     private EntityQuery<XenoWeedsComponent> _xenoWeedsQuery;
 
     private TimeSpan _maxProcessTime;
@@ -59,9 +57,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
         _airtightQuery = GetEntityQuery<AirtightComponent>();
         _allowWeedSpreadQuery = GetEntityQuery<AllowWeedSpreadComponent>();
         _mapGridQuery = GetEntityQuery<MapGridComponent>();
-        _wallWeedsQuery = GetEntityQuery<XenoWallWeedsComponent>();
         _xenoNestSurfaceQuery = GetEntityQuery<XenoNestSurfaceComponent>();
-        _xenoWeedableQuery = GetEntityQuery<XenoWeedableComponent>();
         _xenoWeedsQuery = GetEntityQuery<XenoWeedsComponent>();
 
         Subs.CVar(
@@ -187,7 +183,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                     _map.GetAnchoredEntities(grid, adjacent.GridIndices, _anchored);
                     foreach (var anchoredId in _anchored)
                     {
-                        if (!_xenoWeedableQuery.TryComp(anchoredId, out var weedable) ||
+                        if (!WeedableQuery.TryComp(anchoredId, out var weedable) ||
                             !TryComp(anchoredId, out TransformComponent? weedableTransform) ||
                             !weedableTransform.Anchored ||
                             weedable.Entity != null)
@@ -211,7 +207,8 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
 
                         weedable.Entity = SpawnAtPosition(weedable.Spawn, anchoredId.ToCoordinates());
                         var wallWeeds = EnsureComp<XenoWallWeedsComponent>(weedable.Entity.Value);
-                        wallWeeds.Weeds = source;
+                        wallWeeds.Weeds = neighborWeeds;
+                        wallWeeds.AttachedTo = anchoredId;
                         Dirty(weedable.Entity.Value, wallWeeds);
 
                         if (_xenoNestSurfaceQuery.TryComp(weedable.Entity, out var surface))
@@ -219,8 +216,6 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                             surface.Weedable = anchoredId;
                             Dirty(weedable.Entity.Value, surface);
                         }
-
-                        sourceWeeds?.Spread.Add(weedable.Entity.Value);
                     }
                 }
             }
@@ -254,9 +249,10 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
 
     private bool TryAvoidOrphanage(EntityUid weedEnt)
     {
-        WeedsQuery.TryComp(weedEnt, out var weedsComp);
+        if (!WeedsQuery.TryComp(weedEnt, out var weedsComp))
+            return false;
 
-        if (FindNewParentNode(weedEnt, weedsComp) is not { } newParent)
+        if (FindNewParentNode((weedEnt, weedsComp)) is not { } newParent)
             return false;
         // Found a new parent! (yippee)
 
@@ -265,22 +261,6 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
         if (weedsComp != null)
         {
             weedsComp.Source = newParent;
-
-            // Also preserve anything which was weeded due to being adjacent to this entity. (Weeded walls, comms tower, etc.)
-            // These may be out of range of the original node if they were placed by an outer weed tile, so they need to be handled separately.
-            foreach (var adjacentEnt in weedsComp.LocalWeeded)
-            {
-                if (!_xenoWeedableQuery.TryComp(adjacentEnt, out var weedable) || weedable.Entity is not { } weedableSpawnedEnt)
-                    continue;
-
-                RemComp<XenoWeedsDecayingComponent>(weedableSpawnedEnt);
-                if (_wallWeedsQuery.TryComp(weedableSpawnedEnt, out var wallWeeds))
-                {
-                    wallWeeds.Weeds = newParent;
-                    Dirty(weedableSpawnedEnt, wallWeeds);
-                    newParent.Comp.Spread.Add(weedableSpawnedEnt);
-                }
-            }
             Dirty(weedEnt, weedsComp);
         }
 
@@ -289,7 +269,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
         return true;
     }
 
-    private Entity<XenoWeedsComponent>? FindNewParentNode(EntityUid childEnt, XenoWeedsComponent? childWeedsComp)
+    private Entity<XenoWeedsComponent>? FindNewParentNode(Entity<XenoWeedsComponent> childEnt)
     {
         Entity<XenoWeedsComponent>? newParent = null;
 
@@ -297,12 +277,11 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
         if (_transform.GetGrid(coordinates) is not { } gridUid || !TryComp<MapGridComponent>(gridUid, out var gridComp))
             return newParent;
 
-        // Loop through each nearby weed node, trying to find a valid one.
         HiveMemberQuery.TryComp(childEnt, out var weedHive);
-        foreach (var node in GetNearbyWeedNodes((gridUid, gridComp), coordinates, 4))
+        foreach (var node in GetNearbyWeedNodes((gridUid, gridComp), coordinates, childEnt.Comp.Range - 1))
         {
             // Regular weed nodes can't support hive weeds or "hardy" weeds.
-            if (childWeedsComp is { } weeds && weeds.Level > node.Comp.Level)
+            if (childEnt.Comp.Level > node.Comp.Level)
                 continue;
 
             // If both weed entities are part of a hive, make sure they're in the same one.

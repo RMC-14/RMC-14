@@ -1,4 +1,4 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Xenonids.Weeds;
 
@@ -6,6 +6,15 @@ namespace Content.Shared._RMC14.Xenonids.Weeds;
 [Access(typeof(SharedXenoWeedsSystem))]
 public sealed partial class XenoWallWeedsComponent : Component
 {
+    /// <summary>
+    /// The weed tile which caused these wall weeds to grow.
+    /// </summary>
     [DataField, AutoNetworkedField]
-    public EntityUid? Weeds;
+    public EntityUid Weeds;
+
+    /// <summary>
+    /// The entity that the wall weeds are attached to.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityUid AttachedTo;
 }
