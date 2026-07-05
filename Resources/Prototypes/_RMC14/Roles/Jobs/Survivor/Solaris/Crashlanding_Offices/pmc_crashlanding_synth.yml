@@ -12,24 +12,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Language
-      spokenLanguages:
-      - Russian
-#     - Scandinavian # TODO RMC14: for when scandi gets added
-      - English
-      - Japanese
-      - Chinese
-      - German
-      - French
-      - Spanish
-      understoodLanguages:
-      - Russian
-#     - Scandinavian # TODO RMC14: for when scandi gets added
-      - English
-      - Japanese
-      - Chinese
-      - German
-      - French
-      - Spanish
+      preset: RMCLanguagePresetSynthColonist
     - type: LanguageLearning
       learnableLanguages:
       - Xeno
