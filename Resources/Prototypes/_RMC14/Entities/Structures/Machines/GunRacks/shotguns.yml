@@ -100,10 +100,10 @@
 
 - type: entity
   parent: RMCGunRackM42A2Empty
-  id: RMCGunRackHG3712Empty
-  name: HG 37-12 gun rack
-  suffix: HG 37-12, Empty
-  description:  A modification of an outdated, 21st century weapons rack, custom built to store the HG 37-12. It's still painted in that classical, multi-century old military jungle green. Some historian out there would cry if they saw the frankensteinian level of desecration of a 21st century artifact such as this.
+  id: RMCGunRackModel12Empty
+  name: Model 12 gun rack
+  suffix: Model 12, Empty
+  description:  A modification of an outdated, 21st century weapons rack, custom built to store the Model 12. It's still painted in that classical, multi-century old military jungle green. Some historian out there would cry if they saw the frankensteinian level of desecration of a 21st century artifact such as this.
   components:
   - type: ContainerContainer
     containers:
@@ -116,40 +116,40 @@
         occludes: True
         ent: null
   - type: Sprite
-    sprite: _RMC14/Structures/Machines/VendingMachines/GunRacks/hg37_rack.rsi
+    sprite: _RMC14/Structures/Machines/VendingMachines/GunRacks/model12_rack.rsi
   - type: ItemSlots
     slots:
       item_1:
         name: HG 37-12
         whitelist:
           tags:
-          - RMCWeaponShotgunHG3712
+          - RMCWeaponShotgunModel12
       item_2:
         name: HG 37-12
         whitelist:
           tags:
-          - RMCWeaponShotgunHG3712
+          - RMCWeaponShotgunModel12
   - type: ItemMapper
     mapLayers:
       fill_1:
         minCount: 1
         whitelist:
           tags:
-          - RMCWeaponShotgunHG3712
+          - RMCWeaponShotgunModel12
       fill_2:
         minCount: 2
         whitelist:
           tags:
-          - RMCWeaponShotgunHG3712
+          - RMCWeaponShotgunModel12
 
 - type: entity
-  parent: RMCGunRackHG3712Empty
-  id: RMCGunRackHG3712Filled
-  suffix: HG 37-12, Filled
+  parent: RMCGunRackModel12Empty
+  id: RMCGunRackModel12Filled
+  suffix: Model 12, Filled
   components:
   - type: ContainerFill
     containers:
       item_1:
-      - RMCWeaponShotgunHG3712
+      - RMCWeaponShotgunModel12
       item_2:
-      - RMCWeaponShotgunHG3712
+      - RMCWeaponShotgunModel12
