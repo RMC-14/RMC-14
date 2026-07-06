@@ -22,10 +22,10 @@
     - 0,0,5,1 # 3 slots
     whitelist:
       components:
-      - CMScalpel
       - CMHemostat
       - CMRetractor
       tags:
+      - RMCScalpel
       - CMSurgicalLine
       - CMSynthGraft
       #TODO FixoVein

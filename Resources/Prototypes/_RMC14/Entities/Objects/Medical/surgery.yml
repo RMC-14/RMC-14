@@ -326,9 +326,6 @@
       quality: Ideal
     - kind: Scalpel
       quality: Suboptimal
-      stepOverrides:
-      - step: CMSurgeryStepCutLarvaRoots
-        quality: Ideal     
     - kind: Cautery
       quality: Awful
   - type: Sprite
