@@ -13,13 +13,20 @@
   special:
     - !type:AddComponentSpecial
       components:
+        - type: Language
+          spokenLanguages:
+          - English
+          understoodLanguages:
+          - English
+          currentLanguage: English
+          defaultLanguage: English
         - type: NpcFactionMember
           factions:
             - RoyalMarines
             - TSE
         - type: RMCSurvivor
         - type: Skills
-          preset: RMCSkillPresetCommander
+          preset: RMCSkillPresetParaCommander
         - type: RMCAllowSuitStorage
         - type: IntelRescueSurvivorObjective
         - type: MotionDetectorTracked

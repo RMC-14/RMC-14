@@ -243,12 +243,37 @@
   - type: RMCHeadset
     channels:
     - MarineSOF
+  - type: RMCStaticDefaultChannel
+  - type: EncryptionKeyHolder
+    defaultChannel: MarineSOF
   - type: GrantSquadLeaderTracker
     defaultMode: SquadLeader
     trackerModes:
     - SquadLeader
     - FORECONCommandingOfficer
-      
+
+- type: entity
+  parent: RMCHeadsetForecon
+  id: RMCHeadsetForeconSL
+  name: UNMC SOF squad leader headset
+  suffix: Survivor, Recon SL
+  components:
+  - type: RMCHeadset
+    channels:
+    - MarineSOF
+    radioTextIncrease: 2
+
+- type: entity
+  parent: RMCHeadsetForecon
+  id: RMCHeadsetForeconCommander
+  name: UNMC SOF commander headset
+  suffix: Survivor, Recon Commander
+  components:
+  - type: RMCHeadset
+    channels:
+    - MarineSOF
+    radioTextIncrease: 3
+
 # Paramarine Hybrisa survivor insert
 - type: entity
   parent: RMCHeadsetIconsPara
@@ -286,7 +311,7 @@
       radioTextIncrease: 2
     - type: GrantSquadLeaderTracker
       defaultMode: ParaCommander
-          
+
 - type: entity
   parent: RMCHeadsetPara
   id: RMCHeadsetParaOfficer
@@ -318,8 +343,6 @@
 - type: entity
   parent: RMCHeadsetForecon
   id: RMCHeadsetMARSOC
-  name: UNMC SOF headset
-  description: Issued exclusively to Marine Raiders and members of the UNMC's Force Reconnaissance.
   suffix: ERT
   components:
   - type: ContainerFill
@@ -338,7 +361,7 @@
 - type: entity
   parent: RMCHeadsetColonyIcons
   id: RMCHeadsetSPPCrashland
-  name: SPP 173/Airborne headset 
+  name: SPP 173/Airborne headset
   description: A headset used by members of the 173rd Airborne Reconnaissance unit.
   components:
   - type: ContainerFill

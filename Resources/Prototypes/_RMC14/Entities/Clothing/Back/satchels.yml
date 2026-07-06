@@ -42,6 +42,145 @@
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/black.rsi
 
 - type: entity
+  parent: CMSatchel
+  abstract: true
+  id: CMSatchelSecure
+  name: secure leather satchel
+  description: A very fancy satchel made of fine leather. It's got a lock on it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/secure_command.rsi
+    layers:
+    - state: icon
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+    - state: locked
+      map: [ "enum.LockVisualLayers.Lock" ]
+      shader: unshaded
+  - type: CMStorageVisualizer
+    storageClosed: closedLayer
+    storageOpen: openLayer
+    showOpenClosedWhenEmpty: true
+  - type: LockVisuals
+  - type: RMCIdLockableStorage
+
+- type: entity
+  parent: CMSatchelSecure
+  id: CMSatchelSecureStandard
+  components:
+  - type: RMCIdLockableStorage
+    overrideAccesses:
+    - RMCAccessSeniorCommand
+
+- type: entity
+  parent: CMSatchelSecureStandard
+  id: CMSatchelCommandSecure
+
+- type: entity
+  parent: CMSatchelSecureStandard
+  id: CMSatchelSecureFillSurvivor
+  suffix: Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSheetMetal20
+
+- type: entity
+  parent: CMSatchelSecure
+  id: CMSatchelLiaisonSecure
+
+- type: entity
+  parent: CMSatchelLiaisonSecure
+  id: CMSatchelLiaisonSecureFillSurvivor
+  suffix: Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSheetMetal20
+
+- type: entity
+  parent: CMSatchelLiaisonSecure
+  id: RMCSatchelBureauObserverSecureFill
+  suffix: Bureau Observer, Filled
+  components:
+  - type: StorageFill
+    contents: # TODO RMC14 film cartridge
+    - id: RMCBinoculars
+    - id: CMPaper
+    - id: CMFolderWhite
+    - id: CMPenClicky
+    - id: RMCRadioHandheldColonyOff
+    - id: CMClipboard # TODO RMC14 tape recorder
+    - id: CMCrowbar
+
+- type: entity
+  parent: CMSatchelLiaisonSecure
+  id: RMCSatchelICBLiaisonSecureFill
+  suffix: Interstellar Commerce Bureau Liaison, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPenClicky
+    - id: CMPaper
+    - id: CMPaper
+    - id: RMCRadioHandheldColonyOff
+    - id: CMCrowbar
+
+- type: entity
+  parent: RMCSatchelBlack
+  id: RMCSatchelBlackSecure
+  name: secure leather satchel
+  description: A very fancy satchel made of fine leather. It's got a lock on it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/black.rsi
+    layers:
+    - state: icon
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+    - state: locked
+      map: [ "enum.LockVisualLayers.Lock" ]
+      shader: unshaded
+  - type: CMStorageVisualizer
+    storageClosed: closedLayer
+    storageOpen: openLayer
+    showOpenClosedWhenEmpty: true
+  - type: LockVisuals
+  - type: RMCIdLockableStorage
+    overrideAccesses:
+    - RMCAccessSeniorCommand
+
+- type: entity
+  parent: RMCSatchelNorm
+  id: RMCSatchelNormSecure
+  name: secure satchel
+  description: A trendy-looking satchel with an ID lock.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/norm.rsi
+    layers:
+    - state: icon
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+    - state: locked
+      map: [ "enum.LockVisualLayers.Lock" ]
+      shader: unshaded
+  - type: CMStorageVisualizer
+    storageClosed: closedLayer
+    storageOpen: openLayer
+    showOpenClosedWhenEmpty: true
+  - type: LockVisuals
+  - type: RMCIdLockableStorage
+    overrideAccesses:
+    - RMCAccessSeniorCommand
+
+- type: entity
   parent: RMCSatchelBlack
   id: RMCSatchelBlackFillSurvivorConstable
   suffix: Survivor, Constable
@@ -288,17 +427,20 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCArmorProvostFlexi # TODO RMC14 provost office handheld beacon
+    - id: RMCArmorProvostFlexi
+    - id: RMCProvostClipboard
+    # TODO RMC14 provost office handheld beacon
 
 - type: entity
   parent: CMSatchelSecurity
-  suffix: Provost
+  suffix: Provost, Inspector
   id: CMSatchelSecurityFilledProvostInspector
   components:
   - type: StorageFill
     contents:
     - id: RMCArmorProvostFlexi
     - id: RMCStampProvostInspector
+    - id: RMCProvostClipboard
 
 - type: entity
   parent: CMSatchelSecurity
@@ -307,7 +449,9 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCArmorProvostMarshal # TODO RMC14 provost office handheld beacon
+    - id: RMCArmorProvostMarshal
+    - id: RMCProvostClipboard
+    # TODO RMC14 provost office handheld beacon
 
 - type: entity
   parent: CMSatchelSecurity
@@ -316,8 +460,10 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCArmorProvostMarshal # TODO RMC14 provost office handheld beacon
+    - id: RMCArmorProvostMarshal
+    - id: RMCProvostClipboard
     - id: RMCTabletCO
+    # TODO RMC14 provost office handheld beacon
 
 - type: entity
   parent: CMSatchelSecurity
@@ -326,8 +472,10 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCArmorProvostMarshal # TODO RMC14 provost office handheld beacon
+    - id: RMCArmorProvostMarshal
+    - id: RMCProvostClipboard
     - id: RMCTabletCO
+    # TODO RMC14 provost office handheld beacon
 
 - type: entity
   parent: CMSatchelSecurity
@@ -337,7 +485,8 @@
   - type: StorageFill
     contents:
     - id: RMCPacketGrenadeFlashBang
-    - id: RMCWeaponTaser # TODO RMC14 4 tear gas grenades
+    - id: RMCWeaponTaser
+    # TODO RMC14 4 tear gas grenades
 
 - type: entity
   parent: CMSatchel
@@ -351,13 +500,24 @@
     - id: CMStampDenied
 
 - type: entity
-  parent: CMSatchelSecurity
-  id: CMSatchelSecurityFilledFaxResponder
-  suffix: Fax Responder
+  parent: CMSatchel
+  id: RMCSatchelFilledFaxResponderHighComm
+  suffix: Fax Responder, HComm
   components:
   - type: StorageFill
     contents:
     - id: CMPenFountain
+    - id: CMStampApproved
+    - id: CMStampDenied
+
+- type: entity
+  parent: CMSatchelSecurity
+  id: CMSatchelSecurityFilledFaxResponderProvost
+  suffix: Fax Responder, Provost
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCProvostPen
     - id: CMStampApproved
     - id: CMStampDenied
 
@@ -504,11 +664,19 @@
   name: UNMC IMP M63A1 grenade satchel
   description: A satchel specially designed to maximize grenade carrying capacity while minimizing the risks of secondary ignition.
   components:
-  # TODO ID locking feature + make lights green when unlocked.
   - type: ExplosionResistance
     damageCoefficient: 0
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/grenadepack.rsi
+    layers:
+    - state: icon
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+    - state: locked
+      map: [ "enum.LockVisualLayers.Lock" ]
+      shader: unshaded
   - type: Storage
     maxItemSize: Normal
     grid:
@@ -517,6 +685,17 @@
       tags:
       - Grenade
   - type: FixedItemSizeStorage
+  - type: CMStorageVisualizer
+    storageClosed: closedLayer
+    storageOpen: openLayer
+    showOpenClosedWhenEmpty: true
+  - type: LockVisuals
+  - type: RMCIdLockableStorage
+    overrideAccesses:
+    - RMCAccessSeniorCommand
+    - CMAccessRequisitions
+    - CMAccessQM
+    - CMAccessSquadLeaderPrep
 
 - type: entity
   parent: CMSatchel
@@ -599,7 +778,8 @@
     - id: CMFolderWhite
     - id: CMPenClicky
     - id: RMCRadioHandheldColonyOff
-    - id: CMClipboard # TODO RMC14 tape recorder
+    - id: CMClipboard
+    - id: RMCUniversalRecorder
     - id: CMCrowbar
 
 - type: entity
@@ -732,6 +912,70 @@
     camouflageVariations: {}
 
 - type: entity
+  parent: RMCBackpackRTO
+  id: RMCBackpackRTOWEYABagPhone
+  name: WEYA T70 portable bag phone
+  description: The T70 is the latest and greatest in portable telephone technology for the consumer market. Often seen on Corporate Executives, day-traders, and those who require a quick-dial to the buisness world.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/PMC/bag_phone.rsi
+    layers:
+    - state: icon
+      map: [ "base" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: Storage
+    grid:
+    - 0,0,14,1 # 15
+  - type: RotaryPhone
+    category: Weston-Yamada
+  - type: ItemCamouflage
+    camouflageVariations: {}
+  - type: GenericVisualizer
+    visuals:
+      enum.RotaryPhoneLayers.Layer:
+        base:
+          Base: { state: icon }
+          Ring: { state: ring }
+          Ear: { state: ear }
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-t70-bag-phone
+
+- type: entity
+  parent: RMCBackpackRTO
+  id: RMCBackpackRTOBagPhone
+  name: RT-8000 portable bag phone
+  description: A fairly basic satchel with a phone attached to it, containing an interior battery for continued use. This model is fairly old, and has seen reproduction by practically every technology corporation around since the patent expired.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/bag_phone.rsi
+    layers:
+    - state: icon
+      map: [ "base" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: Storage
+    grid:
+    - 0,0,14,1 # 15
+  - type: RotaryPhone
+    category: Marine
+  - type: ItemCamouflage
+    camouflageVariations: {}
+  - type: GenericVisualizer
+    visuals:
+      enum.RotaryPhoneLayers.Layer:
+        base:
+          Base: { state: icon }
+          Ring: { state: ring }
+          Ear: { state: ear }
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-bag-phone
+
+- type: entity
   parent: CMSatchel
   id: RMCSatchelLightpack #ERT pack
   name: lightweight combat pack
@@ -802,109 +1046,6 @@
     - id: RMCRangefinder
     - id: RMCExplosivePlastic
     - id: RMCExplosivePlastic
-
-- type: entity
-  parent: RMCSatchelLightpack
-  id: RMCSatchelLightpackFilledRoyal
-  suffix: Filled, Royal
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMFirstAidKitFilled
-    - id: RMCPowerCellSmartgun
-    - id: RMCMagazineSmartGunHT
-      amount: 2
-    - id: RMCPacketGrenadeIncendiaryFilled # TODO RMC14 R2175
-    - id: CMPacketGrenadeHighExplosiveFilled # TODO RMC14 R2175
-    - id: CMPackFlare
-
-- type: entity
-  parent: RMCSatchelLightpack
-  id: RMCSatchelLightpackFilledRoyalCommando
-  suffix: Filled, Royal Commando
-  components:
-  - type: StorageFill
-    contents:
-    - id: RMCMagazineRifleL83A3AP
-    - id: RMCMagazineRifleL83A3
-    - id: RMCPacketGrenadeIncendiaryFilled # TODO RMC14 R2175
-    - id: CMPacketGrenadeHighExplosiveFilled # TODO RMC14 R2175
-    - id: CMPackFlare
-
-- type: entity
-  parent: RMCSatchelLightpack
-  id: RMCSatchelLightpackFilledRoyalMarksman
-  suffix: Filled, Royal Marksman
-  components:
-  - type: StorageFill
-    contents:
-    - id: RMCMagazineRifleL24AP
-    - id: RMCPacketGrenadeIncendiaryFilled # TODO RMC14 R2175
-    - id: CMPacketGrenadeHighExplosiveFilled # TODO RMC14 R2175
-    - id: CMPackFlare
-
-- type: entity
-  parent: RMCSatchelLightpack
-  id: RMCSatchelLightpackFilledRoyalMedic
-  suffix: Filled, Royal Medic
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMAdvFirstAidKitFilled
-    - id: RMCDefibrillatorCompact
-    - id: RMCPacketGrenadeIncendiaryFilled # TODO RMC14 R2175
-    - id: CMPacketGrenadeHighExplosiveFilled # TODO RMC14 R2175 // Why the FUCK does the medic get nades?
-    - id: RMCHeadRoyalBeret
-    - id: CMMaskGas # TODO RMC14 royal marine gas masks
-    - id: RMCSyringeCase
-    - id: CMPortableSurgicalBedSpawnFolded
-    - id: RMCTacticalPrybar
-    - id: RMCMRETSE
-
-- type: entity
-  parent: RMCSatchelLightpack
-  id: RMCSatchelLightpackFilledRoyalLieutenant
-  suffix: Filled, Royal Lieutenant
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMAdvFirstAidKitFilled
-    - id: RMCDefibrillatorCompact
-    - id: RMCPacketGrenadeIncendiaryFilled # TODO RMC14 R2175
-    - id: CMPacketGrenadeHighExplosiveFilled # TODO RMC14 R2175
-    - id: RMCSyringeCase
-    - id: CMPackFlare
-    - id: RMCMagazineRifleL24
-
-- type: entity
-  parent: RMCSatchelLightpack
-  id: RMCSatchelLightpackFilledRoyalMajor
-  suffix: Filled, Royal Major
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMAdvFirstAidKitFilled
-    - id: RMCDefibrillatorCompact
-    - id: RMCPacketGrenadeIncendiaryFilled # TODO RMC14 R2175
-    - id: CMPacketGrenadeHighExplosiveFilled # TODO RMC14 R2175
-    - id: RMCSyringeCase
-    - id: CMPackFlare
-
-- type: entity
-  parent: RMCSatchelLightpack
-  id: RMCSatchelLightpackFilledRoyalTeamlead
-  suffix: Filled, Royal Team Leader
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMAdvFirstAidKitFilled
-    - id: RMCDefibrillatorCompact
-    - id: RMCSyringeCase
-    - id: CMCautery
-    - id: RMCPacketGrenadeIncendiaryFilled # TODO RMC14 R2175
-    - id: CMPacketGrenadeHighExplosiveFilled # TODO RMC14 R2175
-    - id: RMCMagazineRifleL24
-    - id: CMPackFlare
 
 - type: entity
   parent: RMCSatchelLightpack5Slot
@@ -1137,6 +1278,25 @@
   id: RMCSatchelCorporateSynthetic
   suffix: Filled, Corporate Synthetic
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/TSE/tsepa_standard.rsi
+    layers:
+    - state: icon
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+    - state: locked
+      map: [ "enum.LockVisualLayers.Lock" ]
+      shader: unshaded
+  - type: CMStorageVisualizer
+    storageClosed: closedLayer
+    storageOpen: openLayer
+    showOpenClosedWhenEmpty: true
+  - type: LockVisuals
+  - type: RMCIdLockableStorage
+    overrideAccesses:
+    - RMCAccessSeniorCommand
   - type: StorageFill
     contents:
     - id: CMFirstAidKitFilled

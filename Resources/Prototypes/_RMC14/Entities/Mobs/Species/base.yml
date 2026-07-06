@@ -21,6 +21,7 @@
         layer:
         - Opaque
         - XenoProjectileImpassable
+        - Marine
       fix2:
         shape:
           !type:PhysShapeCircle
@@ -229,6 +230,13 @@
       whitelist:
         components:
         - RequisitionsCrate #Lockers/Crates
+  - type: Language
+    spokenLanguages:
+      - English
+    understoodLanguages:
+      - English
+    currentLanguage: English
+    defaultLanguage: English
   - type: MobThresholds
     thresholds:
       0: Alive

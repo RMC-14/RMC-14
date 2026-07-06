@@ -11,6 +11,17 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - English
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - English
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
     - type: Skills
       preset: RMCSkillPresetSurvivor
     - type: EquipSurvivorPreset
@@ -31,7 +42,7 @@
   equipment:
     id: RMCIDCardHalcyon
     jumpsuit: RMCJumpsuitLiaisonBrownTie
-    back: CMSatchel # TODO RMC14 - Lockable
+    back: CMSatchelLiaisonSecure
     shoes: RMCBootsSPP
     gloves: RMCHandsVeteran
     ears: RMCHeadsetDistressHalcyon
@@ -59,7 +70,7 @@
   name: halcyon dynamics liaison preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCCoatBureauTrenchCoatBrown ]
     - [ RMCCoatBureauTrenchCoatGrey ]
