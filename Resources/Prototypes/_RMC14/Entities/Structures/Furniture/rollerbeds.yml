@@ -36,7 +36,7 @@
     tags:
     - CMRollerItem
     - CMRollerBed
-    - RMCSurgerySurfaceUnsuited
+    - RMCSurgerySurfaceAdequate
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/rollerbeds.rsi
     noRot: true
