@@ -23,6 +23,12 @@
     grid:
     - 0,0,3,1 # 2 slots
     maxItemSize: Small
+  - type: ClothingRequireEquipped
+    autoUnequip: true
+    denyReason: rmc-armor-not-freelancer-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformFreelancer
 
 - type: entity
   parent: RMCArmorVestXLBase
@@ -50,6 +56,12 @@
       outerClothing:
       - sprite: _RMC14/Objects/Clothing/OuterClothing/Mercenary/platecarrier_black.rsi
         state: equipped-OUTERCLOTHING
+  - type: ClothingRequireEquipped
+    autoUnequip: true
+    denyReason: rmc-armor-not-freelancer-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformFreelancer
 
 - type: entity
   parent: RMCArmorFreelancerVestBlack
