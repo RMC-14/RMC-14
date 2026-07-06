@@ -54,9 +54,6 @@
   components:
   - type: Transform
     anchored: true
-  - type: Physics
-    bodyType: Static
-    canCollide: false
   - type: Sprite
     sprite: _RMC14/Structures/almayer_props.rsi
     state: ob_fuel
@@ -78,9 +75,6 @@
   components:
   - type: Transform
     anchored: true
-  - type: Physics
-    bodyType: Static
-    canCollide: false
   - type: Sprite
     sprite: _RMC14/Structures/almayer_props.rsi
     state: ob_warhead1

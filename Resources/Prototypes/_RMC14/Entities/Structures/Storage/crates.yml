@@ -916,3 +916,73 @@
       map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _RMC14/Structures/Storage/Crates/woodcrate.rsi
+
+- type: entity
+  parent: RMCCrateSecureAmmo
+  id: RMCCrateOB
+  name: OB Ammo Crate
+  description: A secure crate capable of storing orbital bombardment warheads and fuel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/ob_crate.rsi
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: invoice
+      sprite: _RMC14/Structures/Storage/Crates/labels.rsi
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
+    - state: locked
+      map: ["enum.LockVisualLayers.Lock"]
+      shader: unshaded
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/ob_crate.rsi
+  - type: AccessReader
+    access: [["CMAccessEngineering"],["RMCAccessCommand"]]
+
+- type: entity
+  parent: RMCCrateOB
+  id: RMCCrateOBHE
+  name: OB Ammo Crate (HE)
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCOrbitalCannonWarheadExplosive
+      - id: RMCOrbitalCannonFuel
+      - id: RMCOrbitalCannonFuel
+      - id: RMCOrbitalCannonFuel
+      - id: RMCOrbitalCannonFuel
+      - id: RMCOrbitalCannonFuel
+
+- type: entity
+  parent: RMCCrateOB
+  id: RMCCrateOBCluster
+  name: OB Ammo Crate (Cluster)
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCOrbitalCannonWarheadCluster
+      - id: RMCOrbitalCannonFuel
+      - id: RMCOrbitalCannonFuel
+      - id: RMCOrbitalCannonFuel
+      - id: RMCOrbitalCannonFuel
+      - id: RMCOrbitalCannonFuel
+
+- type: entity
+  parent: RMCCrateOB
+  id: RMCCrateOBIncendiary
+  name: OB Ammo Crate (Incendiary)
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCOrbitalCannonWarheadIncendiary
+      - id: RMCOrbitalCannonFuel
+      - id: RMCOrbitalCannonFuel
+      - id: RMCOrbitalCannonFuel
+      - id: RMCOrbitalCannonFuel
+      - id: RMCOrbitalCannonFuel
