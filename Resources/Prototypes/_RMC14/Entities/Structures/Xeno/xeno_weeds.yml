@@ -430,24 +430,6 @@
     base: weedwindow
     mode: CardinalFlags
 
-- type: entity
-  parent: XenoWeedsWall
-  id: XenoWeedsWindowFrame
-  suffix: Window Frame
-  components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
-    # These sprites extend "behind" the window frame. This ensures it doesn't hide any items there.
-    drawdepth: WallTops
-    layers:
-    - state: weedframe0
-  - type: IconSmooth
-    key: cm_xeno_weeds_windows
-    additionalKeys:
-    - windows
-    base: weedframe
-    mode: CardinalFlags
-
 # Gardener's weeds
 - type: entity # TODO RMC14 sound
   parent: XenoWeeds

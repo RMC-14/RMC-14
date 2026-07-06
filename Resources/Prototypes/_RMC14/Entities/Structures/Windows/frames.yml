@@ -56,7 +56,7 @@
   - type: MinimapColor
     color: "#8d2294ad"
   - type: XenoWeedable
-    spawn: XenoWeedsWindowFrame
+    spawn: XenoWeedsWindow
   - type: ReceiverXenoClaws
     maxHealth: 600
     hitsToDestroy: 3
