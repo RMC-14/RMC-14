@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Server.Atmos.Components;
+using Content.Server.Construction;
 using Content.Server.Spreader;
 using Content.Shared._RMC14.Barricade;
 using Content.Shared._RMC14.CCVar;
@@ -60,6 +61,8 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
         _xenoNestSurfaceQuery = GetEntityQuery<XenoNestSurfaceComponent>();
         _xenoWeedableQuery = GetEntityQuery<XenoWeedableComponent>();
         _xenoWeedsQuery = GetEntityQuery<XenoWeedsComponent>();
+
+        SubscribeLocalEvent<XenoWeedableComponent, ConstructionChangeEntityEvent>(OnConstructionChangeEntity);
 
         Subs.CVar(
             _config,
@@ -203,21 +206,9 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                         if (!HasComp<CommunicationsTowerComponent>(anchoredId))
                             _appearance.SetData(anchoredId, WeededEntityLayers.Layer, true);
 
-                        if (weedable.Spawn == null)
-                            continue;
-
-                        weedable.Entity = SpawnAtPosition(weedable.Spawn, anchoredId.ToCoordinates());
-                        var wallWeeds = EnsureComp<XenoWallWeedsComponent>(weedable.Entity.Value);
-                        wallWeeds.Weeds = source;
-                        Dirty(weedable.Entity.Value, wallWeeds);
-
-                        if (_xenoNestSurfaceQuery.TryComp(weedable.Entity, out var surface))
-                        {
-                            surface.Weedable = anchoredId;
-                            Dirty(weedable.Entity.Value, surface);
-                        }
-
-                        sourceWeeds?.Spread.Add(weedable.Entity.Value);
+                        var wallWeeds = SpawnWallWeeds((anchoredId, weedable), source);
+                        if (wallWeeds is { } spawnedWeeds)
+                            sourceWeeds?.Spread.Add(spawnedWeeds.Owner);
                     }
                 }
             }
@@ -235,5 +226,40 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
             RemCompDeferred<XenoWeedsSpreadingComponent>(uid);
             _spread.Add((uid, weeds));
         }
+    }
+
+    private Entity<XenoWallWeedsComponent>? SpawnWallWeeds(Entity<XenoWeedableComponent> wallToWeed, EntityUid? sourceWeeds)
+    {
+        if (wallToWeed.Comp.Spawn == null)
+            return null;
+
+        var spawnedWeeds = SpawnAtPosition(wallToWeed.Comp.Spawn, wallToWeed.Owner.ToCoordinates());
+        wallToWeed.Comp.Entity = spawnedWeeds;
+
+        var wallWeeds = EnsureComp<XenoWallWeedsComponent>(spawnedWeeds);
+        wallWeeds.Weeds = sourceWeeds;
+        Dirty(spawnedWeeds, wallWeeds);
+
+        if (_xenoNestSurfaceQuery.TryComp(spawnedWeeds, out var nestSurface))
+        {
+            nestSurface.Weedable = wallToWeed;
+            Dirty(spawnedWeeds, nestSurface);
+        }
+
+        return (spawnedWeeds, wallWeeds);
+    }
+
+    // Transfer wall weeds over when one `XenoWeedable` entity gets turned into another. (E.g. Window into window frame)
+    private void OnConstructionChangeEntity(Entity<XenoWeedableComponent> ent, ref ConstructionChangeEntityEvent args)
+    {
+        if (!_xenoWeedableQuery.TryComp(args.Old, out var oldWeedable) ||
+            !TryComp<XenoWallWeedsComponent>(oldWeedable.Entity, out var oldWallWeeds))
+            return;
+
+        if (!_xenoWeedableQuery.TryComp(args.New, out var newWeedable) || newWeedable.Entity != null)
+            return;
+
+        SpawnWallWeeds((args.New, newWeedable), oldWallWeeds.Weeds);
+        // Deletion of the old weeds is handled separately when `args.Old` is swapped out and deleted.
     }
 }
