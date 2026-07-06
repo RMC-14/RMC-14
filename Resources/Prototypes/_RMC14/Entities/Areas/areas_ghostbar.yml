@@ -10,13 +10,14 @@
     avoidBioscan: true
     alwaysPowered: true
     CAS: false
-    Fulton: false
-    Lasing: false
-    WeatherEnabled: false
-    NoTunnel: true
-    SupplyDrop: false
-    MortarPlacecment: false
-    Medevac: false
+    fulton: false
+    lasing: false
+    weatherEnabled: false
+    noTunnel: true
+    supplyDrop: false
+    mortarPlacecment: false
+    medevac: false
+    OB: false
 
 - type: entity
   parent: RMCAreaBase
@@ -30,10 +31,11 @@
     avoidBioscan: true
     alwaysPowered: true
     CAS: false
-    Fulton: false
-    Lasing: false
-    WeatherEnabled: true
-    NoTunnel: true
-    SupplyDrop: false
-    MortarPlacecment: false
-    Medevac: false
+    fulton: false
+    lasing: false
+    weatherEnabled: true
+    noTunnel: true
+    supplyDrop: false
+    mortarPlacecment: false
+    medevac: false
+    OB: false
