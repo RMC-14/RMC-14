@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: PursuitInAshes
-  changes:
-  - message: '[PVE] Royal Crown Marine Riflemen no longer have the pilot skill.'
-    type: Tweak
-  id: 2994
-  time: '2026-03-03T02:13:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9339
 - author: IceNoobXD
   changes:
   - message: "Tweaked the ON sprite of the data detector so it\u2019s more easily\
@@ -4641,5 +4634,12 @@
   id: 3493
   time: '2026-07-04T04:17:01.956603+00:00'
   url: null
+- author: Pyromaniac365
+  changes:
+  - message: Added '(Fax Responder)' to all Fax Responder roles in the spawn menu
+    type: Tweak
+  id: 3494
+  time: '2026-07-06T17:12:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10392
 Name: RMC14
 Order: -1
