@@ -387,6 +387,7 @@
     key: cm_xeno_weeds_walls
     additionalKeys:
     - walls
+    - windows
     base: weedwall
     mode: Corners
   - type: XenoNestSurface
@@ -408,6 +409,22 @@
     priority: -1
     transparency: 0.2
   - type: XenoChargeDontHit
+
+- type: entity
+  parent: XenoWeedsWall
+  id: XenoWeedsWindow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
+    drawdepth: Objects
+    layers:
+    - state: weedwindow0
+  - type: IconSmooth
+    key: cm_xeno_weeds_windows
+    additionalKeys:
+    - windows
+    base: weedwindow
+    mode: CardinalFlags
 
 # Gardener's weeds
 - type: entity # TODO RMC14 sound
