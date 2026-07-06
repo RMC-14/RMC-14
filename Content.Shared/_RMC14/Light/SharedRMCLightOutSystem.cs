@@ -1,7 +1,6 @@
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Attachable.Systems;
 using Content.Shared._RMC14.Light;
-using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Actions;
 using Content.Shared.Hands.EntitySystems;
@@ -17,8 +16,8 @@ namespace Content.Server._RMC14.Light;
 
 public abstract class SharedRMCLightOutSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedHandsSystem _hands = default!;
-    [Dependency] protected readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedHandheldLightSystem _handheldLight = default!;
     [Dependency] private readonly MobStateSystem _mob = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
@@ -50,7 +49,7 @@ public abstract class SharedRMCLightOutSystem : EntitySystem
             TurnOffLights(ent);
     }
 
-    protected virtual void TurnOffLights(Entity<RMCLightsOutOnDeathComponent> ent)
+    private void TurnOffLights(Entity<RMCLightsOutOnDeathComponent> ent)
     {
         var entsToCheck = new HashSet<EntityUid>();
 
@@ -97,5 +96,10 @@ public abstract class SharedRMCLightOutSystem : EntitySystem
                 Dirty(invEnt, holder);
             }
         }
+    }
+
+    protected virtual void ExtinguishFlare(EntityUid ent)
+    {
+
     }
 }
