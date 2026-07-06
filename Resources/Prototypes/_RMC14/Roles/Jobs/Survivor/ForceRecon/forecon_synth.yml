@@ -1,0 +1,80 @@
+- type: job
+  parent: RMCSurvivorForeconBase
+  id: RMCSurvivorForeconSynth
+  name: rmc-job-name-forecon-synth
+  description: rmc-job-description-forecon
+  playTimeTracker: RMCJobSyntheticColony
+  ranks:
+    RMCRankMasterSergeant: []
+  supervisors: rmc-job-supervisors-commander
+  accessGroups: # TODO RMC14 verify parity access groups with FORECON synthetic, i can't find the actual file that stores this
+  - ColonistEngi
+  - Synth
+  startingGear: RMCGearForeconSynthetic
+  spawnMenuRoleName: FORECON Synthetic (Survivor)
+  roleWeight: 0.25
+  icon: "RMCJobIconReconSynthetic"
+  whitelisted: true
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: LanguageLearning
+      preset: RMCLanguageLearningPresetSynthColonist
+    - type: RMCAllowSuitStorage
+    - type: Skills
+      preset: RMCSkillPresetReconSynth
+    - type: MarineOrders
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: forecon_synth
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadFORECON
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: JobPrefix
+      prefix: rmc-job-prefix-synth
+    - type: MeleeWeapon
+      soundHit:
+        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
+        params:
+          variation: 0.15
+          volume: -1
+      angle: 30
+      animation: WeaponArcFist
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 35
+    - type: Synth
+  hidden: true
+
+- type: startingGear
+  id: RMCGearForeconSynthetic
+  equipment:
+    id: RMCIDCardSynth
+    back: CMSatchelFillColonySynthetic # TODO RMC14 check loadouts for synth survivors to see if there's a backpack category
+    jumpsuit: CMJumpsuitMaintTech
+    shoes: CMBootsBlackFilled # TODO RMC14 replace with unique red shoes that hold a knife
+    ears: RMCHeadsetForecon
+    pocket1: RMCPouchToolsFill
+    pocket2: RMCPouchSurvivalSynthFill
+  inhand:
+    - RMCMotionDetector
+    - CMFirstAidKitFilled
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointForeconSynth
+  name: forecon synthetic spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorForeconSynth
+  - type: Sprite
+    state: syn_spawn

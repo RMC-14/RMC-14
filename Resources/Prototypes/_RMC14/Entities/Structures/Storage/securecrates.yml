@@ -104,7 +104,7 @@
     - RMCWeaponPistolHandcannon: RMCMagazinePistolHandcannon
     - RMCWeaponRevolver38Magnum: RMCSpeedLoader38
     - WeaponShotgunCustomBuilt: CMShellShotgunBuckshot
-    - RMCWeaponShotgunHG3712: CMShellShotgunBuckshot
+    - RMCWeaponShotgunM12: CMShellShotgunBuckshot
     - RMCWeaponSMGMP27: RMCMagazineSMGMP27
     - RMCWeaponSMGType64: RMCMagazineSMGType64
     - WeaponSMGMAC15: RMCMagazineSMGMAC15
@@ -151,7 +151,7 @@
 
 - type: entity
   parent: MarkerBase
-  id: RMCSpawnerRandomHalyconGuns
+  id: RMCSpawnerRandomHalcyonGuns
   name: random crate loot spawner
   description: This is a random crate loot spawner
   categories: [ HideSpawnMenu ]
@@ -202,6 +202,7 @@
   parent: BaseStructureDynamic
   id: RMCCrateOpenableBase
   components:
+  - type: VehicleSmashable
   - type: CrateOpenable
     spawn:
     - id: RMCPlankWood2
@@ -256,6 +257,9 @@
         !type:DamageTrigger
         damage: 50
       behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_RMC14/Structures/metalhit.ogg
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: Appearance
@@ -278,12 +282,12 @@
 
 - type: entity
   parent: RMCCrateLarge
-  id: RMCCrateHalyconFireArms
-  name: Halycon firearm crate
+  id: RMCCrateHalcyonFireArms
+  name: Halcyon firearm crate
   description: A hefty wooden crate.
   components:
   - type: SpawnOnTerminate
-    spawn: RMCSpawnerRandomHalyconGuns
+    spawn: RMCSpawnerRandomHalcyonGuns
 #Todo RMC14: Make it so it does it 3 times
 
 # Black market
@@ -543,6 +547,9 @@
         !type:DamageTrigger
         damage: 50
       behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_RMC14/Structures/metalhit.ogg
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: Appearance
@@ -595,6 +602,9 @@
         !type:DamageTrigger
         damage: 50
       behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_RMC14/Structures/metalhit.ogg
       - !type:DoActsBehavior
         acts: ["Destruction"]
 
@@ -671,6 +681,9 @@
         !type:DamageTrigger
         damage: 50
       behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_RMC14/Structures/metalhit.ogg
       - !type:DoActsBehavior
         acts: ["Destruction"]
 
@@ -747,6 +760,9 @@
         !type:DamageTrigger
         damage: 50
       behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_RMC14/Structures/metalhit.ogg
       - !type:DoActsBehavior
         acts: ["Destruction"]
 
@@ -881,5 +897,8 @@
         !type:DamageTrigger
         damage: 50
       behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_RMC14/Structures/metalhit.ogg
       - !type:DoActsBehavior
         acts: ["Destruction"]

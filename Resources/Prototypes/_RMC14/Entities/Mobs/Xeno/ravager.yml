@@ -162,6 +162,8 @@
     leapDamage:
       groups:
         Brute: 45
+  - type: VehicleDamageMultiplier
+    multiplier: 2
   - type: XenoScissorCut
     damage:
       types:
