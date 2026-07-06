@@ -259,7 +259,23 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
         if (!_xenoWeedableQuery.TryComp(args.New, out var newWeedable) || newWeedable.Entity != null)
             return;
 
-        SpawnWallWeeds((args.New, newWeedable), oldWallWeeds.Weeds);
-        // Deletion of the old weeds is handled separately when `args.Old` is swapped out and deleted.
+        // If the new and old entities both spawn the same thing when weeded, just transfer the old one over.
+        if (oldWeedable.Spawn == newWeedable.Spawn)
+        {
+            newWeedable.Entity = oldWeedable.Entity;
+            oldWeedable.Entity = null;
+
+            if (_xenoNestSurfaceQuery.TryComp(newWeedable.Entity, out var nestSurface))
+            {
+                nestSurface.Weedable = args.New;
+                Dirty(newWeedable.Entity.Value, nestSurface);
+            }
+        }
+        // else make a new one.
+        else
+        {
+            SpawnWallWeeds((args.New, newWeedable), oldWallWeeds.Weeds);
+            // Removal of the old weeds is handled separately when `args.Old` is swapped out and deleted.
+        }
     }
 }
