@@ -917,6 +917,7 @@
   - type: Icon
     sprite: _RMC14/Structures/Storage/Crates/woodcrate.rsi
 
+  # TODO RMC14: OB crates spawn with requsitions invoice inside
 - type: entity
   parent: RMCCrateSecureAmmo
   id: RMCCrateOB
@@ -943,7 +944,7 @@
   - type: Icon
     sprite: _RMC14/Structures/Storage/Crates/ob_crate.rsi
   - type: AccessReader
-    access: [["CMAccessEngineering"],["RMCAccessCommand"]]
+    access: [["CMAccessEngineering"], ["RMCAccessCommand"]]
 
 - type: entity
   parent: RMCCrateOB
