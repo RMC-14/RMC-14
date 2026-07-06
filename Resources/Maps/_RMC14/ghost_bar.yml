@@ -386,7 +386,7 @@ entities:
             31: 42,10
             32: 43,10
     - type: BecomesStation
-      id: Ghost Bar
+      id: GhostBar
     - type: MapLight
     - type: Roof
       data: {}
