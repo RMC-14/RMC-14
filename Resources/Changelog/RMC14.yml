@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: IceNoobXD
-  changes:
-  - message: "Tweaked the ON sprite of the data detector so it\u2019s more easily\
-      \ distinguishable from the OFF sprite."
-    type: Tweak
-  id: 2995
-  time: '2026-03-03T02:12:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9305
 - author: GNUtopia
   changes:
   - message: Marines can now take a camo beret in their loadout.
@@ -4641,5 +4633,12 @@
   id: 3494
   time: '2026-07-06T17:12:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10392
+- author: Drazamuffin
+  changes:
+  - message: tweaked some barrel sprites
+    type: Tweak
+  id: 3495
+  time: '2026-07-06T17:32:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9853
 Name: RMC14
 Order: -1
