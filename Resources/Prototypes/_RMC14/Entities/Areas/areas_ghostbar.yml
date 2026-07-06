@@ -15,7 +15,7 @@
     weatherEnabled: false
     noTunnel: true
     supplyDrop: false
-    mortarPlacecment: false
+    mortarPlacement: false
     medevac: false
     OB: false
 
@@ -36,6 +36,6 @@
     weatherEnabled: true
     noTunnel: true
     supplyDrop: false
-    mortarPlacecment: false
+    mortarPlacement: false
     medevac: false
     OB: false
