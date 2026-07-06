@@ -21,13 +21,10 @@
     grid:
     - 0,0,5,1 # 3 slots
     whitelist:
-      components:
-      - CMHemostat
-      - CMRetractor
       tags:
-      - RMCScalpel
       - CMSurgicalLine
       - CMSynthGraft
+      - RMCSurgeryTool
       #TODO FixoVein
   - type: FixedItemSizeStorage
   - type: Tag
