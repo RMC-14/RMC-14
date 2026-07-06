@@ -3,7 +3,6 @@
   id: CMJobSurvivorHalcyonDynamicsLiaison
   name: rmc-job-name-survivor-halcyon-dynamics-liaison
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorCorporate
   startingGear: RMCGearSurvivorHalcyonDynamicsLiaison
   accessGroups:
   - ColonistCorporate
@@ -12,12 +11,19 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - English
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - English
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
+      preset: RMCSkillPresetSurvivor
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetHalcyonDynamicsLiaison
     - type: RMCSurvivor
@@ -29,7 +35,6 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
-  useLoadoutOfJob: CMSurvivorCorporate # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBase
@@ -37,7 +42,7 @@
   equipment:
     id: RMCIDCardHalcyon
     jumpsuit: RMCJumpsuitLiaisonBrownTie
-    back: CMSatchel # TODO RMC14 - Lockable
+    back: CMSatchelLiaisonSecure
     shoes: RMCBootsSPP
     gloves: RMCHandsVeteran
     ears: RMCHeadsetDistressHalcyon
@@ -65,7 +70,7 @@
   name: halcyon dynamics liaison preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCCoatBureauTrenchCoatBrown ]
     - [ RMCCoatBureauTrenchCoatGrey ]

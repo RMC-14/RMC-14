@@ -278,8 +278,8 @@
         points: 15
       - id: CMPacketGrenadeFragFilled
         points: 15
-      #- id: CMPacketGrenadeWPFilled # TODO RMC14 White Phosphorus (WP) Grenades
-      #  points: 15
+      - id: RMCPacketGrenadeWhitePhosphorusFilled
+        points: 15
     - name: Rail Attachments
       entries:
       - id: RMCAttachmentMagneticHarness
@@ -455,7 +455,7 @@
       choices: { CMBag: 1 }
       entries:
       - id: CMBackpackCommand
-      #- id: CMSatchelCommandSecure # TODO RMC14 Secure Satchel (ID LOCK)
+      - id: CMSatchelCommandSecure
       - id: RMCBackpackRTO
       - id: CMSatchelMarineIntel
       - id: RMCSatchelMarineIntelChestrig
@@ -622,7 +622,8 @@
         points: 15
       - id: CMPacketGrenadeFragFilled
         points: 15
-      #- id: CMPacketGrenadesWPFilled # TODO RMC14 Port White Phosphorus (WP) Grenades
+      - id: RMCPacketGrenadeWhitePhosphorusFilled
+        points: 15
       #- id: CMPacketGrenadesG2Filled (x3) # TODO RMC14 Port Electroshock (G2) Grenades
     - name: Rail Attachments
       entries:
@@ -880,7 +881,7 @@
       - CMExecutiveOfficer
       choices: { CMHat: 1 }
       entries:
-      - id: RMCHeadBeret # TODO: Port Officer Beret
+      - id: RMCHeadBeretChiefOfficer
       - id: CMHeadCapPeakedService
       - id: RMCHeadCapFlippable # TODO: Port Patrol Cap
       - id: CMHeadCapOfficer
@@ -1323,12 +1324,19 @@
       entries:
       - id: CMJumpsuitCMO
         recommended: true
-      - id: CMScrubsGreen
+      - id: RMCScrubsCMO
+        recommended: true
+      - id: RMCJumpsuitDoctor
       - id: CMScrubsBlue
       - id: RMCScrubsLightBlue
+      - id: CMScrubsGreen
+      - id: RMCScrubsPharm
       - id: CMScrubsPurple
       - id: RMCScrubsOlive
       - id: RMCScrubsGrey
+      - id: RMCScrubsBrown
+      - id: RMCScrubsWhite
+      - id: RMCScrubsBlack
     - name: Suit
       jobs:
       - CMCMO
@@ -1337,18 +1345,39 @@
       - id: RMCLabcoatCMO
         recommended: true
       - id: RMCLabcoat
-        recommended: true
+      - id: RMCLabcoatPharm
+      - id: RMCLabcoatShort
+        name: High-Cut Labcoat
+      - id: RMCLabcoatLong
+        name: Low-Cut Labcoat
       - id: RMCMedicalApron
+    - name: Snow gear (Snow use only)
+      jobs:
+      - CMCMO
+      takeAll: CMSnowgear
+      entries:
+      - id: RMCCoatSnow
+      - id: RMCMaskBalaclava
+      - id: RMCMaskTornScarfBlack
+        name: Snow Scarf 
     - name: Headwear
       jobs:
       - CMCMO
       choices: { CMHelmet: 1 }
       entries:
       - id: CMHeadCapCMO
-      - id: CMHeadCapSurgOrange
+        recommended: true
+      - id: CMHeadCapSurgCMO
+        recommended: true
       - id: CMHeadCapSurgBlue
-      - id: CMHeadCapSurgPurple
       - id: CMHeadCapSurgGreen
+      - id: CMHeadCapSurgPharm
+      - id: CMHeadCapSurgPurple
+      - id: CMHeadCapSurgOlive
+      - id: CMHeadCapSurgGrey
+      - id: CMHeadCapSurgBrown
+      - id: CMHeadCapSurgWhite
+      - id: CMHeadCapSurgBlack
     - name: Bag
       jobs:
       - CMCMO
@@ -1367,8 +1396,10 @@
       entries:
       - id: CMBeltMedicBagFilled
         name: M276 pattern lifesaver bag (Full)
+        recommended: true
       - id: CMBeltMedicalFilled
         name: M276 medical storage rig (Full)
+        recommended: true
     - name: Personal Sidearm
       jobs:
       - CMCMO
@@ -1419,7 +1450,9 @@
         name: first-aid pouch (pills)
       - id: RMCPouchFirstResponder
       - id: RMCPouchMedical
+        recommended: true
       - id: RMCPouchMedkit
+        recommended: true
       - id: RMCPouchReagentCanisterBicaridine
         recommended: true
         name: Pressurized Reagent Canister Pouch\n(Bicaridine)
@@ -1460,7 +1493,9 @@
       - id: CMHeadsetMedical
         amount: 15
       - id: CMHeadsetResearcher
-        amount: 15
+        amount: 30
+      - id: RMCCPRDummy
+        amount: 5
     # ////////////////////////////////////
     # Auxiliary Support Officer
     # ////////////////////////////////////

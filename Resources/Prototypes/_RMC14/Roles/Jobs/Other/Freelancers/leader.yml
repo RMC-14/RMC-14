@@ -20,6 +20,19 @@
     - type: NpcFactionMember
       factions:
       - WeYa
+    - type: Language
+      spokenLanguages:
+      - English
+      - Russian
+      - Chinese
+      - Japanese
+      understoodLanguages:
+      - English
+      - Russian
+      - Chinese
+      - Japanese
+      currentLanguage: English
+      defaultLanguage: English
     - type: Skills
       skills:
         RMCSkillCqc: 1
@@ -32,7 +45,7 @@
         RMCSkillJtac: 3
         RMCSkillLeadership: 2
         RMCSkillOverwatch: 1
-        RMCSkillPolice: 2
+        RMCSkillPolice: 1 # RMC14 disallow use of flashbangs
       # TODO RMC14 add English, russian, Chinese and Japanese languages
     - type: MarineOrders
     - type: SquadArmorWearer

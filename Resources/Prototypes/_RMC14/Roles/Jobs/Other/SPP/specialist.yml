@@ -19,6 +19,17 @@
     - type: NpcFactionMember
       factions:
       - SPP
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - English
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - English
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
     - type: Skills
       skills:
         RMCSkillCqc: 1
@@ -31,6 +42,7 @@
         RMCSkillMeleeWeapons: 1
         RMCSkillSpecialistWeapons: 1
     - type: SquadArmorWearer
+    - type: QYJWhitelist
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-specialist
   hidden: true

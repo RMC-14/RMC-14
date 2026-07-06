@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseRecharger
+  parent: [ BaseRecharger, RMCConstructibleMachine ]
   id: RMCRecharger
   name: recharger
   components:
@@ -8,10 +8,14 @@
     drawdepth: SmallObjects
     layers:
     - state: recharger
-      #map: ["enum.PowerChargerVisualLayers.Base"] # TODO RMC14 charge visuals
+      map: ["enum.PowerChargerVisualLayers.Base"]
     - state: recharger-0
-      #map: ["enum.PowerChargerVisualLayers.Light"]
+      map: ["enum.PowerChargerVisualLayers.Light"]
       shader: unshaded
+  - type: PowerChargerVisuals
+    emptyState: "recharger"
+    occupiedState: "recharger"
+    chargeLevelState: "recharger-{0}"
   - type: Fixtures
     fixtures:
       fix1:
@@ -27,10 +31,15 @@
       machine_board: !type:Container
       machine_parts: !type:Container
   - type: ApcPowerReceiver
-    needsPower: false # TODO RMC14
-    powerLoad: 0 #15 kW
+    needsPower: true
+    powerLoad: 250
+  - type: RMCPowerReceiver
+    idleLoad: 4
+    activeLoad: 15000
+    channel: Equipment
   - type: Charger
     chargeRate: 1000
+    chargeLevelSteps: 6
   - type: ItemSlots
     slots:
       charger_slot:
@@ -55,6 +64,14 @@
         whitelist:
           components:
             - Stunbaton
+  - type: Construction
+    graph: CMMachineFrame
+    node: machine
+    containers:
+    - machine_parts
+    - machine_board
+  - type: Machine
+    board: RMCRechargerCircuitboard
 
 - type: entity
   parent: RMCRecharger

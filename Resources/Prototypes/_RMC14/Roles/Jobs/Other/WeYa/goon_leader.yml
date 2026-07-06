@@ -20,6 +20,15 @@
     - type: NpcFactionMember
       factions:
       - WeYa
+    - type: Language
+      spokenLanguages:
+      - English
+      - Japanese
+      understoodLanguages:
+      - English
+      - Japanese
+      currentLanguage: English
+      defaultLanguage: English
     - type: MarineOrders
     - type: Skills
       skills:
@@ -34,6 +43,13 @@
         RMCSkillLeadership: 1
         RMCSkillFirearms: 1
     - type: RMCTrackable
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: goon_leader
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
 
 - type: playTimeTracker
   id: RMCJobWeYaGoonLead

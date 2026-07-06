@@ -1,4 +1,7 @@
-﻿- type: entity
+﻿
+# Survivor skills
+
+- type: entity
   id: RMCSkillPresetSurvivor
   name: Survivor
   categories: [ HideSpawnMenu ]
@@ -12,86 +15,73 @@
 
 - type: entity
   parent: RMCSkillPresetSurvivor
-  id: RMCSkillPresetSurvivorWeYaManager
-  name: Survivor WeYa Manager
+  id: RMCSkillPresetSurvivorResearcher
+  name: Survivor Researcher
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
     skills:
-      RMCSkillLeadership: 3
-      RMCSkillIntel: 2
-      RMCSkillMedical: 1
-      RMCSkillOverwatch: 1
+      RMCSkillMedical: 3
+      RMCSkillSurgery: 2
+      RMCSkillResearch: 1
 
 - type: entity
   parent: RMCSkillPresetSurvivor
-  id: RMCSkillPresetSurvivorMarshal
-  name: Deputy Marshal Survivor
+  id: RMCSkillPresetSurvivorDoctor
+  name: Survivor Doctor
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
     skills:
-      RMCSkillEngineer: 1
-      RMCSkillMeleeWeapons: 1
-      RMCSkillMedical: 1
-      RMCSkillCqc: 2
-      RMCSkillFirearms: 2
-      RMCSkillPolice: 0 # RMC14
+      RMCSkillMedical: 3
+      RMCSkillSurgery: 2
       RMCSkillFireman: 2
 
 - type: entity
   parent: RMCSkillPresetSurvivor
-  id: RMCSkillPresetSurvivorGoon
-  name: Survivor Goon
+  id: RMCSkillPresetSurvivorEngineer
+  name: Survivor Engineer
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
     skills:
-      RMCSkillEngineer: 1
-      RMCSkillMedical: 1
-      RMCSkillCqc: 1
-      RMCSkillFirearms: 2
-      RMCSkillPolice: 0 # RMC14
-      RMCSkillFireman: 2
-      RMCSkillVehicles: 1
-
-- type: entity
-  parent: RMCSkillPresetSurvivorGoon
-  id: RMCSkillPresetSurvivorGoonMedic
-  name: Survivor Goon Medic
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: SkillPreset
-    skills:
-      RMCSkillMedical: 2
-      RMCSkillSurgery: 1
-
-- type: entity
-  parent: RMCSkillPresetSurvivorGoon
-  id: RMCSkillPresetSurvivorGoonTechnician
-  name: Survivor Goon Technician
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: SkillPreset
-    skills:
-      RMCSkillConstruction: 2
       RMCSkillEngineer: 2
-      RMCSkillFireman: 2
+      RMCSkillConstruction: 2
+      RMCSkillVehicles: 1
       RMCSkillPowerLoader: 2
 
 - type: entity
-  parent: RMCSkillPresetSurvivorGoon
-  id: RMCSkillPresetSurvivorGoonLead
-  name: Survivor Goon Lead
+  parent: RMCSkillPresetSurvivor
+  id: RMCSkillPresetSurvivorChaplain
+  name: Survivor Chaplain
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
     skills:
-      RMCSkillPolice: 2
-      RMCSkillFireman: 2
-      RMCSkillConstruction: 2
-      RMCSkillEngineer: 2
       RMCSkillLeadership: 1
+
+- type: entity
+  parent: RMCSkillPresetSurvivor
+  id: RMCSkillPresetSurvivorGangLeader
+  name: Survivor Gang Leader
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillCqc: 2
+      RMCSkillLeadership: 1
+
+- type: entity
+  parent: RMCSkillPresetSurvivor
+  id: RMCSkillPresetSurvivorPrisoner
+  name: Survivor Prisoner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillCqc: 2
+      RMCSkillMeleeWeapons: 1
+      RMCSkillVehicles: 1
 
 - type: entity
   parent: RMCSkillPresetSurvivor
@@ -119,95 +109,47 @@
 
 - type: entity
   parent: RMCSkillPresetSurvivor
-  id: RMCSkillPresetSurvivorWeYaPMCStandard
-  name: Survivor PMC Standard
+  id: RMCSkillPresetSurvivorPizzaGalaxyDriver
+  name: Survivor Pizza Galaxy Delivery Driver
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
     skills:
-      RMCSkillCqc: 1
-      RMCSkillPolice: 0 # RMC14
-      RMCSkillFireman: 2
-      RMCSkillMedical: 1
-      RMCSkillFirearms: 2
       RMCSkillVehicles: 1
 
 - type: entity
   parent: RMCSkillPresetSurvivor
-  id: RMCSkillPresetSurvivorWeYaPMCMedic
-  name: Survivor PMC Medic
+  id: RMCSkillPresetSurvivorCommercialPilot
+  name: Survivor Commercial Pilot
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
     skills:
-      RMCSkillCqc: 1
-      RMCSkillPolice: 0 # RMC14
-      RMCSkillFireman: 2
-      RMCSkillMedical: 2
-      RMCSkillSurgery: 1
-      RMCSkillEndurance: 2
-      RMCSkillFirearms: 2
-      RMCSkillVehicles: 1
+      RMCSkillPilot: 2
+      RMCSkillLeadership: 1
 
 - type: entity
   parent: RMCSkillPresetSurvivor
-  id: RMCSkillPresetSurvivorWeYaPMCEngineer
-  name: Survivor PMC Engineer
+  id: RMCSkillPresetSurvivorParamedic
+  name: Survivor Paramedic
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
     skills:
-      RMCSkillCqc: 1
-      RMCSkillPolice: 0 # RMC14
-      RMCSkillFireman: 2
-      RMCSkillMedical: 1
-      RMCSkillEndurance: 2
-      RMCSkillFirearms: 2
+      RMCSkillMedical: 3
+      RMCSkillSurgery: 2
       RMCSkillVehicles: 1
+      RMCSkillFireman: 2
+
+- type: entity
+  parent: RMCSkillPresetSurvivor
+  id: RMCSkillPresetSurvivorFireProtectionSpecialist
+  name: Survivor Fire Protection Specialist
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
       RMCSkillEngineer: 2
-      RMCSkillConstruction: 2
-      RMCSkillPowerLoader: 2
-
-- type: entity
-  parent: RMCSkillPresetSurvivor
-  id: RMCSkillPresetSurvivorWeYaPMCLeader
-  name: Survivor PMC Team Leader
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: SkillPreset
-    skills:
-      RMCSkillCqc: 1
-      RMCSkillPolice: 0 # RMC14
-      RMCSkillFireman: 2
       RMCSkillMedical: 1
-      RMCSkillEndurance: 2
-      RMCSkillFirearms: 2
-      RMCSkillVehicles: 1
-      RMCSkillEngineer: 2
-      RMCSkillConstruction: 2
-      RMCSkillLeadership: 2
-      RMCSkillOverwatch: 1
-      RMCSkillJtac: 2
-      RMCSkillIntel: 2
-
-- type: entity
-  parent: RMCSkillPresetSurvivor
-  id: RMCSkillPresetSurvivorWeYaPMCCommander
-  name: Survivor PMC Field Operations Leader
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: SkillPreset
-    skills:
-      RMCSkillCqc: 1
-      RMCSkillPolice: 0 # RMC14
       RMCSkillFireman: 2
-      RMCSkillMedical: 1
-      RMCSkillEndurance: 2
-      RMCSkillFirearms: 2
       RMCSkillVehicles: 1
-      RMCSkillEngineer: 2
-      RMCSkillConstruction: 2
-      RMCSkillLeadership: 3 # Replace with 4 when skill change comes around
-      RMCSkillOverwatch: 1
-      RMCSkillJtac: 2
-      RMCSkillIntel: 2

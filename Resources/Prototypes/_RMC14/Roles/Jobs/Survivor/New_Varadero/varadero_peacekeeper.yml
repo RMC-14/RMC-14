@@ -1,0 +1,49 @@
+- type: job
+  parent: CMSurvivorSecurity
+  id: CMSurvivorILRCPeacekeeper
+  name: cm-job-name-survivor-un-peacekeeper
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorSecurity
+  startingGear: RMCGearSurvivorILRCPeacekeeper
+  spawnMenuRoleName: ILRC peacekeeper (NV Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetSurvivorMarshal
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetILRCPeacekeeper
+  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorSecurity
+  id: RMCGearSurvivorILRCPeacekeeper
+  equipment:
+    head: ArmorHelmetPMCRiotShield
+    jumpsuit: RMCJumpsuitRiotControl
+    outerClothing: RMCArmorPMCRiot
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorILRCPeacekeeper
+  name: survivor ILRC peacekeeper spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: entity
+  parent: RMCSurvivorPresetSecurity
+  id: RMCGearSurvivorPresetILRCPeacekeeper
+  name: ILRC peacekeeper colonist preset
+  categories: [ HideSpawnMenu ]

@@ -1,4 +1,7 @@
 - type: Tag
+  id: RMCSkillPamphlet
+
+- type: Tag
   id: CMCartridge10x20mm
 
 - type: Tag
@@ -89,7 +92,22 @@
   id: RMCWeaponRevolverM44
 
 - type: Tag
+  id: RMCSheetMetal
+
+- type: Tag
   id: RMCGlass
+
+- type: Tag
+  id: RMCFoldingBarricade
+
+- type: Tag
+  id: RMCHelmet
+
+- type: Tag
+  id: RMCPVEArmor
+
+- type: Tag
+  id: RMCPVEArmorAccessory
 
 - type: Tag
   id: Scabbard
@@ -98,10 +116,16 @@
   id: RMCMacheteScabbard
 
 - type: Tag
+  id: RMCMacheteHolder
+
+- type: Tag
   id: RMCScalpel
 
 - type: Tag
   id: RMCScrewdriver
+
+- type: Tag
+  id: LightReplacer
 
 - type: Tag
   id: ThrowingKnife
@@ -125,6 +149,11 @@
   id: Bacon
 
 - type: Tag
+
+  id: Watch
+
+- type: Tag
+
   id: RMCPinpointer
 
 - type: Tag
@@ -159,3 +188,12 @@
 
 - type: Tag
   id: RMCXenoParasitePreparingLeap
+
+- type: Tag
+  id: RMCSynthGrabbable # whitelist tag for synths being able to grab particular xenos
+
+- type: Tag
+  id: RMCSentryLaptop
+
+- type: Tag
+  id: RMCDataDisk

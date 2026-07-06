@@ -17,6 +17,15 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      understoodLanguages:
+      - Japanese
+      - English
+      currentLanguage: English
+      defaultLanguage: English
     - type: Skills
       preset: RMCSkillPresetSurvivorWeYaPMCStandard
     - type: RMCSurvivor
@@ -30,9 +39,14 @@
       - WeYa
       - Civilian
     - type: AssignSquad
-      whitelist:
-        tags:
-        - RMCSquadPMC
+      squad: SquadPMC
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pmc_gun
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_pmc
   useLoadoutOfJob: CMSurvivor # for inheritance
 
 - type: startingGear
@@ -41,7 +55,7 @@
   equipment:
     jumpsuit: RMCJumpsuitVeteranPMCNoWebbingPatch
     shoes: RMCBootsPMCFilled
-    gloves: CMHandsBlackMarine
+    gloves: RMCHandsVeteran
     mask: RMCMaskCoifPMC
     ears: RMCHeadsetHvHWeYaPMC
     back: RMCSatchelPMC
@@ -72,12 +86,12 @@
   name: pmc standard survivor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomStartingGear:
       jumpsuit:
       - RMCJumpsuitVeteranPMCNoWebbingPatch
       - RMCJumpsuitVeteranPMCNoWebbingPatchFolded
     randomOutfits:
-    - [ CMArmorM4PMCLight, ArmorHelmetPMC]
-    - [ CMArmorM4PMCLight, ArmorHelmetPMC] # TODO RMC14: PMC bulletproof armor, black tactical cap
-    - [ WeaponSMGM63, ArmorHelmetPMC] # TODO RMC14: PMC helmet (enclosed)
+    - [ CMArmorM4PMCLight, ArmorHelmetPMC ]
+    - [ RMCArmorM4PMCBulletProof, RMCArmorHelmetPMCBlack ]
+    - [ WeaponSMGM63, ArmorHelmetPMC, RMCArmorM4PMCNoLight ] # TODO RMC14: PMC helmet (enclosed)
