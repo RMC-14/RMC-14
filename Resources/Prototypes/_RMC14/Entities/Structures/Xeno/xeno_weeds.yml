@@ -405,6 +405,10 @@
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        collection: XenoResinBreak
   - type: ImmuneToUnarmed
   - type: WallMount
     arc: 360
