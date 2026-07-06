@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Aura;
 using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Xenonids.Heal;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Stab;
 using Content.Shared.Actions;
@@ -23,6 +24,7 @@ public sealed class XenoSoakSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
+    [Dependency] private readonly SharedXenoHealSystem _heal = default!;
 
     public override void Initialize()
     {
@@ -60,8 +62,7 @@ public sealed class XenoSoakSystem : EntitySystem
         if (xeno.Comp.DamageAccumulated < xeno.Comp.DamageGoal)
             return;
 
-        var amount = -_rmcDamageable.DistributeTypesTotal(xeno.Owner, xeno.Comp.Heal);
-        _damage.TryChangeDamage(xeno, amount, origin: xeno, tool: xeno);
+        _heal.Heal(xeno, xeno.Comp.Heal);
 
         foreach (var action in _rmcActions.GetActionsWithEvent<XenoTailStabEvent>(xeno))
         {
