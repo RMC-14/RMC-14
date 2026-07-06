@@ -4,8 +4,8 @@ meta:
   engineVersion: 267.4.3
   forkId: ""
   forkVersion: ""
-  time: 07/05/2026 23:33:04
-  entityCount: 3082
+  time: 07/06/2026 01:43:59
+  entityCount: 3085
 maps:
 - 1
 grids:
@@ -12292,6 +12292,21 @@ entities:
     components:
     - type: Transform
       pos: 15.5,10.5
+      parent: 1
+  - uid: 3083
+    components:
+    - type: Transform
+      pos: 17.5,21.5
+      parent: 1
+  - uid: 3084
+    components:
+    - type: Transform
+      pos: 25.5,18.5
+      parent: 1
+  - uid: 3085
+    components:
+    - type: Transform
+      pos: 33.5,26.5
       parent: 1
 - proto: RMCFishingPole
   entities:
