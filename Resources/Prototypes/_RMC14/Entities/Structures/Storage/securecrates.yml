@@ -151,7 +151,7 @@
 
 - type: entity
   parent: MarkerBase
-  id: RMCSpawnerRandomHalyconGuns
+  id: RMCSpawnerRandomHalcyonGuns
   name: random crate loot spawner
   description: This is a random crate loot spawner
   categories: [ HideSpawnMenu ]
@@ -282,12 +282,12 @@
 
 - type: entity
   parent: RMCCrateLarge
-  id: RMCCrateHalyconFireArms
-  name: Halycon firearm crate
+  id: RMCCrateHalcyonFireArms
+  name: Halcyon firearm crate
   description: A hefty wooden crate.
   components:
   - type: SpawnOnTerminate
-    spawn: RMCSpawnerRandomHalyconGuns
+    spawn: RMCSpawnerRandomHalcyonGuns
 #Todo RMC14: Make it so it does it 3 times
 
 # Black market
