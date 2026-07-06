@@ -278,6 +278,7 @@
 - type: entity
   parent: XenoHiveWeeds
   id: XenoHiveWeedsCluster
+  suffix: Cluster, 6 Range
   components:
   - type: XenoWeeds
     range: 6
@@ -287,6 +288,7 @@
 - type: entity
   parent: XenoHiveWeeds
   id: XenoHiveWeedsCore
+  suffix: Core, 8 Range
   components:
   - type: XenoWeeds
     range: 8
@@ -358,6 +360,7 @@
 - type: entity
   id: XenoWeedsWall
   name: weeds
+  suffix: Wall
   placement:
     mode: SnapgridCenter
     snap:
@@ -413,6 +416,7 @@
 - type: entity
   parent: XenoWeedsWall
   id: XenoWeedsWindow
+  suffix: Window
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
@@ -429,6 +433,7 @@
 - type: entity
   parent: XenoWeedsWall
   id: XenoWeedsWindowFrame
+  suffix: Window Frame
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
@@ -447,6 +452,7 @@
 - type: entity # TODO RMC14 sound
   parent: XenoWeeds
   id: XenoHardyWeeds
+  suffix: Gardener
   components:
   - type: Sprite
     color: "#a1a1a1"
@@ -508,7 +514,7 @@
 - type: entity
   parent: XenoHardyWeeds
   id: XenoHardyWeedsSourceHidden
-  suffix: Hidden Node
+  suffix: Hidden Node, Gardener
   components:
   - type: Sprite
     layers:
