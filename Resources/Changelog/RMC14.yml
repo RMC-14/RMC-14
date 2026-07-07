@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: GNUtopia
-  changes:
-  - message: Marines can now take a camo beret in their loadout.
-    type: Add
-  id: 2996
-  time: '2026-03-03T02:10:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9370
 - author: SharkSnake98
   changes:
   - message: Added new to job Popup for CL
@@ -4640,5 +4633,12 @@
   id: 3495
   time: '2026-07-06T17:32:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9853
+- author: Vermidia
+  changes:
+  - message: Fixed Xippy (Xeno Imaginary friend) not being able to speak xeno.
+    type: Fix
+  id: 3496
+  time: '2026-07-07T12:26:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10217
 Name: RMC14
 Order: -1
