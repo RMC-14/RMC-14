@@ -8,8 +8,6 @@
   - type: VehicleSmashable
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/fridge.rsi
-  - type: AccessReader
-    access: [["CMAccessKitchen"], ["RMCAccessCommand"]]
   - type: AntiRottingContainer
 
 - type: entity
