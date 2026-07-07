@@ -42,9 +42,6 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
         {
             ApplyGenerationModifier((ent.Owner, comp));
 
-            if(TryComp<MovementSpeedModifierComponent>(ent.Owner, out var moveComp))
-                Dirty(ent.Owner, moveComp);
-
             return;
         }
 
