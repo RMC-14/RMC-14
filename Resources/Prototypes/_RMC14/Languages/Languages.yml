@@ -222,6 +222,30 @@
     messageWrapOverrides: {}
 
 - type: language
+  id: Hindi
+  name: "Hindi"
+  description: "An old Earth language."
+  isVisibleLanguage: true
+  typefaceId: DefaultBold
+  textSize: null
+  showLanguageName: true
+  languageIcon:
+    sprite: /Textures/_RMC14/Interface/flags.rsi
+    state: IN
+  canUseRadio: true
+  needsSpeech: true
+  expectedVocabularySize: 140
+  obfuscationMethod:
+    !type:SyllableObfuscation
+    replacement: ["ka", "se", "aap", "wah", "kya", "haan", "is", "muj", "he", "hain", "par", "un", "raj", "kam", "kai", "din", "raat", "sam", "ba", "kev", "al", "var", "sha"]
+    minSyllables: 1
+    maxSyllables: 4
+  speechOverride:
+    chatTypeOverride: null
+    speechVerbOverrides: null
+    messageWrapOverrides: {}
+
+- type: language
   id: SignLanguage
   name: "Sign Language"
   description: "A visual language using hand gestures and body movements."

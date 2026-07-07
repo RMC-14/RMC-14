@@ -60,3 +60,12 @@
   cost: 1
   components: []
   language: Scandinavian
+
+- type: trait
+  id: HindiLanguage
+  name: rmc-trait-hindi-language-name
+  description: rmc-trait-hindi-language-desc
+  category: SpeechTraits
+  cost: 1
+  components: []
+  language: Hindi
