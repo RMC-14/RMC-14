@@ -93,3 +93,12 @@
       amount: 14
     - id: RMCFoodMeatFish
       amount: 14
+
+- type: entity
+  parent: CMLockerFridge
+  id: CMLockerFridgeColony
+  name: fridge
+  suffix: colony
+  components:
+  - type: AccessReader
+    access: [["CMAccessColonyPublic"]]
