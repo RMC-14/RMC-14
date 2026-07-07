@@ -598,15 +598,21 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<bool> RMCLightningMaxAmountLightNearbyEnabled =
         CVarDef.Create("rmc.lighting_max_amount_light_nearby_enabled", true, CVar.REPLICATED | CVar.SERVER);
-        
+
     public static readonly CVarDef<float> RMCWeedSpreadMaxProcessTimeMilliseconds =
         CVarDef.Create("rmc.weed_spread_max_process_time_milliseconds", 1f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> RMCDoAfterCancelMaxProcessTimeMilliseconds =
         CVarDef.Create("rmc.do_after_cancel_max_process_time_milliseconds", 1f, CVar.REPLICATED | CVar.SERVER);
-        
+
     public static readonly CVarDef<bool> RMCGMRequestEnabled =
         CVarDef.Create("rmc.gm_request_enabled", false, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCGMRequestMaxLength =
+        CVarDef.Create("rmc.gm_request_max_length", 300,  CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCGMRequestCooldownSeconds =
+        CVarDef.Create("rmc.gm_request_cooldown_seconds", 10, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<string> RMCGMRequestSound =
         CVarDef.Create("rmc.gm_request_sound", "/Audio/_RMC14/Effects/Admin/gmrequest.ogg", CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);

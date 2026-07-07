@@ -1,11 +1,13 @@
 using System.Threading;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.GMRequest;
 using Content.Shared._RMC14.Roles;
 using Content.Shared.Ghost;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.GMRequest;
 /// <summary>
@@ -18,8 +20,10 @@ public sealed class GMRequestManager
 {
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
+    [Dependency] private readonly Robust.Shared.Configuration.IConfigurationManager _cfg = default!;
     [Dependency] private readonly IEntityManager _entMan = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+
     public Dictionary<int, GMRequestLog> Logs { get; } = new();
 
     private int _currentLogId;
@@ -33,6 +37,7 @@ public sealed class GMRequestManager
     {
         var entityname = Loc.GetString("rmc-gm-request-log-entity-default");
 
+        //Determine entity name and job, if possible
         if (_entMan.TryGetComponent(sender.AttachedEntity, out MetaDataComponent? metaData))
         {
             var job = string.Empty;
@@ -46,6 +51,12 @@ public sealed class GMRequestManager
                 _entMan.HasComponent<GhostComponent>(sender.AttachedEntity)
                     ? Loc.GetString("rmc-gm-request-log-entity-ghost")
                     : $"{metaData.EntityName}{job}";
+        }
+
+        //Truncate messages that are too long
+        if (message.Length > _cfg.GetCVar(RMCCVars.RMCGMRequestMaxLength))
+        {
+            message = message[.._cfg.GetCVar(RMCCVars.RMCGMRequestMaxLength)];
         }
 
         var log = new GMRequestLog(

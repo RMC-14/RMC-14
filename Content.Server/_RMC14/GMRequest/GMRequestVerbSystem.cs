@@ -8,6 +8,7 @@ using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.GMRequest;
@@ -18,10 +19,16 @@ namespace Content.Server._RMC14.GMRequest;
 public sealed class GMRequestVerbSystem : EntitySystem
 {
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly PopupSystem _popupSystem = default!;
     [Dependency] private readonly QuickDialogSystem _quickDialog = default!;
     [Dependency] private readonly GMRequestManager _gmRequestManager = default!;
+
+    //Tracks the next permitted time to send a request for a player
+    //Handled here to avoid extra Shared systems, components, etc
+    private Dictionary<ICommonSession, TimeSpan> _cooldowns = new();
 
     public override void Initialize()
     {
@@ -77,6 +84,15 @@ public sealed class GMRequestVerbSystem : EntitySystem
     {
         if (sender.AttachedEntity == null)
             return;
+
+        if (_cooldowns.TryGetValue(sender, out var time) && time > _timing.CurTime)
+        {
+            var delay = (int)Math.Ceiling((time -  _timing.CurTime).TotalSeconds);
+            _popupSystem.PopupEntity(Loc.GetString("rmc-gm-request-verb-cooldown", ("secs", delay)), sender.AttachedEntity.Value, sender, PopupType.SmallCaution);
+            return;
+        }
+
+        _cooldowns[sender] =  _timing.CurTime + TimeSpan.FromSeconds(_cfg.GetCVar(RMCCVars.RMCGMRequestCooldownSeconds));
 
         _popupSystem.PopupEntity(Loc.GetString("rmc-gm-request-verb-sent"), sender.AttachedEntity.Value, sender, PopupType.Medium);
 

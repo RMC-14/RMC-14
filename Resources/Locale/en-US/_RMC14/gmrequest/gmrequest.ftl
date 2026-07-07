@@ -2,6 +2,7 @@ rmc-gm-request-verb = GM Request
 rmc-gm-request-verb-ui-title = Request
 rmc-gm-request-verb-ui-prompt = Message
 rmc-gm-request-verb-sent = Your request has been sent...
+rmc-gm-request-verb-cooldown = Please wait {$secs} seconds to send another request.
 
 rmc-gm-request-subtle-ui-title = Subtle Message
 rmc-gm-request-subtle-ui-message = Message...

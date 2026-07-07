@@ -18,8 +18,6 @@ public sealed partial class GMRequestWindow : DefaultWindow
     [Dependency] private readonly IClientConsoleHost _clientConsole = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
 
-    public Dictionary<int, GMRequestLog> Logs = new();
-
     public GMRequestLog? _selectedLog;
     public int? _selectedLogId;
 
