@@ -15,12 +15,6 @@ namespace Content.Packaging;
 
 public static class ClientPackaging
 {
-    //RMC14
-    private const string ResourcesDirectory = "Resources";
-    private const string IgnoredPrototypesDirectory = "IgnoredPrototypes";
-    private const string YamlSearchPattern = "*.yml";
-    //RMC14
-
     /// <summary>
     /// Be advised this can be called from server packaging during a HybridACZ build.
     /// </summary>
@@ -112,12 +106,12 @@ public static class ClientPackaging
     private static HashSet<string> ReadIgnoredPrototypePaths(string contentDir)
     {
         var ignored = new HashSet<string>(StringComparer.Ordinal);
-        var ignoredDir = Path.Combine(contentDir, ResourcesDirectory, IgnoredPrototypesDirectory);
+        var ignoredDir = Path.Combine(contentDir, "Resources", "IgnoredPrototypes");
 
         if (!Directory.Exists(ignoredDir))
             return ignored;
 
-        foreach (var file in Directory.EnumerateFiles(ignoredDir, YamlSearchPattern))
+        foreach (var file in Directory.EnumerateFiles(ignoredDir, "*.yml"))
         {
             using var reader = new StreamReader(file, EncodingHelpers.UTF8);
 

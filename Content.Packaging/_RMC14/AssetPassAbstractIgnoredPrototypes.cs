@@ -8,6 +8,9 @@ using Robust.Shared.Utility;
 
 namespace Content.Packaging._RMC14;
 
+/// <summary>
+/// Marks ignored client prototypes as abstract before prototype directories are merged.
+/// </summary>
 public sealed class AssetPassAbstractIgnoredPrototypes : AssetPass
 {
     private readonly IReadOnlySet<string> _ignoredPrototypePaths;
@@ -19,7 +22,7 @@ public sealed class AssetPassAbstractIgnoredPrototypes : AssetPass
 
     protected override AssetFileAcceptResult AcceptFile(AssetFile file)
     {
-        if (!IsIgnoredPrototypePath(file.Path))
+        if (!file.Path.EndsWith(".yml", StringComparison.Ordinal) || !IsIgnoredPrototypePath(file.Path))
             return AssetFileAcceptResult.Pass;
 
         using var stream = file.Open();
@@ -48,7 +51,7 @@ public sealed class AssetPassAbstractIgnoredPrototypes : AssetPass
             }
         }
 
-        SendFile(new AssetFileMemory(file.Path, output.ToArray()));
+        SendFileFromMemory(file.Path, output.ToArray());
         return AssetFileAcceptResult.Consumed;
     }
 
