@@ -1,5 +1,7 @@
 - type: entity
   id: RMCWeakLingeringAcid
+  name: weak acid
+  categories: [ HideSpawnMenu ]
   components:
   - type: XenoAcidType
     damage:
@@ -12,6 +14,7 @@
 - type: entity
   id: RMCNormalLingeringAcid
   parent: RMCWeakLingeringAcid
+  name: acid
   components:
   - type: XenoAcidType
     tier: 2
@@ -23,6 +26,7 @@
 - type: entity
   id: RMCStrongLingeringAcid
   parent: RMCNormalLingeringAcid
+  name: strong acid
   components:
   - type: XenoAcidType
     tier: 3
