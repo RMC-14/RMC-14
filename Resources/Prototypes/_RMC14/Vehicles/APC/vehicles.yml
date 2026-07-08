@@ -8,6 +8,9 @@
     movementKind: Grid
   - type: LagCompensation
   - type: Clickable
+  - type: WarpPoint
+    follow: true
+    location: APC
   - type: RMCIgnoreGhostInteractionLimits
   - type: RequireProjectileTarget
   - type: GridVehicleMover
@@ -204,6 +207,12 @@
     - offset: -1.5,0
       radius: 0.7
       interiorCoords: 1.55,-1.2
+  - type: MarineMapTracked
+  - type: TacticalMapTracked
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips_large.rsi
+      state: apc
 
 - type: entity
   parent: VehicleAPCBase
@@ -259,6 +268,12 @@
     - offset: 0,2
       radius: 0.85
       interiorCoords: 0.25,-1
+  - type: MarineMapTracked
+  - type: TacticalMapTracked
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips_large.rsi
+      state: apc
 
 - type: entity
   parent: VehicleAPCBase
@@ -315,6 +330,12 @@
     - offset: 0,2
       radius: 0.85
       interiorCoords: 0.25,-1
+  - type: MarineMapTracked
+  - type: TacticalMapTracked
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips_large.rsi
+      state: apc
 
 - type: entity
   parent: VehicleAPCBase

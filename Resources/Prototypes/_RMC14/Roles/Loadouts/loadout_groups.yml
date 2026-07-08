@@ -930,6 +930,15 @@
   - NeckerchiefWhiteRMC
   - NeckerchiefRedRMC
 
+- type: loadoutGroup
+  id: SynthGenRMC
+  name: rmc-loadout-group-synth
+  maxLimit: 1
+  minLimit: 1
+  loadouts:
+  - RMCSynthGenOne
+  - RMCSynthGenTwo
+  - RMCSynthGenThree
 # Watches
 - type: loadoutGroup
   id: WatchesBasicRMC

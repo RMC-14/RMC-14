@@ -96,7 +96,7 @@
         amount: 25
       - id: RMCGrenadeIncendiary
         amount: 4
-      - id: RMCPacketGrenadeWhitePhosphorusCompoundFilled
+      - id: RMCGrenadeWhitePhosphorusCompound
         amount: 4
       - id: CMGrenadeSmoke
         amount: 5
@@ -321,6 +321,11 @@
       - id: RMCPacketGrenadeIncendiaryFilled
         name: 30mm HIDP grenade packet
         box: RMCGrenadeIncendiary
+        boxAmount: 3
+        boxSlots: 3
+      - id: RMCPacketGrenadeWhitePhosphorusCompoundFilled
+        name: 30mm CCDP grenade packet
+        box: RMCGrenadeWhitePhosphorusCompound
         boxAmount: 3
         boxSlots: 3
       - id: RMCPacketGrenadeSmokeFilled
