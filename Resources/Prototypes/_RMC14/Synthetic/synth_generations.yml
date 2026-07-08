@@ -30,7 +30,6 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      399: Critical
       400: Dead
   - type: MovementSpeedModifier
     baseSprintSpeed: 3.625
@@ -68,6 +67,10 @@
       RMCSkillJtac: 1
       RMCSkillIntel: 1
       RMCSkillDomestics: 2
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      400: Dead
   - type: ShowHealthIcons
   - type: ShowHealthBars
   - type: RMCAllowSuitStorage
@@ -84,7 +87,6 @@
   - type: Skills
     skills:
       RMCSkillCqc: 5
-      RMCSkillEndurance: 1
       RMCSkillEngineer: 4
       RMCSkillConstruction: 3
       RMCSkillFirearms: 2
@@ -102,6 +104,10 @@
       RMCSkillIntel: 2
       RMCSkillDomestics: 2
       RMCSkillNavigations: 1
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      350: Dead
   - type: ShowHealthIcons
   - type: ShowHealthBars
   - type: RMCAllowSuitStorage
