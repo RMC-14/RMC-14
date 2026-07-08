@@ -11,6 +11,13 @@
   icon: RMCJobIconPMCEngineer
   greeting: rmc-job-greeting-solaris-pmc-engineer
   playTimeTracker: RMCJobSurvivorMilitary
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobCombatTech
+    time: 36000 # 10 hours
+  - !type:TotalJobsTimeRequirement
+    group: RMCJobsSurvivor
+    time: 5400 # 1.5 hours
   spawnMenuRoleName: Survivor — PMC Engineer (Solaris Ridge special survivor)
   special:
   - !type:AddComponentSpecial

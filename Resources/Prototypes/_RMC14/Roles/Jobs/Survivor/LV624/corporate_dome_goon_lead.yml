@@ -3,6 +3,13 @@
   id: CMSurvivorLV624CorporateDomeGoonLead
   name: rmc-job-name-pmc-corporate-goon-leader
   description: cm-job-description-survivor
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobSquadLeader
+    time: 18000  # 5 hours
+  - !type:TotalJobsTimeRequirement
+    group: RMCJobsSurvivor
+    time: 18000 # 5 hour
   spawnMenuRoleName: We-Ya Goon Lead (Survivor Special)
   startingGear: RMCGearSurvivorGoonLead
   icon: "RMCJobIconPMCGoonLead"

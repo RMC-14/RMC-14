@@ -4,6 +4,13 @@
   name: rmc-job-name-pmc-corporate-goon-engi
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorEngineer
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobCombatTech
+    time: 36000 # 10 hours
+  - !type:TotalJobsTimeRequirement
+    group: RMCJobsSurvivor
+    time: 5400 # 1.5 hours
   spawnMenuRoleName: We-Ya Goon Engineer (Survivor Special)
   startingGear: RMCGearSurvivorGoon
   icon: "RMCJobIconPMCGoonEngi"

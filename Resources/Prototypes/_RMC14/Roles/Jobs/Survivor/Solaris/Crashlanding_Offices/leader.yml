@@ -11,6 +11,13 @@
   icon: RMCJobIconPMCLeader
   greeting: rmc-job-greeting-solaris-pmc-leader
   playTimeTracker: RMCJobSurvivorMilitary
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobSquadLeader
+    time: 18000  # 5 hours
+  - !type:TotalJobsTimeRequirement
+    group: RMCJobsSurvivor
+    time: 18000 # 5 hour
   spawnMenuRoleName: Survivor — PMC Leader (Solaris Ridge special survivor)
   special:
   - !type:AddComponentSpecial

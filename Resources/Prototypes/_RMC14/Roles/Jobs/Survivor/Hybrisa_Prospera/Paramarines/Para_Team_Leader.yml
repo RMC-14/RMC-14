@@ -8,6 +8,13 @@
   startingGear: RMCGearParaTeamLeader
   icon: RMCJobIconParaTeamLeader
   playTimeTracker: RMCJobSurvivorMilitary
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobSquadLeader
+    time: 18000  # 5 hours
+  - !type:TotalJobsTimeRequirement
+    group: RMCJobsSurvivor
+    time: 18000 # 5 hour
   spawnMenuRoleName: Royal Paramarine Team Leader (Survivor)
   special:
     - !type:AddComponentSpecial
