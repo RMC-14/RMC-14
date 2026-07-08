@@ -3,18 +3,27 @@
   id: RMCSurvivorSolarisCorporateSupervisor
   name: rmc-job-name-survivor-solaris-corporate-supervisor
   ranks:
-    RMCRankWeYaExecutiveSupervisor: []
+    RMCRankWeYaAssistantManager: []
   accessGroups:
   - ColonistPMC
   access:
   - CMAccessIllegal
-  icon: CMJobIconExecSpec
+  icon: "CMJobIconExecAssMan"
   greeting: rmc-job-greeting-solaris-pmc-supervisor
   spawnMenuRoleName: Survivor — Corporate Supervisor (Solaris Ridge special survivor)
   startingGear: RMCGearSurvivorSolarisCorporateSupervisor
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      understoodLanguages:
+      - Japanese
+      - English
+      currentLanguage: English
+      defaultLanguage: English
     - type: Skills
       preset: RMCSkillPresetSurvivorWeYaManager
     - type: MarineOrders

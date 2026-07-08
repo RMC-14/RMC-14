@@ -19,21 +19,16 @@
       - RoyalMarines
       - TSE
     - type: Skills
-      skills:
-        RMCSkillCqc: 2
-        RMCSkillFirearms: 1
-        RMCSkillPolice: 2
-        RMCSkillFireman: 2
-        RMCSkillConstruction: 2
-        RMCSkillEngineer: 3
-        RMCSkillEndurance: 3
-        RMCSkillMedical: 2
-        RMCSkillMeleeWeapons: 1
-        RMCSkillJtac: 1
-        RMCSkillVehicles: 1
-        RMCSkillPowerLoader: 1
+      preset: RMCSkillPresetRoyalBreacher
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-breacher
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: rmc_breacher
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_twe
   hidden: true
 
 - type: entity
@@ -64,21 +59,22 @@
       role: CMJobCombatTech
       time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
+    squad: SquadRoyalMarines
 
 - type: startingGear
   id: RMCGearRoyalBreacher
   equipment:
     head: RMCHeadRoyalHelmet
     ears: RMCHeadsetRoyalMarine
-    jumpsuit: RMCJumpsuitMarineRoyal
+    jumpsuit: RMCJumpsuitMarineRoyalDropPouch
     outerClothing: RMCArmorRoyalPointmanFilled
     gloves: RMCHandsVeteranRoyalMarine
     shoes: RMCBootsRoyalFilled
     suitstorage: RMCWeaponRifleL24B
     id: RMCIDRoyalMarinesBreacher
-    belt: RMCBeltUtiliyGeneralFilledRoyal
+    belt: RMCBeltUtilityGeneralRCMFilled
     # back: RMCShieldBallistic // TODO RMC14 proper ballistic shields
-    pocket1: RMCPouchToolsSoc # TODO RMC14 I think there are like 3 different PRs adding the full version of this so fix that when one of those is merged
+    pocket1: RMCPouchToolsSocFilledTactical
     pocket2: RMCPouchMedkitFillRoyal
 
 - type: playTimeTracker

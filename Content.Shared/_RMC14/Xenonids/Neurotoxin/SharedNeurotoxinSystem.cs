@@ -142,6 +142,12 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
                     continue;
                 }
 
+                var ev = new NeurotoxinInjectAttemptEvent();
+                RaiseLocalEvent(marine, ref ev);
+
+                if (ev.Cancelled)
+                    continue;
+
                 if (!EnsureComp<NeurotoxinComponent>(marine, out var builtNeurotoxin))
                 {
                     builtNeurotoxin.LastMessage = time;
@@ -383,10 +389,9 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
                 break;
             case NeuroHallucinations.OB:
                 //Little extra to confuse the player
-                //TODO RMC14 replace if it gets a locId
                 if (_player.TryGetSessionByEntity(victim, out var session))
                 {
-                    var msg = "[font size=16][color=red]Orbital bombardment launch command detected![/color][/font]";
+                    var msg = Loc.GetString("rmc-ob-launch-detected");
                     msg = $"[bold][font size=24][color=red]\n{msg}\n[/color][/font][/bold]";
                     _rmcChat.ChatMessageToOne(ChatChannel.Radio, msg, msg, default, false, session.Channel, recordReplay: true);
 
@@ -396,7 +401,9 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
 
                         if (_proto.TryIndex(warhead, out var warHeadProto))
                         {
-                            msg = $"[color=red]Launch command informs {warHeadProto.Name}. Estimated impact area: {areaProto.Name}[/color]";
+                            msg = Loc.GetString("rmc-ob-launch-area",
+                                ("warhead", warHeadProto.Name),
+                                ("area", areaProto.Name));
                             _rmcChat.ChatMessageToOne(ChatChannel.Radio, msg, msg, default, false, session.Channel, recordReplay: true);
                         }
                     }

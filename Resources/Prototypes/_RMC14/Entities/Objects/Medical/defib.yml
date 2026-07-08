@@ -13,12 +13,6 @@
       map: [ "enum.ToggleableVisuals.Layer" ]
       visible: false
   - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.ToggleableVisuals.Enabled:
-        enum.ToggleableVisuals.Layer:
-          True: { visible: true }
-          False: { visible: false }
   - type: Item
     size: Normal
     sprite: _RMC14/Objects/Medical/defib.rsi
@@ -70,16 +64,40 @@
     price: 100
   - type: GuideHelp
     guides:
-    - Medical Doctor
+    - RMCMedical
   - type: RequiresSkill
     skills:
       RMCSkillMedical: 2
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   id: CMDefibrillator
   parent: [CMBaseDefibrillator, RMCPowerCellSlotUnremovable]
   suffix: RMC14
   components:
+  - type: Sprite
+    layers:
+    - state: defib
+    - state: defib_on
+      map: [ "enum.ToggleableVisuals.Layer" ]
+      visible: false
+    - state: full
+      map: [ "enum.DefibrillatorVisualLayers.Overlay"]
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
+          True: { visible: true }
+          False: { visible: false }
+      enum.DefibrillatorVisuals.DefibrillatorCharge:
+        enum.DefibrillatorVisualLayers.Overlay:
+          Empty: { state: empty }
+          Low: { state: low }
+          Half: { state: half }
+          Full: { state: full }
   - type: PowerCellDraw
     enabled: false
     useRate: 66
@@ -94,6 +112,15 @@
   parent: CMDefibrillator
   suffix: RMC14, Empty
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/defib.rsi
+    layers:
+    - state: defib
+    - state: defib_on
+      map: [ "enum.ToggleableVisuals.Layer" ]
+      visible: false
+    - state: empty
+      map: [ "enum.DefibrillatorVisualLayers.Overlay"]
   - type: ItemSlots
     slots:
       cell_slot:
@@ -179,6 +206,22 @@
   id: RMCSynthResetKeySMART
   name: SMART WeYa synthetic reset key
   description: This device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It can only be used once before being reset. This one has a microfunction AI and can be operated by anyone.
+  components:
+  - type: RequiresSkill
+    skills:
+      RMCSkillEngineer: 0
+
+- type: entity
+  parent: RMCSynthResetKey
+  id: RMCSynthResetKeyNovaris # TODO RMC14 unique sprite for this
+  name: Novaris synthetic reset key
+  description: An independent Novaris design, based on a previous collaboration with Weston-Yamada. This device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It can only be used once before being reset.
+
+- type: entity
+  parent: RMCSynthResetKey
+  id: RMCSynthResetKeyNovarisSMART # TODO RMC14 unique sprite for this
+  name: SMART Novaris synthetic reset key
+  description: An independent Novaris design, based on a previous collaboration with Weston-Yamada. This device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It can only be used once before being reset. This one has a micro-function AI and can be operated by anyone.
   components:
   - type: RequiresSkill
     skills:

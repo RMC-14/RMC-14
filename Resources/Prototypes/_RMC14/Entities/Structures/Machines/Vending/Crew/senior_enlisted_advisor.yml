@@ -17,7 +17,7 @@
       takeAll: CMStandard
       entries:
       - id: RMCOuterClothingExternalWebbing
-      - id: CMSatchel
+      - id: CMSatchelSecureStandard
       - id: CMBootsBlackFilled
       - id: CMMRE
       - id: RMCStampSEA
@@ -84,11 +84,6 @@
       - id: RMCWebbingBlackSmall
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
-    - name: Tools of the Trade
-      takeAll: RMCSEATrainingTools
-      entries:
-      - id: RMCCPRDummy
-        amount: 5
     - name: Books
       takeAll: RMCBook
       entries:

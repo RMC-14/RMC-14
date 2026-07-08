@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: [ CMBaseWeaponGun, BaseItem, RMCBaseAttachableHolder ]
   id: RMCSmartGunPVENoCamo
   abstract: true
@@ -62,7 +62,7 @@
     - FullAuto
     recoilWielded: 3
     scatterWielded: 10
-    baseFireRate: 5
+    baseFireRate: 6
     burstScatterMult: 4
     modifiers:
       FullAuto:
@@ -102,7 +102,7 @@
     settings:
     - damage:
         types:
-          Piercing: 30
+          Piercing: 35
       armorPiercing: 0
       name: rmc-toggleable-ammo-highly-precise
       icon:
@@ -110,7 +110,7 @@
         state: ammo_swap_normal
     - damage:
         types:
-          Piercing: 20
+          Piercing: 25
       armorPiercing: 40
       name: rmc-toggleable-ammo-armor-shredding
       icon:
@@ -136,6 +136,8 @@
     deactivateOnDrop: false
     toggleSound: null
   - type: SmartGun
+  - type: RMCWeaponDamageFalloff
+    rangeFlat: 12
   - type: AttachableHolder
     slots:
       rmc-aslot-rail:
@@ -179,6 +181,32 @@
       Snow: "#ddcbc9"
       Classic: "#c7e7d9"
       Urban: "#acb8c7"
+
+- type: entity
+  parent: RMCSmartGunPVE
+  id: RMCSmartGunOvertunedPVE
+  name: ML66OT heavy support gun
+  description: "The actual firearm in the Support Gun System. Essentially a heavy, mobile machinegun.\n\nThis model appears to have been overtuned, packing a greater punch than usual. Watch where you point this thing."
+  suffix: PVE, Overtuned
+  components:
+  - type: GunToggleableAmmo
+    settings:
+    - damage:
+        types:
+          Piercing: 60
+      armorPiercing: 10
+      name: rmc-toggleable-ammo-highly-precise
+      icon:
+        sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
+        state: ammo_swap_normal
+    - damage:
+        types:
+          Piercing: 50
+      armorPiercing: 40
+      name: rmc-toggleable-ammo-armor-shredding
+      icon:
+        sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
+        state: ammo_swap_ap
 
 - type: entity
   parent: RMCSmartGunPVENoCamo
@@ -254,3 +282,47 @@
 
 - type: Tag
   id: RMCAttachmentSmartgunHarness
+
+- type: entity
+  parent: RMCSmartGunPVENoCamo
+  id: RMCSmartGunRCMPVE
+  name: ML66C general purpose machine gun
+  description: A heavy, mobile machinegun used by the Royal Crown Marines. Heavily modified from the UN's ML66A platform, it fires 10x30mm holotargeting rounds. # In parity this is 10x28 HT but I don't want to make more unnecessary duplicate gear
+  suffix: PVE, RCM
+  components:
+  - type: Gun
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a.ogg
+    soundEmpty:
+      path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/royal_gpmg.rsi
+    layers:
+    - state: base
+      sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/royal_gpmg.rsi
+    - state: mag-0
+      sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/royal_gpmg.rsi
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/royal_gpmg.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineSmartGunHT
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineSmartGunHT
+          - RMCMagazineSmartGun # needs this or magazines are entirely unusable
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: RMCPowerCellSmartgun
+        whitelist:
+          components:
+          - SmartGunBattery

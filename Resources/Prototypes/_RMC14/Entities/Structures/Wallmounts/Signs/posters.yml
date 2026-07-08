@@ -116,7 +116,7 @@
 - type: entity
   parent: CMPosterBase
   id: CMPosterPathos
-  name: "Pathos Motion Tracker"
+  name: "motion tracker poster"
   description: "It's an ad for a civilian brand motion tracker, less reliable than the M314, but about half of the weight."
   components:
   - type: Sprite
@@ -166,15 +166,6 @@
   components:
   - type: Sprite
     state: f_100
-
-- type: entity
-  parent: CMPosterBase
-  id: CMPosterRememberIo
-  name: "'Remember Io'"
-  description: "This faded propaganda poster proudly demands you to, 'Remember Io,' with the titular moon in the middle. The surprise commando raid on the repair/refit yard on Jupiter's moon, Io, was the event that kicked off the war with the Arcturians over a decade ago. They may be your allies now, but old wounds run deep."
-  components:
-  - type: Sprite
-    state: remember_io
 
 - type: entity
   parent: CMPosterBase
@@ -438,15 +429,6 @@
 
 - type: entity
   parent: CMPosterBase
-  id: CMPosterTartarus
-  name: "Tartarus Mining co. poster"
-  description: "A simplified version of the Tartarus Mining co. logo. The Tartarus Mining Company is owned by Prospectia, a sub-division of the San Rei Corporation, which is in turn owned by the Weston-Yamada Corporation."
-  components:
-  - type: Sprite
-    state: tartarus
-
-- type: entity
-  parent: CMPosterBase
   id: CMPosterEATBlue
   name: "EAT"
   description: "This is less of a poster and more of an advertisement for those gross power bars."
@@ -475,8 +457,8 @@
 - type: entity
   parent: CMPosterCMB1
   id: CMPosterCMB2
-  name: "Colonial Marshals poster"
-  description: "The laws of Earth stretch beyond the Sol: The Colonial Marshals."
+  name: "Colony Marshal poster"
+  description: "Justice, authority, and protection in the outer rim."
   components:
   - type: Sprite
     state: CMB_2
@@ -843,30 +825,30 @@
   - type: Sprite
     state: forecon
 
-# ZSPA
+# TSEPA
 - type: entity
   parent: CMPosterBase
-  id: CMPosterZSPA1
-  name: "ZSPA poster"
-  description: "A recruitment poster for the ZSPA. Integrity, Justice, Unity—Together, We Keep the Peace."
+  id: RMCPosterTSEPA1
+  name: "TSEPA poster"
+  description: "A recruitment poster for the TSEPA. Integrity, Justice, Unity. Together, We Keep the Peace."
   components:
   - type: Sprite
     state: ZSPA_1
 
 - type: entity
-  parent: CMPosterZSPA1
-  id: CMPosterZSPA2
-  name: "ZSPA poster"
-  description: "A recruitment poster for the ZSPA. Serve with Honor, Protect with Strength."
+  parent: RMCPosterTSEPA1
+  id: RMCPosterTSEPA2
+  name: "TSEPA poster"
+  description: "A recruitment poster for the TSEPA. Serve with Honor, Protect with Strength."
   components:
   - type: Sprite
     state: ZSPA_2
 
 - type: entity
-  parent: CMPosterZSPA1
-  id: CMPosterZSPA3
-  name: "ZSPA poster"
-  description: "A recruitment poster for the ZSPA. One Law, One Duty, One Force—Join the ZSPA."
+  parent: RMCPosterTSEPA1
+  id: RMCPosterTSEPA3
+  name: "TSEPA poster"
+  description: "A recruitment poster for the TSEPA. One Law, One Duty, One Force. Join the TSEPA."
   components:
   - type: Sprite
     state: ZSPA_3

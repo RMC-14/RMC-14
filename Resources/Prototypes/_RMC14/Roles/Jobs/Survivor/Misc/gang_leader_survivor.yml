@@ -11,13 +11,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillCqc: 2
-        RMCSkillFirearms: 1
-        RMCSkillLeadership: 1
+      preset: RMCSkillPresetSurvivorGangLeader
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetGangLeader
     - type: MarineOrders
@@ -57,7 +51,7 @@
   name: gang leader survivor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ ArmorHelmetRiot ]
     - [ RMCArmorVestCivilian ]

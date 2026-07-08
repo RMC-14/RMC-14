@@ -1,7 +1,13 @@
 using System.Collections.Frozen;
+using Content.Shared._RMC14.ARES;
+using Content.Shared._RMC14.ARES.Logs;
 using System.Linq;
+using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
+using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Marines.Skills.Pamphlets;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Roles;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Access;
 using Content.Shared.Access.Components;
@@ -11,6 +17,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Robust.Shared.Containers;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager;
 
@@ -20,13 +27,17 @@ public sealed class IdModificationConsoleSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly ARESCoreSystem _core = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly GunIFFSystem _iff = default!;
+    [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedRankSystem _rank = default!;
     [Dependency] private readonly ISerializationManager _serialization = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
 
     private FrozenDictionary<string, AccessGroupPrototype> _accessGroup =
@@ -35,8 +46,13 @@ public sealed class IdModificationConsoleSystem : EntitySystem
     private FrozenDictionary<string, AccessLevelPrototype> _accessLevel =
         FrozenDictionary<string, AccessLevelPrototype>.Empty;
 
+    private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabIdentificationLogs";
+    private EntityQuery<OriginalRoleComponent> _originalRoleQuery;
+
     public override void Initialize()
     {
+        _originalRoleQuery = GetEntityQuery<OriginalRoleComponent>();
+
         Subs.BuiEvents<IdModificationConsoleComponent>(IdModificationConsoleUIKey.Key,
             subs =>
             {
@@ -47,8 +63,9 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 subs.Event<IdModificationConsoleIFFChangeBuiMsg>(OnIFFChangeMsg);
                 subs.Event<IdModificationConsoleJobChangeBuiMsg>(OnJobChangeMsg);
                 subs.Event<IdModificationConsoleTerminateConfirmBuiMsg>(OnTerminateConfirmMsg);
+                subs.Event<IdModificationConsoleAssignSquadMsg>(OnTerminalAssignSquadMsg);
             });
-        SubscribeLocalEvent<IdModificationConsoleComponent, MapInitEvent>(OnComponentInit);
+        SubscribeLocalEvent<IdModificationConsoleComponent, ComponentInit>(OnComponentInit);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
         SubscribeLocalEvent<IdModificationConsoleComponent, InteractUsingEvent>(OnInteractHand);
 
@@ -85,6 +102,8 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         _adminLogger.Add(LogType.RMCIdModify,
             LogImpact.Low,
             $"{ToPrettyString(args.Actor):player} has changed the accesses of {ToPrettyString(uid):entity} to {accessGroupPrototype.Name}");
+
+        _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} modified ID: {Name(uid.Value)} to {accessGroupPrototype.Name}");
     }
 
     private void OnTerminateConfirmMsg(Entity<IdModificationConsoleComponent> ent,
@@ -124,6 +143,9 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         _adminLogger.Add(LogType.RMCIdModify,
             LogImpact.High,
             $"{ToPrettyString(args.Actor):player} has terminated {ToPrettyString(uid):entity} & {ToPrettyString(idCard.OriginalOwner):player}");
+
+        if(idCard.OriginalOwner != null)
+            _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} has terminated {Name(idCard.OriginalOwner.Value)}");
     }
 
     private void OnIFFChangeMsg(Entity<IdModificationConsoleComponent> ent,
@@ -148,6 +170,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 LogImpact.Medium,
                 $"{ToPrettyString(args.Actor):player} has granted the {targetFaction} IFF for {ToPrettyString(uid):entity}");
 
+            _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} has granted IFF for ID card: {Name(uid.Value)}");
             ent.Comp.HasIFF = true;
         }
         else
@@ -162,6 +185,12 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 Dirty(uid.Value, iff);
 
             ent.Comp.HasIFF = false;
+            _adminLogger.Add(LogType.RMCIdModify,
+                LogImpact.Medium,
+                $"{ToPrettyString(args.Actor):player} has revoked the {ent.Comp.Faction} IFF for {ToPrettyString(uid):entity}");
+            _core.CreateARESLog(ent,
+                LogCat,
+                (string)$"{Name(args.Actor)} has revoked IFF for ID card: {Name(uid.Value)}");
 
             if (removed)
             {
@@ -170,6 +199,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                     $"{ToPrettyString(args.Actor):player} has revoked the {targetFaction} IFF for {ToPrettyString(uid):entity}");
             }
         }
+
 
         Dirty(ent);
     }
@@ -234,6 +264,8 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 _adminLogger.Add(LogType.RMCIdModify,
                     LogImpact.Medium,
                     $"{ToPrettyString(args.Actor):player} has granted all accesses for {args.AccessList} on {ToPrettyString(uid):entity}");
+
+                _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} has granted all accesses for {args.AccessList} for ID card: {Name(uid.Value)}");
                 break;
             case "RevokeAll":
                 foreach (var accessToRemove in ent.Comp.AccessList)
@@ -247,6 +279,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 _adminLogger.Add(LogType.RMCIdModify,
                     LogImpact.Medium,
                     $"{ToPrettyString(args.Actor):player} has revoked all accesses for {args.AccessList} on {ToPrettyString(uid):entity}");
+                _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} has revoked all accesses for {args.AccessList} for ID card: {Name(uid.Value)}");
                 break;
             case "GrantAllGroup":
                 foreach (var accessToAdd in ent.Comp.AccessList)
@@ -257,6 +290,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 _adminLogger.Add(LogType.RMCIdModify,
                     LogImpact.Medium,
                     $"{ToPrettyString(args.Actor):player} has granted all accesses on {ToPrettyString(uid):entity}");
+                _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} has granted all accesses on ID card: {Name(uid.Value)}");
                 break;
             case "RevokeAllGroup":
                 foreach (var accessToRemove in ent.Comp.AccessList)
@@ -267,6 +301,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 _adminLogger.Add(LogType.RMCIdModify,
                     LogImpact.Medium,
                     $"{ToPrettyString(args.Actor):player} has revoked all accesses on {ToPrettyString(uid):entity}");
+                _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} has revoked all accesses on ID card: {Name(uid.Value)}");
                 break;
         }
 
@@ -289,6 +324,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             _adminLogger.Add(LogType.RMCIdModify,
                 LogImpact.Low,
                 $"{ToPrettyString(args.Actor):player} has granted {args.Access} to {ToPrettyString(uid):entity}");
+            _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} has granted {Loc.GetString(_prototype.Index(args.Access).Name ?? "unknown")} to ID card: {Name(uid.Value)}");
         }
         else
         {
@@ -296,6 +332,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             _adminLogger.Add(LogType.RMCIdModify,
                 LogImpact.Low,
                 $"{ToPrettyString(args.Actor):player} has revoked {args.Access} to {ToPrettyString(uid):entity}");
+            _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} has revoked {Loc.GetString(_prototype.Index(args.Access).Name ?? "unknown")} to ID card: {Name(uid.Value)}");
         }
 
         Dirty(uid.Value, access);
@@ -377,6 +414,17 @@ public sealed class IdModificationConsoleSystem : EntitySystem
 
         var container = _container.EnsureContainer<ContainerSlot>(ent, containerType);
         _container.Insert(handItem.Value, container);
+
+        var query = EntityQueryEnumerator<SquadTeamComponent>();
+        ent.Comp.Squads = [];
+        while (query.MoveNext(out var uid, out var team))
+        {
+            if (ent.Comp.SquadGroup != "ADMINISTRATOR" && team.Group != ent.Comp.SquadGroup)
+                continue;
+
+            ent.Comp.Squads.Add(new(GetNetEntity(uid), Name(uid), team.Color));
+        }
+
         Dirty(ent);
         return true;
     }
@@ -407,7 +455,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         return contained != null;
     }
 
-    private void OnComponentInit(Entity<IdModificationConsoleComponent> ent, ref MapInitEvent args)
+    private void OnComponentInit(Entity<IdModificationConsoleComponent> ent, ref ComponentInit args)
     {
         UpdateAccessList(ent);
     }
@@ -460,5 +508,99 @@ public sealed class IdModificationConsoleSystem : EntitySystem
 
         ent.Comp.JobGroups = groupGroups;
         ent.Comp.JobList = groupList;
+    }
+
+    private void OnTerminalAssignSquadMsg(Entity<IdModificationConsoleComponent> ent, ref IdModificationConsoleAssignSquadMsg args)
+    {
+        // Too many mispredictions.
+        if (_net.IsClient)
+            return;
+
+        var actor = args.Actor;
+        if (!ent.Comp.Authenticated)
+            return;
+
+        if (!TryContainerEntity(ent, ent.Comp.TargetIdSlot, out var uid) ||
+            !TryComp(uid, out IdCardComponent? idCard) ||
+            idCard.OriginalOwner is not { } marineId ||
+            !_originalRoleQuery.TryComp(marineId, out var role) ||
+            role.Job is not { } job)
+            return;
+
+        var jobName = job.Id;
+        if (TryComp<UsedSkillPamphletComponent>(marineId, out var usedSkillPamphlet) && usedSkillPamphlet.JobTitle is { } title)
+            jobName = Loc.GetString(title);
+        else if (_prototype.TryIndex(job, out var jobProto))
+            jobName = Loc.GetString(jobProto.Name);
+
+        if (args.Squad is not { } squadNetEnt)
+        {
+            if (ent.Comp.DisallowSquadUnassignment.Contains(job.Id))
+            {
+                _popup.PopupCursor($"You cannot unassign a {jobName}!", actor, PopupType.LargeCaution);
+                return;
+            }
+
+            _squad.RemoveSquad(marineId, null);
+            _metaData.SetEntityName(uid.Value,
+                $"{MetaData(idCard.OriginalOwner.Value).EntityName} ({jobName})");
+
+            idCard._jobTitle = jobName;
+            Dirty(uid.Value, idCard);
+
+            var selfMsgUnassign = $"{Name(marineId)} has been unassigned.";
+            _marineAnnounce.AnnounceSingle(selfMsgUnassign, actor);
+            _popup.PopupCursor(selfMsgUnassign, actor, PopupType.Large);
+
+            var targetMsgUnassign = "You've been unassigned from your squad.";
+            _marineAnnounce.AnnounceSingle(targetMsgUnassign, marineId);
+            _popup.PopupEntity(targetMsgUnassign, marineId, marineId, PopupType.Large);
+
+            _adminLogger.Add(LogType.RMCIdModify,
+                LogImpact.Medium,
+                $"{ToPrettyString(actor):player} has unassigned {ToPrettyString(marineId):player}");
+            return;
+        }
+
+        if (!TryGetEntity(squadNetEnt, out var newSquadEnt))
+        {
+            _popup.PopupCursor($"There was an error assigning {Name(marineId)}.", actor, PopupType.LargeCaution);
+            return;
+        }
+
+        if (TryComp(newSquadEnt, out SquadTeamComponent? newSquadComp) &&
+            !_squad.HasSpaceForRole((newSquadEnt.Value, newSquadComp), job))
+        {
+            _popup.PopupCursor($"{Name(newSquadEnt.Value)} can't have another {jobName}.", actor, PopupType.LargeCaution);
+            return;
+        }
+
+        if (ent.Comp.EnlistmentRequirement is { } requirements && !_skills.HasAllSkills(marineId, requirements))
+        {
+            _popup.PopupCursor("You cannot assign untrained civilians to squads!", actor, PopupType.LargeCaution);
+            return;
+        }
+
+        var newSquadName = Name(newSquadEnt.Value);
+
+        RemComp<SquadLeaderComponent>(marineId);
+        _squad.AssignSquad(marineId, newSquadEnt.Value, null);
+        _metaData.SetEntityName(uid.Value,
+            $"{MetaData(idCard.OriginalOwner.Value).EntityName} ({newSquadName} {jobName})");
+
+        idCard._jobTitle = $"{newSquadName} {jobName}";
+        Dirty(uid.Value, idCard);
+
+        var selfMsg = $"{Name(marineId)} has been assigned to {Name(newSquadEnt.Value)}.";
+        _marineAnnounce.AnnounceSingle(selfMsg, actor);
+        _popup.PopupCursor(selfMsg, actor, PopupType.Large);
+
+        var targetMsg = $"You've been transferred to {Name(newSquadEnt.Value)}!";
+        _marineAnnounce.AnnounceSingle(targetMsg, marineId);
+        _popup.PopupEntity(targetMsg, marineId, marineId, PopupType.Large);
+
+        _adminLogger.Add(LogType.RMCIdModify,
+            LogImpact.Medium,
+            $"{ToPrettyString(actor):player} has assigned {ToPrettyString(marineId):player} to {Name(newSquadEnt.Value)}");
     }
 }

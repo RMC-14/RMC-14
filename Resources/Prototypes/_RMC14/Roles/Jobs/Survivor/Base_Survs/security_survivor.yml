@@ -11,6 +11,7 @@
       time: 252000 # 70 hours
     RMCRankCivilianOfficer: []
   startingGear: RMCGearSurvivorSecurity
+  icon: "RMCJobIconGenericColonistMP"
   accessGroups:
   - ColonistSec
   basePlaytimeTracker: true
@@ -68,11 +69,11 @@
   name: security colonist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     primaryWeapons:
     - [ RMCBeltMarineMAR, RMCWeaponRifleMAR30 ]
     - [ CMBeltMarineMP5, WeaponSMGMP5 ]
-    - [ CMBeltMarineBuckshot, RMCWeaponShotgunHG3712 ]
+    - [ CMBeltMarineBuckshot, RMCWeaponShotgunM12 ]
     - [ CMBeltMarineM16, WeaponRifleM16 ]
     primaryWeaponChance: 1
 

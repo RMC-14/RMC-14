@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.NPC;
 using Content.Shared._RMC14.Tools;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Weapons.Ranged.Homing;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
@@ -55,7 +56,6 @@ public sealed class SentrySystem : EntitySystem
     [Dependency] private readonly SharedToolSystem _tools = default!;
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
     [Dependency] private readonly SharedSentryTargetingSystem _targeting = default!;
-    [Dependency] private readonly GunIFFSystem _gunIFF = default!;
     [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
 
     private readonly HashSet<EntityUid> _toUpdate = new();
@@ -67,13 +67,13 @@ public sealed class SentrySystem : EntitySystem
         SubscribeLocalEvent<SentryComponent, UseInHandEvent>(OnSentryUseInHand);
         SubscribeLocalEvent<SentryComponent, SentryDeployDoAfterEvent>(OnSentryDeployDoAfter);
         SubscribeLocalEvent<SentryComponent, ActivateInWorldEvent>(OnSentryActivateInWorld);
-        SubscribeLocalEvent<SentryComponent, AmmoShotEvent>(OnSentryAmmoShot);
         SubscribeLocalEvent<SentryComponent, AttemptShootEvent>(OnSentryAttemptShoot);
         SubscribeLocalEvent<SentryComponent, InteractUsingEvent>(OnSentryInteractUsing);
         SubscribeLocalEvent<SentryComponent, SentryInsertMagazineDoAfterEvent>(OnSentryInsertMagazineDoAfter);
         SubscribeLocalEvent<SentryComponent, SentryDisassembleDoAfterEvent>(OnSentryDisassembleDoAfter);
         SubscribeLocalEvent<SentryComponent, ExaminedEvent>(OnSentryExamined);
         SubscribeLocalEvent<SentryComponent, CombatModeShouldHandInteractEvent>(OnSentryShouldInteract);
+        SubscribeLocalEvent<SentryComponent, BeforeDamageChangedEvent>(OnBeforeDamageChanged);
         SubscribeLocalEvent<SentrySpikesComponent, AttackedEvent>(OnSentrySpikesAttacked);
 
         Subs.BuiEvents<SentryComponent>(SentryUiKey.Key,
@@ -145,41 +145,13 @@ public sealed class SentrySystem : EntitySystem
     private void OnSentryActivateInWorld(Entity<SentryComponent> sentry, ref ActivateInWorldEvent args)
     {
         ref var mode = ref sentry.Comp.Mode;
-        if (mode == SentryMode.Item)
+        if (mode == SentryMode.Item || sentry.Comp.IsLocked)
             return;
 
         args.Handled = true;
 
-        var user = args.User;
-        switch (mode)
-        {
-            case SentryMode.Off:
-            {
-                foreach (var defense in _entityLookup.GetEntitiesInRange<SentryComponent>(_transform.GetMapCoordinates(sentry), sentry.Comp.DefenseCheckRange))
-                {
-                    if (sentry != defense && defense.Comp.Mode == SentryMode.On)
-                    {
-                        var ret = Loc.GetString("rmc-sentry-too-close", ("defense", defense));
-                        _popup.PopupClient(ret, sentry, user);
-                        return;
-                    }
-                }
-                mode = SentryMode.On;
-                var msg = Loc.GetString("rmc-sentry-on", ("sentry", sentry));
-                _popup.PopupClient(msg, sentry, user);
-                break;
-            }
-            default:
-            {
-                mode = SentryMode.Off;
-                var msg = Loc.GetString("rmc-sentry-off", ("sentry", sentry));
-                _popup.PopupClient(msg, sentry, user);
-                break;
-            }
-        }
-
-        Dirty(sentry);
-        UpdateState(sentry);
+        var newMode = mode == SentryMode.On ? SentryMode.Off : SentryMode.On;
+        TrySetMode(sentry, newMode, args.User);
     }
 
     private void OnSentryAttemptShoot(Entity<SentryComponent> ent, ref AttemptShootEvent args)
@@ -188,24 +160,11 @@ public sealed class SentrySystem : EntitySystem
             args.Cancelled = true;
     }
 
-    private void OnSentryAmmoShot(Entity<SentryComponent> ent, ref AmmoShotEvent args)
-    {
-        if(!ent.Comp.HomingShots)
-            return;
-
-        //Make projectiles shot from a sentry gun homing.
-        foreach (var projectile in args.FiredProjectiles)
-        {
-            if(!TryComp(projectile, out TargetedProjectileComponent? targeted))
-                return;
-
-            var homing = EnsureComp<HomingProjectileComponent>(projectile);
-            homing.Target = targeted.Target;
-        }
-    }
-
     private void OnSentryInteractUsing(Entity<SentryComponent> sentry, ref InteractUsingEvent args)
     {
+        if (sentry.Comp.IsLocked)
+            return;
+
         var user = args.User;
         var used = args.Used;
         if (TryComp(used, out SentryUpgradeItemComponent? upgrade))
@@ -328,8 +287,11 @@ public sealed class SentrySystem : EntitySystem
                 args.PushMarkup(rot);
             }
 
-            var msg = Loc.GetString("rmc-sentry-disassembled-with-multitool");
-            args.PushMarkup(msg);
+            if (!ent.Comp.IsLocked)
+            {
+                var msg = Loc.GetString("rmc-sentry-disassembled-with-multitool");
+                args.PushMarkup(msg);
+            }
 
             if (ent.Comp.Mode == SentryMode.Off)
             {
@@ -369,6 +331,15 @@ public sealed class SentrySystem : EntitySystem
         var newSentry = Spawn(upgrade, coordinates, rotation: rotation);
         var ev = new SentryUpgradedEvent(oldSentry, newSentry, user);
         RaiseLocalEvent(newSentry, ref ev);
+    }
+
+    private void OnBeforeDamageChanged(Entity<SentryComponent> ent, ref BeforeDamageChangedEvent args)
+    {
+        if (args.Damage.GetTotal() < 0)
+            return;
+
+        if (ent.Comp.Mode == SentryMode.Item)
+            args.Cancelled = true;
     }
 
     private void UpdateState(Entity<SentryComponent> sentry)
@@ -414,6 +385,12 @@ public sealed class SentrySystem : EntitySystem
     {
         coordinates = default;
         rotation = default;
+
+        if (HasComp<VehicleInteriorOccupantComponent>(user))
+        {
+            _popup.PopupClient(Loc.GetString("emplacement-mount-deploy-vehicle"), user, user, PopupType.SmallCaution);
+            return false;
+        }
 
         var moverCoordinates = _transform.GetMoverCoordinateRotation(user, Transform(user));
         coordinates = moverCoordinates.Coords;
@@ -533,10 +510,43 @@ public sealed class SentrySystem : EntitySystem
         }
     }
 
-    public bool TrySetMode(Entity<SentryComponent> sentry, SentryMode mode)
+    public bool TrySetMode(Entity<SentryComponent> sentry, SentryMode mode, EntityUid? user = null, bool remote = false)
     {
         if (sentry.Comp.Mode == mode)
             return false;
+
+        switch (mode)
+        {
+            case SentryMode.On:
+            {
+                foreach (var defense in _entityLookup.GetEntitiesInRange<SentryComponent>(_transform.GetMapCoordinates(sentry), sentry.Comp.DefenseCheckRange))
+                {
+                    if (sentry != defense && defense.Comp.Mode == SentryMode.On)
+                    {
+                        var ret = Loc.GetString("rmc-sentry-too-close", ("defense", defense));
+                        if (remote && user != null)
+                            _popup.PopupCursor(ret, user.Value, PopupType.SmallCaution);
+                        else
+                        {
+                            _popup.PopupClient(ret, sentry, user);
+                        }
+                        return false;
+                    }
+                }
+
+                mode = SentryMode.On;
+                var msg = Loc.GetString("rmc-sentry-on", ("sentry", sentry));
+                _popup.PopupClient(msg, sentry, user);
+                break;
+            }
+            default:
+            {
+                mode = SentryMode.Off;
+                var msg = Loc.GetString("rmc-sentry-off", ("sentry", sentry));
+                _popup.PopupClient(msg, sentry, user);
+                break;
+            }
+        }
 
         sentry.Comp.Mode = mode;
         UpdateState(sentry);

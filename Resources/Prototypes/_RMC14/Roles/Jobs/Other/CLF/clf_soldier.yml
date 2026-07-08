@@ -16,6 +16,15 @@
     - type: NpcFactionMember
       factions:
       - CLF
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      understoodLanguages:
+      - Japanese
+      - English
+      currentLanguage: Japanese
+      defaultLanguage: Japanese
     - type: Skills
       skills:
         RMCSkillFirearms: 1
@@ -55,6 +64,10 @@
     job: RMCCLFSoldier
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 36000 # 10 Hours
   - type: GhostRoleApplySpecial
     squad: SquadCLF
 
@@ -70,7 +83,7 @@
     shoes: RMCShoesBrown
     id: RMCIDCardCLFSoldier
     belt: RMCM276ShotgunShellLoadingRigFill # TODO RMC14
-    back: RMCWeaponShotgunHG3712
+    back: RMCWeaponShotgunM12
     pocket1: RMCFlashlight
     pocket2: RMCPouchFirstAidERTFill
   inhand:
