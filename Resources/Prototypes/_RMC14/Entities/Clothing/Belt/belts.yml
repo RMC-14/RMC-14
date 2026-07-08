@@ -328,7 +328,7 @@
   parent: CMBeltBaseStorage
   id: RMCBeltBrowne
   name: M276 'Sam Browne' duty belt
-  description: The M276 'Sam Browne' duty belt is an alternative piece of load-bearing equipment offered to senior officers, military police, and senior enlisted advisors. It consists of a leather belt, a supporting strap worn over the right shoulder, a holster for a sidearm, and a small pouch capable of holding binoculars, a megaphone, policing tools, and other miscellaneous items - even a command tablet.
+  description: The M276 'Sam Browne' duty belt is an alternative piece of load-bearing equipment offered to senior officers, military police, and senior enlisted advisors. It consists of a leather belt, a supporting strap worn over the right shoulder, a holster for a sidearm, and a small pouch capable of holding binoculars, a megaphone, policing tools, and other miscellaneous items.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/browne.rsi
@@ -361,8 +361,8 @@
       - Donut
       - RMCGrenadeFlashBang
       - Radio
+      - Recorder
       - Binoculars
-      - CommandTablet
       components:
       - Handcuff
       - Flash
