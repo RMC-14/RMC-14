@@ -153,6 +153,13 @@ rmc-job-greeting-corporate-dome-goon-engi = You are a Corporate Security Technic
   You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
 # New Varadero Survs
+rmc-job-greeting-survivor-nv = You are an employee for the United Nations on the island outpost of New Varadero. A newfound discovery has unleashed unspeakable horrors. Do everything you can to survive.
+
+  You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
+
+  You are NOT aware of the marines or their intentions.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
 rmc-job-name-survivor-commander-new-varadero = UNMC Commander
 
@@ -169,6 +176,13 @@ cm-job-name-survivor-un-peacekeeper = ILRC Peacekeeper
 cm-job-name-survivor-new-varadero-researcher = New Varadero Researcher
 
 # Hybrisa Prospera Survs
+rmc-job-greeting-survivor-hybrisa = As the city burns, you find yourself among the dwindling few who survived the initial onslaught, The catastrophic breach shattered the once-prosperous world of LV-759, home to the large commercial & industrial Weston-Yamada colony known as Hybrisa Prospera. Through sheer will or cunning, you've evaded the relentless xenonid onslaught so far... but the nightmare persists.
+
+  You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
+
+  You are NOT aware of the marines or their intentions.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
 rmc-job-name-survivor-hybrisa-civilian = Civilian
 
@@ -334,6 +348,13 @@ rmc-job-prefix-crashland-soldier = 173/RECON SOL
 
 
 # Fiorina Science Annex Survs
+rmc-job-greeting-survivor-fop = You are a survivor of the attack on Fiorina Orbital Penitentiary. You worked or lived on the prison station, and managed to avoid the alien attacks... until now.
+
+  You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
+
+  You are NOT aware of the marines or their intentions.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
 cm-job-name-survivor-fiorina-corporate-liaison = Fiorina Corporate Liaison
 CMSurvivorFiorinaCorporateLiaison = Fiorina Corporate Liaison
@@ -469,6 +490,13 @@ rmc-job-greeting-solaris-pmc-supervisor = You are a survivor of a crash landing!
   You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
 # Shivas survs
+rmc-job-greeting-survivor-shivas = You are a survivor of the attack on the ice habitat. You worked or lived on the colony, and managed to avoid the alien attacks... until now.
+
+  You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
+
+  You are NOT aware of the marines or their intentions.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
 rmc-job-name-survivor-shivas-liaison = Shivas Corporate Liaison
 rmc-job-name-survivor-shivas-doctor = Shivas Doctor

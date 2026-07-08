@@ -3,6 +3,7 @@
   id: CMSurvivorVaraderoICB
   name: cm-job-name-survivor-icb
   description: cm-job-description-survivor
+  greeting: rmc-job-greeting-survivor-nv
   spawnMenuRoleName: Interstellar Commerce Bureau Liaison (NV Survivor)
   startingGear: RMCGearSurvivorVaraderoICB
 

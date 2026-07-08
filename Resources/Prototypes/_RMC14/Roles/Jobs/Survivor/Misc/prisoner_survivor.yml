@@ -4,6 +4,7 @@
   id: CMSurvivorPrisoner
   name: cm-job-name-survivor-prisoner
   description: cm-job-description-survivor
+  greeting: rmc-job-greeting-survivor-fop
   playTimeTracker: CMJobSurvivor
   startingGear: RMCGearSurvivorPrisoner
   spawnMenuRoleName: Prisoner (Survivor)

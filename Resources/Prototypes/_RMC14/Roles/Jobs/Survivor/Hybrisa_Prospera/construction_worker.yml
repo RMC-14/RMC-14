@@ -4,6 +4,7 @@
   name: rmc-job-name-survivor-construction-worker
   description: cm-job-description-survivor
   startingGear: RMCGearSurvivorHybrisaConstructionWorker
+  greeting: rmc-job-greeting-survivor-hybrisa
   spawnMenuRoleName: Construction Worker (Hybrisa Survivor)
   special:
   - !type:AddComponentSpecial

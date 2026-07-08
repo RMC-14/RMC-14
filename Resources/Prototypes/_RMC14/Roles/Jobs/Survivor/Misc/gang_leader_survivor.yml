@@ -5,6 +5,7 @@
   name: cm-job-name-survivor-gang-leader
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivor
+  greeting: rmc-job-greeting-survivor-fop
   startingGear: RMCGearSurvivorGangLeader
   spawnMenuRoleName: Gang Leader (Survivor)
   special:

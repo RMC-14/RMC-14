@@ -5,6 +5,7 @@
   description: cm-job-description-survivor
   startingGear: RMCGearSurvivorHybrisaTMCCMiner
   spawnMenuRoleName: TMCC Miner (Hybrisa Survivor)
+  greeting: rmc-job-greeting-survivor-hybrisa
   special:
   - !type:AddComponentSpecial
     components:

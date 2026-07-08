@@ -4,6 +4,7 @@
   name: rmc-job-name-survivor-shivas-engineer
   playTimeTracker: CMJobSurvivorEngineer
   startingGear: RMCGearSurvivorShivasEngineer
+  greeting: rmc-job-greeting-survivor-shivas
   spawnMenuRoleName: Engineer (Shivas Survivor)
   camouflageStartingGear: null
 

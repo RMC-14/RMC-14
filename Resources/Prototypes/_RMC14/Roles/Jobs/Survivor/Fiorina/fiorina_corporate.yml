@@ -3,6 +3,7 @@
   id: CMSurvivorFiorinaCorporateLiaison
   name: cm-job-name-survivor-fiorina-corporate-liaison
   description: cm-job-description-survivor
+  greeting: rmc-job-greeting-survivor-fop
   startingGear: RMCGearSurvivorFiorinaCorporateLiaison
   accessGroups:
   - ColonistCorporate

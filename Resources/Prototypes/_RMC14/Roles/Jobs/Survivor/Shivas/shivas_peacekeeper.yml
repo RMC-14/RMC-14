@@ -4,6 +4,7 @@
   name: cm-job-name-survivor-un-peacekeeper
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorSecurity
+  greeting: rmc-job-greeting-survivor-shivas
   startingGear: RMCGearSurvivorShivasILRCPeacekeeper
   spawnMenuRoleName: ILRC Peacekeeper (Shivas Survivor)
   camouflageStartingGear: null

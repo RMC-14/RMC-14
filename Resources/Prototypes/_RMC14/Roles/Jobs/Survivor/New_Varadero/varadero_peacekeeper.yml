@@ -5,6 +5,7 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorSecurity
   startingGear: RMCGearSurvivorILRCPeacekeeper
+  greeting: rmc-job-greeting-survivor-nv
   spawnMenuRoleName: ILRC peacekeeper (NV Survivor)
   special:
   - !type:AddComponentSpecial
