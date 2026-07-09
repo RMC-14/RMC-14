@@ -71,7 +71,7 @@
     pocket1: RMCPouchSurvivalSynthFill
     pocket2: RMCPouchToolsFill
   storage:
-    pocket1:
+    pocket2:
     - RMCWelderIndustrialHighCapacity
     back:
     - RMCHandcuffs

@@ -4,7 +4,7 @@
   name: rmc-job-name-pmc-corporate-goon-synth
   description: cm-job-description-survivor
   playTimeTracker: RMCJobSyntheticColony
-  spawnMenuRoleName: We-Ya Goon Synthetic (Survivor Special)
+  spawnMenuRoleName: We-Ya Goon Synthetic (LV624 Special Survivor)
   startingGear: RMCGearGoonSyntheticSurvivor
   icon: "RMCJobIconWeYaGoonSynthetic"
   greeting: rmc-job-greeting-corporate-dome-goon

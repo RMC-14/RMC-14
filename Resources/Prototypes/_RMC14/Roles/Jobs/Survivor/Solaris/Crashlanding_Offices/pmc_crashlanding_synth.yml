@@ -7,7 +7,7 @@
   startingGear: RMCGearPMCSyntheticSurvivor
   icon: "RMCJobIconPMCSynthetic"
   playTimeTracker: RMCJobSyntheticColony
-  spawnMenuRoleName: Survivor — PMC Synthetic (Solaris Ridge special survivor)
+  spawnMenuRoleName: PMC Synthetic (Solaris Special Survivor)
   special:
   - !type:AddComponentSpecial
     components:
