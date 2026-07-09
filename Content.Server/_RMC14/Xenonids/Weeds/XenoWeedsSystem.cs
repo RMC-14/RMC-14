@@ -238,6 +238,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
 
         var wallWeeds = EnsureComp<XenoWallWeedsComponent>(spawnedWeeds);
         wallWeeds.Weeds = sourceWeeds;
+        wallWeeds.WeededSurface = wallToWeed;
         Dirty(spawnedWeeds, wallWeeds);
 
         if (_xenoNestSurfaceQuery.TryComp(spawnedWeeds, out var nestSurface))
