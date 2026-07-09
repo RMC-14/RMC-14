@@ -359,43 +359,17 @@
     - XenoWeedTile
   - type: RMCVisibleToGhostsOnly
 
+# `XenoWeedableComponent` entities, for things covered up by nearby weeds
 - type: entity
-  id: XenoWeedsWall
+  abstract: true
+  id: XenoWeedCovering
   name: weeds
-  suffix: Wall
-  placement:
-    mode: SnapgridCenter
-    snap:
-    - Wall
   components:
   - type: Transform
     anchored: true
   - type: Physics
     bodyType: Static
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.5,-0.5,0.5,0.5"
-        layer:
-        - WallLayer
-        density: 1000
-        hard: false
   - type: Clickable
-  - type: Sprite
-    sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
-    drawdepth: Objects
-#    layers:
-#    - state: weedwall
-  - type: IconSmooth
-    key: cm_xeno_weeds_walls
-    additionalKeys:
-    - walls
-    - windows
-    base: weedwall
-    mode: Corners
-  - type: XenoNestSurface
   - type: XenoFriendly
   - type: Damageable
     damageContainer: StructuralXeno
@@ -420,6 +394,39 @@
   - type: XenoChargeDontHit
 
 - type: entity
+  parent: XenoWeedCovering
+  id: XenoWeedsWall
+  suffix: Wall
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        layer:
+        - WallLayer
+        density: 1000
+        hard: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
+    drawdepth: Objects
+#    layers:
+#    - state: weedwall
+  - type: IconSmooth
+    key: cm_xeno_weeds_walls
+    additionalKeys:
+    - walls
+    - windows
+    base: weedwall
+    mode: Corners
+  - type: XenoNestSurface
+
+- type: entity
   parent: XenoWeedsWall
   id: XenoWeedsWindow
   suffix: Window
@@ -435,6 +442,28 @@
     - windows
     base: weedwindow
     mode: CardinalFlags
+
+- type: entity
+  parent: XenoWeedCovering
+  id: XenoWeedsWindowFrame
+  suffix: Window Frame
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
+    drawdepth: Objects
+    layers:
+    - state: weedwindow0
+  - type: IconSmooth
+    key: cm_xeno_weeds_windows
+    additionalKeys:
+    - windows
+    base: weedwindow
+    mode: CardinalFlags
+  # No `XenoNestSurface` for frames.
 
 # Gardener's weeds
 - type: entity # TODO RMC14 sound
