@@ -13,7 +13,7 @@
   hasIcon: true
   greeting: rmc-job-greeting-soro-sof
   playTimeTracker: RMCJobSurvivorMilitary
-  spawnMenuRoleName: SPP SOF Survivor (Base)
+  spawnMenuRoleName: SPP SOF (Sorokyne Special Survivor - Base)
   useLoadoutOfJob: CMSurvivor
   basePlaytimeTracker: true
   abstract: true
