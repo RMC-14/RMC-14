@@ -74,13 +74,13 @@ public sealed partial class SynthComponent : Component
     /// The time it takes to repair the synth.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public TimeSpan RepairTime = TimeSpan.FromSeconds(0);
+    public TimeSpan RepairTime = TimeSpan.FromSeconds(0.5);
 
     /// <summary>
     /// The time it takes to repair the synth, if you are the synth.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public TimeSpan SelfRepairTime = TimeSpan.FromSeconds(30);
+    public TimeSpan SelfRepairTime = TimeSpan.FromSeconds(3);
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 CritThreshold = FixedPoint2.New(199);
@@ -117,6 +117,18 @@ public sealed partial class SynthComponent : Component
 
     [DataField, AutoNetworkedField]
     public ProtoId<DamageGroupPrototype> CableCoilDamageGroup = "Burn";
+
+    [DataField, AutoNetworkedField]
+    public LocId SynthRebootText = "rmc-species-synth-reset-key-needed";
+
+    [DataField, AutoNetworkedField]
+    public LocId SynthTooDamagedText = "rmc-species-synth-reset-key-too-damaged";
+
+    [DataField, AutoNetworkedField]
+    public List<ProtoId<DamageGroupPrototype>> ResetKeyHealGroups = new() { "Brute", "Burn" };
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 ResetKeyHealPerGroup = 12;
 
     [DataField, AutoNetworkedField]
     public string DamageVisualsColor = "#EEEEEE";
