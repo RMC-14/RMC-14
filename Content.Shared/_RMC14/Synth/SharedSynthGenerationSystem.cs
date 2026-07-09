@@ -117,19 +117,19 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
             return;
 
         var options = new List<DialogOption>();
-        HashSet<EntProtoId<SynthGenerationComponent>> synthTypes = [];
+        var synthTypes = new List<(EntityPrototype Proto, int Priority)>();
 
         foreach (var proto in _prototype.EnumeratePrototypes<EntityPrototype>())
         {
-            if (proto.HasComponent<SynthGenerationComponent>())
-                synthTypes.Add(proto.ID);
+            if (proto.TryGetComponent(out SynthGenerationComponent? gen, _compFactory))
+                synthTypes.Add((proto, gen.Priority));
         }
 
-        foreach (var synth in synthTypes)
+        synthTypes.Sort((a, b) => a.Priority.CompareTo(b.Priority));
+
+        foreach (var (proto, _) in synthTypes)
         {
-            if (!_prototype.TryIndex(synth, out var proto))
-                continue;
-            options.Add(new DialogOption($"{proto.Name}", new GenerationSelectedActionEvent(synth)));
+            options.Add(new DialogOption($"{proto.Name}", new GenerationSelectedActionEvent(proto.ID)));
         }
 
         _dialog.OpenOptions(ent.Owner, "Select a Generation", options, "Available Generations");

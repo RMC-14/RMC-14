@@ -5,6 +5,7 @@
   - type: SynthGeneration
     generation: RMCSynthGenOne
     damageModifier: RMCSynthGenOne
+    priority: 1
   - type: Skills
     skills:
       RMCSkillCqc: 3
@@ -48,6 +49,7 @@
   - type: SynthGeneration
     generation: RMCSynthGenTwo
     damageModifier: RMCSynthGenTwo
+    priority: 2
   - type: Skills
     skills:
       RMCSkillCqc: 3
@@ -84,6 +86,7 @@
   components:
   - type: SynthGeneration
     generation: RMCSynthGenThree
+    priority: 3
   - type: Skills
     skills:
       RMCSkillCqc: 5
