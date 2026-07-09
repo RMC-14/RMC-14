@@ -252,11 +252,14 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
     // Transfer wall weeds over when one `XenoWeedable` entity gets turned into another. (E.g. Window into window frame)
     private void OnConstructionChangeEntity(Entity<XenoWeedableComponent> ent, ref ConstructionChangeEntityEvent args)
     {
+        if (ent.Owner != args.New)
+            return;
+
         if (!_xenoWeedableQuery.TryComp(args.Old, out var oldWeedable) ||
             !TryComp<XenoWallWeedsComponent>(oldWeedable.Entity, out var oldWallWeeds))
             return;
 
-        if (!_xenoWeedableQuery.TryComp(args.New, out var newWeedable) || newWeedable.Entity != null)
+        if (ent.Comp is not { Entity: null } newWeedable)
             return;
 
         // If the new and old entities both spawn the same thing when weeded, just transfer the old one over.
@@ -264,18 +267,24 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
         {
             newWeedable.Entity = oldWeedable.Entity;
             oldWeedable.Entity = null;
+            Dirty(args.New, newWeedable);
+            Dirty(args.Old, oldWeedable);
 
             if (_xenoNestSurfaceQuery.TryComp(newWeedable.Entity, out var nestSurface))
             {
                 nestSurface.Weedable = args.New;
                 Dirty(newWeedable.Entity.Value, nestSurface);
             }
+            return;
         }
-        // else make a new one.
-        else
+
+        // Otherwise, make a new one.
+        var spawned = SpawnWallWeeds((args.New, newWeedable), oldWallWeeds.Weeds);
+        if (spawned is { } spawnedWeeds && _xenoWeedsQuery.TryComp(oldWallWeeds.Weeds, out var sourceWeeds))
         {
-            SpawnWallWeeds((args.New, newWeedable), oldWallWeeds.Weeds);
-            // Removal of the old weeds is handled separately when `args.Old` is swapped out and deleted.
+            sourceWeeds.Spread.Add(spawnedWeeds.Owner);
+            Dirty(oldWallWeeds.Weeds.Value, sourceWeeds);
         }
+        // Removal of the old weeds is handled separately when `args.Old` is swapped out and deleted.
     }
 }
