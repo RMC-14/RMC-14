@@ -2,6 +2,7 @@
   id: XenoWeeds
   name: weeds
   description: Weird black weeds...
+  categories: [ HideSpawnMenu ]
   placement:
     mode: SnapgridCenter
     snap:
@@ -199,10 +200,12 @@
     - XenoWeedTile
   - type: RMCVisibleToGhostsOnly
 
+# Hive weeds
 - type: entity # TODO RMC14 sound
   parent: XenoWeeds
   id: XenoHiveWeeds
   name: hive weeds
+  categories: [ HideSpawnMenu ]
   placement:
     mode: SnapgridCenter
     snap:
@@ -278,7 +281,7 @@
 - type: entity
   parent: XenoHiveWeeds
   id: XenoHiveWeedsCluster
-  suffix: Cluster, 6 Range
+  categories: [ HideSpawnMenu ]
   components:
   - type: XenoWeeds
     range: 6
@@ -288,7 +291,7 @@
 - type: entity
   parent: XenoHiveWeeds
   id: XenoHiveWeedsCore
-  suffix: Core, 8 Range
+  categories: [ HideSpawnMenu ]
   components:
   - type: XenoWeeds
     range: 8
@@ -355,7 +358,6 @@
     - XenoWeedNode
     - XenoWeedTile
   - type: RMCVisibleToGhostsOnly
-
 
 - type: entity
   id: XenoWeedsWall
@@ -438,7 +440,7 @@
 - type: entity # TODO RMC14 sound
   parent: XenoWeeds
   id: XenoHardyWeeds
-  suffix: Gardener
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     color: "#a1a1a1"
@@ -496,11 +498,10 @@
     tags:
     - XenoWeedNode
 
-
 - type: entity
   parent: XenoHardyWeeds
   id: XenoHardyWeedsSourceHidden
-  suffix: Hidden Node, Gardener
+  suffix: Hidden Node, Hardy
   components:
   - type: Sprite
     layers:
