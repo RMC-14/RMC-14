@@ -156,7 +156,7 @@
   id: VehicleVan
 
 - type: entity
-  parent: VehicleVanBase
+  parent: VehicleVanBase # RMC TODO: Replace with clf interior
   id: VehicleCLFVan
   name: CLF van
   description: A rugged transport van painted in CLF colors.
@@ -177,21 +177,7 @@
   - type: VehicleSound
     collisionSoundCooldown: 0.4
   - type: VehicleEnter
-    interiorPath: /Maps/_RMC14/Vehicles/van_interior.yml #TODO RMC14 add a dedicated CLF interior
-    enterDoAfter: 1.0
-    exitDoAfter: 1.0
     maxPassengers: 10
-    maxXenos: 2
-    entryPoints:
-    - offset: 1,-1
-      radius: 0.6
-      interiorCoords: 3.25,0
-    - offset: -1,-1
-      radius: 0.6
-      interiorCoords: 3.25,-1
-    - offset: 0,2
-      radius: 0.75
-      interiorCoords: 0.25,-1
 
 - type: entity
   id: VehicleBoxVanBase
