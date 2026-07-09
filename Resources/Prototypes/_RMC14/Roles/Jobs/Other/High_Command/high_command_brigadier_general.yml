@@ -11,6 +11,13 @@
   joinNotifyCrew: false
   accessGroups:
   - ShipMasterAccess
+  - Colony
+  - Corp
+  - RMCWeYa
+  access:
+  - CMAccessHighCommand
+  - CMAccessXenoQueen
+  - CMAccessXeno
   special:
   - !type:AddComponentSpecial
     components:
@@ -56,12 +63,14 @@
     - RMCHeadBeretGeneral
 
 - type: entity
-  parent: IDCardStandard # Deliberately parenting off of upstream ID card cause it needs to work with admin access configurator.
+  parent: CMIDCardGold
   id: RMCIDCardUNMCBrigadierGeneral
   name: brigadier general ID card
   suffix: Admin
-  description: Issued to the top brass of the UNMC. Premium, sleek, built to last.
+  description: Issued to members of UNMC High Command.
   components:
+  - type: PresetIdCard
+    job: CMUNMCBrigadierGeneral
   - type: Sprite
     sprite: _RMC14/Objects/CMIDs/general.rsi
     state: general
@@ -71,16 +80,6 @@
     sprite: _RMC14/Objects/CMIDs/general.rsi
   - type: Item
     heldPrefix: green
-  - type: Access
-    groups:
-    - ShipMasterAccess
-    - Colony
-    - Corp
-    - RMCWeYa
-    tags:
-    - CMAccessHighCommand
-    - CMAccessXenoQueen
-    - CMAccessXeno
 
 - type: playTimeTracker
   id: CMJobUNMCBrigadierGeneral
