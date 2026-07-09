@@ -6,6 +6,9 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: Tag
+    tags:
+    - HideContextMenu
   - type: Transform
     anchored: true
   - type: Sprite
@@ -21,6 +24,9 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: Tag
+    tags:
+    - HideContextMenu
   - type: Transform
     anchored: true
   - type: Physics
@@ -302,6 +308,9 @@
     state: exit_door
   - type: VehicleExit
   - type: RMCIgnoreGhostInteractionLimits
+  - type: RemoveComponents
+    components:
+    - type: Tag
 
 - type: entity
   parent: VehicleAPCWallBase
@@ -616,6 +625,9 @@
   - type: WallMount
     arc: 360
   - type: VehiclePortGunController
+  - type: RemoveComponents
+    components:
+    - type: Tag
 
 - type: entity
   parent: VehicleAPCM56FPWInterior
