@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "hudsquad, hudsquad_leader_a, hudsquad_leader, hudsquad_tl, hudsquad_spec, hudsquad_gun, hudsquad_engi, hudsquad_med, hudsquad_ass taken from https://github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi. hudsquad_rto made by noctyrnal (Github). spttech by Drazamuffin (Github). hudsquad_spec_pyro by Ian321 then edited by noctyrnal (Github). hudsquad_spec_demo, hudsquad_spec_anti_materiel_sniper, hudsquad_spec_grenadier, hudsquad_spec_sniper, hudsquad_load, hudsquad_mortar from https://github.com/cmss13-devs/cmss13/blob/2a8e4b86f79b1b75ffa94bf5a721fb5c52b51598/icons/mob/hud/marine_hud.dmi. hudsquad_rifleman from https://github.com/cmss13-devs/cmss13/blob/5f144e83d141f75baba01b69f5c6fb85a644e0ab/icons/mob/hud/factions/marine.dmi ",
+  "copyright": "hudsquad, hudsquad_leader_a, hudsquad_leader, hudsquad_tl, hudsquad_spec, hudsquad_gun, hudsquad_engi, hudsquad_med, hudsquad_ass taken from https://github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi. hudsquad_rto made by noctyrnal (Github). spttech by Drazamuffin (Github). hudsquad_spec_pyro by Ian321 then edited by noctyrnal (Github). hudsquad_spec_demo, hudsquad_spec_anti_materiel_sniper, hudsquad_spec_grenadier, hudsquad_spec_sniper, hudsquad_load, hudsquad_mortar from https://github.com/cmss13-devs/cmss13/blob/2a8e4b86f79b1b75ffa94bf5a721fb5c52b51598/icons/mob/hud/marine_hud.dmi. hudsquad_rifleman made by Dutch-VanDerLinde (github)",
   "size": {
     "x": 16,
     "y": 16
