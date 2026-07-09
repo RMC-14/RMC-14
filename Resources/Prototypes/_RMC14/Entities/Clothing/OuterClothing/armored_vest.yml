@@ -103,7 +103,7 @@
   id: RMCArmorVestXLBase
   abstract: true
   name: M3-XL pattern flak vest
-  description: A type of flak vest, standard issue for UNMC auxiliary support troops. While it lacks a TNR shoulder lamp however it does come with IMP compatibility putting it just a step above older generation vests. It has been designed to exclusively protect the user's chest from light ballistics, it is not recommended for direct combat.
+  description: A type of flak vest, standard issue for UNMC auxiliary support troops. While it lacks a TNR shoulder lamp, it does come with IMP compatibility putting it just a step above older generation vests. It has been designed to exclusively protect the user's chest from light ballistics, it is not recommended for direct combat.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/standard/jungle.rsi
@@ -183,22 +183,29 @@
   parent: RMCArmorVestXLBase
   id: RMCArmorVestIntel
   name: M3-XL pattern intelligence flak vest
-  description: A type of M3-XL flak vest, uncommonly issued to UNMC intelligence troops and designed primarily for mobility. While it may lack a TNR shoulder lamp however it does come with IMP compatibility putting it just a step above older generation vests. It has been designed to exclusively protect the user's chest from light ballistics and blades, it is not recommended for direct combat.
+  description: A type of M3-XL flak vest, uncommonly issued to UNMC intelligence officers, designed primarily for mobility. While it may lack a TNR shoulder lamp, it does come with IMP compatibility putting it just a step above older generation vests. It has been designed to exclusively protect the user's chest from light ballistics and blades, it is not recommended for direct combat.
   components:
   - type: CMArmor
     melee: 10
     bullet: 10
     bio: 0
     explosionArmor: 0
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/intel/classic-jungle-urban.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/intel/desert
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/intel/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/intel/classic-jungle-urban.rsi
+      Urban:  _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/intel/classic-jungle-urban.rsi
 
 - type: entity
   parent: RMCArmorVestIntel
   id: RMCArmorVestOfficer
   name: M3-XL pattern officer flak vest
-  description: A type of M3-XL flak vest, uncommonly issued to UNMC officers and designed primarily for mobility. Compared to your average flak vest it comes with additonal padding, a partial guard for the lower torso and shoulder pads. This added protection will not protect against explosions or biohazards. As such it is not recommended for direct combat.
+  description: A type of M3-XL flak vest, uncommonly issued to UNMC officers, designed primarily for mobility. Compared to your average flak vest it comes with additonal padding, a partial guard for the lower torso and shoulder pads. This added protection will not protect against explosions or biohazards. As such it is not recommended for direct combat.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/officer/classic-jungle.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/officer/classic-jungle-urban.rsi
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/officer/classic-jungle-urban.rsi
@@ -211,7 +218,7 @@
   parent: RMCArmorVestOfficer
   id: RMCArmorVestSeniorOfficer
   name: M3-XL pattern senior officer flak vest
-  description: A type of M3-XL flak vest, uncommonly issued to UNMC senior officers and designed primarily for mobility. Compared to your average flak vest it comes with additonal padding, a partial guard for the lower torso and shoulder pads. This added protection will not protect against explosions. Not recommended for direct combat.
+  description: A type of M3-XL flak vest, uncommonly issued to UNMC senior officers, designed primarily for mobility. Compared to your average flak vest it comes with additonal padding, a partial guard for the lower torso and shoulder pads. This added protection will not protect against explosions. Not recommended for direct combat.
   components:
   - type: CMArmor
     melee: 10
@@ -242,7 +249,7 @@
   parent: RMCArmorVestXLBase
   id: RMCArmorVestSquad
   name: M3-XL pattern marine flak vest
-  description: A type of M3-XL flak vest, standard issue for UNMC auxiliary support troops and designed primarily for mobility. While it may lack a TNR shoulder lamp however it does come with IMP compatibility putting it just a step above older generation vests. It has been designed to exclusively protect the user's chest from light ballistics, it is not intended for direct combat.
+  description: A type of M3-XL flak vest, standard issue for UNMC auxiliary support troops, designed primarily for mobility. While it may lack a TNR shoulder lamp, it does come with IMP compatibility putting it just a step above older generation vests. It has been designed to exclusively protect the user's chest from light ballistics, it is not intended for direct combat.
   components:
   - type: CMArmor
     melee: 0
@@ -259,7 +266,7 @@
   parent: RMCArmorVestSquad
   id: RMCArmorVestSquadLeader
   name: M3-XL pattern squad leader flak vest
-  description: A type of M3-XL flak vest, uncommonly issued to UNMC auxiliary support squad leads and designed primarily for mobility, with a dedicated pouch for a box of zip ties. While it may lack a TNR shoulder lamp however it does come with IMP compatibility putting it just a step above older generation vests. It has been designed to exclusively protect the user's chest from light ballistics, it is not intended for direct combat.
+  description: A type of M3-XL flak vest, uncommonly issued to UNMC auxiliary support squad leads, designed primarily for mobility, with a dedicated pouch for a box of zip ties. While it may lack a TNR shoulder lamp, it does come with IMP compatibility putting it just a step above older generation vests. It has been designed to exclusively protect the user's chest from light ballistics, it is not intended for direct combat.
   suffix: Zipties
   components:
   - type: Storage
