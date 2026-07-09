@@ -6,7 +6,7 @@
   ranks:
     RMCRankSyntheticColonist: []
   icon: "RMCJobIconSPPSynth"
-  spawnMenuRoleName: SPP Airborne Synthetic (Survivor)
+  spawnMenuRoleName: SPP Airborne Synthetic (Trijent Special Survivor)
   special:
   - !type:AddComponentSpecial
     components:

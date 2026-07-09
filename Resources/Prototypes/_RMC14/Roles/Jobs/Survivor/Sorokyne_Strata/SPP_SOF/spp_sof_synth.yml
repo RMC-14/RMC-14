@@ -6,7 +6,7 @@
   ranks:
     RMCRankSyntheticColonist: []
   icon: "RMCJobIconSPPSynth"
-  spawnMenuRoleName: SPP SOF Synthetic (Survivor)
+  spawnMenuRoleName: SPP SOF Synthetic (Sorokyne Special Survivor)
   special:
   - !type:AddComponentSpecial
     components:
