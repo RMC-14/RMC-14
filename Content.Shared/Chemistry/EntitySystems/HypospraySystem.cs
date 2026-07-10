@@ -27,6 +27,9 @@ public sealed class HypospraySystem : EntitySystem
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainers = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
+    // RMC14
+    [Dependency] private readonly RMCSharedHypospraySystem _rmcHypospray = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -80,6 +83,9 @@ public sealed class HypospraySystem : EntitySystem
 
     public bool TryDoInject(Entity<HyposprayComponent> entity, EntityUid target, EntityUid user, bool doAfter = true)
     {
+        if (doAfter)
+            return _rmcHypospray.DoAfter(entity, target, user);
+
         var (uid, component) = entity;
 
         if (!EligibleEntity(target, component))
