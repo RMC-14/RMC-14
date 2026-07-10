@@ -41,6 +41,16 @@ public sealed class HyposprayStatusControl : Control
 
         if (!_solutionContainers.TryGetSolution(_parent.Owner, _parent.Comp.SolutionName, out _, out var solution))
         {
+            if (PrevVolume == 0
+                && PrevMaxVolume == 0
+                && PrevOnlyAffectsMobs == _parent.Comp.OnlyAffectsMobs
+                && PrevTransferAmount == _parent.Comp.TransferAmount)
+                return;
+
+            PrevVolume = 0;
+            PrevMaxVolume = 0;
+            PrevOnlyAffectsMobs = _parent.Comp.OnlyAffectsMobs;
+            PrevTransferAmount = _parent.Comp.TransferAmount;
 
             _label.SetMarkup(Loc.GetString("rmc-hypospray-label",
             ("modeString", modeStringLocalized),

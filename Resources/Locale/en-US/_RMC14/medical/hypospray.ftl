@@ -2,3 +2,5 @@
 rmc-hypospray-swap-tacreload = You begin swapping vials.
 rmc-hypospray-load-tacreload = You begin loading a vial into {THE($target)}.
 
+rmc-hypospray-label = No solution
+    Mode: [color=white]{$modeString}[/color] ([color=white]{$transferVolume}u[/color])
