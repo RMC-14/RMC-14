@@ -60,13 +60,25 @@
     sprite: _RMC14/Objects/Misc/laptop.rsi
     layers:
     - state: laptop_closed
-      map: [ "enum.ToggleableVisuals.Enabled" ]
+layers:
+- state: laptop_closed
+  map: [ "unfoldedLayer" ]
+- state: laptop_off
+  map: [ "foldedLayer", "enum.ToggleableVisuals.Layer" ]
+  visible: false
   - type: GenericVisualizer
     visuals:
+      enum.FoldedVisuals.State:
+        foldedLayer:
+          True: {visible: true}
+          False: {visible: false}
+        unfoldedLayer:
+          True: {visible: false}
+          False: {visible: true}
       enum.ToggleableVisuals.Enabled:
-        enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
           True: { state: laptop_on }
-          False: { state: laptop_closed }
+          False: { state: laptop_off }
     sprite: _RMC14/Objects/Misc/laptop.rsi
   - type: Item
     size: Normal
@@ -74,7 +86,16 @@
   - type: ItemToggle
     activated: false
   - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true 
   - type: ItemToggleSize
-    activatedSize: Large
+- type: ItemToggleSize
+  activatedSize: Large
+- type: ItemTogglePointLight
+- type: PointLight
+  enabled: false
+  radius: 2
+  netsync: false
+  color: "#52ff39"
 
 
