@@ -193,7 +193,7 @@
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/intel/classic-jungle-urban.rsi
-      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/intel/desert
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/intel/desert.rsi
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/intel/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/intel/classic-jungle-urban.rsi
       Urban:  _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/intel/classic-jungle-urban.rsi
@@ -203,6 +203,7 @@
   id: RMCArmorVestCrewchief
   name: M80B1 flak vest
   description: The predecessor to the M3-XL flak vest, commonly issued to UNMC flight crew members not situated in the cockpit such as Weapons Crew and Drop Crew. Designed to protect the wearer's chest against small arms fire and loose sharp objects.
+
 - type: entity
   parent: RMCArmorVestIntel
   id: RMCArmorVestOfficer
@@ -237,7 +238,7 @@
   parent: RMCArmorVestSeniorOfficer
   id: RMCArmorVestCommandingOfficer
   name: M4-XL pattern commanding officer flak vest
-  description: A next generation model of flak vest, the M4-XL has been designed for mobility and with additional padding and protection. While it may still lack a TNR shoulder lamp the M4-XL imrpoves on the protection provided by the M3 via having a padded composit mesh guard over the shoulders and upper chest. This increased protection does not protect the use from blasts however and as such is still not recommended for direct combat.
+  description: A next generation model of flak vest, the M4-XL has been designed for mobility and with additional padding and protection. While it may still lack a TNR shoulder lamp the M4-XL improves on the protection provided by the M3 via having a padded composite mesh guard over the shoulders and upper chest. This increased protection does not protect the use from blasts however and as such is still not recommended for direct combat.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/commanding_officer/jungle.rsi
