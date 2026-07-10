@@ -314,7 +314,7 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
         if (_timing.ApplyingState)
             return;
 
-        if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var conContainer))
+        if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var conContainer) || args.Container != conContainer)
             return;
 
         var contained = EnsureComp<RMCConnectContainerRelayComponent>(args.Entity);
@@ -327,7 +327,7 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
 
     private void OnConnectedContainerRemove(Entity<RMCConnectedContainerComponent> ent, ref EntRemovedFromContainerMessage args)
     {
-        if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container))
+        if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container) || args.Container != container)
             return;
 
         RemCompDeferred<RMCConnectContainerRelayComponent>(args.Entity);
