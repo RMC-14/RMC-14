@@ -16,7 +16,7 @@ public abstract class SharedInjectorSystem : EntitySystem
     /// <summary>
     ///     Default transfer amounts for the set-transfer verb.
     /// </summary>
-    public static readonly FixedPoint2[] TransferAmounts = { 1, 5, 10, 15 };
+    public static readonly FixedPoint2[] TransferAmounts = { 1, 5, 10, 15, 30}; // RMC14
 
     [Dependency] protected readonly SharedPopupSystem Popup = default!;
     [Dependency] protected readonly SharedSolutionContainerSystem SolutionContainers = default!;

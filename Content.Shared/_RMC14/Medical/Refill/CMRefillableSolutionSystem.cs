@@ -91,12 +91,6 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
     private void OnRefillerInteractUsing(Entity<CMSolutionRefillerComponent> ent, ref InteractUsingEvent args)
     {
         var fillable = args.Used;
-        if (TryComp<RMCHyposprayComponent>(args.Used, out var hypo) &&
-            _container.TryGetContainer(args.Used, hypo.SlotId, out var container) &&
-            container.ContainedEntities.Count != 0)
-        {
-            fillable = container.ContainedEntities[0];
-        }
 
         if (!TryComp(fillable, out CMRefillableSolutionComponent? refillable))
             return;
@@ -176,9 +170,6 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         {
             return;
         }
-
-        if (sol != null)
-            _appearance.SetData(ent, SolutionContainerStoreVisuals.Color, sol.GetColor(_proto));
 
         if (!TryGetStorageFillableSolution(args.Entity, out var refillable, out _))
         {
