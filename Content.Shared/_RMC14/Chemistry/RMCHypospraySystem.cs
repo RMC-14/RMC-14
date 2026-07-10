@@ -4,7 +4,7 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.DoAfter;
 using Content.Shared.Timing;
 
-namespace Content.Shared._RMC14.Medical;
+namespace Content.Shared._RMC14.Chemistry;
 
 public sealed class RMCHypospraySystem : EntitySystem
 {

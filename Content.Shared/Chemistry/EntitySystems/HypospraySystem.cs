@@ -28,7 +28,7 @@ public sealed class HypospraySystem : EntitySystem
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
     // RMC14
-    [Dependency] private readonly RMCSharedHypospraySystem _rmcHypospray = default!;
+    [Dependency] private readonly RMCHypospraySystem _rmcHypospray = default!;
 
     public override void Initialize()
     {
