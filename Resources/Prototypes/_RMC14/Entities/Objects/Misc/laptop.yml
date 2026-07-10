@@ -52,34 +52,32 @@
 
 - type: entity
   parent: BaseItem
-  id: RMCLaptopBudget
-  name: laptop
-  description: The screen is stuck on some sort of boot-loop in terrible garish green. All the text is in Rusoek, a creole language spawned out of the borders of UN and SPP space from some Korean settlements.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Misc/laptop.rsi
-    state: laptop_on
-  - type: Item
-    size: Large
-    sprite: _RMC14/Objects/Misc/laptop.rsi
-
-- type: entity
-  parent: RMCLaptopBudget
   id: RMCLaptop
-  name: laptop
+  name: laptop #RMC14: Deviation from parity, the laptop is a moveable entity which can be opened
   description: Laptops, porta-comps, and reel-back computers, all of these and more available at your local WEYA-Mart electronics section!
+  suffix: closed
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/laptop.rsi
     layers:
     - state: laptop_closed
-      map: [ "enum.ToggleableVisuals.Enabled" ]
+      map: [ "foldedLayer" ]
+    - state: laptop_off
+      map: [ "unfoldedLayer", "enum.ToggleableVisuals.Layer" ]
+      visible: false
   - type: GenericVisualizer
     visuals:
+      enum.FoldedVisuals.State:
+        foldedLayer:
+          True: {visible: true}
+          False: {visible: false}
+        unfoldedLayer:
+          True: {visible: false}
+          False: {visible: true}
       enum.ToggleableVisuals.Enabled:
-        enum.ToggleableVisuals.Enabled:
-          True: { state: laptop_off }
-          False: { state: laptop_closed }
+        enum.ToggleableVisuals.Layer:
+          True: { state: laptop_on }
+          False: { state: laptop_off }
     sprite: _RMC14/Objects/Misc/laptop.rsi
   - type: Item
     size: Normal
@@ -87,7 +85,33 @@
   - type: ItemToggle
     activated: false
   - type: Appearance
+  - type: Foldable
+    folded: true
+    canFoldInsideContainer: true
   - type: ItemToggleSize
     activatedSize: Large
+  - type: ItemTogglePointLight
+  - type: PointLight
+    enabled: false
+    radius: 2
+    netsync: false
+    color: "#52ff39"
 
+- type: entity
+  parent: RMCLaptop
+  id: RMCLaptopOff
+  suffix: off
+  components:
+  - type: Foldable
+    folded: false
+    canFoldInsideContainer: true
 
+- type: entity
+  parent: RMCLaptopOff
+  id: RMCLaptopOn
+  suffix: on
+  components:
+  - type: ItemToggle
+    activated: true
+  - type: PointLight
+    enabled: true
