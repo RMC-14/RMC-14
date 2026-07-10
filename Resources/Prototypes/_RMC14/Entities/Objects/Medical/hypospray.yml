@@ -66,6 +66,14 @@
     solution: beaker
   - type: InjectableSolution
     solution: beaker
+  - type: ReagentExaminationRequiresSkill
+    containerId: vial
+    noContainerExamine: rmc-hypospray-no-vial
+    unskilledExamine: rmc-hypospray-examine-unskilled
+    skilledExamineContains: rmc-hypospray-examine-contains
+    skilledExamineNone: rmc-hypospray-examine-empty
+    skills:
+      RMCSkillMedical: 1
   - type: Hypospray
     solutionName: beaker
     injectOnly: true
@@ -115,6 +123,7 @@
   id: CMHyposprayFilledTricord
   name: tricordrazine hypospray
   suffix: Filled, Tricordrazine
+  description: The Avant Biomedical hypospray is a sterile, air-needle auto-injector for rapid administration of drugs to patients. Contains Tricordrazine, a weak general use medicine for treating damage.
   components:
   - type: ContainerFill
     containers:
@@ -130,6 +139,7 @@
   id: RMCHyposprayFilledEpi
   name: epinephrine hypospray
   suffix: Filled, Epinephrine
+  description: The Avant Biomedical hypospray is a sterile, air-needle auto-injector for rapid administration of drugs to patients. Contains Epinephrine, a cardiostimulant used to assist in revival.
   components:
   - type: ContainerFill
     containers:
