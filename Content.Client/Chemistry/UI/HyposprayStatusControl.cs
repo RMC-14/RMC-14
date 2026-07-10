@@ -32,8 +32,21 @@ public sealed class HyposprayStatusControl : Control
     {
         base.FrameUpdate(args);
 
+        // RMC14
+        var modeStringLocalized = Loc.GetString((_parent.Comp.OnlyAffectsMobs && _parent.Comp.CanContainerDraw) switch
+        {
+            false => "hypospray-all-mode-text",
+            true => "hypospray-mobs-only-mode-text",
+        });
+
         if (!_solutionContainers.TryGetSolution(_parent.Owner, _parent.Comp.SolutionName, out _, out var solution))
+        {
+
+            _label.SetMarkup(Loc.GetString("rmc-hypospray-label",
+            ("modeString", modeStringLocalized),
+            ("transferVolume", _parent.Comp.TransferAmount)));
             return;
+        }
 
         // only updates the UI if any of the details are different than they previously were
         if (PrevVolume == solution.Volume
@@ -47,16 +60,11 @@ public sealed class HyposprayStatusControl : Control
         PrevOnlyAffectsMobs = _parent.Comp.OnlyAffectsMobs;
         PrevTransferAmount = _parent.Comp.TransferAmount;
 
-        var modeStringLocalized = Loc.GetString((_parent.Comp.OnlyAffectsMobs && _parent.Comp.CanContainerDraw) switch
-        {
-            false => "hypospray-all-mode-text",
-            true => "hypospray-mobs-only-mode-text",
-        });
-
         _label.SetMarkup(Loc.GetString("hypospray-volume-label",
             ("currentVolume", solution.Volume),
             ("totalVolume", solution.MaxVolume),
             ("modeString", modeStringLocalized),
             ("transferVolume", _parent.Comp.TransferAmount)));
+        // RMC14
     }
 }
