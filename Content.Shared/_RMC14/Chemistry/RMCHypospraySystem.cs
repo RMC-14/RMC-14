@@ -37,7 +37,8 @@ public sealed class RMCHypospraySystem : EntitySystem
         {
             BreakOnMove = true,
             BreakOnHandChange = true,
-            NeedHand = true
+            NeedHand = true,
+            LagCompensated = true,
         };
 
         _doAfter.TryStartDoAfter(args);
