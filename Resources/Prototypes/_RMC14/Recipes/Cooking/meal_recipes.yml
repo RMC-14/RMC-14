@@ -449,6 +449,16 @@
     Rice: 5
 
 - type: microwaveMealRecipe
+  id: RecipeRMCCrabBurger
+  name: crab sushi roll recipe
+  result: FoodBurgerCrab
+  time: 10
+  group: Savory
+  solids:
+    RMCFoodMeatFishCrab: 2
+    FoodBreadBun: 1
+
+- type: microwaveMealRecipe
   id: RecipeRMCFishSushiCrabShell
   name: shelled crab sushi roll recipe
   result: RMCFoodMeatFishSushi
