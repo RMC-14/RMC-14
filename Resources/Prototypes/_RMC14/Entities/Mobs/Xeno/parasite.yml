@@ -87,7 +87,6 @@
     whitelist:
       components:
       - Xeno
-      - Synth
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.7
     baseSprintSpeed: 5
