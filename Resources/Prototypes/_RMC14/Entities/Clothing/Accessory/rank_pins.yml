@@ -10,6 +10,7 @@
     limit: 1
     hiddenByJacketRolling: false
 
+# UNMC Enlisted
 - type: entity
   parent: RMCPinBase
   id: RMCPinE1
@@ -145,6 +146,7 @@
       sprite: _RMC14/Objects/Clothing/Accessory/RankPins/e9.rsi
       state: pin
 
+# UNMC Officer
 - type: entity
   parent: RMCPinBase
   id: RMCPinO1
@@ -233,4 +235,20 @@
   - type: UniformAccessory
     playerSprite:
       sprite: _RMC14/Objects/Clothing/Accessory/RankPins/o6.rsi
+      state: pin
+
+# Provost
+- type: entity
+  parent: RMCPinBase
+  id: RMCPinProvost
+  suffix: Provost
+  name: Rank Pins
+  description: These ones are for the members of the Marine Provost Office.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/RankPins/provost.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/RankPins/provost.rsi
       state: pin
