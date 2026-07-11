@@ -203,6 +203,9 @@
     solution: food
   - type: DrawableSolution
     solution: food
+  - type: FoodSequenceElement
+    entries:
+      Burger: RMCFoodMeatFishGrilled
 
 - type: entity
   parent: CMFoodBase
