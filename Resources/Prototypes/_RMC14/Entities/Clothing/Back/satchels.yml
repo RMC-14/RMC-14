@@ -783,7 +783,7 @@
     - id: CMCrowbar
 
 - type: entity
-  parent: CMSatchel
+  parent: CMSatchelLiaisonSecure
   id: RMCSatchelICBLiaisonFill
   suffix: Interstellar Commerce Bureau Liaison, Filled
   components:
