@@ -143,7 +143,10 @@
   id: RMCAirburstGrenade
 
 - type: Tag
-  id: Bacon
+  id: Bacon #used for metamorphic recipes
+
+- type: Tag
+  id: Fish #used for metamorphic recipes
 
 - type: Tag
 
