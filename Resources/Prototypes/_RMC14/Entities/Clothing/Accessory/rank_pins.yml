@@ -1,0 +1,137 @@
+- type: entity
+  abstract: true
+  parent: RMCBaseUniformAccessory
+  id: RMCPinBase
+  name: pin
+  description: An abstract pin.
+  components:
+  - type: UniformAccessory
+    category: RankPin
+    limit: 1
+    hiddenByJacketRolling: false
+
+- type: entity
+  parent: RMCPinBase
+  id: RMCPinE1
+  name: Rank Pins
+  description: These ones are for the rank of E1.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/RankPins/e1.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/RankPins/e1.rsi
+      state: pin
+
+- type: entity
+  parent: RMCPinBase
+  id: RMCPinE2
+  name: Rank Pins
+  description: These ones are for the rank of E2.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/RankPins/e2.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/RankPins/e2.rsi
+      state: pin
+
+- type: entity
+  parent: RMCPinBase
+  id: RMCPinE3
+  name: Rank Pins
+  description: These ones are for the rank of E3.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/RankPins/e3.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/RankPins/e3.rsi
+      state: pin
+
+- type: entity
+  parent: RMCPinBase
+  id: RMCPinE4
+  name: Rank Pins
+  description: These ones are for the rank of E4.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/RankPins/e4.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/RankPins/e4.rsi
+      state: pin
+
+- type: entity
+  parent: RMCPinBase
+  id: RMCPinE5
+  name: Rank Pins
+  description: These ones are for the rank of E5.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/RankPins/e5.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/RankPins/e5.rsi
+      state: pin
+
+- type: entity
+  parent: RMCPinBase
+  id: RMCPinE6
+  name: Rank Pins
+  description: These ones are for the rank of E6.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/RankPins/e6.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/RankPins/e6.rsi
+      state: pin
+
+- type: entity
+  parent: RMCPinBase
+  id: RMCPinE7
+  name: Rank Pins
+  description: These ones are for the rank of E7.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/RankPins/e7.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/RankPins/e7.rsi
+      state: pin
+
+- type: entity
+  parent: RMCPinBase
+  id: RMCPinE8
+  name: Rank Pins
+  description: These ones are for the rank of E8.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/RankPins/e8.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/RankPins/e8.rsi
+      state: pin
+
+- type: entity
+  parent: RMCPinBase
+  id: RMCPinE9
+  name: Rank Pins
+  description: These ones are for the rank of E9.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/RankPins/e9.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/RankPins/e9.rsi
+      state: pin
