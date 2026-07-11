@@ -80,7 +80,7 @@
     head: RMCHardhatWhite
     ears: RMCHeadsetDistressICBLiaison
     back: RMCSatchelICBLiaisonFill
-    jumpsuit: CMJumpsuitICBLiaisonBlack
+    jumpsuit: RMCJumpsuitICBLiaisonBlack
     outerClothing: RMCHazardVestYellow
     gloves: CMHandsInsulated
     shoes: RMCBootsPMCFilled
@@ -93,7 +93,7 @@
 
 - type: entity
   parent: CMJumpsuitLiaisonBlack
-  id: CMJumpsuitICBLiaisonBlack
+  id: RMCJumpsuitICBLiaisonBlack
   suffix: ICB, Webbing
   components:
   - type: WebbingClothing
