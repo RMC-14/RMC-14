@@ -263,6 +263,8 @@
       map: ["enum.GunVisualLayers.Mag"]
     - state: ammo_band
       color: "#1F951F"
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifleAP
 
 - type: entity
   parent: RMCMagazineRifleSSG45
@@ -289,6 +291,8 @@
       map: ["enum.GunVisualLayers.Mag"]
     - state: ammo_band
       color: "#9C9A19"
+  - type: RefillableByBulletBox
+    bulletType: null
 
 - type: entity
   parent: RMCMagazineRifleSSG45HEAP
@@ -322,6 +326,8 @@
       map: ["enum.GunVisualLayers.Mag"]
     - state: ammo_band
       color: "#771A10"
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifleIncendiary
 
 - type: Tag
   id: RMCWeaponRifleSSG45
