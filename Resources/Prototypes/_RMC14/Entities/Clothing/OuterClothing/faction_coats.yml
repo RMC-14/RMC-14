@@ -182,7 +182,7 @@
 - type: entity
   parent: RMCCoatBureauDeputy
   id: RMCCoatPCG
-  name: PCP uniform jacket
+  name: PCG uniform jacket
   description: A People's Civil Gendarmes service jacket featuring small dispersed para-aramid inserts providing the barest of defensive functionality, and a Personal Light Unit rig.
   components:
   - type: Sprite
