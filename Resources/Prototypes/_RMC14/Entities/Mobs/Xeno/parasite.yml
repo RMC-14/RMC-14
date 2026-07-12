@@ -144,6 +144,7 @@
       6: rmc-xeno-prime-parasite
       7: rmc-xeno-prime-parasite
       8: rmc-xeno-prime-parasite
+      9: rmc-xeno-prime-parasite
   - type: FixedIdentity
     name: cm-job-name-xeno-parasite
   - type: VentCrawler
