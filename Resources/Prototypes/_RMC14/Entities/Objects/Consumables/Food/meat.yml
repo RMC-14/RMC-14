@@ -176,7 +176,7 @@
   - type: Tag
     tags:
     - Cooked
-    - Meat
+    - Fish
   - type: Construction
     graph: GrilledFISH
     node: grilled fish
