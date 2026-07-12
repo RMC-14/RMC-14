@@ -183,24 +183,42 @@ public sealed class HiveTeamSystem : EntitySystem
 
     private void OnXenoEvolved(Entity<HiveMemberComponent> xeno, ref NewXenoEvolvedEvent args)
     {
-        if (_hive.GetHive(xeno.Owner) is not { } hive)
+        var hive = _hive.GetHive(args.NewXeno) ?? _hive.GetHive(xeno.Owner);
+        if (hive == null)
             return;
-        if (!TryComp(hive.Owner, out HiveTeamsComponent? teams))
+        if (!TryComp(hive.Value.Owner, out HiveTeamsComponent? teams))
             return;
-        UpdateTeamNetEntities(teams, args.OldXeno, args.NewXeno);
+        UpdateTeamNetEntities(teams, args.OldXeno.Owner, args.NewXeno);
         RefreshTeamMemberComponents(teams);
-        Dirty(hive.Owner, teams);
+        Dirty(hive.Value.Owner, teams);
+
+        // Reopen the hive leader squad UI on the new entity if it was open on the old one
+        if (_ui.IsUiOpen(args.OldXeno.Owner, HiveLeaderSquadUIKey.Key) &&
+            TryComp(args.NewXeno, out ActorComponent? actor))
+        {
+            _ui.CloseUi(args.OldXeno.Owner, HiveLeaderSquadUIKey.Key);
+            _ui.OpenUi(args.NewXeno, HiveLeaderSquadUIKey.Key, actor.PlayerSession);
+        }
     }
 
     private void OnXenoDevolved(Entity<HiveMemberComponent> xeno, ref XenoDevolvedEvent args)
     {
-        if (_hive.GetHive(xeno.Owner) is not { } hive)
+        var hive = _hive.GetHive(args.NewXeno) ?? _hive.GetHive(xeno.Owner);
+        if (hive == null)
             return;
-        if (!TryComp(hive.Owner, out HiveTeamsComponent? teams))
+        if (!TryComp(hive.Value.Owner, out HiveTeamsComponent? teams))
             return;
         UpdateTeamNetEntities(teams, args.OldXeno, args.NewXeno);
         RefreshTeamMemberComponents(teams);
-        Dirty(hive.Owner, teams);
+        Dirty(hive.Value.Owner, teams);
+
+        // Reopen the hive leader squad UI on the new entity if it was open on the old one
+        if (_ui.IsUiOpen(args.OldXeno, HiveLeaderSquadUIKey.Key) &&
+            TryComp(args.NewXeno, out ActorComponent? actor))
+        {
+            _ui.CloseUi(args.OldXeno, HiveLeaderSquadUIKey.Key);
+            _ui.OpenUi(args.NewXeno, HiveLeaderSquadUIKey.Key, actor.PlayerSession);
+        }
     }
 
     private void UpdateTeamNetEntities(HiveTeamsComponent teams, EntityUid oldUid, EntityUid newUid)

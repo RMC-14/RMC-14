@@ -4,7 +4,7 @@
   name: rmc-job-name-pmc-corporate-goon-engi
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorEngineer
-  spawnMenuRoleName: We-Ya Goon Engineer (Survivor Special)
+  spawnMenuRoleName: We-Ya Goon Engineer (LV624 Special Survivor)
   startingGear: RMCGearSurvivorGoon
   icon: "RMCJobIconPMCGoonEngi"
   hasIcon: true
