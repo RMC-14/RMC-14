@@ -10,6 +10,10 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      preset: RMCLanguagePresetSynthColonist
+    - type: LanguageLearning
+      preset: RMCLanguageLearningPresetSynthColonist
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
@@ -19,8 +23,6 @@
     - type: NpcFactionMember
       factions:
       - SPP
-    - type: Skills
-      preset: RMCSkillPresetSurvivorSPPSynth
     - type: IntelRescueSurvivorObjective
     - type: JobPrefix
       prefix: rmc-job-prefix-soro-sof-synth

@@ -10,11 +10,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      preset: RMCLanguagePresetSynthColonist
+    - type: LanguageLearning
+      preset: RMCLanguageLearningPresetSynthColonist
     - type: NpcFactionMember
       factions:
       - SPP
-    - type: Skills
-      preset: RMCSkillPresetSurvivorSPPSynth
     - type: IntelRescueSurvivorObjective
     - type: AssignSquad
       squad: SquadSPP
