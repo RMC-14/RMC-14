@@ -9,6 +9,7 @@ using Content.Shared.Item;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.Verbs;
+using Content.Shared.Localizations;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Utility;
@@ -35,6 +36,7 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
         SubscribeLocalEvent<UniformAccessoryHolderComponent, GetVerbsEvent<EquipmentVerb>>(OnHolderGetEquipmentVerbs);
 
         SubscribeLocalEvent<UniformAccessoryHolderComponent, ExaminedEvent>(HolderRelayEvent);
+        SubscribeLocalEvent<UniformAccessoryHolderComponent, ExaminedEvent>(OnHolderExaminedList);
 
         SubscribeLocalEvent<UniformAccessoryComponent, ExaminedEvent>(OnAccessoryExamined);
 
@@ -166,6 +168,27 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
 
         var ownerName = Name(owner.Value);
         args.PushMarkup(Loc.GetString("rmc-uniform-accessory-owner", ("owner", ownerName)));
+    }
+
+    private void OnHolderExaminedList(Entity<UniformAccessoryHolderComponent> ent, ref ExaminedEvent args)
+    {
+        if (HasComp<XenoComponent>(args.Examiner))
+            return;
+
+        if (ent.Comp.HideAccessories)
+            return;
+
+        if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container) ||
+            container.ContainedEntities.Count == 0)
+            return;
+
+        var names = new List<string>();
+        foreach (var accessory in container.ContainedEntities)
+        {
+            names.Add(Name(accessory));
+        }
+
+        args.PushMarkup(Loc.GetString("rmc-uniform-accessory-list", ("accessories", ContentLocalizationManager.FormatList(names))));
     }
 
     private void HolderRelayEvent<T>(Entity<UniformAccessoryHolderComponent> holder, ref T args) where T : notnull
