@@ -1,40 +1,4 @@
 ﻿Entries:
-- author: PursuitInAshes
-  changes:
-  - message: '[PVE] Royal Crown Marine Riflemen no longer have the pilot skill.'
-    type: Tweak
-  id: 2994
-  time: '2026-03-03T02:13:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9339
-- author: IceNoobXD
-  changes:
-  - message: "Tweaked the ON sprite of the data detector so it\u2019s more easily\
-      \ distinguishable from the OFF sprite."
-    type: Tweak
-  id: 2995
-  time: '2026-03-03T02:12:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9305
-- author: GNUtopia
-  changes:
-  - message: Marines can now take a camo beret in their loadout.
-    type: Add
-  id: 2996
-  time: '2026-03-03T02:10:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9370
-- author: SharkSnake98
-  changes:
-  - message: Added new to job Popup for CL
-    type: Add
-  id: 2997
-  time: '2026-03-03T02:15:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9129
-- author: Dygon
-  changes:
-  - message: The hive tracker now tracks the queen by default.
-    type: Fix
-  id: 2998
-  time: '2026-03-03T02:10:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9340
 - author: CatAndHats
   changes:
   - message: The Accentless trait now costs 0
@@ -4641,5 +4605,40 @@
   id: 3493
   time: '2026-07-04T04:17:01.956603+00:00'
   url: null
+- author: Pyromaniac365
+  changes:
+  - message: Added '(Fax Responder)' to all Fax Responder roles in the spawn menu
+    type: Tweak
+  id: 3494
+  time: '2026-07-06T17:12:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10392
+- author: Drazamuffin
+  changes:
+  - message: tweaked some barrel sprites
+    type: Tweak
+  id: 3495
+  time: '2026-07-06T17:32:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9853
+- author: Vermidia
+  changes:
+  - message: Fixed Xippy (Xeno Imaginary friend) not being able to speak xeno.
+    type: Fix
+  id: 3496
+  time: '2026-07-07T12:26:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10217
+- author: Ian321
+  changes:
+  - message: Xenos can now see small hosts with their nightvision.
+    type: Tweak
+  id: 3497
+  time: '2026-07-08T03:20:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10407
+- author: MoonlightHollow
+  changes:
+  - message: SSG Mags refilling from proper ammo box.
+    type: Fix
+  id: 3498
+  time: '2026-07-10T14:00:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10433
 Name: RMC14
 Order: -1

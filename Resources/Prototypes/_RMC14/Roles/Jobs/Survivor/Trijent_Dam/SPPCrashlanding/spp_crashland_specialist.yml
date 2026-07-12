@@ -6,7 +6,7 @@
   ranks:
     RMCRankSPPSerzhant: []
   icon: "RMCJobIconSPPSpecialist"
-  spawnMenuRoleName: SPP Airborne Specialist (Survivor)
+  spawnMenuRoleName: SPP Airborne Specialist (Trijent Special Survivor)
   special:
   - !type:AddComponentSpecial
     components:
