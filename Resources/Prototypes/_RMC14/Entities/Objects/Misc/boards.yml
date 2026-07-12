@@ -1,0 +1,62 @@
+- type: entity
+  abstract: true
+  id: RMCBaseBoards
+  name: boards
+  description: Salvaged wooden boards.
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Decals/boards.rsi
+    drawdepth: FloorObjects
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroy
+          params:
+            volume: 0.5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: RMCBaseBoards
+  id: RMCBoards1
+  suffix: 1
+  components:
+  - type: Sprite
+    state: boards_1
+
+- type: entity
+  parent: RMCBaseBoards
+  id: RMCBoards2
+  suffix: 2
+  components:
+  - type: Sprite
+    state: boards_2
+
+- type: entity
+  parent: RMCBaseBoards
+  id: RMCBoards3
+  suffix: 3
+  components:
+  - type: Sprite
+    state: boards_3

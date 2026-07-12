@@ -1,0 +1,29 @@
+- type: entity
+  id: RMCPropSentry
+  name: UH-46 Heavy Sentry Gun
+  description: A large weapons system platform designed to deploy multiple types of automated defense systems. This one has been rendered permanently non-functional.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    noRot: false
+  - type: Physics
+    bodyType: Static
+    fixedRotation: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.6,-0.5,0.5,0.45"
+        density: 190
+        layer:
+        - MobMask
+  - type: Sprite
+    sprite: _RMC14/Structures/static_defence_prop.rsi
+    state: turret
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Corrodible
+    isCorrodible: false
+  - type: RequireProjectileTarget
