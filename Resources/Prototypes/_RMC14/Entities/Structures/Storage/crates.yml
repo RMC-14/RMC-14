@@ -742,6 +742,7 @@
   parent: RMCCrateBase
   id: RMCCrateMinecartYellow
   name: minecart
+  suffix: yellow
   description: Essentially a big metal bucket on wheels. This one has a modern plastic shroud.
   components:
   - type: Sprite
