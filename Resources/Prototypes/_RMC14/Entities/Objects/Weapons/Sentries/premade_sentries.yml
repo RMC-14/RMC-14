@@ -247,9 +247,9 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/sentry_deployer.rsi
     layers:
-    - state: floor_sentry_installed
+    - state: sentry_system_installed
       map: [ "enum.EquipmentDeployState.UnDeployed" ]
-    - state: floor_sentry_deployed
+    - state: sentry_system_deployed
       map: [ "enum.EquipmentDeployState.Deployed" ]
       visible: false
   - type: ApcPowerReceiver
