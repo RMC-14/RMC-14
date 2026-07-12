@@ -240,6 +240,8 @@
         amount: 5
       - id: RMCPouchFuelTank
         amount: 4
+      - id: RMCPouchDocumentMedium
+        amount: 1
       - id: RMCPouchGeneralLarge
         amount: 1
       - id: RMCPouchMagazineLarge
