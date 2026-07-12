@@ -6,10 +6,23 @@
   ranks:
     RMCRankSPPMladshiySerzhant: []
   icon: "RMCJobIconSPPEngineer"
-  spawnMenuRoleName: SPP SOF Sapper (Survivor)
+  spawnMenuRoleName: SPP SOF Sapper (Sorokyne Special Survivor)
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - English
+      - German
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - English
+      - German
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
     - type: RMCAllowSuitStorage
     - type: RMCSurvivor
     - type: NpcFactionMember

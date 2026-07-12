@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 05/15/2026 23:09:00
-  entityCount: 25
+  time: 06/21/2026 12:13:23
+  entityCount: 40
 maps: []
 grids:
 - 1
@@ -116,6 +116,18 @@ entities:
     - type: Transform
       pos: 3.540793,1.4624572
       parent: 1
+- proto: CMSheetMetal1
+  entities:
+  - uid: 39
+    components:
+    - type: Transform
+      pos: 2.5,-1.5
+      parent: 1
+  - uid: 40
+    components:
+    - type: Transform
+      pos: 1.5,-0.5
+      parent: 1
 - proto: CMSpawnPointSurvivor
   entities:
   - uid: 14
@@ -184,6 +196,81 @@ entities:
     components:
     - type: Transform
       pos: 0.62870944,2.5263968
+      parent: 1
+- proto: DisposalBend
+  entities:
+  - uid: 34
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 1.5,-2.5
+      parent: 1
+  - uid: 35
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,-2.5
+      parent: 1
+  - uid: 36
+    components:
+    - type: Transform
+      pos: 1.5,-0.5
+      parent: 1
+  - uid: 37
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 0.5,-0.5
+      parent: 1
+  - uid: 38
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 0.5,0.5
+      parent: 1
+- proto: DisposalPipe
+  entities:
+  - uid: 26
+    components:
+    - type: Transform
+      pos: 1.5,-1.5
+      parent: 1
+  - uid: 27
+    components:
+    - type: Transform
+      pos: 2.5,-1.5
+      parent: 1
+  - uid: 28
+    components:
+    - type: Transform
+      pos: 2.5,-0.5
+      parent: 1
+  - uid: 29
+    components:
+    - type: Transform
+      pos: 2.5,0.5
+      parent: 1
+  - uid: 30
+    components:
+    - type: Transform
+      pos: 2.5,1.5
+      parent: 1
+  - uid: 31
+    components:
+    - type: Transform
+      pos: 2.5,2.5
+      parent: 1
+  - uid: 32
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 1.5,0.5
+      parent: 1
+  - uid: 33
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.5,0.5
       parent: 1
 - proto: RMCBarrelGreen
   entities:

@@ -345,6 +345,7 @@ namespace Content.Client.Actions
             if (args.Input.EntityUid is not { Valid: true } entity)
             {
                 EntityManager.RaisePredictiveEvent(new RMCMissedTargetActionEvent(EntityManager.GetNetEntity(ent))); // RMC14
+                args.Handled = true; // RMC14
                 return;
             }
 
