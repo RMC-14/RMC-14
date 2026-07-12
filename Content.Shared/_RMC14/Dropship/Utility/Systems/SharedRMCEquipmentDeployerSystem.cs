@@ -106,7 +106,6 @@ public abstract partial class SharedRMCEquipmentDeployerSystem : EntitySystem
             {
                 TryGetOffset(ent, out deployOffset, out rotationOffset, weaponPoint.Location);
             }
-            // --- UPDATED LOGIC HERE ---
             else if (container.ContainedEntities.Count > 0)
             {
                 var localOffset = ent.Comp.DeployOffset;
