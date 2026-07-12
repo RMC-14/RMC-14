@@ -96,7 +96,7 @@
   id: CMChairFolded
   suffix: RMC|folded
   components:
-  - type: Transform
+  - type: Transform # Unanchored and dynamic to prevent folded chairs from getting stuck
     anchored: false
   - type: Physics
     bodyType: Dynamic
