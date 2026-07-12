@@ -35,8 +35,7 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
         SubscribeLocalEvent<UniformAccessoryHolderComponent, GotEquippedEvent>(OnHolderGotEquipped);
         SubscribeLocalEvent<UniformAccessoryHolderComponent, GetVerbsEvent<EquipmentVerb>>(OnHolderGetEquipmentVerbs);
 
-        SubscribeLocalEvent<UniformAccessoryHolderComponent, ExaminedEvent>(HolderRelayEvent);
-        SubscribeLocalEvent<UniformAccessoryHolderComponent, ExaminedEvent>(OnHolderExaminedList);
+        SubscribeLocalEvent<UniformAccessoryHolderComponent, ExaminedEvent>(OnHolderExamined);
 
         SubscribeLocalEvent<UniformAccessoryComponent, ExaminedEvent>(OnAccessoryExamined);
 
@@ -170,16 +169,25 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
         args.PushMarkup(Loc.GetString("rmc-uniform-accessory-owner", ("owner", ownerName)));
     }
 
-    private void OnHolderExaminedList(Entity<UniformAccessoryHolderComponent> ent, ref ExaminedEvent args)
+
+    private void OnHolderExamined(Entity<UniformAccessoryHolderComponent> ent, ref ExaminedEvent args)
     {
+        if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container))
+            return;
+
+        var relayEv = new AccessoryRelayedEvent<ExaminedEvent>(args, ent.Owner);
+        foreach (var accessory in container.ContainedEntities)
+        {
+            RaiseLocalEvent(accessory, relayEv);
+        }
+
         if (HasComp<XenoComponent>(args.Examiner))
             return;
 
         if (ent.Comp.HideAccessories)
             return;
 
-        if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container) ||
-            container.ContainedEntities.Count == 0)
+        if (container.ContainedEntities.Count == 0)
             return;
 
         var names = new List<string>();
@@ -188,20 +196,15 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
             names.Add(Name(accessory));
         }
 
-        args.PushMarkup(Loc.GetString("rmc-uniform-accessory-list", ("accessories", ContentLocalizationManager.FormatList(names))));
-    }
-
-    private void HolderRelayEvent<T>(Entity<UniformAccessoryHolderComponent> holder, ref T args) where T : notnull
-    {
-        if (!_container.TryGetContainer(holder, holder.Comp.ContainerId, out var container))
-            return;
-
-        var ev = new AccessoryRelayedEvent<T>(args, holder.Owner);
-
-        foreach (var accessory in container.ContainedEntities)
+        if (container.ContainedEntities.Count > 1)
         {
-            RaiseLocalEvent(accessory, ev);
+            args.PushMarkup(Loc.GetString("rmc-uniform-accessory-list-plural", ("accessories", ContentLocalizationManager.FormatList(names))));
         }
+        else
+        {
+            args.PushMarkup(Loc.GetString("rmc-uniform-accessory-list-singular", ("accessories", ContentLocalizationManager.FormatList(names))));
+        }
+
     }
 
     public void TryInsertInhandAccessories(EntityUid target)
