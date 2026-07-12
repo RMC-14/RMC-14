@@ -945,6 +945,17 @@
     sprite: _RMC14/Structures/Storage/Crates/ob_crate.rsi
   - type: AccessReader
     access: [["CMAccessEngineering"], ["RMCAccessCommand"]]
+  - type: EntityStorage
+    capacity: 10
+    whitelist:
+      components:
+      - OrbitalCannonWarhead
+      - OrbitalCannonFuel
+  - type: RMCEntityStorageWhitelist
+    whitelist:
+      components:
+      - OrbitalCannonWarhead
+      - OrbitalCannonFuel
 
 - type: entity
   parent: RMCCrateOB

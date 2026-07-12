@@ -53,11 +53,25 @@
     mode: SnapgridCenter
   components:
   - type: Transform
-    anchored: true
+  - type: CollisionWake
+  - type: Physics
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 100000
+        mask:
+        - ItemMask
+  - type: TileFrictionModifier
+    modifier: 10000
   - type: Sprite
     sprite: _RMC14/Structures/almayer_props.rsi
     state: ob_fuel
     drawdepth: SmallObjects
+    noRot: true
   - type: Clickable
   - type: InteractionOutline
   - type: PowerLoaderGrabbable
@@ -74,11 +88,25 @@
     mode: SnapgridCenter
   components:
   - type: Transform
-    anchored: true
+  - type: CollisionWake
+  - type: Physics
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 100000
+        mask:
+        - ItemMask
+  - type: TileFrictionModifier
+    modifier: 10000
   - type: Sprite
     sprite: _RMC14/Structures/almayer_props.rsi
     state: ob_warhead1
     drawdepth: SmallObjects
+    noRot: true
   - type: OrbitalCannonWarhead
   - type: Clickable
   - type: InteractionOutline
@@ -95,6 +123,7 @@
   components:
   - type: Sprite
     state: ob_warhead_1
+    noRot: true
   - type: OrbitalCannonWarhead
     explosion: RMCOrbitalCannonExplosionExplosive
 
@@ -106,6 +135,7 @@
   components:
   - type: Sprite
     state: ob_warhead_2
+    noRot: true
   - type: OrbitalCannonWarhead
     explosion: RMCOrbitalCannonExplosionIncendiary
 
@@ -117,6 +147,7 @@
   components:
   - type: Sprite
     state: ob_warhead_3
+    noRot: true
   - type: OrbitalCannonWarhead
     explosion: RMCOrbitalCannonExplosionCluster
 
@@ -137,6 +168,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/ob_warhead_aegis.rsi
     state: ob_warhead_aegis
+    noRot: true
   - type: OrbitalCannonWarhead
     explosion: RMCOrbitalCannonExplosionAegis
     isAegis: true
