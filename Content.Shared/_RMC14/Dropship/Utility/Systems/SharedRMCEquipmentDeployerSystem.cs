@@ -80,11 +80,17 @@ public abstract partial class SharedRMCEquipmentDeployerSystem : EntitySystem
 
         var container = _container.EnsureContainer<ContainerSlot>(ent, ent.Comp.DeploySlotId);
 
-        if (container.ContainedEntities.Count > 0)
-            return;
+        if (container.ContainedEntities.Count <= 0)
+        {
+            ent.Comp.DeployEntity = GetNetEntity(SpawnInContainerOrDrop(ent.Comp.DeployPrototype, ent, ent.Comp.DeploySlotId));
+            DirtyField(ent.Owner, ent.Comp, nameof(RMCEquipmentDeployerComponent.DeployEntity));
+        }
 
-        ent.Comp.DeployEntity = GetNetEntity(SpawnInContainerOrDrop(ent.Comp.DeployPrototype, ent, ent.Comp.DeploySlotId));
-        DirtyField(ent.Owner, ent.Comp, nameof(RMCEquipmentDeployerComponent.DeployEntity));
+        if (ent.Comp.PowerTogglesDeployable)
+        {
+            ent.Comp.IsDeployable = false;
+            DirtyField(ent.Owner, ent.Comp, nameof(RMCEquipmentDeployerComponent.IsDeployable));
+        }
     }
 
     private void OnInteract(Entity<RMCEquipmentDeployerComponent> ent, ref InteractHandEvent args)
