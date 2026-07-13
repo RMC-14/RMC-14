@@ -18,8 +18,10 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: Skills
-      preset: RMCSkillPresetArmySynth
+    - type: Language
+      preset: RMCLanguagePresetSynthColonist
+    - type: LanguageLearning
+      preset: RMCLanguageLearningPresetSynthColonist
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
