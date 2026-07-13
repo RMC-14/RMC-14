@@ -1,4 +1,5 @@
 using Content.Shared.Actions;
+using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Actions;
@@ -12,6 +13,9 @@ public sealed partial class SwappableActionComponent : Component
 
     [DataField, AutoNetworkedField]
     public string OriginalDescription = string.Empty;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan? OriginalUseDelay;
 
     [DataField, AutoNetworkedField]
     public bool IsSwapped;

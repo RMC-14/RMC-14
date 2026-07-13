@@ -266,7 +266,8 @@ public sealed class QueenEyeSystem : EntitySystem
         _swappableAction.SwapInstantToWorldTarget<XenoPlantWeedsActionEvent>(
             queen.Owner,
             Loc.GetString("rmc-xeno-queen-eye-expand-weeds-name"),
-            Loc.GetString("rmc-xeno-queen-eye-expand-weeds-desc"));
+            Loc.GetString("rmc-xeno-queen-eye-expand-weeds-desc"),
+            TimeSpan.FromSeconds(0.5));
     }
 
     private void SwapPlantWeedsToInstant(Entity<QueenEyeActionComponent> queen)

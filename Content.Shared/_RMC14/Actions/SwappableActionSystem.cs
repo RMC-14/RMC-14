@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Robust.Shared.GameStates;
@@ -37,9 +38,10 @@ public sealed class SwappableActionSystem : EntitySystem
     public bool SwapInstantToWorldTarget<TOriginalEvent>(
         EntityUid owner,
         string swappedName,
-        string swappedDescription) where TOriginalEvent : InstantActionEvent
+        string swappedDescription,
+        TimeSpan? swappedUseDelay) where TOriginalEvent : InstantActionEvent
     {
-        foreach (var (actionId, _) in _actions.GetActions(owner))
+        foreach (var (actionId, actionBase) in _actions.GetActions(owner))
         {
             if (!TryComp<InstantActionComponent>(actionId, out var instant) ||
                 instant.Event is not TOriginalEvent)
@@ -55,6 +57,7 @@ public sealed class SwappableActionSystem : EntitySystem
 
             swappable.OriginalName = MetaData(actionId).EntityName;
             swappable.OriginalDescription = MetaData(actionId).EntityDescription;
+            swappable.OriginalUseDelay = actionBase.UseDelay;
             swappable.IsSwapped = true;
             Dirty(actionId, swappable);
 
@@ -64,7 +67,7 @@ public sealed class SwappableActionSystem : EntitySystem
             targetAction.CheckCanAccess = false;
             targetAction.Range = -1;
             targetAction.DeselectOnMiss = false;
-            targetAction.Repeat = false;
+            targetAction.Repeat = true;
             Dirty(actionId, targetAction);
 
             EnsureComp<WorldTargetActionComponent>(actionId);
@@ -72,6 +75,7 @@ public sealed class SwappableActionSystem : EntitySystem
 
             _metaData.SetEntityName(actionId, swappedName);
             _metaData.SetEntityDescription(actionId, swappedDescription);
+            _actions.SetUseDelay(actionId, swappedUseDelay);
 
             return true;
         }
@@ -103,6 +107,7 @@ public sealed class SwappableActionSystem : EntitySystem
 
             _metaData.SetEntityName(actionId, swappable.OriginalName);
             _metaData.SetEntityDescription(actionId, swappable.OriginalDescription);
+            _actions.SetUseDelay(actionId, swappable.OriginalUseDelay);
 
             swappable.IsSwapped = false;
             Dirty(actionId, swappable);
