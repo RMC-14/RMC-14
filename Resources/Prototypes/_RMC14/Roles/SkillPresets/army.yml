@@ -81,29 +81,3 @@
       RMCSkillConstruction: 1
       RMCSkillEngineer: 2
       RMCSkillLeadership: 2
-
-- type: entity
-  id: RMCSkillPresetArmySynth
-  name: UNMC Devil Dogs Synth
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: SkillPreset
-    skills:
-      RMCSkillCqc: 5
-      RMCSkillEngineer: 4
-      RMCSkillConstruction: 3
-      RMCSkillFirearms: 2
-      RMCSkillOverwatch: 1
-      RMCSkillMedical: 4
-      RMCSkillSurgery: 3
-      RMCSkillResearch: 1
-      RMCSkillMeleeWeapons: 2
-      RMCSkillPilot: 2
-      RMCSkillPolice: 2
-      RMCSkillFireman: 5
-      RMCSkillPowerLoader: 2
-      RMCSkillVehicles: 2
-      RMCSkillJtac: 3
-      RMCSkillIntel: 2
-      RMCSkillDomestics: 2
-      RMCSkillNavigations: 1
