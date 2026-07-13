@@ -5,6 +5,7 @@ using Robust.Client.UserInterface.Controllers;
 using Content.Shared.CCVar;
 using Content.Client.CharacterInfo;
 using static Content.Client.CharacterInfo.CharacterInfoSystem;
+using Content.Client._RMC14.UserInterface.Systems.Chat;
 
 namespace Content.Client.UserInterface.Systems.Chat;
 
@@ -154,7 +155,12 @@ public sealed partial class ChatUIController : IOnSystemChanged<CharacterInfoSys
         if (_loc.TryGetString($"highlights-{jobKey}", out var jobMatches))
             newHighlights += '\n' + jobMatches.Replace(", ", "\n");
 
-        RMCHighlights(data, ref newHighlights); // RMC
+        // RMC14
+        var ev = new BeforeCharacterChatHighlightsUpdatedEvent(data, newHighlights);
+        EntityManager.EventBus.RaiseLocalEvent(data.Entity, ref ev);
+        newHighlights = ev.Highlights;
+        // RMC14
+
         UpdateHighlights(newHighlights);
         HighlightsUpdated?.Invoke(newHighlights);
         _charInfoIsAttach = false;
