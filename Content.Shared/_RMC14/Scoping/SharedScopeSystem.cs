@@ -207,7 +207,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
         var ent = scope.Owner;
         if (scope.Comp.Attachment && !TryGetActiveEntity(scope, out ent))
         {
-            var msgError = Loc.GetString("cm-action-popup-scoping-must-attach", ("scope", ent));
+            var msgError = Loc.GetString("cm-action-popup-scoping-must-attach", ("scope", scope.Owner));
             _popup.PopupClient(msgError, user, user);
             return false;
         }
