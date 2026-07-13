@@ -15,10 +15,21 @@
   camouflageStartingGear: null
   greeting: rmc-job-greeting-shivas-commando
   playTimeTracker: CMJobSurvivorSecurity
-  spawnMenuRoleName: Survivor - We-Ya Commando (Shivas)
+  spawnMenuRoleName: We-Ya Commando (Shivas Special Survivor)
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      - SignLanguage
+      understoodLanguages:
+      - Japanese
+      - English
+      - SignLanguage
+      currentLanguage: English
+      defaultLanguage: English
     - type: Skills
       preset: RMCSkillPresetPMCCommando
     - type: RMCSurvivor
