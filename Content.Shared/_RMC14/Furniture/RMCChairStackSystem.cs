@@ -1,5 +1,3 @@
-using Content.Shared._RMC14.Marines.Skills;
-using Content.Shared._RMC14.PowerLoader;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
@@ -41,7 +39,6 @@ public sealed class RMCChairStackSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly SharedToolSystem _tool = default!;
@@ -49,8 +46,6 @@ public sealed class RMCChairStackSystem : EntitySystem
 
     private const string ContainerId = "rmc_chair_stack";
     private const float SpeedFast = 6.67f;
-
-    private static readonly EntProtoId<SkillDefinitionComponent> PowerLoaderSkill = "RMCSkillPowerLoader";
     private static readonly ProtoId<ToolQualityPrototype> WrenchQuality = "Anchoring";
 
     public override void Initialize()
@@ -62,7 +57,6 @@ public sealed class RMCChairStackSystem : EntitySystem
         SubscribeLocalEvent<RMCChairStackableComponent, InteractUsingEvent>(OnInteractUsing, before: [typeof(AnchorableSystem)]);
         SubscribeLocalEvent<RMCChairStackableComponent, InteractHandEvent>(OnInteractHand, before: [typeof(SharedBuckleSystem)]);
         SubscribeLocalEvent<RMCChairStackableComponent, AfterInteractEvent>(OnAfterInteract, after: [typeof(DeployFoldableSystem)]);
-        SubscribeLocalEvent<RMCChairStackableComponent, PowerLoaderGrabEvent>(OnPowerLoaderGrab);
         SubscribeLocalEvent<RMCChairStackableComponent, FoldAttemptEvent>(OnFoldAttempt);
 
         SubscribeLocalEvent<RMCChairStackableComponent, DestructionEventArgs>(OnDestruction);
@@ -230,48 +224,6 @@ public sealed class RMCChairStackSystem : EntitySystem
 
         if (ent.Comp.CurrentStackSize > ent.Comp.MaxStableStack && _random.Prob(0.5f))
             StackCollapse(ent);
-    }
-
-    private void OnPowerLoaderGrab(Entity<RMCChairStackableComponent> ent, ref PowerLoaderGrabEvent args)
-    {
-        if (args.Handled)
-            return;
-
-        if (ent.Comp.CurrentStackSize <= 0)
-        {
-            foreach (var buckled in args.Buckled)
-            {
-                _popup.PopupClient(Loc.GetString("rmc-chair-stack-power-loader-grab"), ent, buckled);
-            }
-
-            args.Handled = true;
-            return;
-        }
-
-        if (_net.IsClient)
-            return;
-
-        var highestSkill = 0;
-        foreach (var buckled in args.Buckled)
-        {
-            var skill = _skills.GetSkill(buckled, PowerLoaderSkill);
-            if (skill > highestSkill)
-                highestSkill = skill;
-        }
-
-        if (ent.Comp.CurrentStackSize > 8)
-        {
-            var collapseChance = (50f / highestSkill) / 100f;
-            if (_random.Prob(collapseChance))
-            {
-                StackCollapse(ent);
-                args.Handled = true;
-                return;
-            }
-        }
-
-        args.ToGrab = ent.Owner;
-        args.Handled = true;
     }
 
     private void UpdateStackState(Entity<RMCChairStackableComponent> ent)

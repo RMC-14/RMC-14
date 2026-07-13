@@ -4,4 +4,3 @@ rmc-chair-stack-blocked = There's someone in the way!
 rmc-chair-stack-unstable = The stack of chairs looks unstable!
 rmc-chair-stack-collapse = The stack of chairs collapses!!!
 rmc-chair-stack-wrench-blocked = You'll need to unstack the chairs before you can take one apart.
-rmc-chair-stack-power-loader-grab = The clamp can only grab stacks of chairs.
