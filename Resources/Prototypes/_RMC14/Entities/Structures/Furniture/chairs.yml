@@ -61,6 +61,7 @@
   - type: Foldable
     anchorOnUnfold: true
   - type: RMCChairStackable
+  - type: PowerLoaderGrabbable
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/folding_chair.rsi
     layers:
