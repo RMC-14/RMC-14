@@ -183,7 +183,7 @@ cm-xeno-toggle-crest-cant-fortify = You can't fortify while your crest is lowere
 cm-xeno-toggle-crest-cant-rest = You can't rest while your crest is lowered!
 cm-xeno-toggle-crest-cant-tail-sweep = You can't tail sweep while your crest is lowered!
 rmc-alert-xeno-crest-lowered = Crest Lowered
-rmc-alert-xeno-crest-lowered-desc = Your armor is increased, but movement speed is reduced.
+rmc-alert-xeno-crest-lowered-desc = Your armor is [color=green]increased[/color], but movement speed is [color=red]reduced[/color].
 
 # Transfer Plasma
 cm-xeno-plasma-transferred-to-other = You have transferred {$plasma} plasma to {$target}. You now have {$total}
