@@ -154,6 +154,7 @@ public sealed partial class ChatUIController : IOnSystemChanged<CharacterInfoSys
         if (_loc.TryGetString($"highlights-{jobKey}", out var jobMatches))
             newHighlights += '\n' + jobMatches.Replace(", ", "\n");
 
+        RMCHighlights(data, ref newHighlights); // RMC
         UpdateHighlights(newHighlights);
         HighlightsUpdated?.Invoke(newHighlights);
         _charInfoIsAttach = false;
