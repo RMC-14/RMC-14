@@ -1,35 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: The Accentless trait now costs 0
-    type: Tweak
-  id: 2999
-  time: '2026-03-03T02:16:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9290
-- author: kleinerstation13
-  changes:
-  - message: Added a possible scenario for 121/RECON, an SPP SOF team investigating
-      the Sorokyne Outpost distress signal. Has a 40% chance of occuring.
-    type: Add
-  id: 3000
-  time: '2026-03-03T02:17:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9401
-- author: GNUtopia
-  changes:
-  - message: Hyposprays vended from the We-Wa-Med Plus now contain an empty vial
-    type: Tweak
-  - message: The We-Ya-Med Plus now stocks tricordrazine vials
-    type: Tweak
-  id: 3001
-  time: '2026-03-03T02:20:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9135
-- author: CatAndHats
-  changes:
-  - message: Added new-to-job popups for Maint Tech and Combat Tech
-    type: Add
-  id: 3002
-  time: '2026-03-03T02:23:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9365
 - author: Dygon
   changes:
   - message: Fixed fire damage taken while standing on a fire tile being too high.
@@ -4640,5 +4609,33 @@
   id: 3498
   time: '2026-07-10T14:00:07.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10433
+- author: BarteG44
+  changes:
+  - message: Added wheels to the clf mining insert
+    type: Add
+  id: 3499
+  time: '2026-07-13T19:41:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10266
+- author: BarteG44
+  changes:
+  - message: Added a van to the clf ship insert
+    type: Add
+  id: 3500
+  time: '2026-07-13T19:42:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10264
+- author: BarteG44
+  changes:
+  - message: Added a van to the shivas clf raid insert
+    type: Add
+  id: 3501
+  time: '2026-07-13T19:42:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10265
+- author: BarteG44
+  changes:
+  - message: Added a van to the Trijent CLF pods insert
+    type: Add
+  id: 3502
+  time: '2026-07-13T19:41:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10267
 Name: RMC14
 Order: -1
