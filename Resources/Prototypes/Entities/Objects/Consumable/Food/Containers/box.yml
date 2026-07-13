@@ -243,9 +243,6 @@
       map: ["enum.StorageVisualLayers.Door"]
   - type: StorageFill
     contents:
-    - id: RMCFoodPizzaFullBase
-      prob: 0.15
-      orGroup: Pizza
     - id: RMCFoodPizzaMeatFull
       prob: 0.15
       orGroup: Pizza
