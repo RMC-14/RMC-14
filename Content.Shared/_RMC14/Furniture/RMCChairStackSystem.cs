@@ -213,7 +213,7 @@ public sealed class RMCChairStackSystem : EntitySystem
         {
             StackCollapse(ent);
 
-            if (!HasComp<XenoComponent>(args.Thrown) && _net.IsServer)
+            if (!HasComp<XenoComponent>(args.Thrown))
             {
                 _stun.TryStun(args.Thrown, ent.Comp.ThrownMobStatusDuration, true);
                 _stun.TryKnockdown(args.Thrown, ent.Comp.ThrownMobStatusDuration, true);
