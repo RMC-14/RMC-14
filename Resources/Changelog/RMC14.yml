@@ -1,115 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Fixed fire damage taken while standing on a fire tile being too high.
-    type: Fix
-  - message: Fixed the duration of fire tiles created by UT Naphtal(60>20) and B-Gel(60>50)
-      being too high.
-    type: Fix
-  id: 3003
-  time: '2026-03-03T02:45:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9298
-- author: kleinerstation13
-  changes:
-  - message: Added chatsan for the word "M2C" for xenonids.
-    type: Add
-  id: 3004
-  time: '2026-03-03T02:45:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9306
-- author: Dygon
-  changes:
-  - message: Charger crushers can now run over a deployed HMG, undeploying and heavily
-      damaging it.
-    type: Fix
-  - message: Directly aiming at a deployed HMG when shooting a projectile now makes
-      it hit the HMG.
-    type: Fix
-  - message: When an ML66D is destroyed it now has a 50% chance to drop the gun component
-      instead of a 100% chance.
-    type: Fix
-  - message: You can now craft a new ML66D mount component using 10 plasteel rods.
-    type: Fix
-  - message: Slightly adjusted the damage and accuracy falloff rates of the M2C. This
-      reduces the damage of each projectile by 3 at most distances and makes it slightly
-      less accurate at medium-range.
-    type: Fix
-  - message: Fixed a bug where an undeployed HMG would sometimes collide as if it
-      was deployed.
-    type: Fix
-  - message: You can now only mount a deployed HMG when standing behind it.
-    type: Fix
-  - message: Being knocked down now dismounts you from an HMG instead of only stunning
-      you.
-    type: Fix
-  - message: You can no longer deploy or mount an HMG while invisible.
-    type: Fix
-  - message: Trying to repair something now gets cancelled if the repaired entity
-      moves.
-    type: Fix
-  - message: The M2C cannot rotate in a given direction if the tile behind its new
-      facing direction is blocked by a wall.
-    type: Fix
-  - message: Having a wall right behind you while mounting an HMG no longer makes
-      you unable to be hit.
-    type: Fix
-  - message: Fixed dismounting from an HMG sometimes making your vision flicker.
-    type: Fix
-  id: 3005
-  time: '2026-03-03T02:44:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9244
-- author: GNUtopia
-  changes:
-  - message: Welding fuel now has a distinct flame
-    type: Tweak
-  - message: Fire visuals now die down linearly over their duration
-    type: Tweak
-  - message: Fixed incorrect fire tile duration for several sources
-    type: Fix
-  id: 3006
-  time: '2026-03-03T02:47:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9329
-- author: DrSmugleaf
-  changes:
-  - message: Fixed M5-ATL HE rockets not exploding when colliding with a target.
-    type: Fix
-  - message: Fixed not being able to give admins RMCMaintainer or AdminGhost permission.
-    type: Fix
-  id: 3007
-  time: '2026-03-03T05:17:25.616872+00:00'
-  url: null
-- author: CatAndHats, SharkSnake98, MoonlightHollow, TadJohnson00, Drazamaffin, kleinerstation13
-  changes:
-  - message: Added the RCM Paramarine survivor special scenario on Hybrisa Prospera
-      with a 30% chance to spawn, can these paratroopers withstand the xenonids before
-      the marines can come to their aid?
-    type: Add
-  id: 3008
-  time: '2026-03-03T05:17:25.618554+00:00'
-  url: null
-- author: CatAndHats, SharkSnake98
-  changes:
-  - message: 'Added inserts for survivors to spawn together on Solaris: in Admin,
-      Bar, Storage, Office, and south of Marshals.'
-    type: Add
-  id: 3009
-  time: '2026-03-03T05:17:25.618985+00:00'
-  url: null
-- author: SharkSnake98
-  changes:
-  - message: Added the SPP Doors and ASAT Launcher prop
-    type: Add
-  - message: Added the PVE varient of the SPP Flamer, as well as tank storage case
-      and rack
-    type: Add
-  - message: Added ammo boxes for the heavy shotgun shells
-    type: Add
-  - message: Changed the doors and layout of the SSV Deyneka, and added the correct
-      flamer and shells. Also moved all the phones to the SSV Deyneka catagory, and
-      added some more around the ship.
-    type: Tweak
-  id: 3010
-  time: '2026-03-26T10:40:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9140
 - author: Arykh
   changes:
   - message: Added the emergency surgical equipment cabinet for doctors. These only
@@ -4637,5 +4526,61 @@
   id: 3502
   time: '2026-07-13T19:41:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10267
+- author: BarteG44
+  changes:
+  - message: Added a van and wheels to trijent dam
+    type: Add
+  id: 3503
+  time: '2026-07-13T19:45:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10259
+- author: BarteG44
+  changes:
+  - message: Added a van to solaris ridge
+    type: Add
+  id: 3504
+  time: '2026-07-13T19:44:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10262
+- author: BarteG44
+  changes:
+  - message: Added a van to the LV corporate dome insert
+    type: Add
+  id: 3505
+  time: '2026-07-13T19:44:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10263
+- author: BarteG44
+  changes:
+  - message: Added a van to new varadero
+    type: Add
+  id: 3506
+  time: '2026-07-13T19:46:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10260
+- author: BarteG44
+  changes:
+  - message: Added a van to the clf smugglers insert
+    type: Add
+  id: 3507
+  time: '2026-07-13T19:46:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10256
+- author: BarteG44
+  changes:
+  - message: Added wheels to chances claim
+    type: Add
+  id: 3508
+  time: '2026-07-13T19:46:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10257
+- author: BarteG44
+  changes:
+  - message: Added a van to the Rocinante insert
+    type: Add
+  id: 3509
+  time: '2026-07-13T19:47:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10255
+- author: BarteG44
+  changes:
+  - message: Added a van to lv624
+    type: Add
+  id: 3510
+  time: '2026-07-13T19:45:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10261
 Name: RMC14
 Order: -1
