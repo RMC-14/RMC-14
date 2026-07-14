@@ -7,7 +7,7 @@
   ranks:
     RMCRankChiefWarrantOfficer:
     - !type:RoleTimeRequirement
-      role: RMCSurvivorForeconSynth
+      role: RMCJobSyntheticColony
       time: 270000 # 75 hours
     RMCRankWarrantOfficer: [ ]
   supervisors: rmc-job-supervisors-commander
