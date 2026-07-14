@@ -60,7 +60,7 @@
     sprite: _RMC14/Objects/Clothing/Shoes/Sneakers/green.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Shoes/Sneakers/green.rsi
-
+  
 # Yellow 
 - type: entity
   parent: RMCShoesBlack
@@ -96,6 +96,41 @@
     sprite: _RMC14/Objects/Clothing/Shoes/Sneakers/red.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Shoes/Sneakers/red.rsi
+
+# Red, knife
+- type: entity
+  parent: ClothingShoesBase
+  id: RMCShoesRedKnife
+  description: Stylish red shoes. This pair has a compartment for a small weapon.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Sneakers/red.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Sneakers/red.rsi
+  - type: ContainerContainer
+    containers:
+      item: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      item:
+        name: cm-knife
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
+        whitelist:
+          tags:
+          - Knife
+          - Holdout
+          - Screwdriver
+          - RMCScalpel
+  - type: CMHolster
+  - type: CMItemSlots
+  - type: UsableWhileDevoured
+
+# Red, knife, filled
+- type: entity
+  parent: [RMCItemSlotM5Bayonet, RMCShoesRedKnife]
+  id: RMCShoesRedKnifeFilled
+  suffix: Filled
 
 # Orange  
 - type: entity
