@@ -1,0 +1,93 @@
+- type: entity
+  id: CMClosetToolFilled
+  parent: CMClosetTool
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMScrewdriver
+        prob: 0.7
+      - id: CMWrench
+        prob: 0.7
+      - id: CMWelder
+        prob: 0.7
+      - id: CMCrowbar
+        prob: 0.7
+      - id: CMWirecutter
+        prob: 0.7
+      - id: CMMultitool
+        prob: 0.2
+##      - id: trayScanner
+##        prob: 0.7
+##      - id: GasAnalyzer
+##        prob: 0.7
+      - id: CMBeltUtility
+        prob: 0.2
+      - id: CMHandsInsulated
+        prob: 0.05
+##      - id: SprayPainter
+##        prob: 0.7
+
+- type: entity
+  id: CMClosetRadiationFilled
+  parent: CMClosetRadiation
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+     - id: RMCSuitRadiation
+       amount: 2
+     - id: RMCHeadRadiationHood
+       amount: 2
+     - id: RMCGeigerCounter
+       amount: 2
+
+- type: entity
+  parent: CMClosetRadiation
+  id: CMClosetRadiationFilledTycho
+  name: radiation suit closet
+  description: It's a storage unit for rad-protective suits.
+  suffix: Filled, Tycho 4000 Suit
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCShoesTychoBoots
+    - id: RMCHeadTychoRadiationHood
+    - id: RMCHandsTychoGloves
+    - id: RMCSuitTychoRadiationSuit
+    - id: RMCGeigerCounter
+
+- type: entity
+  parent: CMLockerEngineer
+  id: CMLockerEngineerFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBackpackEngineer
+    - id: RMCFlashlight
+    - id: CMMaskGas
+    - id: RMCPouchToolsFill
+    - id: RMCPouchConstruction
+    - id: RMCPouchElectronicsFill
+    - id: RMCPouchGeneral
+    - id: RMCHazardVest
+    - id: CMWebbingBrown
+    - id: CMHeadsetEngineer
+    - id: RMCToolboxMechanicalFilled
+    - id: CMWebbing
+    - id: RMCHazardVestBlue
+
+- type: entity
+  parent: CMLockerEngineerWelder
+  id: CMLockerEngineerWelderFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeldingKit
+      amount: 3
+    - id: CMWelder
+      amount: 3
+    - id: RMCHelmetWelding
+      amount: 3
