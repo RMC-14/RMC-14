@@ -101,7 +101,7 @@
 - type: entity
   parent: ClothingShoesBase
   id: RMCShoesRedKnife
-  description: Stylish red shoes. This pair has a compartment for a small weapon.
+  description: Stylish red shoes. Somehow this one has space to hold a knife.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Shoes/Sneakers/red.rsi
