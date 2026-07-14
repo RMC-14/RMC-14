@@ -71,8 +71,6 @@
     pocket1: RMCPouchSurvivalSynthFill
     pocket2: RMCPouchToolsFill
   storage:
-    pocket2:
-    - RMCWelderIndustrialHighCapacity
     back:
     - RMCHandcuffs
     - RMCHandcuffs # TODO RMC14: Teargas grenades
