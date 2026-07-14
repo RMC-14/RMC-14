@@ -236,7 +236,7 @@
     speciesType: Mechanical
 
 - type: entity
-  parent: BaseStructure
+  parent: CMBaseStructure
   id: RMCDeployerSentryCheckpoint
   name: checkpoint sentry deployment system
   description: A box that deploys a sentry turret.
@@ -253,13 +253,12 @@
       map: [ "enum.EquipmentDeployState.Deployed" ]
       visible: false
   - type: ApcPowerReceiver
-    powerLoad: 5000
     needsPower: true
   - type: WallMount
     arc: 360
   - type: RMCPowerReceiver
-    idleLoad: 0
-    activeLoad: 0
+    idleLoad: 1000
+    activeLoad: 5000
     channel: Equipment
   - type: RMCEquipmentDeployer
     deployPrototype: RMCTurretColony
