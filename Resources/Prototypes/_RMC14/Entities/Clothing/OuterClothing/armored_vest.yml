@@ -200,12 +200,6 @@
 
 - type: entity
   parent: RMCArmorVestIntel
-  id: RMCArmorVestCrewchief
-  name: M80B1 flak vest
-  description: The predecessor to the M3-XL flak vest, commonly issued to UNMC flight crew members not situated in the cockpit such as Weapons Crew and Drop Crew. Designed to protect the wearer's chest against small arms fire and loose sharp objects.
-
-- type: entity
-  parent: RMCArmorVestIntel
   id: RMCArmorVestOfficer
   name: M3-XL pattern officer flak vest
   description: A type of M3-XL flak vest, uncommonly issued to UNMC officers, designed primarily for mobility. Compared to your average flak vest it comes with additonal padding, a partial guard for the lower torso and shoulder pads. This added protection will not protect against explosions or biohazards. As such it is not recommended for direct combat.
@@ -289,3 +283,17 @@
         - RMCBoxZipties
       whitelist: null
       count: 2
+
+# DCC
+
+- type: entity
+  parent: RMCArmorVestSquad
+  id: RMCArmorVestCrewchief
+  name: SFA-80C1 flak vest #SFA = Survival Flight Armor
+  description: The predecessor to the M3-XL flak vest, while slightly outdated it is still commonly issued to UNMC flight crew members not situated in the cockpit, such as Weapons Systems Chiefs, or Drop Crew Chiefs. Designed to protect the wearer's chest against small arms fire.
+  components:
+  - type: CMArmor
+    melee: 0
+    bullet: 10
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/dcc.rsi
