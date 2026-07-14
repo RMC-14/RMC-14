@@ -16,6 +16,8 @@ using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Doors.Components;
 using Content.Shared.FixedPoint;
+using Content.Shared.Follower;
+using Content.Shared.Follower.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -49,6 +51,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
+    [Dependency] private readonly FollowerSystem _follower = default!;
     [Dependency] private readonly SharedGameTicker _gameTicker = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
@@ -696,6 +699,15 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         if (Prototype(xeno)?.ID is { } oldId)
             newRecently.Recent[oldId] = _timing.CurTime;
+
+        var followers = EntityQueryEnumerator<FollowerComponent>();
+        while (followers.MoveNext(out var uid, out var follower))
+        {
+            if (follower.Following == xeno)
+            {
+                _follower.StartFollowingEntity(uid, newXeno);
+            }
+        }
 
         return newXeno;
     }
