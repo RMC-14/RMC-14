@@ -25,7 +25,7 @@
     scatterWielded: 10
     scatterUnwielded: 20
     baseFireRate: 0.85
-    burstScatterMult: 4
+    burstScatterMult: 7
     modifiers:
       Burst:
         fireDelay: 0.1665
@@ -47,4 +47,30 @@
       rmc-aslot-rail: -0.025, 0.125
       rmc-aslot-underbarrel: 0.30, -0.31
 
-# Theres a damaged version of this with worse stats, make sure to use the "busted" state as the base/icon for it
+- type: entity
+  parent: WeaponShotgunCustomBuilt
+  id: WeaponShotgunCustomBuiltDamaged
+  name: damaged custom built shotgun
+  description: A cobbled-together pile of scrap and alien wood. Point end towards things you want to die. Has a burst fire feature, as if it needed it. Well, it had one, this one's barrel has apparently exploded outwards like an overripe grape. Guess that's what happens when you DIY a shotgun.
+  components:
+    - type: Sprite
+      state: busted
+    - type: Gun
+      shotsPerBurst: 1
+    - type: RMCSelectiveFire
+      recoilWielded: 3       # RECOIL_AMOUNT_TIER_3
+      recoilUnwielded: 1     # RECOIL_AMOUNT_TIER_1
+      scatterWielded: 12     # SCATTER_AMOUNT_TIER_5
+      scatterUnwielded: 30   # SCATTER_AMOUNT_TIER_1 
+      baseFireRate: 0.5      # FIRE_DELAY_TIER_SHOTGUN_BASE 
+      burstScatterMult: 8    # SCATTER_AMOUNT_TIER_3
+    - type: RMCWeaponAccuracy
+      accuracyMultiplier: 0.7  # BASE_ACCURACY_MULT - HIT_ACCURACY_MULT_TIER_6
+      accuracyMultiplierUnwielded: 0.5  # BASE_ACCURACY_MULT - HIT_ACCURACY_MULT_TIER_10
+    - type: GunDamageModifier
+      multiplier: 0.9        # BASE_BULLET_DAMAGE_MULT - BULLET_DAMAGE_MULT_TIER_2
+    - type: AttachableHolder
+      slots:
+        rmc-aslot-barrel:
+          whitelist:
+            tags:
