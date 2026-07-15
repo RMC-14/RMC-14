@@ -685,6 +685,7 @@
   parent: FoodMealBase
   id: FoodMealBourguignon
   description: a traditional French braise featuring slow-cooked beef, beef stock, garlic, and herbs.
+  components:
   - type: FlavorProfile
     flavors:
       - savory
