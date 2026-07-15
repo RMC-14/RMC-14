@@ -3,7 +3,7 @@
   id: CMSurvivorLV624CorporateDomeGoonLead
   name: rmc-job-name-pmc-corporate-goon-leader
   description: cm-job-description-survivor
-  spawnMenuRoleName: We-Ya Goon Lead (Survivor Special)
+  spawnMenuRoleName: We-Ya Goon Lead (LV624 Special Survivor)
   startingGear: RMCGearSurvivorGoonLead
   icon: "RMCJobIconPMCGoonLead"
   hasIcon: true

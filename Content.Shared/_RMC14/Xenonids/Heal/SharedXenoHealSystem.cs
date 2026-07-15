@@ -1,10 +1,8 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Damage;
-using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Announce;
-using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Energy;
 using Content.Shared._RMC14.Xenonids.Eye;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -23,6 +21,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
+using Content.Shared.StatusEffectNew;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -47,6 +46,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
     [Dependency] private readonly QueenEyeSystem _queenEye = default!;
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
+    [Dependency] private readonly SharedStatusEffectsSystem _statusEffect = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedBodySystem _body = default!;
@@ -327,6 +327,10 @@ public abstract class SharedXenoHealSystem : EntitySystem
             _status.TryRemoveStatusEffect(target, status);
         }
 
+        foreach (var status in args.AilmentsRemoveNew)
+        {
+            _statusEffect.TryRemoveStatusEffect(target, status);
+        }
 
         EntityManager.RemoveComponents(target, args.ComponentsRemove);
 

@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 05/18/2026 15:23:51
-  entityCount: 1368
+  time: 07/04/2026 11:16:09
+  entityCount: 1380
 maps: []
 grids:
 - 1
@@ -6976,6 +6976,58 @@ entities:
     - type: Transform
       pos: 16.533646,33.53279
       parent: 1
+- proto: RMCBlockerVehicle
+  entities:
+  - uid: 1369
+    components:
+    - type: Transform
+      pos: 5.5,44.5
+      parent: 1
+  - uid: 1370
+    components:
+    - type: Transform
+      pos: 6.5,44.5
+      parent: 1
+  - uid: 1371
+    components:
+    - type: Transform
+      pos: 7.5,44.5
+      parent: 1
+  - uid: 1372
+    components:
+    - type: Transform
+      pos: 8.5,44.5
+      parent: 1
+  - uid: 1373
+    components:
+    - type: Transform
+      pos: 9.5,44.5
+      parent: 1
+  - uid: 1374
+    components:
+    - type: Transform
+      pos: 10.5,44.5
+      parent: 1
+  - uid: 1375
+    components:
+    - type: Transform
+      pos: 42.5,44.5
+      parent: 1
+  - uid: 1376
+    components:
+    - type: Transform
+      pos: 43.5,44.5
+      parent: 1
+  - uid: 1377
+    components:
+    - type: Transform
+      pos: 44.5,44.5
+      parent: 1
+  - uid: 1378
+    components:
+    - type: Transform
+      pos: 45.5,44.5
+      parent: 1
 - proto: RMCBodyScanner
   entities:
   - uid: 649
@@ -8206,9 +8258,9 @@ entities:
       parent: 1
     missingComponents:
     - ApcPowerReceiver
+    - ActivatableUIRequiresPower
     - FaxMachine
     - ActivatableUI
-    - ActivatableUIRequiresPower
     - UserInterface
     - ItemSlots
     - ContainerContainer
@@ -9160,6 +9212,16 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 25.5,34.5
       parent: 1
+- proto: RMCVanWheel
+  entities:
+  - uid: 1380
+    components:
+    - type: Transform
+      parent: 1379
+    - type: HardpointIntegrity
+      integrity: 250
+    - type: Physics
+      canCollide: False
 - proto: RMCWeaponMar50LMG
   entities:
   - uid: 825
@@ -9210,6 +9272,20 @@ entities:
     - type: Transform
       pos: 12.5,17.5
       parent: 1
+- proto: VehicleCLFVan
+  entities:
+  - uid: 1379
+    components:
+    - type: Transform
+      pos: 10.031859,20.486206
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        wheel-1: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: 1380
+    - type: VehicleLock
 - proto: WallXenoResinImpenetrable
   entities:
   - uid: 1331
