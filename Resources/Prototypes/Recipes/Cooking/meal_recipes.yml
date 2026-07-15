@@ -766,6 +766,40 @@
     FoodDoughFlat: 1
     FoodWorldPeas: 3
 
+#French
+- type: microwaveMealRecipe
+  id: RecipeCassoulet
+  name: Cassoulet Recipe
+  result: FoodCassoulet
+  time: 15
+  group: Savory
+  solids:
+    FoodOnionSlice: 1
+    FoodBreadPlainSlice: 1
+    FoodMeat: 1
+    FoodTomato: 1
+    FoodMeatChickenCutlet: 1
+    FoodGarlic: 1
+    FoodCarrot: 1
+    FoodSoybeans: 1
+
+- type: microwaveMealRecipe
+  id: RecipeBouillabaisse
+  name: Bouillabaisse Recipe
+  result: FoodBouillabaisse
+  time: 15
+  group: Savory
+  reagents:
+    TableSalt: 5
+    BlackPepper: 5
+    OilOlive: 5
+  solids:
+    FoodOnionSlice: 1
+    FoodTomato: 1
+    FoodGarlic: 1
+    FoodOrange: 1
+    FoodMeatFish: 1
+
 #Italian
 - type: microwaveMealRecipe
   id: RecipeBoiledSpaghetti
