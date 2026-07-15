@@ -85,7 +85,9 @@
     - CMAccessRequisitions
     - CMAccessMarinePrep
     - CMAccessResearch
+    - RMCAccessFieldDoctor
     - CMAccessCE
+    - RMCAccessVehicleCrew
     accessGroups:
     - RMCBaseMarineAccess
     - RMCBaseMPAccess
@@ -118,7 +120,26 @@
   - type: Sprite
     drawdepth: SmallObjects
     sprite: _RMC14/Structures/Machines/computer.rsi
-    state: engineering_terminal
+    layers:
+    - map: ["base"]
+      state: "id0"
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "id"
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Appearance
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver # Supposed to be 300, but we have this grouped up with squad distibution computer so yeah
+    idleLoad: 600
+    activeLoad: 600
+    channel: Equipment
+  - type: ActivatableUIRequiresPower
   - type: Clickable
   - type: Corrodible
     isCorrodible: false

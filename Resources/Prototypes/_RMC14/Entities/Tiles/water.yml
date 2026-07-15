@@ -49,6 +49,7 @@
       params:
         volume: 8
   - type: BlockWeeds
+  - type: BlockXenoConstruction
   - type: MinimapColor
     color: "#94b0d59c"
   - type: RMCWater

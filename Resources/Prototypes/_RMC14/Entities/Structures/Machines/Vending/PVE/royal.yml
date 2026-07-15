@@ -411,6 +411,9 @@
       - id: RMCPatchTSE
         name: TSE patch
         amount: 15
+      - id: RMCPatchTSEWhiskey
+        name: Whiskey Troop patch
+        amount: 15
       - id: BedrollFolded
         amount: 10
       - id: CMCanteen
