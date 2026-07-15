@@ -791,7 +791,7 @@
   group: Savory
   reagents:
     TableSalt: 5
-    BlackPepper: 5
+    Blackpepper: 5
     OilOlive: 5
   solids:
     FoodOnionSlice: 1
