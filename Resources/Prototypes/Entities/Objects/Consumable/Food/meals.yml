@@ -643,7 +643,7 @@
 - type: entity
   name: cassoulet
   parent: FoodMealBase
-  id: FoodCassoulet
+  id: FoodMealCassoulet
   description: a rich, slow-cooked French stew.
   components:
   - type: FlavorProfile
@@ -663,7 +663,7 @@
 - type: entity
   name: bouillabaisse
   parent: FoodMealBase
-  id: FoodBouillabaisse
+  id: FoodMealBouillabaisse
   description: a rich, aromatic French seafood stew made by simmering a variety of fresh fish and shellfish in a deeply flavored broth.
   components:
   - type: FlavorProfile
@@ -683,7 +683,7 @@
 - type: entity
   name: bourguignon
   parent: FoodMealBase
-  id: FoodBourguignon
+  id: FoodMealBourguignon
   description: a traditional French braise featuring beef slow-cooked in red Burgundy wine, beef stock, garlic, herbs, and aromatics like carrots, pearl onions, and mushrooms.
   components:
   - type: FlavorProfile
