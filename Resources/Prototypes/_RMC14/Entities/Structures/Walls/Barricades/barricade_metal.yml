@@ -327,6 +327,7 @@
   components:
     - type: Sprite
       drawdepth: SmallObjects
+
 - type: entity
   parent: RMCBarricadeHandrail
   id: RMCBarricadeHybrisa
