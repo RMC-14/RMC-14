@@ -22,6 +22,8 @@ using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.Vehicle.Components;
+using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameObjects;
 using Robust.Shared.EntitySerialization;
 using Robust.Shared.EntitySerialization.Systems;
@@ -41,8 +43,10 @@ namespace Content.Shared._RMC14.Vehicle;
 public sealed class VehicleSystem : EntitySystem
 {
     private static readonly EntProtoId VehicleKey = "RMCVehicleKey";
+    private static readonly SoundSpecifier XenoFrameBreachSound = new SoundCollectionSpecifier("XenoPry");
 
     [Dependency] private readonly AreaSystem _area = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly SharedJobSystem _job = default!;
@@ -141,6 +145,9 @@ public sealed class VehicleSystem : EntitySystem
             interior.EntryLocks.Remove(entryIndex);
             return;
         }
+
+        if (CanBypassLockWithDestroyedFrame(ent.Owner, args.User))
+            _audio.PlayPvs(XenoFrameBreachSound, ent.Owner);
 
         args.Handled = true;
     }
