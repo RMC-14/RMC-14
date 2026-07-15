@@ -691,7 +691,7 @@
       - savory
       - meaty
   - type: Sprite
-    state: bouillabaisse
+    state: Bourguignon
   - type: SolutionContainerManager
     solutions:
       food:
