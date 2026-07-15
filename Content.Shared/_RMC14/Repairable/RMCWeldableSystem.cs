@@ -16,11 +16,11 @@ public sealed class RMCWeldableSystem : EntitySystem
 
     private void OnWeldableAttempt(Entity<WeldableComponent> ent, ref WeldableAttemptEvent args)
     {
-        if (!TryComp<RMCBlowtorchWeldFuelComponent>(args.Tool, out var blowtorchFuel))
+        if (!TryComp<RMCWeldFuelComponent>(args.Tool, out var welderFuel))
             return;
 
         _baseFuels.TryAdd(ent, ent.Comp.Fuel);
-        ent.Comp.Fuel = Math.Max(_baseFuels[ent] * blowtorchFuel.WeldFuelMultiplier, blowtorchFuel.MinWeldFuel);
+        ent.Comp.Fuel = Math.Max(_baseFuels[ent] * welderFuel.WeldFuelMultiplier, welderFuel.MinWeldFuel);
     }
 
     private void OnWeldableTerminating(Entity<WeldableComponent> ent, ref EntityTerminatingEvent args)
