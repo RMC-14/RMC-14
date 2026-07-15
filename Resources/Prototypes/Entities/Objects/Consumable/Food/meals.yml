@@ -638,3 +638,45 @@
           Quantity: 4
         - ReagentId: Vitamin
           Quantity: 4
+
+
+- type: entity
+  name: cassoulet
+  parent: FoodMealBase
+  id: FoodCassoulet
+  description: a rich, slow-cooked French stew.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - creamy
+      - meaty
+  - type: Sprite
+    state: corn-in-butter
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 30
+
+- type: entity
+  name: bouillabaisse
+  parent: FoodMealBase
+  id: FoodBouillabaisse
+  description: a rich, slow-cooked French stew.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - fishy
+      - oily
+  - type: Sprite
+    state: corn-in-butter
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 30
+          
