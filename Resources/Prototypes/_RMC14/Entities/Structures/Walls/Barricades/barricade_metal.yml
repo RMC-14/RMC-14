@@ -327,7 +327,13 @@
   components:
     - type: Sprite
       drawdepth: SmallObjects
-
+- type: entity
+  parent: RMCBarricadeHandrail
+  id: RMCBarricadeHybrisa
+  components:
+    - type: Sprite
+      layers:
+      - state: handrail_hybrisa
       - map: [ "acided" ]
     - type: Construction
       graph: BarricadeHandrailGraph
@@ -336,7 +342,6 @@
 - type: entity
   parent: RMCBarricadeHandrail
   id: RMCBarricadeHybrisaCenterRoad
-
   components:
     - type: Sprite
       layers:
@@ -383,14 +388,10 @@
 - type: entity
   parent: RMCBarricadeHybrisaPlasticRoadBarrier
   id: RMCBarricadeHybrisaPlasticRoadBarrierBlack
-
   components:
     - type: Sprite
-
       layers:
       - state: plasticroadbarrierblack
-      - map: [ "acided" ]
-
       - map: [ "acided" ]
 
 # Metal Barricade Doors
