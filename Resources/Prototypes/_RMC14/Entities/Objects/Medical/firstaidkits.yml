@@ -115,6 +115,12 @@
       components:
       - Hypospray
       - CMSurgeryTool
+  - type: Sprite
+    layers:
+    - state: bezerk
+    - state: kit_empty
+      map: [ "openLayer" ]
+      visible: false
 
 - type: entity
   parent: CMFirstAidKit
