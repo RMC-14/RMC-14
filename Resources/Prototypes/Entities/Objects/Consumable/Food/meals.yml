@@ -664,7 +664,7 @@
   name: bouillabaisse
   parent: FoodMealBase
   id: FoodMealBouillabaisse
-  description: a rich, aromatic French seafood stew made by simmering a variety of fresh fish and shellfish in a deeply flavored broth.
+  description: a rich, aromatic French seafood stew made by simmering a variety of fresh fish in a deeply flavored broth.
   components:
   - type: FlavorProfile
     flavors:
@@ -684,8 +684,7 @@
   name: bourguignon
   parent: FoodMealBase
   id: FoodMealBourguignon
-  description: a traditional French braise featuring beef slow-cooked in red Burgundy wine, beef stock, garlic, herbs, and aromatics like carrots, pearl onions, and mushrooms.
-  components:
+  description: a traditional French braise featuring slow-cooked beef, beef stock, garlic, and herbs.
   - type: FlavorProfile
     flavors:
       - savory
