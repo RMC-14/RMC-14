@@ -356,7 +356,7 @@
       graph: RMCBarricadeHandrailPlasticGraph # none of hybrisa's map specific railing is meant to yield metal
       node: nodeHandrail
 
-# Plastic Handrails
+# Plastic road barriers
 - type: entity
   parent: RMCBarricadeHybrisa
   id: RMCBarricadeHybrisaPlasticRoadBarrier
@@ -385,8 +385,9 @@
       - state: plasticroadbarrierblack
       - map: [ "acided" ]
 
+# metal road barriers
 - type: entity
-  parent: RMCBarricadeHybrisaPlasticRoadBarrier
+  parent: RMCBarricadeHybrisa
   id: RMCBarricadeHybrisaCenterRoad
   components:
     - type: Sprite
@@ -395,7 +396,7 @@
       - map: [ "acided" ]
 
 - type: entity
-  parent: RMCBarricadeHybrisaPlasticRoadBarrier
+  parent: RMCBarricadeHybrisa
   id: RMCBarricadeHybrisaCenterRoadDouble
   suffix: Double
   components:
