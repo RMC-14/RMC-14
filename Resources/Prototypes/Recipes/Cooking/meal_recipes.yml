@@ -770,7 +770,7 @@
 - type: microwaveMealRecipe
   id: RecipeCassoulet
   name: Cassoulet Recipe
-  result: FoodCassoulet
+  result: FoodMealCassoulet
   time: 15
   group: Savory
   solids:
@@ -786,7 +786,7 @@
 - type: microwaveMealRecipe
   id: RecipeBouillabaisse
   name: Bouillabaisse Recipe
-  result: FoodBouillabaisse
+  result: FoodMealBouillabaisse
   time: 15
   group: Savory
   reagents:
@@ -803,7 +803,7 @@
 - type: microwaveMealRecipe
   id: RecipeBourguignon
   name: Bourguignon Recipe
-  result: FoodBourguignon
+  result: FoodMealBourguignon
   time: 15
   group: Savory
   reagents:
