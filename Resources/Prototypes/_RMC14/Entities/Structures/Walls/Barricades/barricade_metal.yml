@@ -353,35 +353,12 @@
       - state: handrail_hybrisa
       - map: [ "acided" ]
     - type: Construction
-      graph: BarricadeHandrailGraph
+      graph: RMCBarricadeHandrailPlasticGraph # none of hybrisa's map specific railing is meant to yield metal
       node: nodeHandrail
-
-- type: entity
-  parent: RMCBarricadeHandrail
-  id: RMCBarricadeHybrisaCenterRoad
-  components:
-    - type: Sprite
-      layers:
-      - state: centerroadbarrier2
-      - map: [ "acided" ]
-    - type: Construction
-      graph: BarricadeHandrailGraph
-      node: nodeHandrail
-
-- type: entity
-  parent: RMCBarricadeHybrisaCenterRoad
-  id: RMCBarricadeHybrisaCenterRoadDouble
-  suffix: Double
-  components:
-    - type: Sprite
-      offset: 0,-0.15
-      layers:
-      - state: centerroadbarrier1
-      - map: [ "acided" ]
 
 # Plastic Handrails
 - type: entity
-  parent: RMCBarricadeHandrail
+  parent: RMCBarricadeHybrisa
   id: RMCBarricadeHybrisaPlasticRoadBarrier
   name: plastic road barrier
   components:
@@ -389,9 +366,6 @@
       layers:
       - state: plasticroadbarrierred
       - map: [ "acided" ]
-    - type: Construction
-      graph: RMCBarricadeHandrailPlasticGraph
-      node: nodeHandrail
 
 - type: entity
   parent: RMCBarricadeHybrisaPlasticRoadBarrier
@@ -409,6 +383,26 @@
     - type: Sprite
       layers:
       - state: plasticroadbarrierblack
+      - map: [ "acided" ]
+
+- type: entity
+  parent: RMCBarricadeHybrisaPlasticRoadBarrier
+  id: RMCBarricadeHybrisaCenterRoad
+  components:
+    - type: Sprite
+      layers:
+      - state: centerroadbarrier2
+      - map: [ "acided" ]
+
+- type: entity
+  parent: RMCBarricadeHybrisaPlasticRoadBarrier
+  id: RMCBarricadeHybrisaCenterRoadDouble
+  suffix: Double
+  components:
+    - type: Sprite
+      offset: 0,-0.15
+      layers:
+      - state: centerroadbarrier1
       - map: [ "acided" ]
 
 # Metal Barricade Doors
@@ -481,7 +475,7 @@
       enum.DoorVisuals.State:
         enum.RMCDamageOverlayVisuals.DamageOverlay:
           Open: { sprite: _RMC14/Structures/Walls/Barricades/folding_metal_closed_cracks.rsi }
-          Closed: { sprite: _RMC14/Structures/Walls/Barricades/folding_metal_cracks.rsi }       
+          Closed: { sprite: _RMC14/Structures/Walls/Barricades/folding_metal_cracks.rsi }
   - type: DamageVisuals
     thresholds: [4, 8, 12]
     damageDivisor: 25
