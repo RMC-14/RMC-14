@@ -651,7 +651,7 @@
       - creamy
       - meaty
   - type: Sprite
-    state: corn-in-butter
+    state: cassoulet
   - type: SolutionContainerManager
     solutions:
       food:
@@ -664,14 +664,14 @@
   name: bouillabaisse
   parent: FoodMealBase
   id: FoodBouillabaisse
-  description: a rich, slow-cooked French stew.
+  description: a rich, aromatic French seafood stew made by simmering a variety of fresh fish and shellfish in a deeply flavored broth.
   components:
   - type: FlavorProfile
     flavors:
       - fishy
       - oily
   - type: Sprite
-    state: corn-in-butter
+    state: bouillabaisse
   - type: SolutionContainerManager
     solutions:
       food:
