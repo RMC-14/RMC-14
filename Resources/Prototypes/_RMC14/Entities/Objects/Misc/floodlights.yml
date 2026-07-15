@@ -376,7 +376,7 @@
   name: broken colony streetlight
   description: A pasted on note says 'To fix, unscrew the panel, crowbar out the damaged assembly, weld it fixed, add 2 cable, then close the panel.'
   components:
-  - type: Sprit
+  - type: Sprite
     noRot: true
     sprite: _RMC14/Objects/Misc/Lights/streetlight.rsi
     offset: 0.0,0.8
