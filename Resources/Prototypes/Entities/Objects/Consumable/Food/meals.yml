@@ -679,4 +679,24 @@
         reagents:
         - ReagentId: Nutriment
           Quantity: 30
+
+- type: entity
+  name: bourguignon
+  parent: FoodMealBase
+  id: FoodBourguignon
+  description: a traditional French braise featuring beef slow-cooked in red Burgundy wine, beef stock, garlic, herbs, and aromatics like carrots, pearl onions, and mushrooms.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - savory
+      - meaty
+  - type: Sprite
+    state: bouillabaisse
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 30          
           
