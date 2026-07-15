@@ -342,6 +342,9 @@
   id: RMCStreetlight
   name: colony streetlight
   components:
+  - type: Physics
+    bodyType: Static
+    canCollide: false #Doesnt look the best, however in lue of the mechanic; "AddComponent(/datum/component/shimmy_around, east_offset = -15, west_offset = -15)" it'll do
   - type: Fixtures
     fixtures:
       fix1:
@@ -373,7 +376,7 @@
   name: broken colony streetlight
   description: A pasted on note says 'To fix, unscrew the panel, crowbar out the damaged assembly, weld it fixed, add 2 cable, then close the panel.'
   components:
-  - type: Sprite
+  - type: Sprit
     noRot: true
     sprite: _RMC14/Objects/Misc/Lights/streetlight.rsi
     offset: 0.0,0.8
@@ -382,6 +385,9 @@
   - type: Construction
     graph: RMCStreetlightBroken
     node: start
+  - type: Physics
+    bodyType: Static
+    canCollide: false #Dito
   - type: Fixtures
     fixtures:
       fix1:
