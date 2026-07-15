@@ -328,21 +328,38 @@
     - type: Sprite
       drawdepth: SmallObjects
 
+      - map: [ "acided" ]
+    - type: Construction
+      graph: BarricadeHandrailGraph
+      node: nodeHandrail
+
 - type: entity
   parent: RMCBarricadeHandrail
-  id: RMCBarricadeHybrisa
+  id: RMCBarricadeHybrisaCenterRoad
+
   components:
     - type: Sprite
       layers:
-      - state: handrail_hybrisa
+      - state: centerroadbarrier2
       - map: [ "acided" ]
-    - type: Construction # none of hybrisa's map specific railing is meant to yield metal
-      graph: RMCBarricadeHandrailPlasticGraph
+    - type: Construction
+      graph: BarricadeHandrailGraph
       node: nodeHandrail
+
+- type: entity
+  parent: RMCBarricadeHybrisaCenterRoad
+  id: RMCBarricadeHybrisaCenterRoadDouble
+  suffix: Double
+  components:
+    - type: Sprite
+      offset: 0,-0.15
+      layers:
+      - state: centerroadbarrier1
+      - map: [ "acided" ]
 
 # Plastic Handrails
 - type: entity
-  parent: RMCBarricadeHybrisa
+  parent: RMCBarricadeHandrail
   id: RMCBarricadeHybrisaPlasticRoadBarrier
   name: plastic road barrier
   components:
@@ -350,6 +367,9 @@
       layers:
       - state: plasticroadbarrierred
       - map: [ "acided" ]
+    - type: Construction
+      graph: RMCBarricadeHandrailPlasticGraph
+      node: nodeHandrail
 
 - type: entity
   parent: RMCBarricadeHybrisaPlasticRoadBarrier
@@ -363,30 +383,14 @@
 - type: entity
   parent: RMCBarricadeHybrisaPlasticRoadBarrier
   id: RMCBarricadeHybrisaPlasticRoadBarrierBlack
+
   components:
     - type: Sprite
+
       layers:
       - state: plasticroadbarrierblack
       - map: [ "acided" ]
 
-- type: entity
-  parent: RMCBarricadeHybrisaPlasticRoadBarrier
-  id: RMCBarricadeHybrisaCenterRoad
-  components:
-    - type: Sprite
-      layers:
-      - state: centerroadbarrier2
-      - map: [ "acided" ]
-
-- type: entity
-  parent: RMCBarricadeHybrisaPlasticRoadBarrier
-  id: RMCBarricadeHybrisaCenterRoadDouble
-  suffix: Double
-  components:
-    - type: Sprite
-      offset: 0,-0.15
-      layers:
-      - state: centerroadbarrier1
       - map: [ "acided" ]
 
 # Metal Barricade Doors
