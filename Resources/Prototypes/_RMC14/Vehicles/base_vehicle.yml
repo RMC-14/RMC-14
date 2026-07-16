@@ -120,8 +120,11 @@
         - VehicleWheelItem
   - type: VehicleWheelSlots
     slotCount: 1
+    slots:
+    - wheel-1
   - type: HardpointIntegrity
     maxIntegrity: 1000
+    integrity: 1000
     bypassEntryOnZero: true
   - type: Appearance
   - type: VehicleEnter
