@@ -384,6 +384,13 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (!xeno.Comp.EvolvesTo.Contains(newXeno) && !xeno.Comp.EvolvesToWithoutPoints.Contains(newXeno) && !isEarlyEvo)
             return false;
 
+        if (!xeno.Comp.EvolvesToWithoutPoints.Contains(newXeno) && xeno.Comp.Points < xeno.Comp.Max)
+        {
+            if (doPopup)
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-failed-not-enough-points"), xeno, xeno, PopupType.MediumCaution);
+            return false;
+        }
+
         if (isEarlyEvo && xeno.Comp.MarinesLanded)
         {
             if (doPopup)
