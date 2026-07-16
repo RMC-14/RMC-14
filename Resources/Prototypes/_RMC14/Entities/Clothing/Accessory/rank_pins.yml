@@ -236,3 +236,17 @@
     playerSprite:
       sprite: _RMC14/Objects/Clothing/Accessory/RankPins/provost.rsi
       state: pin
+
+- type: entity
+  parent: RMCPinBase
+  id: RMCShoulderTabsProvostInspector
+  name: Provost Shoulder Tabs
+  description: These signify an important official from the provost office.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/RankPins/provost_shoulder_tabs.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/RankPins/provost_shoulder_tabs.rsi
+      state: pin
