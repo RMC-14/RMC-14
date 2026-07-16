@@ -585,6 +585,25 @@
   - type: Sprite
     state: tartaruscontainerright
 
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerMiyahiraLargeMiddle
+  name: Miyahira Container
+  description: "A huge industrial shipping container belonging to the Miyahira corporation, a subsidary of Weston-Yamada. They produce all sorts of domestic vehicles, including the famed Mono-Supron. While it would be nice if this container had a new car, it's probably just full of spare parts."
+  suffix: Miyahira, Middle
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/containers_2.rsi
+    state: miyahiracontainermiddle
+
+- type: entity
+  parent: RMCContainerMiyahiraLargeMiddle
+  id: RMCContainerMiyahiraLargeRight
+  suffix: Miyahira, Right
+  components:
+  - type: Sprite
+    state: miyahiracontainerright
+
 # Small
 
 - type: entity
