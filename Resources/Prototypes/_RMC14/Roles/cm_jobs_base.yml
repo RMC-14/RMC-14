@@ -14,6 +14,36 @@
     Amethyst: RMCMedalAmethystService
     Emerald: RMCMedalEmeraldService
     Prismatic: RMCMedalPrismaticService
+  pins:
+    # Enlisted
+    RMCRankPrivate: RMCPinE1
+    RMCRankPrivateFirstClass: RMCPinE2
+    RMCRankLanceCorporal: RMCPinE3
+    RMCRankCorporal: RMCPinE4
+    RMCRankSergeant: RMCPinE5
+    RMCRankStaffSergeant: RMCPinE6
+    RMCRankGunnerySergeant: RMCPinE7
+    RMCRankMasterSergeant: RMCPinE8
+    RMCRankFirstSergeant: RMCPinE8
+    RMCRankMasterGunnerySergeant: RMCPinE9
+    RMCRankSergeantMajor: RMCPinE9
+    # Officers
+    RMCRankSecondLT: RMCPinO1
+    RMCRankFirstLT: RMCPinO2
+    RMCRankCaptain: RMCPinO3
+    RMCRankMajor: RMCPinO4
+    RMCRankLieutenantColonel: RMCPinO5
+    RMCRankColonel: RMCPinO6
+    # Provost
+    RMCRankProvostProvostEnforcer: RMCPinProvost
+    RMCRankProvostProvostTeamLeader: RMCPinProvost
+    RMCRankProvostAdvisor: RMCPinProvost
+    RMCRankProvostInspector: RMCPinProvost
+    RMCRankProvostChiefInspector: RMCPinProvost
+    RMCRankProvostDeputyMarshal: RMCPinProvost
+    RMCRankProvostMarshal: RMCPinProvost
+    RMCRankProvostSeniorMarshal: RMCPinProvost
+    RMCRankProvostSectorMarshal: RMCPinProvost
 
 - type: job
   abstract: true
