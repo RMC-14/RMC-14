@@ -127,7 +127,7 @@
   id: CMVendomat
 
 - type: entity
-  parent: CMBaseStructureCorrodible
+  parent: CMBaseStructure
   id: VehicleHardpointVendor
   name: vehicle hardpoint printer
   description: A machine for printing vehicle hardpoints.
@@ -155,11 +155,15 @@
         density: 200
   - type: ActivatableUI
     key: enum.CMAutomatedVendorUI.Key
+  - type: ActivatableUIRequiresAccess
+  - type: AccessReader
+    access: [ [ "RMCAccessVehicleCrew" ] ]
   - type: UserInterface
     interfaces:
       enum.CMAutomatedVendorUI.Key:
         type: CMAutomatedVendorBui
   - type: CMAutomatedVendor
+    scaling: false
     sound:
       path: /Audio/_RMC14/Machines/vending_drop.ogg
       params:

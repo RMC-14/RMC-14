@@ -7,10 +7,12 @@
   startingGear: RMCGearParaSupportSynthetic
   icon: RMCJobIconParaSupportSynthetic
   playTimeTracker: RMCJobSyntheticColony
-  spawnMenuRoleName: Royal Paramarine Support Synthetic (Survivor)
+  spawnMenuRoleName: Royal Paramarine Support Synthetic (Hybrisa Special Survivor)
   special:
     - !type:AddComponentSpecial
       components:
+        - type: Language
+          preset: RMCLanguagePresetSynthColonist
         - type: LanguageLearning
           learnableLanguages:
             - Xeno
