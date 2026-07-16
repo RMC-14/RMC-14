@@ -17,7 +17,7 @@
     - CMBeltUtilityFilled
     - CMMultitool
     - RMCFlashlight
-    - FoodDonkpocket
+    - RMCFoodDonkpocket
     - CMGrenadeSmoke
     - DoorElectronics
     - CMWirecutter
@@ -399,7 +399,7 @@
     - id: RMCSmallFloodlightUnanchored
       amount: 4
   - type: SpawnOnTerminate
-    spawn: FoodDonkpocket
+    spawn: RMCFoodDonkpocket
 
 - type: entity
   parent: RMCSecureCaseStrapped #Floodlights (funny drag stuff)
