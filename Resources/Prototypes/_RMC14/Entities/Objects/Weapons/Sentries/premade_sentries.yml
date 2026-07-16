@@ -182,11 +182,18 @@
   - type: Turret
 
 - type: entity
-  parent: RMCBaseTurret
+  parent: RMCSentryPremade
   id: RMCTurretColony
   name: UN-635 static gauss turret
   description: A fully-automated defence turret with mid-range targeting capabilities. Armed with a modified M32-S Autocannon and an internal belt feed.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
+    drawdepth: Mobs
+    noRot: true
+    layers:
+    - state: defense_base
+    - state: omni_uad_sentry_on
   - type: InteractionPopup
     interactDelay: 0.2
     successChance: 0.8
@@ -219,16 +226,6 @@
           collection: MetalBreak
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: HTN
-    rootTask:
-      task: RMCTurretCompound
-    blackboard:
-      SoundTargetInLOS: !type:SoundPathSpecifier
-        path: /Audio/Effects/double_beep.ogg
-      VisionRadius: !type:Single
-        5.5
-      AggroVisionRadius: !type:Single
-        5.5
   - type: UserIFF
     factions:
     - FactionMarine
