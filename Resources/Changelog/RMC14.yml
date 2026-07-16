@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Arykh
-  changes:
-  - message: Added the emergency surgical equipment cabinet for doctors. These only
-      open on hijack.
-    type: Add
-  id: 3011
-  time: '2026-03-26T10:51:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9518
 - author: CatAndHats
   changes:
   - message: Added Container Room Xenos sprinkle insert to Solaris
@@ -4582,5 +4574,15 @@
   id: 3510
   time: '2026-07-13T19:45:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10261
+- author: MidZik
+  changes:
+  - message: Xenos now rest when they disconnect or ghost.
+    type: Add
+  - message: Defenders now unfortify and raise their crest when they disconnect or
+      ghost (after which they rest).
+    type: Add
+  id: 3511
+  time: '2026-07-16T21:05:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9938
 Name: RMC14
 Order: -1
