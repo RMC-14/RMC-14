@@ -5,6 +5,7 @@
   name: secure locker
   description: It's an immobile card-locked storage unit.
   components:
+  - type: VehicleSmashable
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/standard.rsi
     layers:
@@ -33,6 +34,18 @@
   - type: Lock
   - type: XenoCrusherChargable
     instantDestroy: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.48,0.25,0.48"
+        density: 75
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        - BulletImpassable
 
 - type: entity
   parent: CMLockerBase
@@ -66,6 +79,21 @@
     sprite: _RMC14/Structures/Storage/Lockers/safe.rsi
 
 - type: entity
+  parent: CMLockerBase
+  id: RMCLockerIntelSafe
+  name: secure safe
+  description: May contain valuable information
+  suffix: Intel
+  components:
+  - type: IntelSafeCandidate
+  - type: UserInterface
+    interfaces:
+      enum.DialogUiKey.Key:
+        type: DialogBui
+  - type: AccessReader
+    access: [ [ "CMAccessColonyCommand" ] ]
+
+- type: entity
   parent: RMCLockerSecureSafe
   id: RMCLockerSecureSafeColony
   suffix: Colony Command
@@ -85,6 +113,36 @@
     sprite: _RMC14/Structures/Storage/Lockers/safe.rsi
   - type: AccessReader
     access: [["RMCAccessWeYa"]]
+
+- type: entity
+  parent: CMLockerBase
+  id: RMCFloorSafeNormal
+  name: floor safe
+  description: A concealed floor safe for storing valuables and confidential material.
+  suffix: Normal
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/floor_safe.rsi
+    drawdepth: FloorObjects
+  - type: InteractionOutline
+  - type: Physics
+    canCollide: false
+  - type: EntityStorage
+    whitelist:
+      components:
+      - Item
+
+- type: entity
+  parent: RMCFloorSafeNormal
+  id: RMCFloorSafe
+  suffix: Intel
+  components:
+  - type: Lock
+  - type: IntelSafeCandidate
+  - type: UserInterface
+    interfaces:
+      enum.DialogUiKey.Key:
+        type: DialogBui
 
 - type: entity
   parent: CMLockerBase
@@ -128,7 +186,7 @@
   description: It's an immobile card-locked storage unit.
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Storage/Lockers/armorylocker.rsi
+    sprite: _RMC14/Structures/Storage/Lockers/gun_cabinet.rsi
   - type: AccessReader
     access: [["CMAccessArmory"]]
   - type: InsertBlacklist
@@ -139,11 +197,21 @@
 
 - type: entity
   parent: RMCLockerGunBase
-  id: RMCLockerGunBlue
-  name: riot control equipment Cabinet
+  id: RMCLockerGunStorageBrig
+  name: Storage Cabinet
+  description: It's an immobile card-locked storage unit.
   components:
-  - type: RMCUnlockOnAlertLevel
-    level: Blue
+  - type: AccessReader
+    access: [["CMAccessBrig"]]
+
+- type: entity
+  parent: RMCLockerGunBase
+  id: RMCLockerGunStorageCommand
+  name: Storage Cabinet
+  description: It's an immobile card-locked storage unit.
+  components:
+  - type: AccessReader
+    access: [["RMCAccessCommand"]]
 
 - type: entity
   parent: RMCLockerGunBase
@@ -159,9 +227,21 @@
 
 - type: entity
   parent: RMCLockerGunBase
+  id: RMCLockerGunBlue
+  name: riot control equipment Cabinet
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/armory_locker.rsi
+  - type: RMCUnlockOnAlertLevel
+    level: Blue
+
+- type: entity
+  parent: RMCLockerGunBase
   id: RMCLockerGunRed
   name: red alert gun cabinet
   components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/armory_locker.rsi
   - type: RMCUnlockOnAlertLevel
   - type: Destructible
     thresholds: []
@@ -192,9 +272,24 @@
   name: medical doctor's locker
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Storage/Lockers/medical.rsi
+    sprite: _RMC14/Structures/Storage/Lockers/medical_white.rsi
   - type: AccessReader
     access: [["CMAccessMedical"]]
+  - type: StorageFill
+    contents:
+     #- id: RMCJumpsuitDoctor RMC14 TODO only when cold map & a scarf
+      - id: RMCLabcoat
+      - id: RMCLabcoatShort
+      - id: RMCLabcoatLong
+      - id: RMCShoesWhite
+      - id: RMCMaskBreath
+      - id: CMMaskSterile
+      - id: RMCGlassesMedicalHUDGlasses
+      - id: RMCPouchMedical
+      - id: RMCPouchSyringe
+      - id: RMCPouchMedkit
+      - id: RMCPouchChem
+      - id: CMSatchelMarine
 
 - type: entity
   parent: CMLockerBase
@@ -278,6 +373,16 @@
     sprite: _RMC14/Structures/Storage/Lockers/cmo.rsi
   - type: AccessReader
     access: [["CMAccessCMO"]]
+
+- type: entity
+  parent: CMLockerBase
+  id: RMCLockerFieldDoctor
+  name: field doctor's locker
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/medical.rsi
+  - type: AccessReader
+    access: [["RMCAccessFieldDoctor"]]
 
 # Engineering
 - type: entity
@@ -371,7 +476,7 @@
   - type: AccessReader
     access: [["CMAccessDelta"]]
 
-# new varadero
+# map lockers
 
 - type: entity
   parent: CMLockerBase
@@ -398,6 +503,16 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/detective.rsi
+
+- type: entity
+  parent: CMLockerBase
+  id: RMCLockerMiner
+  name: miner's equipment
+  suffix: Secure
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/mining.rsi
+
 
 # PVE
 

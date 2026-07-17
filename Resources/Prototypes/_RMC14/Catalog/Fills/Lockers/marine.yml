@@ -11,8 +11,9 @@
   table: !type:AllSelector
     children:
     - id: CMArmorHelmetM11
-    - id: RMCLaserDesignator
+    - id: RMCLaserDesignatorPVE
     - id: RMCWhistle
+    - id: RMCPVEArmorCaseB12
 
 - type: entityTable
   id: RMCClosetGoldenArrowSGOFill
@@ -20,13 +21,12 @@
     children:
     - id: RMCSmartGunPVE
     - id: RMCPowerCellSmartgun
-    - id: CMArmorSmartGunCombatHarness
+    - id: RMCPVEArmorCaseM3SGO
     - id: RMCBeltSmartGunOperatorPistolFilled
     - id: RMCMagazineSmartGun
     - id: RMCMagazineSmartGun
     - id: RMCGlassesSmartGunSight
-    - id: RMCWebbingClipOnPouch
-    - id: RMCWebbingGrenade
+    - id: RMCScabbardMacheteSGFilled
 
 - type: entityTable
   id: RMCClosetTSEPAFill
@@ -34,3 +34,23 @@
     children:
     - id: RMCCoatTSEPAHighVis
     - id: RMCCoatTSEPAHighVisVest
+
+- type: entity
+  id: RMCClosetBombFilledOT
+  parent: CMClosetBomb
+  suffix: Filled, OT
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCClothingHeadHelmetBombSuit
+      - id: RMCSuitBombSuit
+      - id: CMWirecutter
+        prob: 0.9
+      - id: CMJumpsuitMaintTech
+        prob: 0.9
+      - id: CMBootsBlack
+        prob: 0.9
+      - id: CMScrewdriver
+        prob: 0.9
+      - id: CMMultitool
+        prob: 0.5

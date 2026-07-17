@@ -1,9 +1,11 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
+using Content.Shared._RMC14.Barricade;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Tackle;
 using Content.Shared._RMC14.Weapons.Melee;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions.Events;
 using Content.Shared.Administration.Components;
@@ -26,6 +28,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
+using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Weapons.Melee.Components;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Components;
@@ -37,11 +40,13 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 using ItemToggleMeleeWeaponComponent = Content.Shared.Item.ItemToggle.Components.ItemToggleMeleeWeaponComponent;
 
 namespace Content.Shared.Weapons.Melee;
@@ -68,13 +73,17 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
     [Dependency] private   readonly SharedStaminaSystem _stamina = default!;
 
-    // RMC14
+    // RMC14 start
     [Dependency] private readonly IConfigurationManager _configuration = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
+    [Dependency] private readonly SharedEntityStorageSystem _storage = default!;
+    // RMC14 end
 
     private const int AttackMask = (int) (CollisionGroup.MobMask | CollisionGroup.Opaque);
 
     private static readonly EntProtoId DisarmEffect = "RMCWeaponArcDisarm"; // RMC14
+    private const float ArtificialMeleeDelay = 0.1f; //RMC14
 
     /// <summary>
     /// Maximum amount of targets allowed for a wide-attack.
@@ -86,6 +95,12 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     /// </summary>
     public const float GracePeriod = 0.05f;
 
+    // RMC14 start
+    private EntityQuery<MobStateComponent> _mobStateQuery;
+    private EntityQuery<PhysicsComponent> _physicsQuery;
+    private EntityQuery<DirectionalAttackBlockerComponent> _directionalAttackBlockerQuery;
+    // RMC14 end
+
     public override void Initialize()
     {
         base.Initialize();
@@ -93,6 +108,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         _configuration.OnValueChanged(RMCCVars.CMMaxHeavyAttackTargets, v => MaxTargets = v, true);
 
         SubscribeLocalEvent<MeleeWeaponComponent, HandSelectedEvent>(OnMeleeSelected);
+        SubscribeLocalEvent<MeleeWeaponComponent, HandDeselectedEvent>(OnMeleeDeselected); // RMC14
         SubscribeLocalEvent<MeleeWeaponComponent, ShotAttemptedEvent>(OnMeleeShotAttempted);
         SubscribeLocalEvent<MeleeWeaponComponent, GunShotEvent>(OnMeleeShot);
         SubscribeLocalEvent<BonusMeleeDamageComponent, GetMeleeDamageEvent>(OnGetBonusMeleeDamage);
@@ -105,6 +121,12 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         SubscribeAllEvent<LightAttackEvent>(OnLightAttack);
         SubscribeAllEvent<DisarmAttackEvent>(OnDisarmAttack);
         SubscribeAllEvent<StopAttackEvent>(OnStopAttack);
+
+        // RMC14 start
+        _mobStateQuery = GetEntityQuery<MobStateComponent>();
+        _physicsQuery = GetEntityQuery<PhysicsComponent>();
+        _directionalAttackBlockerQuery = GetEntityQuery<DirectionalAttackBlockerComponent>();
+        // RMC14 end
 
 #if DEBUG
         SubscribeLocalEvent<MeleeWeaponComponent,
@@ -153,13 +175,39 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         // If someone swaps to this weapon then reset its cd.
         var curTime = Timing.CurTime;
-        var minimum = curTime + TimeSpan.FromSeconds(1 / attackRate);
+        var minimum = curTime + TimeSpan.FromSeconds(ArtificialMeleeDelay); // RMC14 No attack delay reset, A tiny delay is still needed so you don't attack and grab a weapon at the same time while in harm mode.
+
+        // RMC14, Prevent dual wielded melee weapons from having separate attack delays when swapping hands.
+        var heldItems = _hands.EnumerateHeld(args.User);
+        foreach (var item in heldItems)
+        {
+            if (item == uid || !TryComp(item, out MeleeWeaponComponent? weapon))
+                continue;
+
+            if (minimum < weapon.NextAttack)
+                minimum = weapon.NextAttack;
+        }
+
+        // RMC14
+        if (TryComp(args.User, out RMCMeleeUserCooldownComponent? userCooldown) && minimum < userCooldown.NextAttack)
+            minimum = userCooldown.NextAttack;
 
         if (minimum < component.NextAttack)
             return;
 
         component.NextAttack = minimum;
         DirtyField(uid, component, nameof(MeleeWeaponComponent.NextAttack));
+    }
+
+    // RMC14
+    private void OnMeleeDeselected(Entity<MeleeWeaponComponent> weapon, ref HandDeselectedEvent args)
+    {
+        var userCooldown = EnsureComp<RMCMeleeUserCooldownComponent>(args.User);
+        if (userCooldown.NextAttack < weapon.Comp.NextAttack)
+        {
+            userCooldown.NextAttack = weapon.Comp.NextAttack;
+            DirtyField(args.User, userCooldown, nameof(RMCMeleeUserCooldownComponent.NextAttack));
+        }
     }
 
     private void OnGetBonusMeleeDamage(EntityUid uid, BonusMeleeDamageComponent component, ref GetMeleeDamageEvent args)
@@ -360,18 +408,31 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         return AttemptAttack(user, weaponUid, weapon, new DisarmAttackEvent(GetNetEntity(target), GetNetCoordinates(targetXform.Coordinates)), null);
     }
 
+    // RMC14
+    public bool AttemptLightAttack(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, EntityUid target, bool requireCombatMode)
+    {
+        if (!TryComp(target, out TransformComponent? targetXform))
+            return false;
+
+        return AttemptAttack(user, weaponUid, weapon, new LightAttackEvent(GetNetEntity(target), GetNetEntity(weaponUid), GetNetCoordinates(targetXform.Coordinates)), null, requireCombatMode);
+    }
+
     /// <summary>
     /// Called when a windup is finished and an attack is tried.
     /// </summary>
     /// <returns>True if attack successful</returns>
-    private bool AttemptAttack(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, AttackEvent attack, ICommonSession? session)
+    private bool AttemptAttack(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, AttackEvent attack, ICommonSession? session, bool requireCombatMode = true) //added requireCombatMode param
     {
         var curTime = Timing.CurTime;
+
+        // RMC14
+        if (TryComp(user, out RMCMeleeUserCooldownComponent? globalCooldown) && globalCooldown.NextAttack > curTime)
+            return false;
 
         if (weapon.NextAttack > curTime)
             return false;
 
-        if (!CombatMode.IsInCombatMode(user))
+        if (requireCombatMode && !CombatMode.IsInCombatMode(user)) // RMC14
             return false;
 
         EntityUid? target = null;
@@ -411,9 +472,9 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         // RMC14
         if (target != null)
         {
-            if  (_rmcMelee.AttemptOverrideAttack(target.Value, (weaponUid, weapon), user, attack, out var newAttack))
+            if  (_rmcMelee.AttemptOverrideAttack(target.Value, (weaponUid, weapon), user, attack, out var newAttack, out var cancelled))
                 attack = newAttack;
-            else
+            else if (cancelled)
                 return false;
         }
 
@@ -432,6 +493,14 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         }
 
         DirtyField(weaponUid, weapon, nameof(MeleeWeaponComponent.NextAttack));
+
+        // RMC14
+        var userCooldown = EnsureComp<RMCMeleeUserCooldownComponent>(user);
+        if (userCooldown.NextAttack < weapon.NextAttack)
+        {
+            userCooldown.NextAttack = weapon.NextAttack;
+            DirtyField(user, userCooldown, nameof(RMCMeleeUserCooldownComponent.NextAttack));
+        }
 
         // Do this AFTER attack so it doesn't spam every tick
         var ev = new AttemptMeleeEvent(user);
@@ -742,10 +811,12 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             var target = entities.First();
             _meleeSound.PlayHitSound(target, user, GetHighestDamageSound(appliedDamage, _protoManager), hitEvent.HitSoundOverride, component);
         }
-
-        if (appliedDamage.GetTotal() > FixedPoint2.Zero)
+        // RMC14: Checks and returns early for when attacking too fast and target is technically not there
+        if (appliedDamage.GetTotal() > FixedPoint2.Zero && targets.Count > 0)
         {
-            DoDamageEffect(targets, user, Transform(targets[0]));
+            if (!TryComp(targets[0], out TransformComponent? targetXform))
+                return true;
+            DoDamageEffect(targets, user, targetXform);
         }
 
         return true;
@@ -775,8 +846,38 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
             if (res.Count != 0)
             {
+                // RMC14 start
+                // Ignore dead mobs, mobs from the same hive, and open entity containers (lockers, crates, etc).
+                var filteredResults = res.Where(x => !MobState.IsDead(x.HitEntity))
+                    .Where(x => !(_mobStateQuery.HasComp(x.HitEntity) && _hive.FromSameHive(ignore, x.HitEntity)))
+                    .Where(x => !_storage.IsOpen(x.HitEntity));
+
+                if (filteredResults.Count() <= 0)
+                {
+                    continue;
+                }
+
+                // We prioritize non-dead mobs, but we also have to make sure we don't hit past barricades or entities
+                // that block interactions over them, such as walls, windows, windoors, closed airlocks, etc.
+                // In short, we should hit the closest entity, UNLESS we can hit a mob, in which case we hit the mob.
+                // To accomplish this, we find the first object that either is a mob or would block our attack.
+                var firstPriorityResult = filteredResults.FirstOrNull(
+                    x => _mobStateQuery.HasComp(x.HitEntity)  // mobs
+                      || ((_physicsQuery.CompOrNull(x.HitEntity)?.CollisionLayer ?? 0) & (int)CollisionGroup.InteractImpassable) != 0  // walls, windows, etc
+                      || _directionalAttackBlockerQuery.HasComp(x.HitEntity)  // barricades
+                );
+
+                // If the found object is a mob, we target it. Otherwise we target the first object we found.
+                var target = filteredResults.First();
+                if (firstPriorityResult is { } result &&
+                    _mobStateQuery.HasComp(result.HitEntity))
+                {
+                    target = result;
+                }
+                // RMC14 end
+
                 // If there's exact distance overlap, we simply have to deal with all overlapping objects to avoid selecting randomly.
-                var resChecked = res.Where(x => x.Distance.Equals(res[0].Distance));
+                var resChecked = filteredResults.Where(x => x.Distance.Equals(target.Distance));
                 foreach (var r in resChecked)
                 {
                     if (Interaction.InRangeUnobstructed(ignore, r.HitEntity, range + 0.1f, overlapCheck: false))

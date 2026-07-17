@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Shark Taken from SS14, https://github.com/space-wizards/space-station-14/tree/e88d2b748155040b8fd1ae6df2cba42c31a009c3/Resources/Textures/Objects/Fun/Plushies/shark.rsi and hat Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/05eaa3484b1a35aa759300bcfc8f0119f009daae/icons/mob/humans/onmob/head_1.dmi and https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/items/clothing/cm_hats.dmi, Edited/Cobbled together by @x5tink",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "SMO"
+        },
+        {
+            "name": "SMO-inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "SMO-inhand-right",
+            "directions": 4
+        }
+    ]
+}

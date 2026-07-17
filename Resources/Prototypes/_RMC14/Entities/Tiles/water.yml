@@ -49,6 +49,7 @@
       params:
         volume: 8
   - type: BlockWeeds
+  - type: BlockXenoConstruction
   - type: MinimapColor
     color: "#94b0d59c"
   - type: RMCWater
@@ -93,3 +94,11 @@
   components:
   - type: Sprite
     color: "#990000"
+
+- type: entity
+  parent: CMFloorShallowWaterEntity
+  id: RMCFloorShallowWaterEntityBelowPipes
+  suffix: Below Pipes
+  components:
+  - type: Sprite
+    drawdepth: LowFloors

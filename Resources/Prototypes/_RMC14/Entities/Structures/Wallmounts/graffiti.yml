@@ -1,0 +1,21 @@
+﻿- type: entity
+  parent: BaseSign
+  id: CMGraffitiBase
+  abstract: true
+  components:
+  - type: WallMount
+    arc: 360
+  - type: Sprite
+    drawdepth: WallTops
+    snapCardinals: true
+  - type: Godmode
+
+- type: entity
+  parent: CMGraffitiBase
+  id: CMGraffitiYellowSign
+  name: "strange symbol"
+  description: "Have you seen the yellow sign?"
+  components:
+  - type: Sprite
+    sprite: _RMC14/Decals/pve.rsi
+    state: yellow_sign

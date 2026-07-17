@@ -110,6 +110,9 @@ public sealed class PryingSystem : EntitySystem
             return true;
         }
 
+        if (!HasComp<PryingComponent>(user))
+            return true;
+
         // hand-prying is much slower
         var modifier = CompOrNull<PryingComponent>(user)?.SpeedModifier ?? unpoweredComp.PryModifier;
         return StartPry(target, user, null, modifier, out id);

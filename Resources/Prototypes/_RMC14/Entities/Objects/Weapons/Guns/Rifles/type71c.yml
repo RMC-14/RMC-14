@@ -25,7 +25,7 @@
     - Burst
     - FullAuto
     soundGunshot:
-      collection: CMM54CShoot
+      collection: RMCType71Shoot
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
@@ -54,7 +54,8 @@
           - RMCMagazineRifleType71
           - RMCMagazineRifleType71AP
           - RMCMagazineRifleType71HEAP
-        startingItem: RMCMagazineRifleType71
+          - RMCMagazineRifleType71Rubber
+        startingItem: RMCMagazineRifleType71AP
   - type: GunDamageModifier
     multiplier: 0.8
   - type: AttachableHolder
@@ -81,10 +82,8 @@
         whitelist:
           tags:
           - RMCAttachmentFlashlightGrip
-          - RMCAttachmentLaserSight
           - RMCAttachmentVerticalGrip
-          - RMCAttachmentExtinguisher
-          - RMCAttachmentFlamer
+          - RMCAttachmentUnderbarrelExtinguisher
           - RMCAttachmentBurstFireAssembly
   - type: AttachableHolderVisuals
     offsets:

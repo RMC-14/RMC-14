@@ -96,3 +96,11 @@
   name: foxtrot wooden crate
   id: RMCFoxtrotWoodenCrateBuild
   prototype: RMCCrateWoodenBuildableFoxtrot
+  
+- type: rmcConstruction
+  id: RMCFishingPoleBuild
+  name: fishing pole
+  prototype: RMCFishingPole
+  noRotate: true
+  doAfterTime: 20
+  materialCost: 25

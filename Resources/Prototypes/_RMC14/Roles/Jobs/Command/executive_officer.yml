@@ -43,7 +43,7 @@
         RMCSkillPolice: 2
         RMCSkillPowerLoader: 2
         RMCSkillSurgery: 1
-        RMCSkillVehicles: 1
+        RMCSkillVehicles: 2
     - type: MarineOrders
     - type: CMVendorUser
       id: CMExecutiveOfficer
@@ -64,6 +64,9 @@
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_command
     - type: RMCTrackable
+    - type: RMCAwardRecommendation
+      maxRecommendations: 4
+    - type: SeeNewPlayers
 
 - type: startingGear
   id: CMGearExecutiveOfficer

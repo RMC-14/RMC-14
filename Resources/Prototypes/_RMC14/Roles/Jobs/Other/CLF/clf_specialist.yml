@@ -32,6 +32,15 @@
     - type: NpcFactionMember
       factions:
       - CLF
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      understoodLanguages:
+      - Japanese
+      - English
+      currentLanguage: Japanese
+      defaultLanguage: Japanese
     - type: JobPrefix
       prefix: rmc-job-prefix-clf-specialist
   hidden: true
@@ -59,6 +68,10 @@
     job: RMCCLFSpecialist
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobWeaponsSpecialist
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadCLF
 
@@ -66,7 +79,7 @@
   id: RMCGearCLFSpecialist
   equipment:
     head: RMCHeadMilitiaBucket
-    mask: RMCM5Bayonet # TODO RMC14
+    mask: RMCCombatUtilityKnifeA
     ears: RMCHeadsetDistressCLF
     eyes: RMCGlassesM4SPRBattleSight
     jumpsuit: RMCJumpsuitCLFWebbingMAR50
@@ -74,7 +87,7 @@
     gloves: CMHandsBlackMarine
     shoes: RMCShoesBrown
     id: RMCIDCardCLFSpecialist
-    belt: CMM77BeltFilled
+    belt: RMCM77BeltFilled
     back: RMCSatchelLightpack
     suitstorage: RMCWeaponMar50LMG
     pocket1: RMCPouchExplosiveFilledC4SPP
@@ -86,7 +99,7 @@
     - RMCFlashlight
     - CMFirstAidKitFilled
     - CMCrowbar
-    - CMMRE
+    - RMCMRECLF
     - RMCRangefinder
     - RMCGrenadeIED
     - RMCGrenadeIED

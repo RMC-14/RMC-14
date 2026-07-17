@@ -11,12 +11,15 @@
     - state: "off"
     - state: "normal-unshaded"
   - type: CMAutomatedVendor
+    canManualRestock: true
     hackable: true
     sections:
     - name: Cassettes
       entries:
       - id: RMCCassettePlayer
         amount: 50
+      - id: RMCPouchCassette
+        amount: 10
       - id: RMCCassetteTapeWigWoo1
         amount: 10
       - id: RMCCassetteTapeMendax
@@ -36,7 +39,9 @@
       - id: RMCCassetteTapeCustom
         amount: 20
     - name: Cards
-      entries: []
+      entries:
+      - id: RMCPlayingCardDeck
+        amount: 10
     - name: Magazines
       entries:
       - id: RMCMagazineBootsN160

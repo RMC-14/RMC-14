@@ -36,7 +36,7 @@ public sealed class RMCAdminChatBansEui : BaseEui
             time *= _window.Multiplier;
             var duration = TimeSpan.FromMinutes(time);
             var reason = Rope.Collapse(_window.ReasonEdit.TextRope);
-            var msg = new RMCAdminChatBanAddMsg(_window.PlayerEdit.Text, type, duration, reason);
+            var msg = new RMCAdminChatBanAddMsg(_window.PlayerEdit.Text, type, time == 0 ? null : duration, reason);
             SendMessage(msg);
         };
 

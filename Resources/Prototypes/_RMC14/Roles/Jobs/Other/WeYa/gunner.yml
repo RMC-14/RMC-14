@@ -20,6 +20,15 @@
     - type: NpcFactionMember
       factions:
       - WeYa
+    - type: Language
+      spokenLanguages:
+      - English
+      - Japanese
+      understoodLanguages:
+      - English
+      - Japanese
+      currentLanguage: English
+      defaultLanguage: English
     - type: Skills
       skills:
         RMCSkillCqc: 1
@@ -31,8 +40,16 @@
         RMCSkillSmartGun: 1
         RMCSkillEndurance: 3
         RMCSkillJtac: 1
+        RMCSkillVehicles: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-gunner
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pmc_sg
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_pmc
   hidden: true
 
 - type: entity

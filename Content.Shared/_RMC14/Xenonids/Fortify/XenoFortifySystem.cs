@@ -1,4 +1,3 @@
-using System.Linq;
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Explosion;
@@ -18,8 +17,11 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Weapons.Melee.Events;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Player;
+using System.Linq;
 using static Content.Shared._RMC14.Xenonids.Fortify.XenoFortifyComponent;
 using static Content.Shared.Physics.CollisionGroup;
 
@@ -30,6 +32,7 @@ public sealed class XenoFortifySystem : EntitySystem
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly CMArmorSystem _armor = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _explode = default!;
     [Dependency] private readonly FixtureSystem _fixtures = default!;
@@ -43,6 +46,7 @@ public sealed class XenoFortifySystem : EntitySystem
     {
         // TODO RMC14 resist knockback from small explosives
         SubscribeLocalEvent<XenoFortifyComponent, XenoFortifyActionEvent>(OnXenoFortifyAction);
+        SubscribeLocalEvent<XenoFortifyComponent, PlayerDetachedEvent>(OnXenoFortifyPlayerDetached, before: [typeof(XenoSystem)]);
 
         SubscribeLocalEvent<XenoFortifyComponent, CMGetArmorEvent>(OnXenoFortifyGetArmor);
         SubscribeLocalEvent<XenoFortifyComponent, BeforeStatusEffectAddedEvent>(OnXenoFortifyBeforeStatusAdded);
@@ -74,10 +78,18 @@ public sealed class XenoFortifySystem : EntitySystem
 
         args.Handled = true;
 
+        _audio.PlayPredicted(xeno.Comp.FortifySound, xeno, xeno);
+
         if (xeno.Comp.Fortified)
             Unfortify(xeno);
         else
             Fortify(xeno);
+    }
+
+    private void OnXenoFortifyPlayerDetached(Entity<XenoFortifyComponent> ent, ref PlayerDetachedEvent args)
+    {
+        if (!TerminatingOrDeleted(ent) && ent.Comp.Fortified)
+            Unfortify(ent);
     }
 
     private void OnXenoFortifyGetArmor(Entity<XenoFortifyComponent> xeno, ref CMGetArmorEvent args)

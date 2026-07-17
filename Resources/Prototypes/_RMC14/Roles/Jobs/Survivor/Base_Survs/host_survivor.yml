@@ -5,6 +5,7 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorHost
   startingGear: RMCGearHostSurvivorBase
+  spawnMenuRoleName: Civilian Survivor (Xenonid Host)
 
 - type: startingGear
   parent: RMCGearSurvivorBaseNoBackpack

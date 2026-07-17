@@ -11,8 +11,6 @@
   name: Lurker
   description: A beefy, fast alien with sharp claws.
   components:
-  - type: GhostRole
-    name: cm-job-name-xeno-lurker
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Lurker/lurker.rsi
   - type: MobState
@@ -20,6 +18,10 @@
     - Alive
     - Critical
     - Dead
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - RMCSynthGrabbable
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -119,6 +121,7 @@
   - type: XenoCripplingStrike
     removeOnHit: true
     preventTackle: true
+    resetMeleeCooldown: true
   - type: XenoTailStab
     tailDamage:
       groups:

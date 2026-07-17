@@ -148,6 +148,16 @@
 
 - type: entity
   parent: RMCPodDoorButtonShip
+  id: RMCPodDoorButtonMorgue
+  name: button
+  description: A basic button locked to medical staff.
+  suffix: Locked, Morgue
+  components:
+  - type: AccessReader
+    access: [ [ "RMCAccessMorgue" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonShip
   id: RMCPodDoorButtonChemistry
   name: button
   description: A basic button locked to chemistry.
@@ -225,6 +235,16 @@
   components:
   - type: AccessReader
     access: [ [ "CMAccessArmory" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonShip
+  id: RMCPodDoorButtonFieldDoctor
+  name: button
+  description: A basic button locked to field doctors.
+  suffix: Locked, Field Doctor
+  components:
+  - type: AccessReader
+    access: [ [ "RMCAccessFieldDoctor" ] ]
 
 # \Shipside Buttons
 
@@ -427,6 +447,16 @@
   components:
   - type: AccessReader
     access: [ [ "CMAccessArmory" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonBigRedShip
+  id: RMCPodDoorButtonBigRedFieldDoctor
+  name: button
+  description: A basic button locked to field doctors.
+  suffix: Locked, Field Doctor
+  components:
+  - type: AccessReader
+    access: [ [ "RMCAccessFieldDoctor" ] ]
 
 # \Shipside Buttons
 

@@ -12,11 +12,15 @@
   - type: RMCTrainingDummy
     removeComponents:
     - type: CanEnterCryostorage
+    - type: CommendationReceiver
     - type: Hunger
     - type: Infectable
+    - type: Marine
+    - type: MarineMapTracked
     - type: MindContainer
     - type: NewPlayerLabel
     - type: Perishable
+    - type: RMCRevivable
     - type: SSDIndicator
     - type: TacticalMapTracked
     - type: Thirst
@@ -26,7 +30,7 @@
   id: RMCGearTrainingDummy
   equipment:
     jumpsuit: JumpsuitMarine
-    shoes: RMCShoesJackboots
+    shoes: CMBootsBlack
 
 - type: entity
   parent: MarkerBase
@@ -41,3 +45,72 @@
   - type: ConditionalSpawner
     prototypes:
     - RMCTrainingDummy
+
+- type: entity
+  parent: CMLockerBase
+  id: RMCLockerTrainingDummy
+  name: training dummy cabinet
+  suffix: South, Empty
+  description: An ultrasafe cabinet containing a training dummy. Only accessible by Chief Medical Officers and Senior Enlisted Advisors.
+  # description: An ultrasafe cabinet containing Professor DUMMY and its tablet. Only accessible by Chief Medical Officers and Senior Listed Advisors.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Corrodible
+    isCorrodible: false
+  - type: Destructible
+    thresholds: [ ]
+  - type: WallMount
+    arc: 360
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: _RMC14/Structures/Wallmounts/surgical.rsi
+  - type: EntityStorage
+    capacity: 1
+    isCollidableWhenOpen: true
+    enteringOffset: 0, -0.6
+    enteringRange: 0.03
+    whitelist:
+      components:
+      - RMCTrainingDummy
+  - type: RMCEntityStorageWhitelist
+    whitelist:
+      components:
+      - RMCTrainingDummy
+  - type: AccessReader
+    access: [["CMAccessCMO"], ["CMAccessSEA"]]
+  - type: RMCMesonsNonviewable
+
+- type: entity
+  parent: RMCLockerTrainingDummy
+  id: RMCLockerTrainingDummyFilled
+  suffix: South, Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCLockerFillTrainingDummy
+
+- type: entity
+  parent: RMCLockerTrainingDummy
+  id: RMCLockerTrainingDummyNorth
+  suffix: North, Empty
+  components:
+  - type: EntityStorage
+    enteringOffset: 0, 0.6
+
+- type: entity
+  parent: RMCLockerTrainingDummyNorth
+  id: RMCLockerTrainingDummyNorthFilled
+  suffix: North, Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCLockerFillTrainingDummy
+
+- type: entityTable
+  id: RMCLockerFillTrainingDummy
+  table: !type:AllSelector
+    children:
+    - id: RMCTrainingDummy
