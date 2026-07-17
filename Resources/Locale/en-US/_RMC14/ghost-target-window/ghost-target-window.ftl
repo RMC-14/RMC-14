@@ -1,0 +1,18 @@
+rmc-ghost-target-window-search-placeholde = Search...
+rmc-ghost-target-window-refresh = Refresh
+rmc-ghost-target-window-tooltip-name = Name: {$name}
+rmc-ghost-target-window-tooltip-job = Job: {$job}
+rmc-ghost-target-window-tooltip-caste = Caste: {$caste}
+rmc-ghost-target-window-tooltip-health = Health: {$health}%
+
+
+# Standard groups
+rmc-ghost-target-window-group-marines = Marines
+rmc-ghost-target-window-group-xenos = Xenomorphs
+rmc-ghost-target-window-group-infected = Infected
+rmc-ghost-target-window-group-survivors = Survivors
+rmc-ghost-target-window-group-escaped = Escaped
+rmc-ghost-target-window-group-others = Others
+rmc-ghost-target-window-group-deads = Deads
+rmc-ghost-target-window-group-warp-points = Warp-points
+rmc-ghost-target-window-group-ghosts = Ghosts
