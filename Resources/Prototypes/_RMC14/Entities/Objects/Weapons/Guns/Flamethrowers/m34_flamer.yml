@@ -70,7 +70,7 @@
       rmc-aslot-underbarrel:
         whitelist:
           tags:
-          - RMCAttachmentExtinguisher
+          - RMCAttachmentUnderbarrelExtinguisher
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-rail: -0.032, 0.092
@@ -238,6 +238,20 @@
         maxVol: 200
         reagents: [ ]
 
+- type: entity
+  parent: RMCTankFlamer
+  id: VehicleFlamerTankLZRN
+  name: LZR-N flame tank
+  description: A fuel tank for the LZR-N flame unit. Handle with care.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 150
+        reagents:
+        - ReagentId: RMCNapalmUTTank
+          Quantity: 150
+
 - type: Tag
   id: RMCTankFlamer
 
@@ -256,10 +270,28 @@
       - RMCFlamerAmmoProvider
       - RMCFlamerTank
       tags:
-      - RMCAttachmentExtinguisher
+      - RMCAttachmentUnderbarrelExtinguisher
   - type: StorageFill
     contents:
     - id: RMCWeaponFlamer
     - id: RMCTankFlamer
       amount: 2
     - id: RMCAttachmentUnderbarrelExtinguisher
+
+- type: entity
+  parent: RMCWeaponFlamer
+  id: RMCWeaponFlamerExt
+  suffix: with extinguisher
+  components:
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentUnderbarrelExtinguisher
+        whitelist:
+          tags:
+          - RMCAttachmentUnderbarrelExtinguisher

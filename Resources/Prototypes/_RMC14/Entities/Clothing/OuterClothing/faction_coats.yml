@@ -1,7 +1,7 @@
 # Bureau
 
 - type: entity
-  parent: [RMCAllowSuitStorageClothingJacketMB, RMCBaseJacket]
+  parent: RMCCoatBureauDeputy
   id: RMCCoatBureauTrenchCoatBrown
   name: brown trench-coat
   description: A worn, brown, old style trench-coat. When a bum sees a cop coming, he don't stick around.
@@ -177,18 +177,18 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/highvis_vest.rsi
 
-# SPP PaP
+# SPP PCG
 
 - type: entity
   parent: RMCCoatBureauDeputy
-  id: RMCCoatPaP
-  name: PaP uniform jacket
-  description: A People's Armed Police service jacket featuring small dispersed para-aramid inserts providing the barest of defensive functionality, and a Personal Light Unit rig.
+  id: RMCCoatPCG
+  name: PCG uniform jacket
+  description: A People's Civil Gendarmes service jacket featuring small dispersed para-aramid inserts providing the barest of defensive functionality, and a Personal Light Unit rig.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/pap.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/pcg.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/pap.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/pcg.rsi
 
 # WeYa pilot
 - type: entity

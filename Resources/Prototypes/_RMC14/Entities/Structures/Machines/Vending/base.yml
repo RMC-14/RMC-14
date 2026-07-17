@@ -25,6 +25,7 @@
         - MachineMask
         layer:
         - MachineLayer
+        - BulletImpassable # TODO Remove this after vendor tipping is added.
   - type: Tag
     tags:
     - Structure
@@ -33,10 +34,25 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/colmartechweapons.rsi
     layers:
-    - state: "off"
-      map: [ "enum.VendingMachineVisualLayers.Base" ]
-    - state: "base"
-      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded", "rmc_flick_animation" ]
+    - map: [ "enum.VendingMachineVisualLayers.Base" ]
+      state: "off"
+    - map: ["enum.PowerDeviceVisualLayers.Powered", "rmc_flick_animation"]
+      state: "base"
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
+    channel: Equipment
+  - type: ActivatableUIRequiresPower
   - type: UserInterface
     interfaces:
       enum.CMAutomatedVendorUI.Key:
@@ -76,20 +92,11 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 500
+        damage: 100
       behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   # - type: XenoCrusherChargable TODO knock over by crusher
-  - type: Fixtures #TODO remove this component(making it use the parent's fixtures) after vendor tipping is added.
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.45,-0.45,0.45,0.45"
-        density: 200
-        mask:
-        - MachineMask
-        layer:
-        - MachineLayer
-        - BulletImpassable

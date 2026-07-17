@@ -104,6 +104,15 @@
     - FactionWeYa
 
 - type: entity
+  parent: CMIDCardPMC
+  id: CMIDCardCommando
+  name: commando holo-badge
+  suffix: WeYa
+  components:
+  - type: Sprite
+    state: commando
+
+- type: entity
   parent: CMIDCardLiaison
   id: CMIDCardPMCExecutive
   name: corporate holo-badge
@@ -223,6 +232,15 @@
     - RMCWeYa
 
 - type: entity
+  parent: RMCIDCardPMC
+  id: RMCIDCardExecutiveBodyguard
+  components:
+  - type: ItemIFF
+    factions:
+    - FactionMarine
+    - FactionWeYa
+
+- type: entity
   parent: CMIDCardLanyard
   id: RMCIDCardBureauObserver
   name: bureau observer ID card
@@ -253,7 +271,7 @@
 - type: entity
   parent: RMCIDCardProvost
   id: RMCIDCardProvostAdvisor
-  name: provost advisor ID card
+  name: Provost Advisor ID card
   components:
   - type: PresetIdCard
     job: CMProvostAdvisor
@@ -261,7 +279,7 @@
 - type: entity
   parent: RMCIDCardProvost
   id: RMCIDCardProvostEnforcer
-  name: provost enforcer ID card
+  name: Provost Enforcer ID card
   components:
   - type: PresetIdCard
     job: CMProvostEnforcer
@@ -269,7 +287,7 @@
 - type: entity
   parent: RMCIDCardProvost
   id: RMCIDCardProvostTeamLeader
-  name: provost team leader ID card
+  name: Provost Team Leader ID card
   components:
   - type: PresetIdCard
     job: CMProvostTeamLeader
@@ -285,7 +303,8 @@
 - type: entity
   parent: RMCIDCardProvost
   id: RMCIDCardProvostDeputyMarshal
-  name: provost deputy marshal ID card
+  name: Provost Deputy Marshal ID card
+  suffix: Admin
   components:
   - type: PresetIdCard
     job: CMProvostDeputyMarshal
@@ -293,7 +312,7 @@
 - type: entity
   parent: RMCIDCardProvost
   id: RMCIDCardProvostInspector
-  name: provost inspector ID card
+  name: Provost Inspector ID card
   components:
   - type: PresetIdCard
     job: CMProvostInspector
@@ -301,7 +320,8 @@
 - type: entity
   parent: RMCIDCardProvost
   id: RMCIDCardProvostMarshal
-  name: provost marshal ID card
+  name: Provost Marshal ID card
+  suffix: Admin
   components:
   - type: PresetIdCard
     job: CMProvostMarshal
@@ -321,7 +341,7 @@
   suffix: Survivor
   components:
   - type: PresetIdCard
-    job: RMCJobSyntheticColony
+    job: RMCSyntheticColony
   - type: ItemIFF
     factions:
     - FactionSurvivor
@@ -362,3 +382,56 @@
   - type: Sprite
     sprite: _RMC14/Objects/CMIDs/aegis.rsi
     state: bloody
+
+
+# CBRN
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagCBRNRifleman
+  name: CBRN Rifleman's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCCBRNRifleman
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagCBRNCombatTech
+  name: CBRN Combat Technician's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCCBRNCombatTech
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagCBRNFTL
+  name: CBRN Fireteam Leader's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCCBRNFireteamLeader
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagCBRNSL
+  name: CBRN Squad Leader's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCCBRNSquadLeader
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagCBRNWS
+  name: CBRN Weapons Specialist's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCCBRNWS
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagCBRNMedic
+  name: CBRN Hospital Corpsman's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCCBRNMedic
+
+

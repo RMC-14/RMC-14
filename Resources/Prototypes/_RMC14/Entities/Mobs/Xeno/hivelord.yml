@@ -11,8 +11,6 @@
   name: Hivelord
   description: A builder of really big hives.
   components:
-  - type: GhostRole
-    name: cm-job-name-xeno-hivelord
   - type: MobState
     allowedStates:
     - Alive
@@ -129,10 +127,12 @@
     buildDelay: 1
     canBuild:
     - WallXenoResinThick
+    - WallXenoResinReflective
     - WallXenoMembraneThick
     - DoorXenoResinThick
     - XenoStickyResin
     - XenoFastResin
+    - XenoResinSpikes
     - HiveAcidPillarXeno
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
@@ -185,6 +185,7 @@
     - DoorXenoResin
     - XenoStickyResin
     - XenoFastResin
+    - XenoResinSpikes
     - XenoWeedsSource
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
@@ -238,12 +239,6 @@
     - ActionXenoDevolve
     - ActionXenoZoom
   - type: DesignerStrain
-    greaterResinSurgePlasmaCost: 250
-    greaterResinSurgeCooldown: 30
-    greaterResinSurgeRange: 7
-    greaterResinSurgeBuildTime: 1
-    greaterResinSurgeAnimationEffect: RMCEffectWallXenoResinThick
-    greaterResinSurgeWallPrototype: WallXenoResinThickSurge
   - type: DesignerCrosshair
     optimizedWallRsi:
       sprite: _RMC14/Structures/designer_nodes.rsi
@@ -284,8 +279,8 @@
     plasmaRegenOnWeeds: 5.5
     plasmaTransferDelay: 0.5
   - type: XenoPheromones
-    pheromonesMultiplier: 3
-    pheroSuffix: strong
+    pheromonesMultiplier: 3.5
+    pheroSuffix: designer
   - type: Tackle
     max: 4
     chance: 0.45

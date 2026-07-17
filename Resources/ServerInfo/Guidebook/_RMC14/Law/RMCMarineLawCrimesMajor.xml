@@ -20,12 +20,30 @@
 
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Unauthorised Deployment
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        \- To deploy into the area of operations without permission of the relevant head of department or [color=#008000][bold]Commander[/bold][/color], whilst still performing assigned duties, such as a doctor performing surgery.\nDeploying without intent to perform assigned duties is [bold]Desertion[/bold].
+        \n- The relevant Head of Department or the [color=#008000][bold]Commander[/bold][/color] where appropriate may retroactively authorize deployment and negate the crime. The [color=#008000][bold]Commander[/bold][/color] may overrule the decision.
+        \n- The relevant Head of Department or the [color=#008000][bold]Commander[/bold][/color] may designate an alternate person to deploy to replace an unauthorized person as soon as possible.
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        [bold]10 Minutes.[/bold]
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
         Disorderly Conduct
       </Box>
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Directly and intentionally disrupting primary operations of the ship. Fighting in the requisitions line, extensively or repeatedly disrupting the briefing.
+        \- Directly and intentionally disrupting primary operations of the warship. Fighting in the requisitions line, extensively or repeatedly disrupting the briefing.
       </Box>
     </ColorBox>
     <ColorBox>
@@ -41,7 +59,7 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Carrying out objectives or being tied to material that describe planned actions that go against the UNMC. Strong proof is required that the individual is working against UNMC.\n[italic]A major charge of Unauthorized use of a Listening Device when such a device is also tied to a foreign government or terror organisation is additionally considered Subterfuge.[/italic]
+        \- Taking action, or being tied to material that describes planned actions that go against the UNMC. Strong proof is required that the individual is working against the UNMC.
       </Box>
     </ColorBox>
     <ColorBox>
@@ -57,7 +75,9 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Failure to perform one’s role to an acceptable standard.\n[italic]For example, a [color=#008000][bold]Commander[/bold][/color] failing to properly organize and ensure their personnel are given orders, failing to follow proper procedure in detriment of one’s duties, or ship crew leaving the ship or their post without authorization from the [color=#008000][bold]Commander[/bold][/color] or their Department Head.[/italic]
+        \- Failure to perform one’s role to an acceptable standard.
+        \n\- A [color=#008000][bold]Commander[/bold][/color] failing to properly organize and ensure their personnel are given orders.
+        \n\- Failing to perform one's duties or follow proper procedure in detriment of one's duties.
       </Box>
     </ColorBox>
     <ColorBox>
@@ -73,7 +93,8 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        To threaten or use physical force against someone with ill intent, but without intent to kill.
+        \- To threaten or use physical force against someone with ill intent, but without intent to kill.
+        \n\- To threaten murder.
       </Box>
     </ColorBox>
     <ColorBox>
@@ -89,40 +110,8 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        To intentionally arrest a person on false charges, on ones own initiative. To apply an improper or abusive NJP.
-      </Box>
-    </ColorBox>
-    <ColorBox>
-      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        [bold]20 Minutes.[/bold]
-      </Box>
-    </ColorBox>
-
-    <ColorBox>
-      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Manslaughter
-      </Box>
-    </ColorBox>
-    <ColorBox>
-      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Killing someone without malicious intent. Manslaughter may be applied if someone dies as a result of a fight where the intent was not to kill.
-        \nThis also includes failing to revive someone without a reasonable attempt, not executed by the execution procedure.
-      </Box>
-    </ColorBox>
-    <ColorBox>
-      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        [bold]20 Minutes, and/or demotion.[/bold]
-      </Box>
-    </ColorBox>
-
-    <ColorBox>
-      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Assault with a deadly weapon
-      </Box>
-    </ColorBox>
-    <ColorBox>
-      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        To threaten or use physical force against someone with ill intent and with a lethal weapon such as a sidearm, blade, or rifle but not attempting to murder them.
+        \- To intentionally arrest a person on false charges, on ones own initiative.
+        \n\- To apply an improper or abusive NJP.
       </Box>
     </ColorBox>
     <ColorBox>
@@ -138,28 +127,12 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Unlawfully detaining a person against their will. Includes, kidnapping, hostage-taking, and confining people in cells without charging them for a crime. It does not apply to Prisoners of War.
+        \- Unlawfully detaining a person against their will, such as Kidnapping, and hostage-taking.
       </Box>
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
         [bold]20 Minutes.[/bold]
-      </Box>
-    </ColorBox>
-
-    <ColorBox>
-      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Cruelty to Animals
-      </Box>
-    </ColorBox>
-    <ColorBox>
-      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Injuring or killing any domestic animal or wild life with malicious intent. Research monkeys used for chemical research, scientific purposes or hostile wildlife are exempt.
-      </Box>
-    </ColorBox>
-    <ColorBox>
-      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        [bold]30 Minutes.[/bold]
       </Box>
     </ColorBox>
 
@@ -170,8 +143,8 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        The exercising of power to a [bold]malicious extent[/bold] by [color=#ff000d][bold]MP[/bold][/color].
-        \n[italic]Examples include beating a downed prisoner, excessive use of harmful or non-lethal force, or other abusive actions that led to the harm of a person in custody.[/italic]\nDetained suspects should not have more force used on them than necessary in order to pacify them.
+        \- The exercising of power to a [bold]malicious extent[/bold] by [color=#ff000d][bold]MP[/bold][/color].
+        \n\- Excessive use of harmful or non-lethal force, or other abusive actions that led to the harm of a person in custody.\n\- Detained suspects should not have more force used on them than necessary in order to pacify them and ensure they do not escape during processing.
       </Box>
     </ColorBox>
     <ColorBox>
@@ -182,19 +155,34 @@
 
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Unauthorised Deployment
+        Manslaughter
       </Box>
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        To deploy into the area of operations without permission of the relevant head of department or [color=#008000][bold]Commander[/bold][/color] where appropriate whilst still performing assigned duties. (I.E A doctor deploying without permission, with the intentions to perform field surgery.) Deploying without intent to perform assigned duties remains desertion.
-        \n- The relevant Head of Department or the [color=#008000][bold]Commander[/bold][/color] where appropriate may retroactively authorize deployment. The [color=#008000][bold]Commander[/bold][/color] may overrule the Head of Department on this.
-        \n- The relevant Head of Department or the [color=#008000][bold]Commander[/bold][/color] may designate an alternate person to deploy in the stead of an unauthorized person, in which case [color=#ff000d][bold]MP[/bold][/color]s should coordinate with the designated person to reduce disruption in the field. The maximum delay for this period is five minutes.
+        \- Killing someone without malicious intent. Manslaughter may be applied if someone dies as a result of a fight where the intent was not to kill.
+        \n\- This also includes failing to revive someone without a reasonable attempt, not executed by the execution procedure.
       </Box>
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        [bold]10 Minutes.[/bold]
+        [bold]20 Minutes, and/or demotion.[/bold]
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Cruelty to Animals
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        \- Injuring or killing any domestic animal or wild life with malicious intent. Research monkeys used for chemical research, scientific purposes or hostile wildlife are exempt.
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        [bold]30 Minutes.[/bold]
       </Box>
     </ColorBox>
 

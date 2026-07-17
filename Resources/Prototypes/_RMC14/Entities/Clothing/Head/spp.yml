@@ -88,6 +88,35 @@
   - type: ItemCamouflage
     camouflageVariations: { }
 
+- type: entity
+  parent: ArmorHelmetSPP
+  id: RMCArmorHelmetSPPSOF
+  name: CCC5-L composite helmet
+  description: A SPP-manufactured combat helmet with a distinctive spherical design. Made from a reinforced polymer composite, it offers ballistic protection while incorporating an integrated HUD, encrypted comms, and a rebreather system. Its limited visor visibility is a tradeoff for enhanced durability.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/SPP/composite_helmet.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/SPP/composite_helmet.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+  - type: CMArmor
+    melee: 25
+    bullet: 35
+    bio: 20
+    explosionArmor: 30
+  - type: FoldableClothing
+    foldedHideLayers:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - Snout
+    unfoldedHideLayers:
+    - Snout
+  - type: HideLayerClothing
+    slots:
+    - Snout
+
 # SPP hats
 - type: entity
   parent: CMHeadCap
@@ -157,13 +186,35 @@
 - type: entity
   parent: CMHeadCapSPPPeaked
   id: CMHeadCapSPPPeakedPolice
-  name: UL3 PaP peaked cap
-  description: Standard issue peaked cap of the People's Armed Police.
+  name: UL3 PCG peaked cap
+  description: Standard issue peaked cap of the People's Civil Gendarmes.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/SPP/peaked_police.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/SPP/peaked_police.rsi
+
+- type: entity
+  parent: CMHeadCapSPP
+  id: RMCHeadCapSPPPolKomWhite
+  name: SPP  UL5 C-1 peaked cap
+  description: SPP headgear issued to high ranking officers in the navy or Marine Infantry corps.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/SPP/kommisar_cap_white.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/SPP/kommisar_cap_white.rsi
+
+- type: entity
+  parent: CMHeadCapSPP
+  id: RMCHeadCapSPPPolBlack
+  name: SPP  UL5 P-1 peaked cap
+  description: SPP headgear issued to political Kommisars of all types. Reminds you of october.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/SPP/kommisar_cap_black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/SPP/kommisar_cap_black.rsi
 
 - type: entity
   parent: CMHeadCapSPP
@@ -201,3 +252,14 @@
       visible: false
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/SPP/ushanka_civ.rsi
+
+- type: entity
+  parent: CMHeadCapSPP
+  id: RMCHeadCapSPPSOF
+  name: SOF beret
+  description: A finely crafted beret worn by members of the SPP Space Operations Forces. It signifies service in the void, from deep-space missions to planetary operations, and is a mark of discipline and camaraderie among its wearers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/SPP/beret_sof.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/SPP/beret_sof.rsi

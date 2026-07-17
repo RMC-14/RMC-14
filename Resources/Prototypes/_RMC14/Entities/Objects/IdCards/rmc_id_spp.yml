@@ -15,6 +15,21 @@
     - FactionSPP
 
 - type: entity
+  parent: CMIDCardBase
+  id: RMCIDSPPCard
+  name: SPP ID Card
+  description: A SPP officer's ID card.
+  components:
+  - type: ItemIFF
+    factions:
+    - FactionSPP
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/spp_id.rsi
+    state: spp
+  - type: Clothing
+    sprite: _RMC14/Objects/CMIDs/spp_id.rsi
+
+- type: entity
   parent: [ RMCIDCardStandardDogtagHidden, RMCIDSPP ]
   id: RMCIDSPPHidden
   categories: [ HideSpawnMenu ]
@@ -33,9 +48,9 @@
 
 - type: entity
   parent: CMIDCardLanyard
-  id: RMCIDCardPaP
-  name: PaP identification holo-badge
-  description: A standard-issue holo-badge for personnel within the SPP's People's Armed Police. It displays the officer's rank and affiliation.
+  id: RMCIDCardPCG
+  name: PCG identification holo-badge
+  description: A standard-issue holo-badge for personnel within the SPP's People's Civil Gendarmes. It displays the officer's rank and affiliation.
   components:
   - type: PresetIdCard
     job: CMSurvivor
