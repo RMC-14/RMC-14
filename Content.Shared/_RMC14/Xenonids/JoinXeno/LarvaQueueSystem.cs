@@ -121,10 +121,10 @@ public sealed class LarvaQueueSystem : EntitySystem
 
     private void OnMindRemoved(Entity<CanBeLarvaQueuedComponent> ent, ref MindRemovedMessage _)
     {
-        if (_net.IsClient || !HasComp<XenoComponent>(ent))
+        if (_net.IsClient || TerminatingOrDeleted(ent) || !HasComp<XenoComponent>(ent))
             return;
 
-        if (TerminatingOrDeleted(ent) || _mobState.IsDead(ent))
+        if (_mobState.IsDead(ent))
             return;
 
         EnsureComp<LarvaQueuedComponent>(ent);
