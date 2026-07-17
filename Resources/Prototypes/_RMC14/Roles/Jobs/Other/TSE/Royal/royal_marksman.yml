@@ -24,11 +24,11 @@
       prefix: rmc-job-prefix-rcm-marksman
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: rmc_marksman
+        sprite: /Textures/_RMC14/Interface/TacMap_Icons/tse.rsi
+        state: rcm_marksman
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_twe
+        sprite: /Textures/_RMC14/Interface/TacMap_Icons/tse.rsi
+        state: background_tse
   hidden: true
 
 - type: entity
@@ -86,5 +86,5 @@
   parent: CMJobIconBase
   id: RMCJobIconRoyalMarinesMarksman
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_marksman
+    sprite: _RMC14/Interface/Hud_Icons/TSE/rcm.rsi
+    state: rcm_marksman

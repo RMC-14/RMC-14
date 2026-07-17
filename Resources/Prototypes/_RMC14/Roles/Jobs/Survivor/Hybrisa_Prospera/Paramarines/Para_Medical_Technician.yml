@@ -32,10 +32,10 @@
         preset: RMCSkillPresetParaMedic
       - type: TacticalMapIcon
         icon:
-          sprite: /Textures/_RMC14/Interface/map_blips.rsi
-          state: rmc_medic
+          sprite: /Textures/_RMC14/Interface/TacMap_Icons/tse.rsi
+          state: rcm_medic
         background:
-          sprite: /Textures/_RMC14/Interface/map_blips.rsi
+          sprite: /Textures/_RMC14/Interface/TacMap_Icons/tse.rsi
           state: background_para
       - type: AssignSquad
         squad: SquadPara
@@ -69,5 +69,5 @@
   parent: CMJobIconBase
   id: RMCJobIconParaMedicalTechnican
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: para_medic
+    sprite: _RMC14/Interface/Hud_Icons/TSE/paramarines.rsi
+    state: rcm_para_medic
