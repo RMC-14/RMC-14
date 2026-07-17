@@ -18,6 +18,21 @@
     - type: NpcFactionMember
       factions:
       - SPP
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - English
+      - SignLanguage
+      - Spanish
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - English
+      - SignLanguage
+      - Spanish
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
     - type: Skills
       skills:
         RMCSkillConstruction: 2
@@ -37,6 +52,7 @@
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
+    - type: QYJWhitelist
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix
@@ -117,5 +133,5 @@
   parent: CMJobIconBase
   id: RMCJobIconSPPCommandoLeader
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: upp_comsl
+    sprite: _RMC14/Interface/job_icons/SPP/standard.rsi
+    state: spp_comsl

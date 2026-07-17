@@ -27,6 +27,15 @@
     - type: NpcFactionMember
       factions:
       - CLF
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      understoodLanguages:
+      - Japanese
+      - English
+      currentLanguage: Japanese
+      defaultLanguage: Japanese
     - type: JobPrefix
       prefix: rmc-job-prefix-clf-engineer
   hidden: true
@@ -54,6 +63,10 @@
     job: RMCCLFEngineer
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobCombatTech
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadCLF
 
@@ -98,5 +111,5 @@
   parent: CMJobIconBase
   id: RMCJobIconCLFEngineer
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/CLF.rsi
     state: clf_engi

@@ -1,6 +1,6 @@
 - type: job
   parent: CMSurvivor
-  id: RMCJobSyntheticColony
+  id: RMCSyntheticColony
   name: rmc-job-name-synth-colony
   description: rmc-job-description-synth-colony
   playTimeTracker: RMCJobSyntheticColony
@@ -19,25 +19,11 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: Skills
-      skills:
-        RMCSkillCqc: 3
-        RMCSkillEngineer: 4
-        RMCSkillConstruction: 3
-        RMCSkillFirearms: 2
-        RMCSkillOverwatch: 1
-        RMCSkillMedical: 3
-        RMCSkillSurgery: 2
-        RMCSkillResearch: 1
-        RMCSkillMeleeWeapons: 2
-        RMCSkillPilot: 2
-        RMCSkillPolice: 2
-        RMCSkillFireman: 3
-        RMCSkillPowerLoader: 2
-        RMCSkillVehicles: 2
-        RMCSkillJtac: 1
-        RMCSkillIntel: 1
-        RMCSkillDomestics: 2
+    - type: Language
+      preset: RMCLanguagePresetSynthColonist
+    - type: LanguageLearning
+      preset: RMCLanguageLearningPresetSynthColonist
+    - type: RMCAllowSuitStorage
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
@@ -66,9 +52,8 @@
         types:
           Blunt: 35
     - type: Synth
-      generation: rmc-species-synth-generation-second
   hidden: true
-  useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
+  useLoadoutOfJob: RMCSyntheticColony # for inheritance
 
 - type: startingGear
   id: RMCGearSyntheticColonistBase
@@ -93,7 +78,7 @@
   name: synthetic colonist spawn point
   components:
   - type: SpawnPoint
-    job_id: RMCJobSyntheticColony
+    job_id: RMCSyntheticColony
   - type: Sprite
     state: syn_spawn
 

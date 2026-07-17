@@ -34,6 +34,12 @@ cm-chatsan-replacement-admins-marine = high command
 cm-chatsan-word-eorg-marine = eorg
 cm-chatsan-replacement-eorg-marine = warcrimes
 
+cm-chatsan-word-xx121-marine = xx121
+cm-chatsan-replacement-xx121-marine = xenonids
+
+cm-chatsan-word-xx-121-marine = xx-121
+cm-chatsan-replacement-xx-121-marine = xenonids
+
 cm-chatsan-word-xenoid = xenoid
 cm-chatsan-replacement-xenoid = xenonid
 
@@ -283,11 +289,11 @@ cm-chatsan-replacement-felinid = feline host
 cm-chatsan-word-felinids = felinids
 cm-chatsan-replacement-felinids = feline hosts
 
-cm-chatsan-word-cat = cat
-cm-chatsan-replacement-cat = feline host
+cm-chatsan-word-vamp = vamp
+cm-chatsan-word-replacement-vamp = vampire lurker
 
-cm-chatsan-word-cats = cats
-cm-chatsan-replacement-cats = feline hosts
+cm-chatsan-word-vamps = vamps
+cm-chatsan-word-replacement-vamps = vampire lurkers
 
 cm-chatsan-word-vulpkanin = vulpkanin
 cm-chatsan-replacement-vulpkanin = canine host
@@ -300,12 +306,6 @@ cm-chatsan-replacement-vulp = canine host
 
 cm-chatsan-word-vulps = vulps
 cm-chatsan-replacement-vulps = canine hosts
-
-cm-chatsan-word-dog = dog
-cm-chatsan-replacement-dog = canine host
-
-cm-chatsan-word-dogs = dogs
-cm-chatsan-replacement-dogs = canine hosts
 
 cm-chatsan-word-avali = avali
 cm-chatsan-replacement-avali = four-eared host
@@ -322,18 +322,6 @@ cm-chatsan-replacement-rodentias = squeaking hosts
 cm-chatsan-word-rodentiae = rodentiae
 cm-chatsan-replacement-rodentiae = squeaking hosts
 
-cm-chatsan-word-rat = rat
-cm-chatsan-replacement-rat = squeaking host
-
-cm-chatsan-word-rats = rats
-cm-chatsan-replacement-rats = squeaking hosts
-
-cm-chatsan-word-mouse = mouse
-cm-chatsan-replacement-mouse = squeaking host
-
-cm-chatsan-word-mice = mice
-cm-chatsan-replacement-mice = squeaking hosts
-
 cm-chatsan-word-feroxi = feroxi
 cm-chatsan-replacement-feroxi = aquatic host
 
@@ -346,8 +334,60 @@ cm-chatsan-replacement-shark = aquatic host
 cm-chatsan-word-sharks = sharks
 cm-chatsan-replacement-sharks = aquatic hosts
 
+cm-chatsan-word-dog = dog
+cm-chatsan-replacement-dog = canine
+
+cm-chatsan-word-corgi = corgi
+cm-chatsan-word-mrwiggles = mr.wiggles
+cm-chatsan-word-mr-wiggles = mr wiggles
+cm-chatsan-word-mister-wiggles = mister wiggles
+cm-chatsan-word-puppy = puppy
+cm-chatsan-replacement-corgi = canine fuzzy
+
+cm-chatsan-word-dogs = dogs
+cm-chatsan-word-corgies = corgies
+cm-chatsan-word-puppies = puppies
+cm-chatsan-replacement-dogs = canines
+
+cm-chatsan-word-cat = cat
+cm-chatsan-word-kitty = kitty
+cm-chatsan-word-kitten = kitten
+cm-chatsan-replacement-cat = feline
+
+cm-chatsan-word-cats = cats
+cm-chatsan-word-kitties = kitties
+cm-chatsan-word-kittens = kittens
+cm-chatsan-replacement-cats = felines
+
 cm-chatsan-word-fish = fish
-cm-chatsan-replacement-fish = aquatic host
+cm-chatsan-word-carp = carp
+cm-chatsan-replacement-fish = aquatic creature
+
+cm-chatsan-word-rat = rat
+cm-chatsan-word-mouse = mouse
+cm-chatsan-replacement-rat = squeaking creature
+
+cm-chatsan-word-rats = rats
+cm-chatsan-word-mice = mice
+cm-chatsan-replacement-rats = squeaking creature
+
+cm-chatsan-word-monkey = monkey
+cm-chatsan-word-monke = monke
+cm-chatsan-word-kobold = kobold
+cm-chatsan-word-farwa = farwa
+cm-chatsan-word-stok = stok
+cm-chatsan-word-neaera = neaera
+cm-chatsan-word-yiren = yiren
+cm-chatsan-replacement-monkey = small host
+
+cm-chatsan-word-monkeys = monkeys
+cm-chatsan-word-monkies = monkies
+cm-chatsan-word-kobolds = kobolds
+cm-chatsan-word-farwas = farwas
+cm-chatsan-word-stoks = stoks
+cm-chatsan-word-neaeras = neaeras
+cm-chatsan-word-yirens = yirens
+cm-chatsan-replacement-monkeys = small hosts
 
 cm-chatsan-word-grenade = grenade
 cm-chatsan-replacement-grenade = boomstick
@@ -689,6 +729,9 @@ cm-chatsan-replacement-generator = light core
 cm-chatsan-word-generators = generators
 cm-chatsan-replacement-generators = light cores
 
+cm-chatsan-word-gens = gens
+cm-chatsan-word-replacement-gens = light cores
+
 cm-chatsan-word-disk = disk
 cm-chatsan-word-disc = disc
 cm-chatsan-replacement-disk = memory wheel
@@ -786,7 +829,11 @@ cm-chatsan-word-batonged = batonged
 cm-chatsan-word-replacement-batonged = daze spitted
 
 cm-chatsan-word-xover = xover
+cm-chatsan-word-xenoover = xenover
 cm-chatsan-word-replacement-xover = over
+
+cm-chatsan-word-m2c = m2c
+cm-chatsan-word-replacement-m2c = heavy mounted spitter
 
 cm-chatsan-word-m13 = m13
 cm-chatsan-word-replacement-m13 = fast spitter
@@ -796,6 +843,9 @@ cm-chatsan-word-replacement-m63 = fast spitter
 
 cm-chatsan-word-p90 = p90
 cm-chatsan-word-replacement-p90 = fast spitter
+
+cm-chatsan-word-pdw90 = pdw90
+cm-chatsan-word-replacement-pdw90 = fast spitter
 
 cm-chatsan-word-m54c = m54c
 cm-chatsan-word-replacement-m54c = spitter
@@ -833,7 +883,7 @@ cm-chatsan-word-replacement-foxtrot = brown hosts
 cm-chatsan-word-thru = thru
 cm-chatsan-replacement-thru = through
 
-cm-chatsan-word-tho = th
+cm-chatsan-word-tho = tho
 cm-chatsan-replacement-tho = though
 
 cm-chatsan-word-t1 = t1
@@ -855,6 +905,8 @@ cm-chatsan-word-evos = evos
 cm-chatsan-replacement-evos = evolutions
 
 cm-chatsan-word-tax = tax
+cm-chatsan-word-taxx = taxx
+cm-chatsan-word-taxxx = taxxx
 cm-chatsan-word-xax = xax
 cm-chatsan-replacement-tax = build
 
@@ -863,6 +915,7 @@ cm-chatsan-word-xaxes = xaxes
 cm-chatsan-replacement-taxes = building
 
 cm-chatsan-word-taxing = taxing
+cm-chatsan-word-taxxing = taxxing
 cm-chatsan-word-xaxing = xaxing
 cm-chatsan-replacement-taxing = building
 
@@ -882,3 +935,39 @@ cm-chatsan-replacement-slopcade = bad cades
 
 cm-chatsan-word-clanker = clanker
 cm-chatsan-replacement-clanker = synthetic
+
+cm-chatsan-word-rwall = rwall
+cm-chatsan-replacement-rwall = reinforced wall
+
+cm-chatsan-word-pyro = pyro
+cm-chatsan-word-replacement-pyro = flamewalker
+
+cm-chatsan-word-pyros = pyros
+cm-chatsan-word-replacement-pyros = flamewalkers
+
+cm-chatsan-word-fender = fender
+cm-chatsan-word-replacement-fender = defender
+
+cm-chatsan-word-fenders = fenders
+cm-chatsan-word-replacement-fenders = defenders
+
+cm-chatsan-word-senti = senti
+cm-chatsan-word-replacement-senti = sentinel
+
+cm-chatsan-word-sentis = sentis
+cm-chatsan-word-replacement-sentis = sentinels
+
+cm-chatsan-word-valk = valk
+cm-chatsan-word-replacement-valk = valkyrie
+
+cm-chatsan-word-valks = valks
+cm-chatsan-word-replacement-valks = valkyries
+
+cm-chatsan-word-lessy = lessy
+cm-chatsan-word-replacement-lessy = lesser
+
+cm-chatsan-word-gamba = gamba
+cm-chatsan-word-replacement-gamba = gamble
+
+cm-chatsan-word-pheros = pheros
+cm-chatsan-word-replacement-pheros = pheromones

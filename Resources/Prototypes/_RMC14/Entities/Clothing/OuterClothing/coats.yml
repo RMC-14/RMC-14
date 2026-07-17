@@ -30,6 +30,10 @@
         type: StorageBoundUserInterface
       enum.UniformAccessoriesUi.Key:
         type: UniformAccessoryBui
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   abstract: True
@@ -313,6 +317,20 @@
   - type: CMArmor
     melee: 10
 
+# Tanker
+- type: entity
+  parent: [RMCBaseJacketButtonable, RMCBaseJacket]
+  id: RMCCoatTanker
+  name: tanker jacket
+  description: A comfortable jacket provided to anyone expected to operate near or inside heavy machinery. Special material within the arms jams up any machinery it gets caught up in, protecting the wearer from injury.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/tanker.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/tanker.rsi
+  - type: CMArmor
+    melee: 10
+
 # Auxiliary Supply Officer
 - type: entity
   parent: RMCBaseJacket
@@ -384,6 +402,29 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/white_alt.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/white_alt.rsi
+
+# Pilot Officer
+- type: entity
+  parent: RMCBaseJacketButtonable
+  id: RMCCoatPilot
+  name: M70B1 light flak jacket
+  description: A light flak jacket used by dropship pilots to protect themselves while flying in the cockpit. This specific flak jacket has been designed for style and comfort over protection, and it shows. Don't get hit by any stray bullets!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/pilot.rsi
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: jacket-icon
+      map: [ "foldedLayer" ]
+      visible: false
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/pilot.rsi
+  - type: CMArmor
+    melee: 10
+  - type: FoldableClothing
+    foldedEquippedPrefix: jacket
+    foldedHeldPrefix: jacket
 
 # Commanding Officer
 - type: entity
@@ -587,6 +628,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/jungle.rsi
   - type: CMArmor
     melee: 10
+    bullet: 10
   - type: Appearance
   - type: ItemCamouflage
     camouflageVariations:
@@ -717,7 +759,7 @@
   - type: Appearance
 
 - type: entity
-  parent: [RMCOuterClothingExternalWebbing, BaseFoldable]
+  parent: [ClothingOuterStorageBase, RMCAllowSuitStorageClothingJacket, BaseFoldable, RMCBaseUniformAccessoryItemOuterClothing]
   id: RMCJacketWindbreaker
   name: green windbreaker
   description: A green windbreaker.
@@ -824,7 +866,7 @@
 # Hybrisa
 
 - type: entity
-  parent: RMCBaseJacket
+  parent: RMCCoatSnow
   id: RMCCoatHoboBlue
   name: dark blue worn parka
   description: An old worn blue Parka, has seen better days...
@@ -835,7 +877,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_blue.rsi
 
 - type: entity
-  parent: RMCBaseJacket
+  parent: RMCCoatSnow
   id: RMCCoatHoboGreen
   name: dark green worn parka
   description: An old worn green Parka, has seen better days...
@@ -846,7 +888,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_green.rsi
 
 - type: entity
-  parent: RMCBaseJacket
+  parent: RMCCoatSnow
   id: RMCCoatHoboBrown
   name: dark brown worn polyester jacket
   description: An old worn brown polyester jacket, has seen better days...
@@ -857,7 +899,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_brown.rsi
 
 - type: entity
-  parent: RMCBaseJacket
+  parent: RMCCoatSnow
   id: RMCCoatHoboDarkBlue
   name: dark blue worn polyester jacket
   description: An old worn blue polyester jacket, has seen better days...
@@ -868,7 +910,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_dark_blue.rsi
 
 - type: entity
-  parent: RMCBaseJacket
+  parent: RMCCoatSnow
   id: RMCCoatHoboRed
   name: dark red worn polyester jacket
   description: An old worn blue polyester jacket, has seen better days...
@@ -935,7 +977,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/ChancesClaim/brown_iconcoat.rsi
 
 - type: entity
-  parent: RMCBaseJacket
+  parent: RMCJacketWindbreaker
   id: RMCWEYARainCoat
   name: WEYA rain coat
   description: A bright, yellow raincoat with the Company logo. It's gaudy, sure, but it keeps the rain off well. Typically distributed to frontier colonies with heavy rain.
@@ -971,11 +1013,30 @@
   name: robust snow suit
   description: A snow suit. It can protect the wearer from extreme cold. This one seems to have been modified somewhat, and can both holster a gun and fit magazines.
   components:
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - CMMagazineRifle
+      - RMCMagazineShotgun
+      - CMMagazineSmg
+      - CMMagazineSniper
+      - CMMagazinePistol
+      - RMCMagazineRevolver
+      - MRE
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+      - RMCSyringeCase
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/normal.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/normal.rsi # TODO cool sprite
   - type: CMHardArmor
+  - type: CMArmor
+    melee: 15
+    bullet: 20
+    bio: 20
+    explosionArmor: 0
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
     walkModifier: 0.897
     sprintModifier: 0.897
@@ -994,7 +1055,7 @@
   parent: RMCCoatSnowSurvivor
   id: RMCCoatSnowSurvivorCMBDeputy
   name: CMB deputy parka
-  description: A snow suit tailored to the CMB's needs. It can protect the wearer from extreme cold. The back is enscribed with the powerful letters of 'DEPUTY' representing justice, authority, and protection in the outer rim. The laws of the Earth stretch beyond the Sol.
+  description: A snow suit tailored to the CMB's needs. It can protect the wearer from extreme cold. The back is enscribed with the powerful letters of 'DEPUTY' representing justice, authority, and protection in the outer rim.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/cmb.rsi

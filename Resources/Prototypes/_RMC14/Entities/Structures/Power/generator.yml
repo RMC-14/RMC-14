@@ -34,6 +34,9 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleCombatTechnician
   - type: InteractionOutline
   - type: Appearance
   - type: Corrodible
@@ -71,6 +74,44 @@
     watts: 100000
     randomizeDamage: true
   - type: IntelPowerObjective
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: _RMC14/Structures/Power/geothermal_generator.rsi
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCFusionReactorLayers.Layer:
+        base:
+          Off: { state: "off" }
+          Weld: { state: "weld" }
+          Wire: { state: "wire" }
+          Wrench: { state: "wrench" }
+          Ten: { state: "on-10" }
+          TwentyFive: { state: "on-25" }
+          Fifty: { state: "on-50" }
+          SeventyFive: { state: "on-75" }
+          Hundred: { state: "on-100" }
+  - type: MarineMapTracked
+  - type: XenoMapTracked
+  - type: TacticalMapTracked
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: generator
+
+- type: entity
+  parent: RMCGeneratorFusionColony
+  id: RMCGeneratorFusionColonyNoMapIcon
+  suffix: No Map Icon
+  components:
+  - type: RemoveComponents
+    components:
+    - type: MarineMapTracked
+    - type: XenoMapTracked
+    - type: TacticalMapTracked
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: generator
 
 - type: entity
   parent: BaseItem
@@ -90,6 +131,9 @@
   id: RMCPortableGeneratorBase # TODO RMC14 - Functionality
   parent: [ BaseMachine, SmallConstructibleMachine, StructureWheeled]
   components:
+    - type: GuideHelp
+      guides:
+      - RMCGuideRoleCombatTechnician
     - type: Transform
       anchored: False
     - type: Physics

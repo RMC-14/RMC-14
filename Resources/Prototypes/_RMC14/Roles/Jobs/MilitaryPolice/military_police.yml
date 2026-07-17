@@ -3,6 +3,7 @@
   id: CMMilitaryPolice
   name: cm-job-name-militarypolice
   description: cm-job-description-militarypolice
+  newToJobInfo: rmc-new-to-job-military-police
   playTimeTracker: CMJobMilitaryPolice
   requirements:
   - !type:DepartmentTimeRequirement
@@ -60,7 +61,7 @@
     outerClothing: CMArmorM2MP
     ears: CMHeadsetMPO
     belt: CMBeltSecurityMPFilled
-    #    pocket1: TODO RMC14 tape recorder
+    pocket1: RMCUniversalRecorder
     pocket2: RMCPouchGeneralLarge
 
 - type: entity

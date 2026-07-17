@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorSecurity
   id: RMCSurvivorHybrisaTSEPAConstable
   name: rmc-job-name-tsepa-constable
@@ -6,7 +6,7 @@
   ranks:
     RMCRankTSEPASergeant:
     - !type:RoleTimeRequirement
-      role: CMJobSurvivorSecurity # TODO allow jobs to support multiple playtime trackers
+      role: CMJobSurvivorSecurity
       time: 630000 # 175 hours
     RMCRankTSEPASeniorConstable:
     - !type:RoleTimeRequirement
@@ -24,7 +24,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      preset: SurvivorMarshal
+      preset: RMCSkillPresetSurvivorMarshal
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetHybrisaConstable
     - type: RMCSurvivor
@@ -45,7 +45,7 @@
     jumpsuit: RMCJumpsuitTSEPA
     belt: RMCBeltHolsterPistolTSEFilledL54
     shoes: RMCShoesLaceup
-    id: RMCIDCardTSEPA
+    id: RMCIDCardTSEPASurvivor
     back: RMCSatchelBlackFillSurvivorConstable
     ears: RMCHeadsetTSEPA
 
@@ -55,12 +55,12 @@
   name: constable colonist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     primaryWeapons: [ ]
     randomOutfits:
     - [ RMCHeadCapTSEPAPeaked, RMCCoatTSEPA, RMCPouchMagazineFilledMP5, WeaponSMGMP5 ]
     - [ RMCHeadCapTSEPAPeaked, RMCCoatTSEPAFormal, RMCPouchMagazineFilledMP5, WeaponSMGMP5 ]
-    - [ RMCHeadCapTSEPAPeaked, RMCArmorVestTSEPA, RMCPouchShotgunFilledConstable, RMCWeaponShotgunHG3712, RMCExplosiveBreachingChargeRubberTSEPA ]
+    - [ RMCHeadCapTSEPAPeaked, RMCArmorVestTSEPA, RMCPouchShotgunFilledPolicing, RMCWeaponShotgunM12, RMCExplosiveBreachingChargeRubberTSEPA ]
     - [ RMCHeadCapTSEPAPeaked, RMCCoatTSEPAHighVis, RMCPouchMagazineFilledMP5, WeaponSMGMP5, RMCHandsCombat ]
-    - [ RMCHeadCapTSEPAPeakedGoldSilver, RMCCoatTSEPAHighVisVest, RMCPouchShotgunFilledConstable, RMCWeaponShotgunHG3712, RMCHandsCombat ]
-    - [ RMCHeadCapTSEPAPeakedGold, RMCCoatTSEPAFormal, RMCPouchShotgunFilledConstable, RMCHandsCombat ]
+    - [ RMCHeadCapTSEPAPeakedGoldSilver, RMCCoatTSEPAHighVisVest, RMCPouchShotgunFilledPolicing, RMCWeaponShotgunM12, RMCHandsCombat ]
+    - [ RMCHeadCapTSEPAPeakedGold, RMCCoatTSEPAFormal, RMCPouchShotgunFilledPolicing, RMCHandsCombat ]

@@ -18,32 +18,25 @@
       - RoyalMarines
       - TSE
     - type: Skills
-      skills:
-        RMCSkillCqc: 3
-        RMCSkillFirearms: 2
-        RMCSkillPolice: 2
-        RMCSkillFireman: 3
-        RMCSkillConstruction: 2
-        RMCSkillEngineer: 2
-        RMCSkillEndurance: 3
-        RMCSkillMedical: 2
-        RMCSkillSurgery: 1
-        RMCSkillMeleeWeapons: 1
-        RMCSkillJtac: 3
-        RMCSkillVehicles: 2
-        RMCSkillLeadership: 3
-        RMCSkillPilot: 1
-        RMCSkillIntel: 2
-        RMCSkillPowerLoader: 1
-        RMCSkillOverwatch: 1
-        RMCSkillSmartGun: 1
-        RMCSkillExecution: 1
+      preset: RMCSkillPresetRoyalMajor
     - type: MarineOrders
     - type: RMCPointing
     - type: CommandAccent
+    - type: InnateCommandSpeech
     - type: ViewIntelObjectives
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-major
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadRoyalMarines
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: rmc_major
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_twe
   hidden: true
 
 - type: startingGear
@@ -59,8 +52,8 @@
     suitstorage: RMCWeaponRifleL24
     id: RMCIDRoyalMarines
     belt: RMCMatebaBeltLuxuriousFilled
-    back: RMCSatchelLightpackFilledRoyalMedic
-    pocket1: RMCPouchToolsSoc # TODO RMC14 I think there are like 3 different PRs adding the full version of this so fix that when one of those is merged
+    back: RMCBackpackRCMSmallPVPMajor
+    pocket1: RMCPouchToolsFilledRCM
     pocket2: RMCPouchMedkitFillRoyal
 
 - type: playTimeTracker
@@ -70,5 +63,6 @@
   parent: CMJobIconBase
   id: RMCJobIconRoyalMajor
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_commander
+    sprite: _RMC14/Interface/job_icons/TSE/RCM/standard.rsi
+    state: rcm_major
+

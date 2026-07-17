@@ -5,12 +5,12 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorEngineer
   startingGear: RMCGearSurvivorCargoTechnician
-  spawnMenuRoleName: Cargo Technician (NV Survivor)
+  spawnMenuRoleName: Cargo Technician (New Varadero Survivor)
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      preset: SurvivorTrucker
+      preset: RMCSkillPresetSurvivorTrucker
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember

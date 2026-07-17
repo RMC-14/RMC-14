@@ -11,7 +11,7 @@
     contents:
     - id: CMMaskGas
       amount: 3
-    - id: CMGasTankOxygen
+    - id: RMCGasTankOxygenFilled
       amount: 3
 
 # /datum/supply_packs/evacuation
@@ -26,7 +26,7 @@
       amount: 2
     - id: RMCHazardVest
       amount: 2
-    - id: CMGasTankOxygen # /obj/item/tank/emergency_oxygen
+    - id: RMCEmergencyOxygenTankFilled
       amount: 5
     - id: CMMaskGas
       amount: 5

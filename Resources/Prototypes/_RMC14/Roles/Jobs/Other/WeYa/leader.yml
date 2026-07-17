@@ -20,6 +20,15 @@
     - type: NpcFactionMember
       factions:
       - WeYa
+    - type: Language
+      spokenLanguages:
+      - English
+      - Japanese
+      understoodLanguages:
+      - English
+      - Japanese
+      currentLanguage: English
+      defaultLanguage: English
     - type: Skills
       skills:
         RMCSkillFirearms: 2
@@ -37,12 +46,19 @@
     - type: MarineOrders
     - type: SquadLeader
       icon:
-        sprite: _RMC14/Interface/cm_job_icons.rsi
+        sprite: _RMC14/Interface/job_icons/We-Ya/pmc.rsi
         state: pmc_ld
     - type: RMCPointing
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-leader
     - type: RMCTrackable
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pmc_ld
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_pmc
   hidden: true
 
 - type: entity
@@ -108,7 +124,7 @@
     - CMStunbaton
     - CMCrowbar # TODO RMC14: tactical prybar
     - RMCRangefinder
-    - RMCMREWeYa
+    - RMCMREWeYaPMC
     - RMCGrenadeBlastM12
     - RMCExplosivePlastic
     - CMMagazineRifleM54CAP
@@ -129,5 +145,5 @@
   parent: CMJobIconBase
   id: RMCJobIconPMCLeader
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/We-Ya/pmc.rsi
     state: pmc_ld

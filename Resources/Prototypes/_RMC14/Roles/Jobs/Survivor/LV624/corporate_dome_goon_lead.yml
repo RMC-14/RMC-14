@@ -3,15 +3,17 @@
   id: CMSurvivorLV624CorporateDomeGoonLead
   name: rmc-job-name-pmc-corporate-goon-leader
   description: cm-job-description-survivor
-  spawnMenuRoleName: We-Ya Goon Lead (Survivor Special)
+  spawnMenuRoleName: We-Ya Goon Lead (LV624 Special Survivor)
   startingGear: RMCGearSurvivorGoonLead
   icon: "RMCJobIconPMCGoonLead"
   hasIcon: true
+  ranks:
+    RMCRankCivilianSeniorOfficer: []
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      preset: SurvivorGoonLead
+      preset: RMCSkillPresetSurvivorGoonLead
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -21,6 +23,13 @@
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: MarineOrders
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: goon_leader
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
   greeting: rmc-job-greeting-corporate-dome-goon-lead
 
 - type: entity
@@ -48,7 +57,7 @@
     head: ArmorHelmetPMCCorporate
     shoes: RMCBootsPMCFilled
     back: RMCSatchelLightpack
-    belt: CMM77BeltFilled # TODO RMC14: PMC re-sprite
+    belt: RMCM77BeltPMCFilled
     suitstorage: RMCWeaponRifleM54CWhite
     pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchFirstAidPMCFill
@@ -68,5 +77,5 @@
   parent: CMJobIconBase
   id: RMCJobIconPMCGoonLead
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/We-Ya/goon.rsi
     state: weya_goon_lead

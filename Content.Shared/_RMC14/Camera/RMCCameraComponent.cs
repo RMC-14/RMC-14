@@ -1,10 +1,11 @@
-﻿using Robust.Shared.GameStates;
+﻿using Content.Shared._RMC14.Dropship.Weapon;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Camera;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedRMCCameraSystem))]
+[Access(typeof(SharedRMCCameraSystem), typeof(SharedDropshipWeaponSystem))]
 public sealed partial class RMCCameraComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
@@ -12,4 +13,7 @@ public sealed partial class RMCCameraComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool Rename = true;
+
+    [DataField, AutoNetworkedField]
+    public string? NameOverride;
 }

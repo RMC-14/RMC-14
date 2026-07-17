@@ -5,6 +5,8 @@ rmc-jelly-3 = Royal jelly of sabotage
 rmc-jelly-4 = Royal jelly of proliferation
 rmc-jelly-5 = Royal jelly of rejuvenation
 
+rmc-jelly-special-1 = Queen Mother Royal jelly of supremacy
+
 # Jelly UI
 rmc-jelly-recipient = Jelly Recipient
 rmc-jelly-recipient-prompt = Who do you want to award a jelly to?
@@ -46,4 +48,5 @@ rmc-hivemanagement-must-overwatch = You must overwatch the xeno you want to de-e
 rmc-hivemanagement-cant-be-devolved = { $name } can't be devolved!
 rmc-hivemanagement-cant-deevolve-larva = You cannot deevolve xenonids to larva.
 rmc-hivemanagement-cant-deevolve-other-hive = You cannot deevolve a member of another hive!
+rmc-hivemanagement-manage-teams = Manage Hive Teams
 

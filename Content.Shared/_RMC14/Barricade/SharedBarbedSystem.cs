@@ -18,6 +18,7 @@ using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Systems;
+using Content.Shared.Examine;
 
 namespace Content.Shared._RMC14.Barricade;
 
@@ -38,12 +39,13 @@ public abstract class SharedBarbedSystem : EntitySystem
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<BarbedComponent, ExaminedEvent>(OnExamined);
+
         SubscribeLocalEvent<BarbedComponent, AttackedEvent>(OnAttacked);
         SubscribeLocalEvent<BarbedComponent, InteractUsingEvent>(OnInteractUsing);
 
         SubscribeLocalEvent<BarbedComponent, DoAfterAttemptEvent<BarbedDoAfterEvent>>(OnDoAfterAttempt);
         SubscribeLocalEvent<BarbedComponent, BarbedDoAfterEvent>(OnDoAfter);
-
 
         SubscribeLocalEvent<BarbedComponent, CutBarbedDoAfterEvent>(WireCutterOnDoAfter);
         SubscribeLocalEvent<BarbedComponent, DoorStateChangedEvent>(OnDoorStateChanged);
@@ -51,6 +53,17 @@ public abstract class SharedBarbedSystem : EntitySystem
         SubscribeLocalEvent<BarbedComponent, CMGetArmorPiercingEvent>(OnGetArmorPiercing);
         SubscribeLocalEvent<BarbedComponent, RMCConstructionUpgradedEvent>(OnConstructionUpgraded);
         SubscribeLocalEvent<BarbedComponent, XenoLeapHitAttempt>(OnXenoLeapHitAttempt, after: new[] { typeof(XenoLeapSystem) });
+    }
+
+    private void OnExamined(Entity<BarbedComponent> ent, ref ExaminedEvent args)
+    {
+        if (!ent.Comp.IsBarbed)
+            return;
+
+        using (args.PushGroup(nameof(SharedBarbedSystem)))
+        {
+            args.PushMarkup(Loc.GetString("rmc-barricade-examine-barbed"));
+        }
     }
 
     private void OnAttacked(Entity<BarbedComponent> barbed, ref AttackedEvent args)
@@ -64,17 +77,17 @@ public abstract class SharedBarbedSystem : EntitySystem
 
     private void OnInteractUsing(Entity<BarbedComponent> ent, ref InteractUsingEvent args)
     {
-        if (_xenoAcid.IsMelted(ent))
-        {
-            var failPopup = Loc.GetString("rmc-construction-melted");
-            _popupSystem.PopupClient(failPopup, ent, args.User, PopupType.SmallCaution);
-
-            args.Handled = true;
-            return;
-        }
-
         if (!ent.Comp.IsBarbed && HasComp<BarbedWireComponent>(args.Used))
         {
+            if (_xenoAcid.IsMelted(ent))
+            {
+                var failPopup = Loc.GetString("rmc-construction-melted");
+                _popupSystem.PopupClient(failPopup, ent, args.User, PopupType.SmallCaution);
+
+                args.Handled = true;
+                return;
+            }
+
             var ev = new BarbedDoAfterEvent();
             var barbDoAfter = new DoAfterArgs(EntityManager, args.User, ent.Comp.WireTime, ev, ent, ent, used: args.Used)
             {
@@ -107,6 +120,15 @@ public abstract class SharedBarbedSystem : EntitySystem
 
         if (!_toolSystem.HasQuality(args.Used, ent.Comp.RemoveQuality, tool))
             return;
+
+        if (_xenoAcid.IsMelted(ent))
+        {
+            var failPopup = Loc.GetString("rmc-construction-melted");
+            _popupSystem.PopupClient(failPopup, ent, args.User, PopupType.SmallCaution);
+
+            args.Handled = true;
+            return;
+        }
 
         args.Handled = true;
         _popupSystem.PopupClient(Loc.GetString("barbed-wire-cutting-action-begin"), ent, args.User);
@@ -179,6 +201,7 @@ public abstract class SharedBarbedSystem : EntitySystem
         if (barbed.Comp.IsBarbed)
         {
             args.Cancelled = true;
+            args.PopupHandled = true;
             _popupSystem.PopupClient(Loc.GetString("barbed-wire-cant-climb"), barbed.Owner, args.User);
         }
     }

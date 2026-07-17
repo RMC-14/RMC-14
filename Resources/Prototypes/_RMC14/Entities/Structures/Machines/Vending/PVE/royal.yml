@@ -1,0 +1,528 @@
+- type: entity
+  parent: ColMarTechBase
+  id: RMCRoyalAssaultEngineerVendor
+  name: We-Ya section engineering equipment rack
+  suffix: PVE, RCM
+  description: An automated rack hooked up to a colossal storage of assault engineer standard-issue equipment.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: AccessReader
+    access:
+    - [ "CMAccessCombatTechPrep" ]
+  - type: CMAutomatedVendor
+    jobs:
+    - CMRoyalMarinesAssaultEngineerPVE
+    pointsType: AssaultEngineer
+    sections:
+    - name: Assault Engineering Set (Mandatory) # TODO RMC royal marines breaching hammer, XM51 is placeholder
+      choices: { CMPrimary: 1 }
+      takeOne: CMAccessories
+      entries:
+      # - id: RMCBreachingHammerD2
+      #   name: Breaching Hammer
+      - id: RMCL49Case
+        name: assault shotgun case
+    - name: Specialist Equipment (Mandatory)
+      takeAll: CMStandard
+      entries:
+      - id: RMCVendorBundleRCMPVEAssaultEngi
+      - id: RMCPVEArmorCaseRoyalPointman
+      - id: CMHandsBlackInsulated
+      - id: RMCBackpackRCMTechnician
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries:
+      - id: RMCBeltRCM
+        recommended: true
+      - id: RMCBeltHolsterPistolRCM
+      - id: RMCBeltUtilityGeneralRCMPVE
+    - name: Armor Webbing
+      choices: { RMCArmorWebbing: 1 } 
+      entries:
+      - id: RMCArmorWebbingShellRCM
+        name: shell armor webbing
+        recommended: true
+      - id: RMCArmorWebbingMagRCM
+        name: magazine armor webbing
+      - id: RMCArmorWebbingDrumRCM
+        name: drum armor webbing
+      - id: RMCArmorWebbingGrenadeRCM
+        name: grenade armor webbing
+      - id: RMCArmorWebbingPouchRCM
+        name: general armor webbing
+    - name: Shotgun Shells
+      entries:
+      - id: RMCBoxShotgunBuckshot
+        points: 20
+      - id: RMCBoxShotgunSlugs
+        points: 20
+      - id: RMCBoxShotgunFlechette
+        points: 20
+      - id: RMCBoxShotgunL49B
+        points: 20
+
+- type: entity
+  parent: ColMarTechBase
+  id: RMCRoyalMedicalAssistantVendor
+  name: We-Ya section medical equipment rack
+  suffix: PVE, RCM
+  description: An automated rack hooked up to a colossal storage of medical assistant standard-issue equipment.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/medical_gear.rsi
+  - type: AccessReader
+    access:
+    - [ "CMAccessMedPrep" ]
+  - type: CMAutomatedVendor
+    jobs:
+    - CMRoyalMarinesMedicPVE
+    sections:
+    - name: Medical Storage Set (Mandatory)
+      takeOne: CMAccessories
+      choices: { CMBelt: 1 }
+      entries: 
+      - id: RMCMedicalL75RCM
+      - id: RMCBeltUtilityGeneralRCMPVE
+    - name: Specialist Equipment (Mandatory)
+      takeAll: CMStandard
+      entries:
+      - id: RMCVendorBundleRCMPVEMedic
+      - id: RMCPVEArmorCaseRoyalLight
+      - id: RMCBackpackRCMMedic
+      - id: CMHandsLatex
+    - name: Pouches
+      choices: { RMCPouch: 2 }
+      entries:
+      - id: RMCPouchReagentCanisterMeraBic
+        name: Pressurized Reagent Canister Pouch\n(Meralyne-Bicaridine)
+        recommended: true
+      - id: RMCPouchReagentCanisterKeloDerm
+        name: Pressurized Reagent Canister Pouch\n(Kelotane-Dermaline)
+        recommended: true
+      - id: RMCPouchReagentCanisterTricordrazine
+        name: Pressurized Reagent Canister Pouch\n(Tricordrazine)
+        recommended: true
+      - id: RMCPouchMedkit
+        recommended: true
+      - id: RMCPouchAutoinjector
+      - id: RMCPouchVialFill
+        name: vial pouch (Full)
+    - name: Armor Webbing
+      choices: { RMCArmorWebbing: 1 } 
+      entries:
+      - id: RMCArmorWebbingMagRCM
+        name: magazine armor webbing
+        recommended: true
+      - id: RMCArmorWebbingDrumRCM
+        name: drum armor webbing
+      - id: RMCArmorWebbingGrenadeRCM
+        name: grenade armor webbing
+      - id: RMCArmorWebbingPouchRCM
+        name: general armor webbing
+    - name: Uniform Webbing
+      choices: { RMCWebbing: 1 } 
+      entries:
+      - id: RMCWebbingRCM
+        name: leg pouches
+        recommended: true
+      - id: RMCWebbingHolsterRCM
+        name: waist holster
+      - id: RMCWebbingDropPouchRCM
+        name: drop pouch
+
+- type: entity
+  parent: ColMarTechBase
+  id: RMCRoyalBombSpecVendor
+  name: We-Ya Section Fire Support Gear Rack # Labeled "OFS" in parity.
+  description: An automated rack hooked up to a colossal storage of bombardment specialist standard-issue equipment.
+  suffix: PVE, RCM
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessSpecPrep" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMRoyalMarinesBombSpecPVE
+    pointsType: Specialist
+    sections:
+    - name: Fire Support Set (Mandatory)
+      takeOne: CMPrimary
+      entries:
+      - id: RMCVendorBundleRCMPVEMGL
+        name: multiple grenade launcher kit
+      - id: RMCVendorBundleRCMPVEMortar
+        name: assault mortar kit
+    - name: Specialist Equipment (Mandatory)
+      takeAll: RMCAccessories 
+      entries:
+      - id: RMCPVEArmorCaseRoyalPointman
+        name: modular armor kit
+    - name: Backpack
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: RMCBackpackRCMMedium
+        recommended: true
+      - id: RMCBackpackRCMSmall
+      - id: RMCBackpackRCMLarge
+    - name: Armor Webbing
+      choices: { RMCArmorWebbing: 1 }
+      entries:
+      - id: RMCArmorWebbingMagRCM
+        name: magazine armor webbing
+        recommended: true
+      - id: RMCArmorWebbingDrumRCM
+        name: drum armor webbing
+      - id: RMCArmorWebbingGrenadeRCM
+        name: grenade armor webbing
+      - id: RMCArmorWebbingPouchRCM
+        name: general armor webbing
+    - name: Uniform Webbing
+      choices: { RMCWebbing: 1 } 
+      entries:
+      - id: RMCWebbingRCM
+        name: leg pouches
+        recommended: true
+      - id: RMCWebbingHolsterRCM
+        name: waist holster
+      - id: RMCWebbingDropPouchRCM
+        name: drop pouch
+    - name: Mortar Shells
+      entries:
+      - id: RMCMortarShellHE
+        points: 15
+      - id: RMCMortarShellIncendiary
+        points: 15
+      - id: RMCMortarShellFlare
+        points: 10
+      #- id: RMCMortarShellFrag # TODO RMC14 more mortar shell types
+      #  points: 10
+      #- id: RMCMortarShellSmoke
+      #  points: 10
+      #- id: RMCMortarShellWhitePhosphorus
+      #  points: 25
+    - name: Grenade Packets # TODO RMC14 20mm grenades (other than HE and incendiary)
+      entries:
+      - id: RMCPacketGrenade20mmHEFilled
+        points: 20
+      - id: RMCPacketGrenade20mmIncendiaryFilled
+        points: 20
+      #- id: RMCPacketGrenade20mmHoloTargetingFilled
+      #  points: 20
+      #- id: RMCPacketGrenade20mmCN20Filled
+      #  points: 20
+
+- type: entity
+  parent: ColMarTechBase
+  id: RMCRoyalScoutSniperVendor
+  name: We-Ya Section Scout-Sniper Gear Rack
+  description: An automated rack hooked up to a colossal storage of scout-sniper standard-issue equipment.
+  suffix: PVE, RCM
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessSpecPrep" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMRoyalMarinesScoutSniperPVE
+    pointsType: Specialist
+    sections:
+    - name: Precision Weapon Set (Mandatory)
+      takeOne: CMPrimary
+      entries:
+      - id: RMCScoutSniperSniperEquipmentCase
+        name: Sniper Equipment Kit
+      - id: RMCScoutSniperMarksmanEquipmentCase
+        name: Marksman Equipment Kit
+    - name: Specialist Equipment (Mandatory)
+      takeAll: RMCAccessories 
+      entries:
+      - id: RMCPVEArmorCaseRoyalLight
+        name: modular armor kit
+    - name: Backpack
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: RMCBackpackRCMMedium
+        recommended: true
+      - id: RMCBackpackRCMSmall
+      - id: RMCBackpackRCMLarge
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries:
+      - id: RMCBeltRCM
+        recommended: true
+      - id: RMCBeltHolsterPistolRCM
+      - id: RMCBeltUtilityGeneralRCMPVE
+    - name: Armor Webbing
+      choices: { RMCArmorWebbing: 1 }
+      entries:
+      - id: RMCArmorWebbingMagRCM
+        name: magazine armor webbing
+        recommended: true
+      - id: RMCArmorWebbingDrumRCM
+        name: drum armor webbing
+      - id: RMCArmorWebbingGrenadeRCM
+        name: grenade armor webbing
+      - id: RMCArmorWebbingPouchRCM
+        name: general armor webbing
+    - name: Uniform Webbing
+      choices: { RMCWebbing: 1 } 
+      entries:
+      - id: RMCWebbingRCM
+        name: leg pouches
+        recommended: true
+      - id: RMCWebbingHolsterRCM
+        name: waist holster
+      - id: RMCWebbingDropPouchRCM
+        name: drop pouch
+
+
+- type: entity
+  parent: ColMarTechBase
+  id: RMCColMarTechSurplusRCMPVE
+  name: We-Ya Section Surplus Uniform Vendor
+  description: An automated rack hooked up to a small storage of Royal Crown Marines uniforms.
+  suffix: PVE, RCM
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/squad_prep.rsi
+  - type: CMAutomatedVendor
+    access:
+    - "CMAccessMarinePrep"
+    hackable: true
+    sections:
+    - name: Surplus Equipment
+      entries:
+      - id: RMCBootsRoyal
+        name: combat boots
+        amount: 15
+      - id: RMCJumpsuitMarineRoyalPVE
+        name: field uniform
+        amount: 15
+      - id: RMCHandsVeteranRoyalMarine
+        name: combat gloves
+        amount: 15
+      - id: RMCHeadRoyalBeret
+        amount: 15
+      - id: RMCHeadRoyalBeanie
+        name: tactical beanie
+        amount: 15
+      - id: RMCHeadRoyalTurban
+        amount: 15
+      - id: RMCHeadsetRoyalMarinePVE
+        name: radio headset
+        amount: 15
+    - name: Armor
+      entries:
+      - id: RMCPVEArmorCaseRoyal
+        name: modular armor kit
+        recommended: true
+        amount: 15
+      - id: RMCArmorWebbingMagRCM
+        name: magazine armor webbing
+        recommended: true
+        amount: 5
+      - id: RMCArmorWebbingDrumRCM
+        name: drum armor webbing
+        amount: 5
+      - id: RMCArmorWebbingGrenadeRCM
+        name: grenade armor webbing
+        amount: 5
+      - id: RMCArmorWebbingPouchRCM
+        name: general armor webbing
+        amount: 5
+    - name: Webbing
+      entries:
+      - id: RMCWebbingRCM
+        name: leg pouches
+        recommended: true
+        amount: 5
+      - id: RMCWebbingHolsterRCM
+        name: waist holster
+        amount: 5
+      - id: RMCWebbingDropPouchRCM
+        name: drop pouch
+        amount: 5
+    - name: Backpacks
+      entries: 
+      - id: RMCBackpackRCMMedium
+        recommended: true
+        amount: 15
+      - id: RMCBackpackRCMSmall
+        amount: 15
+      - id: RMCBackpackRCMLarge
+        amount: 15
+    - name: Belts
+      entries:
+      - id: RMCBeltRCM
+        recommended: true
+        amount: 15
+      - id: RMCBeltHolsterPistolRCM
+        amount: 15
+      - id: RMCBeltUtilityGeneralRCMPVE
+        amount: 5
+    - name: Pouches
+      entries:
+      - id: RMCPouchFirstResponder
+        recommended: true
+        amount: 10
+      - id: RMCPouchFlareL96Filled
+        recommended: true
+        name: flare pouch (Full)
+        amount: 10
+      - id: RMCPouchMagazineLarge
+        amount: 10
+      - id: RMCPouchGeneralLarge
+        amount: 10
+      - id: RMCPouchMagazinePistolLarge
+        amount: 10
+      - id: RMCPouchPistol
+        amount: 10
+      - id: RMCPouchExplosive
+        amount: 10
+      - id: RMCPouchSling
+        amount: 10
+    - name: Mask
+      entries:
+      - id: RMCMaskGasRCM
+        recommended: true
+        amount: 15
+    - name: Miscellaneous
+      entries:
+      - id: RMCGogglesBallisticRCM
+        name: ballistic goggles
+        amount: 10
+      - id: RMCGogglesPrescriptionBallisticRCM
+        name: prescription ballistic goggles
+        amount: 10
+      - id: RMCGogglesTintedBallisticRCM
+        name: tinted ballistic goggles
+        amount: 10
+      - id: RMCHelmetGarbGunOil
+        name: firearm lubricant
+        amount: 15
+      - id: RMCPatchTSEMarines
+        name: RCM patch
+        amount: 15
+      - id: RMCPatchTSE
+        name: TSE patch
+        amount: 15
+      - id: RMCPatchTSEWhiskey
+        name: Whiskey Troop patch
+        amount: 15
+      - id: BedrollFolded
+        amount: 10
+      - id: CMCanteen
+        amount: 10
+
+- type: entity
+  parent: ColMarTechBase
+  id: RMCColMarTechUtilitiesRCMPVE
+  suffix: PVE, RCM
+  name: We-Ya Automated Utilities Section Vendor
+  description: An automated supply rack hooked up to a small storage of various utilities, tools, and medical supplies. Can be accessed by any Royal marine.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/prep.rsi
+  - type: CMAutomatedVendor
+    access:
+    - "CMAccessMarinePrep"
+    hackable: true
+    sections:
+    - name: Food
+      entries:
+      - id: RMCMRETSE
+        name: ORP
+        amount: 5
+      - id: RMCBoxMRETSE
+        name: ORP box
+        amount: 1
+    - name: Medical
+      entries:
+      - id: CMGauze10
+        amount: 10
+      - id: CMOintment10
+        amount: 10
+      - id: CMTraumaKit10
+        amount: 15
+      - id: CMBurnKit10
+        amount: 15
+      #- id: RMCSplints10 # TODO RMC14 implement newmed
+      #  amount: 15
+      - id: CMEmergencyAutoInjector
+        name: emergency autoinjector
+        amount: 15
+      - id: CMBicaridineAutoInjector
+        amount: 15
+      - id: CMKelotaneAutoInjector
+        amount: 15
+      - id: CMTricordrazineAutoInjector
+        amount: 15
+      #- id: RMCTramadolAutoInjector # TODO RMC14 implement newmed
+      #  amount: 15
+    - name: Flare and Light
+      entries:
+      - id: RMCFlashlight
+        amount: 10
+      - id: RMCPackFlareL96
+        amount: 10
+    - name: Sidearms
+      entries:
+      - id: RMCWeaponPistolL14
+        amount: 2
+      - id: RMCMK80RCM
+        amount: 2
+      - id: RMCWeaponRevolverWarwickMkVIIAlt
+        name: L187 service revolver
+        amount: 2
+    - name: Attachments
+      entries:
+      - id: RMCAttachmentTwoPointSling
+        amount: 10
+      - id: RMCAttachmentRailFlashlight
+        amount: 5
+      - id: RMCAttachmentS6ReflexSight
+        amount: 5
+      - id: RMCAttachmentS5RedDotSight
+        amount: 5
+      - id: RMCAttachmentAngledGrip
+        amount: 5
+      - id: RMCAttachmentVerticalGrip
+        amount: 5
+      - id: RMCAttachmentLaserSight
+        amount: 5
+      - id: RMCAttachmentExtendedBarrel
+        amount: 3
+      - id: RMCAttachmentSuppressor
+        amount: 3
+      - id: RMCAttachmentRecoilCompensator
+        amount: 3
+      - id: RMCAttachmentS42xTelescopicMiniscope
+        amount: 1
+      - id: RMCAttachmentBurstFireAssembly
+        amount: 1
+    - name: Miscellaneous
+      entries:
+      - id: CMFireExtinguisherPortable
+        name: Fire Extinguisher (Portable)
+        amount: 2
+      - id: CMRollerBedSpawnFolded
+        amount: 2
+      - id: RMCTacticalPrybar
+        amount: 2
+      - id: RMCScabbardRoyalMacheteFilled
+        name: kukri scabbard (Full)
+        amount: 5
+      - id: CMEntrenchingTool
+        amount: 2
+      - id: RMCBinocularsPVE
+        amount: 2
+      - id: RMCTantoA
+        amount: 25
+      - id: RMCM5CameraGear #RMC14 TODO: TSE Camera Gear
+        amount: 20
+

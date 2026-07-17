@@ -37,6 +37,10 @@ public sealed class DamagePopupSystem : EntitySystem
 
     private void OnInteractHand(Entity<DamagePopupComponent> ent, ref InteractHandEvent args)
     {
+        //RMC14
+        if (args.Handled)
+            return;
+
         if (ent.Comp.AllowTypeChange)
         {
             var next = (DamagePopupType)(((int)ent.Comp.Type + 1) % Enum.GetValues<DamagePopupType>().Length);

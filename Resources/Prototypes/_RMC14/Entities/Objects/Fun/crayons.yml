@@ -1,5 +1,5 @@
 - type: entity
-  parent: CrayonBox
+  parent: RMCBoxCardboard
   id: RMCCrayonBox
   name: box of crayons
   description: A box of every flavor of crayon.
@@ -10,9 +10,14 @@
   - type: Storage
     grid:
     - 0,0,4,0  #6 slots
+    maxItemSize: Tiny
     whitelist:
       tags:
       - Crayon
+  - type: Item
+    sprite: _RMC14/Objects/Misc/paint.rsi
+    size: Small
+    heldPrefix: box
   - type: StorageFill
     contents:
     - id: RMCCrayonRed
@@ -47,6 +52,8 @@
         whitelist:
           tags:
           - CrayonPurple
+  - type: Appearance
+
 #base   #Todo shade system for crayons.
 - type: entity
   parent: Crayon

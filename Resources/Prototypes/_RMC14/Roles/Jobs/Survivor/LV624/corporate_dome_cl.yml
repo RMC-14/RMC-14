@@ -5,13 +5,27 @@
   description: cm-job-description-survivor
   spawnMenuRoleName: Paranoid Corporate Liaison (LV624 Special Survivor)
   startingGear: RMCGearSurvivorLV624CorporateLiaison
+  icon: "CMJobIconExecSpec"
+  ranks:
+    RMCRankWeYaExecutiveSpecialist: []
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      - Russian
+      understoodLanguages:
+      - Japanese
+      - English
+      - Russian
+      currentLanguage: English
+      defaultLanguage: English
     - type: Skills
-      preset: SurvivorWeYaManager
+      preset: RMCSkillPresetSurvivorWeYaManager
     - type: EquipSurvivorPreset
-      preset: RMCGearSurvivorPresetLV624CorporateLiaison
+      preset: RMCSurvivorPresetCorporate
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -21,6 +35,13 @@
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: MarineOrders
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: exec_spec
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
   greeting: rmc-job-greeting-corporate-dome-cl
 
 - type: entity

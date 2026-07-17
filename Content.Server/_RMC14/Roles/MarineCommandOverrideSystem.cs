@@ -6,6 +6,7 @@ using Content.Server.Players.PlayTimeTracking;
 using Content.Shared._RMC14.ARES;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Marines.HyperSleep;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Roles;
@@ -19,9 +20,7 @@ using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
-using Content.Shared.Random.Helpers;
 using Content.Shared.Roles;
-using Content.Shared.Medical.Cryogenics;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -32,7 +31,7 @@ namespace Content.Server._RMC14.Roles;
 
 public sealed partial class MarineCommandOverrideSystem : EntitySystem
 {
-    [Dependency] private readonly ARESSystem _ares = default!;
+    [Dependency] private readonly ARESCoreSystem _aresCore = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
@@ -104,7 +103,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
     /// </remarks>
     private void CheckForSeniorCommandPresence()
     {
-        var ares = _ares.EnsureARES();
+        var ares = _aresCore.EnsureMarineARES();
         var foundAny = false;
 
         var query = EntityQueryEnumerator<MarineComponent, OriginalRoleComponent, MobStateComponent, MindContainerComponent>();
@@ -113,7 +112,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
             if (_rankSystem.HasInvalidRank(uid, PrivateRank)) // the player has an invalid rank. the privates are not ready yet...
                 continue;
 
-            if (HasComp<CryostorageContainedComponent>(uid) || HasComp<InsideCryoPodComponent>(uid))  // the player is in cryostorage or cryopod
+            if (HasComp<CryostorageContainedComponent>(uid) || HasComp<InsideHyperSleepChamberComponent>(uid))  // the player is in cryostorage or hypersleep
                 continue;
 
             if (originalRole.Job == null || !_prototypes.TryIndex(originalRole.Job.Value, out var jobProto))
@@ -152,7 +151,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
     /// </remarks>
     private void CommanderSelection()
     {
-        var ares = _ares.EnsureARES();
+        var ares = _aresCore.EnsureMarineARES();
 
         // In fact, List contains only entities with the maximum (the same among themselves) non-zero authority level (MarineAuthorityLevel)
         List<EntityUid> candidates = [];
@@ -165,7 +164,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
             if (_rankSystem.HasInvalidRank(uid, PrivateRank)) // the player has an invalid rank. the privates are not ready yet...
                 continue;
 
-            if (HasComp<CryostorageContainedComponent>(uid) || HasComp<InsideCryoPodComponent>(uid))  // the player is in cryostorage or cryopod
+            if (HasComp<CryostorageContainedComponent>(uid) || HasComp<InsideHyperSleepChamberComponent>(uid))  // the player is in cryostorage or hypersleep
                 continue;
 
             if (originalRole.Job == null || !_prototypes.TryIndex(originalRole.Job.Value, out var jobProto))

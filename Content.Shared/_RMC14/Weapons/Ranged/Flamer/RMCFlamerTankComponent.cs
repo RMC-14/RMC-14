@@ -1,5 +1,7 @@
-﻿using Content.Shared.Whitelist;
+﻿using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.Flamer;
 
@@ -24,4 +26,7 @@ public sealed partial class RMCFlamerTankComponent : Component
 
     [DataField, AutoNetworkedField]
     public string ExamineIcon = "/Textures/_RMC14/Structures/Storage/reagent_tank.rsi/weldtank.png";
+
+    [DataField, AutoNetworkedField]
+    public List<ProtoId<ReagentPrototype>>? ReagentWhitelist = null;
 }

@@ -20,8 +20,10 @@
     solution: food
   - type: Openable
     sound:
-      collection: pop
+      collection: bottleOpenSounds
     closeable: true
+    closeSound:
+      collection: bottleCloseSounds
   - type: RefillableSolution
     solution: food
   - type: Spillable

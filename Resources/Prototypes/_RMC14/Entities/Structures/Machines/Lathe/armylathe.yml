@@ -22,8 +22,8 @@
     - RMCRecipesArmyLathe
   - type: MaterialStorage
     storage:
-      CMSteel: 1500
-      RMCPlastic: 1000
+      CMSteel: 56250
+      RMCPlastic: 20000
     whitelist:
       components:
       - FloorTile

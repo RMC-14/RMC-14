@@ -9,7 +9,7 @@
   startingGear: RMCGearRoyalTeamlead
   icon: "RMCJobIconRoyalTeamlead"
   joinNotifyCrew: false
-  supervisors: cm-job-supervisors-royal-officer
+  supervisors: cm-job-supervisors-royal-lieutenant
   spawnMenuRoleName: RCM Team Leader
   special:
   - !type:AddComponentSpecial
@@ -19,27 +19,25 @@
       - RoyalMarines
       - TSE
     - type: Skills
-      skills:
-        RMCSkillCqc: 2
-        RMCSkillFirearms: 1
-        RMCSkillPolice: 2
-        RMCSkillFireman: 2
-        RMCSkillConstruction: 1
-        RMCSkillEngineer: 2
-        RMCSkillEndurance: 3
-        RMCSkillMedical: 2
-        RMCSkillMeleeWeapons: 1
-        RMCSkillJtac: 2
-        RMCSkillVehicles: 1
-        RMCSkillLeadership: 1
-        RMCSkillPilot: 1
-        RMCSkillIntel: 1
+      preset: RMCSkillPresetRoyalTeamLeader
     - type: MarineOrders
     - type: RMCPointing
     - type: CommandAccent
     - type: ViewIntelObjectives
+    - type: SquadLeader
+      icon:
+        sprite: _RMC14/Interface/job_icons/TSE/RCM/standard.rsi
+        state: rcm_teamleader
+    - type: RMCTrackable
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-teamlead
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: rmc_teamleader
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_twe
   hidden: true
 
 - type: entity
@@ -70,6 +68,7 @@
       role: CMJobSquadLeader
       time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
+    squad: SquadRoyalMarines
 
 - type: startingGear
   id: RMCGearRoyalTeamlead
@@ -82,9 +81,9 @@
     shoes: RMCBootsRoyalFilled
     suitstorage: RMCWeaponRifleL24
     id: RMCIDRoyalMarinesTeamlead
-    belt: RMCBeltHolsterPistolFilledL54
-    back: RMCSatchelLightpackFilledRoyalTeamlead
-    pocket1: RMCPouchToolsSoc # TODO RMC14 I think there are like 3 different PRs adding the full version of this so fix that when one of those is merged
+    belt: RMCBeltHolsterPistolRCML54
+    back: RMCBackpackRCMSmallPVPTeamlead
+    pocket1: RMCPouchToolsFilledRCM
     pocket2: RMCPouchMedkitFillRoyal
 
 - type: playTimeTracker
@@ -94,5 +93,5 @@
   parent: CMJobIconBase
   id: RMCJobIconRoyalTeamlead
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_teamleader
+    sprite: _RMC14/Interface/job_icons/TSE/RCM/standard.rsi
+    state: rcm_teamleader

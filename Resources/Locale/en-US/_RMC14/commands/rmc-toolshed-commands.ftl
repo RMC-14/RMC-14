@@ -89,9 +89,16 @@ command-description-gridtile = Gets TileRefs for a grid that a specified entity 
 
 command-description-movespeed = Changes the max movement speed for given entities.
 
+command-description-rename = changes the MetaData entityName field.
+
 command-description-stairwell = Sets the teleportation offset for the given Teleporter entities.
 command-description-stairwellprojector = Sets the projection id for the given TeleporterView entities.
 
 command-description-getusername = Gets the username attached to an entity.
 
 command-description-mobstate = Filter entities by their MobState.
+
+command-description-vehiclesupply-addstorage = Adds a vehicle prototype to the nearest vehicle supply lift storage.
+command-description-vehiclesupply-addstoragelift = Adds a vehicle prototype to a specific vehicle supply lift storage.
+command-description-vehicleroundstart-current = Applies the vehicle roundstart thresholds using the current connected player count.
+command-description-vehicleroundstart-test = Applies the vehicle roundstart thresholds using a supplied player count for testing.

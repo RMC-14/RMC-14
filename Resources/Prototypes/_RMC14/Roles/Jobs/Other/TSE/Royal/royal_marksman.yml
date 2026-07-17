@@ -19,20 +19,16 @@
       - RoyalMarines
       - TSE
     - type: Skills
-      skills:
-        RMCSkillCqc: 2
-        RMCSkillFirearms: 2
-        RMCSkillPolice: 2
-        RMCSkillFireman: 2
-        RMCSkillConstruction: 1
-        RMCSkillEngineer: 1
-        RMCSkillEndurance: 3
-        RMCSkillMedical: 2
-        RMCSkillMeleeWeapons: 1
-        RMCSkillJtac: 1
-        RMCSkillVehicles: 1
+      preset: RMCSkillPresetRoyalMarksman
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-marksman
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: rmc_marksman
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_twe
   hidden: true
 
 - type: entity
@@ -58,23 +54,29 @@
     job: CMRoyalMarinesMarksman
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 36000 # 10 Hours
   - type: GhostRoleApplySpecial
+    squad: SquadRoyalMarines
 
 - type: startingGear
   id: RMCGearRoyalMarksman
   equipment:
     head: RMCHeadRoyalHelmet
     ears: RMCHeadsetRoyalMarine
+    eyes: RMCGlassesM4SPRBattleSightRCM
     mask: RMCMaskScarfTan
-    jumpsuit: RMCJumpsuitMarineRoyalMK80
+    jumpsuit: RMCJumpsuitMarineRoyalL189
     outerClothing: RMCArmorRoyalLightFilled
     gloves: RMCHandsVeteranRoyalMarine
     shoes: RMCBootsRoyalFilled
     suitstorage: RMCWeaponRifleL24
     id: RMCIDRoyalMarinesMarksman
-    belt: RMCL24BeltFilled
-    back: RMCSatchelLightpackFilledRoyalMarksman # TODO RMC14 lightweight rmc backpack
-    pocket1: RMCPouchGeneralLargeFilledRoyalCommando
+    belt: RMCBeltRCML24
+    back: RMCBackpackRCMSmallPVPMarksman
+    pocket1: RMCPouchGeneralLargeFilledRCM
     pocket2: RMCPouchMedkitFillRoyal
 
 - type: playTimeTracker
@@ -84,5 +86,5 @@
   parent: CMJobIconBase
   id: RMCJobIconRoyalMarinesMarksman
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_marksman
+    sprite: _RMC14/Interface/job_icons/TSE/RCM/standard.rsi
+    state: rcm_marksman

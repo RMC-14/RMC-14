@@ -15,7 +15,7 @@
     - to: CMRodPlasteel
       completed:
       - !type:SetStackCount
-        amount: 2
+        amount: 1
       steps:
       - material: CMPlasteel
         amount: 1

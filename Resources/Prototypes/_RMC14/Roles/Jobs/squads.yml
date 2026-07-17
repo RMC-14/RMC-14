@@ -4,7 +4,7 @@
   components:
   - type: SquadTeam
     background:
-      sprite: _RMC14/Interface/cm_job_icons.rsi
+      sprite: _RMC14/Interface/job_icons/UNMC/marine.rsi
       state: hudsquad
     maxRoles:
       CMSquadLeader: 1
@@ -108,6 +108,12 @@
     minimapBackground:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: background_echo
+  - type: Tag
+    tags:
+    - RMCSquadEcho
+
+- type: Tag
+  id: RMCSquadEcho
 
 - type: entity
   parent: SquadBase
@@ -141,13 +147,42 @@
 
 - type: entity
   parent: SquadBase
+  id: SquadCBRN
+  name: CBRN
+  components:
+  - type: SquadTeam
+    color: "#4A2070"
+    accessLevels:
+    - CMAccessAlpha
+    - CMAccessBravo
+    - CMAccessCharlie
+    - CMAccessDelta
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+    canSupplyDrop: false
+    group: SOF
+    minimapBackground:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: background_cbrn
+  - type: Tag
+    tags:
+    - RMCSquadCBRN
+
+- type: Tag
+  id: RMCSquadCBRN
+
+- type: entity
+  parent: SquadBase
   id: SquadSPP
   name: SPP
   components:
   - type: SquadTeam
     color: "#9b0612"
     background:
-      sprite: _RMC14/Interface/cm_job_icons.rsi
+      sprite: _RMC14/Interface/job_icons/Misc/other.rsi
       state: empty
     blacklistedSquadArmor:
     - Helmet
@@ -161,8 +196,11 @@
     canSupplyDrop: false
     group: SPP
     leaderIcon:
-      sprite: _RMC14/Interface/cm_job_icons.rsi
-      state: upp_sl_a
+      sprite: _RMC14/Interface/job_icons/SPP/standard.rsi
+      state: spp_sl_a
+
+- type: Tag
+  id: RMCSquadSPP
 
 - type: entity
   parent: SquadBase
@@ -172,7 +210,7 @@
   - type: SquadTeam
     color: "#C0C0C0"
     background:
-      sprite: _RMC14/Interface/cm_job_icons.rsi
+      sprite: _RMC14/Interface/job_icons/Misc/other.rsi
       state: empty
     blacklistedSquadArmor:
     - Helmet
@@ -186,8 +224,14 @@
     canSupplyDrop: false
     group: WeYa
     leaderIcon:
-      sprite: _RMC14/Interface/cm_job_icons.rsi
+      sprite: _RMC14/Interface/job_icons/We-Ya/pmc.rsi
       state: pmc_ld
+  - type: Tag
+    tags:
+    - RMCSquadPMC
+
+- type: Tag
+  id: RMCSquadPMC
 
 - type: entity
   parent: SquadBase
@@ -197,7 +241,7 @@
   - type: SquadTeam
     color: "#4559F5"
     background:
-      sprite: _RMC14/Interface/cm_job_icons.rsi
+      sprite: _RMC14/Interface/job_icons/Misc/other.rsi
       state: empty
     blacklistedSquadArmor:
     - Helmet
@@ -211,7 +255,7 @@
     canSupplyDrop: false
     group: Freelancer
     leaderIcon:
-      sprite: _RMC14/Interface/cm_job_icons.rsi
+      sprite: _RMC14/Interface/job_icons/freelancer.rsi
       state: free_sl
 
 - type: entity
@@ -222,7 +266,7 @@
   - type: SquadTeam
     color: "#3D6F43"
     background:
-      sprite: _RMC14/Interface/cm_job_icons.rsi
+      sprite: _RMC14/Interface/job_icons/Misc/other.rsi
       state: empty
     blacklistedSquadArmor:
     - Helmet
@@ -236,8 +280,76 @@
     canSupplyDrop: false
     group: Royal Marines
     leaderIcon:
-      sprite: _RMC14/Interface/cm_job_icons.rsi
-      state: rmc_teamleader
+      sprite: _RMC14/Interface/job_icons/TSE/RCM/standard.rsi
+      state: rcm_teamleader
+  - type: Tag
+    tags:
+    - RMCSquadRoyalMarines
+
+- type: Tag
+  id: RMCSquadRoyalMarines
+
+- type: entity # Duplicate entry for PVE to get unique icons + orange color palette
+  parent: SquadBase
+  id: SquadRoyalMarinesPVE
+  name: Whiskey Troop
+  components:
+  - type: SquadTeam
+    color: "#AA740F"
+    background:
+      sprite: _RMC14/Interface/job_icons/Misc/other.rsi
+      state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+    radio: TSE
+    minimapBackground:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: background_twe
+    canSupplyDrop: false
+    group: Whiskey Troop
+    leaderIcon:
+      sprite: _RMC14/Interface/job_icons/TSE/RCM/pve.rsi
+      state: rcm_troopleader_pve
+  - type: Tag
+    tags:
+    - RMCSquadRoyalMarinesPVE
+
+- type: Tag
+  id: RMCSquadRoyalMarinesPVE
+
+- type: entity
+  parent: SquadBase
+  id: SquadPara
+  name: Royal Paramarines
+  components:
+  - type: SquadTeam
+    color: "#3D6F43"
+    background:
+      sprite: _RMC14/Interface/job_icons/Misc/other.rsi
+      state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+    radio: TSE
+    minimapBackground:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: background_para
+    canSupplyDrop: false
+    group: Paramarine
+    leaderIcon:
+      sprite: _RMC14/Interface/job_icons/TSE/RCM/paramarine.rsi
+      state: para_teamleader_alt
+  - type: Tag
+    tags:
+      - SquadPara
+
+- type: Tag
+  id: SquadPara
 
 - type: entity
   parent: SquadBase
@@ -247,7 +359,7 @@
   - type: SquadTeam
     color: "#990218"
     background:
-      sprite: _RMC14/Interface/cm_job_icons.rsi
+      sprite: _RMC14/Interface/job_icons/Misc/other.rsi
       state: empty
     blacklistedSquadArmor:
     - Helmet
@@ -261,7 +373,7 @@
     canSupplyDrop: false
     group: Provost
     leaderIcon:
-      sprite: _RMC14/Interface/cm_job_icons.rsi
+      sprite: _RMC14/Interface/job_icons/UNMC/provost.rsi
       state: hudsquad_pvl
 
 - type: entity
@@ -297,7 +409,7 @@
   - type: SquadTeam
     color: "#400000"
     background:
-      sprite: _RMC14/Interface/cm_job_icons.rsi
+      sprite: _RMC14/Interface/job_icons/Misc/other.rsi
       state: empty
     radio: MarineSOF
     accessLevels: []
@@ -306,7 +418,7 @@
       state: background_sof
     group: SOF
     leaderIcon:
-      sprite: _RMC14/Interface/cm_job_icons.rsi
+      sprite: _RMC14/Interface/job_icons/UNMC/marsoc.rsi
       state: hudsquad_soctl
 
 - type: entity
@@ -317,7 +429,7 @@
   - type: SquadTeam
     color: "#3aeb34"
     background:
-      sprite: _RMC14/Interface/cm_job_icons.rsi
+      sprite: _RMC14/Interface/job_icons/Misc/other.rsi
       state: empty
     blacklistedSquadArmor:
     - Helmet
@@ -331,7 +443,7 @@
     canSupplyDrop: false
     group: CLF
     leaderIcon:
-      sprite: _RMC14/Interface/cm_job_icons.rsi
+      sprite: _RMC14/Interface/job_icons/CLF.rsi
       state: clf_sl
 
 - type: entity

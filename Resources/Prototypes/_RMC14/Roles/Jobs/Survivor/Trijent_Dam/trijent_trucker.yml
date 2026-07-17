@@ -9,7 +9,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      preset: SurvivorTrucker
+      preset: RMCSkillPresetSurvivorTrucker
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -28,7 +28,6 @@
     head: RMCHeadCapTruckerBlue
     jumpsuit: RMCJumpsuitLiaisonGreenWorkwear
     outerClothing: RMCCoatBomberGrey
-    # hand: Vehicle Wheels
 
 - type: entity
   parent: CMSpawnPointJobBase

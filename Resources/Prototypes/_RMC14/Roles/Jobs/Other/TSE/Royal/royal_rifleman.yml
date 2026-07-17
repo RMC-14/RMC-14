@@ -1,0 +1,88 @@
+- type: job
+  parent: CMJobBase
+  id: CMRoyalMarinesCommando
+  name: rmc-job-name-rcm-commando
+  description: rmc-ghost-role-information-rcm-description
+  playTimeTracker: RMCJobRoyalCommando
+  ranks:
+    RMCRankTSEMarine: [ ]
+  startingGear: RMCGearRoyalCommando
+  icon: "RMCJobIconRoyalCommando"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-royal-tl
+  spawnMenuRoleName: RCM Rifleman
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - RoyalMarines
+      - TSE
+    - type: Skills
+      preset: RMCSkillPresetRoyalRifleman
+    - type: JobPrefix
+      prefix: rmc-job-prefix-rcm-commando
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: rmc_rifleman
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_twe
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidRoyalMarinesCommando
+  name: royal crown marines ghost role rifleman
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/ballistic.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCRoyalMarinesCommando
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCRoyalMarinesCommando
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-rcm-commando
+    description: rmc-ghost-role-information-rcm-description
+    rules: rmc-ghost-role-information-rcm-rules
+    reregister: false
+    job: CMRoyalMarinesCommando
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadRoyalMarines
+
+- type: startingGear
+  id: RMCGearRoyalCommando
+  equipment:
+    head: RMCHeadRoyalHelmet
+    ears: RMCHeadsetRoyalMarine
+    jumpsuit: RMCJumpsuitMarineRoyalL189
+    outerClothing: RMCArmorRoyalLightFilled
+    gloves: RMCHandsVeteranRoyalMarine
+    shoes: RMCBootsRoyalFilled
+    suitstorage: RMCWeaponRifleL83A3
+    id: RMCIDRoyalMarinesCommando
+    belt: RMCBeltRCML83A3
+    back: RMCBackpackRCMSmallPVPRifleman
+    pocket1: RMCPouchGeneralLargeFilledRCM
+    pocket2: RMCPouchMedkitFillRoyal
+
+- type: playTimeTracker
+  id: RMCJobRoyalCommando
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconRoyalCommando
+  icon:
+    sprite: _RMC14/Interface/job_icons/TSE/RCM/standard.rsi
+    state: rcm_rifleman

@@ -70,7 +70,7 @@
       rmc-aslot-underbarrel:
         whitelist:
           tags:
-          - RMCAttachmentExtinguisher
+          - RMCAttachmentUnderbarrelExtinguisher
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-rail: -0.032, 0.092
@@ -127,6 +127,28 @@
 
 - type: entity
   parent: BaseItem
+  id: RMCBaseTankFlamer
+  abstract: true
+  components:
+  - type: Item
+    size: Normal
+  - type: RMCFlushableSolution
+    solution: rmc_flamer_tank
+    flushTime: 1.5
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: Tag
+    tags:
+    - RMCTankFlamer
+  - type: RefillableSolution
+    solution: rmc_flamer_tank
+  - type: DetailedExaminableSolution
+    solution: rmc_flamer_tank
+
+- type: entity
+  parent: RMCBaseTankFlamer
   id: RMCTankFlamer
   name: M34 incinerator tank
   description: A fuel tank used to store fuel for use in the M34 incinerator unit. Handle with care.
@@ -152,16 +174,11 @@
   - type: RMCSolutionTransferWhitelist
     popup: rmc-solution-transfer-whitelist-failed-not-reagent-tank
     targetWhitelist:
+      components:
+      - RMCFlamerBackpack
       tags:
       - RMCTankReagent
       - RMCBackpackFlamer
-    sourceWhitelist:
-      tags:
-      - RMCTankReagent
-  - type: RefillableSolution
-    solution: rmc_flamer_tank
-  - type: DetailedExaminableSolution
-    solution: rmc_flamer_tank
   - type: NoMixingReagents
   - type: SolutionContainerVisuals
     maxFillLevels: 2
@@ -169,15 +186,6 @@
   - type: Appearance
   - type: SolutionStorageFillable
     solution: rmc_flamer_tank
-  - type: RMCPressurizedSolution
-    solution: rmc_flamer_tank
-  - type: SolutionTransfer
-    canChangeTransferAmount: true
-    canSend: false
-    canReceive: false
-  - type: Tag
-    tags:
-    - RMCTankFlamer
 
 - type: entity
   parent: RMCTankFlamer
@@ -193,6 +201,9 @@
       rmc_flamer_tank:
         maxVol: 100
         reagents: [ ]
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 3750
 
 - type: entity
   parent: RMCTankFlamer
@@ -227,6 +238,20 @@
         maxVol: 200
         reagents: [ ]
 
+- type: entity
+  parent: RMCTankFlamer
+  id: VehicleFlamerTankLZRN
+  name: LZR-N flame tank
+  description: A fuel tank for the LZR-N flame unit. Handle with care.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 150
+        reagents:
+        - ReagentId: RMCNapalmUTTank
+          Quantity: 150
+
 - type: Tag
   id: RMCTankFlamer
 
@@ -245,10 +270,28 @@
       - RMCFlamerAmmoProvider
       - RMCFlamerTank
       tags:
-      - RMCAttachmentExtinguisher
+      - RMCAttachmentUnderbarrelExtinguisher
   - type: StorageFill
     contents:
     - id: RMCWeaponFlamer
     - id: RMCTankFlamer
       amount: 2
     - id: RMCAttachmentUnderbarrelExtinguisher
+
+- type: entity
+  parent: RMCWeaponFlamer
+  id: RMCWeaponFlamerExt
+  suffix: with extinguisher
+  components:
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentUnderbarrelExtinguisher
+        whitelist:
+          tags:
+          - RMCAttachmentUnderbarrelExtinguisher

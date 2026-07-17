@@ -18,12 +18,30 @@
     - type: NpcFactionMember
       factions:
       - Bureau
+    - type: Language
+      spokenLanguages:
+      - English
+      - Spanish
+      - Japanese
+      understoodLanguages:
+      - English
+      - Spanish
+      - Japanese
+      currentLanguage: English
+      defaultLanguage: English
     - type: Skills
       skills:
         RMCSkillVehicles: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-icb
     - type: RMCTrackable
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: icc
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_cmb
   hidden: true
 
 - type: entity
@@ -61,7 +79,7 @@
     eyes: RMCSunglasses
     head: RMCHardhatWhite
     ears: RMCHeadsetDistressICBLiaison # TODO RMC14 tape recorder
-    back: RMCSatchelICBLiaisonFill # TODO RMC14 secure leather satchel
+    back: RMCSatchelICBLiaisonFill
     jumpsuit: CMJumpsuitLiaisonBlack
     outerClothing: RMCHazardVestYellow
     gloves: CMHandsInsulated
@@ -80,5 +98,5 @@
   parent: CMJobIconBase
   id: RMCJobIconICBLiaison
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/CMB.rsi
     state: cmb_icc

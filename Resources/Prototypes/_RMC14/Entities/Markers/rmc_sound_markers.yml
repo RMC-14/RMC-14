@@ -1,14 +1,27 @@
 ﻿# Bases
 
 - type: entity
-  parent: MarkerBase
   id: RMCMarkerSoundBase
   abstract: true
   name: sound marker
+  placement:
+    mode: SnapgridCenter
   components:
+  - type: Transform
+    anchored: true
   - type: Sprite
     sprite: _RMC14/Markers/landmarks.rsi
-    state: sound
+    layers:
+    - state: sound
+      map: ["enum.RMCGhostVisibleOnlyVisualLayers.Base"]
+  - type: RMCVisibleToGhostsOnly
+  - type: Appearance
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Tag
+    tags:
+    - ForceFixRotations
+    - HideContextMenu
 
 - type: entity
   parent: RMCMarkerSoundBase

@@ -3,15 +3,17 @@
   id: CMSurvivorLV624CorporateDomeGoonMedic
   name: rmc-job-name-pmc-corporate-goon-medic
   description: cm-job-description-survivor
-  spawnMenuRoleName: We-Ya Goon Medic (Survivor Special)
+  spawnMenuRoleName: We-Ya Goon Medic (LV624 Special Survivor)
   startingGear: RMCGearSurvivorGoon
   icon: "RMCJobIconPMCGoonMedic"
   hasIcon: true
+  ranks:
+    RMCRankCivilianOfficer: []
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      preset: SurvivorGoonMedic
+      preset: RMCSkillPresetSurvivorGoonMedic
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -20,6 +22,13 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: goon_med
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
   greeting: rmc-job-greeting-corporate-dome-goon-medic
 
 - type: entity
@@ -45,5 +54,5 @@
   parent: CMJobIconBase
   id: RMCJobIconPMCGoonMedic
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/We-Ya/goon.rsi
     state: weya_goon_medic

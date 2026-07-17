@@ -1,5 +1,6 @@
 using Content.Shared.Damage;
 using Content.Shared.StatusEffect;
+using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -25,4 +26,7 @@ public sealed partial class StunHostilesOnStepComponent : Component
 
     [DataField, AutoNetworkedField]
     public ProtoId<StatusEffectPrototype> DisableStatus = "KnockedDown";
+
+    [DataField, AutoNetworkedField]
+    public EntityWhitelist? Whitelist;
 }

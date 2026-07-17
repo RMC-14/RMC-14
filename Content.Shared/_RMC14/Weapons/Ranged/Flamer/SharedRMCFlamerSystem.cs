@@ -1,9 +1,12 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Vehicle;
+using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Fluids;
 using Content.Shared._RMC14.Line;
 using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.OnCollide;
 using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
@@ -24,6 +27,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -37,6 +41,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly SharedOnCollideSystem _onCollide = default!;
     [Dependency] private readonly LineSystem _line = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -48,6 +53,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCReagentSystem _reagent = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
 
     public override void Initialize()
     {
@@ -75,6 +81,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
 
         SubscribeLocalEvent<RMCCanUseBroilerComponent, UniqueActionEvent>(OnBroilerUniqueAction);
         SubscribeLocalEvent<RMCCanUseBroilerComponent, ExaminedEvent>(OnBroilerUniqueActionExamine, before: [typeof(SharedGunSystem)]);
+        SubscribeLocalEvent<RMCFlamerChainComponent, ComponentShutdown>(OnFlamerChainShutdown);
     }
 
     private void OnMapInit(Entity<RMCFlamerAmmoProviderComponent> ent, ref MapInitEvent args)
@@ -116,7 +123,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
     private void OnAttemptShoot(Entity<RMCFlamerAmmoProviderComponent> ent, ref AttemptShootEvent args)
     {
         if (args.ToCoordinates is not { } toCoordinates ||
-            CanShootFlamer(ent, args.FromCoordinates, toCoordinates, out _, out _, out _, out _))
+            CanShootFlamer(ent, args.FromCoordinates, toCoordinates, out _, out var solution, out _, out _))
         {
             return;
         }
@@ -131,11 +138,20 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         ent.Comp.CantShootPopupLast = time;
         Dirty(ent);
 
+        if (solution is not { } sol || sol.Comp.Solution.Volume < ent.Comp.CostPer)
+        {
+            args.Message = Loc.GetString("rmc-flamer-empty");
+            return;
+        }
+
         args.Message = Loc.GetString("rmc-flamer-too-close");
     }
 
     private void OnFlamerTankBeforeRangedInteract(Entity<RMCFlamerTankComponent> tank, ref BeforeRangedInteractEvent args)
     {
+        if (!args.CanReach)
+            return;
+
         if (!HasComp<RMCFlamerAmmoProviderComponent>(tank))
         {
             RefillTank(tank, ref args);
@@ -238,6 +254,13 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
 
     private void OnIgniterToggle(Entity<RMCIgniterComponent> ent, ref IsHotEvent args)
     {
+        if (TryComp<AttachableHolderComponent>(ent, out var holder) &&
+            holder.SupercedingAttachable != null)
+        {
+            args.IsHot = false;
+            return;
+        }
+
         args.IsHot = ent.Comp.Enabled;
     }
 
@@ -299,8 +322,8 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         if (reagent.FireSpread && cost > 2)
             cost = (int)Math.Ceiling(cost / 3.0f);
 
-        solution.Comp.Solution.RemoveSolution(flamer.Comp.CostPer * cost);
-        _solution.UpdateChemicals(solution);
+        solution.Value.Comp.Solution.RemoveSolution(flamer.Comp.CostPer * cost);
+        _solution.UpdateChemicals(solution.Value);
 
         if (_net.IsClient)
             return;
@@ -312,8 +335,28 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         chainComp.Reagent = reagent.ID;
         chainComp.MaxIntensity = tank.Value.Comp.MaxIntensity;
         chainComp.MaxDuration = tank.Value.Comp.MaxDuration;
+        chainComp.FuelPressure = (int)flamer.Comp.CostPer;
 
         Dirty(chain, chainComp);
+    }
+
+    public bool TryGetPreviewTiles(
+        Entity<RMCFlamerAmmoProviderComponent> flamer,
+        EntityCoordinates fromCoordinates,
+        EntityCoordinates toCoordinates,
+        [NotNullWhen(true)] out List<LineTile>? tiles)
+    {
+        return CanShootFlamer(flamer, fromCoordinates, toCoordinates, out tiles, out _, out _, out _);
+    }
+
+    public bool TryGetFuelColor(Entity<RMCFlamerAmmoProviderComponent> flamer, out Color color)
+    {
+        color = default;
+        if (!TryGetTankSolution(flamer, out var solutionEnt, out _))
+            return false;
+
+        color = solutionEnt.Value.Comp.Solution.GetColor(_prototypes);
+        return true;
     }
 
     private bool CanShootFlamer(
@@ -321,18 +364,17 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         EntityCoordinates fromCoordinates,
         EntityCoordinates toCoordinates,
         [NotNullWhen(true)] out List<LineTile>? tiles,
-        out Entity<SolutionComponent> solution,
+        [NotNullWhen(true)] out Entity<SolutionComponent>? solution,
         [NotNullWhen(true)] out ReagentPrototype? reagent,
         [NotNullWhen(true)] out Entity<RMCFlamerTankComponent>? tank)
     {
         tiles = null;
-        solution = default;
         reagent = null;
-        if (!TryGetTankSolution(flamer, out var solutionEnt, out tank))
+        if (!TryGetTankSolution(flamer, out solution, out tank))
             return false;
 
-        var volume = solutionEnt.Value.Comp.Solution.Volume;
-        if (volume <= flamer.Comp.CostPer)
+        var volume = solution.Value.Comp.Solution.Volume;
+        if (volume < flamer.Comp.CostPer)
             return false;
 
         if (!fromCoordinates.TryDelta(EntityManager, _transform, toCoordinates, out var delta))
@@ -346,7 +388,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         // to prevent hitting yourself
         fromCoordinates = fromCoordinates.Offset(normalized * 0.23f);
 
-        if (!solutionEnt.Value.Comp.Solution.TryFirstOrNull(out var firstReagent))
+        if (!solution.Value.Comp.Solution.TryFirstOrNull(out var firstReagent))
             return false;
 
         reagent = _reagent.Index(firstReagent.Value.Reagent.Prototype);
@@ -363,7 +405,6 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
             return false;
         }
 
-        solution = solutionEnt.Value;
         return true;
     }
 
@@ -376,7 +417,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         if (user == null)
             return;
 
-        _rmcSpray.Spray(spray, user.Value, _transform.ToMapCoordinates(toCoordinates));
+        _rmcSpray.Spray(spray, user.Value, _transform.ToMapCoordinates(toCoordinates), spray.Comp.HitUser);
     }
 
     /// <summary>
@@ -401,6 +442,23 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
                  TryComp(tankId, out tankComp))
         {
             tankEnt = (tankId.Value, tankComp);
+
+            if (TryComp(flamer, out VehicleFlamerTankSlotsComponent? tankSlots) &&
+                _solution.TryGetSolution(tankEnt.Value.Owner, tankEnt.Value.Comp.SolutionId, out var primarySol, out _) &&
+                primarySol.Value.Comp.Solution.Volume < flamer.Comp.CostPer)
+            {
+                for (var i = 1; i < tankSlots.MaxTanks; i++)
+                {
+                    var extraSlotId = $"{flamer.Comp.ContainerId}_{i + 1}";
+                    if (!_container.TryGetContainer(flamer, extraSlotId, out var extraContainer) ||
+                        !extraContainer.ContainedEntities.TryFirstOrNull(out var extraTankId) ||
+                        !TryComp(extraTankId, out RMCFlamerTankComponent? extraTankComp))
+                        continue;
+
+                    tankEnt = (extraTankId.Value, extraTankComp);
+                    break;
+                }
+            }
         }
         else if (!display && HasComp<RMCCanUseBroilerComponent>(flamer))
         {
@@ -439,9 +497,9 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         return _solution.TryGetSolution(tankValue.Owner, tankValue.Comp.SolutionId, out solutionEnt, out _);
     }
 
-    private void Transfer(EntityUid source,
+    public void Transfer(EntityUid source,
         Entity<SolutionComponent> sourceSolutionEnt,
-        EntityUid target,
+        Entity<RMCFlamerTankComponent> target,
         Entity<SolutionComponent> targetSolutionEnt,
         EntityUid user)
     {
@@ -449,6 +507,11 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         var targetSolution = sourceSolutionEnt.Comp.Solution;
         foreach (var content in targetSolution.Contents)
         {
+            if (target.Comp.ReagentWhitelist is { } whitelist && !whitelist.Contains(content.Reagent.Prototype))
+            {
+                _popup.PopupClient(Loc.GetString("rmc-flamer-tank-not-whitelisted", ("tank", target)), source, user);
+                return;
+            }
             if (_reagent.TryIndex(content.Reagent.Prototype, out var reagent) &&
                 (reagent.Intensity <= 0 || reagent.Duration <= 0 || reagent.Radius <= 0))
             {
@@ -558,6 +621,11 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         args.PushMarkup(Loc.GetString(ent.Comp.ExamineText), 1);
     }
 
+    private void OnFlamerChainShutdown(Entity<RMCFlamerChainComponent> ent, ref ComponentShutdown args)
+    {
+        _onCollide.CleanupChain(ent.Comp.Chain);
+    }
+
     public override void Update(float frameTime)
     {
         if (_net.IsClient)
@@ -572,6 +640,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
                 QueueDel(uid);
                 continue;
             }
+            comp.Chain ??= _onCollide.SpawnChain();
 
             foreach (var tile in comp.Tiles)
             {
@@ -579,6 +648,9 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
                 {
                     comp.Tiles.Remove(tile);
                     var fire = Spawn(comp.Spawn, tile.Coordinates);
+
+                    EnsureComp<DamageOnCollideComponent>(fire, out var collide);
+                    _onCollide.SetChain((fire, collide), comp.Chain.Value);
 
                     // check for any fires on the same tile other than the one we just spawned, and delete them
                     if (_rmcMap.HasAnchoredEntityEnumerator<TileFireComponent>(_transform.ToCoordinates(fire, tile.Coordinates), out var oldTileFire)
@@ -590,7 +662,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
                     if (_reagent.TryIndex(comp.Reagent, out var reagent))
                     {
                         var intensity = Math.Min(comp.MaxIntensity, reagent.Intensity);
-                        var duration = Math.Min(comp.MaxDuration, reagent.Duration);
+                        var duration = Math.Min(comp.MaxDuration, reagent.Duration + (int)(comp.FuelPressure * reagent.DurationMod));
                         _rmcFlammable.SetIntensityDuration(fire, intensity, duration);
                     }
 

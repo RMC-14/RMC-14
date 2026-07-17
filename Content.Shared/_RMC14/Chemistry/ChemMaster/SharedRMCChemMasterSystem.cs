@@ -1,5 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Shared._RMC14.ARES;
+using Content.Shared._RMC14.ARES.Logs;
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Chemistry.SmartFridge;
 using Content.Shared._RMC14.IconLabel;
 using Content.Shared._RMC14.Storage;
@@ -23,6 +26,7 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Chemistry.ChemMaster;
 
@@ -32,6 +36,7 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly ARESCoreSystem _core = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
@@ -39,6 +44,7 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
     [Dependency] private readonly LabelSystem _label = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly RMCReagentSystem _reagent = default!;
     [Dependency] private readonly SharedRMCIconLabelSystem _rmcIconLabel = default!;
     [Dependency] private readonly SharedRMCSmartFridgeSystem _rmcSmartFridge = default!;
     [Dependency] private readonly RMCStorageSystem _rmcStorage = default!;
@@ -48,6 +54,7 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
 
     private readonly List<EntityUid> _toFill = new();
 
+    private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabMedicalLogs";
     public override void Initialize()
     {
         SubscribeLocalEvent<RMCChemMasterComponent, InteractUsingEvent>(OnInteractUsing);
@@ -72,6 +79,9 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
                 subs.Event<RMCChemMasterSetPillAmountMsg>(OnSetPillAmountMsg);
                 subs.Event<RMCChemMasterSetPillTypeMsg>(OnSetPillTypeMsg);
                 subs.Event<RMCChemMasterCreatePillsMsg>(OnCreatePillsMsg);
+                subs.Event<RMCChemMasterPillBottleSelectAllMsg>(OnPillBottleSelectAllMsg);
+                subs.Event<RMCChemMasterAutoSelectToggleMsg>(OnAutoSelectToggleMsg);
+                subs.Event<RMCChemMasterApplyPresetMsg>(OnApplyPresetMsg);
             });
     }
 
@@ -128,6 +138,17 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
 
     protected virtual void OnEntInsertedIntoContainer(Entity<RMCChemMasterComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
+        if (args.Container.ID == ent.Comp.PillBottleContainer)
+        {
+            if (ent.Comp.AutoSelectPillBottles)
+            {
+                ent.Comp.SelectedBottles.Add(args.Entity);
+            }
+
+            Dirty(ent);
+            return;
+        }
+
         if (args.Container.ID != ent.Comp.BufferSolutionId)
             return;
 
@@ -136,6 +157,13 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
 
     protected virtual void OnEntRemovedFromContainer(Entity<RMCChemMasterComponent> ent, ref EntRemovedFromContainerMessage args)
     {
+        if (args.Container.ID == ent.Comp.PillBottleContainer)
+        {
+            ent.Comp.SelectedBottles.Remove(args.Entity);
+            Dirty(ent);
+            return;
+        }
+
         if (args.Container.ID != ent.Comp.BufferSolutionId)
             return;
 
@@ -413,6 +441,10 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
 
         var originalSolution = string.Join(", ",
             buffer.Value.Comp.Solution.Contents.Select(c => $"{c.Quantity}u {c.Reagent.Prototype}"));
+
+        var originalSolutionNamed = string.Join(", ",
+            buffer.Value.Comp.Solution.Contents.Select(c => $"{c.Quantity}u {_reagent.Index(c.Reagent.Prototype).LocalizedName}"));
+
         var coords = Transform(ent).Coordinates;
 
         var reagentsPerPill = buffer.Value.Comp.Solution.Contents
@@ -444,7 +476,11 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
                     foreach (var (reagentProto, amount) in reagentsPerPill)
                     {
                         var removed = buffer.Value.Comp.Solution.RemoveReagent(reagentProto, amount);
-                        _solution.TryAddReagent(pillSolution.Value, reagentProto, removed);
+                        _solution.TryAddReagent(pillSolution.Value, reagentProto, removed, out var accepted);
+                        removed -= accepted;
+
+                        if (removed > FixedPoint2.Zero)
+                            _solution.TryAddReagent(buffer.Value, reagentProto, removed);
                     }
 
                     _adminLog.Add(LogType.Action,
@@ -462,7 +498,86 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
             Pill bottle IDs: {string.Join(", ", ent.Comp.SelectedBottles):bottleIds}
             """);
 
+        _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} created {ent.Comp.PillAmount} {(double)perPill}u pills with a solution of {Loc.GetString(originalSolutionNamed)}.");
         Dirty(ent);
+    }
+
+    private void OnPillBottleSelectAllMsg(Entity<RMCChemMasterComponent> ent, ref RMCChemMasterPillBottleSelectAllMsg args)
+    {
+        if (!_container.TryGetContainer(ent, ent.Comp.PillBottleContainer, out var container))
+            return;
+
+        if (args.SelectAll)
+        {
+            ent.Comp.SelectedBottles.UnionWith(container.ContainedEntities);
+        }
+        else
+        {
+            ent.Comp.SelectedBottles.Clear();
+        }
+
+        Dirty(ent);
+        RefreshUIs(ent);
+    }
+
+    private void OnAutoSelectToggleMsg(Entity<RMCChemMasterComponent> ent, ref RMCChemMasterAutoSelectToggleMsg args)
+    {
+        ent.Comp.AutoSelectPillBottles = !ent.Comp.AutoSelectPillBottles;
+        Dirty(ent);
+        RefreshUIs(ent);
+    }
+
+    private void OnApplyPresetMsg(Entity<RMCChemMasterComponent> ent, ref RMCChemMasterApplyPresetMsg args)
+    {
+        string fullLabel;
+        string iconLabel;
+
+        if (args.UsePresetNameAsLabel)
+        {
+            fullLabel = args.PresetName;
+            iconLabel = !string.IsNullOrEmpty(args.BottleLabel)
+                ? args.BottleLabel
+                : (args.PresetName.Length > ent.Comp.MaxLabelLength
+                    ? args.PresetName[..ent.Comp.MaxLabelLength]
+                    : args.PresetName);
+        }
+        else
+        {
+            fullLabel = args.BottleLabel;
+            iconLabel = args.BottleLabel;
+        }
+
+        if (iconLabel.Length > ent.Comp.MaxLabelLength)
+            iconLabel = iconLabel[..ent.Comp.MaxLabelLength];
+
+        foreach (var bottle in ent.Comp.SelectedBottles)
+        {
+            if (!_container.TryGetContainingContainer((bottle, null), out var container) ||
+                container.Owner != ent.Owner)
+            {
+                continue;
+            }
+
+            if (!string.IsNullOrWhiteSpace(fullLabel))
+            {
+                _label.Label(bottle, fullLabel);
+            }
+
+            if (!string.IsNullOrWhiteSpace(iconLabel))
+            {
+                _rmcIconLabel.Label(bottle, "rmc-custom-container-label-text", ("customLabel", iconLabel));
+            }
+
+            _appearance.SetData(bottle, RMCPillBottleVisuals.Color, args.BottleColor);
+        }
+
+        if (args.PillType > 0 && args.PillType <= ent.Comp.PillTypes)
+        {
+            ent.Comp.SelectedType = args.PillType;
+        }
+
+        Dirty(ent);
+        RefreshUIs(ent);
     }
 
     private void OnPillBottleBoxTransferDoAfter(Entity<RMCChemMasterComponent> ent, ref RMCChemMasterPillBottleTransferDoAfterEvent args)
