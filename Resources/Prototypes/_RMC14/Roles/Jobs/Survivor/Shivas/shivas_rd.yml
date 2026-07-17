@@ -1,0 +1,71 @@
+﻿- type: job
+  parent: CMSurvivor
+  id: RMCSurvivorShivasResearchDirector
+  name: rmc-job-name-survivor-shivas-rd
+  description: cm-job-description-commanding-officer
+  playTimeTracker: RMCJobSurvivorCO
+  ranks:
+    RMCRankCivilianRegentsProfessor: []
+  startingGear: RMCGearSurvivorShivasResearchDirector
+  accessGroups:
+  - ColonistMedical
+  hasIcon: true
+  icon: "RMCJobIconWeYaRD"
+  spawnMenuRoleName: Research Director (Shiva's Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: CommandAccent
+    - type: InnateCommandSpeech
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillLeadership: 1
+        RMCSkillVehicles: 1
+        RMCSkillFirearms: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+        RMCSkillResearch: 2
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetScientist
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: researcher
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_pmc
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+      - WeYa
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+  useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorBase
+  id: RMCGearSurvivorShivasResearchDirector
+  equipment:
+    eyes: RMCGlassesReagentHUDGlasses
+    gloves: CMHandsLatex
+    jumpsuit: RMCJumpsuitLiaisonExpensiveSuitJacket
+    outerClothing: RMCCoatSnowSurvivorPurple
+    shoes: RMCShoesSnow
+    back: RMCSatchelVirologyFill
+    id: RMCIDCardColonistScientist
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchMedkitPMCFilled
+    mask: RMCMaskRebreather
+    belt: RMCBeltMedicalDefibAnalyzerFilled
+    head: RMCHeadUshanka
+    ears: RMCHeadsetDistressWeYa
+  storage:
+    back:
+    - RMCGrenadeCustomWeedkiller

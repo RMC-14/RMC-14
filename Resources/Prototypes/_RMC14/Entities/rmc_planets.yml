@@ -176,6 +176,8 @@
     - scenarioName: none # 85% chance of regular surv. Reduce to 75% (0.75) once CLF survs are in.
       scenarioProbability: 0.85
     survivorJobVariants: # Civ survivor is default one
+      RMCSurvivorCommandingOfficer:
+      - RMCSurvivorShivasResearchDirector: 1
       CMSurvivorCorporate:
       - RMCSurvivorShivasCorporateLiaison: -1
       CMSurvivorDoctor:

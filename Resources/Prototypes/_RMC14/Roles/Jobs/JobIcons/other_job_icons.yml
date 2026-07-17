@@ -127,6 +127,13 @@
 
 - type: jobIcon
   parent: CMJobIconBase
+  id: RMCJobIconWeYaRD
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: weya_rd
+
+- type: jobIcon
+  parent: CMJobIconBase
   id: CMJobIconDirector
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
