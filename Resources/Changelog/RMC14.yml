@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: CatAndHats
   changes:
-  - message: Fixed shiva's snowball panic room insert not having its tactical map
-      labels
-    type: Fix
-  id: 3013
-  time: '2026-03-26T10:50:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9473
-- author: CatAndHats
-  changes:
   - message: Fixed the missing aerodrom tacmap label on the Sorokyne Strata SPP SOF
       map insert
     type: Fix
@@ -4580,5 +4572,12 @@
   id: 3512
   time: '2026-07-17T12:40:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10477
+- author: SharkSnake98
+  changes:
+  - message: Changed the name of the People's Armed Police to the People's Civil Gendarmes
+    type: Tweak
+  id: 3513
+  time: '2026-07-17T12:44:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10457
 Name: RMC14
 Order: -1
