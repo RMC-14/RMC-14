@@ -10,6 +10,7 @@ using Content.Shared.Alert;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffectNew;
+using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Crest;
 
@@ -29,6 +30,7 @@ public sealed class XenoCrestSystem : EntitySystem
         SubscribeLocalEvent<XenoCrestComponent, XenoToggleCrestActionEvent>(OnXenoCrestAction);
         SubscribeLocalEvent<XenoCrestComponent, RefreshMovementSpeedModifiersEvent>(OnXenoCrestRefreshMovementSpeed);
         SubscribeLocalEvent<XenoCrestComponent, CMGetArmorEvent>(OnXenoCrestGetArmor);
+        SubscribeLocalEvent<XenoCrestComponent, PlayerDetachedEvent>(OnXenoCrestPlayerDetached, before: [typeof(XenoSystem)]);
 
         SubscribeLocalEvent<XenoCrestComponent, BeforeStatusEffectAddedEvent>(OnXenoCrestBeforeStatusAdded);
 
@@ -50,34 +52,7 @@ public sealed class XenoCrestSystem : EntitySystem
 
         args.Handled = true;
 
-        if (TryComp<RMCSizeComponent>(xeno, out var size))
-        {
-            if (!xeno.Comp.Lowered)
-            {
-                xeno.Comp.OriginalSize = size.Size;
-                size.Size = xeno.Comp.CrestSize;
-            }
-            else
-                size.Size = xeno.Comp.OriginalSize ?? RMCSizes.Xeno;
-            Dirty(xeno.Owner, size);
-        }
-
-        xeno.Comp.Lowered = !xeno.Comp.Lowered;
-        Dirty(xeno);
-
-        _armor.UpdateArmorValue((xeno, null));
-        _movementSpeed.RefreshMovementSpeedModifiers(xeno);
-        _appearance.SetData(xeno, XenoVisualLayers.Crest, xeno.Comp.Lowered);
-
-        if (xeno.Comp.Lowered)
-            _alerts.ShowAlert(xeno, xeno.Comp.Alert);
-        else
-            _alerts.ClearAlert(xeno, xeno.Comp.Alert);
-
-        foreach (var action in _rmcActions.GetActionsWithEvent<XenoToggleCrestActionEvent>(xeno))
-        {
-            _actions.SetToggled(action.AsNullable(), xeno.Comp.Lowered);
-        }
+        ToggleCrest(xeno);
     }
 
     private void OnXenoCrestRefreshMovementSpeed(Entity<XenoCrestComponent> xeno, ref RefreshMovementSpeedModifiersEvent args)
@@ -90,6 +65,12 @@ public sealed class XenoCrestSystem : EntitySystem
     {
         if (xeno.Comp.Lowered)
             args.XenoArmor += xeno.Comp.Armor;
+    }
+
+    private void OnXenoCrestPlayerDetached(Entity<XenoCrestComponent> xeno, ref PlayerDetachedEvent args)
+    {
+        if (!TerminatingOrDeleted(xeno) && xeno.Comp.Lowered)
+            ToggleCrest(xeno);
     }
 
     private void OnXenoCrestBeforeStatusAdded(Entity<XenoCrestComponent> xeno, ref BeforeStatusEffectAddedEvent args)
@@ -122,6 +103,38 @@ public sealed class XenoCrestSystem : EntitySystem
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-toggle-crest-cant-rest"), xeno, xeno);
             args.Cancelled = true;
+        }
+    }
+
+    private void ToggleCrest(Entity<XenoCrestComponent> xeno)
+    {
+        if (TryComp<RMCSizeComponent>(xeno, out var size))
+        {
+            if (!xeno.Comp.Lowered)
+            {
+                xeno.Comp.OriginalSize = size.Size;
+                size.Size = xeno.Comp.CrestSize;
+            }
+            else
+                size.Size = xeno.Comp.OriginalSize ?? RMCSizes.Xeno;
+            Dirty(xeno.Owner, size);
+        }
+
+        xeno.Comp.Lowered = !xeno.Comp.Lowered;
+        Dirty(xeno);
+
+        _armor.UpdateArmorValue((xeno, null));
+        _movementSpeed.RefreshMovementSpeedModifiers(xeno);
+        _appearance.SetData(xeno, XenoVisualLayers.Crest, xeno.Comp.Lowered);
+
+        if (xeno.Comp.Lowered)
+            _alerts.ShowAlert(xeno, xeno.Comp.Alert);
+        else
+            _alerts.ClearAlert(xeno, xeno.Comp.Alert);
+
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoToggleCrestActionEvent>(xeno))
+        {
+            _actions.SetToggled(action.AsNullable(), xeno.Comp.Lowered);
         }
     }
 }
