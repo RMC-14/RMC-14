@@ -1,0 +1,59 @@
+- type: entity
+  id: RMCPropIlluminator
+  name: UE-92/B Area Illuminator
+  description: A variant of the UE-92, a large deployable floodlight. This version is less powerful but it houses an internal power source that allows it to operate for several hours without being linked to a power generator.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    noRot: true
+  - type: Physics
+    bodyType: Static
+    fixedRotation: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 190
+        layer:
+        - MobMask
+  - type: Sprite
+    sprite: _RMC14/Structures/illuminator.rsi
+    state: illuminator
+    offset: 0, 1
+  - type: DeleteOnExplosion
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Corrodible
+    isCorrodible: false
+
+- type: entity
+  parent: RMCPropIlluminator
+  id: RMCPropIlluminatorOn
+  suffix: On
+  components:
+  - type: PointLight
+    enabled: true
+    radius: 6
+    netsync: false
+    energy: 2
+    offset: "0, 1"
+    color: "#ECFFFF"
+    mask: /Textures/_RMC14/Effects/LightMasks/quad_cone.png
+  - type: Sprite
+    state: illuminator_on

@@ -1,0 +1,74 @@
+- type: job
+  parent: RMCSurvivorArmyBase
+  id: RMCSurvivorArmyMarksman
+  name: rmc-job-name-forecon-marksman
+  startingGear: RMCGearArmyMarksman
+  ranks:
+    RMCRankArmySpecialist: []
+  icon: "RMCJobIconArmyMarksman"
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobWeaponsSpecialist
+    time: 3600 # 1 hour
+  - !type:TotalJobsTimeRequirement
+    group: RMCJobsSurvivor
+    time: 5400 # 1.5 hours
+  spawnMenuRoleName: UNMC Devil Dogs - Marksman (Tyrargo Rift Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetArmyMarksman
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: spec_sniper
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadUNMC
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetArmyMarksman
+    - type: ScoutWhitelist
+    - type: JobPrefix
+      prefix: rmc-job-prefix-forecon-marksman
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearArmyBase
+  id: RMCGearArmyMarksman
+  equipment:
+    shoes: RMCScoutShoes
+    head: RMCHeadBeretSquad
+    eyes: RMCGlassesTriMaxBlack
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointArmyMarksman
+  name: army marksman spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorArmyMarksman
+  - type: Sprite
+    state: spec_spawn
+
+- type: entity
+  parent: RMCSurvivorPresetArmyNoPrimary
+  id: RMCSurvivorPresetArmyMarksman
+  name: army marksman survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    randomOutfits:
+    - []
+    primaryWeapons: # 1/5 M4SPR, 4/5 MK2
+    - [ WeaponRifleM4SPRCustom, CMMagazineRifleM4SPR, CMMagazineRifleM4SPR, CMMagazineRifleM4SPRExt ]
+    primaryWeaponChance: 1
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconArmyMarksman
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_army_snpr

@@ -577,6 +577,23 @@
     - RMCPatchUNMC
     - RMCPatchFORECON
 
+# Tyrargo
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitMarineArmy
+  name: UNMC Devil Dogs uniform
+  description: Standard-issue Marine uniform. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/army_uniform.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingPouchForecon
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchUNMC
+
 # High Command
 
 # General

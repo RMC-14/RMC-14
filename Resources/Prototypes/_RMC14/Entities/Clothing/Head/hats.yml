@@ -385,6 +385,17 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/xippy_hat.rsi
 
 - type: entity
+  parent: CMHeadCap
+  id: CMHeadCapCav
+  name: UN cavalry hat
+  description: Also known as Cavalry Stetson, this hat is a symbol of tradition and remembrance of heroism that is ongoing from as far as 19th century. Even though the Corps had cashed in its horses for choppers, choppers for dropships, and gone tear-assing around space, looking for the shit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cav_hat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cav_hat.rsi
+
+- type: entity
   parent: RMCHeadCapFlippable
   id: CMHeadCapOfficer
   name: UNMC officer cap
