@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: Fixed the missing aerodrom tacmap label on the Sorokyne Strata SPP SOF
-      map insert
-    type: Fix
-  id: 3014
-  time: '2026-03-26T10:50:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9474
 - author: kleinerstation13
   changes:
   - message: Survivor now spawn together instead of separately on Trijent Dam. Their
@@ -4579,5 +4571,14 @@
   id: 3513
   time: '2026-07-17T12:44:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10457
+- author: kleinerstation13
+  changes:
+  - message: Fixed TSEPA support synthetic survivor missing their HUD icon
+    type: Fix
+  - message: Fixed FORECON synth only knowing English
+    type: Fix
+  id: 3514
+  time: '2026-07-17T12:46:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10440
 Name: RMC14
 Order: -1
