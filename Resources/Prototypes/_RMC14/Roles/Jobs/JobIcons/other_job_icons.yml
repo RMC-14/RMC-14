@@ -82,6 +82,13 @@
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hc_exec
 
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSurvivor
+  icon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: surv
+
 # WEYA Job Icons
 - type: jobIcon
   parent: CMJobIconBase

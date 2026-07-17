@@ -122,7 +122,12 @@ namespace Content.Server.GameTicking
                 if (job == null)
                     continue;
 
-                SpawnPlayer(_playerManager.GetSessionById(player), profiles[player], station, job, false);
+                var session = _playerManager.GetSessionById(player);
+                var profile = SelectProfileForAssignedJob(player, job.Value, profiles);
+                if (profile == null)
+                    continue;
+
+                SpawnPlayer(session, profile, station, job, false);
             }
 
             RefreshLateJoinAllowed();
@@ -134,16 +139,43 @@ namespace Content.Server.GameTicking
                 force));
         }
 
+        private HumanoidCharacterProfile? SelectProfileForAssignedJob(
+            NetUserId userId,
+            ProtoId<JobPrototype> job,
+            IReadOnlyDictionary<NetUserId, HumanoidCharacterProfile> fallbackProfiles)
+        {
+            var currentMap = _distressSignal?.SelectedPlanetMapId;
+            Predicate<HumanoidCharacterProfile>? compatibility = null;
+            compatibility = profile => _distressSignal!.CanSpawnForJob(job, profile);
+
+            if (_prefsManager.TryGetCachedPreferences(userId, out var prefs))
+            {
+                var selected = prefs.SelectProfileForJob(job, currentMap, compatibility);
+                if (selected != null)
+                    return selected;
+
+                if (prefs.TryGetHumanoidInSlot(prefs.SelectedCharacterIndex, out var selectedProfile) &&
+                    selectedProfile != null &&
+                    (compatibility == null || compatibility(selectedProfile)))
+                {
+                    return selectedProfile;
+                }
+            }
+
+            return fallbackProfiles.GetValueOrDefault(userId);
+        }
+
         private void SpawnPlayer(ICommonSession player,
             EntityUid station,
             string? jobId = null,
             bool lateJoin = true,
-            bool silent = false)
+            bool silent = false,
+            int? selectedCharacterSlot = null)
         {
             var character = GetPlayerProfile(player);
 
             var jobBans = _banManager.GetJobBans(player.UserId);
-            if (jobBans == null || jobId != null && jobBans.Contains(jobId))
+            if (jobId != null && jobBans?.Contains(jobId) == true)
                 return;
 
             if (jobId != null)
@@ -154,15 +186,16 @@ namespace Content.Server.GameTicking
                     return;
             }
 
-            SpawnPlayer(player, character, station, jobId, lateJoin, silent);
+            SpawnPlayer(player, character, station, jobId, lateJoin, silent, selectedCharacterSlot);
         }
 
         private void SpawnPlayer(ICommonSession player,
-            HumanoidCharacterProfile character,
+            HumanoidCharacterProfile? character,
             EntityUid station,
             string? jobId = null,
             bool lateJoin = true,
-            bool silent = false)
+            bool silent = false,
+            int? selectedCharacterSlot = null)
         {
             // Can't spawn players with a dummy ticker!
             if (DummyTicker)
@@ -184,6 +217,7 @@ namespace Content.Server.GameTicking
                 return;
             }
 
+            character ??= HumanoidCharacterProfile.Random();
             string speciesId;
             if (_randomizeCharacters)
             {
@@ -234,9 +268,12 @@ namespace Content.Server.GameTicking
             if (jobBans != null)
                 restrictedRoles.UnionWith(jobBans);
 
+            var playerPreferences = _prefsManager.GetPreferences(player.UserId);
+            var requestedJob = jobId;
+
             // Pick best job best on prefs.
             jobId ??= _stationJobs.PickBestAvailableJobWithPriority(station,
-                character.JobPriorities,
+                playerPreferences.JobPrioritiesFiltered(),
                 true,
                 restrictedRoles);
             // If no job available, stay in lobby, or if no lobby spawn as observer
@@ -252,6 +289,50 @@ namespace Content.Server.GameTicking
 
                 _chatManager.DispatchServerMessage(player,
                     Loc.GetString("game-ticker-player-no-jobs-available-when-joining"));
+                return;
+            }
+
+            // For non-randomized characters, try to pick a profile that requested the chosen job.
+            if (!_randomizeCharacters)
+            {
+                HumanoidCharacterProfile? matchingProfile = null;
+                Predicate<HumanoidCharacterProfile>? compatibility = null;
+                var chosenJobId = new ProtoId<JobPrototype>(jobId);
+                compatibility = profile => _distressSignal!.CanSpawnForJob(chosenJobId, profile);
+
+                if (selectedCharacterSlot != null &&
+                    playerPreferences.TryGetHumanoidInSlot(selectedCharacterSlot.Value, out var preferredProfile) &&
+                    preferredProfile != null &&
+                    compatibility(preferredProfile))
+                {
+                    matchingProfile = preferredProfile;
+                }
+                else
+                {
+                    matchingProfile = playerPreferences.SelectProfileForJob(
+                        jobId,
+                        _distressSignal?.SelectedPlanetMapId,
+                        compatibility);
+                }
+
+                if (matchingProfile != null)
+                {
+                    character = matchingProfile;
+                }
+            }
+
+            var finalJobId = new ProtoId<JobPrototype>(jobId);
+            if (character.OnlyUsePreferredSquads &&
+                !_distressSignal!.CanSpawnForJob(finalJobId, character))
+            {
+                if (!LobbyEnabled)
+                    JoinAsObserver(player);
+
+                var evNoJobs = new NoJobsAvailableSpawningEvent(player);
+                RaiseLocalEvent(evNoJobs);
+
+                _chatManager.DispatchServerMessage(player,
+                    Loc.GetString("game-ticker-player-no-preferred-squads-available"));
                 return;
             }
 
@@ -375,7 +456,15 @@ namespace Content.Server.GameTicking
         /// <param name="station">The station they're spawning on</param>
         /// <param name="jobId">An optional job for them to spawn as</param>
         /// <param name="silent">Whether or not the player should be greeted upon joining</param>
-        public void MakeJoinGame(ICommonSession player, EntityUid station, string? jobId = null, bool silent = false)
+        /// <param name="selectedCharacterSlot">
+        /// Optional character slot to force for this join if that slot is eligible for the selected job.
+        /// </param>
+        public void MakeJoinGame(
+            ICommonSession player,
+            EntityUid station,
+            string? jobId = null,
+            bool silent = false,
+            int? selectedCharacterSlot = null)
         {
             if (!_playerGameStatuses.ContainsKey(player.UserId))
                 return;
@@ -383,7 +472,7 @@ namespace Content.Server.GameTicking
             if (!_userDb.IsLoadComplete(player))
                 return;
 
-            SpawnPlayer(player, station, jobId, silent: silent);
+            SpawnPlayer(player, station, jobId, silent: silent, selectedCharacterSlot: selectedCharacterSlot);
         }
 
         /// <summary>

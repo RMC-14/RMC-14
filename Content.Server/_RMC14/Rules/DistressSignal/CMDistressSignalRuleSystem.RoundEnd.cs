@@ -401,13 +401,13 @@ public sealed partial class CMDistressSignalRuleSystem
             {
                 if (_prefsManager.TryGetCachedPreferences(player.UserId, out var preferences))
                 {
-                    var profile = (HumanoidCharacterProfile) preferences.GetProfile(preferences.SelectedCharacterIndex);
-                    if (profile.JobPriorities.TryGetValue(distress.XenoSelectableJob, out var xenoPriority) &&
+                    var jobPriorities = preferences.JobPrioritiesFiltered();
+                    if (jobPriorities.TryGetValue(distress.XenoSelectableJob, out var xenoPriority) &&
                         xenoPriority > JobPriority.Never)
                     {
                         xenoCandidates++;
                     }
-                    else if (profile.JobPriorities.TryGetValue(distress.QueenJob, out var queenPriority) &&
+                    else if (jobPriorities.TryGetValue(distress.QueenJob, out var queenPriority) &&
                         queenPriority > JobPriority.Never)
                     {
                         xenoCandidates++;

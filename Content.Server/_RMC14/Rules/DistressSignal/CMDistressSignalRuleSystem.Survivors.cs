@@ -115,26 +115,53 @@ public sealed partial class CMDistressSignalRuleSystem
         if (!IsJobAllowed(id, comp.CivilianSurvivorJob) || !IsJobAllowed(id, job))
             return;
 
-        if (!ev.Profiles.TryGetValue(id, out var profile))
-            return;
-
         if (comp.SurvivorJobOverrides != null)
         {
             foreach (var (originalJob, overrideJob) in comp.SurvivorJobOverrides)
             {
-                if (profile.JobPriorities.TryGetValue(originalJob, out var overridePrio) &&
-                    overridePrio > JobPriority.Never && overrideJob == job)
+                if (overrideJob != job)
+                    continue;
+
+                var hasOverridePriority = TryGetSurvivorPriority(id, originalJob, comp, ev, out var overridePrio);
+                if (TryGetPriority(id, overrideJob, ev, out var directOverridePrio) &&
+                    directOverridePrio > overridePrio)
                 {
-                    players[(int)overridePrio].Add(id);
-                    return;
+                    hasOverridePriority = true;
+                    overridePrio = directOverridePrio;
                 }
+
+                if (!hasOverridePriority)
+                    continue;
+
+                players[(int)overridePrio].Add(id);
+                return;
             }
         }
 
-        if (profile.JobPriorities.TryGetValue(job, out var prio) && prio > JobPriority.Never)
+        if (TryGetSurvivorPriority(id, job, comp, ev, out var prio))
         {
             players[(int)prio].Add(id);
         }
+    }
+
+    private bool TryGetSurvivorPriority(
+        NetUserId id,
+        ProtoId<JobPrototype> job,
+        CMDistressSignalRuleComponent comp,
+        RulePlayerSpawningEvent ev,
+        out JobPriority priority)
+    {
+        priority = JobPriority.Never;
+
+        if (TryGetPriority(id, job, ev, out priority))
+            return true;
+
+        if (!_prefsManager.TryGetCachedPreferences(id, out var preferences))
+            return false;
+
+        return preferences.JobPriorities.TryGetValue(job, out priority) &&
+               priority > JobPriority.Never &&
+               HasSurvivorProfileForJob(preferences, job, comp);
     }
 
     private void SpawnSurvivorsFromCandidates(
@@ -206,7 +233,7 @@ public sealed partial class CMDistressSignalRuleSystem
             return false;
         }
 
-        var spawnAsJob = DetermineSurvivorJob(job, playerId, comp, out var scenarioSuccess, out var stop);
+        var spawnAsJob = DetermineSurvivorJob(job, playerId, comp, ev, out var scenarioSuccess, out var stop);
         if (stop)
         {
             spawnedId = default;
@@ -231,7 +258,7 @@ public sealed partial class CMDistressSignalRuleSystem
         ev.PlayerPool.Remove(player);
         GameTicker.PlayerJoinGame(player);
 
-        var profile = GameTicker.GetPlayerProfile(player);
+        var profile = SelectSpawnProfile(player, spawnAsJob, job);
         var coordinates = _transform.GetMoverCoordinates(spawner);
         var survivorMob = _stationSpawning.SpawnPlayerMob(coordinates, spawnAsJob, profile, null);
 
@@ -253,19 +280,20 @@ public sealed partial class CMDistressSignalRuleSystem
         ProtoId<JobPrototype> job,
         NetUserId playerId,
         CMDistressSignalRuleComponent comp,
+        RulePlayerSpawningEvent ev,
         out bool scenarioSuccess,
         out bool stop)
     {
         stop = false;
         var spawnAsJob = job;
 
-        scenarioSuccess = TryGetScenarioJob(job, playerId, comp, ref spawnAsJob, ref stop);
+        scenarioSuccess = TryGetScenarioJob(job, playerId, comp, ev, ref spawnAsJob, ref stop);
         if (stop)
             return spawnAsJob;
 
         if (!scenarioSuccess)
         {
-            CheckVariantJob(job, playerId, comp, ref spawnAsJob, ref stop);
+            CheckVariantJob(job, playerId, comp, ev, ref spawnAsJob, ref stop);
         }
 
         return spawnAsJob;
@@ -275,6 +303,7 @@ public sealed partial class CMDistressSignalRuleSystem
         ProtoId<JobPrototype> job,
         NetUserId playerId,
         CMDistressSignalRuleComponent comp,
+        RulePlayerSpawningEvent ev,
         ref ProtoId<JobPrototype> spawnAsJob,
         ref bool stop)
     {
@@ -284,24 +313,16 @@ public sealed partial class CMDistressSignalRuleSystem
             return false;
         }
 
+        if (TryGetPreferredSurvivorJobIndex(playerId, scenarioJobsList, ev, out var preferredIndex) &&
+            TryUseSurvivorJobAtIndex(playerId, scenarioJobsList, preferredIndex, ref spawnAsJob))
+        {
+            return true;
+        }
+
         for (var i = 0; i < scenarioJobsList.Count; i++)
         {
-            var (scenarioJob, amount) = scenarioJobsList[i];
-            if (!IsJobAllowed(playerId, scenarioJob))
-                continue;
-
-            if (amount == -1)
-            {
-                spawnAsJob = scenarioJob;
+            if (TryUseSurvivorJobAtIndex(playerId, scenarioJobsList, i, ref spawnAsJob))
                 return true;
-            }
-
-            if (amount <= 0)
-                continue;
-
-            scenarioJobsList[i] = (scenarioJob, amount - 1);
-            spawnAsJob = scenarioJob;
-            return true;
         }
 
         stop = true;
@@ -316,6 +337,7 @@ public sealed partial class CMDistressSignalRuleSystem
         ProtoId<JobPrototype> job,
         NetUserId playerId,
         CMDistressSignalRuleComponent comp,
+        RulePlayerSpawningEvent ev,
         ref ProtoId<JobPrototype> spawnAsJob,
         ref bool stop)
     {
@@ -325,27 +347,119 @@ public sealed partial class CMDistressSignalRuleSystem
             return;
         }
 
-        for (var i = 0; i < variants.Count; i++)
+        if (TryGetPreferredSurvivorJobIndex(playerId, variants, ev, out var preferredIndex) &&
+            TryUseSurvivorJobAtIndex(playerId, variants, preferredIndex, ref spawnAsJob))
         {
-            var (variantJob, amount) = variants[i];
-            if (!IsJobAllowed(playerId, variantJob))
-                continue;
-
-            if (amount == -1)
-            {
-                spawnAsJob = variantJob;
-                return;
-            }
-
-            if (amount <= 0)
-                continue;
-
-            variants[i] = (variantJob, amount - 1);
-            spawnAsJob = variantJob;
             return;
         }
 
+        for (var i = 0; i < variants.Count; i++)
+        {
+            if (TryUseSurvivorJobAtIndex(playerId, variants, i, ref spawnAsJob))
+                return;
+        }
+
         stop = true;
+    }
+
+    private bool TryGetPreferredSurvivorJobIndex(
+        NetUserId playerId,
+        List<(ProtoId<JobPrototype> Job, int Amount)> jobs,
+        RulePlayerSpawningEvent ev,
+        out int selectedIndex)
+    {
+        selectedIndex = -1;
+
+        for (var i = 0; i < jobs.Count; i++)
+        {
+            var (job, amount) = jobs[i];
+            if (amount != -1 && amount <= 0)
+                continue;
+
+            if (!IsJobAllowed(playerId, job))
+                continue;
+
+            if (!HasProfileForJob(playerId, job, ev))
+                continue;
+
+            selectedIndex = i;
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool HasProfileForJob(
+        NetUserId playerId,
+        ProtoId<JobPrototype> job,
+        RulePlayerSpawningEvent ev)
+    {
+        if (_prefsManager.TryGetCachedPreferences(playerId, out var preferences))
+            return preferences.SelectProfileForJob(job, SelectedPlanetMapId) != null;
+
+        return ev.Profiles.TryGetValue(playerId, out var profile) &&
+               profile.JobPreferences.Contains(job);
+    }
+
+    private bool HasSurvivorProfileForJob(
+        PlayerPreferences preferences,
+        ProtoId<JobPrototype> job,
+        CMDistressSignalRuleComponent comp)
+    {
+        if (preferences.SelectProfileForJob(job, SelectedPlanetMapId) != null)
+            return true;
+
+        if (comp.SurvivorJobVariants != null &&
+            comp.SurvivorJobVariants.TryGetValue(job, out var variants))
+        {
+            foreach (var (variant, _) in variants)
+            {
+                if (preferences.SelectProfileForJob(variant, SelectedPlanetMapId) != null)
+                    return true;
+            }
+        }
+
+        if (comp.SurvivorJobVariantScenarios != null &&
+            comp.SurvivorJobVariantScenarios.TryGetValue(job, out var scenarioVariants))
+        {
+            foreach (var (variant, _) in scenarioVariants)
+            {
+                if (preferences.SelectProfileForJob(variant, SelectedPlanetMapId) != null)
+                    return true;
+            }
+        }
+
+        if (comp.SurvivorJobOverrides != null &&
+            comp.SurvivorJobOverrides.TryGetValue(job, out var overrideJob))
+        {
+            return preferences.SelectProfileForJob(overrideJob, SelectedPlanetMapId) != null;
+        }
+
+        return false;
+    }
+
+    private bool TryUseSurvivorJobAtIndex(
+        NetUserId playerId,
+        List<(ProtoId<JobPrototype> Job, int Amount)> jobs,
+        int index,
+        ref ProtoId<JobPrototype> spawnAsJob)
+    {
+        var (job, amount) = jobs[index];
+        if (!IsJobAllowed(playerId, job))
+            return false;
+
+        if (amount == -1)
+        {
+            spawnAsJob = job;
+            return true;
+        }
+
+        if (amount <= 0)
+            return false;
+
+        jobs[index] = (job, amount - 1);
+        spawnAsJob = job;
+        return true;
     }
 
     /// <summary>
@@ -365,7 +479,7 @@ public sealed partial class CMDistressSignalRuleSystem
             if (survJob != job)
                 continue;
 
-            if (!scenarioSuccess && selectRandomVariant &&
+            if (!scenarioSuccess && spawnAsJob == job && selectRandomVariant &&
                 comp.SurvivorJobVariants != null &&
                 comp.SurvivorJobVariants.TryGetValue(job, out var randomInsertList) &&
                 randomInsertList.Count > 0)

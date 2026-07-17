@@ -150,6 +150,7 @@ namespace Content.Client.Stylesheets
         public static readonly Color ItemStatusNotHeldColor = Color.Gray;
 
         //Background
+        public const string StyleClassBackgroundPanel = "BackgroundPanel";
         public const string StyleClassBackgroundBaseDark = "PanelBackgroundBaseDark";
 
         //Buttons
@@ -1625,6 +1626,10 @@ namespace Content.Client.Stylesheets
                     .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#753131")),
 
                 //The lengths you have to go through to change a background color smh
+                Element<PanelContainer>().Class("BackgroundPanel")
+                    .Prop("panel", new StyleBoxTexture(BaseButtonOpenBoth) { Padding = default })
+                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#1F1F23")),
+
                 Element<PanelContainer>().Class("PanelBackgroundBaseDark")
                     .Prop("panel", new StyleBoxTexture(BaseButtonOpenBoth) { Padding = default })
                     .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#1F1F23")),

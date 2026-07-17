@@ -23,6 +23,7 @@ using Content.Shared.GameTicking;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
+using Content.Shared.Roles.Jobs;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -203,6 +204,49 @@ public sealed partial class CMDistressSignalRuleSystem
             RaiseLocalEvent(new TechUnlockVehicleEvent(VehicleTankUnlock));
     }
 
+    private bool TryGetPriority(NetUserId id, ProtoId<JobPrototype> job, RulePlayerSpawningEvent ev, out JobPriority priority)
+    {
+        priority = JobPriority.Never;
+
+        IReadOnlyDictionary<ProtoId<JobPrototype>, JobPriority>? priorities = null;
+        if (_prefsManager.TryGetCachedPreferences(id, out var preferences))
+            priorities = preferences.JobPrioritiesFiltered();
+        else if (ev.Profiles.TryGetValue(id, out var profile))
+            priorities = profile.JobPriorities;
+
+        return priorities != null &&
+               priorities.TryGetValue(job, out priority) &&
+               priority > JobPriority.Never;
+    }
+
+    private HumanoidCharacterProfile SelectSpawnProfile(
+        ICommonSession player,
+        ProtoId<JobPrototype> primaryJob,
+        ProtoId<JobPrototype>? secondaryJob = null)
+    {
+        var fallbackProfile = GameTicker.GetPlayerProfile(player);
+
+        if (!_prefsManager.TryGetCachedPreferences(player.UserId, out var preferences))
+            return fallbackProfile;
+
+        if (preferences.SelectProfileForJob(primaryJob, SelectedPlanetMapId) is { } primaryProfile)
+            return primaryProfile;
+
+        if (secondaryJob is { } secondary &&
+            preferences.SelectProfileForJob(secondary, SelectedPlanetMapId) is { } secondaryProfile)
+        {
+            return secondaryProfile;
+        }
+
+        if (preferences.TryGetHumanoidInSlot(preferences.SelectedCharacterIndex, out var selectedProfile) &&
+            selectedProfile != null)
+        {
+            return selectedProfile;
+        }
+
+        return fallbackProfile;
+    }
+
     /// <summary>
     /// Selects xeno players based on job priorities and spawns them as queen or larva.
     /// Handles burrowed larva calculation if there aren't enough xeno players.
@@ -256,10 +300,13 @@ public sealed partial class CMDistressSignalRuleSystem
             xenoCandidates[i] = new();
         }
 
-        foreach (var (id, profile) in ev.Profiles)
+        foreach (var (id, _) in ev.Profiles)
         {
-            if (IsJobAllowed(id, comp.QueenJob) && profile.JobPriorities.TryGetValue(comp.QueenJob, out var p) && p > JobPriority.Never)
+            if (IsJobAllowed(id, comp.QueenJob) &&
+                TryGetPriority(id, comp.QueenJob, ev, out var p))
+            {
                 xenoCandidates[(int)p].Add(id);
+            }
         }
 
         NetUserId? queenSelected = null;
@@ -282,10 +329,14 @@ public sealed partial class CMDistressSignalRuleSystem
             xenoCandidates[i].Clear();
         }
 
-        foreach (var (id, profile) in ev.Profiles)
+        foreach (var (id, _) in ev.Profiles)
         {
-            if (id != queenSelected && IsJobAllowed(id, comp.XenoSelectableJob) && profile.JobPriorities.TryGetValue(comp.XenoSelectableJob, out var p) && p > JobPriority.Never)
+            if (id != queenSelected &&
+                IsJobAllowed(id, comp.XenoSelectableJob) &&
+                TryGetPriority(id, comp.XenoSelectableJob, ev, out var p))
+            {
                 xenoCandidates[(int)p].Add(id);
+            }
         }
 
         var selectedXenos = 0;
@@ -312,7 +363,7 @@ public sealed partial class CMDistressSignalRuleSystem
 
         if (doBurst)
         {
-            var profile = GameTicker.GetPlayerProfile(player);
+            var profile = SelectSpawnProfile(player, comp.XenoSurvivorCorpseJob);
             var coordinates = _transform.GetMoverCoordinates(point);
             var corpseMob = _stationSpawning.SpawnPlayerMob(coordinates, comp.XenoSurvivorCorpseJob, profile, null);
 
@@ -436,8 +487,7 @@ public sealed partial class CMDistressSignalRuleSystem
         if (comp == null)
             return;
 
-        var squadPreference = ev.HumanoidCharacterProfile?.SquadPreference;
-        if (GetSpawner(comp, job, squadPreference) is not { } spawnerInfo)
+        if (GetSpawner(comp, job, ev.HumanoidCharacterProfile) is not { } spawnerInfo)
             return;
 
         var (spawner, squad) = spawnerInfo;

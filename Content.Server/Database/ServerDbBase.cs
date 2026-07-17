@@ -11,7 +11,9 @@ using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.IP;
+using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.NamedItems;
+using Content.Shared._RMC14.Rules;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Database;
@@ -31,6 +33,12 @@ namespace Content.Server.Database
 {
     public abstract class ServerDbBase
     {
+        private sealed class SerializedSquadPreferences
+        {
+            public bool OnlyUsePreferredSquads { get; set; }
+            public List<string> Squads { get; set; } = [];
+        }
+
         private readonly ISawmill _opsLog;
 
         public event Action<DatabaseNotification>? OnNotificationReceived;
@@ -138,6 +146,50 @@ namespace Content.Server.Database
             await db.DbContext.SaveChangesAsync();
         }
 
+        public async Task SaveJobPrioritiesAsync(NetUserId userId, Dictionary<ProtoId<JobPrototype>, JobPriority> newJobPriorities)
+        {
+            await using var db = await GetDb();
+
+            var prefs = await db.DbContext
+                .Preference
+                .Include(p => p.Profiles)
+                    .ThenInclude(p => p.Jobs)
+                .SingleOrDefaultAsync(p => p.UserId == userId.UserId);
+
+            if (prefs == null)
+                return;
+
+            var selectedProfile = prefs.Profiles.SingleOrDefault(p => p.Slot == prefs.SelectedCharacterSlot);
+            if (selectedProfile == null)
+                return;
+
+            selectedProfile.Jobs.Clear();
+
+            var hasHighPriority = false;
+            foreach (var (job, priority) in newJobPriorities)
+            {
+                if (priority == JobPriority.Never)
+                    continue;
+
+                var fixedPriority = priority;
+                if (fixedPriority == JobPriority.High)
+                {
+                    if (hasHighPriority)
+                        fixedPriority = JobPriority.Medium;
+                    else
+                        hasHighPriority = true;
+                }
+
+                selectedProfile.Jobs.Add(new Job
+                {
+                    JobName = job,
+                    Priority = (DbJobPriority) fixedPriority,
+                });
+            }
+
+            await db.DbContext.SaveChangesAsync();
+        }
+
         private static async Task DeleteCharacterSlot(ServerDbContext db, NetUserId userId, int slot)
         {
             var profile = await db.Profile.Include(p => p.Preference)
@@ -230,7 +282,7 @@ namespace Content.Server.Database
                 sex = sexVal;
 
             var spawnPriority = (SpawnPriorityPreference) profile.SpawnPriority;
-            var squadPreference = profile.SquadPreference?.Squad;
+            var (squadPreferences, onlyUsePreferredSquads) = DeserializeSquadPreferences(profile.SquadPreference?.Squad);
 
             var armorPreference = ArmorPreference.Random;
             if (Enum.TryParse<ArmorPreference>(profile.ArmorPreference, true, out var armorVal))
@@ -300,7 +352,8 @@ namespace Content.Server.Database
                 spawnPriority,
                 armorPreference,
                 ranks,
-                squadPreference,
+                squadPreferences,
+                onlyUsePreferredSquads,
                 jobs,
                 (PreferenceUnavailableMode)profile.PreferenceUnavailable,
                 antags.ToHashSet(),
@@ -316,7 +369,8 @@ namespace Content.Server.Database
                 },
                 profile.PlaytimePerks,
                 profile.XenoPrefix,
-                profile.XenoPostfix
+                profile.XenoPostfix,
+                enabled: profile.Enabled
             );
         }
 
@@ -345,7 +399,8 @@ namespace Content.Server.Database
             profile.SkinColor = appearance.SkinColor.ToHex();
             profile.SpawnPriority = (int) humanoid.SpawnPriority;
             profile.ArmorPreference = humanoid.ArmorPreference.ToString();
-            profile.SquadPreference = new RMCSquadPreference { Squad = humanoid.SquadPreference };
+            profile.SquadPreference ??= new RMCSquadPreference();
+            profile.SquadPreference.Squad = SerializeSquadPreferences(humanoid);
             profile.Markings = markings;
             profile.Slot = slot;
             profile.PreferenceUnavailable = (DbPreferenceUnavailableMode) humanoid.PreferenceUnavailable;
@@ -419,8 +474,51 @@ namespace Content.Server.Database
             profile.PlaytimePerks = humanoid.PlaytimePerks;
             profile.XenoPrefix = humanoid.XenoPrefix;
             profile.XenoPostfix = humanoid.XenoPostfix;
+            profile.Enabled = humanoid.Enabled;
 
             return profile;
+        }
+
+        private static (HashSet<EntProtoId<SquadTeamComponent>>? Squads, bool OnlyUsePreferredSquads) DeserializeSquadPreferences(string? serialized)
+        {
+            if (string.IsNullOrWhiteSpace(serialized))
+                return (null, false);
+
+            try
+            {
+                if (serialized.TrimStart().StartsWith('{'))
+                {
+                    var data = JsonSerializer.Deserialize<SerializedSquadPreferences>(serialized);
+                    if (data == null)
+                        return (null, false);
+
+                    return (data.Squads.Select(id => new EntProtoId<SquadTeamComponent>(id)).ToHashSet(),
+                        data.OnlyUsePreferredSquads);
+                }
+            }
+            catch (JsonException)
+            {
+                // Fall back to the legacy single-squad format below.
+            }
+
+            return ([new EntProtoId<SquadTeamComponent>(serialized)], false);
+        }
+
+        private static string? SerializeSquadPreferences(HumanoidCharacterProfile humanoid)
+        {
+            if (!humanoid.HasExplicitSquadPreferences)
+                return null;
+
+            var data = new SerializedSquadPreferences
+            {
+                OnlyUsePreferredSquads = humanoid.OnlyUsePreferredSquads,
+                Squads = humanoid.SquadPreferences
+                    .Select(squad => squad.Id)
+                    .OrderBy(id => id)
+                    .ToList(),
+            };
+
+            return JsonSerializer.Serialize(data);
         }
         #endregion
 

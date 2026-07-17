@@ -5,6 +5,7 @@ using Content.Server.Preferences.Managers;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences;
+using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.GameTicking.Rules;
@@ -27,9 +28,33 @@ public sealed class AntagLoadProfileRuleSystem : GameRuleSystem<AntagLoadProfile
         if (args.Handled)
             return;
 
-        var profile = args.Session != null
-            ? _prefs.GetPreferences(args.Session.UserId).SelectedCharacter as HumanoidCharacterProfile
-            : HumanoidCharacterProfile.RandomWithSpecies();
+        HumanoidCharacterProfile? profile = null;
+        if (args.Session != null)
+        {
+            var preferences = _prefs.GetPreferences(args.Session.UserId);
+
+            var roles = new HashSet<ProtoId<AntagPrototype>>();
+            foreach (var (definition, selectedSessions) in args.GameRule.Comp.PreSelectedSessions)
+            {
+                if (selectedSessions.Contains(args.Session))
+                    roles.UnionWith(definition.PrefRoles);
+            }
+
+            if (roles.Count == 0)
+            {
+                foreach (var definition in args.GameRule.Comp.Definitions)
+                {
+                    roles.UnionWith(definition.PrefRoles);
+                }
+            }
+
+            if (roles.Count > 0)
+                profile = preferences.SelectProfileForAntag(roles);
+
+            profile ??= preferences.SelectedCharacter as HumanoidCharacterProfile;
+        }
+
+        profile ??= HumanoidCharacterProfile.RandomWithSpecies();
 
 
         if (profile?.Species is not { } speciesId || !_proto.TryIndex(speciesId, out var species))

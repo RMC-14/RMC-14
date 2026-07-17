@@ -3,6 +3,7 @@ using System;
 using Content.Server.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Content.Server.Database.Migrations.Sqlite
 {
     [DbContext(typeof(SqliteServerDbContext))]
-    partial class SqliteServerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260306090216_ProfileEnabled")]
+    partial class ProfileEnabled
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.1");
@@ -1447,35 +1450,6 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.ToTable("rmc_squad_preferences", (string)null);
                 });
 
-            modelBuilder.Entity("Content.Server.Database.Rank", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("rank_id");
-
-                    b.Property<string>("JobName")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasColumnName("job_name");
-
-                    b.Property<int>("ProfileId")
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("profile_id");
-
-                    b.Property<string>("RankName")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasColumnName("rank_name");
-
-                    b.HasKey("Id")
-                        .HasName("PK_rank");
-
-                    b.HasIndex("ProfileId");
-
-                    b.ToTable("rank", (string)null);
-                });
-
             modelBuilder.Entity("Content.Server.Database.RoleWhitelist", b =>
                 {
                     b.Property<Guid>("PlayerUserId")
@@ -2538,18 +2512,6 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Navigation("Profile");
                 });
 
-            modelBuilder.Entity("Content.Server.Database.Rank", b =>
-                {
-                    b.HasOne("Content.Server.Database.Profile", "Profile")
-                        .WithMany("Ranks")
-                        .HasForeignKey("ProfileId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_rank_profile_profile_id");
-
-                    b.Navigation("Profile");
-                });
-
             modelBuilder.Entity("Content.Server.Database.RoleWhitelist", b =>
                 {
                     b.HasOne("Content.Server.Database.Player", "Player")
@@ -2865,8 +2827,6 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Navigation("Loadouts");
 
                     b.Navigation("NamedItems");
-
-                    b.Navigation("Ranks");
 
                     b.Navigation("SquadPreference");
 
