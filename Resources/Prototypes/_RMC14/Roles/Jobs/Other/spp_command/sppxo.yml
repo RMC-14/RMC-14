@@ -90,5 +90,5 @@
   parent: CMJobIconBase
   id: RMCJobIconSPPXO
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: upp_xo
+    sprite: _RMC14/Interface/job_icons/SPP/standard.rsi
+    state: spp_xo

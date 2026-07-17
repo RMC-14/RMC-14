@@ -85,5 +85,5 @@
   parent: CMJobIconBase
   id: RMCJobIconRoyalMedic
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_medic
+    sprite: _RMC14/Interface/job_icons/TSE/RCM/standard.rsi
+    state: rcm_medic
