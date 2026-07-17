@@ -1,7 +1,7 @@
 - type: job
   parent: CMSurvivor
   id: CMJobSurvivorArmedPoliceOfficer
-  name: rmc-job-name-survivor-armed-police-officer
+  name: rmc-job-name-survivor-civil-gendarmes-officer
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorSecurity
   ranks:
@@ -17,7 +17,7 @@
   startingGear: RMCGearSurvivorArmedPoliceOfficer
   accessGroups:
   - ColonistSec
-  spawnMenuRoleName: People's Armed Police Officer (Sorokyne Survivor)
+  spawnMenuRoleName: People's Civil Gendarmes Officer (Sorokyne Survivor)
   special:
   - !type:AddComponentSpecial
     components:
@@ -50,15 +50,15 @@
   equipment:
     head: CMHeadCapSPPPeakedPolice
     eyes: CMGlassesSecurity
-    jumpsuit: RMCJumpsuitSPPPaP
-    outerClothing: RMCCoatPaP
+    jumpsuit: RMCJumpsuitSPPPCG
+    outerClothing: RMCCoatPCG
     gloves: RMCHandsVeteran
     shoes: CMBootsBlackFilled
     pocket1: RMCPouchSurvivalBlackFilled
     pocket2: RMCPouchMagazine
-    id: RMCIDCardPaP
+    id: RMCIDCardPCG
     back: RMCSatchelBlack
-    ears: RMCHeadsetSPPPaP
+    ears: RMCHeadsetSPPPCG
   storage:
     back:
     - CMSheetMetal20
@@ -67,7 +67,7 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointSurvivorArmedPoliceOfficer
-  name: people's armed police officer spawn point
+  name: people's civil gendarmes officer spawn point
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
@@ -79,5 +79,5 @@
 - type: entity
   parent: RMCSurvivorPresetSecurity
   id: RMCGearSurvivorPresetArmedPoliceOfficer
-  name: people's armed police officer preset
+  name: people's civil gendarmes officer preset
   categories: [ HideSpawnMenu ]
