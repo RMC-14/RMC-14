@@ -124,7 +124,7 @@ public sealed class LarvaQueueSystem : EntitySystem
         if (_net.IsClient || !HasComp<XenoComponent>(ent))
             return;
 
-        if (_mobState.IsDead(ent))
+        if (TerminatingOrDeleted(ent) || _mobState.IsDead(ent))
             return;
 
         EnsureComp<LarvaQueuedComponent>(ent);
