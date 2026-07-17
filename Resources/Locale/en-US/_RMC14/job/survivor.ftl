@@ -347,6 +347,9 @@ CMSurvivorFiorinaEngineer = Fiorina Engineer
 cm-job-name-survivor-fiorina-researcher = Fiorina Researcher
 CMSurvivorFiorinaResearcher = Fiorina Researcher
 
+cm-job-name-survivor-fiorina-cmo = Fiorina Chief Medical Officer
+RMCSurvivorFiorinaChiefMedicalOfficer = Fiorina Chief Medical Officer
+
 cm-job-name-survivor-riot-officer = CMB Riot Control Officer
 CMSurvivorFiorinaRiotOfficer = CMB Riot Control Officer
 cm-job-prefix-survivor-riot-officer = CMB RCO

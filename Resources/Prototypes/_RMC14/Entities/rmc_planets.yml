@@ -229,6 +229,8 @@
     - scenarioName: none
       scenarioProbability: 0.85
     survivorJobVariants:
+      RMCSurvivorCommandingOfficer:
+      - RMCSurvivorFiorinaChiefMedicalOfficer: 1
       CMSurvivor:
       - CMSurvivor: -1
       - CMSurvivorISR: -1

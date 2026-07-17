@@ -1,0 +1,88 @@
+﻿- type: job
+  parent: CMSurvivor
+  id: RMCSurvivorFiorinaChiefMedicalOfficer
+  name: cm-job-name-survivor-fiorina-cmo
+  description: cm-job-description-commanding-officer
+  playTimeTracker: RMCJobSurvivorCO
+  ranks:
+    RMCRankCivilianDoctor: []
+  startingGear: RMCGearSurvivorFiorinaChiefMedicalOfficer
+  accessGroups:
+  - ColonistMedical
+  roleWeight: 0.25
+  icon: "RMCJobIconWeYaCMO"
+  hasIcon: true
+  spawnMenuRoleName: Chief Medical Officer (Fiorina Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillLeadership: 2
+        RMCSkillMedical: 3
+        RMCSkillEngineer: 1
+        RMCSkillConstruction: 1
+        RMCSkillFireman: 2
+        RMCSkillFirearms: 1
+        RMCSkillEndurance: 2
+        RMCSkillSurgery: 2
+    - type: MarineOrders
+    - type: RMCSurvivor
+    - type: RMCPointing
+    - type: CommandAccent
+    - type: InnateCommandSpeech
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetNoGun
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: cmo_wo
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_wy_management
+  useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
+
+- type: startingGear
+  id: RMCGearSurvivorFiorinaChiefMedicalOfficer
+  equipment:
+    id: CMIDCardColonistDoctor
+    jumpsuit: RMCJumpsuitLiaisonBrownSurgicalWebbing
+    outerClothing: RMCLabcoatLongOpenedFiorinaCMO
+    eyes: RMCGlassesMedicalHUDGlasses
+    head: CMHeadCapCMO
+    belt: RMCBeltMedicalDefibAnalyzerFilled
+    back: CMSatchelMedical
+    gloves: CMHandsLatex
+    mask: CMMaskSterile
+    shoes: RMCShoesFancyLeather
+    ears: RMCHeadsetDistressWeYa
+    pocket1: RMCPouchSurvivalFill # TODO RMC14: wy survival pouch
+    pocket2: RMCPouchMedicalERT
+
+- type: entity
+  parent: CMJumpsuitLiaisonBrown
+  id: RMCJumpsuitLiaisonBrownSurgicalWebbing
+  suffix: Surgical Webbing
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingSurgicalGreen
+
+- type: entity
+  parent: RMCLabcoatLongOpened
+  id: RMCLabcoatLongOpenedFiorinaCMO
+  components:
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchWeYaFury161
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconWeYaCMO
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: weya_cmo
