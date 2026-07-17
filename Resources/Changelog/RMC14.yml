@@ -1,17 +1,6 @@
 ﻿Entries:
 - author: CatAndHats
   changes:
-  - message: Added Container Room Xenos sprinkle insert to Solaris
-    type: Add
-  - message: Fixed the room near sensors on Solaris having the incorrect area
-    type: Fix
-  - message: Fixed the container room on Solaris not having an APC
-    type: Fix
-  id: 3012
-  time: '2026-03-26T10:51:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9493
-- author: CatAndHats
-  changes:
   - message: Fixed shiva's snowball panic room insert not having its tactical map
       labels
     type: Fix
@@ -4584,5 +4573,12 @@
   id: 3511
   time: '2026-07-16T21:05:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9938
+- author: carccborg
+  changes:
+  - message: Vehicle Crewmen and Provost Inspectors now have watches in their loadouts
+    type: Add
+  id: 3512
+  time: '2026-07-17T12:40:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10477
 Name: RMC14
 Order: -1
