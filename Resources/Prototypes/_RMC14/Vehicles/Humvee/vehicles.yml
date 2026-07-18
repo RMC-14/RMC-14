@@ -1,15 +1,13 @@
 - type: entity
+  parent: RMCVehicleBase
   id: VehicleHumveeBase
   abstract: true
   name: humvee
   description: A fast armored utility vehicle outfitted for patrols and support.
   components:
-  - type: Vehicle
-    movementKind: Grid
-  - type: LagCompensation
-  - type: Clickable
-  - type: RMCIgnoreGhostInteractionLimits
-  - type: RequireProjectileTarget
+  - type: WarpPoint
+    follow: true
+    location: Humvee
   - type: GridVehicleMover
     maxSpeed: 6
     acceleration: 5
@@ -26,17 +24,14 @@
   - type: VehicleSound
     runningSound: /Audio/Effects/Vehicle/vehicleengineidle.ogg
     runningSoundCooldown: 2
-    hornSound: /Audio/_RMC14/Vehicle/sound_vehicles_humvee_horn.ogg
+    hornSound: /Audio/_RMC14/Vehicle/sound_vehicles_humvee_horn.ogg # This uses a unique horn
     hornCooldown: 1
 #    collisionSound: /Audio/_RMC14/Structures/metalhit.ogg
-#    collisionSoundCooldown: 0.4
     mobCollisionSound: /Audio/_RMC14/Xeno/alien_claw_block.ogg
   - type: VehicleSpotlight
     radius: 6
     energy: 2.5
     softness: 2
-  - type: Physics
-    bodyType: Dynamic
   - type: Fixtures
     fixtures:
       world:
@@ -64,7 +59,6 @@
         - LargeMobLayer
         layer:
         - LargeMobLayer
-  - type: InteractionOutline
   - type: Sprite
     drawdepth: Mobs
     sprite: _RMC14/Structures/Vehicles/humvee.rsi
@@ -88,13 +82,6 @@
       visible: false
     - map: [ rmc-wheels ]
       state: wheels_1
-  - type: SpriteMovement
-    movementLayers:
-      rmc-wheels:
-        state: wheels_0
-    noMovementLayers:
-      rmc-wheels:
-        state: wheels_1
   - type: PointLight
     enabled: false
     radius: 12
@@ -102,18 +89,7 @@
     softness: 2
     autoRot: true
     offset: "0,0.9"
-  - type: Corrodible
-    isCorrodible: false
-  - type: DoAfter
-  - type: UserInterface
-    interfaces:
-      enum.HardpointUiKey.Key:
-        type: HardpointBoundUserInterface
-      enum.VehicleWeaponsUiKey.Key:
-        type: VehicleWeaponsBoundUserInterface
-  - type: VehicleWeapons
   - type: VehicleHardpointVisuals
-  - type: InputMover
   - type: ItemSlots
     slots:
       wheel-1:
@@ -146,9 +122,6 @@
       hardpointType: HardpointTypeWheel
       slotType: HardpointSlotTypeWheel
       insertDelay: 1.5
-  - type: VehicleWheelSlots
-    slotCount: 1
-  - type: Appearance
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/humvee_interior.yml
     enterDoAfter: 1.0
@@ -178,6 +151,7 @@
 - type: entity
   parent: VehicleHumveeBase
   id: VehicleHumvee
+  suffix: Drivable, Humvee, Base, Tracked
   components:
   - type: ItemSlots
     slots:
@@ -186,25 +160,14 @@
         whitelist:
           components:
           - HardpointItem
-  - type: Damageable
-    damageContainer: StructuralMarine
-    damageModifierSet: StructuralMarine
-  - type: HardpointIntegrity
-    maxIntegrity: 1000
-    bypassEntryOnZero: true
 
 - type: entity
   parent: VehicleHumveeBase
   id: VehicleHumveeMedical
   name: humvee (medical)
   description: A medical-configured humvee outfitted for field triage.
+  suffix: Drivable, Humvee, Base, Medical, Tracked
   components:
-  - type: Damageable
-    damageContainer: StructuralMarine
-    damageModifierSet: StructuralMarine
-  - type: HardpointIntegrity
-    maxIntegrity: 1000
-    bypassEntryOnZero: true
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/humvee_medical.rsi
     layers:
@@ -265,13 +228,8 @@
   id: VehicleHumveeTransport
   name: humvee (transport)
   description: A transport humvee configured for passenger movement.
+  suffix: Drivable, Humvee, Base, Transport, Tracked
   components:
-  - type: Damageable
-    damageContainer: StructuralMarine
-    damageModifierSet: StructuralMarine
-  - type: HardpointIntegrity
-    maxIntegrity: 1000
-    bypassEntryOnZero: true
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/humvee_transport.rsi
     layers:
@@ -332,24 +290,24 @@
   id: VehicleHumveeARC
   name: humvee (arc)
   description: A humvee configured for ARC interior layout.
+  suffix: Drivable, Humvee, Base, ARC, Tracked
   components:
   - type: ItemSlots
     slots:
       turret:
-        startingItem: VehicleHumveeARCTurret
         whitelist:
           components:
           - HardpointItem
   - type: Damageable
     damageContainer: StructuralMarine
-    damageModifierSet: VehicleFrameARC
+    damageModifierSet: VehicleFrameARC # ARC damage modifier
   - type: HardpointIntegrity
     maxIntegrity: 800
     bypassEntryOnZero: true
   - type: VehicleDeployable
     deployTime: 5
     undeployTime: 5
-    autoTargetRange: 10
+    autoTargetRange: 7
     autoTargetCooldown: 0.2
     autoTurretEnabled: true
   - type: VehicleSensor
@@ -382,4 +340,3 @@
     - offset: 1,-0.1
       radius: 0.5
       interiorCoords: 3.56, -0.42
-
