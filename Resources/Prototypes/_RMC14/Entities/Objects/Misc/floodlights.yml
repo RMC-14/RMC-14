@@ -4,6 +4,7 @@
   name: small floodlight
   description: A small bit of light in the darkness.
   components:
+  - type: VehicleSmashable
   - type: Transform
     anchored: true
   - type: Physics

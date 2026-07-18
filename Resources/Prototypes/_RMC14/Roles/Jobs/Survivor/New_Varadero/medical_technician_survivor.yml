@@ -5,18 +5,12 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorDoctor
   startingGear: RMCGearSurvivorMedicalTechnician
-  spawnMenuRoleName: Medical Technician (NV Survivor)
+  spawnMenuRoleName: Medical Technician (New Varadero Survivor)
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
-        RMCSkillMedical: 3
-        RMCSkillSurgery: 2
+      preset: RMCSkillPresetSurvivorDoctor
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
