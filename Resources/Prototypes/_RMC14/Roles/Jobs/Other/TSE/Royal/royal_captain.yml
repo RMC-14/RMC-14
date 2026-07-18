@@ -5,7 +5,7 @@
   description: rmc-ghost-role-information-rcm-description
   playTimeTracker: RMCJobRoyalCaptain
   ranks:
-    RMCRankTSECaptain: [ ] 
+    RMCRankTSECaptain: [ ]
   startingGear: RMCGearRoyalCaptain
   icon: "RMCJobIconRoyalCaptain"
   joinNotifyCrew: false
@@ -18,24 +18,7 @@
       - RoyalMarines
       - TSE
     - type: Skills
-      skills:
-        RMCSkillCqc: 3
-        RMCSkillFirearms: 2 
-        RMCSkillPolice: 2
-        RMCSkillFireman: 3
-        RMCSkillConstruction: 2
-        RMCSkillEngineer: 2
-        RMCSkillEndurance: 3
-        RMCSkillMedical: 2
-        RMCSkillSurgery: 1
-        RMCSkillMeleeWeapons: 1
-        RMCSkillJtac: 3
-        RMCSkillVehicles: 2
-        RMCSkillLeadership: 3
-        RMCSkillPilot: 1
-        RMCSkillIntel: 2
-        RMCSkillPowerLoader: 1
-        RMCSkillOverwatch: 1
+      preset: RMCSkillPresetRoyalCaptain
     - type: MarineOrders
     - type: RMCPointing
     - type: CommandAccent
@@ -57,7 +40,7 @@
         state: background_twe
   hidden: true
 
-- type: startingGear 
+- type: startingGear
   id: RMCGearRoyalCaptain
   equipment:
     head: RMCHeadRoyalBeretLead
@@ -81,5 +64,5 @@
   parent: CMJobIconBase
   id: RMCJobIconRoyalCaptain
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_captain
+    sprite: _RMC14/Interface/job_icons/TSE/RCM/standard.rsi
+    state: rcm_captain
