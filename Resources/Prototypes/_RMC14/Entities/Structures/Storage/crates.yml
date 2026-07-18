@@ -185,7 +185,7 @@
       visible: false
       map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
-    sprite: _RMC14/Structures/Storage/Crates/charlie.rsi-
+    sprite: _RMC14/Structures/Storage/Crates/charlie.rsi
 
 - type: entity
   parent: RMCCrateBase
