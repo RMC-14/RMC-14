@@ -2,6 +2,7 @@
 using Content.Shared._RMC14.ARES.Logs;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Marines.ControlComputer;
+using Content.Shared._RMC14.Marines.GroundsideOperations;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
@@ -62,6 +63,15 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
                 subs.Event<MarineCommunicationsEchoSquadMsg>(OnMarineCommunicationsEchoMsg);
                 subs.Event<MarineCommunicationsOverwatchMsg>(OnMarineCommunicationsOverwatchMsg);
                 subs.Event<MarineControlComputerMedalMsg>(OnMarineCommunicationsMedalMsg);
+            });
+        Subs.BuiEvents<GroundsideOperationsConsoleComponent>(GroundsideOperationsConsoleUi.Key,
+            subs =>
+            {
+                subs.Event<MarineCommunicationsComputerMsg>(OnGroundsideOperationsComputerMsg);
+                subs.Event<MarineCommunicationsOpenMapMsg>(OnGroundsideOperationsOpenMapMsg);
+                subs.Event<MarineCommunicationsEchoSquadMsg>(OnGroundsideOperationsEchoMsg);
+                subs.Event<MarineCommunicationsOverwatchMsg>(OnGroundsideOperationsOverwatchMsg);
+                subs.Event<MarineControlComputerMedalMsg>(OnGroundsideOperationsMedalMsg);
             });
 
         Subs.CVar(_config, CCVars.ChatMaxMessageLength, limit => CharacterLimit = limit, true);
@@ -138,6 +148,22 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         _ui.TryOpenUi(ent.Owner, TacticalMapComputerUi.Key, args.Actor);
     }
 
+    private void OnGroundsideOperationsComputerMsg(
+        Entity<GroundsideOperationsConsoleComponent> ent,
+        ref MarineCommunicationsComputerMsg args)
+    {
+        if (TryComp(ent, out MarineCommunicationsComputerComponent? communications))
+            OnMarineCommunicationsComputerMsg((ent.Owner, communications), ref args);
+    }
+
+    private void OnGroundsideOperationsOpenMapMsg(
+        Entity<GroundsideOperationsConsoleComponent> ent,
+        ref MarineCommunicationsOpenMapMsg args)
+    {
+        if (TryComp(ent, out MarineCommunicationsComputerComponent? communications))
+            OnMarineCommunicationsOpenMapMsg((ent.Owner, communications), ref args);
+    }
+
     private void OnMarineCommunicationsEchoMsg(Entity<MarineCommunicationsComputerComponent> ent, ref MarineCommunicationsEchoSquadMsg args)
     {
         if (!ent.Comp.CanCreateEcho)
@@ -161,12 +187,36 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         _ui.TryOpenUi(ent.Owner, OverwatchConsoleUI.Key, args.Actor);
     }
 
+    private void OnGroundsideOperationsEchoMsg(
+        Entity<GroundsideOperationsConsoleComponent> ent,
+        ref MarineCommunicationsEchoSquadMsg args)
+    {
+        if (TryComp(ent, out MarineCommunicationsComputerComponent? communications))
+            OnMarineCommunicationsEchoMsg((ent.Owner, communications), ref args);
+    }
+
+    private void OnGroundsideOperationsOverwatchMsg(
+        Entity<GroundsideOperationsConsoleComponent> ent,
+        ref MarineCommunicationsOverwatchMsg args)
+    {
+        if (TryComp(ent, out MarineCommunicationsComputerComponent? communications))
+            OnMarineCommunicationsOverwatchMsg((ent.Owner, communications), ref args);
+    }
+
     private void OnMarineCommunicationsMedalMsg(Entity<MarineCommunicationsComputerComponent> ent, ref MarineControlComputerMedalMsg args)
     {
         if (!ent.Comp.CanGiveMedals)
             return;
 
         _marineControlComputer.GiveMedal(ent, args.Actor);
+    }
+
+    private void OnGroundsideOperationsMedalMsg(
+        Entity<GroundsideOperationsConsoleComponent> ent,
+        ref MarineControlComputerMedalMsg args)
+    {
+        if (TryComp(ent, out MarineCommunicationsComputerComponent? communications))
+            OnMarineCommunicationsMedalMsg((ent.Owner, communications), ref args);
     }
 
     public virtual void AnnounceRadio(

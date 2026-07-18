@@ -1,0 +1,103 @@
+<controls:GroundsideOperationsConsoleWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Marines.GroundsideOperations"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    Title="{Loc rmc-goc-title}"
+    MinSize="900 590"
+    SetSize="1050 700">
+    <PanelContainer>
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BackgroundColor="#06111C" BorderColor="#5EC6E8" BorderThickness="2" />
+        </PanelContainer.PanelOverride>
+        <BoxContainer Orientation="Vertical" Margin="10" SeparationOverride="6">
+            <BoxContainer Orientation="Horizontal">
+                <Label Text="{Loc rmc-goc-heading}" ModulateSelfOverride="#83D9F5" />
+                <Control HorizontalExpand="True" />
+                <Label Name="AlertStatus" Access="Public" ModulateSelfOverride="#83D9F5" />
+            </BoxContainer>
+            <RichTextLabel Text="{Loc rmc-goc-subheading}" ModulateSelfOverride="#6EA5B8" />
+            <TabContainer Name="Tabs" Access="Public" HorizontalExpand="True" VerticalExpand="True">
+                <BoxContainer Name="OverwatchTab" Access="Public" Orientation="Vertical" Margin="10" SeparationOverride="8">
+                    <RichTextLabel Text="{Loc rmc-goc-overwatch-title}" />
+                    <RichTextLabel Text="{Loc rmc-goc-overwatch-description}" ModulateSelfOverride="#8AB6C5" />
+                    <PanelContainer>
+                        <PanelContainer.PanelOverride>
+                            <graphics:StyleBoxFlat BackgroundColor="#0B1B29" BorderColor="#2E7891" BorderThickness="1" />
+                        </PanelContainer.PanelOverride>
+                        <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="5">
+                            <Label Text="{Loc rmc-goc-overwatch-functions}" />
+                            <RichTextLabel Name="SelectedSquadSummary" Access="Public" Text="{Loc rmc-goc-no-squad-selected}" ModulateSelfOverride="#8AB6C5" />
+                            <ScrollContainer VerticalExpand="True" MinHeight="150">
+                                <BoxContainer Name="SquadSummaryContainer" Access="Public" Orientation="Vertical" SeparationOverride="3" />
+                            </ScrollContainer>
+                            <LineEdit Name="SquadMessage" Access="Public" PlaceHolder="{Loc rmc-goc-squad-message-placeholder}" />
+                            <BoxContainer Orientation="Horizontal" SeparationOverride="5">
+                                <Button Name="MessageSquadButton" Access="Public" Text="{Loc rmc-goc-message-squad}" StyleClasses="OpenBoth" HorizontalExpand="True" />
+                                <Button Name="MessageLeaderButton" Access="Public" Text="{Loc rmc-goc-message-leader}" StyleClasses="OpenBoth" HorizontalExpand="True" />
+                            </BoxContainer>
+                            <BoxContainer Orientation="Horizontal" SeparationOverride="5">
+                                <LineEdit Name="PrimaryObjective" Access="Public" PlaceHolder="{Loc rmc-goc-primary-objective-placeholder}" HorizontalExpand="True" />
+                                <Button Name="SetPrimaryObjectiveButton" Access="Public" Text="{Loc rmc-goc-set-primary-objective}" StyleClasses="OpenBoth" />
+                                <Button Name="ClearPrimaryObjectiveButton" Access="Public" Text="{Loc rmc-goc-clear-objective}" StyleClasses="OpenBoth" />
+                                <Button Name="RemindPrimaryObjectiveButton" Access="Public" Text="{Loc rmc-goc-remind-objective}" StyleClasses="OpenBoth" />
+                            </BoxContainer>
+                            <BoxContainer Orientation="Horizontal" SeparationOverride="5">
+                                <LineEdit Name="SecondaryObjective" Access="Public" PlaceHolder="{Loc rmc-goc-secondary-objective-placeholder}" HorizontalExpand="True" />
+                                <Button Name="SetSecondaryObjectiveButton" Access="Public" Text="{Loc rmc-goc-set-secondary-objective}" StyleClasses="OpenBoth" />
+                                <Button Name="ClearSecondaryObjectiveButton" Access="Public" Text="{Loc rmc-goc-clear-objective}" StyleClasses="OpenBoth" />
+                                <Button Name="RemindSecondaryObjectiveButton" Access="Public" Text="{Loc rmc-goc-remind-objective}" StyleClasses="OpenBoth" />
+                            </BoxContainer>
+                            <Button Name="OpenOverwatchButton" Access="Public" Text="{Loc rmc-goc-open-overwatch}" StyleClasses="OpenBoth" />
+                        </BoxContainer>
+                    </PanelContainer>
+                    <Control VerticalExpand="True" />
+                </BoxContainer>
+                <BoxContainer Name="CommandMonitorTab" Access="Public" Orientation="Vertical" Margin="10" SeparationOverride="8">
+                    <RichTextLabel Text="{Loc rmc-goc-command-monitor-title}" />
+                    <RichTextLabel Name="CommandMonitorStatus" Access="Public" Text="{Loc rmc-goc-command-monitor-idle}" ModulateSelfOverride="#8AB6C5" />
+                    <RichTextLabel Text="{Loc rmc-goc-command-monitor-description}" ModulateSelfOverride="#8AB6C5" />
+                    <BoxContainer Orientation="Horizontal" SeparationOverride="6">
+                        <Button Name="TakeOperatorButton" Access="Public" Text="{Loc rmc-goc-take-operator}" StyleClasses="OpenBoth" HorizontalExpand="True" />
+                        <Button Name="StopOverwatchButton" Access="Public" Text="{Loc rmc-goc-stop-overwatch}" StyleClasses="OpenBoth" HorizontalExpand="True" />
+                    </BoxContainer>
+                    <Button Name="OpenCommandMonitorButton" Access="Public" Text="{Loc rmc-goc-open-command-monitor}" StyleClasses="OpenBoth" />
+                    <Control VerticalExpand="True" />
+                </BoxContainer>
+                <BoxContainer Name="ExecutiveTab" Access="Public" Orientation="Vertical" Margin="10" SeparationOverride="6">
+                    <Label Text="{Loc rmc-goc-groundside-title}" />
+                    <TextEdit Name="GroundAnnouncementText" Access="Public" MinHeight="80" />
+                    <Button Name="GroundAnnouncementButton" Access="Public" Text="{Loc rmc-goc-groundside-announce}" StyleClasses="OpenBoth" />
+                    <BoxContainer Orientation="Horizontal" SeparationOverride="6">
+                        <Button Name="TacticalMapButton" Access="Public" Text="{Loc rmc-goc-tactical-map}" StyleClasses="OpenBoth" HorizontalExpand="True" />
+                        <Button Name="EchoButton" Access="Public" Text="{Loc rmc-goc-activate-echo}" StyleClasses="OpenBoth" HorizontalExpand="True" />
+                    </BoxContainer>
+                    <Label Text="{Loc rmc-goc-primary-lz}" />
+                    <BoxContainer Name="LandingZonesContainer" Access="Public" Orientation="Horizontal" SeparationOverride="4" />
+                    <Label Text="{Loc rmc-goc-ship-control-title}" Margin="0 8 0 0" />
+                    <BoxContainer Orientation="Horizontal" SeparationOverride="6">
+                        <Button Name="AlertButton" Access="Public" Text="{Loc rmc-goc-change-alert}" StyleClasses="OpenBoth" HorizontalExpand="True" />
+                        <Button Name="ShipAnnouncementButton" Access="Public" Text="{Loc rmc-goc-ship-announce}" StyleClasses="OpenBoth" HorizontalExpand="True" />
+                    </BoxContainer>
+                    <BoxContainer Orientation="Horizontal" SeparationOverride="6">
+                        <Button Name="HighCommandButton" Access="Public" Text="{Loc rmc-goc-high-command}" StyleClasses="OpenBoth" HorizontalExpand="True" />
+                        <Button Name="MedalsButton" Access="Public" Text="{Loc rmc-goc-medals}" StyleClasses="OpenBoth" HorizontalExpand="True" />
+                    </BoxContainer>
+                    <LineEdit Name="HighCommandMessage" Access="Public" PlaceHolder="{Loc rmc-goc-high-command-placeholder}" />
+                </BoxContainer>
+                <BoxContainer Name="EmergencyTab" Access="Public" Orientation="Vertical" Margin="10" SeparationOverride="8">
+                    <RichTextLabel Text="{Loc rmc-goc-emergency-description}" ModulateSelfOverride="#E0B381" />
+                    <Button Name="RedAlertButton" Access="Public" Text="{Loc rmc-goc-red-alert}" StyleClasses="OpenBoth" />
+                    <Button Name="GeneralQuartersButton" Access="Public" Text="{Loc rmc-goc-general-quarters}" StyleClasses="OpenBoth" />
+                    <Button Name="EvacuationButton" Access="Public" StyleClasses="OpenBoth" />
+                    <!-- TODO RMC14: restore only after a native ERT/distress workflow exists. -->
+                </BoxContainer>
+                <BoxContainer Name="OrdnanceTab" Access="Public" Orientation="Vertical" Margin="10" SeparationOverride="8">
+                    <RichTextLabel Name="OrdnanceStatus" Access="Public" />
+                    <RichTextLabel Text="{Loc rmc-goc-ordnance-description}" ModulateSelfOverride="#8AB6C5" />
+                    <Button Name="OpenOrdnanceButton" Access="Public" Text="{Loc rmc-goc-open-ordnance}" StyleClasses="OpenBoth" />
+                    <Control VerticalExpand="True" />
+                </BoxContainer>
+            </TabContainer>
+        </BoxContainer>
+    </PanelContainer>
+</controls:GroundsideOperationsConsoleWindow>

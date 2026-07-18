@@ -1,5 +1,7 @@
 ﻿using Content.Shared._RMC14.Marines.ControlComputer;
 
+using Content.Client._RMC14.Marines.GroundsideOperations;
+
 namespace Content.Client._RMC14.Marines.ControlComputer;
 
 public sealed class MarineControlComputerSystem : SharedMarineControlComputerSystem
@@ -21,6 +23,8 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
             {
                 if (open is MarineControlComputerBui bui)
                     bui.Refresh();
+                else if (open is GroundsideOperationsConsoleBui groundsideUi)
+                    groundsideUi.Refresh();
             }
         }
         catch (Exception e)

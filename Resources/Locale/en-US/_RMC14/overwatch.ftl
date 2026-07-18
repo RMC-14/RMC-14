@@ -4,6 +4,7 @@ rmc-overwatch-console-tactical-map = Tactical Map
 rmc-overwatch-console-stop-overwatch = Stop Overwatch
 rmc-overwatch-console-squad-message-title = Squad Message
 rmc-overwatch-console-message-squad = Message Squad
+rmc-overwatch-console-message-squad-leader = Message Squad Leader
 rmc-overwatch-console-squad-objectives = Squad Objectives
 rmc-overwatch-console-show-squad-info = Show Squad Info
 rmc-overwatch-console-hide-squad-info = Hide Squad Info
@@ -83,7 +84,10 @@ rmc-overwatch-console-pain-kicked-out = The pain kicked you out of the console!
 
 # Squad message announcements
 rmc-overwatch-console-announce-message = [color=#3C70FF][bold]Overwatch:[/bold] { $operatorName } transmits: [font size=16][bold]{ $message }[/bold][/font][/color]
+rmc-overwatch-console-announce-leader-message = [color=#3C70FF][bold]Overwatch — Squad Leader:[/bold] { $operatorName } transmits: [font size=16][bold]{ $message }[/bold][/font][/color]
 rmc-overwatch-console-squad-message-sent = [bold][color=#6685F5]'{ $squadName }' squad message sent: '{ $message }'.[/color][/bold]
+rmc-overwatch-console-no-squad-leader = The selected squad has no living Squad Leader.
+rmc-overwatch-console-leader-message-sent = Message sent to Squad Leader { $leader }.
 
 # Squad leader promotion messages
 rmc-overwatch-console-marine-unfit-to-lead = { $marineName } is unfit to lead!
