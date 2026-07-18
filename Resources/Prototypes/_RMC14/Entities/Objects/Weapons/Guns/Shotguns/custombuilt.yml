@@ -69,8 +69,3 @@
       accuracyMultiplierUnwielded: 0.5  # BASE_ACCURACY_MULT - HIT_ACCURACY_MULT_TIER_10
     - type: GunDamageModifier
       multiplier: 0.9        # BASE_BULLET_DAMAGE_MULT - BULLET_DAMAGE_MULT_TIER_2
-    - type: AttachableHolder
-      slots:
-        rmc-aslot-barrel:
-          whitelist:
-            tags:
