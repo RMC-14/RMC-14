@@ -135,7 +135,7 @@
   parent: CMJobIconBase
   id: RMCJobIconColonyAdministrator
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/We-Ya/other.rsi
     state: weya_admin
 
 - type: jobIcon
