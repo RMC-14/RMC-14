@@ -68,5 +68,5 @@
   parent: CMJobIconBase
   id: RMCJobIconArmyCET
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/army.rsi
     state: hudsquad_cet
