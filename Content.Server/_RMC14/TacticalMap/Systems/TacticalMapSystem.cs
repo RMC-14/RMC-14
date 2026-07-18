@@ -23,6 +23,7 @@ using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Eye;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
+using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Database;
@@ -52,6 +53,7 @@ namespace Content.Server._RMC14.TacticalMap;
 public sealed class TacticalMapSystem : SharedTacticalMapSystem
 {
     private static readonly ProtoId<TacticalMapLayerPrototype> GlobalMarineLayer = "Marines";
+    private static readonly ProtoId<TacticalMapLayerPrototype> GlobalXenoLayer = "Xenos";
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
@@ -73,6 +75,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly RMCUnrevivableSystem _unrevivable = default!;
+    [Dependency] private readonly SharedXenoWeedsSystem _weeds = default!;
     [Dependency] private readonly XenoAnnounceSystem _xenoAnnounce = default!;
     [Dependency] private readonly XenoWatchSystem _xenoWatch = default!;
 
@@ -1607,7 +1610,15 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             return;
 
         var tileCoords = new Vector2(position.X, position.Y);
-        var worldPos = _transform.ToMapCoordinates(new EntityCoordinates(map.Owner, tileCoords * grid.TileSize));
+        var targetCoords = new EntityCoordinates(map.Owner, tileCoords * grid.TileSize);
+
+        if (!_weeds.IsOnWeeds((map.Owner, grid), targetCoords))
+        {
+            _popup.PopupCursor(Loc.GetString("rmc-xeno-queen-eye-no-weeds"), actor, PopupType.MediumCaution);
+            return;
+        }
+
+        var worldPos = _transform.ToMapCoordinates(targetCoords);
 
         _transform.SetWorldPosition(eye, worldPos.Position);
     }
@@ -1838,6 +1849,44 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
                     if (delta.X * delta.X + delta.Y * delta.Y <= rangeSquared)
                         blips[id] = blip;
                 }
+            }
+        }
+    }
+
+    private void AddVehicleSensorRevealBlips(
+        TacticalMapComponent map,
+        Dictionary<int, TacticalMapBlip> blips,
+        bool useLastUpdateBlips)
+    {
+        // vehicle-mounted sensors reveal nearby xeno blips without exposing the whole layer.
+        if (!TryGetTacticalMapOwner(map, out var mapId) ||
+            !map.Layers.TryGetValue(GlobalXenoLayer, out var xenoLayer))
+        {
+            return;
+        }
+
+        var rangeEv = new TacticalMapXenoRevealRangeEvent();
+        RaiseLocalEvent(ref rangeEv);
+        if (rangeEv.Sources.Count == 0)
+            return;
+
+        var sourceBlips = useLastUpdateBlips ? xenoLayer.LastUpdateBlips : xenoLayer.Blips;
+        foreach (var (id, blip) in sourceBlips)
+        {
+            if (blips.ContainsKey(id))
+                continue;
+
+            foreach (var source in rangeEv.Sources)
+            {
+                if (source.Grid != mapId)
+                    continue;
+
+                var delta = blip.Indices - source.Indices;
+                if (delta.X * delta.X + delta.Y * delta.Y > source.Range * source.Range)
+                    continue;
+
+                blips[id] = blip;
+                break;
             }
         }
     }
@@ -2133,6 +2182,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         var blips = BuildBlipsFromLayers(map, blipLayers, useLastUpdateBlips: !user.Comp.LiveUpdate);
         AddAlwaysVisibleBlips(blipLayers, map, blips);
         AddRangedSensorTowerBlips(map, blipLayers, blips, useLastUpdateBlips: !user.Comp.LiveUpdate);
+        AddVehicleSensorRevealBlips(map, blips, useLastUpdateBlips: !user.Comp.LiveUpdate);
 
         AddSelfBlip(user.Owner, map, blips);
         FilterXenoBlipsForHive(user.Owner, blips);
@@ -2298,6 +2348,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         var blips = BuildBlipsFromLayers(map, blipLayers, useLastUpdateBlips: false);
         AddRangedSensorTowerBlips(map, blipLayers, blips, useLastUpdateBlips: false);
+        AddVehicleSensorRevealBlips(map, blips, useLastUpdateBlips: false);
         computer.Comp.Blips = ToNetworkBlips(blips);
         Dirty(computer);
 

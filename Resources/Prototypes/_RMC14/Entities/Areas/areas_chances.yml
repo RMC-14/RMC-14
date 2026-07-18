@@ -490,12 +490,30 @@
 - type: entity
   parent: RMCAreaLv522IndoorsLoneBuildings
   id: RMCAreaLv522IndoorsLoneBuildingsStorageBlocks
-  name: Outdoor Storage
+  name: Southern Outdoor Storage
   components:
   - type: Sprite
     state: blue
   - type: Area
     linkedLz: dropship_lz2, dropship_lz1
+
+- type: entity
+  parent: RMCAreaLv522IndoorsLoneBuildingsStorageBlocks
+  id: RMCAreaLv522IndoorsLoneBuildingsStorageBlocksNW
+  name: Northwestern Outdoor Storage
+  components:
+  - type: Sprite
+    state: blue
+
+- type: entity
+  parent: RMCAreaLv522IndoorsLoneBuildingsStorageBlocks
+  id: RMCAreaLv522IndoorsLoneBuildingsStorageBlocksE
+  name: Eastern Outdoor Storage
+  components:
+  - type: Sprite
+    state: blue
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaLv522IndoorsLoneBuildings

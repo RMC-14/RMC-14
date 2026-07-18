@@ -49,9 +49,40 @@
         RMCSkillIntel: 2
         RMCSkillDomestics: 2
         RMCSkillNavigations: 1
+    - type: Language
+      spokenLanguages:
+      - English
+      - French
+      - Japanese
+      - Russian
+      - Scandinavian
+      - German
+      - Chinese
+      - Spanish
+      understoodLanguages:
+      - English
+      - French
+      - Japanese
+      - Russian
+      - Scandinavian
+      - German
+      - Chinese
+      - Spanish
+      currentLanguage: English
+      defaultLanguage: English
+    - type: LanguageLearning
+      learnableLanguages:
+      - Xeno
+      firstContactLanguages:
+      - Xeno
+      comprehensionThreshold: 0.8
+      learningRange: 8.0
+      baseWordLearningRate: 0.05
     - type: CMVendorUser
       id: RMCJobSynthetic
       points: 45
+      extraPoints:
+        ExperimentalTools: 30
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
@@ -114,21 +145,13 @@
   - type: EyeProtection
   - type: WoundableUntreatable
   - type: Insulated
-  - type: RMCLeapProtection
-    inherentStunDuration: 3
   - type: ZombieImmune
+  - type: ShowHealthIcons
+  - type: ShowHealthBars
   - type: ParalyzeImmuneFrom
     whitelist:
       tags:
       - RMCSynthGrabbable
-
-- type: entity
-  id: RMCSynthHudComponents
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: ShowHealthBars
-  - type: ShowHealthIcons
-  - type: HolocardScanner
 
 - type: entity
   id: RMCSynthRemoveComponents
