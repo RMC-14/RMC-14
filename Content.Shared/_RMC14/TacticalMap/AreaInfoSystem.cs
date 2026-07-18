@@ -199,6 +199,14 @@ public sealed class AreaInfoSystem : EntitySystem
         else if (!area.Value.Comp.ResinAllowed)
             restrictedActions.Add("Resin Structures");
 
+        var weedkillerZones = new List<string>();
+        var check = new string(area.Value.Comp.LinkedLz);
+        if (!string.IsNullOrWhiteSpace(check))
+            if (check.Contains("dropship_lz1"))
+                weedkillerZones.Add("Landing Zone One");
+            if (check.Contains("dropship_lz2"))
+                weedkillerZones.Add("Landing Zone Two");
+
         var protectionSource = "";
         if (hasHiveCoreProtection)
             protectionSource = "\nProtection: Hive Core";
@@ -217,6 +225,12 @@ public sealed class AreaInfoSystem : EntitySystem
         {
             restrictionsStr += "\n\nBlocked:";
             restrictionsStr += "\n• " + string.Join("\n• ", restrictedActions);
+        }
+
+        if (weedkillerZones.Count > 0)
+        {
+            restrictionsStr += "\n\nWeedkiller:";
+            restrictionsStr += "\n• " + string.Join("\n• ", weedkillerZones);
         }
 
         return (areaProto.Name, severityToUse, restrictionsStr);
