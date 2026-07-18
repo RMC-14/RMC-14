@@ -59,7 +59,7 @@
       shotsPerBurst: 1
     - type: RMCSelectiveFire
       recoilWielded: 3       # RECOIL_AMOUNT_TIER_3
-      recoilUnwielded: 1     # RECOIL_AMOUNT_TIER_1
+      recoilUnwielded: 5     # RECOIL_AMOUNT_TIER_1
       scatterWielded: 12     # SCATTER_AMOUNT_TIER_5
       scatterUnwielded: 30   # SCATTER_AMOUNT_TIER_1 
       baseFireRate: 0.5      # FIRE_DELAY_TIER_SHOTGUN_BASE 
