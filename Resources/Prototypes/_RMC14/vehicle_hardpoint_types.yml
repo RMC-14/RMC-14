@@ -1,139 +1,177 @@
 - type: entity
   id: HardpointVehicleFamilyVan
+  categories: [ HideSpawnMenu ]
   components:
   - type: HardpointVehicleFamily
 
 - type: entity
   id: HardpointVehicleFamilyAPC
+  categories: [ HideSpawnMenu ]
   components:
   - type: HardpointVehicleFamily
 
 - type: entity
   id: HardpointVehicleFamilyHumvee
+  categories: [ HideSpawnMenu ]
   components:
   - type: HardpointVehicleFamily
 
 - type: entity
   id: HardpointVehicleFamilyTank
+  categories: [ HideSpawnMenu ]
   components:
   - type: HardpointVehicleFamily
 
 - type: entity
   id: HardpointTypeWheel
+  categories: [ HideSpawnMenu ]
   components:
   - type: HardpointType
 
 - type: entity
   id: HardpointTypeTurret
+  categories: [ HideSpawnMenu ]
   components:
   - type: HardpointType
 
 - type: entity
   id: HardpointTypeCannon
+  categories: [ HideSpawnMenu ]
   components:
   - type: HardpointType
 
 - type: entity
   id: HardpointTypeLauncher
+  categories: [ HideSpawnMenu ]
   components:
   - type: HardpointType
 
 - type: entity
   id: HardpointTypeArmor
+  categories: [ HideSpawnMenu ]
   components:
   - type: HardpointType
 
 - type: entity
   id: HardpointTypeSupport
+  categories: [ HideSpawnMenu ]
   components:
   - type: HardpointType
 
 - type: entity
   id: HardpointTypeSupportAttachment
+  categories: [ HideSpawnMenu ]
   components:
   - type: HardpointType
 
 - type: entity
   id: HardpointTypeRoofAttachment
+  categories: [ HideSpawnMenu ]
   components:
   - type: HardpointType
 
 - type: entity
   id: HardpointTypeFrontAttachment
+  categories: [ HideSpawnMenu ]
   components:
   - type: HardpointType
 
 - type: entity
   id: HardpointTypeSecondary
+  categories: [ HideSpawnMenu ]
   components:
   - type: HardpointType
 
 - type: entity
   id: HardpointCompatibilitySPPVan
+  categories: [ HideSpawnMenu ]
   components:
   - type: HardpointCompatibility
 
 - type: entity
   id: HardpointCompatibilitySPPAPC
+  categories: [ HideSpawnMenu ]
   components:
   - type: HardpointCompatibility
 
 - type: entity
   id: HardpointCompatibilitySPPAPCTurret
+  categories: [ HideSpawnMenu ]
   components:
   - type: HardpointCompatibility
 
 - type: entity
   id: HardpointCompatibilitySPPTank
+  categories: [ HideSpawnMenu ]
   components:
   - type: HardpointCompatibility
 
 - type: entity
   id: HardpointSlotTypeWheel
+  categories: [ HideSpawnMenu ]
   components:
   - type: HardpointSlotType
+    repairRate: 0.033
 
 - type: entity
   id: HardpointSlotTypeTurret
+  categories: [ HideSpawnMenu ]
   components:
   - type: HardpointSlotType
+    repairRate: 0.016
 
 - type: entity
   id: HardpointSlotTypeCannon
+  categories: [ HideSpawnMenu ]
   components:
   - type: HardpointSlotType
+    repairRate: 0.020
 
 - type: entity
   id: HardpointSlotTypeLauncher
+  categories: [ HideSpawnMenu ]
   components:
   - type: HardpointSlotType
+    repairRate: 0.025
 
 - type: entity
   id: HardpointSlotTypeRoofAttachment
+  categories: [ HideSpawnMenu ]
   components:
   - type: HardpointSlotType
+    repairRate: 0.025
 
 - type: entity
   id: HardpointSlotTypeFrontAttachment
+  categories: [ HideSpawnMenu ]
   components:
   - type: HardpointSlotType
+    repairRate: 0.025
 
 - type: entity
   id: HardpointSlotTypeSupportAttachment
+  categories: [ HideSpawnMenu ]
   components:
   - type: HardpointSlotType
+    repairRate: 0.025
 
 - type: entity
   id: HardpointSlotTypeArmor
+  categories: [ HideSpawnMenu ]
   components:
   - type: HardpointSlotType
+    repairRate: 0.014
 
 - type: entity
   id: HardpointSlotTypeTreads
+  categories: [ HideSpawnMenu ]
   components:
   - type: HardpointSlotType
+    repairRate: 0.033
 
 - type: entity
   id: HardpointSlotTypeTires
+  categories: [ HideSpawnMenu ]
   components:
   - type: HardpointSlotType
+    repairRate: 0.033

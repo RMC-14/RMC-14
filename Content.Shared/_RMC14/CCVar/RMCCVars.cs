@@ -127,18 +127,6 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCAtmosTileEqualize =
         CVarDef.Create("rmc.atmos_tile_equalize", false, CVar.REPLICATED | CVar.SERVER);
 
-    public static readonly CVarDef<bool> VehicleDebugOverlay =
-        CVarDef.Create("rmc.vehicle.debug_overlay", false, CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<bool> VehicleHardpointOverlay =
-        CVarDef.Create("rmc.vehicle.hardpoint_overlay", false, CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<bool> VehicleCollisionOverlay =
-        CVarDef.Create("rmc.vehicle.collision_overlay", false, CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<bool> VehicleMovementOverlay =
-        CVarDef.Create("rmc.vehicle.movement_overlay", false, CVar.CLIENT | CVar.ARCHIVE);
-
     public static readonly CVarDef<bool> RMCGasTileOverlayUpdate =
         CVarDef.Create("rmc.gas_tile_overlay_update", false, CVar.REPLICATED | CVar.SERVER);
 
@@ -527,7 +515,7 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.lobby_start_paused", false, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCChatRepeatHistory =
-        CVarDef.Create("rmc.chat_repeat_history", 4, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.chat_repeat_history", 5, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<bool> RMCChatSquadColorMode =
         CVarDef.Create("rmc.chat_squad_color_mode", true, CVar.CLIENTONLY | CVar.ARCHIVE);
@@ -610,4 +598,10 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<bool> RMCLightningMaxAmountLightNearbyEnabled =
         CVarDef.Create("rmc.lighting_max_amount_light_nearby_enabled", true, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCWeedSpreadMaxProcessTimeMilliseconds =
+        CVarDef.Create("rmc.weed_spread_max_process_time_milliseconds", 1f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCDoAfterCancelMaxProcessTimeMilliseconds =
+        CVarDef.Create("rmc.do_after_cancel_max_process_time_milliseconds", 1f, CVar.REPLICATED | CVar.SERVER);
 }

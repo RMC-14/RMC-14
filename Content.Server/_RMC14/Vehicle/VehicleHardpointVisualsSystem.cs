@@ -7,13 +7,16 @@ namespace Content.Server._RMC14.Vehicle;
 
 public sealed class VehicleHardpointVisualsSystem : EntitySystem
 {
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private readonly VehicleTopologySystem _topology = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<VehicleHardpointVisualsComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<VehicleHardpointVisualsComponent, MapInitEvent>(OnInit);
-        SubscribeLocalEvent<HardpointSlotsChangedEvent>(OnHardpointSlotsChanged);
+        SubscribeLocalEvent<VehicleHardpointVisualsComponent, HardpointSlotsChangedEvent>(OnHardpointSlotsChanged);
+        SubscribeLocalEvent<HardpointIntegrityComponent, HardpointIntegrityChangedEvent>(OnHardpointIntegrityChanged);
     }
 
     private void OnInit(Entity<VehicleHardpointVisualsComponent> ent, ref ComponentInit args)
@@ -26,12 +29,20 @@ public sealed class VehicleHardpointVisualsSystem : EntitySystem
         UpdateAppearance(ent.Owner);
     }
 
-    private void OnHardpointSlotsChanged(HardpointSlotsChangedEvent args)
+    private void OnHardpointSlotsChanged(Entity<VehicleHardpointVisualsComponent> ent, ref HardpointSlotsChangedEvent _)
     {
-        if (!HasComp<VehicleHardpointVisualsComponent>(args.Vehicle))
+        UpdateAppearance(ent.Owner);
+    }
+
+    private void OnHardpointIntegrityChanged(Entity<HardpointIntegrityComponent> ent, ref HardpointIntegrityChangedEvent args)
+    {
+        if (!_topology.TryGetVehicle(ent.Owner, out var vehicle))
             return;
 
-        UpdateAppearance(args.Vehicle);
+        if (!HasComp<VehicleHardpointVisualsComponent>(vehicle))
+            return;
+
+        UpdateAppearance(vehicle);
     }
 
     private void UpdateAppearance(
@@ -66,7 +77,6 @@ public sealed class VehicleHardpointVisualsSystem : EntitySystem
                 var item = itemSlot.Item!.Value;
                 state = ResolveVisualState(item, out usesOverlay);
             }
-
             if (usesOverlay)
                 state = string.Empty;
 
@@ -98,7 +108,8 @@ public sealed class VehicleHardpointVisualsSystem : EntitySystem
         }
 
         visuals.Layers = newLayers;
-        Dirty(vehicle, visuals);
+        var appearance = EnsureComp<AppearanceComponent>(vehicle);
+        _appearance.SetData(vehicle, VehicleHardpointVisualsVisuals.Layers, newLayers, appearance);
     }
 
     internal string ResolveVisualState(EntityUid item, out bool usesOverlay, int depth = 0)
@@ -109,6 +120,18 @@ public sealed class VehicleHardpointVisualsSystem : EntitySystem
 
         if (TryComp(item, out VehicleTurretComponent? turret) && turret.ShowOverlay)
             usesOverlay = true;
+
+        if (TryComp(item, out HardpointVisualComponent? visual) &&
+            !string.IsNullOrWhiteSpace(visual.VehicleState))
+        {
+            return ResolveDamageVisual(item, visual.VehicleState, visual.DamagedVehicleState);
+        }
+
+        if (TryComp(item, out VehicleTurretComponent? turretOverlay) &&
+            !string.IsNullOrWhiteSpace(turretOverlay.OverlayState))
+        {
+            return ResolveDamageVisual(item, turretOverlay.OverlayState, turretOverlay.OverlayDamagedState);
+        }
 
         if (TryComp(item, out HardpointSlotsComponent? attachedSlots) &&
             TryComp(item, out ItemSlotsComponent? attachedItemSlots))
@@ -129,18 +152,18 @@ public sealed class VehicleHardpointVisualsSystem : EntitySystem
             }
         }
 
-        if (TryComp(item, out HardpointVisualComponent? visual) &&
-            !string.IsNullOrWhiteSpace(visual.VehicleState))
-        {
-            return visual.VehicleState;
-        }
-
-        if (TryComp(item, out VehicleTurretComponent? turretOverlay) &&
-            !string.IsNullOrWhiteSpace(turretOverlay.OverlayState))
-        {
-            return turretOverlay.OverlayState;
-        }
-
         return string.Empty;
+    }
+
+    private string ResolveDamageVisual(EntityUid item, string normalState, string damagedState)
+    {
+        if (!TryComp(item, out HardpointIntegrityComponent? integrity) ||
+            integrity.Integrity > 0f ||
+            string.IsNullOrWhiteSpace(damagedState))
+        {
+            return normalState;
+        }
+
+        return damagedState;
     }
 }

@@ -2,8 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
+using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Construction;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Power;
+using Content.Shared._RMC14.PowerLoader;
 using Content.Shared._RMC14.Teleporter;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Buckle;
@@ -14,6 +17,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Maps;
 using Content.Shared.Mind;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
@@ -38,6 +42,7 @@ public sealed class VehicleSystem : EntitySystem
 {
     private static readonly EntProtoId VehicleKey = "RMCVehicleKey";
 
+    [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly SharedJobSystem _job = default!;
@@ -49,6 +54,7 @@ public sealed class VehicleSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
     [Dependency] private readonly SharedRMCTeleporterSystem _rmcTeleporter = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -78,6 +84,7 @@ public sealed class VehicleSystem : EntitySystem
         SubscribeLocalEvent<VehicleInteriorOccupantComponent, MapUidChangedEvent>(OnOccupantMapChanged);
         SubscribeLocalEvent<VehicleInteriorOccupantComponent, MetaFlagRemoveAttemptEvent>(OnOccupantMetaFlagRemoveAttempt);
         SubscribeLocalEvent<HardpointIntegrityComponent, VehicleCanRunEvent>(OnFrameVehicleCanRun);
+        SubscribeLocalEvent<VehicleInteriorComponent, VehicleFrameIntegrityChangedEvent>(OnVehicleFrameIntegrityChanged);
         SubscribeLocalEvent<RMCConstructionAttemptEvent>(OnConstructionAttempt);
     }
 
@@ -99,6 +106,12 @@ public sealed class VehicleSystem : EntitySystem
         if (!TryFindEntry(ent, args.User, out var entryIndex))
         {
             _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-use-doorway"), args.User, args.User);
+            return;
+        }
+
+        if (!HasComp<GhostComponent>(args.User) &&
+            !TryPrepareEnter(ent, args.User, entryIndex, popup: true, out _, out _, out _, out _, out _))
+        {
             return;
         }
 
@@ -134,50 +147,125 @@ public sealed class VehicleSystem : EntitySystem
 
     private bool TryEnter(Entity<VehicleEnterComponent> ent, EntityUid user, int entryIndex = -1)
     {
+        if (!TryPrepareEnter(ent, user, entryIndex, popup: true, out var interior, out var coords, out var isGhost, out var isXeno, out var pulled))
+            return false;
+
+        if (!isGhost)
+            TrackOccupant(user, ent.Owner, isXeno);
+
+        if (pulled is { } pulledUid)
+            TrackOccupant(pulledUid, ent.Owner, HasComp<XenoComponent>(pulledUid));
+
+        var targetMapCoords = _transform.ToMapCoordinates(coords);
+        _rmcTeleporter.HandlePulling(user, targetMapCoords);
+        return true;
+    }
+
+    private bool TryPrepareEnter(
+        Entity<VehicleEnterComponent> ent,
+        EntityUid user,
+        int entryIndex,
+        bool popup,
+        [NotNullWhen(true)] out VehicleInteriorComponent? interior,
+        out EntityCoordinates coords,
+        out bool isGhost,
+        out bool isXeno,
+        out EntityUid? pulled)
+    {
+        interior = null;
+        coords = default;
+        isGhost = HasComp<GhostComponent>(user);
+        isXeno = HasComp<XenoComponent>(user);
+        pulled = null;
+
         if (IsEntryBlockedByLock(ent.Owner, user))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-locked"), user, user, PopupType.SmallCaution);
+            if (popup)
+                _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-locked"), user, user, PopupType.SmallCaution);
+
             return false;
         }
 
-        if (!EnsureInterior(ent, out var interior))
-            return false;
+        if (HasComp<ActivePowerLoaderPilotComponent>(user) ||
+            HasComp<PowerLoaderComponent>(user))
+        {
+            if (popup)
+                _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-no-power-loader"), user, user);
 
-        var isGhost = HasComp<GhostComponent>(user);
+            return false;
+        }
+
+        if (!EnsureInterior(ent, out interior))
+            return false;
 
         if (!isGhost)
             PruneTrackedOccupants(ent.Owner, interior);
 
-        var isXeno = HasComp<XenoComponent>(user);
         if (!isGhost && isXeno)
         {
-            if (ent.Comp.MaxXenos > 0 &&
-                !interior.Xenos.Contains(user) &&
-                CountLivingOccupants(interior.Xenos) >= ent.Comp.MaxXenos)
+            if (!CanEnterAsXeno(ent, interior.Xenos, user))
             {
-                _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-xeno-full"), user, user);
+                if (popup)
+                    _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-xeno-full"), user, user);
+
                 return false;
             }
         }
-        else
+        else if (!isGhost)
         {
-            if (ent.Comp.MaxPassengers > 0 &&
-                !interior.Passengers.Contains(user) &&
-                !CanEnterAsPassenger(ent, interior, user))
+            if (!CanEnterAsPassenger(ent, interior.Passengers, user))
             {
-                _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-passenger-full"), user, user);
+                if (popup)
+                    _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-passenger-full"), user, user);
+
                 return false;
             }
         }
 
-        if (!TryGetInteriorEntryCoordinates(ent, entryIndex, out var coords))
+        if (!TryGetInteriorEntryCoordinates(ent, entryIndex, out coords))
             return false;
 
-        var targetMapCoords = _transform.ToMapCoordinates(coords);
-        _rmcTeleporter.HandlePulling(user, targetMapCoords);
-        if (!isGhost)
-            TrackOccupant(user, ent.Owner, isXeno);
-        return true;
+        if (!isGhost &&
+            TryComp(user, out PullerComponent? puller) &&
+            puller.Pulling is { } pulling &&
+            pulling != ent.Owner &&
+            !HasComp<GhostComponent>(pulling))
+        {
+            pulled = pulling;
+        }
+
+        if (pulled is not { } pulledUid)
+            return true;
+
+        var passengers = interior.Passengers;
+        var xenos = interior.Xenos;
+
+        if (isXeno && !xenos.Contains(user))
+        {
+            xenos = new HashSet<EntityUid>(xenos)
+            {
+                user,
+            };
+        }
+        else if (!isXeno && !passengers.Contains(user))
+        {
+            passengers = new HashSet<EntityUid>(passengers)
+            {
+                user,
+            };
+        }
+
+        var pulledAllowed = HasComp<XenoComponent>(pulledUid)
+            ? CanEnterAsXeno(ent, xenos, pulledUid)
+            : CanEnterAsPassenger(ent, passengers, pulledUid);
+
+        if (pulledAllowed)
+            return true;
+
+        if (popup)
+            _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-pulled-full"), user, user);
+
+        return false;
     }
 
     private bool EnsureInterior(Entity<VehicleEnterComponent> ent, [NotNullWhen(true)] out VehicleInteriorComponent? interior)
@@ -727,10 +815,17 @@ public sealed class VehicleSystem : EntitySystem
         return count;
     }
 
-    private bool CanEnterAsPassenger(Entity<VehicleEnterComponent> ent, VehicleInteriorComponent interior, EntityUid user)
+    private bool CanEnterAsXeno(Entity<VehicleEnterComponent> ent, HashSet<EntityUid> xenos, EntityUid user)
     {
-        var passengers = CountLivingOccupants(interior.Passengers);
-        if (passengers >= ent.Comp.MaxPassengers)
+        return ent.Comp.MaxXenos <= 0 ||
+               xenos.Contains(user) ||
+               CountLivingOccupants(xenos) < ent.Comp.MaxXenos;
+    }
+
+    private bool CanEnterAsPassenger(Entity<VehicleEnterComponent> ent, HashSet<EntityUid> passengers, EntityUid user)
+    {
+        var passengerCount = CountLivingOccupants(passengers);
+        if (passengerCount >= ent.Comp.MaxPassengers)
             return false;
 
         if (ent.Comp.ReservedPassengerPools.Count == 0)
@@ -744,10 +839,10 @@ public sealed class VehicleSystem : EntitySystem
             if (userJob is { } job && pool.EligibleJobs.Contains(job))
                 continue;
 
-            reservedForOtherJobs += GetUnfilledReservedPoolSlots(pool, interior.Passengers);
+            reservedForOtherJobs += GetUnfilledReservedPoolSlots(pool, passengers);
         }
 
-        return passengers < ent.Comp.MaxPassengers - reservedForOtherJobs;
+        return passengerCount < ent.Comp.MaxPassengers - reservedForOtherJobs;
     }
 
     private int GetUnfilledReservedPoolSlots(VehicleReservedPassengerPool pool, HashSet<EntityUid> passengers)
@@ -900,6 +995,22 @@ public sealed class VehicleSystem : EntitySystem
             return;
 
         args.CanRun = false;
+    }
+
+    private void OnVehicleFrameIntegrityChanged(Entity<VehicleInteriorComponent> ent, ref VehicleFrameIntegrityChangedEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        var interior = ent.Comp;
+        if (!interior.Grid.IsValid() || !EntityManager.EntityExists(interior.Grid))
+            return;
+
+        if (!_area.TryGetArea(interior.Grid, out var area, out _))
+            return;
+
+        if (_area.SetAlwaysPowered(area.Value, args.Intact))
+            _rmcPower.RecalculatePower();
     }
 
     private void OnConstructionAttempt(ref RMCConstructionAttemptEvent ev)
