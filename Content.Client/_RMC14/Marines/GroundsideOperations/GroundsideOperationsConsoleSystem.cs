@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.AlertLevel;
 using Content.Shared._RMC14.Marines.GroundsideOperations;
 using Content.Shared.UserInterface;
 using Robust.Client.UserInterface;
@@ -9,25 +10,50 @@ public sealed class GroundsideOperationsConsoleSystem : EntitySystem
 {
     public override void Initialize()
     {
-        SubscribeLocalEvent<GroundsideOperationsConsoleComponent, AfterAutoHandleStateEvent>(OnState);
+        SubscribeLocalEvent<GroundsideOperationsConsoleComponent, AfterAutoHandleStateEvent>(OnOwnerState);
+        SubscribeLocalEvent<RMCAlertLevelComponent, AfterAutoHandleStateEvent>(OnAlertState);
     }
 
-    private void OnState<T>(Entity<T> ent, ref AfterAutoHandleStateEvent args) where T : IComponent?
+    private void OnOwnerState(Entity<GroundsideOperationsConsoleComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        Refresh(ent.Owner);
+    }
+
+    private void OnAlertState(Entity<RMCAlertLevelComponent> ent, ref AfterAutoHandleStateEvent args)
     {
         try
         {
-            if (!TryComp(ent, out UserInterfaceComponent? ui))
+            var query = EntityQueryEnumerator<GroundsideOperationsConsoleComponent, UserInterfaceComponent>();
+            while (query.MoveNext(out var uid, out _, out var ui))
+                Refresh((uid, ui));
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Error refreshing {nameof(GroundsideOperationsConsoleBui)} after alert state update\n{e}");
+        }
+    }
+
+    private void Refresh(EntityUid owner)
+    {
+        try
+        {
+            if (!TryComp(owner, out UserInterfaceComponent? ui))
                 return;
 
-            foreach (var bui in ui.ClientOpenInterfaces.Values)
-            {
-                if (bui is GroundsideOperationsConsoleBui groundside)
-                    groundside.Refresh();
-            }
+            Refresh((owner, ui));
         }
         catch (Exception e)
         {
             Log.Error($"Error refreshing {nameof(GroundsideOperationsConsoleBui)}\n{e}");
+        }
+    }
+
+    private static void Refresh(Entity<UserInterfaceComponent> ent)
+    {
+        foreach (var bui in ent.Comp.ClientOpenInterfaces.Values)
+        {
+            if (bui is GroundsideOperationsConsoleBui groundside)
+                groundside.Refresh();
         }
     }
 }

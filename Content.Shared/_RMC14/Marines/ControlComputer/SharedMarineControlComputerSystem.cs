@@ -258,12 +258,26 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
 
     private void OnComputerAlert(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerAlertEvent args)
     {
+        var current = _alertLevel.Get();
+        if (current == RMCAlertLevels.Delta ||
+            args.Level >= RMCAlertLevels.Red ||
+            args.Level == current)
+        {
+            return;
+        }
+
         _alertLevel.Set(args.Level, GetEntity(args.User));
     }
 
     private void OnAlertLevel(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerAlertLevelMsg args)
     {
         var current = _alertLevel.Get();
+        if (current == RMCAlertLevels.Delta)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-alert-delta-locked"), args.Actor, PopupType.MediumCaution);
+            return;
+        }
+
         var options = new List<DialogOption>();
         foreach (var level in Enum.GetValues<RMCAlertLevels>())
         {

@@ -7,7 +7,6 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Marines.Announce;
-using Content.Shared._RMC14.Marines.GroundsideOperations;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Marines.Skills.Pamphlets;
 using Content.Shared._RMC14.Marines.Squads;
@@ -99,6 +98,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
         SubscribeLocalEvent<OrbitalCannonChangedEvent>(OnOrbitalCannonChanged);
         SubscribeLocalEvent<OrbitalCannonLaunchEvent>(OnOrbitalCannonLaunch);
+        SubscribeLocalEvent<OrbitalCannonSafetyChangedEvent>(OnOrbitalCannonSafetyChanged);
 
         SubscribeLocalEvent<OverwatchConsoleComponent, BoundUIOpenedEvent>(OnBUIOpened);
         SubscribeLocalEvent<OverwatchConsoleComponent, OverwatchTransferMarineSelectedEvent>(OnTransferMarineSelected);
@@ -135,17 +135,6 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             subs.Event<OverwatchConsoleSetSquadObjectiveBuiMsg>(OnOverwatchSetSquadObjectiveBui);
             subs.Event<OverwatchConsoleClearSquadObjectiveBuiMsg>(OnOverwatchClearSquadObjectiveBui);
         });
-        Subs.BuiEvents<GroundsideOperationsConsoleComponent>(GroundsideOperationsConsoleUi.Key, subs =>
-        {
-            subs.Event<OverwatchConsoleSelectSquadBuiMsg>(OnGroundsideOperationsSelectSquadBui);
-            subs.Event<OverwatchConsoleTakeOperatorBuiMsg>(OnGroundsideOperationsTakeOperatorBui);
-            subs.Event<OverwatchConsoleStopOverwatchBuiMsg>(OnGroundsideOperationsStopBui);
-            subs.Event<OverwatchConsoleSendMessageBuiMsg>(OnGroundsideOperationsSendMessageBui);
-            subs.Event<OverwatchConsoleSendLeaderMessageBuiMsg>(OnGroundsideOperationsSendLeaderMessageBui);
-            subs.Event<OverwatchConsoleSetSquadObjectiveBuiMsg>(OnGroundsideOperationsSetSquadObjectiveBui);
-            subs.Event<OverwatchConsoleClearSquadObjectiveBuiMsg>(OnGroundsideOperationsClearSquadObjectiveBui);
-        });
-
         Subs.CVar(_config, RMCCVars.RMCOverwatchMaxProcessTimeMilliseconds, v => _maxProcessTime = TimeSpan.FromMilliseconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCOverwatchConsoleUpdateEverySeconds, v => _updateEvery = TimeSpan.FromSeconds(v), true);
     }
@@ -176,6 +165,8 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        ent.Comp.OrbitalSafetyEngaged = _orbitalCannon.IsSafetyEngaged();
+        Dirty(ent);
         var state = GetOverwatchBuiState(ent);
         _ui.SetUiState(ent.Owner, OverwatchConsoleUI.Key, state);
     }
@@ -332,6 +323,16 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         Dirty(ent);
     }
 
+    private void OnOrbitalCannonSafetyChanged(ref OrbitalCannonSafetyChangedEvent ev)
+    {
+        var consoles = EntityQueryEnumerator<OverwatchConsoleComponent>();
+        while (consoles.MoveNext(out var uid, out var console))
+        {
+            console.OrbitalSafetyEngaged = ev.Engaged;
+            Dirty(uid, console);
+        }
+    }
+
     private bool TryGetSelectedSquad(Entity<OverwatchConsoleComponent> ent, out Entity<SquadTeamComponent?> squad)
     {
         squad = default;
@@ -344,62 +345,6 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
         squad = (squadId.Value, squadComp);
         return true;
-    }
-
-    private void OnGroundsideOperationsSelectSquadBui(
-        Entity<GroundsideOperationsConsoleComponent> ent,
-        ref OverwatchConsoleSelectSquadBuiMsg args)
-    {
-        if (TryComp(ent, out OverwatchConsoleComponent? overwatch))
-            OnOverwatchSelectSquadBui((ent.Owner, overwatch), ref args);
-    }
-
-    private void OnGroundsideOperationsTakeOperatorBui(
-        Entity<GroundsideOperationsConsoleComponent> ent,
-        ref OverwatchConsoleTakeOperatorBuiMsg args)
-    {
-        if (TryComp(ent, out OverwatchConsoleComponent? overwatch))
-            OnOverwatchTakeOperatorBui((ent.Owner, overwatch), ref args);
-    }
-
-    private void OnGroundsideOperationsStopBui(
-        Entity<GroundsideOperationsConsoleComponent> ent,
-        ref OverwatchConsoleStopOverwatchBuiMsg args)
-    {
-        if (TryComp(ent, out OverwatchConsoleComponent? overwatch))
-            OnOverwatchStopBui((ent.Owner, overwatch), ref args);
-    }
-
-    private void OnGroundsideOperationsSendMessageBui(
-        Entity<GroundsideOperationsConsoleComponent> ent,
-        ref OverwatchConsoleSendMessageBuiMsg args)
-    {
-        if (TryComp(ent, out OverwatchConsoleComponent? overwatch))
-            OnOverwatchSendMessageBui((ent.Owner, overwatch), ref args);
-    }
-
-    private void OnGroundsideOperationsSendLeaderMessageBui(
-        Entity<GroundsideOperationsConsoleComponent> ent,
-        ref OverwatchConsoleSendLeaderMessageBuiMsg args)
-    {
-        if (TryComp(ent, out OverwatchConsoleComponent? overwatch))
-            OnOverwatchSendLeaderMessageBui((ent.Owner, overwatch), ref args);
-    }
-
-    private void OnGroundsideOperationsSetSquadObjectiveBui(
-        Entity<GroundsideOperationsConsoleComponent> ent,
-        ref OverwatchConsoleSetSquadObjectiveBuiMsg args)
-    {
-        if (TryComp(ent, out OverwatchConsoleComponent? overwatch))
-            OnOverwatchSetSquadObjectiveBui((ent.Owner, overwatch), ref args);
-    }
-
-    private void OnGroundsideOperationsClearSquadObjectiveBui(
-        Entity<GroundsideOperationsConsoleComponent> ent,
-        ref OverwatchConsoleClearSquadObjectiveBuiMsg args)
-    {
-        if (TryComp(ent, out OverwatchConsoleComponent? overwatch))
-            OnOverwatchClearSquadObjectiveBui((ent.Owner, overwatch), ref args);
     }
 
     private void OnOverwatchViewTacticalMapBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchViewTacticalMapBuiMsg args)

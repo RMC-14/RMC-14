@@ -9,9 +9,6 @@ public enum GroundsideOperationsConsoleUi
 }
 
 [Serializable, NetSerializable]
-public sealed class GroundsideOperationsOpenOverwatchMsg : BoundUserInterfaceMessage;
-
-[Serializable, NetSerializable]
 public sealed class GroundsideOperationsHighCommandMsg(string message) : BoundUserInterfaceMessage
 {
     public readonly string Message = message;

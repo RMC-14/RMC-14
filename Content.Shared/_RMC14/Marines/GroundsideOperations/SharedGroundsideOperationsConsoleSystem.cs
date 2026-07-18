@@ -1,16 +1,13 @@
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines.Announce;
-using Content.Shared._RMC14.Marines.Squads;
-using Content.Shared._RMC14.Overwatch;
+using Content.Shared._RMC14.OrbitalCannon;
 using Content.Shared._RMC14.Power;
 using Content.Shared.Access.Systems;
-using Content.Shared.Mobs;
-using Content.Shared.Mobs.Components;
+using Content.Shared.Interaction;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
-using Content.Shared.UserInterface;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
-using System.Linq;
 
 namespace Content.Shared._RMC14.Marines.GroundsideOperations;
 
@@ -18,24 +15,25 @@ public abstract class SharedGroundsideOperationsConsoleSystem : EntitySystem
 {
     [Dependency] private readonly AccessReaderSystem _access = default!;
     [Dependency] private readonly SharedDropshipSystem _dropship = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly OrbitalCannonSystem _orbitalCannon = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedRMCPowerSystem _power = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-
-    private TimeSpan _nextSummaryUpdate;
-    private TimeSpan _summaryUpdateEvery = TimeSpan.FromSeconds(0.5);
 
     public override void Initialize()
     {
         SubscribeLocalEvent<GroundsideOperationsConsoleComponent, BoundUserInterfaceMessageAttempt>(OnBoundUiMessageAttempt);
         SubscribeLocalEvent<GroundsideOperationsConsoleComponent, BoundUIOpenedEvent>(OnBoundUiOpened);
         SubscribeLocalEvent<GroundsideOperationsConsoleComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<OrbitalCannonChangedEvent>(OnOrbitalCannonChanged);
+        SubscribeLocalEvent<OrbitalCannonLaunchEvent>(OnOrbitalCannonLaunch);
+        SubscribeLocalEvent<OrbitalCannonSafetyChangedEvent>(OnOrbitalCannonSafetyChanged);
 
         Subs.BuiEvents<GroundsideOperationsConsoleComponent>(GroundsideOperationsConsoleUi.Key, subs =>
         {
-            subs.Event<GroundsideOperationsOpenOverwatchMsg>(OnOpenOverwatch);
             subs.Event<GroundsideOperationsHighCommandMsg>(OnHighCommand);
             subs.Event<GroundsideOperationsRedAlertMsg>(OnRedAlert);
             subs.Event<GroundsideOperationsGeneralQuartersMsg>(OnGeneralQuarters);
@@ -46,6 +44,20 @@ public abstract class SharedGroundsideOperationsConsoleSystem : EntitySystem
     {
         if (!_net.IsServer || args.Cancelled)
             return;
+
+        if (!_mobState.IsAlive(args.Actor))
+        {
+            args.Cancel();
+            _popup.PopupClient(Loc.GetString("rmc-goc-invalid-user"), args.Actor, PopupType.MediumCaution);
+            return;
+        }
+
+        if (!_interaction.InRangeUnobstructed(args.Actor, ent.Owner))
+        {
+            args.Cancel();
+            _popup.PopupClient(Loc.GetString("rmc-goc-out-of-range"), args.Actor, PopupType.MediumCaution);
+            return;
+        }
 
         if (!_access.IsAllowed(args.Actor, ent.Owner))
         {
@@ -61,41 +73,19 @@ public abstract class SharedGroundsideOperationsConsoleSystem : EntitySystem
         _popup.PopupClient(Loc.GetString("rmc-goc-unpowered"), args.Actor, PopupType.MediumCaution);
     }
 
-    public override void Update(float frameTime)
-    {
-        if (!_net.IsServer || _timing.CurTime < _nextSummaryUpdate)
-            return;
-
-        _nextSummaryUpdate = _timing.CurTime + _summaryUpdateEvery;
-        var consoles = EntityQueryEnumerator<GroundsideOperationsConsoleComponent, OverwatchConsoleComponent>();
-        while (consoles.MoveNext(out var uid, out var groundside, out var overwatch))
-        {
-            if (!_ui.IsUiOpen(uid, GroundsideOperationsConsoleUi.Key))
-                continue;
-
-            RefreshOverwatchSquads((uid, groundside), overwatch);
-        }
-    }
-
-    private void OnMapInit(Entity<GroundsideOperationsConsoleComponent> ent, ref MapInitEvent args)
+    protected virtual void OnMapInit(Entity<GroundsideOperationsConsoleComponent> ent, ref MapInitEvent args)
     {
         RefreshLandingZones(ent);
+        RefreshOrdnance(ent);
     }
 
-    private void OnBoundUiOpened(Entity<GroundsideOperationsConsoleComponent> ent, ref BoundUIOpenedEvent args)
+    protected virtual void OnBoundUiOpened(Entity<GroundsideOperationsConsoleComponent> ent, ref BoundUIOpenedEvent args)
     {
         if (!_net.IsServer)
             return;
 
         RefreshLandingZones(ent);
-        if (TryComp(ent, out OverwatchConsoleComponent? overwatch))
-            RefreshOverwatchSquads(ent, overwatch);
-    }
-
-    private void OnOpenOverwatch(Entity<GroundsideOperationsConsoleComponent> ent, ref GroundsideOperationsOpenOverwatchMsg args)
-    {
-        if (_net.IsServer)
-            _ui.TryOpenUi(ent.Owner, OverwatchConsoleUI.Key, args.Actor);
+        RefreshOrdnance(ent);
     }
 
     private void OnHighCommand(Entity<GroundsideOperationsConsoleComponent> ent, ref GroundsideOperationsHighCommandMsg args)
@@ -128,10 +118,15 @@ public abstract class SharedGroundsideOperationsConsoleSystem : EntitySystem
     {
     }
 
-    private void RefreshLandingZones(Entity<GroundsideOperationsConsoleComponent> ent)
+    protected void RefreshLandingZones(Entity<GroundsideOperationsConsoleComponent> ent)
     {
         if (!_net.IsServer)
             return;
+
+        string? primaryLandingZone = null;
+        var primaryQuery = EntityQueryEnumerator<PrimaryLandingZoneComponent>();
+        if (primaryQuery.MoveNext(out var primary, out _))
+            primaryLandingZone = Name(primary);
 
         var landingZones = new List<LandingZone>();
         foreach (var (id, metaData) in _dropship.GetPrimaryLZCandidates())
@@ -141,52 +136,78 @@ public abstract class SharedGroundsideOperationsConsoleSystem : EntitySystem
 
         landingZones.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal));
         ent.Comp.LandingZones = landingZones;
+        ent.Comp.PrimaryLandingZone = primaryLandingZone;
         Dirty(ent);
     }
 
-    private void RefreshOverwatchSquads(Entity<GroundsideOperationsConsoleComponent> ent, OverwatchConsoleComponent overwatch)
+    public void RefreshAllLandingZones()
     {
-        var summaries = new List<GroundsideOverwatchSquadSummary>();
-        var squads = EntityQueryEnumerator<SquadTeamComponent>();
-        while (squads.MoveNext(out var squadId, out var squad))
-        {
-            if (squad.Group != overwatch.Group)
-                continue;
-
-            var alive = 0;
-            foreach (var squadMember in squad.Members)
-            {
-                if (TryComp(squadMember, out MobStateComponent? state) && state.CurrentState == MobState.Alive)
-                    alive++;
-            }
-
-            string? leader = null;
-            var leaders = EntityQueryEnumerator<SquadLeaderComponent, SquadMemberComponent>();
-            while (leaders.MoveNext(out var leaderId, out _, out var squadMember))
-            {
-                if (squadMember.Squad == squadId)
-                {
-                    leader = Name(leaderId);
-                    break;
-                }
-            }
-
-            summaries.Add(new GroundsideOverwatchSquadSummary(
-                GetNetEntity(squadId),
-                Name(squadId),
-                squad.Color,
-                leader,
-                squad.Members.Count,
-                alive,
-                squad.Objectives.GetValueOrDefault(SquadObjectiveType.Primary, string.Empty),
-                squad.Objectives.GetValueOrDefault(SquadObjectiveType.Secondary, string.Empty)));
-        }
-
-        summaries.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal));
-        if (ent.Comp.OverwatchSquads.SequenceEqual(summaries))
+        if (!_net.IsServer)
             return;
 
-        ent.Comp.OverwatchSquads = summaries;
+        var query = EntityQueryEnumerator<GroundsideOperationsConsoleComponent>();
+        while (query.MoveNext(out var uid, out var groundside))
+            RefreshLandingZones((uid, groundside));
+    }
+
+    protected void RefreshAllOrdnance()
+    {
+        if (!_net.IsServer)
+            return;
+
+        var query = EntityQueryEnumerator<GroundsideOperationsConsoleComponent>();
+        while (query.MoveNext(out var uid, out var groundside))
+            RefreshOrdnance((uid, groundside));
+    }
+
+    private void RefreshOrdnance(Entity<GroundsideOperationsConsoleComponent> ent)
+    {
+        if (!_net.IsServer)
+            return;
+
+        ent.Comp.OrbitalSafetyEngaged = _orbitalCannon.IsSafetyEngaged();
+        if (!_orbitalCannon.TryGetClosestCannon(ent, out var cannon))
+        {
+            ent.Comp.HasOrbitalCannon = false;
+            ent.Comp.OrbitalWarhead = null;
+            ent.Comp.OrbitalFuel = 0;
+            ent.Comp.OrbitalRequiredFuel = null;
+            ent.Comp.OrbitalStatus = OrbitalCannonStatus.Unloaded;
+            ent.Comp.NextOrbitalFire = default;
+            Dirty(ent);
+            return;
+        }
+
+        var status = _orbitalCannon.GetStatus(cannon);
+        ent.Comp.HasOrbitalCannon = true;
+        ent.Comp.OrbitalWarhead = status.Warhead;
+        ent.Comp.OrbitalFuel = status.Fuel;
+        ent.Comp.OrbitalRequiredFuel = status.RequiredFuel;
+        ent.Comp.OrbitalStatus = status.Status;
+        ent.Comp.NextOrbitalFire = status.NextFire;
         Dirty(ent);
+    }
+
+    private void OnOrbitalCannonChanged(ref OrbitalCannonChangedEvent ev)
+    {
+        RefreshAllOrdnance();
+    }
+
+    private void OnOrbitalCannonLaunch(ref OrbitalCannonLaunchEvent ev)
+    {
+        if (!_net.IsServer)
+            return;
+
+        var query = EntityQueryEnumerator<GroundsideOperationsConsoleComponent>();
+        while (query.MoveNext(out var uid, out var groundside))
+        {
+            groundside.NextOrbitalFire = _timing.CurTime + ev.Cooldown;
+            Dirty(uid, groundside);
+        }
+    }
+
+    private void OnOrbitalCannonSafetyChanged(ref OrbitalCannonSafetyChangedEvent ev)
+    {
+        RefreshAllOrdnance();
     }
 }

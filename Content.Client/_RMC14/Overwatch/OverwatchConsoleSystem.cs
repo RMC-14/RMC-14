@@ -6,8 +6,6 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Components;
 using Robust.Shared.Map;
 
-using Content.Client._RMC14.Marines.GroundsideOperations;
-
 namespace Content.Client._RMC14.Overwatch;
 
 public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
@@ -39,8 +37,6 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
             {
                 if (bui is OverwatchConsoleBui overwatchUi)
                     overwatchUi.Refresh();
-                else if (bui is GroundsideOperationsConsoleBui groundsideUi)
-                    groundsideUi.Refresh();
             }
         }
         catch (Exception e)

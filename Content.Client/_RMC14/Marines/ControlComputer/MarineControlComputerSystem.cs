@@ -23,8 +23,8 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
             {
                 if (open is MarineControlComputerBui bui)
                     bui.Refresh();
-                else if (open is GroundsideOperationsConsoleBui groundsideUi)
-                    groundsideUi.Refresh();
+                else if (open is GroundsideOperationsConsoleBui groundside)
+                    groundside.Refresh();
             }
         }
         catch (Exception e)

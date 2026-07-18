@@ -1,7 +1,6 @@
 using Content.Shared._RMC14.Marines.Announce;
-using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.OrbitalCannon;
 using Robust.Shared.GameStates;
-using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Marines.GroundsideOperations;
@@ -23,16 +22,29 @@ public sealed partial class GroundsideOperationsConsoleComponent : Component
     public List<LandingZone> LandingZones = new();
 
     [DataField, AutoNetworkedField]
-    public List<GroundsideOverwatchSquadSummary> OverwatchSquads = new();
-}
+    public string? PrimaryLandingZone;
 
-[Serializable, NetSerializable]
-public readonly record struct GroundsideOverwatchSquadSummary(
-    NetEntity Id,
-    string Name,
-    Color Color,
-    string? Leader,
-    int Members,
-    int Alive,
-    string PrimaryObjective,
-    string SecondaryObjective);
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    public TimeSpan NextGeneralQuarters;
+
+    [DataField, AutoNetworkedField]
+    public bool HasOrbitalCannon;
+
+    [DataField, AutoNetworkedField]
+    public string? OrbitalWarhead;
+
+    [DataField, AutoNetworkedField]
+    public int OrbitalFuel;
+
+    [DataField, AutoNetworkedField]
+    public int? OrbitalRequiredFuel;
+
+    [DataField, AutoNetworkedField]
+    public OrbitalCannonStatus OrbitalStatus = OrbitalCannonStatus.Unloaded;
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    public TimeSpan NextOrbitalFire;
+
+    [DataField, AutoNetworkedField]
+    public bool OrbitalSafetyEngaged;
+}

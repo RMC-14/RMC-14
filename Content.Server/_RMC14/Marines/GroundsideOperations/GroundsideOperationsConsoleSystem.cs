@@ -2,6 +2,8 @@ using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
 using Content.Shared._RMC14.AlertLevel;
+using Content.Shared._RMC14.ARES;
+using Content.Shared._RMC14.ARES.Logs;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.GroundsideOperations;
@@ -12,6 +14,7 @@ using Robust.Server.Audio;
 using Robust.Shared.Audio;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Marines.GroundsideOperations;
@@ -24,6 +27,7 @@ public sealed class GroundsideOperationsConsoleSystem : SharedGroundsideOperatio
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly ARESCoreSystem _core = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -31,6 +35,8 @@ public sealed class GroundsideOperationsConsoleSystem : SharedGroundsideOperatio
     private int _characterLimit = 1000;
     private TimeSpan _generalQuartersCooldown;
     private TimeSpan _nextGeneralQuarters;
+
+    private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabAnnouncementLogs";
 
     public override void Initialize()
     {
@@ -71,6 +77,12 @@ public sealed class GroundsideOperationsConsoleSystem : SharedGroundsideOperatio
 
     protected override void TrySetRedAlert(Entity<GroundsideOperationsConsoleComponent> ent, EntityUid actor)
     {
+        if (_alertLevel.Get() >= RMCAlertLevels.Red)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-goc-red-alert-already-set"), actor, PopupType.MediumCaution);
+            return;
+        }
+
         _alertLevel.Set(RMCAlertLevels.Red, actor);
     }
 
@@ -85,14 +97,41 @@ public sealed class GroundsideOperationsConsoleSystem : SharedGroundsideOperatio
         }
 
         _nextGeneralQuarters = time + _generalQuartersCooldown;
+        SyncGeneralQuartersCooldown();
 
-        if (_alertLevel.Get() < RMCAlertLevels.Red)
+        if (_alertLevel.Get() is not { } alert || alert < RMCAlertLevels.Red)
             _alertLevel.Set(RMCAlertLevels.Red, actor, playSound: false, sendAnnouncement: false);
 
         var text = Loc.GetString("rmc-announcement-general-quarters");
         _marineAnnounce.AnnounceARES(ent.Owner, text,
             new SoundPathSpecifier("/Audio/_RMC14/Announcements/ARES/GQfullcall.ogg"));
+        _core.CreateARESLog(ent, LogCat, (string)$"{Name(actor)} called General Quarters");
         _adminLog.Add(LogType.RMCAlertLevel, $"{ToPrettyString(actor):player} called General Quarters from {ToPrettyString(ent.Owner):console}");
         _popup.PopupClient(Loc.GetString("rmc-goc-general-quarters-sent"), actor, PopupType.Medium);
+    }
+
+    protected override void OnMapInit(Entity<GroundsideOperationsConsoleComponent> ent, ref MapInitEvent args)
+    {
+        base.OnMapInit(ent, ref args);
+        SyncGeneralQuartersCooldown(ent);
+    }
+
+    protected override void OnBoundUiOpened(Entity<GroundsideOperationsConsoleComponent> ent, ref BoundUIOpenedEvent args)
+    {
+        base.OnBoundUiOpened(ent, ref args);
+        SyncGeneralQuartersCooldown(ent);
+    }
+
+    private void SyncGeneralQuartersCooldown()
+    {
+        var query = EntityQueryEnumerator<GroundsideOperationsConsoleComponent>();
+        while (query.MoveNext(out var uid, out var groundside))
+            SyncGeneralQuartersCooldown((uid, groundside));
+    }
+
+    private void SyncGeneralQuartersCooldown(Entity<GroundsideOperationsConsoleComponent> ent)
+    {
+        ent.Comp.NextGeneralQuarters = _nextGeneralQuarters;
+        Dirty(ent);
     }
 }

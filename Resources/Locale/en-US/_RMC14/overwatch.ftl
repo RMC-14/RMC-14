@@ -62,6 +62,7 @@ rmc-overwatch-console-no-crate-loaded = [color=red][bold][ NO CRATE LOADED ][/bo
 rmc-overwatch-console-crate-loaded = [color=green][bold][ CRATE LOADED ][/bold][/color]
 rmc-overwatch-console-ready = [color=green][bold][ READY ][/bold][/color]
 rmc-overwatch-console-not-ready = [color=red][bold][ NOT READY ][/bold][/color]
+rmc-overwatch-console-orbital-safety-engaged = [color=red][bold][ SAFETY LOCK ENGAGED ][/bold][/color]
 rmc-overwatch-console-cooldown = [color=#D3B400][bold][ COOLDOWN - { $seconds } SECONDS ][/bold][/color]
 rmc-overwatch-console-no-warhead-loaded = [color=red][bold]No warhead loaded[/bold][/color]
 
