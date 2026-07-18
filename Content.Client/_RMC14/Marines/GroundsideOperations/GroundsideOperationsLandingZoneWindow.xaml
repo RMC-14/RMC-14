@@ -1,0 +1,20 @@
+<controls:GroundsideOperationsLandingZoneWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Marines.GroundsideOperations"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    Title="{Loc rmc-goc-primary-lz-window-title}"
+    MinSize="480 220"
+    SetSize="480 220">
+    <PanelContainer>
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BackgroundColor="#020711" BorderColor="#78C8F2" BorderThickness="2" />
+        </PanelContainer.PanelOverride>
+        <BoxContainer Orientation="Vertical" Margin="9" SeparationOverride="7">
+            <Label Text="{Loc rmc-goc-primary-lz-window-description}"
+                HorizontalAlignment="Center" ModulateSelfOverride="#B8DDF0" />
+            <BoxContainer Name="LandingZonesContainer" Access="Public"
+                Orientation="Vertical" SeparationOverride="5" />
+            <Control VerticalExpand="True" />
+        </BoxContainer>
+    </PanelContainer>
+</controls:GroundsideOperationsLandingZoneWindow>

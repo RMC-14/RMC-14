@@ -52,6 +52,7 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<MarineCommunicationsComputerComponent, GroundsideOperationsGroundAnnouncementDialogEvent>(OnGroundsideOperationsAnnouncementDialog);
         SubscribeLocalEvent<MarineCommunicationsComputerComponent, EchoSquadReasonEvent>(OnEchoSquadReason);
         SubscribeLocalEvent<MarineCommunicationsComputerComponent, EchoSquadConfirmEvent>(OnEchoSquadConfirm);
 
@@ -67,6 +68,7 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         Subs.BuiEvents<GroundsideOperationsConsoleComponent>(GroundsideOperationsConsoleUi.Key,
             subs =>
             {
+                subs.Event<GroundsideOperationsGroundAnnouncementMsg>(OnGroundsideOperationsAnnouncementMsg);
                 subs.Event<MarineCommunicationsComputerMsg>(OnGroundsideOperationsComputerMsg);
                 subs.Event<MarineCommunicationsOpenMapMsg>(OnGroundsideOperationsOpenMapMsg);
                 subs.Event<MarineCommunicationsEchoSquadMsg>(OnGroundsideOperationsEchoMsg);
@@ -115,32 +117,74 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
 
     private void OnMarineCommunicationsComputerMsg(Entity<MarineCommunicationsComputerComponent> ent, ref MarineCommunicationsComputerMsg args)
     {
-        if (string.IsNullOrWhiteSpace(args.Text))
+        TryAnnounce(ent, args.Actor, args.Text);
+    }
+
+    private void OnGroundsideOperationsAnnouncementMsg(
+        Entity<GroundsideOperationsConsoleComponent> ent,
+        ref GroundsideOperationsGroundAnnouncementMsg args)
+    {
+        if (!TryComp(ent, out MarineCommunicationsComputerComponent? communications) ||
+            !CanAnnounce((ent.Owner, communications), args.Actor))
+        {
+            return;
+        }
+
+        var ev = new GroundsideOperationsGroundAnnouncementDialogEvent(GetNetEntity(args.Actor));
+        _dialog.OpenInput(
+            ent.Owner,
+            args.Actor,
+            Loc.GetString("rmc-goc-groundside-prompt"),
+            ev,
+            true,
+            CharacterLimit);
+    }
+
+    private void OnGroundsideOperationsAnnouncementDialog(
+        Entity<MarineCommunicationsComputerComponent> ent,
+        ref GroundsideOperationsGroundAnnouncementDialogEvent args)
+    {
+        if (GetEntity(args.User) is not { Valid: true } user)
             return;
 
-        if (!_skills.HasSkill(args.Actor, ent.Comp.AnnounceSkill, ent.Comp.AnnounceSkillLevel))
-        {
-            _popup.PopupClient(Loc.GetString("rmc-skills-no-training", ("target", ent)), args.Actor, PopupType.MediumCaution);
+        TryAnnounce(ent, user, args.Message);
+    }
+
+    private void TryAnnounce(
+        Entity<MarineCommunicationsComputerComponent> ent,
+        EntityUid actor,
+        string message)
+    {
+        message = message.Trim();
+        if (message.Length == 0 || !CanAnnounce(ent, actor))
             return;
+
+        if (message.Length > CharacterLimit)
+            message = message[..CharacterLimit].Trim();
+
+        _ui.CloseUi(ent.Owner, MarineCommunicationsComputerUI.Key);
+        AnnounceSigned(actor, message, name: ent.Comp.AnnounceName);
+
+        ent.Comp.LastAnnouncement = _timing.CurTime;
+        Dirty(ent);
+    }
+
+    private bool CanAnnounce(Entity<MarineCommunicationsComputerComponent> ent, EntityUid actor)
+    {
+        if (!_skills.HasSkill(actor, ent.Comp.AnnounceSkill, ent.Comp.AnnounceSkillLevel))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-skills-no-training", ("target", ent)), actor, PopupType.MediumCaution);
+            return false;
         }
 
         var time = _timing.CurTime;
-        if (_timing.CurTime < ent.Comp.LastAnnouncement + ent.Comp.Cooldown)
-        {
-            var cooldownMessage = Loc.GetString("rmc-announcement-cooldown", ("seconds", (int) ent.Comp.Cooldown.TotalSeconds));
-            _popup.PopupClient(cooldownMessage, args.Actor, PopupType.SmallCaution);
-            return;
-        }
+        if (ent.Comp.LastAnnouncement is not { } last || time >= last + ent.Comp.Cooldown)
+            return true;
 
-        _ui.CloseUi(ent.Owner, MarineCommunicationsComputerUI.Key);
-        var text = args.Text;
-        if (text.Length > CharacterLimit)
-            text = text[..CharacterLimit].Trim();
-
-        AnnounceSigned(args.Actor, text, name: ent.Comp.AnnounceName);
-
-        ent.Comp.LastAnnouncement = time;
-        Dirty(ent);
+        var seconds = Math.Max(1, (int) Math.Ceiling((last + ent.Comp.Cooldown - time).TotalSeconds));
+        var cooldownMessage = Loc.GetString("rmc-announcement-cooldown", ("seconds", seconds));
+        _popup.PopupClient(cooldownMessage, actor, PopupType.SmallCaution);
+        return false;
     }
 
     private void OnMarineCommunicationsOpenMapMsg(Entity<MarineCommunicationsComputerComponent> ent, ref MarineCommunicationsOpenMapMsg args)

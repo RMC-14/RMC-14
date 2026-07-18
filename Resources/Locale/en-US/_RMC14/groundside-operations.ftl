@@ -1,16 +1,18 @@
 rmc-goc-title = Groundside Operations Console
-rmc-goc-system-version = [font=monospace]Version 2.1.8 // Command access verified[/font]
+rmc-goc-system-version = Version 2.1.8
 rmc-goc-open-overwatch = Open Overwatch
 rmc-goc-tab-executive = Executive Panel
 rmc-goc-tab-emergency = Emergency Measures
 rmc-goc-tab-ordnance = Ordnance Systems
 
 rmc-goc-groundside-title = GROUNDSIDE OPERATIONS
-rmc-goc-groundside-placeholder = Write a groundside announcement...
 rmc-goc-groundside-announce = MAKE AN ANNOUNCEMENT
+rmc-goc-groundside-prompt = Please write a groundside announcement
 rmc-goc-tactical-map = VIEW TACTICAL MAP
 rmc-goc-primary-lz = DESIGNATE PRIMARY LZ
 rmc-goc-primary-lz-designated = PRIMARY LZ: { $landingZone }
+rmc-goc-primary-lz-window-title = Designate Primary Landing Zone
+rmc-goc-primary-lz-window-description = Select the landing zone to designate as primary.
 rmc-goc-activate-echo = ACTIVATE ECHO SQUAD
 rmc-goc-echo-purpose = What is the purpose of Echo Squad?
 rmc-goc-overwatch-untrained = You are not trained in overwatch!
@@ -19,7 +21,7 @@ rmc-goc-ship-control-title = SHIP CONTROL
 rmc-goc-change-alert = CHANGE ALERT LEVEL
 rmc-goc-ship-announce = MAKE A SHIPWIDE ANNOUNCEMENT
 rmc-goc-high-command = MESSAGE USCM HIGH COMMAND
-rmc-goc-high-command-placeholder = Concise message to USCM High Command...
+rmc-goc-high-command-prompt = Please write a message to USCM High Command
 rmc-goc-medals = AWARD A MEDAL
 
 rmc-goc-emergency-title = EMERGENCY MEASURES
@@ -53,11 +55,13 @@ rmc-goc-ob-safety-title = OB SAFETY SYSTEM:
 rmc-goc-ob-safety-engaged = [color=green][bold]\[ ENGAGED \][/bold][/color]
 rmc-goc-ob-safety-disengaged = [color=red][bold]\[ DISENGAGED \][/bold][/color]
 rmc-goc-keycard-required = Keycard Override Required
-rmc-goc-open-ordnance = OPEN OVERWATCH FIRE CONTROL
 
 rmc-goc-button-cooldown = { $action } ({ $seconds }s)
-rmc-goc-alert-unknown = Alert: Unknown
-rmc-goc-alert-status = Alert: { $level }
+rmc-goc-alert-unknown = CURRENT ALERT LEVEL: UNKNOWN
+rmc-goc-alert-status-green = CURRENT ALERT LEVEL: GREEN
+rmc-goc-alert-status-blue = CURRENT ALERT LEVEL: BLUE
+rmc-goc-alert-status-red = CURRENT ALERT LEVEL: RED
+rmc-goc-alert-status-delta = CURRENT ALERT LEVEL: DELTA
 
 rmc-goc-high-command-admin-message = USCM HIGH COMMAND MESSAGE from { $sender }: { $message }
 rmc-goc-high-command-cooldown = Long-range arrays are recycling. Wait { $seconds } seconds.

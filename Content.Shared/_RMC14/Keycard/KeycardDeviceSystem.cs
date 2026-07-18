@@ -123,7 +123,7 @@ public sealed class KeycardDeviceSystem : EntitySystem
         args.Handled = true;
         if (ent.Comp.RequestSource is { } source)
         {
-            ConfirmRequest(ent, source, args.User, args.Used);
+            ConfirmRequest(ent, source, args.User);
             return;
         }
 
@@ -145,15 +145,14 @@ public sealed class KeycardDeviceSystem : EntitySystem
             return;
         }
 
-        BeginRequest(ent, args.User, args.Used);
+        BeginRequest(ent, args.User);
     }
 
-    private void BeginRequest(Entity<KeycardDeviceComponent> source, EntityUid user, EntityUid card)
+    private void BeginRequest(Entity<KeycardDeviceComponent> source, EntityUid user)
     {
         var expiresAt = _timing.CurTime + source.Comp.Time;
         source.Comp.Active = true;
         source.Comp.Initiator = user;
-        source.Comp.InitiatorCard = card;
         source.Comp.RequestExpiresAt = expiresAt;
         SetAppearance(source);
         Dirty(source);
@@ -189,8 +188,7 @@ public sealed class KeycardDeviceSystem : EntitySystem
     private void ConfirmRequest(
         Entity<KeycardDeviceComponent> receiver,
         EntityUid sourceId,
-        EntityUid confirmer,
-        EntityUid confirmerCard)
+        EntityUid confirmer)
     {
         if (receiver.Owner == sourceId)
         {
@@ -204,18 +202,6 @@ public sealed class KeycardDeviceSystem : EntitySystem
         {
             ResetRequest(sourceId);
             _popup.PopupClient(Loc.GetString("rmc-keycard-request-expired"), receiver, confirmer, PopupType.SmallCaution);
-            return;
-        }
-
-        if (source.Initiator == confirmer)
-        {
-            _popup.PopupClient(Loc.GetString("rmc-keycard-distinct-user-required"), receiver, confirmer, PopupType.SmallCaution);
-            return;
-        }
-
-        if (source.InitiatorCard == confirmerCard)
-        {
-            _popup.PopupClient(Loc.GetString("rmc-keycard-distinct-card-required"), receiver, confirmer, PopupType.SmallCaution);
             return;
         }
 
@@ -271,7 +257,6 @@ public sealed class KeycardDeviceSystem : EntitySystem
         device.Comp.Mode = KeycardDeviceMode.None;
         device.Comp.RequestSource = null;
         device.Comp.Initiator = null;
-        device.Comp.InitiatorCard = null;
         device.Comp.RequestExpiresAt = default;
         SetAppearance(device);
         Dirty(device);

@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.AlertLevel;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.OrbitalCannon;
 using Robust.Shared.GameStates;
@@ -12,6 +13,9 @@ namespace Content.Shared._RMC14.Marines.GroundsideOperations;
 [Access(typeof(SharedGroundsideOperationsConsoleSystem))]
 public sealed partial class GroundsideOperationsConsoleComponent : Component
 {
+    [DataField, AutoNetworkedField]
+    public RMCAlertLevels AlertLevel = RMCAlertLevels.Green;
+
     [DataField, AutoNetworkedField]
     public TimeSpan HighCommandCooldown = TimeSpan.FromSeconds(30);
 

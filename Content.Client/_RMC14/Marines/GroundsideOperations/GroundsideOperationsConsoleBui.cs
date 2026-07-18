@@ -17,6 +17,7 @@ public sealed class GroundsideOperationsConsoleBui(EntityUid owner, Enum uiKey) 
 {
     private readonly IGameTiming _timing = IoCManager.Resolve<IGameTiming>();
 
+    private GroundsideOperationsLandingZoneWindow? _landingZoneWindow;
     private GroundsideOperationsConsoleWindow? _window;
     private bool _confirmingEvacuation;
     private bool _confirmingGeneralQuarters;
@@ -31,14 +32,15 @@ public sealed class GroundsideOperationsConsoleBui(EntityUid owner, Enum uiKey) 
         _window = this.CreateWindow<GroundsideOperationsConsoleWindow>();
         _window.OnTimeRefresh += RefreshTimeSensitive;
         _window.OpenOverwatchButton.OnPressed += _ => SendPredictedMessage(new MarineCommunicationsOverwatchMsg());
-        _window.OpenOrdnanceButton.OnPressed += _ => SendPredictedMessage(new MarineCommunicationsOverwatchMsg());
         _window.TacticalMapButton.OnPressed += _ => SendPredictedMessage(new MarineCommunicationsOpenMapMsg());
+        _window.PrimaryLandingZoneButton.OnPressed += _ => OpenLandingZoneWindow();
         _window.EchoButton.OnPressed += _ => SendPredictedMessage(new MarineCommunicationsEchoSquadMsg());
         _window.AlertButton.OnPressed += _ => SendPredictedMessage(new MarineControlComputerAlertLevelMsg());
         _window.ShipAnnouncementButton.OnPressed += _ => SendPredictedMessage(new MarineControlComputerShipAnnouncementMsg());
         _window.MedalsButton.OnPressed += _ => SendPredictedMessage(new MarineControlComputerOpenMedalsPanelMsg());
-        _window.GroundAnnouncementButton.OnPressed += _ => SendGroundAnnouncement();
-        _window.HighCommandButton.OnPressed += _ => SendHighCommandMessage();
+        _window.GroundAnnouncementButton.OnPressed += _ =>
+            SendPredictedMessage(new GroundsideOperationsGroundAnnouncementMsg());
+        _window.HighCommandButton.OnPressed += _ => SendPredictedMessage(new GroundsideOperationsHighCommandMsg());
         _window.RedAlertButton.OnPressed += _ => ConfirmRedAlert();
         _window.GeneralQuartersButton.OnPressed += _ => ConfirmGeneralQuarters();
         _window.EvacuationButton.OnPressed += _ => ConfirmEvacuation();
@@ -63,17 +65,49 @@ public sealed class GroundsideOperationsConsoleBui(EntityUid owner, Enum uiKey) 
         if (_window == null)
             return;
 
-        _window.LandingZonesContainer.DisposeAllChildren();
         if (groundside.PrimaryLandingZone is { } primaryLandingZone)
         {
-            _window.PrimaryLandingZoneStatus.Text = Loc.GetString(
+            _window.PrimaryLandingZoneButton.Text = Loc.GetString(
                 "rmc-goc-primary-lz-designated",
                 ("landingZone", primaryLandingZone));
+            _window.SetButtonState(_window.PrimaryLandingZoneButton, true, icon: GroundsideOperationsIcon.Home);
+            _landingZoneWindow?.Close();
             return;
         }
 
-        _window.PrimaryLandingZoneStatus.Text = Loc.GetString("rmc-goc-primary-lz");
-        foreach (var landingZone in groundside.LandingZones)
+        _window.PrimaryLandingZoneButton.Text = Loc.GetString("rmc-goc-primary-lz");
+        _window.SetButtonState(
+            _window.PrimaryLandingZoneButton,
+            groundside.LandingZones.Count == 0,
+            icon: GroundsideOperationsIcon.Home);
+
+        if (_landingZoneWindow is { IsOpen: true })
+            PopulateLandingZoneWindow(_landingZoneWindow, groundside.LandingZones);
+    }
+
+    private void OpenLandingZoneWindow()
+    {
+        if (!EntMan.TryGetComponent(Owner, out GroundsideOperationsConsoleComponent? groundside) ||
+            groundside.PrimaryLandingZone != null ||
+            groundside.LandingZones.Count == 0)
+        {
+            return;
+        }
+
+        _landingZoneWindow?.Close();
+        var window = new GroundsideOperationsLandingZoneWindow();
+        _landingZoneWindow = window;
+        window.OnClose += () => _landingZoneWindow = null;
+        PopulateLandingZoneWindow(window, groundside.LandingZones);
+        window.OpenCentered();
+    }
+
+    private void PopulateLandingZoneWindow(
+        GroundsideOperationsLandingZoneWindow window,
+        IReadOnlyList<LandingZone> landingZones)
+    {
+        window.LandingZonesContainer.DisposeAllChildren();
+        foreach (var landingZone in landingZones)
         {
             var button = new GroundsideOperationsIconButton
             {
@@ -82,8 +116,12 @@ public sealed class GroundsideOperationsConsoleBui(EntityUid owner, Enum uiKey) 
                 HorizontalExpand = true,
                 MinHeight = 36,
             };
-            button.OnPressed += _ => SendPredictedMessage(new MarineCommunicationsDesignatePrimaryLZMsg(landingZone.Id));
-            _window.LandingZonesContainer.AddChild(button);
+            button.OnPressed += _ =>
+            {
+                SendPredictedMessage(new MarineCommunicationsDesignatePrimaryLZMsg(landingZone.Id));
+                window.Close();
+            };
+            window.LandingZonesContainer.AddChild(button);
         }
     }
 
@@ -114,10 +152,8 @@ public sealed class GroundsideOperationsConsoleBui(EntityUid owner, Enum uiKey) 
             return;
         }
 
-        var alert = EntMan.System<RMCAlertLevelSystem>().Get();
-        _window.AlertStatus.Text = alert == null
-            ? Loc.GetString("rmc-goc-alert-unknown")
-            : Loc.GetString("rmc-goc-alert-status", ("level", Loc.GetString($"rmc-alert-{alert.Value.ToString().ToLowerInvariant()}")));
+        var alert = groundside.AlertLevel;
+        _window.AlertStatus.Text = Loc.GetString($"rmc-goc-alert-status-{alert.ToString().ToLowerInvariant()}");
 
         var deltaLocked = alert == RMCAlertLevels.Delta;
         _window.SetButtonState(_window.AlertButton, deltaLocked);
@@ -257,32 +293,6 @@ public sealed class GroundsideOperationsConsoleBui(EntityUid owner, Enum uiKey) 
         _window.SetButtonState(button, disabled);
     }
 
-    private void SendGroundAnnouncement()
-    {
-        if (_window == null)
-            return;
-
-        var message = Rope.Collapse(_window.GroundAnnouncementText.TextRope).Trim();
-        if (message.Length == 0)
-            return;
-
-        SendPredictedMessage(new MarineCommunicationsComputerMsg(message));
-        _window.GroundAnnouncementText.TextRope = new Rope.Leaf(string.Empty);
-    }
-
-    private void SendHighCommandMessage()
-    {
-        if (_window == null)
-            return;
-
-        var message = _window.HighCommandMessage.Text.Trim();
-        if (message.Length == 0)
-            return;
-
-        SendPredictedMessage(new GroundsideOperationsHighCommandMsg(message));
-        _window.HighCommandMessage.Text = string.Empty;
-    }
-
     private void ConfirmEvacuation()
     {
         if (_confirmingEvacuation)
@@ -308,5 +318,12 @@ public sealed class GroundsideOperationsConsoleBui(EntityUid owner, Enum uiKey) 
 
         _confirmingRedAlert = !_confirmingRedAlert;
         RefreshTimeSensitive();
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+        if (disposing)
+            _landingZoneWindow?.Close();
     }
 }

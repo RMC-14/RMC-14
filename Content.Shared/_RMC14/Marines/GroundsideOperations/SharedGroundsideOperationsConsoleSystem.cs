@@ -91,7 +91,7 @@ public abstract class SharedGroundsideOperationsConsoleSystem : EntitySystem
     private void OnHighCommand(Entity<GroundsideOperationsConsoleComponent> ent, ref GroundsideOperationsHighCommandMsg args)
     {
         if (_net.IsServer)
-            TrySendHighCommand(ent, args.Actor, args.Message);
+            TryOpenHighCommand(ent, args.Actor);
     }
 
     private void OnRedAlert(Entity<GroundsideOperationsConsoleComponent> ent, ref GroundsideOperationsRedAlertMsg args)
@@ -104,6 +104,10 @@ public abstract class SharedGroundsideOperationsConsoleSystem : EntitySystem
     {
         if (_net.IsServer)
             TryCallGeneralQuarters(ent, args.Actor);
+    }
+
+    protected virtual void TryOpenHighCommand(Entity<GroundsideOperationsConsoleComponent> ent, EntityUid actor)
+    {
     }
 
     protected virtual void TrySendHighCommand(Entity<GroundsideOperationsConsoleComponent> ent, EntityUid actor, string message)

@@ -1,4 +1,3 @@
-using Content.Shared._RMC14.AlertLevel;
 using Content.Shared._RMC14.Marines.GroundsideOperations;
 using Content.Shared.UserInterface;
 using Robust.Client.UserInterface;
@@ -11,26 +10,11 @@ public sealed class GroundsideOperationsConsoleSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<GroundsideOperationsConsoleComponent, AfterAutoHandleStateEvent>(OnOwnerState);
-        SubscribeLocalEvent<RMCAlertLevelComponent, AfterAutoHandleStateEvent>(OnAlertState);
     }
 
     private void OnOwnerState(Entity<GroundsideOperationsConsoleComponent> ent, ref AfterAutoHandleStateEvent args)
     {
         Refresh(ent.Owner);
-    }
-
-    private void OnAlertState(Entity<RMCAlertLevelComponent> ent, ref AfterAutoHandleStateEvent args)
-    {
-        try
-        {
-            var query = EntityQueryEnumerator<GroundsideOperationsConsoleComponent, UserInterfaceComponent>();
-            while (query.MoveNext(out var uid, out _, out var ui))
-                Refresh((uid, ui));
-        }
-        catch (Exception e)
-        {
-            Log.Error($"Error refreshing {nameof(GroundsideOperationsConsoleBui)} after alert state update\n{e}");
-        }
     }
 
     private void Refresh(EntityUid owner)

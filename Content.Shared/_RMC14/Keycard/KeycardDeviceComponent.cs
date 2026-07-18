@@ -1,4 +1,5 @@
 ﻿using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Keycard;
 
@@ -24,13 +25,11 @@ public sealed partial class KeycardDeviceComponent : Component
     [DataField]
     public EntityUid? Initiator;
 
-    [DataField]
-    public EntityUid? InitiatorCard;
-
     [DataField, AutoPausedField]
     public TimeSpan RequestExpiresAt;
 }
 
+[Serializable, NetSerializable]
 public enum KeycardDeviceVisuals
 {
     Active,
