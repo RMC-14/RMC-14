@@ -458,11 +458,7 @@
   id: RMCContainerGrafLeft
   suffix: Graffiti, Left
   name: Cargo Container
-<<<<<<< HEAD
-  description: "A huge industrial shipping container.\nThis one has been turned into a canvas for street art"
-=======
   description: "A huge industrial shipping container.\nThis one has been turned into a canvas for street art."
->>>>>>> master
   components:
   - type: Sprite
     state: grafcontain_l

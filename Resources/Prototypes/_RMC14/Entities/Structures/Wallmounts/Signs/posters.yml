@@ -413,13 +413,8 @@
 - type: entity
   parent: CMPosterBase
   id: CMPosterTartarus
-<<<<<<< HEAD
-  name: "Tartarus Mining co. poster"
-  description: "A simplified version of the Tartarus Mining co. logo. The Tartarus Mining Company is of course a subsidiary company of the Weston-Yamada Corporation, what did you expect?."
-=======
   name: "Tartarus Mining Co. poster"
   description: "A simplified version of the Tartarus Mining Co. logo. The Tartarus Mining Company is of course a subsidiary company of the Weston-Yamada Corporation, what did you expect?"
->>>>>>> master
   components:
   - type: Sprite
     state: tartarus

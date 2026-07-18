@@ -185,7 +185,7 @@
       visible: false
       map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
-    sprite: _RMC14/Structures/Storage/Crates/charlie.rsi
+    sprite: _RMC14/Structures/Storage/Crates/charlie.rsi-
 
 - type: entity
   parent: RMCCrateBase
@@ -742,10 +742,7 @@
   parent: RMCCrateBase
   id: RMCCrateMinecartYellow
   name: minecart
-<<<<<<< HEAD
-=======
   suffix: yellow
->>>>>>> master
   description: Essentially a big metal bucket on wheels. This one has a modern plastic shroud.
   components:
   - type: Sprite
