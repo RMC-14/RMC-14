@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from https://github.com/cmss13-devs/cmss13/blob/b5fdd521893688496435d65c5f52abdf4233c8e5/icons/mob/hud/factions/cmb.dmi with cmb_icc and cmb_obv being renamed to flip one another by PursuitinAshes (Github)",
+  "size": {
+    "x": 16,
+    "y": 16
+  },
+    "states": [
+        {
+            "name": "cmb_dep"
+        },
+        {
+            "name": "cmb_icc"
+        },
+        {
+            "name": "cmb_mar"
+        },
+        {
+            "name": "cmb_obs"
+        },
+        {
+            "name": "cmb_rco"
+        },
+        {
+            "name": "cmb_syn"
+        },
+        {
+            "name": "cmb_mark"
+        }
+    ]
+}

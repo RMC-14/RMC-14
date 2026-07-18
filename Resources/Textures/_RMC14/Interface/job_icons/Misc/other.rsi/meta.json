@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "pve_dynaengi and pve_novameddoc made by noctrynal (Github), hudsquad_nv_co made by Dutch-VanDerLine (Github) based off CO sprite in https://github.com/cmss13-devs/cmss13/blob/a46fad702be27fedec2b0bca69ed3b316e482095/icons/mob/hud/factions/marine.dmi, hudsquad_syn_forecon by Sigma Draconis (Github), hudsquad_vo from https://github.com/cmss13-devs/cmss13/blob/a46fad702be27fedec2b0bca69ed3b316e482095/icons/mob/hud/factions/marine.dmi",
+  "size": {
+    "x": 16,
+    "y": 16
+  },
+    "states": [
+        {
+            "name": "empty"
+        },
+        {
+            "name": "hudsquad_nv_co"
+        },
+        {
+            "name": "hudsquad_syn_forecon"
+        },
+        {
+            "name": "hudsquad_vo"
+        },
+        {
+            "name": "pve_dynaengi"
+        },
+        {
+            "name": "pve_novameddoc"
+        }
+    ]
+}

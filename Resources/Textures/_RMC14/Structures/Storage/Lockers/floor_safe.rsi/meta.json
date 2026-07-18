@@ -12,6 +12,18 @@
         },
         {
             "name": "open"
+        },
+        {
+            "name": "base"
+        },
+        {
+            "name": "unlocked"
+        },
+        {
+            "name": "welded"
+        },
+        {
+            "name": "locked"
         }
     ]
 }
