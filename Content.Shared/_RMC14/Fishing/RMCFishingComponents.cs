@@ -58,9 +58,6 @@ public sealed partial class RMCFishingRodComponent : Component
     public ProtoId<RMCFishingLootPrototype> Loot = "RMCFishingLootGeneric";
 
     [DataField]
-    public SoundSpecifier StartSound = new SoundPathSpecifier("/Audio/_RMC14/Fishing/fishing_Line.ogg");
-
-    [DataField]
     public SoundSpecifier BiteSound = new SoundPathSpecifier("/Audio/_RMC14/Fishing/bobber_water_splash.ogg");
 
     [DataField]
