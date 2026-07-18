@@ -28,7 +28,7 @@
     burstScatterMult: 7
     modifiers:
       Burst:
-        fireDelay: 0.1665
+        fireDelay: 0.25
   - type: BallisticAmmoProvider
     cycleable: false
     whitelist:
