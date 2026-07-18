@@ -20,8 +20,8 @@ rmc-goc-overwatch-untrained = You are not trained in overwatch!
 rmc-goc-ship-control-title = SHIP CONTROL
 rmc-goc-change-alert = CHANGE ALERT LEVEL
 rmc-goc-ship-announce = MAKE A SHIPWIDE ANNOUNCEMENT
-rmc-goc-high-command = MESSAGE USCM HIGH COMMAND
-rmc-goc-high-command-prompt = Please write a message to USCM High Command
+rmc-goc-high-command = MESSAGE UNMC HIGH COMMAND
+rmc-goc-high-command-prompt = Please write a message to UNMC High Command
 rmc-goc-medals = AWARD A MEDAL
 
 rmc-goc-emergency-title = EMERGENCY MEASURES
@@ -63,9 +63,9 @@ rmc-goc-alert-status-blue = CURRENT ALERT LEVEL: BLUE
 rmc-goc-alert-status-red = CURRENT ALERT LEVEL: RED
 rmc-goc-alert-status-delta = CURRENT ALERT LEVEL: DELTA
 
-rmc-goc-high-command-admin-message = USCM HIGH COMMAND MESSAGE from { $sender }: { $message }
+rmc-goc-high-command-admin-message = UNMC HIGH COMMAND MESSAGE from { $sender }: { $message }
 rmc-goc-high-command-cooldown = Long-range arrays are recycling. Wait { $seconds } seconds.
-rmc-goc-high-command-sent = Message transmitted to USCM High Command.
+rmc-goc-high-command-sent = Message transmitted to UNMC High Command.
 rmc-goc-access-denied = Command access is no longer valid.
 rmc-goc-invalid-user = You must be alive and conscious to operate this console.
 rmc-goc-out-of-range = You are too far away from the console.
