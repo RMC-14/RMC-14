@@ -458,7 +458,11 @@
   id: RMCContainerGrafLeft
   suffix: Graffiti, Left
   name: Cargo Container
+<<<<<<< HEAD
   description: "A huge industrial shipping container.\nThis one has been turned into a canvas for street art"
+=======
+  description: "A huge industrial shipping container.\nThis one has been turned into a canvas for street art."
+>>>>>>> master
   components:
   - type: Sprite
     state: grafcontain_l
@@ -1051,7 +1055,11 @@
   parent: RMCContainerTartarusLeft
   id: RMCContainerMedicalLeft
   name: medical cargo container
+<<<<<<< HEAD
   description: A huge industrial shipping container. This one belongs to the Medical Supply Corporation, a company that produces medical supplies and pharmaceuticals.
+=======
+  description: A huge industrial shipping container. This one belongs to Avant Biomedical, a company that produces medical supplies and pharmaceuticals.
+>>>>>>> master
   suffix: Medical, Left
   components:
   - type: Sprite
@@ -1061,6 +1069,10 @@
   parent: RMCContainerMedicalLeft
   id: RMCContainerMedicalEmptyRight
   suffix: Medical, Empty, Right
+<<<<<<< HEAD
+=======
+  description: A small piece of a huge industrial shipping container.
+>>>>>>> master
   components:
   - type: Sprite
     state: medical_empty_right
