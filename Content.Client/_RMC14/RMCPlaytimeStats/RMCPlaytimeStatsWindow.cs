@@ -105,16 +105,15 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
 
     /// <summary>
     ///     The parasite's stats-menu rank icon is derived from total infections (matching the in-game rank),
-    ///     rather than playtime. Parasites currently top out at rank 5 (Prime); rank 6 is reserved for the future.
+    ///     rather than playtime. Parasites currently top out at rank 5 (Prime/Merciless); rank 6 is reserved for the future.
     /// </summary>
     private SpriteSpecifier.Rsi? GetParasiteInfectIcon(int infections)
     {
         if (infections <= 0)
             return null;
 
-        // TODO RMC14: parasites top out at rank 5 here; for consistency with other xenos (whose playtime
-        // path can reach hudxenoupgrade6-ui) a rank-6 tier may be added when a 6th infection threshold and
-        // the matching server branch exist. Leaving it out does not break anything — it just caps the icon.
+        // TODO RMC14: Parasites should have a rank 6. In parity this would be Royal, however this has been stated to be undesirable at present due to connotations. Some other name has to be created.
+        // Leaving it blank doesn't break anything and it defaults to Merciless even if a para gets to what would ordinarily be the rank 6 infection count.
         string? iconName = null;
         if (infections >= _infectPrimeThreshold)
             iconName = "hudxenoupgrade5-ui";

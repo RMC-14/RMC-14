@@ -152,11 +152,8 @@ public sealed class XenoRoleSystem : EntitySystem
         else if (HasComp<XenoParasiteComponent>(xeno))
         {
             // The parasite role is ranked by total successful infections instead of playtime.
-            // Note: parasites currently top out at rank 5 (Prime); rank 6 is reserved for the future.
-            // TODO RMC14: for consistency with other xenos a rank-6 codepath may be added here (a 6th
-            // infection threshold + `rank = 6`), with a matching hudxenoupgrade6-ui branch in the client's
-            // RMCPlaytimeStatsWindow.GetParasiteInfectIcon. Setting rank 6 is already safe (XenoHudOverlay
-            // and the rank name modifier both tolerate it); this is purely about adding the tier.
+            // Note: parasites currently top out at rank 5 (Prime/Merciless); a rank 6 of Royal however is parity but undesired at this time.
+            // TODO RMC14: Parasites need a rank 6 when a name is devised, which needs to be added here when ready.
             var infects = _infectionsManager.GetInfects(player.UserId);
             if (infects <= 0)
                 rank = 0;
