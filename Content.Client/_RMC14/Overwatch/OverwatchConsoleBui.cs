@@ -614,7 +614,14 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                 {
                     Margin = new Thickness(0, 3, 0, 3)
                 };
-                roleNameLabel.SetMarkupPermissive($"[bold]{role.OverwatchRoleName}[/bold]");
+                var overwatchRoleName = role.LocalizedName;
+                if (role.OverwatchRoleName is { } roleName &&
+                    _localization.TryGetString(roleName, out var localizedRoleName))
+                {
+                    overwatchRoleName = localizedRoleName;
+                }
+
+                roleNameLabel.SetMarkupPermissive($"[bold]{overwatchRoleName}[/bold]");
 
                 roleNamePanel.AddChild(new BoxContainer
                 {

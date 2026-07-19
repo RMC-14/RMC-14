@@ -14,7 +14,7 @@
   accessGroups:
   - ShipMasterAccess
   overwatchSortPriority: -2
-  overwatchRoleName: Hospital Corpsmen
+  overwatchRoleName: rmc-overwatch-role-hospital-corpsmen
   spawnMenuRoleName: CBRN Hospital Corpsman
   roleWeight: 1
   displayWeight: 2

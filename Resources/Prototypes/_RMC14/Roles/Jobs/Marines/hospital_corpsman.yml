@@ -30,7 +30,7 @@
   accessGroups:
   - HospitalCorpsman
   overwatchSortPriority: -2
-  overwatchRoleName: Hospital Corpsmen
+  overwatchRoleName: rmc-overwatch-role-hospital-corpsmen
   roleWeight: 1
   displayWeight: 2
   special:

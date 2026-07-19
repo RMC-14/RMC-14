@@ -3,6 +3,7 @@ rmc-overwatch-console = Overwatch
 rmc-overwatch-console-tactical-map = Tactical Map
 rmc-overwatch-console-stop-overwatch = Stop Overwatch
 rmc-overwatch-console-squad-message-title = Squad Message
+rmc-overwatch-console-confirm = Confirm
 rmc-overwatch-console-message-squad = Message Squad
 rmc-overwatch-console-message-squad-leader = Message Squad Leader
 rmc-overwatch-console-squad-objectives = Squad Objectives
@@ -109,3 +110,11 @@ rmc-overwatch-console-objective-updated = [bold][color=#7FFFD4]'{ $squadName }' 
 rmc-overwatch-console-objective-cancelled = [bold][color=#7FFFD4]'{ $squadName }' { $objectiveType } '{ $objective }' cancelled.[/color][/bold]
 rmc-overwatch-console-objectives = Your squad objectives:
     { $objectives }
+
+# Role summaries
+rmc-overwatch-role-specialist = Specialist
+rmc-overwatch-role-squad-leader = Squad Leader
+rmc-overwatch-role-smart-gun-operator = Smart Gun Operator
+rmc-overwatch-role-hospital-corpsmen = Hospital Corpsmen
+rmc-overwatch-role-fireteam-leaders = Fire Team Leaders
+rmc-overwatch-role-combat-technicians = Combat Technicians
