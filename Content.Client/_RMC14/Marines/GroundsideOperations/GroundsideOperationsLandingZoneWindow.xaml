@@ -1,20 +1,17 @@
 <controls:GroundsideOperationsLandingZoneWindow
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Marines.GroundsideOperations"
-    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    xmlns:crt="clr-namespace:Content.Client._RMC14.UserInterface.Crt"
     Title="{Loc rmc-goc-primary-lz-window-title}"
     MinSize="480 220"
     SetSize="480 220">
-    <controls:GroundsideOperationsCrtPanel Scanlines="True">
-        <controls:GroundsideOperationsCrtPanel.PanelOverride>
-            <graphics:StyleBoxFlat BackgroundColor="#00000F" BorderColor="#8ACBFF" BorderThickness="2" />
-        </controls:GroundsideOperationsCrtPanel.PanelOverride>
+    <crt:RMCCrtThemeScope Palette="Blue" Effects="HorizontalScanlines" BorderThickness="2">
         <BoxContainer Orientation="Vertical" Margin="9" SeparationOverride="7">
-            <Label Text="{Loc rmc-goc-primary-lz-window-description}"
-                StyleClasses="monospace" HorizontalAlignment="Center" ModulateSelfOverride="#8ACBFF" />
+            <crt:RMCCrtLabel Text="{Loc rmc-goc-primary-lz-window-description}"
+                HorizontalAlignment="Center" />
             <BoxContainer Name="LandingZonesContainer" Access="Public"
                 Orientation="Vertical" SeparationOverride="5" />
             <Control VerticalExpand="True" />
         </BoxContainer>
-    </controls:GroundsideOperationsCrtPanel>
+    </crt:RMCCrtThemeScope>
 </controls:GroundsideOperationsLandingZoneWindow>

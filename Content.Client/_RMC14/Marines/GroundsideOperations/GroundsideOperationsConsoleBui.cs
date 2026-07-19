@@ -1,3 +1,4 @@
+using Content.Client._RMC14.UserInterface.Crt;
 using Content.Client.Message;
 using Content.Shared._RMC14.AlertLevel;
 using Content.Shared._RMC14.Marines.Announce;
@@ -70,7 +71,7 @@ public sealed class GroundsideOperationsConsoleBui(EntityUid owner, Enum uiKey) 
             _window.PrimaryLandingZoneButton.Text = Loc.GetString(
                 "rmc-goc-primary-lz-designated",
                 ("landingZone", primaryLandingZone));
-            _window.SetButtonState(_window.PrimaryLandingZoneButton, true, icon: GroundsideOperationsIcon.Home);
+            _window.SetButtonState(_window.PrimaryLandingZoneButton, true, iconState: RMCCrtIcons.Home);
             _landingZoneWindow?.Close();
             return;
         }
@@ -79,7 +80,7 @@ public sealed class GroundsideOperationsConsoleBui(EntityUid owner, Enum uiKey) 
         _window.SetButtonState(
             _window.PrimaryLandingZoneButton,
             groundside.LandingZones.Count == 0,
-            icon: GroundsideOperationsIcon.Home);
+            iconState: RMCCrtIcons.Home);
 
         if (_landingZoneWindow is { IsOpen: true })
             PopulateLandingZoneWindow(_landingZoneWindow, groundside.LandingZones);
@@ -109,11 +110,11 @@ public sealed class GroundsideOperationsConsoleBui(EntityUid owner, Enum uiKey) 
         window.LandingZonesContainer.DisposeAllChildren();
         foreach (var landingZone in landingZones)
         {
-            var button = new GroundsideOperationsIconButton
+            var button = new RMCCrtActionButton
             {
                 Text = landingZone.Name,
-                Icon = GroundsideOperationsIcon.Home,
-                Filled = true,
+                IconState = RMCCrtIcons.Home,
+                Variant = RMCCrtButtonVariant.Filled,
                 HorizontalExpand = true,
                 MinHeight = 36,
             };
@@ -171,7 +172,7 @@ public sealed class GroundsideOperationsConsoleBui(EntityUid owner, Enum uiKey) 
             _window.RedAlertButton,
             redOrHigher,
             !redOrHigher,
-            redOrHigher ? GroundsideOperationsIcon.Ban : GroundsideOperationsIcon.Warning);
+            redOrHigher ? RMCCrtIcons.Ban : RMCCrtIcons.Warning);
 
         var generalQuartersLeft = groundside.NextGeneralQuarters - _timing.CurTime;
         var generalQuartersCooldown = generalQuartersLeft > TimeSpan.Zero;
@@ -185,7 +186,7 @@ public sealed class GroundsideOperationsConsoleBui(EntityUid owner, Enum uiKey) 
             _window.GeneralQuartersButton,
             generalQuartersCooldown,
             !generalQuartersCooldown,
-            generalQuartersCooldown ? GroundsideOperationsIcon.Ban : GroundsideOperationsIcon.Warning);
+            generalQuartersCooldown ? RMCCrtIcons.Ban : RMCCrtIcons.Warning);
 
         RefreshCommunicationsCooldowns();
         RefreshControlComputer();
@@ -235,7 +236,7 @@ public sealed class GroundsideOperationsConsoleBui(EntityUid owner, Enum uiKey) 
             _window.EvacuationButton,
             !control.CanEvacuate,
             control.CanEvacuate,
-            control.CanEvacuate ? GroundsideOperationsIcon.DoorOpen : GroundsideOperationsIcon.Ban);
+            control.CanEvacuate ? RMCCrtIcons.DoorOpen : RMCCrtIcons.Ban);
     }
 
     private void RefreshCannonCountdown(GroundsideOperationsConsoleComponent groundside)
@@ -277,7 +278,7 @@ public sealed class GroundsideOperationsConsoleBui(EntityUid owner, Enum uiKey) 
     }
 
     private void SetCooldownButton(
-        GroundsideOperationsIconButton button,
+        RMCCrtActionButton button,
         string text,
         TimeSpan remaining)
     {

@@ -1,3 +1,4 @@
+using Content.Client._RMC14.UserInterface.Crt;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.ControlComputer;
 using Content.Shared._RMC14.TacticalMap;
@@ -100,9 +101,9 @@ public sealed class CommandTabletBui(EntityUid owner, Enum uiKey) : BoundUserInt
             : Loc.GetString(control.Evacuating
                 ? "rmc-command-tablet-cancel-evacuation"
                 : "rmc-command-tablet-initiate-evacuation");
-        _window.EvacuationButton.Icon = control.CanEvacuate
-            ? CommandTabletIcon.DoorOpen
-            : CommandTabletIcon.Ban;
+        _window.EvacuationButton.IconState = control.CanEvacuate
+            ? RMCCrtIcons.DoorOpen
+            : RMCCrtIcons.Ban;
         _window.EvacuationButton.Disabled = !control.CanEvacuate;
     }
 
