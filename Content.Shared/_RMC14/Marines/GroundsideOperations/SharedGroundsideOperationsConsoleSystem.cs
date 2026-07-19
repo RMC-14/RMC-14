@@ -28,6 +28,7 @@ public abstract class SharedGroundsideOperationsConsoleSystem : EntitySystem
         SubscribeLocalEvent<GroundsideOperationsConsoleComponent, BoundUserInterfaceMessageAttempt>(OnBoundUiMessageAttempt);
         SubscribeLocalEvent<GroundsideOperationsConsoleComponent, BoundUIOpenedEvent>(OnBoundUiOpened);
         SubscribeLocalEvent<GroundsideOperationsConsoleComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<PrimaryLandingZoneChangedEvent>(OnPrimaryLandingZoneChanged);
         SubscribeLocalEvent<OrbitalCannonChangedEvent>(OnOrbitalCannonChanged);
         SubscribeLocalEvent<OrbitalCannonLaunchEvent>(OnOrbitalCannonLaunch);
         SubscribeLocalEvent<OrbitalCannonSafetyChangedEvent>(OnOrbitalCannonSafetyChanged);
@@ -86,6 +87,11 @@ public abstract class SharedGroundsideOperationsConsoleSystem : EntitySystem
 
         RefreshLandingZones(ent);
         RefreshOrdnance(ent);
+    }
+
+    private void OnPrimaryLandingZoneChanged(ref PrimaryLandingZoneChangedEvent args)
+    {
+        RefreshAllLandingZones();
     }
 
     private void OnHighCommand(Entity<GroundsideOperationsConsoleComponent> ent, ref GroundsideOperationsHighCommandMsg args)

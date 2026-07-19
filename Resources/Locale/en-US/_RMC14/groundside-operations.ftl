@@ -7,7 +7,6 @@ rmc-goc-tab-ordnance = Ordnance Systems
 
 rmc-goc-groundside-title = GROUNDSIDE OPERATIONS
 rmc-goc-groundside-announce = MAKE AN ANNOUNCEMENT
-rmc-goc-groundside-prompt = Please write a groundside announcement
 rmc-goc-tactical-map = VIEW TACTICAL MAP
 rmc-goc-primary-lz = DESIGNATE PRIMARY LZ
 rmc-goc-primary-lz-designated = PRIMARY LZ: { $landingZone }
@@ -16,6 +15,8 @@ rmc-goc-primary-lz-window-description = Select the landing zone to designate as 
 rmc-goc-activate-echo = ACTIVATE ECHO SQUAD
 rmc-goc-echo-purpose = What is the purpose of Echo Squad?
 rmc-goc-overwatch-untrained = You are not trained in overwatch!
+rmc-echo-squad-confirm-title = Confirm Activation
+rmc-echo-squad-confirm-message = Confirm activation of Echo Squad for { $purpose }
 
 rmc-goc-ship-control-title = SHIP CONTROL
 rmc-goc-change-alert = CHANGE ALERT LEVEL

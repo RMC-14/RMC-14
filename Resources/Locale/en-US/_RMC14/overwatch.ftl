@@ -118,3 +118,4 @@ rmc-overwatch-role-smart-gun-operator = Smart Gun Operator
 rmc-overwatch-role-hospital-corpsmen = Hospital Corpsmen
 rmc-overwatch-role-fireteam-leaders = Fire Team Leaders
 rmc-overwatch-role-combat-technicians = Combat Technicians
+rmc-overwatch-console-scoped = You're too busy peering through optics.

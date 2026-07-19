@@ -176,6 +176,9 @@ public sealed class GroundsideOperationsConsoleBui(EntityUid owner, Enum uiKey) 
 
         var generalQuartersLeft = groundside.NextGeneralQuarters - _timing.CurTime;
         var generalQuartersCooldown = generalQuartersLeft > TimeSpan.Zero;
+        if (generalQuartersCooldown)
+            _confirmingGeneralQuarters = false;
+
         _window.GeneralQuartersButton.Text = _confirmingGeneralQuarters
             ? Loc.GetString("rmc-goc-confirm-general-quarters")
             : Loc.GetString("rmc-goc-general-quarters");

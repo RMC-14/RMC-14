@@ -129,8 +129,14 @@ public sealed partial class RMCCrtActionButton : ContainerButton, IRMCCrtThemedC
 
     private void UpdateIcon()
     {
-        if (NameScope == null || string.IsNullOrWhiteSpace(IconState))
+        if (NameScope == null)
             return;
+
+        if (string.IsNullOrWhiteSpace(IconState))
+        {
+            IconControl.Texture = null;
+            return;
+        }
 
         try
         {

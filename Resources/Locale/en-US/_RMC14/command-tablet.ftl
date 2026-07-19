@@ -2,7 +2,6 @@ rmc-command-tablet-title = Command Tablet
 rmc-command-tablet-command = Command
 rmc-command-tablet-make-announcement = Make an announcement
 rmc-command-tablet-announcement-cooldown = Make an announcement ({$seconds}s)
-rmc-command-tablet-announcement-prompt = Please write a message to announce to the crew
 rmc-command-tablet-give-medal = Give a medal
 rmc-command-tablet-view-tactical-map = View tactical map
 rmc-command-tablet-evacuation = Evacuation

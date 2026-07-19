@@ -32,8 +32,8 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly ARESCoreSystem _core = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
-    [Dependency] private readonly SharedMarineControlComputerSystem _marineControlComputer = default!;
     [Dependency] private readonly SharedIdCardSystem _idCard = default!;
+    [Dependency] private readonly SharedMarineControlComputerSystem _marineControlComputer = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedRankSystem _rankSystem = default!;
@@ -92,8 +92,8 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         _dialog.OpenConfirmation(
             ent,
             user.Value,
-            "Confirm Activation",
-            $"Confirm activation of Echo Squad for {args.Message}",
+            Loc.GetString("rmc-echo-squad-confirm-title"),
+            Loc.GetString("rmc-echo-squad-confirm-message", ("purpose", args.Message)),
             ev
         );
     }
@@ -147,7 +147,7 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         _dialog.OpenInput(
             ent.Owner,
             actor,
-            Loc.GetString("rmc-command-tablet-announcement-prompt"),
+            Loc.GetString("rmc-announcement-shipside-header"),
             ev,
             true,
             CharacterLimit);
