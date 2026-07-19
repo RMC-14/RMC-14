@@ -21,6 +21,8 @@ public sealed partial class GroundsideOperationsIconButton : ContainerButton
         BorderThickness = new Thickness(1),
     };
     private bool _danger;
+    private bool _filled;
+    private bool _navigation;
     private bool _paletteDisabled;
     private bool _selected;
     private GroundsideOperationsIcon _icon;
@@ -43,11 +45,24 @@ public sealed partial class GroundsideOperationsIconButton : ContainerButton
 
     public bool Navigation
     {
+        get => _navigation;
         set
         {
+            _navigation = value;
             Layout.HorizontalExpand = false;
             Layout.HorizontalAlignment = HAlignment.Center;
             TextLabel.HorizontalExpand = false;
+            UpdatePalette();
+        }
+    }
+
+    public bool Filled
+    {
+        get => _filled;
+        set
+        {
+            _filled = value;
+            UpdatePalette();
         }
     }
 
@@ -80,20 +95,37 @@ public sealed partial class GroundsideOperationsIconButton : ContainerButton
 
     private void UpdatePalette()
     {
-        var hovered = IsHovered && !_paletteDisabled;
-        var background = _danger
-            ? hovered ? "#D64036" : "#B72B24"
-            : _selected
-                ? hovered ? "#9BDEFF" : "#79C5EC"
-                : hovered ? "#153B55" : "#071321";
-        var foreground = _paletteDisabled
-            ? "#557080"
-            : _selected || _danger
-                ? "#020711"
-                : hovered ? "#FFFFFF" : "#D9F3FF";
-        var border = _danger
-            ? hovered ? "#FF8278" : "#E85A50"
-            : hovered ? "#B7E9FF" : "#78C8F2";
+        var pressed = DrawMode == DrawModeEnum.Pressed;
+        var hovered = DrawMode == DrawModeEnum.Hover;
+
+        string background;
+        string border;
+        string foreground;
+        if (_paletteDisabled)
+        {
+            background = "#00000F80";
+            border = "#46677F";
+            foreground = "#55768D";
+        }
+        else if (_danger)
+        {
+            background = pressed ? "#8E1712" : hovered ? "#E13B32" : "#C3251E";
+            border = hovered ? "#FF766E" : "#F04B43";
+            foreground = "#00000F";
+        }
+        else if (_selected || _filled)
+        {
+            background = pressed ? "#5897C2" : hovered ? "#A9DDFF" : "#82C5F2";
+            border = hovered ? "#D1EDFF" : "#8ACBFF";
+            foreground = "#00000F";
+        }
+        else
+        {
+            background = pressed ? "#284C6680" : hovered ? "#8ACBFF4D" : "#00000F80";
+            border = hovered ? "#B9E2FF" : "#8ACBFF";
+            foreground = hovered ? "#FFFFFF" : "#8ACBFF";
+        }
+
         _style.BackgroundColor = Color.FromHex(background);
         _style.BorderColor = Color.FromHex(border);
         IconControl.ModulateSelfOverride = Color.FromHex(foreground);

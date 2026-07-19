@@ -5,16 +5,16 @@
     Title="{Loc rmc-goc-primary-lz-window-title}"
     MinSize="480 220"
     SetSize="480 220">
-    <PanelContainer>
-        <PanelContainer.PanelOverride>
-            <graphics:StyleBoxFlat BackgroundColor="#020711" BorderColor="#78C8F2" BorderThickness="2" />
-        </PanelContainer.PanelOverride>
+    <controls:GroundsideOperationsCrtPanel Scanlines="True">
+        <controls:GroundsideOperationsCrtPanel.PanelOverride>
+            <graphics:StyleBoxFlat BackgroundColor="#00000F" BorderColor="#8ACBFF" BorderThickness="2" />
+        </controls:GroundsideOperationsCrtPanel.PanelOverride>
         <BoxContainer Orientation="Vertical" Margin="9" SeparationOverride="7">
             <Label Text="{Loc rmc-goc-primary-lz-window-description}"
-                HorizontalAlignment="Center" ModulateSelfOverride="#B8DDF0" />
+                StyleClasses="monospace" HorizontalAlignment="Center" ModulateSelfOverride="#8ACBFF" />
             <BoxContainer Name="LandingZonesContainer" Access="Public"
                 Orientation="Vertical" SeparationOverride="5" />
             <Control VerticalExpand="True" />
         </BoxContainer>
-    </PanelContainer>
+    </controls:GroundsideOperationsCrtPanel>
 </controls:GroundsideOperationsLandingZoneWindow>

@@ -6,17 +6,17 @@
     Title="{Loc rmc-goc-title}"
     MinSize="1100 640"
     SetSize="1100 640">
-    <PanelContainer>
-        <PanelContainer.PanelOverride>
-            <graphics:StyleBoxFlat BackgroundColor="#020711" BorderColor="#78C8F2" BorderThickness="2" />
-        </PanelContainer.PanelOverride>
-        <BoxContainer Orientation="Vertical" Margin="7" SeparationOverride="6">
-            <BoxContainer Orientation="Horizontal" SeparationOverride="6" VerticalExpand="True">
-                <PanelContainer MinWidth="210" VerticalExpand="True">
-                    <PanelContainer.PanelOverride>
-                        <graphics:StyleBoxFlat BackgroundColor="#030A14" BorderColor="#78C8F2" BorderThickness="1" />
-                    </PanelContainer.PanelOverride>
-                    <BoxContainer Orientation="Vertical" Margin="6" SeparationOverride="5">
+    <controls:GroundsideOperationsCrtPanel Scanlines="True">
+        <controls:GroundsideOperationsCrtPanel.PanelOverride>
+            <graphics:StyleBoxFlat BackgroundColor="#00000F" BorderColor="#8ACBFF" BorderThickness="2" />
+        </controls:GroundsideOperationsCrtPanel.PanelOverride>
+        <BoxContainer Orientation="Vertical" Margin="5" SeparationOverride="5">
+            <BoxContainer Orientation="Horizontal" SeparationOverride="5" VerticalExpand="True">
+                <controls:GroundsideOperationsCrtPanel MinWidth="210" VerticalExpand="True">
+                    <controls:GroundsideOperationsCrtPanel.PanelOverride>
+                        <graphics:StyleBoxFlat BackgroundColor="#00000FB8" BorderColor="#8ACBFF" BorderThickness="1" />
+                    </controls:GroundsideOperationsCrtPanel.PanelOverride>
+                    <BoxContainer Orientation="Vertical" Margin="5" SeparationOverride="2">
                         <controls:GroundsideOperationsIconButton Name="OpenOverwatchButton" Access="Public"
                             Text="{Loc rmc-goc-open-overwatch}" Icon="Heartbeat" Navigation="True" MinHeight="38" />
                         <controls:GroundsideOperationsIconButton Name="ExecutiveNavigationButton" Access="Public"
@@ -29,58 +29,58 @@
                         <Label Text="{Loc rmc-goc-system-version}" StyleClasses="monospace"
                             HorizontalAlignment="Center" ModulateSelfOverride="#6B9FBC" />
                     </BoxContainer>
-                </PanelContainer>
+                </controls:GroundsideOperationsCrtPanel>
 
-                <PanelContainer HorizontalExpand="True" VerticalExpand="True">
-                    <PanelContainer.PanelOverride>
-                        <graphics:StyleBoxFlat BackgroundColor="#030A14" BorderColor="#78C8F2" BorderThickness="1" />
-                    </PanelContainer.PanelOverride>
-                    <BoxContainer Orientation="Vertical" Margin="9" HorizontalExpand="True" VerticalExpand="True">
-                            <BoxContainer Name="ExecutivePage" Access="Public" Orientation="Horizontal" SeparationOverride="9" VerticalExpand="True">
-                                <PanelContainer MinWidth="360" HorizontalExpand="True" VerticalExpand="True">
-                                    <PanelContainer.PanelOverride>
-                                        <graphics:StyleBoxFlat BackgroundColor="#061321" BorderColor="#3E91BC" BorderThickness="1" />
-                                    </PanelContainer.PanelOverride>
-                                    <BoxContainer Orientation="Vertical" Margin="9" SeparationOverride="7">
+                <controls:GroundsideOperationsCrtPanel HorizontalExpand="True" VerticalExpand="True">
+                    <controls:GroundsideOperationsCrtPanel.PanelOverride>
+                        <graphics:StyleBoxFlat BackgroundColor="#00000FA6" BorderColor="#8ACBFF" BorderThickness="1" />
+                    </controls:GroundsideOperationsCrtPanel.PanelOverride>
+                    <BoxContainer Orientation="Vertical" Margin="7" HorizontalExpand="True" VerticalExpand="True">
+                            <BoxContainer Name="ExecutivePage" Access="Public" Orientation="Horizontal" SeparationOverride="7" VerticalExpand="True">
+                                <controls:GroundsideOperationsCrtPanel MinWidth="360" HorizontalExpand="True" VerticalExpand="True">
+                                    <controls:GroundsideOperationsCrtPanel.PanelOverride>
+                                        <graphics:StyleBoxFlat BackgroundColor="#00000F80" BorderColor="#8ACBFF" BorderThickness="1" />
+                                    </controls:GroundsideOperationsCrtPanel.PanelOverride>
+                                    <BoxContainer Orientation="Vertical" Margin="9" SeparationOverride="5">
                                         <Label Text="{Loc rmc-goc-groundside-title}" StyleClasses="monospace" HorizontalAlignment="Center" ModulateSelfOverride="#8CD8FF" />
                                         <controls:GroundsideOperationsIconButton Name="GroundAnnouncementButton" Access="Public"
-                                            Text="{Loc rmc-goc-groundside-announce}" Icon="Bullhorn" MinHeight="37" />
+                                            Text="{Loc rmc-goc-groundside-announce}" Icon="Bullhorn" Filled="True" MinHeight="37" />
                                         <controls:GroundsideOperationsIconButton Name="TacticalMapButton" Access="Public"
-                                            Text="{Loc rmc-goc-tactical-map}" Icon="Map" MinHeight="37" />
-                                        <cc:HSeparator Color="#78C8F2" Margin="0 2" />
+                                            Text="{Loc rmc-goc-tactical-map}" Icon="Map" Filled="True" MinHeight="37" />
+                                        <cc:HSeparator Color="#8ACBFF" Margin="0 3" />
                                         <controls:GroundsideOperationsIconButton Name="PrimaryLandingZoneButton" Access="Public"
-                                            Text="{Loc rmc-goc-primary-lz}" Icon="Home" MinHeight="37" />
+                                            Text="{Loc rmc-goc-primary-lz}" Icon="Home" Filled="True" MinHeight="37" />
                                         <controls:GroundsideOperationsIconButton Name="EchoButton" Access="Public"
-                                            Text="{Loc rmc-goc-activate-echo}" Icon="Users" MinHeight="37" />
+                                            Text="{Loc rmc-goc-activate-echo}" Icon="Users" Filled="True" MinHeight="37" />
                                         <Control VerticalExpand="True" />
                                     </BoxContainer>
-                                </PanelContainer>
+                                </controls:GroundsideOperationsCrtPanel>
 
-                                <PanelContainer MinWidth="360" HorizontalExpand="True" VerticalExpand="True">
-                                    <PanelContainer.PanelOverride>
-                                        <graphics:StyleBoxFlat BackgroundColor="#061321" BorderColor="#3E91BC" BorderThickness="1" />
-                                    </PanelContainer.PanelOverride>
-                                    <BoxContainer Orientation="Vertical" Margin="9" SeparationOverride="7">
+                                <controls:GroundsideOperationsCrtPanel MinWidth="360" HorizontalExpand="True" VerticalExpand="True">
+                                    <controls:GroundsideOperationsCrtPanel.PanelOverride>
+                                        <graphics:StyleBoxFlat BackgroundColor="#00000F80" BorderColor="#8ACBFF" BorderThickness="1" />
+                                    </controls:GroundsideOperationsCrtPanel.PanelOverride>
+                                    <BoxContainer Orientation="Vertical" Margin="9" SeparationOverride="5">
                                         <Label Text="{Loc rmc-goc-ship-control-title}" StyleClasses="monospace" HorizontalAlignment="Center" ModulateSelfOverride="#8CD8FF" />
                                         <controls:GroundsideOperationsIconButton Name="AlertButton" Access="Public"
-                                            Text="{Loc rmc-goc-change-alert}" Icon="Warning" MinHeight="37" />
-                                        <PanelContainer>
-                                            <PanelContainer.PanelOverride>
-                                                <graphics:StyleBoxFlat BackgroundColor="#020711" BorderColor="#78C8F2" BorderThickness="1" />
-                                            </PanelContainer.PanelOverride>
+                                            Text="{Loc rmc-goc-change-alert}" Icon="Warning" Filled="True" MinHeight="37" />
+                                        <controls:GroundsideOperationsCrtPanel>
+                                            <controls:GroundsideOperationsCrtPanel.PanelOverride>
+                                                <graphics:StyleBoxFlat BackgroundColor="#00000FA6" BorderColor="#8ACBFF" BorderThickness="1" />
+                                            </controls:GroundsideOperationsCrtPanel.PanelOverride>
                                             <Label Name="AlertStatus" Access="Public" StyleClasses="monospace"
                                                 HorizontalAlignment="Center" ModulateSelfOverride="#D9F3FF" Margin="6 5" />
-                                        </PanelContainer>
-                                        <cc:HSeparator Color="#78C8F2" Margin="0 2" />
+                                        </controls:GroundsideOperationsCrtPanel>
+                                        <cc:HSeparator Color="#8ACBFF" Margin="0 3" />
                                         <controls:GroundsideOperationsIconButton Name="ShipAnnouncementButton" Access="Public"
-                                            Text="{Loc rmc-goc-ship-announce}" Icon="Bullhorn" MinHeight="37" />
+                                            Text="{Loc rmc-goc-ship-announce}" Icon="Bullhorn" Filled="True" MinHeight="37" />
                                         <controls:GroundsideOperationsIconButton Name="HighCommandButton" Access="Public"
-                                            Text="{Loc rmc-goc-high-command}" Icon="PaperPlane" MinHeight="37" />
+                                            Text="{Loc rmc-goc-high-command}" Icon="PaperPlane" Filled="True" MinHeight="37" />
                                         <controls:GroundsideOperationsIconButton Name="MedalsButton" Access="Public"
-                                            Text="{Loc rmc-goc-medals}" Icon="Medal" MinHeight="37" />
+                                            Text="{Loc rmc-goc-medals}" Icon="Medal" Filled="True" MinHeight="37" />
                                         <Control VerticalExpand="True" />
                                     </BoxContainer>
-                                </PanelContainer>
+                                </controls:GroundsideOperationsCrtPanel>
                             </BoxContainer>
 
                             <BoxContainer Name="EmergencyPage" Access="Public" Orientation="Vertical" SeparationOverride="9" VerticalExpand="True" Visible="False">
@@ -93,17 +93,17 @@
                                 <Label Name="GeneralQuartersStatus" Access="Public" StyleClasses="monospace"
                                     HorizontalAlignment="Center" ModulateSelfOverride="#D3B400" />
                                 <controls:GroundsideOperationsIconButton Name="EvacuationButton" Access="Public"
-                                    Icon="DoorOpen" MinHeight="40" />
+                                    Icon="DoorOpen" Filled="True" MinHeight="40" />
                                 <!-- TODO RMC14: restore distress/ERT only after a native workflow exists. -->
                                 <Control VerticalExpand="True" />
                             </BoxContainer>
 
                             <BoxContainer Name="OrdnancePage" Access="Public" Orientation="Vertical" SeparationOverride="9" VerticalExpand="True" Visible="False">
                                 <Label Text="{Loc rmc-goc-ordnance-title}" StyleClasses="monospace" HorizontalAlignment="Center" ModulateSelfOverride="#8CD8FF" />
-                                <PanelContainer>
-                                    <PanelContainer.PanelOverride>
-                                        <graphics:StyleBoxFlat BackgroundColor="#061321" BorderColor="#3E91BC" BorderThickness="1" />
-                                    </PanelContainer.PanelOverride>
+                                <controls:GroundsideOperationsCrtPanel>
+                                    <controls:GroundsideOperationsCrtPanel.PanelOverride>
+                                        <graphics:StyleBoxFlat BackgroundColor="#00000F80" BorderColor="#8ACBFF" BorderThickness="1" />
+                                    </controls:GroundsideOperationsCrtPanel.PanelOverride>
                                     <BoxContainer Orientation="Horizontal" Margin="12" SeparationOverride="14">
                                         <BoxContainer Orientation="Vertical" HorizontalExpand="True" SeparationOverride="7">
                                             <Label Text="{Loc rmc-goc-orbital-subsystem}" StyleClasses="monospace" ModulateSelfOverride="#D9F3FF" />
@@ -115,10 +115,10 @@
                                             <Label Text="{Loc rmc-goc-cannon-status}" StyleClasses="monospace" ModulateSelfOverride="#D9F3FF" />
                                             <RichTextLabel Name="CannonStatus" Access="Public" />
                                         </BoxContainer>
-                                        <PanelContainer MinWidth="275">
-                                            <PanelContainer.PanelOverride>
-                                                <graphics:StyleBoxFlat BackgroundColor="#020711" BorderColor="#3E91BC" BorderThickness="1" />
-                                            </PanelContainer.PanelOverride>
+                                        <controls:GroundsideOperationsCrtPanel MinWidth="275">
+                                            <controls:GroundsideOperationsCrtPanel.PanelOverride>
+                                                <graphics:StyleBoxFlat BackgroundColor="#00000FA6" BorderColor="#8ACBFF" BorderThickness="1" />
+                                            </controls:GroundsideOperationsCrtPanel.PanelOverride>
                                             <BoxContainer Orientation="Vertical" Margin="10" SeparationOverride="8">
                                                 <Label Text="{Loc rmc-goc-ob-safety-title}" StyleClasses="monospace" HorizontalAlignment="Center" ModulateSelfOverride="#D9F3FF" />
                                                 <RichTextLabel Name="OrbitalSafetyStatus" Access="Public" HorizontalAlignment="Center" />
@@ -126,14 +126,14 @@
                                                     Text="{Loc rmc-goc-keycard-required}" Icon="Ban" Disabled="True" MinHeight="38" />
                                                 <Control VerticalExpand="True" />
                                             </BoxContainer>
-                                        </PanelContainer>
+                                        </controls:GroundsideOperationsCrtPanel>
                                     </BoxContainer>
-                                </PanelContainer>
+                                </controls:GroundsideOperationsCrtPanel>
                                 <Control VerticalExpand="True" />
                             </BoxContainer>
                     </BoxContainer>
-                </PanelContainer>
+                </controls:GroundsideOperationsCrtPanel>
             </BoxContainer>
         </BoxContainer>
-    </PanelContainer>
+    </controls:GroundsideOperationsCrtPanel>
 </controls:GroundsideOperationsConsoleWindow>

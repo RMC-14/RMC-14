@@ -113,6 +113,7 @@ public sealed class GroundsideOperationsConsoleBui(EntityUid owner, Enum uiKey) 
             {
                 Text = landingZone.Name,
                 Icon = GroundsideOperationsIcon.Home,
+                Filled = true,
                 HorizontalExpand = true,
                 MinHeight = 36,
             };
