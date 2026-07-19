@@ -6,6 +6,7 @@
   ranks:
     RMCRankTSEPAConstable: [ ]
   icon: "RMCJobIconTSEPASynth"
+  hasIcon: true
   special:
   - !type:AddComponentSpecial
     components:

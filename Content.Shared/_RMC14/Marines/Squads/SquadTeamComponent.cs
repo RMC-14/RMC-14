@@ -61,7 +61,7 @@ public sealed partial class SquadTeamComponent : Component
     public string Group = "UNMC";
 
     [DataField]
-    public SpriteSpecifier.Rsi LeaderIcon = new(new ResPath("_RMC14/Interface/cm_job_icons.rsi"), "hudsquad_leader_a");
+    public SpriteSpecifier.Rsi LeaderIcon = new(new ResPath("_RMC14/Interface/job_icons/UNMC/marine.rsi"), "hudsquad_leader_a");
 
     [DataField]
     public ProtoId<TacticalMapLayerPrototype>? TacticalMapLayer;

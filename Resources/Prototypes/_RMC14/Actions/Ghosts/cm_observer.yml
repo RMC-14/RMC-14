@@ -6,10 +6,10 @@
   - type: Action
     checkCanInteract: false
     icon:
-      sprite: _RMC14/Interface/cm_job_icons.rsi
+      sprite: _RMC14/Interface/job_icons/UNMC/command.rsi
       state: hudsquad_co
     iconOn:
-      sprite: _RMC14/Interface/cm_job_icons.rsi
+      sprite: _RMC14/Interface/job_icons/UNMC/command.rsi
       state: hudsquad_co
   - type: InstantAction
     event: !type:ToggleMarineHudActionEvent
