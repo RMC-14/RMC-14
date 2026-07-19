@@ -37,7 +37,6 @@
     vehicles:
     - name: humvee
       vehicle: VehicleHumvee
-      unlock: VehicleHumvee
       hardpoints:
       - VehicleHumveeTurret
       - VehicleHumveeCannon
@@ -48,7 +47,6 @@
       - VehicleHumveeWheel
     - name: humvee (medical)
       vehicle: VehicleHumveeMedical
-      unlock: VehicleHumveeMedical
       hardpoints:
       - VehicleHumveeSnowplow
       - VehicleHumveeOverlight
@@ -56,15 +54,13 @@
       - VehicleHumveeWheel
     - name: humvee (transport)
       vehicle: VehicleHumveeTransport
-      unlock: VehicleHumveeTransport
       hardpoints:
       - VehicleHumveeSnowplow
       - VehicleHumveeOverlight
       - VehicleHumveeHatch
       - VehicleHumveeWheel
     - name: apc
-      vehicle: VehicleAPC
-      unlock: VehicleAPC
+      vehicle: VehicleAPCTracked
       hardpoints:
       - RMCAPCDualCannon
       - RMCAPCFrontCannon
@@ -74,7 +70,6 @@
       - RMCAPCWheel
     - name: apc (medical)
       vehicle: VehicleAPCMed
-      unlock: VehicleAPCMed
       hardpoints:
       - RMCAPCDualCannon
       - RMCAPCFrontCannon
@@ -84,7 +79,6 @@
       - RMCAPCWheel
     - name: apc (command)
       vehicle: VehicleAPCCommand
-      unlock: VehicleAPCCommand
       hardpoints:
       - RMCAPCDualCannon
       - RMCAPCFrontCannon
@@ -94,7 +88,6 @@
       - RMCAPCWheel
     - name: tank
       vehicle: VehicleTank
-      unlock: VehicleTank
       hardpoints:
       - VehicleTankArmorBallistic
       - VehicleTankArmorConcussive
@@ -107,7 +100,7 @@
       - VehicleTankDragonFlamer
       - VehicleTankFlamer
       - VehicleTankGrenadeLauncher
-      - VehicleTankRERE700
+      - VehicleTankM56Cupola
       - VehicleTankWarningArray
       - VehicleTankOverdriveEnhancer
       - VehicleTankRocketLauncher
@@ -149,7 +142,6 @@
         - VehicleTankSnowplow
     - name: humvee (arc)
       vehicle: VehicleHumveeARC
-      unlock: VehicleHumveeARC
       hardpoints:
       - VehicleHumveeTurret
       - VehicleHumveeARCCannon
