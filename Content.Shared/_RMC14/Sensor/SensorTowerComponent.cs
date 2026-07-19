@@ -62,8 +62,8 @@ public sealed partial class SensorTowerComponent : Component
     public List<ProtoId<TacticalMapLayerPrototype>> RevealLayers = new();
 
     /// <summary>
-    /// If above zero, only blips within this tactical-map tile radius are revealed.
-    /// A value of zero keeps the current global layer reveal behavior.
+    /// If > 0, only blips within this tacmap tile radius are revealed.
+    /// A value of 0 keeps the current global layer reveal behavior.
     /// </summary>
     [DataField, AutoNetworkedField]
     public float RevealRange;
