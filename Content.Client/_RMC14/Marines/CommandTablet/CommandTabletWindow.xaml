@@ -1,0 +1,52 @@
+<controls:CommandTabletWindow
+    xmlns="https://spacestation14.io"
+    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Marines.CommandTablet"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    Title="{Loc rmc-command-tablet-title}"
+    MinSize="400 350"
+    SetSize="400 350">
+    <controls:CommandTabletScanlinePanel>
+        <controls:CommandTabletScanlinePanel.PanelOverride>
+            <graphics:StyleBoxFlat BackgroundColor="#111314" BorderColor="#2D3F54" BorderThickness="1" />
+        </controls:CommandTabletScanlinePanel.PanelOverride>
+        <BoxContainer Orientation="Vertical" Margin="6" SeparationOverride="3"
+                      HorizontalExpand="True" VerticalExpand="True">
+            <Label Text="{Loc rmc-command-tablet-command}" StyleClasses="LabelKeyText"
+                   FontColorOverride="#F0F0F0" />
+            <cc:HSeparator Color="#4972A1" Margin="0 0 0 2" />
+            <controls:CommandTabletActionButton Name="AnnouncementButton" Access="Public"
+                Text="{Loc rmc-command-tablet-make-announcement}" Icon="Bullhorn" MinHeight="29" />
+            <controls:CommandTabletActionButton Name="MedalButton" Access="Public"
+                Text="{Loc rmc-command-tablet-give-medal}" Icon="Medal" MinHeight="29" />
+            <controls:CommandTabletActionButton Name="TacticalMapButton" Access="Public"
+                Text="{Loc rmc-command-tablet-view-tactical-map}" Icon="Map" MinHeight="29" />
+
+            <BoxContainer Name="EvacuationSection" Access="Public"
+                          Orientation="Vertical" SeparationOverride="3" Margin="0 4 0 0">
+                <Label Text="{Loc rmc-command-tablet-evacuation}" StyleClasses="LabelKeyText"
+                       FontColorOverride="#F0F0F0" />
+                <cc:HSeparator Color="#4972A1" Margin="0 0 0 2" />
+                <controls:CommandTabletWarningPanel Name="EvacuationWarning" Access="Public" MinHeight="48">
+                    <controls:CommandTabletWarningPanel.PanelOverride>
+                        <graphics:StyleBoxFlat BackgroundColor="#A94D12" BorderColor="#D46B22"
+                                               BorderThickness="1" />
+                    </controls:CommandTabletWarningPanel.PanelOverride>
+                    <BoxContainer Orientation="Vertical" Align="Center" SeparationOverride="0"
+                                  HorizontalExpand="True" Margin="5 3">
+                        <Label Name="EvacuationWarningLineOne" Access="Public"
+                               Text="{Loc rmc-command-tablet-evacuation-warning-line-one}"
+                               HorizontalExpand="True" Align="Center" FontColorOverride="#FFFFFF" />
+                        <Label Name="EvacuationWarningLineTwo" Access="Public"
+                               Text="{Loc rmc-command-tablet-evacuation-warning-line-two}"
+                               HorizontalExpand="True" Align="Center" FontColorOverride="#FFFFFF" />
+                    </BoxContainer>
+                </controls:CommandTabletWarningPanel>
+                <!-- TODO RMC14: Add Distress Beacon only when RMC14 has a real distress/ERT system. -->
+                <controls:CommandTabletActionButton Name="EvacuationButton" Access="Public"
+                    Text="{Loc rmc-command-tablet-initiate-evacuation}" Icon="DoorOpen" MinHeight="29" />
+            </BoxContainer>
+            <Control VerticalExpand="True" />
+        </BoxContainer>
+    </controls:CommandTabletScanlinePanel>
+</controls:CommandTabletWindow>

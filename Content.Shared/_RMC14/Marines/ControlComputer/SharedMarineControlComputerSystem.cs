@@ -80,6 +80,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         Subs.BuiEvents<MarineCommunicationsComputerComponent>(MarineCommunicationsComputerUI.Key,
             subs =>
             {
+                subs.Event<MarineCommunicationsToggleEvacuationMsg>(OnMarineCommunicationsToggleEvacuationKeepOpen);
                 subs.Event<MarineControlComputerToggleEvacuationMsg>(OnMarineCommunicationsToggleEvacuation);
                 subs.Event<MarineControlComputerOpenMedalsPanelMsg>(OnMarineCommunicationsOpenMedalsPanel);
             });
@@ -547,6 +548,11 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         if (_ui.HasUi(ent.Owner, MarineCommunicationsComputerUI.Key))
             _ui.CloseUi(ent.Owner, MarineCommunicationsComputerUI.Key, args.Actor);
 
+        TryToggleEvacuation(ent);
+    }
+
+    private void TryToggleEvacuation(Entity<MarineControlComputerComponent> ent)
+    {
         if (!ent.Comp.CanEvacuate)
             return;
 
@@ -559,6 +565,14 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         // TODO RMC14 evacuation start sound
         _evacuation.ToggleEvacuation(null, ent.Comp.EvacuationCancelledSound, _transform.GetMap(ent.Owner));
         RefreshComputers();
+    }
+
+    private void OnMarineCommunicationsToggleEvacuationKeepOpen(
+        Entity<MarineCommunicationsComputerComponent> ent,
+        ref MarineCommunicationsToggleEvacuationMsg args)
+    {
+        if (TryComp(ent, out MarineControlComputerComponent? control))
+            TryToggleEvacuation((ent.Owner, control));
     }
 
     private void OnGroundsideOperationsToggleEvacuation(

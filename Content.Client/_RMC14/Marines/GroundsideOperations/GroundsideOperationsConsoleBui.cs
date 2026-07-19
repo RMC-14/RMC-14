@@ -39,7 +39,7 @@ public sealed class GroundsideOperationsConsoleBui(EntityUid owner, Enum uiKey) 
         _window.ShipAnnouncementButton.OnPressed += _ => SendPredictedMessage(new MarineControlComputerShipAnnouncementMsg());
         _window.MedalsButton.OnPressed += _ => SendPredictedMessage(new MarineControlComputerOpenMedalsPanelMsg());
         _window.GroundAnnouncementButton.OnPressed += _ =>
-            SendPredictedMessage(new GroundsideOperationsGroundAnnouncementMsg());
+            SendPredictedMessage(new MarineCommunicationsOpenAnnouncementMsg());
         _window.HighCommandButton.OnPressed += _ => SendPredictedMessage(new GroundsideOperationsHighCommandMsg());
         _window.RedAlertButton.OnPressed += _ => ConfirmRedAlert();
         _window.GeneralQuartersButton.OnPressed += _ => ConfirmGeneralQuarters();

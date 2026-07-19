@@ -17,12 +17,6 @@ public sealed class GroundsideOperationsHighCommandMsg : BoundUserInterfaceMessa
 public sealed record GroundsideOperationsHighCommandDialogEvent(NetEntity User, string Message = "") : DialogInputEvent(Message);
 
 [Serializable, NetSerializable]
-public sealed class GroundsideOperationsGroundAnnouncementMsg : BoundUserInterfaceMessage;
-
-[Serializable, NetSerializable]
-public sealed record GroundsideOperationsGroundAnnouncementDialogEvent(NetEntity User, string Message = "") : DialogInputEvent(Message);
-
-[Serializable, NetSerializable]
 public sealed class GroundsideOperationsRedAlertMsg : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]

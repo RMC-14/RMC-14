@@ -1,4 +1,5 @@
 ﻿using Content.Client._RMC14.Marines.Announce;
+using Content.Client._RMC14.Marines.CommandTablet;
 using Content.Client._RMC14.Marines.GroundsideOperations;
 using Content.Shared._RMC14.Marines.Announce;
 
@@ -23,13 +24,15 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
             {
                 if (bui is MarineCommunicationsComputerBui computerUi)
                     computerUi.OnStateUpdate();
+                else if (bui is CommandTabletBui commandTablet)
+                    commandTablet.Refresh();
                 else if (bui is GroundsideOperationsConsoleBui groundside)
                     groundside.Refresh();
             }
         }
         catch (Exception e)
         {
-            Log.Error($"Error refreshing {nameof(MarineCommunicationsComputerBui)}\n{e}");
+            Log.Error($"Error refreshing marine communications UI\n{e}");
         }
     }
 }

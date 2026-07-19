@@ -52,7 +52,7 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<MarineCommunicationsComputerComponent, GroundsideOperationsGroundAnnouncementDialogEvent>(OnGroundsideOperationsAnnouncementDialog);
+        SubscribeLocalEvent<MarineCommunicationsComputerComponent, MarineCommunicationsAnnouncementDialogEvent>(OnMarineCommunicationsAnnouncementDialog);
         SubscribeLocalEvent<MarineCommunicationsComputerComponent, EchoSquadReasonEvent>(OnEchoSquadReason);
         SubscribeLocalEvent<MarineCommunicationsComputerComponent, EchoSquadConfirmEvent>(OnEchoSquadConfirm);
 
@@ -60,6 +60,7 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
             subs =>
             {
                 subs.Event<MarineCommunicationsComputerMsg>(OnMarineCommunicationsComputerMsg);
+                subs.Event<MarineCommunicationsOpenAnnouncementMsg>(OnMarineCommunicationsOpenAnnouncementMsg);
                 subs.Event<MarineCommunicationsOpenMapMsg>(OnMarineCommunicationsOpenMapMsg);
                 subs.Event<MarineCommunicationsEchoSquadMsg>(OnMarineCommunicationsEchoMsg);
                 subs.Event<MarineCommunicationsOverwatchMsg>(OnMarineCommunicationsOverwatchMsg);
@@ -68,8 +69,8 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         Subs.BuiEvents<GroundsideOperationsConsoleComponent>(GroundsideOperationsConsoleUi.Key,
             subs =>
             {
-                subs.Event<GroundsideOperationsGroundAnnouncementMsg>(OnGroundsideOperationsAnnouncementMsg);
                 subs.Event<MarineCommunicationsComputerMsg>(OnGroundsideOperationsComputerMsg);
+                subs.Event<MarineCommunicationsOpenAnnouncementMsg>(OnGroundsideOperationsOpenAnnouncementMsg);
                 subs.Event<MarineCommunicationsOpenMapMsg>(OnGroundsideOperationsOpenMapMsg);
                 subs.Event<MarineCommunicationsEchoSquadMsg>(OnGroundsideOperationsEchoMsg);
                 subs.Event<MarineCommunicationsOverwatchMsg>(OnGroundsideOperationsOverwatchMsg);
@@ -117,43 +118,56 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
 
     private void OnMarineCommunicationsComputerMsg(Entity<MarineCommunicationsComputerComponent> ent, ref MarineCommunicationsComputerMsg args)
     {
-        TryAnnounce(ent, args.Actor, args.Text);
+        TryAnnounce(ent, args.Actor, args.Text, true);
     }
 
-    private void OnGroundsideOperationsAnnouncementMsg(
-        Entity<GroundsideOperationsConsoleComponent> ent,
-        ref GroundsideOperationsGroundAnnouncementMsg args)
+    private void OnMarineCommunicationsOpenAnnouncementMsg(
+        Entity<MarineCommunicationsComputerComponent> ent,
+        ref MarineCommunicationsOpenAnnouncementMsg args)
     {
-        if (!TryComp(ent, out MarineCommunicationsComputerComponent? communications) ||
-            !CanAnnounce((ent.Owner, communications), args.Actor))
-        {
-            return;
-        }
+        TryOpenAnnouncementDialog(ent, args.Actor);
+    }
 
-        var ev = new GroundsideOperationsGroundAnnouncementDialogEvent(GetNetEntity(args.Actor));
+    private void OnGroundsideOperationsOpenAnnouncementMsg(
+        Entity<GroundsideOperationsConsoleComponent> ent,
+        ref MarineCommunicationsOpenAnnouncementMsg args)
+    {
+        if (!TryComp(ent, out MarineCommunicationsComputerComponent? communications))
+            return;
+
+        TryOpenAnnouncementDialog((ent.Owner, communications), args.Actor);
+    }
+
+    private void TryOpenAnnouncementDialog(Entity<MarineCommunicationsComputerComponent> ent, EntityUid actor)
+    {
+        if (!CanAnnounce(ent, actor))
+            return;
+
+        var ev = new MarineCommunicationsAnnouncementDialogEvent(GetNetEntity(actor));
         _dialog.OpenInput(
             ent.Owner,
-            args.Actor,
-            Loc.GetString("rmc-goc-groundside-prompt"),
+            actor,
+            Loc.GetString("rmc-command-tablet-announcement-prompt"),
             ev,
             true,
             CharacterLimit);
     }
 
-    private void OnGroundsideOperationsAnnouncementDialog(
+    private void OnMarineCommunicationsAnnouncementDialog(
         Entity<MarineCommunicationsComputerComponent> ent,
-        ref GroundsideOperationsGroundAnnouncementDialogEvent args)
+        ref MarineCommunicationsAnnouncementDialogEvent args)
     {
         if (GetEntity(args.User) is not { Valid: true } user)
             return;
 
-        TryAnnounce(ent, user, args.Message);
+        TryAnnounce(ent, user, args.Message, false);
     }
 
     private void TryAnnounce(
         Entity<MarineCommunicationsComputerComponent> ent,
         EntityUid actor,
-        string message)
+        string message,
+        bool closeCommunicationsUi)
     {
         message = message.Trim();
         if (message.Length == 0 || !CanAnnounce(ent, actor))
@@ -162,7 +176,8 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         if (message.Length > CharacterLimit)
             message = message[..CharacterLimit].Trim();
 
-        _ui.CloseUi(ent.Owner, MarineCommunicationsComputerUI.Key);
+        if (closeCommunicationsUi)
+            _ui.CloseUi(ent.Owner, MarineCommunicationsComputerUI.Key);
         AnnounceSigned(actor, message, name: ent.Comp.AnnounceName);
 
         ent.Comp.LastAnnouncement = _timing.CurTime;
