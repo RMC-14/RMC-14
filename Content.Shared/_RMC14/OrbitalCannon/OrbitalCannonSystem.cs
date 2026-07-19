@@ -95,9 +95,6 @@ public sealed class OrbitalCannonSystem : EntitySystem
 
     private void OnOrbitalCannonMapInit(Entity<OrbitalCannonComponent> ent, ref MapInitEvent args)
     {
-        if (_net.IsServer)
-            EnsureSafety();
-
         var possibleFuels = ent.Comp.PossibleFuelRequirements.ToList();
         foreach (var warhead in ent.Comp.WarheadTypes)
         {
