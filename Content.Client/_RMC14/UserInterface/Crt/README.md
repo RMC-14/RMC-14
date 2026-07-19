@@ -228,16 +228,3 @@ New reusable CRT controls belong in this directory and should:
 
 Before adding a new control, check whether composition from `RMCCrtPanel`, `RMCCrtLabel`, and standard Robust
 containers is sufficient.
-
-## Common mistakes
-
-- Applying CRT colors globally instead of using a local `RMCCrtThemeScope`.
-- Copying a console-specific button class into another menu.
-- Hardcoding visible text instead of using Fluent localization.
-- Using a fixed `SetSize` that clips longer localized or runtime text.
-- Recoloring internal labels and icons directly instead of using `Tone`, `Variant`, `Selected`, and `Disabled`.
-- Enabling `RgbSubpixels` on every panel or using high effect opacity.
-- Reimplementing scanlines with one control per line instead of using the cached effect renderer.
-
-Current production examples are the Groundside Operations Console, its Primary LZ selection window, and the Command
-Tablet.
