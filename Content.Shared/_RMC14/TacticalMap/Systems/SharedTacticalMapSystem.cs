@@ -5,6 +5,7 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Overwatch;
+using Content.Shared.Ghost;
 using Robust.Shared.Configuration;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Maths;
@@ -153,8 +154,8 @@ public abstract class SharedTacticalMapSystem : EntitySystem
     protected void RefreshUserVisibleLayers(Entity<TacticalMapUserComponent> user)
     {
         var baseLayers = EnsureBaseLayers(user);
-        // players use explicit layer sets, not global defaults.
-        var options = BuildLayerOptions(user.Owner, baseLayers, includeLayerAccess: true, includeAllSquads: false, allowDefaultVisible: false);
+        var isGhost = HasComp<GhostComponent>(user.Owner);
+        var options = BuildLayerOptions(user.Owner, baseLayers, includeLayerAccess: true, includeAllSquads: isGhost, allowDefaultVisible: false);
         ApplyLayerOptions(user, options);
         ApplyVisibleLayerSelection(user, options, baseLayers);
     }
@@ -255,7 +256,9 @@ public abstract class SharedTacticalMapSystem : EntitySystem
 
         FilterSquadGroups(layers, allowedSquadGroups);
         ApplyLayerVisibilityRules(viewer, layers, accessLayers, includeAllSquads);
-        FilterEmptySquadLayers(layers);
+
+        if (!includeAllSquads)
+            FilterEmptySquadLayers(layers);
 
         return OrderLayers(layers, baseOrder);
     }
