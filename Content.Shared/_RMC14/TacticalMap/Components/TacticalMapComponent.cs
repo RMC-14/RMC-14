@@ -26,17 +26,17 @@ public sealed partial class TacticalMapLayerData
     public Dictionary<Vector2i, TacticalMapLabelData> Labels = new();
 }
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentPause]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 [Access(typeof(SharedTacticalMapSystem))]
 public sealed partial class TacticalMapComponent : Component
 {
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan NextUpdate = TimeSpan.FromSeconds(1);
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public string MapId = string.Empty;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public string DisplayName = string.Empty;
 
     [DataField]

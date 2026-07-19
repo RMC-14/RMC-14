@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Marines.Squads;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Network;
@@ -41,6 +42,9 @@ public sealed partial class TacticalMapUserComponent : Component
 
     [DataField, AutoNetworkedField]
     public Dictionary<NetEntity, TacticalMapBlip> Blips = new();
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<SquadObjectiveType, string> Objectives = new();
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan LastBlipUpdateAt;

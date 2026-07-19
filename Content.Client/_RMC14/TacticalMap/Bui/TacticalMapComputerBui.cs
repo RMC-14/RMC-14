@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using Content.Client._RMC14.TacticalMap.UI;
 using Content.Client._RMC14.UserInterface;
@@ -61,10 +63,8 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
         Window.Wrapper.LayerSelected += OnLayerSelected;
         Window.Wrapper.VisibleLayersChanged += OnVisibleLayersChanged;
         Window.Wrapper.CloseRequested += OnCloseRequested;
-        ApplyMapState();
         TryUpdateTextureFromComponent();
         Refresh();
-        Window.Wrapper.UpdateObjectives(_objectives);
         Window.Wrapper.Map.OnQueenEyeMove += position => SendPredictedMessage(new TacticalMapQueenEyeMoveMsg(position));
 
         if (EntMan.HasComponent<OverwatchConsoleComponent>(Owner))
@@ -78,18 +78,6 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
             SendPredictedMessage(new TacticalMapUpdateCanvasMsg(Window.Wrapper.Canvas.Lines, Window.Wrapper.Canvas.TacticalLabels));
             Window.Wrapper.NotifyCanvasUpdated();
         };
-    }
-
-    protected override void UpdateState(BoundUserInterfaceState state)
-    {
-        if (state is TacticalMapBuiState tacticalState)
-        {
-            _availableMaps = tacticalState.Maps;
-            _activeMap = tacticalState.ActiveMap;
-            _objectives = new Dictionary<SquadObjectiveType, string>(tacticalState.Objectives);
-            ApplyMapState();
-            Window?.Wrapper.UpdateObjectives(_objectives);
-        }
     }
 
     protected override void Dispose(bool disposing)
@@ -304,10 +292,74 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
         }
     }
 
+    private void RefreshMapState()
+    {
+        if (Window == null)
+            return;
+
+        var maps = BuildAvailableMaps();
+        var mapsChanged = !maps.SequenceEqual(_availableMaps);
+        _availableMaps = maps;
+
+        NetEntity activeMap;
+        Dictionary<SquadObjectiveType, string> objectives;
+        if (EntMan.TryGetComponent(Owner, out TacticalMapComputerComponent? computer))
+        {
+            activeMap = computer.Map != null ? EntMan.GetNetEntity(computer.Map.Value) : NetEntity.Invalid;
+            objectives = computer.Objectives;
+        }
+        else
+        {
+            activeMap = NetEntity.Invalid;
+            objectives = new Dictionary<SquadObjectiveType, string>();
+        }
+
+        var activeMapChanged = activeMap != _activeMap;
+        _activeMap = activeMap;
+
+        if (mapsChanged || activeMapChanged)
+            ApplyMapState();
+
+        if (!DictionariesEqual(_objectives, objectives))
+        {
+            _objectives = new Dictionary<SquadObjectiveType, string>(objectives);
+            Window.Wrapper.UpdateObjectives(_objectives);
+        }
+    }
+
+    private static bool DictionariesEqual(Dictionary<SquadObjectiveType, string> first, Dictionary<SquadObjectiveType, string> second)
+    {
+        if (first.Count != second.Count)
+            return false;
+
+        foreach (var (key, value) in first)
+        {
+            if (!second.TryGetValue(key, out var otherValue) || value != otherValue)
+                return false;
+        }
+
+        return true;
+    }
+
+    private List<TacticalMapMapInfo> BuildAvailableMaps()
+    {
+        var maps = new List<TacticalMapMapInfo>();
+        var query = EntMan.EntityQueryEnumerator<TacticalMapComponent>();
+        while (query.MoveNext(out var uid, out var map))
+        {
+            maps.Add(new TacticalMapMapInfo(EntMan.GetNetEntity(uid), map.MapId, map.DisplayName));
+        }
+
+        maps.Sort(static (a, b) => string.Compare(a.DisplayName, b.DisplayName, StringComparison.OrdinalIgnoreCase));
+        return maps;
+    }
+
     public void Refresh()
     {
         if (Window == null)
             return;
+
+        RefreshMapState();
 
         // the map shows visible layers, the canvas shows only the active layer
         UpdateLayerSelector();

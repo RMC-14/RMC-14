@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using Content.Client._RMC14.TacticalMap.Controls;
-using Content.Client.UserInterface.Controls;
 using Content.Shared.Administration;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Marines.Squads;
@@ -65,8 +64,6 @@ public sealed partial class TacticalMapWrapper : Control
     private const string MortarPrototypeId = "RMCMortarKit";
     private const string HiveCorePrototypeId = "HiveCoreXeno";
     private const string HivePylonPrototypeId = "HivePylonXeno";
-    private const string CoordinateFieldX = "x";
-    private const string CoordinateFieldY = "y";
     private const float DefaultOrbitalRadiusTiles = 17.5f;
     private const float DefaultMortarRadiusTiles = 5.3f;
     private const int DefaultMortarMinRange = 15;
@@ -185,8 +182,6 @@ public sealed partial class TacticalMapWrapper : Control
     private TacticalMapContextPopup? _contextPopup;
     private TacticalMapOverlayLegendPopup? _overlayLegendPopup;
     private TimeSpan _updateFeedbackUntil = TimeSpan.Zero;
-    private Vector2i? _enteredCoordinates;
-    private Vector2i? _coordinateOffset;
     private bool _crtEffectEnabled = true;
     private bool _linkedLzOverlayEnabled;
     private bool _roof0OverlayEnabled;
@@ -271,7 +266,6 @@ public sealed partial class TacticalMapWrapper : Control
         Canvas.SetCurrentMapName(mapId);
         Map.ClearMortarOverlay();
         Canvas.ClearMortarOverlay();
-        ClearCoordinateReference();
 
         LoadSettings();
     }
@@ -1586,20 +1580,9 @@ public sealed partial class TacticalMapWrapper : Control
             return;
         }
 
-        if (TryGetCalculatedCoordinates(info.Value.Indices, out var coordinates))
-        {
-            HoverAreaLabel.Text = Loc.GetString(
-                "ui-tactical-map-hover-area-coords",
-                ("area", info.Value.AreaName),
-                ("x", coordinates.X),
-                ("y", coordinates.Y));
-        }
-        else
-        {
-            HoverAreaLabel.Text = Loc.GetString(
-                "ui-tactical-map-hover-area",
-                ("area", info.Value.AreaName));
-        }
+        HoverAreaLabel.Text = Loc.GetString(
+            "ui-tactical-map-hover-area",
+            ("area", info.Value.AreaName));
         if (HoverAreaIcon != null)
         {
             HoverAreaIcon.Texture = _entityManager.System<SpriteSystem>()
@@ -1617,11 +1600,7 @@ public sealed partial class TacticalMapWrapper : Control
             ? areaInfo
             : CreateFallbackAreaInfo(indices);
 
-        var calculatedCoordinates = TryGetCalculatedCoordinates(indices, out var calculated)
-            ? calculated
-            : (Vector2i?) null;
-        var displayCoordinates = calculatedCoordinates
-            ?? (showRawCoordinates ? indices : (Vector2i?) null);
+        var displayCoordinates = showRawCoordinates ? indices : (Vector2i?) null;
         var canCopyCoordinates = displayCoordinates != null;
 
         bool showDeleteMortar = source.IsMortarOverlayTile(indices);
@@ -1642,11 +1621,6 @@ public sealed partial class TacticalMapWrapper : Control
             Canvas.ClearMortarOverlay();
             _contextPopup?.Close();
         };
-        _contextPopup.OnEnterCoordinatesPressed = () =>
-        {
-            OpenCoordinateDialog(indices);
-            _contextPopup?.Close();
-        };
         _contextPopup.OnCopyCoordinatesPressed = () =>
         {
             if (displayCoordinates != null)
@@ -1658,68 +1632,10 @@ public sealed partial class TacticalMapWrapper : Control
         _contextPopup.SetInfo(
             info,
             showRawCoordinates,
-            _enteredCoordinates,
-            calculatedCoordinates,
             showDeleteMortar,
-            showCoordinateEntry: true,
             showCopyCoordinates: canCopyCoordinates);
         _contextPopup.Open(UIBox2.FromDimensions(screenPosition, new Vector2(1, 1)));
         _contextPopup.SetPositionLast();
-    }
-
-    private void OpenCoordinateDialog(Vector2i indices)
-    {
-        var entries = new List<QuickDialogEntry>
-        {
-            new(CoordinateFieldX, QuickDialogEntryType.ShortText, Loc.GetString("ui-tactical-map-coords-dialog-x"),
-                Loc.GetString("ui-tactical-map-coords-dialog-placeholder")),
-            new(CoordinateFieldY, QuickDialogEntryType.ShortText, Loc.GetString("ui-tactical-map-coords-dialog-y"),
-                Loc.GetString("ui-tactical-map-coords-dialog-placeholder"))
-        };
-
-        var dialog = new DialogWindow(Loc.GetString("ui-tactical-map-coords-dialog-title"), entries);
-        dialog.OnConfirmed += results =>
-        {
-            if (!TryParseEnteredCoordinates(results, out var entered))
-                return;
-
-            SetCoordinateReference(indices, entered);
-        };
-    }
-
-    private static bool TryParseEnteredCoordinates(Dictionary<string, string> results, out Vector2i coordinates)
-    {
-        coordinates = default;
-        if (!results.TryGetValue(CoordinateFieldX, out var xText) || !int.TryParse(xText, out var x))
-            return false;
-
-        if (!results.TryGetValue(CoordinateFieldY, out var yText) || !int.TryParse(yText, out var y))
-            return false;
-
-        coordinates = new Vector2i(x, y);
-        return true;
-    }
-
-    private void SetCoordinateReference(Vector2i indices, Vector2i enteredCoordinates)
-    {
-        _enteredCoordinates = enteredCoordinates;
-        _coordinateOffset = enteredCoordinates - indices;
-    }
-
-    private void ClearCoordinateReference()
-    {
-        _enteredCoordinates = null;
-        _coordinateOffset = null;
-    }
-
-    private bool TryGetCalculatedCoordinates(Vector2i indices, out Vector2i coordinates)
-    {
-        coordinates = default;
-        if (_coordinateOffset == null)
-            return false;
-
-        coordinates = indices + _coordinateOffset.Value;
-        return true;
     }
 
     private static string FormatCoordinates(Vector2i coordinates)

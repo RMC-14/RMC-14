@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Marines.Squads;
 using Robust.Shared.GameStates;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -15,6 +16,9 @@ public sealed partial class TacticalMapComputerComponent : Component
 
     [DataField, AutoNetworkedField]
     public Dictionary<NetEntity, TacticalMapBlip> Blips = new();
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<SquadObjectiveType, string> Objectives = new();
 
     [DataField]
     public List<ProtoId<TacticalMapLayerPrototype>> BaseLayers = new();

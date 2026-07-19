@@ -4,6 +4,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._RMC14.TacticalMap;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(TacMapLiveUpdateSystem))]
 public sealed partial class GrantTacMapLiveUpdateComponent : Component, IClothingSlots
 {
     [DataField, AutoNetworkedField]

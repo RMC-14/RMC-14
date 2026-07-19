@@ -1,0 +1,24 @@
+<local:TacticalMapContextPopup
+    xmlns="https://spacestation14.io"
+    xmlns:local="clr-namespace:Content.Client._RMC14.TacticalMap.UI"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.TacticalMap.Controls"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
+    <PanelContainer Name="Background">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat />
+        </PanelContainer.PanelOverride>
+        <BoxContainer Orientation="Vertical" Margin="2 2 2 2">
+            <BoxContainer Orientation="Horizontal" SeparationOverride="3">
+                <TextureRect Name="AreaIcon" MinSize="18 18" MaxSize="18 18" Stretch="KeepAspectCentered" />
+                <Label Name="AreaNameLabel" StyleClasses="LabelSmall" FontColorOverride="White" />
+            </BoxContainer>
+            <BoxContainer Name="InfoContainer" Orientation="Vertical" Margin="0 2 0 2" />
+        </BoxContainer>
+    </PanelContainer>
+    <BoxContainer Name="ButtonTemplates" Visible="False">
+        <controls:TacticalMapButton Name="CreateLabelButton" MinHeight="20" HorizontalExpand="True" />
+        <controls:TacticalMapButton Name="CreateMortarButton" MinHeight="20" HorizontalExpand="True" />
+        <controls:TacticalMapButton Name="DeleteMortarButton" MinHeight="20" HorizontalExpand="True" />
+        <controls:TacticalMapButton Name="CopyCoordinatesButton" MinHeight="20" HorizontalExpand="True" />
+    </BoxContainer>
+</local:TacticalMapContextPopup>

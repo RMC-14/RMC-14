@@ -92,7 +92,6 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     // blip writes are deferred so bursts of movement collapse into one update.
     private readonly HashSet<Entity<TacticalMapTrackedComponent>> _toInit = new();
     private readonly HashSet<Entity<ActiveTacticalMapTrackedComponent>> _toUpdate = new();
-    private readonly Dictionary<string, ProtoId<TacticalMapLayerPrototype>> _squadLayerMap = new();
     private TimeSpan _announceCooldown;
     private TimeSpan _mapUpdateEvery;
     private TimeSpan _forceMapUpdateEvery;
@@ -111,8 +110,6 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         _tacticalMapIconQuery = GetEntityQuery<TacticalMapIconComponent>();
         _tacticalMapQuery = GetEntityQuery<TacticalMapComponent>();
         _transformQuery = GetEntityQuery<TransformComponent>();
-
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
         SubscribeLocalEvent<XenoOvipositorChangedEvent>(OnOvipositorChanged);
 
@@ -173,6 +170,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             subs =>
             {
                 subs.Event<BoundUIOpenedEvent>(OnComputerBUIOpened);
+                subs.Event<BoundUIClosedEvent>(OnComputerBUIClosed);
                 subs.Event<TacticalMapSelectMapMsg>(OnComputerSelectMapMsg);
                 subs.Event<TacticalMapSelectLayerMsg>(OnComputerSelectLayerMsg);
                 subs.Event<TacticalMapUpdateCanvasMsg>(OnComputerUpdateCanvasMsg);
@@ -195,8 +193,6 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             RMCCVars.RMCTacticalMapForceUpdateEverySeconds,
             v => _forceMapUpdateEvery = TimeSpan.FromSeconds(v),
             true);
-
-        RebuildSquadLayerMap();
     }
 
     protected override bool TryResolveUserMap(Entity<TacticalMapUserComponent> user, out Entity<TacticalMapComponent> map)
@@ -269,6 +265,11 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     private void OnTacticalMapMapInit(Entity<TacticalMapComponent> ent, ref MapInitEvent args)
     {
+        // resolve once and network the result so clients can build their own map list.
+        ent.Comp.MapId = ResolveMapId(ent);
+        ent.Comp.DisplayName = ResolveMapDisplayName(ent, ent.Comp.MapId);
+        Dirty(ent);
+
         // a new map can become the fallback for unresolved users and computers.
         var tracked = EntityQueryEnumerator<ActiveTacticalMapTrackedComponent, TacticalMapTrackedComponent>();
         while (tracked.MoveNext(out var uid, out var active, out var comp))
@@ -486,25 +487,6 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         _nextForceMapUpdate = TimeSpan.FromSeconds(30);
     }
 
-    private void OnPrototypesReloaded(PrototypesReloadedEventArgs ev)
-    {
-        if (ev.WasModified<TacticalMapLayerPrototype>())
-            RebuildSquadLayerMap();
-    }
-
-    private void RebuildSquadLayerMap()
-    {
-        // cache prototype squad ids for fast squad layer lookup.
-        _squadLayerMap.Clear();
-        foreach (var layer in _prototypes.EnumeratePrototypes<TacticalMapLayerPrototype>())
-        {
-            if (layer.SquadId == null)
-                continue;
-
-            _squadLayerMap[layer.SquadId.Value.Id] = layer.ID;
-        }
-    }
-
     private void OnLiveUpdateOnOviMapInit(Entity<TacticalMapLiveUpdateOnOviComponent> ent, ref MapInitEvent args)
     {
         if (!ent.Comp.Enabled ||
@@ -563,6 +545,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     private void OnComputerBUIOpened(Entity<TacticalMapComputerComponent> ent, ref BoundUIOpenedEvent args)
     {
+        EnsureComp<ActiveTacticalMapComputerComponent>(ent);
         RefreshComputerVisibleLayers(ent);
         if (_squad.TryGetMemberSquad(args.Actor, out var squad))
             ent.Comp.ObjectivesSquad = squad.Owner;
@@ -570,6 +553,13 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             ent.Comp.ObjectivesSquad = null;
 
         UpdateTacticalMapComputerState(ent);
+    }
+
+    private void OnComputerBUIClosed(Entity<TacticalMapComputerComponent> ent, ref BoundUIClosedEvent args)
+    {
+        // consoles can have multiple concurrent viewers, only stop updating once the last one leaves.
+        if (!_ui.IsUiOpen(ent.Owner, TacticalMapComputerUi.Key))
+            RemCompDeferred<ActiveTacticalMapComputerComponent>(ent);
     }
 
     private void OnSquadObjectivesChanged(ref SquadObjectivesChangedEvent args)
@@ -800,26 +790,18 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     private void UpdateTacticalMapState(Entity<TacticalMapUserComponent> ent)
     {
-        var maps = BuildMapList();
-        var activeMap = NetEntity.Invalid;
-        if (TryResolveUserMap(ent, out var map))
-            activeMap = GetNetEntity(map.Owner);
+        TryResolveUserMap(ent, out _);
 
-        var objectives = BuildObjectiveStateForUser(ent.Owner);
-        var state = new TacticalMapBuiState(activeMap, maps, objectives);
-        _ui.SetUiState(ent.Owner, TacticalMapUserUi.Key, state);
+        ent.Comp.Objectives = BuildObjectiveStateForUser(ent.Owner);
+        Dirty(ent);
     }
 
     private void UpdateTacticalMapComputerState(Entity<TacticalMapComputerComponent> computer)
     {
-        var maps = BuildMapList();
-        var activeMap = NetEntity.Invalid;
-        if (TryResolveComputerMap(computer, out var map))
-            activeMap = GetNetEntity(map.Owner);
+        TryResolveComputerMap(computer, out _);
 
-        var objectives = BuildObjectiveStateForComputer(computer);
-        var state = new TacticalMapBuiState(activeMap, maps, objectives);
-        _ui.SetUiState(computer.Owner, TacticalMapComputerUi.Key, state);
+        computer.Comp.Objectives = BuildObjectiveStateForComputer(computer);
+        Dirty(computer);
     }
 
     private Dictionary<SquadObjectiveType, string> BuildObjectiveState(SquadTeamComponent squad)
@@ -855,613 +837,6 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         }
 
         return new Dictionary<SquadObjectiveType, string>();
-    }
-
-    private void RefreshUserVisibleLayers(Entity<TacticalMapUserComponent> user)
-    {
-        var baseLayers = EnsureBaseLayers(user);
-        // players use explicit layer sets, not global defaults.
-        var options = BuildLayerOptions(user.Owner, baseLayers, includeLayerAccess: true, includeAllSquads: false, allowDefaultVisible: false);
-        ApplyLayerOptions(user, options);
-        ApplyVisibleLayerSelection(user, options, baseLayers);
-    }
-
-    private void RefreshComputerVisibleLayers(Entity<TacticalMapComputerComponent> computer)
-    {
-        var baseLayers = EnsureBaseLayers(computer);
-        var allowedSquadGroups = GetAllowedSquadGroups(computer.Owner);
-        // computers can expose command-wide layers.
-        var options = BuildLayerOptions(computer.Owner, baseLayers, includeLayerAccess: false, includeAllSquads: true, allowedSquadGroups: allowedSquadGroups);
-        ApplyLayerOptions(computer, options);
-        ApplyVisibleLayerSelection(computer, options, baseLayers);
-        EnsureOverwatchDrawLayer(computer);
-    }
-
-    private List<ProtoId<TacticalMapLayerPrototype>> ResolveLayerSets(IReadOnlyList<ProtoId<TacticalMapLayerSetPrototype>> sets)
-    {
-        var layers = new List<ProtoId<TacticalMapLayerPrototype>>();
-        var seen = new HashSet<ProtoId<TacticalMapLayerPrototype>>();
-        foreach (var setId in sets)
-        {
-            if (!_prototypes.TryIndex(setId, out var setProto))
-                continue;
-
-            // preserve yaml order while removing duplicates.
-            foreach (var layer in setProto.Layers)
-            {
-                if (seen.Add(layer))
-                    layers.Add(layer);
-            }
-        }
-
-        return layers;
-    }
-
-    private IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> EnsureBaseLayers(Entity<TacticalMapUserComponent> user)
-    {
-        if (user.Comp.BaseLayers.Count == 0 && user.Comp.LayerSets.Count > 0)
-        {
-            user.Comp.BaseLayers = ResolveLayerSets(user.Comp.LayerSets);
-            Dirty(user);
-        }
-
-        if (user.Comp.BaseLayers.Count == 0 && user.Comp.VisibleLayers.Count > 0)
-        {
-            user.Comp.BaseLayers = new List<ProtoId<TacticalMapLayerPrototype>>(user.Comp.VisibleLayers);
-            Dirty(user);
-        }
-
-        return user.Comp.BaseLayers;
-    }
-
-    private IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> EnsureBaseLayers(Entity<TacticalMapComputerComponent> computer)
-    {
-        if (computer.Comp.BaseLayers.Count == 0 && computer.Comp.LayerSets.Count > 0)
-        {
-            computer.Comp.BaseLayers = ResolveLayerSets(computer.Comp.LayerSets);
-            Dirty(computer);
-        }
-
-        if (computer.Comp.BaseLayers.Count == 0 && computer.Comp.VisibleLayers.Count > 0)
-        {
-            computer.Comp.BaseLayers = new List<ProtoId<TacticalMapLayerPrototype>>(computer.Comp.VisibleLayers);
-            Dirty(computer);
-        }
-
-        return computer.Comp.BaseLayers;
-    }
-
-    private List<ProtoId<TacticalMapLayerPrototype>> BuildLayerOptions(
-        EntityUid? viewer,
-        IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> baseLayers,
-        bool includeLayerAccess,
-        bool includeAllSquads,
-        bool allowDefaultVisible = true,
-        IReadOnlySet<string>? allowedSquadGroups = null)
-    {
-        var baseOrder = new List<ProtoId<TacticalMapLayerPrototype>>(baseLayers);
-        if (allowDefaultVisible)
-            AddDefaultVisibleLayers(baseOrder);
-
-        // options are base layers plus temporary access grants.
-        var layers = new HashSet<ProtoId<TacticalMapLayerPrototype>>(baseOrder);
-        var accessLayers = new HashSet<ProtoId<TacticalMapLayerPrototype>>();
-
-        if (includeLayerAccess && viewer != null && _layerAccess.TryGetLayers(viewer.Value, accessLayers))
-        {
-            foreach (var layer in accessLayers)
-            {
-                layers.Add(layer);
-            }
-        }
-
-        if (includeAllSquads)
-            AddAllSquadLayers(layers);
-        else if (viewer != null)
-            AddViewerSquadLayer(viewer.Value, layers);
-
-        FilterSquadGroups(layers, allowedSquadGroups);
-        ApplyLayerVisibilityRules(viewer, layers, accessLayers, includeAllSquads);
-        FilterEmptySquadLayers(layers);
-
-        return OrderLayers(layers, baseOrder);
-    }
-
-    private void AddDefaultVisibleLayers(List<ProtoId<TacticalMapLayerPrototype>> baseOrder)
-    {
-        foreach (var layer in _prototypes.EnumeratePrototypes<TacticalMapLayerPrototype>())
-        {
-            if (layer.DefaultVisible && !baseOrder.Contains(layer.ID))
-                baseOrder.Add(layer.ID);
-        }
-    }
-
-    private void ApplyLayerVisibilityRules(
-        EntityUid? viewer,
-        HashSet<ProtoId<TacticalMapLayerPrototype>> layers,
-        HashSet<ProtoId<TacticalMapLayerPrototype>> accessLayers,
-        bool includeAllSquads)
-    {
-        if (layers.Count == 0)
-            return;
-
-        // yaml visibility rules are enforced after all candidate layers merge.
-        var toRemove = new List<ProtoId<TacticalMapLayerPrototype>>();
-        foreach (var layerId in layers)
-        {
-            if (!_prototypes.TryIndex(layerId, out var layer))
-                continue;
-
-            switch (layer.Visibility)
-            {
-                case TacticalMapLayerVisibility.None:
-                    toRemove.Add(layerId);
-                    break;
-                case TacticalMapLayerVisibility.LayerAccess:
-                    if (!accessLayers.Contains(layerId))
-                        toRemove.Add(layerId);
-                    break;
-                case TacticalMapLayerVisibility.SquadMembers:
-                    if (!includeAllSquads && !IsViewerInSquadLayer(viewer, layer))
-                        toRemove.Add(layerId);
-                    break;
-                case TacticalMapLayerVisibility.SquadOrAccess:
-                    if (!accessLayers.Contains(layerId) && !includeAllSquads && !IsViewerInSquadLayer(viewer, layer))
-                        toRemove.Add(layerId);
-                    break;
-            }
-        }
-
-        foreach (var remove in toRemove)
-        {
-            layers.Remove(remove);
-        }
-    }
-
-    private IReadOnlySet<string>? GetAllowedSquadGroups(EntityUid computerOwner)
-    {
-        if (!TryComp(computerOwner, out TacticalMapComputerComponent? computer))
-            return null;
-
-        if (computer.AllowedSquadGroups.Count == 0)
-            return null;
-
-        return new HashSet<string>(computer.AllowedSquadGroups, StringComparer.OrdinalIgnoreCase);
-    }
-
-    private void FilterSquadGroups(HashSet<ProtoId<TacticalMapLayerPrototype>> layers, IReadOnlySet<string>? allowedSquadGroups)
-    {
-        if (allowedSquadGroups == null || allowedSquadGroups.Count == 0)
-            return;
-
-        var toRemove = new List<ProtoId<TacticalMapLayerPrototype>>();
-        foreach (var layerId in layers)
-        {
-            if (!TryGetSquadGroup(layerId, out var group))
-                continue;
-
-            if (group == null || !allowedSquadGroups.Contains(group))
-                toRemove.Add(layerId);
-        }
-
-        foreach (var remove in toRemove)
-        {
-            layers.Remove(remove);
-        }
-    }
-
-    private void FilterEmptySquadLayers(HashSet<ProtoId<TacticalMapLayerPrototype>> layers)
-    {
-        if (layers.Count == 0)
-            return;
-
-        // empty squads should not appear as selectable layers.
-        var toRemove = new List<ProtoId<TacticalMapLayerPrototype>>();
-        foreach (var layerId in layers)
-        {
-            if (!_prototypes.TryIndex(layerId, out var layer) || layer.SquadId == null)
-                continue;
-
-            if (!_squad.TryGetSquad(layer.SquadId.Value, out var squad))
-            {
-                toRemove.Add(layerId);
-                continue;
-            }
-
-            if (_squad.GetSquadMembersAlive(squad) <= 0)
-                toRemove.Add(layerId);
-        }
-
-        foreach (var remove in toRemove)
-        {
-            layers.Remove(remove);
-        }
-    }
-
-    private bool TryGetSquadGroup(ProtoId<TacticalMapLayerPrototype> layerId, out string? group)
-    {
-        group = null;
-        if (!_prototypes.TryIndex(layerId, out var layer) || layer.SquadId == null)
-            return false;
-
-        if (!layer.SquadId.Value.TryGet(out var squad, _prototypes, _compFactory))
-            return false;
-
-        group = squad.Group;
-        return true;
-    }
-
-    private bool IsViewerInSquadLayer(EntityUid? viewer, TacticalMapLayerPrototype layer)
-    {
-        if (viewer == null || layer.SquadId == null)
-            return false;
-
-        if (!_squad.TryGetMemberSquad(viewer.Value, out var squad))
-            return false;
-
-        var squadId = MetaData(squad.Owner).EntityPrototype?.ID;
-        return squadId != null && squadId == layer.SquadId.Value.Id;
-    }
-
-    private readonly HashSet<ProtoId<TacticalMapLayerPrototype>> _layerAccessBuffer = new();
-
-    private void AddLayerAccessLayers(EntityUid user, HashSet<ProtoId<TacticalMapLayerPrototype>> layers)
-    {
-        if (!_layerAccess.TryGetLayers(user, _layerAccessBuffer))
-            return;
-
-        foreach (var layer in _layerAccessBuffer)
-        {
-            layers.Add(layer);
-        }
-    }
-
-    private bool TryGetSquadLayer(EntityUid squadEntity, out ProtoId<TacticalMapLayerPrototype> layer)
-    {
-        var prototypeId = MetaData(squadEntity).EntityPrototype?.ID;
-        if (prototypeId != null && _squadLayerMap.TryGetValue(prototypeId, out layer))
-            return true;
-
-        if (_squadTeamQuery.TryComp(squadEntity, out var squadComp) && squadComp.TacticalMapLayer != null)
-        {
-            layer = squadComp.TacticalMapLayer.Value;
-            return true;
-        }
-
-        layer = default;
-        return false;
-    }
-
-    private void AddViewerSquadLayer(EntityUid viewer, HashSet<ProtoId<TacticalMapLayerPrototype>> layers)
-    {
-        if (TryGetViewerSquadLayer(viewer, out var layer))
-            layers.Add(layer);
-    }
-
-    private bool TryGetViewerSquadLayer(EntityUid viewer, out ProtoId<TacticalMapLayerPrototype> layer)
-    {
-        if (!_squad.TryGetMemberSquad(viewer, out var squad))
-        {
-            layer = default;
-            return false;
-        }
-
-        return TryGetSquadLayer(squad.Owner, out layer);
-    }
-
-    private void AddAllSquadLayers(HashSet<ProtoId<TacticalMapLayerPrototype>> layers)
-    {
-        foreach (var layer in GetAllSquadLayers())
-        {
-            layers.Add(layer);
-        }
-    }
-
-    private HashSet<ProtoId<TacticalMapLayerPrototype>> GetAllSquadLayers()
-    {
-        var layers = new HashSet<ProtoId<TacticalMapLayerPrototype>>();
-        foreach (var layer in _prototypes.EnumeratePrototypes<TacticalMapLayerPrototype>())
-        {
-            if (layer.Kind != TacticalMapLayerKind.Squad &&
-                layer.Visibility != TacticalMapLayerVisibility.SquadMembers &&
-                layer.Visibility != TacticalMapLayerVisibility.SquadOrAccess &&
-                layer.SquadId == null)
-            {
-                continue;
-            }
-
-            layers.Add(layer.ID);
-        }
-
-        return layers;
-    }
-
-    private void EnsureOverwatchDrawLayer(Entity<TacticalMapComputerComponent> computer)
-    {
-        // overwatch consoles draw on their assigned squad layer.
-        if (HasComp<MarineCommunicationsComputerComponent>(computer.Owner))
-            return;
-
-        if (!TryComp(computer.Owner, out OverwatchConsoleComponent? console))
-            return;
-
-        if (console.Squad is not { } squadNet ||
-            !TryGetEntity(squadNet, out var squadEnt) ||
-            !TryGetSquadLayer(squadEnt.Value, out var layer))
-        {
-            return;
-        }
-
-        if (!computer.Comp.VisibleLayers.Contains(layer))
-        {
-            computer.Comp.VisibleLayers.Add(layer);
-            ApplyVisibleLayerSelection(computer, computer.Comp.LayerOptions, EnsureBaseLayers(computer));
-        }
-
-        if (computer.Comp.ActiveLayer != layer)
-        {
-            computer.Comp.ActiveLayer = layer;
-        }
-
-        Dirty(computer);
-    }
-
-    private List<ProtoId<TacticalMapLayerPrototype>> OrderLayers(
-        HashSet<ProtoId<TacticalMapLayerPrototype>> layers,
-        IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> baseOrder)
-    {
-        var ordered = new List<ProtoId<TacticalMapLayerPrototype>>(layers.Count);
-        foreach (var layer in baseOrder)
-        {
-            if (layers.Remove(layer))
-                ordered.Add(layer);
-        }
-
-        if (layers.Count == 0)
-            return ordered;
-
-        var remaining = layers.ToList();
-        remaining.Sort(CompareLayerOrder);
-        ordered.AddRange(remaining);
-        return ordered;
-    }
-
-    private int CompareLayerOrder(ProtoId<TacticalMapLayerPrototype> a, ProtoId<TacticalMapLayerPrototype> b)
-    {
-        var orderA = _prototypes.TryIndex(a, out var protoA) ? protoA.SortOrder : 0;
-        var orderB = _prototypes.TryIndex(b, out var protoB) ? protoB.SortOrder : 0;
-        var compare = orderA.CompareTo(orderB);
-        return compare != 0 ? compare : string.CompareOrdinal(a.Id, b.Id);
-    }
-
-    private void ApplyLayerOptions(Entity<TacticalMapUserComponent> user, List<ProtoId<TacticalMapLayerPrototype>> options)
-    {
-        if (!options.SequenceEqual(user.Comp.LayerOptions))
-        {
-            user.Comp.LayerOptions = options;
-            Dirty(user);
-        }
-    }
-
-    private void ApplyLayerOptions(Entity<TacticalMapComputerComponent> computer, List<ProtoId<TacticalMapLayerPrototype>> options)
-    {
-        if (!options.SequenceEqual(computer.Comp.LayerOptions))
-        {
-            computer.Comp.LayerOptions = options;
-            Dirty(computer);
-        }
-    }
-
-    private void ApplyVisibleLayerSelection(
-        Entity<TacticalMapUserComponent> user,
-        IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> options,
-        IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> baseLayers)
-    {
-        // saved selections are trimmed back to layers still allowed now.
-        var usingDefaults = user.Comp.VisibleLayers.Count == 0;
-        var selected = usingDefaults
-            ? (baseLayers.Count > 0
-                ? new List<ProtoId<TacticalMapLayerPrototype>>(baseLayers)
-                : new List<ProtoId<TacticalMapLayerPrototype>>(options))
-            : new List<ProtoId<TacticalMapLayerPrototype>>(user.Comp.VisibleLayers);
-
-        if (usingDefaults &&
-            TryGetViewerSquadLayer(user.Owner, out var squadLayer) &&
-            options.Contains(squadLayer) &&
-            !selected.Contains(squadLayer))
-        {
-            selected.Add(squadLayer);
-        }
-
-        selected = selected.Distinct().Where(options.Contains).ToList();
-        if (selected.Count == 0 && options.Count > 0)
-            selected.Add(options[0]);
-
-        selected = selected.Where(options.Contains).ToList();
-
-        var ordered = OrderLayers(new HashSet<ProtoId<TacticalMapLayerPrototype>>(selected), options);
-        if (!ordered.SequenceEqual(user.Comp.VisibleLayers))
-        {
-            user.Comp.VisibleLayers = ordered;
-            Dirty(user);
-        }
-
-        EnsureActiveLayer(user, options);
-    }
-
-    private void ApplyVisibleLayerSelection(
-        Entity<TacticalMapComputerComponent> computer,
-        IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> options,
-        IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> baseLayers)
-    {
-        // saved selections are trimmed back to layers still allowed now.
-        var selected = computer.Comp.VisibleLayers.Count == 0
-            ? (baseLayers.Count > 0
-                ? new List<ProtoId<TacticalMapLayerPrototype>>(baseLayers)
-                : new List<ProtoId<TacticalMapLayerPrototype>>(options))
-            : new List<ProtoId<TacticalMapLayerPrototype>>(computer.Comp.VisibleLayers);
-
-        selected = selected.Distinct().Where(options.Contains).ToList();
-        if (selected.Count == 0 && options.Count > 0)
-            selected.Add(options[0]);
-
-        selected = selected.Where(options.Contains).ToList();
-
-        var ordered = OrderLayers(new HashSet<ProtoId<TacticalMapLayerPrototype>>(selected), options);
-        if (!ordered.SequenceEqual(computer.Comp.VisibleLayers))
-        {
-            computer.Comp.VisibleLayers = ordered;
-            Dirty(computer);
-        }
-
-        EnsureActiveLayer(computer, options);
-    }
-
-    private void EnsureActiveLayer(Entity<TacticalMapUserComponent> user, IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> options)
-    {
-        if (user.Comp.ActiveLayer != null && options.Contains(user.Comp.ActiveLayer.Value))
-            return;
-
-        ProtoId<TacticalMapLayerPrototype>? fallback = null;
-        if (options.Count > 0)
-            fallback = options[0];
-
-        user.Comp.ActiveLayer = user.Comp.VisibleLayers.Count > 0
-            ? user.Comp.VisibleLayers[0]
-            : fallback;
-        Dirty(user);
-    }
-
-    private void EnsureActiveLayer(Entity<TacticalMapComputerComponent> computer, IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> options)
-    {
-        if (computer.Comp.ActiveLayer != null && options.Contains(computer.Comp.ActiveLayer.Value))
-            return;
-
-        ProtoId<TacticalMapLayerPrototype>? fallback = null;
-        if (options.Count > 0)
-            fallback = options[0];
-
-        if (HasComp<MarineCommunicationsComputerComponent>(computer.Owner) &&
-            options.Contains(GlobalMarineLayer))
-        {
-            computer.Comp.ActiveLayer = GlobalMarineLayer;
-        }
-        else
-        {
-            computer.Comp.ActiveLayer = computer.Comp.VisibleLayers.Count > 0
-                ? computer.Comp.VisibleLayers[0]
-                : fallback;
-        }
-
-        Dirty(computer);
-    }
-
-    private bool TryGetSelectedLayer(string? layerId, out ProtoId<TacticalMapLayerPrototype>? selected)
-    {
-        selected = null;
-        if (string.IsNullOrWhiteSpace(layerId))
-            return true;
-
-        if (!_prototypes.HasIndex<TacticalMapLayerPrototype>(layerId))
-            return false;
-
-        selected = layerId;
-        return true;
-    }
-
-    private bool TryGetDrawLayer(
-        IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> visibleLayers,
-        ProtoId<TacticalMapLayerPrototype>? activeLayer,
-        out ProtoId<TacticalMapLayerPrototype> drawLayer)
-    {
-        // draw on the active layer, or fall back to the first drawable visible layer.
-        if (activeLayer != null && LayerAllowsDrawing(activeLayer.Value))
-        {
-            drawLayer = activeLayer.Value;
-            return true;
-        }
-
-        var fallback = GetVisibleLayers(visibleLayers);
-        if (fallback.Count == 0)
-        {
-            drawLayer = default;
-            return false;
-        }
-
-        foreach (var layer in fallback)
-        {
-            if (!LayerAllowsDrawing(layer))
-                continue;
-
-            drawLayer = layer;
-            return true;
-        }
-
-        drawLayer = default;
-        return false;
-    }
-
-    private bool LayerAllowsDrawing(ProtoId<TacticalMapLayerPrototype> layer)
-    {
-        return !_prototypes.TryIndex(layer, out var proto) || proto.CanDraw;
-    }
-
-    private bool LayerAllowsBlipUpdates(ProtoId<TacticalMapLayerPrototype> layer)
-    {
-        return _prototypes.TryIndex(layer, out var proto) && proto.CanUpdateBlips && proto.CanContainBlips;
-    }
-
-    private bool LayerAllowsBlipStorage(ProtoId<TacticalMapLayerPrototype> layer)
-    {
-        return !_prototypes.TryIndex(layer, out var proto) || proto.CanContainBlips;
-    }
-
-    private List<ProtoId<TacticalMapLayerPrototype>> GetEffectiveVisibleLayers(
-        IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> visibleLayers)
-    {
-        return new List<ProtoId<TacticalMapLayerPrototype>>(GetVisibleLayers(visibleLayers));
-    }
-
-    private List<TacticalMapMapInfo> BuildMapList()
-    {
-        var maps = new List<TacticalMapMapInfo>();
-        var query = EntityQueryEnumerator<TacticalMapComponent>();
-        while (query.MoveNext(out var uid, out var map))
-        {
-            var mapId = ResolveMapId((uid, map));
-            var displayName = ResolveMapDisplayName((uid, map), mapId);
-            maps.Add(new TacticalMapMapInfo(GetNetEntity(uid), mapId, displayName));
-        }
-
-        maps.Sort(static (a, b) => string.Compare(a.DisplayName, b.DisplayName, StringComparison.OrdinalIgnoreCase));
-        return maps;
-    }
-
-    private string ResolveMapId(Entity<TacticalMapComponent> map)
-    {
-        if (!string.IsNullOrWhiteSpace(map.Comp.MapId))
-            return map.Comp.MapId;
-
-        var meta = MetaData(map.Owner);
-        if (!string.IsNullOrWhiteSpace(meta.EntityPrototype?.ID))
-            return meta.EntityPrototype.ID;
-
-        if (!string.IsNullOrWhiteSpace(meta.EntityName))
-            return meta.EntityName;
-
-        return map.Owner.ToString();
-    }
-
-    private string ResolveMapDisplayName(Entity<TacticalMapComponent> map, string mapId)
-    {
-        if (!string.IsNullOrWhiteSpace(map.Comp.DisplayName))
-            return map.Comp.DisplayName;
-
-        var meta = MetaData(map.Owner);
-        if (!string.IsNullOrWhiteSpace(meta.EntityName))
-            return meta.EntityName;
-
-        return mapId;
     }
 
     private void OnUserBUIClosed(Entity<TacticalMapUserComponent> ent, ref BoundUIClosedEvent args)
@@ -2085,6 +1460,19 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         tracked.Comp.HiveLeader = isLeader;
     }
 
+    private readonly HashSet<ProtoId<TacticalMapLayerPrototype>> _layerAccessBuffer = new();
+
+    private void AddLayerAccessLayers(EntityUid user, HashSet<ProtoId<TacticalMapLayerPrototype>> layers)
+    {
+        if (!_layerAccess.TryGetLayers(user, _layerAccessBuffer))
+            return;
+
+        foreach (var layer in _layerAccessBuffer)
+        {
+            layers.Add(layer);
+        }
+    }
+
     private void UpdateTracked(Entity<ActiveTacticalMapTrackedComponent> ent)
     {
         if (!_transformQuery.TryComp(ent.Owner, out var xform) ||
@@ -2439,12 +1827,9 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             map.NextUpdate = time + _mapUpdateEvery;
 
             // dirty maps push one batched state update to every active viewer.
-            var computers = EntityQueryEnumerator<TacticalMapComputerComponent>();
-            while (computers.MoveNext(out var computerId, out var computer))
+            var computers = EntityQueryEnumerator<ActiveTacticalMapComputerComponent, TacticalMapComputerComponent>();
+            while (computers.MoveNext(out var computerId, out _, out var computer))
             {
-                if (!_ui.IsUiOpen(computerId, TacticalMapComputerUi.Key))
-                    continue;
-
                 if (computer.Map != mapId)
                     continue;
 

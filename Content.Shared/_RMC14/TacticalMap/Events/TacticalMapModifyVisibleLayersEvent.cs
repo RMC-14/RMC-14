@@ -4,6 +4,6 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.TacticalMap;
 
 [ByRefEvent]
-public record struct TacticalMapModifyVisibleLayersEvent(
+public readonly record struct TacticalMapModifyVisibleLayersEvent(
     EntityUid? Viewer,
     HashSet<ProtoId<TacticalMapLayerPrototype>> Layers);
