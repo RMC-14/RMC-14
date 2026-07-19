@@ -179,13 +179,6 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
                 subs.Event<TacticalMapSetVisibleLayersMsg>(OnComputerSetVisibleLayersMsg);
             });
 
-        Subs.BuiEvents<DropshipTerminalWeaponsComponent>(DropshipTerminalWeaponsUi.Key,
-            subs =>
-            {
-                subs.Event<BoundUIOpenedEvent>(OnDropshipWeaponsBUIOpened);
-                subs.Event<BoundUIClosedEvent>(OnDropshipWeaponsBUIClosed);
-            });
-
         Subs.CVar(_config,
             RMCCVars.RMCTacticalMapAnnounceCooldownSeconds,
             v => _announceCooldown = TimeSpan.FromSeconds(v),
@@ -567,19 +560,6 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         // consoles can have multiple concurrent viewers, only stop updating once the last one leaves.
         if (!_ui.IsUiOpen(ent.Owner, TacticalMapComputerUi.Key))
             RemCompDeferred<ActiveTacticalMapComputerComponent>(ent);
-    }
-
-    private void OnDropshipWeaponsBUIOpened(Entity<DropshipTerminalWeaponsComponent> ent, ref BoundUIOpenedEvent args)
-    {
-        // gates the embedded tacmap on a dropship weapons terminal, kept separate from ActiveTacticalMapComputerComponent
-        // since it tracks a different UI key on the same entity.
-        EnsureComp<ActiveTacticalMapDropshipWeaponsComponent>(ent);
-    }
-
-    private void OnDropshipWeaponsBUIClosed(Entity<DropshipTerminalWeaponsComponent> ent, ref BoundUIClosedEvent args)
-    {
-        if (!_ui.IsUiOpen(ent.Owner, DropshipTerminalWeaponsUi.Key))
-            RemCompDeferred<ActiveTacticalMapDropshipWeaponsComponent>(ent);
     }
 
     private void OnSquadObjectivesChanged(ref SquadObjectivesChangedEvent args)
@@ -1874,9 +1854,12 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
                 UpdateUserData((tunnelUserId, tunnelUserComp), map);
             }
 
-            var dropshipWeapons = EntityQueryEnumerator<ActiveTacticalMapDropshipWeaponsComponent, TacticalMapComputerComponent>();
-            while (dropshipWeapons.MoveNext(out var weaponsId, out _, out var weaponsComputer))
+            var dropshipWeapons = EntityQueryEnumerator<TacticalMapComputerComponent, DropshipTerminalWeaponsComponent>();
+            while (dropshipWeapons.MoveNext(out var weaponsId, out var weaponsComputer, out _))
             {
+                if (!_ui.IsUiOpen(weaponsId, DropshipTerminalWeaponsUi.Key))
+                    continue;
+
                 if (weaponsComputer.Map != mapId)
                     continue;
 
