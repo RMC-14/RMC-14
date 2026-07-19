@@ -37,11 +37,8 @@
                     </controls:GroundsideOperationsCrtPanel.PanelOverride>
                     <BoxContainer Orientation="Vertical" Margin="7" HorizontalExpand="True" VerticalExpand="True">
                             <BoxContainer Name="ExecutivePage" Access="Public" Orientation="Horizontal" SeparationOverride="7" VerticalExpand="True">
-                                <controls:GroundsideOperationsCrtPanel MinWidth="360" HorizontalExpand="True" VerticalExpand="True">
-                                    <controls:GroundsideOperationsCrtPanel.PanelOverride>
-                                        <graphics:StyleBoxFlat BackgroundColor="#00000F80" BorderColor="#8ACBFF" BorderThickness="1" />
-                                    </controls:GroundsideOperationsCrtPanel.PanelOverride>
-                                    <BoxContainer Orientation="Vertical" Margin="9" SeparationOverride="5">
+                                <BoxContainer Orientation="Vertical" MinWidth="360" HorizontalExpand="True" VerticalExpand="True"
+                                    Margin="9" SeparationOverride="5">
                                         <Label Text="{Loc rmc-goc-groundside-title}" StyleClasses="monospace" HorizontalAlignment="Center" ModulateSelfOverride="#8CD8FF" />
                                         <controls:GroundsideOperationsIconButton Name="GroundAnnouncementButton" Access="Public"
                                             Text="{Loc rmc-goc-groundside-announce}" Icon="Bullhorn" Filled="True" MinHeight="37" />
@@ -53,14 +50,16 @@
                                         <controls:GroundsideOperationsIconButton Name="EchoButton" Access="Public"
                                             Text="{Loc rmc-goc-activate-echo}" Icon="Users" Filled="True" MinHeight="37" />
                                         <Control VerticalExpand="True" />
-                                    </BoxContainer>
-                                </controls:GroundsideOperationsCrtPanel>
+                                </BoxContainer>
 
-                                <controls:GroundsideOperationsCrtPanel MinWidth="360" HorizontalExpand="True" VerticalExpand="True">
-                                    <controls:GroundsideOperationsCrtPanel.PanelOverride>
-                                        <graphics:StyleBoxFlat BackgroundColor="#00000F80" BorderColor="#8ACBFF" BorderThickness="1" />
-                                    </controls:GroundsideOperationsCrtPanel.PanelOverride>
-                                    <BoxContainer Orientation="Vertical" Margin="9" SeparationOverride="5">
+                                <PanelContainer MinWidth="2" MaxWidth="2" VerticalExpand="True">
+                                    <PanelContainer.PanelOverride>
+                                        <graphics:StyleBoxFlat BackgroundColor="#8ACBFF" />
+                                    </PanelContainer.PanelOverride>
+                                </PanelContainer>
+
+                                <BoxContainer Orientation="Vertical" MinWidth="360" HorizontalExpand="True" VerticalExpand="True"
+                                    Margin="9" SeparationOverride="5">
                                         <Label Text="{Loc rmc-goc-ship-control-title}" StyleClasses="monospace" HorizontalAlignment="Center" ModulateSelfOverride="#8CD8FF" />
                                         <controls:GroundsideOperationsIconButton Name="AlertButton" Access="Public"
                                             Text="{Loc rmc-goc-change-alert}" Icon="Warning" Filled="True" MinHeight="37" />
@@ -79,8 +78,7 @@
                                         <controls:GroundsideOperationsIconButton Name="MedalsButton" Access="Public"
                                             Text="{Loc rmc-goc-medals}" Icon="Medal" Filled="True" MinHeight="37" />
                                         <Control VerticalExpand="True" />
-                                    </BoxContainer>
-                                </controls:GroundsideOperationsCrtPanel>
+                                </BoxContainer>
                             </BoxContainer>
 
                             <BoxContainer Name="EmergencyPage" Access="Public" Orientation="Vertical" SeparationOverride="9" VerticalExpand="True" Visible="False">
