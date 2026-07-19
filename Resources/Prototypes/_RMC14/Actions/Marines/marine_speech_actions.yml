@@ -6,6 +6,9 @@
   components:
   - type: Action
     itemIconStyle: NoItem
+    backgroundOn:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: template_on_big
     icon:
       sprite: _RMC14/Actions/marine_actions.rsi
       state: authoritative_voice
