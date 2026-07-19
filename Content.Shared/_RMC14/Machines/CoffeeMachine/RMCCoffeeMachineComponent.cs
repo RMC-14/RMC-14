@@ -45,6 +45,9 @@ public sealed partial class RMCCoffeeMachineComponent : Component
 
     [DataField, AutoNetworkedField]
     public string MugOverlay = "coffee_cup_generic";
+
+    [DataField, AutoNetworkedField]
+    public string CoffeeCupOverlay = "coffee_cup";
 }
 
 [Serializable, NetSerializable]
@@ -52,4 +55,18 @@ public enum RMCCoffeeMachineVisuals
 {
     HasCup,
     IsBrewing,
+    CupType,
+}
+
+[Serializable, NetSerializable]
+public enum RMCCoffeeMachineCupType
+{
+    Generic,
+    CoffeeMug,
+    WestonYamada,
+    UNMC,
+    UnitedNations,
+    SocialistPP,
+    ThreeSunEmpire,
+    ColonyLiberationFront,
 }
