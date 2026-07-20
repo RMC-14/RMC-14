@@ -61,6 +61,7 @@ public sealed partial class VehicleWeaponsSystem : EntitySystem
         SubscribeLocalEvent<VehicleWeaponsOperatorComponent, ShotAttemptedEvent>(OnOperatorShotAttempted);
         SubscribeLocalEvent<VehicleWeaponsOperatorComponent, VehicleHardpointSelectActionEvent>(OnHardpointActionSelect);
         SubscribeLocalEvent<VehicleWeaponsOperatorComponent, VehicleViewToggledEvent>(OnViewToggled);
+        SubscribeLocalEvent<VehicleWeaponsOperatorComponent, AfterAutoHandleStateEvent>(OnOperatorAfterState);
 
         SubscribeLocalEvent<VehicleWeaponsComponent, HardpointSlotsChangedEvent>(OnHardpointSlotsChanged);
 
@@ -496,6 +497,35 @@ public sealed partial class VehicleWeaponsSystem : EntitySystem
             {
                 vehicleEnt.Comp.HardpointOperators[selectedWeapon] = operatorUid;
             }
+        }
+    }
+
+    private void OnOperatorAfterState(Entity<VehicleWeaponsOperatorComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        if (!_net.IsClient)
+            return;
+
+        if (ent.Comp.Vehicle is not { } vehicle || !TryComp(vehicle, out VehicleWeaponsComponent? weapons))
+            return;
+
+        foreach (var pair in weapons.HardpointOperators.ToArray())
+        {
+            if (pair.Value == ent.Owner)
+                weapons.HardpointOperators.Remove(pair.Key);
+        }
+
+        if (ent.Comp.SelectedWeapon is { } selectedWeapon)
+        {
+            weapons.OperatorSelections[ent.Owner] = selectedWeapon;
+            if (TryGetMountedWeaponHardpointType(vehicle, selectedWeapon, out var hardpointType) &&
+                !IsSharedHardpointType(hardpointType))
+            {
+                weapons.HardpointOperators[selectedWeapon] = ent.Owner;
+            }
+        }
+        else
+        {
+            weapons.OperatorSelections.Remove(ent.Owner);
         }
     }
 
