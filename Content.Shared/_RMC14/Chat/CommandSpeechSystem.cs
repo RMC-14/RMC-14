@@ -10,12 +10,12 @@ public sealed class CommandSpeechSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<InnateCommandSpeechComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<InnateCommandSpeechComponent, ComponentRemove>(OnCommandSpeechRemoved);
-        SubscribeLocalEvent<InnateCommandSpeechComponent, CommandSpeechActionEvent>(OnCommandSpeechAction);
+        SubscribeLocalEvent<CommandSpeechComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<CommandSpeechComponent, ComponentRemove>(OnCommandSpeechRemoved);
+        SubscribeLocalEvent<CommandSpeechComponent, CommandSpeechActionEvent>(OnCommandSpeechAction);
     }
 
-    private void OnMapInit(Entity<InnateCommandSpeechComponent> ent, ref MapInitEvent args)
+    private void OnMapInit(Entity<CommandSpeechComponent> ent, ref MapInitEvent args)
     {
         _actions.AddAction(
             ent.Owner,
@@ -23,13 +23,13 @@ public sealed class CommandSpeechSystem : EntitySystem
             ent.Comp.CommandSpeechActionId);
     }
 
-    private void OnCommandSpeechRemoved(Entity<InnateCommandSpeechComponent> ent, ref ComponentRemove args)
+    private void OnCommandSpeechRemoved(Entity<CommandSpeechComponent> ent, ref ComponentRemove args)
     {
         if (ent.Comp.CommandSpeechAction is { } action)
             _actions.RemoveAction(ent.Owner, action);
     }
 
-    private void OnCommandSpeechAction(Entity<InnateCommandSpeechComponent> ent, ref CommandSpeechActionEvent args)
+    private void OnCommandSpeechAction(Entity<CommandSpeechComponent> ent, ref CommandSpeechActionEvent args)
     {
         if (args.Handled)
             return;

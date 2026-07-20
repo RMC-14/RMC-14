@@ -24,6 +24,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using Content.Shared._RMC14.Chat;
 
 namespace Content.Shared._RMC14.Marines.Skills;
 
@@ -40,6 +41,10 @@ public sealed class SkillsSystem : EntitySystem
     [Dependency] private readonly RMCReagentSystem _reagent = default!;
 
     private static readonly EntProtoId<SkillDefinitionComponent> MeleeSkill = "RMCSkillMeleeWeapons";
+
+    private static readonly EntProtoId<SkillDefinitionComponent> LeadershipSkill = "RMCSkillLeadership";
+
+    private const int CommandSpeechLeadershipLevel = 1; // Change to 2 or 3 if desired
 
     public ImmutableArray<EntProtoId<SkillDefinitionComponent>> Skills { get; private set; }
 
@@ -76,6 +81,8 @@ public sealed class SkillsSystem : EntitySystem
 
         SubscribeLocalEvent<ExamineRequiresSkillComponent, ExaminedEvent>(OnExamineRequiresSkill);
 
+        SubscribeLocalEvent<SkillsComponent, ComponentInit>(OnSkillsComponentInit);
+
         ReloadPrototypes();
     }
 
@@ -97,6 +104,27 @@ public sealed class SkillsSystem : EntitySystem
         args.Damage = ApplyMeleeSkillModifier(args.User, args.Damage);
     }
 
+    private void UpdateCommandSpeech(Entity<SkillsComponent> ent)
+    {
+        var leadership = ent.Comp.Skills.GetValueOrDefault(LeadershipSkill);
+        Log.Debug($"Leadership check for {ent.Owner}: {leadership}");
+        if (leadership >= CommandSpeechLeadershipLevel)
+        {
+            if (!HasComp<CommandSpeechComponent>(ent))
+                EnsureComp<CommandSpeechComponent>(ent);
+        }
+        else
+        {
+            if (HasComp<CommandSpeechComponent>(ent))
+                RemComp<CommandSpeechComponent>(ent);
+        }
+    }
+
+    private void OnSkillsComponentInit(Entity<SkillsComponent> ent, ref ComponentInit args)
+    {
+        UpdateCommandSpeech(ent);
+    }
+
     private void OnSkillsMapInit(Entity<SkillsComponent> ent, ref MapInitEvent args)
     {
         if (ent.Comp.Preset is not { } presetPrototype)
@@ -107,6 +135,8 @@ public sealed class SkillsSystem : EntitySystem
 
         ent.Comp.Skills = new(skillPreset.Skills);
         Dirty(ent);
+
+        UpdateCommandSpeech(new Entity<SkillsComponent>(ent.Owner, ent.Comp!));
     }
 
     private void OnSkillsVerbExamine(Entity<SkillsComponent> ent, ref GetVerbsEvent<ExamineVerb> args)
@@ -544,6 +574,8 @@ public sealed class SkillsSystem : EntitySystem
 
         ent.Comp.Skills.Clear();
         Dirty(ent);
+
+        UpdateCommandSpeech(new Entity<SkillsComponent>(ent.Owner, ent.Comp!));
     }
 
     public void SetSkill(Entity<SkillsComponent?> ent, EntProtoId<SkillDefinitionComponent> skill, int to)
@@ -562,6 +594,8 @@ public sealed class SkillsSystem : EntitySystem
         ent.Comp ??= EnsureComp<SkillsComponent>(ent);
         ent.Comp.Skills[skill] = to;
         Dirty(ent);
+
+        UpdateCommandSpeech(new Entity<SkillsComponent>(ent.Owner, ent.Comp!));
     }
 
     public void SetSkills(Entity<SkillsComponent?> ent, Dictionary<EntProtoId<SkillDefinitionComponent>, int> to)
@@ -574,6 +608,8 @@ public sealed class SkillsSystem : EntitySystem
         }
 
         Dirty(ent);
+
+        UpdateCommandSpeech(new Entity<SkillsComponent>(ent.Owner, ent.Comp!));
     }
 
     public void SetSkills(Entity<SkillsComponent?> ent, List<Skill> to)
@@ -587,6 +623,8 @@ public sealed class SkillsSystem : EntitySystem
         }
 
         Dirty(ent);
+
+        UpdateCommandSpeech(new Entity<SkillsComponent>(ent.Owner, ent.Comp!));
     }
 
     public void SetSkills(Entity<SkillsComponent?> ent, HashSet<Skill> to)
@@ -599,6 +637,8 @@ public sealed class SkillsSystem : EntitySystem
         }
 
         Dirty(ent);
+
+        UpdateCommandSpeech(new Entity<SkillsComponent>(ent.Owner, ent.Comp!));
     }
 
     public float GetSkillDelayMultiplier(Entity<SkillsComponent?> user, EntProtoId<SkillDefinitionComponent> definition, float[]? multipliers = null)
