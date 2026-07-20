@@ -88,8 +88,6 @@
   - type: Foldable
     folded: true
     canFoldInsideContainer: true
-  - type: ItemToggleSize
-    activatedSize: Large
   - type: ItemTogglePointLight
   - type: PointLight
     enabled: false
