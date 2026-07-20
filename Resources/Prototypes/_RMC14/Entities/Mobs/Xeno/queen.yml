@@ -115,7 +115,7 @@
   - type: VehicleDamageMultiplier
     multiplier: 2
   - type: XenoPsychicCommunication
-  - type: InnateCommandSpeech
+  - type: StaticCommandSpeech
   - type: RMCInnateRadioTextIncrease
     radioTextIncrease: 3
     instrinsic: true
