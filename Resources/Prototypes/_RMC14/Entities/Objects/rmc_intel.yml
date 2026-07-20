@@ -277,6 +277,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
     state: terminal1_old
+    layers: []
   - type: InteractionOutline
   - type: ActivatableUI
     key: enum.ViewIntelObjectivesUI.Key
