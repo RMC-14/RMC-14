@@ -17,11 +17,11 @@
       tags:
       - RMCUniformFreelancer
 
-- entity:
+- type: entity
   parent: RMCArmorPlateCarrierBlack
   id: RMCArmorFreelancerPlateCarrierBlack
-  name: black plate carrier vest
-  prefix: no lamp, freelancer
+  name: freelancer's black plate carrier vest
+  prefix: no lamp
   components:
   - type: ClothingRequireEquipped
     autoUnequip: true
@@ -30,11 +30,11 @@
       tags:
       - RMCUniformFreelancer
 
-- entity:
+- type: entity
   parent: RMCArmorPlateCarrierBeige
   id: RMCArmorFreelancerPlateCarrierBeige
-  name: beige plate carrier vest
-  prefix: no lamp, freelancer
+  name: freelancer's beige plate carrier vest
+  prefix: no lamp
   components:
   - type: ClothingRequireEquipped
     autoUnequip: true
@@ -43,11 +43,11 @@
       tags:
       - RMCUniformFreelancer
 
-- entity:
+- type: entity
   parent: RMCArmorPlateCarrierBlackLamp
   id: RMCArmorFreelancerPlateCarrierBlackLamp
-  name: black plate carrier vest
-  prefix: lamp, freelancer
+  name: freelancer's black plate carrier vest
+  prefix: lamp
   components:
   - type: ClothingRequireEquipped
     autoUnequip: true
@@ -56,11 +56,11 @@
       tags:
       - RMCUniformFreelancer
 
-- entity:
+- type: entity
   parent: RMCArmorPlateCarrierBeigeLamp
   id: RMCArmorFreelancerPlateCarrierBeigeLamp
-  name: beige plate carrier vest
-  prefix: lamp, freelancer
+  name: freelancer's beige plate carrier vest
+  prefix: lamp
   components:
   - type: ClothingRequireEquipped
     autoUnequip: true
