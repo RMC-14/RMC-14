@@ -4,7 +4,7 @@
   name: rmc-job-name-survivor-shivas-researcher
   playTimeTracker: CMJobSurvivorScientist
   startingGear: RMCGearSurvivorShivasResearcher
-  spawnMenuRoleName: Researcher (Shivas Panic Room Special Survivor)
+  spawnMenuRoleName: Researcher (Shivas Special Survivor)
   greeting: rmc-job-greeting-shivas-panic-room-researcher
 
 - type: entity

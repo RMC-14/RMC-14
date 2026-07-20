@@ -43,7 +43,7 @@
         RMCSkillPolice: 2
         RMCSkillPowerLoader: 2
         RMCSkillSurgery: 1
-        RMCSkillVehicles: 1
+        RMCSkillVehicles: 2
     - type: MarineOrders
     - type: CMVendorUser
       id: CMExecutiveOfficer

@@ -24,6 +24,19 @@ public sealed partial class CMDistressSignalRuleSystem
     private const int HijackCameraShakeIntensity = 10;
     private const int HijackCameraShakeDuration = 2;
 
+    private void OnDropshipLandedOnPlanet(ref DropshipLandedOnPlanetEvent ev)
+    {
+        var rule = TryGetActiveRuleEntity();
+        if (rule == null || rule.Value.Comp.MarinesLanded)
+            return;
+
+        rule.Value.Comp.MarinesLanded = true;
+        Dirty(rule.Value);
+
+        var landedEv = new MarinesLandedChangedEvent(true);
+        RaiseLocalEvent(ref landedEv);
+    }
+
     /// <summary>
     /// Handles the start of a dropship hijack: destroys xeno structures on the planet,
     /// evacuates living xenos to the dropship, and calculates xeno surge based on marine weights.
@@ -49,10 +62,10 @@ public sealed partial class CMDistressSignalRuleSystem
         }
 
         //TODO RMC14 only do main hive
-        var xenos = EntityQueryEnumerator<XenoComponent, MobStateComponent, InfectableComponent, TransformComponent>();
+        var xenos = EntityQueryEnumerator<XenoComponent, MobStateComponent, TransformComponent>();
         var xenoAmount = 0;
         var larva = 0;
-        while (xenos.MoveNext(out var xeno, out var comp, out _, out _, out var transformComp))
+        while (xenos.MoveNext(out var xeno, out var comp, out _, out var transformComp))
         {
             if (_mobState.IsDead(xeno))
                 continue;
@@ -85,6 +98,9 @@ public sealed partial class CMDistressSignalRuleSystem
 
                     var origin = _transform.GetMoverCoordinates(xeno);
                     _popup.PopupCoordinates(Loc.GetString("rmc-xeno-hibernation"), origin, Filter.SinglePlayer(session), true, PopupType.MediumXeno);
+
+                    if (comp.CountedInSlots && _hive.GetHive(xeno) is { } hive)
+                        _larvaQueue.AddToLarvaQueueFront(hive, actor.PlayerSession.UserId);
                 }
 
                 QueueDel(xeno);
@@ -136,7 +152,7 @@ public sealed partial class CMDistressSignalRuleSystem
             return;
 
         var hiveComp = EnsureComp<HiveComponent>(rule.Hive);
-        _hive.IncreaseBurrowedLarva(larva);
+        _hive.ChangeBurrowedLarva((rule.Hive, hiveComp), larva);
         _hive.ResetHiveCoreCooldown((rule.Hive, hiveComp));
         var surge = EnsureComp<HijackBurrowedSurgeComponent>(rule.Hive);
         surge.PooledLarva = surgeAmount;
@@ -153,6 +169,13 @@ public sealed partial class CMDistressSignalRuleSystem
             return;
 
         var time = Timing.CurTime;
+        if (!rule.ScuttleUnlocked &&
+            rule.ScuttleUnlockAt == null &&
+            !rule.ScuttleDetonated)
+        {
+            rule.ScuttleUnlockAt = time + rule.ScuttleUnlockDelay;
+        }
+
         if (!rule.HijackSongPlayed)
         {
             rule.HijackSongPlayed = true;

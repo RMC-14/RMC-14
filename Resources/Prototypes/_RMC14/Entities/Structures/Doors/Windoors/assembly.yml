@@ -8,7 +8,7 @@
   components:
   - type: InteractionOutline
   - type: Sprite
-    sprite: _RMC14/Structures/Doors/windoor_assemblies.rsi/
+    sprite: _RMC14/Structures/Doors/windoor_assemblies.rsi
     state: windoor_assembly01
   - type: Physics
   - type: Fixtures
