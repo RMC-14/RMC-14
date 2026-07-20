@@ -1,3 +1,4 @@
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
@@ -13,6 +14,12 @@ public sealed partial class XenoAcidHoleWallComponent : Component
 
     [DataField]
     public float DamageNearCapRatio = 0.9f;
+
+    [DataField]
+    public SoundSpecifier? HoleCreatedSound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/acid_impact1.ogg");
+
+    [DataField]
+    public SoundSpecifier? HoleExpandSound = new SoundCollectionSpecifier("XenoPry");
 
     [AutoNetworkedField]
     public EntityUid? Hole;

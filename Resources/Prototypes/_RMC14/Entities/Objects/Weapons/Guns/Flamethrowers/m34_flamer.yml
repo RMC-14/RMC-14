@@ -243,6 +243,20 @@
         maxVol: 200
         reagents: [ ]
 
+- type: entity
+  parent: RMCTankFlamer
+  id: VehicleFlamerTankLZRN
+  name: LZR-N flame tank
+  description: A fuel tank for the LZR-N flame unit. Handle with care.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 150
+        reagents:
+        - ReagentId: RMCNapalmUTTank
+          Quantity: 150
+
 - type: Tag
   id: RMCTankFlamer
 
