@@ -50,7 +50,7 @@ properties continue to work.
 
 ## Palettes and local theming
 
-Available presets are `Blue`, `Brown`, `Green`, `Purple`, `Red`, `Upp`, `White`, and `Yellow`.
+Available presets are `Blue`, `Brown`, `Green`, `Purple`, `Red`, `Spp`, `White`, and `Yellow`.
 
 ```xml
 <crt:RMCCrtThemeScope Palette="Green" Effects="HorizontalScanlines">

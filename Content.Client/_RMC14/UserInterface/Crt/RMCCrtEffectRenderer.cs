@@ -20,11 +20,6 @@ internal sealed class RMCCrtEffectRenderer
     private Vector2[] _horizontalScanlines = [];
     private Vector2[] _redSubpixels = [];
 
-    internal int GeometryGeneration { get; private set; }
-    internal int HorizontalVertexCount => _horizontalScanlines.Length;
-    internal int RgbVertexCount => _redSubpixels.Length + _greenSubpixels.Length + _blueSubpixels.Length;
-    internal int StripeVertexCount => _diagonalStripes.Length;
-
     public void Draw(
         DrawingHandleScreen handle,
         float width,
@@ -105,8 +100,6 @@ internal sealed class RMCCrtEffectRenderer
         _cachedScanlineThickness = scanlineThickness;
         _cachedRgbWidth = rgbWidth;
         _cachedStripeWidth = stripeWidth;
-        GeometryGeneration++;
-
         _horizontalScanlines = effects.HasFlag(RMCCrtEffects.HorizontalScanlines)
             ? CreateHorizontalLines(width, height, uiScale, scanlineSpacing, scanlineThickness)
             : [];

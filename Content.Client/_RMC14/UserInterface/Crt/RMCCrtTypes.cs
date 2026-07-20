@@ -19,7 +19,7 @@ public enum RMCCrtPalettePreset
     Green,
     Purple,
     Red,
-    Upp,
+    Spp,
     White,
     Yellow,
 }
@@ -95,7 +95,7 @@ public static class RMCCrtPalettes
             RMCCrtPalettePreset.Green => Create("#00EB4E", "#001000", "#00EB4E"),
             RMCCrtPalettePreset.Purple => Create("#C634D0", "#100302", "#C634D0"),
             RMCCrtPalettePreset.Red => Create("#D03434", "#100302", "#D03434"),
-            RMCCrtPalettePreset.Upp => Create("#DBBF23", "#511814", "#DBBF23"),
+            RMCCrtPalettePreset.Spp => Create("#DBBF23", "#511814", "#DBBF23"),
             RMCCrtPalettePreset.White => Create("#CCCCCC", "#666666", "#CCCCCC"),
             RMCCrtPalettePreset.Yellow => Create("#FFD000", "#101000", "#FFD000"),
             _ => Create("#8ACBFF", "#00000F", "#82C5F2"),
@@ -139,5 +139,6 @@ public static class RMCCrtIcons
 public static class RMCCrtStyleClasses
 {
     public const string Heading = "RMCCrtHeading";
+    public const string MutedIcon = "RMCCrtMutedIcon";
     public const string Text = "RMCCrtText";
 }

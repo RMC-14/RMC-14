@@ -168,6 +168,8 @@ public sealed class RMCCrtThemeScope : PanelContainer
                 .Prop(Label.StylePropertyFontColor, ResolvedPalette.Foreground),
             Element<RichTextLabel>().Class(RMCCrtStyleClasses.Text)
                 .Prop(Control.StylePropertyModulateSelf, ResolvedPalette.Foreground),
+            Element<TextureRect>().Class(RMCCrtStyleClasses.MutedIcon)
+                .Prop(Control.StylePropertyModulateSelf, ResolvedPalette.Muted),
         }).ToArray();
 
         return new Stylesheet(rules);

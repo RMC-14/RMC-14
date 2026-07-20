@@ -4,7 +4,6 @@ using Content.Shared._RMC14.Marines.ControlComputer;
 using Content.Shared._RMC14.TacticalMap;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
-using Robust.Shared.IoC;
 using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Marines.CommandTablet;
@@ -12,7 +11,7 @@ namespace Content.Client._RMC14.Marines.CommandTablet;
 [UsedImplicitly]
 public sealed class CommandTabletBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    private readonly IGameTiming _timing = IoCManager.Resolve<IGameTiming>();
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     private CommandTabletWindow? _window;
     private bool _confirmingEvacuation;

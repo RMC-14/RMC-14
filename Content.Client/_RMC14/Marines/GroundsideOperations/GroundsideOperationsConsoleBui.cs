@@ -7,7 +7,6 @@ using Content.Shared._RMC14.Marines.GroundsideOperations;
 using Content.Shared._RMC14.OrbitalCannon;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
-using Robust.Shared.IoC;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -16,7 +15,7 @@ namespace Content.Client._RMC14.Marines.GroundsideOperations;
 [UsedImplicitly]
 public sealed class GroundsideOperationsConsoleBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    private readonly IGameTiming _timing = IoCManager.Resolve<IGameTiming>();
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     private GroundsideOperationsLandingZoneWindow? _landingZoneWindow;
     private GroundsideOperationsConsoleWindow? _window;
