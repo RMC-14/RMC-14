@@ -22,7 +22,6 @@
     - type: Skills
       preset: RMCSkillPresetPVESectionSergeant
     - type: SquadLeader
-    - type: SquadLeaderCommandSpeech
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist

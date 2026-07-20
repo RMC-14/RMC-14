@@ -45,7 +45,6 @@
     - type: PyroWhitelist
     - type: MarineOrders
     - type: SquadLeader
-    - type: SquadLeaderCommandSpeech
       icon:
         sprite: _RMC14/Interface/job_icons/UNMC/marsoc.rsi
         state: hudsquad_soctl_a

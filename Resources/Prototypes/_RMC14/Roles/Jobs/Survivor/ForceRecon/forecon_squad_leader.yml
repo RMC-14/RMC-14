@@ -23,7 +23,6 @@
       preset: RMCSkillPresetReconSquadLeader
     - type: MarineOrders
     - type: SquadLeader
-    - type: SquadLeaderCommandSpeech
     - type: RMCPointing
     - type: TacticalMapIcon
       icon:

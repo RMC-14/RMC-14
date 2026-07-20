@@ -43,7 +43,6 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-clf-cell-leader
     - type: SquadLeader
-    - type: SquadLeaderCommandSpeech
       icon:
         sprite: _RMC14/Interface/job_icons/CLF.rsi
         state: clf_sl
