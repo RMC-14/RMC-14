@@ -159,3 +159,9 @@ rmc-intel-tech-announcement-wake-troops = Additional troops are being taken out 
 rmc-intel-tech-announcement-wake-specialist = An additional specialist is being taken out of cryo.
 rmc-intel-tech-announcement-tier-4 = THREAT ASSESSMENT LEVEL INCREASED TO LEVEL 4. LEVEL 4 assets have been authorised to handle the situation.
 rmc-intel-tech-announcement-nuclear-device = The deployment of Nuclear Ordnance has been authorized and will be delivered to the Requisitions Department via ASRS.
+
+rmc-intel-detector-not-on = Turn the Device on first.
+rmc-intel-detector-has-intel = The Device has detected Intelligence on your person.
+rmc-intel-detector-no-intel = The Device does not react.
+rmc-intel-detector-cooldown = The Device needs to cooldown before another self-scan can be performed.
+rmc-intel-detector-self-check-examine = Use the Device on yourself to perform a self-scan for Intelligence.
