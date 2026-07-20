@@ -49,6 +49,7 @@
     - type: SquadArmorWearer
       leader: true
     - type: SquadLeader
+    - type: SquadLeaderCommandSpeech
       icon:
         sprite: _RMC14/Interface/job_icons/SPP/standard.rsi
         state: spp_sl_a

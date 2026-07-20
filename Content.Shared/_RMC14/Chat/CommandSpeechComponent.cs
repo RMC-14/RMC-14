@@ -4,7 +4,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Chat;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-public sealed partial class CommandSpeechComponent : Component
+public sealed partial class SquadLeaderCommandSpeechComponent : Component
 {
     [DataField]
     public EntProtoId CommandSpeechActionId = "ActionCommandSpeechToggle";

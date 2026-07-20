@@ -35,6 +35,7 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-soro-sof-sl
     - type: SquadLeader
+    - type: SquadLeaderCommandSpeech
       icon:
         sprite: _RMC14/Interface/job_icons/SPP/standard.rsi
         state: spp_sl_a

@@ -254,7 +254,7 @@ namespace Content.Client.Chat.UI
             {
                 if (message.SpeechStyleClass != null)
                     speechStyleClass = message.SpeechStyleClass;
-                else if (/*entityManager.HasComponent<SquadLeaderComponent>(senderUid) ||*/ entityManager.HasComponent<HiveLeaderComponent>(senderUid) ||/* entityManager.HasComponent<InnateCommandSpeechComponent>(senderUid) ||*/ (entityManager.TryGetComponent<CommandSpeechComponent>(senderUid, out var commandSpeech) && commandSpeech.Active))
+                else if (entityManager.HasComponent<HiveLeaderComponent>(senderUid) || (entityManager.TryGetComponent<SquadLeaderCommandSpeechComponent>(senderUid, out var squadleadercommandSpeech) && squadleadercommandSpeech.Active) || (entityManager.TryGetComponent<InnateCommandSpeechComponent>(senderUid, out var innatecommandSpeech) && innatecommandSpeech.Active))
                     speechStyleClass = "commanderSpeech";
             }
 

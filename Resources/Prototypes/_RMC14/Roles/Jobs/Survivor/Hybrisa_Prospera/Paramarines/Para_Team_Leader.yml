@@ -36,6 +36,7 @@
         - type: CommandAccent
         - type: RMCTrackable
         - type: SquadLeader
+        - type: SquadLeaderCommandSpeech
           icon:
             sprite: _RMC14/Interface/job_icons/TSE/RCM/paramarine.rsi
             state: para_teamleader_alt

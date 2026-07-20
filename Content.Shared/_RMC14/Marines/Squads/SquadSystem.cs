@@ -583,6 +583,7 @@ public sealed class SquadSystem : EntitySystem
     public void RemoveSquad(EntityUid marine, ProtoId<JobPrototype>? job)
     {
         RemComp<SquadLeaderComponent>(marine);
+        RemComp<SquadLeaderCommandSpeechComponent>(marine);
         if (!TryComp<SquadMemberComponent>(marine, out var member))
             return;
 
@@ -723,6 +724,7 @@ public sealed class SquadSystem : EntitySystem
                 }
 
                 RemComp<SquadLeaderComponent>(uid);
+                RemComp<SquadLeaderCommandSpeechComponent>(uid);
 
                 if (TryComp<RMCTrackableComponent>(uid, out var otherTrackable) &&
                     !otherTrackable.Intrinsic)
@@ -739,6 +741,8 @@ public sealed class SquadSystem : EntitySystem
         }
 
         var newLeader = EnsureComp<SquadLeaderComponent>(toPromote);
+        EnsureComp<SquadLeaderCommandSpeechComponent>(toPromote);
+
         newLeader.Icon = icon;
 
         EnsureComp<RMCAwardRecommendationComponent>(toPromote);

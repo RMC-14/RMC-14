@@ -10,12 +10,16 @@ public sealed class CommandSpeechSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<CommandSpeechComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<CommandSpeechComponent, ComponentRemove>(OnCommandSpeechRemoved);
-        SubscribeLocalEvent<CommandSpeechComponent, CommandSpeechActionEvent>(OnCommandSpeechAction);
+        SubscribeLocalEvent<SquadLeaderCommandSpeechComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<SquadLeaderCommandSpeechComponent, ComponentRemove>(OnSquadLeaderCommandSpeechRemoved);
+        SubscribeLocalEvent<SquadLeaderCommandSpeechComponent, CommandSpeechActionEvent>(OnSquadLeaderCommandSpeechAction);
+
+        SubscribeLocalEvent<InnateCommandSpeechComponent, MapInitEvent>(OnInnateMapInit);
+        SubscribeLocalEvent<InnateCommandSpeechComponent, ComponentRemove>(OnInnateCommandSpeechRemoved);
+        SubscribeLocalEvent<InnateCommandSpeechComponent, CommandSpeechActionEvent>(OnInnateCommandSpeechAction);
     }
 
-    private void OnMapInit(Entity<CommandSpeechComponent> ent, ref MapInitEvent args)
+    private void OnMapInit(Entity<SquadLeaderCommandSpeechComponent> ent, ref MapInitEvent args)
     {
         _actions.AddAction(
             ent.Owner,
@@ -23,13 +27,43 @@ public sealed class CommandSpeechSystem : EntitySystem
             ent.Comp.CommandSpeechActionId);
     }
 
-    private void OnCommandSpeechRemoved(Entity<CommandSpeechComponent> ent, ref ComponentRemove args)
+    private void OnInnateMapInit(Entity<InnateCommandSpeechComponent> ent, ref MapInitEvent args)
+    {
+        _actions.AddAction(
+            ent.Owner,
+            ref ent.Comp.CommandSpeechAction,
+            ent.Comp.CommandSpeechActionId);
+    }
+
+    private void OnSquadLeaderCommandSpeechRemoved(Entity<SquadLeaderCommandSpeechComponent> ent, ref ComponentRemove args)
     {
         if (ent.Comp.CommandSpeechAction is { } action)
             _actions.RemoveAction(ent.Owner, action);
     }
 
-    private void OnCommandSpeechAction(Entity<CommandSpeechComponent> ent, ref CommandSpeechActionEvent args)
+    private void OnInnateCommandSpeechRemoved(Entity<InnateCommandSpeechComponent> ent, ref ComponentRemove args)
+    {
+        if (ent.Comp.CommandSpeechAction is { } action)
+            _actions.RemoveAction(ent.Owner, action);
+    }
+
+    private void OnSquadLeaderCommandSpeechAction(Entity<SquadLeaderCommandSpeechComponent> ent, ref CommandSpeechActionEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        args.Handled = true;
+
+        ent.Comp.Active = !ent.Comp.Active;
+        Dirty(ent);
+
+        foreach (var action in _rmcActions.GetActionsWithEvent<CommandSpeechActionEvent>(ent))
+        {
+            _actions.SetToggled((action, action), ent.Comp.Active);
+        }
+    }
+
+    private void OnInnateCommandSpeechAction(Entity<InnateCommandSpeechComponent> ent, ref CommandSpeechActionEvent args)
     {
         if (args.Handled)
             return;

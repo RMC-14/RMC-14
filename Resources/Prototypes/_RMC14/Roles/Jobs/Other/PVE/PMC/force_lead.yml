@@ -27,6 +27,7 @@
     - type: AssignSquad
       squad: SquadPMC
     - type: SquadLeader
+    - type: SquadLeaderCommandSpeech
       icon:
         sprite: _RMC14/Interface/job_icons/We-Ya/pmc.rsi
         state: pmc_ld

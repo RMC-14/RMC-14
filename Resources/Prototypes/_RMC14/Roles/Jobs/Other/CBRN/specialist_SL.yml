@@ -55,6 +55,7 @@
     - type: SquadArmorWearer
       leader: true
     - type: SquadLeader
+    - type: SquadLeaderCommandSpeech
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-squad-leader
