@@ -184,9 +184,9 @@
 
 - type: entity
   parent: RMCHeadsetDistressSPP
-  id: RMCHeadsetSPPPaP
-  name: SPP PaP headset
-  description: A special headset used by the People's Armed Police of the SPP.
+  id: RMCHeadsetSPPPCG
+  name: SPP PCG headset
+  description: A special headset used by the People's Civil Gendarmes of the SPP.
   components:
   - type: ContainerFill
     containers:
