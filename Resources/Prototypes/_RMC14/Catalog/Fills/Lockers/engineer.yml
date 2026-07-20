@@ -59,7 +59,7 @@
 
 - type: entity
   parent: CMLockerEngineer
-  id: CMLockerEngineerFilled
+  id: RMCLockerEngineerFilled
   suffix: Filled
   components:
   - type: StorageFill
@@ -67,20 +67,19 @@
     - id: CMBackpackEngineer
     - id: RMCFlashlight
     - id: CMMaskGas
-    - id: RMCPouchToolsFill
+    - id: RMCPouchTools
     - id: RMCPouchConstruction
-    - id: RMCPouchElectronicsFill
+    - id: RMCPouchElectronics
     - id: RMCPouchGeneral
     - id: RMCHazardVest
     - id: CMWebbingBrown
-    - id: CMHeadsetEngineer
     - id: RMCToolboxMechanicalFilled
     - id: CMWebbing
     - id: RMCHazardVestBlue
 
 - type: entity
   parent: CMLockerEngineerWelder
-  id: CMLockerEngineerWelderFilled
+  id: RMCLockerEngineerWelderFilled
   suffix: Filled
   components:
   - type: StorageFill
