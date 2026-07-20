@@ -107,7 +107,7 @@ public sealed class SkillsSystem : EntitySystem
     private void UpdateCommandSpeech(Entity<SkillsComponent> ent)
     {
         var leadership = ent.Comp.Skills.GetValueOrDefault(LeadershipSkill);
-        Log.Debug($"Leadership check for {ent.Owner}: {leadership}");
+
         if (leadership >= CommandSpeechLeadershipLevel)
         {
             if (!HasComp<CommandSpeechComponent>(ent))
