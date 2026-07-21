@@ -32,11 +32,15 @@ public static class FocusChainExtensions
                 if (args.Function == EngineKeyFunctions.GuiTabNavigateNext)
                 {
                     next?.GrabKeyboardFocus();
+                    if (next is LineEdit nextEdit)
+                        nextEdit.CursorPosition = nextEdit.Text.Length;
                     args.Handle();
                 }
                 else if (args.Function == EngineKeyFunctions.GuiTabNavigatePrev)
                 {
                     prev?.GrabKeyboardFocus();
+                    if (prev is LineEdit prevEdit)
+                        prevEdit.CursorPosition = prevEdit.Text.Length;
                     args.Handle();
                 }
             };
