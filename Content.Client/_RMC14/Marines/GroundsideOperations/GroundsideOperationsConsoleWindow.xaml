@@ -100,9 +100,8 @@
                                             <crt:RMCCrtPanel Variant="Inset" MinHeight="38">
                                                 <BoxContainer Orientation="Horizontal" Align="Center" Margin="9 5"
                                                     SeparationOverride="7" MouseFilter="Ignore">
-                                                    <TextureRect TexturePath="/Textures/_RMC14/Interface/CRT/crt_icons.rsi/ban.png"
-                                                        StyleClasses="RMCCrtMutedIcon" SetWidth="18" SetHeight="18"
-                                                        Stretch="Scale" MouseFilter="Ignore" />
+                                                    <crt:RMCCrtIcon IconState="ban" Tone="Muted" SetWidth="18" SetHeight="18"
+                                                        MouseFilter="Ignore" />
                                                     <crt:RMCCrtLabel Text="{Loc rmc-goc-keycard-required}" Tone="Muted"
                                                         VerticalAlignment="Center" MouseFilter="Ignore" />
                                                 </BoxContainer>
