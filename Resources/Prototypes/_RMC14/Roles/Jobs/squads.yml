@@ -403,6 +403,31 @@
 
 - type: entity
   parent: SquadBase
+  id: SquadUNMC
+  name: UNMC
+  components:
+  - type: SquadTeam
+    color: "#3b62a7"
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+    radio: Colony
+    minimapBackground:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: background_ua
+    canSupplyDrop: false
+    group: UNMC
+  - type: Tag
+    tags:
+    - RMCSquadUNMC
+
+- type: Tag
+  id: RMCSquadUNMC
+
+- type: entity
+  parent: SquadBase
   id: SquadSOF
   name: SOF
   components:

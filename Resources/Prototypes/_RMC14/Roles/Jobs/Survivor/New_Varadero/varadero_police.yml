@@ -1,0 +1,84 @@
+# RMC14: these are MP survs on CM
+- type: job
+  parent: CMSurvivorSecurity
+  id: RMCSurvivorUNMCBasePolice
+  name: cm-job-name-survivor-varadero-base-guard
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorSecurity
+  startingGear: RMCGearSurvivorUNMCBasePolice
+  ranks:
+    RMCRankSergeant: []
+  spawnMenuRoleName: UNMC Base Police (NV Survivor)
+  icon: "RMCJobIconSurvivorBasePolice"
+  hasIcon: true
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadUNMC
+    - type: Skills
+      preset: RMCSkillPresetSurvivorUNMCRifleman
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetUNMCBasePolice
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: mp
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_ua
+    - type: Language
+      spokenLanguages:
+      - Spanish
+      - English
+      understoodLanguages:
+      - Spanish
+      - English
+      currentLanguage: English
+      defaultLanguage: English
+  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
+
+- type: startingGear
+  id: RMCGearSurvivorUNMCBasePolice # This loadout is supposed to have MP stuff but these are not real MP's. Replaced the jacket and jumpsuit with their counterparts
+  equipment:
+    jumpsuit: JumpsuitMarine
+    outerClothing: RMCCoatService
+    ears: RMCHeadsetMarineDistress
+    belt: CMBeltSecurityMPFilled
+    gloves: RMCHandsVeteran
+    id: CMIDCardStandardDogtag
+    pocket1: RMCPouchSurvivalFill
+    back: CMSatchelSecurity
+    shoes: CMBootsBlackFilled
+  storage:
+    back:
+      - CMSheetMetal20
+
+- type: entity
+  parent: RMCGearSurvivorPresetUNMC
+  id: RMCSurvivorPresetUNMCBasePolice
+  name: varadero base police preset
+  categories: [ HideSpawnMenu ]
+  components: # This preset is supposed to have MP stuff but these are not real MP's. Replaced the cap and helmet with their counterparts
+    - type: EntityPreset
+      randomOutfits:
+        - [ ArmorHelmetM10 ]
+        - [ RMCHeadCapFlippable ]
+        - [ RMCBoonie ]
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSurvivorBasePolice
+  icon:
+    sprite: _RMC14/Interface/job_icons/UNMC/other.rsi
+    state: hudsquad_nv_baseguard

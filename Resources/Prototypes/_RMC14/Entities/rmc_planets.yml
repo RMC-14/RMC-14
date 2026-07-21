@@ -366,8 +366,8 @@
     camouflage: Jungle
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingVaradero
-    announcement: "An automated distress signal has been received from UN Outpost New Varadero. A response team from the UNS Almayer will be dispatched shortly to investigate.
-      Designation: Island research station and mining facility
+    announcement: "An automated distress signal has been received from UNMC New Varadero Naval Base. A response team from the UNS Almayer will be dispatched shortly to investigate.
+      Designation: UNMC Naval base, research site and mining facility
 
       Population: 47
       Current Temperature: 68F Interior, 97F Exterior
@@ -392,21 +392,25 @@
       RMCSurvivorCommandingOfficer:
       - RMCSurvivorCommanderNewVaradero: 1
       CMSurvivor:
-      - CMSurvivor: -1
-      - RMCSurvivorCivilianUnique: -1
       - CMSurvivorBeachBum: -1
       - RMCSurvivorHybrisaTMCCMiner: -1
-      - CMSurvivorPriest: 1
+      - RMCSurvivorNewVaraderoChaplain: -1
       CMSurvivorCorporate:
-      - CMSurvivorVaraderoICB: 2
+      - RMCSurvivorNewVaraderoResearchDirector: 1
+      - RMCSurvivorNewVaraderoUNRepresentative: 1
       CMSurvivorDoctor:
       - CMSurvivorMedicalTechnician: 3
+      - RMCSurvivorAirportFirefighter: 3
       CMSurvivorEngineer:
-      - CMSurvivorTechnician: 2
-      - CMSurvivorCargoTechnician: 2
+      - RMCSurvivorUNMCPilot: 2
+      - RMCSurvivorUNMCVehicleCrewman: 2
+      - RMCSurvivorUNMCGroundCrewman: 2
       CMSurvivorSecurity:
-      - CMSurvivorILRCPeacekeeper: 2
+      - RMCSurvivorUNMCRifleman: 2
+      - RMCSurvivorUNMCBasePolice: 2
       CMSurvivorScientist:
+      - RMCSurvivorNewVaraderoXenoarchaeologist: 2
+      - RMCSurvivorNewVaraderoXenobiologist: 2
       - RMCSurvivorNewVaraderoResearcher: 2
 
 - type: entity

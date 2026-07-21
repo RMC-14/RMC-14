@@ -11,7 +11,9 @@
   roleWeight: 0.25
   icon: "RMCJobIconSurvivorCommanderNewVaradero"
   hasIcon: true
-  spawnMenuRoleName: UNMC Commander (New Varadero Survivor)
+  spawnMenuRoleName: UNMC Commander (NV Survivor)
+  accessGroups:
+  - Colony
   special:
   - !type:AddComponentSpecial
     components:
@@ -33,35 +35,35 @@
         state: xo
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_shipside
-    - type: EquipSurvivorPreset
-      preset: RMCSurvivorPresetNoGun
+        state: background_ua
+    - type: JobPrefix
+      prefix: rmc-job-prefix-survivor-varadero-commander
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadUNMC
   hidden: true
   useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
 
 - type: startingGear
   id: RMCGearSurvivorCommanderNewVaradero
   equipment:
-    ears: RMCHeadsetMarineDistress
+    ears: RMCHeadsetMarineDistress # TODO RMC14: Placeholder on CM
     jumpsuit: CMJumpsuitBO
     head: RMCHeadCapFlippable
     outerClothing: RMCCoatServiceFolded
     shoes: CMBootsBlackFilled
-    back: CMSatchelFillSurvivor
-    belt: RMCM1911BeltFilledNVCommander
+    back: CMSatchelLiaisonSecure
+    belt: RMCMatebaBeltForeconFilled # TODO RMC14: M1911 CO Variant. Mateba for now since it's the closest thing
     id: CMIDCardGold
     pocket1: RMCPouchSurvivalFill
-    pocket2: RMCPouchGeneralLargeFilledSurvivorCommanderNewVaradero
-
-- type: entity
-  parent: RMCPouchGeneralLarge
-  id: RMCPouchGeneralLargeFilledSurvivorCommanderNewVaradero
-  suffix: Filled, Survivor
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMClipboard
-    - id: CMPenFountain
+    pocket2: RMCPouchGeneralLarge
+  storage:
+    pocket2:
+    - CMClipboard
+    - CMPenFountain
+    back:
+    - CMSheetMetal20
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -77,5 +79,5 @@
   parent: CMJobIconBase
   id: RMCJobIconSurvivorCommanderNewVaradero
   icon:
-    sprite: _RMC14/Interface/job_icons/Misc/other.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/other.rsi
     state: hudsquad_nv_co

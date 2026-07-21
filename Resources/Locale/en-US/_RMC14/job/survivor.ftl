@@ -154,19 +154,42 @@ rmc-job-greeting-corporate-dome-goon-engi = You are a Corporate Security Technic
 
 # New Varadero Survs
 
-rmc-job-name-survivor-commander-new-varadero = UNMC Commander
+rmc-job-name-survivor-commander-new-varadero = Commander
+rmc-job-prefix-survivor-varadero-commander = UNMC CDR
 
 cm-job-name-surivor-beach-bum = Beach Bum
 
-cm-job-name-survivor-cargo-technician = New Varadero Cargo Technician
+cm-job-name-survivor-varadero-chaplain = Base Chaplain
+rmc-job-prefix-survivor-varadero-chaplain = UNMC CHAP
 
-cm-job-name-survivor-medical-technician = New Varadero Medical Technician
+cm-job-name-survivor-varadero-un-asst-rep = UN Assistant Representative
+rmc-job-prefix-survivor-varadero-un-asst-rep = UN AST REP
 
-cm-job-name-survivor-technician = New Varadero Engineering Technician
+cm-job-name-survivor-varadero-base-guard = Varadero Base Guard
 
-cm-job-name-survivor-un-peacekeeper = ILRC Peacekeeper
+cm-job-name-survivor-varadero-firefighter = Airport Firefighter
+rmc-job-prefix-survivor-varadero-firefighter = UNMC ARFPS
+
+cm-job-name-survivor-ground-crew = Ground Crewman
+rmc-job-prefix-survivor-ground-crew = UNMC GCM
+
+cm-job-name-survivor-pilot = Pilot
+rmc-job-prefix-survivor-pilot = UNMC PO
+
+cm-job-name-survivor-medical-technician = Medical Technician
+rmc-job-prefix-survivor-medical-technician = UNMC MEDTECH
 
 cm-job-name-survivor-new-varadero-researcher = New Varadero Researcher
+rmc-job-prefix-survivor-new-varadero-researcher = WY RSR
+
+cm-job-name-survivor-new-varadero-xenoarchaeologist = New Varadero Xenoarchaeologist
+rmc-job-prefix-survivor-new-varadero-xenoarchaeologist = WY XARC
+
+cm-job-name-survivor-new-varadero-xenobiologist = New Varadero Xenobiologist
+rmc-job-prefix-survivor-new-varadero-xenobiologist = WY XBIO
+
+cm-job-name-survivor-new-varadero-rd = New Varadero Research Director
+rmc-job-prefix-survivor-new-varadero-rd = WY RD
 
 # Hybrisa Prospera Survs
 
@@ -404,6 +427,8 @@ rmc-job-name-survivor-solaris-scientist = Solaris Scientist
 rmc-job-name-survivor-solaris-trucker = Solaris Heavy Vehicle Operator
 
 rmc-job-name-survivor-unmc-recruiter = UNMC Recruiter
+
+cm-job-name-survivor-un-peacekeeper = ILRC Peacekeeper
 
 rmc-job-name-survivor-solaris-corporate-supervisor = Colony Supervisor
 rmc-job-prefix-survivor-solaris-corporate-supervisor = Supervisor

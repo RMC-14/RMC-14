@@ -577,6 +577,14 @@
     - RMCPatchUNMC
     - RMCPatchFORECON
 
+- type: entity
+  parent: JumpsuitMarine
+  id: RMCJumpsuitSurvivorMarineFirefighter
+  suffix: Firefighter, Survivor, Webbing, Patch
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingHolsterM77Survivor
+
 # High Command
 
 # General
