@@ -3,10 +3,23 @@
   id: RMCSurvivorSPPSOFSoldier
   name: rmc-job-name-soro-sof-soldier
   icon: "RMCJobIconSPPRifleman"
-  spawnMenuRoleName: SPP SOF Rifleman (Survivor)
+  spawnMenuRoleName: SPP SOF Rifleman (Sorokyne Special Survivor)
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - English
+      - German
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - English
+      - German
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
     - type: RMCAllowSuitStorage
     - type: RMCSurvivor
     - type: NpcFactionMember

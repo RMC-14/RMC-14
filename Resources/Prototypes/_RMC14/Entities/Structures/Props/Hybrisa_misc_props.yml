@@ -1,0 +1,211 @@
+- type: entity
+  parent: RMCPropBase
+  id: RMCPropInertEgg
+  name: strange egg
+  description: A strange ancient looking egg, it seems to be inert.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_misc_props/32x32.rsi
+    state: inertegg
+    drawdepth: BelowFloor
+
+- type: entity
+  parent: RMCPropBase
+  id: RMCPropDogcatchersuit
+  name: Weston-Yamada 'M5X Apesuit' showcase
+  description: A display model of the Weston-Yamada 'Apesuit', shame it's only a model...
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_misc_props/32x32.rsi
+    state: dogcatchersuitempty
+
+- type: entity
+  parent: RMCPropDogcatchersuit
+  id: RMCPropFireHydrantRed
+  name: fire hydrant
+  description: It is just a fire hydrant. You know what it does.
+  components:
+  - type: Sprite
+    state: firehydrant_red
+
+- type: entity
+  parent: RMCPropFireHydrantRed
+  id: RMCPropFireHydrantBlue
+  components:
+  - type: Sprite
+    state: firehydrant_blue
+
+- type: entity
+  parent: RMCPropFireHydrantRed
+  id: RMCPropFireHydrantwhite
+  components:
+  - type: Sprite
+    state: firehydrant_white
+
+- type: entity
+  parent: RMCPropFireHydrantRed
+  id: RMCPropFireHydrantGrey
+  components:
+  - type: Sprite
+    state: firehydrant_grey
+
+- type: entity
+  parent: RMCPropBase
+  id: RMCPropFactoryConveyer
+  name: large conveyor belt
+  description: A large conveyor belt used in industrial factories.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_misc_props/64x64.rsi
+    state: factory_conveyer
+    offset: "-0.5, 0.5"
+    drawdepth: BelowFloor
+
+- type: entity
+  parent: RMCPropBase
+  id: RMCPropFactoryRoboticArm
+  name: robotic arm
+  suffix: left
+  description: A robust robotic arm used in a range of mechanical processes, including assembly and packaging.
+  components:
+  - type: Transform
+    anchored: false
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_misc_props/64x64.rsi
+    state: factory_roboticarm
+
+- type: entity
+  parent: RMCPropFactoryRoboticArm
+  id: RMCPropFactoryRoboticArm2
+  suffix: right
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_misc_props/64x64.rsi
+    state: factory_roboticarm2
+
+- type: entity
+  parent: RMCPropBase
+  id: RMCPropPowerTransformer
+  name: power transformer
+  description: A passive electrical component that controls where and which circuits power flows into...
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_misc_props/64x64.rsi
+    state: transformer
+    offset: "0.5, -0.5"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+            bounds: "0,-1.5,1,0.5"
+        density: 190
+        layer:
+        - MobMask
+
+- type: entity
+  parent: RMCPropBaseUnbreakable
+  id: RMCPropGiantXenoCryo
+  name: colossal specimen containment cell
+  description: A colossal cryogenic tube with yellow-tinted glass towers before you, housing a hulking, monstrous entity. Is it alive, or in a deep slumber? Cold mist swirls around the base as a low hum fills the air.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_misc_props/giant_xeno_cryo.rsi
+    state: icon
+    offset: "-0.5, 0"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+            bounds: "-1.5,-2,0.5,2"
+        density: 190
+        layer:
+        - MobMask
+
+- type: entity
+  parent: RMCPropBaseUnbreakable
+  id: RMCPropDropshipdamage
+  name: dropship damage
+  description: The engine appears to have severe damage.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_misc_props/dropshipdamage.rsi
+    state: dropshipdamage
+    offset: 0.5, 0.0
+  - type: PointLight
+    radius: 1.5
+    energy: 1.5
+    color: "#FF6A00"
+    softness: 1.0
+    offset: 0.5, 0.0
+
+- type: entity
+  parent: RMCPropBase
+  id: RMCPropSlotmachinebroken
+  name: slot machine
+  suffix: broken
+  description: Looks like the house lost... a machine.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_misc_props/64x64.rsi
+    state: slotmachine_broken
+    offset: 0.7, 0.5
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.3,-0.5,0.3,0.5"
+        density: 55
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Transform
+    anchored: false
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMSheetMetal1:
+            min: 1
+            max: 3
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  parent: RMCPropSlotmachinebroken
+  id: RMCPropSlotmachineIdle
+  name: slot machine
+  suffix: idle, prop
+  description: A fast way to lose all of your money, but hey, atleast you had fun while doing so, right?
+  components:
+  - type: Sprite
+    state: slotmachine_idle
+
+- type: entity
+  parent: RMCPropBase
+  id: RMCPropHybrisaPole
+  name: pole
+  description: For all of your 'pole' related activities.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_misc_props/64x64.rsi
+    state: pole
+  - type: Transform
+    anchored: false

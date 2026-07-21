@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Numerics;
 using Content.Server.GameTicking;
 using Content.Server.Station.Components;
@@ -130,7 +131,7 @@ public sealed partial class CMDistressSignalRuleSystem
         var totalPlayers = ev.PlayerPool.Count;
         var vehicleThreshold = _config.GetCVar(RMCCVars.RMCVehicleRoundstartThresholdPlayers);
         var marines = GetRoundstartMarineMinimum(totalPlayers);
-        var roundstartTank = totalPlayers >= vehicleThreshold;
+        var roundstartTank = _player.Sessions.Count() >= vehicleThreshold;
         var crewmanSlots = roundstartTank ? 2 : 0;
 
         // TODO RMC14: Move to component
