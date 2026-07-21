@@ -123,6 +123,62 @@
     - id: RMCDrinkAlcoholRum
     - id: RMCBaseballBat
 
+- type: entity
+  parent: RMCSatchelArmy
+  id: RMCSatchelArmySurvivorFill
+  suffix: Survivor, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRadioHandheldColony
+
+- type: entity
+  parent: RMCSatchelArmy
+  id: RMCSatchelArmySurvivorSquadLeaderFill
+  suffix: Survivor, Filled, Squad Leader
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRadioHandheldColony
+    - id: RMCRangefinder
+
+- type: entity
+  parent: RMCSatchelArmy
+  id: RMCSatchelArmySurvivorHeavyGunnerFill
+  suffix: Survivor, Filled, Heavy Gunner
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRadioHandheldColony
+    - id: RMCPowerCellSmartgun
+
+- type: entity
+  parent: RMCSatchelArmy
+  id: RMCSatchelArmySurvivorSynthFill
+  suffix: Survivor, Filled, Synth
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRadioHandheldColony
+    - id: RMCMotionDetector
+    - id: RMCSynthResetKey
+    - id: CMDefibrillator
+    - id: CMWelder
+    - id: RMCCableCoil
+
+- type: entity
+  parent: RMCSatchelArmy
+  id: RMCSatchelArmySurvivorCommanderFill
+  suffix: Army Commander, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRadioHandheldColony
+    - id: RMCLaserDesignator
+    - id: RMCDrinkAlcoholDavenport
+    - id: RMCZippoGold
+    - id: CMTarbackCigar
+
 # Unique Civ Survivor Fills
 - type: entity
   parent: CMSatchelEngineer

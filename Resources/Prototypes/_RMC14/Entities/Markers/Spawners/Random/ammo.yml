@@ -1,0 +1,224 @@
+# m54c mag
+- type: entity
+  parent: RMCSpawnerRandomGunBase
+  id: RMCSpawnerRandomMagazineM54C
+  name: m54c magazine spawner
+  description: This will spawn an M54C magazine
+  suffix: Guaranteed
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_m54c
+  - type: RandomSpawner
+    offset: 0
+    chance: 1.0
+    prototypes:
+    - CMMagazineRifleM54C
+
+- type: entity
+  parent: RMCSpawnerRandomMagazineM54C
+  id: RMCSpawnerRandomMagazineM54CMidHigh
+  suffix: High Chance
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_m54c_60
+  - type: RandomSpawner
+    chance: 0.6
+    prototypes:
+    - CMMagazineRifleM54C
+
+- type: entity
+  parent: RMCSpawnerRandomMagazineM54C
+  id: RMCSpawnerRandomMagazineM54CMid
+  suffix: Mid Chance
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_m54c_40
+  - type: RandomSpawner
+    chance: 0.4
+    prototypes:
+    - CMMagazineRifleM54C
+
+- type: entity
+  parent: RMCSpawnerRandomMagazineM54C
+  id: RMCSpawnerRandomMagazineM54CLow
+  suffix: Low Chance
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_m54c_20
+  - type: RandomSpawner
+    chance: 0.2
+    prototypes:
+    - CMMagazineRifleM54C
+
+# m54c extended mag
+
+- type: entity
+  parent: RMCSpawnerRandomGunBase
+  id: RMCSpawnerRandomMagazineM54CExt
+  name: m54c extended magazine spawner
+  description: This will spawn an M54C extended magazine
+  suffix: Guaranteed
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_m54c
+  - type: RandomSpawner
+    offset: 0
+    chance: 1.0
+    prototypes:
+    - CMMagazineRifleM54CExt
+
+- type: entity
+  parent: RMCSpawnerRandomMagazineM54CExt
+  id: RMCSpawnerRandomMagazineM54CExtMidHigh
+  suffix: High Chance
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_m54cext_60
+  - type: RandomSpawner
+    chance: 0.6
+
+- type: entity
+  parent: RMCSpawnerRandomMagazineM54CExt
+  id: RMCSpawnerRandomMagazineM54CExtMid
+  suffix: Mid Chance
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_m54cext_40
+  - type: RandomSpawner
+    chance: 0.4
+
+- type: entity
+  parent: RMCSpawnerRandomMagazineM54CExt
+  id: RMCSpawnerRandomMagazineM54CExtLow
+  suffix: Low Chance
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_m54cext_20
+  - type: RandomSpawner
+    chance: 0.2
+
+# m63 mag
+
+- type: entity
+  parent: RMCSpawnerRandomGunBase
+  id: RMCSpawnerRandomMagazineM63
+  name: m63 magazine spawner
+  description: This will spawn an M63 magazine
+  suffix: Guaranteed
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_m63
+  - type: RandomSpawner
+    offset: 0
+    chance: 1.0
+    prototypes:
+    - CMMagazineSMGM63
+
+- type: entity
+  parent: RMCSpawnerRandomMagazineM63
+  id: RMCSpawnerRandomMagazineM63MidHigh
+  suffix: High Chance
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_m63_60
+  - type: RandomSpawner
+    chance: 0.6
+
+- type: entity
+  parent: RMCSpawnerRandomMagazineM63
+  id: RMCSpawnerRandomMagazineM63Mid
+  suffix: Mid Chance
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_m63_40
+  - type: RandomSpawner
+    chance: 0.4
+
+- type: entity
+  parent: RMCSpawnerRandomMagazineM63
+  id: RMCSpawnerRandomMagazineM63Low
+  suffix: Low Chance
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_m63_20
+  - type: RandomSpawner
+    chance: 0.2
+
+# m4spr mag
+
+- type: entity
+  parent: RMCSpawnerRandomGunBase
+  id: RMCSpawnerRandomMagazineM4SPR
+  name: m4spr magazine spawner
+  description: This will spawn an M4SPR magazine
+  suffix: Guaranteed
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_m4spr
+  - type: RandomSpawner
+    offset: 0
+    chance: 1.0
+    prototypes:
+    - CMMagazineRifleM4SPR
+
+- type: entity
+  parent: RMCSpawnerRandomMagazineM4SPR
+  id: RMCSpawnerRandomMagazineM4SPRMidHigh
+  suffix: High Chance
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_m4spr_60
+  - type: RandomSpawner
+    chance: 0.6
+
+- type: entity
+  parent: RMCSpawnerRandomMagazineM4SPR
+  id: RMCSpawnerRandomMagazineM4SPRMid
+  suffix: Mid Chance
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_m4spr_40
+  - type: RandomSpawner
+    chance: 0.4
+
+- type: entity
+  parent: RMCSpawnerRandomMagazineM4SPR
+  id: RMCSpawnerRandomMagazineM4SPRLow
+  suffix: Low Chance
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_m4spr_20
+  - type: RandomSpawner
+    chance: 0.2

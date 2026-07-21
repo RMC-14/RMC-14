@@ -498,6 +498,14 @@
 
 - type: entity
   parent: CMLockerBase
+  id: RMCCabinetMetal
+  name: metal cabinet
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/cabinet_metal.rsi
+
+- type: entity
+  parent: CMLockerBase
   id: RMCLockerDetective
   name: detective's cabinet
   components:

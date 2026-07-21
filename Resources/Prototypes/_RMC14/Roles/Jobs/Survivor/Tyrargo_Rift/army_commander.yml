@@ -1,0 +1,72 @@
+﻿- type: job
+  parent: RMCSurvivorArmyBase
+  id: RMCSurvivorArmyCommander
+  name: rmc-job-name-forecon-commander
+  description: cm-job-description-commanding-officer
+  playTimeTracker: RMCJobSurvivorCO
+  ranks:
+    RMCRankMajor: []
+  accessGroups:
+  - ColonistEngi
+  startingGear: RMCGearArmyCommander
+  spawnMenuRoleName: UNMC Devil Dogs - Commander (Tyrargo Rift Survivor)
+  supervisors: cm-job-supervisors-marine-high-command
+  roleWeight: 0.25
+  icon: "RMCJobIconArmyCommander"
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetCommander
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: RMCTrackable
+    - type: JobPrefix
+      prefix: rmc-job-prefix-forecon-co
+    - type: CommandAccent
+    - type: InnateCommandSpeech
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: co
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_unmc
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadUNMC
+    - type: RMCAwardRecommendation
+      maxRecommendations: 4
+  hidden: true
+  useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
+
+- type: startingGear
+  parent: RMCGearArmyBase
+  id: RMCGearArmyCommander
+  equipment:
+    belt: RMCMatebaBeltForeconFilled
+    head: CMHeadCapCav
+    outerClothing: RMCJacketWindbreakerForeconFilled
+    back: RMCSatchelArmySurvivorCommanderFill
+    id: CMIDCardGold
+    ears: RMCHeadsetArmyCommander
+    eyes: RMCSunglasses
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointArmyCommander
+  name: army commander spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorArmyCommander
+  - type: Sprite
+    state: co_spawn
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconArmyCommander
+  icon:
+    sprite: _RMC14/Interface/job_icons/UNMC/army.rsi
+    state: hudsquad_co_army

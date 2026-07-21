@@ -1,0 +1,87 @@
+- type: entity
+  abstract: true
+  id: RMCPropTentBase
+  name: tent
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    noRot: true
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/_RMC14/Items/paper_ripped.ogg"
+        params:
+          volume: 3
+  - type: Physics
+    bodyType: Static
+    fixedRotation: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1.5,-0.5,1.4,2"
+        density: 190
+        layer:
+        - MobMask
+  - type: Sprite
+    sprite: _RMC14/Structures/tents.rsi
+    offset: 0, 1.5
+  - type: DeleteOnExplosion
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Corrodible
+    isCorrodible: false
+
+- type: entity
+  parent: RMCPropTentBase
+  id: RMCPropTentSmall
+  name: small tent
+  components:
+  - type: Sprite
+    state: small_tent
+
+- type: entity
+  parent: RMCPropTentBase
+  id: RMCPropTentMedical
+  name: medical tent
+  components:
+  - type: Sprite
+    state: medical_tent
+
+- type: entity
+  parent: RMCPropTentBase
+  id: RMCPropTentCommand
+  name: command tent
+  components:
+  - type: Sprite
+    state: command_tent
+
+- type: entity
+  parent: RMCPropTentBase
+  id: RMCPropTentSupply
+  name: supply tent
+  components:
+  - type: Sprite
+    state: supply_tent
+
+- type: entity
+  parent: RMCPropTentBase
+  id: RMCPropTentSmallBack
+  suffix: Back
+  name: small tent
+  components:
+  - type: Sprite
+    state: small_tent_back

@@ -1,0 +1,72 @@
+- type: job
+  parent: RMCSurvivorArmyBase
+  id: RMCSurvivorArmyCET
+  name: rmc-job-name-army-cet
+  startingGear: RMCGearArmyCET
+  icon: "RMCJobIconArmyCET"
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobCombatTech
+    time: 36000 # 10 hours
+  - !type:TotalJobsTimeRequirement
+    group: RMCJobsSurvivor
+    time: 5400 # 1.5 hours
+  spawnMenuRoleName: UNMC Devil Dogs - Combat Engineering Technician (Tyrargo Rift Survivor)
+  ranks:
+    RMCRankArmyPrivateFirstClass: []
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetEngineeringTechnician
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: medic
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadUNMC
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetArmyCET
+    - type: JobPrefix
+      prefix: rmc-job-prefix-army-cet
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearArmyBase
+  id: RMCGearArmyCET
+  equipment:
+    head: RMCArmorHelmetTyrargoEngineer
+    eyes: RMCGogglesBallisticPolarizedBlue
+    back: RMCBackpackArmySurvivorFillCET
+    belt: CMBeltUtilityFilled
+    gloves: CMHandsInsulated
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointArmyCET
+  name: army combat engineering technician spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorArmyCET
+  - type: Sprite
+    state: spec_spawn
+
+- type: entity
+  parent: RMCSurvivorPresetArmyNoPistol
+  id: RMCSurvivorPresetArmyCET
+  name: army combat engineering technician survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    randomOutfits:
+    - []
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconArmyCET
+  icon:
+    sprite: _RMC14/Interface/job_icons/UNMC/army.rsi
+    state: hudsquad_cet

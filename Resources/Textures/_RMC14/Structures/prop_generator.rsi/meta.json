@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "license": "CC-BY-3.0",
+  "copyright": "taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/structures/props/tyrargo_props.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "tyrargo_gen"
+    }
+  ]
+}

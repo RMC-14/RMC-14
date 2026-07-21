@@ -62,6 +62,52 @@
         Slash: 10
 
 - type: entity
+  parent: CMBarricadeBase
+  id: CMBarricadeHesco
+  name: HESCO barricade
+  description: A sandbag wall. Provides better protection than a makeshift sandbag barricade, but requires specialized equipment to set up.
+  components:
+  - type: BarricadeSandbag
+  - type: Climbable
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Effects/Footsteps/snowstep1.ogg"
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
+    layers:
+    - state: hesco
+      color: "#a98c7c"
+    - map: [ "acided" ]
+    drawdepth: WallTops
+  - type: GenericVisualizer
+    visuals:
+      enum.BarbedWireVisualLayers.Wire:
+      enum.SprayAcidedVisuals.Acided:
+        acided:
+          True:
+            sprite: _RMC14/Effects/xeno_spray_acid.rsi
+            state: acid
+            visible: true
+          False:
+            visible: false
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: CMHescoBarricade
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 500
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
   parent: BaseItem
   id: CMSandbagEmpty
   name: empty sandbags

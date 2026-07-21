@@ -112,6 +112,15 @@
   - type: Sprite
     state: solidgrate5
 
+- type: entity
+  parent: RMCMonorailStraight
+  id: RMCCatwalkHybrisaReinforcedGlass
+  name: reinforced glass floor
+  description: A heavily reinforced glass floor panel, this looks almost indestructible.
+  components:
+  - type: Sprite
+    state: reinforced_glass
+
 # Monorail
 
 - type: entity

@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/structures/props/natural/vegetation/tyrargo_wood_flora.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "stick_01"
+    },
+    {
+      "name": "stick_02"
+    },
+    {
+      "name": "stick_03"
+    },
+    {
+      "name": "stick_04"
+    },
+    {
+      "name": "trunk_01"
+    },
+    {
+      "name": "trunk_02"
+    }
+  ]
+}

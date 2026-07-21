@@ -199,6 +199,14 @@
 
 - type: entity
   parent: RMCMagazineML66D
+  id: RMCMagazineML66DEmpty
+  suffix: Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+
+- type: entity
+  parent: RMCMagazineML66D
   id: RMCMagazineML66DLarge
   name: large ML66D drum magazine (10x28mm)
   description: A box of 1500, 10x28mm caseless tungsten rounds for the ML66D heavy machine gun system.

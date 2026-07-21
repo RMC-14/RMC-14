@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/structures/props/large_tent_props.dmi. command_tent modified by kleinerstation13 (Github)",
+  "size": {
+    "x": 96,
+    "y": 128
+  },
+  "states": [
+      {
+          "name": "small_tent"
+      },
+      {
+          "name": "command_tent"
+      },
+      {
+          "name": "medical_tent"
+      },
+      {
+          "name": "small_tent_back"
+      },
+      {
+          "name": "supply_tent"
+      }
+  ]
+}

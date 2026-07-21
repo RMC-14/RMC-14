@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/8d7070ece1af7c4af3b4546c5e424c920c0b3591/icons/turf/walls/forest_veg.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "forest_veg"
+    },
+    {
+      "name": "forest_veg0",
+      "directions": 4
+    },
+    {
+      "name": "forest_veg1",
+      "directions": 4
+    },
+    {
+      "name": "forest_veg2",
+      "directions": 4
+    },
+    {
+      "name": "forest_veg3",
+      "directions": 4
+    },
+    {
+      "name": "forest_veg4",
+      "directions": 4
+    },
+    {
+      "name": "forest_veg5",
+      "directions": 4
+    },
+    {
+      "name": "forest_veg6",
+      "directions": 4
+    },
+    {
+      "name": "forest_veg7",
+      "directions": 4
+    }
+  ]
+}

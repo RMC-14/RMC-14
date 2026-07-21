@@ -1,0 +1,4 @@
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetForest1
+  sprite: /Textures/_RMC14/Tiles/planet/forest/forest_1.png

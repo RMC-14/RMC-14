@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "license": "CC-BY-3.0",
+  "copyright": "taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/vehices/vtol_prop.dmi",
+  "size": {
+    "x": 160,
+    "y": 160
+  },
+  "states": [
+    {
+      "name": "vtol",
+      "directions": 4
+    },
+    {
+      "name": "vtol_damaged",
+      "directions": 4
+    }
+  ]
+}

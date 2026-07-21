@@ -98,6 +98,37 @@
           tags:
           - CMMagazinePistolM77AP
 
+- type: entity
+  parent: RMCWeaponPistolM77
+  id: RMCWeaponPistolM77Army
+  suffix: Army
+  components:
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        startingAttachable: RMCAttachmentExtendedBarrel
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentSuppressor
+          - RMCAttachmentSuppressorCompact
+      rmc-aslot-rail:
+        startingAttachable: RMCAttachmentS6ReflexSight
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBurstFireAssembly
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentLaserSight
 
 - type: entity
   parent: CMBaseMagazinePistol

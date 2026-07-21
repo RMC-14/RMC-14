@@ -1,0 +1,73 @@
+- type: job
+  parent: RMCSurvivorArmyBase
+  id: RMCSurvivorArmyCMT
+  name: rmc-job-name-army-cmt
+  startingGear: RMCGearArmyCMT
+  icon: "RMCJobIconArmyCMT"
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobHospitalCorpsman
+    time: 36000 # 10 hours
+  - !type:TotalJobsTimeRequirement
+    group: RMCJobsSurvivor
+    time: 5400 # 1.5 hours
+  spawnMenuRoleName: UNMC Devil Dogs - Combat Medical Technician (Tyrargo Rift Survivor)
+  ranks:
+    RMCRankArmyPrivateFirstClass: []
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetArmyMedicalTechnician
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: medic
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadUNMC
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetArmyCMT
+    - type: JobPrefix
+      prefix: rmc-job-prefix-army-cmt
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearArmyBase
+  id: RMCGearArmyCMT
+  equipment:
+    head: RMCArmorHelmetTyrargoMedic
+    eyes: RMCGogglesBallisticPolarizedBlue
+    back: RMCBackpackArmySurvivorFillCMT
+    belt: CMBeltMedicalFilled
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointArmyCMT
+  name: army combat medical technician spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorArmyCMT
+  - type: Sprite
+    state: spec_spawn
+
+- type: entity
+  parent: RMCSurvivorPresetArmyNoPistol
+  id: RMCSurvivorPresetArmyCMT
+  name: army combat medical technician survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    randomGear:
+    - [ CMAdvFirstAidKitFilled ]
+    randomOutfits:
+    - []
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconArmyCMT
+  icon:
+    sprite: _RMC14/Interface/job_icons/UNMC/army.rsi
+    state: hudsquad_cmt

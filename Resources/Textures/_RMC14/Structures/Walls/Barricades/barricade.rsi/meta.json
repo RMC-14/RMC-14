@@ -209,6 +209,10 @@
     {
       "name": "centerroadbarrier2",
       "directions": 4
+    },
+    {
+      "name": "hesco",
+      "directions": 4
     }
   ]
 }
