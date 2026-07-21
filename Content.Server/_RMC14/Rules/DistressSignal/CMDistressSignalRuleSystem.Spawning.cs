@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Server.GameTicking;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
@@ -58,7 +58,7 @@ public sealed partial class CMDistressSignalRuleSystem
         ApplyJobSlotScaling(comp, ev);
 
         var initialPlayerCount = ev.PlayerPool.Count;
-        SelectAndSpawnXenos(comp, ev);
+        SelectAndSpawnXenos(comp, ev, initialPlayerCount);
         SpawnSurvivors(comp, ev, initialPlayerCount);
 
         if (_spawnedDropships) return;
@@ -129,10 +129,7 @@ public sealed partial class CMDistressSignalRuleSystem
     {
         var totalPlayers = ev.PlayerPool.Count;
         var vehicleThreshold = _config.GetCVar(RMCCVars.RMCVehicleRoundstartThresholdPlayers);
-        var totalXenos = (int) Math.Round(Math.Max(1, totalPlayers / _marinesPerXeno));
-        // TODO RMC14 dont count survivors
-        var totalSurvivors = (int) Math.Clamp((int) Math.Round(totalPlayers / _marinesPerSurvivor), _minimumSurvivors, _maximumSurvivors);
-        var marines = totalPlayers - totalXenos - totalSurvivors;
+        var marines = GetRoundstartMarineMinimum(totalPlayers);
         var roundstartTank = totalPlayers >= vehicleThreshold;
         var crewmanSlots = roundstartTank ? 2 : 0;
 
@@ -208,7 +205,7 @@ public sealed partial class CMDistressSignalRuleSystem
     /// </summary>
     /// <param name="comp">The distress signal rule component.</param>
     /// <param name="ev">The rule player spawning event.</param>
-    private void SelectAndSpawnXenos(CMDistressSignalRuleComponent comp, RulePlayerSpawningEvent ev)
+    private void SelectAndSpawnXenos(CMDistressSignalRuleComponent comp, RulePlayerSpawningEvent ev, int initialPlayerCount)
     {
         if (!comp.SpawnXenos)
             return;
@@ -247,7 +244,7 @@ public sealed partial class CMDistressSignalRuleSystem
             return playerId;
         }
 
-        var totalXenos = (int) Math.Round(Math.Max(1, ev.PlayerPool.Count / _marinesPerXeno));
+        var totalXenos = GetRoundstartXenoLimit(initialPlayerCount);
         var priorities = Enum.GetValues<JobPriority>().Length;
         var xenoCandidates = new List<NetUserId>[priorities];
         for (var i = 0; i < priorities; i++)
@@ -296,8 +293,18 @@ public sealed partial class CMDistressSignalRuleSystem
             }
         }
 
-        if (totalXenos - selectedXenos > 0)
-            _hive.ChangeBurrowedLarva(totalXenos - selectedXenos);
+        var unfilledXenoSlots = totalXenos - selectedXenos;
+        if (unfilledXenoSlots > 0)
+        {
+            // If not every xeno slot is filled, that means there will be more marines than calculated.
+            // Because of that, we can't just turn unfilled slots to burrowed, we actually need to add some extra
+            // burrowed to account for the extra marines. The number of unfilled slots directly translates to marines,
+            // so we can use that to calculate the marine count.
+            // To be consistent with GetRoundstartXenoLimit, we use marine + surv count to calculate number of xenos.
+            var correctedNonxenoCount = GetRoundstartMarineMinimum(initialPlayerCount) + GetRoundstartSurvLimit(initialPlayerCount) + unfilledXenoSlots;
+            var correctedTotalXenos = (int)Math.Floor(correctedNonxenoCount / _marinesPerXeno);
+            _hive.ChangeBurrowedLarva(Math.Max(unfilledXenoSlots, correctedTotalXenos - selectedXenos));
+        }
     }
 
     private EntityUid SpawnXenoEnt(EntProtoId ent, ICommonSession player, bool doBurst,
