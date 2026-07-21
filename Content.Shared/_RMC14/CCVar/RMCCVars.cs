@@ -60,6 +60,12 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<int> RMCAutoBalanceLastAdjustment =
         CVarDef.Create("rmc.auto_balance_last_adjustment", 0, CVar.SERVER | CVar.SERVERONLY);
 
+    /// <summary>
+    /// Enables or disables the autobalance only adjusting on streaks.
+    /// </summary>
+    public static readonly CVarDef<bool> RMCAutoBalanceStreakOnly =
+        CVarDef.Create("rmc.auto_balance_streak_only", false, CVar.SERVER |CVar.SERVERONLY);
+
     public static readonly CVarDef<int> RMCPatronLobbyMessageTimeSeconds =
         CVarDef.Create("rmc.patron_lobby_message_time_seconds", 30, CVar.REPLICATED | CVar.SERVER);
 

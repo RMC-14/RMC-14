@@ -278,11 +278,12 @@ public sealed partial class CMDistressSignalRuleSystem
                 _ => throw new ArgumentOutOfRangeException(),
             };
 
-            // Only make an adjustment if we are trying to make the SAME adjustment two rounds in a row.
             if (adjust != _autoBalanceLastAdjustment)
             {
                 _config.SetCVar(RMCCVars.RMCAutoBalanceLastAdjustment, adjust);
-                break;
+                // If streak only is enabled, don't make an adjustment because this adjustment was different from the previous attempt.
+                if (_autoBalanceStreakOnly)
+                    break;
             }
 
             if (adjust == 0)
