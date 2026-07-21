@@ -24,7 +24,6 @@ using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using Content.Shared._RMC14.Chat;
 
 namespace Content.Shared._RMC14.Marines.Skills;
 
