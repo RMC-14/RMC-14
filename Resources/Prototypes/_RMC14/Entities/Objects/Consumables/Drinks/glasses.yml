@@ -84,5 +84,4 @@
   - type: Tag
     tags:
     - DrinkGlass
-  - type: ExaminableSolution
-    solution: drink
+  - type: TransformableContainer
