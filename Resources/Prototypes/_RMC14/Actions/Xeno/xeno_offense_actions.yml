@@ -1029,6 +1029,7 @@
   - type: TargetAction
     range: 15
     checkCanAccess: false
+    repeat: true
   - type: WorldTargetAction
     event: !type:XenoPierceActionEvent
   - type: ActionBlockIfResting
@@ -1051,6 +1052,7 @@
   components:
   - type: Action
     useDelay: 0
+    repeat: true
   - type: ActionBlockIfResting
 
 - type: entity
