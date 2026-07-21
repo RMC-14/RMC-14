@@ -1,5 +1,4 @@
 ﻿using Content.Shared._RMC14.Medical.HUD.Components;
-using Content.Shared.Actions;
 using Content.Shared.Body.Organ;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
@@ -14,7 +13,7 @@ using Content.Shared.Whitelist;
 namespace Content.Shared._RMC14.Synth;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedSynthSystem))]
+[Access(typeof(SharedSynthSystem), typeof(SharedSynthGenerationSystem))]
 public sealed partial class SynthComponent : Component
 {
     [DataField]
@@ -22,18 +21,6 @@ public sealed partial class SynthComponent : Component
 
     [DataField]
     public EntProtoId RemoveComponents = "RMCSynthRemoveComponents";
-
-    [DataField]
-    public EntProtoId HudComponents = "RMCSynthHudComponents";
-
-    [DataField]
-    public EntProtoId ToggleHudAction = "RMCActionToggleSynthHud";
-
-    [DataField, AutoNetworkedField]
-    public EntityUid? ToggleHudActionEntity;
-
-    [DataField, AutoNetworkedField]
-    public bool HudActive = true;
 
     /// <summary>
     /// The final stun duration (after endurance skill) is divided by this number.
@@ -61,12 +48,6 @@ public sealed partial class SynthComponent : Component
 
     [DataField, AutoNetworkedField]
     public LocId SpeciesName = "rmc-species-name-synth";
-
-    /// <summary>
-    /// I.E. 1st generation, 3rd generation.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public LocId Generation = "rmc-species-synth-generation-third";
 
     [DataField, AutoNetworkedField]
     public LocId FixedIdentityReplacement = "cm-chatsan-replacement-synth";
@@ -144,6 +125,4 @@ public sealed partial class SynthComponent : Component
     public TimeSpan NextUnableUsePopup;
 
 }
-
-public sealed partial class RMCToggleSynthHudActionEvent : InstantActionEvent;
 

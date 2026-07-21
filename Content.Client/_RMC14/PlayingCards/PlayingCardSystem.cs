@@ -1,9 +1,7 @@
 using System.Numerics;
 using Content.Shared._RMC14.PlayingCards;
 using Content.Shared.Hands;
-using Content.Shared.Hands.EntitySystems;
 using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
@@ -13,7 +11,6 @@ namespace Content.Client._RMC14.PlayingCards;
 public sealed class PlayingCardSystem : SharedPlayingCardSystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
 
@@ -80,7 +77,7 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
         if (showFaceUp &&
             _container.TryGetContainingContainer(ent.Owner, out var container) &&
             container.Owner != _player.LocalEntity &&
-            _hands.IsHolding(container.Owner, ent.Owner))
+            Hands.IsHolding(container.Owner, ent.Owner))
         {
             showFaceUp = false;
         }
@@ -138,7 +135,7 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
         try
         {
             UpdateHandSprite(ent);
-            if (_ui.TryGetOpenUi<PlayingCardHandBui>(ent.Owner, PlayingCardHandUi.Key, out var bui))
+            if (Ui.TryGetOpenUi<PlayingCardHandBui>(ent.Owner, PlayingCardHandUi.Key, out var bui))
                 bui.Refresh();
         }
         catch (Exception e)
@@ -192,7 +189,7 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
         if (showFaceUp &&
             _container.TryGetContainingContainer(ent.Owner, out var container) &&
             container.Owner != _player.LocalEntity &&
-            _hands.IsHolding(container.Owner, ent.Owner))
+            Hands.IsHolding(container.Owner, ent.Owner))
         {
             showFaceUp = false;
         }
@@ -231,13 +228,13 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
         }
     }
 
-    public override void FlipCard(Entity<PlayingCardComponent> card, EntityUid user)
+    protected override void FlipCard(Entity<PlayingCardComponent> card, EntityUid user)
     {
         base.FlipCard(card, user);
         UpdateCardSprite(card);
     }
 
-    public override void FlipHand(Entity<PlayingCardHandComponent> hand, EntityUid user)
+    protected override void FlipHand(Entity<PlayingCardHandComponent> hand, EntityUid user)
     {
         base.FlipHand(hand, user);
         UpdateHandSprite(hand);

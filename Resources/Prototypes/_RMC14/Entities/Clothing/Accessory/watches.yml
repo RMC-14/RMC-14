@@ -11,11 +11,11 @@
     hiddenByJacketRolling: false
   - type: RMCClock
   - type: Tag
-    tags: 
+    tags:
     - Watch
   - type: Item
-    size: Normal
-    
+    size: Small
+
 - type: entity
   abstract: true
   parent: [RMCBaseUniformAccessory, ClothingHandsBase]
@@ -29,12 +29,12 @@
     hiddenByJacketRolling: false
   - type: RMCClock
   - type: Tag
-    tags: 
+    tags:
     - Watch
   - type: Item
-    size: Normal
+    size: Small
 
-- type: entity 
+- type: entity
   parent: RMCWatchBaseL
   id: RMCWatchCheap
   name: cheap digital watch
@@ -47,13 +47,13 @@
     playerSprite:
       sprite: _RMC14/Objects/Clothing/Accessory/Watches/pdt.rsi
       state: watchL
-  - type: Clothing 
+  - type: Clothing
     sprite: _RMC14/Objects/Clothing/Accessory/Watches/pdt.rsi
   - type: Tag
-    tags: 
+    tags:
     - Watch
 
-- type: entity 
+- type: entity
   parent: RMCWatchBaseL
   id: RMCWatchBasic
   name: Seikaku Pulsemeter wristwatch
@@ -66,10 +66,10 @@
     playerSprite:
       sprite: _RMC14/Objects/Clothing/Accessory/Watches/black.rsi
       state: watchL
-  - type: Clothing 
+  - type: Clothing
     sprite: _RMC14/Objects/Clothing/Accessory/Watches/black.rsi
-    
-- type: entity 
+
+- type: entity
   parent: RMCWatchBaseL
   id: RMCWatchSynth
   name: Seikaku 13B6-2000 wristwatch
@@ -82,10 +82,10 @@
     playerSprite:
       sprite: _RMC14/Objects/Clothing/Accessory/Watches/black.rsi
       state: watchL
-  - type: Clothing 
+  - type: Clothing
     sprite: _RMC14/Objects/Clothing/Accessory/Watches/black.rsi
-    
-- type: entity 
+
+- type: entity
   parent: RMCWatchBaseL
   id: RMCWatchSurv
   name: Seikaku 13B6-3000 wristwatch
@@ -98,10 +98,10 @@
     playerSprite:
       sprite: _RMC14/Objects/Clothing/Accessory/Watches/silver.rsi
       state: watchL
-  - type: Clothing 
+  - type: Clothing
     sprite: _RMC14/Objects/Clothing/Accessory/Watches/silver.rsi
-    
-- type: entity 
+
+- type: entity
   parent: RMCWatchBaseL
   id: RMCWatchLiaison
   name: Seikaku H487-9098 wristwatch
@@ -114,10 +114,10 @@
     playerSprite:
       sprite: _RMC14/Objects/Clothing/Accessory/Watches/silver.rsi
       state: watchL
-  - type: Clothing 
+  - type: Clothing
     sprite: _RMC14/Objects/Clothing/Accessory/Watches/silver.rsi
 
-- type: entity 
+- type: entity
   parent: RMCWatchBaseL
   id: RMCWatchPilot
   name: Veniti E-338 wristwatch
@@ -130,5 +130,5 @@
     playerSprite:
       sprite: _RMC14/Objects/Clothing/Accessory/Watches/fancy.rsi
       state: watchL
-  - type: Clothing 
+  - type: Clothing
     sprite: _RMC14/Objects/Clothing/Accessory/Watches/fancy.rsi

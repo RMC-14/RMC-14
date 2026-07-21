@@ -19,31 +19,15 @@
       - RoyalMarines
       - TSE
     - type: Skills
-      skills:
-        RMCSkillCqc: 3
-        RMCSkillFirearms: 2
-        RMCSkillPolice: 2
-        RMCSkillFireman: 3
-        RMCSkillConstruction: 2
-        RMCSkillEngineer: 2
-        RMCSkillEndurance: 3
-        RMCSkillMedical: 2
-        RMCSkillSurgery: 1
-        RMCSkillMeleeWeapons: 1
-        RMCSkillJtac: 3
-        RMCSkillVehicles: 2
-        RMCSkillLeadership: 2
-        RMCSkillPilot: 1
-        RMCSkillIntel: 1
-        RMCSkillPowerLoader: 1
+      preset: RMCSkillPresetRoyalLieutenant
     - type: MarineOrders
     - type: RMCPointing
     - type: CommandAccent
     - type: ViewIntelObjectives
     - type: SquadLeader
       icon:
-       sprite: _RMC14/Interface/cm_job_icons.rsi
-       state: rmc_lieutenant
+       sprite: _RMC14/Interface/job_icons/TSE/RCM/standard.rsi
+       state: rcm_lieutenant
     - type: RMCTrackable
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-lieutenant
@@ -86,5 +70,5 @@
   parent: CMJobIconBase
   id: RMCJobIconRoyalLieutenant
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_lieutenant
+    sprite: _RMC14/Interface/job_icons/TSE/RCM/standard.rsi
+    state: rcm_lieutenant

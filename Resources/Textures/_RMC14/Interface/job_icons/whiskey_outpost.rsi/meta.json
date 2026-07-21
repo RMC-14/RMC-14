@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from https://github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi",
+  "size": {
+    "x": 16,
+    "y": 16
+  },
+    "states": [
+        {
+            "name": "hudsquad_hg"
+        },
+        {
+            "name": "hudsquad_hgalt"
+        },
+        {
+            "name": "hudsquad_hgsl"
+        },
+        {
+            "name": "hudsquad_hgspec"
+        },
+        {
+            "name": "hudsquad_vhg"
+        },
+        {
+            "name": "hudsquad_wo_chemist"
+        },
+        {
+            "name": "hudsquad_wo_cmo"
+        },
+        {
+            "name": "hudsquad_wo_co"
+        },
+        {
+            "name": "hudsquad_wo_doctor"
+        },
+        {
+            "name": "hudsquad_wo_mcrew"
+        },
+        {
+            "name": "hudsquad_wo_ro"
+        },
+        {
+            "name": "hudsquad_wo_xo"
+        }
+    ]
+}

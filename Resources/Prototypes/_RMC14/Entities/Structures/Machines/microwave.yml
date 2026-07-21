@@ -2,6 +2,8 @@
   parent: KitchenMicrowave
   id: CMMicrowave
   components:
+  - type: Microwave
+    maxItemSize: Huge
   - type: Transform
     anchored: false
   - type: Physics

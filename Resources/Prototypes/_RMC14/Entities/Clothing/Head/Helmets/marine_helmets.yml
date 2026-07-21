@@ -378,6 +378,8 @@
     interfaces:
       enum.RMCTelephoneUiKey.Key:
         type: RMCTelephoneBui
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
   - type: ActivatableUIBlacklist
     blacklist:
       components:
