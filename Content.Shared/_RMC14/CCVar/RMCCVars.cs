@@ -50,7 +50,7 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.auto_balance_min", 3f, CVar.SERVER | CVar.SERVERONLY);
 
     public static readonly CVarDef<float> RMCAutoBalanceMax =
-        CVarDef.Create("rmc.auto_balance_max", 6.5f, CVar.SERVER | CVar.SERVERONLY);
+        CVarDef.Create("rmc.auto_balance_max", 5.5f, CVar.SERVER | CVar.SERVERONLY);
 
     /// <summary>
     /// An automatically adjusted CVar that tracks the last adjustment to CMMarinesPerXeno. To make the autobalance
