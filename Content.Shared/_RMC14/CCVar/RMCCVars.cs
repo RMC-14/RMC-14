@@ -273,7 +273,14 @@ public sealed partial class RMCCVars : CVars
     /// Set to 0 to disable adjustment.
     /// </summary>
     public static readonly CVarDef<float> RMCLateJoinsPerBurrowedAdjustment =
-        CVarDef.Create("rmc.late_joins_per_burrowed_adjustment", 0f, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.late_joins_per_burrowed_adjustment", -1.5f, CVar.REPLICATED | CVar.SERVER);
+
+    /// <summary>
+    /// The minimum amount of late joins required for one burrowed larva. Prevents the adjustment
+    /// from adjusting the late join requirement too low.
+    /// </summary>
+    public static readonly CVarDef<float> RMCLateJoinsPerBurrowedMinimum =
+        CVarDef.Create("rmc.late_joins_per_burrowed_minimum", 2.5f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> RMCLateJoinsBurrowedLarvaDeathTime =
         CVarDef.Create("rmc.late_joins_burrowed_larva_death_time", 2.5f, CVar.REPLICATED | CVar.SERVER);

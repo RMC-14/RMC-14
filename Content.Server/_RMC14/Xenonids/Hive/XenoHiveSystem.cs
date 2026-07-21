@@ -50,6 +50,7 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
 
     private TimeSpan _lateJoinsPerBurrowedAdjustmentThreshold;
     private float _lateJoinsPerBurrowedAdjustment;
+    private float _lateJoinsPerBurrowedMinimum;
     private float _marinesPerXeno;
 
     private const int InvinciblePer = 10;
@@ -70,6 +71,7 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
             v => _lateJoinsPerBurrowedAdjustmentThreshold = TimeSpan.FromMinutes(v),
             true);
         Subs.CVar(_config, RMCCVars.RMCLateJoinsPerBurrowedAdjustment, v => _lateJoinsPerBurrowedAdjustment = v, true);
+        Subs.CVar(_config, RMCCVars.RMCLateJoinsPerBurrowedMinimum, v => _lateJoinsPerBurrowedMinimum = v, true);
         Subs.CVar(_config, RMCCVars.CMMarinesPerXeno, v => _marinesPerXeno = v, true);
     }
 
@@ -92,8 +94,7 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
         var lateJoinsPer = _marinesPerXeno;
         if (time >= _lateJoinsPerBurrowedAdjustmentThreshold)
             lateJoinsPer += _lateJoinsPerBurrowedAdjustment;
-        // prevent adjustment from producing too many burrowed
-        lateJoinsPer = Math.Max(lateJoinsPer, 1f);
+        lateJoinsPer = Math.Max(lateJoinsPer, _lateJoinsPerBurrowedMinimum);
 
         var hives = EntityQueryEnumerator<HiveComponent>();
         while (hives.MoveNext(out var uid, out var hive))
