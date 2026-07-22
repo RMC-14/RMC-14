@@ -110,6 +110,7 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleCrewMaintenanceEssentials
+  categories: [ HideSpawnMenu ]
   name: essential maintenance set
   description: Contains a flashlight and a light replacer.
   components:
