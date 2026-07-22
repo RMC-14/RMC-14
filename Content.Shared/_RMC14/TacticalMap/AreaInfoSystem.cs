@@ -201,14 +201,13 @@ public sealed class AreaInfoSystem : EntitySystem
 
         var weedkillerZones = new List<string>();
         var check = new string(area.Value.Comp.LinkedLz);
-        var numbersToWords = new List<string> { "Zero", "One", "Two", "Three", "Four", "Five" };
         if (!string.IsNullOrWhiteSpace(check))
-            for (int i = 0; i <= 5; i++)
-            {
-                string place = i.ToString();
-                if (check.Contains(place))
-                    weedkillerZones.Add("Landing Zone " + numbersToWords[i]);
-            }
+            if (check.Contains("dropship_lz1"))
+                weedkillerZones.Add("Landing Zone One");
+            if (check.Contains("dropship_lz2"))
+                weedkillerZones.Add("Landing Zone Two");
+            if (check.Contains("dropship_lz3"))
+                weedkillerZones.Add("Landing Zone Three");
 
         var protectionSource = "";
         if (hasHiveCoreProtection)
