@@ -73,7 +73,7 @@ rmc-xeno-construction-default-tunnel-name = {$areaName} ({$coordX}, {$coordY}) {
 rmc-xeno-construction-default-area-name = Unknown
 
 rmc-xeno-construction-failed-tunnel-rename = Tunnel names must be unique!
-rmc-xeno-construction-tunnel-examine = The pheromone scent reads: {$tunnelName}
+rmc-xeno-construction-tunnel-examine = The pheromone scent reads: '{$tunnelName}'
 rmc-xeno-construction-tunnel-examine-not-xeno-empty = [color=purple][italic]It's a dark abyss...[/italic][/color]
 rmc-xeno-construction-tunnel-examine-not-xeno = [color=purple][italic]It's a dark abyss with a few little...lights...almost like something is watching.[/italic][/color]
 
