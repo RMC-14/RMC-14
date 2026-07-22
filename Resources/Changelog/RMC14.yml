@@ -1,23 +1,6 @@
 ﻿Entries:
 - author: kleinerstation13
   changes:
-  - message: Survivor now spawn together instead of separately on Trijent Dam. Their
-      holdout locations include the Dam, Bar and Hospital.
-    type: Tweak
-  id: 3015
-  time: '2026-03-26T10:49:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9421
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added United Nations Representative Steve Haifisch
-    type: Add
-  - message: The new varadero LZs have received a small passover
-    type: Tweak
-  id: 3016
-  time: '2026-03-26T10:50:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9435
-- author: kleinerstation13
-  changes:
   - message: Fixed SPP SOF not being able to open their own dropship doors
     type: Fix
   - message: Fixed SPP SOF not spawning with shortwave radios
@@ -4580,5 +4563,28 @@
   id: 3514
   time: '2026-07-17T12:46:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10440
+- author: IceNoobXD
+  changes:
+  - message: Hybrisa Prospera (LV-759) has recived a whole map passover, adding numerous
+      new props to bring it more in line with its CMSS13 counterpart. Added Box vans
+      near pizza galaxy and freights and wheels for them in biogen, ironbridge and
+      garage. Additionally 3 random supply kit spawners and 2 seized foreign equipment
+      crates have been added!
+    type: Add
+  - message: Miyahira a subsidiary of Weston-Yamada has replaced Meridian and Mizutani!
+    type: Tweak
+  id: 3515
+  time: '2026-07-18T16:26:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9800
+- author: Whisper
+  changes:
+  - message: Updated language rules to clarify mechanical languages are allowed.
+    type: Tweak
+  - message: Updated roleplay rules to account for UNMC Marine correspondent. They
+      are not restricted in any way from combat.
+    type: Tweak
+  id: 3516
+  time: '2026-07-22T14:53:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10283
 Name: RMC14
 Order: -1
