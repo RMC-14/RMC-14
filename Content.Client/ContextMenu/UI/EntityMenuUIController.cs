@@ -164,16 +164,18 @@ namespace Content.Client.ContextMenu.UI
                 // RMC start
                 // Don't close the menu on use if the user is currently using a repeatable action.
                 var _controller = UIManager.GetUIController<ActionUIController>();
-                if (!(args.Function == EngineKeyFunctions.Use)
-                    || _controller.SelectingTargetFor is not { } selectedActionId
-                    || _actionsSystem.GetAction(selectedActionId) is not { } action
-                    || !EntityManager.TryGetComponent<TargetActionComponent>(action, out var target)
-                    || !target.Repeat)
+                if (args.Function == EngineKeyFunctions.Use
+                    && _controller.SelectingTargetFor is { } selectedActionId
+                    && _actionsSystem.GetAction(selectedActionId) is { } action
+                    && EntityManager.TryGetComponent<TargetActionComponent>(action, out var target)
+                    && target.Repeat)
                 {
-                    _context.Close();
+                    args.Handle();
+                    return;
                 }
                 // RMC end
 
+                _context.Close();
                 args.Handle();
             }
         }
