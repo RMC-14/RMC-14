@@ -9,5 +9,5 @@ namespace Content.Shared._RMC14.Xenonids.Weeds;
 public sealed partial class XenoWeedsDecayingComponent : Component
 {
     [DataField]
-    public float Lifetime;
+    public TimeSpan DecayAt;
 }

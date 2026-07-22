@@ -207,7 +207,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
 
                         weedable.Entity = SpawnAtPosition(weedable.Spawn, anchoredId.ToCoordinates());
                         var wallWeeds = EnsureComp<XenoWallWeedsComponent>(weedable.Entity.Value);
-                        wallWeeds.Weeds = neighborWeeds;
+                        wallWeeds.SourceWeeds = neighborWeeds;
                         wallWeeds.AttachedTo = anchoredId;
                         Dirty(weedable.Entity.Value, wallWeeds);
 
@@ -224,10 +224,8 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
         var decayingQuery = EntityQueryEnumerator<XenoWeedsDecayingComponent>();
         while (decayingQuery.MoveNext(out var uid, out var comp))
         {
-            comp.Lifetime -= frameTime;
-
             // Before despawning the weed entity, check to see if there's a different node in range which could take over as its parent.
-            if (comp.Lifetime <= 0 && !TryAvoidOrphanage(uid))
+            if (time >= comp.DecayAt && !TryAvoidOrphanage(uid))
             {
                 QueueDel(uid);
             }
@@ -254,8 +252,8 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
 
         if (FindNewParentNode((weedEnt, weedsComp)) is not { } newParent)
             return false;
-        // Found a new parent! (yippee)
 
+        // Found a new parent! (yippee)
         RemComp<XenoWeedsDecayingComponent>(weedEnt);
 
         weedsComp.Source = newParent;

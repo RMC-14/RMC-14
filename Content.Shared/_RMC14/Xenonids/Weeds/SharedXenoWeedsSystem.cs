@@ -202,7 +202,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
             var decaying = EnsureComp<XenoWeedsDecayingComponent>(spread);
             var offset = _random.Next(ent.Comp.MinRandomDelete, ent.Comp.MaxRandomDelete);
-            decaying.Lifetime = (float)offset.TotalSeconds;
+            decaying.DecayAt = _timing.CurTime + offset;
         }
 
         ent.Comp.Spread.Clear();
@@ -254,11 +254,15 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         if (WeedableQuery.TryComp(ent.Comp.AttachedTo, out var weedable) && weedable.Entity == ent.Owner)
         {
             weedable.Entity = null;
-            Dirty(ent.Comp.AttachedTo, weedable);
+            Dirty(ent.Comp.AttachedTo.Value, weedable);
         }
 
-        if (WeedsQuery.TryComp(ent.Comp.Weeds, out var weeds) && weeds.LocalWeeded.Remove(ent.Comp.AttachedTo))
-            Dirty(ent.Comp.Weeds, weeds);
+        if (ent.Comp.SourceWeeds is { } sourceWeeds &&
+            WeedsQuery.TryComp(sourceWeeds, out var weeds) &&
+            weeds.LocalWeeded.Remove(sourceWeeds))
+        {
+            Dirty(sourceWeeds, weeds);
+        }
     }
 
     private void OnWeedableAnchorStateChanged(Entity<XenoWeedableComponent> weedable, ref AnchorStateChangedEvent args)
@@ -420,7 +424,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
     public bool HasWeedNodeNearby(Entity<MapGridComponent> grid, EntityCoordinates coordinates, int range = 5)
     {
-        return GetNearbyWeeds(grid, coordinates, range).Count > 1;
+        return GetNearbyWeeds(grid, coordinates, range).Count != 0;
     }
 
     public bool IsOnHiveWeeds(Entity<MapGridComponent> grid, EntityCoordinates coordinates, bool sourceOnly = false)

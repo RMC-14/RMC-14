@@ -10,11 +10,11 @@ public sealed partial class XenoWallWeedsComponent : Component
     /// The weed tile which caused these wall weeds to grow.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public EntityUid Weeds;
+    public EntityUid? SourceWeeds;
 
     /// <summary>
     /// The entity that the wall weeds are attached to.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public EntityUid AttachedTo;
+    public EntityUid? AttachedTo;
 }
