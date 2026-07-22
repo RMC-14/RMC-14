@@ -49,10 +49,8 @@ public sealed partial class EggMorpherSystem : EntitySystem
 
     private void OnExamineEvent(Entity<EggMorpherComponent> eggMorpher, ref ExaminedEvent args)
     {
-        if (!HasComp<XenoComponent>(args.Examiner))
-        {
+        if (!HasComp<XenoComponent>(args.Examiner) && !HasComp<GhostComponent>(args.Examiner))
             return;
-        }
 
         using (args.PushGroup(nameof(EggMorpherComponent)))
         {
