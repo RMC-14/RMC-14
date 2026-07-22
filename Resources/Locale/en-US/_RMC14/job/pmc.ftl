@@ -87,6 +87,7 @@ rmc-job-name-pmc-corporate-goon-engi = We-Ya Corporate Security Technician
 rmc-job-name-pmc-corporate-goon-medic = We-Ya Corporate Security Medic
 rmc-job-name-pmc-corporate-goon-leader = We-Ya Corporate Security Lead
 rmc-job-name-pmc-corporate-goon-secguard = We-Ya Security Guard
+rmc-job-name-pmc-corporate-goon-synth = We-Ya Corporate Security Synthetic
 
 rmc-job-name-pmc-pve-team-leader = Team Leader
 rmc-job-prefix-pmc-pve-team-leader = TL

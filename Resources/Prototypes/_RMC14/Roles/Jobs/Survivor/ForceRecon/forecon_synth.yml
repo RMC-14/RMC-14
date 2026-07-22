@@ -61,20 +61,24 @@
   id: RMCGearForeconSynthetic
   equipment:
     id: RMCIDCardSynth
-    back: CMSatchelFillColonySynthetic # TODO RMC14 check loadouts for synth survivors to see if there's a backpack category
+    back: CMSatchelMarine
     jumpsuit: CMJumpsuitMaintTech
-    shoes: CMBootsBlackFilled # TODO RMC14 replace with unique red shoes that hold a knife
+    shoes: RMCShoesRedKnife
     ears: RMCHeadsetForecon
     pocket1: RMCPouchToolsFill
     pocket2: RMCPouchSurvivalSynthFill
   inhand:
     - RMCMotionDetector
     - CMFirstAidKitFilled
+  storage:
+    back:
+    - RMCSynthResetKey
 
 - type: entity
   parent: CMSpawnPointJobBase
   id: CMSpawnPointForeconSynth
   name: forecon synthetic spawn point
+  suffix: survivor
   components:
   - type: SpawnPoint
     job_id: RMCSurvivorForeconSynth

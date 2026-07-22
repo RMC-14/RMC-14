@@ -1,0 +1,99 @@
+# UA Police Synthetic in CM
+- type: job
+  parent: CMSurvivorFiorinaRiotOfficer
+  id: RMCSurvivorFiorinaRiotInProgressCMBSupportSynth
+  name: cm-job-name-survivor-fiorina-cmb-synth
+  description: cm-job-description-survivor
+  playTimeTracker: RMCJobSyntheticColony
+  startingGear: RMCGearSurvivorFiorinaRiotInProgressCMBSupportSynth
+  icon: "RMCJobIconCMBSupportSynthetic"
+  accessGroups:
+  - ColonistSec
+  spawnMenuRoleName: CMB Support Synthetic (Fiorina Special Survivor)
+  greeting: rmc-job-greeting-riot-in-progress-CMB-RCO
+  ranks:
+    RMCRankCMBSupportSynthetic: []
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Language
+      preset: RMCLanguagePresetSynthColonist
+    - type: LanguageLearning
+      preset: RMCLanguageLearningPresetSynthColonist
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: MeleeWeapon
+      soundHit:
+        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
+        params:
+          variation: 0.15
+          volume: -1
+      angle: 30
+      animation: WeaponArcFist
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 35
+    - type: Synth
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Bureau
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: JobPrefix
+      prefix: cm-job-prefix-survivor-fiorina-cmb-synth
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: synth
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_cmb
+
+- type: startingGear
+  id: RMCGearSurvivorFiorinaRiotInProgressCMBSupportSynth
+  equipment:
+    jumpsuit: RMCJumpsuitRiotControl # TODO RMC14: Drop pouch with flashbangs and handcuffs
+    id: RMCIDCardCMBDeputySurvivor
+    back: CMSatchelSecurity
+    outerClothing: RMCArmorPMCRiotSynth
+    ears: RMCHeadsetDistressBureauDamaged
+    eyes: CMGlassesSecurity
+    gloves: CMHandsBlackMarine
+    shoes: RMCBootsPMCFilled
+    belt: CMBeltSecurityMPFilled # TODO RMC14: synth fill
+    pocket1: RMCPouchSurvivalSynthFill
+    pocket2: RMCPouchToolsFill
+  storage:
+    back:
+    - RMCHandcuffs
+    - RMCHandcuffs # TODO RMC14: Teargas grenades
+    - RMCPacketGrenadeBatonSlugHIRRFilled
+    - RMCMagazineRifleM16
+    outerClothing:
+    - RMCGrenadeFlashBang
+    - RMCTelescopicBaton
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointCMBRiotInProgressCMBSupportSynth
+  name: cmb support synthetic spawn point
+  suffix: special survivor, fiorina riot
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorFiorinaRiotInProgressCMBSupportSynth
+  - type: Sprite
+    state: surv
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconCMBSupportSynthetic
+  icon:
+    sprite: _RMC14/Interface/job_icons/CMB.rsi
+    state: cmb_ssyn
