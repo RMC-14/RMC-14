@@ -1026,10 +1026,10 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: prae_pierce
     useDelay: 3
-    repeat: true
   - type: TargetAction
     range: 15
     checkCanAccess: false
+    repeat: true
   - type: WorldTargetAction
     event: !type:XenoPierceActionEvent
   - type: ActionBlockIfResting
@@ -1052,6 +1052,7 @@
   components:
   - type: Action
     useDelay: 0
+  - type: TargetAction
     repeat: true
   - type: ActionBlockIfResting
 
