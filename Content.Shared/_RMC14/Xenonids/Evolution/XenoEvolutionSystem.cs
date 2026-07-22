@@ -408,11 +408,11 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 return false;
             }
 
-            var noQueenSince = _xenoHive.GetHive(xeno.Owner) is { } hive
-                ? hive.Comp.LastQueenDeath ?? _gameTicker.RoundStartTimeSpan
+            var queenEvolvableAt = _xenoHive.GetHive(xeno.Owner) is { } hive
+                ? hive.Comp.NewQueenAt ?? _gameTicker.RoundStartTimeSpan
                 : _gameTicker.RoundStartTimeSpan;
 
-            var graceLeft = noQueenSince + _queenRequirementGracePeriod - _timing.CurTime;
+            var graceLeft = queenEvolvableAt + _queenRequirementGracePeriod - _timing.CurTime;
             if (graceLeft > TimeSpan.Zero)
             {
                 var allowedEv = new XenoEvolveQueenAllowedEvent(xeno.Owner);
