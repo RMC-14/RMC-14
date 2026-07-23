@@ -180,6 +180,8 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(CMKeyFunctions.RMCInteractWithOtherHand);
             AddButton(CMKeyFunctions.RMCRest);
             AddButton(CMKeyFunctions.RMCResist);
+            AddButton(CMKeyFunctions.RMCOpenLanguageMenu);
+            AddButton(CMKeyFunctions.RMCCycleLanguage);
 
             AddHeader("ui-options-header-rmc-xeno");
             AddButton(CMKeyFunctions.CMXenoWideSwing);
