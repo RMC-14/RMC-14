@@ -92,6 +92,19 @@
 
 - type: entity
   parent: RMCAlphaArmband
+  id: RMCIntelArmband
+  name: intel armband
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Armbands/intel_armband.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Armbands/intel_armband.rsi
+      state: armband
+
+- type: entity
+  parent: RMCAlphaArmband
   id: RMCSquadArmband
   name: squad armband
   components:
@@ -110,6 +123,7 @@
       SquadDelta: RMCDeltaArmband
       SquadEcho: RMCEchoArmband
       SquadFoxtrot: RMCFoxtrotArmband
+      SquadIntel: RMCIntelArmband
 
 - type: entity
   parent: RMCArmbandBase
