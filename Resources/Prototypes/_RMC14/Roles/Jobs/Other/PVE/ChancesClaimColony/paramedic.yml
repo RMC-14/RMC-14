@@ -34,7 +34,7 @@
     head: RMCArmorHelmetSecurity
     outerClothing: RMCOuterClothingExternalWebbing
     mask: RMCMaskRebreather
-    eyes: RMCGlassesMedicalHUDGlasses
+    eyes: RMCGlassesMedicalHUDGlassesAdvanced
     jumpsuit: RMCJumpsuitEMTGreen
 
 - type: entity

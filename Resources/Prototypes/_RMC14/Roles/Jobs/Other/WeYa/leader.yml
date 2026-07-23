@@ -113,7 +113,7 @@
     head: ArmorHelmetPMCOfficer
     shoes: RMCBootsPMCFilled
     mask: RMCMaskCoifPMC
-    eyes: RMCGlassesMedicalHUDGlasses
+    eyes: RMCGlassesMedicalHUDGlassesAdvanced
     back: RMCSatchelPMC
     belt: RMCMK80BeltPMCFilled
     suitstorage: RMCWeaponRifleM54C2

@@ -42,7 +42,7 @@
     - name: Eyewear
       choices: { CMEyewear: 1 }
       entries:
-      - id: RMCGlassesMedicalHUDGlasses
+      - id: RMCGlassesMedicalHUDGlassesAdvanced
 #      - id: Prescription Medical HUD Glasses
     - name: Uniform
       choices: { CMUniform: 1 }

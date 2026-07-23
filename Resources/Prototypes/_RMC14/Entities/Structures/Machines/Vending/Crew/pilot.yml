@@ -127,7 +127,7 @@
       choices: { CMGlasses: 1 }
       entries:
       - id: RMCSunglasses
-      - id: RMCGlassesMedicalHUDGlasses
+      - id: RMCGlassesMedicalHUDGlassesAdvanced
       - id: RMCGlassesAviatorsSilver
       - id: RMCGlassesAviators
     - name: Flight Visor

@@ -49,7 +49,7 @@
     head: RMCHeadCapFlippable
     id: RMCIDCardCLFResponder
     ears: CMHeadsetColony
-    eyes: RMCGlassesMedicalHUDGlasses
+    eyes: RMCGlassesMedicalHUDGlassesAdvanced
     back: CMSatchelFilledFaxResponder
     belt: CMClipboard
     pocket1: RMCPouchGeneralLarge
