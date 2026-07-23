@@ -178,6 +178,71 @@
     camouflageVariations: {}
 
 - type: entity
+  parent: RMCWeaponRevolverMateba
+  id: RMCWeaponRevolverMateba2006M
+  name: Spearhead 2006M autorevolver
+  description: The Spearhead 2006M is a powerful, fast-firing revolver that uses its own recoil to rotate the cylinders. It fires heavy .454 rounds. It is compatible with more commonly found Unica 6 speedloaders.
+  components:
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/mateba_2006m.ogg
+  - type: RevolverAmmoProvider
+    soundEject:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/gun_mateba2006m_open_chamber.ogg
+    soundInsert:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/gun_mateba2006m_speed_loader.ogg
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+  - type: AttachableHolder
+    slots:
+      rmc-bslot-barrel:
+        locked: true
+        startingAttachable: null
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-mateba-2006m
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCRevolver
+    - RMCMateba
+
+- type: entity
+  parent: RMCWeaponRevolverMateba2006M
+  id: RMCWeaponRevolverMateba2006MGold
+  name: golden Spearhead 2006M autorevolver
+  suffix: Gold
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m_gold.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m_gold.rsi
+
+- type: entity
+  parent: RMCWeaponRevolverMateba2006MGold
+  id: RMCWeaponRevolverMateba2006MBlackGold
+  suffix: Black Handle, Gold
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m_bgold.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m_bgold.rsi
+
+- type: entity
+  parent: RMCWeaponRevolverMateba2006M
+  id: RMCWeaponRevolverMateba2006MSilver
+  name: silver Spearhead 2006M autorevolver
+  suffix: Silver
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m_silver.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m_silver.rsi
+
+- type: entity
   id: RMCBaseSpeedLoaderMateba
   name: "Mateba speed loader (.454)" #Base
   parent: BaseItem
