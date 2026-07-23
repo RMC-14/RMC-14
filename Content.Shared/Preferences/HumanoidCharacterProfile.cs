@@ -803,7 +803,7 @@ namespace Content.Shared.Preferences
                     if (end && numberEndingAllowed && c >= '0' && c <= '9')
                         continue;
 
-                    // Not a letter
+                    // Not a letter or end isn't a number
                     if ((c < 'A' || c > 'Z') || (end && onlyEndWithNumber))
                         return string.Empty;
                 }
