@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Actions;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Charges.Systems;
+using Content.Shared.GameTicking;
 using Content.Shared.Mapping;
 using Content.Shared.Maps;
 using JetBrains.Annotations;
@@ -12,6 +13,8 @@ using Robust.Client.Player;
 using Robust.Shared.ContentPack;
 using Robust.Shared.GameStates;
 using Robust.Shared.Input.Binding;
+using Robust.Shared.Map;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager;
@@ -51,6 +54,7 @@ namespace Content.Client.Actions
 
         // RMC14
         [Dependency] private readonly RMCLagCompensationSystem _rmcLagCompensation = default!;
+        private readonly Queue<ActionRequest> _requested = new();
 
         public override void Initialize()
         {
@@ -64,7 +68,48 @@ namespace Content.Client.Actions
 
             SubscribeLocalEvent<EntityTargetActionComponent, ActionTargetAttemptEvent>(OnEntityTargetAttempt);
             SubscribeLocalEvent<WorldTargetActionComponent, ActionTargetAttemptEvent>(OnWorldTargetAttempt);
+
+            // RMC14
+            SubscribeLocalEvent<RoundRestartCleanupEvent>(OnCleanup);
+            UpdatesOutsidePrediction = true;
+            UpdatesBefore.Add(typeof(SharedPhysicsSystem));
         }
+
+        // RMC14 start
+        public override void Update(float frameTime)
+        {
+            base.Update(frameTime);
+
+            if (!GameTiming.IsFirstTimePredicted)
+                return;
+
+            RequestPerformActionEvent ev;
+            while (_requested.TryDequeue(out var request))
+            {
+                switch (request)
+                {
+                    case (var actionId, var targetId, { } coords):
+                        // World target case
+                        ev = new RequestPerformActionEvent(actionId, targetId, coords, _rmcLagCompensation.GetLastRealTick(null));
+                        break;
+                    case (var actionId, { } targetId, null):
+                        // Entity target case
+                        ev = new RequestPerformActionEvent(actionId, targetId, _rmcLagCompensation.GetLastRealTick(null));
+                        break;
+                    case (var actionId, null, null):
+                        // Trigger case
+                        ev = new RequestPerformActionEvent(actionId, _rmcLagCompensation.GetLastRealTick(null));
+                        break;
+                }
+                RaisePredictiveEvent(ev);
+            }
+        }
+
+        private void OnCleanup(RoundRestartCleanupEvent ev)
+        {
+            _requested.Clear();
+        }
+        // RMC14 end
 
 
         private void OnActionAutoHandleState(Entity<ActionComponent> ent, ref AfterAutoHandleStateEvent args)
@@ -213,6 +258,12 @@ namespace Content.Client.Actions
             {
                 PerformAction(user, action);
             }
+            // RMC14 start
+            else if (!GameTiming.InSimulation && action.Comp.InSimulationOnly)
+            {
+                _requested.Enqueue(new(GetNetEntity(action), null, null));
+            }
+            // RMC14 end
             else
             {
                 var request = new RequestPerformActionEvent(GetNetEntity(action), _rmcLagCompensation.GetLastRealTick(null));
@@ -331,6 +382,12 @@ namespace Content.Client.Actions
 
                 PerformAction((user, user.Comp), (uid, action));
             }
+            // RMC14 start
+            else if (!GameTiming.InSimulation && action.InSimulationOnly)
+            {
+                _requested.Enqueue(new(GetNetEntity(uid), GetNetEntity(targetEnt), GetNetCoordinates(coords)));
+            }
+            // RMC14 end
             else
                 RaisePredictiveEvent(new RequestPerformActionEvent(GetNetEntity(uid), GetNetEntity(targetEnt), GetNetCoordinates(coords), _rmcLagCompensation.GetLastRealTick(null)));
 
@@ -371,6 +428,12 @@ namespace Content.Client.Actions
 
                 PerformAction((user, user.Comp), (uid, action));
             }
+            // RMC14 start
+            else if (!GameTiming.InSimulation && action.InSimulationOnly)
+            {
+                _requested.Enqueue(new(GetNetEntity(uid), GetNetEntity(entity), null));
+            }
+            // RMC14 end
             else
             {
                 RaisePredictiveEvent(new RequestPerformActionEvent(GetNetEntity(uid), GetNetEntity(entity), _rmcLagCompensation.GetLastRealTick(null)));
@@ -386,5 +449,8 @@ namespace Content.Client.Actions
         }
 
         public record struct SlotAssignment(byte Hotbar, byte Slot, EntityUid ActionId);
+
+        // RMC14
+        readonly record struct ActionRequest(NetEntity ActionId, NetEntity? TargetId, NetCoordinates? TargetCoords);
     }
 }
