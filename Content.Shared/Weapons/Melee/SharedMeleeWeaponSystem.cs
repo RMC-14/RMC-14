@@ -847,37 +847,49 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             if (res.Count != 0)
             {
                 // RMC14 start
-                // Ignore dead mobs, mobs from the same hive, and open entity containers (lockers, crates, etc).
-                var filteredResults = res.Where(x => !MobState.IsDead(x.HitEntity))
-                    .Where(x => !(_mobStateQuery.HasComp(x.HitEntity) && _hive.FromSameHive(ignore, x.HitEntity)))
-                    .Where(x => !_storage.IsOpen(x.HitEntity));
+                RayCastResults? firstValidResult = null;
+                RayCastResults? priorityResult = null;
 
-                if (filteredResults.Count() <= 0)
+                foreach (var item in res)
                 {
-                    continue;
+                    // Ignore dead mobs, mobs from the same hive, and open entity containers (lockers, crates, etc).
+                    if (MobState.IsDead(item.HitEntity)
+                        || _mobStateQuery.HasComp(item.HitEntity) && _hive.FromSameHive(ignore, item.HitEntity)
+                        || _storage.IsOpen(item.HitEntity))
+                    {
+                        continue;
+                    }
+
+                    firstValidResult ??= item;
+
+                    // We prioritize non-dead mobs, but we also have to make sure we don't hit past barricades or entities
+                    // that block interactions over them, such as walls, windows, windoors, closed airlocks, etc.
+                    // In short, we should hit the closest entity, UNLESS we can hit a mob, in which case we hit the mob.
+                    // To accomplish this, we have to find the first object that either is a mob or would block our attack.
+                    if (_mobStateQuery.HasComp(item.HitEntity)  // mobs
+                        || ((_physicsQuery.CompOrNull(item.HitEntity)?.CollisionLayer ?? 0) & (int)CollisionGroup.InteractImpassable) != 0  // walls, windows, etc
+                        || _directionalAttackBlockerQuery.HasComp(item.HitEntity))  // barricades
+                    {
+                        priorityResult = item;
+                        break;
+                    }
                 }
 
-                // We prioritize non-dead mobs, but we also have to make sure we don't hit past barricades or entities
-                // that block interactions over them, such as walls, windows, windoors, closed airlocks, etc.
-                // In short, we should hit the closest entity, UNLESS we can hit a mob, in which case we hit the mob.
-                // To accomplish this, we find the first object that either is a mob or would block our attack.
-                var firstPriorityResult = filteredResults.FirstOrNull(
-                    x => _mobStateQuery.HasComp(x.HitEntity)  // mobs
-                      || ((_physicsQuery.CompOrNull(x.HitEntity)?.CollisionLayer ?? 0) & (int)CollisionGroup.InteractImpassable) != 0  // walls, windows, etc
-                      || _directionalAttackBlockerQuery.HasComp(x.HitEntity)  // barricades
-                );
+                if (firstValidResult is null)
+                    continue;
 
-                // If the found object is a mob, we target it. Otherwise we target the first object we found.
-                var target = filteredResults.First();
-                if (firstPriorityResult is { } result &&
+                // If the priority entity is a mob, we target it. Otherwise we target the first entity we found.
+                var target = firstValidResult.Value;
+                if (priorityResult is { } result &&
                     _mobStateQuery.HasComp(result.HitEntity))
                 {
                     target = result;
                 }
+                var targetDistance = target.Distance;
                 // RMC14 end
 
                 // If there's exact distance overlap, we simply have to deal with all overlapping objects to avoid selecting randomly.
-                var resChecked = filteredResults.Where(x => x.Distance.Equals(target.Distance));
+                var resChecked = res.Where(x => x.Distance.Equals(targetDistance));
                 foreach (var r in resChecked)
                 {
                     if (Interaction.InRangeUnobstructed(ignore, r.HitEntity, range + 0.1f, overlapCheck: false))
