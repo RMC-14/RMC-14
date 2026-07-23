@@ -11,6 +11,8 @@
       collection: VulpkaninWhines
     Yip:
       path: /Audio/Animals/fox_squeak.ogg
+    Scream:
+      collection: VulpkaninScreams
 
 - type: emoteSounds
   parent: [RMCUnisexVulpkanin, RMCMaleHuman]
