@@ -69,6 +69,7 @@ public sealed partial class MiscTab : Control
         Control.AddOptionCheckBox(RMCCVars.RMCDamageYourself, RMCDamageYourself);
         Control.AddOptionCheckBox(RMCCVars.RMCShowNewPlayerIcons, RMCShowNewPlayerIcons);
         Control.AddOptionDropDown(RMCCVars.RMCXenoDefaultNightVision, RMCXenoNightVisionDefault, xenoNightVisionEntries);
+        Control.AddOptionCheckBox(RMCCVars.RMCGhostHearing, RMCGhostHearing);
 
         Control.Initialize();
     }

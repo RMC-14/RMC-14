@@ -528,6 +528,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<int> RMCXenoDefaultNightVision =
         CVarDef.Create("rmc.xeno_default_night_vision", (int) NightVisionState.Half, CVar.CLIENT | CVar.ARCHIVE | CVar.REPLICATED);
 
+    public static readonly CVarDef<bool> RMCGhostHearing =
+        CVarDef.Create("rmc.ghost_hearing", true, CVar.CLIENT | CVar.ARCHIVE | CVar.REPLICATED);
+
     public static readonly CVarDef<int> RMCLagCompensationMilliseconds =
         CVarDef.Create("rmc.lag_compensation_milliseconds", 750, CVar.REPLICATED | CVar.SERVER);
 
