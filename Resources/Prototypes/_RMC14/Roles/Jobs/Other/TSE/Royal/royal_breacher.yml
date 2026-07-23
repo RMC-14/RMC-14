@@ -11,6 +11,7 @@
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-royal-tl
   spawnMenuRoleName: RCM Breacher
+  access: [ CMAccessERT ]
   special:
   - !type:AddComponentSpecial
     components:

@@ -254,6 +254,20 @@
   name: freelancer ID card
 
 - type: entity
+  parent: CMIDCardSilver
+  id: RMCIDCardContractor
+  name: VAI contractor holo-badge
+  description: A Vanguard's Arrow Incorporated contractor holo-badge with a corporate access seal.
+  components:
+  - type: ItemIFF
+    factions:
+    - FactionVAI
+  - type: Access
+    groups:
+    - Colony
+    - RMCWeYa
+
+- type: entity
   parent: CMIDCardGold
   id: RMCIDCardProvost
   abstract: true

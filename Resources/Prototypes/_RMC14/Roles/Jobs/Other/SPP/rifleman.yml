@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMJobBase
   id: RMCSPPRifleman
   name: rmc-job-name-spp-rifleman
@@ -9,6 +9,7 @@
   startingGear: RMCGearSPPRifleman
   icon: "RMCJobIconSPPRifleman"
   joinNotifyCrew: false
+  access: [ CMAccessERT ]
   accessGroups:
   - Colonist
   spawnMenuRoleName: SPP Conscript
@@ -38,6 +39,13 @@
       prefix: rmc-job-prefix-spp-rifleman
   hidden: true
 
+- type: job
+  parent: RMCSPPRifleman
+  id: RMCSPPRiflemanDouble
+  startingGear: RMCGearSPPRiflemanDouble
+  spawnMenuRoleName: SPP Rifleman
+  hidden: true
+
 - type: entity
   id: RMCRandomHumanoidSPPRiflemanHostile
   name: spp ghost role rifleman
@@ -59,6 +67,28 @@
     state: spp_spawn
   - type: RandomHumanoidSpawner
     settings: RMCSPPRiflemanFriendly
+
+- type: entity
+  id: RMCRandomHumanoidSPPRiflemanDoubleHostile
+  name: spp ghost role rifleman
+  suffix: Spawner, Player, Hostile, Double
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: spp_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCSPPRiflemanDouble
+
+- type: entity
+  id: RMCRandomHumanoidSPPRiflemanDoubleFriendly
+  name: spp ghost role rifleman
+  suffix: Spawner, Player, Friendly, Double
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: spp_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCSPPRiflemanDoubleFriendly
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
@@ -94,6 +124,40 @@
   - type: GhostRoleApplySpecial
     squad: SquadSPP
 
+- type: randomHumanoidSettings
+  parent: RMCSPPRifleman
+  id: RMCSPPRiflemanDouble
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-spp-hostile-rifleman
+    description: rmc-ghost-role-information-spp-hostile-description
+    rules: rmc-ghost-role-information-spp-rules
+    reregister: false
+    job: RMCSPPRiflemanDouble
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadSPP
+
+- type: randomHumanoidSettings
+  parent: RMCSPPRiflemanFriendly
+  id: RMCSPPRiflemanDoubleFriendly
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-spp-friendly-rifleman
+    description: rmc-ghost-role-information-spp-friendly-description
+    rules: rmc-ghost-role-information-spp-rules
+    reregister: false
+    job: RMCSPPRiflemanDouble
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+    squad: SquadSPP
+
 - type: startingGear
   id: RMCGearSPPRifleman
   equipment:
@@ -109,6 +173,24 @@
     back: RMCSatchelSPPRifleman
     pocket1: RMCPouchAutoinjectorFill
     pocket2: RMCPouchExplosiveFilledSPP
+
+- type: startingGear
+  id: RMCGearSPPRiflemanDouble
+  equipment:
+    head: ArmorHelmetSPP
+    ears: RMCHeadsetSPP
+    jumpsuit: CMJumpsuitSPP
+    outerClothing: RMCArmorSPPRifleman
+    gloves: RMCHandsVeteranSPP
+    shoes: RMCBootsSPPFilled
+    suitstorage: RMCWeaponShotgunType23
+    id: RMCIDSPP
+    belt: RMCType71BeltFilled
+    back: RMCSatchelSPPRifleman
+    pocket1: RMCPouchAutoinjectorFill
+    pocket2: RMCPouchShotgunLargeBuckshot
+  inhand:
+    - RMCWeaponRifleType71C
 
 - type: playTimeTracker
   id: CMJobSPPRifleman

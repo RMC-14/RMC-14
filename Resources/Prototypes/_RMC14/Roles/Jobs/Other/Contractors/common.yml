@@ -1,0 +1,23 @@
+# Vanguard's Arrow Incorporated contractors.
+- type: startingGear
+  id: RMCGearContractorDutyBase
+  equipment:
+    id: RMCIDCardContractor
+    ears: RMCHeadsetDistressVAI
+    jumpsuit: RMCJumpsuitFreelancerBluePants
+    outerClothing: CMArmorM3Light
+    gloves: RMCHandsVeteranPMC
+    head: ArmorHelmetM10
+    shoes: RMCBootsPMCFilled
+    eyes: RMCGlassesHUDSecurity
+    back: RMCSatchelLightpackBlack
+    belt: RMCMK80BeltPMCFilled
+    pocket1: RMCPouchFirstAidERTFill
+    pocket2: RMCPouchMagazineLarge
+  storage:
+    back:
+    - RMCExplosiveBreachingCharge
+    - RMCGrenadeBlastM12
+    - RMCGrenadeBlastM12
+    - RMCMREWeYaPMC
+    - CMCrowbar

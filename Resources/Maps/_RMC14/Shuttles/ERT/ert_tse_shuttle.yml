@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 02/12/2026 13:40:40
-  entityCount: 92
+  entityCount: 96
 maps: []
 grids:
 - 1
@@ -205,6 +205,10 @@ entities:
       rot: 3.141592653589793 rad
       pos: 0.5,4
       parent: 1
+    - type: RMCERTSeat
+      seatTags: [ command ]
+      reservedRoleTags: [ leader, command ]
+      priority: 110
 - proto: RMCMedicalL75RCMFilled
   entities:
   - uid: 12
@@ -313,6 +317,10 @@ entities:
       rot: 3.141592653589793 rad
       pos: -1.281102,1.5
       parent: 1
+    - type: RMCERTSeat
+      seatTags: [ medic, troop ]
+      reservedRoleTags: [ medic ]
+      priority: 50
   - uid: 15
     components:
     - type: Transform
@@ -325,6 +333,10 @@ entities:
       rot: 3.141592653589793 rad
       pos: 2.328273,1.5
       parent: 1
+    - type: RMCERTSeat
+      seatTags: [ engineer, troop ]
+      reservedRoleTags: [ engineer ]
+      priority: 40
   - uid: 53
     components:
     - type: Transform
@@ -347,6 +359,8 @@ entities:
       rot: 3.141592653589793 rad
       pos: -0.26547694,-1
       parent: 1
+    - type: RMCERTSeat
+      seatTags: [ troop ]
   - uid: 57
     components:
     - type: Transform
@@ -739,5 +753,33 @@ entities:
     components:
     - type: Transform
       pos: 2.5,-4.5
+      parent: 1
+- proto: RMCERTSpawnMarkerCommand
+  entities:
+  - uid: 1001
+    components:
+    - type: Transform
+      pos: 0.5,4
+      parent: 1
+- proto: RMCERTSpawnMarkerMedic
+  entities:
+  - uid: 1002
+    components:
+    - type: Transform
+      pos: -1.281102,1.5
+      parent: 1
+- proto: RMCERTSpawnMarkerEngineer
+  entities:
+  - uid: 1003
+    components:
+    - type: Transform
+      pos: 2.328273,1.5
+      parent: 1
+- proto: RMCERTSpawnMarker
+  entities:
+  - uid: 1004
+    components:
+    - type: Transform
+      pos: -0.26547694,-1
       parent: 1
 ...
