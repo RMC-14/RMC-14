@@ -711,9 +711,9 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleMilitaryPoliceApparelCMP
+  categories: [ HideSpawnMenu ]
   name: Essential Police Set
   description: Contains security HUD-glasses and a filled security belt.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses.rsi
@@ -1359,7 +1359,7 @@
       - id: RMCCoatSnow
       - id: RMCMaskBalaclava
       - id: RMCMaskTornScarfBlack
-        name: Snow Scarf 
+        name: Snow Scarf
     - name: Headwear
       jobs:
       - CMCMO

@@ -51,4 +51,5 @@
 - type: entity
   parent: RMCSurvivorPresetEngineer
   id: RMCGearSurvivorPresetLV624CargoTechnician
+  categories: [ HideSpawnMenu ]
   name: lv624 cargo technician colonist preset # TODO RMC14 random research notes
