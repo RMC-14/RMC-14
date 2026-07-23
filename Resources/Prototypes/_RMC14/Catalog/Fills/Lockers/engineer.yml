@@ -56,3 +56,37 @@
     - id: RMCHandsTychoGloves
     - id: RMCSuitTychoRadiationSuit
     - id: RMCGeigerCounter
+
+- type: entity
+  parent: CMLockerEngineer
+  id: RMCLockerEngineerFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBackpackEngineer
+    - id: RMCFlashlight
+    - id: CMMaskGas
+    - id: RMCPouchTools
+    - id: RMCPouchConstruction
+    - id: RMCPouchElectronics
+    - id: RMCPouchGeneral
+    - id: RMCHazardVest
+    - id: CMWebbingBrown
+    - id: RMCToolboxMechanicalFilled
+    - id: CMWebbing
+    - id: RMCHazardVestBlue
+
+- type: entity
+  parent: CMLockerEngineerWelder
+  id: RMCLockerEngineerWelderFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeldingKit
+      amount: 3
+    - id: CMWelder
+      amount: 3
+    - id: RMCHelmetWelding
+      amount: 3
