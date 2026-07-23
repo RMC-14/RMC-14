@@ -1,4 +1,4 @@
-﻿using Content.Shared.Clothing;
+using Content.Shared.Clothing;
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Item;
@@ -71,7 +71,7 @@ public sealed class HelmetAccessoriesSystem : EntitySystem
         var index = 0;
         foreach (var item in storage.Container.ContainedEntities)
         {
-            var layer = $"enum.{nameof(HelmetAccessoryLayers)}.{HelmetAccessoryLayers.Helmet}{index}_{Name(ent.Owner)}";
+            var layer = $"helmetaccessory_{nameof(HelmetAccessoryLayers)}.{HelmetAccessoryLayers.Helmet}{index}_{Name(ent.Owner)}";
 
             if (!_accessoryQuery.TryComp(item, out var accessoryComp))
                 continue;
