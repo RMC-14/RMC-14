@@ -23,9 +23,9 @@
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
-    recoilWielded: 2
-    recoilUnwielded: 4
-    scatterWielded: 10
+    recoilWielded: 0 # "recoil = RECOIL_OFF"
+    recoilUnwielded: 2
+    scatterWielded: 1.5 # the gun is supposed to be 2.0 recoil however in regular gameplay this thing is even more accurate due to how 13 handle's bullet code
     scatterUnwielded: 20
     baseFireRate: 1.25
     burstScatterMult: 5
@@ -33,7 +33,7 @@
     accuracyMultiplier: 1.35
     accuracyMultiplierUnwielded: 0.35
   - type: UniqueAction
-  - type: BreechLoaded
+  - type: BreechLoaded # TODO: Spam protection for the bolt to prevent noise spam, its parity
     needOpenClose: true
     openSound:
       path: "/Audio/_RMC14/Weapons/Guns/Breech/pkd_open_chamber.ogg"
@@ -119,10 +119,10 @@
   - type: Appearance
 
 - type: entity
-  parent: CMBaseCartridgeRifle
+  parent: CMCartridgeSniper10x28mm
   id: RMCCartridgeBoltActionRifle
-  name: Cartridge (5.56x45)
-  description: A Cartridge for the Basira-Armstrong hunting rifle. Compliant with the 15-cartridge limit on civilian hunting rifles.
+  name: cartridge (6.5mm)
+  description: A cartridge for the Basira-Armstrong hunting rifle. Compliant with the 10-cartridge limit on civilian hunting rifles.
   components:
   - type: Tag
     tags:
@@ -132,8 +132,9 @@
     proto: RMCBulletRifleHunting
 
 - type: entity
-  parent: BulletRifle10x24mm
+  parent: CMBulletSniper10x28mm
   id: RMCBulletRifleHunting
+  name: bullet (6.5mm)
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
