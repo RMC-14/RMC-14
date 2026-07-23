@@ -55,6 +55,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using static Content.Shared.Physics.CollisionGroup;
+using Content.Shared.Ghost;
 
 namespace Content.Shared._RMC14.Xenonids.Construction;
 
@@ -1007,6 +1008,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private void OnHiveConstructionNodeExamined(Entity<HiveConstructionNodeComponent> node, ref ExaminedEvent args)
     {
+        if (!HasComp<XenoComponent>(args.Examiner) && !HasComp<GhostComponent>(args.Examiner))
+            return;
+
         var plasmaLeft = node.Comp.PlasmaCost - node.Comp.PlasmaStored;
         args.PushMarkup(Loc.GetString("cm-xeno-construction-plasma-left", ("construction", node.Owner), ("plasma", plasmaLeft)));
     }
