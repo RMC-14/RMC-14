@@ -160,3 +160,5 @@
   - RMCVialBox
   - RMCPouchReagentCanister
   - RMCPressurizedCanister
+  - RMCPouchSmartTankAdapter
+  - CMMiniTank

@@ -76,6 +76,8 @@ public sealed class SkillsSystem : EntitySystem
 
         SubscribeLocalEvent<ExamineRequiresSkillComponent, ExaminedEvent>(OnExamineRequiresSkill);
 
+        SubscribeLocalEvent<EquipRequiresSkillComponent, BeingEquippedAttemptEvent>(OnEquipRequiresSkill);
+
         ReloadPrototypes();
     }
 
@@ -622,4 +624,13 @@ public sealed class SkillsSystem : EntitySystem
         var skill = GetSkill(user, MeleeSkill);
         return damage * (1 + 0.25 * skill);
     }
+
+    private void OnEquipRequiresSkill(Entity<EquipRequiresSkillComponent> ent, ref BeingEquippedAttemptEvent args)
+    {
+        if (!HasAllSkills(args.Equipee, ent.Comp.Skills))
+        {
+            args.Reason = Loc.GetString("rmc-skills-cant-use", ("item", ent));
+            args.Cancel();
+        }
+    } 
 }
