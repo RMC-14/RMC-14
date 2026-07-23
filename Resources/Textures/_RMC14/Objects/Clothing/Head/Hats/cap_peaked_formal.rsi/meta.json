@@ -1,18 +1,26 @@
 {
   "version": 1,
-  "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/06d35efb20e830eacc57d3c77fea047dadbcdee3/icons/mob/humans/onmob/head_1.dmi, https://github.com/cmss13-devs/cmss13/blob/06d35efb20e830eacc57d3c77fea047dadbcdee3/icons/obj/items/clothing/cm_hats.dmi",
+  "license": "CC0-1.0",
+  "copyright": "Created for RMC-14/RMC-14 by @TadJohnson00 (GitHub).",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
     {
+      "name": "icon"
+    },
+    {
       "name": "equipped-HELMET",
       "directions": 4
     },
     {
-      "name": "icon"
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
     }
   ]
 }
