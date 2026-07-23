@@ -1,0 +1,214 @@
+using System.Numerics;
+using Content.Client._RMC14.Announce.Styling;
+using Content.Client.UserInterface.Controls;
+using Content.Shared._RMC14.Announce;
+using Robust.Client.GameObjects;
+using Robust.Client.UserInterface;
+using Robust.Client.UserInterface.Controls;
+using Robust.Shared.GameObjects;
+using Robust.Shared.IoC;
+using Robust.Shared.Maths;
+using Robust.Client.ResourceManagement;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
+using Robust.Shared.Timing;
+
+namespace Content.Client._RMC14.Announce;
+
+public sealed partial class AnnouncementWidget : UIWidget
+{
+    private static readonly Vector2 FallbackScreenSize = new(1920f, 1080f);
+
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly IResourceCache _resCache = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
+
+    public event Action<NetEntity?>? OnAnnouncementFinished;
+
+    public ActiveAnnouncement? ActiveAnnouncement { get; private set; }
+    public bool PreviewMode { get; set; }
+    public Vector2? ForcedScreenSize { get; set; }
+
+    private Control[] _richTextLabels = Array.Empty<Control>();
+    private Control? _spriteContainer;
+    private readonly List<Control> _textContainers = new();
+    private readonly TextLayoutBuilder _textLayoutBuilder;
+    private readonly DecalBuilder _decalBuilder;
+    private readonly SpriteBuilder _spriteBuilder;
+    private bool _hasTitle;
+    private int _titleOffset;
+    private float _activeTextMaxWidth;
+
+    public AnnouncementWidget()
+    {
+        _decalBuilder = new DecalBuilder(this);
+        _spriteBuilder = new SpriteBuilder(this, _decalBuilder);
+        _textLayoutBuilder = new TextLayoutBuilder(this);
+        Orientation = LayoutOrientation.Horizontal;
+        HorizontalAlignment = HAlignment.Left;
+        VerticalAlignment = VAlignment.Top;
+        LayoutContainer.SetAnchorPreset(this, LayoutContainer.LayoutPreset.TopLeft);
+        LayoutContainer.SetGrowHorizontal(this, LayoutContainer.GrowDirection.Constrain);
+        LayoutContainer.SetGrowVertical(this, LayoutContainer.GrowDirection.Constrain);
+        Visible = false;
+    }
+
+    public void ShowAnnouncement(AnnouncementDisplayData announcement)
+    {
+        if (ActiveAnnouncement != null)
+            CleanupCurrentAnnouncement();
+
+        ResetLayoutState();
+        var resolvedStyle = AnnouncementStyling.CreateDisplayStyle(announcement.Style, announcement.VisualScale);
+        AnnouncementStyling.ApplyLocalAppearanceOverrides(resolvedStyle, announcement);
+
+        ActiveAnnouncement = new ActiveAnnouncement
+        {
+            Data = announcement,
+            ResolvedStyle = resolvedStyle,
+            StartTime = _timing.CurTime,
+            State = AnnouncementState.Animating,
+            CleanText = PreprocessText(announcement.Text),
+            FadeAlpha = 1.0f
+        };
+
+        SetupUI();
+        ConfigureAnimationAndEffects();
+        Visible = true;
+    }
+
+    protected override void FrameUpdate(FrameEventArgs args)
+    {
+        base.FrameUpdate(args);
+
+        if (ActiveAnnouncement == null)
+            return;
+
+        var deltaTime = (float) args.DeltaSeconds;
+        var currentTime = _timing.CurTime;
+
+        if (PreviewMode)
+        {
+            if (_playback.IsFinished)
+            {
+                ActiveAnnouncement.StartTime = currentTime;
+                ConfigureAnimationAndEffects();
+            }
+
+            UpdateAnnouncement(deltaTime, currentTime);
+            UpdatePosition();
+            return;
+        }
+
+        UpdateAnnouncement(deltaTime, currentTime);
+        UpdatePosition();
+    }
+
+    private void FinishAnnouncement()
+    {
+        var speaker = ActiveAnnouncement?.Data.SpeakerEntity;
+        CleanupCurrentAnnouncement();
+        Visible = false;
+        OnAnnouncementFinished?.Invoke(speaker);
+    }
+
+    private void CleanupCurrentAnnouncement()
+    {
+        Visible = false;
+        _playback.Clear();
+        _animationContext = null;
+        ActiveAnnouncement = null;
+        RemoveAllChildren();
+        _textContainers.Clear();
+        _richTextLabels = Array.Empty<Control>();
+        _spriteContainer = null;
+        Modulate = Color.White;
+        _hasTitle = false;
+        _titleOffset = 0;
+        _activeTextMaxWidth = 0f;
+        ResetLayoutState();
+    }
+
+    private void ResetLayoutState()
+    {
+        SetWidth = float.NaN;
+        SetHeight = float.NaN;
+        MinWidth = 0f;
+        MinHeight = 0f;
+        MaxWidth = float.PositiveInfinity;
+        MaxHeight = float.PositiveInfinity;
+        LayoutContainer.SetMarginLeft(this, 0f);
+        LayoutContainer.SetMarginTop(this, 0f);
+        LayoutContainer.SetMarginRight(this, 0f);
+        LayoutContainer.SetMarginBottom(this, 0f);
+    }
+
+    private string[] PreprocessText(string[] originalText)
+    {
+        var cleanText = new string[originalText.Length];
+        for (var i = 0; i < originalText.Length; i++)
+        {
+            cleanText[i] = StripMarkup(originalText[i]);
+        }
+
+        return cleanText;
+    }
+
+    private static string StripMarkup(string text)
+    {
+        if (string.IsNullOrEmpty(text))
+            return text;
+
+        var tagStart = text.IndexOf('[');
+        if (tagStart == -1)
+            return text;
+
+        var sb = new System.Text.StringBuilder(text.Length);
+        var insideTag = false;
+
+        foreach (var c in text)
+        {
+            if (c == '[')
+            {
+                insideTag = true;
+                continue;
+            }
+
+            if (insideTag)
+            {
+                if (c == ']')
+                    insideTag = false;
+
+                continue;
+            }
+
+            sb.Append(c);
+        }
+
+        return sb.ToString();
+    }
+
+    private Vector2 ResolveScreenSize()
+    {
+        if (ForcedScreenSize is { } forcedSize &&
+            forcedSize.X > 0f &&
+            forcedSize.Y > 0f)
+        {
+            return forcedSize;
+        }
+
+        if (Parent is Control control &&
+            control.Size.X > 0f &&
+            control.Size.Y > 0f)
+        {
+            return control.Size;
+        }
+
+        return FallbackScreenSize;
+    }
+
+}
+
