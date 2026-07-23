@@ -333,3 +333,19 @@
     - RMCMagazineRifleSSG45
     - RMCMagazineRifleSSG45
     - RMCMagazineRifleSSG45
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleShotgunPK10
+  name: PK-10 quasar electrostatic shockgun
+  description: Contains the PK-10 quasar electrostatic shockgun, a box of MX24 Electrostatic shells, and a shotgun shell loading rig.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/pk10.rsi
+    state: icon
+  - type: CMVendorBundle
+    bundle:
+    - RMCWeaponShotgunPK10
+    - RMCBoxShotgunMX24Electrostatic
+    - RMCM276ShotgunShellLoadingRig
