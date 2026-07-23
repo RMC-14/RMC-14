@@ -283,6 +283,7 @@
       - RMCSurvivorCivilianUnique: -1
       - RMCSurvivorHybrisaTMCCMiner: -1
       - CMSurvivorTrijentChaplain: 1
+      - CMSurvivorTrijentRoughneck: 1
       - RMCSurvivorHybrisaFireProtectionSpecialist: 1
       CMSurvivorCorporate:
       - CMSurvivorICB: 1
