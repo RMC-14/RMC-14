@@ -27,7 +27,7 @@ public abstract class SharedRMCActionsSystem : EntitySystem
 
         SubscribeLocalEvent<ActionReducedUseDelayComponent, ActionReducedUseDelayEvent>(OnReducedUseDelayEvent);
 
-        SubscribeLocalEvent<ActionReducedUseDelayComponent, StartUseDelayEvent>(OnReducedStartUseDelay);
+        SubscribeLocalEvent<ActionReducedUseDelayComponent, SettingCooldownEvent>(OnReducedSettingCooldown);
     }
 
     private void OnMissedTargetAction(RMCMissedTargetActionEvent args)
@@ -135,9 +135,12 @@ public abstract class SharedRMCActionsSystem : EntitySystem
             args.Cancelled = true;
     }
 
-    private void OnReducedStartUseDelay(Entity<ActionReducedUseDelayComponent> ent, ref StartUseDelayEvent args)
+    private void OnReducedSettingCooldown(Entity<ActionReducedUseDelayComponent> ent, ref SettingCooldownEvent args)
     {
-        var reductionAmount = args.Delay * ent.Comp.UseDelayReduction.Float();
+        // TODO RMC14 this is a "flat" reduction calculation. It's fine for now since this is the only
+        // cooldown reducer we have, but if we ever get more sources of cooldown reduction, this will
+        // need to be revisited to be multiplicative instead of additive to prevent issues.
+        var reductionAmount = args.InitialDelay * ent.Comp.UseDelayReduction.Float();
         args.Start -= reductionAmount;
         args.End -= reductionAmount;
     }
