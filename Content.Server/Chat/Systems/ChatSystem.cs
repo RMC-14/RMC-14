@@ -671,8 +671,16 @@ public sealed partial class ChatSystem : SharedChatSystem
             if (entRange == MessageRangeCheckResult.Disallowed)
                 continue;
 
-            var entHideChat = entRange == MessageRangeCheckResult.HideChat; // RMC14 ear deafness
-            var ev = new ChatMessageOverrideInVoiceRangeEvent(session, channel, source, message, wrappedMessage, entHideChat);
+            // RMC14
+            var entHideChat = entRange == MessageRangeCheckResult.HideChat;
+            var ev = new ChatMessageOverrideInVoiceRangeEvent(
+                session,
+                channel,
+                source,
+                message,
+                wrappedMessage,
+                null,
+                entHideChat);
 
             if (session.AttachedEntity != null)
                 RaiseLocalEvent(session.AttachedEntity.Value, ref ev);
@@ -680,6 +688,7 @@ public sealed partial class ChatSystem : SharedChatSystem
                 RaiseLocalEvent(source, ref ev);
 
             _chatManager.ChatMessageToOne(channel, ev.Message, ev.WrappedMessage, source, ev.EntHideChat, session.Channel, author: author);
+            // RMC14
         }
 
         _replay.RecordServerMessage(new ChatMessage(channel, message, wrappedMessage, GetNetEntity(source), null, MessageRangeHideChatForReplay(range), speechStyleClass: CompOrNull<RMCSpeechBubbleSpecificStyleComponent>(source)?.SpeechStyleClass, repeatCheckSender: !HasComp<ChatRepeatIgnoreSenderComponent>(source)));
