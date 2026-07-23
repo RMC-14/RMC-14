@@ -84,3 +84,4 @@
   - type: Tag
     tags:
     - DrinkGlass
+  - type: TransformableContainer
