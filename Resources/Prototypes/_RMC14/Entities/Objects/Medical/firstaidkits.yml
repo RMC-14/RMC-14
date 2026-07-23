@@ -83,6 +83,12 @@
   id: CMFirstAidKitSurgery
   name: basic field surgery kit
   components:
+  - type: Sprite
+    layers:
+    - state: bezerk
+    - state: kit_empty
+      map: [ "openLayer" ]
+      visible: false
   - type: Storage
     maxItemSize: Small
     grid:
