@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: TadJohnson00
-  changes:
-  - message: '[PVE] added large magazine boxes for most PVE weapons.'
-    type: Add
-  id: 3021
-  time: '2026-03-28T11:15:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9293
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed Mess Techs not being mutiny eligible
@@ -4582,5 +4575,13 @@
   id: 3520
   time: '2026-07-23T18:45:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10527
+- author: SharkSnake98
+  changes:
+  - message: Put the PK7 and it's magazines in the CL's safe inside of the shoulder
+      holster
+    type: Tweak
+  id: 3521
+  time: '2026-07-23T18:50:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9590
 Name: RMC14
 Order: -1
