@@ -176,18 +176,18 @@ public sealed class QueenEyeSystem : EntitySystem
             return;
 
         var newCoords = args.NewPosition;
-        var newWorldPos = _transform.ToMapCoordinates(newCoords).Position;
         var soft = ent.Comp.SoftWeedDistance;
         var max = ent.Comp.MaxWeedDistance;
 
-        var anchorPos = Vector2.Zero;
         var haveAnchor = ent.Comp.AnchorWeed is { } anchor && HasComp<XenoWeedsComponent>(anchor);
         if (haveAnchor)
         {
-            anchorPos = _transform.GetWorldPosition(ent.Comp.AnchorWeed!.Value);
-
-            if (Vector2.DistanceSquared(newWorldPos, anchorPos) <= soft * soft)
+            var anchorCoords = Transform(ent.Comp.AnchorWeed!.Value).Coordinates;
+            if (anchorCoords.TryDistance(EntityManager, _transform, newCoords, out var distance) &&
+            distance <= soft)
+            {
                 return;
+            }
         }
 
         _nearbyWeeds.Clear();
@@ -195,13 +195,18 @@ public sealed class QueenEyeSystem : EntitySystem
 
         if (_nearbyWeeds.Count != 0)
         {
-            ent.Comp.AnchorWeed = GetClosestWeed(newWorldPos, _nearbyWeeds, out _);
+            ent.Comp.AnchorWeed = GetClosestWeed(newCoords, _nearbyWeeds);
             return;
         }
 
+        var newWorldPos = _transform.ToMapCoordinates(newCoords).Position;
         var oldWorldPos = _transform.ToMapCoordinates(args.OldPosition).Position;
 
         Vector2 pivot;
+        var anchorPos = Vector2.Zero;
+        if (haveAnchor)
+            anchorPos = _transform.GetWorldPosition(ent.Comp.AnchorWeed!.Value);
+
         if (haveAnchor && Vector2.DistanceSquared(oldWorldPos, anchorPos) <= max * max + 0.01f)
         {
             pivot = anchorPos;
@@ -223,7 +228,8 @@ public sealed class QueenEyeSystem : EntitySystem
                 return;
             }
 
-            ent.Comp.AnchorWeed = GetClosestWeed(oldWorldPos, _anchorWeeds, out pivot);
+            ent.Comp.AnchorWeed = GetClosestWeed(args.OldPosition, _anchorWeeds);
+            pivot = _transform.GetWorldPosition(ent.Comp.AnchorWeed!.Value);
         }
 
         var offset = newWorldPos - pivot;
@@ -246,20 +252,20 @@ public sealed class QueenEyeSystem : EntitySystem
         }
     }
 
-    private EntityUid? GetClosestWeed(Vector2 worldPos, HashSet<Entity<XenoWeedsComponent>> weeds, out Vector2 closestWeedPos)
+    private EntityUid? GetClosestWeed(EntityCoordinates origin, HashSet<Entity<XenoWeedsComponent>> weeds)
     {
         EntityUid? closest = null;
-        closestWeedPos = worldPos;
-        var closestDistSq = float.MaxValue;
+        var closestDist = float.MaxValue;
         foreach (var weed in weeds)
         {
-            var weedPos = _transform.GetWorldPosition(weed.Owner);
-            var distSq = Vector2.DistanceSquared(worldPos, weedPos);
-            if (distSq >= closestDistSq)
+            var weedCoords = Transform(weed).Coordinates;
+            if (!origin.TryDistance(EntityManager, _transform, weedCoords, out var distance))
                 continue;
 
-            closestDistSq = distSq;
-            closestWeedPos = weedPos;
+            if (distance >= closestDist)
+                continue;
+
+            closestDist = distance;
             closest = weed.Owner;
         }
 
