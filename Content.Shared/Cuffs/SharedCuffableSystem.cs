@@ -24,6 +24,7 @@ using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Popups;
 using Content.Shared.Pulling.Events;
 using Content.Shared.Rejuvenate;
+using Content.Shared.Security.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Timing;
 using Content.Shared.Verbs;
@@ -185,6 +186,15 @@ namespace Content.Shared.Cuffs
                 _alerts.ClearAlert(uid, component.CuffedAlert);
             else
                 _alerts.ShowAlert(uid, component.CuffedAlert);
+
+            // Temporary addition: Being handcuffed removes your Wanted criminal status.
+            if (!component.CanStillInteract && TryComp<CriminalRecordComponent>(uid, out var record))
+            {
+                if (record.StatusIcon == "SecurityIconWanted")
+                {
+                    RemComp<CriminalRecordComponent>(uid);
+                }
+            }
 
             var ev = new CuffedStateChangeEvent();
             RaiseLocalEvent(uid, ref ev);
