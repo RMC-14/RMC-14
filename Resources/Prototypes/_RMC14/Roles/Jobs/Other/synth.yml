@@ -126,6 +126,7 @@
     whitelist:
       tags:
       - RMCSynthGrabbable
+  - type: InfectOnPullAttemptImmune
 
 - type: entity
   id: RMCSynthRemoveComponents
