@@ -790,16 +790,21 @@ namespace Content.Shared.Preferences
                 SentryName = ValidateNamedItem(NamedItems.SentryName),
             };
 
-            string ValidateXenoName(string xenoName, bool numberEndingAllowed)
+            string ValidateXenoName(string xenoName, bool numberEndingAllowed, bool onlyEndWithNumber = false)
             {
                 xenoName = xenoName.ToUpperInvariant();
                 for (var i = 0; i < xenoName.Length; i++)
                 {
                     var c = xenoName[i];
-                    if (i > 0 && numberEndingAllowed && c >= '0' && c <= '9')
+
+                    var end = i == xenoName.Length - 1;
+
+                    // Number
+                    if (end && numberEndingAllowed && c >= '0' && c <= '9')
                         continue;
 
-                    if (c < 'A' || c > 'Z')
+                    // Not a letter
+                    if ((c < 'A' || c > 'Z') || (end && onlyEndWithNumber))
                         return string.Empty;
                 }
 
@@ -826,7 +831,7 @@ namespace Content.Shared.Preferences
                 if (XenoPostfix.Length > postfixMax)
                     XenoPostfix = XenoPostfix[..postfixMax];
 
-                XenoPostfix = ValidateXenoName(XenoPostfix, true);
+                XenoPostfix = ValidateXenoName(XenoPostfix, true, !xenoName.AllowPostfixLetterEnding(session));
             }
         }
 
