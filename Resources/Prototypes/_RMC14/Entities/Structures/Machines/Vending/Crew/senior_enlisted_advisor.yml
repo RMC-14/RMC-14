@@ -30,6 +30,7 @@
       choices: { CMBelt: 1 }
       entries:
       - id: RMCBeltUtilityGeneral
+      - id: RMCBeltBrowne
       - id: CMBeltUtilityFilled
         name: M276 pattern toolbelt rig (Full)
       - id: CMBeltMedicBagFilled

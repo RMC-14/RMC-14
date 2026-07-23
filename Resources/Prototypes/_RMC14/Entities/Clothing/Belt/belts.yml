@@ -325,6 +325,75 @@
       - Gun
 
 - type: entity
+  parent: CMBeltBaseStorage
+  id: RMCBeltBrowne
+  name: M276 'Sam Browne' duty belt
+  description: The M276 'Sam Browne' duty belt is an alternative piece of load-bearing equipment offered to senior officers, military police, and senior enlisted advisors. It consists of a leather belt, a supporting strap worn over the right shoulder, a holster for a sidearm, and a small pouch capable of holding binoculars, a megaphone, policing tools, and other miscellaneous items.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/browne.rsi
+    layers:
+    - state: icon
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m1984 # TODO RMC14 per-gun underlay
+      map: [ "enum.CMHolsterLayers.Fill" ]
+    - sprite: _RMC14/Objects/Clothing/Belt/browne.rsi
+      state: icon-front
+      map: [ "holstered" ]
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/browne.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,11,1 # 6 slots
+    whitelist:
+      tags:
+      - SecBeltEquip
+      - Taser
+      - Flashlight
+      - CMMagazinePistol
+      - RMCShellShotgun
+      - RMCMagazineRevolver
+      - Donut
+      - RMCGrenadeFlashBang
+      - Radio
+      - Recorder
+      - Binoculars
+      components:
+      - Handcuff
+      - Flash
+      - FlashOnTrigger
+      - Stunbaton
+      - ForensicScanner
+      - MeleeWeapon
+      - Gun
+      - RMCLighter
+      - RMCMegaphone
+  - type: FixedItemSizeStorage
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        components:
+        - Gun
+  - type: CMHolster
+    whitelist:
+      components:
+      - Gun
+  - type: ItemMapper
+    spriteLayers:
+    - holstered
+    mapLayers:
+      holstered:
+        whitelist:
+          tags:
+          - Sidearm
+
+- type: entity
   parent: CMBeltBase
   id: CMBeltKnife
   name: M276 pattern knife rig
