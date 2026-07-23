@@ -8,3 +8,8 @@ rmc-structure-wall-repair-examine-tip = [color=cyan]Alt+click[/color] this wall 
 rmc-structure-damaged-girder-examine-tip = Use a [color=lightgreen]welder[/color] to repair it.
 
 rmc-structure-displaced-examine-tip = It looks dislodged. [color=lightgreen]Crowbar[/color] to secure it.
+
+rmc-xeno-structure-damaged-1 = [color=lightgreen]It looks healthy![/color]
+rmc-xeno-structure-damaged-2 = [color=yellow]It looks slightly damaged.[/color]
+rmc-xeno-structure-damaged-3 = [color=orange]It looks severely damaged.[/color]
+rmc-xeno-structure-damaged-4 = [color=red]It's about to fall apart![/color]
