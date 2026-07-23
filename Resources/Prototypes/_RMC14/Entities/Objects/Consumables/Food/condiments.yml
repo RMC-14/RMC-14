@@ -108,7 +108,7 @@
       metabolismRate: 0.1
       effects:
       - !type:Nutritious
-        potency: 2
+        level: 2
         nutFactor: 5
         nutMetabolism: 0.1
 
@@ -142,7 +142,7 @@
       metabolismRate: 0.1
       effects:
       - !type:Nutritious
-        potency: 2
+        level: 2
         nutFactor: 2
         nutMetabolism: 0.1
 
@@ -176,7 +176,7 @@
       metabolismRate: 0.1
       effects:
       - !type:Nutritious
-        potency: 2
+        level: 2
         nutFactor: 20
         nutMetabolism: 0.1
 
