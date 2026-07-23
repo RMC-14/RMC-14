@@ -54,7 +54,9 @@ public sealed partial class EggMorpherSystem : EntitySystem
 
         using (args.PushGroup(nameof(EggMorpherComponent)))
         {
-            args.PushMarkup(Loc.GetString("rmc-xeno-construction-egg-morpher-examine", ("cur_paras", eggMorpher.Comp.CurParasites), ("max_paras", eggMorpher.Comp.MaxParasites)));
+            args.PushMarkup(Loc.GetString("rmc-xeno-construction-egg-morpher-examine-count", ("cur_paras", eggMorpher.Comp.CurParasites), ("max_paras", eggMorpher.Comp.MaxParasites)));
+            if (eggMorpher.Comp.NextSpawnAt is { } nextSpawnAt && eggMorpher.Comp.CurParasites < eggMorpher.Comp.GrowMaxParasites)
+                args.PushMarkup(Loc.GetString("rmc-xeno-construction-egg-morpher-examine-next-spawn", ("time_left", (int)(nextSpawnAt - _time.CurTime).TotalSeconds)));
         }
     }
 
@@ -147,6 +149,7 @@ public sealed partial class EggMorpherSystem : EntitySystem
         args.Handled = true;
         QueueDel(used);
         eggMorpher.Comp.CurParasites++;
+        Dirty(eggMorpher);
         _appearance.SetData(eggMorpher, EggmorpherOverlayVisuals.Number, eggMorpher.Comp.CurParasites);
     }
 

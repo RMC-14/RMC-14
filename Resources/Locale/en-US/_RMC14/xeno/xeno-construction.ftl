@@ -94,7 +94,8 @@ rmc-xeno-construction-egg-morpher-already-full = This egg morpher is already ful
 
 rmc-xeno-egg-morpher-return-self = {CAPITALIZE($parasite)} crawls into the egg morpher.
 
-rmc-xeno-construction-egg-morpher-examine = Sheltering: {$cur_paras}/{$max_paras} children.
+rmc-xeno-construction-egg-morpher-examine-count = Sheltering: {$cur_paras}/{$max_paras} children.
+rmc-xeno-construction-egg-morpher-examine-next-spawn = A new child will grow in [bold]{$time_left}[/bold] seconds.
 
 rmc-xeno-construction-recovery-node-heal-target = We feel a warm aura envelop us.
 rmc-xeno-construction-recovery-node-heal-other = {CAPITALIZE(THE($target))} glows as a warm aura envelops them.
