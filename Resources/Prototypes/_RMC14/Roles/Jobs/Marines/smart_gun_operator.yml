@@ -3,6 +3,7 @@
   id: CMSmartGunOperator
   name: cm-job-name-smart-gun-operator
   description: cm-job-description-smart-gun-operator
+  newToJobInfo: rmc-new-to-job-smart-gun-operator
   playTimeTracker: CMJobSmartGunOperator
   requirements:
     - !type:DepartmentTimeRequirement
