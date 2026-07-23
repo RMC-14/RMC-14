@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: GNUtopia
-  changes:
-  - message: Improvised firebombs and AGM-I grenades now burn for the proper time
-    type: Fix
-  id: 3019
-  time: '2026-03-28T11:06:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9409
 - author: Arykh
   changes:
   - message: Added the Body Scanner! Its scan is more detailed than the Health Analyzer,
@@ -4581,5 +4574,13 @@
   id: 3518
   time: '2026-07-23T14:54:24.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10532
+- author: kleinerstation13
+  changes:
+  - message: Fixed Fiorina riot control officers and kutjevo deputy not having their
+      parity ranks
+    type: Fix
+  id: 3519
+  time: '2026-07-23T15:56:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10535
 Name: RMC14
 Order: -1
