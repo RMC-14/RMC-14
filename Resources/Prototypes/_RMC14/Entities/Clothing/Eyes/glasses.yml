@@ -17,6 +17,7 @@
   - type: ShowMindShieldIcons
   - type: ShowCriminalRecordIcons
   - type: FlashImmunity
+  - type: OverwatchCamera
   - type: GuideHelp
     guides:
     - RMCGuideRoleMilitaryPolice
