@@ -64,5 +64,5 @@
   parent: CMJobIconBase
   id: RMCJobIconRoyalCaptain
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_captain
+    sprite: _RMC14/Interface/job_icons/TSE/RCM/standard.rsi
+    state: rcm_captain

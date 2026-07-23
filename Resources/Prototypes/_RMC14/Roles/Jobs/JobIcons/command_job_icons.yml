@@ -2,26 +2,26 @@
   parent: CMJobIconBase
   id: CMJobIconStaffOfficer
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/command.rsi
     state: staff_officer
 
 - type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconSEA
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/auxiliary_support.rsi
     state: senior_enlisted_advisor
 
 - type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconCommandingOfficer
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/command.rsi
     state: hudsquad_co
 
 - type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconExecutiveOfficer
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/command.rsi
     state: hudsquad_xo

@@ -467,9 +467,9 @@
     minMagazines: 1
     maxMagazines: 5
     prototypes:
-    - RMCWeaponShotgunHG3712: RMCSpawnerRandomShotgunBoxes
-    - RMCWeaponShotgunHG3712: RMCSpawnerRandomShotgunBoxes
-    - RMCWeaponShotgunHG3712: RMCSpawnerRandomShotgunBoxes
+    - RMCWeaponShotgunM12: RMCSpawnerRandomShotgunBoxes
+    - RMCWeaponShotgunM12: RMCSpawnerRandomShotgunBoxes
+    - RMCWeaponShotgunM12: RMCSpawnerRandomShotgunBoxes
     - WeaponSMGMP5: CMMagazineSMGMP5
     - WeaponSMGMP5: CMMagazineSMGMP5
     - WeaponSMGMP5: CMMagazineSMGMP5
@@ -541,7 +541,7 @@
     - WeaponShotgunM357Sawn: RMCSpawnerRandomShotgunBoxes
     - WeaponShotgunM357: RMCSpawnerRandomShotgunBoxes
     - WeaponShotgunM357: RMCSpawnerRandomShotgunBoxes
-    - RMCWeaponShotgunHG3712: RMCSpawnerRandomShotgunBoxes
+    - RMCWeaponShotgunM12: RMCSpawnerRandomShotgunBoxes
     - RMCWeaponRevolverSpearhead: RMCSpeedLoader357
     - RMCWeaponRifleABR40: RMCMagazineRifleABR40
 

@@ -1531,3 +1531,9 @@ RMCBeakerHighCapacity: RMCReagentJug
 
 # 2026-07-04
 RMCWeaponShotgunHG3712: RMCWeaponShotgunM12
+
+# 2026-07-11
+RMCJumpsuitSPPPaP: RMCJumpsuitSPPPCG
+RMCIDCardPaP: RMCIDCardPCG
+RMCHeadsetSPPPaP: RMCHeadsetSPPPCG
+RMCCoatPaP: RMCCoatPCG

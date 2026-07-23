@@ -7,7 +7,7 @@
   startingGear: RMCGearSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader
   accessGroups:
   - ColonistSec
-  spawnMenuRoleName: CMB Riot Control Team Leader (Special Survivor)
+  spawnMenuRoleName: CMB Riot Control Team Leader (Fiorina Special Survivor)
   icon: "RMCJobIconBureauDeputy"
   hasIcon: true
   special:

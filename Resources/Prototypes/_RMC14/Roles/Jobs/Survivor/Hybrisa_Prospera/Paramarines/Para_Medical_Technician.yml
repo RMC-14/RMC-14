@@ -7,7 +7,7 @@
   startingGear: RMCGearParaMedicalTechnician
   icon: RMCJobIconParaMedicalTechnican
   playTimeTracker: RMCJobSurvivorMilitary
-  spawnMenuRoleName: Royal Paramarine Medical Technician (Survivor)
+  spawnMenuRoleName: Royal Paramarine Medical Technician (Hybrisa Special Survivor)
   special:
     - !type:AddComponentSpecial
       components:
@@ -69,5 +69,5 @@
   parent: CMJobIconBase
   id: RMCJobIconParaMedicalTechnican
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/TSE/RCM/paramarine.rsi
     state: para_medic

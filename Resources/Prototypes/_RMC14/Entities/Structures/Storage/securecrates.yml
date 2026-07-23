@@ -151,7 +151,7 @@
 
 - type: entity
   parent: MarkerBase
-  id: RMCSpawnerRandomHalyconGuns
+  id: RMCSpawnerRandomHalcyonGuns
   name: random crate loot spawner
   description: This is a random crate loot spawner
   categories: [ HideSpawnMenu ]
@@ -282,12 +282,12 @@
 
 - type: entity
   parent: RMCCrateLarge
-  id: RMCCrateHalyconFireArms
-  name: Halycon firearm crate
+  id: RMCCrateHalcyonFireArms
+  name: Halcyon firearm crate
   description: A hefty wooden crate.
   components:
   - type: SpawnOnTerminate
-    spawn: RMCSpawnerRandomHalyconGuns
+    spawn: RMCSpawnerRandomHalcyonGuns
 #Todo RMC14: Make it so it does it 3 times
 
 # Black market
@@ -506,6 +506,19 @@
       amount: 1
   - type: SpawnOnTerminate
     spawn: CMSheetPlasteel30
+
+- type: entity
+  parent: RMCSecureCase # x6 Sentry M30 ammo drum
+  id: RMCSecureCaseSentryAmmo6
+  name: UN 571-C ammunition drum case (x6)
+  description: An ammunition case containing 6 M30 ammo drums.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: RMCMagazineSentry
+      amount: 6
+  - type: SpawnOnTerminate
+    spawn: RMCPlankWood2
 
 #Blackmarket will be down from there TODO RMC14: Blackmarket Crates after R4T rifle
 
