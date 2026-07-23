@@ -60,6 +60,7 @@
     bodyType: Static
   - type: Foldable
     anchorOnUnfold: true
+  - type: RMCChairStackable
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/folding_chair.rsi
     layers:
@@ -79,6 +80,10 @@
     damage:
       types:
         Blunt: 10
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 3
   - type: Construction
     graph: CMSeat
     node: chair
@@ -91,6 +96,10 @@
   id: CMChairFolded
   suffix: RMC|folded
   components:
+  - type: Transform # Unanchored and dynamic to prevent folded chairs from getting stuck
+    anchored: false
+  - type: Physics
+    bodyType: Dynamic
   - type: Foldable
     folded: true
   - type: Strap
