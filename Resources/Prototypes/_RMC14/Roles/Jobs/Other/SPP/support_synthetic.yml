@@ -29,6 +29,7 @@
       - German
       - French
       - Spanish
+      - Hindi
       understoodLanguages:
       - Russian
       - Scandinavian
@@ -38,6 +39,7 @@
       - German
       - French
       - Spanish
+      - Hindi
       currentLanguage: Russian
       defaultLanguage: Russian
     - type: LanguageLearning
