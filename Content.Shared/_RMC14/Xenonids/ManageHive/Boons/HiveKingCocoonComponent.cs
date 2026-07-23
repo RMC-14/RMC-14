@@ -1,4 +1,5 @@
-﻿using Content.Shared.Roles;
+using Content.Shared.Roles;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -28,4 +29,7 @@ public sealed partial class HiveKingCocoonComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntProtoId Spawn = "RMCXenoKing";
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier KingMusic = new SoundPathSpecifier("/Audio/_RMC14/Hijack/retribution.ogg");
 }
