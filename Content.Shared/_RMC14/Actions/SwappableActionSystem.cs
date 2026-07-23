@@ -1,6 +1,7 @@
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Actions;
 
@@ -8,6 +9,8 @@ public sealed class SwappableActionSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IComponentFactory _compFactory = default!;
 
     public override void Initialize()
     {
@@ -20,24 +23,29 @@ public sealed class SwappableActionSystem : EntitySystem
     {
         if (ent.Comp.IsSwapped)
         {
-            if (!HasComp<WorldTargetActionComponent>(ent) || ent.Comp.SwappedEventTemplate == null)
-                return;
-
-            _actions.SetEvent(ent, ent.Comp.SwappedEventTemplate);
+            if (HasComp<WorldTargetActionComponent>(ent) &&
+                ent.Comp.SwappedActionProto is { } id &&
+                _prototype.TryIndex(id, out var proto) &&
+                proto.TryGetComponent<WorldTargetActionComponent>(out var world, _compFactory) &&
+                world.Event is { } ev)
+            {
+                _actions.SetEvent(ent, ev);
+            }
         }
         else
         {
-            if (!HasComp<InstantActionComponent>(ent) || ent.Comp.OriginalEventTemplate == null)
-                return;
-
-            _actions.SetEvent(ent, ent.Comp.OriginalEventTemplate);
+            if (HasComp<InstantActionComponent>(ent) &&
+                MetaData(ent).EntityPrototype is { } proto &&
+                proto.TryGetComponent<InstantActionComponent>(out var instant, _compFactory) &&
+                instant.Event is { } ev)
+            {
+                _actions.SetEvent(ent, ev);
+            }
         }
     }
 
-    public bool SwapInstantToWorldTarget<TOriginalEvent>(
-        EntityUid owner,
-        string swappedName,
-        string swappedDescription) where TOriginalEvent : InstantActionEvent
+    public bool SwapInstantToWorldTarget<TOriginalEvent>(EntityUid owner)
+        where TOriginalEvent : InstantActionEvent
     {
         foreach (var (actionId, _) in _actions.GetActions(owner))
         {
@@ -48,31 +56,16 @@ public sealed class SwappableActionSystem : EntitySystem
             }
 
             if (!TryComp<SwappableActionComponent>(actionId, out var swappable) ||
-                swappable.SwappedEventTemplate == null)
+                swappable.SwappedActionProto is not { } protoId ||
+                !_prototype.TryIndex(protoId, out var proto))
             {
                 continue;
             }
 
-            swappable.OriginalName = MetaData(actionId).EntityName;
-            swappable.OriginalDescription = MetaData(actionId).EntityDescription;
             swappable.IsSwapped = true;
             Dirty(actionId, swappable);
 
-            RemComp<InstantActionComponent>(actionId);
-
-            var targetAction = EnsureComp<TargetActionComponent>(actionId);
-            targetAction.CheckCanAccess = false;
-            targetAction.Range = -1;
-            targetAction.DeselectOnMiss = false;
-            targetAction.Repeat = false;
-            Dirty(actionId, targetAction);
-
-            EnsureComp<WorldTargetActionComponent>(actionId);
-            _actions.SetEvent(actionId, swappable.SwappedEventTemplate);
-
-            _metaData.SetEntityName(actionId, swappedName);
-            _metaData.SetEntityDescription(actionId, swappedDescription);
-
+            SwapActionTo(actionId, proto);
             return true;
         }
 
@@ -92,20 +85,64 @@ public sealed class SwappableActionSystem : EntitySystem
                 continue;
             }
 
-            if (swappable.OriginalEventTemplate == null)
+            if (!swappable.IsSwapped ||
+                MetaData(actionId).EntityPrototype is not { } originalProto)
+            {
                 continue;
+            }
 
+            SwapActionTo(actionId, originalProto);
+
+            swappable.IsSwapped = false;
+            Dirty(actionId, swappable);
+        }
+    }
+
+    /// <summary>
+    ///     Swaps the action to the target action prototype
+    /// </summary>
+    private void SwapActionTo(EntityUid actionId, EntityPrototype proto)
+    {
+        _metaData.SetEntityName(actionId, proto.Name);
+        _metaData.SetEntityDescription(actionId, proto.Description);
+
+        if (proto.TryGetComponent<ActionComponent>(out var protoAction, _compFactory))
+        {
+            _actions.SetUseDelay(actionId, protoAction.UseDelay);
+            _actions.SetIcon(actionId, protoAction.Icon);
+            _actions.SetIconOn(actionId, protoAction.IconOn);
+            _actions.SetIconColor(actionId, protoAction.IconColor);
+        }
+
+        if (proto.TryGetComponent<WorldTargetActionComponent>(out var protoWorld, _compFactory))
+        {
+            RemComp<InstantActionComponent>(actionId);
+
+            var target = EnsureComp<TargetActionComponent>(actionId);
+            if (proto.TryGetComponent<TargetActionComponent>(out var protoTarget, _compFactory))
+            {
+                target.Repeat = protoTarget.Repeat;
+                target.DeselectOnMiss = protoTarget.DeselectOnMiss;
+                target.CheckCanAccess = protoTarget.CheckCanAccess;
+                target.Range = protoTarget.Range;
+            }
+            Dirty(actionId, target);
+
+            var world = EnsureComp<WorldTargetActionComponent>(actionId);
+            world.RotateOnUse = protoWorld.RotateOnUse;
+            Dirty(actionId, world);
+
+            if (protoWorld.Event is { } worldEv)
+                _actions.SetEvent(actionId, worldEv);
+        }
+        else if (proto.TryGetComponent<InstantActionComponent>(out var protoInstant, _compFactory))
+        {
             RemComp<WorldTargetActionComponent>(actionId);
             RemComp<TargetActionComponent>(actionId);
 
             EnsureComp<InstantActionComponent>(actionId);
-            _actions.SetEvent(actionId, swappable.OriginalEventTemplate);
-
-            _metaData.SetEntityName(actionId, swappable.OriginalName);
-            _metaData.SetEntityDescription(actionId, swappable.OriginalDescription);
-
-            swappable.IsSwapped = false;
-            Dirty(actionId, swappable);
+            if (protoInstant.Event is { } instantEv)
+                _actions.SetEvent(actionId, instantEv);
         }
     }
 }
