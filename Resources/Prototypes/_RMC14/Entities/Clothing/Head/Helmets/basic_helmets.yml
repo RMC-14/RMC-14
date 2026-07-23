@@ -22,7 +22,6 @@
       whitelist:
         components:
         - RMCFlask
-        - CMScalpel
         - CassettePlayer
         - CassetteTape
         tags:
@@ -39,6 +38,7 @@
         - PillPacket
         - Syringe
         - Pill
+        - RMCScalpel
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
@@ -73,7 +73,6 @@
       components:
       - RMCLighter
       - RMCFlask
-      - CMScalpel
       - Figurine
       - HelmetAccessory
       - CassettePlayer
@@ -92,6 +91,7 @@
       - CMOintment
       - CMAutoInjector
       - PillPacket
+      - RMCScalpel
   - type: FixedItemSizeStorage
   - type: InteractedBlacklist
     blacklist:

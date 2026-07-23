@@ -197,3 +197,18 @@
 
 - type: Tag
   id: RMCDataDisk
+
+- type: Tag
+  id: RMCSurgerySurfaceIdeal
+
+- type: Tag
+  id: RMCSurgerySurfaceAdequate
+
+- type: Tag
+  id: RMCSurgerySurfaceUnsuited
+
+- type: Tag
+  id: RMCSurgerySurfaceAwful
+
+- type: Tag
+  id: RMCSurgeryTool
