@@ -3,7 +3,7 @@
   id: RMCSurvivorParaMedicalTechnician
   name: rmc-job-name-para-medic
   ranks:
-    RMCRankParaLanceCorporal: [ ]
+    RMCRankTSELanceCorporal: [ ]
   startingGear: RMCGearParaMedicalTechnician
   icon: RMCJobIconParaMedicalTechnican
   playTimeTracker: RMCJobSurvivorMilitary
