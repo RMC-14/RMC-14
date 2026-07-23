@@ -160,7 +160,7 @@ namespace Content.Client.ContextMenu.UI
                 // RMC: if a repeatable targeted abilityis still selected after this
                 // click, keep the menu open so the next can be targeted immediately
                 // instead of forcing the player to reopen the menu
-                if (_actionUi.SelectingTargetFor == null)
+                if (func != EngineKeyFunctions.Use || _actionUi.SelectingTargetFor == null)
                     _context.Close();
 
                 args.Handle();
