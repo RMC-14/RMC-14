@@ -71,6 +71,9 @@
       - FoodSoupBungo
       - FoodMealCornInButter
       - FoodSoupStew
+      - FoodMealBourguignon
+      - FoodMealBouillabaisse
+      - FoodMealCassoulet
     chance: 0.8
     offset: 0.0
     #rare
