@@ -1,4 +1,6 @@
 uniform sampler2D SCREEN_TEXTURE;
+uniform highp float min_brightness;
+uniform highp float max_brightness;
 
 void fragment() {
     highp vec2 uv = UV;
@@ -14,10 +16,8 @@ void fragment() {
 
     highp float v = vx * vy;
 
-    // Darkening gradient
-    // Center: 60% brightness
-    // Edges: 0% brightness
-    highp vec3 final_color = color.rgb * mix(0.0, 0.6, v);
+    // darkening using parameterized values
+    highp vec3 final_color = color.rgb * mix(min_brightness, max_brightness, v);
 
     COLOR = vec4(clamp(final_color, 0.0, 1.0), color.a);
 }

@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Welding;
 using Content.Shared.Inventory;
+using Content.Shared.Item.ItemToggle.Components;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
@@ -18,12 +19,33 @@ public sealed class RMCWeldingVisionOverlay : Overlay
 
     private readonly ShaderInstance _shader;
     private readonly InventorySystem _inventory;
+    private bool _isSuperior;
 
     public RMCWeldingVisionOverlay()
     {
         IoCManager.InjectDependencies(this);
         _shader = _prototypeManager.Index<ShaderPrototype>("RMCWeldingVision").InstanceUnique();
         _inventory = _entityManager.System<InventorySystem>();
+    }
+
+    private bool TryGetWeldingVision(EntityUid? item, out bool superior)
+    {
+        superior = false;
+
+        if (item == null)
+            return false;
+
+        if (!_entityManager.TryGetComponent<RMCWeldingVisionComponent>(item.Value, out var weldComp))
+            return false;
+
+        if (_entityManager.TryGetComponent<ItemToggleComponent>(item.Value, out var toggle) &&
+            !toggle.Activated)
+        {
+            return false;
+        }
+
+        superior = weldComp.Superior;
+        return true;
     }
 
     protected override bool BeforeDraw(in OverlayDrawArgs args)
@@ -38,21 +60,27 @@ public sealed class RMCWeldingVisionOverlay : Overlay
         if (args.Viewport.Eye != eyeComp.Eye)
             return false;
 
-        if (_inventory.TryGetSlotEntity(local.Value, "eyes", out var eyes) &&
-            _entityManager.HasComponent<RMCWeldingVisionComponent>(eyes.Value))
+        _isSuperior = false;
+
+        _inventory.TryGetSlotEntity(local.Value, "eyes", out var eyes);
+        _inventory.TryGetSlotEntity(local.Value, "mask", out var mask);
+        _inventory.TryGetSlotEntity(local.Value, "head", out var head);
+
+        if (TryGetWeldingVision(eyes, out var eyesSuperior))
         {
+            _isSuperior = eyesSuperior;
             return true;
         }
 
-        if (_inventory.TryGetSlotEntity(local.Value, "mask", out var mask) &&
-            _entityManager.HasComponent<RMCWeldingVisionComponent>(mask.Value))
+        if (TryGetWeldingVision(mask, out var maskSuperior))
         {
+            _isSuperior = maskSuperior;
             return true;
         }
 
-        if (_inventory.TryGetSlotEntity(local.Value, "head", out var head) &&
-            _entityManager.HasComponent<RMCWeldingVisionComponent>(head.Value))
+        if (TryGetWeldingVision(head, out var headSuperior))
         {
+            _isSuperior = headSuperior;
             return true;
         }
 
@@ -66,6 +94,18 @@ public sealed class RMCWeldingVisionOverlay : Overlay
 
         var handle = args.WorldHandle;
         _shader.SetParameter("SCREEN_TEXTURE", ScreenTexture);
+
+        if (_isSuperior)
+        {
+            _shader.SetParameter("min_brightness", 0.22f);
+            _shader.SetParameter("max_brightness", 0.75f);
+        }
+        else
+        {
+            _shader.SetParameter("min_brightness", 0.0f);
+            _shader.SetParameter("max_brightness", 0.6f);
+        }
+
         handle.UseShader(_shader);
         handle.DrawRect(args.WorldBounds, Color.White);
         handle.UseShader(null);
