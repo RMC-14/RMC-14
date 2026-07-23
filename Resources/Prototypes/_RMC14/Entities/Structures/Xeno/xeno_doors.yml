@@ -30,6 +30,7 @@
         layer:
         - AirlockLayer
   - type: Door
+    canHoldOpen: true
     canPry: false
     crushDamage:
       types:
@@ -115,6 +116,7 @@
     - state: closed_unlit
       map: ["enum.DoorVisualLayers.BaseBolted"]
   - type: Door
+    canHoldOpen: true
     crushDamage:
       types:
         Blunt: 15

@@ -121,6 +121,15 @@ public abstract class SharedAirlockSystem : EntitySystem
         if (autoev.Cancelled)
             return;
 
+        //RMC14
+        if (door.CanHoldOpen)
+        {
+            //if the door can be held open it needs to check every second if it is being held open
+            DoorSystem.SetNextStateChange(uid, TimeSpan.FromSeconds(1));
+            return;
+        }
+        //RMC14
+
         DoorSystem.SetNextStateChange(uid, airlock.AutoCloseDelay * airlock.AutoCloseDelayModifier);
     }
 

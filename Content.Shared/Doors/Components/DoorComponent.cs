@@ -42,6 +42,26 @@ public sealed partial class DoorComponent : Component
     [DataField]
     public TimeSpan CloseTimeTwo = TimeSpan.FromSeconds(0.2f);
 
+    //RMC14
+    /// <summary>
+    /// Remaining time an open door is held open
+    /// </summary>
+    [AutoNetworkedField, ViewVariables]
+    public TimeSpan HoldOpenDelay;
+
+    /// <summary>
+    /// time the door will be delayed from closing when held open
+    /// </summary>
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public TimeSpan HoldOpenTime = TimeSpan.FromSeconds(5);
+
+    /// <summary>
+    /// Whether or not the door closing time can be delayed when held open
+    /// </summary>
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public bool CanHoldOpen = false;
+    //RMC14
+
     /// <summary>
     /// Opening time until passable. Total time is this plus <see cref="OpenTimeTwo"/>.
     /// </summary>

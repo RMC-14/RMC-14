@@ -166,6 +166,12 @@ public abstract partial class SharedDoorSystem : EntitySystem
             case DoorState.Opening:
                 _activeDoors.Add((uid, door));
                 door.NextStateChange = GameTiming.CurTime + door.OpenTimeOne;
+                //RMC14
+                if (door.CanHoldOpen)
+                {
+                    door.HoldOpenDelay = GameTiming.CurTime + door.HoldOpenTime;
+                }
+                //RMC14
                 break;
 
             case DoorState.Closing:
@@ -820,6 +826,22 @@ public abstract partial class SharedDoorSystem : EntitySystem
                 break;
 
             case DoorState.Open:
+
+                //RMC14
+                if (door.CanHoldOpen)
+                {
+                    if (!(time > door.HoldOpenDelay))
+                    {
+                        if (!CanClose(ent, door))
+                        {
+                            door.HoldOpenDelay = time + door.HoldOpenTime;
+                        }
+                        door.NextStateChange = time + TimeSpan.FromSeconds(1);
+                        break;
+                    }
+                }
+                //RMC14
+
                 // This door is open, and queued for an auto-close.
                 if (!TryClose(ent, door))
                 {
