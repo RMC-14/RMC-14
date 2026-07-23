@@ -646,6 +646,27 @@
   suffix: Unbuttoned
 
 - type: entity
+  parent: [CMCoatOfficer, RMCBaseJacketButtonable]
+  id: RMCCoatAllWeather
+  name: marine all-weather coat
+  description: A water-resistant trench coat issued to marines not expected to see frontline combat. You think you remember hearing something about these bleeding orange into the wash.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/allweather.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/allweather.rsi
+  - type: CMArmor
+    melee: 10
+  - type: Appearance
+
+- type: entity
+  parent: [RMCBaseJacketButtonableOpened, RMCCoatAllWeather]
+  id: RMCCoatAllWeatherFolded
+  name: marine all-weather coat
+  description: A water-resistant trench coat issued to marines not expected to see frontline combat. You think you remember hearing something about these bleeding orange into the wash.
+  suffix: Unbuttoned
+
+- type: entity
   parent: CMCoatOfficer
   id: RMCProvostCoat
   name: Provost Coat

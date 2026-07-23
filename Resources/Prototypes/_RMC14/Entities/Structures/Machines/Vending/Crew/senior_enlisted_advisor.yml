@@ -61,6 +61,7 @@
       choices: { CMCoat: 1 }
       entries:
       - id: RMCCoatService
+      - id: RMCCoatAllWeather
     - name: Eyewear
       choices: { CMEyewear: 1 }
       entries:
