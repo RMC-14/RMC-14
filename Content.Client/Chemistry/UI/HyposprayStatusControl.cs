@@ -18,6 +18,7 @@ public sealed class HyposprayStatusControl : Control
     private FixedPoint2 PrevVolume;
     private FixedPoint2 PrevMaxVolume;
     private bool PrevOnlyAffectsMobs;
+    private FixedPoint2 PrevTransferAmount; // RMC14
 
     public HyposprayStatusControl(Entity<HyposprayComponent> parent, SharedSolutionContainerSystem solutionContainers)
     {
@@ -31,28 +32,49 @@ public sealed class HyposprayStatusControl : Control
     {
         base.FrameUpdate(args);
 
-        if (!_solutionContainers.TryGetSolution(_parent.Owner, _parent.Comp.SolutionName, out _, out var solution))
-            return;
-
-        // only updates the UI if any of the details are different than they previously were
-        if (PrevVolume == solution.Volume
-            && PrevMaxVolume == solution.MaxVolume
-            && PrevOnlyAffectsMobs == _parent.Comp.OnlyAffectsMobs)
-            return;
-
-        PrevVolume = solution.Volume;
-        PrevMaxVolume = solution.MaxVolume;
-        PrevOnlyAffectsMobs = _parent.Comp.OnlyAffectsMobs;
-
+        // RMC14
         var modeStringLocalized = Loc.GetString((_parent.Comp.OnlyAffectsMobs && _parent.Comp.CanContainerDraw) switch
         {
             false => "hypospray-all-mode-text",
             true => "hypospray-mobs-only-mode-text",
         });
 
+        if (!_solutionContainers.TryGetSolution(_parent.Owner, _parent.Comp.SolutionName, out _, out var solution))
+        {
+            if (PrevVolume == 0
+                && PrevMaxVolume == 0
+                && PrevOnlyAffectsMobs == _parent.Comp.OnlyAffectsMobs
+                && PrevTransferAmount == _parent.Comp.TransferAmount)
+                return;
+
+            PrevVolume = 0;
+            PrevMaxVolume = 0;
+            PrevOnlyAffectsMobs = _parent.Comp.OnlyAffectsMobs;
+            PrevTransferAmount = _parent.Comp.TransferAmount;
+
+            _label.SetMarkup(Loc.GetString("rmc-hypospray-label",
+            ("modeString", modeStringLocalized),
+            ("transferVolume", _parent.Comp.TransferAmount)));
+            return;
+        }
+
+        // only updates the UI if any of the details are different than they previously were
+        if (PrevVolume == solution.Volume
+            && PrevMaxVolume == solution.MaxVolume
+            && PrevOnlyAffectsMobs == _parent.Comp.OnlyAffectsMobs
+            && PrevTransferAmount == _parent.Comp.TransferAmount)
+            return;
+
+        PrevVolume = solution.Volume;
+        PrevMaxVolume = solution.MaxVolume;
+        PrevOnlyAffectsMobs = _parent.Comp.OnlyAffectsMobs;
+        PrevTransferAmount = _parent.Comp.TransferAmount;
+
         _label.SetMarkup(Loc.GetString("hypospray-volume-label",
             ("currentVolume", solution.Volume),
             ("totalVolume", solution.MaxVolume),
-            ("modeString", modeStringLocalized)));
+            ("modeString", modeStringLocalized),
+            ("transferVolume", _parent.Comp.TransferAmount)));
+        // RMC14
     }
 }

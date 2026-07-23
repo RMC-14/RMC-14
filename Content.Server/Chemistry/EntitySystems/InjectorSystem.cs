@@ -138,7 +138,7 @@ public sealed class InjectorSystem : SharedInjectorSystem
         actualDelay += injector.Comp.DelayPerVolume * FixedPoint2.Max(0, amountToInject - injector.Comp.MinimumTransferAmount).Double();
 
         // Ensure that minimum delay before incapacitation checks is 1 seconds
-        actualDelay = MathHelper.Max(actualDelay, TimeSpan.FromSeconds(1));
+        actualDelay = MathHelper.Max(actualDelay, TimeSpan.FromSeconds(0)); //RMC min delay is 0
 
 
         var isTarget = user != target;
