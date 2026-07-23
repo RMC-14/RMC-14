@@ -184,7 +184,7 @@ public sealed class QueenEyeSystem : EntitySystem
         {
             var anchorCoords = Transform(ent.Comp.AnchorWeed!.Value).Coordinates;
             if (anchorCoords.TryDistance(EntityManager, _transform, newCoords, out var distance) &&
-            distance <= soft)
+                distance <= soft)
             {
                 return;
             }
