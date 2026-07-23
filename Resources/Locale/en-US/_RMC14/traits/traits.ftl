@@ -1,5 +1,7 @@
 rmc-trait-category-inconveniences = Inconveniences
 
+rmc-trait-category-drinking = Alcohol Tolerance
+
 rmc-trait-russian-accent-name = Russian accent
 rmc-trait-russian-accent-desc = You come from space Russia
 
@@ -14,6 +16,9 @@ rmc-trait-spanish-accent-desc = You come from space Spain
 
 rmc-trait-scottish-accent-name = Scottish accent
 rmc-trait-scottish-accent-desc = Fer tha folk who come fae a Hielan clan.
+
+rmc-trait-heavyweight-name = Heavyweight drunk
+rmc-trait-heavyweight-desc = This is someone that can hold their liquor
 
 rmc-trait-spanish-language-name = Spanish language
 rmc-trait-spanish-language-desc = You can speak and understand Spanish.

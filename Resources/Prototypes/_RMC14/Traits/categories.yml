@@ -1,3 +1,8 @@
 - type: traitCategory
   id: RMCInconveniences
   name: rmc-trait-category-inconveniences
+
+- type: traitCategory
+  id: RMCDrinkingTraits
+  name: rmc-trait-category-drinking
+  maxTraitPoints: 1
