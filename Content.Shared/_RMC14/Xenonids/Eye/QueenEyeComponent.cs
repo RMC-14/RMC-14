@@ -16,6 +16,6 @@ public sealed partial class QueenEyeComponent : Component
     public float SoftWeedDistance = 3f;
 
     // Queen Eye only local cache for the range calc, lives on comp for if ever multiple eyes. Do not set elsewhere.
-    // Currently intentional to benot Datafield or AutoNetworkedField as there is no need.
+    // Currently intentional to not be Datafield or AutoNetworkedField as there is no need.
     public EntityUid? AnchorWeed;
 }
