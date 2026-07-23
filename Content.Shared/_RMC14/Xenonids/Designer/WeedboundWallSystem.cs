@@ -2,10 +2,9 @@ using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Destructible;
+using Content.Shared.Examine;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
-using System.Linq;
-using Content.Shared.Examine;
 
 namespace Content.Shared._RMC14.Xenonids.Designer;
 

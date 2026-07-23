@@ -36,6 +36,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Doors.Components;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
+using Content.Shared.Ghost;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
 using Content.Shared.Popups;
@@ -55,7 +56,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using static Content.Shared.Physics.CollisionGroup;
-using Content.Shared.Ghost;
 
 namespace Content.Shared._RMC14.Xenonids.Construction;
 
