@@ -69,6 +69,7 @@
   - type: MarineCommunicationsComputer
   - type: OverwatchConsole
     canMessageSquad: false
+    showAntiAirStatus: true
   - type: TacticalMapComputer
   - type: GuideHelp
     guides:

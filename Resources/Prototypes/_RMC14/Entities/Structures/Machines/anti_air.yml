@@ -1,0 +1,69 @@
+- type: entity
+  parent: RMCCommunicationsConsoleBase
+  id: RMCShipAntiAirConsole
+  name: IX-50 MGAD system console
+  description: A console used to configure the warship's mapped ground-to-air defense zones.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    layers:
+    - map: ["base"]
+      state: "ob_console0"
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "ob_console"
+    overrideDir: West
+    enableOverrideDir: true
+  - type: ActivatableUI
+    key: enum.RMCShipAntiAirUiKey.Key
+  - type: ActivatableUIRequiresAccess
+  - type: AccessReader
+    access: [ [ "CMAccessEngineering" ], [ "RMCAccessCommand" ] ]
+  - type: UserInterface
+    interfaces:
+      enum.RMCShipAntiAirUiKey.Key:
+        type: RMCShipAntiAirBui
+  - type: RequiresSkill
+    skills:
+      RMCSkillEngineer: 1
+  - type: RMCShipAntiAir
+
+- type: entity
+  id: RMCShipAntiAirCannon
+  name: IX-50 MGAD Cannon
+  description: The IX-50 is a state-of-the-art Micro-Gravity and Air Defense system capable of independently tracking and neutralizing threats with rockets strapped onto them.
+  suffix: ""
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,0.49,3.49,2.49"
+        density: 155
+        mask:
+        - MachineMask
+        layer:
+        - WallLayer
+  - type: Sprite
+    sprite: _RMC14/Structures/artillery.rsi
+    offset: 1.5, 0.5
+    state: anti_air_cannon
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Corrodible
+    isCorrodible: false
+  - type: RMCShipAntiAirCannon
+
+- type: entity
+  parent: RMCShipAntiAirCannon
+  id: RMCShipAntiAirCannonFlipped
+  suffix: Flipped
+  components:
+  - type: Sprite
+    state: anti_air_cannon_f
