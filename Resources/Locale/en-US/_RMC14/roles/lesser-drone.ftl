@@ -3,3 +3,6 @@ roles-lesser-drone-description = Support the hive by plugging gaps where needed,
 
 roles-lesser-carrier-name = Lesser Carrier
 roles-lesser-carrier-description = Support the hive by planting eggs, moving hosts, saving the larger castes or infecting the enemy on the frontline to delay their advance.
+
+roles-lesser-intern-name = Lesser Intern
+roles-lesser-intern-description = Serve as a Secretary, file forms, and get coffee.

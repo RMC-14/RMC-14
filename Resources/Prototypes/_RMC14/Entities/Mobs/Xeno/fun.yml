@@ -174,3 +174,47 @@
   - type: XenoHidden
   - type: FixedIdentity
     name: rmc-lesser-carrier
+
+- type: entity
+  parent: CMXenoLesserDrone
+  id: RMCXenoLesserDroneSuited
+  name: Lesser Intern
+  description: A Lesser Drone. In a suit.
+  components:
+  - type: GhostRole
+    name: roles-lesser-intern-name
+    description: roles-lesser-intern-description
+    raffle:
+      settings: short
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/LesserDrone/suit_lesser.rsi
+  - type: RemoveComponents
+    components:
+    - type: WhitelistPickup
+      whitelist:
+        components:
+        - XenoParasite
+        - XenoEgg
+        - XenoFruit
+    - type: DamageOffWeeds
+      damage:
+        types:
+          Blunt: 2.5
+    - type: Xeno
+      role: CMXenoLesserDrone
+      actionIds:
+      - ActionXenoRest
+      - ActionXenoRegurgitate
+      - ActionXenoWatch
+      - ActionXenoTailStab
+      - ActionXenoAcidWeak
+      - ActionXenoPheromones
+      - ActionLesserDronePlantWeeds
+      - ActionXenoChooseStructure
+      - ActionXenoSecreteStructure
+      tier: 0
+      hudOffset: -0.15,-0.03
+      contributesToVictory: false
+      countedInSlots: false
+      unlockAt: 0
+      muteOnSpawn: true
