@@ -5,6 +5,18 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.5,0.25,0.5"
+        density: 190
+        mask:
+        - TabletopMachineMask
+        layer:
+        - TabletopMachineLayer
   - type: Sprite
     sprite: _RMC14/Structures/Machines/parts.rsi
   - type: Construction
@@ -41,6 +53,18 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/parts.rsi
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.5,0.25,0.5"
+        density: 190
+        mask:
+        - TabletopMachineMask
+        layer:
+        - TabletopMachineLayer
   - type: Construction
     graph: CMMachineFrame
     node: machineFrame

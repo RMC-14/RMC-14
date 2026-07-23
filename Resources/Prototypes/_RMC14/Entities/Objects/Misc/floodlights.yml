@@ -343,6 +343,9 @@
   id: RMCStreetlight
   name: colony streetlight
   components:
+  - type: Physics
+    bodyType: Static
+    canCollide: false #Doesnt look the best, however in lue of the mechanic; "AddComponent(/datum/component/shimmy_around, east_offset = -15, west_offset = -15)" it'll do
   - type: Fixtures
     fixtures:
       fix1:
@@ -383,6 +386,9 @@
   - type: Construction
     graph: RMCStreetlightBroken
     node: start
+  - type: Physics
+    bodyType: Static
+    canCollide: false #Dito
   - type: Fixtures
     fixtures:
       fix1:
