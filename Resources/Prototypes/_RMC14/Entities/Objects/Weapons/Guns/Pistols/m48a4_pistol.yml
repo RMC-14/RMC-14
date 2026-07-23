@@ -1,0 +1,76 @@
+- type: entity
+  parent: CMWeaponPistolM1911
+  id: CMWeaponPistolM48A4
+  name: M48A4 service pistol
+  description: A timeless classic since the first World War, the M1911A1 has limited use with the UNMC, and is also often privately bought and used as a sidearm if a standard pistol is not issued out. This is a modernized version with an ammo counter and a polymer grip, designated M48A4. Chambered in .45 ACP.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m48a4.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m48a4.rsi
+  - type: RMCSelectiveFire
+    scatterWielded: 6
+    scatterUnwielded: 6
+    baseFireRate: 4
+    burstScatterMult: 5
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        startingAttachable: RMCAttachmentSuppressor
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentSuppressor
+          - RMCAttachmentSuppressorCompact
+      rmc-aslot-rail:
+        startingAttachable: RMCAttachmentS6ReflexSight
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentLaserSight
+        whitelist:
+          tags:
+          - RMCAttachmentBurstFireAssembly
+          - RMCAttachmentLaserSight
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m1911.ogg
+      params:
+        pitch: 0.9
+        volume: -1
+
+- type: entity
+  parent: CMWeaponPistolM48A4
+  id: CMWeaponPistolM48A4Fluff
+  description: A timeless classic since the first World War, the M1911A1 has limited use with the UNMC, and is also often privately bought and used as a sidearm if a standard pistol is not issued out. This is a modernized version with an ammo counter and a polymer grip, designated M48A4. Chambered in .45 ACP. This one looks a bit worn and old.
+  components:
+  - type: GunDamageModifier
+    multiplier: 1
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentSuppressor
+          - RMCAttachmentSuppressorCompact
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBurstFireAssembly
+          - RMCAttachmentLaserSight
