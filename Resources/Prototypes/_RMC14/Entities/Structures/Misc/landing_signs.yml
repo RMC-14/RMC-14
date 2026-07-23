@@ -53,6 +53,24 @@
 
 - type: entity
   parent: RMCBaseLandingSign
+  id: RMCPrisonSignFixed
+  name: UN Prison Docking sign
+  description: A large sign that reads 'UN Prison Docking - POP. 309' The flag of the United Nations is emblazoned in the corner. Inspires patriotism, fear, or revulsion depending on the viewer's political leanings.
+  components:
+  - type: Sprite
+    state: prison_sign_fixed
+
+- type: entity
+  parent: RMCBaseLandingSign
+  id: RMCFiorinaSign
+  name: Fiorina Science Annex sign
+  description: A large sign that reads 'Fiorina Science Annex', A graphic of the station and some text threatening fines or jail time adorn the sign. The underside of the sign is covered in some odd imitation plants, made of a rough, layered, fabric. When approached, you sense some of the sharp needle like fibers of the foliage break loose.
+  components:
+  - type: Sprite
+    state: fiorina_sign
+
+- type: entity
+  parent: RMCBaseLandingSign
   id: RMCShivaIceSign
   name: Shiva's Ice landing sign
   description: A large sign that reads 'Shiva's Ice L-nding -', bullet holes and torn metal obscure the rest of the signage.
@@ -165,3 +183,4 @@
   components:
   - type: Sprite
     state: nereidspaceport_sign
+
