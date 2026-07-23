@@ -52,7 +52,7 @@
   - type: MapInsert
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Sorokyne/flamer_bodypile.yml"
-      probability: 0.6
+      probability: 1
 
 # Survivor Scenario Inserts
 - type: entity
