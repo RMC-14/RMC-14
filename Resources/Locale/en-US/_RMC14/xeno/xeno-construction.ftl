@@ -123,3 +123,5 @@ rmc-xeno-designer-greater-surge-cooldown = We need to wait before using Greater 
 rmc-xeno-designer-greater-surge-none = There's no design nodes nearby.
 rmc-xeno-designer-greater-surge-success = We convert {$count} design nodes into reflective resin walls.
 rmc-xeno-designer-infuse-node = You infuse the node with plasma.
+
+rmc-xeno-weedbound-examined = You sense that this structure will collapse if the weeds it is merged with disappear.
