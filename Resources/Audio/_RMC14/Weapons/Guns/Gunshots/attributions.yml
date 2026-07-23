@@ -337,3 +337,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/07455a5f3986b610e7ccdc3096cad1d914fca2f9/sound/weapons/gun_shotgun_automatic.ogg"
+
+- files: ["gun_qyj.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Taken and modified from Pixabay, Pixabay usage terms at https://pixabay.com/service/terms/"
+  source: "https://pixabay.com/sound-effects/film-special-effects-072816-heavy-machine-gun-50-caliber-28293/"
