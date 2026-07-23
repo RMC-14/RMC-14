@@ -1,0 +1,23 @@
+uniform sampler2D SCREEN_TEXTURE;
+
+void fragment() {
+    highp vec2 uv = UV;
+    highp vec4 color = zTextureSpec(SCREEN_TEXTURE, uv);
+
+    // Compute coordinate relative to center
+    highp float dist_x = abs(uv.x - 0.5);
+    highp float dist_y = abs(uv.y - 0.5);
+
+    // Create a horizontal slit shape with smooth limits
+    highp float vx = 1.0 - smoothstep(0.28, 0.46, dist_x);
+    highp float vy = 1.0 - smoothstep(0.12, 0.26, dist_y);
+
+    highp float v = vx * vy;
+
+    // Darkening gradient
+    // Center: 60% brightness
+    // Edges: 0% brightness
+    highp vec3 final_color = color.rgb * mix(0.0, 0.6, v);
+
+    COLOR = vec4(clamp(final_color, 0.0, 1.0), color.a);
+}

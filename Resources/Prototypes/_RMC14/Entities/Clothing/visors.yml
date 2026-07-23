@@ -109,6 +109,7 @@
   - type: ComponentToggler
     components:
     - type: EyeProtection
+    - type: RMCWeldingVision
 
 - type: entity
   parent: RMCVisorWelding

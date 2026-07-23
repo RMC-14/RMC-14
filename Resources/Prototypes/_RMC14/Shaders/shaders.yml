@@ -34,6 +34,11 @@
   path: "/Textures/_RMC14/Shaders/blurryx.swsl"
 
 - type: shader
+  id: RMCWeldingVision
+  kind: source
+  path: "/Textures/_RMC14/Shaders/welding_vision.swsl"
+
+- type: shader
   id: RMCAuraOutline
   kind: source
   path: "/Textures/Shaders/outline.swsl"
