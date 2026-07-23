@@ -24,6 +24,9 @@
         },
         {
             "name": "cmb_syn"
+        },
+        {
+            "name": "cmb_mark"
         }
     ]
 }

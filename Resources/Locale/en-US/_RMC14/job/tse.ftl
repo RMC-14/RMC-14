@@ -13,3 +13,7 @@ rmc-job-prefix-tsepa-inspector = TSEPA INSP
 rmc-job-name-tsepa-synth = TSEPA Support Synthetic
 rmc-job-description-tsepa-synth = Support and assist the TSEPA Personnel.
 rmc-job-prefix-tsepa-synth = SYN
+
+rmc-job-name-tsepa-marksman = TSEPA Marksman
+rmc-job-description-tsepa-marksman = Look out for hostiles. Lay down accurate fire, if needed.
+rmc-job-prefix-tsepa-marksman = TSEPA MARK.
