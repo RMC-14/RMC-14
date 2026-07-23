@@ -243,38 +243,26 @@
       map: ["enum.StorageVisualLayers.Door"]
   - type: StorageFill
     contents:
-    - id: FoodPizzaArnold
+    - id: RMCFoodPizzaMeatFull
       prob: 0.15
       orGroup: Pizza
-    - id: FoodPizzaDank
-      prob: 0.10
-      orGroup: Pizza
-    - id: FoodPizzaSassysage
+    - id: RMCFoodPizzaVegetableFull
       prob: 0.15
       orGroup: Pizza
-    - id: FoodPizzaMargherita
+    - id: RMCFoodPizzaMargheritaFull
       prob: 0.15
       orGroup: Pizza
-    - id: FoodPizzaMeat
+    - id: RMCFoodPizzaMushroomFull
       prob: 0.15
       orGroup: Pizza
-    - id: FoodPizzaMushroom
+    - id: RMCFoodPizzaHawaiianFull
       prob: 0.15
       orGroup: Pizza
-    - id: FoodPizzaPineapple
+    - id: RMCFoodPizzaSupremeFull
       prob: 0.15
       orGroup: Pizza
-    - id: FoodPizzaVegetable
+    - id: RMCFoodPizzaCalabresaFull
       prob: 0.15
-      orGroup: Pizza
-    - id: FoodPizzaDonkpocket
-      prob: 0.10
-      orGroup: Pizza
-    - id: FoodPizzaCotton
-      prob: 0.10
-      orGroup: Pizza
-    - id: FoodPizzaWorldpeas
-      prob: 0.05
       orGroup: Pizza
     - id: KnifePlastic
 
