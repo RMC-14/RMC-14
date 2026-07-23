@@ -284,6 +284,9 @@ rmc-job-prefix-soro-sof-spec = 121/RECON SPEC
 rmc-job-name-soro-sof-soldier = SOF Soldier
 rmc-job-prefix-soro-sof-soldier = 121/RECON SOL
 
+rmc-job-name-soro-sof-synth = SOF Support Synthetic
+rmc-job-prefix-soro-sof-synth = 121/RECON SYN
+
 # Trijent survs
 
 rmc-job-name-survivor-trijent-chaplain = Trijent Dam Chaplain
@@ -332,6 +335,8 @@ rmc-job-prefix-crashland-spec = 173/RECON SPEC
 rmc-job-name-crashland-soldier = Airborne Soldier
 rmc-job-prefix-crashland-soldier = 173/RECON SOL
 
+rmc-job-name-crashland-synth = Airborne Support Synthetic
+rmc-job-prefix-crashland-synth = 173/RECON SYN
 
 # Fiorina Science Annex Survs
 

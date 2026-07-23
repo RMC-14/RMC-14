@@ -373,3 +373,17 @@
     defaultMode: SPPAirborneSL
     trackerModes:
     - SPPAirborneSL
+
+# For Sorokyne SPP SOF
+
+- type: entity
+  parent: RMCHeadsetColonyIcons
+  id: RMCHeadsetSPPSOFCrashland
+  name: SPP 121/RECON headset
+  description: A special headset used by recon elements of the SPP military.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeySPP
+      - CMEncryptionKeyColony
