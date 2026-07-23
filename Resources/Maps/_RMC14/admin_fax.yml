@@ -12619,8 +12619,7 @@ entities:
       parent: 2
     missingComponents:
     - SensorTower
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
 - proto: RMCShutterHybrisaWindow

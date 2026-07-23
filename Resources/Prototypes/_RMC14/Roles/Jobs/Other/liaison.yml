@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: RMCJobNametagBase
   id: CMLiaison
   name: cm-job-name-liaison

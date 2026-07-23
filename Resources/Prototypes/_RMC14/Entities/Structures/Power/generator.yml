@@ -90,8 +90,8 @@
           Fifty: { state: "on-50" }
           SeventyFive: { state: "on-75" }
           Hundred: { state: "on-100" }
-  - type: MarineMapTracked
-  - type: XenoMapTracked
+  - type: TacticalMapLayerTracked
+    layers: [Marines, Xenos]
   - type: TacticalMapTracked
   - type: TacticalMapIcon
     icon:
@@ -105,8 +105,7 @@
   components:
   - type: RemoveComponents
     components:
-    - type: MarineMapTracked
-    - type: XenoMapTracked
+    - type: TacticalMapLayerTracked
     - type: TacticalMapTracked
     - type: TacticalMapIcon
       icon:

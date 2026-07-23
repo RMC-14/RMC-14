@@ -96,6 +96,8 @@
     noTunnel: true
     unweedable: true
     alwaysPowered: true
+    excludeFromTacMapBounds: true
+    excludeFromTacMapRender: true
 
 - type: entity
   parent: RMCAreaKutjevoInteriorOob

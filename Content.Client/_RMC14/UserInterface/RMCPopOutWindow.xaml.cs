@@ -36,31 +36,36 @@ public partial class RMCPopOutWindow : DefaultWindow
 
         header.AddChild(button);
         button.SetPositionInParent(header.ChildCount - 2);
-        button.OnPressed += _ =>
+        button.OnPressed += _ => PopOut();
+    }
+
+    protected void PopOut()
+    {
+        if (_popOutWindow != null)
+            return;
+
+        OnClose -= FinalClose;
+
+        _popOutWindow = new OSWindow
         {
-            OnClose -= FinalClose;
-
-            _popOutWindow = new OSWindow
-            {
-                Title = Title ?? string.Empty,
-                SetWidth = PixelWidth,
-                SetHeight = PixelHeight,
-            };
-
-            Control.Orphan();
-            Close();
-
-            _popOutWindow.Closed += () => OnFinalClose?.Invoke();
-
-            var panel = new PanelContainer();
-            panel.PanelOverride = new StyleBoxFlat(Color.FromHex("#25252A"));
-            panel.AddChild(Control);
-
-            _popOutWindow.AddChild(panel);
-            _popOutWindow.Show();
-
-            OnPopout?.Invoke();
+            Title = Title ?? string.Empty,
+            SetWidth = PixelWidth,
+            SetHeight = PixelHeight,
         };
+
+        Control.Orphan();
+        Close();
+
+        _popOutWindow.Closed += () => OnFinalClose?.Invoke();
+
+        var panel = new PanelContainer();
+        panel.PanelOverride = new StyleBoxFlat(Color.FromHex("#25252A"));
+        panel.AddChild(Control);
+
+        _popOutWindow.AddChild(panel);
+        _popOutWindow.Show();
+
+        OnPopout?.Invoke();
     }
 
     private void FinalClose()

@@ -1,0 +1,39 @@
+light_mode unshaded;
+
+uniform highp vec2 tile_size;
+uniform highp float line_thickness;
+uniform lowp vec4 grid_color;
+
+void fragment() {
+    lowp vec4 base = zTexture(UV);
+    if (base.a <= 0.0) {
+        COLOR = vec4(0.0);
+        return;
+    }
+
+    highp vec2 textureSize = 1.0 / TEXTURE_PIXEL_SIZE;
+    highp vec2 tileCoord = UV * textureSize;
+    highp vec2 frac = fract(tileCoord);
+
+    highp float tx = line_thickness / max(tile_size.x, 0.001);
+    highp float ty = line_thickness / max(tile_size.y, 0.001);
+
+#ifdef HAS_DFDX
+    highp vec2 fw = fwidth(tileCoord);
+    tx = max(tx, fw.x * 0.5);
+    ty = max(ty, fw.y * 0.5);
+#endif
+
+    highp float lineX = step(frac.x, tx) + step(1.0 - frac.x, tx);
+    highp float lineY = step(frac.y, ty) + step(1.0 - frac.y, ty);
+    highp float mask = clamp(lineX + lineY, 0.0, 1.0);
+
+    highp float present = step(0.001, base.a);
+    highp float alpha = mask * grid_color.a * present;
+    if (alpha <= 0.0) {
+        COLOR = vec4(0.0);
+        return;
+    }
+
+    COLOR = vec4(grid_color.rgb, alpha);
+}

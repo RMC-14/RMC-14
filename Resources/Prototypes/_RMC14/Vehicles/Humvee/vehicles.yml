@@ -141,7 +141,8 @@
     - offset: 1,-0.1
       radius: 0.45
       interiorCoords: 2.41,-1.35
-  - type: MarineMapTracked
+  - type: TacticalMapLayerTracked
+    layers: [Marines]
   - type: TacticalMapTracked
   - type: TacticalMapIcon
     icon:

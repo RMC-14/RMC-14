@@ -16,7 +16,8 @@
     - type: Hunger
     - type: Infectable
     - type: Marine
-    - type: MarineMapTracked
+    - type: TacticalMapLayerTracked
+      layers: [Marines]
     - type: MindContainer
     - type: NewPlayerLabel
     - type: Perishable

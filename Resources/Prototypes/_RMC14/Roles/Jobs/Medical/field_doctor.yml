@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMDoctor
   id: RMCFieldDoctor
   name: rmc-job-name-field-doctor

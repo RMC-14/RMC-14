@@ -1,4 +1,4 @@
-﻿- type: jobIcon
+- type: jobIcon
   parent: JobIcon
   id: CMJobIconBase
   abstract: true

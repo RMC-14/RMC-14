@@ -1,8 +1,8 @@
-﻿<controls:RMCGlobalAdminWindow
+<controls:RMCGlobalAdminWindow
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Admin.Global"
     xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
-    xmlns:tacticalMap="clr-namespace:Content.Client._RMC14.TacticalMap"
+    xmlns:tacticalMap="clr-namespace:Content.Client._RMC14.TacticalMap.Controls"
     xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
     MinSize="600 500"
     Title="RMC Admin UI">

@@ -44,9 +44,9 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
             if (watched is not { } target)
                 continue;
 
-            var targetCoordinates = TransformSystem.GetMoverCoordinates(target);
-            var targetMap = TransformSystem.GetMap(targetCoordinates);
-            if (overwatch != null && HasComp<RMCPlanetComponent>(targetMap) && targetMap != TransformSystem.GetMap(ent))
+            var targetCoordinates = Xform.GetMoverCoordinates(target);
+            var targetMap = Xform.GetMap(targetCoordinates);
+            if (overwatch != null && HasComp<RMCPlanetComponent>(targetMap) && targetMap != Xform.GetMap(ent))
             {
                 if (!_communicationsTower.CanTransmit())
                     continue;
