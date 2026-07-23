@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Loadout;
 using Content.Shared._RMC14.Storage;
 using Content.Shared.Hands.Components;
@@ -25,6 +26,10 @@ public abstract class SharedStationSpawningSystem : EntitySystem
     [Dependency] private readonly MetaDataSystem _metadata = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
     [Dependency] private readonly SharedTransformSystem _xformSystem = default!;
+
+    //RMC14
+    [Dependency] private readonly SharedCMInventorySystem _cmInventorySystem = default!;
+    //RMC14
 
     private EntityQuery<HandsComponent> _handsQuery;
     private EntityQuery<InventoryComponent> _inventoryQuery;
@@ -135,11 +140,17 @@ public abstract class SharedStationSpawningSystem : EntitySystem
             foreach (var slot in slotDefinitions)
             {
                 var equipmentStr = startingGear.GetGear(slot.Name);
-                if (!string.IsNullOrEmpty(equipmentStr))
-                {
-                    var equipmentEntity = Spawn(equipmentStr, xform.Coordinates);
-                    InventorySystem.TryEquip(entity, equipmentEntity, slot.Name, silent: true, force: true);
-                }
+
+                //RMC14
+                if (string.IsNullOrEmpty(equipmentStr))
+                    continue;
+
+                var equipmentEntity = Spawn(equipmentStr, xform.Coordinates);
+                if (InventorySystem.TryEquip(entity, equipmentEntity, slot.Name, silent: true, force: true))
+                    continue;
+
+                _cmInventorySystem.TryStoreInBackpack(entity, equipmentEntity);
+                //RMC14
             }
         }
 
