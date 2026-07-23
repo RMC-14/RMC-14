@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed Mess Techs not being mutiny eligible
-    type: Fix
-  id: 3022
-  time: '2026-03-28T11:13:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9321
 - author: Arykh
   changes:
   - message: Added a heart rate monitor to the health analyzer.
@@ -4583,5 +4576,14 @@
   id: 3521
   time: '2026-07-23T18:50:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9590
+- author: monomethylhydrazine
+  changes:
+  - message: Changed the timelock of Executive Officer from 10 hours of command and
+      5 hours of MP to 15 hours of command, 10 hours of squad leader, and 5 hours
+      of MP.
+    type: Tweak
+  id: 3522
+  time: '2026-07-23T19:51:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9644
 Name: RMC14
 Order: -1
