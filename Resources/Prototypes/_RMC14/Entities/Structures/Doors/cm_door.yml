@@ -120,7 +120,7 @@
   - type: WiresPanelSecurity
   - type: Wires
     boardName: wires-board-name-airlock
-    layoutId: Airlock
+    layoutId: RMCAirlock
   - type: DoorSignalControl
   - type: DeviceNetwork
     deviceNetId: Wireless
