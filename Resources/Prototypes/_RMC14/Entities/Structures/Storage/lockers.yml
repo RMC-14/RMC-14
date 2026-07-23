@@ -48,6 +48,22 @@
         - BulletImpassable
 
 - type: entity
+  parent: CMLockerCommander
+  id: CMLockerCommanderFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMHeadCapPeakedFormal #TODO RMC14: marine commanding officer peaked cap
+    - id: CMCoatCO
+    - id: RMCSunglasses
+    - id: CMBackpackMarine
+    - id: RMCRadioHandheldColonyOff
+    - id: RMCMegaphone
+    - id: RMCWhistle
+    - id: CMArmorM3VLBallistics
+
+- type: entity
   parent: CMLockerBase
   id: CMLockerCommander
   name: commanding officer's locker
@@ -257,6 +273,28 @@
     access: [["CMAccessCMP"]]
 
 - type: entity
+  parent: CMLockerCMP
+  id: CMLockerCMPFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBeltSecurityMPFilled
+    - id: CMArmorM3WO
+    - id: CMHeadBeretCMP
+    - id: RMCPouchGeneralLarge
+    - id: RMCHandcuffs
+    # TODO RMC14: peper spray
+    - id: CMSatchelSecurity
+    - id: CMStunbaton
+    - id: RMCWeaponTaser
+    - id: CMHeadsetCMP
+    - id: CMGlassesSecurity
+    - id: RMCFlashlight
+    - id: CMBootsBlack
+    - id: CMWebbingHolster
+
+- type: entity
   parent: CMLockerBase
   id: CMLockerWarden
   name: warden's locker
@@ -330,9 +368,26 @@
     sprite: _RMC14/Structures/Storage/Lockers/qm.rsi
   - type: AccessReader
     access: [["CMAccessQM"]]
+
+- type: entity
+  parent: CMLockerQM
+  id: CMLockerQMFilled
+  suffix: Filled
+  components:
   - type: StorageFill
     contents:
+      - id: RMCFlashlight
+      - id: CMClipboard
+      - id: CMFolderBase
+      - id: CMMaskGas
       - id: RMCMegaphone
+      - id: RMCSuitFirefighter
+      - id: CMFlash
+      - id: CMStampQM
+      - id: CMHandsInsulated
+      - id: CMBootsBlack
+      - id: RMCHeadCapQuartermaster
+      - id: CMJumpsuitQM
 
 - type: entity
   parent: CMLockerBase
@@ -373,6 +428,31 @@
     sprite: _RMC14/Structures/Storage/Lockers/cmo.rsi
   - type: AccessReader
     access: [["CMAccessCMO"]]
+
+- type: entity
+  parent: CMLockerCMO
+  id: CMLockerCMOFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMHyposprayWithVial
+    # TODO RMC14: chemistry pouch
+    - id: RMCPouchMedkit
+    - id: RMCPouchSyringe
+    - id: RMCPouchMedical
+    - id: CMFlash
+    - id: CMMaskSterile
+    - id: RMCMaskBreath
+    - id: RMCLabcoatCMO
+    - id: CMHeadCapCMO
+    - id: CMHeadCapSurgCMO
+    - id: CMJumpsuitCMO
+    - id: RMCScrubsCMO
+    - id: RMCShoesWhite
+    - id: RMCHeadRadiationHood
+    - id: RMCSuitRadiation
+    - id: RMCStethoscope
 
 - type: entity
   parent: CMLockerBase
