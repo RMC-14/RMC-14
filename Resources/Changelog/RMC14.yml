@@ -1,70 +1,4 @@
 ﻿Entries:
-- author: kleinerstation13
-  changes:
-  - message: Survivor now spawn together instead of separately on Trijent Dam. Their
-      holdout locations include the Dam, Bar and Hospital.
-    type: Tweak
-  id: 3015
-  time: '2026-03-26T10:49:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9421
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added United Nations Representative Steve Haifisch
-    type: Add
-  - message: The new varadero LZs have received a small passover
-    type: Tweak
-  id: 3016
-  time: '2026-03-26T10:50:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9435
-- author: kleinerstation13
-  changes:
-  - message: Fixed SPP SOF not being able to open their own dropship doors
-    type: Fix
-  - message: Fixed SPP SOF not spawning with shortwave radios
-    type: Fix
-  - message: Fixed SPP SOF hearing marine announcements
-    type: Fix
-  id: 3017
-  time: '2026-03-28T11:05:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9410
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed the SPP SOF sorokyne survivors insert having the wrong skills.
-    type: Fix
-  - message: Fixed the SPP SOF sorokyne survivors not all spawning with 20 metal sheets.
-    type: Fix
-  id: 3018
-  time: '2026-03-28T11:07:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9408
-- author: GNUtopia
-  changes:
-  - message: Improvised firebombs and AGM-I grenades now burn for the proper time
-    type: Fix
-  id: 3019
-  time: '2026-03-28T11:06:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9409
-- author: Arykh
-  changes:
-  - message: Added the Body Scanner! Its scan is more detailed than the Health Analyzer,
-      but it's not continuous.
-    type: Add
-  id: 3020
-  time: '2026-03-28T11:09:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9398
-- author: TadJohnson00
-  changes:
-  - message: '[PVE] added large magazine boxes for most PVE weapons.'
-    type: Add
-  id: 3021
-  time: '2026-03-28T11:15:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9293
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed Mess Techs not being mutiny eligible
-    type: Fix
-  id: 3022
-  time: '2026-03-28T11:13:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9321
 - author: Arykh
   changes:
   - message: Added a heart rate monitor to the health analyzer.
@@ -4580,5 +4514,76 @@
   id: 3514
   time: '2026-07-17T12:46:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10440
+- author: IceNoobXD
+  changes:
+  - message: Hybrisa Prospera (LV-759) has recived a whole map passover, adding numerous
+      new props to bring it more in line with its CMSS13 counterpart. Added Box vans
+      near pizza galaxy and freights and wheels for them in biogen, ironbridge and
+      garage. Additionally 3 random supply kit spawners and 2 seized foreign equipment
+      crates have been added!
+    type: Add
+  - message: Miyahira a subsidiary of Weston-Yamada has replaced Meridian and Mizutani!
+    type: Tweak
+  id: 3515
+  time: '2026-07-18T16:26:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9800
+- author: Whisper
+  changes:
+  - message: Updated language rules to clarify mechanical languages are allowed.
+    type: Tweak
+  - message: Updated roleplay rules to account for UNMC Marine correspondent. They
+      are not restricted in any way from combat.
+    type: Tweak
+  id: 3516
+  time: '2026-07-22T14:53:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10283
+- author: IceNoobXD
+  changes:
+  - message: Fixed reflective resin being able to be upgraded into thick resin!
+    type: Fix
+  id: 3517
+  time: '2026-07-22T15:49:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10534
+- author: spanky-spanky
+  changes:
+  - message: Replaced generic brown gloves with marine brown combat gloves in several
+      marine vendors.
+    type: Tweak
+  id: 3518
+  time: '2026-07-23T14:54:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10532
+- author: kleinerstation13
+  changes:
+  - message: Fixed Fiorina riot control officers and kutjevo deputy not having their
+      parity ranks
+    type: Fix
+  id: 3519
+  time: '2026-07-23T15:56:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10535
+- author: kleinerstation13
+  changes:
+  - message: Handheld sources of light like lanterns and flashlights are no longer
+      melee weapons
+    type: Tweak
+  id: 3520
+  time: '2026-07-23T18:45:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10527
+- author: SharkSnake98
+  changes:
+  - message: Put the PK7 and it's magazines in the CL's safe inside of the shoulder
+      holster
+    type: Tweak
+  id: 3521
+  time: '2026-07-23T18:50:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9590
+- author: monomethylhydrazine
+  changes:
+  - message: Changed the timelock of Executive Officer from 10 hours of command and
+      5 hours of MP to 15 hours of command, 10 hours of squad leader, and 5 hours
+      of MP.
+    type: Tweak
+  id: 3522
+  time: '2026-07-23T19:51:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9644
 Name: RMC14
 Order: -1
