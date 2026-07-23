@@ -1,14 +1,52 @@
 ﻿<cc:RMCConstructionWindow
     xmlns="https://spacestation14.io"
     xmlns:cc="clr-namespace:Content.Client._RMC14.Construction"
-    xmlns:userInterface="clr-namespace:Content.Client._RMC14.UserInterface"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     Title="Construction"
-    MinSize="300 300"
-    SetSize="450 500">
-    <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
-        <BoxContainer Orientation="Vertical">
-            <RichTextLabel Name="MaterialLabel" Access="Public" />
-            <BoxContainer Orientation="Vertical" Name="ConstructionContainer" Access="Public" />
+    MinSize="280 280"
+    SetSize="380 460">
+    <PanelContainer HorizontalExpand="True" VerticalExpand="True" Margin="6">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BackgroundColor="#0B1522"
+                                   BorderColor="#3B6A8B" BorderThickness="1" />
+        </PanelContainer.PanelOverride>
+        <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="6">
+            <PanelContainer>
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat BackgroundColor="#0A1220"
+                                           BorderColor="#355E7C" BorderThickness="1" />
+                </PanelContainer.PanelOverride>
+                <BoxContainer Orientation="Horizontal" Margin="6 4" SeparationOverride="6">
+                    <LineEdit Name="SearchBar" Access="Public"
+                              HorizontalExpand="True"
+                              PlaceHolder="Search construction..."
+                              MinHeight="22"/>
+                    <Button Name="CloseWindowButton" Access="Public"
+                            Text="X"
+                            SetWidth="24"
+                            SetHeight="22"
+                            StyleClasses="OpenBoth" />
+                </BoxContainer>
+            </PanelContainer>
+
+            <BoxContainer Orientation="Horizontal" SeparationOverride="6">
+                <RichTextLabel Name="MaterialLabel" Access="Public" HorizontalExpand="True" VerticalAlignment="Center"/>
+                <Button Name="ClearGhostsButton" Access="Public"
+                        Text="Clear Ghosts"
+                        SetWidth="110"
+                        SetHeight="22"
+                        StyleClasses="OpenBoth" />
+            </BoxContainer>
+
+            <PanelContainer HorizontalExpand="True" VerticalExpand="True">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat BackgroundColor="#0A1220"
+                                           BorderColor="#355E7C" BorderThickness="1" />
+                </PanelContainer.PanelOverride>
+                <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True" Margin="6 5">
+                    <BoxContainer Orientation="Vertical" Name="ConstructionContainer" Access="Public" />
+                </ScrollContainer>
+            </PanelContainer>
         </BoxContainer>
-    </ScrollContainer>
+    </PanelContainer>
 </cc:RMCConstructionWindow>
