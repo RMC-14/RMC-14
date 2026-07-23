@@ -7,18 +7,27 @@ namespace Content.Shared._RMC14.Xenonids.Construction.RecoveryNode;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class RecoveryNodeComponent : Component
 {
-    [DataField, AutoNetworkedField]
-    public FixedPoint2 HealAmount = 25;
+    [DataField(required: true), AutoNetworkedField]
+    public RecoveryType RecoveryType;
 
     [DataField, AutoNetworkedField]
-    public float HealRange = 1.5F;
+    public FixedPoint2 RecoveryAmount = 25;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan HealCooldown = TimeSpan.FromSeconds(3);
+    public float Range = 1.5f;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan NextHealAt;
+    public TimeSpan Cooldown = TimeSpan.FromSeconds(3);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan NextRecoveryAt;
 
     [DataField]
-    public DoAfterId? HealDoAfter;
+    public DoAfterId? DoAfter;
+}
+
+public enum RecoveryType
+{
+    Health,
+    Plasma,
 }
