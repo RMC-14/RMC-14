@@ -1,0 +1,64 @@
+- type: job
+  parent: CMJobBase
+  id: RMCCLFLeaderPVE
+  name: rmc-job-name-clf-pve-leader
+  description: rmc-ghost-role-information-clf-pve-description
+  playTimeTracker: CMJobCLFLeaderPVE
+  ranks:
+    RMCRankPVECLFLeader: []
+  startingGear: RMCJobCLFLeaderPVE
+  icon: RMCJobIconCLFCellLeader
+  supervisors: cm-job-supervisors-royal-captain
+  marineAuthorityLevel: 1
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  - SquadLeader
+  - Rifleman
+  spawnMenuRoleName: CLF Ship Cell Leader (PVE)
+  roleWeight: 1
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - CLF
+    - type: Skills
+      preset: RMCSkillPresetPVESquadLeader
+    - type: SquadArmorWearer
+    - type: AssignSquad
+      squad: SquadCLF
+    - type: JobPrefix
+      prefix: rmc-job-prefix-clf-pve-leader
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: RMCTrackable
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+  hidden: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointCLFleaderPVE
+  name: clf leader spawn point
+  suffix: PVE
+  components:
+  - type: SpawnPoint
+    job_id: RMCCLFLeaderPVE
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: clf_spawn
+
+- type: startingGear
+  id: RMCJobCLFLeaderPVE
+  equipment:
+    id: RMCIDCardCLFLeaderPVE
+    jumpsuit: RMCJumpsuitCLFPVELead
+    shoes: RMCShoesCombat
+    ears: RMCHeadsetDistressCLFPVELead
+
+- type: playTimeTracker
+  id: CMJobCLFLeaderPVE

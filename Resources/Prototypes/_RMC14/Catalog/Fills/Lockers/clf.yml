@@ -1,4 +1,12 @@
 - type: entityTable
+  id: RMCClosetCLFGearFill
+  table: !type:AllSelector
+    children:
+    - id: RMCShoesCombat
+    - id: RMCJumpsuitCLFPVESoldier
+    - id: RMCHeadsetDistressCLFPVE
+
+- type: entityTable
   id: RMCClosetCLFSGOFill
   table: !type:AllSelector
     children:

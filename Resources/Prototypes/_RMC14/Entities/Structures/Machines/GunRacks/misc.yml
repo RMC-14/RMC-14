@@ -102,6 +102,162 @@
       item_2:
       - RMCWeaponFlamerSPPPVE
 
+#LC9/Colony Flamer
+
+- type: entity
+  parent: RMCGunRackM34IncineratorEmpty
+  id: RMCGunRackLC9IncineratorEmpty
+  name: LC9 Incinerator rack
+  suffix: LC9 Incinerator, Empty
+  description: An outdated, mid 21st century weapon rack, judging from the labeling still present on the top it appears to have orginally been designed to store military incinerators of the era. Its even painted up in that multi-century old, military jungle green. This specific rack appears to have been modified and resold on the civilian market for use with sanitation-grade incinerators.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/GunRacks/LC9_rack.rsi
+  - type: ItemSlots
+    slots:
+      item_1:
+        name: LC9 Incinerator
+        whitelist:
+          tags:
+          - RMCWeaponIncineratorColony
+      item_2:
+        name: LC9 Incinerator
+        whitelist:
+          tags:
+          - RMCWeaponIncineratorColony
+  - type: ItemMapper
+    mapLayers:
+      fill_1:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCWeaponIncineratorColony
+      fill_2:
+        minCount: 2
+        whitelist:
+          tags:
+          - RMCWeaponIncineratorColony
+
+- type: entity
+  parent: RMCGunRackLC9IncineratorEmpty
+  id: RMCGunRackLC9IncineratorFilled
+  suffix: LC9 Incinerator, Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item_1:
+      - RMCWeaponFlamerColonyPVE
+      item_2:
+      - RMCWeaponFlamerColonyPVE
+
+#SLAW
+
+- type: entity
+  parent: RMCGunRackBase
+  id: RMCGunRackSlAWEmpty
+  name: M5A1 SLAW rack
+  suffix: M5A1 SLAW, Empty
+  description: An outdated, modified early 22nd century weapon rack, designed to store folded M5A1 SLAWs. Strangely this specific rack seems to have been painted in that multi-century old, military jungle green, odd.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/GunRacks/slaw_rack.rsi
+  - type: ItemSlots
+    slots:
+      item_1:
+        name: M5A1 SLAW
+        whitelist:
+          tags:
+          - RMCWeaponRocketDisposableFolded
+      item_2:
+        name: M5A1 SLAW
+        whitelist:
+          tags:
+          - RMCWeaponRocketDisposableFolded
+  - type: ItemMapper
+    mapLayers:
+      fill_1:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCWeaponRocketDisposableFolded
+      fill_2:
+        minCount: 2
+        whitelist:
+          tags:
+          - RMCWeaponRocketDisposableFolded
+
+- type: entity
+  parent: RMCGunRackSlAWEmpty
+  id: RMCGunRackSlAWFilled
+  suffix: M5A1 SLAW, Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item_1:
+      - RMCWeaponLauncherDisposableFolded
+      item_2:
+      - RMCWeaponLauncherDisposableFolded
+
+#PDW90
+
+- type: entity
+  parent: RMCGunRackBase
+  id: RMCGunRackPDW90Empty
+  name: PDW90 submachine gun rack
+  suffix: PDW90, Empty
+  description: An outdated, mid-21st century weapon rack designed to store the PDW90. It's still painted in that multi-century old, military jungle green. The SMGs' faded '90' designation is still painted on the top of the rack. - Locked and loaded ready for combat, just how any good mercenary or enterprising criminal likes it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/GunRacks/p90_rack.rsi
+  - type: ItemSlots
+    slots:
+      item_1:
+        name: PDW90 submachine gun
+        whitelist:
+          tags:
+          - RMCWeaponSMGPDW90
+      item_2:
+        name: PDW90 submachine gun
+        whitelist:
+          tags:
+          - RMCWeaponSMGPDW90
+      item_3:
+        name: PDW90 submachine gun
+        whitelist:
+          tags:
+          - RMCWeaponSMGPDW90
+  - type: ItemMapper
+    mapLayers:
+      fill_1:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCWeaponSMGPDW90
+      fill_2:
+        minCount: 2
+        whitelist:
+          tags:
+          - RMCWeaponSMGPDW90
+      fill_3:
+        minCount: 3
+        whitelist:
+          tags:
+          - RMCWeaponSMGPDW90
+
+- type: entity
+  parent: RMCGunRackPDW90Empty
+  id: RMCGunRackPDW90Filled
+  suffix: PDW90, Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item_1:
+      - RMCWeaponSMGPDW90
+      item_2:
+      - RMCWeaponSMGPDW90
+      item_3:
+      - RMCWeaponSMGPDW90
+
 # MAR 50 Wall-Mounted Rack
 
 - type: entity

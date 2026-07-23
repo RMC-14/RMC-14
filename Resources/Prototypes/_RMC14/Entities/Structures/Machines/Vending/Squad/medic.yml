@@ -522,6 +522,68 @@
 
 - type: entity
   parent: RMCColMarTechMedicalEquipmentPVE
+  id: RMCCLFMedicalEquipmentPVE
+  name: CLF cell doctor equipment rack
+  description: A sturdy metal rack made by local friends of the front, filled to the brim with all the medical gear that a rebel medic may need; Or at the least, all the front could source.
+  suffix: PVE, CLF
+  components:
+  - type: CMAutomatedVendor
+    sections:
+    - name: Standard Equipment
+      takeAll: CMStandard
+      entries:
+      - id: CMHandsLatex
+        name: combat sterile gloves
+      - id: CMMaskSterile
+      - id: RMCSatchelMedicpack #TODO: CLF medical satchel
+        recommended: true
+    - name: Eyewear
+      choices: { CMEyewear: 1 }
+      entries:
+      - id: RMCGlassesMedicalHUDGlasses
+#      - id: Prescription Medical HUD Glasses
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries:
+      - id: CMBeltMedicBagFilled
+        name: M276 lifesaver bag (Full)
+      - id: CMBeltMedicalFilled
+        name: M276 medical storage rig (Full)
+    - name: Pouches
+      choices: { RMCPouch: 2 }
+      entries:
+      - id: RMCPouchReagentCanisterMeraBic
+        name: Pressurized Reagent Canister Pouch\n(Meralyne-Bicaridine)
+        recommended: true
+      - id: RMCPouchReagentCanisterKeloDerm
+        name: Pressurized Reagent Canister Pouch\n(Kelotane-Dermaline)
+        recommended: true
+      - id: RMCPouchReagentCanisterTricordrazineRevival
+        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine)
+        recommended: true
+#     - id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
+#       name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
+#       recommended: true
+      - id: RMCPouchMedkit
+        recommended: true
+      - id: RMCPouchAutoinjector
+      - id: RMCPouchFirstResponder
+      - id: RMCPouchReagentCanisterTricordrazine
+        name: Pressurized Reagent Canister Pouch\n(Tricordrazine)
+      - id: RMCPouchReagentCanister
+        name: Pressurized Reagent Canister Pouch\n(EMPTY)
+      - id: RMCPouchVialFill
+        name: vial pouch (Full)
+      - id: RMCPouchMedical
+      - id: RMCPouchFirstAidInjectors
+        name: first-aid pouch (refillable injectors)
+      - id: RMCPouchFirstAidSplintsGauzeOintment
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+      - id: RMCPouchFirstAidPills
+        name: first-aid pouch (pills)
+
+- type: entity
+  parent: RMCColMarTechMedicalEquipmentPVE
   id: ColMarTechMedicalChemicalPVE
   suffix: PVE
   name: ColMarTech squad medical chemical rack
