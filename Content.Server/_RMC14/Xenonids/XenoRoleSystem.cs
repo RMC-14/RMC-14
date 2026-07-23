@@ -7,6 +7,7 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Maturing;
 using Content.Shared._RMC14.Xenonids.Name;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Rank;
 using Content.Shared.GameTicking;
 using Content.Shared.NameModifier.EntitySystems;
@@ -25,6 +26,7 @@ public sealed class XenoRoleSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly XenoInfectionsManager _infectionsManager = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly NameModifierSystem _nameModifier = default!;
     [Dependency] private readonly PlayTimeTrackingSystem _playTime = default!;
@@ -41,6 +43,11 @@ public sealed class XenoRoleSystem : EntitySystem
     private TimeSpan _rankFourTime;
     private TimeSpan _rankFiveTime;
     private TimeSpan _rankSixTime;
+
+    private int _rankMatureThreshold;
+    private int _rankElderThreshold;
+    private int _rankAncientThreshold;
+    private int _rankPrimeThreshold;
 
     private readonly List<Entity<XenoComponent>> _toUpdate = new();
 
@@ -63,6 +70,12 @@ public sealed class XenoRoleSystem : EntitySystem
         Subs.CVar(_config, RMCCVars.RMCPlaytimeGoldMedalTimeHours, v => _rankFourTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimePlatinumMedalTimeHours, v => _rankFiveTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimeRubyMedalTimeHours, v => _rankSixTime = TimeSpan.FromHours(v), true);
+
+        Subs.CVar(_config, RMCCVars.RMCXenoInfectRankMatureThreshold, v => _rankMatureThreshold = v, true);
+        Subs.CVar(_config, RMCCVars.RMCXenoInfectRankElderThreshold, v => _rankElderThreshold = v, true);
+        Subs.CVar(_config, RMCCVars.RMCXenoInfectRankAncientThreshold, v => _rankAncientThreshold = v, true);
+        Subs.CVar(_config, RMCCVars.RMCXenoInfectRankPrimeThreshold, v => _rankPrimeThreshold = v, true);
+
         Subs.CVar(_config, RMCCVars.RMCDisconnectedXenoGhostRoleTimeSeconds, v => _disconnectedXenoGhostRoleTime = TimeSpan.FromSeconds(v), true);
     }
 
@@ -131,28 +144,52 @@ public sealed class XenoRoleSystem : EntitySystem
         if (!HasComp<XenoComponent>(xeno))
             return;
 
-        var time = TimeSpan.Zero;
-        if (_prototype.TryIndex(jobId, out JobPrototype? job) &&
-            _playTimeManager.TryGetTrackerTime(player, job.PlayTimeTracker, out var nullableTime))
-        {
-            time = nullableTime.Value;
-        }
-
         int rank;
         if (!profile.PlaytimePerks)
+        {
             rank = 1;
-        else if (time > _rankSixTime)
-            rank = 6;
-        else if (time > _rankFiveTime)
-            rank = 5;
-        else if (time > _rankFourTime)
-            rank = 4;
-        else if (time > _rankThreeTime)
-            rank = 3;
-        else if (time > _rankTwoTime)
-            rank = 2;
+        }
+        else if (HasComp<XenoParasiteComponent>(xeno))
+        {
+            // The parasite role is ranked by total successful infections instead of playtime.
+            // Note: parasites currently top out at rank 5 (Prime/Merciless); a rank 6 of Royal however is parity but undesired at this time.
+            // TODO RMC14: Parasites need a rank 6 when a name is devised, which needs to be added here when ready.
+            var infects = _infectionsManager.GetInfects(player.UserId);
+            if (infects <= 0)
+                rank = 0;
+            else if (infects >= _rankPrimeThreshold)
+                rank = 5;
+            else if (infects >= _rankAncientThreshold)
+                rank = 4;
+            else if (infects >= _rankElderThreshold)
+                rank = 3;
+            else if (infects >= _rankMatureThreshold)
+                rank = 2;
+            else
+                rank = 0;
+        }
         else
-            rank = 0;
+        {
+            var time = TimeSpan.Zero;
+            if (_prototype.TryIndex(jobId, out JobPrototype? job) &&
+                _playTimeManager.TryGetTrackerTime(player, job.PlayTimeTracker, out var nullableTime))
+            {
+                time = nullableTime.Value;
+            }
+
+            if (time > _rankSixTime)
+                rank = 6;
+            else if (time > _rankFiveTime)
+                rank = 5;
+            else if (time > _rankFourTime)
+                rank = 4;
+            else if (time > _rankThreeTime)
+                rank = 3;
+            else if (time > _rankTwoTime)
+                rank = 2;
+            else
+                rank = 0;
+        }
 
         // TODO RMC14 names
         var rankComp = EnsureComp<XenoRankComponent>(xeno);

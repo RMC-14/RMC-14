@@ -296,6 +296,22 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.playtime_prismatic_medal_time_hours", 1500, CVar.REPLICATED | CVar.SERVER);
     // For the future coder: 2100, 2800, 3600, 4500
 
+    /// <summary>
+    ///     Total successful parasite infections required for a parasite to reach each rank.
+    ///     Used instead of playtime when ranking the parasite role.
+    /// </summary>
+    public static readonly CVarDef<int> RMCXenoInfectRankMatureThreshold =
+        CVarDef.Create("rmc.xeno_infect_rank_mature_threshold", 5, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCXenoInfectRankElderThreshold =
+        CVarDef.Create("rmc.xeno_infect_rank_elder_threshold", 25, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCXenoInfectRankAncientThreshold =
+        CVarDef.Create("rmc.xeno_infect_rank_ancient_threshold", 100, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCXenoInfectRankPrimeThreshold =
+        CVarDef.Create("rmc.xeno_infect_rank_prime_threshold", 1000, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<int> RMCPlaytimeXenoPrefixThreeTimeHours =
         CVarDef.Create("rmc.playtime_xeno_prefix_three_time_hours", 124, CVar.REPLICATED | CVar.SERVER);
 
