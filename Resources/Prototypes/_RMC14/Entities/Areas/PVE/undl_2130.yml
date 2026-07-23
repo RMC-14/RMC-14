@@ -1,0 +1,162 @@
+﻿- type: entity
+  parent: RMCAreaShuttleDrop1
+  id: RMCAreaShuttleDrop1UNDL2130
+  name: UNDL-2130 - Landing Pad
+  suffix: Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_undl_2130.rsi
+    state: unlz
+  - type: Area
+    linkedLz: dropship_lz1
+    minimapColor: '#EBE5E5E3'
+    weatherEnabled: true
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    paradropping: true
+    OB: true
+    supplyDrop: true
+    landingZone: true
+
+- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaUNDL2130Backline
+  name: UNDL-2130 - Backlines
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_undl_2130.rsi
+    state: unbackline
+  - type: Area
+    weatherEnabled: true
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    paradropping: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaUNDL2130Backline
+  id: RMCAreaUNDL2130ReserveTrench
+  name: UNDL-2130 - Reserve Trench
+  components:
+  - type: Sprite
+    state: unreserveline
+
+- type: entity
+  parent: RMCAreaUNDL2130Backline
+  id: RMCAreaUNDL2130SupportTrench
+  name: UNDL-2130 - Support Trench
+  components:
+  - type: Sprite
+    state: unsupportline
+
+- type: entity
+  parent: RMCAreaUNDL2130Backline
+  id: RMCAreaUNDL2130Frontline
+  name: UNDL-2130 - Frontline
+  components:
+  - type: Sprite
+    state: unfrontline
+
+- type: entity
+  parent: RMCAreaUNDL2130Backline
+  id: RMCAreaUNDL2130NoMansLand
+  name: No Man's Land
+  components:
+  - type: Sprite
+    state: nomansland
+
+- type: entity
+  parent: RMCAreaProtectionOne
+  id: RMCAreaUNDL2130Dugout
+  name: UNDL-2130 - Dugout
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_undl_2130.rsi
+    state: undugout
+  - type: Area
+    minimapColor: '#4d3d2f'
+    weatherEnabled: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: true
+    medevac: false
+    paradropping: false
+    CAS: true
+    fulton: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaUNDL2130Backline
+  id: RMCAreaUNDL2130Trench
+  name: UNDL-2130 - Trench Line
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_undl_2130.rsi
+    state: untrench
+  - type: Area
+    minimapColor: '#352b24'
+
+- type: entity
+  parent: RMCAreaUNDL2130Dugout
+  id: RMCAreaUNDL2130Building
+  name: UNDL-2130 - Building
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_undl_2130.rsi
+    state: unbuilding
+  - type: Area
+    minimapColor: '#467b49'
+
+- type: entity
+  parent: RMCAreaReinforcedMetal
+  id: RMCAreaUNDL2130UNBunker
+  name: UNDL-2130 - Bunker
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_undl_2130.rsi
+    state: unbunker
+  - type: Area
+    minimapColor: '#467dab'
+    weatherEnabled: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    paradropping: false
+    CAS: false
+    fulton: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent: RMCAreaVaraderoInteriorOob
+  id: RMCAreaUNDL2130Oob
+  name: UNDL-2130 - Out Of Bounds
+  components:
+  - type: Sprite
+    state: oob
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    paradropping: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: false
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: true
+    weatherEnabled: true
