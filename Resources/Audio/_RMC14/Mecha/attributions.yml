@@ -7,3 +7,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/562b51dbda5b25012e423779e980a00f303065a5/sound/mecha/powerloader_unbuckle.ogg"
+
+- files: ["powerup.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/d7ac8ccfb28b46621afbb2e2a7b1995c1f3477f1/sound/mecha/powerup.ogg"
