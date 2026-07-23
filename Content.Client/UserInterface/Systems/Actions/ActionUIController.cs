@@ -15,6 +15,7 @@ using Content.Client.UserInterface.Systems.Gameplay;
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Vehicle;
 using Content.Shared.Actions;
+using Content.Shared.Coordinates;
 using Content.Shared.Actions.Components;
 using Content.Shared.Charges.Systems;
 using Content.Shared.Input;
@@ -165,13 +166,29 @@ public sealed partial class ActionUIController : UIController, IOnStateChanged<G
         if (!_timing.IsFirstTimePredicted || _actionsSystem == null || SelectingTargetFor is not { } actionId)
             return false;
 
+        return TryFireSelectedAction(actionId, args);
+    }
+
+    /// RMC: fires the currently selected targeted action at <paramref name="target"/>
+    public bool TryUseSelectedActionOn(EntityUid target)
+    {
+        if (!_timing.IsFirstTimePredicted || _actionsSystem == null || SelectingTargetFor is not { } actionId)
+            return false;
+
+        var args = new PointerInputCmdArgs(null, target.ToCoordinates(), default, target, BoundKeyState.Down, null!);
+        return TryFireSelectedAction(actionId, args);
+    }
+
+    private bool TryFireSelectedAction(EntityUid actionId, in PointerInputCmdArgs args)
+    {
         if (_playerManager.LocalEntity is not { } user)
             return false;
 
         if (!EntityManager.TryGetComponent<ActionsComponent>(user, out var comp))
             return false;
 
-        if (_actionsSystem.GetAction(actionId) is not {} action ||
+        if (_actionsSystem == null ||
+            _actionsSystem.GetAction(actionId) is not {} action ||
             !EntityManager.TryGetComponent<TargetActionComponent>(action, out var target))
         {
             return false;

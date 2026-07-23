@@ -3,6 +3,7 @@ using System.Numerics;
 using Content.Client.CombatMode;
 using Content.Client.Examine;
 using Content.Client.Gameplay;
+using Content.Client.UserInterface.Systems.Actions;
 using Content.Client.Verbs;
 using Content.Client.Verbs.UI;
 using Content.Shared.CCVar;
@@ -46,6 +47,7 @@ namespace Content.Client.ContextMenu.UI
         [Dependency] private readonly IEyeManager _eyeManager = default!;
         [Dependency] private readonly ContextMenuUIController _context = default!;
         [Dependency] private readonly VerbMenuUIController _verb = default!;
+        [Dependency] private readonly ActionUIController _actionUi = default!;
 
         [UISystemDependency] private readonly VerbSystem _verbSystem = default!;
         [UISystemDependency] private readonly ExamineSystem _examineSystem = default!;
@@ -155,7 +157,12 @@ namespace Content.Client.ContextMenu.UI
                     inputSys.HandleInputCommand(session, func, message);
                 }
 
-                _context.Close();
+                // RMC: if a repeatable targeted abilityis still selected after this
+                // click, keep the menu open so the next can be targeted immediately
+                // instead of forcing the player to reopen the menu
+                if (_actionUi.SelectingTargetFor == null)
+                    _context.Close();
+
                 args.Handle();
             }
         }

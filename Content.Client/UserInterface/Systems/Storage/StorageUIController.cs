@@ -5,6 +5,7 @@ using Content.Client.Hands.Systems;
 using Content.Client.Interaction;
 using Content.Client.Storage;
 using Content.Client.Storage.Systems;
+using Content.Client.UserInterface.Systems.Actions;
 using Content.Client.UserInterface.Systems.Hotbar.Widgets;
 using Content.Client.UserInterface.Systems.Info;
 using Content.Client.UserInterface.Systems.Storage.Controls;
@@ -242,6 +243,15 @@ public sealed class StorageUIController : UIController, IOnSystemChanged<Storage
     {
         if (IsDragging || !window.IsOpen)
             return;
+
+        // RMC
+        if (args.Function == ContentKeyFunctions.MoveStoredItem &&
+            UIManager.GetUIController<ActionUIController>().TryUseSelectedActionOn(control.Entity))
+        {
+            args.Handle();
+            window.FlagDirty();
+            return;
+        }
 
         if (args.Function == ContentKeyFunctions.MoveStoredItem)
         {
