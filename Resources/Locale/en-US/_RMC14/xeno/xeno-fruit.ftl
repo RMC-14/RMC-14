@@ -105,5 +105,5 @@ rmc-xeno-fruit-instant-heal = Instantly restores [bold]{$amount}[/bold] health.
 rmc-xeno-fruit-regen-heal = Regenerates [bold]{$amount}[/bold] health per second for {$time} seconds.
 rmc-xeno-fruit-shield = Grants an overshield equal to [bold]{$percent}%[/bold] of our max health, up to [bold]{$max}[/bold] max. It decays after {$duration} seconds, losing {$decay} per second.
 rmc-xeno-fruit-cooldown = Slashes give you an ongoing [bold]{$amount}%[/bold] cooldown reduction, up to [bold]{$max}%[/bold]. Benefits expire {$time} seconds after consumption.
-rmc-xeno-fruit-speed = Boosts our speed by [bold]{$amount}[/bold] for {$time} seconds.
+rmc-xeno-fruit-speed = Boosts our speed by [bold]{$amount}%[/bold] for {$time} seconds.
 rmc-xeno-fruit-regen-plasma = Regenerates [bold]{$amount}[/bold] plasma per second for {$time} seconds.

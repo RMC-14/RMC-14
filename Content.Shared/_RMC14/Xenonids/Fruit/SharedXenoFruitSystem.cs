@@ -191,7 +191,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         };
 
         args.PushMarkup(Loc.GetString("rmc-xeno-fruit-examine-base",
-            ("growthStatus", Loc.GetString(state))));
+            ("growthStatus", Loc.GetString(state))), -9);
 
         if (!HasComp<XenoComponent>(args.Examiner))
             return;
@@ -239,7 +239,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         if (!HasComp<XenoComponent>(args.Examiner))
             return;
 
-        args.PushMarkup(Loc.GetString("rmc-xeno-fruit-speed", ("amount", fruit.SpeedModifier), ("time", fruit.Duration.TotalSeconds)), -12);
+        args.PushMarkup(Loc.GetString("rmc-xeno-fruit-speed", ("amount", fruit.SpeedModifier * 100), ("time", fruit.Duration.TotalSeconds)), -12);
     }
 
     private void OnXenoPlasmaFruitExamined(EntityUid uid, XenoFruitPlasmaComponent fruit, ExaminedEvent args)
