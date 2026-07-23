@@ -1,38 +1,39 @@
+# We-Ya Commandos
 - type: job
-  parent: RMCPMCStandardM63B2
-  id: RMCWeYaCommando
+  parent: RMCPMCLeader
+  id: RMCWeYaCommandoLeader
   access: [ CMAccessERT ]
-  name: rmc-job-name-weya-commando
-  playTimeTracker: RMCJobWeYaCommando
-  startingGear: RMCGearWeYaCommando
-  spawnMenuRoleName: We-Ya Commando
+  name: rmc-job-name-weya-commando-leader
+  playTimeTracker: RMCJobWeYaCommandoLeader
+  startingGear: RMCGearWeYaCommandoLeader
+  spawnMenuRoleName: We-Ya Commando Squad Leader
 
 - type: entity
-  parent: RMCRandomHumanoidPMCStandardM63B2
-  id: RMCRandomHumanoidWeYaCommando
-  name: we-ya commando ghost role standard
+  parent: RMCRandomHumanoidPMCLeader
+  id: RMCRandomHumanoidWeYaCommandoLeader
+  name: we-ya commando ghost role leader
   suffix: Spawner, Player, Low Threat
   components:
   - type: RandomHumanoidSpawner
-    settings: RMCWeYaCommando
+    settings: RMCWeYaCommandoLeader
 
 - type: randomHumanoidSettings
-  parent: RMCPMCStandardM63B2
-  id: RMCWeYaCommando
+  parent: RMCPMCLeader
+  id: RMCWeYaCommandoLeader
   components:
   - type: GhostRole
-    name: rmc-ghost-name-weya-commando
-    job: RMCWeYaCommando
+    name: rmc-ghost-name-weya-commando-leader
+    job: RMCWeYaCommandoLeader
     requirements:
     - !type:RoleTimeRequirement
-      role: CMJobRifleman
+      role: CMJobSquadLeader
       time: 18000 # 5 Hours
 
 - type: startingGear
-  id: RMCGearWeYaCommando
+  id: RMCGearWeYaCommandoLeader
   equipment:
     id: CMIDCardCommando
-    ears: RMCHeadsetDistressPMC
+    ears: RMCHeadsetDistressPMCLeader
     jumpsuit: RMCJumpsuitVeteranPMCCommando
     outerClothing: CMArmorM4PMCCommando
     gloves: RMCHandsVeteranPMCCommando
@@ -47,6 +48,7 @@
     suitstorage: RMCWeaponRifleM54CWhiteCommando
   storage:
     back:
+    - RMCRangefinder
     - RMCMotionDetector
     - RMCExplosiveBreachingCharge
     - RMCGrenadeBlastM12
@@ -59,4 +61,4 @@
     - CMMagazineRifleM54CAP
 
 - type: playTimeTracker
-  id: RMCJobWeYaCommando
+  id: RMCJobWeYaCommandoLeader

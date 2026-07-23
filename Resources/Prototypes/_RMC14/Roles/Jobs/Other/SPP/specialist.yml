@@ -187,23 +187,12 @@
     - RMCMotionDetector
 
 - type: startingGear
+  parent: RMCGearSPPSpecialist
   id: RMCGearSPPSpecialistShotgun
   equipment:
-    head: ArmorHelmetSPPHeavy
-    ears: RMCHeadsetSPP
-    jumpsuit: CMJumpsuitSPP
-    outerClothing: RMCArmorSPPHeavySpecialist
-    gloves: RMCHandsVeteranSPP
-    shoes: RMCBootsSPPFilled
     suitstorage: RMCWeaponShotgunType23
-    id: RMCIDSPP
     belt: RMCBeltHolsterPistolSPPT73
-    back: RMCSatchelSPPRifleman
     pocket1: RMCPouchShotgunLargeBuckshot
-    pocket2: RMCPouchExplosiveFilledC4SPP
-  storage:
-    back:
-    - RMCMotionDetector
 
 - type: playTimeTracker
   id: CMJobSPPSpecialist
