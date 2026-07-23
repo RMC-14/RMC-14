@@ -1015,8 +1015,18 @@
 - type: loadoutGroup
   id: ProvostRoleSpecificOuterwearRMC
   name: rmc-loadout-group-provost-role-specific-outerwear
-  minLimit: 0
+  minLimit: 1
   maxLimit: 1
   loadouts:
   - ProvostJacketFilledRMC
   - ProvostCoatFilledRMC
+  - RMCProvostJacketBlueFilled
+
+- type: loadoutGroup
+  id: ProvostRoleSpecificHeadRMC
+  name: rmc-loadout-group-provost-role-specific-headwear
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - RMCHeadBeretProvostGold
+  - RMCHeadBeretProvostBlue

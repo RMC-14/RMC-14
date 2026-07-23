@@ -69,7 +69,6 @@
 - type: startingGear
   id: RMCGearProvostInspector
   equipment:
-    head: RMCHeadBeretProvostSenior
     eyes: CMGlassesSecurity
     ears: RMCHeadsetProvost
     jumpsuit: CMJumpsuitProvostSenior
