@@ -54,4 +54,10 @@ public sealed partial class RMCMegaphoneUserComponent : Component
         { "chat-speech-verb-suffix-stutter", "Megaphone" },
         { "chat-speech-verb-suffix-mumble", "Megaphone" },
     };
+
+    /// <summary>
+    /// Multiplier applied to the base voice range when using a megaphone.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float VoiceRangeMultiplier = 1.5f;
 }
