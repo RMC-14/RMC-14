@@ -1,0 +1,56 @@
+- type: job
+  parent: RMCSurvivorArmyBase
+  id: RMCSurvivorArmySmartgunOperator
+  name: rmc-job-name-army-heavy-gunner
+  startingGear: RMCGearArmySmartgunOperator
+  icon: "RMCJobIconArmySmartgunOperator"
+  ranks:
+    RMCRankArmySpecialist: []
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobSmartGunOperator
+    time: 3600 # 1 hour
+  spawnMenuRoleName: UNMC Devil Dogs - Heavy Gunner (Tyrargo Rift Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetArmyHeavyGunner
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: smartgunner
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadUNMC
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetArmyNoPistol
+    - type: JobPrefix
+      prefix: rmc-job-prefix-army-heavy-gunner
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearArmyBase
+  id: RMCGearArmySmartgunOperator
+  equipment:
+    belt: RMCBeltSmartGunOperatorPistolArmyFilled
+    back: RMCSatchelArmySurvivorHeavyGunnerFill
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointArmySmartGunOperator
+  name: army heavy gunner spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorArmySmartgunOperator
+  - type: Sprite
+    state: smartgunner_spawn
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconArmySmartgunOperator
+  icon:
+    sprite: _RMC14/Interface/job_icons/UNMC/army.rsi
+    state: hudsquad_mmg

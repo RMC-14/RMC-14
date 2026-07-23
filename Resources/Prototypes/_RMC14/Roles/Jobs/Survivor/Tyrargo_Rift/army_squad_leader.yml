@@ -1,0 +1,66 @@
+- type: job
+  parent: RMCSurvivorArmyBase
+  id: RMCSurvivorArmySquadLeader
+  name: cm-job-name-squad-leader
+  startingGear: RMCGearArmySquadLeader
+  ranks:
+    RMCRankGunnerySergeant: []
+  icon: "RMCJobIconArmySquadLeader"
+  roleWeight: 1
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobSquadLeader
+    time: 18000  # 5 hours
+  - !type:TotalJobsTimeRequirement
+    group: RMCJobsSurvivor
+    time: 3600 # 1 hour
+  spawnMenuRoleName: UNMC Devil Dogs - Squad Leader (Tyrargo Rift Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetArmySquadLeader
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: leader
+    - type: IntelRescueSurvivorObjective
+    - type: CommandAccent
+    - type: InnateCommandSpeech
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadUNMC
+    - type: JobPrefix
+      prefix: cm-job-prefix-squad-leader
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetArmyFull
+    - type: RMCTrackable
+    - type: RMCAwardRecommendation
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearArmyBase
+  id: RMCGearArmySquadLeader
+  equipment:
+    ears: RMCHeadsetArmyLeader
+    back: RMCSatchelArmySurvivorSquadLeaderFill
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointArmySquadLeader
+  name: army squad leader spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorArmySquadLeader
+  - type: Sprite
+    state: leader_spawn
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconArmySquadLeader
+  icon:
+    sprite: _RMC14/Interface/job_icons/UNMC/army.rsi
+    state: hudsquad_sl_army

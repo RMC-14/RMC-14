@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "license": "CC-BY-3.0",
+  "copyright": "taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/vehices/ifv_prop.dmi",
+  "size": {
+    "x": 128,
+    "y": 128
+  },
+  "states": [
+    {
+      "name": "ifv",
+      "directions": 4
+    },
+    {
+      "name": "ifv_broken",
+      "directions": 4
+    }
+  ]
+}
