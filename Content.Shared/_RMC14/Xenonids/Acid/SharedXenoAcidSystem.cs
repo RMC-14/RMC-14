@@ -31,6 +31,8 @@ using Robust.Shared.GameObjects;
 using Robust.Shared.Physics;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared._RMC14.Chemistry;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Audio;
 
 namespace Content.Shared._RMC14.Xenonids.Acid;
 
@@ -54,6 +56,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
     [Dependency] private readonly XenoEnergySystem _xenoEnergy = default!;
     [Dependency] private readonly FixtureSystem _fixtures = default!;
     [Dependency] private readonly CollisionWakeSystem _collisionWake = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     protected int CorrosiveAcidTickDelaySeconds;
     protected ProtoId<DamageTypePrototype> CorrosiveAcidDamageTypeStr = "Heat";
@@ -213,7 +216,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         if (CorrosiveAcidInstant)
             acidTime = TimeSpan.Zero;
 
-        ApplyAcid(args.AcidId, args.Strength, target, args.Dps, args.ExpendableLightDps, acidTime);
+        ApplyAcid(args.AcidId, args.Strength, target, args.Dps, args.ExpendableLightDps, acidTime, args.AcidSound);
     }
 
     /// <summary>
@@ -221,12 +224,12 @@ public abstract class SharedXenoAcidSystem : EntitySystem
     /// </summary>
     private void OnAmmoShot(Entity<InheritAcidComponent> ent, ref AmmoShotEvent args)
     {
-        if(!TryComp(ent, out TimedCorrodingComponent? corroding))
+        if (!TryComp(ent, out TimedCorrodingComponent? corroding))
             return;
 
         foreach (var projectile in args.FiredProjectiles)
         {
-            ApplyAcid(corroding.AcidPrototype, corroding.Strength, projectile, corroding.LightDps, corroding.Dps, corroding.CorrodesAt, true);
+            ApplyAcid(corroding.AcidPrototype, corroding.Strength, projectile, corroding.LightDps, corroding.Dps, corroding.CorrodesAt, null, true);
         }
     }
 
@@ -237,7 +240,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
     {
         if (TryComp(args.Source, out TimedCorrodingComponent? corroding))
         {
-            ApplyAcid(corroding.AcidPrototype, corroding.Strength, ent, corroding.Dps, corroding.LightDps, corroding.CorrodesAt, true);
+            ApplyAcid(corroding.AcidPrototype, corroding.Strength, ent, corroding.Dps, corroding.LightDps, corroding.CorrodesAt, null, true);
         }
     }
 
@@ -342,7 +345,8 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         return true;
     }
 
-    public void ApplyAcid(EntProtoId acidId, XenoAcidStrength strength, EntityUid target, float dps, float lightDps, TimeSpan time, bool inherit = false)
+    public void ApplyAcid(EntProtoId acidId, XenoAcidStrength strength, EntityUid target, float dps, float lightDps,
+        TimeSpan time, SoundSpecifier? acidSound = null, bool inherit = false)
     {
         if (_net.IsClient)
             return;
@@ -374,7 +378,11 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             CorrodesAt = time,
             Dps = dps,
             LightDps = lightDps,
+            AcidSound = acidSound,
         });
+
+        if (acidSound is { } sound)
+            _audio.PlayPvs(sound, target);
 
         EnsureAcidVaporFixture(target);
         EnsureAcidCollisionWake(target);
@@ -412,6 +420,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         }
 
         var timedCorrodingQuery = EntityQueryEnumerator<TimedCorrodingComponent>();
+        var xformQuery = GetEntityQuery<TransformComponent>();
         while (timedCorrodingQuery.MoveNext(out var uid, out var timedCorrodingComponent))
         {
             if (time < timedCorrodingComponent.CorrodesAt)
@@ -422,6 +431,9 @@ public abstract class SharedXenoAcidSystem : EntitySystem
 
             var ev = new BeforeMeltedEvent();
             RaiseLocalEvent(uid, ref ev);
+
+            if (xformQuery.TryComp(uid, out var xform))
+                _audio.PlayPvs(timedCorrodingComponent.AcidSound, xform.Coordinates);
 
             if (_acidHole.TryCreateHoleFromMelt(uid))
             {
