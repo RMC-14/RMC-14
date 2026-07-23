@@ -145,6 +145,7 @@
       total: 3000
       slope: 5.5
       max: 55
+      type: RMCDropshipWidowmaker
 
 - type: entity
   parent: RMCDropshipAttachmentAmmoRocket
@@ -164,6 +165,7 @@
       total: 905
       slope: 15
       max: 45
+      type: RMCDropshipKeeper
 
 - type: entity
   parent: RMCDropshipAttachmentAmmoRocket
@@ -206,6 +208,7 @@
       total: 1850
       slope: 3.2
       max: 32
+      type: RMCDropshipHarpoon
 
 - type: entity
   parent: RMCDropshipAttachmentAmmoRocket
@@ -293,6 +296,7 @@
       total: 850
       slope: 8
       max: 40
+      type: RMCDropshipMiniMike
     impactEffects:
     - RMCEffectExplosionParticle
     - RMCSmokeExplosionProofSmall
