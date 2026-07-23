@@ -26,7 +26,6 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Serialization.Manager.Exceptions;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -41,7 +40,6 @@ public sealed class XenoProjectileSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedProjectileSystem _projectile = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedRMCLagCompensationSystem _rmcLag = default!;
     [Dependency] private readonly CMPoweredLightSystem _rmcPoweredLight = default!;
     [Dependency] private readonly RMCPseudoRandomSystem _rmcPseudoRandom = default!;
@@ -77,6 +75,7 @@ public sealed class XenoProjectileSystem : EntitySystem
         SubscribeLocalEvent<XenoProjectileComponent, PreventCollideEvent>(OnPreventCollide);
         SubscribeLocalEvent<XenoProjectileComponent, ProjectileHitEvent>(OnProjectileHit);
         SubscribeLocalEvent<XenoProjectileComponent, CMClusterSpawnedEvent>(OnClusterSpawned);
+        SubscribeLocalEvent<XenoProjectileComponent, StartCollideEvent>(OnClusterProjectileStartCollide);
 
         UpdatesBefore.Add(typeof(SharedPhysicsSystem));
     }
@@ -351,11 +350,12 @@ public sealed class XenoProjectileSystem : EntitySystem
             return;
         }
 
-        if (ent.Comp.DeleteOnFriendlyXeno)
+        if (ent.Comp.DeleteOnFriendlyXeno || ent.Comp.StopOnFriendlyXeno)
             return;
 
         if (_hive.FromSameHive(ent.Owner, args.OtherEntity) &&
-            (HasComp<XenoComponent>(args.OtherEntity) || HasComp<HiveCoreComponent>(args.OtherEntity)))
+            (HasComp<XenoComponent>(args.OtherEntity) || HasComp<HiveCoreComponent>(args.OtherEntity)) &&
+            !HasComp<XenoConstructComponent>(args.OtherEntity))
             args.Cancelled = true;
     }
 
@@ -364,6 +364,9 @@ public sealed class XenoProjectileSystem : EntitySystem
         if (_hive.FromSameHive(ent.Owner, args.Target))
         {
             args.Handled = true;
+
+            if (!ent.Comp.DeleteOnFriendlyXeno && !HasComp<XenoConstructComponent>(args.Target) || ent.Comp.StopOnFriendlyXeno)
+                return;
 
             if (_net.IsServer || IsClientSide(ent))
                 QueueDel(ent);
@@ -391,6 +394,18 @@ public sealed class XenoProjectileSystem : EntitySystem
         {
             _hive.SetHive(spawned, hive);
         }
+    }
+
+    private void OnClusterProjectileStartCollide(Entity<XenoProjectileComponent> ent, ref StartCollideEvent args)
+    {
+        var shouldStop = _hive.FromSameHive(ent.Owner, args.OtherEntity)
+            ? ent.Comp.StopOnFriendlyXeno
+            : ent.Comp.StopOnCollide;
+
+        if (!shouldStop)
+            return;
+
+        _physics.SetLinearVelocity(ent, Vector2.Zero);
     }
 
     /// <summary>
