@@ -219,19 +219,11 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
 
                 monitor.MessageSquadButton.OnPressed += _ =>
                 {
-                    var window = new OverwatchTextInputWindow();
-
-                    void SendSquadMessage()
-                    {
-                        SendPredictedMessage(new OverwatchConsoleSendMessageBuiMsg(window.MessageBox.Text));
-                        window.Close();
-                    }
-
-                    window.MessageBox.OnTextEntered += _ => SendSquadMessage();
-                    window.OkButton.OnPressed += _ => SendSquadMessage();
-                    window.CancelButton.OnPressed += _ => window.Close();
-                    window.OpenCentered();
+                    OpenMessageInput(message => new OverwatchConsoleSendMessageBuiMsg(message));
                 };
+
+                monitor.MessageLeaderButton.OnPressed += _ =>
+                    OpenMessageInput(message => new OverwatchConsoleSendLeaderMessageBuiMsg(message));
 
                 monitor.SquadObjectivesButton.OnPressed += _ =>
                 {
@@ -298,11 +290,13 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                 {
                     TabContainer.SetTabVisible(monitor.OrbitalBombardment, overwatch.CanOrbitalBombardment);
                     monitor.MessageSquadButton.Visible = overwatch.CanMessageSquad;
+                    monitor.MessageLeaderButton.Visible = overwatch.CanMessageSquad;
                 }
                 else
                 {
                     TabContainer.SetTabVisible(monitor.OrbitalBombardment, false);
                     monitor.MessageSquadButton.Visible = false;
+                    monitor.MessageLeaderButton.Visible = false;
                 }
 
                 _squadViews[squad.Id] = monitor;
@@ -620,7 +614,14 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                 {
                     Margin = new Thickness(0, 3, 0, 3)
                 };
-                roleNameLabel.SetMarkupPermissive($"[bold]{role.OverwatchRoleName}[/bold]");
+                var overwatchRoleName = role.LocalizedName;
+                if (role.OverwatchRoleName is { } roleName &&
+                    _localization.TryGetString(roleName, out var localizedRoleName))
+                {
+                    overwatchRoleName = localizedRoleName;
+                }
+
+                roleNameLabel.SetMarkupPermissive($"[bold]{overwatchRoleName}[/bold]");
 
                 roleNamePanel.AddChild(new BoxContainer
                 {
@@ -852,6 +853,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
             );
 
             squad.HasOrbital = console.HasOrbital;
+            squad.OrbitalSafetyEngaged = console.OrbitalSafetyEngaged;
             squad.NextOrbitalAt = console.NextOrbitalLaunch;
         }
     }
@@ -991,6 +993,22 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
             text = text[..50];
 
         SendPredictedMessage(new OverwatchConsoleLocationCommentBuiMsg(index, text));
+    }
+
+    private void OpenMessageInput(Func<string, BoundUserInterfaceMessage> messageFactory)
+    {
+        var window = new OverwatchTextInputWindow();
+
+        void SendMessage()
+        {
+            SendPredictedMessage(messageFactory(window.MessageBox.Text));
+            window.Close();
+        }
+
+        window.MessageBox.OnTextEntered += _ => SendMessage();
+        window.OkButton.OnPressed += _ => SendMessage();
+        window.CancelButton.OnPressed += _ => window.Close();
+        window.OpenCentered();
     }
 
     public void Refresh()

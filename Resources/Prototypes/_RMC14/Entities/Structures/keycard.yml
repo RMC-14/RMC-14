@@ -9,11 +9,26 @@
     anchored: true
   - type: Sprite
     sprite: _RMC14/Structures/monitors.rsi
-    state: auth_off # TODO RMC14 auth_on when on
     drawdepth: WallMountedItems
+    layers:
+    - state: auth_off
+      map: ["keycard"]
   - type: Clickable
   - type: InteractionOutline
   - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.KeycardDeviceVisuals.Active:
+        keycard:
+          True: { state: auth_on }
+          False: { state: auth_off }
+  - type: ApcPowerReceiver
+    powerLoad: 6
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 2
+    activeLoad: 6
+    channel: Equipment
   - type: KeycardDevice
   - type: AccessReader
     access: [ [ "RMCAccessCommand" ] ]

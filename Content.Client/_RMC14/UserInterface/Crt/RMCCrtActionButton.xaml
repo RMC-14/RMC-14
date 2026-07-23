@@ -1,0 +1,19 @@
+<crt:RMCCrtActionButton
+    xmlns="https://spacestation14.io"
+    xmlns:crt="clr-namespace:Content.Client._RMC14.UserInterface.Crt">
+    <crt:RMCCrtPanel Name="Background" Access="Public" Effects="HorizontalScanlines"
+                     HorizontalExpand="True" VerticalExpand="True" MouseFilter="Ignore">
+        <BoxContainer Name="Layout" Access="Public" Orientation="Horizontal" Align="Center"
+                      HorizontalAlignment="Stretch" HorizontalExpand="True"
+                      SeparationOverride="7" Margin="9 5" MouseFilter="Ignore">
+            <TextureRect Name="IconControl" Access="Public"
+                         SetWidth="18" SetHeight="18" Stretch="Scale"
+                         HorizontalExpand="False"
+                         HorizontalAlignment="Center" VerticalAlignment="Center"
+                         MouseFilter="Ignore" />
+            <Label Name="TextLabel" Access="Public" StyleClasses="RMCCrtText"
+                   HorizontalExpand="False" VerticalAlignment="Center"
+                   MouseFilter="Ignore" />
+        </BoxContainer>
+    </crt:RMCCrtPanel>
+</crt:RMCCrtActionButton>
