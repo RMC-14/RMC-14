@@ -3,7 +3,7 @@
   mapName: Savannah
   mapPath: /Maps/_RMC14/savannah.yml
   minPlayers: 0
-  maxPlayers: 75
+  maxPlayers: 90
   maxRandomOffset: 0
   randomRotation: false
   stations:
@@ -11,7 +11,7 @@
       stationProto: StandardUNMCWarship
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'LCS-14 Savannah'
+          mapNameTemplate: 'UNS LCS-14 Savannah'
         - type: StationJobs
           availableJobs:
             # Command
