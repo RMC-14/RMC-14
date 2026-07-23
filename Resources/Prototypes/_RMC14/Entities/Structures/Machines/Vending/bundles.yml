@@ -203,7 +203,7 @@
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleCrewCombatCorrespondent
   name: Essential Reporter's Set
-  description: Contains a flashlight, binoculars, a clipboard, and a pen. #TODO a tape recorder, a notepad, and a pen
+  description: Contains a flashlight, binoculars, a clipboard, and a pen.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Tools/Light/flashlight.rsi
@@ -213,7 +213,7 @@
     - RMCFlashlight
     - CMPen
     - RMCBinoculars
-    - CMClipboard # notepad
+    - CMClipboard #TODO RMC14 Notepad
     - RMCUniversalRecorder
 
 # PVE
