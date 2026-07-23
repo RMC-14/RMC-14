@@ -278,6 +278,8 @@
     - scenarioName: spp_bar
       scenarioProbability: 0.4
     survivorJobVariants:
+      RMCSurvivorCommandingOfficer:
+      - RMCSurvivorTrijentDamSupervisor: 1
       CMSurvivor:
       - CMSurvivor: -1
       - RMCSurvivorCivilianUnique: -1
