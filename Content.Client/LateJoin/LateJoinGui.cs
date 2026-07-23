@@ -103,7 +103,7 @@ namespace Content.Client.LateJoin
                                     new RichTextLabel()
                                     {
                                         StyleClasses = { "LabelBig" },
-                                        Text = $"\n{Loc.GetString("rmc-lobby-late-join-hijack-1")}\n\n{Loc.GetString("rmc-lobby-late-join-hijack-2")}",
+                                        Text = $"{Loc.GetString("rmc-lobby-late-join-hijack-1")}\n\n{Loc.GetString("rmc-lobby-late-join-hijack-2")}",
                                         HorizontalAlignment = HAlignment.Center,
                                     },
                                 }
