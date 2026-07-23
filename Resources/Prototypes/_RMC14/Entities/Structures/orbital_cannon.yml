@@ -32,6 +32,11 @@
   - type: RMCLoreExaminable
     content: rmc-lore-examniable-orbital-cannon
   - type: RMCMesonsNonviewable
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-orbital-cannon
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCOrbitalCannonDerelict
@@ -68,6 +73,11 @@
     virtualLeft: RMCVirtualFuelLeft
   - type: Item
   - type: OrbitalCannonFuel
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-orbital-cannon-fuel
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   abstract: true
@@ -92,6 +102,11 @@
     virtualRight: RMCVirtualWarheadRight
     virtualLeft: RMCVirtualWarheadLeft
   - type: Item
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-orbital-cannon-shell
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCOrbitalCannonWarheadBase
