@@ -342,6 +342,36 @@
       state: patch
 
 - type: entity
+  parent: RMCPatchWeYaBlack
+  id: RMCPatchWeYaSecurityDivision
+  name: Weston-Yamada security division patch
+  description: A fire-resistant patch shoulder patch, denoting the wearer as a member of Weston-Yamada's Security Division.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/WeYa/weya_patch_security.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/WeYa/weya_patch_security.rsi
+      state: patch
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-patch-security-division
+
+- type: entity
+  parent: RMCPatchWeYaBlack
+  id: RMCPatchWeYaCommsDivision
+  name: Weston-Yamada communications division patch
+  description: A fire-resistant patch shoulder patch, denoting the wearer as a member of Weston-Yamada's Communications Division.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/WeYa/weya_patch_comms.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/WeYa/weya_patch_comms.rsi
+      state: patch
+
+- type: entity
   parent: RMCPatchBase
   id: RMCPatchWeYaFury161
   name: Weston-Yamada Fury '161' patch

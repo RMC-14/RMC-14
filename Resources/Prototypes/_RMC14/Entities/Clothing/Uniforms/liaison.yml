@@ -581,3 +581,23 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/bluegrey_admin.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/bluegrey_admin.rsi
+
+- type: entity
+  parent: RMCJumpsuitLiaisonKhakiWorkwear
+  id: RMCJumpsuitLiaisonBlueSecurity
+  name: blue security uniform
+  description: A stylish pair of dark-blue slacks, and a lighter blue shirt with a black tie, often seen among bodyguard and security officers on the Company Payroll. When it comes to protecting assets, this guy's on your side.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/blue_security.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/blue_security.rsi
+
+- type: entity
+  parent: RMCJumpsuitLiaisonBlueSecurity
+  id: RMCJumpsuitLiaisonBlueSecurityExecutiveBodyguard
+  suffix: Executive Bodyguard
+  components:
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchWeYaBlack
