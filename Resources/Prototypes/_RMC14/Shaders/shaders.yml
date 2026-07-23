@@ -34,7 +34,7 @@
   path: "/Textures/_RMC14/Shaders/blurryx.swsl"
 
 - type: shader
-  id: RMCWeldingVision
+  id: WeldingVision
   kind: source
   path: "/Textures/_RMC14/Shaders/welding_vision.swsl"
 

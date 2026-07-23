@@ -8,7 +8,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Welding;
 
-public sealed class RMCWeldingVisionOverlay : Overlay
+public sealed class WeldingVisionOverlay : Overlay
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
@@ -21,10 +21,10 @@ public sealed class RMCWeldingVisionOverlay : Overlay
     private readonly InventorySystem _inventory;
     private bool _isSuperior;
 
-    public RMCWeldingVisionOverlay()
+    public WeldingVisionOverlay()
     {
         IoCManager.InjectDependencies(this);
-        _shader = _prototypeManager.Index<ShaderPrototype>("RMCWeldingVision").InstanceUnique();
+        _shader = _prototypeManager.Index<ShaderPrototype>("WeldingVision").InstanceUnique();
         _inventory = _entityManager.System<InventorySystem>();
     }
 
@@ -35,7 +35,7 @@ public sealed class RMCWeldingVisionOverlay : Overlay
         if (item == null)
             return false;
 
-        if (!_entityManager.TryGetComponent<RMCWeldingVisionComponent>(item.Value, out var weldComp))
+        if (!_entityManager.TryGetComponent<WeldingVisionComponent>(item.Value, out var weldComp))
             return false;
 
         if (_entityManager.TryGetComponent<ItemToggleComponent>(item.Value, out var toggle) &&

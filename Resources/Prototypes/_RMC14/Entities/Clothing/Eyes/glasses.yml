@@ -1107,7 +1107,7 @@
   - type: ComponentToggler
     components:
     - type: EyeProtection
-    - type: RMCWeldingVision
+    - type: WeldingVision
   - type: RMCItemToggleClothingVisuals
   - type: GenericVisualizer
     visuals:
@@ -1149,7 +1149,7 @@
   - type: ComponentToggler
     components:
     - type: EyeProtection
-  - type: RMCWeldingVision
+  - type: WeldingVision
     superior: true
 
 - type: entity
