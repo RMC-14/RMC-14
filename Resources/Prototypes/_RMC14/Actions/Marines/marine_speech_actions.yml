@@ -1,0 +1,17 @@
+- type: entity
+  id: ActionCommandSpeechToggle
+  parent: ActionMarineBase
+  name: Toggle Speech
+  description: Adjust the intensity of your voice
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    backgroundOn:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: template_on_big
+    icon:
+      sprite: _RMC14/Actions/marine_actions.rsi
+      state: authoritative_voice
+    useDelay: 0.25
+  - type: InstantAction
+    event: !type:CommandSpeechActionEvent
