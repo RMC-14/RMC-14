@@ -3,7 +3,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidBravoCombatTech
   name: bravo ghost role combat technician
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
@@ -20,7 +20,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidBravoFireteamLeader
   name: bravo ghost role fireteam leader
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
@@ -37,7 +37,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidBravoHospitalCorpsman
   name: bravo ghost role hospital corpsman
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
@@ -54,7 +54,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidBravoRifleman
   name: bravo ghost role rifleman
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
@@ -71,7 +71,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidBravoSmartGunOperator
   name: bravo ghost role smart gun operator
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
@@ -88,7 +88,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidBravoSquadLeader
   name: bravo ghost role squad leader
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
@@ -105,7 +105,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidBravoWeaponsSpecialist
   name: bravo ghost role weapons specialist
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
