@@ -1,0 +1,71 @@
+﻿{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Made by ThataKat on Github",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "ai"
+    },
+    {
+      "name": "base"
+    },
+    {
+      "name": "cafeteria"
+    },
+    {
+      "name": "captain"
+    },
+    {
+      "name": "cargo"
+    },
+    {
+      "name": "central_deck"
+    },
+    {
+      "name": "dorms"
+    },
+    {
+      "name": "engineering"
+    },
+    {
+      "name": "hypersleep"
+    },
+    {
+      "name": "lower_deck"
+    },
+    {
+      "name": "lower_hangar"
+    },
+    {
+      "name": "maints"
+    },
+    {
+      "name": "medbay"
+    },
+    {
+      "name": "office"
+    },
+    {
+      "name": "oob"
+    },
+    {
+      "name": "recreation"
+    },
+    {
+      "name": "secure_storage"
+    },
+    {
+      "name": "synth"
+    },
+    {
+      "name": "upper_deck"
+    },
+    {
+      "name": "upper_hangar"
+    }
+  ]
+}
