@@ -1,0 +1,282 @@
+- type: entity
+  parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
+  name: F50 SLR
+  id: RMCWeaponRifleSLR
+  description: The F50 self-loading rifle, an ageless design prized for its sturdiness and reliability. Chambered in 7.62x51mm.
+  suffix: Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/slr.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/slr.rsi
+  - type: Gun
+    selectedMode: FullAuto
+    availableModes:
+    - SemiAuto
+    - FullAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_l88.ogg
+      params:
+        volume: -2
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - FullAuto
+    recoilUnwielded: 8
+    scatterWielded: 4
+    scatterUnwielded: 20
+    baseFireRate: 2
+    burstScatterMult: 6
+    modifiers:
+      FullAuto:
+        fireDelay: -0.25
+        useBurstScatterMult: true
+        maxScatterModifier: 2
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 3
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.5
+    accuracyMultiplierUnwielded: 0.5
+  - type: MagazineAmmoProvider
+    autoEject: false
+    soundAutoEject: null
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineRifleSLR
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineRifleSLR
+          - RMCMagazineRifleSLRExt
+          - RMCMagazineRifleSLRAP
+  - type: GunDamageModifier
+    multiplier: 1.5
+  - type: WieldDelay
+    baseDelay: 1
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentLaserSight
+          - RMCAttachmentVerticalGrip
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 1.05, 0.03
+      rmc-aslot-rail: -0.11, 0.15
+      rmc-aslot-underbarrel: 0.35, -0.25
+  - type: Tag
+    tags:
+    - RMCWeaponRifleSLR
+
+- type: entity
+  parent: RMCWeaponRifleSLR
+  name: F50P SLR Para
+  id: RMCWeaponRifleSLRPara
+  description: "The F50 self-loading rifle in its \"para\" configuration, lightweight but hard-hitting - if hard to control in automatic. Chambered in 7.62x51mm."
+  suffix: Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/slrpara.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/slrpara.rsi
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - FullAuto
+    recoilUnwielded: 8
+    scatterWielded: 8
+    scatterUnwielded: 20
+    baseFireRate: 2.5
+    burstScatterMult: 8
+    modifiers:
+      FullAuto:
+        fireDelay: -0.15
+        useBurstScatterMult: true
+        maxScatterModifier: 2.5
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 3
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.2
+    accuracyMultiplierUnwielded: 0.4
+  - type: WieldDelay
+    baseDelay: 0.5
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentLaserSight
+          - RMCAttachmentVerticalGrip
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.88, 0.03
+      rmc-aslot-rail: -0.11, 0.15
+      rmc-aslot-underbarrel: 0.32, -0.25
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineRifleSLR
+  name: "F50 SLR magazine (7.62x51mm)"
+  description: "A 20-round magazine of 7.62x51mm rounds for use in F50-pattern rifles."
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleSLR
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifleAR10
+    proto: RMCCartridgeRifleAR10
+    capacity: 20
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/slr.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Appearance
+
+- type: entity
+  parent: RMCMagazineRifleSLR
+  id: RMCMagazineRifleSLRExt
+  name: "F50 SLR extended magazine (7.62x51mm)"
+  description: "An extended 30-round magazine of 7.62x51mm rounds for use in F50-pattern rifles."
+  suffix: Ext
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleSLRExt
+  - type: BallisticAmmoProvider
+    capacity: 30
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/slre.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: RMCMagazineRifleSLR
+  id: RMCMagazineRifleSLRAP
+  name: "F50 SLR AP magazine (7.62x51mm)"
+  description: "A 20-round magazine of armor-piercing 7.62x51mm rounds for use in F50-pattern rifles."
+  suffix: AP
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleSLRAP
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/slr.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: ammo_band
+      color: "#1F951F"
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRifleAR10AP
+    proto: RMCCartridgeRifleAR10AP
+
+- type: entity
+  parent: RMCCartridgeRifleAR10
+  id: RMCCartridgeRifleAR10AP
+  name: AP Cartridge (7.62x51)
+  description: An armor-piercing 7.62x51 rifle cartridge
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifleAR10AP
+  - type: CartridgeAmmo
+    proto: BulletRifleAR10AP
+
+- type: entity
+  parent: BulletRifleAR10
+  id: BulletRifleAR10AP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 30
+  - type: CMArmorPiercing
+    amount: 40
+
+- type: Tag
+  id: RMCWeaponRifleSLR
+
+- type: Tag
+  id: RMCMagazineRifleSLR
+
+- type: Tag
+  id: RMCMagazineRifleSLRExt
+
+- type: Tag
+  id: RMCMagazineRifleSLRAP
+
+- type: Tag
+  id: RMCCartridgeRifleAR10AP
