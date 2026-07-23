@@ -1,0 +1,38 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/structures/props/natural/vegetation/snowflora.dmi",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "snowgrassall_1"
+        },
+        {
+            "name": "snowgrassall_2"
+        },
+        {
+            "name": "snowgrassall_3"
+        },
+        {
+            "name": "snowgrassbb_1"
+        },
+        {
+            "name": "snowgrassbb_2"
+        },
+        {
+            "name": "snowgrassbb_3"
+        },
+        {
+            "name": "snowgrassgb_1"
+        },
+        {
+            "name": "snowgrassgb_2"
+        },
+        {
+            "name": "snowgrassgb_3"
+        }
+    ]
+}
