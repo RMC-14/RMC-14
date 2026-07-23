@@ -102,6 +102,26 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/spp_nv.rsi
 
 - type: entity
+  parent: CMGlassesM42ScoutSight
+  id: RMCGlassesL8HMOD
+  name: L8 head-mounted optical device
+  description: "The L8 HMOD, an advanced headset and low-light imaging system in use by select members of the TSE's Royal Crown Marines. Allows highlighted imaging of surroundings."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/l8_hmod.rsi
+    layers:
+    - state: icon
+      map: [ "icon" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/l8_hmod.rsi
+  - type: GenericVisualizer
+    visuals:
+      enum.NightVisionItemVisuals.Active:
+        icon:
+          True: { state: icon-on }
+          False: { state: icon }
+
+- type: entity
   parent: ClothingEyesHudMedical
   id: RMCGlassesM4SPRBattleSight
   name: M4SPR Battle Sight
