@@ -1,24 +1,25 @@
 - type: entity
   abstract: true
-  parent: CMBaseStructure
   id: RMCGrassTallBase
   name: tallgrass
   suffix: Centre
+  placement:
+    mode: SnapgridCenter
   components:
   # make this slashable by only machete
+  - type: Clickable
   - type: Sprite
     sprite: _RMC14/Structures/Flora/tallgrass.rsi
     state: tallgrass
     drawdepth: Walls
   - type: Physics
     canCollide: false
-  - type: Fixtures
   - type: Damageable
-    damageContainer: Inorganic
+    damageModifierSet: Wood
   - type: MeleeSound
     soundGroups:
       Brute:
-        path: /Audio/Effects/chop.ogg
+        path: /Audio/Weapons/slash.ogg
         params:
           variation: 0.05
   - type: Destructible
