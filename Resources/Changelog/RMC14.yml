@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Arykh
-  changes:
-  - message: Added the Body Scanner! Its scan is more detailed than the Health Analyzer,
-      but it's not continuous.
-    type: Add
-  id: 3020
-  time: '2026-03-28T11:09:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9398
 - author: TadJohnson00
   changes:
   - message: '[PVE] added large magazine boxes for most PVE weapons.'
@@ -4582,5 +4574,13 @@
   id: 3519
   time: '2026-07-23T15:56:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10535
+- author: kleinerstation13
+  changes:
+  - message: Handheld sources of light like lanterns and flashlights are no longer
+      melee weapons
+    type: Tweak
+  id: 3520
+  time: '2026-07-23T18:45:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10527
 Name: RMC14
 Order: -1
