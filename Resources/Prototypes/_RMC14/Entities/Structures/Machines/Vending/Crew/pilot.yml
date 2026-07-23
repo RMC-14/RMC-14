@@ -62,6 +62,7 @@
       entries:
       - id: RMCArmorVestFlak
       - id: CMArmorM3VLFlakVest
+      - id: RMCArmorVestCrewchief
     # Dropship Crew Chief Section End
     - name: Personal Sidearm
       choices: { CMSidearm: 1 }
