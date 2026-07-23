@@ -212,6 +212,8 @@ cm-xeno-retrieve-egg-too-many-eggs = We can't carry more eggs!
 cm-xeno-retrieve-egg-stash-egg = We store the egg for safekeeping. Now holding: {$cur_eggs}/{$max_eggs}.
 cm-xeno-retrieve-egg-unstash-egg = We grab an egg from our storage. Now holding: {$cur_eggs}/{$max_eggs}.
 rmc-xeno-retrieve-egg-current = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-BE($xeno)} holding: {$cur_eggs}/{$max_eggs} eggs.
+rmc-xeno-retrieve-egg-fill = We start filling {THE($morpher)} with our children.
+rmc-xeno-retrieve-egg-fill-finish = We slide our children out of eggs into {THE($morpher)}. Now holding: {$cur_eggs}/{$max_eggs}.
 
 # Throw Parasite
 cm-xeno-throw-parasite-no-parasites = We don't have any children stored!
@@ -223,6 +225,8 @@ rmc-xeno-throw-parasite-reserves = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-HAVE(
    [one] role
    *[other] roles
 } available.
+rmc-xeno-throw-parasite-empty = We take children from {THE($morpher)} and carry them for safekeeping. Now sheltering: {$cur_parasites}/{$max_parasites}.
+rmc-xeno-throw-parasite-empty-on-fire = Touching {THE($morpher)} while you're on fire would burn the children in it!
 
 # Defensive Shield
 rmc-xeno-defensive-shield-end = We feel our enhanced shield end!
