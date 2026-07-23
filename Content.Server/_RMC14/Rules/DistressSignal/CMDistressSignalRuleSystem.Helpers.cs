@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using Content.Server.Power.Components;
 using Content.Server.Spawners.Components;
 using Content.Shared._RMC14.Item;
@@ -376,6 +376,41 @@ public sealed partial class CMDistressSignalRuleSystem
             return (_random.Pick(latePoints), squad);
 
         return null;
+    }
+
+    /// <summary>
+    /// Returns the maximum amount of roundstart xenos possible given the number of readied players.
+    /// </summary>
+    /// <param name="readyupCount"></param>
+    /// <returns></returns>
+    /// <remarks>This limit assumes the marine count is at the minimum, which will happen if every xeno slot is taken. If not every xeno slot is taken,
+    /// the xeno + burrowed count can exceed this limit to account for the extra marines.</remarks>
+    private int GetRoundstartXenoLimit(int readyupCount)
+    {
+        // TODO RMC14 xeno limit should be changed to be based on number of marines rather than number of readied players, but this is a decent estimate.
+        return (int)Math.Floor(Math.Max(1, readyupCount / (_marinesPerXeno + 1)));
+    }
+
+    /// <summary>
+    /// Returns the maximum amount of roundstart survs possible given the number of readied players.
+    /// </summary>
+    /// <param name="readyupCount"></param>
+    /// <returns></returns>
+    private int GetRoundstartSurvLimit(int readyupCount)
+    {
+        // TODO RMC14 surv limit should be changed to be based on number of marines rather than number of readied players. This isn't a good estimate since it includes xenos.
+        return (int)Math.Clamp((int)Math.Floor(readyupCount / (_marinesPerSurvivor + 1)), _minimumSurvivors, _maximumSurvivors);
+    }
+
+    /// <summary>
+    /// Returns the minimum number of roundstart marines possible given the number of readied players.
+    /// </summary>
+    /// <param name="readyupCount"></param>
+    /// <returns></returns>
+    /// <remarks>Despite being called a minimum, the actual number of marines could be smaller if readied players don't receive a role.</remarks>
+    private int GetRoundstartMarineMinimum(int readyupCount)
+    {
+        return readyupCount - GetRoundstartXenoLimit(readyupCount) - GetRoundstartSurvLimit(readyupCount);
     }
 
     private void ReloadPrototypes()
