@@ -1,0 +1,21 @@
+﻿- type: entity
+  parent: BaseItem
+  id: RMCDumbbell
+  name: dumbbell
+  description: Lift it for strength, or drop it on your toe for instant enlightenment, either way this dumbbell delivers results.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/dumbbells.rsi
+    state: dumbbell
+  - type: Item
+    size: Normal
+
+- type: entity
+  parent: RMCDumbbell
+  id: RMCDumbbellAlt
+  name: dumbbell
+  suffix: Alt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/dumbbells.rsi
+    state: dumbbell_2
