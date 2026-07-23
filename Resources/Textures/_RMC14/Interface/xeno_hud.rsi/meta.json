@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/67a5981e191d9c049ff1e8db6ffce96ab2f968ae/icons/mob/hud/hud.dmi and ayou331 for hudxenoupgrade6, prae_tag_yellow modified by Vermidia.",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/daac1b70c46480c55b1e93b64f04529d364dd60f/icons/mob/hud/hud.dmi, hudxenoupgrade/-ui 2-9 designed and created by thefairykings, prae_tag_yellow modified by Vermidia.",
   "size": {
     "x": 32,
     "y": 32
@@ -372,8 +372,6 @@
           0.1,
           0.1,
           0.1,
-          0.1,
-          0.1,
           5
         ]
       ]
@@ -382,7 +380,6 @@
       "name": "hudxenoupgrade6",
       "delays": [
         [
-          0.3,
           0.1,
           0.1,
           0.1,
@@ -395,6 +392,14 @@
           0.1,
           0.1,
           0.1,
+          5
+        ]
+      ]
+    },
+    {
+      "name": "hudxenoupgrade7",
+      "delays": [
+        [
           0.1,
           0.1,
           0.1,
@@ -407,10 +412,47 @@
           0.1,
           0.1,
           0.1,
+          5
+        ]
+      ]
+    },
+    {
+      "name": "hudxenoupgrade8",
+      "delays": [
+        [
           0.1,
           0.1,
           0.1,
-          0.1
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          5
+        ]
+      ]
+    },
+    {
+      "name": "hudxenoupgrade9",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          5
         ]
       ]
     },
@@ -650,6 +692,15 @@
     },
     {
       "name": "hudxenoupgrade6-ui"
+    },
+    {
+      "name": "hudxenoupgrade7-ui"
+    },
+    {
+      "name": "hudxenoupgrade8-ui"
+    },
+    {
+      "name": "hudxenoupgrade9-ui"
     },
     {
       "name": "prae_tag"
