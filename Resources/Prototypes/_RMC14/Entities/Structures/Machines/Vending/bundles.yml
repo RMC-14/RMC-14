@@ -3,7 +3,6 @@
   categories: [ HideSpawnMenu ]
   name: Uniform, helmet, headset, gloves, boots
   description: Contains a marine jumpsuit, a M10 helmet, a headset, combat gloves and combat boots.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/headsets.rsi
