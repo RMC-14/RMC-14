@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Buckle;
 using Content.Shared._RMC14.CrashLand;
 using Content.Shared._RMC14.Mobs;
 using Content.Shared._RMC14.Sprite;
+using Content.Shared._RMC14.TallGrass;
 using Content.Shared._RMC14.Xenonids.Hide;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Ghost;
@@ -114,6 +115,9 @@ public sealed class RMCSpriteSystem : SharedRMCSpriteSystem
                 return;
 
             if (TryComp(player, out XenoHideComponent? hide) && hide.Hiding)
+                return;
+
+            if (HasComp<HiddenInGrassComponent>(player))
                 return;
 
             if (TryComp(player, out SpriteComponent? playerSprite) &&
