@@ -1,10 +1,13 @@
 using System.Linq;
 using System.Numerics;
+using Content.Client.Actions;
 using Content.Client.CombatMode;
 using Content.Client.Examine;
 using Content.Client.Gameplay;
+using Content.Client.UserInterface.Systems.Actions;
 using Content.Client.Verbs;
 using Content.Client.Verbs.UI;
+using Content.Shared.Actions.Components;
 using Content.Shared.CCVar;
 using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;
@@ -51,6 +54,10 @@ namespace Content.Client.ContextMenu.UI
         [UISystemDependency] private readonly ExamineSystem _examineSystem = default!;
         [UISystemDependency] private readonly TransformSystem _xform = default!;
         [UISystemDependency] private readonly CombatModeSystem _combatMode = default!;
+
+        // RMC
+        [Dependency] private readonly ActionUIController _action = default!;
+        [UISystemDependency] private readonly ActionsSystem _actionsSystem = default!;
 
         private bool _updating;
 
@@ -154,6 +161,19 @@ namespace Content.Client.ContextMenu.UI
                 {
                     inputSys.HandleInputCommand(session, func, message);
                 }
+
+                // RMC start
+                // Don't close the menu on use if the user is currently using a repeatable action.
+                if (args.Function == EngineKeyFunctions.Use
+                    && _action.SelectingTargetFor is { } selectedActionId
+                    && _actionsSystem.GetAction(selectedActionId) is { } action
+                    && EntityManager.TryGetComponent<TargetActionComponent>(action, out var target)
+                    && target.Repeat)
+                {
+                    args.Handle();
+                    return;
+                }
+                // RMC end
 
                 _context.Close();
                 args.Handle();
