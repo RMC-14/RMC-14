@@ -60,6 +60,23 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret_engi.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret_engi.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      head-dog:
+      - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
+      head-cat:
+      - state: equipped-HELMET-cat
+      head-hamster:
+      - state: equipped-HELMET-hamster
+  - type: Tag
+    tags:
+    - RMCPuppyWearable
+    - RMCFoxWearable
+    - RMCCatWearable
+    - RMCMothRoachWearable
 
 - type: entity
   parent: CMHeadBeret
@@ -71,6 +88,23 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret_wo.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret_wo.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      head-dog:
+      - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
+      head-cat:
+      - state: equipped-HELMET-cat
+      head-hamster:
+      - state: equipped-HELMET-hamster
+  - type: Tag
+    tags:
+    - RMCPuppyWearable
+    - RMCFoxWearable
+    - RMCCatWearable
+    - RMCMothRoachWearable
 
 - type: entity
   parent: CMHeadBeret
@@ -100,6 +134,23 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_black.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_black.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      head-dog:
+      - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
+      head-cat:
+      - state: equipped-HELMET-cat
+      head-hamster:
+      - state: equipped-HELMET-hamster
+  - type: Tag
+    tags:
+    - RMCPuppyWearable
+    - RMCFoxWearable
+    - RMCCatWearable
+    - RMCMothRoachWearable
 
 - type: entity
   parent: CMHeadBeret
@@ -111,6 +162,23 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_white.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_white.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      head-dog:
+      - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
+      head-cat:
+      - state: equipped-HELMET-cat
+      head-hamster:
+      - state: equipped-HELMET-hamster
+  - type: Tag
+    tags:
+    - RMCPuppyWearable
+    - RMCFoxWearable
+    - RMCCatWearable
+    - RMCMothRoachWearable
 
 - type: entity
   parent: CMHeadBeret
@@ -122,6 +190,23 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_ltcol.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_ltcol.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      head-dog:
+      - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
+      head-cat:
+      - state: equipped-HELMET-cat
+      head-hamster:
+      - state: equipped-HELMET-hamster
+  - type: Tag
+    tags:
+    - RMCPuppyWearable
+    - RMCFoxWearable
+    - RMCCatWearable
+    - RMCMothRoachWearable
 
 - type: entity
   parent: CMHeadBeret
@@ -133,6 +218,23 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_col.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_col.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      head-dog:
+      - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
+      head-cat:
+      - state: equipped-HELMET-cat
+      head-hamster:
+      - state: equipped-HELMET-hamster
+  - type: Tag
+    tags:
+    - RMCPuppyWearable
+    - RMCFoxWearable
+    - RMCCatWearable
+    - RMCMothRoachWearable
 
 - type: entity
   parent: CMHeadBeret
@@ -244,6 +346,23 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/warden.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/warden.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      head-dog:
+      - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
+      head-cat:
+      - state: equipped-HELMET-cat
+      head-hamster:
+      - state: equipped-HELMET-hamster
+  - type: Tag
+    tags:
+    - RMCPuppyWearable
+    - RMCFoxWearable
+    - RMCCatWearable
+    - RMCMothRoachWearable
 
 - type: entity
   parent: CMHeadCapMP
@@ -432,6 +551,23 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/cap_peaked_formal.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/cap_peaked_formal.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      head-dog:
+      - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
+      head-cat:
+      - state: equipped-HELMET-cat
+      head-hamster:
+      - state: equipped-HELMET-hamster
+  - type: Tag
+    tags:
+    - RMCPuppyWearable
+    - RMCFoxWearable
+    - RMCCatWearable
+    - RMCMothRoachWearable
 
 - type: entity
   parent: CMHeadCap
@@ -443,6 +579,23 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/cap_peaked_service.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/cap_peaked_service.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      head-dog:
+      - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
+      head-cat:
+      - state: equipped-HELMET-cat
+      head-hamster:
+      - state: equipped-HELMET-hamster
+  - type: Tag
+    tags:
+    - RMCPuppyWearable
+    - RMCFoxWearable
+    - RMCCatWearable
+    - RMCMothRoachWearable
 
 - type: entity
   parent: CMHeadCap
@@ -454,6 +607,23 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/ASO/cap_peaked_aso.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/ASO/cap_peaked_aso.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      head-dog:
+      - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
+      head-cat:
+      - state: equipped-HELMET-cat
+      head-hamster:
+      - state: equipped-HELMET-hamster
+  - type: Tag
+    tags:
+    - RMCPuppyWearable
+    - RMCFoxWearable
+    - RMCCatWearable
+    - RMCMothRoachWearable
 
 - type: entity
   parent: CMHeadCap
@@ -476,6 +646,23 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/cmo_cap.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/cmo_cap.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      head-dog:
+      - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
+      head-cat:
+      - state: equipped-HELMET-cat
+      head-hamster:
+      - state: equipped-HELMET-hamster
+  - type: Tag
+    tags:
+    - RMCPuppyWearable
+    - RMCFoxWearable
+    - RMCCatWearable
+    - RMCMothRoachWearable
 
 - type: entity
   parent: CMHeadCapMP
@@ -688,6 +875,23 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/DressBlues/enlisted.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/DressBlues/enlisted.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      head-dog:
+      - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
+      head-cat:
+      - state: equipped-HELMET-cat
+      head-hamster:
+      - state: equipped-HELMET-hamster
+  - type: Tag
+    tags:
+    - RMCPuppyWearable
+    - RMCFoxWearable
+    - RMCCatWearable
+    - RMCMothRoachWearable
 
 - type: entity
   parent: CMHeadBeret
@@ -699,6 +903,23 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/DressBlues/officer.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/DressBlues/officer.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      head-dog:
+      - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
+      head-cat:
+      - state: equipped-HELMET-cat
+      head-hamster:
+      - state: equipped-HELMET-hamster
+  - type: Tag
+    tags:
+    - RMCPuppyWearable
+    - RMCFoxWearable
+    - RMCCatWearable
+    - RMCMothRoachWearable
 
 # The squad beret
 - type: entity
@@ -810,6 +1031,23 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/pvciberet.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/pvciberet.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      head-dog:
+      - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
+      head-cat:
+      - state: equipped-HELMET-cat
+      head-hamster:
+      - state: equipped-HELMET-hamster
+  - type: Tag
+    tags:
+    - RMCPuppyWearable
+    - RMCFoxWearable
+    - RMCCatWearable
+    - RMCMothRoachWearable
 
 # beanies
 
@@ -1047,6 +1285,23 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/cowboy/light_cowboy.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/cowboy/light_cowboy.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      head-dog:
+      - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
+      head-cat:
+      - state: equipped-HELMET-cat
+      head-hamster:
+      - state: equipped-HELMET-hamster
+  - type: Tag
+    tags:
+    - RMCPuppyWearable
+    - RMCFoxWearable
+    - RMCCatWearable
+    - RMCMothRoachWearable
 
 - type: entity
   parent: RMCHeadCowboyHatLight
@@ -1057,6 +1312,23 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/cowboy/dark_cowboy.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/cowboy/dark_cowboy.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      head-dog:
+      - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
+      head-cat:
+      - state: equipped-HELMET-cat
+      head-hamster:
+      - state: equipped-HELMET-hamster
+  - type: Tag
+    tags:
+    - RMCPuppyWearable
+    - RMCFoxWearable
+    - RMCCatWearable
+    - RMCMothRoachWearable
 
 - type: entity
   parent: ClothingHeadBase
@@ -1101,6 +1373,23 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/ushanka.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/ushanka.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      head-dog:
+      - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
+      head-cat:
+      - state: equipped-HELMET-cat
+      head-hamster:
+      - state: equipped-HELMET-hamster
+  - type: Tag
+    tags:
+    - RMCPuppyWearable
+    - RMCFoxWearable
+    - RMCCatWearable
+    - RMCMothRoachWearable
   - type: ItemCamouflage
     camouflageVariations: {}
   - type: CMArmor
@@ -1172,6 +1461,23 @@
     slots:
     - HEAD
     - neck
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      head-dog:
+      - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
+      head-cat:
+      - state: equipped-HELMET-cat
+      head-hamster:
+      - state: equipped-HELMET-hamster
+  - type: Tag
+    tags:
+    - RMCPuppyWearable
+    - RMCFoxWearable
+    - RMCCatWearable
+    - RMCMothRoachWearable
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/Head/Hats/horizons_wreath.rsi
