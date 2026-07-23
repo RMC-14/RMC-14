@@ -56,6 +56,7 @@ namespace Content.Client.ContextMenu.UI
         [UISystemDependency] private readonly CombatModeSystem _combatMode = default!;
 
         // RMC
+        [Dependency] private readonly ActionUIController _action = default!;
         [UISystemDependency] private readonly ActionsSystem _actionsSystem = default!;
 
         private bool _updating;
@@ -163,9 +164,8 @@ namespace Content.Client.ContextMenu.UI
 
                 // RMC start
                 // Don't close the menu on use if the user is currently using a repeatable action.
-                var _controller = UIManager.GetUIController<ActionUIController>();
                 if (args.Function == EngineKeyFunctions.Use
-                    && _controller.SelectingTargetFor is { } selectedActionId
+                    && _action.SelectingTargetFor is { } selectedActionId
                     && _actionsSystem.GetAction(selectedActionId) is { } action
                     && EntityManager.TryGetComponent<TargetActionComponent>(action, out var target)
                     && target.Repeat)
