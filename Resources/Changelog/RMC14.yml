@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed the SPP SOF sorokyne survivors insert having the wrong skills.
-    type: Fix
-  - message: Fixed the SPP SOF sorokyne survivors not all spawning with 20 metal sheets.
-    type: Fix
-  id: 3018
-  time: '2026-03-28T11:07:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9408
 - author: GNUtopia
   changes:
   - message: Improvised firebombs and AGM-I grenades now burn for the proper time
@@ -4582,5 +4573,13 @@
   id: 3517
   time: '2026-07-22T15:49:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10534
+- author: spanky-spanky
+  changes:
+  - message: Replaced generic brown gloves with marine brown combat gloves in several
+      marine vendors.
+    type: Tweak
+  id: 3518
+  time: '2026-07-23T14:54:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10532
 Name: RMC14
 Order: -1
