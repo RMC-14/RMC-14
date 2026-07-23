@@ -192,6 +192,9 @@
       path: /Audio/_RMC14/Xeno/alien_queen_died.ogg
       params:
         volume: -6
+  - type: SoundOnDrag
+    sound:
+      path: /Audio/Effects/stonedoor_openclose.ogg
   - type: WhitelistPickup
     whitelist:
       components:
@@ -223,13 +226,6 @@
     size: Immobile
   - type: RMCXenoDamageVisuals
     prefix: queen
-  - type: PreventPulledWhileAlive
-    whitelist:
-      components:
-      - Xeno
-    exceptEffects:
-    - Stun
-    - KnockedDown
   - type: TacticalMapUser
     xenos: true
     canDraw: true

@@ -115,18 +115,14 @@
       path: /Audio/_RMC14/Xeno/alien_queen_died.ogg
       params:
         volume: -6
+  - type: SoundOnDrag
+    sound:
+      path: /Audio/Effects/stonedoor_openclose.ogg
   - type: XenoAnnounceDeath
     message: rmc-xeno-death-king
     color: "#921992"
   - type: RMCSize
     size: Immobile
-  - type: PreventPulledWhileAlive
-    whitelist:
-      components:
-      - Xeno
-    exceptEffects:
-    - Stun
-    - KnockedDown
   - type: RMCXenoDamageVisuals
     prefix: king
   - type: FixedIdentity
