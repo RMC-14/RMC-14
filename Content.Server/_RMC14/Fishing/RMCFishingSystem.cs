@@ -44,6 +44,7 @@ public sealed class RMCFishingSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedScaleVisualsSystem _scaleVisuals = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -603,7 +604,7 @@ public sealed class RMCFishingSystem : EntitySystem
 
         var t = (float)(ent.Comp.Length - ent.Comp.MinLength) / (ent.Comp.MaxLength - ent.Comp.MinLength);
         var scaleVal = ent.Comp.MinScale + t * (ent.Comp.MaxScale - ent.Comp.MinScale);
-        _appearance.SetData(ent.Owner, ScaleVisuals.Scale,  Vector2.One * scaleVal);
+        _scaleVisuals.SetSpriteScale(ent, Vector2.One * scaleVal);
     }
 
     private void OnSpearAfterInteract(Entity<RMCFishingSpearComponent> ent, ref AfterInteractEvent args)

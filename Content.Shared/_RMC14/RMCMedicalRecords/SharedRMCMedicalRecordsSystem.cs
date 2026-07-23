@@ -50,7 +50,7 @@ public abstract class SharedRMCMedicalRecordsSystem : EntitySystem
             Text = Loc.GetString("rmc-records-examine-verb-text"),
             Message = verbMessage,
             Category = VerbCategory.Examine,
-            Icon = new SpriteSpecifier.Texture(new("/Textures/_RMC14/Objects/Misc/paper.rsi/folder_blue.png")),
+            Icon = new SpriteSpecifier.Rsi(new("/Textures/_RMC14/Objects/Misc/paper"), "folder_blue"),
             Disabled = !hasScan,
         };
 
