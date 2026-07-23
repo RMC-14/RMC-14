@@ -94,7 +94,10 @@ public sealed partial class RecoveryNodeSystem : EntitySystem
         recoveryNode.Comp.NextRecoveryAt = _time.CurTime + recoveryNode.Comp.Cooldown;
 
         if (possibleTargets.Count == 0)
+        {
+            Dirty(recoveryNode);
             return;
+        }
 
         var selectedTarget = _random.Pick(possibleTargets);
         var recover = new DoAfterArgs(EntityManager,
@@ -113,6 +116,7 @@ public sealed partial class RecoveryNodeSystem : EntitySystem
         if (_doafter.TryStartDoAfter(recover, out var id))
         {
             recoveryNode.Comp.DoAfter = id;
+            Dirty(recoveryNode);
             _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-recovery-node-heal-target"),
                 selectedTarget,
                 selectedTarget);
@@ -126,6 +130,7 @@ public sealed partial class RecoveryNodeSystem : EntitySystem
     private void OnRecoveryDoAfter(Entity<RecoveryNodeComponent> recoveryNode, ref RecoveryNodeRecoverDoAfterEvent args)
     {
         recoveryNode.Comp.DoAfter = null;
+        Dirty(recoveryNode);
 
         if (args.Handled || args.Cancelled || args.Target == null)
             return;
