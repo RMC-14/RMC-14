@@ -5,6 +5,9 @@ rmc-species-synth-programming-prevents-use = Your programming prevents you from 
 rmc-species-synth-defib-attempt = You can't defibrilate {$target}. You need a synthetic reset key for reboot!
 rmc-species-synth-reset-key-invalid = You can't use the reset key on them, they aren't a synth!
 
+rmc-species-synth-reset-key-needed = [color=ForestGreen]Use a synthetic reset key to get { OBJECT($victim) } functioning.[/color]
+rmc-species-synth-reset-key-too-damaged = [color=FireBrick]{ CAPITALIZE(SUBJECT($victim)) } { CONJUGATE-BE($victim) } too damaged to use a reset key on.[/color]
+
 rmc-synth-repair-brute-start-others = {THE($user)} begins fixing some dents on {THE($target)}'s {$limb}.
 rmc-synth-repair-brute-start-self = You begin to carefully patch some dents on your {$limb} so as not to void your warranty.
 rmc-synth-repair-brute-start-target-self = You begin fixing some dents on {THE($target)}'s {$limb}.
