@@ -719,6 +719,20 @@
   - ColNormalIDCardRMC
 
 - type: loadoutGroup
+  id: CommandingOfficerCareerPathRMC
+  name: rmc-loadout-group-role-specific-career-path
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - COCareerPathInfantryRMC
+  - COCareerPathIntelRMC
+  - COCareerPathMedicalRMC
+  - COCareerPathAviationRMC
+  # - COCareerPathTankerRMC
+  - COCareerPathEngineeringRMC
+  - COCareerPathLogisticsRMC
+
+- type: loadoutGroup
   id: CommandingOfficerWeaponRMC
   name: rmc-loadout-group-role-specific-weapon
   loadouts:
