@@ -75,6 +75,7 @@ public sealed partial class XenoSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThresholds = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private readonly INetConfigurationManager _netConfig = default!;
     [Dependency] private readonly SharedNightVisionSystem _nightVision = default!;
     [Dependency] private readonly XenoRestSystem _rest = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
@@ -553,6 +554,13 @@ public sealed partial class XenoSystem : EntitySystem
     public bool CanTackleOtherXeno(EntityUid sourceXeno, EntityUid targetXeno, out TimeSpan time)
     {
         time = TimeSpan.Zero;
+
+        if (CompOrNull<ActorComponent>(sourceXeno)?.PlayerSession is not { } session ||
+            !_netConfig.GetClientCVar(session.Channel, RMCCVars.RMCHiveLeaderTackleXenos))
+        {
+            return false;
+        }
+
         if (!_hive.FromSameHive(targetXeno, sourceXeno))
             return false;
 
