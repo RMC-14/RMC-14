@@ -223,6 +223,10 @@ rmc-xeno-throw-parasite-reserves = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-HAVE(
    [one] role
    *[other] roles
 } available.
+rmc-xeno-throw-parasite-throw-cooldown = We must wait before throwing another child.
+rmc-xeno-throw-parasite-retrieve-cooldown = We must wait before retrieving another child.
+
+rmc-xeno-parasite-drop-cooldown = We must wait before dropping another child.
 
 # Defensive Shield
 rmc-xeno-defensive-shield-end = We feel our enhanced shield end!
