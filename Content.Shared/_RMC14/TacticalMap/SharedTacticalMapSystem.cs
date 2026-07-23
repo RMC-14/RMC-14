@@ -102,4 +102,9 @@ public abstract class SharedTacticalMapSystem : EntitySystem
 
         _ui.TryOpenUi(user.Owner, TacticalMapUserUi.Key, user);
     }
+
+    public virtual bool HasValidPosition(EntityUid ent, ref Vector2i indices)
+    {
+        return false;
+    }
 }
