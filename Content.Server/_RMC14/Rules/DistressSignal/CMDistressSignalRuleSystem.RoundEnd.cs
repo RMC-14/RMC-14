@@ -331,7 +331,7 @@ public sealed partial class CMDistressSignalRuleSystem
                 Loc.GetString("rmc-distress-signal-saving-report"),
                 rule.AllClearChannel);
             _marineAnnounce.AnnounceRadio(ares,
-                Loc.GetString("rmc-distress-signal-final-scan"),
+                Loc.GetString("rmc-distress-signal-final-scan", ("delay", rule.AllClearEndDelay.Minutes)),
                 rule.AllClearChannel);
             rule.EndAtAllClear ??= Timing.CurTime + rule.AllClearEndDelay;
         }
