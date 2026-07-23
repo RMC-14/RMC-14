@@ -104,3 +104,19 @@
   components:
   - type: Sprite
     state: 0
+
+- type: entity
+  parent: CMMachineFrame
+  id: CMMachineFrameUnanchored
+  suffix: RMC14, Ready, Unanchored
+  components:
+  - type: Transform
+    anchored: false
+
+- type: entity
+  parent: CMMachineFrameUnfinished
+  id: CMMachineFrameUnfinishedUnanchored
+  suffix: RMC14, Unfinished, Unanchored
+  components:
+  - type: Transform
+    anchored: false
