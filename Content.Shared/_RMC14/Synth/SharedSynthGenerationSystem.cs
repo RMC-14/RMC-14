@@ -6,6 +6,7 @@ using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Damage;
 using Content.Shared.GameTicking;
+using Content.Shared.Movement.Components;
 using Content.Shared.Prototypes;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -21,7 +22,6 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
 
     public override void Initialize()
     {
@@ -41,6 +41,7 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
         if (comp.Generation != null)
         {
             ApplyGenerationModifier((ent.Owner, comp));
+
             return;
         }
 
@@ -70,28 +71,9 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
         if (!HasComp<RMCAdminSpawnedComponent>(ent))
             return;
 
-        ClearGeneration(ent);
         GenerationPopup(ent);
     }
 
-    private void ClearGeneration(Entity<SynthGenerationComponent> ent)
-    {
-        if (ent.Comp.Generation is { } current && _prototype.TryIndex(current, out var proto))
-        {
-            var keep = _compFactory.GetComponentName(typeof(SynthGenerationComponent));
-            foreach (var (name, _) in proto.Components)
-            {
-                if (name == keep)
-                    continue;
-
-                EntityManager.RemoveComponent(ent.Owner, _compFactory.GetRegistration(name).Type);
-            }
-        }
-
-        ent.Comp.Generation = null;
-        Dirty(ent);
-        _actions.AddAction(ent.Owner, ref ent.Comp.SelectGenerationActionEntity, ent.Comp.GenerationAction);
-    }
 
     private void OnGenerationSelectAction(Entity<SynthGenerationComponent> ent, ref GenerationSelectActionEvent args)
     {
