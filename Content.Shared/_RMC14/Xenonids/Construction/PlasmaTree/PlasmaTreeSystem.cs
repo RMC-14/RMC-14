@@ -1,7 +1,10 @@
-using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.DoAfter;
+using Content.Shared.Examine;
+using Content.Shared.Ghost;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
@@ -29,6 +32,7 @@ public sealed class PlasmaTreeSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<PlasmaTreeComponent, PlasmaTreeRecoverDoAfterEvent>(OnRecoveryDoAfter);
+        SubscribeLocalEvent<PlasmaTreeComponent, ExaminedEvent>(OnExamined);
     }
 
     public override void Update(float frameTime)
@@ -110,5 +114,11 @@ public sealed class PlasmaTreeSystem : EntitySystem
             return;
 
         _plasma.RegenPlasma(args.Target.Value, plasmaTree.Comp.PlasmaAmount);
+    }
+
+    private void OnExamined(Entity<PlasmaTreeComponent> ent, ref ExaminedEvent args)
+    {
+        if (HasComp<XenoComponent>(args.Examiner) || HasComp<GhostComponent>(args.Examiner))
+            args.PushMarkup(Loc.GetString("rmc-xeno-construction-plasma-tree-xeno-examine"));
     }
 }

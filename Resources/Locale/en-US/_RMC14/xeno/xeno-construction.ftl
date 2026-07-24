@@ -73,7 +73,7 @@ rmc-xeno-construction-default-tunnel-name = {$areaName} ({$coordX}, {$coordY}) {
 rmc-xeno-construction-default-area-name = Unknown
 
 rmc-xeno-construction-failed-tunnel-rename = Tunnel names must be unique!
-rmc-xeno-construction-tunnel-examine = The pheromone scent reads: {$tunnelName}
+rmc-xeno-construction-tunnel-examine = The pheromone scent reads: '{$tunnelName}'
 rmc-xeno-construction-tunnel-examine-not-xeno-empty = [color=purple][italic]It's a dark abyss...[/italic][/color]
 rmc-xeno-construction-tunnel-examine-not-xeno = [color=purple][italic]It's a dark abyss with a few little...lights...almost like something is watching.[/italic][/color]
 
@@ -94,10 +94,13 @@ rmc-xeno-construction-egg-morpher-already-full = This egg morpher is already ful
 
 rmc-xeno-egg-morpher-return-self = {CAPITALIZE($parasite)} crawls into the egg morpher.
 
-rmc-xeno-construction-egg-morpher-examine = Sheltering: {$cur_paras}/{$max_paras} children.
+rmc-xeno-construction-egg-morpher-examine-count = Sheltering: {$cur_paras}/{$max_paras} children.
+rmc-xeno-construction-egg-morpher-examine-next-spawn = A new child will grow in [bold]{$time_left}[/bold] seconds.
 
 rmc-xeno-construction-recovery-node-heal-target = We feel a warm aura envelop us.
 rmc-xeno-construction-recovery-node-heal-other = {CAPITALIZE(THE($target))} glows as a warm aura envelops them.
+rmc-xeno-construction-recovery-node-xeno-examine = Recovers the [color=green]health[/color] of adjacent Xenonids.
+rmc-xeno-construction-plasma-tree-xeno-examine = Recovers the [color=cyan]plasma[/color] of adjacent Xenonids.
 
 rmc-xeno-construction-no-map-structure = The ground isn't solid.
 rmc-xeno-construction-must-have-weeds-structure = We can only make this on weeds!
@@ -120,3 +123,5 @@ rmc-xeno-designer-greater-surge-cooldown = We need to wait before using Greater 
 rmc-xeno-designer-greater-surge-none = There's no design nodes nearby.
 rmc-xeno-designer-greater-surge-success = We convert {$count} design nodes into reflective resin walls.
 rmc-xeno-designer-infuse-node = You infuse the node with plasma.
+
+rmc-xeno-weedbound-examined = You sense that this structure will collapse if the weeds it is merged with disappear.
