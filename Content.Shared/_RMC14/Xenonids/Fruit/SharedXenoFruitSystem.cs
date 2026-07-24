@@ -239,7 +239,14 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         if (!HasComp<XenoComponent>(args.Examiner))
             return;
 
-        args.PushMarkup(Loc.GetString("rmc-xeno-fruit-speed", ("amount", fruit.SpeedModifier * 100), ("time", fruit.Duration.TotalSeconds)), -12);
+        string? modifier = null;
+        if (TryComp<MovementSpeedModifierComponent>(args.Examiner, out var movementSpeed))
+        {
+            modifier = (fruit.SpeedModifier.Float() / movementSpeed.BaseWalkSpeed).ToString("P0");
+        }
+        args.PushMarkup(Loc.GetString("rmc-xeno-fruit-speed",
+            ("amount", modifier ?? fruit.SpeedModifier.ToString()),
+            ("time", fruit.Duration.TotalSeconds)), -12);
     }
 
     private void OnXenoPlasmaFruitExamined(EntityUid uid, XenoFruitPlasmaComponent fruit, ExaminedEvent args)
