@@ -288,3 +288,90 @@
   components:
   - type: Stack
     count: 1
+
+#Uranium
+- type: material
+  id: RMCUranium
+  stackEntity: RMCSheetUranium
+  name: materials-uranium
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/uranium.rsi, state: icon }
+  color: "#B8B8C0"
+  price: 0.0053
+
+- type: stack
+  id: RMCUranium
+  name: uranium
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/uranium.rsi, state: icon }
+  spawn: RMCSheetUranium
+  maxCount: 50
+
+- type: entity
+  parent: SheetOtherBase
+  id: RMCSheetUranium
+  name: uranium
+  description: Uranium is a radioactive metal of the actinide series. Valued as reactor fuel for fission-type generators, and as a primer for fusion bombs.
+  suffix: Full
+  components:
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      RMCUranium: 2000
+  - type: Stack
+    stackType: RMCUranium
+    count: 50
+  - type: Sprite
+    sprite: _RMC14/Objects/Materials/Sheets/uranium.rsi
+    state: icon
+  - type: Item
+    heldPrefix: uranium
+    size: Normal
+    sprite: _RMC14/Objects/Materials/Sheets/uranium.rsi
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
+  - type: Appearance
+  - type: Extractable
+    grindableSolutionName: uranium
+  - type: SolutionContainerManager
+    solutions:
+      uranium:
+        reagents:
+        - ReagentId: RMCUranium
+          Quantity: 10
+  - type: Tag
+    tags:
+    - Sheet
+
+- type: entity
+  parent: RMCSheetUranium
+  id: RMCSheetUranium15
+  suffix: "15"
+  components:
+  - type: Stack
+    count: 15
+
+- type: entity
+  parent: RMCSheetUranium
+  id: RMCSheetUranium25
+  suffix: "25"
+  components:
+  - type: Stack
+    count: 25
+
+- type: entity
+  parent: RMCSheetUranium
+  id: RMCSheetUranium30
+  suffix: "30"
+  components:
+  - type: Stack
+    count: 30
+
+- type: entity
+  parent: RMCSheetUranium
+  id: RMCSheetUranium1
+  suffix: Single
+  components:
+  - type: Stack
+    count: 1

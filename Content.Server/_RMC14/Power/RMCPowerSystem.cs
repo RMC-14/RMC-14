@@ -155,7 +155,6 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
 
             if (!xform.Anchored)
             {
-
                 _portableGenerator.StopPortableGenerator((uid, gen));
                 continue;
             }
@@ -172,19 +171,18 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
 
             if (gen.FractionalMaterial < 0f)
             {
-                var consumeWhole = -(int) MathF.Floor(gen.FractionalMaterial);
+                var consumeWhole = Math.Min(
+                    -(int)MathF.Floor(gen.FractionalMaterial),
+                    _materialStorage.GetMaterialAmount(uid, gen.Material));
 
-                if (_materialStorage.TryChangeMaterialAmount(uid, gen.Material, -consumeWhole))
+                if (consumeWhole > 0 && !_materialStorage.TryChangeMaterialAmount(uid, gen.Material, -consumeWhole))
                 {
-                    gen.FractionalMaterial += consumeWhole;
-                }
-                else
-                {
-                    // Not enough material in storage. Zero fractional and stop the generator.
                     gen.FractionalMaterial = 0f;
                     _portableGenerator.StopPortableGenerator((uid, gen));
                     continue;
                 }
+
+                gen.FractionalMaterial += consumeWhole;
             }
 
             var lowerLimit = 56f + setting * 10f;

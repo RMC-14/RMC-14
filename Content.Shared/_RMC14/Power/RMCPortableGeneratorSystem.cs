@@ -31,11 +31,11 @@ public sealed partial class RMCPortableGeneratorSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<RMCPortableGeneratorComponent, InteractUsingEvent>(OnPortableGeneratorInteractUsing);
         SubscribeLocalEvent<RMCPortableGeneratorComponent, InteractHandEvent>(OnPortableGeneratorInteractHand);
         SubscribeLocalEvent<RMCPortableGeneratorComponent, RMCPortableGeneratorStartDoAfterEvent>(OnPortableGeneratorStartDoAfter);
         SubscribeLocalEvent<RMCPortableGeneratorComponent, ExaminedEvent>(OnPortableGeneratorExamined);
         SubscribeLocalEvent<RMCPortableGeneratorComponent, AnchorStateChangedEvent>(OnPortableGeneratorAnchorChanged);
+        SubscribeLocalEvent<RMCPortableGeneratorComponent, MaterialAmountChangedEvent>(OnPortableGeneratorMaterialAmountChanged);
 
         Subs.BuiEvents<RMCPortableGeneratorComponent>(RMCPortableGeneratorUiKey.Key,
             subs =>
@@ -45,46 +45,6 @@ public sealed partial class RMCPortableGeneratorSystem : EntitySystem
                 subs.Event<RMCPortableGeneratorRaisePowerBuiMsg>(OnPortableGeneratorRaisePower);
                 subs.Event<RMCPortableGeneratorLowerPowerBuiMsg>(OnPortableGeneratorLowerPower);
             });
-    }
-
-    private void OnPortableGeneratorInteractUsing(Entity<RMCPortableGeneratorComponent> ent, ref InteractUsingEvent args)
-    {
-        /*var user = args.User;
-        var used = args.Used;
-
-        if (!TryComp(used, out StackComponent? stack))
-            return;
-
-        if (stack.StackTypeId != ent.Comp.FuelStackType)
-            return;
-
-        // Gen is already full so we can skip the partial stack math below
-        if (ent.Comp.Sheets >= ent.Comp.MaxSheets)
-        {
-            _popup.PopupClient(Loc.GetString("rmc-portable-generator-fuel-full", ("generator", ent)), ent, user, SmallCaution);
-            args.Handled = true;
-            return;
-        }
-
-        var amount = Math.Min(stack.Count, ent.Comp.MaxSheets - ent.Comp.Sheets);
-        if (amount <= 0)
-            return;
-
-        if (!_net.IsServer)
-            return;
-
-        _stack.Use(used, amount, stack);
-        ent.Comp.Sheets += amount;
-        Dirty(ent);
-
-        var addMsg = Loc.GetString("rmc-portable-generator-fuel-add",
-            ("amount", amount),
-            ("fuel", ent.Comp.FuelName),
-            ("generator", ent));
-        _popup.PopupClient(addMsg, ent, user);
-        args.Handled = true;
-*/
-        // Handled by material storage
     }
 
     private void OnPortableGeneratorInteractHand(Entity<RMCPortableGeneratorComponent> ent, ref InteractHandEvent args)
@@ -229,6 +189,14 @@ public sealed partial class RMCPortableGeneratorSystem : EntitySystem
         Dirty(ent);
     }
 
+    private void OnPortableGeneratorMaterialAmountChanged(Entity<RMCPortableGeneratorComponent> ent, ref MaterialAmountChangedEvent args)
+    {
+        if (!_net.IsServer)
+            return;
+
+        Dirty(ent);
+    }
+
     private void SetPortableGeneratorOn(Entity<RMCPortableGeneratorComponent> ent, bool on)
     {
         ent.Comp.On = on;
@@ -241,7 +209,6 @@ public sealed partial class RMCPortableGeneratorSystem : EntitySystem
 
     public void StopPortableGenerator(Entity<RMCPortableGeneratorComponent> ent)
     {
-
         if (!ent.Comp.On)
             return;
 

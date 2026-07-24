@@ -230,3 +230,9 @@
       explosionIntensity: 80
       explosionSlope: 3
       explosionMaxIntensity: 15
+      fuelName: uranium
+      material: RMCUranium
+    - type: MaterialStorage
+      storageLimit: 100000
+      materialWhiteList:
+      - RMCUranium

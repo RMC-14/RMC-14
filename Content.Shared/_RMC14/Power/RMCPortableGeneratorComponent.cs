@@ -32,29 +32,14 @@ public sealed partial class RMCPortableGeneratorComponent : Component
     [DataField, AutoNetworkedField]
     public ProtoId<MaterialPrototype>  Material = "CMPhoron";
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public int MaterialPerSheet = 2000;
 
     [DataField, AutoNetworkedField]
     public float FractionalMaterial;
 
-    // [DataField, AutoNetworkedField]
-    // public int Sheets;
-    //
-    // [DataField, AutoNetworkedField]
-    // public int MaxSheets = 100;
-    //
-    // [DataField, AutoNetworkedField]
-    // public float SheetFraction;
-    //
     [DataField, AutoNetworkedField]
     public float TimePerSheet = 70f;
-    //
-    // [DataField, AutoNetworkedField]
-    // public string FuelStackType = "CMPhoron";
-    //
-    // [DataField, AutoNetworkedField]
-    // public string FuelEntity = "CMSheetPhoron1";
 
     [DataField, AutoNetworkedField]
     public string FuelName = "phoron";

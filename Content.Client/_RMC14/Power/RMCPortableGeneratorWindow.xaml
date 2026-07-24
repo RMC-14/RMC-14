@@ -6,8 +6,8 @@
     <BoxContainer Orientation="Vertical">
         <BoxContainer Orientation="Horizontal">
             <RichTextLabel Text="[bold]Generator Status[/bold]" />
-            <Control HorizontalExpand="True" />
-            <RichTextLabel Name="StatusLabel" Access="Public" />
+            <!-- <Control HorizontalExpand="True" /> -->
+            <RichTextLabel Name="StatusLabel" Access="Public" Text="Status" HorizontalAlignment="Right" />
         </BoxContainer>
         <ui:BlueHorizontalSeparator />
         <BoxContainer Orientation="Horizontal" Margin="0 5">

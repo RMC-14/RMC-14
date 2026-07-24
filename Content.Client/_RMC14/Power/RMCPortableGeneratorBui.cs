@@ -40,21 +40,33 @@ public sealed class RMCPortableGeneratorBui(EntityUid owner, Enum uiKey) : Bound
         if (!EntMan.TryGetComponent(Owner, out MaterialStorageComponent? storage))
             return;
 
-        if (gen.On)
+        var anchored = true;
+        if (EntMan.TryGetComponent(Owner, out TransformComponent? xform))
+            anchored = xform.Anchored;
+
+        if (!anchored)
         {
-            _window.StatusLabel.SetMarkupPermissive($"[color={GreenColor.ToHex()}][ Online ][/color]");
-            _window.ToggleButton.Text = "Stop";
+            _window.StatusLabel.SetMarkupPermissive($"[color={RedColor.ToHex()}][ Unanchored ][/color]");
+            _window.ToggleButton.Disabled = true;
         }
         else
         {
-            _window.StatusLabel.SetMarkupPermissive($"[color={RedColor.ToHex()}][ Offline ][/color]");
-            _window.ToggleButton.Text = "Start";
+            if (gen.On)
+            {
+                _window.StatusLabel.SetMarkupPermissive($"[color={GreenColor.ToHex()}][ Online ][/color]");
+                _window.ToggleButton.Text = "Stop";
+            }
+            else
+            {
+                _window.StatusLabel.SetMarkupPermissive($"[color={RedColor.ToHex()}][ Offline ][/color]");
+                _window.ToggleButton.Text = "Start";
+            }
         }
 
         var fuelSheets = storage.Storage.GetValueOrDefault(gen.Material, 0) / gen.MaterialPerSheet;
-        var fuelPercent = (storage.Storage.GetValueOrDefault(gen.Material, 0) % (float)gen.MaterialPerSheet) / gen.MaterialPerSheet * 100;
+        var fuelPercent = storage.Storage.GetValueOrDefault(gen.Material, 0) % (float)gen.MaterialPerSheet / gen.MaterialPerSheet * 100;
         _window.FuelLabel.SetMarkupPermissive(
-            $"[color=#5B88B0]Fuel:[/color] [bold]{fuelSheets}[/bold] sheets of {gen.FuelName}");
+            $"[color=#5B88B0]Fuel:[/color] [bold]{fuelSheets}[/bold] sheets of {gen.FuelName} ({storage.Storage.GetValueOrDefault(gen.Material, 0)})");
 
         _window.FuelBar.MinValue = 0;
         _window.FuelBar.MaxValue = 100;
@@ -74,13 +86,12 @@ public sealed class RMCPortableGeneratorBui(EntityUid owner, Enum uiKey) : Bound
         _window.HeatBar.MaxValue = gen.OverheatThreshold;
         _window.HeatBar.Value = Math.Min(gen.Heat, gen.OverheatThreshold);
 
-        string heatStatus;
-        if (gen.Heat > 200)
-            heatStatus = $"[color={RedColor.ToHex()}]DANGER[/color]";
-        else if (gen.Heat >= 100)
-            heatStatus = $"[color={OrangeColor.ToHex()}]Caution[/color]";
-        else
-            heatStatus = $"[color={GreenColor.ToHex()}]Nominal[/color]";
+        var heatStatus = gen.Heat switch
+        {
+            > 200 => $"[color={RedColor.ToHex()}]DANGER[/color]",
+            >= 100 => $"[color={OrangeColor.ToHex()}]Caution[/color]",
+            _ => $"[color={GreenColor.ToHex()}]Nominal[/color]",
+        };
 
         _window.HeatStatusLabel.SetMarkupPermissive($"[color=#5B88B0]Heat:[/color] {heatStatus}");
     }
