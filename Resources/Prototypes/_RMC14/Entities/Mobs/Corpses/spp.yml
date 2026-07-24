@@ -30,3 +30,140 @@
   storage:
     outerClothing:
     - RMCBinoculars
+
+# SPP Chef
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseSPPChef
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseSPPChef ]
+
+- type: startingGear
+  id: RMCGearCorpseSPPChef
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitChef
+    back: CMSatchel
+    shoes: RMCShoesBlack
+    head: ClothingHeadHatChef
+    outerClothing: RMCChefApron
+    id: RMCIDCardChefCorpse
+    ears: RMCHeadsetSPP
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
+
+# SPP Colonist (Randomly selects a loadout job (Civilian, Doctor, Engineer, Scientist, Miner, Security))
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseSPPColonist
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseSPPColonist,
+                  RMCGearCorpseSPPDoctor,
+                  RMCGearCorpseSPPEngineer,
+                  RMCGearCorpseSPPScientist,
+                  RMCGearCorpseSPPMiner,
+                  RMCGearCorpseSPPSecurity ]
+
+# Civilian Job
+- type: startingGear
+  id: RMCGearCorpseSPPColonist
+  equipment:
+    jumpsuit: CMJumpsuitSPP
+    back: CMSatchel
+    shoes: CMBootsBlack
+    id: CMIDCardColonist
+    ears: RMCHeadsetSPP
+
+# Doctor job
+- type: startingGear
+  id: RMCGearCorpseSPPDoctor
+  equipment:
+    jumpsuit: CMJumpsuitSPPMedic
+    back: CMSatchelMedical
+    shoes: CMBootsBlackFilled
+    eyes: RMCGlassesMedicalHUDGlasses
+    gloves: CMHandsLatex
+    id: CMIDCardColonistDoctor
+    ears: RMCHeadsetSPP
+    mask: CMMaskSterile
+    outerClothing: RMCMedicalApron
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
+
+#Engineer job
+- type: startingGear
+  id: RMCGearCorpseSPPEngineer
+  equipment:
+    jumpsuit: CMJumpsuitSPPEngi
+    back: CMSatchelEngineer
+    shoes: CMBootsBlackFilled
+    head: RMCHardHat
+    eyes: RMCWeldingGoggles
+    gloves: CMHandsInsulated
+    outerClothing: RMCHazardVest
+    id: CMIDCardColonistEngineer
+    ears: RMCHeadsetSPPEngineer
+    belt: CMBeltUtilityFilled
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
+
+# Scientist job
+- type: startingGear
+  id: RMCGearCorpseSPPScientist
+  equipment:
+    jumpsuit: RMCJumpsuitCivilianVirologist
+    back: RMCSatchelVirology
+    shoes: CMBootsBlackFilled
+    gloves: CMHandsLatex
+    outerClothing: RMCLabcoat
+    id: RMCIDCardColonistScientist
+    mask: CMMaskSterile
+    eyes: RMCGlassesReagentHUDGlasses
+    ears: RMCHeadsetSPP
+    head: CMHeadCapSurgGreen
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
+    - RMCMotionDetector
+#    # T3 research notes
+
+# Miner job
+- type: startingGear
+  id: RMCGearCorpseSPPMiner
+  equipment:
+    jumpsuit: RMCJumpsuitTMCC
+    back: CMBackpackEngineer
+    shoes: RMCShoesJackboots
+    head: RMCHardhatRedTMCC
+    outerClothing: RMCArmorTMCCAlt
+    id: RMCIDCardMinerCorpse
+    ears: RMCHeadsetSPP
+    pocket1: RMCPouchToolsFill
+    gloves: RMCHandsCombat
+  storage:
+    back:
+    - RMCFlashlightLantern
+    - RMCRadioHandheldColonyOff
+
+# Security job
+- type: startingGear
+  id: RMCGearCorpseSPPSecurity
+  equipment:
+    jumpsuit: CMJumpsuitSPP
+    back: CMSatchelSecurity
+    head: ArmorHelmetSPP
+    outerClothing: RMCArmorSPP
+    shoes: RMCBootsSPPFilled
+    eyes: CMGlassesSecurity
+    gloves: CMHandsBlackMarine
+    id: CMIDCardColonistSecurity
+    ears: RMCHeadsetSPP
+    belt: CMBeltSecurityMPFilled
+  storage:
+    back:
+    - RMCM5Bayonet
+    - RMCRadioHandheldColonyOff
