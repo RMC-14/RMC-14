@@ -64,7 +64,12 @@ public sealed partial class VehicleSystem : EntitySystem
             return false;
 
         if (TryComp<VehicleOperatorComponent>(uid, out var eOperator))
-            return eOperator.Vehicle == entity.Owner;
+        {
+            if (eOperator.Vehicle == entity.Owner)
+                return true;
+
+            RemComp<VehicleOperatorComponent>(uid!.Value);
+        }
 
         if (!removeExisting && entity.Comp.Operator is not null)
             return false;
