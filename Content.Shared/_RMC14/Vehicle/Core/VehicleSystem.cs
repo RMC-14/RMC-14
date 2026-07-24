@@ -25,6 +25,7 @@ using Content.Shared.Roles.Jobs;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Vehicle.Components;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameObjects;
 using Robust.Shared.EntitySerialization;
@@ -46,17 +47,10 @@ namespace Content.Shared._RMC14.Vehicle;
 public sealed class VehicleSystem : EntitySystem
 {
     private static readonly EntProtoId VehicleKey = "RMCVehicleKey";
-
-    /// <summary>
-    ///     Minimum fraction of a vehicle's max speed it must be going when it crashes for the interior crash
-    ///     effect (fling/stun occupants) to trigger.
-    /// </summary>
-    private const float CrashMinSpeedFraction = 0.15f;
-    private const float CrashThrowSpeed = 10f;
+    private static readonly SoundSpecifier XenoFrameBreachSound = new SoundCollectionSpecifier("XenoPry");
 
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly RMCCameraShakeSystem _cameraShake = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly SharedJobSystem _job = default!;
@@ -158,6 +152,9 @@ public sealed class VehicleSystem : EntitySystem
             interior.EntryLocks.Remove(entryIndex);
             return;
         }
+
+        if (CanBypassLockWithDestroyedFrame(ent.Owner, args.User))
+            _audio.PlayPvs(XenoFrameBreachSound, ent.Owner);
 
         args.Handled = true;
     }
