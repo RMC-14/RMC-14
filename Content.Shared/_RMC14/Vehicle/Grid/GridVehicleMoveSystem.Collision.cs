@@ -406,8 +406,6 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
         PlayMobCollisionSound(vehicle, ref playedCollisionSound);
 
-        // A fortified xeno is anchored, which the normal mob-push below refuses to move - knock them out of
-        // fortify first so a medium/heavy vehicle can shove them aside like it would any other mob in its way.
         if (blockResult == XenoBlockResult.ForcePush)
             _fortify.TryBreakFortify(xeno);
 
@@ -415,8 +413,6 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (PushMobOutOfVehicle(vehicle, xeno, vehicleAabb, xenoAabb, vehicleMove))
             return CollisionHandlingResult.Continue;
 
-        // A forced push (medium/heavy vehicle vs. a fortified xeno) never falls back to blocking, even if there
-        // was nowhere tidy to relocate the xeno to - the vehicle just drives through regardless.
         if (blockResult == XenoBlockResult.ForcePush)
             return CollisionHandlingResult.Continue;
 

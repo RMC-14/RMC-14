@@ -88,6 +88,7 @@ public sealed partial class VehicleSystem : EntitySystem
             RemCompDeferred<VehicleOperatorComponent>(currentOperator);
             RemCompDeferred<RelayInputMoverComponent>(currentOperator);
             RemCompDeferred<GridVehicleOperatorComponent>(currentOperator);
+            RemCompDeferred<VehicleWatchingComponent>(currentOperator);
         }
 
         entity.Comp.Operator = uid;
@@ -108,6 +109,10 @@ public sealed partial class VehicleSystem : EntitySystem
                 EnsureComp<GridVehicleOperatorComponent>(uid.Value);
                 RemCompDeferred<RelayInputMoverComponent>(uid.Value);
                 RemCompDeferred<MovementRelayTargetComponent>(entity);
+
+                var watching = EnsureComp<VehicleWatchingComponent>(uid.Value);
+                watching.Watching = entity.Owner;
+                Dirty(uid.Value, watching);
             }
 
             var enterEvent = new OnVehicleEnteredEvent(entity, uid.Value);

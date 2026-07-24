@@ -110,6 +110,10 @@ public sealed partial class VehicleWeaponsSystem : EntitySystem
         operatorComp.HardpointActions.Clear();
         Dirty(args.Buckle.Owner, operatorComp);
 
+        var watching = EnsureComp<VehicleWatchingComponent>(args.Buckle.Owner);
+        watching.Watching = vehicleUid;
+        Dirty(args.Buckle.Owner, watching);
+
         RefreshOperatorSelectedWeapons(vehicleUid, weapons);
         RefreshHardpointActions(args.Buckle.Owner, vehicleUid, weapons, operatorComp);
 
@@ -134,6 +138,7 @@ public sealed partial class VehicleWeaponsSystem : EntitySystem
             ClearHardpointActions(args.Buckle.Owner, operatorComp);
 
         RemCompDeferred<VehicleWeaponsOperatorComponent>(args.Buckle.Owner);
+        RemCompDeferred<VehicleWatchingComponent>(args.Buckle.Owner);
         _ui.CloseUi(ent.Owner, VehicleWeaponsUiKey.Key, args.Buckle.Owner);
         UpdateGunnerView(args.Buckle.Owner, ent.Owner, ent.Comp, removeOnly: true);
 

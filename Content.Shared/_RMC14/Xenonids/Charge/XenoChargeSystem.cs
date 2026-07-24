@@ -226,7 +226,6 @@ public sealed class XenoChargeSystem : EntitySystem
 
         if (_net.IsServer && isVehicle)
         {
-            // Crash sound is played centrally by DoInteriorCrashEffect below, keyed off VehicleSoundComponent.
             if (chargeDirection is { } chargeDir && !_vehicleWheels.HasAnyFunctionalWheel(targetId))
                 _gridVehicleMover.TryShoveVehicle(targetId, xeno, chargeDir);
 

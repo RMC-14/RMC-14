@@ -47,10 +47,14 @@ namespace Content.Shared._RMC14.Vehicle;
 public sealed class VehicleSystem : EntitySystem
 {
     private static readonly EntProtoId VehicleKey = "RMCVehicleKey";
+
+    private const float CrashMinSpeedFraction = 0.15f;
+    private const float CrashThrowSpeed = 10f;
     private static readonly SoundSpecifier XenoFrameBreachSound = new SoundCollectionSpecifier("XenoPry");
 
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly RMCCameraShakeSystem _cameraShake = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly SharedJobSystem _job = default!;
@@ -1079,11 +1083,11 @@ public sealed class VehicleSystem : EntitySystem
         if (!TryComp(vehicle, out VehicleInteriorComponent? interior))
             return;
 
-        var flingDistance = (int) MathF.Ceiling(ratio) * 2;
+        var shakeStrength = Math.Clamp((int) MathF.Ceiling(ratio * 3f), 1, 3);
+        var flingDistance = shakeStrength * 2;
         if (flingDistance <= 0)
             return;
 
-        var shakeStrength = Math.Max(1, (int) MathF.Ceiling(ratio));
         var offset = new Vector2(speed >= 0f ? flingDistance : -flingDistance, 0f);
 
         var occupants = new List<EntityUid>(interior.Passengers.Count + interior.Xenos.Count);

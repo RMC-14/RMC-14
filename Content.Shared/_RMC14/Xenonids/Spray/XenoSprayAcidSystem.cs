@@ -174,12 +174,13 @@ public sealed class XenoSprayAcidSystem : EntitySystem
         if (damage <= 0f)
             return;
 
+        var splatterMap = _transform.GetMapId(splatter);
         var splatterAabb = _lookup.GetWorldAABB(splatter);
-        var vehicles = EntityQueryEnumerator<VehicleWheelSlotsComponent>();
-        while (vehicles.MoveNext(out var vehicleUid, out _))
+        var vehicles = new HashSet<Entity<VehicleWheelSlotsComponent>>();
+        _lookup.GetEntitiesIntersecting(splatterMap, splatterAabb, vehicles);
+        foreach (var vehicle in vehicles)
         {
-            if (_lookup.GetWorldAABB(vehicleUid).Intersects(splatterAabb))
-                _vehicleWheels.DamageWheels(vehicleUid, damage);
+            _vehicleWheels.DamageWheels(vehicle, damage);
         }
     }
 
