@@ -34,11 +34,11 @@ public sealed class DesignerRemoteThickenResinSystem : EntitySystem
         if (!target.Valid || Deleted(target) || Terminating(target))
             return;
         var targetXform = Transform(target);
+        var targetCoords = targetXform.Coordinates;
 
         if (args.Range > 0)
         {
             var origin = _transform.GetMoverCoordinates(ent.Owner);
-            var targetCoords = targetXform.Coordinates;
             if (!_transform.InRange(origin, targetCoords, args.Range))
             {
                 _popup.PopupClient(Loc.GetString("cm-xeno-cant-reach-there"), ent.Owner, ent.Owner, PopupType.SmallCaution);
@@ -61,11 +61,8 @@ public sealed class DesignerRemoteThickenResinSystem : EntitySystem
         if (!_plasma.TryRemovePlasmaPopup(ent.Owner, args.PlasmaCost))
             return;
 
-        var coords = targetXform.Coordinates;
-        var rotation = targetXform.LocalRotation;
-
         _popup.PopupClient(Loc.GetString("rmc-xeno-designer-thicken-success"), ent.Owner, ent.Owner);
-        _audio.PlayPredicted(ent.Comp.RemoteThickenSound, coords, ent.Owner);
+        _audio.PlayPredicted(ent.Comp.RemoteThickenSound, targetCoords, ent.Owner);
 
         if (_net.IsClient)
             return;
@@ -74,8 +71,8 @@ public sealed class DesignerRemoteThickenResinSystem : EntitySystem
         {
             _xenoConstruction.BeginStructureUpgrade(target);
             Del(target);
-            var thickened = Spawn(upgradeable.To.Value, coords);
-            _transform.SetLocalRotation(thickened, rotation);
+            var thickened = Spawn(upgradeable.To.Value, targetCoords);
+            _transform.SetLocalRotation(thickened, targetXform.LocalRotation);
             _hive.SetSameHive(ent.Owner, thickened);
         }
         finally

@@ -420,7 +420,6 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         }
 
         var timedCorrodingQuery = EntityQueryEnumerator<TimedCorrodingComponent>();
-        var xformQuery = GetEntityQuery<TransformComponent>();
         while (timedCorrodingQuery.MoveNext(out var uid, out var timedCorrodingComponent))
         {
             if (time < timedCorrodingComponent.CorrodesAt)
@@ -432,8 +431,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             var ev = new BeforeMeltedEvent();
             RaiseLocalEvent(uid, ref ev);
 
-            if (xformQuery.TryComp(uid, out var xform))
-                _audio.PlayPvs(timedCorrodingComponent.AcidSound, xform.Coordinates);
+            _audio.PlayPvs(timedCorrodingComponent.AcidSound, Transform(uid).Coordinates);
 
             if (_acidHole.TryCreateHoleFromMelt(uid))
             {
