@@ -1,0 +1,35 @@
+- type: entity
+  parent: BaseItem
+  id: RMCOverwatchCameraTripod
+  name: Field Camera Tripod
+  description: A Motoca-430-T deployable tripod camera that connects to the Overwatch network.
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/overwatch_tripod_camera.rsi
+    layers:
+    - state: undeployed
+      map: [ "tripod" ]
+  - type: Icon
+    sprite: _RMC14/Objects/Devices/overwatch_tripod_camera.rsi
+    state: deployed
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCOverwatchTripodCameraVisuals.Deployed:
+        tripod:
+          True: { state: deployed }
+          False: { state: undeployed }
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: RMCOverwatchTripodCamera
+    deploySound:
+      path: /Audio/_RMC14/Items/mine_armed.ogg
+      params:
+        volume: -12
+        variation: 0.1
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno

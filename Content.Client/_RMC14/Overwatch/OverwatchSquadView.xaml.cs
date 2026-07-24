@@ -1,4 +1,4 @@
-﻿using Content.Client._RMC14.UserInterface;
+using Content.Client._RMC14.UserInterface;
 using Content.Client.UserInterface.ControlExtensions;
 using Content.Shared._RMC14.Overwatch;
 using Content.Shared.Mobs;
@@ -163,9 +163,12 @@ public sealed partial class OverwatchSquadView : Control
         {
             var name = Names.GetChild(i);
             var role = Roles.GetChild(i);
+            var area = Locations.GetChild(i);
             if (!string.IsNullOrWhiteSpace(text))
             {
-                if (!name.ChildrenContainText(text) && !role.ChildrenContainText(text))
+                if (!name.ChildrenContainText(text) &&
+                    !role.ChildrenContainText(text) &&
+                    !area.ChildrenContainText(text))
                 {
                     MakeViewVisible(i, false);
                     continue;
