@@ -137,6 +137,36 @@
       sprite: _RMC14/Objects/Clothing/Accessory/RankPins/e9.rsi
       state: pin
 
+# UNMC Warrant
+
+- type: entity
+  parent: RMCPinBase
+  id: RMCPinWO
+  name: Warrant Officer Shoulder Tabs
+  description: These ones are for the rank of Warrant Officer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/RankPins/WO.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/RankPins/WO.rsi
+      state: pin
+
+- type: entity
+  parent: RMCPinBase
+  id: RMCPinCWO
+  name: Chief Warrant Officer Shoulder Tabs
+  description: These ones are for the rank of Chief Warrant Officer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/RankPins/CWO.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/RankPins/CWO.rsi
+      state: pin
+
 # UNMC Officer
 - type: entity
   parent: RMCPinBase
