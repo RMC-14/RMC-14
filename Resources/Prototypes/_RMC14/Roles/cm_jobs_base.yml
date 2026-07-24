@@ -27,6 +27,9 @@
     RMCRankFirstSergeant: RMCPinE8
     RMCRankMasterGunnerySergeant: RMCPinE9
     RMCRankSergeantMajor: RMCPinE9
+    # Warrant
+    RMCRankWarrantOfficer: RMCPinWO
+    RMCRankChiefWarrantOfficer: RMCPinCWO
     # Officers
     RMCRankSecondLT: RMCPinO1
     RMCRankFirstLT: RMCPinO2

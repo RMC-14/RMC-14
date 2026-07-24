@@ -42,17 +42,13 @@ public sealed class RankPinSystem : EntitySystem
             return;
         }
 
-        if (!TryComp<RankComponent>(ev.Mob, out RankComponent? rankComp))
+        // To do update rank system
+        if (!TryComp<RankComponent>(ev.Mob, out RankComponent? rankComp) || rankComp.Rank is not { } rank)
         {
             return;
         }
 
-        if (!job.Pins.TryGetValue(rankComp.Rank, out var pinId))
-        {
-            return;
-        }
-
-        if (!pinId)
+        if (job.Pins == null || !job.Pins.TryGetValue(rank, out var pinId))
         {
             return;
         }
