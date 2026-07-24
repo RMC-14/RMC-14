@@ -375,7 +375,21 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         float wheelDamage,
         ref bool playedCollisionSound)
     {
-        if (ShouldBlockXeno(mover, xeno))
+        var blockResult = GetXenoBlockResult(mover, xeno);
+
+        if (blockResult == XenoBlockResult.Slow)
+        {
+            if (applyEffects)
+            {
+                PlayMobCollisionSound(vehicle, ref playedCollisionSound);
+                mover.CurrentSpeed *= FortifiedLightSlowFactor;
+                Dirty(vehicle, mover);
+            }
+
+            return CollisionHandlingResult.Continue;
+        }
+
+        if (blockResult == XenoBlockResult.Block)
         {
             if (applyEffects)
             {
@@ -391,8 +405,19 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             return CollisionHandlingResult.Continue;
 
         PlayMobCollisionSound(vehicle, ref playedCollisionSound);
+
+        // A fortified xeno is anchored, which the normal mob-push below refuses to move - knock them out of
+        // fortify first so a medium/heavy vehicle can shove them aside like it would any other mob in its way.
+        if (blockResult == XenoBlockResult.ForcePush)
+            _fortify.TryBreakFortify(xeno);
+
         var vehicleMove = GetVehicleMoveDelta(grid, vehicleWorldPosition, mapId, mover);
         if (PushMobOutOfVehicle(vehicle, xeno, vehicleAabb, xenoAabb, vehicleMove))
+            return CollisionHandlingResult.Continue;
+
+        // A forced push (medium/heavy vehicle vs. a fortified xeno) never falls back to blocking, even if there
+        // was nowhere tidy to relocate the xeno to - the vehicle just drives through regardless.
+        if (blockResult == XenoBlockResult.ForcePush)
             return CollisionHandlingResult.Continue;
 
         ApplyWheelCollisionDamage(vehicle, mover, wheelDamage);
@@ -598,15 +623,43 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         return damage;
     }
 
+    private enum XenoBlockResult : byte
+    {
+        Push,
+        Block,
+        Slow,
+        ForcePush,
+    }
+
+    private const float FortifiedLightSlowFactor = 1f / 3f;
+
     private bool ShouldBlockXeno(GridVehicleMoverComponent mover, EntityUid xeno)
     {
+        return GetXenoBlockResult(mover, xeno) == XenoBlockResult.Block;
+    }
+
+    private XenoBlockResult GetXenoBlockResult(GridVehicleMoverComponent mover, EntityUid xeno)
+    {
         if (mover.XenoBlockMinimumSize is not { } minSize)
-            return true;
+            return XenoBlockResult.Block;
 
         if (!_size.TryGetSize(xeno, out var size))
-            return true;
+            return XenoBlockResult.Block;
 
-        return size >= minSize;
+        if (size < minSize)
+            return XenoBlockResult.Push;
+
+        if (_fortify.IsFortified(xeno))
+        {
+            return mover.WeightClass switch
+            {
+                VehicleWeightClass.Weak => XenoBlockResult.Block,
+                VehicleWeightClass.Light => XenoBlockResult.Slow,
+                _ => XenoBlockResult.ForcePush,
+            };
+        }
+
+        return XenoBlockResult.Block;
     }
 
     private bool HasBlockingVehicleMob(GridVehicleMoverComponent mover, HashSet<EntityUid> blockers)
@@ -739,6 +792,74 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         SetGridPosition(pushed, grid, pushedMover.Position);
         _physics.WakeBody(pushed);
         Dirty(pushed, pushedMover);
+        return true;
+    }
+
+    public bool TryShoveVehicle(EntityUid vehicle, EntityUid shover, Vector2 worldDirection)
+    {
+        if (worldDirection.LengthSquared() <= 0f)
+            return false;
+
+        if (!TryComp(vehicle, out VehicleComponent? vehicleComp) || vehicleComp.MovementKind != VehicleMovementKind.Grid)
+            return false;
+
+        if (!TryComp(vehicle, out GridVehicleMoverComponent? mover))
+            return false;
+
+        var xform = Transform(vehicle);
+        if (xform.GridUid is not { } grid || !gridQ.TryComp(grid, out var gridComp))
+            return false;
+
+        TrySyncMoverToCurrentGrid((vehicle, mover), centerOnTile: false, xform);
+        if (mover.SyncedGrid != grid)
+            return false;
+
+        var direction = GetCardinalDirection(worldDirection);
+        if (direction == Vector2i.Zero)
+            return false;
+
+        _vehiclePushIgnored.Clear();
+        _vehiclePushIgnored.Add(shover);
+        var target = mover.Position + direction;
+
+        if (!CanOccupyTransform(
+                vehicle,
+                mover,
+                grid,
+                target,
+                null,
+                Clearance,
+                applyEffects: false,
+                debug: false,
+                ignoredEntities: _vehiclePushIgnored))
+        {
+            return false;
+        }
+
+        if (!CanOccupyTransform(
+                vehicle,
+                mover,
+                grid,
+                target,
+                null,
+                Clearance,
+                applyEffects: true,
+                debug: false,
+                ignoredEntities: _vehiclePushIgnored))
+        {
+            return false;
+        }
+
+        mover.Position = target;
+        mover.CurrentSpeed = 0f;
+        mover.IsCommittedToMove = false;
+        mover.IsPushMove = true;
+        mover.PushDirection = direction;
+        mover.IsMoving = true;
+        UpdateDerivedTileState(grid, gridComp, mover);
+        SetGridPosition(vehicle, grid, mover.Position);
+        _physics.WakeBody(vehicle);
+        Dirty(vehicle, mover);
         return true;
     }
 

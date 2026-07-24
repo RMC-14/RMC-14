@@ -171,18 +171,14 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -0.5,0.5
       parent: 2
+- proto: RMCSeatVanDriver
+  entities:
   - uid: 4
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -0.5,1.5
       parent: 2
-    - type: VehicleDriverSeat
-    - type: RemoveComponents
-      components:
-      - type: Damageable
-      - type: Destructible
-      - type: Corrodible
 - proto: CMRandomPosterAny
   entities:
   - uid: 5

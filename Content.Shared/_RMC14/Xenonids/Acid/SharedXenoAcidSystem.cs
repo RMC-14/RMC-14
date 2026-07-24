@@ -31,29 +31,31 @@ using Robust.Shared.GameObjects;
 using Robust.Shared.Physics;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared._RMC14.Chemistry;
+using Content.Shared._RMC14.Vehicle;
 
 namespace Content.Shared._RMC14.Xenonids.Acid;
 
 public abstract class SharedXenoAcidSystem : EntitySystem
 {
+    [Dependency] private readonly XenoAcidHoleSystem _acidHole = default!;
+    [Dependency] private readonly CollisionWakeSystem _collisionWake = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedDropshipSystem _dropship = default!;
     [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
+    [Dependency] private readonly FixtureSystem _fixtures = default!;
+    [Dependency] private readonly HardpointSystem _hardpoints = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly XenoAcidHoleSystem _acidHole = default!;
     [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly XenoEnergySystem _xenoEnergy = default!;
-    [Dependency] private readonly FixtureSystem _fixtures = default!;
-    [Dependency] private readonly CollisionWakeSystem _collisionWake = default!;
+    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     protected int CorrosiveAcidTickDelaySeconds;
     protected ProtoId<DamageTypePrototype> CorrosiveAcidDamageTypeStr = "Heat";
@@ -181,6 +183,24 @@ public abstract class SharedXenoAcidSystem : EntitySystem
 
         if (!xeno.Comp.CanMeltStructures && corrodible.Structure)
             return;
+
+        if (HasComp<HardpointSlotsComponent>(target))
+        {
+            if (args.PlasmaCost != 0 && !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
+                return;
+
+            if (args.EnergyCost != 0 && !_xenoEnergy.TryRemoveEnergyPopup(xeno.Owner, args.EnergyCost))
+                return;
+
+            if (_net.IsClient)
+                return;
+
+            args.Handled = true;
+
+            var vehicleDamage = args.VehicleDamage ?? GetDefaultVehicleAcidDamage(args.Strength);
+            _hardpoints.DamageHardpoint(target, target, vehicleDamage);
+            return;
+        }
 
         // Re-check if acid can be replaced at DoAfter end to prevent race conditions
         // (e.g., weak acid downgrading strong acid if both DoAfters were started before any completed)
@@ -461,6 +481,16 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         Dirty(uid, secondWind);
         RemoveAcid(uid);
         return true;
+    }
+
+    private static float GetDefaultVehicleAcidDamage(XenoAcidStrength strength)
+    {
+        return strength switch
+        {
+            XenoAcidStrength.Weak => 16f,
+            XenoAcidStrength.Strong => 100f,
+            _ => 40f,
+        };
     }
 
     public bool IsMelted(EntityUid uid)

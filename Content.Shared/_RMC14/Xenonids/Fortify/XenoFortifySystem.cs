@@ -42,6 +42,20 @@ public sealed class XenoFortifySystem : EntitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
+    public bool IsFortified(EntityUid xeno)
+    {
+        return TryComp<XenoFortifyComponent>(xeno, out var fortify) && fortify.Fortified;
+    }
+
+    public bool TryBreakFortify(EntityUid xeno)
+    {
+        if (!TryComp<XenoFortifyComponent>(xeno, out var fortify) || !fortify.Fortified)
+            return false;
+
+        Unfortify((xeno, fortify));
+        return true;
+    }
+
     public override void Initialize()
     {
         // TODO RMC14 resist knockback from small explosives

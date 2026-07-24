@@ -16,6 +16,7 @@
     pushCooldown: 2
     xenoBlockMinimumSize: Immobile
     xenoPushMinimumSize: Immobile
+    weedsSpeedFactor: 0.2
   - type: VehicleOvercharge
     speedMultiplier: 1.6
     duration: 3
