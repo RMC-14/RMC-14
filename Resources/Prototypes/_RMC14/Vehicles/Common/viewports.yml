@@ -19,6 +19,7 @@
   - type: RemoveComponents
     components:
     - type: InteractionTransparency
+    - type: Tag
 
 - type: entity
   parent: VehicleViewport
@@ -60,6 +61,7 @@
   - type: RemoveComponents
     components:
     - type: InteractionTransparency
+    - type: Tag
 
 - type: entity
   parent: VehicleHumveeViewportBase

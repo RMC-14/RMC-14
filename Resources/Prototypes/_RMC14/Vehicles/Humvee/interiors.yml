@@ -6,6 +6,9 @@
   placement:
     mode: PlaceFree
   components:
+  - type: Tag
+    tags:
+    - HideContextMenu
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/Interiors/general_humvee.rsi
     drawdepth: Overdoors
@@ -19,6 +22,9 @@
   placement:
     mode: PlaceFree
   components:
+  - type: Tag
+    tags:
+    - HideContextMenu
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/Interiors/humvee_chassis.rsi
     drawdepth: FloorTiles
@@ -135,6 +141,7 @@
   - type: RemoveComponents
     components:
     - type: InteractionTransparency
+    - type: Tag
   - type: VehicleAmmoLoader
   - type: UserInterface
     interfaces:
@@ -154,6 +161,7 @@
   - type: RemoveComponents
     components:
     - type: InteractionTransparency
+    - type: Tag
   - type: VehicleExit
   - type: RMCIgnoreGhostInteractionLimits
 
@@ -165,6 +173,9 @@
     state: exit_door1
   - type: VehicleExit
   - type: RMCIgnoreGhostInteractionLimits
+  - type: RemoveComponents
+    components:
+    - type: Tag
 
 - type: entity
   parent: VehicleHumveeDoorBase
@@ -271,6 +282,7 @@
     components:
     - type: InteractionTransparency
     - type: WallMount
+    - type: Tag
   - type: UserInterface
     interfaces:
       enum.CMAutomatedVendorUI.Key:
