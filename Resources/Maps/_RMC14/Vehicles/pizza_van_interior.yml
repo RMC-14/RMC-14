@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 264.0.2-fix-physics
+  engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 12/18/2025 14:37:40
-  entityCount: 39
+  time: 07/24/2026 10:50:13
+  entityCount: 41
 maps:
 - 1
 grids:
@@ -26,9 +26,9 @@ entities:
     - type: Transform
     - type: Map
       mapPaused: True
+    - type: GridTree
     - type: MapLight
       ambientLightColor: '#FFFFFFFF'
-    - type: GridTree
     - type: Broadphase
     - type: OccluderTree
   - uid: 2
@@ -182,25 +182,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 0.5,0.5
       parent: 2
-- proto: RMCSeatVanDriver
-  entities:
-  - uid: 6
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 0.5,1.5
-      parent: 2
-    - type: Absorbent
-      transferSound: !type:SoundPathSpecifier
-        params:
-          variation: 0.05
-          volume: -3
-        path: /Audio/Effects/Fluids/slosh.ogg
-      pickupSound: !type:SoundPathSpecifier
-        params:
-          variation: 0.05
-        path: /Audio/Effects/Fluids/watersplash.ogg
-      progress: {}
 - proto: RMCBoxPizzaGalaxyMystery
   entities:
   - uid: 8
@@ -269,6 +250,29 @@ entities:
           showEnts: False
           occludes: True
           ent: null
+- proto: RMCSeatVanDriver
+  entities:
+  - uid: 6
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 0.5,1.5
+      parent: 2
+    - type: Absorbent
+      transferSound: !type:SoundPathSpecifier
+        params:
+          variation: 0.05
+          volume: -3
+        path: /Audio/Effects/Fluids/slosh.ogg
+      pickupSound: !type:SoundPathSpecifier
+        params:
+          variation: 0.05
+        path: /Audio/Effects/Fluids/watersplash.ogg
+      progress: {}
+    missingComponents:
+    - Corrodible
+    - Damageable
+    - Destructible
 - proto: RMCSecureCaseStrapped
   entities:
   - uid: 15
@@ -285,6 +289,33 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+- proto: RMCWallInvisibleBulletLightBlocker
+  entities:
+  - uid: 20
+    components:
+    - type: Transform
+      pos: -1.5,-0.5
+      parent: 2
+  - uid: 22
+    components:
+    - type: Transform
+      pos: -2.5,-0.5
+      parent: 2
+  - uid: 23
+    components:
+    - type: Transform
+      pos: 0.5,-0.5
+      parent: 2
+  - uid: 24
+    components:
+    - type: Transform
+      pos: -0.5,-0.5
+      parent: 2
+  - uid: 32
+    components:
+    - type: Transform
+      pos: 1.5,-0.5
+      parent: 2
 - proto: VehiclePizzaVanBackground1
   entities:
   - uid: 16
@@ -292,6 +323,8 @@ entities:
     - type: Transform
       pos: -1.5,0.5
       parent: 2
+    - type: Fixtures
+      fixtures: {}
 - proto: VehiclePizzaVanBackground3
   entities:
   - uid: 17
@@ -299,6 +332,8 @@ entities:
     - type: Transform
       pos: -0.5,0.5
       parent: 2
+    - type: Fixtures
+      fixtures: {}
 - proto: VehiclePizzaVanExterior1
   entities:
   - uid: 18
@@ -313,15 +348,15 @@ entities:
     - type: Transform
       pos: -0.5,2.5
       parent: 2
-- proto: VehiclePizzaVanExteriorDoor
+- proto: VehiclePizzaVanExteriorDoorUnique
   entities:
-  - uid: 20
+  - uid: 33
     components:
     - type: Transform
       pos: 0.5,0.5
       parent: 2
     - type: VehicleExit
-      entryIndex: 0
+      entryIndex: 1
     missingComponents:
     - InteractionTransparency
 - proto: VehiclePizzaVanFront1
@@ -374,7 +409,6 @@ entities:
       pos: 0.5,2.5
       parent: 2
     - type: VehicleExit
-      entryIndex: 0
     missingComponents:
     - InteractionTransparency
 - proto: VehiclePizzaVanLeft1
@@ -395,26 +429,6 @@ entities:
       parent: 2
     - type: VehicleExit
       entryIndex: 2
-  - uid: 32
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -1.5,-0.5
-      parent: 2
-  - uid: 33
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -0.5,-0.5
-      parent: 2
-  - uid: 34
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 0.5,-0.5
-      parent: 2
-    - type: VehicleExit
-      entryIndex: 1
 - proto: VehiclePizzaVanRight3
   entities:
   - uid: 35

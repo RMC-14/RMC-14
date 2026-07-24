@@ -353,7 +353,9 @@
   name: van background 1
   components:
   - type: Sprite
-    state: background_1
+    layers:
+    - state: background_1
+      map: [ "roof" ]
   - type: RMCSpriteFade
     targetAlpha: 0.35
     changeRate: 4.0
@@ -375,7 +377,9 @@
   name: van background 3
   components:
   - type: Sprite
-    state: background_3
+    layers:
+    - state: background_3
+      map: [ "roof" ]
   - type: InteractionTransparency
 
 - type: entity
@@ -385,6 +389,7 @@
   components:
   - type: Sprite
     state: interior_door
+    drawdepth: BelowMobs
   - type: Clickable
   - type: InteractionOutline
   - type: RMCIgnoreGhostInteractionLimits
@@ -435,7 +440,9 @@
   name: van windshield top
   components:
   - type: Sprite
-    state: windshield_viewport_top
+    layers:
+    - state: windshield_viewport_top
+      map: [ "roof" ]
   - type: RMCSpriteFade
     targetAlpha: 0.35
     changeRate: 4.0
@@ -447,7 +454,9 @@
   name: van windshield bottom
   components:
   - type: Sprite
-    state: windshield_viewport_bottom
+    layers:
+    - state: windshield_viewport_bottom
+      map: [ "roof" ]
   - type: RMCSpriteFade
     targetAlpha: 0.35
     changeRate: 4.0

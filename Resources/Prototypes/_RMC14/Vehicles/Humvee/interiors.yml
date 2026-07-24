@@ -129,6 +129,7 @@
   components:
   - type: Sprite
     state: weapons_loader
+    drawdepth: BelowMobs
   - type: Clickable
   - type: InteractionOutline
   - type: RemoveComponents

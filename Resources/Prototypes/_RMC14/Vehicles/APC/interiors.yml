@@ -252,12 +252,6 @@
     fadeOnSharedGrid: true
     fadeLayers:
     - "roof"
-  - type: Clickable
-  - type: InteractionOutline
-  - type: RMCIgnoreGhostInteractionLimits
-  - type: RemoveComponents
-    components:
-    - type: InteractionTransparency
 
 - type: entity
   parent: VehicleAPCDoorBase
@@ -707,6 +701,7 @@
   components:
   - type: Sprite
     state: door_back
+    drawdepth: BelowMobs
   - type: Occluder
     enabled: false
   - type: Clickable

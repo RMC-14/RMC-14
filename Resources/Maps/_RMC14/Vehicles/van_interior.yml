@@ -1,10 +1,10 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 264.0.2-fix-physics
+  engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 12/18/2025 12:35:01
+  time: 07/24/2026 10:18:30
   entityCount: 40
 maps:
 - 1
@@ -218,6 +218,32 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 3.5,-0.5
       parent: 2
+    missingComponents:
+    - Corrodible
+    - Damageable
+    - Destructible
+- proto: RMCWallInvisibleBulletLightBlocker
+  entities:
+  - uid: 13
+    components:
+    - type: Transform
+      pos: 2.5,-2.5
+      parent: 2
+  - uid: 14
+    components:
+    - type: Transform
+      pos: 1.5,-2.5
+      parent: 2
+  - uid: 15
+    components:
+    - type: Transform
+      pos: 0.5,-2.5
+      parent: 2
+  - uid: 24
+    components:
+    - type: Transform
+      pos: 3.5,-2.5
+      parent: 2
 - proto: VehicleVanBack1
   entities:
   - uid: 11
@@ -236,30 +262,6 @@ entities:
       parent: 2
     - type: VehicleExit
       entryIndex: 2
-  - uid: 13
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 0.5,-2.5
-      parent: 2
-  - uid: 14
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 1.5,-2.5
-      parent: 2
-  - uid: 15
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 2.5,-2.5
-      parent: 2
-  - uid: 16
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 3.5,-2.5
-      parent: 2
 - proto: VehicleVanBack3
   entities:
   - uid: 17
@@ -301,9 +303,9 @@ entities:
     - type: Transform
       pos: 2.5,-1.5
       parent: 2
-- proto: VehicleVanExteriorDoor
+- proto: VehicleVanExteriorDoorUnique
   entities:
-  - uid: 24
+  - uid: 16
     components:
     - type: Transform
       pos: 3.5,-1.5
@@ -359,8 +361,6 @@ entities:
       pos: 3.5,0.5
       parent: 2
     - type: VehicleExit
-    missingComponents:
-    - InteractionTransparency
 - proto: VehicleVanRoof2
   entities:
   - uid: 31
@@ -418,6 +418,8 @@ entities:
     - type: Transform
       pos: 3.5,-0.5
       parent: 2
+    - type: Fixtures
+      fixtures: {}
 - proto: VehicleVanWindshieldTop
   entities:
   - uid: 38
@@ -425,6 +427,8 @@ entities:
     - type: Transform
       pos: 3.5,0.5
       parent: 2
+    - type: Fixtures
+      fixtures: {}
 - proto: VehicleViewportSimple
   entities:
   - uid: 39
