@@ -110,7 +110,7 @@ public sealed partial class RecoveryNodeSystem : EntitySystem
             BreakOnMove = true,
             MovementThreshold = 0.5f,
             DuplicateCondition = DuplicateConditions.SameEvent,
-            TargetEffect = "RMCEffectHealBusy",
+            TargetEffect = recoveryNode.Comp.RecoveryEffect,
         };
 
         if (_doafter.TryStartDoAfter(recover, out var id))

@@ -1,6 +1,7 @@
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Construction.RecoveryNode;
 
@@ -9,6 +10,9 @@ public sealed partial class RecoveryNodeComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
     public RecoveryType RecoveryType;
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId RecoveryEffect = "RMCEffectHealBusy";
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 RecoveryAmount = 25;
