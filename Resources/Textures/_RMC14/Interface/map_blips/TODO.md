@@ -5,14 +5,10 @@ Meta Files - This will mimic the file structure, if a folder isn't present its b
     UNMC
         auxiliary_support
         backgrounds
-        command
-        engineering
         marine
-        marsoc
         medical
         military_police
         other
-        provost
         requisition
 
     - type: TacticalMapIcon
