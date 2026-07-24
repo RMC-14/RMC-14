@@ -1,6 +1,7 @@
+# Recovery Node
 - type: entity
-  id: HiveRecoveryNodeXeno
   parent: BaseHiveStructure
+  id: HiveRecoveryNodeXeno
   name: recovery node
   description: A warm, soothing light source that pulsates with a faint hum.
   components:
@@ -20,6 +21,7 @@
       types:
         Slash: 100
   - type: RecoveryNode
+    recoveryType: Health
   - type: HiveConstructionRequiresHiveCore
   - type: HiveConstructionLimited
     id: HiveRecoveryNodeXeno
@@ -34,11 +36,11 @@
       state: recovery_node
 
 - type: entity
-  id: HiveRecoveryNodeXenoConstructionNode
   parent: BaseHiveStructureNode
+  id: HiveRecoveryNodeXenoConstructionNode
   name: recovery node
-  description: A warm, soothing light source that pulsates with a faint hum. Looks like a marker for something.
   suffix: Construction
+  description: A warm, soothing light source that pulsates with a faint hum. Looks like a marker for something.
   components:
   - type: Sprite
     color: '#FFFFFFAA'
@@ -68,3 +70,40 @@
   - type: WarpPoint
     location: recovery node
 
+
+# Plasma Tree
+- type: entity
+  parent: HiveRecoveryNodeXeno
+  id: HivePlasmaTreeXeno
+  name: plasma tree
+  description: A tree-shaped node whose "berries" are filled with glowing blue liquid that drips from them.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/hive_structures.rsi
+    state: recovery_plasma
+  - type: RecoveryNode
+    recoveryType: Plasma
+  - type: HiveConstructionLimited
+    id: HivePlasmaTreeXeno
+
+- type: entity
+  parent: HiveRecoveryNodeXenoConstructionNode
+  id: HivePlasmaTreeXenoConstructionNode
+  name: plasma tree
+  description: Making glowing blue "berries", replenishing plasma reserves of the sisters around it.
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Structures/Xenos/hive_structures.rsi
+      state: recovery_plasma
+    - sprite: _RMC14/Interface/xeno_hud.rsi
+      state: xeno_structure_node_indicator
+      scale: 0.8, 0.8
+  - type: HiveConstructionNode
+    initialPlasmaCost: 400
+    plasmaCost: 450
+    spawn: HivePlasmaTreeXeno
+  - type: HiveConstructionLimited
+    id: HivePlasmaTreeXeno
+  - type: WarpPoint
+    location: plasma tree
