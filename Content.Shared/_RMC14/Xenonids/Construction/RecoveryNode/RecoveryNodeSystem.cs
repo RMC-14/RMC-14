@@ -26,19 +26,19 @@ public sealed partial class RecoveryNodeSystem : EntitySystem
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
 
-    private EntityQuery<XenoComponent> _xenoQuery;
-    private EntityQuery<XenoRestingComponent> _restingQuery;
     private EntityQuery<DamageableComponent> _damageableQuery;
     private EntityQuery<XenoPlasmaComponent> _plasmaQuery;
+    private EntityQuery<XenoRestingComponent> _restingQuery;
+    private EntityQuery<XenoComponent> _xenoQuery;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        _xenoQuery = GetEntityQuery<XenoComponent>();
-        _restingQuery = GetEntityQuery<XenoRestingComponent>();
         _damageableQuery = GetEntityQuery<DamageableComponent>();
         _plasmaQuery = GetEntityQuery<XenoPlasmaComponent>();
+        _restingQuery = GetEntityQuery<XenoRestingComponent>();
+        _xenoQuery = GetEntityQuery<XenoComponent>();
 
         SubscribeLocalEvent<RecoveryNodeComponent, RecoveryNodeRecoverDoAfterEvent>(OnRecoveryDoAfter);
     }
