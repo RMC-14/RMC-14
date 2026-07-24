@@ -5,6 +5,7 @@ using Content.Shared.Audio;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
+using Content.Shared.Materials;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Content.Shared.Weapons.Melee;
@@ -26,6 +27,7 @@ public sealed partial class RMCPortableGeneratorSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedMaterialStorageSystem _materialStorage = default!;
 
     public override void Initialize()
     {
@@ -47,7 +49,7 @@ public sealed partial class RMCPortableGeneratorSystem : EntitySystem
 
     private void OnPortableGeneratorInteractUsing(Entity<RMCPortableGeneratorComponent> ent, ref InteractUsingEvent args)
     {
-        var user = args.User;
+        /*var user = args.User;
         var used = args.Used;
 
         if (!TryComp(used, out StackComponent? stack))
@@ -68,6 +70,9 @@ public sealed partial class RMCPortableGeneratorSystem : EntitySystem
         if (amount <= 0)
             return;
 
+        if (!_net.IsServer)
+            return;
+
         _stack.Use(used, amount, stack);
         ent.Comp.Sheets += amount;
         Dirty(ent);
@@ -77,8 +82,9 @@ public sealed partial class RMCPortableGeneratorSystem : EntitySystem
             ("fuel", ent.Comp.FuelName),
             ("generator", ent));
         _popup.PopupClient(addMsg, ent, user);
-
         args.Handled = true;
+*/
+        // Handled by material storage
     }
 
     private void OnPortableGeneratorInteractHand(Entity<RMCPortableGeneratorComponent> ent, ref InteractHandEvent args)
@@ -106,7 +112,6 @@ public sealed partial class RMCPortableGeneratorSystem : EntitySystem
             }
 
             args.Handled = true;
-            return;
         }
     }
 
@@ -123,12 +128,16 @@ public sealed partial class RMCPortableGeneratorSystem : EntitySystem
         if (!Transform(ent).Anchored)
             return;
 
-        if (ent.Comp.Sheets <= 0 && ent.Comp.SheetFraction <= 0)
+        var empty = _materialStorage.GetMaterialAmount(ent, ent.Comp.Material) <= 0;
+
+        if (empty)
+            return;
+
+        if (!_net.IsServer)
             return;
 
         SetPortableGeneratorOn(ent, true);
-        if (_net.IsServer)
-            _audio.PlayPvs(ent.Comp.StartSound, ent);
+        _audio.PlayPvs(ent.Comp.StartSound, ent);
         _popup.PopupClient(Loc.GetString("rmc-portable-generator-start-success", ("generator", ent)), ent, args.User);
     }
 
@@ -145,7 +154,7 @@ public sealed partial class RMCPortableGeneratorSystem : EntitySystem
                 args.PushMarkup(Loc.GetString("rmc-portable-generator-examine-off"));
 
             args.PushMarkup(Loc.GetString("rmc-portable-generator-examine-fuel",
-                ("sheets", ent.Comp.Sheets),
+                ("sheets", _materialStorage.GetMaterialAmount(ent, ent.Comp.Material) / ent.Comp.MaterialPerSheet),
                 ("fuel", ent.Comp.FuelName),
                 ("watts", ent.Comp.Watts)));
 
@@ -156,6 +165,9 @@ public sealed partial class RMCPortableGeneratorSystem : EntitySystem
 
     private void OnPortableGeneratorAnchorChanged(Entity<RMCPortableGeneratorComponent> ent, ref AnchorStateChangedEvent args)
     {
+        if (!_net.IsServer)
+            return;
+
         if (!args.Anchored && ent.Comp.On)
             SetPortableGeneratorOn(ent, false);
     }
@@ -176,7 +188,7 @@ public sealed partial class RMCPortableGeneratorSystem : EntitySystem
             return;
         }
 
-        if (ent.Comp.Sheets <= 0 && ent.Comp.SheetFraction <= 0)
+        if (_materialStorage.GetMaterialAmount(ent, ent.Comp.Material) <= 0 && ent.Comp.FractionalMaterial <= 0)
         {
             if (_net.IsServer)
                 _audio.PlayPvs(ent.Comp.StartSoundEmpty, ent);
@@ -196,30 +208,7 @@ public sealed partial class RMCPortableGeneratorSystem : EntitySystem
 
     private void OnPortableGeneratorEjectFuel(Entity<RMCPortableGeneratorComponent> ent, ref RMCPortableGeneratorEjectFuelBuiMsg args)
     {
-        if (ent.Comp.On)
-            return;
-
-        if (ent.Comp.Sheets <= 0)
-            return;
-
-        if (_net.IsServer)
-        {
-            var remaining = ent.Comp.Sheets;
-            var coords = Transform(ent).Coordinates;
-            while (remaining > 0)
-            {
-                var spawned = Spawn(ent.Comp.FuelEntity, coords);
-                if (!TryComp(spawned, out StackComponent? spawnedStack))
-                    break;
-
-                var amount = Math.Min(remaining, _stack.GetMaxCount(spawnedStack));
-                _stack.SetCount(spawned, amount, spawnedStack);
-                remaining -= amount;
-            }
-        }
-
-        ent.Comp.Sheets = 0;
-        Dirty(ent);
+        RaiseLocalEvent(ent, RMCGeneratorEmpty.Instance);
     }
 
     private void OnPortableGeneratorRaisePower(Entity<RMCPortableGeneratorComponent> ent, ref RMCPortableGeneratorRaisePowerBuiMsg args)
@@ -250,4 +239,17 @@ public sealed partial class RMCPortableGeneratorSystem : EntitySystem
         _ambientSound.SetAmbience(ent, on);
     }
 
+    public void StopPortableGenerator(Entity<RMCPortableGeneratorComponent> ent)
+    {
+
+        if (!ent.Comp.On)
+            return;
+
+        SetPortableGeneratorOn(ent, false);
+    }
+}
+
+public sealed class RMCGeneratorEmpty
+{
+    public static readonly RMCGeneratorEmpty Instance = new();
 }

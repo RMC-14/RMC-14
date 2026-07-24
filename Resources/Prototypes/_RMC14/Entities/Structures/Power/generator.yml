@@ -206,13 +206,13 @@
       board: RMCPortableGeneratorPacmanMachineCircuitBoard
     - type: RMCPortableGenerator
       watts: 5000
-      timePerSheet: 70
-      fuelStackType: CMPhoron
-      fuelEntity: CMSheetPhoron1
-      fuelName: phoron
       explosionIntensity: 50
       explosionSlope: 5
       explosionMaxIntensity: 10
+    - type: MaterialStorage
+      storageLimit: 100000
+      materialWhiteList:
+      - CMPhoron
 
 - type: entity
   parent: RMCPortableGeneratorBase
@@ -227,9 +227,6 @@
     - type: RMCPortableGenerator
       watts: 15000
       timePerSheet: 120
-      fuelStackType: Uranium
-      fuelEntity: SheetUranium1
-      fuelName: uranium
       explosionIntensity: 80
       explosionSlope: 3
       explosionMaxIntensity: 15

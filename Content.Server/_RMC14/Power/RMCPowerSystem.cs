@@ -1,5 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 using Content.Server.Explosion.EntitySystems;
+using Content.Server.Materials;
 using Content.Server.Popups;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
@@ -36,6 +37,8 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
     [Dependency] private readonly ExplosionSystem _explosion = default!;
     [Dependency] private readonly SharedPointLightSystem _light = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly MaterialStorageSystem _materialStorage = default!;
+    [Dependency] private readonly RMCPortableGeneratorSystem _portableGenerator = default!;
 
     [ViewVariables]
     private TimeSpan _nextUpdate;
@@ -66,6 +69,7 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
 
         SubscribeLocalEvent<RMCPowerReceiverComponent, PowerChangedEvent>(OnReceiverPowerChanged);
         SubscribeLocalEvent<RMCPowerUsageDisplayComponent, ExaminedEvent>(OnUsageDisplayEvent);
+        SubscribeLocalEvent<RMCPortableGeneratorComponent,RMCGeneratorEmpty>(OnGeneratorEmpty);
 
         Subs.CVar(_config, RMCCVars.RMCPowerUpdateEverySeconds, v => _updateEvery = TimeSpan.FromSeconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCPowerLoadMultiplier, v => _powerLoadMultiplier = v, true);
@@ -126,6 +130,11 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
         return TryComp(ent, out ApcPowerReceiverComponent? receiver) && receiver.Powered;
     }
 
+    private void OnGeneratorEmpty(Entity<RMCPortableGeneratorComponent> ent, ref RMCGeneratorEmpty args)
+    {
+        _materialStorage.EjectAllMaterial(ent);
+    }
+
     private void UpdatePortableGenerators()
     {
         _portableGenPower.Clear();
@@ -146,45 +155,41 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
 
             if (!xform.Anchored)
             {
-                gen.On = false;
-                Dirty(uid, gen);
-                _appearance.SetData(uid, RMCPortableGeneratorVisuals.Running, false);
-                _ambientSound.SetAmbience(uid, false);
+
+                _portableGenerator.StopPortableGenerator((uid, gen));
                 continue;
             }
 
-            if (gen.CritFail || gen.Sheets <= 0 && gen.SheetFraction <= 0)
+            if (_materialStorage.GetMaterialAmount(uid, gen.Material) <= 0 && gen.FractionalMaterial <= 0f)
             {
-                gen.On = false;
-                Dirty(uid, gen);
-                _appearance.SetData(uid, RMCPortableGeneratorVisuals.Running, false);
-                _ambientSound.SetAmbience(uid, false);
+                _portableGenerator.StopPortableGenerator((uid, gen));
                 continue;
             }
 
-            var setting = gen.PowerGenPercent / 100;
-            var fuelUsed = setting / gen.TimePerSheet;
+            var setting = gen.PowerGenPercent / 100f;
+            var consumeThisFrame = (gen.MaterialPerSheet / gen.TimePerSheet) * (float)_updateEvery.TotalSeconds * setting;
+            gen.FractionalMaterial -= consumeThisFrame;
 
-            gen.SheetFraction -= fuelUsed;
-            while (gen.SheetFraction <= 0 && gen.Sheets > 0)
+            if (gen.FractionalMaterial < 0f)
             {
-                gen.Sheets--;
-                gen.SheetFraction += 1f;
-            }
+                var consumeWhole = -(int) MathF.Floor(gen.FractionalMaterial);
 
-            if (gen.Sheets <= 0 && gen.SheetFraction <= 0)
-            {
-                gen.SheetFraction = 0;
-                gen.On = false;
-                Dirty(uid, gen);
-                _appearance.SetData(uid, RMCPortableGeneratorVisuals.Running, false);
-                _ambientSound.SetAmbience(uid, false);
-                continue;
+                if (_materialStorage.TryChangeMaterialAmount(uid, gen.Material, -consumeWhole))
+                {
+                    gen.FractionalMaterial += consumeWhole;
+                }
+                else
+                {
+                    // Not enough material in storage. Zero fractional and stop the generator.
+                    gen.FractionalMaterial = 0f;
+                    _portableGenerator.StopPortableGenerator((uid, gen));
+                    continue;
+                }
             }
 
             var lowerLimit = 56f + setting * 10f;
             var upperLimit = 76f + setting * 10f;
-            var bias = 0;
+            var bias = 0f;
 
             if (setting > 4)
             {
@@ -198,7 +203,7 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
             }
             else
             {
-                gen.Heat += _random.Next(-7 + bias, 8 + bias);
+                gen.Heat += _random.NextFloat(-7 + bias, 8 + bias);
 
                 if (gen.Heat < lowerLimit)
                     gen.Heat = lowerLimit;

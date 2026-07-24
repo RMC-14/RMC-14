@@ -1,5 +1,6 @@
 using Content.Client.Message;
 using Content.Shared._RMC14.Power;
+using Content.Shared.Materials;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 
@@ -36,6 +37,9 @@ public sealed class RMCPortableGeneratorBui(EntityUid owner, Enum uiKey) : Bound
         if (!EntMan.TryGetComponent(Owner, out RMCPortableGeneratorComponent? gen))
             return;
 
+        if (!EntMan.TryGetComponent(Owner, out MaterialStorageComponent? storage))
+            return;
+
         if (gen.On)
         {
             _window.StatusLabel.SetMarkupPermissive($"[color={GreenColor.ToHex()}][ Online ][/color]");
@@ -47,9 +51,10 @@ public sealed class RMCPortableGeneratorBui(EntityUid owner, Enum uiKey) : Bound
             _window.ToggleButton.Text = "Start";
         }
 
-        var fuelPercent = gen.SheetFraction * 100;
+        var fuelSheets = storage.Storage.GetValueOrDefault(gen.Material, 0) / gen.MaterialPerSheet;
+        var fuelPercent = (storage.Storage.GetValueOrDefault(gen.Material, 0) % (float)gen.MaterialPerSheet) / gen.MaterialPerSheet * 100;
         _window.FuelLabel.SetMarkupPermissive(
-            $"[color=#5B88B0]Fuel:[/color] [bold]{gen.Sheets}[/bold] sheets of {gen.FuelName}");
+            $"[color=#5B88B0]Fuel:[/color] [bold]{fuelSheets}[/bold] sheets of {gen.FuelName}");
 
         _window.FuelBar.MinValue = 0;
         _window.FuelBar.MaxValue = 100;

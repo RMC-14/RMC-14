@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared.Materials;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -29,22 +30,31 @@ public sealed partial class RMCPortableGeneratorComponent : Component
     public int PowerPercentStep = 100;
 
     [DataField, AutoNetworkedField]
-    public int Sheets;
+    public ProtoId<MaterialPrototype>  Material = "CMPhoron";
+
+    [DataField]
+    public int MaterialPerSheet = 2000;
 
     [DataField, AutoNetworkedField]
-    public int MaxSheets = 100;
+    public float FractionalMaterial;
 
-    [DataField, AutoNetworkedField]
-    public float SheetFraction;
-
+    // [DataField, AutoNetworkedField]
+    // public int Sheets;
+    //
+    // [DataField, AutoNetworkedField]
+    // public int MaxSheets = 100;
+    //
+    // [DataField, AutoNetworkedField]
+    // public float SheetFraction;
+    //
     [DataField, AutoNetworkedField]
     public float TimePerSheet = 70f;
-
-    [DataField, AutoNetworkedField]
-    public string FuelStackType = "CMPhoron";
-
-    [DataField, AutoNetworkedField]
-    public string FuelEntity = "CMSheetPhoron1";
+    //
+    // [DataField, AutoNetworkedField]
+    // public string FuelStackType = "CMPhoron";
+    //
+    // [DataField, AutoNetworkedField]
+    // public string FuelEntity = "CMSheetPhoron1";
 
     [DataField, AutoNetworkedField]
     public string FuelName = "phoron";
