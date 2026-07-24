@@ -243,7 +243,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         }
 
         args.PushMarkup(Loc.GetString("rmc-xeno-fruit-speed",
-            ("caste", Loc.GetString(casteJob.Name)),
+            ("caste", casteJob.LocalizedName),
             ("amount", fruit.SpeedModifier / movementSpeed.BaseWalkSpeed * 100),
             ("time", fruit.Duration.TotalSeconds)), -12);
     }
