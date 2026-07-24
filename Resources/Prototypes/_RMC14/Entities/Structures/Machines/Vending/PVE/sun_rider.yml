@@ -65,13 +65,13 @@
     - name: Armor Webbings
       entries:
       - id: RMCArmorWebbingDrum
-        name: M3 Armor Drum Webbing
+        name: M3 Pattern Drum Webbing
         amount: 5
       - id: RMCArmorWebbingMag
         name: M3 Pattern Magazine Webbing
         amount: 5
       - id: RMCArmorWebbingGrenade
-        name: M3 Armor Grenadier Webbing
+        name: M3 Pattern Grenadier Webbing
         amount: 5
       - id: RMCArmorWebbingPouch
         name: M3 Pattern Pouch Webbing
