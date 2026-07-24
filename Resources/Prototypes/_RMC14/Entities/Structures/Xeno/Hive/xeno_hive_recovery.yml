@@ -1,7 +1,7 @@
 # Recovery Node
 - type: entity
-  id: HiveRecoveryNodeXeno
   parent: BaseHiveStructure
+  id: HiveRecoveryNodeXeno
   name: recovery node
   description: A warm, soothing light source that pulsates with a faint hum.
   components:
@@ -36,11 +36,11 @@
       state: recovery_node
 
 - type: entity
-  id: HiveRecoveryNodeXenoConstructionNode
   parent: BaseHiveStructureNode
+  id: HiveRecoveryNodeXenoConstructionNode
   name: recovery node
-  description: A warm, soothing light source that pulsates with a faint hum. Looks like a marker for something.
   suffix: Construction
+  description: A warm, soothing light source that pulsates with a faint hum. Looks like a marker for something.
   components:
   - type: Sprite
     color: '#FFFFFFAA'
@@ -73,8 +73,8 @@
 
 # Plasma Tree
 - type: entity
-  id: HivePlasmaTreeXeno
   parent: HiveRecoveryNodeXeno
+  id: HivePlasmaTreeXeno
   name: plasma tree
   description: A tree-shaped node whose "berries" are filled with glowing blue liquid that drips from them.
   components:
@@ -87,8 +87,8 @@
     id: HivePlasmaTreeXeno
 
 - type: entity
-  id: HivePlasmaTreeXenoConstructionNode
   parent: HiveRecoveryNodeXenoConstructionNode
+  id: HivePlasmaTreeXenoConstructionNode
   name: plasma tree
   description: Making glowing blue "berries", replenishing plasma reserves of the sisters around it.
   components:
