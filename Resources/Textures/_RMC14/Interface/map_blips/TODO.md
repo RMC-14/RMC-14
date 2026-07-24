@@ -2,12 +2,6 @@ Delete this file when done
 
 Code side changes
 Meta Files - This will mimic the file structure, if a folder isn't present its been completed.
-    TSE
-        backgrounds
-        TSEPA
-        RCM
-            PVE
-            Standard
     UNMC
         auxiliary_support
         backgrounds
