@@ -19,11 +19,12 @@
   - type: RemoveComponents
     components:
     - type: InteractionTransparency
+    - type: Tag
 
 - type: entity
   parent: VehicleViewport
   id: VehicleViewportUnanchored
-  name: vehicle viewport (unanchored)
+  name: vehicle viewport
   description: A small viewport for peering outside.
   placement:
     mode: PlaceFree
@@ -37,7 +38,7 @@
 - type: entity
   parent: VehicleViewport
   id: VehicleViewportSimple
-  name: vehicle viewport (simple)
+  name: vehicle viewport
   description: A small viewport for peering outside.
   components:
   - type: Sprite
@@ -60,6 +61,7 @@
   - type: RemoveComponents
     components:
     - type: InteractionTransparency
+    - type: Tag
 
 - type: entity
   parent: VehicleHumveeViewportBase

@@ -15,6 +15,7 @@ using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Mortar;
 using Content.Shared._RMC14.PowerLoader;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
@@ -63,6 +64,7 @@ public sealed class OrbitalCannonSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly ARESCoreSystem _core = default!;
+    [Dependency] private readonly VehicleSystem _vehicle = default!;
 
     private static readonly EntProtoId OrbitalTargetMarker = "RMCLaserDropshipTarget";
 
@@ -521,6 +523,14 @@ public sealed class OrbitalCannonSystem : EntitySystem
         cannon = default;
         if (!TryComp(to, out TransformComponent? transform))
             return false;
+
+        var coordinates = transform.Coordinates;
+        if (_vehicle.TryGetVehicleFromInterior(to, out var vehicle) &&
+            vehicle is { } vehicleUid &&
+            TryComp(vehicleUid, out TransformComponent? vehicleTransform))
+        {
+            coordinates = vehicleTransform.Coordinates;
+        }
 
         var last = float.MaxValue;
         var query = EntityQueryEnumerator<OrbitalCannonComponent, TransformComponent>();

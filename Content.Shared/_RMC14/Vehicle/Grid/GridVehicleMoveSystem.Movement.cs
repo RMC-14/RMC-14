@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Numerics;
 using Content.Shared.Vehicle.Components;
 using Content.Shared._RMC14.Vehicle;
+using Content.Shared._RMC14.Xenonids.Weeds;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -146,6 +147,13 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         Vector2i inputDir,
         float frameTime)
     {
+        if (mover.WeedsSpeedFactor < 1f)
+        {
+            var coords = Transform(uid).Coordinates;
+            if (_rmcMap.HasAnchoredEntityEnumerator<XenoWeedsComponent>(coords, out _))
+                mover.CurrentSpeed *= MathF.Pow(mover.WeedsSpeedFactor, frameTime);
+        }
+
         var hasInput = inputDir != Vector2i.Zero;
         var facing = mover.CurrentDirection;
         var hadFacing = facing != Vector2i.Zero;
@@ -245,6 +253,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             ? mover.CurrentDirection
             : -mover.CurrentDirection;
         var rotation = DirectionToVehicleRotation(mover.CurrentDirection);
+        var speedBeforeMove = mover.CurrentSpeed;
         var moved = TryMoveWithLaneGuidance(
             uid,
             mover,
@@ -256,7 +265,10 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             frameTime,
             out var blocked);
         if (blocked)
+        {
             mover.CurrentSpeed = 0f;
+            _rmcVehicles.DoInteriorCrashEffect(uid, speedBeforeMove, GetModifiedMaxSpeed(uid, mover));
+        }
 
         return moved;
     }

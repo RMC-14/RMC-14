@@ -226,6 +226,14 @@ public sealed class VehicleWheelSystem : EntitySystem
         return integrity.Integrity > 0f;
     }
 
+    public bool HasAnyFunctionalWheel(EntityUid vehicle)
+    {
+        if (!TryComp(vehicle, out VehicleWheelSlotsComponent? wheels))
+            return false;
+
+        return GetFunctionalWheelCount(vehicle, wheels) > 0;
+    }
+
     public void DamageWheels(EntityUid vehicle, float amount)
     {
         if (amount <= 0f || !TryComp(vehicle, out VehicleWheelSlotsComponent? wheels))

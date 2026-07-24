@@ -7,12 +7,16 @@ using Content.Shared.Destructible;
 using Content.Shared.Doors.Systems;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Standing;
+using Content.Shared.StepTrigger.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Vehicle.Components;
 using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Fortify;
+using Content.Shared._RMC14.Xenonids.Weeds;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
@@ -36,13 +40,16 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedDestructibleSystem _destructible = default!;
     [Dependency] private readonly SharedDoorSystem _door = default!;
+    [Dependency] private readonly XenoFortifySystem _fortify = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
+    [Dependency] private readonly VehicleSystem _rmcVehicles = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
@@ -276,6 +283,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         }
 
         if (args.OtherBody.BodyType != BodyType.Static)
+            return;
+
+        if (!args.OtherFixture.Hard && HasComp<StepTriggerComponent>(args.OtherEntity))
             return;
 
         if (IsNormallyMobPassable(args.OtherFixture))
