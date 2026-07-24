@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from https://github.com/cmss13-devs/cmss13/commit/70f98497ccd968d049906e499be8aa1b8f219f8a, lurker based off runner created by DummeHytteOst (Github),   lesser_carrier, xenoking created modified by Vermidia (Github)",
+  "size": {
+    "x": 7,
+    "y": 7
+  },
+  "states": [
+    {
+      "name": "boiler"
+    },
+    {
+      "name": "burrower"
+    },
+    {
+      "name": "carrier"
+    },
+    {
+      "name": "crusher"
+    },
+    {
+      "name": "defender"
+    },
+    {
+      "name": "drone"
+    },
+    {
+      "name": "hivelord"
+    },
+    {
+      "name": "larva"
+    },
+    {
+      "name": "lesser_carrier"
+    },
+    {
+      "name": "lesser_drone"
+    },
+    {
+      "name": "lurker"
+    },
+    {
+      "name": "parasite"
+    },
+    {
+      "name": "praetorian"
+    },
+    {
+      "name": "ravager"
+    },
+    {
+      "name": "runner"
+    },
+    {
+      "name": "sentinel"
+    },
+    {
+      "name": "spitter"
+    },
+    {
+      "name": "warrior"
+    },
+    {
+      "name": "xeno"
+    },
+    {
+      "name": "xenoking"
+    },
+    {
+      "name": "xenoleader"
+    },
+    {
+      "name": "xenoqueen"
+    }
+  ]
+}
+

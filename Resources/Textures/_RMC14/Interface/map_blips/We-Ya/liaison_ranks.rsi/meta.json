@@ -8,29 +8,37 @@
   },
   "states": [
     {
-      "name": "background_clf"
+      "name": "ass_man"
     },
     {
-      "name": "clf_engi"
+      "name": "chief_man"
     },
     {
-      "name": "clf_med"
+      "name": "cl"
     },
     {
-      "name": "clf_mil"
+      "name": "dep_director"
     },
     {
-      "name": "clf_sl"
+      "name": "director"
     },
     {
-      "name": "clf_sl_a"
+      "name": "div_man"
     },
     {
-      "name": "clf_spec"
+      "name": "exec_spec"
     },
     {
-      "name": "clf_synth"
+      "name": "exec_super"
+    },
+    {
+      "name": "junior_exec"
+    },
+    {
+      "name": "senior_exec"
     }
   ]
 }
+
+
 

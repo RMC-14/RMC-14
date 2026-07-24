@@ -47,7 +47,7 @@
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: pmc_spec
+        state: pmc_sg # RMC14 TODO: Map blip to match icon
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_pmc

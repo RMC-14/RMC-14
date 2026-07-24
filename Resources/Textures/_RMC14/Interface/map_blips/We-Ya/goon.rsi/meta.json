@@ -8,29 +8,24 @@
   },
   "states": [
     {
-      "name": "background_clf"
+      "name": "goon_engi"
     },
     {
-      "name": "clf_engi"
+      "name": "goon_leader"
     },
     {
-      "name": "clf_med"
+      "name": "goon_med"
     },
     {
-      "name": "clf_mil"
+      "name": "goon_sci"
     },
     {
-      "name": "clf_sl"
+      "name": "goon_sci_lead"
     },
     {
-      "name": "clf_sl_a"
-    },
-    {
-      "name": "clf_spec"
-    },
-    {
-      "name": "clf_synth"
+      "name": "goon_standard"
     }
   ]
 }
+
 

@@ -8,29 +8,24 @@
   },
   "states": [
     {
-      "name": "background_clf"
+      "name": "background_medical_WO"
     },
     {
-      "name": "clf_engi"
+      "name": "chemist_wo"
     },
     {
-      "name": "clf_med"
+      "name": "cmo_wo"
     },
     {
-      "name": "clf_mil"
+      "name": "co_wo"
     },
     {
-      "name": "clf_sl"
+      "name": "wo_mcrew"
     },
     {
-      "name": "clf_sl_a"
-    },
-    {
-      "name": "clf_spec"
-    },
-    {
-      "name": "clf_synth"
+      "name": "xo_wo"
     }
   ]
 }
+
 

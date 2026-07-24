@@ -8,29 +8,18 @@
   },
   "states": [
     {
-      "name": "background_clf"
+      "name": "background_goon"
     },
     {
-      "name": "clf_engi"
+      "name": "background_pmc"
     },
     {
-      "name": "clf_med"
+      "name": "background_wy_com"
     },
     {
-      "name": "clf_mil"
-    },
-    {
-      "name": "clf_sl"
-    },
-    {
-      "name": "clf_sl_a"
-    },
-    {
-      "name": "clf_spec"
-    },
-    {
-      "name": "clf_synth"
+      "name": "background_wy_management"
     }
   ]
 }
+
 

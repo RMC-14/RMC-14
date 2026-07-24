@@ -8,30 +8,71 @@
   },
   "states": [
     {
-      "name": "background_clf"
+      "name": "spp_cargo"
     },
     {
-      "name": "clf_engi"
+      "name": "spp_co"
     },
     {
-      "name": "clf_med"
+      "name": "spp_com"
     },
     {
-      "name": "clf_mil"
+      "name": "spp_commed"
     },
     {
-      "name": "clf_sl"
+      "name": "spp_comsl"
     },
     {
-      "name": "clf_sl_a"
+      "name": "spp_cont"
     },
     {
-      "name": "clf_spec"
+      "name": "spp_doc"
     },
     {
-      "name": "clf_synth"
+      "name": "spp_lt"
+    },
+    {
+      "name": "spp_med"
+    },
+    {
+      "name": "spp_mp"
+    },
+    {
+      "name": "spp_plt"
+    },
+    {
+      "name": "spp_pvt"
+    },
+    {
+      "name": "spp_sapper"
+    },
+    {
+      "name": "spp_sci"
+    },
+    {
+      "name": "spp_sec"
+    },
+    {
+      "name": "spp_sl"
+    },
+    {
+      "name": "spp_sl_a"
+    },
+    {
+      "name": "spp_slt"
+    },
+    {
+      "name": "spp_spec"
+    },
+    {
+      "name": "spp_synth"
+    },
+    {
+      "name": "spp_vc"
+    },
+    {
+      "name": "spp_xo"
     }
   ]
 }
-
 

@@ -14,14 +14,8 @@ Meta Files - This will mimic the file structure, if a folder isn't present its b
         other
         provost
         requisition
-    We-Ya
-        backgrounds
-        goon
-        liaison_ranks
-        other
-        pmc
-    Whiskey_Outpost - Will need to go to the PVE repo on CM probably
-    xeno
-        castes
-        other
-        structures
+
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pmc_sg # RMC14 TODO: Map blip to match icon, this will probably be easy to find, check the job icon
