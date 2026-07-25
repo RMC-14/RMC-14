@@ -2871,7 +2871,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronMathewMothewLampyris
   name: Mathew 'Mothew' Lampyris figurine
-  description: "He's a green moth that is fuzzy, he has a scar on his lip."
+  description: "He's a green moth that is fuzzy, he has a scar across his face."
   components:
   - type: Sprite
     state: mathew_mothew_lampyris
