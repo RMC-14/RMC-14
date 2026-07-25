@@ -2505,7 +2505,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronSethXi
   name: Seth Xi figurine
-  description: "Calm under pressure. Evil beyond measure.\n\nBuilt for operations where hope was optional and success was necessary.\n\nWhen others followed orders, he followed instinct. Where others followed the path, he forged his own.\n\nNormally found beyond the frontline - questioning the plan, not the outcome."
+  description: "Calm under pressure. Determined beyond measure.\n\nBuilt for operations where hope was optional and success was required.\n\nWhen others followed orders, he followed instinct. Where others followed the path, he forged his own.\n\nNormally found beyond the frontline - questioning the plan, not the outcome."
   components:
   - type: Sprite
     state: seth_xi
