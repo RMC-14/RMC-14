@@ -1,3 +1,4 @@
+using Content.Client.Stylesheets;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 
@@ -5,9 +6,14 @@ namespace Content.Client._RMC14.UserInterface.Crt;
 
 public sealed class RMCCrtSeparator : Control, IRMCCrtThemedControl
 {
-    private RMCCrtPalette _palette = RMCCrtPalettes.Get(RMCCrtPalettePreset.Blue);
+    private RMCCrtThemeContext _context = new(
+        RMCCrtPalettes.Get(RMCCrtPalettePreset.Blue),
+        new RMCCrtAppearanceSettings(true, true));
     private RMCCrtSeparatorOrientation _orientation;
     private float _thickness = 1;
+
+    internal Color ResolvedColor =>
+        _context.ThemeEnabled ? _context.Palette.Border : StyleNano.NanoGold;
 
     public RMCCrtSeparatorOrientation Orientation
     {
@@ -34,15 +40,20 @@ public sealed class RMCCrtSeparator : Control, IRMCCrtThemedControl
         UpdateMinimumSize();
     }
 
-    public void ApplyCrtTheme(RMCCrtPalette palette)
+    void IRMCCrtThemedControl.ApplyCrtTheme(RMCCrtThemeContext context)
     {
-        _palette = palette;
+        ApplyAppearance(context);
+    }
+
+    internal void ApplyAppearance(RMCCrtThemeContext context)
+    {
+        _context = context;
     }
 
     protected override void EnteredTree()
     {
         base.EnteredTree();
-        ApplyCrtTheme(RMCCrtThemeHelpers.FindPalette(this));
+        ApplyAppearance(RMCCrtThemeHelpers.FindContext(this));
     }
 
     protected override void Draw(DrawingHandleScreen handle)
@@ -51,12 +62,12 @@ public sealed class RMCCrtSeparator : Control, IRMCCrtThemedControl
         if (Orientation == RMCCrtSeparatorOrientation.Vertical)
         {
             var left = Math.Max(0, (PixelWidth - Thickness * UIScale) / 2);
-            handle.DrawRect(new UIBox2(left, 0, left + Thickness * UIScale, PixelHeight), _palette.Border);
+            handle.DrawRect(new UIBox2(left, 0, left + Thickness * UIScale, PixelHeight), ResolvedColor);
             return;
         }
 
         var top = Math.Max(0, (PixelHeight - Thickness * UIScale) / 2);
-        handle.DrawRect(new UIBox2(0, top, PixelWidth, top + Thickness * UIScale), _palette.Border);
+        handle.DrawRect(new UIBox2(0, top, PixelWidth, top + Thickness * UIScale), ResolvedColor);
     }
 
     private void UpdateMinimumSize()

@@ -1,3 +1,4 @@
+using Content.Client.Stylesheets;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface.Controls;
@@ -16,7 +17,9 @@ public sealed class RMCCrtIcon : TextureRect, IRMCCrtThemedControl
     private readonly IResourceCache _resourceCache;
     private string? _iconState;
     private ResPath _rsiPath = DefaultRsiPath;
-    private RMCCrtPalette _palette = RMCCrtPalettes.Get(RMCCrtPalettePreset.Blue);
+    private RMCCrtThemeContext _context = new(
+        RMCCrtPalettes.Get(RMCCrtPalettePreset.Blue),
+        new RMCCrtAppearanceSettings(true, true));
     private RMCCrtTone _tone = RMCCrtTone.Default;
 
     public string? IconState
@@ -56,27 +59,46 @@ public sealed class RMCCrtIcon : TextureRect, IRMCCrtThemedControl
         UpdateColor();
     }
 
-    public void ApplyCrtTheme(RMCCrtPalette palette)
+    void IRMCCrtThemedControl.ApplyCrtTheme(RMCCrtThemeContext context)
     {
-        _palette = palette;
+        ApplyAppearance(context);
+    }
+
+    internal void ApplyAppearance(RMCCrtThemeContext context)
+    {
+        _context = context;
         UpdateColor();
     }
 
     protected override void EnteredTree()
     {
         base.EnteredTree();
-        ApplyCrtTheme(RMCCrtThemeHelpers.FindPalette(this));
+        ApplyAppearance(RMCCrtThemeHelpers.FindContext(this));
     }
 
     private void UpdateColor()
     {
+        if (!_context.ThemeEnabled)
+        {
+            ModulateSelfOverride = Tone switch
+            {
+                RMCCrtTone.Danger => StyleNano.DangerousRedFore,
+                RMCCrtTone.Good => StyleNano.GoodGreenFore,
+                RMCCrtTone.Muted => StyleNano.DisabledFore,
+                RMCCrtTone.Warning => StyleNano.ConcerningOrangeFore,
+                _ => null,
+            };
+            return;
+        }
+
+        var palette = _context.Palette;
         ModulateSelfOverride = Tone switch
         {
-            RMCCrtTone.Danger => _palette.Danger,
-            RMCCrtTone.Good => _palette.Good,
-            RMCCrtTone.Muted => _palette.Muted,
-            RMCCrtTone.Warning => _palette.Warning,
-            _ => _palette.Foreground,
+            RMCCrtTone.Danger => palette.Danger,
+            RMCCrtTone.Good => palette.Good,
+            RMCCrtTone.Muted => palette.Muted,
+            RMCCrtTone.Warning => palette.Warning,
+            _ => palette.Foreground,
         };
     }
 

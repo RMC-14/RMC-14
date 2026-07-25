@@ -1,7 +1,7 @@
 <crt:RMCCrtActionButton
     xmlns="https://spacestation14.io"
     xmlns:crt="clr-namespace:Content.Client._RMC14.UserInterface.Crt">
-    <crt:RMCCrtPanel Name="Background" Access="Public" Effects="HorizontalScanlines"
+    <crt:RMCCrtPanel Name="Background" Access="Public" Variant="Transparent" Effects="HorizontalScanlines"
                      HorizontalExpand="True" VerticalExpand="True" MouseFilter="Ignore">
         <BoxContainer Name="Layout" Access="Public" Orientation="Horizontal" Align="Center"
                       HorizontalAlignment="Stretch" HorizontalExpand="True"

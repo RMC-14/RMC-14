@@ -20,6 +20,13 @@ internal sealed class RMCCrtEffectRenderer
     private Vector2[] _horizontalScanlines = [];
     private Vector2[] _redSubpixels = [];
 
+    internal bool HasGeometry =>
+        _horizontalScanlines.Length > 0 ||
+        _redSubpixels.Length > 0 ||
+        _greenSubpixels.Length > 0 ||
+        _blueSubpixels.Length > 0 ||
+        _diagonalStripes.Length > 0;
+
     public void Draw(
         DrawingHandleScreen handle,
         float width,

@@ -62,6 +62,26 @@ public enum RMCCrtSeparatorOrientation
     Vertical,
 }
 
+internal readonly record struct RMCCrtAppearanceSettings(bool ThemeEnabled, bool EffectsEnabled)
+{
+    public RMCCrtEffects ResolveEffects(RMCCrtEffects requested)
+    {
+        return ThemeEnabled && EffectsEnabled ? requested : RMCCrtEffects.None;
+    }
+}
+
+internal readonly record struct RMCCrtThemeContext(
+    RMCCrtPalette Palette,
+    RMCCrtAppearanceSettings Appearance)
+{
+    public bool ThemeEnabled => Appearance.ThemeEnabled;
+
+    public RMCCrtEffects ResolveEffects(RMCCrtEffects requested)
+    {
+        return Appearance.ResolveEffects(requested);
+    }
+}
+
 public readonly record struct RMCCrtPalette(
     Color Foreground,
     Color Background,

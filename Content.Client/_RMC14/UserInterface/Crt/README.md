@@ -7,6 +7,20 @@ It does not modify the global SS14 stylesheet and contains no game-specific text
 Use these controls when several interfaces should share the same visual language without copying styles or depending
 on another console's UI classes.
 
+## User preferences
+
+The Accessibility tab exposes two archived client preferences:
+
+- `rmc.crt_theme_enabled` switches the entire library between CRT presentation and the standard Nano presentation;
+- `rmc.crt_effects_enabled` controls scanlines, RGB subpixels, and diagonal warning stripes while the CRT theme is on.
+
+Disabling the theme always suppresses display effects, but does not overwrite the effects preference. Re-enabling the
+theme restores the user's previous effects choice. Existing windows update when the settings are applied, and newly
+created controls inherit the current preference from their nearest theme scope.
+
+Nano fallback preserves layout, content, icons, semantic tones, and interaction state. CRT palettes, custom color
+overrides, monospace fonts, and effect layers are presentation details and must not leak into the fallback.
+
 ## Quick start
 
 Add the CRT namespace to the window and wrap its contents in an `RMCCrtThemeScope`:
@@ -219,12 +233,13 @@ than overlapping neighboring columns.
 New reusable CRT controls belong in this directory and should:
 
 1. remain independent from a specific console, BUI, component, or localization key;
-2. implement `IRMCCrtThemedControl` when they consume semantic palette colors;
-3. obtain the nearest palette through `RMCCrtThemeHelpers` on entering the UI tree;
+2. implement `IRMCCrtThemedControl` when they consume theme state or semantic palette colors;
+3. obtain the nearest theme context through `RMCCrtThemeHelpers` on entering the UI tree;
 4. expose semantic properties such as `Tone`, `Variant`, or `Selected` instead of raw per-state colors;
-5. define structure in XAML where practical;
-6. preserve normal Robust measurement and invalidation behavior;
-7. avoid allocations in per-frame drawing code.
+5. provide both CRT and standard Nano presentation without duplicating console layout or behavior;
+6. define structure in XAML where practical;
+7. preserve normal Robust measurement and invalidation behavior;
+8. avoid allocations and configuration lookups in per-frame drawing code.
 
 Before adding a new control, check whether composition from `RMCCrtPanel`, `RMCCrtLabel`, and standard Robust
 containers is sufficient.

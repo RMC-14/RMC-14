@@ -1,8 +1,6 @@
 using System.Linq;
-using Content.Client.Resources;
 using Content.Client.Stylesheets;
 using Robust.Client.Graphics;
-using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.IoC;
@@ -15,9 +13,9 @@ namespace Content.Client._RMC14.UserInterface.Crt;
 /// </summary>
 public sealed class RMCCrtThemeScope : PanelContainer
 {
+    private readonly IRMCCrtAppearanceManager _appearanceManager;
     private readonly RMCCrtEffectRenderer _effectsRenderer = new();
     private readonly StyleBoxFlat _style = new();
-    private readonly IResourceCache _resourceCache;
     private readonly IStylesheetManager _stylesheet;
 
     private float _backgroundOpacity = 1;
@@ -37,6 +35,7 @@ public sealed class RMCCrtThemeScope : PanelContainer
     private RMCCrtPalettePreset _palette = RMCCrtPalettePreset.Blue;
 
     public RMCCrtPalette ResolvedPalette { get; private set; }
+    internal RMCCrtThemeContext ResolvedContext { get; private set; }
 
     public RMCCrtPalettePreset Palette
     {
@@ -95,17 +94,25 @@ public sealed class RMCCrtThemeScope : PanelContainer
 
     public RMCCrtThemeScope()
     {
-        _resourceCache = IoCManager.Resolve<IResourceCache>();
+        _appearanceManager = IoCManager.Resolve<IRMCCrtAppearanceManager>();
         _stylesheet = IoCManager.Resolve<IStylesheetManager>();
         PanelOverride = _style;
         ResolvedPalette = RMCCrtPalettes.Get(RMCCrtPalettePreset.Blue);
+        ResolvedContext = new RMCCrtThemeContext(ResolvedPalette, _appearanceManager.Settings);
         RefreshTheme();
     }
 
     protected override void EnteredTree()
     {
         base.EnteredTree();
+        _appearanceManager.AppearanceChanged += OnAppearanceChanged;
         RefreshTheme();
+    }
+
+    protected override void ExitedTree()
+    {
+        _appearanceManager.AppearanceChanged -= OnAppearanceChanged;
+        base.ExitedTree();
     }
 
     protected override void Draw(DrawingHandleScreen handle)
@@ -116,7 +123,7 @@ public sealed class RMCCrtThemeScope : PanelContainer
             PixelWidth,
             PixelHeight,
             UIScale,
-            Effects,
+            ResolvedContext.ResolveEffects(Effects),
             ScanlineSpacing,
             ScanlineThickness,
             RgbWidth,
@@ -124,6 +131,11 @@ public sealed class RMCCrtThemeScope : PanelContainer
             ScanlineOpacity,
             RgbOpacity,
             ResolvedPalette.Warning.WithAlpha(0.3f));
+    }
+
+    private void OnAppearanceChanged(RMCCrtAppearanceSettings settings)
+    {
+        RefreshTheme();
     }
 
     private void RefreshTheme()
@@ -143,9 +155,22 @@ public sealed class RMCCrtThemeScope : PanelContainer
                 CustomDisabledForeground)
             : RMCCrtPalettes.Get(Palette);
 
-        UpdatePanel();
-        Stylesheet = CreateStylesheet();
-        RMCCrtThemeHelpers.ApplyToDescendants(this, ResolvedPalette);
+        ResolvedContext = new RMCCrtThemeContext(ResolvedPalette, _appearanceManager.Settings);
+        if (ResolvedContext.ThemeEnabled)
+        {
+            RemoveStyleClass(StyleNano.StyleClassBorderedWindowPanel);
+            PanelOverride = _style;
+            UpdatePanel();
+            Stylesheet = CreateCrtStylesheet();
+        }
+        else
+        {
+            AddStyleClass(StyleNano.StyleClassBorderedWindowPanel);
+            PanelOverride = null;
+            Stylesheet = _stylesheet.SheetNano;
+        }
+
+        RMCCrtThemeHelpers.ApplyToDescendants(this, ResolvedContext);
     }
 
     private void UpdatePanel()
@@ -155,16 +180,13 @@ public sealed class RMCCrtThemeScope : PanelContainer
         _style.BorderThickness = new Thickness(BorderThickness);
     }
 
-    private Stylesheet CreateStylesheet()
+    private Stylesheet CreateCrtStylesheet()
     {
-        var mono = _resourceCache.GetFont("/EngineFonts/NotoSans/NotoSansMono-Regular.ttf", 12);
         var rules = _stylesheet.SheetNano.Rules.Concat(new StyleRule[]
         {
             Element<Label>().Class(RMCCrtStyleClasses.Text)
-                .Prop(Label.StylePropertyFont, mono)
                 .Prop(Label.StylePropertyFontColor, ResolvedPalette.Foreground),
             Element<Label>().Class(RMCCrtStyleClasses.Heading)
-                .Prop(Label.StylePropertyFont, mono)
                 .Prop(Label.StylePropertyFontColor, ResolvedPalette.Foreground),
             Element<RichTextLabel>().Class(RMCCrtStyleClasses.Text)
                 .Prop(Control.StylePropertyModulateSelf, ResolvedPalette.Foreground),

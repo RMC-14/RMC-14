@@ -1,3 +1,4 @@
+using Content.Client.Stylesheets;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface.Controls;
 
@@ -6,12 +7,15 @@ namespace Content.Client._RMC14.UserInterface.Crt;
 public sealed class RMCCrtPanel : PanelContainer, IRMCCrtThemedControl
 {
     private readonly RMCCrtEffectRenderer _effectsRenderer = new();
-    private readonly StyleBoxFlat _style = new();
+    private readonly StyleBoxFlat _crtStyle = new();
+    private readonly StyleBoxFlat _nanoWarningStyle = new();
     private Color? _backgroundOverride;
     private Color? _borderOverride;
     private float _backgroundOpacity = 0.72f;
     private float _borderThickness = 1;
-    private RMCCrtPalette _palette = RMCCrtPalettes.Get(RMCCrtPalettePreset.Blue);
+    private RMCCrtThemeContext _context = new(
+        RMCCrtPalettes.Get(RMCCrtPalettePreset.Blue),
+        new RMCCrtAppearanceSettings(true, true));
     private RMCCrtPanelVariant _variant = RMCCrtPanelVariant.Surface;
 
     public RMCCrtEffects Effects { get; set; }
@@ -53,13 +57,18 @@ public sealed class RMCCrtPanel : PanelContainer, IRMCCrtThemedControl
 
     public RMCCrtPanel()
     {
-        PanelOverride = _style;
+        PanelOverride = _crtStyle;
         UpdateStyle();
     }
 
-    public void ApplyCrtTheme(RMCCrtPalette palette)
+    void IRMCCrtThemedControl.ApplyCrtTheme(RMCCrtThemeContext context)
     {
-        _palette = palette;
+        ApplyAppearance(context);
+    }
+
+    internal void ApplyAppearance(RMCCrtThemeContext context)
+    {
+        _context = context;
         UpdateStyle();
     }
 
@@ -73,7 +82,7 @@ public sealed class RMCCrtPanel : PanelContainer, IRMCCrtThemedControl
     protected override void EnteredTree()
     {
         base.EnteredTree();
-        ApplyCrtTheme(RMCCrtThemeHelpers.FindPalette(this));
+        ApplyAppearance(RMCCrtThemeHelpers.FindContext(this));
     }
 
     protected override void Draw(DrawingHandleScreen handle)
@@ -84,30 +93,65 @@ public sealed class RMCCrtPanel : PanelContainer, IRMCCrtThemedControl
             PixelWidth,
             PixelHeight,
             UIScale,
-            Effects,
+            _context.ResolveEffects(Effects),
             ScanlineSpacing,
             ScanlineThickness,
             RgbWidth,
             StripeWidth,
             ScanlineOpacity,
             RgbOpacity,
-            _palette.Background.WithAlpha(0.3f));
+            _context.Palette.Background.WithAlpha(0.3f));
     }
 
     private void UpdateStyle()
     {
+        RemoveStyleClass(StyleNano.StyleClassBorderedWindowPanel);
+        RemoveStyleClass(StyleNano.StyleClassInset);
+
+        if (!_context.ThemeEnabled)
+        {
+            UpdateNanoStyle();
+            return;
+        }
+
+        PanelOverride = _crtStyle;
+        var palette = _context.Palette;
         var background = Variant switch
         {
-            RMCCrtPanelVariant.Inset => _palette.Background.WithAlpha(Math.Clamp(BackgroundOpacity + 0.15f, 0, 1)),
-            RMCCrtPanelVariant.Surface => _palette.Background.WithAlpha(Math.Clamp(BackgroundOpacity, 0, 1)),
+            RMCCrtPanelVariant.Inset => palette.Background.WithAlpha(Math.Clamp(BackgroundOpacity + 0.15f, 0, 1)),
+            RMCCrtPanelVariant.Surface => palette.Background.WithAlpha(Math.Clamp(BackgroundOpacity, 0, 1)),
             RMCCrtPanelVariant.Transparent => Color.Transparent,
-            RMCCrtPanelVariant.Warning => _palette.Warning.WithAlpha(0.72f),
-            _ => _palette.Background.WithAlpha(Math.Clamp(BackgroundOpacity, 0, 1)),
+            RMCCrtPanelVariant.Warning => palette.Warning.WithAlpha(0.72f),
+            _ => palette.Background.WithAlpha(Math.Clamp(BackgroundOpacity, 0, 1)),
         };
-        var border = Variant == RMCCrtPanelVariant.Warning ? _palette.Warning : _palette.Border;
+        var border = Variant == RMCCrtPanelVariant.Warning ? palette.Warning : palette.Border;
 
-        _style.BackgroundColor = _backgroundOverride ?? background;
-        _style.BorderColor = _borderOverride ?? border;
-        _style.BorderThickness = new Thickness(BorderThickness);
+        _crtStyle.BackgroundColor = _backgroundOverride ?? background;
+        _crtStyle.BorderColor = _borderOverride ?? border;
+        _crtStyle.BorderThickness = new Thickness(BorderThickness);
+    }
+
+    private void UpdateNanoStyle()
+    {
+        switch (Variant)
+        {
+            case RMCCrtPanelVariant.Inset:
+                PanelOverride = null;
+                AddStyleClass(StyleNano.StyleClassInset);
+                break;
+            case RMCCrtPanelVariant.Surface:
+                PanelOverride = null;
+                AddStyleClass(StyleNano.StyleClassBorderedWindowPanel);
+                break;
+            case RMCCrtPanelVariant.Transparent:
+                PanelOverride = null;
+                break;
+            case RMCCrtPanelVariant.Warning:
+                _nanoWarningStyle.BackgroundColor = StyleNano.PanelDark;
+                _nanoWarningStyle.BorderColor = StyleNano.ConcerningOrangeFore;
+                _nanoWarningStyle.BorderThickness = new Thickness(BorderThickness);
+                PanelOverride = _nanoWarningStyle;
+                break;
+        }
     }
 }
