@@ -3102,3 +3102,14 @@
     state: noelle_shimizu-lockhart
   - type: PatronFigurine
     id: a825851d-a9e6-48db-b7d2-2307fef49ff5
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronNibbles-The-Fixtures
+  name: Nibbles-The-Fixtures figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: nibbles-the-fixtures
+  - type: PatronFigurine
+    id: 397f7666-e6d2-4a8f-9124-1c58628055c6
