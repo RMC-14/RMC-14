@@ -3083,3 +3083,22 @@
     state: rosemary_aw_glaive
   - type: PatronFigurine
     id: fd50277f-ebce-4d08-b430-fa96a68b09b5
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMoffusSnowlight
+  name: Moffus Snowlight figurine
+  description: "A seemingly unremarkable, tan colored moth person. Despite being somewhat new to the flight crew, this little guy is still highly experienced and not afraid to give you advice on how to run the dropships.\n\nWhat? \"Marcus Snow\"? I think I've heard of that one before...\n\nEh, this figurine is cooler anyways. "
+  components:
+  - type: Sprite
+    state: moffus_snowlight
+  - type: PatronFigurine
+    id: 19695197-da11-43da-9c91-6c57e4f23e67
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Voice/Moth/moth_squeak.ogg
+      params:
+        volume: 5
+        maxDistance: 1
+  - type: UseDelay
+    delay: 30
