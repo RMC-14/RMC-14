@@ -3061,3 +3061,14 @@
     state: cheery_heather
   - type: PatronFigurine
     id: d461098b-d57c-4bd3-9671-5dff32f70b9b
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSamanthaMotherOppenheimer
+  name: Samantha 'Mother' Oppenheimer figurine
+  description: "My work... my work lies where i left it... if there is anyone brave enough and... clever enough, to take it and... return, the keys to time... perhaps the foundation... of a new empire..."
+  components:
+  - type: Sprite
+    state: samantha_mother_oppenheimer
+  - type: PatronFigurine
+    id: f2dd8a36-c553-4f7a-9f31-0852cdb326e5
