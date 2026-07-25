@@ -518,8 +518,7 @@ public abstract class SharedWoundsSystem : EntitySystem
             }
         }
 
-        // Clone
-        wounded.WoundGroups = woundable.Comp.WoundGroups.ToDictionary();
+        wounded.WoundGroups = woundable.Comp.WoundGroups;
 
         TimeSpan? newDuration = duration == TimeSpan.MaxValue ? null : time + duration;
         wounded.Wounds.Add(new Wound(total, FixedPoint2.Zero, bloodloss, newDuration, type, false));
