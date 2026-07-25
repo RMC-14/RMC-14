@@ -352,11 +352,11 @@ public sealed class HealthScannerUiData
         // TODO RMC14 Pain related medical advice
 
         // Damage related
-        var brute = uiState.Damage.DamageDict.GetValueOrDefault(BruteGroup);
-        var burn = uiState.Damage.DamageDict.GetValueOrDefault(BurnGroup);
-        var toxin = uiState.Damage.DamageDict.GetValueOrDefault(ToxinGroup);
-        var airloss = uiState.Damage.DamageDict.GetValueOrDefault(AirlossGroup);
-        var genetic = uiState.Damage.DamageDict.GetValueOrDefault(GeneticGroup);
+        var brute = uiState.Damage.GetDamagePerGroup(_protoManager).GetValueOrDefault(BruteGroup);
+        var burn = uiState.Damage.GetDamagePerGroup(_protoManager).GetValueOrDefault(BurnGroup);
+        var toxin = uiState.Damage.GetDamagePerGroup(_protoManager).GetValueOrDefault(ToxinGroup);
+        var airloss = uiState.Damage.GetDamagePerGroup(_protoManager).GetValueOrDefault(AirlossGroup);
+        var genetic = uiState.Damage.GetDamagePerGroup(_protoManager).GetValueOrDefault(GeneticGroup);
 
         if (airloss > 0 && uiState.State != Shared.Mobs.MobState.Dead)
         {
