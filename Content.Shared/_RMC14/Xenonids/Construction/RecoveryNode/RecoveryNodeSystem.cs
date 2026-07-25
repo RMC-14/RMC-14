@@ -31,6 +31,9 @@ public sealed partial class RecoveryNodeSystem : EntitySystem
     private EntityQuery<XenoRestingComponent> _restingQuery;
     private EntityQuery<XenoComponent> _xenoQuery;
 
+    private readonly HashSet<EntityUid> _nearbyEntities = [];
+    private readonly HashSet<EntityUid> _possibleTargets = [];
+
     public override void Initialize()
     {
         base.Initialize();
@@ -62,14 +65,16 @@ public sealed partial class RecoveryNodeSystem : EntitySystem
 
     private void TryRecoverRandomXeno(Entity<RecoveryNodeComponent> recoveryNode)
     {
-        var nearbyEntities = _lookup.GetEntitiesInRange(recoveryNode, recoveryNode.Comp.Range);
-        var possibleTargets = new List<EntityUid>();
-        foreach (var nearbyEntity in nearbyEntities)
+        _nearbyEntities.Clear();
+        _possibleTargets.Clear();
+
+        _lookup.GetEntitiesInRange(recoveryNode, recoveryNode.Comp.Range, _nearbyEntities);
+        foreach (var nearbyEntity in _nearbyEntities)
         {
-            if (!_hive.FromSameHive(recoveryNode.Owner, nearbyEntity) ||
-                !_xenoQuery.HasComp(nearbyEntity) ||
+            if (!_xenoQuery.HasComp(nearbyEntity) ||
                 !_restingQuery.HasComp(nearbyEntity) ||
-                _mob.IsDead(nearbyEntity))
+                _mob.IsDead(nearbyEntity) ||
+                !_hive.FromSameHive(recoveryNode.Owner, nearbyEntity))
             {
                 continue;
             }
@@ -88,18 +93,18 @@ public sealed partial class RecoveryNodeSystem : EntitySystem
                     break;
             }
 
-            possibleTargets.Add(nearbyEntity);
+            _possibleTargets.Add(nearbyEntity);
         }
 
         recoveryNode.Comp.NextRecoveryAt = _time.CurTime + recoveryNode.Comp.Cooldown;
 
-        if (possibleTargets.Count == 0)
+        if (_possibleTargets.Count == 0)
         {
             Dirty(recoveryNode);
             return;
         }
 
-        var selectedTarget = _random.Pick(possibleTargets);
+        var selectedTarget = _random.Pick(_possibleTargets);
         var recover = new DoAfterArgs(EntityManager,
             recoveryNode,
             recoveryNode.Comp.Cooldown,

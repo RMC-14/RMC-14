@@ -2,6 +2,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Xenonids.Construction.RecoveryNode;
 
@@ -30,6 +31,7 @@ public sealed partial class RecoveryNodeComponent : Component
     public DoAfterId? DoAfter;
 }
 
+[Serializable, NetSerializable]
 public enum RecoveryType
 {
     Health,
