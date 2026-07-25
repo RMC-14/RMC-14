@@ -1,5 +1,9 @@
-﻿using Content.Shared.Chemistry.Components;
+using Content.Shared._RMC14.Medical.Wounds;
+using Content.Shared.Chemistry.Components;
+using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Medical.Scanner;
@@ -11,6 +15,9 @@ namespace Content.Shared._RMC14.Medical.Scanner;
 [DataRecord, Serializable, NetSerializable]
 public readonly record struct HealthScanState(
     NetEntity Target,
+    DamageSpecifier Damage,
+    List<Wound> Wounds,
+    Dictionary<ProtoId<DamageGroupPrototype>, WoundType> WoundTypes,
     FixedPoint2 Blood,
     FixedPoint2 MaxBlood,
     float? Temperature,

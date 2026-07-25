@@ -1,9 +1,9 @@
-using System.Linq;
 using Content.Server.StationRecords.Systems;
 using Content.Shared._RMC14.Body;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Medical.Scanner;
 using Content.Shared._RMC14.Medical.Surgery.Steps.Parts;
+using Content.Shared._RMC14.Medical.Wounds;
 using Content.Shared._RMC14.Mobs;
 using Content.Shared._RMC14.RMCMedicalRecords;
 using Content.Shared._RMC14.Temperature;
@@ -15,6 +15,7 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.GameTicking;
 using Robust.Shared.Prototypes;
+using System.Linq;
 
 namespace Content.Server._RMC14.RMCMedicalRecords;
 
@@ -76,9 +77,15 @@ public sealed class RMCMedicalRecordsSystem : SharedRMCMedicalRecordsSystem
 
         var pulse = _rmcPulse.TryGetPulseReading(target, true, out _);
         var bleeding = _rmcBloodstream.IsBleeding(target);
+        var damage = TryComp<DamageableComponent>(target, out var dam) ? dam.Damage : new();
+        var wounds = TryComp<WoundedComponent>(target, out var wound) ? wound.Wounds : new();
+        var woundTypes = wound != null ? wound.WoundGroups : new();
 
         return new HealthScanState(
             GetNetEntity(target),
+            damage,
+            wounds,
+            woundTypes,
             blood,
             maxBlood,
             temperature,
