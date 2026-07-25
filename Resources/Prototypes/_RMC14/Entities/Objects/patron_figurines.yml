@@ -3077,7 +3077,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronRosemaryAWGlaive
   name: Rosemary AW Glaive figurine
-  description: ""
+  description: "The Galaxy's Second-best Henchwoman."
   components:
   - type: Sprite
     state: rosemary_aw_glaive
