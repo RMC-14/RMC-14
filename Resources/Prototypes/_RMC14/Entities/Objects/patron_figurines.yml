@@ -2514,17 +2514,6 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronEats-The-Crayons
-  name: Eats-The-Crayons figurine
-  #description: ""
-  components:
-  - type: Sprite
-    state: eats-the-crayons
-  - type: PatronFigurine
-    id: a825851d-a9e6-48db-b7d2-2307fef49ff5
-
-- type: entity
-  parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronKaliDarland
   name: Kali Darland figurine
   description: "This is a young martian felinid. All craftsmanship is of the highest quality.\nShe holds her rifle slung over her shoulder, striking a smug, triumphant pose. Ninth time's the charm, darling."
@@ -3102,3 +3091,14 @@
         maxDistance: 1
   - type: UseDelay
     delay: 30
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronNoelleShimizu-Lockhart
+  name: Noelle Shimizu-Lockhart figurine
+  description: "Noelle Shimizu-Lockhart - We-Ya Office Edition\n\nOne of the many poised faces of Weston-Yamada diplomacy. Presented in her signature executive attire, she reflects the refinement, discipline, and quiet confidence of Her Majesty the Empress' Core Worlds. She does not look as though she belongs on the Frontier. This collectible figurine commemorates one of Weston-Yamada's most respectable Corporate Liaisons and includes a subtle tribute to her long-running-if decidedly professional-office rivalry with Executive Specialist Geraldine Birgitsdottir.\n\nCuriously, the figurine smells faintly of freshly printed paper and perfume."
+  components:
+  - type: Sprite
+    state: noelle_shimizu-lockhart
+  - type: PatronFigurine
+    id: a825851d-a9e6-48db-b7d2-2307fef49ff5
