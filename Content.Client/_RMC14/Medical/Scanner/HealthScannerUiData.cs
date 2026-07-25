@@ -285,7 +285,7 @@ public sealed class HealthScannerUiData
             return;
 
         // Defibrillation related
-        if (_mob.IsDead(target))
+        if (uiState.State == Shared.Mobs.MobState.Dead)
         {
             if (_mobThresholds.TryGetDeadThreshold(target, out var deadThreshold))
             {
@@ -358,7 +358,7 @@ public sealed class HealthScannerUiData
         var airloss = uiState.Damage.DamageDict.GetValueOrDefault(AirlossGroup);
         var genetic = uiState.Damage.DamageDict.GetValueOrDefault(GeneticGroup);
 
-        if (airloss > 0 && !_mob.IsDead(target))
+        if (airloss > 0 && uiState.State != Shared.Mobs.MobState.Dead)
         {
             if (airloss > 10 && _mob.IsCritical(target))
                 AddAdvice(Loc.GetString("rmc-health-analyzer-advice-cpr-crit"), window);
@@ -370,7 +370,7 @@ public sealed class HealthScannerUiData
         if (brute > 30 &&
             uiState.Chemicals != null &&
             !uiState.Chemicals.ContainsReagent("CMBicaridine", null) &&
-            !_mob.IsDead(target))
+            uiState.State != Shared.Mobs.MobState.Dead)
         {
             AddAdvice(Loc.GetString("rmc-health-analyzer-advice-bicaridine"), window);
         }
@@ -378,7 +378,7 @@ public sealed class HealthScannerUiData
         if (burn > 30 &&
             uiState.Chemicals != null &&
             !uiState.Chemicals.ContainsReagent("CMKelotane", null) &&
-            !_mob.IsDead(target))
+            uiState.State != Shared.Mobs.MobState.Dead)
         {
             AddAdvice(Loc.GetString("rmc-health-analyzer-advice-kelotane"), window);
         }
@@ -387,7 +387,7 @@ public sealed class HealthScannerUiData
             uiState.Chemicals != null &&
             !uiState.Chemicals.ContainsReagent("CMDylovene", null) &&
             !uiState.Chemicals.ContainsReagent("Inaprovaline", null) &&
-            !_mob.IsDead(target))
+            uiState.State != Shared.Mobs.MobState.Dead)
         {
             AddAdvice(Loc.GetString("rmc-health-analyzer-advice-dylovene"), window);
         }

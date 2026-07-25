@@ -8,6 +8,7 @@ using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
+using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Storage.Components;
@@ -204,8 +205,9 @@ public sealed class HealthScannerSystem : EntitySystem
         var damage = TryComp<DamageableComponent>(target, out var dam) ? dam.Damage : new();
         var wounds = TryComp<WoundedComponent>(target, out var wound) ? wound.Wounds : new();
         var woundTypes = wound != null ? wound.WoundGroups : new();
+        var mobState = TryComp<MobStateComponent>(target, out var mob) ? mob.CurrentState : MobState.Alive;
 
-        var state = new HealthScanState(GetNetEntity(target), damage, wounds, woundTypes, blood, maxBlood, temperature, pulse, chemicals, bleeding, scanner.Comp.DetailLevel);
+        var state = new HealthScanState(GetNetEntity(target), mobState, damage, wounds, woundTypes, blood, maxBlood, temperature, pulse, chemicals, bleeding, scanner.Comp.DetailLevel);
 
         _ui.SetUiState(scanner.Owner, HealthScannerUIKey.Key, new HealthScannerBuiState(state));
     }

@@ -3,6 +3,7 @@ using Content.Shared.Chemistry.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
+using Content.Shared.Mobs;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
@@ -15,6 +16,7 @@ namespace Content.Shared._RMC14.Medical.Scanner;
 [DataRecord, Serializable, NetSerializable]
 public readonly record struct HealthScanState(
     NetEntity Target,
+    MobState State,
     DamageSpecifier Damage,
     List<Wound> Wounds,
     Dictionary<ProtoId<DamageGroupPrototype>, WoundType> WoundTypes,

@@ -14,6 +14,8 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.GameTicking;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Robust.Shared.Prototypes;
 using System.Linq;
 
@@ -80,9 +82,11 @@ public sealed class RMCMedicalRecordsSystem : SharedRMCMedicalRecordsSystem
         var damage = TryComp<DamageableComponent>(target, out var dam) ? dam.Damage : new();
         var wounds = TryComp<WoundedComponent>(target, out var wound) ? wound.Wounds : new();
         var woundTypes = wound != null ? wound.WoundGroups : new();
+        var state = TryComp<MobStateComponent>(target, out var mobState) ? mobState.CurrentState : MobState.Alive;
 
         return new HealthScanState(
             GetNetEntity(target),
+            state,
             damage,
             wounds,
             woundTypes,
