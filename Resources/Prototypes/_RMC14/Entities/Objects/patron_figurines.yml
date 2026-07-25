@@ -3113,3 +3113,14 @@
     state: nibbles-the-fixtures
   - type: PatronFigurine
     id: 397f7666-e6d2-4a8f-9124-1c58628055c6
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSteveLungCancerMichaels
+  name: Steve 'Lung Cancer' Michaels figurine
+  description: "WARNING:\n\nManufactured in a facility that produces tobacco products. Thirdhand smoke exposure is likely."
+  components:
+  - type: Sprite
+    state: steve_lung_cancer_michaels
+  - type: PatronFigurine
+    id: 15c4354c-d94c-4085-a264-dcb6f2a38c05
