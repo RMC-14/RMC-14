@@ -3072,3 +3072,14 @@
     state: samantha_mother_oppenheimer
   - type: PatronFigurine
     id: f2dd8a36-c553-4f7a-9f31-0852cdb326e5
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRosemaryAWGlaive
+  name: Rosemary AW Glaive figurine
+  description: ""
+  components:
+  - type: Sprite
+    state: rosemary_aw_glaive
+  - type: PatronFigurine
+    id: fd50277f-ebce-4d08-b430-fa96a68b09b5
