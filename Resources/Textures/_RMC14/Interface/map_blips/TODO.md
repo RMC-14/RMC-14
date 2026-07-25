@@ -1,9 +1,9 @@
 Delete this file when done
 
 Code side changes
+    Ignore map files, those will fix when they are resaved, probably
 
-state: pmc_sg # RMC14 TODO: Map blip to match icon, this will probably be easy to find, check the job icon
+Merge https://github.com/RMC-14/RMC-14/pull/9296
 
-Account for https://github.com/RMC-14/RMC-14/pull/9296
-
-UNMC/Marine/spec_anti_materiel_sniper is UNKOWN
+UNMC/Marine/spec_anti_materiel_sniper is unattributed
+We-Ya/PMC/pmc_sniper was unattributed, so it was removed
