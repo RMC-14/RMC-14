@@ -2,11 +2,7 @@ Delete this file when done
 
 Code side changes
 
-
-    - type: TacticalMapIcon
-      icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: pmc_sg # RMC14 TODO: Map blip to match icon, this will probably be easy to find, check the job icon
+state: pmc_sg # RMC14 TODO: Map blip to match icon, this will probably be easy to find, check the job icon
 
 Account for https://github.com/RMC-14/RMC-14/pull/9296
 

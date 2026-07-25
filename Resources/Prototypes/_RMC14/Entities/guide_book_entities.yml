@@ -15,7 +15,7 @@
   name: Lesser
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
+  - type: Sprite #
     layers:
     - state: background_xeno
     - state: lesser_drone
@@ -26,7 +26,7 @@
   name: Parasite
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
+  - type: Sprite #
     layers:
     - state: background_xeno
     - state: parasite
@@ -37,7 +37,7 @@
   name: Larva
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
+  - type: Sprite #
     layers:
     - state: background_xeno
     - state: larva
@@ -49,7 +49,7 @@
   name: Drone
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
+  - type: Sprite #
     layers:
     - state: background_xeno
     - state: drone
@@ -60,7 +60,7 @@
   name: Hivelord
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
+  - type: Sprite #
     layers:
     - state: background_xeno
     - state: hivelord
@@ -71,7 +71,7 @@
   name: Burrower
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
+  - type: Sprite #
     layers:
     - state: background_xeno
     - state: burrower
@@ -82,7 +82,7 @@
   name: Carrier
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
+  - type: Sprite #
     layers:
     - state: background_xeno
     - state: carrier
@@ -94,7 +94,7 @@
   name: Defender
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
+  - type: Sprite #
     layers:
     - state: background_xeno
     - state: defender
@@ -105,7 +105,7 @@
   name: Warrior
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
+  - type: Sprite #
     layers:
     - state: background_xeno
     - state: warrior
@@ -116,10 +116,11 @@
   name: Crusher
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
+  - type: Sprite #
     layers:
     - state: background_xeno
     - state: crusher
+
 # Sentinel Castes
 - type: entity
   parent: RMCBaseMapIcon
@@ -127,7 +128,7 @@
   name: Sentinel
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
+  - type: Sprite #
     layers:
     - state: background_xeno
     - state: sentinel
@@ -138,7 +139,7 @@
   name: Spitter
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
+  - type: Sprite #
     layers:
     - state: background_xeno
     - state: spitter
@@ -149,7 +150,7 @@
   name: Boiler
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
+  - type: Sprite #
     layers:
     - state: background_xeno
     - state: boiler
@@ -161,7 +162,7 @@
   name: Runner
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
+  - type: Sprite #
     layers:
     - state: background_xeno
     - state: runner
@@ -172,7 +173,7 @@
   name: Lurker
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
+  - type: Sprite #
     layers:
     - state: background_xeno
     - state: lurker
@@ -183,7 +184,7 @@
   name: Ravager
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
+  - type: Sprite #
     layers:
     - state: background_xeno
     - state: ravager
@@ -196,7 +197,7 @@
   name: Praetorian
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
+  - type: Sprite #
     layers:
     - state: background_xeno
     - state: praetorian
@@ -207,7 +208,7 @@
   name: Queen
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
+  - type: Sprite #
     layers:
     - state: xeno_ruler
     - state: xenoqueen
@@ -218,7 +219,7 @@
   name: Leader Crown
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
+  - type: Sprite #
     layers:
     - state: background_xeno
     - state: xeno
@@ -232,7 +233,7 @@
   name: Hive core
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
+  - type: Sprite #
     state: core
 
 - type: entity
@@ -241,7 +242,7 @@
   name: Egg morpher
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
+  - type: Sprite #
     state: morpher
 
 - type: entity
@@ -250,7 +251,7 @@
   name: Hive cluster
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
+  - type: Sprite #
     state: cluster
 
 - type: entity
@@ -259,7 +260,7 @@
   name: Tunnel
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
+  - type: Sprite #
     state: xenotunnel
 
 - type: entity
@@ -268,7 +269,7 @@
   name: Recovery node
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
+  - type: Sprite #
     state: recovery_node
 
 - type: entity
@@ -277,5 +278,5 @@
   name: hive pylon
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
+  - type: Sprite #
     state: pylon
