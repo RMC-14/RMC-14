@@ -188,9 +188,6 @@ public sealed class HealthScannerSystem : EntitySystem
         if (!_rmcHands.TryGetHolder(scanner, out var user) || !_interact.InRangeAndAccessible(user, scanner.Comp.Target.Value))
             return;
 
-        if (!TryComp(target, out DamageableComponent? damageable))
-            return;
-
         FixedPoint2 blood = 0;
         FixedPoint2 maxBlood = 0;
         if (_rmcBloodstream.TryGetBloodSolution(target, out var bloodstream))
