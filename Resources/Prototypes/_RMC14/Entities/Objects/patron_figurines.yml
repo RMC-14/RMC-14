@@ -3050,3 +3050,14 @@
     state: cade_stripes_sagan
   - type: PatronFigurine
     id: 26f7eb05-ab44-460a-bd6b-036929ef9951
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronCheeryHeather
+  name: Cheery Heather figurine
+  description: "A mini of a middle-aged rabbit woman.  She has a smile on her face, and dark circles under her eyes.\n\nShe's holding the usual."
+  components:
+  - type: Sprite
+    state: cheery_heather
+  - type: PatronFigurine
+    id: d461098b-d57c-4bd3-9671-5dff32f70b9b
