@@ -8,13 +8,37 @@
   },
   "states": [
     {
-      "name": "cluster"
+      "name": "cluster",
+      "delays": [
+        [
+          4,
+          0.15,
+          0.15
+        ]
+      ]
     },
     {
-      "name": "core"
+      "name": "core",
+      "delays": [
+        [
+          0.7,
+          0.125,
+          0.125,
+          0.125
+        ]
+      ]
     },
     {
-      "name": "morpher"
+      "name": "morpher",
+      "delays": [
+        [
+          4,
+          0.05,
+          0.1,
+          0.2,
+          0.5
+        ]
+      ]
     },
     {
       "name": "pylon"

@@ -1,17 +1,13 @@
 Delete this file when done
 
 Code side changes
-Meta Files - This will mimic the file structure, if a folder isn't present its been completed.
-    UNMC
-        auxiliary_support
-        backgrounds
-        marine
-        medical
-        military_police
-        other
-        requisition
+
 
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: pmc_sg # RMC14 TODO: Map blip to match icon, this will probably be easy to find, check the job icon
+
+Account for https://github.com/RMC-14/RMC-14/pull/9296
+
+UNMC/Marine/spec_anti_materiel_sniper is UNKOWN
