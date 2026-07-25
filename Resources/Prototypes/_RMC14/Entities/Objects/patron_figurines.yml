@@ -3033,7 +3033,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronJatayuNerdCorvuson
   name: Jatayu 'Nerd' Corvuson figurine
-  #description: ""
+  description: "\"They're jumping me!!\""
   components:
   - type: Sprite
     state: jatayu_nerd_corvuson
