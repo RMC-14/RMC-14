@@ -28,7 +28,7 @@
     - type: RMCAllowSuitStorage
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/UNMC/military_police.rsi
         state: cmp
       background:
         sprite: /Textures/_RMC14/Interface/map_blips/CMB.rsi
