@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from https://github.com/cmss13-devs/cmss13/commit/70f98497ccd968d049906e499be8aa1b8f219f8a, pmc tl by noctyrnal (Github)",
+  "copyright": "Taken from https://github.com/cmss13-devs/cmss13/commit/70f98497ccd968d049906e499be8aa1b8f219f8a, pmc tl by noctyrnal (Github), pmc_spec from https://github.com/cmss13-devs/cmss13/pull/8088",
   "size": {
     "x": 7,
     "y": 7
@@ -30,6 +30,9 @@
     },
     {
       "name": "pmc_sg"
+    },
+    {
+      "name": "pmc_sped"
     },
     {
       "name": "pmc_syn"
