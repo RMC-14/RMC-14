@@ -325,10 +325,10 @@
   - type: MotionDetectorTracked
   - type: TacticalMapIcon
     icon:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
       state: xeno
     background:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/Xeno/other.rsi
       state: background_xeno
   - type: XenoMapTracked
   - type: Evasion
