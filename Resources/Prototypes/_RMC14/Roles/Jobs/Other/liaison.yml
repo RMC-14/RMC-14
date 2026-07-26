@@ -56,7 +56,7 @@
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: cl
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/We-Ya/backgrounds.rsi
         state: background_goon
     - type: RMCTrackable
 

@@ -38,7 +38,7 @@
     - type: MarineOrders
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/We-Ya/liaison_ranks.rsi
         state: ass_man
       background:
         sprite: /Textures/_RMC14/Interface/map_blips/We-Ya/backgrounds.rsi

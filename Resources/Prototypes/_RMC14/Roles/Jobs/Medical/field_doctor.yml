@@ -35,7 +35,7 @@
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: field_doctor
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/UNMC/backgrounds.rsi
         state: background_medical
   hidden: true # TODO RMC14
 

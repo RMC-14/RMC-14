@@ -78,7 +78,7 @@
   - type: TacticalMapTracked
   - type: TacticalMapIcon
     icon:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/Xeno/structures.rsi
       state: core
   - type: RMCAlternateSprite
     normalSprite: _RMC14/Structures/Xenos/hive_structures.rsi
@@ -182,5 +182,5 @@
   - type: TacticalMapTracked
   - type: TacticalMapIcon
     icon:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/Xeno/structures.rsi
       state: pylon

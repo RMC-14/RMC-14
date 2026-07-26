@@ -39,7 +39,7 @@
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: mp
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/CMB.rsi
         state: background_cmb
   greeting: rmc-job-greeting-riot-in-progress-CMB-RCO
 
