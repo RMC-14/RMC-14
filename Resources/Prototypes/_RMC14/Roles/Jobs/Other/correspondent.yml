@@ -34,7 +34,7 @@
       prefix: cm-job-prefix-correspondent # TODO RMC14 combat correspondent is CC
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/UNMC/other.rsi
         state: correspondent
       background:
         sprite: /Textures/_RMC14/Interface/map_blips/UNMC/backgrounds.rsi
@@ -75,7 +75,7 @@
       prefix: cm-job-prefix-combat-correspondent
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/UNMC/other.rsi
         state: correspondent
       background:
         sprite: /Textures/_RMC14/Interface/map_blips/UNMC/backgrounds.rsi
