@@ -586,8 +586,7 @@ public sealed class OrbitalCannonSystem : EntitySystem
             LogType.RMCOrbitalBombardment,
             $"{ToPrettyString(initiator):player} initiated and {ToPrettyString(confirmer):player} confirmed OB safety {state}");
 
-        var cannons = EntityQueryEnumerator<OrbitalCannonComponent>();
-        if (cannons.MoveNext(out var cannon, out _))
+        if (TryGetClosestCannon(confirmer, out var cannon))
         {
             _core.CreateARESLog(
                 cannon,
