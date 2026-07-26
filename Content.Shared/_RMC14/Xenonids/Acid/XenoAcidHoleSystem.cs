@@ -103,6 +103,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         SubscribeLocalEvent<XenoAcidHoleWallComponent, RMCRepairableTargetAttemptEvent>(OnWallRepairAttempt);
         SubscribeLocalEvent<XenoAcidHoleWallComponent, EntityTerminatingEvent>(OnWallTerminating);
 
+        SubscribeLocalEvent<XenoWallWeedsComponent, ActivateInWorldEvent>(OnWeededWallActivateInWorld);
         SubscribeLocalEvent<XenoWallWeedsComponent, InteractHandEvent>(OnWeededWallInteractHand, before: [typeof(XenoNestSystem)]);
         SubscribeLocalEvent<XenoWallWeedsComponent, InteractUsingEvent>(OnWeededWallInteractUsing, before: [typeof(XenoNestSystem)]);
     }
@@ -761,6 +762,19 @@ public sealed class XenoAcidHoleSystem : EntitySystem
             return;
 
         TryStartCrawl(args.User, hole);
+    }
+
+    private void OnWeededWallActivateInWorld(Entity<XenoWallWeedsComponent> weeds, ref ActivateInWorldEvent args)
+    {
+        if (args.Handled ||
+            !TryGetWeededWallWithActiveHole(weeds.Owner, out var wall))
+        {
+            return;
+        }
+
+        var ev = new ActivateInWorldEvent(args.User, wall.Owner, args.Complex);
+        RaiseLocalEvent(wall.Owner, ev);
+        args.Handled = ev.Handled;
     }
 
     private void OnWeededWallInteractHand(Entity<XenoWallWeedsComponent> weeds, ref InteractHandEvent args)
