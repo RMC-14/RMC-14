@@ -1,245 +1,62 @@
-# RMC14 CRT UI controls
+# RMC14 CRT UI
 
-This directory contains reusable client-side controls for building CM-SS13-inspired CRT interfaces in RMC14. The
-library provides local palettes, semantic colors, panels, buttons, separators, icons, and optional display effects.
-It does not modify the global SS14 stylesheet and contains no game-specific text or behavior.
+Reusable client-side controls for CM-SS13-inspired interfaces. The library provides locally scoped palettes,
+semantic colors, icons, and optional display effects without changing the global SS14 stylesheet.
 
-Use these controls when several interfaces should share the same visual language without copying styles or depending
-on another console's UI classes.
+## Usage
 
-## User preferences
-
-The Accessibility tab exposes two archived client preferences:
-
-- `rmc.crt_theme_enabled` switches the entire library between CRT presentation and the standard Nano presentation;
-- `rmc.crt_effects_enabled` controls scanlines, RGB subpixels, and diagonal warning stripes while the CRT theme is on.
-
-Disabling the theme always suppresses display effects, but does not overwrite the effects preference. Re-enabling the
-theme restores the user's previous effects choice. Existing windows update when the settings are applied, and newly
-created controls inherit the current preference from their nearest theme scope.
-
-Nano fallback preserves layout, content, icons, semantic tones, and interaction state. CRT palettes, custom color
-overrides, monospace fonts, and effect layers are presentation details and must not leak into the fallback.
-
-## Quick start
-
-Add the CRT namespace to the window and wrap its contents in an `RMCCrtThemeScope`:
+Wrap CRT controls in an `RMCCrtThemeScope`:
 
 ```xml
-<DefaultWindow
-    xmlns="https://spacestation14.io"
-    xmlns:crt="clr-namespace:Content.Client._RMC14.UserInterface.Crt"
-    Title="{Loc example-console-title}"
-    MinSize="500 320">
-    <crt:RMCCrtThemeScope Palette="Blue" Effects="HorizontalScanlines">
-        <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="6">
-            <crt:RMCCrtLabel Text="{Loc example-console-heading}"
-                             Heading="True"
-                             HorizontalAlignment="Center" />
-            <crt:RMCCrtSeparator Thickness="2" />
-            <crt:RMCCrtActionButton Name="ActionButton" Access="Public"
-                                    Text="{Loc example-console-action}"
-                                    IconState="warning"
-                                    Variant="Filled"
-                                    MinHeight="36" />
-        </BoxContainer>
-    </crt:RMCCrtThemeScope>
-</DefaultWindow>
-```
-
-All user-facing text must remain in Fluent localization files. CRT controls only handle presentation.
-
-## Controls
-
-| Control | Purpose | Important properties |
-| --- | --- | --- |
-| `RMCCrtThemeScope` | Provides an isolated palette, stylesheet, background, border, and root display effects. | `Palette`, `Effects`, `BackgroundOpacity`, `BorderThickness` |
-| `RMCCrtPanel` | Creates a themed surface or nested status area. | `Variant`, `Effects`, `BackgroundOpacity`, `BorderThickness` |
-| `RMCCrtActionButton` | Displays a themed interactive action with an optional RSI icon. | `Variant`, `Tone`, `Selected`, `ContentAlignment`, `IconState`, `IconRsiPath` |
-| `RMCCrtLabel` | Displays a heading, normal text, or semantic status. | `Heading`, `Tone` |
-| `RMCCrtSeparator` | Draws a palette-colored horizontal or vertical line. | `Orientation`, `Thickness` |
-
-Normal Robust properties such as `Disabled`, `ToggleMode`, `MinSize`, `HorizontalExpand`, `Margin`, and alignment
-properties continue to work.
-
-## Palettes and local theming
-
-Available presets are `Blue`, `Brown`, `Green`, `Purple`, `Red`, `Spp`, `White`, and `Yellow`.
-
-```xml
-<crt:RMCCrtThemeScope Palette="Green" Effects="HorizontalScanlines">
-    <!-- Every CRT control below this scope inherits the green palette. -->
+<crt:RMCCrtThemeScope Palette="Blue" Effects="HorizontalScanlines">
+    <BoxContainer Orientation="Vertical">
+        <crt:RMCCrtLabel Text="{Loc example-title}" Heading="True" />
+        <crt:RMCCrtSeparator />
+        <crt:RMCCrtActionButton Text="{Loc example-action}"
+                                IconState="warning"
+                                Variant="Filled" />
+    </BoxContainer>
 </crt:RMCCrtThemeScope>
 ```
 
-Theme scopes are local and may be nested. A dynamically added CRT control receives the palette of the nearest scope
-when it enters the UI tree. Changing a scope's preset or custom colors at runtime reapplies the theme to its existing
-CRT descendants; nested scopes retain their own palettes.
+All user-facing text must use Fluent localization. Normal Robust properties such as `Disabled`, `MinSize`,
+`HorizontalExpand`, margins, and alignment continue to work.
 
-Use `Custom` when a menu needs its own color identity:
+Available reusable controls:
 
-```xml
-<crt:RMCCrtThemeScope Palette="Custom"
-                      CustomForeground="#E8F4FF"
-                      CustomBackground="#07131D"
-                      CustomBorder="#4E90BD"
-                      CustomFill="#2E6D98"
-                      CustomFillForeground="#E8F4FF"
-                      CustomGood="#39C66D"
-                      CustomWarning="#E2B93B"
-                      CustomDanger="#E05252"
-                      CustomMuted="#688393"
-                      CustomDisabledBackground="#293944"
-                      CustomDisabledForeground="#7993A2">
-    <!-- Menu contents. -->
-</crt:RMCCrtThemeScope>
-```
+- `RMCCrtThemeScope` - local palette, stylesheet, background, border, and root effects;
+- `RMCCrtPanel` - surface, inset, transparent, or warning panel;
+- `RMCCrtActionButton` - outline, filled, navigation, or danger action;
+- `RMCCrtLabel` - normal, heading, or semantic status text;
+- `RMCCrtSeparator` - horizontal or vertical separator;
+- `RMCCrtIcon` - palette-aware RSI icon.
 
-A custom palette should define all semantic colors. This keeps disabled, warning, danger, hover, and pressed states
-readable instead of recoloring only the foreground.
+Prefer semantic properties such as `Tone`, `Variant`, and `Selected` over directly changing child colors. Buttons use
+`/Textures/_RMC14/Interface/CRT/crt_icons.rsi` by default; matching state constants are available in `RMCCrtIcons`.
 
-## Panels
+## Appearance preferences
 
-`RMCCrtPanel.Variant` accepts:
+The Accessibility tab provides two archived client preferences, both enabled by default:
 
-- `Surface` — the normal framed panel;
-- `Inset` — a darker nested status area;
-- `Transparent` — no panel background;
-- `Warning` — a warning-colored panel.
+- `rmc.crt_theme_enabled` switches the library between CRT and standard Nano presentation;
+- `rmc.crt_effects_enabled` controls scanlines, RGB subpixels, and diagonal warning stripes.
 
-```xml
-<crt:RMCCrtPanel Variant="Inset">
-    <crt:RMCCrtLabel Name="StatusLabel" Access="Public"
-                     Text="{Loc example-console-status-ready}"
-                     Tone="Good"
-                     Margin="8" />
-</crt:RMCCrtPanel>
-```
+Disabling the theme always suppresses effects without overwriting the effects preference. Re-enabling it restores the
+previous effects choice. Applied preference changes update open windows, and controls added later inherit the current
+appearance from their nearest scope. Nested scopes keep their own palettes.
 
-For SS13-style warning stripes, enable the effect only on the warning panel:
+Nano mode preserves layout, content, icons, semantic tones, and interaction state while replacing CRT palettes,
+fonts, borders, color overrides, and effects with standard Nano styling.
 
-```xml
-<crt:RMCCrtPanel Variant="Warning"
-                 Effects="DiagonalStripes"
-                 StripeWidth="18">
-    <crt:RMCCrtLabel Text="{Loc example-console-warning}"
-                     HorizontalAlignment="Center"
-                     Margin="8" />
-</crt:RMCCrtPanel>
-```
+## Adding controls
 
-## Buttons
-
-`RMCCrtActionButton.Variant` accepts:
-
-- `Outline` — a secondary action on the CRT background;
-- `Filled` — a primary action;
-- `Navigation` — a section or page selector, normally combined with `Selected`;
-- `Danger` — a destructive or emergency action.
-
-Use `Tone` for semantic color without changing the role of the button. Available tones are `Default`, `Good`,
-`Muted`, `Warning`, and `Danger`.
-
-```xml
-<crt:RMCCrtActionButton Name="NavigationButton" Access="Public"
-                        Text="{Loc example-console-navigation}"
-                        IconState="id_card"
-                        Variant="Navigation"
-                        ToggleMode="True"
-                        ContentAlignment="Left" />
-```
-
-Update state through the public properties instead of directly tinting child controls:
-
-```csharp
-NavigationButton.Selected = true;
-ActionButton.Disabled = !canPerformAction;
-StatusLabel.Tone = RMCCrtTone.Good;
-```
-
-The button calculates its desired size from its icon, localized text, padding, and minimum size. Let the surrounding
-containers participate in normal Robust layout so longer localized text can grow the button and its column.
-
-## Icons
-
-Buttons use `/Textures/_RMC14/Interface/CRT/crt_icons.rsi` by default. The bundled state names are:
-
-`ban`, `bullhorn`, `cog`, `door_open`, `heartbeat`, `home`, `id_card`, `map`, `medal`, `paper_plane`, `users`, and
-`warning`.
-
-In C#, prefer the matching constants from `RMCCrtIcons`. To use a different RSI, set both `IconRsiPath` and
-`IconState`. Code may also assign a texture through `IconTexture`. Setting `IconState` to `null` clears the icon.
-
-```xml
-<crt:RMCCrtActionButton Text="{Loc example-console-custom-icon}"
-                        IconRsiPath="/Textures/_RMC14/Interface/example_icons.rsi"
-                        IconState="terminal" />
-```
-
-Do not use emoji or Unicode symbols as icon replacements: their appearance and metrics vary between fonts and they do
-not scale consistently with RSI assets.
-
-## Display effects
-
-`Effects` is a flags property. Multiple effects can be combined with commas:
-
-```xml
-Effects="HorizontalScanlines, DiagonalStripes"
-```
-
-Available effects:
-
-- `HorizontalScanlines` — the normal CRT scanline layer and the recommended default;
-- `RgbSubpixels` — an explicit RGB mask; disabled by default because it can reduce readability;
-- `DiagonalStripes` — warning stripes, usually applied to a small warning panel;
-- `None` — no effect layer.
-
-The root scope exposes `ScanlineOpacity`, `ScanlineSpacing`, `ScanlineThickness`, `RgbOpacity`, `RgbWidth`, and
-`StripeWidth`. Panels expose the same effect geometry options relevant to their local layer. Effect geometry is cached
-and regenerated only when size, UI scale, enabled effects, or geometry settings change.
-
-Keep effect opacity restrained. Semantic text colors and button states must remain readable at UI scaling values of
-100%, 125%, and 150%.
-
-## Responsive sizing
-
-Robust UI already propagates `DesiredSize` from labels and icons through buttons, panels, containers, and the window.
-For localized or dynamic CRT interfaces:
-
-- set a sensible `MinSize` for the usable baseline;
-- use `HorizontalExpand` and `VerticalExpand` where columns should share extra room;
-- use `MinWidth` only for a genuine column baseline;
-- do not set a fixed window `SetSize` unless clipping is intentionally part of the design;
-- do not calculate title-bar, border, or content margins manually in C#.
-
-Example:
-
-```xml
-<!-- Correct: starts at 700x420 and grows when localized content requires more room. -->
-<DefaultWindow MinSize="700 420">
-    <crt:RMCCrtThemeScope Palette="Blue">
-        <!-- Content. -->
-    </crt:RMCCrtThemeScope>
-</DefaultWindow>
-```
-
-`DefaultWindow` includes its header and content margins in its own measurement. When text changes, the Robust layout
-queue invalidates and recalculates the affected controls automatically. The final window is still constrained by the
-available viewport; exceptionally long content should use wrapping, clipping, or a suitable scroll container rather
-than overlapping neighboring columns.
-
-## Extending the library
-
-New reusable CRT controls belong in this directory and should:
+New controls in this library must:
 
 1. remain independent from a specific console, BUI, component, or localization key;
-2. implement `IRMCCrtThemedControl` when they consume theme state or semantic palette colors;
-3. obtain the nearest theme context through `RMCCrtThemeHelpers` on entering the UI tree;
-4. expose semantic properties such as `Tone`, `Variant`, or `Selected` instead of raw per-state colors;
-5. provide both CRT and standard Nano presentation without duplicating console layout or behavior;
-6. define structure in XAML where practical;
-7. preserve normal Robust measurement and invalidation behavior;
-8. avoid allocations and configuration lookups in per-frame drawing code.
+2. support both CRT and Nano presentation;
+3. implement `IRMCCrtThemedControl` when consuming theme or semantic palette state;
+4. resolve the nearest context through `RMCCrtThemeHelpers` when entering the UI tree;
+5. avoid configuration lookups and allocations in per-frame drawing code;
+6. preserve normal Robust measurement and invalidation behavior.
 
-Before adding a new control, check whether composition from `RMCCrtPanel`, `RMCCrtLabel`, and standard Robust
-containers is sufficient.
+Use `RMCCrtPanel`, `RMCCrtLabel`, and standard Robust containers through composition before adding another control.
