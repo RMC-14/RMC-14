@@ -66,7 +66,7 @@
       prefix: rmc-job-prefix-synth
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/UNMC/other.rsi
         state: synth
     - type: MeleeWeapon
       soundHit:
