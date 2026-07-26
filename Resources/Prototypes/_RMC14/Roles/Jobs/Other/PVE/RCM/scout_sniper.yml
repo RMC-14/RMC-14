@@ -50,10 +50,10 @@
       squad: SquadRoyalMarinesPVE
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/TSE/RCM/PVE.rsi
         state: rmc_marksman_pve
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/TSE/backgrounds.rsi
         state: background_twe
   hidden: true
 
