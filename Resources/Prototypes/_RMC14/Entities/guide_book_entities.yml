@@ -6,7 +6,7 @@
   suffix: GuideBookEntity
   components:
   - type: Sprite
-    sprite: /Textures/_RMC14/Interface/map_blips.rsi
+    sprite: /Textures/_RMC14/Interface/map_blips/Xeno/other.rsi
 
 # Tier 0
 - type: entity
@@ -15,10 +15,11 @@
   name: Lesser
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite # Need to fix inheretence now that this isn't one super folder.
+  - type: Sprite
     layers:
     - state: background_xeno
-    - state: lesser_drone
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: lesser_drone
 
 - type: entity
   parent: RMCBaseMapIcon
@@ -26,10 +27,11 @@
   name: Parasite
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite # Need to fix inheretence now that this isn't one super folder.
+  - type: Sprite
     layers:
     - state: background_xeno
-    - state: parasite
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: parasite
 
 - type: entity
   parent: RMCBaseMapIcon
@@ -37,10 +39,11 @@
   name: Larva
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite # Need to fix inheretence now that this isn't one super folder.
+  - type: Sprite
     layers:
     - state: background_xeno
-    - state: larva
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: larva
 
 # Drone Castes
 - type: entity
@@ -49,10 +52,11 @@
   name: Drone
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite # Need to fix inheretence now that this isn't one super folder.
+  - type: Sprite
     layers:
     - state: background_xeno
-    - state: drone
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: drone
 
 - type: entity
   parent: RMCBaseMapIcon
@@ -60,10 +64,11 @@
   name: Hivelord
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite # Need to fix inheretence now that this isn't one super folder.
+  - type: Sprite
     layers:
     - state: background_xeno
-    - state: hivelord
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: hivelord
 
 - type: entity
   parent: RMCBaseMapIcon
@@ -71,10 +76,11 @@
   name: Burrower
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite # Need to fix inheretence now that this isn't one super folder.
+  - type: Sprite
     layers:
     - state: background_xeno
-    - state: burrower
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: burrower
 
 - type: entity
   parent: RMCBaseMapIcon
@@ -82,10 +88,11 @@
   name: Carrier
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite # Need to fix inheretence now that this isn't one super folder.
+  - type: Sprite
     layers:
     - state: background_xeno
-    - state: carrier
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: carrier
 
 # Defender Castes
 - type: entity
@@ -94,10 +101,11 @@
   name: Defender
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite # Need to fix inheretence now that this isn't one super folder.
+  - type: Sprite
     layers:
     - state: background_xeno
-    - state: defender
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: defender
 
 - type: entity
   parent: RMCBaseMapIcon
@@ -105,10 +113,11 @@
   name: Warrior
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite # Need to fix inheretence now that this isn't one super folder.
+  - type: Sprite
     layers:
     - state: background_xeno
-    - state: warrior
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: warrior
 
 - type: entity
   parent: RMCBaseMapIcon
@@ -116,10 +125,11 @@
   name: Crusher
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite # Need to fix inheretence now that this isn't one super folder.
+  - type: Sprite
     layers:
     - state: background_xeno
-    - state: crusher
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: crusher
 
 # Sentinel Castes
 - type: entity
@@ -128,10 +138,11 @@
   name: Sentinel
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite # Need to fix inheretence now that this isn't one super folder.
+  - type: Sprite
     layers:
     - state: background_xeno
-    - state: sentinel
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: sentinel
 
 - type: entity
   parent: RMCBaseMapIcon
@@ -139,10 +150,11 @@
   name: Spitter
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite # Need to fix inheretence now that this isn't one super folder.
+  - type: Sprite
     layers:
     - state: background_xeno
-    - state: spitter
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: spitter
 
 - type: entity
   parent: RMCBaseMapIcon
@@ -150,10 +162,11 @@
   name: Boiler
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite # Need to fix inheretence now that this isn't one super folder.
+  - type: Sprite
     layers:
     - state: background_xeno
-    - state: boiler
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: boiler
 
 # Runner Castes
 - type: entity
@@ -162,10 +175,11 @@
   name: Runner
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite # Need to fix inheretence now that this isn't one super folder.
+  - type: Sprite
     layers:
     - state: background_xeno
-    - state: runner
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: runner
 
 - type: entity
   parent: RMCBaseMapIcon
@@ -173,10 +187,11 @@
   name: Lurker
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite # Need to fix inheretence now that this isn't one super folder.
+  - type: Sprite
     layers:
     - state: background_xeno
-    - state: lurker
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: lurker
 
 - type: entity
   parent: RMCBaseMapIcon
@@ -184,10 +199,11 @@
   name: Ravager
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite # Need to fix inheretence now that this isn't one super folder.
+  - type: Sprite
     layers:
     - state: background_xeno
-    - state: ravager
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: ravager
 
 # Special Castes
 
@@ -197,10 +213,11 @@
   name: Praetorian
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite # Need to fix inheretence now that this isn't one super folder.
+  - type: Sprite
     layers:
     - state: background_xeno
-    - state: praetorian
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: praetorian
 
 - type: entity
   parent: RMCBaseMapIcon
@@ -208,10 +225,11 @@
   name: Queen
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite # Need to fix inheretence now that this isn't one super folder.
+  - type: Sprite
     layers:
     - state: xeno_ruler
-    - state: xenoqueen
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: xenoqueen
 
 - type: entity
   parent: RMCBaseMapIcon
@@ -219,11 +237,13 @@
   name: Leader Crown
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite # Need to fix inheretence now that this isn't one super folder.
+  - type: Sprite
     layers:
     - state: background_xeno
-    - state: xeno
-    - state: xenoleader
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: xeno
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: xenoleader
 
 # Structures
 
@@ -233,7 +253,8 @@
   name: Hive core
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite # Need to fix inheretence now that this isn't one super folder.
+  - type: Sprite
+    sprite: /Textures/_RMC14/Interface/map_blips/Xeno/structures.rsi
     state: core
 
 - type: entity
@@ -242,7 +263,8 @@
   name: Egg morpher
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite # Need to fix inheretence now that this isn't one super folder.
+  - type: Sprite
+    sprite: /Textures/_RMC14/Interface/map_blips/Xeno/structures.rsi
     state: morpher
 
 - type: entity
@@ -251,7 +273,8 @@
   name: Hive cluster
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite # Need to fix inheretence now that this isn't one super folder.
+  - type: Sprite
+    sprite: /Textures/_RMC14/Interface/map_blips/Xeno/structures.rsi
     state: cluster
 
 - type: entity
@@ -260,7 +283,8 @@
   name: Tunnel
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite # Need to fix inheretence now that this isn't one super folder.
+  - type: Sprite
+    sprite: /Textures/_RMC14/Interface/map_blips/Xeno/structures.rsi
     state: xenotunnel
 
 - type: entity
@@ -269,7 +293,8 @@
   name: Recovery node
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite # Need to fix inheretence now that this isn't one super folder.
+  - type: Sprite
+    sprite: /Textures/_RMC14/Interface/map_blips/Xeno/structures.rsi
     state: recovery_node
 
 - type: entity
@@ -278,5 +303,6 @@
   name: hive pylon
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite # Need to fix inheretence now that this isn't one super folder.
+  - type: Sprite
+    sprite: /Textures/_RMC14/Interface/map_blips/Xeno/structures.rsi
     state: pylon
