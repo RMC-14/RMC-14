@@ -21,7 +21,7 @@
           sprite: _RMC14/Interface/job_icons/UNMC/marine.rsi
           state: hudsquad_spec_demo
         giveMapBlip:
-          sprite: /Textures/_RMC14/Interface/map_blips.rsi
+          sprite: /Textures/_RMC14/Interface/map_blips/UNMC/marine.rsi
           state: spec_demo
       - id: RMCGrenadeSpecEquipmentCase
         giveSquadRoleName: rmc-job-name-weapons-specialist-grenadier
@@ -32,7 +32,7 @@
           sprite: _RMC14/Interface/job_icons/UNMC/marine.rsi
           state: hudsquad_spec_grenadier
         giveMapBlip:
-          sprite: /Textures/_RMC14/Interface/map_blips.rsi
+          sprite: /Textures/_RMC14/Interface/map_blips/UNMC/marine.rsi
           state: spec_grenadier
       - id: RMCPyroSpecEquipmentCase
         giveSquadRoleName: rmc-job-name-weapons-specialist-pyro
@@ -43,7 +43,7 @@
           sprite: _RMC14/Interface/job_icons/UNMC/marine.rsi
           state: hudsquad_spec_pyro
         giveMapBlip:
-          sprite: /Textures/_RMC14/Interface/map_blips.rsi
+          sprite: /Textures/_RMC14/Interface/map_blips/UNMC/marine.rsi
           state: spec_pyro
       - id: RMCScoutSpecEquipmentCase
         giveSquadRoleName: rmc-job-name-weapons-specialist-scout
@@ -60,7 +60,7 @@
           sprite: _RMC14/Interface/job_icons/UNMC/marine.rsi
           state: hudsquad_spec_sniper
         giveMapBlip:
-          sprite: /Textures/_RMC14/Interface/map_blips.rsi
+          sprite: /Textures/_RMC14/Interface/map_blips/UNMC/marine.rsi
           state: spec_sniper
         linkedEntries:
         - RMCAntiMaterielEquipmentCase
@@ -73,7 +73,7 @@
           sprite: _RMC14/Interface/job_icons/UNMC/marine.rsi
           state: hudsquad_spec_anti_materiel_sniper
         giveMapBlip:
-          sprite: /Textures/_RMC14/Interface/map_blips.rsi
+          sprite: /Textures/_RMC14/Interface/map_blips/UNMC/marine.rsi
           state: spec_anti_materiel_sniper
         linkedEntries:
         - CMSniperEquipmentCase
