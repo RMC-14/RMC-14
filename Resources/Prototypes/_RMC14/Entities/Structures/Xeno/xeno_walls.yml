@@ -309,7 +309,7 @@
   parent: WallXenoResinReflective
   id: WallXenoResinReflectiveUnstable
   name: weakened reflective wall
-  description: Weird slime with strange, hardened fragments solidified into a wall. It looks like it will last for a moment before it collapses.
+  description: "Weird slime with strange, hardened fragments solidified into a wall.\nIt looks ready to collapse at any moment."
   components:
   - type: TimedDespawn
     lifetime: 13.0
