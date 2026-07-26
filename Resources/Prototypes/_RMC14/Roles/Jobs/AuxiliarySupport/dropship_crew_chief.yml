@@ -57,7 +57,7 @@
       prefix: cm-job-prefix-dcc
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/UNMC/auxiliary_support.rsi
         state: dcc
       background:
         sprite: /Textures/_RMC14/Interface/map_blips/UNMC/backgrounds.rsi
