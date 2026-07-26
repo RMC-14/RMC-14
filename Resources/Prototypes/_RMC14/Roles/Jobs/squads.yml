@@ -439,7 +439,7 @@
     radio: Colony
     minimapBackground:
       sprite: /Textures/_RMC14/Interface/map_blips/CLF.rsi
-      state: background_spp
+      state: background_clf
     canSupplyDrop: false
     group: CLF
     leaderIcon:
