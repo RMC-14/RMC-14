@@ -1,0 +1,73 @@
+# Commanding Officer career data entities copied onto the character
+- type: entity
+  id: RMCCOCareerInfantryData
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: LoadoutGearProfile
+    startingGear: RMCGearCOCareerInfantry
+    managedSlots: &coCareerManagedSlots
+    - jumpsuit
+    - head
+    - shoes
+    - gloves
+    - outerClothing
+    - mask
+    - eyes
+    preserveSlots: &coCareerPreserveSlots
+    - pocket1
+    - pocket2
+    - belt
+
+- type: entity
+  id: RMCCOCareerEngineeringData
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: LoadoutGearProfile
+    startingGear: RMCGearCOCareerEngineering
+    managedSlots: *coCareerManagedSlots
+    preserveSlots: *coCareerPreserveSlots
+
+- type: entity
+  id: RMCCOCareerMedicalData
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: LoadoutGearProfile
+    startingGear: RMCGearCOCareerMedical
+    managedSlots: *coCareerManagedSlots
+    preserveSlots: *coCareerPreserveSlots
+
+- type: entity
+  id: RMCCOCareerIntelData
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: LoadoutGearProfile
+    startingGear: RMCGearCOCareerIntel
+    managedSlots: *coCareerManagedSlots
+    preserveSlots: *coCareerPreserveSlots
+
+- type: entity
+  id: RMCCOCareerLogisticsData
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: LoadoutGearProfile
+    startingGear: RMCGearCOCareerLogistics
+    managedSlots: *coCareerManagedSlots
+    preserveSlots: *coCareerPreserveSlots
+
+- type: entity
+  id: RMCCOCareerAviationData
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: LoadoutGearProfile
+    startingGear: RMCGearCOCareerAviation
+    managedSlots: *coCareerManagedSlots
+    preserveSlots: *coCareerPreserveSlots
+
+- type: entity
+  id: RMCCOCareerTankerData
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: LoadoutGearProfile
+    startingGear: RMCGearCOCareerTanker
+    managedSlots: *coCareerManagedSlots
+    preserveSlots: *coCareerPreserveSlots

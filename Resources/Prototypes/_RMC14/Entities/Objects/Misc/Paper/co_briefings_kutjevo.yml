@@ -1,0 +1,33 @@
+# Kutjevo
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingKutjevoUnaligned
+  suffix: Kutjevo, Unaligned
+  components:
+  - type: Paper
+    content: rmc-co-briefing-kutjevo-unaligned
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingKutjevoHawks
+  suffix: Kutjevo, Hawks
+  components:
+  - type: Paper
+    content: rmc-co-briefing-kutjevo-hawks
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingKutjevoDoves
+  suffix: Kutjevo, Doves
+  components:
+  - type: Paper
+    content: rmc-co-briefing-kutjevo-doves
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingKutjevoMagpies
+  suffix: Kutjevo, Magpies
+  components:
+  - type: Paper
+    content: rmc-co-briefing-kutjevo-magpies
