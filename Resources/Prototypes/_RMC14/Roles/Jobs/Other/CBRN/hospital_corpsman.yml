@@ -5,7 +5,7 @@
   description: rmc-job-description-cbrn-medic
   playTimeTracker: CMJobCBRNMedic
   ranks:
-    RMCRankCorporal: [] 
+    RMCRankCorporal: []
   startingGear: RMCGearCBRNMedic
   icon: "CMJobIconHospitalCorpsman"
   joinNotifyCrew: false
@@ -49,7 +49,7 @@
       prefix: cm-job-prefix-hospital-corpsman
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/UNMC/marine.rsi
         state: medic
   hidden: true
 
@@ -100,7 +100,7 @@
     pocket2: RMCPouchMedkit
   storage:
     back:
-    # RMC TODO: synthetic repair kit  
+    # RMC TODO: synthetic repair kit
     - RMCRadiationAidKitFilled
     - CMFirstAidO2KitFilled
     - CMToxinAidKitFilled
