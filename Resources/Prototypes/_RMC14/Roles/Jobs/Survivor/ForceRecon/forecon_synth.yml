@@ -12,7 +12,6 @@
   - Synth
   startingGear: RMCGearForeconSynthetic
   spawnMenuRoleName: FORECON Synthetic (Survivor)
-  roleWeight: 0.25
   icon: "RMCJobIconReconSynthetic"
   whitelisted: true
   special:

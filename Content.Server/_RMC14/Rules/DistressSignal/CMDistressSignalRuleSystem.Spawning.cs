@@ -20,6 +20,8 @@ using Content.Shared.Coordinates;
 using Content.Shared.Database;
 using Content.Shared.Fax.Components;
 using Content.Shared.GameTicking;
+using Content.Shared.Mind;
+using Content.Shared.Mind.Components;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
@@ -66,6 +68,74 @@ public sealed partial class CMDistressSignalRuleSystem
 
         _spawnedDropships = true;
         InitializeDropships(comp);
+    }
+
+    /// <summary>
+    /// Handles giving xenos burrowed larva if there aren't enough xeno players,
+    /// OR adds a burrowed larva debt to the hive if there are too many xeno players spawned in.
+    /// </summary>
+    /// <param name="ev"></param>
+    private void OnRulePlayerJobsAssigned(RulePlayerJobsAssignedEvent ev)
+    {
+        var rule = TryGetActiveRuleEntity();
+        if (!rule.HasValue)
+            return;
+
+        var marineQuery = AllEntityQuery<MarineComponent, MindContainerComponent>();
+        var marineCount = 0;
+        var marineTotalRoleWeight = 0.0f;
+        while (marineQuery.MoveNext(out var marineUid, out _, out var mindContainer))
+        {
+            if (!TryComp<MindComponent>(mindContainer.Mind, out var mind))
+                continue;
+
+            foreach (var roleId in mind.MindRoles)
+            {
+                if (!TryComp<MindRoleComponent>(roleId, out var mindRole))
+                    continue;
+
+                if (mindRole.JobPrototype == null || !_prototypes.TryIndex(mindRole.JobPrototype, out var proto))
+                    continue;
+
+                marineCount += 1;
+                marineTotalRoleWeight += proto.RoleWeight;
+            }
+        }
+
+        var xenoQuery = AllEntityQuery<XenoComponent, MindContainerComponent>();
+        var xenoCount = 0;
+        while (xenoQuery.MoveNext(out var xenoUid, out _, out var mindContainer))
+        {
+            if (!HasComp<MindComponent>(mindContainer.Mind))
+                continue;
+
+            xenoCount += 1;
+        }
+
+        var desiredXenoCount = GetDesiredRoundstartXenoCount(marineTotalRoleWeight);
+        if (desiredXenoCount > xenoCount)
+        {
+            // add burrowed for each xeno player we are missing
+            _hive.ChangeBurrowedLarva(desiredXenoCount - xenoCount);
+        }
+        else if (desiredXenoCount < xenoCount)
+        {
+            // The estimated xeno limit gave too many xenos. Add a debt to the hive that prevents
+            // late joins from giving burrowed larva until the debt is paid, in order to
+            // get the xeno : marine ratio back to where we want it.
+            _hive.ChangeBurrowedLarvaDebt(xenoCount - desiredXenoCount);
+        }
+
+        Log.Info($"""
+            Round start player spawning info:
+              Marine count:       {marineCount}
+              Marine role weight: {marineTotalRoleWeight:F2}
+              Xeno count:         {xenoCount}
+              Desired xeno count: {desiredXenoCount}
+              Burrowed amount:    {desiredXenoCount - xenoCount}
+              CMMarinesPerXeno:   {_marinesPerXeno:F2}
+              Actual ratio:       {marineTotalRoleWeight / desiredXenoCount:F2}
+            """);
     }
 
     private bool InitializeXenoMap(Entity<CMDistressSignalRuleComponent> rule, CMDistressSignalRuleComponent comp)
@@ -202,7 +272,6 @@ public sealed partial class CMDistressSignalRuleSystem
 
     /// <summary>
     /// Selects xeno players based on job priorities and spawns them as queen or larva.
-    /// Handles burrowed larva calculation if there aren't enough xeno players.
     /// </summary>
     /// <param name="comp">The distress signal rule component.</param>
     /// <param name="ev">The rule player spawning event.</param>
@@ -292,19 +361,6 @@ public sealed partial class CMDistressSignalRuleSystem
             {
                 if (SpawnXeno(xenoCandidates[i], comp.LarvaEnt, true) != null) selectedXenos++;
             }
-        }
-
-        var unfilledXenoSlots = totalXenos - selectedXenos;
-        if (unfilledXenoSlots > 0)
-        {
-            // If not every xeno slot is filled, that means there will be more marines than calculated.
-            // Because of that, we can't just turn unfilled slots to burrowed, we actually need to add some extra
-            // burrowed to account for the extra marines. The number of unfilled slots directly translates to marines,
-            // so we can use that to calculate the marine count.
-            // To be consistent with GetRoundstartXenoLimit, we use marine + surv count to calculate number of xenos.
-            var correctedNonxenoCount = GetRoundstartMarineMinimum(initialPlayerCount) + GetRoundstartSurvLimit(initialPlayerCount) + unfilledXenoSlots;
-            var correctedTotalXenos = (int)Math.Floor(correctedNonxenoCount / _marinesPerXeno);
-            _hive.ChangeBurrowedLarva(Math.Max(unfilledXenoSlots, correctedTotalXenos - selectedXenos));
         }
     }
 

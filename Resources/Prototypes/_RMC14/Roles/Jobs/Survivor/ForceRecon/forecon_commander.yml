@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: RMCSurvivorForeconBase
   id: RMCSurvivorForeconCommander
   name: rmc-job-name-forecon-commander
@@ -11,7 +11,6 @@
   startingGear: RMCGearForeconCommander
   spawnMenuRoleName: FORECON Commander (Survivor)
   supervisors: cm-job-supervisors-marine-high-command
-  roleWeight: 0.25
   icon: "RMCJobIconForeconCommander"
   special:
   - !type:AddComponentSpecial

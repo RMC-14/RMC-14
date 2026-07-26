@@ -379,26 +379,42 @@ public sealed partial class CMDistressSignalRuleSystem
     }
 
     /// <summary>
-    /// Returns the maximum amount of roundstart xenos possible given the number of readied players.
+    /// Returns the maximum amount of roundstart xenos possible given the number of readied players, based on the configured MarinesPerXeno CVar.
     /// </summary>
     /// <param name="readyupCount"></param>
-    /// <returns></returns>
-    /// <remarks>This limit assumes the marine count is at the minimum, which will happen if every xeno slot is taken. If not every xeno slot is taken,
-    /// the xeno + burrowed count can exceed this limit to account for the extra marines.</remarks>
+    /// <returns>The maximum amount of xenos that can spawn at roundstart.</returns>
+    /// <remarks>This is an estimate, as the readyup count can't capture the exact number of marines and xenos that will be in the round, nor their roles.
+    /// After all players are spawned in, GetDesiredRoundstartXenoCount can be used with the actual marine count to calculate how many xenos should actually
+    /// be in the round, respecting their job weights.</remarks>
     private int GetRoundstartXenoLimit(int readyupCount)
     {
-        // TODO RMC14 xeno limit should be changed to be based on number of marines rather than number of readied players, but this is a decent estimate.
+        // TODO RMC14 although the CVar is MarinesPerXeno, it includes survivors in the calculation.
+        // This is parity behavior but CVar name is misleading. Consider changing the logic to match or
+        // renaming the CVar if this behavior is desirable.
         return (int)Math.Floor(Math.Max(1, readyupCount / (_marinesPerXeno + 1)));
     }
 
     /// <summary>
-    /// Returns the maximum amount of roundstart survs possible given the number of readied players.
+    /// Returns how many xenos there should be at round start given the actual amount of marines that spawned in.
+    /// </summary>
+    /// <param name="marineTotalRoleWeight">The total role weight of all marines in the round.</param>
+    /// <returns>How many xenos should have been created at round start.</returns>
+    /// <remarks>At this time survivors should be included in the total weight.</remarks>
+    private int GetDesiredRoundstartXenoCount(float marineTotalRoleWeight)
+    {
+        return (int)Math.Floor(Math.Max(1, marineTotalRoleWeight / _marinesPerXeno));
+    }
+
+    /// <summary>
+    /// Returns the maximum amount of roundstart survs possible given the number of readied players, based on the configured MarinesPerSurvivor CVar.
     /// </summary>
     /// <param name="readyupCount"></param>
-    /// <returns></returns>
+    /// <returns>The maximum amount of survivors that can spawn at roundstart.</returns>
     private int GetRoundstartSurvLimit(int readyupCount)
     {
-        // TODO RMC14 surv limit should be changed to be based on number of marines rather than number of readied players. This isn't a good estimate since it includes xenos.
+        // TODO RMC14 although the CVar is MarinesPerSurvivor, it includes xenos in the calculation.
+        // This is parity behavior but CVar name is misleading.  Consider changing the logic to match or
+        // renaming the CVar if this behavior is desirable.
         return (int)Math.Clamp((int)Math.Floor(readyupCount / (_marinesPerSurvivor + 1)), _minimumSurvivors, _maximumSurvivors);
     }
 

@@ -88,6 +88,12 @@ public sealed partial class HiveComponent : Component
     [DataField, AutoNetworkedField]
     public int BurrowedLarva;
 
+    /// <summary>
+    /// In case there are too many xenos spawned, prevent this many burrowed from being created from late joins.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public int BurrowedLarvaDebt;
+
     [DataField, AutoNetworkedField]
     public bool LateJoinGainLarva;
 

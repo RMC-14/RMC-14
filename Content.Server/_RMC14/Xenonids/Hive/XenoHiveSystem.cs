@@ -85,7 +85,7 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
 
         if (ev.JobId is not { } jobId ||
             !_prototypes.TryIndex(jobId, out JobPrototype? job) ||
-            job.RoleWeight < 0)
+            job.RoleWeight <= 0)
         {
             return;
         }
@@ -107,7 +107,10 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
                 continue;
 
             hive.LateJoinMarines -= lateJoinsPer;
-            ChangeBurrowedLarva((uid, hive), 1);
+            if (hive.BurrowedLarvaDebt > 0)
+                ChangeBurrowedLarvaDebt((uid, hive), -1);
+            else
+                ChangeBurrowedLarva((uid, hive), 1);
         }
     }
 

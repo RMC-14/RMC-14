@@ -442,6 +442,26 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         RaiseLocalEvent(hive, ref ev, true);
     }
 
+    public void ChangeBurrowedLarvaDebt(int amount)
+    {
+        var hives = EntityQueryEnumerator<HiveComponent>();
+        while (hives.MoveNext(out var uid, out var hive))
+        {
+            ChangeBurrowedLarvaDebt((uid, hive), amount);
+        }
+    }
+
+    public void ChangeBurrowedLarvaDebt(Entity<HiveComponent> hive, int amount)
+    {
+        SetHiveBurrowedLarvaDebt(hive, hive.Comp.BurrowedLarvaDebt + amount);
+    }
+
+    private void SetHiveBurrowedLarvaDebt(Entity<HiveComponent> hive, int larvaDebt)
+    {
+        hive.Comp.BurrowedLarvaDebt = Math.Max(0, larvaDebt);
+        Dirty(hive);
+    }
+
     public bool JoinBurrowedLarva(Entity<HiveComponent> hive, ICommonSession session)
     {
         if (_net.IsClient)

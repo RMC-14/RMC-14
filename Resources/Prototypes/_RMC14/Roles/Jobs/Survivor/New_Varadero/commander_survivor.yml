@@ -8,7 +8,6 @@
     RMCRankLieutenantColonel: []
   startingGear: RMCGearSurvivorCommanderNewVaradero
   supervisors: cm-job-supervisors-marine-high-command
-  roleWeight: 0.25
   icon: "RMCJobIconSurvivorCommanderNewVaradero"
   hasIcon: true
   spawnMenuRoleName: UNMC Commander (New Varadero Survivor)
