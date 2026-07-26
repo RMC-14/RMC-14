@@ -16,7 +16,7 @@
       prefix: rmc-job-prefix-rmpl
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/UNMC/military_police.rsi
         state: crmp
       background:
         sprite: /Textures/_RMC14/Interface/map_blips/UNMC/backgrounds.rsi
