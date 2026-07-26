@@ -256,6 +256,10 @@ public sealed class RMCPullingSystem : EntitySystem
     {
         if (ent.Owner == args.PullerUid)
         {
+            if (TryComp<MeleeWeaponComponent>(ent.Owner, out var increaseMeleeRange))
+            {
+                increaseMeleeRange.Range = 1.5f;
+            }
             RemComp<PullingSlowedComponent>(args.PullerUid);
             _movementSpeed.RefreshMovementSpeedModifiers(args.PullerUid);
         }
@@ -276,17 +280,21 @@ public sealed class RMCPullingSystem : EntitySystem
         var ev = new PullSlowdownAttemptEvent(puller.Pulling.Value);
         RaiseLocalEvent(ent, ref ev);
         if (ev.Cancelled)
+        {
             return;
-
+        }
         foreach (var slowdown in slow.Slowdowns)
         {
             if (_whitelist.IsWhitelistPass(slowdown.Whitelist, puller.Pulling.Value))
             {
+                if (TryComp<MeleeWeaponComponent>(ent.Owner, out var increaseMeleeRange))
+                {
+                    increaseMeleeRange.Range = 2.5f;
+                }
                 args.ModifySpeed(slowdown.Multiplier, slowdown.Multiplier);
                 return;
             }
         }
-
         args.ModifySpeed(slow.Multiplier, slow.Multiplier);
     }
 
