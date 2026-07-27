@@ -1,4 +1,4 @@
-﻿using Content.Shared.Physics;
+using Content.Shared.Physics;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Damage;
@@ -15,4 +15,10 @@ public sealed partial class UserDamageOverTimeComponent : Component
 
     [DataField, AutoNetworkedField]
     public CollisionGroup Collision = CollisionGroup.MobLayer | CollisionGroup.MobMask;
+
+    /// <summary>
+    /// Server-side cooldowns keyed by each overlapping damage source.
+    /// </summary>
+    [ViewVariables]
+    public readonly Dictionary<EntityUid, TimeSpan> NextDamageAtBySource = new();
 }

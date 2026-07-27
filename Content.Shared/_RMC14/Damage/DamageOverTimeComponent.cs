@@ -45,7 +45,7 @@ public sealed partial class DamageOverTimeComponent : Component
     public bool AffectsCrit = true;
 
     /// <summary>
-    /// Does bonus damage to xenos
+    /// Does bonus damage to xenos.
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool Acidic = true;
@@ -55,6 +55,15 @@ public sealed partial class DamageOverTimeComponent : Component
 
     [DataField, AutoNetworkedField]
     public string? Popup;
+
+    [DataField, AutoNetworkedField]
+    public EntityWhitelist? PopupBlacklist;
+
+    [DataField, AutoNetworkedField]
+    public float? RadiationPerSecond;
+
+    [DataField, AutoNetworkedField]
+    public EntityWhitelist? RadiationWhitelist;
 
     [DataField, AutoNetworkedField]
     public EntityWhitelist? Cover;

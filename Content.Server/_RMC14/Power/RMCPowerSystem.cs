@@ -77,7 +77,8 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
 
     private void OnReceiverPowerChanged(Entity<RMCPowerReceiverComponent> ent, ref PowerChangedEvent args)
     {
-        ent.Comp.Mode = args.Powered ? RMCPowerMode.Active : RMCPowerMode.Off;
+        ent.Comp.Mode = args.Powered ? ent.Comp.RequestedMode : RMCPowerMode.Off;
+        Dirty(ent);
         ToUpdate.Add(ent);
     }
 
@@ -244,6 +245,13 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
                     var load = (int) (loadSpan[i] * _powerLoadMultiplier);
                     totalLoad += load;
                     apcComp.Channels[i].Watts = load;
+                }
+
+                totalLoad += area.Comp.OneOffLoad;
+                if (area.Comp.OneOffLoad != 0)
+                {
+                    area.Comp.OneOffLoad = 0;
+                    Dirty(area);
                 }
 
                 if (cell == null)

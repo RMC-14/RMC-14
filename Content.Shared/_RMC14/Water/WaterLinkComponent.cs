@@ -1,4 +1,4 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Water;
 
@@ -7,5 +7,5 @@ namespace Content.Shared._RMC14.Water;
 public sealed partial class WaterLinkComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
-    public string? Id;
+    public string Id = string.Empty;
 }
