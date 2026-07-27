@@ -117,6 +117,10 @@
         volume: -6
   - type: SoundOnDrag
     sound:
+      collection: XenoFootstepLarge
+      params:
+        volume: 0
+    downedSound:
       path: /Audio/Effects/stonedoor_openclose.ogg
   - type: XenoAnnounceDeath
     message: rmc-xeno-death-king
