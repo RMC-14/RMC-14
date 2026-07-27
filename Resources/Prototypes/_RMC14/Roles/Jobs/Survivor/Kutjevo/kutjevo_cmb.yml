@@ -7,8 +7,6 @@
   hasIcon: true
   icon: RMCJobIconBureauDeputy
   spawnMenuRoleName: CMB Deputy (Kutjevo Survivor)
-  ranks:
-    RMCRankCMBDeputy: []
   special:
   - !type:AddComponentSpecial
     components:
