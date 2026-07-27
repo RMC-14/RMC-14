@@ -1,4 +1,5 @@
 ﻿using Robust.Shared.GameStates;
+using Robust.Shared.Network;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Xenonids.Parasite;
@@ -33,4 +34,7 @@ public sealed partial class XenoParasiteComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool FellOff;
+
+    [DataField]
+    public NetUserId? PendingInfectorUserId;
 }

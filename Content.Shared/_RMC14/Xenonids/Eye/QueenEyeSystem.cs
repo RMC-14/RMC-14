@@ -1,6 +1,9 @@
-﻿using System.Numerics;
+using System.Numerics;
+using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Watch;
+using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Coordinates;
 using Content.Shared.Mind;
 using Content.Shared.Movement.Components;
@@ -23,6 +26,7 @@ public sealed class QueenEyeSystem : EntitySystem
     [Dependency] private readonly SharedMoverController _mover = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IParallelManager _parallel = default!;
+    [Dependency] private readonly SwappableActionSystem _swappableAction = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedXenoWatchSystem _xenoWatch = default!;
@@ -33,6 +37,13 @@ public sealed class QueenEyeSystem : EntitySystem
     private readonly HashSet<Entity<QueenEyeVisionComponent>> _seeds = new();
 
     private readonly HashSet<Vector2i> _singleTiles = new();
+
+    private readonly HashSet<Entity<XenoWeedsComponent>> _nearbyWeeds = new();
+    private readonly HashSet<Entity<XenoWeedsComponent>> _anchorWeeds = new();
+
+    private bool _isRevertingMove;
+
+    private readonly HashSet<(Entity<QueenEyeComponent> Eye, EntityCoordinates OldCoords, EntityCoordinates NewCoords)> _movedQueenEyes = new();
 
     public override void Initialize()
     {
@@ -61,6 +72,7 @@ public sealed class QueenEyeSystem : EntitySystem
         SubscribeLocalEvent<QueenEyeActionComponent, XenoOvipositorChangedEvent>(OnQueenEyeOvipositorChanged);
 
         SubscribeLocalEvent<QueenEyeComponent, XenoUnwatchEvent>(OnQueenEyeUnwatch);
+        SubscribeLocalEvent<QueenEyeComponent, MoveEvent>(OnQueenEyeMove);
     }
 
     private void OnQueenEyeActionMapInit(Entity<QueenEyeActionComponent> ent, ref MapInitEvent args)
@@ -82,6 +94,9 @@ public sealed class QueenEyeSystem : EntitySystem
     {
         if (RemoveQueenEye(ent))
             return;
+
+        if (HasComp<XenoAttachedOvipositorComponent>(ent.Owner))
+            SwapPlantWeedsToWorldTarget(ent);
 
         if (_net.IsClient)
             return;
@@ -110,7 +125,7 @@ public sealed class QueenEyeSystem : EntitySystem
             return;
         }
 
-        args.VisibilityMask |= (int) ent.Comp.Visibility;
+        args.VisibilityMask |= (int)ent.Comp.Visibility;
     }
 
     private void OnQueenEyeActionWatch(Entity<QueenEyeActionComponent> ent, ref XenoWatchEvent args)
@@ -146,6 +161,23 @@ public sealed class QueenEyeSystem : EntitySystem
             return;
 
         _eye.SetTarget(queen, ent);
+    }
+
+    private void OnQueenEyeMove(Entity<QueenEyeComponent> ent, ref MoveEvent args)
+    {
+        if (_timing.ApplyingState)
+            return;
+
+        if (_isRevertingMove)
+            return;
+
+        if (TerminatingOrDeleted(ent))
+            return;
+
+        if (!args.NewPosition.IsValid(EntityManager))
+            return;
+
+        _movedQueenEyes.Add((ent, args.OldPosition, args.NewPosition));
     }
 
     /// <param name="expansionSize">How much to expand the bounds before to find vision intersecting it. Makes this the largest vision size + 1 tile.</param>
@@ -221,10 +253,25 @@ public sealed class QueenEyeSystem : EntitySystem
 
         RemComp<RelayInputMoverComponent>(ent);
 
+        SwapPlantWeedsToInstant(ent);
+
         var ev = new QueenEyeActionUpdated(ent);
         RaiseLocalEvent(ent, ref ev);
 
         return true;
+    }
+
+    private void SwapPlantWeedsToWorldTarget(Entity<QueenEyeActionComponent> queen)
+    {
+        _swappableAction.SwapInstantToWorldTarget<XenoPlantWeedsActionEvent>(
+            queen.Owner,
+            Loc.GetString("rmc-xeno-queen-eye-expand-weeds-name"),
+            Loc.GetString("rmc-xeno-queen-eye-expand-weeds-desc"));
+    }
+
+    private void SwapPlantWeedsToInstant(Entity<QueenEyeActionComponent> queen)
+    {
+        _swappableAction.SwapAllToInstant(queen.Owner);
     }
 
     public bool IsInQueenEye(Entity<QueenEyeActionComponent?> queen)
@@ -268,6 +315,73 @@ public sealed class QueenEyeSystem : EntitySystem
 
         var targetTile = _map.CoordinatesToTile(gridId, grid, target);
         return IsAccessible((gridId, broadphase, grid), targetTile);
+    }
+
+    public override void Update(float frameTime)
+    {
+        foreach (var (ent, oldCoords, newCoords) in _movedQueenEyes)
+        {
+            if (_timing.ApplyingState)
+                return;
+
+            if (_isRevertingMove)
+                return;
+
+            if (TerminatingOrDeleted(ent))
+                return;
+
+            _nearbyWeeds.Clear();
+            _entityLookup.GetEntitiesInRange(newCoords, ent.Comp.SoftWeedDistance, _nearbyWeeds);
+
+            if (_nearbyWeeds.Count != 0)
+                continue;
+
+            _isRevertingMove = true;
+            try
+            {
+                _anchorWeeds.Clear();
+                _entityLookup.GetEntitiesInRange(oldCoords, ent.Comp.MaxWeedDistance, _anchorWeeds);
+                if (_anchorWeeds.Count > 0)
+                {
+                    var newWorldPos = _transform.ToMapCoordinates(newCoords).Position;
+                    var oldWorldPos = _transform.ToMapCoordinates(oldCoords).Position;
+                    var closestDistSq = float.MaxValue;
+                    var closestWeedPos = oldWorldPos;
+
+                    foreach (var weed in _anchorWeeds)
+                    {
+                        var weedPos = _transform.GetWorldPosition(weed.Owner);
+                        var distSq = Vector2.DistanceSquared(oldWorldPos, weedPos);
+                        if (distSq < closestDistSq)
+                        {
+                            closestDistSq = distSq;
+                            closestWeedPos = weedPos;
+                        }
+                    }
+
+                    var offset = newWorldPos - closestWeedPos;
+                    var dist = offset.Length();
+                    var soft = ent.Comp.SoftWeedDistance;
+                    var max = ent.Comp.MaxWeedDistance;
+                    if (dist > soft)
+                    {
+                        var t = Math.Clamp((dist - soft) / (max - soft), 0f, 1f);
+                        var dampedDist = soft + (max - soft) * t * t;
+                        _transform.SetWorldPosition(ent, closestWeedPos + offset / dist * dampedDist);
+                    }
+                }
+                else if (ent.Comp.Queen is { } queen &&
+                         !TerminatingOrDeleted(queen) &&
+                         TryComp(queen, out QueenEyeActionComponent? queenAction))
+                {
+                    RemoveQueenEye((queen, queenAction));
+                }
+            }
+            finally
+            {
+                _isRevertingMove = false;
+            }
+        }
     }
 
     /// <summary>

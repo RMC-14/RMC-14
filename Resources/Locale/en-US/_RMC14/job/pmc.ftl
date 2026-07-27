@@ -130,5 +130,11 @@ rmc-job-name-corp-dep-director = WE-YA Deputy Director
 rmc-ghost-name-corp-director = WE-YA Director (Neutral)
 rmc-job-name-corp-director = WE-YA Director
 
+# CL Bodyguard
+rmc-job-name-executive-bodyguard = Executive Bodyguard
+rmc-job-description-executive-bodyguard = Protect the Corporate Liaison and their office. Remember not to serve as a thug, and work with the Military Police when needed.
+rmc-job-prefix-executive-bodyguard = EB
+RMCWeYaExecutiveBodyguard = Executive Bodyguard
+
 # Corpses
 rmc-job-name-pmc-operator-corpse = PMC Operator

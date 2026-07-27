@@ -4,16 +4,17 @@
   id: RMCCouchMid
   name: couch
   description: A piece of Swedish flat pack furniture, just dont ask the MTs for an Allen key.
-  suffix: Mid
+  suffix: Mid, Double
   placement:
     mode: SnapgridCenter
   components:
+  - type: VehicleSmashable
   - type: Transform
     anchored: true
   - type: Physics
     bodyType: Static
   - type: Sprite
-    sprite: _RMC14/Structures/Furniture/couch.rsi
+    sprite: _RMC14/Structures/Furniture/Couches/couch.rsi
     state: couch_mid
   - type: RMCMesonsNonviewable
   - type: BlockXenoConstruction
@@ -45,12 +46,30 @@
 - type: entity
   parent: RMCCouchMid
   id: RMCCouchEnd
-  suffix: End
+  suffix: End, Double
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Furniture/couch.rsi
     state: couch_end
 
+# Alt Couch
+- type: entity
+  parent: RMCCouchMid
+  id: RMCCouchMidAlt
+  suffix: Mid, Double, Alt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Couches/couch_alt.rsi
+    state: couch_mid
+
+- type: entity
+  parent: RMCCouchMidAlt
+  id: RMCCouchEndAlt
+  suffix: End, Double, Alt
+  components:
+  - type: Sprite
+    state: couch_end
+
+# Red Couch
 - type: entity
   parent: RMCCouchMid
   id: RMCCouchMidRed
@@ -58,29 +77,109 @@
   suffix: Mid
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Furniture/red_couch.rsi
+    sprite: _RMC14/Structures/Furniture/Couches/red_couch.rsi
     state: couch_mid
 
 - type: entity
-  parent: RMCCouchMid
+  parent: RMCCouchMidRed
   id: RMCCouchEndLowerRed
   name: red couch
   suffix: End, Lower
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Furniture/red_couch.rsi
     state: couch_end_lower
 
 - type: entity
-  parent: RMCCouchMid
+  parent: RMCCouchMidRed
   id: RMCCouchEndUpperRed
   name: red couch
   suffix: End, Upper
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Furniture/red_couch.rsi
     state: couch_end_upper
 
+# Black Couch
+- type: entity
+  parent: RMCCouchMid
+  id: RMCCouchMidBlack
+  name: black couch
+  suffix: Mid
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Couches/black_couch.rsi
+    state: couch_mid
+
+- type: entity
+  parent: RMCCouchMidBlack
+  id: RMCCouchEndLowerBlack
+  suffix: End, Lower
+  components:
+  - type: Sprite
+    state: couch_end_lower
+
+- type: entity
+  parent: RMCCouchMidBlack
+  id: RMCCouchEndUpperBlack
+  suffix: End, Upper
+  components:
+  - type: Sprite
+    state: couch_end_upper
+
+# Black Couch
+- type: entity
+  parent: RMCCouchMid
+  id: RMCCouchMidBrown
+  name: brown couch
+  suffix: Mid
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Couches/brown_couch.rsi
+    state: couch_mid
+
+- type: entity
+  parent: RMCCouchMidBrown
+  id: RMCCouchEndLowerBrown
+  suffix: End, Lower
+  components:
+  - type: Sprite
+    state: couch_end_lower
+
+- type: entity
+  parent: RMCCouchMidBrown
+  id: RMCCouchEndUpperBrown
+  suffix: End, Upper
+  components:
+  - type: Sprite
+    state: couch_end_upper
+
+# Brown Couch Alt
+- type: entity
+  parent: RMCCouchMidBrown
+  id: RMCCouchMidBrownAlt
+  name: brown couch
+  suffix: Mid, Alt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Couches/brown_couch_alt.rsi
+    state: couch_mid
+
+- type: entity
+  parent: RMCCouchMidBrownAlt
+  id: RMCCouchEndLowerBrownAlt
+  suffix: End, Lower, Alt
+  components:
+  - type: Sprite
+    state: couch_end_lower
+
+- type: entity
+  parent: RMCCouchMidBrownAlt
+  id: RMCCouchEndUpperBrownAlt
+  suffix: End, Upper, Alt
+  components:
+  - type: Sprite
+    state: couch_end_upper
+
+# Bar Booth
 - type: entity
   parent: RMCCouchMid
   id: RMCCouchLeftBar
@@ -89,7 +188,7 @@
   description: An old wooden booth with red cushioning. There are stains in the cushions.
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Furniture/couch_bar.rsi
+    sprite: _RMC14/Structures/Furniture/Couches/couch_bar.rsi
     state: couch_left
 
 - type: entity
@@ -98,5 +197,5 @@
   suffix: Right
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Furniture/couch_bar.rsi
+    sprite: _RMC14/Structures/Furniture/Couches/couch_bar.rsi
     state: couch_right

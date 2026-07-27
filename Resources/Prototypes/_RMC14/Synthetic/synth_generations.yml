@@ -1,0 +1,130 @@
+- type: entity
+  id: RMCSynthGenOne
+  name: Generation One
+  components:
+  - type: SynthGeneration
+    generation: RMCSynthGenOne
+    damageModifier: RMCSynthGenOne
+  - type: Skills
+    skills:
+      RMCSkillCqc: 3
+      RMCSkillEngineer: 4
+      RMCSkillConstruction: 3
+      RMCSkillFirearms: 2
+      RMCSkillOverwatch: 1
+      RMCSkillMedical: 3
+      RMCSkillSurgery: 2
+      RMCSkillResearch: 1
+      RMCSkillMeleeWeapons: 2
+      RMCSkillPilot: 2
+      RMCSkillPolice: 2
+      RMCSkillFireman: 3
+      RMCSkillPowerLoader: 2
+      RMCSkillVehicles: 2
+      RMCSkillJtac: 1
+      RMCSkillIntel: 1
+      RMCSkillDomestics: 2
+  - type: RMCLeapProtection
+    inherentStunDuration: 3
+    fullProtection: true
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      399: Critical
+      400: Dead
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 3.625
+    baseWalkSpeed: 1.9575
+  - type: ShowHealthIcons
+  - type: ShowHealthBars
+  - type: RMCAllowSuitStorage
+  - type: RemoveComponents
+    components:
+    - type: HiddenAppearance
+
+- type: entity
+  id: RMCSynthGenTwo
+  name: Generation Two
+  components:
+  - type: SynthGeneration
+    generation: RMCSynthGenTwo
+    damageModifier: RMCSynthGenTwo
+  - type: Skills
+    skills:
+      RMCSkillCqc: 3
+      RMCSkillEngineer: 4
+      RMCSkillConstruction: 3
+      RMCSkillFirearms: 2
+      RMCSkillOverwatch: 1
+      RMCSkillMedical: 3
+      RMCSkillSurgery: 2
+      RMCSkillResearch: 1
+      RMCSkillMeleeWeapons: 2
+      RMCSkillPilot: 2
+      RMCSkillPolice: 2
+      RMCSkillFireman: 3
+      RMCSkillPowerLoader: 2
+      RMCSkillVehicles: 2
+      RMCSkillJtac: 1
+      RMCSkillIntel: 1
+      RMCSkillDomestics: 2
+  - type: ShowHealthIcons
+  - type: ShowHealthBars
+  - type: RMCAllowSuitStorage
+  - type: RemoveComponents
+    components:
+    - type: HiddenAppearance
+
+- type: entity
+  id: RMCSynthGenThree
+  name: Generation Three
+  components:
+  - type: SynthGeneration
+    generation: RMCSynthGenThree
+  - type: Skills
+    skills:
+      RMCSkillCqc: 5
+      RMCSkillEndurance: 1
+      RMCSkillEngineer: 4
+      RMCSkillConstruction: 3
+      RMCSkillFirearms: 2
+      RMCSkillOverwatch: 1
+      RMCSkillMedical: 4
+      RMCSkillSurgery: 3
+      RMCSkillResearch: 1
+      RMCSkillMeleeWeapons: 2
+      RMCSkillPilot: 2
+      RMCSkillPolice: 2
+      RMCSkillFireman: 5
+      RMCSkillPowerLoader: 2
+      RMCSkillVehicles: 2
+      RMCSkillJtac: 3
+      RMCSkillIntel: 2
+      RMCSkillDomestics: 2
+      RMCSkillNavigations: 1
+  - type: ShowHealthIcons
+  - type: ShowHealthBars
+  - type: RMCAllowSuitStorage
+  - type: RemoveComponents
+    components:
+    - type: HiddenAppearance
+
+#- type: entity
+#  id: RMCARESWorker
+#  name: ARES Worker
+#  components:
+#  - type: SynthGeneration
+#    generation: RMCARESWorker
+#  - type: Skills
+#    skills:
+#      RMCSkillCqc: 5
+#      RMCSkillEngineer: 4
+#      RMCSkillConstruction: 3
+#      RMCSkillFirearms: 2
+#      RMCSkillMeleeWeapons: 2
+#      RMCSkillPolice: 2
+#      RMCSkillFireman: 2
+#      RMCSkillPowerLoader: 2
+#      RMCSkillVehicles: 2
+#      RMCSkillDomestics: 2
+#      RMCSkillEndurance: 1

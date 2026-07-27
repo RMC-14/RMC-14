@@ -8,6 +8,7 @@
     tags:
     - Sidearm
     - CMWeaponPistolM1984
+  - type: GunClickToFire # TODO RMC14 can be removed once fire rate is adjusted
   - type: RMCSelectiveFire
     scatterWielded: 10
     scatterUnwielded: 10

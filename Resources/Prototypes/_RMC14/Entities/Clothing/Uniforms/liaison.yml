@@ -211,6 +211,15 @@
     - RMCPatchWeYaBlack
 
 - type: entity
+  parent: CMJumpsuitLiaisonBlack
+  id: RMCJumpsuitLiaisonBlackExecutiveBodyguard
+  suffix: Executive Bodyguard
+  components:
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchWeYaBlack
+
+- type: entity
   parent: [CMJumpsuitLiaison, RMCAlternateFoldableUniformBase]
   id: RMCJumpsuitLiaisonGreenWorkwear
   name: green workwear

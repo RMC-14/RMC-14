@@ -60,7 +60,7 @@ public sealed partial class ExpendableLightComponent : Component
     /// <summary>
     /// The sound that plays when the expendable light is lit.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public EntityUid? PlayingStream;
 
     /// <summary>
