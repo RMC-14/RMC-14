@@ -13,8 +13,11 @@ public sealed partial class SoundOnDragComponent : Component
     [DataField(required: true), AutoNetworkedField]
     public SoundSpecifier? Sound;
 
-    //[DataField, AutoNetworkedField]
-    //public EntityUid? Entity;
+    /// <summary>
+    /// Sound that should play instead if the entity is not standing.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? DownedSound;
 
     /// <summary>
     ///     Used to keep track of how far we've been dragged before playing a sound.

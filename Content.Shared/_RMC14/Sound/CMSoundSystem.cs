@@ -1,15 +1,16 @@
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared.Gravity;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Sound;
+using Content.Shared.Standing;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Shared._RMC14.Sound;
 
@@ -21,6 +22,7 @@ public sealed class CMSoundSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -139,7 +141,7 @@ public sealed class CMSoundSystem : EntitySystem
             return false;
 
         var coordinates = xform.Coordinates;
-        var distanceNeeded = 1.0f; // Whatever sounds good.
+        var distanceNeeded = 1.5f; // Whatever sounds good.
 
         // Can happen when teleporting between grids.
         if (!coordinates.TryDistance(EntityManager, soundOnDrag.LastPosition, out var distance) ||
@@ -159,26 +161,30 @@ public sealed class CMSoundSystem : EntitySystem
 
         soundOnDrag.DragSoundDistance -= distanceNeeded;
 
-        sound = soundOnDrag.Sound;
+        if (soundOnDrag.DownedSound is { } downedSound && _standing.IsDown(uid))
+            sound = downedSound;
+        else
+            sound = soundOnDrag.Sound;
         return sound != null;
     }
 
     public override void Update(float frameTime)
     {
-        if (_net.IsClient)
-            return;
-
         var time = _timing.CurTime;
-        var random = EntityQueryEnumerator<RandomSoundComponent>();
-        while (random.MoveNext(out var uid, out var comp))
+
+        if (_net.IsServer)
         {
-            if (_mobState.IsDead(uid) || time <= comp.PlayAt)
-                continue;
+            var random = EntityQueryEnumerator<RandomSoundComponent>();
+            while (random.MoveNext(out var uid, out var comp))
+            {
+                if (_mobState.IsDead(uid) || time <= comp.PlayAt)
+                    continue;
 
-            comp.PlayAt = time + _random.Next(comp.Min, comp.Max);
-            Dirty(uid, comp);
+                comp.PlayAt = time + _random.Next(comp.Min, comp.Max);
+                Dirty(uid, comp);
 
-            _audio.PlayPvs(comp.Sound, uid);
+                _audio.PlayPvs(comp.Sound, uid);
+            }
         }
 
         var soundOnDrag = EntityQueryEnumerator<SoundOnDragComponent, BeingPulledComponent>();
@@ -187,12 +193,12 @@ public sealed class CMSoundSystem : EntitySystem
             if (!TryGetSound(uid, comp, Transform(uid), out var sound))
                 continue;
 
-            var timeFromLastSound = _timing.CurTime - comp.LastSoundTime;
+            var timeFromLastSound = time - comp.LastSoundTime;
             // Pitch up or down slightly based on roughly how fast the drag is.
             // Linear decrease from 1.05 at 0.5 seconds to 0.95 at 1.5 seconds.
             var pitchAdjustment = (float)Math.Clamp(-timeFromLastSound.TotalSeconds / 10 + 1.1, .95, 1.05);
 
-            comp.LastSoundTime = _timing.CurTime;
+            comp.LastSoundTime = time;
 
             var audioParams = sound.Params
                 .WithPitchScale(pitchAdjustment);
