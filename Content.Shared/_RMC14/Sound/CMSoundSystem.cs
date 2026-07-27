@@ -1,14 +1,17 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Pulling;
+using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Gravity;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Sound;
 using Content.Shared.Standing;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -21,6 +24,7 @@ public sealed class CMSoundSystem : EntitySystem
     [Dependency] private readonly SharedGravitySystem _gravity = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -161,10 +165,12 @@ public sealed class CMSoundSystem : EntitySystem
 
         soundOnDrag.DragSoundDistance -= distanceNeeded;
 
-        if (soundOnDrag.DownedSound is { } downedSound && _standing.IsDown(uid))
+        sound = soundOnDrag.Sound;
+        if (soundOnDrag.DownedSound is { } downedSound
+            && (_standing.IsDown(uid) || HasComp<XenoRestingComponent>(uid)))
+        {
             sound = downedSound;
-        else
-            sound = soundOnDrag.Sound;
+        }
         return sound != null;
     }
 
@@ -187,8 +193,8 @@ public sealed class CMSoundSystem : EntitySystem
             }
         }
 
-        var soundOnDrag = EntityQueryEnumerator<SoundOnDragComponent, BeingPulledComponent>();
-        while (soundOnDrag.MoveNext(out var uid, out var comp, out var _))
+        var soundOnDrag = EntityQueryEnumerator<SoundOnDragComponent, BeingPulledComponent, PullableComponent>();
+        while (soundOnDrag.MoveNext(out var uid, out var comp, out var _, out var pullable))
         {
             if (!TryGetSound(uid, comp, Transform(uid), out var sound))
                 continue;
@@ -203,7 +209,9 @@ public sealed class CMSoundSystem : EntitySystem
             var audioParams = sound.Params
                 .WithPitchScale(pitchAdjustment);
 
-            _audio.PlayPredicted(sound, uid, uid, audioParams);
+            // The PULLER, not the origin of the sound, is the one who can predict the sound.
+            if (_net.IsServer || _player.LocalEntity == pullable.Puller)
+                _audio.PlayPredicted(sound, uid, pullable.Puller, audioParams);
         }
     }
 }
