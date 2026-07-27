@@ -214,24 +214,38 @@ public abstract class SharedSynthSystem : EntitySystem
         if (args.Cancelled || args.Handled)
             return;
 
-        args.Handled = true;
-
         var used = args.Used;
         var user = args.User;
 
         if (used == null)
             return;
 
-        if (HasComp<BlowtorchComponent>(used) && _repairable.UseFuel(used.Value, user, 5))
+        if (HasComp<BlowtorchComponent>(used) && _repairable.UseFuel(used.Value, user, 1))
         {
             if (synth.Comp.WelderDamageToRepair != null)
                 _damageable.TryChangeDamage(synth, synth.Comp.WelderDamageToRepair, true, false, origin: user);
+
+            if (HasDamage(synth, synth.Comp.WelderDamageGroup) &&
+                _repairable.UseFuel(used.Value, user, 1, true))
+            {
+                args.Repeat = true;
+                return;
+            }
         }
-        else if (HasComp<RMCCableCoilComponent>(args.Used) && _stack.Use(args.Used.Value, 1))
+        else if (HasComp<RMCCableCoilComponent>(used) && _stack.Use(used.Value, 1))
         {
             if (synth.Comp.CableCoilDamageToRepair != null)
-                _damageable.TryChangeDamage(synth, synth.Comp.CableCoilDamageToRepair, true, false, origin: args.User);
+                _damageable.TryChangeDamage(synth, synth.Comp.CableCoilDamageToRepair, true, false, origin: user);
+
+            if (HasDamage(synth, synth.Comp.CableCoilDamageGroup) &&
+                HasComp<RMCCableCoilComponent>(used))
+            {
+                args.Repeat = true;
+                return;
+            }
         }
+
+        args.Handled = true;
     }
 
     private void OnSynthResetKey(Entity<SynthComponent> synth, ref TargetDefibrillatedEvent args)
