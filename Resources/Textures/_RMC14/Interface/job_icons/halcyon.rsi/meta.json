@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Sprited by sharksnake (Github)",
+  "size": {
+    "x": 16,
+    "y": 16
+  },
+    "states": [
+        {
+            "name": "hc_exec"
+        },
+        {
+            "name": "hc_execspec"
+        },
+        {
+            "name": "hc_jrexec"
+        },
+        {
+            "name": "hc_srexec"
+        },
+        {
+            "name": "hc_trainee"
+        }
+    ]
+}

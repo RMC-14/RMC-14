@@ -7,10 +7,19 @@
   startingGear: RMCGearSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
   accessGroups:
   - ColonistSec
-  spawnMenuRoleName: CMB Riot Control Officer (Special Survivor)
+  spawnMenuRoleName: CMB Riot Control Officer (Fiorina Special Survivor)
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      understoodLanguages:
+      - Japanese
+      - English
+      currentLanguage: English
+      defaultLanguage: English
     - type: Skills
       preset: RMCSkillPresetSurvivorMarshal
     - type: RMCSurvivor

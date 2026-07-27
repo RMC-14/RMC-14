@@ -53,6 +53,11 @@
       - Marine
       - Xeno
       - Vehicle
+    multipliers:
+    - multiplier: 2
+      whitelist:
+        components:
+        - Vehicle
   - type: DeleteOnExplosion # so this is supposed to be random depending on the explosion severity but uhhh hahAHAHA help
 
 - type: entity
