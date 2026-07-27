@@ -134,6 +134,14 @@
     graph: CMSeat
     node: stool
 
+- type: entity
+  parent: RMCStool
+  id: RMCStoolRed
+  components:
+  - type: Sprite
+    state: stool_red
+
+
 # Comfy chair
 - type: entity
   parent: CMSeatBase

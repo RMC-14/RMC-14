@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/items/clothing/uniforms/uniforms_by_faction/WY.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/uniforms/uniforms_by_faction/WY.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/items/clothing/uniforms/uniforms_by_faction/WY.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/uniforms/uniforms_by_faction/WY.dmi, modified for RMC by Drazamuffin",
   "size": {
     "x": 32,
     "y": 32

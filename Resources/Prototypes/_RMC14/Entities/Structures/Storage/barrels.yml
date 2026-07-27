@@ -119,3 +119,45 @@
   components:
   - type: Sprite
     state: barrel_yellow
+
+- type: entity
+  parent: RMCBarrelWhite
+  id: RMCBarrelPureWhite
+  components:
+  - type: Sprite
+    state: barrel_purewhite
+
+- type: entity
+  parent: RMCBarrelBase
+  id: RMCBarrelBlack
+  name: black barrel
+  description: A black storage barrel.
+  components:
+  - type: Sprite
+    state: barrel_black
+
+- type: entity
+  parent: RMCBarrelBase
+  id: RMCBarrelBrown
+  name: brown barrel
+  description: A brown storage barrel.
+  components:
+  - type: Sprite
+    state: barrel_tan
+
+- type: entity
+  parent: RMCBarrelBase
+  id: RMCBarrelFire
+  name: barrel
+  suffix: fire
+  description: A burning barrel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_misc_props/64x64.rsi
+    state: fire_barrel
+    offset: 0.73, 0.5
+  - type: PointLight
+    radius: 4.0
+    energy: 1.5
+    color: "#FF6A00"
+    softness: 1.0

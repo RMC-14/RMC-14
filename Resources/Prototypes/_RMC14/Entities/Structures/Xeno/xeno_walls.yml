@@ -290,6 +290,8 @@
   - type: XenoConstructionPlasmaCost
     plasma: 145
     scalingCost: true
+  - type: XenoStructureUpgradeable
+    to: null
   - type: RMCReflective
   - type: ExplosionRandomResistance
     min: 0.3

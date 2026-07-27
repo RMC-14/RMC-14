@@ -4,27 +4,26 @@ using Content.Shared.Charges.Components;
 using Content.Shared.Charges.Systems;
 using Content.Shared.Speech.EntitySystems;
 using Content.Shared.StatusEffect;
-using Robust.Shared.Network;
-using Robust.Shared.Player;
-using Robust.Shared.Serialization;
+using Content.Shared.StatusEffectNew;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Stun;
 
 public sealed class RMCDazedSystem : EntitySystem
 {
     [Dependency] private readonly SharedChargesSystem _charges = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffect = default!;
+    [Dependency] private readonly SharedStatusEffectsSystem _statusEffect = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
     [Dependency] private readonly SharedStutteringSystem _stutter = default!;
+
+    public static readonly EntProtoId StatusEffectDazed = "Dazed";
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RMCDazedComponent, DazedEvent>(OnDazed);
-        SubscribeLocalEvent<RMCDazedComponent, ComponentShutdown>(OnDazedEnd);
+        SubscribeLocalEvent<RMCDazedComponent, StatusEffectAppliedEvent>(OnDazed);
+        SubscribeLocalEvent<RMCDazedComponent, StatusEffectRemovedEvent>(OnDazedEnd);
     }
 
     /// <summary>
@@ -32,7 +31,7 @@ public sealed class RMCDazedSystem : EntitySystem
     ///     cooldown isn't higher already.
     /// </summary>
     /// <seealso cref="RMCDazeableActionComponent"/>
-    private void OnDazed(Entity<RMCDazedComponent> ent, ref DazedEvent args)
+    private void OnDazed(Entity<RMCDazedComponent> ent, ref StatusEffectAppliedEvent args)
     {
         foreach (var (actionId, _) in _actions.GetActions(ent))
         {
@@ -46,7 +45,7 @@ public sealed class RMCDazedSystem : EntitySystem
         }
     }
 
-    private void OnDazedEnd(Entity<RMCDazedComponent> ent, ref ComponentShutdown args)
+    private void OnDazedEnd(Entity<RMCDazedComponent> ent, ref StatusEffectRemovedEvent args)
     {
         foreach (var (actionId, _) in _actions.GetActions(ent))
         {
@@ -55,12 +54,6 @@ public sealed class RMCDazedSystem : EntitySystem
                 _actions.SetEnabled(actionId, true);
                 _charges.ResetCharges(actionId);
             }
-        }
-
-        if (_net.IsServer && _playerManager.TryGetSessionByEntity(ent.Owner, out var session))
-        {
-            var ev = new DazedComponentShutdownEvent();
-            RaiseNetworkEvent(ev, session.Channel);
         }
     }
 
@@ -72,25 +65,18 @@ public sealed class RMCDazedSystem : EntitySystem
         if (time <= TimeSpan.Zero)
             return false;
 
-        if (_statusEffect.TryAddStatusEffect<RMCDazedComponent>(uid, "Dazed", time, refresh, status))
+        var appliedEffect = false;
+        if (refresh)
         {
-            if (stutter)
-                _stutter.DoStutter(uid, time, true);
-
-            var ev = new DazedEvent(time);
-            RaiseLocalEvent(uid, ref ev);
-            return true;
+            _statusEffect.TryUpdateStatusEffectDuration(uid, StatusEffectDazed, time);
+            appliedEffect = true;
         }
+        else if (_statusEffect.TryAddStatusEffectDuration(uid, StatusEffectDazed, time))
+            appliedEffect = true;
+
+        if (appliedEffect && stutter)
+            _stutter.DoStutter(uid, time, true, status);
 
         return false;
     }
 }
-
-/// <summary>
-///     Raised directed on an entity when it is dazed.
-/// </summary>
-[ByRefEvent]
-public record struct DazedEvent(TimeSpan Duration);
-
-[NetSerializable, Serializable]
-public sealed class DazedComponentShutdownEvent: EntityEventArgs;
