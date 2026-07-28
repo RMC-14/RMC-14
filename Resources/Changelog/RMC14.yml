@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: XO and others now keep their pointer when no longer SL
-    type: Fix
-  id: 3027
-  time: '2026-03-30T04:52:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9279
 - author: SharkSnake98
   changes:
   - message: Added the option for all non-suit liaison uniforms to fold their sleeves
@@ -4586,5 +4579,13 @@
   id: 3526
   time: '2026-07-28T23:05:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10380
+- author: wheelwrightt
+  changes:
+  - message: Laser designators and rangefinders will now have their targeting interrupted/cancelled
+      when line of sight is broken.
+    type: Tweak
+  id: 3527
+  time: '2026-07-28T23:07:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8952
 Name: RMC14
 Order: -1
