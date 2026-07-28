@@ -9,6 +9,7 @@
   startingGear: RMCGearSurvivorCLFCoordinator
   icon: RMCJobIconCLFCoordinator
   spawnMenuRoleName: CLF Coordinator (Survivor)
+  playTimeTracker: CMJobCLFCoordinator # Can be removed when parent changed 
 # antagRole: RMCHostileSurvivor
   special:
   - !type:AddComponentSpecial

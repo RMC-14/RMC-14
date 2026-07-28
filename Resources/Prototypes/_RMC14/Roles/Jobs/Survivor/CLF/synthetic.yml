@@ -9,6 +9,7 @@
   startingGear: RMCGearSurvivorSyntheticCLF
   icon: "RMCJobIconCLFSynthetic"
   spawnMenuRoleName: CLF Multipurpose Synthetic (Survivor)
+  playTimeTracker: RMCJobSyntheticCLF # Can be removed when parent changed
   # antagRole: RMCHostileSurvivor
   special:
   - !type:AddComponentSpecial
