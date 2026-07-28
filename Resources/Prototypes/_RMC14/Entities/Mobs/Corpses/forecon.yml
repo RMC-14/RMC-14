@@ -8,6 +8,7 @@
   - type: Rank
     rank: RMCRankSergeant
   - type: Marine
+    parent: CMJobIconBase
     icon:
       sprite: _RMC14/Interface/job_icons/UNMC/marine.rsi
       state: hudsquad_ass
