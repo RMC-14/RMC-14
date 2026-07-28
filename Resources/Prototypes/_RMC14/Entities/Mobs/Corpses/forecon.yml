@@ -7,11 +7,11 @@
     prototypes: [ RMCGearCorpseFORECONSpotter ]
   - type: Rank
     rank: RMCRankSergeant
-  - type: SquadTeam
+ -  type: SquadMember
     background:
       sprite: _RMC14/Interface/job_icons/UNMC/marine.rsi
       state: hudsquad
-    color: "#32CD32"
+    backgroundColor: "#32CD32"
     blacklistedSquadArmor:
     - Helmet
     - Goggles
