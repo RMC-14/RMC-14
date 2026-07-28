@@ -1,4 +1,4 @@
-﻿# Neutral/Friendly
+﻿# Friendly
 - type: job
   parent: CMJobBase
   id: RMCSPPEngineer
@@ -45,7 +45,7 @@
       prefix: rmc-job-prefix-spp-engineer
   hidden: true
 
-# Hostile
+# Hostile/Neutral
 - type: job
   parent: RMCSPPEngineer
   id: RMCSPPEngineerHostile

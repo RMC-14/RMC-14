@@ -1,4 +1,4 @@
-﻿# Friendly/Neutral
+﻿# Friendly
 - type: job
   parent: CMJobBase
   id: RMCSPPRifleman
@@ -39,7 +39,7 @@
       prefix: rmc-job-prefix-spp-rifleman
   hidden: true
 
-# Hostile
+# Hostile/Neutral
 - type: job
   parent: RMCSPPRifleman
   id: RMCSPPRiflemanHostile

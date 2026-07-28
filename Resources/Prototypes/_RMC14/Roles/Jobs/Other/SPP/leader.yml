@@ -1,4 +1,4 @@
-﻿# Friendly/Neutral
+﻿# Friendly
 - type: job
   parent: CMJobBase
   id: RMCSPPLeader
@@ -58,7 +58,7 @@
       prefix: rmc-job-prefix-spp-leader
   hidden: true
 
-# Hostile
+# Hostile/Neutral
 - type: job
   parent: RMCSPPLeader
   id: RMCSPPLeaderHostile

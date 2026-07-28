@@ -1,4 +1,4 @@
-﻿# Friendly/Neutral
+﻿# Friendly
 - type: job
   parent: CMJobBase
   id: RMCSPPSpecialist
@@ -48,7 +48,7 @@
       prefix: rmc-job-prefix-spp-specialist
   hidden: true
 
-# Hostile
+# Hostile/Neutral
 - type: job
   parent: RMCSPPSpecialist
   id: RMCSPPSpecialistHostile
