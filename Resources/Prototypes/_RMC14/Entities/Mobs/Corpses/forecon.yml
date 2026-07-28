@@ -9,8 +9,8 @@
     rank: RMCRankSergeant
   - type: Marine
     icon:
-      sprite: _RMC14/Interface/job_icons/UNMC/hudsquad_ass.rsi
-      state: spotter
+      sprite: _RMC14/Interface/job_icons/UNMC/marine.rsi
+      state: hudsquad_ass
 
 - type: startingGear
   id: RMCGearCorpseFORECONSpotter
