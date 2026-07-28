@@ -7,6 +7,10 @@
     prototypes: [ RMCGearCorpseFORECONSpotter ]
   - type: Rank
     rank: RMCRankSergeant
+  - type: Marine
+    icon:
+      sprite: _RMC14/Interface/job_icons/UNMC/hudsquad_ass.rsi
+      state: spotter
 
 - type: startingGear
   id: RMCGearCorpseFORECONSpotter
