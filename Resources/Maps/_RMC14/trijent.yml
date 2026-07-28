@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/17/2026 06:06:20
-  entityCount: 38946
+  time: 07/20/2026 23:59:03
+  entityCount: 38949
 maps:
 - 1
 grids:
@@ -69567,7 +69567,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -55401.207
+      secondsUntilStateChange: -55430.42
       state: Opening
 - proto: CMAnestheticTank
   entities:
@@ -77711,13 +77711,6 @@ entities:
       name: 'LZ2: Aerodrome'
     - type: Transform
       pos: 21.5,-206.5
-      parent: 1
-- proto: RMCEncryptionKeyBureauDamaged
-  entities:
-  - uid: 1641
-    components:
-    - type: Transform
-      pos: 14.5,-178.5
       parent: 1
 - proto: CMFax
   entities:
@@ -130968,6 +130961,16 @@ entities:
     - type: Transform
       pos: 16.5,-152.5
       parent: 1
+  - uid: 38948
+    components:
+    - type: Transform
+      pos: 59.5,-66.5
+      parent: 1
+  - uid: 38949
+    components:
+    - type: Transform
+      pos: 60.5,-65.5
+      parent: 1
 - proto: RMCDecalSpawnerXenoSplatters
   entities:
   - uid: 10951
@@ -131389,6 +131392,13 @@ entities:
     components:
     - type: Transform
       pos: 142.5,-31.5
+      parent: 1
+- proto: RMCEncryptionKeyBureauDamaged
+  entities:
+  - uid: 1641
+    components:
+    - type: Transform
+      pos: 14.5,-178.5
       parent: 1
 - proto: RMCEngineerKit
   entities:
@@ -277539,6 +277549,13 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+- proto: RMCWeaponFlamerColony
+  entities:
+  - uid: 38947
+    components:
+    - type: Transform
+      pos: 60.5,-65.5
+      parent: 1
 - proto: RMCWeaponLauncherM81
   entities:
   - uid: 37471
@@ -277671,7 +277688,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: RMCWeaponShotgunHG3712
+- proto: RMCWeaponShotgunM12
   entities:
   - uid: 37484
     components:

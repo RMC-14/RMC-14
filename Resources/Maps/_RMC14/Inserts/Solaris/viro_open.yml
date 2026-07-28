@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 11/24/2025 17:08:42
-  entityCount: 162
+  time: 07/21/2026 00:01:15
+  entityCount: 161
 maps: []
 grids:
 - 1
@@ -369,7 +369,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -760.03265
+      secondsUntilStateChange: -778.7074
       state: Opening
 - proto: CMBodyBag
   entities:
@@ -1250,12 +1250,5 @@ entities:
     components:
     - type: Transform
       pos: 16.427841,1.8593969
-      parent: 1
-- proto: RMCWeaponFlamerColony
-  entities:
-  - uid: 159
-    components:
-    - type: Transform
-      pos: 2.6245747,5.56773
       parent: 1
 ...

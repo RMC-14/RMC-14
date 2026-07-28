@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/19/2026 23:18:05
-  entityCount: 22479
+  time: 07/20/2026 23:58:02
+  entityCount: 22485
 maps:
 - 1
 grids:
@@ -89182,6 +89182,53 @@ entities:
     - type: Transform
       pos: -76.5,-6.5
       parent: 1
+  - uid: 11263
+    components:
+    - type: Transform
+      pos: 81.5,30.5
+      parent: 1
+  - uid: 11264
+    components:
+    - type: Transform
+      pos: 81.5,29.5
+      parent: 1
+  - uid: 20315
+    components:
+    - type: Transform
+      pos: 82.5,30.5
+      parent: 1
+  - uid: 22480
+    components:
+    - type: Transform
+      pos: 82.5,31.5
+      parent: 1
+  - uid: 22481
+    components:
+    - type: Transform
+      pos: 81.5,28.5
+      parent: 1
+  - uid: 22482
+    components:
+    - type: Transform
+      pos: 80.5,28.5
+      parent: 1
+- proto: RMCDecalSpawnerOilSplatters
+  entities:
+  - uid: 22483
+    components:
+    - type: Transform
+      pos: 80.5,29.5
+      parent: 1
+  - uid: 22484
+    components:
+    - type: Transform
+      pos: 80.5,30.5
+      parent: 1
+  - uid: 22485
+    components:
+    - type: Transform
+      pos: 81.5,31.5
+      parent: 1
 - proto: RMCDigitalClock
   entities:
   - uid: 5988
@@ -99404,13 +99451,6 @@ entities:
     - type: Transform
       pos: 12.5,-50.5
       parent: 1
-  - uid: 7821
-    components:
-    - type: Transform
-      pos: -46.5,-18.5
-      parent: 1
-    missingComponents:
-    - AccessReader
 - proto: RMCLockerHydro
   entities:
   - uid: 7822
@@ -109088,13 +109128,6 @@ entities:
     - type: Transform
       pos: 42.5,-41.5
       parent: 1
-- proto: RMCPouchFuelTank
-  entities:
-  - uid: 9332
-    components:
-    - type: Transform
-      pos: -46.5,-18.5
-      parent: 1
 - proto: RMCPouchRadio
   entities:
   - uid: 9333
@@ -111016,6 +111049,13 @@ entities:
     components:
     - type: Transform
       pos: 33.5,-50.5
+      parent: 1
+- proto: RMCSpawnerCorpseChef
+  entities:
+  - uid: 7821
+    components:
+    - type: Transform
+      pos: 81.5,30.5
       parent: 1
 - proto: RMCSpawnerCorpseDoctor
   entities:
@@ -119593,18 +119633,6 @@ entities:
     components:
     - type: Transform
       pos: -64.5,-11.5
-      parent: 1
-- proto: RMCTankFlamerColony
-  entities:
-  - uid: 11263
-    components:
-    - type: Transform
-      pos: -46.5,-18.5
-      parent: 1
-  - uid: 11264
-    components:
-    - type: Transform
-      pos: -46.5,-18.5
       parent: 1
 - proto: RMCTankReagentFuel
   entities:
@@ -165409,10 +165437,10 @@ entities:
       parent: 1
 - proto: RMCWeaponFlamerColony
   entities:
-  - uid: 20315
+  - uid: 9332
     components:
     - type: Transform
-      pos: -46.5,-18.5
+      pos: 81.5,29.5
       parent: 1
 - proto: RMCWeaponLauncherM81
   entities:
@@ -165435,7 +165463,7 @@ entities:
     - type: Transform
       pos: 30.5,41.5
       parent: 1
-- proto: RMCWeaponShotgunHG3712
+- proto: RMCWeaponShotgunM12
   entities:
   - uid: 20318
     components:

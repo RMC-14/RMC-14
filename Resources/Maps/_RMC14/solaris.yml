@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/17/2026 06:04:06
-  entityCount: 30303
+  time: 07/21/2026 00:00:48
+  entityCount: 30314
 maps:
 - 1
 grids:
@@ -184400,12 +184400,64 @@ entities:
     - type: Transform
       pos: 59.5,-122.5
       parent: 1
+- proto: RMCDecalSpawnerBloodSplatters
+  entities:
+  - uid: 30310
+    components:
+    - type: Transform
+      pos: 105.5,-119.5
+      parent: 1
+  - uid: 30311
+    components:
+    - type: Transform
+      pos: 105.5,-118.5
+      parent: 1
+  - uid: 30312
+    components:
+    - type: Transform
+      pos: 106.5,-118.5
+      parent: 1
+  - uid: 30313
+    components:
+    - type: Transform
+      pos: 104.5,-118.5
+      parent: 1
+  - uid: 30314
+    components:
+    - type: Transform
+      pos: 105.5,-117.5
+      parent: 1
 - proto: RMCDecalSpawnerOilSplatters
   entities:
   - uid: 2260
     components:
     - type: Transform
       pos: 37.5,-164.5
+      parent: 1
+  - uid: 30305
+    components:
+    - type: Transform
+      pos: 107.5,-118.5
+      parent: 1
+  - uid: 30306
+    components:
+    - type: Transform
+      pos: 107.5,-117.5
+      parent: 1
+  - uid: 30307
+    components:
+    - type: Transform
+      pos: 107.5,-116.5
+      parent: 1
+  - uid: 30308
+    components:
+    - type: Transform
+      pos: 107.5,-119.5
+      parent: 1
+  - uid: 30309
+    components:
+    - type: Transform
+      pos: 106.5,-119.5
       parent: 1
 - proto: RMCDiamondOre1
   entities:
@@ -210254,6 +210306,13 @@ entities:
     - type: Transform
       pos: 31.5,-185.5
       parent: 1
+- proto: RMCWeaponFlamerColony
+  entities:
+  - uid: 30304
+    components:
+    - type: Transform
+      pos: 106.5,-118.5
+      parent: 1
 - proto: RMCWeaponLauncherM85A1
   entities:
   - uid: 29154
@@ -210433,7 +210492,7 @@ entities:
     - type: InsideEntityStorage
     missingComponents:
     - GunIDLock
-- proto: RMCWeaponShotgunHG3712
+- proto: RMCWeaponShotgunM12
   entities:
   - uid: 29174
     components:
