@@ -194,7 +194,7 @@ public sealed class CMArmorSystem : EntitySystem
         if (armor <= 0)
             return;
 
-        var resist = (float) Math.Pow(1.1, armor / 5.0);
+        var resist = (float) Math.Pow(1.1, armor / 10.0);
         args.Args.DamageCoefficient /= resist;
     }
 
@@ -204,7 +204,7 @@ public sealed class CMArmorSystem : EntitySystem
         if (armor <= 0)
             return;
 
-        var resist = (float) Math.Pow(1.1, armor / 5.0);
+        var resist = (float) Math.Pow(1.1, armor / 10.0);
         args.DamageCoefficient /= resist;
     }
 
