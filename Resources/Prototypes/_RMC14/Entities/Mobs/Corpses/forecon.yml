@@ -27,6 +27,7 @@
   equipment:
     jumpsuit: RMCJumpsuitSurvivorMarineDropPouch
     back: CMSatchelMarine
+    outerClothing: RMCArmorUDEPForeconSpotter
     shoes: CMBootsBlackFilled
     id: RMCIDCardFORECONSpotter
     pocket1: RMCPouchFirstAidInjectors
