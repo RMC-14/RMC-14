@@ -872,7 +872,7 @@
 # recon spotter m45
 - type: entity
   parent: CMArmorM3Medium
-  id: CMArmorM45ForeconSpotter
+  id: RMCArmorUDEPForeconSpotter
   name: battered UDEP thermal poncho # TODO id lock
   description: UDEP or the Ultra Diffusive Environmental Poncho is a camouflaged rain-cover worn to protect against the elements and chemical spills. It's commonly treated with an infrared absorbing coating, making a marine almost invisible in the rain. Favoured by UNMC specialists for its comfort and practicality. This one seems to have taken excessive damage, its cloaking capabilities missing outright.
   components:
