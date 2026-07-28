@@ -18,9 +18,6 @@ public sealed partial class PurifiableWaterComponent : Component
     public TimeSpan PurifyDelay = TimeSpan.FromSeconds(1);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan TransitionDelay = TimeSpan.FromSeconds(4);
-
-    [DataField, AutoNetworkedField]
     public float SloshChance = 0.3f;
 
     [DataField, AutoNetworkedField]

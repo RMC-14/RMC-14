@@ -142,42 +142,9 @@
   - type: PurifiableWater
 
 - type: entity
-  parent: RMCDesertWaterPurifiableBase
+  parent: [ RMCDesertWaterPurifiableBase, RMCToxicWaterHazardBase ]
   id: RMCDesertWaterPurifiableRiverBase
   abstract: true
-  components:
-  - type: ToxicWater
-  - type: DamageOverTime
-    affectsDead: false
-    damageEvery: 2
-    cover:
-      tags:
-      - Catwalk
-    armorPiercingDamage:
-      types:
-        Heat: 15
-    radiationPerSecond: 10
-    radiationWhitelist:
-      components:
-      - HumanoidAppearance
-    emotes:
-    - Cough
-    - Gasp
-    popup: "The water burns!"
-    popupBlacklist:
-      components:
-      - Synth
-    sound:
-      collection: ToxicWaterSizzle
-    multipliers:
-    - multiplier: 0.050
-      whitelist:
-        tags:
-        - RMCXenoLarva
-    - multiplier: 0.866
-      whitelist:
-        components:
-        - Xeno
 
 - type: entity
   parent: [ RMCEntityDesertWaterShallow, RMCDesertWaterPurifiableRiverBase ]

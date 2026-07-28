@@ -43,7 +43,7 @@
       enum.PurifiableWaterLayers.Layer:
         base:
           Toxic: { sprite: _RMC14/Tiles/planet/desert_water.rsi, state: shallow_corner_edge_toxic }
-          Dispersing: { sprite: _RMC14/Tiles/planet/desert_water_transition.rsi, state: shallow_c }
+          Dispersing: { sprite: _RMC14/Tiles/planet/desert_water_transition.rsi, state: shallow_corner_edge }
           Purified: { sprite: _RMC14/Tiles/planet/desert_water.rsi, state: shallow_corner_edge }
 
 - type: entity

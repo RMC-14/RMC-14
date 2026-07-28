@@ -7,7 +7,44 @@
     - /Audio/_RMC14/Xeno/acid_sizzle4.ogg
 
 - type: entity
-  parent: CMFloorShallowWaterEntity
+  id: RMCToxicWaterHazardBase
+  abstract: true
+  components:
+  - type: ToxicWater
+  - type: DamageOverTime
+    affectsDead: false
+    damageEvery: 1
+    cover:
+      tags:
+      - Catwalk
+    armorPiercingDamage:
+      types:
+        Heat: 7.5
+    radiationPerSecond: 10
+    radiationWhitelist:
+      components:
+      - HumanoidAppearance
+    emotes:
+    - Cough
+    - Gasp
+    popup: "The water burns!"
+    popupBlacklist:
+      components:
+      - Synth
+    sound:
+      collection: ToxicWaterSizzle
+    multipliers:
+    - multiplier: 0.050 # 0.98
+      whitelist:
+        tags:
+        - RMCXenoLarva
+    - multiplier: 0.866 # 17.04
+      whitelist:
+        components:
+        - Xeno
+
+- type: entity
+  parent: [ CMFloorShallowWaterEntity, RMCToxicWaterHazardBase ]
   id: RMCToxicWaterShallow
   name: water
   description: Something about this water doesn't look right. Best to stay out of it.
@@ -17,29 +54,6 @@
     sprite: _RMC14/Tiles/planet/desert_water.rsi
     layers:
     - state: shallow_toxic
-  - type: DamageOverTime
-    affectsDead: false
-    cover:
-      tags:
-      - Catwalk
-    armorPiercingDamage:
-      types:
-        Heat: 7.5
-    emotes:
-    - Cough
-    - Gasp
-    popup: "The water burns!"
-    sound:
-      collection: ToxicWaterSizzle
-    multipliers:
-    - multiplier: 0.050  # 0.98
-      whitelist:
-        tags:
-        - RMCXenoLarva
-    - multiplier: 0.866  # 17.04
-      whitelist:
-        components:
-        - Xeno
 
 - type: entity
   parent: [CMFloorDeepWaterEntity, RMCToxicWaterShallow]
@@ -76,25 +90,30 @@
 
 
 - type: entity
-  parent: RMCToxicWaterShallow
+  parent: RMCEntityDesertWaterShallowCorner
   id: RMCEntityDesertWaterShallowCornerToxic
+  description: Something about this water doesn't look right. Best to stay out of it.
+  suffix: Toxic Visual
   components:
   - type: Sprite
     layers:
     - state: shallow_c
 
 - type: entity
-  parent: RMCToxicWaterShallow
+  parent: RMCEntityDesertWaterShallowCornerEdge
   id: RMCEntityDesertWaterShallowCornerEdgeToxic
+  description: Something about this water doesn't look right. Best to stay out of it.
+  suffix: Toxic Visual
   components:
   - type: Sprite
     layers:
     - state: shallow_corner_edge_toxic
 
-
 - type: entity
-  parent: RMCToxicWaterShallow
+  parent: RMCEntityDesertWaterShallowEdge
   id: RMCEntityDesertWaterShallowEdgeToxic
+  description: Something about this water doesn't look right. Best to stay out of it.
+  suffix: Toxic Visual
   components:
   - type: Sprite
     layers:

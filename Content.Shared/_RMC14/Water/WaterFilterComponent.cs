@@ -20,6 +20,9 @@ public sealed partial class WaterFilterComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan ResetDelay = TimeSpan.FromSeconds(8);
 
+    [DataField, AutoNetworkedField]
+    public int OneOffLoad = 5;
+
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan TriggerAt;
 

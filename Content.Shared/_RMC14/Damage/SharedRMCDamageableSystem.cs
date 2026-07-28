@@ -187,8 +187,6 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        ent.Comp.NextDamageAtBySource.Remove(args.OtherEntity);
-
         foreach (var contact in _physics.GetContactingEntities(ent, approximate: true))
         {
             if (_damageOverTimeQuery.HasComp(contact))
@@ -635,6 +633,9 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         var userDamageOverTimeQuery = EntityQueryEnumerator<UserDamageOverTimeComponent>();
         while (userDamageOverTimeQuery.MoveNext(out var user, out var userDamage))
         {
+            if (time < userDamage.NextDamageAt)
+                continue;
+
             var contacts = _physics.GetEntitiesIntersectingBody(user, (int) userDamage.Collision);
             if (contacts.Count == 0)
             {
@@ -642,13 +643,10 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
                 continue;
             }
 
-            var hasDamageSource = false;
             foreach (var contact in contacts)
             {
                 if (!_damageOverTimeQuery.TryComp(contact, out var damage))
                     continue;
-
-                hasDamageSource = true;
 
                 if (damage.Cover != null)
                 {
@@ -694,13 +692,7 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
                 if (_hive.FromSameHive(contact, user))
                     continue;
 
-                if (userDamage.NextDamageAtBySource.TryGetValue(contact, out var nextDamageAt) &&
-                    time < nextDamageAt)
-                {
-                    continue;
-                }
-
-                userDamage.NextDamageAtBySource[contact] = time + damage.DamageEvery;
+                userDamage.NextDamageAt = time + damage.DamageEvery;
 
                 if (damage.Damage != null)
                     DoDamage((contact, damage), user, damage.Damage);
@@ -732,10 +724,9 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
                 }
 
                 _audio.PlayPvs(damage.Sound, user);
-            }
 
-            if (!hasDamageSource)
-                RemCompDeferred<UserDamageOverTimeComponent>(user);
+                break;
+            }
         }
     }
 }

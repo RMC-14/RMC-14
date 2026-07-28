@@ -120,7 +120,7 @@ public sealed class RMCWaterSystem : EntitySystem
         Dirty(ent);
 
         _power.SetReceiverMode(ent.Owner, RMCPowerMode.Active);
-        _power.TryUseOneOffPower(ent, 5);
+        _power.TryUseOneOffPower(ent, ent.Comp.OneOffLoad);
         UpdateFilterAppearance(ent);
     }
 
@@ -374,24 +374,14 @@ public sealed class RMCWaterSystem : EntitySystem
         }
     }
 
-    private void FinishPurifying(Entity<PurifiableWaterComponent, ActiveWaterComponent> water, TimeSpan time)
+    private void FinishPurifying(Entity<PurifiableWaterComponent, ActiveWaterComponent> water)
     {
         water.Comp1.State = PurifiableWaterState.Purified;
         Dirty(water.Owner, water.Comp1);
-        _nameModifier.RefreshNameModifiers(water.Owner);
+        UpdateAppearance((water.Owner, water.Comp1));
 
         RemCompDeferred<DamageOverTimeComponent>(water);
-
-        var transitionLeft = water.Comp1.TransitionDelay - water.Comp1.PurifyDelay;
-        if (transitionLeft <= TimeSpan.Zero)
-        {
-            UpdateAppearance((water.Owner, water.Comp1));
-            RemCompDeferred<ActiveWaterComponent>(water);
-            return;
-        }
-
-        water.Comp2.SpreadAt = time + transitionLeft;
-        Dirty(water.Owner, water.Comp2);
+        RemCompDeferred<ActiveWaterComponent>(water);
     }
 
     private void UpdateFilters(TimeSpan time)
@@ -436,7 +426,7 @@ public sealed class RMCWaterSystem : EntitySystem
                     BeginDispersing((uid, purifiable, active), time);
                     break;
                 case PurifiableWaterState.Dispersing:
-                    FinishPurifying((uid, purifiable, active), time);
+                    FinishPurifying((uid, purifiable, active));
                     break;
                 case PurifiableWaterState.Purified:
                     UpdateAppearance((uid, purifiable));
