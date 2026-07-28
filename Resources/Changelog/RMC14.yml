@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Arykh
-  changes:
-  - message: Fixed the Power Loader being able to load the orbital cannon from across
-      the room.
-    type: Fix
-  id: 3030
-  time: '2026-03-30T04:53:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9282
 - author: Vixting
   changes:
   - message: Xeno apply acid is now a repeat action & has outline around items
@@ -4582,5 +4574,12 @@
   id: 3529
   time: '2026-07-28T23:43:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10493
+- author: kleinerstation13
+  changes:
+  - message: Renamed Survivor Camp on Fiorina to Cargo Comms Relay
+    type: Tweak
+  id: 3530
+  time: '2026-07-28T23:54:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10462
 Name: RMC14
 Order: -1
