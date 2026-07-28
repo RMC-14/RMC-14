@@ -1,24 +1,4 @@
 ﻿Entries:
-- author: SharkSnake98
-  changes:
-  - message: Added the option for all non-suit liaison uniforms to fold their sleeves
-      and jackets
-    type: Add
-  - message: Added a closed state to the WEYA rain jacket
-    type: Add
-  - message: Fixed Windbreakers being unable to have patches and accessories on them
-    type: Fix
-  id: 3028
-  time: '2026-03-30T04:53:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9297
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed the CLF armor vests having no bio protection and sentinel resistance.
-      They now have sentinel resistance and 15 biohazard protection.
-    type: Fix
-  id: 3029
-  time: '2026-03-30T04:51:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9269
 - author: Arykh
   changes:
   - message: Fixed the Power Loader being able to load the orbital cannon from across
@@ -4587,5 +4567,20 @@
   id: 3527
   time: '2026-07-28T23:07:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8952
+- author: Dygon
+  changes:
+  - message: Fix planet side xenonids not turning into burrowed larva when hijack
+      starts.
+    type: Fix
+  id: 3528
+  time: '2026-07-28T23:43:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10382
+- author: Dygon
+  changes:
+  - message: Fixed the dazed status effect not disabling any abilities for it's duration.
+    type: Fix
+  id: 3529
+  time: '2026-07-28T23:43:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10493
 Name: RMC14
 Order: -1
