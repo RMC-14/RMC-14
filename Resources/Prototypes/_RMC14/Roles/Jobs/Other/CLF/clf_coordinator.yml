@@ -92,7 +92,7 @@
     shoes: RMCBootsSPPFilled
     back: RMCSatchelLightpack
     suitstorage: RMCWeaponSMGFP9000
-    id: RMCIDCardCLFCoordinator # TODO RMC14
+    id: RMCIDCardCLFCoordinator
     belt: RMCScabbardDragonKatanaFilled
     pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchFirstAidInjectors
