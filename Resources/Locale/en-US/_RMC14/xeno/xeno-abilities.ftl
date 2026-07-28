@@ -75,6 +75,8 @@ rmc-xeno-evolution-failed-early-weeds = The hive hasn't developed enough yet for
 rmc-xeno-evolution-failed-bad-location = We can't evolve here.
 rmc-xeno-evolution-failed-marines-dropped = The sky talls have already landed, we can no longer evolve into this form.
 rmc-xeno-evolution-failed-queen-exists = The hive already has a Queen!
+rmc-xeno-evolution-failed-queen-requirement-minutes = We have not yet proven ourselves worthy to lead the hive. Anyone will be able to answer the call in {$minutes} minutes and {$seconds} seconds if no one else does.
+rmc-xeno-evolution-failed-queen-requirement-seconds = We have not yet proven ourselves worthy to lead the hive. Anyone will be able to answer the call in {$seconds} seconds if no one else does.
 rmc-xeno-evolution-start-self = We begin to twist and contort.
 rmc-xeno-evolution-start-others = {$xeno} begins to twist and contort.
 

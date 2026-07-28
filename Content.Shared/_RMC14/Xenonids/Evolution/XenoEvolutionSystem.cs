@@ -69,6 +69,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     private TimeSpan _evolutionAccumulatePointsBefore;
     private TimeSpan _evolveSameCasteCooldown;
     private TimeSpan _earlyEvoBoostBefore;
+    private TimeSpan _queenRequirementGracePeriod;
 
     private readonly HashSet<EntityUid> _climbable = new();
     private readonly HashSet<EntityUid> _doors = new();
@@ -114,6 +115,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         Subs.CVar(_config, RMCCVars.RMCEvolutionPointsAccumulateBeforeMinutes, v => _evolutionAccumulatePointsBefore = TimeSpan.FromMinutes(v), true);
         Subs.CVar(_config, RMCCVars.RMCXenoEvolveSameCasteCooldownSeconds, v => _evolveSameCasteCooldown = TimeSpan.FromSeconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCXenoEarlyEvoPointBoostBeforeMinutes, v => _earlyEvoBoostBefore = TimeSpan.FromMinutes(v), true);
+        Subs.CVar(_config, RMCCVars.RMCXenoQueenRequirementGracePeriodMinutes, v => _queenRequirementGracePeriod = TimeSpan.FromMinutes(v), true);
     }
 
     private void OnXenoOpenDevolveAction(Entity<XenoDevolveComponent> xeno, ref XenoOpenDevolveActionEvent args)
@@ -397,11 +399,43 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (!ContainedCheckPopup(xeno, doPopup))
             return false;
 
-        if (prototype.HasComponent<XenoEvolutionGranterComponent>(_compFactory) && HiveHasLivingQueen(xeno.Owner))
+        if (prototype.HasComponent<XenoEvolutionGranterComponent>(_compFactory))
         {
-            if (doPopup)
-                _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-failed-queen-exists"), xeno, xeno, PopupType.MediumCaution);
-            return false;
+            if (HiveHasLivingQueen(xeno.Owner))
+            {
+                if (doPopup)
+                    _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-failed-queen-exists"), xeno, xeno, PopupType.MediumCaution);
+                return false;
+            }
+
+            var queenEvolvableAt = _xenoHive.GetHive(xeno.Owner) is { } hive
+                ? hive.Comp.NewQueenAt ?? _gameTicker.RoundStartTimeSpan
+                : _gameTicker.RoundStartTimeSpan;
+
+            var graceLeft = queenEvolvableAt + _queenRequirementGracePeriod - _timing.CurTime;
+            if (graceLeft > TimeSpan.Zero)
+            {
+                var allowedEv = new XenoEvolveQueenAllowedEvent(xeno.Owner);
+                RaiseLocalEvent(ref allowedEv);
+                if (!allowedEv.Allowed)
+                {
+                    if (doPopup)
+                    {
+                        var msg = Loc.GetString("rmc-xeno-evolution-failed-queen-requirement-minutes",
+                            ("minutes", graceLeft.Minutes),
+                            ("seconds", graceLeft.Seconds));
+                        if (graceLeft.Minutes == 0)
+                        {
+                            msg = Loc.GetString("rmc-xeno-evolution-failed-queen-requirement-seconds",
+                                ("seconds", graceLeft.Seconds));
+                        }
+
+                        _popup.PopupEntity(msg, xeno, xeno, PopupType.MediumCaution);
+                    }
+
+                    return false;
+                }
+            }
         }
 
         // TODO RMC14 revive jelly when added should not bring back dead queens
