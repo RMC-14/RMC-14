@@ -24,6 +24,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Silicons.Borgs;
+using Content.Shared.Vehicle.Components;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Whitelist;
@@ -324,14 +325,7 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
 
     private void OnActiveDamageOnPulledDevoured(Entity<ActiveDamageOnPulledWhileCritComponent> ent, ref XenoTargetDevouredAttemptEvent args)
     {
-        if (_mobThresholds.TryGetDeadThreshold(ent.Owner, out var mobThreshold) && TryComp<DamageableComponent>(ent, out var damageable))
-        {
-            var lethalAmountOfDamage = mobThreshold.Value - damageable.TotalDamage;
-            var type = _prototypes.Index<DamageTypePrototype>(LethalDamageType);
-            var damage = new DamageSpecifier(type, lethalAmountOfDamage);
-            _damageable.TryChangeDamage(ent.Owner, damage, true);
-        }
-
+        DoLethalDamage(ent.Owner);
         args.Cancelled = true;
     }
 
@@ -455,11 +449,11 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         if (damage.Comp.BarricadeDamage != null && _barricadeQuery.HasComp(target))
             return true;
 
-        if (!Resolve(target, ref target.Comp, false))
-            return false;
-
         if (!_entityWhitelist.IsWhitelistPassOrNull(damage.Comp.Whitelist, target))
             return false;
+
+        if (!Resolve(target, ref target.Comp, false))
+            return HasComp<VehicleComponent>(target);
 
         if (!damage.Comp.AffectsDead && _mobState.IsDead(target))
             return false;
@@ -521,6 +515,24 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         }
 
         return false;
+    }
+
+    /// <summary>
+    ///   Does a lethal amount of asphyxiation damage to the given mob. Optionally checks for critical state.
+    /// </summary>
+    public void DoLethalDamage(EntityUid target, bool checkCrit = true, EntityUid? origin = null)
+    {
+        if (!_mobState.IsCritical(target) && checkCrit)
+            return;
+
+        if (_mobThresholds.TryGetDeadThreshold(target, out var mobThreshold)
+            && TryComp<DamageableComponent>(target, out var damageable))
+        {
+            var lethalAmountOfDamage = mobThreshold.Value - damageable.TotalDamage;
+            var type = _prototypes.Index(LethalDamageType);
+            var lethalDamage = new DamageSpecifier(type, lethalAmountOfDamage);
+            _damageable.TryChangeDamage(target, lethalDamage, true, origin: origin);
+        }
     }
 
     public override void Update(float frameTime)

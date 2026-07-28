@@ -6,26 +6,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      preset: RMCLanguagePresetSynthColonist
+    - type: LanguageLearning
+      preset: RMCLanguageLearningPresetSynthColonist
     - type: RMCAllowSuitStorage
-    - type: Skills
-      skills:
-        RMCSkillCqc: 3
-        RMCSkillEngineer: 4
-        RMCSkillConstruction: 3
-        RMCSkillFirearms: 2
-        RMCSkillOverwatch: 1
-        RMCSkillMedical: 3
-        RMCSkillSurgery: 2
-        RMCSkillResearch: 1
-        RMCSkillMeleeWeapons: 2
-        RMCSkillPilot: 2
-        RMCSkillPolice: 2
-        RMCSkillFireman: 3
-        RMCSkillPowerLoader: 2
-        RMCSkillVehicles: 2
-        RMCSkillJtac: 1
-        RMCSkillIntel: 1
-        RMCSkillDomestics: 2
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
@@ -56,7 +41,6 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetHybrisaSynthDetective
     - type: Synth
-      generation: rmc-species-synth-generation-second
   useLoadoutOfJob: RMCSyntheticColony # for inheritance
 
 - type: startingGear

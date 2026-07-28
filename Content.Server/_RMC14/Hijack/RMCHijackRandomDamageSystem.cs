@@ -1,4 +1,5 @@
 using Content.Server.Destructible;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Explosion;
@@ -8,6 +9,7 @@ using Content.Shared.Explosion;
 using Content.Shared.FixedPoint;
 using Content.Shared.GameTicking;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -21,6 +23,7 @@ namespace Content.Server._RMC14.Hijack;
 public sealed class RMCHijackRandomDamageSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
@@ -50,6 +53,8 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
     private const float PipeExplosionMax = 20f;
     private const int PipeFireRange = 2;
 
+    private TimeSpan _hijackCrashStunTime;
+
     private readonly List<(EntityUid Uid, RMCHijackRandomDamageTargetComponent Comp)> _wallTargets = new();
     private readonly List<(EntityUid Uid, RMCHijackRandomDamageTargetComponent Comp)> _windowTargets = new();
     private readonly List<(EntityUid Uid, RMCHijackRandomDamageTargetComponent Comp)> _windoorTargets = new();
@@ -62,6 +67,8 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
         SubscribeLocalEvent<RMCHijackActivePipeComponent, ComponentRemove>(OnPipeRemove);
         SubscribeLocalEvent<RMCHijackActivePipeComponent, EntityTerminatingEvent>(OnPipeRemove);
         SubscribeLocalEvent<RMCHijackActivePipeComponent, AnchorStateChangedEvent>(OnPipeAnchorChanged);
+
+        Subs.CVar(_config, RMCCVars.RMCHijackCrashStunTimeSeconds, v => _hijackCrashStunTime = TimeSpan.FromSeconds(v), true);
     }
 
     private void OnRoundRestart(RoundRestartCleanupEvent ev)
@@ -120,7 +127,8 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
         ApplyRandomDamage(_windowTargets, WindowMinPercent, WindowMaxPercent);
         ApplyRandomDamage(_windoorTargets, WindoorMinPercent, WindoorMaxPercent);
 
-        DoPipeBarrage(ev.Map, PipeInitialMinPercent, PipeInitialMaxPercent);
+        map.InitialPipeBarragePending = true;
+        map.Next = _timing.CurTime + _hijackCrashStunTime;
     }
 
     private void OnPipeRemove<T>(Entity<RMCHijackActivePipeComponent> ent, ref T args)
@@ -321,6 +329,13 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
 
             if (time < active.Next)
                 continue;
+
+            if (active.InitialPipeBarragePending)
+            {
+                active.InitialPipeBarragePending = false;
+                DoPipeBarrage((uid, active), PipeInitialMinPercent, PipeInitialMaxPercent);
+                continue;
+            }
 
             DoPipeBarrage((uid, active));
         }

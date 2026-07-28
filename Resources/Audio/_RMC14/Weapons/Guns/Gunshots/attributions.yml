@@ -332,3 +332,8 @@
   license: "CC-BY-4.0"
   copyright: "Taken from Pixabay and modified by kleinerstation13 (Github) (content license at https://pixabay.com/service/license-summary/)"
   source: "https://pixabay.com/sound-effects/film-special-effects-9mm-pistol-shoot-short-reverb-7152/"
+
+- files: [ "gun_shotgun_automatic.ogg" ]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/07455a5f3986b610e7ccdc3096cad1d914fca2f9/sound/weapons/gun_shotgun_automatic.ogg"

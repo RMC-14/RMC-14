@@ -1,0 +1,37 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "taken from CMSS13 https://github.com/cmss13-devs/cmss13-pve/blob/master/icons/obj/structures/tables.dmi",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "clothtable"
+        },
+        {
+            "name": "clothmiddle"
+        },
+        {
+            "name": "cloth1tileendtable",
+            "directions": 4
+        },
+        {
+            "name": "cloth1tilethick",
+            "directions": 8
+        },
+        {
+            "name": "clothdir",
+            "directions": 8
+        },
+        {
+            "name": "clothdir2",
+            "directions": 4
+        },
+        {
+            "name": "clothdir3",
+            "directions": 8
+        }
+    ]
+}

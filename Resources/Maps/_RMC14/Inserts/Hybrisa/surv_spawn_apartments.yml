@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 04/17/2026 19:02:42
-  entityCount: 60
+  time: 05/23/2026 14:32:26
+  entityCount: 74
 maps: []
 grids:
 - 1
@@ -87,71 +87,21 @@ entities:
     - type: GasTileOverlay
     - type: RadiationGridResistance
     - type: ImplicitRoof
+- proto: BedrollFolded
+  entities:
+  - uid: 64
+    components:
+    - type: Transform
+      parent: 23
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
 - proto: CMBarricadeSandbag
   entities:
   - uid: 12
     components:
     - type: Transform
       pos: 4.5,0.5
-      parent: 1
-- proto: CMBed
-  entities:
-  - uid: 2
-    components:
-    - type: Transform
-      pos: -0.5,6.5
-      parent: 1
-  - uid: 3
-    components:
-    - type: Transform
-      pos: 0.5,6.5
-      parent: 1
-  - uid: 4
-    components:
-    - type: Transform
-      pos: 0.5,4.5
-      parent: 1
-  - uid: 5
-    components:
-    - type: Transform
-      pos: -0.5,4.5
-      parent: 1
-  - uid: 7
-    components:
-    - type: Transform
-      pos: -0.5,2.5
-      parent: 1
-- proto: CMBedsheetBlue
-  entities:
-  - uid: 19
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -0.5,4.5
-      parent: 1
-- proto: CMBedsheetBrown
-  entities:
-  - uid: 20
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 0.5,6.5
-      parent: 1
-- proto: CMBedsheetGray
-  entities:
-  - uid: 18
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -0.5,2.5
-      parent: 1
-- proto: CMBedsheetWhite
-  entities:
-  - uid: 21
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -0.5,6.5
       parent: 1
 - proto: CMChairAlt
   entities:
@@ -160,6 +110,13 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -0.15433073,8.876757
+      parent: 1
+- proto: CMChairFolded
+  entities:
+  - uid: 5
+    components:
+    - type: Transform
+      pos: 1.5,0.5
       parent: 1
 - proto: CMDrinkWEYAWaterBottle30
   entities:
@@ -272,7 +229,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -1.5,7.5
       parent: 1
-  - uid: 47
+  - uid: 42
     components:
     - type: Transform
       pos: 0.5,1.5
@@ -289,13 +246,76 @@ entities:
     - type: Transform
       pos: 3.6887646,0.61907816
       parent: 1
-- proto: RMCBinoculars
+- proto: RMCBedBunkRed
   entities:
-  - uid: 42
+  - uid: 2
     components:
     - type: Transform
-      pos: 1.5331693,8.596823
+      pos: 0.5,4.5
       parent: 1
+  - uid: 3
+    components:
+    - type: Transform
+      pos: -0.5,2.5
+      parent: 1
+  - uid: 4
+    components:
+    - type: Transform
+      pos: 0.5,6.5
+      parent: 1
+  - uid: 19
+    components:
+    - type: Transform
+      pos: -0.5,4.5
+      parent: 1
+  - uid: 21
+    components:
+    - type: Transform
+      pos: -0.5,6.5
+      parent: 1
+- proto: RMCBinocularsCivPVE
+  entities:
+  - uid: 47
+    components:
+    - type: Transform
+      pos: 1.8594804,8.765524
+      parent: 1
+- proto: RMCCassetteTapeCustom
+  entities:
+  - uid: 66
+    components:
+    - type: Transform
+      parent: 24
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+- proto: RMCCassetteTapeRedQwesta
+  entities:
+  - uid: 63
+    components:
+    - type: Transform
+      parent: 9
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+- proto: RMCCassetteTapeWigWoo1
+  entities:
+  - uid: 61
+    components:
+    - type: Transform
+      parent: 9
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+- proto: RMCCoatHoboRed
+  entities:
+  - uid: 62
+    components:
+    - type: Transform
+      parent: 9
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
 - proto: RMCCrateBase
   entities:
   - uid: 8
@@ -303,26 +323,112 @@ entities:
     - type: Transform
       pos: -0.5,5.5
       parent: 1
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PolygonShape
+            radius: 0.01
+            vertices:
+            - -0.4,-0.4
+            - 0.4,-0.4
+            - 0.4,0.29
+            - -0.4,0.29
+          mask:
+          - Impassable
+          - HighImpassable
+          - LowImpassable
+          layer:
+          - Opaque
+          density: 50
+          hard: True
+          restitution: 0
+          friction: 0.4
+    - type: EntityStorage
+      open: True
+      removedMasks: 20
+    - type: PlaceableSurface
+      isPlaceable: True
   - uid: 9
     components:
     - type: Transform
       pos: -0.5,3.5
       parent: 1
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 61
+          - 62
+          - 63
+        paper_label: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
   - uid: 23
     components:
     - type: Transform
       pos: 3.5,1.5
       parent: 1
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 64
+          - 65
+        paper_label: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
   - uid: 24
     components:
     - type: Transform
       pos: 3.5,3.5
       parent: 1
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 66
+        paper_label: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
   - uid: 25
     components:
     - type: Transform
       pos: 3.5,5.5
       parent: 1
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PolygonShape
+            radius: 0.01
+            vertices:
+            - -0.4,-0.4
+            - 0.4,-0.4
+            - 0.4,0.29
+            - -0.4,0.29
+          mask:
+          - Impassable
+          - HighImpassable
+          - LowImpassable
+          layer:
+          - Opaque
+          density: 50
+          hard: True
+          restitution: 0
+          friction: 0.4
+    - type: EntityStorage
+      open: True
+      removedMasks: 20
+    - type: PlaceableSurface
+      isPlaceable: True
   - uid: 26
     components:
     - type: Transform
@@ -349,6 +455,27 @@ entities:
     - type: Transform
       pos: 0.8701188,2.1337543
       parent: 1
+- proto: RMCFoodSnackBarcaridine
+  entities:
+  - uid: 74
+    components:
+    - type: Transform
+      pos: 1.3907304,8.348568
+      parent: 1
+- proto: RMCHardhatBlue
+  entities:
+  - uid: 69
+    components:
+    - type: Transform
+      pos: -0.5,5.5
+      parent: 1
+- proto: RMCHeadBeanieGray
+  entities:
+  - uid: 73
+    components:
+    - type: Transform
+      pos: 3.5,5.5
+      parent: 1
 - proto: RMCHybrisaStairs
   entities:
   - uid: 36
@@ -363,12 +490,73 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -1.5,7.5
       parent: 1
+- proto: RMCItemPoolBuckshot
+  entities:
+  - uid: 70
+    components:
+    - type: Transform
+      pos: 3.5,3.5
+      parent: 1
+  - uid: 71
+    components:
+    - type: Transform
+      pos: -0.5,5.5
+      parent: 1
+  - uid: 72
+    components:
+    - type: Transform
+      pos: 3.5,5.5
+      parent: 1
+- proto: RMCJumpsuitLiaisonGreyWorkwear
+  entities:
+  - uid: 65
+    components:
+    - type: Transform
+      parent: 23
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
 - proto: RMCMagazinePistolHoldout
   entities:
   - uid: 22
     components:
     - type: Transform
       pos: 3.547203,1.0533028
+      parent: 1
+- proto: RMCPaperScrapProp
+  entities:
+  - uid: 68
+    components:
+    - type: Transform
+      pos: 0.5,7.5
+      parent: 1
+- proto: RMCPlatformHybrisaThreeCornerSmall
+  entities:
+  - uid: 7
+    components:
+    - type: Transform
+      pos: -0.5,8.5
+      parent: 1
+  - uid: 20
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -0.5,7.5
+      parent: 1
+- proto: RMCPlatformHybrisaThreeStair
+  entities:
+  - uid: 18
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -1.5,8.5
+      parent: 1
+- proto: RMCPlatformHybrisaThreeStairAlt
+  entities:
+  - uid: 67
+    components:
+    - type: Transform
+      pos: -1.5,7.5
       parent: 1
 - proto: RMCRollerBedHospital
   entities:

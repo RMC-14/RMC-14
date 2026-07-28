@@ -58,6 +58,7 @@
       path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
   - type: RMCAllowStrapMovement
   - type: Strap
+    modifyBuckleDrawDepth: false
     buckleSound:
       path: /Audio/_RMC14/Mecha/powerloader_buckle.ogg
       params:

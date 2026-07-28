@@ -81,6 +81,18 @@
 
 - type: entity
   parent: RMCBaseEffectXenoStructure
+  id: RMCEffectWallXenoResinReflective
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    layers:
+    - sprite: /Textures/_RMC14/Effects/xeno_secrete.rsi
+      state: secrete_base
+    - map: ["enum.XenoConstructionVisualLayers.Animation"]
+      state: wall # TODO RMC14 Make this have it's own build animation once the reflective wall stops using the skeletal resin sprite.
+
+- type: entity
+  parent: RMCBaseEffectXenoStructure
   id: RMCEffectWallXenoMembrane
   categories: [ HideSpawnMenu ]
   components:

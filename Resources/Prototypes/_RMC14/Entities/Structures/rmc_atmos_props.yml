@@ -1,4 +1,4 @@
-﻿# Scrubbers
+# Scrubbers
 - type: entity
   id: RMCAirScrubberPortable
   parent: BaseStructureDynamic
@@ -181,6 +181,7 @@
   name: space heater
   description: It's an electric space heater. It heats the room through radiation with electricity.
   components:
+  - type: VehicleSmashable
   - type: Transform
   - type: Physics
     bodyType: Dynamic

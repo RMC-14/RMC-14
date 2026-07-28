@@ -108,6 +108,12 @@ public sealed partial class RMCFishComponent : Component
     public int Length;
 
     [DataField]
+    public float MinScale = 0.5f;
+
+    [DataField]
+    public float MaxScale = 1.5f;
+
+    [DataField]
     public bool Guttable = true;
 
     [DataField, AutoNetworkedField]

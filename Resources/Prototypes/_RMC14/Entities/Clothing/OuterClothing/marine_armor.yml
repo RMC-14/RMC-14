@@ -709,26 +709,6 @@
 # Forced Camo Variants for Vendor Parity
 - type: entity
   parent: CMArmorM3VLSynth
-  id: CMArmorM3VLSynthGray
-  name: M3A1 synthetic utility vest (UN Gray)
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/classic.rsi
-  - type: ItemCamouflage
-    camouflageVariations: { }
-
-- type: entity
-  parent: CMArmorM3VLSynth
-  id: CMArmorM3VLSynthDarkGray
-  name: M3A1 synthetic utility vest (UN Dark Grey)
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/urban.rsi
-  - type: ItemCamouflage
-    camouflageVariations: { }
-
-- type: entity
-  parent: CMArmorM3VLSynth
   id: CMArmorM3VLSynthJungle
   name: M3A1 synthetic utility vest (Jungle)
   components:

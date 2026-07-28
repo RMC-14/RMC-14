@@ -1,4 +1,5 @@
 rmc-bullet-box-amount = It contains {$amount} rounds.
+rmc-bullet-box-used-in = Used in: {$vehicle}
 rmc-bullet-box-wrong-rounds = Those aren't the same rounds. Better not mix them up.
 rmc-bullet-box-box-empty = Box has no bullets left to give.
 rmc-bullet-box-box-full = Box has no more room for bullets.

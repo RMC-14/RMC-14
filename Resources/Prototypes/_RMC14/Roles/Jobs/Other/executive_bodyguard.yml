@@ -32,8 +32,7 @@
   supervisors: cm-job-supervisors-we-ya
   roleWeight: 0.25
   accessGroups:
-  - Colony
-  - RMCWeYa
+  - RMCWeYaExecColony
   spawnMenuRoleName: Executive Bodyguard
   special:
   - !type:AddComponentSpecial
@@ -41,6 +40,7 @@
     - type: NpcFactionMember
       factions:
       - WeYa
+      - UNMC
     - type: JobPrefix
       prefix: rmc-job-prefix-executive-bodyguard
     - type: Skills
@@ -51,6 +51,7 @@
         RMCSkillEndurance: 2
         RMCSkillMeleeWeapons: 1
         RMCSkillFirearms: 1
+        RMCSkillMedical: 1
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi

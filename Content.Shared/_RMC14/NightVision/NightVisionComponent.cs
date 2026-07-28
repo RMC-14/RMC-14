@@ -31,9 +31,6 @@ public sealed partial class NightVisionComponent : Component
     public bool Mesons;
 
     [DataField, AutoNetworkedField]
-    public bool ExperimentalMesonFov;
-
-    [DataField, AutoNetworkedField]
     public bool BlockScopes;
 
     [DataField, AutoNetworkedField]

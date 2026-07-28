@@ -134,52 +134,58 @@ public sealed class RMCProjectileSystem : EntitySystem
             return;
         }
 
-        if (projectile.Comp.ForceHit || projectile.Comp.ShotFrom == null)
-            return;
+        var ev = new RMCBeforeProjectileAccuracyEvent(projectile);
+        RaiseLocalEvent(args.OtherEntity, ref ev);
 
-        if (!TryComp(projectile.Owner, out ProjectileComponent? projectileComponent))
-            return;
-
-        if (!TryComp(args.OtherEntity, out EvasionComponent? evasionComponent))
-            return;
-
-        var accuracy = projectile.Comp.Accuracy;
-        var targetCoords = _transform.GetMoverCoordinates(args.OtherEntity);
-        var distance = (targetCoords.Position - projectile.Comp.ShotFrom.Value.Position).Length();
-
-        foreach (var threshold in projectile.Comp.Thresholds)
+        if (!ev.GuaranteedMiss)
         {
-            var pastRange = distance - threshold.Range;
+            if (projectile.Comp.ForceHit || projectile.Comp.ShotFrom == null)
+                return;
 
-            if (threshold.Buildup)
+            if (!TryComp(projectile.Owner, out ProjectileComponent? projectileComponent))
+                return;
+
+            if (!TryComp(args.OtherEntity, out EvasionComponent? evasionComponent))
+                return;
+
+            var accuracy = projectile.Comp.Accuracy;
+            var targetCoords = _transform.GetMoverCoordinates(args.OtherEntity);
+            var distance = (targetCoords.Position - projectile.Comp.ShotFrom.Value.Position).Length();
+
+            foreach (var threshold in projectile.Comp.Thresholds)
             {
-                if (pastRange >= 0)
+                var pastRange = distance - threshold.Range;
+
+                if (threshold.Buildup)
+                {
+                    if (pastRange >= 0)
+                        continue;
+
+                    accuracy += threshold.Falloff * pastRange;
+                    continue;
+                }
+
+                if (pastRange <= 0)
                     continue;
 
-                accuracy += threshold.Falloff * pastRange;
-                continue;
+                accuracy -= threshold.Falloff * pastRange;
             }
 
-            if (pastRange <= 0)
-                continue;
+            if (!_examine.InRangeUnOccluded(_transform.ToMapCoordinates(projectile.Comp.ShotFrom.Value), _transform.ToMapCoordinates(targetCoords), distance, null))
+                accuracy += (int)AccuracyModifiers.TargetOccluded;
 
-            accuracy -= threshold.Falloff * pastRange;
+            if (!projectile.Comp.IgnoreFriendlyEvasion && IsProjectileTargetFriendly(projectile.Owner, args.OtherEntity))
+                accuracy -= evasionComponent.ModifiedEvasionFriendly;
+
+            accuracy -= evasionComponent.ModifiedEvasion;
+
+            accuracy = accuracy > projectile.Comp.MinAccuracy ? accuracy : projectile.Comp.MinAccuracy;
+
+            var random = new Xoshiro128P(projectile.Comp.GunSeed, (long)projectile.Comp.Tick << 32 | GetNetEntity(args.OtherEntity).Id).NextFloat(0f, 100f);
+
+            if (accuracy >= random)
+                return;
         }
-
-        if (!_examine.InRangeUnOccluded(_transform.ToMapCoordinates(projectile.Comp.ShotFrom.Value), _transform.ToMapCoordinates(targetCoords), distance, null))
-            accuracy += (int) AccuracyModifiers.TargetOccluded;
-
-        if (!projectile.Comp.IgnoreFriendlyEvasion && IsProjectileTargetFriendly(projectile.Owner, args.OtherEntity))
-            accuracy -= evasionComponent.ModifiedEvasionFriendly;
-
-        accuracy -= evasionComponent.ModifiedEvasion;
-
-        accuracy = accuracy > projectile.Comp.MinAccuracy ? accuracy : projectile.Comp.MinAccuracy;
-
-        var random = new Xoshiro128P(projectile.Comp.GunSeed, (long) projectile.Comp.Tick << 32 | GetNetEntity(args.OtherEntity).Id).NextFloat(0f, 100f);
-
-        if (accuracy >= random)
-            return;
 
         args.Cancelled = true;
 

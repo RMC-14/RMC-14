@@ -227,7 +227,7 @@
       590: Critical
       690: Dead
   - type: XenoZoom
-    zoom: 1.9, 1.9
+    zoom: 1.8, 1.8
     offsetLength: 0
     speed: 1
     doAfter: 0

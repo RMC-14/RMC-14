@@ -58,5 +58,5 @@
   parent: CMJobIconBase
   id: RMCJobIconWeYaSec
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/We-Ya/pmc.rsi
     state: weya_sec

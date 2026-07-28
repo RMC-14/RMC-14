@@ -12,7 +12,7 @@
   startingGear: RMCGearSPPCrashlandBase
   hasIcon: true
   greeting: rmc-job-greeting-crashland
-  spawnMenuRoleName: SPP Airborne Survivor (Base)
+  spawnMenuRoleName: SPP Airborne (Trijent Special Survivor - Base)
   abstract: true
   hidden: true
 

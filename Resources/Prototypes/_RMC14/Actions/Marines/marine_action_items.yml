@@ -47,23 +47,6 @@
     event: !type:ToggleActionEvent
 
 - type: entity
-  parent: ActionMarineBase
-  id: RMCActionToggleExperimentalMesons
-  name: Toggle experimental meson goggles
-  description: Enables synthetic meson-assisted terrain imaging.
-  components:
-  - type: Action
-    icon:
-      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/experimental_meson_hud.rsi
-      state: icon
-    iconOn:
-      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/experimental_meson_hud.rsi
-      state: icon-on
-    useDelay: 0.25
-  - type: InstantAction
-    event: !type:ToggleActionEvent
-
-- type: entity
   parent: ActionMarineToggleable
   id: RMCActionToggleIDLock
   name: Toggle ID lock
@@ -157,23 +140,6 @@
     itemIconStyle: BigItem
   - type: InstantAction
     event: !type:ToggleActionEvent
-
-- type: entity
-  parent: ActionMarineBase
-  id: RMCActionToggleSynthHud
-  name: Toggle Synthetic HUD
-  description: Toggle the integrated synthetic medical HUD.
-  components:
-  - type: Action
-    icon:
-      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud.rsi
-      state: icon
-    iconOn:
-      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud.rsi
-      state: icon-on
-    useDelay: 0.25
-  - type: InstantAction
-    event: !type:RMCToggleSynthHudActionEvent
 
 - type: entity
   parent: ActionMarineBase

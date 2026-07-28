@@ -411,6 +411,15 @@
     state: horizon
 
 - type: entity
+  parent: CMPosterBase
+  id: CMPosterTartarus
+  name: "Tartarus Mining Co. poster"
+  description: "A simplified version of the Tartarus Mining Co. logo. The Tartarus Mining Company is of course a subsidiary company of the Weston-Yamada Corporation, what did you expect?"
+  components:
+  - type: Sprite
+    state: tartarus
+
+- type: entity
   parent: CMPosterElectro
   id: CMPosterElectroMan
   description: "Electro Golds - lovingly machine rolled for YOUR pleasure."
@@ -687,6 +696,16 @@
   components:
   - type: Sprite
     state: weya_5
+
+- type: entity
+  parent: RMCPosterWEYA1
+  id: RMCPosterROCreed
+  name: founders plaque
+  description: A plaque with the names of the research team of this facility, including the founders and contributors.
+  components:
+  - type: Sprite
+    state: rocreed
+
 
 # Daniel
 - type: entity

@@ -1248,6 +1248,7 @@
         tags:
         - RMCMagazineRifleL83A3Extended
 
+# Type 77
 - type: entity
   parent: RMCBoxMagazineRifleBase
   id: RMCBoxMagazineRifleType77Empty
@@ -1265,7 +1266,7 @@
     - state: rifle_ammo_full_mags_color
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#ffc000"
-    - state: rifle_box_54
+    - state: rifle_box_77
       color: "#ffcb26"
     - state: rifle_box_marking
       color: "#7c4c1b"
@@ -1289,6 +1290,94 @@
   components:
   - type: CMItemSlots
     startingItem: RMCMagazineRifleType77
+    count: 10
+
+# Type 77 AP
+- type: entity
+  parent: RMCBoxMagazineRifleBase
+  id: RMCBoxMagazineRifleType77APEmpty
+  name: magazine box (AP Type 77 x 10)
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazineRifleType77APEmpty
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#515237"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#ffc000"
+    - state: rifle_box_77
+      color: "#ffcb26"
+    - state: rifle_box_marking
+      color: "#318b11"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#515237"
+    - state: rifle_lid_marking
+      map: [ "lid_marking" ]
+      color: "#318b11"
+  - type: CMItemSlots
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleType77AP
+
+- type: entity
+  parent: RMCBoxMagazineRifleType77APEmpty
+  id: RMCBoxMagazineRifleType77AP
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleType77AP
+    count: 10
+
+# Type 77 rubber
+- type: entity
+  parent: RMCBoxMagazineRifleBase
+  id: RMCBoxMagazineRifleType77RubberEmpty
+  name: magazine box (rubber Type 77 x 10)
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazineRifleType77RubberEmpty
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#515237"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#ffc000"
+    - state: rifle_box_77
+      color: "#ffcb26"
+    - state: rifle_box_marking
+      color: "#0A00C8"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#515237"
+    - state: rifle_lid_marking
+      map: [ "lid_marking" ]
+      color: "#0A00C8"
+  - type: CMItemSlots
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleType77Rubber
+
+- type: entity
+  parent: RMCBoxMagazineRifleType77RubberEmpty
+  id: RMCBoxMagazineRifleType77Rubber
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleType77Rubber
     count: 10
 
 # SSG45
@@ -1521,6 +1610,51 @@
       whitelist:
         tags:
         - RMCMagazineRifleType71HEAP
+
+# Type 71 Rubber
+- type: entity
+  parent: RMCBoxMagazineRifleBase
+  id: RMCBoxMagazineRifleType71RubberEmpty
+  name: magazine box (rubber Type 71 x 10)
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#962e23"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#ffc000"
+    - state: rifle_box_71
+      color: "#ffcb26"
+    - state: rifle_box_marking
+      color: "#0A00C8"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#962e23"
+    - state: rifle_lid_marking
+      map: [ "lid_marking" ]
+      color: "#0A00C8"
+  - type: CMItemSlots
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleType71Rubber
+
+- type: entity
+  parent: RMCBoxMagazineRifleType71RubberEmpty
+  id: RMCBoxMagazineRifleType71Rubber
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleType71Rubber
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleType71Rubber
 
 # Type 88
 - type: entity
@@ -2165,6 +2299,51 @@
       whitelist:
         tags:
         - RMCMagazineSMGType64
+
+# Type 64 Rubber
+- type: entity
+  parent: RMCBoxMagazineSMGBase
+  id: RMCBoxMagazineSMGType64RubberEmpty
+  name: magazine box (rubber Type 64 x 12)
+  components:
+  - type: Sprite
+    layers:
+    - state: smg_box
+      color: "#a64f46"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#727e90"
+    - state: smg_box_64
+      color: "#ffcb26"
+    - state: smg_box_marking
+      color: "#0A00C8"
+    - state: smg_lid
+      map: [ "lid" ]
+      color: "#a64f46"
+    - state: smg_lid_marking
+      map: [ "lid_marking" ]
+      color: "#0A00C8"
+  - type: CMItemSlots
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineSMGType64Rubber
+
+- type: entity
+  parent: RMCBoxMagazineSMGType64RubberEmpty
+  id: RMCBoxMagazineSMGType64Rubber
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineSMGType64Rubber
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineSMGType64Rubber
 
 # L7A3 HESH
 

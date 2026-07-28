@@ -190,8 +190,17 @@ public sealed class MentorManager : IPostInjectInit
         };
 
         var isAdmin = false;
+        var title = "Mentor";
         if (_player.TryGetSessionById(author.UserId, out var authorSession))
-            isAdmin = _admin.IsAdmin(authorSession);
+        {
+            var data = _admin.GetAdminData(authorSession);
+
+            if (data != null)
+            {
+                isAdmin = true;
+                title = data.Title ?? "Admin";
+            }
+        }
 
         var mentorMsg = new MentorMessage(
             destination,
@@ -202,7 +211,8 @@ public sealed class MentorManager : IPostInjectInit
             DateTime.Now,
             true,
             isAdmin,
-            true
+            true,
+            title
         );
         var messages = new List<MentorMessage> { mentorMsg };
         var receive = new MentorMessagesReceivedMsg { Messages = messages };
@@ -300,8 +310,17 @@ public sealed class MentorManager : IPostInjectInit
         };
 
         var isAdmin = false;
+        var title = "Mentor";
         if (_player.TryGetSessionById(author.UserId, out var authorSession))
-            isAdmin = _admin.IsAdmin(authorSession);
+        {
+            var data = _admin.GetAdminData(authorSession);
+
+            if (data != null)
+            {
+                isAdmin = true;
+                title = data.Title ?? "Admin";
+            }
+        }
 
         var mentorMsg = new MentorMessage(
             destination,
@@ -312,7 +331,8 @@ public sealed class MentorManager : IPostInjectInit
             DateTime.Now,
             true,
             isAdmin,
-            true
+            true,
+            title
         );
         var messages = new List<MentorMessage> { mentorMsg };
         var receive = new MentorMessagesReceivedMsg { Messages = messages };
@@ -369,7 +389,18 @@ public sealed class MentorManager : IPostInjectInit
             recipients.Add(active.Channel);
         }
 
-        var isAdmin = author != null && _admin.IsAdmin(author);
+        var isAdmin = false;
+        var title = "Mentor";
+        if (author != null && _player.TryGetSessionById(author.UserId, out var authorSession))
+        {
+            var data = _admin.GetAdminData(authorSession);
+
+            if (data != null)
+            {
+                isAdmin = true;
+                title = data.Title ?? "Admin";
+            }
+        }
         var mentorMsg = new MentorMessage(
             destination,
             destinationName,
@@ -379,7 +410,8 @@ public sealed class MentorManager : IPostInjectInit
             DateTime.Now,
             isMentor,
             isAdmin,
-            create
+            create,
+            title
         );
         var messages = new List<MentorMessage> { mentorMsg };
         var receive = new MentorMessagesReceivedMsg { Messages = messages };

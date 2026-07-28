@@ -18,6 +18,7 @@ public sealed partial class HiveTeamWindow : DefaultWindow
     public void UpdateState(
         HiveTeamsComponent teams,
         List<(NetEntity Entity, string Name, EntProtoId? ProtoId)> allXenos,
+        List<(NetEntity Entity, string Name, EntProtoId? ProtoId)> pickerXenos,
         Func<EntProtoId?, Texture?> getTexture,
         Action<int, NetEntity> onSetLeader,
         Action<int> onRemoveLeader,
@@ -34,7 +35,7 @@ public sealed partial class HiveTeamWindow : DefaultWindow
             var panel = new HiveTeamPanelControl();
             panel.HorizontalExpand = true;
             panel.VerticalExpand = true;
-            panel.Populate(i, entry, allXenos, getTexture, onSetLeader, onRemoveLeader, onAddMember, onRemoveMember, onSetRole);
+            panel.Populate(i, entry, allXenos, pickerXenos, getTexture, onSetLeader, onRemoveLeader, onAddMember, onRemoveMember, onSetRole);
 
             if (i < 2)
                 TopRow.AddChild(panel);
