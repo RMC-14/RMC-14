@@ -31,6 +31,7 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: MutinyForcedLoyalist
     - type: Skills
       skills:
         RMCSkillCqc: 2
