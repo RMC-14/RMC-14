@@ -263,7 +263,7 @@
       - id: RMCSentryLaptop
         amount: 4
       - id: RMCOverwatchCameraTripod
-        amount: 1
+        amount: 4
       - id: CMSparePDTLBattleBuddyKit
         amount: 4
     - name: Flare and Light
