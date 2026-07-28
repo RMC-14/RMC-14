@@ -7,7 +7,7 @@
     prototypes: [ RMCGearCorpseFORECONSpotter ]
   - type: Rank
     rank: RMCRankSergeant
- -  type: SquadMember
+  - type: SquadMember
     background:
       sprite: _RMC14/Interface/job_icons/UNMC/marine.rsi
       state: hudsquad
