@@ -20,11 +20,16 @@ public sealed partial class RMCConstructionBuildDoAfterEvent : SimpleDoAfterEven
 
     [DataField(required: true)]
     public Direction Direction;
-    public RMCConstructionBuildDoAfterEvent(RMCConstructionPrototype prototype, int amount, NetCoordinates coordinates, Direction direction)
+
+    [DataField]
+    public RMCConstructionGhostKey? GhostKey;
+
+    public RMCConstructionBuildDoAfterEvent(RMCConstructionPrototype prototype, int amount, NetCoordinates coordinates, Direction direction, RMCConstructionGhostKey? ghostKey = null)
     {
         Prototype = prototype;
         Amount = amount;
         Coordinates = coordinates;
         Direction = direction;
+        GhostKey = ghostKey;
     }
 }

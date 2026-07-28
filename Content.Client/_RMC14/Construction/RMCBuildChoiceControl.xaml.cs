@@ -3,6 +3,7 @@ using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Construction;
@@ -19,5 +20,18 @@ public partial class RMCBuildChoiceControl : Control
     public void Set(string name)
     {
         NameLabel.SetMessage(name);
+    }
+
+    public void SetPrototype(EntProtoId? prototype)
+    {
+        if (prototype == null || string.IsNullOrWhiteSpace(prototype.Value.Id))
+        {
+            PrototypeView.SetPrototype(null);
+            PrototypeView.Visible = false;
+            return;
+        }
+
+        PrototypeView.SetPrototype(prototype);
+        PrototypeView.Visible = true;
     }
 }

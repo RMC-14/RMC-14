@@ -1,7 +1,6 @@
-﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Physics;
 using Content.Shared.Tag;
-using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
@@ -32,6 +31,10 @@ public sealed partial class RMCConstructionPrototype : IPrototype, IInheritingPr
     [AlwaysPushInheritance]
     [DataField]
     public bool NoRotate = false;
+
+    [AlwaysPushInheritance]
+    [DataField]
+    public RMCConstructionType ConstructionType = RMCConstructionType.Item;
 
     /// <summary>
     /// Which other construction prototypes are listed when this button is pressed.
@@ -89,4 +92,17 @@ public sealed partial class RMCConstructionPrototype : IPrototype, IInheritingPr
     /// </summary>
     [DataField]
     public HashSet<int>? StackAmounts;
+
+    [DataField]
+    public HashSet<ProtoId<RMCConstructionPrototype>>? Buildable { get; set; }
+}
+
+/// <summary>
+/// Type of RMC construction - determines behavior during construction
+/// </summary>
+[Serializable, NetSerializable]
+public enum RMCConstructionType : byte
+{
+    Item,
+    Structure
 }
