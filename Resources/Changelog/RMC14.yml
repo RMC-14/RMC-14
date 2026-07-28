@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: BreakpointDebug1234
-  changes:
-  - message: M1984 hollow point magazine box. Can be crafted, purchased or received
-      as a random crate from ASRS.
-    type: Add
-  id: 3026
-  time: '2026-03-30T04:48:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8947
 - author: Ian321
   changes:
   - message: XO and others now keep their pointer when no longer SL
@@ -4585,5 +4577,14 @@
   id: 3525
   time: '2026-07-27T22:40:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10580
+- author: Thereisabear
+  changes:
+  - message: Fixed Queen Eye's leash breaking.
+    type: Fix
+  - message: Fixed various Queen Eye performance issues.
+    type: Fix
+  id: 3526
+  time: '2026-07-28T23:05:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10380
 Name: RMC14
 Order: -1
