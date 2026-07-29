@@ -962,5 +962,17 @@
     {
       "name": "background_wy_com"
     }
+    {
+      "name": "tse_paconstable_pve"
+    },
+    {
+      "name": "tse_painspector_pve"
+    },
+    {
+      "name": "tse_paseniorconstable_pve"
+    },
+    {
+      "name": "tse_pasergeant_pve"
+    },
   ]
 }
