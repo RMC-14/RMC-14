@@ -22,6 +22,8 @@
         RMCSkillEndurance: 2
         RMCSkillFirearms: 1
         RMCSkillFireman: 2
+        RMCSkillIntel: 1
+        RMCSkillLeadership: 1
         RMCSkillMedical: 1
         RMCSkillMeleeWeapons: 1
         RMCSkillPolice: 2
@@ -33,6 +35,8 @@
       prefix: rmc-job-prefix-tsepa-pve-sergeant
     - type: AssignSquad
       squad: SquadTSEPAPVE
+    - type: RMCTrackable
+    - type: RMCPointing
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
