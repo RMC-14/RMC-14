@@ -99,7 +99,7 @@ public sealed class RMCPullingSystem : EntitySystem
 
         SubscribeLocalEvent<BeingPulledComponent, PullStoppedMessage>(OnBeingPulledPullStopped);
 
-        SubscribeLocalEvent<PullerComponent, RMCGetTackleRangeEvent>(ExtendTacklingRangeToPullingTarget);
+        SubscribeLocalEvent<PullerComponent, GetUserDisarmRange>(ExtendTacklingRangeToPullingTarget);
         SubscribeLocalEvent<PullerComponent, RMCMeleeUserGetRangeEvent>(ExtendAttackingRangeToPullingTarget);
     }
 
@@ -544,15 +544,12 @@ public sealed class RMCPullingSystem : EntitySystem
     }
 
 
-    private void ExtendTacklingRangeToPullingTarget(Entity<PullerComponent> ent, ref RMCGetTackleRangeEvent args)
+    private void ExtendTacklingRangeToPullingTarget(Entity<PullerComponent> ent, ref GetUserDisarmRange args)
     {
         if (args.Target == ent.Comp.Pulling && args.Target != null)
         {
-            if (TryComp<MeleeWeaponComponent>(ent, out var meleeComp))
-            {
-                Log.Info("Bigger tackle range");
-                meleeComp.Range = 3.0f;
-            }
+            Log.Info("Bigger Tackling range 2.0V");
+            args.Range = 4.0f;
         }
     }
 
@@ -561,7 +558,7 @@ public sealed class RMCPullingSystem : EntitySystem
         if (args.Target == ent.Comp.Pulling && args.Target != null)
         {
             Log.Info("Bigger Attack range");
-            args.Range = 3.0f;
+            args.Range = 4.0f;
         }
     }
     public override void Update(float frameTime)
