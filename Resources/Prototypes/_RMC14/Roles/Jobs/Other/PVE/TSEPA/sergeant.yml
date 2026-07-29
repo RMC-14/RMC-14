@@ -51,7 +51,7 @@
     jumpsuit: RMCJumpsuitTSEPA
     outerClothing: RMCCoatTSEPA
     shoes: RMCShoesLaceup
-    id: RMCIDCardTSEPAGoldSilver
+    id: RMCIDCardTSEPASilverGold
     back: RMCSatchelTSEPA
 
 - type: playTimeTracker
