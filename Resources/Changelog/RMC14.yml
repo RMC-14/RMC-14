@@ -1,62 +1,4 @@
 ﻿Entries:
-- author: Arykh
-  changes:
-  - message: Added the sleeper medical pod! Removes chemicals from the occupant and
-      can inject stabilizing chemicals, with more becoming available as injuries worsen.
-    type: Add
-  id: 3025
-  time: '2026-03-28T22:39:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9130
-- author: BreakpointDebug1234
-  changes:
-  - message: M1984 hollow point magazine box. Can be crafted, purchased or received
-      as a random crate from ASRS.
-    type: Add
-  id: 3026
-  time: '2026-03-30T04:48:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8947
-- author: Ian321
-  changes:
-  - message: XO and others now keep their pointer when no longer SL
-    type: Fix
-  id: 3027
-  time: '2026-03-30T04:52:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9279
-- author: SharkSnake98
-  changes:
-  - message: Added the option for all non-suit liaison uniforms to fold their sleeves
-      and jackets
-    type: Add
-  - message: Added a closed state to the WEYA rain jacket
-    type: Add
-  - message: Fixed Windbreakers being unable to have patches and accessories on them
-    type: Fix
-  id: 3028
-  time: '2026-03-30T04:53:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9297
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed the CLF armor vests having no bio protection and sentinel resistance.
-      They now have sentinel resistance and 15 biohazard protection.
-    type: Fix
-  id: 3029
-  time: '2026-03-30T04:51:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9269
-- author: Arykh
-  changes:
-  - message: Fixed the Power Loader being able to load the orbital cannon from across
-      the room.
-    type: Fix
-  id: 3030
-  time: '2026-03-30T04:53:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9282
-- author: Vixting
-  changes:
-  - message: Xeno apply acid is now a repeat action & has outline around items
-    type: Tweak
-  id: 3031
-  time: '2026-03-31T01:57:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9535
 - author: Bakeun0
   changes:
   - message: Fixed burrow-down sound being played when selecting a tile to burrow
@@ -4586,5 +4528,58 @@
   id: 3524
   time: '2026-07-27T16:36:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10447
+- author: FreeSpy443
+  changes:
+  - message: Fixed the storage whitelist on the provost clipboard
+    type: Fix
+  id: 3525
+  time: '2026-07-27T22:40:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10580
+- author: Thereisabear
+  changes:
+  - message: Fixed Queen Eye's leash breaking.
+    type: Fix
+  - message: Fixed various Queen Eye performance issues.
+    type: Fix
+  id: 3526
+  time: '2026-07-28T23:05:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10380
+- author: wheelwrightt
+  changes:
+  - message: Laser designators and rangefinders will now have their targeting interrupted/cancelled
+      when line of sight is broken.
+    type: Tweak
+  id: 3527
+  time: '2026-07-28T23:07:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8952
+- author: Dygon
+  changes:
+  - message: Fix planet side xenonids not turning into burrowed larva when hijack
+      starts.
+    type: Fix
+  id: 3528
+  time: '2026-07-28T23:43:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10382
+- author: Dygon
+  changes:
+  - message: Fixed the dazed status effect not disabling any abilities for it's duration.
+    type: Fix
+  id: 3529
+  time: '2026-07-28T23:43:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10493
+- author: kleinerstation13
+  changes:
+  - message: Renamed Survivor Camp on Fiorina to Cargo Comms Relay
+    type: Tweak
+  id: 3530
+  time: '2026-07-28T23:54:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10462
+- author: GrigoriyGalintano
+  changes:
+  - message: Fixed xenos being able to fish.
+    type: Fix
+  id: 3531
+  time: '2026-07-29T01:14:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10133
 Name: RMC14
 Order: -1
