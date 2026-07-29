@@ -49,7 +49,6 @@
     eyes: RMCGlassesSecurityBlue
     ears: RMCHeadsetTSEPAPVE
     jumpsuit: RMCJumpsuitTSEPA
-    outerClothing: RMCCoatTSEPA
     shoes: RMCShoesLaceup
     id: RMCIDCardTSEPA
     back: RMCSatchelTSEPA
