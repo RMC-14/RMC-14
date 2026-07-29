@@ -787,10 +787,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         tracked.Comp.Background = squad.Comp.MinimapBackground;
         if (TryComp(tracked, out TacticalMapIconComponent? icon))
-        {
-            icon.Background = tracked.Comp.Background;
-            Dirty(tracked, icon);
-        }
+            SetBackground((tracked, icon), tracked.Comp.Background);
     }
 
     private void UpdateRotting(Entity<ActiveTacticalMapTrackedComponent> tracked)
@@ -816,10 +813,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         }
 
         if (TryComp(tracked, out TacticalMapIconComponent? icon))
-        {
-            icon.Background = tracked.Comp.Background;
-            Dirty(tracked, icon);
-        }
+            SetBackground((tracked, icon), tracked.Comp.Background);
     }
 
     private void UpdateHiveLeader(Entity<ActiveTacticalMapTrackedComponent> tracked, bool isLeader)

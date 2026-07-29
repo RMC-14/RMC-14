@@ -4,7 +4,7 @@ using Robust.Shared.Utility;
 namespace Content.Shared._RMC14.Marines.Squads;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SquadSystem), Other = AccessPermissions.Read)]
+[Access(typeof(SquadSystem))]
 public sealed partial class SquadMemberComponent : Component
 {
     [DataField, AutoNetworkedField]

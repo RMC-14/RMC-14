@@ -11,6 +11,7 @@ public sealed class RMCGhostTargetUIController : UIController, IOnSystemChanged<
 {
     [Dependency] private readonly IEntityNetworkManager _net = default!;
 
+    private readonly RMCGhostTargetRequestState _requests = new();
     private RMCGhostTargetWindow? _window;
 
     public override void Initialize()
@@ -47,9 +48,17 @@ public sealed class RMCGhostTargetUIController : UIController, IOnSystemChanged<
 
     private void OnGhostWarpsResponse(RMCGhostWarpsResponseEvent msg, EntitySessionEventArgs args)
     {
-        var window = EnsureWindow();
-        window.UpdateSections(msg.Sections);
-        window.Populate();
+        if (!_requests.TryComplete(msg.RequestId, out var refreshQueued))
+            return;
+
+        if (_window?.IsOpen == true)
+            _window.UpdateContent(msg.Self, msg.Targets, msg.Sections);
+
+        if (!refreshQueued)
+            return;
+
+        if (_window?.IsOpen == true)
+            RequestWarps();
     }
 
     private void OnWarpClicked(NetEntity target)
@@ -59,7 +68,10 @@ public sealed class RMCGhostTargetUIController : UIController, IOnSystemChanged<
 
     private void RequestWarps()
     {
-        _net.SendSystemNetworkMessage(new RMCGhostWarpsRequestEvent());
+        if (_requests.Request() is not { } requestId)
+            return;
+
+        _net.SendSystemNetworkMessage(new RMCGhostWarpsRequestEvent(requestId));
     }
 
     private void OnPlayerRemoved(GhostComponent component)
@@ -69,6 +81,7 @@ public sealed class RMCGhostTargetUIController : UIController, IOnSystemChanged<
 
     private void CloseWindow()
     {
+        _requests.CancelQueued();
         _window?.Close();
     }
 

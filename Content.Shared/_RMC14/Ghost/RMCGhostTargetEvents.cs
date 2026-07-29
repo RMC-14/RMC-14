@@ -6,15 +6,38 @@ namespace Content.Shared._RMC14.Ghost;
 [Serializable, NetSerializable]
 public sealed class RMCGhostWarpsRequestEvent : EntityEventArgs
 {
+    public RMCGhostWarpsRequestEvent(uint requestId)
+    {
+        RequestId = requestId;
+    }
+
+    public uint RequestId { get; }
 }
 
 [Serializable, NetSerializable]
 public sealed class RMCGhostWarpsResponseEvent : EntityEventArgs
 {
-    public RMCGhostWarpsResponseEvent(List<RMCGhostTargetSection> sections)
+    public RMCGhostWarpsResponseEvent(
+        uint requestId,
+        uint revision,
+        NetEntity self,
+        List<RMCGhostTargetEntry> targets,
+        List<RMCGhostTargetSection> sections)
     {
+        RequestId = requestId;
+        Revision = revision;
+        Self = self;
+        Targets = targets;
         Sections = sections;
     }
+
+    public uint RequestId { get; }
+
+    public uint Revision { get; }
+
+    public NetEntity Self { get; }
+
+    public List<RMCGhostTargetEntry> Targets { get; }
 
     public List<RMCGhostTargetSection> Sections { get; }
 }
@@ -39,24 +62,24 @@ public sealed class RMCGhostnadoRequestEvent : EntityEventArgs
 public sealed class RMCGhostTargetSection
 {
     public RMCGhostTargetSection(
-        int index,
+        RMCGhostTargetSectionKey key,
         LocId titleLocId,
         string? title,
         Color headerColor,
         bool isExpandedByDefault,
-        List<RMCGhostTargetEntry> entries,
+        List<NetEntity> targets,
         List<RMCGhostTargetSection> children)
     {
-        Index = index;
+        Key = key;
         TitleLocId = titleLocId;
         Title = title;
         HeaderColor = headerColor;
         IsExpandedByDefault = isExpandedByDefault;
-        Entries = entries;
+        Targets = targets;
         Children = children;
     }
 
-    public int Index { get; }
+    public RMCGhostTargetSectionKey Key { get; }
 
     public LocId TitleLocId { get; }
 
@@ -66,10 +89,16 @@ public sealed class RMCGhostTargetSection
 
     public bool IsExpandedByDefault { get; }
 
-    public List<RMCGhostTargetEntry> Entries { get; }
+    public List<NetEntity> Targets { get; }
 
     public List<RMCGhostTargetSection> Children { get; }
 }
+
+[Serializable, NetSerializable]
+public readonly record struct RMCGhostTargetSectionKey(
+    RMCGhostTargetSectionKind Kind,
+    string? Prototype = null,
+    NetEntity? Entity = null);
 
 [Serializable, NetSerializable]
 public readonly struct RMCGhostTargetEntry
@@ -77,23 +106,21 @@ public readonly struct RMCGhostTargetEntry
     public RMCGhostTargetEntry(
         NetEntity entity,
         string displayName,
-        string searchText,
         string? displayJob,
-        bool isWarpPoint,
+        RMCGhostTargetFlags flags,
         int followerCount,
-        SpriteSpecifier.Rsi? healthIcon,
-        int healthPercent,
+        RMCGhostTargetHealthState healthState,
+        byte healthPercent,
         SpriteSpecifier.Rsi? tacticalIcon,
         SpriteSpecifier.Rsi? tacticalBackground,
         RMCGhostTargetTooltipJobKind tooltipJobKind)
     {
         Entity = entity;
         DisplayName = displayName;
-        SearchText = searchText;
         DisplayJob = displayJob;
-        IsWarpPoint = isWarpPoint;
+        Flags = flags;
         FollowerCount = followerCount;
-        HealthIcon = healthIcon;
+        HealthState = healthState;
         HealthPercent = healthPercent;
         TacticalIcon = tacticalIcon;
         TacticalBackground = tacticalBackground;
@@ -104,23 +131,57 @@ public readonly struct RMCGhostTargetEntry
 
     public string DisplayName { get; }
 
-    public string SearchText { get; }
-
     public string? DisplayJob { get; }
 
-    public bool IsWarpPoint { get; }
+    public RMCGhostTargetFlags Flags { get; }
 
     public int FollowerCount { get; }
 
-    public SpriteSpecifier.Rsi? HealthIcon { get; }
+    public RMCGhostTargetHealthState HealthState { get; }
 
-    public int HealthPercent { get; }
+    public byte HealthPercent { get; }
 
     public SpriteSpecifier.Rsi? TacticalIcon { get; }
 
     public SpriteSpecifier.Rsi? TacticalBackground { get; }
 
     public RMCGhostTargetTooltipJobKind TooltipJobKind { get; }
+
+    public bool IsWarpPoint => (Flags & RMCGhostTargetFlags.WarpPoint) != 0;
+}
+
+[Serializable, NetSerializable]
+public enum RMCGhostTargetSectionKind : byte
+{
+    Marines,
+    Xenos,
+    Infected,
+    Survivors,
+    Escaped,
+    Faction,
+    Others,
+    MarineOthers,
+    Dead,
+    WarpPoints,
+    Ghosts,
+    Squad,
+}
+
+[Flags]
+[Serializable, NetSerializable]
+public enum RMCGhostTargetFlags : byte
+{
+    None = 0,
+    WarpPoint = 1 << 0,
+}
+
+[Serializable, NetSerializable]
+public enum RMCGhostTargetHealthState : byte
+{
+    None,
+    High,
+    Medium,
+    Low,
 }
 
 [Serializable, NetSerializable]

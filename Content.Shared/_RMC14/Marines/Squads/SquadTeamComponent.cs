@@ -8,15 +8,15 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Marines.Squads;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SquadSystem), Other = AccessPermissions.Read)]
+[RegisterComponent, NetworkedComponent]
+[Access(typeof(SquadSystem))]
 [EntityCategory("Squads")]
 public sealed partial class SquadTeamComponent : Component
 {
-    [DataField, AutoNetworkedField]
+    [DataField]
     public bool RoundStart;
 
-    [DataField(required: true), AutoNetworkedField]
+    [DataField(required: true)]
     public Color Color;
 
     /// <summary>
@@ -28,38 +28,38 @@ public sealed partial class SquadTeamComponent : Component
     [DataField]
     public ProtoId<RadioChannelPrototype>? Radio;
 
-    [DataField(required: true), AutoNetworkedField]
+    [DataField(required: true)]
     public SpriteSpecifier Background;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public SpriteSpecifier.Rsi? MinimapBackground;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public ProtoId<AccessLevelPrototype>[] AccessLevels = Array.Empty<ProtoId<AccessLevelPrototype>>();
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public HashSet<EntityUid> Members = new();
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public Dictionary<ProtoId<JobPrototype>, int> Roles = new();
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public Dictionary<ProtoId<JobPrototype>, int> MaxRoles = new();
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public bool CanSupplyDrop = true;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public List<SquadArmorLayers> BlacklistedSquadArmor = new();
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     [Access(typeof(SquadLeaderTrackerSystem))]
     public FireteamData Fireteams = new();
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public string Group = "UNMC";
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public SpriteSpecifier.Rsi LeaderIcon = new(new ResPath("_RMC14/Interface/job_icons/UNMC/marine.rsi"), "hudsquad_leader_a");
 
     /// <summary>

@@ -14,16 +14,7 @@ public sealed partial class MindContainerComponent : Component
     ///     The mind controlling this mob. Can be null.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public EntityUid? Mind //RMC14 changed start
-    {
-        get => _mind;
-        set
-        {
-            _mind = value;
-            if (value != null)
-                EverHadMind = true;
-        }
-    } //RMC14 changed end
+    public EntityUid? Mind { get; set; }
 
     /// <summary>
     ///     True if we have a mind, false otherwise.

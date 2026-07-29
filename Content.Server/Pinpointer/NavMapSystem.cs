@@ -29,6 +29,7 @@ public sealed partial class NavMapSystem : SharedNavMapSystem
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly TurfSystem _turfSystem = default!;
+    [Dependency] private readonly WarpPointSystem _warpPoint = default!;
 
     public const float CloseDistance = 15f;
     public const float FarDistance = 30f;
@@ -199,9 +200,7 @@ public sealed partial class NavMapSystem : SharedNavMapSystem
             $"{ToPrettyString(args.Actor):player} configured NavMapBeacon \'{ToPrettyString(ent):entity}\' with text \'{args.Text}\', color {args.Color.ToHexNoAlpha()}, and {(args.Enabled ? "enabled" : "disabled")} it.");
 
         if (TryComp<WarpPointComponent>(ent, out var warpPoint))
-        {
-            warpPoint.Location = args.Text;
-        }
+            _warpPoint.SetLocation((ent, warpPoint), args.Text);
 
         beacon.Text = args.Text;
         beacon.Color = args.Color;
@@ -219,7 +218,7 @@ public sealed partial class NavMapSystem : SharedNavMapSystem
 
         // We set this on mapinit just in case the text was edited via VV or something.
         if (TryComp<WarpPointComponent>(ent, out var warpPoint))
-            warpPoint.Location = navMap.Text;
+            _warpPoint.SetLocation((ent, warpPoint), navMap.Text);
 
         UpdateBeaconEnabledVisuals((ent, navMap));
     }
