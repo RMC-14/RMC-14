@@ -357,10 +357,10 @@
   name: TSEPA
   components:
   - type: SquadTeam
-    color: "#1f2742"
+    color: "#334b79"
     background:
       sprite: _RMC14/Interface/job_icons/Misc/other.rsi
-      state: background_nspa
+      state: empty
     blacklistedSquadArmor:
     - Helmet
     - Goggles
