@@ -2,7 +2,6 @@ using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Shared._RMC14.AlertLevel;
 using Content.Shared._RMC14.Marines.Mutiny;
-using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Synth;
 using Content.Shared.Database;
 using Content.Shared.Mind;
@@ -10,14 +9,11 @@ using Content.Shared.Mind.Components;
 using Content.Shared.Popups;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Marines.Mutiny;
 
 public sealed partial class MutinyRuleSystem
 {
-    private static readonly EntProtoId<SkillDefinitionComponent> PoliceSkill = "RMCSkillPolice";
-
     private void OnRecruitAction(Entity<MutineerLeaderComponent> leader, ref MutineerRecruitActionEvent args)
     {
         if (args.Handled)
@@ -218,11 +214,10 @@ public sealed partial class MutinyRuleSystem
             return false;
         }
 
-        if (side == MutinySide.Mutineer &&
-            mind.OwnedEntity is { } body &&
-            HasComp<SynthComponent>(body))
+        if (side == MutinySide.Mutineer)
         {
-            return false;
+            if (mind.OwnedEntity is not { } body || !CanJoinMutineers(body))
+                return false;
         }
 
         _pendingSideChoices.Remove(mindId);
@@ -263,8 +258,7 @@ public sealed partial class MutinyRuleSystem
     {
         if (!IsMutinyBody(target, rule.Comp, requireAlive: true) ||
             !HasComp<MutinyEligibleComponent>(target) ||
-            HasComp<SynthComponent>(target) ||
-            IsForcedLoyalist(target) ||
+            !CanJoinMutineers(target) ||
             _pendingInvites.ContainsKey(targetMindId))
         {
             return false;
@@ -277,8 +271,14 @@ public sealed partial class MutinyRuleSystem
 
     private bool IsForcedLoyalist(EntityUid body)
     {
-        return HasComp<MutinyForcedLoyalistComponent>(body) ||
-               _skills.HasSkill(body, PoliceSkill, 2);
+        return HasComp<MutinyForcedLoyalistComponent>(body);
+    }
+
+    private bool CanJoinMutineers(EntityUid body)
+    {
+        return !HasComp<SynthComponent>(body) &&
+               !HasComp<MutinyForcedLoyalistComponent>(body) &&
+               !HasComp<MutinyLoyalistOrNeutralComponent>(body);
     }
 
     private void ClassifyBody(EntityUid body, Entity<MutinyRuleComponent> rule)
@@ -318,7 +318,7 @@ public sealed partial class MutinyRuleSystem
         if (_pendingSideChoices.ContainsKey(mindId))
             return;
 
-        var choice = new MutinySideEui(mindId, rule.Owner, !HasComp<SynthComponent>(body), this);
+        var choice = new MutinySideEui(mindId, rule.Owner, CanJoinMutineers(body), this);
         _pendingSideChoices[mindId] = new PendingSideChoice(choice, Timing.CurTime + rule.Comp.ChoiceDuration);
         _euis.OpenEui(choice, actor.PlayerSession);
     }

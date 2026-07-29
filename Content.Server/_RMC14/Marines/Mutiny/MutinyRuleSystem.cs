@@ -10,7 +10,6 @@ using Content.Server.Mind;
 using Content.Shared._RMC14.AlertLevel;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Mutiny;
-using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Administration;
 using Content.Shared.Chat;
 using Content.Shared.Database;
@@ -49,8 +48,6 @@ public sealed partial class MutinyRuleSystem : GameRuleSystem<MutinyRuleComponen
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
     [Dependency] private readonly IPlayerManager _players = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
-
     private readonly Dictionary<EntityUid, MutineerInviteEui> _pendingInvites = new();
     private readonly Dictionary<EntityUid, MutinyBeginEui> _pendingBegins = new();
     private readonly Dictionary<EntityUid, PendingSideChoice> _pendingSideChoices = new();

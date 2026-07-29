@@ -26,7 +26,7 @@ rmc-mutiny-noncombatant-status-added = [bold][color=red]You are now a Non-Combat
 
 mutineer-invite-title = Mutiny invitation
 mutineer-invite-text = You are being asked to join a mutiny.
-    Read the Mutinies and Riots guidelines before accepting.
+    Read and understand the Mutinies and Riots guidelines (Core Rules -> "Mutinies, Riots") before accepting.
 mutineer-invite-accept = Join
 mutineer-invite-deny = Decline
 rmc-mutiny-recruit-sent = Mutiny invitation sent.
@@ -38,7 +38,9 @@ rmc-mutiny-begin-accept = Begin
 rmc-mutiny-begin-deny = Cancel
 
 rmc-mutiny-side-title = Choose a side
-rmc-mutiny-side-text = A mutiny has begun. With whom do you stand? Closing this window or waiting 20 seconds means refusing to fight.
+rmc-mutiny-side-text = A mutiny has begun. With whom do you stand?
+    Read and understand the Mutinies and Riots guidelines (Core Rules -> "Mutinies, Riots") before choosing a side.
+    Closing this window or waiting 20 seconds means refusing to fight.
 rmc-mutiny-side-mutineer = Mutineers
 rmc-mutiny-side-loyalist = Loyalists
 rmc-mutiny-side-refuse = Refuse to fight
