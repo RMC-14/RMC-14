@@ -28,6 +28,5 @@ cm-job-supervisors-royal-section-leader = the Section Leader
 cm-job-supervisors-royal-troop-sergeant = the Troop Sergeant
 cm-job-supervisors-royal-troop-commander = the Troop Commander
 cm-job-supervisors-squadron-command = Squadron Command
-cm-job-supervisors-tsepa-senior-constable = the Senior Constables
 cm-job-supervisors-tsepa-sergeant = the Sergeant
 cm-job-supervisors-tsepa-inspector = the Inspector
