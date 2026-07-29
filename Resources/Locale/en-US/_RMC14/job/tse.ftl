@@ -1,3 +1,5 @@
+rmc-ghost-role-information-tsepa-description = Uphold the Crown's laws. Maintain justice and order.
+
 rmc-job-name-tsepa-constable = TSEPA Constable
 rmc-job-description-tsepa-constable = Assist in the enforcement of TSE Law.
 rmc-job-prefix-tsepa-constable = TSEPA CST
