@@ -275,7 +275,6 @@
     radioTextIncrease: 3
 
 # Tyrargo survs
-
 - type: entity
   parent: RMCHeadsetMarine
   id: RMCHeadsetArmy
