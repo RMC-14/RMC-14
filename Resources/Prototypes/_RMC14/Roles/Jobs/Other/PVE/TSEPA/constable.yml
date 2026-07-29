@@ -3,6 +3,7 @@
   id: RMCTSEPAConstablePVE
   name: rmc-job-name-tsepa-pve-constable
   description: rmc-ghost-role-information-tsepa-description
+  playTimeTracker: RMCJobTSEPAConstablePVE
   ranks:
     RMCRankTSEPAConstable: []
   startingGear: RMCGearTSEPAConstablePVE
@@ -51,6 +52,10 @@
     shoes: RMCShoesLaceup
     id: RMCIDCardTSEPA
     back: RMCSatchelTSEPA
+
+- type: playTimeTracker
+  id: RMCTSEPAConstablePVE
+  isHumanoid: true
 
 - type: jobIcon
   parent: CMJobIconBase
