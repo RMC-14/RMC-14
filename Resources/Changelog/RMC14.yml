@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Xeno apply acid is now a repeat action & has outline around items
-    type: Tweak
-  id: 3031
-  time: '2026-03-31T01:57:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9535
 - author: Bakeun0
   changes:
   - message: Fixed burrow-down sound being played when selecting a tile to burrow
@@ -4581,5 +4574,12 @@
   id: 3530
   time: '2026-07-28T23:54:24.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10462
+- author: GrigoriyGalintano
+  changes:
+  - message: Fixed xenos being able to fish.
+    type: Fix
+  id: 3531
+  time: '2026-07-29T01:14:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10133
 Name: RMC14
 Order: -1
