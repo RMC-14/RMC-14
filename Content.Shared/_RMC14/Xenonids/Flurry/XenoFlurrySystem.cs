@@ -114,12 +114,26 @@ public sealed class XenoFlurrySystem : EntitySystem
                 break;
         }
 
-        XenoFishingComponent? fishing = null;
-
         if (hitEnt != null)
             _rmcMelee.DoLunge(xeno, hitEnt.Value);
         else
-            TryComp(xeno, out fishing);
+        {
+            if (TryComp<XenoFishingComponent>(xeno, out var fishing))
+            {
+                // Center and near the edges
+                List<EntityCoordinates> fishingChecks = new() {
+                    xenoCoord.WithPosition(rot.Center),
+                    xenoCoord.WithPosition((rot.TopLeft + rot.BottomLeft) / 2),
+                    xenoCoord.WithPosition((rot.TopRight + rot.BottomRight) / 2)
+                };
+
+                foreach (var check in fishingChecks)
+                {
+                    if (_fishing.DoXenoFish((xeno, fishing), check, out var caught, pickup: false) && caught != null)
+                        _audio.PlayEntity(xeno.Comp.SlashSound, xeno, caught.Value);
+                }
+            }
+        }
 
         var bounds = rot.CalcBoundingBox();
 
@@ -128,15 +142,7 @@ public sealed class XenoFlurrySystem : EntitySystem
             if (!_interaction.InRangeUnobstructed(xeno.Owner, _turf.GetTileCenter(tile), xeno.Comp.Range + 0.5f))
                 continue;
 
-            var center = _turf.GetTileCenter(tile);
-
-            SpawnAtPosition(xeno.Comp.TelegraphEffect, center);
-
-            // Try fish at every hit tile
-            if (fishing != null &&
-                _fishing.DoXenoFish((xeno, fishing), center, out var caught, pickup: false) &&
-                caught != null)
-                _audio.PlayEntity(xeno.Comp.SlashSound, xeno, caught.Value);
+            SpawnAtPosition(xeno.Comp.TelegraphEffect, _turf.GetTileCenter(tile));
         }
     }
 }
