@@ -57,7 +57,7 @@ public sealed class RMCPortableGeneratorBui(EntityUid owner, Enum uiKey) : Bound
         var fuelSheets = storage.Storage.GetValueOrDefault(gen.Material, 0) / gen.MaterialPerSheet;
         var fuelPercent = storage.Storage.GetValueOrDefault(gen.Material, 0) % (float)gen.MaterialPerSheet / gen.MaterialPerSheet * 100;
         _window.FuelLabel.SetMarkupPermissive(
-            $"[color=#5B88B0]Fuel:[/color] [bold]{fuelSheets}[/bold] sheets of {gen.FuelName} ({storage.Storage.GetValueOrDefault(gen.Material, 0)})");
+            $"[color=#5B88B0]Fuel:[/color] [bold]{fuelSheets}[/bold] sheets of {gen.FuelName})");
 
         _window.FuelBar.MinValue = 0;
         _window.FuelBar.MaxValue = 100;
