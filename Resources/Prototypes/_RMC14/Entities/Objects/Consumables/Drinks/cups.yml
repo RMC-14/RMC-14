@@ -71,13 +71,17 @@
   description: A rugged, military-grade mug featuring the UNMC insignia, built for endurance in any deployment—whether aboard a ship or in the field.
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/unmccup.rsi
     layers:
       - sprite: _RMC14/Objects/Consumable/Drinks/unmccup.rsi
-        state: base
+        state: icon-0
       - map: ["enum.SolutionContainerLayers.Fill"]
-        sprite: _RMC14/Objects/Consumable/Drinks/coffee_cup.rsi
-        state: icon-3
+        sprite: _RMC14/Objects/Consumable/Drinks/unmccup.rsi
+        state: icon-2
         visible: false
+  - type: SolutionContainerVisuals
+    maxFillLevels: 2
+    fillBaseName: icon-
 
 - type: entity
   parent: RMCCoffeeCup
@@ -86,13 +90,17 @@
   description: A tough, crimson cup stamped with the SPP emblem—built like a real krepky muzhik, ready to serve comrades in toil and glory among the stars.
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/sppcup.rsi
     layers:
       - sprite: _RMC14/Objects/Consumable/Drinks/sppcup.rsi
-        state: base
+        state: icon-0
       - map: ["enum.SolutionContainerLayers.Fill"]
-        sprite: _RMC14/Objects/Consumable/Drinks/coffee_cup.rsi
-        state: icon-3
+        sprite: _RMC14/Objects/Consumable/Drinks/sppcup.rsi
+        state: icon-2
         visible: false
+  - type: SolutionContainerVisuals
+    maxFillLevels: 2
+    fillBaseName: icon-
 
 - type: entity
   parent: RMCCoffeeCup
@@ -101,13 +109,17 @@
   description: A sleek, official UN cup, symbolizing unity, order, and authority across the stars. Crafted for those who uphold peace and progress.
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/uncup.rsi
     layers:
       - sprite: _RMC14/Objects/Consumable/Drinks/uncup.rsi
-        state: base
+        state: icon-0
       - map: ["enum.SolutionContainerLayers.Fill"]
-        sprite: _RMC14/Objects/Consumable/Drinks/coffee_cup.rsi
-        state: icon-3
+        sprite: _RMC14/Objects/Consumable/Drinks/uncup.rsi
+        state: icon-2
         visible: false
+  - type: SolutionContainerVisuals
+    maxFillLevels: 2
+    fillBaseName: icon-
 
 - type: entity
   parent: RMCCoffeeCup
@@ -116,13 +128,17 @@
   description: A clean, stylish cup with the logo of the Weston-Yamada Corporation branded on the side. Used throughout the company hierarchy, from interns to division directors.
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/weyacup.rsi
     layers:
       - sprite: _RMC14/Objects/Consumable/Drinks/weyacup.rsi
-        state: base
+        state: icon-0
       - map: ["enum.SolutionContainerLayers.Fill"]
-        sprite: _RMC14/Objects/Consumable/Drinks/coffee_cup.rsi
-        state: icon-3
+        sprite: _RMC14/Objects/Consumable/Drinks/weyacup.rsi
+        state: icon-2
         visible: false
+  - type: SolutionContainerVisuals
+    maxFillLevels: 2
+    fillBaseName: icon-
 
 - type: entity
   parent: RMCCoffeeCup
@@ -131,13 +147,17 @@
   description: A well-crafted, sleek mug with the icon of the Three Sun Empire on it's side. Excellent for those who serve and live under the Empress and her Empire.
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/tsecup.rsi
     layers:
       - sprite: _RMC14/Objects/Consumable/Drinks/tsecup.rsi
-        state: base
+        state: icon-0
       - map: ["enum.SolutionContainerLayers.Fill"]
-        sprite: _RMC14/Objects/Consumable/Drinks/coffee_cup.rsi
-        state: icon-3
+        sprite: _RMC14/Objects/Consumable/Drinks/tsecup.rsi
+        state: icon-2
         visible: false
+  - type: SolutionContainerVisuals
+    maxFillLevels: 2
+    fillBaseName: icon-
 
 - type: entity
   parent: RMCCoffeeCup
@@ -146,13 +166,17 @@
   description: A tough, well-worn cup marked with the CLF sigil born from the defiance sparked by the Fires of Kharis.
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/clfcup.rsi
     layers:
       - sprite: _RMC14/Objects/Consumable/Drinks/clfcup.rsi
-        state: base
+        state: icon-0
       - map: ["enum.SolutionContainerLayers.Fill"]
-        sprite: _RMC14/Objects/Consumable/Drinks/coffee_cup.rsi
-        state: icon-3
+        sprite: _RMC14/Objects/Consumable/Drinks/clfcup.rsi
+        state: icon-2
         visible: false
+  - type: SolutionContainerVisuals
+    maxFillLevels: 2
+    fillBaseName: icon-
 
 - type: entity
   parent: RMCCoffeeCup
