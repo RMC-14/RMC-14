@@ -33,6 +33,7 @@
       prefix: rmc-job-prefix-tsepa-pve-senior-constable
     - type: AssignSquad
       squad: SquadTSEPAPVE
+    - type: RMCTrackable
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
