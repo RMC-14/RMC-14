@@ -23,6 +23,8 @@
       - TSE
     - type: JobPrefix
       prefix: rmc-job-prefix-tsepa-pve-constable
+    - type: AssignSquad
+      squad: SquadTSEPAPVE
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
@@ -55,10 +57,6 @@
       state: green
     - sprite: _RMC14/Objects/Clothing/OuterClothing/CMB/cmb_light_armor.rsi
       state: icon
-
-- type: playTimeTracker
-  id: RMCJobTSEPAConstable
-  isHumanoid: true
 
 - type: jobIcon
   parent: CMJobIconBase
