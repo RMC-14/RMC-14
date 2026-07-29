@@ -62,8 +62,8 @@
       key_slots:
       - RMCEncryptionKeyTSEPA
 
-- type: entity
-  parent: RMCHeadsetTSEAbstract
+- type: entity # Standalone headset for TSEPA PVE roles
+  parent: RMCHeadsetIconsTSE
   id: RMCHeadsetTSEPAPVE
   name: TSEPA headset
   components:
