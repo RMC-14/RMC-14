@@ -7,6 +7,7 @@ using Content.Shared._RMC14.Synth;
 using Content.Shared.Database;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
+using Content.Shared.Popups;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -30,20 +31,20 @@ public sealed partial class MutinyRuleSystem
             !GameTicker.IsGameRuleActive(leaderMind.Rule) ||
             rule.Phase != MutinyPhase.Recruiting)
         {
-            SendBodyMessage(leader.Owner, "rmc-mutiny-error-not-recruiting");
+            SendBodyPopup(leader.Owner, "rmc-mutiny-error-not-recruiting", PopupType.SmallCaution);
             return;
         }
 
         if (!TryGetRecruitTarget(leader.Owner, args.Target, (leaderMind.Rule, rule), out var targetMindId, out var session, out var error))
         {
-            SendBodyMessage(leader.Owner, error);
+            SendBodyPopup(leader.Owner, error, PopupType.SmallCaution);
             return;
         }
 
         var invite = new MutineerInviteEui(leaderMindId, targetMindId, leaderMind.Rule, this);
         _pendingInvites[targetMindId] = invite;
         _euis.OpenEui(invite, session);
-        SendBodyMessage(leader.Owner, "rmc-mutiny-recruit-sent");
+        SendBodyPopup(leader.Owner, "rmc-mutiny-recruit-sent");
     }
 
     private void OnBeginAction(Entity<MutineerLeaderComponent> leader, ref MutineerBeginActionEvent args)
@@ -60,7 +61,7 @@ public sealed partial class MutinyRuleSystem
             rule.Phase != MutinyPhase.Recruiting ||
             !TryComp(leader.Owner, out ActorComponent? actor))
         {
-            SendBodyMessage(leader.Owner, "rmc-mutiny-error-not-recruiting");
+            SendBodyPopup(leader.Owner, "rmc-mutiny-error-not-recruiting", PopupType.SmallCaution);
             return;
         }
 
@@ -330,9 +331,9 @@ public sealed partial class MutinyRuleSystem
             begin.Cancel();
     }
 
-    private void SendBodyMessage(EntityUid body, string locId)
+    private void SendBodyPopup(EntityUid body, string locId, PopupType popupType = PopupType.Small)
     {
-        if (TryComp(body, out ActorComponent? actor))
-            _chat.DispatchServerMessage(actor.PlayerSession, Loc.GetString(locId));
+        if (HasComp<ActorComponent>(body))
+            _popup.PopupEntity(Loc.GetString(locId), body, body, popupType);
     }
 }

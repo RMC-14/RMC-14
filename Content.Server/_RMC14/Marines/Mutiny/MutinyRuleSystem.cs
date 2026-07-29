@@ -12,6 +12,7 @@ using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Mutiny;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Administration;
+using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
@@ -21,6 +22,7 @@ using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
+using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
@@ -46,6 +48,7 @@ public sealed partial class MutinyRuleSystem : GameRuleSystem<MutinyRuleComponen
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
     [Dependency] private readonly IPlayerManager _players = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
 
     private readonly Dictionary<EntityUid, MutineerInviteEui> _pendingInvites = new();
@@ -203,7 +206,7 @@ public sealed partial class MutinyRuleSystem : GameRuleSystem<MutinyRuleComponen
             RemoveProjection(owned, mutinyMind.Rule);
         }
 
-        SendMindMessage((mindId, mind), "mutineer-leader-status-removed");
+        SendMindPopup((mindId, mind), "mutineer-leader-status-removed");
         _chat.SendAdminAnnouncement(Loc.GetString("rmc-mutiny-admin-leader-removed",
             ("player", MindName((mindId, mind)))));
         _adminLog.Add(LogType.Mind,
@@ -542,7 +545,24 @@ public sealed partial class MutinyRuleSystem : GameRuleSystem<MutinyRuleComponen
     private void SendMindMessage(Entity<MindComponent> mind, string locId)
     {
         if (mind.Comp.UserId is { } userId && _players.TryGetSessionById(userId, out var session))
-            _chat.DispatchServerMessage(session, Loc.GetString(locId));
+        {
+            var message = Loc.GetString(locId);
+            var wrappedMessage = Loc.GetString("chat-manager-server-wrap-message", ("message", message));
+            _chat.ChatMessageToOne(
+                ChatChannel.Server,
+                FormattedMessage.RemoveMarkupOrThrow(message),
+                wrappedMessage,
+                default,
+                false,
+                session.Channel,
+                recordReplay: true);
+        }
+    }
+
+    private void SendMindPopup(Entity<MindComponent> mind, string locId, PopupType popupType = PopupType.Small)
+    {
+        if (mind.Comp.OwnedEntity is { } body)
+            SendBodyPopup(body, locId, popupType);
     }
 
     private string MindName(Entity<MindComponent> mind)

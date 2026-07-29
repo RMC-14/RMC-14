@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Marines.Mutiny;
 using Content.Shared.Administration;
 using Content.Shared.Database;
 using Content.Shared.Mind.Components;
+using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
@@ -35,7 +36,7 @@ public sealed partial class MutinyRuleSystem
                 Act = () =>
                 {
                     if (!TryAddLeader(args.Target, out var error) && error != null)
-                        SendBodyMessage(args.User, error);
+                        SendBodyPopup(args.User, error, PopupType.SmallCaution);
                 },
                 Impact = LogImpact.High,
                 Message = Loc.GetString("rmc-mutiny-verb-make-leader"),
@@ -53,7 +54,7 @@ public sealed partial class MutinyRuleSystem
                 Act = () =>
                 {
                     if (!TryRemoveLeader(args.Target, out var error) && error != null)
-                        SendBodyMessage(args.User, error);
+                        SendBodyPopup(args.User, error, PopupType.SmallCaution);
                 },
                 Impact = LogImpact.High,
                 Message = Loc.GetString("rmc-mutiny-verb-remove-leader"),
@@ -76,7 +77,7 @@ public sealed partial class MutinyRuleSystem
                 Act = () =>
                 {
                     if (!TryMakeMutineer(args.Target, out var error) && error != null)
-                        SendBodyMessage(args.User, error);
+                        SendBodyPopup(args.User, error, PopupType.SmallCaution);
                 },
                 Impact = LogImpact.High,
                 Message = Loc.GetString("rmc-mutiny-verb-make-mutineer"),
@@ -94,7 +95,7 @@ public sealed partial class MutinyRuleSystem
                 Act = () =>
                 {
                     if (!TryRemoveMutineer(args.Target, out var error) && error != null)
-                        SendBodyMessage(args.User, error);
+                        SendBodyPopup(args.User, error, PopupType.SmallCaution);
                 },
                 Impact = LogImpact.High,
                 Message = Loc.GetString("rmc-mutiny-verb-remove-mutineer"),
