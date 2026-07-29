@@ -104,7 +104,7 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
                 continue;
 
             hive.LateJoinMarines -= lateJoinsPer;
-            IncreaseBurrowedLarva((uid, hive), 1);
+            ChangeBurrowedLarva((uid, hive), 1);
         }
     }
 
@@ -209,7 +209,7 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
                 EvoScreech(hive);
             }
 
-            if (!hive.AnnouncedQueenDeathCooldownOver && hive.CurrentQueen == null && hive.NewQueenAt.HasValue && roundTime >= hive.NewQueenAt.Value)
+            if (!hive.AnnouncedQueenDeathCooldownOver && hive.CurrentQueen == null && hive.NewQueenAt.HasValue && _timing.CurTime >= hive.NewQueenAt.Value)
             {
                 var queenPopup = Loc.GetString("rmc-queen-death-cooldown-over");
                 _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hiveId, queenPopup, hive.AnnounceSound);
@@ -217,7 +217,16 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
                 Dirty(hiveId, hive);
             }
 
-            if (!hive.AnnouncedHiveCoreCooldownOver && hive.NewCoreAt.HasValue && roundTime >= hive.NewCoreAt)
+            //No queen has been picked they have 1 minutes to pick a queeen before hive goes feral
+            if (!hive.AnnouncedNoQueenCooldownOver && hive.CurrentQueen == null && hive.NewQueenAt.HasValue && _timing.CurTime >= hive.NewQueenAt.Value + hive.NoQueenAlertTime)
+            {
+                var noQueenPopup = Loc.GetString("rmc-no-queen-warning");
+                _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hiveId, noQueenPopup, hive.AnnounceSound);
+                hive.AnnouncedNoQueenCooldownOver = true;
+                Dirty(hiveId, hive);
+            }
+
+            if (!hive.AnnouncedHiveCoreCooldownOver && hive.NewCoreAt.HasValue && _timing.CurTime >= hive.NewCoreAt)
             {
                 var corePopup = Loc.GetString("rmc-hive-core-cooldown-over");
                 _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hiveId, corePopup, hive.AnnounceSound);
@@ -244,7 +253,7 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
                 continue;
             }
 
-            IncreaseBurrowedLarva(1);
+            ChangeBurrowedLarva((id, hive), 1);
             burrowed.PooledLarva--;
             if (burrowed.PooledLarva < 1)
                 RemCompDeferred<HijackBurrowedSurgeComponent>(id);

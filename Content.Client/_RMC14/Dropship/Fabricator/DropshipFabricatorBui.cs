@@ -12,6 +12,8 @@ namespace Content.Client._RMC14.Dropship.Fabricator;
 [UsedImplicitly]
 public sealed class DropshipFabricatorBui : BoundUserInterface
 {
+    private const int QueueRowHeight = 28;
+
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
 
@@ -83,10 +85,86 @@ public sealed class DropshipFabricatorBui : BoundUserInterface
         if (_window is not { Disposed: false })
             return;
 
-        if (EntMan.TryGetComponent(Owner, out DropshipFabricatorComponent? fabricator))
+        if (!EntMan.TryGetComponent(Owner, out DropshipFabricatorComponent? fabricator))
+            return;
+
+        _window.PointsLabel.Text = Loc.GetString("rmc-dropship-fabricator-points",
+            ("points", fabricator.Points));
+
+        if (fabricator.Printing is { } printing)
         {
-            _window.PointsLabel.Text = Loc.GetString("rmc-dropship-fabricator-points", 
-                ("points", fabricator.Points));
+            _window.CurrentLabel.SetMarkupPermissive(Loc.GetString("rmc-dropship-fabricator-current",
+                ("item", GetPrintableName(printing))));
         }
+        else
+        {
+            _window.CurrentLabel.SetMarkupPermissive(Loc.GetString("rmc-dropship-fabricator-idle"));
+        }
+
+        _window.QueueLabel.SetMarkupPermissive(Loc.GetString("rmc-dropship-fabricator-queue",
+            ("count", fabricator.Queue.Count),
+            ("max", fabricator.MaxQueue)));
+
+        _window.QueueContainer.DisposeAllChildren();
+        if (fabricator.Queue.Count == 0)
+        {
+            var empty = new Label
+            {
+                Text = Loc.GetString("rmc-dropship-fabricator-queue-empty"),
+                Margin = new Thickness(4, 2),
+                HorizontalExpand = true,
+                SetHeight = QueueRowHeight,
+            };
+            _window.QueueContainer.AddChild(empty);
+            return;
+        }
+
+        for (var i = 0; i < fabricator.Queue.Count; i++)
+        {
+            var entry = fabricator.Queue[i];
+            var index = i;
+
+            var label = new Label
+            {
+                Text = Loc.GetString("rmc-dropship-fabricator-queue-entry",
+                    ("position", i + 1),
+                    ("item", GetPrintableName(entry.Id)),
+                    ("cost", entry.Cost)),
+                Margin = new Thickness(4, 2),
+                HorizontalExpand = false,
+                VerticalAlignment = Control.VAlignment.Center,
+            };
+
+            var cancel = new Button
+            {
+                Text = Loc.GetString("rmc-dropship-fabricator-cancel"),
+                StyleClasses = { "OpenBoth" },
+                MinWidth = 90,
+                SetHeight = 24,
+            };
+            cancel.OnPressed += _ => SendPredictedMessage(new DropshipFabricatorCancelQueueMsg(index));
+
+            var container = new BoxContainer
+            {
+                Orientation = LayoutOrientation.Horizontal,
+                Margin = new Thickness(0, 2),
+                Children =
+                {
+                    label,
+                    new Control { HorizontalExpand = true },
+                    cancel
+                },
+                HorizontalExpand = true,
+                SetHeight = QueueRowHeight,
+            };
+            _window.QueueContainer.AddChild(container);
+        }
+    }
+
+    private string GetPrintableName(EntProtoId<DropshipFabricatorPrintableComponent> id)
+    {
+        return _prototypes.TryIndex(id, out var proto)
+            ? proto.Name
+            : id.ToString();
     }
 }

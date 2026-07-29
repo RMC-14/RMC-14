@@ -55,7 +55,7 @@ public sealed class RangefinderBui : BoundUserInterface
             _window.BottomContainer.AddChild(AddRow("Supply Drop", _area.CanSupplyDrop(mapCoords)));
             _window.BottomContainer.AddChild(AddRow("Mortar", _area.CanMortarFire(coords)));
             _window.BottomContainer.AddChild(AddRow("Close Air Support", _area.CanCAS(coords)));
-            _window.BottomContainer.AddChild(AddRow("Orbital Bombardment", _area.CanOrbitalBombard(coords, out _)));
+            _window.BottomContainer.AddChild(AddRow(Loc.GetString("rmc-rangefinder-orbital-bombardment"), _area.CanOrbitalBombard(coords, out _)));
         }
     }
 

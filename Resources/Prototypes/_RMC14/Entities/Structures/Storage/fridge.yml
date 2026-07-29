@@ -1,10 +1,11 @@
-﻿- type: entity
+- type: entity
   parent: CMLockerBase
   id: CMLockerFridge
   name: fridge
   placement:
     mode: SnapgridCenter
   components:
+  - type: VehicleSmashable
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/fridge.rsi
   - type: AccessReader
@@ -18,9 +19,9 @@
   components:
   - type: StorageFill
     contents:
-    - id: DrinkMilkCarton
+    - id: RMCDrinkMilkCarton
       amount: 2
-    - id: DrinkSoyMilkCarton
+    - id: RMCDrinkSoyMilkCarton
       amount: 2
     - id: FoodContainerEgg
     - id: FoodCondimentBottleEnzyme

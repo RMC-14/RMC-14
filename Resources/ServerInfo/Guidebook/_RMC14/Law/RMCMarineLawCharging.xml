@@ -5,15 +5,17 @@
 
   ## General Information
 
-  - Brig timers must not exceed 30 minutes unless in the case of a [bold]Capital Crime[/bold], or if extended by crimes performed while jailed.
+  - Brig timers must not exceed 30 minutes, but can be extended by crimes performed while jailed past this limit.
   - Ensure to follow prisoner rights and the right to appeal.
   - In the case of Prisoners of War, be sure to read the relevant section of [textlink="Third-Parties SOP." link="RMCMarineSOPNONModThirdparty"]
-  - If a prisoner has been SSD for over 5 minutes you may place them in hypersleep, but they must serve the rest of their time if they return.
+  - If a prisoner has been SSD for over 5 minutes they may be placed in hypersleep, but they must serve the rest of their time if they return.
 
-  ### Charging must be carried out in this order:
+  ### Who May Charge
+
+  This order of priority must be used to select the person issuing charges:
 
   - [bold]Military Warden[/bold].
-  - Chief MP.
+  - [color=#8B0000][bold]Chief MP[/bold][/color].
   - An uninvolved [color=#ff000d][bold]MP[/bold][/color], in order of rank.
   - Arresting [color=#ff000d][bold]MP[/bold][/color] (only as a last resort).
 
@@ -21,17 +23,24 @@
 
   ## Charging and Sentencing Procedure
 
-  Charging and sentencing should be done in this order.
+  Charging and sentencing must be done in this order.
 
+  ### Set the Charges
   - The person issuing the charges should determine a sentence.
   - Inform the Suspect of their Charges before the brig timer starts.
   - Apply the charges and activate the brig timer.
+
+  ### Search and Remove belongings
   - Remove all their belongings, including ID and headset.
   - Put them in the orange uniform, if available, else their original uniform. Ensure they also have footwear.
-  - Give them a standard headset of common channel, if available.
+  - Give them a standard headset with the ship's common channel, if available.
+
+  ### Cell
   - Place them inside the cell, buckled to the bed, then stun them and recover your handcuffs.
   - Inform the Suspect they may file an appeal should they wish so.
   - Search their belongings for contraband and theft.
+
+  ### End of Time Served
   - When the time is over, let them grab their belongings, escort them out of the brig.
   - If the prisoner is SSD at the end of their sentence, return their belongings and place them in brig hypersleep.
 
@@ -43,8 +52,8 @@
 
   ## Medical Experiments
 
-  A prisoner may waive their rights to participate in medical experiments. Researchers performing approved medical experiments  may not be held liable for damages inflicted on the subject within the approved parameters of the experiment.
-  - All experiments require the signed (or stamped) approval of either the [color=#008000][bold]Commander[/bold][/color] (But not [color=#90EE90][bold]Duty Officer[/bold][/color]) or the [bold]Chief Medical Officer[/bold].
+  A prisoner may waive their rights in order to participate in medical experiments. Researchers performing approved medical experiments may not be held liable for damages inflicted on the subject within the approved parameters of the experiment.
+  - All experiments require the signed (or stamped) approval of either the [color=#008000][bold]Commander[/bold][/color], or the [bold]Chief Medical Officer[/bold].
   - Prisoners can request to be used as subjects. The prisoner's brig time must continue to run while they are being used, and are free to go when it expires and are not obligated to continue.
   - Medical experiments that will result in death must only be offered to prisoners who are to be executed, or if execution is one of the listed punishment options for their crime. It is otherwise illegal, and will result in a [bold]Attempted Murder[/bold], or [bold]Murder[/bold] charge where relevant.
 

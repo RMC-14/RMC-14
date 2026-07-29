@@ -213,6 +213,7 @@
       buildup: true
   - type: AimedShotEffect
     extraHits: 2
+  - type: IgnoreSwiftSteps
 
 - type: entity
   parent: CMBulletSniper10x28mm

@@ -53,3 +53,34 @@
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Sorokyne/flamer_bodypile.yml"
       probability: 0.6
+
+# Survivor Scenario Inserts
+- type: entity
+  abstract: true
+  parent: RMCMapInsertSorokyneBase
+  id: RMCMapInsertSorokyneBaseScenario
+  suffix: Insert Sorokyne
+  components:
+  - type: MapInsert
+    replaceAreas: false
+
+# Regular Surv Spawns
+- type: entity
+  parent: RMCMapInsertSorokyneBaseScenario
+  id: RMCMapInsertSorokyneSurvSpawnTogether
+  name: Together Surv Spawn
+  suffix: Insert Sorokyne
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Sorokyne/surv_spawn_security.yml"
+      probability: 0.34
+      nightmareScenario: none
+    - spawn: "/Maps/_RMC14/Inserts/Sorokyne/surv_spawn_aerodrom.yml"
+      probability: 0.33
+      nightmareScenario: none
+      offset: 9,-39
+    - spawn: "/Maps/_RMC14/Inserts/Sorokyne/surv_spawn_south_engi.yml"
+      probability: 0.33
+      nightmareScenario: none
+      offset: -34,-23
