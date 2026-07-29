@@ -373,7 +373,7 @@
     canSupplyDrop: false
     group: TSEPA
     leaderIcon:
-      sprite: /Textures/_RMC14/Interface/job_icons/TSE/TSEPA.rsi
+      sprite: /Textures/_RMC14/Interface/job_icons/TSE/TSEPA.rsi/pve
       state: tse_pasergeant_pve
   - type: Tag
     tags:
