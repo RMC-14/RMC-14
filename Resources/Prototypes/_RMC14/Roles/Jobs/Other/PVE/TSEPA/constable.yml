@@ -54,7 +54,7 @@
     back: RMCSatchelTSEPA
 
 - type: playTimeTracker
-  id: RMCTSEPAConstablePVE
+  id: RMCJobTSEPAConstablePVE
   isHumanoid: true
 
 - type: jobIcon
