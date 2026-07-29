@@ -147,6 +147,18 @@
   job: RMCTSEPAInspector
 
 - type: trackerMode
+  id: SeniorConstableTSEPAPVE
+  job: RMCTSEPASeniorConstablePVE
+
+- type: trackerMode
+  id: SergeantTSEPAPVE
+  job: RMCTSEPASergeantPVE
+
+- type: trackerMode
+  id: InspectorTSEPAPVE
+  job: RMCTSEPAInspectorPVE
+
+- type: trackerMode
   id: FORECONCommandingOfficer
   job: RMCSurvivorForeconCommander
   alert: SquadTrackerCommandingOfficer
