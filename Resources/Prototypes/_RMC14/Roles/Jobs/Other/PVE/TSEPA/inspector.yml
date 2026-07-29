@@ -3,6 +3,7 @@
   id: RMCTSEPAInspectorPVE
   name: rmc-job-name-tsepa-pve-inspector
   description: rmc-ghost-role-information-tsepa-description
+  playTimeTracker: RMCJobTSEPAInspectorPVE
   ranks:
     RMCRankTSEPASergeant: []
   startingGear: RMCGearTSEPAInspectorPVE
@@ -51,6 +52,10 @@
     shoes: RMCShoesLaceup
     id: RMCIDCardTSEPA
     back: RMCSatchelTSEPA
+
+- type: playTimeTracker
+  id: RMCTSEPAInspectorPVE
+  isHumanoid: true
 
 - type: jobIcon
   parent: CMJobIconBase
