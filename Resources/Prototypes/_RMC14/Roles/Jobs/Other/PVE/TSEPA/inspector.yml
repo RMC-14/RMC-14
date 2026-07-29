@@ -1,0 +1,59 @@
+- type: job
+  parent: CMJobBase
+  id: RMCTSEPAInspectorPVE
+  name: rmc-job-name-tsepa-pve-inspector
+  description: rmc-ghost-role-information-tsepa-description
+  ranks:
+    RMCRankTSEPASergeant: []
+  startingGear: RMCGearTSEPAInspectorPVE
+  icon: "RMCJobIconTSEPAInspectorPVE"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-tsepa-precinct-command
+  accessGroups:
+  - ColonistTSEPA
+  spawnMenuRoleName: TSEPA Inspector (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+        RMCSkillCqc: 2
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillMedical: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillPolice: 2
+        RMCSkillVehicles: 1
+    - type: NpcFactionMember
+      factions:
+      - TSE
+    - type: JobPrefix
+      prefix: rmc-job-prefix-tsepa-pve-inspector
+    - type: AssignSquad
+      squad: SquadTSEPAPVE
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: tse_painspector_pve
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_nspa
+  hidden: true
+
+- type: startingGear
+  id: RMCGearTSEPAInspectorPVE
+  equipment:
+    head: RMCHeadCapTSEPA
+    eyes: RMCGlassesSecurityBlue
+    ears: RMCHeadsetTSEPA
+    jumpsuit: RMCJumpsuitTSEPA
+    shoes: RMCShoesLaceup
+    id: RMCIDCardTSEPA
+    back: RMCSatchelTSEPA
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconTSEPAInspectorPVE
+  icon:
+    sprite: _RMC14/Interface/job_icons/TSE/TSEPA.rsi/pve
+    state: tse_painspector_pve
