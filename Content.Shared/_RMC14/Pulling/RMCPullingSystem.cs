@@ -280,9 +280,8 @@ public sealed class RMCPullingSystem : EntitySystem
         var ev = new PullSlowdownAttemptEvent(puller.Pulling.Value);
         RaiseLocalEvent(ent, ref ev);
         if (ev.Cancelled)
-        {
             return;
-        }
+
         foreach (var slowdown in slow.Slowdowns)
         {
             if (_whitelist.IsWhitelistPass(slowdown.Whitelist, puller.Pulling.Value))
@@ -291,6 +290,7 @@ public sealed class RMCPullingSystem : EntitySystem
                 return;
             }
         }
+
         args.ModifySpeed(slow.Multiplier, slow.Multiplier);
     }
 
