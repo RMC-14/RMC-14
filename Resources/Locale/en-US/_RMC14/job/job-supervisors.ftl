@@ -30,3 +30,4 @@ cm-job-supervisors-royal-troop-commander = the Troop Commander
 cm-job-supervisors-squadron-command = Squadron Command
 cm-job-supervisors-tsepa-sergeant = the Sergeant
 cm-job-supervisors-tsepa-inspector = the Inspector
+cm-job-supervisors-tsepa-commander = Precinct Command
