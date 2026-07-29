@@ -16,8 +16,15 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: Skills # TODO; Add unique skills
-      preset: RMCSkillPresetSurvivorMarshal
+    - type: Skills
+        RMCSkillCqc: 2
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillMedical: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillPolice: 2
+        RMCSkillVehicles: 1
     - type: NpcFactionMember
       factions:
       - TSE
