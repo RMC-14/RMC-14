@@ -54,6 +54,12 @@ public sealed partial class MarineControlComputerComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public HashSet<string> PrintedCommendationIds = new();
+
+    /// <summary>
+    ///     The map this computer toggles the evacuation state of.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityUid? EvacuationMap;
 }
 
 [Serializable, NetSerializable]
