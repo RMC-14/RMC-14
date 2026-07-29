@@ -62,5 +62,5 @@
   parent: CMJobIconBase
   id: RMCJobIconTSEPASeniorConstablePVE
   icon:
-    sprite: _RMC14/Interface/job_icons/TSE/TSEPA.rsi/pve
+    sprite: _RMC14/Interface/job_icons/TSE/TSEPA.rsi
     state: tse_paseniorconstable_pve
