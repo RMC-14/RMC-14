@@ -5,7 +5,7 @@
   description: rmc-ghost-role-information-tsepa-description
   playTimeTracker: RMCJobTSEPAInspectorPVE
   ranks:
-    RMCRankTSEPASergeant: []
+    RMCRankTSEPAInspector: []
   startingGear: RMCGearTSEPAInspectorPVE
   icon: "RMCJobIconTSEPAInspectorPVE"
   joinNotifyCrew: false
