@@ -3,7 +3,6 @@
   id: RMCTSEPAConstablePVE
   name: rmc-job-name-tsepa-pve-constable
   description: rmc-ghost-role-information-tsepa-description
-  playTimeTracker: RMCJobTSEPAConstable
   ranks:
     RMCRankTSEPAConstable: []
   startingGear: RMCGearTSEPAConstablePVE
@@ -45,6 +44,7 @@
   id: RMCGearTSEPAConstablePVE
   equipment:
     head: RMCHeadCapTSEPA
+    eyes: RMCGlassesSecurityBlue
     ears: RMCHeadsetTSEPA
     jumpsuit: RMCJumpsuitTSEPA
     shoes: RMCShoesLaceup
