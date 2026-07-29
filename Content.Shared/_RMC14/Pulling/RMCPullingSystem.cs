@@ -548,7 +548,6 @@ public sealed class RMCPullingSystem : EntitySystem
     {
         if (args.Target == ent.Comp.Pulling && args.Target != null)
         {
-            Log.Info("Bigger Tackling range 2.0V");
             args.Range = 4.0f;
         }
     }
@@ -557,7 +556,6 @@ public sealed class RMCPullingSystem : EntitySystem
     {
         if (args.Target == ent.Comp.Pulling && args.Target != null)
         {
-            Log.Info("Bigger Attack range");
             args.Range = 4.0f;
         }
     }
