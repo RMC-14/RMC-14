@@ -520,7 +520,6 @@
   description: An experimental brain-bucket. A dust ruffle hangs from back. Moderately better at deflecting blunt objects at the cost of humiliation, can also hold a second visor optic. But who will be laughing at the memorial? Not you, you'll be busy getting medals for your intel work.
 
 # Tyrargo army surv helmet
-
 - type: entity
   parent: CMArmorHelmetM12
   id: RMCArmorHelmetTyrargo
