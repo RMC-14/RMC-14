@@ -52,20 +52,6 @@
     id: RMCIDCardTSEPA
     back: RMCSatchelTSEPA
 
-- type: entity
-  parent: CMSpawnPointJobBase
-  id: RMCSpawnPointTSEPAConstablePVE
-  name: tsepa constable pve spawn point
-  components:
-  - type: SpawnPoint
-    job_id: RMCTSEPAConstable
-  - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - sprite: _RMC14/Objects/Clothing/OuterClothing/CMB/cmb_light_armor.rsi
-      state: icon
-
 - type: jobIcon
   parent: CMJobIconBase
   id: RMCJobIconTSEPAConstablePVE
