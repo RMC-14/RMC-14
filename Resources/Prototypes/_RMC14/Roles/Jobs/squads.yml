@@ -380,7 +380,7 @@
     - RMCSquadTSEPAPVE
 
 - type: Tag
-  id: RMCSquadRoyalMarinesPVE
+  id: RMCSquadTSEPAPVE
 
 - type: entity
   parent: SquadBase
