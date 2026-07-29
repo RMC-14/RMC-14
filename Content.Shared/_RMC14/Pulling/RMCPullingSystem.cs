@@ -99,7 +99,7 @@ public sealed class RMCPullingSystem : EntitySystem
 
         SubscribeLocalEvent<BeingPulledComponent, PullStoppedMessage>(OnBeingPulledPullStopped);
 
-        SubscribeLocalEvent<PullerComponent, GetUserDisarmRange>(ExtendTacklingRangeToPullingTarget);
+        SubscribeLocalEvent<PullerComponent, RMCGetUserDisarmRange>(ExtendTacklingRangeToPullingTarget);
         SubscribeLocalEvent<PullerComponent, RMCMeleeUserGetRangeEvent>(ExtendAttackingRangeToPullingTarget);
     }
 
@@ -544,7 +544,7 @@ public sealed class RMCPullingSystem : EntitySystem
     }
 
 
-    private void ExtendTacklingRangeToPullingTarget(Entity<PullerComponent> ent, ref GetUserDisarmRange args)
+    private void ExtendTacklingRangeToPullingTarget(Entity<PullerComponent> ent, ref RMCGetUserDisarmRange args)
     {
         if (args.Target == ent.Comp.Pulling && args.Target != null)
         {

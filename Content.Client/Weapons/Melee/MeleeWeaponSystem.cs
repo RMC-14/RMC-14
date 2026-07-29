@@ -218,7 +218,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
         if (_stateManager.CurrentState is GameplayStateBase screen)
             target = screen.GetClickedEntity(mousePos);
         var attackerPos = TransformSystem.GetMapCoordinates(attacker);
-        if (mousePos.MapId != attackerPos.MapId || (attackerPos.Position - mousePos.Position).Length() > _rmcMeleeWeapon.GetUserDisarmRange(attacker, target, meleeComponent))
+        if (mousePos.MapId != attackerPos.MapId || (attackerPos.Position - mousePos.Position).Length() > _rmcMeleeWeapon.RMCGetUserDisarmRange(attacker, target, meleeComponent))
             return;
         _rmcLagCompensation.SendLastRealTick(); // RMC14
         RaisePredictiveEvent(new DisarmAttackEvent(GetNetEntity(target), GetNetCoordinates(coordinates)));

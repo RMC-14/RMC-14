@@ -292,9 +292,9 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
         RaiseLocalEvent(user, ref ev);
         return ev.Range;
     }
-    public float GetUserDisarmRange(EntityUid user, EntityUid? target, MeleeWeaponComponent melee)
+    public float RMCGetUserDisarmRange(EntityUid user, EntityUid? target, MeleeWeaponComponent melee)
     {
-        var ev = new GetUserDisarmRange(target, melee.Range);
+        var ev = new RMCGetUserDisarmRange(target, melee.Range);
         RaiseLocalEvent(user, ref ev);
         return ev.Range;
     }
