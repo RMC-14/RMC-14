@@ -78,3 +78,13 @@
       key_slots:
       - RMCEncryptionKeyTSEPA
   - type: GrantTacMapAlert
+
+- type: entity # Headset for command TSEPA PVE roles
+  parent: RMCHeadsetTSEPAPVE
+  id: RMCHeadsetCommandTSEPAPVE
+  name: TSEPA command headset
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommand
