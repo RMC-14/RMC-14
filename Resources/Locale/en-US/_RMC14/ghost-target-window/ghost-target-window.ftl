@@ -8,7 +8,7 @@ rmc-ghost-target-window-tooltip-health = Health: {$health}%
 
 # Standard groups
 rmc-ghost-target-window-group-marines = Marines
-rmc-ghost-target-window-group-xenos = Xenomorphs
+rmc-ghost-target-window-group-xenos = Xenonids
 rmc-ghost-target-window-group-infected = Infected
 rmc-ghost-target-window-group-survivors = Survivors
 rmc-ghost-target-window-group-escaped = Escaped
