@@ -31,6 +31,7 @@ using Content.Shared._RMC14.Xenonids.Crest;
 using Content.Shared._RMC14.Xenonids.Fortify;
 using Content.Shared._RMC14.Stun;
 using Content.Shared.IdentityManagement;
+using Content.Shared._RMC14.Tackle;
 
 namespace Content.Shared._RMC14.Pulling;
 
@@ -97,6 +98,9 @@ public sealed class RMCPullingSystem : EntitySystem
         SubscribeLocalEvent<PullerComponent, PullStoppedMessage>(OnPullerPullStopped);
 
         SubscribeLocalEvent<BeingPulledComponent, PullStoppedMessage>(OnBeingPulledPullStopped);
+
+        SubscribeLocalEvent<PullerComponent, RMCGetTackleRangeEvent>(ExtendTacklingRangeToPullingTarget);
+        SubscribeLocalEvent<PullerComponent, RMCMeleeUserGetRangeEvent>(ExtendAttackingRangeToPullingTarget);
     }
 
     private void OnGetPullTarget(Entity<BuckleComponent> ent, ref RMCGetPullTargetEvent ev)
@@ -256,10 +260,6 @@ public sealed class RMCPullingSystem : EntitySystem
     {
         if (ent.Owner == args.PullerUid)
         {
-            if (TryComp<MeleeWeaponComponent>(ent.Owner, out var increaseMeleeRange))
-            {
-                increaseMeleeRange.Range = 1.5f;
-            }
             RemComp<PullingSlowedComponent>(args.PullerUid);
             _movementSpeed.RefreshMovementSpeedModifiers(args.PullerUid);
         }
@@ -287,10 +287,6 @@ public sealed class RMCPullingSystem : EntitySystem
         {
             if (_whitelist.IsWhitelistPass(slowdown.Whitelist, puller.Pulling.Value))
             {
-                if (TryComp<MeleeWeaponComponent>(ent.Owner, out var increaseMeleeRange))
-                {
-                    increaseMeleeRange.Range = 2.5f;
-                }
                 args.ModifySpeed(slowdown.Multiplier, slowdown.Multiplier);
                 return;
             }
@@ -547,6 +543,27 @@ public sealed class RMCPullingSystem : EntitySystem
         return ev.Target;
     }
 
+
+    private void ExtendTacklingRangeToPullingTarget(Entity<PullerComponent> ent, ref RMCGetTackleRangeEvent args)
+    {
+        if (args.Target == ent.Comp.Pulling && args.Target != null)
+        {
+            if (TryComp<MeleeWeaponComponent>(ent, out var meleeComp))
+            {
+                Log.Info("Bigger tackle range");
+                meleeComp.Range = 3.0f;
+            }
+        }
+    }
+
+    private void ExtendAttackingRangeToPullingTarget(Entity<PullerComponent> ent, ref RMCMeleeUserGetRangeEvent args)
+    {
+        if (args.Target == ent.Comp.Pulling && args.Target != null)
+        {
+            Log.Info("Bigger Attack range");
+            args.Range = 3.0f;
+        }
+    }
     public override void Update(float frameTime)
     {
         var blockDeadActive = EntityQueryEnumerator<BlockPullingDeadActiveComponent, PullerComponent>();
