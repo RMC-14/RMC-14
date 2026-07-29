@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/16/2026 10:13:56
-  entityCount: 739
+  time: 06/17/2026 18:14:48
+  entityCount: 740
 maps: []
 grids:
 - 1
@@ -4953,13 +4953,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 7.5,18.5
       parent: 1
-- proto: RMCPropVehicleLoaderTruckWhite
-  entities:
-  - uid: 553
-    components:
-    - type: Transform
-      pos: 19.5,14.5
-      parent: 1
 - proto: RMCRadioHandheldColonyOff
   entities:
   - uid: 370
@@ -5592,6 +5585,16 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 36.5,9.5
       parent: 1
+- proto: RMCVanWheel
+  entities:
+  - uid: 740
+    components:
+    - type: Transform
+      parent: 553
+    - type: Physics
+      canCollide: False
+    - type: HardpointIntegrity
+      integrity: 250
 - proto: RMCVendorCigsElectro
   entities:
   - uid: 605
@@ -5728,6 +5731,21 @@ entities:
     - type: Transform
       pos: 21.5,15.5
       parent: 1
+- proto: VehicleCLFVan
+  entities:
+  - uid: 553
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 20.5,14
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        wheel-1: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: 740
+    - type: VehicleLock
 - proto: WeaponRifleM16
   entities:
   - uid: 420
