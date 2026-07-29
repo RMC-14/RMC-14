@@ -44,24 +44,15 @@ public sealed class RMCPortableGeneratorBui(EntityUid owner, Enum uiKey) : Bound
         if (EntMan.TryGetComponent(Owner, out TransformComponent? xform))
             anchored = xform.Anchored;
 
-        if (!anchored)
+        _window.StatusLabel.SetMarkupPermissive((!anchored, gen.On) switch
         {
-            _window.StatusLabel.SetMarkupPermissive($"[color={RedColor.ToHex()}][ Unanchored ][/color]");
-            _window.ToggleButton.Disabled = true;
-        }
-        else
-        {
-            if (gen.On)
-            {
-                _window.StatusLabel.SetMarkupPermissive($"[color={GreenColor.ToHex()}][ Online ][/color]");
-                _window.ToggleButton.Text = "Stop";
-            }
-            else
-            {
-                _window.StatusLabel.SetMarkupPermissive($"[color={RedColor.ToHex()}][ Offline ][/color]");
-                _window.ToggleButton.Text = "Start";
-            }
-        }
+            (true, _) => $"[color={RedColor.ToHex()}]Unanchored[/color]",
+            (false, true) => $"[color={GreenColor.ToHex()}]Online[/color]",
+            (false, false) => $"[color={RedColor.ToHex()}]Offline[/color]",
+        });
+
+        _window.ToggleButton.Text = gen.On ? "Stop" : "Start";
+        _window.ToggleButton.Disabled = !anchored;
 
         var fuelSheets = storage.Storage.GetValueOrDefault(gen.Material, 0) / gen.MaterialPerSheet;
         var fuelPercent = storage.Storage.GetValueOrDefault(gen.Material, 0) % (float)gen.MaterialPerSheet / gen.MaterialPerSheet * 100;

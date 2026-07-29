@@ -149,11 +149,7 @@ public sealed partial class RMCPortableGeneratorSystem : EntitySystem
         }
 
         if (_materialStorage.GetMaterialAmount(ent, ent.Comp.Material) <= 0 && ent.Comp.FractionalMaterial <= 0)
-        {
-            if (_net.IsServer)
-                _audio.PlayPvs(ent.Comp.StartSoundEmpty, ent);
             return;
-        }
 
         var ev = new RMCPortableGeneratorStartDoAfterEvent();
         var delay = ent.Comp.StartDelay * _skills.GetSkillDelayMultiplier(user, ent.Comp.Skill);
