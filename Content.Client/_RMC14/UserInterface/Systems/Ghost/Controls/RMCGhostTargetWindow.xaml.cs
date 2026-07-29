@@ -22,11 +22,14 @@ public sealed partial class RMCGhostTargetWindow : DefaultWindow
     private readonly List<RMCGhostTargetSection> _sections = new();
     private readonly Dictionary<string, RMCGhostTargetSectionControl> _sectionControls = new();
     private readonly Dictionary<ButtonKey, RMCGhostTargetButton> _buttons = new();
-    private readonly Dictionary<Collapsible, RMCGhostTargetSection> _collapsibleSections = new();
+    private readonly Dictionary<Collapsible, bool> _expansionStates = new();
+    private readonly List<NetEntity> _targetDisplayOrder = new();
     private string _searchText = string.Empty;
+    private StyleBoxTexture _ghostnadoButtonStyle = default!;
 
     private static readonly Color TguiGoodButtonColor = Color.FromHex("#4e9121");
     private static readonly Color TguiGoodButtonHoverColor = Color.FromHex("#9ade6d");
+    private static readonly Color TguiGoodButtonDisabledColor = Color.FromHex("#29451a");
     private static readonly Color TguiTransparentButtonHoverColor = Color.FromHex("#737373");
 
     public event Action<NetEntity>? WarpClicked;
@@ -38,10 +41,15 @@ public sealed partial class RMCGhostTargetWindow : DefaultWindow
         RobustXamlLoader.Load(this);
         SetWindowBackgroundColor();
         SearchBar.OnTextChanged += OnSearchTextChanged;
+        SearchBar.OnTextEntered += _ => WarpToMostRelevantSearchResult();
 
         GhostnadoButton.Disabled = true;
+        SetupSearchBarStyle();
+        GhostnadoButton.ModulateSelfOverride = Color.White;
+        RefreshButton.ModulateSelfOverride = Color.White;
         GhostnadoButton.OnPressed += _ => WarpToMostFollowed();
         RefreshButton.OnPressed += _ => OnRefreshClicked?.Invoke();
+        OnOpen += SearchBar.GrabKeyboardFocus;
         OnClose += ClearContent;
         SetupGhostnadoButtonColors();
         SetupRefreshButtonHover();
@@ -71,8 +79,9 @@ public sealed partial class RMCGhostTargetWindow : DefaultWindow
         _sections.Clear();
         _sectionControls.Clear();
         _buttons.Clear();
-        _collapsibleSections.Clear();
-        ContentContainer.DisposeAllChildren();
+        _expansionStates.Clear();
+        _targetDisplayOrder.Clear();
+        ContentContainer.RemoveAllChildren();
         UpdateGhostnadoButtonState();
     }
 
@@ -81,7 +90,8 @@ public sealed partial class RMCGhostTargetWindow : DefaultWindow
         var spriteSystem = _entityManager.System<SpriteSystem>();
         var activeSections = new HashSet<string>();
         var activeButtons = new HashSet<ButtonKey>();
-        _collapsibleSections.Clear();
+        var orderedTargets = new HashSet<NetEntity>();
+        _targetDisplayOrder.Clear();
 
         var position = 0;
         foreach (var section in _sections)
@@ -97,12 +107,14 @@ public sealed partial class RMCGhostTargetWindow : DefaultWindow
                 position++,
                 spriteSystem,
                 activeSections,
-                activeButtons);
+                activeButtons,
+                orderedTargets);
         }
 
         foreach (var key in _buttons.Keys.Where(key => !activeButtons.Contains(key)).ToArray())
         {
-            _buttons[key].Dispose();
+            var button = _buttons[key];
+            button.Parent?.RemoveChild(button);
             _buttons.Remove(key);
         }
 
@@ -111,7 +123,9 @@ public sealed partial class RMCGhostTargetWindow : DefaultWindow
                      .OrderByDescending(path => path.Length)
                      .ToArray())
         {
-            _sectionControls[path].Collapsible.Dispose();
+            var collapsible = _sectionControls[path].Collapsible;
+            collapsible.Parent?.RemoveChild(collapsible);
+            _expansionStates.Remove(collapsible);
             _sectionControls.Remove(path);
         }
 
@@ -127,21 +141,27 @@ public sealed partial class RMCGhostTargetWindow : DefaultWindow
         int position,
         SpriteSystem spriteSystem,
         HashSet<string> activeSections,
-        HashSet<ButtonKey> activeButtons)
+        HashSet<ButtonKey> activeButtons,
+        HashSet<NetEntity> orderedTargets)
     {
         var path = GetSectionPath(parentPath, section.Key);
         activeSections.Add(path);
 
         if (!_sectionControls.TryGetValue(path, out var control))
         {
-            control = new RMCGhostTargetSectionControl(spriteSystem, _resourceCache, isSubsection);
+            control = new RMCGhostTargetSectionControl(_resourceCache, isSubsection);
             _sectionControls[path] = control;
+            _expansionStates[control.Collapsible] = section.IsExpandedByDefault;
+            control.Heading.OnToggled += args =>
+            {
+                if (string.IsNullOrEmpty(_searchText))
+                    _expansionStates[control.Collapsible] = args.Pressed;
+            };
         }
 
         Reparent(control.Collapsible, parent);
         control.Collapsible.SetPositionInParent(position);
         control.Update(section, GetSectionTitle(section), CountAllEntries(section));
-        _collapsibleSections[control.Collapsible] = section;
 
         var buttonPosition = 0;
         foreach (var targetId in section.Targets)
@@ -149,18 +169,21 @@ public sealed partial class RMCGhostTargetWindow : DefaultWindow
             if (!_targets.TryGetValue(targetId, out var target))
                 continue;
 
+            if (orderedTargets.Add(targetId))
+                _targetDisplayOrder.Add(targetId);
+
             var key = new ButtonKey(path, targetId);
             activeButtons.Add(key);
             if (!_buttons.TryGetValue(key, out var button))
             {
-                button = new RMCGhostTargetButton();
+                button = new RMCGhostTargetButton(_resourceCache);
                 button.TargetPressed += targetEntity => WarpClicked?.Invoke(targetEntity);
                 _buttons[key] = button;
             }
 
             Reparent(button, control.Targets);
             button.SetPositionInParent(buttonPosition++);
-            button.Update(target, spriteSystem);
+            button.Update(target, spriteSystem, SectionUsesColoredTargets(section.Key.Kind));
             button.Visible = ButtonIsVisible(button);
         }
 
@@ -178,7 +201,8 @@ public sealed partial class RMCGhostTargetWindow : DefaultWindow
                 childPosition++,
                 spriteSystem,
                 activeSections,
-                activeButtons);
+                activeButtons,
+                orderedTargets);
         }
     }
 
@@ -221,15 +245,58 @@ public sealed partial class RMCGhostTargetWindow : DefaultWindow
             : Loc.GetString(section.TitleLocId);
     }
 
+    private static bool SectionUsesColoredTargets(RMCGhostTargetSectionKind kind)
+    {
+        return kind switch
+        {
+            RMCGhostTargetSectionKind.Others or
+            RMCGhostTargetSectionKind.Dead or
+            RMCGhostTargetSectionKind.WarpPoints or
+            RMCGhostTargetSectionKind.Ghosts => false,
+            _ => true,
+        };
+    }
+
     private void UpdateGhostnadoButtonState()
     {
         GhostnadoButton.Disabled = GetMostFollowedEntry() == null;
+        UpdateGhostnadoButtonColor();
     }
 
     private void WarpToMostFollowed()
     {
         if (GetMostFollowedEntry() is { } entry)
             WarpClicked?.Invoke(entry.Entity);
+    }
+
+    private void WarpToMostRelevantSearchResult()
+    {
+        if (string.IsNullOrEmpty(_searchText))
+            return;
+
+        NetEntity? mostRelevant = null;
+        var bestMatchRank = int.MaxValue;
+        var bestFollowerCount = -1;
+        foreach (var targetId in _targetDisplayOrder)
+        {
+            if (!_targets.TryGetValue(targetId, out var entry))
+                continue;
+
+            var matchRank = GetSearchMatchRank(entry, _searchText);
+            if (matchRank == int.MaxValue ||
+                matchRank > bestMatchRank ||
+                matchRank == bestMatchRank && entry.FollowerCount <= bestFollowerCount)
+            {
+                continue;
+            }
+
+            mostRelevant = targetId;
+            bestMatchRank = matchRank;
+            bestFollowerCount = entry.FollowerCount;
+        }
+
+        if (mostRelevant is { } target)
+            WarpClicked?.Invoke(target);
     }
 
     private RMCGhostTargetEntry? GetMostFollowedEntry()
@@ -250,8 +317,30 @@ public sealed partial class RMCGhostTargetWindow : DefaultWindow
 
     private bool ButtonIsVisible(RMCGhostTargetButton button)
     {
+        return EntryMatchesSearch(button.Entry);
+    }
+
+    private bool EntryMatchesSearch(RMCGhostTargetEntry entry)
+    {
         return string.IsNullOrEmpty(_searchText) ||
-               button.SearchText.Contains(_searchText, StringComparison.OrdinalIgnoreCase);
+               GetSearchMatchRank(entry, _searchText) != int.MaxValue;
+    }
+
+    private static int GetSearchMatchRank(RMCGhostTargetEntry entry, string searchText)
+    {
+        if (entry.DisplayName.Equals(searchText, StringComparison.OrdinalIgnoreCase))
+            return 0;
+
+        if (entry.DisplayName.StartsWith(searchText, StringComparison.OrdinalIgnoreCase))
+            return 1;
+
+        if (entry.DisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase))
+            return 2;
+
+        if (entry.DisplayJob?.Contains(searchText, StringComparison.OrdinalIgnoreCase) == true)
+            return 3;
+
+        return int.MaxValue;
     }
 
     private void UpdateVisibleButtons()
@@ -278,8 +367,7 @@ public sealed partial class RMCGhostTargetWindow : DefaultWindow
                 var visible = searchEmpty || hasVisibleContent;
                 collapsible.Visible = visible;
                 collapsible.BodyVisible = searchEmpty
-                    ? _collapsibleSections.TryGetValue(collapsible, out var section) &&
-                      section.IsExpandedByDefault
+                    ? _expansionStates.TryGetValue(collapsible, out var expanded) && expanded
                     : hasVisibleContent;
                 anyVisible |= visible;
             }
@@ -298,7 +386,7 @@ public sealed partial class RMCGhostTargetWindow : DefaultWindow
 
     private void OnSearchTextChanged(LineEdit.LineEditEventArgs args)
     {
-        _searchText = args.Text;
+        _searchText = args.Text.Trim();
         UpdateVisibleButtons();
         UpdateVisibleCollapsibles();
         GhostScroll.SetScrollValue(Vector2.Zero);
@@ -306,30 +394,46 @@ public sealed partial class RMCGhostTargetWindow : DefaultWindow
 
     private void SetupGhostnadoButtonColors()
     {
-        if (GhostnadoButton.StyleBoxOverride is not StyleBoxTexture styleBox)
-            return;
-
-        styleBox.Modulate = TguiGoodButtonColor;
-        GhostnadoButton.OnMouseEntered += _ => styleBox.Modulate = TguiGoodButtonHoverColor;
-        GhostnadoButton.OnMouseExited += _ => styleBox.Modulate = TguiGoodButtonColor;
-        GhostnadoButton.OnButtonDown += _ => styleBox.Modulate = TguiGoodButtonHoverColor;
-        GhostnadoButton.OnButtonUp += _ =>
-        {
-            styleBox.Modulate = GhostnadoButton.IsHovered
-                ? TguiGoodButtonHoverColor
-                : TguiGoodButtonColor;
-        };
+        _ghostnadoButtonStyle = RMCGhostTargetStyles.CreateRoundedBox(_resourceCache, TguiGoodButtonDisabledColor);
+        _ghostnadoButtonStyle.SetContentMarginOverride(StyleBox.Margin.Horizontal, 6);
+        GhostnadoButton.StyleBoxOverride = _ghostnadoButtonStyle;
+        GhostnadoButton.OnMouseEntered += _ => UpdateGhostnadoButtonColor();
+        GhostnadoButton.OnMouseExited += _ => UpdateGhostnadoButtonColor();
+        GhostnadoButton.OnButtonDown += _ => UpdateGhostnadoButtonColor(pressed: true);
+        GhostnadoButton.OnButtonUp += _ => UpdateGhostnadoButtonColor();
     }
 
     private void SetupRefreshButtonHover()
     {
-        var styleBox = new StyleBoxFlat
-        {
-            BackgroundColor = Color.Transparent,
-        };
+        var styleBox = RMCGhostTargetStyles.CreateRoundedBox(_resourceCache, Color.Transparent);
+        styleBox.SetContentMarginOverride(StyleBox.Margin.All, 0);
         RefreshButton.StyleBoxOverride = styleBox;
-        RefreshButton.OnMouseEntered += _ => styleBox.BackgroundColor = TguiTransparentButtonHoverColor;
-        RefreshButton.OnMouseExited += _ => styleBox.BackgroundColor = Color.Transparent;
+        RefreshButton.OnMouseEntered += _ => styleBox.Modulate = TguiTransparentButtonHoverColor;
+        RefreshButton.OnMouseExited += _ => styleBox.Modulate = Color.Transparent;
+    }
+
+    private void SetupSearchBarStyle()
+    {
+        var border = RMCGhostTargetStyles.CreateRoundedBox(_resourceCache, Color.FromHex("#4b4b4b"));
+        border.SetContentMarginOverride(StyleBox.Margin.All, 1);
+        SearchBorder.PanelOverride = border;
+
+        var background = RMCGhostTargetStyles.CreateRoundedBox(
+            _resourceCache,
+            Color.FromHex("#111111"),
+            inset: true);
+        background.SetContentMarginOverride(StyleBox.Margin.Horizontal, 5);
+        background.SetContentMarginOverride(StyleBox.Margin.Vertical, 2);
+        SearchBar.StyleBoxOverride = background;
+    }
+
+    private void UpdateGhostnadoButtonColor(bool pressed = false)
+    {
+        _ghostnadoButtonStyle.Modulate = GhostnadoButton.Disabled
+            ? TguiGoodButtonDisabledColor
+            : pressed || GhostnadoButton.IsHovered
+                ? TguiGoodButtonHoverColor
+                : TguiGoodButtonColor;
     }
 
     private void SetWindowBackgroundColor()

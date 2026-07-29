@@ -2,6 +2,7 @@ using System.Numerics;
 using Content.Shared._RMC14.Ghost;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
+using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Utility;
 
@@ -9,9 +10,16 @@ namespace Content.Client._RMC14.UserInterface.Systems.Ghost.Controls;
 
 internal sealed class RMCGhostTargetButton : Button
 {
-    private const float HoverLightnessPercent = 0.1f;
     private static readonly ResPath HealthRsi = new("/Textures/_RMC14/Interface/health_hud.rsi");
+    private static readonly Color ColoredBorderColor = Color.FromHex("#2185d0");
+    private static readonly Color NeutralBorderColor = Color.FromHex("#66717f");
+    private static readonly Color TextColor = Color.FromHex("#f0f0f0");
+    private static readonly Color NormalBackgroundColor = Color.FromHex("#25282d");
+    private static readonly Color HoverBackgroundColor = Color.FromHex("#3b4652");
+    private static readonly Color PressedBackgroundColor = Color.FromHex("#465667");
 
+    private readonly StyleBoxTexture _borderStyle;
+    private readonly StyleBoxTexture _backgroundStyle;
     private readonly TextureRect _healthIcon;
     private readonly PanelContainer _tacticalPanel;
     private readonly TextureRect _tacticalBackground;
@@ -21,41 +29,34 @@ internal sealed class RMCGhostTargetButton : Button
     private readonly Label _followerCount;
 
     private RMCGhostTargetEntry _entry;
+    private bool _coloredSection;
     private bool _initialized;
 
     public event Action<NetEntity>? TargetPressed;
 
-    public string SearchText { get; private set; } = string.Empty;
-
     public RMCGhostTargetEntry Entry => _entry;
 
-    public RMCGhostTargetButton()
+    public RMCGhostTargetButton(IResourceCache resourceCache)
     {
-        StyleBoxOverride = new StyleBoxTexture
-        {
-            PatchMarginTop = 5,
-            PatchMarginBottom = 5,
-            PatchMarginLeft = 5,
-            PatchMarginRight = 5,
-            ContentMarginTopOverride = 3,
-            ContentMarginLeftOverride = 6,
-            ContentMarginRightOverride = 6,
-            ContentMarginBottomOverride = 3,
-            Padding = new Thickness(2),
-        };
+        _borderStyle = RMCGhostTargetStyles.CreateRoundedBox(resourceCache, NeutralBorderColor);
+        _borderStyle.SetContentMarginOverride(StyleBox.Margin.All, 1);
+        StyleBoxOverride = _borderStyle;
+        ModulateSelfOverride = Color.White;
+        HorizontalAlignment = HAlignment.Left;
+        VerticalAlignment = VAlignment.Top;
+        RectClipContent = true;
 
         OnPressed += _ => TargetPressed?.Invoke(_entry.Entity);
-        OnMouseEntered += _ => SetModulate(AdjustLightness(GetModulate(), HoverLightnessPercent));
-        OnMouseExited += _ => SetModulate(Color.White);
-        OnButtonDown += _ => SetModulate(Color.FromHex("#3e6c45"));
-        OnButtonUp += _ => SetModulate(Color.White);
+        OnMouseEntered += _ => SetInteractionStyle(pressed: false, hovered: true);
+        OnMouseExited += _ => SetInteractionStyle(pressed: false, hovered: false);
+        OnButtonDown += _ => SetInteractionStyle(pressed: true, hovered: true);
+        OnButtonUp += _ => SetInteractionStyle(pressed: false, hovered: IsHovered);
 
         var buttonContainer = new BoxContainer
         {
             Orientation = BoxContainer.LayoutOrientation.Horizontal,
-            HorizontalAlignment = HAlignment.Center,
+            HorizontalAlignment = HAlignment.Left,
             VerticalAlignment = VAlignment.Center,
-            HorizontalExpand = true,
         };
 
         _healthIcon = new TextureRect
@@ -63,8 +64,8 @@ internal sealed class RMCGhostTargetButton : Button
             HorizontalAlignment = HAlignment.Center,
             VerticalAlignment = VAlignment.Center,
             Stretch = TextureRect.StretchMode.KeepAspectCentered,
-            MinSize = new Vector2(13, 13),
-            MaxSize = new Vector2(13, 13),
+            MinSize = new Vector2(10, 10),
+            MaxSize = new Vector2(10, 10),
             Margin = new Thickness(0, 0, 4, 0),
             Visible = false,
         };
@@ -116,22 +117,34 @@ internal sealed class RMCGhostTargetButton : Button
         _followerCounter.AddChild(_followerCount);
         buttonContainer.AddChild(_followerCounter);
 
-        AddChild(buttonContainer);
+        _backgroundStyle = RMCGhostTargetStyles.CreateRoundedBox(
+            resourceCache,
+            NormalBackgroundColor,
+            inset: true);
+        _backgroundStyle.SetContentMarginOverride(StyleBox.Margin.Horizontal, 5);
+        _backgroundStyle.SetContentMarginOverride(StyleBox.Margin.Vertical, 2);
+        var background = new PanelContainer
+        {
+            PanelOverride = _backgroundStyle,
+        };
+        background.AddChild(buttonContainer);
+        AddChild(background);
     }
 
-    public void Update(RMCGhostTargetEntry entry, SpriteSystem spriteSystem)
+    public void Update(RMCGhostTargetEntry entry, SpriteSystem spriteSystem, bool coloredSection)
     {
-        if (_initialized && EntriesEqual(_entry, entry))
+        if (_initialized && EntriesEqual(_entry, entry) && _coloredSection == coloredSection)
             return;
 
         var previous = _entry;
         var firstUpdate = !_initialized;
 
-        if (StyleBoxOverride is StyleBoxTexture style)
+        if (firstUpdate || _coloredSection != coloredSection)
         {
-            style.Texture ??= spriteSystem.Frame0(
-                new SpriteSpecifier.Texture(
-                    new ResPath("/Textures/Interface/Nano/rounded_button.svg.96dpi.png")));
+            _coloredSection = coloredSection;
+            _nameLabel.Modulate = TextColor;
+            _followerCount.Modulate = TextColor;
+            SetInteractionStyle(pressed: false, hovered: IsHovered);
         }
 
         if (firstUpdate ||
@@ -139,10 +152,7 @@ internal sealed class RMCGhostTargetButton : Button
             previous.DisplayJob != entry.DisplayJob)
         {
             Name = entry.DisplayName;
-            SearchText = entry.DisplayJob == null
-                ? entry.DisplayName
-                : $"{entry.DisplayName} {entry.DisplayJob}";
-            _nameLabel.Text = TruncateText(entry.DisplayName, 15);
+            _nameLabel.Text = entry.DisplayName;
         }
 
         if (firstUpdate ||
@@ -257,30 +267,15 @@ internal sealed class RMCGhostTargetButton : Button
         return tooltip;
     }
 
-    private static string TruncateText(string text, int maxLength)
+    private void SetInteractionStyle(bool pressed, bool hovered)
     {
-        return text.Length > maxLength
-            ? text[..maxLength] + "..."
-            : text;
-    }
-
-    private Color GetModulate()
-    {
-        return StyleBoxOverride is StyleBoxTexture style ? style.Modulate : Color.White;
-    }
-
-    private void SetModulate(Color color)
-    {
-        if (StyleBoxOverride is StyleBoxTexture style)
-            style.Modulate = color;
-    }
-
-    private static Color AdjustLightness(Color color, float percent)
-    {
-        var hsv = Color.ToHsv(color);
-        hsv.Z = percent > 0
-            ? Math.Min(hsv.Z * (1f + percent), 1f)
-            : hsv.Z * (1f + percent);
-        return Color.FromHsv(hsv);
+        _borderStyle.Modulate = _coloredSection
+            ? ColoredBorderColor
+            : NeutralBorderColor;
+        _backgroundStyle.Modulate = pressed
+            ? PressedBackgroundColor
+            : hovered
+                ? HoverBackgroundColor
+                : NormalBackgroundColor;
     }
 }

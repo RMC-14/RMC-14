@@ -1,64 +1,49 @@
 using Content.Client.Stylesheets;
 using Content.Shared._RMC14.Ghost;
-using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface.Controls;
-using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.UserInterface.Systems.Ghost.Controls;
 
 internal sealed class RMCGhostTargetSectionControl
 {
-    private const float HoverLightnessPercent = 0.1f;
+    private const float HoverLightnessPercent = 0.12f;
+
+    private readonly StyleBoxTexture _headingStyle;
     private Color _headerColor;
 
     public readonly CollapsibleHeading Heading;
     public readonly CollapsibleBody Body;
-    public readonly GridContainer Targets;
+    public readonly RMCGhostTargetWrapContainer Targets;
     public readonly BoxContainer Children;
     public readonly Collapsible Collapsible;
 
-    public RMCGhostTargetSectionControl(
-        SpriteSystem spriteSystem,
-        IResourceCache resourceCache,
-        bool isSubsection)
+    public RMCGhostTargetSectionControl(IResourceCache resourceCache, bool isSubsection)
     {
         Heading = new CollapsibleHeading();
         Heading.Label.StyleClasses.Add(StyleNano.StyleClassLabelSmall);
-        Heading.Label.FontOverride = resourceCache.NotoStack("Bold", 10);
-        Heading.StyleBoxOverride = new StyleBoxTexture
-        {
-            Texture = spriteSystem.Frame0(
-                new SpriteSpecifier.Texture(
-                    new ResPath("/Textures/Interface/Nano/rounded_button.svg.96dpi.png"))),
-            PatchMarginTop = 5,
-            PatchMarginBottom = 5,
-            PatchMarginLeft = 5,
-            PatchMarginRight = 5,
-            ContentMarginTopOverride = 3,
-            ContentMarginLeftOverride = 5,
-            ContentMarginRightOverride = 5,
-            ContentMarginBottomOverride = 3,
-            Padding = new Thickness(2),
-        };
+        Heading.Label.FontOverride = resourceCache.NotoStack("Bold", 11);
+        Heading.ChevronMargin = new Thickness(4, 0, 3, 0);
+        _headingStyle = RMCGhostTargetStyles.CreateRoundedBox(resourceCache, Color.White);
+        _headingStyle.SetContentMarginOverride(StyleBox.Margin.Top, 3);
+        _headingStyle.SetContentMarginOverride(StyleBox.Margin.Left, 3);
+        _headingStyle.SetContentMarginOverride(StyleBox.Margin.Right, 6);
+        _headingStyle.SetContentMarginOverride(StyleBox.Margin.Bottom, 3);
+        Heading.StyleBoxOverride = _headingStyle;
+        Heading.ModulateSelfOverride = Color.White;
         Heading.OnMouseEntered += _ => SetHeadingColor(AdjustLightness(_headerColor, HoverLightnessPercent));
         Heading.OnMouseExited += _ => SetHeadingColor(_headerColor);
 
         Body = new CollapsibleBody
         {
             HorizontalExpand = true,
-            Margin = new Thickness(0, 3, 0, 0),
+            Margin = new Thickness(2, 4, 0, 0),
         };
-        Targets = new GridContainer
+        Targets = new RMCGhostTargetWrapContainer
         {
             HorizontalExpand = true,
-            VerticalExpand = true,
-        };
-        Body.OnResized += () =>
-        {
-            if (Body.Width > 0)
-                Targets.MaxGridWidth = Body.Width;
+            VerticalExpand = false,
         };
 
         Children = new BoxContainer
@@ -79,7 +64,7 @@ internal sealed class RMCGhostTargetSectionControl
 
         Collapsible = new Collapsible(Heading, Body)
         {
-            Margin = isSubsection ? new Thickness(10, 4, 0, 4) : new Thickness(0, 4),
+            Margin = isSubsection ? new Thickness(12, 3, 0, 3) : new Thickness(0, 3),
             HorizontalExpand = true,
         };
     }
@@ -89,15 +74,13 @@ internal sealed class RMCGhostTargetSectionControl
         _headerColor = section.HeaderColor;
         Heading.Title = $"{title} - ({totalCount})";
         SetHeadingColor(_headerColor);
-        Collapsible.BodyVisible = section.IsExpandedByDefault;
         Targets.Visible = section.Targets.Count > 0;
         Children.Visible = section.Children.Count > 0;
     }
 
     private void SetHeadingColor(Color color)
     {
-        if (Heading.StyleBoxOverride is StyleBoxTexture style)
-            style.Modulate = color;
+        _headingStyle.Modulate = color;
     }
 
     private static Color AdjustLightness(Color color, float percent)
