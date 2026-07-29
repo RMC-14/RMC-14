@@ -9,6 +9,12 @@
   name: King
   description: The end of the line.
   components:
+  - type: RMCKeybindActions
+    actions:
+      XenoPrimaryOne: [ ActionXenoRend ]
+      XenoPrimaryTwo: [ ActionXenoDoom ]
+      XenoPrimaryThree: [ ActionXenoDestroy ]
+      XenoPrimaryFour: [ ActionXenoBulwarkOfTheHive ]
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/King/king.rsi
   - type: MobState

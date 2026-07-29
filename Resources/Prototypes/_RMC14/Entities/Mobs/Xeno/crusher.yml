@@ -115,6 +115,11 @@
   parent: CMXenoCrusherBase
   id: RMCXenoCrusher
   components:
+  - type: RMCKeybindActions
+    actions:
+      XenoPrimaryOne: [ ActionXenoCharge ]
+      XenoPrimaryTwo: [ ActionXenoStomp ]
+      XenoPrimaryThree: [ ActionXenoDefensiveShield ]
   - type: Xeno
     actionIds:
     - ActionXenoRest
@@ -143,6 +148,12 @@
   id: RMCXenoCrusherCharger
   suffix: Charger
   components:
+  - type: RMCKeybindActions
+    actions:
+      XenoPrimaryOne: [ ActionXenoToggleCharging ]
+      XenoPrimaryTwo: [ ActionXenoTumble ]
+      XenoPrimaryThree: [ ActionXenoStomp ]
+      XenoPrimaryFour: [ ActionXenoRam ]
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Crusher/charger_crusher.rsi
   - type: MobThresholds
