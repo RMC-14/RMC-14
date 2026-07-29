@@ -51,7 +51,7 @@
   equipment:
     head: RMCHeadCapTSEPAPeakedGoldSilver
     eyes: RMCGlassesSecurityBlue
-    ears: RMCHeadsetTSEPAPVE
+    ears: RMCHeadsetCommandTSEPAPVE
     jumpsuit: RMCJumpsuitTSEPA
     outerClothing: RMCCoatTSEPA
     shoes: RMCShoesLaceup
