@@ -170,7 +170,7 @@
         - Xeno
     - type: AmbientSound
       range: 5
-      volume: -5
+      volume: 0
       sound:
         path: /Audio/Ambience/Objects/engine_hum.ogg
       enabled: false
