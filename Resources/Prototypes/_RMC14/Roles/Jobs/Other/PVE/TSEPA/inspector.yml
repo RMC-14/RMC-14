@@ -16,6 +16,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
+      skills:
         RMCSkillCqc: 2
         RMCSkillEndurance: 2
         RMCSkillFirearms: 1
