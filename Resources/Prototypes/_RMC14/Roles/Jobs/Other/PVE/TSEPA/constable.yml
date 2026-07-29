@@ -27,9 +27,6 @@
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: tse_paconstable_pve
-      background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_nspa
   hidden: true
 
 - type: startingGear
