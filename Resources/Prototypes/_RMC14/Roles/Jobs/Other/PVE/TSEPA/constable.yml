@@ -1,4 +1,3 @@
-# TSEPA Constable
 - type: job
   parent: CMJobBase
   id: RMCTSEPAConstablePVE
@@ -7,7 +6,7 @@
   playTimeTracker: RMCJobTSEPAConstable
   ranks:
     RMCRankTSEPAConstable: []
-  startingGear: RMCGearTSEPAConstable
+  startingGear: RMCGearTSEPAConstablePVE
   icon: "RMCJobIconTSEPAConstablePVE"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-tsepa-sergeant
@@ -34,7 +33,7 @@
   hidden: true
 
 - type: startingGear
-  id: RMCGearTSEPAConstable
+  id: RMCGearTSEPAConstablePVE
   equipment:
     head: RMCHeadCapTSEPA
     ears: RMCHeadsetTSEPA
