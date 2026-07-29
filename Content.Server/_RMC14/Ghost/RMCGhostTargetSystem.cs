@@ -114,6 +114,7 @@ public sealed class RMCGhostTargetSystem : EntitySystem
         SubscribeLocalEvent<GhostComponent, GhostCanInteractChangedEvent>(OnGhostVisibilityChanged);
         SubscribeLocalEvent<GhostComponent, EntityTerminatingEvent>(OnGhostTerminating);
 
+        SubscribeLocalEvent<WarpPointComponent, MapInitEvent>(OnWarpPointMapInit);
         SubscribeLocalEvent<WarpPointComponent, WarpPointLocationChangedEvent>(OnWarpPointLocationChanged);
         SubscribeLocalEvent<WarpPointComponent, EntityTerminatingEvent>(OnWarpPointTerminating);
 
@@ -241,7 +242,7 @@ public sealed class RMCGhostTargetSystem : EntitySystem
         if (query.MoveNext(out storeUid, out existing))
         {
             _store = storeUid;
-            if (!existing.Initialized)
+            if (!existing.IsInitialized)
                 InitializeStore((storeUid, existing));
 
             while (query.MoveNext(out var duplicate, out _))
@@ -310,7 +311,7 @@ public sealed class RMCGhostTargetSystem : EntitySystem
             InitializeSectionIndex(store.Comp);
             SeedStore(store.Comp);
             RebuildViews(store.Comp);
-            store.Comp.Initialized = true;
+            store.Comp.IsInitialized = true;
         }
         finally
         {
@@ -445,6 +446,11 @@ public sealed class RMCGhostTargetSystem : EntitySystem
         RemoveTarget(ent);
     }
 
+    private void OnWarpPointMapInit(Entity<WarpPointComponent> ent, ref MapInitEvent args)
+    {
+        RefreshTarget(ent);
+    }
+
     private void OnWarpPointLocationChanged(
         EntityUid uid,
         WarpPointComponent component,
@@ -503,7 +509,6 @@ public sealed class RMCGhostTargetSystem : EntitySystem
         switch (args.Component)
         {
             case GhostComponent:
-            case WarpPointComponent:
             case MindContainerComponent:
             case VisitingMindComponent:
             case VictimInfectedComponent:
@@ -512,6 +517,10 @@ public sealed class RMCGhostTargetSystem : EntitySystem
             case HumanoidAppearanceComponent:
             case NpcFactionMemberComponent:
                 RefreshTarget(args.Owner);
+                break;
+            case WarpPointComponent:
+                if (LifeStage(args.Owner) >= EntityLifeStage.MapInitialized)
+                    RefreshTarget(args.Owner);
                 break;
             case TacticalMapIconComponent:
             case DamageableComponent:

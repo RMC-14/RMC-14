@@ -23,7 +23,7 @@ public sealed partial class RMCGhostTargetStoreComponent : Component
 
     public uint Revision;
     public bool DistressEndgame;
-    public bool Initialized;
+    public bool IsInitialized;
 }
 
 /// <summary>
