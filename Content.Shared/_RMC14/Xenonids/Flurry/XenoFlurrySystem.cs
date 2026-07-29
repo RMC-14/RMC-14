@@ -1,15 +1,18 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Emote;
+using Content.Shared._RMC14.Fishing;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Heal;
 using Content.Shared._RMC14.Xenonids.Stab;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
+using Content.Shared.Fishing;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Systems;
@@ -33,6 +36,7 @@ public sealed class XenoFlurrySystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedXenoHealSystem _xenoHeal = default!;
+    [Dependency] private readonly SharedRMCFishingSystem _fishing = default!;
 
     public override void Initialize()
     {
@@ -110,8 +114,12 @@ public sealed class XenoFlurrySystem : EntitySystem
                 break;
         }
 
+        XenoFishingComponent? fishing = null;
+
         if (hitEnt != null)
             _rmcMelee.DoLunge(xeno, hitEnt.Value);
+        else
+            TryComp(xeno, out fishing);
 
         var bounds = rot.CalcBoundingBox();
 
@@ -120,7 +128,15 @@ public sealed class XenoFlurrySystem : EntitySystem
             if (!_interaction.InRangeUnobstructed(xeno.Owner, _turf.GetTileCenter(tile), xeno.Comp.Range + 0.5f))
                 continue;
 
-            SpawnAtPosition(xeno.Comp.TelegraphEffect, _turf.GetTileCenter(tile));
+            var center = _turf.GetTileCenter(tile);
+
+            SpawnAtPosition(xeno.Comp.TelegraphEffect, center);
+
+            // Try fish at every hit tile
+            if (fishing != null &&
+                _fishing.DoXenoFish((xeno, fishing), center, out var caught, pickup: false) &&
+                caught != null)
+                _audio.PlayEntity(xeno.Comp.SlashSound, xeno, caught.Value);
         }
     }
 }

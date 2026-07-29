@@ -209,3 +209,5 @@
     ventCrawlIcon: vampire
   - type: RMCActionOrder
     id: RMCXenoLurkerVampire
+  - type: XenoFishing
+    failChance: 0.9 # Slashing at the water has mixed results
