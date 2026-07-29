@@ -45,12 +45,14 @@
 - type: startingGear
   id: RMCGearTSEPAInspectorPVE
   equipment:
-    head: RMCHeadCapTSEPA
+    head: RMCHeadCapTSEPAPeakedGold
     eyes: RMCGlassesSecurityBlue
-    ears: RMCHeadsetTSEPA
+    ears: RMCHeadsetTSEPAPVE
+    gloves: RMCHandsCombat
     jumpsuit: RMCJumpsuitTSEPA
+    outerClothing: RMCCoatTSEPAFormal
     shoes: RMCShoesLaceup
-    id: RMCIDCardTSEPA
+    id: RMCIDCardTSEPAGold
     back: RMCSatchelTSEPA
 
 - type: playTimeTracker
