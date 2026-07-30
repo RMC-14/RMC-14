@@ -170,7 +170,7 @@ public sealed class RMCInjectorSystem : EntitySystem
             // Check target - if in combat mode abort!!!
             // Not parity but just in case
 
-            if (syringe.Comp.NoDrawOnAliveHostiles && !_combatSystem.IsInCombatMode(args.Target) && !_mob.IsDead(args.Target))
+            if (syringe.Comp.NoDrawOnAliveHostiles && _combatSystem.IsInCombatMode(args.Target) && !_mob.IsDead(args.Target))
             {
                 args.Cancelled = true;
                 return;
