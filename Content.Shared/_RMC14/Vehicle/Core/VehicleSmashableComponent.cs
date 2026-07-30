@@ -24,4 +24,7 @@ public sealed partial class VehicleSmashableComponent : Component
 
     [DataField]
     public bool RequiresDoorUnpowered;
+
+    [DataField]
+    public bool BlocksUntilDestroyed;
 }

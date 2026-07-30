@@ -375,6 +375,26 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         float wheelDamage,
         ref bool playedCollisionSound)
     {
+        if (TryComp(vehicle, out VehicleSqueezeUnderComponent? squeezeUnder) &&
+            _squeezeUnder.CanSqueezeUnder((vehicle, squeezeUnder), xeno))
+        {
+            if (!applyEffects)
+                return CollisionHandlingResult.Continue;
+
+            _squeezeUnder.TryMarkUnder(xeno, (vehicle, squeezeUnder));
+
+            var squeezeVehicleMove = GetVehicleMoveDelta(grid, vehicleWorldPosition, mapId, mover);
+            if (PushMobOutOfVehicle(vehicle, xeno, vehicleAabb, xenoAabb, squeezeVehicleMove))
+            {
+                mover.CurrentSpeed *= SqueezeUnderPushSlowFactor;
+                Dirty(vehicle, mover);
+                return CollisionHandlingResult.Continue;
+            }
+
+            AddBlockingCollision(vehicle, xeno, collisionAabb, xenoAabb, clearance, mapId, debug, blockers);
+            return CollisionHandlingResult.Blocked;
+        }
+
         var blockResult = GetXenoBlockResult(mover, xeno);
 
         if (blockResult == XenoBlockResult.Slow)
@@ -437,10 +457,10 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         float wheelDamage,
         ref bool playedCollisionSound)
     {
-        if (TryComp(other, out VehicleSmashableComponent? smashable) &&
-            smashable.RequiresDoorUnpowered &&
-            hasDoor &&
-            !isUnpoweredDoor)
+        if (!TryComp(other, out VehicleSmashableComponent? smashable))
+            return CollisionHandlingResult.Continue;
+
+        if (smashable.RequiresDoorUnpowered && hasDoor && !isUnpoweredDoor)
         {
             if (applyEffects)
             {
@@ -454,6 +474,12 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
         if (applyEffects)
             TrySmash(other, vehicle, ref playedCollisionSound);
+
+        if (smashable.BlocksUntilDestroyed && !TerminatingOrDeleted(other))
+        {
+            AddBlockingCollision(vehicle, other, collisionAabb, otherAabb, clearance, mapId, debug, blockers);
+            return CollisionHandlingResult.Blocked;
+        }
 
         return CollisionHandlingResult.Continue;
     }
@@ -628,6 +654,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     }
 
     private const float FortifiedLightSlowFactor = 1f / 3f;
+    private const float SqueezeUnderPushSlowFactor = 0.8f;
 
     private bool ShouldBlockXeno(GridVehicleMoverComponent mover, EntityUid xeno)
     {

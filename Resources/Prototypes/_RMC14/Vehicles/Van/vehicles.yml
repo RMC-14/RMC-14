@@ -17,6 +17,7 @@
     xenoBlockMinimumSize: Immobile
     xenoPushMinimumSize: Immobile
     weedsSpeedFactor: 0.2
+  - type: VehicleSqueezeUnder
   - type: VehicleOvercharge
     speedMultiplier: 1.6
     duration: 3
@@ -31,7 +32,7 @@
       world:
         shape:
           !type:PhysShapeAabb
-          bounds: -0.425,-1.2,0.425,1.2
+          bounds: -0.6,-1.2,0.6,1.5
         density: 1000
         mask:
         - Impassable
@@ -45,7 +46,7 @@
       mob:
         shape:
           !type:PhysShapeAabb
-          bounds: -0.425,-1.2,0.425,1.2
+          bounds: -0.6,-1.2,0.6,1.5
         density: 1000
         mask:
         - MidImpassable
@@ -152,7 +153,7 @@
       world:
         shape:
           !type:PhysShapeAabb
-          bounds: -0.425,1.4,0.425,-0.35
+          bounds: -0.55,1.4,0.55,-0.35
         density: 1000
         mask:
         - Impassable
@@ -166,7 +167,7 @@
       mob:
         shape:
           !type:PhysShapeAabb
-          bounds: -0.425,1.4,0.425,-0.35
+          bounds: -0.55,1.4,0.55,-0.35
         density: 1000
         mask:
         - MidImpassable
