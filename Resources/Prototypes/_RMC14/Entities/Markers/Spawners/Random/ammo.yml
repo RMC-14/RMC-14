@@ -1,4 +1,4 @@
-# m54c mag
+# M54C mag
 - type: entity
   parent: RMCSpawnerRandomGunBase
   id: RMCSpawnerRandomMagazineM54C

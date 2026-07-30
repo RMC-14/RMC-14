@@ -44,7 +44,6 @@
     Cold: 1.15
     Caustic: 1.15
 
-# Used in HESCO Barricades
 - type: damageModifierSet
   id: CMHescoBarricade
   coefficients:
