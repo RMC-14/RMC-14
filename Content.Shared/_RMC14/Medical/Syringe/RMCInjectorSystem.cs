@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Audio;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Stun;
+using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
@@ -154,7 +155,8 @@ public sealed class RMCInjectorSystem : EntitySystem
             // Check target - if not the same faction abort!!!
             // Not parity but just in case
 
-            if (!_npcFaction.IsEntityFriendly(args.User, args.Target))
+            if (!_npcFaction.IsEntityFriendly(args.User, args.Target) ||
+                (!syringe.Comp.AllowBloodDraw && HasComp<BloodstreamComponent>(args.Target)))
             {
                 args.Cancelled = true;
                 return;
@@ -168,6 +170,7 @@ public sealed class RMCInjectorSystem : EntitySystem
         }
 
         // If nothing else goes through, do skill check
-        args.Delay *= _skills.GetSkillDelayMultiplier(args.User, syringe.Comp.SkillCheck);
+        if (syringe.Comp.SkillBasedDelay)
+            args.Delay *= _skills.GetSkillDelayMultiplier(args.User, syringe.Comp.SkillCheck);
     }
 }

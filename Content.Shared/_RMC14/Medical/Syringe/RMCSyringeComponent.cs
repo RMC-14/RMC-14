@@ -17,7 +17,13 @@ public sealed partial class RMCSyringeComponent : Component
     public bool AllowInstantDraw = true;
 
     [DataField, AutoNetworkedField]
+    public bool AllowBloodDraw = true;
+
+    [DataField, AutoNetworkedField]
     public bool NoDrawOnHostiles = true;
+
+    [DataField, AutoNetworkedField]
+    public bool SkillBasedDelay = true;
 
     [DataField, AutoNetworkedField]
     public EntProtoId<SkillDefinitionComponent> SkillCheck = "RMCSkillMedical";
