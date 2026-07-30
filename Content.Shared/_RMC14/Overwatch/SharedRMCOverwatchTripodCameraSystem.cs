@@ -23,7 +23,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Overwatch;
 
-public sealed class RMCOverwatchTripodCameraSystem : EntitySystem
+public abstract class SharedRMCOverwatchTripodCameraSystem : EntitySystem
 {
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
@@ -239,19 +239,23 @@ public sealed class RMCOverwatchTripodCameraSystem : EntitySystem
 
     public string GetDisplayLabel(Entity<RMCOverwatchTripodCameraComponent> ent)
     {
+        var label = string.IsNullOrWhiteSpace(ent.Comp.CustomLabel)
+            ? Name(ent)
+            : ent.Comp.CustomLabel;
+
         if (ent.Comp.Deployed &&
             ent.Comp.Squad is { } squad &&
             !TerminatingOrDeleted(squad))
         {
-            return $"{Name(squad)} - {ent.Comp.Label}";
+            return $"{Name(squad)} - {label}";
         }
 
-        return ent.Comp.Label;
+        return label;
     }
 
     public void SetLabel(Entity<RMCOverwatchTripodCameraComponent> ent, string label)
     {
-        ent.Comp.Label = label;
+        ent.Comp.CustomLabel = label;
         Dirty(ent);
     }
 

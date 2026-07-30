@@ -11,7 +11,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Overwatch;
 
-public sealed class RMCServerOverwatchTripodCameraSystem : EntitySystem
+public sealed class RMCOverwatchTripodCameraSystem : SharedRMCOverwatchTripodCameraSystem
 {
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
@@ -19,10 +19,10 @@ public sealed class RMCServerOverwatchTripodCameraSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly RMCOverwatchTripodCameraSystem _tripod = default!;
-
     public override void Initialize()
     {
+        base.Initialize();
+
         SubscribeLocalEvent<ActorComponent, RMCOverwatchTripodRenameInputEvent>(OnRenameInput);
         SubscribeLocalEvent<RMCOverwatchTripodCameraComponent, RMCOverwatchTripodDeployAttemptEvent>(OnDeployAttempt);
     }
@@ -58,10 +58,10 @@ public sealed class RMCServerOverwatchTripodCameraSystem : EntitySystem
         if (label.Length == 0)
             return;
 
-        _tripod.SetLabel((camera.Value, tripod), label[..Math.Min(label.Length, 32)]);
+        SetLabel((camera.Value, tripod), label[..Math.Min(label.Length, 32)]);
         _popup.PopupEntity(
             Loc.GetString("rmc-overwatch-tripod-camera-renamed",
-                ("name", FormattedMessage.EscapeText(_tripod.GetDisplayLabel((camera.Value, tripod))))),
+                ("name", FormattedMessage.EscapeText(GetDisplayLabel((camera.Value, tripod))))),
             camera.Value,
             user.Value);
     }

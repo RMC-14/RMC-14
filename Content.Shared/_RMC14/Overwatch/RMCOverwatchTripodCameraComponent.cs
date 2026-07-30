@@ -8,11 +8,11 @@ namespace Content.Shared._RMC14.Overwatch;
 /// A portable camera which can be deployed as a static Overwatch target.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(RMCOverwatchTripodCameraSystem), Other = AccessPermissions.ReadWrite)]
+[Access(typeof(SharedRMCOverwatchTripodCameraSystem), Other = AccessPermissions.ReadWrite)]
 public sealed partial class RMCOverwatchTripodCameraComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public string Label = "Field Camera Tripod";
+    public string? CustomLabel;
 
     [DataField, AutoNetworkedField]
     public EntityUid? Squad;

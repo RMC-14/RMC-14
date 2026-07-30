@@ -61,7 +61,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
-    [Dependency] private readonly RMCOverwatchTripodCameraSystem _tripod = default!;
+    [Dependency] private readonly SharedRMCOverwatchTripodCameraSystem _tripod = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly SharedSupplyDropSystem _supplyDrop = default!;
     [Dependency] private readonly SharedTacticalMapSystem _tacticalMap = default!;
