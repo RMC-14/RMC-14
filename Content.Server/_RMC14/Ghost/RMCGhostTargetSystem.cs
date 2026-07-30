@@ -118,7 +118,9 @@ public sealed class RMCGhostTargetSystem : EntitySystem
         SubscribeLocalEvent<WarpPointComponent, WarpPointLocationChangedEvent>(OnWarpPointLocationChanged);
         SubscribeLocalEvent<WarpPointComponent, EntityTerminatingEvent>(OnWarpPointTerminating);
 
-        SubscribeLocalEvent<NpcFactionMemberComponent, NpcFactionMembershipChangedEvent>(OnFactionChanged);
+        SubscribeLocalEvent<NpcFactionMembershipChangedEvent>(OnFactionChanged);
+        SubscribeLocalEvent<VictimInfectedChangedEvent>(OnVictimInfectedChanged);
+        SubscribeLocalEvent<XenoComponentChangedEvent>(OnXenoComponentChanged);
         SubscribeLocalEvent<VisitingMindComponent, MindVisitedMessage>(OnMindVisited);
         SubscribeLocalEvent<SquadMemberAddedEvent>(OnSquadMemberAdded);
         SubscribeLocalEvent<SquadMemberRemovedEvent>(OnSquadMemberRemoved);
@@ -126,15 +128,20 @@ public sealed class RMCGhostTargetSystem : EntitySystem
 
         SubscribeLocalEvent<TacticalMapIconComponent, TacticalMapIconChangedEvent>(OnTacticalIconChanged);
 
-        EntityManager.ComponentAdded += OnComponentAdded;
-        EntityManager.ComponentRemoved += OnComponentRemoved;
-    }
+        SubscribeTargetComponentLifecycle<GhostComponent>();
+        SubscribeTargetComponentLifecycle<MindContainerComponent>();
+        SubscribeTargetComponentLifecycle<VisitingMindComponent>();
+        SubscribeTargetComponentLifecycle<RMCSurvivorComponent>();
+        SubscribeTargetComponentLifecycle<HumanoidAppearanceComponent>();
+        SubscribeTargetComponentAdded<NpcFactionMemberComponent>();
+        SubscribeEntryComponentLifecycle<TacticalMapIconComponent>();
+        SubscribeEntryComponentLifecycle<DamageableComponent>();
+        SubscribeEntryComponentLifecycle<MobThresholdsComponent>();
 
-    public override void Shutdown()
-    {
-        EntityManager.ComponentAdded -= OnComponentAdded;
-        EntityManager.ComponentRemoved -= OnComponentRemoved;
-        base.Shutdown();
+        SubscribeLocalEvent<WarpPointComponent, ComponentAdd>(OnWarpPointAdded);
+        SubscribeLocalEvent<WarpPointComponent, ComponentRemove>(OnWarpPointRemoved);
+        SubscribeLocalEvent<AlmayerComponent, ComponentAdd>(OnAlmayerAdded);
+        SubscribeLocalEvent<AlmayerComponent, ComponentRemove>(OnAlmayerRemoved);
     }
 
     private void OnRoundStarting(RoundStartingEvent args)
@@ -451,6 +458,18 @@ public sealed class RMCGhostTargetSystem : EntitySystem
         RefreshTarget(ent);
     }
 
+    private void OnWarpPointAdded(Entity<WarpPointComponent> ent, ref ComponentAdd args)
+    {
+        if (LifeStage(ent) >= EntityLifeStage.MapInitialized)
+            RefreshTarget(ent);
+    }
+
+    private void OnWarpPointRemoved(Entity<WarpPointComponent> ent, ref ComponentRemove args)
+    {
+        if (!TerminatingOrDeleted(ent))
+            RefreshTarget(ent);
+    }
+
     private void OnWarpPointLocationChanged(
         EntityUid uid,
         WarpPointComponent component,
@@ -464,12 +483,19 @@ public sealed class RMCGhostTargetSystem : EntitySystem
         RemoveTarget(ent);
     }
 
-    private void OnFactionChanged(
-        EntityUid uid,
-        NpcFactionMemberComponent component,
-        NpcFactionMembershipChangedEvent args)
+    private void OnFactionChanged(ref NpcFactionMembershipChangedEvent args)
     {
-        RefreshTarget(uid);
+        RefreshTarget(args.Target);
+    }
+
+    private void OnVictimInfectedChanged(ref VictimInfectedChangedEvent args)
+    {
+        RefreshTarget(args.Target);
+    }
+
+    private void OnXenoComponentChanged(ref XenoComponentChangedEvent args)
+    {
+        RefreshTarget(args.Target);
     }
 
     private void OnMindVisited(EntityUid uid, VisitingMindComponent component, MindVisitedMessage args)
@@ -494,43 +520,43 @@ public sealed class RMCGhostTargetSystem : EntitySystem
         RefreshTarget(ent);
     }
 
-    private void OnComponentAdded(AddedComponentEventArgs args)
+    private void SubscribeTargetComponentLifecycle<T>() where T : IComponent
     {
-        OnRelevantComponentChanged(args.BaseArgs);
+        SubscribeTargetComponentAdded<T>();
+        SubscribeLocalEvent<T, ComponentRemove>(OnTargetComponentRemoved<T>);
     }
 
-    private void OnComponentRemoved(RemovedComponentEventArgs args)
+    private void SubscribeTargetComponentAdded<T>() where T : IComponent
     {
-        OnRelevantComponentChanged(args.BaseArgs);
+        SubscribeLocalEvent<T, ComponentAdd>(OnTargetComponentAdded<T>);
     }
 
-    private void OnRelevantComponentChanged(ComponentEventArgs args)
+    private void SubscribeEntryComponentLifecycle<T>() where T : IComponent
     {
-        switch (args.Component)
-        {
-            case GhostComponent:
-            case MindContainerComponent:
-            case VisitingMindComponent:
-            case VictimInfectedComponent:
-            case RMCSurvivorComponent:
-            case XenoComponent:
-            case HumanoidAppearanceComponent:
-            case NpcFactionMemberComponent:
-                RefreshTarget(args.Owner);
-                break;
-            case WarpPointComponent:
-                if (LifeStage(args.Owner) >= EntityLifeStage.MapInitialized)
-                    RefreshTarget(args.Owner);
-                break;
-            case TacticalMapIconComponent:
-            case DamageableComponent:
-            case MobThresholdsComponent:
-                RefreshEntry(args.Owner);
-                break;
-            case AlmayerComponent:
-                OnAlmayerChanged();
-                break;
-        }
+        SubscribeLocalEvent<T, ComponentAdd>(OnEntryComponentAdded<T>);
+        SubscribeLocalEvent<T, ComponentRemove>(OnEntryComponentRemoved<T>);
+    }
+
+    private void OnTargetComponentAdded<T>(Entity<T> ent, ref ComponentAdd args) where T : IComponent
+    {
+        RefreshTarget(ent);
+    }
+
+    private void OnTargetComponentRemoved<T>(Entity<T> ent, ref ComponentRemove args) where T : IComponent
+    {
+        if (!TerminatingOrDeleted(ent))
+            RefreshTarget(ent);
+    }
+
+    private void OnEntryComponentAdded<T>(Entity<T> ent, ref ComponentAdd args) where T : IComponent
+    {
+        RefreshEntry(ent);
+    }
+
+    private void OnEntryComponentRemoved<T>(Entity<T> ent, ref ComponentRemove args) where T : IComponent
+    {
+        if (!TerminatingOrDeleted(ent))
+            RefreshEntry(ent);
     }
 
     private void OnTacticalIconChanged(
@@ -548,6 +574,16 @@ public sealed class RMCGhostTargetSystem : EntitySystem
             RebuildAllMemberships(store.Comp);
             RebuildViews(store.Comp);
         }
+    }
+
+    private void OnAlmayerAdded(Entity<AlmayerComponent> ent, ref ComponentAdd args)
+    {
+        OnAlmayerChanged();
+    }
+
+    private void OnAlmayerRemoved(Entity<AlmayerComponent> ent, ref ComponentRemove args)
+    {
+        OnAlmayerChanged();
     }
 
     private void OnDistressEndgameChanged(DistressSignalEndgameChangedEvent args)
@@ -599,8 +635,8 @@ public sealed class RMCGhostTargetSystem : EntitySystem
             return;
         }
 
-        UpsertRecord(store.Comp, uid);
-        RebuildViews(store.Comp);
+        if (UpsertRecord(store.Comp, uid))
+            RebuildViews(store.Comp);
     }
 
     private void RefreshEntry(EntityUid uid)
@@ -640,9 +676,10 @@ public sealed class RMCGhostTargetSystem : EntitySystem
         RebuildViews(store.Comp);
     }
 
-    private void UpsertRecord(RMCGhostTargetStoreComponent store, EntityUid uid)
+    private bool UpsertRecord(RMCGhostTargetStoreComponent store, EntityUid uid)
     {
-        if (store.Records.TryGetValue(uid, out var old))
+        var hadRecord = store.Records.TryGetValue(uid, out var old);
+        if (old != null)
         {
             RemoveMemberships(store, old);
             if (old.Mind is { } oldMind)
@@ -652,7 +689,7 @@ public sealed class RMCGhostTargetSystem : EntitySystem
         if (!TryBuildRecord(uid, out var record))
         {
             store.Records.Remove(uid);
-            return;
+            return hadRecord;
         }
 
         BuildMemberships(store, record);
@@ -661,6 +698,7 @@ public sealed class RMCGhostTargetSystem : EntitySystem
             AddMindTarget(store, mind, uid);
 
         AddMemberships(store, record);
+        return true;
     }
 
     private bool RemoveRecord(RMCGhostTargetStoreComponent store, EntityUid uid)

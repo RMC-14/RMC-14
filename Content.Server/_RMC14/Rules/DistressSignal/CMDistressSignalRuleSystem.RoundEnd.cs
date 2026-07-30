@@ -359,6 +359,13 @@ public sealed partial class CMDistressSignalRuleSystem
         CheckRoundShouldEnd();
     }
 
+    private void OnXenoComponentRemoved(Entity<XenoComponent> ent, ref ComponentRemove args)
+    {
+        var ev = new XenoComponentChangedEvent(ent);
+        RaiseLocalEvent(ref ev);
+        CheckRoundShouldEnd();
+    }
+
     private void OnMapInit(Entity<XenoEvolutionGranterComponent> ent, ref MapInitEvent args)
     {
         CheckRoundShouldEnd();

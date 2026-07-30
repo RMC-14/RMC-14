@@ -47,6 +47,8 @@ public sealed partial class NpcFactionSystem : EntitySystem
     private void OnFactionRemoved(Entity<NpcFactionMemberComponent> ent, ref ComponentRemove args)
     {
         _pendingMembershipChanges.Remove(ent);
+        var ev = new NpcFactionMembershipChangedEvent(ent);
+        RaiseLocalEvent(ref ev);
     }
 
     /// <summary>
@@ -201,8 +203,8 @@ public sealed partial class NpcFactionSystem : EntitySystem
     private void CommitMembershipChange(Entity<NpcFactionMemberComponent> ent)
     {
         RefreshFactions(ent);
-        var ev = new NpcFactionMembershipChangedEvent();
-        RaiseLocalEvent(ent, ev);
+        var ev = new NpcFactionMembershipChangedEvent(ent);
+        RaiseLocalEvent(ref ev);
     }
 
     public IEnumerable<EntityUid> GetNearbyHostiles(Entity<NpcFactionMemberComponent?, FactionExceptionComponent?> ent, float range)
