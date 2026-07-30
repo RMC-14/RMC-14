@@ -78,9 +78,6 @@ public sealed class InjectorSystem : SharedInjectorSystem
         {
             // RMC14
             entity.Comp.DoAfterId = null;
-            Dirty(entity);
-            // RMC14
-
             return;
         }
 
@@ -236,7 +233,6 @@ public sealed class InjectorSystem : SharedInjectorSystem
             TargetEffect = "RMCEffectHealBusy",
             DuplicateCondition = DuplicateConditions.SameTool
         }, out injector.Comp.DoAfterId);
-        Dirty(injector);
         // RMC 14
     }
 
