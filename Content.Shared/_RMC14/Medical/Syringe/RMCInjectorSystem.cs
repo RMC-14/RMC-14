@@ -173,6 +173,7 @@ public sealed class RMCInjectorSystem : EntitySystem
             if (syringe.Comp.NoDrawOnAliveHostiles && _combatSystem.IsInCombatMode(args.Target) && !_mob.IsDead(args.Target))
             {
                 args.Cancelled = true;
+                _popup.PopupEntity(Loc.GetString("rmc-syringe-no-hostile-draw", ("target", Identity.Name(args.Target, EntityManager, args.User))), args.User, args.User, PopupType.SmallCaution);
                 return;
             }
 
