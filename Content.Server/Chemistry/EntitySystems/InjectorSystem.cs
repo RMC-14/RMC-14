@@ -233,7 +233,7 @@ public sealed class InjectorSystem : SharedInjectorSystem
             TargetEffect = "RMCEffectHealBusy",
             DuplicateCondition = DuplicateConditions.SameTool
         }, out injector.Comp.DoAfterId);
-        // RMC 14
+        // RMC14
     }
 
     // RMC14
