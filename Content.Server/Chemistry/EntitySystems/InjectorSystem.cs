@@ -138,24 +138,22 @@ public sealed class InjectorSystem : SharedInjectorSystem
         // Ensure that minimum delay before incapacitation checks is 1 seconds
         actualDelay = MathHelper.Max(actualDelay, TimeSpan.FromSeconds(1));
 
+
         var isTarget = user != target;
+
         if (isTarget)
         {
-
-            if (isTarget)
+            // Create a pop-up for the target
+            var userName = Identity.Entity(user, EntityManager);
+            if (injector.Comp.ToggleState == InjectorToggleMode.Draw)
             {
-                // Create a pop-up for the target
-                var userName = Identity.Entity(user, EntityManager);
-                if (injector.Comp.ToggleState == InjectorToggleMode.Draw)
-                {
-                    Popup.PopupEntity(Loc.GetString("injector-component-drawing-target",
-        ("user", userName)), user, target);
-                }
-                else
-                {
-                    Popup.PopupEntity(Loc.GetString("injector-component-injecting-target",
-        ("user", userName)), user, target);
-                }
+                Popup.PopupEntity(Loc.GetString("injector-component-drawing-target",
+    ("user", userName)), user, target);
+            }
+            else
+            {
+                Popup.PopupEntity(Loc.GetString("injector-component-injecting-target",
+    ("user", userName)), user, target);
             }
 
             // Check if the target is incapacitated or in combat mode and modify time accordingly.
