@@ -381,7 +381,7 @@
       - id: CMBootsBlackFilled
       - id: CMBootsBrown
       - id: CMHandsBlackMarine
-      - id: CMHandsBrown
+      - id: RMCHandsBrownMarine
     - name: Utility Extras
       entries:
       - id: RMCSunglasses
@@ -1359,7 +1359,7 @@
       - id: RMCCoatSnow
       - id: RMCMaskBalaclava
       - id: RMCMaskTornScarfBlack
-        name: Snow Scarf 
+        name: Snow Scarf
     - name: Headwear
       jobs:
       - CMCMO
