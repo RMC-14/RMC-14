@@ -134,22 +134,17 @@ public sealed class RMCActionKeybindSystem : EntitySystem
             return null;
         }
 
-        var owned = new Dictionary<string, EntityUid>();
-        foreach (var action in _actions.GetClientActions())
-        {
-            if (action.Comp.AttachedEntity != actor ||
-                MetaData(action).EntityPrototype?.ID is not { } prototype)
-            {
-                continue;
-            }
-
-            owned.TryAdd(prototype, action);
-        }
-
+        var actions = _actions.GetClientActions();
         foreach (var candidate in candidates)
         {
-            if (owned.TryGetValue(candidate.Id, out var action))
-                return action;
+            foreach (var action in actions)
+            {
+                if (action.Comp.AttachedEntity == actor &&
+                    MetaData(action).EntityPrototype?.ID == candidate.Id)
+                {
+                    return action;
+                }
+            }
         }
 
         return null;
