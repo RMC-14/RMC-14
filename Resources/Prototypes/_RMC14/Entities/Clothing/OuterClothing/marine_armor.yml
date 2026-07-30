@@ -810,10 +810,11 @@
   - type: ItemCamouflage
     camouflageVariations: { }
   - type: CMArmor
-    melee: 5
-    bullet: 15
-    bio: 5
-    explosionArmor: 5
+    # RMC14: Removed armor
+    melee: 0 # 5
+    bullet: 0 # 15
+    bio: 0 # 5
+    explosionArmor: 0 # 5
     # armor_laser = CLOTHING_ARMOR_VERYLOW
     # armor_rad = CLOTHING_ARMOR_MEDIUMLOW
   - type: RMCArmorSpeedTier
