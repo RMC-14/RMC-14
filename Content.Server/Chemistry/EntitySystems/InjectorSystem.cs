@@ -272,11 +272,17 @@ public sealed class InjectorSystem : SharedInjectorSystem
             return false;
         }
 
+        // Seperate chems from blood
+        var tempSolution = bloodSolution != null ? SolutionContainers.SplitSolutionWithout(soln.Value, solution.Volume, target.Comp.BloodReagent) : SolutionContainers.SplitSolution(soln.Value, solution.Volume);
+
         // Move units from attackSolution to targetSolution
         // TODO RMC14 support multiple blood reagents (?)
-        var removedSolution = bloodSolution != null ? SolutionContainers.SplitSolutionWithout(soln.Value, realTransferAmount, target.Comp.BloodReagent) : SolutionContainers.SplitSolution(soln.Value, realTransferAmount);
+        var removedSolution = tempSolution.SplitSolution(realTransferAmount);
         var bloodRemoveSolution = bloodSolution != null ? SolutionContainers.SplitSolution(soln.Value, bloodTransferAmount - removedSolution.Volume) : null;
         var bloodRemoveVol = bloodRemoveSolution != null ? bloodRemoveSolution.Volume : 0;
+
+        // Add back sepearted
+        SolutionContainers.TryAddSolution(soln.Value, tempSolution);
 
         _blood.TryAddToChemicals(target.AsNullable(), removedSolution);
 
