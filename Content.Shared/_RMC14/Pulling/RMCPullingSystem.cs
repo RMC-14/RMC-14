@@ -99,7 +99,7 @@ public sealed class RMCPullingSystem : EntitySystem
 
         SubscribeLocalEvent<BeingPulledComponent, PullStoppedMessage>(OnBeingPulledPullStopped);
 
-        SubscribeLocalEvent<PullerComponent, RMCGetUserDisarmRange>(ExtendTacklingRangeToPullingTarget);
+        SubscribeLocalEvent<PullerComponent, RMCDisarmUserGetRangeEvent>(ExtendTacklingRangeToPullingTarget);
         SubscribeLocalEvent<PullerComponent, RMCMeleeUserGetRangeEvent>(ExtendAttackingRangeToPullingTarget);
     }
 
