@@ -21,4 +21,7 @@ public sealed partial class SynthGenerationComponent : Component
 
     [DataField]
     public ProtoId<DamageModifierSetPrototype>? DamageModifier;
+
+    [DataField]
+    public int Priority;
 }
