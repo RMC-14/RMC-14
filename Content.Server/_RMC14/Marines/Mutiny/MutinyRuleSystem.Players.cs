@@ -23,7 +23,7 @@ public sealed partial class MutinyRuleSystem
             return;
 
         if (_pendingSideChoices.TryGetValue(mindId, out var choice))
-            choice.Eui.ResolveDefault();
+            choice.ResolveDefault();
         if (_pendingInvites.TryGetValue(mindId, out var invite))
             invite.Cancel();
         if (_pendingBegins.TryGetValue(mindId, out var begin))

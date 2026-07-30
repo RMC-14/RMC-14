@@ -9,6 +9,7 @@ using Content.Shared.Mind.Components;
 using Content.Shared.Popups;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
+using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Marines.Mutiny;
 
@@ -201,7 +202,7 @@ public sealed partial class MutinyRuleSystem
         MutinySideEui eui)
     {
         if (!_pendingSideChoices.TryGetValue(mindId, out var pending) ||
-            !ReferenceEquals(pending.Eui, eui) ||
+            !ReferenceEquals(pending, eui) ||
             !Enum.IsDefined(side) ||
             !TryComp(ruleId, out MutinyRuleComponent? rule) ||
             !GameTicker.IsGameRuleActive(ruleId) ||
@@ -226,8 +227,14 @@ public sealed partial class MutinyRuleSystem
 
     internal void OnSideChoiceClosed(EntityUid mindId, MutinySideEui eui)
     {
-        if (_pendingSideChoices.TryGetValue(mindId, out var pending) && ReferenceEquals(pending.Eui, eui))
+        if (_pendingSideChoices.TryGetValue(mindId, out var pending) && ReferenceEquals(pending, eui))
             _pendingSideChoices.Remove(mindId);
+    }
+
+    private void ResolveSideChoiceTimeout(EntityUid mindId, MutinySideEui eui)
+    {
+        if (_pendingSideChoices.TryGetValue(mindId, out var pending) && ReferenceEquals(pending, eui))
+            eui.ResolveDefault();
     }
 
     private bool TryGetRecruitTarget(
@@ -319,8 +326,9 @@ public sealed partial class MutinyRuleSystem
             return;
 
         var choice = new MutinySideEui(mindId, rule.Owner, CanJoinMutineers(body), this);
-        _pendingSideChoices[mindId] = new PendingSideChoice(choice, Timing.CurTime + rule.Comp.ChoiceDuration);
+        _pendingSideChoices[mindId] = choice;
         _euis.OpenEui(choice, actor.PlayerSession);
+        Timer.Spawn(rule.Comp.ChoiceDuration, () => ResolveSideChoiceTimeout(mindId, choice));
     }
 
     private void CloseRecruitingEuis()

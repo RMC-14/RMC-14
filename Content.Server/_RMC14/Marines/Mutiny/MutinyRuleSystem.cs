@@ -50,9 +50,7 @@ public sealed partial class MutinyRuleSystem : GameRuleSystem<MutinyRuleComponen
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     private readonly Dictionary<EntityUid, MutineerInviteEui> _pendingInvites = new();
     private readonly Dictionary<EntityUid, MutinyBeginEui> _pendingBegins = new();
-    private readonly Dictionary<EntityUid, PendingSideChoice> _pendingSideChoices = new();
-
-    private sealed record PendingSideChoice(MutinySideEui Eui, TimeSpan Deadline);
+    private readonly Dictionary<EntityUid, MutinySideEui> _pendingSideChoices = new();
 
     public override void Initialize()
     {
@@ -99,26 +97,6 @@ public sealed partial class MutinyRuleSystem : GameRuleSystem<MutinyRuleComponen
     {
         base.Ended(uid, component, gameRule, args);
         CleanupRule(uid);
-    }
-
-    protected override void ActiveTick(
-        EntityUid uid,
-        MutinyRuleComponent component,
-        GameRuleComponent gameRule,
-        float frameTime)
-    {
-        base.ActiveTick(uid, component, gameRule, frameTime);
-
-        if (_pendingSideChoices.Count == 0)
-            return;
-
-        foreach (var (mind, pending) in _pendingSideChoices.ToArray())
-        {
-            if (pending.Deadline > Timing.CurTime)
-                continue;
-
-            pending.Eui.ResolveDefault();
-        }
     }
 
     public bool TryGetActiveMutiny(out Entity<MutinyRuleComponent> mutiny)
@@ -577,7 +555,7 @@ public sealed partial class MutinyRuleSystem : GameRuleSystem<MutinyRuleComponen
         foreach (var begin in _pendingBegins.Values.ToArray())
             begin.Cancel();
         foreach (var choice in _pendingSideChoices.Values.ToArray())
-            choice.Eui.CancelWithoutChoice();
+            choice.CancelWithoutChoice();
 
         _pendingInvites.Clear();
         _pendingBegins.Clear();
