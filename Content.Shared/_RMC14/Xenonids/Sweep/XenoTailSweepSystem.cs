@@ -76,8 +76,9 @@ public sealed class XenoTailSweepSystem : EntitySystem
             if (!_xeno.CanAbilityAttackTarget(xeno, mob))
                 continue;
 
-            // Range check against the target's lag-compensated position
-            if (!_rmcLagCompensation.IsWithinMargin(xeno.Owner, mob.Owner, session, xeno.Comp.Range))
+            // Range check against the target's lag-compensated position, without margin
+            var mobCoords = _rmcLagCompensation.GetCoordinates(mob, session);
+            if (!_transform.InRange(xeno.Owner.ToCoordinates(), mobCoords, xeno.Comp.Range))
                 continue;
 
             if (!_interact.InRangeUnobstructed(xeno.Owner, mob.Owner, xeno.Comp.Range))
