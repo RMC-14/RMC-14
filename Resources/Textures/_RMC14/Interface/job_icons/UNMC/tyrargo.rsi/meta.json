@@ -8,10 +8,10 @@
   },
     "states": [
         {
-            "name": "hudsquad_co_army"
+            "name": "hudsquad_tyrargo_co"
         },
         {
-            "name": "hudsquad_sl_army"
+            "name": "hudsquad_tyrargo_sl"
         },
         {
             "name": "hudsquad_cmt"
@@ -23,13 +23,13 @@
             "name": "hudsquad_mmg"
         },
         {
-            "name": "hudsquad_army_snpr"
+            "name": "hudsquad_tyrargo_snpr"
         },
         {
             "name": "hudsquad_trpr"
         },
         {
-            "name": "hudsquad_army_synth"
+            "name": "hudsquad_tyrargo_synth"
         }
     ]
 }

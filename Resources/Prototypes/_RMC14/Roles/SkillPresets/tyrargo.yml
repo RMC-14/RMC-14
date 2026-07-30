@@ -1,7 +1,7 @@
 - type: entity
   parent: RMCSkillPresetSurvivor
-  id: RMCSkillPresetArmyTrooper
-  name: UNMC Devil Dogs Rifleman
+  id: RMCSkillPresetTyrargoTrooper
+  name: UNMC Tyrargo Rifleman
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
@@ -15,9 +15,9 @@
       RMCSkillVehicles: 1
 
 - type: entity
-  parent: RMCSkillPresetArmyTrooper
+  parent: RMCSkillPresetTyrargoTrooper
   id: RMCSkillPresetEngineeringTechnician
-  name: UNMC Devil Dogs Engineering Technician
+  name: UNMC Tyrargo Engineering Technician
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
@@ -31,9 +31,9 @@
       RMCSkillPowerLoader: 1
 
 - type: entity
-  parent: RMCSkillPresetArmyTrooper
-  id: RMCSkillPresetArmyMedicalTechnician
-  name: UNMC Devil Dogs Medical Technician
+  parent: RMCSkillPresetTyrargoTrooper
+  id: RMCSkillPresetTyrargoMedicalTechnician
+  name: UNMC Tyrargo Medical Technician
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
@@ -42,9 +42,9 @@
       RMCSkillSurgery: 1
 
 - type: entity
-  parent: RMCSkillPresetArmyTrooper
-  id: RMCSkillPresetArmyMarksman
-  name: UNMC Devil Dogs Marksman
+  parent: RMCSkillPresetTyrargoTrooper
+  id: RMCSkillPresetTyrargoMarksman
+  name: UNMC Tyrargo Marksman
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
@@ -55,9 +55,9 @@
       RMCSkillSpecialistWeapons: 1
 
 - type: entity
-  parent: RMCSkillPresetArmyTrooper
-  id: RMCSkillPresetArmyHeavyGunner
-  name: UNMC Devil Dogs Heavy Gunner
+  parent: RMCSkillPresetTyrargoTrooper
+  id: RMCSkillPresetTyrargoHeavyGunner
+  name: UNMC Tyrargo Heavy Gunner
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
@@ -67,9 +67,9 @@
       RMCSkillSmartGun: 1
 
 - type: entity
-  parent: RMCSkillPresetArmyTrooper
-  id: RMCSkillPresetArmySquadLeader
-  name: UNMC Devil Dogs Squad Leader
+  parent: RMCSkillPresetTyrargoTrooper
+  id: RMCSkillPresetTyrargoSquadLeader
+  name: UNMC Tyrargo Squad Leader
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset

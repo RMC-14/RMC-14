@@ -100,8 +100,8 @@
 
 - type: entity
   parent: RMCWeaponPistolM77
-  id: RMCWeaponPistolM77Army
-  suffix: Army
+  id: RMCWeaponPistolM77Survivor
+  suffix: Survivor
   components:
   - type: AttachableHolder
     slots:

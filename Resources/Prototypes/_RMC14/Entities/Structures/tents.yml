@@ -25,10 +25,11 @@
           bounds: "-1.5,-0.5,1.4,2"
         density: 190
         layer:
-        - MobMask
+        - MachineLayer
   - type: Sprite
     sprite: _RMC14/Structures/tents.rsi
     offset: 0, 1.5
+    drawdepth: Mobs
   - type: DeleteOnExplosion
   - type: Damageable
     damageContainer: Inorganic

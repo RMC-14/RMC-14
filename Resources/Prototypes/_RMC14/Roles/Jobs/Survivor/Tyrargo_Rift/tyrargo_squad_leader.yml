@@ -1,11 +1,11 @@
 - type: job
-  parent: RMCSurvivorArmyBase
-  id: RMCSurvivorArmySquadLeader
+  parent: RMCSurvivorTyrargoBase
+  id: RMCSurvivorTyrargoSquadLeader
   name: cm-job-name-squad-leader
-  startingGear: RMCGearArmySquadLeader
+  startingGear: RMCGearTyrargoSquadLeader
   ranks:
     RMCRankGunnerySergeant: []
-  icon: "RMCJobIconArmySquadLeader"
+  icon: "RMCJobIconTyrargoSquadLeader"
   roleWeight: 1
   requirements:
   - !type:RoleTimeRequirement
@@ -14,12 +14,12 @@
   - !type:TotalJobsTimeRequirement
     group: RMCJobsSurvivor
     time: 3600 # 1 hour
-  spawnMenuRoleName: UNMC Devil Dogs - Squad Leader (Tyrargo Rift Survivor)
+  spawnMenuRoleName: UNMC Squad Leader (Tyrargo Rift Survivor)
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      preset: RMCSkillPresetArmySquadLeader
+      preset: RMCSkillPresetTyrargoSquadLeader
     - type: MarineOrders
     - type: RMCPointing
     - type: TacticalMapIcon
@@ -36,31 +36,31 @@
     - type: JobPrefix
       prefix: cm-job-prefix-squad-leader
     - type: EquipSurvivorPreset
-      preset: RMCSurvivorPresetArmyFull
+      preset: RMCSurvivorPresetTyrargoSurvivorFull
     - type: RMCTrackable
     - type: RMCAwardRecommendation
   hidden: true
 
 - type: startingGear
-  parent: RMCGearArmyBase
-  id: RMCGearArmySquadLeader
+  parent: RMCGearTyrargoBase
+  id: RMCGearTyrargoSquadLeader
   equipment:
-    ears: RMCHeadsetArmyLeader
-    back: RMCSatchelArmySurvivorSquadLeaderFill
+    ears: RMCHeadsetTyrargoLeader
+    back: RMCSatchelTyrargoSurvivorSquadLeaderFill
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: CMSpawnPointArmySquadLeader
-  name: army squad leader spawn point
+  id: CMSpawnPointTyrargoSquadLeader
+  name: tyrargo marine squad leader spawn point
   components:
   - type: SpawnPoint
-    job_id: RMCSurvivorArmySquadLeader
+    job_id: RMCSurvivorTyrargoSquadLeader
   - type: Sprite
     state: leader_spawn
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconArmySquadLeader
+  id: RMCJobIconTyrargoSquadLeader
   icon:
-    sprite: _RMC14/Interface/job_icons/UNMC/army.rsi
-    state: hudsquad_sl_army
+    sprite: _RMC14/Interface/job_icons/UNMC/tyrargo.rsi
+    state: hudsquad_tyrargo_sl

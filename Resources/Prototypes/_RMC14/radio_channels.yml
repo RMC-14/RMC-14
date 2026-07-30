@@ -147,10 +147,10 @@
   longRange: true
   tower: true
 
-# Tyrargo Survs
+# Tyrargo Survs/Generic UNMC survivors
 - type: radioChannel
-  id: MarineArmy
-  name: chat-radio-marine-army
+  id: MarineSurvivor
+  name: chat-radio-marine-survivor
   keycode: "@"
   frequency: 1724
   color: "#349c30"

@@ -26,8 +26,8 @@
     - id: RMCTacticalPrybar
 
 - type: entity
-  parent: CMArmorM4Army
-  id: CMArmorM4ArmySurvivorFill
+  parent: CMArmorM4Tyrargo
+  id: CMArmorM4TyrargoSurvivorFill
   suffix: Survivor, Filled
   components:
   - type: StorageFill
@@ -35,8 +35,8 @@
     - id: RMCTacticalPrybar
 
 - type: entity
-  parent: CMArmorM4ArmySynth
-  id: CMArmorM4ArmySynthSurvivorFill
+  parent: CMArmorM4TyrargoSynth
+  id: CMArmorM4TyrargoSynthSurvivorFill
   suffix: Survivor, Filled, Synth
   components:
   - type: StorageFill

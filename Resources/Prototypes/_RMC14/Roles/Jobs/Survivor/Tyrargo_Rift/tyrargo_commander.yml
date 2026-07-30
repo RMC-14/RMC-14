@@ -1,6 +1,6 @@
 ﻿- type: job
-  parent: RMCSurvivorArmyBase
-  id: RMCSurvivorArmyCommander
+  parent: RMCSurvivorTyrargoBase
+  id: RMCSurvivorTyrargoCommander
   name: rmc-job-name-forecon-commander
   description: cm-job-description-commanding-officer
   playTimeTracker: RMCJobSurvivorCO
@@ -8,11 +8,11 @@
     RMCRankMajor: []
   accessGroups:
   - ColonistEngi
-  startingGear: RMCGearArmyCommander
-  spawnMenuRoleName: UNMC Devil Dogs - Commander (Tyrargo Rift Survivor)
+  startingGear: RMCGearTyrargoCommander
+  spawnMenuRoleName: UNMC Commander (Tyrargo Rift Survivor)
   supervisors: cm-job-supervisors-marine-high-command
   roleWeight: 0.25
-  icon: "RMCJobIconArmyCommander"
+  icon: "RMCJobIconTyrargoCommander"
   special:
   - !type:AddComponentSpecial
     components:
@@ -43,30 +43,30 @@
   useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
 
 - type: startingGear
-  parent: RMCGearArmyBase
-  id: RMCGearArmyCommander
+  parent: RMCGearTyrargoBase
+  id: RMCGearTyrargoCommander
   equipment:
     belt: RMCMatebaBeltForeconFilled
     head: CMHeadCapCav
     outerClothing: RMCJacketWindbreakerForeconFilled
-    back: RMCSatchelArmySurvivorCommanderFill
+    back: RMCSatchelTyrargoSurvivorCommanderFill
     id: CMIDCardGold
-    ears: RMCHeadsetArmyCommander
+    ears: RMCHeadsetTyrargoCommander
     eyes: RMCSunglasses
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: CMSpawnPointArmyCommander
-  name: army commander spawn point
+  id: CMSpawnPointTyrargoCommander
+  name: tyrargo commander spawn point
   components:
   - type: SpawnPoint
-    job_id: RMCSurvivorArmyCommander
+    job_id: RMCSurvivorTyrargoCommander
   - type: Sprite
     state: co_spawn
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconArmyCommander
+  id: RMCJobIconTyrargoCommander
   icon:
-    sprite: _RMC14/Interface/job_icons/UNMC/army.rsi
-    state: hudsquad_co_army
+    sprite: _RMC14/Interface/job_icons/UNMC/tyrargo.rsi
+    state: hudsquad_tyrargo_co

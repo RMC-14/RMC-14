@@ -1,9 +1,9 @@
 - type: job
-  parent: RMCSurvivorArmyBase
-  id: RMCSurvivorArmyCMT
-  name: rmc-job-name-army-cmt
-  startingGear: RMCGearArmyCMT
-  icon: "RMCJobIconArmyCMT"
+  parent: RMCSurvivorTyrargoBase
+  id: RMCSurvivorTyrargoCMT
+  name: rmc-job-name-tyrargo-cmt
+  startingGear: RMCGearTyrargoCMT
+  icon: "RMCJobIconTyrargoCMT"
   requirements:
   - !type:RoleTimeRequirement
     role: CMJobHospitalCorpsman
@@ -11,14 +11,14 @@
   - !type:TotalJobsTimeRequirement
     group: RMCJobsSurvivor
     time: 5400 # 1.5 hours
-  spawnMenuRoleName: UNMC Devil Dogs - Combat Medical Technician (Tyrargo Rift Survivor)
+  spawnMenuRoleName: UNMC Combat Medical Technician (Tyrargo Rift Survivor)
   ranks:
-    RMCRankArmyPrivateFirstClass: []
+    RMCRankLanceCorporal: []
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      preset: RMCSkillPresetArmyMedicalTechnician
+      preset: RMCSkillPresetTyrargoMedicalTechnician
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
@@ -29,34 +29,34 @@
         tags:
         - RMCSquadUNMC
     - type: EquipSurvivorPreset
-      preset: RMCSurvivorPresetArmyCMT
+      preset: RMCSurvivorPresetTyrargoCMT
     - type: JobPrefix
-      prefix: rmc-job-prefix-army-cmt
+      prefix: rmc-job-prefix-tyrargo-cmt
   hidden: true
 
 - type: startingGear
-  parent: RMCGearArmyBase
-  id: RMCGearArmyCMT
+  parent: RMCGearTyrargoBase
+  id: RMCGearTyrargoCMT
   equipment:
     head: RMCArmorHelmetTyrargoMedic
     eyes: RMCGogglesBallisticPolarizedBlue
-    back: RMCBackpackArmySurvivorFillCMT
+    back: RMCBackpackTyrargoSurvivorFillCMT
     belt: CMBeltMedicalFilled
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: CMSpawnPointArmyCMT
-  name: army combat medical technician spawn point
+  id: CMSpawnPointTyrargoCMT
+  name: tyrargo marine combat medical technician spawn point
   components:
   - type: SpawnPoint
-    job_id: RMCSurvivorArmyCMT
+    job_id: RMCSurvivorTyrargoCMT
   - type: Sprite
     state: spec_spawn
 
 - type: entity
-  parent: RMCSurvivorPresetArmyNoPistol
-  id: RMCSurvivorPresetArmyCMT
-  name: army combat medical technician survivor preset
+  parent: RMCSurvivorPresetTyrargoSurvivorNoPistol
+  id: RMCSurvivorPresetTyrargoCMT
+  name: tyrargo marine combat medical technician survivor preset
   categories: [ HideSpawnMenu ]
   components:
   - type: EntityPreset
@@ -67,7 +67,7 @@
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconArmyCMT
+  id: RMCJobIconTyrargoCMT
   icon:
-    sprite: _RMC14/Interface/job_icons/UNMC/army.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/tyrargo.rsi
     state: hudsquad_cmt

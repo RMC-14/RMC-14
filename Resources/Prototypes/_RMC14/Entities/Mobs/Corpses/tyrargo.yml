@@ -1,25 +1,25 @@
-# Tyrargo army trooper
+# Tyrargo trooper
 - type: randomHumanoidSettings
   parent: RMCCorpse
-  id: RMCCorpseArmyTrooper
+  id: RMCCorpseTyrargoTrooper
   components:
   - type: Loadout
-    prototypes: [ RMCGearCorpseArmyTrooper ]
+    prototypes: [ RMCGearCorpseTyrargoTrooper ]
   - type: Rank
-    rank: RMCRankArmyPrivateSecondClass
+    rank: RMCRankPrivateFirstClass
 
 - type: startingGear
-  id: RMCGearCorpseArmyTrooper
+  id: RMCGearCorpseTyrargoTrooper
   equipment:
-    jumpsuit: RMCJumpsuitMarineArmy
-    back: RMCSatchelArmySurvivorFill
+    jumpsuit: RMCJumpsuitMarineTyrargoWebbing
+    back: RMCSatchelTyrargoSurvivorFill
     shoes: CMBootsBlackFilled
-    id: RMCIDCardArmyTrooper
+    id: RMCIDCardTyrargoTrooper
     head: RMCArmorHelmetTyrargo
     eyes: RMCGogglesBallisticPolarizedBlue
-    outerClothing: CMArmorM4Army
-    suitstorage: RMCWeaponRifleM54CArmy
-    ears: RMCHeadsetArmy
+    outerClothing: CMArmorM4Tyrargo
+    suitstorage: RMCWeaponRifleM54CSurvivor
+    ears: RMCHeadsetTyrargo
     pocket1: RMCPouchFirstAidInjectors
     pocket2: RMCPouchFirstAidSplintsGauzeOintment
   storage:
@@ -28,29 +28,29 @@
     - CMMagazineRifleM54C
     - RMCMagazineRifleM54CHEAPEmpty
 
-# Tyrargo army medic
+# Tyrargo medic
 - type: randomHumanoidSettings
   parent: RMCCorpse
-  id: RMCCorpseArmyMedic
+  id: RMCCorpseTyrargoMedic
   components:
   - type: Loadout
-    prototypes: [ RMCGearCorpseArmyMedic ]
+    prototypes: [ RMCGearCorpseTyrargoMedic ]
   - type: Rank
-    rank: RMCRankArmyPrivateFirstClass
+    rank: RMCRankLanceCorporal
 
 - type: startingGear
-  id: RMCGearCorpseArmyMedic
+  id: RMCGearCorpseTyrargoMedic
   equipment:
-    jumpsuit: RMCJumpsuitMarineArmy
-    back: RMCSatchelArmySurvivorFill
+    jumpsuit: RMCJumpsuitMarineTyrargoWebbing
+    back: RMCSatchelTyrargoSurvivorFill
     shoes: CMBootsBlackFilled
-    id: RMCIDCardArmyMedic
+    id: RMCIDCardTyrargoMedic
     head: RMCArmorHelmetTyrargo
     belt: CMBeltMedicalFilled
     eyes: RMCGogglesBallisticPolarizedBlue
-    outerClothing: CMArmorM4Army
-    suitstorage: RMCWeaponRifleM54CArmy
-    ears: RMCHeadsetArmy
+    outerClothing: CMArmorM4Tyrargo
+    suitstorage: RMCWeaponRifleM54CSurvivor
+    ears: RMCHeadsetTyrargo
   storage:
     back:
     - CMMagazineRifleM54C

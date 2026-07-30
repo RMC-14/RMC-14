@@ -1,8 +1,7 @@
 - type: job
-  parent: RMCSurvivorArmyBase
-  id: RMCSurvivorArmySynth
+  parent: RMCSurvivorTyrargoBase
+  id: RMCSurvivorTyrargoSynth
   name: rmc-job-name-forecon-synth
-  description: rmc-job-description-forecon
   playTimeTracker: RMCJobSyntheticColony
   ranks:
     RMCRankFirstSergeant: []
@@ -10,10 +9,10 @@
   accessGroups:
   - ColonistEngi
   - Synth
-  startingGear: RMCGearArmySynthetic
-  spawnMenuRoleName: UNMC Devil Dogs - Synthetic (Tyrargo Rift Survivor)
+  startingGear: RMCGearTyrargoSynthetic
+  spawnMenuRoleName: UNMC Synthetic (Tyrargo Rift Survivor)
   roleWeight: 0.25
-  icon: "RMCJobIconArmySynth"
+  icon: "RMCJobIconTyrargoSynth"
   whitelisted: true
   special:
   - !type:AddComponentSpecial
@@ -25,7 +24,7 @@
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: army_synth
+        state: tyrargo_synth
     - type: IntelRescueSurvivorObjective
     - type: AssignSquad
       whitelist:
@@ -54,17 +53,17 @@
   hidden: true
 
 - type: startingGear
-  id: RMCGearArmySynthetic
+  id: RMCGearTyrargoSynthetic
   equipment:
     id: RMCIDCardSynth
-    back: RMCSatchelArmySurvivorSynthFill
-    jumpsuit: RMCJumpsuitMarineArmy
+    back: RMCSatchelTyrargoSurvivorSynthFill
+    jumpsuit: RMCJumpsuitMarineTyrargoWebbing
     eyes: RMCGlassesTriMaxBronzeFake
     head: RMCHeadCapFlippable
-    outerClothing: CMArmorM4ArmySynthSurvivorFill
+    outerClothing: CMArmorM4TyrargoSynthSurvivorFill
     suitstorage: RMCScabbardMacheteFilled
     shoes: CMBootsBlackFilled
-    ears: RMCHeadsetArmy
+    ears: RMCHeadsetTyrargo
     gloves: CMHandsBlackMarine
     belt: CMBeltMedicalFilled
     pocket1: RMCPouchSling
@@ -74,17 +73,17 @@
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: CMSpawnPointArmySynth
-  name: army synthetic spawn point
+  id: CMSpawnPointTyrargoSynth
+  name: tyrargo marine synthetic spawn point
   components:
   - type: SpawnPoint
-    job_id: RMCSurvivorArmySynth
+    job_id: RMCSurvivorTyrargoSynth
   - type: Sprite
     state: syn_spawn
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconArmySynth
+  id: RMCJobIconTyrargoSynth
   icon:
-    sprite: _RMC14/Interface/job_icons/UNMC/army.rsi
-    state: hudsquad_army_synth
+    sprite: _RMC14/Interface/job_icons/UNMC/tyrargo.rsi
+    state: hudsquad_tyrargo_synth

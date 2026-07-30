@@ -782,7 +782,7 @@
 
 - type: entity
   parent: CMArmorM4
-  id: CMArmorM4Army
+  id: CMArmorM4Tyrargo
   name: Personal Body Armor System
   description: The Personal Body Armor System is an experimental armor set issued sparingly to the UN Marine Corps, being the contender to the M4 series pattern armor during field trials. Surprisingly uncomfortable, but offering far superior protection to the M3 or M4 series armor. At four times the price.
   components:
@@ -797,7 +797,7 @@
 
 - type: entity
   parent: CMArmorM4
-  id: CMArmorM4ArmySynth
+  id: CMArmorM4TyrargoSynth
   name: Synthetic Body Armor System
   description: This is a variant of the Personal Body Armor System, it has been modified extensively to be used by UN Marine Corps Synthetics. It offers light protection, maximum mobility and more internal storage than the standardised UNMC counterpart. The cost of this item could outfit an entire squad of UNMC Marines, but you are worth this cost.
   components:

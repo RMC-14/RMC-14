@@ -1,9 +1,9 @@
 - type: job
-  parent: RMCSurvivorArmyBase
-  id: RMCSurvivorArmyCET
-  name: rmc-job-name-army-cet
-  startingGear: RMCGearArmyCET
-  icon: "RMCJobIconArmyCET"
+  parent: RMCSurvivorTyrargoBase
+  id: RMCSurvivorTyrargoCET
+  name: rmc-job-name-tyrargo-cet
+  startingGear: RMCGearTyrargoCET
+  icon: "RMCJobIconTyrargoCET"
   requirements:
   - !type:RoleTimeRequirement
     role: CMJobCombatTech
@@ -11,9 +11,9 @@
   - !type:TotalJobsTimeRequirement
     group: RMCJobsSurvivor
     time: 5400 # 1.5 hours
-  spawnMenuRoleName: UNMC Devil Dogs - Combat Engineering Technician (Tyrargo Rift Survivor)
+  spawnMenuRoleName: UNMC Combat Engineering Technician (Tyrargo Rift Survivor)
   ranks:
-    RMCRankArmyPrivateFirstClass: []
+    RMCRankLanceCorporal: []
   special:
   - !type:AddComponentSpecial
     components:
@@ -29,35 +29,35 @@
         tags:
         - RMCSquadUNMC
     - type: EquipSurvivorPreset
-      preset: RMCSurvivorPresetArmyCET
+      preset: RMCSurvivorPresetTyrargoCET
     - type: JobPrefix
-      prefix: rmc-job-prefix-army-cet
+      prefix: rmc-job-prefix-tyrargo-cet
   hidden: true
 
 - type: startingGear
-  parent: RMCGearArmyBase
-  id: RMCGearArmyCET
+  parent: RMCGearTyrargoBase
+  id: RMCGearTyrargoCET
   equipment:
     head: RMCArmorHelmetTyrargoEngineer
     eyes: RMCGogglesBallisticPolarizedBlue
-    back: RMCBackpackArmySurvivorFillCET
+    back: RMCBackpackTyrargoSurvivorFillCET
     belt: CMBeltUtilityFilled
     gloves: CMHandsInsulated
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: CMSpawnPointArmyCET
-  name: army combat engineering technician spawn point
+  id: CMSpawnPointTyrargoCET
+  name: marine combat engineering technician spawn point
   components:
   - type: SpawnPoint
-    job_id: RMCSurvivorArmyCET
+    job_id: RMCSurvivorTyrargoCET
   - type: Sprite
     state: spec_spawn
 
 - type: entity
-  parent: RMCSurvivorPresetArmyNoPistol
-  id: RMCSurvivorPresetArmyCET
-  name: army combat engineering technician survivor preset
+  parent: RMCSurvivorPresetTyrargoSurvivorNoPistol
+  id: RMCSurvivorPresetTyrargoCET
+  name: tyrargo marine combat engineering technician survivor preset
   categories: [ HideSpawnMenu ]
   components:
   - type: EntityPreset
@@ -66,7 +66,7 @@
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconArmyCET
+  id: RMCJobIconTyrargoCET
   icon:
-    sprite: _RMC14/Interface/job_icons/UNMC/army.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/tyrargo.rsi
     state: hudsquad_cet
