@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Arykh
-  changes:
-  - message: Fixed the CPR Dummy not properly tracking successful and failed CPR attempts.
-    type: Fix
-  id: 3038
-  time: '2026-03-31T10:09:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9423
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed the M12 Blast Grenade not fitting inside of the M85A1 launcher,
@@ -4573,5 +4566,12 @@
   id: 3537
   time: '2026-07-30T18:07:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10569
+- author: SharkSnake98
+  changes:
+  - message: Changed the atmos scanner sprite to be more dynamic
+    type: Tweak
+  id: 3538
+  time: '2026-07-30T18:14:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9942
 Name: RMC14
 Order: -1
