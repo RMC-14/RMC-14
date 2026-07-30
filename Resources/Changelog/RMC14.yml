@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Aurallianz
-  changes:
-  - message: Paper is cooler now
-    type: Tweak
-  id: 3033
-  time: '2026-03-31T01:58:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9403
 - author: Ian321
   changes:
   - message: Fixed dropship weapon targeting systems stacking if multiple are used
@@ -4579,5 +4572,13 @@
   id: 3532
   time: '2026-07-29T17:43:40.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9665
+- author: GNUtopia
+  changes:
+  - message: The XM88 now has a visual indicator for when it can be refired, much
+      like shotguns.
+    type: Tweak
+  id: 3533
+  time: '2026-07-30T03:36:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10017
 Name: RMC14
 Order: -1
