@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Shields;
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -35,6 +36,7 @@ public sealed class XenoBlitzSystem : EntitySystem
     [Dependency] private readonly VanguardShieldSystem _vanguard = default!;
     [Dependency] private readonly SharedInteractionSystem _interact = default!;
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCLagCompensationSystem _rmcLagCompensation = default!;
 
     public override void Initialize()
     {
@@ -102,12 +104,18 @@ public sealed class XenoBlitzSystem : EntitySystem
 
         var hits = 0;
 
-        foreach (var hit in _lookup.GetEntitiesInRange<MobStateComponent>(_transform.GetMapCoordinates(xeno), xeno.Comp.Range))
+        var session = CompOrNull<ActorComponent>(xeno)?.PlayerSession;
+
+        foreach (var hit in _lookup.GetEntitiesInRange<MobStateComponent>(_transform.GetMapCoordinates(xeno), xeno.Comp.Range + xeno.Comp.LagCompensationLookupMargin))
         {
             if (!_xeno.CanAbilityAttackTarget(xeno, hit))
                 continue;
 
-            if (!_interact.InRangeUnobstructed(xeno.Owner, hit.Owner, xeno.Comp.Range))
+            if (!_interact.InRangeUnobstructed(xeno.Owner, hit.Owner, xeno.Comp.Range + xeno.Comp.LagCompensationLookupMargin))
+                continue;
+
+            // Range check against the target's lag-compensated position
+            if (!_rmcLagCompensation.IsWithinMargin(xeno.Owner, hit.Owner, session, xeno.Comp.Range))
                 continue;
 
             hits++;

@@ -1,4 +1,4 @@
-﻿using Content.Shared.Damage;
+using Content.Shared.Damage;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -49,4 +49,7 @@ public sealed partial class XenoBlitzComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan FirstPartActivatedAt;
+
+    [DataField]
+    public float LagCompensationLookupMargin = 4f;
 }
