@@ -36,7 +36,7 @@ public sealed partial class RMCSyringeComponent : Component
     public float ArmorFailChance = 0.5f;
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier ArmorSound = new SoundCollectionSpecifier("RMCShieldImpact", AudioParams.Default.WithVolume(-4));
+    public SoundSpecifier ArmorSound = new SoundCollectionSpecifier("RMCShieldImpact", AudioParams.Default.WithVolume(-6));
 
     [DataField, AutoNetworkedField]
     public DamageSpecifier InjectDamage;
