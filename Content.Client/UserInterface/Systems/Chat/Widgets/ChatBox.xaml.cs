@@ -1,4 +1,5 @@
 // RMC14
+using System.Linq;
 using Content.Client._RMC14.Chat;
 // RMC14
 using Content.Client.UserInterface.Systems.Chat.Controls;
@@ -148,6 +149,10 @@ public partial class ChatBox : UIWidget
             return;
 
         Contents.AddMessage(formatted);
+
+        // RMC14
+        if (!string.IsNullOrWhiteSpace(languageIcon) && RepeatQueue.Count > 0)
+            RepeatQueue.Last().IconControl = Contents.Children.OfType<LanguageIconTag.LanguageIconControl>().LastOrDefault();
     }
 
     // RMC14

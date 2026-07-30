@@ -42,6 +42,7 @@ public abstract class SharedSynthSystem : EntitySystem
     [Dependency] private readonly RMCStatusEffectSystem _rmcStatusEffects = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly SharedSynthGenerationSystem _synthGeneration = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -62,6 +63,7 @@ public abstract class SharedSynthSystem : EntitySystem
     private void OnMapInit(Entity<SynthComponent> ent, ref MapInitEvent args)
     {
         MakeSynth(ent);
+        _synthGeneration.SynthStartup(ent);
     }
 
     protected virtual void MakeSynth(Entity<SynthComponent> ent)
@@ -262,6 +264,11 @@ public abstract class SharedSynthSystem : EntitySystem
             _popup.PopupClient(msg, args.User, args.User, PopupType.SmallCaution);
         }
     }
+
+    // public bool HasAnyDamage(Entity<SynthComponent> synth)
+    // {
+    //     return HasDamage(synth, synth.Comp.CableCoilDamageGroup) || HasDamage(synth, synth.Comp.WelderDamageGroup);
+    // }
 
     public bool HasDamage(EntityUid synth, ProtoId<DamageGroupPrototype> group)
     {

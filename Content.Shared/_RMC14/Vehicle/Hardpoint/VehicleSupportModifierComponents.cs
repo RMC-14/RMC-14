@@ -114,7 +114,7 @@ public sealed partial class VehicleGunnerViewComponent : Component
 /// <summary>
 /// Added to gunners to increase their view while operating a vehicle with a view module installed.
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
 [Access(typeof(VehicleWeaponsSystem), typeof(VehicleGunnerViewSystem))]
 public sealed partial class VehicleGunnerViewUserComponent : Component
 {
