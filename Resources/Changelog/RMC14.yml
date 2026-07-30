@@ -1,43 +1,4 @@
 ﻿Entries:
-- author: BreakpointDebug1234
-  changes:
-  - message: M54C MK2 rubber mags now use the correct sprite
-    type: Fix
-  - message: M54C MK1 rubber mags, available in the MP riot vend
-    type: Add
-  id: 3035
-  time: '2026-03-31T08:37:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9157
-- author: Dygon
-  changes:
-  - message: "The dropship part fabricator can now print the LAG-14 internal sentry\
-      \ launcher (200 points), this system can be used to deploy the newly added A/C-49-P\
-      \ Air Deployable Sentry (200 points) at the target location. It can be installed\
-      \ in a dropship\u2019s utility slot."
-    type: Add
-  - message: Supply drops now have a falling animation.
-    type: Add
-  - message: LZ sentries now light up the nearby area.
-    type: Fix
-  id: 3036
-  time: '2026-03-31T08:58:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9089
-- author: Thereisabear
-  changes:
-  - message: Xenos now do appropriate damage and to Lathes and Vending Machines.
-    type: Fix
-  - message: Fixed Vendors not having corrodible components.
-    type: Fix
-  id: 3037
-  time: '2026-03-31T08:59:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9167
-- author: Arykh
-  changes:
-  - message: Fixed the CPR Dummy not properly tracking successful and failed CPR attempts.
-    type: Fix
-  id: 3038
-  time: '2026-03-31T10:09:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9423
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed the M12 Blast Grenade not fitting inside of the M85A1 launcher,
@@ -4579,5 +4540,38 @@
   id: 3534
   time: '2026-07-30T08:01:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10498
+- author: Thereisabear
+  changes:
+  - message: New dead examine text for Synths so you know when a Synthetic Reset key
+      will work, instead of silently consuming the charge.
+    type: Add
+  - message: Fixed Gen 2 & 3 synths not having their proper health
+    type: Fix
+  - message: Fixed Synth self repair taking too long (30s to 3s).
+    type: Fix
+  id: 3535
+  time: '2026-07-30T12:53:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10422
+- author: SharkSnake98
+  changes:
+  - message: Changed a few liaison clothing option sprites
+    type: Tweak
+  id: 3536
+  time: '2026-07-30T17:46:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9796
+- author: IceNoobXD
+  changes:
+  - message: Made it now easier to differentiate the updated/cancelled squad objectives!
+    type: Add
+  id: 3537
+  time: '2026-07-30T18:07:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10569
+- author: SharkSnake98
+  changes:
+  - message: Changed the atmos scanner sprite to be more dynamic
+    type: Tweak
+  id: 3538
+  time: '2026-07-30T18:14:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9942
 Name: RMC14
 Order: -1

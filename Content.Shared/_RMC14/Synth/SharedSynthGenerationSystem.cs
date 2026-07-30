@@ -8,6 +8,7 @@ using Content.Shared.Damage;
 using Content.Shared.GameTicking;
 using Content.Shared.Movement.Components;
 using Content.Shared.Prototypes;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -18,6 +19,7 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
 {
 
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
@@ -99,19 +101,19 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
             return;
 
         var options = new List<DialogOption>();
-        HashSet<EntProtoId<SynthGenerationComponent>> synthTypes = [];
+        var synthTypes = new List<(EntityPrototype Proto, int Priority)>();
 
         foreach (var proto in _prototype.EnumeratePrototypes<EntityPrototype>())
         {
-            if (proto.HasComponent<SynthGenerationComponent>())
-                synthTypes.Add(proto.ID);
+            if (proto.TryGetComponent(out SynthGenerationComponent? gen, _compFactory))
+                synthTypes.Add((proto, gen.Priority));
         }
 
-        foreach (var synth in synthTypes)
+        synthTypes.Sort((a, b) => a.Priority.CompareTo(b.Priority));
+
+        foreach (var (proto, _) in synthTypes)
         {
-            if (!_prototype.TryIndex(synth, out var proto))
-                continue;
-            options.Add(new DialogOption($"{proto.Name}", new GenerationSelectedActionEvent(synth)));
+            options.Add(new DialogOption($"{proto.Name}", new GenerationSelectedActionEvent(proto.ID)));
         }
 
         _dialog.OpenOptions(ent.Owner, "Select a Generation", options, "Available Generations");
