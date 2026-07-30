@@ -985,6 +985,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
                 return false;
             }
         }
+
         // RMC14 range disarm distance
         if (!InRange(user, target.Value, _rmcMelee.GetUserDisarmRange(user, target, component), session))
         {
