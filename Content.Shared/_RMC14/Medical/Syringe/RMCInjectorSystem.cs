@@ -173,7 +173,7 @@ public sealed class RMCInjectorSystem : EntitySystem
             if (!syringe.Comp.AllowBloodDraw && HasComp<BloodstreamComponent>(args.Target))
             {
                 args.Cancelled = true;
-                _popup.PopupClient(Loc.GetString("rmc-syringe-no-blood-draw"), args.User, PopupType.SmallCaution);
+                _popup.PopupEntity(Loc.GetString("rmc-syringe-no-blood-draw", ("injector", syringe)), args.User, args.User, PopupType.SmallCaution);
                 return;
             }
 
