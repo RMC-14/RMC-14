@@ -8,6 +8,7 @@ using Content.Shared.Damage;
 using Content.Shared.GameTicking;
 using Content.Shared.Movement.Components;
 using Content.Shared.Prototypes;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -18,6 +19,7 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
 {
 
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
