@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Random;
 using Content.Shared._RMC14.Stun;
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Components;
@@ -24,7 +25,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
-using System.Threading.Channels;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Medical.Syringe;
 
@@ -44,6 +45,7 @@ public sealed class RMCInjectorSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -98,7 +100,11 @@ public sealed class RMCInjectorSystem : EntitySystem
                 var ev = new CMGetArmorEvent(SlotFlags.OUTERCLOTHING | SlotFlags.INNERCLOTHING);
                 RaiseLocalEvent(hit, ref ev);
 
-                if (ev.Melee > syringe.Comp.MinArmorBlock && _random.Prob(syringe.Comp.ArmorFailChance))
+                // TODO RMC14 replace with predictedrandom
+                var seed = (long)1 << 32 | GetNetEntity(args.User).Id;
+                var random = new Xoshiro128P(seed, (long)_timing.CurTick.Value << 32 | GetNetEntity(hit).Id).NextFloat(0f, 1f);
+
+                if (ev.Melee > syringe.Comp.MinArmorBlock && random < syringe.Comp.ArmorFailChance)
                 {
                     _audio.PlayPredicted(syringe.Comp.ArmorSound, hit, args.User);
                     _popup.PopupClient(Loc.GetString("rmc-syringe-combat-armor", ("target", Identity.Name(hit, EntityManager, args.User).Value), ("injector", syringe)), args.User, PopupType.SmallCaution);
@@ -164,7 +170,7 @@ public sealed class RMCInjectorSystem : EntitySystem
             // Check target - if not the same faction abort!!!
             // Not parity but just in case
 
-            if (!_npcFaction.IsEntityFriendly(args.User, args.Target))
+            if (syringe.Comp.NoDrawOnAliveHostiles && !_npcFaction.IsEntityFriendly(args.User, args.Target) && !_mob.IsDead(args.Target))
             {
                 args.Cancelled = true;
                 return;

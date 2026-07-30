@@ -20,7 +20,7 @@ public sealed partial class RMCSyringeComponent : Component
     public bool AllowBloodDraw = true;
 
     [DataField, AutoNetworkedField]
-    public bool NoDrawOnHostiles = true;
+    public bool NoDrawOnAliveHostiles = true;
 
     [DataField, AutoNetworkedField]
     public bool SkillBasedDelay = true;

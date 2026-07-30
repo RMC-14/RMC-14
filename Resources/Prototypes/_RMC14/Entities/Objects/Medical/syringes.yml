@@ -35,7 +35,7 @@
   - type: RMCSyringe
     injectDamage:
       types:
-        Pierce: 3
+        Piercing: 3
 
 - type: entity
   parent: CMSyringeNoMelee
