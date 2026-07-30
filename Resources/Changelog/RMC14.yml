@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: "The dropship part fabricator can now print the LAG-14 internal sentry\
-      \ launcher (200 points), this system can be used to deploy the newly added A/C-49-P\
-      \ Air Deployable Sentry (200 points) at the target location. It can be installed\
-      \ in a dropship\u2019s utility slot."
-    type: Add
-  - message: Supply drops now have a falling animation.
-    type: Add
-  - message: LZ sentries now light up the nearby area.
-    type: Fix
-  id: 3036
-  time: '2026-03-31T08:58:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9089
 - author: Thereisabear
   changes:
   - message: Xenos now do appropriate damage and to Lathes and Vending Machines.
@@ -4582,5 +4568,12 @@
   id: 3535
   time: '2026-07-30T12:53:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10422
+- author: SharkSnake98
+  changes:
+  - message: Changed a few liaison clothing option sprites
+    type: Tweak
+  id: 3536
+  time: '2026-07-30T17:46:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9796
 Name: RMC14
 Order: -1
