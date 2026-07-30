@@ -1,5 +1,4 @@
 using Content.Shared._RMC14.Armor;
-using Content.Shared._RMC14.Audio;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Stun;
@@ -10,6 +9,8 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.CombatMode;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
+using Content.Shared.Effects;
+using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
@@ -23,6 +24,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
+using System.Threading.Channels;
 
 namespace Content.Shared._RMC14.Medical.Syringe;
 
@@ -41,6 +43,7 @@ public sealed class RMCInjectorSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
 
     public override void Initialize()
     {
@@ -104,7 +107,13 @@ public sealed class RMCInjectorSystem : EntitySystem
                 }
             }
 
-            _damage.TryChangeDamage(hit, syringe.Comp.InjectDamage, true);
+            var damage = _damage.TryChangeDamage(hit, syringe.Comp.InjectDamage, true, origin: args.User, tool: syringe);
+
+            if (damage?.GetTotal() > FixedPoint2.Zero)
+            {
+                var filter = Filter.Pvs(hit, entityManager: EntityManager);
+                _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { hit }, filter);
+            }
 
             if (HasComp<InjectableSolutionComponent>(hit) &&
                 TryComp<InjectorComponent>(syringe, out var inject) &&
