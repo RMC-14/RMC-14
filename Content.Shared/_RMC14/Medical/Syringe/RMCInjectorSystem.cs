@@ -164,10 +164,16 @@ public sealed class RMCInjectorSystem : EntitySystem
             // Check target - if not the same faction abort!!!
             // Not parity but just in case
 
-            if (!_npcFaction.IsEntityFriendly(args.User, args.Target) ||
-                (!syringe.Comp.AllowBloodDraw && HasComp<BloodstreamComponent>(args.Target)))
+            if (!_npcFaction.IsEntityFriendly(args.User, args.Target))
             {
                 args.Cancelled = true;
+                return;
+            }
+
+            if (!syringe.Comp.AllowBloodDraw && HasComp<BloodstreamComponent>(args.Target))
+            {
+                args.Cancelled = true;
+                _popup.PopupClient(Loc.GetString("rmc-syringe-no-blood-draw"), args.User, PopupType.SmallCaution);
                 return;
             }
 

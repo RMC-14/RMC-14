@@ -75,7 +75,14 @@ public sealed class InjectorSystem : SharedInjectorSystem
     private void OnInjectDoAfter(Entity<InjectorComponent> entity, ref InjectorDoAfterEvent args)
     {
         if (args.Cancelled || args.Handled || args.Args.Target == null)
+        {
+            // RMC14
+            entity.Comp.DoAfterId = null;
+            Dirty(entity);
+            // RMC14
+
             return;
+        }
 
         args.Handled = TryUseInjector(entity, args.Args.Target.Value, args.Args.User);
     }
@@ -226,8 +233,9 @@ public sealed class InjectorSystem : SharedInjectorSystem
             NeedHand = injector.Comp.NeedHand,
             BreakOnHandChange = injector.Comp.BreakOnHandChange,
             MovementThreshold = injector.Comp.MovementThreshold,
-            TargetEffect = "RMCEffectHealBusy",
-        });
+            TargetEffect = "RMCEffectHealBusy"
+        }, out injector.Comp.DoAfterId);
+        Dirty(injector);
         // RMC 14
     }
 

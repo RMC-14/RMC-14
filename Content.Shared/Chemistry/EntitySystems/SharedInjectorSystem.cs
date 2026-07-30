@@ -151,6 +151,9 @@ public abstract class SharedInjectorSystem : EntitySystem
 
     public void SetMode(Entity<InjectorComponent> injector, InjectorToggleMode mode)
     {
+        if (injector.Comp.ToggleState != mode && injector.Comp.DoAfterId != null) // RMC 14
+            DoAfter.Cancel(injector.Comp.DoAfterId);
+
         injector.Comp.ToggleState = mode;
         Dirty(injector);
     }

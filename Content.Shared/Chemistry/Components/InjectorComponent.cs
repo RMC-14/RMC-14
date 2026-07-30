@@ -129,6 +129,9 @@ public sealed partial class InjectorComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool CanDirectInjectIntoBlood = true;
+
+    [DataField, AutoNetworkedField]
+    public DoAfterId? DoAfterId;
 }
 
 /// <summary>
