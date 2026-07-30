@@ -6,5 +6,5 @@ namespace Content.Shared.Roles;
 public sealed partial class AntagPrototype : ICMSpecific
 {
     [DataField]
-    public bool IsCM { get; }
+    public bool IsCM { get; private set; }
 }

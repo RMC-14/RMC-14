@@ -7,5 +7,5 @@ namespace Content.Shared.Decals;
 public sealed partial class DecalPrototype : ICMSpecific
 {
     [DataField]
-    public bool IsCM { get; }
+    public bool IsCM { get; private set; }
 }

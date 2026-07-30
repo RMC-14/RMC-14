@@ -5,4 +5,4 @@ namespace Content.Shared._RMC14.Item;
 
 [DataRecord]
 [Serializable, NetSerializable]
-public record MultiHandedItem(int Hands, EntityWhitelist Whitelist);
+public partial record MultiHandedItem(int Hands, EntityWhitelist Whitelist);

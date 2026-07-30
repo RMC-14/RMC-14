@@ -5,7 +5,7 @@ namespace Content.Shared._RMC14.Requisitions.Components;
 
 [DataRecord]
 [Serializable, NetSerializable]
-public sealed class RequisitionsRandomCrates
+public sealed partial class RequisitionsRandomCrates
 {
     [ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan Every;

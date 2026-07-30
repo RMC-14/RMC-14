@@ -8,11 +8,11 @@ namespace Content.Shared.Access;
 public sealed partial class AccessGroupPrototype : IInheritingPrototype
 {
     [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<AccessGroupPrototype>))]
-    public string[]? Parents { get; }
+    public string[]? Parents { get; private set; }
 
     [NeverPushInheritance]
     [AbstractDataField]
-    public bool Abstract { get; }
+    public bool Abstract { get; private set; }
 
     /// <summary>
     ///     Denotes what faction this group belongs to.

@@ -109,7 +109,7 @@ public sealed partial class OrbitalCannonComponent : Component
 
 [DataRecord]
 [Serializable, NetSerializable]
-public readonly record struct WarheadFuelRequirement(EntProtoId<OrbitalCannonWarheadComponent> Warhead, int Fuel);
+public readonly partial record struct WarheadFuelRequirement(EntProtoId<OrbitalCannonWarheadComponent> Warhead, int Fuel);
 
 [Serializable, NetSerializable]
 public enum OrbitalCannonStatus

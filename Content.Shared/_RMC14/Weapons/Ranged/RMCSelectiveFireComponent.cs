@@ -100,7 +100,7 @@ public sealed partial class RMCSelectiveFireComponent : Component
 }
 
 [DataRecord, Serializable, NetSerializable]
-public record struct SelectiveFireModifierSet(
+public partial record struct SelectiveFireModifierSet(
     /// <summary>
     /// Additional fire delay applied to the weapon when this mode is active.
     /// A weapon's fire delay is the delay in seconds between each shot. It's inversely proportionate to the weapon's rate of fire.

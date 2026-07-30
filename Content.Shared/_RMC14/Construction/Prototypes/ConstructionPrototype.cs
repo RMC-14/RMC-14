@@ -9,17 +9,17 @@ namespace Content.Shared.Construction.Prototypes;
 public sealed partial class ConstructionPrototype : IInheritingPrototype, ICMSpecific
 {
     [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<ConstructionPrototype>))]
-    public string[]? Parents { get; }
+    public string[]? Parents { get; private set; }
 
     [NeverPushInheritance]
     [AbstractDataField]
-    public bool Abstract { get; }
+    public bool Abstract { get; private set; }
 
     [DataField]
-    public bool IsCM { get; }
+    public bool IsCM { get; private set; }
 
     [DataField("rmcPrototype")]
-    public ProtoId<RMCConstructionPrototype>? RMCPrototype { get; }
+    public ProtoId<RMCConstructionPrototype>? RMCPrototype { get; private set; }
 
     [DataField]
     public Color IconColor = Color.FromHex("#ffffff");

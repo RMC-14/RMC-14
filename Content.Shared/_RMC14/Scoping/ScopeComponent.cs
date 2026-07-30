@@ -75,7 +75,7 @@ public sealed partial class ScopeComponent : Component
 /// <param name="AllowMovement">If set to true, the user's movement won't interrupt the scoping action.</param>
 /// <param name="DoAfter">The length of the doafter to zoom in.</param>
 [DataRecord, Serializable, NetSerializable]
-public record struct ScopeZoomLevel(
+public partial record struct ScopeZoomLevel(
     string? Name,
     float Zoom,
 

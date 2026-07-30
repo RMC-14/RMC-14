@@ -6,4 +6,4 @@ namespace Content.Shared._RMC14.Intel.Tech;
 
 [DataRecord]
 [Serializable, NetSerializable]
-public sealed record TechUnlockVehicleEvent(EntProtoId Unlock);
+public sealed partial record TechUnlockVehicleEvent(EntProtoId Unlock);
