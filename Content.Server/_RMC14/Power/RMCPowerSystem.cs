@@ -133,6 +133,7 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
     private void OnGeneratorEmpty(Entity<RMCPortableGeneratorComponent> ent, ref RMCGeneratorEmpty args)
     {
         _materialStorage.EjectAllMaterial(ent);
+        Dirty(ent);
     }
 
     private void UpdatePortableGenerators()

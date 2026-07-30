@@ -34,15 +34,11 @@ public sealed class RMCPortableGeneratorBui(EntityUid owner, Enum uiKey) : Bound
         if (_window is not { IsOpen: true })
             return;
 
-        if (!EntMan.TryGetComponent(Owner, out RMCPortableGeneratorComponent? gen))
+        if (!EntMan.TryGetComponent(Owner, out RMCPortableGeneratorComponent? gen) ||
+            !EntMan.TryGetComponent(Owner, out MaterialStorageComponent? storage))
             return;
 
-        if (!EntMan.TryGetComponent(Owner, out MaterialStorageComponent? storage))
-            return;
-
-        var anchored = true;
-        if (EntMan.TryGetComponent(Owner, out TransformComponent? xform))
-            anchored = xform.Anchored;
+        var anchored = EntMan.TryGetComponent(Owner, out TransformComponent? xform) && xform.Anchored;
 
         _window.StatusLabel.SetMarkupPermissive((!anchored, gen.On) switch
         {
@@ -51,11 +47,14 @@ public sealed class RMCPortableGeneratorBui(EntityUid owner, Enum uiKey) : Bound
             (false, false) => $"[color={RedColor.ToHex()}]Offline[/color]",
         });
 
-        _window.ToggleButton.Text = gen.On ? "Stop" : "Start";
-        _window.ToggleButton.Disabled = !anchored || storage.Storage.GetValueOrDefault(gen.Material, 0) <= 0;
+        var fuelAmount = storage.Storage.GetValueOrDefault(gen.Material, 0);
+        var fuelSheets = fuelAmount / gen.MaterialPerSheet;
+        var fuelPercent = fuelAmount % (float)gen.MaterialPerSheet / gen.MaterialPerSheet * 100;
 
-        var fuelSheets = storage.Storage.GetValueOrDefault(gen.Material, 0) / gen.MaterialPerSheet;
-        var fuelPercent = storage.Storage.GetValueOrDefault(gen.Material, 0) % (float)gen.MaterialPerSheet / gen.MaterialPerSheet * 100;
+        _window.ToggleButton.Text = gen.On ? "Stop" : "Start";
+        _window.ToggleButton.Disabled = !anchored || fuelAmount <= 0;
+
+
         _window.FuelLabel.SetMarkupPermissive(
             $"[color=#5B88B0]Fuel:[/color] [bold]{fuelSheets}[/bold] sheets of {gen.FuelName}");
 
@@ -73,7 +72,6 @@ public sealed class RMCPortableGeneratorBui(EntityUid owner, Enum uiKey) : Bound
         _window.LowerPowerButton.Disabled = gen.PowerGenPercent <= gen.MinPowerPercent;
         _window.RaisePowerButton.Disabled = gen.PowerGenPercent >= gen.MaxPowerPercent;
 
-        _window.HeatBar.MinValue = 0;
         _window.HeatBar.MaxValue = gen.OverheatThreshold;
         _window.HeatBar.Value = Math.Min(gen.Heat, gen.OverheatThreshold);
 
@@ -86,4 +84,5 @@ public sealed class RMCPortableGeneratorBui(EntityUid owner, Enum uiKey) : Bound
 
         _window.HeatStatusLabel.SetMarkupPermissive($"[color=#5B88B0]Heat:[/color] {heatStatus}");
     }
+
 }

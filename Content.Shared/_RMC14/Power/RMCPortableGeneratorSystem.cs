@@ -31,7 +31,6 @@ public sealed partial class RMCPortableGeneratorSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<RMCPortableGeneratorComponent, InteractUsingEvent>(OnPortableGeneratorInteractUsing);
         SubscribeLocalEvent<RMCPortableGeneratorComponent, InteractHandEvent>(OnPortableGeneratorInteractHand);
         SubscribeLocalEvent<RMCPortableGeneratorComponent, RMCPortableGeneratorStartDoAfterEvent>(OnPortableGeneratorStartDoAfter);
         SubscribeLocalEvent<RMCPortableGeneratorComponent, ExaminedEvent>(OnPortableGeneratorExamined);
@@ -46,11 +45,6 @@ public sealed partial class RMCPortableGeneratorSystem : EntitySystem
                 subs.Event<RMCPortableGeneratorRaisePowerBuiMsg>(OnPortableGeneratorRaisePower);
                 subs.Event<RMCPortableGeneratorLowerPowerBuiMsg>(OnPortableGeneratorLowerPower);
             });
-    }
-
-    private void OnPortableGeneratorInteractUsing(Entity<RMCPortableGeneratorComponent> ent, ref InteractUsingEvent args)
-    {
-        Dirty(ent);
     }
 
     private void OnPortableGeneratorInteractHand(Entity<RMCPortableGeneratorComponent> ent, ref InteractHandEvent args)

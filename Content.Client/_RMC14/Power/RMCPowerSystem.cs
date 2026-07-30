@@ -1,6 +1,7 @@
 ﻿using Content.Client.Power.Components;
 using Content.Shared._RMC14.Power;
 using Robust.Client.GameObjects;
+using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Power;
 
@@ -49,7 +50,7 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
             foreach (var bui in ui.ClientOpenInterfaces.Values)
             {
                 if (bui is RMCPortableGeneratorBui genUi)
-                    genUi.Refresh();
+                    Timer.Spawn(0, () => genUi.Refresh());
             }
         }
         catch (Exception e)
