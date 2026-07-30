@@ -559,6 +559,7 @@ public sealed class RMCPullingSystem : EntitySystem
             args.Range = 4.0f;
         }
     }
+    
     public override void Update(float frameTime)
     {
         var blockDeadActive = EntityQueryEnumerator<BlockPullingDeadActiveComponent, PullerComponent>();
