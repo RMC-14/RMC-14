@@ -42,7 +42,7 @@
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
-  - type: Sprite # TODO: Replace with landmark sprite
+  - type: Sprite
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
