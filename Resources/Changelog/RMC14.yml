@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: BreakpointDebug1234
-  changes:
-  - message: M54C MK2 rubber mags now use the correct sprite
-    type: Fix
-  - message: M54C MK1 rubber mags, available in the MP riot vend
-    type: Add
-  id: 3035
-  time: '2026-03-31T08:37:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9157
 - author: Dygon
   changes:
   - message: "The dropship part fabricator can now print the LAG-14 internal sentry\
@@ -4579,5 +4570,17 @@
   id: 3534
   time: '2026-07-30T08:01:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10498
+- author: Thereisabear
+  changes:
+  - message: New dead examine text for Synths so you know when a Synthetic Reset key
+      will work, instead of silently consuming the charge.
+    type: Add
+  - message: Fixed Gen 2 & 3 synths not having their proper health
+    type: Fix
+  - message: Fixed Synth self repair taking too long (30s to 3s).
+    type: Fix
+  id: 3535
+  time: '2026-07-30T12:53:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10422
 Name: RMC14
 Order: -1
