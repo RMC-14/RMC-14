@@ -8,7 +8,6 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using Serilog;
 
 namespace Content.Server._RMC14.Actions;
 
