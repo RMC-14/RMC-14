@@ -59,7 +59,7 @@
     toggleState: Inject
 
 - type: entity
-  parent: CMSyringeBasic
+  parent: CMSyringeNoMelee
   id: RMCSyringeLethal
   name: lethal injection syringe
   description: A syringe used for lethal injections.
