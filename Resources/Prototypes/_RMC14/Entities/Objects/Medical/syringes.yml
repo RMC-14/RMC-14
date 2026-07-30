@@ -104,7 +104,7 @@
   id: RMCSyringeBroken
   name: syringe
   description: A syringe. It's broken.
-  suffix: RMC14
+  suffix: RMC14, Broken
   components:
   - type: Item
     size: Tiny

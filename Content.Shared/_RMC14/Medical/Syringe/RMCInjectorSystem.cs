@@ -167,10 +167,10 @@ public sealed class RMCInjectorSystem : EntitySystem
 
         if (args.Mode == InjectorToggleMode.Draw)
         {
-            // Check target - if not the same faction abort!!!
+            // Check target - if in combat mode abort!!!
             // Not parity but just in case
 
-            if (syringe.Comp.NoDrawOnAliveHostiles && !_npcFaction.IsEntityFriendly(args.User, args.Target) && !_mob.IsDead(args.Target))
+            if (syringe.Comp.NoDrawOnAliveHostiles && !_combatSystem.IsInCombatMode(args.Target) && !_mob.IsDead(args.Target))
             {
                 args.Cancelled = true;
                 return;
