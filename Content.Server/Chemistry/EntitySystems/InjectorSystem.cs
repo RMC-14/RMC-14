@@ -38,7 +38,7 @@ public sealed class InjectorSystem : SharedInjectorSystem
         // Handle injecting/drawing for solutions
         if (injector.Comp.ToggleState == InjectorToggleMode.Inject)
         {
-            if (TryComp<BloodstreamComponent>(target, out var bloodstream))
+            if (TryComp<BloodstreamComponent>(target, out var bloodstream)) // RMC14 move to top
                 return TryInjectIntoBloodstream(injector, (target, bloodstream), user);
 
             if (isOpenOrIgnored && SolutionContainers.TryGetInjectableSolution(target, out var injectableSolution, out _))
@@ -156,6 +156,7 @@ public sealed class InjectorSystem : SharedInjectorSystem
     ("user", userName)), user, target);
             }
 
+
             // Check if the target is incapacitated or in combat mode and modify time accordingly.
             if (MobState.IsIncapacitated(target))
             {
@@ -197,6 +198,7 @@ public sealed class InjectorSystem : SharedInjectorSystem
             }
         }
 
+        // RMC14
         var ev = new RMCSyringeGetDelayEvent(baseDelay, injector.Comp.ToggleState, user, target);
         RaiseLocalEvent(injector, ref ev);
 
