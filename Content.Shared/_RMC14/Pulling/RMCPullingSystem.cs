@@ -544,7 +544,7 @@ public sealed class RMCPullingSystem : EntitySystem
     }
 
 
-    private void ExtendTacklingRangeToPullingTarget(Entity<PullerComponent> ent, ref RMCGetUserDisarmRange args)
+    private void ExtendTacklingRangeToPullingTarget(Entity<PullerComponent> ent, ref RMCDisarmUserGetRangeEvent args)
     {
         if (args.Target == ent.Comp.Pulling && args.Target != null)
         {
