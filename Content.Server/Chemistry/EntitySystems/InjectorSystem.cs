@@ -233,7 +233,8 @@ public sealed class InjectorSystem : SharedInjectorSystem
             NeedHand = injector.Comp.NeedHand,
             BreakOnHandChange = injector.Comp.BreakOnHandChange,
             MovementThreshold = injector.Comp.MovementThreshold,
-            TargetEffect = "RMCEffectHealBusy"
+            TargetEffect = "RMCEffectHealBusy",
+            DuplicateCondition = DuplicateConditions.SameTool
         }, out injector.Comp.DoAfterId);
         Dirty(injector);
         // RMC 14
