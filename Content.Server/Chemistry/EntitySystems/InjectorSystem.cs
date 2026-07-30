@@ -14,6 +14,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Stacks;
+using System.Xml.Schema;
 
 namespace Content.Server.Chemistry.EntitySystems;
 
@@ -130,76 +131,75 @@ public sealed class InjectorSystem : SharedInjectorSystem
         // First 5u(MinimumTransferAmount) doesn't incur delay
         actualDelay += injector.Comp.DelayPerVolume * FixedPoint2.Max(0, amountToInject - injector.Comp.MinimumTransferAmount).Double();
 
+        // RMC14 - ignore actual delay
+        var baseDelay = actualDelay;
+        // RMC14
+
         // Ensure that minimum delay before incapacitation checks is 1 seconds
         actualDelay = MathHelper.Max(actualDelay, TimeSpan.FromSeconds(1));
 
-
         var isTarget = user != target;
-        // RMC 14
-        if (!HasComp<RMCSyringeComponent>(injector))
+        if (isTarget)
         {
+
             if (isTarget)
             {
-
-                if (isTarget)
+                // Create a pop-up for the target
+                var userName = Identity.Entity(user, EntityManager);
+                if (injector.Comp.ToggleState == InjectorToggleMode.Draw)
                 {
-                    // Create a pop-up for the target
-                    var userName = Identity.Entity(user, EntityManager);
-                    if (injector.Comp.ToggleState == InjectorToggleMode.Draw)
-                    {
-                        Popup.PopupEntity(Loc.GetString("injector-component-drawing-target",
-            ("user", userName)), user, target);
-                    }
-                    else
-                    {
-                        Popup.PopupEntity(Loc.GetString("injector-component-injecting-target",
-            ("user", userName)), user, target);
-                    }
-                }
-
-                // Check if the target is incapacitated or in combat mode and modify time accordingly.
-                if (MobState.IsIncapacitated(target))
-                {
-                    actualDelay /= 2.5f;
-                }
-                else if (Combat.IsInCombatMode(target))
-                {
-                    // Slightly increase the delay when the target is in combat mode. Helps prevents cheese injections in
-                    // combat with fast syringes & lag.
-                    actualDelay += TimeSpan.FromSeconds(1);
-                }
-
-                // Add an admin log, using the "force feed" log type. It's not quite feeding, but the effect is the same.
-                if (injector.Comp.ToggleState == InjectorToggleMode.Inject)
-                {
-                    AdminLogger.Add(LogType.ForceFeed,
-                        $"{ToPrettyString(user):user} is attempting to inject {ToPrettyString(target):target} with a solution {SharedSolutionContainerSystem.ToPrettyString(solution):solution}");
+                    Popup.PopupEntity(Loc.GetString("injector-component-drawing-target",
+        ("user", userName)), user, target);
                 }
                 else
                 {
-                    AdminLogger.Add(LogType.ForceFeed,
-                        $"{ToPrettyString(user):user} is attempting to draw {injector.Comp.TransferAmount.ToString()} units from {ToPrettyString(target):target}");
+                    Popup.PopupEntity(Loc.GetString("injector-component-injecting-target",
+        ("user", userName)), user, target);
                 }
+            }
+
+            // Check if the target is incapacitated or in combat mode and modify time accordingly.
+            if (MobState.IsIncapacitated(target))
+            {
+                actualDelay /= 2.5f;
+            }
+            else if (Combat.IsInCombatMode(target))
+            {
+                // Slightly increase the delay when the target is in combat mode. Helps prevents cheese injections in
+                // combat with fast syringes & lag.
+                actualDelay += TimeSpan.FromSeconds(1);
+            }
+
+            // Add an admin log, using the "force feed" log type. It's not quite feeding, but the effect is the same.
+            if (injector.Comp.ToggleState == InjectorToggleMode.Inject)
+            {
+                AdminLogger.Add(LogType.ForceFeed,
+                    $"{ToPrettyString(user):user} is attempting to inject {ToPrettyString(target):target} with a solution {SharedSolutionContainerSystem.ToPrettyString(solution):solution}");
             }
             else
             {
-                // Self-injections take half as long.
-                actualDelay /= 2;
+                AdminLogger.Add(LogType.ForceFeed,
+                    $"{ToPrettyString(user):user} is attempting to draw {injector.Comp.TransferAmount.ToString()} units from {ToPrettyString(target):target}");
+            }
+        }
+        else
+        {
+            // Self-injections take half as long.
+            actualDelay /= 2;
 
-                if (injector.Comp.ToggleState == InjectorToggleMode.Inject)
-                {
-                    AdminLogger.Add(LogType.Ingestion,
-                        $"{ToPrettyString(user):user} is attempting to inject themselves with a solution {SharedSolutionContainerSystem.ToPrettyString(solution):solution}.");
-                }
-                else
-                {
-                    AdminLogger.Add(LogType.ForceFeed,
-                        $"{ToPrettyString(user):user} is attempting to draw {injector.Comp.TransferAmount.ToString()} units from themselves.");
-                }
+            if (injector.Comp.ToggleState == InjectorToggleMode.Inject)
+            {
+                AdminLogger.Add(LogType.Ingestion,
+                    $"{ToPrettyString(user):user} is attempting to inject themselves with a solution {SharedSolutionContainerSystem.ToPrettyString(solution):solution}.");
+            }
+            else
+            {
+                AdminLogger.Add(LogType.ForceFeed,
+                    $"{ToPrettyString(user):user} is attempting to draw {injector.Comp.TransferAmount.ToString()} units from themselves.");
             }
         }
 
-        var ev = new RMCSyringeGetDelayEvent(actualDelay, injector.Comp.ToggleState, user, target);
+        var ev = new RMCSyringeGetDelayEvent(baseDelay, injector.Comp.ToggleState, user, target);
         RaiseLocalEvent(injector, ref ev);
 
         if (ev.Cancelled)
