@@ -55,7 +55,6 @@
   - type: VehicleSmashable
     deleteOnHit: false
     damageOnHit: 100
-    blocksUntilDestroyed: true
   - type: MeleeSound
     soundGroups:
       Brute:

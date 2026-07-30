@@ -1168,6 +1168,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (smashable.SlowdownDuration <= 0f || smashable.SlowdownMultiplier >= 1f)
             return;
 
+        if (smashable.SlowdownBelowWeightClass is { } maxWeight && mover.WeightClass >= maxWeight)
+            return;
+
         var now = _timing.CurTime;
         mover.SmashSlowdownMultiplier = MathF.Min(mover.SmashSlowdownMultiplier, smashable.SlowdownMultiplier);
         var until = now + TimeSpan.FromSeconds(smashable.SlowdownDuration);

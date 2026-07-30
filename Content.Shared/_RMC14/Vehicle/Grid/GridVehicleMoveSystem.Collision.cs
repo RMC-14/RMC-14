@@ -472,14 +472,34 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             return CollisionHandlingResult.Blocked;
         }
 
-        if (applyEffects)
-            TrySmash(other, vehicle, ref playedCollisionSound);
+        if (smashable.MinDestroyWeightClass is { } minDestroy && mover.WeightClass < minDestroy)
+        {
+            if (applyEffects)
+            {
+                PlayCollisionSound(vehicle, ref playedCollisionSound);
+                ApplyWheelCollisionDamage(vehicle, mover, wheelDamage);
+            }
 
-        if (smashable.BlocksUntilDestroyed && !TerminatingOrDeleted(other))
+            AddBlockingCollision(vehicle, other, collisionAabb, otherAabb, clearance, mapId, debug, blockers);
+            return CollisionHandlingResult.Blocked;
+        }
+
+        if (!applyEffects)
+            return CollisionHandlingResult.Continue;
+
+        TrySmash(other, vehicle, ref playedCollisionSound);
+
+        if (smashable.MinDestroyWeightClass == null && smashable.MinContinueWeightClass == null)
+            return CollisionHandlingResult.Continue;
+
+        if (!TerminatingOrDeleted(other))
         {
             AddBlockingCollision(vehicle, other, collisionAabb, otherAabb, clearance, mapId, debug, blockers);
             return CollisionHandlingResult.Blocked;
         }
+
+        if (mover.WeightClass < smashable.MinContinueWeightClass)
+            return CollisionHandlingResult.Blocked;
 
         return CollisionHandlingResult.Continue;
     }

@@ -6,6 +6,8 @@
   description: It's an immobile card-locked storage unit.
   components:
   - type: VehicleSmashable
+    minDestroyWeightClass: Light
+    minContinueWeightClass: Medium
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/standard.rsi
     layers:
