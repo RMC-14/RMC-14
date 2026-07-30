@@ -2,6 +2,7 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Commendations;
 using Content.Shared._RMC14.Dialog;
+using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.ManageHive.Boons;
@@ -38,6 +39,7 @@ public sealed class ManageHiveSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
+    [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
     [Dependency] private readonly SharedXenoWatchSystem _xenoWatch = default!;
     [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
@@ -64,6 +66,16 @@ public sealed class ManageHiveSystem : EntitySystem
         SubscribeLocalEvent<ManageHiveComponent, ManageHiveDevolveMessageEvent>(OnManageHiveDevolveMessage);
         SubscribeLocalEvent<ManageHiveComponent, ManageHiveTeamsEvent>(OnManageHiveTeams);
 
+        SubscribeLocalEvent<ManageHiveComponent, ManageHivePermissionsEvent>(OnManageHivePermissions);
+        SubscribeLocalEvent<ManageHiveComponent, ManageHivePermissionsHarmEvent>(OnManageHivePermissionsHarm);
+        SubscribeLocalEvent<ManageHiveComponent, ManageHivePermissionsHarmChosenEvent>(OnManageHivePermissionsHarmChosen);
+        SubscribeLocalEvent<ManageHiveComponent, ManageHivePermissionsConstructionEvent>(OnManageHivePermissionsConstruction);
+        SubscribeLocalEvent<ManageHiveComponent, ManageHivePermissionsConstructionChosenEvent>(OnManageHivePermissionsConstructionChosen);
+        SubscribeLocalEvent<ManageHiveComponent, ManageHivePermissionsDeconstructionEvent>(OnManageHivePermissionsDeconstruction);
+        SubscribeLocalEvent<ManageHiveComponent, ManageHivePermissionsDeconstructionChosenEvent>(OnManageHivePermissionsDeconstructionChosen);
+        SubscribeLocalEvent<ManageHiveComponent, ManageHivePermissionsUnnestEvent>(OnManageHivePermissionsUnnest);
+        SubscribeLocalEvent<ManageHiveComponent, ManageHivePermissionsUnnestChosenEvent>(OnManageHivePermissionsUnnestChosen);
+
         Subs.CVar(_config, RMCCVars.RMCJelliesPerQueen, v => _jelliesPerQueen = v, true);
         Subs.CVar(_config, RMCCVars.RMCBurrowedLarvaSacrificeTimeMinutes, v => _burrowedLarvaSacrificeTime = TimeSpan.FromMinutes(v), true);
         Subs.CVar(_config, RMCCVars.RMCBurrowedLarvaEvolutionPointsPer, v => _burrowedLarvaEvolutionPointsPer = v, true);
@@ -88,8 +100,234 @@ public sealed class ManageHiveSystem : EntitySystem
         options.Add(new DialogOption(Loc.GetString("rmc-hivemanagement-exchange-larva"), new ManageHiveSacrificeBurrowedEvent()));
         options.Add(new DialogOption(Loc.GetString("rmc-boon-activate"), new ManageHiveActivateBoonsEvent()));
         options.Add(new DialogOption(Loc.GetString("rmc-hivemanagement-manage-teams"), new ManageHiveTeamsEvent()));
+        options.Add(new DialogOption(Loc.GetString("rmc-hivemanagement-permissions"), new ManageHivePermissionsEvent()));
 
         _dialog.OpenOptions(manage, Loc.GetString("rmc-hivemanagement-hive-management"), options, Loc.GetString("rmc-hivemanagement-manage-the-hive"));
+    }
+
+    private void OnManageHivePermissions(Entity<ManageHiveComponent> manage, ref ManageHivePermissionsEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        var options = new List<DialogOption>
+        {
+            new(Loc.GetString("rmc-hivemanagement-permissions-harming"), new ManageHivePermissionsHarmEvent()),
+            new(Loc.GetString("rmc-hivemanagement-permissions-construction"), new ManageHivePermissionsConstructionEvent()),
+            new(Loc.GetString("rmc-hivemanagement-permissions-deconstruction"), new ManageHivePermissionsDeconstructionEvent()),
+            new(Loc.GetString("rmc-hivemanagement-permissions-unnesting"), new ManageHivePermissionsUnnestEvent()),
+        };
+
+        _dialog.OpenOptions(manage, Loc.GetString("rmc-hivemanagement-permissions-title"), options);
+    }
+
+    private void OnManageHivePermissionsHarm(Entity<ManageHiveComponent> manage, ref ManageHivePermissionsHarmEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!CanChangePermissionPopup(manage, out var hive, h => h.Comp.HarmPermissionChangeAt))
+            return;
+
+        var options = new List<DialogOption>
+        {
+            new(Loc.GetString("rmc-hivemanagement-permissions-harm-forbidden"), new ManageHivePermissionsHarmChosenEvent(XenoHarmPermission.Forbidden)),
+            new(Loc.GetString("rmc-hivemanagement-permissions-harm-restricted"), new ManageHivePermissionsHarmChosenEvent(XenoHarmPermission.RestrictedInfected)),
+            new(Loc.GetString("rmc-hivemanagement-permissions-harm-allowed"), new ManageHivePermissionsHarmChosenEvent(XenoHarmPermission.Allowed)),
+        };
+
+        var current = Loc.GetString(GetPermissionLoc(hive.Comp.HarmPermission));
+        _dialog.OpenOptions(manage, Loc.GetString("rmc-hivemanagement-permissions-harming"), options, Loc.GetString("rmc-hivemanagement-permissions-current", ("value", current)));
+    }
+
+    private void OnManageHivePermissionsHarmChosen(Entity<ManageHiveComponent> manage, ref ManageHivePermissionsHarmChosenEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!CanChangePermissionPopup(manage, out var hive, h => h.Comp.HarmPermissionChangeAt))
+            return;
+
+        if (hive.Comp.HarmPermission == args.Choice)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-hivemanagement-permissions-already-set"), manage, manage, PopupType.MediumCaution);
+            return;
+        }
+
+        _hive.SetHarmPermission(hive, args.Choice);
+
+        var msg = Loc.GetString("rmc-hivemanagement-permissions-harm-announce", ("value", Loc.GetString(GetPermissionLoc(args.Choice))));
+        _xenoAnnounce.AnnounceToHive(manage.Owner, hive, msg);
+    }
+
+    private void OnManageHivePermissionsConstruction(Entity<ManageHiveComponent> manage, ref ManageHivePermissionsConstructionEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!CanChangePermissionPopup(manage, out var hive, h => h.Comp.ConstructionPermissionChangeAt))
+            return;
+
+        var options = GetConstructionPermissionOptions(false);
+        var current = Loc.GetString(GetPermissionLoc(hive.Comp.ConstructionPermission));
+        _dialog.OpenOptions(manage, Loc.GetString("rmc-hivemanagement-permissions-construction"), options, Loc.GetString("rmc-hivemanagement-permissions-current", ("value", current)));
+    }
+
+    private void OnManageHivePermissionsConstructionChosen(Entity<ManageHiveComponent> manage, ref ManageHivePermissionsConstructionChosenEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!CanChangePermissionPopup(manage, out var hive, h => h.Comp.ConstructionPermissionChangeAt))
+            return;
+
+        if (hive.Comp.ConstructionPermission == args.Choice)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-hivemanagement-permissions-already-set"), manage, manage, PopupType.MediumCaution);
+            return;
+        }
+
+        _hive.SetConstructionPermission(hive, args.Choice);
+
+        var msg = Loc.GetString("rmc-hivemanagement-permissions-construction-announce", ("value", Loc.GetString(GetPermissionLoc(args.Choice))));
+        _xenoAnnounce.AnnounceToHive(manage.Owner, hive, msg);
+    }
+
+    private void OnManageHivePermissionsDeconstruction(Entity<ManageHiveComponent> manage, ref ManageHivePermissionsDeconstructionEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!CanChangePermissionPopup(manage, out var hive, h => h.Comp.DeconstructionPermissionChangeAt))
+            return;
+
+        var options = GetConstructionPermissionOptions(true);
+        var current = Loc.GetString(GetPermissionLoc(hive.Comp.DeconstructionPermission));
+        _dialog.OpenOptions(manage, Loc.GetString("rmc-hivemanagement-permissions-deconstruction"), options, Loc.GetString("rmc-hivemanagement-permissions-current", ("value", current)));
+    }
+
+    private void OnManageHivePermissionsDeconstructionChosen(Entity<ManageHiveComponent> manage, ref ManageHivePermissionsDeconstructionChosenEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!CanChangePermissionPopup(manage, out var hive, h => h.Comp.DeconstructionPermissionChangeAt))
+            return;
+
+        if (hive.Comp.DeconstructionPermission == args.Choice)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-hivemanagement-permissions-already-set"), manage, manage, PopupType.MediumCaution);
+            return;
+        }
+
+        _hive.SetDeconstructionPermission(hive, args.Choice);
+
+        var msg = Loc.GetString("rmc-hivemanagement-permissions-deconstruction-announce", ("value", Loc.GetString(GetPermissionLoc(args.Choice))));
+        _xenoAnnounce.AnnounceToHive(manage.Owner, hive, msg);
+    }
+
+    private void OnManageHivePermissionsUnnest(Entity<ManageHiveComponent> manage, ref ManageHivePermissionsUnnestEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!CanChangePermissionPopup(manage, out var hive, h => h.Comp.UnnestPermissionChangeAt))
+            return;
+
+        var options = new List<DialogOption>
+        {
+            new(Loc.GetString("rmc-hivemanagement-permissions-unnest-builders"), new ManageHivePermissionsUnnestChosenEvent(XenoUnnestPermission.Builders)),
+            new(Loc.GetString("rmc-hivemanagement-permissions-level-anyone"), new ManageHivePermissionsUnnestChosenEvent(XenoUnnestPermission.Anyone)),
+        };
+
+        var current = Loc.GetString(GetPermissionLoc(hive.Comp.UnnestPermission));
+        _dialog.OpenOptions(manage, Loc.GetString("rmc-hivemanagement-permissions-unnesting"), options, Loc.GetString("rmc-hivemanagement-permissions-current", ("value", current)));
+    }
+
+    private void OnManageHivePermissionsUnnestChosen(Entity<ManageHiveComponent> manage, ref ManageHivePermissionsUnnestChosenEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!CanChangePermissionPopup(manage, out var hive, h => h.Comp.UnnestPermissionChangeAt))
+            return;
+
+        if (hive.Comp.UnnestPermission == args.Choice)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-hivemanagement-permissions-already-set"), manage, manage, PopupType.MediumCaution);
+            return;
+        }
+
+        _hive.SetUnnestPermission(hive, args.Choice);
+
+        var msg = Loc.GetString("rmc-hivemanagement-permissions-unnest-announce", ("value", Loc.GetString(GetPermissionLoc(args.Choice))));
+        _xenoAnnounce.AnnounceToHive(manage.Owner, hive, msg);
+    }
+
+    private List<DialogOption> GetConstructionPermissionOptions(bool deconstruction)
+    {
+        DialogOption Make(XenoConstructionPermission permission)
+        {
+            var ev = deconstruction
+                ? (object) new ManageHivePermissionsDeconstructionChosenEvent(permission)
+                : new ManageHivePermissionsConstructionChosenEvent(permission);
+            return new DialogOption(Loc.GetString(GetPermissionLoc(permission)), ev);
+        }
+
+        return new List<DialogOption>
+        {
+            Make(XenoConstructionPermission.Queen),
+            Make(XenoConstructionPermission.Leaders),
+            Make(XenoConstructionPermission.Anyone),
+        };
+    }
+
+    private bool CanChangePermissionPopup(Entity<ManageHiveComponent> manage, out Entity<HiveComponent> hive, Func<Entity<HiveComponent>, TimeSpan?> getChangeAt)
+    {
+        hive = default;
+        if (_hive.GetHive(manage.Owner) is not { } userHive)
+            return false;
+
+        hive = userHive;
+        if (_hive.IsPermissionChangeOnCooldown(getChangeAt(hive), out var remaining))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-hivemanagement-permissions-cooldown", ("seconds", (int) remaining.TotalSeconds)), manage, manage, PopupType.MediumCaution);
+            return false;
+        }
+
+        return true;
+    }
+
+    private static string GetPermissionLoc(XenoHarmPermission permission)
+    {
+        return permission switch
+        {
+            XenoHarmPermission.Forbidden => "rmc-hivemanagement-permissions-harm-forbidden",
+            XenoHarmPermission.RestrictedInfected => "rmc-hivemanagement-permissions-harm-restricted",
+            XenoHarmPermission.Allowed => "rmc-hivemanagement-permissions-harm-allowed",
+            _ => string.Empty,
+        };
+    }
+
+    private static string GetPermissionLoc(XenoConstructionPermission permission)
+    {
+        return permission switch
+        {
+            XenoConstructionPermission.Queen => "rmc-hivemanagement-permissions-level-queen",
+            XenoConstructionPermission.Leaders => "rmc-hivemanagement-permissions-level-leaders",
+            XenoConstructionPermission.Anyone => "rmc-hivemanagement-permissions-level-anyone",
+            _ => string.Empty,
+        };
+    }
+
+    private static string GetPermissionLoc(XenoUnnestPermission permission)
+    {
+        return permission switch
+        {
+            XenoUnnestPermission.Builders => "rmc-hivemanagement-permissions-unnest-builders",
+            XenoUnnestPermission.Anyone => "rmc-hivemanagement-permissions-level-anyone",
+            _ => string.Empty,
+        };
     }
 
     private void OnManageHiveDevolve(Entity<ManageHiveComponent> manage, ref ManageHiveDevolveEvent args)
