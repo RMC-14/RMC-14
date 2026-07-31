@@ -705,6 +705,9 @@
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/urban.rsi
   - type: ClothingRequireEquipped
     whitelist: null
+  - type: Tag
+    tags:
+    - RMCSynthAllowedArmor
 
 # Forced Camo Variants for Vendor Parity
 - type: entity
