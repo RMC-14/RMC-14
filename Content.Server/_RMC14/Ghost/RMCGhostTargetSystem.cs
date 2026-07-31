@@ -49,6 +49,11 @@ public sealed class RMCGhostTargetSystem : EntitySystem
     private static readonly ProtoId<NpcFactionPrototype> MarineFaction = "UNMC";
     private static readonly ProtoId<NpcFactionPrototype> XenoFaction = "RMCXeno";
     private static readonly ProtoId<JobPrototype> SquadLeaderJob = "CMSquadLeader";
+    private static readonly ProtoId<JobPrototype> XenoQueenJob = "CMXenoQueen";
+    private static readonly ProtoId<JobPrototype> XenoKingJob = "RMCXenoKing";
+    private static readonly SpriteSpecifier.Rsi SquadLeaderMapIcon = new(
+        new ResPath("/Textures/_RMC14/Interface/map_blips.rsi"),
+        "leader");
 
     private static readonly LocId EmptyTitle = string.Empty;
     private static readonly LocId MarinesTitle = "rmc-ghost-target-window-group-marines";
@@ -65,7 +70,6 @@ public sealed class RMCGhostTargetSystem : EntitySystem
     [Dependency] private readonly IAdminManager _adminManager = default!;
     [Dependency] private readonly FollowerSystem _follower = default!;
     [Dependency] private readonly JobSystem _jobs = default!;
-    [Dependency] private readonly SharedMarineSystem _marine = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
@@ -914,10 +918,16 @@ public sealed class RMCGhostTargetSystem : EntitySystem
         if (!HasComp<MarineComponent>(uid))
             return tactical;
 
-        var marine = _marine.GetMarineIcon(uid);
-        return (
-            marine.Icon as SpriteSpecifier.Rsi ?? tactical.Icon,
-            marine.Background as SpriteSpecifier.Rsi ?? tactical.Background);
+        // Marine HUD icons use a different size and visual language from tactical map blips.
+        // Keep the map icon family here while applying the same role precedence as the HUD:
+        // acting squad leader, specialization override, then the marine's base map icon.
+        if (HasComp<SquadLeaderComponent>(uid))
+            return (SquadLeaderMapIcon, tactical.Background);
+
+        if (TryComp(uid, out MapBlipIconOverrideComponent? mapBlip) && mapBlip.Icon is { } overrideIcon)
+            return (overrideIcon, tactical.Background);
+
+        return tactical;
     }
 
     private int GetFollowerCount(EntityUid uid)
@@ -1081,10 +1091,11 @@ public sealed class RMCGhostTargetSystem : EntitySystem
 
         if (TryComp(uid, out XenoComponent? xeno))
         {
+            var isRuler = xeno.Role == XenoQueenJob || xeno.Role == XenoKingJob;
             AddMembership(
                 target,
                 RMCGhostTargetSectionKind.Xenos,
-                new RMCGhostTargetSortKey(xeno.Tier));
+                new RMCGhostTargetSortKey(isRuler ? 1 : 0, xeno.Tier));
             return;
         }
 
