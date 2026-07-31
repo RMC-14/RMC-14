@@ -126,7 +126,10 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
 
         foreach (var (proto, _) in synthTypes)
         {
-            options.Add(new DialogOption($"{proto.Name}", new GenerationSelectedActionEvent(proto.ID)));
+            var desc = proto.TryGetComponent(out SynthGenerationComponent? genComp, _compFactory)
+                ? genComp.Description
+                : string.Empty;
+            options.Add(new DialogOption(proto.Name, new GenerationSelectedActionEvent(proto.ID), description: desc));
         }
 
         _dialog.OpenOptions(ent.Owner, "Select a Generation", options, "Available Generations");

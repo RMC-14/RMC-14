@@ -7,6 +7,7 @@
     generation: RMCSynthGenOne
     damageModifier: RMCSynthGenOne
     priority: 1
+    description: A simple but sturdy synthetic that trades some agility for durability.
   - type: Skills
     skills:
       RMCSkillCqc: 3
@@ -27,7 +28,7 @@
       RMCSkillIntel: 1
       RMCSkillDomestics: 2
   - type: RMCLeapProtection
-    inherentStunDuration: 3
+    inherentStunDuration: 1.5
     fullProtection: true
   - type: MobThresholds
     thresholds:
@@ -51,6 +52,7 @@
     generation: RMCSynthGenTwo
     damageModifier: RMCSynthGenTwo
     priority: 2
+    description: Visually improved but mechanically similar to Generation One.
   - type: Skills
     skills:
       RMCSkillCqc: 3
@@ -70,6 +72,9 @@
       RMCSkillJtac: 1
       RMCSkillIntel: 1
       RMCSkillDomestics: 2
+  - type: RMCLeapProtection
+    inherentStunDuration: 1.5
+    fullProtection: true
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -91,6 +96,7 @@
   - type: SynthGeneration
     generation: RMCSynthGenThree
     priority: 3
+    description: Sacrifices some durability for improved agility and support capabilities.
   - type: Skills
     skills:
       RMCSkillCqc: 5
@@ -129,6 +135,7 @@
   - type: SynthGeneration
     generation: RMCSynthWhiteout
     priority: 3
+    description: Classified initiative. Full combat systems maximising lethality.
   - type: Skills
     skills:
         RMCSkillCqc: 5

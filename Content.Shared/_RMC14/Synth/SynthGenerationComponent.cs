@@ -26,6 +26,12 @@ public sealed partial class SynthGenerationComponent : Component
     public int Priority;
 
     /// <summary>
+    /// Short description shown in the generation selection dialog.
+    /// </summary>
+    [DataField]
+    public string Description = string.Empty;
+
+    /// <summary>
     /// Sets choices, else it defaults to Gens 1,2,3
     /// </summary>
     [DataField]

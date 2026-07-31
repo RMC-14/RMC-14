@@ -119,6 +119,28 @@ public sealed class DialogBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
             label.AddStyleClass("CMAlignLeft");
             contentContainer.AddChild(label);
 
+            if (!string.IsNullOrEmpty(option.Description))
+            {
+                var textBox = new BoxContainer
+                {
+                    Orientation = BoxContainer.LayoutOrientation.Vertical,
+                    HorizontalExpand = true
+                };
+                contentContainer.RemoveChild(label);
+                textBox.AddChild(label);
+
+                var descLabel = new Label
+                {
+                    Text = option.Description,
+                    HorizontalExpand = true,
+                    FontColorOverride = Color.FromHex("#aaaaaa"),
+                    ClipText = false
+                };
+                descLabel.AddStyleClass("CMAlignLeft");
+                textBox.AddChild(descLabel);
+                contentContainer.AddChild(textBox);
+            }
+
             button.AddChild(contentContainer);
 
             var index = i;
