@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: c0rigin
-  changes:
-  - message: Non-wagging vulp tails are now properly labeled as such
-    type: Fix
-  id: 3047
-  time: '2026-04-02T05:02:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9422
 - author: CatAndHats
   changes:
   - message: The xenonid mechanic of bringing dead larva to the hivecore, which opens
@@ -4570,5 +4563,17 @@
   id: 3546
   time: '2026-07-31T23:08:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10356
+- author: SharkSnake98
+  changes:
+  - message: Replaced the generic shuttles in the CLF & CMB ERT areas with the custom
+      shuttles
+    type: Tweak
+  - message: Changed a chair in the ERT area to a sofa
+    type: Tweak
+  - message: Fixed the couch placement in the ERT areas
+    type: Fix
+  id: 3547
+  time: '2026-07-31T23:09:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10282
 Name: RMC14
 Order: -1
