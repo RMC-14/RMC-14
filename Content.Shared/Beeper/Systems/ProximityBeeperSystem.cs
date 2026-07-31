@@ -12,7 +12,7 @@ namespace Content.Shared.Beeper.Systems;
 /// </summary>
 public sealed class ProximityBeeperSystem : EntitySystem
 {
-    [Dependency] private readonly BeeperSystem _beeper = default!;
+    [Dependency] private BeeperSystem _beeper = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

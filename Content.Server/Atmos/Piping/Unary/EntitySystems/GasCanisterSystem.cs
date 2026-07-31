@@ -16,9 +16,9 @@ namespace Content.Server.Atmos.Piping.Unary.EntitySystems;
 
 public sealed class GasCanisterSystem : SharedGasCanisterSystem
 {
-    [Dependency] private readonly AtmosphereSystem _atmos = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly NodeContainerSystem _nodeContainer = default!;
+    [Dependency] private AtmosphereSystem _atmos = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private NodeContainerSystem _nodeContainer = default!;
 
     public override void Initialize()
     {

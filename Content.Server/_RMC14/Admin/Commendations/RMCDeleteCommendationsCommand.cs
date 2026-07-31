@@ -15,11 +15,11 @@ namespace Content.Server._RMC14.Admin.Commendations;
 [AdminCommand(AdminFlags.Commendations)]
 public sealed class RMCDeleteCommendationsCommand : LocalizedCommands
 {
-    [Dependency] private readonly IPlayerLocator _locator = default!;
-    [Dependency] private readonly IServerDbManager _db = default!;
-    [Dependency] private readonly IPlayerManager _players = default!;
-    [Dependency] private readonly IAdminLogManager _adminLog = default!;
-    [Dependency] private readonly IChatManager _chat = default!;
+    [Dependency] private IPlayerLocator _locator = default!;
+    [Dependency] private IServerDbManager _db = default!;
+    [Dependency] private IPlayerManager _players = default!;
+    [Dependency] private IAdminLogManager _adminLog = default!;
+    [Dependency] private IChatManager _chat = default!;
 
     public override string Command => "rmcdeletecommendations";
 

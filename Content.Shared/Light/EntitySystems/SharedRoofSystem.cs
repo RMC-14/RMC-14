@@ -12,8 +12,8 @@ namespace Content.Shared.Light.EntitySystems;
 /// </summary>
 public abstract class SharedRoofSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly AreaSystem _area = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private AreaSystem _area = default!;
 
     private HashSet<Entity<IsRoofComponent>> _roofSet = new();
 

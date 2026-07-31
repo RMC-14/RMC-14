@@ -16,8 +16,8 @@ namespace Content.Shared.Singularity.EntitySystems;
 public abstract class SharedEventHorizonSystem : EntitySystem
 {
 
-    [Dependency] private readonly FixtureSystem _fixtures = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private FixtureSystem _fixtures = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] protected readonly IViewVariablesManager Vvm = default!;
 
     public override void Initialize()

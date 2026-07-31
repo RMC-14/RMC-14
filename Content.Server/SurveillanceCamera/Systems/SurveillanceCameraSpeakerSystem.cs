@@ -12,10 +12,10 @@ namespace Content.Server.SurveillanceCamera;
 /// </summary>
 public sealed class SurveillanceCameraSpeakerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
-    [Dependency] private readonly SpeechSoundSystem _speechSound = default!;
-    [Dependency] private readonly ChatSystem _chatSystem = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private SharedAudioSystem _audioSystem = default!;
+    [Dependency] private SpeechSoundSystem _speechSound = default!;
+    [Dependency] private ChatSystem _chatSystem = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

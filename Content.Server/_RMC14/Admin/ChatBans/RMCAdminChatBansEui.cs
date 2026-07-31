@@ -12,11 +12,11 @@ namespace Content.Server._RMC14.Admin.ChatBans;
 
 public sealed class RMCAdminChatBansEui : BaseEui
 {
-    [Dependency] private readonly IAdminManager _admin = default!;
-    [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly ILogManager _log = default!;
-    [Dependency] private readonly IPlayerLocator _playerLocator = default!;
-    [Dependency] private readonly RMCChatBansManager _rmcChatBans = default!;
+    [Dependency] private IAdminManager _admin = default!;
+    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private ILogManager _log = default!;
+    [Dependency] private IPlayerLocator _playerLocator = default!;
+    [Dependency] private RMCChatBansManager _rmcChatBans = default!;
 
     public RMCAdminChatBansEui()
     {

@@ -9,7 +9,7 @@ namespace Content.Shared.HealthExaminable;
 
 public sealed class HealthExaminableSystem : EntitySystem
 {
-    [Dependency] private readonly ExamineSystemShared _examineSystem = default!;
+    [Dependency] private ExamineSystemShared _examineSystem = default!;
 
     public override void Initialize()
     {

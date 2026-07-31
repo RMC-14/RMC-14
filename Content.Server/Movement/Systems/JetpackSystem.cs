@@ -10,8 +10,8 @@ namespace Content.Server.Movement.Systems;
 
 public sealed class JetpackSystem : SharedJetpackSystem
 {
-    [Dependency] private readonly GasTankSystem _gasTank = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private GasTankSystem _gasTank = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     protected override bool CanEnable(EntityUid uid, JetpackComponent component)
     {

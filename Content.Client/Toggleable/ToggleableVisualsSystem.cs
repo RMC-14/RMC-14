@@ -20,8 +20,8 @@ namespace Content.Client.Toggleable;
 /// <see cref="ToggleableVisualsComponent"/>
 public sealed class ToggleableVisualsSystem : VisualizerSystem<ToggleableVisualsComponent>
 {
-    [Dependency] private readonly SharedItemSystem _item = default!;
-    [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
+    [Dependency] private SharedItemSystem _item = default!;
+    [Dependency] private SharedPointLightSystem _pointLight = default!;
 
     public override void Initialize()
     {

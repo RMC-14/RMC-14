@@ -18,16 +18,16 @@ namespace Content.Shared.Stacks
     [UsedImplicitly]
     public abstract class SharedStackSystem : EntitySystem
     {
-        [Dependency] private readonly IGameTiming _gameTiming = default!;
-        [Dependency] private readonly IPrototypeManager _prototype = default!;
-        [Dependency] private readonly IViewVariablesManager _vvm = default!;
+        [Dependency] private IGameTiming _gameTiming = default!;
+        [Dependency] private IPrototypeManager _prototype = default!;
+        [Dependency] private IViewVariablesManager _vvm = default!;
         [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
         [Dependency] protected readonly SharedHandsSystem Hands = default!;
         [Dependency] protected readonly SharedTransformSystem Xform = default!;
-        [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-        [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+        [Dependency] private EntityLookupSystem _entityLookup = default!;
+        [Dependency] private SharedPhysicsSystem _physics = default!;
         [Dependency] protected readonly SharedPopupSystem Popup = default!;
-        [Dependency] private readonly SharedStorageSystem _storage = default!;
+        [Dependency] private SharedStorageSystem _storage = default!;
 
         public override void Initialize()
         {

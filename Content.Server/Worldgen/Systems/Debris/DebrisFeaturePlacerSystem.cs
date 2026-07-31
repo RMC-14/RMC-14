@@ -17,12 +17,12 @@ namespace Content.Server.Worldgen.Systems.Debris;
 /// </summary>
 public sealed class DebrisFeaturePlacerSystem : BaseWorldSystem
 {
-    [Dependency] private readonly NoiseIndexSystem _noiseIndex = default!;
-    [Dependency] private readonly PoissonDiskSampler _sampler = default!;
-    [Dependency] private readonly TransformSystem _xformSys = default!;
-    [Dependency] private readonly ILogManager _logManager = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private NoiseIndexSystem _noiseIndex = default!;
+    [Dependency] private PoissonDiskSampler _sampler = default!;
+    [Dependency] private TransformSystem _xformSys = default!;
+    [Dependency] private ILogManager _logManager = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     private ISawmill _sawmill = default!;
 

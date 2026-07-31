@@ -8,7 +8,7 @@ namespace Content.Server._RMC14.GameTicking;
 
 public sealed class RMCGameTickerSystem : SharedRMCGameTickerSystem
 {
-    [Dependency] private readonly GameTicker _gameTicker = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
 
     public override IReadOnlyDictionary<NetUserId, PlayerGameStatus> PlayerGameStatuses => _gameTicker.PlayerGameStatuses;
 

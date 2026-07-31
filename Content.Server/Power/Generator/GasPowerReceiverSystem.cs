@@ -14,8 +14,8 @@ namespace Content.Server.Power.Generator;
 /// </summary>
 public sealed class GasPowerReceiverSystem : EntitySystem
 {
-    [Dependency] private readonly AtmosphereSystem _atmosphereSystem = default!;
-    [Dependency] private readonly NodeContainerSystem _nodeContainer = default!;
+    [Dependency] private AtmosphereSystem _atmosphereSystem = default!;
+    [Dependency] private NodeContainerSystem _nodeContainer = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

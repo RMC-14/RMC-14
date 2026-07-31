@@ -11,7 +11,7 @@ namespace Content.Server.StationEvents.Events;
 
 public sealed class MassHallucinationsRule : StationEventSystem<MassHallucinationsRuleComponent>
 {
-    [Dependency] private readonly ParacusiaSystem _paracusia = default!;
+    [Dependency] private ParacusiaSystem _paracusia = default!;
 
     protected override void Started(EntityUid uid, MassHallucinationsRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {

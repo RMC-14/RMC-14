@@ -9,8 +9,8 @@ namespace Content.Server.Arcade.BlockGame;
 
 public sealed class BlockGameArcadeSystem : EntitySystem
 {
-    [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly SpeakOnUIClosedSystem _speakOnUIClosed = default!;
+    [Dependency] private UserInterfaceSystem _uiSystem = default!;
+    [Dependency] private SpeakOnUIClosedSystem _speakOnUIClosed = default!;
 
     public override void Initialize()
     {

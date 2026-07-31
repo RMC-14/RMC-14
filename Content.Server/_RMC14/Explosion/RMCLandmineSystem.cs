@@ -9,8 +9,8 @@ namespace Content.Server._RMC14.Explosion;
 
 public sealed partial class RMCLandmineSystem : SharedRMCLandmineSystem
 {
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly TriggerSystem _trigger = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private TriggerSystem _trigger = default!;
 
     public override void Initialize()
     {

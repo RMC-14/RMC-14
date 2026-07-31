@@ -75,7 +75,7 @@ public abstract class SharedStorageSystem : EntitySystem
 
     // RMC14
     [Dependency] protected readonly RMCStorageSystem RMCStorage = default!;
-    [Dependency] private readonly RMCHandsSystem _rmcHands = default!;
+    [Dependency] private RMCHandsSystem _rmcHands = default!;
 
     private EntityQuery<ItemComponent> _itemQuery;
     private EntityQuery<StackComponent> _stackQuery;

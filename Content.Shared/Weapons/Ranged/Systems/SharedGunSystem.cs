@@ -95,10 +95,10 @@ public abstract partial class SharedGunSystem : EntitySystem
     [Dependency] private   readonly INetConfigurationManager _netConfig = default!;
 
     // RMC14
-    [Dependency] private readonly AttachableHolderSystem _attachableHolder = default!;
-    [Dependency] private readonly SharedRMCFlamerSystem _flamer = default!;
-    [Dependency] private readonly VehicleWeaponsSystem _rmcVehicleWeapons = default!;
-    [Dependency] private readonly RMCSharedWeaponControllerSystem _rmcSharedWeaponController = default!;
+    [Dependency] private AttachableHolderSystem _attachableHolder = default!;
+    [Dependency] private SharedRMCFlamerSystem _flamer = default!;
+    [Dependency] private VehicleWeaponsSystem _rmcVehicleWeapons = default!;
+    [Dependency] private RMCSharedWeaponControllerSystem _rmcSharedWeaponController = default!;
 
     private const float InteractNextFire = 0.3f;
     private const double SafetyNextFire = 0.5;

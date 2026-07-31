@@ -13,9 +13,9 @@ namespace Content.Server._RMC14.Spawners;
 /// </summary>
 public sealed class AegisCorpseSpawnerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly RandomHumanoidSystem _randomHumanoid = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private RandomHumanoidSystem _randomHumanoid = default!;
 
     /// <summary>
     /// Global flag that determines if AEGIS corpse spawners should be activated this round

@@ -6,7 +6,7 @@ namespace Content.Shared.Eye.Blinding.Systems;
 
 public sealed class BlindfoldSystem : EntitySystem
 {
-    [Dependency] private readonly BlindableSystem _blindableSystem = default!;
+    [Dependency] private BlindableSystem _blindableSystem = default!;
 
     public override void Initialize()
     {

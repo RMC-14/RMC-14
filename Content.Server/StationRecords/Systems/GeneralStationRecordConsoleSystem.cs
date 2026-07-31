@@ -8,9 +8,9 @@ namespace Content.Server.StationRecords.Systems;
 
 public sealed class GeneralStationRecordConsoleSystem : EntitySystem
 {
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly StationRecordsSystem _stationRecords = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private StationRecordsSystem _stationRecords = default!;
 
     public override void Initialize()
     {

@@ -17,12 +17,12 @@ namespace Content.Server._RMC14.Announce
 {
     public sealed class MarinePresenceAnnounceSystem : EntitySystem
     {
-        [Dependency] private readonly ARESCoreSystem _aresCore = default!;
-        [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
-        [Dependency] private readonly SharedRankSystem _rankSystem = default!;
-        [Dependency] private readonly SquadSystem _squad = default!;
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-        [Dependency] private readonly StationRecordsSystem _stationRecords = default!;
+        [Dependency] private ARESCoreSystem _aresCore = default!;
+        [Dependency] private MarineAnnounceSystem _marineAnnounce = default!;
+        [Dependency] private SharedRankSystem _rankSystem = default!;
+        [Dependency] private SquadSystem _squad = default!;
+        [Dependency] private IPrototypeManager _prototypeManager = default!;
+        [Dependency] private StationRecordsSystem _stationRecords = default!;
 
         [ValidatePrototypeId<RadioChannelPrototype>]
         public readonly ProtoId<RadioChannelPrototype> CommonChannel = "MarineCommon";

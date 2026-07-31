@@ -11,9 +11,9 @@ namespace Content.Shared._RMC14.Camera;
 // we would be using the upstream system for cameras IF IT WAS NOT ABOMINABLE DOGSHIT
 public abstract class SharedRMCCameraSystem : EntitySystem
 {
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private readonly HashSet<EntProtoId> _refresh = new();
 

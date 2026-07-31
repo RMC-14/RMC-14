@@ -21,15 +21,15 @@ namespace Content.Shared._RMC14.Dropship.Utility.Systems;
 
 public abstract partial class SharedRMCEquipmentDeployerSystem : EntitySystem
 {
-    [Dependency] private readonly RMCAlertLevelSystem _alert = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedBuckleSystem _buckle = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SentrySystem _sentry = default!;
-    [Dependency] private readonly SharedWeaponMountSystem _weaponMount = default!;
+    [Dependency] private RMCAlertLevelSystem _alert = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedBuckleSystem _buckle = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SentrySystem _sentry = default!;
+    [Dependency] private SharedWeaponMountSystem _weaponMount = default!;
 
     public override void Initialize()
     {

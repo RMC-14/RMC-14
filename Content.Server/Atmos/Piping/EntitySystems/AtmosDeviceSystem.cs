@@ -11,8 +11,8 @@ namespace Content.Server.Atmos.Piping.EntitySystems
     [UsedImplicitly]
     public sealed class AtmosDeviceSystem : EntitySystem
     {
-        [Dependency] private readonly IGameTiming _gameTiming = default!;
-        [Dependency] private readonly AtmosphereSystem _atmosphereSystem = default!;
+        [Dependency] private IGameTiming _gameTiming = default!;
+        [Dependency] private AtmosphereSystem _atmosphereSystem = default!;
 
         private float _timer;
 

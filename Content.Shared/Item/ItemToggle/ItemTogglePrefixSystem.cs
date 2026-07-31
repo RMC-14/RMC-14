@@ -7,7 +7,7 @@ namespace Content.Shared.Item.ItemToggle;
 /// </summary>
 public sealed class ItemTogglePrefixSystem : EntitySystem
 {
-    [Dependency] private readonly SharedItemSystem _item = default!;
+    [Dependency] private SharedItemSystem _item = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

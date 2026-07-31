@@ -10,11 +10,11 @@ namespace Content.Shared._RMC14.Xenonids.Walker;
 
 public sealed class XenoResinWalkerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
-    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private XenoPlasmaSystem _xenoPlasma = default!;
 
     public override void Initialize()
     {

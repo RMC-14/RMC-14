@@ -46,26 +46,26 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     [Dependency] protected readonly ISharedPlayerManager Player = default!;
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
 
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly ARESCoreSystem _core = default!;
-    [Dependency] private readonly DialogSystem _dialog = default!;
-    [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly OrbitalCannonSystem _orbitalCannon = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
-    [Dependency] private readonly SquadSystem _squad = default!;
-    [Dependency] private readonly SharedSupplyDropSystem _supplyDrop = default!;
-    [Dependency] private readonly SharedTacticalMapSystem _tacticalMap = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private ARESCoreSystem _core = default!;
+    [Dependency] private DialogSystem _dialog = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedMarineAnnounceSystem _marineAnnounce = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private OrbitalCannonSystem _orbitalCannon = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private SharedCMChatSystem _rmcChat = default!;
+    [Dependency] private SquadSystem _squad = default!;
+    [Dependency] private SharedSupplyDropSystem _supplyDrop = default!;
+    [Dependency] private SharedTacticalMapSystem _tacticalMap = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
 
     private EntityQuery<ActorComponent> _actor;

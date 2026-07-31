@@ -11,8 +11,8 @@ namespace Content.Server.Anomaly.Effects;
 /// </summary>
 public sealed class PyroclasticAnomalySystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly FlammableSystem _flammable = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private FlammableSystem _flammable = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

@@ -12,9 +12,9 @@ namespace Content.Shared.Chat.TypingIndicator;
 /// </summary>
 public abstract class SharedTypingIndicatorSystem : EntitySystem
 {
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     /// <summary>
     ///     Default ID of <see cref="TypingIndicatorPrototype"/>

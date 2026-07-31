@@ -6,7 +6,7 @@ namespace Content.Shared._RMC14.Medical.Unrevivable;
 
 public sealed class RMCUnrevivableSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

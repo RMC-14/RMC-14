@@ -7,7 +7,7 @@ namespace Content.Client.Light.EntitySystems;
 
 public sealed class LightFadeSystem : EntitySystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _player = default!;
+    [Dependency] private AnimationPlayerSystem _player = default!;
 
     private const string FadeTrack = "light-fade";
 

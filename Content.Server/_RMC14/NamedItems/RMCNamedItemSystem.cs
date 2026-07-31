@@ -14,9 +14,9 @@ namespace Content.Server._RMC14.NamedItems;
 
 public sealed class RMCNamedItemSystem : SharedRMCNamedItemSystem
 {
-    [Dependency] private readonly IAdminLogManager _adminLogs = default!;
-    [Dependency] private readonly LinkAccountManager _linkAccount = default!;
-    [Dependency] private readonly NameModifierSystem _nameModifier = default!;
+    [Dependency] private IAdminLogManager _adminLogs = default!;
+    [Dependency] private LinkAccountManager _linkAccount = default!;
+    [Dependency] private NameModifierSystem _nameModifier = default!;
 
     private EntityQuery<RMCNameItemOnVendComponent> _nameItemOnVendQuery;
 

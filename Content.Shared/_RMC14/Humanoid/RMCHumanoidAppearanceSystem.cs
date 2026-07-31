@@ -14,11 +14,11 @@ namespace Content.Shared._RMC14.Humanoid;
 
 public sealed class RMCHumanoidAppearanceSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly SharedRMCStationSpawningSystem _rmcStationSpawning = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private SharedRMCStationSpawningSystem _rmcStationSpawning = default!;
 
     private EntityUid? _spawnMap;
 

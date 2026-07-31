@@ -15,9 +15,9 @@ namespace Content.Server.CartridgeLoader;
 
 public sealed class CartridgeLoaderSystem : SharedCartridgeLoaderSystem
 {
-    [Dependency] private readonly ContainerSystem _containerSystem = default!;
-    [Dependency] private readonly UserInterfaceSystem _userInterfaceSystem = default!;
-    [Dependency] private readonly PdaSystem _pda = default!;
+    [Dependency] private ContainerSystem _containerSystem = default!;
+    [Dependency] private UserInterfaceSystem _userInterfaceSystem = default!;
+    [Dependency] private PdaSystem _pda = default!;
 
     public override void Initialize()
     {

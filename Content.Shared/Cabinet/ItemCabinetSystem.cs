@@ -12,9 +12,9 @@ namespace Content.Shared.Cabinet;
 /// </summary>
 public sealed class ItemCabinetSystem : EntitySystem
 {
-    [Dependency] private readonly ItemSlotsSystem _slots = default!;
-    [Dependency] private readonly OpenableSystem _openable = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private ItemSlotsSystem _slots = default!;
+    [Dependency] private OpenableSystem _openable = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

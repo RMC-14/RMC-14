@@ -15,8 +15,8 @@ public sealed class MobsterAccentSystem : EntitySystem
     private static readonly Regex RegexFirstWord = new(@"^(\S+)");
     private static readonly Regex RegexLastWord = new(@"(\S+)$");
     private static readonly Regex RegexLastPunctuation = new(@"([.!?]+$)(?!.*[.!?])|(?<![.!?])$");
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ReplacementAccentSystem _replacement = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ReplacementAccentSystem _replacement = default!;
 
     public override void Initialize()
     {

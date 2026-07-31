@@ -12,10 +12,10 @@ namespace Content.Server._RMC14.NewPlayer;
 
 public sealed class NewPlayerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly PlayTimeTrackingManager _playtimeManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private PlayTimeTrackingManager _playtimeManager = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
 
     private ImmutableHashSet<ProtoId<PlayTimeTrackerPrototype>> _humanoidTrackers =
         ImmutableHashSet<ProtoId<PlayTimeTrackerPrototype>>.Empty;

@@ -17,10 +17,10 @@ namespace Content.Server.Atmos.Monitor.Systems;
 
 public sealed class AtmosAlarmableSystem : EntitySystem
 {
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
-    [Dependency] private readonly AudioSystem _audioSystem = default!;
-    [Dependency] private readonly DeviceNetworkSystem _deviceNet = default!;
-    [Dependency] private readonly AtmosDeviceNetworkSystem _atmosDevNetSystem = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private AudioSystem _audioSystem = default!;
+    [Dependency] private DeviceNetworkSystem _deviceNet = default!;
+    [Dependency] private AtmosDeviceNetworkSystem _atmosDevNetSystem = default!;
 
     /// <summary>
     ///     An alarm. Has three valid states: Normal, Warning, Danger.

@@ -26,17 +26,17 @@ namespace Content.Server._RMC14.Xenonids.Construction;
 
 public sealed class XenoPylonSystem : SharedXenoPylonSystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly XenoEvolutionSystem _evolution = default!;
-    [Dependency] private readonly GhostRoleSystem _ghostRole = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RMCDamageableSystem _rmcDamageable = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private XenoEvolutionSystem _evolution = default!;
+    [Dependency] private GhostRoleSystem _ghostRole = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private RMCDamageableSystem _rmcDamageable = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
 
     public override void Initialize()
     {

@@ -5,7 +5,7 @@ namespace Content.Shared._RMC14.Xenonids;
 
 public sealed class VictimInfectedEmoteSystem : EntitySystem
 {
-    [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private ChatSystem _chat = default!;
 
     public override void Initialize()
     {

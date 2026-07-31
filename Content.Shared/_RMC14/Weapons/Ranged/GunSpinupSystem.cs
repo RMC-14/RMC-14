@@ -13,10 +13,10 @@ public sealed class GunSpinupSystem : EntitySystem
     private const float ClientWindupSafetyPadding = 0.05f;
     private const float ModifierRefreshEpsilon = 0.01f;
 
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

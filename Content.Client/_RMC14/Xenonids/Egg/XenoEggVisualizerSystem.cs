@@ -8,8 +8,8 @@ namespace Content.Client._RMC14.Xenonids.Egg;
 
 public sealed class XenoEggVisualizerSystem : EntitySystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _animation = default!;
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
+    [Dependency] private AnimationPlayerSystem _animation = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
 
     private const string AnimationKey = "rmc_egg_destroying";
 

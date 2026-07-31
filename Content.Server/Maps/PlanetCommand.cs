@@ -24,9 +24,9 @@ namespace Content.Server.Maps;
 [AdminCommand(AdminFlags.Mapping)]
 public sealed class PlanetCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private IEntityManager _entManager = default!;
+    [Dependency] private IPrototypeManager _protoManager = default!;
+    [Dependency] private SharedMapSystem _map = default!;
 
     public override string Command => "planet";
     public override string Description => Loc.GetString("cmd-planet-desc");

@@ -8,7 +8,7 @@ namespace Content.Server.Chat.Commands
     [AnyCommand]
     internal sealed class LOOCCommand : IConsoleCommand
     {
-        [Dependency] private readonly IEntityManager _e = default!;
+        [Dependency] private IEntityManager _e = default!;
 
         public string Command => "looc";
         public string Description => "Send Local Out Of Character chat messages.";

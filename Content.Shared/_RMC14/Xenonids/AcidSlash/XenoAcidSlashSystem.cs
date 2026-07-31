@@ -7,8 +7,8 @@ namespace Content.Shared._RMC14.Xenonids.AcidSlash;
 
 public sealed class XenoAcidSlashSystem : EntitySystem
 {
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private IGameTiming _timing = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoAcidSlashComponent, MeleeHitEvent>(OnMeleeHit);

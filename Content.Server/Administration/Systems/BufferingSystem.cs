@@ -8,7 +8,7 @@ namespace Content.Server.Administration.Systems;
 
 public sealed class BufferingSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Update(float frameTime)
     {

@@ -10,7 +10,7 @@ namespace Content.Client.CombatMode
     {
         private static readonly ProtoId<ShaderPrototype> Shader = "ColoredScreenBorder";
 
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+        [Dependency] private IPrototypeManager _prototypeManager = default!;
 
         public override OverlaySpace Space => OverlaySpace.WorldSpace;
         private readonly ShaderInstance _shader;

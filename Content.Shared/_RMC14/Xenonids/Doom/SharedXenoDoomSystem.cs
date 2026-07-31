@@ -18,21 +18,21 @@ using Robust.Shared.Timing;
 namespace Content.Shared._RMC14.Xenonids.Doom;
 public abstract class SharedXenoDoomSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedRMCActionsSystem _rmcAction = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPointLightSystem _pointLight = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedRMCActionsSystem _rmcAction = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] protected readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] protected readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly RMCDazedSystem _daze = default!;
-    [Dependency] private readonly RMCSlowSystem _slow = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly RMCCameraShakeSystem _cameraShake = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
+    [Dependency] private RMCDazedSystem _daze = default!;
+    [Dependency] private RMCSlowSystem _slow = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private RMCCameraShakeSystem _cameraShake = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _mobs = new();
     public override void Initialize()

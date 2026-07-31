@@ -10,7 +10,7 @@ namespace Content.Server.Antag;
 /// </summary>
 public sealed class AntagObjectivesSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
 
     public override void Initialize()
     {

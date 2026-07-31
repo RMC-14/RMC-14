@@ -11,9 +11,9 @@ namespace Content.Client.UserInterface.Controls
 {
     public abstract class SlotControl : Control, IEntityControl
     {
-        [Dependency] private readonly IEntityManager _entities = default!;
-        [Dependency] private readonly IPrototypeManager _prototype = default!;
-        [Dependency] private readonly ILocalizationManager _loc = default!;
+        [Dependency] private IEntityManager _entities = default!;
+        [Dependency] private IPrototypeManager _prototype = default!;
+        [Dependency] private ILocalizationManager _loc = default!;
 
         public static int DefaultButtonSize = 64;
 

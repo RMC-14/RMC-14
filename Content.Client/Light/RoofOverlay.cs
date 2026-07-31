@@ -17,9 +17,9 @@ public sealed class RoofOverlay : Overlay
 {
     private readonly IEntityManager _entManager;
     // RMC14
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IPlayerManager _player = default!;
     // RMC14
-    [Dependency] private readonly IOverlayManager _overlay = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
 
     private readonly EntityLookupSystem _lookup;
     private readonly SharedMapSystem _mapSystem;

@@ -5,7 +5,7 @@ namespace Content.Shared._RMC14.Pointing;
 
 public sealed class RMCPointingSystem : EntitySystem
 {
-    [Dependency] private readonly SharedRMCSpriteSystem _rmcSprite = default!;
+    [Dependency] private SharedRMCSpriteSystem _rmcSprite = default!;
 
     public override void Initialize()
     {

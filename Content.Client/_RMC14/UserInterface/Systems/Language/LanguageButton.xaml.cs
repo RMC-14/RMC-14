@@ -13,7 +13,7 @@ namespace Content.Client._RMC14.UserInterface.Systems.Language;
 [GenerateTypedNameReferences]
 public sealed partial class LanguageButton : ContainerButton
 {
-    [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
+    [Dependency] private IEntitySystemManager _entitySystemManager = default!;
 
     private static readonly StyleBoxFlat NormalStyle = new()
     {

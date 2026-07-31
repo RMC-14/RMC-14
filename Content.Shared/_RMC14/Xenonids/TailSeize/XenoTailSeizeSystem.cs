@@ -18,18 +18,18 @@ namespace Content.Shared._RMC14.Xenonids.TailSeize;
 
 public sealed class XenoTailSeizeSystem : EntitySystem
 {
-    [Dependency] private readonly XenoHookSystem _hook = default!;
-    [Dependency] private readonly XenoProjectileSystem _projectile = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly RMCSlowSystem _slow = default!;
-    [Dependency] private readonly RMCPullingSystem _pulling = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly RMCSizeStunSystem _size = default!;
-    [Dependency] private readonly RMCObstacleSlammingSystem _obstacleSlamming = default!;
+    [Dependency] private XenoHookSystem _hook = default!;
+    [Dependency] private XenoProjectileSystem _projectile = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private RMCSlowSystem _slow = default!;
+    [Dependency] private RMCPullingSystem _pulling = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private RMCSizeStunSystem _size = default!;
+    [Dependency] private RMCObstacleSlammingSystem _obstacleSlamming = default!;
 
     public override void Initialize()
     {

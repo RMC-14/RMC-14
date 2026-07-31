@@ -9,7 +9,7 @@ namespace Content.Server.Actions.Commands;
 [AdminCommand(AdminFlags.Debug)]
 public sealed class RemoveActionCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     public override string Command => "rmaction";
 

@@ -11,9 +11,9 @@ namespace Content.Client._RMC14.Medical.HUD;
 
 public sealed class CMHealthIconsSystem : EntitySystem
 {
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly RMCUnrevivableSystem _unrevivable = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private RMCUnrevivableSystem _unrevivable = default!;
 
     private static readonly ProtoId<HealthIconPrototype> BaseDeadIcon = "CMHealthIconDead";
 

@@ -10,7 +10,7 @@ namespace Content.Client.Voting.UI
     /// </summary>
     public sealed class VoteCallMenuButton : Button
     {
-        [Dependency] private readonly IVoteManager _voteManager = default!;
+        [Dependency] private IVoteManager _voteManager = default!;
 
         public VoteCallMenuButton()
         {

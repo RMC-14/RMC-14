@@ -9,8 +9,8 @@ namespace Content.Server._RMC14.Holiday;
 public sealed class RMCHolidaySystem : SharedRMCHolidaySystem
 {
 
-    [Dependency] private readonly HolidaySystem _holiday = default!;
-    [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
+    [Dependency] private HolidaySystem _holiday = default!;
+    [Dependency] private PvsOverrideSystem _pvsOverride = default!;
 
     public override void Initialize()
     {

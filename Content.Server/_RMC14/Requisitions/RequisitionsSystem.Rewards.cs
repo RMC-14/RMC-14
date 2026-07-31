@@ -12,9 +12,9 @@ namespace Content.Server._RMC14.Requisitions
 {
     public sealed partial class RequisitionsSystem
     {
-        [Dependency] private readonly PaperSystem _paperSystem = default!;
-        [Dependency] private readonly ItemSlotsSystem _slots = default!;
-        [Dependency] private readonly MetaDataSystem _metaSystem = default!;
+        [Dependency] private PaperSystem _paperSystem = default!;
+        [Dependency] private ItemSlotsSystem _slots = default!;
+        [Dependency] private MetaDataSystem _metaSystem = default!;
 
         private void PrintInvoice(EntityUid requisitionOrder, EntityCoordinates coordinates, string paperwork)
         {

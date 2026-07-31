@@ -4,7 +4,7 @@ using Robust.Client.Graphics;
 namespace Content.Client._RMC14.Xenonids.Doom;
 public sealed class XenoDoomSystem : SharedXenoDoomSystem
 {
-    [Dependency] private readonly IOverlayManager _overlay = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
 
     protected override void OnDoomedAdded(Entity<MobDoomedComponent> ent, ref ComponentStartup args)
     {

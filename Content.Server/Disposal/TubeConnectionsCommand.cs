@@ -8,7 +8,7 @@ namespace Content.Server.Disposal
     [AdminCommand(AdminFlags.Debug)]
     public sealed class TubeConnectionsCommand : IConsoleCommand
     {
-        [Dependency] private readonly IEntityManager _entities = default!;
+        [Dependency] private IEntityManager _entities = default!;
 
         public string Command => "tubeconnections";
         public string Description => Loc.GetString("tube-connections-command-description");

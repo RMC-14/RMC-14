@@ -12,8 +12,8 @@ namespace Content.Client.Doors;
 /// <inheritdoc/>
 public sealed class TurnstileSystem : SharedTurnstileSystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _animationPlayer = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private AnimationPlayerSystem _animationPlayer = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private static readonly EntProtoId ExamineArrow = "TurnstileArrow";
 

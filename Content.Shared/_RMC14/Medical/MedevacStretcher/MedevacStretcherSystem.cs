@@ -23,14 +23,14 @@ namespace Content.Shared._RMC14.Medical.MedevacStretcher;
 
 public sealed class MedevacStretcherSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly AreaSystem _areas = default!;
-    [Dependency] private readonly SharedDropshipWeaponSystem _dropshipWeapon = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private AreaSystem _areas = default!;
+    [Dependency] private SharedDropshipWeaponSystem _dropshipWeapon = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SkillsSystem _skills = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private static readonly EntProtoId<SkillDefinitionComponent> SkillType = "RMCSkillMedical";
     private const int MinimumRequiredSkill = 1;

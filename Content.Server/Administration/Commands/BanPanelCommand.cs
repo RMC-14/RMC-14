@@ -8,8 +8,8 @@ namespace Content.Server.Administration.Commands;
 public sealed class BanPanelCommand : LocalizedCommands
 {
 
-    [Dependency] private readonly IPlayerLocator _locator = default!;
-    [Dependency] private readonly EuiManager _euis = default!;
+    [Dependency] private IPlayerLocator _locator = default!;
+    [Dependency] private EuiManager _euis = default!;
 
     public override string Command => "banpanel";
 

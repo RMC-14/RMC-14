@@ -8,8 +8,8 @@ namespace Content.Server._RMC14.Traits;
 
 public sealed class RMCTraitSystem : EntitySystem
 {
-    [Dependency] private readonly LanguageSystem _language = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private LanguageSystem _language = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     public override void Initialize()
     {

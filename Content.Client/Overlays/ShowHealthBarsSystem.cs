@@ -12,8 +12,8 @@ namespace Content.Client.Overlays;
 /// </summary>
 public sealed class ShowHealthBarsSystem : EquipmentHudSystem<ShowHealthBarsComponent>
 {
-    [Dependency] private readonly IOverlayManager _overlayMan = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IOverlayManager _overlayMan = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private EntityHealthBarOverlay _overlay = default!;
 

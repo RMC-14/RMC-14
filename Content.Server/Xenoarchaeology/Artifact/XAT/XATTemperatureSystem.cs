@@ -10,7 +10,7 @@ namespace Content.Server.Xenoarchaeology.Artifact.XAT;
 /// </summary>
 public sealed class XATTemperatureSystem : BaseQueryUpdateXATSystem<XATTemperatureComponent>
 {
-    [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
+    [Dependency] private AtmosphereSystem _atmosphere = default!;
 
     /// <inheritdoc />
     protected override void UpdateXAT(Entity<XenoArtifactComponent> artifact, Entity<XATTemperatureComponent, XenoArtifactNodeComponent> node, float frameTime)

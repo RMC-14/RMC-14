@@ -5,7 +5,7 @@ namespace Content.Shared.Power.EntitySystems;
 
 public sealed class ItemSlotRequiresPowerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPowerReceiverSystem _receiver = default!;
+    [Dependency] private SharedPowerReceiverSystem _receiver = default!;
 
     public override void Initialize()
     {

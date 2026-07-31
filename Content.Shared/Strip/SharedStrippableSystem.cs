@@ -29,21 +29,21 @@ namespace Content.Shared.Strip;
 
 public abstract class SharedStrippableSystem : EntitySystem
 {
-    [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
+    [Dependency] private SharedInteractionSystem _interactionSystem = default!;
 
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
-    [Dependency] private readonly InventorySystem _inventorySystem = default!;
+    [Dependency] private InventorySystem _inventorySystem = default!;
 
-    [Dependency] private readonly SharedCuffableSystem _cuffableSystem = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedCuffableSystem _cuffableSystem = default!;
+    [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private SharedHandsSystem _handsSystem = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
 
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
 
     // RMC14
-    [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private SkillsSystem _skills = default!;
 
     private static readonly EntProtoId<SkillDefinitionComponent> Skill = "RMCSkillPolice";
     public const int MinimumStripSkillLevel = 1;

@@ -22,8 +22,8 @@ namespace Content.Client.Interaction;
 /// <typeparam name="T">thing being dragged and dropped</typeparam>
 public sealed class DragDropHelper<T>
 {
-    [Dependency] private readonly IInputManager _inputManager = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IInputManager _inputManager = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     private readonly OnBeginDrag _onBeginDrag;
     private readonly OnEndDrag _onEndDrag;

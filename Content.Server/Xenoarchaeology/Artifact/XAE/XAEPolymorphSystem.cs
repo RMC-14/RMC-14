@@ -13,10 +13,10 @@ namespace Content.Server.Xenoarchaeology.Artifact.XAE;
 /// </summary>
 public sealed class XAEPolymorphSystem : BaseXAESystem<XAEPolymorphComponent>
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly PolymorphSystem _poly = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private PolymorphSystem _poly = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     /// <summary> Pre-allocated and re-used collection.</summary>
     private readonly HashSet<Entity<HumanoidAppearanceComponent>> _humanoids = new();

@@ -21,13 +21,13 @@ namespace Content.Server.IdentityManagement;
 /// </summary>
 public sealed class IdentitySystem : SharedIdentitySystem
 {
-    [Dependency] private readonly IdCardSystem _idCard = default!;
-    [Dependency] private readonly IAdminLogManager _adminLog = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
-    [Dependency] private readonly CriminalRecordsConsoleSystem _criminalRecordsConsole = default!;
-    [Dependency] private readonly GrammarSystem _grammarSystem = default!;
+    [Dependency] private IdCardSystem _idCard = default!;
+    [Dependency] private IAdminLogManager _adminLog = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private HumanoidAppearanceSystem _humanoid = default!;
+    [Dependency] private CriminalRecordsConsoleSystem _criminalRecordsConsole = default!;
+    [Dependency] private GrammarSystem _grammarSystem = default!;
 
     private HashSet<EntityUid> _queuedIdentityUpdates = new();
 

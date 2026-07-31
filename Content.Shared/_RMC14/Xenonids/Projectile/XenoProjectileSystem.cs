@@ -34,21 +34,21 @@ namespace Content.Shared._RMC14.Xenonids.Projectile;
 
 public sealed class XenoProjectileSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SharedGunPredictionSystem _gunPrediction = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedProjectileSystem _projectile = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedRMCLagCompensationSystem _rmcLag = default!;
-    [Dependency] private readonly CMPoweredLightSystem _rmcPoweredLight = default!;
-    [Dependency] private readonly RMCPseudoRandomSystem _rmcPseudoRandom = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private SharedGunPredictionSystem _gunPrediction = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedProjectileSystem _projectile = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedRMCLagCompensationSystem _rmcLag = default!;
+    [Dependency] private CMPoweredLightSystem _rmcPoweredLight = default!;
+    [Dependency] private RMCPseudoRandomSystem _rmcPseudoRandom = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private XenoPlasmaSystem _xenoPlasma = default!;
 
     private EntityQuery<ProjectileComponent> _projectileQuery;
     private EntityQuery<PreventAttackLightOffComponent> _preventAttackLightOffQuery;

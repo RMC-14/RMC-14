@@ -8,9 +8,9 @@ namespace Content.Shared._RMC14.Dropship.ElectronicSystem;
 
 public abstract class SharedDropshipElectronicSystemSystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedDropshipSystem _dropship = default!;
-    [Dependency] private readonly SharedRMCCameraSystem _rmcCamera = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedDropshipSystem _dropship = default!;
+    [Dependency] private SharedRMCCameraSystem _rmcCamera = default!;
 
     private const int MinSpread = 0;
     private const int MinBulletSpread = 1;

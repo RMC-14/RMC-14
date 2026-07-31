@@ -10,7 +10,7 @@ namespace Content.Server.Xenoarchaeology.Artifact.XAE;
 /// </summary>
 public sealed class XAEEmpInAreaSystem : BaseXAESystem<XAEEmpInAreaComponent>
 {
-    [Dependency] private readonly EmpSystem _emp = default!;
+    [Dependency] private EmpSystem _emp = default!;
 
     /// <inheritdoc />
     protected override void OnActivated(Entity<XAEEmpInAreaComponent> ent, ref XenoArtifactNodeActivatedEvent args)

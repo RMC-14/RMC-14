@@ -6,7 +6,7 @@ namespace Content.Server._RMC14.CrashLand;
 
 public sealed class CrashLandSystem : SharedCrashLandSystem
 {
-    [Dependency] private readonly EntityStorageSystem _entityStorage = default!;
+    [Dependency] private EntityStorageSystem _entityStorage = default!;
 
     public override void Initialize()
     {

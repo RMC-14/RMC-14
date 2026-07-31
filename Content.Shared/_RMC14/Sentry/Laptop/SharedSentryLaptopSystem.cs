@@ -19,17 +19,17 @@ namespace Content.Shared._RMC14.Sentry.Laptop;
 
 public abstract class SharedSentryLaptopSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedSentryTargetingSystem _sentryTargeting = default!;
-    [Dependency] private readonly GunIFFSystem _iff = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedDeviceLinkSystem _deviceLink = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedSentryTargetingSystem _sentryTargeting = default!;
+    [Dependency] private GunIFFSystem _iff = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedDeviceLinkSystem _deviceLink = default!;
 
     private const float UpdateInterval = 1.0f;
 

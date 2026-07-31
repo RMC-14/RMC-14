@@ -17,13 +17,13 @@ namespace Content.Shared._RMC14.Medical.HUD.Systems;
 
 public sealed class HolocardSystem : EntitySystem
 {
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SkillsSystem _skills = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public const int MinimumRequiredSkill = 2;
     public static readonly EntProtoId<SkillDefinitionComponent> SkillType = "RMCSkillMedical";

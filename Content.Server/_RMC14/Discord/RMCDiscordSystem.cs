@@ -12,11 +12,11 @@ namespace Content.Server._RMC14.Discord;
 
 public sealed class RMCDiscordSystem : EntitySystem
 {
-    [Dependency] private readonly IAdminManager _admin = default!;
-    [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly RMCDiscordManager _discord = default!;
-    [Dependency] private readonly MentorManager _mentor = default!;
-    [Dependency] private readonly INetConfigurationManager _net = default!;
+    [Dependency] private IAdminManager _admin = default!;
+    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private RMCDiscordManager _discord = default!;
+    [Dependency] private MentorManager _mentor = default!;
+    [Dependency] private INetConfigurationManager _net = default!;
 
     private const int Cap = 10;
 

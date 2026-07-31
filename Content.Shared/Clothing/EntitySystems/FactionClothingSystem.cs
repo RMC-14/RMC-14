@@ -10,7 +10,7 @@ namespace Content.Shared.Clothing.EntitySystems;
 /// </summary>
 public sealed class FactionClothingSystem : EntitySystem
 {
-    [Dependency] private readonly NpcFactionSystem _faction = default!;
+    [Dependency] private NpcFactionSystem _faction = default!;
 
     public override void Initialize()
     {

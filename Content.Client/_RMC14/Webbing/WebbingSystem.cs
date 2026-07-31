@@ -14,8 +14,8 @@ namespace Content.Client._RMC14.Webbing;
 
 public sealed class WebbingSystem : SharedWebbingSystem
 {
-    [Dependency] private readonly ItemSystem _item = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private ItemSystem _item = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     public event Action? PlayerWebbingUpdated;
 
@@ -74,7 +74,7 @@ public sealed class WebbingSystem : SharedWebbingSystem
 
     private void OnClothingState(Entity<WebbingClothingComponent> clothing, ref AfterAutoHandleStateEvent args)
     {
-        var layer = GetWebbingLayer(clothing.Comp);  // define which layer to use based on the clothing's webbing 
+        var layer = GetWebbingLayer(clothing.Comp);  // define which layer to use based on the clothing's webbing
 
         if (TryComp(clothing, out SpriteComponent? clothingSprite) &&
             clothingSprite.LayerMapTryGet(layer, out var clothingLayer))

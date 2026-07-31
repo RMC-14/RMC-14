@@ -7,8 +7,8 @@ namespace Content.Client._RMC14.Vehicle.Supply;
 
 public sealed class VehicleSupplyLiftSystem : EntitySystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _animation = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private AnimationPlayerSystem _animation = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private const string AnimationKey = "rmc_vehicle_supply_lift";
     private const string BaseLayerKey = "rmc-vehicle-supply-lift-base";

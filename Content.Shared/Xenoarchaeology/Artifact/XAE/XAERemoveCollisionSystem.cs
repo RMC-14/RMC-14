@@ -9,7 +9,7 @@ namespace Content.Shared.Xenoarchaeology.Artifact.XAE;
 /// </summary>
 public sealed class XAERemoveCollisionSystem : BaseXAESystem<XAERemoveCollisionComponent>
 {
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
 
     /// <inheritdoc />
     protected override void OnActivated(Entity<XAERemoveCollisionComponent> ent, ref XenoArtifactNodeActivatedEvent args)

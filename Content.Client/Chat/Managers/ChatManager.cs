@@ -9,9 +9,9 @@ namespace Content.Client.Chat.Managers;
 
 internal sealed class ChatManager : IChatManager
 {
-    [Dependency] private readonly IClientConsoleHost _consoleHost = default!;
-    [Dependency] private readonly IClientAdminManager _adminMgr = default!;
-    [Dependency] private readonly IEntitySystemManager _systems = default!;
+    [Dependency] private IClientConsoleHost _consoleHost = default!;
+    [Dependency] private IClientAdminManager _adminMgr = default!;
+    [Dependency] private IEntitySystemManager _systems = default!;
 
     private ISawmill _sawmill = default!;
 

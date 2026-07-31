@@ -12,7 +12,7 @@ namespace Content.Server.PDA.Ringer;
 /// </summary>
 public sealed class RingerSystem : SharedRingerSystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

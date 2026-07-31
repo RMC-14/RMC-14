@@ -6,7 +6,7 @@ namespace Content.Client._RMC14.Dropship.Utility;
 
 public sealed class RMCEquipmentDeployerSystem : SharedRMCEquipmentDeployerSystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

@@ -10,10 +10,10 @@ namespace Content.Shared._RMC14.Shields;
 
 public sealed class VanguardShieldSystem : EntitySystem
 {
-    [Dependency] private readonly XenoShieldSystem _shield = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private XenoShieldSystem _shield = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

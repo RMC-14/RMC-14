@@ -10,8 +10,8 @@ namespace Content.Shared._RMC14.Armor;
 
 public sealed partial class RMCAdjustableArmorValueSystem : EntitySystem
 {
-    [Dependency] private readonly ActivatableUISystem _activatableUI = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
+    [Dependency] private ActivatableUISystem _activatableUI = default!;
+    [Dependency] private SharedUserInterfaceSystem _uiSystem = default!;
 
     public override void Initialize()
     {

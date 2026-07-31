@@ -19,7 +19,7 @@ namespace Content.Server.Power.EntitySystems;
 /// </remarks>
 public sealed class BatteryInterfaceSystem : EntitySystem
 {
-    [Dependency] private readonly UserInterfaceSystem _uiSystem = null!;
+    [Dependency] private UserInterfaceSystem _uiSystem = null!;
 
     public override void Initialize()
     {

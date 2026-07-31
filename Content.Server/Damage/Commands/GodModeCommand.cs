@@ -8,7 +8,7 @@ namespace Content.Server.Damage.Commands
     [AdminCommand(AdminFlags.Fun)]
     public sealed class GodModeCommand : IConsoleCommand
     {
-        [Dependency] private readonly IEntityManager _entManager = default!;
+        [Dependency] private IEntityManager _entManager = default!;
 
         public string Command => "godmode";
         public string Description => "Makes your entity or another invulnerable to almost anything. May have irreversible changes.";

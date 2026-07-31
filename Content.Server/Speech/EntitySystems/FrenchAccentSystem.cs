@@ -8,7 +8,7 @@ namespace Content.Server.Speech.EntitySystems;
 /// </summary>
 public sealed class FrenchAccentSystem : EntitySystem
 {
-    [Dependency] private readonly ReplacementAccentSystem _replacement = default!;
+    [Dependency] private ReplacementAccentSystem _replacement = default!;
 
     private static readonly Regex RegexTh = new(@"th", RegexOptions.IgnoreCase);
     private static readonly Regex RegexStartH = new(@"(?<!\w)h", RegexOptions.IgnoreCase);
@@ -32,7 +32,7 @@ public sealed class FrenchAccentSystem : EntitySystem
 
         // spaces out ! ? : and ;.
         msg = RegexSpacePunctuation.Replace(msg, " $&");
-        
+
         // replaces th with 'z or 's depending on the case
         foreach (Match match in RegexTh.Matches(msg))
         {

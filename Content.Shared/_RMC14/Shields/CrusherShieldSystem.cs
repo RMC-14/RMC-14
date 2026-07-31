@@ -14,13 +14,13 @@ namespace Content.Shared._RMC14.Shields;
 
 public sealed partial class CrusherShieldSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
-    [Dependency] private readonly XenoShieldSystem _shield = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private XenoShieldSystem _shield = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private XenoPlasmaSystem _xenoPlasma = default!;
 
     public override void Initialize()
     {

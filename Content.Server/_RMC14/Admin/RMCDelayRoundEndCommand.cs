@@ -15,8 +15,8 @@ namespace Content.Server._RMC14.Admin;
 [AdminCommand(AdminFlags.Fun)]
 public sealed class RMCDelayRoundEndCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     public override string Command => "rmcdelayroundend";
     public override string Description => "Delay the round end.";

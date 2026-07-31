@@ -5,8 +5,8 @@ namespace Content.Server.Power.Generator;
 
 public sealed class GeneratorSignalControlSystem: EntitySystem
 {
-    [Dependency] private readonly GeneratorSystem _generator = default!;
-    [Dependency] private readonly ActiveGeneratorRevvingSystem _revving = default!;
+    [Dependency] private GeneratorSystem _generator = default!;
+    [Dependency] private ActiveGeneratorRevvingSystem _revving = default!;
 
     public override void Initialize()
     {

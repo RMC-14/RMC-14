@@ -41,32 +41,32 @@ namespace Content.Shared._RMC14.Xenonids.Neurotoxin;
 
 public abstract class SharedNeurotoxinSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly RMCStaminaSystem _stamina = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
-    [Dependency] private readonly SharedSlurredSystem _slurred = default!;
-    [Dependency] private readonly SharedStutteringSystem _stutter = default!;
-    [Dependency] private readonly RMCDazedSystem _daze = default!;
-    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!; //It's how this fakes movement
-    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
-    [Dependency] private readonly RMCSlowSystem _slow = default!;
-    [Dependency] private readonly SharedDeafnessSystem _deafness = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private RMCStaminaSystem _stamina = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private SharedSlurredSystem _slurred = default!;
+    [Dependency] private SharedStutteringSystem _stutter = default!;
+    [Dependency] private RMCDazedSystem _daze = default!;
+    [Dependency] private SharedJitteringSystem _jitter = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private ThrowingSystem _throwing = default!; //It's how this fakes movement
+    [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private RMCSlowSystem _slow = default!;
+    [Dependency] private SharedDeafnessSystem _deafness = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedCMChatSystem _rmcChat = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     private readonly HashSet<Entity<MarineComponent>> _marines = new();
     public override void Initialize()

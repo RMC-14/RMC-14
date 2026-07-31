@@ -10,9 +10,9 @@ namespace Content.Shared._RMC14.Radio;
 
 public sealed class RMCRadioSystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly EncryptionKeySystem _encryptionKey = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private EncryptionKeySystem _encryptionKey = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     private readonly HashSet<Entity<RMCHeadsetComponent, EncryptionKeyHolderComponent>> _toUpdate = new();
 

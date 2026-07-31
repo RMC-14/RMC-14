@@ -7,7 +7,7 @@ namespace Content.Client.Overlays;
 
 public sealed class ShowThirstIconsSystem : EquipmentHudSystem<ShowThirstIconsComponent>
 {
-    [Dependency] private readonly ThirstSystem _thirst = default!;
+    [Dependency] private ThirstSystem _thirst = default!;
 
     public override void Initialize()
     {

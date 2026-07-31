@@ -16,9 +16,9 @@ namespace Content.Shared.Interaction
     [UsedImplicitly]
     public sealed class RotateToFaceSystem : EntitySystem
     {
-        [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
-        [Dependency] private readonly SharedTransformSystem _transform = default!;
-        [Dependency] private readonly RMCInteractionSystem _rmcInteraction = default!;
+        [Dependency] private ActionBlockerSystem _actionBlockerSystem = default!;
+        [Dependency] private SharedTransformSystem _transform = default!;
+        [Dependency] private RMCInteractionSystem _rmcInteraction = default!;
 
         /// <summary>
         /// Tries to rotate the entity towards the target rotation. Returns false if it needs to keep rotating.

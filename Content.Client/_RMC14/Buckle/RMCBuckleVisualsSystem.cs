@@ -10,7 +10,7 @@ namespace Content.Client._RMC14.Buckle;
 
 public sealed class RMCBuckleVisualsSystem : EntitySystem
 {
-    [Dependency] private readonly RMCSpriteSystem _rmcSprite = default!;
+    [Dependency] private RMCSpriteSystem _rmcSprite = default!;
 
     public override void Initialize()
     {

@@ -25,9 +25,9 @@ namespace Content.Shared._RMC14.Xenonids.Parasite;
 
 public abstract partial class SharedXenoParasiteSystem
 {
-    [Dependency] private readonly SharedRMCNPCSystem _rmcNpc = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedRMCNPCSystem _rmcNpc = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     public void IntializeAI()
     {

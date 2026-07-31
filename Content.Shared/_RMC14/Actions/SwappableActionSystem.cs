@@ -6,8 +6,8 @@ namespace Content.Shared._RMC14.Actions;
 
 public sealed class SwappableActionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
 
     public override void Initialize()
     {

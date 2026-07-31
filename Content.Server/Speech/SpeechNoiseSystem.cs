@@ -16,11 +16,11 @@ namespace Content.Server.Speech
 {
     public sealed class SpeechSoundSystem : EntitySystem
     {
-        [Dependency] private readonly IGameTiming _gameTiming = default!;
-        [Dependency] private readonly IPrototypeManager _protoManager = default!;
-        [Dependency] private readonly IRobustRandom _random = default!;
+        [Dependency] private IGameTiming _gameTiming = default!;
+        [Dependency] private IPrototypeManager _protoManager = default!;
+        [Dependency] private IRobustRandom _random = default!;
         // RMC14
-        [Dependency] private readonly SharedAudioSystem _audio = default!;
+        [Dependency] private SharedAudioSystem _audio = default!;
         // RMC14
 
         public override void Initialize()

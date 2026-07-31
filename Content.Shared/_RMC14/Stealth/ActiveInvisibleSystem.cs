@@ -5,7 +5,7 @@ namespace Content.Shared._RMC14.Stealth;
 
 public sealed class ActiveInvisibleSystem : EntitySystem
 {
-    [Dependency] private readonly EvasionSystem _evasionSystem = default!;
+    [Dependency] private EvasionSystem _evasionSystem = default!;
 
     public override void Initialize()
     {

@@ -7,7 +7,7 @@ namespace Content.Server._RMC14.Mentor;
 [AnyCommand]
 public sealed class MentorChatCommand : IConsoleCommand
 {
-    [Dependency] private readonly MentorManager _mentor = default!;
+    [Dependency] private MentorManager _mentor = default!;
 
     public string Command => "msay";
     public string Description => "Send chat messages to the private mentor chat channel.";

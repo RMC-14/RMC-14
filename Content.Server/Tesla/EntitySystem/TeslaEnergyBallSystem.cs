@@ -17,7 +17,7 @@ namespace Content.Server.Tesla.EntitySystems;
 /// </summary>
 public sealed class TeslaEnergyBallSystem : EntitySystem
 {
-    [Dependency] private readonly AudioSystem _audio = default!;
+    [Dependency] private AudioSystem _audio = default!;
 
     public override void Initialize()
     {

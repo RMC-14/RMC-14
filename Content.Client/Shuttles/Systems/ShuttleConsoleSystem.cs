@@ -9,8 +9,8 @@ namespace Content.Client.Shuttles.Systems
 {
     public sealed class ShuttleConsoleSystem : SharedShuttleConsoleSystem
     {
-        [Dependency] private readonly IInputManager _input = default!;
-        [Dependency] private readonly IPlayerManager _playerManager = default!;
+        [Dependency] private IInputManager _input = default!;
+        [Dependency] private IPlayerManager _playerManager = default!;
 
         public override void Initialize()
         {

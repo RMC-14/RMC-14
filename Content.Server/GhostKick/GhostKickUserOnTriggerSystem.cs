@@ -5,7 +5,7 @@ namespace Content.Server.GhostKick;
 
 public sealed class GhostKickUserOnTriggerSystem : EntitySystem
 {
-    [Dependency] private readonly GhostKickManager _ghostKickManager = default!;
+    [Dependency] private GhostKickManager _ghostKickManager = default!;
 
     public override void Initialize()
     {

@@ -5,7 +5,7 @@ namespace Content.Shared.Electrocution
 {
     public abstract class SharedElectrocutionSystem : EntitySystem
     {
-        [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+        [Dependency] private SharedAppearanceSystem _appearance = default!;
 
         public override void Initialize()
         {

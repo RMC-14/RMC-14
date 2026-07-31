@@ -10,9 +10,9 @@ namespace Content.Server.Tesla.EntitySystems;
 /// </summary>
 public sealed class LightningArcShooterSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly LightningSystem _lightning = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private LightningSystem _lightning = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {

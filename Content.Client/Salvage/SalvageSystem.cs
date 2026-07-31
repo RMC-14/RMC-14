@@ -8,8 +8,8 @@ namespace Content.Client.Salvage;
 
 public sealed class SalvageSystem : SharedSalvageSystem
 {
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly ContentAudioSystem _audio = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private ContentAudioSystem _audio = default!;
 
     public override void Initialize()
     {

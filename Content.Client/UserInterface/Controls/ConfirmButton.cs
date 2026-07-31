@@ -16,7 +16,7 @@ namespace Content.Client.UserInterface.Controls;
 /// </remarks>
 public sealed class ConfirmButton : Button
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
 
     public const string ConfirmPrefix = "confirm-";
 

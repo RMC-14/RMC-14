@@ -18,9 +18,9 @@ namespace Content.Shared.Hands.EntitySystems;
 
 public abstract partial class SharedHandsSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly RMCHandsSystem _rmcHands = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private RMCHandsSystem _rmcHands = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private void InitializeInteractions()
     {

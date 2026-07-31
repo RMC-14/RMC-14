@@ -10,7 +10,7 @@ namespace Content.Server.Atmos.Commands
     [AdminCommand(AdminFlags.Debug)]
     public sealed class SetAtmosTemperatureCommand : IConsoleCommand
     {
-        [Dependency] private readonly IEntityManager _entManager = default!;
+        [Dependency] private IEntityManager _entManager = default!;
 
         public string Command => "setatmostemp";
         public string Description => "Sets a grid's temperature (in kelvin).";

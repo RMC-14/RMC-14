@@ -8,8 +8,8 @@ namespace Content.Client._RMC14.Vehicle;
 
 public sealed class VehicleWheelVisualizerSystem : VisualizerSystem<VehicleWheelSlotsComponent>
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

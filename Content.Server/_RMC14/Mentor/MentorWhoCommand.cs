@@ -7,7 +7,7 @@ namespace Content.Server._RMC14.Mentor;
 [AnyCommand]
 public sealed class MentorWhoCommand : LocalizedCommands
 {
-    [Dependency] private readonly MentorManager _mentor = default!;
+    [Dependency] private MentorManager _mentor = default!;
 
     public override string Command => "mentorwho";
 

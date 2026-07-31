@@ -8,7 +8,7 @@ namespace Content.Server._RMC14.Decals;
 
 public sealed class RMCDecalSystem : EntitySystem
 {
-    [Dependency] private readonly DecalSystem _decal = default!;
+    [Dependency] private DecalSystem _decal = default!;
 
     public int GetDecalsInTile(EntityUid ent, IReadOnlyCollection<ProtoId<DecalPrototype>> decals)
     {

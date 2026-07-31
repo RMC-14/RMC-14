@@ -7,9 +7,9 @@ namespace Content.Server._RMC14.Xenonids.Pheromones;
 
 public sealed class XenoPheromonesSystem : SharedXenoPheromonesSystem
 {
-    [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly ActorSystem _actors = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private ActorSystem _actors = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     private const string HelpButtonText = "rmc-xeno-pheromones-help";
 

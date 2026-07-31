@@ -10,7 +10,7 @@ namespace Content.Shared.Weapons.Melee;
 /// </summary>
 public sealed class MeleeSoundSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     public const float DamagePitchVariation = 0.05f;
 

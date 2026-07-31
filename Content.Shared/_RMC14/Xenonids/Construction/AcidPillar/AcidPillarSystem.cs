@@ -15,15 +15,15 @@ namespace Content.Shared._RMC14.Xenonids.Construction.AcidPillar;
 
 public sealed class AcidPillarSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedRMCAnimationSystem _rmcAnimation = default!;
-    [Dependency] private readonly StandingStateSystem _standingState = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly XenoSprayAcidSystem _xenoSprayAcid = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedRMCAnimationSystem _rmcAnimation = default!;
+    [Dependency] private StandingStateSystem _standingState = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private XenoSprayAcidSystem _xenoSprayAcid = default!;
 
     private readonly HashSet<Entity<MarineComponent>> _marines = new();
     private readonly HashSet<Entity<XenoComponent>> _xenos = new();

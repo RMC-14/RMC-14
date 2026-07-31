@@ -6,8 +6,8 @@ namespace Content.Client._RMC14.Animations;
 
 public sealed class RMCAnimationSystem : SharedRMCAnimationSystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _animation = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private AnimationPlayerSystem _animation = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private const string FlickId = "rmc_flick_animation";
 

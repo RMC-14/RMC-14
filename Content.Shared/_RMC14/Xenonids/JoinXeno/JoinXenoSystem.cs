@@ -17,16 +17,16 @@ namespace Content.Shared._RMC14.Xenonids.JoinXeno;
 
 public sealed class JoinXenoSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly DialogSystem _dialog = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly LarvaQueueSystem _larvaQueue = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedRMCGameTickerSystem _rmcGameTicker = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedGameTicker _gameTicker = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private DialogSystem _dialog = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private LarvaQueueSystem _larvaQueue = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedRMCGameTickerSystem _rmcGameTicker = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedGameTicker _gameTicker = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public int ClientBurrowedLarva { get; private set; }
 

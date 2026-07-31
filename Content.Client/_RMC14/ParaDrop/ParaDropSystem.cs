@@ -12,10 +12,10 @@ namespace Content.Client._RMC14.ParaDrop;
 
 public sealed partial class ParaDropSystem : SharedParaDropSystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _animPlayer = default!;
-    [Dependency] private readonly RMCSpriteSystem _rmcSprite = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private AnimationPlayerSystem _animPlayer = default!;
+    [Dependency] private RMCSpriteSystem _rmcSprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private TransformSystem _transform = default!;
 
     private const string DroppingAnimationKey = "dropping-animation";
     private const string SkyFallingAnimationKey = "sky-falling-animation";

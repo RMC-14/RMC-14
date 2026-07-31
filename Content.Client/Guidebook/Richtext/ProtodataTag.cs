@@ -11,8 +11,8 @@ namespace Content.Client.Guidebook.RichText;
 /// </summary>
 public sealed class ProtodataTag : IMarkupTagHandler
 {
-    [Dependency] private readonly ILogManager _logMan = default!;
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private ILogManager _logMan = default!;
+    [Dependency] private IEntityManager _entMan = default!;
 
     public string Name => "protodata";
     private ISawmill Log => _log ??= _logMan.GetSawmill("protodata_tag");

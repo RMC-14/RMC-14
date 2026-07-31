@@ -11,8 +11,8 @@ namespace Content.Server.Worldgen.Systems;
 [PublicAPI]
 public abstract class BaseWorldSystem : EntitySystem
 {
-    [Dependency] private readonly WorldControllerSystem _worldController = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+    [Dependency] private WorldControllerSystem _worldController = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
 
     /// <summary>
     ///     Gets a chunk's coordinates in chunk space as an integer value.

@@ -10,8 +10,8 @@ namespace Content.Server._RMC14.Dropship.Utility;
 
 public sealed class RMCOrbitalDeployerSystem : SharedRMCOrbitalDeployerSystem
 {
-    [Dependency] private readonly PhysicsSystem _physics = default!;
-    [Dependency] private readonly RMCNPCSystem _rmcNpc = default!;
+    [Dependency] private PhysicsSystem _physics = default!;
+    [Dependency] private RMCNPCSystem _rmcNpc = default!;
 
     public override void Initialize()
     {

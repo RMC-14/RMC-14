@@ -10,9 +10,9 @@ namespace Content.Server._RMC14.Campfire;
 
 public sealed class CampfireSystem : SharedCampfireSystem
 {
-    [Dependency] private readonly SharedAmbientSoundSystem _ambient = default!;
-    [Dependency] private readonly SharedPointLightSystem _lights = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAmbientSoundSystem _ambient = default!;
+    [Dependency] private SharedPointLightSystem _lights = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
 
     protected override void UpdateAppearance(Entity<CampfireComponent> ent)
     {

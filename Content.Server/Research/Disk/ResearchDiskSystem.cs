@@ -10,9 +10,9 @@ namespace Content.Server.Research.Disk
 {
     public sealed class ResearchDiskSystem : EntitySystem
     {
-        [Dependency] private readonly IPrototypeManager _prototype = default!;
-        [Dependency] private readonly PopupSystem _popupSystem = default!;
-        [Dependency] private readonly ResearchSystem _research = default!;
+        [Dependency] private IPrototypeManager _prototype = default!;
+        [Dependency] private PopupSystem _popupSystem = default!;
+        [Dependency] private ResearchSystem _research = default!;
         public override void Initialize()
         {
             base.Initialize();

@@ -7,8 +7,8 @@ using System.Numerics;
 namespace Content.Client._RMC14.Xenonids.Destroy;
 public sealed partial class XenoDestroySystem : SharedXenoDestroySystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _animPlayer = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private AnimationPlayerSystem _animPlayer = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private const float JumpHeight = 10;
 

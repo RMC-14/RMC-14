@@ -8,9 +8,9 @@ namespace Content.Server._RMC14.Weapons.Ranged;
 
 public sealed class GunBatterySystem : EntitySystem
 {
-    [Dependency] private readonly BatterySystem _battery = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly RMCGunBatterySystem _gunBattery = default!;
+    [Dependency] private BatterySystem _battery = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private RMCGunBatterySystem _gunBattery = default!;
 
     private EntityQuery<GunDrainBatteryOnShootComponent> _gunDrainBatteryQuery;
     private EntityQuery<BatteryComponent> _batteryQuery;

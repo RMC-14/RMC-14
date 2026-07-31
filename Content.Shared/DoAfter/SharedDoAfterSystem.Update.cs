@@ -11,12 +11,12 @@ namespace Content.Shared.DoAfter;
 
 public abstract partial class SharedDoAfterSystem : EntitySystem
 {
-    [Dependency] private readonly IDynamicTypeFactory _factory = default!;
-    [Dependency] private readonly SharedGravitySystem _gravity = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly RMCDoAfterSystem _rmcDoAfter = default!;
+    [Dependency] private IDynamicTypeFactory _factory = default!;
+    [Dependency] private SharedGravitySystem _gravity = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private RMCDoAfterSystem _rmcDoAfter = default!;
 
     private DoAfter[] _doAfters = Array.Empty<DoAfter>();
 

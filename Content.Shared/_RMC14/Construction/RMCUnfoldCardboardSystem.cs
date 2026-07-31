@@ -11,10 +11,10 @@ namespace Content.Shared._RMC14.Construction;
 
 public sealed class RMCUnfoldCardboardSystem : EntitySystem
 {
-    [Dependency] private readonly SharedCMInventorySystem _cmInventory = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedStackSystem _stack = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private SharedCMInventorySystem _cmInventory = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedStackSystem _stack = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
     {

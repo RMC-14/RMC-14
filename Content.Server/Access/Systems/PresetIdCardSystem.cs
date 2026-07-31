@@ -11,10 +11,10 @@ namespace Content.Server.Access.Systems;
 
 public sealed class PresetIdCardSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IdCardSystem _cardSystem = default!;
-    [Dependency] private readonly SharedAccessSystem _accessSystem = default!;
-    [Dependency] private readonly StationSystem _stationSystem = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IdCardSystem _cardSystem = default!;
+    [Dependency] private SharedAccessSystem _accessSystem = default!;
+    [Dependency] private StationSystem _stationSystem = default!;
 
     public override void Initialize()
     {

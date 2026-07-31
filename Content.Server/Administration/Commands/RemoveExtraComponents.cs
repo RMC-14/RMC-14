@@ -7,8 +7,8 @@ namespace Content.Server.Administration.Commands
     [AdminCommand(AdminFlags.Mapping)]
     public sealed class RemoveExtraComponents : LocalizedEntityCommands
     {
-        [Dependency] private readonly IComponentFactory _compFactory = default!;
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+        [Dependency] private IComponentFactory _compFactory = default!;
+        [Dependency] private IPrototypeManager _prototypeManager = default!;
 
         public override string Command => "removeextracomponents";
 

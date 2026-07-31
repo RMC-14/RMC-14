@@ -10,7 +10,7 @@ namespace Content.Server.DeviceLinking.Systems;
 
 public sealed class DeviceLinkSystem : SharedDeviceLinkSystem
 {
-    [Dependency] private readonly DeviceNetworkSystem _deviceNetworkSystem = default!;
+    [Dependency] private DeviceNetworkSystem _deviceNetworkSystem = default!;
 
     public override void Initialize()
     {

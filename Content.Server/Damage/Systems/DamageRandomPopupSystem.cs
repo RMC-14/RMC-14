@@ -11,8 +11,8 @@ namespace Content.Server.Damage.Systems;
 /// </summary>
 public sealed class DamageRandomPopupSystem : EntitySystem
 {
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {

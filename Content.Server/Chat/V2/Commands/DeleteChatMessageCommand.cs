@@ -11,7 +11,7 @@ namespace Content.Server.Chat.V2.Commands;
 [ToolshedCommand, AdminCommand(AdminFlags.Admin)]
 public sealed class DeleteChatMessageCommand : ToolshedCommand
 {
-    [Dependency] private readonly IEntitySystemManager _manager = default!;
+    [Dependency] private IEntitySystemManager _manager = default!;
 
     [CommandImplementation("id")]
     public void DeleteChatMessage(IInvocationContext ctx, uint messageId)

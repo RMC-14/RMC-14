@@ -7,8 +7,8 @@ namespace Content.Server.Atmos.Piping.Binary.EntitySystems;
 
 public sealed class SignalControlledValveSystem : EntitySystem
 {
-    [Dependency] private readonly DeviceLinkSystem _signal = default!;
-    [Dependency] private readonly GasValveSystem _valve = default!;
+    [Dependency] private DeviceLinkSystem _signal = default!;
+    [Dependency] private GasValveSystem _valve = default!;
 
     public override void Initialize()
     {

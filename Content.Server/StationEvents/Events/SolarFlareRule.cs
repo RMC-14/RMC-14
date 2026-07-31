@@ -13,8 +13,8 @@ namespace Content.Server.StationEvents.Events;
 
 public sealed class SolarFlareRule : StationEventSystem<SolarFlareRuleComponent>
 {
-    [Dependency] private readonly PoweredLightSystem _poweredLight = default!;
-    [Dependency] private readonly SharedDoorSystem _door = default!;
+    [Dependency] private PoweredLightSystem _poweredLight = default!;
+    [Dependency] private SharedDoorSystem _door = default!;
 
     private float _effectTimer = 0;
 

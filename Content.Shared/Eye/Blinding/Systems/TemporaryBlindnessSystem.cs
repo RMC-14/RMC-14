@@ -8,7 +8,7 @@ public sealed class TemporaryBlindnessSystem : EntitySystem
 {
     public static readonly ProtoId<StatusEffectPrototype> BlindingStatusEffect = "TemporaryBlindness";
 
-    [Dependency] private readonly BlindableSystem _blindableSystem = default!;
+    [Dependency] private BlindableSystem _blindableSystem = default!;
 
     public override void Initialize()
     {

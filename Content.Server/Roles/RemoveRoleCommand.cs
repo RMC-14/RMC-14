@@ -11,9 +11,9 @@ namespace Content.Server.Roles
     [AdminCommand(AdminFlags.Admin)]
     public sealed class RemoveRoleCommand : LocalizedEntityCommands
     {
-        [Dependency] private readonly IPlayerManager _playerManager = default!;
-        [Dependency] private readonly SharedJobSystem _jobs = default!;
-        [Dependency] private readonly SharedRoleSystem _roles = default!;
+        [Dependency] private IPlayerManager _playerManager = default!;
+        [Dependency] private SharedJobSystem _jobs = default!;
+        [Dependency] private SharedRoleSystem _roles = default!;
 
         public override string Command => "rmrole";
 

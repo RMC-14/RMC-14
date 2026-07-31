@@ -23,7 +23,7 @@ namespace Content.Shared.ActionBlocker
     [UsedImplicitly]
     public sealed class ActionBlockerSystem : EntitySystem
     {
-        [Dependency] private readonly SharedContainerSystem _container = default!;
+        [Dependency] private SharedContainerSystem _container = default!;
 
         private EntityQuery<ComplexInteractionComponent> _complexInteractionQuery;
 

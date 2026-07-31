@@ -5,7 +5,7 @@ namespace Content.Shared._RMC14.Weapons.Ranged.AimedShot.FocusedShooting;
 
 public sealed class RMCFocusedShootingSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {

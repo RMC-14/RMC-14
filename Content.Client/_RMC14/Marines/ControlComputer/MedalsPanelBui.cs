@@ -22,10 +22,10 @@ namespace Content.Client._RMC14.Marines.ControlComputer;
 [UsedImplicitly]
 public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    [Dependency] private readonly IClipboardManager _clipboard = default!;
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IEntitySystemManager _systems = default!;
+    [Dependency] private IClipboardManager _clipboard = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IEntitySystemManager _systems = default!;
 
     [ViewVariables]
     private MedalsPanelWindow? _window;

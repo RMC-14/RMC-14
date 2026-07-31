@@ -7,7 +7,7 @@ namespace Content.Server.StationEvents.Events;
 
 public sealed class AnomalySpawnRule : StationEventSystem<AnomalySpawnRuleComponent>
 {
-    [Dependency] private readonly AnomalySystem _anomaly = default!;
+    [Dependency] private AnomalySystem _anomaly = default!;
 
     protected override void Added(EntityUid uid, AnomalySpawnRuleComponent component, GameRuleComponent gameRule, GameRuleAddedEvent args)
     {

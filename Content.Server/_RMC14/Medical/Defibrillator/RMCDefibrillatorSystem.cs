@@ -9,8 +9,8 @@ namespace Content.Server._RMC14.Medical.Defibrillator;
 
 public sealed class RMCDefibrillatorSystem : SharedRMCDefibrillatorSystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly PowerCellSystem _powerCell = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private PowerCellSystem _powerCell = default!;
 
     public override void Initialize()
     {

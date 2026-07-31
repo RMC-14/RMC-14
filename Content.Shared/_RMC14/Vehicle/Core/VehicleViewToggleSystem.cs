@@ -8,9 +8,9 @@ namespace Content.Shared._RMC14.Vehicle;
 
 public sealed class VehicleViewToggleSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
     {

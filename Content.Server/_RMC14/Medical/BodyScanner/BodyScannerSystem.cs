@@ -7,8 +7,8 @@ namespace Content.Server._RMC14.Medical.BodyScanner;
 
 public sealed class BodyScannerSystem : SharedBodyScannerSystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly RMCMedicalRecordsSystem _rmcMedicalRecords = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private RMCMedicalRecordsSystem _rmcMedicalRecords = default!;
 
     protected override void OnConsoleScan(Entity<BodyScannerConsoleComponent> console, EntityUid occupant, EntityUid user)
     {

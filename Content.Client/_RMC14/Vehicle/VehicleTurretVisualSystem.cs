@@ -13,9 +13,9 @@ public sealed class VehicleTurretVisualSystem : EntitySystem
 {
     private const float PixelsPerMeter = 32f;
 
-    [Dependency] private readonly IEyeManager _eye = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly VehicleTurretSystem _turret = default!;
+    [Dependency] private IEyeManager _eye = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private VehicleTurretSystem _turret = default!;
 
     public override void Initialize()
     {

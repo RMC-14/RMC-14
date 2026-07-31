@@ -10,7 +10,7 @@ public sealed class RMCEffectSystem : SharedRMCEffectSystem
     // Most effects are pretty large and flashy so we're dividing the opacity of the parent by 3 before applying it to the effect.
     private const int OpacityDivider = 3;
 
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void FrameUpdate(float frameTime)
     {

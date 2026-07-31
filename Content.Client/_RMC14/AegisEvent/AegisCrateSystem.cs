@@ -9,8 +9,8 @@ public sealed class AegisCrateSystem : SharedAegisCrateSystem
     private const string AnimationKey = "AegisCrateOpenAnim";
     private Animation? _openingAnimation;
 
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly AnimationPlayerSystem _animation = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private AnimationPlayerSystem _animation = default!;
 
     public override void Initialize()
     {

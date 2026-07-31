@@ -7,9 +7,9 @@ namespace Content.Client.Light.EntitySystems;
 
 public sealed class ExpendableLightVisualizerSystem : VisualizerSystem<ExpendableLightComponent>
 {
-    [Dependency] private readonly PointLightSystem _pointLightSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
-    [Dependency] private readonly LightBehaviorSystem _lightBehavior = default!;
+    [Dependency] private PointLightSystem _pointLightSystem = default!;
+    [Dependency] private SharedAudioSystem _audioSystem = default!;
+    [Dependency] private LightBehaviorSystem _lightBehavior = default!;
 
     public override void Initialize()
     {

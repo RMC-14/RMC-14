@@ -6,7 +6,7 @@ namespace Content.Server._RMC14.Dropship.Weapon;
 
 public sealed class DropshipWeaponSystem : SharedDropshipWeaponSystem
 {
-    [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
+    [Dependency] private ViewSubscriberSystem _viewSubscriber = default!;
 
     protected override void AddPvs(Entity<DropshipTerminalWeaponsComponent> terminal, Entity<ActorComponent?> actor)
     {

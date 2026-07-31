@@ -18,10 +18,10 @@ public sealed class SynthSystem : SharedSynthSystem
 {
     private const string GrenadeTag = "Grenade";
 
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
-    [Dependency] private readonly TagSystem _tags = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private BloodstreamSystem _bloodstream = default!;
+    [Dependency] private SharedBodySystem _body = default!;
+    [Dependency] private TagSystem _tags = default!;
 
     public override void Initialize()
     {

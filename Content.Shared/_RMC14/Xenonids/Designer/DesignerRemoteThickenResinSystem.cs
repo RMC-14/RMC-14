@@ -9,12 +9,12 @@ namespace Content.Shared._RMC14.Xenonids.Designer;
 
 public sealed class DesignerRemoteThickenResinSystem : EntitySystem
 {
-    [Dependency] private readonly SharedXenoConstructionSystem _xenoConstruction = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
+    [Dependency] private SharedXenoConstructionSystem _xenoConstruction = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private XenoPlasmaSystem _plasma = default!;
 
     public override void Initialize()
     {

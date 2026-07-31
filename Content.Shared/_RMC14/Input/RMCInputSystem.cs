@@ -8,8 +8,8 @@ namespace Content.Shared._RMC14.Input;
 
 public sealed class RMCInputSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private INetManager _net = default!;
 
     private bool _activeInputMoverEnabled;
 

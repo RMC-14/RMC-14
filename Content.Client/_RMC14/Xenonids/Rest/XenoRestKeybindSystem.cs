@@ -10,9 +10,9 @@ namespace Content.Client._RMC14.Xenonids.Rest;
 
 public sealed class XenoRestKeybindSystem : EntitySystem
 {
-    [Dependency] private readonly ActionsSystem _actionsSystem = default!;
-    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private ActionsSystem _actionsSystem = default!;
+    [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

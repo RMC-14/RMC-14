@@ -10,7 +10,7 @@ namespace Content.Client.Chemistry.Visualizers;
 /// </summary>
 public sealed class FoamVisualizerSystem : VisualizerSystem<FoamVisualsComponent>
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

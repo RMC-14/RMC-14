@@ -13,7 +13,7 @@ namespace Content.Client.Overlays;
 /// </summary>
 public abstract class EquipmentHudSystem<T> : EntitySystem where T : IComponent
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     [ViewVariables]
     protected bool IsActive;

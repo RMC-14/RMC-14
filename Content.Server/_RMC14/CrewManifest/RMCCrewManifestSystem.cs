@@ -6,8 +6,8 @@ namespace Content.Server._RMC14.CrewManifest;
 
 public sealed class RMCCrewManifestSystem : SharedRMCCrewManifestSystem
 {
-    [Dependency] private readonly CrewManifestSystem _crewManifest = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private CrewManifestSystem _crewManifest = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     public override void OpenCrewManifest(EntityUid user, NetEntity station)
     {

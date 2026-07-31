@@ -13,9 +13,9 @@ namespace Content.Server.Ghost.Roles;
 /// </summary>
 public sealed class ToggleableGhostRoleSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

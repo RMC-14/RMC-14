@@ -10,10 +10,10 @@ namespace Content.Shared.Chemistry.EntitySystems;
 /// </summary>
 public sealed class ScoopableSolutionSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _netManager = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly SolutionTransferSystem _solutionTransfer = default!;
+    [Dependency] private INetManager _netManager = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private SolutionTransferSystem _solutionTransfer = default!;
 
     public override void Initialize()
     {

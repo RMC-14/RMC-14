@@ -6,7 +6,7 @@ namespace Content.Shared.Containers;
 /// </summary>
 public sealed class DeleteOnContainerEmptySystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<DeleteOnContainerEmptyComponent, EntRemovedFromContainerMessage>(OnEntRemoved);

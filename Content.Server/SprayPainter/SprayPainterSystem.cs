@@ -13,7 +13,7 @@ namespace Content.Server.SprayPainter;
 /// </summary>
 public sealed class SprayPainterSystem : SharedSprayPainterSystem
 {
-    [Dependency] private readonly AtmosPipeColorSystem _pipeColor = default!;
+    [Dependency] private AtmosPipeColorSystem _pipeColor = default!;
 
     public override void Initialize()
     {

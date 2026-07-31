@@ -6,9 +6,9 @@ namespace Content.Client.Access.Commands;
 
 public sealed class ShowAccessReadersCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly IOverlayManager _overlay = default!;
-    [Dependency] private readonly IResourceCache _cache = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
+    [Dependency] private IResourceCache _cache = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
 
     public override string Command => "showaccessreaders";
 

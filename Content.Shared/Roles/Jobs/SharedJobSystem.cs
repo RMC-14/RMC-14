@@ -13,9 +13,9 @@ namespace Content.Shared.Roles.Jobs;
 /// </summary>
 public abstract class SharedJobSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPlayerSystem _playerSystem = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly SharedRoleSystem _roles = default!;
+    [Dependency] private SharedPlayerSystem _playerSystem = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private SharedRoleSystem _roles = default!;
 
     private readonly Dictionary<ProtoId<PlayTimeTrackerPrototype>, List<ProtoId<JobPrototype>>> _inverseTrackerLookup = new();
 

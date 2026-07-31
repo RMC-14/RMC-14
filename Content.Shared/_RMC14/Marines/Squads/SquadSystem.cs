@@ -43,26 +43,26 @@ namespace Content.Shared._RMC14.Marines.Squads;
 
 public sealed class SquadSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly EncryptionKeySystem _encryptionKey = default!;
-    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
-    [Dependency] private readonly SharedIdCardSystem _id = default!;
-    [Dependency] private readonly SharedCMInventorySystem _cmInventory = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedJobSystem _job = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedMarineSystem _marine = default!;
-    [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
-    [Dependency] private readonly SharedMarineOrdersSystem _marineOrders = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly SharedAwardRecommendationSystem _awardRecommendation = default!;
-    [Dependency] private readonly SharedRMCBanSystem _rmcBan = default!;
-    [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private EncryptionKeySystem _encryptionKey = default!;
+    [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private SharedIdCardSystem _id = default!;
+    [Dependency] private SharedCMInventorySystem _cmInventory = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedJobSystem _job = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedMarineSystem _marine = default!;
+    [Dependency] private SharedMarineAnnounceSystem _marineAnnounce = default!;
+    [Dependency] private SharedMarineOrdersSystem _marineOrders = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private SharedAwardRecommendationSystem _awardRecommendation = default!;
+    [Dependency] private SharedRMCBanSystem _rmcBan = default!;
+    [Dependency] private SharedCMChatSystem _rmcChat = default!;
 
     private static readonly ProtoId<JobPrototype> SquadLeaderJob = "CMSquadLeader";
     private static readonly ProtoId<JobPrototype> IntelOfficerJob = "CMIntelOfficer";

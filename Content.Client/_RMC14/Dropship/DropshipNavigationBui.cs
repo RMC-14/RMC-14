@@ -11,8 +11,8 @@ namespace Content.Client._RMC14.Dropship;
 [UsedImplicitly]
 public sealed class DropshipNavigationBui : BoundUserInterface
 {
-    [Dependency] private readonly IEntityManager _entities = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IEntityManager _entities = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     [ViewVariables]
     private DropshipNavigationWindow? _window;

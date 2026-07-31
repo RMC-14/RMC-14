@@ -8,7 +8,7 @@ namespace Content.Client.Xenoarchaeology.Equipment;
 /// <inheritdoc />
 public sealed class ArtifactAnalyzerSystem : SharedArtifactAnalyzerSystem
 {
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

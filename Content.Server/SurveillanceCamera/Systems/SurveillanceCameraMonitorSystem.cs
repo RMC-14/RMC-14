@@ -14,9 +14,9 @@ namespace Content.Server.SurveillanceCamera;
 
 public sealed class SurveillanceCameraMonitorSystem : EntitySystem
 {
-    [Dependency] private readonly SurveillanceCameraSystem _surveillanceCameras = default!;
-    [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
-    [Dependency] private readonly DeviceNetworkSystem _deviceNetworkSystem = default!;
+    [Dependency] private SurveillanceCameraSystem _surveillanceCameras = default!;
+    [Dependency] private UserInterfaceSystem _userInterface = default!;
+    [Dependency] private DeviceNetworkSystem _deviceNetworkSystem = default!;
 
     public override void Initialize()
     {

@@ -24,15 +24,15 @@ namespace Content.Server.GameTicking
         /// <summary>
         ///     For access to CVars in status responses.
         /// </summary>
-        [Dependency] private readonly IConfigurationManager _cfg = default!;
+        [Dependency] private IConfigurationManager _cfg = default!;
         /// <summary>
         ///     For access to the round ID in status responses.
         /// </summary>
-        [Dependency] private readonly SharedGameTicker _gameTicker = default!;
+        [Dependency] private SharedGameTicker _gameTicker = default!;
         /// <summary>
         ///     Needed to get entity system instances.
         /// </summary>
-        [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
+        [Dependency] private IEntitySystemManager _entitySystemManager = default!;
 
         private void InitializeStatusShell()
         {

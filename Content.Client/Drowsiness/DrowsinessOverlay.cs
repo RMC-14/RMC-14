@@ -12,11 +12,11 @@ public sealed class DrowsinessOverlay : Overlay
 {
     private static readonly ProtoId<ShaderPrototype> Shader = "Drowsiness";
 
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IEntitySystemManager _sysMan = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IEntitySystemManager _sysMan = default!;
+    [Dependency] private IGameTiming _timing = default!;
     private readonly SharedStatusEffectsSystem _statusEffects = default!;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;

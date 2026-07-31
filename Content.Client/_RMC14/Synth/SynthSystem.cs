@@ -8,7 +8,7 @@ namespace Content.Client._RMC14.Synth;
 
 public sealed class SynthSystem : SharedSynthSystem
 { // TODO rework this code why is damage visuals client only
-    [Dependency] private readonly DamageVisualsSystem _damageVisuals = default!;
+    [Dependency] private DamageVisualsSystem _damageVisuals = default!;
 
     private static readonly ProtoId<DamageGroupPrototype> GroupToChange = "Brute";
 

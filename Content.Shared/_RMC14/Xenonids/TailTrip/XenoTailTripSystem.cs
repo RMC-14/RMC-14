@@ -15,14 +15,14 @@ namespace Content.Shared._RMC14.Xenonids.TailTrip;
 
 public sealed class XenoTailTripSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly RMCDazedSystem _daze = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly RMCSlowSystem _slow = default!;
-    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
-    [Dependency] private readonly RMCSizeStunSystem _size = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private RMCDazedSystem _daze = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private RMCSlowSystem _slow = default!;
+    [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private RMCSizeStunSystem _size = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

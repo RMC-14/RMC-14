@@ -10,8 +10,8 @@ namespace Content.Shared._RMC14.Attachable.Systems;
 
 public sealed class AttachablePryingSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

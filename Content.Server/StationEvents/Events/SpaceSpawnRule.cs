@@ -13,7 +13,7 @@ namespace Content.Server.StationEvents.Events;
 /// </summary>
 public sealed class SpaceSpawnRule : StationEventSystem<SpaceSpawnRuleComponent>
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {

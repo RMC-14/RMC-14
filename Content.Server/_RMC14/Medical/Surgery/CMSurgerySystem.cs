@@ -23,15 +23,15 @@ namespace Content.Server._RMC14.Medical.Surgery;
 
 public sealed class CMSurgerySystem : SharedCMSurgerySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly WoundsSystem _wounds = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private SkillsSystem _skills = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private WoundsSystem _wounds = default!;
 
     private readonly List<EntProtoId> _surgeries = new();
 

@@ -13,9 +13,9 @@ namespace Content.Client._RMC14.Commendations;
 
 public sealed class CommendationsManager : IPostInjectInit
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IEntitySystemManager _systems = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IEntitySystemManager _systems = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private CommendationsWindow? _receivedWindow;
     private CommendationsWindow? _givenWindow;

@@ -5,7 +5,7 @@ namespace Content.Shared.Stunnable;
 
 public abstract class SharedStunbatonSystem : EntitySystem
 {
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
 
     public override void Initialize()
     {

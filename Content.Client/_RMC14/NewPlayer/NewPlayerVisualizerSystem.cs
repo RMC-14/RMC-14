@@ -10,9 +10,9 @@ namespace Content.Client._RMC14.NewPlayer;
 
 public sealed class NewPlayerVisualizerSystem : VisualizerSystem<NewPlayerLabelComponent>
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IConfigurationManager _configManager = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IConfigurationManager _configManager = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private EntityQuery<SeeNewPlayersComponent> _seeNewPlayersQuery;
     private bool _showPlayerIcons;

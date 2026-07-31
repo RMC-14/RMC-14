@@ -6,7 +6,7 @@ namespace Content.Client.Ghost;
 
 public sealed class GhostToggleSelfVisibility : LocalizedEntityCommands
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override string Command => "toggleselfghost";
 

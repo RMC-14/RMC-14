@@ -9,9 +9,9 @@ namespace Content.Shared._RMC14.Attachable.Systems;
 
 public sealed class AttachableIFFSystem : EntitySystem
 {
-    [Dependency] private readonly AttachableHolderSystem _holder = default!;
-    [Dependency] private readonly GunIFFSystem _gunIFF = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private AttachableHolderSystem _holder = default!;
+    [Dependency] private GunIFFSystem _gunIFF = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

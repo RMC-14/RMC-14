@@ -21,15 +21,15 @@ namespace Content.Shared._RMC14.Xenonids.HiveLeader;
 
 public sealed class HiveLeaderSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly DialogSystem _dialog = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedXenoWatchSystem _xenoWatch = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private DialogSystem _dialog = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedCMChatSystem _rmcChat = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedXenoWatchSystem _xenoWatch = default!;
 
     private EntityQuery<XenoAttachedOvipositorComponent> _attachedOvipositorQuery;
     private EntityQuery<HiveLeaderComponent> _hiveLeaderQuery;

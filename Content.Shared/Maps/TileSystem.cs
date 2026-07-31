@@ -14,11 +14,11 @@ namespace Content.Shared.Maps;
 /// </summary>
 public sealed class TileSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _robustRandom = default!;
-    [Dependency] private readonly ITileDefinitionManager _tileDefinitionManager = default!;
-    [Dependency] private readonly SharedDecalSystem _decal = default!;
-    [Dependency] private readonly SharedMapSystem _maps = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private IRobustRandom _robustRandom = default!;
+    [Dependency] private ITileDefinitionManager _tileDefinitionManager = default!;
+    [Dependency] private SharedDecalSystem _decal = default!;
+    [Dependency] private SharedMapSystem _maps = default!;
+    [Dependency] private TurfSystem _turf = default!;
 
     /// <summary>
     ///     Returns a weighted pick of a tile variant.

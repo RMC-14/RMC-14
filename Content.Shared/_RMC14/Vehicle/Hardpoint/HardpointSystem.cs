@@ -51,26 +51,26 @@ public sealed partial class HardpointSystem : EntitySystem
     private readonly List<(EntityUid Item, HardpointIntegrityComponent Integrity)> _topLevelHardpoints = new();
     private readonly HashSet<EntityUid> _visitedHardpoints = new();
 
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedContainerSystem _containers = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedExplosionSystem _explosion = default!;
-    [Dependency] private readonly SharedGunSystem _guns = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly RMCRepairableSystem _repairable = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly VehicleSpotlightSystem _spotlight = default!;
-    [Dependency] private readonly SharedToolSystem _tool = default!;
-    [Dependency] private readonly VehicleTopologySystem _topology = default!;
-    [Dependency] private readonly Content.Shared.Vehicle.VehicleSystem _vehicles = default!;
-    [Dependency] private readonly VehicleWeaponsSystem _weapons = default!;
-    [Dependency] private readonly VehicleWheelSystem _wheels = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedContainerSystem _containers = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedExplosionSystem _explosion = default!;
+    [Dependency] private SharedGunSystem _guns = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private RMCRepairableSystem _repairable = default!;
+    [Dependency] private SkillsSystem _skills = default!;
+    [Dependency] private VehicleSpotlightSystem _spotlight = default!;
+    [Dependency] private SharedToolSystem _tool = default!;
+    [Dependency] private VehicleTopologySystem _topology = default!;
+    [Dependency] private Content.Shared.Vehicle.VehicleSystem _vehicles = default!;
+    [Dependency] private VehicleWeaponsSystem _weapons = default!;
+    [Dependency] private VehicleWheelSystem _wheels = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {

@@ -9,7 +9,7 @@ namespace Content.Server.Chat.Commands;
 [AdminCommand(AdminFlags.Admin)]
 public sealed class SetOOCCommand : LocalizedCommands
 {
-    [Dependency] private readonly IConfigurationManager _configManager = default!;
+    [Dependency] private IConfigurationManager _configManager = default!;
 
     public override string Command => "setooc";
 

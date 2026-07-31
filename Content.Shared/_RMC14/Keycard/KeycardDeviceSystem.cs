@@ -11,12 +11,12 @@ namespace Content.Shared._RMC14.Keycard;
 
 public sealed class KeycardDeviceSystem : EntitySystem
 {
-    [Dependency] private readonly AccessReaderSystem _accessReader = default!;
-    [Dependency] private readonly RMCAlertLevelSystem _alertLevel = default!;
-    [Dependency] private readonly DialogSystem _dialog = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private AccessReaderSystem _accessReader = default!;
+    [Dependency] private RMCAlertLevelSystem _alertLevel = default!;
+    [Dependency] private DialogSystem _dialog = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private readonly HashSet<Entity<KeycardDeviceComponent>> _devices = new();
 

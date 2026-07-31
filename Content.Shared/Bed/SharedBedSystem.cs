@@ -15,12 +15,12 @@ namespace Content.Shared.Bed;
 public abstract class SharedBedSystem : EntitySystem
 {
     [Dependency] protected readonly IGameTiming Timing = default!;
-    [Dependency] private readonly ActionContainerSystem _actConts = default!;
-    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
-    [Dependency] private readonly EmagSystem _emag = default!;
-    [Dependency] private readonly SharedMetabolizerSystem _metabolizer = default!;
-    [Dependency] private readonly SharedPowerReceiverSystem _powerReceiver = default!;
-    [Dependency] private readonly SleepingSystem _sleepingSystem = default!;
+    [Dependency] private ActionContainerSystem _actConts = default!;
+    [Dependency] private SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private EmagSystem _emag = default!;
+    [Dependency] private SharedMetabolizerSystem _metabolizer = default!;
+    [Dependency] private SharedPowerReceiverSystem _powerReceiver = default!;
+    [Dependency] private SleepingSystem _sleepingSystem = default!;
 
     public override void Initialize()
     {

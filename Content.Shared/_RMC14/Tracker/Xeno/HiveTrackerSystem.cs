@@ -17,17 +17,17 @@ namespace Content.Shared._RMC14.Tracker.Xeno;
 
 public sealed class HiveTrackerSystem : EntitySystem
 {
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly DialogSystem _dialog = default!;
-    [Dependency] private readonly IComponentFactory _factory = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly TrackerSystem _tracker = default!;
-    [Dependency] private readonly SquadLeaderTrackerSystem _squadLeaderTrackerSystem = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedXenoWatchSystem _xenoWatch = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private DialogSystem _dialog = default!;
+    [Dependency] private IComponentFactory _factory = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private TrackerSystem _tracker = default!;
+    [Dependency] private SquadLeaderTrackerSystem _squadLeaderTrackerSystem = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedXenoWatchSystem _xenoWatch = default!;
 
     private const string HiveTrackerCategory = "HiveTracker";
     private const string QueenTrackerComponent = "XenoOvipositorCapable";

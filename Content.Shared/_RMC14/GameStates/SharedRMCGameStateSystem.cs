@@ -8,8 +8,8 @@ namespace Content.Shared._RMC14.GameStates;
 
 public sealed class SharedRMCGameStateSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
     {

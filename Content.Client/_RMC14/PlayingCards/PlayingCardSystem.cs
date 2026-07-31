@@ -10,9 +10,9 @@ namespace Content.Client._RMC14.PlayingCards;
 
 public sealed class PlayingCardSystem : SharedPlayingCardSystem
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private const int MaxVisibleCards = 5;
     private const float CardFanOffset = 2f / 32f;

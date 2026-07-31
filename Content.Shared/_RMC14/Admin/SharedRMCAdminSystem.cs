@@ -7,7 +7,7 @@ namespace Content.Shared._RMC14.Admin;
 
 public abstract class SharedRMCAdminSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminManager _admin = default!;
+    [Dependency] private ISharedAdminManager _admin = default!;
 
     public override void Initialize()
     {

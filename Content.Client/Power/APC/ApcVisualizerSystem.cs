@@ -5,7 +5,7 @@ namespace Content.Client.Power.APC;
 
 public sealed class ApcVisualizerSystem : VisualizerSystem<ApcVisualsComponent>
 {
-    [Dependency] private readonly SharedPointLightSystem _lights = default!;
+    [Dependency] private SharedPointLightSystem _lights = default!;
 
     protected override void OnAppearanceChange(EntityUid uid, ApcVisualsComponent comp, ref AppearanceChangeEvent args)
     {

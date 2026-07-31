@@ -54,7 +54,7 @@ public abstract class SharedMobCollisionSystem : EntitySystem
     private float _massDiffCap;
 
     // RMC14
-    [Dependency] private readonly RMCSizeStunSystem _rmcSizeStun = default!;
+    [Dependency] private RMCSizeStunSystem _rmcSizeStun = default!;
 
     private EntityQuery<RMCMobCollisionMassComponent> _rmcMobCollisionMassQuery;
     private EntityQuery<XenoComponent> _xenoQuery;

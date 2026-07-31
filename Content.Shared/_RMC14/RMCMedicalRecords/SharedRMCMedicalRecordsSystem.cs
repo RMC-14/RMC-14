@@ -9,7 +9,7 @@ namespace Content.Shared._RMC14.RMCMedicalRecords;
 
 public abstract class SharedRMCMedicalRecordsSystem : EntitySystem
 {
-    [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private SkillsSystem _skills = default!;
 
     private const int MinimumSkillLvl = 2;
     private static readonly EntProtoId<SkillDefinitionComponent> MedicalSkill = "RMCSkillMedical";

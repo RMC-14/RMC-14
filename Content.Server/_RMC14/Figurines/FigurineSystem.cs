@@ -20,13 +20,13 @@ namespace Content.Server._RMC14.Figurines;
 
 public sealed class FigurineSystem : EntitySystem
 {
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly LinkAccountManager _linkAccount = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly StorageSystem _storage = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private HandsSystem _hands = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private LinkAccountManager _linkAccount = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private StorageSystem _storage = default!;
 
     private readonly Dictionary<string, EntProtoId> _allFigurines = new();
     private readonly HashSet<EntProtoId> _figurines = [];

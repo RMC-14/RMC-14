@@ -12,8 +12,8 @@ namespace Content.Server.Interaction;
 [AdminCommand(AdminFlags.Debug)]
 public sealed class TilePryCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly ITileDefinitionManager _tileDefinitionManager = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
+    [Dependency] private ITileDefinitionManager _tileDefinitionManager = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
 
     private readonly string _platingId = "Plating";
 

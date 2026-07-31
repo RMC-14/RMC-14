@@ -6,7 +6,7 @@ namespace Content.Client.Sprite;
 
 public sealed class ScaleVisualsSystem : SharedScaleVisualsSystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

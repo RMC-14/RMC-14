@@ -6,7 +6,7 @@ namespace Content.Client._RMC14.Vehicle.Viewport;
 
 public sealed class VehicleViewportSystem : EntitySystem
 {
-    [Dependency] private readonly SharedEyeSystem _eye = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
 
     public override void Initialize()
     {

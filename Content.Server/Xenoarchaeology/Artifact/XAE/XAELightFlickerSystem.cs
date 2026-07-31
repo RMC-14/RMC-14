@@ -12,9 +12,9 @@ namespace Content.Server.Xenoarchaeology.Artifact.XAE;
 /// </summary>
 public sealed class XAELightFlickerSystem : BaseXAESystem<XAELightFlickerComponent>
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly GhostSystem _ghost = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private GhostSystem _ghost = default!;
 
     private EntityQuery<PoweredLightComponent> _lights;
 

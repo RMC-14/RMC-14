@@ -9,9 +9,9 @@ namespace Content.Server.Silicons.Laws;
 /// </summary>
 public sealed class StartIonStormedSystem : EntitySystem
 {
-    [Dependency] private readonly IonStormSystem _ionStorm = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SiliconLawSystem _siliconLaw = default!;
+    [Dependency] private IonStormSystem _ionStorm = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private SiliconLawSystem _siliconLaw = default!;
 
     public override void Initialize()
     {

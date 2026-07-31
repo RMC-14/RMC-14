@@ -33,14 +33,14 @@ namespace Content.Shared._RMC14.Armor;
 
 public sealed class CMArmorSystem : EntitySystem
 {
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly ISerializationManager _serializationManager = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private ISerializationManager _serializationManager = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
 
     private static readonly ProtoId<DamageGroupPrototype> ArmorGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BioGroup = "Burn";

@@ -11,8 +11,8 @@ namespace Content.Server.Traitor.Systems;
 /// </summary>
 public sealed class AutoTraitorSystem : EntitySystem
 {
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
 
     public override void Initialize()
     {

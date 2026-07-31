@@ -14,7 +14,7 @@ namespace Content.Server.Revenant.EntitySystems;
 /// </summary>
 public sealed class EssenceSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {

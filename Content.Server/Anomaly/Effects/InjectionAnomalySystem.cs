@@ -15,9 +15,9 @@ namespace Content.Server.Anomaly.Effects;
 /// <see cref="InjectionAnomalyComponent"/>
 public sealed class InjectionAnomalySystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private TransformSystem _transform = default!;
 
     private EntityQuery<InjectableSolutionComponent> _injectableQuery;
 

@@ -10,9 +10,9 @@ namespace Content.Client.Parallax;
 
 public sealed class ParallaxSystem : SharedParallaxSystem
 {
-    [Dependency] private readonly IOverlayManager _overlay = default!;
-    [Dependency] private readonly IParallaxManager _parallax = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
+    [Dependency] private IParallaxManager _parallax = default!;
+    [Dependency] private SharedMapSystem _map = default!;
 
     private static readonly ProtoId<ParallaxPrototype> Fallback = "Default";
 

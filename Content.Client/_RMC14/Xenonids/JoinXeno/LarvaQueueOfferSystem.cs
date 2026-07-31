@@ -12,9 +12,9 @@ namespace Content.Client._RMC14.Xenonids.JoinXeno;
 [UsedImplicitly]
 public sealed class LarvaQueueOfferSystem : EntitySystem
 {
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
 
     private static readonly SoundPathSpecifier OfferSound = new("/Audio/Effects/newplayerping.ogg");
 

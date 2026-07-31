@@ -15,11 +15,11 @@ namespace Content.Server.Anomaly.Effects;
 /// </summary>
 public sealed class ProjectileAnomalySystem : EntitySystem
 {
-    [Dependency] private readonly TransformSystem _xform = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly GunSystem _gunSystem = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private TransformSystem _xform = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private GunSystem _gunSystem = default!;
+    [Dependency] private SharedMapSystem _map = default!;
 
     private EntityQuery<TransformComponent> _xFormQuery;
     private EntityQuery<MobStateComponent> _mobQuery;

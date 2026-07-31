@@ -5,7 +5,7 @@ namespace Content.Client.Emp;
 
 public sealed class EmpSystem : SharedEmpSystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Update(float frameTime)
     {

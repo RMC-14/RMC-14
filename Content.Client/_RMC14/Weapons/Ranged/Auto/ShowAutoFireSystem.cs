@@ -6,9 +6,9 @@ namespace Content.Client._RMC14.Weapons.Ranged.Auto;
 
 public sealed class ShowAutoFireSystem : EntitySystem
 {
-    [Dependency] private readonly IConsoleHost _console = default!;
-    [Dependency] private readonly GunToggleableAutoFireSystem _autoFire = default!;
-    [Dependency] private readonly IOverlayManager _overlay = default!;
+    [Dependency] private IConsoleHost _console = default!;
+    [Dependency] private GunToggleableAutoFireSystem _autoFire = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
 
     public override void Initialize()
     {

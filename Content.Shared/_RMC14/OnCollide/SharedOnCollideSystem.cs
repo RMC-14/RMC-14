@@ -18,17 +18,17 @@ namespace Content.Shared._RMC14.OnCollide;
 
 public abstract class SharedOnCollideSystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly ThermalCloakSystem _cloak = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly XenoSpitSystem _xenoSpit = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly RMCSizeStunSystem _size = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private ThermalCloakSystem _cloak = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private XenoSpitSystem _xenoSpit = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private RMCSizeStunSystem _size = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
 
     private EntityQuery<CollideChainComponent> _collideChainQuery;
     private EntityQuery<DamageOnCollideComponent> _damageOnCollideQuery;

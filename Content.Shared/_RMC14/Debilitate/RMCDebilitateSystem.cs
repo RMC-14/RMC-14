@@ -6,8 +6,8 @@ namespace Content.Shared._RMC14.Debilitate;
 
 public sealed class RMCDebilitateSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
 
     public override void Initialize()
     {

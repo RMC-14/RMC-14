@@ -10,7 +10,7 @@ namespace Content.Client.Revolutionary;
 /// </summary>
 public sealed class RevolutionarySystem : SharedRevolutionarySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     public override void Initialize()
     {

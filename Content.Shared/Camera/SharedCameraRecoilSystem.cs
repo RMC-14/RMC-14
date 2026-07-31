@@ -30,8 +30,8 @@ public abstract class SharedCameraRecoilSystem : EntitySystem
     /// </summary>
     protected const float KickMagnitudeMax = 1f;
 
-    [Dependency] private readonly SharedContentEyeSystem _eye = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private SharedContentEyeSystem _eye = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
     {

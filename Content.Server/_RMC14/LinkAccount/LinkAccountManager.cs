@@ -14,11 +14,11 @@ namespace Content.Server._RMC14.LinkAccount;
 
 public sealed class LinkAccountManager : IPostInjectInit
 {
-    [Dependency] private readonly IServerDbManager _db = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly UserDbDataManager _userDb = default!;
+    [Dependency] private IServerDbManager _db = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private UserDbDataManager _userDb = default!;
 
     private readonly Dictionary<NetUserId, TimeSpan> _lastRequest = new();
     private readonly TimeSpan _minimumWait = TimeSpan.FromSeconds(0.5);

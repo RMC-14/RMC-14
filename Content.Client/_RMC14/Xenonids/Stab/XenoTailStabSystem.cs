@@ -14,12 +14,12 @@ namespace Content.Client._RMC14.Xenonids.Stab;
 
 public sealed class XenoTailStabSystem : SharedXenoTailStabSystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _animation = default!;
-    [Dependency] private readonly IConsoleHost _console = default!;
-    [Dependency] private readonly InteractionSystem _interaction = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IOverlayManager _overlays = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private AnimationPlayerSystem _animation = default!;
+    [Dependency] private IConsoleHost _console = default!;
+    [Dependency] private InteractionSystem _interaction = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IOverlayManager _overlays = default!;
+    [Dependency] private TransformSystem _transform = default!;
 
     private const string TailAnimationKey = "cm-xeno-tail";
     private const string TailFadeAnimationKey = "cm-xeno-tail-fade";

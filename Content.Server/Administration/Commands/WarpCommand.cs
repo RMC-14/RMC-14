@@ -16,7 +16,7 @@ namespace Content.Server.Administration.Commands
     [AdminCommand(AdminFlags.AdminGhost)] //RMC14
     public sealed class WarpCommand : IConsoleCommand
     {
-        [Dependency] private readonly IEntityManager _entManager = default!;
+        [Dependency] private IEntityManager _entManager = default!;
 
         public string Command => "warp";
         public string Description => "Teleports you to predefined areas on the map.";

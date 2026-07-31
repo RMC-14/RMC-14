@@ -8,7 +8,7 @@ namespace Content.Client.AlertLevel;
 
 public sealed class AlertLevelDisplaySystem : EntitySystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

@@ -5,7 +5,7 @@ namespace Content.Shared._RMC14.Tracker;
 
 public sealed class TrackerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public static readonly short CenterSeverity = 1;
     private static readonly Dictionary<Direction, short> AlertSeverity = new()

@@ -13,9 +13,9 @@ namespace Content.Server.Database;
 /// </remarks>
 public sealed class ServerDbEntryManager
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IServerDbManager _db = default!;
-    [Dependency] private readonly ILogManager _logManager = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IServerDbManager _db = default!;
+    [Dependency] private ILogManager _logManager = default!;
 
     private Task<Server>? _serverEntityTask;
 

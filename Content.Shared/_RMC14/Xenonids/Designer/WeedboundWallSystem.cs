@@ -10,9 +10,9 @@ namespace Content.Shared._RMC14.Xenonids.Designer;
 
 public sealed class WeedboundWallSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private RMCMapSystem _rmcMap = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
 
     private EntityQuery<XenoWeedsComponent> _weedsQuery;
 

@@ -11,7 +11,7 @@ namespace Content.Client.NPC;
 
 public sealed class NPCSteeringSystem : SharedNPCSteeringSystem
 {
-    [Dependency] private readonly IOverlayManager _overlay = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
 
     public bool DebugEnabled
     {

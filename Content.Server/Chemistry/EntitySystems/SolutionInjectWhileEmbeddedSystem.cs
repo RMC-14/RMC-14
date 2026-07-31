@@ -10,7 +10,7 @@ namespace Content.Server.Chemistry.EntitySystems;
 /// </summary>
 public sealed class SolutionInjectWhileEmbeddedSystem : EntitySystem
 {
-	[Dependency] private readonly IGameTiming _gameTiming = default!;
+	[Dependency] private IGameTiming _gameTiming = default!;
 
     public override void Initialize()
     {

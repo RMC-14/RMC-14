@@ -37,8 +37,8 @@ public abstract class SharedActionsSystem : EntitySystem
     [Dependency] private   readonly SharedTransformSystem _transform = default!;
 
     // RMC14
-    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
-    [Dependency] private readonly SharedRMCLagCompensationSystem _rmcLagCompensation = default!;
+    [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private SharedRMCLagCompensationSystem _rmcLagCompensation = default!;
 
     private EntityQuery<ActionComponent> _actionQuery;
     private EntityQuery<ActionsComponent> _actionsQuery;

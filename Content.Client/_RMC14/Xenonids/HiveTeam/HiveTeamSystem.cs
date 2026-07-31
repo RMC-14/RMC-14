@@ -6,7 +6,7 @@ namespace Content.Client._RMC14.Xenonids.HiveTeam;
 
 public sealed class HiveTeamSystem : EntitySystem
 {
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {

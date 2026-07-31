@@ -6,8 +6,8 @@ namespace Content.Server._RMC14.Tether;
 
 public sealed class RMCTetherSystem : SharedRMCTetherSystem
 {
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly RMCPvsSystem _pvs = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private RMCPvsSystem _pvs = default!;
 
     public override void Initialize()
     {

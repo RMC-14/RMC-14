@@ -5,7 +5,7 @@ namespace Content.Shared._RMC14.RMCCustomHoliday;
 
 public sealed class RMCCustomHolidaySystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     public IEnumerable<CustomHolidayPrototype> GetCustomHolidays()
     {

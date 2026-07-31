@@ -12,8 +12,8 @@ namespace Content.Client._RMC14.Sprite;
 public sealed class RMCAltSpriteVisualizerSystem : VisualizerSystem<RMCAlternateSpriteComponent>
 {
 
-    [Dependency] private readonly IConfigurationManager _configuration = default!;
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
+    [Dependency] private IConfigurationManager _configuration = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
 
     private bool _useAlternateSprites;
 

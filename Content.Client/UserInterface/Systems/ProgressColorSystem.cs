@@ -9,7 +9,7 @@ namespace Content.Client.UserInterface.Systems;
 /// </summary>
 public sealed class ProgressColorSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _configuration = default!;
+    [Dependency] private IConfigurationManager _configuration = default!;
 
     private bool _colorBlindFriendly;
 

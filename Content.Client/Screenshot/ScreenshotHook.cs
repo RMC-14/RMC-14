@@ -17,10 +17,10 @@ namespace Content.Client.Screenshot
     {
         private static readonly ResPath BaseScreenshotPath = new("/Screenshots");
 
-        [Dependency] private readonly IInputManager _inputManager = default!;
-        [Dependency] private readonly IClyde _clyde = default!;
-        [Dependency] private readonly IResourceManager _resourceManager = default!;
-        [Dependency] private readonly IStateManager _stateManager = default!;
+        [Dependency] private IInputManager _inputManager = default!;
+        [Dependency] private IClyde _clyde = default!;
+        [Dependency] private IResourceManager _resourceManager = default!;
+        [Dependency] private IStateManager _stateManager = default!;
 
         private ISawmill _sawmill = default!;
 

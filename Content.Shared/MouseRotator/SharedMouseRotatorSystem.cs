@@ -8,7 +8,7 @@ namespace Content.Shared.MouseRotator;
 /// <see cref="MouseRotatorComponent"/>
 public abstract class SharedMouseRotatorSystem : EntitySystem
 {
-    [Dependency] private readonly RotateToFaceSystem _rotate = default!;
+    [Dependency] private RotateToFaceSystem _rotate = default!;
 
     public override void Initialize()
     {

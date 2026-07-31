@@ -9,8 +9,8 @@ namespace Content.Server.GameTicking.Commands
     [AdminCommand(AdminFlags.Round)]
     sealed class EndRoundCommand : IConsoleCommand
     {
-        [Dependency] private readonly IEntityManager _e = default!;
-        [Dependency] private readonly IConfigurationManager _cfg = default!;
+        [Dependency] private IEntityManager _e = default!;
+        [Dependency] private IConfigurationManager _cfg = default!;
 
 
         public string Command => "endround";

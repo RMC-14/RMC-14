@@ -16,7 +16,7 @@ namespace Content.Shared.Tag;
 /// </summary>
 public sealed class TagSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     private EntityQuery<TagComponent> _tagQuery;
 

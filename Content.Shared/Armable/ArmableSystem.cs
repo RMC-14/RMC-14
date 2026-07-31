@@ -11,7 +11,7 @@ namespace Content.Shared.Armable;
 /// </summary>
 public sealed class ArmableSystem : EntitySystem
 {
-    [Dependency] private readonly ItemToggleSystem _itemToggle = default!;
+    [Dependency] private ItemToggleSystem _itemToggle = default!;
 
     public override void Initialize()
     {

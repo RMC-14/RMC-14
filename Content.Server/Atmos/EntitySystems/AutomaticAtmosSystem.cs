@@ -11,7 +11,7 @@ namespace Content.Server.Atmos.EntitySystems;
 /// </summary>
 public sealed class AutomaticAtmosSystem : EntitySystem
 {
-    [Dependency] private readonly AtmosphereSystem _atmosphereSystem = default!;
+    [Dependency] private AtmosphereSystem _atmosphereSystem = default!;
 
     public override void Initialize()
     {

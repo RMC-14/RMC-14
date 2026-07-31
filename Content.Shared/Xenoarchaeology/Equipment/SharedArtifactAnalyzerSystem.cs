@@ -14,7 +14,7 @@ namespace Content.Shared.Xenoarchaeology.Equipment;
 /// </summary>
 public abstract class SharedArtifactAnalyzerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPowerReceiverSystem _powerReceiver = default!;
+    [Dependency] private SharedPowerReceiverSystem _powerReceiver = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

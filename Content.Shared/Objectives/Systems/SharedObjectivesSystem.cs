@@ -11,8 +11,8 @@ namespace Content.Shared.Objectives.Systems;
 /// </summary>
 public abstract class SharedObjectivesSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private IPrototypeManager _protoMan = default!;
 
     private EntityQuery<MetaDataComponent> _metaQuery;
 

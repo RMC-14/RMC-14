@@ -7,9 +7,9 @@ namespace Content.Server._RMC14.Vehicle;
 
 public sealed class VehicleHardpointVisualsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
-    [Dependency] private readonly VehicleTopologySystem _topology = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private VehicleTopologySystem _topology = default!;
 
     public override void Initialize()
     {

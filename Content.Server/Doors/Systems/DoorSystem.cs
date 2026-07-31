@@ -10,7 +10,7 @@ namespace Content.Server.Doors.Systems;
 
 public sealed class DoorSystem : SharedDoorSystem
 {
-    [Dependency] private readonly AirtightSystem _airtightSystem = default!;
+    [Dependency] private AirtightSystem _airtightSystem = default!;
 
     public override void Initialize()
     {

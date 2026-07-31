@@ -18,17 +18,17 @@ namespace Content.Server._RMC14.Xenonids.Egg.EggRetriever;
 
 public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSystem
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedInteractionSystem _interact = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly EntityManager _entities = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly ThrowingSystem _throw = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedXenoAnnounceSystem _announce = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedInteractionSystem _interact = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private EntityManager _entities = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private ThrowingSystem _throw = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedXenoAnnounceSystem _announce = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private XenoPlasmaSystem _plasma = default!;
 
     public override void Initialize()
     {

@@ -19,13 +19,13 @@ namespace Content.Shared._RMC14.Wieldable;
 
 public sealed class RMCWieldableSystem : EntitySystem
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly UseDelaySystem _useDelaySystem = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private UseDelaySystem _useDelaySystem = default!;
+    [Dependency] private SkillsSystem _skills = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
 
     private const string WieldUseDelayId = "RMCWieldDelay";
     private static readonly EntProtoId<SkillDefinitionComponent> WieldSkill = "RMCSkillFirearms";

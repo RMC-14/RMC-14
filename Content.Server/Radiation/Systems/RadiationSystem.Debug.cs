@@ -89,7 +89,7 @@ public partial class RadiationSystem
 [AdminCommand(AdminFlags.Admin)]
 public sealed class RadiationViewCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly RadiationSystem _radiation = default!;
+    [Dependency] private RadiationSystem _radiation = default!;
 
     public override string Command => "showradiation";
 

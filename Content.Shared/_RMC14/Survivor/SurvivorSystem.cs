@@ -6,7 +6,7 @@ namespace Content.Shared._RMC14.Survivor;
 
 public sealed class SurvivorSystem : EntitySystem
 {
-    [Dependency] private readonly EntityPresetSystem _preset = default!;
+    [Dependency] private EntityPresetSystem _preset = default!;
 
     public override void Initialize()
     {

@@ -11,10 +11,10 @@ namespace Content.Server._RMC14.Light;
 
 public sealed class RMCAmbientLightCommand : EntitySystem
 {
-    [Dependency] private readonly IConsoleHost _console = default!;
-    [Dependency] private readonly RMCAmbientLightSystem _lightSystem = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IConsoleHost _console = default!;
+    [Dependency] private RMCAmbientLightSystem _lightSystem = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     public override void Initialize()
     {

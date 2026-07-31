@@ -18,14 +18,14 @@ namespace Content.Shared.Examine
 {
     public abstract partial class ExamineSystemShared : EntitySystem
     {
-        [Dependency] private readonly OccluderSystem _occluder = default!;
-        [Dependency] private readonly SharedTransformSystem _transform = default!;
-        [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-        [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
+        [Dependency] private OccluderSystem _occluder = default!;
+        [Dependency] private SharedTransformSystem _transform = default!;
+        [Dependency] private SharedContainerSystem _containerSystem = default!;
+        [Dependency] private SharedInteractionSystem _interactionSystem = default!;
         [Dependency] protected readonly MobStateSystem MobStateSystem = default!;
 
         // RMC14
-        [Dependency] private readonly QueenEyeSystem _queenEye = default!;
+        [Dependency] private QueenEyeSystem _queenEye = default!;
 
         public const float MaxRaycastRange = 100;
 
@@ -117,7 +117,7 @@ namespace Content.Shared.Examine
             if (!examinerComp.CheckInRangeUnOccluded)
                 return true;
 
-            if (Comp<TransformComponent>(examiner).MapID != target.MapId) 
+            if (Comp<TransformComponent>(examiner).MapID != target.MapId)
             {
                 if (!HasComp<OverwatchWatchingComponent>(examiner) && !HasComp<XenoWatchingComponent>(examiner))
                     return false;
@@ -141,7 +141,7 @@ namespace Content.Shared.Examine
                         GetExaminerRange(overwatched),
                         predicate: predicate,
                         ignoreInsideBlocker: true);
-                } 
+                }
                 else if (TryComp<XenoWatchingComponent>(examiner, out var watcher) && watcher.Watching is { } watched)
                 {
                     return InRangeUnOccluded(

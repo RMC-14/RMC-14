@@ -16,8 +16,8 @@ namespace Content.Client._RMC14.Xenonids.Evolution;
 [UsedImplicitly]
 public sealed class XenoEvolutionBui : BoundUserInterface
 {
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private readonly SpriteSystem _sprite;
     private readonly MobStateSystem _mobState;

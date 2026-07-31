@@ -6,7 +6,7 @@ namespace Content.Server._RMC14.Hands;
 
 public sealed class ServerRMCHandsSystem : RMCHandsSystem
 {
-    [Dependency] private readonly HandsSystem _hands = default!;
+    [Dependency] private HandsSystem _hands = default!;
 
     public override void ThrowHeldItem(EntityUid player, EntityCoordinates coordinates, float minDistance = 0.1f)
     {

@@ -6,7 +6,7 @@ namespace Content.Server.CartridgeLoader.Cartridges;
 
 public sealed class AstroNavCartridgeSystem : EntitySystem
 {
-    [Dependency] private readonly CartridgeLoaderSystem _cartridgeLoaderSystem = default!;
+    [Dependency] private CartridgeLoaderSystem _cartridgeLoaderSystem = default!;
 
     public override void Initialize()
     {

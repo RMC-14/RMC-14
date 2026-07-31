@@ -5,7 +5,7 @@ namespace Content.Server.Speech.EntitySystems
 {
     public sealed class OwOAccentSystem : EntitySystem
     {
-        [Dependency] private readonly IRobustRandom _random = default!;
+        [Dependency] private IRobustRandom _random = default!;
 
         private static readonly IReadOnlyList<string> Faces = new List<string>{
             " (•`ω´•)", " ;;w;;", " owo", " UwU", " >w<", " ^w^"

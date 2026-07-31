@@ -15,9 +15,9 @@ namespace Content.Client.Radiation.Overlays
     {
         private static readonly ProtoId<ShaderPrototype> RadiationShader = "Radiation";
 
-        [Dependency] private readonly IEntityManager _entityManager = default!;
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-        [Dependency] private readonly IGameTiming _gameTiming = default!;
+        [Dependency] private IEntityManager _entityManager = default!;
+        [Dependency] private IPrototypeManager _prototypeManager = default!;
+        [Dependency] private IGameTiming _gameTiming = default!;
         private TransformSystem? _transform;
 
         private const float MaxDist = 15.0f;

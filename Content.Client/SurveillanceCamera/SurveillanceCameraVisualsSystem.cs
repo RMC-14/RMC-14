@@ -5,7 +5,7 @@ namespace Content.Client.SurveillanceCamera;
 
 public sealed class SurveillanceCameraVisualsSystem : EntitySystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

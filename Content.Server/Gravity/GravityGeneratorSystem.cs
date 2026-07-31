@@ -6,8 +6,8 @@ namespace Content.Server.Gravity;
 
 public sealed class GravityGeneratorSystem : EntitySystem
 {
-    [Dependency] private readonly GravitySystem _gravitySystem = default!;
-    [Dependency] private readonly SharedPointLightSystem _lights = default!;
+    [Dependency] private GravitySystem _gravitySystem = default!;
+    [Dependency] private SharedPointLightSystem _lights = default!;
 
     public override void Initialize()
     {

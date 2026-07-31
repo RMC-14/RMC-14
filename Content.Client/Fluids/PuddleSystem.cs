@@ -9,8 +9,8 @@ namespace Content.Client.Fluids;
 
 public sealed class PuddleSystem : SharedPuddleSystem
 {
-    [Dependency] private readonly IconSmoothSystem _smooth = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private IconSmoothSystem _smooth = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

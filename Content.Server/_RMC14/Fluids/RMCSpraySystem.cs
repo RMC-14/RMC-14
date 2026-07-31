@@ -7,7 +7,7 @@ namespace Content.Server._RMC14.Fluids;
 
 public sealed class RMCSpraySystem : SharedRMCSpraySystem
 {
-    [Dependency] private readonly SpraySystem _spray = default!;
+    [Dependency] private SpraySystem _spray = default!;
 
     public override void Spray(EntityUid entity, EntityUid user, MapCoordinates mapcoord, bool hitUser = false)
     {

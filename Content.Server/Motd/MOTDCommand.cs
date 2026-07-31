@@ -10,7 +10,7 @@ namespace Content.Server.Motd;
 [AnyCommand]
 internal sealed class MOTDCommand : LocalizedCommands
 {
-    [Dependency] private readonly IAdminManager _adminManager = default!;
+    [Dependency] private IAdminManager _adminManager = default!;
 
     public override string Command => "motd";
 

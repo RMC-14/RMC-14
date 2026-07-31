@@ -5,7 +5,7 @@ namespace Content.Shared._RMC14.Weapons.Ranged.Ammo;
 
 public sealed class RMCEmptyMagSystem : EntitySystem
 {
-    [Dependency] private readonly SharedGunSystem _gun = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
 
     public override void Initialize()
     {

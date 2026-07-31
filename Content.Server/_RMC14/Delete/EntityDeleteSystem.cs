@@ -5,7 +5,7 @@ namespace Content.Server._RMC14.Delete;
 
 public sealed class EntityDeleteSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private IConfigurationManager _config = default!;
 
     public override void Initialize()
     {

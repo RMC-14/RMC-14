@@ -7,7 +7,7 @@ namespace Content.Shared.IdentityManagement;
 
 public abstract class SharedIdentitySystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
     private static string SlotName = "identity";
 
     public override void Initialize()

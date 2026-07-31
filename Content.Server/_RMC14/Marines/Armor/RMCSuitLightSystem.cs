@@ -14,9 +14,9 @@ namespace Content.Server._RMC14.Marines.Armor;
 
 public sealed class RMCSuitLightSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly HandheldLightSystem _lights = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private HandheldLightSystem _lights = default!;
 
     public override void Initialize()
     {

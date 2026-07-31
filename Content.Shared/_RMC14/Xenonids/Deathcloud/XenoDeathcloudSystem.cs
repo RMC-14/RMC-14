@@ -7,8 +7,8 @@ namespace Content.Shared._RMC14.Xenonids.Deathcloud;
 
 public sealed class XenoDeathcloudSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
 
     public override void Initialize()
     {

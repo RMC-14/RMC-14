@@ -9,9 +9,9 @@ namespace Content.Server.Administration.Commands;
 [AdminCommand(AdminFlags.Admin)]
 public sealed class EraseCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly IPlayerLocator _locator = default!;
-    [Dependency] private readonly IPlayerManager _players = default!;
-    [Dependency] private readonly AdminSystem _admin = default!;
+    [Dependency] private IPlayerLocator _locator = default!;
+    [Dependency] private IPlayerManager _players = default!;
+    [Dependency] private AdminSystem _admin = default!;
 
     public override string Command => "erase";
 

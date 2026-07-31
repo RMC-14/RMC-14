@@ -6,7 +6,7 @@ namespace Content.Server._RMC14.GameStates;
 
 public sealed class RMCPvsSystem : SharedRMCPvsSystem
 {
-    [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
+    [Dependency] private PvsOverrideSystem _pvsOverride = default!;
 
     public override void AddGlobalOverride(EntityUid ent)
     {

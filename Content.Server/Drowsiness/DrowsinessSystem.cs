@@ -10,9 +10,9 @@ namespace Content.Server.Drowsiness;
 
 public sealed class DrowsinessSystem : SharedDrowsinessSystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

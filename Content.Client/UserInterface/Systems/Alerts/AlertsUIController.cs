@@ -13,7 +13,7 @@ namespace Content.Client.UserInterface.Systems.Alerts;
 
 public sealed class AlertsUIController : UIController, IOnStateEntered<GameplayState>, IOnSystemChanged<ClientAlertsSystem>
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     [UISystemDependency] private readonly ClientAlertsSystem? _alertsSystem = default;
 

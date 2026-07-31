@@ -8,8 +8,8 @@ namespace Content.Server.GameTicking.Commands
     [AnyCommand]
     sealed class ObserveCommand : IConsoleCommand
     {
-        [Dependency] private readonly IEntityManager _e = default!;
-        [Dependency] private readonly IAdminManager _adminManager = default!;
+        [Dependency] private IEntityManager _e = default!;
+        [Dependency] private IAdminManager _adminManager = default!;
 
         public string Command => "observe";
         public string Description => "";

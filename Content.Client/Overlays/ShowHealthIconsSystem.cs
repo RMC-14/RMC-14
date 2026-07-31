@@ -16,8 +16,8 @@ namespace Content.Client.Overlays;
 /// </summary>
 public sealed class ShowHealthIconsSystem : EquipmentHudSystem<ShowHealthIconsComponent>
 {
-    [Dependency] private readonly IPrototypeManager _prototypeMan = default!;
-    [Dependency] private readonly CMHealthIconsSystem _healthIcons = default!;
+    [Dependency] private IPrototypeManager _prototypeMan = default!;
+    [Dependency] private CMHealthIconsSystem _healthIcons = default!;
 
     [ViewVariables]
     public HashSet<string> DamageContainers = new();

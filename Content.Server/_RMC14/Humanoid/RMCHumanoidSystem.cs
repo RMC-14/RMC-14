@@ -7,7 +7,7 @@ namespace Content.Server._RMC14.Humanoid;
 
 public sealed class RMCHumanoidSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     public override void Initialize()
     {

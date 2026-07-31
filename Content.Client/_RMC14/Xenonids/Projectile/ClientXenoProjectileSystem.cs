@@ -8,9 +8,9 @@ namespace Content.Client._RMC14.Xenonids.Projectile;
 
 public sealed class ClientXenoProjectileSystem : EntitySystem
 {
-    [Dependency] private readonly GunPredictionSystem _gunPrediction = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private GunPredictionSystem _gunPrediction = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

@@ -7,10 +7,10 @@ namespace Content.Shared.Tiles;
 
 public sealed class ReplaceFloorOnSpawnSystem : EntitySystem
 {
-    [Dependency] private readonly ITileDefinitionManager _tile = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private ITileDefinitionManager _tile = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedMapSystem _map = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

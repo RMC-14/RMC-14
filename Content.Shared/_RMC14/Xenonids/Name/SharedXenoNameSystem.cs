@@ -14,12 +14,12 @@ namespace Content.Shared._RMC14.Xenonids.Name;
 
 public abstract class SharedXenoNameSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly NameModifierSystem _nameModifier = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly ISharedPlaytimeManager _playtime = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private NameModifierSystem _nameModifier = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private ISharedPlaytimeManager _playtime = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private const string DefaultPrefix = "XX";
 

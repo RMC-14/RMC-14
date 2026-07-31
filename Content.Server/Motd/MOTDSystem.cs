@@ -13,8 +13,8 @@ namespace Content.Server.Motd;
 /// </summary>
 public sealed class MOTDSystem : EntitySystem
 {
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private IConfigurationManager _configurationManager = default!;
 
     /// <summary>
     /// The cached value of the Message of the Day. Used for fast access.

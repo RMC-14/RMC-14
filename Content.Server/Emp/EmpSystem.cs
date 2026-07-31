@@ -11,8 +11,8 @@ namespace Content.Server.Emp;
 
 public sealed class EmpSystem : SharedEmpSystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private TransformSystem _transform = default!;
 
     public const string EmpPulseEffectPrototype = "EffectEmpPulse";
 

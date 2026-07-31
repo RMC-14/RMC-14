@@ -29,22 +29,22 @@ public sealed partial class VehicleWeaponsSystem : EntitySystem
     private static readonly EntProtoId HardpointSelectActionId = "ActionVehicleSelectHardpoint";
     private static readonly EntProtoId HardpointTypeSupport = "HardpointTypeSupport";
 
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedContentEyeSystem _contentEye = default!;
-    [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] private readonly VehicleHardpointAmmoSystem _hardpointAmmo = default!;
-    [Dependency] private readonly MetaDataSystem _meta = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly VehicleTopologySystem _topology = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly VehicleTurretSystem _turret = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly VehicleSystem _vehicle = default!;
-    [Dependency] private readonly VehicleViewToggleSystem _viewToggle = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedContentEyeSystem _contentEye = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
+    [Dependency] private VehicleHardpointAmmoSystem _hardpointAmmo = default!;
+    [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SkillsSystem _skills = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private VehicleTopologySystem _topology = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private VehicleTurretSystem _turret = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private VehicleSystem _vehicle = default!;
+    [Dependency] private VehicleViewToggleSystem _viewToggle = default!;
 
     public override void Initialize()
     {

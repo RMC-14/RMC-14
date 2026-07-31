@@ -7,7 +7,7 @@ namespace Content.Client.Radiation.Systems;
 
 public sealed class RadiationSystem : EntitySystem
 {
-    [Dependency] private readonly IOverlayManager _overlayMan = default!;
+    [Dependency] private IOverlayManager _overlayMan = default!;
 
     public List<DebugRadiationRay>? Rays;
     public Dictionary<NetEntity, Dictionary<Vector2i, float>>? ResistanceGrids;

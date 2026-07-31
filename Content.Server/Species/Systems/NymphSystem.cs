@@ -10,10 +10,10 @@ namespace Content.Server.Species.Systems;
 
 public sealed partial class NymphSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _protoManager= default!;
-    [Dependency] private readonly MindSystem _mindSystem = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ZombieSystem _zombie = default!;
+    [Dependency] private IPrototypeManager _protoManager= default!;
+    [Dependency] private MindSystem _mindSystem = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ZombieSystem _zombie = default!;
 
     public override void Initialize()
     {

@@ -21,10 +21,10 @@ namespace Content.Server.GameTicking.Rules;
 /// </summary>
 public sealed class RespawnRuleSystem : GameRuleSystem<RespawnDeadRuleComponent>
 {
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly StationSystem _station = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private StationSystem _station = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

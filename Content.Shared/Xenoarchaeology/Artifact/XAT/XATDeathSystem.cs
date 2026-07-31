@@ -9,7 +9,7 @@ namespace Content.Shared.Xenoarchaeology.Artifact.XAT;
 /// </summary>
 public sealed class XATDeathSystem : BaseXATSystem<XATDeathComponent>
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private EntityQuery<XenoArtifactComponent> _xenoArtifactQuery;
 

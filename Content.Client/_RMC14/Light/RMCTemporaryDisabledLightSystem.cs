@@ -10,12 +10,12 @@ namespace Content.Client._RMC14.Light;
 
 public sealed class RMCTemporaryDisabledLightSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly PointLightSystem _pointLight = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private ContainerSystem _container = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private PointLightSystem _pointLight = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private TransformSystem _transform = default!;
 
     private readonly HashSet<Entity<PointLightComponent>> _nearbyLights = new();
     private readonly List<Entity<PointLightComponent>> _nearbyLightsList = new();

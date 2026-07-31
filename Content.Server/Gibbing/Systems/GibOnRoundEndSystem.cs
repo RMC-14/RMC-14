@@ -7,9 +7,9 @@ using Content.Server.Body.Systems;
 namespace Content.Server.Gibbing.Systems;
 public sealed class GibOnRoundEndSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly SharedObjectivesSystem _objectives = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SharedObjectivesSystem _objectives = default!;
 
     public override void Initialize()
     {

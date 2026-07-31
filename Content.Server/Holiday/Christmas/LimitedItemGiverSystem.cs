@@ -11,9 +11,9 @@ namespace Content.Server.Holiday.Christmas;
 /// </summary>
 public sealed class LimitedItemGiverSystem : EntitySystem
 {
-    [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly HolidaySystem _holiday = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private HandsSystem _hands = default!;
+    [Dependency] private HolidaySystem _holiday = default!;
+    [Dependency] private PopupSystem _popup = default!;
     /// <inheritdoc/>
     public override void Initialize()
     {

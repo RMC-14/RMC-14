@@ -9,7 +9,7 @@ namespace Content.Client.Tools
 {
     public sealed class ToolSystem : SharedToolSystem
     {
-        [Dependency] private readonly SpriteSystem _sprite = default!;
+        [Dependency] private SpriteSystem _sprite = default!;
 
         public override void Initialize()
         {

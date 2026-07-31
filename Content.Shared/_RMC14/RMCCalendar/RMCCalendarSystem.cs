@@ -9,9 +9,9 @@ namespace Content.Shared._RMC14.RMCCalendar;
 
 public sealed class RMCCalendarSystem : EntitySystem
 {
-    [Dependency] private readonly SharedGameTicker _ticker = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly RMCCustomHolidaySystem _customHolidaySystem = default!;
+    [Dependency] private SharedGameTicker _ticker = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private RMCCustomHolidaySystem _customHolidaySystem = default!;
 
     public override void Initialize()
     {

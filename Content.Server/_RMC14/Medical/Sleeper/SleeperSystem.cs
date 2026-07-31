@@ -24,16 +24,16 @@ namespace Content.Server._RMC14.Medical.Sleeper;
 
 public sealed class SleeperSystem : SharedSleeperSystem
 {
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
-    [Dependency] private readonly SharedRMCBloodstreamSystem _rmcBloodstream = default!;
-    [Dependency] private readonly RMCPulseSystem _rmcPulse = default!;
-    [Dependency] private readonly RMCReagentSystem _rmcReagent = default!;
-    [Dependency] private readonly SharedRMCTemperatureSystem _rmcTemperature = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private MobThresholdSystem _mobThreshold = default!;
+    [Dependency] private SharedRMCBloodstreamSystem _rmcBloodstream = default!;
+    [Dependency] private RMCPulseSystem _rmcPulse = default!;
+    [Dependency] private RMCReagentSystem _rmcReagent = default!;
+    [Dependency] private SharedRMCTemperatureSystem _rmcTemperature = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
 
     private readonly List<ProtoId<ReagentPrototype>> _reagentRemovalBuffer = [];
     private readonly List<SleeperChemicalData> _chemicalListBuffer = [];

@@ -10,7 +10,7 @@ namespace Content.Client.Alerts;
 /// </summary>
 public sealed class GenericCounterAlertSystem : EntitySystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

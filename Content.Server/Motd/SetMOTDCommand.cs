@@ -15,9 +15,9 @@ namespace Content.Server.Motd;
 [AdminCommand(AdminFlags.Moderator)]
 public sealed class SetMotdCommand : LocalizedCommands
 {
-    [Dependency] private readonly IAdminLogManager _adminLogManager = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
+    [Dependency] private IAdminLogManager _adminLogManager = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private IConfigurationManager _configurationManager = default!;
 
     public override string Command => "set-motd";
 

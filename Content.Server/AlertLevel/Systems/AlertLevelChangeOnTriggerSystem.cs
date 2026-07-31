@@ -6,8 +6,8 @@ namespace Content.Server.AlertLevel.Systems;
 
 public sealed class AlertLevelChangeOnTriggerSystem : EntitySystem
 {
-    [Dependency] private readonly AlertLevelSystem _alertLevelSystem = default!;
-    [Dependency] private readonly StationSystem _station = default!;
+    [Dependency] private AlertLevelSystem _alertLevelSystem = default!;
+    [Dependency] private StationSystem _station = default!;
 
     public override void Initialize()
     {

@@ -10,9 +10,9 @@ namespace Content.Server._RMC14.Admin;
 [AdminCommand(AdminFlags.Admin)]
 public sealed class RMCEraseChatMessagesCommand : LocalizedCommands
 {
-    [Dependency] private readonly IAdminLogManager _adminLog = default!;
-    [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly IPlayerLocator _locator = default!;
+    [Dependency] private IAdminLogManager _adminLog = default!;
+    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private IPlayerLocator _locator = default!;
 
     public override string Command => "rmcerasechatmessages";
 

@@ -10,11 +10,11 @@ namespace Content.Shared._RMC14.Tools;
 
 public abstract class SharedRMCHandLabelerSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly LabelSystem _labelSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private LabelSystem _labelSystem = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     private const string PillCanisterTag = "PillCanister";
 

@@ -15,9 +15,9 @@ namespace Content.Client._RMC14.Sprite;
 
 public sealed class RMCSpriteSystem : SharedRMCSpriteSystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private TransformSystem _transform = default!;
 
     public override void Initialize()
     {

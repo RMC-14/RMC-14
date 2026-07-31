@@ -14,12 +14,12 @@ namespace Content.Server._RMC14.Language.Systems;
 
 public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
 {
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly LanguageSystem _languages = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
+    [Dependency] private LanguageSystem _languages = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private const float MaxHearingRange = 10.0f;
     private readonly HashSet<EntityUid> _potentialLearners = [];

@@ -10,10 +10,10 @@ namespace Content.Server.Popups
 {
     public sealed class PopupSystem : SharedPopupSystem
     {
-        [Dependency] private readonly IPlayerManager _player = default!;
-        [Dependency] private readonly IConfigurationManager _cfg = default!;
-        [Dependency] private readonly SharedTransformSystem _transform = default!;
-        [Dependency] private readonly RMCPopupSystem _rmcPopup = default!;
+        [Dependency] private IPlayerManager _player = default!;
+        [Dependency] private IConfigurationManager _cfg = default!;
+        [Dependency] private SharedTransformSystem _transform = default!;
+        [Dependency] private RMCPopupSystem _rmcPopup = default!;
 
         public override void PopupCursor(string? message, PopupType type = PopupType.Small)
         {

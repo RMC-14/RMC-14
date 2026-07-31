@@ -12,9 +12,9 @@ namespace Content.Shared.Construction
     /// </summary>
     public sealed class MachinePartSystem : EntitySystem
     {
-        [Dependency] private readonly IPrototypeManager _prototype = default!;
-        [Dependency] private readonly SharedLatheSystem _lathe = default!;
-        [Dependency] private readonly SharedConstructionSystem _construction = default!;
+        [Dependency] private IPrototypeManager _prototype = default!;
+        [Dependency] private SharedLatheSystem _lathe = default!;
+        [Dependency] private SharedConstructionSystem _construction = default!;
 
         public override void Initialize()
         {

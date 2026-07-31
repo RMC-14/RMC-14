@@ -19,17 +19,17 @@ namespace Content.Shared._RMC14.Xenonids.Eye;
 
 public sealed class QueenEyeSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly SharedMoverController _mover = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IParallelManager _parallel = default!;
-    [Dependency] private readonly SwappableActionSystem _swappableAction = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedXenoWatchSystem _xenoWatch = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SharedMoverController _mover = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IParallelManager _parallel = default!;
+    [Dependency] private SwappableActionSystem _swappableAction = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedXenoWatchSystem _xenoWatch = default!;
 
     private SeedJob _seedJob;
     private ViewJob _job;

@@ -11,7 +11,7 @@ namespace Content.Client.Implants.UI;
 
 public sealed class ImplanterStatusControl : Control
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
     private readonly ImplanterComponent _parent;
     private readonly RichTextLabel _label;
 

@@ -10,7 +10,7 @@ namespace Content.Client.Labels.UI
     /// </summary>
     public sealed class HandLabelerBoundUserInterface : BoundUserInterface
     {
-        [Dependency] private readonly IEntityManager _entManager = default!;
+        [Dependency] private IEntityManager _entManager = default!;
 
         [ViewVariables]
         private HandLabelerWindow? _window;

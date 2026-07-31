@@ -8,7 +8,7 @@ namespace Content.Server.Worldgen.Systems;
 /// </summary>
 public sealed class LocalityLoaderSystem : BaseWorldSystem
 {
-    [Dependency] private readonly TransformSystem _xformSys = default!;
+    [Dependency] private TransformSystem _xformSys = default!;
 
     /// <inheritdoc />
     public override void Update(float frameTime)

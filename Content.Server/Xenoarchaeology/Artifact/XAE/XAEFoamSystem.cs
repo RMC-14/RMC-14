@@ -16,10 +16,10 @@ namespace Content.Server.Xenoarchaeology.Artifact.XAE;
 /// </summary>
 public sealed class XAEFoamSystem : BaseXAESystem<XAEFoamComponent>
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SmokeSystem _smoke = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager= default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SmokeSystem _smoke = default!;
+    [Dependency] private IPrototypeManager _prototypeManager= default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
 
     /// <inheritdoc />
     public override void Initialize()

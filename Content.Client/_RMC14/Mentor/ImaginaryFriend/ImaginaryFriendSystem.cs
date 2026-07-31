@@ -8,8 +8,8 @@ namespace Content.Client._RMC14.Mentor.ImaginaryFriend;
 
 public sealed partial class ImaginaryFriendSystem : SharedImaginaryFriendSystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private const float AlphaWhileHidden = 0;
 

@@ -15,10 +15,10 @@ public sealed class VehicleViewportSystem : EntitySystem
 {
     private static readonly EntProtoId VehiclePeekAnchor = "VehiclePeekAnchor";
 
-    [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly VehicleSystem _vehicles = default!;
-    [Dependency] private readonly VehicleViewToggleSystem _viewToggle = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private VehicleSystem _vehicles = default!;
+    [Dependency] private VehicleViewToggleSystem _viewToggle = default!;
 
     public override void Initialize()
     {

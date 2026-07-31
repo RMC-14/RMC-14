@@ -9,7 +9,7 @@ namespace Content.Server.Power
     [AdminCommand(AdminFlags.Debug)]
     public sealed class SetBatteryPercentCommand : LocalizedEntityCommands
     {
-        [Dependency] private readonly BatterySystem _batterySystem = default!;
+        [Dependency] private BatterySystem _batterySystem = default!;
 
         public override string Command => "setbatterypercent";
 

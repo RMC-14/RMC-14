@@ -10,7 +10,7 @@ namespace Content.Server.Nuke.Commands;
 [AdminCommand(AdminFlags.Fun)]
 public sealed class ToggleNukeCommand : LocalizedCommands
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
 
     public override string Command => "nukearm";
 

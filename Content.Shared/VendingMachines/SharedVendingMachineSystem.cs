@@ -33,7 +33,7 @@ public abstract partial class SharedVendingMachineSystem : EntitySystem
     [Dependency] private   readonly SharedSpeakOnUIClosedSystem _speakOn = default!;
     [Dependency] protected readonly SharedUserInterfaceSystem UISystem = default!;
     [Dependency] protected readonly IRobustRandom Randomizer = default!;
-    [Dependency] private readonly EmagSystem _emag = default!;
+    [Dependency] private EmagSystem _emag = default!;
 
     public override void Initialize()
     {

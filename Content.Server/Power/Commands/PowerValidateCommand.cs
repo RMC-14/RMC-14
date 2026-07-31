@@ -8,7 +8,7 @@ namespace Content.Server.Power.Commands;
 [AdminCommand(AdminFlags.Debug)]
 public sealed class PowerValidateCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly PowerNetSystem _powerNet = null!;
+    [Dependency] private PowerNetSystem _powerNet = null!;
 
     public override string Command => "power_validate";
 

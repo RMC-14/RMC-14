@@ -9,7 +9,7 @@ namespace Content.Shared.Movement.Systems;
 /// </summary>
 public abstract class SharedFloorOcclusionSystem : EntitySystem
 {
-    [Dependency] private readonly RMCWaterSystem _rmcWater = default!;
+    [Dependency] private RMCWaterSystem _rmcWater = default!;
 
     public override void Initialize()
     {

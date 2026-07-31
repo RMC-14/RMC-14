@@ -33,8 +33,8 @@ public sealed class CommandReceivedEventArgs
 /// </summary>
 public sealed class DiscordLink : IPostInjectInit
 {
-    [Dependency] private readonly ILogManager _logManager = default!;
-    [Dependency] private readonly IConfigurationManager _configuration = default!;
+    [Dependency] private ILogManager _logManager = default!;
+    [Dependency] private IConfigurationManager _configuration = default!;
 
     /// <summary>
     ///    The Discord client. This is null if the bot is not connected.

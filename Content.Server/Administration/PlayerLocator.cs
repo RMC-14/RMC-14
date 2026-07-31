@@ -72,10 +72,10 @@ namespace Content.Server.Administration
 
     internal sealed class PlayerLocator : IPlayerLocator, IDisposable, IPostInjectInit
     {
-        [Dependency] private readonly IPlayerManager _playerManager = default!;
-        [Dependency] private readonly IConfigurationManager _configurationManager = default!;
-        [Dependency] private readonly IServerDbManager _db = default!;
-        [Dependency] private readonly ILogManager _logManager = default!;
+        [Dependency] private IPlayerManager _playerManager = default!;
+        [Dependency] private IConfigurationManager _configurationManager = default!;
+        [Dependency] private IServerDbManager _db = default!;
+        [Dependency] private ILogManager _logManager = default!;
 
         private readonly HttpClient _httpClient = new();
         private ISawmill _sawmill = default!;

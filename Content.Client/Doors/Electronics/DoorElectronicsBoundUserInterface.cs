@@ -8,7 +8,7 @@ namespace Content.Client.Doors.Electronics;
 
 public sealed class DoorElectronicsBoundUserInterface : BoundUserInterface
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     private DoorElectronicsConfigurationMenu? _window;
 

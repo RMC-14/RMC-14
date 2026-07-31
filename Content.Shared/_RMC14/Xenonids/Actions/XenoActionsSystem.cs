@@ -4,7 +4,7 @@ namespace Content.Shared._RMC14.Xenonids.Actions;
 
 public sealed class XenoActionsSystem : EntitySystem
 {
-    [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private XenoSystem _xeno = default!;
 
     public override void Initialize()
     {

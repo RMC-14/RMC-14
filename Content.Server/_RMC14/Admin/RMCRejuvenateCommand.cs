@@ -13,7 +13,7 @@ namespace Content.Server._RMC14.Admin;
 [ToolshedCommand, AdminCommand(AdminFlags.Admin)]
 public sealed class RMCRejuvenateCommand : ToolshedCommand
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     [CommandImplementation("marineplayersinrange")]
     public void MarinePlayersInRange([CommandInvocationContext] IInvocationContext ctx, [CommandArgument] int range)

@@ -17,7 +17,7 @@ namespace Content.Server.Database;
 /// </remarks>
 public sealed class UserDbDataManager : IPostInjectInit
 {
-    [Dependency] private readonly ILogManager _logManager = default!;
+    [Dependency] private ILogManager _logManager = default!;
 
     private readonly Dictionary<NetUserId, UserData> _users = new();
     private readonly List<OnLoadPlayer> _onLoadPlayer = [];

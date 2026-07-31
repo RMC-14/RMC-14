@@ -14,12 +14,12 @@ namespace Content.Shared._RMC14.Armor.Magnetic;
 
 public sealed class RMCMagneticSystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly ItemSlotsSystem _slots = default!;
-    [Dependency] private readonly ThrownItemSystem _thrownItem = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private ItemSlotsSystem _slots = default!;
+    [Dependency] private ThrownItemSystem _thrownItem = default!;
 
     public override void Initialize()
     {

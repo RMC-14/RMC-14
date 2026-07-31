@@ -12,7 +12,7 @@ namespace Content.Client._RMC14.Chemistry.Master;
 /// </summary>
 public sealed class RMCChemMasterPresetManager
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private IConfigurationManager _config = default!;
 
     private List<RMCChemMasterPreset> _presets = new();
     private bool _loaded;

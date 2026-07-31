@@ -8,7 +8,7 @@ namespace Content.Shared.Construction
 {
     public abstract class SharedConstructionSystem : EntitySystem
     {
-        [Dependency] private readonly SharedMapSystem _map = default!;
+        [Dependency] private SharedMapSystem _map = default!;
         [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
         [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
 

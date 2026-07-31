@@ -26,8 +26,8 @@ namespace Content.Client.UserInterface.Systems.Storage.Controls;
 
 public sealed partial class StorageWindow : BaseWindow
 {
-    [Dependency] private readonly IEntityManager _entity = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IEntityManager _entity = default!;
+    [Dependency] private IPlayerManager _player = default!;
     private readonly StorageUIController _storageController;
 
     public EntityUid? StorageEntity;

@@ -12,9 +12,9 @@ namespace Content.Server.Explosion.EntitySystems;
 /// </summary>
 public sealed partial class ReleaseGasOnTriggerSystem : SharedReleaseGasOnTriggerSystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly AtmosphereSystem _atmosphereSystem = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private AtmosphereSystem _atmosphereSystem = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

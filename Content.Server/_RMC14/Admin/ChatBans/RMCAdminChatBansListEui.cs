@@ -10,10 +10,10 @@ namespace Content.Server._RMC14.Admin.ChatBans;
 
 public sealed class RMCAdminChatBansListEui : BaseEui
 {
-    [Dependency] private readonly IAdminManager _admin = default!;
-    [Dependency] private readonly ILogManager _logManager = default!;
-    [Dependency] private readonly RMCChatBansManager _rmcChatBans = default!;
-    [Dependency] private readonly ITaskManager _task = default!;
+    [Dependency] private IAdminManager _admin = default!;
+    [Dependency] private ILogManager _logManager = default!;
+    [Dependency] private RMCChatBansManager _rmcChatBans = default!;
+    [Dependency] private ITaskManager _task = default!;
 
     private readonly List<ChatBan> _bans = new();
     public NetUserId Target;

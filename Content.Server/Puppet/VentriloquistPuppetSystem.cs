@@ -11,7 +11,7 @@ namespace Content.Server.Puppet
 {
     public sealed class VentriloquistPuppetSystem : SharedVentriloquistPuppetSystem
     {
-        [Dependency] private readonly PopupSystem _popupSystem = default!;
+        [Dependency] private PopupSystem _popupSystem = default!;
 
         public override void Initialize()
         {

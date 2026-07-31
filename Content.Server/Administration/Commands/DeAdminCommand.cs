@@ -9,7 +9,7 @@ namespace Content.Server.Administration.Commands
     [AdminCommand(AdminFlags.None)]
     public sealed class DeAdminCommand : LocalizedCommands
     {
-        [Dependency] private readonly IAdminManager _admin = default!;
+        [Dependency] private IAdminManager _admin = default!;
 
         public override string Command => "deadmin";
 

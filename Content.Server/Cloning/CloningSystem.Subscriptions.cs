@@ -24,10 +24,10 @@ namespace Content.Server.Cloning;
 /// </remarks>
 public sealed partial class CloningSystem : EntitySystem
 {
-    [Dependency] private readonly SharedStackSystem _stack = default!;
-    [Dependency] private readonly LabelSystem _label = default!;
-    [Dependency] private readonly ForensicsSystem _forensics = default!;
-    [Dependency] private readonly PaperSystem _paper = default!;
+    [Dependency] private SharedStackSystem _stack = default!;
+    [Dependency] private LabelSystem _label = default!;
+    [Dependency] private ForensicsSystem _forensics = default!;
+    [Dependency] private PaperSystem _paper = default!;
 
     public override void Initialize()
     {

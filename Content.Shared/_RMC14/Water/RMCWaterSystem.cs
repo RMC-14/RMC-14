@@ -9,12 +9,12 @@ namespace Content.Shared._RMC14.Water;
 
 public sealed class RMCWaterSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
-    [Dependency] private readonly NameModifierSystem _nameModifier = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private NameModifierSystem _nameModifier = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private RMCMapSystem _rmcMap = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private readonly List<(EntityUid Id, TimeSpan SpreadAt)> _makeActive = new();
 

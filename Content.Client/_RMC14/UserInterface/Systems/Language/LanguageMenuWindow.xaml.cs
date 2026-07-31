@@ -13,7 +13,7 @@ namespace Content.Client._RMC14.UserInterface.Systems.Language;
 [GenerateTypedNameReferences]
 public sealed partial class LanguageMenuWindow : DefaultWindow
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
     private static readonly IReadOnlyDictionary<ProtoId<LanguagePrototype>, LanguageLearningViewData> EmptyLearningLanguages =
         new Dictionary<ProtoId<LanguagePrototype>, LanguageLearningViewData>();
 

@@ -13,10 +13,10 @@ namespace Content.Server._RMC14.Intel.Tech;
 
 public sealed class ServerTechSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IComponentFactory _componentFactory = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IComponentFactory _componentFactory = default!;
+    [Dependency] private TransformSystem _transform = default!;
 
     private static readonly EntProtoId CombatTechProto = "RMCRandomHumanoidFoxtrotCombatTech";
     private static readonly EntProtoId FireteamLeaderProto = "RMCRandomHumanoidFoxtrotFireteamLeader";

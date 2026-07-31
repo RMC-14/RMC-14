@@ -10,11 +10,11 @@ namespace Content.Shared._RMC14.Tools;
 
 public sealed class RMCDeviceBreakerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doafter = default!;
-    [Dependency] private readonly SharedRMCPowerSystem _power = default!;
-    [Dependency] private readonly SharedDestructibleSystem _destroy = default!;
-    [Dependency] private readonly SensorTowerSystem _sensor = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doafter = default!;
+    [Dependency] private SharedRMCPowerSystem _power = default!;
+    [Dependency] private SharedDestructibleSystem _destroy = default!;
+    [Dependency] private SensorTowerSystem _sensor = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {

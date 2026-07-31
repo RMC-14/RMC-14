@@ -7,7 +7,7 @@ namespace Content.Shared._RMC14.Vehicle;
 
 public sealed class VehicleWeaponSupportSystem : EntitySystem
 {
-    [Dependency] private readonly VehicleTopologySystem _topology = default!;
+    [Dependency] private VehicleTopologySystem _topology = default!;
 
     public override void Initialize()
     {

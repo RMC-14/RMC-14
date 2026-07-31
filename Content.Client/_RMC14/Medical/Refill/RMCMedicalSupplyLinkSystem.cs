@@ -7,9 +7,9 @@ namespace Content.Client._RMC14.Medical.Refill;
 
 public sealed class RMCMedicalSupplyLinkSystem : SharedRMCMedicalSupplyLinkSystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _animationPlayer = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private AnimationPlayerSystem _animationPlayer = default!;
+    [Dependency] private RMCMapSystem _rmcMap = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private const string FlickId = "rmc_flick_animation";
 

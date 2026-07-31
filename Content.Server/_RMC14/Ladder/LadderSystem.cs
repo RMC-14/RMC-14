@@ -6,8 +6,8 @@ namespace Content.Server._RMC14.Ladder;
 
 public sealed class LadderSystem : SharedLadderSystem
 {
-    [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
+    [Dependency] private ViewSubscriberSystem _viewSubscriber = default!;
 
     public override void Initialize()
     {

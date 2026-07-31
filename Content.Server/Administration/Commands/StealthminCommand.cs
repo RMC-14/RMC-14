@@ -8,7 +8,7 @@ namespace Content.Server.Administration.Commands;
 [AdminCommand(AdminFlags.Stealth)]
 public sealed class StealthminCommand : LocalizedCommands
 {
-    [Dependency] private readonly IAdminManager _adminManager = default!;
+    [Dependency] private IAdminManager _adminManager = default!;
 
     public override string Command => "stealthmin";
 

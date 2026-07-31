@@ -7,8 +7,8 @@ namespace Content.Client.Commands;
 
 public sealed class HideMechanismsCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private readonly SpriteSystem _spriteSystem = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private SpriteSystem _spriteSystem = default!;
 
     public override string Command => "hidemechanisms";
 

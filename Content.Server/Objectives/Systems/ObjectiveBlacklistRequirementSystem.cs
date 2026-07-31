@@ -9,7 +9,7 @@ namespace Content.Server.Objectives.Systems;
 /// </summary>
 public sealed class ObjectiveBlacklistRequirementSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
 
     public override void Initialize()
     {

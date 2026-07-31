@@ -8,7 +8,7 @@ namespace Content.Server.Objectives.Systems;
 /// </summary>
 public sealed class NotJobRequirementSystem : EntitySystem
 {
-    [Dependency] private readonly SharedJobSystem _jobs = default!;
+    [Dependency] private SharedJobSystem _jobs = default!;
 
     public override void Initialize()
     {

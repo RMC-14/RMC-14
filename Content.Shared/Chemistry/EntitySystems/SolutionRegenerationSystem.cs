@@ -8,8 +8,8 @@ namespace Content.Shared.Chemistry.EntitySystems;
 
 public sealed class SolutionRegenerationSystem : EntitySystem
 {
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

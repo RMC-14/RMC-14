@@ -11,8 +11,8 @@ namespace Content.Server._RMC14.Language.Systems;
 
 public sealed partial class LanguageSystem : SharedLanguageSystem
 {
-    [Dependency] private readonly LanguageLearningSystem _learning = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
+    [Dependency] private LanguageLearningSystem _learning = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
 
     public override void Initialize()
     {

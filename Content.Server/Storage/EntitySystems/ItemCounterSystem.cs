@@ -10,7 +10,7 @@ namespace Content.Server.Storage.EntitySystems
     [UsedImplicitly]
     public sealed class ItemCounterSystem : SharedItemCounterSystem
     {
-        [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+        [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
         protected override int? GetCount(ContainerModifiedMessage msg, ItemCounterComponent itemCounter)
         {
             if (!TryComp(msg.Container.Owner, out StorageComponent? component))

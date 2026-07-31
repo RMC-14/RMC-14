@@ -7,8 +7,8 @@ namespace Content.Shared._RMC14.Attachable.Systems;
 
 public sealed class AttachableMagneticSystem : EntitySystem
 {
-    [Dependency] private readonly RMCMagneticSystem _magneticSystem = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private RMCMagneticSystem _magneticSystem = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

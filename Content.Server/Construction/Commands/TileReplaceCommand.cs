@@ -9,8 +9,8 @@ namespace Content.Server.Construction.Commands;
 [AdminCommand(AdminFlags.Mapping)]
 public sealed class TileReplaceCommand : IConsoleCommand
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
-    [Dependency] private readonly ITileDefinitionManager _tileDef = default!;
+    [Dependency] private IEntityManager _entManager = default!;
+    [Dependency] private ITileDefinitionManager _tileDef = default!;
 
     // ReSharper disable once StringLiteralTypo
     public string Command => "tilereplace";

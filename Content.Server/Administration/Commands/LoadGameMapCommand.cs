@@ -11,9 +11,9 @@ namespace Content.Server.Administration.Commands
     [AdminCommand(AdminFlags.Round | AdminFlags.Spawn)]
     public sealed class LoadGameMapCommand : LocalizedEntityCommands
     {
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-        [Dependency] private readonly GameTicker _gameTicker = default!;
-        [Dependency] private readonly SharedMapSystem _mapSystem = default!;
+        [Dependency] private IPrototypeManager _prototypeManager = default!;
+        [Dependency] private GameTicker _gameTicker = default!;
+        [Dependency] private SharedMapSystem _mapSystem = default!;
 
         public override string Command => "loadgamemap";
 
@@ -75,7 +75,7 @@ namespace Content.Server.Administration.Commands
     [AdminCommand(AdminFlags.Round | AdminFlags.Spawn)]
     public sealed class ListGameMaps : LocalizedCommands
     {
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+        [Dependency] private IPrototypeManager _prototypeManager = default!;
 
         public override string Command => "listgamemaps";
 

@@ -30,7 +30,7 @@ namespace Content.Server.Explosion.EntitySystems;
 
 public sealed partial class ExplosionSystem
 {
-    [Dependency] private readonly FlammableSystem _flammableSystem = default!;
+    [Dependency] private FlammableSystem _flammableSystem = default!;
 
     /// <summary>
     ///     Used to limit explosion processing time. See <see cref="MaxProcessingTime"/>.

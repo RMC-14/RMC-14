@@ -5,7 +5,7 @@ namespace Content.Client.Changelog
 {
     public sealed class ChangelogButton : Button
     {
-        [Dependency] private readonly ChangelogManager _changelogManager = default!;
+        [Dependency] private ChangelogManager _changelogManager = default!;
 
         public ChangelogButton()
         {

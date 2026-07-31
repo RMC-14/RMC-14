@@ -6,8 +6,8 @@ namespace Content.Client.NodeContainer
 {
     public sealed class NodeVisCommand : LocalizedEntityCommands
     {
-        [Dependency] private readonly IClientAdminManager _adminManager = default!;
-        [Dependency] private readonly NodeGroupSystem _nodeSystem = default!;
+        [Dependency] private IClientAdminManager _adminManager = default!;
+        [Dependency] private NodeGroupSystem _nodeSystem = default!;
 
         public override string Command => "nodevis";
 
@@ -25,7 +25,7 @@ namespace Content.Client.NodeContainer
 
     public sealed class NodeVisFilterCommand : LocalizedEntityCommands
     {
-        [Dependency] private readonly NodeGroupSystem _nodeSystem = default!;
+        [Dependency] private NodeGroupSystem _nodeSystem = default!;
 
         public override string Command => "nodevisfilter";
 

@@ -20,8 +20,8 @@ namespace Content.Client._RMC14.Admin;
 [UsedImplicitly]
 public sealed class RMCAdminEui : BaseEui
 {
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
 
     private static readonly Comparer<EntityPrototype> EntityComparer =
         Comparer<EntityPrototype>.Create(static (a, b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal));

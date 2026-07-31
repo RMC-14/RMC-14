@@ -4,7 +4,7 @@ namespace Content.Shared._RMC14.Weapons.Ranged.HoloTargeting;
 
 public sealed class RMCHoloTargetingSystem : EntitySystem
 {
-    [Dependency] private readonly RMCHoloTargetedSystem _holoTargeted = default!;
+    [Dependency] private RMCHoloTargetedSystem _holoTargeted = default!;
 
     public override void Initialize()
     {

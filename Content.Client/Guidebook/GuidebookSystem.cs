@@ -22,12 +22,12 @@ namespace Content.Client.Guidebook;
 /// </summary>
 public sealed class GuidebookSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly VerbSystem _verbSystem = default!;
-    [Dependency] private readonly RgbLightControllerSystem _rgbLightControllerSystem = default!;
-    [Dependency] private readonly SharedPointLightSystem _pointLightSystem = default!;
-    [Dependency] private readonly TagSystem _tags = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private VerbSystem _verbSystem = default!;
+    [Dependency] private RgbLightControllerSystem _rgbLightControllerSystem = default!;
+    [Dependency] private SharedPointLightSystem _pointLightSystem = default!;
+    [Dependency] private TagSystem _tags = default!;
 
     public event Action<List<ProtoId<GuideEntryPrototype>>,
         List<ProtoId<GuideEntryPrototype>>?,

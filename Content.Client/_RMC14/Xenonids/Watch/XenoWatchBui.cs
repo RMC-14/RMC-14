@@ -13,7 +13,7 @@ namespace Content.Client._RMC14.Xenonids.Watch;
 [UsedImplicitly]
 public sealed class XenoWatchBui : BoundUserInterface
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     [ViewVariables]
     private XenoWatchWindow? _window;
