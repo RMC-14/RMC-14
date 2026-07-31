@@ -1,6 +1,7 @@
 - type: entity
   id: RMCSynthGenOne
   name: Generation One
+  categories: [ HideSpawnMenu ]
   components:
   - type: SynthGeneration
     generation: RMCSynthGenOne
@@ -45,6 +46,7 @@
 - type: entity
   id: RMCSynthGenTwo
   name: Generation Two
+  categories: [ HideSpawnMenu ]
   components:
   - type: SynthGeneration
     generation: RMCSynthGenTwo
@@ -73,6 +75,9 @@
     thresholds:
       0: Alive
       400: Dead
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 3.625
+    baseWalkSpeed: 1.9575
   - type: ShowHealthIcons
   - type: ShowHealthBars
   - type: RMCAllowSuitStorage
@@ -83,6 +88,7 @@
 - type: entity
   id: RMCSynthGenThree
   name: Generation Three
+  categories: [ HideSpawnMenu ]
   components:
   - type: SynthGeneration
     generation: RMCSynthGenThree
@@ -110,7 +116,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      350: Dead
+      300: Dead
   - type: ShowHealthIcons
   - type: ShowHealthBars
   - type: RMCAllowSuitStorage
