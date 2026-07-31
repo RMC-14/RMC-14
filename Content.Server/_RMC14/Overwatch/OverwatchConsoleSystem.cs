@@ -22,6 +22,7 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
 
         SubscribeLocalEvent<OverwatchCameraComponent, ComponentRemove>(OnWatchedRemove);
         SubscribeLocalEvent<OverwatchCameraComponent, EntityTerminatingEvent>(OnWatchedRemove);
+        SubscribeLocalEvent<OverwatchCameraComponent, RMCOverwatchTripodSquadChangedEvent>(OnWatchedSquadChanged);
         SubscribeLocalEvent<OverwatchWatchingComponent, ComponentRemove>(OnWatchingRemove);
         SubscribeLocalEvent<OverwatchWatchingComponent, EntityTerminatingEvent>(OnWatchingRemove);
     }
@@ -65,15 +66,41 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
 
     private void OnWatchedRemove<T>(Entity<OverwatchCameraComponent> ent, ref T args)
     {
+        RemoveWatchers(ent);
+    }
+
+    private void OnWatchedSquadChanged(
+        Entity<OverwatchCameraComponent> ent,
+        ref RMCOverwatchTripodSquadChangedEvent args)
+    {
+        RemoveWatchers(ent);
+        ent.Comp.Watching.Clear();
+        Dirty(ent);
+    }
+
+    private void RemoveWatchers(Entity<OverwatchCameraComponent> ent)
+    {
         foreach (var watching in new List<EntityUid>(ent.Comp.Watching))
         {
             if (TerminatingOrDeleted(watching))
                 continue;
 
             if (TryComp(watching, out ActorComponent? actor) && actor != null)
-                Unwatch(watching, actor.PlayerSession);
+            {
+                if (TryComp(watching, out EyeComponent? eye))
+                {
+                    Unwatch((watching, eye), actor.PlayerSession);
+                }
+                else
+                {
+                    _viewSubscriber.RemoveViewSubscriber(ent, actor.PlayerSession);
+                    RemCompDeferred<OverwatchWatchingComponent>(watching);
+                }
+            }
             else
+            {
                 RemCompDeferred<OverwatchWatchingComponent>(watching);
+            }
         }
     }
 

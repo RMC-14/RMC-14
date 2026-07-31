@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Vehicle;
+using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.ActionBlocker;
 using Content.Shared.DoAfter;
@@ -19,6 +20,8 @@ using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
+using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Overwatch;
@@ -33,10 +36,13 @@ public abstract class SharedRMCOverwatchTripodCameraSystem : EntitySystem
     [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly GunIFFSystem _iff = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly RMCMapSystem _map = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
@@ -50,6 +56,7 @@ public abstract class SharedRMCOverwatchTripodCameraSystem : EntitySystem
         SubscribeLocalEvent<RMCOverwatchTripodCameraComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<RMCOverwatchTripodCameraComponent, AttackedEvent>(OnAttacked);
         SubscribeLocalEvent<RMCOverwatchTripodCameraComponent, CombatModeShouldHandInteractEvent>(OnCombatModeShouldHandInteract);
+        SubscribeLocalEvent<ActorComponent, RMCOverwatchTripodSetSquadEvent>(OnSetSquad);
     }
 
     private void OnUseInHand(Entity<RMCOverwatchTripodCameraComponent> ent, ref UseInHandEvent args)
@@ -84,6 +91,15 @@ public abstract class SharedRMCOverwatchTripodCameraSystem : EntitySystem
 
         if (ent.Comp.Deployed)
         {
+            if (CanChangeSquad(ent, user))
+            {
+                args.Verbs.Add(new ActivationVerb
+                {
+                    Text = Loc.GetString("rmc-overwatch-tripod-camera-change-squad"),
+                    Act = () => OpenSquadSelection(ent, user),
+                });
+            }
+
             args.Verbs.Add(new ActivationVerb
             {
                 Text = Loc.GetString("rmc-overwatch-tripod-camera-pick-up"),
@@ -104,6 +120,84 @@ public abstract class SharedRMCOverwatchTripodCameraSystem : EntitySystem
     {
         var ev = new RMCOverwatchTripodRenameInputEvent(GetNetEntity(ent), GetNetEntity(user));
         _dialog.OpenInput(user, Loc.GetString("rmc-overwatch-tripod-camera-rename-prompt"), ev, characterLimit: 32);
+    }
+
+    private void OpenSquadSelection(Entity<RMCOverwatchTripodCameraComponent> ent, EntityUid user)
+    {
+        if (_net.IsClient || !CanChangeSquad(ent, user, true))
+            return;
+
+        var squads = new List<(EntityUid Id, string Name)>();
+        var query = EntityQueryEnumerator<SquadTeamComponent>();
+        while (query.MoveNext(out var squadId, out var squad))
+        {
+            if (squadId == ent.Comp.Squad ||
+                !string.Equals(squad.Group, ent.Comp.SelectableSquadGroup, StringComparison.Ordinal))
+            {
+                continue;
+            }
+
+            squads.Add((squadId, Name(squadId)));
+        }
+
+        squads.Sort(static (left, right) => string.CompareOrdinal(left.Name, right.Name));
+        if (squads.Count == 0)
+        {
+            _popup.PopupEntity(
+                Loc.GetString(
+                    "rmc-overwatch-tripod-camera-squad-change-no-options",
+                    ("group", ent.Comp.SelectableSquadGroup)),
+                ent,
+                user,
+                PopupType.SmallCaution);
+            return;
+        }
+
+        var options = new List<DialogOption>(squads.Count);
+        foreach (var squad in squads)
+        {
+            options.Add(new DialogOption(
+                squad.Name,
+                new RMCOverwatchTripodSetSquadEvent(
+                    GetNetEntity(ent),
+                    GetNetEntity(user),
+                    GetNetEntity(squad.Id))));
+        }
+
+        _dialog.OpenOptions(
+            user,
+            Loc.GetString("rmc-overwatch-tripod-camera-squad-selection-title"),
+            options,
+            Loc.GetString("rmc-overwatch-tripod-camera-squad-selection-prompt"));
+    }
+
+    private void OnSetSquad(Entity<ActorComponent> actor, ref RMCOverwatchTripodSetSquadEvent args)
+    {
+        if (_net.IsClient ||
+            !TryGetEntity(args.User, out var user) ||
+            user.Value != actor.Owner ||
+            !TryGetEntity(args.Camera, out var camera) ||
+            !TryComp(camera, out RMCOverwatchTripodCameraComponent? tripod) ||
+            TerminatingOrDeleted(camera.Value) ||
+            !CanChangeSquad((camera.Value, tripod), user.Value, true) ||
+            !TryGetEntity(args.Squad, out var squad) ||
+            TerminatingOrDeleted(squad.Value) ||
+            !TryComp(squad, out SquadTeamComponent? team) ||
+            !string.Equals(team.Group, tripod.SelectableSquadGroup, StringComparison.Ordinal) ||
+            tripod.Squad == squad.Value)
+        {
+            return;
+        }
+
+        tripod.Squad = squad.Value;
+        Dirty(camera.Value, tripod);
+
+        var changed = new RMCOverwatchTripodSquadChangedEvent();
+        RaiseLocalEvent(camera.Value, ref changed);
+        _popup.PopupEntity(
+            Loc.GetString("rmc-overwatch-tripod-camera-squad-changed", ("squad", Name(squad.Value))),
+            camera.Value,
+            user.Value);
     }
 
     private void TryStartDeploy(Entity<RMCOverwatchTripodCameraComponent> ent, EntityUid user)
@@ -128,7 +222,7 @@ public abstract class SharedRMCOverwatchTripodCameraSystem : EntitySystem
     {
         if (args.Cancelled ||
             args.Handled ||
-            !CanDeploy(ent, args.User, out var coordinates, out var rotation) ||
+            !CanDeploy(ent, args.User, out var coordinates, out var rotation, out var squad) ||
             !_hands.TryDrop(args.User, ent, coordinates))
         {
             return;
@@ -139,7 +233,7 @@ public abstract class SharedRMCOverwatchTripodCameraSystem : EntitySystem
         _transform.AnchorEntity(ent);
         ent.Comp.Deployed = true;
         ent.Comp.XenoSlashes = 0;
-        ent.Comp.Squad = CompOrNull<SquadMemberComponent>(args.User)?.Squad;
+        ent.Comp.Squad = squad;
         EnsureComp<OverwatchCameraComponent>(ent);
         _appearance.SetData(ent, RMCOverwatchTripodCameraVisuals.Deployed, true);
         _audio.PlayPredicted(ent.Comp.DeploySound, ent, args.User);
@@ -285,18 +379,20 @@ public abstract class SharedRMCOverwatchTripodCameraSystem : EntitySystem
 
     private bool CanDeploy(Entity<RMCOverwatchTripodCameraComponent> ent, EntityUid user)
     {
-        return CanDeploy(ent, user, out _, out _);
+        return CanDeploy(ent, user, out _, out _, out _);
     }
 
     private bool CanDeploy(
         Entity<RMCOverwatchTripodCameraComponent> ent,
         EntityUid user,
         out EntityCoordinates coordinates,
-        out Angle rotation)
+        out Angle rotation,
+        out EntityUid squad)
     {
         var moverCoordinates = _transform.GetMoverCoordinateRotation(user, Transform(user));
         coordinates = _map.SnapToGrid(moverCoordinates.Coords);
         rotation = moverCoordinates.worldRot.GetCardinalDir().ToAngle();
+        squad = default;
 
         if (ent.Comp.Deployed ||
             !_mobState.IsAlive(user) ||
@@ -326,8 +422,73 @@ public abstract class SharedRMCOverwatchTripodCameraSystem : EntitySystem
             return false;
         }
 
+        if (_net.IsServer && !TryGetDeploymentSquad(ent, user, out squad))
+        {
+            _popup.PopupClient(
+                Loc.GetString("rmc-overwatch-tripod-camera-default-squad-unavailable"),
+                ent,
+                user,
+                PopupType.SmallCaution);
+            return false;
+        }
+
         var attempt = new RMCOverwatchTripodDeployAttemptEvent(user);
         RaiseLocalEvent(ent.Owner, ref attempt);
         return !attempt.Cancelled;
+    }
+
+    /// <summary>
+    /// Resolves the squad assigned when the tripod finishes deploying.
+    /// </summary>
+    public bool TryGetDeploymentSquad(
+        Entity<RMCOverwatchTripodCameraComponent> ent,
+        EntityUid user,
+        out EntityUid squad)
+    {
+        if (_squad.TryGetMemberSquad(user, out var memberSquad) &&
+            !TerminatingOrDeleted(memberSquad))
+        {
+            squad = memberSquad;
+            return true;
+        }
+
+        if (_squad.TryGetSquad(ent.Comp.DefaultSquad, out var defaultSquad) &&
+            !TerminatingOrDeleted(defaultSquad))
+        {
+            squad = defaultSquad;
+            return true;
+        }
+
+        squad = default;
+        return false;
+    }
+
+    private bool CanChangeSquad(
+        Entity<RMCOverwatchTripodCameraComponent> ent,
+        EntityUid user,
+        bool showPopup = false)
+    {
+        if (!ent.Comp.Deployed ||
+            !_mobState.IsAlive(user) ||
+            _mobState.IsIncapacitated(user) ||
+            !_actionBlocker.CanInteract(user, ent) ||
+            !_interaction.InRangeUnobstructed(user, ent.Owner))
+        {
+            return false;
+        }
+
+        if (_iff.IsInFaction(user, ent.Comp.AssignmentFaction))
+            return true;
+
+        if (showPopup)
+        {
+            _popup.PopupClient(
+                Loc.GetString("rmc-overwatch-tripod-camera-squad-change-iff-denied"),
+                ent,
+                user,
+                PopupType.SmallCaution);
+        }
+
+        return false;
     }
 }

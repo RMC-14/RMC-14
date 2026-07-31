@@ -1,5 +1,8 @@
+using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Overwatch;
@@ -16,6 +19,15 @@ public sealed partial class RMCOverwatchTripodCameraComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntityUid? Squad;
+
+    [DataField(required: true)]
+    public EntProtoId<SquadTeamComponent> DefaultSquad;
+
+    [DataField(required: true)]
+    public string SelectableSquadGroup = string.Empty;
+
+    [DataField(required: true)]
+    public EntProtoId<IFFFactionComponent> AssignmentFaction;
 
     [DataField, AutoNetworkedField]
     public bool Deployed;

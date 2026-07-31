@@ -24,6 +24,9 @@
   - type: Damageable
     damageContainer: Inorganic
   - type: RMCOverwatchTripodCamera
+    defaultSquad: SquadAlpha
+    selectableSquadGroup: UNMC
+    assignmentFaction: FactionMarine
     deploySound:
       path: /Audio/_RMC14/Items/mine_armed.ogg
       params:

@@ -17,3 +17,9 @@ public record struct RMCOverwatchTripodDeployAttemptEvent(EntityUid User, bool C
 [Serializable, NetSerializable]
 public sealed record RMCOverwatchTripodRenameInputEvent(NetEntity Camera, NetEntity User, string Message = "")
     : DialogInputEvent(Message);
+
+[Serializable, NetSerializable]
+public sealed record RMCOverwatchTripodSetSquadEvent(NetEntity Camera, NetEntity User, NetEntity Squad);
+
+[ByRefEvent]
+public readonly record struct RMCOverwatchTripodSquadChangedEvent;

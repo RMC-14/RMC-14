@@ -52,6 +52,13 @@ rmc-overwatch-tripod-camera-collapsed = The field camera tripod collapses.
 rmc-overwatch-tripod-camera-destroyed = The field camera tripod is destroyed.
 rmc-overwatch-tripod-camera-examine-label = The label reads: [color=cyan]{ $label }[/color].
 rmc-overwatch-tripod-camera-examine-squad = It is currently assigned to squad: [color=cyan]{ $squad }[/color].
+rmc-overwatch-tripod-camera-change-squad = Change squad
+rmc-overwatch-tripod-camera-squad-selection-title = Camera Squad Assignment
+rmc-overwatch-tripod-camera-squad-selection-prompt = Select the squad to assign this camera to.
+rmc-overwatch-tripod-camera-squad-changed = Camera assigned to { $squad } squad.
+rmc-overwatch-tripod-camera-squad-change-iff-denied = Your IFF does not permit you to reassign this camera.
+rmc-overwatch-tripod-camera-squad-change-no-options = There are no other active { $group } squads available.
+rmc-overwatch-tripod-camera-default-squad-unavailable = No default squad is available for the field camera tripod.
 rmc-overwatch-console-state-unconscious = Unconscious
 rmc-overwatch-console-state-dead = Dead
 rmc-overwatch-console-state-conscious = Conscious
