@@ -17,6 +17,7 @@ public sealed class JobIconPickerEui : BaseEui
     [Dependency] private readonly IEntityManager _entManager = default!;
 
     private readonly NetEntity _target;
+    public Action? OnClosed;
 
     public JobIconPickerEui(NetEntity target)
     {
@@ -34,6 +35,7 @@ public sealed class JobIconPickerEui : BaseEui
     {
         base.Closed();
         _adminManager.OnPermsChanged -= OnPermsChanged;
+        OnClosed?.Invoke();
     }
 
     public override void HandleMessage(EuiMessageBase msg)
