@@ -6,6 +6,7 @@ using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Movement;
+using Content.Shared._RMC14.Deferred;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Weapons.Melee;
@@ -56,7 +57,7 @@ public sealed class XenoLeapSystem : EntitySystem
     [Dependency] private ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private BlindableSystem _blindable = default!;
-    [Dependency] private SharedBroadphaseSystem _broadphase = default!;
+    [Dependency] private RMCDeferredPhysicsSystem _deferredPhysics = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedXenoHiveSystem _hive = default!;
@@ -562,7 +563,7 @@ public sealed class XenoLeapSystem : EntitySystem
             _physics.SetBodyStatus(xeno, physics, BodyStatus.OnGround);
 
             if (physics.Awake)
-                _broadphase.RegenerateContacts(xeno, physics);
+                _deferredPhysics.TryQueueRegenerateContacts(xeno);
         }
 
         if (!xeno.Comp.KnockdownRequiresInvisibility || HasComp<XenoActiveInvisibleComponent>(xeno))

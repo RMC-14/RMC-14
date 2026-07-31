@@ -85,6 +85,10 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
 
     private void OnClientProjectileStartCollide(Entity<PredictedProjectileClientComponent> ent, ref StartCollideEvent args)
     {
+        //TODO RMC14 Remove this once predicted contact events are buffered in RobustToolbox
+        if (_timing.ApplyingState)
+            return;
+
         if (ent.Comp.Hit)
             return;
 

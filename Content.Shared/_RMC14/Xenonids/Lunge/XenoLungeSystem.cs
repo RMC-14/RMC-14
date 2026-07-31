@@ -2,6 +2,7 @@ using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Movement;
+using Content.Shared._RMC14.Deferred;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Weapons.Melee;
@@ -25,10 +26,10 @@ namespace Content.Shared._RMC14.Xenonids.Lunge;
 public sealed class XenoLungeSystem : EntitySystem
 {
     [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private RMCDeferredPhysicsSystem _deferredPhysics = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private ThrowingSystem _throwing = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private ThrownItemSystem _thrownItem = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private PullingSystem _pulling = default!;
@@ -42,12 +43,10 @@ public sealed class XenoLungeSystem : EntitySystem
     [Dependency] private RMCSizeStunSystem _size = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
-    private EntityQuery<ThrownItemComponent> _thrownItemQuery;
 
     public override void Initialize()
     {
         _physicsQuery = GetEntityQuery<PhysicsComponent>();
-        _thrownItemQuery = GetEntityQuery<ThrownItemComponent>();
 
         SubscribeAllEvent<XenoLungePredictedHitEvent>(OnPredictedHit);
 
@@ -182,14 +181,8 @@ public sealed class XenoLungeSystem : EntitySystem
         if (_mobState.IsDead(targetId))
             return false;
 
-        if (_physicsQuery.TryGetComponent(xeno, out var physics) &&
-            _thrownItemQuery.TryGetComponent(xeno, out var thrown))
-        {
-            _thrownItem.LandComponent(xeno, thrown, physics, true);
-
-            if (stopThrow)
-                _thrownItem.StopThrow(xeno, thrown);
-        }
+        if (stopThrow && !_deferredPhysics.TryQueueLandAndStopThrow(xeno))
+            return true;
 
         var ev = new XenoLungeHitAttempt(xeno);
         RaiseLocalEvent(targetId, ref ev);

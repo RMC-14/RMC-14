@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Deferred;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -21,6 +22,7 @@ public sealed class XenoTumbleSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private RMCDeferredPhysicsSystem _deferredPhysics = default!;
     [Dependency] private SharedXenoHiveSystem _hive = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private INetManager _net = default!;
@@ -32,17 +34,14 @@ public sealed class XenoTumbleSystem : EntitySystem
     [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private ThrowingSystem _throwing = default!;
-    [Dependency] private ThrownItemSystem _thrownItem = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private XenoSystem _xeno = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
-    private EntityQuery<ThrownItemComponent> _thrownItemQuery;
 
     public override void Initialize()
     {
         _physicsQuery = GetEntityQuery<PhysicsComponent>();
-        _thrownItemQuery = GetEntityQuery<ThrownItemComponent>();
 
         SubscribeLocalEvent<XenoTumbleComponent, XenoTumbleActionEvent>(OnXenoTumbleAction);
         SubscribeLocalEvent<XenoTumbleComponent, ThrowDoHitEvent>(OnXenoTumbleHit);
@@ -101,12 +100,8 @@ public sealed class XenoTumbleSystem : EntitySystem
         if (_mobState.IsDead(args.Target))
             return;
 
-        if (_physicsQuery.TryGetComponent(xeno, out var physics) &&
-            _thrownItemQuery.TryGetComponent(xeno, out var thrown))
-        {
-            _thrownItem.LandComponent(xeno, thrown, physics, true);
-            _thrownItem.StopThrow(xeno, thrown);
-        }
+        if (!_deferredPhysics.TryQueueLandAndStopThrow(xeno))
+            return;
 
         if (_timing.IsFirstTimePredicted && xeno.Comp.Target != null)
             xeno.Comp.Target = null;
