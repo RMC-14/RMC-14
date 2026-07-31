@@ -8,6 +8,6 @@ namespace Content.Shared._RMC14.Attachable.Components;
 [Access(typeof(AttachableHolderSystem))]
 public sealed partial class AttachableAddRemoveComponentsComponent : Component
 {
-    [DataField(readOnly: true, required: true)]
+    [DataField(required: true)]
     public ComponentRegistry Components = default!;
 }
