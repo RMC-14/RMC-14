@@ -13,7 +13,6 @@ public sealed class TetherGunSystem : SharedTetherGunSystem
     [Dependency] private readonly IEyeManager _eyeManager = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IInputManager _input = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly IOverlayManager _overlay = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly MapSystem _mapSystem = default!;
@@ -73,7 +72,7 @@ public sealed class TetherGunSystem : SharedTetherGunSystem
 
         EntityCoordinates coords;
 
-        if (_mapManager.TryFindGridAt(mouseWorldPos, out var gridUid, out _))
+        if (_mapSystem.TryFindGridAt(mouseWorldPos, out var gridUid, out _))
         {
             coords = TransformSystem.ToCoordinates(gridUid, mouseWorldPos);
         }

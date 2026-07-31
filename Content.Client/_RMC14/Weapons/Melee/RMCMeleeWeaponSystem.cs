@@ -14,7 +14,6 @@ public sealed class RMCMeleeWeaponSystem : SharedRMCMeleeWeaponSystem
 {
     [Dependency] private readonly IEyeManager _eye = default!;
     [Dependency] private readonly IInputManager _input = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly MapSystem _map = default!;
     [Dependency] private readonly MeleeWeaponSystem _melee = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
@@ -39,7 +38,7 @@ public sealed class RMCMeleeWeaponSystem : SharedRMCMeleeWeaponSystem
         var mousePos = _eye.PixelToMap(_input.MouseScreenPosition);
         EntityUid grid;
 
-        if (_mapManager.TryFindGridAt(mousePos, out var gridUid, out _))
+        if (_map.TryFindGridAt(mousePos, out var gridUid, out _))
             grid = gridUid;
         else if (_map.TryGetMap(mousePos.MapId, out var map))
             grid = map.Value;

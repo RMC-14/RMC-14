@@ -44,7 +44,6 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
     [Dependency] private readonly IEyeManager _eyeManager = default!;
     [Dependency] private readonly IInputManager _inputManager = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
@@ -246,7 +245,7 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
         if (!coords.IsValid(EntityManager))
             return null;
 
-        var snapped = coords.SnapToGrid(EntityManager, _mapManager);
+        var snapped = coords.SnapToGrid(EntityManager);
 
         if (_transform.GetGrid(snapped) is not { } gridId ||
             !TryComp(gridId, out MapGridComponent? grid))
@@ -438,7 +437,7 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
             return player != null ? _transform.GetMoverCoordinates(player.Value) : EntityCoordinates.Invalid;
         }
 
-        if (!_mapManager.TryFindGridAt(mapCoords, out var gridUid, out var grid))
+        if (!_mapSystem.TryFindGridAt(mapCoords, out var gridUid, out var grid))
             return _transform.ToCoordinates(mapCoords);
 
         var gridCoords = _transform.ToCoordinates(gridUid, mapCoords);
