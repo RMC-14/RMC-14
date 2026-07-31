@@ -13,6 +13,8 @@ public sealed class JobIconPickerSystem : EntitySystem
     [Dependency] private readonly IAdminManager _adminManager = default!;
     [Dependency] private readonly EuiManager _eui = default!;
 
+    private readonly Dictionary<ICommonSession, JobIconPickerEui> _openEuis = new();
+
     public override void Initialize()
     {
         SubscribeLocalEvent<MarineComponent, GetVerbsEvent<Verb>>(AddPickerVerb);
@@ -33,7 +35,16 @@ public sealed class JobIconPickerSystem : EntitySystem
         {
             Text = "Set Job Icon",
             Category = VerbCategory.Debug,
-            Act = () => _eui.OpenEui(new JobIconPickerEui(target), player),
+            Act = () =>
+            {
+                if (_openEuis.TryGetValue(player, out var old))
+                    old.Close();
+
+                var eui = new JobIconPickerEui(target);
+                _openEuis[player] = eui;
+                eui.OnClosed += () => _openEuis.Remove(player);
+                _eui.OpenEui(eui, player);
+            },
             Impact = LogImpact.Low,
         });
     }

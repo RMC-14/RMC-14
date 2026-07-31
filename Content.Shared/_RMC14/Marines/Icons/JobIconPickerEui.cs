@@ -5,12 +5,6 @@ using Robust.Shared.Utility;
 namespace Content.Shared._RMC14.Marines.Icons;
 
 [Serializable, NetSerializable]
-public sealed class JobIconPickerEuiState : EuiStateBase
-{
-    public NetEntity Target;
-}
-
-[Serializable, NetSerializable]
 public sealed class JobIconPickerSelectMessage : EuiMessageBase
 {
     public readonly ResPath Rsi;
