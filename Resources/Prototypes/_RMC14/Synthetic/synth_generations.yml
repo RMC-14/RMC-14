@@ -38,7 +38,6 @@
     baseWalkSpeed: 1.9575
   - type: ShowHealthIcons
   - type: ShowHealthBars
-  - type: RMCAllowSuitStorage
   - type: RemoveComponents
     components:
     - type: HiddenAppearance
@@ -80,7 +79,6 @@
     baseWalkSpeed: 1.9575
   - type: ShowHealthIcons
   - type: ShowHealthBars
-  - type: RMCAllowSuitStorage
   - type: RemoveComponents
     components:
     - type: HiddenAppearance
@@ -119,7 +117,6 @@
       300: Dead
   - type: ShowHealthIcons
   - type: ShowHealthBars
-  - type: RMCAllowSuitStorage
   - type: RemoveComponents
     components:
     - type: HiddenAppearance
@@ -162,7 +159,6 @@
       500: Dead
   - type: ShowHealthIcons
   - type: ShowHealthBars
-  - type: RMCAllowSuitStorage
   - type: RemoveComponents
     components:
     - type: HiddenAppearance
