@@ -99,7 +99,6 @@ public sealed class XenoBlitzSystem : EntitySystem
         if (ev.Cancelled)
             return;
 
-        //Note doesn't seem to work here
         EnsureComp<XenoSweepingComponent>(xeno);
 
         var hits = 0;
