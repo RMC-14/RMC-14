@@ -20,7 +20,6 @@ namespace Content.Server.Abilities.Mime
         [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
         [Dependency] private readonly AlertsSystem _alertsSystem = default!;
         [Dependency] private readonly TurfSystem _turf = default!;
-        [Dependency] private readonly IMapManager _mapMan = default!;
         [Dependency] private readonly SharedContainerSystem _container = default!;
         [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -81,7 +80,7 @@ namespace Content.Server.Abilities.Mime
             var xform = Transform(uid);
             // Get the tile in front of the mime
             var offsetValue = xform.LocalRotation.ToWorldVec();
-            var coords = xform.Coordinates.Offset(offsetValue).SnapToGrid(EntityManager, _mapMan);
+            var coords = xform.Coordinates.Offset(offsetValue).SnapToGrid(EntityManager);
             var tile = _turf.GetTileRef(coords);
             if (tile == null)
                 return;

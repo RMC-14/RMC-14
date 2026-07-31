@@ -26,7 +26,6 @@ public sealed partial class NavMapSystem : SharedNavMapSystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly TurfSystem _turfSystem = default!;
 
@@ -466,7 +465,7 @@ public sealed partial class NavMapSystem : SharedNavMapSystem
             return beacon.Value.Comp.Text!;
 
         var gridOffset = Angle.Zero;
-        if (_mapManager.TryFindGridAt(pos.Value, out var grid, out _))
+        if (_mapSystem.TryFindGridAt(pos.Value, out var grid, out _))
             gridOffset = Transform(grid).LocalRotation;
 
         // get the angle between the two positions, adjusted for the grid rotation so that

@@ -41,7 +41,6 @@ namespace Content.Server.GameTicking
         [Dependency] private readonly IGameMapManager _gameMapManager = default!;
         [Dependency] private readonly IGameTiming _gameTiming = default!;
         [Dependency] private readonly ILogManager _logManager = default!;
-        [Dependency] private readonly IMapManager _mapManager = default!;
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
         [Dependency] private readonly IRobustRandom _robustRandom = default!;
 #if EXCEPTION_TOLERANCE

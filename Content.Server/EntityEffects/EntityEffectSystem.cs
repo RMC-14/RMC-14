@@ -56,7 +56,6 @@ public sealed class EntityEffectSystem : EntitySystem
     [Dependency] private readonly ExplosionSystem _explosion = default!;
     [Dependency] private readonly FlammableSystem _flammable = default!;
     [Dependency] private readonly SharedFlashSystem _flash = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly IPrototypeManager _protoManager = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
@@ -523,7 +522,7 @@ public sealed class EntityEffectSystem : EntitySystem
             var transform = Comp<TransformComponent>(reagentArgs.TargetEntity);
             var mapCoords = _xform.GetMapCoordinates(reagentArgs.TargetEntity, xform: transform);
 
-            if (!_mapManager.TryFindGridAt(mapCoords, out var gridUid, out var grid) ||
+            if (!_map.TryFindGridAt(mapCoords, out var gridUid, out var grid) ||
                 !_map.TryGetTileRef(gridUid, grid, transform.Coordinates, out var tileRef))
             {
                 return;

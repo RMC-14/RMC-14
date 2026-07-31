@@ -19,7 +19,6 @@ namespace Content.Server.NPC.Systems;
 public sealed partial class NPCCombatSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly GunSystem _gun = default!;
     [Dependency] private readonly InteractionSystem _interaction = default!;

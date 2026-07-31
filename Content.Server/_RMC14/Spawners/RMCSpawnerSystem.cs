@@ -31,7 +31,6 @@ public sealed class RMCSpawnerSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly RandomHumanoidSystem _randomHumanoid = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;

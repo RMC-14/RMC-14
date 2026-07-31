@@ -29,7 +29,6 @@ public sealed class EventHorizonSystem : SharedEventHorizonSystem
     #region Dependencies
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IMapManager _mapMan = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
@@ -314,7 +313,7 @@ public sealed class EventHorizonSystem : SharedEventHorizonSystem
         var box = Box2.CenteredAround(mapPos.Position, new Vector2(range, range));
         var circle = new Circle(mapPos.Position, range);
         var grids = new List<Entity<MapGridComponent>>();
-        _mapMan.FindGridsIntersecting(mapPos.MapId, box, ref grids);
+        _mapSystem.FindGridsIntersecting(mapPos.MapId, box, ref grids);
 
         foreach (var grid in grids)
         {

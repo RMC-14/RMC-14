@@ -4,7 +4,6 @@ using Microsoft.Extensions.ObjectPool;
 using Robust.Shared;
 using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
-using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
@@ -19,7 +18,7 @@ namespace Content.Shared.Chunking;
 public sealed class ChunkingSystem : EntitySystem
 {
     [Dependency] private readonly IConfigurationManager _configurationManager = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private EntityQuery<TransformComponent> _xformQuery;
@@ -74,7 +73,7 @@ public sealed class ChunkingSystem : EntitySystem
         var bounds = _baseViewBounds.Translated(pos).Enlarged(viewEnlargement);
 
         var state = new QueryState(chunks, indexPool, chunkSize, bounds, _transform, EntityManager);
-        _mapManager.FindGridsIntersecting(xform.MapID, bounds, ref state, AddGridChunks, true);
+        _map.FindGridsIntersecting(xform.MapID, bounds, ref state, AddGridChunks, true);
     }
 
     private static bool AddGridChunks(

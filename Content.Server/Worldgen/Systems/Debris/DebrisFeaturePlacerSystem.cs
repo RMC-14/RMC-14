@@ -21,7 +21,7 @@ public sealed class DebrisFeaturePlacerSystem : BaseWorldSystem
     [Dependency] private readonly PoissonDiskSampler _sampler = default!;
     [Dependency] private readonly TransformSystem _xformSys = default!;
     [Dependency] private readonly ILogManager _logManager = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
 
     private ISawmill _sawmill = default!;
@@ -235,7 +235,7 @@ public sealed class DebrisFeaturePlacerSystem : BaseWorldSystem
     private bool HasCollisions(MapId mapId, Box2 point)
     {
         _mapGrids.Clear();
-        _mapManager.FindGridsIntersecting(mapId, point, ref _mapGrids);
+        _map.FindGridsIntersecting(mapId, point, ref _mapGrids);
         return _mapGrids.Count > 0;
     }
 
