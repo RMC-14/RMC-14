@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: LZ sentries have a rotating warning light.
-    type: Add
-  id: 3046
-  time: '2026-04-02T05:02:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9461
 - author: c0rigin
   changes:
   - message: Non-wagging vulp tails are now properly labeled as such
@@ -4570,5 +4563,12 @@
   id: 3545
   time: '2026-07-31T19:57:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10489
+- author: wheelwrightt
+  changes:
+  - message: Converted fishing sounds to mono.
+    type: Tweak
+  id: 3546
+  time: '2026-07-31T23:08:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10356
 Name: RMC14
 Order: -1
