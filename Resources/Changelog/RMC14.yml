@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed Survivor Cargo Techs, Heavy Vehicle Operators, and truckers having
-      civilian access instead of engineering access.
-    type: Fix
-  id: 3041
-  time: '2026-04-01T06:58:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9133
 - author: Thereisabear
   changes:
   - message: Fixed Defenders Headbutt having a plasma cost, Headbutt cooldown reduced
@@ -4570,5 +4562,12 @@
   id: 3540
   time: '2026-07-31T00:13:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10371
+- author: Vermidia
+  changes:
+  - message: Fixed being able to use normal syringes without medical skill 2.
+    type: Fix
+  id: 3541
+  time: '2026-07-31T03:22:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10368
 Name: RMC14
 Order: -1
