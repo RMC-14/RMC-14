@@ -28,7 +28,6 @@ public sealed class RangefinderSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedDropshipWeaponSystem _dropshipWeapon = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -89,7 +88,7 @@ public sealed class RangefinderSystem : EntitySystem
     private void OnRangefinderAfterInteract(Entity<RangefinderComponent> rangefinder, ref AfterInteractEvent args)
     {
         var user = args.User;
-        var coordinates = args.ClickLocation.SnapToGrid(EntityManager, _mapManager);
+        var coordinates = args.ClickLocation.SnapToGrid(EntityManager);
         if (!coordinates.IsValid(EntityManager))
             return;
 

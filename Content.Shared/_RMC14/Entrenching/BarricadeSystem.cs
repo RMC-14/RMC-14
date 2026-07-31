@@ -26,7 +26,6 @@ public sealed class BarricadeSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -249,7 +248,7 @@ public sealed class BarricadeSystem : EntitySystem
             return;
 
         var coordinates = GetCoordinates(args.Coordinates);
-        if (!_mapManager.TryFindGridAt(_transform.ToMapCoordinates(coordinates), out var gridId, out var gridComp) ||
+        if (!_mapSystem.TryFindGridAt(_transform.ToMapCoordinates(coordinates), out var gridId, out var gridComp) ||
             !_interaction.InRangeUnobstructed(full, coordinates, popup: false) ||
             !_turf.TryGetTileRef(coordinates, out var turf) ||
             !CanBuild(full, (gridId, gridComp), args.User, turf.Value, args.Direction))
@@ -357,7 +356,7 @@ public sealed class BarricadeSystem : EntitySystem
     private bool Build(Entity<FullSandbagComponent> full, EntityUid user, EntityCoordinates coordinates, Direction direction, out bool handled)
     {
         handled = false;
-        if (!_mapManager.TryFindGridAt(_transform.ToMapCoordinates(coordinates), out var gridId, out var gridComp) ||
+        if (!_mapSystem.TryFindGridAt(_transform.ToMapCoordinates(coordinates), out var gridId, out var gridComp) ||
             !_turf.TryGetTileRef(coordinates, out var tile))
         {
             return false;
@@ -401,7 +400,7 @@ public sealed class BarricadeSystem : EntitySystem
         if (TryComp(tool, out ItemToggleComponent? toggle) && !toggle.Activated)
             return false;
 
-        if (!_mapManager.TryFindGridAt(_transform.ToMapCoordinates(coordinates), out var gridId, out var gridComp))
+        if (!_mapSystem.TryFindGridAt(_transform.ToMapCoordinates(coordinates), out var gridId, out var gridComp))
             return false;
 
         tileRef = _mapSystem.GetTileRef(gridId, gridComp, coordinates);

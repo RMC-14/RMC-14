@@ -78,7 +78,6 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     [Dependency] private readonly DropshipUtilitySystem _dropshipUtility = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly NameModifierSystem _name = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedOnCollideSystem _onCollide = default!;
@@ -669,7 +668,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             return;
         }
 
-        var coordinates = _transform.GetMoverCoordinates(target).SnapToGrid(EntityManager, _mapManager);
+        var coordinates = _transform.GetMoverCoordinates(target).SnapToGrid(EntityManager);
         if (!CasDebug && !_area.CanCAS(coordinates))
         {
             var msg = Loc.GetString("rmc-laser-designator-not-cas");
@@ -789,7 +788,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         var time = _timing.CurTime;
 
-        var spawnTarget = _transform.GetMoverCoordinates(active).SnapToGrid(EntityManager, _mapManager);
+        var spawnTarget = _transform.GetMoverCoordinates(active).SnapToGrid(EntityManager);
         if (ammo.Explosion != null && HasNonDeletableWallOnTile(spawnTarget))
             spawnTarget = FindAlternateLandingTile(spawnTarget, 3);
 
@@ -1374,7 +1373,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
     public void UpdateSignalFlareVisuals(EntityUid ent)
     {
-        var coordinates = _transform.GetMoverCoordinates(ent).SnapToGrid(EntityManager, _mapManager);
+        var coordinates = _transform.GetMoverCoordinates(ent).SnapToGrid(EntityManager);
 
         if (!IsFlareLit(ent))
             return;
@@ -1511,7 +1510,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
                 var landing = flight.Target.Offset(spread);
 
-                var targetMap = _transform.ToMapCoordinates(landing.SnapToGrid(EntityManager, _mapManager));
+                var targetMap = _transform.ToMapCoordinates(landing.SnapToGrid(EntityManager));
 
                 foreach (var effect in flight.ImpactEffects)
                 {
@@ -1667,7 +1666,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
     private EntityCoordinates FindAlternateLandingTile(EntityCoordinates desired, int maxRadius = 3)
     {
-        var origin = desired.SnapToGrid(EntityManager, _mapManager);
+        var origin = desired.SnapToGrid(EntityManager);
 
         for (var r = 1; r <= maxRadius; r++)
         {

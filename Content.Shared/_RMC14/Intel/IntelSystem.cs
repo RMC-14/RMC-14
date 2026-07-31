@@ -449,7 +449,7 @@ public sealed class IntelSystem : EntitySystem
         AddPoints(tree, ent.Comp.Value);
 
         var knowledge = EnsureComp<IntelKnowledgeComponent>(user);
-        knowledge.Read.Add(ent);
+        knowledge.ReadIntel.Add(ent);
         Dirty(user, knowledge);
 
         var read = EnsureComp<IntelReadComponent>(ent);
@@ -564,7 +564,7 @@ public sealed class IntelSystem : EntitySystem
 
     private void OnKnowledgeRemove<T>(Entity<IntelKnowledgeComponent> ent, ref T args)
     {
-        foreach (var read in ent.Comp.Read)
+        foreach (var read in ent.Comp.ReadIntel)
         {
             if (TerminatingOrDeleted(read))
                 continue;
@@ -586,7 +586,7 @@ public sealed class IntelSystem : EntitySystem
 
             if (TryComp(reader, out IntelKnowledgeComponent? knowledge))
             {
-                knowledge.Read.Remove(ent);
+                knowledge.ReadIntel.Remove(ent);
                 Dirty(reader, knowledge);
             }
         }
@@ -600,7 +600,7 @@ public sealed class IntelSystem : EntitySystem
         args.Handled = true;
 
         if (!TryComp(args.User, out IntelKnowledgeComponent? knowledge) ||
-            !knowledge.Read.TryFirstOrNull(out var read))
+            !knowledge.ReadIntel.TryFirstOrNull(out var read))
         {
             _popup.PopupClient(Loc.GetString("rmc-intel-console-typing-no-new"), ent, args.User, PopupType.Medium);
             return;
@@ -663,7 +663,7 @@ public sealed class IntelSystem : EntitySystem
             !TryComp(intel, out IntelUnlocksComponent? unlocks) ||
             !unlocks.Unlocks.TryFirstOrNull(out var unlock))
         {
-            if (!knowledge.Read.TryFirstOrNull(out intel))
+            if (!knowledge.ReadIntel.TryFirstOrNull(out intel))
             {
                 StopPopup(ref args);
                 return;
@@ -673,7 +673,7 @@ public sealed class IntelSystem : EntitySystem
             if (!TryComp(intel, out unlocks) ||
                 !unlocks.Unlocks.TryFirstOrNull(out unlock))
             {
-                knowledge.Read.Remove(intel.Value);
+                knowledge.ReadIntel.Remove(intel.Value);
                 Dirty(args.User, knowledge);
                 args.Repeat = true;
                 return;
@@ -690,12 +690,12 @@ public sealed class IntelSystem : EntitySystem
         _audio.PlayPvs(ent.Comp.TypingSound, ent);
 
         if (unlocks.Unlocks.Count == 0 &&
-            knowledge.Read.Remove(intel.Value))
+            knowledge.ReadIntel.Remove(intel.Value))
         {
             Dirty(args.User, knowledge);
         }
 
-        if (knowledge.Read.Count > 0)
+        if (knowledge.ReadIntel.Count > 0)
             args.Repeat = true;
         else
             StopPopup(ref args);

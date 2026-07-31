@@ -54,7 +54,6 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedOnCollideSystem _onCollide = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
@@ -272,7 +271,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         var coords = _transform.GetMoverCoordinates(ent);
         _audio.PlayPvs(ent.Comp.Sound, coords);
 
-        var tile = coords.SnapToGrid(EntityManager, _map);
+        var tile = coords.SnapToGrid(EntityManager);
         SpawnFireDiamond(ent.Comp.Spawn, tile, ent.Comp.Range, ent.Comp.Intensity, ent.Comp.Duration);
         QueueDel(ent);
     }
@@ -300,7 +299,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
     private void OnTileFireOnTriggerExplosive(Entity<TileFireOnTriggerComponent> ent, ref CMExplosiveTriggeredEvent args)
     {
-        var coords = _transform.GetMoverCoordinates(ent).SnapToGrid(EntityManager, _map);
+        var coords = _transform.GetMoverCoordinates(ent).SnapToGrid(EntityManager);
         SpawnFireDiamond(ent.Comp.Spawn, coords, ent.Comp.Range, ent.Comp.Intensity, ent.Comp.Duration);
     }
 

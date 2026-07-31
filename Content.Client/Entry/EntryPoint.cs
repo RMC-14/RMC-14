@@ -39,6 +39,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.ContentPack;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Replays;
+using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 
 namespace Content.Client.Entry
@@ -88,6 +89,8 @@ namespace Content.Client.Entry
                 var cast = (ClientModuleTestingCallbacks) callback;
                 cast.ClientBeforeIoC?.Invoke();
             }
+
+            Dependencies.Resolve<IRobustSerializer>().FloatFlags = SerializerFloatFlags.RemoveReadNan;
 
             IoCManager.BuildGraph();
             IoCManager.InjectDependencies(this);

@@ -24,7 +24,6 @@ namespace Content.Shared.Construction.EntitySystems;
 
 public sealed partial class AnchorableSystem : EntitySystem
 {
-    [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
@@ -158,7 +157,7 @@ public sealed partial class AnchorableSystem : EntitySystem
         // TODO: Anchoring snaps rn anyway!
         if (component.Snap)
         {
-            var coordinates = xform.Coordinates.SnapToGrid(EntityManager, _mapManager);
+            var coordinates = xform.Coordinates.SnapToGrid(EntityManager);
 
             if (AnyUnstackable(uid, coordinates))
             {

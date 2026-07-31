@@ -7,7 +7,7 @@ namespace Content.Shared.Alert;
 
 public sealed partial class AlertPrototype : IInheritingPrototype
 {
-    [ParentDataField(typeof(PrototypeIdArraySerializer<AlertPrototype>))]
+    [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<AlertPrototype>))]
     public string[]? Parents { get; private set; }
 
     [AbstractDataField]

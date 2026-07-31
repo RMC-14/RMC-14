@@ -20,7 +20,6 @@ public sealed class DesignerGreaterResinSurgeSystem : EntitySystem
 {
     private const float EffectSearchPaddingMultiplier = 2f;
 
-    [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -219,7 +218,7 @@ public sealed class DesignerGreaterResinSurgeSystem : EntitySystem
                 continue;
 
             // Spawn after the enumerator is disposed to avoid modifying anchored entity collections mid-iteration.
-            var spawned = Spawn(pending.WallPrototype, tileCenter.SnapToGrid(EntityManager, _map));
+            var spawned = Spawn(pending.WallPrototype, tileCenter.SnapToGrid(EntityManager));
             _hive.SetSameHive(user, spawned);
 
             foreach (var nodeUid in nodesToConvert)

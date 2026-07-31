@@ -51,7 +51,6 @@ namespace Content.Shared._RMC14.Xenonids.Fruit;
 public sealed class SharedXenoFruitSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogs = default!;
@@ -339,7 +338,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         }
 
         // Target not on weeds
-        target = target.SnapToGrid(EntityManager, _map);
+        target = target.SnapToGrid(EntityManager);
         if (checkWeeds && !_xenoWeeds.IsOnWeeds((gridId, grid), target))
         {
             popup = Loc.GetString("rmc-xeno-fruit-plant-failed-weeds");
@@ -414,7 +413,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             return;
         }
 
-        var coordinates = _transform.GetMoverCoordinates(xeno).SnapToGrid(EntityManager, _map);
+        var coordinates = _transform.GetMoverCoordinates(xeno).SnapToGrid(EntityManager);
 
         if (!coordinates.IsValid(EntityManager))
             return;

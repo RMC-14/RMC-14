@@ -18,7 +18,6 @@ public sealed class RMCMapSystem : EntitySystem
 {
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -92,7 +91,7 @@ public sealed class RMCMapSystem : EntitySystem
 
     public RMCAnchoredEntitiesEnumerator GetAnchoredEntitiesEnumerator(MapCoordinates coords, Direction? offset = null, DirectionFlag facing = DirectionFlag.None)
     {
-        if (!_mapManager.TryFindGridAt(coords, out var gridId, out var gridComp))
+        if (!_map.TryFindGridAt(coords, out var gridId, out var gridComp))
             return RMCAnchoredEntitiesEnumerator.Empty;
 
         var indices = _map.CoordinatesToTile(gridId, gridComp, coords);
@@ -127,7 +126,7 @@ public sealed class RMCMapSystem : EntitySystem
 
     public RMCAnchoredEntitiesEnumerator<T> GetAnchoredEntitiesEnumerator<T>(MapCoordinates coords, Direction? offset = null, DirectionFlag facing = DirectionFlag.None) where T : IComponent
     {
-        if (!_mapManager.TryFindGridAt(coords, out var gridId, out var gridComp))
+        if (!_map.TryFindGridAt(coords, out var gridId, out var gridComp))
             return RMCAnchoredEntitiesEnumerator<T>.Empty;
 
         var indices = _map.CoordinatesToTile(gridId, gridComp, coords);

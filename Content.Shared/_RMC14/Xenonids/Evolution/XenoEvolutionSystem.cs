@@ -52,7 +52,6 @@ public sealed class XenoEvolutionSystem : EntitySystem
     [Dependency] private readonly SharedGameTicker _gameTicker = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
-    [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -432,7 +431,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         if (TryComp<RestrictEvolveOffWeedsComponent>(xeno.Owner, out var comp))
         {
-            var coordinates = _transform.GetMoverCoordinates(xeno).SnapToGrid(EntityManager, _map);
+            var coordinates = _transform.GetMoverCoordinates(xeno).SnapToGrid(EntityManager);
             if (_transform.GetGrid(coordinates) is not { } gridUid ||
                 !TryComp(gridUid, out MapGridComponent? grid))
             {

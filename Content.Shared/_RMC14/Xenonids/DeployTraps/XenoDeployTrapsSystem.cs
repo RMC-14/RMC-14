@@ -26,7 +26,6 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly XenoInsightSystem _insight = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -90,7 +89,7 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
 
         args.Handled = true;
 
-        var coords = args.Target.SnapToGrid(EntityManager, _map);
+        var coords = args.Target.SnapToGrid(EntityManager);
 
         _audio.PlayPredicted(xeno.Comp.DeploySound, coords, xeno);
 

@@ -23,7 +23,6 @@ namespace Content.Shared._RMC14.Xenonids.ResinSurge;
 
 public sealed class SharedXenoResinSurgeSystem : EntitySystem
 {
-    [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -99,7 +98,7 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
         if (args.Handled)
             return;
 
-        var target = args.Target.SnapToGrid(EntityManager, _map);
+        var target = args.Target.SnapToGrid(EntityManager);
 
         // Check if target on grid
         if (_transform.GetGrid(target) is not { } gridId ||
