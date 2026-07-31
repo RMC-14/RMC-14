@@ -1,18 +1,13 @@
 - type: entity
+  parent: RMCVehicleBase
   id: VehicleVanBase
   abstract: true
   name: van
   description: A rugged transport van.
   components:
-  - type: Vehicle
-    movementKind: Grid
-  - type: LagCompensation
-  - type: Clickable
   - type: WarpPoint
     follow: true
     location: Van
-  - type: RMCIgnoreGhostInteractionLimits
-  - type: RequireProjectileTarget
   - type: GridVehicleMover
     maxSpeed: 6
     acceleration: 5
@@ -26,20 +21,10 @@
     duration: 3
     cooldown: 15
     overchargeSound: /Audio/_RMC14/Vehicle/overdrive_activate.ogg
-  - type: VehicleSound
-    runningSound: /Audio/Effects/Vehicle/vehicleengineidle.ogg
-    runningSoundCooldown: 2
-    hornSound: /Audio/Effects/Vehicle/carhorn.ogg
-    hornCooldown: 1
-    #collisionSound: /Audio/_RMC14/Structures/metalhit.ogg
-    collisionSoundCooldown: 0.5
-    mobCollisionSound: /Audio/_RMC14/Xeno/alien_claw_block.ogg
   - type: VehicleSpotlight
     radius: 6
     energy: 2.5
     softness: 2
-  - type: Physics
-    bodyType: Dynamic
   - type: Fixtures
     fixtures:
       world:
@@ -67,10 +52,6 @@
         - LargeMobLayer
         layer:
         - LargeMobLayer
-  - type: Damageable
-    damageContainer: StructuralMarine
-    damageModifierSet: StructuralMarine
-  - type: InteractionOutline
   - type: Sprite
     drawdepth: Mobs
     sprite: _RMC14/Structures/Vehicles/van.rsi
@@ -82,13 +63,6 @@
       visible: false
     - map: [ rmc-wheels ]
       state: wheels_1
-  - type: SpriteMovement
-    movementLayers:
-      rmc-wheels:
-        state: wheels_0
-    noMovementLayers:
-      rmc-wheels:
-        state: wheels_1
   - type: PointLight
     enabled: false
     radius: 6
@@ -96,18 +70,6 @@
     softness: 2
     autoRot: true
     offset: "0,0.9"
-  - type: Corrodible
-    isCorrodible: false
-  - type: DoAfter
-  - type: UserInterface
-    interfaces:
-      enum.HardpointUiKey.Key:
-        type: HardpointBoundUserInterface
-      enum.VehicleWeaponsUiKey.Key:
-        type: VehicleWeaponsBoundUserInterface
-  - type: VehicleWeapons
-  - type: InputMover
-  - type: ItemSlots
   - type: ContainerContainer
     containers:
       wheel-1: !type:ContainerSlot
@@ -124,16 +86,7 @@
       whitelist:
         components:
         - VehicleWheelItem
-  - type: VehicleWheelSlots
-    slotCount: 1
-    slots:
-    - wheel-1
-  - type: HardpointIntegrity
-    maxIntegrity: 1000
-    integrity: 1000
-    bypassEntryOnZero: true
   - type: HardpointState
-  - type: Appearance
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/van_interior.yml
     enterDoAfter: 1.0
@@ -154,16 +107,20 @@
 - type: entity
   parent: VehicleVanBase
   id: VehicleVan
+  suffix: Drivable, Van, Base
+
+## CLF
 
 - type: entity
   parent: VehicleVanBase
   id: VehicleCLFVan
   name: CLF van
+  suffix: Drivable, Van, CLF
   description: A rugged transport van painted in CLF colors.
   components:
   - type: Damageable
     damageContainer: StructuralMarine
-    damageModifierSet: VehicleFrameCLFVan
+    damageModifierSet: VehicleFrameCLFVan # CLF van modifiers
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/CLF_van.rsi
     layers:
@@ -174,8 +131,6 @@
       visible: false
     - map: [ rmc-wheels ]
       state: wheels_1
-  - type: VehicleSound
-    collisionSoundCooldown: 0.4
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/van_interior.yml #TODO RMC14 add a dedicated CLF interior
     enterDoAfter: 1.0
@@ -193,44 +148,18 @@
       radius: 0.75
       interiorCoords: 0.25,-1
 
+## Box Vans
+
 - type: entity
+  parent: VehicleVanBase
   id: VehicleBoxVanBase
   abstract: true
   name: box van
   description: A rugged transport van fitted with a box body.
   components:
-  - type: Vehicle
-    movementKind: Grid
-  - type: Clickable
   - type: WarpPoint
     follow: true
     location: Box Van
-  - type: GridVehicleMover
-    maxSpeed: 6
-    acceleration: 5
-    deceleration: 12
-    turnDelay: 0.25
-    pushCooldown: 2
-    xenoBlockMinimumSize: Immobile
-    xenoPushMinimumSize: Immobile
-  - type: VehicleOvercharge
-    speedMultiplier: 1.6
-    duration: 3
-    cooldown: 15
-    overchargeSound: /Audio/_RMC14/Vehicle/overdrive_activate.ogg
-  - type: VehicleSound
-    runningSound: /Audio/Effects/Vehicle/vehicleengineidle.ogg
-    runningSoundCooldown: 2
-    hornSound: /Audio/Effects/Vehicle/carhorn.ogg
-    hornCooldown: 1
-    collisionSoundCooldown: 0.4
-    mobCollisionSound: /Audio/_RMC14/Xeno/alien_claw_block.ogg
-  - type: VehicleSpotlight
-    radius: 6
-    energy: 2.5
-    softness: 2
-  - type: Physics
-    bodyType: Dynamic
   - type: Fixtures
     fixtures:
       world:
@@ -258,10 +187,6 @@
         - LargeMobLayer
         layer:
         - LargeMobLayer
-  - type: Damageable
-    damageContainer: StructuralMarine
-    damageModifierSet: StructuralMarine
-  - type: InteractionOutline
   - type: Sprite
     offset: "0,0.5"
     drawdepth: Mobs
@@ -274,58 +199,6 @@
       visible: false
     - map: [ rmc-wheels ]
       state: wheels_1
-  - type: SpriteMovement
-    movementLayers:
-      rmc-wheels:
-        state: wheels_0
-    noMovementLayers:
-      rmc-wheels:
-        state: wheels_1
-  - type: PointLight
-    enabled: false
-    radius: 6
-    energy: 2.5
-    softness: 2
-    autoRot: true
-    offset: "0,0.9"
-  - type: Corrodible
-    isCorrodible: false
-  - type: DoAfter
-  - type: UserInterface
-    interfaces:
-      enum.HardpointUiKey.Key:
-        type: HardpointBoundUserInterface
-      enum.VehicleWeaponsUiKey.Key:
-        type: VehicleWeaponsBoundUserInterface
-  - type: VehicleWeapons
-  - type: InputMover
-  - type: ItemSlots
-  - type: ContainerContainer
-    containers:
-      wheel-1: !type:ContainerSlot
-        showEnts: false
-        occludes: true
-        ent: null
-  - type: HardpointSlots
-    vehicleFamily: HardpointVehicleFamilyVan
-    slots:
-    - id: wheel-1
-      hardpointType: HardpointTypeWheel
-      slotType: HardpointSlotTypeWheel
-      insertDelay: 1.5
-      whitelist:
-        components:
-        - VehicleWheelItem
-  - type: VehicleWheelSlots
-    slotCount: 1
-    slots:
-    - wheel-1
-  - type: HardpointIntegrity
-    maxIntegrity: 1000
-    integrity: 1000
-    bypassEntryOnZero: true
-  - type: HardpointState
-  - type: Appearance
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/box_van_interior.yml
     enterDoAfter: 1.0
@@ -346,12 +219,14 @@
 - type: entity
   parent: VehicleBoxVanBase
   id: VehicleBoxVan
+  suffix: Drivable, Box Van, Base
 
 - type: entity
   parent: VehicleBoxVanBase
   id: VehiclePizzaVan
   name: pizza van
   description: A van repurposed for pizza delivery, still sturdy enough for transport.
+  suffix: Drivable, Box Van, Pizza
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/pizza_van.rsi
@@ -381,11 +256,14 @@
       radius: 0.75
       interiorCoords: -0.75,1.2
 
+## SPP Vans
+
 - type: entity
   parent: VehicleVanBase
   id: VehicleSPPVan
   name: SPP van
   description: A rugged transport van painted in SPP colors.
+  suffix: Drivable, Van, SPP, Transport
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/sppvan.rsi
@@ -410,7 +288,6 @@
     - offset: 1.2,-0.3
       radius: 0.7
       interiorCoords: 2.5,0.9
-
     - offset: -1.2,-0.3
       radius: 0.7
       interiorCoords: 2.5,-0.2
@@ -428,6 +305,7 @@
   id: VehicleSPPVanArmed
   name: SPP van (armed)
   description: An SPP van fitted with a roof-mounted weapon.
+  suffix: Drivable, Van, SPP, Armed
   components:
   - type: Sprite
     layers:
@@ -486,6 +364,7 @@
   id: VehicleSPPVanMedical
   name: SPP van (medical)
   description: An SPP van marked for casualty evacuation and field treatment.
+  suffix: Drivable, Van, SPP, Medical
   components:
   - type: Sprite
     layers:
@@ -518,6 +397,7 @@
   id: VehicleSPPVanPrisoner
   name: SPP van (prisoner)
   description: An SPP van refitted for prisoner transport.
+  suffix: Drivable, Van, SPP, Prisoner
   components:
   - type: Sprite
     layers:
@@ -546,10 +426,11 @@
       interiorCoords: 2.5,-0.2
 
 - type: entity
-  parent: VehicleBoxVanBase
+  parent: VehicleSPPVan
   id: VehicleSPPVanLogistics
   name: SPP van (logistics)
   description: An SPP logistics van fitted with an enlarged cargo body.
+  suffix: Drivable, Van, SPP, Logistics
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/sppvan_logistics.rsi
@@ -577,11 +458,3 @@
     - offset: -1.2,-0.3
       radius: 0.7
       interiorCoords: 2.5,-0.2
-  - type: HardpointSlots
-    vehicleFamily: HardpointVehicleFamilyVan
-    slots:
-    - id: wheel-1
-      hardpointType: HardpointTypeWheel
-      slotType: HardpointSlotTypeWheel
-      compatibilityId: HardpointCompatibilitySPPVan
-      insertDelay: 1.5

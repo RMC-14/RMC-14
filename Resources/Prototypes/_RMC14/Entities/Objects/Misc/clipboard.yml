@@ -94,6 +94,10 @@
     slots:
       pen_slot:
         startingItem: RMCProvostPen
+        whitelist:
+          tags:
+            - Write
+        insertOnInteract: true
   - type: StorageFill
     contents:
     - id: CMPaper

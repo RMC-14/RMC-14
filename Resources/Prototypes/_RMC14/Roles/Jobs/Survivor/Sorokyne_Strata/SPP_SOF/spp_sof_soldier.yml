@@ -3,7 +3,7 @@
   id: RMCSurvivorSPPSOFSoldier
   name: rmc-job-name-soro-sof-soldier
   icon: "RMCJobIconSPPRifleman"
-  spawnMenuRoleName: SPP SOF Rifleman (Survivor)
+  spawnMenuRoleName: SPP SOF Rifleman (Sorokyne Special Survivor)
   special:
   - !type:AddComponentSpecial
     components:

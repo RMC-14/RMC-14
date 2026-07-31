@@ -29,6 +29,7 @@ public sealed class XenoRestSystem : EntitySystem
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
@@ -213,5 +214,29 @@ public sealed class XenoRestSystem : EntitySystem
     public bool IsResting(Entity<XenoRestingComponent?> ent)
     {
         return Resolve(ent, ref ent.Comp, false);
+    }
+
+    public bool TryRestAction(Entity<XenoComponent?> ent, bool ignoreCooldown = false, bool ignoreEnabled = false)
+    {
+        if (!Resolve(ent, ref ent.Comp, false))
+            return false;
+
+        foreach (var (actionId, actionComp) in _rmcActions.GetActionsWithEvent<XenoRestActionEvent>(ent))
+        {
+            if (actionComp.AttachedEntity != ent.Owner)
+                continue;
+
+            if (!ignoreEnabled && actionComp is not { Enabled: true })
+                continue;
+
+            if (!ignoreCooldown && actionComp.Cooldown.HasValue && actionComp.Cooldown.Value.End > _timing.CurTime)
+                continue;
+
+            _actions.PerformAction(ent.Owner, (actionId, actionComp));
+            return true;
+        }
+
+        // Xeno had no rest action for some reason.
+        return false;
     }
 }
