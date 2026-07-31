@@ -24,99 +24,99 @@ public sealed class RMCActionKeybindSystem : EntitySystem
 
         CommandBinds.Builder
             .Bind(CMKeyFunctions.RMCMarineIssueOrder,
-                InputCmdHandler.FromDelegate(session => OpenOrderMenu(session?.AttachedEntity), handle: false))
+                InputCmdHandler.FromDelegate(session => OpenOrderMenu(session?.AttachedEntity), handle: true))
             .Bind(CMKeyFunctions.RMCMarineIssueOrderFocus,
                 InputCmdHandler.FromDelegate(
                     session => TryTrigger(session?.AttachedEntity, RMCKeybindActionSlot.MarineOrderFocus),
-                    handle: false))
+                    handle: true))
             .Bind(CMKeyFunctions.RMCMarineIssueOrderHold,
                 InputCmdHandler.FromDelegate(
                     session => TryTrigger(session?.AttachedEntity, RMCKeybindActionSlot.MarineOrderHold),
-                    handle: false))
+                    handle: true))
             .Bind(CMKeyFunctions.RMCMarineIssueOrderMove,
                 InputCmdHandler.FromDelegate(
                     session => TryTrigger(session?.AttachedEntity, RMCKeybindActionSlot.MarineOrderMove),
-                    handle: false))
+                    handle: true))
             .Bind(CMKeyFunctions.RMCMarineSpecialistOne,
                 InputCmdHandler.FromDelegate(
                     session => TryTrigger(session?.AttachedEntity, RMCKeybindActionSlot.MarineSpecialistOne),
-                    handle: false))
+                    handle: true))
             .Bind(CMKeyFunctions.RMCMarineSpecialistTwo,
                 InputCmdHandler.FromDelegate(
                     session => TryTrigger(session?.AttachedEntity, RMCKeybindActionSlot.MarineSpecialistTwo),
-                    handle: false))
+                    handle: true))
             .Bind(CMKeyFunctions.RMCMarineCycleHelmetHud,
                 InputCmdHandler.FromDelegate(
                     session => TryTrigger(session?.AttachedEntity, RMCKeybindActionSlot.MarineCycleHelmetHud),
-                    handle: false))
+                    handle: true))
             .Bind(CMKeyFunctions.RMCToggleIff,
                 InputCmdHandler.FromDelegate(
                     session => TryTrigger(session?.AttachedEntity, RMCKeybindActionSlot.MarineToggleIff),
-                    handle: false))
+                    handle: true))
             .Bind(CMKeyFunctions.RMCXenoPrimaryActionOne,
                 InputCmdHandler.FromDelegate(
                     session => TryTrigger(session?.AttachedEntity, RMCKeybindActionSlot.XenoPrimaryOne),
-                    handle: false))
+                    handle: true))
             .Bind(CMKeyFunctions.RMCXenoPrimaryActionTwo,
                 InputCmdHandler.FromDelegate(
                     session => TryTrigger(session?.AttachedEntity, RMCKeybindActionSlot.XenoPrimaryTwo),
-                    handle: false))
+                    handle: true))
             .Bind(CMKeyFunctions.RMCXenoPrimaryActionThree,
                 InputCmdHandler.FromDelegate(
                     session => TryTrigger(session?.AttachedEntity, RMCKeybindActionSlot.XenoPrimaryThree),
-                    handle: false))
+                    handle: true))
             .Bind(CMKeyFunctions.RMCXenoPrimaryActionFour,
                 InputCmdHandler.FromDelegate(
                     session => TryTrigger(session?.AttachedEntity, RMCKeybindActionSlot.XenoPrimaryFour),
-                    handle: false))
+                    handle: true))
             .Bind(CMKeyFunctions.RMCXenoPrimaryActionFive,
                 InputCmdHandler.FromDelegate(
                     session => TryTrigger(session?.AttachedEntity, RMCKeybindActionSlot.XenoPrimaryFive),
-                    handle: false))
+                    handle: true))
             .Bind(CMKeyFunctions.RMCXenoCorrosiveAcid,
                 InputCmdHandler.FromDelegate(
                     session => TryTrigger(session?.AttachedEntity, RMCKeybindActionSlot.XenoCorrosiveAcid),
-                    handle: false))
+                    handle: true))
             .Bind(CMKeyFunctions.RMCXenoEvolve,
                 InputCmdHandler.FromDelegate(
                     session => TryTrigger(session?.AttachedEntity, RMCKeybindActionSlot.XenoEvolve),
-                    handle: false))
+                    handle: true))
             .Bind(CMKeyFunctions.RMCXenoHide,
                 InputCmdHandler.FromDelegate(
                     session => TryTrigger(session?.AttachedEntity, RMCKeybindActionSlot.XenoHide),
-                    handle: false))
+                    handle: true))
             .Bind(CMKeyFunctions.RMCXenoPheromones,
                 InputCmdHandler.FromDelegate(
                     session => TryTrigger(session?.AttachedEntity, RMCKeybindActionSlot.XenoPheromones),
-                    handle: false))
+                    handle: true))
             .Bind(CMKeyFunctions.RMCXenoPheromonesFrenzy,
                 InputCmdHandler.FromDelegate(
                     _ => RaiseNetworkEvent(new XenoPheromonesKeybindEvent(XenoPheromones.Frenzy)),
-                    handle: false))
+                    handle: true))
             .Bind(CMKeyFunctions.RMCXenoPheromonesRecovery,
                 InputCmdHandler.FromDelegate(
                     _ => RaiseNetworkEvent(new XenoPheromonesKeybindEvent(XenoPheromones.Recovery)),
-                    handle: false))
+                    handle: true))
             .Bind(CMKeyFunctions.RMCXenoPheromonesWarding,
                 InputCmdHandler.FromDelegate(
                     _ => RaiseNetworkEvent(new XenoPheromonesKeybindEvent(XenoPheromones.Warding)),
-                    handle: false))
+                    handle: true))
             .Bind(CMKeyFunctions.RMCXenoPurchaseStrain,
                 InputCmdHandler.FromDelegate(
                     session => TryTrigger(session?.AttachedEntity, RMCKeybindActionSlot.XenoEvolve),
-                    handle: false))
+                    handle: true))
             .Bind(CMKeyFunctions.RMCXenoScreech,
                 InputCmdHandler.FromDelegate(
                     session => TryTrigger(session?.AttachedEntity, RMCKeybindActionSlot.XenoScreech),
-                    handle: false))
+                    handle: true))
             .Bind(CMKeyFunctions.RMCXenoTailStab,
                 InputCmdHandler.FromDelegate(
                     session => TryTrigger(session?.AttachedEntity, RMCKeybindActionSlot.XenoTailStab),
-                    handle: false))
+                    handle: true))
             .Bind(CMKeyFunctions.RMCXenoWordQueen,
                 InputCmdHandler.FromDelegate(
                     session => TryTrigger(session?.AttachedEntity, RMCKeybindActionSlot.XenoWordQueen),
-                    handle: false))
+                    handle: true))
             .Register<RMCActionKeybindSystem>();
     }
 
