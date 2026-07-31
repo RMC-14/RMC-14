@@ -1,6 +1,19 @@
-﻿# Shiva
+﻿# Shiva Base
 - type: entity
+  abstract: true
   parent: RMCMapInsertBase
+  id: RMCMapInsertShivaBase
+  suffix: Insert Shiva
+  components:
+  - type: MapInsert
+    clearEntities: true
+    clearDecals: true
+    replaceAreas: true
+
+
+# Standalones
+- type: entity
+  parent: RMCMapInsertShivaBase
   id: RMCMapInsertShivaSouthCaves
   name: LZ2 South Caves
   suffix: Insert Shiva
@@ -11,12 +24,21 @@
       probability: 0.30
     - spawn: "/Maps/_RMC14/Inserts/Shiva/destroyed_lz2-south-caves.yml"
       probability: 0.20
-    clearEntities: true
-    clearDecals: true
-    replaceAreas: true
 
+
+# Survivor Scenario Inserts
 - type: entity
-  parent: RMCMapInsertBase
+  abstract: true
+  parent: RMCMapInsertShivaBase
+  id: RMCMapInsertShivaBaseScenario
+  suffix: Insert Shiva
+  components:
+  - type: MapInsert
+    replaceAreas: false
+
+# Panic Room
+- type: entity
+  parent: RMCMapInsertShivaBaseScenario
   id: RMCMapInsertShivaPanicRoomHold
   name: Panic Room Hold
   suffix: Insert Shiva
@@ -27,12 +49,10 @@
       probability: 1
       nightmareScenario: panic_room_hold
       offset: 0,2
-    clearEntities: true
-    clearDecals: true
-    replaceAreas: false
 
+# CLF Raid
 - type: entity
-  parent: RMCMapInsertBase
+  parent: RMCMapInsertShivaBase
   id: RMCMapInsertShivaCLFRaid
   name: CLF Raid
   suffix: Insert Shiva
@@ -42,6 +62,32 @@
     - spawn: "/Maps/_RMC14/Inserts/Shiva/clf_raid_shivas.yml"
       probability: 1
       nightmareScenario: clfraid_shivas
-    clearEntities: true
-    clearDecals: true
-    replaceAreas: true
+
+# Regular Surv Spawns
+- type: entity
+  parent: RMCMapInsertShivaBaseScenario
+  id: RMCMapInsertShivaSurvSpawnTogether
+  name: Together Surv Spawn
+  suffix: Insert Shiva
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Shiva/surv_spawn_church.yml"
+      probability: 0.2
+      nightmareScenario: none
+    - spawn: "/Maps/_RMC14/Inserts/Shiva/surv_spawn_command_centre.yml"
+      probability: 0.2
+      nightmareScenario: none
+      offset: 3,-21
+    - spawn: "/Maps/_RMC14/Inserts/Shiva/surv_spawn_botany.yml"
+      probability: 0.2
+      nightmareScenario: none
+      offset: -16,-36
+    - spawn: "/Maps/_RMC14/Inserts/Shiva/surv_spawn_crisis_centre.yml"
+      probability: 0.2
+      nightmareScenario: none
+      offset: 0,-62
+    - spawn: "/Maps/_RMC14/Inserts/Shiva/surv_spawn_garage.yml"
+      probability: 0.2
+      nightmareScenario: none
+      offset: 28,-46

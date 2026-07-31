@@ -30,7 +30,7 @@
   ##Designer Abilities:
   -[bold]Toggle Long-Range Sight[/bold]: Increases your vision to see more of the battlefield. You can place nodes as far as the eye can see!
   <GuideEntityEmbed Entity="RMCGuidebookActionXenoToggleLongRangeSight"/>
-  -[bold]Greater Resin Surge[/bold]: Transform all nodes within 7 tiles of you into unstable thick resin walls. They decay in 13 seconds. They can soak host spits, but will break in 1 melee hit. (In the future, it will create weak reflective resin walls)
+  -[bold]Greater Resin Surge[/bold]: Transform all nodes within 7 tiles of you into weak reflective resin walls. They decay in 13 seconds. They have a high chance of reflecting projectiles, but will break in 1 melee hit.
   <GuideEntityEmbed Entity="RMCGuidebookActionXenoGreaterResinSurge"/>
   -[bold]Toggle Node Type[/bold]: Switches between placing wall nodes and door nodes. This only affects construction nodes. For Flexible and Optimized nodes, it's a way to show your design intentions with your sisters.
     <GuideEntityEmbed Entity="RMCGuidebookActionXenoToggleNodeType"/>

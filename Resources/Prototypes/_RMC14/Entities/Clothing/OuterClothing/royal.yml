@@ -140,6 +140,18 @@
     - id: RMCMagazineRifleL24Incendiary
     - id: RMCMagazineRifleL24
 
+# External Webbing
+
+- type: entity
+  parent: RMCOuterClothingExternalWebbing
+  id: RMCOuterClothingExternalWebbingRoyal
+  name: MOLS suspenders
+  description: A set of L1 pattern MOLS webbing, modified to act as external webbing in place of armor. This particular setup features suspenders, several pouches, and a set of clips capable of storing a weapon.
+  suffix: Royal, External Webbing
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/mols_webbing.rsi
+
 # Paramarines
 
 - type: entity

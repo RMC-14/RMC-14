@@ -122,6 +122,10 @@
     materialComposition:
       CMSteel: 70
       CMGlass: 30
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCWelderBase
@@ -166,8 +170,8 @@
 - type: entity
   parent: RMCWelderBase
   id: CMWelderSmall
-  name: ME3 hand welder
-  description: A compact, handheld welding torch used by the Marines for cutting and welding jobs on the field. Due to the small size and slow strength, its function is limited compared to a full-sized technician's blowtorch.
+  name: MCT3 hand welder
+  description: The MCT (Mechanical Cutting Torch) is a compact, handheld used by the Marines, technicians, and Average Joes for cutting and welding jobs on the field. Due to the small size and slow strength, its function is limited compared to a full-sized technician's blowtorch. Made by Novaris Industries.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Tools/welder_hand.rsi
@@ -209,6 +213,23 @@
     materialComposition:
       CMSteel: 70
       CMGlass: 60
+
+- type: entity
+  parent: RMCWelderIndustrial
+  id: RMCWelderIndustrialHighCapacity
+  name: high-capacity industrial blowtorch
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      Welder:
+        reagents:
+        - ReagentId: WeldingFuel
+          Quantity: 200
+        maxVol: 200 # TODO RMC14 80 when welders are fixed
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 70
+      CMGlass: 120
 
 - type: entity
   parent: RMCWelderBase

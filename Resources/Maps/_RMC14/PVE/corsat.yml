@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 10/31/2025 18:14:55
+  time: 04/04/2026 15:55:25
   entityCount: 22749
 maps:
 - 1
@@ -64280,7 +64280,7 @@ entities:
       pos: 28.5,-186.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -15385.312
+      secondsUntilStateChange: -15505.805
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -74219,7 +74219,6 @@ entities:
   - uid: 1910
     components:
     - type: Transform
-      anchored: False
       rot: -1.5707963267948966 rad
       pos: 78.96875,-60.5
       parent: 1
@@ -75307,7 +75306,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 4194.3958056
     - type: Door
-      secondsUntilStateChange: -22632.049
+      secondsUntilStateChange: -22752.543
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -75323,7 +75322,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 4194.3958056
     - type: Door
-      secondsUntilStateChange: -22632.049
+      secondsUntilStateChange: -22752.543
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -75871,7 +75870,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 11892.4547742
     - type: Door
-      secondsUntilStateChange: -15019.679
+      secondsUntilStateChange: -15140.172
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -75894,7 +75893,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 11892.4547742
     - type: Door
-      secondsUntilStateChange: -15019.679
+      secondsUntilStateChange: -15140.172
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -121060,111 +121059,208 @@ entities:
       parent: 1
 - proto: RMCGeneratorFusionColony
   entities:
-  - uid: 10831
-    components:
-    - type: Transform
-      pos: 115.5,-71.5
-      parent: 1
-  - uid: 10832
-    components:
-    - type: Transform
-      pos: 115.5,-72.5
-      parent: 1
-  - uid: 10833
-    components:
-    - type: Transform
-      pos: 115.5,-73.5
-      parent: 1
-  - uid: 10834
-    components:
-    - type: Transform
-      pos: 117.5,-71.5
-      parent: 1
   - uid: 10835
     components:
     - type: Transform
       pos: 117.5,-72.5
-      parent: 1
-  - uid: 10836
-    components:
-    - type: Transform
-      pos: 117.5,-73.5
-      parent: 1
-  - uid: 10837
-    components:
-    - type: Transform
-      pos: 122.5,-71.5
-      parent: 1
-  - uid: 10838
-    components:
-    - type: Transform
-      pos: 122.5,-72.5
-      parent: 1
-  - uid: 10839
-    components:
-    - type: Transform
-      pos: 122.5,-73.5
-      parent: 1
-  - uid: 10840
-    components:
-    - type: Transform
-      pos: 124.5,-71.5
-      parent: 1
-  - uid: 10841
-    components:
-    - type: Transform
-      pos: 124.5,-72.5
-      parent: 1
-  - uid: 10842
-    components:
-    - type: Transform
-      pos: 124.5,-73.5
-      parent: 1
-  - uid: 10843
-    components:
-    - type: Transform
-      pos: 231.5,-171.5
-      parent: 1
-  - uid: 10844
-    components:
-    - type: Transform
-      pos: 231.5,-175.5
-      parent: 1
-  - uid: 10845
-    components:
-    - type: Transform
-      pos: 233.5,-171.5
-      parent: 1
-  - uid: 10846
-    components:
-    - type: Transform
-      pos: 233.5,-173.5
-      parent: 1
-  - uid: 10847
-    components:
-    - type: Transform
-      pos: 233.5,-175.5
-      parent: 1
-  - uid: 10848
-    components:
-    - type: Transform
-      pos: 229.5,-171.5
-      parent: 1
-  - uid: 10849
-    components:
-    - type: Transform
-      pos: 229.5,-173.5
-      parent: 1
-  - uid: 10850
-    components:
-    - type: Transform
-      pos: 229.5,-175.5
       parent: 1
   - uid: 10851
     components:
     - type: Transform
       pos: 231.5,-173.5
       parent: 1
+- proto: RMCGeneratorFusionColonyNoMapIcon
+  entities:
+  - uid: 10831
+    components:
+    - type: Transform
+      pos: 124.5,-72.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 10832
+    components:
+    - type: Transform
+      pos: 124.5,-71.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 10833
+    components:
+    - type: Transform
+      pos: 124.5,-73.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 10834
+    components:
+    - type: Transform
+      pos: 122.5,-73.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 10836
+    components:
+    - type: Transform
+      pos: 122.5,-72.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 10837
+    components:
+    - type: Transform
+      pos: 122.5,-71.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 10838
+    components:
+    - type: Transform
+      pos: 115.5,-72.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 10839
+    components:
+    - type: Transform
+      pos: 115.5,-73.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 10840
+    components:
+    - type: Transform
+      pos: 117.5,-71.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 10841
+    components:
+    - type: Transform
+      pos: 117.5,-73.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 10842
+    components:
+    - type: Transform
+      pos: 115.5,-71.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 10843
+    components:
+    - type: Transform
+      pos: 233.5,-171.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 10844
+    components:
+    - type: Transform
+      pos: 229.5,-175.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 10845
+    components:
+    - type: Transform
+      pos: 231.5,-171.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 10846
+    components:
+    - type: Transform
+      pos: 229.5,-171.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 10847
+    components:
+    - type: Transform
+      pos: 229.5,-173.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 10848
+    components:
+    - type: Transform
+      pos: 233.5,-173.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 10849
+    components:
+    - type: Transform
+      pos: 233.5,-175.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 10850
+    components:
+    - type: Transform
+      pos: 231.5,-175.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
 - proto: RMCGrenadeBlastM12
   entities:
   - uid: 10852

@@ -23,17 +23,11 @@ public sealed class HolocardChangeEvent(NetEntity owner, HolocardStatus newHoloc
 }
 
 /// <summary>
-///     Indicates to the server to change open a Holocard Change Bound UI for a particular user on a particular target
+///     Sent by the client from any scan window (health scanner, body scanner, or medical records)
+///     to ask the server to open the holocard-change UI for <see cref="Target"/>.
 /// </summary>
-[NetSerializable, Serializable]
-public sealed class OpenChangeHolocardUIEvent : BoundUserInterfaceMessage
+[Serializable, NetSerializable]
+public sealed class OpenHolocardFromScanEvent(NetEntity target) : EntityEventArgs
 {
-    public NetEntity Owner;
-    public NetEntity Target;
-
-    public OpenChangeHolocardUIEvent(NetEntity owner, NetEntity target)
-    {
-        Owner = owner;
-        Target = target;
-    }
+    public readonly NetEntity Target = target;
 }

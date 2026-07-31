@@ -16,6 +16,15 @@
     - type: NpcFactionMember
       factions:
       - CLF
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      understoodLanguages:
+      - Japanese
+      - English
+      currentLanguage: Japanese
+      defaultLanguage: Japanese
     - type: Skills
       skills:
         RMCSkillFirearms: 1
@@ -74,7 +83,7 @@
     shoes: RMCShoesBrown
     id: RMCIDCardCLFSoldier
     belt: RMCM276ShotgunShellLoadingRigFill # TODO RMC14
-    back: RMCWeaponShotgunHG3712
+    back: RMCWeaponShotgunM12
     pocket1: RMCFlashlight
     pocket2: RMCPouchFirstAidERTFill
   inhand:
@@ -91,5 +100,5 @@
   parent: CMJobIconBase
   id: RMCJobIconCLFSoldier
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/CLF.rsi
     state: clf_mil

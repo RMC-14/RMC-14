@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: CMBarricadeBase
   id: CMBarricadeSandbag
   name: sandbag barricade
@@ -14,7 +14,9 @@
   - type: Sprite
     sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
     layers:
-    - state: sandbag
+    - state: DamageOverlay_0
+      map: [ "enum.RMCDamageOverlayVisuals.DamageOverlay" ]
+      sprite: _RMC14/Structures/Walls/Barricades/sandbag_cracks.rsi
     - map: [ "acided" ]
     drawdepth: WallTops
   - type: GenericVisualizer
@@ -47,10 +49,13 @@
         acts: [ "Destruction" ]
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 25
+    damageDivisor: 28.125
     trackAllDamage: true
-    damageOverlay:
-      sprite: _RMC14/Structures/Walls/Barricades/sandbag_cracks.rsi
+    overlay: false
+    targetLayers:
+    - "enum.RMCDamageOverlayVisuals.DamageOverlay"
+    hideIfZero: false
+    damageGroup: "Brute"
   - type: Barbed
     thornsDamage:
       types:
@@ -63,6 +68,12 @@
   description: Some empty sandbags, best to fill them up if you want to use them.
   components:
   - type: Item
+    sprite: _RMC14/Objects/Misc/sandbags.rsi
+    inhandVisuals:
+      left:
+      - state: stack-inhand-left
+      right:
+      - state: stack-inhand-right
     size: Small
   - type: Sprite
     sprite: _RMC14/Objects/Misc/sandbags.rsi
@@ -108,6 +119,12 @@
   description: Some bags filled with sand. For now, just cumbersome, but soon to be used for fortifications.
   components:
   - type: Item
+    sprite: _RMC14/Objects/Misc/sandbags.rsi
+    inhandVisuals:
+      left:
+      - state: pile-inhand-left
+      right:
+      - state: pile-inhand-right
     size: Large
   - type: Sprite
     sprite: _RMC14/Objects/Misc/sandbags.rsi

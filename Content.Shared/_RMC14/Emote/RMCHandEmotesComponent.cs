@@ -59,6 +59,15 @@ public sealed partial class RMCHandEmotesComponent : Component
     public EntProtoId HugEffect = "RMCEffectHug";
 
     [DataField, AutoNetworkedField]
+    public SoundSpecifier? HandshakeSound = new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg")
+    {
+        Params = AudioParams.Default.WithVariation(0.4f),
+    };
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId HandshakeEffect = "RMCEffectHandshake";
+
+    [DataField, AutoNetworkedField]
     public TimeSpan LeftHangingDelay = TimeSpan.FromSeconds(10);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
@@ -71,5 +80,6 @@ public enum RMCHandsEmoteState : byte
     Fistbump = 0,
     Highfive = 1,
     Tailswipe = 2,
-    Hug = 3
+    Hug = 3,
+    Handshake = 4
 }

@@ -182,7 +182,7 @@ namespace Content.Shared.Damage
         ///     null if the user had no applicable components that can take damage.
         /// </returns>
         public DamageSpecifier? TryChangeDamage(EntityUid? uid, DamageSpecifier damage, bool ignoreResistances = false,
-            bool interruptsDoAfters = true, DamageableComponent? damageable = null, EntityUid? origin = null, EntityUid? tool = null, int armorPiercing = 0)
+            bool interruptsDoAfters = true, DamageableComponent? damageable = null, EntityUid? origin = null, EntityUid? tool = null, int armorPiercing = 0, bool shouldIgnoreClawLogic = false)
         {
             if (!uid.HasValue || !_damageableQuery.Resolve(uid.Value, ref damageable, false))
             {
@@ -212,7 +212,7 @@ namespace Content.Shared.Damage
                     damage = DamageSpecifier.ApplyModifierSet(damage, modifierSet);
                 }
 
-                var ev = new DamageModifyEvent(damage, origin, tool, armorPiercing);
+                var ev = new DamageModifyEvent(damage, origin, tool, armorPiercing, shouldIgnoreClawLogic);
                 RaiseLocalEvent(uid.Value, ev);
                 damage = ev.Damage;
 
@@ -406,14 +406,16 @@ namespace Content.Shared.Damage
         public EntityUid? Origin;
         public EntityUid? Tool;
         public int ArmorPiercing;
+        public bool ShouldIgnoreClawLogic;
 
-        public DamageModifyEvent(DamageSpecifier damage, EntityUid? origin = null, EntityUid? tool = null, int armorPiercing = 0)
+        public DamageModifyEvent(DamageSpecifier damage, EntityUid? origin = null, EntityUid? tool = null, int armorPiercing = 0, bool shouldIgnoreClawLogic = false)
         {
             OriginalDamage = damage;
             Damage = damage;
             Origin = origin;
             Tool = tool;
             ArmorPiercing = armorPiercing;
+            ShouldIgnoreClawLogic = shouldIgnoreClawLogic;
         }
     }
 

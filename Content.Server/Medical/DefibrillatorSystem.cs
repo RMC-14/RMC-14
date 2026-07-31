@@ -51,7 +51,7 @@ public sealed class DefibrillatorSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
 
     // RMC14
-    [Dependency] private readonly RMCDefibrillatorSystem _rmcDefibrillator = default!;
+    [Dependency] private readonly SharedRMCDefibrillatorSystem _rmcDefibrillator = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
 
     /// <inheritdoc/>

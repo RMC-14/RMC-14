@@ -7,14 +7,25 @@
   supervisors: rmc-job-supervisors-commander
   startingGear: RMCGearParaTeamLeader
   icon: RMCJobIconParaTeamLeader
-  spawnMenuRoleName: Royal Paramarine Team Leader (Survivor)
+  playTimeTracker: RMCJobSurvivorMilitary
+  spawnMenuRoleName: Royal Paramarine Team Leader (Hybrisa Special Survivor)
   special:
     - !type:AddComponentSpecial
       components:
+        - type: Language
+          spokenLanguages:
+          - Japanese
+          - English
+          understoodLanguages:
+          - Japanese
+          - English
+          currentLanguage: English
+          defaultLanguage: English
         - type: NpcFactionMember
           factions:
             - RoyalMarines
             - TSE
+        - type: RMCSurvivor
         - type: Skills
           preset: RMCSkillPresetParaLeader
         - type: RMCAllowSuitStorage
@@ -26,7 +37,7 @@
         - type: RMCTrackable
         - type: SquadLeader
           icon:
-            sprite: _RMC14/Interface/cm_job_icons.rsi
+            sprite: _RMC14/Interface/job_icons/TSE/RCM/paramarine.rsi
             state: para_teamleader_alt
         - type: TacticalMapIcon
           icon:
@@ -36,9 +47,7 @@
             sprite: /Textures/_RMC14/Interface/map_blips.rsi
             state: background_para
         - type: AssignSquad
-          whitelist:
-            tags:
-              - SquadPara
+          squad: SquadPara
         - type: JobPrefix
           prefix: rmc-job-prefix-para-team-leader
   hidden: true
@@ -47,8 +56,11 @@
   parent: RMCGearParaBase
   id: RMCGearParaTeamLeader
   equipment:
+    id: RMCIDRoyalParamarinesTeamLeader
     head: RMCHeadParaBeretLead
+    ears: RMCHeadsetParaTeamLead
     outerClothing: RMCArmorParaVest
+    back: RMCSatchelLightpackFilledPara
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -64,6 +76,5 @@
   parent: CMJobIconBase
   id: RMCJobIconParaTeamLeader
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/TSE/RCM/paramarine.rsi
     state: para_teamleader_alt
-    

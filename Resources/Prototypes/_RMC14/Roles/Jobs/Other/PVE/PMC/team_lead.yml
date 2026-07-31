@@ -24,9 +24,7 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-pve-team-leader
     - type: AssignSquad
-      whitelist:
-        tags:
-        - RMCSquadPMC
+      squad: SquadPMC
     - type: MarineOrders
     - type: RMCPointing
     - type: RMCTrackable
@@ -68,5 +66,5 @@
   parent: CMJobIconBase
   id: RMCJobIconPMCTeamLead
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/We-Ya/pmc.rsi
     state: pmc_tl

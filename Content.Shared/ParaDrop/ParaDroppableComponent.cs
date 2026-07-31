@@ -1,3 +1,4 @@
+using System.Numerics;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -17,11 +18,20 @@ public sealed partial class ParaDroppableComponent : Component
     public float FallHeight = 16;
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier DropSound = new SoundPathSpecifier("/Audio/_RMC14/Items/fulton.ogg");
+    public SoundSpecifier? DropSound = new SoundPathSpecifier("/Audio/_RMC14/Items/fulton.ogg");
 
     [DataField, AutoNetworkedField]
     public EntProtoId ParachutePrototype = "RMCParachuteDeployed";
 
     [DataField, AutoNetworkedField]
     public TimeSpan? LastParaDrop;
+
+    [DataField, AutoNetworkedField]
+    public float SkyFallDuration = 1.5f;
+
+    [DataField, AutoNetworkedField]
+    public bool RemoveComponentAfterDrop;
+
+    [DataField]
+    public Vector2 OriginalSpriteOffset;
 }

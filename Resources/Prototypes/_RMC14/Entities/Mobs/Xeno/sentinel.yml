@@ -14,8 +14,6 @@
   - type: GuideHelp
     guides:
     - RMCGuideRoleSentinel
-  - type: GhostRole
-    name: cm-job-name-xeno-sentinel
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Sentinel/sentinel.rsi
   - type: MobState

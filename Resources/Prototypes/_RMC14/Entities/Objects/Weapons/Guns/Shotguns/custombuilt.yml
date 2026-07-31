@@ -13,6 +13,8 @@
     - belt
   - type: Gun
     shotsPerBurst: 2
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_automatic.ogg
   - type: ShootUseDelay
   - type: RMCSelectiveFire
     baseFireModes:

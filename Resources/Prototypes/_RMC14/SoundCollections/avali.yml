@@ -1,0 +1,8 @@
+- type: soundCollection
+  id: RMCAvaliChirps
+  files:
+  - /Audio/_RMC14/Voice/Avali/resomi_chirp1.ogg
+  - /Audio/_RMC14/Voice/Avali/resomi_chirp2.ogg
+  - /Audio/_RMC14/Voice/Avali/resomi_chirp3.ogg
+  - /Audio/_RMC14/Voice/Avali/resomi_chirp4.ogg
+  - /Audio/_RMC14/Voice/Avali/resomi_chirp5.ogg

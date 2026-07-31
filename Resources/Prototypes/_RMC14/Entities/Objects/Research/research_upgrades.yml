@@ -1,0 +1,58 @@
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: RMCResearchUpgradeBase
+  name: research upgrade
+  description: A disk containing research data for upgrading equipment.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/disks.rsi
+    state: datadisk1
+  - type: Item
+    size: Tiny
+
+# Autodoc Upgrades
+- type: entity
+  parent: RMCResearchUpgradeBase
+  id: RMCResearchUpgradeAutodocInternalBleeding
+  name: research upgrade (autodoc - internal bleeding)
+  description: Research upgrade for an autodoc. The technology on this disk is used for stitching up internal bleeding. Insert it into an autodoc console to use it.
+  components:
+  - type: AutodocResearchUpgrade
+    tier: InternalBleeding
+
+- type: entity
+  parent: RMCResearchUpgradeBase
+  id: RMCResearchUpgradeAutodocBrokenBone
+  name: research upgrade (autodoc - broken bones)
+  description: Research upgrade for an autodoc. The technology on this disk is used for fixing broken bones. Insert it into an autodoc console to use it.
+  components:
+  - type: AutodocResearchUpgrade
+    tier: BrokenBone
+
+- type: entity
+  parent: RMCResearchUpgradeBase
+  id: RMCResearchUpgradeAutodocOrganDamage
+  name: research upgrade (autodoc - organ damage)
+  description: Research upgrade for an autodoc. The technology on this disk is used for treating internal organ damage. Insert it into an autodoc console to use it.
+  components:
+  - type: AutodocResearchUpgrade
+    tier: OrganDamage
+
+- type: entity
+  parent: RMCResearchUpgradeBase
+  id: RMCResearchUpgradeAutodocLarvaExtraction
+  name: research upgrade (autodoc - parasite extraction)
+  description: Research upgrade for an autodoc. The technology on this disk is used for extracting unknown parasites. Insert it into an autodoc console to use it.
+  components:
+  - type: AutodocResearchUpgrade
+    tier: LarvaExtraction
+
+# Sleeper Upgrades
+- type: entity
+  parent: RMCResearchUpgradeBase
+  id: RMCResearchUpgradeSleeper
+  name: research upgrade (sleeper)
+  description: Research upgrade for a sleeper system. The technology on this disk allows a wider spectrum of chemicals to be administered and improves the dialysis machine.
+  components:
+  - type: SleeperResearchUpgrade

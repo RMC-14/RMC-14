@@ -178,3 +178,45 @@
   components:
   - type: Sprite
     state: tank_larva
+
+- type: entity
+  parent: RMCAlienTankBroken
+  id: RMCAlienLabcageBroken
+  name: Laboratoy cage
+  suffix: Broken
+  components:
+  - type: Sprite
+    state: labcage_broken
+
+- type: entity
+  parent: RMCAlienTankEmpty
+  id: RMCAlienLabcage
+  name: Laboratoy cage
+  components:
+  - type: Sprite
+    state: labcage
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 250 # excessive damage destroys our inhabitant
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 75
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              RMCAlienLabcageBroken:
+                min: 1
+                max: 1
+          - !type:DoActsBehavior
+            acts: ["Destruction"]

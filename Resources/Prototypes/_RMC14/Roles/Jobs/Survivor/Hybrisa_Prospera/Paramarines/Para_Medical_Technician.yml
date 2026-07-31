@@ -6,14 +6,25 @@
     RMCRankParaLanceCorporal: [ ]
   startingGear: RMCGearParaMedicalTechnician
   icon: RMCJobIconParaMedicalTechnican
-  spawnMenuRoleName: Royal Paramarine Medical Technician (Survivor)
+  playTimeTracker: RMCJobSurvivorMilitary
+  spawnMenuRoleName: Royal Paramarine Medical Technician (Hybrisa Special Survivor)
   special:
     - !type:AddComponentSpecial
       components:
+      - type: Language
+        spokenLanguages:
+        - Japanese
+        - English
+        understoodLanguages:
+        - Japanese
+        - English
+        currentLanguage: English
+        defaultLanguage: English
       - type: NpcFactionMember
         factions:
           - RoyalMarines
           - TSE
+      - type: RMCSurvivor
       - type: RMCAllowSuitStorage
       - type: IntelRescueSurvivorObjective
       - type: MotionDetectorTracked
@@ -27,9 +38,7 @@
           sprite: /Textures/_RMC14/Interface/map_blips.rsi
           state: background_para
       - type: AssignSquad
-        whitelist:
-          tags:
-            - SquadPara
+        squad: SquadPara
       - type: JobPrefix
         prefix: rmc-job-prefix-paramarine
   hidden: true
@@ -38,6 +47,7 @@
   parent: RMCGearParaBase
   id: RMCGearParaMedicalTechnician
   equipment:
+    id: RMCIDRoyalParamarinesMedicalTechnician
     jumpsuit: RMCJumpsuitMarineParaPDW90
     back: RMCBackpackRCMMedicPVPFilledParaMedic
     eyes: RMCGlassesMedicalHUDGlasses
@@ -59,6 +69,5 @@
   parent: CMJobIconBase
   id: RMCJobIconParaMedicalTechnican
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/TSE/RCM/paramarine.rsi
     state: para_medic
-    

@@ -285,8 +285,26 @@
     anchored: true
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
-    state: ob_console # TODO RMC14 powered off, broken
     drawdepth: HighFloorObjects
+    layers:
+    - state: "ob_console0" # TODO RMC14 broken
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "ob_console"
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Appearance
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 300
+    activeLoad: 300
+    channel: Equipment
+  - type: ActivatableUIRequiresPower
   - type: Clickable
   - type: InteractionOutline
   - type: UserInterface
@@ -405,11 +423,11 @@
         mask:
         - MachineMask
         layer:
-        - WallLayer
+        - MachineLayer
         hard: false
   - type: Sprite
     sprite: _RMC14/Structures/orbital_cannon_tray.rsi
-    drawdepth: SmallObjects
+    drawdepth: LargeObjects
     offset: 0.5, 0.5
     layers:
     - state: cannon_tray
@@ -444,3 +462,5 @@
           6: { visible: true, state: cannon_tray_6 }
   - type: RMCMesonsNonviewable
   - type: OrbitalCannonTray
+  - type: WallMount
+    arc: 175

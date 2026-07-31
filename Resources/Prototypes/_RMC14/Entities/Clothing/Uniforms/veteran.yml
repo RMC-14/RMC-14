@@ -65,7 +65,7 @@
   suffix: Webbing, Synthetic
   components:
   - type: WebbingClothing
-    startingWebbing: CMWebbingSurgicalGreen
+    startingWebbing: RMCWebbingSurgicalGreen
   - type: UniformAccessoryHolder
     startingAccessories:
     - RMCPatchWeYa

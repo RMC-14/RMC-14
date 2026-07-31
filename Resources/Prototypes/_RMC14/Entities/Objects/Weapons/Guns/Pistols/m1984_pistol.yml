@@ -8,6 +8,7 @@
     tags:
     - Sidearm
     - CMWeaponPistolM1984
+  - type: GunClickToFire # TODO RMC14 can be removed once fire rate is adjusted
   - type: RMCSelectiveFire
     scatterWielded: 10
     scatterUnwielded: 10
@@ -30,6 +31,7 @@
           tags:
           - CMMagazinePistolM1984
           - RMCMagazinePistolM1984AP
+          - RMCMagazinePistolM1984HP
           - RMCMagazinePistolM1984Rubber
         startingItem: CMMagazinePistolM1984
   - type: AttachableHolder
@@ -65,6 +67,17 @@
 
 - type: entity
   parent: CMWeaponPistolM1984
+  id: CMWeaponPistolM1984Custom
+  name: Custom M1984 service pistol
+  description: A M1984 Service Pistol, once the standard issue sidearm of the Marines but has recently been replaced with the M77 combat pistol. Fires 9mm pistol rounds. This one has had it's wooden grips replaced with gaudy ivory ones.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m1984custom.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m1984custom.rsi
+
+- type: entity
+  parent: CMWeaponPistolM1984
   id: CMWeaponPistolM1984Empty
   suffix: Empty
   components:
@@ -79,6 +92,8 @@
           tags:
           - CMMagazinePistolM1984
           - RMCMagazinePistolM1984AP
+          - RMCMagazinePistolM1984HP
+          - RMCMagazinePistolM1984Rubber
 
 #9mm
 - type: entity
@@ -173,6 +188,10 @@
   name: M1984 hollowpoint magazine (9mm)
   description: A hollow-point 9mm pistol magazine for the M1984. These hollow-point bullets have noticeably higher stopping power on unarmored targets, and noticeably less on armored targets.
   components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolM1984HP
   - type: BallisticAmmoProvider
     whitelist:
       tags:
@@ -188,6 +207,9 @@
     - state: ammo_band
       color: "#BA5D00"
 
+- type: Tag
+  id: RMCMagazinePistolM1984HP
+
 - type: entity
   parent: CMCartridgePistol9mm
   id: RMCCartridgePistol9mmHP
@@ -196,6 +218,7 @@
   - type: Tag
     tags:
     - Cartridge
+    - CMCartridgePistol9mm
     - RMCCartridgePistol9mmHP
   - type: CartridgeAmmo
     proto: RMCBulletPistol9mmHP

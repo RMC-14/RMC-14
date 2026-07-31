@@ -5,6 +5,8 @@
   description: cm-job-description-survivor
   startingGear: RMCGearSurvivorTrucker
   playTimeTracker: CMJobSurvivorEngineer
+  accessGroups:
+  - ColonistEngi
   special:
   - !type:AddComponentSpecial
     components:
@@ -32,6 +34,8 @@
     id: CMIDCardColonist
     pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchToolsFill
+  inhand:
+  - RMCVanWheel
 
 - type: entity
   parent: CMSpawnPointJobBase

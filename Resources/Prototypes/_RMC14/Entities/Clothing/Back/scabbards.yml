@@ -60,6 +60,7 @@
     tags:
     - Scabbard
     - RMCMacheteScabbard
+    - RMCMacheteHolder
 
 - type: entity
   parent: RMCScabbardMachete
@@ -108,6 +109,7 @@
     tags:
     - Scabbard
     - RMCMacheteScabbard
+    - RMCMacheteHolder
 
 - type: entity
   parent: RMCScabbardMacheteM2100
@@ -118,6 +120,55 @@
     containers:
       item:
       - RMCM2100Machete
+
+- type: entity
+  parent: RMCScabbardBase
+  id: RMCScabbardRoyalMachete
+  name: L225 Kukri scabbard
+  description: A large leather scabbard used to carry an L225 Kukri machete, with clips allowing it to be strapped to the back or the waist.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Scabbards/machete_kukri.rsi
+    state: sheath
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Back/Scabbards/machete_kukri.rsi
+    quickEquip: false
+    slots:
+    - back
+    - belt
+    - suitstorage
+  - type: ClothingIgnoreBlockBackpack
+  - type: ItemSlots
+    slots:
+      item:
+        name: Kukri
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/_RMC14/Weapons/Guns/gun_rifle_draw.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/gun_rifle_draw.ogg
+        whitelist:
+          tags:
+          - RMCRoyalMachete
+  - type: ItemMapper
+    mapLayers:
+      sheath-machete:
+        whitelist:
+          tags:
+          - RMCRoyalMachete
+  - type: Tag
+    tags:
+    - Scabbard
+    - RMCMacheteScabbard
+
+- type: entity
+  parent: RMCScabbardRoyalMachete
+  id: RMCScabbardRoyalMacheteFilled
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - RMCRoyalMachete
 
 - type: entity
   parent: RMCScabbardBase

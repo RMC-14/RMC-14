@@ -57,6 +57,11 @@
     heldPrefix: cardboard
     size: Normal
     sprite: _RMC14/Objects/Materials/Sheets/rmc_cardboard.rsi
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
   - type: Appearance
   - type: Tag
     tags:

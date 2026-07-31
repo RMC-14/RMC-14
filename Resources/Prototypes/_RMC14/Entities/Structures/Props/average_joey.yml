@@ -1,0 +1,22 @@
+- type: entity
+  parent: RMCPropBase
+  id: RMCPropAverageJoey
+  name: average joey
+  description: A defunct Novaris-brand Average Joe lifted from deep storage by a crew of marines after the last shore leave. Attempts have been made to modify the janitorial synthetic to serve as a crude bartender, but with little success.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/almayer_props.rsi
+    state: joey
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 20
+        mask:
+        - MobMask
+        layer:
+        - WallLayer

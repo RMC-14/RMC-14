@@ -2,6 +2,7 @@
   parent: RMCDropshipCockpitBase
   id: CMSPPSOFCockpit
   suffix: Voron
+  name: voron crew hatch
   components:
   - type: RemoveComponents
     components:
@@ -26,3 +27,5 @@
     - state: panel_open
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
       color: "#b09e90"
+  - type: AccessReader
+    access: [["CMAccessColonyPublic"]]

@@ -105,6 +105,17 @@
     bullet: 35
     bio: 20
     explosionArmor: 30
+  - type: FoldableClothing
+    foldedHideLayers:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - Snout
+    unfoldedHideLayers:
+    - Snout
+  - type: HideLayerClothing
+    slots:
+    - Snout
 
 # SPP hats
 - type: entity
@@ -175,8 +186,8 @@
 - type: entity
   parent: CMHeadCapSPPPeaked
   id: CMHeadCapSPPPeakedPolice
-  name: UL3 PaP peaked cap
-  description: Standard issue peaked cap of the People's Armed Police.
+  name: UL3 PCG peaked cap
+  description: Standard issue peaked cap of the People's Civil Gendarmes.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/SPP/peaked_police.rsi
@@ -204,7 +215,6 @@
     sprite: _RMC14/Objects/Clothing/Head/SPP/kommisar_cap_black.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/SPP/kommisar_cap_black.rsi
-
 
 - type: entity
   parent: CMHeadCapSPP

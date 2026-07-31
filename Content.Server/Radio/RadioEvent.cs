@@ -1,10 +1,25 @@
 using Content.Shared.Chat;
+// RMC14
+using Content.Shared._RMC14.Language.Prototypes;
+// RMC14
 using Content.Shared.Radio;
+// RMC14
+using Robust.Shared.Prototypes;
+// RMC14
 
 namespace Content.Server.Radio;
 
 [ByRefEvent]
-public readonly record struct RadioReceiveEvent(string Message, EntityUid MessageSource, RadioChannelPrototype Channel, EntityUid RadioSource, MsgChatMessage ChatMsg);
+// RMC14
+public readonly record struct RadioReceiveEvent(
+    string Message,
+    EntityUid MessageSource,
+    RadioChannelPrototype Channel,
+    EntityUid RadioSource,
+    MsgChatMessage ChatMsg,
+    ProtoId<LanguagePrototype> Language
+);
+// RMC14
 
 /// <summary>
 /// Event raised on the parent entity of a headset radio when a radio message is received

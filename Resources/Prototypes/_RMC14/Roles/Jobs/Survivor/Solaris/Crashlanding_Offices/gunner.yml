@@ -13,10 +13,19 @@
   hasIcon: true
   greeting: rmc-job-greeting-solaris-pmc
   playTimeTracker: RMCJobSurvivorMilitary
-  spawnMenuRoleName: Survivor — PMC Standard (Solaris Ridge special survivor)
+  spawnMenuRoleName: PMC Standard (Solaris Special Survivor)
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      understoodLanguages:
+      - Japanese
+      - English
+      currentLanguage: English
+      defaultLanguage: English
     - type: Skills
       preset: RMCSkillPresetSurvivorWeYaPMCStandard
     - type: RMCSurvivor
@@ -30,9 +39,7 @@
       - WeYa
       - Civilian
     - type: AssignSquad
-      whitelist:
-        tags:
-        - RMCSquadPMC
+      squad: SquadPMC
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
@@ -79,7 +86,7 @@
   name: pmc standard survivor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomStartingGear:
       jumpsuit:
       - RMCJumpsuitVeteranPMCNoWebbingPatch
