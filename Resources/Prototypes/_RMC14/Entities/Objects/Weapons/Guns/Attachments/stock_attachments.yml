@@ -963,6 +963,8 @@
       accuracyAddMult: -0.15
       recoilFlat: 2
       scatterFlat: 2
+  - type: AttachableVisuals
+    suffix: ""
 
 - type: entity
   parent: RMCStockAttachmentCollapsibleBase

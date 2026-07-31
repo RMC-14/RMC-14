@@ -376,6 +376,7 @@
     - RMCAttachmentBarrel
     - RMCAttachmentSuppressorPCAC5
   - type: AttachableVisuals
+    suffix: ""
   - type: AttachableSilencer
     sound:
       collection: RMCSilencedShootAlt

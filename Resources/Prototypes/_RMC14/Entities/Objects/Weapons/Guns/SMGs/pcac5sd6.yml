@@ -6,14 +6,14 @@
   suffix: PVE, Filled
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/SMGs/pcac5.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/pcac5sd.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/SMGs/pcac5.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/pcac5sd.rsi
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -50,7 +50,7 @@
           - RMCAttachmentStockPCAC5Collapsible
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.25, 0
+      rmc-aslot-barrel: 0.28, 0
       rmc-aslot-rail: -0.16, 0.09
       rmc-aslot-underbarrel: 0.28, -0.37
-      rmc-aslot-stock: -0.53, 0
+      rmc-aslot-stock: -0.5, 0
