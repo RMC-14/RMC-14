@@ -470,9 +470,9 @@
     - RMCWeaponShotgunM12: RMCSpawnerRandomShotgunBoxes
     - RMCWeaponShotgunM12: RMCSpawnerRandomShotgunBoxes
     - RMCWeaponShotgunM12: RMCSpawnerRandomShotgunBoxes
-    - WeaponSMGMP5: RMCMagazineSMGPCAC5
-    - WeaponSMGMP5: RMCMagazineSMGPCAC5
-    - WeaponSMGMP5: RMCMagazineSMGPCAC5
+    - RMCWeaponSMGPCAC5A4: RMCMagazineSMGPCAC5
+    - RMCWeaponSMGPCAC5A4: RMCMagazineSMGPCAC5
+    - RMCWeaponSMGPCAC5A4: RMCMagazineSMGPCAC5
     - RMCWeaponRevolverSpearhead: RMCSpeedLoader357
     - RMCWeaponRevolverSpearhead: RMCSpeedLoader357
     - RMCWeaponRevolverSpearhead: RMCSpeedLoader357

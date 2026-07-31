@@ -39,7 +39,7 @@
           - RMCAttachmentLaserSight
           - RMCAttachmentBipod
           - RMCAttachmentM203GrenadeLauncher
-          - RMCAttachmentExtinguisher
+          - RMCAttachmentUnderbarrelExtinguisher
           - RMCAttachmentAngledGrip
           - RMCAttachmentVerticalGrip
       rmc-aslot-stock:
