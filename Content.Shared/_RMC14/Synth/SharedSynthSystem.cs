@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.IdentityManagement;
+﻿using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.IdentityManagement;
 using Content.Shared._RMC14.Medical.HUD.Components;
 using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Repairable;
@@ -12,6 +13,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Inventory.Events;
 using Content.Shared.Medical;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -44,6 +46,7 @@ public abstract class SharedSynthSystem : EntitySystem
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly TagSystem _tags = default!;
     [Dependency] private readonly SharedSynthGenerationSystem _synthGeneration = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -61,6 +64,7 @@ public abstract class SharedSynthSystem : EntitySystem
         SubscribeLocalEvent<SynthComponent, TargetDefibrillatedEvent>(OnSynthResetKey);
 
         SubscribeLocalEvent<UseOnSynthBlockedComponent, BeforeRangedInteractEvent>(OnSynthBlockedBeforeRangedInteract);
+        SubscribeLocalEvent<CMArmorComponent, BeingEquippedAttemptEvent>(OnArmorBeingEquippedAttempt);
     }
 
     private void OnMapInit(Entity<SynthComponent> ent, ref MapInitEvent args)
@@ -337,6 +341,18 @@ public abstract class SharedSynthSystem : EntitySystem
         }
 
         return damageable.TotalDamage - heal < deadThreshold.Value;
+    }
+
+    private void OnArmorBeingEquippedAttempt(Entity<CMArmorComponent> ent, ref BeingEquippedAttemptEvent args)
+    {
+        if (!TryComp<SynthComponent>(args.EquipTarget, out var synth) || synth.CanWearArmor)
+            return;
+
+        if (_tags.HasTag(ent.Owner, "RMCSynthAllowedArmor"))
+            return;
+
+        DoSynthUnableToUsePopup(args.EquipTarget, ent.Owner);
+        args.Cancel();
     }
 
     public void DoSynthUnableToUsePopup(EntityUid synth, EntityUid tool)
