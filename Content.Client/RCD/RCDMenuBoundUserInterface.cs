@@ -125,7 +125,7 @@ public sealed class RCDMenuBoundUserInterface : BoundUserInterface
             var name = Loc.GetString(proto.SetName);
 
             if (proto.Prototype != null &&
-                _prototypeManager.TryIndex(proto.Prototype, out var entProto, logError: false))
+                _prototypeManager.TryIndex(proto.Prototype, out var entProto))
                 name = entProto.Name;
 
             msg = Loc.GetString("rcd-component-change-build-mode", ("name", name));
@@ -142,7 +142,7 @@ public sealed class RCDMenuBoundUserInterface : BoundUserInterface
 
         if (proto.Mode is RcdMode.ConstructTile or RcdMode.ConstructObject
             && proto.Prototype != null
-            && _prototypeManager.TryIndex(proto.Prototype, out var entProto, logError: false))
+            && _prototypeManager.TryIndex(proto.Prototype, out var entProto))
         {
             tooltip = Loc.GetString(entProto.Name);
         }

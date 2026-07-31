@@ -9,7 +9,6 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.UserInterface.Controls
 {
-    [Virtual]
     public abstract class SlotControl : Control, IEntityControl
     {
         [Dependency] private readonly IEntityManager _entities = default!;
