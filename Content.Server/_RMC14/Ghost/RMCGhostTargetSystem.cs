@@ -10,6 +10,7 @@ using Content.Server.Warps;
 using Content.Shared._RMC14.Ghost;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Roles;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Survivor;
 using Content.Shared._RMC14.TacticalMap;
@@ -924,10 +925,24 @@ public sealed class RMCGhostTargetSystem : EntitySystem
         if (HasComp<SquadLeaderComponent>(uid))
             return (SquadLeaderMapIcon, tactical.Background);
 
+        // A marine whose actual job is Squad Leader can remain in the squad after being
+        // replaced through Overwatch. Do not leave the base leader blip visible in that
+        // state: the active SquadLeaderComponent above is the sole source of leader status.
+        if (IsSquadLeaderJob(uid))
+            return (null, null);
+
         if (TryComp(uid, out MapBlipIconOverrideComponent? mapBlip) && mapBlip.Icon is { } overrideIcon)
             return (overrideIcon, tactical.Background);
 
         return tactical;
+    }
+
+    private bool IsSquadLeaderJob(EntityUid uid)
+    {
+        if (TryComp(uid, out OriginalRoleComponent? originalRole) && originalRole.Job is { } originalJob)
+            return originalJob == SquadLeaderJob;
+
+        return _jobs.MindTryGetJob(GetMindId(uid), out var job) && job.ID == SquadLeaderJob;
     }
 
     private int GetFollowerCount(EntityUid uid)
