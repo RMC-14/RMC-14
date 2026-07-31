@@ -124,6 +124,49 @@
     components:
     - type: HiddenAppearance
 
+- type: entity
+  id: RMCSynthWhiteout
+  name: Classified Programme
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SynthGeneration
+    generation: RMCSynthWhiteout
+    priority: 3
+  - type: Skills
+    skills:
+        RMCSkillCqc: 5
+        RMCSkillLeadership: 4
+        RMCSkillEndurance: 5
+        RMCSkillEngineer: 4
+        RMCSkillConstruction: 3
+        RMCSkillFirearms: 3
+        RMCSkillOverwatch: 1
+        RMCSkillMedical: 4
+        RMCSkillSurgery: 3
+        RMCSkillResearch: 1
+        RMCSkillMeleeWeapons: 2
+        RMCSkillPilot: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 5
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 3
+        RMCSkillJtac: 4
+        RMCSkillIntel: 2
+        RMCSkillDomestics: 2
+        RMCSkillNavigations: 1
+        RMCSkillExecution: 1
+        RMCSkillSmartGun: 1
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      500: Dead
+  - type: ShowHealthIcons
+  - type: ShowHealthBars
+  - type: RMCAllowSuitStorage
+  - type: RemoveComponents
+    components:
+    - type: HiddenAppearance
+
 #- type: entity
 #  id: RMCARESWorker
 #  name: ARES Worker
