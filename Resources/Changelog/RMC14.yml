@@ -1,16 +1,6 @@
 ﻿Entries:
 - author: Dutch-VanDerLinde
   changes:
-  - message: Fixed the pyro specialist helmet with urban camo having mismatched colors.
-    type: Fix
-  - message: Fixed helmets with toggleable markings hiders permanently hiding markings
-      once you enable them.
-    type: Fix
-  id: 3040
-  time: '2026-04-01T06:58:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9427
-- author: Dutch-VanDerLinde
-  changes:
   - message: Fixed Survivor Cargo Techs, Heavy Vehicle Operators, and truckers having
       civilian access instead of engineering access.
     type: Fix
@@ -4573,5 +4563,12 @@
   id: 3539
   time: '2026-07-31T00:11:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9392
+- author: Vixting
+  changes:
+  - message: Fixed xenonids being able to interact with vehicle ammo loader
+    type: Fix
+  id: 3540
+  time: '2026-07-31T00:13:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10371
 Name: RMC14
 Order: -1
