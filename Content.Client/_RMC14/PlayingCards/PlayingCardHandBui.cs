@@ -71,7 +71,7 @@ public sealed class PlayingCardHandBui : BoundUserInterface
             {
                 StyleClasses = { "RadialMenuButton" },
                 SetSize = new Vector2(64, 64),
-                ToolTip = $"{rankName} of {suitName}",
+                ToolTip = $"{FormattedMessage.RemoveMarkupPermissive(rankName)} of {FormattedMessage.RemoveMarkupPermissive(suitName)}",
             };
 
             var specifier = new SpriteSpecifier.Rsi(CardRsiPath, stateName);
@@ -85,7 +85,7 @@ public sealed class PlayingCardHandBui : BoundUserInterface
             var cardIndex = i;
             button.OnButtonDown += _ =>
             {
-                SendPredictedMessage(new PlayingCardHandBuiMsg(cardIndex));
+                SendMessage(new PlayingCardHandBuiMsg(cardIndex));
                 Close();
             };
 

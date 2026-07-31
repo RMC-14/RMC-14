@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Construction;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Power;
+using Content.Shared._RMC14.PowerLoader;
 using Content.Shared._RMC14.Teleporter;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Buckle;
@@ -108,6 +109,12 @@ public sealed class VehicleSystem : EntitySystem
             return;
         }
 
+        if (!HasComp<GhostComponent>(args.User) &&
+            !TryPrepareEnter(ent, args.User, entryIndex, popup: true, out _, out _, out _, out _, out _))
+        {
+            return;
+        }
+
         if (HasComp<GhostComponent>(args.User))
         {
             args.Handled = TryEnter(ent, args.User, entryIndex);
@@ -140,46 +147,84 @@ public sealed class VehicleSystem : EntitySystem
 
     private bool TryEnter(Entity<VehicleEnterComponent> ent, EntityUid user, int entryIndex = -1)
     {
+        if (!TryPrepareEnter(ent, user, entryIndex, popup: true, out var interior, out var coords, out var isGhost, out var isXeno, out var pulled))
+            return false;
+
+        if (!isGhost)
+            TrackOccupant(user, ent.Owner, isXeno);
+
+        if (pulled is { } pulledUid)
+            TrackOccupant(pulledUid, ent.Owner, HasComp<XenoComponent>(pulledUid));
+
+        var targetMapCoords = _transform.ToMapCoordinates(coords);
+        _rmcTeleporter.HandlePulling(user, targetMapCoords);
+        return true;
+    }
+
+    private bool TryPrepareEnter(
+        Entity<VehicleEnterComponent> ent,
+        EntityUid user,
+        int entryIndex,
+        bool popup,
+        [NotNullWhen(true)] out VehicleInteriorComponent? interior,
+        out EntityCoordinates coords,
+        out bool isGhost,
+        out bool isXeno,
+        out EntityUid? pulled)
+    {
+        interior = null;
+        coords = default;
+        isGhost = HasComp<GhostComponent>(user);
+        isXeno = HasComp<XenoComponent>(user);
+        pulled = null;
+
         if (IsEntryBlockedByLock(ent.Owner, user))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-locked"), user, user, PopupType.SmallCaution);
+            if (popup)
+                _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-locked"), user, user, PopupType.SmallCaution);
+
             return false;
         }
 
-        if (!EnsureInterior(ent, out var interior))
-            return false;
+        if (HasComp<ActivePowerLoaderPilotComponent>(user) ||
+            HasComp<PowerLoaderComponent>(user))
+        {
+            if (popup)
+                _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-no-power-loader"), user, user);
 
-        var isGhost = HasComp<GhostComponent>(user);
+            return false;
+        }
+
+        if (!EnsureInterior(ent, out interior))
+            return false;
 
         if (!isGhost)
             PruneTrackedOccupants(ent.Owner, interior);
 
-        var isXeno = HasComp<XenoComponent>(user);
         if (!isGhost && isXeno)
         {
-            if (ent.Comp.MaxXenos > 0 &&
-                !interior.Xenos.Contains(user) &&
-                CountLivingOccupants(interior.Xenos) >= ent.Comp.MaxXenos)
+            if (!CanEnterAsXeno(ent, interior.Xenos, user))
             {
-                _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-xeno-full"), user, user);
+                if (popup)
+                    _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-xeno-full"), user, user);
+
                 return false;
             }
         }
-        else
+        else if (!isGhost)
         {
-            if (ent.Comp.MaxPassengers > 0 &&
-                !interior.Passengers.Contains(user) &&
-                !CanEnterAsPassenger(ent, interior, user))
+            if (!CanEnterAsPassenger(ent, interior.Passengers, user))
             {
-                _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-passenger-full"), user, user);
+                if (popup)
+                    _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-passenger-full"), user, user);
+
                 return false;
             }
         }
 
-        if (!TryGetInteriorEntryCoordinates(ent, entryIndex, out var coords))
+        if (!TryGetInteriorEntryCoordinates(ent, entryIndex, out coords))
             return false;
 
-        EntityUid? pulled = null;
         if (!isGhost &&
             TryComp(user, out PullerComponent? puller) &&
             puller.Pulling is { } pulling &&
@@ -189,31 +234,38 @@ public sealed class VehicleSystem : EntitySystem
             pulled = pulling;
         }
 
-        if (!isGhost)
-            TrackOccupant(user, ent.Owner, isXeno);
+        if (pulled is not { } pulledUid)
+            return true;
 
-        if (pulled is { } pulledUid)
+        var passengers = interior.Passengers;
+        var xenos = interior.Xenos;
+
+        if (isXeno && !xenos.Contains(user))
         {
-            var pulledIsXeno = HasComp<XenoComponent>(pulledUid);
-            var pulledAllowed = pulledIsXeno
-                ? ent.Comp.MaxXenos <= 0 || interior.Xenos.Contains(pulledUid) || CountLivingOccupants(interior.Xenos) < ent.Comp.MaxXenos
-                : ent.Comp.MaxPassengers <= 0 || interior.Passengers.Contains(pulledUid) || CanEnterAsPassenger(ent, interior, pulledUid);
-
-            if (!pulledAllowed)
+            xenos = new HashSet<EntityUid>(xenos)
             {
-                if (!isGhost)
-                    UntrackOccupant(user, ent.Owner);
-
-                _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-pulled-full"), user, user);
-                return false;
-            }
-
-            TrackOccupant(pulledUid, ent.Owner, pulledIsXeno);
+                user,
+            };
+        }
+        else if (!isXeno && !passengers.Contains(user))
+        {
+            passengers = new HashSet<EntityUid>(passengers)
+            {
+                user,
+            };
         }
 
-        var targetMapCoords = _transform.ToMapCoordinates(coords);
-        _rmcTeleporter.HandlePulling(user, targetMapCoords);
-        return true;
+        var pulledAllowed = HasComp<XenoComponent>(pulledUid)
+            ? CanEnterAsXeno(ent, xenos, pulledUid)
+            : CanEnterAsPassenger(ent, passengers, pulledUid);
+
+        if (pulledAllowed)
+            return true;
+
+        if (popup)
+            _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-pulled-full"), user, user);
+
+        return false;
     }
 
     private bool EnsureInterior(Entity<VehicleEnterComponent> ent, [NotNullWhen(true)] out VehicleInteriorComponent? interior)
@@ -763,10 +815,17 @@ public sealed class VehicleSystem : EntitySystem
         return count;
     }
 
-    private bool CanEnterAsPassenger(Entity<VehicleEnterComponent> ent, VehicleInteriorComponent interior, EntityUid user)
+    private bool CanEnterAsXeno(Entity<VehicleEnterComponent> ent, HashSet<EntityUid> xenos, EntityUid user)
     {
-        var passengers = CountLivingOccupants(interior.Passengers);
-        if (passengers >= ent.Comp.MaxPassengers)
+        return ent.Comp.MaxXenos <= 0 ||
+               xenos.Contains(user) ||
+               CountLivingOccupants(xenos) < ent.Comp.MaxXenos;
+    }
+
+    private bool CanEnterAsPassenger(Entity<VehicleEnterComponent> ent, HashSet<EntityUid> passengers, EntityUid user)
+    {
+        var passengerCount = CountLivingOccupants(passengers);
+        if (passengerCount >= ent.Comp.MaxPassengers)
             return false;
 
         if (ent.Comp.ReservedPassengerPools.Count == 0)
@@ -780,10 +839,10 @@ public sealed class VehicleSystem : EntitySystem
             if (userJob is { } job && pool.EligibleJobs.Contains(job))
                 continue;
 
-            reservedForOtherJobs += GetUnfilledReservedPoolSlots(pool, interior.Passengers);
+            reservedForOtherJobs += GetUnfilledReservedPoolSlots(pool, passengers);
         }
 
-        return passengers < ent.Comp.MaxPassengers - reservedForOtherJobs;
+        return passengerCount < ent.Comp.MaxPassengers - reservedForOtherJobs;
     }
 
     private int GetUnfilledReservedPoolSlots(VehicleReservedPassengerPool pool, HashSet<EntityUid> passengers)

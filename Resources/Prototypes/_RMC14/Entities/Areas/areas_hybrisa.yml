@@ -1168,8 +1168,8 @@
 
 - type: entity
   parent: RMCAreaLv759IndoorsSpaceport
-  id: RMCAreaLv759IndoorsSpaceportCuppajoes
-  name: Weston-Yamada Celestia Gateway Space-Port - Cuppa Joe's
+  id: RMCAreaLv759IndoorsSpaceportTheDailyGrind
+  name: Weston-Yamada Celestia Gateway Space-Port - The Daily Grind
   components:
   - type: Sprite
     state: cuppajoes
@@ -1274,68 +1274,68 @@
 - type: entity
   abstract: true
   parent: RMCAreaLv759Indoors
-  id: RMCAreaLv759IndoorsMeridian
+  id: RMCAreaLv759IndoorsMiyahira
 
 - type: entity
-  parent: RMCAreaLv759IndoorsMeridian
-  id: RMCAreaLv759IndoorsMeridianMeridianFoyer
-  name: Meridian - Foyer
+  parent: RMCAreaLv759IndoorsMiyahira
+  id: RMCAreaLv759IndoorsMiyahiraFoyer
+  name: Miyahira - Foyer
   components:
   - type: Sprite
     state: meridian
 
 - type: entity
-  parent: RMCAreaLv759IndoorsMeridian
-  id: RMCAreaLv759IndoorsMeridianMeridianShowroom
-  name: Meridian - Showroom
+  parent: RMCAreaLv759IndoorsMiyahira
+  id: RMCAreaLv759IndoorsMiyahiraShowroom
+  name: Miyahira - Showroom
   components:
   - type: Sprite
     state: meridian
 
 - type: entity
-  parent: RMCAreaLv759IndoorsMeridian
-  id: RMCAreaLv759IndoorsMeridianMeridianOffice
-  name: Meridian - Offices
+  parent: RMCAreaLv759IndoorsMiyahira
+  id: RMCAreaLv759IndoorsMiyahiraOffice
+  name: Miyahira - Offices
   components:
   - type: Sprite
     state: meridian
 
 - type: entity
-  parent: RMCAreaLv759IndoorsMeridian
-  id: RMCAreaLv759IndoorsMeridianMeridianManagersoffice
-  name: Meridian - Manager's Office
+  parent: RMCAreaLv759IndoorsMiyahira
+  id: RMCAreaLv759IndoorsMiyahiraManagersoffice
+  name: Miyahira - Manager's Office
   components:
   - type: Sprite
     state: meridian
 
 - type: entity
-  parent: RMCAreaLv759IndoorsMeridian
-  id: RMCAreaLv759IndoorsMeridianMeridianFactory
-  name: Meridian - Factory Floor
+  parent: RMCAreaLv759IndoorsMiyahira
+  id: RMCAreaLv759IndoorsMiyahiraFactory
+  name: Miyahira - Factory Floor
   components:
   - type: Sprite
     state: meridian_factory
 
 - type: entity
-  parent: RMCAreaLv759IndoorsMeridian
-  id: RMCAreaLv759IndoorsMeridianMeridianRestroom
-  name: Meridian - Restroom
+  parent: RMCAreaLv759IndoorsMiyahira
+  id: RMCAreaLv759IndoorsMiyahiraRestroom
+  name: Miyahira - Restroom
   components:
   - type: Sprite
     state: meridian
 
 - type: entity
-  parent: RMCAreaLv759IndoorsMeridian
-  id: RMCAreaLv759IndoorsMeridianMeridianMaintenance
-  name: Meridian - Maintenance
+  parent: RMCAreaLv759IndoorsMiyahira
+  id: RMCAreaLv759IndoorsMiyahiraMaintenance
+  name: Miyahira - Maintenance
   components:
   - type: Sprite
     state: meridian
 
 - type: entity
-  parent: RMCAreaLv759IndoorsMeridian
-  id: RMCAreaLv759IndoorsMeridianMeridianMaintenanceEast
-  name: Meridian - Factory Floor - Maintenance
+  parent: RMCAreaLv759IndoorsMiyahira
+  id: RMCAreaLv759IndoorsMiyahiraMaintenanceEast
+  name: Miyahira - Factory Floor - Maintenance
   components:
   - type: Sprite
     state: meridian

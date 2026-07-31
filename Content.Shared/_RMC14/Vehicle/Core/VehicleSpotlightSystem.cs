@@ -19,7 +19,7 @@ public sealed class VehicleSpotlightSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<VehicleSpotlightComponent, ComponentStartup>(OnSpotlightStartup);
-        SubscribeLocalEvent<HardpointSlotsChangedEvent>(OnHardpointSlotsChanged);
+        SubscribeLocalEvent<VehicleSpotlightComponent, HardpointSlotsChangedEvent>(OnHardpointSlotsChanged);
 
         if (_net.IsClient)
         {
@@ -59,17 +59,22 @@ public sealed class VehicleSpotlightSystem : EntitySystem
         ApplySpotlight(ent.Owner, ent.Comp);
     }
 
-    private void OnHardpointSlotsChanged(HardpointSlotsChangedEvent args)
+    private void OnHardpointSlotsChanged(Entity<VehicleSpotlightComponent> ent, ref HardpointSlotsChangedEvent args)
     {
         if (!_net.IsServer)
             return;
 
-        if (!TryComp(args.Vehicle, out VehicleSpotlightComponent? spotlight))
+        RefreshVehicleSpotlight(ent.Owner, ent.Comp);
+    }
+
+    internal void RefreshVehicleSpotlight(EntityUid vehicle, VehicleSpotlightComponent? spotlight = null)
+    {
+        if (_net.IsClient || !Resolve(vehicle, ref spotlight, logMissing: false))
             return;
 
-        RecalculateFromHardpoints(args.Vehicle, spotlight);
-        ApplySpotlight(args.Vehicle, spotlight);
-        Dirty(args.Vehicle, spotlight);
+        RecalculateFromHardpoints(vehicle, spotlight);
+        ApplySpotlight(vehicle, spotlight);
+        Dirty(vehicle, spotlight);
     }
 
     private void OnSpotlightToggleRequest(VehicleSpotlightToggleRequestEvent ev, EntitySessionEventArgs args)
@@ -138,6 +143,12 @@ public sealed class VehicleSpotlightSystem : EntitySystem
                     continue;
 
                 var item = itemSlot.Item!.Value;
+                if (TryComp(item, out HardpointIntegrityComponent? integrity) &&
+                    integrity.Integrity <= 0f)
+                {
+                    continue;
+                }
+
                 if (!TryComp(item, out VehicleSpotlightModifierComponent? modifier))
                     continue;
 
