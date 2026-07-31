@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: Dutch-VanDerLinde
   changes:
-  - message: Fixed the M12 Blast Grenade not fitting inside of the M85A1 launcher,
-      fixed it being weaker than intended, and fixed it having shrapnel.
-    type: Fix
-  id: 3039
-  time: '2026-04-01T06:59:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9295
-- author: Dutch-VanDerLinde
-  changes:
   - message: Fixed the pyro specialist helmet with urban camo having mismatched colors.
     type: Fix
   - message: Fixed helmets with toggleable markings hiders permanently hiding markings
@@ -4573,5 +4565,13 @@
   id: 3538
   time: '2026-07-30T18:14:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9942
+- author: wheelwrightt
+  changes:
+  - message: Fixed defibrillators being blocked from being put into medical bags without
+      the medical skill.
+    type: Fix
+  id: 3539
+  time: '2026-07-31T00:11:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9392
 Name: RMC14
 Order: -1
