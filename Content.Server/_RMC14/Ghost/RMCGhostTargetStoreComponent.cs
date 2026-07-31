@@ -83,13 +83,17 @@ internal sealed class RMCGhostFactionSectionDefinition(
     public readonly List<RMCGhostFactionSectionDefinition> Children = new();
 }
 
+internal readonly record struct RMCGhostTargetSortKey(
+    int Primary,
+    int Secondary = 0);
+
 internal readonly record struct RMCGhostTargetMembership(
     RMCGhostTargetSectionKey Section,
-    int? SortValue = null);
+    RMCGhostTargetSortKey? SortKey = null);
 
 internal readonly record struct RMCGhostTargetStoredEntry(
     EntityUid Uid,
-    int? SortValue);
+    RMCGhostTargetSortKey? SortKey);
 
 internal sealed class RMCGhostTargetStoredSection(
     RMCGhostTargetSectionKey key,

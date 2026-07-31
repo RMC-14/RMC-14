@@ -48,6 +48,7 @@ public sealed class RMCGhostTargetSystem : EntitySystem
 {
     private static readonly ProtoId<NpcFactionPrototype> MarineFaction = "UNMC";
     private static readonly ProtoId<NpcFactionPrototype> XenoFaction = "RMCXeno";
+    private static readonly ProtoId<JobPrototype> SquadLeaderJob = "CMSquadLeader";
 
     private static readonly LocId EmptyTitle = string.Empty;
     private static readonly LocId MarinesTitle = "rmc-ghost-target-window-group-marines";
@@ -64,6 +65,7 @@ public sealed class RMCGhostTargetSystem : EntitySystem
     [Dependency] private readonly IAdminManager _adminManager = default!;
     [Dependency] private readonly FollowerSystem _follower = default!;
     [Dependency] private readonly JobSystem _jobs = default!;
+    [Dependency] private readonly SharedMarineSystem _marine = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
@@ -824,7 +826,7 @@ public sealed class RMCGhostTargetSystem : EntitySystem
             ? GetHealthStatus(uid)
             : (RMCGhostTargetHealthState.None, (byte) 0);
         var tactical = kind == RMCGhostTargetRecordKind.Body
-            ? GetTacticalIcons(uid)
+            ? GetTargetIcons(uid)
             : (null, null);
 
         entry = new RMCGhostTargetEntry(
@@ -843,6 +845,17 @@ public sealed class RMCGhostTargetSystem : EntitySystem
 
     private bool TryGetJobName(EntityUid uid, out string? jobName)
     {
+        if (HasComp<MarineComponent>(uid))
+        {
+            var ev = new GetMarineSquadNameEvent();
+            RaiseLocalEvent(uid, ref ev);
+            if (!string.IsNullOrWhiteSpace(ev.RoleName))
+            {
+                jobName = ev.RoleName;
+                return true;
+            }
+        }
+
         if (_jobs.MindTryGetJobName(GetMindId(uid), out var name))
         {
             jobName = name;
@@ -892,11 +905,19 @@ public sealed class RMCGhostTargetSystem : EntitySystem
         return (state, percent);
     }
 
-    private (SpriteSpecifier.Rsi? Icon, SpriteSpecifier.Rsi? Background) GetTacticalIcons(EntityUid uid)
+    private (SpriteSpecifier.Rsi? Icon, SpriteSpecifier.Rsi? Background) GetTargetIcons(EntityUid uid)
     {
-        return TryComp(uid, out TacticalMapIconComponent? icon)
+        (SpriteSpecifier.Rsi? Icon, SpriteSpecifier.Rsi? Background) tactical = TryComp(uid, out TacticalMapIconComponent? icon)
             ? (icon.Icon, icon.Background)
             : (null, null);
+
+        if (!HasComp<MarineComponent>(uid))
+            return tactical;
+
+        var marine = _marine.GetMarineIcon(uid);
+        return (
+            marine.Icon as SpriteSpecifier.Rsi ?? tactical.Icon,
+            marine.Background as SpriteSpecifier.Rsi ?? tactical.Background);
     }
 
     private int GetFollowerCount(EntityUid uid)
@@ -1060,7 +1081,10 @@ public sealed class RMCGhostTargetSystem : EntitySystem
 
         if (TryComp(uid, out XenoComponent? xeno))
         {
-            AddMembership(target, RMCGhostTargetSectionKind.Xenos, xeno.Tier);
+            AddMembership(
+                target,
+                RMCGhostTargetSectionKind.Xenos,
+                new RMCGhostTargetSortKey(xeno.Tier));
             return;
         }
 
@@ -1070,11 +1094,11 @@ public sealed class RMCGhostTargetSystem : EntitySystem
     private static void AddMembership(
         RMCGhostTargetRecord target,
         RMCGhostTargetSectionKind kind,
-        int? sortValue = null)
+        RMCGhostTargetSortKey? sortKey = null)
     {
         target.Memberships.Add(new RMCGhostTargetMembership(
             new RMCGhostTargetSectionKey(kind),
-            sortValue));
+            sortKey));
     }
 
     private void AddMarineMembership(
@@ -1084,9 +1108,23 @@ public sealed class RMCGhostTargetSystem : EntitySystem
         var authorityLevel = GetMarineAuthorityLevel(target.Uid);
         if (!_squad.TryGetMemberSquad(target.Uid, out var squad))
         {
-            AddMembership(target, RMCGhostTargetSectionKind.MarineOthers, authorityLevel);
+            RMCGhostTargetSortKey? sortKey = authorityLevel is { } level
+                ? new RMCGhostTargetSortKey(level)
+                : null;
+            AddMembership(target, RMCGhostTargetSectionKind.MarineOthers, sortKey);
             return;
         }
+
+        var isActiveSquadLeader = HasComp<SquadLeaderComponent>(target.Uid);
+        if (isActiveSquadLeader)
+        {
+            var squadLeaderAuthority = _prototypes.Index(SquadLeaderJob).MarineAuthorityLevel;
+            authorityLevel = Math.Max(authorityLevel ?? 0, squadLeaderAuthority);
+        }
+
+        RMCGhostTargetSortKey? squadSortKey = authorityLevel is { } effectiveAuthority
+            ? new RMCGhostTargetSortKey(effectiveAuthority, isActiveSquadLeader ? 1 : 0)
+            : null;
 
         var key = new RMCGhostTargetSectionKey(
             RMCGhostTargetSectionKind.Squad,
@@ -1106,7 +1144,7 @@ public sealed class RMCGhostTargetSystem : EntitySystem
             store.Sections.Add(key, section);
         }
 
-        target.Memberships.Add(new RMCGhostTargetMembership(key, authorityLevel));
+        target.Memberships.Add(new RMCGhostTargetMembership(key, squadSortKey));
     }
 
     private void AddMemberships(
@@ -1118,7 +1156,7 @@ public sealed class RMCGhostTargetSystem : EntitySystem
             if (!store.Sections.TryGetValue(membership.Section, out var section))
                 continue;
 
-            var entry = new RMCGhostTargetStoredEntry(target.Uid, membership.SortValue);
+            var entry = new RMCGhostTargetStoredEntry(target.Uid, membership.SortKey);
             var low = 0;
             var high = section.Entries.Count;
             while (low < high)
@@ -1406,15 +1444,19 @@ public sealed class RMCGhostTargetSystem : EntitySystem
         RMCGhostTargetStoredEntry a,
         RMCGhostTargetStoredEntry b)
     {
-        if (a.SortValue is { } aSort && b.SortValue is { } bSort)
+        if (a.SortKey is { } aSort && b.SortKey is { } bSort)
         {
-            var sort = bSort.CompareTo(aSort);
+            var sort = bSort.Primary.CompareTo(aSort.Primary);
+            if (sort != 0)
+                return sort;
+
+            sort = bSort.Secondary.CompareTo(aSort.Secondary);
             if (sort != 0)
                 return sort;
         }
-        else if (a.SortValue != null || b.SortValue != null)
+        else if (a.SortKey != null || b.SortKey != null)
         {
-            return a.SortValue != null ? -1 : 1;
+            return a.SortKey != null ? -1 : 1;
         }
 
         var name = string.Compare(
