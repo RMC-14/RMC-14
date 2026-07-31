@@ -188,7 +188,7 @@
 - type: entity
   parent: RMCSimpleMob
   id: RMCMobCorgi
-  name: corgi
+  name: Corgi
   description: It's a corgi.
   abstract: true
   components:
@@ -258,11 +258,16 @@
     follow: true
     location: Mister Wiggles
 
+- type: entity
+  parent: CMMobWiggles
+  id: RMCMobCorporateCorgi
+  name: Divvy
+  description: It's a corgi puppy. It has a Weston-Yamada nametag that says "Divvy"
 
 - type: entity
   parent: RMCSimpleMob
   id: RMCMobCat
-  name: cat
+  name: Cat
   description: It's a black cat
   components:
   - type: Sprite
@@ -328,7 +333,7 @@
 - type: entity
   parent: RMCMobCat
   id: RMCMobCatCalico
-  name: calico
+  name: Calico
   description: It's an orange, brown and black cat
   components:
   - type: Sprite
