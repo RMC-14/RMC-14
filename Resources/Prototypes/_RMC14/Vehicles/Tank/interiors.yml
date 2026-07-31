@@ -1,0 +1,428 @@
+- type: entity
+  abstract: true
+  id: VehicleTankInteriorBase
+  name: tank interior piece
+  description: A decorative interior piece for the tank.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/tank.rsi
+    drawdepth: Walls
+  - type: InteractionTransparency
+
+- type: entity
+  abstract: true
+  id: VehicleTankRoofBase
+  name: tank interior roof
+  description: A removable roof section for the tank interior.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/tank.rsi
+    drawdepth: Overdoors
+  - type: InteractionTransparency
+
+- type: entity
+  abstract: true
+  parent: VehicleTankInteriorBase
+  id: VehicleTankWallBase
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Physics
+    bodyType: Static
+    canCollide: true
+  - type: Occluder
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 20000
+        hard: true
+        mask:
+        - FullTileMask
+        layer:
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
+        - Opaque
+        - InteractImpassable
+
+- type: entity
+  abstract: true
+  parent: VehicleTankWallBase
+  id: VehicleTankDoorBase
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
+
+- type: entity
+  abstract: true
+  parent: CMClosetBase
+  id: VehicleTankLockerBase
+  name: tank interior locker
+  description: A storage locker for tank interiors.
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+  - type: WallMount
+    arc: 360
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/tank.rsi
+    drawdepth: Walls
+    layers:
+    - state: locker
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: locker
+      map: ["enum.StorageVisualLayers.Door"]
+  - type: EntityStorageVisuals
+    stateBaseClosed: locker
+    stateBaseOpen: locker_open
+    stateDoorClosed:
+    stateDoorOpen:
+
+- type: entity
+  parent: VehicleTankWallBase
+  id: VehicleTankWall
+  components:
+  - type: Sprite
+    drawdepth: Walls
+    state: wall
+
+- type: entity
+  parent: VehicleTankWallBase
+  id: VehicleTankWallAlt
+  components:
+  - type: Sprite
+    state: wall_1
+
+- type: entity
+  parent: VehicleTankWallBase
+  id: VehicleTankFront1
+  components:
+  - type: Sprite
+    state: front_1
+
+- type: entity
+  parent: VehicleTankWallBase
+  id: VehicleTankFront2
+  components:
+  - type: Sprite
+    state: front_2
+
+- type: entity
+  parent: VehicleTankWallBase
+  id: VehicleTankFront3
+  components:
+  - type: Sprite
+    state: front_3
+
+- type: entity
+  parent: VehicleTankWallBase
+  id: VehicleTankBack1
+  components:
+  - type: Sprite
+    state: back_1
+
+- type: entity
+  parent: VehicleTankWallBase
+  id: VehicleTankBack2
+  components:
+  - type: Sprite
+    state: back_2
+
+- type: entity
+  parent: VehicleTankWallBase
+  id: VehicleTankBack3
+  components:
+  - type: Sprite
+    state: back_3
+
+- type: entity
+  parent: VehicleTankWallBase
+  id: VehicleTankTankFront1
+  components:
+  - type: Sprite
+    state: trank_front_1
+
+- type: entity
+  parent: VehicleTankWallBase
+  id: VehicleTankTankFront2
+  components:
+  - type: Sprite
+    state: tank_front_2
+
+- type: entity
+  parent: VehicleTankWallBase
+  id: VehicleTankTankFront3
+  components:
+  - type: Sprite
+    state: tank_front_3
+
+- type: entity
+  parent: VehicleTankWallBase
+  id: VehicleTankTankBack1
+  components:
+  - type: Sprite
+    state: tank_back_1
+
+- type: entity
+  parent: VehicleTankWallBase
+  id: VehicleTankTankBack2
+  components:
+  - type: Sprite
+    state: tank_back_2
+
+- type: entity
+  parent: VehicleTankWallBase
+  id: VehicleTankTankBack3
+  components:
+  - type: Sprite
+    state: tank_back_3
+
+- type: entity
+  parent: VehicleTankWallBase
+  id: VehicleTankTankLeft1
+  components:
+  - type: Sprite
+    state: tank_left_1
+
+- type: entity
+  parent: VehicleTankWallBase
+  id: VehicleTankTankLeft2
+  components:
+  - type: Sprite
+    state: tank_left_2
+
+- type: entity
+  parent: VehicleTankWallBase
+  id: VehicleTankTankLeft3
+  components:
+  - type: Sprite
+    state: tank_left_3
+
+- type: entity
+  parent: VehicleTankWallBase
+  id: VehicleTankTankRight1
+  components:
+  - type: Sprite
+    state: tank_right_1
+
+- type: entity
+  parent: VehicleTankRoofBase
+  id: VehicleTankTankRight2
+  components:
+  - type: Sprite
+    layers:
+    - state: tank_right_2
+      map: [ "roof" ]
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+    fadeOnSharedGrid: true
+    fadeLayers:
+    - "roof"
+
+- type: entity
+  parent: VehicleTankRoofBase
+  id: VehicleTankTankRight3
+  components:
+  - type: Sprite
+    layers:
+    - state: tank_right_3
+      map: [ "roof" ]
+
+- type: entity
+  parent: VehicleTankDoorBase
+  id: VehicleTankHatch
+  components:
+  - type: Sprite
+    state: hatch
+
+- type: entity
+  parent: VehicleTankHatch
+  id: VehicleTankExitHatch
+  components:
+  - type: RemoveComponents
+    components:
+    - type: Fixtures
+    - type: Occluder
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: VehicleExit
+  - type: RMCIgnoreGhostInteractionLimits
+
+- type: entity
+  parent: VehicleTankRoofBase
+  id: VehicleTankExterior1
+  components:
+  - type: Sprite
+    layers:
+    - state: exterior_1
+      map: ["roof"]
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+    fadeOnSharedGrid: true
+    fadeLayers:
+    - "roof"
+
+- type: entity
+  parent: VehicleTankRoofBase
+  id: VehicleTankExterior2
+  components:
+  - type: Sprite
+    layers:
+    - state: exterior_2
+      map: ["roof"]
+
+- type: entity
+  parent: VehicleTankInteriorBase
+  id: VehicleTankExterior3
+  components:
+  - type: Sprite
+    drawdepth: Objects
+    state: exterior_3
+
+- type: entity
+  abstract: true
+  parent: VehicleTankInteriorBase
+  id: VehicleTankSolidPropBase
+  components:
+  - type: Physics
+    bodyType: Static
+    canCollide: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 20000
+        hard: true
+        mask:
+        - FullTileMask
+        layer:
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
+        - InteractImpassable
+
+- type: entity
+  parent: VehicleTankInteriorBase
+  id: VehicleTankProp0
+  components:
+  - type: Sprite
+    state: prop0
+
+- type: entity
+  parent: VehicleTankInteriorBase
+  id: VehicleTankProp1
+  components:
+  - type: Sprite
+    state: prop1
+
+- type: entity
+  parent: VehicleTankSolidPropBase
+  id: VehicleTankProp2
+  components:
+  - type: Sprite
+    state: prop2
+
+- type: entity
+  parent: VehicleTankSolidPropBase
+  id: VehicleTankProp3
+  components:
+  - type: Sprite
+    drawdepth: Walls
+    state: prop3
+
+- type: entity
+  parent: VehicleTankInteriorBase
+  id: VehicleTankProp4
+  components:
+  - type: Sprite
+    state: prop4
+
+- type: entity
+  parent: VehicleTankInteriorBase
+  id: VehicleTankProp5
+  components:
+  - type: Sprite
+    state: prop5
+
+- type: entity
+  parent: VehicleTankInteriorBase
+  id: VehicleTankProp6
+  components:
+  - type: Sprite
+    drawdepth: Walls
+    state: prop6
+
+- type: entity
+  parent: VehicleTankInteriorBase
+  id: VehicleTankProp7
+  components:
+  - type: Sprite
+    state: prop7
+
+- type: entity
+  parent: VehicleTankInteriorBase
+  id: VehicleTankProp8Extra
+  components:
+  - type: Sprite
+    state: prop8_extra
+
+- type: entity
+  parent: VehicleTankInteriorBase
+  id: VehicleTankNewStuff
+  components:
+  - type: Sprite
+    state: "new stuff"
+
+- type: entity
+  parent: VehicleTankLockerBase
+  id: VehicleTankLocker
+  name: tank locker
+
+- type: entity
+  parent: VehicleTankLockerBase
+  id: VehicleTankLockerOpen
+  name: tank locker (open)
+  components:
+  - type: EntityStorageVisuals
+    stateBaseClosed: locker_open
+    stateBaseOpen: locker_open
+
+- type: entity
+  parent: VehicleAmmoLoader
+  id: VehicleTankAmmoLoader
+  name: tank ammo loader
+  description: A loader for tank hardpoint ammunition.
+  components:
+  - type: Sprite
+    drawdepth: LowFloors
+

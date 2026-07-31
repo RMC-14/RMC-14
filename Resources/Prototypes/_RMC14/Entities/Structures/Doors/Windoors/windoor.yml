@@ -53,6 +53,9 @@
   - type: ExaminableDamage
     messages: WindowMessages
   - type: Destructible
+  - type: VehicleSmashable
+    damageOnHit: 1000
+    requiresDoorUnpowered: true
   - type: ContainerFill
     containers:
       board: [ DoorElectronics ]
@@ -147,6 +150,14 @@
         acts: [ "Destruction" ]
   - type: XenoCrusherChargable
   - type: RMCMesonsNonviewable
+  - type: RMCHijackRandomDamageTarget
+    category: Windoor
+    damage:
+      types:
+        Structural: 100
+    breakDamage:
+      types:
+        Structural: 150
 
 - type: entity
   parent: CMWindoor
@@ -192,3 +203,11 @@
               mix: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: RMCHijackRandomDamageTarget
+    category: Windoor
+    damage:
+      types:
+        Structural: 200
+    breakDamage:
+      types:
+        Structural: 300

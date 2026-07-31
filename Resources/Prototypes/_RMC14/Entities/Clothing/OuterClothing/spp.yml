@@ -207,8 +207,8 @@
   - type: StorageFill
     contents:
     - id: RMCTacticalPrybar
-    - id: RMCMagazineRifleAK4047
-    - id: RMCMagazineRifleAK4047
+    - id: RMCMagazineRifleType77
+    - id: RMCMagazineRifleType77
     - id: RMCRadioHandheldColony
 
 - type: entity

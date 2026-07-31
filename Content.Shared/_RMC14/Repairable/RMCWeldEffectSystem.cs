@@ -25,7 +25,6 @@ public sealed class RMCWeldEffectSystem : EntitySystem
         SubscribeLocalEvent<WelderComponent, RMCToolUseEvent>(OnWelderToolUse, after: new[] { typeof(RMCToolSystem) });
         SubscribeLocalEvent<WeldableComponent, RMCToolDoAfterEvent>(OnWeldableToolDoAfter);
         SubscribeLocalEvent<WeldFinishedEvent>(OnWeldFinished);
-        SubscribeLocalEvent<RMCRepairableDoAfterEvent>(OnRepairDoAfter, before: new[] { typeof(RMCRepairableSystem) });
         SubscribeLocalEvent<RMCWeldEffectSourceComponent, ConstructionInteractDoAfterEvent>(OnConstructionDoAfter);
     }
 
@@ -124,19 +123,13 @@ public sealed class RMCWeldEffectSystem : EntitySystem
         ClearActiveEffect(uid);
     }
 
-    private void OnRepairDoAfter(RMCRepairableDoAfterEvent args)
-    {
-        if (args.Cancelled && args.Target is { } target)
-            ClearActiveEffect(target);
-    }
-
     private void OnConstructionDoAfter(Entity<RMCWeldEffectSourceComponent> ent, ref ConstructionInteractDoAfterEvent args)
     {
         if (args.Cancelled)
             ClearActiveEffect(ent.Owner);
     }
 
-    private void ClearActiveEffect(EntityUid target)
+    public void ClearActiveEffect(EntityUid target)
     {
         if (_net.IsClient)
             return;

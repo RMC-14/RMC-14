@@ -197,6 +197,8 @@
   - type: Eye
     zoom: 0.5, 0.5
     drawFov: false
+  - type: DestroyedByExplosion
+    isExplodable: true
 
 - type: entity
   parent: CMFlare
@@ -207,6 +209,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Misc/flares.rsi
     layers:
+    - map: [ "enum.ExpendableLightVisualLayers.Base" ]
+      state: starshell_ash
     - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
       sprite: _RMC14/Objects/Misc/flares.rsi
       state: starshell_ash-on
@@ -214,7 +218,7 @@
       visible: false
     - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
       sprite: _RMC14/Objects/Misc/flares.rsi
-      state: starshell_ash
+      state: overlay
   - type: Icon
     sprite: _RMC14/Objects/Misc/flares.rsi
     state: starshell_ash
@@ -379,6 +383,10 @@
       whitelist:
         tags:
         - RMCFlare
+  - type: BulletBox
+    amount: 8
+    max: 8
+    bulletType: RMCFlareBullet
   - type: Sprite
     sprite: _RMC14/Objects/Storage/boxes.rsi
     layers:
@@ -611,20 +619,20 @@
   - type: LightBehaviour
     behaviours:
       - !type:FadeBehaviour
-       id: turn_on
-       maxDuration: 5
-       startValue: 2.5
-       endValue: 5
+        id: turn_on
+        maxDuration: 5
+        startValue: 2.5
+        endValue: 5
       - !type:FadeBehaviour
         id: phase_1
         maxDuration: 145
         startValue: 5
         endValue: 5
       - !type:FadeBehaviour
-       id: fade_out
-       maxDuration: 30
-       startValue: 5
-       endValue: 1
+        id: fade_out
+        maxDuration: 30
+        startValue: 5
+        endValue: 1
   - type: PointLight
     color: "#A7FFA7"
     radius: 8.0

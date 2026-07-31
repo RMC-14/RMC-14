@@ -73,7 +73,7 @@
     primaryWeapons:
     - [ RMCBeltMarineMAR, RMCWeaponRifleMAR30 ]
     - [ RMCBeltMarinePCAC5, RMCWeaponSMGPCAC5A4 ]
-    - [ CMBeltMarineBuckshot, RMCWeaponShotgunHG3712 ]
+    - [ CMBeltMarineBuckshot, RMCWeaponShotgunM12 ]
     - [ CMBeltMarineM16, WeaponRifleM16 ]
     primaryWeaponChance: 1
 

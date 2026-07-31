@@ -115,6 +115,18 @@
   - type: InstantAction
     event: !type:RMCTelephoneActionEvent
 
+- type: entity
+  parent: RMCActionTelephone
+  id: RMCActionTelephoneScout
+  name: Use Helmet Microphone
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Objects/phone.rsi
+      state: scout_microphone
+    useDelay: 0.5
+
 - type: Tag
   id: RMCActionCycleZoomLevel
 

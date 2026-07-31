@@ -233,6 +233,8 @@
         amount: 1
       - id: CMRollerBedSpawnFolded
         amount: 2
+      - id: CMSparePDTLBattleBuddyKit
+        amount: 3
       - id: RMCScabbardMacheteFilled #todo spp machete scabbard
         name: Machete Scabbard (Full)
         amount: 5

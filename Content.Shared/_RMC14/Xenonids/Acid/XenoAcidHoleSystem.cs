@@ -1,12 +1,19 @@
 using System.Numerics;
+using Content.Shared._RMC14.Barricade;
+using Content.Shared._RMC14.Barricade.Components;
 using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Repairable;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.ClawSharpness;
+using Content.Shared._RMC14.Xenonids.Weeds;
+using Content.Shared.Climbing.Components;
 using Content.Shared.Coordinates;
+using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
@@ -19,12 +26,15 @@ using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Content.Shared.Tag;
+using Content.Shared.Tools.Components;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Maths;
 using Robust.Shared.Network;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Acid;
@@ -36,17 +46,18 @@ public sealed class XenoAcidHoleSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly OccluderSystem _occluder = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly RMCPullingSystem _pulling = default!;
     [Dependency] private readonly RMCRepairableSystem _repairable = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
-    [Dependency] private readonly RMCPullingSystem _pulling = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
-    [Dependency] private readonly XenoClawsSystem _xenoClaws = default!;
     [Dependency] private readonly SharedStackSystem _stack = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private readonly XenoClawsSystem _xenoClaws = default!;
 
     private EntityQuery<DamageableComponent> _damageableQuery;
     private EntityQuery<OccluderComponent> _occluderQuery;
@@ -55,9 +66,15 @@ public sealed class XenoAcidHoleSystem : EntitySystem
     private EntityQuery<XenoComponent> _xenoQuery;
     private EntityQuery<XenoAcidHoleWallComponent> _holeWallQuery;
 
-    private static readonly ProtoId<DamageGroupPrototype> BruteDamageGroup = "Brute";
     private static readonly ProtoId<StackPrototype> PlasteelStack = "CMPlasteel";
+    private static readonly ProtoId<DamageGroupPrototype> AcidHoleDamage = "Brute";
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
+    private static readonly EntProtoId DamagedGirderPrototype = "RMCGirderDamaged";
+    private const CollisionGroup HoleBlockMask = CollisionGroup.Impassable |
+                                                 CollisionGroup.HighImpassable |
+                                                 CollisionGroup.LowImpassable |
+                                                 CollisionGroup.InteractImpassable |
+                                                 CollisionGroup.BarbedBarricade;
 
     public override void Initialize()
     {
@@ -70,9 +87,9 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         _xenoQuery = GetEntityQuery<XenoComponent>();
         _holeWallQuery = GetEntityQuery<XenoAcidHoleWallComponent>();
 
-        SubscribeLocalEvent<XenoAcidHoleComponent, InteractHandEvent>(OnHoleInteractHand);
+        SubscribeLocalEvent<XenoAcidHoleComponent, ActivateInWorldEvent>(OnHoleActivateInWorld);
         SubscribeLocalEvent<XenoAcidHoleComponent, XenoAcidHoleCrawlDoAfterEvent>(OnHoleCrawlDoAfter);
-        SubscribeLocalEvent<XenoAcidHoleComponent, InteractUsingEvent>(OnHoleInteractUsing);
+        SubscribeLocalEvent<XenoAcidHoleComponent, InteractUsingEvent>(OnHoleInteractUsing, before: [typeof(XenoNestSystem)]);
         SubscribeLocalEvent<XenoAcidHoleComponent, XenoAcidHoleRepairDoAfterEvent>(OnHoleRepairDoAfter);
         SubscribeLocalEvent<XenoAcidHoleComponent, XenoAcidHoleBreakDoAfterEvent>(OnHoleBreakDoAfter);
         SubscribeLocalEvent<XenoAcidHoleComponent, GettingAttackedAttemptEvent>(OnHoleAttacked);
@@ -81,10 +98,13 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         SubscribeLocalEvent<XenoAcidHoleWallComponent, DamageChangedEvent>(OnWallDamageChanged);
         SubscribeLocalEvent<XenoAcidHoleWallComponent, DamageModifyEvent>(OnWallDamageModify);
         SubscribeLocalEvent<XenoAcidHoleWallComponent, GettingAttackedAttemptEvent>(OnWallAttacked);
-        SubscribeLocalEvent<XenoAcidHoleWallComponent, InteractHandEvent>(OnWallInteractHand);
-        SubscribeLocalEvent<XenoAcidHoleWallComponent, InteractUsingEvent>(OnWallInteractUsing);
+        SubscribeLocalEvent<XenoAcidHoleWallComponent, ActivateInWorldEvent>(OnWallActivateInWorld);
+        SubscribeLocalEvent<XenoAcidHoleWallComponent, InteractUsingEvent>(OnWallInteractUsing, before: [typeof(XenoNestSystem)]);
         SubscribeLocalEvent<XenoAcidHoleWallComponent, RMCRepairableTargetAttemptEvent>(OnWallRepairAttempt);
         SubscribeLocalEvent<XenoAcidHoleWallComponent, EntityTerminatingEvent>(OnWallTerminating);
+
+        SubscribeLocalEvent<XenoWallWeedsComponent, InteractHandEvent>(OnWeededWallInteractHand, before: [typeof(XenoNestSystem)]);
+        SubscribeLocalEvent<XenoWallWeedsComponent, InteractUsingEvent>(OnWeededWallInteractUsing, before: [typeof(XenoNestSystem)]);
     }
 
     public bool HasActiveHole(EntityUid wall)
@@ -98,7 +118,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (!TryComp(wall, out XenoAcidHoleWallComponent? wallComp))
+        if (!TryComp<XenoAcidHoleWallComponent>(wall, out var wallComp))
             return;
 
         if (!TryGetHoleDirection(wall, attacker, out var direction))
@@ -112,7 +132,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         if (_net.IsClient)
             return false;
 
-        if (!TryComp(wall, out XenoAcidHoleWallComponent? wallComp))
+        if (!TryComp<XenoAcidHoleWallComponent>(wall, out var wallComp))
             return false;
 
         if (TerminatingOrDeleted(wall))
@@ -124,11 +144,20 @@ public sealed class XenoAcidHoleSystem : EntitySystem
             return true;
         }
 
+        if (_damageableQuery.TryComp(wall, out var damageable) &&
+            _receiverClawsQuery.TryComp(wall, out var receiver))
+        {
+            var targetDamage = FixedPoint2.New(receiver.MaxHealth * 0.9f);
+            if (damageable.TotalDamage < targetDamage)
+                SetWallDamage((wall, damageable), targetDamage);
+        }
+
         var direction = wallComp.PendingDirection ?? Direction.South;
         if (!TryCreateHole((wall, wallComp), direction))
             return false;
 
         wallComp.PendingDirection = null;
+        _audio.PlayPvs(wallComp.HoleCreatedSound, wall);
         return true;
     }
 
@@ -184,19 +213,21 @@ public sealed class XenoAcidHoleSystem : EntitySystem
 
     private void OnWallAttacked(Entity<XenoAcidHoleWallComponent> wall, ref GettingAttackedAttemptEvent args)
     {
-        if (_net.IsClient)
+        if (_net.IsClient || args.Cancelled)
             return;
 
         if (!TryGetActiveHole(wall, out var hole))
             return;
 
-        if (TryStartBreak(args.Attacker, hole))
-            args.Cancelled = true;
+        TryStartBreak(args.Attacker, hole);
     }
 
     private void OnWallTerminating(Entity<XenoAcidHoleWallComponent> wall, ref EntityTerminatingEvent args)
     {
-        if (wall.Comp.Hole is not { } hole ||
+        if (_net.IsClient)
+            return;
+
+        if (wall.Comp.Hole is not { Valid: true } hole ||
             TerminatingOrDeleted(hole))
         {
             return;
@@ -207,9 +238,9 @@ public sealed class XenoAcidHoleSystem : EntitySystem
 
     private void OnHoleTerminating(Entity<XenoAcidHoleComponent> hole, ref EntityTerminatingEvent args)
     {
-        if (hole.Comp.Wall is not { } wall ||
+        if (hole.Comp.Wall is not { Valid: true } wall ||
             TerminatingOrDeleted(wall) ||
-            !TryComp(wall, out XenoAcidHoleWallComponent? wallComp))
+            !TryComp<XenoAcidHoleWallComponent>(wall, out var wallComp))
         {
             return;
         }
@@ -220,7 +251,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         ClearHole((wall, wallComp), deleteHole: false);
     }
 
-    private void OnHoleInteractHand(Entity<XenoAcidHoleComponent> hole, ref InteractHandEvent args)
+    private void OnHoleActivateInWorld(Entity<XenoAcidHoleComponent> hole, ref ActivateInWorldEvent args)
     {
         if (args.Handled)
             return;
@@ -261,7 +292,13 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (TryComp(args.Used, out NailgunComponent? _))
+        if (HasComp<WelderComponent>(args.Used))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-acid-hole-repair-requires-nailgun"), hole.Owner, args.User, PopupType.MediumCaution);
+            return;
+        }
+
+        if (HasComp<NailgunComponent>(args.Used))
         {
             TryStartRepair(args.User, args.Used, hole);
             return;
@@ -281,10 +318,10 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         if (args.Used is not { } used)
             return;
 
-        if (!TryComp(used, out NailgunComponent? nailgun))
+        if (!TryComp<NailgunComponent>(used, out var nailgun))
             return;
 
-        if (!TryComp(args.User, out HandsComponent? hands))
+        if (!TryComp<HandsComponent>(args.User, out var hands))
             return;
 
         if (!_repairable.TryGetNailgunRepairStack((args.User, hands), hole.Comp.RepairMaterialCost, out var stackUid, out var stack, PlasteelStack))
@@ -310,6 +347,14 @@ public sealed class XenoAcidHoleSystem : EntitySystem
 
         args.Handled = true;
 
+        var selfMsg = Loc.GetString("rmc-nailgun-finish-self", ("material", stackUid), ("target", hole.Owner));
+        var othersMsg = Loc.GetString("rmc-repairable-finish-others", ("user", args.User), ("material", stackUid), ("target", hole.Owner));
+        _popup.PopupPredicted(selfMsg, othersMsg, args.User, args.User);
+        _audio.PlayPredicted(nailgun.RepairSound, wall.Owner, args.User);
+
+        if (_net.IsClient)
+            return;
+
         if (!_stack.Use(stackUid, hole.Comp.RepairMaterialCost, stack))
             return;
 
@@ -330,49 +375,38 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         }
 
         ClearHole(wall, deleteHole: true);
-
-        var selfMsg = Loc.GetString("rmc-nailgun-finish-self", ("material", stackUid), ("target", hole.Owner));
-        var othersMsg = Loc.GetString("rmc-repairable-finish-others", ("user", args.User), ("material", stackUid), ("target", hole.Owner));
-        _popup.PopupPredicted(selfMsg, othersMsg, args.User, args.User);
-        _audio.PlayPredicted(nailgun.RepairSound, wall.Owner, args.User);
     }
 
     private void OnHoleBreakDoAfter(Entity<XenoAcidHoleComponent> hole, ref XenoAcidHoleBreakDoAfterEvent args)
     {
-        if (args.Cancelled || args.Handled)
+        if (_net.IsClient || args.Cancelled || args.Handled)
             return;
 
         if (!TryGetHoleWall(hole, out var wall))
             return;
 
-        if (!TryGetBreakData(args.User, wall, out var receiver))
-            return;
-
-        if (!_damageableQuery.TryComp(wall, out var damageable))
+        if (!CanBreakHole(args.User, wall))
             return;
 
         args.Handled = true;
 
-        var damage = FixedPoint2.New(receiver.MaxHealth);
-        var spec = new DamageSpecifier(_proto.Index(BruteDamageGroup), damage);
-        _damageable.TryChangeDamage(wall, spec, ignoreResistances: true, damageable: damageable, origin: args.User, tool: args.User);
+        ReplaceWallWithDamagedGirder(wall);
     }
 
     private void OnHoleAttacked(Entity<XenoAcidHoleComponent> hole, ref GettingAttackedAttemptEvent args)
     {
-        if (_net.IsClient)
+        if (_net.IsClient || args.Cancelled)
             return;
 
-        if (TryStartBreak(args.Attacker, hole))
-            args.Cancelled = true;
+        TryStartBreak(args.Attacker, hole);
     }
 
     private bool TryGetHoleWall(Entity<XenoAcidHoleComponent> hole, out Entity<XenoAcidHoleWallComponent> wall)
     {
         wall = default;
-        if (hole.Comp.Wall is not { } wallUid ||
+        if (hole.Comp.Wall is not { Valid: true } wallUid ||
             TerminatingOrDeleted(wallUid) ||
-            !TryComp(wallUid, out XenoAcidHoleWallComponent? wallComp))
+            !TryComp<XenoAcidHoleWallComponent>(wallUid, out var wallComp))
         {
             return false;
         }
@@ -394,6 +428,9 @@ public sealed class XenoAcidHoleSystem : EntitySystem
             return false;
         }
 
+        if (!CanCrossHoleSide(user, hole, wall.Owner))
+            return false;
+
         var wallCoords = _transform.GetMoverCoordinates(wall.Owner);
         exit = wallCoords.Offset(exitDirection.ToVec());
 
@@ -403,9 +440,44 @@ public sealed class XenoAcidHoleSystem : EntitySystem
             return false;
         }
 
-        if (_turf.IsTileBlocked(tile.Value, CollisionGroup.Impassable))
+        if (_turf.IsTileBlocked(tile.Value, HoleBlockMask) || IsHoleSideBlocked(wallCoords.Position, exit.Position, user, hole, wall.Owner))
         {
             _popup.PopupEntity(Loc.GetString("rmc-acid-hole-blocked"), hole.Owner, user, PopupType.SmallCaution);
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool CanReachHole(EntityUid user, Entity<XenoAcidHoleComponent> hole)
+    {
+        if (!TryGetHoleWall(hole, out var wall))
+            return false;
+
+        if (!TryGetHoleSide(user, wall.Owner, hole.Comp.EntranceDirection, out _))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-acid-hole-wrong-side"), hole.Owner, user, PopupType.SmallCaution);
+            return false;
+        }
+
+        return CanCrossHoleSide(user, hole, wall.Owner);
+    }
+
+    private bool CanCrossHoleSide(EntityUid user, Entity<XenoAcidHoleComponent> hole, EntityUid wall)
+    {
+        var userCoords = _transform.GetMoverCoordinates(user);
+        var wallCoords = _transform.GetMoverCoordinates(wall);
+
+        if (!userCoords.TryDistance(EntityManager, _transform, wallCoords, out var distance) ||
+            distance > SharedInteractionSystem.InteractionRange)
+        {
+            _popup.PopupClient(Loc.GetString("interaction-system-user-interaction-cannot-reach"), user, PopupType.SmallCaution);
+            return false;
+        }
+
+        if (IsHoleSideBlocked(userCoords.Position, wallCoords.Position, user, hole, wall))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-acid-hole-entrance-blocked"), hole.Owner, user, PopupType.SmallCaution);
             return false;
         }
 
@@ -415,49 +487,89 @@ public sealed class XenoAcidHoleSystem : EntitySystem
     private bool TryGetCrawlExitDirection(EntityUid user, EntityUid wall, Direction entrance, out Direction exitDirection)
     {
         exitDirection = default;
-        var userCoords = _transform.GetMoverCoordinates(user);
-        var wallCoords = _transform.GetMoverCoordinates(wall);
-
-        if (!userCoords.TryDelta(EntityManager, _transform, wallCoords, out var delta))
+        if (!TryGetHoleSide(user, wall, entrance, out var approach))
             return false;
 
-        if (delta == Vector2.Zero)
-            return false;
-
-        var approach = delta.GetDir();
         var opposite = entrance.GetOpposite();
 
-        if (approach.IsCardinal())
-        {
-            if (approach == entrance)
-            {
-                exitDirection = opposite;
-                return true;
-            }
-
-            if (approach == opposite)
-            {
-                exitDirection = entrance;
-                return true;
-            }
-
-            return false;
-        }
-
-        var flags = approach.AsFlag();
-        if (flags.HasFlag(entrance.AsFlag()))
+        if (approach == entrance)
         {
             exitDirection = opposite;
             return true;
         }
 
-        if (flags.HasFlag(opposite.AsFlag()))
+        if (approach == opposite)
         {
             exitDirection = entrance;
             return true;
         }
 
         return false;
+    }
+
+    private bool TryGetHoleSide(EntityUid user, EntityUid wall, Direction entrance, out Direction side)
+    {
+        side = default;
+        var userCoords = _transform.GetMoverCoordinates(user).SnapToGrid(EntityManager);
+        var wallCoords = _transform.GetMoverCoordinates(wall).SnapToGrid(EntityManager);
+
+        if (!userCoords.TryDelta(EntityManager, _transform, wallCoords, out var delta) ||
+            delta == Vector2.Zero)
+        {
+            return false;
+        }
+
+        var approach = delta.GetDir();
+        var opposite = entrance.GetOpposite();
+        if (approach != entrance && approach != opposite)
+            return false;
+
+        side = approach;
+        return true;
+    }
+
+    private bool IsHoleSideBlocked(Vector2 start, Vector2 end, EntityUid user, Entity<XenoAcidHoleComponent> hole, EntityUid wall)
+    {
+        var direction = end - start;
+        if (direction == Vector2.Zero)
+            return false;
+
+        var mapId = Transform(wall).MapID;
+        var ray = new CollisionRay(start, direction.Normalized(), (int) HoleBlockMask);
+        var hits = _physics.IntersectRayWithPredicate(
+            mapId,
+            ray,
+            direction.Length(),
+            uid =>
+            {
+                if (uid == user || uid == hole.Owner || uid == wall)
+                    return true;
+
+                return TryComp(uid, out TransformComponent? xform) && !xform.Anchored;
+            },
+            false);
+
+        foreach (var hit in hits)
+        {
+            var blocker = hit.HitEntity;
+            if (ShouldIgnoreHoleBlocker(blocker))
+                continue;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool ShouldIgnoreHoleBlocker(EntityUid blocker)
+    {
+        if (HasComp<BarricadeComponent>(blocker))
+            return !TryComp<BarbedComponent>(blocker, out var barbed) || !barbed.IsBarbed;
+
+        if (HasComp<DirectionalAttackBlockerComponent>(blocker))
+            return false;
+
+        return HasComp<ClimbableComponent>(blocker);
     }
 
     private bool TryGetHoleDirection(EntityUid wall, EntityUid attacker, out Direction direction)
@@ -538,12 +650,15 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         if (HasActiveHole(wall))
             return false;
 
-        var hole = SpawnAttachedTo(wall.Comp.HolePrototype, wall.Owner.ToCoordinates(), rotation: direction.ToAngle());
+        var holeRotation = direction.ToAngle() - Transform(wall).WorldRotation;
+        var hole = SpawnAttachedTo(wall.Comp.HolePrototype, wall.Owner.ToCoordinates(), rotation: holeRotation);
         var holeComp = EnsureComp<XenoAcidHoleComponent>(hole);
         holeComp.Wall = wall.Owner;
         holeComp.EntranceDirection = direction;
+        Dirty(hole, holeComp);
 
         wall.Comp.Hole = hole;
+        Dirty(wall);
 
         if (_occluderQuery.TryComp(wall, out var occluder))
             _occluder.SetEnabled(wall.Owner, false, occluder);
@@ -551,12 +666,29 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         return true;
     }
 
+    private void SetWallDamage(Entity<DamageableComponent> wall, FixedPoint2 damage)
+    {
+        var damageSpecifier = new DamageSpecifier(_prototype.Index(AcidHoleDamage), damage);
+        _damageable.SetDamage(wall.Owner, wall.Comp, damageSpecifier);
+    }
+
+    private void ReplaceWallWithDamagedGirder(Entity<XenoAcidHoleWallComponent> wall)
+    {
+        ClearHole(wall, deleteHole: true);
+
+        var xform = Transform(wall);
+        var damagedGirder = Spawn(DamagedGirderPrototype, xform.Coordinates);
+        _transform.SetLocalRotation(damagedGirder, xform.LocalRotation);
+        QueueDel(wall);
+    }
+
     private bool HasActiveHole(Entity<XenoAcidHoleWallComponent> wall)
     {
-        if (wall.Comp.Hole is { } hole && !TerminatingOrDeleted(hole))
+        if (wall.Comp.Hole is { Valid: true } hole && !TerminatingOrDeleted(hole))
             return true;
 
         wall.Comp.Hole = null;
+        Dirty(wall);
         return false;
     }
 
@@ -565,6 +697,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         var hole = wall.Comp.Hole;
         wall.Comp.Hole = null;
         wall.Comp.PendingDirection = null;
+        Dirty(wall);
 
         if (!TerminatingOrDeleted(wall.Owner) &&
             _occluderQuery.TryComp(wall, out var occluder))
@@ -572,11 +705,15 @@ public sealed class XenoAcidHoleSystem : EntitySystem
             _occluder.SetEnabled(wall.Owner, true, occluder);
         }
 
-        if (deleteHole && hole != null && !TerminatingOrDeleted(hole.Value))
-            QueueDel(hole.Value);
+        if (deleteHole &&
+            hole is { Valid: true } holeUid &&
+            !TerminatingOrDeleted(holeUid))
+        {
+            QueueDel(holeUid);
+        }
     }
 
-    private void OnWallInteractHand(Entity<XenoAcidHoleWallComponent> wall, ref InteractHandEvent args)
+    private void OnWallActivateInWorld(Entity<XenoAcidHoleWallComponent> wall, ref ActivateInWorldEvent args)
     {
         if (args.Handled)
             return;
@@ -608,7 +745,13 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (TryComp(args.Used, out NailgunComponent? _))
+        if (HasComp<WelderComponent>(args.Used))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-acid-hole-repair-requires-nailgun"), wall.Owner, args.User, PopupType.MediumCaution);
+            return;
+        }
+
+        if (HasComp<NailgunComponent>(args.Used))
         {
             TryStartRepair(args.User, args.Used, hole);
             return;
@@ -620,21 +763,64 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         TryStartCrawl(args.User, hole);
     }
 
+    private void OnWeededWallInteractHand(Entity<XenoWallWeedsComponent> weeds, ref InteractHandEvent args)
+    {
+        if (args.Handled ||
+            !TryGetWeededWallWithActiveHole(weeds.Owner, out var wall))
+        {
+            return;
+        }
+
+        var ev = new InteractHandEvent(args.User, wall.Owner);
+        RaiseLocalEvent(wall.Owner, ev);
+        args.Handled = ev.Handled;
+    }
+
+    private void OnWeededWallInteractUsing(Entity<XenoWallWeedsComponent> weeds, ref InteractUsingEvent args)
+    {
+        if (args.Handled ||
+            !TryGetWeededWallWithActiveHole(weeds.Owner, out var wall))
+        {
+            return;
+        }
+
+        var ev = new InteractUsingEvent(args.User, args.Used, wall.Owner, args.ClickLocation);
+        RaiseLocalEvent(wall.Owner, ev);
+        args.Handled = ev.Handled;
+    }
+
     private void OnWallRepairAttempt(Entity<XenoAcidHoleWallComponent> wall, ref RMCRepairableTargetAttemptEvent args)
     {
         if (!HasActiveHole(wall.Owner))
             return;
 
         args.Cancelled = true;
-        args.Popup = Loc.GetString("rmc-acid-hole-repair-blocked");
+        args.Popup = _xenoQuery.HasComp(args.User)
+            ? Loc.GetString("rmc-acid-hole-repair-blocked")
+            : Loc.GetString("rmc-acid-hole-repair-requires-nailgun");
+    }
+
+    private bool TryGetWeededWallWithActiveHole(EntityUid weeds, out Entity<XenoAcidHoleWallComponent> wall)
+    {
+        wall = default;
+        if (!TryComp(weeds, out XenoNestSurfaceComponent? surface) ||
+            surface.Weedable is not { Valid: true } coveredWall ||
+            !TryComp<XenoAcidHoleWallComponent>(coveredWall, out var wallComp) ||
+            !HasActiveHole((coveredWall, wallComp)))
+        {
+            return false;
+        }
+
+        wall = (coveredWall, wallComp);
+        return true;
     }
 
     private bool TryGetActiveHole(Entity<XenoAcidHoleWallComponent> wall, out Entity<XenoAcidHoleComponent> hole)
     {
         hole = default;
-        if (wall.Comp.Hole is not { } holeUid ||
+        if (wall.Comp.Hole is not { Valid: true } holeUid ||
             TerminatingOrDeleted(holeUid) ||
-            !TryComp(holeUid, out XenoAcidHoleComponent? holeComp))
+            !TryComp<XenoAcidHoleComponent>(holeUid, out var holeComp))
         {
             return false;
         }
@@ -646,9 +832,6 @@ public sealed class XenoAcidHoleSystem : EntitySystem
     private void TryStartCrawl(EntityUid user, Entity<XenoAcidHoleComponent> hole)
     {
         if (!CanCrawl(user, hole))
-            return;
-
-        if (!TryGetCrawlExit(user, hole, out _))
             return;
 
         var ev = new XenoAcidHoleCrawlDoAfterEvent();
@@ -665,15 +848,21 @@ public sealed class XenoAcidHoleSystem : EntitySystem
     {
         if (!_xenoQuery.TryComp(user, out _))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-acid-hole-only-small-xenos"), hole.Owner, user, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-acid-hole-too-large-non-xeno"), hole.Owner, user, PopupType.SmallCaution);
             return false;
         }
 
         if (!_size.TryGetSize(user, out var size) || size > RMCSizes.Xeno)
         {
-            _popup.PopupEntity(Loc.GetString("rmc-acid-hole-too-large"), hole.Owner, user, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-acid-hole-only-small-xenos"), hole.Owner, user, PopupType.SmallCaution);
             return false;
         }
+
+        if (!CanReachHole(user, hole))
+            return false;
+
+        if (!TryGetCrawlExit(user, hole, out _))
+            return false;
 
         return true;
     }
@@ -683,7 +872,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         if (!TryGetHoleWall(hole, out var wall))
             return false;
 
-        if (!TryGetBreakData(user, wall, out _))
+        if (!CanBreakHole(user, wall))
             return false;
 
         var ev = new XenoAcidHoleBreakDoAfterEvent();
@@ -691,31 +880,26 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         {
             BreakOnMove = true,
             BlockDuplicate = true,
+            CancelDuplicate = false,
             DuplicateCondition = DuplicateConditions.SameEvent
         };
 
-        return _doAfter.TryStartDoAfter(doAfter);
+        if (!_doAfter.TryStartDoAfter(doAfter))
+            return false;
+
+        _audio.PlayPvs(wall.Comp.HoleExpandSound, wall.Owner);
+        return true;
     }
 
-    private bool TryGetBreakData(EntityUid user, Entity<XenoAcidHoleWallComponent> wall, out ReceiverXenoClawsComponent receiver)
+    private bool CanBreakHole(EntityUid user, Entity<XenoAcidHoleWallComponent> wall)
     {
-        receiver = null!;
-
         if (!HasActiveHole(wall.Owner))
             return false;
 
-        if (!_receiverClawsQuery.TryComp(wall, out var tempReceiver))
+        if (!_xenoQuery.TryComp(user, out _))
             return false;
 
-        receiver = tempReceiver!;
-
-        if (!_xenoQuery.TryComp(user, out var xeno) ||
-            !HasRequiredClaws(receiver, user, xeno))
-        {
-            return false;
-        }
-
-        if (!_size.TryGetSize(user, out var size) || size <= RMCSizes.SmallXeno)
+        if (!_size.TryGetSize(user, out var size) || size < RMCSizes.Big)
             return false;
 
         return true;
@@ -723,7 +907,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
 
     private void TryStartRepair(EntityUid user, EntityUid used, Entity<XenoAcidHoleComponent> hole)
     {
-        if (!TryComp(user, out HandsComponent? hands))
+        if (!TryComp<HandsComponent>(user, out var hands))
             return;
 
         if (!_repairable.TryGetNailgunRepairStack((user, hands), hole.Comp.RepairMaterialCost, out _, out _, PlasteelStack))
@@ -743,6 +927,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         var ev = new XenoAcidHoleRepairDoAfterEvent();
         var doAfter = new DoAfterArgs(EntityManager, user, hole.Comp.RepairDelay, ev, hole, used: used)
         {
+            NeedHand = true,
             BreakOnMove = true,
             BreakOnDropItem = true,
             BreakOnHandChange = true,

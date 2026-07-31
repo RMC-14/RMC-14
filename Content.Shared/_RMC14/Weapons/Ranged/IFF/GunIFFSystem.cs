@@ -20,6 +20,7 @@ public sealed class GunIFFSystem : EntitySystem
 
     private EntityQuery<UserIFFComponent> _userIFFQuery;
     private readonly HashSet<EntProtoId<IFFFactionComponent>> _factionBuffer = new();
+    private readonly HashSet<EntProtoId<IFFFactionComponent>> _iffEventBuffer = new();
 
     public override void Initialize()
     {
@@ -129,20 +130,16 @@ public sealed class GunIFFSystem : EntitySystem
     public bool TryGetFactions(Entity<UserIFFComponent?> user, HashSet<EntProtoId<IFFFactionComponent>> factions, SlotFlags slots = SlotFlags.IDCARD)
     {
         factions.Clear();
-        if (!_userIFFQuery.Resolve(user, ref user.Comp, false))
-            return false;
+        _userIFFQuery.Resolve(user, ref user.Comp, false);
+        if (user.Comp != null)
+            factions.UnionWith(user.Comp.Factions);
 
-        factions.UnionWith(user.Comp.Factions);
-
-        var ev = new GetIFFFactionEvent(slots, new HashSet<EntProtoId<IFFFactionComponent>>());
+        _iffEventBuffer.Clear();
+        var ev = new GetIFFFactionEvent(slots, _iffEventBuffer);
         RaiseLocalEvent(user, ref ev);
-
         factions.UnionWith(ev.Factions);
 
-        if (factions.Count == 0)
-            return false;
-
-        return true;
+        return factions.Count > 0;
     }
 
     public bool IsInFaction(Entity<UserIFFComponent?> user, EntProtoId<IFFFactionComponent> faction)
@@ -246,9 +243,7 @@ public sealed class GunIFFSystem : EntitySystem
             return;
         }
 
-        if (!_userIFFQuery.TryComp(owner, out var ownerIFF))
-            return;
-
+        _userIFFQuery.TryComp(owner, out var ownerIFF);
         _factionBuffer.Clear();
         if (!TryGetFactions((owner, ownerIFF), _factionBuffer, SlotFlags.IDCARD))
             return;
@@ -291,6 +286,13 @@ public sealed class GunIFFSystem : EntitySystem
 
         projectileIFFComponent.Enabled = enabled && projectileIFFComponent.Factions.Count > 0;
         Dirty(uid, projectileIFFComponent);
+    }
+
+    public bool HasFaction(EntityUid uid, EntProtoId<IFFFactionComponent> faction)
+    {
+        if (!TryComp<ItemIFFComponent>(uid, out var itemIff))
+            return false;
+        return itemIff.Factions.Contains(faction);
     }
 }
 
