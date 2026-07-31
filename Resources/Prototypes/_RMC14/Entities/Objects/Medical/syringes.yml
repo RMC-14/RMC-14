@@ -29,6 +29,9 @@
   - type: PhysicalComposition
     materialComposition:
       CMGlass: 150
+  - type: RequiresSkill
+    skills:
+      RMCSkillMedical: 2
   - type: Injector
     delay: 2
     delayPerVolume: 0

@@ -1,93 +1,4 @@
 ﻿Entries:
-- author: Bakeun0
-  changes:
-  - message: Fixed burrow-down sound being played when selecting a tile to burrow
-      to, or cancelling a burrow. It will now only be played upon entering the burrowed
-      state.
-    type: Fix
-  id: 3032
-  time: '2026-03-31T01:57:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9523
-- author: Aurallianz
-  changes:
-  - message: Paper is cooler now
-    type: Tweak
-  id: 3033
-  time: '2026-03-31T01:58:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9403
-- author: Ian321
-  changes:
-  - message: Fixed dropship weapon targeting systems stacking if multiple are used
-      at the same time.
-    type: Fix
-  id: 3034
-  time: '2026-03-31T02:00:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9484
-- author: BreakpointDebug1234
-  changes:
-  - message: M54C MK2 rubber mags now use the correct sprite
-    type: Fix
-  - message: M54C MK1 rubber mags, available in the MP riot vend
-    type: Add
-  id: 3035
-  time: '2026-03-31T08:37:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9157
-- author: Dygon
-  changes:
-  - message: "The dropship part fabricator can now print the LAG-14 internal sentry\
-      \ launcher (200 points), this system can be used to deploy the newly added A/C-49-P\
-      \ Air Deployable Sentry (200 points) at the target location. It can be installed\
-      \ in a dropship\u2019s utility slot."
-    type: Add
-  - message: Supply drops now have a falling animation.
-    type: Add
-  - message: LZ sentries now light up the nearby area.
-    type: Fix
-  id: 3036
-  time: '2026-03-31T08:58:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9089
-- author: Thereisabear
-  changes:
-  - message: Xenos now do appropriate damage and to Lathes and Vending Machines.
-    type: Fix
-  - message: Fixed Vendors not having corrodible components.
-    type: Fix
-  id: 3037
-  time: '2026-03-31T08:59:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9167
-- author: Arykh
-  changes:
-  - message: Fixed the CPR Dummy not properly tracking successful and failed CPR attempts.
-    type: Fix
-  id: 3038
-  time: '2026-03-31T10:09:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9423
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed the M12 Blast Grenade not fitting inside of the M85A1 launcher,
-      fixed it being weaker than intended, and fixed it having shrapnel.
-    type: Fix
-  id: 3039
-  time: '2026-04-01T06:59:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9295
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed the pyro specialist helmet with urban camo having mismatched colors.
-    type: Fix
-  - message: Fixed helmets with toggleable markings hiders permanently hiding markings
-      once you enable them.
-    type: Fix
-  id: 3040
-  time: '2026-04-01T06:58:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9427
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed Survivor Cargo Techs, Heavy Vehicle Operators, and truckers having
-      civilian access instead of engineering access.
-    type: Fix
-  id: 3041
-  time: '2026-04-01T06:58:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9133
 - author: Thereisabear
   changes:
   - message: Fixed Defenders Headbutt having a plasma cost, Headbutt cooldown reduced
@@ -4581,5 +4492,82 @@
   id: 3531
   time: '2026-07-29T01:14:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10133
+- author: NotActuallyMarty
+  changes:
+  - message: You can now unbuckle people by alt-clicking them.
+    type: Fix
+  id: 3532
+  time: '2026-07-29T17:43:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9665
+- author: GNUtopia
+  changes:
+  - message: The XM88 now has a visual indicator for when it can be refired, much
+      like shotguns.
+    type: Tweak
+  id: 3533
+  time: '2026-07-30T03:36:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10017
+- author: Thereisabear
+  changes:
+  - message: Fixed double Boiler announcement at T3 unlock.
+    type: Fix
+  id: 3534
+  time: '2026-07-30T08:01:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10498
+- author: Thereisabear
+  changes:
+  - message: New dead examine text for Synths so you know when a Synthetic Reset key
+      will work, instead of silently consuming the charge.
+    type: Add
+  - message: Fixed Gen 2 & 3 synths not having their proper health
+    type: Fix
+  - message: Fixed Synth self repair taking too long (30s to 3s).
+    type: Fix
+  id: 3535
+  time: '2026-07-30T12:53:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10422
+- author: SharkSnake98
+  changes:
+  - message: Changed a few liaison clothing option sprites
+    type: Tweak
+  id: 3536
+  time: '2026-07-30T17:46:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9796
+- author: IceNoobXD
+  changes:
+  - message: Made it now easier to differentiate the updated/cancelled squad objectives!
+    type: Add
+  id: 3537
+  time: '2026-07-30T18:07:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10569
+- author: SharkSnake98
+  changes:
+  - message: Changed the atmos scanner sprite to be more dynamic
+    type: Tweak
+  id: 3538
+  time: '2026-07-30T18:14:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9942
+- author: wheelwrightt
+  changes:
+  - message: Fixed defibrillators being blocked from being put into medical bags without
+      the medical skill.
+    type: Fix
+  id: 3539
+  time: '2026-07-31T00:11:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9392
+- author: Vixting
+  changes:
+  - message: Fixed xenonids being able to interact with vehicle ammo loader
+    type: Fix
+  id: 3540
+  time: '2026-07-31T00:13:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10371
+- author: Vermidia
+  changes:
+  - message: Fixed being able to use normal syringes without medical skill 2.
+    type: Fix
+  id: 3541
+  time: '2026-07-31T03:22:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10368
 Name: RMC14
 Order: -1
