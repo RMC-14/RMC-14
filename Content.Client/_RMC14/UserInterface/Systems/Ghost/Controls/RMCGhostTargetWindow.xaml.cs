@@ -51,7 +51,6 @@ public sealed partial class RMCGhostTargetWindow : DefaultWindow
         RefreshButton.ModulateSelfOverride = Color.White;
         GhostnadoButton.OnPressed += _ => WarpToMostFollowed();
         RefreshButton.OnPressed += _ => OnRefreshClicked?.Invoke();
-        OnOpen += SearchBar.GrabKeyboardFocus;
         OnClose += ClearContent;
         SetupGhostnadoButtonColors();
         SetupRefreshButtonHover();
