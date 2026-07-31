@@ -8,7 +8,8 @@ namespace Content.Shared._RMC14.HealthExaminable;
 
 public sealed class RMCHealthExaminableSystem : EntitySystem
 {
-    private readonly ImmutableArray<FixedPoint2> _thresholds = ImmutableArray.Create<FixedPoint2>(25, 50, 75, 100, 200, 300);
+    private readonly ImmutableArray<FixedPoint2> _thresholds = ImmutableArray.CreateRange(
+        new FixedPoint2[] { 25, 50, 75, 100, 200, 300 });
 
     public override void Initialize()
     {
