@@ -21,7 +21,6 @@
   parent: RMCArmorPlateCarrierBlack
   id: RMCArmorFreelancerPlateCarrierBlack
   name: freelancer's black plate carrier vest
-  prefix: no lamp
   components:
   - type: ClothingRequireEquipped
     autoUnequip: true
@@ -34,7 +33,6 @@
   parent: RMCArmorPlateCarrierBeige
   id: RMCArmorFreelancerPlateCarrierBeige
   name: freelancer's beige plate carrier vest
-  prefix: no lamp
   components:
   - type: ClothingRequireEquipped
     autoUnequip: true
@@ -47,7 +45,7 @@
   parent: RMCArmorPlateCarrierBlackLamp
   id: RMCArmorFreelancerPlateCarrierBlackLamp
   name: freelancer's black plate carrier vest
-  prefix: lamp
+  suffix: Lamp
   components:
   - type: ClothingRequireEquipped
     autoUnequip: true
@@ -60,7 +58,7 @@
   parent: RMCArmorPlateCarrierBeigeLamp
   id: RMCArmorFreelancerPlateCarrierBeigeLamp
   name: freelancer's beige plate carrier vest
-  prefix: lamp
+  suffix: Lamp
   components:
   - type: ClothingRequireEquipped
     autoUnequip: true

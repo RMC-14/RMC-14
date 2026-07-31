@@ -275,7 +275,6 @@
   id: RMCArmorPlateCarrierBlack
   name: black plate carrier vest
   description: A standard plate carrier produced by virtually every armour manufacturer in the galaxy, and sold to both governments, mercenaries and civilians alike. As the name implies, it carries a series of armoured plates for protection, and has two pouches on the front.
-  suffix: no lamp
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Mercenary/platecarrier_black.rsi
@@ -298,7 +297,6 @@
   parent: RMCArmorPlateCarrierBlack
   id: RMCArmorPlateCarrierBeige
   name: beige plate carrier vest
-  suffix: no lamp
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Mercenary/platecarrier_beige.rsi
