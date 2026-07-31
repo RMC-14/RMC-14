@@ -67,7 +67,8 @@ namespace Content.Shared.EntityEffects.Effects
 
         protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
         {
-            if (Reagent is not null && prototype.TryIndexReagent(Reagent, out ReagentPrototype? reagentProto))
+            var reagentSystem = entSys.GetEntitySystem<RMCReagentSystem>();
+            if (Reagent is not null && reagentSystem.TryIndex(Reagent, out var reagentProto))
             {
                 return Loc.GetString("reagent-effect-guidebook-adjust-reagent-reagent",
                     ("chance", Probability),
