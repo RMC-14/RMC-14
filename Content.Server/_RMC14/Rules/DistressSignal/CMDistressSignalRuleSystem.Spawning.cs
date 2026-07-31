@@ -413,7 +413,7 @@ public sealed partial class CMDistressSignalRuleSystem
                 if (!paper.TryGet(out var paperComponent, _prototypes, _compFactory))
                     continue;
 
-                if (!_prototypes.TryIndex(paper.Id, out var entProto, logError: false))
+                if (!_prototypes.TryIndex(paper.Id, out var entProto))
                     continue;
 
                 var content = Loc.GetString(paperComponent.Content);

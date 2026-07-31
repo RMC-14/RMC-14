@@ -33,6 +33,7 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 using IgniteOnCollideComponent = Content.Server.Atmos.Components.IgniteOnCollideComponent;
 
 namespace Content.Server.Atmos.EntitySystems
@@ -469,8 +470,11 @@ namespace Content.Server.Atmos.EntitySystems
             _stunSystem.TryParalyze(uid, flammable.ResistDuration, true, force: true);
 
             // TODO FLAMMABLE: Make this not use TimerComponent...
-            uid.SpawnTimer(1000, () =>
+            Timer.Spawn(1000, () =>
             {
+                if (TerminatingOrDeleted(uid))
+                    return;
+
                 flammable.Resisting = false;
                 Dirty(uid, flammable);
                 UpdateAppearance(uid, flammable);
