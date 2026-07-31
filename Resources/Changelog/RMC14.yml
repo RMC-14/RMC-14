@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: MoonlightHollow
-  changes:
-  - message: All Paramarines get armor chances redone and now don't hear announcments.
-    type: Tweak
-  - message: L88 now gets proper underbarrel support and mags can refill from spam
-      cans.
-    type: Tweak
-  id: 3045
-  time: '2026-04-01T07:02:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9375
 - author: Whisper
   changes:
   - message: LZ sentries have a rotating warning light.
@@ -4572,5 +4562,13 @@
   id: 3544
   time: '2026-07-31T12:54:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10609
+- author: Thereisabear
+  changes:
+  - message: Fixed unanchored barricades stacking on top of anchored barricades when
+      upgraded.
+    type: Fix
+  id: 3545
+  time: '2026-07-31T19:57:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10489
 Name: RMC14
 Order: -1
