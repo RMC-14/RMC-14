@@ -48,11 +48,6 @@
     - type: NpcFactionMember
       factions:
       - TSE
-    - type: DemoSpecWhitelist
-    - type: GrenadeSpecWhitelist
-    - type: ScoutWhitelist
-    - type: SniperWhitelist
-    - type: PyroWhitelist
     - type: JobPrefix
       prefix: rmc-job-prefix-tsepa-synth
     - type: TacticalMapIcon

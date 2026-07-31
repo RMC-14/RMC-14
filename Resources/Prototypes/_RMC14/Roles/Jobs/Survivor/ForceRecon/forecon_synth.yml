@@ -35,11 +35,6 @@
       whitelist:
         tags:
         - RMCSquadFORECON
-    - type: DemoSpecWhitelist
-    - type: GrenadeSpecWhitelist
-    - type: ScoutWhitelist
-    - type: SniperWhitelist
-    - type: PyroWhitelist
     - type: JobPrefix
       prefix: rmc-job-prefix-synth
     - type: MeleeWeapon

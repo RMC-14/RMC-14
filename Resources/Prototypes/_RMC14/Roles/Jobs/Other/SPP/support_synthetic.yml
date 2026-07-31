@@ -72,12 +72,6 @@
     - type: CMVendorUser
       id: RMCJobSynthetic
       points: 45
-    - type: DemoSpecWhitelist
-    - type: GrenadeSpecWhitelist
-    - type: ScoutWhitelist
-    - type: SniperWhitelist
-    - type: PyroWhitelist
-    - type: QYJWhitelist
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-synth
     - type: MeleeWeapon
