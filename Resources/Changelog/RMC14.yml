@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Thereisabear
-  changes:
-  - message: Fixed Defenders Headbutt having a plasma cost, Headbutt cooldown reduced
-      from 6s to 4s. Tail Sweep cooldown 15s to 11s
-    type: Fix
-  - message: Fixed Headbutt unintentionally targeting windows and activating.
-    type: Fix
-  id: 3042
-  time: '2026-04-01T07:00:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9102
 - author: c0rigin
   changes:
   - message: Vulpkanin blaze marking can now have it's nose color independently changed.
@@ -4569,5 +4559,18 @@
   id: 3541
   time: '2026-07-31T03:22:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10368
+- author: ThataKat
+  changes:
+  - message: '[PVE] The UNS Rover medbay now has advanced medical machines, and loose
+      prep room ammo has been stored in boxes.'
+    type: Add
+  - message: '[PVE] FORECON surplus uniform vendors now stock modular armor and webbing
+      instead of standard armor.'
+    type: Tweak
+  - message: '[PVE] FORECON utility vendors now stock M1911 handguns.'
+    type: Tweak
+  id: 3542
+  time: '2026-07-31T05:40:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10417
 Name: RMC14
 Order: -1
