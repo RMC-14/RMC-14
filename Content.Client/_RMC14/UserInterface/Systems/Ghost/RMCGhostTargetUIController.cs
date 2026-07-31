@@ -18,7 +18,6 @@ public sealed class RMCGhostTargetUIController : UIController, IOnSystemChanged<
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RMCGhostWarpsWindowRequestedEvent>(OnGhostWarpsWindowRequested);
         SubscribeNetworkEvent<RMCGhostWarpsResponseEvent>(OnGhostWarpsResponse);
     }
 
@@ -34,10 +33,8 @@ public sealed class RMCGhostTargetUIController : UIController, IOnSystemChanged<
         system.PlayerRemoved -= OnPlayerRemoved;
     }
 
-    private void OnGhostWarpsWindowRequested(RMCGhostWarpsWindowRequestedEvent args)
+    public void OpenWindow()
     {
-        args.Handled = true;
-
         var window = EnsureWindow();
 
         if (!window.IsOpen)

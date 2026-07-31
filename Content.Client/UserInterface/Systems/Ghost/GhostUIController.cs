@@ -152,14 +152,7 @@ public sealed class GhostUIController : UIController, IOnSystemChanged<GhostSyst
 
     private void RequestWarps()
     {
-        var ev = new RMCGhostWarpsWindowRequestedEvent(); // RMC start
-        EntityManager.EventBus.RaiseEvent(EventSource.Local, ev);
-        if (ev.Handled)
-            return; // RMC end
-
-        _system?.RequestWarps();
-        Gui?.TargetWindow.Populate();
-        Gui?.TargetWindow.OpenCentered();
+        UIManager.GetUIController<RMCGhostTargetUIController>().OpenWindow(); // RMC14
     }
 
     private void GhostRolesPressed()
