@@ -72,6 +72,7 @@
         RMCSkillNavigations: 1
         RMCSkillExecution: 1
         RMCSkillSmartGun: 1
+    - type: MarineOrders
     - type: MeleeWeapon
       soundHit:
         path: /Audio/_RMC14/Weapons/synthpunch1.ogg
@@ -86,6 +87,9 @@
           Blunt: 35
     - type: Synth
       canUseGuns: true
+    - type: SynthGeneration
+      availableGenerations:
+      - RMCSynthWhiteout
     - type: CMArmor
       immuneToAP: true
     - type: RandomMetadata
