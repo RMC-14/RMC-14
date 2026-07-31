@@ -99,6 +99,7 @@
           - RMCAttachmentUnderbarrelExtinguisher
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentVerticalGrip
+          - RMCAttachmentM54CE2Smart
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.75, 0.03125

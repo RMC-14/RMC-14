@@ -629,7 +629,7 @@ public sealed class CMGunSystem : EntitySystem
         if (!Resolve(gun, ref gun.Comp, false))
             return true;
 
-        var slots = _inventory.GetSlotEnumerator(user, SlotFlags.OUTERCLOTHING);
+        var slots = _inventory.GetSlotEnumerator(user, SlotFlags.OUTERCLOTHING | SlotFlags.BACK);
         while (slots.MoveNext(out var slot))
         {
             if (_whitelist.IsValid(gun.Comp.Whitelist, slot.ContainedEntity))
