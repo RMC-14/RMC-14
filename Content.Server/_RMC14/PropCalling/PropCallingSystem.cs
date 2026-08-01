@@ -38,16 +38,16 @@ public sealed class PropCallingSystem : SharedPropCallingSystem
         _propCallingEnabled = value;
 
         var callingQuery = EntityQueryEnumerator<PropCallingComponent>();
-        while (callingQuery.MoveNext(out var uid, out var propcalling))
+        while (callingQuery.MoveNext(out var uid, out var propCalling))
         {
             if (_propCallingEnabled)
             {
-                _actions.AddAction(uid, ref propcalling.TogglePropCallingEntity, propcalling.TogglePropCalling, uid);
-                if (!_callersSignedUp.TryGetValue((uid, propcalling), out _))
-                    _actions.SetToggled(propcalling.TogglePropCallingEntity, true);
+                _actions.AddAction(uid, ref propCalling.TogglePropCallingEntity, propCalling.TogglePropCalling, uid);
+                if (!_callersSignedUp.TryGetValue((uid, propCalling), out _))
+                    _actions.SetToggled(propCalling.TogglePropCallingEntity, true);
             }
             else
-                _actions.RemoveAction(uid, propcalling.TogglePropCallingEntity);
+                _actions.RemoveAction(uid, propCalling.TogglePropCallingEntity);
         }
 
         var callerQuery = EntityQueryEnumerator<PropCallerComponent>();
