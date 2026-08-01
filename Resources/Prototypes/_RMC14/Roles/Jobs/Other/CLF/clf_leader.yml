@@ -31,11 +31,20 @@
     - type: NpcFactionMember
       factions:
       - CLF
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      understoodLanguages:
+      - Japanese
+      - English
+      currentLanguage: Japanese
+      defaultLanguage: Japanese
     - type: JobPrefix
       prefix: rmc-job-prefix-clf-cell-leader
     - type: SquadLeader
       icon:
-        sprite: _RMC14/Interface/cm_job_icons.rsi
+        sprite: _RMC14/Interface/job_icons/CLF.rsi
         state: clf_sl
     - type: RMCPointing
     - type: MarineOrders
@@ -110,5 +119,5 @@
   parent: CMJobIconBase
   id: RMCJobIconCLFCellLeader
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/CLF.rsi
     state: clf_sl

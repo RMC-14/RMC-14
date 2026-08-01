@@ -1,0 +1,105 @@
+- type: entity
+  parent: BaseStructureDynamic
+  id: RMCMechPropBase
+  abstract: true
+  suffix: Prop
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Clickable
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 20
+        mask:
+        - ItemMask
+        layer: []
+  - type: Pullable
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/mech_props.rsi
+    state: mecha_drill
+  - type: Appearance
+
+- type: entity
+  parent: RMCMechPropBase
+  id: RMCMechPropDrill
+  name: drill
+  description: This is the drill that'll pierce the heavens!
+  components:
+    - type: Sprite
+      state: mecha_drill
+
+- type: entity
+  parent: RMCMechPropBase
+  id: RMCMechPropClamp
+  name: Hydraulic Clamp
+  components:
+    - type: Sprite
+      state: mecha_clamp
+
+- type: entity
+  parent: RMCMechPropBase
+  id: RMCMechPropArmorBooster
+  name: "Armor Booster Module (Close Combat Weaponry)"
+  description: Boosts exosuit armor against armed melee attacks. Requires energy to operate.
+  components:
+    - type: Sprite
+      state: mecha_abooster_ccw
+
+- type: entity
+  parent: RMCMechPropBase
+  id: RMCMechMAXChassis
+  name: MAX chassis
+  components:
+    - type: Sprite
+      state: gygax_chassis
+
+- type: entity
+  parent: RMCMechPropBase
+  id: RMCMechMAXTorso
+  name: MAX torso
+  description: A torso part of MAX. Contains power unit, processing core and life support systems. Has an additional equipment slot.
+  components:
+    - type: Sprite
+      state: gygax_harness
+
+- type: entity
+  parent: RMCMechPropBase
+  id: RMCMechMAXArmor
+  name: MAX armor plates
+  components:
+    - type: Sprite
+      state: gygax_armor
+
+- type: entity
+  parent: RMCMechPropBase
+  id: RMCMechEnergyRelay
+  name: energy relay
+  description: Wirelessly drains energy from any available power channel in area. The performance index is quite low.
+  components:
+    - type: Sprite
+      state: tesla
+
+- type: entity
+  parent: RMCMechPropBase
+  id: RMCMechRepairDroid
+  name: repair droid
+  description: Automated repair droid. Scans exosuit for damage and repairs it. Can fix almost all types of external or internal damage.
+  components:
+    - type: Sprite
+      state: repair_droid
+
+- type: entity
+  parent: RMCMechPropBase
+  id: RMCMechRipleyBroken
+  name: MkIV Powerloader Wreckage
+  components:
+    - type: Sprite
+      state: ripley_broken

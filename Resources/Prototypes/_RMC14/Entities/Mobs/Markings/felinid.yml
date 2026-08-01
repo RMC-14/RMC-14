@@ -90,6 +90,17 @@
   - sprite: _RMC14/Mobs/Felinids/felinid_ears.rsi
     state: wide_inner
 
+- type: marking
+  id: FelinidEarsFlat
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Felinid]
+  sprites:
+  - sprite: _RMC14/Mobs/Felinids/felinid_ears.rsi
+    state: flat
+  - sprite: _RMC14/Mobs/Felinids/felinid_ears.rsi
+    state: flat_inner
+
 # Felinid Tails
 
 - type: marking

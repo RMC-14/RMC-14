@@ -10,6 +10,10 @@
     angle: 0
   - type: CMArmorPiercing
     amount: 20
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: [ RMCBaseMeleeWeapon, BaseKnife, RMCAttachableBase ]
@@ -232,6 +236,7 @@
     malus: 0.225
   - type: Tag
     tags:
+    - Knife
     - ThrowingKnife
   - type: DeleteOnExplosion
 

@@ -2,6 +2,7 @@ using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Content.Shared._RMC14.Maths;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Shields;
 
@@ -27,8 +28,14 @@ public sealed partial class XenoBulwarkOfTheHiveComponent : Component
     public string VisualState = "king-shield";
 
     [DataField]
-    public TimeSpan LightningDuration = TimeSpan.FromSeconds(4);
+    public ResPath LightningRsiPath = new("/Textures/_RMC14/Effects/beam.rsi");
 
     [DataField]
-    public List<EntityUid> Supporting = new();
+    public string LightningEffectState = "purple_lightning";
+
+    [DataField]
+    public float LightningWidth = 0.5f;
+
+    [DataField]
+    public TimeSpan LightningDuration = TimeSpan.FromSeconds(4);
 }
