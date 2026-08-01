@@ -15,12 +15,15 @@ public sealed class XenoNameSystem : SharedXenoNameSystem
 
     private void OnChatHighlightsUpdated(Entity<XenoNameComponent> ent, ref BeforeCharacterChatHighlightsUpdatedEvent args)
     {
-        var xenoName = ent.Comp;
+        // Add the xeno's custom name and their number, if applicable.
+        var prefix = GetXenoPrefix(ent.Owner);
+        var newHighlights = $"@\"{prefix}{ent.Comp.Postfix}\"\n";
 
-        // Add the xeno's combined custom name and number.
-        var prefix = xenoName.Prefix.Length == 0 ? "XX" : xenoName.Prefix;
-        args.Highlights += $"\n@{prefix}{xenoName.Postfix}";
-        args.Highlights += $"\n@{xenoName.Number}";
+        if (!HasComp<XenoOmitNumberComponent>(ent))
+            newHighlights += $"@\"{ent.Comp.Number}\"\n";
+
+        // Inserted to the start of the highlights string since name stuff usually goes first.
+        args.Highlights = args.Highlights.Insert(0, newHighlights);
 
         // Remove the full xeno name since people won't tend to say "Young Drone (XX-123)" when talking to you.
         args.Highlights = args.Highlights.Replace($"@{args.Data.EntityName}\n", "");
