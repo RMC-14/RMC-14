@@ -35,6 +35,7 @@
     tier: 1
     hudOffset: -0.15,0.6
     hudRankIconScale: 0.95
+    hudRankIconOffset: 0,0.15
     unlockAt: 300 # 5 minutes
   - type: XenoRegen
     restHealMultiplier:  1.75

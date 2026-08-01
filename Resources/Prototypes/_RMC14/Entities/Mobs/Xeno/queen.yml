@@ -81,6 +81,7 @@
     unlockAt: 0
     hudOffset: -0.1,0
     hudRankIconScale: 0.95
+    hudRankIconOffset: 0,0.15
   - type: XenoHeavy
   - type: XenoAcid
   - type: XenoConstruction
