@@ -13,6 +13,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Medical;
 using Content.Shared.Mobs;
@@ -35,6 +36,7 @@ namespace Content.Shared._RMC14.Synth;
 public abstract class SharedSynthSystem : EntitySystem
 {
     private static readonly TimeSpan UnableUsePopupCooldown = TimeSpan.FromSeconds(1);
+    private static readonly ProtoId<TagPrototype> SynthAllowedArmorTag = "RMCSynthAllowedArmor";
 
     [Dependency] private readonly RMCRepairableSystem _repairable = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
@@ -346,10 +348,13 @@ public abstract class SharedSynthSystem : EntitySystem
 
     private void OnArmorBeingEquippedAttempt(Entity<CMArmorComponent> ent, ref BeingEquippedAttemptEvent args)
     {
+        if ((args.SlotFlags & SlotFlags.OUTERCLOTHING) == 0)
+            return;
+
         if (!TryComp<SynthComponent>(args.EquipTarget, out var synth) || synth.CanWearArmor)
             return;
 
-        if (_tags.HasTag(ent.Owner, "RMCSynthAllowedArmor"))
+        if (_tags.HasTag(ent.Owner, SynthAllowedArmorTag))
             return;
 
         DoSynthUnableToUsePopup(args.EquipTarget, ent.Owner);
