@@ -153,11 +153,8 @@ public abstract partial class SharedCryoPodSystem: EntitySystem
         }
     }
 
-    protected void OnEmagged(EntityUid uid, CryoPodComponent? cryoPodComponent, ref GotEmaggedEvent args)
+    protected void OnEmagged(EntityUid uid, CryoPodComponent cryoPodComponent, ref GotEmaggedEvent args)
     {
-        if (!Resolve(uid, ref cryoPodComponent))
-            return;
-
         if (!_emag.CompareFlag(args.Type, EmagType.Interaction))
             return;
 

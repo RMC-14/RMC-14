@@ -32,7 +32,7 @@ public sealed class ChemistryGuideDataSystem : SharedChemistryGuideDataSystem
 
         SubscribeNetworkEvent<ReagentGuideRegistryChangedEvent>(OnReceiveRegistryUpdate);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
-        OnPrototypesReloaded(null);
+        LoadPrototypes(null);
     }
 
     private void OnReceiveRegistryUpdate(ReagentGuideRegistryChangedEvent message)
@@ -49,7 +49,12 @@ public sealed class ChemistryGuideDataSystem : SharedChemistryGuideDataSystem
         }
     }
 
-    private void OnPrototypesReloaded(PrototypesReloadedEventArgs? ev)
+    private void OnPrototypesReloaded(PrototypesReloadedEventArgs ev)
+    {
+        LoadPrototypes(ev);
+    }
+
+    private void LoadPrototypes(PrototypesReloadedEventArgs? args)
     {
         // this doesn't check what prototypes are being reloaded because, to be frank, we use a lot of them.
         _reagentSources.Clear();
