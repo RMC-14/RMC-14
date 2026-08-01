@@ -33,7 +33,7 @@ public sealed class RMCDazedSystem : EntitySystem
     /// <seealso cref="RMCDazeableActionComponent"/>
     private void OnDazed(Entity<RMCDazedComponent> ent, ref StatusEffectAppliedEvent args)
     {
-        foreach (var (actionId, _) in _actions.GetActions(ent))
+        foreach (var (actionId, _) in _actions.GetActions(args.Target))
         {
             if (TryComp(actionId, out RMCDazeableActionComponent? _))
             {
@@ -47,7 +47,7 @@ public sealed class RMCDazedSystem : EntitySystem
 
     private void OnDazedEnd(Entity<RMCDazedComponent> ent, ref StatusEffectRemovedEvent args)
     {
-        foreach (var (actionId, _) in _actions.GetActions(ent))
+        foreach (var (actionId, _) in _actions.GetActions(args.Target))
         {
             if (TryComp(actionId, out RMCDazeableActionComponent? _))
             {

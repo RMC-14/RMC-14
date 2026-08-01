@@ -7,6 +7,8 @@
   startingGear: RMCGearSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
   accessGroups:
   - ColonistSec
+  ranks:
+    RMCRankCMBRiotControlOfficer: []
   spawnMenuRoleName: CMB Riot Control Officer (Fiorina Special Survivor)
   special:
   - !type:AddComponentSpecial
