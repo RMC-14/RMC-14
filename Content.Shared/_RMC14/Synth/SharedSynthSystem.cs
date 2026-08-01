@@ -23,6 +23,7 @@ using Content.Shared.Stacks;
 using Content.Shared.Tools.Components;
 using Content.Shared.Tools.Systems;
 using Content.Shared.Weapons.Ranged.Events;
+using Content.Shared.Tag;
 using Content.Shared.Whitelist;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
