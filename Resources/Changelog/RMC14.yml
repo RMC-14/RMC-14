@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: The xenonid mechanic of bringing dead larva to the hivecore, which opens
-      up a new burrowed larva slot, is now explained in a gameplay tip and has a popup
-      when it happens.
-    type: Add
-  id: 3048
-  time: '2026-04-02T05:04:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9034
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed PMC and Paramarine survivors not spawning with their squad.
@@ -4575,5 +4566,12 @@
   id: 3547
   time: '2026-07-31T23:09:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10282
+- author: FreeSpy443
+  changes:
+  - message: Fixed HERMES logs when purchasing Tech Tree options
+    type: Fix
+  id: 3548
+  time: '2026-08-01T00:10:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10564
 Name: RMC14
 Order: -1
