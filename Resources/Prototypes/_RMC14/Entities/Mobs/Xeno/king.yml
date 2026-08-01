@@ -42,6 +42,7 @@
     countedInSlots: false
     unlockAt: 0
     hudOffset: -0.1,0
+    hudRankIconScale: 0.95
   - type: XenoHeavy
   - type: XenoDevour
   - type: XenoPheromones

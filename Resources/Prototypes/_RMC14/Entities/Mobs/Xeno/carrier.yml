@@ -28,6 +28,7 @@
     role: CMXenoCarrier
     tier: 2
     hudOffset: 0,0.19
+    hudRankIconScale: 0.95
     unlockAt: 300 # 5 minutes
   - type: XenoHeavy
   - type: XenoDevolve

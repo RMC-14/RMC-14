@@ -80,6 +80,7 @@
     - ActionXenoParasiteReserve
     tier: 0
     hudOffset: -0.15,-0.03
+    hudRankIconScale: 0.95
     contributesToVictory: false
     countedInSlots: false
     unlockAt: 0

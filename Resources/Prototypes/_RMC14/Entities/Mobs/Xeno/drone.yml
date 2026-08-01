@@ -37,6 +37,7 @@
   - type: Xeno
     role: CMXenoDrone
     hudOffset: -0.1,0.15
+    hudRankIconScale: 0.95
     tier: 1
     bypassTierCount: true
     unlockAt: 60 # 1 minute

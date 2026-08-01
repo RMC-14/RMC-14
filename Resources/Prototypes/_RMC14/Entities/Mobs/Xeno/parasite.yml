@@ -43,6 +43,8 @@
     - ActionXenoLeap
     tier: 0
     hudOffset: -0.1,0.1
+    hudRankIconScale: 0.85
+    hudRankIconOffset: 0.06,0
     contributesToVictory: false
     countedInSlots: false
     unlockAt: 0
