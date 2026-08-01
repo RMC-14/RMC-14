@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/16/2026 11:52:55
-  entityCount: 38944
+  time: 06/17/2026 06:06:20
+  entityCount: 38946
 maps:
 - 1
 grids:
@@ -69567,7 +69567,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -55370.047
+      secondsUntilStateChange: -55401.207
       state: Opening
 - proto: CMAnestheticTank
   entities:
@@ -191723,6 +191723,15 @@ entities:
     - type: Transform
       pos: 29.5,-222.5
       parent: 1
+- proto: RMCVanWheel
+  entities:
+  - uid: 38946
+    components:
+    - type: Transform
+      pos: 25.5,-103.5
+      parent: 1
+    - type: HardpointIntegrity
+      integrity: 250
 - proto: RMCVendorCigsElectro
   entities:
   - uid: 20629
@@ -281302,6 +281311,13 @@ entities:
     components:
     - type: Transform
       pos: 36.5,-211.5
+      parent: 1
+- proto: VehicleVan
+  entities:
+  - uid: 38945
+    components:
+    - type: Transform
+      pos: 21,-103.5
       parent: 1
 - proto: WallXenoResin
   entities:

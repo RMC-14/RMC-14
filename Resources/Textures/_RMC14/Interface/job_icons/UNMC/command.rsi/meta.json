@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from https://github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi",
+  "size": {
+    "x": 16,
+    "y": 16
+  },
+    "states": [
+        {
+            "name": "hudsquad_co"
+        },
+        {
+            "name": "hudsquad_xo"
+        },
+        {
+            "name": "staff_officer"
+        }
+    ]
+}

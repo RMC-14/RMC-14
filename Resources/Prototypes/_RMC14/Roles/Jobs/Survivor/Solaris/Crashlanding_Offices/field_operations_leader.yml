@@ -12,7 +12,7 @@
   icon: RMCJobIconPMCCommander
   greeting: rmc-job-greeting-solaris-pmc-commander
   playTimeTracker: RMCJobSurvivorCO
-  spawnMenuRoleName: Survivor — PMC Field Operations Leader (Solaris Ridge special survivor)
+  spawnMenuRoleName: PMC Field Operations Leader (Solaris Special Survivor)
   special:
   - !type:AddComponentSpecial
     components:
@@ -97,5 +97,5 @@
   parent: CMJobIconBase
   id: RMCJobIconPMCCommander
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/We-Ya/pmc.rsi
     state: pmc_fol

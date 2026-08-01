@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 04/17/2026 20:01:42
-  entityCount: 92
+  time: 05/23/2026 14:25:00
+  entityCount: 95
 maps: []
 grids:
 - 1
@@ -350,13 +350,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 8.5,5.5
       parent: 1
-- proto: FoodBoxPizzaFilled
-  entities:
-  - uid: 42
-    components:
-    - type: Transform
-      pos: 0.6087403,0.59107876
-      parent: 1
+    - type: VentCrawlable
+      originalTravelDirection: Fourway
 - proto: RMCBarricadeWood
   entities:
   - uid: 19
@@ -517,6 +512,13 @@ entities:
     - type: Transform
       pos: 3.0681217,3.864185
       parent: 1
+- proto: RMCBoxPizzaGalaxyMargherita
+  entities:
+  - uid: 42
+    components:
+    - type: Transform
+      pos: 0.58018494,0.72690845
+      parent: 1
 - proto: RMCDirtBandageProp
   entities:
   - uid: 73
@@ -573,6 +575,14 @@ entities:
     - type: Transform
       pos: 0.30665708,0.7787092
       parent: 1
+- proto: RMCIdentificationComputer
+  entities:
+  - uid: 93
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 8.5,4.5
+      parent: 1
 - proto: RMCLightFixtureBlueOffset
   entities:
   - uid: 7
@@ -609,6 +619,18 @@ entities:
     components:
     - type: Transform
       pos: 5.224372,4.343685
+      parent: 1
+- proto: RMCPropCuppaJoeLid
+  entities:
+  - uid: 94
+    components:
+    - type: Transform
+      pos: 0.73206806,4.669508
+      parent: 1
+  - uid: 95
+    components:
+    - type: Transform
+      pos: 6.6954274,1.9219468
       parent: 1
 - proto: RMCRollerBedHospitalBlood
   entities:
