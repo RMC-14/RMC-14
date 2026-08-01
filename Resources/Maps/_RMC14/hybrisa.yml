@@ -101539,14 +101539,14 @@ entities:
   - uid: 4736
     components:
     - type: MetaData
-      name: LZ1 Landing Zone
+      name: 'LZ1: Emergency Medical Landing Zone'
     - type: Transform
       pos: -12.5,-17.5
       parent: 1
   - uid: 4737
     components:
     - type: MetaData
-      name: LZ2 Landing Zone
+      name: 'LZ2: Mining Landing Zone'
     - type: Transform
       pos: -15.5,-147.5
       parent: 1
