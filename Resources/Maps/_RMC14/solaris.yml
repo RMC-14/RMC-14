@@ -194962,8 +194962,7 @@ entities:
       pos: 102.5,-172.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 26797
@@ -194972,8 +194971,7 @@ entities:
       pos: 24.5,-94.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 26799
@@ -194982,8 +194980,7 @@ entities:
       pos: 167.5,-43.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 26801
@@ -194992,8 +194989,7 @@ entities:
       pos: 76.5,-139.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 26802
@@ -195002,8 +194998,7 @@ entities:
       pos: 76.5,-140.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 26803
@@ -195012,8 +195007,7 @@ entities:
       pos: 72.5,-140.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 26804
@@ -195022,8 +195016,7 @@ entities:
       pos: 76.5,-141.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 26805
@@ -195032,8 +195025,7 @@ entities:
       pos: 72.5,-141.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
 - proto: RMCGlowshroom

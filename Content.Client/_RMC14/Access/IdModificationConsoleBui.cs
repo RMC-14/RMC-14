@@ -1,10 +1,12 @@
 using System.Linq;
 using Content.Shared._RMC14.Marines.Access;
+using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.UserInterface;
 using Content.Shared.Access.Components;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
 using Robust.Shared.Containers;
+using Robust.Shared.Localization;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Access;
@@ -23,6 +25,9 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
     private readonly HashSet<IdModificationConsoleAccessButton> _accessButtons = [];
     private readonly HashSet<IdModificationConsoleAccessGroupButton> _accessGroupButtons = [];
     private string _currentAccessGroup = "";
+
+    private readonly Dictionary<ProtoId<TacticalMapLayerPrototype>, IdModificationConsoleAccessButton> _tacMapLayerButtons = new();
+    private readonly HashSet<ProtoId<TacticalMapLayerPrototype>> _currentTacMapLayers = new();
 
     private readonly HashSet<IdModificationConsoleAccessGroupButton> _jobGroupButtons = new();
     private readonly HashSet<IdModificationConsoleAccessButton> _jobButtons = new();
@@ -43,6 +48,16 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
         EntMan.TryGetComponent(target, out MetaDataComponent? metaData);
         EntMan.TryGetComponent(target, out IdCardComponent? targetCardComponent);
         EntMan.TryGetComponent(target, out AccessComponent? targetCardAccessComponent);
+        EntMan.TryGetComponent(target, out TacticalMapLayerAccessComponent? tacMapAccess);
+
+        _currentTacMapLayers.Clear();
+        if (tacMapAccess != null)
+        {
+            foreach (var layer in tacMapAccess.Layers)
+            {
+                _currentTacMapLayers.Add(layer);
+            }
+        }
 
         if (console.Authenticated)
             _window.SignInButton.Text = "Log Out";
@@ -90,6 +105,7 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
                     AccessGroupRefresh(console, targetCardAccessComponent);
                     AccessButtonRefresh(targetCardAccessComponent);
                     RefreshIFFButton(console);
+                    RefreshTacMapLayerButtons();
                     break;
                 case "Jobs":
                     _window.JobContainer.Visible = true;
@@ -205,6 +221,7 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
         };
 
         DisplayAccessGroups(console);
+        DisplayTacMapLayers(console);
 
         // Jobs
         var tab2 = new IdModificationConsoleTabButton();
@@ -281,6 +298,47 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
 
         _window.IFF.ModulateSelfOverride = Color.Green;
         _window.IFF.Text = "Grant IFF";
+    }
+
+    private void DisplayTacMapLayers(IdModificationConsoleComponent console)
+    {
+        if (_window is not { IsOpen: true })
+            return;
+
+        _window.TacMapLayers.RemoveAllChildren();
+        _tacMapLayerButtons.Clear();
+
+        foreach (var layer in console.TacticalMapLayers)
+        {
+            if (!_prototype.TryIndex(layer, out var layerPrototype))
+                continue;
+
+            var button = new IdModificationConsoleAccessButton();
+            button.AccessButton.HorizontalExpand = true;
+            button.AccessButton.SetHeight = 30;
+            button.AccessButton.Text = Loc.GetString(layerPrototype.Name);
+            button.AccessButton.OnPressed += _ =>
+            {
+                var revoke = _currentTacMapLayers.Contains(layer);
+                SendPredictedMessage(new IdModificationConsoleTacMapLayerChangeBuiMsg(layer, revoke));
+                Refresh();
+            };
+
+            _tacMapLayerButtons[layer] = button;
+            _window.TacMapLayers.AddChild(button);
+        }
+    }
+
+    private void RefreshTacMapLayerButtons()
+    {
+        if (_window is not { IsOpen: true })
+            return;
+
+        foreach (var (layer, button) in _tacMapLayerButtons)
+        {
+            var enabled = _currentTacMapLayers.Contains(layer);
+            button.AccessButton.ModulateSelfOverride = enabled ? Color.Green : null;
+        }
     }
 
     private void DisplayAccessGroups(IdModificationConsoleComponent console)

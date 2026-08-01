@@ -175,7 +175,8 @@
   id: VehicleAPCTracked
   suffix: Drivable, APC, Base, Tracked
   components:
-  - type: MarineMapTracked
+  - type: TacticalMapLayerTracked
+    layers: [Marines]
   - type: TacticalMapTracked
   - type: TacticalMapIcon
     icon:

@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Access;
 using Content.Shared.Roles;
@@ -57,6 +58,9 @@ public sealed partial class IdModificationConsoleComponent : Component
 
     [DataField] [AutoNetworkedField]
     public HashSet<ProtoId<JobPrototype>> DisallowSquadUnassignment = ["CMRifleman"];
+
+    [DataField] [AutoNetworkedField]
+    public List<ProtoId<TacticalMapLayerPrototype>> TacticalMapLayers = new();
 }
 
 [Serializable] [NetSerializable]

@@ -58,6 +58,8 @@
       supplyDrop: false
       weatherEnabled: false
       alwaysPowered: true
+      excludeFromTacMapBounds: true
+      excludeFromTacMapRender: true
 
 - type: entity
   parent: RMCAreaCorsat
@@ -1268,3 +1270,5 @@
       weatherEnabled: false
       noTunnel: true
       alwaysPowered: true
+      excludeFromTacMapBounds: true
+      excludeFromTacMapRender: true

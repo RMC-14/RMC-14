@@ -8,6 +8,8 @@
     avoidBioscan: false
     noTunnel: true
     unweedable: false
+    excludeFromTacMapBounds: true
+    excludeFromTacMapRender: true
 
 - type: entity
   parent: RMCAreaBase

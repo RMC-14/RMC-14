@@ -66,7 +66,8 @@
   - type: RMCAlternateSprite
     normalSprite: _RMC14/Structures/Xenos/hive_structures.rsi
     alternateSprite: _RMC14/Structures/Xenos/hive_structures_old.rsi
-  - type: XenoStructureMapTracked
+  - type: TacticalMapLayerTracked
+    layers: [Xenos]
   - type: TacticalMapTracked
   - type: TacticalMapIcon
     icon:

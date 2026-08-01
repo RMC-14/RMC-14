@@ -1,0 +1,35 @@
+<local:TacticalMapOverlayLegendPopup
+    xmlns="https://spacestation14.io"
+    xmlns:local="clr-namespace:Content.Client._RMC14.TacticalMap.UI"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
+    <PanelContainer Name="Background">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat />
+        </PanelContainer.PanelOverride>
+        <BoxContainer Orientation="Vertical" Margin="4 4 4 4" SeparationOverride="4">
+            <Label Text="{Loc ui-tactical-map-overlay-legend-title}" StyleClasses="LabelSmall" FontColorOverride="White" />
+            <BoxContainer Orientation="Vertical" SeparationOverride="3">
+                <BoxContainer Orientation="Horizontal" SeparationOverride="6">
+                    <TextureRect Name="Roof0Icon" MinSize="18 18" MaxSize="18 18" Stretch="KeepAspectCentered" />
+                    <Label Text="{Loc ui-tactical-map-overlay-roof0-desc}" StyleClasses="LabelSmall" FontColorOverride="#E5E5E5" />
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal" SeparationOverride="6">
+                    <TextureRect Name="Roof1Icon" MinSize="18 18" MaxSize="18 18" Stretch="KeepAspectCentered" />
+                    <Label Text="{Loc ui-tactical-map-overlay-roof1-desc}" StyleClasses="LabelSmall" FontColorOverride="#E5E5E5" />
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal" SeparationOverride="6">
+                    <TextureRect Name="Roof2Icon" MinSize="18 18" MaxSize="18 18" Stretch="KeepAspectCentered" />
+                    <Label Text="{Loc ui-tactical-map-overlay-roof2-desc}" StyleClasses="LabelSmall" FontColorOverride="#E5E5E5" />
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal" SeparationOverride="6">
+                    <TextureRect Name="Roof3Icon" MinSize="18 18" MaxSize="18 18" Stretch="KeepAspectCentered" />
+                    <Label Text="{Loc ui-tactical-map-overlay-roof3-desc}" StyleClasses="LabelSmall" FontColorOverride="#E5E5E5" />
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal" SeparationOverride="6">
+                    <TextureRect Name="Roof4Icon" MinSize="18 18" MaxSize="18 18" Stretch="KeepAspectCentered" />
+                    <Label Text="{Loc ui-tactical-map-overlay-roof4-desc}" StyleClasses="LabelSmall" FontColorOverride="#E5E5E5" />
+                </BoxContainer>
+            </BoxContainer>
+        </BoxContainer>
+    </PanelContainer>
+</local:TacticalMapOverlayLegendPopup>

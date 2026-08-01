@@ -29,6 +29,7 @@
     canGiveMedals: true
     canInitiateEvac: true
   - type: TacticalMapComputer
+    allowedSquadGroups: [UNMC]
   - type: MarineControlComputer
     canPrintCommendations: false
   - type: Tag

@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Areas;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(AreaSystem))]
+[Access(typeof(AreaSystem), typeof(SharedAreaLookupSystem))]
 public sealed partial class AreaComponent : Component
 {
     [DataField("CAS"), AutoNetworkedField]
@@ -77,17 +77,23 @@ public sealed partial class AreaComponent : Component
     public Color MinimapColor;
 
     [DataField, AutoNetworkedField]
+    public bool ExcludeFromTacMapBounds;
+
+    [DataField, AutoNetworkedField]
+    public bool ExcludeFromTacMapRender;
+
+    [DataField, AutoNetworkedField]
     public int ZLevel;
 
     [DataField, AutoNetworkedField]
     public bool LandingZone;
 
     [DataField, AutoNetworkedField]
-    [Access(typeof(AreaSystem), typeof(WeedKillerSystem))]
+    [Access(typeof(AreaSystem), typeof(WeedKillerSystem), typeof(SharedAreaLookupSystem))]
     public string? LinkedLz;
 
     [DataField, AutoNetworkedField]
-    [Access(typeof(AreaSystem), typeof(WeedKillerSystem))]
+    [Access(typeof(AreaSystem), typeof(WeedKillerSystem), typeof(SharedAreaLookupSystem))]
     public bool WeedKilling;
 
     [DataField, AutoNetworkedField]

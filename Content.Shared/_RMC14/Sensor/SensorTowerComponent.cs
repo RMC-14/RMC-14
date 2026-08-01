@@ -1,4 +1,6 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.TacticalMap;
+using System.Collections.Generic;
 using Content.Shared.Tools;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -8,7 +10,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Shared._RMC14.Sensor;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-[Access(typeof(SensorTowerSystem))]
+[Access(typeof(SensorTowerSystem), typeof(SharedTacticalMapSystem))]
 public sealed partial class SensorTowerComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -52,6 +54,19 @@ public sealed partial class SensorTowerComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan DestroyDelay = TimeSpan.FromSeconds(4);
+
+    [DataField, AutoNetworkedField]
+    public List<ProtoId<TacticalMapLayerPrototype>> RevealForLayers = new();
+
+    [DataField, AutoNetworkedField]
+    public List<ProtoId<TacticalMapLayerPrototype>> RevealLayers = new();
+
+    /// <summary>
+    /// If > 0, only blips within this tacmap tile radius are revealed.
+    /// A value of 0 keeps the current global layer reveal behavior.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float RevealRange;
 }
 
 [Serializable, NetSerializable]

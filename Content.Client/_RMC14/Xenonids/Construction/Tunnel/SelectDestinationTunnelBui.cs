@@ -9,6 +9,7 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Utility;
 using static Robust.Client.UserInterface.Control;
+using Content.Client._RMC14.TacticalMap.UI;
 
 namespace Content.Client._RMC14.Xenonids.Construction.Tunnel;
 
@@ -35,7 +36,7 @@ public struct TunnelCacheEntry
     public Vector2i Position;
     public string Name;
     public NetEntity Entity;
-    public int EntityId;
+    public NetEntity EntityId;
 }
 
 [UsedImplicitly]
@@ -46,12 +47,12 @@ public sealed class SelectDestinationTunnelBui : BoundUserInterface
     private SelectDestinationTunnelWindow? _window;
     private NetEntity? _selectedTunnel;
     private Dictionary<string, NetEntity> _availableTunnels = new();
-    private int? _currentTunnelNetEntityKey;
+    private NetEntity? _currentTunnelNetEntityKey;
     private bool _showOnlyTunnels = true;
     private TunnelPathfindingConfig _pathfindingConfig = TunnelPathfindingConfig.Default;
 
-    private readonly Dictionary<int, TunnelCacheEntry> _tunnelCache = new();
-    private readonly Dictionary<Vector2i, int> _positionToEntityCache = new();
+    private readonly Dictionary<NetEntity, TunnelCacheEntry> _tunnelCache = new();
+    private readonly Dictionary<Vector2i, NetEntity> _positionToEntityCache = new();
     private readonly Dictionary<(Vector2i, Vector2i), double> _distanceCache = new();
     private readonly Dictionary<(Vector2i, Vector2i), List<Vector2i>> _pathCache = new();
     private readonly List<TacticalMapBlip> _reusableBlipsList = new();
@@ -122,7 +123,7 @@ public sealed class SelectDestinationTunnelBui : BoundUserInterface
             if (EntMan.GetEntity(tunnel.Value) == Owner)
             {
                 currentTunnelName = tunnel.Key;
-                _currentTunnelNetEntityKey = (int)tunnel.Value;
+                _currentTunnelNetEntityKey = tunnel.Value;
                 continue;
             }
 
@@ -157,8 +158,7 @@ public sealed class SelectDestinationTunnelBui : BoundUserInterface
 
     private string? GetTunnelNameCached(NetEntity tunnel)
     {
-        var entityId = (int)tunnel;
-        return _tunnelCache.TryGetValue(entityId, out var cached)
+        return _tunnelCache.TryGetValue(tunnel, out var cached)
             ? cached.Name
             : GetTunnelName(tunnel);
     }
@@ -194,34 +194,21 @@ public sealed class SelectDestinationTunnelBui : BoundUserInterface
         _tunnelCache.Clear();
         _positionToEntityCache.Clear();
 
-        var blipCollections = new[]
+        foreach (var (entityId, blip) in user.Blips)
         {
-            user.XenoStructureBlips,
-            user.XenoBlips,
-            user.MarineBlips
-        };
-
-        foreach (var blipCollection in blipCollections)
-        {
-            foreach (var kvp in blipCollection)
+            var tunnelName = GetTunnelNameByEntityId(entityId);
+            if (tunnelName != null && _availableTunnels.ContainsKey(tunnelName))
             {
-                var entityId = kvp.Key;
-                var blip = kvp.Value;
-
-                var tunnelName = GetTunnelNameByEntityId(entityId);
-                if (tunnelName != null && _availableTunnels.ContainsKey(tunnelName))
+                var cacheEntry = new TunnelCacheEntry
                 {
-                    var cacheEntry = new TunnelCacheEntry
-                    {
-                        Position = blip.Indices,
-                        Name = tunnelName,
-                        Entity = _availableTunnels[tunnelName],
-                        EntityId = entityId
-                    };
+                    Position = blip.Indices,
+                    Name = tunnelName,
+                    Entity = _availableTunnels[tunnelName],
+                    EntityId = entityId
+                };
 
-                    _tunnelCache[entityId] = cacheEntry;
-                    _positionToEntityCache[blip.Indices] = entityId;
-                }
+                _tunnelCache[entityId] = cacheEntry;
+                _positionToEntityCache[blip.Indices] = entityId;
             }
         }
 
@@ -242,7 +229,7 @@ public sealed class SelectDestinationTunnelBui : BoundUserInterface
         _reusableBlipsList.Clear();
 
         var (currentTunnelPosition, selectedTunnelPosition) = ProcessBlipCollections(user,
-            _selectedTunnel != null ? (int)_selectedTunnel.Value : null,
+            _selectedTunnel,
             _reusableBlipsList);
 
         _window.TacticalMapWrapper.UpdateBlips(_reusableBlipsList.ToArray());
@@ -255,14 +242,14 @@ public sealed class SelectDestinationTunnelBui : BoundUserInterface
         }
     }
 
-    private void GetTunnelEntityIds(int? selectedTunnelKey, HashSet<int> output)
+    private void GetTunnelEntityIds(NetEntity? selectedTunnelKey, HashSet<NetEntity> output)
     {
         if (_currentTunnelNetEntityKey.HasValue)
             output.Add(_currentTunnelNetEntityKey.Value);
 
         foreach (var netTunnel in _availableTunnels.Values)
         {
-            output.Add((int)netTunnel);
+            output.Add(netTunnel);
         }
 
         if (selectedTunnelKey.HasValue)
@@ -270,40 +257,30 @@ public sealed class SelectDestinationTunnelBui : BoundUserInterface
     }
 
     private (Vector2i? currentPos, Vector2i? selectedPos) ProcessBlipCollections(TacticalMapUserComponent user,
-        int? selectedTunnelKey,
+        NetEntity? selectedTunnelKey,
         List<TacticalMapBlip> blipsList)
     {
         Vector2i? currentTunnelPosition = null;
         Vector2i? selectedTunnelPosition = null;
 
-        var tunnelEntityIds = new HashSet<int>(_availableTunnels.Values.Select(t => (int)t));
+        var tunnelEntityIds = new HashSet<NetEntity>(_availableTunnels.Values);
         if (_currentTunnelNetEntityKey.HasValue)
             tunnelEntityIds.Add(_currentTunnelNetEntityKey.Value);
         if (selectedTunnelKey.HasValue)
             tunnelEntityIds.Add(selectedTunnelKey.Value);
 
-        var blipCollections = new[]
+        foreach (var (entityId, blip) in user.Blips)
         {
-            user.XenoStructureBlips,
-            user.XenoBlips,
-            user.MarineBlips
-        };
+            if (_showOnlyTunnels && !tunnelEntityIds.Contains(entityId))
+                continue;
 
-        foreach (var blips in blipCollections)
-        {
-            foreach (var (entityId, blip) in blips)
-            {
-                if (_showOnlyTunnels && !tunnelEntityIds.Contains(entityId))
-                    continue;
+            blipsList.Add(HighlightBlip(blip, entityId, selectedTunnelKey));
 
-                blipsList.Add(HighlightBlip(blip, entityId, selectedTunnelKey));
+            if (_currentTunnelNetEntityKey == entityId && currentTunnelPosition == null)
+                currentTunnelPosition = blip.Indices;
 
-                if (_currentTunnelNetEntityKey == entityId && currentTunnelPosition == null)
-                    currentTunnelPosition = blip.Indices;
-
-                if (selectedTunnelKey == entityId && selectedTunnelPosition == null)
-                    selectedTunnelPosition = blip.Indices;
-            }
+            if (selectedTunnelKey == entityId && selectedTunnelPosition == null)
+                selectedTunnelPosition = blip.Indices;
         }
 
         return (currentTunnelPosition, selectedTunnelPosition);
@@ -447,14 +424,14 @@ public sealed class SelectDestinationTunnelBui : BoundUserInterface
         return result;
     }
 
-    private string? GetTunnelNameByEntityId(int entityId)
+    private string? GetTunnelNameByEntityId(NetEntity entityId)
     {
         if (_tunnelCache.TryGetValue(entityId, out var cached))
             return cached.Name;
 
         foreach (var kvp in _availableTunnels)
         {
-            if ((int)kvp.Value == entityId)
+            if (kvp.Value == entityId)
                 return kvp.Key;
         }
         return null;
@@ -475,7 +452,7 @@ public sealed class SelectDestinationTunnelBui : BoundUserInterface
         }
     }
 
-    private TacticalMapBlip HighlightBlip(TacticalMapBlip blip, int entityId, int? selectedTunnelKey)
+    private TacticalMapBlip HighlightBlip(TacticalMapBlip blip, NetEntity entityId, NetEntity? selectedTunnelKey)
     {
         if (_currentTunnelNetEntityKey.HasValue && entityId == _currentTunnelNetEntityKey.Value)
         {
@@ -556,21 +533,9 @@ public sealed class SelectDestinationTunnelBui : BoundUserInterface
         _window.TacticalMapWrapper.Canvas.ShowTunnelInfo(clickedIndices, tunnelName, screenPos);
     }
 
-    private int? FindEntityIdAtIndices(Vector2i indices, TacticalMapUserComponent user)
+    private NetEntity? FindEntityIdAtIndices(Vector2i indices, TacticalMapUserComponent user)
     {
-        foreach (var kvp in user.XenoStructureBlips)
-        {
-            if (kvp.Value.Indices == indices)
-                return kvp.Key;
-        }
-
-        foreach (var kvp in user.XenoBlips)
-        {
-            if (kvp.Value.Indices == indices)
-                return kvp.Key;
-        }
-
-        foreach (var kvp in user.MarineBlips)
+        foreach (var kvp in user.Blips)
         {
             if (kvp.Value.Indices == indices)
                 return kvp.Key;
@@ -598,8 +563,7 @@ public sealed class SelectDestinationTunnelBui : BoundUserInterface
         _window.SetBlipUpdateCallback(() => UpdateBlips());
 
         var wrapper = _window.TacticalMapWrapper;
-        TabContainer.SetTabVisible(wrapper.CanvasTab, false);
-        wrapper.Tabs.CurrentTab = 0;
+        wrapper.SetCanvasAccess(false);
 
         wrapper.Map.MouseFilter = MouseFilterMode.Stop;
         wrapper.Canvas.MouseFilter = MouseFilterMode.Stop;

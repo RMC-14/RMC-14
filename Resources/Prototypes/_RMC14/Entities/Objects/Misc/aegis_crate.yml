@@ -26,8 +26,8 @@
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: aegiscrate
     - type: TacticalMapTracked
-    - type: XenoMapTracked
-    - type: MarineMapTracked
+    - type: TacticalMapLayerTracked
+      layers: [Marines, Xenos]
     - type: InteractionOutline
     - type: Clickable
     - type: Physics

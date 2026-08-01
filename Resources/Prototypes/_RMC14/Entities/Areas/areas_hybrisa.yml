@@ -68,6 +68,8 @@
     minimapColor: '#3A3A3AFF'
     weatherEnabled: false
     alwaysPowered: true
+    excludeFromTacMapBounds: true
+    excludeFromTacMapRender: true
 
 - type: entity
   parent: RMCAreaLv759
@@ -92,6 +94,8 @@
     unweedable: false
     minimapColor: '#3A3A3AFF'
     weatherEnabled: false
+    excludeFromTacMapBounds: true
+    excludeFromTacMapRender: true
 
 - type: entity
   parent: RMCAreaLv759Bunker
