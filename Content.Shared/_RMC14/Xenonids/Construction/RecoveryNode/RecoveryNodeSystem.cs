@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Heal;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -26,6 +27,7 @@ public sealed partial class RecoveryNodeSystem : EntitySystem
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
 
+    private EntityQuery<XenoAttachedOvipositorComponent> _attachedOviQuery;
     private EntityQuery<DamageableComponent> _damageableQuery;
     private EntityQuery<XenoPlasmaComponent> _plasmaQuery;
     private EntityQuery<XenoRestingComponent> _restingQuery;
@@ -38,6 +40,7 @@ public sealed partial class RecoveryNodeSystem : EntitySystem
     {
         base.Initialize();
 
+        _attachedOviQuery = GetEntityQuery<XenoAttachedOvipositorComponent>();
         _damageableQuery = GetEntityQuery<DamageableComponent>();
         _plasmaQuery = GetEntityQuery<XenoPlasmaComponent>();
         _restingQuery = GetEntityQuery<XenoRestingComponent>();
@@ -72,7 +75,7 @@ public sealed partial class RecoveryNodeSystem : EntitySystem
         foreach (var nearbyEntity in _nearbyEntities)
         {
             if (!_xenoQuery.HasComp(nearbyEntity) ||
-                !_restingQuery.HasComp(nearbyEntity) ||
+                !(_restingQuery.HasComp(nearbyEntity) || _attachedOviQuery.HasComp(nearbyEntity)) ||
                 _mob.IsDead(nearbyEntity) ||
                 !_hive.FromSameHive(recoveryNode.Owner, nearbyEntity))
             {

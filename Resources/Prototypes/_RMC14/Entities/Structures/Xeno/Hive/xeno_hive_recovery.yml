@@ -83,6 +83,7 @@
     state: recovery_plasma
   - type: RecoveryNode
     recoveryType: Plasma
+    recoveryEffect: RMCEffectHealPlasma
     recoveryAmount: 75
   - type: HiveConstructionLimited
     id: HivePlasmaTreeXeno
