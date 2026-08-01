@@ -7,7 +7,7 @@
     generation: RMCSynthGenOne
     damageModifier: RMCSynthGenOne
     priority: 1
-    description: A simple but sturdy synthetic that trades some agility for durability.
+    description: Slow and sturdy. Pounce resisting.
   - type: Skills
     skills:
       RMCSkillCqc: 3
@@ -52,7 +52,7 @@
     generation: RMCSynthGenTwo
     damageModifier: RMCSynthGenTwo
     priority: 2
-    description: Visually improved but mechanically similar to Generation One.
+    description: A better looking Gen 1.
   - type: Skills
     skills:
       RMCSkillCqc: 3
@@ -96,7 +96,7 @@
   - type: SynthGeneration
     generation: RMCSynthGenThree
     priority: 3
-    description: Sacrifices some durability for improved agility and support capabilities.
+    description: Better skills, agile but fragile.
   - type: Skills
     skills:
       RMCSkillCqc: 5
@@ -135,7 +135,7 @@
   - type: SynthGeneration
     generation: RMCSynthWhiteout
     priority: 3
-    description: Classified initiative. Full combat systems maximising lethality.
+    description: Generation Grill.
   - type: Skills
     skills:
         RMCSkillCqc: 5
