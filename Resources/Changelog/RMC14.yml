@@ -1,36 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed PMC and Paramarine survivors not spawning with their squad.
-    type: Fix
-  id: 3049
-  time: '2026-04-02T05:04:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9450
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed the engi PMC armor having the incorrect stats. It now has fire
-      resistance and 20 melee protection as intended.
-    type: Fix
-  id: 3050
-  time: '2026-04-02T05:05:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9437
-- author: keegaroo65
-  changes:
-  - message: Fixed pheromones not relaying instantly to newly selected Xeno leaders
-    type: Fix
-  id: 3051
-  time: '2026-04-02T05:06:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9447
-- author: Arykh
-  changes:
-  - message: The HEFA helmet now acts like a HEFA grenade!
-    type: Add
-  - message: Added the ability to prime the HEFA sword so it detonates on hitting
-      a mob! This will destroy the sword.
-    type: Add
-  id: 3052
-  time: '2026-04-02T09:08:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8985
 - author: kleinerstation13
   changes:
   - message: RCM Paramarines Commander now has big text
@@ -4573,5 +4541,36 @@
   id: 3548
   time: '2026-08-01T00:10:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10564
+- author: Vermidia
+  changes:
+  - message: Fixed healer drone not being able to fill acid traps.
+    type: Fix
+  id: 3549
+  time: '2026-08-01T02:16:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10514
+- author: Vermidia
+  changes:
+  - message: Fixed pylon or core protection area info not properly stating it blocks
+      medevacs/paradropping.
+    type: Fix
+  id: 3550
+  time: '2026-08-01T02:16:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10528
+- author: Ian321
+  changes:
+  - message: Living synthetics on the warship no longer prevent the round from ending.
+    type: Fix
+  id: 3551
+  time: '2026-08-01T02:16:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10419
+- author: Vermidia
+  changes:
+  - message: Plasma Trees now check for if a xeno is resting or ovi for giving plasma.
+    type: Tweak
+  - message: Plasma Tree doafter now uses the transfer plasma action's effects.
+    type: Tweak
+  id: 3552
+  time: '2026-08-01T02:16:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10273
 Name: RMC14
 Order: -1
