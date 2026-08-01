@@ -7,6 +7,7 @@ using Content.Server.Body.Components;
 using Content.Server.GameTicking.Events;
 using Content.Server.Roles.Jobs;
 using Content.Server.Warps;
+using Content.Shared._RMC14.Cryostorage;
 using Content.Shared._RMC14.Ghost;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Squads;
@@ -16,6 +17,7 @@ using Content.Shared._RMC14.Survivor;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared.Bed.Cryostorage;
 using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.Follower;
@@ -64,6 +66,7 @@ public sealed class RMCGhostTargetSystem : EntitySystem
     private static readonly LocId EscapedTitle = "rmc-ghost-target-window-group-escaped";
     private static readonly LocId OthersTitle = "rmc-ghost-target-window-group-others";
     private static readonly LocId DeadsTitle = "rmc-ghost-target-window-group-deads";
+    private static readonly LocId CryoTitle = "rmc-ghost-target-window-group-cryo";
     private static readonly LocId GhostsTitle = "rmc-ghost-target-window-group-ghosts";
     private static readonly LocId WarpPointsTitle = "rmc-ghost-target-window-group-warp-points";
 
@@ -132,6 +135,8 @@ public sealed class RMCGhostTargetSystem : EntitySystem
         SubscribeLocalEvent<SquadMemberAddedEvent>(OnSquadMemberAdded);
         SubscribeLocalEvent<SquadMemberRemovedEvent>(OnSquadMemberRemoved);
         SubscribeLocalEvent<RMCGhostTargetTrackedComponent, SquadMemberUpdatedEvent>(OnSquadMemberUpdated);
+        SubscribeLocalEvent<RMCGhostTargetTrackedComponent, EnteredCryostorageEvent>(OnEnteredCryostorage);
+        SubscribeLocalEvent<RMCGhostTargetTrackedComponent, LeftCryostorageEvent>(OnLeftCryostorage);
 
         SubscribeLocalEvent<TacticalMapIconComponent, TacticalMapIconChangedEvent>(OnTacticalIconChanged);
 
@@ -523,6 +528,20 @@ public sealed class RMCGhostTargetSystem : EntitySystem
     private void OnSquadMemberUpdated(
         Entity<RMCGhostTargetTrackedComponent> ent,
         ref SquadMemberUpdatedEvent args)
+    {
+        RefreshTarget(ent);
+    }
+
+    private void OnEnteredCryostorage(
+        Entity<RMCGhostTargetTrackedComponent> ent,
+        ref EnteredCryostorageEvent args)
+    {
+        RefreshTarget(ent);
+    }
+
+    private void OnLeftCryostorage(
+        Entity<RMCGhostTargetTrackedComponent> ent,
+        ref LeftCryostorageEvent args)
     {
         RefreshTarget(ent);
     }
@@ -1044,6 +1063,12 @@ public sealed class RMCGhostTargetSystem : EntitySystem
             return;
         }
 
+        if (IsStoredInCryostorage(uid))
+        {
+            AddMembership(target, RMCGhostTargetSectionKind.Cryo);
+            return;
+        }
+
         var isInfected = HasComp<VictimInfectedComponent>(uid);
         var isSurvivor = HasComp<RMCSurvivorComponent>(uid);
         var isEscaped = IsEscaped(uid, store.DistressEndgame);
@@ -1266,6 +1291,14 @@ public sealed class RMCGhostTargetSystem : EntitySystem
             : null;
     }
 
+    private bool IsStoredInCryostorage(EntityUid uid)
+    {
+        return TryComp(uid, out CryostorageContainedComponent? contained) &&
+               contained.Cryostorage is { } cryostorage &&
+               TryComp(cryostorage, out CryostorageComponent? storage) &&
+               storage.StoredPlayers.Contains(uid);
+    }
+
     private bool IsDistressEndgame()
     {
         var query = EntityQueryEnumerator<ActiveGameRuleComponent, CMDistressSignalRuleComponent>();
@@ -1344,6 +1377,7 @@ public sealed class RMCGhostTargetSystem : EntitySystem
 
         AddRootSection(store, RMCGhostTargetSectionKind.Others, OthersTitle);
         AddRootSection(store, RMCGhostTargetSectionKind.Dead, DeadsTitle, isExpandedByDefault: false);
+        AddRootSection(store, RMCGhostTargetSectionKind.Cryo, CryoTitle, isExpandedByDefault: false);
         AddRootSection(store, RMCGhostTargetSectionKind.WarpPoints, WarpPointsTitle, isExpandedByDefault: false);
         AddRootSection(store, RMCGhostTargetSectionKind.Ghosts, GhostsTitle, isExpandedByDefault: false);
 

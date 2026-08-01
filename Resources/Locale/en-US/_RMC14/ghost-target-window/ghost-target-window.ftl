@@ -14,5 +14,6 @@ rmc-ghost-target-window-group-survivors = Survivors
 rmc-ghost-target-window-group-escaped = Escaped
 rmc-ghost-target-window-group-others = Others
 rmc-ghost-target-window-group-deads = Deads
+rmc-ghost-target-window-group-cryo = Cryo
 rmc-ghost-target-window-group-warp-points = Warp-points
 rmc-ghost-target-window-group-ghosts = Ghosts

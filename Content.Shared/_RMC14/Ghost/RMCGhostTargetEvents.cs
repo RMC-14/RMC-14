@@ -165,6 +165,7 @@ public enum RMCGhostTargetSectionKind : byte
     WarpPoints,
     Ghosts,
     Squad,
+    Cryo,
 }
 
 [Flags]

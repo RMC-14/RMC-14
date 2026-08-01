@@ -254,6 +254,7 @@ public sealed partial class RMCGhostTargetWindow : DefaultWindow
         {
             RMCGhostTargetSectionKind.Others or
             RMCGhostTargetSectionKind.Dead or
+            RMCGhostTargetSectionKind.Cryo or
             RMCGhostTargetSectionKind.WarpPoints or
             RMCGhostTargetSectionKind.Ghosts => false,
             _ => true,
