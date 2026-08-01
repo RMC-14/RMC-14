@@ -13,9 +13,9 @@ public sealed partial class XenoRankNamesComponent : Component
         {3, "rmc-xeno-elder"},
         {4, "rmc-xeno-ancient"},
         {5, "rmc-xeno-prime"},
-        {6, "rmc-xeno-prime"},
-        {7, "rmc-xeno-prime"},
-        {8, "rmc-xeno-prime"},
-        {9, "rmc-xeno-prime"},
+        {6, "rmc-xeno-apex"},
+        {7, "rmc-xeno-apex"},
+        {8, "rmc-xeno-apex"},
+        {9, "rmc-xeno-apex"},
     };
 }
