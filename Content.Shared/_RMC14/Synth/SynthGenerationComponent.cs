@@ -11,7 +11,7 @@ public sealed partial class SynthGenerationComponent : Component
     /// I.E. 1st generation, 3rd generation.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public EntProtoId<SynthGenerationComponent>? Generation;
+    public EntProtoId? Generation;
 
     [DataField, AutoNetworkedField]
     public EntProtoId GenerationAction = "ActionChooseGen";
