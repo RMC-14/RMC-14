@@ -4,6 +4,8 @@ rmc-ui-options-cassettes-volume = Cassette volume:
 rmc-ui-options-hijack-song-volume = Hijack song volume:
 rmc-ui-options-xeno-ability-previews = Show xeno ability previews
 rmc-ui-options-marine-equipment-previews = Show marine equipment previews
+rmc-ui-options-tacmap-xeno-click-watch = Tactical map: watch a xeno by clicking their blip
+rmc-ui-options-tacmap-ghost-click-teleport = Tactical map: teleport as a ghost by clicking the map
 
 rmc-ui-voicelines = Voicelines
 rmc-ui-options-tab-voicelines = Voicelines
