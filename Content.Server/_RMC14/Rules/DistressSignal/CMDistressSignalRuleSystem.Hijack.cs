@@ -81,6 +81,8 @@ public sealed partial class CMDistressSignalRuleSystem
                 if (comp.CountedInSlots)
                     larva++;
 
+                RemComp<CanBeLarvaQueuedComponent>(xeno);
+
                 //Ghost player and send message
                 if (TryComp(xeno, out ActorComponent? actor))
                 {
