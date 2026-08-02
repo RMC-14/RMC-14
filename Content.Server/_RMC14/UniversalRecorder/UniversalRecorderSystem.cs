@@ -1,9 +1,11 @@
 using System.Text;
+using Content.Server._RMC14.Language.Systems;
 using Content.Server.Atmos;
-using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Server.Speech;
 using Content.Server.Speech.Components;
+using Content.Shared._RMC14.Language.Prototypes;
+using Content.Shared._RMC14.Language.Systems;
 using Content.Shared._RMC14.UniversalRecorder;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Atmos;
@@ -25,7 +27,6 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
-using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -42,11 +43,11 @@ public sealed class UniversalRecorderSystem : EntitySystem
 
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedItemSystem _item = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private readonly LanguageSystem _language = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly PaperSystem _paper = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -176,7 +177,7 @@ public sealed class UniversalRecorderSystem : EntitySystem
 
             var usedPercent = ent.Comp.MaxCapacity == TimeSpan.Zero
                 ? 0
-                : (int) MathF.Floor((float) (tapeRuntime.UsedCapacity.TotalSeconds / ent.Comp.MaxCapacity.TotalSeconds * 100f));
+                : (int)MathF.Floor((float)(tapeRuntime.UsedCapacity.TotalSeconds / ent.Comp.MaxCapacity.TotalSeconds * 100f));
 
             var key = usedPercent switch
             {
@@ -494,7 +495,7 @@ public sealed class UniversalRecorderSystem : EntitySystem
         args.Handled = _tool.UseTool(args.Used,
             args.User,
             ent.Owner,
-            (float) ent.Comp.RespoolTime.TotalSeconds,
+            (float)ent.Comp.RespoolTime.TotalSeconds,
             ent.Comp.ScrewdriverQuality,
             new UniversalRecorderTapeRespoolDoAfterEvent());
     }
@@ -515,6 +516,10 @@ public sealed class UniversalRecorderSystem : EntitySystem
     {
         var runtime = GetRecorderRuntime(ent);
         if (runtime.State != UniversalRecorderState.Recording)
+            return;
+
+        var (language, languagePrototype) = ResolveLanguage(args.Language);
+        if (!languagePrototype.NeedsSpeech)
             return;
 
         if (!TryGetTape(ent, out var tape))
@@ -553,7 +558,8 @@ public sealed class UniversalRecorderSystem : EntitySystem
             args.Message,
             speech.FontId,
             speech.FontSize,
-            speech.Bold));
+            speech.Bold,
+            language));
         tapeRuntime.UsedCapacity = currentDuration;
     }
 
@@ -770,7 +776,7 @@ public sealed class UniversalRecorderSystem : EntitySystem
             runtime.WarningSent = true;
             SendRecorderNotice(ent,
                 Loc.GetString("rmc-universal-recorder-popup-warning",
-                    ("seconds", Math.Max(0, (int) remaining.TotalSeconds))));
+                    ("seconds", Math.Max(0, (int)remaining.TotalSeconds))));
         }
 
         if (used < tape.Comp.MaxCapacity)
@@ -833,7 +839,7 @@ public sealed class UniversalRecorderSystem : EntitySystem
         var delta = nextEntry.Timestamp - currentEntry.Timestamp;
         if (delta > ent.Comp1.PlaybackSilenceThreshold)
         {
-            runtime.PendingSilenceSeconds = Math.Max(1, (int) Math.Round(delta.TotalSeconds));
+            runtime.PendingSilenceSeconds = Math.Max(1, (int)Math.Round(delta.TotalSeconds));
             runtime.NextPlaybackAt = _timing.CurTime + TimeSpan.FromSeconds(1);
             return;
         }
@@ -887,7 +893,19 @@ public sealed class UniversalRecorderSystem : EntitySystem
             if (text.Length >= paperComp.ContentSize)
                 break;
 
-            var line = FormatTranscriptLine(entry.Timestamp, entry.SpeakerName, entry.SpeechVerb, entry.Text);
+            var (language, languagePrototype) = ResolveLanguage(entry.Language);
+            var entryText = _language.ObfuscateMessageForListener(user, entry.Text, language);
+            var languageIndicator = languagePrototype.ShowLanguageName
+                ? Loc.GetString(
+                    "rmc-universal-recorder-transcript-language",
+                    ("language", languagePrototype.LocalizedName))
+                : null;
+            var line = FormatTranscriptLine(
+                entry.Timestamp,
+                entry.SpeakerName,
+                entry.SpeechVerb,
+                entryText,
+                languageIndicator);
             AppendLineLimited(text, FormattedMessage.EscapeText(line), paperComp.ContentSize);
         }
 
@@ -983,26 +1001,32 @@ public sealed class UniversalRecorderSystem : EntitySystem
 
     private void SendPlaybackSpeech(Entity<UniversalRecorderComponent> ent, RecorderEntry entry)
     {
-        var wrapped = Loc.GetString(
+        var (language, languagePrototype) = ResolveLanguage(entry.Language);
+        var languageIcon = languagePrototype.DisplayedLanguageIcon;
+        var languageIndicator = languagePrototype.ShowLanguageName && string.IsNullOrEmpty(languageIcon)
+            ? $" ({languagePrototype.LocalizedName})"
+            : string.Empty;
+        var fontId = languagePrototype.TypefaceId ?? entry.FontId;
+        var fontSize = languagePrototype.TextSize ?? entry.FontSize;
+        var wrappedMessageTemplate = Loc.GetString(
             entry.Bold ? "chat-manager-entity-say-bold-wrap-message" : "chat-manager-entity-say-wrap-message",
-            ("entityName", FormattedMessage.EscapeText(entry.SpeakerName)),
+            ("entityName", "{1}" + languageIndicator),
             ("verb", entry.SpeechVerb),
-            ("fontType", entry.FontId),
-            ("fontSize", entry.FontSize),
-            ("message", FormattedMessage.EscapeText(entry.Text)));
+            ("fontType", fontId),
+            ("fontSize", fontSize),
+            ("message", "{0}"));
 
-        var filter = Filter.Pvs(ent.Owner, entityManager: EntityManager);
-        filter.RemoveWhereAttachedEntity(HasComp<XenoComponent>);
-
-        _chatManager.ChatMessageToManyFiltered(
-            filter,
+        _chat.SendInVoiceRangeWithLanguage(
             ChatChannel.Local,
             entry.Text,
-            wrapped,
+            wrappedMessageTemplate,
             ent.Owner,
-            hideChat: true,
-            recordReplay: true,
-            colorOverride: null);
+            ChatTransmitRange.HideChat,
+            language,
+            languageIcon,
+            speakerName: FormattedMessage.EscapeText(entry.SpeakerName),
+            transformedName: entry.SpeakerName,
+            ignoreXenos: true);
     }
 
     private TimeSpan GetCurrentRecordedDuration(
@@ -1110,13 +1134,29 @@ public sealed class UniversalRecorderSystem : EntitySystem
 
     private static string FormatTimestamp(TimeSpan timestamp)
     {
-        var totalMinutes = (int) timestamp.TotalMinutes;
+        var totalMinutes = (int)timestamp.TotalMinutes;
         return $"[{totalMinutes:00}:{timestamp.Seconds:00}]";
     }
 
-    private static string FormatTranscriptLine(TimeSpan timestamp, string speakerName, string speechVerb, string text)
+    private static string FormatTranscriptLine(
+        TimeSpan timestamp,
+        string speakerName,
+        string speechVerb,
+        string text,
+        string? languageIndicator)
     {
-        return $"{FormatTimestamp(timestamp)} {speakerName} {speechVerb}, \"{text}\"";
+        return $"{FormatTimestamp(timestamp)} {speakerName} {speechVerb}{languageIndicator}, \"{text}\"";
+    }
+
+    private (ProtoId<LanguagePrototype> Id, LanguagePrototype Prototype) ResolveLanguage(
+        ProtoId<LanguagePrototype>? language)
+    {
+        var languageId = language ?? SharedLanguageSystem.CommonLanguage;
+        if (_prototype.TryIndex(languageId, out LanguagePrototype? languagePrototype))
+            return (languageId, languagePrototype);
+
+        languageId = SharedLanguageSystem.CommonLanguage;
+        return (languageId, _prototype.Index<LanguagePrototype>(languageId));
     }
 
     private static void AppendLineLimited(StringBuilder builder, string line, int maxLength)
@@ -1137,7 +1177,7 @@ public sealed class UniversalRecorderSystem : EntitySystem
 
     private static string FormatDuration(TimeSpan duration)
     {
-        var totalMinutes = (int) duration.TotalMinutes;
+        var totalMinutes = (int)duration.TotalMinutes;
         return $"{totalMinutes}m {duration.Seconds}s";
     }
 }

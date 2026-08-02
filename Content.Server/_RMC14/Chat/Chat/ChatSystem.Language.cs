@@ -442,7 +442,7 @@ public sealed partial class ChatSystem
             ("originalName", originalSpeakerName));
     }
 
-    private void SendInVoiceRangeWithLanguage(
+    public void SendInVoiceRangeWithLanguage(
         ChatChannel channel,
         string speakerMessage,
         string wrappedMessageTemplate,
@@ -454,9 +454,10 @@ public sealed partial class ChatSystem
         bool visibleLanguage = false,
         NetUserId? author = null,
         string? transformedName = null,
-        bool needsLos = false)
+        bool needsLos = false,
+        bool ignoreXenos = false)
     {
-        foreach (var (session, data) in GetRecipients(source, VoiceRange))
+        foreach (var (session, data) in GetRecipients(source, VoiceRange, ignoreXenos))
         {
             var entRange = MessageRangeCheck(session, data, range);
             if (entRange == MessageRangeCheckResult.Disallowed)
