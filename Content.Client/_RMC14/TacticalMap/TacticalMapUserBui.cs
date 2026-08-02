@@ -4,8 +4,11 @@ using Robust.Client.Player;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Localization;
 using Robust.Shared.Maths;
+using Robust.Shared.Prototypes;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.TacticalMap;
+using Content.Shared._RMC14.Xenonids;
+using Content.Shared.Ghost;
 using JetBrains.Annotations;
 
 namespace Content.Client._RMC14.TacticalMap;
@@ -14,6 +17,7 @@ namespace Content.Client._RMC14.TacticalMap;
 public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutBui<TacticalMapWindow>(owner, uiKey)
 {
     [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
     private static readonly ISawmill _logger = Logger.GetSawmill("tactical_map_settings");
 
     protected override TacticalMapWindow? Window { get; set; }
@@ -70,6 +74,19 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
 
         Window.Wrapper.SetupUpdateButton(msg => SendPredictedMessage(msg));
         Window.Wrapper.Map.OnQueenEyeMove += position => SendPredictedMessage(new TacticalMapQueenEyeMoveMsg(position));
+
+        if (EntMan.HasComponent<XenoComponent>(Owner))
+        {
+            Window.Wrapper.Map.OnBlipEntityClicked += (_, entityId) =>
+                SendPredictedMessage(new TacticalMapWatchXenoMsg(new NetEntity(entityId)));
+        }
+
+        if (EntMan.HasComponent<GhostComponent>(Owner))
+        {
+            Window.Wrapper.Map.GhostTeleportMode = true;
+            Window.Wrapper.Map.OnGhostTeleport += position =>
+                SendPredictedMessage(new TacticalMapGhostTeleportMsg(position));
+        }
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
@@ -80,7 +97,16 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
             Window?.SetMapEntity(_currentMapName);
             Window?.Wrapper.SetMapEntity(_currentMapName);
             Window?.Wrapper.UpdateSquadObjectivesFromState(tacticalState.SquadObjectives);
+            Window?.Wrapper.SetPlanetName(GetLocalizedMapName(tacticalState, _prototype));
         }
+    }
+
+    internal static string? GetLocalizedMapName(TacticalMapBuiState state, IPrototypeManager prototype)
+    {
+        if (state.MapId != null && prototype.TryIndex<EntityPrototype>(state.MapId, out var proto))
+            return proto.Name;
+
+        return string.IsNullOrWhiteSpace(state.MapName) ? null : state.MapName;
     }
 
     protected override void Dispose(bool disposing)

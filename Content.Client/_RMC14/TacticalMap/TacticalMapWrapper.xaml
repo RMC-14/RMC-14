@@ -16,7 +16,7 @@
                     <Button Name="LabelsButton" Access="Public" Text="{Loc ui-tactical-map-labels-button}" StyleClasses="OpenBoth" Margin="0 0 2 0" MinWidth="60" />
                     <Button Name="FollowPlayerButton" Access="Public" Text="{Loc ui-tactical-map-centre-button}" StyleClasses="OpenBoth" Margin="0 0 2 0" MinWidth="50" />
                     <Button Name="ResetViewButton" Access="Public" Text="{Loc ui-tactical-map-reset-button}" StyleClasses="OpenBoth" Margin="0 0 2 0" MinWidth="50" />
-                    <Control HorizontalExpand="True" />
+                    <Label Name="PlanetNameLabel" Access="Public" HorizontalExpand="True" HorizontalAlignment="Center" VerticalAlignment="Center" StyleClasses="LabelHeading" />
                     <Button Name="SettingsToggleButton" Access="Public" Text="{Loc ui-tactical-map-settings-toggle-collapsed}" StyleClasses="OpenBoth" MinWidth="25" />
                 </BoxContainer>
 

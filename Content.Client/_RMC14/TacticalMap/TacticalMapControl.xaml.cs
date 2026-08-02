@@ -100,11 +100,14 @@ public sealed partial class TacticalMapControl : TextureRect
     public float BlipSizeMultiplier { get; set; } = 1.0f;
     public float LineThickness { get; set; } = 2.0f;
     public bool QueenEyeMode { get; set; }
+    public bool GhostTeleportMode { get; set; }
 
     public Action<Vector2i>? OnBlipClicked;
+    public Action<Vector2i, int>? OnBlipEntityClicked;
     public Action<Vector2i, string>? OnBlipRightClicked;
     public Action? OnUserInteraction;
     public Action<Vector2i>? OnQueenEyeMove;
+    public Action<Vector2i>? OnGhostTeleport;
     public Action<Vector2i, string>? OnCreateLabel;
     public Action<Vector2i, string>? OnEditLabel;
     public Action<Vector2i>? OnDeleteLabel;
@@ -375,6 +378,11 @@ public sealed partial class TacticalMapControl : TextureRect
 
     private TacticalMapBlip? GetBlipAtPosition(Vector2 controlPosition)
     {
+        return GetBlipIndexAtPosition(controlPosition) is { } index ? _blips![index] : null;
+    }
+
+    private int? GetBlipIndexAtPosition(Vector2 controlPosition)
+    {
         if (_blips == null || Texture == null)
             return null;
 
@@ -382,8 +390,9 @@ public sealed partial class TacticalMapControl : TextureRect
         (Vector2 actualSize, Vector2 actualTopLeft, float overlayScale) = GetDrawParameters();
         float clickTolerance = ClickTolerance * overlayScale;
 
-        foreach (TacticalMapBlip blip in _blips)
+        for (int i = 0; i < _blips.Length; i++)
         {
+            TacticalMapBlip blip = _blips[i];
             Vector2 blipPosition = IndicesToPosition(blip.Indices) * overlayScale + actualTopLeft;
             float scaledBlipSize = GetScaledBlipSize(overlayScale);
 
@@ -393,7 +402,7 @@ public sealed partial class TacticalMapControl : TextureRect
             );
 
             if (blipRect.Contains(pixelPosition))
-                return blip;
+                return i;
         }
 
         return null;
@@ -745,6 +754,9 @@ public sealed partial class TacticalMapControl : TextureRect
             if (HandleQueenEyeClick(args))
                 return;
 
+            if (HandleGhostTeleportClick(args))
+                return;
+
             if (HandleLabelClick(args))
                 return;
 
@@ -801,12 +813,29 @@ public sealed partial class TacticalMapControl : TextureRect
         return true;
     }
 
+    private bool HandleGhostTeleportClick(GUIBoundKeyEventArgs args)
+    {
+        if (GhostTeleportMode && !Drawing && !IsCanvas)
+        {
+            Vector2i clickPosition = PositionToIndices(args.RelativePosition);
+            OnGhostTeleport?.Invoke(clickPosition);
+            args.Handle();
+            return true;
+        }
+        return false;
+    }
+
     private bool HandleBlipClick(GUIBoundKeyEventArgs args)
     {
-        TacticalMapBlip? clickedBlip = GetBlipAtPosition(args.RelativePosition);
-        if (clickedBlip != null && !Drawing && !QueenEyeMode)
+        int? blipIndex = GetBlipIndexAtPosition(args.RelativePosition);
+        if (blipIndex != null && !Drawing && !QueenEyeMode)
         {
-            OnBlipClicked?.Invoke(clickedBlip.Value.Indices);
+            TacticalMapBlip clickedBlip = _blips![blipIndex.Value];
+            OnBlipClicked?.Invoke(clickedBlip.Indices);
+
+            if (_blipEntityIds != null && blipIndex.Value < _blipEntityIds.Length)
+                OnBlipEntityClicked?.Invoke(clickedBlip.Indices, _blipEntityIds[blipIndex.Value]);
+
             args.Handle();
             return true;
         }

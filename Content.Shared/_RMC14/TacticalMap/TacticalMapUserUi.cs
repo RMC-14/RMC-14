@@ -10,8 +10,9 @@ public enum TacticalMapUserUi
 }
 
 [Serializable, NetSerializable]
-public sealed class TacticalMapBuiState(string mapName, Dictionary<SquadObjectiveType, string>? squadObjectives = null) : BoundUserInterfaceState
+public sealed class TacticalMapBuiState(string mapName, Dictionary<SquadObjectiveType, string>? squadObjectives = null, string? mapId = null) : BoundUserInterfaceState
 {
     public readonly string MapName = mapName;
     public readonly Dictionary<SquadObjectiveType, string>? SquadObjectives = squadObjectives;
+    public readonly string? MapId = mapId;
 }
