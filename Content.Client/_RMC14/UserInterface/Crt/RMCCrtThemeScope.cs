@@ -1,6 +1,8 @@
 using System.Linq;
+using Content.Client.Resources;
 using Content.Client.Stylesheets;
 using Robust.Client.Graphics;
+using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.IoC;
@@ -15,6 +17,7 @@ public sealed class RMCCrtThemeScope : PanelContainer
 {
     private readonly IRMCCrtAppearanceManager _appearanceManager;
     private readonly RMCCrtEffectRenderer _effectsRenderer = new();
+    private readonly IResourceCache _resourceCache;
     private readonly StyleBoxFlat _style = new();
     private readonly IStylesheetManager _stylesheet;
 
@@ -95,6 +98,7 @@ public sealed class RMCCrtThemeScope : PanelContainer
     public RMCCrtThemeScope()
     {
         _appearanceManager = IoCManager.Resolve<IRMCCrtAppearanceManager>();
+        _resourceCache = IoCManager.Resolve<IResourceCache>();
         _stylesheet = IoCManager.Resolve<IStylesheetManager>();
         PanelOverride = _style;
         ResolvedPalette = RMCCrtPalettes.Get(RMCCrtPalettePreset.Blue);
@@ -167,7 +171,7 @@ public sealed class RMCCrtThemeScope : PanelContainer
         {
             AddStyleClass(StyleNano.StyleClassBorderedWindowPanel);
             PanelOverride = null;
-            Stylesheet = _stylesheet.SheetNano;
+            Stylesheet = CreateNanoStylesheet();
         }
 
         RMCCrtThemeHelpers.ApplyToDescendants(this, ResolvedContext);
@@ -190,6 +194,20 @@ public sealed class RMCCrtThemeScope : PanelContainer
                 .Prop(Label.StylePropertyFontColor, ResolvedPalette.Foreground),
             Element<RichTextLabel>().Class(RMCCrtStyleClasses.Text)
                 .Prop(Control.StylePropertyModulateSelf, ResolvedPalette.Foreground),
+            Element<RichTextLabel>().Class(RMCCrtStyleClasses.CompactText)
+                .Prop(Label.StylePropertyFont,
+                    _resourceCache.GetFont("/EngineFonts/NotoSans/NotoSansMono-Regular.ttf", 10)),
+        }).ToArray();
+
+        return new Stylesheet(rules);
+    }
+
+    private Stylesheet CreateNanoStylesheet()
+    {
+        var rules = _stylesheet.SheetNano.Rules.Concat(new StyleRule[]
+        {
+            Element<RichTextLabel>().Class(RMCCrtStyleClasses.CompactText)
+                .Prop(Label.StylePropertyFont, _resourceCache.NotoStack(size: 10)),
         }).ToArray();
 
         return new Stylesheet(rules);

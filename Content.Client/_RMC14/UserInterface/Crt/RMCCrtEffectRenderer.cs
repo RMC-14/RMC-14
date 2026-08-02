@@ -1,31 +1,21 @@
 using System.Numerics;
 using Robust.Client.Graphics;
+using Robust.Shared.IoC;
 using Robust.Shared.Maths;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.UserInterface.Crt;
 
 internal sealed class RMCCrtEffectRenderer
 {
-    private float _cachedHeight = -1;
-    private float _cachedRgbWidth = -1;
-    private float _cachedScale = -1;
-    private float _cachedScanlineSpacing = -1;
-    private float _cachedScanlineThickness = -1;
-    private float _cachedStripeWidth = -1;
-    private float _cachedWidth = -1;
-    private RMCCrtEffects _cachedEffects;
-    private Vector2[] _blueSubpixels = [];
-    private Vector2[] _diagonalStripes = [];
-    private Vector2[] _greenSubpixels = [];
-    private Vector2[] _horizontalScanlines = [];
-    private Vector2[] _redSubpixels = [];
+    private static readonly ProtoId<ShaderPrototype> Shader = "RMCCrtUiEffects";
 
-    internal bool HasGeometry =>
-        _horizontalScanlines.Length > 0 ||
-        _redSubpixels.Length > 0 ||
-        _greenSubpixels.Length > 0 ||
-        _blueSubpixels.Length > 0 ||
-        _diagonalStripes.Length > 0;
+    private readonly ShaderInstance _shader;
+
+    public RMCCrtEffectRenderer()
+    {
+        _shader = IoCManager.Resolve<IPrototypeManager>().Index(Shader).InstanceUnique();
+    }
 
     public void Draw(
         DrawingHandleScreen handle,
@@ -41,158 +31,30 @@ internal sealed class RMCCrtEffectRenderer
         float rgbOpacity,
         Color stripeColor)
     {
-        UpdateGeometry(
-            width,
-            height,
-            uiScale,
-            effects,
-            scanlineSpacing,
-            scanlineThickness,
-            rgbWidth,
-            stripeWidth);
-
-        if (_horizontalScanlines.Length > 0)
-            handle.DrawPrimitives(
-                DrawPrimitiveTopology.TriangleList,
-                _horizontalScanlines,
-                Color.Black.WithAlpha(Math.Clamp(scanlineOpacity, 0, 1)));
-
-        if (_redSubpixels.Length > 0)
-            handle.DrawPrimitives(
-                DrawPrimitiveTopology.TriangleList,
-                _redSubpixels,
-                Color.Red.WithAlpha(Math.Clamp(rgbOpacity, 0, 1)));
-        if (_greenSubpixels.Length > 0)
-            handle.DrawPrimitives(
-                DrawPrimitiveTopology.TriangleList,
-                _greenSubpixels,
-                Color.Lime.WithAlpha(Math.Clamp(rgbOpacity * 0.35f, 0, 1)));
-        if (_blueSubpixels.Length > 0)
-            handle.DrawPrimitives(
-                DrawPrimitiveTopology.TriangleList,
-                _blueSubpixels,
-                Color.Blue.WithAlpha(Math.Clamp(rgbOpacity, 0, 1)));
-
-        if (_diagonalStripes.Length > 0)
-            handle.DrawPrimitives(DrawPrimitiveTopology.TriangleList, _diagonalStripes, stripeColor);
-    }
-
-    internal void UpdateGeometry(
-        float width,
-        float height,
-        float uiScale,
-        RMCCrtEffects effects,
-        float scanlineSpacing,
-        float scanlineThickness,
-        float rgbWidth,
-        float stripeWidth)
-    {
-        if (MathHelper.CloseTo(_cachedWidth, width) &&
-            MathHelper.CloseTo(_cachedHeight, height) &&
-            MathHelper.CloseTo(_cachedScale, uiScale) &&
-            MathHelper.CloseTo(_cachedScanlineSpacing, scanlineSpacing) &&
-            MathHelper.CloseTo(_cachedScanlineThickness, scanlineThickness) &&
-            MathHelper.CloseTo(_cachedRgbWidth, rgbWidth) &&
-            MathHelper.CloseTo(_cachedStripeWidth, stripeWidth) &&
-            _cachedEffects == effects)
-        {
-            return;
-        }
-
-        _cachedWidth = width;
-        _cachedHeight = height;
-        _cachedScale = uiScale;
-        _cachedEffects = effects;
-        _cachedScanlineSpacing = scanlineSpacing;
-        _cachedScanlineThickness = scanlineThickness;
-        _cachedRgbWidth = rgbWidth;
-        _cachedStripeWidth = stripeWidth;
-        _horizontalScanlines = effects.HasFlag(RMCCrtEffects.HorizontalScanlines)
-            ? CreateHorizontalLines(width, height, uiScale, scanlineSpacing, scanlineThickness)
-            : [];
-
-        if (effects.HasFlag(RMCCrtEffects.RgbSubpixels))
-            CreateRgbSubpixels(width, height, uiScale, rgbWidth);
-        else
-            (_redSubpixels, _greenSubpixels, _blueSubpixels) = ([], [], []);
-
-        _diagonalStripes = effects.HasFlag(RMCCrtEffects.DiagonalStripes)
-            ? CreateDiagonalStripes(width, height, uiScale, stripeWidth)
-            : [];
-    }
-
-    private static Vector2[] CreateHorizontalLines(
-        float width,
-        float height,
-        float uiScale,
-        float spacing,
-        float thickness)
-    {
-        var scaledSpacing = Math.Max(2f, spacing * uiScale);
-        var scaledThickness = Math.Max(1f, thickness * uiScale);
-        var vertices = new List<Vector2>();
-        for (var y = 1f; y < height; y += scaledSpacing)
-            AddRectangle(vertices, 0, y, width, Math.Min(y + scaledThickness, height));
-
-        return vertices.ToArray();
-    }
-
-    private void CreateRgbSubpixels(float width, float height, float uiScale, float subpixelWidth)
-    {
-        var red = new List<Vector2>();
-        var green = new List<Vector2>();
-        var blue = new List<Vector2>();
-        var scaledWidth = Math.Max(1f, subpixelWidth * uiScale);
-        var groupWidth = scaledWidth * 3;
-        for (var x = 0f; x < width; x += groupWidth)
-        {
-            AddRectangle(red, x, 0, Math.Min(x + scaledWidth, width), height);
-            AddRectangle(green, x + scaledWidth, 0, Math.Min(x + scaledWidth * 2, width), height);
-            AddRectangle(blue, x + scaledWidth * 2, 0, Math.Min(x + groupWidth, width), height);
-        }
-
-        _redSubpixels = red.ToArray();
-        _greenSubpixels = green.ToArray();
-        _blueSubpixels = blue.ToArray();
-    }
-
-    private static Vector2[] CreateDiagonalStripes(float width, float height, float uiScale, float stripeWidth)
-    {
-        var scaledWidth = Math.Max(2f, stripeWidth * uiScale);
-        var vertices = new List<Vector2>();
-        for (var x = -height; x < width; x += scaledWidth * 2)
-        {
-            var topLeft = new Vector2(x, 0);
-            var topRight = new Vector2(x + scaledWidth, 0);
-            var bottomRight = new Vector2(x + scaledWidth + height, height);
-            var bottomLeft = new Vector2(x + height, height);
-
-            vertices.Add(topLeft);
-            vertices.Add(topRight);
-            vertices.Add(bottomRight);
-            vertices.Add(topLeft);
-            vertices.Add(bottomRight);
-            vertices.Add(bottomLeft);
-        }
-
-        return vertices.ToArray();
-    }
-
-    private static void AddRectangle(List<Vector2> vertices, float left, float top, float right, float bottom)
-    {
-        if (left >= right || top >= bottom)
+        if (effects == RMCCrtEffects.None || width <= 0 || height <= 0)
             return;
 
-        var topLeft = new Vector2(left, top);
-        var topRight = new Vector2(right, top);
-        var bottomRight = new Vector2(right, bottom);
-        var bottomLeft = new Vector2(left, bottom);
+        _shader.SetParameter("size", new Vector2(width, height));
+        _shader.SetParameter(
+            "horizontalScanlines",
+            (effects & RMCCrtEffects.HorizontalScanlines) != 0);
+        _shader.SetParameter(
+            "rgbSubpixels",
+            (effects & RMCCrtEffects.RgbSubpixels) != 0);
+        _shader.SetParameter(
+            "diagonalStripes",
+            (effects & RMCCrtEffects.DiagonalStripes) != 0);
+        _shader.SetParameter("scanlineSpacing", Math.Max(2f, scanlineSpacing * uiScale));
+        _shader.SetParameter("scanlineThickness", Math.Max(1f, scanlineThickness * uiScale));
+        _shader.SetParameter("rgbWidth", Math.Max(1f, rgbWidth * uiScale));
+        _shader.SetParameter("stripeWidth", Math.Max(2f, stripeWidth * uiScale));
+        _shader.SetParameter("scanlineOpacity", Math.Clamp(scanlineOpacity, 0, 1));
+        _shader.SetParameter("rgbOpacity", Math.Clamp(rgbOpacity, 0, 1));
+        _shader.SetParameter("stripeColor", stripeColor);
 
-        vertices.Add(topLeft);
-        vertices.Add(topRight);
-        vertices.Add(bottomRight);
-        vertices.Add(topLeft);
-        vertices.Add(bottomRight);
-        vertices.Add(bottomLeft);
+        var previousShader = handle.GetShader();
+        handle.UseShader(_shader);
+        handle.DrawRect(UIBox2.FromDimensions(Vector2.Zero, new Vector2(width, height)), Color.White);
+        handle.UseShader(previousShader);
     }
 }

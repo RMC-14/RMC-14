@@ -158,6 +158,7 @@ public static class RMCCrtIcons
 
 public static class RMCCrtStyleClasses
 {
+    public const string CompactText = "RMCCrtCompactText";
     public const string Heading = "RMCCrtHeading";
     public const string Text = "RMCCrtText";
 }

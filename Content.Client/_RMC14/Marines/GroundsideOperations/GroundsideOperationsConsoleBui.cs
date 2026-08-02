@@ -30,7 +30,7 @@ public sealed class GroundsideOperationsConsoleBui(EntityUid owner, Enum uiKey) 
             return;
 
         _window = this.CreateWindow<GroundsideOperationsConsoleWindow>();
-        _window.OnTimeRefresh += RefreshTimeSensitive;
+        _window.CooldownRefresh += RefreshTimeSensitive;
         _window.OpenOverwatchButton.OnPressed += _ => SendPredictedMessage(new MarineCommunicationsOverwatchMsg());
         _window.TacticalMapButton.OnPressed += _ => SendPredictedMessage(new MarineCommunicationsOpenMapMsg());
         _window.PrimaryLandingZoneButton.OnPressed += _ => OpenLandingZoneWindow();

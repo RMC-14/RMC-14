@@ -24,7 +24,7 @@ public sealed class CommandTabletBui(EntityUid owner, Enum uiKey) : BoundUserInt
             return;
 
         _window = this.CreateWindow<CommandTabletWindow>();
-        _window.OnTimeRefresh += Refresh;
+        _window.CooldownRefresh += Refresh;
         _window.AnnouncementButton.OnPressed += _ =>
             SendPredictedMessage(new MarineCommunicationsOpenAnnouncementMsg());
         _window.MedalButton.OnPressed += _ =>

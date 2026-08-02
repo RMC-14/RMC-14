@@ -9,7 +9,13 @@ namespace Content.Client._RMC14.Marines.GroundsideOperations;
 [GenerateTypedNameReferences]
 public sealed partial class GroundsideOperationsConsoleWindow : DefaultWindow
 {
-    public event Action? OnTimeRefresh;
+    private const float CooldownRefreshInterval = 0.25f;
+
+    /// <summary>
+    /// Server state synchronizes cooldown end timestamps; displayed seconds are derived locally
+    /// so the UI can count down without receiving a network update every second.
+    /// </summary>
+    public event Action? CooldownRefresh;
 
     private float _timeRefreshAccumulator;
 
@@ -20,6 +26,7 @@ public sealed partial class GroundsideOperationsConsoleWindow : DefaultWindow
         ExecutiveNavigationButton.OnPressed += _ => ShowPage(GroundsideOperationsPage.Executive);
         EmergencyNavigationButton.OnPressed += _ => ShowPage(GroundsideOperationsPage.Emergency);
         OrdnanceNavigationButton.OnPressed += _ => ShowPage(GroundsideOperationsPage.Ordnance);
+        EmergencyDescription.AddStyleClass(RMCCrtStyleClasses.Text);
 
         ShowPage(GroundsideOperationsPage.Executive);
     }
@@ -57,11 +64,11 @@ public sealed partial class GroundsideOperationsConsoleWindow : DefaultWindow
     {
         base.FrameUpdate(args);
         _timeRefreshAccumulator += args.DeltaSeconds;
-        if (_timeRefreshAccumulator < 0.25f)
+        if (_timeRefreshAccumulator < CooldownRefreshInterval)
             return;
 
-        _timeRefreshAccumulator = 0;
-        OnTimeRefresh?.Invoke();
+        _timeRefreshAccumulator %= CooldownRefreshInterval;
+        CooldownRefresh?.Invoke();
     }
 
     private enum GroundsideOperationsPage

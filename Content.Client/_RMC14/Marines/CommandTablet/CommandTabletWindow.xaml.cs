@@ -11,7 +11,13 @@ namespace Content.Client._RMC14.Marines.CommandTablet;
 [GenerateTypedNameReferences]
 public sealed partial class CommandTabletWindow : DefaultWindow
 {
-    public event Action? OnTimeRefresh;
+    private const float CooldownRefreshInterval = 0.25f;
+
+    /// <summary>
+    /// Server state synchronizes cooldown end timestamps; displayed seconds are derived locally
+    /// so the UI can count down without receiving a network update every second.
+    /// </summary>
+    public event Action? CooldownRefresh;
 
     private float _timeRefreshAccumulator;
 
@@ -29,10 +35,10 @@ public sealed partial class CommandTabletWindow : DefaultWindow
     {
         base.FrameUpdate(args);
         _timeRefreshAccumulator += args.DeltaSeconds;
-        if (_timeRefreshAccumulator < 0.25f)
+        if (_timeRefreshAccumulator < CooldownRefreshInterval)
             return;
 
-        _timeRefreshAccumulator = 0;
-        OnTimeRefresh?.Invoke();
+        _timeRefreshAccumulator %= CooldownRefreshInterval;
+        CooldownRefresh?.Invoke();
     }
 }
