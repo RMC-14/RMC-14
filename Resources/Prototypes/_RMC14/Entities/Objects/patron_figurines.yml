@@ -3124,3 +3124,14 @@
     state: steve_lung_cancer_michaels
   - type: PatronFigurine
     id: 15c4354c-d94c-4085-a264-dcb6f2a38c05
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronScottDadGreaves
+  name: Scott 'Dad' Greaves figurine
+  description: "He may not be your father. But he's sure as hell your Dad."
+  components:
+  - type: Sprite
+    state: scott_dad_greaves
+  - type: PatronFigurine
+    id: fb36d3c3-a557-4f59-9b61-e10d2e34c4da
