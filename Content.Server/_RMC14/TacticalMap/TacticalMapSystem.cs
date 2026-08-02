@@ -147,8 +147,9 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
                 subs.Event<TacticalMapUpdateCanvasMsg>(OnUserUpdateCanvasMsg);
                 subs.Event<TacticalMapQueenEyeMoveMsg>(OnUserQueenEyeMoveMsg);
                 subs.Event<TacticalMapWatchXenoMsg>(OnUserWatchXenoMsg);
-                subs.Event<TacticalMapGhostTeleportMsg>(OnUserGhostTeleportMsg);
             });
+
+        SubscribeAllEvent<TacticalMapGhostTeleportRequestEvent>(OnGhostTeleportRequest);
 
         Subs.BuiEvents<TacticalMapComputerComponent>(TacticalMapComputerUi.Key,
             subs =>
@@ -633,16 +634,21 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (!TryGetEntity(args.Target, out var target))
             return;
 
+        // Only allow watching from live blips; stale snapshot blips would leak
+        // the xeno's current position.
+        if (!ent.Comp.LiveUpdate)
+            return;
+
         if (!HasComp<XenoComponent>(user) || !HasComp<XenoComponent>(target))
             return;
 
         _xenoWatch.Watch(user, target.Value);
     }
 
-    private void OnUserGhostTeleportMsg(Entity<TacticalMapUserComponent> ent, ref TacticalMapGhostTeleportMsg args)
+    private void OnGhostTeleportRequest(TacticalMapGhostTeleportRequestEvent args, EntitySessionEventArgs session)
     {
-        var user = args.Actor;
-        if (!HasComp<GhostComponent>(user))
+        if (session.SenderSession.AttachedEntity is not { } user ||
+            !HasComp<GhostComponent>(user))
             return;
 
         if (!TryGetTacticalMap(out var map) ||

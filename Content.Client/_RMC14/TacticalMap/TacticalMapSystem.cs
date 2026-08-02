@@ -8,6 +8,11 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 {
     [Dependency] private readonly IPlayerManager _player = default!;
 
+    public void RequestGhostTeleport(Vector2i position)
+    {
+        RaiseNetworkEvent(new TacticalMapGhostTeleportRequestEvent(position));
+    }
+
     public override void Initialize()
     {
         base.Initialize();

@@ -78,14 +78,19 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
         if (EntMan.HasComponent<XenoComponent>(Owner))
         {
             Window.Wrapper.Map.OnBlipEntityClicked += (_, entityId) =>
-                SendPredictedMessage(new TacticalMapWatchXenoMsg(new NetEntity(entityId)));
+            {
+                // Blips are frozen while the queen is off the ovipositor; watching from
+                // a stale blip would leak the xeno's current position.
+                if (EntMan.GetComponentOrNull<TacticalMapUserComponent>(Owner)?.LiveUpdate == true)
+                    SendPredictedMessage(new TacticalMapWatchXenoMsg(new NetEntity(entityId)));
+            };
         }
 
         if (EntMan.HasComponent<GhostComponent>(Owner))
         {
             Window.Wrapper.Map.GhostTeleportMode = true;
             Window.Wrapper.Map.OnGhostTeleport += position =>
-                SendPredictedMessage(new TacticalMapGhostTeleportMsg(position));
+                EntMan.System<TacticalMapSystem>().RequestGhostTeleport(position);
         }
     }
 
