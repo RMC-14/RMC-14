@@ -29,6 +29,7 @@ Available reusable controls:
 - `RMCCrtActionButton` - outline, filled, navigation, or danger action;
 - `RMCCrtLabel` - normal, heading, or semantic status text;
 - `RMCCrtSeparator` - horizontal or vertical separator;
+- `RMCCrtTwoColumnContainer` - two equal-width wrapping columns around a divider;
 - `RMCCrtIcon` - palette-aware RSI icon.
 
 Prefer semantic properties such as `Tone`, `Variant`, and `Selected` over directly changing child colors. Buttons use

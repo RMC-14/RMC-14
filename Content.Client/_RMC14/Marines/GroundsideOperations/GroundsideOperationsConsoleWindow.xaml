@@ -3,7 +3,8 @@
     xmlns:controls="clr-namespace:Content.Client._RMC14.Marines.GroundsideOperations"
     xmlns:crt="clr-namespace:Content.Client._RMC14.UserInterface.Crt"
     Title="{Loc rmc-goc-title}"
-    MinSize="880 512">
+    MinSize="890 512"
+    SetSize="890 512">
     <crt:RMCCrtThemeScope Palette="Blue" Effects="HorizontalScanlines" BorderThickness="2">
         <BoxContainer Orientation="Vertical" Margin="4" SeparationOverride="4">
             <BoxContainer Orientation="Horizontal" SeparationOverride="4" VerticalExpand="True">
@@ -29,7 +30,8 @@
 
                 <crt:RMCCrtPanel HorizontalExpand="True" VerticalExpand="True">
                     <BoxContainer Orientation="Vertical" Margin="6" HorizontalExpand="True" VerticalExpand="True">
-                        <BoxContainer Name="ExecutivePage" Access="Public" Orientation="Horizontal" SeparationOverride="6" VerticalExpand="True">
+                        <crt:RMCCrtTwoColumnContainer Name="ExecutivePage" Access="Public"
+                            ColumnSeparation="6" VerticalExpand="True">
                             <BoxContainer Orientation="Vertical" MinWidth="288" HorizontalExpand="True" VerticalExpand="True"
                                 Margin="7" SeparationOverride="4">
                                 <crt:RMCCrtLabel Text="{Loc rmc-goc-groundside-title}" Heading="True" TextFontSize="11" HorizontalAlignment="Center" />
@@ -73,7 +75,7 @@
                                     IconSize="14" ContentMargin="7 4" ContentSeparation="6" TextFontSize="10" />
                                 <Control VerticalExpand="True" />
                             </BoxContainer>
-                        </BoxContainer>
+                        </crt:RMCCrtTwoColumnContainer>
 
                         <BoxContainer Name="EmergencyPage" Access="Public" Orientation="Vertical" SeparationOverride="7" VerticalExpand="True" Visible="False">
                             <crt:RMCCrtLabel Text="{Loc rmc-goc-emergency-title}" Heading="True" TextFontSize="11" HorizontalAlignment="Center" />
