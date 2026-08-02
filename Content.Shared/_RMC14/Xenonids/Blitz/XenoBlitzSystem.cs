@@ -110,8 +110,9 @@ public sealed class XenoBlitzSystem : EntitySystem
             if (!_xeno.CanAbilityAttackTarget(xeno, hit))
                 continue;
 
-            // Range check against the target's lag-compensated position
-            if (!_rmcLagCompensation.IsWithinMargin(xeno.Owner, hit.Owner, session, xeno.Comp.Range))
+            // Range check against the target's lag-compensated position, without margin
+            var hitCoords = _rmcLagCompensation.GetCoordinates(hit, session);
+            if (!_transform.InRange(xeno.Owner.ToCoordinates(), hitCoords, xeno.Comp.Range))
                 continue;
 
             if (!_interact.InRangeUnobstructed(xeno.Owner, hit.Owner, xeno.Comp.Range))
