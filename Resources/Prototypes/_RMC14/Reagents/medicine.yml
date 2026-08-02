@@ -160,7 +160,7 @@
   id: CMEpinephrine
   name: reagent-name-cmepinephrine
   desc: reagent-desc-cmepinephrine
-  color: "#6bd43c"
+  color: "#FFF0B9"
   overdose: 10.5
   criticalOverdose: 20
   metabolisms:
