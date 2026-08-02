@@ -26,6 +26,7 @@ public sealed partial class RMCCrtActionButton : ContainerButton, IRMCCrtThemedC
     private float _iconSize = 18;
     private string? _iconState;
     private ResPath _iconRsiPath = DefaultIconRsiPath;
+    private string? _text;
     private RMCCrtThemeContext _context = new(
         RMCCrtPalettes.Get(RMCCrtPalettePreset.Blue),
         new RMCCrtAppearanceSettings(true, true));
@@ -36,8 +37,15 @@ public sealed partial class RMCCrtActionButton : ContainerButton, IRMCCrtThemedC
 
     public string? Text
     {
-        get => TextLabel.Text;
-        set => TextLabel.Text = value;
+        get => _text;
+        set
+        {
+            if (_text == value)
+                return;
+
+            _text = value;
+            UpdateText();
+        }
     }
 
     public string? IconState
@@ -226,12 +234,6 @@ public sealed partial class RMCCrtActionButton : ContainerButton, IRMCCrtThemedC
             _ => BoxContainer.AlignMode.Center,
         };
         Layout.HorizontalAlignment = HAlignment.Stretch;
-        TextLabel.Align = ContentAlignment switch
-        {
-            RMCCrtContentAlignment.Left => Label.AlignMode.Left,
-            RMCCrtContentAlignment.Right => Label.AlignMode.Right,
-            _ => Label.AlignMode.Center,
-        };
     }
 
     private void UpdateMetrics()
@@ -251,11 +253,7 @@ public sealed partial class RMCCrtActionButton : ContainerButton, IRMCCrtThemedC
         if (NameScope == null)
             return;
 
-        TextLabel.FontOverride = TextFontSize > 0
-            ? _context.ThemeEnabled
-                ? _resourceCache.GetFont("/EngineFonts/NotoSans/NotoSansMono-Regular.ttf", TextFontSize)
-                : _resourceCache.NotoStack(size: TextFontSize)
-            : null;
+        UpdateText();
 
         if (!_context.ThemeEnabled)
         {
@@ -267,9 +265,6 @@ public sealed partial class RMCCrtActionButton : ContainerButton, IRMCCrtThemedC
         RemoveStyleClass(StyleBase.ButtonCaution);
         ModulateSelfOverride = null;
         StyleBoxOverride = _transparentStyle;
-        TextLabel.AddStyleClass(RMCCrtStyleClasses.Text);
-        TextLabel.AddStyleClass("monospace");
-
         var palette = _context.Palette;
         var isDanger = Tone == RMCCrtTone.Danger || Variant == RMCCrtButtonVariant.Danger;
         Color background;
@@ -324,16 +319,13 @@ public sealed partial class RMCCrtActionButton : ContainerButton, IRMCCrtThemedC
 
         Background.SetColorOverrides(background, border);
         IconControl.ModulateSelfOverride = foreground;
-        TextLabel.FontColorOverride = foreground;
+        TextLabel.ModulateSelfOverride = foreground;
     }
 
     private void UpdateNanoAppearance()
     {
         AddStyleClass(ContainerButton.StyleClassButton);
         StyleBoxOverride = null;
-        TextLabel.RemoveStyleClass(RMCCrtStyleClasses.Text);
-        TextLabel.RemoveStyleClass("monospace");
-
         var isDanger = Tone == RMCCrtTone.Danger || Variant == RMCCrtButtonVariant.Danger;
         if (isDanger)
             AddStyleClass(StyleBase.ButtonCaution);
@@ -357,6 +349,17 @@ public sealed partial class RMCCrtActionButton : ContainerButton, IRMCCrtThemedC
         };
 
         IconControl.ModulateSelfOverride = foreground;
-        TextLabel.FontColorOverride = foreground;
+        TextLabel.ModulateSelfOverride = foreground;
+    }
+
+    private void UpdateText()
+    {
+        if (NameScope == null)
+            return;
+
+        TextLabel.SetMessage(RMCCrtThemeHelpers.CreateTextMessage(
+            _text,
+            _context,
+            TextFontSize));
     }
 }

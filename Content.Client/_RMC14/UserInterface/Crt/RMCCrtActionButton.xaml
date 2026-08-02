@@ -11,9 +11,9 @@
                          HorizontalExpand="False"
                          HorizontalAlignment="Center" VerticalAlignment="Center"
                          MouseFilter="Ignore" />
-            <Label Name="TextLabel" Access="Public" StyleClasses="RMCCrtText"
-                   HorizontalExpand="False" VerticalAlignment="Center"
-                   MouseFilter="Ignore" />
+            <RichTextLabel Name="TextLabel" Access="Public"
+                           HorizontalExpand="False" VerticalAlignment="Center"
+                           MouseFilter="Ignore" />
         </BoxContainer>
     </crt:RMCCrtPanel>
 </crt:RMCCrtActionButton>
