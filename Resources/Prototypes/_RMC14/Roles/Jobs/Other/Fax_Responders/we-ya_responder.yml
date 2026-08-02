@@ -2,6 +2,7 @@
   parent: RMCJobRibbonBase
   id: CMWeYaresponder
   name: rmc-job-name-weya-responder
+  spawnMenuRoleName: We-Ya Communications Executive (Fax Responder)
   description: rmc-job-description-weya-responder
   playTimeTracker: CMJobWeYaResponder
   ranks:
@@ -13,7 +14,6 @@
   accessGroups:
   - ShipMasterAccess
   - RMCWeYa
-  spawnMenuRoleName: WEYA Communications Executive
   special:
   - !type:AddComponentSpecial
     components:

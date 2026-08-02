@@ -818,7 +818,7 @@
         amount: 10
     - name: Gloves
       entries:
-      - id: CMHandsBrown
+      - id: RMCHandsBrownMarine
         amount: 40
       - id: RMCHandsGreyMarine
         amount: 40
