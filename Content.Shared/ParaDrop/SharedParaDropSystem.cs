@@ -314,33 +314,32 @@ public abstract partial class SharedParaDropSystem : EntitySystem
     private bool TryGetParaDropLocation(EntityCoordinates targetLocation, int dropScatter, out EntityCoordinates adjustedLocation)
     {
         adjustedLocation = default;
-        var distressQuery = EntityQueryEnumerator<RMCPlanetComponent>();
-        while (distressQuery.MoveNext(out var grid, out _))
+        if (_transform.GetGrid(targetLocation) is not { } grid ||
+            !HasComp<RMCPlanetComponent>(grid) ||
+            !TryComp<MapGridComponent>(grid, out var gridComp))
         {
-            if (!TryComp<MapGridComponent>(grid, out var gridComp))
+            return false;
+        }
+
+        var position = _mapSystem.LocalToTile(grid, gridComp, targetLocation);
+        var dropArea = new Box2(position.X - dropScatter, position.Y - dropScatter, position.X + dropScatter, position.Y + dropScatter);
+        var enumerable = _mapSystem.GetTilesEnumerator(grid, gridComp, dropArea);
+
+        var viableTiles = new List<TileRef>();
+        while (enumerable.MoveNext(out var tileRef))
+        {
+            if (!_crashLand.IsLandableTile((grid, gridComp), tileRef))
                 continue;
 
-            var position = _mapSystem.LocalToTile(grid, gridComp, targetLocation);
-            var dropArea = new Box2(position.X - dropScatter, position.Y - dropScatter, position.X + dropScatter, position.Y + dropScatter);
-            var enumerable = _mapSystem.GetTilesEnumerator(grid, gridComp, dropArea);
-
-            var viableTiles = new List<TileRef>();
-            while (enumerable.MoveNext(out var tileRef))
-            {
-                if (!_crashLand.IsLandableTile((grid, gridComp), tileRef))
-                    continue;
-
-                viableTiles.Add(tileRef);
-            }
-
-            if (viableTiles.Count == 0)
-                return false;
-
-            var random = _random.Next(0, viableTiles.Count);
-            adjustedLocation = _mapSystem.GridTileToLocal(grid, gridComp, viableTiles[random].GridIndices);
-            return true;
+            viableTiles.Add(tileRef);
         }
-        return false;
+
+        if (viableTiles.Count == 0)
+            return false;
+
+        var random = _random.Next(0, viableTiles.Count);
+        adjustedLocation = _mapSystem.GridTileToLocal(grid, gridComp, viableTiles[random].GridIndices);
+        return true;
     }
 
     /// <summary>

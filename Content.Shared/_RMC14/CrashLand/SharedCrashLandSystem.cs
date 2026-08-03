@@ -195,6 +195,11 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
 
     public bool IsLandableTile(Entity<MapGridComponent> grid, TileRef tileRef)
     {
+        return IsLandableTile(grid, tileRef, false);
+    }
+
+    public bool IsLandableTile(Entity<MapGridComponent> grid, TileRef tileRef, bool ignoreParadropRestrictions)
+    {
         var tile = tileRef.GridIndices;
         var location = _mapSystem.GridTileToLocal(grid, grid, tile);
 
@@ -208,7 +213,7 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
             return false;
         }
 
-        if (!_area.CanParadrop(location))
+        if (!ignoreParadropRestrictions && !_area.CanParadrop(location))
             return false;
 
         // don't spawn inside of solid objects

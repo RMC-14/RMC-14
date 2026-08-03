@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.SupplyDrop;
 using Content.Shared.Coordinates;
@@ -25,7 +26,7 @@ public abstract class SharedRMCOrbitalDeployerSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
-    private static readonly EntProtoId DefaultDropPodPrototype = "RMCSupplyDropPod";
+    protected static readonly EntProtoId DefaultDropPodPrototype = "RMCSupplyDropPod";
 
     /// <summary>
     ///     Tries to paradrop an entity to the target's coordinates.
@@ -118,32 +119,45 @@ public abstract class SharedRMCOrbitalDeployerSystem : EntitySystem
         return true;
     }
 
-    /// <summary>
-    ///     Puts an entity in a drop pod and supply drops it to the given coordinates.
-    /// </summary>
-    /// <param name="deploying">The entity being deployed.</param>
-    /// <param name="dropLocation">The location the drop pod should land at.</param>
-    /// <param name="skyFallDuration">How long it should take before the drop pod appears at the target map and starts it's falling animation.</param>
-    /// <param name="dropDuration">The duration of the falling animation.</param>
-    /// <param name="timeToOpen">The amount of time in seconds it takes after landing for the drop pod to release it's contents.</param>
-    /// <param name="dropScatter">How far away from the given drop location the drop pod can be randomly dropped to.</param>
-    /// <param name="useParachute">Whether the drop pod should have a parachute during it's falling animation.</param>
-    public void DoOrbitalDeploy(EntityUid deploying, MapCoordinates dropLocation, float skyFallDuration = 5, float dropDuration = 3, float timeToOpen = 2, int dropScatter = 0, bool useParachute = true)
+    protected bool TryCreateOrbitalDropPod(float timeToOpen, out EntityUid dropPod)
     {
-        var dropPod = Spawn(DefaultDropPodPrototype);
-        DebugTools.Assert(HasComp<SupplyDropPodComponent>(dropPod));
+        dropPod = default;
+        if (!float.IsFinite(timeToOpen) || timeToOpen < 0)
+            return false;
 
+        var pod = Spawn(DefaultDropPodPrototype);
+        if (!TryComp(pod, out SupplyDropPodComponent? podComponent))
+        {
+            QueueDel(pod);
+            return false;
+        }
+
+        podComponent.OpenTimeRemaining = TimeSpan.FromSeconds(timeToOpen);
+        Dirty(pod, podComponent);
+        dropPod = pod;
+        return true;
+    }
+
+    protected void LaunchOrbitalDropPod(EntityUid dropPod,
+        MapCoordinates dropLocation,
+        float skyFallDuration,
+        float dropDuration,
+        bool useParachute,
+        IReadOnlyList<EntityCoordinates>? launchCoordinates = null,
+        int dropScatter = 0)
+    {
         if (!TryComp(dropPod, out SupplyDropPodComponent? podComponent))
             return;
 
-        _audio.PlayPvs(podComponent.LaunchSound, _transform.GetMoverCoordinates(deploying)); // Play sound at the location the entity is deployed from.
+        if (launchCoordinates != null)
+        {
+            foreach (var launch in launchCoordinates.Distinct())
+            {
+                _audio.PlayPvs(podComponent.LaunchSound, launch);
+            }
+        }
 
-        var openAt = TimeSpan.FromSeconds(skyFallDuration + dropDuration + timeToOpen);
-        var podContainer = Container.EnsureContainer<Container>(dropPod, podComponent.DeploySlotId);
-        Container.Insert(deploying, podContainer);
-
-        _audio.PlayPvs(podComponent.LaunchSound, _transform.GetMoverCoordinates(deploying)); // Play sound at the location of the entity after being inserted into the drop pod.
-
+        var openAt = TimeSpan.FromSeconds(skyFallDuration + dropDuration) + podComponent.OpenTimeRemaining;
         SupplyDrop.LaunchSupplyDrop(dropPod,
             _transform.ToMapCoordinates(_map.AlignToGrid(_transform.ToCoordinates(dropLocation))),
             skyFallDuration,
@@ -154,5 +168,7 @@ public abstract class SharedRMCOrbitalDeployerSystem : EntitySystem
             podComponent.ArrivingSound,
             dropScatter,
             useParachute);
+
+        _audio.PlayPvs(podComponent.LaunchSound, _transform.GetMoverCoordinates(dropPod));
     }
 }
