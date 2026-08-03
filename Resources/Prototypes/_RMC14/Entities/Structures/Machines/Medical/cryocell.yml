@@ -1,0 +1,71 @@
+- type: entity
+  parent: CMBaseStructureCorrodible
+  id: RMCCryoCell
+  name: cryo cell
+  description: A donation from the old A.W. project, using cryogenic technology. It slowly heals whoever is inside the tube.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/Medical/cryo.rsi
+    drawdepth: Mobs
+    noRot: true
+    layers:
+    - state: cryo_open
+      map: [ "enum.CryoVisualLayers.Base" ]
+  - type: InteractionOutline
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 15
+    activeLoad: 200
+    channel: Equipment
+  - type: CryoCell
+  - type: DragInsertContainer
+    containerId: cryo_cell
+    entryDelay: 2
+    delaySelfEntry: true
+  - type: NoStunOnExit
+  - type: ContainerContainer
+    containers:
+      cryo_cell: !type:ContainerSlot { }
+      beakerSlot: !type:ContainerSlot { }
+  - type: ItemSlots
+    slots:
+      beakerSlot:
+        whitelist:
+          components:
+          - FitsInDispenser
+  - type: UserInterface
+    interfaces:
+      enum.CryoCellUIKey.Key:
+        type: CryoCellBui
+  - type: ActivatableUI
+    key: enum.CryoCellUIKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.CryoVisuals.State:
+        enum.CryoVisualLayers.Base:
+          Empty: { state: cryo_open }
+          Occupied: { state: cryo_closed }
+  - type: InsertBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: RMCMesonsNonviewable

@@ -1,0 +1,42 @@
+<DefaultWindow xmlns="https://spacestation14.io" MinSize="400 280">
+  <BoxContainer Orientation="Vertical" Margin="8">
+    <!-- Empty state -->
+    <BoxContainer Name="EmptyPanel" Orientation="Vertical" Visible="False" VerticalExpand="True" HorizontalExpand="True">
+      <Control VerticalExpand="True" />
+      <Label Text="{Loc rmc-cryocell-no-occupant}" Align="Center" StyleClasses="LabelBig" />
+      <Control VerticalExpand="True" />
+    </BoxContainer>
+
+    <!-- Occupant panel -->
+    <BoxContainer Name="OccupantPanel" Orientation="Vertical">
+      <BoxContainer Orientation="Horizontal" Margin="0 0 0 8">
+        <Label Text="{Loc rmc-cryocell-name-label}" MinWidth="120" Modulate="#5B88B0" />
+        <Label Name="OccupantNameLabel" Text="" />
+      </BoxContainer>
+
+      <BoxContainer Orientation="Horizontal" Margin="0 0 0 8">
+        <Label Text="{Loc rmc-cryocell-health-label}" MinWidth="120" Modulate="#5B88B0" />
+        <ProgressBar Name="HealthBar" HorizontalExpand="True" MinValue="0" MinHeight="16">
+          <Label Name="HealthBarText" Align="Right" Margin="0 0 5 0" />
+        </ProgressBar>
+      </BoxContainer>
+
+      <BoxContainer Orientation="Horizontal" Margin="0 0 0 8">
+        <Label Text="{Loc rmc-cryocell-temperature}" MinWidth="120" Modulate="#5B88B0" />
+        <Label Name="TemperatureLabel" Text="" />
+      </BoxContainer>
+
+      <BoxContainer Orientation="Horizontal" Margin="0 0 0 8">
+        <Button Name="PowerButton" Text="{Loc rmc-cryocell-toggle-power}" MinWidth="120" />
+        <Control HorizontalExpand="True" />
+        <Button Name="AutoEjectButton" Text="{Loc rmc-cryocell-auto-eject}" ToggleMode="True" MinWidth="120" />
+      </BoxContainer>
+
+      <BoxContainer Orientation="Horizontal" Margin="0 0 0 8">
+        <Button Name="EjectButton" Text="{Loc rmc-cryocell-eject}" MinWidth="120" />
+        <Control HorizontalExpand="True" />
+        <Button Name="EjectBeakerButton" Text="{Loc rmc-cryocell-eject-beaker}" MinWidth="120" />
+      </BoxContainer>
+    </BoxContainer>
+  </BoxContainer>
+</DefaultWindow>
