@@ -163,7 +163,7 @@
     explosion:
       total: 694
       slope: 24.95
-      max: 40
+      max: 45
 
 - type: entity
   parent: RMCDropshipAttachmentAmmoRocket
