@@ -23,6 +23,7 @@ public abstract partial class SharedEntityStorageComponent : Component
         CollisionGroup.MidImpassable |
         CollisionGroup.HighImpassable |
         CollisionGroup.LowImpassable |
+        // RMC14
         CollisionGroup.BulletImpassable);
 
     /// <summary>
