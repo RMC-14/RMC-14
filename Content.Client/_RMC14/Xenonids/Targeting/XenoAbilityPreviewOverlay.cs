@@ -622,7 +622,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         var direction = (mousePos.Position - originMap.Position).ToAngle() - Angle.FromDegrees(90);
 
         var color = FlurryOutlineColor.WithAlpha(OutlineAlpha);
-        var box2 = Box2.CenteredAround(xform.Coordinates.Position, new(1, flurry.Range)).Translated(new(0, (flurry.Range / 2) + 0.5f));
+        var box2 = Box2.CenteredAround(xform.Coordinates.Position, new(flurry.Range, 1)).Translated(new(0, 1f));
         var rot = new Box2Rotated(box2, direction, xform.Coordinates.Position);
         DrawBorderFromBox2Rotated(args, rot, color);
     }

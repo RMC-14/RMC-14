@@ -55,7 +55,7 @@ public sealed class XenoFlurrySystem : EntitySystem
         var direction = (args.Target.Position - _transform.GetMoverCoordinates(xeno).Position).Normalized().ToAngle() - Angle.FromDegrees(90);
 
         var xenoCoord = _transform.GetMoverCoordinates(xeno);
-        var area = Box2.CenteredAround(xenoCoord.Position, new(1, xeno.Comp.Range)).Translated(new(0, (xeno.Comp.Range / 2) + 0.5f));
+        var area = Box2.CenteredAround(xenoCoord.Position, new(xeno.Comp.Range, 1)).Translated(new(0, 1f));
         var rot = new Box2Rotated(area, direction, xenoCoord.Position); // Correct the angle
 
         List<EntityUid> mobs = new();
