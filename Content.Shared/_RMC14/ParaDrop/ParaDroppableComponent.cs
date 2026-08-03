@@ -3,7 +3,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.ParaDrop;
+namespace Content.Shared._RMC14.ParaDrop;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ParaDroppableComponent : Component

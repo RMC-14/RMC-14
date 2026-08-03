@@ -3,7 +3,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 
-namespace Content.Shared.ParaDrop;
+namespace Content.Shared._RMC14.ParaDrop;
 
 [RegisterComponent, NetworkedComponent]
 public sealed partial class SkyFallingComponent : Component

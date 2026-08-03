@@ -2,7 +2,7 @@ using System.Numerics;
 using Content.Client._RMC14.ParaDrop;
 using Content.Client._RMC14.Sprite;
 using Content.Shared._RMC14.CrashLand;
-using Content.Shared.ParaDrop;
+using Content.Shared._RMC14.ParaDrop;
 using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.CrashLand;

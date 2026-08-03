@@ -28,7 +28,7 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
-namespace Content.Shared.ParaDrop;
+namespace Content.Shared._RMC14.ParaDrop;
 
 public abstract partial class SharedParaDropSystem : EntitySystem
 {

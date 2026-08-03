@@ -1,7 +1,7 @@
 using System.Numerics;
 using Content.Client._RMC14.Sprite;
+using Content.Shared._RMC14.ParaDrop;
 using Content.Shared._RMC14.Sprite;
-using Content.Shared.ParaDrop;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
 using Robust.Shared.Animations;
