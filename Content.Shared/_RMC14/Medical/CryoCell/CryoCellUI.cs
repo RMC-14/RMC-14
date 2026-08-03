@@ -9,6 +9,18 @@ public enum CryoCellUIKey
 }
 
 [Serializable, NetSerializable]
+public enum CryoCellVisuals : byte
+{
+    Occupied,
+}
+
+[Serializable, NetSerializable]
+public enum CryoCellVisualLayers
+{
+    Base,
+}
+
+[Serializable, NetSerializable]
 public sealed class CryoCellBuiState(
     NetEntity? occupant,
     string? occupantName,

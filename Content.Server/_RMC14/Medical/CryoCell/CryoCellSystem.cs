@@ -1,21 +1,36 @@
 using System.Linq;
+using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Medical.CryoCell;
+using Content.Shared._RMC14.Temperature;
+using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
+using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
-using Robust.Server.Player;
+using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Medical.CryoCell;
 
 public sealed class CryoCellSystem : SharedCryoCellSystem
 {
-    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
+    [Dependency] private readonly SharedRMCTemperatureSystem _rmcTemperature = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+
+    private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
+    private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
+    private static readonly ProtoId<DamageGroupPrototype> ToxinGroup = "Toxin";
+    private static readonly ProtoId<DamageGroupPrototype> AirlossGroup = "Airloss";
 
     public override void Initialize()
     {
@@ -27,6 +42,8 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         SubscribeLocalEvent<CryoCellComponent, CryoCellToggleAutoEjectBuiMsg>(OnUiToggleAutoEject);
         SubscribeLocalEvent<CryoCellComponent, CryoCellEjectBeakerBuiMsg>(OnUiEjectBeaker);
         SubscribeLocalEvent<CryoCellComponent, CryoCellToggleNotifyBuiMsg>(OnUiToggleNotify);
+        SubscribeLocalEvent<CryoCellComponent, EntInsertedIntoContainerMessage>(OnCryoEntInserted);
+        SubscribeLocalEvent<CryoCellComponent, EntRemovedFromContainerMessage>(OnCryoEntRemoved);
     }
 
     private void OnUiOpen(Entity<CryoCellComponent> ent, ref AfterActivatableUIOpenEvent args)
@@ -39,6 +56,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         ent.Comp.On = !ent.Comp.On;
         if (ent.Comp.On)
             ent.Comp.NextTick = _timing.CurTime + ent.Comp.TickDelay;
+
         Dirty(ent);
         UpdateUI(ent);
     }
@@ -65,7 +83,6 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
 
         var beaker = cont.ContainedEntities.First();
         _container.Remove(beaker, cont);
-        // Drop to owner map position
         _popup.PopupEntity(Loc.GetString("rmc-cryocell-beaker-ejected", ("entity", beaker)), ent);
         UpdateUI(ent);
     }
@@ -77,121 +94,156 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         UpdateUI(ent);
     }
 
+    private void OnCryoEntInserted(Entity<CryoCellComponent> ent, ref EntInsertedIntoContainerMessage args)
+    {
+        if (args.Container.ID != ent.Comp.ContainerId)
+            return;
+
+        ent.Comp.Occupant = args.Entity;
+        Dirty(ent);
+        UpdateCryoVisuals(ent);
+        UpdateUI(ent);
+    }
+
+    private void OnCryoEntRemoved(Entity<CryoCellComponent> ent, ref EntRemovedFromContainerMessage args)
+    {
+        if (args.Container.ID != ent.Comp.ContainerId)
+            return;
+
+        if (ent.Comp.Occupant == args.Entity)
+        {
+            ent.Comp.Occupant = null;
+            Dirty(ent);
+        }
+
+        UpdateCryoVisuals(ent);
+        UpdateUI(ent);
+    }
+
     private void UpdateUI(Entity<CryoCellComponent> ent)
     {
+        if (!_ui.IsUiOpen(ent.Owner, CryoCellUIKey.Key))
+            return;
+
         var comp = ent.Comp;
         NetEntity? occupantNet = null;
-        string occupantName = string.Empty;
-        float health = 0f;
-        float maxHealth = 0f;
-        float bodyTemp = 0f;
+        var occupantName = string.Empty;
+        var health = 0f;
+        var maxHealth = 0f;
+        var bodyTemp = 0f;
         var hasBeaker = TryGetBeaker(ent.Owner, comp, out _);
 
-        if (comp.Occupant is { } occupant && TryComp(occupant, out IMobControllerComponent? mob))
+        if (comp.Occupant is { } occupant)
         {
             occupantNet = GetNetEntity(occupant);
-            // Best-effort attempts to read health/body temp — replace with your project's exact APIs.
-            // TODO: Replace GetEntityHealth/GetEntityMaxHealth/GetEntityBodyTemperature with actual project helpers.
             health = GetEntityHealth(occupant);
-            maxHealth = GetEntityMaxHealth(occupant);
+            maxHealth = GetEntityMaxHealth();
             bodyTemp = GetEntityBodyTemperature(occupant);
             occupantName = MetaData(occupant).EntityName;
         }
 
         var state = new CryoCellBuiState(occupantNet, occupantName, health, maxHealth, bodyTemp, comp.On, hasBeaker, comp.AutoEject, comp.ReleaseNotice);
-        if (TryComp(ent.Owner, out BoundUserInterfaceComponent? bui))
-        {
-            // Bound UI sending is handled by the ActivatableUI system; we simply update via raising a UI state event.
-            // If your framework uses RaiseNetworkEvent for BUI state, change this accordingly.
-            bui.SetState(state);
-        }
+        _ui.SetUiState(ent.Owner, CryoCellUIKey.Key, state);
     }
 
     public override void Update(float frameTime)
     {
         var now = _timing.CurTime;
-        // Iterate all cryo cells and process ticks server-side.
-        foreach (var (comp, ent) in EntityQuery<CryoCellComponent>(true))
+        var query = EntityQueryEnumerator<CryoCellComponent>();
+
+        while (query.MoveNext(out var uid, out var comp))
         {
-            if (!comp.On)
+            if (!comp.On || comp.NextTick > now)
                 continue;
 
-            if (comp.NextTick > now)
-                continue;
-
-            // Schedule next tick
             comp.NextTick = now + comp.TickDelay;
-            Dirty(ent);
-
-            // Apply temperature drop
+            Dirty(uid, comp);
             comp.Temperature -= comp.TemperatureDropPerTick;
 
-            // If occupant present, apply cooling/healing logic and possibly auto-eject
-            if (comp.Occupant is { } occupant)
-            {
-                // 1. Adjust occupant body temperature toward cryo target (server must provide API)
-                ApplyBodyTemperatureChange(occupant, comp);
+            if (comp.Occupant is not { } occupant)
+                continue;
 
-                // 2. Apply healing while cold — per-damage-type
+            if (_mobState.IsDead(occupant))
+            {
+                EjectOccupant((uid, comp), occupant);
+                if (comp.ReleaseNotice)
+                    _popup.PopupEntity(Loc.GetString("rmc-cryocell-auto-eject-dead", ("entity", occupant)), uid);
+                continue;
+            }
+
+            _rmcTemperature.ForceChangeTemperature(occupant, comp.Temperature);
+
+            if (comp.Temperature <= 260f)
                 ApplyHealing(occupant, comp);
 
-                // 3. Auto-eject dead or if special rules trigger
-                if (_mobState.IsDead(occupant))
-                {
-                    // If literal-dead and undefibbable or other rules in DM: eject immediately
-                    EjectOccupant(ent, occupant);
-                    // play auto-eject sound / popup if configured
-                    if (comp.ReleaseNotice)
-                        _popup.PopupEntity(Loc.GetString("rmc-cryocell-auto-eject-dead", ("entity", occupant)), ent);
-                }
+            if (comp.AutoEject && ShouldAutoEject(occupant, comp))
+            {
+                EjectOccupant((uid, comp), occupant);
+                if (comp.ReleaseNotice)
+                    _popup.PopupEntity(Loc.GetString("rmc-cryocell-auto-eject-recovered", ("entity", occupant)), uid);
             }
         }
     }
 
-    private void ApplyBodyTemperatureChange(EntityUid occupant, CryoCellComponent comp)
-    {
-        // TODO: Insert a call to the project's body temperature API.
-        // Example (pseudocode — replace with your API):
-        // var current = _bodyTempSystem.GetTemperature(occupant);
-        // var newTemp = current - comp.TemperatureDropPerTick; // or using more exact heat capacity math
-        // _bodyTempSystem.SetTemperature(occupant, newTemp);
-        //
-        // For now this function is a no-op placeholder to be replaced with the correct API call.
-    }
-
     private void ApplyHealing(EntityUid occupant, CryoCellComponent comp)
     {
-        // TODO: Replace with your damage/healing API calls. The original DM code heals brute/burn/toxin
-        // gradually while in cryo. Here we call a small helper with marked TODOs.
+        if (!TryComp<DamageableComponent>(occupant, out var damageable))
+            return;
 
-        var brute = comp.HealBrutePerTick;
-        var burn = comp.HealBurnPerTick;
-        var toxin = comp.HealToxinPerTick;
+        if (damageable.DamagePerGroup.GetValueOrDefault(BruteGroup) > 0)
+        {
+            var healing = _rmcDamageable.DistributeHealingCached(occupant, BruteGroup, 0.25);
+            _damageable.TryChangeDamage(occupant, healing, true, false);
+        }
 
-        // Example placeholder:
-        // _damageableSystem.Heal(occupant, DamageType.Brute, brute);
-        // _damageableSystem.Heal(occupant, DamageType.Heat, burn);
-        // _damageableSystem.Heal(occupant, DamageType.Toxin, toxin);
+        if (damageable.DamagePerGroup.GetValueOrDefault(BurnGroup) > 0)
+        {
+            var healing = _rmcDamageable.DistributeHealingCached(occupant, BurnGroup, 0.25);
+            _damageable.TryChangeDamage(occupant, healing, true, false);
+        }
 
-        // If your repo exposes direct component fields, call them here, otherwise adapt to your damage API.
+        if (damageable.DamagePerGroup.GetValueOrDefault(ToxinGroup) > 0)
+        {
+            var healing = _rmcDamageable.DistributeHealingCached(occupant, ToxinGroup, 0.25);
+            _damageable.TryChangeDamage(occupant, healing, true, false);
+        }
+
+        if (damageable.DamagePerGroup.GetValueOrDefault(AirlossGroup) > 0)
+        {
+            var healing = _rmcDamageable.DistributeHealingCached(occupant, AirlossGroup, 1);
+            _damageable.TryChangeDamage(occupant, healing, true, false);
+        }
     }
 
-    // Helper placeholder getters: replace with your game's actual APIs.
+    private bool ShouldAutoEject(EntityUid occupant, CryoCellComponent comp)
+    {
+        if (!comp.AutoEject)
+            return false;
+
+        if (_mobState.IsDead(occupant))
+            return true;
+
+        if (TryComp<DamageableComponent>(occupant, out var damageable))
+            return damageable.TotalDamage <= 0;
+
+        return false;
+    }
+
     private float GetEntityHealth(EntityUid uid)
     {
-        // TODO: read actual health from Damageable/Health component
-        return 0f;
+        if (!TryComp<DamageableComponent>(uid, out var damageable))
+            return 100f;
+
+        return Math.Max(0f, 100f - (float) damageable.TotalDamage);
     }
 
-    private float GetEntityMaxHealth(EntityUid uid)
+    private float GetEntityMaxHealth()
     {
-        // TODO: read actual max health from Damageable/Health component
         return 100f;
     }
 
     private float GetEntityBodyTemperature(EntityUid uid)
     {
-        // TODO: read actual body temperature
-        return 293.15f; // default ~20C in Kelvin-like scale used in DM
+        return _rmcTemperature.GetTemperature(uid);
     }
 }

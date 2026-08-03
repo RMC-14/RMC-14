@@ -127,11 +127,10 @@ public abstract class SharedCryoCellSystem : EntitySystem
         return true;
     }
 
-    private void UpdateCryoVisuals(Entity<CryoCellComponent> cryo)
+    protected void UpdateCryoVisuals(Entity<CryoCellComponent> cryo)
     {
         var occupied = cryo.Comp.Occupant != null;
-        // Consider adding a CryoVisuals enum in shared for proper visuals similar to Sleeper/BodyScanner.
-        _appearance.SetData(cryo, /* placeholder index */ (byte)0, occupied);
+        _appearance.SetData(cryo, CryoCellVisuals.Occupied, occupied);
     }
 
     private void OnInsideCryoMoveInput(Entity<InsideCryoCellComponent> ent, ref MoveInputEvent args)
