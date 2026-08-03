@@ -564,12 +564,12 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     }
 
     private void DrawScissors(
-    in OverlayDrawArgs args,
-    EntityUid player,
-    TransformComponent xform,
-    MapCoordinates originMap,
-    MapCoordinates mousePos,
-    XenoScissorCutComponent scissors)
+        in OverlayDrawArgs args,
+        EntityUid player,
+        TransformComponent xform,
+        MapCoordinates originMap,
+        MapCoordinates mousePos,
+        XenoScissorCutComponent scissors)
     {
         var direction = (mousePos.Position - originMap.Position).ToAngle() - Angle.FromDegrees(90);
 
@@ -580,12 +580,12 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     }
 
     private void DrawHighGallop(
-    in OverlayDrawArgs args,
-    EntityUid player,
-    TransformComponent xform,
-    MapCoordinates originMap,
-    MapCoordinates mousePos,
-    XenoHighGallopComponent gallop)
+        in OverlayDrawArgs args,
+        EntityUid player,
+        TransformComponent xform,
+        MapCoordinates originMap,
+        MapCoordinates mousePos,
+        XenoHighGallopComponent gallop)
     {
         var direction = (mousePos.Position - originMap.Position).ToAngle() - Angle.FromDegrees(90);
 
@@ -596,12 +596,12 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     }
 
     private void DrawTailLash(
-    in OverlayDrawArgs args,
-    EntityUid player,
-    TransformComponent xform,
-    MapCoordinates originMap,
-    MapCoordinates mousePos,
-    XenoTailLashComponent lash)
+        in OverlayDrawArgs args,
+        EntityUid player,
+        TransformComponent xform,
+        MapCoordinates originMap,
+        MapCoordinates mousePos,
+        XenoTailLashComponent lash)
     {
         var direction = (mousePos.Position - originMap.Position).ToAngle() - Angle.FromDegrees(90);
 
@@ -612,12 +612,12 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     }
 
     private void DrawFlurry(
-    in OverlayDrawArgs args,
-    EntityUid player,
-    TransformComponent xform,
-    MapCoordinates originMap,
-    MapCoordinates mousePos,
-    XenoFlurryComponent flurry)
+        in OverlayDrawArgs args,
+        EntityUid player,
+        TransformComponent xform,
+        MapCoordinates originMap,
+        MapCoordinates mousePos,
+        XenoFlurryComponent flurry)
     {
         var direction = (mousePos.Position - originMap.Position).ToAngle() - Angle.FromDegrees(90);
 
