@@ -208,7 +208,7 @@ public sealed class LineSystem : EntitySystem
                 blocker = uid.Value;
                 return true;
             }
-            else if (_lockerQuery.TryComp(uid, out _))
+            else if (_lockerQuery.HasComp(uid))
             {
                 if (_entityStorage.IsOpen(uid.Value))
                     continue;
