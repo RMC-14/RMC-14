@@ -297,6 +297,10 @@ public sealed class RMCWaterSystem : EntitySystem
 
         water.Comp1.State = PurifiableWaterState.Dispersing;
         water.Comp2.SpreadAt = time + water.Comp1.PurifyDelay;
+
+        // SyncSprite derives animation progress from global real time. Temporarily remove it so
+        // this one-shot transition starts from its first frame instead of wrapping mid-transition.
+        water.Comp2.RestoreSyncSprite = RemComp<SyncSpriteComponent>(water);
         Dirty(water.Owner, water.Comp1);
         Dirty(water.Owner, water.Comp2);
         UpdateAppearance((water.Owner, water.Comp1));
@@ -379,6 +383,9 @@ public sealed class RMCWaterSystem : EntitySystem
         water.Comp1.State = PurifiableWaterState.Purified;
         Dirty(water.Owner, water.Comp1);
         UpdateAppearance((water.Owner, water.Comp1));
+
+        if (water.Comp2.RestoreSyncSprite)
+            EnsureComp<SyncSpriteComponent>(water);
 
         RemCompDeferred<DamageOverTimeComponent>(water);
         RemCompDeferred<ActiveWaterComponent>(water);

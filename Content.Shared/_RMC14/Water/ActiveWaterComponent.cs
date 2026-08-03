@@ -17,4 +17,10 @@ public sealed partial class ActiveWaterComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public Vector2 IncomingDirection;
+
+    /// <summary>
+    /// Whether synchronized idle animation should be restored after the purification transition.
+    /// </summary>
+    [DataField]
+    public bool RestoreSyncSprite;
 }
