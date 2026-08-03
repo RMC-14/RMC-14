@@ -179,7 +179,7 @@
     explosion:
       total: 1749
       slope: 2.25
-      max: 40
+      max: 20
     fire:
       type: RMCTileFireNapalm
       range: 3
