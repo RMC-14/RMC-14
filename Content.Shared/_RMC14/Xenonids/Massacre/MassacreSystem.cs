@@ -161,6 +161,7 @@ public sealed class MassacreSystem : EntitySystem
                 _statusEffects.TryRemoveStatusEffect(target.ent, "Jitter");
                 QueueDel(target.effect);
             }
+            xeno.Comp.Targets.Clear();
             return;
         }
 
@@ -190,6 +191,8 @@ public sealed class MassacreSystem : EntitySystem
                 _hive.ChangeBurrowedLarva(hive, xeno.Comp.BurrowedPerGib);
             }
         }
+
+        xeno.Comp.Targets.Clear();
 
         _popup.PopupClient(Loc.GetString("rmc-xeno-massacre-end-self"), xeno, xeno, PopupType.LargeCaution);
 
