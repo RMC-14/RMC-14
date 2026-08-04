@@ -1,6 +1,5 @@
 using System.Linq;
 using System.Numerics;
-using Content.Client.Actions;
 using Content.Client.CombatMode;
 using Content.Client.Examine;
 using Content.Client.Gameplay;
@@ -57,7 +56,6 @@ namespace Content.Client.ContextMenu.UI
 
         // RMC
         [Dependency] private readonly ActionUIController _action = default!;
-        [UISystemDependency] private readonly ActionsSystem _actionsSystem = default!;
 
         private bool _updating;
 
@@ -166,8 +164,7 @@ namespace Content.Client.ContextMenu.UI
                 // Don't close the menu on use if the user is currently using a repeatable action.
                 if (args.Function == EngineKeyFunctions.Use
                     && _action.SelectingTargetFor is { } selectedActionId
-                    && _actionsSystem.GetAction(selectedActionId) is { } action
-                    && EntityManager.TryGetComponent<TargetActionComponent>(action, out var target)
+                    && _entityManager.TryGetComponent<TargetActionComponent>(selectedActionId, out var target)
                     && target.Repeat)
                 {
                     args.Handle();
