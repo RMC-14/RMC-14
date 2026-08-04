@@ -785,6 +785,7 @@
       - creamy
       - meaty
   - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/misc.rsi
     state: cassoulet
   - type: SolutionContainerManager
     solutions:
@@ -805,6 +806,7 @@
       - fishy
       - oily
   - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/misc.rsi 
     state: bouillabaisse
   - type: SolutionContainerManager
     solutions:
@@ -825,6 +827,7 @@
       - savory
       - meaty
   - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/misc.rsi
     state: bourguignon
   - type: SolutionContainerManager
     solutions:
