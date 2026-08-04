@@ -123,8 +123,10 @@ public sealed class RadioDeviceSystem : EntitySystem
         if (!Resolve(uid, ref component, false))
             return;
 
-        if (component.PowerRequired && !this.IsPowered(uid, EntityManager))
+        // RMC14 - An unpowered microphone must still be able to turn off.
+        if (enabled && component.PowerRequired && !this.IsPowered(uid, EntityManager))
             return;
+        // RMC14
 
         component.Enabled = enabled;
 
@@ -166,7 +168,13 @@ public sealed class RadioDeviceSystem : EntitySystem
 
         _appearance.SetData(uid, RadioDeviceVisuals.Speaker, component.Enabled);
         if (component.Enabled)
-            EnsureComp<ActiveRadioComponent>(uid).Channels.UnionWith(component.Channels);
+        {
+            // RMC14 - RadioSpeakerComponent is authoritative; do not retain stale channels.
+            var active = EnsureComp<ActiveRadioComponent>(uid);
+            active.Channels.Clear();
+            active.Channels.UnionWith(component.Channels);
+            // RMC14
+        }
         else
             RemCompDeferred<ActiveRadioComponent>(uid);
     }
@@ -265,7 +273,7 @@ public sealed class RadioDeviceSystem : EntitySystem
         SetIntercomChannel(ent, args.Channel);
     }
 
-    private void SetIntercomChannel(Entity<IntercomComponent> ent, ProtoId<RadioChannelPrototype>? channel)
+    public void SetIntercomChannel(Entity<IntercomComponent> ent, ProtoId<RadioChannelPrototype>? channel)
     {
         ent.Comp.CurrentChannel = channel;
 
@@ -282,7 +290,17 @@ public sealed class RadioDeviceSystem : EntitySystem
         if (TryComp<RadioMicrophoneComponent>(ent, out var mic))
             mic.BroadcastChannel = channel;
         if (TryComp<RadioSpeakerComponent>(ent, out var speaker))
+        {
             speaker.Channels = new() { channel };
+
+            // RMC14 - Keep an already enabled speaker synchronized with its selected channel.
+            if (TryComp<ActiveRadioComponent>(ent, out var active))
+            {
+                active.Channels.Clear();
+                active.Channels.Add(channel.Value);
+            }
+            // RMC14
+        }
         Dirty(ent);
     }
 }
