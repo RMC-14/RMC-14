@@ -66,6 +66,15 @@
         },
         {
             "name": "pie-mash"
+        },
+         {
+           "name": "cassoulet"
+        },
+        {
+           "name": "bouillabaisse"
+        },
+        {
+           "name": "bourguignon"
         }
     ]
 }
