@@ -388,7 +388,7 @@
     addComponents:
     - type: XenoDoom
     - type: CrusherShield
-      shieldEffect: blood
+      shieldEffect: blood-shield
       plasmaCost: 200
       shieldDuration: 5
       explosionResistanceDuration: 0
