@@ -137,7 +137,7 @@ public abstract class SharedXenoDoomSystem : EntitySystem
 
         foreach (var mob in _mobs)
         {
-            if (!_examine.InRangeUnOccluded(xeno, mob))
+            if (!_examine.InRangeUnOccluded(xeno, mob, xeno.Comp.Range))
                 continue;
 
             if (!_xeno.CanAbilityAttackTarget(xeno, mob))
