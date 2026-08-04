@@ -14,6 +14,9 @@
   - type: ShowHealthIcons
   - type: ShowHealthBars
   - type: ParalyzeImmuneFrom
+    whitelist:
+      tags:
+      - RMCSynthGrabbable
   - type: RMCAllowSuitStorage
   - type: DemoSpecWhitelist
   - type: GrenadeSpecWhitelist
@@ -21,9 +24,6 @@
   - type: SniperWhitelist
   - type: PyroWhitelist
   - type: QYJWhitelist
-    whitelist:
-      tags:
-      - RMCSynthGrabbable
 
 - type: entity
   id: RMCSynthRemoveComponents
