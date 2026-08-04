@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.BlurredVision;
+using Content.Shared._RMC14.Body;
 using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
@@ -33,6 +34,7 @@ public abstract class SharedXenoDoomSystem : EntitySystem
     [Dependency] private readonly RMCCameraShakeSystem _cameraShake = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly SharedRMCBloodstreamSystem _rmcblood = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _mobs = new();
     public override void Initialize()
@@ -145,14 +147,14 @@ public abstract class SharedXenoDoomSystem : EntitySystem
             _daze.TryDaze(mob, xeno.Comp.DazeTime);
             _slow.TrySuperSlowdown(mob, xeno.Comp.SlowTime, ignoreDurationModifier: true);
 
-            if (!_solution.TryGetSolution(mob.Owner, xeno.Comp.TargetSolution, out var solEnt, out var solu))
+            if (_rmcblood.TryGetChemicalSolution(mob, out var solEnt, out var solu))
             {
-                if (solu == null || solEnt == null)
+                if (solu == null)
                     return;
 
                 foreach (var chemical in solu.GetReagentPrototypes(_prototypeManager).Keys)
                 {
-                    _solution.RemoveReagent(solEnt.Value, chemical.ID, xeno.Comp.RemovalPerReagent);
+                    _solution.RemoveReagent(solEnt, chemical.ID, xeno.Comp.RemovalPerReagent);
                 }
             }
 
