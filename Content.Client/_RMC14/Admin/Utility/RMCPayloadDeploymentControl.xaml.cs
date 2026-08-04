@@ -17,6 +17,9 @@ public sealed partial class RMCPayloadDeploymentControl : PanelContainer
     {
         RobustXamlLoader.Load(this);
         LandingRadiusContainer.AddChild(LandingRadius);
+        MapX.InitDefaultButtons();
+        MapY.InitDefaultButtons();
+        PodCount.InitDefaultButtons();
 
         PayloadTabs.SetTabTitle(0, Loc.GetString("rmc-payload-deployment-nearby-tab"));
         PayloadTabs.SetTabTitle(1, Loc.GetString("rmc-payload-deployment-player-tab"));

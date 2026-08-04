@@ -784,8 +784,7 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
             ("payload", total),
             ("total", TotalPayloadCount()));
         var maximumPods = Math.Max(1, Math.Min(RMCPayloadDeploymentLimits.MaxPods, total));
-        if (_control.PodCount.Value > maximumPods)
-            _control.PodCount.Value = maximumPods;
+        _control.PodCount.OverrideValue(Math.Min(_control.PodCount.Value, maximumPods));
         ActiveManifest.PodCount = _control.PodCount.Value;
         UpdateManifestOptions();
         ValidateManifestEntities();

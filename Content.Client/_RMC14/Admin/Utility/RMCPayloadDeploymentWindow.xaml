@@ -2,7 +2,7 @@
     xmlns="https://spacestation14.io"
     xmlns:admin="clr-namespace:Content.Client._RMC14.Admin.Utility"
     Title="{Loc rmc-payload-deployment-title}"
-    SetSize="1400 1000"
+    SetSize="1400 700"
     MinSize="920 600">
     <admin:RMCPayloadDeploymentControl Name="Deployment" Access="Public" />
 </DefaultWindow>

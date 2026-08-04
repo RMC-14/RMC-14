@@ -51,3 +51,4 @@
   - type: AnimationPlayer
   - type: PointLight
     radius: 2
+    castShadows: false

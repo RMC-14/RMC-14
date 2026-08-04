@@ -187,7 +187,7 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
                 if (!_animPlayer.HasRunningAnimation(uid, DroppingAnimationKey) && paraDroppable.LastParaDrop != null && Transform(uid).MapID != MapId.Nullspace)
                     PlayFallAnimation(uid, paraDroppable.DropDuration, paraDropping.RemainingTime, paraDroppable.FallHeight, DroppingAnimationKey, paraDroppable);
 
-                _rmcSprite.UpdatePosition(uid);
+                _rmcSprite.UpdateSpriteTree(uid);
             }
         }
     }

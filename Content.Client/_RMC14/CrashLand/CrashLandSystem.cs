@@ -55,7 +55,7 @@ public sealed class CrashLandSystem : SharedCrashLandSystem
                     _paraDrop.PlayFallAnimation(uid, crashLandable.CrashDuration, crashLanding.RemainingTime, crashLandable.FallHeight, CrashingAnimationKey);
                 }
 
-                _rmcSprite.UpdatePosition(uid);
+                _rmcSprite.UpdateSpriteTree(uid);
             }
         }
     }
