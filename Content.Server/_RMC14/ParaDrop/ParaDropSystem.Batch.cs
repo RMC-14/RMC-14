@@ -1,8 +1,9 @@
 using System.Linq;
 using System.Numerics;
+using Content.Server._RMC14.PayloadDeployment;
 using Content.Shared._RMC14.CrashLand;
-using Content.Shared._RMC14.Dropship.Utility;
 using Content.Shared._RMC14.ParaDrop;
+using Content.Shared._RMC14.PayloadDeployment;
 using Content.Shared._RMC14.SupplyDrop;
 using Content.Shared.Ghost;
 using Content.Shared.Mobs.Components;
@@ -21,16 +22,13 @@ public sealed partial class ParaDropSystem
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly RMCPayloadDeploymentSystem _payloadDeployment = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
-    private const float StagingGroupSeparation = RMCPayloadDeploymentLimits.MaxLandingRadius * 2 + 100;
-
     private readonly List<ParaDropJob> _batchJobs = [];
     private readonly HashSet<EntityUid> _reservedPayloads = [];
-    private MapId? _stagingMap;
-    private int _nextStagingGroup;
 
     public bool IsPayloadReserved(EntityUid entity)
     {
@@ -82,6 +80,7 @@ public sealed partial class ParaDropSystem
                     Math.Max(0, viableTiles));
             }
 
+            var stagingOrigin = _payloadDeployment.AllocateStagingGroup();
             var payload = new List<EntityUid>(requestPayload);
             payload.AddRange(existingPayload);
             foreach (var prototypePayload in request.Prototypes)
@@ -96,13 +95,12 @@ public sealed partial class ParaDropSystem
 
                 for (var i = 0; i < prototypePayload.Quantity; i++)
                 {
-                    var spawned = Spawn(prototypePayload.Prototype, GetStagingCoordinates(Vector2.Zero));
+                    var spawned = Spawn(prototypePayload.Prototype, _payloadDeployment.GetStagingCoordinates(stagingOrigin));
                     spawnedPayload.Add(spawned);
                     payload.Add(spawned);
                 }
             }
 
-            var stagingOrigin = new Vector2(_nextStagingGroup++ * StagingGroupSeparation, 0);
             var queued = new List<QueuedParaDrop>(payload.Count);
             var existingPayloadSet = existingPayload.ToHashSet();
             var previousArrivalAt = TimeSpan.Zero;
@@ -123,7 +121,7 @@ public sealed partial class ParaDropSystem
                 previousArrivalAt = arrivalAt;
                 var landing = landingTiles[i];
                 var stagingOffset = landing.Coordinates.Position - request.Target.Position;
-                var staging = GetStagingCoordinates(stagingOrigin + stagingOffset);
+                var staging = _payloadDeployment.GetStagingCoordinates(stagingOrigin + stagingOffset);
                 if (!existingPayloadSet.Contains(payload[i]))
                     _transform.SetMapCoordinates(payload[i], staging);
 
@@ -243,17 +241,6 @@ public sealed partial class ParaDropSystem
         }
 
         return true;
-    }
-
-    private MapCoordinates GetStagingCoordinates(Vector2 position)
-    {
-        if (_stagingMap is not { } mapId || !_map.MapExists(mapId))
-        {
-            _map.CreateMap(out mapId);
-            _stagingMap = mapId;
-        }
-
-        return new MapCoordinates(position, mapId);
     }
 
     private static bool IsValidTiming(float value)

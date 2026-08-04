@@ -1,6 +1,6 @@
 using Robust.Shared.Map;
 
-namespace Content.Shared._RMC14.Dropship.Utility;
+namespace Content.Shared._RMC14.PayloadDeployment;
 
 public sealed class RMCOrbitalDropRequest
 {

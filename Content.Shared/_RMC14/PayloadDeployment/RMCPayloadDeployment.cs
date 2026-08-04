@@ -1,7 +1,7 @@
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._RMC14.Dropship.Utility;
+namespace Content.Shared._RMC14.PayloadDeployment;
 
 [Serializable, NetSerializable]
 public readonly record struct RMCDropPrototypePayload(EntProtoId Prototype, int Quantity);

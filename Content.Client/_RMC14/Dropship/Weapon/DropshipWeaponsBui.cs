@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Text;
 using Content.Client._RMC14.TacticalMap;
 using Content.Client._RMC14.UserInterface;
@@ -9,6 +9,7 @@ using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.ElectronicSystem;
 using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Dropship.Utility.Systems;
+using Content.Shared._RMC14.PayloadDeployment.Components;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.ParaDrop;
 using Content.Shared._RMC14.TacticalMap;

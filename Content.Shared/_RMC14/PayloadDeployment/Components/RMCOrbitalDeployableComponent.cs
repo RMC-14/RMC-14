@@ -5,7 +5,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._RMC14.Dropship.Utility.Components;
+namespace Content.Shared._RMC14.PayloadDeployment.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class RMCOrbitalDeployableComponent : Component
@@ -78,7 +78,7 @@ public sealed partial class RMCOrbitalDeployableComponent : Component
     public EntProtoId? LandingEffectId = "RMCEffectAlert";
 
     /// <summary>
-    ///     The sound to play on the deployer's location when the deployer is activated.
+    ///     The payload-specific sound to play when this entity is launched.
     /// </summary>
     [DataField, AutoNetworkedField]
     public SoundSpecifier? LaunchSound = new SoundPathSpecifier("/Audio/_RMC14/Effects/bamf.ogg");

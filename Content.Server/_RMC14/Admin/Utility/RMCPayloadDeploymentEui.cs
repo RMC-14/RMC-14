@@ -1,14 +1,14 @@
 using System.Linq;
 using System.Numerics;
-using Content.Server._RMC14.Dropship.Utility;
 using Content.Server._RMC14.ParaDrop;
+using Content.Server._RMC14.PayloadDeployment;
 using Content.Server.Administration;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.EUI;
 using Content.Shared._RMC14.Admin.Utility;
-using Content.Shared._RMC14.Dropship.Utility;
 using Content.Shared._RMC14.ParaDrop;
+using Content.Shared._RMC14.PayloadDeployment;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.SupplyDrop;
 using Content.Shared.Administration;
@@ -36,7 +36,7 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
     private readonly EntityLookupSystem _lookup;
     private readonly SharedMapSystem _map;
     private readonly SharedMindSystem _mind;
-    private readonly RMCOrbitalDeployerSystem _orbitalDrop;
+    private readonly RMCOrbitalDeploySystem _orbitalDrop;
     private readonly ParaDropSystem _paraDrop;
     private readonly RMCPlanetSystem _planet;
     private readonly SharedJobSystem _job;
@@ -51,7 +51,7 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
         _lookup = _entities.System<EntityLookupSystem>();
         _map = _entities.System<SharedMapSystem>();
         _mind = _entities.System<SharedMindSystem>();
-        _orbitalDrop = _entities.System<RMCOrbitalDeployerSystem>();
+        _orbitalDrop = _entities.System<RMCOrbitalDeploySystem>();
         _paraDrop = _entities.System<ParaDropSystem>();
         _planet = _entities.System<RMCPlanetSystem>();
         _job = _entities.System<SharedJobSystem>();

@@ -35,7 +35,5 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
     {
         _batchJobs.Clear();
         _reservedPayloads.Clear();
-        _stagingMap = null;
-        _nextStagingGroup = 0;
     }
 }

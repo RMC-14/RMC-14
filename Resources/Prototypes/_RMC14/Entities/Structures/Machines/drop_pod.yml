@@ -48,3 +48,6 @@
       types:
         Blunt: 5000
   - type: NoStunOnExit
+  - type: AnimationPlayer
+  - type: PointLight
+    radius: 2

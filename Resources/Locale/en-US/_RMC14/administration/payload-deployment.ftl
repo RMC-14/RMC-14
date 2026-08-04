@@ -4,6 +4,7 @@ rmc-payload-deployment-type = Delivery type
 rmc-payload-deployment-manifest = Manifest
 rmc-payload-deployment-add-manifest = Add manifest
 rmc-payload-deployment-remove-manifest = Remove manifest
+rmc-payload-deployment-pop-out = Pop out
 rmc-payload-deployment-manifest-name = Manifest name
 rmc-payload-deployment-manifest-name-placeholder = Optional name...
 rmc-payload-deployment-manifest-number = Manifest {$number}

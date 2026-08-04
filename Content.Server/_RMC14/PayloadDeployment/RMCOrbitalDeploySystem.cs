@@ -1,8 +1,8 @@
 using System.Linq;
-using Content.Shared._RMC14.Dropship.Utility;
 using Content.Shared._RMC14.CrashLand;
-using Content.Shared._RMC14.Dropship.Utility.Systems;
 using Content.Shared._RMC14.ParaDrop;
+using Content.Shared._RMC14.PayloadDeployment;
+using Content.Shared._RMC14.PayloadDeployment.Systems;
 using Content.Shared._RMC14.SupplyDrop;
 using Content.Shared.GameTicking;
 using Robust.Shared.Containers;
@@ -11,13 +11,14 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
-namespace Content.Server._RMC14.Dropship.Utility;
+namespace Content.Server._RMC14.PayloadDeployment;
 
-public sealed class RMCOrbitalDeployerSystem : SharedRMCOrbitalDeployerSystem
+public sealed class RMCOrbitalDeploySystem : SharedRMCOrbitalDeploySystem
 {
     [Dependency] private readonly SharedCrashLandSystem _crashLand = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private readonly RMCPayloadDeploymentSystem _payloadDeployment = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -242,6 +243,7 @@ public sealed class RMCOrbitalDeployerSystem : SharedRMCOrbitalDeployerSystem
         }
 
         var existingPayloadSet = prepared.ExistingPayload.ToHashSet();
+        var stagingOrigin = _payloadDeployment.AllocateStagingGroup();
         var previousDropAt = TimeSpan.Zero;
         var queuedPods = new List<QueuedDropPod>(prepared.Request.PodCount);
         for (var i = 0; i < prepared.PreparedPods.Count; i++)
@@ -259,6 +261,8 @@ public sealed class RMCOrbitalDeployerSystem : SharedRMCOrbitalDeployerSystem
 
             previousDropAt = dropAt;
             var landing = prepared.LandingTiles[i];
+            var stagingOffset = landing.Coordinates.Position - prepared.Request.Target.Position;
+            var staging = _payloadDeployment.GetStagingCoordinates(stagingOrigin + stagingOffset);
             var pendingEntities = prepared.PodPayloads[i].Where(existingPayloadSet.Contains).ToList();
             var reservationUntil = dropAt +
                 TimeSpan.FromSeconds(prepared.Request.DropDuration + prepared.Request.TimeToOpen);
@@ -267,6 +271,7 @@ public sealed class RMCOrbitalDeployerSystem : SharedRMCOrbitalDeployerSystem
                 prepared.PreparedPods[i],
                 landing.Coordinates,
                 landing.Tile,
+                staging,
                 pendingEntities,
                 [],
                 launchAt,
@@ -441,7 +446,8 @@ public sealed class RMCOrbitalDeployerSystem : SharedRMCOrbitalDeployerSystem
             timeUntilDrop,
             request.DropDuration,
             request.UseParachute,
-            launchCoordinates);
+            launchCoordinates,
+            stagingCoordinates: queued.StagingCoordinates);
     }
 
     private bool IsBeingSupplyDropped(EntityUid entity)
@@ -534,6 +540,7 @@ public sealed class RMCOrbitalDeployerSystem : SharedRMCOrbitalDeployerSystem
         EntityUid Pod,
         MapCoordinates Coordinates,
         ReservedTile Tile,
+        MapCoordinates StagingCoordinates,
         List<EntityUid> PendingEntities,
         List<EntityCoordinates> LaunchCoordinates,
         TimeSpan LaunchAt,

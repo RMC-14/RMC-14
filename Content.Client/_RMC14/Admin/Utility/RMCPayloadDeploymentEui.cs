@@ -2,13 +2,15 @@ using System.Linq;
 using Content.Client._RMC14.UserInterface;
 using Content.Client.Eui;
 using Content.Shared._RMC14.Admin.Utility;
-using Content.Shared._RMC14.Dropship.Utility;
 using Content.Shared._RMC14.ParaDrop;
+using Content.Shared._RMC14.PayloadDeployment;
 using Content.Shared.Eui;
 using Content.Shared.Item;
 using Content.Shared.Prototypes;
 using JetBrains.Annotations;
+using Robust.Client.Graphics;
 using Robust.Client.Player;
+using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared;
 using Robust.Shared.Configuration;
@@ -25,9 +27,11 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
     private const int MaxPrototypeResults = 250;
 
     [Dependency] private readonly IConfigurationManager _configuration = default!;
+    [Dependency] private readonly IClyde _clyde = default!;
     [Dependency] private readonly IEntityManager _entities = default!;
     [Dependency] private readonly IPlayerManager _players = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
 
     private readonly List<RMCPayloadDeploymentManifest> _manifests = [];
     private readonly List<RMCPayloadDeploymentMapEntry> _maps = [];
@@ -35,7 +39,10 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
 
     private SharedTransformSystem _transform = default!;
     private RMCPayloadDeploymentDraftSystem _draft = default!;
-    private RMCPayloadDeploymentWindow _window = default!;
+    private RMCPayloadDeploymentControl _control = default!;
+    private RMCPayloadDeploymentWindow? _hostWindow;
+    private WindowRoot? _popOutRoot;
+    private IClydeWindow? _popOutWindow;
     private List<RMCPayloadDeploymentEntityEntry> _nearby = [];
     private List<RMCPayloadDeploymentEntityEntry> _playerControlled = [];
     private ConfirmationWindow? _confirmation;
@@ -51,8 +58,9 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
     {
         _transform = _entities.System<SharedTransformSystem>();
         _draft = _entities.System<RMCPayloadDeploymentDraftSystem>();
-        _window = new RMCPayloadDeploymentWindow();
-        _window.OnClose += SendClosedMessage;
+        _hostWindow = new RMCPayloadDeploymentWindow();
+        _control = _hostWindow.Deployment;
+        _hostWindow.OnClose += SendClosedMessage;
 
         if (_draft.TryRestore(out var deliveryType, out var activeManifest, out var manifests))
         {
@@ -73,43 +81,44 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
             }
         }
 
-        _window.DropType.AddItem(Loc.GetString("rmc-payload-deployment-orbital"), (int) RMCPayloadDeliveryType.Orbital);
-        _window.DropType.AddItem(Loc.GetString("rmc-payload-deployment-paradrop"), (int) RMCPayloadDeliveryType.ParaDrop);
-        _window.DropType.SelectId((int) _deliveryType);
+        _control.DropType.AddItem(Loc.GetString("rmc-payload-deployment-orbital"), (int) RMCPayloadDeliveryType.Orbital);
+        _control.DropType.AddItem(Loc.GetString("rmc-payload-deployment-paradrop"), (int) RMCPayloadDeliveryType.ParaDrop);
+        _control.DropType.SelectId((int) _deliveryType);
 
-        _window.NearbyRadius.IsValid = value => value is >= 1 and <= MaxNearbyRadius;
-        _window.PrototypeQuantity.IsValid = value => value is >= 1 and <= RMCPayloadDeploymentLimits.MaxPayload;
-        _window.LandingRadius.IsValid = value =>
+        _control.NearbyRadius.IsValid = value => value is >= 1 and <= MaxNearbyRadius;
+        _control.PrototypeQuantity.IsValid = value => value is >= 1 and <= RMCPayloadDeploymentLimits.MaxPayload;
+        _control.LandingRadius.IsValid = value =>
             value is >= 0 and <= RMCPayloadDeploymentLimits.MaxLandingRadius &&
             MathF.Abs(value * 2 - MathF.Round(value * 2)) < 0.001f;
-        _window.PodCount.IsValid = value => value >= 1 &&
+        _control.PodCount.IsValid = value => value >= 1 &&
             value <= Math.Max(1, Math.Min(RMCPayloadDeploymentLimits.MaxPods, ActiveManifest.PayloadCount()));
-        _window.LaunchInterval.IsValid = ValidDuration;
-        _window.ArrivalDelay.IsValid = ValidDuration;
-        _window.ArrivalInterval.IsValid = ValidDuration;
-        _window.ArrivalIntervalVariation.IsValid = ValidDuration;
-        _window.DropDuration.IsValid = ValidDuration;
-        _window.OpenDelay.IsValid = ValidDuration;
-        _window.ManifestName.IsValid = value => value.Length <= MaxManifestNameLength;
+        _control.LaunchInterval.IsValid = ValidDuration;
+        _control.ArrivalDelay.IsValid = ValidDuration;
+        _control.ArrivalInterval.IsValid = ValidDuration;
+        _control.ArrivalIntervalVariation.IsValid = ValidDuration;
+        _control.DropDuration.IsValid = ValidDuration;
+        _control.OpenDelay.IsValid = ValidDuration;
+        _control.ManifestName.IsValid = value => value.Length <= MaxManifestNameLength;
 
-        _window.RefreshNearby.OnPressed += _ => Refresh(_window.NearbyRadius.Value);
-        _window.SelectAllNearby.OnPressed += _ => SelectAllItems(_window.NearbyEntities);
-        _window.AddNearby.OnPressed += _ => AddSelectedEntities(_window.NearbyEntities, true);
-        _window.AddPlayer.OnPressed += _ => AddSelectedEntities(_window.PlayerEntities, false);
-        _window.AddPrototype.OnPressed += _ => AddSelectedPrototype();
-        _window.RemoveManifestEntry.OnPressed += _ => RemoveSelectedManifestEntry();
-        _window.ClearManifest.OnPressed += _ => ClearManifestEntries();
-        _window.UseCurrentPosition.OnPressed += _ => SetCurrentPosition();
-        _window.AddManifest.OnPressed += _ => AddManifest();
-        _window.RemoveManifest.OnPressed += _ => RemoveManifest();
-        _window.LaunchSelected.OnPressed += _ => ConfirmLaunch(true);
-        _window.LaunchAll.OnPressed += _ => ConfirmLaunch(false);
+        _control.RefreshNearby.OnPressed += _ => Refresh(_control.NearbyRadius.Value);
+        _control.SelectAllNearby.OnPressed += _ => SelectAllItems(_control.NearbyEntities);
+        _control.AddNearby.OnPressed += _ => AddSelectedEntities(_control.NearbyEntities, true);
+        _control.AddPlayer.OnPressed += _ => AddSelectedEntities(_control.PlayerEntities, false);
+        _control.AddPrototype.OnPressed += _ => AddSelectedPrototype();
+        _control.RemoveManifestEntry.OnPressed += _ => RemoveSelectedManifestEntry();
+        _control.ClearManifest.OnPressed += _ => ClearManifestEntries();
+        _control.UseCurrentPosition.OnPressed += _ => SetCurrentPosition();
+        _control.AddManifest.OnPressed += _ => AddManifest();
+        _control.RemoveManifest.OnPressed += _ => RemoveManifest();
+        _hostWindow.PopOut.OnPressed += _ => PopOut();
+        _control.LaunchSelected.OnPressed += _ => ConfirmLaunch(true);
+        _control.LaunchAll.OnPressed += _ => ConfirmLaunch(false);
 
-        _window.NearbySearch.OnTextChanged += _ => RebuildNearbyList();
-        _window.PlayerSearch.OnTextChanged += _ => RebuildPlayerList();
-        _window.PrototypeSearch.OnTextChanged += _ => RebuildPrototypeList();
-        _window.LandingRadius.OnValueChanged += _ => UpdateLandingTileCount();
-        _window.ManifestName.OnTextChanged += args =>
+        _control.NearbySearch.OnTextChanged += _ => RebuildNearbyList();
+        _control.PlayerSearch.OnTextChanged += _ => RebuildPlayerList();
+        _control.PrototypeSearch.OnTextChanged += _ => RebuildPrototypeList();
+        _control.LandingRadius.OnValueChanged += _ => UpdateLandingTileCount();
+        _control.ManifestName.OnTextChanged += args =>
         {
             if (_loadingManifest)
                 return;
@@ -119,11 +128,11 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
             RebuildNearbyList();
             RebuildPlayerList();
         };
-        _window.DropType.OnItemSelected += OnDropTypeSelected;
-        _window.ManifestOptions.OnItemSelected += OnManifestSelected;
-        _window.MapOptions.OnItemSelected += args =>
+        _control.DropType.OnItemSelected += OnDropTypeSelected;
+        _control.ManifestOptions.OnItemSelected += OnManifestSelected;
+        _control.MapOptions.OnItemSelected += args =>
         {
-            _window.MapOptions.SelectId(args.Id);
+            _control.MapOptions.SelectId(args.Id);
             if (!_loadingManifest && args.Id >= 0 && args.Id < _maps.Count)
             {
                 ActiveManifest.Map = _maps[args.Id].MapId;
@@ -132,24 +141,24 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
 
             UpdateCoordinateMode();
         };
-        _window.RawCoordinates.OnToggled += args =>
+        _control.RawCoordinates.OnToggled += args =>
         {
             if (_loadingManifest ||
-                _window.MapOptions.SelectedId < 0 ||
-                _window.MapOptions.SelectedId >= _maps.Count ||
-                !_maps[_window.MapOptions.SelectedId].HasPlanetCoordinates)
+                _control.MapOptions.SelectedId < 0 ||
+                _control.MapOptions.SelectedId >= _maps.Count ||
+                !_maps[_control.MapOptions.SelectedId].HasPlanetCoordinates)
             {
                 return;
             }
 
-            var map = _maps[_window.MapOptions.SelectedId];
-            var coordinates = new Vector2i(_window.MapX.Value, _window.MapY.Value);
+            var map = _maps[_control.MapOptions.SelectedId];
+            var coordinates = new Vector2i(_control.MapX.Value, _control.MapY.Value);
             coordinates += args.Pressed
                 ? -map.CoordinateOffset
                 : map.CoordinateOffset;
 
-            _window.MapX.Value = coordinates.X;
-            _window.MapY.Value = coordinates.Y;
+            _control.MapX.Value = coordinates.X;
+            _control.MapY.Value = coordinates.Y;
             ActiveManifest.Coordinates = coordinates;
             ActiveManifest.RawCoordinates = args.Pressed;
         };
@@ -157,7 +166,7 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
         BuildPrototypeCatalog();
         UpdateModeControls();
         LoadActiveManifest();
-        _window.OpenCentered();
+        _hostWindow.OpenCentered();
     }
 
     public override void Closed()
@@ -166,8 +175,50 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
         _draft.Save(_deliveryType, _activeManifest, _manifests);
         _confirmation?.Close();
         _confirmation = null;
-        _window.OnClose -= SendClosedMessage;
-        _window.Close();
+        if (_hostWindow != null)
+            _hostWindow.OnClose -= SendClosedMessage;
+
+        if (_popOutWindow != null)
+            _popOutWindow.RequestClosed -= OnPopOutClosed;
+
+        _control.Orphan();
+        _hostWindow?.Close();
+        _popOutWindow?.Dispose();
+    }
+
+    private void OnPopOutClosed(WindowRequestClosedEventArgs args)
+    {
+        SendClosedMessage();
+    }
+
+    private void PopOut()
+    {
+        if (_hostWindow == null)
+            return;
+
+        _confirmation?.Close();
+        _confirmation = null;
+
+        var monitor = _clyde.EnumerateMonitors().First();
+        _popOutWindow = _clyde.CreateWindow(new WindowCreateParameters
+        {
+            Maximized = false,
+            Title = Loc.GetString("rmc-payload-deployment-title"),
+            Monitor = monitor,
+            Width = 1400,
+            Height = 1000,
+        });
+
+        _control.Orphan();
+        _hostWindow.OnClose -= SendClosedMessage;
+        _hostWindow.Close();
+        _hostWindow = null;
+
+        _popOutWindow.RequestClosed += OnPopOutClosed;
+        _popOutWindow.DisposeOnClose = true;
+
+        _popOutRoot = _uiManager.CreateWindowRoot(_popOutWindow);
+        _popOutRoot.AddChild(_control);
     }
 
     public override void HandleState(EuiStateBase state)
@@ -177,7 +228,7 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
 
         _nearby = deploymentState.Nearby;
         _playerControlled = deploymentState.PlayerControlled;
-        _window.NearbyRadius.Value = (int) deploymentState.NearbyRadius;
+        _control.NearbyRadius.Value = (int) deploymentState.NearbyRadius;
         UpdateMaps(deploymentState.Maps);
         RebuildNearbyList();
         RebuildPlayerList();
@@ -220,7 +271,7 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
                     _manifests[manifest].Entities.Clear();
             }
 
-            _window.Result.Text = Loc.GetString("rmc-payload-deployment-result-success", ("manifests", pending.Count));
+            _control.Result.Text = Loc.GetString("rmc-payload-deployment-result-success", ("manifests", pending.Count));
             UpdateManifest();
             RebuildNearbyList();
             RebuildPlayerList();
@@ -241,7 +292,7 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
             LoadActiveManifest();
         }
 
-        _window.Result.Text = result.Failure switch
+        _control.Result.Text = result.Failure switch
         {
             RMCPayloadDeploymentFailure.InvalidPayload => Loc.GetString("rmc-payload-deployment-result-invalid-payload", ("manifest", manifestLabel)),
             RMCPayloadDeploymentFailure.InvalidPrototype => Loc.GetString("rmc-payload-deployment-result-invalid-prototype", ("manifest", manifestLabel)),
@@ -265,14 +316,14 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
 
         SaveActiveManifest();
         _deliveryType = (RMCPayloadDeliveryType) args.Id;
-        _window.DropType.SelectId(args.Id);
+        _control.DropType.SelectId(args.Id);
         var removed = RemoveInvalidParaDropPrototypes();
         BuildPrototypeCatalog();
         UpdateModeControls();
         LoadActiveManifest();
         if (removed > 0)
         {
-            _window.Result.Text = Loc.GetString("rmc-payload-deployment-removed-prototypes",
+            _control.Result.Text = Loc.GetString("rmc-payload-deployment-removed-prototypes",
                 ("count", removed));
         }
     }
@@ -284,7 +335,7 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
 
         SaveActiveManifest();
         _activeManifest = args.Id;
-        _window.ManifestOptions.SelectId(args.Id);
+        _control.ManifestOptions.SelectId(args.Id);
         LoadActiveManifest();
         RebuildNearbyList();
         RebuildPlayerList();
@@ -332,15 +383,15 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
     private void UpdateManifestOptions()
     {
         _loadingManifest = true;
-        _window.ManifestOptions.Clear();
+        _control.ManifestOptions.Clear();
         for (var i = 0; i < _manifests.Count; i++)
         {
-            _window.ManifestOptions.AddItem(GetManifestLabel(i, true), i);
+            _control.ManifestOptions.AddItem(GetManifestLabel(i, true), i);
         }
 
-        _window.ManifestOptions.SelectId(_activeManifest);
-        _window.RemoveManifest.Disabled = _manifests.Count <= 1;
-        _window.AddManifest.Disabled = _manifests.Count >= RMCPayloadDeploymentLimits.MaxBatchRequests;
+        _control.ManifestOptions.SelectId(_activeManifest);
+        _control.RemoveManifest.Disabled = _manifests.Count <= 1;
+        _control.AddManifest.Disabled = _manifests.Count >= RMCPayloadDeploymentLimits.MaxBatchRequests;
         _loadingManifest = false;
     }
 
@@ -378,22 +429,22 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
             return;
 
         var manifest = ActiveManifest;
-        manifest.Name = _window.ManifestName.Text;
-        if (_window.MapOptions.SelectedId >= 0 && _window.MapOptions.SelectedId < _maps.Count)
-            manifest.Map = _maps[_window.MapOptions.SelectedId].MapId;
+        manifest.Name = _control.ManifestName.Text;
+        if (_control.MapOptions.SelectedId >= 0 && _control.MapOptions.SelectedId < _maps.Count)
+            manifest.Map = _maps[_control.MapOptions.SelectedId].MapId;
 
-        manifest.Coordinates = new Vector2i(_window.MapX.Value, _window.MapY.Value);
-        manifest.LandingRadius = _window.LandingRadius.Value;
-        manifest.PodCount = _window.PodCount.Value;
-        manifest.ArrivalDelay = _window.ArrivalDelay.Value;
-        manifest.DropDuration = _window.DropDuration.Value;
-        manifest.OpenDelay = _window.OpenDelay.Value;
-        manifest.LaunchInterval = _window.LaunchInterval.Value;
-        manifest.ArrivalInterval = _window.ArrivalInterval.Value;
-        manifest.ArrivalIntervalVariation = _window.ArrivalIntervalVariation.Value;
-        manifest.UseParachute = _window.UseParachute.Pressed;
-        manifest.RawCoordinates = _window.RawCoordinates.Pressed;
-        manifest.IgnoreParadropRestrictions = _window.IgnoreParadropRestrictions.Pressed;
+        manifest.Coordinates = new Vector2i(_control.MapX.Value, _control.MapY.Value);
+        manifest.LandingRadius = _control.LandingRadius.Value;
+        manifest.PodCount = _control.PodCount.Value;
+        manifest.ArrivalDelay = _control.ArrivalDelay.Value;
+        manifest.DropDuration = _control.DropDuration.Value;
+        manifest.OpenDelay = _control.OpenDelay.Value;
+        manifest.LaunchInterval = _control.LaunchInterval.Value;
+        manifest.ArrivalInterval = _control.ArrivalInterval.Value;
+        manifest.ArrivalIntervalVariation = _control.ArrivalIntervalVariation.Value;
+        manifest.UseParachute = _control.UseParachute.Pressed;
+        manifest.RawCoordinates = _control.RawCoordinates.Pressed;
+        manifest.IgnoreParadropRestrictions = _control.IgnoreParadropRestrictions.Pressed;
     }
 
     private void LoadActiveManifest()
@@ -403,7 +454,7 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
 
         _loadingManifest = true;
         var manifest = ActiveManifest;
-        _window.ManifestName.Text = manifest.Name;
+        _control.ManifestName.Text = manifest.Name;
         var mapIndex = manifest.Map is { } map
             ? _maps.FindIndex(entry => entry.MapId == map)
             : -1;
@@ -414,21 +465,21 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
         }
 
         if (mapIndex >= 0)
-            _window.MapOptions.Select(mapIndex);
+            _control.MapOptions.Select(mapIndex);
 
-        _window.MapX.Value = manifest.Coordinates.X;
-        _window.MapY.Value = manifest.Coordinates.Y;
-        _window.LandingRadius.Value = manifest.LandingRadius;
-        _window.PodCount.Value = Math.Max(1,
+        _control.MapX.Value = manifest.Coordinates.X;
+        _control.MapY.Value = manifest.Coordinates.Y;
+        _control.LandingRadius.Value = manifest.LandingRadius;
+        _control.PodCount.Value = Math.Max(1,
             Math.Min(manifest.PodCount, Math.Max(1, manifest.PayloadCount())));
-        _window.ArrivalDelay.Value = manifest.ArrivalDelay;
-        _window.DropDuration.Value = manifest.DropDuration;
-        _window.OpenDelay.Value = manifest.OpenDelay;
-        _window.LaunchInterval.Value = manifest.LaunchInterval;
-        _window.ArrivalInterval.Value = manifest.ArrivalInterval;
-        _window.ArrivalIntervalVariation.Value = manifest.ArrivalIntervalVariation;
-        _window.UseParachute.Pressed = manifest.UseParachute;
-        _window.IgnoreParadropRestrictions.Pressed = manifest.IgnoreParadropRestrictions;
+        _control.ArrivalDelay.Value = manifest.ArrivalDelay;
+        _control.DropDuration.Value = manifest.DropDuration;
+        _control.OpenDelay.Value = manifest.OpenDelay;
+        _control.LaunchInterval.Value = manifest.LaunchInterval;
+        _control.ArrivalInterval.Value = manifest.ArrivalInterval;
+        _control.ArrivalIntervalVariation.Value = manifest.ArrivalIntervalVariation;
+        _control.UseParachute.Pressed = manifest.UseParachute;
+        _control.IgnoreParadropRestrictions.Pressed = manifest.IgnoreParadropRestrictions;
         UpdateCoordinateMode();
         UpdateLandingTileCount();
         _loadingManifest = false;
@@ -438,9 +489,9 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
     private void UpdateModeControls()
     {
         var orbital = _deliveryType == RMCPayloadDeliveryType.Orbital;
-        _window.PodCountRow.Visible = orbital;
-        _window.OpenDelayRow.Visible = orbital;
-        _window.UseParachute.Visible = orbital;
+        _control.PodCountRow.Visible = orbital;
+        _control.OpenDelayRow.Visible = orbital;
+        _control.UseParachute.Visible = orbital;
     }
 
     private int RemoveInvalidParaDropPrototypes()
@@ -502,8 +553,8 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
 
     private void RebuildPrototypeList()
     {
-        var search = _window.PrototypeSearch.Text.Trim();
-        _window.Prototypes.Clear();
+        var search = _control.PrototypeSearch.Text.Trim();
+        _control.Prototypes.Clear();
         var shown = 0;
         foreach (var prototype in _prototypeCatalog)
         {
@@ -514,7 +565,7 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
             if (!string.IsNullOrWhiteSpace(prototype.EditorSuffix))
                 prototypeName += $" [{prototype.EditorSuffix}]";
 
-            _window.Prototypes.Add(new ItemList.Item(_window.Prototypes)
+            _control.Prototypes.Add(new ItemList.Item(_control.Prototypes)
             {
                 Text = prototypeName,
                 TooltipText = prototype.Description,
@@ -536,12 +587,12 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
 
     private void RebuildNearbyList()
     {
-        PopulateEntityList(_window.NearbyEntities, _nearby, _window.NearbySearch.Text, false);
+        PopulateEntityList(_control.NearbyEntities, _nearby, _control.NearbySearch.Text, false);
     }
 
     private void RebuildPlayerList()
     {
-        PopulateEntityList(_window.PlayerEntities, _playerControlled, _window.PlayerSearch.Text, true);
+        PopulateEntityList(_control.PlayerEntities, _playerControlled, _control.PlayerSearch.Text, true);
     }
 
     private void PopulateEntityList(
@@ -616,6 +667,9 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
                 AddEntities(selectedEntries);
             };
             _confirmation.DenyButton.OnPressed += _ => _confirmation.Close();
+            if (_popOutRoot != null)
+                _popOutRoot.AddChild(_confirmation);
+
             _confirmation.OpenCentered();
             return;
         }
@@ -655,21 +709,21 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
 
     private void AddSelectedPrototype()
     {
-        if (_window.Prototypes.GetSelected().FirstOrDefault()?.Metadata is not EntProtoId prototype)
+        if (_control.Prototypes.GetSelected().FirstOrDefault()?.Metadata is not EntProtoId prototype)
             return;
 
         var remaining = RMCPayloadDeploymentLimits.MaxPayload - ActiveManifest.PayloadCount();
         if (remaining <= 0)
             return;
 
-        var quantity = Math.Min(_window.PrototypeQuantity.Value, remaining);
+        var quantity = Math.Min(_control.PrototypeQuantity.Value, remaining);
         ActiveManifest.Prototypes[prototype] = ActiveManifest.Prototypes.GetValueOrDefault(prototype) + quantity;
         UpdateManifest();
     }
 
     private void RemoveSelectedManifestEntry()
     {
-        foreach (var selected in _window.Manifest.GetSelected().ToArray())
+        foreach (var selected in _control.Manifest.GetSelected().ToArray())
         {
             switch (selected.Metadata)
             {
@@ -698,12 +752,16 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
 
     private void UpdateManifest()
     {
-        _window.Manifest.Clear();
+        _control.Manifest.Clear();
         foreach (var (entity, entry) in ActiveManifest.Entities)
         {
-            _window.Manifest.Add(new ItemList.Item(_window.Manifest)
+            var text = $"{entry.Name} [{entity}]";
+            if (!string.IsNullOrWhiteSpace(entry.Role))
+                text += $" — {entry.Role}";
+
+            _control.Manifest.Add(new ItemList.Item(_control.Manifest)
             {
-                Text = $"{entry.Name} [{entity}]",
+                Text = text,
                 Metadata = entity,
             });
         }
@@ -713,7 +771,7 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
             var name = _prototypes.TryIndex(prototype, out EntityPrototype? entityPrototype)
                 ? entityPrototype.Name
                 : prototype.Id;
-            _window.Manifest.Add(new ItemList.Item(_window.Manifest)
+            _control.Manifest.Add(new ItemList.Item(_control.Manifest)
             {
                 Text = $"{name} ({prototype}) ×{quantity}",
                 Metadata = prototype,
@@ -721,14 +779,14 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
         }
 
         var total = ActiveManifest.PayloadCount();
-        _window.ManifestSummary.Text = Loc.GetString("rmc-payload-deployment-manifest-summary",
+        _control.ManifestSummary.Text = Loc.GetString("rmc-payload-deployment-manifest-summary",
             ("manifest", GetManifestLabel(_activeManifest, false)),
             ("payload", total),
             ("total", TotalPayloadCount()));
         var maximumPods = Math.Max(1, Math.Min(RMCPayloadDeploymentLimits.MaxPods, total));
-        if (_window.PodCount.Value > maximumPods)
-            _window.PodCount.Value = maximumPods;
-        ActiveManifest.PodCount = _window.PodCount.Value;
+        if (_control.PodCount.Value > maximumPods)
+            _control.PodCount.Value = maximumPods;
+        ActiveManifest.PodCount = _control.PodCount.Value;
         UpdateManifestOptions();
         ValidateManifestEntities();
     }
@@ -755,7 +813,7 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
 
     private void UpdateLandingTileCount()
     {
-        var radius = _window.LandingRadius.Value;
+        var radius = _control.LandingRadius.Value;
         var radiusSquared = radius * radius;
         var radiusBounds = (int) MathF.Ceiling(radius);
         var tiles = 0;
@@ -768,17 +826,17 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
             }
         }
 
-        _window.LandingTileCount.Text = Loc.GetString("rmc-payload-deployment-landing-tiles", ("tiles", tiles));
+        _control.LandingTileCount.Text = Loc.GetString("rmc-payload-deployment-landing-tiles", ("tiles", tiles));
     }
 
     private void UpdateMaps(IReadOnlyList<RMCPayloadDeploymentMapEntry> maps)
     {
         _maps.Clear();
         _maps.AddRange(maps);
-        _window.MapOptions.Clear();
+        _control.MapOptions.Clear();
         foreach (var map in _maps)
         {
-            _window.MapOptions.AddItem(FormatMap(map.MapId));
+            _control.MapOptions.AddItem(FormatMap(map.MapId));
         }
 
         MapId? defaultMap = null;
@@ -809,19 +867,19 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
 
     private void UpdateCoordinateMode()
     {
-        if (_window.MapOptions.SelectedId < 0 || _window.MapOptions.SelectedId >= _maps.Count)
+        if (_control.MapOptions.SelectedId < 0 || _control.MapOptions.SelectedId >= _maps.Count)
             return;
 
-        var hasPlanetCoordinates = _maps[_window.MapOptions.SelectedId].HasPlanetCoordinates;
+        var hasPlanetCoordinates = _maps[_control.MapOptions.SelectedId].HasPlanetCoordinates;
         if (hasPlanetCoordinates)
         {
-            _window.RawCoordinates.Disabled = false;
-            _window.RawCoordinates.Pressed = ActiveManifest.RawCoordinates;
+            _control.RawCoordinates.Disabled = false;
+            _control.RawCoordinates.Pressed = ActiveManifest.RawCoordinates;
         }
         else
         {
-            _window.RawCoordinates.Pressed = true;
-            _window.RawCoordinates.Disabled = true;
+            _control.RawCoordinates.Pressed = true;
+            _control.RawCoordinates.Disabled = true;
             ActiveManifest.RawCoordinates = true;
         }
     }
@@ -837,18 +895,18 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
         var mapIndex = _maps.FindIndex(entry => entry.MapId == transform.MapID);
         if (mapIndex >= 0)
         {
-            _window.MapOptions.Select(mapIndex);
+            _control.MapOptions.Select(mapIndex);
             ActiveManifest.Map = transform.MapID;
             UpdateCoordinateMode();
             UpdateManifestOptions();
         }
 
         var position = _transform.GetMapCoordinates(player, transform).Position.Floored();
-        if (mapIndex >= 0 && !_window.RawCoordinates.Pressed)
+        if (mapIndex >= 0 && !_control.RawCoordinates.Pressed)
             position += _maps[mapIndex].CoordinateOffset;
 
-        _window.MapX.Value = position.X;
-        _window.MapY.Value = position.Y;
+        _control.MapX.Value = position.X;
+        _control.MapY.Value = position.Y;
         ActiveManifest.Coordinates = position;
     }
 
@@ -896,7 +954,7 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
             : Enumerable.Range(0, _manifests.Count).ToList();
         if (!ValidateManifests(manifests))
         {
-            _window.Result.Text = Loc.GetString("rmc-payload-deployment-result-empty");
+            _control.Result.Text = Loc.GetString("rmc-payload-deployment-result-empty");
             return;
         }
 
@@ -922,6 +980,9 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
             SendLaunch(manifests);
         };
         _confirmation.DenyButton.OnPressed += _ => _confirmation.Close();
+        if (_popOutRoot != null)
+            _popOutRoot.AddChild(_confirmation);
+
         _confirmation.OpenCentered();
     }
 
@@ -985,8 +1046,8 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
 
     private void SetLaunchButtonsDisabled(bool disabled)
     {
-        _window.LaunchSelected.Disabled = disabled;
-        _window.LaunchAll.Disabled = disabled;
+        _control.LaunchSelected.Disabled = disabled;
+        _control.LaunchAll.Disabled = disabled;
     }
 
     private void Refresh(float radius)

@@ -291,7 +291,7 @@ public abstract class SharedSupplyDropSystem : EntitySystem
         return true;
     }
 
-    public void LaunchSupplyDrop(EntityUid droppingEntity, MapCoordinates dropCoordinates, float skyFallDuration, float dropDuration, TimeSpan openDelay, DamageSpecifier? landingDamage = null, EntProtoId? landingEffect = null, SoundSpecifier? arrivingSound = null, int dropScatter = 0, bool useParachute = true)
+    public void LaunchSupplyDrop(EntityUid droppingEntity, MapCoordinates dropCoordinates, float skyFallDuration, float dropDuration, TimeSpan openDelay, DamageSpecifier? landingDamage = null, EntProtoId? landingEffect = null, SoundSpecifier? arrivingSound = null, int dropScatter = 0, bool useParachute = true, MapCoordinates? stagingCoordinates = null)
     {
         if (_net.IsClient)
             return;
@@ -300,8 +300,10 @@ public abstract class SharedSupplyDropSystem : EntitySystem
 
         _rmcpulling.TryStopAllPullsFromAndOn(droppingEntity);
 
-        var mapId = EnsureMap();
-        _transform.SetMapCoordinates(droppingEntity, new MapCoordinates(_supplyDropCount++ * 50, 0, mapId));
+        if (stagingCoordinates is { } staging)
+            _transform.SetMapCoordinates(droppingEntity, staging);
+        else
+            _transform.SetMapCoordinates(droppingEntity, new MapCoordinates(_supplyDropCount++ * 50, 0, EnsureMap()));
 
         var dropping = EnsureComp<BeingSupplyDroppedComponent>(droppingEntity);
         var dropEntityCoordinates = _transform.ToCoordinates(dropCoordinates);
