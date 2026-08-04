@@ -204,8 +204,9 @@
     icon:
       sprite: /Textures/_RMC14/Interface/map_blips_large.rsi
       state: tank
-
-## SPP
+  - type: AnimationPlayer
+  - type: CrashLandable
+  - type: ParaDroppable
 
 - type: entity
   parent: VehicleTankBase
