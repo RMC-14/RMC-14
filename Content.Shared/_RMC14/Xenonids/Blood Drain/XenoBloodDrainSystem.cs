@@ -114,10 +114,10 @@ public sealed class XenoBloodDrainSystem : EntitySystem
             SpawnAttachedTo(xeno.Comp.HealEffect, xeno.Owner.ToCoordinates());
             SpawnAttachedTo(xeno.Comp.BiteEffect, args.Target.Value.ToCoordinates());
             _audio.PlayPvs(xeno.Comp.DrainSound, xeno);
-
-            if (_rmcblood.TryGetBloodSolution(args.Target.Value, out var blood))
-                blood.RemoveSolution(xeno.Comp.BloodDrain);
         }
+
+        if (_rmcblood.TryGetBloodSolution(args.Target.Value, out var blood))
+            blood.RemoveSolution(xeno.Comp.BloodDrain);
 
         var evoBonus = FixedPoint2.Zero;
         var bonuses = EntityQueryEnumerator<EvolutionBonusComponent>();
