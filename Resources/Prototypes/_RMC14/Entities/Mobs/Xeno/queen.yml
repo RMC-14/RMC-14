@@ -392,6 +392,7 @@
       plasmaCost: 200
       shieldDuration: 5
       explosionResistanceDuration: 0
+      damageReduction: 5
     addActions:
     - ActionXenoDoomBloodQueen
     - ActionXenoDefensiveShieldBloodQueen
