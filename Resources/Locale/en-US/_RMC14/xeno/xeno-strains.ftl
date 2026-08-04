@@ -210,6 +210,7 @@ rmc-xeno-bloodqueen-description = You lose:
   - Your normal acid is replaced with weak acid.
   You gain:
   - Increased speed, damage, health, and armor.
+  - Your slashes now do a slight AOE to enemies surrounding the target.
   - Brace: Gives you a temporary shield for 5 seconds that reduces damage taken slightly.
   - Doom: A terrifying roar that removes helpful chemicals and darkens lights.
   - Massacre: Guts multiple dead bodies in an area. Gives a burrowed larva for each body gibbed.
