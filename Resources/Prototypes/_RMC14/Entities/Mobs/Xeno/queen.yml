@@ -419,6 +419,20 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 1.66
     baseSprintSpeed: 3
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.68
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.755
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.5275
+      whitelist:
+        components:
+        - XenoHeavy
   - type: FootstepModifier
     footstepSoundCollection:
       collection: XenoFootstepLarge
