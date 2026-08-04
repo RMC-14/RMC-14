@@ -10,6 +10,7 @@
   icon: "RMCJobIconSynth"
   joinNotifyCrew: true
   whitelisted: true
+  whitelistParent: RMCJobSynthetic
   supervisors: cm-job-supervisors-colonists
   accessGroups:
   - Colony # Colony All Access
