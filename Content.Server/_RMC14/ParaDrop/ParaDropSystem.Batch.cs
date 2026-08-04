@@ -180,7 +180,9 @@ public sealed partial class ParaDropSystem
                 HasComp<SkyFallingComponent>(entity) ||
                 HasComp<ParaDroppingComponent>(entity) ||
                 HasComp<BeingSupplyDroppedComponent>(entity) ||
-                (!HasComp<MobStateComponent>(entity) && !HasComp<CanBeSupplyDroppedComponent>(entity)))
+                (!HasComp<MobStateComponent>(entity) &&
+                 !HasComp<CanBeSupplyDroppedComponent>(entity) &&
+                 !HasComp<ParaDroppableComponent>(entity)))
             {
                 return false;
             }

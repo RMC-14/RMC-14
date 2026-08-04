@@ -92,7 +92,8 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
             foreach (var entity in _nearbyEntities)
             {
                 if ((!_entities.HasComponent<MobStateComponent>(entity) &&
-                     !_entities.HasComponent<CanBeSupplyDroppedComponent>(entity)) ||
+                     !_entities.HasComponent<CanBeSupplyDroppedComponent>(entity) &&
+                     !_entities.HasComponent<ParaDroppableComponent>(entity)) ||
                     !TryCreateEntry(entity, sourceCoordinates, out var entry))
                 {
                     continue;
