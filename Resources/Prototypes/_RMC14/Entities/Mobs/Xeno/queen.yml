@@ -357,6 +357,65 @@
     popup: rmc-xeno-magicalgirl-popup
 
 - type: entity
+  parent: RMCXenoQueenBase
+  id: RMCXenoQueenBlood
+  suffix: Blood Queen
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Extras/blood_queen.rsi
+  - type: XenoStrain
+    name: rmc-xeno-bloodqueen-name
+    description: rmc-xeno-bloodqueen-description
+    popup: rmc-xeno-bloodqueen-popup
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoAcidWeak
+    - ActionXenoPheromones
+    - ActionXenoWordQueen
+    - ActionXenoPsychicWhisper
+    - ActionXenoPsychicRadiance
+    - ActionXenoGiveOrder
+    - ActionXenoGut
+    - ActionXenoManageHive
+  - type: XenoMaturing
+    critThreshold: 1500
+    deadThreshold: 1600
+    addComponents:
+    - type: XenoDoom
+    - type: XenoCharge
+      damage:
+        types:
+          Blunt: 60
+          Structural: 750
+    addActions:
+    - ActionXenoDoom
+    - ActionXenoCharge
+  - type: CMArmor
+    xenoArmor: 35
+  - type: AcidTrap
+    trapLevel: 1
+    cost: 70
+  - type: XenoPheromones
+    pheromonesMultiplier: 3
+    pheroSuffix: strong  
+  - type: WhitelistPickup
+    whitelist:
+      components:
+      - XenoFruit
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 50
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 68
+
+- type: entity
   parent: StationAiHolo
   id: RMCQueenEye
   name: queen eye
