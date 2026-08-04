@@ -412,6 +412,11 @@
     damage:
       groups:
         Brute: 50
+  - type: XenoBrutalize
+    damage:
+      groups:
+        Brute: 40
+    baseCooldownReduction: 0
   - type: XenoTailStab
     tailDamage:
       groups:
