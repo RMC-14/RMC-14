@@ -48,6 +48,39 @@
     },
     {
       "name": "hedgehog-shield-half"
+    },
+    {
+      "name": "blood-shield-half",
+      "delays": [
+        [
+          0.15,
+          0.15,
+          0.15,
+          0.15
+        ]
+      ]
+    },
+    {
+      "name": "blood-shield-quarter",
+      "delays": [
+        [
+          0.15,
+          0.15,
+          0.15,
+          0.15
+        ]
+      ]
+    },
+    {
+      "name": "blood-shield-full",
+      "delays": [
+        [
+          0.15,
+          0.15,
+          0.15,
+          0.15
+        ]
+      ]
     }
   ]
 }

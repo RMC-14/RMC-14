@@ -431,7 +431,7 @@
   parent: ActionXenoBase
   id: ActionXenoDoom
   name: Doom (50)
-  description: Turns off lights around you for 10 seconds, and slows, dazes, and drains hostiles as well.
+  description: Turns off lights around you for 10 seconds, and slows, dazes, and drains helpful chemicals from hostiles as well.
   components:
   - type: Action
     itemIconStyle: NoItem
@@ -443,3 +443,29 @@
     event: !type:XenoDoomActionEvent
   - type: XenoActionPlasma
     cost: 50
+
+- type: entity
+  parent: ActionXenoDoom
+  id: ActionXenoDoomBloodQueen
+  name: Doom (250)
+  components:
+  - type: XenoActionPlasma
+    cost: 250
+
+- type: entity
+  id: ActionXenoBloodDrain
+  parent: ActionXenoBase
+  name: Blood Drain (50)
+  description: Drain blood from a pulled host, giving the hive evolution points and healing you slightly.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: headbite
+  - type: TargetAction
+    range: 2
+  - type: EntityTargetAction
+    event: !type:XenoBloodDrainActionEvent
+  - type: ActionBlockIfResting
+  - type: XenoOffensiveAction

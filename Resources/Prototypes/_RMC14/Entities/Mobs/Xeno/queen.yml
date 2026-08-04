@@ -379,21 +379,22 @@
     - ActionXenoPsychicWhisper
     - ActionXenoPsychicRadiance
     - ActionXenoGiveOrder
-    - ActionXenoGut
+    - ActionXenoMassacre
+    - ActionXenoBloodDrain
     - ActionXenoManageHive
   - type: XenoMaturing
     critThreshold: 1500
     deadThreshold: 1600
     addComponents:
     - type: XenoDoom
-    - type: XenoCharge
-      damage:
-        types:
-          Blunt: 60
-          Structural: 750
+    - type: CrusherShield
+      shieldEffect: blood
+      plasmaCost: 200
+      shieldDuration: 5
+      explosionResistanceDuration: 0
     addActions:
-    - ActionXenoDoom
-    - ActionXenoCharge
+    - ActionXenoDoomBloodQueen
+    - ActionXenoDefensiveShieldBloodQueen
   - type: CMArmor
     xenoArmor: 35
   - type: AcidTrap
@@ -414,6 +415,20 @@
     tailDamage:
       groups:
         Brute: 68
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.66
+    baseSprintSpeed: 3
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: XenoFootstepLarge
+      params:
+        volume: 4
+  - type: XenoMassacre
+  - type: XenoBloodDrain
+    biteDamage:
+      groups:
+        Brute: 20
+      
 
 - type: entity
   parent: StationAiHolo
