@@ -24,10 +24,70 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<SkyFallingComponent, ComponentInit>(OnComponentInit);
+        SubscribeLocalEvent<SkyFallingComponent, AfterAutoHandleStateEvent>(OnSkyFallingState);
         SubscribeLocalEvent<SkyFallingComponent, ComponentRemove>(OnComponentRemove);
 
         SubscribeLocalEvent<ParaDroppingComponent, ComponentRemove>(OnParaDroppingRemove);
+    }
+
+    private void OnSkyFallingState(Entity<SkyFallingComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        if (!TryComp<SpriteComponent>(ent, out var sprite) ||
+            TerminatingOrDeleted(ent))
+        {
+            return;
+        }
+
+        if (!TryComp<AnimationPlayerComponent>(ent, out var player) ||
+            _animPlayer.HasRunningAnimation(player, SkyFallingAnimationKey))
+        {
+            return;
+        }
+
+        ent.Comp.OriginalScale = sprite.Scale;
+        ent.Comp.OriginalSpriteOffset = sprite.Offset;
+
+        if (ent.Comp.RemainingTime <= 0)
+            return;
+
+        _animPlayer.Play((ent, player), GetFallingDisappearingAnimation(ent.Comp.RemainingTime, ent.Comp.OriginalScale, ent.Comp.AnimationScale), SkyFallingAnimationKey);
+    }
+
+    private void OnComponentRemove(Entity<SkyFallingComponent> ent, ref ComponentRemove args)
+    {
+        if (!TryComp<SpriteComponent>(ent, out var sprite) ||
+            TerminatingOrDeleted(ent))
+        {
+            return;
+        }
+
+        if (TryComp(ent, out AnimationPlayerComponent? animation))
+            _animPlayer.Stop((ent, animation), SkyFallingAnimationKey);
+
+        var spriteEnt = (ent, sprite);
+        _sprite.SetScale(spriteEnt, ent.Comp.OriginalScale);
+        _sprite.SetOffset(spriteEnt, ent.Comp.OriginalSpriteOffset);
+    }
+
+    private void OnParaDroppingRemove(Entity<ParaDroppingComponent> ent, ref ComponentRemove args)
+    {
+        if (TerminatingOrDeleted(ent))
+            return;
+
+        if (!TryComp(ent, out AnimationPlayerComponent? animation))
+            return;
+
+        _animPlayer.Stop((ent, animation), DroppingAnimationKey);
+
+        if (!TryComp(ent, out SpriteComponent? sprite))
+            return;
+
+        var offset = Vector2.Zero;
+
+        if (TryComp(ent, out ParaDroppableComponent? paraDroppable))
+            offset = paraDroppable.OriginalSpriteOffset;
+
+        _sprite.SetOffset((ent, sprite), offset);
     }
 
     public Animation ReturnFallAnimation(float fallDuration, float fallHeight, Vector2 offset = new ())
@@ -81,63 +141,6 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
                 },
             }
         };
-    }
-
-    private void OnComponentInit(Entity<SkyFallingComponent> ent, ref ComponentInit args)
-    {
-        if (!TryComp<SpriteComponent>(ent, out var sprite) ||
-            TerminatingOrDeleted(ent))
-        {
-            return;
-        }
-
-        ent.Comp.OriginalScale = sprite.Scale;
-        ent.Comp.OriginalSpriteOffset = sprite.Offset;
-
-        if (!TryComp<AnimationPlayerComponent>(ent, out var player))
-            return;
-
-        if (_animPlayer.HasRunningAnimation(player, SkyFallingAnimationKey))
-            return;
-
-        _animPlayer.Play((ent, player), GetFallingDisappearingAnimation(ent.Comp.RemainingTime, ent.Comp.OriginalScale, ent.Comp.AnimationScale), SkyFallingAnimationKey);
-    }
-
-    private void OnComponentRemove(Entity<SkyFallingComponent> ent, ref ComponentRemove args)
-    {
-        if (!TryComp<SpriteComponent>(ent, out var sprite) ||
-            TerminatingOrDeleted(ent))
-        {
-            return;
-        }
-
-        if (TryComp(ent, out AnimationPlayerComponent? animation))
-            _animPlayer.Stop((ent, animation),SkyFallingAnimationKey);
-
-        var spriteEnt = (ent, sprite);
-        _sprite.SetScale(spriteEnt, ent.Comp.OriginalScale);
-        _sprite.SetOffset(spriteEnt, ent.Comp.OriginalSpriteOffset);
-    }
-
-    private void OnParaDroppingRemove(Entity<ParaDroppingComponent> ent, ref ComponentRemove args)
-    {
-        if (TerminatingOrDeleted(ent))
-            return;
-
-        if (!TryComp(ent, out AnimationPlayerComponent? animation))
-            return;
-
-        _animPlayer.Stop((ent, animation),DroppingAnimationKey);
-
-        if (!TryComp(ent, out SpriteComponent? sprite))
-            return;
-
-        var offset = Vector2.Zero;
-
-        if (TryComp(ent, out ParaDroppableComponent? paraDroppable))
-            offset = paraDroppable.OriginalSpriteOffset;
-
-        _sprite.SetOffset((ent, sprite), offset);
     }
 
     private void SpawnParachute(float fallDuration, EntityCoordinates coordinates, ParaDroppableComponent paraDroppable, float multiplier, Vector2 offset = new())

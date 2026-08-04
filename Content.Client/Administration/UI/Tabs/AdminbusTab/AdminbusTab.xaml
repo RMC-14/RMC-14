@@ -13,7 +13,7 @@
         <cc:UICommandButton Name="LoadBlueprintsButton" Command="loadbp" Text="{Loc 'load-blueprints'}" WindowType="{x:Type abt:LoadBlueprintsWindow}"/>
         <cc:CommandButton Command="deleteewc Singularity" Name="DeleteSingulos" Text="{Loc 'delete-singularities'}"/>
         <!-- RMC14 -->
-        <cc:CommandButton Command="orbitaldropui" Text="{Loc rmc-orbital-drop-button}" />
+        <cc:CommandButton Command="rmcdeploymentui" Text="{Loc rmc-payload-deployment-button}" />
         <!-- RMC14 -->
     </GridContainer>
 </Control>

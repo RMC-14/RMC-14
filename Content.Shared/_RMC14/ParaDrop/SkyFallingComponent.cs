@@ -5,13 +5,13 @@ using Robust.Shared.Map;
 
 namespace Content.Shared._RMC14.ParaDrop;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
 public sealed partial class SkyFallingComponent : Component
 {
     /// <summary>
     ///     The remaining duration of the animation.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float RemainingTime = 1.5f;
 
     /// <summary>

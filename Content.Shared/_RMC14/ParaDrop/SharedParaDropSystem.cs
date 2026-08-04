@@ -278,16 +278,35 @@ public abstract partial class SharedParaDropSystem : EntitySystem
             return false;
         }
 
+        // Paradrop near the target location.
+        if (TryGetParaDropLocation(dropCoordinates, paraDroppable.DropScatter, out var adjustedCoordinates))
+            dropCoordinates = adjustedCoordinates;
+
+        StartParaDrop(dropping, dropCoordinates, paraDroppable);
+        return true;
+    }
+
+    protected void StartPreparedParaDrop(EntityUid dropping, EntityCoordinates dropCoordinates, float skyFallDuration, float dropDuration)
+    {
+        if (!EnsureComp<ParaDroppableComponent>(dropping, out var paraDroppable))
+            paraDroppable.RemoveComponentAfterDrop = true;
+
+        paraDroppable.SkyFallDuration = skyFallDuration;
+        paraDroppable.DropScatter = 0;
+        paraDroppable.DropDuration = dropDuration;
+        Dirty(dropping, paraDroppable);
+
+        StartParaDrop(dropping, dropCoordinates, paraDroppable);
+    }
+
+    private void StartParaDrop(EntityUid dropping, EntityCoordinates dropCoordinates, ParaDroppableComponent paraDroppable)
+    {
         paraDroppable.LastParaDrop = _timing.CurTime;
         Dirty(dropping, paraDroppable);
 
         _rmcPulling.TryStopAllPullsFromAndOn(dropping);
         if (TryComp(dropping, out PhysicsComponent? physics))
             _physics.SetLinearVelocity(dropping, Vector2.Zero, body: physics);
-
-        // Paradrop near the target location.
-        if (TryGetParaDropLocation(dropCoordinates, paraDroppable.DropScatter, out var adjustedCoordinates))
-            dropCoordinates = adjustedCoordinates;
 
         var skyFalling = EnsureComp<SkyFallingComponent>(dropping);
         skyFalling.RemainingTime = paraDroppable.SkyFallDuration;
@@ -300,8 +319,6 @@ public abstract partial class SharedParaDropSystem : EntitySystem
         Dirty(dropping, droppingComp);
 
         Blocker.UpdateCanMove(dropping);
-
-        return true;
     }
 
     /// <summary>
