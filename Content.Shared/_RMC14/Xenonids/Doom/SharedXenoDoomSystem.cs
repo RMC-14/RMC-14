@@ -150,7 +150,7 @@ public abstract class SharedXenoDoomSystem : EntitySystem
             if (_rmcblood.TryGetChemicalSolution(mob, out var solEnt, out var solu))
             {
                 if (solu == null)
-                    return;
+                    continue;
 
                 foreach (var chemical in solu.GetReagentPrototypes(_prototypeManager).Keys)
                 {
