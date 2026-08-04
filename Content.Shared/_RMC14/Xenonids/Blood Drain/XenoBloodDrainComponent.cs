@@ -13,10 +13,10 @@ public sealed partial class XenoBloodDrainComponent : Component
     public FixedPoint2 BloodDrain = 28;
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 BaseEvoPointsGranted = 5;
+    public FixedPoint2 BaseEvoPointsGranted = 2.5;
 
     [DataField, AutoNetworkedField]
-    public float BonusEvoMult = 5;
+    public float BonusEvoMult = 2.5;
 
     [DataField, AutoNetworkedField]
     public TimeSpan DrainTime = TimeSpan.FromSeconds(1);

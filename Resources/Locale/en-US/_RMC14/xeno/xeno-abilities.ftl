@@ -487,4 +487,6 @@ rmc-xeno-massacre-end-others = {CAPITALIZE(THE($user))} tears the nearby bodies 
 rmc-xeno-blood-drain-target = {CAPITALIZE(THE($user))} is biting into you!
 rmc-xeno-blood-drain-no-blood = {CAPITALIZE(THE($target))} has no blood left!
 rmc-xeno-blood-drain-bad-blood = {CAPITALIZE(THE($target))} has terrible tasting blood!
+rmc-xeno-blood-drain-infected-blood = {CAPITALIZE(THE($target))} has sister blood flowing through them!
 rmc-xeno-blood-drain-pull = We need to pull {CAPITALIZE(THE($target))} to drain blood!
+rmc-xeno-blood-drain-down = We need to keep {CAPITALIZE(THE($target))} down to drain blood!

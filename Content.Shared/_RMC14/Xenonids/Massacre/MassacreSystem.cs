@@ -1,9 +1,12 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Gibbing;
+using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Synth;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Gut;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Massacre;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
 using Content.Shared.Body.Components;
@@ -72,7 +75,7 @@ public sealed class MassacreSystem : EntitySystem
 
         List<(EntityUid ent, EntityUid effect)> gibs = new();
 
-        foreach (var ent in _lookup.GetEntitiesInRange<BodyComponent>(args.Target, xeno.Comp.GibRange))
+        foreach (var ent in _lookup.GetEntitiesInRange<MarineComponent>(args.Target, xeno.Comp.GibRange))
         {
             if (!CanGib(xeno, args.Target, ent))
                 continue;
@@ -209,10 +212,13 @@ public sealed class MassacreSystem : EntitySystem
         if (HasComp<XenoNestedComponent>(target) ||
             !HasComp<BodyComponent>(target) ||
             HasComp<XenoComponent>(target) ||
+            HasComp<SynthComponent>(target) ||
+            HasComp<VictimBurstComponent>(target) ||
             !_mob.IsDead(target))
             return false;
 
-        if (!_interact.InRangeUnobstructed(_transform.ToMapCoordinates(coords), target, xeno.Comp.GibRange))
+        if (!_interact.InRangeUnobstructed(_transform.ToMapCoordinates(coords), target, xeno.Comp.GibRange) ||
+            !_interact.InRangeUnobstructed(xeno.Owner, target, xeno.Comp.GibRange * 2))
             return false;
 
         return true;

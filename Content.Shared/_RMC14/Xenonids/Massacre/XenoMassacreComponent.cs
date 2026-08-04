@@ -24,7 +24,7 @@ public sealed partial class XenoMassacreComponent : Component
     public EntProtoId Effects = "RMCEffectGutting";
 
     [DataField, AutoNetworkedField]
-    public float GibRange = 3;
+    public float GibRange = 2.5f;
 
     [DataField]
     public List<(EntityUid ent, EntityUid effect)> Targets = new();

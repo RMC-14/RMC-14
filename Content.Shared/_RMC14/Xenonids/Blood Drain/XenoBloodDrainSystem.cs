@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Synth;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Heal;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Coordinates;
@@ -15,6 +16,7 @@ using Content.Shared.Fluids;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Standing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -38,7 +40,7 @@ public sealed class XenoBloodDrainSystem : EntitySystem
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly MobStateSystem _mob = default!;
     [Dependency] private readonly XenoEvolutionSystem _evo = default!;
-    [Dependency] private readonly SharedPuddleSystem _puddle = default!;
+    [Dependency] private readonly StandingStateSystem _standing = default!;
 
     public override void Initialize()
     {
@@ -114,10 +116,7 @@ public sealed class XenoBloodDrainSystem : EntitySystem
             _audio.PlayPvs(xeno.Comp.DrainSound, xeno);
 
             if (_rmcblood.TryGetBloodSolution(args.Target.Value, out var blood))
-            {
-                var solu = blood.SplitSolution(xeno.Comp.BloodDrain);
-                _puddle.TrySpillAt(args.Target.Value.ToCoordinates(), solu, out _, false);
-        }
+                blood.RemoveSolution(xeno.Comp.BloodDrain);
         }
 
         var evoBonus = FixedPoint2.Zero;
@@ -154,9 +153,21 @@ public sealed class XenoBloodDrainSystem : EntitySystem
             return false;
         }
 
+        if (!_standing.IsDown(target))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-blood-drain-down", ("target", Identity.Name(target, EntityManager, xeno))), xeno, xeno, PopupType.SmallCaution);
+            return false;
+        }
+
         if (HasComp<SynthComponent>(target) || HasComp<XenoComponent>(target))
         {
             _popup.PopupClient(Loc.GetString("rmc-xeno-blood-drain-bad-blood", ("target", Identity.Name(target, EntityManager, xeno))), xeno, xeno, PopupType.SmallCaution);
+            return false;
+        }
+
+        if (HasComp<VictimInfectedComponent>(target))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-blood-drain-infected-blood", ("target", Identity.Name(target, EntityManager, xeno))), xeno, xeno, PopupType.SmallCaution);
             return false;
         }
 
