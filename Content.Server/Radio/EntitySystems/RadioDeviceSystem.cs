@@ -109,6 +109,24 @@ public sealed class RadioDeviceSystem : EntitySystem
         if (!Resolve(uid, ref component))
             return;
 
+        // RMC14
+        if (TryComp(uid, out RMCRadioListenOnlyModeComponent? comp))
+        {
+            if (!comp.Enabled && component.Enabled)
+            {
+                comp.Enabled = true;
+                EnsureComp<BlockListeningComponent>(uid);
+
+                var state = Loc.GetString("handheld-radio-component-listen-only-state");
+                var message = Loc.GetString("handheld-radio-component-on-use", ("radioState", state));
+                _popup.PopupEntity(message, user, user);
+
+                _appearance.SetData(uid, RadioDeviceVisuals.Broadcasting, !comp.Enabled);
+
+                return;
+            }
+        }
+
         SetMicrophoneEnabled(uid, user, !component.Enabled, quiet, component);
     }
 
@@ -127,30 +145,6 @@ public sealed class RadioDeviceSystem : EntitySystem
         if (component.PowerRequired && !this.IsPowered(uid, EntityManager))
             return;
 
-        // RMC14
-        if (TryComp(uid, out RMCRadioListenOnlyModeComponent? comp))
-        {
-            if (!comp.Enabled && component.Enabled)
-            {
-                comp.Enabled = true;
-                EnsureComp<BlockListeningComponent>(uid);
-
-                if (user != null)
-                {
-                    var state = Loc.GetString("handheld-radio-component-listen-only-state");
-                    var message = Loc.GetString("handheld-radio-component-on-use", ("radioState", state));
-                    _popup.PopupEntity(message, user.Value, user.Value);
-                }
-
-                return;
-            }
-            else if (comp.Enabled && component.Enabled)
-            {
-                comp.Enabled = false;
-                RemCompDeferred<BlockListeningComponent>(uid);
-            }
-        }
-
         component.Enabled = enabled;
 
         if (!quiet && user != null)
@@ -158,6 +152,13 @@ public sealed class RadioDeviceSystem : EntitySystem
             var state = Loc.GetString(component.Enabled ? "handheld-radio-component-on-state" : "handheld-radio-component-off-state");
             var message = Loc.GetString("handheld-radio-component-on-use", ("radioState", state));
             _popup.PopupEntity(message, user.Value, user.Value);
+        }
+
+        // RMC14
+        if (TryComp(uid, out RMCRadioListenOnlyModeComponent? comp) && comp.Enabled && !enabled)
+        {
+            comp.Enabled = false;
+            RemCompDeferred<BlockListeningComponent>(uid);
         }
 
         _appearance.SetData(uid, RadioDeviceVisuals.Broadcasting, component.Enabled);
@@ -172,16 +173,16 @@ public sealed class RadioDeviceSystem : EntitySystem
         if (!Resolve(uid, ref component))
             return;
 
+        // RMC14
+        if (TryComp(uid, out RMCRadioListenOnlyModeComponent? comp) && comp.Enabled && component.Enabled)
+            return;
+
         SetSpeakerEnabled(uid, user, !component.Enabled, quiet, component);
     }
 
     public void SetSpeakerEnabled(EntityUid uid, EntityUid? user, bool enabled, bool quiet = false, RadioSpeakerComponent? component = null)
     {
         if (!Resolve(uid, ref component))
-            return;
-
-        // RMC14
-        if (TryComp(uid, out RMCRadioListenOnlyModeComponent? comp) && comp.Enabled && component.Enabled)
             return;
 
         component.Enabled = enabled;
