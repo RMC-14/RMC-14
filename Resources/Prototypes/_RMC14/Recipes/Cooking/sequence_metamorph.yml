@@ -193,6 +193,7 @@
   - !type:IngredientsWithTags # 1 grilled fish fillet
     tags:
     - Cooked
+    - Meat
     - Fish
     count:
       min: 1

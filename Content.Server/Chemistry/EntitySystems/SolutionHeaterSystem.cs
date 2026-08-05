@@ -1,6 +1,7 @@
 using Content.Server.Chemistry.Components;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
+using Content.Shared._RMC14.Power; // added for RMC
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components.SolutionManager;
@@ -11,7 +12,7 @@ namespace Content.Server.Chemistry.EntitySystems;
 
 public sealed class SolutionHeaterSystem : EntitySystem
 {
-    [Dependency] private readonly PowerReceiverSystem _powerReceiver = default!;
+    [Dependency] private readonly SharedRMCPowerSystem _powerReceiver = default!; //Changed for RMC
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
 
@@ -36,7 +37,7 @@ public sealed class SolutionHeaterSystem : EntitySystem
         if (!Resolve(uid, ref placer))
             return false;
 
-        if (placer.PlacedEntities.Count <= 0 || !_powerReceiver.IsPowered(uid))
+        if (placer.PlacedEntities.Count <= 0 || _powerReceiver.IsPowered(uid))
             return false;
 
         TurnOn(uid);
