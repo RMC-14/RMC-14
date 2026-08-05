@@ -68,8 +68,6 @@ public sealed class XenoNestSystem : EntitySystem
     private EntityQuery<XenoNestSurfaceComponent> _xenoNestSurfaceQuery;
     private EntityQuery<XenoWeedableComponent> _xenoWeedableQuery;
 
-    private static readonly TimeSpan UnnestDoAfterDelay = TimeSpan.FromSeconds(3);
-
     public override void Initialize()
     {
         base.Initialize();
@@ -173,7 +171,7 @@ public sealed class XenoNestSystem : EntitySystem
             return false;
 
         var ev = new XenoUnnestDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, user, UnnestDoAfterDelay, ev, nest.Owner, nest.Owner)
+        var doAfter = new DoAfterArgs(EntityManager, user, nest.Comp.UnnestDelay, ev, nest.Owner, nest.Owner)
         {
             BreakOnMove = true,
             BreakOnDamage = true,
