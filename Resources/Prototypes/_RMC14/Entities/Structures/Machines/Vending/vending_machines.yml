@@ -839,6 +839,8 @@
         amount: 2
       - id: DrinkMugRed
         amount: 2
+      - id: RMCHeadCapChefPaperHat
+        amount: 3
 
 - type: entity
   parent: CMVendorDinnerware
