@@ -214,6 +214,16 @@ public sealed class RadioDeviceSystem : EntitySystem
             args.PushMarkup(Loc.GetString("handheld-radio-component-on-examine", ("frequency", proto.Frequency)));
             args.PushMarkup(Loc.GetString("handheld-radio-component-chennel-examine",
                 ("channel", proto.LocalizedName)));
+
+            if (component.ToggleOnInteract)
+            {
+                var state = Loc.GetString(component.Enabled ? "handheld-radio-component-on-state" : "handheld-radio-component-off-state");
+
+                if (TryComp(uid, out RMCRadioListenOnlyModeComponent? comp) && comp.Enabled)
+                    state = Loc.GetString("handheld-radio-component-listen-only-state");
+
+                args.PushMarkup(Loc.GetString("handheld-radio-component-state-examine", ("radioState", state)));
+            }
         }
     }
 
