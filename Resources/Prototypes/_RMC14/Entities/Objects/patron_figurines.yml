@@ -2715,17 +2715,6 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronGunnerWilo
-  name: Gunner Wilo figurine
-  description: "\"Clogging arteries is my hobby. In the Corps, you only live once and not for long, so why not enjoy it?\""
-  components:
-  - type: Sprite
-    state: gunner_wilo
-  - type: PatronFigurine
-    id: e63137eb-1bdf-49cb-9f4c-be29bb2a7e0f
-
-- type: entity
-  parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronKhaunami
   name: Khaunami figurine
   #description: ""
@@ -3135,3 +3124,14 @@
     state: scott_dad_greaves
   - type: PatronFigurine
     id: fb36d3c3-a557-4f59-9b61-e10d2e34c4da
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAmberUnluckySummer
+  name: Amber 'Unlucky' Summer figurine
+  description: "She calls herself Fopsquez, I have no idea why, she says it's a movie reference? I don't get it honestly."
+  components:
+  - type: Sprite
+    state: amber_unlucky_summer
+  - type: PatronFigurine
+    id: e63137eb-1bdf-49cb-9f4c-be29bb2a7e0f
