@@ -227,6 +227,8 @@
     - AnomalyHost
   - type: MobGibbedByExplosionType
   - type: RMCCanBeFultoned
+  - type: ExplosionResistance
+    damageCoefficient: 1.2
 
 - type: entity
   save: false
