@@ -15,7 +15,6 @@ namespace Content.Shared._RMC14.Medical.CryoCell;
 public abstract class SharedCryoCellSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -102,13 +101,16 @@ public abstract class SharedCryoCellSystem : EntitySystem
         _popup.PopupEntity(Loc.GetString("rmc-cryo-cell-ejected", ("entity", occupant)), cell);
     }
 
-    protected bool TryGetBeaker(EntityUid uid, CryoCellComponent comp, out EntityUid beaker)
+    protected bool TryGetBeaker(Entity<CryoCellComponent> cell, out EntityUid beaker)
     {
         beaker = default;
-        if (!_container.TryGetContainer(uid, comp.BeakerSlot, out var cont) || cont.ContainedEntities.Count == 0)
+        if (!_container.TryGetContainer(cell, cell.Comp.BeakerSlot, out var container))
             return false;
 
-        beaker = cont.ContainedEntities.First();
+        if (container is not ContainerSlot { ContainedEntity: { } ent })
+            return false;
+
+        beaker = ent;
         return true;
     }
 

@@ -26,7 +26,7 @@
                 </BoxContainer>
                 <BoxContainer Orientation="Horizontal" Margin="0 2 0 2">
                     <Label Text="{Loc rmc-cryo-cell-temperature-label}" MinWidth="120" Modulate="#5B88B0" />
-                    <ProgressBar Name="BodyTemperatureBar" HorizontalExpand="True" MinValue="0" MaxValue="400" MinHeight="16">
+                    <ProgressBar Name="BodyTemperatureBar" HorizontalExpand="True" MinValue="0" MaxValue="1000" MinHeight="16">
                         <Label Name="BodyTemperatureText" Align="Right" Margin="0 0 5 0" />
                     </ProgressBar>
                 </BoxContainer>
@@ -71,13 +71,19 @@
             <cc:HSeparator Color="#4972A1" Margin="0 0 0 4" />
             <BoxContainer Orientation="Horizontal" Margin="0 2 0 2">
                 <Label Text="{Loc rmc-cryo-cell-power-label}" MinWidth="120" Modulate="#5B88B0" />
-                <Button Name="PowerButton" Text="{Loc rmc-cryo-cell-power-off}" ToggleMode="True" MinWidth="60" />
+                <Button Name="PowerButton" Text="{Loc rmc-cryo-cell-power-off}" ToggleMode="True" MinWidth="40" />
+            </BoxContainer>
+            <BoxContainer Orientation="Horizontal" Margin="0 2 0 2">
+                <Label Text="{Loc rmc-cryo-cell-temperature-label}" MinWidth="120" Modulate="#5B88B0" />
+                <ProgressBar Name="CellTemperatureBar" HorizontalExpand="True" MinValue="0" MaxValue="1000" MinHeight="16">
+                    <Label Name="CellTemperatureText" Align="Right" Margin="0 0 5 0" />
+                </ProgressBar>
             </BoxContainer>
             <BoxContainer Orientation="Horizontal" Margin="0 2 0 2">
                 <Label Text="{Loc rmc-cryo-cell-door-label}" MinWidth="120" Modulate="#5B88B0" />
                 <Button Name="EjectButton" Text="{Loc rmc-cryo-cell-eject}" MinWidth="100" />
-                <Button Name="AutoEjectButton" Text="{Loc rmc-cryo-cell-manual}" ToggleMode="True" MinWidth="80" Margin="4 0 0 0" />
-                <Button Name="NotifyButton" Text="{Loc rmc-cryo-cell-silent}" ToggleMode="True" MinWidth="70" Margin="4 0 0 0" />
+                <Button Name="AutoEjectButton" Text="{Loc rmc-cryo-cell-manual}" ToggleMode="True" MinWidth="60" Margin="2" />
+                <Button Name="NotifyButton" Text="{Loc rmc-cryo-cell-silent}" ToggleMode="True" MinWidth="60" Margin="2" />
             </BoxContainer>
         </BoxContainer>
 

@@ -3,21 +3,39 @@ rmc-cryo-cell-no-occupant = No occupant detected.
 
 rmc-cryo-cell-occupant-header = Occupant
 rmc-cryo-cell-name-label = Name:
-rmc-cryo-cell-status-label = Status:
-rmc-cryo-cell-temperature = Temperature:
+rmc-cryo-cell-state-label = State:
+rmc-cryo-cell-temperature-label = Temperature:
+
 rmc-cryo-cell-health-label = Health:
 rmc-cryo-cell-brute-label = Brute:
 rmc-cryo-cell-burn-label = Burn:
 rmc-cryo-cell-toxin-label = Toxin:
-rmc-cryo-cell-oxygen-label = Respiratory:
+rmc-cryo-cell-oxygen-label = Oxygen:
 
-rmc-cryo-cell-toggle-power = Power
-rmc-cryo-cell-auto-eject = Auto Eject
-rmc-cryo-cell-notify = Notify
-rmc-cryo-cell-eject = Eject
-rmc-cryo-cell-eject-beaker = Eject Beaker
+rmc-cryo-cell-status-alive = Alive
+rmc-cryo-cell-status-critical = Critical
+rmc-cryo-cell-status-dead = DEAD
+
+rmc-cryo-cell-header = Cell
+rmc-cryo-cell-power-label = Power:
 rmc-cryo-cell-power-on = On
 rmc-cryo-cell-power-off = Off
-rmc-cryo-cell-beaker-ejected = {$entity} is ejected from the cryo cell.
-rmc-cryo-cell-auto-eject-dead = {$entity} is automatically ejected from the cryo cell.
-rmc-cryo-cell-auto-eject-recovered = {$entity} is automatically released from the cryo cell.
+
+rmc-cryo-cell-door-label = Door:
+rmc-cryo-cell-eject = Eject Patient
+rmc-cryo-cell-autoeject = Auto
+rmc-cryo-cell-manual = Manual
+rmc-cryo-cell-notify = Notify
+rmc-cryo-cell-silent = Silent
+
+rmc-cryo-cell-beaker-header = Beaker
+rmc-cryo-cell-beaker-empty = No beaker loaded.
+rmc-cryo-cell-beaker-eject = Eject
+
+rmc-cryo-cell-ejected = {$entity} pops out of the cryo cell!
+rmc-cryo-cell-patient-dead = Patient is dead!
+rmc-cryo-cell-patient-recovered = Patient's external wounds are healed.
+
+rmc-cryo-cell-auto-eject-popup = Patient {$entity} has been automatically released from the cryo cell. {$reason}
+rmc-cryo-cell-auto-eject-dead = Reason for release: Patient death.
+rmc-cryo-cell-auto-eject-recovered = Reason for release: Patient recovery.
