@@ -6,7 +6,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Xenonids.Construction.RecoveryNode;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 public sealed partial class RecoveryNodeComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
@@ -24,7 +24,7 @@ public sealed partial class RecoveryNodeComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan Cooldown = TimeSpan.FromSeconds(3);
 
-    [DataField, AutoNetworkedField]
+    [DataField, AutoNetworkedField, AutoPausedField]
     public TimeSpan NextRecoveryAt;
 
     [DataField]
