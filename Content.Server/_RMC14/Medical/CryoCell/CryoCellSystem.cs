@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Server.Power.Components;
 using Content.Shared._RMC14.Body;
 using Content.Shared._RMC14.Damage;
@@ -14,7 +15,6 @@ using Content.Shared.Interaction;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
-using Content.Shared.Temperature;
 using Content.Shared.UserInterface;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
@@ -35,7 +35,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
     [Dependency] private readonly SharedRMCBloodstreamSystem _rmcBloodstream = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly SharedRMCTemperatureSystem _rmcTemperature = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
 
@@ -91,7 +91,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
 
     private void OnToggleNotify(Entity<CryoCellComponent> cell, ref CryoCellToggleNotifyBuiMsg args)
     {
-        cell.Comp.ReleaseNotice = !cell.Comp.ReleaseNotice;
+        cell.Comp.Notice = !cell.Comp.Notice;
         Dirty(cell);
         UpdateUI(cell);
     }
@@ -188,7 +188,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         var isBeakerLoaded = false;
         if (TryGetBeaker(cell, out var beaker) &&
             TryComp<FitsInDispenserComponent>(beaker, out var fits) &&
-            _solution.TryGetSolution(beaker, fits.Solution, out _, out var beakerSol))
+            _solutionContainer.TryGetSolution(beaker, fits.Solution, out _, out var beakerSol))
         {
             isBeakerLoaded = true;
             foreach (var reagent in beakerSol.Contents)
@@ -211,7 +211,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
             cell.Comp.CryoCellTemperature,
             cell.Comp.IsPoweredOn,
             cell.Comp.AutoEject,
-            cell.Comp.ReleaseNotice,
+            cell.Comp.Notice,
             isBeakerLoaded,
             _beakerReagentBuffer.ToArray());
 
@@ -259,13 +259,13 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         _rmcTemperature.TryGetCurrentTemperature(occupant, out var curBodyTemp);
 
         // Cooling the occupant
-        var normalBodyTemp = TemperatureHelpers.CelsiusToKelvin(Atmospherics.NormalBodyTemperature);
-        if (Math.Abs(curBodyTemp - normalBodyTemp) >= 0.01)
+        var cryoCellTemp = cell.Comp.CryoCellTemperature;
+        if (Math.Abs(curBodyTemp - cryoCellTemp) >= 0.01)
         {
-            var change = 2 * (cell.Comp.CryoCellTemperature + curBodyTemp);
-            var temp = curBodyTemp > normalBodyTemp
-                ? Math.Max(normalBodyTemp, curBodyTemp - change)
-                : Math.Min(normalBodyTemp, curBodyTemp + change);
+            var change = 2 * (cryoCellTemp + curBodyTemp);
+            var temp = curBodyTemp > cryoCellTemp
+                ? Math.Max(cryoCellTemp, curBodyTemp - change)
+                : Math.Min(cryoCellTemp, curBodyTemp + change);
 
             _rmcTemperature.ForceChangeTemperature(occupant, temp);
         }
@@ -312,13 +312,41 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         // Chemical healing via beaker
         if (TryGetBeaker(cell, out var beakerEnt) &&
             TryComp<FitsInDispenserComponent>(beakerEnt, out var fits) &&
-            _solution.TryGetSolution(beakerEnt, fits.Solution, out var beakerSolEnt, out var beakerSol) &&
-            beakerSol.Volume > 0 &&
-            _rmcBloodstream.TryGetChemicalSolution(occupant, out var chemSolEnt, out _))
+            _solutionContainer.TryGetSolution(beakerEnt, fits.Solution, out var beakerSolEnt, out var beakerSol) &&
+            _rmcBloodstream.TryGetChemicalSolution(occupant, out var chemSolEnt, out var chemSol) &&
+            beakerSol.Volume > 0)
         {
-            _solution.TryTransferSolution(chemSolEnt, beakerSol, FixedPoint2.New(cell.Comp.BeakerTransferAmount));
-            if (beakerSolEnt is { } beakerSolEntity)
-                _solution.UpdateChemicals(beakerSolEntity);
+            bool HasAtLeastOne(Solution sol, string reagentId)
+                => sol.Contents.Any(r => r.Reagent.Prototype == reagentId && r.Quantity >= FixedPoint2.New(1));
+
+            var occupantHasCryo = HasAtLeastOne(chemSol, "cryoxadone") || HasAtLeastOne(chemSol, "clonexadone");
+            var beakerHasCryo = HasAtLeastOne(beakerSol, "cryoxadone") || HasAtLeastOne(beakerSol, "clonexadone");
+            var canAdminister = occupantHasCryo ^ beakerHasCryo;
+
+            if (canAdminister && occupantHasCryo && !beakerHasCryo)
+            {
+                foreach (var beakerReagents in beakerSol.Contents)
+                {
+                    foreach (var occupantReagents in chemSol.Contents)
+                    {
+                        if (beakerReagents.Reagent.Prototype == occupantReagents.Reagent.Prototype)
+                        {
+                            canAdminister = false;
+                            break;
+                        }
+                    }
+
+                    if (!canAdminister)
+                        break;
+                }
+            }
+
+            if (canAdminister)
+            {
+                _solutionContainer.TryTransferSolution(chemSolEnt, beakerSol, FixedPoint2.New(cell.Comp.BeakerTransferAmount));
+                if (beakerSolEnt is { } beakerSolEntity)
+                    _solutionContainer.UpdateChemicals(beakerSolEntity);
+            }
         }
 
         // Auto-eject when fully healed
@@ -340,7 +368,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
     {
         cell.Comp.IsPoweredOn = false;
 
-        if (cell.Comp.ReleaseNotice)
+        if (cell.Comp.Notice)
         {
             var reason = dead
                 ? Loc.GetString("rmc-cryo-cell-auto-eject-dead")

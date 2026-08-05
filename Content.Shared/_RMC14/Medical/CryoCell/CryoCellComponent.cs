@@ -17,30 +17,30 @@ public sealed partial class CryoCellComponent : Component
     [DataField, AutoNetworkedField]
     public EntityUid? Occupant;
 
-    [DataField, AutoNetworkedField]
-    public bool IsPoweredOn;
-
     // Temperatures in Kelvin
     [DataField, AutoNetworkedField]
     public float CryoCellTemperature = 0f;
 
     [DataField, AutoNetworkedField]
+    public bool IsPoweredOn;
+
+    [DataField, AutoNetworkedField]
     public bool AutoEject;
 
     [DataField, AutoNetworkedField]
-    public bool ReleaseNotice;
+    public bool Notice;
 
     [DataField]
-    public TimeSpan TickDelay = TimeSpan.FromSeconds(3.5);
+    public TimeSpan TickDelay = TimeSpan.FromSeconds(3);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NextTick;
 
-    [DataField, AutoNetworkedField]
-    public TimeSpan ExitStun = TimeSpan.FromSeconds(1);
-
     [DataField]
     public float BeakerTransferAmount = 5f;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan ExitStun = TimeSpan.FromSeconds(1);
 
     [DataField]
     public SoundSpecifier HealingCompleteSound = new SoundPathSpecifier("/Audio/Effects/Cargo/ping.ogg");
