@@ -450,7 +450,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeRMCCrabBurger
-  name: crab sushi roll recipe
+  name: rmc crab burger recipe
   result: FoodBurgerCrab
   time: 10
   group: Savory
