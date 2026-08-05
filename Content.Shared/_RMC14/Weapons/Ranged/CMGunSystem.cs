@@ -52,6 +52,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Shared._RMC14.Xenonids.Rest;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
@@ -501,7 +502,7 @@ public sealed class CMGunSystem : EntitySystem
                 continue;
             }
 
-            if (_standing.IsDown(gunComp.Target.Value))
+            if (_standing.IsDown(gunComp.Target.Value) || HasComp<XenoRestingComponent>(gunComp.Target.Value))
             {
                 projectileComp.Damage *= gun.Comp.ProneDamageMult;
                 Dirty(projectile, projectileComp);
