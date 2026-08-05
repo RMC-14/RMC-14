@@ -27,94 +27,79 @@ public abstract class SharedCryoCellSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<CryoCellComponent, ComponentInit>(OnCryoInit);
-        SubscribeLocalEvent<CryoCellComponent, ComponentShutdown>(OnCryoShutdown);
-        SubscribeLocalEvent<CryoCellComponent, EntInsertedIntoContainerMessage>(OnCryoEntInserted);
-        SubscribeLocalEvent<CryoCellComponent, EntRemovedFromContainerMessage>(OnCryoEntRemoved);
-        SubscribeLocalEvent<CryoCellComponent, InteractHandEvent>(OnCryoInteractHand);
+        SubscribeLocalEvent<CryoCellComponent, ComponentInit>(OnCryoCellInit);
+        SubscribeLocalEvent<CryoCellComponent, EntInsertedIntoContainerMessage>(OnCryoCellEntInserted);
+        SubscribeLocalEvent<CryoCellComponent, EntRemovedFromContainerMessage>(OnCryoCellEntRemoved);
 
-        SubscribeLocalEvent<InsideCryoCellComponent, MoveInputEvent>(OnInsideCryoMoveInput);
+        SubscribeLocalEvent<InsideCryoCellComponent, MoveInputEvent>(OnInsideCryoCellMoveInput);
     }
 
-    private void OnCryoInit(Entity<CryoCellComponent> cryo, ref ComponentInit args)
+    private void OnCryoCellInit(Entity<CryoCellComponent> cell, ref ComponentInit args)
     {
-        // Prototype-driven containers: ContainerContainer / ItemSlots defined in prototype.
-        // Do not call EnsureContainer here.
+        _container.EnsureContainer<ContainerSlot>(cell, cell.Comp.ContainerId);
     }
 
-    private void OnCryoShutdown(Entity<CryoCellComponent> cryo, ref ComponentShutdown args)
+    private void OnCryoCellEntInserted(Entity<CryoCellComponent> cell, ref EntInsertedIntoContainerMessage args)
     {
-        // No console or other ephemeral dependencies to clean in shared code.
-    }
-
-    private void OnCryoEntInserted(Entity<CryoCellComponent> cryo, ref EntInsertedIntoContainerMessage args)
-    {
-        if (args.Container.ID == cryo.Comp.ContainerId)
-        {
-            cryo.Comp.Occupant = args.Entity;
-            if (_net.IsServer)
-                _audio.PlayPvs(cryo.Comp.InsertSound, cryo);
-            Dirty(cryo);
-            UpdateCryoVisuals(cryo);
-
-            if (!_timing.ApplyingState)
-                EnsureComp<InsideCryoCellComponent>(args.Entity).Chamber = cryo;
-        }
-        else if (args.Container.ID == cryo.Comp.BeakerSlot)
-        {
-            // Beaker placed in beaker slot. Server may react to this.
-        }
-    }
-
-    private void OnCryoEntRemoved(Entity<CryoCellComponent> cryo, ref EntRemovedFromContainerMessage args)
-    {
-        if (args.Container.ID == cryo.Comp.ContainerId)
-        {
-            if (cryo.Comp.Occupant == args.Entity)
-            {
-                cryo.Comp.Occupant = null;
-                Dirty(cryo);
-            }
-
-            UpdateCryoVisuals(cryo);
-            RemCompDeferred<InsideCryoCellComponent>(args.Entity);
-            _rmcMovement.SuppressCollisionOnExit(args.Entity, cryo.Owner);
-        }
-        else if (args.Container.ID == cryo.Comp.BeakerSlot)
-        {
-            // Beaker removed: server may react.
-        }
-    }
-
-    private void OnCryoInteractHand(Entity<CryoCellComponent> cryo, ref InteractHandEvent args)
-    {
-        if (args.Handled)
+        if (args.Container.ID != cell.Comp.ContainerId)
             return;
 
-        if (cryo.Comp.Occupant is { } occupant)
-        {
-            EjectOccupant(cryo, occupant);
-            args.Handled = true;
-        }
+        cell.Comp.Occupant = args.Entity;
+
+        Dirty(cell);
+        UpdateCryoCellVisuals(cell);
+
+        if (!_timing.ApplyingState)
+            EnsureComp<InsideCryoCellComponent>(args.Entity).Chamber = cell;
     }
 
-    protected void EjectOccupant(Entity<CryoCellComponent> cryo, EntityUid occupant)
+    private void OnCryoCellEntRemoved(Entity<CryoCellComponent> cell, ref EntRemovedFromContainerMessage args)
     {
-        if (!_container.TryGetContainer(cryo, cryo.Comp.ContainerId, out var container))
+        if (args.Container.ID != cell.Comp.ContainerId)
+            return;
+
+        if (cell.Comp.Occupant == args.Entity)
+        {
+            cell.Comp.Occupant = null;
+            Dirty(cell);
+        }
+
+        UpdateCryoCellVisuals(cell);
+        RemCompDeferred<InsideCryoCellComponent>(args.Entity);
+        _rmcMovement.SuppressCollisionOnExit(args.Entity, cell.Owner);
+    }
+
+    private void OnInsideCryoCellMoveInput(Entity<InsideCryoCellComponent> ent, ref MoveInputEvent args)
+    {
+        if (!args.HasDirectionalMovement)
+            return;
+
+        if (_timing.ApplyingState)
+            return;
+
+        if (ent.Comp.Chamber is not { } cellId)
+            return;
+
+        if (!TryComp<CryoCellComponent>(cellId, out var cellComp))
+            return;
+
+        EjectOccupant((cellId, cellComp), ent);
+    }
+
+    protected void EjectOccupant(Entity<CryoCellComponent> cell, EntityUid occupant)
+    {
+        if (!_container.TryGetContainer(cell, cell.Comp.ContainerId, out var container))
             return;
 
         _container.Remove(occupant, container);
 
-        if (cryo.Comp.ExitStun > TimeSpan.Zero && !HasComp<NoStunOnExitComponent>(cryo))
-            _stun.TryStun(occupant, cryo.Comp.ExitStun, true);
+        if (cell.Comp.ExitStun > TimeSpan.Zero && !HasComp<NoStunOnExitComponent>(cell))
+            _stun.TryStun(occupant, cell.Comp.ExitStun, true);
 
         if (_net.IsClient)
             return;
 
-        if (cryo.Comp.On && cryo.Comp.AutoEject && cryo.Comp.ReleaseNotice)
-            _popup.PopupEntity(Loc.GetString("rmc-cryocell-ejected", ("entity", occupant)), cryo);
-
-        _audio.PlayPvs(cryo.Comp.EjectSound, cryo);
+        _popup.PopupEntity(Loc.GetString("rmc-cryo-cell-ejected", ("entity", occupant)), cell);
     }
 
     protected bool TryGetBeaker(EntityUid uid, CryoCellComponent comp, out EntityUid beaker)
@@ -127,26 +112,19 @@ public abstract class SharedCryoCellSystem : EntitySystem
         return true;
     }
 
-    protected void UpdateCryoVisuals(Entity<CryoCellComponent> cryo)
+    protected void UpdateCryoCellVisuals(Entity<CryoCellComponent> cell, bool? powered = null)
     {
-        var occupied = cryo.Comp.Occupant != null;
-        _appearance.SetData(cryo, CryoCellVisuals.Occupied, occupied);
-    }
+        var isOn = cell.Comp.IsPoweredOn && (powered ?? true);
+        var hasOccupant = cell.Comp.Occupant != null;
 
-    private void OnInsideCryoMoveInput(Entity<InsideCryoCellComponent> ent, ref MoveInputEvent args)
-    {
-        if (!args.HasDirectionalMovement)
-            return;
+        var state = (isOn, hasOccupant) switch
+        {
+            (true, false) => CryoCellVisualState.OnEmpty,
+            (true, true) => CryoCellVisualState.OnOccupied,
+            (false, false) => CryoCellVisualState.OffEmpty,
+            (false, true) => CryoCellVisualState.OffOccupied,
+        };
 
-        if (_timing.ApplyingState)
-            return;
-
-        if (ent.Comp.Chamber is not { } cryoId)
-            return;
-
-        if (!TryComp<CryoCellComponent>(cryoId, out var cryo))
-            return;
-
-        EjectOccupant((cryoId, cryo), ent);
+        _appearance.SetData(cell, CryoCellVisuals.State, state);
     }
 }

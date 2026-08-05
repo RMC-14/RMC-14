@@ -15,7 +15,7 @@ public sealed class CryoCellBui(EntityUid owner, Enum uiKey) : BoundUserInterfac
         base.Open();
 
         _window = this.CreateWindow<CryoCellWindow>();
-        _window.Title = Loc.GetString("rmc-cryocell-window-title");
+        _window.Title = Loc.GetString("rmc-cryo-cell-window-title");
         _window.SetBui(this);
 
         if (State is CryoCellBuiState state)

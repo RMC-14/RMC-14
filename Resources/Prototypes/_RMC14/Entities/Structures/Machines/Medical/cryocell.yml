@@ -9,12 +9,12 @@
   - type: Transform
     anchored: true
   - type: Sprite
-    sprite: _RMC14/Structures/Machines/Medical/cryo.rsi
+    sprite: _RMC14/Structures/Machines/Medical/cryo_cell.rsi
     drawdepth: Mobs
     noRot: true
     layers:
-    - state: cryo_open
-      map: [ "enum.CryoVisualLayers.Base" ]
+    - state: cell-off-empty
+      map: ["enum.CryoCellVisualLayers.Base"]
   - type: InteractionOutline
   - type: Fixtures
     fixtures:
@@ -31,10 +31,9 @@
     powerLoad: 250
     needsPower: true
   - type: RMCPowerReceiver
-    idleLoad: 15
+    idleLoad: 20
     activeLoad: 200
     channel: Equipment
-  - type: CryoCell
   - type: DragInsertContainer
     containerId: cryo_cell
     entryDelay: 2
@@ -50,6 +49,7 @@
         whitelist:
           components:
           - FitsInDispenser
+  - type: CryoCell
   - type: UserInterface
     interfaces:
       enum.CryoCellUIKey.Key:
@@ -60,10 +60,14 @@
   - type: Appearance
   - type: GenericVisualizer
     visuals:
-      enum.CryoVisuals.State:
-        enum.CryoVisualLayers.Base:
-          Empty: { state: cryo_open }
-          Occupied: { state: cryo_closed }
+      enum.CryoCellVisuals.Occupied:
+        enum.CryoCellVisualLayers.Base:
+          Empty: { state: cell-on-empty }
+          Occupied: { state: cell-on-occupied }
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
   - type: InsertBlacklist
     blacklist:
       components:

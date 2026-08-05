@@ -18,7 +18,11 @@ public sealed partial class CryoCellComponent : Component
     public EntityUid? Occupant;
 
     [DataField, AutoNetworkedField]
-    public bool On;
+    public bool IsPoweredOn;
+
+    // Temperatures in Kelvin
+    [DataField, AutoNetworkedField]
+    public float CryoCellTemperature = 0f;
 
     [DataField, AutoNetworkedField]
     public bool AutoEject;
@@ -26,8 +30,8 @@ public sealed partial class CryoCellComponent : Component
     [DataField, AutoNetworkedField]
     public bool ReleaseNotice;
 
-    [DataField, AutoNetworkedField]
-    public float Temperature;
+    [DataField]
+    public TimeSpan TickDelay = TimeSpan.FromSeconds(3.5);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NextTick;
@@ -36,23 +40,11 @@ public sealed partial class CryoCellComponent : Component
     public TimeSpan ExitStun = TimeSpan.FromSeconds(1);
 
     [DataField]
-    public SoundSpecifier EjectSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/hydraulics_3.ogg");
+    public float BeakerTransferAmount = 5f;
 
     [DataField]
-    public SoundSpecifier InsertSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/scanning_pod1.ogg");
+    public SoundSpecifier HealingCompleteSound = new SoundPathSpecifier("/Audio/Effects/Cargo/ping.ogg");
 
-    [DataField, AutoNetworkedField]
-    public TimeSpan TickDelay = TimeSpan.FromSeconds(1);
-
-    [DataField, AutoNetworkedField]
-    public float TemperatureDropPerTick = 1.0f;
-
-    [DataField, AutoNetworkedField]
-    public float HealBrutePerTick = 1.0f;
-
-    [DataField, AutoNetworkedField]
-    public float HealBurnPerTick = 1.0f;
-
-    [DataField, AutoNetworkedField]
-    public float HealToxinPerTick = 0.5f;
+    [DataField]
+    public SoundSpecifier WarningSound = new SoundPathSpecifier("/Audio/Machines/twobeep.ogg");
 }
