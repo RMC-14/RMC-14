@@ -3135,3 +3135,14 @@
     state: amber_unlucky_summer
   - type: PatronFigurine
     id: e63137eb-1bdf-49cb-9f4c-be29bb2a7e0f
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAelicaMomDanara
+  name: Aelica 'Mom' Danara figurine
+  description: "A figurine of 'Mom', her confidence radiates from her smile. Simply looking at her feels... soothing."
+  components:
+  - type: Sprite
+    state: aelica_mom_danara
+  - type: PatronFigurine
+    id: fc6f4f20-8c81-4e64-a485-fc9766445f27
