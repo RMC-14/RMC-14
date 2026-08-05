@@ -6,6 +6,7 @@ using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
+using Content.Shared.Mobs.Systems;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Xenonids.HiveTeam;
@@ -17,12 +18,14 @@ public sealed class HiveTeamBui : BoundUserInterface
 
     private readonly SpriteSystem _sprite;
     private readonly SharedXenoHiveSystem _hiveSystem;
+    private readonly MobStateSystem _mobState;
     private HiveTeamWindow? _window;
 
     public HiveTeamBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         _sprite = EntMan.System<SpriteSystem>();
         _hiveSystem = EntMan.System<SharedXenoHiveSystem>();
+        _mobState = EntMan.System<MobStateSystem>();
     }
 
     protected override void Open()
@@ -60,6 +63,8 @@ public sealed class HiveTeamBui : BoundUserInterface
         while (query.MoveNext(out var uid, out _, out var member, out var meta))
         {
             if (uid == Owner || member.Hive != hiveOwner)
+                continue;
+            if (_mobState.IsDead(uid))
                 continue;
             result.Add((Entity: EntMan.GetNetEntity(uid), Name: meta.EntityName, ProtoId: meta.EntityPrototype?.ID));
         }

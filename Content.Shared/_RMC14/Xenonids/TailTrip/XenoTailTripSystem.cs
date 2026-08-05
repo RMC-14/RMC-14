@@ -65,6 +65,6 @@ public sealed class XenoTailTripSystem : EntitySystem
             _slow.TrySlowdown(args.Target, xeno.Comp.SlowTime, ignoreDurationModifier: true);
         }
 
-        args.Handled = criticalMark;
+        args.Handled = !criticalMark;
     }
 }

@@ -11,7 +11,7 @@
   roleWeight: 0.25
   icon: "RMCJobIconSurvivorCommanderNewVaradero"
   hasIcon: true
-  spawnMenuRoleName: UNMC Commander (NV Survivor)
+  spawnMenuRoleName: UNMC Commander (New Varadero Survivor)
   special:
   - !type:AddComponentSpecial
     components:
@@ -77,5 +77,5 @@
   parent: CMJobIconBase
   id: RMCJobIconSurvivorCommanderNewVaradero
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/Misc/other.rsi
     state: hudsquad_nv_co

@@ -45,6 +45,7 @@
   - RMCAccessFieldDoctor
   - RMCAccessSeniorCommand
   - RMCAccessLogs
+  - RMCAccessVehicleCrew
 
 - type: accessGroup
   id: CO
@@ -93,6 +94,7 @@
   - RMCAccessFieldDoctor
   - RMCAccessSeniorCommand
   - RMCAccessLogs
+  - RMCAccessVehicleCrew
 
 # all ship-side access that is not CO
 # SEA uses this.
@@ -140,6 +142,7 @@
   - RMCAccessFieldDoctor
   - RMCAccessSeniorCommand
   - RMCAccessLogs
+  - RMCAccessVehicleCrew
 
 - type: accessGroup
   id: SEA
@@ -194,6 +197,7 @@
   - CMAccessDropship
   - CMAccessMedical
   - RMCAccessDatabase
+  - RMCAccessVehicleCrew
 
 # Corp access, probably not needed
 - type: accessGroup

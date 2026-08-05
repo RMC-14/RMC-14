@@ -127,6 +127,8 @@
     state: flacculation_arm
     offset: "-0.5, 0.0"
 
+# Main filtration machines
+
 - type: entity
   parent: RMCFiltration
   id: RMCFiltrationMachine
@@ -139,7 +141,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.49,-1.49,0.49,1.49"
+          bounds: "-0.5,-2.5,1.5,1.5"
         density: 60
         layer:
         - MobMask
@@ -147,8 +149,6 @@
     sprite: _RMC14/Structures/Filtration/64x128.rsi
     state: filtration
     offset: "0.5, -0.5"
-
-# Main filtration machines
 
 - type: entity
   parent: RMCFiltrationMachine
@@ -340,6 +340,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Filtration/32x32.rsi
     state: ne1
+  - type: Destructible
+    thresholds: []
 
 - type: entity
   parent: RMCCoagulationCatwalkNE1
@@ -350,14 +352,11 @@
     state: ne2
 
 - type: entity
-  parent: CMCatwalk
+  parent: RMCCoagulationCatwalkNE1
   id: RMCCoagulationCatwalkNE3
-  name: coagulation catwalk
-  description: ""
   suffix: NE, lower
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Filtration/32x32.rsi
     state: ne3
 
 - type: entity

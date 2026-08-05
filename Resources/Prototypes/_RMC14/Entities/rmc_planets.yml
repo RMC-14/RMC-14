@@ -233,6 +233,7 @@
       - CMSurvivor: -1
       - CMSurvivorISR: -1
       - CMSurvivorGangLeader: -1
+      - CMSurvivorPrisoner: -1
       CMSurvivorCorporate:
       - CMSurvivorFiorinaCorporateLiaison: 2
       CMSurvivorDoctor:
@@ -240,7 +241,6 @@
       CMSurvivorEngineer:
       - CMSurvivorFiorinaEngineer: 2
       CMSurvivorSecurity:
-      - CMSurvivorPrisoner: 2
       - CMSurvivorFiorinaPrisonGuard: 2
       - CMSurvivorFiorinaRiotOfficer: 2
       CMSurvivorScientist:

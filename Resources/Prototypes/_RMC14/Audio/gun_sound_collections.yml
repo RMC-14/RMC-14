@@ -100,3 +100,9 @@
   id: RMCL112Shoot
   files:
   - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_silenced_l112.ogg
+
+- type: soundCollection
+  id: RMCCannonDistant
+  files:
+  - /Audio/_RMC14/Vehicle/weapons/cannon_distant1.ogg
+  - /Audio/_RMC14/Vehicle/weapons/cannon_distant2.ogg

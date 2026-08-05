@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Impale;
 using Content.Shared._RMC14.Xenonids.TailTrip;
 using Content.Shared.Actions;
+using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
 using Content.Shared.Mobs.Systems;
@@ -10,6 +11,7 @@ using Content.Shared.StatusEffect;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
+using System.Linq;
 
 namespace Content.Shared._RMC14.Xenonids.Finesse;
 
@@ -24,6 +26,7 @@ public sealed class XenoFinesseSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private readonly HashSet<Entity<MarineComponent>> _marines = new();
     public override void Initialize()
@@ -69,9 +72,6 @@ public sealed class XenoFinesseSystem : EntitySystem
 
     private void OnXenoMarkedDamageChanged(Entity<XenoSpreadMarkAttemptComponent> marked, ref DamageChangedEvent args)
     {
-        if (_net.IsClient)
-            return;
-
         if (!TryComp<XenoFinesseComponent>(marked.Comp.Origin, out var finesse))
             return;
 
@@ -96,11 +96,14 @@ public sealed class XenoFinesseSystem : EntitySystem
         EnsureComp<XenoCriticalMarkSpreadImmunityComponent>(hit).WearOffAt = currTime + xeno.Comp.CriticalMarkSpreadImmuneDuration;
 
         var spreadEffected = 0;
+        var selfCoords = xeno.Owner.ToCoordinates();
+
         _marines.Clear();
+        _entityLookup.GetEntitiesInRange(selfCoords, xeno.Comp.SpreadCriticalMarkRange, _marines);
 
-        _entityLookup.GetEntitiesInRange(Transform(xeno).Coordinates, xeno.Comp.SpreadCriticalMarkRange, _marines);
+        var nearestMarines = _marines.ToList().OrderBy(a => selfCoords.TryDistance(EntityManager, a.Owner.ToCoordinates(), out var distance) ? distance : 20).ToList();
 
-        foreach (var marine in _marines)
+        foreach (var marine in nearestMarines)
         {
             if (!_examine.InRangeUnOccluded(xeno, marine, xeno.Comp.SpreadCriticalMarkRange))
                 continue;
@@ -125,7 +128,10 @@ public sealed class XenoFinesseSystem : EntitySystem
         }
 
         if (spreadEffected > 0)
+        {
             xeno.Comp.NextCriticalMarkSpreadTime = currTime + xeno.Comp.CritcalMarkSpreadCooldown;
+            Dirty(xeno);
+        }
     }
 
     public override void Update(float frameTime)

@@ -90,8 +90,8 @@
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentLaserSight
           - RMCAttachmentVerticalGrip
-          - RMCAttachmentExtinguisher
-          - RMCAttachmentFlamer
+          - RMCAttachmentUnderbarrelExtinguisher
+          - RMCAttachmentMiniFlamethrower
           - RMCAttachmentBurstFireAssembly
   - type: AttachableHolderVisuals
     offsets:
@@ -153,7 +153,7 @@
         startingAttachable: RMCAttachmentMiniFlamethrower
         whitelist:
           tags:
-          - RMCAttachmentFlamer
+          - RMCAttachmentMiniFlamethrower
 
 - type: entity
   parent: CMMagazineRifleBase
@@ -237,6 +237,13 @@
       color: "#9C9A19"
   - type: RefillableByBulletBox
     bulletType: null
+
+- type: entity
+  parent: RMCMagazineRifleType71HEAP
+  id: RMCMagazineRifleType71HEAPEmpty
+  suffix: HEAP, Empty
+  components:
+  - type: RMCEmptyMag
 
 - type: entity
   parent: RMCMagazineRifleType71

@@ -103,11 +103,11 @@ public sealed partial class CMAutomatedVendorComponent : Component
     [DataField, AutoNetworkedField]
     public Dictionary<string, int> PartialProductStacks = new();
 
-    [ViewVariables]
-    public readonly Dictionary<EntProtoId, CMVendorEntry> EntryByPrototype = new();
+    [DataField, AutoNetworkedField]
+    public Dictionary<EntProtoId, CMVendorEntry> RestockEntries = new();
 
-    [ViewVariables]
-    public readonly Dictionary<string, CMVendorEntry> EntryByStackType = new();
+    [DataField, AutoNetworkedField]
+    public Dictionary<string, CMVendorEntry> StackEntries = new();
 }
 
 internal readonly struct StackRestockPlan

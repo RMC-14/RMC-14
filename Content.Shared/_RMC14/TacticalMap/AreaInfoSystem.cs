@@ -181,12 +181,12 @@ public sealed class AreaInfoSystem : EntitySystem
         else
             restrictedActions.Add("Laser Designation");
 
-        if (area.Value.Comp.Medevac)
+        if (_area.CanMedevac(coordinates))
             allowedActions.Add("Casualty Evacuation");
         else
             restrictedActions.Add("Casualty Evacuation");
 
-        if (area.Value.Comp.Paradropping)
+        if (_area.CanParadrop(coordinates))
             allowedActions.Add("Paradropping");
         else
             restrictedActions.Add("Paradropping");
