@@ -247,11 +247,17 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         if (cell.Comp.Occupant is not { } occupant)
             return;
 
-        // Auto-eject Perma Dead occupants
+        if (!TryComp<DamageableComponent>(occupant, out var damageable))
+        {
+            EjectOccupant(cell, occupant);
+            return;
+        }
+
+        // Auto-eject dead even if auto is turned off
         if (_mobState.IsDead(occupant))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-cryo-cell-patient-dead"), cell.Owner);
-            _audio.PlayPvs(cell.Comp.WarningSound, cell.Owner);
+            _popup.PopupEntity(Loc.GetString("rmc-cryo-cell-patient-dead"), cell);
+            _audio.PlayPvs(cell.Comp.WarningSound, cell);
             AutoEjectOccupant(cell, occupant, dead: true);
             return;
         }
@@ -269,9 +275,6 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
 
             _rmcTemperature.ForceChangeTemperature(occupant, temp);
         }
-
-        if (!TryComp<DamageableComponent>(occupant, out var damageable))
-            return;
 
         // Passive healing when body is below freezing
         if (curBodyTemp < Atmospherics.T0C &&
@@ -312,53 +315,41 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         // Chemical healing via beaker
         if (TryGetBeaker(cell, out var beakerEnt) &&
             TryComp<FitsInDispenserComponent>(beakerEnt, out var fits) &&
-            _solutionContainer.TryGetSolution(beakerEnt, fits.Solution, out var beakerSolEnt, out var beakerSol) &&
+            _solutionContainer.TryGetSolution(beakerEnt, fits.Solution, out _, out var beakerSol) &&
             _rmcBloodstream.TryGetChemicalSolution(occupant, out var chemSolEnt, out var chemSol) &&
-            beakerSol.Volume > 0)
+            beakerSol.Volume > FixedPoint2.Zero)
         {
-            bool HasAtLeastOne(Solution sol, string reagentId)
+            static bool HasAtLeastOne(Solution sol, string reagentId)
                 => sol.Contents.Any(r => r.Reagent.Prototype == reagentId && r.Quantity >= FixedPoint2.New(1));
 
             var occupantHasCryo = HasAtLeastOne(chemSol, "cryoxadone") || HasAtLeastOne(chemSol, "clonexadone");
             var beakerHasCryo = HasAtLeastOne(beakerSol, "cryoxadone") || HasAtLeastOne(beakerSol, "clonexadone");
-            var canAdminister = occupantHasCryo ^ beakerHasCryo;
 
-            if (canAdminister && occupantHasCryo && !beakerHasCryo)
+            var canAdminister = (occupantHasCryo ^ beakerHasCryo) && beakerSol.Contents.Count > 0;
+            if (canAdminister && occupantHasCryo)
             {
-                foreach (var beakerReagents in beakerSol.Contents)
+                var occupantSol = chemSol.Contents.Select(r => r.Reagent.Prototype).ToHashSet();
+                foreach (var beakerReagent in beakerSol.Contents)
                 {
-                    foreach (var occupantReagents in chemSol.Contents)
+                    if (occupantSol.Contains(beakerReagent.Reagent.Prototype))
                     {
-                        if (beakerReagents.Reagent.Prototype == occupantReagents.Reagent.Prototype)
-                        {
-                            canAdminister = false;
-                            break;
-                        }
-                    }
-
-                    if (!canAdminister)
+                        canAdminister = false;
                         break;
+                    }
                 }
             }
 
             if (canAdminister)
-            {
-                _solutionContainer.TryTransferSolution(chemSolEnt, beakerSol, FixedPoint2.New(cell.Comp.BeakerTransferAmount));
-                if (beakerSolEnt is { } beakerSolEntity)
-                    _solutionContainer.UpdateChemicals(beakerSolEntity);
-            }
+                _solutionContainer.TryTransferSolution(chemSolEnt, beakerSol, cell.Comp.BeakerTransferAmount);
         }
 
         // Auto-eject when fully healed
         if (cell.Comp.AutoEject)
         {
-            if (!TryComp<DamageableComponent>(occupant, out var healCheck))
-                return;
-
-            if (healCheck.TotalDamage <= 0)
+            if (damageable.TotalDamage <= 0)
             {
-                _popup.PopupEntity(Loc.GetString("rmc-cryo-cell-patient-recovered"), cell.Owner);
-                _audio.PlayPvs(cell.Comp.HealingCompleteSound, cell.Owner);
+                _popup.PopupEntity(Loc.GetString("rmc-cryo-cell-patient-recovered"), cell);
+                _audio.PlayPvs(cell.Comp.HealingCompleteSound, cell);
                 AutoEjectOccupant(cell, occupant, dead: false);
             }
         }
