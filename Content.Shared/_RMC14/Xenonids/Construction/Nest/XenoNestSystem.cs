@@ -31,6 +31,7 @@ using Content.Shared.Popups;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
+using Content.Shared.Verbs;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
@@ -67,6 +68,8 @@ public sealed class XenoNestSystem : EntitySystem
     private EntityQuery<XenoNestSurfaceComponent> _xenoNestSurfaceQuery;
     private EntityQuery<XenoWeedableComponent> _xenoWeedableQuery;
 
+    private static readonly TimeSpan UnnestDoAfterDelay = TimeSpan.FromSeconds(3);
+
     public override void Initialize()
     {
         base.Initialize();
@@ -89,6 +92,8 @@ public sealed class XenoNestSystem : EntitySystem
 
         SubscribeLocalEvent<XenoNestComponent, ComponentRemove>(OnNestRemove);
         SubscribeLocalEvent<XenoNestComponent, EntityTerminatingEvent>(OnNestTerminating);
+        SubscribeLocalEvent<XenoNestComponent, GetVerbsEvent<InteractionVerb>>(OnNestGetVerbs);
+        SubscribeLocalEvent<XenoNestComponent, XenoUnnestDoAfterEvent>(OnUnnestDoAfter);
 
         SubscribeLocalEvent<XenoNestableComponent, BeforeRangedInteractEvent>(OnNestableBeforeRangedInteract);
         SubscribeLocalEvent<XenoNestableComponent, ShouldHandleVirtualItemInteractEvent>(OnNestableShouldHandle);
@@ -140,6 +145,61 @@ public sealed class XenoNestSystem : EntitySystem
     private void OnNestTerminating(Entity<XenoNestComponent> ent, ref EntityTerminatingEvent args)
     {
         DetachNested(ent, ent.Comp.Nested);
+    }
+
+    private void OnNestGetVerbs(Entity<XenoNestComponent> ent, ref GetVerbsEvent<InteractionVerb> args)
+    {
+        if (!args.CanAccess || !args.CanInteract)
+            return;
+
+        if (ent.Comp.Nested is null)
+            return;
+
+        if (!HasComp<XenoComponent>(args.User) || !_hive.FromSameHive(ent.Owner, args.User))
+            return;
+
+        var user = args.User;
+        var nest = ent.Owner;
+        args.Verbs.Add(new InteractionVerb
+        {
+            Text = Loc.GetString("rmc-xeno-nest-unnest-verb"),
+            Act = () => TryStartUnnest(user, nest),
+        });
+    }
+
+    public bool TryStartUnnest(EntityUid user, Entity<XenoNestComponent?> nest)
+    {
+        if (!Resolve(nest, ref nest.Comp, false) || nest.Comp.Nested is not { } nested)
+            return false;
+
+        var ev = new XenoUnnestDoAfterEvent();
+        var doAfter = new DoAfterArgs(EntityManager, user, UnnestDoAfterDelay, ev, nest.Owner, nest.Owner)
+        {
+            BreakOnMove = true,
+            BreakOnDamage = true,
+        };
+
+        if (_doAfter.TryStartDoAfter(doAfter))
+            _popup.PopupClient(Loc.GetString("rmc-xeno-nest-unnest-start", ("target", nested)), user, user);
+
+        return true;
+    }
+
+    private void OnUnnestDoAfter(Entity<XenoNestComponent> ent, ref XenoUnnestDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled)
+            return;
+
+        if (ent.Comp.Nested is not { } nested)
+            return;
+
+        args.Handled = true;
+
+        if (_net.IsClient)
+            return;
+
+        DetachNested(ent.Owner, nested);
+        _adminLog.Add(LogType.RMCXenoNest, $"{ToPrettyString(args.User):user} released {ToPrettyString(nested):victim} from nest {ToPrettyString(ent.Owner):nest}");
     }
 
     private void OnNestableBeforeRangedInteract(Entity<XenoNestableComponent> ent, ref BeforeRangedInteractEvent args)
