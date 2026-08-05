@@ -319,7 +319,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
             _rmcBloodstream.TryGetChemicalSolution(occupant, out var chemSolEnt, out var chemSol) &&
             beakerSol.Volume > FixedPoint2.Zero)
         {
-            static bool HasAtLeastOne(Solution sol, string reagentId)
+            bool HasAtLeastOne(Solution sol, string reagentId)
                 => sol.Contents.Any(r => r.Reagent.Prototype == reagentId && r.Quantity >= FixedPoint2.New(1));
 
             var occupantHasCryo = HasAtLeastOne(chemSol, "cryoxadone") || HasAtLeastOne(chemSol, "clonexadone");
