@@ -228,7 +228,7 @@
   - type: MobGibbedByExplosionType
   - type: RMCCanBeFultoned
   - type: ExplosionResistance
-    damageCoefficient: 1.2
+    damageCoefficient: 1.2  # TODO RMC14: won't be necessary once limb damage is implemented to mimic parity
 
 - type: entity
   save: false
