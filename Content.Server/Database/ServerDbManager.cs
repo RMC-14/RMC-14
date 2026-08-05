@@ -427,6 +427,30 @@ namespace Content.Server.Database
 
         Task<Guid?> TryPardonChatBan(int id, Guid? admin);
 
+        // RMC14 start
+        Task<RMCDistressSignalStateRecord> GetOrCreateRMCDistressSignalState(
+            int serverId,
+            int recentPlanetCount,
+            float initialMarinesPerXeno);
+
+        Task<List<string>> GetRecentRMCDistressSignalPlanets(int serverId, int count);
+
+        Task AddRMCDistressSignalRound(int serverId, int roundId, string planetId, float marinesPerXeno);
+
+        Task<float> FinishRMCDistressSignalRound(
+            int serverId,
+            int roundId,
+            int result,
+            float marinesPerXeno);
+
+        Task SetRMCDistressSignalVotingState(
+            int serverId,
+            string? selectedPlanetId,
+            IReadOnlyDictionary<string, int> carryoverVotes);
+
+        Task SetRMCDistressSignalBalance(int serverId, float marinesPerXeno);
+        // RMC14 end
+
         #endregion
 
         #region DB Notifications
@@ -1363,6 +1387,68 @@ namespace Content.Server.Database
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.TryPardonChatBan(id, admin));
         }
+
+        // RMC14 start
+        public Task<RMCDistressSignalStateRecord> GetOrCreateRMCDistressSignalState(
+            int serverId,
+            int recentPlanetCount,
+            float initialMarinesPerXeno)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetOrCreateRMCDistressSignalState(
+                serverId,
+                recentPlanetCount,
+                initialMarinesPerXeno));
+        }
+
+        public Task<List<string>> GetRecentRMCDistressSignalPlanets(int serverId, int count)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetRecentRMCDistressSignalPlanets(serverId, count));
+        }
+
+        public Task AddRMCDistressSignalRound(int serverId, int roundId, string planetId, float marinesPerXeno)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AddRMCDistressSignalRound(
+                serverId,
+                roundId,
+                planetId,
+                marinesPerXeno));
+        }
+
+        public Task<float> FinishRMCDistressSignalRound(
+            int serverId,
+            int roundId,
+            int result,
+            float marinesPerXeno)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.FinishRMCDistressSignalRound(
+                serverId,
+                roundId,
+                result,
+                marinesPerXeno));
+        }
+
+        public Task SetRMCDistressSignalVotingState(
+            int serverId,
+            string? selectedPlanetId,
+            IReadOnlyDictionary<string, int> carryoverVotes)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SetRMCDistressSignalVotingState(
+                serverId,
+                selectedPlanetId,
+                carryoverVotes));
+        }
+
+        public Task SetRMCDistressSignalBalance(int serverId, float marinesPerXeno)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SetRMCDistressSignalBalance(serverId, marinesPerXeno));
+        }
+        // RMC14 end
 
         // Wrapper functions to run DB commands from the thread pool.
         // This will avoid SynchronizationContext capturing and avoid running CPU work on the main thread.
