@@ -92,7 +92,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
             foreach (var cardinal in _rmcMap.AtmosCardinalDirections)
             {
                 var blocked = false;
-                EntityUid? weedsToReplace = null;
+                Entity<XenoWeedsComponent>? weedsToReplace = null;
                 var neighbor = indices.Offset(cardinal);
                 var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(grid, neighbor);
                 while (anchored.MoveNext(out var anchoredId))
@@ -119,7 +119,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                         if (otherWeeds.Level >= weeds.Level)
                             blocked = true;
                         else
-                            weedsToReplace = anchoredId;
+                            weedsToReplace = (anchoredId, otherWeeds);
                     }
                 }
 
@@ -161,17 +161,37 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                 if (!CanSpreadWeedsPopup(grid, neighbor, null, null, weeds.SpreadsOnSemiWeedable))
                     continue;
 
-                if (weedsToReplace != null)
-                    QueueDel(weedsToReplace.Value);
-
                 var coords = _map.GridTileToLocal(grid, grid, neighbor);
                 var neighborWeeds = Spawn(prototype, coords);
                 var neighborWeedsEnt = AssignSource(neighborWeeds, (source.Value, sourceWeeds));
+
+                // If `neighborWeeds` is replacing a lower tier weed tile (regular -> hive), transfer over any wall weeds from the old one.
+                if (weedsToReplace is { } oldWeeds)
+                {
+                    if (oldWeeds.Comp.LocalWeeded.Count != 0)
+                    {
+                        foreach (var weededEntity in oldWeeds.Comp.LocalWeeded)
+                        {
+                            if (WeedableQuery.TryComp(weededEntity, out var weedable) &&
+                                TryComp<XenoWallWeedsComponent>(weedable.Entity, out var wallWeeds))
+                            {
+                                wallWeeds.SourceWeeds = neighborWeeds;
+                                Dirty(weedable.Entity.Value, wallWeeds);
+                            }
+                        }
+                        neighborWeedsEnt.Comp.LocalWeeded = oldWeeds.Comp.LocalWeeded;
+                        Dirty(neighborWeedsEnt);
+
+                        oldWeeds.Comp.LocalWeeded = [];
+                    }
+                    QueueDel(oldWeeds);
+                }
 
                 _hive.SetSameHive(uid, neighborWeeds);
 
                 EnsureComp<ActiveEdgeSpreaderComponent>(neighborWeeds);
 
+                var oldLocalWeededCount = neighborWeedsEnt.Comp.LocalWeeded.Count;
                 for (var j = 0; j < 4; j++)
                 {
                     var dir = (AtmosDirection)(1 << j);
@@ -218,6 +238,8 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                         }
                     }
                 }
+                if (neighborWeedsEnt.Comp.LocalWeeded.Count != oldLocalWeededCount)
+                    Dirty(neighborWeedsEnt);
             }
         }
 

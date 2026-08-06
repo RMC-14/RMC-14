@@ -176,7 +176,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
                 if (!HasComp<CommunicationsTowerComponent>(weededEntity))
                     _appearance.SetData(weededEntity, WeededEntityLayers.Layer, false);
 
-                // Clean up any other weed entities caused by this tile.
+                // Clean up any other weed entities spawned by this tile.
                 if (WeedableQuery.TryComp(weededEntity, out var weedable) && Exists(weedable.Entity))
                 {
                     QueueDel(weedable.Entity);
@@ -251,17 +251,21 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
     private void OnWallWeedsRemove<T>(Entity<XenoWallWeedsComponent> ent, ref T args)
     {
-        if (WeedableQuery.TryComp(ent.Comp.AttachedTo, out var weedable) && weedable.Entity == ent.Owner)
+        if (ent.Comp.AttachedTo is not { } parentWall)
+            return;
+
+        // Remove the reference to `ent` from the parent wall's `XenoWeedableComponent`.
+        if (WeedableQuery.TryComp(parentWall, out var weedable) && weedable.Entity == ent)
         {
             weedable.Entity = null;
-            Dirty(ent.Comp.AttachedTo.Value, weedable);
+            Dirty(parentWall, weedable);
         }
 
-        if (ent.Comp.SourceWeeds is { } sourceWeeds &&
-            WeedsQuery.TryComp(sourceWeeds, out var weeds) &&
-            weeds.LocalWeeded.Remove(sourceWeeds))
+        // Remove the parent wall from the source weed tile's `XenoWeedsComponent.LocalWeeded` list.
+        if (WeedsQuery.TryComp(ent.Comp.SourceWeeds, out var weeds) &&
+            weeds.LocalWeeded.Remove(parentWall))
         {
-            Dirty(sourceWeeds, weeds);
+            Dirty(ent.Comp.SourceWeeds.Value, weeds);
         }
     }
 
