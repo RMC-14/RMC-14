@@ -1038,7 +1038,7 @@
     sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
     state: E290mkey
   - type: AttachableVisuals
-    suffix: ""
+    suffix: "a"
   - type: Tag
     tags:
     - RMCAttachmentUnderbarrel
