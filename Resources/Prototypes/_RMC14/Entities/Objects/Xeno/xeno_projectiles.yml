@@ -204,6 +204,7 @@
     max: 4
   - type: RMCProjectileAccuracy
     accuracy: 135
+  - type: RMCBullet
 
 - type: entity
   parent: XenoBoneChipsProjectile # TODO one projectile out of the 8 spawned for fire spikes is this one
