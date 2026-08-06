@@ -359,15 +359,15 @@
 
 - type: entity
   parent: RMCParaWebbing
-  id: RMCParaWebbingL88
+  id: RMCParaWebbingE290
   name: paramarine webbing
-  suffix: Paramarine, Survivor, Filled, L88
+  suffix: Paramarine, Survivor, Filled, E290
   components:
     - type: StorageFill
       contents:
         - id: RMCTacticalPrybar
-        - id: RMCMagazineRifleL88
-        - id: RMCMagazineRifleL88
+        - id: RMCMagazineRifleE290
+        - id: RMCMagazineRifleE290
 
 - type: entity
   parent: RMCParaWebbing

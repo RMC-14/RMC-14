@@ -21,16 +21,16 @@
   id: RMCGearParaBase
   equipment:
     head: RMCHeadParaBeret
-    jumpsuit: RMCJumpsuitMarineParaL88
+    jumpsuit: RMCJumpsuitMarineParaE290
     gloves: RMCHandsVeteranRoyalMarine
     shoes: RMCBootsRoyalFilled
     id: RMCIDRoyalParamarinesRifleman
     ears: RMCHeadsetPara
     belt: RMCBeltHolsterPistolParaM44Random
-    pocket1: RMCPouchFirstAidSplintsGauzeOintment 
+    pocket1: RMCPouchFirstAidSplintsGauzeOintment
     pocket2: RMCPouchFlareL96Filled
-    suitstorage: RMCWeaponRifleL88A2Filled
-    
+    suitstorage: RMCWeaponRifleE290A1
+
 - type: entity
   id: RMCGearSurvivorPresetPara
   name: para preset

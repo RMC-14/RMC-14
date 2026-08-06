@@ -1532,3 +1532,15 @@ RMCJumpsuitSPPPaP: RMCJumpsuitSPPPCG
 RMCIDCardPaP: RMCIDCardPCG
 RMCHeadsetSPPPaP: RMCHeadsetSPPPCG
 RMCCoatPaP: RMCCoatPCG
+
+# 2026-08-06
+RMCWeaponRifleL88A1: RMCWeaponRifleE290A2
+RMCWeaponRifleL88A2: RMCWeaponRifleE290A1
+RMCWeaponRifleL89A1: RMCWeaponRifleE290A1D
+RMCWeaponRifleL89A2: RMCWeaponRifleE290A1D
+RMCMagazineRifleL88: RMCMagazineRifleE290
+RMCMagazineRifleL88AP: RMCMagazineRifleE290Marksman
+RMCAttachmentL88Grip: RMCAttachmente290Grip
+RMCAttachmentL89Scope: RMCAttachmente290Scope
+RMCJumpsuitMarineParaL88: RMCJumpsuitMarineParaE290
+RMCParaWebbingL88: RMCParaWebbingE290
