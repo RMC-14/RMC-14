@@ -1,25 +1,20 @@
-using System.Numerics;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Barricade;
-using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Communications;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Xenonids.Announce;
-using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Construction.FloorResin;
 using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
+using Content.Shared._RMC14.Xenonids.Designer;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Hive;
-using Content.Shared._RMC14.Xenonids.ManageHive.Boons;
 using Content.Shared._RMC14.Xenonids.Rest;
-using Content.Shared._RMC14.Xenonids.Designer;
 using Content.Shared.Climbing.Components;
 using Content.Shared.Coordinates;
-using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
 using Content.Shared.GameTicking;
@@ -39,8 +34,9 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
+using System.Linq;
+using System.Numerics;
 
 namespace Content.Shared._RMC14.Xenonids.Weeds;
 
@@ -408,27 +404,25 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             _toUpdate.Add(ent);
     }
 
-    public List<Entity<XenoWeedsComponent>> GetNearbyWeeds(Entity<MapGridComponent> grid, EntityCoordinates coordinates, int range = 5, bool sourceNodes = true)
+    public IEnumerable<Entity<XenoWeedsComponent>> GetNearbyWeeds(Entity<MapGridComponent> grid, EntityCoordinates coordinates, int range = 5, bool sourceNodes = true)
     {
         var position = _mapSystem.LocalToTile(grid, grid, coordinates);
         var checkArea = new Box2(position.X - range + 1, position.Y - range + 1, position.X + range, position.Y + range);
         var enumerable = _mapSystem.GetLocalAnchoredEntities(grid, grid, checkArea);
 
-        var nodeList = new List<Entity<XenoWeedsComponent>>();
-        foreach (var anchored in enumerable)
-        {
-            if (!TerminatingOrDeleted(anchored) && WeedsQuery.TryComp(anchored, out var weeds) && weeds.IsSource == sourceNodes)
-            {
-                nodeList.Add((anchored, weeds));
-            }
-        }
-
-        return nodeList;
+        return enumerable
+            .Where(anchored =>
+                !TerminatingOrDeleted(anchored) &&
+                WeedsQuery.TryComp(anchored, out var weeds)
+                && weeds.IsSource == sourceNodes
+            ).Select(weedTile =>
+                new Entity<XenoWeedsComponent>(weedTile, WeedsQuery.Comp(weedTile))
+            );
     }
 
     public bool HasWeedNodeNearby(Entity<MapGridComponent> grid, EntityCoordinates coordinates, int range = 5)
     {
-        return GetNearbyWeeds(grid, coordinates, range).Count != 0;
+        return GetNearbyWeeds(grid, coordinates, range).Any();
     }
 
     public bool IsOnHiveWeeds(Entity<MapGridComponent> grid, EntityCoordinates coordinates, bool sourceOnly = false)
