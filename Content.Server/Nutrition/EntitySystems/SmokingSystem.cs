@@ -49,7 +49,6 @@ namespace Content.Server.Nutrition.EntitySystems
             InitializeCigars();
             InitializePipes();
             InitializeVapes();
-            InitializeRMC(); // RMC14
         }
 
         private void OnExtinguishEvent(Entity<SmokableComponent> ent, ref ExtinguishEvent args)
