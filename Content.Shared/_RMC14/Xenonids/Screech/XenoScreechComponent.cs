@@ -26,10 +26,10 @@ public sealed partial class XenoScreechComponent : Component
 
     // TODO RMC14 stun less within 4 tiles
     [DataField, AutoNetworkedField]
-    public float StunRange = 7;
+    public float StunRange = 8.4628f;
 
     [DataField, AutoNetworkedField]
-    public float ParalyzeRange = 4;
+    public float ParalyzeRange = 5.0777f;
 
     [DataField, AutoNetworkedField]
     public float ParasiteStunRange = 11.2838f;
