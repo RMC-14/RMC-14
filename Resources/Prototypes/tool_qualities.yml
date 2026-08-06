@@ -85,8 +85,8 @@
 
 - type: tool
   id: DoorPrying
-  name: tool-quality-doorcutting-name
-  toolName: tool-quality-doorcutting-tool-name
+  name: tool-quality-doorprying-name
+  toolName: tool-quality-doorprying-tool-name
   spawn: RMCM5Bayonet
-  icon: { sprite: _RMC14/Objects/Weapons/Melee/m5_bayonet.rsi, state: icon }
+  icon: { sprite: _RMC14/Objects/Weapons/Melee/machete.rsi, state: icon }
 # end RMC14
