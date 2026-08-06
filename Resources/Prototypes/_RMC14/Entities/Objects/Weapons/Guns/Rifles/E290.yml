@@ -226,10 +226,10 @@
           - RMCAttachmente290Scope
       rmc-aslot-underbarrel:
         locked: true
-        startingAttachable: RMCAttachmente290Grip
+        startingAttachable: RMCAttachmentE290Grip
         whitelist:
           tags:
-          - RMCAttachmente290Grip
+          - RMCAttachmentE290Grip
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.84, 0
