@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: RerBreab
-  changes:
-  - message: Fixed direct hit of the incinerator's stream dealing damage multiple
-      times.
-    type: Fix
-  id: 3054
-  time: '2026-04-03T09:14:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9056
 - author: kleinerstation13
   changes:
   - message: Added a green band to PDW90 AP magazines
@@ -4572,5 +4564,13 @@
   id: 3553
   time: '2026-08-01T14:37:50.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10623
+- author: TadJohnson00
+  changes:
+  - message: Adjusted the sprites for PVE soft first-aid packs. They now have a fresh
+      look, featuring fill and in-hand states.
+    type: Tweak
+  id: 3554
+  time: '2026-08-06T22:49:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10621
 Name: RMC14
 Order: -1
