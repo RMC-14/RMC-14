@@ -1,12 +1,12 @@
 - type: job
   parent: CMJobBase
-  id: RMCCLFCommanderPVE
-  name: rmc-job-name-clf-pve-commander
+  id: RMCCLFGroundCommanderPVE
+  name: rmc-job-name-clf-commander
   description: rmc-ghost-role-information-clf-pve-description
   playTimeTracker: CMJobCLFCommanderPVE
   ranks:
     RMCRankCLFRebelCommander: []
-  startingGear: RMCJobCLFCommanderPVE
+  startingGear: RMCJobCLFGroundCommanderPVE
   icon: RMCJobIconCLFCellCommander
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-nobody
@@ -15,7 +15,7 @@
   - Colony
   - ShipMasterAccess #cant be assed to check what the ipad is under
   - Rifleman
-  spawnMenuRoleName: CLF Cell Captain (PVE)
+  spawnMenuRoleName: CLF Cell Commander (PVE)
   roleWeight: 1
   special:
   - !type:AddComponentSpecial
@@ -33,7 +33,7 @@
       squad: SquadCLF
     - type: SquadArmorWearer
     - type: JobPrefix
-      prefix: rmc-job-prefix-clf-pve-commander
+      prefix: rmc-job-prefix-clf-commander
     - type: MarineOrders
     - type: RMCPointing
     - type: RMCTrackable
@@ -46,27 +46,27 @@
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointCLFCommanderPVE
-  name: clf commander spawn point
+  id: RMCSpawnPointCLFGroundCommanderPVE
+  name: clf ground commander spawn point
   suffix: PVE
   components:
   - type: SpawnPoint
-    job_id: RMCCLFCommanderPVE
+    job_id: RMCCLFGroundCommanderPVE
   - type: Sprite
     sprite: _RMC14/Markers/landmarks.rsi
     state: clf_spawn
 
 - type: startingGear
-  id: RMCJobCLFCommanderPVE
+  id: RMCJobCLFGroundCommanderPVE
   equipment:
-    id: RMCIDCardCLFCommanderPVE
+    id: RMCIDCardCLFCommander
     head: RMCHeadCapCellCap
     eyes: RMCGlassesHUDSecurity
     jumpsuit: RMCJumpsuitCLFPVELead
     back: RMCSatchelNorm
     gloves: RMCHandsVeteranSPP
     shoes: RMCShoesCombat
-    ears: RMCHeadsetDistressCLFPVECapt
+    ears: RMCHeadsetDistressCLFPVEComm
     outerClothing: RMCArmorCLFPVECaptain
 
 - type: playTimeTracker
