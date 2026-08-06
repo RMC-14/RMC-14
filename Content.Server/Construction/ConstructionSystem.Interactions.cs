@@ -363,7 +363,7 @@ namespace Content.Server.Construction
                             if (_toolSystem.HasQuality(interactUsing.Used, tool))
                                 return HandleResult.Validated;
                         }
-                            return HandleResult.False;
+                        return HandleResult.False;
                         // end RMC14
                     }
 
