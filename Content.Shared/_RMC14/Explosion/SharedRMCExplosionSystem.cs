@@ -274,6 +274,8 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
             {
                 var arev = new CMGetArmorEvent(SlotFlags.OUTERCLOTHING | SlotFlags.INNERCLOTHING);
                 RaiseLocalEvent(args.Target, ref arev);
+                arev.ExplosionArmor = Math.Max(arev.ExplosionArmor, 0);
+
                 var resist = (float)Math.Pow(1.1, -Math.Min(arev.ExplosionArmor, explosion.ArmorPiercing) / 10.0);
                 ev.DamageCoefficient /= resist;
             }
