@@ -184,6 +184,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     {
         _movementAccumulator.Remove(ent.Owner);
         _activeXenoPushers.Remove(ent.Owner);
+        _nextToxicWaterDamage.Remove(ent.Owner);
     }
 
     private void OnMoverMove(Entity<GridVehicleMoverComponent> ent, ref MoveEvent args)
@@ -332,6 +333,8 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
             if (xform.GridUid is not { } gridUid || !gridQ.HasComp(gridUid))
                 continue;
+
+            UpdateVehicleToxicWater(uid, mover, xform);
 
             if (_net.IsClient && !ShouldPredictVehicleMovement(vehicle))
                 continue;

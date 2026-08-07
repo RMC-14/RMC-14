@@ -17,6 +17,7 @@
     sprite: _RMC14/Tiles/planet/desert_water.rsi
     layers:
     - state: shallow_toxic
+  - type: VehicleCorrosiveTile
   - type: DamageOverTime
     affectsDead: false
     cover:
