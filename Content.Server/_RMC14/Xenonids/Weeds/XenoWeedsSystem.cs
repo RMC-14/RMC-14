@@ -294,7 +294,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
         if (_transform.GetGrid(coordinates) is not { } gridUid || !TryComp<MapGridComponent>(gridUid, out var gridComp))
             return newParent;
 
-        HiveMemberQuery.TryComp(childEnt, out var weedHive);
+        var weedHive = HiveMemberQuery.CompOrNull(childEnt);
         // "Re-parenting" (adoption?) range is deliberately one smaller than the standard growth range.
         foreach (var node in GetNearbyWeeds((gridUid, gridComp), coordinates, childEnt.Comp.Range - 1))
         {

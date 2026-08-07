@@ -413,8 +413,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         return enumerable
             .Where(anchored =>
                 !TerminatingOrDeleted(anchored) &&
-                WeedsQuery.TryComp(anchored, out var weeds)
-                && weeds.IsSource == sourceNodes
+                WeedsQuery.TryComp(anchored, out var weeds) &&
+                weeds.IsSource == sourceNodes
             ).Select(weedTile =>
                 new Entity<XenoWeedsComponent>(weedTile, WeedsQuery.Comp(weedTile))
             );
