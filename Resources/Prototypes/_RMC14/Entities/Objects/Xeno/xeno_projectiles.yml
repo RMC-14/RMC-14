@@ -194,6 +194,7 @@
     slow: 5
     paralyze: 0
   - type: Projectile
+    ignoreResistances: true
     impactEffect: null
     damage:
       types:
