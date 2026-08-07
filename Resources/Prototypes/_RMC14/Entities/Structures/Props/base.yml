@@ -10,3 +10,16 @@
     bodyType: Static
   - type: Clickable
   - type: DeleteOnExplosion
+
+- type: entity
+  abstract: true
+  id: RMCPropBaseUnbreakable
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Clickable
+

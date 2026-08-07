@@ -10,7 +10,16 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
     layers:
-    - state: security_det # TODO RMC14 unpowered and broken sprite
+    - map: ["base"]   # TODO RMC14 broken sprite
+      state: "security_det0"
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "security_det"
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
   - type: Fixtures
     fixtures:
       fix1:
@@ -23,8 +32,8 @@
         layer:
         - MachineLayer
   - type: ApcPowerReceiver
-    powerLoad: 0
-    needsPower: false
+    powerLoad: 250
+    needsPower: true
   - type: RMCPowerReceiver
     idleLoad: 300
     activeLoad: 300

@@ -9,6 +9,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Content.Shared._RMC14.Xenonids.Egg;
 
 namespace Content.Shared._RMC14.Xenonids.Construction.PlasmaTree;
 
@@ -57,7 +58,7 @@ public sealed class PlasmaTreeSystem : EntitySystem
         {
             if (!_hive.FromSameHive(ent, nearbyEntity) ||
                 !HasComp<XenoComponent>(nearbyEntity) ||
-                !HasComp<XenoRestingComponent>(nearbyEntity) ||
+                !(HasComp<XenoRestingComponent>(nearbyEntity) || HasComp<XenoAttachedOvipositorComponent>(nearbyEntity)) ||
                 !TryComp<XenoPlasmaComponent>(nearbyEntity, out var plasmaComp) ||
                 plasmaComp.Plasma == plasmaComp.MaxPlasma ||
                 !HasComp<MobStateComponent>(nearbyEntity) ||
@@ -85,7 +86,7 @@ public sealed class PlasmaTreeSystem : EntitySystem
             BreakOnMove = true,
             MovementThreshold = 0.5f,
             DuplicateCondition = DuplicateConditions.SameEvent,
-            TargetEffect = "RMCEffectHealBusy",
+            TargetEffect = "RMCEffectHealPlasma",
         };
 
         if (_doafter.TryStartDoAfter(recover, out var id))

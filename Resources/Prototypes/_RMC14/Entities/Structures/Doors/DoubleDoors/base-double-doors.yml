@@ -7,6 +7,9 @@
   components:
   - type: Sprite
     offset: "0.5, 0.5"
+  - type: RMCWeldEffectSource
+    startingOffset: 0.45, 0.5
+    endingOffset: -0.45, 0.5
   - type: Fixtures
     fixtures:
       fix1:
