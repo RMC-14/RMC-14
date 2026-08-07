@@ -62,7 +62,7 @@
   equipment:
     head: RMCHeadRoyalCapPeaked
     ears: RMCHeadsetRoyalMarineLeaderPVE
-    jumpsuit: RMCJumpsuitMarineRoyalService
+    jumpsuit: RMCJumpsuitMarineRoyalServicePVE
     gloves: RMCHandsVeteranRoyalMarine
     shoes: RMCBootsRoyalFilled
     id: RMCIDRoyalMarinesTroopCommanderPVE

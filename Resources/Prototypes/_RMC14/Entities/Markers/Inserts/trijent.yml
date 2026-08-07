@@ -13,43 +13,79 @@
 # Standalones
 - type: entity
   parent: RMCMapInsertTrijentBase
-  id: RMCMapInsertTrijentGreenBridge
-  name: Green River New Bridge
-  suffix: Insert Trijent
-  components:
-  - type: MapInsert
-    variations:
-    - spawn: "/Maps/_RMC14/Inserts/Trijent/green_river_new_bridge.yml"
-      probability: 0.1
-
-- type: entity
-  parent: RMCMapInsertTrijentBase
-  id: RMCMapInsertTrijentPurpleBridge
-  name: Purple River New Bridge
-  suffix: Insert Trijent
-  components:
-  - type: MapInsert
-    variations:
-    - spawn: "/Maps/_RMC14/Inserts/Trijent/purple_river_new_bridge.yml"
-      probability: 0.1
-
-- type: entity
-  parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentCaveInEngineering
   name: Cave in Engineering
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Trijent/cave_in_engineering.yml"
       probability: 0.1
 
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentArmory
+  name: Pristine/battle Armory
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/pristine.yml"
+      probability: 0.1
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/battle.yml"
+      probability: 0.2
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentSouthbridge
+  name: Civ/Corp Hold Southbridge
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/corphold.yml"
+      probability: 0.1
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/civhold.yml"
+      probability: 0.1
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentWorkshop
+  name: Gear/Guns workshop
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/gear.yml"
+      probability: 0.1
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/guns.yml"
+      probability: 0.1
+    replaceAreas: false
+
+
 # Sprinkles
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentGreenBridge
+  name: Green River New Bridge
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/green_river_new_bridge.yml"
+      probability: 0.25
+
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentPurpleBridge
+  name: Purple River New Bridge
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/purple_river_new_bridge.yml"
+      probability: 0.25
+
 - type: entity
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentTempleIntact
   name: Temple Intact
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
@@ -60,7 +96,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentShipGone
   name: Ship Gone
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
@@ -69,14 +104,101 @@
 
 - type: entity
   parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentLoaderdude
+  name: Loader dude
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/loaderdude.yml"
+      probability: 0.25
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentAdminFight
+  name: Admin Fight
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/admin_fight.yml"
+      probability: 0.3
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentCMBEngi
+  name: CMB dead engi
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/cmb_engi.yml"
+      probability: 0.3
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentHoldGenwest
+  name: Hold Genwest
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/hold_genwest.yml"
+      probability: 0.3
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentHydroBreakroomHold
+  name: Hydro Breakroom Hold
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/hydro_breakroom_hold.yml"
+      probability: 0.3
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentMetalGeneast
+  name: Metal Geneast
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/metal_geneast.yml"
+      probability: 0.3
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentEngiCentralRepaired
+  name: Engineer Central Repaired
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/engi_central_repaired.yml"
+      probability: 0.7
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentSensorhold
+  name: Sensor Hold
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/sensorhold.yml"
+      probability: 0.5
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentCLFPods
   name: CLF Pods
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Trijent/clfpods.yml"
-      probability: 0.1
+      probability: 1
       offset: 0,-2.0
       nightmareScenario: clf_pods
     replaceAreas: false
@@ -85,7 +207,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentCrashlandingSPPBar
   name: Crashlanding SPP Bar
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
@@ -99,7 +220,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentCrashlandingSPPAlt
   name: Crashlanding SPP Alt
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
@@ -113,7 +233,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentMiniEvacWestResearch
   name: Mini-evac West Research
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
@@ -128,7 +247,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentSurvSpawnHospital
   name: Hospital Surv Spawn
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
@@ -141,7 +259,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentSurvSpawnDam
   name: Dam Surv Spawn
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
@@ -154,7 +271,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentSurvSpawnBar
   name: Bar Surv Spawn
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
@@ -167,7 +283,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentSurvSpawnTunnelDorm
   name: Tunnel Dorm Surv Spawn
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:

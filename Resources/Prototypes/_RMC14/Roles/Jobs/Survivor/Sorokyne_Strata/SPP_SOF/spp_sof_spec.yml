@@ -45,6 +45,6 @@
   name: special survivor spp sof specialist spawn point
   components:
   - type: SpawnPoint
-    job_id: RMCSurvivorSPPSOFSL
+    job_id: RMCSurvivorSPPSOFSpec
   - type: Sprite
     state: surv_spp

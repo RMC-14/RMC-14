@@ -1,8 +1,9 @@
-﻿- type: job
+- type: job
   parent: RMCJobRibbonBase
   id: CMCorrespondent
   name: cm-job-name-correspondent
   description: cm-job-description-correspondent
+  newToJobInfo: rmc-new-to-job-cc
   playTimeTracker: CMJobCorrespondent
   requirements:
   - !type:TotalDepartmentsTimeRequirement

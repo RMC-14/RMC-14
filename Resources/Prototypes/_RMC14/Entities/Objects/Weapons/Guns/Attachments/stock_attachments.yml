@@ -368,6 +368,16 @@
       scatterFlat: 6
 
 - type: entity
+  parent: RMCAttachmentM890Stock
+  id: RMCAttachmentM890StockGuard
+  name: M890 Tactical Stock
+  suffix: Honor Guard
+  description: Standard Stock for the M890 tactical shotgun. Coated in a glossy red finish to signify its use with Military Police Honor Guards.
+  components:
+  - type: Sprite
+    state: tactical_stock_221_guard
+
+- type: entity
   parent: RMCStockAttachmentBase
   id: RMCAttachmentMK221Stock
   name: MK221 tactical stock

@@ -186,7 +186,7 @@
   sprite: /Textures/_RMC14/Tiles/planet/auto_shale/shale_2.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMTileBase
   id: CMPlanetTatami
   name: tatami flooring
   sprite: /Textures/_RMC14/Tiles/planet/interior/tatami.png

@@ -539,6 +539,8 @@
     nightmareScenarios:
     - scenarioName: spp_sof
       scenarioProbability: 0.4
+    - scenarioName: none # reduce by 0.1 once clf survs are in
+      scenarioProbability: 0.6
     survivorJobVariants:
       CMSurvivor:
       - CMJobSurvivorSoroCivilian: -1

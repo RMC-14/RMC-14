@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: RMCFiltration
   name: water filtration system
   description: A water filter that separates both organic and inorganic matter, hazardous waste, and corrosive acids from water so it may be further processed.
@@ -106,3 +106,361 @@
   - type: Sprite
     sprite: _RMC14/Structures/Filtration/96x96.rsi
     state: coagulation_arm
+
+- type: entity
+  parent: RMCFiltration
+  id: RMCFlacculationsArm
+  name: flocculation arm
+  description: flocculation
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1.99,-0.49,1.99,0.49"
+        density: 60
+        layer:
+        - MobMask
+  - type: Sprite
+    sprite: _RMC14/Structures/Filtration/128x32.rsi
+    state: flacculation_arm
+    offset: "-0.5, 0.0"
+
+- type: entity
+  parent: RMCFiltration
+  id: RMCFiltrationMachine
+  name: filtration machine
+  suffix: Left
+  description: ""
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-1.49,0.49,1.49"
+        density: 60
+        layer:
+        - MobMask
+  - type: Sprite
+    sprite: _RMC14/Structures/Filtration/64x128.rsi
+    state: filtration
+    offset: "0.5, -0.5"
+
+# Main filtration machines
+
+- type: entity
+  parent: RMCFiltrationMachine
+  id: RMCFiltrationMachineBroken
+  components:
+  - type: Sprite
+    state: filtration_broken
+
+- type: entity
+  parent: RMCFiltration
+  id: RMCFiltrationMachineA
+  name: filtration machine
+  description: ""
+  suffix: Mid
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-2.49,1.49,0.49"
+        density: 60
+        layer:
+        - MobMask
+  - type: Sprite
+    sprite: _RMC14/Structures/Filtration/64x96.rsi
+    state: filtration_machineA
+    offset: "0.5, -1.0"
+
+- type: entity
+  parent: RMCFiltrationMachineA
+  id: RMCFiltrationMachineB
+  name: filtration machine
+  suffix: Right
+  components:
+  - type: Sprite
+    state: filtration_machineB
+
+- type: entity
+  parent: RMCFiltrationMachineA
+  id: RMCFiltrationMachineABroken
+  name: broken filtration machine
+  components:
+  - type: Sprite
+    state: filtration_machineA_broken
+
+- type: entity
+  parent: RMCFiltrationMachineB
+  id: RMCFiltrationMachineBBroken
+  name: broken filtration machine
+  components:
+  - type: Sprite
+    state: filtration_machineB_broken
+
+# Sedimentation Tanks
+
+- type: entity
+  parent: RMCFiltrationMachineA
+  id: RMCFiltrationSedimentationTank
+  name: sedimentation tank
+  description: A large tank that holds water to allow sediment to settle at the bottom for easier filtration.
+  components:
+  - type: Sprite
+    state: sedimentation
+
+- type: entity
+  parent: RMCFiltrationMachineA
+  id: RMCFiltrationSedimentationTankBroken
+  name: broken sedimentation tank
+  description: A large tank that holds water to allow sediment to settle at the bottom for easier filtration. This one is broken.
+  components:
+  - type: Sprite
+    state: sedimentation_broken
+
+# Filtration catwalks
+
+- type: entity
+  parent: CMCatwalk
+  id: RMCFiltrationCatwalk
+  name: filtration catwalks
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Filtration/32x32.rsi
+    state: filtration_catwalk
+
+- type: entity
+  parent: RMCFiltrationCatwalk
+  id: RMCFiltrationCatwalkA
+  components:
+  - type: Sprite
+    state: filtration_segmentA
+
+- type: entity
+  parent: RMCFiltrationCatwalk
+  id: RMCFiltrationCatwalkB
+  components:
+  - type: Sprite
+    state: filtration_segmentB
+
+- type: entity
+  parent: RMCFiltrationCatwalk
+  id: RMCFiltrationCatwalkC
+  components:
+  - type: Sprite
+    state: filtration_segmentC
+
+- type: entity
+  parent: RMCFiltrationCatwalk
+  id: RMCFiltrationCatwalkD
+  components:
+  - type: Sprite
+    state: filtration_segmentD
+
+# Collection pipes
+
+- type: entity
+  id: RMCFiltrationCollectionsPipe1
+  name: collection pipes
+  description: A series of pipes collecting water from the river to take it to the plant for filtration.
+  suffix: Prop
+  components:
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Filtration/64x32.rsi
+    state: pipe1
+
+- type: entity
+  parent: RMCFiltrationCollectionsPipe1
+  id: RMCFiltrationCollectionsPipe2
+  components:
+  - type: Sprite
+    state: pipe2
+
+- type: entity
+  parent: RMCFiltrationCollectionsPipe1
+  id: RMCFiltrationCollectionsPipe3
+  components:
+  - type: Sprite
+    state: pipe3
+
+- type: entity
+  parent: RMCFiltrationCollectionsPipe1
+  id: RMCFiltrationCollectionsPipe4
+  components:
+  - type: Sprite
+    state: pipe4
+
+- type: entity
+  parent: RMCFiltrationCollectionsPipe1
+  id: RMCFiltrationCollectionsPipe1broken
+  name: broken collection pipes
+  description: A series of pipes collecting water from the river to take it to the plant for filtration. This one is broken.
+  components:
+  - type: Sprite
+    state: pipe1_broken
+
+- type: entity
+  parent: RMCFiltrationCollectionsPipe1broken
+  id: RMCFiltrationCollectionsPipe2broken
+  components:
+  - type: Sprite
+    state: pipe2_broken
+
+- type: entity
+  parent: RMCFiltrationCollectionsPipe1broken
+  id: RMCFiltrationCollectionsPipe3broken
+  components:
+  - type: Sprite
+    state: pipe3_broken
+
+- type: entity
+  parent: RMCFiltrationCollectionsPipe1broken
+  id: RMCFiltrationCollectionsPipe4broken
+  components:
+  - type: Sprite
+    state: pipe4_broken
+
+# Coagulation catwalks
+ 
+- type: entity
+  parent: CMCatwalk
+  id: RMCCoagulationCatwalkNE1
+  name: coagulation catwalk
+  description: ""
+  suffix: NE, upper
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Filtration/32x32.rsi
+    state: ne1
+
+- type: entity
+  parent: RMCCoagulationCatwalkNE1
+  id: RMCCoagulationCatwalkNE2
+  suffix: NE, upper, alt
+  components:
+  - type: Sprite
+    state: ne2
+
+- type: entity
+  parent: CMCatwalk
+  id: RMCCoagulationCatwalkNE3
+  name: coagulation catwalk
+  description: ""
+  suffix: NE, lower
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Filtration/32x32.rsi
+    state: ne3
+
+- type: entity
+  parent: RMCCoagulationCatwalkNE3
+  id: RMCCoagulationCatwalkNE4
+  suffix: NE, End
+  components:
+  - type: Sprite
+    state: ne4
+
+- type: entity
+  parent: RMCCoagulationCatwalkNE1
+  id: RMCCoagulationCatwalkNE5
+  suffix: NE, End, alt
+  components:
+  - type: Sprite
+    state: ne5
+
+- type: entity
+  parent: RMCCoagulationCatwalkNE1
+  id: RMCCoagulationCatwalkNLeft
+  suffix: N, Left
+  components:
+  - type: Sprite
+    state: northleft
+
+- type: entity
+  parent: RMCCoagulationCatwalkNE1
+  id: RMCCoagulationCatwalkNMid
+  suffix: N, Mid
+  components:
+  - type: Sprite
+    state: northmid
+
+- type: entity
+  parent: RMCCoagulationCatwalkNE1
+  id: RMCCoagulationCatwalkNRight
+  suffix: N, Right
+  components:
+  - type: Sprite
+    state: northright
+
+- type: entity
+  parent: RMCCoagulationCatwalkNE1
+  id: RMCCoagulationCatwalkNW1
+  suffix: NW, upper
+  components:
+  - type: Sprite
+    state: nw1
+
+- type: entity
+  parent: RMCCoagulationCatwalkNW1
+  id: RMCCoagulationCatwalkNW2
+  suffix: NW, lower
+  components:
+  - type: Sprite
+    state: nw2
+
+- type: entity
+  parent: RMCCoagulationCatwalkNW1
+  id: RMCCoagulationCatwalkNW3
+  suffix: NW, End
+  components:
+  - type: Sprite
+    state: nw3
+
+- type: entity
+  parent: RMCCoagulationCatwalkNW1
+  id: RMCCoagulationCatwalkNW4
+  suffix: NW, End, alt
+  components:
+  - type: Sprite
+    state: nw4
+
+- type: entity
+  parent: RMCCoagulationCatwalkNE1
+  id: RMCCoagulationCatwalkSE1
+  suffix: SE, upper
+  components:
+  - type: Sprite
+    state: se1
+
+- type: entity
+  parent: RMCCoagulationCatwalkSE1
+  id: RMCCoagulationCatwalkSE2
+  suffix: SE, lower
+  components:
+  - type: Sprite
+    state: se2
+
+- type: entity
+  parent: RMCCoagulationCatwalkNE1
+  id: RMCCoagulationCatwalkSW1
+  suffix: SW, upper
+  components:
+  - type: Sprite
+    state: sw1
+
+- type: entity
+  parent: RMCCoagulationCatwalkSW1
+  id: RMCCoagulationCatwalkSW2
+  suffix: SW, lower
+  components:
+  - type: Sprite
+    state: sw2
+

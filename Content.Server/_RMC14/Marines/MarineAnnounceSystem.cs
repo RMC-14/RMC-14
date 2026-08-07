@@ -3,11 +3,11 @@ using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.Radio.EntitySystems;
 using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Intel;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Rules;
-using Content.Shared._RMC14.Survivor;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Ghost;
@@ -99,8 +99,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
     public override void AnnounceToMarines(
         string message,
         SoundSpecifier? sound = null,
-        Filter? filter = null,
-        bool excludeSurvivors = true)
+        Filter? filter = null)
     {
         filter ??= Filter.Empty()
             .AddWhereAttachedEntity(e =>
@@ -108,9 +107,8 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
                 HasComp<GhostComponent>(e)
             );
 
-        // TODO RMC14
-        if (excludeSurvivors)
-            filter.RemoveWhereAttachedEntity(HasComp<RMCSurvivorComponent>);
+        // Filter out non rescued survivors.
+        filter.RemoveWhereAttachedEntity(HasComp<IntelRescueSurvivorObjectiveComponent>);
 
         _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, message, default, false, true, null);
         _audio.PlayGlobal(sound ?? DefaultAnnouncementSound, filter, true, AudioParams.Default.WithVolume(-2f));

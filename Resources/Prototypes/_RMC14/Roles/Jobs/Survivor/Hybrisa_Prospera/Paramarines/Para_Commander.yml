@@ -19,7 +19,7 @@
             - TSE
         - type: RMCSurvivor
         - type: Skills
-          preset: RMCSkillPresetCommander
+          preset: RMCSkillPresetParaCommander
         - type: RMCAllowSuitStorage
         - type: IntelRescueSurvivorObjective
         - type: MotionDetectorTracked

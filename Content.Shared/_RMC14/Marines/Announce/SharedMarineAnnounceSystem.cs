@@ -211,12 +211,10 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
     /// <param name="message">The content of the announcement.</param>
     /// <param name="sound">GlobalSound for announcement.</param>
     /// <param name="filter">Who should be able to see and hear the announcement.</param>
-    /// <param name="excludeSurvivors">Whether or not to exclude survivors from the list of recipients.</param>
     public virtual void AnnounceToMarines(
         string message,
         SoundSpecifier? sound = null,
-        Filter? filter = null,
-        bool excludeSurvivors = true)
+        Filter? filter = null)
     {
     }
 
@@ -242,15 +240,13 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
     /// <param name="name">The name to sign the message with, defaults to the name of <see cref="author"/>.</param>
     /// <param name="sound">GlobalSound for announcement.</param>
     /// <param name="filter">Who should be able to see and hear the announcement.</param>
-    /// <param name="excludeSurvivors">Whether or not to exclude survivors from the list of recipients.</param>
     public void AnnounceSigned(
         EntityUid sender,
         string message,
         string? author = null,
         string? name = null,
         SoundSpecifier? sound = null,
-        Filter? filter = null,
-        bool excludeSurvivors = true)
+        Filter? filter = null)
     {
         if (_net.IsClient)
             return;
@@ -259,7 +255,7 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         name ??= _rankSystem.GetSpeakerFullRankName(sender) ?? Name(sender);
         var wrappedMessage = Loc.GetString("rmc-announcement-message-signed", ("author", author), ("message", message), ("name", name));
 
-        AnnounceToMarines(wrappedMessage, sound, filter, excludeSurvivors);
+        AnnounceToMarines(wrappedMessage, sound, filter);
         _adminLog.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(sender):source} marine announced message: {message}");
     }
 

@@ -9,14 +9,14 @@
     components:
     - type: Skills
       skills:
-        RMCSkillEngineer: 1
+        RMCSkillEngineer: 2
         RMCSkillConstruction: 0
         RMCSkillMeleeWeapons: 1
         RMCSkillCqc: 1
         RMCSkillFireman: 1
         RMCSkillFirearms: 1
         RMCSkillMedical: 1
-        RMCSkillJtac: 1
+        RMCSkillJtac: 2
         RMCSkillEndurance: 2
         RMCSkillLeadership: 0
         RMCSkillVehicles: 0

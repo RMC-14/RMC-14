@@ -175,6 +175,14 @@
 
 - type: entity
   parent: RMCMagazineRifleAK4047
+  id: RMCMagazineRifleAK4047Empty
+  suffix: Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+
+- type: entity
+  parent: RMCMagazineRifleAK4047
   id: RMCMagazineRifleAK4047AP
   name: "AK4047 AP magazine (10x24mm)"
   suffix: AP
