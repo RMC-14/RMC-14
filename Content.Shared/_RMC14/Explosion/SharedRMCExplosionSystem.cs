@@ -7,11 +7,14 @@ using Content.Shared._RMC14.Xenonids.Acid;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared.Body.Systems;
 using Content.Shared.Coordinates;
+using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Explosion;
+using Content.Shared.Explosion.Components;
 using Content.Shared.FixedPoint;
 using Content.Shared.Flash.Components;
 using Content.Shared.Inventory;
+using Content.Shared.Projectiles;
 using Content.Shared.Standing;
 using Content.Shared.StatusEffect;
 using Content.Shared.Sticky.Components;
@@ -44,6 +47,7 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly SharedDeafnessSystem _deafness = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly DamageableSystem _damage = default!;
 
     private static readonly ProtoId<DamageTypePrototype> StructuralDamage = "Structural";
     private static readonly ProtoId<StatusEffectPrototype> FlashedKey = "Flashed";
@@ -66,6 +70,8 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
         SubscribeLocalEvent<DestroyedByExplosionComponent, ExplosionReceivedEvent>(OnDestroyedByExplosionReceived);
 
         SubscribeLocalEvent<MobGibbedByExplosionTypeComponent, ExplosionReceivedEvent>(OnMobGibbedByExplosionReceived);
+
+        SubscribeLocalEvent<RMCExplosiveDamageOnHitComponent, ProjectileHitEvent>(OnExplosiveDamageOnHitProjectileHit);
     }
 
     private void OnExplosionEffectTriggered(Entity<CMExplosionEffectComponent> ent, ref CMExplosiveTriggeredEvent args)
@@ -250,6 +256,39 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
 
         if (!TerminatingOrDeleted(ent))
             _body.GibBody(ent, true);
+    }
+
+    private void OnExplosiveDamageOnHitProjectileHit(Entity<RMCExplosiveDamageOnHitComponent> projectile, ref ProjectileHitEvent args)
+    {
+        foreach (var explosion in projectile.Comp.Explosions)
+        {
+            if (_entityWhitelist.IsWhitelistFail(explosion.Whitelist, args.Target))
+                continue;
+
+            var ev = new GetExplosionResistanceEvent(explosion.ExplosionType);
+            RaiseLocalEvent(args.Target, ref ev);
+
+            // Effectively subtracts armor like normal armor piercing
+            // We must get base resistance so we don't over damage
+            // If there's ever anything thats supposed to make ents take MORE explosive damage than normal
+            // Change this
+            if (explosion.ArmorPiercing > 0 && TryComp<ExplosionResistanceComponent>(args.Target, out var baseResist))
+            {
+                var resist = (float)Math.Pow(1.1, -explosion.ArmorPiercing / 10.0);
+                ev.DamageCoefficient /= resist;
+                ev.DamageCoefficient = Math.Min(baseResist.DamageCoefficient, ev.DamageCoefficient);
+            }
+
+            ev.DamageCoefficient = Math.Max(0, ev.DamageCoefficient);
+
+            var dam = _damage.TryChangeDamage(args.Target, explosion.Damage * ev.DamageCoefficient, true, origin: args.Shooter, tool: projectile);
+
+            if (dam == null)
+                continue;
+
+            var exv = new ExplosionReceivedEvent(explosion.ExplosionType, _transform.ToMapCoordinates(projectile.Owner.ToCoordinates()), dam);
+            RaiseLocalEvent(args.Target, ref exv);
+        }
     }
 
     public void DoEffect(Entity<CMExplosionEffectComponent> ent)
