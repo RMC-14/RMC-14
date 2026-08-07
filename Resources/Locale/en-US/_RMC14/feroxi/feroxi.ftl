@@ -122,80 +122,80 @@ marking-FeroxiTipTwoToneTailAndDorsal-feroxi-tail-under = Under Tail
 marking-FeroxiTipTwoToneTailAndDorsal-feroxi-dorsal = Base Dorsal
 marking-FeroxiTipTwoToneTailAndDorsal-feroxi-dorsal-tip = Dorsal Tip
 
-marking-FeroxiNurseTailBlitz = StripedNurse Tail with Fin Tips and Dorsal
-marking-FeroxiNurseTailBlitz-feroxi-nurse = BaseNurse Tail
-marking-FeroxiNurseTailBlitz-feroxi-tail-nurse-stripe =Nurse Tail Stripes
-marking-FeroxiNurseTailBlitz-feroxi-tail-nurse-tip = UpperNurse Tail Fin Tip
-marking-FeroxiNurseTailBlitz-feroxi-tail-nurse-under = UnderNurse Tail
+marking-FeroxiNurseTailBlitz = Striped Nurse Tail (Fin Tips, Dorsal)
+marking-FeroxiNurseTailBlitz-feroxi-nurse = Base Nurse Tail
+marking-FeroxiNurseTailBlitz-feroxi-tail-nurse-stripe = Nurse Tail Stripes
+marking-FeroxiNurseTailBlitz-feroxi-tail-nurse-tip = Upper Nurse Tail Fin Tip
+marking-FeroxiNurseTailBlitz-feroxi-tail-nurse-under = Under Nurse Tail
 marking-FeroxiNurseTailBlitz-feroxi-dorsal = Base Dorsal
 marking-FeroxiNurseTailBlitz-feroxi-dorsal-stripes = Dorsal Stripes
 
-marking-FeroxiNurseTailBlitzNoDorsal = StripedNurse Tail with Fin Tips
-marking-FeroxiNurseTailBlitzNoDorsal-feroxi-nurse = BaseNurse Tail
-marking-FeroxiNurseTailBlitzNoDorsal-feroxi-tail-nurse-stripe =Nurse Tail Stripes
-marking-FeroxiNurseTailBlitzNoDorsal-feroxi-tail-nurse-tip = UpperNurse Tail Fin Tip
-marking-FeroxiNurseTailBlitzNoDorsal-feroxi-tail-nurse-under = UnderNurse Tail
+marking-FeroxiNurseTailBlitzNoDorsal = Striped Nurse Tail (Fin Tips)
+marking-FeroxiNurseTailBlitzNoDorsal-feroxi-nurse = Base Nurse Tail
+marking-FeroxiNurseTailBlitzNoDorsal-feroxi-tail-nurse-stripe = Nurse Tail Stripes
+marking-FeroxiNurseTailBlitzNoDorsal-feroxi-tail-nurse-tip = Upper Nurse Tail Fin Tip
+marking-FeroxiNurseTailBlitzNoDorsal-feroxi-tail-nurse-under = Under Nurse Tail
 
-marking-FeroxiNurseStripedTail = StripedNurse Tail
-marking-FeroxiNurseStripedTail-feroxi-nurse = BaseNurse Tail
-marking-FeroxiNurseStripedTail-feroxi-tail-nurse-stripe =Nurse Tail Stripes
+marking-FeroxiNurseStripedTail = Striped Nurse Tail
+marking-FeroxiNurseStripedTail-feroxi-nurse = Base Nurse Tail
+marking-FeroxiNurseStripedTail-feroxi-tail-nurse-stripe = Nurse Tail Stripes
 
-marking-FeroxiNurseStripedTailAndDorsal = StripedNurse Tail with Dorsal
-marking-FeroxiNurseStripedTailAndDorsal-feroxi-nurse = BaseNurse Tail
-marking-FeroxiNurseStripedTailAndDorsal-feroxi-tail-nurse-stripe =Nurse Tail Stripes
+marking-FeroxiNurseStripedTailAndDorsal = Striped Nurse Tail (Dorsal)
+marking-FeroxiNurseStripedTailAndDorsal-feroxi-nurse = Base Nurse Tail
+marking-FeroxiNurseStripedTailAndDorsal-feroxi-tail-nurse-stripe = Nurse Tail Stripes
 marking-FeroxiNurseStripedTailAndDorsal-feroxi-dorsal = Base Dorsal
 marking-FeroxiNurseStripedTailAndDorsal-feroxi-dorsal-stripes = Dorsal Stripes
 
-marking-FeroxiNurseTail =Nurse Tail
-marking-FeroxiNurseTail-feroxi-tail = BaseNurse Tail
+marking-FeroxiNurseTail = Nurse Tail
+marking-FeroxiNurseTail-feroxi-tail = Base Nurse Tail
 
-marking-FeroxiNurseTipTail =Nurse Tail with Tips
-marking-FeroxiNurseTipTail-feroxi-nurse = BaseNurse Tail
-marking-FeroxiNurseTipTail-feroxi-tail-nurse-tip = UpperNurse Tail Fin Tip
+marking-FeroxiNurseTipTail = Nurse Tail (Tips)
+marking-FeroxiNurseTipTail-feroxi-nurse = Base Nurse Tail
+marking-FeroxiNurseTipTail-feroxi-tail-nurse-tip = Upper Nurse Tail Fin Tip
 marking-FeroxiNurseTipTail-feroxi-second-dorsal-tip = Secondary Dorsal Fin Tip
 marking-FeroxiNurseTipTail-feroxi-dorsal = Base Dorsal
 
-marking-FeroxiNurseTipTailAndDorsal =Nurse Tail with Tips and Dorsal
-marking-FeroxiNurseTipTailAndDorsal-feroxi-nurse = BaseNurse Tail
-marking-FeroxiNurseTipTailAndDorsal-feroxi-tail-nurse-tip = UpperNurse Tail Fin Tip
+marking-FeroxiNurseTipTailAndDorsal = Nurse Tail (Tips, Dorsal)
+marking-FeroxiNurseTipTailAndDorsal-feroxi-nurse = Base Nurse Tail
+marking-FeroxiNurseTipTailAndDorsal-feroxi-tail-nurse-tip = Upper Nurse Tail Fin Tip
 marking-FeroxiNurseTipTailAndDorsal-feroxi-second-dorsal-tip = Secondary Dorsal Fin Tip
 marking-FeroxiNurseTipTailAndDorsal-feroxi-dorsal = Base Dorsal
 marking-FeroxiNurseTipTailAndDorsal-feroxi-dorsal-tip = Dorsal Tip
 
-marking-FeroxiNurseTwoToneTail = Two ToneNurse Tail
-marking-FeroxiNurseTwoToneTail-feroxi-nurse = BaseNurse Tail
-marking-FeroxiNurseTwoToneTail-feroxi-tail-nurse-under = UnderNurse Tail
+marking-FeroxiNurseTwoToneTail = Nurse Tail (Two Tone)
+marking-FeroxiNurseTwoToneTail-feroxi-nurse = Base Nurse Tail
+marking-FeroxiNurseTwoToneTail-feroxi-tail-nurse-under = Under Nurse Tail
 
-marking-FeroxiNurseTwoToneTailAndDorsal = Two ToneNurse Tail and Dorsal
-marking-FeroxiNurseTwoToneTailAndDorsal-feroxi-nurse = BaseNurse Tail
-marking-FeroxiNurseTwoToneTailAndDorsal-feroxi-tail-nurse-under = UnderNurse Tail
+marking-FeroxiNurseTwoToneTailAndDorsal = Nurse Tail (Two Tone, Dorsal)
+marking-FeroxiNurseTwoToneTailAndDorsal-feroxi-nurse = Base Nurse Tail
+marking-FeroxiNurseTwoToneTailAndDorsal-feroxi-tail-nurse-under = Under Nurse Tail
 marking-FeroxiNurseTwoToneTailAndDorsal-feroxi-dorsal = Base Dorsal
 
-marking-FeroxiNurseStripeTwoToneTail = Two ToneNurse Tail with Stripes
+marking-FeroxiNurseStripeTwoToneTail = Nurse Tail (Two Tone, Stripes)
 marking-FeroxiNurseStripeTwoToneTail-feroxi-nurse = BaseNurse Tail
-marking-FeroxiNurseStripeTwoToneTail-feroxi-tail-nurse-stripe =Nurse Tail Stripes
-marking-FeroxiNurseStripeTwoToneTail-feroxi-tail-nurse-under = UnderNurse Tail
+marking-FeroxiNurseStripeTwoToneTail-feroxi-tail-nurse-stripe = Nurse Tail Stripes
+marking-FeroxiNurseStripeTwoToneTail-feroxi-tail-nurse-under = Under Nurse Tail
 
-marking-FeroxiNurseStripeTwoToneTailAndDorsal = Two ToneNurse Tail with Stripes and Dorsal
-marking-FeroxiNurseStripeTwoToneTailAndDorsal-feroxi-nurse = BaseNurse Tail
-marking-FeroxiNurseStripeTwoToneTailAndDorsal-feroxi-tail-nurse-stripe =Nurse Tail Stripes
-marking-FeroxiNurseStripeTwoToneTailAndDorsal-feroxi-tail-nurse-under = UnderNurse Tail
+marking-FeroxiNurseStripeTwoToneTailAndDorsal = Nurse Tail (Two Tone, Stripes and Dorsal)
+marking-FeroxiNurseStripeTwoToneTailAndDorsal-feroxi-nurse = Base Nurse Tail
+marking-FeroxiNurseStripeTwoToneTailAndDorsal-feroxi-tail-nurse-stripe = Nurse Tail Stripes
+marking-FeroxiNurseStripeTwoToneTailAndDorsal-feroxi-tail-nurse-under = Under Nurse Tail
 marking-FeroxiNurseStripeTwoToneTailAndDorsal-feroxi-dorsal = Base Dorsal
 marking-FeroxiNurseStripeTwoToneTailAndDorsal-feroxi-dorsal-stripes = Dorsal Stripes
 
-marking-FeroxiNurseTipTwoToneTail = Two ToneNurse Tail with Tips
-marking-FeroxiNurseTipTwoToneTail-feroxi-nurse = BaseNurse Tail
-marking-FeroxiNurseTipTwoToneTail-feroxi-tail-nurse-tip = UpperNurse Tail Fin Tip
-marking-FeroxiNurseTipTwoToneTail-feroxi-tail-nurse-under = UnderNurse Tail
+marking-FeroxiNurseTipTwoToneTail = Nurse Tail (Two Tone, Tips)
+marking-FeroxiNurseTipTwoToneTail-feroxi-nurse = Base Nurse Tail
+marking-FeroxiNurseTipTwoToneTail-feroxi-tail-nurse-tip = Upper Nurse Tail Fin Tip
+marking-FeroxiNurseTipTwoToneTail-feroxi-tail-nurse-under = Under Nurse Tail
 
-marking-FeroxiNurseTipTwoToneTailAndDorsal = Two ToneNurse Tail with Tips and Dorsal
-marking-FeroxiNurseTipTwoToneTailAndDorsal-feroxi-nurse = BaseNurse Tail
-marking-FeroxiNurseTipTwoToneTailAndDorsal-feroxi-tail-nurse-tip = UpperNurse Tail Fin Tip
-marking-FeroxiNurseTipTwoToneTailAndDorsal-feroxi-tail-nurse-under = UnderNurse Tail
+marking-FeroxiNurseTipTwoToneTailAndDorsal = Nurse Tail (Two Tone, Tips, Dorsal)
+marking-FeroxiNurseTipTwoToneTailAndDorsal-feroxi-nurse = Base Nurse Tail
+marking-FeroxiNurseTipTwoToneTailAndDorsal-feroxi-tail-nurse-tip = Upper Nurse Tail Fin Tip
+marking-FeroxiNurseTipTwoToneTailAndDorsal-feroxi-tail-nurse-under = Under Nurse Tail
 marking-FeroxiNurseTipTwoToneTailAndDorsal-feroxi-dorsal = Base Dorsal
 marking-FeroxiNurseTipTwoToneTailAndDorsal-feroxi-dorsal-tip = Dorsal Tip
 
-marking-FeroxiThresherTailBlitz = Striped Thresher Tail with Fin Tips and Dorsal
+marking-FeroxiThresherTailBlitz = Striped Thresher Tail (Fin Tips, Dorsal)
 marking-FeroxiThresherTailBlitz-feroxi-tail-thresher = Base Thresher Tail
 marking-FeroxiThresherTailBlitz-feroxi-tail-thresher-stripe = Tail Stripes
 marking-FeroxiThresherTailBlitz-feroxi-tail-thresher-top-tip = Upper Tail Fin Tip
@@ -204,7 +204,7 @@ marking-FeroxiThresherTailBlitz-feroxi-tail-under = Under Tail
 marking-FeroxiThresherTailBlitz-feroxi-dorsal = Base Dorsal
 marking-FeroxiThresherTailBlitz-feroxi-dorsal-stripes = Dorsal Stripes
 
-marking-FeroxiThresherTailBlitzNoDorsal = Striped Thresher Tail with Fin Tips
+marking-FeroxiThresherTailBlitzNoDorsal = Striped Thresher Tail (Fin Tips)
 marking-FeroxiThresherTailBlitzNoDorsal-feroxi-tail-thresher = Base Thresher Tail
 marking-FeroxiThresherTailBlitzNoDorsal-feroxi-tail-thresher-stripe = Tail Stripes
 marking-FeroxiThresherTailBlitzNoDorsal-feroxi-tail-thresher-top-tip = Upper Tail Fin Tip
@@ -215,7 +215,7 @@ marking-FeroxiThresherStripedTail = Striped Tail
 marking-FeroxiThresherStripedTail-feroxi-tail-thresher = Base Thresher Tail
 marking-FeroxiThresherStripedTail-feroxi-tail-thresher-stripe = Tail Stripes
 
-marking-FeroxiThresherStripedTailAndDorsal = Striped Tail with Dorsal
+marking-FeroxiThresherStripedTailAndDorsal = Striped Thresher Tail (Dorsal)
 marking-FeroxiThresherStripedTailAndDorsal-feroxi-tail-thresher = Base Thresher Tail
 marking-FeroxiThresherStripedTailAndDorsal-feroxi-tail-thresher-stripe = Tail Stripes
 marking-FeroxiThresherStripedTailAndDorsal-feroxi-dorsal = Base Dorsal
@@ -224,14 +224,14 @@ marking-FeroxiThresherStripedTailAndDorsal-feroxi-dorsal-stripes = Dorsal Stripe
 marking-FeroxiThresherTail = Thresher Tail
 marking-FeroxiThresherTail-feroxi-tail-thresher = Base Thresher Tail
 
-marking-FeroxiThresherTipTail = Thresher Tail with Tips
+marking-FeroxiThresherTipTail = Thresher Tail (with Tips)
 marking-FeroxiThresherTipTail-feroxi-tail-thresher = Base Thresher Tail
 marking-FeroxiThresherTipTail-feroxi-tail-thresher-top-tip = Upper Tail Fin Tip
 marking-FeroxiThresherTipTail-feroxi-tail-bottom-tip = Lower Tail Fin Tip
 marking-FeroxiThresherTipTail-feroxi-second-dorsal-tip = Secondary Dorsal Fin Tip
 marking-FeroxiThresherTipTail-feroxi-dorsal = Base Dorsal
 
-marking-FeroxiThresherTipTailAndDorsal = Thresher Tail with Tips and Dorsal
+marking-FeroxiThresherTipTailAndDorsal = Thresher Tail (Tips, Dorsal)
 marking-FeroxiThresherTipTailAndDorsal-feroxi-tail-thresher = Base Thresher Tail
 marking-FeroxiThresherTipTailAndDorsal-feroxi-tail-thresher-top-tip = Upper Tail Fin Tip
 marking-FeroxiThresherTipTailAndDorsal-feroxi-tail-bottom-tip = Lower Tail Fin Tip
@@ -239,34 +239,34 @@ marking-FeroxiThresherTipTailAndDorsal-feroxi-second-dorsal-tip = Secondary Dors
 marking-FeroxiThresherTipTailAndDorsal-feroxi-dorsal = Base Dorsal
 marking-FeroxiThresherTipTailAndDorsal-feroxi-dorsal-tip = Dorsal Tip
 
-marking-FeroxiThresherTwoToneTail = Two Tone Thresher Tail
+marking-FeroxiThresherTwoToneTail = Thresher Tail (Two Tone)
 marking-FeroxiThresherTwoToneTail-feroxi-tail-thresher = Base Thresher Tail
 marking-FeroxiThresherTwoToneTail-feroxi-tail-under = Under Tail
 
-marking-FeroxiThresherTwoToneTailAndDorsal = Two Tone Thresher Tail and Dorsal
+marking-FeroxiThresherTwoToneTailAndDorsal = Thresher Tail (Two Tone, Dorsal)
 marking-FeroxiThresherTwoToneTailAndDorsal-feroxi-tail-thresher = Base Thresher Tail
 marking-FeroxiThresherTwoToneTailAndDorsal-feroxi-tail-under = Under Tail
 marking-FeroxiThresherTwoToneTailAndDorsal-feroxi-dorsal = Base Dorsal
 
-marking-FeroxiThresherStripeTwoToneTail = Two Tone Thresher Tail with Stripes
+marking-FeroxiThresherStripeTwoToneTail = Thresher Tail (Two Tone, Stripes)
 marking-FeroxiThresherStripeTwoToneTail-feroxi-tail-thresher = Base Thresher Tail
 marking-FeroxiThresherStripeTwoToneTail-feroxi-tail-thresher-stripe = Tail Stripes
 marking-FeroxiThresherStripeTwoToneTail-feroxi-tail-under = Under Tail
 
-marking-FeroxiThresherStripeTwoToneTailAndDorsal = Two Tone Thresher Tail with Stripes and Dorsal
+marking-FeroxiThresherStripeTwoToneTailAndDorsal = Thresher Tail (Two Tone, Stripes, Dorsal)
 marking-FeroxiThresherStripeTwoToneTailAndDorsal-feroxi-tail-thresher = Base Thresher Tail
 marking-FeroxiThresherStripeTwoToneTailAndDorsal-feroxi-tail-thresher-stripe = Tail Stripes
 marking-FeroxiThresherStripeTwoToneTailAndDorsal-feroxi-tail-under = Under Tail
 marking-FeroxiThresherStripeTwoToneTailAndDorsal-feroxi-dorsal = Base Dorsal
 marking-FeroxiThresherStripeTwoToneTailAndDorsal-feroxi-dorsal-stripes = Dorsal Stripes
 
-marking-FeroxiThresherTipTwoToneTail = Two Tone Thresher Tail with Tips
+marking-FeroxiThresherTipTwoToneTail = Thresher Tail (Two Tone, Tips)
 marking-FeroxiThresherTipTwoToneTail-feroxi-tail-thresher = Base Thresher Tail
 marking-FeroxiThresherTipTwoToneTail-feroxi-tail-thresher-top-tip = Upper Tail Fin Tip
 marking-FeroxiThresherTipTwoToneTail-feroxi-tail-bottom-tip = Lower Tail Fin Tip
 marking-FeroxiThresherTipTwoToneTail-feroxi-tail-under = Under Tail
 
-marking-FeroxiThresherTipTwoToneTailAndDorsal = Two Tone Thresher Tail with Tips and Dorsal
+marking-FeroxiThresherTipTwoToneTailAndDorsal = Thresher Tail (Two Tone, Tips, Dorsal)
 marking-FeroxiThresherTipTwoToneTailAndDorsal-feroxi-tail-thresher = Base Thresher Tail
 marking-FeroxiThresherTipTwoToneTailAndDorsal-feroxi-tail-thresher-top-tip = Upper Tail Fin Tip
 marking-FeroxiThresherTipTwoToneTailAndDorsal-feroxi-tail-bottom-tip = Lower Tail Fin Tip
