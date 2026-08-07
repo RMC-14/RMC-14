@@ -17,6 +17,7 @@ using Content.Shared.Ghost;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
 using Content.Shared.Mind;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Popups;
@@ -50,6 +51,10 @@ public sealed class VehicleSystem : EntitySystem
 
     private const float CrashMinSpeedFraction = 0.15f;
     private const float CrashThrowSpeed = 10f;
+
+    // Chebyshev tile radius the emergency dismount searches for a reachable exit when every authored
+    // exit is blocked. Kept small so the fallback reads as "step out the side", not a teleport.
+    private const int EmergencyExitSearchRadius = 2;
     private static readonly SoundSpecifier XenoFrameBreachSound = new SoundCollectionSpecifier("XenoPry");
 
     [Dependency] private readonly AreaSystem _area = default!;
@@ -59,6 +64,7 @@ public sealed class VehicleSystem : EntitySystem
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly SharedJobSystem _job = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly MetaDataSystem _meta = default!;
@@ -479,7 +485,18 @@ public sealed class VehicleSystem : EntitySystem
 
         ent.Comp.PendingExit = true;
 
-        var doAfter = new DoAfterArgs(EntityManager, args.User, enter.ExitDoAfter, new VehicleExitDoAfterEvent(), ent.Owner)
+        var exitTime = enter.ExitDoAfter;
+        var emergency = false;
+        if (enter.EmergencyExitDoAfter > 0f &&
+            TryGetExitCoordinates(ent, enter, vehicleUid, out var plannedExit, out _) &&
+            IsExitDestinationBlocked(plannedExit, vehicleUid, args.User) &&
+            AreAllVehicleExitsBlocked(vehicleUid, enter, args.User))
+        {
+            emergency = true;
+            exitTime = enter.EmergencyExitDoAfter;
+        }
+
+        var doAfter = new DoAfterArgs(EntityManager, args.User, exitTime, new VehicleExitDoAfterEvent(emergency), ent.Owner)
         {
             BreakOnMove = true,
         };
@@ -566,7 +583,7 @@ public sealed class VehicleSystem : EntitySystem
         args.Handled = TryEnter(ent, args.User, args.EntryIndex);
     }
 
-    private bool TryExit(Entity<VehicleExitComponent> ent, EntityUid user)
+    private bool TryExit(Entity<VehicleExitComponent> ent, EntityUid user, bool emergency = false)
     {
         if (!TryGetVehicleFromInterior(ent.Owner, out var vehicle) || vehicle is not { } vehicleUid)
             return false;
@@ -583,21 +600,44 @@ public sealed class VehicleSystem : EntitySystem
         if (!TryGetExitCoordinates(ent, enter, vehicleUid, out var exitCoords, out var exitMapCoords))
             return false;
 
-        if (!HasComp<GhostComponent>(user) && IsExitDestinationBlocked(exitCoords, vehicleUid, user))
+        if (HasComp<GhostComponent>(user) || !IsExitDestinationBlocked(exitCoords, vehicleUid, user))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-vehicle-exit-blocked"), user, user, PopupType.SmallCaution);
-            return false;
+            _rmcTeleporter.HandlePulling(user, exitMapCoords);
+            UntrackOccupant(user, vehicleUid);
+            return true;
         }
 
-        _rmcTeleporter.HandlePulling(user, exitMapCoords);
-        UntrackOccupant(user, vehicleUid);
-        return true;
+        if (emergency && TryFindEmergencyExitTile(vehicleUid, exitCoords, user, out var emergencyMapCoords))
+        {
+            _rmcTeleporter.HandlePulling(user, emergencyMapCoords);
+            UntrackOccupant(user, vehicleUid);
+            return true;
+        }
+
+        _popup.PopupEntity(Loc.GetString("rmc-vehicle-exit-blocked"), user, user, PopupType.SmallCaution);
+        return false;
     }
 
     private bool TryGetExitCoordinates(
         Entity<VehicleExitComponent> ent,
         VehicleEnterComponent enter,
         EntityUid vehicleUid,
+        out EntityCoordinates exitCoords,
+        out MapCoordinates exitMapCoords)
+    {
+        Vector2 offset;
+        var entryIndex = ent.Comp.EntryIndex;
+        if (entryIndex >= 0 && entryIndex < enter.EntryPoints.Count)
+            offset = enter.EntryPoints[entryIndex].Offset;
+        else
+            offset = enter.ExitOffset;
+
+        return TryGetExitCoordinatesForOffset(vehicleUid, offset, out exitCoords, out exitMapCoords);
+    }
+
+    private bool TryGetExitCoordinatesForOffset(
+        EntityUid vehicleUid,
+        Vector2 offset,
         out EntityCoordinates exitCoords,
         out MapCoordinates exitMapCoords)
     {
@@ -612,13 +652,6 @@ public sealed class VehicleSystem : EntitySystem
         if (parent == null || !parent.Value.IsValid())
             return false;
 
-        Vector2 offset;
-        var entryIndex = ent.Comp.EntryIndex;
-        if (entryIndex >= 0 && entryIndex < enter.EntryPoints.Count)
-            offset = enter.EntryPoints[entryIndex].Offset;
-        else
-            offset = enter.ExitOffset;
-
         var rotated = vehicleXform.LocalRotation.RotateVec(offset);
         var position = vehicleXform.LocalPosition + rotated;
 
@@ -627,14 +660,48 @@ public sealed class VehicleSystem : EntitySystem
         return exitMapCoords.MapId != MapId.Nullspace;
     }
 
+    private bool AreAllVehicleExitsBlocked(EntityUid vehicleUid, VehicleEnterComponent enter, EntityUid user)
+    {
+        if (enter.EntryPoints.Count == 0)
+        {
+            return TryGetExitCoordinatesForOffset(vehicleUid, enter.ExitOffset, out var coords, out _) &&
+                   IsExitDestinationBlocked(coords, vehicleUid, user);
+        }
+
+        foreach (var entry in enter.EntryPoints)
+        {
+            if (!TryGetExitCoordinatesForOffset(vehicleUid, entry.Offset, out var coords, out _))
+                continue;
+
+            if (!IsExitDestinationBlocked(coords, vehicleUid, user))
+                return false;
+        }
+
+        return true;
+    }
+
     private bool IsExitDestinationBlocked(EntityCoordinates exitCoords, EntityUid vehicle, EntityUid user)
     {
-        if (!_turf.TryGetTileRef(exitCoords, out var tileRef))
-            return false;
+        ScanTileHardBlockers(exitCoords, vehicle, user, out var mobBlocked, out var structureBlocked);
+        return mobBlocked || structureBlocked;
+    }
+
+    private void ScanTileHardBlockers(
+        EntityCoordinates tileCoords,
+        EntityUid vehicle,
+        EntityUid user,
+        out bool mobBlocked,
+        out bool structureBlocked)
+    {
+        mobBlocked = false;
+        structureBlocked = false;
+
+        if (!_turf.TryGetTileRef(tileCoords, out var tileRef))
+            return;
 
         var gridUid = tileRef.Value.GridUid;
         if (!TryComp(gridUid, out MapGridComponent? gridComp))
-            return false;
+            return;
 
         var xformQuery = GetEntityQuery<TransformComponent>();
         var fixtureQuery = GetEntityQuery<FixturesComponent>();
@@ -666,6 +733,7 @@ public sealed class VehicleSystem : EntitySystem
 
             var fixtureTransform = new Transform(pos, (float) rot.Theta);
 
+            var overlaps = false;
             foreach (var fixture in fixtures.Fixtures.Values)
             {
                 if (!fixture.Hard)
@@ -678,12 +746,203 @@ public sealed class VehicleSystem : EntitySystem
                 {
                     var intersection = fixture.Shape.ComputeAABB(fixtureTransform, i).Intersect(tileAabb);
                     if (intersection.Width * intersection.Height > 0.1f)
-                        return true;
+                    {
+                        overlaps = true;
+                        break;
+                    }
+                }
+
+                if (overlaps)
+                    break;
+            }
+
+            if (!overlaps)
+                continue;
+
+            if (HasComp<MobStateComponent>(ent))
+                mobBlocked = true;
+            else
+                structureBlocked = true;
+        }
+    }
+
+    private bool TryGetVehicleWorldAabb(EntityUid vehicleUid, out Box2 aabb)
+    {
+        aabb = default;
+
+        if (!TryComp(vehicleUid, out FixturesComponent? fixtures))
+            return false;
+
+        var (worldPos, worldRot) = _transform.GetWorldPositionRotation(vehicleUid);
+        var transform = new Transform(worldPos, (float) worldRot.Theta);
+
+        var first = true;
+        foreach (var fixture in fixtures.Fixtures.Values)
+        {
+            if (!fixture.Hard)
+                continue;
+
+            for (var i = 0; i < fixture.Shape.ChildCount; i++)
+            {
+                var child = fixture.Shape.ComputeAABB(transform, i);
+                if (first)
+                {
+                    aabb = child;
+                    first = false;
+                }
+                else
+                {
+                    aabb = aabb.Union(child);
                 }
             }
         }
 
-        return false;
+        return !first;
+    }
+
+    private enum EmergencyTileClass : byte
+    {
+        Impassable,
+        Soft,
+        Free,
+    }
+
+    private static readonly Vector2i[] EmergencyExitNeighbors =
+    {
+        new(1, 0), new(-1, 0), new(0, 1), new(0, -1),
+        new(1, 1), new(1, -1), new(-1, 1), new(-1, -1),
+    };
+
+    private EmergencyTileClass ClassifyEmergencyTile(
+        EntityUid gridUid,
+        MapGridComponent gridComp,
+        Vector2i indices,
+        EntityUid vehicle,
+        EntityUid user,
+        Box2 vehicleWorldAabb,
+        out EntityCoordinates coords)
+    {
+        coords = _map.GridTileToLocal(gridUid, gridComp, indices);
+
+        if (!_turf.TryGetTileRef(coords, out var tileRef) || tileRef.Value.Tile.IsEmpty)
+            return EmergencyTileClass.Impassable;
+
+        var mapCoords = _transform.ToMapCoordinates(coords);
+        if (mapCoords.MapId == MapId.Nullspace || vehicleWorldAabb.Contains(mapCoords.Position))
+            return EmergencyTileClass.Impassable;
+
+        ScanTileHardBlockers(coords, vehicle, user, out var mobBlocked, out var structureBlocked);
+        if (structureBlocked)
+            return EmergencyTileClass.Impassable;
+
+        return mobBlocked ? EmergencyTileClass.Soft : EmergencyTileClass.Free;
+    }
+
+    private bool TryFindEmergencyExitTile(
+        EntityUid vehicleUid,
+        EntityCoordinates originExit,
+        EntityUid user,
+        out MapCoordinates resultMap)
+    {
+        resultMap = default;
+
+        if (!_turf.TryGetTileRef(originExit, out var originRef))
+            return false;
+
+        var gridUid = originRef.Value.GridUid;
+        if (!TryComp(gridUid, out MapGridComponent? gridComp))
+            return false;
+
+        var originMap = _transform.ToMapCoordinates(originExit);
+        if (originMap.MapId == MapId.Nullspace)
+            return false;
+
+        var footprint = TryGetVehicleWorldAabb(vehicleUid, out var box)
+            ? box
+            : new Box2(originMap.Position, originMap.Position);
+        var footprintAabb = footprint.Enlarged(-0.1f);
+
+        var corner0 = _transform.ToCoordinates(gridUid, new MapCoordinates(footprint.BottomLeft, originMap.MapId));
+        var corner1 = _transform.ToCoordinates(gridUid, new MapCoordinates(footprint.TopRight, originMap.MapId));
+        var t0 = _map.TileIndicesFor(gridUid, gridComp, corner0);
+        var t1 = _map.TileIndicesFor(gridUid, gridComp, corner1);
+        var minX = Math.Min(t0.X, t1.X);
+        var maxX = Math.Max(t0.X, t1.X);
+        var minY = Math.Min(t0.Y, t1.Y);
+        var maxY = Math.Max(t0.Y, t1.Y);
+
+        var visited = new HashSet<Vector2i>();
+        var queue = new Queue<(Vector2i Indices, int Depth)>();
+        for (var x = minX; x <= maxX; x++)
+        {
+            for (var y = minY; y <= maxY; y++)
+            {
+                var tile = new Vector2i(x, y);
+                if (visited.Add(tile))
+                    queue.Enqueue((tile, 0));
+            }
+        }
+
+        var found = false;
+        var bestCoords = default(EntityCoordinates);
+        var bestDistance = float.MaxValue;
+
+        while (queue.Count > 0)
+        {
+            var (indices, depth) = queue.Dequeue();
+            if (depth >= EmergencyExitSearchRadius)
+                continue;
+
+            foreach (var offset in EmergencyExitNeighbors)
+            {
+                var neighbor = indices + offset;
+                if (!visited.Add(neighbor))
+                    continue;
+
+                if (offset.X != 0 && offset.Y != 0 &&
+                    (IsTileWallLike(gridUid, gridComp, new Vector2i(indices.X + offset.X, indices.Y), vehicleUid, user) ||
+                     IsTileWallLike(gridUid, gridComp, new Vector2i(indices.X, indices.Y + offset.Y), vehicleUid, user)))
+                {
+                    continue;
+                }
+
+                var tileClass = ClassifyEmergencyTile(gridUid, gridComp, neighbor, vehicleUid, user, footprintAabb, out var neighborCoords);
+                if (tileClass == EmergencyTileClass.Impassable)
+                    continue;
+
+                if (tileClass == EmergencyTileClass.Free)
+                {
+                    // prefer reachable tile closest to intended door
+                    var distance = (_transform.ToMapCoordinates(neighborCoords).Position - originMap.Position).LengthSquared();
+                    if (distance < bestDistance)
+                    {
+                        bestDistance = distance;
+                        bestCoords = neighborCoords;
+                        found = true;
+                    }
+
+                    continue;
+                }
+
+                queue.Enqueue((neighbor, depth + 1));
+            }
+        }
+
+        if (!found)
+            return false;
+
+        resultMap = _transform.ToMapCoordinates(bestCoords);
+        return resultMap.MapId != MapId.Nullspace;
+    }
+
+    private bool IsTileWallLike(EntityUid gridUid, MapGridComponent gridComp, Vector2i indices, EntityUid vehicle, EntityUid user)
+    {
+        var coords = _map.GridTileToLocal(gridUid, gridComp, indices);
+        if (!_turf.TryGetTileRef(coords, out var tileRef) || tileRef.Value.Tile.IsEmpty)
+            return true;
+
+        ScanTileHardBlockers(coords, vehicle, user, out _, out var structureBlocked);
+        return structureBlocked;
     }
 
     private void OnVehicleExitDoAfter(Entity<VehicleExitComponent> ent, ref VehicleExitDoAfterEvent args)
@@ -693,7 +952,7 @@ public sealed class VehicleSystem : EntitySystem
         if (args.Cancelled || args.Handled)
             return;
 
-        args.Handled = TryExit(ent, args.User);
+        args.Handled = TryExit(ent, args.User, args.Emergency);
     }
 
     private void OnOccupantStartup(Entity<VehicleInteriorOccupantComponent> ent, ref ComponentStartup args)

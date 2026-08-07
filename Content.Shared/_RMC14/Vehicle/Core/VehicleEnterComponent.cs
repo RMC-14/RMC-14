@@ -60,6 +60,9 @@ public sealed partial class VehicleEnterComponent : Component
     public float ExitDoAfter = 0f;
 
     [DataField]
+    public float EmergencyExitDoAfter = 20f;
+
+    [DataField]
     public Vector2 ExitOffset = Vector2.Zero;
 }
 
@@ -90,7 +93,25 @@ public sealed partial class VehicleEnterDoAfterEvent : SimpleDoAfterEvent
 }
 
 [Serializable, NetSerializable]
-public sealed partial class VehicleExitDoAfterEvent : SimpleDoAfterEvent;
+public sealed partial class VehicleExitDoAfterEvent : SimpleDoAfterEvent
+{
+    [DataField]
+    public bool Emergency;
+
+    public VehicleExitDoAfterEvent()
+    {
+    }
+
+    public VehicleExitDoAfterEvent(bool emergency)
+    {
+        Emergency = emergency;
+    }
+
+    public override DoAfterEvent Clone()
+    {
+        return new VehicleExitDoAfterEvent(Emergency);
+    }
+}
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(VehicleSystem))]
