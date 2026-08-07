@@ -269,14 +269,12 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
             RaiseLocalEvent(args.Target, ref ev);
 
             // Effectively subtracts armor like normal armor piercing
-            // We must get base resistance so we don't over damage
-            // If there's ever anything thats supposed to make ents take MORE explosive damage than normal
-            // Change this
-            if (explosion.ArmorPiercing > 0 && TryComp<ExplosionResistanceComponent>(args.Target, out var baseResist))
+            // We must get explosion armor so we don't make the ent more vunerable
+            if (explosion.ArmorPiercing > 0)
             {
-                var resist = (float)Math.Pow(1.1, -explosion.ArmorPiercing / 10.0);
+                var arev = new CMGetArmorEvent(SlotFlags.OUTERCLOTHING | SlotFlags.INNERCLOTHING);
+                var resist = (float)Math.Pow(1.1, -Math.Min(arev.ExplosionArmor, explosion.ArmorPiercing) / 10.0);
                 ev.DamageCoefficient /= resist;
-                ev.DamageCoefficient = Math.Min(baseResist.DamageCoefficient, ev.DamageCoefficient);
             }
 
             ev.DamageCoefficient = Math.Max(0, ev.DamageCoefficient);

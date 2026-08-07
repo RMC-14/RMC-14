@@ -99,6 +99,7 @@ public sealed class XenoFortifySystem : EntitySystem
 
         args.XenoArmor += xeno.Comp.Armor;
         args.FrontalArmor += xeno.Comp.FrontalArmor;
+        args.ExplosionArmor += xeno.Comp.ExplosionArmor;
     }
 
     private void OnXenoFortifyBeforeStatusAdded(Entity<XenoFortifyComponent> xeno, ref BeforeStatusEffectAddedEvent args)
