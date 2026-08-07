@@ -211,12 +211,15 @@
   parent: CMHeadBeret
   id: RMCHeadBeretXOBlack
   name: executive officer's black beret
-  description: An old-fashioned black beret with Captain insignia on it. Its design may be old, but it speaks of old blood.
+  description: An old-fashioned black beret with Captain insignia on it. Its design may be dated, but it speaks of old blood.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/XO/beret_xo_black.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/XO/beret_xo_black.rsi
+
+- type: entity
+  parent: CMHeadBeret
   id: RMCHeadBeretChiefOfficer
   name: chief officer beret
   description: A beret with the lieutenant-commander insignia emblazoned on it. It emits a dark aura and may corrupt the soul.
