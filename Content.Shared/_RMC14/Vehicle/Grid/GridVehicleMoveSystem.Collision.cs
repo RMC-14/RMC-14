@@ -397,13 +397,32 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
         var blockResult = GetXenoBlockResult(mover, xeno);
 
-        if (blockResult == XenoBlockResult.Slow)
+        if (blockResult == XenoBlockResult.Slow || blockResult == XenoBlockResult.ForcePush)
         {
+            var vehicleMove = GetVehicleMoveDelta(grid, vehicleWorldPosition, mapId, mover);
+            var centeredAabb = GetCenteredMobAabb(xeno, xenoAabb);
+
+            if (!TryGetMobPush(vehicle, xeno, vehicleAabb, centeredAabb, vehicleMove, out var pushTarget))
+            {
+                if (applyEffects)
+                    PlayMobCollisionSound(vehicle, ref playedCollisionSound);
+
+                AddBlockingCollision(vehicle, xeno, collisionAabb, xenoAabb, clearance, mapId, debug, blockers);
+                return CollisionHandlingResult.Blocked;
+            }
+
             if (applyEffects)
             {
                 PlayMobCollisionSound(vehicle, ref playedCollisionSound);
-                mover.CurrentSpeed *= FortifiedLightSlowFactor;
-                Dirty(vehicle, mover);
+
+                if (!_net.IsClient || ShouldPredictVehicleInteractions(vehicle))
+                    _fortify.TryRelocateFortified(xeno, pushTarget);
+
+                if (blockResult == XenoBlockResult.Slow)
+                {
+                    mover.CurrentSpeed *= FortifiedLightSlowFactor;
+                    Dirty(vehicle, mover);
+                }
             }
 
             return CollisionHandlingResult.Continue;
@@ -426,14 +445,8 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
         PlayMobCollisionSound(vehicle, ref playedCollisionSound);
 
-        if (blockResult == XenoBlockResult.ForcePush)
-            _fortify.TryBreakFortify(xeno);
-
-        var vehicleMove = GetVehicleMoveDelta(grid, vehicleWorldPosition, mapId, mover);
-        if (PushMobOutOfVehicle(vehicle, xeno, vehicleAabb, xenoAabb, vehicleMove))
-            return CollisionHandlingResult.Continue;
-
-        if (blockResult == XenoBlockResult.ForcePush)
+        var pushMove = GetVehicleMoveDelta(grid, vehicleWorldPosition, mapId, mover);
+        if (PushMobOutOfVehicle(vehicle, xeno, vehicleAabb, xenoAabb, pushMove))
             return CollisionHandlingResult.Continue;
 
         ApplyWheelCollisionDamage(vehicle, mover, wheelDamage);

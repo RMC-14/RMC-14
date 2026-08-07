@@ -292,6 +292,8 @@
   description: A humvee configured for ARC interior layout.
   suffix: Drivable, Humvee, Base, ARC, Tracked
   components:
+  - type: GridVehicleMover
+    weightClass: Light
   - type: ItemSlots
     slots:
       turret:
