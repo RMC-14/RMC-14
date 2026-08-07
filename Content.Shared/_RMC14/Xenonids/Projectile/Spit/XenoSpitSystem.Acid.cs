@@ -259,7 +259,7 @@ public sealed partial class XenoSpitSystem : EntitySystem
 
     private void OnUserAcidedGetArmor(Entity<UserAcidedComponent> ent, ref CMGetArmorEvent args)
     {
-        args.Bio = Math.Max(0, args.Bio - ent.Comp.WeakenArmor);
-        args.Melee = Math.Max(0, args.Melee - ent.Comp.WeakenArmor);
+        args.Bio -= ent.Comp.WeakenArmor;
+        args.Melee -= ent.Comp.WeakenArmor;
     }
 }
