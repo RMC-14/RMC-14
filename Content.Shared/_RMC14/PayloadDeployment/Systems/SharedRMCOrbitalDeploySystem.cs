@@ -84,9 +84,10 @@ public abstract class SharedRMCOrbitalDeploySystem : EntitySystem
             Dirty(deployableEnt, deployable);
         }
 
-        var openAt = TimeSpan.FromSeconds(deployable.ArrivingSoundDelay + deployable.DropDuration);
         var landingDamage = deployable.LandingDamage;
+        var landingEffect = deployable.LandingEffectId;
         var arrivingSound = deployable.ArrivingSound;
+        var openDelay = TimeSpan.Zero;
 
         if (deployable.DropPod)
         {
@@ -100,8 +101,9 @@ public abstract class SharedRMCOrbitalDeploySystem : EntitySystem
             Container.Insert(deploying, podContainer);
 
             deploying = dropPod;
-            openAt += podComponent.OpenTimeRemaining;
+            openDelay = podComponent.OpenTimeRemaining;
             landingDamage = podComponent.LandingDamage;
+            landingEffect = podComponent.LandingEffectId;
             arrivingSound = podComponent.ArrivingSound;
         }
 
@@ -110,17 +112,19 @@ public abstract class SharedRMCOrbitalDeploySystem : EntitySystem
             _transform.ToMapCoordinates(dropLocation),
             deployable.ArrivingSoundDelay,
             deployable.DropDuration,
-            openAt,
+            openDelay,
             landingDamage,
-            deployable.LandingEffectId,
+            landingEffect,
             arrivingSound,
             deployerComp.DropScatter,
-            deployable.UseParachute);
+            deployable.UseParachute,
+            null,
+            deployable.DropPod);
 
         return true;
     }
 
-    protected bool TryCreateOrbitalDropPod(float timeToOpen, out EntityUid dropPod)
+    protected bool TryCreateOrbitalDropPod(float timeToOpen, out Entity<SupplyDropPodComponent> dropPod)
     {
         dropPod = default;
         if (!float.IsFinite(timeToOpen) || timeToOpen < 0)
@@ -135,7 +139,7 @@ public abstract class SharedRMCOrbitalDeploySystem : EntitySystem
 
         podComponent.OpenTimeRemaining = TimeSpan.FromSeconds(timeToOpen);
         Dirty(pod, podComponent);
-        dropPod = pod;
+        dropPod = (pod, podComponent);
         return true;
     }
 
@@ -146,7 +150,8 @@ public abstract class SharedRMCOrbitalDeploySystem : EntitySystem
         bool useParachute,
         IReadOnlyList<EntityCoordinates>? launchCoordinates = null,
         int dropScatter = 0,
-        MapCoordinates? stagingCoordinates = null)
+        MapCoordinates? stagingCoordinates = null,
+        bool showLandingWarning = true)
     {
         if (!TryComp(dropPod, out SupplyDropPodComponent? podComponent))
             return;
@@ -159,18 +164,18 @@ public abstract class SharedRMCOrbitalDeploySystem : EntitySystem
             }
         }
 
-        var openAt = TimeSpan.FromSeconds(skyFallDuration + dropDuration) + podComponent.OpenTimeRemaining;
         SupplyDrop.LaunchSupplyDrop(dropPod,
-            _transform.ToMapCoordinates(_map.AlignToGrid(_transform.ToCoordinates(dropLocation))),
+            dropLocation,
             skyFallDuration,
             dropDuration,
-            openAt,
+            podComponent.OpenTimeRemaining,
             podComponent.LandingDamage,
-            podComponent.LandingEffectId,
+            showLandingWarning ? podComponent.LandingEffectId : null,
             podComponent.ArrivingSound,
             dropScatter,
             useParachute,
-            stagingCoordinates);
+            stagingCoordinates,
+            true);
 
         _audio.PlayPvs(podComponent.LaunchSound, _transform.GetMoverCoordinates(dropPod));
     }

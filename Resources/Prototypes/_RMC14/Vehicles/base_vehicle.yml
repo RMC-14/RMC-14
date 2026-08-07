@@ -143,3 +143,6 @@
     - offset: 0,2
       radius: 0.75
       interiorCoords: 0.25,-1
+  - type: CrashLandable
+  - type: ParaDroppable
+    parachuteScale: 2.5

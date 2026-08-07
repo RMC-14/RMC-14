@@ -83,6 +83,9 @@
                 <ScrollContainer VerticalExpand="True">
                     <BoxContainer Orientation="Vertical">
                         <Label Text="{Loc rmc-payload-deployment-landing}" StyleClasses="LabelHeading" />
+                        <Button Name="UseCurrentPosition"
+                                Access="Public"
+                                Text="{Loc rmc-payload-deployment-use-current-position}" />
                         <BoxContainer Orientation="Horizontal">
                             <Label Text="{Loc rmc-payload-deployment-map}" MinWidth="190" />
                             <OptionButton Name="MapOptions" Access="Public" HorizontalExpand="True" />
@@ -98,9 +101,6 @@
                             <Label Text="{Loc rmc-payload-deployment-y}" MinWidth="190" />
                             <SpinBox Name="MapY" Access="Public" HorizontalExpand="True" />
                         </BoxContainer>
-                        <Button Name="UseCurrentPosition"
-                                Access="Public"
-                                Text="{Loc rmc-payload-deployment-use-current-position}" />
                         <BoxContainer Orientation="Horizontal">
                             <Label Text="{Loc rmc-payload-deployment-landing-radius}" MinWidth="190" />
                             <BoxContainer Name="LandingRadiusContainer" Access="Public" HorizontalExpand="True" />
@@ -109,10 +109,23 @@
                         <CheckBox Name="IgnoreParadropRestrictions" Access="Public"
                                   Text="{Loc rmc-payload-deployment-ignore-paradrop-restrictions}"
                                   ToolTip="{Loc rmc-payload-deployment-ignore-paradrop-restrictions-tooltip}" />
+                        <CheckBox Name="UseDropPods" Access="Public"
+                                  Text="{Loc rmc-orbital-drop-use-pods}"
+                                  Pressed="True"
+                                  ToolTip="{Loc rmc-orbital-drop-use-pods-tooltip}" />
                         <BoxContainer Name="PodCountRow" Access="Public" Orientation="Horizontal">
                             <Label Text="{Loc rmc-orbital-drop-pod-count}" MinWidth="190" />
                             <SpinBox Name="PodCount" Access="Public" Value="1" HorizontalExpand="True" />
                         </BoxContainer>
+                        <CheckBox Name="UseParachute"
+                                  Access="Public"
+                                  Text="{Loc rmc-orbital-drop-use-parachute}"
+                                  Pressed="False"
+                                  ToolTip="{Loc rmc-orbital-drop-use-parachute-tooltip}" />
+                        <CheckBox Name="ShowLandingWarning"
+                                  Access="Public"
+                                  Text="{Loc rmc-orbital-drop-show-landing-warning}"
+                                  Pressed="True" />
 
                         <Label Text="{Loc rmc-payload-deployment-timing}" StyleClasses="LabelHeading" />
                         <BoxContainer Orientation="Horizontal">
@@ -139,11 +152,6 @@
                             <Label Text="{Loc rmc-orbital-drop-open-delay}" MinWidth="190" />
                             <FloatSpinBox Name="OpenDelay" Access="Public" Value="2" HorizontalExpand="True" />
                         </BoxContainer>
-                        <CheckBox Name="UseParachute"
-                                  Access="Public"
-                                  Text="{Loc rmc-orbital-drop-use-parachute}"
-                                  Pressed="False"
-                                  ToolTip="{Loc rmc-orbital-drop-use-parachute-tooltip}" />
                     </BoxContainer>
                 </ScrollContainer>
 

@@ -9,6 +9,7 @@ using Content.Shared.Ghost;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Prototypes;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -55,8 +56,11 @@ public sealed partial class ParaDropSystem
                 return new RMCPayloadDeploymentResult(RMCPayloadDeploymentFailure.InvalidSettings, requestIndex);
             }
 
-            if (existingPayload.Any(entity => !batchPayload.Add(entity)))
+            foreach (var entity in existingPayload)
             {
+                if (batchPayload.Add(entity))
+                    continue;
+
                 CleanupEntities(spawnedPayload);
                 return new RMCPayloadDeploymentResult(RMCPayloadDeploymentFailure.InvalidPayload, requestIndex);
             }
@@ -68,18 +72,6 @@ public sealed partial class ParaDropSystem
             }
 
             totalPayload += requestPayload;
-            if (!TryFindLandingTiles(request, assignedTiles, requestPayload, out var landingTiles, out var viableTiles))
-            {
-                CleanupEntities(spawnedPayload);
-                return new RMCPayloadDeploymentResult(
-                    viableTiles < 0
-                        ? RMCPayloadDeploymentFailure.InvalidTarget
-                        : RMCPayloadDeploymentFailure.InsufficientLandingTiles,
-                    requestIndex,
-                    requestPayload,
-                    Math.Max(0, viableTiles));
-            }
-
             var stagingOrigin = _payloadDeployment.AllocateStagingGroup();
             var payload = new List<EntityUid>(requestPayload);
             payload.AddRange(existingPayload);
@@ -99,6 +91,26 @@ public sealed partial class ParaDropSystem
                     spawnedPayload.Add(spawned);
                     payload.Add(spawned);
                 }
+            }
+
+            if (!_mapManager.TryFindGridAt(request.Target, out var grid, out var gridComponent))
+            {
+                CleanupEntities(spawnedPayload);
+                return new RMCPayloadDeploymentResult(
+                    RMCPayloadDeploymentFailure.InvalidTarget,
+                    requestIndex,
+                    requestPayload);
+            }
+
+            if (!TryFindLandingTiles(request, (grid, gridComponent), assignedTiles, payload,
+                    out var landingTiles, out var assignedLandings))
+            {
+                CleanupEntities(spawnedPayload);
+                return new RMCPayloadDeploymentResult(
+                    RMCPayloadDeploymentFailure.InsufficientLandingTiles,
+                    requestIndex,
+                    requestPayload,
+                    assignedLandings);
             }
 
             var queued = new List<QueuedParaDrop>(payload.Count);
@@ -202,44 +214,69 @@ public sealed partial class ParaDropSystem
         return totalPayload > 0 && totalPayload <= RMCPayloadDeploymentLimits.MaxPayload;
     }
 
-    private bool TryFindLandingTiles(RMCParaDropRequest request, HashSet<ReservedTile> assignedTiles, int count, out List<LandingTile> selected, out int viableCount)
+    private bool TryFindLandingTiles(RMCParaDropRequest request, Entity<MapGridComponent> grid, HashSet<ReservedTile> assignedTiles, IReadOnlyList<EntityUid> payload, out List<LandingTile> selected, out int assignedCount)
     {
         selected = [];
-        viableCount = -1;
-        if (!_mapManager.TryFindGridAt(request.Target, out var grid, out var gridComponent))
-            return false;
-
+        assignedCount = 0;
         var centerCoordinates = _transform.ToCoordinates(request.Target);
-        var center = _map.LocalToTile(grid, gridComponent, centerCoordinates);
-        var centerPosition = _map.GridTileToLocal(grid, gridComponent, center).Position;
-        var candidates = new List<LandingTile>();
+        var center = _map.LocalToTile(grid, grid.Comp, centerCoordinates);
+        var centerPosition = _map.GridTileToLocal(grid, grid.Comp, center).Position;
+        var candidates = new List<Vector2i>();
         foreach (var tileRef in _map.GetLocalTilesIntersecting(
                      grid,
-                     gridComponent,
-                     new Circle(centerPosition, request.LandingRadius * gridComponent.TileSize),
+                     grid.Comp,
+                     new Circle(centerPosition, request.LandingRadius * grid.Comp.TileSize),
                      false))
         {
-            if (!_crashLand.IsLandableTile((grid, gridComponent), tileRef, request.IgnoreParadropRestrictions))
-                continue;
-
-            var coordinates = _transform.ToMapCoordinates(
-                _map.GridTileToLocal(grid, gridComponent, tileRef.GridIndices));
-            candidates.Add(new LandingTile(coordinates, new ReservedTile(grid, tileRef.GridIndices)));
+            candidates.Add(tileRef.GridIndices);
         }
 
-        viableCount = candidates.Count;
-        if (viableCount == 0)
-            return false;
-
         _random.Shuffle(candidates);
-        var unused = candidates.Where(candidate => !assignedTiles.Contains(candidate.Tile)).ToList();
-        for (var i = 0; i < count; i++)
+        foreach (var entity in payload)
         {
-            var landing = i < unused.Count
-                ? unused[i]
-                : candidates[_random.Next(candidates.Count)];
-            selected.Add(landing);
-            assignedTiles.Add(landing.Tile);
+            LandingTile? fallback = null;
+            LandingTile? landing = null;
+            foreach (var candidate in candidates)
+            {
+                if (!_crashLand.TryGetLandableFootprint(entity,
+                        grid,
+                        candidate,
+                        request.IgnoreParadropRestrictions,
+                        out var footprint))
+                {
+                    continue;
+                }
+
+                var coordinates = _transform.ToMapCoordinates(_map.GridTileToLocal(grid, grid.Comp, candidate));
+                var tiles = new List<ReservedTile>(footprint.Count);
+                var overlapsAssignedTile = false;
+                foreach (var tileRef in footprint)
+                {
+                    var tile = new ReservedTile(grid.Owner, tileRef.GridIndices);
+                    tiles.Add(tile);
+                    if (assignedTiles.Contains(tile))
+                        overlapsAssignedTile = true;
+                }
+
+                var candidateLanding = new LandingTile(coordinates, tiles);
+                fallback ??= candidateLanding;
+                if (overlapsAssignedTile)
+                    continue;
+
+                landing = candidateLanding;
+                break;
+            }
+
+            landing ??= fallback;
+            if (landing == null)
+                return false;
+
+            selected.Add(landing.Value);
+            assignedCount = selected.Count;
+            foreach (var tile in landing.Value.Tiles)
+            {
+                assignedTiles.Add(tile);
+            }
         }
 
         return true;
@@ -306,7 +343,7 @@ public sealed partial class ParaDropSystem
     }
 
     private readonly record struct ReservedTile(EntityUid Grid, Vector2i Indices);
-    private readonly record struct LandingTile(MapCoordinates Coordinates, ReservedTile Tile);
+    private readonly record struct LandingTile(MapCoordinates Coordinates, List<ReservedTile> Tiles);
     private readonly record struct QueuedParaDrop(
         EntityUid Entity,
         bool Existing,

@@ -32,18 +32,18 @@ public sealed class RMCPayloadDeploymentEuiState(
     List<RMCPayloadDeploymentEntityEntry> nearby,
     List<RMCPayloadDeploymentEntityEntry> playerControlled,
     List<RMCPayloadDeploymentMapEntry> maps,
-    float nearbyRadius) : EuiStateBase
+    int nearbyRadius) : EuiStateBase
 {
     public readonly List<RMCPayloadDeploymentEntityEntry> Nearby = nearby;
     public readonly List<RMCPayloadDeploymentEntityEntry> PlayerControlled = playerControlled;
     public readonly List<RMCPayloadDeploymentMapEntry> Maps = maps;
-    public readonly float NearbyRadius = nearbyRadius;
+    public readonly int NearbyRadius = nearbyRadius;
 }
 
 [Serializable, NetSerializable]
-public sealed class RMCPayloadDeploymentRefreshMsg(float nearbyRadius) : EuiMessageBase
+public sealed class RMCPayloadDeploymentRefreshMsg(int nearbyRadius) : EuiMessageBase
 {
-    public readonly float NearbyRadius = nearbyRadius;
+    public readonly int NearbyRadius = nearbyRadius;
 }
 
 [Serializable, NetSerializable]
@@ -65,6 +65,7 @@ public readonly record struct RMCOrbitalDropManifestMsg(
     MapId TargetMap,
     Vector2i TargetCoordinates,
     float LandingRadius,
+    bool UseDropPods,
     int PodCount,
     float ArrivalDelay,
     float DropDuration,
@@ -73,6 +74,7 @@ public readonly record struct RMCOrbitalDropManifestMsg(
     float DropInterval,
     float DropIntervalVariation,
     bool UseParachute,
+    bool ShowLandingWarning,
     bool RawCoordinates,
     bool IgnoreParadropRestrictions);
 
@@ -107,11 +109,11 @@ public sealed class RMCParaDropBatchLaunchMsg(List<RMCParaDropManifestMsg> manif
 public sealed class RMCPayloadDeploymentResultMsg(
     RMCPayloadDeploymentFailure failure,
     int failedManifest,
-    int requestedLandingTiles,
-    int viableLandingTiles) : EuiMessageBase
+    int requestedLandings,
+    int assignedLandings) : EuiMessageBase
 {
     public readonly RMCPayloadDeploymentFailure Failure = failure;
     public readonly int FailedManifest = failedManifest;
-    public readonly int RequestedLandingTiles = requestedLandingTiles;
-    public readonly int ViableLandingTiles = viableLandingTiles;
+    public readonly int RequestedLandings = requestedLandings;
+    public readonly int AssignedLandings = assignedLandings;
 }

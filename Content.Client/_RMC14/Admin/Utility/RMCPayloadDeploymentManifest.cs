@@ -14,6 +14,7 @@ public sealed class RMCPayloadDeploymentManifest
     public MapId? Map;
     public Vector2i Coordinates;
     public float LandingRadius = 3;
+    public bool UseDropPods = true;
     public int PodCount = 1;
     public float ArrivalDelay = 5;
     public float DropDuration = 3;
@@ -22,6 +23,7 @@ public sealed class RMCPayloadDeploymentManifest
     public float ArrivalInterval = 0.2f;
     public float ArrivalIntervalVariation;
     public bool UseParachute;
+    public bool ShowLandingWarning = true;
     public bool RawCoordinates;
     public bool IgnoreParadropRestrictions;
 
@@ -37,6 +39,7 @@ public sealed class RMCPayloadDeploymentManifest
             Map = Map,
             Coordinates = Coordinates,
             LandingRadius = LandingRadius,
+            UseDropPods = UseDropPods,
             PodCount = PodCount,
             ArrivalDelay = ArrivalDelay,
             DropDuration = DropDuration,
@@ -45,6 +48,7 @@ public sealed class RMCPayloadDeploymentManifest
             ArrivalInterval = ArrivalInterval,
             ArrivalIntervalVariation = ArrivalIntervalVariation,
             UseParachute = UseParachute,
+            ShowLandingWarning = ShowLandingWarning,
             RawCoordinates = RawCoordinates,
             IgnoreParadropRestrictions = IgnoreParadropRestrictions,
         };

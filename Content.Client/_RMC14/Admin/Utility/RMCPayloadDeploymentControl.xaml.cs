@@ -7,6 +7,12 @@ namespace Content.Client._RMC14.Admin.Utility;
 [GenerateTypedNameReferences]
 public sealed partial class RMCPayloadDeploymentControl : PanelContainer
 {
+    public readonly PanelContainer InputBlocker = new()
+    {
+        MouseFilter = MouseFilterMode.Stop,
+        Visible = false,
+    };
+
     public readonly FloatSpinBox LandingRadius = new(0.5f, 1)
     {
         HorizontalExpand = true,
@@ -17,9 +23,11 @@ public sealed partial class RMCPayloadDeploymentControl : PanelContainer
     {
         RobustXamlLoader.Load(this);
         LandingRadiusContainer.AddChild(LandingRadius);
+        NearbyRadius.InitDefaultButtons();
         MapX.InitDefaultButtons();
         MapY.InitDefaultButtons();
         PodCount.InitDefaultButtons();
+        AddChild(InputBlocker);
 
         PayloadTabs.SetTabTitle(0, Loc.GetString("rmc-payload-deployment-nearby-tab"));
         PayloadTabs.SetTabTitle(1, Loc.GetString("rmc-payload-deployment-player-tab"));

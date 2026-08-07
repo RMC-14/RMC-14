@@ -26,8 +26,8 @@ namespace Content.Server._RMC14.Admin.Utility;
 
 public sealed class RMCPayloadDeploymentEui : BaseEui
 {
-    private const float DefaultNearbyRadius = 7;
-    private const float MaxNearbyRadius = 50;
+    private const int DefaultNearbyRadius = 7;
+    private const int MaxNearbyRadius = 50;
 
     [Dependency] private readonly IAdminManager _admin = default!;
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
@@ -43,7 +43,7 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
     private readonly SharedTransformSystem _transform;
 
     private readonly HashSet<EntityUid> _nearbyEntities = [];
-    private float _nearbyRadius = DefaultNearbyRadius;
+    private int _nearbyRadius = DefaultNearbyRadius;
 
     public RMCPayloadDeploymentEui()
     {
@@ -165,23 +165,15 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
         for (var manifest = 0; manifest < launch.Manifests.Count; manifest++)
         {
             var entry = launch.Manifests[manifest];
-            if (!TryGetTarget(entry.TargetMap,
-                    entry.TargetCoordinates,
-                    entry.RawCoordinates,
-                    out var target))
+            if (!TryGetTarget(entry.TargetMap, entry.TargetCoordinates, entry.RawCoordinates, out var target))
             {
-                SendResult(new RMCPayloadDeploymentResult(
-                    RMCPayloadDeploymentFailure.InvalidTarget,
-                    manifest,
-                    entry.PodCount));
+                SendResult(new RMCPayloadDeploymentResult(RMCPayloadDeploymentFailure.InvalidTarget, manifest, entry.PodCount));
                 return;
             }
 
             if (!TryResolveEntities(entry.Entities, out var entities))
             {
-                SendResult(new RMCPayloadDeploymentResult(
-                    RMCPayloadDeploymentFailure.InvalidPayload,
-                    manifest));
+                SendResult(new RMCPayloadDeploymentResult(RMCPayloadDeploymentFailure.InvalidPayload, manifest));
                 return;
             }
 
@@ -191,6 +183,7 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
                 Prototypes = entry.Prototypes,
                 Target = target,
                 LandingRadius = entry.LandingRadius,
+                UseDropPods = entry.UseDropPods,
                 PodCount = entry.PodCount,
                 ArrivalDelay = entry.ArrivalDelay,
                 DropDuration = entry.DropDuration,
@@ -199,17 +192,21 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
                 DropInterval = entry.DropInterval,
                 DropIntervalVariation = entry.DropIntervalVariation,
                 UseParachute = entry.UseParachute,
+                ShowLandingWarning = entry.ShowLandingWarning,
                 IgnoreParadropRestrictions = entry.IgnoreParadropRestrictions,
             });
         }
 
         var result = _orbitalDrop.TryQueueOrbitalDropBatch(requests);
         SendResult(result);
+        var deliveries = requests.Sum(request => request.UseDropPods
+            ? request.PodCount
+            : request.Entities.Count + request.Prototypes.Sum(entry => entry.Quantity));
         _adminLog.Add(LogType.AdminCommands,
             $"{Player.Name:admin} requested {requests.Count} orbital drop manifests with " +
             $"{requests.Sum(request => request.Entities.Count)} existing entities, " +
             $"{requests.Sum(request => request.Prototypes.Sum(entry => entry.Quantity))} spawned entities, and " +
-            $"{requests.Sum(request => request.PodCount)} pods. Result: {result.Failure}; " +
+            $"{deliveries} deliveries. Result: {result.Failure}; " +
             $"failed manifest: {result.FailedRequest}.");
 
         if (result.Success)
@@ -222,22 +219,15 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
         for (var manifest = 0; manifest < launch.Manifests.Count; manifest++)
         {
             var entry = launch.Manifests[manifest];
-            if (!TryGetTarget(entry.TargetMap,
-                    entry.TargetCoordinates,
-                    entry.RawCoordinates,
-                    out var target))
+            if (!TryGetTarget(entry.TargetMap, entry.TargetCoordinates, entry.RawCoordinates, out var target))
             {
-                SendResult(new RMCPayloadDeploymentResult(
-                    RMCPayloadDeploymentFailure.InvalidTarget,
-                    manifest));
+                SendResult(new RMCPayloadDeploymentResult(RMCPayloadDeploymentFailure.InvalidTarget, manifest));
                 return;
             }
 
             if (!TryResolveEntities(entry.Entities, out var entities))
             {
-                SendResult(new RMCPayloadDeploymentResult(
-                    RMCPayloadDeploymentFailure.InvalidPayload,
-                    manifest));
+                SendResult(new RMCPayloadDeploymentResult(RMCPayloadDeploymentFailure.InvalidPayload, manifest));
                 return;
             }
 
@@ -268,11 +258,7 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
             StateDirty();
     }
 
-    private bool TryGetTarget(
-        MapId map,
-        Vector2i coordinates,
-        bool rawCoordinates,
-        out MapCoordinates target)
+    private bool TryGetTarget(MapId map, Vector2i coordinates, bool rawCoordinates, out MapCoordinates target)
     {
         if (rawCoordinates)
         {
@@ -302,14 +288,11 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
         SendMessage(new RMCPayloadDeploymentResultMsg(
             result.Failure,
             result.FailedRequest,
-            result.RequestedLandingTiles,
-            result.ViableLandingTiles));
+            result.RequestedLandings,
+            result.AssignedLandings));
     }
 
-    private bool TryCreateEntry(
-        EntityUid entity,
-        MapCoordinates? sourceCoordinates,
-        out RMCPayloadDeploymentEntityEntry entry)
+    private bool TryCreateEntry(EntityUid entity, MapCoordinates? sourceCoordinates, out RMCPayloadDeploymentEntityEntry entry)
     {
         entry = default;
         if (!_entities.TryGetComponent(entity, out MetaDataComponent? metadata) ||
@@ -349,9 +332,7 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
         return true;
     }
 
-    private static int CompareEntries(
-        RMCPayloadDeploymentEntityEntry left,
-        RMCPayloadDeploymentEntityEntry right)
+    private static int CompareEntries(RMCPayloadDeploymentEntityEntry left, RMCPayloadDeploymentEntityEntry right)
     {
         var distance = left.Distance.CompareTo(right.Distance);
         return distance != 0 ? distance : string.Compare(left.Name, right.Name, StringComparison.OrdinalIgnoreCase);

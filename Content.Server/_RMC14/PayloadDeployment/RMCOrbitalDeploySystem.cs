@@ -1,12 +1,17 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.CrashLand;
 using Content.Shared._RMC14.ParaDrop;
 using Content.Shared._RMC14.PayloadDeployment;
 using Content.Shared._RMC14.PayloadDeployment.Systems;
 using Content.Shared._RMC14.SupplyDrop;
+using Content.Shared.Damage;
 using Content.Shared.GameTicking;
+using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -15,6 +20,11 @@ namespace Content.Server._RMC14.PayloadDeployment;
 
 public sealed class RMCOrbitalDeploySystem : SharedRMCOrbitalDeploySystem
 {
+    private static readonly EntProtoId? DirectDropLandingEffect = "RMCEffectAlert";
+    private static readonly SoundSpecifier DirectDropLaunchSound = new SoundPathSpecifier("/Audio/_RMC14/Effects/bamf.ogg");
+    private static readonly SoundSpecifier DirectDropArrivingSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/Techpod/techpod_drill.ogg");
+
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedCrashLandSystem _crashLand = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
@@ -27,6 +37,7 @@ public sealed class RMCOrbitalDeploySystem : SharedRMCOrbitalDeploySystem
     private readonly List<OrbitalDropJob> _jobs = [];
     private readonly HashSet<EntityUid> _reservedPayloads = [];
     private readonly Dictionary<ReservedTile, TimeSpan> _reservedTiles = new();
+    private readonly DamageSpecifier _directDropLandingDamage = new() { DamageDict = { ["Blunt"] = 5000 } };
 
     public override void Initialize()
     {
@@ -67,7 +78,7 @@ public sealed class RMCOrbitalDeploySystem : SharedRMCOrbitalDeploySystem
         var batchPayload = new HashSet<EntityUid>();
         var batchTiles = new HashSet<ReservedTile>();
         var totalPayload = 0;
-        var totalPods = 0;
+        var totalDeliveries = 0;
 
         for (var requestIndex = 0; requestIndex < requests.Count; requestIndex++)
         {
@@ -78,41 +89,48 @@ public sealed class RMCOrbitalDeploySystem : SharedRMCOrbitalDeploySystem
                 return new RMCPayloadDeploymentResult(RMCPayloadDeploymentFailure.InvalidSettings, requestIndex);
             }
 
-            if (existingPayload.Any(entity => !batchPayload.Add(entity)))
+            foreach (var entity in existingPayload)
             {
+                if (batchPayload.Add(entity))
+                    continue;
+
                 CleanupPreparedDrops(prepared);
                 return new RMCPayloadDeploymentResult(RMCPayloadDeploymentFailure.InvalidPayload, requestIndex);
             }
 
+            var requestDeliveries = request.UseDropPods ? request.PodCount : requestPayload;
             if (totalPayload + requestPayload > RMCPayloadDeploymentLimits.MaxPayload ||
-                totalPods + request.PodCount > RMCPayloadDeploymentLimits.MaxPods)
+                totalDeliveries + requestDeliveries > RMCPayloadDeploymentLimits.MaxOrbitalDrops)
             {
                 CleanupPreparedDrops(prepared);
                 return new RMCPayloadDeploymentResult(RMCPayloadDeploymentFailure.InvalidSettings, requestIndex);
             }
 
             totalPayload += requestPayload;
-            totalPods += request.PodCount;
+            totalDeliveries += requestDeliveries;
             if (!TryPrepareOrbitalDrop(request,
                     existingPayload,
                     requestPayload,
                     batchTiles,
                     out var drop,
                     out var failure,
-                    out var viableTiles))
+                    out var assignedLandings))
             {
                 CleanupPreparedDrops(prepared);
                 return new RMCPayloadDeploymentResult(
                     failure,
                     requestIndex,
-                    request.PodCount,
-                    Math.Max(0, viableTiles));
+                    requestDeliveries,
+                    assignedLandings);
             }
 
             prepared.Add(drop);
             foreach (var landing in drop.LandingTiles)
             {
-                batchTiles.Add(landing.Tile);
+                foreach (var tile in landing.Tiles)
+                {
+                    batchTiles.Add(tile);
+                }
             }
         }
 
@@ -129,25 +147,17 @@ public sealed class RMCOrbitalDeploySystem : SharedRMCOrbitalDeploySystem
         List<EntityUid> existingPayload,
         int totalPayload,
         HashSet<ReservedTile> batchTiles,
-        out PreparedOrbitalDrop prepared,
+        [NotNullWhen(true)] out PreparedOrbitalDrop? prepared,
         out RMCPayloadDeploymentFailure failure,
-        out int viableTiles)
+        out int assignedLandings)
     {
-        prepared = default!;
+        prepared = null;
         failure = RMCPayloadDeploymentFailure.None;
-        if (!TryFindLandingTiles(request, batchTiles, out var landingTiles, out viableTiles))
-        {
-            failure = viableTiles < 0
-                ? RMCPayloadDeploymentFailure.InvalidTarget
-                : RMCPayloadDeploymentFailure.InsufficientLandingTiles;
-            return false;
-        }
-
+        assignedLandings = 0;
         var spawnedPayload = new List<EntityUid>();
         foreach (var prototypePayload in request.Prototypes)
         {
-            if (!_prototypes.TryIndex(prototypePayload.Prototype, out EntityPrototype? prototype) ||
-                prototype.Abstract)
+            if (!_prototypes.TryIndex(prototypePayload.Prototype, out var prototype) || prototype.Abstract)
             {
                 CleanupEntities(spawnedPayload);
                 failure = RMCPayloadDeploymentFailure.InvalidPrototype;
@@ -164,64 +174,86 @@ public sealed class RMCOrbitalDeploySystem : SharedRMCOrbitalDeploySystem
         payload.AddRange(existingPayload);
         payload.AddRange(spawnedPayload);
 
-        var podPayloads = new List<List<EntityUid>>(request.PodCount);
-        for (var i = 0; i < request.PodCount; i++)
+        var podPayloads = new List<List<EntityUid>>();
+        var preparedPods = new List<EntityUid>();
+        var podContainers = new List<BaseContainer>();
+        if (request.UseDropPods)
         {
-            podPayloads.Add([]);
-        }
-
-        for (var i = 0; i < payload.Count; i++)
-        {
-            podPayloads[i % request.PodCount].Add(payload[i]);
-        }
-
-        var preparedPods = new List<EntityUid>(request.PodCount);
-        var podContainers = new List<BaseContainer>(request.PodCount);
-        for (var i = 0; i < request.PodCount; i++)
-        {
-            if (!TryCreateOrbitalDropPod(request.TimeToOpen, out var pod) ||
-                !TryComp(pod, out SupplyDropPodComponent? podComponent))
+            for (var i = 0; i < request.PodCount; i++)
             {
-                CleanupEntities(preparedPods);
-                CleanupEntities(spawnedPayload);
-                failure = RMCPayloadDeploymentFailure.PodPreparationFailed;
-                return false;
+                podPayloads.Add([]);
             }
 
-            preparedPods.Add(pod);
-            podContainers.Add(Container.EnsureContainer<Container>(pod, podComponent.DeploySlotId));
-        }
-
-        for (var i = 0; i < podPayloads.Count; i++)
-        {
-            foreach (var entity in podPayloads[i])
+            for (var i = 0; i < payload.Count; i++)
             {
-                if (!TerminatingOrDeleted(entity) &&
-                    !EntityManager.IsQueuedForDeletion(entity) &&
-                    Container.CanInsert(entity, podContainers[i]))
-                    continue;
+                podPayloads[i % request.PodCount].Add(payload[i]);
+            }
 
-                CleanupEntities(preparedPods);
-                CleanupEntities(spawnedPayload);
-                failure = RMCPayloadDeploymentFailure.InvalidPayload;
-                return false;
+            for (var i = 0; i < request.PodCount; i++)
+            {
+                if (!TryCreateOrbitalDropPod(request.TimeToOpen, out var pod))
+                {
+                    CleanupEntities(preparedPods);
+                    CleanupEntities(spawnedPayload);
+                    failure = RMCPayloadDeploymentFailure.PodPreparationFailed;
+                    return false;
+                }
+
+                preparedPods.Add(pod.Owner);
+                podContainers.Add(Container.EnsureContainer<Container>(pod.Owner, pod.Comp.DeploySlotId));
+            }
+
+            for (var i = 0; i < podPayloads.Count; i++)
+            {
+                foreach (var entity in podPayloads[i])
+                {
+                    if (!TerminatingOrDeleted(entity) &&
+                        !EntityManager.IsQueuedForDeletion(entity) &&
+                        Container.CanInsert(entity, podContainers[i]))
+                        continue;
+
+                    CleanupEntities(preparedPods);
+                    CleanupEntities(spawnedPayload);
+                    failure = RMCPayloadDeploymentFailure.InvalidPayload;
+                    return false;
+                }
             }
         }
 
-        var existingPayloadSet = existingPayload.ToHashSet();
-        for (var i = 0; i < podPayloads.Count; i++)
+        var deliveries = request.UseDropPods ? preparedPods : payload;
+        if (!_mapManager.TryFindGridAt(request.Target, out var grid, out var gridComponent))
         {
-            foreach (var entity in podPayloads[i])
+            CleanupEntities(preparedPods);
+            CleanupEntities(spawnedPayload);
+            failure = RMCPayloadDeploymentFailure.InvalidTarget;
+            return false;
+        }
+
+        if (!TryFindLandingTiles(request, (grid, gridComponent), deliveries, batchTiles, out var landingTiles, out assignedLandings))
+        {
+            CleanupEntities(preparedPods);
+            CleanupEntities(spawnedPayload);
+            failure = RMCPayloadDeploymentFailure.InsufficientLandingTiles;
+            return false;
+        }
+
+        if (request.UseDropPods)
+        {
+            var existingPayloadSet = existingPayload.ToHashSet();
+            for (var i = 0; i < podPayloads.Count; i++)
             {
-                if (existingPayloadSet.Contains(entity))
-                    continue;
+                foreach (var entity in podPayloads[i])
+                {
+                    if (existingPayloadSet.Contains(entity))
+                        continue;
 
-                if (Container.Insert(entity, podContainers[i]))
-                    continue;
+                    if (Container.Insert(entity, podContainers[i]))
+                        continue;
 
-                CleanupPreparedPayload(preparedPods, spawnedPayload);
-                failure = RMCPayloadDeploymentFailure.PodPreparationFailed;
-                return false;
+                    CleanupPreparedPayload(preparedPods, spawnedPayload);
+                    failure = RMCPayloadDeploymentFailure.PodPreparationFailed;
+                    return false;
+                }
             }
         }
 
@@ -229,6 +261,7 @@ public sealed class RMCOrbitalDeploySystem : SharedRMCOrbitalDeploySystem
             request,
             existingPayload,
             spawnedPayload,
+            payload,
             podPayloads,
             preparedPods,
             landingTiles);
@@ -245,8 +278,9 @@ public sealed class RMCOrbitalDeploySystem : SharedRMCOrbitalDeploySystem
         var existingPayloadSet = prepared.ExistingPayload.ToHashSet();
         var stagingOrigin = _payloadDeployment.AllocateStagingGroup();
         var previousDropAt = TimeSpan.Zero;
-        var queuedPods = new List<QueuedDropPod>(prepared.Request.PodCount);
-        for (var i = 0; i < prepared.PreparedPods.Count; i++)
+        var deliveries = prepared.Request.UseDropPods ? prepared.PreparedPods : prepared.Payload;
+        var queuedDrops = new List<QueuedOrbitalDrop>(deliveries.Count);
+        for (var i = 0; i < deliveries.Count; i++)
         {
             var launchAt = _timing.CurTime + TimeSpan.FromSeconds(prepared.Request.LaunchInterval * i);
             var dropAt = launchAt + TimeSpan.FromSeconds(prepared.Request.ArrivalDelay);
@@ -263,22 +297,31 @@ public sealed class RMCOrbitalDeploySystem : SharedRMCOrbitalDeploySystem
             var landing = prepared.LandingTiles[i];
             var stagingOffset = landing.Coordinates.Position - prepared.Request.Target.Position;
             var staging = _payloadDeployment.GetStagingCoordinates(stagingOrigin + stagingOffset);
-            var pendingEntities = prepared.PodPayloads[i].Where(existingPayloadSet.Contains).ToList();
+            var pendingEntities = prepared.Request.UseDropPods
+                ? prepared.PodPayloads[i].Where(existingPayloadSet.Contains).ToList()
+                : [];
             var reservationUntil = dropAt +
-                TimeSpan.FromSeconds(prepared.Request.DropDuration + prepared.Request.TimeToOpen);
-            _reservedTiles[landing.Tile] = reservationUntil;
-            queuedPods.Add(new QueuedDropPod(
-                prepared.PreparedPods[i],
+                TimeSpan.FromSeconds(prepared.Request.DropDuration +
+                    (prepared.Request.UseDropPods ? prepared.Request.TimeToOpen : 0));
+            foreach (var tile in landing.Tiles)
+            {
+                _reservedTiles[tile] = reservationUntil;
+            }
+
+            queuedDrops.Add(new QueuedOrbitalDrop(
+                deliveries[i],
+                prepared.Request.UseDropPods,
+                existingPayloadSet.Contains(deliveries[i]),
                 landing.Coordinates,
-                landing.Tile,
+                landing.Tiles,
+                landing.Rotation,
                 staging,
                 pendingEntities,
-                [],
                 launchAt,
                 dropAt));
         }
 
-        _jobs.Add(new OrbitalDropJob(queuedPods, prepared.Request));
+        _jobs.Add(new OrbitalDropJob(queuedDrops, prepared.Request));
     }
 
     private bool ValidateRequest(RMCOrbitalDropRequest request, out List<EntityUid> existingPayload, out int totalPayload)
@@ -288,13 +331,14 @@ public sealed class RMCOrbitalDeploySystem : SharedRMCOrbitalDeploySystem
 
         if (!IsValidTiming(request.ArrivalDelay) ||
             !IsValidTiming(request.DropDuration) ||
-            !IsValidTiming(request.TimeToOpen) ||
+            request.UseDropPods && !IsValidTiming(request.TimeToOpen) ||
             !IsValidTiming(request.LaunchInterval) ||
             !IsValidTiming(request.DropInterval) ||
             !IsValidTiming(request.DropIntervalVariation) ||
             !float.IsFinite(request.Target.X) || !float.IsFinite(request.Target.Y) ||
             request.LandingRadius < 0 || request.LandingRadius > RMCPayloadDeploymentLimits.MaxLandingRadius ||
-            request.PodCount <= 0 || request.PodCount > RMCPayloadDeploymentLimits.MaxPods)
+            request.UseDropPods &&
+            (request.PodCount <= 0 || request.PodCount > RMCPayloadDeploymentLimits.MaxOrbitalDrops))
         {
             return false;
         }
@@ -320,7 +364,7 @@ public sealed class RMCOrbitalDeploySystem : SharedRMCOrbitalDeploySystem
 
         return totalPayload > 0 &&
                totalPayload <= RMCPayloadDeploymentLimits.MaxPayload &&
-               request.PodCount <= totalPayload;
+               (!request.UseDropPods || request.PodCount <= totalPayload);
     }
 
     private static bool IsValidTiming(float value)
@@ -328,45 +372,73 @@ public sealed class RMCOrbitalDeploySystem : SharedRMCOrbitalDeploySystem
         return value is >= 0 and <= RMCPayloadDeploymentLimits.MaxTimingSeconds;
     }
 
-    private bool TryFindLandingTiles(
-        RMCOrbitalDropRequest request,
-        HashSet<ReservedTile> batchTiles,
-        out List<LandingTile> selected,
-        out int viableCount)
+    private bool TryFindLandingTiles(RMCOrbitalDropRequest request, Entity<MapGridComponent> grid,
+        IReadOnlyList<EntityUid> deliveries, HashSet<ReservedTile> batchTiles,
+        out List<LandingTile> selected, out int assignedCount)
     {
         selected = [];
-        viableCount = -1;
-        if (!_mapManager.TryFindGridAt(request.Target, out var grid, out var gridComponent))
-            return false;
-
+        assignedCount = 0;
         var centerCoordinates = _transform.ToCoordinates(request.Target);
-        var center = _map.LocalToTile(grid, gridComponent, centerCoordinates);
-        var centerPosition = _map.GridTileToLocal(grid, gridComponent, center).Position;
-        var candidates = new List<LandingTile>();
-        foreach (var tileRef in _map.GetLocalTilesIntersecting(
-                     grid,
-                     gridComponent,
-                     new Circle(centerPosition, request.LandingRadius * gridComponent.TileSize),
-                     false))
+        var center = _map.LocalToTile(grid, grid.Comp, centerCoordinates);
+        var centerPosition = _map.GridTileToLocal(grid, grid.Comp, center).Position;
+        var candidates = new List<Vector2i>();
+        var circleArea = new Circle(centerPosition, request.LandingRadius * grid.Comp.TileSize);
+        foreach (var tileRef in _map.GetLocalTilesIntersecting(grid, grid.Comp, circleArea, false))
         {
-            var key = new ReservedTile(grid, tileRef.GridIndices);
-            if (batchTiles.Contains(key) ||
-                _reservedTiles.TryGetValue(key, out var reservedUntil) && reservedUntil > _timing.CurTime)
-                continue;
-
-            if (!_crashLand.IsLandableTile((grid, gridComponent), tileRef, request.IgnoreParadropRestrictions))
-                continue;
-
-            var coordinates = _transform.ToMapCoordinates(_map.GridTileToLocal(grid, gridComponent, tileRef.GridIndices));
-            candidates.Add(new LandingTile(coordinates, key));
+            candidates.Add(tileRef.GridIndices);
         }
 
-        viableCount = candidates.Count;
-        if (viableCount < request.PodCount)
-            return false;
-
         _random.Shuffle(candidates);
-        selected.AddRange(candidates.Take(request.PodCount));
+        var assignedTiles = new HashSet<ReservedTile>(batchTiles);
+        foreach (var delivery in deliveries)
+        {
+            LandingTile? landing = null;
+            foreach (var candidate in candidates)
+            {
+                if (!_crashLand.TryGetLandableFootprint(delivery,
+                        grid,
+                        candidate,
+                        request.IgnoreParadropRestrictions,
+                        out var footprint))
+                {
+                    continue;
+                }
+
+                var tiles = new List<ReservedTile>(footprint.Count);
+                var unavailable = false;
+                foreach (var tileRef in footprint)
+                {
+                    var tile = new ReservedTile(grid.Owner, tileRef.GridIndices);
+                    if (assignedTiles.Contains(tile) ||
+                        _reservedTiles.TryGetValue(tile, out var reservedUntil) &&
+                        reservedUntil > _timing.CurTime)
+                    {
+                        unavailable = true;
+                        break;
+                    }
+
+                    tiles.Add(tile);
+                }
+
+                if (unavailable)
+                    continue;
+
+                var coordinates = _transform.ToMapCoordinates(_map.GridTileToLocal(grid, grid.Comp, candidate));
+                landing = new LandingTile(coordinates, tiles, _transform.GetWorldRotation(delivery));
+                break;
+            }
+
+            if (landing == null)
+                return false;
+
+            selected.Add(landing.Value);
+            assignedCount = selected.Count;
+            foreach (var tile in landing.Value.Tiles)
+            {
+                assignedTiles.Add(tile);
+            }
+        }
+
         return true;
     }
 
@@ -393,25 +465,25 @@ public sealed class RMCOrbitalDeploySystem : SharedRMCOrbitalDeploySystem
         }
     }
 
-    private void LaunchQueuedPod(QueuedDropPod queued, RMCOrbitalDropRequest request)
+    private void LaunchQueuedPod(QueuedOrbitalDrop queued, RMCOrbitalDropRequest request)
     {
-        if (TerminatingOrDeleted(queued.Pod) || EntityManager.IsQueuedForDeletion(queued.Pod))
+        if (TerminatingOrDeleted(queued.Entity) || EntityManager.IsQueuedForDeletion(queued.Entity))
         {
             ReleasePayloadReservations(queued.PendingEntities);
-            _reservedTiles.Remove(queued.Tile);
+            ReleaseTileReservations(queued.Tiles);
             return;
         }
 
-        if (!TryComp(queued.Pod, out SupplyDropPodComponent? podComponent) ||
-            !Container.TryGetContainer(queued.Pod, podComponent.DeploySlotId, out var podContainer))
+        if (!TryComp(queued.Entity, out SupplyDropPodComponent? podComponent) ||
+            !Container.TryGetContainer(queued.Entity, podComponent.DeploySlotId, out var podContainer))
         {
             ReleasePayloadReservations(queued.PendingEntities);
-            _reservedTiles.Remove(queued.Tile);
-            QueueDel(queued.Pod);
+            ReleaseTileReservations(queued.Tiles);
+            QueueDel(queued.Entity);
             return;
         }
 
-        var launchCoordinates = new List<EntityCoordinates>(queued.LaunchCoordinates);
+        var launchCoordinates = new List<EntityCoordinates>();
         foreach (var entity in queued.PendingEntities)
         {
             _reservedPayloads.Remove(entity);
@@ -432,22 +504,82 @@ public sealed class RMCOrbitalDeploySystem : SharedRMCOrbitalDeploySystem
 
         if (podContainer.ContainedEntities.Count == 0)
         {
-            QueueDel(queued.Pod);
-            _reservedTiles.Remove(queued.Tile);
+            QueueDel(queued.Entity);
+            ReleaseTileReservations(queued.Tiles);
             return;
         }
 
         var timeUntilDrop = Math.Max(0, (float) (queued.DropAt - _timing.CurTime).TotalSeconds);
-        _reservedTiles[queued.Tile] = _timing.CurTime +
+        var reservedUntil = _timing.CurTime +
             TimeSpan.FromSeconds(timeUntilDrop + request.DropDuration + request.TimeToOpen);
+        foreach (var tile in queued.Tiles)
+        {
+            _reservedTiles[tile] = reservedUntil;
+        }
+
+        _transform.SetWorldRotation(queued.Entity, queued.Rotation);
         LaunchOrbitalDropPod(
-            queued.Pod,
+            queued.Entity,
             queued.Coordinates,
             timeUntilDrop,
             request.DropDuration,
             request.UseParachute,
             launchCoordinates,
-            stagingCoordinates: queued.StagingCoordinates);
+            stagingCoordinates: queued.StagingCoordinates,
+            showLandingWarning: request.ShowLandingWarning);
+    }
+
+    private void LaunchQueuedDirectDrop(QueuedOrbitalDrop queued, RMCOrbitalDropRequest request)
+    {
+        if (queued.Existing)
+            _reservedPayloads.Remove(queued.Entity);
+
+        if (TerminatingOrDeleted(queued.Entity) ||
+            EntityManager.IsQueuedForDeletion(queued.Entity) ||
+            IsBeingSupplyDropped(queued.Entity))
+        {
+            ReleaseTileReservations(queued.Tiles);
+            if (!queued.Existing &&
+                !TerminatingOrDeleted(queued.Entity) &&
+                !EntityManager.IsQueuedForDeletion(queued.Entity))
+            {
+                QueueDel(queued.Entity);
+            }
+
+            return;
+        }
+
+        var launchCoordinates = queued.Existing
+            ? new List<EntityCoordinates> { _transform.GetMoverCoordinates(queued.Entity) }
+            : [];
+        var timeUntilDrop = Math.Max(0, (float) (queued.DropAt - _timing.CurTime).TotalSeconds);
+        var reservedUntil = _timing.CurTime + TimeSpan.FromSeconds(timeUntilDrop + request.DropDuration);
+        foreach (var tile in queued.Tiles)
+        {
+            _reservedTiles[tile] = reservedUntil;
+        }
+
+        _transform.SetWorldRotation(queued.Entity, queued.Rotation);
+        // Play at the original locations for observers, then in staging for payload entities moved to the temporary map.
+        foreach (var launch in launchCoordinates.Distinct())
+        {
+            _audio.PlayPvs(DirectDropLaunchSound, launch);
+        }
+
+        SupplyDrop.LaunchSupplyDrop(queued.Entity,
+            queued.Coordinates,
+            timeUntilDrop,
+            request.DropDuration,
+            TimeSpan.Zero,
+            _directDropLandingDamage,
+            request.ShowLandingWarning ? DirectDropLandingEffect : null,
+            DirectDropArrivingSound,
+            0,
+            request.UseParachute,
+            queued.StagingCoordinates,
+            false);
+
+        _audio.PlayPvs(DirectDropLaunchSound, _transform.GetMoverCoordinates(queued.Entity));
     }
 
     private bool IsBeingSupplyDropped(EntityUid entity)
@@ -464,6 +596,14 @@ public sealed class RMCOrbitalDeploySystem : SharedRMCOrbitalDeploySystem
         foreach (var entity in entities)
         {
             _reservedPayloads.Remove(entity);
+        }
+    }
+
+    private void ReleaseTileReservations(IEnumerable<ReservedTile> tiles)
+    {
+        foreach (var tile in tiles)
+        {
+            _reservedTiles.Remove(tile);
         }
     }
 
@@ -490,13 +630,16 @@ public sealed class RMCOrbitalDeploySystem : SharedRMCOrbitalDeploySystem
         for (var jobIndex = _jobs.Count - 1; jobIndex >= 0; jobIndex--)
         {
             var job = _jobs[jobIndex];
-            while (job.NextPod < job.Pods.Count && curTime >= job.Pods[job.NextPod].LaunchAt)
+            while (job.NextDrop < job.Drops.Count && curTime >= job.Drops[job.NextDrop].LaunchAt)
             {
-                var queued = job.Pods[job.NextPod++];
-                LaunchQueuedPod(queued, job.Request);
+                var queued = job.Drops[job.NextDrop++];
+                if (queued.DropPod)
+                    LaunchQueuedPod(queued, job.Request);
+                else
+                    LaunchQueuedDirectDrop(queued, job.Request);
             }
 
-            if (job.NextPod >= job.Pods.Count)
+            if (job.NextDrop >= job.Drops.Count)
                 _jobs.RemoveAt(jobIndex);
         }
 
@@ -518,12 +661,13 @@ public sealed class RMCOrbitalDeploySystem : SharedRMCOrbitalDeploySystem
     }
 
     private readonly record struct ReservedTile(EntityUid Grid, Vector2i Indices);
-    private readonly record struct LandingTile(MapCoordinates Coordinates, ReservedTile Tile);
+    private readonly record struct LandingTile(MapCoordinates Coordinates, List<ReservedTile> Tiles, Angle Rotation);
 
     private sealed class PreparedOrbitalDrop(
         RMCOrbitalDropRequest request,
         List<EntityUid> existingPayload,
         List<EntityUid> spawnedPayload,
+        List<EntityUid> payload,
         List<List<EntityUid>> podPayloads,
         List<EntityUid> preparedPods,
         List<LandingTile> landingTiles)
@@ -531,25 +675,28 @@ public sealed class RMCOrbitalDeploySystem : SharedRMCOrbitalDeploySystem
         public readonly RMCOrbitalDropRequest Request = request;
         public readonly List<EntityUid> ExistingPayload = existingPayload;
         public readonly List<EntityUid> SpawnedPayload = spawnedPayload;
+        public readonly List<EntityUid> Payload = payload;
         public readonly List<List<EntityUid>> PodPayloads = podPayloads;
         public readonly List<EntityUid> PreparedPods = preparedPods;
         public readonly List<LandingTile> LandingTiles = landingTiles;
     }
 
-    private readonly record struct QueuedDropPod(
-        EntityUid Pod,
+    private readonly record struct QueuedOrbitalDrop(
+        EntityUid Entity,
+        bool DropPod,
+        bool Existing,
         MapCoordinates Coordinates,
-        ReservedTile Tile,
+        List<ReservedTile> Tiles,
+        Angle Rotation,
         MapCoordinates StagingCoordinates,
         List<EntityUid> PendingEntities,
-        List<EntityCoordinates> LaunchCoordinates,
         TimeSpan LaunchAt,
         TimeSpan DropAt);
 
-    private sealed class OrbitalDropJob(List<QueuedDropPod> pods, RMCOrbitalDropRequest request)
+    private sealed class OrbitalDropJob(List<QueuedOrbitalDrop> drops, RMCOrbitalDropRequest request)
     {
-        public readonly List<QueuedDropPod> Pods = pods;
+        public readonly List<QueuedOrbitalDrop> Drops = drops;
         public readonly RMCOrbitalDropRequest Request = request;
-        public int NextPod;
+        public int NextDrop;
     }
 }

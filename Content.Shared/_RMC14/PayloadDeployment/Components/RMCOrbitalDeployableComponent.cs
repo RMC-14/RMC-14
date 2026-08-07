@@ -73,6 +73,7 @@ public sealed partial class RMCOrbitalDeployableComponent : Component
 
     /// <summary>
     ///     The effect to display at the landing location during the drop.
+    ///     If <see cref="DropPod"/> is true, the landing effect specified on the drop pod prototype's <see cref="SupplyDropPodComponent"/> will be used instead.
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntProtoId? LandingEffectId = "RMCEffectAlert";

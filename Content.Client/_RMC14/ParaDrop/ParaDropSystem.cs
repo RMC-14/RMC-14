@@ -86,12 +86,7 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
         if (!TryComp(ent, out SpriteComponent? sprite))
             return;
 
-        var offset = Vector2.Zero;
-
-        if (TryComp(ent, out ParaDroppableComponent? paraDroppable))
-            offset = paraDroppable.OriginalSpriteOffset;
-
-        _sprite.SetOffset((ent, sprite), offset);
+        _sprite.SetOffset((ent, sprite), ent.Comp.OriginalSpriteOffset);
     }
 
     public Animation ReturnFallAnimation(float fallDuration, Vector2 fallOffset, Vector2 offset = new ())
@@ -149,9 +144,10 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
 
     private void SpawnParachute(float fallDuration, EntityCoordinates coordinates, ParaDroppableComponent paraDroppable, float multiplier, Vector2 offset = new())
     {
-        paraDroppable.OriginalSpriteOffset = offset;
-
         var animationEnt = Spawn(paraDroppable.ParachutePrototype, coordinates);
+        if (TryComp(animationEnt, out SpriteComponent? sprite))
+            _sprite.SetScale((animationEnt, sprite), sprite.Scale * paraDroppable.ParachuteScale);
+
         var despawn = EnsureComp<TimedDespawnComponent>(animationEnt);
         despawn.Lifetime = fallDuration;
 
@@ -178,6 +174,9 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
                 offset = sprite.Offset;
                 fallOffset = GetFallOffset(fallingUid, sprite, adjustedHeight);
             }
+
+            if (TryComp(fallingUid, out ParaDroppingComponent? paraDropping))
+                paraDropping.OriginalSpriteOffset = offset;
 
             _animPlayer.Play(fallingUid, ReturnFallAnimation(adjustedDuration, fallOffset, offset), animationKey);
             if (paraDroppable != null)
@@ -212,14 +211,14 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
         }
 
         var paraDroppingQuery = EntityQueryEnumerator<ParaDroppableComponent, ParaDroppingComponent, SpriteComponent>();
-        while (paraDroppingQuery.MoveNext(out var uid, out var paraDroppable, out _, out var sprite))
+        while (paraDroppingQuery.MoveNext(out var uid, out _, out var paraDropping, out var sprite))
         {
             if (sprite.NoRotation || HasComp<SkyFallingComponent>(uid))
                 continue;
 
-            var height = (sprite.Offset - paraDroppable.OriginalSpriteOffset).Length();
+            var height = (sprite.Offset - paraDropping.OriginalSpriteOffset).Length();
             var offset = GetFallOffset(uid, sprite, height);
-            _sprite.SetOffset((uid, sprite), paraDroppable.OriginalSpriteOffset + offset);
+            _sprite.SetOffset((uid, sprite), paraDropping.OriginalSpriteOffset + offset);
         }
     }
 
