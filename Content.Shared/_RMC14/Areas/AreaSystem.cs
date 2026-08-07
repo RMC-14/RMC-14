@@ -1,6 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Components;
+using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.GameStates;
 using Content.Shared._RMC14.Warps;
 using Content.Shared._RMC14.Xenonids.Construction;
@@ -32,6 +34,8 @@ public sealed class AreaSystem : EntitySystem
     [Dependency] private readonly ITileDefinitionManager _tile = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly SharedDropshipWeaponSystem _weapon = default!;
 
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
 
@@ -44,6 +48,7 @@ public sealed class AreaSystem : EntitySystem
     private EntityQuery<XenoConstructComponent> _xenoConstruct;
 
     private readonly List<EntityUid> _toRender = new();
+    private readonly HashSet<Entity<FlareSignalComponent>> _flareEnts = new();
 
     private TimeSpan _earlySpreadHiveTime;
 
@@ -58,8 +63,35 @@ public sealed class AreaSystem : EntitySystem
         _xenoConstruct = GetEntityQuery<XenoConstructComponent>();
 
         SubscribeLocalEvent<AreaGridComponent, MapInitEvent>(OnAreaGridMapInit);
+        SubscribeLocalEvent<RoofingEntityComponent, MapInitEvent>(OnRoofMapInit);
+        SubscribeLocalEvent<RoofingEntityComponent, EntityTerminatingEvent>(OnRoofRemoved);
 
         Subs.CVar(_config, RMCCVars.RMCHiveSpreadEarlyMinutes, v => _earlySpreadHiveTime = TimeSpan.FromMinutes(v), true);
+    }
+
+    private void UpdateRoof(Entity<RoofingEntityComponent> ent)
+    {
+        _flareEnts.Clear();
+        var roofCoords = _transform.GetMoverCoordinates(ent);
+        _lookup.GetEntitiesInRange(roofCoords, ent.Comp.Range, _flareEnts);
+
+        foreach (var foundEnt in _flareEnts)
+        {
+            if (HasComp<ActiveFlareSignalComponent>(foundEnt)) //This component indicates that the flare is arming, so we wait for that to update the visuals instead
+                continue;
+            _weapon.UpdateSignalFlareVisuals(foundEnt);
+        }
+    }
+
+    private void OnRoofMapInit(Entity<RoofingEntityComponent> ent, ref MapInitEvent args)
+    {
+        UpdateRoof(ent);
+    }
+
+    private void OnRoofRemoved(Entity<RoofingEntityComponent> ent, ref EntityTerminatingEvent args)
+    {
+        ent.Comp.CanCAS = true;
+        UpdateRoof(ent);
     }
 
     private void OnAreaGridMapInit(Entity<AreaGridComponent> ent, ref MapInitEvent args)
@@ -94,6 +126,16 @@ public sealed class AreaSystem : EntitySystem
         areaGrid.Areas[position] = area;
 
         EnsureAreaEntityExists(areaGrid, area);
+    }
+
+    public bool SetAlwaysPowered(Entity<AreaComponent> area, bool alwaysPowered)
+    {
+        if (area.Comp.AlwaysPowered == alwaysPowered)
+            return false;
+
+        area.Comp.AlwaysPowered = alwaysPowered;
+        Dirty(area);
+        return true;
     }
 
     public bool TryGetArea(

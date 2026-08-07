@@ -6,7 +6,18 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
-    state: security_cam
+    layers:
+    - state: "security_cam0"
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "security_cam"
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 300
+    activeLoad: 300
+    channel: Equipment
+  - type: ActivatableUIRequiresPower
   - type: InteractionOutline
   - type: ActivatableUI
     key: enum.SupplyDropComputerUi.Key

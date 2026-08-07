@@ -628,6 +628,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/jungle.rsi
   - type: CMArmor
     melee: 10
+    bullet: 10
   - type: Appearance
   - type: ItemCamouflage
     camouflageVariations:
@@ -1012,11 +1013,30 @@
   name: robust snow suit
   description: A snow suit. It can protect the wearer from extreme cold. This one seems to have been modified somewhat, and can both holster a gun and fit magazines.
   components:
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - CMMagazineRifle
+      - RMCMagazineShotgun
+      - CMMagazineSmg
+      - CMMagazineSniper
+      - CMMagazinePistol
+      - RMCMagazineRevolver
+      - MRE
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+      - RMCSyringeCase
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/normal.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/normal.rsi # TODO cool sprite
   - type: CMHardArmor
+  - type: CMArmor
+    melee: 15
+    bullet: 20
+    bio: 20
+    explosionArmor: 0
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
     walkModifier: 0.897
     sprintModifier: 0.897

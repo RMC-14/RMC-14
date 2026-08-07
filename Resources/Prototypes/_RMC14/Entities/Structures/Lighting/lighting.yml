@@ -400,6 +400,27 @@
   - type: Sprite
     sprite: _RMC14/Structures/Wallmounts/LightingOffset/light_tube.rsi
 
+- type: entity
+  parent: RMCLightFixtureDouble
+  id: RMCLightFixtureBlueSpotlight
+  suffix: Blue spotlight, No Offset, Draws below entities
+  components:
+  - type: Sprite
+    drawdepth: HighFloorObjects
+    state: bslight1
+    layers:
+    - state: bslight1
+      map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLight
+    hasLampOnSpawn: RMCLightTubeBlue
+  - type: PoweredLightVisuals
+    spriteStateMap:
+      Empty: bslight-empty
+      Off: bslight0
+      On: bslight1
+      Broken: bslight-broken
+      Burned: bslight-burned
+
 # Light Bulbs
 
 # Light Bulb, Always powered

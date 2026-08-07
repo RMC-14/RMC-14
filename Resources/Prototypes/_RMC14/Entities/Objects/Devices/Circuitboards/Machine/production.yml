@@ -162,3 +162,12 @@
 #   id: RMCElectronicsAirlock
 #   name: airlock electronics
 #   description: A machine printed circuit board for an airlock # TODO RMC14 Airlock Building
+
+- type: entity
+  parent: CMBaseMachineCircuitboard
+  id: RMCRechargerCircuitboard
+  name: recharger machine board
+  description: A machine printed circuit board for a recharger
+  components:
+    - type: MachineBoard
+      prototype: RMCRecharger

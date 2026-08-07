@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Access;
+using Content.Shared.Roles;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -53,6 +54,9 @@ public sealed partial class IdModificationConsoleComponent : Component
 
     [DataField] [AutoNetworkedField]
     public List<IdModificationConsoleSquads>? Squads;
+
+    [DataField] [AutoNetworkedField]
+    public HashSet<ProtoId<JobPrototype>> DisallowSquadUnassignment = ["CMRifleman"];
 }
 
 [Serializable] [NetSerializable]

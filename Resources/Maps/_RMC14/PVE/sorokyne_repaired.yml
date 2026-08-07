@@ -50917,14 +50917,14 @@ entities:
   - uid: 899
     components:
     - type: MetaData
-      name: 'LZ2: Sorokyne Strata'
+      name: 'LZ2: Communications Landing Zone'
     - type: Transform
       pos: 46.5,18.5
       parent: 1
   - uid: 900
     components:
     - type: MetaData
-      name: 'LZ1: Sorokyne Strata'
+      name: 'LZ1: Mining Landing Zone'
     - type: Transform
       pos: 10.5,108.5
       parent: 1
@@ -65647,7 +65647,7 @@ entities:
     - type: Transform
       pos: 118.5,116.5
       parent: 1
-- proto: RMCBoxMagazineRifleAK4047Empty
+- proto: RMCBoxMagazineRifleType77Empty
   entities:
   - uid: 879
     components:
@@ -86291,7 +86291,7 @@ entities:
     - type: Transform
       pos: 175.28365,12.369497
       parent: 1
-- proto: RMCMagazineRifleAK4047
+- proto: RMCMagazineRifleType77
   entities:
   - uid: 7662
     components:
@@ -207682,7 +207682,7 @@ entities:
     - type: Transform
       pos: 99.5,62.5
       parent: 1
-- proto: RMCWeaponRifleAK4047
+- proto: RMCWeaponRifleType77
   entities:
   - uid: 31237
     components:

@@ -8,4 +8,10 @@ public sealed partial class RMCPickedUpPhoneComponent : Component
 {
     [DataField, AutoNetworkedField]
     public int Range = 7;
+
+    [DataField, AutoNetworkedField]
+    public bool CanTransfer = true;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? OriginalHolder;
 }

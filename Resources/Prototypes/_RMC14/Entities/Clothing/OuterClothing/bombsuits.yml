@@ -1,0 +1,29 @@
+- type: entity
+  parent: RMCBaseArmor
+  id: RMCSuitBombSuit
+  name: bomb suit
+  description: A suit designed for safety when handling explosives.
+  suffix: RMC
+  components:
+  - type: Sprite  #RMC14 TODO: Make a new sprite which doesn't look silly
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/bombsuit.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/bombsuit.rsi
+  - type: CMHardArmor
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
+    walkModifier: 0.725
+    sprintModifier: 0.725
+  - type: RMCArmorSpeedTier
+    speedTier: light
+  - type: CMArmor
+    explosionArmor: 50
+
+- type: entity
+  parent: RMCSuitBombSuit
+  id: RMCSuitBombSuitSecurity
+  suffix: Security, RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/bombsuit_security.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/bombsuit_security.rsi

@@ -28,6 +28,13 @@
       map: [ "base" ]
     state: sensor_off
     offset: 0.5,2
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 1000
+    activeLoad: 0
+    channel: Equipment
   - type: Clickable
   - type: InteractionOutline
   - type: Appearance

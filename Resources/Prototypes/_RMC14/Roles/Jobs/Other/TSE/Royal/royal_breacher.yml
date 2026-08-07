@@ -19,19 +19,7 @@
       - RoyalMarines
       - TSE
     - type: Skills
-      skills:
-        RMCSkillCqc: 2
-        RMCSkillFirearms: 1
-        RMCSkillPolice: 2
-        RMCSkillFireman: 2
-        RMCSkillConstruction: 2
-        RMCSkillEngineer: 3
-        RMCSkillEndurance: 3
-        RMCSkillMedical: 2
-        RMCSkillMeleeWeapons: 1
-        RMCSkillJtac: 1
-        RMCSkillVehicles: 1
-        RMCSkillPowerLoader: 1
+      preset: RMCSkillPresetRoyalBreacher
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-breacher
     - type: TacticalMapIcon
@@ -96,5 +84,5 @@
   parent: CMJobIconBase
   id: RMCJobIconRoyalBreacher
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_breacher
+    sprite: _RMC14/Interface/job_icons/TSE/RCM/standard.rsi
+    state: rcm_breacher

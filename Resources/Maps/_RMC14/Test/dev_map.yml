@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/16/2026 05:53:21
-  entityCount: 1476
+  time: 07/28/2026 23:25:13
+  entityCount: 1481
 maps:
 - 1
 grids:
@@ -1470,6 +1470,13 @@ entities:
         path: /Audio/_RMC14/Announcements/ARES/unidentified_lifesigns.ogg
       lastLocked: {}
       attachmentPoints: []
+      launchAlarmSound: !type:SoundPathSpecifier
+        params:
+          loop: True
+          referenceDistance: 10
+          maxDistance: 30
+          volume: 2
+        path: /Audio/_RMC14/Machines/Shuttle/dropship_launch_alarm.ogg
       crashWarningSound: !type:SoundPathSpecifier
         params:
           volume: -5
@@ -1482,6 +1489,8 @@ entities:
         params:
           volume: -1
         path: /Audio/_RMC14/Dropship/dropship_incoming.ogg
+      arrivalSound: !type:SoundPathSpecifier
+        path: /Audio/_RMC14/Machines/Shuttle/engine_landing.ogg
     - type: GridAtmosphere
       version: 2
       data:
@@ -3564,11 +3573,15 @@ entities:
     - type: Transform
       pos: 17.5,9.5
       parent: 2
+    - type: CMMedicalSupplyLink
+      connectedPort: True
   - uid: 228
     components:
     - type: Transform
       pos: 13.5,11.5
       parent: 2
+    - type: CMMedicalSupplyLink
+      connectedPort: True
   - uid: 231
     components:
     - type: Transform
@@ -3579,6 +3592,8 @@ entities:
     - type: Transform
       pos: 13.5,12.5
       parent: 2
+    - type: CMMedicalSupplyLink
+      connectedPort: True
   - uid: 246
     components:
     - type: Transform
@@ -3929,6 +3944,13 @@ entities:
     - type: Transform
       pos: -1.5,-1.5
       parent: 2
+- proto: CMSpawnPointCombatCorrespondent
+  entities:
+  - uid: 1478
+    components:
+    - type: Transform
+      pos: 0.5,-2.5
+      parent: 2
 - proto: CMSpawnPointCombatTech
   entities:
   - uid: 660
@@ -3984,6 +4006,13 @@ entities:
     components:
     - type: Transform
       pos: 0.5,1.5
+      parent: 2
+- proto: CMSpawnPointForeconSynth
+  entities:
+  - uid: 1480
+    components:
+    - type: Transform
+      pos: 3.5,2.5
       parent: 2
 - proto: CMSpawnPointHospitalCorpsman
   entities:
@@ -4109,7 +4138,7 @@ entities:
   - uid: 684
     components:
     - type: Transform
-      pos: 0.5,-2.5
+      pos: -2.5,0.5
       parent: 2
 - proto: CMSpawnPointSurvivor
   entities:
@@ -9228,23 +9257,6 @@ entities:
       anchored: False
       pos: -4,-17
       parent: 1
-- proto: RMCBeakerHighCapacity
-  entities:
-  - uid: 254
-    components:
-    - type: Transform
-      pos: 14.5,9.5
-      parent: 2
-  - uid: 255
-    components:
-    - type: Transform
-      pos: 15.5,9.5
-      parent: 2
-  - uid: 256
-    components:
-    - type: Transform
-      pos: 16.5,9.5
-      parent: 2
 - proto: RMCBoxBeaker
   entities:
   - uid: 23
@@ -9433,6 +9445,8 @@ entities:
     - type: Transform
       pos: 0.7198646,4.374314
       parent: 2
+    missingComponents:
+    - IngestionBlocker
 - proto: RMCKitchenReagentGrinder
   entities:
   - uid: 1203
@@ -10025,6 +10039,23 @@ entities:
     - type: Transform
       pos: -4.3179135,8.275752
       parent: 2
+- proto: RMCReagentJug
+  entities:
+  - uid: 254
+    components:
+    - type: Transform
+      pos: 14.5,9.5
+      parent: 2
+  - uid: 255
+    components:
+    - type: Transform
+      pos: 15.5,9.5
+      parent: 2
+  - uid: 256
+    components:
+    - type: Transform
+      pos: 16.5,9.5
+      parent: 2
 - proto: RMCSheetPlastic
   entities:
   - uid: 242
@@ -10046,6 +10077,13 @@ entities:
     - type: Transform
       pos: 3.5,17.5
       parent: 2
+- proto: RMCSpawnPointExecutiveBodyguard
+  entities:
+  - uid: 1479
+    components:
+    - type: Transform
+      pos: -1.5,3.5
+      parent: 2
 - proto: RMCSpawnPointFieldDoctor
   entities:
   - uid: 1475
@@ -10059,6 +10097,20 @@ entities:
     components:
     - type: Transform
       pos: 0.5,3.5
+      parent: 2
+- proto: RMCSpawnPointSynth
+  entities:
+  - uid: 1477
+    components:
+    - type: Transform
+      pos: 3.5,3.5
+      parent: 2
+- proto: RMCSpawnPointTSEPASynthetic
+  entities:
+  - uid: 1481
+    components:
+    - type: Transform
+      pos: 3.5,1.5
       parent: 2
 - proto: RMCSurveillanceCameraAlmayer
   entities:

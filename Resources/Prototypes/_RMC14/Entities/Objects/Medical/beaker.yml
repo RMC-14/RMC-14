@@ -85,7 +85,7 @@
   - type: Openable
     opened: true
     closeable: true
-    examineText: rmc-bottle-closed
+    examineText: rmc-bottle-open
     openVerbText: rmc-bottle-remove-lid
     closeVerbText: rmc-bottle-put-lid
     sound: null
@@ -135,7 +135,7 @@
   - type: Openable
     opened: true
     closeable: true
-    examineText: rmc-bottle-closed
+    examineText: rmc-bottle-open
     openVerbText: rmc-bottle-remove-lid
     closeVerbText: rmc-bottle-put-lid
     sound: null
@@ -199,7 +199,7 @@
   - type: Openable
     opened: true
     closeable: true
-    examineText: rmc-bottle-closed
+    examineText: rmc-bottle-open
     openVerbText: rmc-bottle-remove-lid
     closeVerbText: rmc-bottle-put-lid
     sound: null
@@ -494,7 +494,7 @@
   - type: Openable
     opened: true
     closeable: true
-    examineText: rmc-bottle-closed
+    examineText: rmc-bottle-open
     openVerbText: rmc-bottle-remove-lid
     closeVerbText: rmc-bottle-put-lid
     sound: null
@@ -547,3 +547,36 @@
     solution: beaker
     reagents:
       CMEpinephrine: 30
+
+## Hi-cap replacement
+- type: entity
+  parent: RMCBeakerHighCapacity
+  id: RMCReagentJug
+  name: reagent jug
+  description: A large jug made of non-reactive plastic, capable of carrying large amounts of diverse chemicals to wherever they are needed. Holds 500 units.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Chemistry/reagent_jug.rsi
+    layers:
+    - state: reagentjug
+    - map: [ "enum.SolutionContainerLayers.Fill" ]
+      state: reagentjug-1
+      visible: false
+    - state: lid_reagentjug
+      map: ["enum.OpenableVisuals.Layer"]
+      visible: false
+  - type: Item
+    sprite: _RMC14/Objects/Chemistry/reagent_jug.rsi
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 500
+  - type: SolutionContainerVisuals
+    fillBaseName: reagentjug-
+    inHandsMaxFillLevels: 5
+    inHandsFillBaseName: -fill-
+  - type: PhysicalComposition
+    materialComposition:
+      CMGlass: 30000
+  - type: StaticPrice
+    price: 60

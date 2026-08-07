@@ -46,13 +46,39 @@
 #      - id: Prescription Medical HUD Glasses
     - name: Uniform
       choices: { CMUniform: 1 }
+      jobs:
+      - CMNurse
       entries:
-      - id: CMScrubsGreen
-      - id: CMScrubsBlue
       - id: RMCScrubsLightBlue
+        recommended: true
+      - id: RMCScrubsPharm
       - id: CMScrubsPurple
       - id: RMCScrubsOlive
       - id: RMCScrubsGrey
+      - id: RMCScrubsBrown
+      - id: RMCScrubsWhite
+      - id: RMCScrubsBlack
+    - name: Uniform
+      choices: { CMUniform: 1 }
+      jobs:
+      - CMDoctor
+      - RMCFieldDoctor
+      - CMCMO
+      - CMResearcher
+      entries:
+      - id: CMScrubsBlue
+        recommended: true
+      - id: CMScrubsGreen
+        recommended: true
+      - id: RMCScrubsPharm
+        recommended: true
+      - id: CMScrubsPurple
+      - id: RMCScrubsOlive
+      - id: RMCScrubsGrey
+      - id: RMCScrubsBrown
+      - id: RMCScrubsWhite
+      - id: RMCScrubsBlack
+      - id: RMCScrubsLightBlue
     - name: Suit
       jobs:
       - CMNurse
@@ -62,30 +88,61 @@
     - name: Suit
       jobs:
       - CMDoctor
+      - RMCFieldDoctor
+      - CMCMO
+      - CMResearcher
       choices: { CMSuit: 1 }
       entries:
       - id: RMCLabcoat
+        recommended: true
+      - id: RMCLabcoatShort
+        name: High-Cut Labcoat
+      - id: RMCLabcoatLong
+        name: Low-Cut Labcoat
+      - id: RMCLabcoatPharm
+        recommended: true
       - id: RMCMedicalApron
-#    - name: Snow gear (Snow use only)
-#      takeall: CMSnowgear
-#      entries:
-#      - id: Snowcoat
-#      - id: Balaclava
-#      - id: Snow Scarf
+    - name: Snow gear (Snow use only)
+      takeAll: CMMedicalSet
+      entries:
+      - id: RMCCoatSnow
+      - id: RMCMaskBalaclava
+      - id: RMCMaskTornScarfBlack
+        name: Snow Scarf 
     - name: Headwear
       choices: { CMHeadwear: 1 }
+      jobs:
+      - CMNurse
       entries:
-      - id: CMHeadCapSurgOrange
-      - id: CMHeadCapSurgBlue
+      - id: CMHeadCapSurgLightBlue
+        recommended: true
+      - id: CMHeadCapSurgPharm
       - id: CMHeadCapSurgPurple
-      - id: CMHeadCapSurgGreen
-    - name: Belt
-      choices: { CMBelt: 1 }
+      - id: CMHeadCapSurgOlive
+      - id: CMHeadCapSurgGrey
+      - id: CMHeadCapSurgBrown
+      - id: CMHeadCapSurgWhite
+      - id: CMHeadCapSurgBlack
+    - name: Headwear
+      choices: { CMHeadwear: 1 }
+      jobs:
+      - CMDoctor
+      - RMCFieldDoctor
+      - CMCMO
+      - CMResearcher
       entries:
-      - id: CMBeltMedicBagFilled
-        name: M276 pattern lifesaver bag (Full)
-      - id: CMBeltMedicalFilled
-        name: M276 pattern medical storage rig (Full)
+      - id: CMHeadCapSurgBlue
+        recommended: true
+      - id: CMHeadCapSurgGreen
+        recommended: true
+      - id: CMHeadCapSurgPharm
+        recommended: true
+      - id: CMHeadCapSurgPurple
+      - id: CMHeadCapSurgOlive
+      - id: CMHeadCapSurgGrey
+      - id: CMHeadCapSurgBrown
+      - id: CMHeadCapSurgWhite
+      - id: CMHeadCapSurgBlack
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
@@ -97,8 +154,19 @@
         replaceSlot: back
       - id: CMBackpackMedical
         replaceSlot: back
+        recommended: true
       - id: CMSatchelMedical
         replaceSlot: back
+        recommended: true
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries:
+      - id: CMBeltMedicBagFilled
+        name: M276 pattern lifesaver bag (Full)
+        recommended: true
+      - id: CMBeltMedicalFilled
+        name: M276 pattern medical storage rig (Full)
+        recommended: true
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
@@ -111,6 +179,7 @@
         name: first-aid pouch (pills)
       - id: RMCPouchFirstResponder
       - id: RMCPouchMedical
+        recommended: true
       - id: RMCPouchMedkit
         recommended: true
       - id: RMCPouchReagentCanisterBicaridine

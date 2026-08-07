@@ -13,5 +13,6 @@ public readonly record struct MentorMessage(
     DateTime Time,
     bool IsMentor,
     bool IsAdmin,
-    bool Create
+    bool Create,
+    string Title
 );

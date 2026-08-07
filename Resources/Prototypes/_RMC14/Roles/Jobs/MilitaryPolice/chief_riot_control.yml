@@ -1,0 +1,62 @@
+- type: job
+  parent: CMRiotControl
+  id: CMRiotControlLeader
+  name: rmc-job-name-riot-control-leader
+  description: rmc-job-description-riot-control-leader
+  playTimeTracker: CMJobRiotControlLeader
+  ranks:
+    RMCRankSecondLT: []
+  startingGear: RMCGearRiotControlLeader
+  spawnMenuRoleName: Riot MP Leader
+  icon: "RMCJobIconRiotMPL"
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: JobPrefix
+      prefix: rmc-job-prefix-rmpl
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: crmp
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_mp
+
+- type: startingGear
+  parent: RMCGearRiotControl
+  id: RMCGearRiotControlLeader
+  equipment:
+    id: RMCIDCardRiotControlLeader
+
+- type: entity
+  id: RMCRandomHumanoidRiotControlLeader
+  name: riot control leader ghost role
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: cmp_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCRiotControlLeader
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCRiotControlLeader
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-riot-control-leader
+    description: rmc-ghost-role-information-riot-control-description
+    rules: rmc-ghost-role-information-riot-control-rules
+    reregister: false
+    job: CMRiotControlLeader
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobChiefMP
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+
+- type: playTimeTracker
+  id: CMJobRiotControlLeader
+  isHumanoid: true
