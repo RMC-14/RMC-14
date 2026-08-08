@@ -17,7 +17,7 @@
   id: CMJobIconPilotGunship
   icon:
     sprite: _RMC14/Interface/job_icons/UNMC/auxiliary_support.rsi
-    state: hudsquad_po
+    state: hudsquad_gp
 
 - type: jobIcon
   parent: CMJobIconBase
