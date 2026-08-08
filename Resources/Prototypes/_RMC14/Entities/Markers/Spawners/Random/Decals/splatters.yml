@@ -68,3 +68,41 @@
     radius: 0.7
     prob: 0.5
     maxDecalsPerTile: 4
+
+- type: entity
+  parent: RMCDecalSpawnerBloodSplatters
+  id: RMCDecalSpawnerBloodSplash
+  name: blood splash spawner
+  suffix: RMC14
+  components:
+    - type: RandomDecalSpawner
+      radius: 0.7
+      maxDecalsPerTile: 4
+
+- type: entity
+  parent: RMCDecalSpawnerBase
+  id: RMCDecalSpawnerBloodDrip
+  name: blood drip spawner
+  suffix: RMC14
+  components:
+  - type: RandomDecalSpawner
+    decals:
+    - RMCDecalBloodDrip
+    color: "#830303"
+    radius: 0.7
+    maxDecalsPerTile: 4
+
+- type: entity
+  parent: RMCDecalSpawnerBase
+  id: RMCDecalSpawnerVomitSplash
+  name: vomit splash spawner
+  suffix: RMC14
+  components:
+  - type: RandomDecalSpawner
+    decals:
+    - RMCDecalVomitFloor1
+    - RMCDecalVomitFloor2
+    - RMCDecalVomitFloor3
+    - RMCDecalVomitFloor4
+    radius: 0.7
+    maxDecalsPerTile: 4

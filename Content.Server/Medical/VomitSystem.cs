@@ -3,6 +3,7 @@ using Content.Server.Fluids.EntitySystems;
 using Content.Server.Forensics;
 using Content.Server.Popups;
 using Content.Server.Stunnable;
+using Content.Shared._RMC14.Chemistry;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry.Components;
@@ -102,6 +103,10 @@ namespace Content.Server.Medical
             // Force sound to play as spill doesn't work if solution is empty.
             _audio.PlayPvs(_vomitSound, uid);
             _popup.PopupEntity(Loc.GetString("disease-vomit", ("person", Identity.Entity(uid, EntityManager))), uid);
+
+            //RMC14
+            var vomitEvent = new RMCVomitEvent();
+            RaiseLocalEvent(uid, ref vomitEvent);
         }
     }
 }
