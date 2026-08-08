@@ -25,7 +25,7 @@ public sealed partial class PointsCostLoadoutEffect : LoadoutEffect
             return true;
         }
 
-        if (loadout.Points <= Cost)
+        if (loadout.Points < Cost) // RMC14 Loadout Fix
         {
             reason = FormattedMessage.FromUnformatted("loadout-group-points-insufficient");
             return false;
