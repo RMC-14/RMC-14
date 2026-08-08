@@ -68,6 +68,7 @@
             tags:
               - TrashBag
           priority: 3
+    - type: Physics
     - type: Fixtures
       fixtures:
         fix1:
