@@ -319,3 +319,34 @@
       whitelist:
         tags:
         - RMCUniformPMC
+
+- type: entity
+  parent: RMCJacketWindbreaker
+  id: RMCJacketBulletproofSuit
+  name: bulletproof suit jacket
+  description: A black suit jacket with kevlar woven into the fabric, giving it a greater degree of protection from firearms. Not as durable as a suit of armour, but it's stylish and allows for greater mobility.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/bulletproof_suit.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/bulletproof_suit.rsi
+  - type: CMArmor
+    melee: 10 # CLOTHING_ARMOR_LOW
+    bullet: 25 # CLOTHING_ARMOR_MEDIUMHIGH
+    bio: 10 # CLOTHING_ARMOR_LOW
+    explosionArmor: 10 # CLOTHING_ARMOR_LOW
+  - type: AllowSuitStorage
+    whitelist:
+      components:
+      - Gun
+      - Stunbaton
+      - BallisticAmmoProvider #Note should get all maganizes
+      tags:
+      - Handcuffs
+      - GasTank
+      - Flashlight
+      - RMCMacheteScabbard
+      - Binoculars
+      - RMCGeneralPistolHolster
+      - RMCGeneralRevolverHolster
+      - RMCFoldingBarricade

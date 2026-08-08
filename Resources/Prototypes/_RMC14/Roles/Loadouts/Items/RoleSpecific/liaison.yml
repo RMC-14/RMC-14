@@ -13,6 +13,19 @@
       - RMCWeYaClipboard
 
 - type: loadout
+  id: RMCPatchWeYaCommsDivision
+  cost: 1
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobLiaison
+      time: 90000 # 25 hours
+  storage:
+    back:
+      - RMCPatchWeYaCommsDivision
+
+- type: loadout
   id: RMCWeYaThermos
   cost: 1
   effects:
