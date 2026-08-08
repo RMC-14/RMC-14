@@ -10,7 +10,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      preset: RMCSkillPresetSurvivor
+      preset: RMCSkillPresetSurvivorPrisoner
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetBeachBum
     - type: RMCSurvivor
