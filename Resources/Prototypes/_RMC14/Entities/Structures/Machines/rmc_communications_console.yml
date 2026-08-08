@@ -52,23 +52,30 @@
   description: This can be used for various important functions.
   components:
   - type: ActivatableUI
-    key: enum.MarineCommunicationsComputerUI.Key
+    key: enum.GroundsideOperationsConsoleUi.Key
   - type: ActivatableUIRequiresAccess
   - type: AccessReader
     access: [ [ "RMCAccessSeniorCommand" ] ]
   - type: UserInterface
     interfaces:
-      enum.MarineCommunicationsComputerUI.Key:
-        type: MarineCommunicationsComputerBui
+      enum.GroundsideOperationsConsoleUi.Key:
+        type: GroundsideOperationsConsoleBui
       enum.OverwatchConsoleUI.Key:
         type: OverwatchConsoleBui
+      enum.MarineControlComputerUi.MedalsPanel:
+        type: MedalsPanelBui
       enum.TacticalMapComputerUi.Key:
         type: TacticalMapComputerBui
       enum.DialogUiKey.Key:
         type: DialogBui
+  - type: GroundsideOperationsConsole
   - type: MarineCommunicationsComputer
+    canGiveMedals: true
+    canInitiateEvac: true
+  - type: MarineControlComputer
   - type: OverwatchConsole
-    canMessageSquad: false
+    canMessageSquad: true
+  - type: SupplyDropComputer
   - type: TacticalMapComputer
   - type: GuideHelp
     guides:

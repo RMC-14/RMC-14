@@ -1,4 +1,5 @@
 ﻿using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Keycard;
 
@@ -15,6 +16,21 @@ public sealed partial class KeycardDeviceComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan Time = TimeSpan.FromSeconds(2);
 
-    [DataField, AutoNetworkedField, AutoPausedField]
-    public TimeSpan LastActivated;
+    [DataField, AutoNetworkedField]
+    public bool Active;
+
+    [DataField]
+    public EntityUid? RequestSource;
+
+    [DataField]
+    public EntityUid? Initiator;
+
+    [DataField, AutoPausedField]
+    public TimeSpan RequestExpiresAt;
+}
+
+[Serializable, NetSerializable]
+public enum KeycardDeviceVisuals
+{
+    Active,
 }

@@ -14,6 +14,7 @@ using Content.Shared._RMC14.Roles;
 using Content.Shared._RMC14.Tracker;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
+using Content.Shared.Bed.Cryostorage;
 using Content.Shared.Chat;
 using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
@@ -242,6 +243,9 @@ public sealed class SquadSystem : EntitySystem
         }
 
         squad.Roles[jobId] = roles + 1;
+
+        if (IsSquadLeader(jobId))
+            TryRestoreOfficialSquadLeader(ent, (ent.Comp.Squad!.Value, squad), false);
     }
 
     private void OnSquadLeaderRemoved(Entity<SquadLeaderComponent> ent, ref ComponentRemove args)
@@ -578,6 +582,9 @@ public sealed class SquadSystem : EntitySystem
 
         // Search for any squad-specific items to map
         SearchForMappedItems((marine, member), member.Squad.Value);
+
+        if (role is { } squadLeaderRole && IsSquadLeader(squadLeaderRole))
+            TryRestoreOfficialSquadLeader((marine, member), (team.Owner, team.Comp), oldSquadId != team.Owner);
     }
 
     public void RemoveSquad(EntityUid marine, ProtoId<JobPrototype>? job)
@@ -678,6 +685,166 @@ public sealed class SquadSystem : EntitySystem
         return member.Comp.Squad is { } memberSquad && memberSquad == squad;
     }
 
+    private void AnnounceSquadLeader(Entity<SquadMemberComponent> leader)
+    {
+        if (leader.Comp.Squad is not { } squad ||
+            Prototype(squad) is not { } squadProto)
+        {
+            return;
+        }
+
+        _marineAnnounce.AnnounceSquad(
+            Loc.GetString("rmc-overwatch-console-new-squad-leader-announce", ("leaderName", Name(leader))),
+            squadProto.ID);
+    }
+
+    private void DemoteSquadLeader(Entity<SquadLeaderComponent> leader)
+    {
+        if (leader.Comp.Headset is { } headset)
+        {
+            RemComp<SquadLeaderHeadsetComponent>(headset);
+            if (TryComp(headset, out EncryptionKeyHolderComponent? holder))
+                _encryptionKey.UpdateChannels(headset, holder);
+        }
+
+        if (TryComp(leader, out MarineComponent? marine) &&
+            Equals(marine.Icon, leader.Comp.Icon))
+        {
+            _marine.ClearIcon((leader, marine));
+        }
+
+        if (TryComp(leader, out MarineOrdersComponent? orders) &&
+            !orders.Intrinsic)
+        {
+            RemCompDeferred<MarineOrdersComponent>(leader);
+        }
+
+        RemComp<SquadLeaderComponent>(leader);
+
+        if (TryComp(leader, out RMCTrackableComponent? trackable) &&
+            !trackable.Intrinsic)
+        {
+            RemComp<RMCTrackableComponent>(leader);
+        }
+
+        if (TryComp(leader, out RMCPointingComponent? pointing) &&
+            !pointing.Intrinsic)
+        {
+            RemCompDeferred<RMCPointingComponent>(leader);
+        }
+    }
+
+    private bool IsActiveOfficialSquadLeader(EntityUid leader)
+    {
+        return _originalRoleQuery.TryComp(leader, out var role) &&
+               role.Job == SquadLeaderJob &&
+               (!TryComp<CryostorageContainedComponent>(leader, out var cryo) || cryo.Cryostorage == null);
+    }
+
+    private void ReconcileSquadLeaders(Entity<SquadTeamComponent> squad, EntityUid canonicalLeader)
+    {
+        var leaders = EntityQueryEnumerator<SquadLeaderComponent, SquadMemberComponent>();
+        while (leaders.MoveNext(out var uid, out var leader, out var member))
+        {
+            if (uid == canonicalLeader || member.Squad != squad.Owner)
+                continue;
+
+            DemoteSquadLeader((uid, leader));
+        }
+    }
+
+    private bool SetSquadLeader(Entity<SquadMemberComponent> leader, SpriteSpecifier.Rsi icon)
+    {
+        var changed = !HasComp<SquadLeaderComponent>(leader);
+
+        var leaders = EntityQueryEnumerator<SquadLeaderComponent, SquadMemberComponent>();
+        while (leaders.MoveNext(out var uid, out var otherLeader, out var member))
+        {
+            if (uid == leader.Owner || member.Squad != leader.Comp.Squad)
+                continue;
+
+            changed = true;
+            DemoteSquadLeader((uid, otherLeader));
+        }
+
+        var newLeader = EnsureComp<SquadLeaderComponent>(leader);
+        newLeader.Icon = icon;
+
+        EnsureComp<RMCAwardRecommendationComponent>(leader);
+        _awardRecommendation.SetCanRecommend(leader, true);
+
+        if (!EnsureComp(leader, out MarineOrdersComponent orders))
+        {
+            orders.Intrinsic = false;
+            Dirty(leader, orders);
+            _marineOrders.StartActionUseDelay((leader, orders));
+        }
+
+        if (!EnsureComp(leader, out RMCTrackableComponent trackable))
+        {
+            trackable.Intrinsic = false;
+            Dirty(leader, trackable);
+        }
+
+        if (!EnsureComp(leader, out RMCPointingComponent pointing))
+        {
+            pointing.Intrinsic = false;
+            Dirty(leader, pointing);
+        }
+
+        var slots = _inventory.GetSlotEnumerator(leader.Owner, SlotFlags.EARS);
+        while (slots.MoveNext(out var slot))
+        {
+            if (slot.ContainedEntity is not { } contained)
+                continue;
+
+            if (TryComp(contained, out EncryptionKeyHolderComponent? holder))
+            {
+                newLeader.Headset = contained;
+                EnsureComp<SquadLeaderHeadsetComponent>(contained);
+                _encryptionKey.UpdateChannels(contained, holder);
+                break;
+            }
+        }
+
+        Dirty(leader, newLeader);
+        return changed;
+    }
+
+    private void TryRestoreOfficialSquadLeader(
+        Entity<SquadMemberComponent> leader,
+        Entity<SquadTeamComponent> squad,
+        bool announceOnAssignment)
+    {
+        if (_net.IsClient)
+            return;
+
+        EntityUid? activeOfficialLeader = null;
+        var leaders = EntityQueryEnumerator<SquadLeaderComponent, SquadMemberComponent>();
+        while (leaders.MoveNext(out var uid, out _, out var member))
+        {
+            if (uid != leader.Owner &&
+                member.Squad == squad.Owner &&
+                IsActiveOfficialSquadLeader(uid))
+            {
+                activeOfficialLeader = uid;
+                break;
+            }
+        }
+
+        if (activeOfficialLeader is { } existingLeader)
+        {
+            Log.Warning($"Refused to assign official Squad Leader {ToPrettyString(leader)} to {ToPrettyString(squad)} because active official Squad Leader {ToPrettyString(existingLeader)} already leads the squad.");
+            ReconcileSquadLeaders(squad, existingLeader);
+            return;
+        }
+
+        if (!SetSquadLeader(leader, squad.Comp.LeaderIcon) && !announceOnAssignment)
+            return;
+
+        AnnounceSquadLeader(leader);
+    }
+
     public void PromoteSquadLeader(Entity<SquadMemberComponent?> toPromote, EntityUid user, SpriteSpecifier.Rsi icon)
     {
         if (HasComp<SquadLeaderComponent>(toPromote))
@@ -695,89 +862,10 @@ public sealed class SquadSystem : EntitySystem
             return;
         }
 
-        if (Resolve(toPromote, ref toPromote.Comp, false))
-        {
-            var leaders = EntityQueryEnumerator<SquadLeaderComponent, SquadMemberComponent>();
-            while (leaders.MoveNext(out var uid, out var leader, out var otherMember))
-            {
-                if (otherMember.Squad != toPromote.Comp.Squad)
-                    continue;
+        if (!Resolve(toPromote, ref toPromote.Comp, false))
+            return;
 
-                if (leader.Headset is { } headset)
-                {
-                    RemComp<SquadLeaderHeadsetComponent>(headset);
-                    if (TryComp(headset, out EncryptionKeyHolderComponent? holder))
-                        _encryptionKey.UpdateChannels(headset, holder);
-                }
-
-                if (TryComp(uid, out MarineComponent? otherMarine) &&
-                    Equals(otherMarine.Icon, leader.Icon))
-                {
-                    _marine.ClearIcon((uid, otherMarine));
-                }
-
-                if (TryComp(uid, out MarineOrdersComponent? otherOrders) &&
-                    !otherOrders.Intrinsic)
-                {
-                    RemCompDeferred<MarineOrdersComponent>(uid);
-                }
-
-                RemComp<SquadLeaderComponent>(uid);
-
-                if (TryComp<RMCTrackableComponent>(uid, out var otherTrackable) &&
-                    !otherTrackable.Intrinsic)
-                {
-                    RemComp<RMCTrackableComponent>(uid);
-                }
-
-                if (TryComp<RMCPointingComponent>(uid, out var otherPointing) &&
-                    !otherPointing.Intrinsic)
-                {
-                    RemCompDeferred<RMCPointingComponent>(uid);
-                }
-            }
-        }
-
-        var newLeader = EnsureComp<SquadLeaderComponent>(toPromote);
-        newLeader.Icon = icon;
-
-        EnsureComp<RMCAwardRecommendationComponent>(toPromote);
-        _awardRecommendation.SetCanRecommend(toPromote, true);
-
-        if (!EnsureComp(toPromote, out MarineOrdersComponent orders))
-        {
-            orders.Intrinsic = false;
-            Dirty(toPromote, orders);
-            _marineOrders.StartActionUseDelay((toPromote, orders));
-        }
-
-        if (!EnsureComp(toPromote, out RMCTrackableComponent trackable))
-        {
-            trackable.Intrinsic = false;
-            Dirty(toPromote, trackable);
-        }
-
-        if (!EnsureComp(toPromote, out RMCPointingComponent pointing))
-        {
-            pointing.Intrinsic = false;
-            Dirty(toPromote, pointing);
-        }
-
-        var slots = _inventory.GetSlotEnumerator(toPromote.Owner, SlotFlags.EARS);
-        while (slots.MoveNext(out var slot))
-        {
-            if (slot.ContainedEntity is not { } contained)
-                continue;
-
-            if (TryComp(contained, out EncryptionKeyHolderComponent? holder))
-            {
-                newLeader.Headset = contained;
-                Dirty(toPromote, newLeader);
-                EnsureComp<SquadLeaderHeadsetComponent>(contained);
-                _encryptionKey.UpdateChannels(contained, holder);
-                break;
-            }
-        }
+        SetSquadLeader((toPromote.Owner, toPromote.Comp), icon);
 
         var squad = toPromote.Comp?.Squad;
         if (TryComp(toPromote, out ActorComponent? actor))
