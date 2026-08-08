@@ -53,6 +53,8 @@
     - Wall
   components:
   - type: VehicleSmashable
+    deleteOnHit: false
+    damageOnHit: 100
   - type: MeleeSound
     soundGroups:
       Brute:

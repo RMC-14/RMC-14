@@ -29,6 +29,9 @@ public sealed partial class XenoCorrosiveAcidDoAfterEvent : DoAfterEvent
     [DataField]
     public float ExpendableLightDps = 2.5f;
 
+    [DataField]
+    public float? VehicleDamage;
+
     public XenoCorrosiveAcidDoAfterEvent(XenoCorrosiveAcidEvent ev)
     {
         AcidId = ev.AcidId;
@@ -38,6 +41,7 @@ public sealed partial class XenoCorrosiveAcidDoAfterEvent : DoAfterEvent
         Dps = ev.Dps;
         ExpendableLightDps = ev.ExpendableLightDps;
         EnergyCost = ev.EnergyCost;
+        VehicleDamage = ev.VehicleDamage;
     }
 
     public override DoAfterEvent Clone()

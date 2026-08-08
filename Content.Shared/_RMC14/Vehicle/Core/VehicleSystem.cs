@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.Construction;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Power;
@@ -21,7 +22,11 @@ using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
+using Content.Shared.Stunnable;
+using Content.Shared.Throwing;
 using Content.Shared.Vehicle.Components;
+using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameObjects;
 using Robust.Shared.EntitySerialization;
 using Robust.Shared.EntitySerialization.Systems;
@@ -33,6 +38,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Shared.Physics;
 
@@ -42,7 +48,13 @@ public sealed class VehicleSystem : EntitySystem
 {
     private static readonly EntProtoId VehicleKey = "RMCVehicleKey";
 
+    private const float CrashMinSpeedFraction = 0.15f;
+    private const float CrashThrowSpeed = 10f;
+    private static readonly SoundSpecifier XenoFrameBreachSound = new SoundCollectionSpecifier("XenoPry");
+
     [Dependency] private readonly AreaSystem _area = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly RMCCameraShakeSystem _cameraShake = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly SharedJobSystem _job = default!;
@@ -57,6 +69,9 @@ public sealed class VehicleSystem : EntitySystem
     [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
     [Dependency] private readonly SharedRMCTeleporterSystem _rmcTeleporter = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly ThrowingSystem _throwing = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly VehicleLockSystem _vehicleLock = default!;
@@ -141,6 +156,9 @@ public sealed class VehicleSystem : EntitySystem
             interior.EntryLocks.Remove(entryIndex);
             return;
         }
+
+        if (CanBypassLockWithDestroyedFrame(ent.Owner, args.User))
+            _audio.PlayPvs(XenoFrameBreachSound, ent.Owner);
 
         args.Handled = true;
     }
@@ -1046,6 +1064,67 @@ public sealed class VehicleSystem : EntitySystem
             return false;
 
         return frameIntegrity.BypassEntryOnZero && frameIntegrity.Integrity <= 0f;
+    }
+
+    public void DoInteriorCrashEffect(EntityUid vehicle, float speed, float maxSpeed)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (maxSpeed <= 0f)
+            return;
+
+        var ratio = MathF.Abs(speed) / maxSpeed;
+        if (ratio < CrashMinSpeedFraction)
+            return;
+
+        PlayCrashSound(vehicle);
+
+        if (!TryComp(vehicle, out VehicleInteriorComponent? interior))
+            return;
+
+        var shakeStrength = Math.Clamp((int) MathF.Ceiling(ratio * 3f), 1, 3);
+        var flingDistance = shakeStrength * 2;
+        if (flingDistance <= 0)
+            return;
+
+        var offset = new Vector2(speed >= 0f ? flingDistance : -flingDistance, 0f);
+
+        var occupants = new List<EntityUid>(interior.Passengers.Count + interior.Xenos.Count);
+        occupants.AddRange(interior.Passengers);
+        occupants.AddRange(interior.Xenos);
+
+        foreach (var occupant in occupants)
+        {
+            if (TerminatingOrDeleted(occupant))
+                continue;
+
+            _cameraShake.ShakeCamera(occupant, 2, shakeStrength);
+
+            var buckled = TryComp(occupant, out BuckleComponent? buckle) && buckle.BuckledTo != null;
+            if (buckled)
+                continue;
+
+            _stun.TryParalyze(occupant, TimeSpan.FromSeconds(1), true);
+            _stun.TryKnockdown(occupant, TimeSpan.FromSeconds(2), true);
+
+            var target = Transform(occupant).Coordinates.Offset(offset);
+            _throwing.TryThrow(occupant, target, CrashThrowSpeed, user: null, pushbackRatio: 0f, compensateFriction: false);
+        }
+    }
+
+    private void PlayCrashSound(EntityUid vehicle)
+    {
+        if (!TryComp(vehicle, out VehicleSoundComponent? sound) || sound.CrashSound == null)
+            return;
+
+        var now = _timing.CurTime;
+        if (sound.NextCrashSound > now)
+            return;
+
+        _audio.PlayPvs(sound.CrashSound, vehicle);
+        sound.NextCrashSound = now + TimeSpan.FromSeconds(sound.CrashSoundCooldown);
+        Dirty(vehicle, sound);
     }
 
     public bool TryGetVehicleFromInterior(EntityUid interiorEntity, out EntityUid? vehicle)

@@ -4,6 +4,7 @@
   name: portable composite barricade
   description: A deployed MB-6 folding barricade. It is light enough to be packed back down, but strong enough to hold a defensive line.
   components:
+  - type: VehicleSmashable
   - type: Transform
     anchored: true
   - type: MeleeSound

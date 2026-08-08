@@ -30,4 +30,6 @@ public sealed partial class XenoCorrosiveAcidEvent : EntityTargetActionEvent
     [DataField]
     public float ApplyTimeMultiplier = 1;
 
+    [DataField]
+    public float? VehicleDamage;
 }
