@@ -1,0 +1,33 @@
+# LV-624
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingLV624Unaligned
+  suffix: LV-624, Unaligned
+  components:
+  - type: Paper
+    content: rmc-co-briefing-lv624-unaligned
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingLV624Hawks
+  suffix: LV-624, Hawks
+  components:
+  - type: Paper
+    content: rmc-co-briefing-lv624-hawks
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingLV624Doves
+  suffix: LV-624, Doves
+  components:
+  - type: Paper
+    content: rmc-co-briefing-lv624-doves
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingLV624Magpies
+  suffix: LV-624, Magpies
+  components:
+  - type: Paper
+    content: rmc-co-briefing-lv624-magpies

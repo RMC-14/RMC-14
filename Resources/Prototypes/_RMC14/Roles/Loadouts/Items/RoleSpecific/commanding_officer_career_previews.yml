@@ -1,0 +1,65 @@
+# Commanding Officer career loadout preview entities
+- type: entity
+  parent: MobHumanDummy
+  id: RMCCOCareerInfantryPreview
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Hands
+    hands:
+      hand_right:
+        location: Right
+      hand_left:
+        location: Left
+    sortedHands:
+    - hand_right
+    - hand_left
+  - type: Loadout
+    prototypes: [ RMCGearCOCareerInfantry ]
+
+- type: entity
+  parent: MobHumanDummy
+  id: RMCCOCareerEngineeringPreview
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCOCareerEngineering ]
+
+- type: entity
+  parent: MobHumanDummy
+  id: RMCCOCareerMedicalPreview
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCOCareerMedical ]
+
+- type: entity
+  parent: MobHumanDummy
+  id: RMCCOCareerIntelPreview
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCOCareerIntel ]
+
+- type: entity
+  parent: MobHumanDummy
+  id: RMCCOCareerLogisticsPreview
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCOCareerLogistics ]
+
+- type: entity
+  parent: MobHumanDummy
+  id: RMCCOCareerAviationPreview
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCOCareerAviation ]
+
+- type: entity
+  parent: MobHumanDummy
+  id: RMCCOCareerTankerPreview
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCOCareerTanker ]
