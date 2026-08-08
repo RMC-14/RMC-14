@@ -1,4 +1,4 @@
-﻿using Content.Shared.Damage;
+using Content.Shared.Damage;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -33,19 +33,10 @@ public sealed partial class XenoAcidBlastComponent : Component
     public bool Empowered;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan AcidDuration = TimeSpan.FromSeconds(20);
-
-    [DataField, AutoNetworkedField]
-    public TimeSpan AcidProlongDuration = TimeSpan.FromSeconds(10);
-
-    [DataField, AutoNetworkedField]
-    public DamageSpecifier AcidDamage = new();
+    public EntProtoId Acid = "RMCWeakLingeringAcid";
 
     [DataField, AutoNetworkedField]
     public HashSet<EntityUid> AlreadyHit = new();
-
-    [DataField, AutoNetworkedField]
-    public int AcidArmorPiercing = 40;
 
     [DataField, AutoNetworkedField]
     public float StructureDamageMultiplier = 1.15f;

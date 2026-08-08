@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Xenonids.Projectile.Spit;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Charge;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Prototypes;
@@ -9,6 +10,7 @@ public sealed class XenoAcidSlashSystem : EntitySystem
 {
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly XenoSpitSystem _spit = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoAcidSlashComponent, MeleeHitEvent>(OnMeleeHit);
@@ -27,8 +29,7 @@ public sealed class XenoAcidSlashSystem : EntitySystem
             if (HasComp<XenoComponent>(hit))
                 continue;
 
-            if (xeno.Comp.Acid is { } add)
-                EntityManager.AddComponents(hit, add);
+            _spit.ApplyOrExtendAcid(hit, xeno.Comp.Acid);
 
             break;
         }

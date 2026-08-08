@@ -20,6 +20,3 @@
     baseDamage:
       types:
         Heat: 45
-    acidDamage:
-      types:
-        Heat: 1.25
