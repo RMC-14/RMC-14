@@ -151,7 +151,22 @@ public abstract class SharedInjectorSystem : EntitySystem
 
     public void SetMode(Entity<InjectorComponent> injector, InjectorToggleMode mode)
     {
+        if (injector.Comp.ToggleState != mode && injector.Comp.DoAfterId != null) // RMC 14
+            DoAfter.Cancel(injector.Comp.DoAfterId);
+
         injector.Comp.ToggleState = mode;
         Dirty(injector);
+    }
+
+    // RMC14
+    /// <summary>
+    /// Ignores the doafter and forces injector into inject mode
+    /// </summary>
+    /// <param name="injector"></param>
+    /// <param name="target"></param>
+    /// <param name="user"></param>
+    public virtual void TryForceInject(Entity<InjectorComponent> injector, EntityUid target, EntityUid user)
+    {
+        SetMode(injector, InjectorToggleMode.Inject);
     }
 }

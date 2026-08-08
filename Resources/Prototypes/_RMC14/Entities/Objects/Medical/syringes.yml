@@ -1,7 +1,8 @@
 - type: entity
   parent: Syringe
-  id: CMSyringe
+  id: CMSyringeNoMelee
   suffix: RMC14
+  abstract: true
   components:
   - type: SolutionContainerVisuals
     maxFillLevels: 3
@@ -31,6 +32,26 @@
   - type: RequiresSkill
     skills:
       RMCSkillMedical: 2
+  - type: Injector
+    delay: 2
+    delayPerVolume: 0
+  - type: RMCSyringe
+    injectDamage:
+      types:
+        Piercing: 3
+
+- type: entity
+  parent: CMSyringeNoMelee
+  id: CMSyringe
+  suffix: RMC14
+  components:
+  - type: MeleeWeapon
+    angle: 0
+    wideAnimationRotation: 270
+    damage:
+      types:
+        Blunt: 0
+    animation: RMCWeaponArcSyringe
 
 - type: entity
   parent: CMSyringe
@@ -41,7 +62,7 @@
     toggleState: Inject
 
 - type: entity
-  parent: CMSyringe
+  parent: CMSyringeNoMelee
   id: RMCSyringeLethal
   name: lethal injection syringe
   description: A syringe used for lethal injections.
@@ -52,12 +73,17 @@
     solutions:
       injector:
         maxVol: 50
-  - type: Injector #TODO RMC14 can't draw blood
+  - type: Injector
     minTransferAmount: 50
     maxTransferAmount: 50
     transferAmount: 50
     delay: 30
     delayPerVolume: 0
+  - type: RMCSyringe
+    allowInstantSelfInject: false
+    allowInstantDraw: false
+    allowBloodDraw: false
+    skillBasedDelay: false
 
 - type: entity
   parent: RMCSyringeLethal
@@ -75,3 +101,28 @@
         reagents:
         - ReagentId: RMCChloralhydrate
           Quantity: 50
+
+- type: entity
+  parent: BaseItem
+  id: RMCSyringeBroken
+  name: syringe
+  description: A syringe. It's broken.
+  suffix: RMC14, Broken
+  components:
+  - type: Item
+    size: Tiny
+    sprite: _RMC14/Objects/Medical/syringe.rsi
+    storedRotation: 90
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/syringe.rsi
+    state: broken
+  - type: PhysicalComposition
+    materialComposition:
+      CMGlass: 150
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
+  - type: Tag
+    tags:
+    - Trash
