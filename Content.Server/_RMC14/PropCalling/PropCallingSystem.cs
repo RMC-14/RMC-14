@@ -1,15 +1,20 @@
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.PropCalling;
 using Content.Shared._RMC14.PropCalling.Events;
 using Content.Shared.Actions;
 using Content.Shared.Toggleable;
+using JetBrains.FormatRipper.Elf;
+using Robust.Shared.Configuration;
 
 namespace Content.Server._RMC14.PropCalling;
 public sealed class PropCallingSystem : SharedPropCallingSystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly IConfigurationManager _configuration = default!;
 
     private readonly HashSet<Entity<PropCallingComponent>> _callersSignedUp = new();
+    private bool _propCallingEnabled;
 
     public override void Initialize()
     {
@@ -24,16 +29,47 @@ public sealed class PropCallingSystem : SharedPropCallingSystem
 
         SubscribeLocalEvent<PropCallingComponent, ComponentShutdown>(OnPropCallingShutdown);
         SubscribeLocalEvent<PropCallerComponent, ComponentShutdown>(OnPropCallerShutdown);
+
+        Subs.CVar(_configuration, RMCCVars.RMCGhostPropCalling, OnGhostPropChange, true);
+    }
+
+    private void OnGhostPropChange(bool value, in CVarChangeInfo info)
+    {
+        _propCallingEnabled = value;
+
+        var callingQuery = EntityQueryEnumerator<PropCallingComponent>();
+        while (callingQuery.MoveNext(out var uid, out var propCalling))
+        {
+            if (_propCallingEnabled)
+            {
+                _actions.AddAction(uid, ref propCalling.TogglePropCallingEntity, propCalling.TogglePropCalling, uid);
+                if (!_callersSignedUp.TryGetValue((uid, propCalling), out _))
+                    _actions.SetToggled(propCalling.TogglePropCallingEntity, true);
+            }
+            else
+                _actions.RemoveAction(uid, propCalling.TogglePropCallingEntity);
+        }
+
+        var callerQuery = EntityQueryEnumerator<PropCallerComponent>();
+        while (callerQuery.MoveNext(out var uid, out var propCaller))
+        {
+            if (_propCallingEnabled)
+                _actions.AddAction(uid, ref propCaller.CallPropsEntity, propCaller.CallProps, uid);
+            else
+                _actions.RemoveAction(uid, propCaller.CallPropsEntity);
+        }
     }
 
     private void OnPropCallingComponentInit(EntityUid uid, PropCallingComponent comp, ComponentInit args)
     {
-        _actions.AddAction(uid, ref comp.TogglePropCallingEntity, comp.TogglePropCalling, uid);
+        if (_propCallingEnabled)
+            _actions.AddAction(uid, ref comp.TogglePropCallingEntity, comp.TogglePropCalling, uid);
     }
 
     private void OnPropCallerComponentInit(EntityUid uid, PropCallerComponent comp, ComponentInit args)
     {
-        _actions.AddAction(uid, ref comp.CallPropsEntity, comp.CallProps, uid);
+        if (_propCallingEnabled)
+            _actions.AddAction(uid, ref comp.CallPropsEntity, comp.CallProps, uid);
     }
 
     private void OnPropCallingShutdown(EntityUid uid, PropCallingComponent comp, ComponentShutdown args)
