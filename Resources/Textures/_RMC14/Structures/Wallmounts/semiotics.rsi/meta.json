@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/53b8f7f634ef16422e463bd75eeaa16dccab25ab/icons/obj/structures/props/semiotic_standard.dmi",
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Sprites by @inspector_jeleshka for RMC14",
   "size": {
     "x": 32,
     "y": 32
@@ -48,6 +48,9 @@
     },
     {
       "name": "bulkheaddoor"
+    },
+    {
+      "name": "chemhaz"
     },
     {
       "name": "chemlab"
@@ -155,6 +158,9 @@
       "name": "medical"
     },
     {
+      "name": "memorial"
+    },
+    {
       "name": "nonpresszerog"
     },
     {
@@ -168,6 +174,9 @@
     },
     {
       "name": "opensup"
+    },
+    {
+      "name": "orbitalcannon"
     },
     {
       "name": "outpatient"
