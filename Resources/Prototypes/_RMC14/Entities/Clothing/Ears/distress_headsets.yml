@@ -28,6 +28,48 @@
   id: RMCHeadsetDistressCLF
   name: CLF headset
   description: A special headset used by small groups of trained operatives. Or terrorists.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeyCLF
+
+- type: entity
+  parent: RMCHeadsetDistressCLF
+  id: RMCHeadsetDistressCLFPVE
+  name: cell headset
+  description: A commercial ship crew headset. Its been modified to allow for use with colony long range subspace communication relays.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/headsets.rsi
+    state: eng_headset
+  - type: GrantTacMapAlert
+  - type: GrantSquadLeaderTracker
+    defaultMode: PVECLFCapt
+    trackerModes:
+    - PVECLFCapt
+    - PVECLFDeckOff
+
+- type: entity
+  parent: RMCHeadsetDistressCLFPVE
+  id: RMCHeadsetDistressCLFPVELead
+  name: cell leader headset
+  description: A commercial deck officer headset. Its been modified to allow for use with colony long range subspace communication relays.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/headsets.rsi
+    state: ce_headset
+  - type: RMCHeadset
+    radioTextIncrease: 2
+
+- type: entity
+  parent: RMCHeadsetDistressCLFPVELead
+  id: RMCHeadsetDistressCLFPVECapt
+  name: cell captain headset
+  description: A commercial ship captain headset. Its been modified to allow for use with colony long range subspace communication relays.
+  components:
+  - type: RMCHeadset
+    radioTextIncrease: 3
 
 # For Bureau Marshals
 - type: entity

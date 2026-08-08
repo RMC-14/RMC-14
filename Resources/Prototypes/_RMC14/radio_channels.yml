@@ -202,6 +202,19 @@
   tower: true
 
 - type: radioChannel
+  id: CLF
+  name: chat-radio-CLF
+  keycode: "!" #g in CM13
+  frequency: 1271
+  color: "#3aeb34"
+  longRange: true
+  tower: true
+# CLF_CMD_FREQ 1272 cant add the rest cause ! is pushing it
+# CLF_ENGI_FREQ 1273
+# CLF_MED_FREQ 1274
+# CLF_CCT_FREQ 1275
+
+- type: radioChannel
   id: Hivemind
   name: chat-radio-hivemind
   keycode: "h"

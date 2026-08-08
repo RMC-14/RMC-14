@@ -565,7 +565,7 @@
   - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
     state: trackon-southwest_tl
   description: Tracks the Team Leader
-  
+
 - type: alert
   parent: SquadTracker
   id: SquadTrackerParaTeamLeader
@@ -789,6 +789,62 @@
     state: trackon-southwest_lt
   name: Royal Squad Tracker
   description: Tracks the Lieutenant
+
+- type: alert
+  parent: SquadTracker
+  id: SquadTrackerCLFPVECapt
+  category: SquadTracker
+  icons:
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackoff
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-direct_co
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-south_co
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-southeast_co
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-east_co
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-northeast_co
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-north_co
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-northwest_co
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-west_co
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-southwest_co
+  name: Cell Tracker
+  description: Tracks the Cell Captain
+
+- type: alert
+  parent: SquadTracker
+  id: SquadTrackerPVECLFCDO
+  category: SquadTracker
+  icons:
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackoff
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-direct_isl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-south_isl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-southeast_isl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-east_isl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-northeast_isl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-north_isl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-northwest_isl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-west_isl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-southwest_isl
+  name: Cell Tracker
+  description: Tracks a Cell Deck Officer
 
 - type: alert
   id: MarineTacMapAlert

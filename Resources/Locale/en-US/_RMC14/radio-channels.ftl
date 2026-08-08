@@ -36,3 +36,5 @@ chat-radio-tse = TSE
 chat-radio-hivemind = Hivemind
 
 chat-radio-marine-sun-riders = Sun Riders
+
+chat-radio-CLF = CLF

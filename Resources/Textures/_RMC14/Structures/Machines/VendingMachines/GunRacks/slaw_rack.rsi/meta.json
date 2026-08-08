@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Empty sprite taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/structures/gun_racks.dmi modified by Drazamuffin, filled state by Drazamuffin modified from https://github.com/cmss13-devs/cmss13/blob/15d853a340792692e623bcd30f7d8cc058ad6343/icons/mob/humans/onmob/inhands/weapons/guns/rocket_launchers_righthand.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "empty"
+    },
+    {
+      "name": "fill_1"
+    },
+    {
+      "name": "fill_2"
+    }
+  ]
+}

@@ -9,11 +9,14 @@
   startingGear: RMCJobCLFCommanderPVE
   icon: RMCJobIconCLFCellCommander
   joinNotifyCrew: false
+  supervisors: cm-job-supervisors-nobody
+  marineAuthorityLevel: 2
   accessGroups:
   - Colony
-  - SO
+  - ShipMasterAccess #cant be assed to check what the ipad is under
   - Rifleman
-  spawnMenuRoleName: CLF Commander (PVE)
+  spawnMenuRoleName: CLF Cell Captain (PVE)
+  roleWeight: 1
   special:
   - !type:AddComponentSpecial
     components:
@@ -22,6 +25,12 @@
       - CLF
     - type: Skills
       preset: RMCSkillPresetPVEPlatoonCommander
+    - type: SquadLeader
+      icon:
+        sprite: _RMC14/Interface/cm_job_icons.rsi
+        state: clf_cellcom
+    - type: AssignSquad
+      squad: SquadCLF
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-clf-pve-commander
@@ -51,9 +60,15 @@
   id: RMCJobCLFCommanderPVE
   equipment:
     id: RMCIDCardCLFCommanderPVE
-    jumpsuit: RMCJumpsuitCLFSoldier
-    shoes: RMCShoesJackbootsFilled
-    ears: RMCHeadsetDistressCLF
+    head: RMCHeadCapCellCap
+    eyes: RMCGlassesHUDSecurity
+    jumpsuit: RMCJumpsuitCLFPVELead
+    back: RMCSatchelNorm
+    gloves: RMCHandsVeteranSPP
+    shoes: RMCShoesCombat
+    ears: RMCHeadsetDistressCLFPVECapt
+    outerClothing: RMCArmorCLFPVECaptain
 
 - type: playTimeTracker
   id: CMJobCLFCommanderPVE
+  isHumanoid: true

@@ -7,3 +7,14 @@
   id: RMCRankCLFRebelCommander
   name: Rebel Commander
   prefix: REBC.
+
+# PVE
+- type: rank
+  id: RMCRankPVECLFLeader
+  name: Cell Deck Officer
+  prefix: REB CDO.
+
+- type: rank
+  id: RMCRanPVECLFCaptain
+  name: Cell Captain
+  prefix: REB CPT.

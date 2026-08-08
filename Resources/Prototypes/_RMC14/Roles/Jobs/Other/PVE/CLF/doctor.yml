@@ -9,6 +9,7 @@
   startingGear: RMCJobCLFDoctorPVE
   icon: RMCJobIconCLFMedic
   joinNotifyCrew: false
+  supervisors: cm-job-supervisors-clf-capt-deckoff
   accessGroups:
   - Colony
   - HospitalCorpsman
@@ -22,6 +23,8 @@
     - type: Skills
       preset: RMCSkillPresetPVECLFDoctor
     - type: SquadArmorWearer
+    - type: AssignSquad
+      squad: SquadCLF
     - type: JobPrefix
       prefix: rmc-job-prefix-clf-pve-doctor
     - type: DemoSpecWhitelist
@@ -47,10 +50,9 @@
   id: RMCJobCLFDoctorPVE
   equipment:
     id: RMCIDCardCLFDoctorPVE
-    jumpsuit: RMCJumpsuitCLFSoldier
-    shoes: RMCShoesJackbootsFilled
-    outerClothing: RMCLabcoat
-    ears: RMCHeadsetDistressCLF
+    jumpsuit: RMCJumpsuitCLFPVEDoctor
+    shoes: RMCShoesCombat
+    ears: RMCHeadsetDistressCLFPVE
 
 - type: playTimeTracker
   id: CMJobCLFDoctorPVE
