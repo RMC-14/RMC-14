@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMJobBase
   id: RMCCLFCellLeader
   name: rmc-clf-cell-leader
@@ -10,6 +10,7 @@
   icon: RMCJobIconCLFCellLeader
   joinNotifyCrew: false
   spawnMenuRoleName: CLF Cell Leader
+  access: [ CMAccessERT ]
   special:
   - !type:AddComponentSpecial
     components:

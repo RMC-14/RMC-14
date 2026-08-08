@@ -11,6 +11,7 @@
   joinNotifyCrew: false
   marineAuthorityLevel: 1
   supervisors: cm-job-supervisors-sl
+  access: [ CMAccessERT ]
   accessGroups:
   - ShipMasterAccess
   overwatchSortPriority: -2

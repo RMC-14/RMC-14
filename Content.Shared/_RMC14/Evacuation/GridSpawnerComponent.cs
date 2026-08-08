@@ -13,4 +13,7 @@ public sealed partial class GridSpawnerComponent : Component
 
     [DataField, AutoNetworkedField]
     public Vector2 Offset;
+
+    [DataField, AutoNetworkedField]
+    public bool SpawnOnMapInit = true;
 }

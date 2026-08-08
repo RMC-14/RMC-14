@@ -11,6 +11,7 @@
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-royal-lieutenant
   spawnMenuRoleName: RCM Team Leader
+  access: [ CMAccessERT ]
   special:
   - !type:AddComponentSpecial
     components:

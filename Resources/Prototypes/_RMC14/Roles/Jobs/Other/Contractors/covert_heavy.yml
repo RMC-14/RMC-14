@@ -1,0 +1,85 @@
+- type: job
+  parent: RMCContractorHeavy
+  id: RMCContractorCovertHeavy
+  access: [ CMAccessERT ]
+  name: rmc-job-name-contractor-covert-heavy
+  playTimeTracker: RMCJobContractorCovertHeavy
+  startingGear: RMCGearContractorCovertHeavy
+  spawnMenuRoleName: VAI Covert Contractor Machinegunner
+
+- type: entity
+  parent: RMCRandomHumanoidContractorHeavy
+  id: RMCRandomHumanoidContractorCovertHeavy
+  name: covert contractor ghost role heavy
+  suffix: Spawner, Player, Friendly, Covert
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorCovertHeavy
+
+- type: entity
+  parent: RMCRandomHumanoidContractorCovertHeavy
+  id: RMCRandomHumanoidContractorCovertHeavyMAR40LMG
+  suffix: Spawner, Player, Friendly, Covert, MAR40 LMG
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorCovertHeavy
+
+- type: entity
+  parent: RMCRandomHumanoidContractorCovertHeavy
+  id: RMCRandomHumanoidContractorCovertHeavyM60
+  suffix: Spawner, Player, Friendly, Covert, M60
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorCovertHeavyM60
+
+- type: randomHumanoidSettings
+  parent: RMCContractorHeavy
+  id: RMCContractorCovertHeavy
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-covert-heavy
+    job: RMCContractorCovertHeavy
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSmartGunOperator
+      time: 18000 # 5 Hours
+
+- type: randomHumanoidSettings
+  parent: RMCContractorCovertHeavy
+  id: RMCContractorCovertHeavyM60
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-covert-heavy
+    job: RMCContractorCovertHeavyM60
+
+- type: job
+  parent: RMCContractorCovertHeavy
+  id: RMCContractorCovertHeavyM60
+  playTimeTracker: RMCJobContractorCovertHeavy
+  startingGear: RMCGearContractorCovertHeavyM60
+  spawnMenuRoleName: VAI Covert Contractor Machinegunner (M60)
+
+- type: startingGear
+  parent: RMCGearContractorHeavy
+  id: RMCGearContractorCovertHeavy
+  equipment:
+    jumpsuit: RMCJumpsuitVeteranPMCCommando
+    outerClothing: CMArmorM4PMCCommando
+    gloves: RMCHandsVeteranPMCCommando
+    head: RMCArmorHelmetPMCCommando
+    mask: RMCMaskCoifPMC
+    back: RMCSatchelPMCCommando
+
+- type: startingGear
+  parent: RMCGearContractorHeavyM60
+  id: RMCGearContractorCovertHeavyM60
+  equipment:
+    jumpsuit: RMCJumpsuitVeteranPMCCommando
+    outerClothing: CMArmorM4PMCCommando
+    gloves: RMCHandsVeteranPMCCommando
+    head: RMCArmorHelmetPMCCommando
+    mask: RMCMaskCoifPMC
+    back: RMCSatchelPMCCommando
+
+- type: playTimeTracker
+  id: RMCJobContractorCovertHeavy

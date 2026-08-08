@@ -1,0 +1,62 @@
+- type: job
+  parent: RMCPMCStandardM63B2
+  id: RMCWeYaCommando
+  access: [ CMAccessERT ]
+  name: rmc-job-name-weya-commando
+  playTimeTracker: RMCJobWeYaCommando
+  startingGear: RMCGearWeYaCommando
+  spawnMenuRoleName: We-Ya Commando
+
+- type: entity
+  parent: RMCRandomHumanoidPMCStandardM63B2
+  id: RMCRandomHumanoidWeYaCommando
+  name: we-ya commando ghost role standard
+  suffix: Spawner, Player, Low Threat
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCWeYaCommando
+
+- type: randomHumanoidSettings
+  parent: RMCPMCStandardM63B2
+  id: RMCWeYaCommando
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-weya-commando
+    job: RMCWeYaCommando
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
+
+- type: startingGear
+  id: RMCGearWeYaCommando
+  equipment:
+    id: CMIDCardCommando
+    ears: RMCHeadsetDistressPMC
+    jumpsuit: RMCJumpsuitVeteranPMCCommando
+    outerClothing: CMArmorM4PMCCommando
+    gloves: RMCHandsVeteranPMCCommando
+    head: RMCArmorHelmetPMCCommando
+    shoes: RMCBootsPMCCommandoFilled
+    mask: RMCMaskCoifPMC
+    eyes: RMCGlassesHUDSecurity
+    back: RMCSatchelPMCCommandoFilled
+    belt: RMCBeltPMCFilledCommando
+    pocket1: RMCPouchMedicalSocFill
+    pocket2: RMCPouchMagazineLargePMC
+    suitstorage: RMCWeaponRifleM54CWhiteCommando
+  storage:
+    back:
+    - RMCMotionDetector
+    - RMCExplosiveBreachingCharge
+    - RMCGrenadeBlastM12
+    - RMCGrenadeBlastM12
+    - RMCHandheldDistressBeaconWeYa
+    pocket2:
+    - CMMagazineRifleM54C
+    - CMMagazineRifleM54C
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+
+- type: playTimeTracker
+  id: RMCJobWeYaCommando

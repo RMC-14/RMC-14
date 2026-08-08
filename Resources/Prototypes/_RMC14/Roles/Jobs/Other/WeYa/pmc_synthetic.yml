@@ -11,7 +11,7 @@
   joinNotifyCrew: false
   accessGroups:
   - RMCWeYa
-  spawnMenuRoleName: WEYA PMC Synthetic
+  spawnMenuRoleName: We-Ya PMC Synthetic
   special:
   - !type:AddComponentSpecial
     components:
