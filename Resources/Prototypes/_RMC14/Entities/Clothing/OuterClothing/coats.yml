@@ -691,9 +691,9 @@
 
 - type: entity
   parent: CMCoatOfficer
-  id: RMCProvostCommandJacket
-  name: Provost Command Jacket
-  description: A crisp jacket with the Provost sigil.
+  id: RMCProvostJacketBlue # Playtime reward for PvIs
+  name: Provost Jacket
+  description: A crisp jacket with the Provost sigil. The blue mark symbolizes extensive service in their division.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Provost/provostci_jacket.rsi
@@ -711,8 +711,8 @@
     - id: RMCHandcuffs
 
 - type: entity
-  parent: RMCProvostCommandJacket
-  id: RMCProvostCommandJacketFilled
+  parent: RMCProvostJacketBlue
+  id: RMCProvostJacketBlueFilled
   suffix: Filled
   components:
   - type: StorageFill
