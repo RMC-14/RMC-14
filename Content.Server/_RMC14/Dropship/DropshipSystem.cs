@@ -46,6 +46,7 @@ namespace Content.Server._RMC14.Dropship;
 public sealed class DropshipSystem : SharedDropshipSystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private readonly RMCAlertLevelSystem _alertLevel = default!;
     [Dependency] private readonly AppearanceSystem _appearance = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
@@ -65,7 +66,6 @@ public sealed class DropshipSystem : SharedDropshipSystem
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
     [Dependency] private readonly RMCPvsSystem _rmcPvs = default!;
-    [Dependency] private readonly RMCAlertLevelSystem _alertLevelSystem = default!;
     [Dependency] private readonly AreaSystem _area = default!;
 
     private EntityQuery<DockingComponent> _dockingQuery;
@@ -148,7 +148,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
             if (xenoCount > 0)
             {
-                _alertLevelSystem.Set(RMCAlertLevels.Red, _dropshipId, false, false);
+                _alertLevel.Set(RMCAlertLevels.Red, _dropshipId, false, false);
                 _marineAnnounce.AnnounceToMarines(Loc.GetString("rmc-announcement-unidentified-lifesigns",
                     ("name", dropshipName),
                     ("count", xenoCount)),
@@ -509,11 +509,12 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
                 var marineText = Loc.GetString("rmc-announcement-dropship-hijack");
                 _marineAnnounce.AnnounceARESStaging(dropshipId.Value, marineText, dropship.MarineHijackSound, new LocId("rmc-announcement-dropship-message"));
+                _marineAnnounce.AnnounceAlertLevel(_alertLevel.EnsureAlertAnnouncementPreset(RMCAlertLevels.Red), marineText);
 
                 var generalQuartersText = Loc.GetString("rmc-announcement-general-quarters");
                 Timer.Spawn(TimeSpan.FromSeconds(10), () =>
                 {
-                    _alertLevelSystem.Set(RMCAlertLevels.Red, dropshipId.Value, false, false);
+                    _alertLevel.Set(RMCAlertLevels.Red, dropshipId.Value, false, false);
                     _marineAnnounce.AnnounceARESStaging(dropshipId.Value, generalQuartersText, dropship.GeneralQuartersSound, null);
                 });
             }
@@ -824,7 +825,9 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 dropship.AnnouncedCrash = true;
                 Dirty(uid, dropship);
 
-                _marineAnnounce.AnnounceToMarines(Loc.GetString("rmc-announcement-emergency-dropship-crash"), dropship.CrashWarningSound);
+                var crashAnnouncement = Loc.GetString("rmc-announcement-emergency-dropship-crash");
+                _marineAnnounce.AnnounceToMarines(crashAnnouncement, dropship.CrashWarningSound);
+                _marineAnnounce.AnnounceAlertLevel(_alertLevel.EnsureAlertAnnouncementPreset(RMCAlertLevels.Delta), crashAnnouncement);
                 continue;
             }
 

@@ -39,12 +39,11 @@ rmc-announcement-dropship-message = [color=#CECECE][font size=16][bold]Dropship 
 
     {$message}[/bold][/font][/color]
 
-rmc-announcement-emergency-dropship-crash = [font size=14][bold][color=#CECECE]EMERGENCY[/color][/bold][/font][font size=16][color=red]
-  DROPSHIP ON COLLISION COURSE. CRASH IMMINENT.[/color][/font]
+rmc-announcement-emergency-dropship-crash = [font size=14][bold][color=#CECECE]EMERGENCY[/color][/bold][/font][color=red][font size=16] DROPSHIP ON COLLISION COURSE. CRASH IMMINENT.[/font][/color]
 
-rmc-announcement-delta = [color=#CECECE][font size=16][bold]EMERGENCY SCUTTLE AUTHORIZATION[/bold][/font][/color][color=red][font size=16][bold]
-
-     DANGER, ARES has authorized emergency scuttle by Engineering reactor overload. Qualified engineers may configure active fusion reactors with a multitool.[/bold][/font][/color]
+rmc-announcement-delta = [color=#CECECE][font size=16][bold]EMERGENCY SCUTTLE AUTHORIZATION[/bold][/font][/color]
+     DANGER, ARES has authorized emergency scuttle by Engineering reactor overload.
+     Qualified engineers may configure active fusion reactors with a multitool.
 
 rmc-announcement-general-quarters = ATTENTION! GENERAL QUARTERS. ALL HANDS, MAN YOUR BATTLESTATIONS.
 
@@ -61,3 +60,10 @@ rmc-announcement-unidentified-lifesigns = [color=#CECECE][font size=16][bold]Uni
     Unidentified lifesigns ({$count}) detected onboard the dropship {$name}. Recommendation: lockdown of exterior access ports, including ducting and ventilation.[/bold][/font][/color]
 
 rmc-announcement-shipside-header = Please write a message to announce to the crew
+rmc-announcement-echo-confirm-title = Confirm Activation
+rmc-announcement-echo-confirm-message = Confirm activation of Echo Squad for {$message}
+rmc-announcement-echo-reason-title = What is the purpose of Echo Squad?
+rmc-announcement-overwatch-untrained = You are not trained in overwatch!
+rmc-announcement-evacuation-confirm = Confirm?
+rmc-announcement-evacuation-cancel = Cancel Evacuation
+rmc-announcement-evacuation-initiate = Initiate Evacuation

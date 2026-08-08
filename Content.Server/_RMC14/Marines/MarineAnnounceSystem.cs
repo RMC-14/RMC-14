@@ -1,21 +1,23 @@
-﻿using Content.Server._RMC14.Rules.DistressSignal;
+using Content.Server._RMC14.Announce;
+using Content.Server._RMC14.Rules.DistressSignal;
 using Content.Server.Administration.Logs;
-using Content.Server.Chat.Managers;
 using Content.Server.Radio.EntitySystems;
 using Content.Shared._RMC14.ARES;
 using Content.Shared._RMC14.ARES.Logs;
+using Content.Shared._RMC14.Announce;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Intel;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Survivor;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Ghost;
 using Content.Shared.Radio;
-using Robust.Server.Audio;
 using Robust.Shared.Audio;
+using Robust.Shared.Maths;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
@@ -24,16 +26,15 @@ namespace Content.Server._RMC14.Marines;
 public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
 {
     [Dependency] private readonly IAdminLogManager _adminLogs = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
+    [Dependency] private readonly AnnouncementRouterSystem _announcementRouter = default!;
     [Dependency] private readonly ARESCoreSystem _core = default!;
     [Dependency] private readonly CMDistressSignalRuleSystem _distressSignal = default!;
     [Dependency] private readonly SharedDropshipSystem _dropship = default!;
     [Dependency] private readonly RadioSystem _radio = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabAnnouncementLogs";
+    private static readonly ProtoId<AnnouncementPresetPrototype> PresetMarineOverwatch = "MarineOverwatch";
 
     public override void Initialize()
     {
@@ -82,30 +83,29 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         }
 
         _dropship.TryDesignatePrimaryLZ(user, lz.Value);
-        _core.CreateARESLog(computer, LogCat, (string)$"{Name(args.Actor)} designated Primary LZ as: {Name(lz.Value)}");
+        _core.CreateARESLog(computer, LogCat, $"{Name(args.Actor)} designated Primary LZ as: {Name(lz.Value)}");
     }
 
     private void UpdatePlanetMap(Entity<MarineCommunicationsComputerComponent> computer)
     {
-        var planet = _distressSignal.SelectedPlanetMapName ?? string.Empty;
-        var operation = _distressSignal.OperationName ?? string.Empty;
-        var landingZones = new List<LandingZone>();
+        computer.Comp.Planet = _distressSignal.SelectedPlanetMapName ?? string.Empty;
+        computer.Comp.Operation = _distressSignal.OperationName ?? string.Empty;
+        computer.Comp.LandingZones.Clear();
 
         foreach (var (id, metaData) in _dropship.GetPrimaryLZCandidates())
         {
-            landingZones.Add(new LandingZone(GetNetEntity(id), metaData.EntityName));
+            computer.Comp.LandingZones.Add(new LandingZone(GetNetEntity(id), metaData.EntityName));
         }
 
-        landingZones.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal));
-
-        var state = new MarineCommunicationsComputerBuiState(planet, operation, landingZones);
-        _ui.SetUiState(computer.Owner, MarineCommunicationsComputerUI.Key, state);
+        computer.Comp.LandingZones.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal));
+        Dirty(computer);
     }
 
     public override void AnnounceToMarines(
         string message,
         SoundSpecifier? sound = null,
-        Filter? filter = null)
+        Filter? filter = null,
+        bool excludeSurvivors = true)
     {
         filter ??= Filter.Empty()
             .AddWhereAttachedEntity(e =>
@@ -113,11 +113,28 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
                 HasComp<GhostComponent>(e)
             );
 
-        // Filter out non rescued survivors.
+        if (excludeSurvivors)
+            filter.RemoveWhereAttachedEntity(HasComp<RMCSurvivorComponent>);
+
+        // Filter out non-rescued survivors.
         filter.RemoveWhereAttachedEntity(HasComp<IntelRescueSurvivorObjectiveComponent>);
 
-        _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, message, default, false, true, null);
-        _audio.PlayGlobal(sound ?? DefaultAnnouncementSound, filter, true, AudioParams.Default.WithVolume(-2f));
+        _announcementRouter.Announce(new AnnouncementRequest
+        {
+            Message = message,
+            Route = new AnnouncementRoute
+            {
+                Target = AnnouncementTarget.Marines,
+                Channels = AnnouncementChannels.Chat | AnnouncementChannels.Sound,
+            },
+            Chat = new AnnouncementChatOptions
+            {
+                Message = message,
+                WrappedMessage = message,
+                Channel = ChatChannel.Radio,
+            },
+            Sound = CreateSoundOptions(sound ?? DefaultAnnouncementSound),
+        }, filter);
     }
 
     public override void AnnounceHighCommand(
@@ -126,7 +143,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         SoundSpecifier? sound = null)
     {
         var wrappedMessage = FormatHighCommand(author, message);
-        AnnounceToMarines(wrappedMessage);
+        AnnounceToMarines(wrappedMessage, sound);
     }
 
     public override void AnnounceRadio(
@@ -159,9 +176,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         base.AnnounceSquad(message, squad, sound);
 
         var filter = Filter.Empty().AddWhereAttachedEntity(e => _squad.IsInSquad(e, squad));
-
-        _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, message, default, false, true, null);
-        _audio.PlayGlobal(sound ?? DefaultSquadSound, filter, true, AudioParams.Default.WithVolume(-2f));
+        AnnounceToFilter(message, filter, sound ?? DefaultSquadSound);
     }
 
     public override void AnnounceSquad(string message, EntityUid squad, SoundSpecifier? sound = null)
@@ -169,18 +184,151 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         base.AnnounceSquad(message, squad, sound);
 
         var filter = Filter.Empty().AddWhereAttachedEntity(e => _squad.IsInSquad(e, squad));
-
-        _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, message, default, false, true, null);
-        _audio.PlayGlobal(sound ?? DefaultSquadSound, filter, true, AudioParams.Default.WithVolume(-2f));
+        AnnounceToFilter(message, filter, sound ?? DefaultSquadSound);
     }
 
     public override void AnnounceSingle(string message, EntityUid receiver, SoundSpecifier? sound = null)
     {
         base.AnnounceSingle(message, receiver, sound);
 
-        if (TryComp(receiver, out ActorComponent? actor))
-            _chatManager.ChatMessageToOne(ChatChannel.Radio, message, message, default, false, actor.PlayerSession.Channel);
+        if (!TryComp(receiver, out ActorComponent? actor))
+            return;
 
-        _audio.PlayEntity(sound, receiver, receiver, AudioParams.Default.WithVolume(-2f));
+        var filter = Filter.Empty().AddPlayer(actor.PlayerSession);
+        AnnounceToFilter(message, filter, sound);
+    }
+
+    protected override void DispatchSignedAnnouncement(
+        EntityUid sender,
+        string message,
+        string wrappedMessage,
+        string author,
+        string name,
+        SignedAnnouncementOptions options)
+    {
+        var dispatchFilter = options.Filter == null
+            ? Filter.Empty().AddWhereAttachedEntity(e => HasComp<MarineComponent>(e) || HasComp<GhostComponent>(e))
+            : Filter.Empty().AddPlayers(options.Filter.Recipients);
+
+        if (options.ExcludeSurvivors)
+            dispatchFilter.RemoveWhereAttachedEntity(HasComp<RMCSurvivorComponent>);
+
+        dispatchFilter.RemoveWhereAttachedEntity(HasComp<IntelRescueSurvivorObjectiveComponent>);
+
+        var channels = AnnouncementChannels.Chat | AnnouncementChannels.Sound;
+        if (options.SendOverlay)
+            channels |= AnnouncementChannels.Overlay;
+
+        _announcementRouter.Announce(new AnnouncementRequest
+        {
+            Message = message,
+            Preset = AnnouncementRouterSystem.PresetMarineCommand,
+            Route = new AnnouncementRoute
+            {
+                Target = AnnouncementTarget.Marines,
+                Speaker = sender,
+                Source = sender,
+                Channels = channels,
+            },
+            Chat = new AnnouncementChatOptions
+            {
+                Message = wrappedMessage,
+                WrappedMessage = wrappedMessage,
+                Channel = ChatChannel.Radio,
+            },
+            Sound = CreateSoundOptions(options.Sound),
+        }, dispatchFilter);
+    }
+
+    public override void AnnounceOverwatchSquad(
+        EntityUid sender,
+        string message,
+        EntityUid squad,
+        SoundSpecifier? sound = null)
+    {
+        var color = Color.White;
+        ProtoId<AnnouncementPresetPrototype> preset = PresetMarineOverwatch;
+
+        if (TryComp(squad, out SquadTeamComponent? squadComp))
+        {
+            color = squadComp.AccessibleColor ?? squadComp.Color;
+            preset = squadComp.OverwatchAnnouncementPreset;
+        }
+
+        var colorHex = color.ToHex();
+        var chatMessage =
+            $"[color={colorHex}][bold]Overwatch:[/bold] transmits: [font size=16][bold]{message}[/bold][/font][/color]";
+
+        var filter = Filter.Empty().AddWhereAttachedEntity(e => _squad.IsInSquad(e, squad));
+        _announcementRouter.Announce(new AnnouncementRequest
+        {
+            Message = message,
+            Preset = preset,
+            Route = new AnnouncementRoute
+            {
+                Target = AnnouncementTarget.Marines,
+                Channels = AnnouncementChannels.Chat | AnnouncementChannels.Overlay | AnnouncementChannels.Sound,
+            },
+            Chat = new AnnouncementChatOptions
+            {
+                Message = chatMessage,
+                WrappedMessage = chatMessage,
+                Channel = ChatChannel.Radio,
+            },
+            Sound = CreateSoundOptions(sound),
+        }, filter);
+    }
+
+    public override void AnnounceAlertLevel(
+        ProtoId<AnnouncementPresetPrototype> preset,
+        string message,
+        Filter? filter = null)
+    {
+        var request = new AnnouncementRequest
+        {
+            Message = message,
+            Preset = preset,
+            Route = new AnnouncementRoute
+            {
+                Target = AnnouncementTarget.Marines,
+                Channels = AnnouncementChannels.Overlay,
+            },
+        };
+
+        if (filter != null)
+            _announcementRouter.Announce(request, filter);
+        else
+            _announcementRouter.Announce(request);
+    }
+
+    private void AnnounceToFilter(string message, Filter filter, SoundSpecifier? sound)
+    {
+        _announcementRouter.Announce(new AnnouncementRequest
+        {
+            Message = message,
+            Route = new AnnouncementRoute
+            {
+                Target = AnnouncementTarget.Marines,
+                Channels = AnnouncementChannels.Chat | AnnouncementChannels.Sound,
+            },
+            Chat = new AnnouncementChatOptions
+            {
+                Message = message,
+                WrappedMessage = message,
+                Channel = ChatChannel.Radio,
+            },
+            Sound = CreateSoundOptions(sound),
+        }, filter);
+    }
+
+    private static AnnouncementSoundOptions? CreateSoundOptions(SoundSpecifier? sound)
+    {
+        if (sound == null)
+            return null;
+
+        return new AnnouncementSoundOptions
+        {
+            Sound = sound,
+        };
     }
 }
