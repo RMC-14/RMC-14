@@ -4,7 +4,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechVehicleCrewmanWeapon
-  name: ColMarTech Vehicle Crewman Weapon Rack
+  name: ASRS Vehicle Crewman Weapon Rack
   description: An automated weapon rack hooked up to a small storage of standard-issue weapons. Can be accessed only by the Vehicle Crewmen.
   components:
   - type: AccessReader
@@ -91,7 +91,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechVehicleCrewmanEquipment
-  name: ColMarTech Vehicle Crewman Equipment Rack
+  name: ASRS Vehicle Crewman Equipment Rack
   description: An automated rack hooked up to a colossal storage of Vehicle Crewmen standard-issue equipment.
   components:
   - type: AccessReader
