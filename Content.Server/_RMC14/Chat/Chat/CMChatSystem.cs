@@ -1,10 +1,12 @@
 using System.Linq;
 using System.Text.RegularExpressions;
+using Content.Server._RMC14.Language.Systems;
 using Content.Server.Chat.Managers;
 using Content.Server.Radio.Components;
 using Content.Server.Speech.EntitySystems;
 using Content.Server.Speech.Prototypes;
 using Content.Shared._RMC14.Chat;
+using Content.Shared._RMC14.Language.Components;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Mentor.ImaginaryFriend;
 using Content.Shared._RMC14.Xenonids;
@@ -25,6 +27,7 @@ public sealed class CMChatSystem : SharedCMChatSystem
 {
     [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly LanguageSystem _language = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ReplacementAccentSystem _wordreplacement = default!;
@@ -37,52 +40,19 @@ public sealed class CMChatSystem : SharedCMChatSystem
 
     private readonly List<ICommonSession> _toRemove = new();
 
+    private EntityQuery<XenoComponent> _xenoQuery;
+    private EntityQuery<MarineComponent> _marineQuery;
+
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<MarineComponent, ChatMessageAfterGetRecipients>(OnMarineAfterGetRecipients);
-        SubscribeLocalEvent<XenoComponent, ChatMessageAfterGetRecipients>(OnXenoAfterGetRecipients);
+
+        _xenoQuery = GetEntityQuery<XenoComponent>();
+        _marineQuery = GetEntityQuery<MarineComponent>();
+
         SubscribeLocalEvent<ImaginaryFriendComponent, ChatMessageAfterGetRecipients>(OnImaginaryFriendGetRecipients);
-    }
-
-    private void OnMarineAfterGetRecipients(Entity<MarineComponent> ent, ref ChatMessageAfterGetRecipients args)
-    {
-        _toRemove.Clear();
-
-        foreach (var (session, data) in args.Recipients)
-        {
-            if (data.Observer)
-                continue;
-
-            if (HasComp<XenoComponent>(session.AttachedEntity))
-                _toRemove.Add(session);
-        }
-
-        foreach (var session in _toRemove)
-        {
-            args.Recipients.Remove(session);
-        }
-    }
-
-    private void OnXenoAfterGetRecipients(Entity<XenoComponent> ent, ref ChatMessageAfterGetRecipients args)
-    {
-        _toRemove.Clear();
-
-        foreach (var (session, data) in args.Recipients)
-        {
-            if (data.Observer)
-                continue;
-
-            // `data.Observer` only indicates whether the recipient has `GhostHearingComponent`.
-            // Disabling ghost hearing removes this component, so the `GhostComponent` check is needed to keep ghosts included.
-            if (!HasComp<XenoComponent>(session.AttachedEntity) && !HasComp<GhostComponent>(session.AttachedEntity))
-                _toRemove.Add(session);
-        }
-
-        foreach (var session in _toRemove)
-        {
-            args.Recipients.Remove(session);
-        }
+        SubscribeLocalEvent<MarineComponent, ChatMessageOverrideInVoiceRangeEvent>(HideObfuscatedMessagesInChat);
+        SubscribeLocalEvent<XenoComponent, ChatMessageOverrideInVoiceRangeEvent>(HideObfuscatedMessagesInChat);
     }
 
     private void OnImaginaryFriendGetRecipients(Entity<ImaginaryFriendComponent> ent, ref ChatMessageAfterGetRecipients args)
@@ -102,6 +72,26 @@ public sealed class CMChatSystem : SharedCMChatSystem
         {
             args.Recipients.Remove(session);
         }
+    }
+
+    private void HideObfuscatedMessagesInChat<T>(Entity<T> recipient, ref ChatMessageOverrideInVoiceRangeEvent args) where T : IComponent
+    {
+        if (HasComp<GhostComponent>(recipient) ||
+            args.Language is not { } spokenLang ||
+            _language.CanUnderstand(recipient, spokenLang) ||
+            HasComp<LanguageLearningComponent>(recipient))
+        {
+            return;
+        }
+
+        // Marines hearing xenos talk & vice versa will see random nonsense words in speech popups, and there's no need to clog up the chat box with that.
+        // Of course this should be skipped if the source and recipient are both on the same side.
+        if (_xenoQuery.HasComp(recipient) && _xenoQuery.HasComp(args.Source) ||
+            _marineQuery.HasComp(recipient) && _marineQuery.HasComp(args.Source))
+            return;
+
+        // Don't show the message in `recipient`'s chat log.
+        args.EntHideChat = true;
     }
 
     public override string SanitizeMessageReplaceWords(EntityUid source, string msg)

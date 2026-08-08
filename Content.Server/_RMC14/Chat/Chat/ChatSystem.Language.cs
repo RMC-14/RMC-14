@@ -497,6 +497,7 @@ public sealed partial class ChatSystem
                 source,
                 listenerMessage,
                 finalWrappedMessage,
+                language,
                 entHideChat);
 
             if (session.AttachedEntity != null)
