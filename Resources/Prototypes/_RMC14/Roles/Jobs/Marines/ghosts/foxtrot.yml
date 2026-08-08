@@ -3,7 +3,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidFoxtrotCombatTech
   name: foxtrot ghost role combat technician
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
@@ -23,7 +23,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidFoxtrotFireteamLeader
   name: foxtrot ghost role fireteam leader
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
@@ -43,7 +43,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidFoxtrotHospitalCorpsman
   name: foxtrot ghost role hospital corpsman
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
@@ -63,7 +63,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidFoxtrotRifleman
   name: foxtrot ghost role rifleman
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
@@ -83,7 +83,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidFoxtrotSmartGunOperator
   name: foxtrot ghost role smart gun operator
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
@@ -103,7 +103,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidFoxtrotSquadLeader
   name: foxtrot ghost role squad leader
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
@@ -123,7 +123,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidFoxtrotWeaponsSpecialist
   name: foxtrot ghost role weapons specialist
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
