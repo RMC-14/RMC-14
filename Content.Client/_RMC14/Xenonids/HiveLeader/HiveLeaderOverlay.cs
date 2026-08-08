@@ -62,8 +62,8 @@ public sealed class HiveLeaderOverlay : Overlay
 
         handle.UseShader(_shader);
 
-        var leaders = _entity.EntityQueryEnumerator<HiveLeaderComponent, SpriteComponent, TransformComponent>();
-        while (leaders.MoveNext(out _, out var sprite, out var xform))
+        var leaders = _entity.EntityQueryEnumerator<HiveLeaderComponent, XenoComponent, SpriteComponent, TransformComponent>();
+        while (leaders.MoveNext(out _, out var xeno, out var sprite, out var xform))
         {
             if (xform.MapID != args.MapId)
                 continue;
@@ -80,8 +80,8 @@ public sealed class HiveLeaderOverlay : Overlay
             handle.SetTransform(matrix);
 
             var texture = _sprite.GetFrame(icon, _timing.CurTime);
-            var yOffset = (bounds.Height + sprite.Offset.Y) / 2f - (float) texture.Height / EyeManager.PixelsPerMeter * bounds.Height + 0.15f;
-            var xOffset = (bounds.Width + sprite.Offset.X) / 2f - (float) texture.Width / EyeManager.PixelsPerMeter - 0.6f;
+            var yOffset = (bounds.Height + sprite.Offset.Y) / 2f - (float) texture.Height / EyeManager.PixelsPerMeter * bounds.Height - 0.13f * bounds.Height + xeno.HudOffset.Y;
+            var xOffset = (bounds.Width + sprite.Offset.X) / 2f - (float) texture.Width / EyeManager.PixelsPerMeter * bounds.Width - 0.1f * bounds.Width + xeno.HudOffset.X;
 
             var position = new Vector2(xOffset, yOffset);
             handle.DrawTexture(texture, position);
