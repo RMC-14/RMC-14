@@ -1,0 +1,17 @@
+<DefaultWindow xmlns="https://spacestation14.io"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               Title="Set Job Icon"
+               MinSize="400 360"
+               SetSize="400 440">
+    <BoxContainer Orientation="Vertical" SeparationOverride="3" Margin="2">
+        <BoxContainer Orientation="Horizontal" SeparationOverride="4">
+            <LineEdit Name="SearchBar" PlaceHolder="Search..." HorizontalExpand="True" />
+            <Button Name="ClearButton" Text="Clear Icon" StyleClasses="ButtonColorRed" />
+        </BoxContainer>
+        <ScrollContainer HScrollEnabled="False" VScrollEnabled="True" VerticalExpand="True">
+            <GridContainer Name="IconGrid" Columns="8" Margin="0 0 10 0">
+                <!-- Autofills the buttons. -->
+            </GridContainer>
+        </ScrollContainer>
+    </BoxContainer>
+</DefaultWindow>
