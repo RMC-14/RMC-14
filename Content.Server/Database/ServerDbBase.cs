@@ -2305,6 +2305,14 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             await db.DbContext.SaveChangesAsync();
         }
 
+        public async Task<int> GetParasiteInfects(Guid player)
+        {
+            await using var db = await GetDb();
+            var stats = await db.DbContext.RMCPlayerStats
+                .FirstOrDefaultAsync(s => s.PlayerId == player);
+            return stats?.ParasiteInfects ?? 0;
+        }
+
         public async Task<Dictionary<string, List<string>>?> GetActionOrder(Guid player)
         {
             await using var db = await GetDb();

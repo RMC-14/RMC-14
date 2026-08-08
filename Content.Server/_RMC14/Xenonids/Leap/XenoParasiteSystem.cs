@@ -2,6 +2,7 @@ using Content.Server.Database;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Ghost;
 using Content.Server.Mind;
+using Content.Server._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Mind;
 using Content.Shared.Popups;
@@ -14,6 +15,7 @@ namespace Content.Server._RMC14.Xenonids.Leap;
 public sealed class XenoParasiteSystem : SharedXenoParasiteSystem
 {
     [Dependency] private readonly IServerDbManager _db = default!;
+    [Dependency] private readonly XenoInfectionsManager _infections = default!;
     [Dependency] private readonly GhostSystem _ghostSystem = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -47,6 +49,7 @@ public sealed class XenoParasiteSystem : SharedXenoParasiteSystem
         }
 
         _db.IncreaseInfects(session.UserId);
+        _infections.IncreaseInfects(session.UserId);
     }
 
     protected override void ChangeHTN(EntityUid parasite, ParasiteMode mode)
