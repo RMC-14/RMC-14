@@ -20,6 +20,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Collections;
+using Content.Shared._RMC14.Xenonids.Rest;
 
 namespace Content.Shared._RMC14.Vehicle;
 
@@ -161,7 +162,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
             if (candidate.CollisionClass == VehicleCollisionClass.SoftMob &&
                 candidate.MobState != null &&
-                _standing.IsDown(candidate.Entity))
+                (_standing.IsDown(candidate.Entity) || HasComp<XenoRestingComponent>(candidate.Entity)))
             {
                 continue;
             }
@@ -961,7 +962,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (!ShouldPredictVehicleInteractions(vehicle))
             return;
 
-        if (_mobState.IsDead(mob, mobState) || _standing.IsDown(mob))
+        if (_mobState.IsDead(mob, mobState) || _standing.IsDown(mob) || HasComp<XenoRestingComponent>(mob))
             return;
 
         if (TryComp(vehicle, out GridVehicleMoverComponent? vehicleMover) &&
