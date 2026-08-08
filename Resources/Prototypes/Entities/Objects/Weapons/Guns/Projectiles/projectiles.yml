@@ -3,14 +3,14 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: TimedDespawn
-    lifetime: 1.0
+    lifetime: 1.0 # RMC
   - type: Sprite
     drawdepth: BelowMobs
-    offset: 0.33, 0
+    offset: 0.33, 0 # RMC
     layers:
     - shader: unshaded
       map: ["enum.EffectLayers.Unshaded"]
-      sprite: _RMC14/Objects/Weapons/Guns/Projectiles/projectiles.rsi
+      sprite: _RMC14/Objects/Weapons/Guns/Projectiles/projectiles.rsi # RMC (obviously)
       state: muzzle_bullet_high_RMC
   - type: EffectVisuals
   - type: Tag
@@ -733,6 +733,7 @@
   - type: AnomalousParticle
     particleType: Sigma
 
+# Launcher projectiles (grenade / rocket)
 - type: entity
   id: BulletRocket
   name: rocket

@@ -53,6 +53,7 @@
   components:
   - type: CartridgeAmmo
     deleteOnSpawn: true
+    muzzleFlash: MuzzleFlashEffectSMG
 
 - type: Tag
   id: RMCWeaponSMG
