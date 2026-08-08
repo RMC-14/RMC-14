@@ -121,3 +121,5 @@ rmc-lore-examinable-t70-bag-phone = A bulky satchel containing a phone, antenna,
 
 rmc-lore-examinable-bag-phone = A basic radio telephone attached to a satchel. The flap has a small cut-out for the transceiver. This design is fairly old, being one of the first civilian bag-telephones originally patented by Novaris Industries.
                                 After the patent expired, its design would be picked by various other corporations and widely sold. Nowadays, despite its bulkier size and weight, this model sees frequent use among the more thrifty consumer for its relatively low cost and for its reliability despite newer models being available.
+
+rmc-lore-examinable-pk10 = Despite receiving very little upgrades over its service period both within the Weston Corporation and later the Weston-Yamada Corporation, it remains popular with mercenaries and security firms because it was designed with security and law enforcement use in mind.
