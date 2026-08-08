@@ -42,3 +42,4 @@
   - chat-speech-verb-megaphone-2
   priority: 1000
   bold: true
+  fontSize: 16
