@@ -1,4 +1,4 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 using Robust.Shared.Network;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -37,4 +37,7 @@ public sealed partial class XenoParasiteComponent : Component
 
     [DataField]
     public NetUserId? PendingInfectorUserId;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan DropCooldown = TimeSpan.FromSeconds(2.5);
 }
