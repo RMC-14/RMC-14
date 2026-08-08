@@ -61,6 +61,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         SubscribeLocalEvent<MarineControlComputerComponent, MarineControlComputerMedalMessageEvent>(OnComputerMedalMessage);
         SubscribeLocalEvent<MarineControlComputerComponent, MarineControlComputerAlertEvent>(OnComputerAlert);
         SubscribeLocalEvent<MarineControlComputerComponent, MarineControlComputerShipAnnouncementDialogEvent>(OnShipAnnouncementDialog);
+        SubscribeLocalEvent<MarineControlComputerComponent, MapInitEvent>(OnComputerMapInit);
 
         Subs.BuiEvents<MarineControlComputerComponent>(MarineControlComputerUi.Key,
             subs =>
@@ -314,6 +315,12 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         _core.CreateARESLog(ent, LogCat, (string)$"{Name(user)} sent a Warship Announcement: {args.Message}");
     }
 
+    private void OnComputerMapInit(Entity<MarineControlComputerComponent> ent, ref MapInitEvent args)
+    {
+        ent.Comp.EvacuationMap = _transform.GetMap(ent.Owner);
+        Dirty(ent);
+    }
+
     private void OnMedal(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerMedalMsg args)
     {
         // Handle messages from both Key and MedalsPanel UI keys
@@ -510,8 +517,9 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
 
         ent.Comp.LastToggle = time;
 
+        var evacuationMap = ent.Comp.EvacuationMap ?? _transform.GetMap(ent.Owner);
         // TODO RMC14 evacuation start sound
-        _evacuation.ToggleEvacuation(null, ent.Comp.EvacuationCancelledSound, _transform.GetMap(ent.Owner));
+        _evacuation.ToggleEvacuation(null, ent.Comp.EvacuationCancelledSound, evacuationMap);
         RefreshComputers();
     }
 

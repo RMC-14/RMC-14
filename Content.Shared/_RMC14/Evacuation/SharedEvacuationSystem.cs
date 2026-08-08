@@ -577,7 +577,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
         {
             //Only start fueling once the dropship has crashed into the Almayer
             if (!progress.DropShipCrashed)
-                return;
+                continue;
 
             if (!progress.StartAnnounced)
             {
