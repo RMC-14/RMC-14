@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.IdentityManagement;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared.Mind;
@@ -145,12 +145,21 @@ public abstract class SharedXenoNameSystem : EntitySystem
     public int GetMaxXenoPostfixLength(ICommonSession player)
     {
         var time = GetXenoPlaytime(player);
-        if (time > _xenoPostfixTwoTime)
+
+        if (time > _xenoPostfixTime)
             return 2;
-        else if (time > _xenoPostfixTime)
-            return 1;
 
         return 0;
+    }
+
+    public bool AllowPostfixLetterEnding(ICommonSession player)
+    {
+        var time = GetXenoPlaytime(player);
+
+        if (time <= _xenoPostfixTwoTime)
+            return false;
+
+        return true;
     }
 
     private void TransferName(EntityUid oldXeno, EntityUid newXeno)
