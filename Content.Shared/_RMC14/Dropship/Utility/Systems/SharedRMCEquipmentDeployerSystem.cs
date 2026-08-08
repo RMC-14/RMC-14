@@ -16,6 +16,7 @@ using Content.Shared.Popups;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
+using Content.Shared.Power;
 
 namespace Content.Shared._RMC14.Dropship.Utility.Systems;
 
@@ -33,12 +34,30 @@ public abstract partial class SharedRMCEquipmentDeployerSystem : EntitySystem
 
     public override void Initialize()
     {
+        base.Initialize();
+
         SubscribeLocalEvent<RMCAlertLevelChangedEvent>(OnAlertLevelChanged);
 
         SubscribeLocalEvent<RMCEquipmentDeployerComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<RMCEquipmentDeployerComponent, InteractHandEvent>(OnInteract);
         SubscribeLocalEvent<RMCEquipmentDeployerComponent, EntGotInsertedIntoContainerMessage>(OnInserted);
         SubscribeLocalEvent<RMCEquipmentDeployerComponent, EntGotRemovedFromContainerMessage>(OnRemovedFromContainer);
+        
+        SubscribeLocalEvent<RMCEquipmentDeployerComponent, PowerChangedEvent>(OnPowerChanged);
+    }
+
+    private void OnPowerChanged(Entity<RMCEquipmentDeployerComponent> ent, ref PowerChangedEvent args)
+    {
+        if (!ent.Comp.PowerTogglesDeployable)
+            return;
+
+        if (!args.Powered && ent.Comp.IsDeployed)
+        {
+            TryDeploy(ent, false);
+        }
+
+        ent.Comp.IsDeployable = args.Powered;
+        DirtyField(ent.Owner, ent.Comp, nameof(RMCEquipmentDeployerComponent.IsDeployable));
     }
 
     private void OnAlertLevelChanged(ref RMCAlertLevelChangedEvent ev)
@@ -61,11 +80,17 @@ public abstract partial class SharedRMCEquipmentDeployerSystem : EntitySystem
 
         var container = _container.EnsureContainer<ContainerSlot>(ent, ent.Comp.DeploySlotId);
 
-        if (container.ContainedEntities.Count > 0)
-            return;
+        if (container.ContainedEntities.Count <= 0)
+        {
+            ent.Comp.DeployEntity = GetNetEntity(SpawnInContainerOrDrop(ent.Comp.DeployPrototype, ent, ent.Comp.DeploySlotId));
+            DirtyField(ent.Owner, ent.Comp, nameof(RMCEquipmentDeployerComponent.DeployEntity));
+        }
 
-        ent.Comp.DeployEntity = GetNetEntity(SpawnInContainerOrDrop(ent.Comp.DeployPrototype, ent, ent.Comp.DeploySlotId));
-        DirtyField(ent.Owner, ent.Comp, nameof(RMCEquipmentDeployerComponent.DeployEntity));
+        if (ent.Comp.PowerTogglesDeployable)
+        {
+            ent.Comp.IsDeployable = false;
+            DirtyField(ent.Owner, ent.Comp, nameof(RMCEquipmentDeployerComponent.IsDeployable));
+        }
     }
 
     private void OnInteract(Entity<RMCEquipmentDeployerComponent> ent, ref InteractHandEvent args)
@@ -86,6 +111,15 @@ public abstract partial class SharedRMCEquipmentDeployerSystem : EntitySystem
             if (container.ContainedEntities.Count > 0 && TryComp(parent, out DropshipWeaponPointComponent? weaponPoint))
             {
                 TryGetOffset(ent, out deployOffset, out rotationOffset, weaponPoint.Location);
+            }
+            else if (container.ContainedEntities.Count > 0)
+            {
+                var localOffset = ent.Comp.DeployOffset;
+
+                var xform = Transform(ent);
+                var rotation = xform.LocalRotation;
+
+                deployOffset = rotation.RotateVec(localOffset);
             }
             else if (ent.Comp.DeployEntity != null && container.ContainedEntities.Count == 0)
             {
