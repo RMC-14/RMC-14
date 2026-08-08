@@ -172,7 +172,7 @@ public sealed class XenoPylonSystem : SharedXenoPylonSystem
                         continue;
 
                     _popup.PopupEntity(Loc.GetString("rmc-xeno-larva-recovered", ("larva", Identity.Name(tripper, EntityManager, otherEnt))),
-                    core, othersFilter, true, PopupType.Medium);
+                    core, otherEnt, PopupType.Medium);
                 }
             _hive.ChangeBurrowedLarva(1);
             QueueDel(tripper);
