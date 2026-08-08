@@ -68,7 +68,7 @@
   - type: DeleteOnExplosion
   - type: Tool
     qualities:
-    - Cutting
+    - FenceCutting
     speedModifier: 0.8
     useSound:
       path: /Audio/Items/wirecutter.ogg
@@ -307,7 +307,7 @@
     malus: 0.225
   - type: Tool
     qualities:
-    - Prying
+    - DoorPrying
   - type: Prying
     pryPowered: false
     speedModifier: 0.8

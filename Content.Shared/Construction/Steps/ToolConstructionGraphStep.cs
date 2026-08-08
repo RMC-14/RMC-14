@@ -2,21 +2,24 @@ using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Tools;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;    // RMC14
+using System.Linq;
 
 namespace Content.Shared.Construction.Steps
 {
     [DataDefinition]
     public sealed partial class ToolConstructionGraphStep : ConstructionGraphStep
     {
-        [DataField("tool", required:true, customTypeSerializer:typeof(PrototypeIdSerializer<ToolQualityPrototype>))]
-        public string Tool { get; private set; } = string.Empty;
+        // Begin RMC14
+        [DataField("tools", required:true, customTypeSerializer:typeof(PrototypeIdListSerializer<ToolQualityPrototype>))]
+        public List<string> Tools { get; private set; } = new();
+        // End RMC14
 
         [DataField("fuel")] public float Fuel { get; private set; } = 10;
 
         [DataField("examine")] public string ExamineOverride { get; private set; } = string.Empty;
 
-        // RMC14
+        // Begin RMC14
         [DataField] public DuplicateConditions DuplicateConditions { get; private set; }
 
         public override void DoExamine(ExaminedEvent examinedEvent)
@@ -27,23 +30,32 @@ namespace Content.Shared.Construction.Steps
                 return;
             }
 
-            if (string.IsNullOrEmpty(Tool) || !IoCManager.Resolve<IPrototypeManager>().TryIndex(Tool, out ToolQualityPrototype? quality))
-                return;
+            var prototype = IoCManager.Resolve<IPrototypeManager>();
 
-            examinedEvent.PushMarkup(Loc.GetString("construction-use-tool-entity", ("toolName", Loc.GetString(quality.ToolName))));
+            foreach (var tool in Tools)
+            {
+                if (!prototype.TryIndex(tool, out ToolQualityPrototype? quality))
+                    continue;
 
+                examinedEvent.PushMarkup(Loc.GetString("construction-use-tool-entity", ("toolName", Loc.GetString(quality.ToolName))));
+            }
         }
 
         public override ConstructionGuideEntry GenerateGuideEntry()
         {
-            var quality = IoCManager.Resolve<IPrototypeManager>().Index<ToolQualityPrototype>(Tool);
+            var prototype = IoCManager.Resolve<IPrototypeManager>();
+
+            var qualities = Tools.Select(tool => prototype.Index<ToolQualityPrototype>(tool)).ToList();
+            
+            var names = qualities.Select(quality => Loc.GetString(quality.ToolName)).ToList();
 
             return new ConstructionGuideEntry()
             {
-                Localization = "construction-presenter-tool-step",
-                Arguments = new (string, object)[]{("tool", quality.ToolName)},
-                Icon = quality.Icon,
+                Localization = names.Count == 1 ? "construction-presenter-tool-step":"construction-presenter-tool-step-multiple",
+                Arguments = new (string, object)[] { ("tools", string.Join(", ", names)) },
+                Icon = qualities[0].Icon,
             };
         }
     }
 }
+// End RMC14
