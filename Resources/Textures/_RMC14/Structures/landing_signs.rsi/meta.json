@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/48e570bd697f2476e28d89cd255d0539a5228228/icons/obj/structures/props/landing_signs.dmi, chances_claim and nereid by sharksnake ",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/48e570bd697f2476e28d89cd255d0539a5228228/icons/obj/structures/props/landing_signs.dmi, chances_claim and nereid by sharksnake. tyrargo_sign modified by kleinerstation13 and SharkSnake98 (Github)",
   "size": {
     "x": 64,
     "y": 64
@@ -85,6 +85,21 @@
     },
     {
       "name": "nereidspaceport_sign"
-    }
+    },
+      {
+        "name": "tyrargo_sign1",
+        "delays": [
+          [
+            1,
+            1
+          ]
+      ]
+      },
+      {
+          "name": "tyrargo_sign2"
+      },
+      {
+          "name": "tyrargo_sign3"
+      }
   ]
 }

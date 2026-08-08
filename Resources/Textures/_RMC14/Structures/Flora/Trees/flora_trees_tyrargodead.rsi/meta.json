@@ -1,0 +1,29 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/d388dee8b7b6d854f6f0d844988552acf5962b1f",
+    "size": {
+        "x": 64,
+        "y": 64
+    },
+    "states": [
+        {
+            "name": "tyrargo_deadtree01"
+        },
+        {
+            "name": "tyrargo_deadtree02"
+        },
+        {
+            "name": "tyrargo_deadtree03"
+        },
+        {
+            "name": "tyrargo_deadtree04"
+        },
+        {
+            "name": "tyrargo_deadtree05"
+        },
+        {
+            "name": "tyrargo_treestump01"
+        }
+    ]
+}

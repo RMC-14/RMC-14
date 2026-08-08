@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "license": "CC-BY-3.0",
+  "copyright": "taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/structures/props/industrial/traffic_signal.dmi. modified by kleinerstation13 (Github)",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "base"
+    },
+    {
+      "name": "checkpoint"
+    },
+    {
+      "name": "follow_orders"
+    },
+    {
+      "name": "evac_center"
+    },
+    {
+      "name": "slow_down"
+    },
+    {
+      "name": "tuneto"
+    }
+  ]
+}

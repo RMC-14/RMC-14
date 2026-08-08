@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "license": "CC-BY-3.0",
+  "copyright": "taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/vehices/bison_prop.dmi",
+  "size": {
+    "x": 96,
+    "y": 96
+  },
+  "states": [
+    {
+      "name": "bison",
+      "directions": 4
+    },
+    {
+      "name": "bison_destroyed",
+      "directions": 4
+    },
+    {
+      "name": "bison_open",
+      "directions": 4
+    },
+    {
+      "name": "bison_open_destroyed",
+      "directions": 4
+    }
+  ]
+}
