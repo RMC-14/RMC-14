@@ -87,6 +87,9 @@ public sealed class XenoEggSystem : EntitySystem
     private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
 
+    // Expanded infection range once egg is triggered (4x4 area)
+    private const float EggOpeningInfectRange = 2.0f;
+
     private EntityQuery<StepTriggerComponent> _stepTriggerQuery;
 
     public override void Initialize()
@@ -990,7 +993,53 @@ public sealed class XenoEggSystem : EntitySystem
 
                 if (egg.InfectTarget != null)
                 {
-                    if (TryComp<XenoParasiteComponent>(egg.SpawnedCreature, out var para))
+                    // Check distance only, walls do NOT let you escape the hugger if you're still in range
+                    var eggPos = _transform.GetMapCoordinates(uid);
+                    var targetPos = _transform.GetMapCoordinates(egg.InfectTarget.Value);
+                    var inRange = eggPos.MapId == targetPos.MapId &&
+                                  (targetPos.Position - eggPos.Position).Length() <= EggOpeningInfectRange;
+
+                    if (!inRange)
+                    {
+                        // Original target left the radius, search for a new host
+                        EntityUid? newTarget = null;
+
+                        var infectableQuery = EntityQueryEnumerator<InfectableComponent>();
+                        while (infectableQuery.MoveNext(out var candidate, out var infectable))
+                        {
+                            if (infectable.BeingInfected || _mobState.IsDead(candidate) || HasComp<VictimInfectedComponent>(candidate))
+                                continue;
+
+                            if (!_interaction.InRangeUnobstructed(uid, candidate, EggOpeningInfectRange))
+                                continue;
+
+                            newTarget = candidate;
+                            break;
+                        }
+
+                        if (newTarget != null)
+                        {
+                            egg.InfectTarget = newTarget;
+                        }
+                        else
+                        {
+                            // No valid targets, hugger returns to egg
+                            egg.InfectTarget = null;
+                            if (egg.SpawnedCreature != null)
+                            {
+                                QueueDel(egg.SpawnedCreature.Value);
+                                egg.SpawnedCreature = null;
+                            }
+
+                            egg.OpenAt = null;
+                            SetEggState((uid, egg), XenoEggState.Grown);
+                            Dirty(uid, egg);
+                            continue;
+                        }
+                    }
+
+                    if (egg.InfectTarget != null &&
+                        TryComp<XenoParasiteComponent>(egg.SpawnedCreature, out var para))
                     {
                         _parasite.Infect((egg.SpawnedCreature.Value, para), egg.InfectTarget.Value, force: true);
                         _stun.TryParalyze(egg.InfectTarget.Value, egg.KnockdownTime, true);
