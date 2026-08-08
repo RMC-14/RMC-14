@@ -1,7 +1,9 @@
-using System.Numerics;
 using Content.Shared._RMC14.Fireman;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Crest;
+using Content.Shared._RMC14.Xenonids.Fortify;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Buckle.Components;
@@ -22,15 +24,11 @@ using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Whitelist;
-using Content.Shared._RMC14.Synth;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using Content.Shared._RMC14.Xenonids.Crest;
-using Content.Shared._RMC14.Xenonids.Fortify;
-using Content.Shared._RMC14.Stun;
-using Content.Shared.IdentityManagement;
+using System.Numerics;
 
 namespace Content.Shared._RMC14.Pulling;
 
@@ -45,14 +43,14 @@ public sealed class RMCPullingSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
+    [Dependency] private readonly RotateToFaceSystem _rotateTo = default!;
+    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly RotateToFaceSystem _rotateTo = default!;
-    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
-    [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
 
     private const float BarricadeCheckRange = 2.5f;
 
@@ -87,10 +85,6 @@ public sealed class RMCPullingSystem : EntitySystem
         SubscribeLocalEvent<BlockPullingDeadComponent, PullAttemptEvent>(OnBlockDeadPullAttempt);
         SubscribeLocalEvent<BlockPullingDeadComponent, PullStartedMessage>(OnBlockDeadPullStarted);
         SubscribeLocalEvent<BlockPullingDeadComponent, PullStoppedMessage>(OnBlockDeadPullStopped);
-
-        SubscribeLocalEvent<PreventPulledWhileAliveComponent, PullAttemptEvent>(OnPreventPulledWhileAliveAttempt);
-        SubscribeLocalEvent<PreventPulledWhileAliveComponent, PullStartedMessage>(OnPreventPulledWhileAliveStart);
-        SubscribeLocalEvent<PreventPulledWhileAliveComponent, PullStoppedMessage>(OnPreventPulledWhileAliveStop);
 
         SubscribeLocalEvent<PullableComponent, PullStartedMessage>(OnPullAnimation);
 
@@ -328,19 +322,6 @@ public sealed class RMCPullingSystem : EntitySystem
             RemCompDeferred<BlockPullingDeadActiveComponent>(ent);
     }
 
-    private void OnPreventPulledWhileAliveAttempt(Entity<PreventPulledWhileAliveComponent> ent, ref PullAttemptEvent args)
-    {
-        if (args.PulledUid != ent.Owner)
-            return;
-
-        if (!CanPullPreventPulledWhileAlive((ent, ent), args.PullerUid))
-        {
-            var msg = Loc.GetString("rmc-prevent-pull-alive", ("target", ent));
-            _popup.PopupClient(msg, ent, args.PullerUid, PopupType.SmallCaution);
-            args.Cancelled = true;
-        }
-    }
-
     private void OnMeleePullAttempt(Entity<MeleeWeaponComponent> ent, ref PullAttemptEvent args)
     {
         if (args.PullerUid != ent.Owner)
@@ -369,42 +350,6 @@ public sealed class RMCPullingSystem : EntitySystem
     private void OnXenoPullToggle(Entity<XenoComponent> ent, ref RMCPullToggleEvent args)
     {
         args.Handled = true;
-    }
-
-    private void OnPreventPulledWhileAliveStart(Entity<PreventPulledWhileAliveComponent> ent, ref PullStartedMessage args)
-    {
-        if (args.PulledUid != ent.Owner)
-            return;
-
-        EnsureComp<ActivePreventPulledWhileAliveComponent>(ent);
-    }
-
-    private void OnPreventPulledWhileAliveStop(Entity<PreventPulledWhileAliveComponent> ent, ref PullStoppedMessage args)
-    {
-        if (args.PulledUid != ent.Owner)
-            return;
-
-        RemCompDeferred<ActivePreventPulledWhileAliveComponent>(ent);
-    }
-
-    private bool CanPullPreventPulledWhileAlive(Entity<PreventPulledWhileAliveComponent?> pulled, EntityUid user)
-    {
-        if (!Resolve(pulled, ref pulled.Comp, false))
-            return true;
-
-        if (!_mobState.IsAlive(pulled))
-            return true;
-
-        if (!_whitelist.IsWhitelistPassOrNull(pulled.Comp.Whitelist, user))
-            return true;
-
-        foreach (var effect in pulled.Comp.ExceptEffects)
-        {
-            if (_statusEffects.HasStatusEffect(pulled, effect))
-                return true;
-        }
-
-        return false;
     }
 
     public void TryStopUserPullIfPulling(EntityUid user, EntityUid target)
@@ -552,18 +497,6 @@ public sealed class RMCPullingSystem : EntitySystem
 
             if (!CanPullDead(uid, pulling))
                 _pulling.TryStopPull(pulling, pullable, uid);
-        }
-
-        var preventPulledWhileAlive = EntityQueryEnumerator<ActivePreventPulledWhileAliveComponent, PreventPulledWhileAliveComponent, PullableComponent>();
-        while (preventPulledWhileAlive.MoveNext(out var uid, out _, out var prevent, out var pullable))
-        {
-            if (pullable.Puller is not { } puller ||
-                CanPullPreventPulledWhileAlive((uid, prevent), puller))
-            {
-                continue;
-            }
-
-            _pulling.TryStopPull(uid, pullable);
         }
 
         var pulledQuery = EntityQueryEnumerator<BeingPulledComponent, InputMoverComponent, PullableComponent>();
