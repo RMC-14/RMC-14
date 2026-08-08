@@ -153,6 +153,7 @@
     components:
     - type: ComplexInteraction
     - type: CanBeLarvaQueued
+    - type: XenoLastStandable
 
 - type: entity
   parent: CMXenoParasiteBase
