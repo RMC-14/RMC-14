@@ -1,6 +1,7 @@
 ﻿using Content.Client.Power.Components;
 using Content.Shared._RMC14.Power;
 using Robust.Client.GameObjects;
+using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Power;
 
@@ -10,6 +11,7 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
     {
         base.Initialize();
         SubscribeLocalEvent<RMCApcComponent, AfterAutoHandleStateEvent>(OnApcState);
+        SubscribeLocalEvent<RMCPortableGeneratorComponent, AfterAutoHandleStateEvent>(OnPortableGeneratorState);
 
         SubscribeLocalEvent<RMCReactorPoweredLightComponent, AppearanceChangeEvent>(OnReactorPoweredLightAppearanceChange);
     }
@@ -35,6 +37,25 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
         catch (Exception e)
         {
             Log.Error($"Error refreshing {nameof(RMCApcBui)}\n{e}");
+        }
+    }
+
+    private void OnPortableGeneratorState(Entity<RMCPortableGeneratorComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        try
+        {
+            if (!TryComp(ent, out UserInterfaceComponent? ui))
+                return;
+
+            foreach (var bui in ui.ClientOpenInterfaces.Values)
+            {
+                if (bui is RMCPortableGeneratorBui genUi)
+                    Timer.Spawn(0, () => genUi.Refresh());
+            }
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Error refreshing {nameof(RMCPortableGeneratorBui)}\n{e}");
         }
     }
 
