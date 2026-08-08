@@ -146,6 +146,7 @@
       choices: { CMCoat: 1 }
       entries:
       - id: RMCCoatService
+      - id: RMCCoatAllWeather
     - name: Backpack
       choices: { CMBag: 1 }
       entries:
