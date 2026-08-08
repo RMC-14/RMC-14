@@ -1,5 +1,6 @@
 <PanelContainer
     xmlns="https://spacestation14.io"
+    xmlns:utility="clr-namespace:Content.Client._RMC14.Admin.Utility"
     StyleClasses="BackgroundDark"
     HorizontalExpand="True"
     VerticalExpand="True">
@@ -32,7 +33,7 @@
                         <LineEdit Name="NearbySearch"
                                   Access="Public"
                                   PlaceHolder="{Loc rmc-payload-deployment-search-entities}" />
-                        <ItemList Name="NearbyEntities" Access="Public" SelectMode="Multiple" VerticalExpand="True" />
+                        <utility:RMCPayloadDeploymentList Name="NearbyEntities" Access="Public" SelectMode="Multiple" VerticalExpand="True" />
                         <BoxContainer Orientation="Horizontal">
                             <Button Name="SelectAllNearby"
                                     Access="Public"
@@ -48,14 +49,14 @@
                         <LineEdit Name="PlayerSearch"
                                   Access="Public"
                                   PlaceHolder="{Loc rmc-payload-deployment-search-player-controlled}" />
-                        <ItemList Name="PlayerEntities" Access="Public" SelectMode="Single" VerticalExpand="True" />
+                        <utility:RMCPayloadDeploymentList Name="PlayerEntities" Access="Public" SelectMode="Single" VerticalExpand="True" />
                         <Button Name="AddPlayer" Access="Public" Text="{Loc rmc-payload-deployment-add-selected}" />
                     </BoxContainer>
                     <BoxContainer Name="PrototypeTab" Orientation="Vertical">
                         <LineEdit Name="PrototypeSearch"
                                   Access="Public"
                                   PlaceHolder="{Loc rmc-payload-deployment-search-prototypes}" />
-                        <ItemList Name="Prototypes" Access="Public" SelectMode="Single" VerticalExpand="True" />
+                        <utility:RMCPayloadDeploymentList Name="Prototypes" Access="Public" SelectMode="Single" VerticalExpand="True" />
                         <BoxContainer Orientation="Horizontal">
                             <Label Text="{Loc rmc-payload-deployment-quantity}" MinWidth="130" />
                             <SpinBox Name="PrototypeQuantity" Access="Public" Value="1" HorizontalExpand="True" />
@@ -67,7 +68,7 @@
 
             <BoxContainer Orientation="Vertical" MinWidth="420" HorizontalExpand="True">
                 <Label Text="{Loc rmc-payload-deployment-payload-manifest}" StyleClasses="LabelHeading" />
-                <ItemList Name="Manifest" Access="Public" SelectMode="Single" MinHeight="160" VerticalExpand="True" />
+                <utility:RMCPayloadDeploymentList Name="Manifest" Access="Public" SelectMode="Single" MinHeight="160" VerticalExpand="True" />
                 <BoxContainer Orientation="Horizontal">
                     <Button Name="RemoveManifestEntry"
                             Access="Public"

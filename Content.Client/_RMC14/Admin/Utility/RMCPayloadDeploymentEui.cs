@@ -2,11 +2,8 @@ using System.Linq;
 using Content.Client._RMC14.UserInterface;
 using Content.Client.Eui;
 using Content.Shared._RMC14.Admin.Utility;
-using Content.Shared._RMC14.ParaDrop;
 using Content.Shared._RMC14.PayloadDeployment;
 using Content.Shared.Eui;
-using Content.Shared.Item;
-using Content.Shared.Prototypes;
 using JetBrains.Annotations;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
@@ -101,7 +98,8 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
         _control.ManifestName.IsValid = value => value.Length <= MaxManifestNameLength;
 
         _control.RefreshNearby.OnPressed += _ => Refresh(_control.NearbyRadius.Value);
-        _control.SelectAllNearby.OnPressed += _ => SelectAllItems(_control.NearbyEntities);
+        _control.SelectAllNearby.OnPressed += _ => _control.NearbyEntities.ToggleAll();
+        _control.NearbyEntities.SelectionChanged += UpdateNearbySelectionButton;
         _control.AddNearby.OnPressed += _ => AddSelectedEntities(_control.NearbyEntities, true);
         _control.AddPlayer.OnPressed += _ => AddSelectedEntities(_control.PlayerEntities, false);
         _control.AddPrototype.OnPressed += _ => AddSelectedPrototype();
@@ -333,13 +331,9 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
         _deliveryType = (RMCPayloadDeliveryType) args.Id;
         _control.DropType.SelectId(args.Id);
 
-        var removed = RemoveInvalidParaDropPrototypes();
         BuildPrototypeCatalog();
         UpdateModeControls();
         LoadActiveManifest();
-
-        if (removed > 0)
-            _control.Result.Text = Loc.GetString("rmc-payload-deployment-removed-prototypes", ("count", removed));
     }
 
     private void OnManifestSelected(OptionButton.ItemSelectedEventArgs args)
@@ -510,30 +504,6 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
         _control.ShowLandingWarning.Visible = orbital;
     }
 
-    private int RemoveInvalidParaDropPrototypes()
-    {
-        if (_deliveryType != RMCPayloadDeliveryType.ParaDrop)
-            return 0;
-
-        var removed = 0;
-        foreach (var manifest in _manifests)
-        {
-            foreach (var (prototype, quantity) in manifest.Prototypes.ToArray())
-            {
-                if (_prototypes.TryIndex(prototype, out EntityPrototype? entityPrototype) &&
-                    entityPrototype.HasComponent<ParaDroppableComponent>())
-                {
-                    continue;
-                }
-
-                removed += quantity;
-                manifest.Prototypes.Remove(prototype);
-            }
-        }
-
-        return removed;
-    }
-
     private void BuildPrototypeCatalog()
     {
         _prototypeCatalog.Clear();
@@ -542,15 +512,8 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
 
         foreach (var prototype in _prototypes.EnumeratePrototypes<EntityPrototype>())
         {
-            var validType = _deliveryType switch
-            {
-                RMCPayloadDeliveryType.Orbital => prototype.HasComponent<ItemComponent>(),
-                RMCPayloadDeliveryType.ParaDrop => prototype.HasComponent<ParaDroppableComponent>(),
-                _ => false,
-            };
             if (prototype.Abstract ||
                 prototype.HideSpawnMenu ||
-                !validType ||
                 filter != null && !prototype.Categories.Contains(filter))
             {
                 continue;
@@ -570,7 +533,7 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
     private void RebuildPrototypeList()
     {
         var search = _control.PrototypeSearch.Text.Trim();
-        _control.Prototypes.Clear();
+        var entries = new List<RMCPayloadDeploymentListEntry>();
         var shown = 0;
         foreach (var prototype in _prototypeCatalog)
         {
@@ -581,16 +544,18 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
             if (!string.IsNullOrWhiteSpace(prototype.EditorSuffix))
                 prototypeName += $" [{prototype.EditorSuffix}]";
 
-            _control.Prototypes.Add(new ItemList.Item(_control.Prototypes)
-            {
-                Text = prototypeName,
-                TooltipText = prototype.Description,
-                Metadata = new EntProtoId(prototype.ID),
-            });
+            var prototypeId = new EntProtoId(prototype.ID);
+            entries.Add(new RMCPayloadDeploymentListEntry(
+                prototypeName,
+                prototypeId,
+                prototype.Description,
+                Prototype: prototypeId));
 
             if (++shown >= MaxPrototypeResults)
                 break;
         }
+
+        _control.Prototypes.SetItems(entries);
     }
 
     private static bool MatchesPrototype(EntityPrototype prototype, string search)
@@ -606,18 +571,25 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
         PopulateEntityList(_control.NearbyEntities, _nearby, _control.NearbySearch.Text, false);
     }
 
+    private void UpdateNearbySelectionButton()
+    {
+        _control.SelectAllNearby.Text = _control.NearbyEntities.AllSelected
+            ? Loc.GetString("rmc-payload-deployment-deselect-all")
+            : Loc.GetString("rmc-payload-deployment-select-all");
+    }
+
     private void RebuildPlayerList()
     {
         PopulateEntityList(_control.PlayerEntities, _playerControlled, _control.PlayerSearch.Text, true);
     }
 
     private void PopulateEntityList(
-        ItemList list,
+        RMCPayloadDeploymentList list,
         IEnumerable<RMCPayloadDeploymentEntityEntry> entries,
         string search,
         bool showMap)
     {
-        list.Clear();
+        var items = new List<RMCPayloadDeploymentListEntry>();
         foreach (var entry in entries)
         {
             var assignedManifest = _manifests.FindIndex(manifest => manifest.Entities.ContainsKey(entry.Entity));
@@ -647,16 +619,17 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
             if (showMap)
                 text += $" — {map}";
 
-            list.Add(new ItemList.Item(list)
-            {
-                Text = text,
-                TooltipText = entry.Prototype,
-                Metadata = entry,
-            });
+            items.Add(new RMCPayloadDeploymentListEntry(
+                text,
+                entry,
+                entry.Prototype,
+                Entity: entry.Entity));
         }
+
+        list.SetItems(items);
     }
 
-    private void AddSelectedEntities(ItemList list, bool confirmCrossMap)
+    private void AddSelectedEntities(RMCPayloadDeploymentList list, bool confirmCrossMap)
     {
         var selectedEntries = list.GetSelected()
             .Select(item => item.Metadata)
@@ -714,15 +687,6 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
         RebuildPlayerList();
     }
 
-    private static void SelectAllItems(ItemList list)
-    {
-        foreach (var item in list)
-        {
-            if (item.Selectable && !item.Disabled)
-                item.Selected = true;
-        }
-    }
-
     private void AddSelectedPrototype()
     {
         if (_control.Prototypes.GetSelected().FirstOrDefault()?.Metadata is not EntProtoId prototype)
@@ -768,18 +732,18 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
 
     private void UpdateManifest()
     {
-        _control.Manifest.Clear();
+        var items = new List<RMCPayloadDeploymentListEntry>();
         foreach (var (entity, entry) in ActiveManifest.Entities)
         {
             var text = $"{entry.Name} [{entity}]";
             if (!string.IsNullOrWhiteSpace(entry.Role))
                 text += $" — {entry.Role}";
 
-            _control.Manifest.Add(new ItemList.Item(_control.Manifest)
-            {
-                Text = text,
-                Metadata = entity,
-            });
+            EntProtoId? prototype = null;
+            if (_prototypes.HasIndex<EntityPrototype>(entry.Prototype))
+                prototype = new EntProtoId(entry.Prototype);
+
+            items.Add(new RMCPayloadDeploymentListEntry(text, entity, Prototype: prototype));
         }
 
         foreach (var (prototype, quantity) in ActiveManifest.Prototypes)
@@ -787,12 +751,13 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
             var name = _prototypes.TryIndex(prototype, out EntityPrototype? entityPrototype)
                 ? entityPrototype.Name
                 : prototype.Id;
-            _control.Manifest.Add(new ItemList.Item(_control.Manifest)
-            {
-                Text = $"{name} ({prototype}) ×{quantity}",
-                Metadata = prototype,
-            });
+            items.Add(new RMCPayloadDeploymentListEntry(
+                $"{name} ({prototype}) ×{quantity}",
+                prototype,
+                Prototype: prototype));
         }
+
+        _control.Manifest.SetItems(items);
 
         var total = ActiveManifest.PayloadCount();
         _control.ManifestSummary.Text = Loc.GetString("rmc-payload-deployment-manifest-summary",

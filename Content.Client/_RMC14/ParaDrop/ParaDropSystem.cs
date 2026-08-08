@@ -41,11 +41,9 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
             return;
         }
 
-        if (!TryComp<AnimationPlayerComponent>(ent, out var player) ||
-            _animPlayer.HasRunningAnimation(player, SkyFallingAnimationKey))
-        {
+        var player = EnsureComp<AnimationPlayerComponent>(ent);
+        if (_animPlayer.HasRunningAnimation(player, SkyFallingAnimationKey))
             return;
-        }
 
         ent.Comp.OriginalScale = sprite.Scale;
         ent.Comp.OriginalSpriteOffset = sprite.Offset;

@@ -7,7 +7,6 @@ using Content.Shared._RMC14.PayloadDeployment;
 using Content.Shared._RMC14.SupplyDrop;
 using Content.Shared.Ghost;
 using Content.Shared.Mobs.Components;
-using Content.Shared.Prototypes;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
@@ -18,7 +17,6 @@ namespace Content.Server._RMC14.ParaDrop;
 
 public sealed partial class ParaDropSystem
 {
-    [Dependency] private readonly IComponentFactory _componentFactory = default!;
     [Dependency] private readonly SharedCrashLandSystem _crashLand = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
@@ -78,8 +76,7 @@ public sealed partial class ParaDropSystem
             foreach (var prototypePayload in request.Prototypes)
             {
                 if (!_prototypes.TryIndex(prototypePayload.Prototype, out var prototype) ||
-                    prototype.Abstract ||
-                    !prototype.HasComponent<ParaDroppableComponent>(_componentFactory))
+                    prototype.Abstract)
                 {
                     CleanupEntities(spawnedPayload);
                     return new RMCPayloadDeploymentResult(RMCPayloadDeploymentFailure.InvalidPrototype, requestIndex);

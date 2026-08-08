@@ -18,7 +18,6 @@ rmc-payload-deployment-arrival-spacing-variation = Arrival spacing variation (±
 rmc-payload-deployment-launch-selected = Launch selected
 rmc-payload-deployment-launch-all = Launch all
 rmc-payload-deployment-manifest-summary = {$manifest}: {$payload} payload entities ({$total} total)
-rmc-payload-deployment-removed-prototypes = Removed {$count} prototypes that cannot be paradropped.
 rmc-payload-deployment-result-success = Successfully prepared { $manifests ->
     [one] one deployment manifest
     *[other] {$manifests} deployment manifests
@@ -49,6 +48,7 @@ rmc-payload-deployment-search-entities = Search nearby entities...
 rmc-payload-deployment-search-player-controlled = Search player-controlled entities...
 rmc-payload-deployment-search-prototypes = Search prototypes by name, ID, or suffix...
 rmc-payload-deployment-select-all = Select all
+rmc-payload-deployment-deselect-all = Deselect all
 rmc-payload-deployment-add-selected = Add selected
 rmc-payload-deployment-quantity = Quantity
 rmc-payload-deployment-add-prototype = Add prototype
