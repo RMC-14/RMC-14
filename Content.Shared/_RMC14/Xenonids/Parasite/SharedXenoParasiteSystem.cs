@@ -85,6 +85,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
     [Dependency] private readonly RMCUnrevivableSystem _unrevivable = default!;
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly RMCTemporaryInvincibilitySystem _invincibility = default!;
 
     private const CollisionGroup LeapCollisionGroup = CollisionGroup.InteractImpassable;
     private const CollisionGroup ThrownCollisionGroup = CollisionGroup.InteractImpassable | CollisionGroup.BarricadeImpassable;
@@ -973,9 +974,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             foreach (var larva in container.ContainedEntities)
             {
                 RemCompDeferred<BursterComponent>(larva);
-                var invc = EnsureComp<RMCTemporaryInvincibilityComponent>(larva);
-                invc.ExpiresAt = _timing.CurTime + ent.Comp.LarvaInvincibilityTime;
-                Dirty(larva, invc);
+                _invincibility.GiveInvincibility(larva, ent.Comp.LarvaInvincibilityTime);
             }
 
             _container.EmptyContainer(container, destination: coords);
