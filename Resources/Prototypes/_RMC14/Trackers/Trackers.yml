@@ -40,6 +40,10 @@
   job: CMMilitaryWarden
 
 - type: trackerMode
+  id: MilitaryPolice
+  job: CMMilitaryPolice
+
+- type: trackerMode
   id: SquadLeader
   job: CMSquadLeader
 
