@@ -1,5 +1,5 @@
-using Content.Shared.Actions;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Actions;
 
@@ -7,18 +7,12 @@ namespace Content.Shared._RMC14.Actions;
 [Access(typeof(SwappableActionSystem))]
 public sealed partial class SwappableActionComponent : Component
 {
+    /// <summary>
+    ///     The action prototype swapped to.
+    /// </summary>
     [DataField, AutoNetworkedField]
-    public string OriginalName = string.Empty;
-
-    [DataField, AutoNetworkedField]
-    public string OriginalDescription = string.Empty;
+    public EntProtoId? SwappedActionProto;
 
     [DataField, AutoNetworkedField]
     public bool IsSwapped;
-
-    [DataField, NonSerialized]
-    public BaseActionEvent? SwappedEventTemplate;
-
-    [DataField, NonSerialized]
-    public BaseActionEvent? OriginalEventTemplate;
 }
