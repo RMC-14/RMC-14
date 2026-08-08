@@ -7,16 +7,20 @@ using Content.Shared._RMC14.Xenonids.Acid;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared.Body.Systems;
 using Content.Shared.Coordinates;
+using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Explosion;
+using Content.Shared.Explosion.Components;
 using Content.Shared.FixedPoint;
 using Content.Shared.Flash.Components;
 using Content.Shared.Inventory;
+using Content.Shared.Projectiles;
 using Content.Shared.Standing;
 using Content.Shared.StatusEffect;
 using Content.Shared.Sticky.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
+using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
@@ -44,6 +48,7 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly SharedDeafnessSystem _deafness = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly DamageableSystem _damage = default!;
 
     private static readonly ProtoId<DamageTypePrototype> StructuralDamage = "Structural";
     private static readonly ProtoId<StatusEffectPrototype> FlashedKey = "Flashed";
@@ -66,6 +71,9 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
         SubscribeLocalEvent<DestroyedByExplosionComponent, ExplosionReceivedEvent>(OnDestroyedByExplosionReceived);
 
         SubscribeLocalEvent<MobGibbedByExplosionTypeComponent, ExplosionReceivedEvent>(OnMobGibbedByExplosionReceived);
+
+        SubscribeLocalEvent<RMCExplosiveDamageOnHitComponent, ProjectileHitEvent>(OnExplosiveDamageOnHitProjectileHit);
+        SubscribeLocalEvent<RMCExplosiveDamageOnHitComponent, MeleeHitEvent>(OnExplosiveDamageOnMeleeHit);
     }
 
     private void OnExplosionEffectTriggered(Entity<CMExplosionEffectComponent> ent, ref CMExplosiveTriggeredEvent args)
@@ -250,6 +258,61 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
 
         if (!TerminatingOrDeleted(ent))
             _body.GibBody(ent, true);
+    }
+
+    private void OnExplosiveDamageOnHitProjectileHit(Entity<RMCExplosiveDamageOnHitComponent> projectile, ref ProjectileHitEvent args)
+    {
+        DoExplosiveHit(projectile, args.Target, args.Shooter);
+    }
+
+    private void OnExplosiveDamageOnMeleeHit(Entity<RMCExplosiveDamageOnHitComponent> projectile, ref MeleeHitEvent args)
+    {
+        foreach (var hit in args.HitEntities)
+        {
+            DoExplosiveHit(projectile, hit, args.User);
+        }
+    }
+
+    private void DoExplosiveHit(Entity<RMCExplosiveDamageOnHitComponent> ent, EntityUid target, EntityUid? user)
+    {
+        foreach (var explosion in ent.Comp.Explosions)
+        {
+            if (_entityWhitelist.IsWhitelistFail(explosion.Whitelist, target))
+                continue;
+
+            DoDirectExplosionDamage(ent, target, user, explosion.ExplosionType, explosion.Damage, explosion.ArmorPiercing);
+        }
+    }
+
+    public void DoDirectExplosionDamage(EntityUid origin, EntityUid target, EntityUid? user,
+        ProtoId<ExplosionPrototype> explosionType, DamageSpecifier damage, int armorPiercing = 0)
+    {
+        var ev = new GetExplosionResistanceEvent(explosionType);
+        RaiseLocalEvent(target, ref ev);
+
+        // Effectively subtracts armor like normal armor piercing
+        // We must get explosion armor so we don't make the ent more vunerable
+        if (armorPiercing > 0)
+        {
+            var arev = new CMGetArmorEvent(SlotFlags.OUTERCLOTHING | SlotFlags.INNERCLOTHING);
+            RaiseLocalEvent(target, ref arev);
+            arev.ExplosionArmor = Math.Max(arev.ExplosionArmor, 0);
+
+            var resist = (float)Math.Pow(1.1, -Math.Min(arev.ExplosionArmor, armorPiercing) / 10.0);
+            ev.DamageCoefficient /= resist;
+        }
+
+        ev.DamageCoefficient = Math.Max(0, ev.DamageCoefficient);
+
+        // TODO RMC14 add BeforeExplosionReceived when merged in, with params to override direction
+
+        var dam = _damage.TryChangeDamage(target, damage * ev.DamageCoefficient, true, origin: user, tool: origin);
+
+        if (dam == null)
+            return;
+
+        var exv = new ExplosionReceivedEvent(explosionType, _transform.ToMapCoordinates(origin.ToCoordinates()), dam);
+        RaiseLocalEvent(target, ref exv);
     }
 
     public void DoEffect(Entity<CMExplosionEffectComponent> ent)
