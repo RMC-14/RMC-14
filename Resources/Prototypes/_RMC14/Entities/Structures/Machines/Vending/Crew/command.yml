@@ -486,7 +486,7 @@
     - name: Huds
       choices: { CMHud: 1 }
       entries:
-      - id: RMCGlassesMedicalHUDGlasses
+      - id: RMCGlassesMedicalHUDGlassesAdvanced
         recommended: true
       - id: CMGlassesSecurity
     - name: Belt
@@ -814,7 +814,7 @@
       - CMExecutiveOfficer
       choices: { CMEyewear: 1 }
       entries:
-      - id: RMCGlassesMedicalHUDGlasses
+      - id: RMCGlassesMedicalHUDGlassesAdvanced
         recommended: true
       - id: CMGlassesSecurity
       - id: RMCSunglassesBig
@@ -1313,7 +1313,7 @@
       - CMCMO
       choices: { CMEyewear: 1 }
       entries:
-      - id: RMCGlassesMedicalHUDGlasses
+      - id: RMCGlassesMedicalHUDGlassesAdvanced
       # - id: RMCGlassesMedicalHUDGlassesPrescription TODO
       # - id: RMCGlasesReagentScannerHUD TODO
       # - id: RMCGlasesReagentScannerHUDPrescription TODO

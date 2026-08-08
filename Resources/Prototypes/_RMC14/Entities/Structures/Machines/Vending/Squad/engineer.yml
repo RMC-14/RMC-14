@@ -168,6 +168,8 @@
         points: 3
       - id: RMCSynthResetKey
         points: 10
+      - id: RMCGlassesMedicalHUDGlasses
+        points: 12
     - name: Binoculars
       entries:
       - id: RMCBinoculars
