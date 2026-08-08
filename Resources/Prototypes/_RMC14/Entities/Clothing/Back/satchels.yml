@@ -714,10 +714,10 @@
   - type: SolutionContainerManager
     solutions:
       tank:
-        maxVol: 250 # TODO RMC14 100 when welders are fixed
+        maxVol: 100
         reagents:
         - ReagentId: WeldingFuel
-          Quantity: 250
+          Quantity: 100
   - type: ReagentTank
     tankType: Fuel
   - type: DrainableSolution
@@ -1146,6 +1146,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Other/lightpack_welder.rsi
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        maxVol: 180
+        reagents:
+        - ReagentId: WeldingFuel
+          Quantity: 180
 
 - type: entity
   parent: RMCSatchelLightpackWelder
