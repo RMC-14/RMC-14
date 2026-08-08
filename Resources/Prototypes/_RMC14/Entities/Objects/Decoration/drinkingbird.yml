@@ -1,0 +1,23 @@
+﻿- type: entity
+  parent: BaseItem
+  id: RMCDrinkingBird
+  name: drinking bird
+  description: "A cute little bird, powered by complex physics. Popular on desks across the galaxy."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Decoration/drinking-bird.rsi
+    layers:
+    - state: drinking_bird
+      map: [ "enum.ToggleableVisuals.Enabled" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Enabled:
+          True: { state: drinking_bird }
+          False: { state: icon }
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Decoration/drinking-bird.rsi
+  - type: ItemToggle
+    activated: true
+  - type: Appearance
