@@ -1,0 +1,180 @@
+- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaBarley
+  name: CSS Barley
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_barley.rsi
+    state: base
+  - type: Area
+    buildSpecial: true
+    powerNet: ground
+    minimapColor: '#91BDCFE7'
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    paradropping: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: true
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
+    weatherEnabled: false
+
+- type: entity
+  parent: RMCAreaBarley
+  id: RMCAreaBarleyAI
+  name: AI Core
+  components:
+  - type: Sprite
+    state: ai
+
+- type: entity
+  parent: RMCAreaBarley
+  id: RMCAreaBarleyCafeteria
+  name: Cafeteria
+  components:
+  - type: Sprite
+    state: cafeteria
+
+- type: entity
+  parent: RMCAreaBarley
+  id: RMCAreaBarleyCaptain
+  name: Captain's Quarters
+  components:
+  - type: Sprite
+    state: captain
+
+- type: entity
+  parent: RMCAreaBarley
+  id: RMCAreaBarleyCargo
+  name: Cargo Bay
+  components:
+  - type: Sprite
+    state: cargo
+
+- type: entity
+  parent: RMCAreaBarley
+  id: RMCAreaBarleyCentralDeck
+  name: Central Deck
+  components:
+  - type: Sprite
+    state: central_deck
+
+- type: entity
+  parent: RMCAreaBarley
+  id: RMCAreaBarleyDorms
+  name: Dorms
+  components:
+  - type: Sprite
+    state: dorms
+
+- type: entity
+  parent: RMCAreaBarley
+  id: RMCAreaBarleyEngineering
+  name: Engineering Bay
+  components:
+  - type: Sprite
+    state: engineering
+
+- type: entity
+  parent: RMCAreaBarley
+  id: RMCAreaBarleyHypersleep
+  name: Hypersleep Bay
+  components:
+  - type: Sprite
+    state: hypersleep
+
+- type: entity
+  parent: RMCAreaBarley
+  id: RMCAreaBarleyLowerDeck
+  name: Lower Deck
+  components:
+  - type: Sprite
+    state: lower_deck
+
+- type: entity
+  parent: RMCAreaBarley
+  id: RMCAreaBarleyLowerHangar
+  name: Lower Hangar
+  components:
+  - type: Sprite
+    state: lower_hangar
+
+- type: entity
+  parent: RMCAreaBarley
+  id: RMCAreaBarleyMaintenance
+  name: Maintenance
+  components:
+  - type: Sprite
+    state: maints
+
+- type: entity
+  parent: RMCAreaBarley
+  id: RMCAreaBarleyMedbay
+  name: Medical Bay
+  components:
+  - type: Sprite
+    state: medbay
+
+- type: entity
+  parent: RMCAreaBarley
+  id: RMCAreaBarleyOffice
+  name: Public Office
+  components:
+  - type: Sprite
+    state: office
+
+- type: entity
+  parent: RMCAreaBarley
+  id: RMCAreaBarleyRecreation
+  name: Rec. Room
+  components:
+  - type: Sprite
+    state: recreation
+
+- type: entity
+  parent: RMCAreaBarley
+  id: RMCAreaBarleySecureStorage
+  name: Secure Storage
+  components:
+  - type: Sprite
+    state: secure_storage
+
+- type: entity
+  parent: RMCAreaBarley
+  id: RMCAreaBarleySyntheticStorage
+  name: Synthetic Storage
+  components:
+  - type: Sprite
+    state: synth
+
+- type: entity
+  parent: RMCAreaBarley
+  id: RMCAreaBarleyUpperDeck
+  name: Upper Deck
+  components:
+  - type: Sprite
+    state: upper_deck
+
+- type: entity
+  parent: RMCAreaBarley
+  id: RMCAreaBarleyUpperHangar
+  name: Upper Hangar
+  components:
+  - type: Sprite
+    state: upper_hangar
+
+- type: entity
+  parent: RMCAreaBarley
+  id: RMCAreaBarleyOOB
+  name: Out of Bounds
+  components:
+  - type: Sprite
+    state: oob
+  - type: Area
+    alwaysPowered: true

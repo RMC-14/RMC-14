@@ -1,0 +1,13 @@
+- type: gameMap
+  id: CSSBarley
+  mapName: "CSS Barley"
+  mapPath: /Maps/_RMC14/PVE/css_barley.yml
+  minPlayers: 0
+  maxRandomOffset: 0
+  randomRotation: false
+  stations:
+    CSSBarley:
+      stationProto: StandardUNMCWarship
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'CSS Barley'
