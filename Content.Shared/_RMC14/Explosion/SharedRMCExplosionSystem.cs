@@ -253,8 +253,13 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
 
     private void OnProneMultBeforeExplosionReceived(Entity<RMCProneExplosionMultComponent> ent, ref BeforeExplosionRecievedEvent args)
     {
-        var distance = (_transform.ToMapCoordinates(ent.Owner.ToCoordinates()).Position - args.Epicenter.Position).Length();
-        if (distance <= ent.Comp.NoMultCenterRadius || (!_standing.IsDown(ent) && !HasComp<XenoRestingComponent>(ent)))
+        if (args.HasDirection == null)
+        {
+            var distance = (_transform.ToMapCoordinates(ent.Owner.ToCoordinates()).Position - args.Epicenter.Position).Length();
+            if (distance <= ent.Comp.NoMultCenterRadius || (!_standing.IsDown(ent) && !HasComp<XenoRestingComponent>(ent)))
+                return;
+        }
+        else if (!args.HasDirection.Value)
             return;
 
         args.Damage *= ent.Comp.ProneMultiplier;
