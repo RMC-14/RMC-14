@@ -42,6 +42,14 @@ public sealed partial class CryoCellComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan ExitStun = TimeSpan.FromSeconds(1);
 
+    // amount * GLOBAL_STATUS_MULTIPLIER
+    [DataField]
+    public TimeSpan SleepDuration = TimeSpan.FromSeconds(20);
+
+    // amount * GLOBAL_STATUS_MULTIPLIER
+    [DataField]
+    public TimeSpan UnconsciousDuration = TimeSpan.FromSeconds(20);
+
     [DataField]
     public SoundSpecifier HealingCompleteSound = new SoundPathSpecifier("/Audio/Effects/Cargo/ping.ogg");
 

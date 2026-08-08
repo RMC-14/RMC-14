@@ -3,8 +3,10 @@ using Content.Server.Power.Components;
 using Content.Shared._RMC14.Body;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Medical.CryoCell;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Temperature;
 using Content.Shared.Atmos;
+using Content.Shared.Bed.Sleep;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
@@ -15,6 +17,8 @@ using Content.Shared.Interaction;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.StatusEffectNew;
+using Content.Shared.Traits.Assorted;
 using Content.Shared.UserInterface;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
@@ -34,8 +38,10 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedRMCBloodstreamSystem _rmcBloodstream = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
+    [Dependency] private readonly RMCSizeStunSystem _rmcSizeStun = default!;
     [Dependency] private readonly SharedRMCTemperatureSystem _rmcTemperature = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private readonly SharedStatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
 
@@ -253,8 +259,8 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
             return;
         }
 
-        // Auto-eject dead even if auto is turned off
-        if (_mobState.IsDead(occupant))
+        // Auto-eject if dead and unrevivable
+        if (_mobState.IsDead(occupant) && HasComp<UnrevivableComponent>(occupant))
         {
             _popup.PopupEntity(Loc.GetString("rmc-cryo-cell-patient-dead"), cell);
             _audio.PlayPvs(cell.Comp.WarningSound, cell);
@@ -262,10 +268,10 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
             return;
         }
 
-        _rmcTemperature.TryGetCurrentTemperature(occupant, out var curBodyTemp);
-
         // Cooling the occupant
         var cryoCellTemp = cell.Comp.CryoCellTemperature;
+        _rmcTemperature.TryGetCurrentTemperature(occupant, out var curBodyTemp);
+
         if (Math.Abs(curBodyTemp - cryoCellTemp) >= 0.01)
         {
             var change = 2 * (cryoCellTemp + curBodyTemp);
@@ -276,39 +282,47 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
             _rmcTemperature.ForceChangeTemperature(occupant, temp);
         }
 
-        // Passive healing when body is below freezing
-        if (curBodyTemp < Atmospherics.T0C &&
-            damageable.DamagePerGroup.GetValueOrDefault(AirlossGroup) > 0)
+        // Passive healing if alive and cold enough
+        if (!_mobState.IsDead(occupant))
         {
-            var oxyHeal = _rmcDamageable.DistributeHealingCached(occupant, AirlossGroup, 1);
-            _damageable.TryChangeDamage(occupant, oxyHeal, ignoreResistances: true, interruptsDoAfters: false);
-        }
-
-        // Severe damage heals slower without proper chemicals
-        if (curBodyTemp < 210f) // Kelvin
-        {
-            if (damageable.DamagePerGroup.GetValueOrDefault(BruteGroup) > 0)
+            if (curBodyTemp < Atmospherics.T0C)
             {
-                var bruteDamage = damageable.DamagePerGroup.GetValueOrDefault(BruteGroup);
-                var bruteHealAmt = FixedPoint2.Min(1, 20 / bruteDamage);
-                var bruteHeal = _rmcDamageable.DistributeHealingCached(occupant, BruteGroup, bruteHealAmt);
-                _damageable.TryChangeDamage(occupant, bruteHeal, ignoreResistances: true, interruptsDoAfters: false);
-            }
+                _statusEffects.TryAddStatusEffectDuration(occupant, SleepingSystem.StatusEffectForcedSleeping, cell.Comp.SleepDuration);
+                _rmcSizeStun.TryKnockOut(occupant, cell.Comp.UnconsciousDuration, true);
 
-            if (damageable.DamagePerGroup.GetValueOrDefault(BurnGroup) > 0)
-            {
-                var burnDamage = damageable.DamagePerGroup.GetValueOrDefault(BurnGroup);
-                var burnHealAmt = FixedPoint2.Min(1, 20 / burnDamage);
-                var burnHeal = _rmcDamageable.DistributeHealingCached(occupant, BurnGroup, burnHealAmt);
-                _damageable.TryChangeDamage(occupant, burnHeal, ignoreResistances: true, interruptsDoAfters: false);
-            }
+                if (damageable.DamagePerGroup.GetValueOrDefault(AirlossGroup) > 0)
+                {
+                    var oxyHeal = _rmcDamageable.DistributeHealingCached(occupant, AirlossGroup, 1);
+                    _damageable.TryChangeDamage(occupant, oxyHeal, ignoreResistances: true, interruptsDoAfters: false);
+                }
 
-            if (damageable.DamagePerGroup.GetValueOrDefault(ToxinGroup) > 0)
-            {
-                var toxinDamage = damageable.DamagePerGroup.GetValueOrDefault(ToxinGroup);
-                var toxinHealAmt = FixedPoint2.Min(1, 20 / toxinDamage);
-                var toxinHeal = _rmcDamageable.DistributeHealingCached(occupant, ToxinGroup, toxinHealAmt);
-                _damageable.TryChangeDamage(occupant, toxinHeal, ignoreResistances: true, interruptsDoAfters: false);
+                // Severe damage heals slower without proper chemicals
+                if (curBodyTemp <= 210f) // 210 Kelvin
+                {
+                    var bruteDamage = damageable.DamagePerGroup.GetValueOrDefault(BruteGroup);
+                    if (bruteDamage > 0)
+                    {
+                        var bruteHealAmt = FixedPoint2.Min(1, 20 / bruteDamage);
+                        var bruteHeal = _rmcDamageable.DistributeHealingCached(occupant, BruteGroup, bruteHealAmt);
+                        _damageable.TryChangeDamage(occupant, bruteHeal, ignoreResistances: true, interruptsDoAfters: false);
+                    }
+
+                    var burnDamage = damageable.DamagePerGroup.GetValueOrDefault(BurnGroup);
+                    if (burnDamage > 0)
+                    {
+                        var burnHealAmt = FixedPoint2.Min(1, 20 / burnDamage);
+                        var burnHeal = _rmcDamageable.DistributeHealingCached(occupant, BurnGroup, burnHealAmt);
+                        _damageable.TryChangeDamage(occupant, burnHeal, ignoreResistances: true, interruptsDoAfters: false);
+                    }
+
+                    var toxinDamage = damageable.DamagePerGroup.GetValueOrDefault(ToxinGroup);
+                    if (toxinDamage > 0)
+                    {
+                        var toxinHealAmt = FixedPoint2.Min(1, 20 / toxinDamage);
+                        var toxinHeal = _rmcDamageable.DistributeHealingCached(occupant, ToxinGroup, toxinHealAmt);
+                        _damageable.TryChangeDamage(occupant, toxinHeal, ignoreResistances: true, interruptsDoAfters: false);
+                    }
+                }
             }
         }
 
@@ -316,9 +330,11 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         if (TryGetBeaker(cell, out var beakerEnt) &&
             TryComp<FitsInDispenserComponent>(beakerEnt, out var fits) &&
             _solutionContainer.TryGetSolution(beakerEnt, fits.Solution, out _, out var beakerSol) &&
-            _rmcBloodstream.TryGetChemicalSolution(occupant, out var chemSolEnt, out var chemSol) &&
-            beakerSol.Volume > FixedPoint2.Zero)
+            _rmcBloodstream.TryGetChemicalSolution(occupant, out var chemSolEnt, out var chemSol))
         {
+            if (beakerSol.Volume <= FixedPoint2.Zero)
+                return;
+
             bool HasAtLeastOne(Solution sol, string reagentId)
                 => sol.Contents.Any(r => r.Reagent.Prototype == reagentId && r.Quantity >= FixedPoint2.New(1));
 
