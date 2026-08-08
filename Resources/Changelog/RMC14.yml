@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: kleinerstation13
-  changes:
-  - message: Added a green band to PDW90 AP magazines
-    type: Tweak
-  id: 3055
-  time: '2026-04-03T09:17:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9500
-- author: wheelwrightt
-  changes:
-  - message: Intel officer's uniform now properly changes with map.
-    type: Fix
-  id: 3056
-  time: '2026-04-03T09:18:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9475
 - author: Dygon
   changes:
   - message: Floodlights no longer provide light while turned off.
@@ -4572,5 +4558,19 @@
   id: 3554
   time: '2026-08-06T22:49:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10621
+- author: carccborg
+  changes:
+  - message: FORECON synthetic now holds the rank of WO by default and CWO at 75 hours
+    type: Tweak
+  id: 3555
+  time: '2026-08-08T02:59:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10490
+- author: Vixting
+  changes:
+  - message: Fixed synth not being able to grab parasite
+    type: Fix
+  id: 3556
+  time: '2026-08-08T02:59:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10450
 Name: RMC14
 Order: -1
