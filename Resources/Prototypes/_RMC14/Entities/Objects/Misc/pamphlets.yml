@@ -483,6 +483,16 @@
   - type: SkillPamphlet
     language: Scandinavian
 
+# gives hindi language
+- type: entity
+  parent: CMPamphletLanguage
+  id: CMPamphletLanguageHindi
+  name: Excerpts from a Sanskrit Epic
+  description: Marked-up pages from the Hindi reprint of an ancient grand poem. The cultural significance is mostly lost on you, but the translated annotations are enough to grasp the basics of the language.
+  components:
+  - type: SkillPamphlet
+    language: Hindi
+
 # RESTRICTED LANGUAGES
 
 
