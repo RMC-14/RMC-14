@@ -322,6 +322,7 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleIntel
+  categories: [ HideSpawnMenu ]
   name: essential intel set
   description: Contains a crowbar, fultons, an intel detector, and binoculars.
   components:
