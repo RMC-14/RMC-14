@@ -112,7 +112,7 @@
     - id: CMFolderWhite
     - id: CMPenClicky
     - id: RMCRadioHandheldColonyOff
-    - id: CMClipboard # TODO RMC14 tape recorder
+    - id: RMCUniversalRecorder
     - id: CMCrowbar
 
 - type: entity
@@ -783,7 +783,7 @@
     - id: CMCrowbar
 
 - type: entity
-  parent: CMSatchel
+  parent: CMSatchelLiaisonSecure
   id: RMCSatchelICBLiaisonFill
   suffix: Interstellar Commerce Bureau Liaison, Filled
   components:
