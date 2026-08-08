@@ -25,10 +25,10 @@
     - type: MarineOrders
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/We-Ya/goon.rsi
         state: goon_leader
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/We-Ya/backgrounds.rsi
         state: background_goon
   greeting: rmc-job-greeting-corporate-dome-goon-lead
 

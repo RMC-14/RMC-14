@@ -24,10 +24,10 @@
     - type: RMCTrackable
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/We-Ya/liaison_ranks.rsi
         state: exec_super
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/We-Ya/backgrounds.rsi
         state: background_goon
   hasIcon: true
   hidden: true
@@ -103,10 +103,10 @@
     - type: RMCTrackable
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/We-Ya/liaison_ranks.rsi
         state: exec_spec
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/We-Ya/backgrounds.rsi
         state: background_goon
   hasIcon: true
   hidden: true
@@ -179,10 +179,10 @@
     - type: RMCTrackable
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/We-Ya/liaison_ranks.rsi
         state: exec_super
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/We-Ya/backgrounds.rsi
         state: background_goon
   hasIcon: true
   hidden: true
@@ -257,10 +257,10 @@
     - type: RMCTrackable
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/We-Ya/liaison_ranks.rsi
         state: ass_man
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/We-Ya/backgrounds.rsi
         state: background_goon
   hasIcon: true
   hidden: true
@@ -338,10 +338,10 @@
     - type: RMCTrackable
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/We-Ya/liaison_ranks.rsi
         state: div_man
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/We-Ya/backgrounds.rsi
         state: background_goon
   hasIcon: true
   hidden: true
@@ -407,10 +407,10 @@
     - type: RMCTrackable
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/We-Ya/liaison_ranks.rsi
         state: chief_man
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/We-Ya/backgrounds.rsi
         state: background_goon
   hasIcon: true
   hidden: true
@@ -479,10 +479,10 @@
     - type: RMCTrackable
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/We-Ya/liaison_ranks.rsi
         state: dep_director
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/We-Ya/backgrounds.rsi
         state: background_goon
   hasIcon: true
   hidden: true
@@ -563,10 +563,10 @@
     - type: RMCTrackable
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/We-Ya/liaison_ranks.rsi
         state: director
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/We-Ya/backgrounds.rsi
         state: background_goon
   hasIcon: true
   hidden: true

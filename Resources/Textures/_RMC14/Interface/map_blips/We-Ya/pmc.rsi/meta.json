@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from https://github.com/cmss13-devs/cmss13/commit/70f98497ccd968d049906e499be8aa1b8f219f8a, pmc tl by noctyrnal (Github), pmc_spec from https://github.com/cmss13-devs/cmss13/pull/8088",
+  "size": {
+    "x": 7,
+    "y": 7
+  },
+  "states": [
+    {
+      "name": "medic_k9"
+    },
+    {
+      "name": "pmc_gun"
+    },
+    {
+      "name": "pmc_ld"
+    },
+    {
+      "name": "pmc_md"
+    },
+    {
+      "name": "pmc_mi"
+    },
+    {
+      "name": "pmc_mp"
+    },
+    {
+      "name": "pmc_sd"
+    },
+    {
+      "name": "pmc_sg"
+    },
+    {
+      "name": "pmc_spec"
+    },
+    {
+      "name": "pmc_syn"
+    },
+    {
+      "name": "pmc_td"
+    },
+    {
+      "name": "pmc_tl"
+    },
+    {
+      "name": "pmc_vc"
+    },
+    {
+      "name": "synth_k9"
+    }
+  ]
+}
+

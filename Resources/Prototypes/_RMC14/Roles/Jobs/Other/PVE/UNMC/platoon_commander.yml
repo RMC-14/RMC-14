@@ -35,10 +35,10 @@
       prefix: cm-job-prefix-platoon-commander
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/whiskey_outpost.rsi
         state: co_wo
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/UNMC/backgrounds.rsi
         state: background_command
     - type: RMCTrackable
   hidden: true

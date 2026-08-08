@@ -26,7 +26,7 @@
     accessLevels:
     - CMAccessAlpha
     minimapBackground:
-     sprite: /Textures/_RMC14/Interface/map_blips.rsi
+     sprite: /Textures/_RMC14/Interface/map_blips/UNMC/backgrounds.rsi
      state: background_alpha
 
 - type: entity
@@ -41,7 +41,7 @@
     accessLevels:
     - CMAccessBravo
     minimapBackground:
-     sprite: /Textures/_RMC14/Interface/map_blips.rsi
+     sprite: /Textures/_RMC14/Interface/map_blips/UNMC/backgrounds.rsi
      state: background_bravo
 
 - type: entity
@@ -56,7 +56,7 @@
     accessLevels:
     - CMAccessCharlie
     minimapBackground:
-     sprite: /Textures/_RMC14/Interface/map_blips.rsi
+     sprite: /Textures/_RMC14/Interface/map_blips/UNMC/backgrounds.rsi
      state: background_charlie
 
 - type: entity
@@ -71,7 +71,7 @@
     accessLevels:
     - CMAccessDelta
     minimapBackground:
-     sprite: /Textures/_RMC14/Interface/map_blips.rsi
+     sprite: /Textures/_RMC14/Interface/map_blips/UNMC/backgrounds.rsi
      state: background_delta
 
 - type: entity
@@ -88,7 +88,7 @@
     - CMAccessCharlie
     - CMAccessDelta
     minimapBackground:
-     sprite: /Textures/_RMC14/Interface/map_blips.rsi
+     sprite: /Textures/_RMC14/Interface/map_blips/UNMC/backgrounds.rsi
      state: background_foxtrot
     canSupplyDrop: false
 
@@ -106,7 +106,7 @@
     - CMAccessCharlie
     - CMAccessDelta
     minimapBackground:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/UNMC/backgrounds.rsi
       state: background_echo
   - type: Tag
     tags:
@@ -128,7 +128,7 @@
     - Armor
     radio: MarineIntel
     minimapBackground:
-     sprite: /Textures/_RMC14/Interface/map_blips.rsi
+     sprite: /Textures/_RMC14/Interface/map_blips/UNMC/backgrounds.rsi
      state: background_intel
     canSupplyDrop: false
     maxRoles:
@@ -165,7 +165,7 @@
     canSupplyDrop: false
     group: SOF
     minimapBackground:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/UNMC/backgrounds.rsi
       state: background_cbrn
   - type: Tag
     tags:
@@ -191,7 +191,7 @@
     - Gloves
     radio: SPP
     minimapBackground:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/SPP/backgrounds.rsi
       state: background_spp
     canSupplyDrop: false
     group: SPP
@@ -219,7 +219,7 @@
     - Gloves
     radio: WEYA
     minimapBackground:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/We-Ya/backgrounds.rsi
       state: background_pmc
     canSupplyDrop: false
     group: WeYa
@@ -250,7 +250,7 @@
     - Gloves
     radio: Colony
     minimapBackground:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/Other/other.rsi
       state: background_free
     canSupplyDrop: false
     group: Freelancer
@@ -275,7 +275,7 @@
     - Gloves
     radio: TSE
     minimapBackground:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/TSE/backgrounds.rsi
       state: background_twe
     canSupplyDrop: false
     group: Royal Marines
@@ -306,7 +306,7 @@
     - Gloves
     radio: TSE
     minimapBackground:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/TSE/backgrounds.rsi
       state: background_twe
     canSupplyDrop: false
     group: Whiskey Troop
@@ -337,7 +337,7 @@
     - Gloves
     radio: TSE
     minimapBackground:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/TSE/backgrounds.rsi
       state: background_para
     canSupplyDrop: false
     group: Paramarine
@@ -368,7 +368,7 @@
     - Gloves
     radio: Provost
     minimapBackground:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/TSE/backgrounds.rsi
       state: background_twe
     canSupplyDrop: false
     group: Provost
@@ -390,7 +390,7 @@
     - Gloves
     radio: MarineSOF
     minimapBackground:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/UNMC/backgrounds.rsi
       state: background_forecon
     canSupplyDrop: false
     group: FORECON
@@ -414,7 +414,7 @@
     radio: MarineSOF
     accessLevels: []
     minimapBackground:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/UNMC/backgrounds.rsi
       state: background_sof
     group: SOF
     leaderIcon:
@@ -438,8 +438,8 @@
     - Gloves
     radio: Colony
     minimapBackground:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
-      state: background_spp
+      sprite: /Textures/_RMC14/Interface/map_blips/CLF.rsi
+      state: background_clf
     canSupplyDrop: false
     group: CLF
     leaderIcon:
@@ -456,7 +456,7 @@
     radio: MarineCommon
     accessLevels: [] # Get them assigned before gearing up.
     minimapBackground:
-     sprite: _RMC14/Interface/map_blips.rsi
+     sprite: _RMC14/Interface/map_blips/UNMC/backgrounds.rsi
      state: background
     canSupplyDrop: false
     blacklistedSquadArmor:
@@ -479,7 +479,7 @@
     - Gloves
     radio: MarineAlpha
     minimapBackground:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/UNMC/backgrounds.rsi
       state: background_delta
   - type: Tag
     tags:

@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Made by Vermidia (Github)",
+  "size": {
+    "x": 7,
+    "y": 7
+  },
+  "states": [
+    {
+      "name": "gm_circle"
+    },
+    {
+      "name": "gm_dollar"
+    },
+    {
+      "name": "gm_exclamation"
+    },
+    {
+      "name": "gm_hash"
+    },
+    {
+      "name": "gm_question"
+    },
+    {
+      "name": "gm_shield"
+    },
+    {
+      "name": "gm_star"
+    },
+    {
+      "name": "gm_sword"
+    },
+    {
+      "name": "gm_x"
+    }
+  ]
+}

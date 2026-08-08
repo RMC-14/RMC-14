@@ -41,10 +41,10 @@
     - type: RMCAllowSuitStorage
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/We-Ya/liaison_ranks.rsi
         state: cl
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/We-Ya/backgrounds.rsi
         state: background_goon
   useLoadoutOfJob: CMSurvivorCorporate # for inheritance
 

@@ -12,7 +12,7 @@
       preset: RMCSkillPresetReconRifleman
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/UNMC/marine.rsi
         state: private
     - type: IntelRescueSurvivorObjective
     - type: AssignSquad

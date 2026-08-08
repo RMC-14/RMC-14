@@ -33,10 +33,10 @@
       prefix: rmc-job-prefix-rcm-teamlead
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/TSE/RCM/Standard.rsi
         state: rmc_teamleader
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/TSE/backgrounds.rsi
         state: background_twe
   hidden: true
 
