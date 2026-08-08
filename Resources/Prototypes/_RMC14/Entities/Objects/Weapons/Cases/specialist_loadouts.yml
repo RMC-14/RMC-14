@@ -226,13 +226,13 @@
     - 0,0,13,3
   - type: Sprite
     sprite: _RMC14/Objects/Storage/procase_mini.rsi
-  - type: Icon
-    sprite: _RMC14/Objects/Storage/procase_mini.rsi
     layers:
     - state: closed
       map: [ base ]
     - state: loader
       map: [ label ]
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
   - type: StorageFill
     contents:
     - id: RMCArmorM3TDemo

@@ -48,7 +48,7 @@
       - id: RMCMagazinePistolM1984HP
         points: 5
       - id: CMMagazinePistolMK80
-        points: 10
+        points: 5
       - id: RMCMagazinePistolSU6
         points: 10
     - name: Restricted Firearms
@@ -299,7 +299,7 @@
       - id: RMCMagazinePistolM1984HP
         amount: 8
       - id: CMMagazinePistolMK80
-        amount: 20
+        amount: 16
     - name: Attachments
       entries:
       - id: RMCAttachmentRailFlashlight
@@ -339,13 +339,19 @@
   parent: RMCKitBase
   id: RMCKitIntel
   name: field intelligence support kit
+  description: Contains 20 fultons, an intel encryption key, a field intelligence instructional pamphlet, a data detector, and a large document pouch.
   components:
   - type: Storage
     maxItemSize: Huge
     grid:
     - 0,0,9,1
   - type: Sprite
-    sprite: _RMC14/Objects/Storage/procase_mini.rsi # TODO RMC14 jtac overlay icon
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+    layers:
+    - state: closed
+      map: [ base ]
+    - state: jtac
+      map: [ label ]
   - type: Icon
     sprite: _RMC14/Objects/Storage/procase_mini.rsi
   - type: StorageFill

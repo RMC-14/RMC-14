@@ -1013,7 +1013,12 @@
   description: A casual cap issued as part of the non-combat uniform. While it only protects from the sun, it's much more comfortable than a helmet.
   components:
   - type: ItemCamouflage
-    camouflageVariations: {}
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Hats/cap/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Hats/cap/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Hats/cap/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Hats/cap/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Hats/cap/urban.rsi
 
 - type: entity
   parent: RMCHeadCapGrey
