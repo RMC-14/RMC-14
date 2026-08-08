@@ -165,3 +165,21 @@
   components:
   - type: Sprite
     state: nereidspaceport_sign
+
+- type: entity
+  parent: RMCBaseLandingSign
+  id: RMCBanerjeesCanalWelcomeSign
+  name: Banerjee's Canal welcome sign
+  description: "A large sign that reads 'Welcome to Banerjee's Canal' in large text, with some information about the colony in the corner, and the symbol of the TSE. Below the main sign is another, smaller sign, reading 'Pop: 240,439'. This sign is heavily worn from sand and wind."
+  components:
+  - type: Sprite
+    state: banerjeeswelcome_sign
+
+- type: entity
+  parent: RMCBaseLandingSign
+  id: RMCBanerjeesCanalTerminalSign
+  name: Cargo Terminal BC-893 sign
+  description: "A large sign that reads 'Terminal BC-893'. In the corner is some text warning against trespassing, as well as the WEYA logo. It's not clear if BC stands for 'Banerjee's Canal' or 'Bulk Carrier'."
+  components:
+  - type: Sprite
+    state: banerjeesterminal_sign
