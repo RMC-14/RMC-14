@@ -313,8 +313,17 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
         var centerCoordinates = _mapSystem.GridTileToLocal(grid, grid, center);
         var rotation = _transform.GetWorldRotation(landing) - _transform.GetWorldRotation(grid);
         var bounds = _entityLookup.GetAABBNoContainer(landing, centerCoordinates.Position, rotation);
+
+        // Prevent exact 1 tile sized fixtures from putting warnings on the neighboring tiles.
+        var horizontalInset = MathF.Min(PhysicsConstants.PolygonRadius, bounds.Width / 2);
+        var verticalInset = MathF.Min(PhysicsConstants.PolygonRadius, bounds.Height / 2);
+        var footprintBounds = new Box2(
+            bounds.Left + horizontalInset,
+            bounds.Bottom + verticalInset,
+            bounds.Right - horizontalInset,
+            bounds.Top - verticalInset);
         var tileBounds = Box2.CenteredAround(centerCoordinates.Position, new Vector2(grid.Comp.TileSize));
-        if (tileBounds.Enlarged(PhysicsConstants.LinearSlop).Contains(bounds))
+        if (tileBounds.Enlarged(PhysicsConstants.LinearSlop).Contains(footprintBounds))
         {
             var centerFootprint = new List<TileRef>();
             if (_mapSystem.TryGetTileRef(grid, grid, center, out var centerTile))
@@ -323,7 +332,7 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
             return centerFootprint;
         }
 
-        var footprint = _mapSystem.GetLocalTilesIntersecting(grid, grid, bounds, false).ToList();
+        var footprint = _mapSystem.GetLocalTilesIntersecting(grid, grid, footprintBounds, false).ToList();
         if (footprint.Count == 0 && _mapSystem.TryGetTileRef(grid, grid, center, out var fallbackTile))
             footprint.Add(fallbackTile);
 
@@ -377,15 +386,15 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
 
                 location = _mapSystem.GridTileToLocal(grid, gridComp, tile);
 
-                if (blocking)
-                {
-                    _crashLandingBlockers.Clear();
-                    _entityLookup.GetEntitiesInRange(location, _crashLandingBlockerRadius, _crashLandingBlockers);
-                    if (_crashLandingBlockers.Count > 0)
-                        continue;
+                if (!blocking)
+                    return true;
 
-                    SpawnAtPosition(_crashLandingBlocker, location);
-                }
+                _crashLandingBlockers.Clear();
+                _entityLookup.GetEntitiesInRange(location, _crashLandingBlockerRadius, _crashLandingBlockers);
+                if (_crashLandingBlockers.Count > 0)
+                    continue;
+
+                SpawnAtPosition(_crashLandingBlocker, location);
 
                 return true;
             }

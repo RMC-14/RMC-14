@@ -1,5 +1,4 @@
 using System.Linq;
-using System.Numerics;
 using Content.Server._RMC14.PayloadDeployment;
 using Content.Shared._RMC14.CrashLand;
 using Content.Shared._RMC14.ParaDrop;
@@ -7,6 +6,7 @@ using Content.Shared._RMC14.PayloadDeployment;
 using Content.Shared._RMC14.SupplyDrop;
 using Content.Shared.Ghost;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Prototypes;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
@@ -76,7 +76,8 @@ public sealed partial class ParaDropSystem
             foreach (var prototypePayload in request.Prototypes)
             {
                 if (!_prototypes.TryIndex(prototypePayload.Prototype, out var prototype) ||
-                    prototype.Abstract)
+                    prototype.Abstract ||
+                    prototype.HasComponent<OccluderComponent>(EntityManager.ComponentFactory))
                 {
                     CleanupEntities(spawnedPayload);
                     return new RMCPayloadDeploymentResult(RMCPayloadDeploymentFailure.InvalidPrototype, requestIndex);
@@ -87,6 +88,7 @@ public sealed partial class ParaDropSystem
                     var spawned = Spawn(prototypePayload.Prototype, _payloadDeployment.GetStagingCoordinates(stagingOrigin));
                     spawnedPayload.Add(spawned);
                     payload.Add(spawned);
+                    _payloadDeployment.PreparePrototypePayload(spawned, prototype);
                 }
             }
 
@@ -99,8 +101,7 @@ public sealed partial class ParaDropSystem
                     requestPayload);
             }
 
-            if (!TryFindLandingTiles(request, (grid, gridComponent), assignedTiles, payload,
-                    out var landingTiles, out var assignedLandings))
+            if (!TryFindLandingTiles(request, (grid, gridComponent), assignedTiles, payload, out var landingTiles, out var assignedLandings))
             {
                 CleanupEntities(spawnedPayload);
                 return new RMCPayloadDeploymentResult(
@@ -159,10 +160,7 @@ public sealed partial class ParaDropSystem
         return new RMCPayloadDeploymentResult(RMCPayloadDeploymentFailure.None);
     }
 
-    private bool ValidateParaDropRequest(
-        RMCParaDropRequest request,
-        out List<EntityUid> existingPayload,
-        out int totalPayload)
+    private bool ValidateParaDropRequest(RMCParaDropRequest request, out List<EntityUid> existingPayload, out int totalPayload)
     {
         existingPayload = request.Entities.Distinct().ToList();
         totalPayload = existingPayload.Count;
@@ -288,6 +286,7 @@ public sealed partial class ParaDropSystem
     {
         foreach (var entity in entities)
         {
+            _payloadDeployment.CancelPrototypePayload(entity);
             if (TerminatingOrDeleted(entity) || EntityManager.IsQueuedForDeletion(entity))
                 continue;
 
@@ -315,11 +314,14 @@ public sealed partial class ParaDropSystem
                     HasComp<ParaDroppingComponent>(queued.Entity) ||
                     HasComp<BeingSupplyDroppedComponent>(queued.Entity))
                 {
-                    if (!queued.Existing &&
-                        !TerminatingOrDeleted(queued.Entity) &&
-                        !EntityManager.IsQueuedForDeletion(queued.Entity))
+                    if (!queued.Existing)
                     {
-                        QueueDel(queued.Entity);
+                        _payloadDeployment.CancelPrototypePayload(queued.Entity);
+                        if (!TerminatingOrDeleted(queued.Entity) &&
+                            !EntityManager.IsQueuedForDeletion(queued.Entity))
+                        {
+                            QueueDel(queued.Entity);
+                        }
                     }
 
                     continue;

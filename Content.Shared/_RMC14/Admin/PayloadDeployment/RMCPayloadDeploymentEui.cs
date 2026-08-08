@@ -106,11 +106,7 @@ public sealed class RMCParaDropBatchLaunchMsg(List<RMCParaDropManifestMsg> manif
 }
 
 [Serializable, NetSerializable]
-public sealed class RMCPayloadDeploymentResultMsg(
-    RMCPayloadDeploymentFailure failure,
-    int failedManifest,
-    int requestedLandings,
-    int assignedLandings) : EuiMessageBase
+public sealed class RMCPayloadDeploymentResultMsg(RMCPayloadDeploymentFailure failure, int failedManifest, int requestedLandings, int assignedLandings) : EuiMessageBase
 {
     public readonly RMCPayloadDeploymentFailure Failure = failure;
     public readonly int FailedManifest = failedManifest;

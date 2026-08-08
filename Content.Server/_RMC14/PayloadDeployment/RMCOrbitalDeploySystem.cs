@@ -7,6 +7,7 @@ using Content.Shared._RMC14.PayloadDeployment.Systems;
 using Content.Shared._RMC14.SupplyDrop;
 using Content.Shared.Damage;
 using Content.Shared.GameTicking;
+using Content.Shared.Prototypes;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -157,7 +158,9 @@ public sealed class RMCOrbitalDeploySystem : SharedRMCOrbitalDeploySystem
         var spawnedPayload = new List<EntityUid>();
         foreach (var prototypePayload in request.Prototypes)
         {
-            if (!_prototypes.TryIndex(prototypePayload.Prototype, out var prototype) || prototype.Abstract)
+            if (!_prototypes.TryIndex(prototypePayload.Prototype, out var prototype) ||
+                prototype.Abstract ||
+                prototype.HasComponent<OccluderComponent>(EntityManager.ComponentFactory))
             {
                 CleanupEntities(spawnedPayload);
                 failure = RMCPayloadDeploymentFailure.InvalidPrototype;
@@ -166,7 +169,9 @@ public sealed class RMCOrbitalDeploySystem : SharedRMCOrbitalDeploySystem
 
             for (var i = 0; i < prototypePayload.Quantity; i++)
             {
-                spawnedPayload.Add(Spawn(prototypePayload.Prototype));
+                var spawned = Spawn(prototypePayload.Prototype);
+                spawnedPayload.Add(spawned);
+                _payloadDeployment.PreparePrototypePayload(spawned, prototype);
             }
         }
 
@@ -539,8 +544,12 @@ public sealed class RMCOrbitalDeploySystem : SharedRMCOrbitalDeploySystem
             IsBeingSupplyDropped(queued.Entity))
         {
             ReleaseTileReservations(queued.Tiles);
-            if (!queued.Existing &&
-                !TerminatingOrDeleted(queued.Entity) &&
+
+            if (queued.Existing)
+                return;
+
+            _payloadDeployment.CancelPrototypePayload(queued.Entity);
+            if (!TerminatingOrDeleted(queued.Entity) &&
                 !EntityManager.IsQueuedForDeletion(queued.Entity))
             {
                 QueueDel(queued.Entity);
@@ -611,6 +620,7 @@ public sealed class RMCOrbitalDeploySystem : SharedRMCOrbitalDeploySystem
     {
         foreach (var entity in entities)
         {
+            _payloadDeployment.CancelPrototypePayload(entity);
             if (TerminatingOrDeleted(entity) || EntityManager.IsQueuedForDeletion(entity))
                 continue;
 
@@ -654,7 +664,12 @@ public sealed class RMCOrbitalDeploySystem : SharedRMCOrbitalDeploySystem
                 continue;
 
             if (Container.TryGetContainer(uid, dropPod.DeploySlotId, out var container))
-                Container.EmptyContainer(container, true);
+            {
+                foreach (var entity in Container.EmptyContainer(container, true))
+                {
+                    _payloadDeployment.CompletePrototypePayload(entity);
+                }
+            }
 
             QueueDel(uid);
         }

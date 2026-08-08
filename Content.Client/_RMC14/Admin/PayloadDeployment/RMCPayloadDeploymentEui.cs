@@ -4,6 +4,7 @@ using Content.Client.Eui;
 using Content.Shared._RMC14.Admin.PayloadDeployment;
 using Content.Shared._RMC14.PayloadDeployment;
 using Content.Shared.Eui;
+using Content.Shared.Prototypes;
 using JetBrains.Annotations;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
@@ -514,6 +515,7 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
         {
             if (prototype.Abstract ||
                 prototype.HideSpawnMenu ||
+                prototype.HasComponent<OccluderComponent>(_entities.ComponentFactory) ||
                 filter != null && !prototype.Categories.Contains(filter))
             {
                 continue;

@@ -76,15 +76,8 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
         if (TerminatingOrDeleted(ent))
             return;
 
-        if (!TryComp(ent, out AnimationPlayerComponent? animation))
-            return;
-
-        _animPlayer.Stop((ent, animation), DroppingAnimationKey);
-
-        if (!TryComp(ent, out SpriteComponent? sprite))
-            return;
-
-        _sprite.SetOffset((ent, sprite), ent.Comp.OriginalSpriteOffset);
+        if (TryComp(ent, out AnimationPlayerComponent? animation))
+            _animPlayer.Stop((ent, animation), DroppingAnimationKey);
     }
 
     public Animation ReturnFallAnimation(float fallDuration, Vector2 fallOffset, Vector2 offset = new ())

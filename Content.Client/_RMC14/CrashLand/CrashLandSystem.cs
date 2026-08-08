@@ -11,7 +11,6 @@ public sealed class CrashLandSystem : SharedCrashLandSystem
     [Dependency] private readonly AnimationPlayerSystem _animPlayer = default!;
     [Dependency] private readonly ParaDropSystem _paraDrop = default!;
     [Dependency] private readonly RMCSpriteSystem _rmcSprite = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
 
     private const string CrashingAnimationKey = "crashing-animation";
 
@@ -27,12 +26,7 @@ public sealed class CrashLandSystem : SharedCrashLandSystem
             return;
 
         if (TryComp(ent, out AnimationPlayerComponent? animation))
-            _animPlayer.Stop((ent, animation),CrashingAnimationKey);
-
-        if (!TryComp(ent, out SpriteComponent? sprite))
-            return;
-
-        _sprite.SetOffset(ent.Owner, ent.Comp.OriginalSpriteOffset);
+            _animPlayer.Stop((ent, animation), CrashingAnimationKey);
     }
 
     public override void Update(float frameTime)
