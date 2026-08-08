@@ -61,3 +61,30 @@
     containers:
       key_slots:
       - RMCEncryptionKeyTSEPA
+
+- type: entity # Standalone headset for TSEPA PVE roles
+  parent: RMCHeadsetIconsTSE
+  id: RMCHeadsetTSEPAPVE
+  name: TSEPA headset
+  components:
+  - type: GrantSquadLeaderTracker
+    defaultMode: InspectorTSEPAPVE
+    trackerModes:
+    - InspectorTSEPAPVE
+    - SergeantTSEPAPVE
+    - SeniorConstableTSEPAPVE
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeyTSEPA
+  - type: GrantTacMapAlert
+
+- type: entity # Headset for command TSEPA PVE roles
+  parent: RMCHeadsetTSEPAPVE
+  id: RMCHeadsetCommandTSEPAPVE
+  name: TSEPA command headset
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommand

@@ -1,0 +1,70 @@
+- type: job
+  parent: CMJobBase
+  id: RMCTSEPASergeantPVE
+  name: rmc-job-name-tsepa-pve-sergeant
+  description: rmc-ghost-role-information-tsepa-description
+  playTimeTracker: RMCJobTSEPASergeantPVE
+  ranks:
+    RMCRankTSEPASergeant: []
+  startingGear: RMCGearTSEPASergeantPVE
+  icon: "RMCJobIconTSEPASergeantPVE"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-tsepa-inspector
+  accessGroups:
+  - ColonistTSEPA
+  spawnMenuRoleName: TSEPA Sergeant (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillCqc: 2
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 2
+        RMCSkillFireman: 2
+        RMCSkillIntel: 1
+        RMCSkillLeadership: 1
+        RMCSkillMedical: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillPolice: 2
+        RMCSkillVehicles: 1
+    - type: NpcFactionMember
+      factions:
+      - TSE
+    - type: JobPrefix
+      prefix: rmc-job-prefix-tsepa-pve-sergeant
+    - type: AssignSquad
+      squad: SquadTSEPAPVE
+    - type: RMCTrackable
+    - type: RMCPointing
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: tse_pasergeant_pve
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_nspa
+  hidden: true
+
+- type: startingGear
+  id: RMCGearTSEPASergeantPVE
+  equipment:
+    head: RMCHeadCapTSEPAPeakedGoldSilver
+    eyes: RMCGlassesSecurityBlue
+    ears: RMCHeadsetCommandTSEPAPVE
+    jumpsuit: RMCJumpsuitTSEPA
+    outerClothing: RMCCoatTSEPA
+    shoes: RMCShoesLaceup
+    id: RMCIDCardTSEPASilverGold
+    back: RMCSatchelTSEPA
+
+- type: playTimeTracker
+  id: RMCJobTSEPASergeantPVE
+  isHumanoid: true
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconTSEPASergeantPVE
+  icon:
+    sprite: _RMC14/Interface/job_icons/TSE/TSEPA.rsi
+    state: tse_pasergeant_pve

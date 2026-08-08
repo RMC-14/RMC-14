@@ -353,6 +353,37 @@
 
 - type: entity
   parent: SquadBase
+  id: SquadTSEPAPVE
+  name: TSEPA
+  components:
+  - type: SquadTeam
+    color: "#334b79"
+    background:
+      sprite: _RMC14/Interface/job_icons/Misc/other.rsi
+      state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+    radio: TSE
+    minimapBackground:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: background_nspa
+    canSupplyDrop: false
+    group: TSEPA
+    leaderIcon:
+      sprite: /Textures/_RMC14/Interface/job_icons/TSE/TSEPA.rsi
+      state: tse_pasergeant_pve
+  - type: Tag
+    tags:
+    - RMCSquadTSEPAPVE
+
+- type: Tag
+  id: RMCSquadTSEPAPVE
+
+- type: entity
+  parent: SquadBase
   id: SquadProvost
   name: Provost
   components:

@@ -1,0 +1,65 @@
+- type: job
+  parent: CMJobBase
+  id: RMCTSEPAConstablePVE
+  name: rmc-job-name-tsepa-pve-constable
+  description: rmc-ghost-role-information-tsepa-description
+  playTimeTracker: RMCJobTSEPAConstablePVE
+  ranks:
+    RMCRankTSEPAConstable: []
+  startingGear: RMCGearTSEPAConstablePVE
+  icon: "RMCJobIconTSEPAConstablePVE"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-tsepa-sergeant
+  accessGroups:
+  - ColonistTSEPA
+  spawnMenuRoleName: TSEPA Constable (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillCqc: 2
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillMedical: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillPolice: 2
+        RMCSkillVehicles: 1
+    - type: NpcFactionMember
+      factions:
+      - TSE
+    - type: JobPrefix
+      prefix: rmc-job-prefix-tsepa-pve-constable
+    - type: AssignSquad
+      squad: SquadTSEPAPVE
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: tse_paconstable_pve
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_nspa
+  hidden: true
+
+- type: startingGear
+  id: RMCGearTSEPAConstablePVE
+  equipment:
+    head: RMCHeadCapTSEPA
+    eyes: RMCGlassesSecurityBlue
+    ears: RMCHeadsetTSEPAPVE
+    jumpsuit: RMCJumpsuitTSEPA
+    shoes: RMCShoesLaceup
+    id: RMCIDCardTSEPA
+    back: RMCSatchelTSEPA
+
+- type: playTimeTracker
+  id: RMCJobTSEPAConstablePVE
+  isHumanoid: true
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconTSEPAConstablePVE
+  icon:
+    sprite: _RMC14/Interface/job_icons/TSE/TSEPA.rsi
+    state: tse_paconstable_pve
