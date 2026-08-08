@@ -20,6 +20,7 @@
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
+      - id: RMCOuterClothingExternalWebbing
       - id: CMHeadsetEngineer
       - id: CMMRE
         name: MRE
