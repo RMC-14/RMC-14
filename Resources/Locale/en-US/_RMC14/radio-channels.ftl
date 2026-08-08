@@ -34,5 +34,8 @@ chat-radio-royal-marine = Royal Marine
 chat-radio-tse = TSE
 
 chat-radio-hivemind = Hivemind
+chat-radio-intercom = Intercom
+
+rmc-intercom-no-device = There is no powered intercom nearby.
 
 chat-radio-marine-sun-riders = Sun Riders
