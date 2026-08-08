@@ -1,0 +1,89 @@
+- files: ["dial.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/machines/telephone/dial.ogg"
+
+- files: ["phone_busy.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/machines/telephone/phone_busy.ogg"
+
+- files: ["remote_hangup.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/machines/telephone/remove_hangup.ogg"
+
+- files: ["remote_pickup.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/machines/telephone/remote_pickup.ogg"
+
+- files: ["ring_outgoing.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/machines/telephone/ring_outgoing.ogg"
+
+- files: ["rtb_handset_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/machines/telephone/rtb_handset_1.ogg"
+
+- files: ["rtb_handset_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/machines/telephone/rtb_handset_2.ogg"
+
+- files: ["rtb_handset_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/machines/telephone/rtb_handset_3.ogg"
+
+- files: ["rtb_handset_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/machines/telephone/rtb_handset_4.ogg"
+
+- files: ["rtb_handset_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/machines/telephone/rtb_handset_5.ogg"
+
+- files: ["talk_phone1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/machines/telephone/talk_phone1.ogg"
+
+- files: ["talk_phone2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/machines/telephone/talk_phone2.ogg"
+
+- files: ["talk_phone3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/machines/telephone/talk_phone3.ogg"
+
+- files: ["talk_phone4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/machines/telephone/talk_phone4.ogg"
+
+- files: ["talk_phone5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/machines/telephone/talk_phone5.ogg"
+
+- files: ["talk_phone6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/machines/telephone/talk_phone6.ogg"
+
+- files: ["talk_phone7.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/machines/telephone/talk_phone7.ogg"
+
+- files: ["telephone_ring.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/machines/telephone/telephone_ring.ogg"
