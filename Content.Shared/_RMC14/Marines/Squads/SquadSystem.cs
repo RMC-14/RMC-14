@@ -12,6 +12,8 @@ using Content.Shared._RMC14.Marines.Orders;
 using Content.Shared._RMC14.Pointing;
 using Content.Shared._RMC14.Roles;
 using Content.Shared._RMC14.Tracker;
+using Content.Shared._RMC14.Actions;
+using Content.Shared.Actions;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Chat;
@@ -63,6 +65,8 @@ public sealed class SquadSystem : EntitySystem
     [Dependency] private readonly SharedAwardRecommendationSystem _awardRecommendation = default!;
     [Dependency] private readonly SharedRMCBanSystem _rmcBan = default!;
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
 
     private static readonly ProtoId<JobPrototype> SquadLeaderJob = "CMSquadLeader";
     private static readonly ProtoId<JobPrototype> IntelOfficerJob = "CMIntelOfficer";
@@ -248,6 +252,9 @@ public sealed class SquadSystem : EntitySystem
     {
         // Disable recommendation ability when squad leader is demoted
         _awardRecommendation.SetCanRecommend(ent, false);
+
+        if (ent.Comp.CommandSpeechAction is { } action)
+        _actions.RemoveAction(ent.Owner, action);
     }
 
     private void OnSquadLeaderTerminating(Entity<SquadLeaderComponent> ent, ref EntityTerminatingEvent args)
@@ -739,6 +746,7 @@ public sealed class SquadSystem : EntitySystem
         }
 
         var newLeader = EnsureComp<SquadLeaderComponent>(toPromote);
+
         newLeader.Icon = icon;
 
         EnsureComp<RMCAwardRecommendationComponent>(toPromote);
