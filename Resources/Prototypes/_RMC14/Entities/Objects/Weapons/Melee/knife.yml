@@ -14,6 +14,11 @@
     blacklist:
       components:
       - Xeno
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-knife
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: [ RMCBaseMeleeWeapon, BaseKnife, RMCAttachableBase ]

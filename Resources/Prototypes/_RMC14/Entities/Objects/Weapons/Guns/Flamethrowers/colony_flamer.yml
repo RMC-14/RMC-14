@@ -88,6 +88,11 @@
   - type: Tag
     tags:
     - RMCTankFlamerColony
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-flamethrower
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCBaseTankFlamer

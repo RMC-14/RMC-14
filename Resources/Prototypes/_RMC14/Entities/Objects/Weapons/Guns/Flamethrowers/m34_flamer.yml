@@ -96,6 +96,11 @@
     - RMCWeaponIncineratorM34
   - type: RMCNameItemOnVend
     item: PrimaryGun
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-flamethrower
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCWeaponFlamer
