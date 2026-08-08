@@ -128,6 +128,7 @@
     maxIntegrity: 1000
     integrity: 1000
     bypassEntryOnZero: true
+  - type: VehicleDemolition
   - type: Appearance
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/van_interior.yml

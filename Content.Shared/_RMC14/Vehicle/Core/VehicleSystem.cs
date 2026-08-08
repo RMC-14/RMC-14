@@ -45,7 +45,7 @@ using Content.Shared.Physics;
 
 namespace Content.Shared._RMC14.Vehicle;
 
-public sealed class VehicleSystem : EntitySystem
+public sealed partial class VehicleSystem : EntitySystem
 {
     private static readonly EntProtoId VehicleKey = "RMCVehicleKey";
 
@@ -107,6 +107,9 @@ public sealed class VehicleSystem : EntitySystem
         SubscribeLocalEvent<HardpointIntegrityComponent, VehicleCanRunEvent>(OnFrameVehicleCanRun);
         SubscribeLocalEvent<VehicleInteriorComponent, VehicleFrameIntegrityChangedEvent>(OnVehicleFrameIntegrityChanged);
         SubscribeLocalEvent<RMCConstructionAttemptEvent>(OnConstructionAttempt);
+
+        SubscribeLocalEvent<VehicleDemolitionComponent, InteractUsingEvent>(OnDemolitionInteractUsing);
+        SubscribeLocalEvent<VehicleDemolitionComponent, VehicleDemolitionDoAfterEvent>(OnDemolitionDoAfter);
     }
 
     private void OnVehicleEnterActivate(Entity<VehicleEnterComponent> ent, ref ActivateInWorldEvent args)
