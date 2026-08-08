@@ -448,6 +448,8 @@
     biteDamage:
       groups:
         Brute: 20
+  - type: RMCActionOrder
+    id: RMCXenoQueenBlood
       
 
 - type: entity
