@@ -22,7 +22,7 @@ public sealed partial class VehicleWeaponsComponent : Component
     public Dictionary<EntityUid, EntityUid> OperatorSelections = new();
 }
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
 [Access(typeof(VehicleWeaponsSystem))]
 public sealed partial class VehicleWeaponsOperatorComponent : Component
 {
