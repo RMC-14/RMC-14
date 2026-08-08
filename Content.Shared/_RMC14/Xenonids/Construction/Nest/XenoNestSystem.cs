@@ -85,7 +85,6 @@ public sealed class XenoNestSystem : EntitySystem
         SubscribeLocalEvent<XenoNestSurfaceComponent, XenoNestDoAfterEvent>(OnNestSurfaceDoAfter);
         SubscribeLocalEvent<XenoNestSurfaceComponent, CanDropTargetEvent>(OnSurfaceCanDropTarget);
         SubscribeLocalEvent<XenoNestSurfaceComponent, DragDropTargetEvent>(OnSurfaceDragDropTarget);
-        SubscribeLocalEvent<XenoNestSurfaceComponent, EntityTerminatingEvent>(OnSurfaceTerminating);
 
         SubscribeLocalEvent<XenoNestComponent, ComponentRemove>(OnNestRemove);
         SubscribeLocalEvent<XenoNestComponent, EntityTerminatingEvent>(OnNestTerminating);
@@ -296,19 +295,6 @@ public sealed class XenoNestSystem : EntitySystem
     {
         args.Handled = true;
         TryStartNesting(args.User, ent, args.Dragged);
-    }
-
-    private void OnSurfaceTerminating(Entity<XenoNestSurfaceComponent> ent, ref EntityTerminatingEvent args)
-    {
-        if (TerminatingOrDeleted(ent.Comp.Weedable) ||
-            !_xenoWeedableQuery.TryComp(ent.Comp.Weedable, out var weedable) ||
-            weedable.Entity != ent)
-        {
-            return;
-        }
-
-        weedable.Entity = null;
-        Dirty(ent.Comp.Weedable.Value, weedable);
     }
 
     #endregion
