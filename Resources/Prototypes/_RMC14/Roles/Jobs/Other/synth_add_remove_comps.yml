@@ -17,6 +17,7 @@
     whitelist:
       tags:
       - RMCSynthGrabbable
+  - type: RMCInfectOnPullAttemptImmune
   - type: RMCAllowSuitStorage
   - type: DemoSpecWhitelist
   - type: GrenadeSpecWhitelist
