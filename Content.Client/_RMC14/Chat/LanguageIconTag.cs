@@ -39,18 +39,21 @@ public sealed class LanguageIconTag : IMarkupTagHandler
         return true;
     }
 
-    private sealed class LanguageIconControl : Control
+    internal sealed class LanguageIconControl : Control
     {
         private const float VerticalOffset = 5f;
+        private const float IconSize = 16f;
 
         private readonly TextureRect _icon;
 
         public LanguageIconControl(Texture texture)
         {
+            HorizontalAlignment = HAlignment.Left;
+            VerticalAlignment = VAlignment.Top;
             _icon = new TextureRect
             {
                 Texture = texture,
-                TextureScale = Vector2.One * 0.5f,
+                Stretch = TextureRect.StretchMode.Scale,
             };
 
             AddChild(_icon);
@@ -58,15 +61,13 @@ public sealed class LanguageIconTag : IMarkupTagHandler
 
         protected override Vector2 MeasureOverride(Vector2 availableSize)
         {
-            _icon.Measure(availableSize);
-            var desired = _icon.DesiredSize;
-            return new Vector2(desired.X + 4f, desired.Y + VerticalOffset);
+            return new Vector2(IconSize + 4f, IconSize + VerticalOffset);
         }
 
         protected override Vector2 ArrangeOverride(Vector2 finalSize)
         {
-            _icon.Arrange(UIBox2.FromDimensions(new Vector2(0f, VerticalOffset), _icon.DesiredSize));
-            return finalSize;
+            _icon.Arrange(UIBox2.FromDimensions(new Vector2(0f, VerticalOffset), new Vector2(IconSize, IconSize)));
+            return new Vector2(IconSize + 4f, IconSize + VerticalOffset);
         }
     }
 }

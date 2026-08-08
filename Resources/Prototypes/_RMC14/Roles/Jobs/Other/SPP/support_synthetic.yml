@@ -22,6 +22,7 @@
     - type: Language
       spokenLanguages:
       - Russian
+      - Scandinavian
       - English
       - Japanese
       - Chinese
@@ -30,6 +31,7 @@
       - Spanish
       understoodLanguages:
       - Russian
+      - Scandinavian
       - English
       - Japanese
       - Chinese
