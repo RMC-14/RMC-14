@@ -432,7 +432,7 @@ public sealed class XenoNestSystem : EntitySystem
 
             if (_mobState.IsDead(victim.Value))
             {
-                var selfMessage = Loc.GetString("cm-xeno-nest-failed-dead", ("target", Identity.Name(victim.Value, EntityManager, user)));
+                var selfMessage = Loc.GetString("rmc-xeno-nest-failed-dead", ("target", Identity.Name(victim.Value, EntityManager, user)));
                 if (!silent)
                     _popup.PopupClient(selfMessage, surface, user);
 
