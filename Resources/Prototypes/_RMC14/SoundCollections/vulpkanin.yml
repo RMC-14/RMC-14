@@ -24,3 +24,11 @@
   files:
   - /Audio/_RMC14/Voice/Vulpkanin/dog_whine.ogg
 
+- type: soundCollection
+  id: VulpkaninScreams
+  files:
+    - /Audio/_Floof/Voice/Vulpkanin/vulpscream1.ogg
+    - /Audio/_Floof/Voice/Vulpkanin/vulpscream2.ogg
+    - /Audio/_Floof/Voice/Vulpkanin/vulpscream4.ogg
+    - /Audio/_Floof/Voice/Vulpkanin/vulpscream5.ogg
+
