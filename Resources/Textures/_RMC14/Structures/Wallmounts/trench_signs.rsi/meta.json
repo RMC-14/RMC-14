@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Made by SharknSnake98 on GitHub",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "trench_sign_ammo",
+      "directions": 4
+    },
+    {
+      "name": "trench_sign_bunks"
+    },
+    {
+      "name": "trench_sign_cmd",
+      "directions": 4
+    },
+    {
+      "name": "trench_sign_frontline",
+      "directions": 4
+    },
+    {
+      "name": "trench_sign_lmg"
+    },
+    {
+      "name": "trench_sign_lmg_bunker"
+    },
+    {
+      "name": "trench_sign_lz",
+      "directions": 4
+    },
+    {
+      "name": "trench_sign_med",
+      "directions": 4
+    },
+    {
+      "name": "trench_sign_mess",
+      "directions": 4
+    },
+    {
+      "name": "trench_sign_mortar"
+    },
+    {
+      "name": "trench_sign_stairs",
+      "directions": 4
+    },
+    {
+      "name": "trench_sign_strg",
+      "directions": 4
+    },
+    {
+      "name": "trench_sign_wc"
+    }
+  ]
+}
