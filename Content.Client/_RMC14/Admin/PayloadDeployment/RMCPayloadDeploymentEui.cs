@@ -1,7 +1,7 @@
 using System.Linq;
 using Content.Client._RMC14.UserInterface;
 using Content.Client.Eui;
-using Content.Shared._RMC14.Admin.Utility;
+using Content.Shared._RMC14.Admin.PayloadDeployment;
 using Content.Shared._RMC14.PayloadDeployment;
 using Content.Shared.Eui;
 using JetBrains.Annotations;
@@ -14,7 +14,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 
-namespace Content.Client._RMC14.Admin.Utility;
+namespace Content.Client._RMC14.Admin.PayloadDeployment;
 
 [UsedImplicitly]
 public sealed class RMCPayloadDeploymentEui : BaseEui

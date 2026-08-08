@@ -1,9 +1,9 @@
 using System.Linq;
-using Content.Shared._RMC14.Admin.Utility;
+using Content.Shared._RMC14.Admin.PayloadDeployment;
 using Content.Shared.GameTicking;
 using Robust.Shared.Network;
 
-namespace Content.Client._RMC14.Admin.Utility;
+namespace Content.Client._RMC14.Admin.PayloadDeployment;
 
 public sealed class RMCPayloadDeploymentDraftSystem : EntitySystem
 {

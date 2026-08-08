@@ -3,7 +3,7 @@ using Content.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
 
-namespace Content.Client._RMC14.Admin.Utility;
+namespace Content.Client._RMC14.Admin.PayloadDeployment;
 
 public sealed class RMCPayloadDeploymentList : ListContainer
 {

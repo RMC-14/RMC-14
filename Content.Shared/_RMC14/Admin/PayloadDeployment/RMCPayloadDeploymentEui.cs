@@ -3,7 +3,7 @@ using Content.Shared.Eui;
 using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._RMC14.Admin.Utility;
+namespace Content.Shared._RMC14.Admin.PayloadDeployment;
 
 public enum RMCPayloadDeliveryType : byte
 {

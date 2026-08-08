@@ -3,7 +3,7 @@ using Content.Server.EUI;
 using Content.Shared.Administration;
 using Robust.Shared.Console;
 
-namespace Content.Server._RMC14.Admin.Utility;
+namespace Content.Server._RMC14.Admin.PayloadDeployment;
 
 [AdminCommand(AdminFlags.VarEdit)]
 public sealed class RMCPayloadDeploymentUiCommand : LocalizedCommands

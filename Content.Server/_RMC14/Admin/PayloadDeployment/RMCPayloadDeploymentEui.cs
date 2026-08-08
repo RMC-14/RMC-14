@@ -6,7 +6,7 @@ using Content.Server.Administration;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.EUI;
-using Content.Shared._RMC14.Admin.Utility;
+using Content.Shared._RMC14.Admin.PayloadDeployment;
 using Content.Shared._RMC14.ParaDrop;
 using Content.Shared._RMC14.PayloadDeployment;
 using Content.Shared._RMC14.Rules;
@@ -22,7 +22,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
 
-namespace Content.Server._RMC14.Admin.Utility;
+namespace Content.Server._RMC14.Admin.PayloadDeployment;
 
 public sealed class RMCPayloadDeploymentEui : BaseEui
 {

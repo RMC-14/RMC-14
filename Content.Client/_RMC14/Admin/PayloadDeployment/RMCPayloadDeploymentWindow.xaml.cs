@@ -5,7 +5,7 @@ using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Utility;
 
-namespace Content.Client._RMC14.Admin.Utility;
+namespace Content.Client._RMC14.Admin.PayloadDeployment;
 
 [GenerateTypedNameReferences]
 public sealed partial class RMCPayloadDeploymentWindow : DefaultWindow
