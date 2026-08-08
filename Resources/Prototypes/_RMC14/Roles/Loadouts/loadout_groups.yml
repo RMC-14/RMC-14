@@ -723,7 +723,10 @@
   name: rmc-loadout-group-role-specific-weapon
   loadouts:
   - MatebaRMC
+  - MatebaSpecialRMC
   - HandcannonRMC
+  - HandcannonPolishedRMC
+  - SilverMatebaRMC
   - GoldMatebaRMC
   - GoldHandcannonRMC
 

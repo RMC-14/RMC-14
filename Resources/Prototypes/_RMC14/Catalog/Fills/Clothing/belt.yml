@@ -394,7 +394,7 @@
 - type: entity
   parent: RMCBeltHolsterPistol
   id: RMCBeltHolsterPistolHandcannonFilled
-  suffix: Filled, Handcannon
+  suffix: Filled, Peregrine
   components:
   - type: StorageFill
     contents:
@@ -525,7 +525,7 @@
 - type: entity
   parent: RMCMatebaBeltLuxurious
   id: RMCMatebaBeltLuxuriousFilled
-  suffix: Filled
+  suffix: Filled, Golden
   components:
   - type: StorageFill
     contents:
@@ -534,12 +534,11 @@
     - id: RMCSpeedLoaderMatebaHighImpact
       amount: 3
     - id: RMCWeaponRevolverMatebaGold
-    - id: RMCMatebaCustomizationCaseLuxury
 
 - type: entity
   parent: RMCMatebaBeltLuxurious
   id: RMCMatebaBeltLuxuriousFilledWEYA
-  suffix: Filled, WEYA Director
+  suffix: Filled, Golden, WEYA Director
   components:
   - type: StorageFill
     contents:
@@ -550,6 +549,19 @@
     - id: RMCSpeedLoaderMatebaHE
       amount: 2
     - id: RMCWeaponRevolverMatebaGold
+
+- type: entity
+  parent: RMCMatebaBeltLuxurious
+  id: RMCMatebaBeltLuxuriousFilledSilver
+  suffix: Filled, Silver
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMatebaHIAP
+      amount: 2
+    - id: RMCSpeedLoaderMatebaHighImpact
+      amount: 3
+    - id: RMCWeaponRevolverMatebaSilver
 
 - type: entity
   parent: RMCMatebaBelt
@@ -566,7 +578,7 @@
 - type: entity
   parent: RMCMatebaBelt
   id: RMCMatebaBeltFilled
-  suffix: Filled, Mateba
+  suffix: Filled, Mateba Custom
   components:
   - type: StorageFill
     contents:
@@ -575,6 +587,19 @@
     - id: RMCSpeedLoaderMatebaHighImpact
       amount: 3
     - id: RMCWeaponRevolverMateba
+
+- type: entity
+  parent: RMCMatebaBelt
+  id: RMCMatebaBeltSpecialFilled
+  suffix: Filled, Mateba Special
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMatebaHIAP
+      amount: 2
+    - id: RMCSpeedLoaderMatebaHighImpact
+      amount: 3
+    - id: RMCWeaponRevolverMatebaSpecial
 
 - type: entity
   parent: RMCMatebaBelt
@@ -699,8 +724,8 @@
 
 - type: entity
   parent: RMCBeltHolsterPistol
-  id: RMCD50WinterWyvernBeltFilledAmmo
-  suffix: Filled, Winter Wyvern Ammo
+  id: RMCPeregrineHandcannonBeltFilledAmmo
+  suffix: Filled, Peregrine Ammo
   components:
   - type: StorageFill
     contents:
@@ -711,8 +736,8 @@
 
 - type: entity
   parent: RMCBeltHolsterPistol
-  id: RMCD50WinterWyvernBeltFilled
-  suffix: Filled, Winter Wyvern
+  id: RMCPeregrineHandcannonBeltFilled
+  suffix: Filled, Custom Peregrine
   components:
   - type: StorageFill
     contents:
@@ -720,12 +745,12 @@
       amount: 4
     - id: RMCMagazinePistolHandcannonHIAP
       amount: 2
-    - id: RMCWeaponPistolHandcannonWinterWyvern
+    - id: RMCWeaponPistolHandcannonCustom
 
 - type: entity
   parent: RMCBeltHolsterPistol
-  id: GoldHandcannonBeltFilled
-  suffix: Filled, Gold Handcannon
+  id: RMCGoldHandcannonBeltFilled
+  suffix: Filled, Gold Peregrine
   components:
   - type: StorageFill
     contents:
@@ -734,6 +759,19 @@
     - id: RMCMagazinePistolHandcannonHIAP
       amount: 2
     - id: RMCWeaponPistolHandcannonGold
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCPolishedHandcannonBeltFilled
+  suffix: Filled, Polished Peregrine
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolHandcannonHI
+      amount: 4
+    - id: RMCMagazinePistolHandcannonHIAP
+      amount: 2
+    - id: RMCWeaponPistolHandcannonPolished
 
 - type: entity
   parent: CMBeltMarine

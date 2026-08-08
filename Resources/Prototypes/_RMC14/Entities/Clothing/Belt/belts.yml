@@ -808,7 +808,8 @@
       co_handcannon_fill:
         whitelist:
           tags:
-          - RMCWeaponPistolHandcannonWyvern
+          - RMCWeaponPistolHandcannonCustom # ideally should have it's own inbelt sprite
+          - RMCWeaponPistolHandcannonPolished
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle.rsi
@@ -1065,19 +1066,51 @@
   parent: CMBeltBaseStorage
   id: RMCMatebaBelt
   name: M276 pattern Mateba holster rig
-  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the powerful Mateba magnum revolver, along with five small pouches for speedloaders. It was included with the mail-order UNMC edition of the Mateba autorevolver in the early 2110s.
+  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the powerful Mateba magnum revolver, along with six small pouches for speedloaders. It was included with the mail-order UNMC edition of the Mateba autorevolver in the early 2110s.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/mateba_belt.rsi
     layers:
-    - state: cmateba
-      map: [ "enum.CMHolsterLayers.Fill" ]
-      visible: false
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: cmateba
+      map: [ "mateba_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: amateba
+      map: [ "mateba_golden_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: smateba
+      map: [ "mateba_silver_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: cmateba_special
+      map: [ "mateba_special_fill" ]
     - state: icon
     - state: half
       map: [ "openLayer" ]
     - state: full
       map: [ "closedLayer" ]
+  - type: ItemMapper
+    spriteLayers:
+    - mateba_fill
+    - mateba_golden_fill
+    - mateba_silver_fill
+    - mateba_special_fill
+    mapLayers:
+      mateba_fill:
+        whitelist:
+          tags:
+          - RMCMateba
+      mateba_golden_fill:
+        whitelist:
+          tags:
+          - RMCMatebaGolden
+      mateba_silver_fill:
+        whitelist:
+          tags:
+          - RMCMatebaSilver
+      mateba_special_fill:
+        whitelist:
+          tags:
+          - RMCMatebaSpecial
   - type: Clothing
     slots:
     - suitStorage
@@ -1087,10 +1120,16 @@
     maxItemSize: Normal
     grid:
     - 0,0,13,1 # 7 slots
-    blacklist:
+    whitelist:
       tags:
-      - CMFirstAidKit
-      - RMCEngineerKit
+      - RMCMateba
+      - RMCMatebaGolden
+      - RMCMatebaSilver
+      - RMCMatebaSpecial
+      - RMCSpeedLoaderMateba
+      - RMCSpeedLoaderMatebaHE
+      - RMCSpeedLoaderMatebaHIAP
+      - RMCSpeedLoaderMatebaHighImpact
   - type: Tag
     tags:
     - RMCMatebaHolster
@@ -1110,14 +1149,23 @@
   parent: RMCMatebaBelt
   id: RMCMatebaBeltLuxurious
   name: luxurious M276 pattern Mateba holster rig
-  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the powerful Mateba magnum revolver, along with five small pouches for speedloaders. This specific one is tinted black and engraved with gold, heavily customized for a high-ranking official.
+  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the powerful Mateba magnum revolver, along with six small pouches for speedloaders. This specific one is tinted black and engraved with gold, heavily customized for a high-ranking official.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/amateba_belt.rsi
     layers:
-    - state: amateba
-      map: [ "enum.CMHolsterLayers.Fill" ]
-      visible: false
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: cmateba
+      map: [ "mateba_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: amateba
+      map: [ "mateba_golden_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: smateba
+      map: [ "mateba_silver_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: cmateba_special
+      map: [ "mateba_special_fill" ]
     - state: icon
     - state: half
       map: [ "openLayer" ]
@@ -1581,10 +1629,11 @@
     maxItemSize: Normal
     grid:
       - 0,0,14,1 # 15 slots
-    blacklist:
+    whitelist:
       tags:
-        - CMFirstAidKit
-        - RMCEngineerKit
+        - RMCRevolver
+        - RMCMagazineRevolver
+        - RMCMatebaCustomizationCase
   - type: Tag
     tags:
     - RMCG8Pouch
