@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines;
@@ -813,6 +813,10 @@ public sealed class XenoEggSystem : EntitySystem
         }
         if (TryComp<XenoEggComponent>(ent, out var egg))
             SetEggSprite((ent, egg), egg.NormalSprite);
+
+        ent.Comp.ApplyNameModifier = false;
+        Dirty(ent);
+
         _nameModifier.RefreshNameModifiers(ent.Owner);
     }
 
@@ -824,7 +828,7 @@ public sealed class XenoEggSystem : EntitySystem
 
     private void OnFragileRefreshModifier(Entity<XenoFragileEggComponent> ent, ref RefreshNameModifiersEvent args)
     {
-        if (!TerminatingOrDeleted(ent))
+        if (!TerminatingOrDeleted(ent) && ent.Comp.ApplyNameModifier)
             args.AddModifier("rmc-xeno-fragile-egg-prefix");
     }
 
