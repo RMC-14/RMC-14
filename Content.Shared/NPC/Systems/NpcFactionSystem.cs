@@ -19,12 +19,14 @@ public sealed partial class NpcFactionSystem : EntitySystem
     /// To avoid prototype mutability we store an intermediary data class that gets used instead.
     /// </summary>
     private FrozenDictionary<string, FactionData> _factions = FrozenDictionary<string, FactionData>.Empty;
+    private readonly HashSet<EntityUid> _pendingMembershipChanges = new();
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<NpcFactionMemberComponent, ComponentStartup>(OnFactionStartup);
+        SubscribeLocalEvent<NpcFactionMemberComponent, ComponentRemove>(OnFactionRemoved);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnProtoReload);
 
         InitializeException();
@@ -40,6 +42,13 @@ public sealed partial class NpcFactionSystem : EntitySystem
     private void OnFactionStartup(Entity<NpcFactionMemberComponent> ent, ref ComponentStartup args)
     {
         RefreshFactions(ent);
+    }
+
+    private void OnFactionRemoved(Entity<NpcFactionMemberComponent> ent, ref ComponentRemove args)
+    {
+        _pendingMembershipChanges.Remove(ent);
+        var ev = new NpcFactionMembershipChangedEvent(ent);
+        RaiseLocalEvent(ref ev);
     }
 
     /// <summary>
@@ -99,6 +108,13 @@ public sealed partial class NpcFactionSystem : EntitySystem
         return false;
     }
 
+    public IReadOnlySet<ProtoId<NpcFactionPrototype>> GetFactionMembership(Entity<NpcFactionMemberComponent?> ent)
+    {
+        return Resolve(ent, ref ent.Comp, false)
+            ? ent.Comp.Factions
+            : FrozenSet<ProtoId<NpcFactionPrototype>>.Empty;
+    }
+
     /// <summary>
     /// Adds this entity to the particular faction.
     /// </summary>
@@ -111,11 +127,8 @@ public sealed partial class NpcFactionSystem : EntitySystem
         }
 
         ent.Comp ??= EnsureComp<NpcFactionMemberComponent>(ent);
-        if (!ent.Comp.Factions.Add(faction))
-            return;
-
-        if (dirty)
-            RefreshFactions((ent, ent.Comp));
+        var changed = ent.Comp.Factions.Add(faction);
+        FinishMembershipChange((ent, ent.Comp), changed, dirty);
     }
 
     /// <summary>
@@ -124,6 +137,7 @@ public sealed partial class NpcFactionSystem : EntitySystem
     public void AddFactions(Entity<NpcFactionMemberComponent?> ent, [ForbidLiteral] HashSet<ProtoId<NpcFactionPrototype>> factions, bool dirty = true)
     {
         ent.Comp ??= EnsureComp<NpcFactionMemberComponent>(ent);
+        var changed = false;
 
         foreach (var faction in factions)
         {
@@ -133,11 +147,10 @@ public sealed partial class NpcFactionSystem : EntitySystem
                 continue;
             }
 
-            ent.Comp.Factions.Add(faction);
+            changed |= ent.Comp.Factions.Add(faction);
         }
 
-        if (dirty)
-            RefreshFactions((ent, ent.Comp));
+        FinishMembershipChange((ent, ent.Comp), changed, dirty);
     }
 
     /// <summary>
@@ -154,11 +167,8 @@ public sealed partial class NpcFactionSystem : EntitySystem
         if (!Resolve(ent, ref ent.Comp, false))
             return;
 
-        if (!ent.Comp.Factions.Remove(faction))
-            return;
-
-        if (dirty)
-            RefreshFactions((ent, ent.Comp));
+        var changed = ent.Comp.Factions.Remove(faction);
+        FinishMembershipChange((ent, ent.Comp), changed, dirty);
     }
 
     /// <summary>
@@ -169,10 +179,32 @@ public sealed partial class NpcFactionSystem : EntitySystem
         if (!Resolve(ent, ref ent.Comp, false))
             return;
 
-        ent.Comp.Factions.Clear();
+        var changed = ent.Comp.Factions.Count > 0;
+        if (changed)
+            ent.Comp.Factions.Clear();
 
-        if (dirty)
-            RefreshFactions((ent, ent.Comp));
+        FinishMembershipChange((ent, ent.Comp), changed, dirty);
+    }
+
+    private void FinishMembershipChange(
+        Entity<NpcFactionMemberComponent> ent,
+        bool changed,
+        bool commit)
+    {
+        if (changed)
+            _pendingMembershipChanges.Add(ent);
+
+        if (!commit || !_pendingMembershipChanges.Remove(ent))
+            return;
+
+        CommitMembershipChange(ent);
+    }
+
+    private void CommitMembershipChange(Entity<NpcFactionMemberComponent> ent)
+    {
+        RefreshFactions(ent);
+        var ev = new NpcFactionMembershipChangedEvent(ent);
+        RaiseLocalEvent(ref ev);
     }
 
     public IEnumerable<EntityUid> GetNearbyHostiles(Entity<NpcFactionMemberComponent?, FactionExceptionComponent?> ent, float range)

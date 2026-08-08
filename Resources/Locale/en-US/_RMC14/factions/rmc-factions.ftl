@@ -1,0 +1,12 @@
+rmc-faction-name-unmc = United Nations Marine Corps
+rmc-faction-name-xeno = Xenomorphs
+rmc-faction-name-spp = Socialist Progressive Peoples
+rmc-faction-name-halcyon = PMC
+rmc-faction-name-clf = Colony Liberation Front
+rmc-faction-name-we-ya = Weston-Yamada
+rmc-faction-name-civilian = Survivors
+rmc-faction-name-royal-marines = Royal Crown Marines
+rmc-faction-name-bureau = Colony Marshal Bureau
+rmc-faction-name-tse = Three Suns Empire
+rmc-faction-name-provost = Provost
+rmc-faction-name-hefa = HEFA
