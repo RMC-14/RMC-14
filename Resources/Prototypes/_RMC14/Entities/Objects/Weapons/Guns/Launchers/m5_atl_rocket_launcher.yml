@@ -179,6 +179,16 @@
     intensitySlope: 10
     totalIntensity: 290
     maxTileBreak: 0
+  - type: RMCExplosiveDamageOnHit
+    explosions:
+      - whitelist:
+          components:
+            - Marine
+        damage:
+          types:
+            Blunt: 175
+            Heat: 175
+        armorPiercing: 100
   - type: CMExplosionEffect
   - type: RMCScorchEffect
   - type: PointLight
