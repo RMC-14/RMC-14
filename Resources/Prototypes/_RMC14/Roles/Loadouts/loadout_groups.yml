@@ -685,7 +685,7 @@
   id: RMCLoadoutGroupPins
   name: rmc-loadout-group-pins
   minLimit: 0
-  maxLimit: 13
+  maxLimit: 14
   loadouts:
   - RMCPinLGBT
   - RMCPinAromantic
@@ -700,6 +700,7 @@
   - RMCPinTransgender
   - RMCPinAutism
   - RMCPinAutismGold
+  - RMCPinAlly
 
 # Commanding Officer
 - type: loadoutGroup

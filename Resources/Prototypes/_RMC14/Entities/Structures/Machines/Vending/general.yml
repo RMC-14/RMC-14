@@ -116,6 +116,8 @@
         amount: 15
       - id: RMCClothingNeckGoldAutismPin
         amount: 15
+      - id: RMCClothingNeckAllyPin
+        amount: 15
     - name: Other
       entries:
       - id: CMPaper
