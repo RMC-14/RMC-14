@@ -61,7 +61,7 @@ public sealed class XenoEnergySystem : EntitySystem
             if (!_xeno.CanAbilityAttackTarget(xeno.Owner, hit))
                 continue;
 
-            if (xeno.Comp.IgnoreLateInfected && TryComp<VictimInfectedComponent>(hit, out var infect) && infect.CurrentStage >= infect.FinalSymptomsStart)
+            if (HasComp<VictimInfectedComponent>(hit))
                 continue;
 
             if (HasComp<RMCTrainingDummyComponent>(hit))
