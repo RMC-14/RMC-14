@@ -1,0 +1,173 @@
+<PanelContainer
+    xmlns="https://spacestation14.io"
+    xmlns:payload="clr-namespace:Content.Client._RMC14.Admin.PayloadDeployment"
+    StyleClasses="BackgroundDark"
+    HorizontalExpand="True"
+    VerticalExpand="True">
+    <BoxContainer Orientation="Vertical" SeparationOverride="8">
+        <BoxContainer Orientation="Horizontal" SeparationOverride="5">
+            <Label Text="{Loc rmc-payload-deployment-type}" MinWidth="110" />
+            <OptionButton Name="DropType" Access="Public" MinWidth="170" />
+            <Label Text="{Loc rmc-payload-deployment-manifest}" MinWidth="90" />
+            <OptionButton Name="ManifestOptions" Access="Public" HorizontalExpand="True" />
+            <Button Name="AddManifest" Access="Public" Text="{Loc rmc-payload-deployment-add-manifest}" />
+            <Button Name="RemoveManifest" Access="Public" Text="{Loc rmc-payload-deployment-remove-manifest}" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal" SeparationOverride="5">
+            <Label Text="{Loc rmc-payload-deployment-manifest-name}" MinWidth="110" />
+            <LineEdit Name="ManifestName"
+                      Access="Public"
+                      PlaceHolder="{Loc rmc-payload-deployment-manifest-name-placeholder}"
+                      HorizontalExpand="True" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal" SeparationOverride="8" VerticalExpand="True">
+            <BoxContainer Orientation="Vertical" MinWidth="480" HorizontalExpand="True">
+                <Label Text="{Loc rmc-payload-deployment-payload-sources}" StyleClasses="LabelHeading" />
+                <TabContainer Name="PayloadTabs" VerticalExpand="True">
+                    <BoxContainer Name="NearbyTab" Orientation="Vertical">
+                        <BoxContainer Orientation="Horizontal">
+                            <Label Text="{Loc rmc-payload-deployment-nearby-radius}" MinWidth="130" />
+                            <SpinBox Name="NearbyRadius" Access="Public" Value="7" HorizontalExpand="True" />
+                            <Button Name="RefreshNearby" Access="Public" Text="{Loc rmc-payload-deployment-refresh}" />
+                        </BoxContainer>
+                        <LineEdit Name="NearbySearch"
+                                  Access="Public"
+                                  PlaceHolder="{Loc rmc-payload-deployment-search-entities}" />
+                        <payload:RMCPayloadDeploymentList Name="NearbyEntities" Access="Public" SelectMode="Multiple" VerticalExpand="True" />
+                        <BoxContainer Orientation="Horizontal">
+                            <Button Name="SelectAllNearby"
+                                    Access="Public"
+                                    Text="{Loc rmc-payload-deployment-select-all}"
+                                    HorizontalExpand="True" />
+                            <Button Name="AddNearby"
+                                    Access="Public"
+                                    Text="{Loc rmc-payload-deployment-add-selected}"
+                                    HorizontalExpand="True" />
+                        </BoxContainer>
+                    </BoxContainer>
+                    <BoxContainer Name="PlayerTab" Orientation="Vertical">
+                        <LineEdit Name="PlayerSearch"
+                                  Access="Public"
+                                  PlaceHolder="{Loc rmc-payload-deployment-search-player-controlled}" />
+                        <payload:RMCPayloadDeploymentList Name="PlayerEntities" Access="Public" SelectMode="Single" VerticalExpand="True" />
+                        <Button Name="AddPlayer" Access="Public" Text="{Loc rmc-payload-deployment-add-selected}" />
+                    </BoxContainer>
+                    <BoxContainer Name="PrototypeTab" Orientation="Vertical">
+                        <LineEdit Name="PrototypeSearch"
+                                  Access="Public"
+                                  PlaceHolder="{Loc rmc-payload-deployment-search-prototypes}" />
+                        <payload:RMCPayloadDeploymentList Name="Prototypes" Access="Public" SelectMode="Single" VerticalExpand="True" />
+                        <BoxContainer Orientation="Horizontal">
+                            <Label Text="{Loc rmc-payload-deployment-quantity}" MinWidth="130" />
+                            <SpinBox Name="PrototypeQuantity" Access="Public" Value="1" HorizontalExpand="True" />
+                            <Button Name="AddPrototype" Access="Public" Text="{Loc rmc-payload-deployment-add-prototype}" />
+                        </BoxContainer>
+                    </BoxContainer>
+                </TabContainer>
+            </BoxContainer>
+
+            <BoxContainer Orientation="Vertical" MinWidth="420" HorizontalExpand="True">
+                <Label Text="{Loc rmc-payload-deployment-payload-manifest}" StyleClasses="LabelHeading" />
+                <payload:RMCPayloadDeploymentList Name="Manifest" Access="Public" SelectMode="Single" MinHeight="160" VerticalExpand="True" />
+                <BoxContainer Orientation="Horizontal">
+                    <Button Name="RemoveManifestEntry"
+                            Access="Public"
+                            Text="{Loc rmc-payload-deployment-remove-selected}"
+                            HorizontalExpand="True" />
+                    <Button Name="ClearManifest"
+                            Access="Public"
+                            Text="{Loc rmc-payload-deployment-clear-manifest}"
+                            HorizontalExpand="True" />
+                </BoxContainer>
+                <Label Name="ManifestSummary" Access="Public" />
+
+                <ScrollContainer VerticalExpand="True">
+                    <BoxContainer Orientation="Vertical">
+                        <Label Text="{Loc rmc-payload-deployment-landing}" StyleClasses="LabelHeading" />
+                        <Button Name="UseCurrentPosition"
+                                Access="Public"
+                                Text="{Loc rmc-payload-deployment-use-current-position}" />
+                        <BoxContainer Orientation="Horizontal">
+                            <Label Text="{Loc rmc-payload-deployment-map}" MinWidth="190" />
+                            <OptionButton Name="MapOptions" Access="Public" HorizontalExpand="True" />
+                        </BoxContainer>
+                        <CheckBox Name="RawCoordinates" Access="Public"
+                                  Text="{Loc rmc-payload-deployment-raw-coordinates}"
+                                  ToolTip="{Loc rmc-payload-deployment-raw-coordinates-tooltip}" />
+                        <BoxContainer Orientation="Horizontal">
+                            <Label Text="{Loc rmc-payload-deployment-x}" MinWidth="190" />
+                            <SpinBox Name="MapX" Access="Public" HorizontalExpand="True" />
+                        </BoxContainer>
+                        <BoxContainer Orientation="Horizontal">
+                            <Label Text="{Loc rmc-payload-deployment-y}" MinWidth="190" />
+                            <SpinBox Name="MapY" Access="Public" HorizontalExpand="True" />
+                        </BoxContainer>
+                        <BoxContainer Orientation="Horizontal">
+                            <Label Text="{Loc rmc-payload-deployment-landing-radius}" MinWidth="190" />
+                            <BoxContainer Name="LandingRadiusContainer" Access="Public" HorizontalExpand="True" />
+                            <Label Name="LandingTileCount" Access="Public" MinWidth="70" />
+                        </BoxContainer>
+                        <CheckBox Name="IgnoreParadropRestrictions" Access="Public"
+                                  Text="{Loc rmc-payload-deployment-ignore-paradrop-restrictions}"
+                                  ToolTip="{Loc rmc-payload-deployment-ignore-paradrop-restrictions-tooltip}" />
+                        <CheckBox Name="UseDropPods" Access="Public"
+                                  Text="{Loc rmc-orbital-drop-use-pods}"
+                                  Pressed="True"
+                                  ToolTip="{Loc rmc-orbital-drop-use-pods-tooltip}" />
+                        <BoxContainer Name="PodCountRow" Access="Public" Orientation="Horizontal">
+                            <Label Text="{Loc rmc-orbital-drop-pod-count}" MinWidth="190" />
+                            <SpinBox Name="PodCount" Access="Public" Value="1" HorizontalExpand="True" />
+                        </BoxContainer>
+                        <CheckBox Name="UseParachute"
+                                  Access="Public"
+                                  Text="{Loc rmc-orbital-drop-use-parachute}"
+                                  Pressed="False"
+                                  ToolTip="{Loc rmc-orbital-drop-use-parachute-tooltip}" />
+                        <CheckBox Name="ShowLandingWarning"
+                                  Access="Public"
+                                  Text="{Loc rmc-orbital-drop-show-landing-warning}"
+                                  Pressed="True" />
+
+                        <Label Text="{Loc rmc-payload-deployment-timing}" StyleClasses="LabelHeading" />
+                        <BoxContainer Orientation="Horizontal">
+                            <Label Text="{Loc rmc-payload-deployment-launch-interval}" MinWidth="190" />
+                            <FloatSpinBox Name="LaunchInterval" Access="Public" Value="0.2" HorizontalExpand="True" />
+                        </BoxContainer>
+                        <BoxContainer Orientation="Horizontal">
+                            <Label Text="{Loc rmc-payload-deployment-arrival-delay}" MinWidth="190" />
+                            <FloatSpinBox Name="ArrivalDelay" Access="Public" Value="5" HorizontalExpand="True" />
+                        </BoxContainer>
+                        <BoxContainer Orientation="Horizontal">
+                            <Label Text="{Loc rmc-payload-deployment-arrival-spacing}" MinWidth="190" />
+                            <FloatSpinBox Name="ArrivalInterval" Access="Public" Value="0.2" HorizontalExpand="True" />
+                        </BoxContainer>
+                        <BoxContainer Orientation="Horizontal">
+                            <Label Text="{Loc rmc-payload-deployment-arrival-spacing-variation}" MinWidth="190" />
+                            <FloatSpinBox Name="ArrivalIntervalVariation" Access="Public" Value="0" HorizontalExpand="True" />
+                        </BoxContainer>
+                        <BoxContainer Orientation="Horizontal">
+                            <Label Text="{Loc rmc-payload-deployment-drop-duration}" MinWidth="190" />
+                            <FloatSpinBox Name="DropDuration" Access="Public" Value="3" HorizontalExpand="True" />
+                        </BoxContainer>
+                        <BoxContainer Name="OpenDelayRow" Access="Public" Orientation="Horizontal">
+                            <Label Text="{Loc rmc-orbital-drop-open-delay}" MinWidth="190" />
+                            <FloatSpinBox Name="OpenDelay" Access="Public" Value="2" HorizontalExpand="True" />
+                        </BoxContainer>
+                    </BoxContainer>
+                </ScrollContainer>
+
+                <Label Name="Result" Access="Public" />
+                <BoxContainer Orientation="Horizontal" SeparationOverride="5">
+                    <Button Name="LaunchSelected"
+                            Access="Public"
+                            Text="{Loc rmc-payload-deployment-launch-selected}"
+                            HorizontalExpand="True" />
+                    <Button Name="LaunchAll"
+                            Access="Public"
+                            Text="{Loc rmc-payload-deployment-launch-all}"
+                            HorizontalExpand="True" />
+                </BoxContainer>
+            </BoxContainer>
+        </BoxContainer>
+    </BoxContainer>
+</PanelContainer>

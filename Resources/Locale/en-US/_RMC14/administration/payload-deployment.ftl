@@ -1,0 +1,82 @@
+rmc-payload-deployment-button = Orbital / Paradrop
+rmc-payload-deployment-title = Payload Deployment
+rmc-payload-deployment-type = Delivery type
+rmc-payload-deployment-manifest = Manifest
+rmc-payload-deployment-add-manifest = Add manifest
+rmc-payload-deployment-remove-manifest = Remove manifest
+rmc-payload-deployment-pop-out = Pop out
+rmc-payload-deployment-manifest-name = Manifest name
+rmc-payload-deployment-manifest-name-placeholder = Optional name...
+rmc-payload-deployment-manifest-number = Manifest {$number}
+rmc-payload-deployment-unknown-manifest = Unknown manifest
+rmc-payload-deployment-all-manifests = all {$count} manifests
+rmc-payload-deployment-map-id = Map {$id}
+rmc-payload-deployment-orbital = Orbital drop
+rmc-payload-deployment-paradrop = Paradrop
+rmc-payload-deployment-arrival-spacing = Arrival spacing
+rmc-payload-deployment-arrival-spacing-variation = Arrival spacing variation (±)
+rmc-payload-deployment-launch-selected = Launch selected
+rmc-payload-deployment-launch-all = Launch all
+rmc-payload-deployment-manifest-summary = {$manifest}: {$payload} payload entities ({$total} total)
+rmc-payload-deployment-result-success = Successfully prepared { $manifests ->
+    [one] one deployment manifest
+    *[other] {$manifests} deployment manifests
+}.
+rmc-payload-deployment-result-invalid-payload = {$manifest} contains an invalid or unavailable payload entity.
+rmc-payload-deployment-result-invalid-prototype = {$manifest} contains an invalid prototype for this delivery type.
+rmc-payload-deployment-result-invalid-settings = {$manifest} has invalid deployment settings.
+rmc-payload-deployment-result-invalid-target = {$manifest} does not have a valid target grid.
+rmc-payload-deployment-result-insufficient-tiles = {$manifest} could only assign landing locations to {$assigned} of {$requested} deliveries.
+rmc-payload-deployment-result-preparation-failed = {$manifest} could not prepare its orbital drop pods.
+rmc-payload-deployment-result-failed = The deployment could not be prepared.
+rmc-payload-deployment-result-empty = Add payload to every manifest being launched and select a valid map.
+rmc-payload-deployment-confirm-title = Confirm Payload Deployment
+rmc-payload-deployment-confirm-text = Launch {$payload} payload entities from {$selection} using {$type}?
+rmc-payload-deployment-confirm = Launch
+rmc-payload-deployment-cancel = Cancel
+rmc-payload-deployment-cross-map-title = Add cross-map payload
+rmc-payload-deployment-cross-map-text = One or more selected nearby entities were recorded on a different map from your current location. Add them anyway?
+rmc-payload-deployment-add-anyway = Add anyway
+
+rmc-payload-deployment-payload-sources = Payload Sources
+rmc-payload-deployment-nearby-tab = Nearby
+rmc-payload-deployment-player-tab = Player-Controlled
+rmc-payload-deployment-prototype-tab = Prototypes
+rmc-payload-deployment-nearby-radius = Search radius
+rmc-payload-deployment-refresh = Refresh
+rmc-payload-deployment-search-entities = Search nearby entities...
+rmc-payload-deployment-search-player-controlled = Search player-controlled entities...
+rmc-payload-deployment-search-prototypes = Search prototypes by name, ID, or suffix...
+rmc-payload-deployment-select-all = Select all
+rmc-payload-deployment-deselect-all = Deselect all
+rmc-payload-deployment-add-selected = Add selected
+rmc-payload-deployment-quantity = Quantity
+rmc-payload-deployment-add-prototype = Add prototype
+rmc-payload-deployment-payload-manifest = Payload Manifest
+rmc-payload-deployment-remove-selected = Remove selected
+rmc-payload-deployment-clear-manifest = Clear manifest
+rmc-payload-deployment-landing = Landing
+rmc-payload-deployment-map = Map
+rmc-payload-deployment-raw-coordinates = Use raw map coordinates
+rmc-payload-deployment-raw-coordinates-tooltip = Use engine map coordinates instead of rangefinder coordinates. Required for maps without a planet coordinate offset.
+rmc-payload-deployment-x = X coordinate
+rmc-payload-deployment-y = Y coordinate
+rmc-payload-deployment-use-current-position = Use current position
+rmc-payload-deployment-landing-radius = Landing area radius
+rmc-payload-deployment-landing-tiles = { $tiles ->
+    [one] 1 tile
+    *[other] {$tiles} tiles
+}
+rmc-payload-deployment-ignore-paradrop-restrictions = Ignore paradrop area restrictions
+rmc-payload-deployment-ignore-paradrop-restrictions-tooltip = Allow roofed or restricted areas, while still rejecting space and physically blocked tiles.
+rmc-orbital-drop-use-pods = Use drop pods
+rmc-orbital-drop-use-pods-tooltip = Put the payload into drop pods. When disabled, every payload entity is dropped directly.
+rmc-orbital-drop-pod-count = Number of pods
+rmc-payload-deployment-timing = Timing
+rmc-payload-deployment-arrival-delay = Arrival delay
+rmc-payload-deployment-drop-duration = Falling duration
+rmc-orbital-drop-open-delay = Open after landing
+rmc-payload-deployment-launch-interval = Launch interval
+rmc-orbital-drop-use-parachute = Use parachutes
+rmc-orbital-drop-use-parachute-tooltip = This option is only cosmetic.
+rmc-orbital-drop-show-landing-warning = Show landing warning

@@ -1,10 +1,11 @@
 using Content.Server._RMC14.Dropship;
+using Content.Shared.GameTicking;
+using Content.Shared._RMC14.ParaDrop;
 using Content.Shared.Doors.Components;
-using Content.Shared.ParaDrop;
 
 namespace Content.Server._RMC14.ParaDrop;
 
-public sealed partial class ParaDropSystem: SharedParaDropSystem
+public sealed partial class ParaDropSystem : SharedParaDropSystem
 {
     [Dependency] private readonly DropshipSystem _dropship = default!;
 
@@ -12,6 +13,7 @@ public sealed partial class ParaDropSystem: SharedParaDropSystem
     {
         base.Initialize();
         SubscribeLocalEvent<ActiveParaDropComponent, ComponentShutdown>(OnActiveParaDropShutdown);
+        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
     }
 
     private void OnActiveParaDropShutdown(Entity<ActiveParaDropComponent> ent, ref ComponentShutdown args)
@@ -27,5 +29,11 @@ public sealed partial class ParaDropSystem: SharedParaDropSystem
             _dropship.UnlockDoor(child);
             _dropship.LockDoor(child);
         }
+    }
+
+    private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
+    {
+        _batchJobs.Clear();
+        _reservedPayloads.Clear();
     }
 }
