@@ -10,12 +10,6 @@
       preset: RMCLanguagePresetSynthColonist
     - type: LanguageLearning
       preset: RMCLanguageLearningPresetSynthColonist
-    - type: RMCAllowSuitStorage
-    - type: DemoSpecWhitelist
-    - type: GrenadeSpecWhitelist
-    - type: ScoutWhitelist
-    - type: SniperWhitelist
-    - type: PyroWhitelist
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi

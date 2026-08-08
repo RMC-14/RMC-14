@@ -16,6 +16,27 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - English
+      - French
+      - Japanese
+      - Russian
+      - Scandinavian
+      - German
+      - Chinese
+      - Spanish
+      understoodLanguages:
+      - English
+      - French
+      - Japanese
+      - Russian
+      - Scandinavian
+      - German
+      - Chinese
+      - Spanish
+      currentLanguage: English
+      defaultLanguage: English
     - type: LanguageLearning
       learnableLanguages:
       - Xeno
@@ -27,11 +48,6 @@
     - type: NpcFactionMember
       factions:
       - TSE
-    - type: DemoSpecWhitelist
-    - type: GrenadeSpecWhitelist
-    - type: ScoutWhitelist
-    - type: SniperWhitelist
-    - type: PyroWhitelist
     - type: JobPrefix
       prefix: rmc-job-prefix-tsepa-synth
     - type: TacticalMapIcon

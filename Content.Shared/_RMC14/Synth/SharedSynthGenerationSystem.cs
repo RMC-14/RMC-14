@@ -31,6 +31,7 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
 
         SubscribeLocalEvent<SynthGenerationComponent, GenerationSelectActionEvent>(OnGenerationSelectAction);
         SubscribeLocalEvent<SynthGenerationComponent, GenerationSelectedActionEvent>(OnGenerationSelectedAction);
+        SubscribeLocalEvent<SynthGenerationComponent, GenerationConfirmedEvent>(OnGenerationConfirmed);
         SubscribeLocalEvent<SynthGenerationComponent, MapInitEvent>(OnGenerationMapInit);
         SubscribeLocalEvent<SynthGenerationComponent, PlayerAttachedEvent>(OnGenerationPlayerAttached);
         SubscribeLocalEvent<SynthGenerationComponent, PlayerSpawnCompleteEvent>(OnGenerationSpawnComplete);
@@ -103,23 +104,56 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
         var options = new List<DialogOption>();
         var synthTypes = new List<(EntityPrototype Proto, int Priority)>();
 
-        foreach (var proto in _prototype.EnumeratePrototypes<EntityPrototype>())
+        if (ent.Comp.AvailableGenerations.Count > 0)
         {
-            if (proto.TryGetComponent(out SynthGenerationComponent? gen, _compFactory))
-                synthTypes.Add((proto, gen.Priority));
+            foreach (var id in ent.Comp.AvailableGenerations)
+            {
+                if (_prototype.TryIndex(id, out var proto) &&
+                    proto.TryGetComponent(out SynthGenerationComponent? gen, _compFactory))
+                    synthTypes.Add((proto, gen.Priority));
+            }
+        }
+        else
+        {
+            foreach (var proto in _prototype.EnumeratePrototypes<EntityPrototype>())
+            {
+                if (proto.TryGetComponent(out SynthGenerationComponent? gen, _compFactory))
+                    synthTypes.Add((proto, gen.Priority));
+            }
         }
 
         synthTypes.Sort((a, b) => a.Priority.CompareTo(b.Priority));
 
         foreach (var (proto, _) in synthTypes)
         {
-            options.Add(new DialogOption($"{proto.Name}", new GenerationSelectedActionEvent(proto.ID)));
+            var desc = proto.TryGetComponent(out SynthGenerationComponent? genComp, _compFactory)
+                ? genComp.Description
+                : string.Empty;
+            options.Add(new DialogOption(proto.Name, new GenerationSelectedActionEvent(proto.ID), description: desc));
         }
 
         _dialog.OpenOptions(ent.Owner, "Select a Generation", options, "Available Generations");
     }
 
     private void OnGenerationSelectedAction(Entity<SynthGenerationComponent> ent, ref GenerationSelectedActionEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (ent.Comp.Generation != null)
+            return;
+
+        if (!_prototype.TryIndex(args.Generation, out var proto))
+            return;
+
+        _dialog.OpenConfirmation(
+            ent.Owner,
+            "Confirm Generation",
+            $"Please confirm {proto.Name} selection.",
+            new GenerationConfirmedEvent(args.Generation));
+    }
+
+    private void OnGenerationConfirmed(Entity<SynthGenerationComponent> ent, ref GenerationConfirmedEvent args)
     {
         if (ent.Comp.Generation != null)
             return;
@@ -130,11 +164,13 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
             return;
         }
 
+        var actionEntity = ent.Comp.SelectGenerationActionEntity;
+
         EntityManager.AddComponents(ent, proto);
 
         if (TryComp<SynthGenerationComponent>(ent, out var gen))
             ApplyGenerationModifier((ent.Owner, gen));
 
-        _actions.RemoveAction(ent.Owner, ent.Comp.SelectGenerationActionEntity);
+        _actions.RemoveAction(ent.Owner, actionEntity);
     }
 }

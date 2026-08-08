@@ -37,11 +37,6 @@
       comprehensionThreshold: 0.8
       learningRange: 8.0
       baseWordLearningRate: 0.05
-    - type: DemoSpecWhitelist
-    - type: GrenadeSpecWhitelist
-    - type: ScoutWhitelist
-    - type: SniperWhitelist
-    - type: PyroWhitelist
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
