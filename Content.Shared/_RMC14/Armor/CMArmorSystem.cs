@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Text;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Medical.Surgery;
@@ -403,6 +403,7 @@ public sealed class CMArmorSystem : EntitySystem
         else
         {
             Resist(args.Damage, ev.XenoArmor, ArmorGroup, mod.RangedArmorModifier);
+            Resist(args.Damage, ev.XenoArmor, BioGroup, mod.RangedArmorModifier);
         }
     }
 
