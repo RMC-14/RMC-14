@@ -5,6 +5,7 @@
   name: van
   description: A rugged transport van.
   components:
+  - type: VehicleWeak
   - type: WarpPoint
     follow: true
     location: Van
