@@ -172,7 +172,6 @@
         types:
           Heat: 1
 
-# Turnstile (not sure how to make a one-way door so for now it is a glorified fence)
 - type: entity
   parent: CMBarricadeBase
   id: CMBarricadeTurnstile
@@ -201,6 +200,24 @@
     - type: Construction
       graph: BarricadeTurnstileGraph
       node: nodeTurnstile
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape:
+            !type:PhysShapeAabb
+            bounds: "-0.49,-0.49,0.49,-0.24" # Thicker than a barricade so turnstile comp works
+          density: 500
+          mask:
+          - FullTileMask
+          layer:
+          - TableLayer
+          - BarricadeImpassable
+          # - BulletImpassable TODO
+    - type: Turnstile # All mobs and pullable objects blocked
+      processWhitelist:
+        components:
+        - MobState
+        - Pullable
 
 - type: entity
   parent: CMBarricadeTurnstile
