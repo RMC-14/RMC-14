@@ -6,12 +6,20 @@
     "x": 32,
     "y": 32
   },
-  "states": [
-    {
-      "name": "planter_box"
-    },
-    {
-      "name": "soil_grid"
-    }
-  ]
+    "states": [
+        {
+            "name": "planter_box",
+            "directions": 4
+        },
+        {
+            "name": "planter_box2",
+            "directions": 4
+        },
+        {
+            "name": "soil_grid"
+        },
+        {
+            "name": "planter_box_empty"
+        }
+    ]
 }
