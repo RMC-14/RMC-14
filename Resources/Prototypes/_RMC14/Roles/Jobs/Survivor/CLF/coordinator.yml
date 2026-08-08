@@ -1,0 +1,74 @@
+# RMC14 TODO: Must be changed when CLF Surviors System gets added PR #7950
+- type: job
+  parent: CMJobBase # RMCSurvivorCLFBase
+  id: RMCSurvivorCLFCoordinator
+  name: rmc-clf-coordinator # rmc-job-name-clf-survivor-coordinator must be created first
+  description: rmc-ghost-role-information-clf-description # Can be removed when parent changed 
+  ranks:
+    RMCRankCLFRebel: [ ]
+  startingGear: RMCGearSurvivorCLFCoordinator
+  icon: RMCJobIconCLFCoordinator
+  spawnMenuRoleName: CLF Coordinator (Survivor)
+  playTimeTracker: CMJobCLFCoordinator # Can be removed when parent changed 
+# antagRole: RMCHostileSurvivor
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetSurvivorCLFCoordinator # Is under /Roles\SkillPresets\clf.yml might need changing when system is added
+    - type: NpcFactionMember     
+      factions:
+      - CLF
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      understoodLanguages:
+      - Japanese
+      - English
+      currentLanguage: Japanese
+      defaultLanguage: Japanese
+    - type: JobPrefix
+      prefix: rmc-job-prefix-clf-coordinator # rmc-job-prefix-clf-survivor-coordinator must be created first
+    - type: SquadLeader
+      icon:
+        sprite: _RMC14/Interface/job_icons/CLF.rsi
+        state: clf_cr
+    - type: RMCPointing
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+  hidden: true
+
+- type: startingGear
+  id: RMCGearSurvivorCLFCoordinator
+  equipment:
+    head: RMCHeadGreyMilitiaHood
+    mask: RMCCarbonMask
+    ears: RMCHeadsetDistressCLF
+    neck: RMCtornCLFflag
+    jumpsuit: RMCJumpsuitCLFWebbingFP9000
+    outerClothing: RMCCoatMilitiaFullArmor
+    gloves: CMHandsBrown
+    shoes: RMCBootsSPPFilled
+    back: RMCSatchelLightpack
+    suitstorage: RMCWeaponSMGFP9000
+    id: RMCIDCardCLFCoordinator
+    belt: RMCScabbardDragonKatanaFilled
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchFirstAidInjectors
+  storage:
+    back:
+    - CMAdvFirstAidKitFilled
+    - RMCMRECLF
+    - CMHealthAnalyzer
+    - CMPaper
+    - RMCMotionDetector
+    - RMCBinoculars
+    - RMCGrenadeMolotov
+    - RMCMagazineSMGFP9000
+    - RMCMagazineSMGFP9000
+    - CMPen
+    outerClothing:
+    - RMCMagazineSMGFP9000
+    - RMCMagazineSMGFP9000
+    - RMCMagazineSMGFP9000
