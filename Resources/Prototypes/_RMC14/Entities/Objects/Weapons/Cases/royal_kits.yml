@@ -2,7 +2,7 @@
   parent: CMSniperEquipmentCase
   id: RMCScoutSniperSniperEquipmentCase
   name: scout-sniper equipment case
-  description: "A large case containing an M96S-B suppressed scoped rifle, its corresponding head-mounted sight, six spare magazines of standard ammo, and a bipod. \n\nNOTE: You cannot put items back inside this case."
+  description: "A large case containing an L144 long-range rifle, an L8 head-mounted optical device, eight spare magazines of squash-head rounds, and a bipod."
   suffix: Sniper
   components:
   - type: Sprite
@@ -26,13 +26,13 @@
   - type: Storage
     maxItemSize: Huge
     grid:
-    - 0,0,17,1
+    - 0,0,21,1
   - type: StorageFill
     contents:
-    - id: CMGlassesM42ScoutSight
-    - id: CMMagazineSniperM96S
-      amount: 6
-    - id: RMCM96SBSniperRifle
+    - id: RMCGlassesL8HMOD
+    - id: RMCMagazineSniperL144SH
+      amount: 8
+    - id: RMCL144SniperRifle
     - id: RMCAttachmentBipod
   - type: CMChangeUserOnVend
     addComponents:
@@ -42,7 +42,7 @@
   parent: CMSniperEquipmentCase
   id: RMCScoutSniperMarksmanEquipmentCase
   name: scout-sniper equipment case
-  description: "A large case containing an L112A1 designated marksman rifle, its corresponding head-mounted sight, ten spare magazines of squash-head rounds, and a bipod."
+  description: "A large case containing an L112A1 designated marksman rifle, an L8 head-mounted optical device, ten spare magazines of squash-head rounds, and a bipod."
   suffix: Marksman
   components:
   - type: Sprite
@@ -73,7 +73,7 @@
       - RMCL112SniperRifle
   - type: StorageFill
     contents:
-    - id: CMGlassesM42ScoutSight
+    - id: RMCGlassesL8HMOD
     - id: RMCL112SniperRifleSuppressedSH
     - id: RMCMagazineSniperL112SH
       amount: 10
