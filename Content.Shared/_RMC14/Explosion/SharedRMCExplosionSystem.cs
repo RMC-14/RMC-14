@@ -262,49 +262,57 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
 
     private void OnExplosiveDamageOnHitProjectileHit(Entity<RMCExplosiveDamageOnHitComponent> projectile, ref ProjectileHitEvent args)
     {
-        DoExplosiveDamage(projectile, args.Target, args.Shooter);
+        DoExplosiveHit(projectile, args.Target, args.Shooter);
     }
 
     private void OnExplosiveDamageOnMeleeHit(Entity<RMCExplosiveDamageOnHitComponent> projectile, ref MeleeHitEvent args)
     {
         foreach (var hit in args.HitEntities)
         {
-            DoExplosiveDamage(projectile, hit, args.User);
+            DoExplosiveHit(projectile, hit, args.User);
         }
     }
 
-    private void DoExplosiveDamage(Entity<RMCExplosiveDamageOnHitComponent> ent, EntityUid target, EntityUid? user)
+    private void DoExplosiveHit(Entity<RMCExplosiveDamageOnHitComponent> ent, EntityUid target, EntityUid? user)
     {
         foreach (var explosion in ent.Comp.Explosions)
         {
             if (_entityWhitelist.IsWhitelistFail(explosion.Whitelist, target))
                 continue;
 
-            var ev = new GetExplosionResistanceEvent(explosion.ExplosionType);
-            RaiseLocalEvent(target, ref ev);
-
-            // Effectively subtracts armor like normal armor piercing
-            // We must get explosion armor so we don't make the ent more vunerable
-            if (explosion.ArmorPiercing > 0)
-            {
-                var arev = new CMGetArmorEvent(SlotFlags.OUTERCLOTHING | SlotFlags.INNERCLOTHING);
-                RaiseLocalEvent(target, ref arev);
-                arev.ExplosionArmor = Math.Max(arev.ExplosionArmor, 0);
-
-                var resist = (float)Math.Pow(1.1, -Math.Min(arev.ExplosionArmor, explosion.ArmorPiercing) / 10.0);
-                ev.DamageCoefficient /= resist;
-            }
-
-            ev.DamageCoefficient = Math.Max(0, ev.DamageCoefficient);
-
-            var dam = _damage.TryChangeDamage(target, explosion.Damage * ev.DamageCoefficient, true, origin: user, tool: ent);
-
-            if (dam == null)
-                continue;
-
-            var exv = new ExplosionReceivedEvent(explosion.ExplosionType, _transform.ToMapCoordinates(ent.Owner.ToCoordinates()), dam);
-            RaiseLocalEvent(target, ref exv);
+            DoDirectExplosionDamage(ent, target, user, explosion.ExplosionType, explosion.Damage, explosion.ArmorPiercing);
         }
+    }
+
+    public void DoDirectExplosionDamage(EntityUid origin, EntityUid target, EntityUid? user,
+        ProtoId<ExplosionPrototype> explosionType, DamageSpecifier damage, int armorPiercing = 0)
+    {
+        var ev = new GetExplosionResistanceEvent(explosionType);
+        RaiseLocalEvent(target, ref ev);
+
+        // Effectively subtracts armor like normal armor piercing
+        // We must get explosion armor so we don't make the ent more vunerable
+        if (armorPiercing > 0)
+        {
+            var arev = new CMGetArmorEvent(SlotFlags.OUTERCLOTHING | SlotFlags.INNERCLOTHING);
+            RaiseLocalEvent(target, ref arev);
+            arev.ExplosionArmor = Math.Max(arev.ExplosionArmor, 0);
+
+            var resist = (float)Math.Pow(1.1, -Math.Min(arev.ExplosionArmor, armorPiercing) / 10.0);
+            ev.DamageCoefficient /= resist;
+        }
+
+        ev.DamageCoefficient = Math.Max(0, ev.DamageCoefficient);
+
+        // TODO RMC14 add BeforeExplosionReceived when merged in, with params to override direction
+
+        var dam = _damage.TryChangeDamage(target, damage * ev.DamageCoefficient, true, origin: user, tool: origin);
+
+        if (dam == null)
+            return;
+
+        var exv = new ExplosionReceivedEvent(explosionType, _transform.ToMapCoordinates(origin.ToCoordinates()), dam);
+        RaiseLocalEvent(target, ref exv);
     }
 
     public void DoEffect(Entity<CMExplosionEffectComponent> ent)

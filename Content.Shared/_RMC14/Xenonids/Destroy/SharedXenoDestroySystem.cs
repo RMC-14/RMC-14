@@ -75,6 +75,7 @@ public abstract class SharedXenoDestroySystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPull = default!;
     [Dependency] private readonly ActionBlockerSystem _blocker = default!;
+    [Dependency] private readonly SharedRMCExplosionSystem _explosion = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _mobs = new();
 
@@ -237,18 +238,7 @@ public abstract class SharedXenoDestroySystem : EntitySystem
 
                 if (_whitelist.IsWhitelistPass(xeno.Comp.Structures, ent))
                 {
-                    var ev = new GetExplosionResistanceEvent(xeno.Comp.ExplosionType.Id);
-                    RaiseLocalEvent(ent, ref ev);
-
-                    ev.DamageCoefficient = Math.Max(0, ev.DamageCoefficient);
-
-                    var dam = _damage.TryChangeDamage(ent, xeno.Comp.StructureDamage * ev.DamageCoefficient, true, origin: xeno, tool: xeno);
-
-                    if (dam == null)
-                        continue;
-
-                    var exv = new ExplosionReceivedEvent(xeno.Comp.ExplosionType, _transform.ToMapCoordinates(xeno.Owner.ToCoordinates()), dam);
-                    RaiseLocalEvent(ent, ref exv);
+                    _explosion.DoDirectExplosionDamage(xeno, ent, xeno, xeno.Comp.ExplosionType, xeno.Comp.StructureDamage);
                     continue;
                 }
             }
