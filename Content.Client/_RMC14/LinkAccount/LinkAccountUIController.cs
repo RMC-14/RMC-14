@@ -16,12 +16,12 @@ namespace Content.Client._RMC14.LinkAccount;
 
 public sealed class LinkAccountUIController : UIController, IOnSystemChanged<LinkAccountSystem>
 {
-    [Dependency] private readonly IClipboardManager _clipboard = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly LinkAccountManager _linkAccount = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IUriOpener _uriOpener = default!;
+    [Dependency] private IClipboardManager _clipboard = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private LinkAccountManager _linkAccount = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IUriOpener _uriOpener = default!;
 
     private LinkAccountWindow? _window;
     private PatronPerksWindow? _patronPerksWindow;

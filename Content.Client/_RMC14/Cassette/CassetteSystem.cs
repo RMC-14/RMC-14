@@ -18,16 +18,16 @@ namespace Content.Client._RMC14.Cassette;
 
 public sealed class CassetteSystem : SharedCassetteSystem
 {
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly IAudioManager _audioManager = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly IFileDialogManager _dialogs = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private IAudioManager _audioManager = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private IFileDialogManager _dialogs = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private float _gain;
     private readonly Dictionary<AudioStream, string> _names = new();

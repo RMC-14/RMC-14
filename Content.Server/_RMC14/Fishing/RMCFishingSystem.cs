@@ -33,21 +33,22 @@ public sealed class RMCFishingSystem : EntitySystem
 {
     private const string FishingLineVisualPrototypePrefix = "RMCFishingLineVisual";
 
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly RMCWaterSystem _water = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private RMCMapSystem _rmcMap = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedScaleVisualsSystem _scaleVisuals = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private RMCWaterSystem _water = default!;
 
     private readonly Dictionary<EntityUid, EntityUid> _lineVisuals = new();
 
@@ -603,7 +604,7 @@ public sealed class RMCFishingSystem : EntitySystem
 
         var t = (float)(ent.Comp.Length - ent.Comp.MinLength) / (ent.Comp.MaxLength - ent.Comp.MinLength);
         var scaleVal = ent.Comp.MinScale + t * (ent.Comp.MaxScale - ent.Comp.MinScale);
-        _appearance.SetData(ent.Owner, ScaleVisuals.Scale,  Vector2.One * scaleVal);
+        _scaleVisuals.SetSpriteScale(ent, Vector2.One * scaleVal);
     }
 
     private void OnSpearAfterInteract(Entity<RMCFishingSpearComponent> ent, ref AfterInteractEvent args)

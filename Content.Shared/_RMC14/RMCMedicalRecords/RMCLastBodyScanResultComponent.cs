@@ -36,4 +36,4 @@ public sealed partial class RMCLastBodyScanResultComponent : Component
 ///     A single autodoc procedure record entry, identifying procedures detected by the body scanner.
 /// </summary>
 [Serializable, NetSerializable, DataRecord]
-public sealed record RMCAutodocScanData(string Procedure, string Details);
+public sealed partial record RMCAutodocScanData(string Procedure, string Details);

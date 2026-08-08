@@ -10,8 +10,8 @@ namespace Content.Shared.Construction;
 /// </summary>
 public sealed class PartAssemblySystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

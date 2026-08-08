@@ -8,8 +8,8 @@ namespace Content.Client._RMC14.NewPlayer;
 
 public sealed class NewPlayerPopupSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IPlayerManager _players = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IPlayerManager _players = default!;
 
 
     private NewToJobPopup? _window;

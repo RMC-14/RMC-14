@@ -12,8 +12,8 @@ namespace Content.Shared.Nutrition.EntitySystems;
 /// </summary>
 public sealed class FlavorProfileSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IConfigurationManager _configManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IConfigurationManager _configManager = default!;
 
     private const string BackupFlavorMessage = "flavor-profile-unknown";
 

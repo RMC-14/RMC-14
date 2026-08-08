@@ -14,13 +14,13 @@ namespace Content.Client._RMC14.CombatMode;
 
 public sealed class RMCCombatModeUISystem : EntitySystem
 {
-    [Dependency] private readonly IClyde _clyde = default!;
-    [Dependency] private readonly CombatModeSystem _combatMode = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly RMCCombatModeSystem _rmcCombatMode = default!;
-    [Dependency] private readonly IUserInterfaceManager _ui = default!;
-    [Dependency] private readonly RMCWeaponControllerSystem _rmcSharedWeaponController = default!;
+    [Dependency] private IClyde _clyde = default!;
+    [Dependency] private CombatModeSystem _combatMode = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private HandsSystem _hands = default!;
+    [Dependency] private RMCCombatModeSystem _rmcCombatMode = default!;
+    [Dependency] private IUserInterfaceManager _ui = default!;
+    [Dependency] private RMCWeaponControllerSystem _rmcSharedWeaponController = default!;
 
     private bool _crosshairsEnabled;
     private ICursor? _crosshairCursor;
@@ -52,7 +52,7 @@ public sealed class RMCCombatModeUISystem : EntitySystem
             return;
         }
 
-        _crosshairCursor ??= _clyde.CreateCursor(new Image<Rgba32>(1, 1), Vector2i.One);
+        _crosshairCursor ??= _clyde.CreateCursor(new Image<Rgba32>(16, 16), new Vector2i(8, 8));
         _ui.CurrentlyHovered.CustomCursorShape = _crosshairCursor;
     }
 }

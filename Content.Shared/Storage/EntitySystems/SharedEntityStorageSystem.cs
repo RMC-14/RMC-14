@@ -43,8 +43,8 @@ public abstract class SharedEntityStorageSystem : EntitySystem
     [Dependency] protected readonly SharedPopupSystem Popup = default!;
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
     [Dependency] private   readonly WeldableSystem _weldable = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
 
     public const string ContainerName = "entity_storage";
 

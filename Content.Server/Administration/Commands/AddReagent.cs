@@ -16,8 +16,8 @@ namespace Content.Server.Administration.Commands
     [AdminCommand(AdminFlags.Admin)]
     public sealed class AddReagent : IConsoleCommand
     {
-        [Dependency] private readonly IEntityManager _entManager = default!;
-        [Dependency] private readonly IPrototypeManager _protomanager = default!;
+        [Dependency] private IEntityManager _entManager = default!;
+        [Dependency] private IPrototypeManager _protomanager = default!;
 
         public string Command => "addreagent";
         public string Description => "Add (or remove) some amount of reagent from some solution.";

@@ -8,8 +8,8 @@ namespace Content.Client._RMC14.Explosion;
 
 public sealed class RMCExplosionShockWaveOverlay : Overlay, IEntityEventSubscriber
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     private SharedTransformSystem? _xformSystem;
 

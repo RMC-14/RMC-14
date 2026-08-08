@@ -5,7 +5,7 @@ namespace Content.Shared._RMC14.Sprite;
 
 public abstract class SharedRMCSpriteSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {

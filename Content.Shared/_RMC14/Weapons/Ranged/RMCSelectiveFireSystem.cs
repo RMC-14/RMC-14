@@ -12,7 +12,7 @@ namespace Content.Shared._RMC14.Weapons.Ranged;
 
 public sealed class RMCSelectiveFireSystem : EntitySystem
 {
-    [Dependency] private readonly SharedGunSystem _gunSystem = default!;
+    [Dependency] private SharedGunSystem _gunSystem = default!;
 
     private const string scatterExamineColour = "yellow";
 

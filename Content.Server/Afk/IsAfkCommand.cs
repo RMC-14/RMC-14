@@ -8,8 +8,8 @@ namespace Content.Server.Afk
     [AdminCommand(AdminFlags.Admin)]
     public sealed class IsAfkCommand : LocalizedCommands
     {
-        [Dependency] private readonly IAfkManager _afkManager = default!;
-        [Dependency] private readonly IPlayerManager _players = default!;
+        [Dependency] private IAfkManager _afkManager = default!;
+        [Dependency] private IPlayerManager _players = default!;
 
         public override string Command => "isafk";
 

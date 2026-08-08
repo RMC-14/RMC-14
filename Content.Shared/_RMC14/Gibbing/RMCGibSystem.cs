@@ -17,13 +17,13 @@ public sealed class RMCGibSystem : EntitySystem
     private const float ItemLaunchImpulse = 8f;
     private const float ItemLaunchImpulseVariance = 3f;
 
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
-    [Dependency] private readonly MobThresholdSystem _thresholds = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedBodySystem _body = default!;
+    [Dependency] private MobThresholdSystem _thresholds = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
     {

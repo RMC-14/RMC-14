@@ -22,9 +22,9 @@ public sealed class ServerInfoManager
         // @formatter:on
     };
 
-    [Dependency] private readonly IStatusHost _statusHost = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly ILocalizationManager _loc = default!;
+    [Dependency] private IStatusHost _statusHost = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
 
     public void Initialize()
     {

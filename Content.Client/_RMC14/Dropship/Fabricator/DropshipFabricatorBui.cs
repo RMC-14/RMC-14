@@ -14,8 +14,8 @@ public sealed class DropshipFabricatorBui : BoundUserInterface
 {
     private const int QueueRowHeight = 28;
 
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
 
     [ViewVariables]
     private DropshipFabricatorWindow? _window;

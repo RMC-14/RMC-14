@@ -15,12 +15,12 @@ namespace Content.Shared._RMC14.Xenonids.Energy;
 
 public sealed class XenoEnergySystem : EntitySystem
 {
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly StandingStateSystem _stand = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private StandingStateSystem _stand = default!;
 
     private void OnXenoPlasmaMapInit(Entity<XenoEnergyComponent> ent, ref MapInitEvent args)
     {

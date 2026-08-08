@@ -33,21 +33,21 @@ namespace Content.Server._RMC14.Requisitions;
 
 public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
 {
-    [Dependency] private readonly IAdminLogManager _adminLogs = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly ChasmSystem _chasm = default!;
-    [Dependency] private readonly ChatSystem _chatSystem = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly ARESCoreSystem _core = default!;
-    [Dependency] private readonly EntityStorageSystem _entityStorage = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly PhysicsSystem _physics = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private IAdminLogManager _adminLogs = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private ChasmSystem _chasm = default!;
+    [Dependency] private ChatSystem _chatSystem = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private ARESCoreSystem _core = default!;
+    [Dependency] private EntityStorageSystem _entityStorage = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private PhysicsSystem _physics = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private XenoSystem _xeno = default!;
 
     private static readonly EntProtoId AccountId = "RMCASRSAccount";
     private static readonly EntProtoId PaperRequisitionInvoice = "RMCPaperRequisitionInvoice";

@@ -20,14 +20,14 @@ namespace Content.Shared._RMC14.Scaling;
 
 public sealed class ScalingSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly SharedGameTicker _gameTicker = default!;
-    [Dependency] private readonly SharedJobSystem _job = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly SharedRequisitionsSystem _requisitions = default!;
-    [Dependency] private readonly SharedCMAutomatedVendorSystem _rmcAutomatedVendor = default!;
-    [Dependency] private readonly GunIFFSystem _gunIFF = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private SharedGameTicker _gameTicker = default!;
+    [Dependency] private SharedJobSystem _job = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private SharedRequisitionsSystem _requisitions = default!;
+    [Dependency] private SharedCMAutomatedVendorSystem _rmcAutomatedVendor = default!;
+    [Dependency] private GunIFFSystem _gunIFF = default!;
 
     public float MarineScalingNormal { get; private set; }
     private float _marineScalingBonus;

@@ -10,10 +10,10 @@ namespace Content.Client.CardboardBox;
 
 public sealed class CardboardBoxSystem : SharedCardboardBoxSystem
 {
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private EntityQuery<BodyComponent> _bodyQuery;
 

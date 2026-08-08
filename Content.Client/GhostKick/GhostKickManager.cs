@@ -10,9 +10,9 @@ public sealed class GhostKickManager
 {
     private bool _fakeLossEnabled;
 
-    [Dependency] private readonly IBaseClient _baseClient = default!;
-    [Dependency] private readonly IClientNetManager _netManager = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IBaseClient _baseClient = default!;
+    [Dependency] private IClientNetManager _netManager = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     public void Initialize()
     {

@@ -18,13 +18,13 @@ namespace Content.Server._RMC14.Xenonids.Respawn;
 
 public sealed partial class XenoRespawnSystem : EntitySystem
 {
-    [Dependency] private readonly GhostSystem _ghostSystem = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly XenoHiveSystem _hive = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private GhostSystem _ghostSystem = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private XenoHiveSystem _hive = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private TransformSystem _transform = default!;
     public void RespawnXeno(EntityUid xeno, TimeSpan time, bool atLocation = false, EntityCoordinates? location = null)
     {
         if (!TryComp(xeno, out ActorComponent? actor))

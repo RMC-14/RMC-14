@@ -16,10 +16,10 @@ namespace Content.Server.Atmos.Piping.Unary.EntitySystems;
 [UsedImplicitly]
 public sealed class GasCondenserSystem : EntitySystem
 {
-    [Dependency] private readonly AtmosphereSystem _atmosphereSystem = default!;
-    [Dependency] private readonly PowerReceiverSystem _power = default!;
-    [Dependency] private readonly NodeContainerSystem _nodeContainer = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private AtmosphereSystem _atmosphereSystem = default!;
+    [Dependency] private PowerReceiverSystem _power = default!;
+    [Dependency] private NodeContainerSystem _nodeContainer = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
 
     public override void Initialize()
     {

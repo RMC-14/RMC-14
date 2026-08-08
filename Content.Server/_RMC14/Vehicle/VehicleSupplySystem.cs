@@ -31,18 +31,18 @@ public sealed class VehicleSupplySystem : EntitySystem
     private const int VendedHardpointAmmoCount = 3;
 
 
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly VehicleHardpointVisualsSystem _hardpointVisuals = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly PhysicsSystem _physics = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly SharedRequisitionsSystem _requisitions = default!;
-    [Dependency] private readonly VehicleSystem _rmcVehicles = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedCMAutomatedVendorSystem _vendor = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private VehicleHardpointVisualsSystem _hardpointVisuals = default!;
+    [Dependency] private ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private PhysicsSystem _physics = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private SharedRequisitionsSystem _requisitions = default!;
+    [Dependency] private VehicleSystem _rmcVehicles = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedCMAutomatedVendorSystem _vendor = default!;
 
     private readonly Dictionary<string, List<HardpointItemInfo>> _hardpointItemsByType = new();
     private readonly Dictionary<string, string> _hardpointTypeByProto = new();

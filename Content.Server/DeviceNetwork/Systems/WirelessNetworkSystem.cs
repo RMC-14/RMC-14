@@ -7,7 +7,7 @@ namespace Content.Server.DeviceNetwork.Systems
     [UsedImplicitly]
     public sealed class WirelessNetworkSystem : EntitySystem
     {
-        [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+        [Dependency] private SharedTransformSystem _transformSystem = default!;
 
         public override void Initialize()
         {

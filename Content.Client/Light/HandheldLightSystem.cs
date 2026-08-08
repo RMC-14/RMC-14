@@ -10,8 +10,8 @@ namespace Content.Client.Light;
 
 public sealed class HandheldLightSystem : SharedHandheldLightSystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly LightBehaviorSystem _lightBehavior = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private LightBehaviorSystem _lightBehavior = default!;
 
     public override void Initialize()
     {

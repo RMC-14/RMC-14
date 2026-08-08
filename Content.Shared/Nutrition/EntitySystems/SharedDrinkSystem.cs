@@ -20,17 +20,17 @@ namespace Content.Shared.Nutrition.EntitySystems;
 
 public abstract partial class SharedDrinkSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly FlavorProfileSystem _flavorProfile = default!;
-    [Dependency] private readonly FoodSystem _food = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly OpenableSystem _openable = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedBodySystem _body = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private FlavorProfileSystem _flavorProfile = default!;
+    [Dependency] private FoodSystem _food = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private OpenableSystem _openable = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
 
     public override void Initialize()
     {

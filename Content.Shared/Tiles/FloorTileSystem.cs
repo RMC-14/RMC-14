@@ -24,20 +24,19 @@ namespace Content.Shared.Tiles;
 
 public sealed class FloorTileSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
-    [Dependency] private readonly ITileDefinitionManager _tileDefinitionManager = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedStackSystem _stackSystem = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly TileSystem _tile = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _netManager = default!;
+    [Dependency] private ITileDefinitionManager _tileDefinitionManager = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedStackSystem _stackSystem = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private TileSystem _tile = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private TurfSystem _turf = default!;
 
     private static readonly Vector2 CheckRange = new(1f, 1f);
 
@@ -80,7 +79,7 @@ public sealed class FloorTileSystem : EntitySystem
         // so we're just gon with this for now.
         const bool inRange = true;
         var state = (inRange, location.EntityId);
-        _mapManager.FindGridsIntersecting(map.MapId, new Box2(map.Position - CheckRange, map.Position + CheckRange), ref state,
+        _map.FindGridsIntersecting(map.MapId, new Box2(map.Position - CheckRange, map.Position + CheckRange), ref state,
             static (EntityUid entityUid, MapGridComponent grid, ref (bool weh, EntityUid EntityId) tuple) =>
             {
                 if (tuple.EntityId == entityUid)
@@ -163,7 +162,7 @@ public sealed class FloorTileSystem : EntitySystem
                 if (_netManager.IsClient)
                     return;
 
-                var grid = _mapManager.CreateGridEntity(locationMap.MapId);
+                var grid = _map.CreateGridEntity(locationMap.MapId);
                 var gridXform = Transform(grid);
                 _transform.SetWorldPosition((grid, gridXform), locationMap.Position);
                 location = new EntityCoordinates(grid, Vector2.Zero);

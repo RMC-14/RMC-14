@@ -8,9 +8,9 @@ namespace Content.Server.Body.Systems;
 
 public sealed class ThermalRegulatorSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly TemperatureSystem _tempSys = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlockerSys = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private TemperatureSystem _tempSys = default!;
+    [Dependency] private ActionBlockerSystem _actionBlockerSys = default!;
 
     public override void Initialize()
     {

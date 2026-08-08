@@ -14,10 +14,10 @@ namespace Content.Server.Xenoarchaeology.Artifact.XAE;
 /// </summary>
 public sealed class XAECreatePuddleSystem: BaseXAESystem<XAECreatePuddleComponent>
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly PuddleSystem _puddle = default!;
-    [Dependency] private readonly MetaDataSystem _metaData= default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager= default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private PuddleSystem _puddle = default!;
+    [Dependency] private MetaDataSystem _metaData= default!;
+    [Dependency] private IPrototypeManager _prototypeManager= default!;
 
     /// <inheritdoc />
     public override void Initialize()

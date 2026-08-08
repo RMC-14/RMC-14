@@ -5,7 +5,7 @@ namespace Content.Client._RMC14.LinkAccount;
 
 public sealed class LinkAccountManager : IPostInjectInit
 {
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private INetManager _net = default!;
 
     private readonly List<SharedRMCPatron> _allPatrons = [];
 

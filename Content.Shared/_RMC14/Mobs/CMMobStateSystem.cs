@@ -10,11 +10,11 @@ namespace Content.Shared._RMC14.Mobs;
 
 public sealed class CMMobStateSystem : EntitySystem
 {
-    [Dependency] private readonly IConsoleHost _host = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedRMCSpriteSystem _rmcSprite = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private IConsoleHost _host = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedRMCSpriteSystem _rmcSprite = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {

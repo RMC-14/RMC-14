@@ -12,10 +12,10 @@ namespace Content.Server._RMC14.Xenonids.Heal;
 
 public sealed partial class XenoHealSystem : SharedXenoHealSystem
 {
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly XenoRespawnSystem _xenoRespawn = default!;
-    [Dependency] private readonly GhostSystem _ghost = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private XenoRespawnSystem _xenoRespawn = default!;
+    [Dependency] private GhostSystem _ghost = default!;
+    [Dependency] private MindSystem _mind = default!;
 
     protected override void SacrificialHealShout(EntityUid xeno)
     {

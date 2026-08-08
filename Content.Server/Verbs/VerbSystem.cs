@@ -13,10 +13,10 @@ namespace Content.Server.Verbs
 {
     public sealed class VerbSystem : SharedVerbSystem
     {
-        [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-        [Dependency] private readonly HandsSystem _hands = default!;
-        [Dependency] private readonly PopupSystem _popupSystem = default!;
-        [Dependency] private readonly IAdminManager _adminMgr = default!;
+        [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+        [Dependency] private HandsSystem _hands = default!;
+        [Dependency] private PopupSystem _popupSystem = default!;
+        [Dependency] private IAdminManager _adminMgr = default!;
 
         public override void Initialize()
         {

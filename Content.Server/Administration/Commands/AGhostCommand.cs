@@ -15,8 +15,8 @@ namespace Content.Server.Administration.Commands;
 [AdminCommand(AdminFlags.AdminGhost)] // RMC14
 public sealed class AGhostCommand : LocalizedCommands
 {
-    [Dependency] private readonly IEntityManager _entities = default!;
-    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
+    [Dependency] private IEntityManager _entities = default!;
+    [Dependency] private ISharedPlayerManager _playerManager = default!;
 
     public override string Command => "aghost";
     public override string Help => "aghost";

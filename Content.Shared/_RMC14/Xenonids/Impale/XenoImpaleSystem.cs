@@ -18,16 +18,16 @@ namespace Content.Shared._RMC14.Xenonids.Impale;
 
 public sealed class XenoImpaleSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _flash = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
-    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedRMCEmoteSystem _emote = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedColorFlashEffectSystem _flash = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedRMCMeleeWeaponSystem _rmcMelee = default!;
+    [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
 
     public override void Initialize()

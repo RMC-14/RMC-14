@@ -12,8 +12,8 @@ namespace Content.Server._RMC14.Movement;
 
 public sealed class RMCLagCompensationSystem : SharedRMCLagCompensationSystem
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly LagCompensationSystem _lagCompensation = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private LagCompensationSystem _lagCompensation = default!;
 
     public override void Initialize()
     {

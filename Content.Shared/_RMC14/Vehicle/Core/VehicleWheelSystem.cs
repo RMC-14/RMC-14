@@ -13,10 +13,10 @@ namespace Content.Shared._RMC14.Vehicle;
 
 public sealed class VehicleWheelSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly HardpointSystem _hardpoints = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
-    [Dependency] private readonly Content.Shared.Vehicle.VehicleSystem _vehicles = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private HardpointSystem _hardpoints = default!;
+    [Dependency] private ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private Content.Shared.Vehicle.VehicleSystem _vehicles = default!;
 
     public override void Initialize()
     {

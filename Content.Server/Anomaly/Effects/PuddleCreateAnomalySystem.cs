@@ -10,8 +10,8 @@ namespace Content.Server.Anomaly.Effects;
 /// </summary>
 public sealed class PuddleCreateAnomalySystem : EntitySystem
 {
-    [Dependency] private readonly PuddleSystem _puddle = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private PuddleSystem _puddle = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
 
     public override void Initialize()
     {

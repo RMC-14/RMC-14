@@ -25,22 +25,22 @@ namespace Content.Shared._RMC14.Xenonids.ManageHive;
 
 public sealed class ManageHiveSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly SharedCommendationSystem _commendation = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly DialogSystem _dialog = default!;
-    [Dependency] private readonly SharedGameTicker _gameTicker = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly HiveBoonSystem _hiveBoon = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly ISharedPlaytimeManager _playtime = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
-    [Dependency] private readonly SharedXenoWatchSystem _xenoWatch = default!;
-    [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private SharedCommendationSystem _commendation = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private DialogSystem _dialog = default!;
+    [Dependency] private SharedGameTicker _gameTicker = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private HiveBoonSystem _hiveBoon = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private ISharedPlaytimeManager _playtime = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SharedCMChatSystem _rmcChat = default!;
+    [Dependency] private SharedXenoWatchSystem _xenoWatch = default!;
+    [Dependency] private XenoEvolutionSystem _xenoEvolution = default!;
+    [Dependency] private XenoPlasmaSystem _xenoPlasma = default!;
 
     private LocalizedDatasetPrototype _jelliesDataset = default!;
 

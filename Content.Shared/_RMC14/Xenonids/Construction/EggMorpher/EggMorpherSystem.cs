@@ -20,15 +20,15 @@ namespace Content.Shared._RMC14.Xenonids.Construction.EggMorpher;
 
 public sealed partial class EggMorpherSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _time = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private IGameTiming _time = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedXenoParasiteSystem _parasite = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {

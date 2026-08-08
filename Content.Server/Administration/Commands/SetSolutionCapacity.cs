@@ -11,7 +11,7 @@ namespace Content.Server.Administration.Commands
     [AdminCommand(AdminFlags.Fun)]
     public sealed class SetSolutionCapacity : IConsoleCommand
     {
-        [Dependency] private readonly IEntityManager _entManager = default!;
+        [Dependency] private IEntityManager _entManager = default!;
 
         public string Command => "setsolutioncapacity";
         public string Description => "Set the capacity (maximum volume) of some solution.";

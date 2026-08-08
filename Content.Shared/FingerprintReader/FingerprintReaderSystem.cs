@@ -9,8 +9,8 @@ namespace Content.Shared.FingerprintReader;
 // TODO: This has a lot of overlap with the AccessReaderSystem, maybe merge them in the future?
 public sealed class FingerprintReaderSystem : EntitySystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     /// <summary>
     /// Checks if the given user has fingerprint access to the target entity.

@@ -10,8 +10,8 @@ namespace Content.Shared.ProximityDetection.Systems;
 /// </summary>
 public sealed class ProximityDetectionSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ItemToggleSystem _toggle = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ItemToggleSystem _toggle = default!;
 
     private EntityQuery<TransformComponent> _xformQuery;
 

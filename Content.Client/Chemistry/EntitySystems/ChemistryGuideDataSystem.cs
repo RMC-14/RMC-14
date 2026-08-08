@@ -16,7 +16,7 @@ namespace Content.Client.Chemistry.EntitySystems;
 /// <inheritdoc/>
 public sealed class ChemistryGuideDataSystem : SharedChemistryGuideDataSystem
 {
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
 
     private static readonly ProtoId<MixingCategoryPrototype> DefaultMixingCategory = "DummyMix";
     private static readonly ProtoId<MixingCategoryPrototype> DefaultGrindCategory = "DummyGrind";

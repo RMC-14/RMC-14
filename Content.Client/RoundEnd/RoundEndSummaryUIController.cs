@@ -13,7 +13,7 @@ namespace Content.Client.RoundEnd;
 public sealed class RoundEndSummaryUIController : UIController,
     IOnSystemLoaded<ClientGameTicker>
 {
-    [Dependency] private readonly IInputManager _input = default!;
+    [Dependency] private IInputManager _input = default!;
 
     private RoundEndSummaryWindow? _window;
 

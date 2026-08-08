@@ -10,8 +10,8 @@ public sealed class RMCPenetratingProjectileSystem : EntitySystem
 {
     private const int HardCollisionGroup = (int) (CollisionGroup.HighImpassable | CollisionGroup.Impassable);
 
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly RMCSizeStunSystem _rmcSize = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private RMCSizeStunSystem _rmcSize = default!;
 
     public override void Initialize()
     {

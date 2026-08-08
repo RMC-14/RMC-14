@@ -12,11 +12,11 @@ namespace Content.Server.Administration.Commands;
 [AdminCommand(AdminFlags.Ban)]
 public sealed class RoleBanListCommand : IConsoleCommand
 {
-    [Dependency] private readonly IServerDbManager _dbManager = default!;
+    [Dependency] private IServerDbManager _dbManager = default!;
 
-    [Dependency] private readonly EuiManager _eui = default!;
+    [Dependency] private EuiManager _eui = default!;
 
-    [Dependency] private readonly IPlayerLocator _locator = default!;
+    [Dependency] private IPlayerLocator _locator = default!;
 
     public string Command => "rolebanlist";
     public string Description => Loc.GetString("cmd-rolebanlist-desc");

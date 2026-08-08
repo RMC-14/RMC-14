@@ -9,7 +9,7 @@ namespace Content.Client.Movement.Systems;
 /// </summary>
 public sealed class ClientSpriteMovementSystem : SharedSpriteMovementSystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private EntityQuery<SpriteComponent> _spriteQuery;
 

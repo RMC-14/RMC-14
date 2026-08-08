@@ -22,8 +22,8 @@ namespace Content.Client._RMC14.Xenonids;
 
 public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
 {
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly RMCSpriteSystem _rmcSprite = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private RMCSpriteSystem _rmcSprite = default!;
 
     private EntityQuery<XenoAnimateMovementComponent> _animateQuery;
 

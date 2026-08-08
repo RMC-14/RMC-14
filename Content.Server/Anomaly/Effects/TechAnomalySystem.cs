@@ -11,11 +11,11 @@ namespace Content.Server.Anomaly.Effects;
 
 public sealed class TechAnomalySystem : EntitySystem
 {
-    [Dependency] private readonly DeviceLinkSystem _signal = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly BeamSystem _beam = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private DeviceLinkSystem _signal = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private BeamSystem _beam = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

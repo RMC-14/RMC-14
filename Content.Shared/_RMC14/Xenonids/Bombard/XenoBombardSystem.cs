@@ -17,16 +17,16 @@ namespace Content.Shared._RMC14.Xenonids.Bombard;
 
 public sealed class XenoBombardSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
-    [Dependency] private readonly RMCProjectileSystem _rmcProjectile = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private RMCProjectileSystem _rmcProjectile = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private XenoPlasmaSystem _xenoPlasma = default!;
 
     public override void Initialize()
     {

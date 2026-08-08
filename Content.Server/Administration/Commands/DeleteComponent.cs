@@ -6,7 +6,7 @@ namespace Content.Server.Administration.Commands
     [AdminCommand(AdminFlags.Spawn)]
     public sealed class DeleteComponent : LocalizedEntityCommands
     {
-        [Dependency] private readonly IComponentFactory _compFactory = default!;
+        [Dependency] private IComponentFactory _compFactory = default!;
 
         public override string Command => "deletecomponent";
 

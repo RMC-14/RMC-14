@@ -11,7 +11,7 @@ namespace Content.Server.Worldgen.Tools;
 public sealed class PoissonDiskSampler
 {
     public const int DefaultPointsPerIteration = 30;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     /// <summary>
     ///     Samples for points within the given circle.

@@ -8,10 +8,10 @@ namespace Content.Shared._RMC14.FarSight;
 
 public sealed class FarSightSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedContentEyeSystem _eye = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedContentEyeSystem _eye = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     public override void Initialize()
     {

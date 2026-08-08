@@ -13,12 +13,12 @@ namespace Content.Shared.Movement.Systems;
 
 public abstract class SharedJetpackSystem : EntitySystem
 {
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeedModifier = default!;
     [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
     [Dependency] protected readonly SharedContainerSystem Container = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private ActionContainerSystem _actionContainer = default!;
 
     public override void Initialize()
     {

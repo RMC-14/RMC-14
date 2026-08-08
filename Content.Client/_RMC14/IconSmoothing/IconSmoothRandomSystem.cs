@@ -7,7 +7,7 @@ namespace Content.Client._RMC14.IconSmoothing;
 
 public sealed class IconSmoothRandomSystem : EntitySystem
 {
-    [Dependency] private readonly IReflectionManager _reflection = default!;
+    [Dependency] private IReflectionManager _reflection = default!;
 
     private EntityQuery<RandomSpriteComponent> _randomSpriteQuery;
     private EntityQuery<SpriteComponent> _spriteQuery;

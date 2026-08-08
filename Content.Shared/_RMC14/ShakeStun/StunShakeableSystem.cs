@@ -17,13 +17,13 @@ namespace Content.Shared._RMC14.ShakeStun;
 
 public sealed class StunShakeableSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _adminLogs = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RMCStandingSystem _rmcStanding = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogs = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private RMCStandingSystem _rmcStanding = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private static readonly ProtoId<StatusEffectPrototype> Stun = "Stun";
     private static readonly ProtoId<StatusEffectPrototype> KnockedDown = "KnockedDown";

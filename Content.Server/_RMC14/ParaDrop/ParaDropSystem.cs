@@ -6,7 +6,7 @@ namespace Content.Server._RMC14.ParaDrop;
 
 public sealed partial class ParaDropSystem: SharedParaDropSystem
 {
-    [Dependency] private readonly DropshipSystem _dropship = default!;
+    [Dependency] private DropshipSystem _dropship = default!;
 
     public override void Initialize()
     {

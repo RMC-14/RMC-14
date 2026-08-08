@@ -13,10 +13,10 @@ namespace Content.Client.Animations;
 /// </summary>
 public sealed class EntityPickupAnimationSystem : EntitySystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _animations = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private AnimationPlayerSystem _animations = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private TransformSystem _transform = default!;
 
     public override void Initialize()
     {

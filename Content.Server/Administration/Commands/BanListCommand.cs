@@ -14,10 +14,10 @@ namespace Content.Server.Administration.Commands;
 [AdminCommand(AdminFlags.Ban)]
 public sealed class BanListCommand : LocalizedCommands
 {
-    [Dependency] private readonly IPlayerLocator _locator = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IServerDbManager _dbManager = default!;
-    [Dependency] private readonly EuiManager _eui = default!;
+    [Dependency] private IPlayerLocator _locator = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IServerDbManager _dbManager = default!;
+    [Dependency] private EuiManager _eui = default!;
 
     public override string Command => "banlist";
 

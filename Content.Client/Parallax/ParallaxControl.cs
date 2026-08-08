@@ -15,9 +15,9 @@ namespace Content.Client.Parallax;
 /// </summary>
 public sealed class ParallaxControl : Control
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IParallaxManager _parallaxManager = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IParallaxManager _parallaxManager = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     private string _parallaxPrototype = "FastSpace";
 

@@ -13,7 +13,7 @@ namespace Content.Client._RMC14.Tracker.SquadLeader;
 [UsedImplicitly]
 public sealed class SquadInfoBui : BoundUserInterface
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private SquadInfoWindow? _window;
 

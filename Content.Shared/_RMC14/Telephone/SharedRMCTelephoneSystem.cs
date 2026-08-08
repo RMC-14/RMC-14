@@ -23,18 +23,18 @@ namespace Content.Shared._RMC14.Telephone;
 
 public abstract class SharedRMCTelephoneSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly SharedAmbientSoundSystem _ambientSound = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SquadSystem _squad = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private SharedAmbientSoundSystem _ambientSound = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SquadSystem _squad = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     private static readonly SoundSpecifier RemotePickupSound = new SoundPathSpecifier("/Audio/_RMC14/Phone/remote_pickup.ogg");
     private static readonly SoundSpecifier RemoteHangupSound = new SoundPathSpecifier("/Audio/_RMC14/Phone/remote_hangup.ogg");

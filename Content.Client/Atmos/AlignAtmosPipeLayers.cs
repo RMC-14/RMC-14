@@ -25,10 +25,9 @@ namespace Content.Client.Atmos;
 /// </remarks>
 public sealed class AlignAtmosPipeLayers : SnapgridCenter
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly IEyeManager _eyeManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _protoManager = default!;
+    [Dependency] private IEyeManager _eyeManager = default!;
 
     private readonly SharedMapSystem _mapSystem;
     private readonly SharedTransformSystem _transformSystem;
@@ -87,7 +86,7 @@ public sealed class AlignAtmosPipeLayers : SnapgridCenter
         if (pManager.PlacementType != PlacementTypes.None)
             return;
 
-        MouseCoords = _unalignedMouseCoords.AlignWithClosestGridTile(SearchBoxSize, _entityManager, _mapManager);
+        MouseCoords = _unalignedMouseCoords.AlignWithClosestGridTile(SearchBoxSize, _entityManager);
 
         var gridId = _transformSystem.GetGrid(MouseCoords);
 

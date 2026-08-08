@@ -19,12 +19,12 @@ namespace Content.Client.Sprite;
 
 public sealed class ContentSpriteSystem : EntitySystem
 {
-    [Dependency] private readonly IClientAdminManager _adminManager = default!;
-    [Dependency] private readonly IClyde _clyde = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IResourceManager _resManager = default!;
-    [Dependency] private readonly IUserInterfaceManager _ui = default!;
-    [Dependency] private readonly IRuntimeLog _runtimeLog = default!;
+    [Dependency] private IClientAdminManager _adminManager = default!;
+    [Dependency] private IClyde _clyde = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IResourceManager _resManager = default!;
+    [Dependency] private IUserInterfaceManager _ui = default!;
+    [Dependency] private IRuntimeLog _runtimeLog = default!;
 
     private ContentSpriteControl _control = new();
 
@@ -141,9 +141,9 @@ public sealed class ContentSpriteSystem : EntitySystem
     /// </summary>
     private sealed class ContentSpriteControl : Control
     {
-        [Dependency] private readonly IEntityManager _entManager = default!;
-        [Dependency] private readonly ILogManager _logMan = default!;
-        [Dependency] private readonly IResourceManager _resManager = default!;
+        [Dependency] private IEntityManager _entManager = default!;
+        [Dependency] private ILogManager _logMan = default!;
+        [Dependency] private IResourceManager _resManager = default!;
 
         internal Queue<(
             IRenderTexture Texture,

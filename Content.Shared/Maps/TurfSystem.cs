@@ -14,11 +14,10 @@ namespace Content.Shared.Maps;
 /// </summary>
 public sealed class TurfSystem : EntitySystem
 {
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly ITileDefinitionManager _tileDefinitions = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private ITileDefinitionManager _tileDefinitions = default!;
 
 
     /// <summary>
@@ -32,7 +31,7 @@ public sealed class TurfSystem : EntitySystem
             return null;
 
         var pos = _transform.ToMapCoordinates(coordinates);
-        if (!_mapManager.TryFindGridAt(pos, out var gridUid, out var gridComp))
+        if (!_mapSystem.TryFindGridAt(pos, out var gridUid, out var gridComp))
             return null;
 
         if (!_mapSystem.TryGetTileRef(gridUid, gridComp, coordinates, out var tile))

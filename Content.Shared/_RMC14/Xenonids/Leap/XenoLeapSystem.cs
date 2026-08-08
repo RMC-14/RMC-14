@@ -6,6 +6,7 @@ using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Movement;
+using Content.Shared._RMC14.Deferred;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Weapons.Melee;
@@ -53,32 +54,32 @@ namespace Content.Shared._RMC14.Xenonids.Leap;
 
 public sealed class XenoLeapSystem : EntitySystem
 {
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly BlindableSystem _blindable = default!;
-    [Dependency] private readonly SharedBroadphaseSystem _broadphase = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedRMCLagCompensationSystem _rmcLagCompensation = default!;
-    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
-    [Dependency] private readonly DamageableSystem _damagable = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
-    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
-    [Dependency] private readonly RMCCameraShakeSystem _cameraShake = default!;
-    [Dependency] private readonly RMCSizeStunSystem _size = default!;
-    [Dependency] private readonly RMCObstacleSlammingSystem _obstacleSlamming = default!;
-    [Dependency] private readonly SharedDirectionalAttackBlockSystem _directionalBlock = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private BlindableSystem _blindable = default!;
+    [Dependency] private RMCDeferredPhysicsSystem _deferredPhysics = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedRMCLagCompensationSystem _rmcLagCompensation = default!;
+    [Dependency] private RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private DamageableSystem _damagable = default!;
+    [Dependency] private SharedColorFlashEffectSystem _colorFlash = default!;
+    [Dependency] private SharedJitteringSystem _jitter = default!;
+    [Dependency] private RMCCameraShakeSystem _cameraShake = default!;
+    [Dependency] private RMCSizeStunSystem _size = default!;
+    [Dependency] private RMCObstacleSlammingSystem _obstacleSlamming = default!;
+    [Dependency] private SharedDirectionalAttackBlockSystem _directionalBlock = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<FixturesComponent> _fixturesQuery;
@@ -562,7 +563,7 @@ public sealed class XenoLeapSystem : EntitySystem
             _physics.SetBodyStatus(xeno, physics, BodyStatus.OnGround);
 
             if (physics.Awake)
-                _broadphase.RegenerateContacts(xeno, physics);
+                _deferredPhysics.TryQueueRegenerateContacts(xeno);
         }
 
         if (!xeno.Comp.KnockdownRequiresInvisibility || HasComp<XenoActiveInvisibleComponent>(xeno))

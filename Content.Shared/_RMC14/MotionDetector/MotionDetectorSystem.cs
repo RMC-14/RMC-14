@@ -25,21 +25,21 @@ namespace Content.Shared._RMC14.MotionDetector;
 
 public sealed class MotionDetectorSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly GunIFFSystem _gunIFF = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly MotionDetectorSystem _motionDetector = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RMCGunBatterySystem _rmcGunBattery = default!;
-    [Dependency] private readonly SharedCMInventorySystem _rmcInventory = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private GunIFFSystem _gunIFF = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private MotionDetectorSystem _motionDetector = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private RMCGunBatterySystem _rmcGunBattery = default!;
+    [Dependency] private SharedCMInventorySystem _rmcInventory = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private EntityQuery<MotionDetectorComponent> _detectorQuery = default!;
     private EntityQuery<StorageComponent> _storageQuery = default!;

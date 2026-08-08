@@ -12,11 +12,11 @@ namespace Content.Shared._RMC14.Xenonids.Smackdown;
 
 public sealed class XenoSmackdownSystem : EntitySystem
 {
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedColorFlashEffectSystem _colorFlash = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoSmackdownComponent, MeleeHitEvent>(OnSmackdownMelee);

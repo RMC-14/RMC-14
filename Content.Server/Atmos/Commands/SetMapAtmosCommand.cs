@@ -11,8 +11,8 @@ namespace Content.Server.Atmos.Commands;
 [AdminCommand(AdminFlags.Admin)]
 public sealed class AddMapAtmosCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly IEntityManager _entities = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private IEntityManager _entities = default!;
+    [Dependency] private SharedMapSystem _map = default!;
 
     private const string _cmd = "cmd-set-map-atmos";
     public override string Command => "setmapatmos";

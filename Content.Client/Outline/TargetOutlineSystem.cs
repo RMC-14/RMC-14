@@ -18,15 +18,15 @@ public sealed class TargetOutlineSystem : EntitySystem
     private static readonly ProtoId<ShaderPrototype> ShaderTargetValid = "SelectionOutlineInrange";
     private static readonly ProtoId<ShaderPrototype> ShaderTargetInvalid = "SelectionOutline";
 
-    [Dependency] private readonly IEyeManager _eyeManager = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly IInputManager _inputManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+    [Dependency] private IEyeManager _eyeManager = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private IInputManager _inputManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private SharedInteractionSystem _interactionSystem = default!;
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
 
     private bool _enabled = false;
 

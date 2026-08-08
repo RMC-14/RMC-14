@@ -9,7 +9,7 @@ namespace Content.Server.Anomaly.Effects;
 /// </summary>
 public sealed class ExplosionAnomalySystem : EntitySystem
 {
-    [Dependency] private readonly ExplosionSystem _boom = default!;
+    [Dependency] private ExplosionSystem _boom = default!;
 
     public override void Initialize()
     {

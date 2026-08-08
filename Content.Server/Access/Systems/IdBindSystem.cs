@@ -8,9 +8,9 @@ namespace Content.Server.Access.Systems;
 
 public sealed class IdBindSystem : EntitySystem
 {
-    [Dependency] private readonly IdCardSystem _cardSystem = default!;
-    [Dependency] private readonly PdaSystem _pdaSystem = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private IdCardSystem _cardSystem = default!;
+    [Dependency] private PdaSystem _pdaSystem = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     public override void Initialize()
     {

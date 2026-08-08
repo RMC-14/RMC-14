@@ -14,7 +14,7 @@ namespace Content.Server.Spawners.EntitySystems
     /// </summary>
     public sealed class UniqueRandomSpawnerSystem : EntitySystem
     {
-        [Dependency] private readonly IRobustRandom _robustRandom = default!;
+        [Dependency] private IRobustRandom _robustRandom = default!;
 
         /// <summary>
         /// Tracks the remaining prototypes for each spawner group.
@@ -39,7 +39,7 @@ namespace Content.Server.Spawners.EntitySystems
         private void OnMapInit(Entity<UniqueRandomSpawnerComponent> ent, ref MapInitEvent args)
         {
             Spawn(ent);
-            
+
             if (ent.Comp.DeleteSpawnerAfterSpawn)
                 QueueDel(ent);
         }
@@ -59,7 +59,7 @@ namespace Content.Server.Spawners.EntitySystems
                 _remainingPrototypes[ent.Comp.SpawnerGroup] = new List<EntProtoId>(ent.Comp.Prototypes);
             }
             var pool = _remainingPrototypes[ent.Comp.SpawnerGroup];
-            
+
             if (pool.Count == 0)
             {
                 Log.Warning($"No more unique prototypes available for group {ent.Comp.SpawnerGroup}. Resetting pool. Entity: {ToPrettyString(ent)}");
@@ -67,7 +67,7 @@ namespace Content.Server.Spawners.EntitySystems
             }
             // Pick a random prototype from the remaining pool
             var selectedProto = _robustRandom.Pick(pool);
-            
+
             // Remove it from the pool so it won't be picked again
             pool.Remove(selectedProto);
             // Spawn the entity

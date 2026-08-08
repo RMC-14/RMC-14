@@ -11,4 +11,4 @@ public sealed partial class GiveHandsComponent : Component
 }
 
 [DataRecord]
-public record struct GivenHand(string Name, HandLocation Location);
+public partial record struct GivenHand(string Name, HandLocation Location);

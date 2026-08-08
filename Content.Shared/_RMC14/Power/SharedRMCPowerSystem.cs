@@ -35,22 +35,22 @@ public abstract class SharedRMCPowerSystem : EntitySystem
 {
     [Dependency] protected readonly SharedPointLightSystem Pointlight = default!;
 
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedPowerReceiverSystem _powerReceiver = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly SharedRMCSpriteSystem _sprite = default!;
-    [Dependency] private readonly SharedToolSystem _tool = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPowerReceiverSystem _powerReceiver = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SkillsSystem _skills = default!;
+    [Dependency] private SharedRMCSpriteSystem _sprite = default!;
+    [Dependency] private SharedToolSystem _tool = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     protected readonly HashSet<EntityUid> ToUpdate = new();
     private readonly Dictionary<MapId, List<EntityUid>> _reactorPoweredLights = new();

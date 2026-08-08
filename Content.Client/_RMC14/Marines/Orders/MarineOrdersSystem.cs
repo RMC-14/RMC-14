@@ -5,7 +5,7 @@ namespace Content.Client._RMC14.Marines.Orders;
 
 public sealed class MarineOrdersSystem : SharedMarineOrdersSystem
 {
-    [Dependency] private readonly IOverlayManager _overlays = default!;
+    [Dependency] private IOverlayManager _overlays = default!;
 
     public override void Initialize()
     {

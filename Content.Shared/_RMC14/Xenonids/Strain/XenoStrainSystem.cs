@@ -7,8 +7,8 @@ namespace Content.Shared._RMC14.Xenonids.Strain;
 
 public sealed class XenoStrainSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

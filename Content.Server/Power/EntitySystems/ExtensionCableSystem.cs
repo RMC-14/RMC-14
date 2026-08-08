@@ -8,7 +8,7 @@ namespace Content.Server.Power.EntitySystems
 {
     public sealed class ExtensionCableSystem : EntitySystem
     {
-        [Dependency] private readonly SharedMapSystem _map = default!;
+        [Dependency] private SharedMapSystem _map = default!;
 
         public override void Initialize()
         {

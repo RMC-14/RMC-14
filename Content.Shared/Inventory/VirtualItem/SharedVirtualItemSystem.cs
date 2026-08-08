@@ -24,11 +24,11 @@ namespace Content.Shared.Inventory.VirtualItem;
 /// </remarks>
 public abstract class SharedVirtualItemSystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private readonly SharedItemSystem _itemSystem = default!;
-    [Dependency] private readonly InventorySystem _inventorySystem = default!;
-    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private SharedItemSystem _itemSystem = default!;
+    [Dependency] private InventorySystem _inventorySystem = default!;
+    [Dependency] private SharedHandsSystem _handsSystem = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     private static readonly EntProtoId VirtualItem = "VirtualItem";
 

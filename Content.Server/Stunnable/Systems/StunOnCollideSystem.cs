@@ -11,7 +11,7 @@ namespace Content.Server.Stunnable
     [UsedImplicitly]
     internal sealed class StunOnCollideSystem : EntitySystem
     {
-        [Dependency] private readonly StunSystem _stunSystem = default!;
+        [Dependency] private StunSystem _stunSystem = default!;
 
         public override void Initialize()
         {

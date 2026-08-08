@@ -11,9 +11,9 @@ namespace Content.Client._RMC14.Roadmap;
 
 public sealed class RoadmapUIController : UIController, IOnStateEntered<LobbyState>
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly InfoUIController _infoUIController = default!;
-    [Dependency] private readonly IUriOpener _uriOpener = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private InfoUIController _infoUIController = default!;
+    [Dependency] private IUriOpener _uriOpener = default!;
 
     private RoadmapWindow? _window;
     private bool _shown;

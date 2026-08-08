@@ -7,7 +7,7 @@ namespace Content.Shared._RMC14.Mind;
 
 public sealed class RMCMindSystem : EntitySystem
 {
-    [Dependency] private readonly SharedRMCPvsSystem _rmcPvs = default!;
+    [Dependency] private SharedRMCPvsSystem _rmcPvs = default!;
 
     public override void Initialize()
     {

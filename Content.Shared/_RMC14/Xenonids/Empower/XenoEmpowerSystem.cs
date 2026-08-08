@@ -27,25 +27,25 @@ namespace Content.Shared._RMC14.Xenonids.Empower;
 
 public sealed class XenoEmpowerSystem : EntitySystem
 {
-    [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly XenoShieldSystem _shield = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
-    [Dependency] private readonly SharedAuraSystem _aura = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
-    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
-    [Dependency] private readonly DamageableSystem _damagable = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
+    [Dependency] private XenoPlasmaSystem _plasma = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private XenoShieldSystem _shield = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private SharedRMCEmoteSystem _emote = default!;
+    [Dependency] private SharedAuraSystem _aura = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private DamageableSystem _damagable = default!;
+    [Dependency] private SharedColorFlashEffectSystem _colorFlash = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private RMCSizeStunSystem _sizeStun = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _mobs = new();
     public override void Initialize()

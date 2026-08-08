@@ -22,22 +22,21 @@ namespace Content.Shared._RMC14.Entrenching;
 
 public sealed class BarricadeSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly RMCConstructionSystem _rmcConstruction = default!;
-    [Dependency] private readonly SharedStackSystem _stack = default!;
-    [Dependency] private readonly ITileDefinitionManager _tiles = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
-    [Dependency] private readonly SharedWeaponMountSystem _weaponMount = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private RMCConstructionSystem _rmcConstruction = default!;
+    [Dependency] private SharedStackSystem _stack = default!;
+    [Dependency] private ITileDefinitionManager _tiles = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
+    [Dependency] private SharedWeaponMountSystem _weaponMount = default!;
 
     private EntityQuery<BarricadeComponent> _barricadeQuery;
 
@@ -249,7 +248,7 @@ public sealed class BarricadeSystem : EntitySystem
             return;
 
         var coordinates = GetCoordinates(args.Coordinates);
-        if (!_mapManager.TryFindGridAt(_transform.ToMapCoordinates(coordinates), out var gridId, out var gridComp) ||
+        if (!_mapSystem.TryFindGridAt(_transform.ToMapCoordinates(coordinates), out var gridId, out var gridComp) ||
             !_interaction.InRangeUnobstructed(full, coordinates, popup: false) ||
             !_turf.TryGetTileRef(coordinates, out var turf) ||
             !CanBuild(full, (gridId, gridComp), args.User, turf.Value, args.Direction))
@@ -357,7 +356,7 @@ public sealed class BarricadeSystem : EntitySystem
     private bool Build(Entity<FullSandbagComponent> full, EntityUid user, EntityCoordinates coordinates, Direction direction, out bool handled)
     {
         handled = false;
-        if (!_mapManager.TryFindGridAt(_transform.ToMapCoordinates(coordinates), out var gridId, out var gridComp) ||
+        if (!_mapSystem.TryFindGridAt(_transform.ToMapCoordinates(coordinates), out var gridId, out var gridComp) ||
             !_turf.TryGetTileRef(coordinates, out var tile))
         {
             return false;
@@ -401,7 +400,7 @@ public sealed class BarricadeSystem : EntitySystem
         if (TryComp(tool, out ItemToggleComponent? toggle) && !toggle.Activated)
             return false;
 
-        if (!_mapManager.TryFindGridAt(_transform.ToMapCoordinates(coordinates), out var gridId, out var gridComp))
+        if (!_mapSystem.TryFindGridAt(_transform.ToMapCoordinates(coordinates), out var gridId, out var gridComp))
             return false;
 
         tileRef = _mapSystem.GetTileRef(gridId, gridComp, coordinates);

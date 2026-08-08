@@ -5,7 +5,7 @@ namespace Content.Client.Dice;
 
 public sealed class DiceSystem : SharedDiceSystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

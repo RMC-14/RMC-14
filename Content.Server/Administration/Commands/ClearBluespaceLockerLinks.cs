@@ -7,7 +7,7 @@ namespace Content.Server.Administration.Commands;
 [AdminCommand(AdminFlags.Admin)]
 public sealed class ClearBluespaceLockerLinks : IConsoleCommand
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
 
     public string Command => "clearbluespacelockerlinks";
     public string Description => "Removes the bluespace links of the given uid. Does not remove links this uid is the target of.";

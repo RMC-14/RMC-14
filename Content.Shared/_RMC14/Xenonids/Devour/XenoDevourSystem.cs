@@ -49,21 +49,21 @@ namespace Content.Shared._RMC14.Xenonids.Devour;
 
 public sealed class XenoDevourSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
-    [Dependency] private readonly SharedMeleeWeaponSystem _meleeWeapon = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private SharedColorFlashEffectSystem _colorFlash = default!;
+    [Dependency] private SharedMeleeWeaponSystem _meleeWeapon = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private RMCPullingSystem _rmcPulling = default!;
 
     private EntityQuery<DevouredComponent> _devouredQuery;
     private EntityQuery<XenoDevourComponent> _xenoDevourQuery;

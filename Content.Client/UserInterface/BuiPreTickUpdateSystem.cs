@@ -30,9 +30,9 @@ public interface IBuiPreTickUpdate
 /// </summary>
 public sealed class BuiPreTickUpdateSystem : EntitySystem
 {
-    [Dependency] private readonly IPlayerManager _playerManager = null!;
-    [Dependency] private readonly UserInterfaceSystem _uiSystem = null!;
-    [Dependency] private readonly IGameTiming _gameTiming = null!;
+    [Dependency] private IPlayerManager _playerManager = null!;
+    [Dependency] private UserInterfaceSystem _uiSystem = null!;
+    [Dependency] private IGameTiming _gameTiming = null!;
 
     private EntityQuery<UserInterfaceUserComponent> _userQuery;
 

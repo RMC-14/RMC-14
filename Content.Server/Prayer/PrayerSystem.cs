@@ -21,10 +21,10 @@ namespace Content.Server.Prayer;
 /// </remarks>
 public sealed class PrayerSystem : EntitySystem
 {
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly QuickDialogSystem _quickDialog = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private QuickDialogSystem _quickDialog = default!;
 
     public override void Initialize()
     {

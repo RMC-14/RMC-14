@@ -26,6 +26,7 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Serialization;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.Projectiles;
@@ -34,21 +35,22 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 {
     public const string ProjectileFixture = "projectile";
 
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDestructibleSystem _destructible = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDestructibleSystem _destructible = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
     // RMC14
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private IGameTiming _timing = default!;
     // RMC14
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly SharedGunSystem _guns = default!;
-    [Dependency] private readonly SharedCameraRecoilSystem _sharedCameraRecoil = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedColorFlashEffectSystem _color = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
+    [Dependency] private SharedGunSystem _guns = default!;
+    [Dependency] private SharedCameraRecoilSystem _sharedCameraRecoil = default!;
 
     public override void Initialize()
     {
@@ -67,6 +69,13 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 
     private void OnStartCollide(EntityUid uid, ProjectileComponent component, ref StartCollideEvent args)
     {
+        //RMC14
+        // Do not process replayed predicted collisions while physics is rebuilding contacts
+        // TODO RMC14: Remove this when RobustToolbox can safely handle projectile deletion during contact replay
+        if (_net.IsClient && _timing.ApplyingState && args.OurBody.Predict)
+            return;
+        //RMC14
+
         // This is so entities that shouldn't get a collision are ignored.
         if (args.OurFixtureId != ProjectileFixture || !args.OtherFixture.Hard
             || component.ProjectileSpent || component is { Weapon: null, OnlyCollideWhenShot: true })

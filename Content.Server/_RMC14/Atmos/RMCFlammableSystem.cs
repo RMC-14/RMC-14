@@ -9,8 +9,8 @@ namespace Content.Server._RMC14.Atmos;
 
 public sealed class RMCFlammableSystem : SharedRMCFlammableSystem
 {
-    [Dependency] private readonly FlammableSystem _flammable = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private FlammableSystem _flammable = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
 
     public override bool Ignite(Entity<FlammableComponent?> flammable, int intensity, int duration, int? maxStacks, bool igniteDamage = true, DamageSpecifier? tileDamage = null)
     {

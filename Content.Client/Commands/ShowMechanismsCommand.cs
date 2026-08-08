@@ -6,7 +6,7 @@ namespace Content.Client.Commands;
 
 public sealed class ShowMechanismsCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly SpriteSystem _spriteSystem = default!;
+    [Dependency] private SpriteSystem _spriteSystem = default!;
 
     public override string Command => "showmechanisms";
 

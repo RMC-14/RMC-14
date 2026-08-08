@@ -18,13 +18,13 @@ namespace Content.Server._RMC14.Spawners;
 /// </summary>
 public sealed class AegisLobbyEventSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly FaxSystem _fax = default!;
-    [Dependency] private readonly SharedRequisitionsSystem _req = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private FaxSystem _fax = default!;
+    [Dependency] private SharedRequisitionsSystem _req = default!;
 
     private bool _aegisScheduled = false;
     private TimeSpan? _scheduledEventTime = null;

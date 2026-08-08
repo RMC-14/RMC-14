@@ -7,8 +7,8 @@ namespace Content.Shared.Body.Prototypes;
 public sealed partial class BodyPrototype : IInheritingPrototype
 {
     [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<BodyPrototype>))]
-    public string[]? Parents { get; }
+    public string[]? Parents { get; private set; }
 
     [AbstractDataField]
-    public bool Abstract { get; }
+    public bool Abstract { get; private set; }
 }

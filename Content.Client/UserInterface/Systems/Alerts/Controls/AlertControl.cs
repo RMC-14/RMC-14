@@ -12,7 +12,7 @@ namespace Content.Client.UserInterface.Systems.Alerts.Controls
 {
     public sealed class AlertControl : BaseButton
     {
-        [Dependency] private readonly IEntityManager _entityManager = default!;
+        [Dependency] private IEntityManager _entityManager = default!;
 
         private readonly SpriteSystem _sprite;
 

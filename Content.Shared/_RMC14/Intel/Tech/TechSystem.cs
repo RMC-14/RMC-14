@@ -17,15 +17,15 @@ namespace Content.Shared._RMC14.Intel.Tech;
 
 public sealed class TechSystem : EntitySystem
 {
-    [Dependency] private readonly ARESCoreSystem _core = default!;
-    [Dependency] private readonly DropshipFabricatorSystem _dropshipFabricator = default!;
-    [Dependency] private readonly SharedIdCardSystem _idCard = default!;
-    [Dependency] private readonly IntelSystem _intel = default!;
-    [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedRequisitionsSystem _requisitions = default!;
-    [Dependency] private readonly ScalingSystem _scaling = default!;
-    [Dependency] private readonly SharedGameTicker _ticker = default!;
+    [Dependency] private ARESCoreSystem _core = default!;
+    [Dependency] private DropshipFabricatorSystem _dropshipFabricator = default!;
+    [Dependency] private SharedIdCardSystem _idCard = default!;
+    [Dependency] private IntelSystem _intel = default!;
+    [Dependency] private SharedMarineAnnounceSystem _marineAnnounce = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedRequisitionsSystem _requisitions = default!;
+    [Dependency] private ScalingSystem _scaling = default!;
+    [Dependency] private SharedGameTicker _ticker = default!;
 
     private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabIntelLogs";
 

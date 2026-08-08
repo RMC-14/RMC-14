@@ -6,8 +6,8 @@ namespace Content.Shared._RMC14.Item.ItemToggle;
 
 public sealed class RMCItemToggleSystem : EntitySystem
 {
-    [Dependency] private readonly ClothingSystem _clothing = default!;
-    [Dependency] private readonly SharedItemSystem _item = default!;
+    [Dependency] private ClothingSystem _clothing = default!;
+    [Dependency] private SharedItemSystem _item = default!;
 
     private EntityQuery<ItemToggleComponent> _query;
 

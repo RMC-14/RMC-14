@@ -7,7 +7,7 @@ namespace Content.Shared.Traits.Assorted;
 
 public sealed class PainNumbnessSystem : EntitySystem
 {
-    [Dependency] private readonly MobThresholdSystem _mobThresholdSystem = default!;
+    [Dependency] private MobThresholdSystem _mobThresholdSystem = default!;
 
     public override void Initialize()
     {

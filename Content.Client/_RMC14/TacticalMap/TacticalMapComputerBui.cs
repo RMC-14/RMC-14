@@ -12,7 +12,7 @@ namespace Content.Client._RMC14.TacticalMap;
 [UsedImplicitly]
 public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPopOutBui<TacticalMapWindow>(owner, uiKey)
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     protected override TacticalMapWindow? Window { get; set; }
     private bool _refreshed;

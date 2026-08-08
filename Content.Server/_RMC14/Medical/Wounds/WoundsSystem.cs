@@ -13,10 +13,10 @@ namespace Content.Server._RMC14.Medical.Wounds;
 
 public sealed class WoundsSystem : SharedWoundsSystem
 {
-    [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
-    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private BloodstreamSystem _bloodstream = default!;
+    [Dependency] private SharedRMCDamageableSystem _rmcDamageable = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private readonly List<int> _toRemove = new();
     private DamageSpecifier _passiveDamage = new();

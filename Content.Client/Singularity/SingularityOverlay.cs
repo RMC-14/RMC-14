@@ -11,8 +11,8 @@ namespace Content.Client.Singularity
     {
         private static readonly ProtoId<ShaderPrototype> Shader = "Singularity";
 
-        [Dependency] private readonly IEntityManager _entMan = default!;
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+        [Dependency] private IEntityManager _entMan = default!;
+        [Dependency] private IPrototypeManager _prototypeManager = default!;
         private SharedTransformSystem? _xformSystem = null;
 
         /// <summary>

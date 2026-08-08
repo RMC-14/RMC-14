@@ -12,11 +12,11 @@ namespace Content.Shared._RMC14.Xenonids.Zoom;
 
 public sealed class XenoZoomSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedContentEyeSystem _contentEye = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
-    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedContentEyeSystem _contentEye = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
 
     public override void Initialize()
     {

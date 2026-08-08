@@ -4,7 +4,7 @@ namespace Content.Shared._RMC14.Animations;
 
 [DataRecord]
 [Serializable, NetSerializable]
-public record struct RMCAnimationId(string Id) : ISelfSerialize
+public partial record struct RMCAnimationId(string Id) : ISelfSerialize
 {
     public void Deserialize(string value)
     {

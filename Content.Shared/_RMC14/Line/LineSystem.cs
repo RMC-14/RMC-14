@@ -20,14 +20,13 @@ namespace Content.Shared._RMC14.Line;
 
 public sealed class LineSystem : EntitySystem
 {
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedDirectionalAttackBlockSystem _directionalBlock = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedDirectionalAttackBlockSystem _directionalBlock = default!;
 
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
@@ -73,7 +72,7 @@ public sealed class LineSystem : EntitySystem
         {
             x += xOffset;
             y += yOffset;
-            var center = new EntityCoordinates(start.EntityId, x, y).SnapToGrid(EntityManager, _mapManager);
+            var center = new EntityCoordinates(start.EntityId, x, y).SnapToGrid(EntityManager);
             if (center == lastCoords)
                 continue;
 
@@ -88,7 +87,7 @@ public sealed class LineSystem : EntitySystem
                         if (xo == 0 && yo == 0)
                             continue;
 
-                        var point = new EntityCoordinates(start.EntityId, x + xo, y + yo).SnapToGrid(EntityManager, _mapManager);
+                        var point = new EntityCoordinates(start.EntityId, x + xo, y + yo).SnapToGrid(EntityManager);
                         coords.Add(point);
                     }
                 }

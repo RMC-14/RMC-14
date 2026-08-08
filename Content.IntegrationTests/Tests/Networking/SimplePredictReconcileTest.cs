@@ -36,7 +36,6 @@ namespace Content.IntegrationTests.Tests.Networking
             var server = pair.Server;
             var client = pair.Client;
 
-            var sMapManager = server.ResolveDependency<IMapManager>();
             var sEntityManager = server.ResolveDependency<IEntityManager>();
             var cEntityManager = client.ResolveDependency<IEntityManager>();
             var sGameTiming = server.ResolveDependency<IGameTiming>();
@@ -397,7 +396,7 @@ namespace Content.IntegrationTests.Tests.Networking
             public List<(GameTick tick, bool firstPredict, bool old, bool @new, bool value)> EventTriggerList { get; } =
                 new();
 
-            [Dependency] private readonly IGameTiming _gameTiming = default!;
+            [Dependency] private IGameTiming _gameTiming = default!;
 
             public override void Initialize()
             {

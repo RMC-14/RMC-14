@@ -9,10 +9,10 @@ namespace Content.Server.Ghost;
 
 public sealed class SpookySpeakerSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ChatSystem _chat = default!;
 
     public override void Initialize()
     {

@@ -29,22 +29,22 @@ namespace Content.Server._RMC14.Admin;
 
 public sealed class RMCAdminSystem : SharedRMCAdminSystem
 {
-    [Dependency] private readonly AdminSystem _admin = default!;
-    [Dependency] private readonly IAdminLogManager _adminLog = default!;
-    [Dependency] private readonly IAdminManager _adminManager = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly EuiManager _eui = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly JobSystem _job = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly PlayTimeTrackingSystem _playTimeTracking = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly RoleSystem _role = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly StationSpawningSystem _stationSpawning = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IConsoleHost _consoleHost = default!;
+    [Dependency] private AdminSystem _admin = default!;
+    [Dependency] private IAdminLogManager _adminLog = default!;
+    [Dependency] private IAdminManager _adminManager = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private EuiManager _eui = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private JobSystem _job = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private PlayTimeTrackingSystem _playTimeTracking = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private RoleSystem _role = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private StationSpawningSystem _stationSpawning = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IConsoleHost _consoleHost = default!;
 
     public readonly Queue<(Guid Id, List<TacticalMapLine> Lines, string Actor, int Round)> LinesDrawn = new();
 

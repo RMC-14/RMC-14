@@ -16,12 +16,12 @@ namespace Content.Server.NPC.Systems;
 
 public sealed class NPCJukeSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly MeleeWeaponSystem _melee = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private MeleeWeaponSystem _melee = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private EntityQuery<NPCMeleeCombatComponent> _npcMeleeQuery;
     private EntityQuery<NPCRangedCombatComponent> _npcRangedQuery;

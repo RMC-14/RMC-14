@@ -35,24 +35,24 @@ public sealed class RMCSizeStunSystem : EntitySystem
     private const double DazedMultiplierBigXeno = 1.2;
     private static readonly ProtoId<StatusEffectPrototype> KnockedOut = "Unconscious";
 
-    [Dependency] private readonly RMCDazedSystem _dazed = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
-    [Dependency] private readonly SharedFlashSystem _flash = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
-    [Dependency] private readonly RMCSlowSystem _slow = default!;
-    [Dependency] private readonly RMCStaminaSystem _stamina = default!;
-    [Dependency] private readonly StandingStateSystem _stand = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private RMCDazedSystem _dazed = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private SharedFlashSystem _flash = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private RMCSlowSystem _slow = default!;
+    [Dependency] private RMCStaminaSystem _stamina = default!;
+    [Dependency] private StandingStateSystem _stand = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private readonly HashSet<Entity<MarineComponent>> _marines = new();
 

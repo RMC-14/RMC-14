@@ -11,11 +11,11 @@ namespace Content.Server._RMC14.NPC.Systems;
 
 public sealed partial class NPCLeapSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly InteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly DoAfterSystem _doafter = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private InteractionSystem _interaction = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private DoAfterSystem _doafter = default!;
 
     private EntityQuery<TransformComponent> _xformQuery;
 

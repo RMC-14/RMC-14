@@ -9,7 +9,7 @@ namespace Content.Shared.Damage.Systems;
 
 public abstract class SharedGodmodeSystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
 
     public override void Initialize()
     {

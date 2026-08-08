@@ -7,7 +7,7 @@ namespace Content.Client.Beam;
 
 public sealed class BeamSystem : SharedBeamSystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

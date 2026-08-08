@@ -6,7 +6,7 @@ namespace Content.Server.Radiation.EntitySystems;
 
 public sealed class RadiationProtectionSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     public override void Initialize()
     {

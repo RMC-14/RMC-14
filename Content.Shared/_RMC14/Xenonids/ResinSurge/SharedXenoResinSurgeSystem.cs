@@ -23,21 +23,20 @@ namespace Content.Shared._RMC14.Xenonids.ResinSurge;
 
 public sealed class SharedXenoResinSurgeSystem : EntitySystem
 {
-    [Dependency] private readonly IMapManager _map = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedXenoConstructReinforceSystem _xenoReinforce = default!;
-    [Dependency] private readonly SharedXenoFruitSystem _xenoFruit = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
-    [Dependency] private readonly SharedMapSystem _sharedMap = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
-    [Dependency] private readonly SharedXenoWeedsSystem _weeds = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedXenoConstructReinforceSystem _xenoReinforce = default!;
+    [Dependency] private SharedXenoFruitSystem _xenoFruit = default!;
+    [Dependency] private XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private SharedMapSystem _sharedMap = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private RMCMapSystem _rmcMap = default!;
+    [Dependency] private SharedXenoWeedsSystem _weeds = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
 
     public override void Initialize()
     {
@@ -99,7 +98,7 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
         if (args.Handled)
             return;
 
-        var target = args.Target.SnapToGrid(EntityManager, _map);
+        var target = args.Target.SnapToGrid(EntityManager);
 
         // Check if target on grid
         if (_transform.GetGrid(target) is not { } gridId ||

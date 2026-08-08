@@ -6,7 +6,7 @@ namespace Content.Server._RMC14.Temperature;
 
 public sealed class RMCTemperatureSystem : SharedRMCTemperatureSystem
 {
-    [Dependency] private readonly TemperatureSystem _temperature = default!;
+    [Dependency] private TemperatureSystem _temperature = default!;
 
     public override float GetTemperature(EntityUid entity)
     {

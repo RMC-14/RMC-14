@@ -5,7 +5,7 @@ namespace Content.Shared._RMC14.TrainingDummy;
 
 public sealed partial class RMCTrainingDummySystem : EntitySystem
 {
-    [Dependency] private readonly GrammarSystem _grammar = default!;
+    [Dependency] private GrammarSystem _grammar = default!;
     public override void Initialize()
     {
         base.Initialize();

@@ -29,11 +29,11 @@ namespace Content.Server.Ninja.Systems;
 /// </summary>
 public sealed class SpaceNinjaSystem : SharedSpaceNinjaSystem
 {
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly BatterySystem _battery = default!;
-    [Dependency] private readonly CodeConditionSystem _codeCondition = default!;
-    [Dependency] private readonly PowerCellSystem _powerCell = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private BatterySystem _battery = default!;
+    [Dependency] private CodeConditionSystem _codeCondition = default!;
+    [Dependency] private PowerCellSystem _powerCell = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
 
     public override void Initialize()
     {

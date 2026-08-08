@@ -23,14 +23,14 @@ namespace Content.Server._RMC14.Sentry.Laptop;
 
 public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
 {
-    [Dependency] private readonly AreaSystem _areaServer = default!;
-    [Dependency] private readonly SharedSentryTargetingSystem _sentryTargetingServer = default!;
-    [Dependency] private readonly UserInterfaceSystem _uiServer = default!;
-    [Dependency] private readonly SharedTransformSystem _transformServer = default!;
-    [Dependency] private readonly IGameTiming _timingServer = default!;
-    [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
-    [Dependency] private readonly NpcFactionSystem _faction = default!;
-    [Dependency] private readonly SharedContainerSystem _containers = default!;
+    [Dependency] private AreaSystem _areaServer = default!;
+    [Dependency] private SharedSentryTargetingSystem _sentryTargetingServer = default!;
+    [Dependency] private UserInterfaceSystem _uiServer = default!;
+    [Dependency] private SharedTransformSystem _transformServer = default!;
+    [Dependency] private IGameTiming _timingServer = default!;
+    [Dependency] private ViewSubscriberSystem _viewSubscriber = default!;
+    [Dependency] private NpcFactionSystem _faction = default!;
+    [Dependency] private SharedContainerSystem _containers = default!;
 
     private EntityQuery<ActorComponent> _actorQuery;
 

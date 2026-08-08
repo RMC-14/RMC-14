@@ -9,8 +9,8 @@ namespace Content.Server._RMC14.Humanoid.Markings;
 
 public sealed class RMCConditionalMarkingsSystem : EntitySystem
 {
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoidAppearance = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private HumanoidAppearanceSystem _humanoidAppearance = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {

@@ -32,18 +32,18 @@ namespace Content.Shared.ParaDrop;
 
 public abstract partial class SharedParaDropSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] protected readonly ActionBlockerSystem Blocker = default!;
-    [Dependency] private readonly SharedCrashLandSystem _crashLand = default!;
-    [Dependency] private readonly SharedDropshipSystem _dropship = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedCrashLandSystem _crashLand = default!;
+    [Dependency] private SharedDropshipSystem _dropship = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private const int CrashScatter = 7;
 

@@ -13,7 +13,7 @@ namespace Content.Shared.Weapons.Ranged.Systems;
 
 public abstract class SharedFlyBySoundSystem : EntitySystem
 {
-    [Dependency] private readonly FixtureSystem _fixtures = default!;
+    [Dependency] private FixtureSystem _fixtures = default!;
 
     public const string FlyByFixture = "fly-by";
 

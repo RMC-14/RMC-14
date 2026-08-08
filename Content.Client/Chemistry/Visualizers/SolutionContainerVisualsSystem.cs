@@ -15,8 +15,8 @@ namespace Content.Client.Chemistry.Visualizers;
 
 public sealed class SolutionContainerVisualsSystem : VisualizerSystem<SolutionContainerVisualsComponent>
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly ItemSystem _itemSystem = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private ItemSystem _itemSystem = default!;
 
     public override void Initialize()
     {

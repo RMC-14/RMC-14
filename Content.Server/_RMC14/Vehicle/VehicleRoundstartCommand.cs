@@ -21,8 +21,8 @@ public sealed class VehicleRoundstartCommand : ToolshedCommand
     private static readonly EntProtoId VehicleHumveeArcUnlock = "VehicleHumveeARC";
     private static readonly EntProtoId VehicleTankUnlock = "VehicleTank";
 
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly IPlayerManager _players = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private IPlayerManager _players = default!;
 
     [CommandImplementation("current")]
     public void TestCurrent([CommandInvocationContext] IInvocationContext ctx)

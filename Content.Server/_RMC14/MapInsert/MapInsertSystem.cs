@@ -20,18 +20,18 @@ namespace Content.Server._RMC14.MapInsert;
 
 public sealed class MapInsertSystem : EntitySystem
 {
-    [Dependency] private readonly AreaSystem _areas = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly DecalSystem _decals = default!;
-    [Dependency] private readonly GridFixtureSystem _fixture = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly CMDistressSignalRuleSystem _distressSignal = default!;
+    [Dependency] private AreaSystem _areas = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private DecalSystem _decals = default!;
+    [Dependency] private GridFixtureSystem _fixture = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private MapLoaderSystem _mapLoader = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private CMDistressSignalRuleSystem _distressSignal = default!;
 
     private float _mergeOffset = 999f;
 

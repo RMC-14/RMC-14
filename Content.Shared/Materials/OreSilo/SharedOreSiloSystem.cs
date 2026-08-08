@@ -6,9 +6,9 @@ namespace Content.Shared.Materials.OreSilo;
 
 public abstract class SharedOreSiloSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMaterialStorageSystem _materialStorage = default!;
-    [Dependency] private readonly SharedPowerReceiverSystem _powerReceiver = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedMaterialStorageSystem _materialStorage = default!;
+    [Dependency] private SharedPowerReceiverSystem _powerReceiver = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private EntityQuery<OreSiloClientComponent> _clientQuery;
 

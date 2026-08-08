@@ -4,7 +4,7 @@ namespace Content.Client._RMC14.Xenonids.Targeting;
 
 public sealed class XenoAbilityPreviewSystem : EntitySystem
 {
-    [Dependency] private readonly IOverlayManager _overlay = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
 
     public override void Initialize()
     {

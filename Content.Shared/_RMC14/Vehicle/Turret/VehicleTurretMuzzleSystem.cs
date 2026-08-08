@@ -10,8 +10,8 @@ namespace Content.Shared._RMC14.Vehicle;
 
 public sealed class VehicleTurretMuzzleSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly VehicleTurretSystem _vehicleTurret = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private VehicleTurretSystem _vehicleTurret = default!;
 
     public override void Initialize()
     {

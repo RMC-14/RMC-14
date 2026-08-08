@@ -9,9 +9,9 @@ namespace Content.Client.Sprite;
 
 public sealed class RandomSpriteSystem : SharedRandomSpriteSystem
 {
-    [Dependency] private readonly IReflectionManager _reflection = default!;
-    [Dependency] private readonly ClientClothingSystem _clothing = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private IReflectionManager _reflection = default!;
+    [Dependency] private ClientClothingSystem _clothing = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

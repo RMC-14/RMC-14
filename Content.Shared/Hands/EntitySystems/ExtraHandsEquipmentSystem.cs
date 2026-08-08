@@ -5,7 +5,7 @@ namespace Content.Shared.Hands.EntitySystems;
 
 public sealed class ExtraHandsEquipmentSystem : EntitySystem
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     public override void Initialize()
     {

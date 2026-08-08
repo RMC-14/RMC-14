@@ -12,7 +12,7 @@ namespace Content.Client._RMC14.Chemistry.Master;
 /// </summary>
 public sealed class RMCChemMasterPresetManager
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private IConfigurationManager _config = default!;
 
     private List<RMCChemMasterPreset> _presets = new();
     private bool _loaded;
@@ -109,14 +109,16 @@ public sealed class RMCChemMasterPresetManager
         // Format: name|bottleLabel|bottleColor|pillType|usePresetName|quickSlot|quickLabel
         var quickSlot = preset.QuickAccessSlot?.ToString(CultureInfo.InvariantCulture) ?? string.Empty;
 
-        return string.Join(FieldDelimiter.ToString(),
+        return string.Join(FieldDelimiter.ToString(), new[]
+        {
             EscapeField(preset.Name),
             EscapeField(preset.BottleLabel),
             ((int)preset.BottleColor).ToString(CultureInfo.InvariantCulture),
             preset.PillType.ToString(CultureInfo.InvariantCulture),
             preset.UsePresetNameAsLabel ? "1" : "0",
             quickSlot,
-            EscapeField(preset.QuickAccessLabel));
+            EscapeField(preset.QuickAccessLabel)
+        });
     }
 
     private static RMCChemMasterPreset? DeserializePreset(string data)

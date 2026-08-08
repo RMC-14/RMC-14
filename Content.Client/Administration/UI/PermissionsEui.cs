@@ -24,7 +24,7 @@ namespace Content.Client.Administration.UI
     {
         private const int NoRank = -1;
 
-        [Dependency] private readonly IClientAdminManager _adminManager = default!;
+        [Dependency] private IClientAdminManager _adminManager = default!;
 
         private readonly Menu _menu;
         private readonly List<DefaultWindow> _subWindows = new();

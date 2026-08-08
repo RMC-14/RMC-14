@@ -23,9 +23,9 @@ namespace Content.Client._RMC14.RMCPlaytimeStats;
 [GenerateTypedNameReferences]
 public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
 {
-    [Dependency] private readonly JobRequirementsManager _jobRequirementsManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private JobRequirementsManager _jobRequirementsManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IConfigurationManager _config = default!;
 
     private readonly Color _altColor = Color.FromHex("#292B38");
     private readonly Color _defaultColor = Color.FromHex("#2F2F3B");

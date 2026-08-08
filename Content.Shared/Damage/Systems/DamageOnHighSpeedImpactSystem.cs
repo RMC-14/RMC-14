@@ -12,12 +12,12 @@ namespace Content.Shared.Damage.Systems;
 
 public sealed class DamageOnHighSpeedImpactSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IRobustRandom _robustRandom = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IRobustRandom _robustRandom = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedColorFlashEffectSystem _color = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
 
     public override void Initialize()
     {

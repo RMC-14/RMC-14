@@ -4,7 +4,7 @@ namespace Content.Server.Disposal.Tube;
 
 public sealed class DisposalSignallerSystem : EntitySystem
 {
-    [Dependency] private readonly DeviceLinkSystem _link = default!;
+    [Dependency] private DeviceLinkSystem _link = default!;
 
     public override void Initialize()
     {

@@ -11,9 +11,9 @@ namespace Content.Shared._RMC14.Clothing;
 
 public sealed class HelmetAccessoriesSystem : EntitySystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedItemSystem _item = default!;
-    [Dependency] private readonly ItemToggleSystem _itemToggle = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedItemSystem _item = default!;
+    [Dependency] private ItemToggleSystem _itemToggle = default!;
 
     private EntityQuery<StorageComponent> _storageQuery;
     private EntityQuery<HelmetAccessoryComponent> _accessoryQuery;

@@ -13,10 +13,10 @@ public sealed class VehicleEntranceItemSystem : EntitySystem
     private static readonly ProtoId<TagPrototype> HandGrenadeTag = "HandGrenade";
     private static readonly ProtoId<TagPrototype> GrenadeTag = "Grenade";
 
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly VehicleSystem _vehicle = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private VehicleSystem _vehicle = default!;
 
     public override void Initialize()
     {

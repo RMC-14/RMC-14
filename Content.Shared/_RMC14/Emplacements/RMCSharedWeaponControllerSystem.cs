@@ -11,9 +11,9 @@ namespace Content.Shared._RMC14.Emplacements;
 
 public abstract partial class RMCSharedWeaponControllerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedBuckleSystem _buckle = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedBuckleSystem _buckle = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
 
     public override void Initialize()

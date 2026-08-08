@@ -5,7 +5,7 @@ namespace Content.Shared.Kitchen
 {
     public sealed class RecipeManager
     {
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+        [Dependency] private IPrototypeManager _prototypeManager = default!;
 
         public List<FoodRecipePrototype> Recipes { get; private set; } = new();
 

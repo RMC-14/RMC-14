@@ -19,19 +19,19 @@ namespace Content.Shared._RMC14.Xenonids.Pierce;
 
 public sealed class XenoPierceSystem : EntitySystem
 {
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly VanguardShieldSystem _vanguard = default!;
-    [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
-    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
-    [Dependency] private readonly LineSystem _line = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedRMCEmoteSystem _emote = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private SharedColorFlashEffectSystem _colorFlash = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private VanguardShieldSystem _vanguard = default!;
+    [Dependency] private SharedRMCMeleeWeaponSystem _rmcMelee = default!;
+    [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private LineSystem _line = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
 
     private readonly HashSet<Entity<MarineComponent>> _pierceEnts = new();
     private readonly HashSet<EntityUid> _hitAlready = new();

@@ -4,7 +4,7 @@ namespace Content.Shared.Power.EntitySystems;
 
 public abstract class SharedPowerNetSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
 
     public abstract bool IsPoweredCalculate(SharedApcPowerReceiverComponent comp);
 

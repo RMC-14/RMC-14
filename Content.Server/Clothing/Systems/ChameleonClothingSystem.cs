@@ -14,9 +14,9 @@ namespace Content.Server.Clothing.Systems;
 
 public sealed class ChameleonClothingSystem : SharedChameleonClothingSystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IdentitySystem _identity = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IdentitySystem _identity = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {

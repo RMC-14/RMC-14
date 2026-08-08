@@ -31,16 +31,16 @@ namespace Content.Server._RMC14.Roles;
 
 public sealed partial class MarineCommandOverrideSystem : EntitySystem
 {
-    [Dependency] private readonly ARESCoreSystem _aresCore = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
-    [Dependency] private readonly PlayTimeTrackingManager _playtimeManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedRankSystem _rankSystem = default!;
-    [Dependency] private readonly SquadSystem _squadSystem = default!;
+    [Dependency] private ARESCoreSystem _aresCore = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private MarineAnnounceSystem _marineAnnounce = default!;
+    [Dependency] private PlayTimeTrackingManager _playtimeManager = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedRankSystem _rankSystem = default!;
+    [Dependency] private SquadSystem _squadSystem = default!;
 
     private static readonly ProtoId<JobPrototype> ExecutiveOfficerJob = "CMExecutiveOfficer";
     private static readonly ProtoId<RankPrototype> PrivateRank = "RMCRankPrivate";

@@ -8,7 +8,7 @@ namespace Content.Shared.Storage.EntitySystems
     [UsedImplicitly]
     public abstract class SharedItemCounterSystem : EntitySystem
     {
-        [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+        [Dependency] private SharedAppearanceSystem _appearance = default!;
 
         /// <inheritdoc />
         public override void Initialize()

@@ -10,7 +10,7 @@ namespace Content.Server.Objectives.Systems;
 /// </summary>
 public sealed class CodeConditionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
 
     public override void Initialize()
     {

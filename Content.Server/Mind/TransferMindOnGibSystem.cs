@@ -14,9 +14,9 @@ namespace Content.Server.Mind;
 /// </summary>
 public sealed class TransferMindOnGibSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly SharedMindSystem _mindSystem = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private SharedMindSystem _mindSystem = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

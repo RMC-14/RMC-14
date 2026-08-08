@@ -9,7 +9,7 @@ namespace Content.Client.Clothing;
 
 public sealed class FlippableClothingVisualizerSystem : VisualizerSystem<FlippableClothingVisualsComponent>
 {
-    [Dependency] private readonly SharedItemSystem _itemSys = default!;
+    [Dependency] private SharedItemSystem _itemSys = default!;
 
     public override void Initialize()
     {

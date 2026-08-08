@@ -47,32 +47,32 @@ namespace Content.Shared._RMC14.Intel;
 
 public sealed class IntelSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedXenoAcidSystem _acid = default!;
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly ARESCoreSystem _aresCore = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly DialogSystem _dialog = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedIdCardSystem _idCard = default!;
-    [Dependency] private readonly LockSystem _lock = default!;
-    [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly NameModifierSystem _nameModifier = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedRMCPowerSystem _power = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly SharedStorageSystem _storage = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedXenoAcidSystem _acid = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private ARESCoreSystem _aresCore = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private DialogSystem _dialog = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private SharedEntityStorageSystem _entityStorage = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedIdCardSystem _idCard = default!;
+    [Dependency] private LockSystem _lock = default!;
+    [Dependency] private SharedMarineAnnounceSystem _marineAnnounce = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private NameModifierSystem _nameModifier = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedRMCPowerSystem _power = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SkillsSystem _skills = default!;
+    [Dependency] private SharedStorageSystem _storage = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     private static readonly char[] UppercaseLetters =
     {
@@ -449,7 +449,7 @@ public sealed class IntelSystem : EntitySystem
         AddPoints(tree, ent.Comp.Value);
 
         var knowledge = EnsureComp<IntelKnowledgeComponent>(user);
-        knowledge.Read.Add(ent);
+        knowledge.ReadIntel.Add(ent);
         Dirty(user, knowledge);
 
         var read = EnsureComp<IntelReadComponent>(ent);
@@ -564,7 +564,7 @@ public sealed class IntelSystem : EntitySystem
 
     private void OnKnowledgeRemove<T>(Entity<IntelKnowledgeComponent> ent, ref T args)
     {
-        foreach (var read in ent.Comp.Read)
+        foreach (var read in ent.Comp.ReadIntel)
         {
             if (TerminatingOrDeleted(read))
                 continue;
@@ -586,7 +586,7 @@ public sealed class IntelSystem : EntitySystem
 
             if (TryComp(reader, out IntelKnowledgeComponent? knowledge))
             {
-                knowledge.Read.Remove(ent);
+                knowledge.ReadIntel.Remove(ent);
                 Dirty(reader, knowledge);
             }
         }
@@ -600,7 +600,7 @@ public sealed class IntelSystem : EntitySystem
         args.Handled = true;
 
         if (!TryComp(args.User, out IntelKnowledgeComponent? knowledge) ||
-            !knowledge.Read.TryFirstOrNull(out var read))
+            !knowledge.ReadIntel.TryFirstOrNull(out var read))
         {
             _popup.PopupClient(Loc.GetString("rmc-intel-console-typing-no-new"), ent, args.User, PopupType.Medium);
             return;
@@ -663,7 +663,7 @@ public sealed class IntelSystem : EntitySystem
             !TryComp(intel, out IntelUnlocksComponent? unlocks) ||
             !unlocks.Unlocks.TryFirstOrNull(out var unlock))
         {
-            if (!knowledge.Read.TryFirstOrNull(out intel))
+            if (!knowledge.ReadIntel.TryFirstOrNull(out intel))
             {
                 StopPopup(ref args);
                 return;
@@ -673,7 +673,7 @@ public sealed class IntelSystem : EntitySystem
             if (!TryComp(intel, out unlocks) ||
                 !unlocks.Unlocks.TryFirstOrNull(out unlock))
             {
-                knowledge.Read.Remove(intel.Value);
+                knowledge.ReadIntel.Remove(intel.Value);
                 Dirty(args.User, knowledge);
                 args.Repeat = true;
                 return;
@@ -690,12 +690,12 @@ public sealed class IntelSystem : EntitySystem
         _audio.PlayPvs(ent.Comp.TypingSound, ent);
 
         if (unlocks.Unlocks.Count == 0 &&
-            knowledge.Read.Remove(intel.Value))
+            knowledge.ReadIntel.Remove(intel.Value))
         {
             Dirty(args.User, knowledge);
         }
 
-        if (knowledge.Read.Count > 0)
+        if (knowledge.ReadIntel.Count > 0)
             args.Repeat = true;
         else
             StopPopup(ref args);

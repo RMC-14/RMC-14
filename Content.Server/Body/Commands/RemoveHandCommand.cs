@@ -12,8 +12,8 @@ namespace Content.Server.Body.Commands
     [AdminCommand(AdminFlags.Fun)]
     public sealed class RemoveHandCommand : IConsoleCommand
     {
-        [Dependency] private readonly IEntityManager _entManager = default!;
-        [Dependency] private readonly IRobustRandom _random = default!;
+        [Dependency] private IEntityManager _entManager = default!;
+        [Dependency] private IRobustRandom _random = default!;
 
         public string Command => "removehand";
         public string Description => "Removes a hand from your entity.";

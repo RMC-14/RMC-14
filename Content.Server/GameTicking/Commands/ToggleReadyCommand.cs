@@ -6,7 +6,7 @@ namespace Content.Server.GameTicking.Commands
     [AnyCommand]
     sealed class ToggleReadyCommand : IConsoleCommand
     {
-        [Dependency] private readonly IEntityManager _e = default!;
+        [Dependency] private IEntityManager _e = default!;
 
         public string Command => "toggleready";
         public string Description => "";

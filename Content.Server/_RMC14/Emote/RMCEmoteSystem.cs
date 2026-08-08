@@ -10,8 +10,8 @@ namespace Content.Server._RMC14.Emote;
 
 public sealed class RMCEmoteSystem : SharedRMCEmoteSystem
 {
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
 
     public override void Initialize()

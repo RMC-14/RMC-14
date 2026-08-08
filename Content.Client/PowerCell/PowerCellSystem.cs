@@ -8,8 +8,8 @@ namespace Content.Client.PowerCell;
 [UsedImplicitly]
 public sealed class PowerCellSystem : SharedPowerCellSystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

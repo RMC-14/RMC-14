@@ -17,9 +17,9 @@ namespace Content.Client._RMC14.Admin.Global;
 
 public sealed class RMCGlobalAdminEui : BaseEui
 {
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
 
     private RMCGlobalAdminWindow _window = default!;
 

@@ -13,9 +13,9 @@ namespace Content.Server.Codewords;
 /// </summary>
 public sealed class CodewordSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {

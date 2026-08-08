@@ -11,9 +11,9 @@ namespace Content.Server.Tesla.EntitySystems;
 /// </summary>
 public sealed class LightningTargetSystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly ExplosionSystem _explosionSystem = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private ExplosionSystem _explosionSystem = default!;
+    [Dependency] private TransformSystem _transform = default!;
 
     public override void Initialize()
     {

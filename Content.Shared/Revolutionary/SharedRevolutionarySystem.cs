@@ -11,8 +11,8 @@ namespace Content.Shared.Revolutionary;
 
 public abstract class SharedRevolutionarySystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedStunSystem _sharedStun = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedStunSystem _sharedStun = default!;
 
     public override void Initialize()
     {

@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Shared.CCVar;
 using Robust.Shared.Configuration;
 
@@ -8,7 +9,7 @@ namespace Content.Client.UserInterface.Systems;
 /// </summary>
 public sealed class ProgressColorSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _configuration = default!;
+    [Dependency] private IConfigurationManager _configuration = default!;
 
     private bool _colorBlindFriendly;
 
@@ -43,7 +44,7 @@ public sealed class ProgressColorSystem : EntitySystem
 
             // lerp
             var hue = 5f / 18f * progress;
-            return Color.FromHsv((hue, 1f, 0.75f, 1f));
+            return Color.FromHsv(new Vector4(hue, 1f, 0.75f, 1f));
         }
 
         return InterpolateColorGaussian(Plasma, progress);

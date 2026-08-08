@@ -1,18 +1,15 @@
 ﻿using Content.Shared.Damage.Components;
+using Content.Shared._RMC14.Deferred;
 using Content.Shared.Throwing;
 
 namespace Content.Shared._RMC14.Throwing;
 
 public sealed class RMCThrowingSystem : EntitySystem
 {
-    [Dependency] private readonly ThrownItemSystem _thrown = default!;
-
-    private EntityQuery<ThrownItemComponent> _thrownItemQuery;
+    [Dependency] private RMCDeferredPhysicsSystem _deferredPhysics = default!;
 
     public override void Initialize()
     {
-        _thrownItemQuery = GetEntityQuery<ThrownItemComponent>();
-
         SubscribeLocalEvent<DamageOtherOnHitComponent, ThrownEvent>(OnDamageOtherOnHitThrown);
         SubscribeLocalEvent<ThrownLimitHitsComponent, ThrowDoHitEvent>(OnThrownLimitHitsDoHit);
         SubscribeLocalEvent<ThrownLimitHitsComponent, LandEvent>(OnThrownLimitHitsLand);
@@ -34,11 +31,11 @@ public sealed class RMCThrowingSystem : EntitySystem
 
     private void OnThrownLimitHitsDoHit(Entity<ThrownLimitHitsComponent> ent, ref ThrowDoHitEvent args)
     {
+        if (!_deferredPhysics.TryQueueStopThrow(ent))
+            return;
+
         ent.Comp.Hit = true;
         Dirty(ent);
-
-        if (_thrownItemQuery.TryComp(ent, out var thrown))
-            _thrown.StopThrow(ent, thrown);
     }
 
     private void OnThrownLimitHitsStopThrow(Entity<ThrownLimitHitsComponent> ent, ref StopThrowEvent args)

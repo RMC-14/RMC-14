@@ -8,7 +8,7 @@ namespace Content.Shared.Clothing.EntitySystems;
 /// </summary>
 public sealed class ToggleClothingPrefixSystem : EntitySystem
 {
-    [Dependency] private readonly ClothingSystem _clothing = default!;
+    [Dependency] private ClothingSystem _clothing = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

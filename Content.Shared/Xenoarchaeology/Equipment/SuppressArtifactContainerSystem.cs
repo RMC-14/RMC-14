@@ -7,7 +7,7 @@ namespace Content.Shared.Xenoarchaeology.Equipment;
 
 public sealed class SuppressArtifactContainerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedXenoArtifactSystem _xenoArtifact = default!;
+    [Dependency] private SharedXenoArtifactSystem _xenoArtifact = default!;
 
     public override void Initialize()
     {

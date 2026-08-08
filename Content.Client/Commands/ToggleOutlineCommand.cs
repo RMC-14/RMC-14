@@ -8,7 +8,7 @@ namespace Content.Client.Commands;
 [AnyCommand]
 public sealed class ToggleOutlineCommand : LocalizedCommands
 {
-    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
+    [Dependency] private IConfigurationManager _configurationManager = default!;
 
     public override string Command => "toggleoutline";
 

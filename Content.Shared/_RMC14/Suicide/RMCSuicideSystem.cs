@@ -19,15 +19,15 @@ namespace Content.Shared._RMC14.Suicide;
 // this ignores the suicide cvar since we don't want upstream suicides
 public sealed class RMCSuicideSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _admin = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly RMCUnrevivableSystem _unrevivable = default!;
+    [Dependency] private ISharedAdminLogManager _admin = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private RMCUnrevivableSystem _unrevivable = default!;
 
     public override void Initialize()
     {

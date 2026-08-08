@@ -19,16 +19,16 @@ namespace Content.Shared.Fluids;
 /// </summary>
 public abstract class SharedAbsorbentSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popups = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popups = default!;
     [Dependency] protected readonly SharedPuddleSystem Puddle = default!;
-    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] protected readonly SharedSolutionContainerSystem SolutionContainer = default!;
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly SharedItemSystem _item = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private SharedItemSystem _item = default!;
 
     public override void Initialize()
     {

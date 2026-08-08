@@ -15,11 +15,11 @@ namespace Content.Server._RMC14.Admin;
 
 public sealed class RMCChatBansManager : IPostInjectInit
 {
-    [Dependency] private readonly IServerDbManager _db = default!;
-    [Dependency] private readonly IEntityManager _entity = default!;
-    [Dependency] private readonly ILogManager _logManager = default!;
-    [Dependency] private readonly IPlayerLocator _playerLocator = default!;
-    [Dependency] private readonly UserDbDataManager _userDb = default!;
+    [Dependency] private IServerDbManager _db = default!;
+    [Dependency] private IEntityManager _entity = default!;
+    [Dependency] private ILogManager _logManager = default!;
+    [Dependency] private IPlayerLocator _playerLocator = default!;
+    [Dependency] private UserDbDataManager _userDb = default!;
 
     private const int Ipv4_CIDR = 32;
     private const int Ipv6_CIDR = 64;

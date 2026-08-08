@@ -17,11 +17,11 @@ public sealed class RMCScuttleCinematicSystem : EntitySystem
     private static readonly SoundSpecifier CinematicExplosionSound =
         new SoundCollectionSpecifier("Explosion", AudioParams.Default.WithVolume(4f));
 
-    [Dependency] private readonly IOverlayManager _overlay = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly IUserInterfaceManager _ui = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private IUserInterfaceManager _ui = default!;
 
     private RMCScuttleCinematicOverlay? _current;
     private TimeSpan? _cinematicExplosionAt;

@@ -23,18 +23,18 @@ namespace Content.Server._RMC14.Xenonids.Psychic;
 
 public sealed class XenoPsychicCommunicationSystem : EntitySystem
 {
-    [Dependency] private readonly IAdminLogManager _adminLog = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedCMChatSystem _chat = default!;
-    [Dependency] private readonly DialogSystem _dialog = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
-    [Dependency] private readonly SharedXenoWatchSystem _watch = default!;
+    [Dependency] private IAdminLogManager _adminLog = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedCMChatSystem _chat = default!;
+    [Dependency] private DialogSystem _dialog = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private XenoPlasmaSystem _plasma = default!;
+    [Dependency] private SharedXenoWatchSystem _watch = default!;
 
     private static readonly Color PsychicColor = Color.FromHex("#921992");
     private static readonly Regex NewLineRegex = new("\n{3,}", RegexOptions.Compiled);

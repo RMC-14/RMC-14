@@ -30,20 +30,20 @@ using Content.Shared.Mobs.Systems;
 namespace Content.Shared._RMC14.Vents;
 public abstract class SharedVentCrawlingSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doafter = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly RMCMapSystem _rmcmap = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
-    [Dependency] private readonly SharedMoverController _mover = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
+    [Dependency] private SharedDoAfterSystem _doafter = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private RMCMapSystem _rmcmap = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedJitteringSystem _jitter = default!;
+    [Dependency] private SharedMoverController _mover = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private MobStateSystem _mob = default!;
 
     private bool _relativeMovement;
     public override void Initialize()

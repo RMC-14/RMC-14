@@ -15,8 +15,8 @@ public abstract partial class GameRuleSystem<T> : EntitySystem where T : ICompon
     [Dependency] protected readonly IGameTiming Timing = default!;
 
     // Not protected, just to be used in utility methods
-    [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
-    [Dependency] private readonly MapSystem _map = default!;
+    [Dependency] private AtmosphereSystem _atmosphere = default!;
+    [Dependency] private MapSystem _map = default!;
 
     public override void Initialize()
     {

@@ -11,7 +11,7 @@ namespace Content.Server.DeviceLinking.Systems;
 /// </summary>
 public sealed class MemoryCellSystem : EntitySystem
 {
-    [Dependency] private readonly DeviceLinkSystem _deviceLink = default!;
+    [Dependency] private DeviceLinkSystem _deviceLink = default!;
 
     public override void Initialize()
     {

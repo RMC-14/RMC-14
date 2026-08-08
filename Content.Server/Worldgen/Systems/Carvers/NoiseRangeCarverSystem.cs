@@ -8,8 +8,8 @@ namespace Content.Server.Worldgen.Systems.Carvers;
 /// </summary>
 public sealed class NoiseRangeCarverSystem : EntitySystem
 {
-    [Dependency] private readonly NoiseIndexSystem _index = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private NoiseIndexSystem _index = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     /// <inheritdoc />
     public override void Initialize()

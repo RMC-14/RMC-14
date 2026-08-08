@@ -6,7 +6,7 @@ namespace Content.Shared.GPS.Systems;
 
 public sealed class HandheldGpsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

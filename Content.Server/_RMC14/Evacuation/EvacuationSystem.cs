@@ -12,10 +12,10 @@ namespace Content.Server._RMC14.Evacuation;
 
 public sealed class EvacuationSystem : SharedEvacuationSystem
 {
-    [Dependency] private readonly SharedCrashLandSystem _crashLand = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ShuttleSystem _shuttle = default!;
+    [Dependency] private SharedCrashLandSystem _crashLand = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ShuttleSystem _shuttle = default!;
 
     private EntityQuery<EvacuationDoorComponent> _evacuationDoorQuery;
 

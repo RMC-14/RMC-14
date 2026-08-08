@@ -9,7 +9,7 @@ namespace Content.Server.Humanoid;
 
 public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
 {
-    [Dependency] private readonly MarkingManager _markingManager = default!;
+    [Dependency] private MarkingManager _markingManager = default!;
 
     public override void Initialize()
     {

@@ -7,7 +7,7 @@ namespace Content.Client.Charges;
 
 public sealed class ChargesSystem : SharedChargesSystem
 {
-    [Dependency] private readonly ActionsSystem _actions = default!;
+    [Dependency] private ActionsSystem _actions = default!;
 
     private Dictionary<EntityUid, int> _lastCharges = new();
     private Dictionary<EntityUid, int> _tempLastCharges = new();

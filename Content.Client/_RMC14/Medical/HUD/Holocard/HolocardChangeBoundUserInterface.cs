@@ -8,8 +8,8 @@ namespace Content.Client._RMC14.Medical.HUD.Holocard;
 [UsedImplicitly]
 public sealed class HolocardChangeBoundUserInterface : BoundUserInterface
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IEntityManager _entities = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IEntityManager _entities = default!;
 
     private HolocardChangeWindow? _window;
 

@@ -25,20 +25,20 @@ namespace Content.Shared._RMC14.Marines.Access;
 
 public sealed class IdModificationConsoleSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly ARESCoreSystem _core = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly GunIFFSystem _iff = default!;
-    [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SharedRankSystem _rank = default!;
-    [Dependency] private readonly ISerializationManager _serialization = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly SquadSystem _squad = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private ARESCoreSystem _core = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private GunIFFSystem _iff = default!;
+    [Dependency] private SharedMarineAnnounceSystem _marineAnnounce = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SharedRankSystem _rank = default!;
+    [Dependency] private ISerializationManager _serialization = default!;
+    [Dependency] private SkillsSystem _skills = default!;
+    [Dependency] private SquadSystem _squad = default!;
 
     private FrozenDictionary<string, AccessGroupPrototype> _accessGroup =
         FrozenDictionary<string, AccessGroupPrototype>.Empty;

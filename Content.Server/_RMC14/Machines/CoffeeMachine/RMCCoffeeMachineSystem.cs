@@ -15,13 +15,13 @@ namespace Content.Server._RMC14.Machines.CoffeeMachine;
 
 public sealed class RMCCoffeeMachineSystem : EntitySystem
 {
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

@@ -14,7 +14,7 @@ namespace Content.Server.Speech.EntitySystems;
 /// </summary>
 public sealed class SpeakOnActionSystem : SharedSpeakOnActionSystem
 {
-    [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private ChatSystem _chat = default!;
 
     public override void Initialize()
     {

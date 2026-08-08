@@ -14,8 +14,8 @@ namespace Content.Shared.Administration;
 // TODO deduplicate with BlockMovementComponent
 public abstract class SharedAdminFrozenSystem : EntitySystem
 {
-    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
+    [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private PullingSystem _pulling = default!;
 
     public override void Initialize()
     {

@@ -22,18 +22,18 @@ namespace Content.Client.Lobby
 {
     public sealed class LobbyState : State
     {
-        [Dependency] private readonly IBaseClient _baseClient = default!;
-        [Dependency] private readonly IConfigurationManager _cfg = default!;
-        [Dependency] private readonly IClientConsoleHost _consoleHost = default!;
-        [Dependency] private readonly IEntityManager _entityManager = default!;
-        [Dependency] private readonly IResourceCache _resourceCache = default!;
-        [Dependency] private readonly IUserInterfaceManager _userInterfaceManager = default!;
-        [Dependency] private readonly IGameTiming _gameTiming = default!;
-        [Dependency] private readonly IVoteManager _voteManager = default!;
-        [Dependency] private readonly ClientsidePlaytimeTrackingManager _playtimeTracking = default!;
+        [Dependency] private IBaseClient _baseClient = default!;
+        [Dependency] private IConfigurationManager _cfg = default!;
+        [Dependency] private IClientConsoleHost _consoleHost = default!;
+        [Dependency] private IEntityManager _entityManager = default!;
+        [Dependency] private IResourceCache _resourceCache = default!;
+        [Dependency] private IUserInterfaceManager _userInterfaceManager = default!;
+        [Dependency] private IGameTiming _gameTiming = default!;
+        [Dependency] private IVoteManager _voteManager = default!;
+        [Dependency] private ClientsidePlaytimeTrackingManager _playtimeTracking = default!;
 
         // RMC14
-        [Dependency] private readonly LinkAccountManager _linkAccount = default!;
+        [Dependency] private LinkAccountManager _linkAccount = default!;
 
         private ClientGameTicker _gameTicker = default!;
         private ContentAudioSystem _contentAudioSystem = default!;

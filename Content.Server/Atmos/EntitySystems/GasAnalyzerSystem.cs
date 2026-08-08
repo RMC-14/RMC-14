@@ -17,11 +17,11 @@ namespace Content.Server.Atmos.EntitySystems;
 [UsedImplicitly]
 public sealed class GasAnalyzerSystem : EntitySystem
 {
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly AtmosphereSystem _atmo = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
-    [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private AtmosphereSystem _atmo = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private UserInterfaceSystem _userInterface = default!;
+    [Dependency] private SharedInteractionSystem _interactionSystem = default!;
 
     /// <summary>
     /// Minimum moles of a gas to be sent to the client.

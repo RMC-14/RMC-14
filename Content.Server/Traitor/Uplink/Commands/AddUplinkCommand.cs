@@ -9,8 +9,8 @@ namespace Content.Server.Traitor.Uplink.Commands;
 [AdminCommand(AdminFlags.Admin)]
 public sealed class AddUplinkCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly UplinkSystem _uplinkSystem = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private UplinkSystem _uplinkSystem = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
 
     public override string Command => "adduplink";
 

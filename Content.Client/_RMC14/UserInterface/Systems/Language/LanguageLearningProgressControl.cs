@@ -16,7 +16,7 @@ namespace Content.Client._RMC14.UserInterface.Systems.Language;
 [GenerateTypedNameReferences]
 public sealed partial class LanguageLearningProgressControl : Control
 {
-    [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
+    [Dependency] private IEntitySystemManager _entitySystemManager = default!;
 
     private const float EstimatedChipWidth = 90f;
     private const int MaxWordsPerRow = 10;
@@ -371,7 +371,7 @@ public sealed partial class LanguageLearningProgressControl : Control
             "language-learning-average-comprehension",
             ("average", _data.AverageWordComprehension.ToString("P1")));
 
-        StatsLabel.Text = string.Join(" | ", overallProgress, wordCount, averageComprehension);
+        StatsLabel.Text = string.Join(" | ", new[] { overallProgress, wordCount, averageComprehension, });
         ProgressBar.Value = Math.Clamp(_data.Progress, 0f, 1f);
         UpdateExpandButtonVisibility();
     }

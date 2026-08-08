@@ -7,7 +7,7 @@ namespace Content.Client.Camera;
 
 public sealed class CameraRecoilSystem : SharedCameraRecoilSystem
 {
-    [Dependency] private readonly IConfigurationManager _configManager = default!;
+    [Dependency] private IConfigurationManager _configManager = default!;
 
     private float _intensity;
 

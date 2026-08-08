@@ -10,7 +10,7 @@ namespace Content.Shared.Xenoarchaeology.Artifact.XAT;
 /// </summary>
 public sealed class XATTimerSystem : BaseQueryUpdateXATSystem<XATTimerComponent>
 {
-    [Dependency] private readonly IRobustRandom _robustRandom = default!;
+    [Dependency] private IRobustRandom _robustRandom = default!;
 
     /// <inheritdoc />
     public override void Initialize()

@@ -8,8 +8,8 @@ using Robust.Shared.Physics;
 namespace Content.Server._RMC14.Xenonids.Doom;
 public sealed partial class XenoDoomSystem : SharedXenoDoomSystem
 {
-    [Dependency] private readonly ExpendableLightSystem _expend = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
+    [Dependency] private ExpendableLightSystem _expend = default!;
+    [Dependency] private ContainerSystem _container = default!;
 
 
     private readonly HashSet<Entity<PointLightComponent>> _lights = new();

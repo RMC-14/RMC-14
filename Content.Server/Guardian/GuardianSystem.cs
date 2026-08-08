@@ -25,15 +25,15 @@ namespace Content.Server.Guardian
     /// </summary>
     public sealed class GuardianSystem : EntitySystem
     {
-        [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-        [Dependency] private readonly PopupSystem _popupSystem = default!;
-        [Dependency] private readonly DamageableSystem _damageSystem = default!;
-        [Dependency] private readonly SharedActionsSystem _actionSystem = default!;
-        [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-        [Dependency] private readonly SharedAudioSystem _audio = default!;
-        [Dependency] private readonly BodySystem _bodySystem = default!;
-        [Dependency] private readonly SharedContainerSystem _container = default!;
-        [Dependency] private readonly SharedTransformSystem _transform = default!;
+        [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
+        [Dependency] private PopupSystem _popupSystem = default!;
+        [Dependency] private DamageableSystem _damageSystem = default!;
+        [Dependency] private SharedActionsSystem _actionSystem = default!;
+        [Dependency] private SharedHandsSystem _handsSystem = default!;
+        [Dependency] private SharedAudioSystem _audio = default!;
+        [Dependency] private BodySystem _bodySystem = default!;
+        [Dependency] private SharedContainerSystem _container = default!;
+        [Dependency] private SharedTransformSystem _transform = default!;
 
         public override void Initialize()
         {

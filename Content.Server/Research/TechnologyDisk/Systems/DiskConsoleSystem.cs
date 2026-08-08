@@ -11,10 +11,10 @@ namespace Content.Server.Research.TechnologyDisk.Systems;
 
 public sealed class DiskConsoleSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly ResearchSystem _research = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private ResearchSystem _research = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

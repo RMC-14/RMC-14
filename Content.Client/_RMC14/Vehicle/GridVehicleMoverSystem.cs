@@ -14,9 +14,9 @@ namespace Content.Client._RMC14.Vehicle;
 
 public sealed class GridVehicleMoverSystem : EntitySystem
 {
-    [Dependency] private readonly IOverlayManager _overlayManager = default!;
-    [Dependency] private readonly ClientPhysicsSystem _physics = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private IOverlayManager _overlayManager = default!;
+    [Dependency] private ClientPhysicsSystem _physics = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
 
     public static readonly List<Vector2> DebugCollisionPositions = new();
 

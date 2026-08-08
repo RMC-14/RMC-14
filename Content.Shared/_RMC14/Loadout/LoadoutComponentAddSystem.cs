@@ -6,7 +6,7 @@ namespace Content.Shared._RMC14.Loadout;
 
 public sealed class LoadoutComponentAddSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     public override void Initialize()
     {

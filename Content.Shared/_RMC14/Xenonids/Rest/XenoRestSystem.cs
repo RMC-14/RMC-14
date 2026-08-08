@@ -1,4 +1,4 @@
-using Content.Shared._RMC14.Actions;
+﻿using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Evasion;
 using Content.Shared._RMC14.Xenonids.Charge;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
@@ -25,12 +25,12 @@ namespace Content.Shared._RMC14.Xenonids.Rest;
 
 public sealed class XenoRestSystem : EntitySystem
 {
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

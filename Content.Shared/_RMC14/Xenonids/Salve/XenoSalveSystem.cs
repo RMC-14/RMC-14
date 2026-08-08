@@ -10,9 +10,9 @@ namespace Content.Shared._RMC14.Xenonids.Salve;
 
 public sealed class XenoSalveSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<RecentlySalvedComponent, ComponentStartup>(OnSalveAdded);

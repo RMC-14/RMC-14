@@ -12,8 +12,8 @@ namespace Content.Server.Xenoarchaeology.Artifact.XAE;
 /// </summary>
 public sealed class XAETemperatureSystem : BaseXAESystem<XAETemperatureComponent>
 {
-    [Dependency] private readonly AtmosphereSystem _atmosphereSystem = default!;
-    [Dependency] private readonly TransformSystem _transformSystem = default!;
+    [Dependency] private AtmosphereSystem _atmosphereSystem = default!;
+    [Dependency] private TransformSystem _transformSystem = default!;
 
     /// <inheritdoc />
     protected override void OnActivated(Entity<XAETemperatureComponent> ent, ref XenoArtifactNodeActivatedEvent args)

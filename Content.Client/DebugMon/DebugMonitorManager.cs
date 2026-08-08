@@ -11,10 +11,10 @@ namespace Content.Client.DebugMon;
 /// </summary>
 internal sealed class DebugMonitorManager
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IClientAdminManager _admin = default!;
-    [Dependency] private readonly IUserInterfaceManager _userInterface = default!;
-    [Dependency] private readonly IBaseClient _baseClient = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IClientAdminManager _admin = default!;
+    [Dependency] private IUserInterfaceManager _userInterface = default!;
+    [Dependency] private IBaseClient _baseClient = default!;
 
     public void FrameUpdate()
     {

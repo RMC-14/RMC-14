@@ -17,16 +17,16 @@ namespace Content.Shared._RMC14.Xenonids.Finesse;
 
 public sealed class XenoFinesseSystem : EntitySystem
 {
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private readonly HashSet<Entity<MarineComponent>> _marines = new();
     public override void Initialize()

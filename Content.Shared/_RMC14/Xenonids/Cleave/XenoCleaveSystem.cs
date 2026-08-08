@@ -12,16 +12,16 @@ namespace Content.Shared._RMC14.Xenonids.Cleave;
 
 public sealed class XenoCleaveSystem : EntitySystem
 {
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly VanguardShieldSystem _vanguard = default!;
-    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
-    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
-    [Dependency] private readonly RMCSlowSystem _slow = default!;
-    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private VanguardShieldSystem _vanguard = default!;
+    [Dependency] private RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedRMCMeleeWeaponSystem _rmcMelee = default!;
+    [Dependency] private SharedRMCDamageableSystem _rmcDamageable = default!;
+    [Dependency] private RMCSlowSystem _slow = default!;
+    [Dependency] private RMCSizeStunSystem _sizeStun = default!;
 
     public override void Initialize()
     {

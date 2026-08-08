@@ -10,8 +10,8 @@ namespace Content.Server.Objectives.Systems;
 /// </summary>
 public sealed class HelpProgressConditionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedObjectivesSystem _objectives = default!;
-    [Dependency] private readonly TargetObjectiveSystem _target = default!;
+    [Dependency] private SharedObjectivesSystem _objectives = default!;
+    [Dependency] private TargetObjectiveSystem _target = default!;
 
     public override void Initialize()
     {

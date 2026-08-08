@@ -28,16 +28,16 @@ namespace Content.Server.Light.EntitySystems
     [UsedImplicitly]
     public sealed class ExpendableLightSystem : SharedExpendableLightSystem
     {
-        [Dependency] private readonly SharedItemSystem _item = default!;
-        [Dependency] private readonly ClothingSystem _clothing = default!;
-        [Dependency] private readonly TagSystem _tagSystem = default!;
-        [Dependency] private readonly SharedAudioSystem _audio = default!;
-        [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-        [Dependency] private readonly StackSystem _stackSystem = default!;
-        [Dependency] private readonly NameModifierSystem _nameModifier = default!;
+        [Dependency] private SharedItemSystem _item = default!;
+        [Dependency] private ClothingSystem _clothing = default!;
+        [Dependency] private TagSystem _tagSystem = default!;
+        [Dependency] private SharedAudioSystem _audio = default!;
+        [Dependency] private SharedAppearanceSystem _appearance = default!;
+        [Dependency] private StackSystem _stackSystem = default!;
+        [Dependency] private NameModifierSystem _nameModifier = default!;
 
         // RMC14
-        [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+        [Dependency] private SharedPhysicsSystem _physics = default!;
 
         private static readonly ProtoId<TagPrototype> TrashTag = "Trash";
 

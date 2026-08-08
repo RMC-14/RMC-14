@@ -7,8 +7,8 @@ namespace Content.Client._RMC14.ItemPickup;
 
 public sealed class ItemPickupSystem : EntitySystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public bool RecentItemPickUp { get; private set; }
     private TimeSpan _lastPickUp;

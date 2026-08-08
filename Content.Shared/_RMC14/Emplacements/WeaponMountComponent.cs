@@ -10,7 +10,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototy
 
 namespace Content.Shared._RMC14.Emplacements;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true)]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true, true)]
 [Access(typeof(SharedWeaponMountSystem))]
 public sealed partial class WeaponMountComponent : Component
 {

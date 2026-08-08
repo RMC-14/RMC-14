@@ -18,11 +18,11 @@ namespace Content.Server.Body.Systems;
 
 public sealed class BodySystem : SharedBodySystem
 {
-    [Dependency] private readonly GhostSystem _ghostSystem = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoidSystem = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedMindSystem _mindSystem = default!;
+    [Dependency] private GhostSystem _ghostSystem = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private HumanoidAppearanceSystem _humanoidSystem = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedMindSystem _mindSystem = default!;
 
     public override void Initialize()
     {

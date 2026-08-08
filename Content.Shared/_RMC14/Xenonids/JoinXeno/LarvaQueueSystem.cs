@@ -19,16 +19,16 @@ namespace Content.Shared._RMC14.Xenonids.JoinXeno;
 
 public sealed class LarvaQueueSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly FollowerSystem _follower = default!;
-    [Dependency] private readonly SharedGameTicker _gameTicker = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private FollowerSystem _follower = default!;
+    [Dependency] private SharedGameTicker _gameTicker = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     [ViewVariables]
     public static readonly Dictionary<EntityUid, HashSet<NetUserId>> InfectorSet = new();

@@ -26,18 +26,18 @@ namespace Content.Server._RMC14.Cryostorage;
 /// </summary>
 public sealed class RMCCryoRecoverySystem : EntitySystem
 {
-    [Dependency] private readonly AccessReaderSystem _accessReader = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly CryostorageSystem _cryostorage = default!;
-    [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly ServerInventorySystem _inventory = default!;
-    [Dependency] private readonly SharedJobSystem _jobs = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedWebbingSystem _webbing = default!;
+    [Dependency] private AccessReaderSystem _accessReader = default!;
+    [Dependency] private ContainerSystem _container = default!;
+    [Dependency] private CryostorageSystem _cryostorage = default!;
+    [Dependency] private HandsSystem _hands = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private ServerInventorySystem _inventory = default!;
+    [Dependency] private SharedJobSystem _jobs = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private SharedWebbingSystem _webbing = default!;
 
     // Reused during UI builds and bulk recovery to avoid allocating a fresh list for every stored body.
     private readonly List<RecoverableItem> _recoverableItems = new();

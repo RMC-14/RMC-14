@@ -18,9 +18,9 @@ namespace Content.Server.Atmos.EntitySystems;
 /// </summary>
 public sealed class PipeRestrictOverlapSystem : EntitySystem
 {
-    [Dependency] private readonly MapSystem _map = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly TransformSystem _xform = default!;
+    [Dependency] private MapSystem _map = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private TransformSystem _xform = default!;
 
     private readonly List<EntityUid> _anchoredEntities = new();
     private EntityQuery<NodeContainerComponent> _nodeContainerQuery;

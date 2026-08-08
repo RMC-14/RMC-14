@@ -13,8 +13,8 @@ namespace Content.Client._RMC14.PlayingCards;
 [UsedImplicitly]
 public sealed class PlayingCardHandBui : BoundUserInterface
 {
-    [Dependency] private readonly IClyde _displayManager = default!;
-    [Dependency] private readonly IEyeManager _eye = default!;
+    [Dependency] private IClyde _displayManager = default!;
+    [Dependency] private IEyeManager _eye = default!;
 
     private readonly TransformSystem _transform;
     private readonly SpriteSystem _sprite;

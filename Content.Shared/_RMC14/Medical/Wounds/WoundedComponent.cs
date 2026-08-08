@@ -32,7 +32,7 @@ public sealed partial class WoundedComponent : Component
 
 [DataRecord]
 [Serializable, NetSerializable]
-public record struct Wound(
+public partial record struct Wound(
     FixedPoint2 Damage,
     FixedPoint2 Healed,
     float Bloodloss,

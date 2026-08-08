@@ -13,8 +13,8 @@ namespace Content.Client._RMC14.UniformAccessories;
 [UsedImplicitly]
 public sealed class UniformAccessoryBui : BoundUserInterface
 {
-    [Dependency] private readonly IClyde _displayManager = default!;
-    [Dependency] private readonly IEyeManager _eye = default!;
+    [Dependency] private IClyde _displayManager = default!;
+    [Dependency] private IEyeManager _eye = default!;
 
     private readonly TransformSystem _transform;
     private readonly SharedContainerSystem _container;

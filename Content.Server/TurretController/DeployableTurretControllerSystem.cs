@@ -15,8 +15,8 @@ namespace Content.Server.TurretController;
 /// <inheritdoc/>
 public sealed partial class DeployableTurretControllerSystem : SharedDeployableTurretControllerSystem
 {
-    [Dependency] private readonly UserInterfaceSystem _userInterfaceSystem = default!;
-    [Dependency] private readonly DeviceNetworkSystem _deviceNetwork = default!;
+    [Dependency] private UserInterfaceSystem _userInterfaceSystem = default!;
+    [Dependency] private DeviceNetworkSystem _deviceNetwork = default!;
 
     /// Keys for the device network. See <see cref="DeviceNetworkConstants"/> for further examples.
     public const string CmdSetArmamemtState = "set_armament_state";

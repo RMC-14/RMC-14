@@ -24,13 +24,13 @@ namespace Content.Server.Body.Systems
     /// <inheritdoc/>
     public sealed class MetabolizerSystem : SharedMetabolizerSystem
     {
-        [Dependency] private readonly IGameTiming _gameTiming = default!;
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-        [Dependency] private readonly IRobustRandom _random = default!;
-        [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-        [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
-        [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
-        [Dependency] private readonly CMStasisBagSystem _cmStasisBag = default!;
+        [Dependency] private IGameTiming _gameTiming = default!;
+        [Dependency] private IPrototypeManager _prototypeManager = default!;
+        [Dependency] private IRobustRandom _random = default!;
+        [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+        [Dependency] private MobStateSystem _mobStateSystem = default!;
+        [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
+        [Dependency] private CMStasisBagSystem _cmStasisBag = default!;
 
         private EntityQuery<OrganComponent> _organQuery;
         private EntityQuery<SolutionContainerManagerComponent> _solutionQuery;

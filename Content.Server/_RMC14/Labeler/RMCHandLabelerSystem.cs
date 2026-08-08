@@ -7,9 +7,9 @@ namespace Content.Server._RMC14.Labeler;
 
 public sealed class RMCHandLabelerSystem : SharedRMCHandLabelerSystem
 {
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     public override void Initialize()
     {

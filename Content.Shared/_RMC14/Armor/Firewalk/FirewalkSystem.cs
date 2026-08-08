@@ -11,12 +11,12 @@ namespace Content.Shared._RMC14.Armor.Firewalk;
 
 public sealed class FirewalkSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAuraSystem _aura = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private SharedAuraSystem _aura = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private INetManager _net = default!;
 
     private EntityQuery<FirewalkArmorComponent> _firewalkArmorQuery;
 

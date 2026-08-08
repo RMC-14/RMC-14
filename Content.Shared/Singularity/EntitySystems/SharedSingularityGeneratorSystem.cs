@@ -11,7 +11,7 @@ public abstract class SharedSingularityGeneratorSystem : EntitySystem
 {
     #region Dependencies
     [Dependency] protected readonly SharedPopupSystem PopupSystem = default!;
-    [Dependency] private readonly EmagSystem _emag = default!;
+    [Dependency] private EmagSystem _emag = default!;
     #endregion Dependencies
 
     public override void Initialize()

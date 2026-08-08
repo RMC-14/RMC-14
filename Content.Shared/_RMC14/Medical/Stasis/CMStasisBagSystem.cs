@@ -13,12 +13,12 @@ namespace Content.Shared._RMC14.Medical.Stasis;
 
 public sealed class CMStasisBagSystem : EntitySystem
 {
-    [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly MobStateSystem _mobstate = default!;
-    [Dependency] private readonly SharedEntityStorageSystem _entStorage = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private SharedXenoParasiteSystem _parasite = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private MobStateSystem _mobstate = default!;
+    [Dependency] private SharedEntityStorageSystem _entStorage = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private INetManager _net = default!;
 
     private EntityQuery<OrganComponent> _organQuery;
 

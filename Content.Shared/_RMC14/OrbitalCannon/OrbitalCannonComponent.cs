@@ -8,7 +8,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.OrbitalCannon;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), AutoGenerateComponentPause]
 [Access(typeof(OrbitalCannonSystem))]
 public sealed partial class OrbitalCannonComponent : Component
 {
@@ -109,7 +109,7 @@ public sealed partial class OrbitalCannonComponent : Component
 
 [DataRecord]
 [Serializable, NetSerializable]
-public readonly record struct WarheadFuelRequirement(EntProtoId<OrbitalCannonWarheadComponent> Warhead, int Fuel);
+public readonly partial record struct WarheadFuelRequirement(EntProtoId<OrbitalCannonWarheadComponent> Warhead, int Fuel);
 
 [Serializable, NetSerializable]
 public enum OrbitalCannonStatus

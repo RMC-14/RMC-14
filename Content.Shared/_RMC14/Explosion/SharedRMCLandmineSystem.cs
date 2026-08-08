@@ -27,17 +27,17 @@ public abstract partial class SharedRMCLandmineSystem : EntitySystem
 {
     [Dependency] protected readonly GunIFFSystem GunIff = default!;
 
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly CollisionWakeSystem _collisionWake = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedToolSystem _tool = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private CollisionWakeSystem _collisionWake = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedToolSystem _tool = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private RMCMapSystem _rmcMap = default!;
 
     public override void Initialize()
     {

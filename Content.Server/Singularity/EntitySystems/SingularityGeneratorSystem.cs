@@ -13,11 +13,11 @@ namespace Content.Server.Singularity.EntitySystems;
 public sealed class SingularityGeneratorSystem : SharedSingularityGeneratorSystem
 {
     #region Dependencies
-    [Dependency] private readonly IViewVariablesManager _vvm = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly PhysicsSystem _physics = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly MetaDataSystem _metadata = default!;
+    [Dependency] private IViewVariablesManager _vvm = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private PhysicsSystem _physics = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private MetaDataSystem _metadata = default!;
     #endregion Dependencies
 
     public override void Initialize()

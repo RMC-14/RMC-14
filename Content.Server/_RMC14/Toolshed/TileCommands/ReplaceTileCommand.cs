@@ -16,7 +16,7 @@ namespace Content.Server._RMC14.Toolshed.TileCommands;
 [ToolshedCommand, AdminCommand(AdminFlags.Query)]
 internal sealed class ReplaceTileCommand : ToolshedCommand
 {
-    [Dependency] private readonly ITileDefinitionManager _tileDefinition = default!;
+    [Dependency] private ITileDefinitionManager _tileDefinition = default!;
     private MapSystem? _mapSys;
 
     [CommandImplementation("FromProtoId")]

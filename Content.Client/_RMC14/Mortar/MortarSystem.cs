@@ -6,7 +6,7 @@ namespace Content.Client._RMC14.Mortar;
 
 public sealed class MortarSystem : SharedMortarSystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _animation = default!;
+    [Dependency] private AnimationPlayerSystem _animation = default!;
 
     private const string AnimationKey = "rmc_mortar_fire";
 

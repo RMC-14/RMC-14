@@ -10,7 +10,7 @@ namespace Content.Server.Atmos.Commands
     [AdminCommand(AdminFlags.Debug)]
     public sealed class DeleteGasCommand : IConsoleCommand
     {
-        [Dependency] private readonly IEntityManager _entManager = default!;
+        [Dependency] private IEntityManager _entManager = default!;
 
         public string Command => "deletegas";
         public string Description => "Removes all gases from a grid, or just of one type if specified.";

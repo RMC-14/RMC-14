@@ -11,7 +11,7 @@ namespace Content.Server.Examine
     [UsedImplicitly]
     public sealed class ExamineSystem : ExamineSystemShared
     {
-        [Dependency] private readonly VerbSystem _verbSystem = default!;
+        [Dependency] private VerbSystem _verbSystem = default!;
 
         private readonly FormattedMessage _entityNotFoundMessage = new();
         private readonly FormattedMessage _entityOutOfRangeMessage = new();

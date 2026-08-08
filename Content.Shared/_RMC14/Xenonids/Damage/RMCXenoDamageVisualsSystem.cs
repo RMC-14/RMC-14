@@ -7,8 +7,8 @@ namespace Content.Shared._RMC14.Xenonids.Damage;
 
 public sealed class RMCXenoDamageVisualsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly MobThresholdSystem _thresholds = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private MobThresholdSystem _thresholds = default!;
 
     private EntityQuery<MobThresholdsComponent> _mobThresholdsQuery;
 

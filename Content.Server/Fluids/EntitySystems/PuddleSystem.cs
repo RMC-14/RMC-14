@@ -40,23 +40,23 @@ namespace Content.Server.Fluids.EntitySystems;
 /// </summary>
 public sealed partial class PuddleSystem : SharedPuddleSystem
 {
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly ReactiveSystem _reactive = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
-    [Dependency] private readonly SharedPopupSystem _popups = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
-    [Dependency] private readonly StepTriggerSystem _stepTrigger = default!;
-    [Dependency] private readonly SpeedModifierContactsSystem _speedModContacts = default!;
-    [Dependency] private readonly TileFrictionController _tile = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private ReactiveSystem _reactive = default!;
+    [Dependency] private SharedColorFlashEffectSystem _color = default!;
+    [Dependency] private SharedPopupSystem _popups = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
+    [Dependency] private StepTriggerSystem _stepTrigger = default!;
+    [Dependency] private SpeedModifierContactsSystem _speedModContacts = default!;
+    [Dependency] private TileFrictionController _tile = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private TurfSystem _turf = default!;
 
     // Using local deletion queue instead of the standard queue so that we can easily "undelete" if a puddle
     // loses & then gains reagents in a single tick.

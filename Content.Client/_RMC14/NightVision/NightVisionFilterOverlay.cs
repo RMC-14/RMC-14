@@ -8,9 +8,9 @@ namespace Content.Client._RMC14.NightVision;
 
 public sealed class NightVisionFilterOverlay : Overlay
 {
-    [Dependency] private readonly IEntityManager _entity = default!;
-    [Dependency] private readonly IPlayerManager _players = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private IEntityManager _entity = default!;
+    [Dependency] private IPlayerManager _players = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
 
     private static readonly ProtoId<ShaderPrototype> ShaderId = "RMCNightVision";
 

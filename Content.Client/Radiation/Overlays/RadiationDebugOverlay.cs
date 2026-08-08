@@ -10,7 +10,7 @@ namespace Content.Client.Radiation.Overlays;
 
 public sealed class RadiationDebugOverlay : Overlay
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
     private readonly SharedMapSystem _mapSystem;
     private readonly RadiationSystem _radiation;
 

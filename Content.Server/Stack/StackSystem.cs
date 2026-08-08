@@ -14,7 +14,7 @@ namespace Content.Server.Stack
     [UsedImplicitly]
     public sealed class StackSystem : SharedStackSystem
     {
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+        [Dependency] private IPrototypeManager _prototypeManager = default!;
 
         public static readonly int[] DefaultSplitAmounts = { 1, 5, 10, 20, 30, 50 };
 

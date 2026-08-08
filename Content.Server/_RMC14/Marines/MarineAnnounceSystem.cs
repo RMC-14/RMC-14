@@ -23,15 +23,15 @@ namespace Content.Server._RMC14.Marines;
 
 public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
 {
-    [Dependency] private readonly IAdminLogManager _adminLogs = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly ARESCoreSystem _core = default!;
-    [Dependency] private readonly CMDistressSignalRuleSystem _distressSignal = default!;
-    [Dependency] private readonly SharedDropshipSystem _dropship = default!;
-    [Dependency] private readonly RadioSystem _radio = default!;
-    [Dependency] private readonly SquadSystem _squad = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private IAdminLogManager _adminLogs = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private ARESCoreSystem _core = default!;
+    [Dependency] private CMDistressSignalRuleSystem _distressSignal = default!;
+    [Dependency] private SharedDropshipSystem _dropship = default!;
+    [Dependency] private RadioSystem _radio = default!;
+    [Dependency] private SquadSystem _squad = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabAnnouncementLogs";
 

@@ -6,7 +6,7 @@ namespace Content.Shared._RMC14.Vehicle;
 
 public sealed class VehicleXenoPushIgnoreSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
     {

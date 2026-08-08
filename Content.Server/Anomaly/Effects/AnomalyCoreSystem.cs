@@ -9,7 +9,7 @@ namespace Content.Server.Anomaly.Effects;
 /// </summary>
 public sealed class AnomalyCoreSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
 
     public override void Initialize()
     {

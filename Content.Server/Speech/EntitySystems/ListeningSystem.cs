@@ -10,7 +10,7 @@ namespace Content.Server.Speech.EntitySystems;
 /// </summary>
 public sealed class ListeningSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _xforms = default!;
+    [Dependency] private SharedTransformSystem _xforms = default!;
 
     public override void Initialize()
     {

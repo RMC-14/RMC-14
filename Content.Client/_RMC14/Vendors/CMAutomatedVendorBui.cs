@@ -24,9 +24,9 @@ namespace Content.Client._RMC14.Vendors;
 [UsedImplicitly]
 public sealed class CMAutomatedVendorBui : BoundUserInterface
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IResourceCache _resource = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IResourceCache _resource = default!;
 
     private readonly SharedJobSystem _job;
     private readonly SharedMindSystem _mind;

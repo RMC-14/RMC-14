@@ -11,9 +11,9 @@ namespace Content.Server.Worldgen.Systems.Biomes;
 /// </summary>
 public sealed class BiomeSelectionSystem : BaseWorldSystem
 {
-    [Dependency] private readonly NoiseIndexSystem _noiseIdx = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly ISerializationManager _ser = default!;
+    [Dependency] private NoiseIndexSystem _noiseIdx = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private ISerializationManager _ser = default!;
 
     /// <inheritdoc />
     public override void Initialize()
