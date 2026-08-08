@@ -15,4 +15,7 @@ public sealed partial class ClothingRequireEquippedComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool AutoUnequip = false;
+
+    [DataField, AutoNetworkedField]
+    public bool HandsValid;
 }
