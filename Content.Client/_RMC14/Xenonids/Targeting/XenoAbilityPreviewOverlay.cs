@@ -37,6 +37,11 @@ using Robust.Shared.Maths;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
+using Content.Shared._RMC14.Xenonids.ScissorCut;
+using Robust.Shared.Utility;
+using Content.Shared._RMC14.Xenonids.HighGallop;
+using Content.Shared._RMC14.Xenonids.Tail_Lash;
+using Content.Shared._RMC14.Xenonids.Flurry;
 
 namespace Content.Client._RMC14.Xenonids.Targeting;
 
@@ -54,6 +59,10 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     private static readonly Color BlockerOutlineColor = new Color(0.65f, 0.65f, 0.65f);
     private static readonly Color AcidMineOutlineColor = new Color(0.6f, 0.9f, 0.2f);
     private static readonly Color DeployTrapsOutlineColor = new Color(0.8f, 0.6f, 0.2f);
+    private static readonly Color ScissorsOutlineColor = new Color(1f, 0f, 0f);
+    private static readonly Color HighGallopOutlineColor = new Color(0.5f, 0f, 0.5f);
+    private static readonly Color TailLashOutlineColor = new Color(0.8f, 0.67f, 0.28f);
+    private static readonly Color FlurryOutlineColor = new Color(1f, 0f, 0f);
 
     private const float OutlineAlpha = 0.8f;
     private const float OutlineThickness = 0.1f;
@@ -86,6 +95,10 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     private readonly EntityQuery<XenoWeedsComponent> _weedsQ;
     private readonly EntityQuery<XenoAbductComponent> _abductQ;
     private readonly EntityQuery<XenoPierceComponent> _pierceQ;
+    private readonly EntityQuery<XenoScissorCutComponent> _scissorsQ;
+    private readonly EntityQuery<XenoHighGallopComponent> _highGallopQ;
+    private readonly EntityQuery<XenoTailLashComponent> _tailLashQ;
+    private readonly EntityQuery<XenoFlurryComponent> _flurryQ;
     private readonly EntityQuery<TransformComponent> _xformQ;
 
     public XenoAbilityPreviewOverlay(IEntityManager ents)
@@ -117,6 +130,10 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         _weedsQ = ents.GetEntityQuery<XenoWeedsComponent>();
         _abductQ = ents.GetEntityQuery<XenoAbductComponent>();
         _pierceQ = ents.GetEntityQuery<XenoPierceComponent>();
+        _scissorsQ = ents.GetEntityQuery<XenoScissorCutComponent>();
+        _highGallopQ = ents.GetEntityQuery<XenoHighGallopComponent>();
+        _tailLashQ = ents.GetEntityQuery<XenoTailLashComponent>();
+        _flurryQ = ents.GetEntityQuery<XenoFlurryComponent>();
         _xformQ = ents.GetEntityQuery<TransformComponent>();
     }
 
@@ -218,6 +235,30 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
                 if (!_pierceQ.TryComp(player.Value, out var pierce))
                     return;
                 DrawPierce(args, player.Value, xform, originMap, mousePos, pierce);
+                break;
+
+            case XenoScissorCutActionEvent:
+                if (!_scissorsQ.TryComp(player.Value, out var scissors))
+                    return;
+                DrawScissors(args, player.Value, xform, originMap, mousePos, scissors);
+                break;
+
+            case XenoHighGallopActionEvent:
+                if (!_highGallopQ.TryComp(player.Value, out var highGallop))
+                    return;
+                DrawHighGallop(args, player.Value, xform, originMap, mousePos, highGallop);
+                break;
+
+            case XenoTailLashActionEvent:
+                if (!_tailLashQ.TryComp(player.Value, out var tailLash))
+                    return;
+                DrawTailLash(args, player.Value, xform, originMap, mousePos, tailLash);
+                break;
+
+            case XenoFlurryActionEvent:
+                if (!_flurryQ.TryComp(player.Value, out var flurry))
+                    return;
+                DrawFlurry(args, player.Value, xform, originMap, mousePos, flurry);
                 break;
         }
     }
@@ -474,7 +515,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
             mousePos = originMap.Offset(direction.Normalized() * range);
 
         var color = BurrowOutlineColor.WithAlpha(OutlineAlpha);
-        DrawLandingTile(args, mousePos, color);
+        DrawLandingSquare(args, mousePos, color);
     }
 
     private static bool IsBurrowed(XenoBurrowComponent burrow)
@@ -520,6 +561,70 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
 
         range = targetAction.Range;
         return true;
+    }
+
+    private void DrawScissors(
+        in OverlayDrawArgs args,
+        EntityUid player,
+        TransformComponent xform,
+        MapCoordinates originMap,
+        MapCoordinates mousePos,
+        XenoScissorCutComponent scissors)
+    {
+        var direction = (mousePos.Position - originMap.Position).ToAngle() - Angle.FromDegrees(90);
+
+        var color = ScissorsOutlineColor.WithAlpha(OutlineAlpha);
+        var box2 = Box2.CenteredAround(xform.Coordinates.Position, new(1, scissors.Range)).Translated(new(0, (scissors.Range / 2) + 0.5f));
+        var rot = new Box2Rotated(box2, direction, xform.Coordinates.Position);
+        DrawBorderFromBox2Rotated(args, rot, color);
+    }
+
+    private void DrawHighGallop(
+        in OverlayDrawArgs args,
+        EntityUid player,
+        TransformComponent xform,
+        MapCoordinates originMap,
+        MapCoordinates mousePos,
+        XenoHighGallopComponent gallop)
+    {
+        var direction = (mousePos.Position - originMap.Position).ToAngle() - Angle.FromDegrees(90);
+
+        var color = HighGallopOutlineColor.WithAlpha(OutlineAlpha);
+        var box2 = Box2.CenteredAround(xform.Coordinates.Position, new(gallop.Width, gallop.Height)).Translated(new(0, (gallop.Height / 2) + 0.5f));
+        var rot = new Box2Rotated(box2, direction, xform.Coordinates.Position);
+        DrawBorderFromBox2Rotated(args, rot, color);
+    }
+
+    private void DrawTailLash(
+        in OverlayDrawArgs args,
+        EntityUid player,
+        TransformComponent xform,
+        MapCoordinates originMap,
+        MapCoordinates mousePos,
+        XenoTailLashComponent lash)
+    {
+        var direction = (mousePos.Position - originMap.Position).ToAngle() - Angle.FromDegrees(90);
+
+        var color = TailLashOutlineColor.WithAlpha(OutlineAlpha);
+        var box2 = Box2.CenteredAround(xform.Coordinates.Position, new(lash.Width, lash.Height)).Translated(new(0, (lash.Height / 2) + 0.5f));
+        var rot = new Box2Rotated(box2, direction, xform.Coordinates.Position);
+        DrawBorderFromBox2Rotated(args, rot, color);
+    }
+
+    private void DrawFlurry(
+        in OverlayDrawArgs args,
+        EntityUid player,
+        TransformComponent xform,
+        MapCoordinates originMap,
+        MapCoordinates mousePos,
+        XenoFlurryComponent flurry)
+    {
+        var direction = (mousePos.Position - originMap.Position).ToAngle() - Angle.FromDegrees(90);
+
+        var color = FlurryOutlineColor.WithAlpha(OutlineAlpha);
+        var box2 = Box2.CenteredAround(xform.Coordinates.Position, new(flurry.Range, 1)).Translated(new(0, 1f));
+        var rot = new Box2Rotated(box2, direction, xform.Coordinates.Position);
+        DrawBorderFromBox2Rotated(args, rot, color);
     }
 
     private void DrawLinePreview(
@@ -570,14 +675,26 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         }
     }
 
-    private void DrawLandingTile(in OverlayDrawArgs args, MapCoordinates target, Color color)
+    private void DrawBorderFromBox2Rotated(in OverlayDrawArgs args, Box2Rotated box, Color color)
+    {
+        var vertices = new HashSet<Vector2>
+        {
+            box.BottomLeft,
+            box.BottomRight,
+            box.TopRight,
+            box.TopLeft
+        };
+
+        DrawPolygonBorder(args.WorldHandle, vertices, color);
+    }
+
+    private void DrawLandingSquare(in OverlayDrawArgs args, MapCoordinates target, Color color)
     {
         if (!_mapManager.TryFindGridAt(target, out var gridUid, out var grid))
             return;
 
-        var indices = _mapSystem.CoordinatesToTile(gridUid, grid, target);
-        var tiles = new HashSet<Vector2i> { indices };
-        DrawTileBorder(args.WorldHandle, gridUid, grid, tiles, color);
+        var box = Box2.CenteredAround(target.Position, Vector2.One);
+        DrawBorderFromBox2Rotated(args, new Box2Rotated(box), color);
     }
 
     private bool TryGetResinSurgeDirectTarget(MapCoordinates mousePos, out TileInfo target)
@@ -708,6 +825,33 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         }
     }
 
+    private void DrawPolygonBorder(DrawingHandleWorld handle, HashSet<Vector2> vertices, Color color)
+    {
+        if (vertices.Count == 0)
+            return;
+
+        var isFirst = true;
+        Vector2? first = vertices.FirstOrNull();
+        Vector2? previous = first;
+
+        foreach (var vertex in vertices)
+        {
+            if (isFirst)
+            {
+                isFirst = false;
+                continue;
+            }
+
+            if (previous != null)
+                DrawEdge(handle, previous.Value, vertex, color);
+
+            previous = vertex;
+        }
+
+        if (previous != null && first != null)
+            DrawEdge(handle, previous.Value, first.Value, color);
+    }
+
     private int GetBombardRadius(EntProtoId projectile)
     {
         if (!_prototypes.TryIndex<EntityPrototype>(projectile, out var projectileProto))
@@ -834,7 +978,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
 
         var length = delta.Length();
         var mid = (from + to) * 0.5f;
-        var angle = delta.ToWorldAngle();
+        var angle = delta.ToAngle();
         var rect = new Box2(-length / 2f, -half, length / 2f, half);
         var rotated = new Box2Rotated(rect.Translated(mid), angle, mid);
         handle.DrawRect(rotated, color);
