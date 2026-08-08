@@ -110,21 +110,55 @@
   name: Trainee Personal Protection Officer
   prefix: TPPO.
   paygrade: WY-SEC-1
+  jobIcon: RMCJobIconExecutiveBodyguardTPPO
 
 - type: rank
   id: RMCRankWeYaBodyguardPPO
   name: Personal Protection Officer
   prefix: PPO.
   paygrade: WY-SEC-2
+  jobIcon: RMCJobIconExecutiveBodyguard
 
 - type: rank
   id: RMCRankWeYaBodyguardPPS
   name: Personal Protection Specialist
   prefix: PPS.
   paygrade: WY-SEC-3
+  jobIcon: RMCJobIconExecutiveBodyguardPPS
 
 - type: rank
   id: RMCRankWeYaBodyguardPPC
   name: Personal Protection Coordinator
   prefix: PPC.
   paygrade: WY-SEC-4
+  jobIcon: RMCJobIconExecutiveBodyguardPPC
+
+# Corporate Liaison
+
+- type: rank
+  id: RMCRankWeYaLiaisonJuniorExecutive
+  name: Junior Executive
+  prefix: Jr. Exec.
+  paygrade: WYC2
+  jobIcon: RMCJobIconExecJunior
+
+- type: rank
+  id: RMCRankWeYaLiaisonExecutive
+  name: Executive
+  prefix: Exec.
+  paygrade: WYC3
+  jobIcon: CMJobIconLiaison
+
+- type: rank
+  id: RMCRankWeYaLiaisonSeniorExecutive
+  name: Senior Executive
+  prefix: Sr. Exec.
+  paygrade: WYC4
+  jobIcon: RMCJobIconExecSenior
+
+- type: rank
+  id: RMCRankWeYaLiaisonExecutiveSpecialist
+  name: Executive Specialist
+  prefix: Exec. Spc.
+  paygrade: WYC5
+  jobIcon: CMJobIconExecSpec

@@ -21,6 +21,27 @@
 
 - type: jobIcon
   parent: CMJobIconBase
+  id: RMCJobIconExecutiveBodyguardPPC
+  icon:
+    sprite: _RMC14/Interface/job_icons/We-Ya/executive_bodyguard.rsi
+    state: weya_bodyguard_ppc
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconExecutiveBodyguardPPS
+  icon:
+    sprite: _RMC14/Interface/job_icons/We-Ya/executive_bodyguard.rsi
+    state: weya_bodyguard_pps
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconExecutiveBodyguardTPPO
+  icon:
+    sprite: _RMC14/Interface/job_icons/We-Ya/executive_bodyguard.rsi
+    state: weya_bodyguard_tppo
+
+- type: jobIcon
+  parent: CMJobIconBase
   id: RMCJobIconSynth
   icon:
     sprite: _RMC14/Interface/job_icons/UNMC/other.rsi
@@ -82,6 +103,20 @@
     state: hc_exec
 
 # WEYA Job Icons
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconExecJunior
+  icon:
+    sprite: _RMC14/Interface/job_icons/We-Ya/liaison_ranks.rsi
+    state: weya_jrexec
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconExecSenior
+  icon:
+    sprite: _RMC14/Interface/job_icons/We-Ya/liaison_ranks.rsi
+    state: weya_seniorexec
+
 - type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconExecSpec
