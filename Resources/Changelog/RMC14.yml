@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: Dygon
   changes:
-  - message: Being mounted to a door gun HMG while the dropship lifts off no longer
-      makes you fall to the planet.
-    type: Fix
-  id: 3058
-  time: '2026-04-03T09:20:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9452
-- author: Dygon
-  changes:
   - message: Increased the initial item size of the ML66D mount component from small
       to normal.
     type: Fix
@@ -4574,5 +4566,13 @@
   id: 3557
   time: '2026-08-08T03:08:21.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9888
+- author: ThataKat
+  changes:
+  - message: '[PVE] Marines of the SPP''s 17th Vega Naval Infantry now properly speak
+      Russian and Chinese (and not English), as do the Party''s Political Kommissars.'
+    type: Tweak
+  id: 3558
+  time: '2026-08-08T03:13:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10670
 Name: RMC14
 Order: -1
