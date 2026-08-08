@@ -525,6 +525,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCMarineEquipmentPreviews =
         CVarDef.Create("rmc.marine_equipment_previews", true, CVar.CLIENTONLY | CVar.ARCHIVE);
 
+    public static readonly CVarDef<int> RMCNightVisionColor =
+        CVarDef.Create("rmc.night_vision_color", (int) NightVisionColor.Green, CVar.CLIENTONLY | CVar.ARCHIVE);
+
     public static readonly CVarDef<int> RMCXenoDefaultNightVision =
         CVarDef.Create("rmc.xeno_default_night_vision", (int) NightVisionState.Half, CVar.CLIENT | CVar.ARCHIVE | CVar.REPLICATED);
 
