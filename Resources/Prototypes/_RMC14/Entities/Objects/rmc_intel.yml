@@ -269,6 +269,29 @@
   - type: IntelDataTerminalCandidate
 
 - type: entity
+  parent: RMCCommunicationsConsoleBase
+  id: RMCComputerIntelDatabase
+  name: Intel Database computer
+  description: An UNMC Intel Computer used for consulting the current intel database.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: terminal1_old
+    layers: []
+  - type: InteractionOutline
+  - type: ActivatableUI
+    key: enum.ViewIntelObjectivesUI.Key
+  - type: UserInterface
+    interfaces:
+      enum.ViewIntelObjectivesUI.Key:
+        type: ViewIntelObjectivesBui
+  - type: ViewIntelObjectives
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
+
+- type: entity
   id: RMCIntelTechTree
   name: intel tech tree
   categories: [ HideSpawnMenu ]
