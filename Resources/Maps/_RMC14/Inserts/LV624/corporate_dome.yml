@@ -396,7 +396,7 @@ entities:
     - type: Transform
       pos: 21.4966,13.535567
       parent: 1
-- proto: CMMagazineSMGMP5
+- proto: RMCMagazineSMGPCAC5
   entities:
   - uid: 63
     components:
@@ -2300,7 +2300,7 @@ entities:
     - type: Transform
       pos: 4.004206,11.3985815
       parent: 1
-- proto: WeaponSMGMP5
+- proto: RMCWeaponSMGPCAC5A4
   entities:
   - uid: 72
     components:

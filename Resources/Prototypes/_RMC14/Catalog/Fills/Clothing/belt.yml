@@ -260,12 +260,12 @@
 
 - type: entity
   parent: CMBeltMarine
-  id: CMBeltMarineMP5
-  suffix: Filled, MP5
+  id: RMCBeltMarinePCAC5
+  suffix: Filled, PCAC5
   components:
   - type: StorageFill
     contents:
-    - id: CMMagazineSMGMP5
+    - id: RMCMagazineSMGPCAC5
       amount: 5
 
 - type: entity
