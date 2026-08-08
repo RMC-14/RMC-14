@@ -175,7 +175,7 @@
 
 - files: ["gun_shotgun_small.ogg"]
   license: "CC-BY-SA-3.0"
-  copyright: "Taken from cmss13"
+  copyright: "Taken from cmss13. Modified by kleinerstation13 (Github)"
   source: "https://github.com/cmss13-devs/cmss13/blob/32730c731936c6737668ead7bde83a6cf296010f/sound/weapons/gun_shotgun_small.ogg"
 
 - files: ["gun_cmb_1.ogg"]
@@ -333,7 +333,7 @@
   copyright: "Taken from Pixabay and modified by kleinerstation13 (Github) (content license at https://pixabay.com/service/license-summary/)"
   source: "https://pixabay.com/sound-effects/film-special-effects-9mm-pistol-shoot-short-reverb-7152/"
 
-- files: [ "gun_shotgun_automatic.ogg" ]
+- files: [ "gun_shotgun_automatic.ogg", "gun_shotgun_small_alt.ogg" ]
   license: "CC-BY-SA-3.0"
-  copyright: "Taken from cmss13"
+  copyright: "Taken from cmss13. gun_shotgun_small_alt modified from gun_shotgun_automatic by kleinerstation13 (Github)"
   source: "https://github.com/cmss13-devs/cmss13/blob/07455a5f3986b610e7ccdc3096cad1d914fca2f9/sound/weapons/gun_shotgun_automatic.ogg"
