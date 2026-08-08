@@ -56,7 +56,12 @@ namespace Content.Client.Paper.UI
             typeof(MonoTag),
             typeof(FormTagHandler),
             typeof(SignatureTagHandler),
-            typeof(CheckTagHandler)
+            typeof(CheckTagHandler),
+            typeof(DateTimeTagHandler),
+            typeof(TimeTagHandler),
+            typeof(OperationTagHandler),
+            typeof(PlanetTagHandler),
+            typeof(ShipTagHandler)
         };
 
         public event Action<string>? OnSaved;
@@ -270,6 +275,7 @@ namespace Content.Client.Paper.UI
             _currentState = state;
             _currentRawText = state.Text;
             var isEditing = state.Mode == PaperComponent.PaperAction.Write;
+            var wasEditing = InputContainer.Visible;
 
             // Show/hide UI elements based on edit mode
             InputContainer.Visible = isEditing;
@@ -280,13 +286,10 @@ namespace Content.Client.Paper.UI
 
             if (isEditing)
             {
-                // Reset margin to original when editing (no tag buttons visible)
                 PaperContent.Margin = _originalContentMargin;
 
-                // Initialize the text input field with server content if it's currently empty
-                // This allows editing existing documents while preserving any text the user has already typed
-                var shouldCopy = Input.TextLength == 0 && state.Text.Length > 0;
-                if (shouldCopy)
+                var shouldCopyText = Input.TextLength == 0 && state.Text.Length > 0;
+                if (!wasEditing || shouldCopyText)
                 {
                     // We can get repeated messages with state.Mode == Write if another
                     // player opens the UI for reading. In this case, don't update the
