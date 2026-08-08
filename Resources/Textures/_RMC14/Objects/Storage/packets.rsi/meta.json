@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/789a362bc55d2d6331bc89699bb4f9f792695853/icons/obj/items/storage/packets.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/789a362bc55d2d6331bc89699bb4f9f792695853/icons/obj/items/storage/packets.dmi. spp and rcm packets by kleinerstation13",
   "size": {
     "x": 32,
     "y": 32
@@ -210,6 +210,30 @@
     },
     {
       "name": "mfhs_packet_e"
+    },
+    {
+      "name": "rcmhe_packet"
+    },
+    {
+      "name": "rcmhe_packet_e"
+    },
+    {
+      "name": "rcmhi_packet"
+    },
+    {
+      "name": "rcmhi_packet_e"
+    },
+    {
+      "name": "spphf_packet"
+    },
+    {
+      "name": "spphf_packet_e"
+    },
+    {
+      "name": "sppwp_packet"
+    },
+    {
+      "name": "sppwp_packet_e"
     }
   ]
 }

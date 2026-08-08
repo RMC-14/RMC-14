@@ -534,8 +534,79 @@
   - type: Sprite
     state: shrapnel_bright2
 
+# RCM Grenades
+- type: entity
+  parent: CMGrenadeHighExplosive
+  id: CMGrenadeHighExplosiveRCM
+  name: L115A1 HEDP grenade
+  suffix: RCM
+  description: High-Explosive Dual-Purpose. A small, but deceptively strong blast grenade that has recently been added to the arsenal of the RCM.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/rcmhedp.rsi
+  - type: Explosive
+    maxIntensity: 25 # 30 more explosion power, 5 more falloff range than HEDP in CM
+    intensitySlope: 6
+    totalIntensity: 250
+    canCreateVacuum: false
+  - type: Tag
+    tags:
+    - Grenade
+    - LauncherCompatibleGrenade
+    - RMCGrenadeM40
+    - RMCGrenadeHEDPRCM
+
+- type: entity
+  parent: RMCGrenadeIncendiary
+  id: RMCGrenadeIncendiaryRCM
+  name: L117A1 HIDP grenade
+  suffix: RCM
+  description: The L117A1 HIDP is a small, but deceptively strong incendiary grenade designed to rapidly clear areas with fast-acting potent fire. It is set to detonate in 4 seconds.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/rcmhidp.rsi
+  - type: TileFireOnTrigger
+    spawn: RMCTileFire
+    duration: 10
+    range: 2
+    intensity: 45
+    sound:
+      collection: RMCFlamerColonyShoot
+
+# SPP Grenades
+- type: entity
+  parent: RMCGrenadeWhitePhosphorus
+  id: RMCGrenadeWhitePhosphorusSPP
+  name: Type 8 WP grenade
+  suffix: SPP
+  description: A deadly gas grenade found within the ranks of the SPP. Designed to spill white phosphorus on the target. It explodes 2 seconds after the pin has been pulled.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/type8wpdp.rsi
+
+- type: entity
+  parent: CMGrenadeFragOld
+  id: CMGrenadeFragSPP
+  name: Type 6 shrapnel grenade
+  description: A fragmentation grenade found within the ranks of the SPP. Designed to explode into shrapnel and rupture the bodies of opponents. It explodes 3 seconds after the pin has been pulled.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/type6shrapnel.rsi
+  - type: Explosive
+    maxIntensity: 20
+    intensitySlope: 6
+    totalIntensity: 120
+    deleteAfterExplosion: false
+  - type: ProjectileGrenade
+    capacity: 56
+  - type: OnUseTimerTrigger
+    delay: 3
+
 - type: Tag
   id: RMCGrenadeHEDP
+
+- type: Tag
+  id: RMCGrenadeHEDPRCM
 
 - type: Tag
   id: RMCGrenadeHEFA
