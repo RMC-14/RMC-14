@@ -133,6 +133,11 @@
   parent: CMXenoRunnerBase
   id: CMXenoRunner
   components:
+  - type: RMCKeybindActions
+    actions:
+      XenoPrimaryOne: [ ActionXenoLeap ]
+      XenoPrimaryTwo: [ ActionXenoBoneChips ]
+      XenoPrimaryThree: [ ActionXenoZoom ]
   - type: GuideHelp
     guides:
     - RMCGuideRoleRunner
@@ -173,6 +178,10 @@
   id: RMCXenoRunnerAcider
   suffix: Acider
   components:
+  - type: RMCKeybindActions
+    actions:
+      XenoPrimaryOne: [ ActionXenoAcidAcider ]
+      XenoPrimaryTwo: [ ActionXenoForTheHive ]
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Runner/acider_runner.rsi
     layers:
