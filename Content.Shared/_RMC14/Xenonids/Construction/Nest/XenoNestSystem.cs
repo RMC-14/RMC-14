@@ -263,7 +263,7 @@ public sealed class XenoNestSystem : EntitySystem
 
         // TODO RMC14 make a method to do this
         var selfMessage = Loc.GetString("cm-xeno-nest-securing-self", ("target", Identity.Name(victim, EntityManager, args.User)));
-        _popup.PopupClient(selfMessage, args.User, args.User);
+        _popup.PopupEntity(selfMessage, args.User, args.User);
 
         var others = Filter.PvsExcept(args.User).Recipients;
         foreach (var other in others)
