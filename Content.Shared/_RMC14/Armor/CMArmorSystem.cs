@@ -414,7 +414,8 @@ public sealed class CMArmorSystem : EntitySystem
             return;
 
         var resist = Math.Pow(1.1, armor / 5.0);
-        var types = _prototypes.Index(group).DamageTypes;
+        var damGroup = _prototypes.Index(group);
+        var types = damGroup.DamageTypes;
 
         foreach (var type in types)
         {
@@ -425,7 +426,7 @@ public sealed class CMArmorSystem : EntitySystem
             }
         }
 
-        var newDamage = damage.GetTotal();
+        var newDamage = damage.TryGetDamageInGroup(damGroup, out var damTotal) ? damTotal : damage.GetTotal();
         if (newDamage != FixedPoint2.Zero && newDamage < armor * 2)
         {
 
