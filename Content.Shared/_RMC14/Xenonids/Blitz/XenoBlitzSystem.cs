@@ -105,7 +105,7 @@ public sealed class XenoBlitzSystem : EntitySystem
 
         var session = CompOrNull<ActorComponent>(xeno)?.PlayerSession;
 
-        foreach (var hit in _lookup.GetEntitiesInRange<MobStateComponent>(_transform.GetMapCoordinates(xeno), xeno.Comp.Range + xeno.Comp.LagCompensationLookupMargin, LookupFlags.Dynamic | LookupFlags.Approximate))
+        foreach (var hit in _lookup.GetEntitiesInRange<MobStateComponent>(_transform.GetMapCoordinates(xeno), xeno.Comp.Range + xeno.Comp.LagCompensationLookupMargin, LookupFlags.Dynamic | LookupFlags.Static | LookupFlags.Approximate))
         {
             if (!_xeno.CanAbilityAttackTarget(xeno, hit))
                 continue;
