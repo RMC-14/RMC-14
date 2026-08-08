@@ -41,6 +41,27 @@ marking-FeroxiSnoutNurseCountershading-feroxi-snout = Base Snout
 marking-FeroxiSnoutNurseCountershading-feroxi-snout-countershading = Countershading
 marking-FeroxiSnoutNurseCountershading-feroxi-snout-nurse = Barbels
 
+marking-FeroxiSnoutBullRound = Round Bull Snout
+marking-FeroxiSnoutBullRound-feroxi-bull-round = Base Snout
+
+marking-FeroxiSnoutBullSharp = Sharp Bull Snout
+marking-FeroxiSnoutBullSharp-feroxi-bull-sharp = Base Snout
+
+marking-FeroxiSnoutGoblin = Goblin Snout
+marking-FeroxiSnoutGoblin-feroxi-goblin = Base Snout
+
+marking-FeroxiSnoutGreatWhiteRound = Round Great White Snout
+marking-FeroxiSnoutGreatWhiteRound-feroxi-great-white-round = Base Snout
+
+marking-FeroxiSnoutGreatWhiteSharp = Sharp Great White Snout
+marking-FeroxiSnoutGreatWhiteSharp-feroxi-great-white-sharp = Base Snout
+
+marking-FeroxiSnoutMako = Mako Snout
+marking-FeroxiSnoutMako-feroxi-mako = Base Snout
+
+marking-FeroxiSnoutLeopard = Leopard Snout
+marking-FeroxiSnoutLeopard-feroxi-leopard = Base Snout
+
 marking-FeroxiTailBlitz = Striped Tail with Fin Tips and Dorsal
 marking-FeroxiTailBlitz-feroxi-tail = Base Tail
 marking-FeroxiTailBlitz-feroxi-tail-stripes = Tail Stripes
