@@ -1,145 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed Survivor Cargo Techs, Heavy Vehicle Operators, and truckers having
-      civilian access instead of engineering access.
-    type: Fix
-  id: 3041
-  time: '2026-04-01T06:58:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9133
-- author: Thereisabear
-  changes:
-  - message: Fixed Defenders Headbutt having a plasma cost, Headbutt cooldown reduced
-      from 6s to 4s. Tail Sweep cooldown 15s to 11s
-    type: Fix
-  - message: Fixed Headbutt unintentionally targeting windows and activating.
-    type: Fix
-  id: 3042
-  time: '2026-04-01T07:00:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9102
-- author: c0rigin
-  changes:
-  - message: Vulpkanin blaze marking can now have it's nose color independently changed.
-    type: Tweak
-  id: 3043
-  time: '2026-04-01T06:57:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9384
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Changed the sprite of the snow camo ghillie suit
-    type: Tweak
-  id: 3044
-  time: '2026-04-01T06:59:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9428
-- author: MoonlightHollow
-  changes:
-  - message: All Paramarines get armor chances redone and now don't hear announcments.
-    type: Tweak
-  - message: L88 now gets proper underbarrel support and mags can refill from spam
-      cans.
-    type: Tweak
-  id: 3045
-  time: '2026-04-01T07:02:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9375
-- author: Whisper
-  changes:
-  - message: LZ sentries have a rotating warning light.
-    type: Add
-  id: 3046
-  time: '2026-04-02T05:02:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9461
-- author: c0rigin
-  changes:
-  - message: Non-wagging vulp tails are now properly labeled as such
-    type: Fix
-  id: 3047
-  time: '2026-04-02T05:02:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9422
-- author: CatAndHats
-  changes:
-  - message: The xenonid mechanic of bringing dead larva to the hivecore, which opens
-      up a new burrowed larva slot, is now explained in a gameplay tip and has a popup
-      when it happens.
-    type: Add
-  id: 3048
-  time: '2026-04-02T05:04:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9034
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed PMC and Paramarine survivors not spawning with their squad.
-    type: Fix
-  id: 3049
-  time: '2026-04-02T05:04:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9450
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed the engi PMC armor having the incorrect stats. It now has fire
-      resistance and 20 melee protection as intended.
-    type: Fix
-  id: 3050
-  time: '2026-04-02T05:05:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9437
-- author: keegaroo65
-  changes:
-  - message: Fixed pheromones not relaying instantly to newly selected Xeno leaders
-    type: Fix
-  id: 3051
-  time: '2026-04-02T05:06:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9447
-- author: Arykh
-  changes:
-  - message: The HEFA helmet now acts like a HEFA grenade!
-    type: Add
-  - message: Added the ability to prime the HEFA sword so it detonates on hitting
-      a mob! This will destroy the sword.
-    type: Add
-  id: 3052
-  time: '2026-04-02T09:08:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8985
-- author: kleinerstation13
-  changes:
-  - message: RCM Paramarines Commander now has big text
-    type: Tweak
-  id: 3053
-  time: '2026-04-03T00:29:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9458
-- author: RerBreab
-  changes:
-  - message: Fixed direct hit of the incinerator's stream dealing damage multiple
-      times.
-    type: Fix
-  id: 3054
-  time: '2026-04-03T09:14:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9056
-- author: kleinerstation13
-  changes:
-  - message: Added a green band to PDW90 AP magazines
-    type: Tweak
-  id: 3055
-  time: '2026-04-03T09:17:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9500
-- author: wheelwrightt
-  changes:
-  - message: Intel officer's uniform now properly changes with map.
-    type: Fix
-  id: 3056
-  time: '2026-04-03T09:18:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9475
-- author: Dygon
-  changes:
-  - message: Floodlights no longer provide light while turned off.
-    type: Fix
-  id: 3057
-  time: '2026-04-03T09:19:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9439
-- author: Dygon
-  changes:
-  - message: Being mounted to a door gun HMG while the dropship lifts off no longer
-      makes you fall to the planet.
-    type: Fix
-  id: 3058
-  time: '2026-04-03T09:20:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9452
 - author: Dygon
   changes:
   - message: Increased the initial item size of the ML66D mount component from small
@@ -4570,5 +4429,150 @@
   id: 3540
   time: '2026-07-31T00:13:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10371
+- author: Vermidia
+  changes:
+  - message: Fixed being able to use normal syringes without medical skill 2.
+    type: Fix
+  id: 3541
+  time: '2026-07-31T03:22:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10368
+- author: ThataKat
+  changes:
+  - message: '[PVE] The UNS Rover medbay now has advanced medical machines, and loose
+      prep room ammo has been stored in boxes.'
+    type: Add
+  - message: '[PVE] FORECON surplus uniform vendors now stock modular armor and webbing
+      instead of standard armor.'
+    type: Tweak
+  - message: '[PVE] FORECON utility vendors now stock M1911 handguns.'
+    type: Tweak
+  id: 3542
+  time: '2026-07-31T05:40:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10417
+- author: Scyarah
+  changes:
+  - message: Added the "Apex" name prefix as a new playtime reward for xenos
+    type: Add
+  id: 3543
+  time: '2026-07-31T12:18:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8770
+- author: Dalothis
+  changes:
+  - message: Added landing lights to CORSAT landing zones
+    type: Add
+  id: 3544
+  time: '2026-07-31T12:54:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10609
+- author: Thereisabear
+  changes:
+  - message: Fixed unanchored barricades stacking on top of anchored barricades when
+      upgraded.
+    type: Fix
+  id: 3545
+  time: '2026-07-31T19:57:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10489
+- author: wheelwrightt
+  changes:
+  - message: Converted fishing sounds to mono.
+    type: Tweak
+  id: 3546
+  time: '2026-07-31T23:08:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10356
+- author: SharkSnake98
+  changes:
+  - message: Replaced the generic shuttles in the CLF & CMB ERT areas with the custom
+      shuttles
+    type: Tweak
+  - message: Changed a chair in the ERT area to a sofa
+    type: Tweak
+  - message: Fixed the couch placement in the ERT areas
+    type: Fix
+  id: 3547
+  time: '2026-07-31T23:09:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10282
+- author: FreeSpy443
+  changes:
+  - message: Fixed HERMES logs when purchasing Tech Tree options
+    type: Fix
+  id: 3548
+  time: '2026-08-01T00:10:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10564
+- author: Vermidia
+  changes:
+  - message: Fixed healer drone not being able to fill acid traps.
+    type: Fix
+  id: 3549
+  time: '2026-08-01T02:16:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10514
+- author: Vermidia
+  changes:
+  - message: Fixed pylon or core protection area info not properly stating it blocks
+      medevacs/paradropping.
+    type: Fix
+  id: 3550
+  time: '2026-08-01T02:16:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10528
+- author: Ian321
+  changes:
+  - message: Living synthetics on the warship no longer prevent the round from ending.
+    type: Fix
+  id: 3551
+  time: '2026-08-01T02:16:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10419
+- author: Vermidia
+  changes:
+  - message: Plasma Trees now check for if a xeno is resting or ovi for giving plasma.
+    type: Tweak
+  - message: Plasma Tree doafter now uses the transfer plasma action's effects.
+    type: Tweak
+  id: 3552
+  time: '2026-08-01T02:16:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10273
+- author: CatAndHats
+  changes:
+  - message: Changed the in-hand sprites for the wrench to be a bit more visible
+    type: Tweak
+  id: 3553
+  time: '2026-08-01T14:37:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10623
+- author: TadJohnson00
+  changes:
+  - message: Adjusted the sprites for PVE soft first-aid packs. They now have a fresh
+      look, featuring fill and in-hand states.
+    type: Tweak
+  id: 3554
+  time: '2026-08-06T22:49:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10621
+- author: carccborg
+  changes:
+  - message: FORECON synthetic now holds the rank of WO by default and CWO at 75 hours
+    type: Tweak
+  id: 3555
+  time: '2026-08-08T02:59:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10490
+- author: Vixting
+  changes:
+  - message: Fixed synth not being able to grab parasite
+    type: Fix
+  id: 3556
+  time: '2026-08-08T02:59:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10450
+- author: kleinerstation13
+  changes:
+  - message: Added 121/RECON headset for SPP SOF
+    type: Add
+  - message: Added SPP SOF and SPP Airborne survivor synths
+    type: Add
+  id: 3557
+  time: '2026-08-08T03:08:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9888
+- author: ThataKat
+  changes:
+  - message: '[PVE] Marines of the SPP''s 17th Vega Naval Infantry now properly speak
+      Russian and Chinese (and not English), as do the Party''s Political Kommissars.'
+    type: Tweak
+  id: 3558
+  time: '2026-08-08T03:13:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10670
 Name: RMC14
 Order: -1
