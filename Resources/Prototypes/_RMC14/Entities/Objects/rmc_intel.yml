@@ -348,7 +348,7 @@
           repurchasable: true
           events:
           - !type:TechLogisticsDeliveryEvent
-            object: RMCOrbitalCannonWarheadExplosive
+            object: RMCCrateOBHE
           - !type:TechAnnounceEvent
             author: rmc-intel-tech-announcement-special-assets-author
             message: rmc-intel-tech-announcement-ob-he
@@ -362,7 +362,7 @@
           repurchasable: true
           events:
           - !type:TechLogisticsDeliveryEvent
-            object: RMCOrbitalCannonWarheadIncendiary
+            object: RMCCrateOBIncendiary
           - !type:TechAnnounceEvent
             author: rmc-intel-tech-announcement-special-assets-author
             message: rmc-intel-tech-announcement-ob-incendiary
@@ -376,7 +376,7 @@
           repurchasable: true
           events:
           - !type:TechLogisticsDeliveryEvent
-            object: RMCOrbitalCannonWarheadCluster
+            object: RMCCrateOBCluster
           - !type:TechAnnounceEvent
             author: rmc-intel-tech-announcement-special-assets-author
             message: rmc-intel-tech-announcement-ob-cluster
