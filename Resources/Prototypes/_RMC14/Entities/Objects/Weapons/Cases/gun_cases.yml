@@ -198,6 +198,37 @@
      - id: CMMagazinePistolM1984
        amount: 2
 
+# M48A4 service pistol (Fluff)
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCGunCasePistolM48A4Fluff
+  name: M48A4 storing case
+  description: A small case containing a M48A4, a modernized version of the classic M1911. It was most likely privately bought by a marine, or specially ordered by an officer.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    noRot: false
+    sprite: _RMC14/Objects/Storage/D18case.rsi # Needs proper 'closed' Sprites, Open/Closed are identical atm
+    layers:
+    - state: closed
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/D18case.rsi
+    state: closed
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,15,1
+    whitelist:
+      tags:
+      - CMMagazinePistolM1911
+      - CMWeaponPistolM1911
+  - type: StorageFill
+    contents:
+    - id: CMWeaponPistolM48A4Fluff
+    - id: CMMagazinePistolM1911
+      amount: 6
+
 # RSh9 Assault Revolver
 - type: entity
   parent: RMCGunCaseBase
