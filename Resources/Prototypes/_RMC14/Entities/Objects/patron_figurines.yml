@@ -2505,23 +2505,12 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronSethXi
   name: Seth Xi figurine
-  description: "Calm under pressure. Evil beyond measure.\n\nBuilt for operations where hope was optional and success was necessary.\n\nWhen others followed orders, he followed instinct. Where others followed the path, he forged his own.\n\nNormally found beyond the frontline - questioning the plan, not the outcome."
+  description: "Calm under pressure. Determined beyond measure.\n\nBuilt for operations where hope was optional and success was required.\n\nWhen others followed orders, he followed instinct. Where others followed the path, he forged his own.\n\nNormally found beyond the frontline - Accepting the sacrifice, never the failure."
   components:
   - type: Sprite
     state: seth_xi
   - type: PatronFigurine
     id: 909c243e-6fb8-42ed-a477-d48571fccff2
-
-- type: entity
-  parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronEats-The-Crayons
-  name: Eats-The-Crayons figurine
-  #description: ""
-  components:
-  - type: Sprite
-    state: eats-the-crayons
-  - type: PatronFigurine
-    id: a825851d-a9e6-48db-b7d2-2307fef49ff5
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -2726,17 +2715,6 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronGunnerWilo
-  name: Gunner Wilo figurine
-  description: "\"Clogging arteries is my hobby. In the Corps, you only live once and not for long, so why not enjoy it?\""
-  components:
-  - type: Sprite
-    state: gunner_wilo
-  - type: PatronFigurine
-    id: e63137eb-1bdf-49cb-9f4c-be29bb2a7e0f
-
-- type: entity
-  parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronKhaunami
   name: Khaunami figurine
   #description: ""
@@ -2871,7 +2849,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronMathewMothewLampyris
   name: Mathew 'Mothew' Lampyris figurine
-  description: "He's a green moth that is fuzzy, he has a scar on his lip."
+  description: "He's a green moth that is fuzzy, he has a scar across his face."
   components:
   - type: Sprite
     state: mathew_mothew_lampyris
@@ -3033,7 +3011,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronJatayuNerdCorvuson
   name: Jatayu 'Nerd' Corvuson figurine
-  #description: ""
+  description: "\"They're jumping me!!\""
   components:
   - type: Sprite
     state: jatayu_nerd_corvuson
@@ -3050,3 +3028,121 @@
     state: cade_stripes_sagan
   - type: PatronFigurine
     id: 26f7eb05-ab44-460a-bd6b-036929ef9951
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronCheeryHeather
+  name: Cheery Heather figurine
+  description: "A mini of a middle-aged rabbit woman.  She has a smile on her face, and dark circles under her eyes.\n\nShe's holding the usual."
+  components:
+  - type: Sprite
+    state: cheery_heather
+  - type: PatronFigurine
+    id: d461098b-d57c-4bd3-9671-5dff32f70b9b
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSamanthaMotherOppenheimer
+  name: Samantha 'Mother' Oppenheimer figurine
+  description: "My work... my work lies where i left it... if there is anyone brave enough and... clever enough, to take it and... return, the keys to time... perhaps the foundation... of a new empire..."
+  components:
+  - type: Sprite
+    state: samantha_mother_oppenheimer
+  - type: PatronFigurine
+    id: f2dd8a36-c553-4f7a-9f31-0852cdb326e5
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRosemaryAWGlaive
+  name: Rosemary AW Glaive figurine
+  description: "The Galaxy's Second-best Henchwoman."
+  components:
+  - type: Sprite
+    state: rosemary_aw_glaive
+  - type: PatronFigurine
+    id: fd50277f-ebce-4d08-b430-fa96a68b09b5
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMoffusSnowlight
+  name: Moffus Snowlight figurine
+  description: "A seemingly unremarkable, tan colored moth person. Despite being somewhat new to the flight crew, this little guy is still highly experienced and not afraid to give you advice on how to run the dropships.\n\nWhat? \"Marcus Snow\"? I think I've heard of that one before...\n\nEh, this figurine is cooler anyways. "
+  components:
+  - type: Sprite
+    state: moffus_snowlight
+  - type: PatronFigurine
+    id: 19695197-da11-43da-9c91-6c57e4f23e67
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Voice/Moth/moth_squeak.ogg
+      params:
+        volume: 5
+        maxDistance: 1
+  - type: UseDelay
+    delay: 30
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronNoelleShimizu-Lockhart
+  name: Noelle Shimizu-Lockhart figurine
+  description: "Noelle Shimizu-Lockhart - We-Ya Office Edition\n\nOne of the many poised faces of Weston-Yamada diplomacy. Presented in her signature executive attire, she reflects the refinement, discipline, and quiet confidence of Her Majesty the Empress' Core Worlds. She does not look as though she belongs on the Frontier. This collectible figurine commemorates one of Weston-Yamada's most respectable Corporate Liaisons and includes a subtle tribute to her long-running-if decidedly professional-office rivalry with Executive Specialist Geraldine Birgitsdottir.\n\nCuriously, the figurine smells faintly of freshly printed paper and perfume."
+  components:
+  - type: Sprite
+    state: noelle_shimizu-lockhart
+  - type: PatronFigurine
+    id: a825851d-a9e6-48db-b7d2-2307fef49ff5
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronNibbles-The-Fixtures
+  name: Nibbles-The-Fixtures figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: nibbles-the-fixtures
+  - type: PatronFigurine
+    id: 397f7666-e6d2-4a8f-9124-1c58628055c6
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSteveLungCancerMichaels
+  name: Steve 'Lung Cancer' Michaels figurine
+  description: "WARNING:\n\nManufactured in a facility that produces tobacco products. Thirdhand smoke exposure is likely."
+  components:
+  - type: Sprite
+    state: steve_lung_cancer_michaels
+  - type: PatronFigurine
+    id: 15c4354c-d94c-4085-a264-dcb6f2a38c05
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronScottDadGreaves
+  name: Scott 'Dad' Greaves figurine
+  description: "He may not be your father. But he's sure as hell your Dad."
+  components:
+  - type: Sprite
+    state: scott_dad_greaves
+  - type: PatronFigurine
+    id: fb36d3c3-a557-4f59-9b61-e10d2e34c4da
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAmberUnluckySummer
+  name: Amber 'Unlucky' Summer figurine
+  description: "She calls herself Fopsquez, I have no idea why, she says it's a movie reference? I don't get it honestly."
+  components:
+  - type: Sprite
+    state: amber_unlucky_summer
+  - type: PatronFigurine
+    id: e63137eb-1bdf-49cb-9f4c-be29bb2a7e0f
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAelicaMomDanara
+  name: Aelica 'Mom' Danara figurine
+  description: "A figurine of 'Mom', her confidence radiates from her smile. Simply looking at her feels... soothing."
+  components:
+  - type: Sprite
+    state: aelica_mom_danara
+  - type: PatronFigurine
+    id: fc6f4f20-8c81-4e64-a485-fc9766445f27
