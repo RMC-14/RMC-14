@@ -8,7 +8,9 @@
     sprite: _RMC14/Objects/Medical/hypospray.rsi
     layers:
       - state: empty
-        map: [ "enum.VialVisuals.Occupied" ]
+        map: [ "emptyLayer" ]
+      - state: hypospray
+        map: [ "fullLayer" ]
       - state: hypospray1
         map: [ "enum.SolutionContainerLayers.Fill" ]
         visible: false
@@ -41,17 +43,8 @@
   - type: ContainerContainer
     containers:
       vial: !type:ContainerSlot
-  - type: GenericVisualizer
-    visuals:
-      enum.VialVisuals.Occupied:
-        enum.VialVisuals.Occupied:
-          False: { state: "empty"}
-          True: { state: "hypospray" }
-  - type: RMCHypospray
-    slotId: vial
-    tacticalSkills:
-      all:
-        RMCSkillMedical: 1
+  - type: RMCConnectedContainer
+    containerId: vial
   - type: InteractedBlacklist
     blacklist:
       components:
@@ -60,6 +53,50 @@
     quickEquip: false
     slots:
     - suitstorage
+# for the vial
+  - type: MixableSolution
+    solution: beaker
+  - type: RefillableSolution
+    solution: beaker
+  - type: DrainableSolution
+    solution: beaker
+  - type: ExaminableSolution
+    solution: beaker
+  - type: DrawableSolution
+    solution: beaker
+  - type: InjectableSolution
+    solution: beaker
+  - type: ReagentExaminationRequiresSkill
+    containerId: vial
+    noContainerExamine: rmc-hypospray-no-vial
+    unskilledExamine: rmc-hypospray-examine-unskilled
+    skilledExamineContains: rmc-hypospray-examine-contains
+    skilledExamineNone: rmc-hypospray-examine-empty
+    skills:
+      RMCSkillMedical: 1
+  - type: Hypospray
+    solutionName: beaker
+    injectOnly: true
+    onlyAffectsMobs: true
+    canContainerDraw: false
+    injectSound:
+      path: /Audio/_RMC14/Medical/hypospray.ogg
+  - type: CMItemSlots
+  - type: GenericVisualizer
+    visuals:
+      enum.CMItemSlotsLayers.Fill:
+        fullLayer:
+          Empty: { visible: false }
+          Full: { visible: true }
+        emptyLayer:
+          Empty: { visible: true }
+          Full: { visible: false }
+  - type: RMCHypoTransferAmounts
+  - type: RMCTacticalReloadSlot
+    slotId: vial
+    tacticalSkills:
+      all:
+        RMCSkillMedical: 1
   - type: PhysicalComposition
     materialComposition:
       RMCPlastic: 1250
@@ -84,19 +121,31 @@
 - type: entity
   parent: CMHyposprayWithVial
   id: CMHyposprayFilledTricord
+  name: tricordrazine hypospray
   suffix: Filled, Tricordrazine
+  description: The Avant Biomedical hypospray is a sterile, air-needle auto-injector for rapid administration of drugs to patients. Contains Tricordrazine, a weak general use medicine for treating damage.
   components:
   - type: ContainerFill
     containers:
       vial:
       - RMCVialTricordrazine
+  - type: CMRefillableSolution
+    solution: beaker
+    reagents:
+      CMTricordrazine: 30
 
 - type: entity
   parent: CMHypospray
   id: RMCHyposprayFilledEpi
+  name: epinephrine hypospray
   suffix: Filled, Epinephrine
+  description: The Avant Biomedical hypospray is a sterile, air-needle auto-injector for rapid administration of drugs to patients. Contains Epinephrine, a cardiostimulant used to assist in revival.
   components:
   - type: ContainerFill
     containers:
       vial:
       - RMCVialEpinephrine
+  - type: CMRefillableSolution
+    solution: beaker
+    reagents:
+      CMEpinephrine: 30
