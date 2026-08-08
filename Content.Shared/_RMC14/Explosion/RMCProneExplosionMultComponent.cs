@@ -23,6 +23,6 @@ public sealed partial class RMCProneExplosionMultComponent : Component
 /// <param name="Explosion"></param>
 /// <param name="Epicenter"></param>
 /// <param name="Damage"></param>
-/// <param name="HasDirection">Overrides epicenter range checks if set to true or false.</param>
+/// <param name="HasDirectionOverride">Overrides epicenter checks. True = not at epicenter, False = at epicenter.</param>
 [ByRefEvent]
-public record struct BeforeExplosionRecievedEvent(ProtoId<ExplosionPrototype> Explosion, MapCoordinates Epicenter, DamageSpecifier Damage, bool? HasDirection = null);
+public record struct BeforeExplosionRecievedEvent(ProtoId<ExplosionPrototype> Explosion, MapCoordinates Epicenter, DamageSpecifier Damage, bool? HasDirectionOverride = null);
