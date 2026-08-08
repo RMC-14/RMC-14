@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Barricade;
 using Content.Shared._RMC14.Barricade.Components;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Entrenching;
+using Content.Shared._RMC14.Ladder;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Repairable;
@@ -94,6 +95,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         SubscribeLocalEvent<XenoAcidHoleComponent, XenoAcidHoleBreakDoAfterEvent>(OnHoleBreakDoAfter);
         SubscribeLocalEvent<XenoAcidHoleComponent, GettingAttackedAttemptEvent>(OnHoleAttacked);
         SubscribeLocalEvent<XenoAcidHoleComponent, EntityTerminatingEvent>(OnHoleTerminating);
+        SubscribeLocalEvent<XenoAcidHoleComponent, GetThrowablePassageExitEvent>(OnHoleGetThrowableExit);
 
         SubscribeLocalEvent<XenoAcidHoleWallComponent, DamageChangedEvent>(OnWallDamageChanged);
         SubscribeLocalEvent<XenoAcidHoleWallComponent, DamageModifyEvent>(OnWallDamageModify);
@@ -289,6 +291,22 @@ public sealed class XenoAcidHoleSystem : EntitySystem
 
         args.Handled = true;
 
+        if (TryComp(args.Used, out PassageThrowableComponent? throwable))
+        {
+            var doAfter = new DoAfterArgs(EntityManager, args.User, throwable.DoAfterDuration, new PassageThrowDoAfterEvent(), args.Used, target: hole)
+            {
+                BreakOnMove = true,
+                NeedHand = true,
+            };
+
+            var selfMessage = Loc.GetString("rmc-acid-hole-throw-start-self", ("thrown", args.Used), ("hole", hole));
+            var othersMessage = Loc.GetString("rmc-acid-hole-throw-start-others", ("user", args.User), ("thrown", args.Used), ("hole", hole));
+            _popup.PopupPredicted(selfMessage, othersMessage, args.User, args.User);
+
+            _doAfter.TryStartDoAfter(doAfter);
+            return;
+        }
+
         if (_net.IsClient)
             return;
 
@@ -391,6 +409,18 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         args.Handled = true;
 
         ReplaceWallWithDamagedGirder(wall);
+    }
+
+    private void OnHoleGetThrowableExit(Entity<XenoAcidHoleComponent> hole, ref GetThrowablePassageExitEvent args)
+    {
+        if (!TryGetCrawlExit(args.User, hole, out var exit))
+            return;
+
+        args.Coordinates = _transform.ToMapCoordinates(exit);
+        args.SelfMessage = Loc.GetString("rmc-acid-hole-throw-self", ("thrown", args.Throwable), ("hole", hole.Owner));
+        args.OthersMessage = Loc.GetString("rmc-acid-hole-throw-others", ("user", args.User), ("thrown", args.Throwable), ("hole", hole.Owner));
+
+        args.Handled = true;
     }
 
     private void OnHoleAttacked(Entity<XenoAcidHoleComponent> hole, ref GettingAttackedAttemptEvent args)
