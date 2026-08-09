@@ -60,7 +60,7 @@
       - VehicleHumveeHatch
       - VehicleHumveeWheel
     - name: apc
-      vehicle: VehicleAPC
+      vehicle: VehicleAPCTracked
       hardpoints:
       - RMCAPCDualCannon
       - RMCAPCFrontCannon

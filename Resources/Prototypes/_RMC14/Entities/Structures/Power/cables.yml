@@ -42,6 +42,8 @@
   - type: Icon
     sprite: _RMC14/Structures/Power/cables_thin.rsi
     state: intactblue
+  - type: Transform
+    anchored: false
 
 - type: entity
   parent: RMCCableBlue

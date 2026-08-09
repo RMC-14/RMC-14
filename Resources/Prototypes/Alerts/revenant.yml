@@ -10,9 +10,7 @@
 
 - type: alert
   id: Corporeal
-  icons:
-  - sprite: /Textures/Mobs/Ghosts/revenant.rsi
-    state: icon
+  icons: [ /Textures/Mobs/Ghosts/revenant.rsi/icon.png ]
   name: alerts-revenant-corporeal-name
   description: alerts-revenant-corporeal-desc
 

@@ -8,7 +8,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Dropship.Utility.Components;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true, true)]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true)]
 public sealed partial class RMCEquipmentDeployerComponent : Component
 {
     /// <summary>
