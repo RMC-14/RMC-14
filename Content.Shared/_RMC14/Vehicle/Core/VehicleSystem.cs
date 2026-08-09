@@ -1099,7 +1099,7 @@ public sealed class VehicleSystem : EntitySystem
         if (!TryComp(vehicle, out HardpointIntegrityComponent? frameIntegrity))
             return false;
 
-        return frameIntegrity is { BypassEntryOnZero: true, Integrity: <= 0f };
+        return frameIntegrity.BypassEntryOnZero && frameIntegrity.Integrity <= 0f;
     }
 
     public bool TryGetVehicleFromInterior(EntityUid interiorEntity, out EntityUid? vehicle)
