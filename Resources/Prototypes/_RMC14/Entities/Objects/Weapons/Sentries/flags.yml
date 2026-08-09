@@ -79,14 +79,8 @@
     interfaces:
       enum.SentryUiKey.Key:
         type: SentryUpgradeBui
-  - type: HealthExaminable
-    locPrefix: sentry
-    examinableTypes:
-    - Blunt
-    - Slash
-    - Piercing
-    - Heat
-    - Shock
+  - type: RMCHealthExaminable
+    speciesType: Mechanical
   - type: ShortExamine
   - type: InteractedBlacklist
     blacklist:
@@ -115,10 +109,12 @@
   - type: Item
     size: Normal
   - type: RMCDeployableEquipment
-    placeableBlacklist:
-      components:
-      - WeaponMount
-      - RMCDeployableEquipment
+    placementRestrictions:
+    - radius: 0
+      blacklist:
+        components:
+        - WeaponMount
+        - RMCDeployableEquipment
     deployDelay: 1
     undeployDelay: 1
   - type: UserIFF

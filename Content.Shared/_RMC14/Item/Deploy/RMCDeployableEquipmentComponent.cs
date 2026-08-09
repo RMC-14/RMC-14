@@ -1,6 +1,6 @@
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Placement;
 using Content.Shared.Tools;
-using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -8,6 +8,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.Item.Deploy;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(DeployableEquipmentSystem))]
 public sealed partial class RMCDeployableEquipmentComponent : Component
 {
     /// <summary>
@@ -47,16 +48,10 @@ public sealed partial class RMCDeployableEquipmentComponent : Component
     public bool AnchorOnDeploy = true;
 
     /// <summary>
-    ///     The whitelist to check for in the <see cref="PlaceableCheckRange"/>, deployment will be blocked if any found entity matches this.
+    ///     Anchored entities that prevent this equipment from being deployed nearby.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public EntityWhitelist? PlaceableBlacklist;
-
-    /// <summary>
-    ///     The range of the blacklist check.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public float PlaceableCheckRange;
+    public List<RMCPlacementRestriction> PlacementRestrictions = new();
 
     /// <summary>
     ///     How far in front of the user the deployable should be placed.

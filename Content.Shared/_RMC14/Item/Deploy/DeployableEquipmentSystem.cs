@@ -1,6 +1,6 @@
-using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Placement;
 using Content.Shared._RMC14.Vehicle;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
@@ -8,9 +8,7 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
 using Content.Shared.Popups;
 using Content.Shared.Tools.Systems;
-using Content.Shared.Whitelist;
 using Robust.Shared.Map;
-using Robust.Shared.Map.Components;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Item.Deploy;
@@ -18,13 +16,12 @@ namespace Content.Shared._RMC14.Item.Deploy;
 public sealed partial class DeployableEquipmentSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
+    [Dependency] private readonly RMCPlacementSystem _placement = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedToolSystem _tool = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
@@ -151,7 +148,7 @@ public sealed partial class DeployableEquipmentSystem : EntitySystem
             return false;
         }
 
-        if (deployable.Comp.PlaceableBlacklist is { } blacklist && TryFindAnchoredEntityNearby(coordinates, blacklist, out var blockingEntity, deployable.Comp.PlaceableCheckRange))
+        if (_placement.TryFindBlocker(coordinates, deployable.Comp.PlacementRestrictions, out var blockingEntity, deployable))
         {
             var msg = Loc.GetString("emplacement-mount-too-close", ("mount", blockingEntity));
             _popup.PopupClient(msg, user, user, PopupType.SmallCaution );
@@ -167,39 +164,6 @@ public sealed partial class DeployableEquipmentSystem : EntitySystem
         return true;
     }
 
-    /// <summary>
-    ///     Checks for anchored entities matching a whitelist within a square area around the given coordinates.
-    /// </summary>
-    /// <param name="coordinates">The center coordinates to search around.</param>
-    /// <param name="whitelist">Whitelist used to determine which entities count as a match.</param>
-    /// <param name="foundEntity">The first matching anchored entity found in the search area.</param>
-    /// <param name="range"> The tile range around the coordinates to search. A range of 1 only checks the given coordinates, a range of 2 a 3x3 area, etc.</param>
-    /// <returns>True if a matching anchored entity is found within the specified range.</returns>
-    public bool TryFindAnchoredEntityNearby(EntityCoordinates coordinates, EntityWhitelist whitelist, [NotNullWhen(true)] out EntityUid? foundEntity, float range = 1)
-    {
-        foundEntity = null;
-        if (range == 0)
-            return false;
-
-        var grid = _transform.GetGrid(coordinates);
-        if (!TryComp(grid, out MapGridComponent? mapGrid))
-            return false;
-
-        var position = _mapSystem.LocalToTile(grid.Value, mapGrid, coordinates);
-        var checkArea = new Box2(position.X - range + 1, position.Y - range + 1, position.X + range, position.Y + range);
-        var enumerable = _mapSystem.GetLocalAnchoredEntities(grid.Value, mapGrid, checkArea);
-
-        foreach (var anchored in enumerable)
-        {
-            if (!_whitelist.IsValid(whitelist, anchored))
-                continue;
-
-            foundEntity = anchored;
-            return true;
-        }
-
-        return false;
-    }
 }
 
 [Serializable, NetSerializable]

@@ -116,11 +116,12 @@
   - type: Item
     size: Normal
   - type: RMCDeployableEquipment
-    placeableBlacklist:
-      components:
-      - WeaponMount
-      - RMCDeployableEquipment
-    placeableCheckRange: 1
+    placementRestrictions:
+    - radius: 0
+      blacklist:
+        components:
+        - WeaponMount
+        - RMCDeployableEquipment
 
 - type: Tag
   id: RMCSentry
