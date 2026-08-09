@@ -57,9 +57,9 @@ public sealed class CRTOverlay : Control
 
     private void UpdateAnimations(float deltaTime)
     {
+        var spacing = Math.Max(2f, Settings.ScanlineSpacing);
         _scanlineOffset += Settings.ScanlineSpeed * deltaTime * 60f;
-        if (_scanlineOffset > Settings.ScanlineSpacing)
-            _scanlineOffset -= Settings.ScanlineSpacing;
+        _scanlineOffset %= spacing;
 
         _noiseTimer += deltaTime;
         _flickerTimer += deltaTime;

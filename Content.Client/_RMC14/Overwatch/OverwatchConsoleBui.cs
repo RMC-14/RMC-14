@@ -59,10 +59,11 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
 
     protected override void UpdateState(BoundUserInterfaceState state)
     {
-        Refresh();
+        if (state is OverwatchConsoleBuiState s)
+            RefreshState(s);
     }
 
-    private void RefreshState()
+    private void RefreshState(OverwatchConsoleBuiState s)
     {
         if (Window == null ||
             !EntMan.TryGetComponent(Owner, out OverwatchConsoleComponent? console))
@@ -70,7 +71,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
             return;
         }
 
-        var squads = console.Squads.ToList();
+        var squads = s.Squads.ToList();
         squads.Sort((a, b) => string.CompareOrdinal(a.Name, b.Name));
 
         foreach (var (id, panel) in _squads)
@@ -105,11 +106,8 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
         var margin = new Thickness(2);
         foreach (var squad in squads)
         {
-            var marineEntry = console.Marines.FirstOrDefault(entry => entry.Key == squad.Id);
-            if (marineEntry.Value == null)
+            if (!s.Marines.TryGetValue(squad.Id, out var marines))
                 continue;
-
-            var marines = marineEntry.Value;
 
             marines.Sort((a, b) =>
             {
@@ -983,15 +981,16 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
 
     public void Refresh()
     {
-        RefreshState();
+        if (State is OverwatchConsoleBuiState s)
+            RefreshState(s);
     }
 
     private Dictionary<SquadObjectiveType, string> GetObjectives(NetEntity squad)
     {
-        if (!EntMan.TryGetComponent(Owner, out OverwatchConsoleComponent? console))
+        if (State is not OverwatchConsoleBuiState s)
             return new Dictionary<SquadObjectiveType, string>();
 
-        var squadData = console.Squads.FirstOrDefault(data => data.Id == squad);
+        var squadData = s.Squads.FirstOrDefault(data => data.Id == squad);
         return squadData.Id == default
             ? new Dictionary<SquadObjectiveType, string>()
             : new Dictionary<SquadObjectiveType, string>(squadData.Objectives);
@@ -999,11 +998,10 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
 
     private List<OverwatchMarine> GetMarines(NetEntity squad)
     {
-        if (EntMan.TryGetComponent(Owner, out OverwatchConsoleComponent? console))
+        if (State is OverwatchConsoleBuiState s &&
+            s.Marines.TryGetValue(squad, out var marines))
         {
-            var marineEntry = console.Marines.FirstOrDefault(entry => entry.Key == squad);
-            if (marineEntry.Value != null)
-                return marineEntry.Value;
+            return marines;
         }
 
         return new List<OverwatchMarine>();

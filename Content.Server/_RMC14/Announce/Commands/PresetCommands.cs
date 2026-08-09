@@ -48,7 +48,11 @@ public sealed class AnnouncePresetCommand : IConsoleCommand
         var request = new AnnouncementRequest
         {
             Message = message,
-            Preset = resolvedPreset.ID
+            Preset = resolvedPreset.ID,
+            Route = new AnnouncementRoute
+            {
+                Target = resolvedPreset.Target,
+            },
         };
 
         if (options.TryGetValue("entity", out var entityStr) &&

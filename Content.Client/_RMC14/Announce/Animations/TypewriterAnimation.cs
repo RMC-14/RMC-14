@@ -6,6 +6,9 @@ namespace Content.Client._RMC14.Announce.Animations;
 
 public sealed class TypewriterAnimation : IAnnouncementAnimation
 {
+    private const float MinTickInterval = 0.005f;
+    private const int MaxAdvancePerUpdate = 8;
+
     private readonly TypewriterAnimationConfig _config;
     private int _currentLine;
     private int _currentChar;
@@ -27,30 +30,56 @@ public sealed class TypewriterAnimation : IAnnouncementAnimation
 
     public AnnouncementAnimationStatus Update(AnnouncementAnimationContext context, float deltaTime)
     {
+        var printSpeed = MathF.Max(MinTickInterval, _config.PrintSpeed);
+
         _timer += deltaTime;
-        if (_timer < _config.PrintSpeed)
+        if (_timer < printSpeed)
             return AnnouncementAnimationStatus.Running;
 
-        _timer = 0f;
+        var advanced = 0;
+        var changed = false;
+        while (_timer >= printSpeed && advanced < MaxAdvancePerUpdate)
+        {
+            _timer -= printSpeed;
+            advanced++;
+
+            var finished = Advance(context, out var printed);
+            changed |= printed;
+
+            if (finished)
+            {
+                if (changed)
+                    UpdateDisplay(context);
+
+                return AnnouncementAnimationStatus.Finished;
+            }
+        }
+
+        if (changed)
+            UpdateDisplay(context);
+
+        return AnnouncementAnimationStatus.Running;
+    }
+
+    private bool Advance(AnnouncementAnimationContext context, out bool printed)
+    {
+        printed = false;
 
         var cleanText = context.CleanText;
-
         if (_currentLine >= cleanText.Length)
-            return AnnouncementAnimationStatus.Finished;
+            return true;
 
         var lineText = cleanText[_currentLine];
         if (_currentChar >= lineText.Length)
         {
             _currentLine++;
             _currentChar = 0;
-            return _currentLine >= cleanText.Length
-                ? AnnouncementAnimationStatus.Finished
-                : AnnouncementAnimationStatus.Running;
+            return _currentLine >= cleanText.Length;
         }
 
         _currentChar++;
-        UpdateDisplay(context);
-        return AnnouncementAnimationStatus.Running;
+        printed = true;
+        return false;
     }
 
     private void UpdateDisplay(AnnouncementAnimationContext context)

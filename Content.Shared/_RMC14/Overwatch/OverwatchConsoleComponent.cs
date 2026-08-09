@@ -32,12 +32,6 @@ public sealed partial class OverwatchConsoleComponent : Component
     [DataField, AutoNetworkedField]
     public int LastLocation;
 
-    [DataField, AutoNetworkedField]
-    public List<OverwatchSquad> Squads = new();
-
-    [DataField, AutoNetworkedField]
-    public Dictionary<NetEntity, List<OverwatchMarine>> Marines = new();
-
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan LastMessage;
 

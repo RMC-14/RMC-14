@@ -1,11 +1,10 @@
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Announce;
 
 [Prototype]
-[DataDefinition, NetSerializable, Serializable]
+[DataDefinition]
 public sealed partial class AnnouncementPresetPrototype : IPrototype
 {
     [IdDataField]
