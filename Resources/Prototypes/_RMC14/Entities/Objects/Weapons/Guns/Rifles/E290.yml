@@ -2,7 +2,7 @@
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   id: RMCWeaponRifleE290A1
   name: E290A1 rifle # in CM13 the F903A1
-  description: The E290A1 is the oldest rifle of the TSE still in active service, these days its typically only issued to TSE forces not expecting a stable supply lines, such as the paramarines. Uses 10x24mm caseless ammunition.
+  description: The E290A1 is the oldest rifle of the TSE still in active service, these days its typically only issued to TSE forces not expecting stable supply lines, such as the paramarines. Uses 10x24mm caseless ammunition.
   suffix: Filled
   components:
   - type: Sprite
@@ -43,6 +43,7 @@
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1.3
     accuracyMultiplierUnwielded: 0.65
+  - type: GunClickToFire # Has burst fire, no need for semi auto = full auto
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -89,7 +90,7 @@
   parent: RMCWeaponRifleE290A1
   id: RMCWeaponRifleE290A2
   name: E290A2 rifle # in CM13 the F903A2
-  description: A non-standard issue rifle of the royal crown marines, the E290A2 is currently being phased out, these days its typically only issued to TSE forces not expecting a stable supply lines, such as the paramarines. Uses 10x24mm caseless ammunition.
+  description: A non-standard issue rifle of the royal crown marines, the E290A2 is currently being phased out, these days its typically only issued to TSE forces not expecting stable supply lines, such as the paramarines. Uses 10x24mm caseless ammunition.
   suffix: Filled
   components:
   - type: Sprite
@@ -149,7 +150,7 @@
           - RMCAttachmentS6ReflexSight
       rmc-aslot-underbarrel:
         locked: true
-        startingAttachable: RMCAttachmentE290Grip
+        startingAttachable: RMCAttachmentE290mkey
         whitelist:
           tags:
           - RMCAttachmentE290mkey
@@ -165,7 +166,7 @@
   parent: RMCWeaponRifleE290A1
   id: RMCWeaponRifleE290A1D
   name: E290A1/D marksman rifle # in CM13 the F903A1 Marksman Rifle
-  description: A variation of the E290A1 a rare DMR configuration currently being phased out. These days its typically only issued to TSE forces not expecting a stable supply lines, such as the paramarines. Uses 10x24mm caseless ammunition. # This weapon only accepts the smaller 20 round magazines of 10x24mm. till issue is resolved in parity
+  description: A variation of the E290A1 a rare DMR configuration currently being phased out. These days its typically only issued to TSE forces not expecting stable supply lines, such as the paramarines. Uses 10x24mm caseless ammunition. # This weapon only accepts the smaller 20 round magazines of 10x24mm. till issue is resolved in parity
   suffix: Filled
   components:
   - type: Sprite
