@@ -21,6 +21,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Ghost;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
@@ -285,7 +286,18 @@ public sealed class XenoEggSystem : EntitySystem
             RootEntity = true
         };
 
-        _popup.PopupPredicted(Loc.GetString("rmc-xeno-egg-plant-self"), Loc.GetString("rmc-xeno-egg-plant", ("user", args.User)), egg, args.User);
+        var selfMessage = Loc.GetString("rmc-xeno-egg-plant-self");
+        _popup.PopupClient(selfMessage, args.User, args.User);
+
+        var others = Filter.PvsExcept(args.User).Recipients;
+        foreach (var other in others)
+        {
+            if (other.AttachedEntity is not { } otherEnt)
+                continue;
+
+            var otherMessage = Loc.GetString("rmc-xeno-egg-plant", ("user", Identity.Name(args.User, EntityManager, otherEnt)));
+            _popup.PopupEntity(otherMessage, args.User, otherEnt, PopupType.MediumCaution);
+        }
 
         _doAfter.TryStartDoAfter(doAfter);
     }
@@ -413,8 +425,18 @@ public sealed class XenoEggSystem : EntitySystem
         if (!CanReturnParasitePopup(args.User, used, egg))
             return;
 
-        _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-return-user"), args.User, args.User);
-        _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-return", ("user", args.User), ("parasite", args.Used)), egg, Filter.PvsExcept(args.User), true);
+        var selfMessage = Loc.GetString("rmc-xeno-egg-return-user");
+        _popup.PopupEntity(selfMessage, args.User, args.User);
+
+        var others = Filter.PvsExcept(args.User).Recipients;
+        foreach (var other in others)
+        {
+            if (other.AttachedEntity is not { } otherEnt)
+                continue;
+
+            var otherMessage = Loc.GetString("rmc-xeno-egg-return", ("user", Identity.Name(args.User, EntityManager, otherEnt)), ("parasite", Identity.Name(args.Used.Value, EntityManager, otherEnt)));
+            _popup.PopupEntity(otherMessage, egg, otherEnt, PopupType.MediumCaution);
+        }
 
         SetEggState(egg, XenoEggState.Grown);
         QueueDel(args.Used);
