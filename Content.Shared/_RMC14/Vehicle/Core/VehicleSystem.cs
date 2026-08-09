@@ -47,6 +47,7 @@ public sealed class VehicleSystem : EntitySystem
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly SharedJobSystem _job = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly MetaDataSystem _meta = default!;
@@ -54,6 +55,7 @@ public sealed class VehicleSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly VehicleRideSurfaceSystem _rideSurface = default!;
     [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
     [Dependency] private readonly SharedRMCTeleporterSystem _rmcTeleporter = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
@@ -482,11 +484,7 @@ public sealed class VehicleSystem : EntitySystem
         if (ent.Comp.EntryPoints.Count == 0)
             return true;
 
-        var bypassEntry =
-            HasComp<GhostComponent>(user) ||
-            TryComp(ent.Owner, out HardpointIntegrityComponent? frameIntegrity) &&
-            frameIntegrity.BypassEntryOnZero &&
-            frameIntegrity.Integrity <= 0f;
+        var bypassEntry = HasComp<GhostComponent>(user) || IsFrameDestroyed(ent.Owner);
 
         var vehicleXform = Transform(ent.Owner);
         var userXform = Transform(user);
@@ -567,6 +565,25 @@ public sealed class VehicleSystem : EntitySystem
 
         if (!HasComp<GhostComponent>(user) && IsExitDestinationBlocked(exitCoords, vehicleUid, user))
         {
+            if (!IsFrameDestroyed(vehicleUid))
+            {
+                _popup.PopupEntity(Loc.GetString("rmc-vehicle-exit-blocked"), user, user, PopupType.SmallCaution);
+                return false;
+            }
+
+            if (TryGetDestroyedExitCoordinates(vehicleUid, user, out var fallbackMapCoords))
+            {
+                _rmcTeleporter.HandlePulling(user, fallbackMapCoords);
+                UntrackOccupant(user, vehicleUid);
+                return true;
+            }
+
+            if (_rideSurface.TryPlaceOnSurface(user, vehicleUid, exitMapCoords.Position))
+            {
+                UntrackOccupant(user, vehicleUid);
+                return true;
+            }
+
             _popup.PopupEntity(Loc.GetString("rmc-vehicle-exit-blocked"), user, user, PopupType.SmallCaution);
             return false;
         }
@@ -607,6 +624,38 @@ public sealed class VehicleSystem : EntitySystem
         exitCoords = new EntityCoordinates(parent.Value, position);
         exitMapCoords = _transform.ToMapCoordinates(exitCoords);
         return exitMapCoords.MapId != MapId.Nullspace;
+    }
+
+    private bool TryGetDestroyedExitCoordinates(EntityUid vehicle, EntityUid user, out MapCoordinates exitMapCoords)
+    {
+        exitMapCoords = default;
+
+        var vehicleXform = Transform(vehicle);
+        if (vehicleXform.GridUid is not { } gridUid ||
+            !TryComp(gridUid, out MapGridComponent? grid))
+            return false;
+
+        var vehicleBounds = _lookup.GetWorldAABB(vehicle);
+        var userBounds = _lookup.GetWorldAABB(user);
+        var clearance = MathF.Max(userBounds.Width, userBounds.Height) / 2f;
+        var searchBounds = vehicleBounds.Enlarged(grid.TileSize / 2f);
+        var blockedBounds = vehicleBounds.Enlarged(clearance);
+
+        foreach (var tile in _map.GetTilesIntersecting(gridUid, grid, searchBounds))
+        {
+            var candidateCoords = _turf.GetTileCenter(tile);
+            var candidateMapCoords = _transform.ToMapCoordinates(candidateCoords);
+            if (blockedBounds.Contains(candidateMapCoords.Position) ||
+                IsExitDestinationBlocked(candidateCoords, vehicle, user))
+            {
+                continue;
+            }
+
+            exitMapCoords = candidateMapCoords;
+            return true;
+        }
+
+        return false;
     }
 
     private bool IsExitDestinationBlocked(EntityCoordinates exitCoords, EntityUid vehicle, EntityUid user)
@@ -1042,10 +1091,15 @@ public sealed class VehicleSystem : EntitySystem
         if (!HasComp<XenoComponent>(user))
             return false;
 
+        return IsFrameDestroyed(vehicle);
+    }
+
+    private bool IsFrameDestroyed(EntityUid vehicle)
+    {
         if (!TryComp(vehicle, out HardpointIntegrityComponent? frameIntegrity))
             return false;
 
-        return frameIntegrity.BypassEntryOnZero && frameIntegrity.Integrity <= 0f;
+        return frameIntegrity is { BypassEntryOnZero: true, Integrity: <= 0f };
     }
 
     public bool TryGetVehicleFromInterior(EntityUid interiorEntity, out EntityUid? vehicle)
