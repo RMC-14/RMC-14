@@ -424,26 +424,6 @@ public sealed class SentrySystem : EntitySystem
         return true;
     }
 
-    private void StartDisassemble(Entity<SentryComponent> sentry, EntityUid user)
-    {
-        if (sentry.Comp.Mode == SentryMode.Item)
-            return;
-
-        var ev = new SentryDisassembleDoAfterEvent();
-        var delay = sentry.Comp.UndeployDelay * _skills.GetSkillDelayMultiplier(user, sentry.Comp.DelaySkill);
-        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, sentry)
-        {
-            BreakOnMove = true,
-        };
-
-        if (_doAfter.TryStartDoAfter(doAfter))
-        {
-            var selfMsg = Loc.GetString("rmc-sentry-disassemble-start-self", ("sentry", sentry));
-            var othersMsg = Loc.GetString("rmc-sentry-disassemble-start-others", ("user", user), ("sentry", sentry));
-            _popup.PopupPredicted(selfMsg, othersMsg, sentry, user);
-        }
-    }
-
     public bool TrySetMode(Entity<SentryComponent> sentry, SentryMode mode, EntityUid? user = null, bool remote = false)
     {
         if (sentry.Comp.Mode == mode)

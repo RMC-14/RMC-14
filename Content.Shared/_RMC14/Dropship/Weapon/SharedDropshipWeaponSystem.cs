@@ -374,14 +374,14 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             {
                 RemovePvsActors((uid, terminal));
 
-                if (!HasComp<DropshipLingeringTargetComponent>(ent) &&
+                if (!HasComp<DropshipLingeringTargetComponent>(dropshipTarget) &&
                     _net.IsServer &&
-                    ent.Comp.Eyes.TryGetValue(uid, out var oldEye))
+                    targetComponent.Eyes.TryGetValue(uid, out var oldEye))
                 {
-                    var proxy = Spawn(null, Transform(ent).Coordinates);
+                    var proxy = Spawn(null, Transform(dropshipTarget).Coordinates);
 
                     var proxyTarget = EnsureComp<DropshipTargetComponent>(proxy);
-                    proxyTarget.Abbreviation = ent.Comp.Abbreviation;
+                    proxyTarget.Abbreviation = targetComponent.Abbreviation;
                     proxyTarget.IsTargetableByWeapons = false;
                     proxyTarget.Eyes[uid] = oldEye;
 
@@ -396,7 +396,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                         Dirty(oldEye, eyeTarget);
                     }
 
-                    ent.Comp.Eyes.Remove(uid);
+                    targetComponent.Eyes.Remove(uid);
 
                     Dirty(proxy, proxyTarget);
                     SetTarget((uid, terminal), proxy);
@@ -428,10 +428,10 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             Dirty(uid, terminal);
         }
 
-        if (_net.IsServer && TryComp(ent, out MetaDataComponent? metaData) && metaData.EntityPrototype is { } prototype)
+        if (_net.IsServer && TryComp(dropshipTarget, out MetaDataComponent? metaData) && metaData.EntityPrototype is { } prototype)
         {
-            RemComp<RMCCameraComponent>(ent);
-            RemComp<EyeComponent>(ent);
+            RemComp<RMCCameraComponent>(dropshipTarget);
+            RemComp<EyeComponent>(dropshipTarget);
             _rmcCamera.RefreshCameras(prototype);
         }
 
