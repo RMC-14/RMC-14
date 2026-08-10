@@ -11,10 +11,10 @@
 # PVE
 - type: rank
   id: RMCRankPVECLFLeader
-  name: Cell Deck Officer
-  prefix: REB CDO.
+  name: Sub-Cell Leader
+  prefix: REB LEAD.
 
 - type: rank
-  id: RMCRanPVECLFCaptain
-  name: Cell Captain
-  prefix: REB CPT.
+  id: RMCRanPVECLFCommander
+  name: Cell Commander
+  prefix: REB CMDR.

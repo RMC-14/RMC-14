@@ -66,7 +66,7 @@
     back: RMCSatchelNorm
     gloves: RMCHandsVeteranSPP
     shoes: RMCShoesCombat
-    ears: RMCHeadsetDistressCLFPVECapt
+    ears: RMCHeadsetDistressCLFPVECmdr
     outerClothing: RMCArmorCLFPVECaptain
 
 - type: playTimeTracker
