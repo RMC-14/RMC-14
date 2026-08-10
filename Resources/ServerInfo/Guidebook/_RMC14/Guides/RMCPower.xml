@@ -137,8 +137,6 @@
 
   EMP temporarily disables both switches and removes stored energy. The controls restore after a short delay. A charged SMES can shock anyone working through an open maintenance panel, so use insulated protection and safe maintenance procedure.
 
-  If the operation includes a power-restoration objective and suitable SMES units are installed, repairing a reactor alone is not enough. The target network needs charged storage with Output enabled. Input must also be enabled, actually receiving at least the configured output amount, and have an input limit no lower than its output limit.
-
   ##Power Monitoring
 
   <Box>
