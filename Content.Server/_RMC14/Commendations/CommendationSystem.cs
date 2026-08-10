@@ -155,6 +155,7 @@ public sealed class CommendationSystem : SharedCommendationSystem
                 return false;
             }
 
+            // Regular awards first, then special awards
             var medalId = awardIndex <= medals.Count
                 ? medals[awardIndex - 1]
                 : specials[awardIndex - medals.Count - 1];
@@ -192,6 +193,7 @@ public sealed class CommendationSystem : SharedCommendationSystem
         return false;
     }
 
+    // Admin commendation (used by the console command and UI)
     public async Task<string?> AdminGiveCommendation(
         Guid adminId,
         string adminName,
@@ -208,6 +210,7 @@ public sealed class CommendationSystem : SharedCommendationSystem
         if (string.IsNullOrWhiteSpace(citation))
             return Loc.GetString("cmd-rmcgivecommendation-empty-citation");
 
+        // IPlayerLocator supports both username and Guid
         var located = await _playerLocator.LookupIdByNameOrIdAsync(receiverNameOrId);
         if (located == null)
             return Loc.GetString("cmd-rmcgivecommendation-player-not-found", ("player", receiverNameOrId));
@@ -225,11 +228,13 @@ public sealed class CommendationSystem : SharedCommendationSystem
 
         try
         {
+            // Save to database
             await _db.AddCommendation(adminId, receiverId, giverName, receiverCharacterName, awardName, citation, type, actualRound);
 
             var commendation = new Commendation(giverName, receiverCharacterName, awardName, citation, type, actualRound);
             _commendation.CommendationAdded(new NetUserId(adminId), new NetUserId(receiverId), commendation);
 
+            // Add to round summary only if it's for the current round
             if (actualRound == currentRound)
             {
                 var entry = new RoundCommendationEntry(
@@ -241,12 +246,14 @@ public sealed class CommendationSystem : SharedCommendationSystem
                 RoundCommendations.Add(entry);
             }
 
+            // Logs It
             var typeName = type == CommendationType.Medal ? "medal" : "jelly";
             var receiverLogin = located.Username;
 
             _adminLog.Add(LogType.RMCMedal,
                 $"admin {adminName} gave a {typeName} '{awardName}' to {receiverLogin} (character: {receiverCharacterName}) that reads:\n{citation}");
 
+            // Send admin announcement
             _chat.SendAdminAnnouncement(Loc.GetString("cmd-rmcgivecommendation-admin-announcement",
                 ("admin", adminName),
                 ("type", typeName),
