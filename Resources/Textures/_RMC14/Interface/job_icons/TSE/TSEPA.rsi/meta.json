@@ -18,6 +18,9 @@
         },
         {
             "name": "tse_pasynth"
+        },
+        {
+            "name": "tse_pamarksman"
         }
     ]
 }
