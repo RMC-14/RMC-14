@@ -17,6 +17,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Power;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Traits.Assorted;
 using Content.Shared.UserInterface;
@@ -63,6 +64,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         SubscribeLocalEvent<CryoCellComponent, CryoCellToggleNotifyBuiMsg>(OnToggleNotify);
         SubscribeLocalEvent<CryoCellComponent, CryoCellEjectBeakerBuiMsg>(OnEjectBeaker);
         SubscribeLocalEvent<CryoCellComponent, InteractUsingEvent>(OnInteractUsing);
+        SubscribeLocalEvent<CryoCellComponent, PowerChangedEvent>(OnCryoCellPower);
     }
 
     private void OnCellUIOpened(Entity<CryoCellComponent> cell, ref AfterActivatableUIOpenEvent args)
@@ -72,11 +74,10 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
 
     private void OnTogglePower(Entity<CryoCellComponent> cell, ref CryoCellTogglePowerBuiMsg args)
     {
-        cell.Comp.IsPoweredOn = !cell.Comp.IsPoweredOn;
-        var powered = IsPowered(cell);
+        cell.Comp.IsPoweredOn = cell.Comp.IsPoweredOn;
 
         Dirty(cell);
-        UpdateCryoCellVisuals(cell, powered);
+        UpdateCryoCellVisuals(cell);
         UpdateUI(cell);
     }
 
@@ -97,7 +98,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
 
     private void OnToggleNotify(Entity<CryoCellComponent> cell, ref CryoCellToggleNotifyBuiMsg args)
     {
-        cell.Comp.Notice = !cell.Comp.Notice;
+        cell.Comp.ReleaseNotice = !cell.Comp.ReleaseNotice;
         Dirty(cell);
         UpdateUI(cell);
     }
@@ -217,7 +218,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
             cell.Comp.CryoCellTemperature,
             cell.Comp.IsPoweredOn,
             cell.Comp.AutoEject,
-            cell.Comp.Notice,
+            cell.Comp.ReleaseNotice,
             isBeakerLoaded,
             _beakerReagentBuffer.ToArray());
 
@@ -235,7 +236,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
             if (cell.Occupant == null)
                 continue;
 
-            if (!IsPowered(uid))
+            if (TryComp<ApcPowerReceiverComponent>(uid, out var power) && power.Powered)
                 continue;
 
             if (time < cell.NextTick)
@@ -264,7 +265,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         {
             _popup.PopupEntity(Loc.GetString("rmc-cryo-cell-patient-dead"), cell);
             _audio.PlayPvs(cell.Comp.WarningSound, cell);
-            AutoEjectOccupant(cell, occupant, dead: true);
+            CryoPopupAndSound(cell, dead: true);
             return;
         }
 
@@ -364,35 +365,33 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         {
             if (damageable.TotalDamage <= 0)
             {
-                _popup.PopupEntity(Loc.GetString("rmc-cryo-cell-patient-recovered"), cell);
-                _audio.PlayPvs(cell.Comp.HealingCompleteSound, cell);
-                AutoEjectOccupant(cell, occupant, dead: false);
+                CryoPopupAndSound(cell);
+                EjectOccupant(cell, occupant);
             }
         }
     }
 
-    private void AutoEjectOccupant(Entity<CryoCellComponent> cell, EntityUid occupant, bool dead)
+    private void CryoPopupAndSound(Entity<CryoCellComponent> cell, bool dead = false, bool warning = false)
     {
-        cell.Comp.IsPoweredOn = false;
-
-        if (cell.Comp.Notice)
+        if (cell.Comp.ReleaseNotice)
         {
             var reason = dead
-                ? Loc.GetString("rmc-cryo-cell-auto-eject-dead")
-                : Loc.GetString("rmc-cryo-cell-auto-eject-recovered");
-            _popup.PopupCoordinates(
-                Loc.GetString("rmc-cryo-cell-auto-eject-popup", ("entity", occupant), ("reason", reason)),
-                Transform(cell).Coordinates,
-                PopupType.Large);
-        }
+                ? "rmc-cryo-cell-patient-dead"
+                : "rmc-cryo-cell-patient-recovered";
+            _popup.PopupEntity(Loc.GetString(reason), cell, PopupType.Large);
 
-        EjectOccupant(cell, occupant);
-        Dirty(cell);
-        UpdateCryoCellVisuals(cell, IsPowered(cell));
+            var sound = warning
+                ? cell.Comp.WarningSound
+                : cell.Comp.HealingCompleteSound;
+            _audio.PlayPvs(sound, cell);
+        }
     }
 
-    private bool IsPowered(EntityUid uid)
+    private void OnCryoCellPower(EntityUid uid, CryoCellComponent component, ref PowerChangedEvent args)
     {
-        return !TryComp<ApcPowerReceiverComponent>(uid, out var receiver) || receiver.Powered;
+        if (TryComp<ApcPowerReceiverComponent>(uid, out var power) && power.Powered)
+            return;
+
+        _ui.CloseUi(uid, CryoCellUIKey.Key);
     }
 }

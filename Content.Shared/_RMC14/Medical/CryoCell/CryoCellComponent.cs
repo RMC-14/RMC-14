@@ -9,7 +9,7 @@ namespace Content.Shared._RMC14.Medical.CryoCell;
 public sealed partial class CryoCellComponent : Component
 {
     [DataField]
-    public string ContainerId = "cryo_cell";
+    public string OccupantId = "cryo_cell";
 
     [DataField]
     public string BeakerSlot = "beakerSlot";
@@ -28,7 +28,7 @@ public sealed partial class CryoCellComponent : Component
     public bool AutoEject;
 
     [DataField, AutoNetworkedField]
-    public bool Notice;
+    public bool ReleaseNotice;
 
     [DataField]
     public TimeSpan TickDelay = TimeSpan.FromSeconds(3);
@@ -42,17 +42,21 @@ public sealed partial class CryoCellComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan ExitStun = TimeSpan.FromSeconds(1);
 
-    // amount * GLOBAL_STATUS_MULTIPLIER
+    /// <summary>
+    /// 10 * GLOBAL_STATUS_MULTIPLIER = 200 deciseconds
+    /// </summary>
     [DataField]
     public TimeSpan SleepDuration = TimeSpan.FromSeconds(20);
 
-    // amount * GLOBAL_STATUS_MULTIPLIER
+    /// <summary>
+    /// 10 * GLOBAL_STATUS_MULTIPLIER = 200 deciseconds
+    /// </summary>
     [DataField]
     public TimeSpan UnconsciousDuration = TimeSpan.FromSeconds(20);
 
     [DataField]
-    public SoundSpecifier HealingCompleteSound = new SoundPathSpecifier("/Audio/Effects/Cargo/ping.ogg");
+    public SoundSpecifier WarningSound = new SoundPathSpecifier("/Audio/Machines/twobeep.ogg");
 
     [DataField]
-    public SoundSpecifier WarningSound = new SoundPathSpecifier("/Audio/Machines/twobeep.ogg");
+    public SoundSpecifier HealingCompleteSound = new SoundPathSpecifier("/Audio/Effects/Cargo/ping.ogg");
 }

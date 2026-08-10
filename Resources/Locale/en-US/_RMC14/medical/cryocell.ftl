@@ -32,9 +32,5 @@ rmc-cryo-cell-beaker-header = Beaker
 rmc-cryo-cell-beaker-empty = No beaker loaded.
 rmc-cryo-cell-beaker-eject = Eject
 
-rmc-cryo-cell-ejected = {$entity} pops out of the cryo cell!
 rmc-cryo-cell-patient-dead = Patient is dead!
 rmc-cryo-cell-patient-recovered = Patient's external wounds are healed.
-rmc-cryo-cell-auto-eject-popup = Patient {$entity} has been automatically released from the cryo cell. {$reason}
-rmc-cryo-cell-auto-eject-dead = Reason for release: Patient death.
-rmc-cryo-cell-auto-eject-recovered = Reason for release: Patient recovery.

@@ -32,12 +32,12 @@ public abstract class SharedCryoCellSystem : EntitySystem
 
     private void OnCryoCellInit(Entity<CryoCellComponent> cell, ref ComponentInit args)
     {
-        _container.EnsureContainer<ContainerSlot>(cell, cell.Comp.ContainerId);
+        _container.EnsureContainer<ContainerSlot>(cell, cell.Comp.OccupantId);
     }
 
     private void OnCryoCellEntInserted(Entity<CryoCellComponent> cell, ref EntInsertedIntoContainerMessage args)
     {
-        if (args.Container.ID != cell.Comp.ContainerId)
+        if (args.Container.ID != cell.Comp.OccupantId)
             return;
 
         cell.Comp.Occupant = args.Entity;
@@ -51,7 +51,7 @@ public abstract class SharedCryoCellSystem : EntitySystem
 
     private void OnCryoCellEntRemoved(Entity<CryoCellComponent> cell, ref EntRemovedFromContainerMessage args)
     {
-        if (args.Container.ID != cell.Comp.ContainerId)
+        if (args.Container.ID != cell.Comp.OccupantId)
             return;
 
         if (cell.Comp.Occupant == args.Entity)
@@ -84,18 +84,17 @@ public abstract class SharedCryoCellSystem : EntitySystem
 
     protected void EjectOccupant(Entity<CryoCellComponent> cell, EntityUid occupant)
     {
-        if (!_container.TryGetContainer(cell, cell.Comp.ContainerId, out var container))
+        if (!_container.TryGetContainer(cell, cell.Comp.OccupantId, out var container))
             return;
 
         _container.Remove(occupant, container);
+        cell.Comp.IsPoweredOn = false;
 
         if (cell.Comp.ExitStun > TimeSpan.Zero && !HasComp<NoStunOnExitComponent>(cell))
             _stun.TryStun(occupant, cell.Comp.ExitStun, true);
 
-        if (_net.IsClient)
-            return;
-
-        _popup.PopupEntity(Loc.GetString("rmc-cryo-cell-ejected", ("entity", occupant)), cell);
+        Dirty(cell);
+        UpdateCryoCellVisuals(cell);
     }
 
     protected bool TryGetBeaker(Entity<CryoCellComponent> cell, out EntityUid beaker)

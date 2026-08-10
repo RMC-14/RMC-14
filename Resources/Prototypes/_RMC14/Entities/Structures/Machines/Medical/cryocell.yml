@@ -7,14 +7,37 @@
     mode: SnapgridCenter
   components:
   - type: Transform
+    noRot: true
     anchored: true
   - type: Sprite
     sprite: _RMC14/Structures/Machines/Medical/cryo_cell.rsi
     drawdepth: Mobs
     noRot: true
+    offset: 0, 0.5
     layers:
     - state: cell-off-empty
       map: ["enum.CryoCellVisualLayers.Base"]
+
+    - state: pod-open
+      map: [ "enum.CryoPodVisualLayers.Base" ]
+    - state: cover-on
+      map: [ "enum.CryoPodVisualLayers.Cover" ]
+      visible: false
+    - state: pod-panel
+      map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      visible: false
+
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.CryoCellVisuals.Occupied:
+        enum.CryoCellVisualLayers.Base:
+          Empty: { state: cell-on-empty }
+          Occupied: { state: cell-on-occupied }
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
   - type: InteractionOutline
   - type: Fixtures
     fixtures:
@@ -27,6 +50,7 @@
         - MachineMask
         layer:
         - MachineLayer
+  - type: CryoCell
   - type: ApcPowerReceiver
     powerLoad: 250
     needsPower: true
@@ -41,33 +65,33 @@
   - type: NoStunOnExit
   - type: ContainerContainer
     containers:
-      cryo_cell: !type:ContainerSlot { }
-      beakerSlot: !type:ContainerSlot { }
+      cryo_cell:
+        !type:ContainerSlot
+        showEnts: true
+      beakerSlot: !type:ContainerSlot {}
   - type: ItemSlots
     slots:
       beakerSlot:
         whitelist:
           components:
           - FitsInDispenser
-  - type: CryoCell
   - type: UserInterface
     interfaces:
       enum.CryoCellUIKey.Key:
         type: CryoCellBui
   - type: ActivatableUI
     key: enum.CryoCellUIKey.Key
+    requiresComplex: false
   - type: ActivatableUIRequiresPower
-  - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.CryoCellVisuals.Occupied:
-        enum.CryoCellVisualLayers.Base:
-          Empty: { state: cell-on-empty }
-          Occupied: { state: cell-on-occupied }
-      enum.PowerDeviceVisuals.Powered:
-        enum.PowerDeviceVisualLayers.Powered:
-          True: { visible: true }
-          False: { visible: false }
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: PointLight
+    color: "#43752c"
+    radius: 2
+    energy: 10
+    enabled: false
   - type: InsertBlacklist
     blacklist:
       components:
