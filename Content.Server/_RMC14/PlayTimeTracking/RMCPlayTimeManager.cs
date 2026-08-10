@@ -12,10 +12,10 @@ namespace Content.Server._RMC14.PlayTimeTracking;
 
 public sealed class RMCPlayTimeManager : IPostInjectInit
 {
-    [Dependency] private readonly IServerDbManager _db = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly UserDbDataManager _userDb = default!;
+    [Dependency] private IServerDbManager _db = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private UserDbDataManager _userDb = default!;
 
     private readonly Dictionary<NetUserId, HashSet<string>> _excluded = [];
 

@@ -31,15 +31,15 @@ namespace Content.Shared._RMC14.Marines.Skills;
 
 public sealed class SkillsSystem : EntitySystem
 {
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly ItemToggleSystem _toggle = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly RMCReagentSystem _reagent = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private ItemToggleSystem _toggle = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private RMCReagentSystem _reagent = default!;
 
     private static readonly EntProtoId<SkillDefinitionComponent> MeleeSkill = "RMCSkillMeleeWeapons";
 

@@ -11,7 +11,7 @@ namespace Content.Client.UserInterface.Controls;
 
 public sealed class MenuButton : ContainerButton
 {
-    [Dependency] private readonly IInputManager _inputManager = default!;
+    [Dependency] private IInputManager _inputManager = default!;
     public const string StyleClassLabelTopButton = "topButtonLabel";
     public const string StyleClassRedTopButton = "topButtonLabel";
 

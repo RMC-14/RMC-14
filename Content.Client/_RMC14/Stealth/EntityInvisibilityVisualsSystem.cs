@@ -7,7 +7,7 @@ namespace Content.Client._RMC14.Stealth;
 
 public sealed class EntityInvisibilityVisualsSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
 
     public override void Initialize()
     {

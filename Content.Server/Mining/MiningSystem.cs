@@ -13,8 +13,8 @@ namespace Content.Server.Mining;
 /// </summary>
 public sealed class MiningSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

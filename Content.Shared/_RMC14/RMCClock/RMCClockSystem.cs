@@ -8,7 +8,7 @@ namespace Content.Shared._RMC14.RMCClock;
 
 public sealed class RMCClockSystem : EntitySystem
 {
-    [Dependency] private readonly SharedGameTicker _ticker = default!;
+    [Dependency] private SharedGameTicker _ticker = default!;
 
     public override void Initialize()
     {

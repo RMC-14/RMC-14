@@ -10,8 +10,8 @@ namespace Content.Server.GameTicking.Commands
     [AdminCommand(AdminFlags.Round)]
     public sealed class ForcePresetCommand : LocalizedEntityCommands
     {
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-        [Dependency] private readonly GameTicker _ticker = default!;
+        [Dependency] private IPrototypeManager _prototypeManager = default!;
+        [Dependency] private GameTicker _ticker = default!;
 
         public override string Command => "forcepreset";
 

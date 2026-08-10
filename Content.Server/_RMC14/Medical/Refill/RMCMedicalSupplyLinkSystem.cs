@@ -9,11 +9,11 @@ namespace Content.Server._RMC14.Medical.Refill;
 
 public sealed class RMCMedicalSupplyLinkSystem : SharedRMCMedicalSupplyLinkSystem
 {
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedCMAutomatedVendorSystem _vendor = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private RMCMapSystem _rmcMap = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedCMAutomatedVendorSystem _vendor = default!;
 
     public override void Update(float frameTime)
     {

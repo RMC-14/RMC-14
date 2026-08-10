@@ -40,25 +40,25 @@ namespace Content.Shared._RMC14.Evacuation;
 
 public abstract class SharedEvacuationSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAmbientSoundSystem _ambientSound = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedDoorSystem _door = default!;
-    [Dependency] private readonly SharedHyperSleepChamberSystem _hyperSleep = default!;
-    [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
-    [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
+    [Dependency] private SharedAmbientSoundSystem _ambientSound = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedDoorSystem _door = default!;
+    [Dependency] private SharedHyperSleepChamberSystem _hyperSleep = default!;
+    [Dependency] private MapLoaderSystem _mapLoader = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private SharedMarineAnnounceSystem _marineAnnounce = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedRMCExplosionSystem _rmcExplosion = default!;
+    [Dependency] private SharedRMCPowerSystem _rmcPower = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedXenoAnnounceSystem _xenoAnnounce = default!;
 
     private EntityQuery<AreaComponent> _areaQuery;
     private EntityQuery<DoorComponent> _doorQuery;

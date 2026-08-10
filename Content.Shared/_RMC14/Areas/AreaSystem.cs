@@ -22,20 +22,20 @@ namespace Content.Shared._RMC14.Areas;
 
 public sealed class AreaSystem : EntitySystem
 {
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly SharedGameTicker _gameTicker = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly SharedRMCPvsSystem _rmcPvs = default!;
-    [Dependency] private readonly SharedRMCWarpSystem _rmcWarp = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly ITileDefinitionManager _tile = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedDropshipWeaponSystem _weapon = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private SharedGameTicker _gameTicker = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private SharedRMCPvsSystem _rmcPvs = default!;
+    [Dependency] private SharedRMCWarpSystem _rmcWarp = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private ITileDefinitionManager _tile = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedDropshipWeaponSystem _weapon = default!;
 
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
 
@@ -152,7 +152,7 @@ public sealed class AreaSystem : EntitySystem
         if (!grid.Comp2.Areas.TryGetValue(indices, out var areaProtoId))
             return false;
 
-        if (!_prototypes.TryIndex(areaProtoId, out areaPrototype))
+        if (!_prototypes.TryIndex<EntityPrototype>(areaProtoId, out areaPrototype))
             return false;
 
         if (!grid.Comp2.AreaEntities.TryGetValue(areaProtoId, out var areaEnt) ||

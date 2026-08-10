@@ -19,13 +19,13 @@ namespace Content.Shared._RMC14.Medical.Scanner;
 
 public sealed class RMCStethoscopeSystem : EntitySystem
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly InventorySystem _inventorySystem = default!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
+    [Dependency] private SkillsSystem _skills = default!;
+    [Dependency] private InventorySystem _inventorySystem = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
 
     private static readonly EntProtoId<SkillDefinitionComponent> MedicalSkill = "RMCSkillMedical";
     private static readonly string[] AccessorySlots = ["jumpsuit", "outerClothing"];
@@ -67,7 +67,7 @@ public sealed class RMCStethoscopeSystem : EntitySystem
             Comp<RMCStethoscopeComponent>(stethoscope),
             examineMarkup,
             Loc.GetString("rmc-stethoscope-verb-text"),
-            "/Textures/_RMC14/Objects/Medical/stethoscope.rsi/icon.png",
+            "/Textures/_RMC14/Interface/VerbIcons/Stethoscope.png",
             Loc.GetString("rmc-stethoscope-verb-message"));
     }
 

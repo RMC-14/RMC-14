@@ -13,8 +13,8 @@ namespace Content.Server.Xenoarchaeology.Artifact.XAT;
 /// </summary>
 public sealed class XATMagnetSystem : BaseQueryUpdateXATSystem<XATMagnetComponent>
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
 
     /// <summary> Pre-allocated and re-used collection.</summary>
     private HashSet<Entity<MagbootsComponent>> _magbootEntities = new();

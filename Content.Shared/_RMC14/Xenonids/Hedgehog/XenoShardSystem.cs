@@ -21,20 +21,20 @@ namespace Content.Shared._RMC14.Xenonids.Hedgehog;
 
 public sealed class XenoShardSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
-    [Dependency] private readonly CMArmorSystem _armor = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedAuraSystem _aura = default!;
-    [Dependency] private readonly XenoProjectileSystem _xenoProjectile = default!;
-    [Dependency] private readonly XenoShieldSystem _shield = default!;
-    [Dependency] private readonly XenoEnergySystem _energy = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedRMCExplosionSystem _explosion = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private CMArmorSystem _armor = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedAuraSystem _aura = default!;
+    [Dependency] private XenoProjectileSystem _xenoProjectile = default!;
+    [Dependency] private XenoShieldSystem _shield = default!;
+    [Dependency] private XenoEnergySystem _energy = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedRMCExplosionSystem _explosion = default!;
 
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private XenoSystem _xeno = default!;
 
     public override void Initialize()
     {

@@ -5,7 +5,7 @@ namespace Content.Client.Weapons.Ranged.Commands;
 
 public sealed class ShowSpreadCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly GunSystem _gunSystem = default!;
+    [Dependency] private GunSystem _gunSystem = default!;
 
     public override string Command => "showgunspread";
 

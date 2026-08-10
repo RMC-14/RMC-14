@@ -6,8 +6,8 @@ using Content.Shared.Toggleable;
 namespace Content.Server._RMC14.PropCalling;
 public sealed class PropCallingSystem : SharedPropCallingSystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private readonly HashSet<Entity<PropCallingComponent>> _callersSignedUp = new();
 

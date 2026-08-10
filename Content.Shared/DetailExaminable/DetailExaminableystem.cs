@@ -8,7 +8,7 @@ namespace Content.Shared.DetailExaminable;
 
 public sealed class DetailExaminableSystem : EntitySystem
 {
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
 
     public override void Initialize()
     {

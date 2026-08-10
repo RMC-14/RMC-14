@@ -12,8 +12,8 @@ namespace Content.Server.Objectives.Systems;
 /// </summary>
 public sealed class TargetObjectiveSystem : EntitySystem
 {
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly SharedJobSystem _job = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private SharedJobSystem _job = default!;
 
     public override void Initialize()
     {

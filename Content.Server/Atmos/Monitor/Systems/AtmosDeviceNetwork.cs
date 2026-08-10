@@ -26,7 +26,7 @@ public sealed class AtmosDeviceNetworkSystem : EntitySystem
     /// </summary>
     public const string SyncData = "atmos_sync_data";
 
-    [Dependency] private readonly DeviceNetworkSystem _deviceNet = default!;
+    [Dependency] private DeviceNetworkSystem _deviceNet = default!;
 
     public void Register(EntityUid uid, string? address)
     {

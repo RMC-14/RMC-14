@@ -9,7 +9,7 @@ namespace Content.Server.Chat.Commands;
 [AdminCommand(AdminFlags.Admin)] //RMC14 +ADMIN not +SERVER
 public sealed class SetLoocCommand : LocalizedCommands
 {
-    [Dependency] private readonly IConfigurationManager _configManager = default!;
+    [Dependency] private IConfigurationManager _configManager = default!;
 
     public override string Command => "setlooc";
 

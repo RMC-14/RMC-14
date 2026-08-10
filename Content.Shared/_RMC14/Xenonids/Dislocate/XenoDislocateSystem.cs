@@ -22,21 +22,21 @@ namespace Content.Shared._RMC14.Xenonids.Dislocate;
 
 public sealed class XenoDislocateSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly RMCSlowSystem _slow = default!;
-    [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
-    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
-    [Dependency] private readonly RMCObstacleSlammingSystem _obstacleSlamming = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedColorFlashEffectSystem _colorFlash = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private RMCSlowSystem _slow = default!;
+    [Dependency] private SharedRMCMeleeWeaponSystem _rmcMelee = default!;
+    [Dependency] private SharedRMCDamageableSystem _rmcDamageable = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private RMCSizeStunSystem _sizeStun = default!;
+    [Dependency] private RMCObstacleSlammingSystem _obstacleSlamming = default!;
 
     public override void Initialize()
     {

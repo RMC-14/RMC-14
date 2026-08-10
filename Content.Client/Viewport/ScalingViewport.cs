@@ -21,9 +21,9 @@ namespace Content.Client.Viewport
     /// </summary>
     public sealed class ScalingViewport : Control, IViewportControl
     {
-        [Dependency] private readonly IClyde _clyde = default!;
-        [Dependency] private readonly IEntityManager _entityManager = default!;
-        [Dependency] private readonly IInputManager _inputManager = default!;
+        [Dependency] private IClyde _clyde = default!;
+        [Dependency] private IEntityManager _entityManager = default!;
+        [Dependency] private IInputManager _inputManager = default!;
 
         // Internal viewport creation is deferred.
         private IClydeViewport? _viewport;

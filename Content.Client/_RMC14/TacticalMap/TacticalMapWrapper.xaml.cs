@@ -33,8 +33,8 @@ public enum DrawingMode
 [GenerateTypedNameReferences]
 public sealed partial class TacticalMapWrapper : Control
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
 
     public TimeSpan LastUpdateAt;
     public TimeSpan NextUpdateAt;

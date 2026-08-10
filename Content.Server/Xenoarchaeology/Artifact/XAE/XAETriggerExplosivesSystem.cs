@@ -11,7 +11,7 @@ namespace Content.Server.Xenoarchaeology.Artifact.XAE;
 /// </summary>
 public sealed class XAETriggerExplosivesSystem : BaseXAESystem<XAETriggerExplosivesComponent>
 {
-    [Dependency] private readonly ExplosionSystem _explosion = default!;
+    [Dependency] private ExplosionSystem _explosion = default!;
 
     /// <inheritdoc />
     protected override void OnActivated(Entity<XAETriggerExplosivesComponent> ent, ref XenoArtifactNodeActivatedEvent args)

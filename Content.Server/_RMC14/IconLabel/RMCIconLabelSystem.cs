@@ -6,7 +6,7 @@ namespace Content.Server._RMC14.IconLabel;
 
 public sealed class RMCIconLabelSystem : SharedRMCIconLabelSystem
 {
-    [Dependency] private readonly QuickDialogSystem _quickDialog = default!;
+    [Dependency] private QuickDialogSystem _quickDialog = default!;
 
     protected override void TrySetIconLabel(EntityUid user, EntityUid target, int maxLength)
     {

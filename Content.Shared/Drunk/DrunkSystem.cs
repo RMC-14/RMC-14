@@ -9,8 +9,8 @@ public abstract class SharedDrunkSystem : EntitySystem
 {
     public static readonly ProtoId<StatusEffectPrototype> DrunkKey = "Drunk";
 
-    [Dependency] private readonly StatusEffectsSystem _statusEffectsSystem = default!;
-    [Dependency] private readonly SharedSlurredSystem _slurredSystem = default!;
+    [Dependency] private StatusEffectsSystem _statusEffectsSystem = default!;
+    [Dependency] private SharedSlurredSystem _slurredSystem = default!;
 
     public void TryApplyDrunkenness(EntityUid uid, float boozePower, bool applySlur = true,
         StatusEffectsComponent? status = null)

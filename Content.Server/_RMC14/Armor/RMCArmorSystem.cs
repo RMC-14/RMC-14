@@ -11,10 +11,10 @@ namespace Content.Server._RMC14.Armor;
 
 public sealed class RMCArmorSystem : EntitySystem
 {
-    [Dependency] private readonly IServerPreferencesManager _prefs = default!;
+    [Dependency] private IServerPreferencesManager _prefs = default!;
     [Dependency] protected readonly InventorySystem InventorySystem = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly CMArmorSystem _armorSystem = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private CMArmorSystem _armorSystem = default!;
 
     private EntityQuery<RMCArmorVariantComponent> _armorVariantQuery;
 

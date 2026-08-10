@@ -19,12 +19,12 @@ namespace Content.Server.Access.Systems
 {
     public sealed class AgentIDCardSystem : SharedAgentIdCardSystem
     {
-        [Dependency] private readonly PopupSystem _popupSystem = default!;
-        [Dependency] private readonly IdCardSystem _cardSystem = default!;
-        [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-        [Dependency] private readonly ChameleonClothingSystem _chameleon = default!;
-        [Dependency] private readonly ChameleonControllerSystem _chamController = default!;
+        [Dependency] private PopupSystem _popupSystem = default!;
+        [Dependency] private IdCardSystem _cardSystem = default!;
+        [Dependency] private UserInterfaceSystem _uiSystem = default!;
+        [Dependency] private IPrototypeManager _prototypeManager = default!;
+        [Dependency] private ChameleonClothingSystem _chameleon = default!;
+        [Dependency] private ChameleonControllerSystem _chamController = default!;
 
         public override void Initialize()
         {

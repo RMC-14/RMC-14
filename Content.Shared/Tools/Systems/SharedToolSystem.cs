@@ -19,7 +19,6 @@ namespace Content.Shared.Tools.Systems;
 
 public abstract partial class SharedToolSystem : EntitySystem
 {
-    [Dependency] private   readonly IMapManager _mapManager = default!;
     [Dependency] private   readonly IPrototypeManager _protoMan = default!;
     [Dependency] protected readonly ISharedAdminLogManager AdminLogger = default!;
     [Dependency] private   readonly ITileDefinitionManager _tileDefManager = default!;

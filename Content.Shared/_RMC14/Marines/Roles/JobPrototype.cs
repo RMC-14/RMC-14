@@ -13,32 +13,32 @@ namespace Content.Shared.Roles;
 public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
 {
     [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<JobPrototype>))]
-    public string[]? Parents { get; }
+    public string[]? Parents { get; private set; }
 
     [NeverPushInheritance]
     [AbstractDataField]
-    public bool Abstract { get; }
+    public bool Abstract { get; private set; }
 
     [DataField]
-    public bool IsCM { get; }
+    public bool IsCM { get; private set; }
 
     [DataField]
-    public readonly bool HasSquad;
+    public bool HasSquad;
 
     [DataField]
-    public readonly bool HasIcon = true;
+    public bool HasIcon = true;
 
     [DataField]
-    public readonly bool Hidden;
+    public bool Hidden;
 
     [DataField]
-    public readonly int? OverwatchSortPriority;
+    public int? OverwatchSortPriority;
 
     [DataField]
-    public readonly bool OverwatchShowName;
+    public bool OverwatchShowName;
 
     [DataField]
-    public readonly string? OverwatchRoleName;
+    public string? OverwatchRoleName;
 
     /// <summary>
     /// Should this job have rank preferences appear in the preferences menu?
@@ -47,16 +47,16 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
     public bool SetRankPreference { get; private set; } = false;
 
     [DataField]
-    public readonly string? SpawnMenuRoleName;
+    public string? SpawnMenuRoleName;
 
     [DataField]
-    public readonly string? NewToJobInfo;
+    public string? NewToJobInfo;
 
     [DataField]
-    public readonly Dictionary<ProtoId<RankPrototype>, HashSet<JobRequirement>?>? Ranks;
+    public Dictionary<ProtoId<RankPrototype>, HashSet<JobRequirement>?>? Ranks;
 
     [DataField]
-    public readonly Dictionary<RMCPlaytimeMedalType, EntProtoId>? Medals;
+    public Dictionary<RMCPlaytimeMedalType, EntProtoId>? Medals;
 
     [DataField]
     public float RoleWeight;
@@ -94,5 +94,5 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
     /// Starting gear that is given when the map has a certain camoflage enabled.
     /// </summary>
     [DataField]
-    public readonly Dictionary<CamouflageType, ProtoId<StartingGearPrototype>>? CamouflageStartingGear;
+    public Dictionary<CamouflageType, ProtoId<StartingGearPrototype>>? CamouflageStartingGear;
 }

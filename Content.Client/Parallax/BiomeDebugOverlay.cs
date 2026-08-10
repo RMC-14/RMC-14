@@ -14,11 +14,11 @@ public sealed class BiomeDebugOverlay : Overlay
 {
     public override OverlaySpace Space => OverlaySpace.ScreenSpace;
 
-    [Dependency] private readonly IEntityManager _entManager = default!;
-    [Dependency] private readonly IEyeManager _eyeManager = default!;
-    [Dependency] private readonly IInputManager _inputManager = default!;
-    [Dependency] private readonly IResourceCache _cache = default!;
-    [Dependency] private readonly ITileDefinitionManager _tileDefManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
+    [Dependency] private IEyeManager _eyeManager = default!;
+    [Dependency] private IInputManager _inputManager = default!;
+    [Dependency] private IResourceCache _cache = default!;
+    [Dependency] private ITileDefinitionManager _tileDefManager = default!;
 
     private BiomeSystem _biomes;
     private SharedMapSystem _maps;

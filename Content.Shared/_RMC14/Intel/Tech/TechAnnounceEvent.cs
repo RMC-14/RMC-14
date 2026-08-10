@@ -5,4 +5,4 @@ namespace Content.Shared._RMC14.Intel.Tech;
 
 [DataRecord]
 [Serializable, NetSerializable]
-public sealed record TechAnnounceEvent(string Author, string Message, SoundSpecifier? Sound);
+public sealed partial record TechAnnounceEvent(string Author, string Message, SoundSpecifier? Sound);

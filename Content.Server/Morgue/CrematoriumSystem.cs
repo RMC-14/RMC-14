@@ -21,14 +21,14 @@ namespace Content.Server.Morgue;
 
 public sealed class CrematoriumSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly GhostSystem _ghostSystem = default!;
-    [Dependency] private readonly EntityStorageSystem _entityStorage = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly SharedMindSystem _minds = default!;
-    [Dependency] private readonly SharedContainerSystem _containers = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private GhostSystem _ghostSystem = default!;
+    [Dependency] private EntityStorageSystem _entityStorage = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private SharedMindSystem _minds = default!;
+    [Dependency] private SharedContainerSystem _containers = default!;
 
     public override void Initialize()
     {

@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
+using Content.Shared._RMC14.Deferred;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
@@ -33,41 +34,37 @@ namespace Content.Shared._RMC14.Xenonids.Charge;
 
 public sealed class XenoChargeSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
-    [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
-    [Dependency] private readonly RMCSlowSystem _slow = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ThrownItemSystem _thrownItem = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly XenoAnimationsSystem _xenoAnimations = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
-    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedDestructibleSystem _destruct = default!;
-    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedColorFlashEffectSystem _colorFlash = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private RMCDeferredPhysicsSystem _deferredPhysics = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedRMCDamageableSystem _rmcDamageable = default!;
+    [Dependency] private RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
+    [Dependency] private RMCSlowSystem _slow = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private XenoAnimationsSystem _xenoAnimations = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedDestructibleSystem _destruct = default!;
+    [Dependency] private RMCSizeStunSystem _sizeStun = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
 
     private readonly ProtoId<DamageTypePrototype> _blunt = "Blunt";
 
-    private EntityQuery<PhysicsComponent> _physicsQuery;
-    private EntityQuery<ThrownItemComponent> _thrownItemQuery;
     private EntityQuery<XenoChargeDontHitComponent> _xenoChargeDontHitQuery;
 
     public override void Initialize()
     {
-        _physicsQuery = GetEntityQuery<PhysicsComponent>();
-        _thrownItemQuery = GetEntityQuery<ThrownItemComponent>();
         _xenoChargeDontHitQuery = GetEntityQuery<XenoChargeDontHitComponent>();
 
         SubscribeLocalEvent<XenoChargeComponent, XenoChargeActionEvent>(OnXenoChargeAction);
@@ -185,7 +182,8 @@ public sealed class XenoChargeSystem : EntitySystem
                 return;
         }
 
-        StopCrusherCharge(xeno);
+        if (!TryStopCrusherCharge(xeno))
+            return;
 
         if (_net.IsServer)
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
@@ -252,20 +250,15 @@ public sealed class XenoChargeSystem : EntitySystem
         Dirty(xeno);
     }
 
-    private void StopCrusherCharge(Entity<XenoChargeComponent> xeno)
+    private bool TryStopCrusherCharge(Entity<XenoChargeComponent> xeno)
     {
-        if (_physicsQuery.TryGetComponent(xeno, out var physics) &&
-            _thrownItemQuery.TryGetComponent(xeno, out var thrown))
-        {
-            _thrownItem.LandComponent(xeno, thrown, physics, true);
-            _thrownItem.StopThrow(xeno, thrown);
-        }
+        if (!_deferredPhysics.TryQueueLandAndStopThrow(xeno))
+            return false;
 
         if (_timing.IsFirstTimePredicted && xeno.Comp.Charge is { } charge)
-        {
-            xeno.Comp.Charge = null;
             _xenoAnimations.PlayLungeAnimationEvent(xeno, charge);
-        }
+
+        return true;
     }
 
     private void OnXenoChargePreventCollide(Entity<XenoChargeComponent> xeno, ref PreventCollideEvent args)

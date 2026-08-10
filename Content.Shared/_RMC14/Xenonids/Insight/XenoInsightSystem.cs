@@ -7,9 +7,9 @@ namespace Content.Shared._RMC14.Xenonids.Insight;
 
 public sealed class XenoInsightSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedRMCEmoteSystem _emote = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     public int GetInsight(EntityUid uid)
     {

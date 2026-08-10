@@ -8,8 +8,8 @@ namespace Content.Shared._RMC14.Localizations;
 
 public sealed class RMCLocalizationManager
 {
-    [Dependency] private readonly IEntityManager _entity = default!;
-    [Dependency] private readonly ILocalizationManager _loc = default!;
+    [Dependency] private IEntityManager _entity = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
 
     public void Initialize(CultureInfo culture)
     {

@@ -7,9 +7,9 @@ namespace Content.Shared.Movement.Systems;
 
 public sealed class AutoOrientSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfgManager = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedMoverController _mover = default!;
+    [Dependency] private IConfigurationManager _cfgManager = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedMoverController _mover = default!;
 
     private TimeSpan _delay = TimeSpan.Zero;
 

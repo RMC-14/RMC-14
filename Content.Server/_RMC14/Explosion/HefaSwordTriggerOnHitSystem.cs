@@ -5,8 +5,8 @@ namespace Content.Server._RMC14.Explosion;
 
 public sealed class HefaSwordTriggerOnHitSystem : SharedHefaSwordTriggerOnHitSystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly TriggerSystem _trigger = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private TriggerSystem _trigger = default!;
 
     protected override void TriggerSword(Entity<HefaSwordTriggerOnHitComponent> ent, EntityUid user, EntityUid target)
     {

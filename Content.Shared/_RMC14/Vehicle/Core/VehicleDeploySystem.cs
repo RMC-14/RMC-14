@@ -35,20 +35,20 @@ public sealed class VehicleDeploySystem : EntitySystem
 
     private readonly List<VehicleMountedSlot> _mountedSlotsBuffer = new();
 
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
-    [Dependency] private readonly SharedGunSystem _guns = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly MetaDataSystem _meta = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
-    [Dependency] private readonly SharedSentryTargetingSystem _targeting = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly VehicleTopologySystem _topology = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly VehicleTurretSystem _turret = default!;
-    [Dependency] private readonly VehicleSystem _vehicle = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedCombatModeSystem _combatMode = default!;
+    [Dependency] private SharedGunSystem _guns = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedCMChatSystem _rmcChat = default!;
+    [Dependency] private SharedSentryTargetingSystem _targeting = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private VehicleTopologySystem _topology = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private VehicleTurretSystem _turret = default!;
+    [Dependency] private VehicleSystem _vehicle = default!;
 
     public override void Initialize()
     {

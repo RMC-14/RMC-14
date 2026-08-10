@@ -9,7 +9,7 @@ namespace Content.Server.Objectives.Systems;
 /// </summary>
 public sealed class RoleRequirementSystem : EntitySystem
 {
-    [Dependency] private readonly SharedRoleSystem _roles = default!;
+    [Dependency] private SharedRoleSystem _roles = default!;
     public override void Initialize()
     {
         base.Initialize();

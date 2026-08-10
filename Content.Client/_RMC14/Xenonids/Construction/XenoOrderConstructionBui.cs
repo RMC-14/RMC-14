@@ -11,7 +11,7 @@ namespace Content.Client._RMC14.Xenonids.Construction;
 [UsedImplicitly]
 public sealed class XenoOrderConstructionBui : BoundUserInterface
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private readonly SpriteSystem _sprite;
 

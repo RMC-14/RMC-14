@@ -7,8 +7,8 @@ namespace Content.Client.DisplacementMap;
 
 public sealed class DisplacementMapSystem : EntitySystem
 {
-    [Dependency] private readonly ISerializationManager _serialization = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private ISerializationManager _serialization = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     /// <summary>
     /// Attempting to apply a displacement map to a specific layer of SpriteComponent

@@ -14,9 +14,9 @@ using static Robust.Shared.Utility.SpriteSpecifier;
 namespace Content.Client._RMC14.VentCrawl;
 public sealed class VentCrawlIconOverlay : Overlay
 {
-    [Dependency] private readonly IEntityManager _entity = default!;
-    [Dependency] private readonly IPlayerManager _players = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IEntityManager _entity = default!;
+    [Dependency] private IPlayerManager _players = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private readonly SpriteSystem _sprite;
     private readonly TransformSystem _transform;

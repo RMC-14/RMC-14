@@ -54,7 +54,7 @@ namespace Content.Shared.Weapons.Melee;
 public abstract class SharedMeleeWeaponSystem : EntitySystem
 {
     [Dependency] protected readonly IGameTiming Timing = default!;
-    [Dependency] protected readonly IMapManager MapManager = default!;
+    [Dependency] protected readonly SharedMapSystem MapManager = default!;
     [Dependency] private   readonly INetManager _netMan = default!;
     [Dependency] private   readonly IPrototypeManager _protoManager = default!;
     [Dependency] private   readonly IRobustRandom _random = default!;
@@ -74,10 +74,10 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     [Dependency] private   readonly SharedStaminaSystem _stamina = default!;
 
     // RMC14 start
-    [Dependency] private readonly IConfigurationManager _configuration = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
-    [Dependency] private readonly SharedEntityStorageSystem _storage = default!;
+    [Dependency] private IConfigurationManager _configuration = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private SharedRMCMeleeWeaponSystem _rmcMelee = default!;
+    [Dependency] private SharedEntityStorageSystem _storage = default!;
     // RMC14 end
 
     private const int AttackMask = (int) (CollisionGroup.MobMask | CollisionGroup.Opaque);

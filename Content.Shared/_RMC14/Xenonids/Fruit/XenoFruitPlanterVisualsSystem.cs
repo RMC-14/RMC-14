@@ -8,9 +8,9 @@ namespace Content.Shared._RMC14.Xenonids.Fruit;
 
 public sealed class XenoFruitPlanterVisualsSystem : EntitySystem
 {
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {

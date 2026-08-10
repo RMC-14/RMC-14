@@ -11,7 +11,7 @@ namespace Content.Shared._RMC14.Commendations;
 
 public abstract class SharedCommendationSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private IConfigurationManager _config = default!;
 
     protected readonly List<RoundCommendationEntry> RoundCommendations = new();
 

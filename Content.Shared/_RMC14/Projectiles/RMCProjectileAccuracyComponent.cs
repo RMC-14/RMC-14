@@ -63,7 +63,7 @@ public sealed partial class RMCProjectileAccuracyComponent : Component
 }
 
 [DataRecord, Serializable, NetSerializable]
-public record struct AccuracyFalloffThreshold(
+public partial record struct AccuracyFalloffThreshold(
     /// <summary>
     /// The range at which accuracy falloff starts to take effect.
     /// Conversion from 13: accurate_range

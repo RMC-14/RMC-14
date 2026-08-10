@@ -10,8 +10,8 @@ namespace Content.Client.CrewManifest.UI;
 
 public sealed class CrewManifestListing : BoxContainer
 {
-    [Dependency] private readonly IEntitySystemManager _entitySystem = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntitySystemManager _entitySystem = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
     private readonly SpriteSystem _spriteSystem;
 
     public CrewManifestListing()

@@ -13,10 +13,10 @@ namespace Content.Server.Administration.Managers;
 /// </summary>
 public sealed class CVarControlManager : IPostInjectInit
 {
-    [Dependency] private readonly IReflectionManager _reflectionManager = default!;
-    [Dependency] private readonly IAdminManager _adminManager = default!;
-    [Dependency] private readonly ILocalizationManager _localizationManager = default!;
-    [Dependency] private readonly ILogManager _logger = default!;
+    [Dependency] private IReflectionManager _reflectionManager = default!;
+    [Dependency] private IAdminManager _adminManager = default!;
+    [Dependency] private ILocalizationManager _localizationManager = default!;
+    [Dependency] private ILogManager _logger = default!;
 
     private readonly List<ChangableCVar> _changableCvars = new();
     private ISawmill _sawmill = default!;

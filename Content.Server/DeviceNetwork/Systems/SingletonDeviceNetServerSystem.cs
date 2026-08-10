@@ -13,8 +13,8 @@ namespace Content.Server.DeviceNetwork.Systems;
 /// </summary>
 public sealed class SingletonDeviceNetServerSystem : EntitySystem
 {
-    [Dependency] private readonly DeviceNetworkSystem _deviceNetworkSystem = default!;
-    [Dependency] private readonly StationSystem _stationSystem = default!;
+    [Dependency] private DeviceNetworkSystem _deviceNetworkSystem = default!;
+    [Dependency] private StationSystem _stationSystem = default!;
 
     public override void Initialize()
     {

@@ -10,14 +10,14 @@ namespace Content.Shared._RMC14.Shields;
 
 public sealed class KingShieldSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly XenoShieldSystem _shield = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly MobThresholdSystem _threshold = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private XenoShieldSystem _shield = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private MobThresholdSystem _threshold = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

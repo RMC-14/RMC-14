@@ -11,9 +11,9 @@ namespace Content.Server.Power.EntitySystems
     [UsedImplicitly]
     public sealed class CableVisSystem : EntitySystem
     {
-        [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-        [Dependency] private readonly NodeContainerSystem _nodeContainer = default!;
-        [Dependency] private readonly SharedMapSystem _map = default!;
+        [Dependency] private SharedAppearanceSystem _appearance = default!;
+        [Dependency] private NodeContainerSystem _nodeContainer = default!;
+        [Dependency] private SharedMapSystem _map = default!;
 
         public override void Initialize()
         {

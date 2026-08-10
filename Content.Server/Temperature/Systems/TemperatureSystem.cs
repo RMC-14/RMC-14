@@ -19,11 +19,11 @@ namespace Content.Server.Temperature.Systems;
 
 public sealed class TemperatureSystem : EntitySystem
 {
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly TemperatureSystem _temperature = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private AtmosphereSystem _atmosphere = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private TemperatureSystem _temperature = default!;
 
     /// <summary>
     ///     All the components that will have their damage updated at the end of the tick.

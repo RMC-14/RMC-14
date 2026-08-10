@@ -23,12 +23,12 @@ namespace Content.Server._RMC14.Chat.Chat;
 
 public sealed class CMChatSystem : SharedCMChatSystem
 {
-    [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ReplacementAccentSystem _wordreplacement = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ReplacementAccentSystem _wordreplacement = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     private static readonly ProtoId<ReplacementAccentPrototype> ChatSanitize = "CMChatSanitize";
     private static readonly ProtoId<ReplacementAccentPrototype> MarineChatSanitize = "CMChatSanitizeMarine";

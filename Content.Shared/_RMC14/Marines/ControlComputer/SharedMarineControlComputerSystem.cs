@@ -28,20 +28,20 @@ namespace Content.Shared._RMC14.Marines.ControlComputer;
 
 public abstract class SharedMarineControlComputerSystem : EntitySystem
 {
-    [Dependency] private readonly RMCAlertLevelSystem _alertLevel = default!;
-    [Dependency] private readonly SharedCommendationSystem _commendation = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly ARESCoreSystem _core = default!;
-    [Dependency] private readonly DialogSystem _dialog = default!;
-    [Dependency] private readonly SharedEvacuationSystem _evacuation = default!;
-    [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly WarshipSystem _warship = default!;
+    [Dependency] private RMCAlertLevelSystem _alertLevel = default!;
+    [Dependency] private SharedCommendationSystem _commendation = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private ARESCoreSystem _core = default!;
+    [Dependency] private DialogSystem _dialog = default!;
+    [Dependency] private SharedEvacuationSystem _evacuation = default!;
+    [Dependency] private SharedMarineAnnounceSystem _marineAnnounce = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private WarshipSystem _warship = default!;
 
     private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabAnnouncementLogs";
     private int _characterLimit = 1000;

@@ -5,7 +5,7 @@ namespace Content.Shared.Storage.EntitySystems;
 
 public sealed class StoreAfterFailedInteractSystem : EntitySystem
 {
-    [Dependency] private readonly SharedStorageSystem _storage = default!;
+    [Dependency] private SharedStorageSystem _storage = default!;
 
     public override void Initialize()
     {

@@ -18,20 +18,20 @@ namespace Content.Shared._RMC14.Xenonids.Aid;
 
 public sealed class XenoAidSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
-    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly XenoEnergySystem _xenoEnergy = default!;
-    [Dependency] private readonly XenoStrainSystem _xenoStrain = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedJitteringSystem _jitter = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private SharedRMCDamageableSystem _rmcDamageable = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private XenoEnergySystem _xenoEnergy = default!;
+    [Dependency] private XenoStrainSystem _xenoStrain = default!;
 
     public override void Initialize()
     {

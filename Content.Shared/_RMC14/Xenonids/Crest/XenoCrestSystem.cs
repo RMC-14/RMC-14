@@ -15,12 +15,12 @@ namespace Content.Shared._RMC14.Xenonids.Crest;
 
 public sealed class XenoCrestSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly CMArmorSystem _armor = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private CMArmorSystem _armor = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
 
     public override void Initialize()
     {

@@ -14,19 +14,19 @@ namespace Content.Shared._RMC14.Xenonids.HighGallop;
 
 public sealed partial class XenoHighGallopSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly RMCPullingSystem _pulling = default!;
-    [Dependency] private readonly TagSystem _tags = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly RMCSlowSystem _slow = default!;
-    [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly RMCSizeStunSystem _size = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private RMCPullingSystem _pulling = default!;
+    [Dependency] private TagSystem _tags = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private RMCSlowSystem _slow = default!;
+    [Dependency] private SharedRMCEmoteSystem _emote = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private RMCSizeStunSystem _size = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoHighGallopComponent, XenoHighGallopActionEvent>(OnHighGallopAction);

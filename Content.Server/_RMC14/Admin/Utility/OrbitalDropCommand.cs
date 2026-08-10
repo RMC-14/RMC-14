@@ -14,9 +14,9 @@ internal sealed class OrbitalDropCommand : LocalizedEntityCommands
     public override string Description => Loc.GetString("cmd-orbitaldrop-desc");
     public override string Help => Loc.GetString("cmd-orbitaldrop-help");
 
-    [Dependency] private readonly IEntityManager _entities = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly SharedRMCOrbitalDeployerSystem _orbitalDeployer = default!;
+    [Dependency] private IEntityManager _entities = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private SharedRMCOrbitalDeployerSystem _orbitalDeployer = default!;
 
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {

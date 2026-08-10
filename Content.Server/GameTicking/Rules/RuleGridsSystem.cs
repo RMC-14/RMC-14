@@ -12,8 +12,8 @@ namespace Content.Server.GameTicking.Rules;
 /// </summary>
 public sealed class RuleGridsSystem : GameRuleSystem<RuleGridsComponent>
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {

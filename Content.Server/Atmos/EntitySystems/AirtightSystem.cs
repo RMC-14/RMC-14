@@ -9,10 +9,10 @@ namespace Content.Server.Atmos.EntitySystems
     [UsedImplicitly]
     public sealed class AirtightSystem : EntitySystem
     {
-        [Dependency] private readonly SharedTransformSystem _transform = default!;
-        [Dependency] private readonly AtmosphereSystem _atmosphereSystem = default!;
-        [Dependency] private readonly ExplosionSystem _explosionSystem = default!;
-        [Dependency] private readonly SharedMapSystem _mapSystem = default!;
+        [Dependency] private SharedTransformSystem _transform = default!;
+        [Dependency] private AtmosphereSystem _atmosphereSystem = default!;
+        [Dependency] private ExplosionSystem _explosionSystem = default!;
+        [Dependency] private SharedMapSystem _mapSystem = default!;
 
         public override void Initialize()
         {

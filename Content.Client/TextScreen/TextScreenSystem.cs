@@ -26,7 +26,7 @@ namespace Content.Client.TextScreen;
 /// </summary>
 public sealed class TextScreenSystem : VisualizerSystem<TextScreenVisualsComponent>
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
 
     /// <summary>
     ///     Contains char/state Key/Value pairs. <br/>

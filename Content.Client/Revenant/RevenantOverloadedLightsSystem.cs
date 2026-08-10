@@ -6,7 +6,7 @@ namespace Content.Client.Revenant;
 
 public sealed class RevenantOverloadedLightsSystem : SharedRevenantOverloadedLightsSystem
 {
-    [Dependency] private readonly SharedPointLightSystem _lights = default!;
+    [Dependency] private SharedPointLightSystem _lights = default!;
 
     public override void Initialize()
     {

@@ -12,7 +12,7 @@ namespace Content.Server.Power.EntitySystems
     [UsedImplicitly]
     public sealed class BatterySystem : EntitySystem
     {
-        [Dependency] private readonly IGameTiming _timing = default!;
+        [Dependency] private IGameTiming _timing = default!;
 
         public override void Initialize()
         {

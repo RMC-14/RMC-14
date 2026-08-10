@@ -11,9 +11,9 @@ namespace Content.Server.Administration.BanList;
 
 public sealed class BanListEui : BaseEui
 {
-    [Dependency] private readonly IAdminManager _admins = default!;
-    [Dependency] private readonly IPlayerLocator _playerLocator = default!;
-    [Dependency] private readonly IServerDbManager _db = default!;
+    [Dependency] private IAdminManager _admins = default!;
+    [Dependency] private IPlayerLocator _playerLocator = default!;
+    [Dependency] private IServerDbManager _db = default!;
 
     public BanListEui()
     {

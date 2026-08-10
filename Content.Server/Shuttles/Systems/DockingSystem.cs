@@ -19,16 +19,15 @@ namespace Content.Server.Shuttles.Systems
 {
     public sealed partial class DockingSystem : SharedDockingSystem
     {
-        [Dependency] private readonly IMapManager _mapManager = default!;
-        [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-        [Dependency] private readonly DoorSystem _doorSystem = default!;
-        [Dependency] private readonly EntityLookupSystem _lookup = default!;
-        [Dependency] private readonly PathfindingSystem _pathfinding = default!;
-        [Dependency] private readonly ShuttleConsoleSystem _console = default!;
-        [Dependency] private readonly SharedJointSystem _jointSystem = default!;
-        [Dependency] private readonly SharedPopupSystem _popup = default!;
-        [Dependency] private readonly SharedTransformSystem _transform = default!;
-        [Dependency] private readonly DropshipSystem _dropship = default!;
+        [Dependency] private SharedMapSystem _mapSystem = default!;
+        [Dependency] private DoorSystem _doorSystem = default!;
+        [Dependency] private EntityLookupSystem _lookup = default!;
+        [Dependency] private PathfindingSystem _pathfinding = default!;
+        [Dependency] private ShuttleConsoleSystem _console = default!;
+        [Dependency] private SharedJointSystem _jointSystem = default!;
+        [Dependency] private SharedPopupSystem _popup = default!;
+        [Dependency] private SharedTransformSystem _transform = default!;
+        [Dependency] private DropshipSystem _dropship = default!;
 
         private const string DockingJoint = "docking";
 

@@ -27,15 +27,14 @@ namespace Content.Server.Singularity.EntitySystems;
 public sealed class EventHorizonSystem : SharedEventHorizonSystem
 {
     #region Dependencies
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IMapManager _mapMan = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedTransformSystem _xformSystem = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedTransformSystem _xformSystem = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
     #endregion Dependencies
 
     private static readonly ProtoId<TagPrototype> HighRiskItemTag = "HighRiskItem";
@@ -314,7 +313,7 @@ public sealed class EventHorizonSystem : SharedEventHorizonSystem
         var box = Box2.CenteredAround(mapPos.Position, new Vector2(range, range));
         var circle = new Circle(mapPos.Position, range);
         var grids = new List<Entity<MapGridComponent>>();
-        _mapMan.FindGridsIntersecting(mapPos.MapId, box, ref grids);
+        _mapSystem.FindGridsIntersecting(mapPos.MapId, box, ref grids);
 
         foreach (var grid in grids)
         {

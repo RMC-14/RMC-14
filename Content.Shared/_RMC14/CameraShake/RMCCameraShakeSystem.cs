@@ -7,9 +7,9 @@ namespace Content.Shared._RMC14.CameraShake;
 
 public sealed class RMCCameraShakeSystem : EntitySystem
 {
-    [Dependency] private readonly SharedCameraRecoilSystem _cameraRecoil = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedCameraRecoilSystem _cameraRecoil = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public void ShakeCamera(EntityUid user, int shakes, int strength, TimeSpan? spacing = null)
     {

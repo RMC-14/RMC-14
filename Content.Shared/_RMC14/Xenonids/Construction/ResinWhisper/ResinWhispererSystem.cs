@@ -13,12 +13,12 @@ namespace Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
 
 public sealed class ResinWhispererSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDoorSystem _door = default!;
-    [Dependency] private readonly ExamineSystemShared _examineSystem = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedXenoWeedsSystem _weeds = default!;
+    [Dependency] private SharedDoorSystem _door = default!;
+    [Dependency] private ExamineSystemShared _examineSystem = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedXenoWeedsSystem _weeds = default!;
 
     public override void Initialize()
     {

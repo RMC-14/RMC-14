@@ -9,7 +9,7 @@ namespace Content.Client._RMC14.Attachable.Systems;
 
 public sealed class AttachableHolderVisualsSystem : EntitySystem
 {
-    [Dependency] private readonly AttachableHolderSystem _attachableHolderSystem = default!;
+    [Dependency] private AttachableHolderSystem _attachableHolderSystem = default!;
 
     public override void Initialize()
     {

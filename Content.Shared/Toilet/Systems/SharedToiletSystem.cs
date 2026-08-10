@@ -15,9 +15,9 @@ namespace Content.Shared.Toilet.Systems
 
     public abstract class SharedToiletSystem : EntitySystem
     {
-        [Dependency] private readonly IRobustRandom _random = default!;
-        [Dependency] private readonly SharedAudioSystem _audio = default!;
-        [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+        [Dependency] private IRobustRandom _random = default!;
+        [Dependency] private SharedAudioSystem _audio = default!;
+        [Dependency] private SharedAppearanceSystem _appearance = default!;
 
         public override void Initialize()
         {

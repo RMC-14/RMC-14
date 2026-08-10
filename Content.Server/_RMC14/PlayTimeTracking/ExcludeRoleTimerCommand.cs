@@ -3,6 +3,7 @@ using Content.Server.Database;
 using Content.Shared.Administration;
 using Content.Shared.Roles;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Toolshed;
 using Robust.Shared.Toolshed.Errors;
 using Robust.Shared.Toolshed.TypeParsers;
@@ -10,17 +11,18 @@ using Robust.Shared.Toolshed.TypeParsers;
 namespace Content.Server._RMC14.PlayTimeTracking;
 
 [ToolshedCommand, AdminCommand(AdminFlags.Ban)]
-public sealed class ExcludeRoleTimerCommand : ToolshedCommand
+public sealed partial class ExcludeRoleTimerCommand : ToolshedCommand
 {
-    [Dependency] private readonly IServerDbManager _db = default!;
-    [Dependency] private readonly RMCPlayTimeManager _playTime = default!;
-    [Dependency] private readonly IPlayerLocator _playerLocator = default!;
+    [Dependency] private IServerDbManager _db = default!;
+    [Dependency] private RMCPlayTimeManager _playTime = default!;
+    [Dependency] private IPlayerLocator _playerLocator = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
 
     [CommandImplementation("add")]
     public async void Add(
         [CommandInvocationContext] IInvocationContext ctx,
         [CommandArgument] ToolshedPlayer player,
-        [CommandArgument] Prototype<JobPrototype> tracker)
+        [CommandArgument] ProtoId<JobPrototype> tracker)
     {
         try
         {
@@ -32,7 +34,7 @@ public sealed class ExcludeRoleTimerCommand : ToolshedCommand
             }
 
             var excluded = await _playTime.Exclude(found.UserId, tracker.Id);
-            var jobName = tracker.Value.LocalizedName;
+            var jobName = _prototypes.Index(tracker).LocalizedName;
             ctx.WriteLine(!excluded
                 ? $"Player {player} was already excluded from the playtime requirements for {jobName}"
                 : $"Excluded player {player} from playtime requirements for {jobName}");
@@ -72,7 +74,7 @@ public sealed class ExcludeRoleTimerCommand : ToolshedCommand
     public async void Remove(
         [CommandInvocationContext] IInvocationContext ctx,
         [CommandArgument] ToolshedPlayer player,
-        [CommandArgument] Prototype<JobPrototype> tracker)
+        [CommandArgument] ProtoId<JobPrototype> tracker)
     {
         try
         {
@@ -85,8 +87,8 @@ public sealed class ExcludeRoleTimerCommand : ToolshedCommand
 
             var removed = await _playTime.RemoveRoleTimerExclusion(found.UserId, tracker.Id);
             ctx.WriteLine(removed
-                ? $"Removed {player}'s playtime requirement exclusion for {tracker.Value.LocalizedName}"
-                : $"Player {player} had no playtime requirement exclusion for {tracker.Value.LocalizedName}");
+                ? $"Removed {player}'s playtime requirement exclusion for {_prototypes.Index(tracker).LocalizedName}"
+                : $"Player {player} had no playtime requirement exclusion for {_prototypes.Index(tracker).LocalizedName}");
         }
         catch (Exception e)
         {

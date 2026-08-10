@@ -8,9 +8,9 @@ namespace Content.Shared._RMC14.Xenonids.Watch;
 
 public abstract class SharedXenoWatchSystem : EntitySystem
 {
-    [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
 
     public override void Initialize()
     {

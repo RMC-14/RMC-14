@@ -18,10 +18,10 @@ namespace Content.Client.NetworkConfigurator.Systems;
 
 public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
 {
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IOverlayManager _overlay = default!;
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly IInputManager _inputManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private IInputManager _inputManager = default!;
 
     private static readonly EntProtoId Action = "ActionClearNetworkLinkOverlays";
 
@@ -138,7 +138,7 @@ public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
 
 public sealed class ClearAllNetworkLinkOverlays : LocalizedEntityCommands
 {
-    [Dependency] private readonly NetworkConfiguratorSystem _network = default!;
+    [Dependency] private NetworkConfiguratorSystem _network = default!;
 
     public override string Command => "clearnetworklinkoverlays";
 

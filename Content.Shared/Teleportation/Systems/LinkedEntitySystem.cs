@@ -11,7 +11,7 @@ namespace Content.Shared.Teleportation.Systems;
 /// </summary>
 public sealed class LinkedEntitySystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

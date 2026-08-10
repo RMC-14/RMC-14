@@ -6,7 +6,7 @@ namespace Content.Shared._RMC14.Xenonids;
 
 public sealed partial class XenoSystem : EntitySystem
 {
-    [Dependency] private readonly RMCSizeStunSystem _size = default!;
+    [Dependency] private RMCSizeStunSystem _size = default!;
 
     public const float XENO_SLASH_DAMAGE_MULT = 1.5f;
     public const float XENO_DEBUFF_MULT = 1.25f;

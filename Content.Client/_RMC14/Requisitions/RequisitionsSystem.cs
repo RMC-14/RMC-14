@@ -8,7 +8,7 @@ namespace Content.Client._RMC14.Requisitions;
 
 public sealed class RequisitionsSystem : SharedRequisitionsSystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _animation = default!;
+    [Dependency] private AnimationPlayerSystem _animation = default!;
 
     private const string AnimationKey = "cm_requisitions_animation";
 

@@ -11,8 +11,8 @@ namespace Content.Server.Light.EntitySystems
 {
     public sealed class LightBulbSystem : EntitySystem
     {
-        [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-        [Dependency] private readonly SharedAudioSystem _audio = default!;
+        [Dependency] private SharedAppearanceSystem _appearance = default!;
+        [Dependency] private SharedAudioSystem _audio = default!;
 
         public override void Initialize()
         {

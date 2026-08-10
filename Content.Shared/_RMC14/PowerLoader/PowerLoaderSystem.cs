@@ -45,24 +45,23 @@ namespace Content.Shared._RMC14.PowerLoader;
 
 public sealed class PowerLoaderSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedBuckleSystem _buckle = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedDropshipSystem _dropship = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
-    [Dependency] private readonly SharedMoverController _mover = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedBuckleSystem _buckle = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedDropshipSystem _dropship = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private SharedMoverController _mover = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private RMCMapSystem _rmcMap = default!;
+    [Dependency] private SkillsSystem _skills = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedVirtualItemSystem _virtualItem = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     private static readonly EntProtoId DefaultHandVisual = "RMCVirtualDropshipGearRight";
 
@@ -1374,7 +1373,7 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         var source = loader.Owner.ToCoordinates();
         var coords = _transform.GetMoverCoordinates(clickLocation);
-        coords = coords.SnapToGrid(EntityManager, _mapManager);
+        coords = coords.SnapToGrid(EntityManager);
         if (!source.TryDistance(EntityManager, coords, out var distance))
             return false;
 

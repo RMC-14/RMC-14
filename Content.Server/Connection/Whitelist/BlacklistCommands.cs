@@ -8,8 +8,8 @@ namespace Content.Server.Connection.Whitelist;
 [AdminCommand(AdminFlags.Ban)]
 public sealed class AddBlacklistCommand : LocalizedCommands
 {
-    [Dependency] private readonly IPlayerLocator _playerLocator = default!;
-    [Dependency] private readonly IServerDbManager _db = default!;
+    [Dependency] private IPlayerLocator _playerLocator = default!;
+    [Dependency] private IServerDbManager _db = default!;
 
     public override string Command => "blacklistadd";
 
@@ -63,8 +63,8 @@ public sealed class AddBlacklistCommand : LocalizedCommands
 [AdminCommand(AdminFlags.Ban)]
 public sealed class RemoveBlacklistCommand : LocalizedCommands
 {
-    [Dependency] private readonly IPlayerLocator _playerLocator = default!;
-    [Dependency] private readonly IServerDbManager _db = default!;
+    [Dependency] private IPlayerLocator _playerLocator = default!;
+    [Dependency] private IServerDbManager _db = default!;
 
     public override string Command => "blacklistremove";
 

@@ -9,9 +9,9 @@ namespace Content.Server.EUI
 {
     public sealed class EuiManager : IPostInjectInit
     {
-        [Dependency] private readonly ILogManager _log = default!;
-        [Dependency] private readonly IPlayerManager _players = default!;
-        [Dependency] private readonly IServerNetManager _net = default!;
+        [Dependency] private ILogManager _log = default!;
+        [Dependency] private IPlayerManager _players = default!;
+        [Dependency] private IServerNetManager _net = default!;
 
         private ISawmill? _sawmill;
 

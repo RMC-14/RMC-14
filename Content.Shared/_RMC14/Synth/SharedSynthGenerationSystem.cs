@@ -18,12 +18,12 @@ namespace Content.Shared._RMC14.Synth;
 public sealed class SharedSynthGenerationSystem : EntitySystem
 {
 
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly DialogSystem _dialog = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private DialogSystem _dialog = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
 
     public override void Initialize()
     {

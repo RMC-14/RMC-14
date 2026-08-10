@@ -5,7 +5,7 @@ namespace Content.Server._RMC14.Ghost.Roles;
 
 public sealed class RMCGhostRoleSystem : EntitySystem
 {
-    [Dependency] private readonly GameTicker _gameTicker = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
 
     public override void Initialize()
     {

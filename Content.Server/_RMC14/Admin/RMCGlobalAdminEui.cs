@@ -11,8 +11,8 @@ namespace Content.Server._RMC14.Admin;
 
 public sealed class RMCGlobalAdminEui : BaseEui
 {
-    [Dependency] private readonly IAdminManager _admin = default!;
-    [Dependency] private readonly IEntityManager _entities = default!;
+    [Dependency] private IAdminManager _admin = default!;
+    [Dependency] private IEntityManager _entities = default!;
 
     private readonly SquadSystem _squad;
     private readonly NpcFactionSystem _faction;

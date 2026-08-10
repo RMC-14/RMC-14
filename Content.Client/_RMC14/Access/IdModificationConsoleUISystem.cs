@@ -7,8 +7,8 @@ namespace Content.Client._RMC14.Access;
 
 public sealed class IdModificationConsoleUISystem : EntitySystem
 {
-    [Dependency] private readonly RMCUserInterfaceSystem _rmcUI = default!;
-    [Dependency] private readonly IClientGameTiming _timing = default!;
+    [Dependency] private RMCUserInterfaceSystem _rmcUI = default!;
+    [Dependency] private IClientGameTiming _timing = default!;
 
     public override void Initialize()
     {

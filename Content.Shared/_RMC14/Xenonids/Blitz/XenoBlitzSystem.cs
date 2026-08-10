@@ -21,20 +21,20 @@ namespace Content.Shared._RMC14.Xenonids.Blitz;
 
 public sealed class XenoBlitzSystem : EntitySystem
 {
-    [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly VanguardShieldSystem _vanguard = default!;
-    [Dependency] private readonly SharedInteractionSystem _interact = default!;
-    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private XenoPlasmaSystem _plasma = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedColorFlashEffectSystem _colorFlash = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private VanguardShieldSystem _vanguard = default!;
+    [Dependency] private SharedInteractionSystem _interact = default!;
+    [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
 
     public override void Initialize()
     {

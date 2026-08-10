@@ -13,8 +13,8 @@ namespace Content.Client.UserInterface.Controls
     /// </summary>
     public sealed class MainViewport : UIWidget
     {
-        [Dependency] private readonly IConfigurationManager _cfg = default!;
-        [Dependency] private readonly ViewportManager _vpManager = default!;
+        [Dependency] private IConfigurationManager _cfg = default!;
+        [Dependency] private ViewportManager _vpManager = default!;
 
         public ScalingViewport Viewport { get; }
 

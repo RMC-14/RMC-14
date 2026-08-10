@@ -12,9 +12,9 @@ namespace Content.Shared._RMC14.Teleporter;
 
 public abstract class SharedRMCTeleporterSystem : EntitySystem
 {
-    [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
+    [Dependency] private PullingSystem _pulling = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
 
     private EntityQuery<ActorComponent> _actorQuery;
     private EntityQuery<AlmayerComponent> _almayerQuery;

@@ -12,7 +12,7 @@ namespace Content.Server.Atmos.EntitySystems;
 
 public sealed partial class AtmosphereSystem
 {
-    [Dependency] private readonly IConsoleHost _consoleHost = default!;
+    [Dependency] private IConsoleHost _consoleHost = default!;
 
     private void InitializeCommands()
     {
@@ -169,7 +169,7 @@ public sealed partial class AtmosphereSystem
         if (playerMap == null)
             return CompletionResult.FromOptions(options);
 
-        foreach (var grid in _mapManager.GetAllGrids(playerMap.Value).OrderBy(o => o.Owner))
+        foreach (var grid in _mapSystem.GetAllGrids(playerMap.Value).OrderBy(o => o.Owner))
         {
             var uid = grid.Owner;
             if (!TryComp(uid, out TransformComponent? gridXform))

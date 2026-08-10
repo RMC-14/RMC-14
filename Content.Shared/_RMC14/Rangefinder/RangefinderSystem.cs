@@ -22,22 +22,21 @@ namespace Content.Shared._RMC14.Rangefinder;
 
 public sealed class RangefinderSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedDropshipWeaponSystem _dropshipWeapon = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly SquadSystem _squad = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedDropshipWeaponSystem _dropshipWeapon = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private RMCPlanetSystem _rmcPlanet = default!;
+    [Dependency] private SkillsSystem _skills = default!;
+    [Dependency] private SquadSystem _squad = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
 
     public override void Initialize()
     {
@@ -89,7 +88,7 @@ public sealed class RangefinderSystem : EntitySystem
     private void OnRangefinderAfterInteract(Entity<RangefinderComponent> rangefinder, ref AfterInteractEvent args)
     {
         var user = args.User;
-        var coordinates = args.ClickLocation.SnapToGrid(EntityManager, _mapManager);
+        var coordinates = args.ClickLocation.SnapToGrid(EntityManager);
         if (!coordinates.IsValid(EntityManager))
             return;
 

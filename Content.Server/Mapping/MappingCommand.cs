@@ -15,10 +15,10 @@ namespace Content.Server.Mapping
     [AdminCommand(AdminFlags.Host)]
     public sealed class MappingCommand : LocalizedEntityCommands
     {
-        [Dependency] private readonly IResourceManager _resourceMgr = default!;
-        [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-        [Dependency] private readonly MappingSystem _mappingSystem = default!;
-        [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
+        [Dependency] private IResourceManager _resourceMgr = default!;
+        [Dependency] private SharedMapSystem _mapSystem = default!;
+        [Dependency] private MappingSystem _mappingSystem = default!;
+        [Dependency] private MapLoaderSystem _mapLoader = default!;
 
         public override string Command => "mapping";
 

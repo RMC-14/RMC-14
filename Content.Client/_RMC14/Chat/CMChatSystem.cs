@@ -11,7 +11,7 @@ namespace Content.Client._RMC14.Chat;
 
 public sealed class CMChatSystem : SharedCMChatSystem
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private IConfigurationManager _config = default!;
 
     private int _repeatHistory;
 

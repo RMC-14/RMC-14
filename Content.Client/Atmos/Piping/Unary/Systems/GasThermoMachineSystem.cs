@@ -6,7 +6,7 @@ namespace Content.Client.Atmos.Piping.Unary.Systems;
 
 public sealed class GasThermoMachineSystem : SharedGasThermoMachineSystem
 {
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {

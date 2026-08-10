@@ -10,7 +10,7 @@ namespace Content.Client.Cargo.BUI;
 [UsedImplicitly]
 public sealed class CargoShuttleConsoleBoundUserInterface : BoundUserInterface
 {
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
+    [Dependency] private IPrototypeManager _protoManager = default!;
 
     [ViewVariables]
     private CargoShuttleMenu? _menu;

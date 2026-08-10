@@ -10,11 +10,11 @@ namespace Content.Shared._RMC14.Weapons.Ranged.Prediction;
 
 public abstract class SharedGunPredictionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly VehicleRideSurfaceSystem _rideSurface = default!;
+    [Dependency] private SharedCombatModeSystem _combatMode = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private VehicleRideSurfaceSystem _rideSurface = default!;
 
     public bool GunPrediction { get; private set; }
 

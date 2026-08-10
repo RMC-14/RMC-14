@@ -15,13 +15,13 @@ namespace Content.Shared.Clothing.EntitySystems;
 
 public abstract class SharedChameleonClothingSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly ClothingSystem _clothingSystem = default!;
-    [Dependency] private readonly ContrabandSystem _contraband = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly SharedItemSystem _itemSystem = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private ClothingSystem _clothingSystem = default!;
+    [Dependency] private ContrabandSystem _contraband = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private SharedItemSystem _itemSystem = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private TagSystem _tag = default!;
     [Dependency] protected readonly IGameTiming _timing = default!;
 
     private static readonly SlotFlags[] IgnoredSlots =

@@ -28,8 +28,8 @@ public abstract class SharedRoleSystem : EntitySystem
     [Dependency] private   readonly SharedAudioSystem _audio = default!;
 
     // RMC14
-    [Dependency] private readonly SharedMindSystem _minds = default!;
-    [Dependency] private readonly SharedRMCPvsSystem _rmcPvs = default!;
+    [Dependency] private SharedMindSystem _minds = default!;
+    [Dependency] private SharedRMCPvsSystem _rmcPvs = default!;
 
     private JobRequirementOverridePrototype? _requirementOverride;
 

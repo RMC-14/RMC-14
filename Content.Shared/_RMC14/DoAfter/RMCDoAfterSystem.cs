@@ -5,7 +5,7 @@ namespace Content.Shared._RMC14.DoAfter;
 
 public sealed class RMCDoAfterSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
 
     public bool ShouldCancel(Shared.DoAfter.DoAfter doAfter)
     {

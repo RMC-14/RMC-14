@@ -12,9 +12,9 @@ namespace Content.Shared.Containers;
 /// </summary>
 public sealed class SlotBasedConnectedContainerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _containers = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private SharedContainerSystem _containers = default!;
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     /// <inheritdoc />
     public override void Initialize()

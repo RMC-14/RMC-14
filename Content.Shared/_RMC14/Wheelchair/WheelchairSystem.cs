@@ -15,13 +15,13 @@ namespace Content.Shared._RMC14.Wheelchair;
 
 public sealed class WheelchairSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedBuckleSystem _buckle = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
-    [Dependency] private readonly SharedMoverController _mover = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedBuckleSystem _buckle = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private SharedMoverController _mover = default!;
+    [Dependency] private INetManager _net = default!;
+
     private readonly HashSet<EntityUid> _processingUnbuckle = new();
 
     public override void Initialize()
@@ -63,13 +63,13 @@ public sealed class WheelchairSystem : EntitySystem
     private void OnUnstrapped(Entity<WheelchairComponent> ent, ref UnstrappedEvent args)
     {
         var buckle = args.Buckle;
-        
+
         // Prevent recursion
         if (_processingUnbuckle.Contains(buckle.Owner))
             return;
-            
+
         _processingUnbuckle.Add(buckle.Owner);
-        
+
         try
         {
             // Clean up bell action first
@@ -77,7 +77,7 @@ public sealed class WheelchairSystem : EntitySystem
             {
                 _actions.RemoveAction(buckle.Owner, pilot.BellActionEntity.Value);
             }
-            
+
             // Clear relay and remove components
             RemCompDeferred<RelayInputMoverComponent>(buckle);
             RemCompDeferred<ActiveWheelchairPilotComponent>(buckle);
@@ -111,7 +111,7 @@ public sealed class WheelchairSystem : EntitySystem
         // Prevent recursion
         if (_processingUnbuckle.Contains(active.Owner))
             return;
-            
+
         // Just remove the component - let the buckle system handle unbuckling
         RemCompDeferred<ActiveWheelchairPilotComponent>(active);
     }
@@ -119,18 +119,18 @@ public sealed class WheelchairSystem : EntitySystem
     public override void Update(float frameTime)
     {
         var toRemove = new List<Entity<ActiveWheelchairPilotComponent>>();
-        
+
         var pilots = EntityQueryEnumerator<ActiveWheelchairPilotComponent>();
         while (pilots.MoveNext(out var uid, out var active))
         {
-            if (!TryComp(uid, out BuckleComponent? buckle) || 
+            if (!TryComp(uid, out BuckleComponent? buckle) ||
                 buckle.BuckledTo == null ||
                 !HasComp<WheelchairComponent>(buckle.BuckledTo))
             {
                 toRemove.Add((uid, active));
             }
         }
-        
+
         foreach (var pilot in toRemove)
         {
             RemCompDeferred<ActiveWheelchairPilotComponent>(pilot);

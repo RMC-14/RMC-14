@@ -10,7 +10,7 @@ namespace Content.Server.Antag;
 
 public sealed class MobReplacementRuleSystem : GameRuleSystem<MobReplacementRuleComponent>
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     protected override void Started(EntityUid uid, MobReplacementRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {

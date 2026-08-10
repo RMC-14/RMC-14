@@ -14,9 +14,9 @@ namespace Content.Client._RMC14.Construction.Upgrades;
 [UsedImplicitly]
 public sealed class RMCConstructionUpgradeBui : BoundUserInterface
 {
-    [Dependency] private readonly IClyde _displayManager = default!;
-    [Dependency] private readonly IEyeManager _eye = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private IClyde _displayManager = default!;
+    [Dependency] private IEyeManager _eye = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
 
     private readonly SpriteSystem _sprite;
     private readonly TransformSystem _transform;

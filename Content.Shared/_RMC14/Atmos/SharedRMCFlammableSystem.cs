@@ -47,30 +47,29 @@ namespace Content.Shared._RMC14.Atmos;
 
 public abstract class SharedRMCFlammableSystem : EntitySystem
 {
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly IMapManager _map = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedOnCollideSystem _onCollide = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
-    [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly CMArmorSystem _armor = default!;
-    [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
-    [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedOnCollideSystem _onCollide = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private RMCMapSystem _rmcMap = default!;
+    [Dependency] private SharedRMCMeleeWeaponSystem _rmcMelee = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private CMArmorSystem _armor = default!;
+    [Dependency] private XenoPlasmaSystem _plasma = default!;
+    [Dependency] private SharedRMCEmoteSystem _emote = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
 
     private static readonly ProtoId<ReagentPrototype> WaterReagent = "Water";
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
@@ -272,7 +271,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         var coords = _transform.GetMoverCoordinates(ent);
         _audio.PlayPvs(ent.Comp.Sound, coords);
 
-        var tile = coords.SnapToGrid(EntityManager, _map);
+        var tile = coords.SnapToGrid(EntityManager);
         SpawnFireDiamond(ent.Comp.Spawn, tile, ent.Comp.Range, ent.Comp.Intensity, ent.Comp.Duration);
         QueueDel(ent);
     }
@@ -300,7 +299,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
     private void OnTileFireOnTriggerExplosive(Entity<TileFireOnTriggerComponent> ent, ref CMExplosiveTriggeredEvent args)
     {
-        var coords = _transform.GetMoverCoordinates(ent).SnapToGrid(EntityManager, _map);
+        var coords = _transform.GetMoverCoordinates(ent).SnapToGrid(EntityManager);
         SpawnFireDiamond(ent.Comp.Spawn, coords, ent.Comp.Range, ent.Comp.Intensity, ent.Comp.Duration);
     }
 

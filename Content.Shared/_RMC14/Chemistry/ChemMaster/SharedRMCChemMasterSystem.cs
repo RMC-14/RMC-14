@@ -32,25 +32,25 @@ namespace Content.Shared._RMC14.Chemistry.ChemMaster;
 
 public abstract class SharedRMCChemMasterSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly ARESCoreSystem _core = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
-    [Dependency] private readonly LabelSystem _label = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RMCReagentSystem _reagent = default!;
-    [Dependency] private readonly SharedRMCIconLabelSystem _rmcIconLabel = default!;
-    [Dependency] private readonly SharedRMCSmartFridgeSystem _rmcSmartFridge = default!;
-    [Dependency] private readonly RMCStorageSystem _rmcStorage = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly SolutionTransferSystem _solutionTransfer = default!;
-    [Dependency] private readonly SharedStorageSystem _storage = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private ARESCoreSystem _core = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private LabelSystem _label = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private RMCReagentSystem _reagent = default!;
+    [Dependency] private SharedRMCIconLabelSystem _rmcIconLabel = default!;
+    [Dependency] private SharedRMCSmartFridgeSystem _rmcSmartFridge = default!;
+    [Dependency] private RMCStorageSystem _rmcStorage = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private SolutionTransferSystem _solutionTransfer = default!;
+    [Dependency] private SharedStorageSystem _storage = default!;
 
     private readonly List<EntityUid> _toFill = new();
 

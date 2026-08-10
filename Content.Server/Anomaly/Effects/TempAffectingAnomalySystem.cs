@@ -10,8 +10,8 @@ namespace Content.Server.Anomaly.Effects;
 /// </summary>
 public sealed class TempAffectingAnomalySystem : EntitySystem
 {
-    [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
-    [Dependency] private readonly TransformSystem _xform = default!;
+    [Dependency] private AtmosphereSystem _atmosphere = default!;
+    [Dependency] private TransformSystem _xform = default!;
 
     public override void Update(float frameTime)
     {

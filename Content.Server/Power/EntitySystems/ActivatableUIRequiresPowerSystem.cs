@@ -8,7 +8,7 @@ namespace Content.Server.Power.EntitySystems;
 
 public sealed class ActivatableUIRequiresPowerSystem : SharedActivatableUIRequiresPowerSystem
 {
-    [Dependency] private readonly ActivatableUISystem _activatableUI = default!;
+    [Dependency] private ActivatableUISystem _activatableUI = default!;
 
     public override void Initialize()
     {

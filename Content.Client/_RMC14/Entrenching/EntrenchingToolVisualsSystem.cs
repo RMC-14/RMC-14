@@ -7,7 +7,7 @@ namespace Content.Client._RMC14.Entrenching;
 
 public sealed class EntrenchingToolVisualsSystem : EntitySystem
 {
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {

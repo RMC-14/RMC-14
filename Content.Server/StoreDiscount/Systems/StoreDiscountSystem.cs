@@ -16,8 +16,8 @@ public sealed class StoreDiscountSystem : EntitySystem
 {
     private static readonly ProtoId<StoreCategoryPrototype> DiscountedStoreCategoryPrototypeKey = "DiscountedItems";
 
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     /// <inheritdoc />
     public override void Initialize()

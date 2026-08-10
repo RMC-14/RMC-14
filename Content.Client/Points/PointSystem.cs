@@ -9,7 +9,7 @@ namespace Content.Client.Points;
 /// <inheritdoc/>
 public sealed class PointSystem : SharedPointSystem
 {
-    [Dependency] private readonly CharacterInfoSystem _characterInfo = default!;
+    [Dependency] private CharacterInfoSystem _characterInfo = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

@@ -16,10 +16,10 @@ namespace Content.Server.Thief.Systems;
 /// </summary>
 public sealed class ThiefBeaconSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly SharedRoleSystem _roles = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private SharedRoleSystem _roles = default!;
     public override void Initialize()
     {
         base.Initialize();

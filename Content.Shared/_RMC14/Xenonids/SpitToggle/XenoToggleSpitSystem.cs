@@ -5,7 +5,7 @@ namespace Content.Shared._RMC14.Xenonids.SpitToggle;
 
 public sealed class XenoToggleSpitSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoToggleSpitComponent, XenoSpitToggleActionEvent>(OnToggleSpit);

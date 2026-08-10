@@ -12,7 +12,7 @@ namespace Content.Server.DeviceNetwork.Systems
     [UsedImplicitly]
     public sealed class ApcNetworkSystem : EntitySystem
     {
-        [Dependency] private readonly NodeContainerSystem _nodeContainer = default!;
+        [Dependency] private NodeContainerSystem _nodeContainer = default!;
 
         public override void Initialize()
         {

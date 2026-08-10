@@ -9,9 +9,9 @@ namespace Content.Client._RMC14.Weapons.Ranged.Flamer;
 
 public sealed class RMCFlamerSystem : SharedRMCFlamerSystem
 {
-    [Dependency] private readonly IInputManager _input = default!;
-    [Dependency] private readonly IOverlayManager _overlay = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private IInputManager _input = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
+    [Dependency] private PopupSystem _popup = default!;
 
     public override void Initialize()
     {

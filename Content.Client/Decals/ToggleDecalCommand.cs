@@ -4,7 +4,7 @@ namespace Content.Client.Decals;
 
 public sealed class ToggleDecalCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly DecalSystem _decal = default!;
+    [Dependency] private DecalSystem _decal = default!;
 
     public override string Command => "toggledecals";
 

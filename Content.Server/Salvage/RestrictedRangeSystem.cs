@@ -11,8 +11,8 @@ namespace Content.Server.Salvage;
 
 public sealed class RestrictedRangeSystem : SharedRestrictedRangeSystem
 {
-    [Dependency] private readonly FixtureSystem _fixtures = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private FixtureSystem _fixtures = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
 
     public override void Initialize()
     {

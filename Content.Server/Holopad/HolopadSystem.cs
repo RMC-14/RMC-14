@@ -26,18 +26,18 @@ namespace Content.Server.Holopad;
 
 public sealed class HolopadSystem : SharedHolopadSystem
 {
-    [Dependency] private readonly TelephoneSystem _telephoneSystem = default!;
-    [Dependency] private readonly UserInterfaceSystem _userInterfaceSystem = default!;
-    [Dependency] private readonly TransformSystem _xformSystem = default!;
-    [Dependency] private readonly AppearanceSystem _appearanceSystem = default!;
-    [Dependency] private readonly SharedPointLightSystem _pointLightSystem = default!;
-    [Dependency] private readonly SharedAmbientSoundSystem _ambientSoundSystem = default!;
-    [Dependency] private readonly SharedStationAiSystem _stationAiSystem = default!;
-    [Dependency] private readonly AccessReaderSystem _accessReaderSystem = default!;
-    [Dependency] private readonly ChatSystem _chatSystem = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly PvsOverrideSystem _pvs = default!;
+    [Dependency] private TelephoneSystem _telephoneSystem = default!;
+    [Dependency] private UserInterfaceSystem _userInterfaceSystem = default!;
+    [Dependency] private TransformSystem _xformSystem = default!;
+    [Dependency] private AppearanceSystem _appearanceSystem = default!;
+    [Dependency] private SharedPointLightSystem _pointLightSystem = default!;
+    [Dependency] private SharedAmbientSoundSystem _ambientSoundSystem = default!;
+    [Dependency] private SharedStationAiSystem _stationAiSystem = default!;
+    [Dependency] private AccessReaderSystem _accessReaderSystem = default!;
+    [Dependency] private ChatSystem _chatSystem = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private PvsOverrideSystem _pvs = default!;
 
     private float _updateTimer = 1.0f;
     private const float UpdateTime = 1.0f;
@@ -560,7 +560,7 @@ public sealed class HolopadSystem : SharedHolopadSystem
             entity.Comp.User = (user.Value, holopadUser);
         }
 
-        // Add the new user to PVS and sync their appearance with any 
+        // Add the new user to PVS and sync their appearance with any
         // holopads connected to the one they are using
         _pvs.AddGlobalOverride(user.Value);
         SyncHolopadHologramAppearanceWithTarget(entity, entity.Comp.User);

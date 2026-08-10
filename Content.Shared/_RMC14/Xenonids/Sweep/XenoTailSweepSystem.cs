@@ -17,21 +17,21 @@ namespace Content.Shared._RMC14.Xenonids.Sweep;
 
 public sealed class XenoTailSweepSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly RotateToFaceSystem _rotateTo = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
-    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
-    [Dependency] private readonly SharedInteractionSystem _interact = default!;
-    [Dependency] private readonly RMCSizeStunSystem _size = default!;
-    [Dependency] private readonly RMCObstacleSlammingSystem _obstacleSlamming = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedColorFlashEffectSystem _colorFlash = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private RotateToFaceSystem _rotateTo = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private SharedInteractionSystem _interact = default!;
+    [Dependency] private RMCSizeStunSystem _size = default!;
+    [Dependency] private RMCObstacleSlammingSystem _obstacleSlamming = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _hit = new();
 

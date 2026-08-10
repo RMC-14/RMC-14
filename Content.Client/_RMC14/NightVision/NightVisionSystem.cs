@@ -11,12 +11,12 @@ namespace Content.Client._RMC14.NightVision;
 
 public sealed class NightVisionSystem : SharedNightVisionSystem
 {
-    [Dependency] private readonly IEntityManager _entity = default!;
-    [Dependency] private readonly ILightManager _light = default!;
-    [Dependency] private readonly IOverlayManager _overlay = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private IEntityManager _entity = default!;
+    [Dependency] private ILightManager _light = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
 
     private EntityQuery<XenoComponent> _xenoQuery;
     private EntityQuery<NightVisionComponent> _nvQuery;

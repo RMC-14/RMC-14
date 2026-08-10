@@ -16,10 +16,10 @@ namespace Content.Shared.Contraband;
 /// </summary>
 public sealed class ContrabandSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _configuration = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedIdCardSystem _id = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private IConfigurationManager _configuration = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedIdCardSystem _id = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
 
     private bool _contrabandExamineEnabled;
     private bool _contrabandExamineOnlyInHudEnabled;

@@ -13,8 +13,8 @@ namespace Content.Server.DeviceLinking.Systems
     [UsedImplicitly]
     public sealed class DoorSignalControlSystem : EntitySystem
     {
-        [Dependency] private readonly DoorSystem _doorSystem = default!;
-        [Dependency] private readonly DeviceLinkSystem _signalSystem = default!;
+        [Dependency] private DoorSystem _doorSystem = default!;
+        [Dependency] private DeviceLinkSystem _signalSystem = default!;
 
         public override void Initialize()
         {

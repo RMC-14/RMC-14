@@ -8,9 +8,9 @@ namespace Content.Client._RMC14.Medical;
 
 public sealed class StorageRefillContainerVisualizerSystem : VisualizerSystem<RMCRefillSolutionFromContainerOnStoreComponent>
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly CMRefillableSolutionSystem _refillable = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private CMRefillableSolutionSystem _refillable = default!;
     protected override void OnAppearanceChange(EntityUid uid, RMCRefillSolutionFromContainerOnStoreComponent component, ref AppearanceChangeEvent args)
     {
         var sprite = args.Sprite;

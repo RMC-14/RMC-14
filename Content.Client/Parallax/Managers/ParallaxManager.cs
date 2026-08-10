@@ -10,9 +10,9 @@ namespace Content.Client.Parallax.Managers;
 
 public sealed class ParallaxManager : IParallaxManager
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
-    [Dependency] private readonly IDependencyCollection _deps = null!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IConfigurationManager _configurationManager = default!;
+    [Dependency] private IDependencyCollection _deps = null!;
 
     private ISawmill _sawmill = Logger.GetSawmill("parallax");
 
@@ -98,10 +98,11 @@ public sealed class ParallaxManager : IParallaxManager
             }
             else
             {
-                layers = await Task.WhenAll(
+                layers = await Task.WhenAll(new[]
+                {
                     LoadParallaxLayers(parallaxPrototype.Layers, loadedLayers, cancel),
                     LoadParallaxLayers(parallaxPrototype.LayersLQ, loadedLayers, cancel)
-                );
+                });
             }
 
             cancel.ThrowIfCancellationRequested();

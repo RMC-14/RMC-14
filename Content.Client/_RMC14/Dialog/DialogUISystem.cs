@@ -5,7 +5,7 @@ namespace Content.Client._RMC14.Dialog;
 
 public sealed class DialogUISystem : EntitySystem
 {
-    [Dependency] private readonly RMCUserInterfaceSystem _rmcUI = default!;
+    [Dependency] private RMCUserInterfaceSystem _rmcUI = default!;
 
     public override void Initialize()
     {

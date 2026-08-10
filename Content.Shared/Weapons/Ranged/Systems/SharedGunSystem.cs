@@ -62,7 +62,7 @@ public abstract partial class SharedGunSystem : EntitySystem
 {
     [Dependency] private   readonly ActionBlockerSystem _actionBlockerSystem = default!;
     [Dependency] protected readonly IGameTiming Timing = default!;
-    [Dependency] protected readonly IMapManager MapManager = default!;
+    [Dependency] protected readonly SharedMapSystem MapManager = default!;
     [Dependency] private   readonly INetManager _netManager = default!;
     [Dependency] protected readonly IPrototypeManager ProtoManager = default!;
     [Dependency] protected readonly IRobustRandom Random = default!;
@@ -95,10 +95,10 @@ public abstract partial class SharedGunSystem : EntitySystem
     [Dependency] private   readonly INetConfigurationManager _netConfig = default!;
 
     // RMC14
-    [Dependency] private readonly AttachableHolderSystem _attachableHolder = default!;
-    [Dependency] private readonly SharedRMCFlamerSystem _flamer = default!;
-    [Dependency] private readonly VehicleWeaponsSystem _rmcVehicleWeapons = default!;
-    [Dependency] private readonly RMCSharedWeaponControllerSystem _rmcSharedWeaponController = default!;
+    [Dependency] private AttachableHolderSystem _attachableHolder = default!;
+    [Dependency] private SharedRMCFlamerSystem _flamer = default!;
+    [Dependency] private VehicleWeaponsSystem _rmcVehicleWeapons = default!;
+    [Dependency] private RMCSharedWeaponControllerSystem _rmcSharedWeaponController = default!;
 
     private const float InteractNextFire = 0.3f;
     private const double SafetyNextFire = 0.5;
@@ -579,7 +579,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         // If applicable, this ensures the projectile is parented to grid on spawn, instead of the map.
         var fromEnt = MapManager.TryFindGridAt(fromMap, out var gridUid, out var grid)
             ? fromCoordinates.WithEntityId(gridUid, EntityManager)
-            : new EntityCoordinates(MapManager.GetMapEntityId(fromMap.MapId), fromMap.Position);
+            : new EntityCoordinates(MapManager.GetMapOrInvalid(fromMap.MapId), fromMap.Position);
 
         // Update shot based on the recoil
         toMap = fromMap.Position + angle.ToVec() * mapDirection.Length();

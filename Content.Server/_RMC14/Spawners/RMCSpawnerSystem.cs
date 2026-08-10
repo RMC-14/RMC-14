@@ -26,15 +26,14 @@ namespace Content.Server._RMC14.Spawners;
 
 public sealed class RMCSpawnerSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly RandomHumanoidSystem _randomHumanoid = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private RandomHumanoidSystem _randomHumanoid = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private RMCMapSystem _rmcMap = default!;
 
     private readonly Dictionary<EntProtoId, List<Entity<ProportionalSpawnerComponent>>> _spawners = new();
     private readonly Dictionary<EntProtoId, List<Entity<ItemPoolSpawnerComponent>>> _itemPools = new();
@@ -173,13 +172,13 @@ public sealed class RMCSpawnerSystem : EntitySystem
         if (_random.Prob(ent.Comp.ChanceToSpawn))
         {
             var spawnerCoords = _transform.ToMapCoordinates(ent.Owner.ToCoordinates());
-            
+
             foreach (var (protoId, amount) in entitiesToSpawn)
             {
                 for (var i = 0; i < amount; i++)
                 {
                     var spawnPosition = FindValidSpawnPosition(ent.Owner, spawnerCoords, ent.Comp.Offset);
-                    
+
                     if (spawnPosition.HasValue)
                     {
                         Spawn(protoId, spawnPosition.Value);

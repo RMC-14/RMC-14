@@ -14,8 +14,8 @@ public sealed class MonoTag : IMarkupTag
 {
     public static readonly ProtoId<FontPrototype> MonoFont = "Monospace";
 
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     public string Name => "mono";
 

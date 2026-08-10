@@ -16,11 +16,11 @@ namespace Content.Server.Doors.Systems
 {
     public sealed class FirelockSystem : SharedFirelockSystem
     {
-        [Dependency] private readonly SharedDoorSystem _doorSystem = default!;
-        [Dependency] private readonly AtmosphereSystem _atmosSystem = default!;
-        [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-        [Dependency] private readonly SharedMapSystem _mapping = default!;
-        [Dependency] private readonly PointLightSystem _pointLight = default!;
+        [Dependency] private SharedDoorSystem _doorSystem = default!;
+        [Dependency] private AtmosphereSystem _atmosSystem = default!;
+        [Dependency] private SharedAppearanceSystem _appearance = default!;
+        [Dependency] private SharedMapSystem _mapping = default!;
+        [Dependency] private PointLightSystem _pointLight = default!;
 
         private const int UpdateInterval = 30;
         private int _accumulatedTicks;

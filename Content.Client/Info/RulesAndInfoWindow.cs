@@ -9,7 +9,7 @@ namespace Content.Client.Info
 {
     public sealed class RulesAndInfoWindow : DefaultWindow
     {
-        [Dependency] private readonly IResourceManager _resourceManager = default!;
+        [Dependency] private IResourceManager _resourceManager = default!;
 
         public RulesAndInfoWindow()
         {

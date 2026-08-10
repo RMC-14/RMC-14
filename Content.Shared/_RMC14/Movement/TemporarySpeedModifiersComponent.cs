@@ -12,7 +12,7 @@ public sealed partial class TemporarySpeedModifiersComponent : Component
 }
 
 [DataRecord, Serializable, NetSerializable]
-public record struct TemporarySpeedModifierSet(
+public partial record struct TemporarySpeedModifierSet(
     TimeSpan Duration,
     float Walk,
     float Sprint

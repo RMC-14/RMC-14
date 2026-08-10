@@ -135,7 +135,6 @@ namespace Content.IntegrationTests.Tests.Body
             await using var pair = await PoolManager.GetServerClient();
             var server = pair.Server;
 
-            var mapManager = server.ResolveDependency<IMapManager>();
             var entityManager = server.ResolveDependency<IEntityManager>();
             var cfg = server.ResolveDependency<IConfigurationManager>();
             var mapLoader = entityManager.System<MapLoaderSystem>();

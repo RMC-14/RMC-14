@@ -8,7 +8,7 @@ namespace Content.Server._RMC14.Admin;
 [AdminCommand(AdminFlags.Debug)]
 public sealed class RMCFixPower : LocalizedEntityCommands
 {
-    [Dependency] private readonly SharedRMCPowerSystem _power = default!;
+    [Dependency] private SharedRMCPowerSystem _power = default!;
 
     public override string Command => "fixpower";
 

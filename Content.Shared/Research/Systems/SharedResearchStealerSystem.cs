@@ -9,9 +9,9 @@ namespace Content.Shared.Research.Systems;
 
 public abstract class SharedResearchStealerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedNinjaGlovesSystem _gloves = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedNinjaGlovesSystem _gloves = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

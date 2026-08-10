@@ -6,7 +6,7 @@ namespace Content.Client._RMC14.TacticalMap;
 
 public sealed class TacticalMapSystem : SharedTacticalMapSystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     public override void Initialize()
     {

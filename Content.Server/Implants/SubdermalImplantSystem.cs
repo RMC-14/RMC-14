@@ -32,19 +32,19 @@ namespace Content.Server.Implants;
 
 public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
 {
-    [Dependency] private readonly CuffableSystem _cuffable = default!;
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoidAppearance = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly StoreSystem _store = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly ForensicsSystem _forensicsSystem = default!;
-    [Dependency] private readonly PullingSystem _pullingSystem = default!;
-    [Dependency] private readonly EntityLookupSystem _lookupSystem = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly IdentitySystem _identity = default!;
+    [Dependency] private CuffableSystem _cuffable = default!;
+    [Dependency] private HumanoidAppearanceSystem _humanoidAppearance = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private StoreSystem _store = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private ForensicsSystem _forensicsSystem = default!;
+    [Dependency] private PullingSystem _pullingSystem = default!;
+    [Dependency] private EntityLookupSystem _lookupSystem = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private IdentitySystem _identity = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private HashSet<Entity<MapGridComponent>> _targetGrids = [];

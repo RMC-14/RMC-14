@@ -22,21 +22,21 @@ namespace Content.Shared._RMC14.Xenonids.Retrieve;
 
 public sealed class XenoRetrieveSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly LineSystem _line = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
-    [Dependency] private readonly SharedRMCEmoteSystem _rmcEmote = default!;
-    [Dependency] private readonly RMCSizeStunSystem _rmcSize = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private LineSystem _line = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private SharedRMCEmoteSystem _rmcEmote = default!;
+    [Dependency] private RMCSizeStunSystem _rmcSize = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private RMCPullingSystem _rmcPulling = default!;
 
     public override void Initialize()
     {

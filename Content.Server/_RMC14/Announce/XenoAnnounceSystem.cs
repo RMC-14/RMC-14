@@ -13,10 +13,10 @@ namespace Content.Server._RMC14.Announce;
 
 public sealed class XenoAnnounceSystem : SharedXenoAnnounceSystem
 {
-    [Dependency] private readonly IAdminLogManager _adminLogs = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private IAdminLogManager _adminLogs = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Announce(EntityUid source, Filter filter, string message, string wrapped, SoundSpecifier? sound = null, PopupType? popup = null, bool needsQueen = false)
     {

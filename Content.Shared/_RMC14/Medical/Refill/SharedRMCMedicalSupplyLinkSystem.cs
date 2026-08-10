@@ -8,8 +8,8 @@ namespace Content.Shared._RMC14.Medical.Refill;
 
 public abstract class SharedRMCMedicalSupplyLinkSystem : EntitySystem
 {
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
-    [Dependency] private readonly SharedRMCAnimationSystem _animation = default!;
+    [Dependency] private RMCMapSystem _rmcMap = default!;
+    [Dependency] private SharedRMCAnimationSystem _animation = default!;
 
     public override void Initialize()
     {

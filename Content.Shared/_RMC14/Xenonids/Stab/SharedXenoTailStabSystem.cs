@@ -30,24 +30,24 @@ namespace Content.Shared._RMC14.Xenonids.Stab;
 
 public abstract class SharedXenoTailStabSystem : EntitySystem
 {
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedDirectionalAttackBlockSystem _directionBlock = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly XenoRotateSystem _rotate = default!;
-    [Dependency] private readonly RMCDazedSystem _daze = default!;
-    [Dependency] private readonly RMCCameraShakeSystem _cameraShake = default!;
-    [Dependency] private readonly RMCSizeStunSystem _size = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedColorFlashEffectSystem _colorFlash = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedDirectionalAttackBlockSystem _directionBlock = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private XenoRotateSystem _rotate = default!;
+    [Dependency] private RMCDazedSystem _daze = default!;
+    [Dependency] private RMCCameraShakeSystem _cameraShake = default!;
+    [Dependency] private RMCSizeStunSystem _size = default!;
 
     protected Box2Rotated LastTailAttack;
 

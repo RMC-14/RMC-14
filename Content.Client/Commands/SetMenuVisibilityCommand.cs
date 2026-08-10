@@ -8,7 +8,7 @@ namespace Content.Client.Commands;
 [UsedImplicitly]
 internal sealed class SetMenuVisibilityCommand : LocalizedCommands
 {
-    [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
+    [Dependency] private IEntitySystemManager _entitySystemManager = default!;
 
     public override string Command => "menuvis";
 

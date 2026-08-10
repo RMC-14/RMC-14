@@ -11,7 +11,7 @@ namespace Content.Client._RMC14.Access;
 
 public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableBui
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
     private readonly ContainerSystem _container;
     public IdModificationConsoleBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {

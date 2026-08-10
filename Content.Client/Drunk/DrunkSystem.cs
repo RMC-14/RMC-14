@@ -7,8 +7,8 @@ namespace Content.Client.Drunk;
 
 public sealed class DrunkSystem : SharedDrunkSystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IOverlayManager _overlayMan = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IOverlayManager _overlayMan = default!;
 
     private DrunkOverlay _overlay = default!;
 

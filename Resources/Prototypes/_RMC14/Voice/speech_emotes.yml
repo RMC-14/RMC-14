@@ -10,7 +10,7 @@
     components:
     - BorgChassis
   available: false
-  icon: _RMC14/Actions/xeno_emotes.rsi/hiss.png
+  icon: { sprite: _RMC14/Actions/xeno_emotes.rsi, state: hiss }
   chatMessages: ["rmc-emote-hiss"]
   chatTriggers:
     - hiss
@@ -29,7 +29,7 @@
     components:
     - BorgChassis
   available: false
-  icon: _RMC14/Actions/species_emotes.rsi/meow.png
+  icon: { sprite: _RMC14/Actions/species_emotes.rsi, state: meow }
   chatMessages: ["rmc-emote-meow"]
   chatTriggers:
     - meow
@@ -52,7 +52,7 @@
     components:
     - BorgChassis
   available: false
-  icon: _RMC14/Actions/species_emotes.rsi/mew.png
+  icon: { sprite: _RMC14/Actions/species_emotes.rsi, state: mew }
   chatMessages: ["rmc-emote-mew"]
   chatTriggers:
     - mew
@@ -72,7 +72,7 @@
     components:
     - BorgChassis
   available: false
-  icon: _RMC14/Actions/xeno_emotes.rsi/growl.png
+  icon: { sprite: _RMC14/Actions/xeno_emotes.rsi, state: growl }
   chatMessages: ["rmc-emote-growl"]
   chatTriggers:
     - growl
@@ -93,7 +93,7 @@
     components:
     - BorgChassis
   available: false
-  icon: _RMC14/Actions/species_emotes.rsi/purr.png
+  icon: { sprite: _RMC14/Actions/species_emotes.rsi, state: purr }
   chatMessages: ["rmc-emote-purr"]
   chatTriggers:
     - purr
@@ -108,7 +108,7 @@
   name: rmc-emote-name-bark
   category: Vocal
   available: false
-  icon: _RMC14/Actions/species_emotes.rsi/bark.png
+  icon: { sprite: _RMC14/Actions/species_emotes.rsi, state: bark }
   whitelist:
     components:
     - Vocal
@@ -132,7 +132,7 @@
   name: rmc-emote-name-snarl
   category: Vocal
   available: false
-  icon: _RMC14/Actions/species_emotes.rsi/snarl.png
+  icon: { sprite: _RMC14/Actions/species_emotes.rsi, state: snarl }
   whitelist:
     components:
     - Vocal
@@ -156,7 +156,7 @@
   name: rmc-emote-name-whine
   category: Vocal
   available: false
-  icon: _RMC14/Actions/species_emotes.rsi/whine.png
+  icon: { sprite: _RMC14/Actions/species_emotes.rsi, state: whine }
   whitelist:
     components:
     - Vocal
@@ -180,7 +180,7 @@
   name: rmc-emote-name-yip
   category: Vocal
   available: false
-  icon: _RMC14/Actions/species_emotes.rsi/bark.png
+  icon: { sprite: _RMC14/Actions/species_emotes.rsi, state: bark }
   whitelist:
     components:
       - Vocal
@@ -203,7 +203,7 @@
   name: rmc-emote-name-gnash
   category: Vocal
   available: false
-  icon: _RMC14/Actions/species_emotes.rsi/gnash.png
+  icon: { sprite: _RMC14/Actions/species_emotes.rsi, state: gnash }
   whitelist:
     components:
     - Vocal
@@ -230,7 +230,7 @@
   name: rmc-emote-name-anger
   category: Vocal
   available: false
-  icon: _RMC14/Actions/species_emotes.rsi/skrellanger.png
+  icon: { sprite: _RMC14/Actions/species_emotes.rsi, state: skrellanger }
   whitelist:
     components:
     - Vocal
@@ -257,7 +257,7 @@
   name: rmc-emote-name-peep
   category: Vocal
   available: false
-  icon: _RMC14/Actions/species_emotes.rsi/peep.png
+  icon: { sprite: _RMC14/Actions/species_emotes.rsi, state: peep }
   whitelist:
     components:
     - Vocal
@@ -278,7 +278,7 @@
   name: rmc-emote-name-trill
   category: Vocal
   available: false
-  icon: _RMC14/Actions/species_emotes.rsi/trill.png
+  icon: { sprite: _RMC14/Actions/species_emotes.rsi, state: trill }
   whitelist:
     components:
     - Vocal
@@ -299,7 +299,7 @@
   name: rmc-emote-name-warble
   category: Vocal
   available: false
-  icon: _RMC14/Actions/species_emotes.rsi/warble.png
+  icon: { sprite: _RMC14/Actions/species_emotes.rsi, state: warble }
   whitelist:
     components:
     - Vocal
@@ -322,7 +322,7 @@
   name: rmc-emote-name-r-rattle
   category: Hands
   available: false
-  icon: _RMC14/Actions/species_emotes.rsi/snarl.png
+  icon: { sprite: _RMC14/Actions/species_emotes.rsi, state: snarl }
   whitelist:
     components:
     - Vocal
@@ -349,7 +349,8 @@
   name: rmc-emote-name-slime-bubble
   category: Vocal
   available: false
-  icon: Interface/Emotes/squish.png # todo: new icons?
+  icon:
+    Interface/Emotes/squish.png # todo: new icons?
   whitelist:
     components:
     - Vocal
@@ -366,7 +367,8 @@
   name: rmc-emote-name-slime-pop
   category: Vocal
   available: false
-  icon: Interface/Emotes/squish.png # todo: new icons?
+  icon:
+    Interface/Emotes/squish.png # todo: new icons?
   whitelist:
     components:
     - Vocal
@@ -383,7 +385,8 @@
   name: rmc-emote-name-slime-wobble
   category: Vocal
   available: false
-  icon: Interface/Emotes/squish.png # todo: new icons?
+  icon:
+    Interface/Emotes/squish.png # todo: new icons?
   whitelist:
     components:
     - Vocal
@@ -403,7 +406,7 @@
   name: rmc-emote-name-avali-chirp
   category: Vocal
   available: false
-  icon: _RMC14/Actions/species_emotes.rsi/peep.png
+  icon: { sprite: _RMC14/Actions/species_emotes.rsi, state: peep }
   whitelist:
     components:
     - Vocal

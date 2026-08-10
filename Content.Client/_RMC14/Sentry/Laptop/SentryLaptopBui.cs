@@ -20,7 +20,7 @@ namespace Content.Client._RMC14.Sentry.Laptop;
 [UsedImplicitly]
 public sealed class SentryLaptopBui : BoundUserInterface
 {
-    [Dependency] private readonly IEntityManager _entities = default!;
+    [Dependency] private IEntityManager _entities = default!;
 
     private SentryLaptopWindow? _window;
     private readonly Dictionary<NetEntity, SentryCard> _sentryCards = new();

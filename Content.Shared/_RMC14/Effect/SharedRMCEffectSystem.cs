@@ -4,7 +4,7 @@ namespace Content.Shared._RMC14.Effect;
 
 public abstract class SharedRMCEffectSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

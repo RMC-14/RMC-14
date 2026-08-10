@@ -22,10 +22,10 @@ namespace Content.Client._RMC14.Marines.ControlComputer;
 [UsedImplicitly]
 public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    [Dependency] private readonly IClipboardManager _clipboard = default!;
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IEntitySystemManager _systems = default!;
+    [Dependency] private IClipboardManager _clipboard = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IEntitySystemManager _systems = default!;
 
     [ViewVariables]
     private MedalsPanelWindow? _window;
@@ -35,7 +35,7 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
 
     private sealed record MedalInfo(SpriteSpecifier Icon, string Name, string Description);
     private readonly Dictionary<string, MedalInfo> _medalsInfo = new();
-    private bool _medalsInfoBuilt = false;
+    private bool _medalsInfoBuilt;
 
     protected override void Open()
     {
@@ -72,12 +72,15 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
         UpdateAwardedMedals(medalsState);
     }
 
-    private static StyleBoxFlat CreateStyleBox(Color backgroundColor) => new()
+    private static StyleBoxFlat CreateStyleBox(Color backgroundColor)
     {
-        BackgroundColor = backgroundColor,
-        BorderThickness = new Robust.Shared.Maths.Thickness(0),
-        Padding = new Robust.Shared.Maths.Thickness(2)
-    };
+        return new StyleBoxFlat
+        {
+            BackgroundColor = backgroundColor,
+            BorderThickness = new Thickness(0),
+            Padding = new Thickness(2)
+        };
+    }
 
     private BoxContainer CreateRecommendationContainer(MarineAwardRecommendationInfo recommendation)
     {
@@ -89,10 +92,14 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
 
         // Recommender: Rank and Name
         var recommenderLabelText = Loc.GetString("rmc-medal-panel-recommender-label");
-        var recommenderText = $"{recommenderLabelText} {string.Join(" ", recommendation.RecommenderRank, recommendation.RecommenderName)}";
+        var recommenderText = $"{recommenderLabelText} {string.Join(" ", new[]
+        {
+            recommendation.RecommenderRank,
+            recommendation.RecommenderName,
+        })}";
         var recommenderLabel = new RichTextLabel
         {
-            HorizontalExpand = true
+            HorizontalExpand = true,
         };
         recommenderLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(recommenderText));
         recContainer.AddChild(recommenderLabel);
@@ -100,10 +107,14 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
         // Job: Squad (if exists) and Job
         var jobLabelText = Loc.GetString("rmc-medal-panel-job-label");
         var squadPart = string.IsNullOrEmpty(recommendation.RecommenderSquad) ? null : $"({recommendation.RecommenderSquad})";
-        var jobText = $"{jobLabelText} {string.Join(" ", squadPart, recommendation.RecommenderJob)}";
+        var jobText = $"{jobLabelText} {string.Join(" ", new[]
+        {
+            squadPart,
+            recommendation.RecommenderJob,
+        })}";
         var jobLabel = new RichTextLabel
         {
-            HorizontalExpand = true
+            HorizontalExpand = true,
         };
         jobLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(jobText));
         recContainer.AddChild(jobLabel);
@@ -112,7 +123,7 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
         var reasonContainer = new BoxContainer
         {
             Orientation = BoxContainer.LayoutOrientation.Horizontal,
-            HorizontalExpand = true
+            HorizontalExpand = true,
         };
 
         var reasonLabelText = Loc.GetString("rmc-medal-panel-reason-label");
@@ -197,7 +208,8 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
             copyIcon.Texture = checkTexture;
 
             // Schedule icon restoration after 1 second
-            Timer.Spawn(System.TimeSpan.FromSeconds(1), () =>
+            Timer.Spawn(System.TimeSpan.FromSeconds(1),
+                () =>
             {
                 copyIcon.Texture = copyTexture;
             });
@@ -232,7 +244,7 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
     {
         var groupPanel = new PanelContainer
         {
-            HorizontalExpand = true
+            HorizontalExpand = true,
         };
 
         var panelStyle = new StyleBoxFlat
@@ -247,7 +259,7 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
         {
             Orientation = BoxContainer.LayoutOrientation.Vertical,
             Margin = new Robust.Shared.Maths.Thickness(8),
-            HorizontalExpand = true
+            HorizontalExpand = true,
         };
 
         // Header: Rank, Squad (if exists), Job, Name - get from first recommendation
@@ -256,7 +268,14 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
             return null;
 
         var squadPart = string.IsNullOrEmpty(firstRec.RecommendedSquad) ? null : $"({firstRec.RecommendedSquad})";
-        var headerText = string.Join(" ", firstRec.RecommendedRank, squadPart, firstRec.RecommendedJob, firstRec.RecommendedName);
+        var headerText = string.Join(" ",
+            new[]
+        {
+            firstRec.RecommendedRank,
+            squadPart,
+            firstRec.RecommendedJob,
+            firstRec.RecommendedName
+        });
         var headerLabel = new RichTextLabel
         {
             HorizontalExpand = true
@@ -306,7 +325,7 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
             {
                 Text = "",
                 HorizontalExpand = true,
-                Margin = new Robust.Shared.Maths.Thickness(0, 8, 0, 0)
+                Margin = new Thickness(0, 8, 0, 0)
             };
             expandButton.AddStyleClass("OpenBoth");
 
@@ -315,7 +334,7 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
             {
                 HorizontalAlignment = Control.HAlignment.Center,
                 VerticalAlignment = Control.VAlignment.Center,
-                HorizontalExpand = true
+                HorizontalExpand = true,
             };
             arrowLabel.SetMessage(FormattedMessage.FromMarkupOrThrow("[bold]v[/bold]"));
             expandButton.AddChild(arrowLabel);
@@ -413,11 +432,10 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
             if (string.IsNullOrWhiteSpace(medalName))
                 continue;
 
-            var medalDescription = medalProto.Description ?? string.Empty;
             var medalInfo = new MedalInfo(
                 new SpriteSpecifier.EntityPrototype(medalId),
                 medalName,
-                medalDescription
+                medalProto.Description
             );
 
             _medalsInfo[medalName] = medalInfo;
@@ -504,7 +522,7 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
         var printButton = new Button
         {
             HorizontalExpand = true,
-            Margin = new Robust.Shared.Maths.Thickness(0, 8, 0, 0)
+            Margin = new Thickness(0, 8, 0, 0),
         };
         printButton.AddStyleClass("OpenBoth");
 

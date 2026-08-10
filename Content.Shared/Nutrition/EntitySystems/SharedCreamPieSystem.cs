@@ -9,7 +9,7 @@ namespace Content.Shared.Nutrition.EntitySystems
     public abstract class SharedCreamPieSystem : EntitySystem
     {
         [Dependency] private SharedStunSystem _stunSystem = default!;
-        [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+        [Dependency] private SharedAppearanceSystem _appearance = default!;
 
         public override void Initialize()
         {

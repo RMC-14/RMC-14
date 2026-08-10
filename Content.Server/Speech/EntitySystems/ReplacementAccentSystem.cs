@@ -14,9 +14,9 @@ namespace Content.Server.Speech.EntitySystems
     /// </summary>
     public sealed class ReplacementAccentSystem : EntitySystem
     {
-        [Dependency] private readonly IPrototypeManager _proto = default!;
-        [Dependency] private readonly IRobustRandom _random = default!;
-        [Dependency] private readonly ILocalizationManager _loc = default!;
+        [Dependency] private IPrototypeManager _proto = default!;
+        [Dependency] private IRobustRandom _random = default!;
+        [Dependency] private ILocalizationManager _loc = default!;
 
         public override void Initialize()
         {

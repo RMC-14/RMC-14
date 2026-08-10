@@ -19,13 +19,13 @@ namespace Content.Client.MainMenu
     // Instantiated dynamically through the StateManager, Dependencies will be resolved.
     public sealed class MainScreen : Robust.Client.State.State
     {
-        [Dependency] private readonly IBaseClient _client = default!;
-        [Dependency] private readonly IClientNetManager _netManager = default!;
-        [Dependency] private readonly IConfigurationManager _configurationManager = default!;
-        [Dependency] private readonly IGameController _controllerProxy = default!;
-        [Dependency] private readonly IResourceCache _resourceCache = default!;
-        [Dependency] private readonly IUserInterfaceManager _userInterfaceManager = default!;
-        [Dependency] private readonly ILogManager _logManager = default!;
+        [Dependency] private IBaseClient _client = default!;
+        [Dependency] private IClientNetManager _netManager = default!;
+        [Dependency] private IConfigurationManager _configurationManager = default!;
+        [Dependency] private IGameController _controllerProxy = default!;
+        [Dependency] private IResourceCache _resourceCache = default!;
+        [Dependency] private IUserInterfaceManager _userInterfaceManager = default!;
+        [Dependency] private ILogManager _logManager = default!;
 
         private ISawmill _sawmill = default!;
 

@@ -6,8 +6,8 @@ namespace Content.Client._RMC14.Interaction;
 
 public sealed partial class RMCClientInteractionSystem : EntitySystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private TransformSystem _transform = default!;
 
     public bool IsInteractionTransparency(EntityUid target, EntityUid? localEntity, IEye? eye)
     {

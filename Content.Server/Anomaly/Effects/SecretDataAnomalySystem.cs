@@ -5,7 +5,7 @@ namespace Content.Server.Anomaly.Effects;
 
 public sealed class SecretDataAnomalySystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     private readonly List<AnomalySecretData> _deita = new();
 

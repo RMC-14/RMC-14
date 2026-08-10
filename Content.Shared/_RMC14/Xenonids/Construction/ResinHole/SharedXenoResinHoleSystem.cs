@@ -23,8 +23,8 @@ public abstract class SharedXenoResinHoleSystem : EntitySystem
     [Dependency] protected readonly INetManager _net = default!;
     [Dependency] protected readonly SharedPopupSystem _popup = default!;
     [Dependency] protected readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly AreaSystem _areas = default!;
-    [Dependency] private readonly SharedXenoAnnounceSystem _announce = default!;
+    [Dependency] private AreaSystem _areas = default!;
+    [Dependency] private SharedXenoAnnounceSystem _announce = default!;
 
     public override void Initialize()
     {

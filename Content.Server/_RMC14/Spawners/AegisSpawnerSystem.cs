@@ -11,8 +11,8 @@ namespace Content.Server._RMC14.Spawners;
 /// </summary>
 public sealed class AegisSpawnerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     /// <summary>
     /// Global flag that determines if AEGIS spawners should be activated this round

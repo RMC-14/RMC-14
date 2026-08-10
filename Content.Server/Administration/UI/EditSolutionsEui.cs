@@ -16,8 +16,8 @@ namespace Content.Server.Administration.UI
     [UsedImplicitly]
     public sealed class EditSolutionsEui : BaseEui
     {
-        [Dependency] private readonly IEntityManager _entityManager = default!;
-        [Dependency] private readonly IGameTiming _gameTiming = default!;
+        [Dependency] private IEntityManager _entityManager = default!;
+        [Dependency] private IGameTiming _gameTiming = default!;
         private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
         public readonly EntityUid Target;
 

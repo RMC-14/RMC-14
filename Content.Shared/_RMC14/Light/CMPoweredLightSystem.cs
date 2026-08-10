@@ -6,8 +6,8 @@ namespace Content.Shared._RMC14.Light;
 
 public sealed class CMPoweredLightSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPointLightSystem _pointLight = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

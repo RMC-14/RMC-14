@@ -6,8 +6,8 @@ namespace Content.Client.Power.Visualizers;
 
 public sealed class CableVisualizerSystem : EntitySystem
 {
-    [Dependency] private readonly AppearanceSystem _appearanceSystem = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private AppearanceSystem _appearanceSystem = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

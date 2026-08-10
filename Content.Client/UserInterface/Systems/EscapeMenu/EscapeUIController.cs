@@ -22,14 +22,14 @@ namespace Content.Client.UserInterface.Systems.EscapeMenu;
 [UsedImplicitly]
 public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>
 {
-    [Dependency] private readonly IClientConsoleHost _console = default!;
-    [Dependency] private readonly IUriOpener _uri = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly ChangelogUIController _changelog = default!;
-    [Dependency] private readonly InfoUIController _info = default!;
-    [Dependency] private readonly OptionsUIController _options = default!;
-    [Dependency] private readonly GuidebookUIController _guidebook = default!;
-    [Dependency] private readonly LinkAccountManager _linkAccount = default!;
+    [Dependency] private IClientConsoleHost _console = default!;
+    [Dependency] private IUriOpener _uri = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private ChangelogUIController _changelog = default!;
+    [Dependency] private InfoUIController _info = default!;
+    [Dependency] private OptionsUIController _options = default!;
+    [Dependency] private GuidebookUIController _guidebook = default!;
+    [Dependency] private LinkAccountManager _linkAccount = default!;
 
     private Options.UI.EscapeMenu? _escapeWindow;
 

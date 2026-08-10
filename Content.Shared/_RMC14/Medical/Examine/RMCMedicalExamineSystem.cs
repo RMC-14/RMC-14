@@ -12,10 +12,10 @@ namespace Content.Shared._RMC14.Medical.Examine;
 
 public sealed class RMCMedicalExamineSystem : EntitySystem
 {
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
-    [Dependency] private readonly RMCUnrevivableSystem _unrevivable = default!;
-    [Dependency] private readonly SharedSynthSystem _synth = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private RMCSizeStunSystem _sizeStun = default!;
+    [Dependency] private RMCUnrevivableSystem _unrevivable = default!;
+    [Dependency] private SharedSynthSystem _synth = default!;
 
     public override void Initialize()
     {

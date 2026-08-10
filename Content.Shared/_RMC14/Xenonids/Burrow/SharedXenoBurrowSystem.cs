@@ -36,24 +36,24 @@ namespace Content.Shared._RMC14.Xenonids.Burrow;
 /// </summary>
 public abstract class SharedXenoBurrowSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly EntityManager _entities = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly IGameTiming _time = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedActionsSystem _action = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
-    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private EntityManager _entities = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private IGameTiming _time = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedActionsSystem _action = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private RMCPullingSystem _rmcPulling = default!;
 
     public override void Initialize()
     {

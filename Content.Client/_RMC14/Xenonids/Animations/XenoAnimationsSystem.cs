@@ -10,8 +10,8 @@ namespace Content.Client._RMC14.Xenonids.Animations;
 
 public sealed class XenoAnimationsSystem : EntitySystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _animation = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private AnimationPlayerSystem _animation = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     private const string MeleeLungeKey = "melee-lunge";
 

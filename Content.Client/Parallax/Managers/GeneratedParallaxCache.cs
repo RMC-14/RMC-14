@@ -19,9 +19,9 @@ namespace Content.Client.Parallax.Managers;
 /// </summary>
 public sealed class GeneratedParallaxCache : IPostInjectInit
 {
-    [Dependency] private readonly IConfigurationManager _cfg = null!;
-    [Dependency] private readonly IResourceManager _res = null!;
-    [Dependency] private readonly ILogManager _logManager = null!;
+    [Dependency] private IConfigurationManager _cfg = null!;
+    [Dependency] private IResourceManager _res = null!;
+    [Dependency] private ILogManager _logManager = null!;
 
     private readonly Dictionary<string, CacheDatum> _data = new();
 

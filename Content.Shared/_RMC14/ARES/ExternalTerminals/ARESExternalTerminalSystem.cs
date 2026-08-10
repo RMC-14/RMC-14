@@ -18,13 +18,13 @@ namespace Content.Shared._RMC14.ARES.ExternalTerminals;
 
 public sealed class ARESExternalTerminalSystem : EntitySystem
 {
-    [Dependency] private readonly ARESCoreSystem _core = default!;
-    [Dependency] private readonly IComponentFactory _componentFactory = default!;
-    [Dependency] private readonly SharedIdCardSystem _idCard = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly GunIFFSystem _iffSystem = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly ISerializationManager _serialization = default!;
+    [Dependency] private ARESCoreSystem _core = default!;
+    [Dependency] private IComponentFactory _componentFactory = default!;
+    [Dependency] private SharedIdCardSystem _idCard = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private GunIFFSystem _iffSystem = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private ISerializationManager _serialization = default!;
 
     private static readonly EntProtoId<ARESLogTypeComponent> CoreLog = "ARESTabARESLogs";
     private static readonly int LogsShown = 12;

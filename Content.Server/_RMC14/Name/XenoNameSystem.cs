@@ -9,9 +9,9 @@ namespace Content.Server._RMC14.Name;
 
 public sealed class XenoNameSystem : SharedXenoNameSystem
 {
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly NameModifierSystem _nameModifier = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private NameModifierSystem _nameModifier = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     private readonly List<int> _available = new();
 

@@ -39,23 +39,23 @@ namespace Content.Server._RMC14.TacticalMap;
 
 public sealed class TacticalMapSystem : SharedTacticalMapSystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly IAdminLogManager _adminLog = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly CMDistressSignalRuleSystem _distressSignal = default!;
-    [Dependency] private readonly XenoEvolutionSystem _evolution = default!;
-    [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly SquadSystem _squad = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedXenoWeedsSystem _weeds = default!;
-    [Dependency] private readonly XenoAnnounceSystem _xenoAnnounce = default!;
-    [Dependency] private readonly RMCUnrevivableSystem _unrevivableSystem = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private IAdminLogManager _adminLog = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private CMDistressSignalRuleSystem _distressSignal = default!;
+    [Dependency] private XenoEvolutionSystem _evolution = default!;
+    [Dependency] private MarineAnnounceSystem _marineAnnounce = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SkillsSystem _skills = default!;
+    [Dependency] private SquadSystem _squad = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedXenoWeedsSystem _weeds = default!;
+    [Dependency] private XenoAnnounceSystem _xenoAnnounce = default!;
+    [Dependency] private RMCUnrevivableSystem _unrevivableSystem = default!;
 
     private EntityQuery<ActiveTacticalMapTrackedComponent> _activeTacticalMapTrackedQuery;
     private EntityQuery<MarineMapTrackedComponent> _marineMapTrackedQuery;

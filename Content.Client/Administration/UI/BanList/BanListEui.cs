@@ -12,7 +12,7 @@ namespace Content.Client.Administration.UI.BanList;
 [UsedImplicitly]
 public sealed class BanListEui : BaseEui
 {
-    [Dependency] private readonly IUserInterfaceManager _ui = default!;
+    [Dependency] private IUserInterfaceManager _ui = default!;
 
     private BanListIdsPopup? _popup;
 

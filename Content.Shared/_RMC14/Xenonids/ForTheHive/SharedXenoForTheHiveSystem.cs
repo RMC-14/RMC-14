@@ -29,28 +29,28 @@ namespace Content.Shared._RMC14.Xenonids.ForTheHive;
 
 public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly XenoEnergySystem _energy = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private XenoEnergySystem _energy = default!;
     [Dependency] protected readonly SharedPopupSystem _popup = default!;
     [Dependency] protected readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly XenoEvolutionSystem _evolution = default!;
+    [Dependency] private XenoEvolutionSystem _evolution = default!;
     [Dependency] protected readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] protected readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedCMChatSystem _chat = default!;
-    [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedCMChatSystem _chat = default!;
+    [Dependency] private SharedPointLightSystem _pointLight = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] protected readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly SharedXenoAcidSystem _acid = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movement = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedBodySystem _body = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private SharedXenoAcidSystem _acid = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private MovementSpeedModifierSystem _movement = default!;
 
     public override void Initialize()
     {

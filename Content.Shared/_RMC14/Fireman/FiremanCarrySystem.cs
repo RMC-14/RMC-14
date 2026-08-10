@@ -31,19 +31,19 @@ namespace Content.Shared._RMC14.Fireman;
 
 public sealed class FiremanCarrySystem : EntitySystem
 {
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
-    [Dependency] private readonly SharedRMCSpriteSystem _rmcSprite = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private SharedRMCSpriteSystem _rmcSprite = default!;
+    [Dependency] private SkillsSystem _skills = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedVirtualItemSystem _virtualItem = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     private readonly List<(EntityUid Target, EntityUid Carrier)> _toReparent = new();
 

@@ -21,7 +21,7 @@ namespace Content.Client.Shuttles.UI;
 [Virtual]
 public partial class BaseShuttleControl : MapGridControl
 {
-    [Dependency] private readonly IParallelManager _parallel = default!;
+    [Dependency] private IParallelManager _parallel = default!;
     protected readonly SharedMapSystem Maps;
 
     protected readonly Font Font;

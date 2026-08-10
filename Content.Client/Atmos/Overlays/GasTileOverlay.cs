@@ -22,7 +22,6 @@ namespace Content.Client.Atmos.Overlays
         private static readonly ProtoId<ShaderPrototype> UnshadedShader = "unshaded";
 
         private readonly IEntityManager _entManager;
-        private readonly IMapManager _mapManager;
         private readonly SharedMapSystem _mapSystem;
         private readonly SharedTransformSystem _xformSys;
 
@@ -53,7 +52,6 @@ namespace Content.Client.Atmos.Overlays
         public GasTileOverlay(GasTileOverlaySystem system, IEntityManager entManager, IResourceCache resourceCache, IPrototypeManager protoMan, SpriteSystem spriteSys, SharedTransformSystem xformSys)
         {
             _entManager = entManager;
-            _mapManager = IoCManager.Resolve<IMapManager>();
             _mapSystem = entManager.System<SharedMapSystem>();
             _xformSys = xformSys;
             _shader = protoMan.Index(UnshadedShader).Instance();
@@ -176,7 +174,7 @@ namespace Content.Client.Atmos.Overlays
                 return;
 
             // TODO: WorldBounds callback.
-            _mapManager.FindGridsIntersecting(args.MapId, args.WorldAABB, ref gridState,
+            _mapSystem.FindGridsIntersecting(args.MapId, args.WorldAABB, ref gridState,
                 static (EntityUid uid, MapGridComponent grid,
                     ref (Box2Rotated WorldBounds,
                         DrawingHandleWorld drawHandle,

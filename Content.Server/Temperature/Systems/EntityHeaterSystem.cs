@@ -11,7 +11,7 @@ namespace Content.Server.Temperature.Systems;
 /// </summary>
 public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
 {
-    [Dependency] private readonly TemperatureSystem _temperature = default!;
+    [Dependency] private TemperatureSystem _temperature = default!;
 
     public override void Initialize()
     {

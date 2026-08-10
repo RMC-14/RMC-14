@@ -7,7 +7,7 @@ namespace Content.Client.Weapons.Ranged.Systems;
 
 public sealed partial class GunSystem
 {
-    [Dependency] private readonly StackSystem _stack = default!;
+    [Dependency] private StackSystem _stack = default!;
 
     protected override void InitializeBallistic()
     {

@@ -7,7 +7,7 @@ namespace Content.Client._RMC14.Xenonids.Burrow;
 
 public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     public override void Update(float frameTime)
     {

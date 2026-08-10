@@ -10,9 +10,9 @@ namespace Content.Shared.Placeable;
 /// </summary>
 public sealed class ItemPlacerSystem : EntitySystem
 {
-    [Dependency] private readonly CollisionWakeSystem _wake = default!;
-    [Dependency] private readonly PlaceableSurfaceSystem _placeableSurface = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private CollisionWakeSystem _wake = default!;
+    [Dependency] private PlaceableSurfaceSystem _placeableSurface = default!;
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
 
     public override void Initialize()
     {

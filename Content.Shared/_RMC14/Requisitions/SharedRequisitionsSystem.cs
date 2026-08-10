@@ -17,13 +17,13 @@ namespace Content.Shared._RMC14.Requisitions;
 
 public abstract class SharedRequisitionsSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly FixtureSystem _fixtures = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private FixtureSystem _fixtures = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedMapSystem _map = default!;
 
     public int Starting { get; private set; }
     public int StartingDollarsPerMarine { get; private set; }

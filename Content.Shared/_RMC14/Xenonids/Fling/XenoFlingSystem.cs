@@ -20,22 +20,22 @@ namespace Content.Shared._RMC14.Xenonids.Fling;
 
 public sealed class XenoFlingSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
-    [Dependency] private readonly RMCSlowSystem _rmcSlow = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
-    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
-    [Dependency] private readonly SharedXenoHealSystem _xenoHeal = default!;
-    [Dependency] private readonly XenoRageSystem _rage = default!;
-    [Dependency] private readonly RMCSizeStunSystem _size = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RMCDazedSystem _daze = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedColorFlashEffectSystem _colorFlash = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private RMCSlowSystem _rmcSlow = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private SharedRMCMeleeWeaponSystem _rmcMelee = default!;
+    [Dependency] private SharedRMCDamageableSystem _rmcDamageable = default!;
+    [Dependency] private SharedXenoHealSystem _xenoHeal = default!;
+    [Dependency] private XenoRageSystem _rage = default!;
+    [Dependency] private RMCSizeStunSystem _size = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private RMCDazedSystem _daze = default!;
 
     public override void Initialize()
     {

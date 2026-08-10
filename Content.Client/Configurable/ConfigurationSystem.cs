@@ -5,7 +5,7 @@ namespace Content.Client.Configurable;
 
 public sealed class ConfigurationSystem : SharedConfigurationSystem
 {
-    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
+    [Dependency] private SharedUserInterfaceSystem _uiSystem = default!;
 
     public override void Initialize()
     {

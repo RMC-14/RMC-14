@@ -4,4 +4,4 @@ namespace Content.Shared._RMC14.Animations;
 
 [DataRecord]
 [Serializable, NetSerializable]
-public readonly record struct RMCKeyFrame(string State, float KeyTime);
+public readonly partial record struct RMCKeyFrame(string State, float KeyTime);

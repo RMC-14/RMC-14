@@ -38,13 +38,13 @@ public abstract partial class SharedBuckleSystem
 {
     public static ProtoId<AlertCategoryPrototype> BuckledAlertCategory = "Buckled";
 
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
 
     // RMC14
-    [Dependency] private readonly RMCBuckleSystem _rmcBuckle = default!;
-    [Dependency] private readonly RMCMovementSystem _rmcMovement = default!;
-    [Dependency] private readonly TagSystem _tags = default!;
+    [Dependency] private RMCBuckleSystem _rmcBuckle = default!;
+    [Dependency] private RMCMovementSystem _rmcMovement = default!;
+    [Dependency] private TagSystem _tags = default!;
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
 
     private void InitializeBuckle()

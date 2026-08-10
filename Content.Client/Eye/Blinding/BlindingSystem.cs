@@ -8,8 +8,8 @@ namespace Content.Client.Eye.Blinding;
 
 public sealed class BlindingSystem : EntitySystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IOverlayManager _overlayMan = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IOverlayManager _overlayMan = default!;
     [Dependency] ILightManager _lightManager = default!;
 
 

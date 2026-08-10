@@ -14,9 +14,9 @@ namespace Content.Server.Xenoarchaeology.Artifact.XAE;
 /// </summary>
 public sealed class XAECreateGasSystem : BaseXAESystem<XAECreateGasComponent>
 {
-    [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly MapSystem _map = default!;
+    [Dependency] private AtmosphereSystem _atmosphere = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private MapSystem _map = default!;
 
     protected override void OnActivated(Entity<XAECreateGasComponent> ent, ref XenoArtifactNodeActivatedEvent args)
     {

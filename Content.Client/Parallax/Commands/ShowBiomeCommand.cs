@@ -5,7 +5,7 @@ namespace Content.Client.Parallax.Commands;
 
 public sealed class ShowBiomeCommand : LocalizedCommands
 {
-    [Dependency] private readonly IOverlayManager _overlayMgr = default!;
+    [Dependency] private IOverlayManager _overlayMgr = default!;
 
     public override string Command => "showbiome";
     public override void Execute(IConsoleShell shell, string argStr, string[] args)

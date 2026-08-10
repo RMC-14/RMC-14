@@ -10,7 +10,7 @@ namespace Content.Shared._RMC14.Language.Systems;
 public abstract class SharedLanguageSystem : EntitySystem
 {
     [Dependency] protected readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public static readonly ProtoId<LanguagePrototype> CommonLanguage = "English";
     private static readonly IReadOnlySet<ProtoId<LanguagePrototype>> DefaultLanguages =

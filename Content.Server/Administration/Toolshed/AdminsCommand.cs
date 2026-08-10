@@ -8,7 +8,7 @@ namespace Content.Server.Administration.Toolshed;
 [ToolshedCommand, AdminCommand(AdminFlags.Admin)]
 public sealed class AdminsCommand : ToolshedCommand
 {
-    [Dependency] private readonly IAdminManager _admin = default!;
+    [Dependency] private IAdminManager _admin = default!;
 
     [CommandImplementation("active")]
     public IEnumerable<ICommonSession> Active()

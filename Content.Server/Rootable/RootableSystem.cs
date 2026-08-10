@@ -18,11 +18,11 @@ namespace Content.Server.Rootable;
 /// </summary>
 public sealed class RootableSystem : SharedRootableSystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _logger = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly ReactiveSystem _reactive = default!;
-    [Dependency] private readonly BloodstreamSystem _blood = default!;
+    [Dependency] private ISharedAdminLogManager _logger = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private ReactiveSystem _reactive = default!;
+    [Dependency] private BloodstreamSystem _blood = default!;
 
     public override void Update(float frameTime)
     {

@@ -33,20 +33,20 @@ public abstract class SharedSynthSystem : EntitySystem
 {
     private static readonly TimeSpan UnableUsePopupCooldown = TimeSpan.FromSeconds(1);
 
-    [Dependency] private readonly RMCRepairableSystem _repairable = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedToolSystem _tool = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedStackSystem _stack = default!;
-    [Dependency] private readonly RMCStatusEffectSystem _rmcStatusEffects = default!;
-    [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedSynthGenerationSystem _synthGeneration = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private RMCRepairableSystem _repairable = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedToolSystem _tool = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedStackSystem _stack = default!;
+    [Dependency] private RMCStatusEffectSystem _rmcStatusEffects = default!;
+    [Dependency] private MobThresholdSystem _mobThreshold = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedSynthGenerationSystem _synthGeneration = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

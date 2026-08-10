@@ -10,8 +10,8 @@ namespace Content.Client._RMC14.Actions;
 
 public sealed class RMCActionsSystem : SharedRMCActionsSystem
 {
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     private EntityUid? _sortEnt;
 

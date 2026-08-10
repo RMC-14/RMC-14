@@ -23,10 +23,9 @@ namespace Content.Server.Storage.EntitySystems;
 
 public sealed class EntityStorageSystem : SharedEntityStorageSystem
 {
-    [Dependency] private readonly ConstructionSystem _construction = default!;
-    [Dependency] private readonly AtmosphereSystem _atmos = default!;
-    [Dependency] private readonly IMapManager _map = default!;
-    [Dependency] private readonly MapSystem _mapSystem = default!;
+    [Dependency] private ConstructionSystem _construction = default!;
+    [Dependency] private AtmosphereSystem _atmos = default!;
+    [Dependency] private MapSystem _mapSystem = default!;
 
     public override void Initialize()
     {
@@ -141,7 +140,7 @@ public sealed class EntityStorageSystem : SharedEntityStorageSystem
     {
         var targetCoordinates = TransformSystem.ToMapCoordinates(new EntityCoordinates(uid, component.EnteringOffset));
 
-        if (_map.TryFindGridAt(targetCoordinates, out var gridId, out var grid))
+        if (_mapSystem.TryFindGridAt(targetCoordinates, out var gridId, out var grid))
         {
             return _mapSystem.GetTileRef(gridId, grid, targetCoordinates);
         }

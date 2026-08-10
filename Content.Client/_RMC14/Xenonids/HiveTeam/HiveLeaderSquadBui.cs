@@ -15,7 +15,7 @@ namespace Content.Client._RMC14.Xenonids.HiveTeam;
 [UsedImplicitly]
 public sealed class HiveLeaderSquadBui : BoundUserInterface
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private readonly SpriteSystem _sprite;
     private readonly SharedXenoHiveSystem _hiveSystem;

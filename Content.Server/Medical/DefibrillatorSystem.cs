@@ -32,27 +32,27 @@ namespace Content.Server.Medical;
 /// </summary>
 public sealed class DefibrillatorSystem : EntitySystem
 {
-    [Dependency] private readonly ChatSystem _chatManager = default!;
-    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly DoAfterSystem _doAfter = default!;
-    [Dependency] private readonly ElectrocutionSystem _electrocution = default!;
-    [Dependency] private readonly EuiManager _euiManager = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly ItemToggleSystem _toggle = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly PowerCellSystem _powerCell = default!;
-    [Dependency] private readonly RottingSystem _rotting = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private ChatSystem _chatManager = default!;
+    [Dependency] private SharedRMCDamageableSystem _rmcDamageable = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private DoAfterSystem _doAfter = default!;
+    [Dependency] private ElectrocutionSystem _electrocution = default!;
+    [Dependency] private EuiManager _euiManager = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private ItemToggleSystem _toggle = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private MobThresholdSystem _mobThreshold = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private PowerCellSystem _powerCell = default!;
+    [Dependency] private RottingSystem _rotting = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     // RMC14
-    [Dependency] private readonly SharedRMCDefibrillatorSystem _rmcDefibrillator = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private SharedRMCDefibrillatorSystem _rmcDefibrillator = default!;
+    [Dependency] private SkillsSystem _skills = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

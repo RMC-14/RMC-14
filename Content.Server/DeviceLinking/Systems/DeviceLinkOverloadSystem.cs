@@ -7,7 +7,7 @@ namespace Content.Server.DeviceLinking.Systems;
 
 public sealed class DeviceLinkOverloadSystem : EntitySystem
 {
-    [Dependency] private readonly AudioSystem _audioSystem = default!;
+    [Dependency] private AudioSystem _audioSystem = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<SoundOnOverloadComponent, DeviceLinkOverloadedEvent>(OnOverloadSound);

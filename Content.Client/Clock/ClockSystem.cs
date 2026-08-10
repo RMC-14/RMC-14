@@ -5,7 +5,7 @@ namespace Content.Client.Clock;
 
 public sealed class ClockSystem : SharedClockSystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Update(float frameTime)
     {

@@ -10,7 +10,7 @@ namespace Content.Server.DeviceNetwork.Systems;
 [UsedImplicitly]
 public sealed class DeviceListSystem : SharedDeviceListSystem
 {
-    [Dependency] private readonly NetworkConfiguratorSystem _configurator = default!;
+    [Dependency] private NetworkConfiguratorSystem _configurator = default!;
 
     public override void Initialize()
     {

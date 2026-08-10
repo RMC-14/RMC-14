@@ -7,7 +7,7 @@ namespace Content.Shared.Nutrition.EntitySystems;
 /// <inheritdoc cref="ExaminableHungerComponent"/>
 public sealed class ExaminableHungerSystem : EntitySystem
 {
-    [Dependency] private readonly HungerSystem _hunger = default!;
+    [Dependency] private HungerSystem _hunger = default!;
     private EntityQuery<HungerComponent> _hungerQuery;
 
     public override void Initialize()

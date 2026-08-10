@@ -8,7 +8,7 @@ namespace Content.Server.NPC.Commands
     [AdminCommand(AdminFlags.Fun)]
     public sealed class AddNPCCommand : IConsoleCommand
     {
-        [Dependency] private readonly IEntityManager _entities = default!;
+        [Dependency] private IEntityManager _entities = default!;
 
         public string Command => "addnpc";
         public string Description => "Add a HTN NPC component with a given root task";

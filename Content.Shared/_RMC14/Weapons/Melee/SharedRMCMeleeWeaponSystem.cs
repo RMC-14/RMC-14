@@ -21,16 +21,16 @@ namespace Content.Shared._RMC14.Weapons.Melee;
 
 public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
 {
-    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
-    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
-    [Dependency] private readonly INetConfigurationManager _netConfig = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ItemToggleSystem _itemToggle = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private INetConfigurationManager _netConfig = default!;
+    [Dependency] private SkillsSystem _skills = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ItemToggleSystem _itemToggle = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     private EntityQuery<MeleeWeaponComponent> _meleeWeaponQuery;
     private EntityQuery<XenoComponent> _xenoQuery;

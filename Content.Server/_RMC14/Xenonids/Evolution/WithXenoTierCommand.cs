@@ -10,7 +10,7 @@ namespace Content.Server._RMC14.Xenonids.Evolution;
 [ToolshedCommand, AdminCommand(AdminFlags.Query)]
 public sealed class WithXenoTierCommand : ToolshedCommand
 {
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
 
     [CommandImplementation]
     public IEnumerable<EntityUid> With(

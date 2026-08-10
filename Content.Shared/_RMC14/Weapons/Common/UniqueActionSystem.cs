@@ -8,8 +8,8 @@ namespace Content.Shared._RMC14.Weapons.Common;
 
 public sealed class UniqueActionSystem : EntitySystem
 {
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     public override void Initialize()
     {

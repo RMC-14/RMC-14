@@ -40,30 +40,29 @@ namespace Content.Shared._RMC14.Xenonids.Evolution;
 
 public sealed class XenoEvolutionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _action = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly ClimbSystem _climb = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly SharedGameTicker _gameTicker = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
-    [Dependency] private readonly IMapManager _map = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _xenoHive = default!;
-    [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
+    [Dependency] private SharedActionsSystem _action = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private ClimbSystem _climb = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private SharedGameTicker _gameTicker = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedJitteringSystem _jitter = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedXenoAnnounceSystem _xenoAnnounce = default!;
+    [Dependency] private SharedXenoHiveSystem _xenoHive = default!;
+    [Dependency] private SharedXenoWeedsSystem _xenoWeeds = default!;
 
     private TimeSpan _evolutionPointsRequireOvipositorAfter;
     private TimeSpan _evolutionAccumulatePointsBefore;
@@ -439,7 +438,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         if (TryComp<RestrictEvolveOffWeedsComponent>(xeno.Owner, out var comp))
         {
-            var coordinates = _transform.GetMoverCoordinates(xeno).SnapToGrid(EntityManager, _map);
+            var coordinates = _transform.GetMoverCoordinates(xeno).SnapToGrid(EntityManager);
             if (_transform.GetGrid(coordinates) is not { } gridUid ||
                 !TryComp(gridUid, out MapGridComponent? grid))
             {

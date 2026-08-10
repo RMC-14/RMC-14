@@ -18,21 +18,21 @@ namespace Content.Shared._RMC14.Xenonids.Eviscerate;
 
 public sealed class XenoEviscerateSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly SharedXenoHealSystem _xenoHeal = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
-    [Dependency] private readonly SharedInteractionSystem _interact = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly XenoRageSystem _rage = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedColorFlashEffectSystem _colorFlash = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private SharedXenoHealSystem _xenoHeal = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private SharedInteractionSystem _interact = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private XenoRageSystem _rage = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedRMCEmoteSystem _emote = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _hit = new();
 

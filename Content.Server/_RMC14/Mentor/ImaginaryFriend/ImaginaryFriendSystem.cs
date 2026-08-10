@@ -22,18 +22,18 @@ namespace Content.Server._RMC14.Mentor.ImaginaryFriend;
 
 public sealed class ImaginaryFriendSystem : SharedImaginaryFriendSystem
 {
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
-    [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly EuiManager _euiManager = default!;
-    [Dependency] private readonly EyeSystem _eye = default!;
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly IServerPreferencesManager _preferencesManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly StationSpawningSystem _stationSpawning = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly VisibilitySystem _visibility = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private EuiManager _euiManager = default!;
+    [Dependency] private EyeSystem _eye = default!;
+    [Dependency] private HumanoidAppearanceSystem _humanoid = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private IServerPreferencesManager _preferencesManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private StationSpawningSystem _stationSpawning = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private VisibilitySystem _visibility = default!;
 
     private EntityQuery<ImaginaryFriendComponent> _imaginaryFriendQuery;
 

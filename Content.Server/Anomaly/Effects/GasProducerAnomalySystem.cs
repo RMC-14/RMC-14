@@ -14,9 +14,9 @@ namespace Content.Server.Anomaly.Effects;
 /// </summary>
 public sealed class GasProducerAnomalySystem : EntitySystem
 {
-    [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private AtmosphereSystem _atmosphere = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedMapSystem _map = default!;
 
     public override void Initialize()
     {

@@ -12,7 +12,7 @@ namespace Content.Server.Zombies;
 
 public sealed partial class RMCZombieSystem : EntitySystem
 {
-    [Dependency] private readonly NpcFactionSystem _faction = default!;
+    [Dependency] private NpcFactionSystem _faction = default!;
     public override void Initialize()
     {
         base.Initialize();

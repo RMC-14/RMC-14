@@ -12,7 +12,7 @@ namespace Content.Client._RMC14.Medical.HUD.Holocard;
 [GenerateTypedNameReferences]
 public sealed partial class HolocardChangeWindow : DefaultWindow
 {
-    [Dependency] private readonly IEntityManager _entities = default!;
+    [Dependency] private IEntityManager _entities = default!;
 
     public HolocardChangeWindow()
     {
