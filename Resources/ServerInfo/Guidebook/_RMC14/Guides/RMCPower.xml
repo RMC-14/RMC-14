@@ -1,0 +1,169 @@
+<Document>
+
+  #Power and APCs
+
+  Marine power is divided into five parts: [bold]generators[/bold] produce power, the named [bold]power network[/bold] moves it between areas, [bold]SMES units[/bold] store it, an [bold]APC[/bold] controls each area, and powered machines consume it.
+
+  <Box>
+    <GuideEntityEmbed Entity="RMCGeneratorFusionColony"/>
+    <GuideEntityEmbed Entity="CMSMESBasic"/>
+    <GuideEntityEmbed Entity="CMApc"/>
+  </Box>
+
+  Power cables are not used to determine which RMC power network a machine belongs to. The area containing the machine determines its network.
+
+  During a shortage, local generation supplies its own area first, then network generation is shared between APCs. SMES output covers the remaining network shortage, and each APC cell is the final backup for its own area. Unused live generation can charge storage.
+
+  ##Emergency Checklist
+
+  When equipment loses power, diagnose the fault from the consumer back toward generation:
+
+  1. [bold]Inspect the local APC.[/bold] Make sure it exists, is not broken, and contains a power cell.
+  2. Open the APC interface. Check the [bold]Main Breaker[/bold], the affected channel, cell charge, total load, and whether external power is available.
+  3. If only one area is unpowered, repair or reconfigure that area's APC.
+  4. If several areas are unpowered, check the power monitor, SMES units, and reactors for their shared network.
+  5. Reduce optional load. Leave Environment available for as long as possible, then restore Lighting and Equipment when supply recovers.
+  6. Install a charged APC cell as a temporary local reserve.
+
+  [color=#C68610]Always inspect damaged power machinery. Its examination text tells you the next required tool or missing part.[/color]
+
+  ##Reading an APC
+
+  An APC controls one area and its three power channels:
+
+  - [bold]Equipment[/bold]: doors, consoles, vendors, chargers, medical equipment, fabricators, and most other machinery.
+  - [bold]Lighting[/bold]: normal lights and powered light fixtures.
+  - [bold]Environment[/bold]: life-support and environmental equipment. This channel has the highest delivery priority.
+
+  Interpret the APC interface and the area's behavior together:
+
+  - [bold]External Power[/bold] means generation or SMES output is reaching the area.
+  - If external power is absent but equipment still works and cell charge falls, the APC cell is supplying the area locally.
+  - If enabled equipment remains unpowered, available generation and cell charge cannot satisfy the area's load.
+  - If the APC is unresponsive, check the cell, breaker, cover, wiring, damage, and whether another APC is incorrectly present in the same area.
+
+  [bold]Main Breaker[/bold] must be on for the APC to operate. [bold]Charge Mode[/bold] allows its cell to recharge after the network has maintained a stable surplus for several power cycles. A short delay before charging begins is normal. A cell is considered full at approximately 98%.
+
+  Each channel has three settings:
+
+  - [bold]Auto[/bold] is the normal setting. It lets the APC shed load to preserve its remaining cell charge.
+  - [bold]On[/bold] forces the channel on while any power is available. It is useful briefly, but can drain the cell and is not changed by automatic load shedding.
+  - [bold]Off[/bold] keeps the channel off until an engineer changes it.
+
+  With channels set to Auto, Equipment shuts down at approximately 25% cell charge and returns at 30%. Lighting shuts down at approximately 15% and returns at 20%. Environment remains available until the APC has no usable power. These different shutdown and recovery levels prevent rapid flickering.
+
+  ##Servicing an APC Cell
+
+  <Box>
+    <GuideEntityEmbed Entity="RMCPowerCellAPC"/>
+    <GuideEntityEmbed Entity="CMCrowbar"/>
+    <GuideEntityEmbed Entity="CMScrewdriver"/>
+  </Box>
+
+  To replace an APC cell:
+
+  1. Swipe an Engineering ID card or dogtags to unlock the interface.
+  2. Disengage [bold]Cover Lock[/bold] in the APC interface.
+  3. Use a crowbar to open the cover.
+  4. Remove the old cell with an empty hand and insert a charged replacement.
+  5. Close the cover with a crowbar, engage Cover Lock, and lock the interface again.
+
+  A map-installed APC normally starts with a charged heavy-duty cell. A newly constructed APC does [bold]not[/bold] create a free cell, so bring one before relying on it.
+
+  ##Repairing or Building an APC
+
+  A destroyed APC is more than an empty battery. Inspect it after every step and follow the displayed instructions. A typical repair requires removing the damaged cover and cell, stripping damaged electronics, fitting an APC frame, connecting cable, installing a power control module, and securing the electronics with a screwdriver.
+
+  <Box>
+    <GuideEntityEmbed Entity="CMAPCFrame"/>
+    <GuideEntityEmbed Entity="RMCCableCoil30"/>
+  </Box>
+
+  Only one APC can control an area. Construction of a second APC in the same area cannot be completed and would not provide extra power.
+
+  ##Fusion and Geothermal Reactors
+
+  The warship uses [bold]S-52 fusion reactors[/bold]. They normally begin operational and running. Colonies use [bold]G-11 geothermal generators[/bold], which begin shut down and with a random amount of damage.
+
+  <Box>
+    <GuideEntityEmbed Entity="RMCGeneratorFusion"/>
+    <GuideEntityEmbed Entity="RMCGeneratorFusionColony"/>
+    <GuideEntityEmbed Entity="RMCGeneratorFusionCell"/>
+  </Box>
+
+  To restore a G-11:
+
+  1. Inspect it to determine its current damage state.
+  2. If requested, repair the casing with a welder.
+  3. Repair wiring with wire cutters.
+  4. Realign and secure the machinery with a wrench.
+  5. Check that a WL-6 fuel cell is installed and contains fuel.
+  6. Use an empty hand on the repaired generator to start it.
+
+  A healthy reactor with a usable cell starts normally. Starting a damaged reactor, or one with no usable cell, begins a three-second emergency startup. Emergency operation is possible but greatly increases the risk of further failure.
+
+  Reactors do not instantly produce full power. Output rises by 1% every two seconds until it reaches 100%. Inspect the reactor to see its current output and fuel level.
+
+  A fully repaired reactor does not consume fuel. A damaged reactor consumes fuel while running. Running without usable fuel rapidly increases its failure chance and causes more frequent failures. A failure progresses through wrench, wire-cutter, and welding repair states; a terminal failure shuts the reactor down.
+
+  Removing a fuel cell does not automatically stop a running reactor. Shut it down with an empty hand before servicing it. Use a crowbar to remove its cell, or click the reactor with a replacement cell to install one. A fresh or reconditioned cell resets accumulated failure risk once.
+
+  [color=#C68610]Emergency overload controls are not a normal power setting. Do not alter them unless the operation specifically calls for it.[/color]
+
+  ##Fusion Fuel Recycler
+
+  <Box>
+    <GuideEntityEmbed Entity="RMCFusionFuelRecycler"/>
+    <GuideEntityEmbed Entity="RMCGeneratorFusionCell"/>
+  </Box>
+
+  The fusion fuel recycler accepts up to two incomplete WL-6 cells. Click it with a cell to insert it. It automatically draws 15 kW while working and restores 5 fuel units to each incomplete cell every two seconds. It pauses if power is lost and stops drawing active power when there is no work.
+
+  A full cell is rejected. Click the recycler with an empty hand to remove a cell; when both slots are occupied, the fuller cell is returned first. A completed cell is marked fresh and can reset a reactor's accumulated failure chance.
+
+  ##SMES Storage
+
+  A SMES stores up to 200 MJ for its named network. Its [bold]Input[/bold] controls charging and its [bold]Output[/bold] controls emergency discharge. Input and output limits are measured in power, not total stored energy.
+
+  <Box>
+    <GuideEntityEmbed Entity="CMSMESBasic"/>
+  </Box>
+
+  - Enable Input when the network has enough generation to charge storage. A Partial input state means less than the requested limit is available; Full means the unit has no remaining storage space.
+  - Keep Output enabled when the SMES should cover network shortages. A new full SMES defaults to 50 kW output.
+  - Raising limits does not create energy. It only permits faster charging or discharging, up to 200 kW.
+  - A SMES never charges and discharges in the same power cycle. During a shortage it discharges; with live surplus it may charge.
+  - Multiple SMES units share charging and discharging according to their limits and available capacity.
+
+  EMP temporarily disables both switches and removes stored energy. The controls restore after a short delay. A charged SMES can shock anyone working through an open maintenance panel, so use insulated protection and safe maintenance procedure.
+
+  If the operation includes a power-restoration objective and suitable SMES units are installed, repairing a reactor alone is not enough. The target network needs charged storage with Output enabled. Input must also be enabled, actually receiving at least the configured output amount, and have an input limit no lower than its output limit.
+
+  ##Power Monitoring
+
+  <Box>
+    <GuideEntityEmbed Entity="RMCPowerMonitoringConsole"/>
+  </Box>
+
+  A power monitoring console, when installed, displays only the named network of its current area:
+
+  - [bold]Available[/bold]: live generation currently available from sources.
+  - [bold]Generation[/bold]: live generation actually being used, including SMES charging.
+  - [bold]Demand[/bold] and [bold]Delivered[/bold]: requested power compared with supplied power.
+  - [bold]Deficit[/bold]: demand that could not be supplied.
+  - [bold]Surplus[/bold]: unused live generation.
+  - [bold]SMES rows[/bold]: charge, switch settings, limits, and actual input/output.
+  - [bold]APC rows[/bold]: area name, channel states, requested/delivered power, and cell charge.
+
+  [bold]Disconnected[/bold] means the console cannot find a power network for its current area. A console never displays another map or a differently named network.
+
+  ##Common Faults
+
+  - [bold]One area is dark:[/bold] check its APC, cell, breaker, Lighting channel, and damage.
+  - [bold]Machines are off but lights work:[/bold] Equipment may be in Auto shutdown, manually Off, or receiving too little delivered power.
+  - [bold]The APC cell drains despite a running reactor:[/bold] demand exceeds current generation, the reactor is still ramping, or SMES output is disabled or empty.
+  - [bold]The APC will not charge:[/bold] enable Charge Mode and wait for stable supply. Charging may remain delayed while the network is unstable or other demand has priority.
+  - [bold]The recycler is offline:[/bold] it needs an incomplete cell, its Equipment channel, and 15 kW of delivered power.
+  - [bold]Everything failed after an EMP or blackout:[/bold] recheck APC breakers and channel modes, SMES input/output switches, stored charge, and reactor condition instead of assuming the old settings remain active.
+
+</Document>

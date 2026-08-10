@@ -1,4 +1,6 @@
 rmc-apc-area-name = {$area} APC
+rmc-apc-construction-area-available = The area must not already have an APC.
+rmc-apc-construction-area-occupied = [color=red]This area already has an APC. Construction cannot be completed.[/color]
 
 rmc-apc-skill-fail = You don't know how to use {$apc}'s interface.
 

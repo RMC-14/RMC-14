@@ -10,7 +10,7 @@ public sealed partial class RMCApcMainPowerWireAction : BaseWireAction
     public override string Name { get; set; } = "wire-name-power";
 
     [DataField("pulseTimeout")]
-    private int _pulseTimeout = 30;
+    private int _pulseTimeout = 120;
 
     public override object StatusKey => RMCApcMainPowerWireActionKey.Status;
 

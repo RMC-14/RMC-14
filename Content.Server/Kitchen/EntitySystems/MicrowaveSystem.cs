@@ -42,6 +42,7 @@ using Content.Server.Construction.Components;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
 using Robust.Shared.Utility;
+using Content.Shared._RMC14.Power; // RMC14
 
 namespace Content.Server.Kitchen.EntitySystems
 {
@@ -69,6 +70,7 @@ namespace Content.Server.Kitchen.EntitySystems
         [Dependency] private readonly IPrototypeManager _prototype = default!;
         [Dependency] private readonly IAdminLogManager _adminLogger = default!;
         [Dependency] private readonly SharedSuicideSystem _suicide = default!;
+        [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!; // RMC14
 
         private static readonly EntProtoId MalfunctionSpark = "Spark";
 
@@ -111,6 +113,7 @@ namespace Content.Server.Kitchen.EntitySystems
 
         private void OnCookStart(Entity<ActiveMicrowaveComponent> ent, ref ComponentStartup args)
         {
+            _rmcPower.SetPowerMode(ent.Owner, RMCPowerMode.Active); // RMC14
             if (!TryComp<MicrowaveComponent>(ent, out var microwaveComponent))
                 return;
             SetAppearance(ent.Owner, MicrowaveVisualState.Cooking, microwaveComponent);
@@ -121,6 +124,7 @@ namespace Content.Server.Kitchen.EntitySystems
 
         private void OnCookStop(Entity<ActiveMicrowaveComponent> ent, ref ComponentShutdown args)
         {
+            _rmcPower.SetPowerMode(ent.Owner, RMCPowerMode.Idle); // RMC14
             if (!TryComp<MicrowaveComponent>(ent, out var microwaveComponent))
                 return;
 
@@ -684,6 +688,9 @@ namespace Content.Server.Kitchen.EntitySystems
             var query = EntityQueryEnumerator<ActiveMicrowaveComponent, MicrowaveComponent>();
             while (query.MoveNext(out var uid, out var active, out var microwave))
             {
+                var cookingTime = Math.Min(frameTime, Math.Max(active.CookTimeRemaining, 0)); // RMC14
+                if (microwave.RmcCookEnergyPerSecond > 0) // RMC14
+                    _rmcPower.AddOneOffEnergy(uid, microwave.RmcCookEnergyPerSecond * cookingTime); // RMC14
 
                 active.CookTimeRemaining -= frameTime;
 

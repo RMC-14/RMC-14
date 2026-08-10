@@ -17,12 +17,7 @@
   - type: WallMount
   - type: ApcPowerReceiver
     powerLoad: 250
-    needsPower: true
-  - type: RMCPowerReceiver
-    idleLoad: 5
-    activeLoad: 10
-    channel: Equipment
-    mode: Active # Unsure if it's needed, but CM does use_power:2 specifically with cams
+    needsPower: false
   - type: ExtensionCableReceiver
   - type: Eye
     zoom: 0.5, 0.5
@@ -84,6 +79,13 @@
     - map: ["enum.PowerDeviceVisualLayers.Powered"]
       state: "security_cam"
     drawdepth: SmallObjects
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
   - type: ApcPowerReceiver
     powerLoad: 250
     needsPower: true

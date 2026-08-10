@@ -24,4 +24,10 @@ public sealed partial class RMCCameraComputerComponent : Component
 
     [DataField, AutoNetworkedField]
     public LocId? Title;
+
+    /// <summary>
+    /// CM13 camera consoles with stay_connected keep using active power after their first use.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool StayConnected;
 }

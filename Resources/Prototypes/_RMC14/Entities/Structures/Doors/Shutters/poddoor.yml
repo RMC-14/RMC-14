@@ -200,6 +200,7 @@
   - type: RMCPowerReceiver
     idleLoad: 0
     activeLoad: 0
+    # This indestructible map barrier is intentionally always powered.
 
 - type: entity
   parent: RMCPodDoorHybrisaIndestructibleUltra

@@ -50,6 +50,7 @@
     protoIds:
     - RMCTelevision
     title: rmc-television-title
+    stayConnected: true
   - type: Machine
     board: RMCCircuitboardTelevision
 
@@ -88,8 +89,8 @@
         layer:
         - MachineLayer
   - type: ApcPowerReceiver
-    powerLoad: 0
-    needsPower: false
+    powerLoad: 300
+    needsPower: true
   - type: RMCPowerReceiver
     idleLoad: 300
     activeLoad: 300

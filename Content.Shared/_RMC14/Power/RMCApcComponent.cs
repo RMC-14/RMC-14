@@ -66,8 +66,42 @@ public sealed partial class RMCApcComponent : Component
     [DataField, AutoNetworkedField]
     public EntProtoId<PowerCellComponent>? StartingCell;
 
+    /// <summary>
+    /// Charge fraction applied only to the cell spawned with a map-placed APC.
+    /// Replacement cells keep the charge defined by their own prototype.
+    /// </summary>
+    [DataField]
+    public float StartingCellCharge = 0.9f;
+
     [DataField, AutoNetworkedField]
     public float ChargePercentage;
+
+    [DataField, AutoNetworkedField]
+    public RMCApcPowerStatus PowerStatus;
+
+    [DataField, AutoNetworkedField]
+    public float RequestedPower;
+
+    [DataField, AutoNetworkedField]
+    public float DeliveredPower;
+
+    [DataField, AutoNetworkedField]
+    public float LocalGeneration;
+
+    [DataField, AutoNetworkedField]
+    public float ExportedPower;
+
+    [DataField, AutoNetworkedField]
+    public float ChargeRequest;
+
+    [DataField, AutoNetworkedField]
+    public float ChargePower;
+
+    [ViewVariables]
+    public int SurplusCycles;
+
+    [ViewVariables]
+    public TimeSpan EmpRestoreAt;
 
     [DataField, AutoNetworkedField]
     public RMCApcState State;
@@ -151,6 +185,16 @@ public enum RMCApcChargeStatus
     NotCharging,
     Charging,
     FullCharge,
+}
+
+[Serializable, NetSerializable]
+public enum RMCApcPowerStatus
+{
+    Faulted,
+    None,
+    Low,
+    External,
+    Local,
 }
 
 [Serializable, NetSerializable]

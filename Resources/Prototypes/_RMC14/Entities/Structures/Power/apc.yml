@@ -7,6 +7,7 @@
   components:
   - type: GuideHelp
     guides:
+    - RMCGuidePower
     - RMCGuideRoleCombatTechnician
   - type: Transform
     anchored: true
@@ -100,7 +101,7 @@
           BrokenCoverRemovedNoBattery: { state: apc1-b-nocover }
           TerminalMissing: { state: apc0 }
           Maintenance: { state: apcmaint }
-        enum.WiresVisualLayers.MaintenancePanel: # TODO RMC14
+        enum.WiresVisualLayers.MaintenancePanel:
           Working: { visible: false }
           WiresExposed: { visible: false }
           CoverOpenBattery: { visible: false }
@@ -112,7 +113,7 @@
           BrokenCoverRemovedNoBattery: { visible: false }
           TerminalMissing: { visible: false }
           Maintenance: { visible: false }
-        enum.ApcVisualLayers.ChargeState: # TODO RMC14
+        enum.ApcVisualLayers.ChargeState:
           Working: { visible: true }
           WiresExposed: { visible: false }
           CoverOpenBattery: { visible: false }
@@ -206,18 +207,6 @@
           AutoOff: { state: apco2-1 }
           ManualOn: { state: apco2-2 }
           AutoOn: { state: apco2-3 }
-#        enum.ApcVisualLayers.PanelLock: # TODO RMC14
-#          Working: { visible: false }
-#          Broken: { visible: false }
-#        enum.ApcVisualLayers.Equipment: # TODO RMC14
-#          Working: { visible: false }
-#          Broken: { visible: false }
-#        enum.ApcVisualLayers.Lighting: # TODO RMC14
-#          Working: { visible: false }
-#          Broken: { visible: false }
-#        enum.ApcVisualLayers.Environment: # TODO RMC14
-#          Working: { visible: false }
-#          Broken: { visible: false }
       enum.RMCApcVisualsLayers.Power:
         enum.ApcVisualLayers.ChargeState:
           NotCharging: { state: display-lack }
@@ -318,6 +307,7 @@
   components:
   - type: RMCApc
     startingCell: RMCPowerCellAPCNoPower
+    startingCellCharge: 0
 
 - type: entity
   parent: CMApcBase
@@ -336,33 +326,24 @@
 - type: entity
   parent: CMApcBase
   id: CMApcLowCapacity
-  suffix: APC, Small powercell, 50kW
-  components: # TODO RMC14 / TODO RMC14 make apc use powercells
+  suffix: APC, Standard power cell, 1.67 MJ
+  components:
   - type: RMCApc
     startingCell: RMCPowerCellAPC
-  - type: Battery
-    maxCharge: 50000
-    startingCharge: 50000
 
 - type: entity
   parent: CMApcBase
   id: CMApcMediumCapacity
-  suffix: APC, Medium powercell, 100kW
+  suffix: APC, High-capacity power cell, 3.33 MJ
   components:
   - type: RMCApc
     startingCell: RMCPowerCellHigh
-  - type: Battery
-    maxCharge: 100000
-    startingCharge: 100000
 
 - type: entity
   parent: CMApcBase
   id: CMApcHighCapacity
-  suffix: APC, High powercell, 150kW
+  suffix: APC, Super-capacity power cell, 6.67 MJ
   components:
   - type: RMCApc
     startingCell: RMCPowerCellSuper
-  - type: Battery
-    maxCharge: 150000
-    startingCharge: 150000
 

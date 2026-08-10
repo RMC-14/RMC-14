@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.ARES;
 using Content.Shared._RMC14.ARES.Logs;
@@ -2090,17 +2091,15 @@ public sealed class IntelSystem : EntitySystem
 
         if (tree != null && !tree.Value.Comp.Tree.ColonyPower)
         {
-            var watts = 0;
-            var generatorQuery = EntityQueryEnumerator<IntelPowerObjectiveComponent, RMCFusionReactorComponent>();
-            while (generatorQuery.MoveNext(out _, out var generator))
+            var networks = new HashSet<RMCPowerNetworkKey>();
+            var generatorQuery = EntityQueryEnumerator<IntelPowerObjectiveComponent>();
+            while (generatorQuery.MoveNext(out var generator, out _))
             {
-                if (generator.State != RMCFusionReactorState.Working)
-                    continue;
-
-                watts += generator.Watts;
+                if (_power.TryGetPowerNetwork(generator, out var network))
+                    networks.Add(network);
             }
 
-            if (watts >= _powerObjectiveWattsRequired)
+            if (networks.Any(network => _power.GetStableNetworkOutput(network) >= _powerObjectiveWattsRequired))
             {
                 tree.Value.Comp.Tree.ColonyPower = true;
                 AddPoints(tree.Value, tree.Value.Comp.PowerPoints);

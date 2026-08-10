@@ -13,3 +13,4 @@
   canBuildInImpassable: true
   conditions:
   - !type:WallmountCondition {}
+  - !type:RMCApcConstructionAreaAvailable {}

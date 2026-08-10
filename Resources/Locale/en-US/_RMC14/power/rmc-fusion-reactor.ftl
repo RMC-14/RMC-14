@@ -33,3 +33,11 @@ rmc-fusion-reactor-examine-repair-wrench = Use a [color=cyan]Wrench[/color] to r
 rmc-fusion-reactor-examine-repair-wirecutters = Use [color=cyan]Wirecutters[/color] to repair it!
 rmc-fusion-reactor-examine-repair-welder = Use a [color=cyan]Welder[/color] to repair it!
 rmc-fusion-reactor-examine-needs-cell = It needs a [color=cyan]fuel cell[/color]!
+rmc-fusion-reactor-examine-fuel = The fuel cell contains [color=cyan]{$fuel}/{$maxFuel}[/color] units of fuel.
+rmc-fusion-reactor-examine-enabled = It is running at [color=cyan]{$percent}%[/color], producing [color=cyan]{$output} W[/color].
+rmc-fusion-reactor-examine-disabled = It is [color=red]shut down[/color].
+rmc-fusion-reactor-started = You start {$reactor}.
+rmc-fusion-reactor-shut-down = You shut down {$reactor}.
+rmc-fusion-reactor-overload-shutdown-blocked = {$reactor} does not respond to the shutdown controls while overloaded.
+rmc-fusion-reactor-emergency-start = You begin the emergency startup procedure for {$reactor}.
+rmc-fusion-reactor-terminal-failure = {$reactor} is too badly damaged to start.

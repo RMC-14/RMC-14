@@ -8,7 +8,7 @@
     powerLoad: 250
     needsPower: true
   - type: RMCPowerReceiver
-    idleLoad: 5
+    idleLoad: 10
     activeLoad: 100
     channel: Equipment
   - type: ActivatableUIRequiresPower
@@ -36,6 +36,7 @@
         layer:
         - MachineLayer
   - type: Lathe
+    printEnergy: 2000
     idleState: autolathe
     runningState: autolathe_n
     producingSound: /Audio/_RMC14/Machines/print.ogg

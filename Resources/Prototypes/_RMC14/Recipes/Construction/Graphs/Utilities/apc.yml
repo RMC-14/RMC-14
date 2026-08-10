@@ -55,6 +55,8 @@
     entity: CMApcFrameElectronics
     edges:
     - to: apc
+      conditions:
+      - !type:RMCApcAreaAvailable
       steps:
       - tool: Screwing
         doAfter: 2

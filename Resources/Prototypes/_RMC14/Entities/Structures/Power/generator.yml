@@ -36,6 +36,7 @@
   components:
   - type: GuideHelp
     guides:
+    - RMCGuidePower
     - RMCGuideRoleCombatTechnician
   - type: InteractionOutline
   - type: Appearance
@@ -43,6 +44,7 @@
     isCorrodible: false
   - type: RMCFusionReactor
     watts: 50000
+  - type: RMCPowerSource
   - type: ActivatableUIBlacklist
     blacklist:
       components:
@@ -61,6 +63,7 @@
           SeventyFive: { state: "on-75" }
           Hundred: { state: "on-100" }
           Overloaded: { state: "overloaded" }
+          Empty: { state: "cell_missing" }
   - type: BlockXenoConstruction
   - type: RMCMesonsNonviewable
 
@@ -73,6 +76,9 @@
   - type: RMCFusionReactor
     watts: 100000
     randomizeDamage: true
+    enabled: false
+    baseFailureChance: 10
+    failureChance: 10
   - type: IntelPowerObjective
   - type: Sprite
     drawdepth: WallMountedItems
@@ -90,6 +96,7 @@
           Fifty: { state: "on-50" }
           SeventyFive: { state: "on-75" }
           Hundred: { state: "on-100" }
+          Empty: { state: "cell_missing" }
   - type: MarineMapTracked
   - type: XenoMapTracked
   - type: TacticalMapTracked
@@ -121,10 +128,34 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Power/fusion_fuel_cell.rsi
-    state: cell-full
+    layers:
+    - state: cell-full
+      map: [ "base" ]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCFusionCellVisuals.Fuel:
+        base:
+          Empty: { state: cell-empty }
+          Low: { state: cell-low }
+          Medium: { state: cell-medium }
+          High: { state: cell-high }
+          Full: { state: cell-full }
   - type: Item
     size: Normal
+  - type: GuideHelp
+    guides:
+    - RMCGuidePower
   - type: RMCFusionCell
+
+- type: entity
+  parent: RMCGeneratorFusionCell
+  id: RMCGeneratorFusionCellEmpty
+  suffix: Empty
+  components:
+  - type: RMCFusionCell
+    fuel: 0
+    isFresh: false
 
 - type: entity
   abstract: true
@@ -194,3 +225,104 @@
       state: portgen1
     - type: Machine
       board: RMCPortableGeneratorSuperPacmanMachineCircuitboard
+
+- type: entity
+  parent: BaseMachine
+  id: RMCFusionFuelRecycler
+  name: fusion fuel recycler
+  description: Reconditions depleted WL-6 fusion fuel cells. It can process two cells at once.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: RemoveComponents
+    components:
+    - type: Damageable
+    - type: Destructible
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Power/fusion_reactor.rsi
+    layers:
+    - state: recycler
+      map: [ "base" ]
+    - state: overlay_left_cell
+      map: [ "leftCell" ]
+      visible: false
+    - state: overlay_right_cell
+      map: [ "rightCell" ]
+      visible: false
+    - state: overlay_left_charging
+      map: [ "leftCharging" ]
+      visible: false
+    - state: overlay_right_charging
+      map: [ "rightCharging" ]
+      visible: false
+    - state: overlay_left_charged
+      map: [ "leftCharged" ]
+      visible: false
+    - state: overlay_right_charged
+      map: [ "rightCharged" ]
+      visible: false
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCFusionFuelRecyclerVisuals.Working:
+        base:
+          True: { state: recycler_on }
+          False: { state: recycler }
+      enum.RMCFusionFuelRecyclerVisuals.LeftCell:
+        leftCell:
+          True: { visible: true }
+          False: { visible: false }
+      enum.RMCFusionFuelRecyclerVisuals.RightCell:
+        rightCell:
+          True: { visible: true }
+          False: { visible: false }
+      enum.RMCFusionFuelRecyclerVisuals.LeftCharging:
+        leftCharging:
+          True: { visible: true }
+          False: { visible: false }
+      enum.RMCFusionFuelRecyclerVisuals.RightCharging:
+        rightCharging:
+          True: { visible: true }
+          False: { visible: false }
+      enum.RMCFusionFuelRecyclerVisuals.LeftCharged:
+        leftCharged:
+          True: { visible: true }
+          False: { visible: false }
+      enum.RMCFusionFuelRecyclerVisuals.RightCharged:
+        rightCharged:
+          True: { visible: true }
+          False: { visible: false }
+  - type: RMCFusionFuelRecycler
+  - type: ContainerContainer
+    containers:
+      rmc_fusion_recycler_left: !type:ContainerSlot
+      rmc_fusion_recycler_right: !type:ContainerSlot
+  - type: ApcPowerReceiver
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 15000
+    channel: Equipment
+  - type: Corrodible
+    isCorrodible: false
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: BlockXenoConstruction
+  - type: GuideHelp
+    guides:
+    - RMCGuidePower
+
+- type: entity
+  parent: RMCFusionFuelRecycler
+  id: RMCFusionFuelRecyclerFilled
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      rmc_fusion_recycler_left:
+      - RMCGeneratorFusionCell
+      rmc_fusion_recycler_right:
+      - RMCGeneratorFusionCell

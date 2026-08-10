@@ -48,6 +48,12 @@ public sealed partial class CMAutomatedVendorComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan HackDelay = TimeSpan.FromSeconds(10);
 
+    /// <summary>
+    ///     Energy used for each successfully vended item, in joules.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float VendEnergy;
+
     [DataField, AutoNetworkedField]
     public List<ProtoId<AccessLevelPrototype>> Access = new();
 
