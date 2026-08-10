@@ -1,15 +1,6 @@
 ﻿Entries:
 - author: Dygon
   changes:
-  - message: Weather effects no longer show inside tents.
-    type: Fix
-  - message: Weather sound effects can no longer be heard while in the lobby.
-    type: Fix
-  id: 3060
-  time: '2026-04-03T09:22:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9460
-- author: Dygon
-  changes:
   - message: Fixed the aimed shot/spotting visuals not always appearing in the correct
       location.
     type: Fix
@@ -4574,5 +4565,12 @@
   id: 3559
   time: '2026-08-10T21:40:27.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10688
+- author: IceNoobXD
+  changes:
+  - message: Fixed not being able to vent crawl on hybrisa!
+    type: Fix
+  id: 3560
+  time: '2026-08-10T21:55:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10671
 Name: RMC14
 Order: -1
