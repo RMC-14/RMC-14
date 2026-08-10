@@ -78287,7 +78287,7 @@ entities:
     - type: Transform
       pos: 42.57707,74.541046
       parent: 1
-- proto: CMMagazineSMGMP5
+- proto: RMCMagazineSMGPCAC5
   entities:
   - uid: 2465
     components:
@@ -246339,7 +246339,7 @@ entities:
           endTime: 5690.1789278
           startTime: 5761.6942382
           length: 0.4
-- proto: RMCWeaponSMGMP5Alt
+- proto: RMCWeaponSMGPCAC5A5
   entities:
   - uid: 2464
     components:
