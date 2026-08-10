@@ -792,7 +792,7 @@
 
 - type: alert
   parent: SquadTracker
-  id: SquadTrackerCLFPVECapt
+  id: SquadTrackerCLFPVECommander
   category: SquadTracker
   icons:
   - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
@@ -816,11 +816,11 @@
   - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
     state: trackon-southwest_co
   name: Cell Tracker
-  description: Tracks the Cell Captain
+  description: Tracks the Cell Commander
 
 - type: alert
   parent: SquadTracker
-  id: SquadTrackerPVECLFCDO
+  id: SquadTrackerPVECLFTeamLead
   category: SquadTracker
   icons:
   - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
@@ -844,7 +844,7 @@
   - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
     state: trackon-southwest_isl
   name: Cell Tracker
-  description: Tracks a Cell Deck Officer
+  description: Tracks a Sub Cell Leader
 
 - type: alert
   id: MarineTacMapAlert

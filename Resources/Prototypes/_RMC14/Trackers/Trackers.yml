@@ -201,14 +201,14 @@
   alert: SquadTrackerAirborne
 
 - type: trackerMode
-  id: PVECLFDeckOff
+  id: PVECLFTeamLead
   job: RMCCLFLeaderPVE
-  alert: SquadTrackerPVECLFCDO
+  alert: SquadTrackerPVECLFTeamLead
 
 - type: trackerMode
-  id: PVECLFCapt
+  id: PVECLFCommander
   job: RMCCLFCommanderPVE
-  alert: SquadTrackerCLFPVECapt
+  alert: SquadTrackerPVECLFCommander
 
 # Humanoid component trackers
 

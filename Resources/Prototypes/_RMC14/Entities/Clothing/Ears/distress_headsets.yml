@@ -40,23 +40,23 @@
   parent: RMCHeadsetDistressCLF
   id: RMCHeadsetDistressCLFPVE
   name: cell headset
-  description: A commercial ship crew headset. Its been modified to allow for use with colony long range subspace communication relays.
+  description: A bulky industrial headset used most frequently by blue collar workers. Notably, this one has been modified to allow for use with colony long range subspace communication relays.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/headsets.rsi
     state: eng_headset
   - type: GrantTacMapAlert
   - type: GrantSquadLeaderTracker
-    defaultMode: PVECLFCapt
+    defaultMode: PVECLFCommander
     trackerModes:
-    - PVECLFCapt
-    - PVECLFDeckOff
+    - PVECLFCommander
+    - PVECLFTeamLead
 
 - type: entity
   parent: RMCHeadsetDistressCLFPVE
   id: RMCHeadsetDistressCLFPVELead
   name: cell leader headset
-  description: A commercial deck officer headset. Its been modified to allow for use with colony long range subspace communication relays.
+  description: A bulky industrial headset used by blue collar worker's foremen. Notably, this one has been modified to allow for use with colony long range subspace communication relays.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/headsets.rsi
@@ -66,47 +66,9 @@
 
 - type: entity
   parent: RMCHeadsetDistressCLFPVELead
-  id: RMCHeadsetDistressCLFPVECapt
-  name: cell captain headset
-  description: A commercial ship captain headset. Its been modified to allow for use with colony long range subspace communication relays.
-  components:
-  - type: RMCHeadset
-    radioTextIncrease: 3
-
-
-- type: entity
-  parent: RMCHeadsetDistressCLFPVE
-  id: RMCHeadsetDistressCLFPVEGround
-  name: cell headset
-  description: A miner's headset. Its been modified to allow for use with colony long range subspace communication relays.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/headsets.rsi
-    state: eng_headset
-  - type: GrantTacMapAlert
-  - type: GrantSquadLeaderTracker
-    defaultMode: PVECLFCapt
-    trackerModes:
-    - PVECLFCapt
-    - PVECLFDeckOff
-
-- type: entity
-  parent: RMCHeadsetDistressCLFPVELead
-  id: RMCHeadsetDistressCLFPVELeadGround
-  name: cell leader headset
-  description: A mining foreman's headset. Its been modified to allow for use with colony long range subspace communication relays.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/headsets.rsi
-    state: ce_headset
-  - type: RMCHeadset
-    radioTextIncrease: 2
-
-- type: entity
-  parent: RMCHeadsetDistressCLFPVECapt
-  id: RMCHeadsetDistressCLFPVEComm
+  id: RMCHeadsetDistressCLFPVECmdr
   name: cell commander headset
-  description: A mining operations chief's headset. Its been modified to allow for use with colony long range subspace communication relays.
+  description: A bulky industrial headset used by blue collar's operations chiefs. Notably, this one has been modified to allow for use with colony long range subspace communication relays.
   components:
   - type: RMCHeadset
     radioTextIncrease: 3

@@ -1,15 +1,15 @@
 - type: job
   parent: CMJobBase
-  id: RMCCLFGroundCommanderPVE
-  name: rmc-job-name-clf-commander
+  id: RMCCLFCommanderPVE
+  name: rmc-job-name-clf-pve-commander
   description: rmc-ghost-role-information-clf-pve-description
   playTimeTracker: CMJobCLFCommanderPVE
   ranks:
     RMCRankCLFRebelCommander: []
-  startingGear: RMCJobCLFGroundCommanderPVE
+  startingGear: RMCJobCLFCommanderPVE
   icon: RMCJobIconCLFCellCommander
   joinNotifyCrew: false
-  supervisors: cm-job-supervisors-nobody
+  supervisors: cm-job-supervisors-clf-sectcoord
   marineAuthorityLevel: 2
   accessGroups:
   - Colony
@@ -33,7 +33,7 @@
       squad: SquadCLF
     - type: SquadArmorWearer
     - type: JobPrefix
-      prefix: rmc-job-prefix-clf-commander
+      prefix: rmc-job-prefix-clf-pve-commander
     - type: MarineOrders
     - type: RMCPointing
     - type: RMCTrackable
@@ -46,27 +46,27 @@
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointCLFGroundCommanderPVE
-  name: clf ground commander spawn point
+  id: RMCSpawnPointCLFCommanderPVE
+  name: clf commander spawn point
   suffix: PVE
   components:
   - type: SpawnPoint
-    job_id: RMCCLFGroundCommanderPVE
+    job_id: RMCCLFCommanderPVE
   - type: Sprite
     sprite: _RMC14/Markers/landmarks.rsi
     state: clf_spawn
 
 - type: startingGear
-  id: RMCJobCLFGroundCommanderPVE
+  id: RMCJobCLFCommanderPVE
   equipment:
-    id: RMCIDCardCLFCommander
+    id: RMCIDCardCLFCommanderPVE
     head: RMCHeadCapCellCap
     eyes: RMCGlassesHUDSecurity
     jumpsuit: RMCJumpsuitCLFPVELead
     back: RMCSatchelNorm
     gloves: RMCHandsVeteranSPP
     shoes: RMCShoesCombat
-    ears: RMCHeadsetDistressCLFPVEComm
+    ears: RMCHeadsetDistressCLFPVECapt
     outerClothing: RMCArmorCLFPVECaptain
 
 - type: playTimeTracker

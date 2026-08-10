@@ -30,21 +30,21 @@ rmc-ghost-role-clf-specialist = CLF Specialist (Hostile)
 rmc-clf-specialist = Specialist
 rmc-job-prefix-clf-specialist = SPC
 
-rmc-ghost-role-clf-pve-commander = CLF Cell Captain (PVE)
-rmc-job-name-clf-pve-commander = Cell Captain
-rmc-job-prefix-clf-pve-commander = Capt.
+rmc-ghost-role-clf-pve-commander = CLF Commander (PVE)
+rmc-job-name-clf-pve-commander = Cell Commander
+rmc-job-prefix-clf-pve-commander = CMDR
 
-rmc-ghost-role-clf-pve-leader = CLF Cell Leader (PVE)
-rmc-job-name-clf-pve-leader = Cell Deck Officer
-rmc-job-prefix-clf-pve-leader = CDO
+rmc-ghost-role-clf-pve-leader = CLF Radio Operator (PVE)
+rmc-job-name-clf-pve-leader = Subcell Leader
+rmc-job-prefix-clf-pve-leader = LEAD
 
 rmc-ghost-role-clf-pve-doctor = CLF Doctor (PVE)
 rmc-job-name-clf-pve-doctor = Doctor
-rmc-job-prefix-clf-pve-doctor = Doc
+rmc-job-prefix-clf-pve-doctor = DOC.
 
 rmc-ghost-role-clf-pve-heavy-gunner = CLF Heavy Gunner (PVE)
 rmc-job-name-clf-pve-heavy-gunner = Heavy Gunner
-rmc-job-prefix-clf-pve-heavy-gunner = Hvy. Gnr.
+rmc-job-prefix-clf-pve-heavy-gunner = HVY. GNR.
 
 rmc-ghost-role-clf-pve-standard = CLF Soldier (PVE)
 rmc-job-name-clf-pve-standard = Irregular Soldier

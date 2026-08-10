@@ -1,19 +1,19 @@
 - type: job
   parent: CMJobBase
-  id: RMCCLFStandardPVE
-  name: rmc-job-name-clf-pve-standard
+  id: RMCCLFDoctorPVE
+  name: rmc-job-name-clf-pve-doctor
   description: rmc-ghost-role-information-clf-pve-description
-  playTimeTracker: CMJobCLFStandardPVE
+  playTimeTracker: CMJobCLFDoctorPVE
   ranks:
-    RMCRankCivilian: []
-  startingGear: RMCJobCLFStandardPVE
-  icon: CMJobIconEmpty
+    RMCRankCivilianDoctor: []
+  startingGear: RMCJobCLFDoctorPVE
+  icon: RMCJobIconCLFMedic
   joinNotifyCrew: false
-  supervisors: cm-job-supervisors-clf-capt-deckoff
+  supervisors: cm-job-supervisors-clf-cmdr-lead
   accessGroups:
   - Colony
-  - Rifleman
-  spawnMenuRoleName: CLF Standard (PVE)
+  - HospitalCorpsman
+  spawnMenuRoleName: CLF Doctor (PVE)
   special:
   - !type:AddComponentSpecial
     components:
@@ -21,12 +21,12 @@
       factions:
       - CLF
     - type: Skills
-      preset: RMCSkillPresetPVERifleman
+      preset: RMCSkillPresetPVECLFDoctor
+    - type: SquadArmorWearer
     - type: AssignSquad
       squad: SquadCLF
-    - type: SquadArmorWearer
     - type: JobPrefix
-      prefix: rmc-job-prefix-clf-pve-standard
+      prefix: rmc-job-prefix-clf-pve-doctor
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
@@ -36,20 +36,23 @@
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointCLFStandardPVE
-  name: clf standard spawn point
+  id: RMCSpawnPointCLFDoctorPVE
+  name: clf doctor spawn point
   suffix: PVE
   components:
   - type: SpawnPoint
-    job_id: RMCCLFStandardPVE
+    job_id: RMCCLFDoctorPVE
   - type: Sprite
     sprite: _RMC14/Markers/landmarks.rsi
     state: clf_spawn
 
 - type: startingGear
-  id: RMCJobCLFStandardPVE
+  id: RMCJobCLFDoctorPVE
   equipment:
-    id: RMCIDCardCLFStandardPVE
+    id: RMCIDCardCLFDoctorPVE
+    jumpsuit: RMCJumpsuitCLFPVEDoctor
+    shoes: RMCShoesCombat
+    ears: RMCHeadsetDistressCLFPVE
 
 - type: playTimeTracker
-  id: CMJobCLFStandardPVE
+  id: CMJobCLFDoctorPVE

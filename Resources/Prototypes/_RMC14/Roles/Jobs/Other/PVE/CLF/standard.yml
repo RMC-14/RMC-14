@@ -1,19 +1,19 @@
 - type: job
   parent: CMJobBase
-  id: RMCCLFHeavyGunnerPVE
-  name: rmc-job-name-clf-pve-heavy-gunner
+  id: RMCCLFStandardPVE
+  name: rmc-job-name-clf-pve-standard
   description: rmc-ghost-role-information-clf-pve-description
-  playTimeTracker: CMJobCLFHeavyGunnerPVE
+  playTimeTracker: CMJobCLFStandardPVE
   ranks:
     RMCRankCivilian: []
-  startingGear: RMCJobCLFHeavyGunnerPVE
-  icon: RMCJobIconCLFSpecialist
+  startingGear: RMCJobCLFStandardPVE
+  icon: CMJobIconEmpty
   joinNotifyCrew: false
-  supervisors: cm-job-supervisors-clf-capt-deckoff
+  supervisors: cm-job-supervisors-clf-cmdr-lead
   accessGroups:
   - Colony
-  - SmartGunOperator
-  spawnMenuRoleName: Ship CLF Heavy Gunner (PVE)
+  - Rifleman
+  spawnMenuRoleName: CLF Standard (PVE)
   special:
   - !type:AddComponentSpecial
     components:
@@ -21,12 +21,12 @@
       factions:
       - CLF
     - type: Skills
-      preset: RMCSkillPresetPVESGO
-    - type: SquadArmorWearer
+      preset: RMCSkillPresetPVERifleman
     - type: AssignSquad
       squad: SquadCLF
+    - type: SquadArmorWearer
     - type: JobPrefix
-      prefix: rmc-job-prefix-clf-pve-heavy-gunner
+      prefix: rmc-job-prefix-clf-pve-standard
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
@@ -36,20 +36,20 @@
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointCLFCHeavyGunnerPVE
-  name: clf heavy gunner spawn point
+  id: RMCSpawnPointCLFStandardPVE
+  name: clf standard spawn point
   suffix: PVE
   components:
   - type: SpawnPoint
-    job_id: RMCCLFHeavyGunnerPVE
+    job_id: RMCCLFStandardPVE
   - type: Sprite
     sprite: _RMC14/Markers/landmarks.rsi
     state: clf_spawn
 
 - type: startingGear
-  id: RMCJobCLFHeavyGunnerPVE
+  id: RMCJobCLFStandardPVE
   equipment:
-    id: RMCIDCardCLFHeavyGunnerPVE
+    id: RMCIDCardCLFStandardPVE
 
 - type: playTimeTracker
-  id: CMJobCLFHeavyGunnerPVE
+  id: CMJobCLFStandardPVE
