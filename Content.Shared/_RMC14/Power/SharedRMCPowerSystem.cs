@@ -561,7 +561,9 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         }
 
         ent.Comp.TerminalInstalled = false;
-        SpawnNextToOrDrop(ent.Comp.CablePrototype, ent);
+        if (_net.IsServer)
+            SpawnNextToOrDrop(ent.Comp.CablePrototype, ent);
+
         Dirty(ent);
         UpdateApcAppearance(ent);
     }
@@ -582,7 +584,9 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             return;
         }
 
-        QueueDel(args.Used.Value);
+        if (_net.IsServer)
+            QueueDel(args.Used.Value);
+
         ent.Comp.Electronics = RMCApcElectronics.Inserted;
         Dirty(ent);
         UpdateApcAppearance(ent);
@@ -604,7 +608,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
 
         var broken = ent.Comp.Broken;
         ent.Comp.Electronics = RMCApcElectronics.Missing;
-        if (!broken)
+        if (_net.IsServer && !broken)
             SpawnNextToOrDrop(ent.Comp.ElectronicsPrototype, ent);
 
         Dirty(ent);
@@ -670,7 +674,9 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             return;
         }
 
-        QueueDel(args.Used.Value);
+        if (_net.IsServer)
+            QueueDel(args.Used.Value);
+
         ent.Comp.Broken = false;
         ent.Comp.Cover = RMCApcCover.Open;
         ent.Comp.TerminalInstalled = false;
@@ -704,9 +710,12 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             return;
         }
 
-        SpawnNextToOrDrop("CMSheetMetal1", ent);
-        SpawnNextToOrDrop("CMSheetMetal1", ent);
-        QueueDel(ent);
+        if (_net.IsServer)
+        {
+            SpawnNextToOrDrop("CMSheetMetal1", ent);
+            SpawnNextToOrDrop("CMSheetMetal1", ent);
+            QueueDel(ent);
+        }
     }
 
     private bool TryForceOpenBrokenApc(Entity<RMCApcComponent> ent, EntityUid user, EntityUid used)
