@@ -55,19 +55,9 @@ public sealed class RMCApcBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
         if (!EntMan.TryGetComponent(Owner, out RMCApcComponent? apc))
             return;
 
-        _window.Title = Loc.GetString("rmc-apc-ui-title");
         _window.LockedLabel.SetMarkupPermissive(Loc.GetString(apc.Locked
             ? "rmc-apc-ui-locked"
             : "rmc-apc-ui-unlocked"));
-
-        _window.PowerStatusLabel.SetMarkupPermissive(Header("rmc-apc-ui-power-status"));
-        _window.PowerChannelsLabel.SetMarkupPermissive(Header("rmc-apc-ui-power-channels"));
-        _window.MiscLabel.SetMarkupPermissive(Header("rmc-apc-ui-misc"));
-        _window.MainBreakerLabel.SetMarkupPermissive(Label("rmc-apc-ui-main-breaker"));
-        _window.PowerCellLabel.SetMarkupPermissive(Label("rmc-apc-ui-power-cell"));
-        _window.ChargeModeLabel.SetMarkupPermissive(Label("rmc-apc-ui-charge-mode"));
-        _window.TotalLoadLabel.SetMarkupPermissive(Label("rmc-apc-ui-total-load"));
-        _window.CoverLockLabel.SetMarkupPermissive(Label("rmc-apc-ui-cover-lock"));
 
         if (apc.MainBreakerButton)
         {
@@ -122,11 +112,6 @@ public sealed class RMCApcBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
         _window.CoverButton.Disabled = apc.Locked;
         _window.MainBreakerButton.Disabled = apc.Locked;
         _window.ChargeModeButton.Disabled = apc.Locked;
-    }
-
-    private string Header(string locId)
-    {
-        return $"[bold]{Loc.GetString(locId)}[/bold]";
     }
 
     private string Label(string locId)

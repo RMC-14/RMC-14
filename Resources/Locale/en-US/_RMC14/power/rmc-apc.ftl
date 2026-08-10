@@ -48,14 +48,14 @@ rmc-apc-nothing-to-secure = There is nothing to secure.
 rmc-apc-ui-title = APC
 rmc-apc-ui-locked = [italic]Swipe an ID card or dogtags to unlock this interface.[/italic]
 rmc-apc-ui-unlocked = [italic]Swipe an ID card or dogtags to lock this interface.[/italic]
-rmc-apc-ui-power-status = Power Status
-rmc-apc-ui-power-channels = Power Channels
-rmc-apc-ui-misc = Misc
-rmc-apc-ui-main-breaker = Main Breaker:
-rmc-apc-ui-power-cell = Power Cell:
-rmc-apc-ui-charge-mode = Charge Mode:
-rmc-apc-ui-total-load = Total Load:
-rmc-apc-ui-cover-lock = Cover Lock:
+rmc-apc-ui-power-status = [bold]Power Status[/bold]
+rmc-apc-ui-power-channels = [bold]Power Channels[/bold]
+rmc-apc-ui-misc = [bold]Misc[/bold]
+rmc-apc-ui-main-breaker = [color=#5B88B0]Main Breaker:[/color]
+rmc-apc-ui-power-cell = [color=#5B88B0]Power Cell:[/color]
+rmc-apc-ui-charge-mode = [color=#5B88B0]Charge Mode:[/color]
+rmc-apc-ui-total-load = [color=#5B88B0]Total Load:[/color]
+rmc-apc-ui-cover-lock = [color=#5B88B0]Cover Lock:[/color]
 rmc-apc-ui-button-auto = Auto
 rmc-apc-ui-button-on = On
 rmc-apc-ui-button-off = Off
