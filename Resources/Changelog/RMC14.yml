@@ -1,41 +1,4 @@
 ﻿Entries:
-- author: RerBreab
-  changes:
-  - message: Fixed direct hit of the incinerator's stream dealing damage multiple
-      times.
-    type: Fix
-  id: 3054
-  time: '2026-04-03T09:14:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9056
-- author: kleinerstation13
-  changes:
-  - message: Added a green band to PDW90 AP magazines
-    type: Tweak
-  id: 3055
-  time: '2026-04-03T09:17:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9500
-- author: wheelwrightt
-  changes:
-  - message: Intel officer's uniform now properly changes with map.
-    type: Fix
-  id: 3056
-  time: '2026-04-03T09:18:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9475
-- author: Dygon
-  changes:
-  - message: Floodlights no longer provide light while turned off.
-    type: Fix
-  id: 3057
-  time: '2026-04-03T09:19:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9439
-- author: Dygon
-  changes:
-  - message: Being mounted to a door gun HMG while the dropship lifts off no longer
-      makes you fall to the planet.
-    type: Fix
-  id: 3058
-  time: '2026-04-03T09:20:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9452
 - author: Dygon
   changes:
   - message: Increased the initial item size of the ML66D mount component from small
@@ -4572,5 +4535,44 @@
   id: 3553
   time: '2026-08-01T14:37:50.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10623
+- author: TadJohnson00
+  changes:
+  - message: Adjusted the sprites for PVE soft first-aid packs. They now have a fresh
+      look, featuring fill and in-hand states.
+    type: Tweak
+  id: 3554
+  time: '2026-08-06T22:49:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10621
+- author: carccborg
+  changes:
+  - message: FORECON synthetic now holds the rank of WO by default and CWO at 75 hours
+    type: Tweak
+  id: 3555
+  time: '2026-08-08T02:59:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10490
+- author: Vixting
+  changes:
+  - message: Fixed synth not being able to grab parasite
+    type: Fix
+  id: 3556
+  time: '2026-08-08T02:59:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10450
+- author: kleinerstation13
+  changes:
+  - message: Added 121/RECON headset for SPP SOF
+    type: Add
+  - message: Added SPP SOF and SPP Airborne survivor synths
+    type: Add
+  id: 3557
+  time: '2026-08-08T03:08:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9888
+- author: ThataKat
+  changes:
+  - message: '[PVE] Marines of the SPP''s 17th Vega Naval Infantry now properly speak
+      Russian and Chinese (and not English), as do the Party''s Political Kommissars.'
+    type: Tweak
+  id: 3558
+  time: '2026-08-08T03:13:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10670
 Name: RMC14
 Order: -1
