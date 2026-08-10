@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: Dygon
   changes:
-  - message: Increased the initial item size of the ML66D mount component from small
-      to normal.
-    type: Fix
-  id: 3059
-  time: '2026-04-03T09:19:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9436
-- author: Dygon
-  changes:
   - message: Weather effects no longer show inside tents.
     type: Fix
   - message: Weather sound effects can no longer be heard while in the lobby.
@@ -4574,5 +4566,13 @@
   id: 3558
   time: '2026-08-08T03:13:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10670
+- author: IceNoobXD
+  changes:
+  - message: The job icons for the forecon CO and synth now use the same background
+      color as the normal forecon troops!
+    type: Tweak
+  id: 3559
+  time: '2026-08-10T21:40:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10688
 Name: RMC14
 Order: -1
