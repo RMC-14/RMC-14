@@ -127,7 +127,7 @@
       sprite: _RMC14/Interface/job_icons/UNMC/marine.rsi
       state: hudsquad_ass
     giveMapBlip:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/UNMC/marine.rsi
       state: spotter
     jobWhitelists:
     - popup: rmc-pamphlets-rifleman-warning
@@ -222,7 +222,7 @@
       sprite: _RMC14/Interface/job_icons/UNMC/marine.rsi
       state: hudsquad_load
     giveMapBlip:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/UNMC/marine.rsi
       state: loader
     jobWhitelists:
     - popup: rmc-pamphlets-rifleman-warning
@@ -253,7 +253,7 @@
       sprite: _RMC14/Interface/job_icons/UNMC/marine.rsi
       state: hudsquad_mortar
     giveMapBlip:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/UNMC/marine.rsi
       state: mortar
     jobWhitelists:
     - popup: rmc-pamphlets-rifleman-warning
@@ -383,7 +383,7 @@
       sprite: _RMC14/Interface/job_icons/UNMC/military_police.rsi
       state: hudsquad_hgmp
     giveMapBlip:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/UNMC/military_police.rsi
       state: honorguard
     jobWhitelists:
     - popup: rmc-pamphlets-mp-warning

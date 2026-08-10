@@ -36,7 +36,7 @@
       map: ["enum.RMCGhostVisibleOnlyVisualLayers.Base"]
   - type: TacticalMapIcon
     icon:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/Other/gamemaster.rsi
       state: gm_exclamation
 
 - type: entity
@@ -52,7 +52,7 @@
       map: ["enum.RMCGhostVisibleOnlyVisualLayers.Base"]
   - type: TacticalMapIcon
     icon:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/Other/gamemaster.rsi
       state: gm_question
 
 - type: entity
@@ -68,7 +68,7 @@
       map: ["enum.RMCGhostVisibleOnlyVisualLayers.Base"]
   - type: TacticalMapIcon
     icon:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/Other/gamemaster.rsi
       state: gm_circle
 
 - type: entity
@@ -84,7 +84,7 @@
       map: ["enum.RMCGhostVisibleOnlyVisualLayers.Base"]
   - type: TacticalMapIcon
     icon:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/Other/gamemaster.rsi
       state: gm_x
 
 - type: entity
@@ -100,7 +100,7 @@
       map: ["enum.RMCGhostVisibleOnlyVisualLayers.Base"]
   - type: TacticalMapIcon
     icon:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/Other/gamemaster.rsi
       state: gm_dollar
 
 - type: entity
@@ -116,7 +116,7 @@
       map: ["enum.RMCGhostVisibleOnlyVisualLayers.Base"]
   - type: TacticalMapIcon
     icon:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/Other/gamemaster.rsi
       state: gm_sword
 
 - type: entity
@@ -132,7 +132,7 @@
       map: ["enum.RMCGhostVisibleOnlyVisualLayers.Base"]
   - type: TacticalMapIcon
     icon:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/Other/gamemaster.rsi
       state: gm_shield
 
 - type: entity
@@ -148,7 +148,7 @@
       map: ["enum.RMCGhostVisibleOnlyVisualLayers.Base"]
   - type: TacticalMapIcon
     icon:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/Other/gamemaster.rsi
       state: gm_hash
 
 - type: entity
@@ -164,6 +164,5 @@
       map: ["enum.RMCGhostVisibleOnlyVisualLayers.Base"]
   - type: TacticalMapIcon
     icon:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/Other/gamemaster.rsi
       state: gm_star
-  

@@ -45,10 +45,10 @@
       name: cm-job-name-vc
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/UNMC/auxiliary_support.rsi
         state: vc
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/UNMC/backgrounds.rsi
         state: background_shipside
 
 - type: startingGear

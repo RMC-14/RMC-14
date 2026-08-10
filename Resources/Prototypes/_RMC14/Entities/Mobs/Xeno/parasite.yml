@@ -122,7 +122,7 @@
         3.0
   - type: TacticalMapIcon
     icon:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
       state: parasite
   - type: AddAccentClothing
     accent: ReplacementAccent

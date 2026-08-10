@@ -38,10 +38,10 @@
       preset: RMCSurvivorPresetRiotInProgressCMBRCTL
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/CMB.rsi
         state: deputy
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/CMB.rsi
         state: background_cmb
     - type: JobPrefix
       prefix: rmc-job-prefix-bureau-riot-control-team-leader

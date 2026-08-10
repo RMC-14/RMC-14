@@ -37,10 +37,10 @@
     - type: RMCTrackable
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/CMB.rsi
         state: icc
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/CMB.rsi
         state: background_cmb
   hidden: true
 
