@@ -820,7 +820,7 @@
 
 - type: alert
   parent: SquadTracker
-  id: SquadTrackerPVECLFTeamLead
+  id: SquadTrackerCLFPVETeamLead
   category: SquadTracker
   icons:
   - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi

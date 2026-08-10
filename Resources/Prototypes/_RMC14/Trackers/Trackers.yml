@@ -203,12 +203,12 @@
 - type: trackerMode
   id: PVECLFTeamLead
   job: RMCCLFLeaderPVE
-  alert: SquadTrackerPVECLFTeamLead
+  alert: SquadTrackerCLFPVETeamLead
 
 - type: trackerMode
   id: PVECLFCommander
   job: RMCCLFCommanderPVE
-  alert: SquadTrackerPVECLFCommander
+  alert: SquadTrackerCLFPVECommander
 
 # Humanoid component trackers
 
