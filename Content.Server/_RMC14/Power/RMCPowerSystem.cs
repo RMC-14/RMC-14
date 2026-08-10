@@ -349,31 +349,6 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
         base.RecalculatePower();
     }
 
-    public override float GetStableNetworkOutput(RMCPowerNetworkKey key)
-    {
-        var output = 0f;
-        foreach (var uid in _trackedStorages)
-        {
-            if (!_storageQuery.TryComp(uid, out var storage) ||
-                !_batteryQuery.TryComp(uid, out var battery) ||
-                !TryGetPowerNetwork(uid, out var storageKey) ||
-                storageKey != key ||
-                battery.CurrentCharge <= 0 ||
-                !storage.OutputEnabled ||
-                storage.OutputLimit <= 0 ||
-                !storage.InputEnabled ||
-                storage.InputLimit + 0.01f < storage.OutputLimit ||
-                storage.CurrentInput + 0.01f < storage.OutputLimit)
-            {
-                continue;
-            }
-
-            output += Math.Min(storage.OutputLimit, storage.MaxOutput);
-        }
-
-        return output;
-    }
-
     public bool BlackoutNetwork(RMCPowerNetworkKey key)
     {
         var changed = false;
