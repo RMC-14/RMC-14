@@ -283,11 +283,6 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         return default;
     }
 
-    public virtual float GetStableNetworkOutput(RMCPowerNetworkKey key)
-    {
-        return 0;
-    }
-
     private void OnApcStartup(Entity<RMCApcComponent> ent, ref ComponentStartup args)
     {
         OffsetApcVisual(ent);
