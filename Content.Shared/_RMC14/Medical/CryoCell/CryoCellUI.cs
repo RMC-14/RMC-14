@@ -50,15 +50,6 @@ public enum CryoCellUIKey
 }
 
 [Serializable, NetSerializable]
-public enum CryoCellOccupantMobState : byte
-{
-    None = 0,
-    Alive = 1,
-    Critical = 2,
-    Dead = 3
-}
-
-[Serializable, NetSerializable]
 public enum CryoCellVisuals : byte
 {
     State
@@ -77,6 +68,15 @@ public enum CryoCellVisualState : byte
 public enum CryoCellVisualLayers
 {
     Base
+}
+
+[Serializable, NetSerializable]
+public enum CryoCellOccupantMobState : byte
+{
+    None = 0,
+    Alive = 1,
+    Critical = 2,
+    Dead = 3
 }
 
 [Serializable, NetSerializable]

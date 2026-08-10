@@ -74,8 +74,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
 
     private void OnTogglePower(Entity<CryoCellComponent> cell, ref CryoCellTogglePowerBuiMsg args)
     {
-        cell.Comp.IsPoweredOn = cell.Comp.IsPoweredOn;
-
+        cell.Comp.IsPoweredOn = !cell.Comp.IsPoweredOn;
         Dirty(cell);
         UpdateCryoCellVisuals(cell);
         UpdateUI(cell);
@@ -288,7 +287,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         {
             if (curBodyTemp < Atmospherics.T0C)
             {
-                _statusEffects.TryAddStatusEffectDuration(occupant, SleepingSystem.StatusEffectForcedSleeping, cell.Comp.SleepDuration);
+                _statusEffects.TrySetStatusEffectDuration(occupant, SleepingSystem.StatusEffectForcedSleeping, cell.Comp.SleepDuration);
                 _rmcSizeStun.TryKnockOut(occupant, cell.Comp.UnconsciousDuration, true);
 
                 if (damageable.DamagePerGroup.GetValueOrDefault(AirlossGroup) > 0)
@@ -387,11 +386,12 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         }
     }
 
-    private void OnCryoCellPower(EntityUid uid, CryoCellComponent component, ref PowerChangedEvent args)
+    private void OnCryoCellPower(EntityUid uid, CryoCellComponent comp, ref PowerChangedEvent args)
     {
         if (TryComp<ApcPowerReceiverComponent>(uid, out var power) && power.Powered)
             return;
 
         _ui.CloseUi(uid, CryoCellUIKey.Key);
+        UpdateCryoCellVisuals((uid, comp));
     }
 }

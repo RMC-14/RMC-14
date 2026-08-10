@@ -16,28 +16,8 @@
     offset: 0, 0.5
     layers:
     - state: cell-off-empty
-      map: ["enum.CryoCellVisualLayers.Base"]
-
-    - state: pod-open
-      map: [ "enum.CryoPodVisualLayers.Base" ]
-    - state: cover-on
-      map: [ "enum.CryoPodVisualLayers.Cover" ]
-      visible: false
-    - state: pod-panel
-      map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
-      visible: false
-
+      map: [ "enum.CryoCellVisualLayers.Base" ]
   - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.CryoCellVisuals.Occupied:
-        enum.CryoCellVisualLayers.Base:
-          Empty: { state: cell-on-empty }
-          Occupied: { state: cell-on-occupied }
-      enum.PowerDeviceVisuals.Powered:
-        enum.PowerDeviceVisualLayers.Powered:
-          True: { visible: true }
-          False: { visible: false }
   - type: InteractionOutline
   - type: Fixtures
     fixtures:

@@ -1,10 +1,8 @@
 using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Storage;
 using Content.Shared.Movement.Events;
-using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Robust.Shared.Containers;
-using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Medical.CryoCell;
@@ -13,8 +11,7 @@ public abstract class SharedCryoCellSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedPointLightSystem _light = default!;
     [Dependency] private readonly RMCMovementSystem _rmcMovement = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -33,6 +30,7 @@ public abstract class SharedCryoCellSystem : EntitySystem
     private void OnCryoCellInit(Entity<CryoCellComponent> cell, ref ComponentInit args)
     {
         _container.EnsureContainer<ContainerSlot>(cell, cell.Comp.OccupantId);
+        UpdateCryoCellVisuals(cell);
     }
 
     private void OnCryoCellEntInserted(Entity<CryoCellComponent> cell, ref EntInsertedIntoContainerMessage args)
@@ -115,7 +113,12 @@ public abstract class SharedCryoCellSystem : EntitySystem
         var isOn = cell.Comp.IsPoweredOn && (powered ?? true);
         var hasOccupant = cell.Comp.Occupant != null;
 
-        var state = (isOn, hasOccupant) switch
+        if (_light.TryGetLight(cell.Owner, out var light))
+        {
+            _light.SetEnabled(cell.Owner, isOn, light);
+        }
+
+        var newState = (isOn, hasOccupant) switch
         {
             (true, false) => CryoCellVisualState.OnEmpty,
             (true, true) => CryoCellVisualState.OnOccupied,
@@ -123,6 +126,12 @@ public abstract class SharedCryoCellSystem : EntitySystem
             (false, true) => CryoCellVisualState.OffOccupied,
         };
 
-        _appearance.SetData(cell, CryoCellVisuals.State, state);
+        if (_appearance.TryGetData<CryoCellVisualState>(cell.Owner, CryoCellVisuals.State, out var oldState))
+        {
+            if (oldState == newState)
+                return;
+        }
+
+        _appearance.SetData(cell, CryoCellVisuals.State, newState);
     }
 }
