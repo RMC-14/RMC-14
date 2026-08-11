@@ -1,5 +1,5 @@
 # Give Commendation UI Window
-rmc-give-commendation-title = RMC Commendation UI
+rmc-give-commendation-title = Admin Commendation UI
 rmc-give-commendation-giver = Giver Name:
 rmc-give-commendation-preset-highcommand = UNMC High Command
 rmc-give-commendation-preset-queenmother = The Queen Mother
