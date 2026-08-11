@@ -1,17 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Civilian survivors now have 17 new unique variants on some maps! Find
-      out ingame!
-    type: Add
-  - message: Civilian survivors spawn with random clothing now
-    type: Tweak
-  - message: Civilian survivors no longer roll last in survivor job rolling and will
-      roll together with every other job.
-    type: Tweak
-  id: 3070
-  time: '2026-04-06T03:33:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8988
 - author: Vixting
   changes:
   - message: Added fun!
@@ -4553,5 +4540,12 @@
   id: 3569
   time: '2026-08-11T07:30:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10235
+- author: Vixting
+  changes:
+  - message: Removed armor from tank vendor
+    type: Remove
+  id: 3570
+  time: '2026-08-11T18:49:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10542
 Name: RMC14
 Order: -1
