@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: The M44 Combat Revolver case no longer fits inside pockets or backpacks.
-    type: Fix
-  id: 3064
-  time: '2026-04-04T10:24:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9485
 - author: Dygon
   changes:
   - message: Acid's total damage to barricades has been increased by 12.5%.
@@ -4572,5 +4565,12 @@
   id: 3563
   time: '2026-08-11T05:42:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10620
+- author: IceNoobXD
+  changes:
+  - message: Added, removed and moved around some APCs on solaris!
+    type: Tweak
+  id: 3564
+  time: '2026-08-11T06:02:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10588
 Name: RMC14
 Order: -1
