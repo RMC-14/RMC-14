@@ -5,6 +5,7 @@ using Content.Client.Eui;
 using Content.Shared._RMC14.Admin.Commendations;
 using Content.Shared._RMC14.Commendations;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
+using Content.Shared._RMC14.Xenonids.Name;
 using Content.Shared.Administration;
 using Content.Shared.Database;
 using Content.Shared.Dataset;
@@ -164,9 +165,18 @@ public sealed class RMCAdminCommendationEui : BaseEui
         if (player.NetEntity is { } netEntity &&
             _entities.TryGetEntity(netEntity, out var uid))
         {
-            var rankName = _rank.GetSpeakerRankName(uid.Value);
-            if (!string.IsNullOrWhiteSpace(rankName))
-                return rankName;
+            if (_entities.HasComponent<XenoNameComponent>(uid.Value))
+            {
+                var xenoName = _entities.GetComponent<MetaDataComponent>(uid.Value).EntityName;
+                if (!string.IsNullOrWhiteSpace(xenoName))
+                    return xenoName;
+            }
+            else
+            {
+                var rankName = _rank.GetSpeakerRankName(uid.Value);
+                if (!string.IsNullOrWhiteSpace(rankName))
+                    return rankName;
+            }
         }
 
         return player.CharacterName;
