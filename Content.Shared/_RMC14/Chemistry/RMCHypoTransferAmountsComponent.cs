@@ -19,5 +19,5 @@ public sealed partial class RMCHypoTransferAmountsComponent : Component
     public FixedPoint2 MaxTransferAmount { get; set; } = FixedPoint2.New(30);
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2[] TransferAmounts = [3, 5, 10, 15, 30];
+    public FixedPoint2[] TransferAmounts = [1, 3, 5, 10, 15, 20, 25, 30];
 }
