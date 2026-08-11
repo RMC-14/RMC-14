@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: monomethylhydrazine
-  changes:
-  - message: Added a new lobby art, Covering Private Vuloss by SampleTex.
-    type: Add
-  id: 3062
-  time: '2026-04-04T10:23:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9266
 - author: Dygon
   changes:
   - message: The Vanguard Praetorian's Pierce ability can now also hit over folded
@@ -4571,5 +4564,13 @@
   id: 3561
   time: '2026-08-11T05:38:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10638
+- author: Dygon
+  changes:
+  - message: Xenonids despawned because of hijack no longer get offered to players
+      in the larva queue.
+    type: Fix
+  id: 3562
+  time: '2026-08-11T05:41:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10633
 Name: RMC14
 Order: -1
