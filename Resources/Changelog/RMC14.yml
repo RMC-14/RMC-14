@@ -1,31 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Acid's total damage to barricades has been increased by 12.5%.
-    type: Fix
-  - message: 'Flares now get melted faster by acid: weak acid 27.5% faster, normal
-      acid 49% faster, strong acid 71.4% faster.'
-    type: Fix
-  - message: Extended the burn duration of M94 flares from 10 to 16 minutes and adjusted
-      their fade-out timing.
-    type: Fix
-  - message: M94 flares fired into the air with a flare gun now last twice as long.
-    type: Fix
-  - message: A signal flare now becomes a valid dropship target 5 seconds after landing
-      instead of instantly.
-    type: Fix
-  - message: Flares no longer ramp up their range as if newly spawned each time they
-      enter your view.
-    type: Fix
-  - message: Flares now gradually fade out instead of maintaining maximum brightness
-      for their entire burn duration.
-    type: Fix
-  - message: Fixed signal flares lasting 30 seconds longer than intended and appearing
-      unlit during this extra duration.
-    type: Fix
-  id: 3065
-  time: '2026-04-04T10:26:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9465
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed PMC Engineers spawning with the wrong backpack.
@@ -4572,5 +4545,14 @@
   id: 3564
   time: '2026-08-11T06:02:21.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10588
+- author: carccborg
+  changes:
+  - message: Added the damaged custom built shotgun
+    type: Add
+  - message: The custom built shotgun now has the proper burst scatter multiplier
+    type: Tweak
+  id: 3565
+  time: '2026-08-11T06:09:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10502
 Name: RMC14
 Order: -1
