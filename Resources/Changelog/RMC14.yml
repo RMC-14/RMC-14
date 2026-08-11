@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Fixed the aimed shot/spotting visuals not always appearing in the correct
-      location.
-    type: Fix
-  id: 3061
-  time: '2026-04-03T09:23:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9472
 - author: monomethylhydrazine
   changes:
   - message: Added a new lobby art, Covering Private Vuloss by SampleTex.
@@ -4572,5 +4564,12 @@
   id: 3560
   time: '2026-08-10T21:55:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10671
+- author: RerBreab
+  changes:
+  - message: Burrowers can no longer place resin holes in vehicles.
+    type: Fix
+  id: 3561
+  time: '2026-08-11T05:38:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10638
 Name: RMC14
 Order: -1
