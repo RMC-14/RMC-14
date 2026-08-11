@@ -11,6 +11,7 @@ public sealed class RMCAdminCommendationEui : BaseEui
 {
     [Dependency] private readonly IAdminManager _admin = default!;
     [Dependency] private readonly IEntitySystemManager _systems = default!;
+    [Dependency] private readonly ILogManager _log = default!;
 
     public RMCAdminCommendationEui()
     {
@@ -19,40 +20,47 @@ public sealed class RMCAdminCommendationEui : BaseEui
 
     public override async void HandleMessage(EuiMessageBase msg)
     {
-        base.HandleMessage(msg);
-
-        if (!_admin.HasAdminFlag(Player, AdminFlags.Commendations))
+        try
         {
-            Close();
-            return;
+            base.HandleMessage(msg);
+
+            if (!_admin.HasAdminFlag(Player, AdminFlags.Commendations))
+            {
+                Close();
+                return;
+            }
+
+            if (msg is not RMCAdminGiveCommendationMsg give)
+                return;
+
+            var cs = _systems.GetEntitySystem<CommendationSystem>();
+
+            if (!cs.TryGetAwardInfo(give.Type, give.AwardIndex, out var awardName, out var protoId))
+            {
+                SendMessage(new RMCAdminGiveCommendationErrorMsg(Loc.GetString("rmc-give-commendation-error-invalid-award")));
+                return;
+            }
+
+            var error = await cs.AdminGiveCommendation(
+                Player.UserId.UserId,
+                Player.Name,
+                give.GiverName,
+                give.ReceiverNameOrId,
+                give.ReceiverCharacterName,
+                give.Type,
+                awardName,
+                protoId,
+                give.Citation,
+                give.TargetRound);
+
+            if (error != null)
+                SendMessage(new RMCAdminGiveCommendationErrorMsg(error));
+            else
+                Close();
         }
-
-        if (msg is not RMCAdminGiveCommendationMsg give)
-            return;
-
-        var cs = _systems.GetEntitySystem<CommendationSystem>();
-
-        if (!cs.TryGetAwardInfo(give.Type, give.AwardIndex, out var awardName, out var protoId))
+        catch (Exception e)
         {
-            SendMessage(new RMCAdminGiveCommendationErrorMsg(Loc.GetString("rmc-give-commendation-error-invalid-award")));
-            return;
+            _log.GetSawmill("rmc_admin_commendation").Error($"Error processing message of type {msg.GetType()}:\n{e}");
         }
-
-        var error = await cs.AdminGiveCommendation(
-            Player.UserId.UserId,
-            Player.Name,
-            give.GiverName,
-            give.ReceiverNameOrId,
-            give.ReceiverCharacterName,
-            give.Type,
-            awardName,
-            protoId,
-            give.Citation,
-            give.TargetRound);
-
-        if (error != null)
-            SendMessage(new RMCAdminGiveCommendationErrorMsg(error));
-        else
-            Close();
     }
 }
