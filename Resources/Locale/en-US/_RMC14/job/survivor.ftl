@@ -237,7 +237,7 @@ rmc-job-name-survivor-infrastructure-engineer = Inzhener Infrastruktury
 
 rmc-job-name-survivor-reactor-technician = Tekhnik Reaktora
 
-rmc-job-name-survivor-armed-police-officer = Narodnyy Vooruzhennyy Politsioner
+rmc-job-name-survivor-civil-gendarmes-officer = Narodnyye Grazhdanskiye Zhandarmy
 
 rmc-job-name-survivor-army-reservist = Armiyskiy Rezervist
 rmc-job-prefix-army-reservist = 202/ARMY
