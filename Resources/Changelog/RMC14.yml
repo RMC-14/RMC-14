@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: Pamphlets can now also be used to increase your skills even further.
-    type: Tweak
-  id: 3067
-  time: '2026-04-06T03:26:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9413
 - author: CatAndHats
   changes:
   - message: Added the handshake as an interactive emote, right-click another player
@@ -4554,5 +4547,13 @@
   id: 3566
   time: '2026-08-11T06:10:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10476
+- author: Ian321
+  changes:
+  - message: Mindless larvae can now be returned to the hive core to gain a burrowed
+      larva.
+    type: Add
+  id: 3567
+  time: '2026-08-11T06:14:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10481
 Name: RMC14
 Order: -1
