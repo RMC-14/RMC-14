@@ -16,6 +16,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.Ghost;
 using Content.Shared.Hands.Components;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.Events;
@@ -178,7 +179,10 @@ public sealed class XenoNestSystem : EntitySystem
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))
-            _popup.PopupClient(Loc.GetString("rmc-xeno-nest-unnest-start", ("target", nested)), user, user);
+        {
+            var message = Loc.GetString("rmc-xeno-nest-unnest-start", ("target", Identity.Name(nested, EntityManager, user)));
+            _popup.PopupClient(message, user, user);
+        }
 
         return true;
     }
