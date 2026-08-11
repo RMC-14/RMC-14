@@ -25,9 +25,18 @@
       - CLF
     - type: Skills
       preset: RMCSkillPresetPVEPlatoonCommander
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      understoodLanguages:
+      - Japanese
+      - English
+      currentLanguage: Japanese
+      defaultLanguage: Japanese
     - type: SquadLeader
       icon:
-        sprite: _RMC14/Interface/cm_job_icons.rsi
+        sprite: _RMC14/Interface/job_icons/CLF.rsi
         state: clf_cellcom
     - type: AssignSquad
       squad: SquadCLF

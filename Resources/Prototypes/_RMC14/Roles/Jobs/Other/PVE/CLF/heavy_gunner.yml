@@ -22,6 +22,15 @@
       - CLF
     - type: Skills
       preset: RMCSkillPresetPVESGO
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      understoodLanguages:
+      - Japanese
+      - English
+      currentLanguage: Japanese
+      defaultLanguage: Japanese
     - type: SquadArmorWearer
     - type: AssignSquad
       squad: SquadCLF

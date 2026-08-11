@@ -25,6 +25,15 @@
       - CLF
     - type: Skills
       preset: RMCSkillPresetPVESquadLeader
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      understoodLanguages:
+      - Japanese
+      - English
+      currentLanguage: Japanese
+      defaultLanguage: Japanese
     - type: SquadArmorWearer
     - type: AssignSquad
       squad: SquadCLF
