@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Armor;
+using System.Numerics;
 using Content.Shared._RMC14.BlurredVision;
 using Content.Shared._RMC14.Deafness;
 using Content.Shared._RMC14.Slow;
@@ -114,14 +115,20 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
         factor = Math.Min(20, factor);
 
         // TODO RMC14 don't reduce if explosion is on same tile
-        if (_standing.IsDown(ent))
+        if (_standing.IsDown(ent) && !args.ProneDamageAdjusted)
             factor *= 0.5;
 
         _sizeStun.TryGetSize(ent, out var size);
 
         // TODO RMC14 size-based throw ranges and speeds
         var pos = _transform.GetWorldPosition(ent);
-        var dir = pos - args.Epicenter.Position;
+        var dir = args.ThrowDirection ?? pos - args.Epicenter.Position;
+        if (dir.IsLengthZero())
+            dir = _random.NextVector2().Normalized();
+
+        var knockBackOrigin = args.ThrowDirection == null
+            ? args.Epicenter
+            : new MapCoordinates(pos - dir.Normalized(), args.Epicenter.MapId);
 
         // Humanoid calcuations
         if (size == RMCSizes.Humanoid)
@@ -135,10 +142,10 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
             _statusEffects.TryAddStatusEffect<FlashedComponent>(ent, FlashedKey, ent.Comp.BlindTime * bombArmorMult, true);
             _deafness.TryDeafen(ent, TimeSpan.FromSeconds(severity * 0.5), true);
 
-            var knockBackDistance = (float) Math.Clamp(severity / 5 / dir.Length(), 0.5, Math.Max(severity / 10, 0.5));
+            var knockBackDistance = (float)Math.Clamp(severity / 5 / dir.Length(), 0.5, Math.Max(severity / 10, 0.5));
 
             if (!HasComp<XenoNestedComponent>(ent))
-                _sizeStun.KnockBack(ent, args.Epicenter, knockBackDistance, knockBackDistance, knockBackSpeed: (float) severity);
+                _sizeStun.KnockBack(ent, knockBackOrigin, knockBackDistance, knockBackDistance, knockBackSpeed: (float)severity);
 
             var knockdownValue = severity * 0.1;
             var knockoutValue = damage.Double() * 0.1;
@@ -170,7 +177,7 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
             else
                 _slow.TrySlowdown(ent, TimeSpan.FromSeconds(factor / 3));
 
-            _sizeStun.KnockBack(ent, args.Epicenter, knockBackSpeed: 5, ignoreSize: true);
+            _sizeStun.KnockBack(ent, knockBackOrigin, knockBackSpeed: 5, ignoreSize: true);
         }
         else if (factor > 10)
         {
@@ -212,7 +219,7 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
         var damage = args.Damage.GetTotal();
         var destroyChance =
             damage > ent.Comp.HighIntensityDamageThreshold ? ent.Comp.HighIntensityDestroyChance :
-            damage > ent.Comp.LowIntensityDamageThreshold  ? ent.Comp.MediumIntensityDestroyChance :
+            damage > ent.Comp.LowIntensityDamageThreshold ? ent.Comp.MediumIntensityDestroyChance :
             ent.Comp.LowIntensityDestroyChance;
 
         if (_random.NextFloat() < destroyChance)
@@ -294,7 +301,8 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
         float tileBreakScale = 1f,
         int maxTileBreak = int.MaxValue,
         bool canCreateVacuum = true,
-        bool addLog = true)
+        bool addLog = true,
+        Vector2? throwDirection = null)
     {
     }
 
@@ -303,7 +311,8 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
         bool delete = true,
         float? totalIntensity = null,
         float? radius = null,
-        EntityUid? user = null)
+        EntityUid? user = null,
+        Vector2? throwDirection = null)
     {
     }
 }

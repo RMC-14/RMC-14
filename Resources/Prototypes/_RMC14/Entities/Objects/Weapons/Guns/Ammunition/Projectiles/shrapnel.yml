@@ -40,3 +40,37 @@
     thresholds:
     - range: 32
       falloff: 10
+
+- type: entity
+  parent: CMProjectileShrapnel
+  id: RMCBreachingChargeShrapnel
+  name: breaching charge shrapnel
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 30
+    deleteOnCollide: true
+  - type: ProjectileMaxRange
+    max: 8
+  - type: RMCProjectileAccuracy
+    accuracy: 125
+  - type: RMCProjectileIgnoreDowned
+
+- type: entity
+  parent: CMProjectileShrapnel
+  id: RMCBreachingChargeRubberPellet
+  name: breaching charge rubber pellet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage: {}
+    deleteOnCollide: true
+  - type: RMCStaminaDamageOnCollide
+    damage: 25
+  - type: CMArmorPiercing
+    amount: 0
+  - type: ProjectileMaxRange
+    max: 8
+  - type: RMCProjectileIgnoreDowned

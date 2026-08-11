@@ -198,7 +198,7 @@ public sealed partial class ExplosionSystem
         if (!_physicsQuery.TryGetComponent(uid, out var physics))
             return false;
 
-        return physics.CanCollide && physics.Hard && (physics.CollisionLayer & (int) CollisionGroup.Impassable) != 0;
+        return physics.CanCollide && physics.Hard && (physics.CollisionLayer & (int)CollisionGroup.Impassable) != 0;
     }
 
     /// <summary>
@@ -214,7 +214,10 @@ public sealed partial class ExplosionSystem
         HashSet<EntityUid> processed,
         string id,
         float? fireStacks,
-        EntityUid? cause)
+        EntityUid? cause,
+        Vector2? throwDirection,
+        EntityUid? user,
+        float proneDamageMultiplier)
     {
         var size = grid.Comp.TileSize;
         var gridBox = new Box2(tile * size, (tile + 1) * size).Scale(0.9f);
@@ -233,7 +236,7 @@ public sealed partial class ExplosionSystem
         // process those entities
         foreach (var (uid, xform) in list)
         {
-            ProcessEntity(uid, epicenter, damage, throwForce, id, xform, fireStacks, cause);
+            ProcessEntity(uid, epicenter, damage, throwForce, id, xform, fireStacks, cause, throwDirection, user, proneDamageMultiplier);
         }
 
         // process anchored entities
@@ -243,7 +246,7 @@ public sealed partial class ExplosionSystem
         foreach (var entity in _anchored)
         {
             processed.Add(entity);
-            ProcessEntity(entity, epicenter, damage, throwForce, id, null, fireStacks, cause);
+            ProcessEntity(entity, epicenter, damage, throwForce, id, null, fireStacks, cause, throwDirection, user, proneDamageMultiplier);
         }
 
         // Walls and reinforced walls will break into girders. These girders will also be considered turf-blocking for
@@ -282,7 +285,7 @@ public sealed partial class ExplosionSystem
         {
             // Here we only throw, no dealing damage. Containers n such might drop their entities after being destroyed, but
             // they should handle their own damage pass-through, with their own damage reduction calculation.
-            ProcessEntity(uid, epicenter, null, throwForce, id, xform, null, cause);
+            ProcessEntity(uid, epicenter, null, throwForce, id, xform, null, cause, throwDirection, user, proneDamageMultiplier);
         }
 
         return !tileBlocked;
@@ -319,7 +322,10 @@ public sealed partial class ExplosionSystem
         HashSet<EntityUid> processed,
         string id,
         float? fireStacks,
-        EntityUid? cause)
+        EntityUid? cause,
+        Vector2? throwDirection,
+        EntityUid? user,
+        float proneDamageMultiplier)
     {
         var gridBox = Box2.FromDimensions(tile * DefaultTileSize, new Vector2(DefaultTileSize, DefaultTileSize));
         var worldBox = spaceMatrix.TransformBox(gridBox);
@@ -335,7 +341,7 @@ public sealed partial class ExplosionSystem
         foreach (var (uid, xform) in state.Item1)
         {
             processed.Add(uid);
-            ProcessEntity(uid, epicenter, damage, throwForce, id, xform, fireStacks, cause);
+            ProcessEntity(uid, epicenter, damage, throwForce, id, xform, fireStacks, cause, throwDirection, user, proneDamageMultiplier);
         }
 
         if (throwForce <= 0)
@@ -349,7 +355,7 @@ public sealed partial class ExplosionSystem
 
         foreach (var (uid, xform) in list)
         {
-            ProcessEntity(uid, epicenter, null, throwForce, id, xform, fireStacks, cause);
+            ProcessEntity(uid, epicenter, null, throwForce, id, xform, fireStacks, cause, throwDirection, user, proneDamageMultiplier);
         }
     }
 
@@ -448,7 +454,10 @@ public sealed partial class ExplosionSystem
         string id,
         TransformComponent? xform,
         float? fireStacksOnIgnite,
-        EntityUid? cause)
+        EntityUid? cause,
+        Vector2? throwDirection,
+        EntityUid? user,
+        float proneDamageMultiplier)
     {
         if (_deleteOnExplosionQuery.HasComp(uid))
         {
@@ -461,23 +470,35 @@ public sealed partial class ExplosionSystem
             GetEntitiesToDamage(uid, originalDamage, id);
             foreach (var (entity, damage) in _toDamage)
             {
-                if (damage.GetTotal() > 0 && TryComp<ActorComponent>(entity, out var actorComponent))
+                var adjustedDamage = damage;
+                var proneDamageAdjusted = false;
+                if (proneDamageMultiplier != 1f && _standing.IsDown(entity))
+                {
+                    adjustedDamage *= proneDamageMultiplier;
+                    proneDamageAdjusted = true;
+                }
+
+                if (adjustedDamage.GetTotal() > 0 && TryComp<ActorComponent>(entity, out var actorComponent))
                 {
                     // Log damage to player entities only, cause this will create a massive amount of log spam otherwise.
                     if (cause != null)
                     {
-                        _adminLogger.Add(LogType.ExplosionHit, LogImpact.Medium, $"Explosion of {ToPrettyString(cause):actor} dealt {damage.GetTotal()} damage to {ToPrettyString(entity):subject}");
+                        _adminLogger.Add(LogType.ExplosionHit, LogImpact.Medium, $"Explosion of {ToPrettyString(cause):actor} dealt {adjustedDamage.GetTotal()} damage to {ToPrettyString(entity):subject}");
                     }
                     else
                     {
-                        _adminLogger.Add(LogType.ExplosionHit, LogImpact.Medium, $"Explosion at {epicenter:epicenter} dealt {damage.GetTotal()} damage to {ToPrettyString(entity):subject}");
+                        _adminLogger.Add(LogType.ExplosionHit, LogImpact.Medium, $"Explosion at {epicenter:epicenter} dealt {adjustedDamage.GetTotal()} damage to {ToPrettyString(entity):subject}");
                     }
 
                 }
 
-                // TODO EXPLOSIONS turn explosions into entities, and pass the the entity in as the damage origin.
-                _damageableSystem.TryChangeDamage(entity, damage * _damageableSystem.UniversalExplosionDamageModifier, ignoreResistances: true);
-                var ev = new ExplosionReceivedEvent(id, epicenter, damage);
+                _damageableSystem.TryChangeDamage(
+                    entity,
+                    adjustedDamage * _damageableSystem.UniversalExplosionDamageModifier,
+                    ignoreResistances: true,
+                    origin: user,
+                    tool: cause); // RMC14
+                var ev = new ExplosionReceivedEvent(id, epicenter, adjustedDamage, throwDirection, proneDamageAdjusted);
                 RaiseLocalEvent(entity, ref ev);
             }
         }
@@ -505,7 +526,7 @@ public sealed partial class ExplosionSystem
             && physics.BodyType == BodyType.Dynamic)
         {
             var pos = _transformSystem.GetWorldPosition(xform);
-            var dir = pos - epicenter.Position;
+            var dir = throwDirection ?? pos - epicenter.Position;
             if (dir.IsLengthZero())
                 dir = _robustRandom.NextVector2().Normalized();
             _throwingSystem.TryThrow(
@@ -694,6 +715,21 @@ sealed class Explosion
     public readonly EntityUid? Cause;
 
     /// <summary>
+    ///     Optional direction used instead of the vector from the epicenter for physics throwing.
+    /// </summary>
+    public readonly Vector2? ThrowDirection;
+
+    /// <summary>
+    ///     Optional user responsible for damage attribution.
+    /// </summary>
+    public readonly EntityUid? User;
+
+    /// <summary>
+    ///     Damage multiplier applied to downed entities.
+    /// </summary>
+    public readonly float ProneDamageMultiplier;
+
+    /// <summary>
     ///     Initialize a new instance for processing
     /// </summary>
     public Explosion(ExplosionSystem system,
@@ -711,10 +747,16 @@ sealed class Explosion
         IMapManager mapMan,
         EntityUid visualEnt,
         EntityUid? cause,
+        Vector2? throwDirection,
+        EntityUid? user,
+        float proneDamageMultiplier,
         SharedMapSystem mapSystem)
     {
         VisualEnt = visualEnt;
         Cause = cause;
+        ThrowDirection = throwDirection;
+        User = user;
+        ProneDamageMultiplier = proneDamageMultiplier;
         _system = system;
         _mapSystem = mapSystem;
         ExplosionType = explosionType;
@@ -880,7 +922,10 @@ sealed class Explosion
                     ProcessedEntities,
                     ExplosionType.ID,
                     ExplosionType.FireStacks,
-                    Cause);
+                    Cause,
+                    ThrowDirection,
+                    User,
+                    ProneDamageMultiplier);
 
                 // If the floor is not blocked by some dense object, damage the floor tiles.
                 if (canDamageFloor)
@@ -899,7 +944,10 @@ sealed class Explosion
                     ProcessedEntities,
                     ExplosionType.ID,
                     ExplosionType.FireStacks,
-                    Cause);
+                    Cause,
+                    ThrowDirection,
+                    User,
+                    ProneDamageMultiplier);
             }
 
             if (!MoveNext())
@@ -941,4 +989,7 @@ public sealed class QueuedExplosion(ExplosionPrototype proto)
     public int MaxTileBreak;
     public bool CanCreateVacuum;
     public EntityUid? Cause; // The entity that exploded, for logging purposes.
+    public Vector2? ThrowDirection; // RMC14
+    public EntityUid? User; // RMC14
+    public float ProneDamageMultiplier = 1f; // RMC14
 }

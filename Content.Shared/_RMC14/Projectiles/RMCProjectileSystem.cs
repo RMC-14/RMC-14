@@ -8,6 +8,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.Standing;
 using Content.Shared.Whitelist;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
@@ -28,6 +29,7 @@ public sealed class RMCProjectileSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly StandingStateSystem _standing = default!;
 
     public override void Initialize()
     {
@@ -47,6 +49,7 @@ public sealed class RMCProjectileSystem : EntitySystem
         SubscribeLocalEvent<SpawnOnTerminateComponent, ProjectileHitEvent>(OnSpawnOnTerminateProjectileHit);
 
         SubscribeLocalEvent<PreventCollideWithDeadComponent, PreventCollideEvent>(OnPreventCollideWithDead);
+        SubscribeLocalEvent<RMCProjectileIgnoreDownedComponent, PreventCollideEvent>(OnIgnoreDownedPreventCollide);
     }
 
     private void OnDeleteOnCollideStartCollide(Entity<DeleteOnCollideComponent> ent, ref StartCollideEvent args)
@@ -266,6 +269,14 @@ public sealed class RMCProjectileSystem : EntitySystem
             return;
 
         if (_mobState.IsDead(args.OtherEntity))
+            args.Cancelled = true;
+    }
+
+    private void OnIgnoreDownedPreventCollide(
+        Entity<RMCProjectileIgnoreDownedComponent> ent,
+        ref PreventCollideEvent args)
+    {
+        if (!args.Cancelled && _standing.IsDown(args.OtherEntity))
             args.Cancelled = true;
     }
 

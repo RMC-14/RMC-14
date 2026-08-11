@@ -1,14 +1,18 @@
+using System.Numerics;
 using Content.Server.Explosion.Components;
 using Content.Server.Explosion.EntitySystems;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Explosion;
+using Content.Shared._RMC14.Stamina;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Damage;
 using Content.Shared.Explosion.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Projectiles;
+using Content.Shared.Standing;
 using Robust.Server.GameObjects;
+using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -26,12 +30,15 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly RMCStaminaSystem _stamina = default!;
+    [Dependency] private readonly StandingStateSystem _standing = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<ProjectileGrenadeComponent, ProjectileHitEvent>(OnStartCollide);
+        SubscribeLocalEvent<ProjectileGrenadeComponent, PrepareFragmentIntoProjectilesEvent>(OnPrepareFragmentIntoProjectiles);
         SubscribeLocalEvent<ProjectileGrenadeComponent, FragmentIntoProjectilesEvent>(OnFragmentIntoProjectiles);
     }
 
@@ -55,10 +62,10 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
     /// </summary>
     private void OnFragmentIntoProjectiles(Entity<ProjectileGrenadeComponent> ent, ref FragmentIntoProjectilesEvent args)
     {
-        if (ent.Comp.DirectHit && args.ShootCount == 0)
+        if (ent.Comp.DirectHit && ent.Comp.DirectHitChance == null && args.ShootCount == 0)
         {
             _hitEntities.Clear();
-            var directHit = DirectHit(ent, args.ContentUid, args.TotalCount);
+            var directHit = DirectHitLegacy(ent, args.ContentUid, args.TotalCount);
             if (directHit != null)
             {
                 args.HitEntities = _hitEntities;
@@ -88,31 +95,105 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
             args.Angle = Angle.FromDegrees(_random.Next((int)angleMin, (int)angleMax));
     }
 
+    private void OnPrepareFragmentIntoProjectiles(
+        Entity<ProjectileGrenadeComponent> ent,
+        ref PrepareFragmentIntoProjectilesEvent args)
+    {
+        if (!ent.Comp.DirectHit || ent.Comp.DirectHitChance is not { } directHitChance)
+            return;
+
+        _hitEntities.Clear();
+        DirectHit(
+            ent,
+            args.ContentUid,
+            args.TotalCount,
+            args.SpawnCoordinates,
+            args.User,
+            directHitChance,
+            args.ConsumedProjectileIndices);
+        args.HitEntities = _hitEntities;
+    }
+
     // Directly hit any entities close enough to the grenade.
-    private int? DirectHit(Entity<ProjectileGrenadeComponent> ent, EntityUid payloadUid,  int projectileCount)
+    private void DirectHit(
+        Entity<ProjectileGrenadeComponent> ent,
+        EntityUid payloadUid,
+        int projectileCount,
+        MapCoordinates spawnCoordinates,
+        EntityUid? user,
+        float directHitChance,
+        HashSet<int> consumedProjectileIndices)
+    {
+        if (!TryComp(payloadUid, out ProjectileComponent? projectile))
+            return;
+
+        var nearbyEntities = _entityLookup.GetEntitiesInRange<MobStateComponent>(spawnCoordinates, MathF.Sqrt(0.5f));
+
+        EntityUid? standingTarget = null;
+        EntityUid? downedTarget = null;
+        foreach (var entity in nearbyEntities)
+        {
+            var delta = _transform.GetMapCoordinates(entity).Position - spawnCoordinates.Position;
+            if (MathF.Abs(delta.X) > 0.5f ||
+                MathF.Abs(delta.Y) > 0.5f ||
+                _mobState.IsDead(entity))
+            {
+                continue;
+            }
+
+            if (_standing.IsDown(entity))
+                downedTarget ??= entity;
+            else
+                standingTarget ??= entity;
+        }
+
+        // CM13 treats the standing mob on the fragmentation tile as the shrapnel source and
+        // prevents all of the remaining projectiles from colliding with it. RMC14
+        if (standingTarget is { } fragmentationSource)
+            IgnoreRemainingProjectiles(ent, fragmentationSource);
+
+        if (standingTarget == null && downedTarget == null)
+            return;
+
+        directHitChance = Math.Clamp(directHitChance, 0, 1);
+        for (var i = 0; i < projectileCount; i++)
+        {
+            EntityUid? target = null;
+            if (standingTarget != null && _random.Prob(directHitChance))
+                target = standingTarget;
+            else if (downedTarget != null && _random.Prob(directHitChance))
+                target = downedTarget;
+
+            if (target == null)
+                continue;
+
+            consumedProjectileIndices.Add(i);
+            ApplyDirectHit(ent, target.Value, payloadUid, projectile, user, true);
+        }
+    }
+
+    private int? DirectHitLegacy(
+        Entity<ProjectileGrenadeComponent> ent,
+        EntityUid payloadUid,
+        int projectileCount)
     {
         if (!TryComp(payloadUid, out ProjectileComponent? projectile))
             return null;
 
         var nearbyEntities = _entityLookup.GetEntitiesInRange<MobStateComponent>(Transform(ent).Coordinates, 0.5f);
         var armorPiercing = 0;
+        if (TryComp(payloadUid, out CMArmorPiercingComponent? armorPiercingComp))
+            armorPiercing = armorPiercingComp.Amount;
 
         foreach (var entity in nearbyEntities)
         {
             if (_mobState.IsDead(entity))
                 continue;
 
-            // Deal damage directly and remove projectiles from the grenade
-            var newProjectileCount = projectileCount - ent.Comp.DirectHitProjectiles;
-            var damage = projectile.Damage * ent.Comp.DirectHitProjectiles;
-            if (newProjectileCount < 0)
-                damage += projectile.Damage * newProjectileCount;
-
-            if (TryComp(payloadUid, out CMArmorPiercingComponent? armorPiercingComp))
-                armorPiercing = armorPiercingComp.Amount;
-
-            projectileCount = Math.Max(newProjectileCount, 0);
-            _damage.TryChangeDamage(entity, damage, armorPiercing: armorPiercing);
+            var hitCount = Math.Min(ent.Comp.DirectHitProjectiles, projectileCount);
+            for (var i = 0; i < hitCount; i++)
+                ApplyDirectHit(ent, entity, payloadUid, projectile, null, armorPiercing: armorPiercing);
+            projectileCount -= hitCount;
 
             // Make sure the leftover projectiles don't hit the entity that was hit directly
             if (!TryComp(entity, out UserLimitHitsComponent? limit))
@@ -120,13 +201,57 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
 
             _hitEntities.Add(entity);
             limit.HitBy.Add(new Hit(ent.Owner.Id, _timing.CurTime + limit.Expire, null));
-            Dirty(entity,limit);
+            Dirty(entity, limit);
 
-            if(projectileCount == 0)
+            if (projectileCount == 0)
                 break;
         }
 
         return projectileCount;
+    }
+
+    private void ApplyDirectHit(
+        Entity<ProjectileGrenadeComponent> grenade,
+        EntityUid target,
+        EntityUid payloadUid,
+        ProjectileComponent projectile,
+        EntityUid? user,
+        bool attribute = false,
+        int armorPiercing = 0)
+    {
+        var minDamageMultiplier = MathF.Max(0, MathF.Min(
+            grenade.Comp.MinProjectileDamageMultiplier,
+            grenade.Comp.MaxProjectileDamageMultiplier));
+        var maxDamageMultiplier = MathF.Max(0, MathF.Max(
+            grenade.Comp.MinProjectileDamageMultiplier,
+            grenade.Comp.MaxProjectileDamageMultiplier));
+        var damageMultiplier = minDamageMultiplier;
+        if (minDamageMultiplier != maxDamageMultiplier)
+            damageMultiplier = _random.NextFloat(minDamageMultiplier, maxDamageMultiplier);
+        var damage = projectile.Damage * damageMultiplier;
+        _damage.TryChangeDamage(
+            target,
+            damage,
+            origin: attribute ? user : null,
+            tool: attribute ? payloadUid : null,
+            armorPiercing: armorPiercing);
+
+        if (attribute &&
+            TryComp(payloadUid, out RMCStaminaDamageOnCollideComponent? staminaDamage) &&
+            TryComp(target, out RMCStaminaComponent? stamina))
+        {
+            _stamina.DoStaminaDamage((target, stamina), staminaDamage.Damage);
+        }
+    }
+
+    private void IgnoreRemainingProjectiles(Entity<ProjectileGrenadeComponent> grenade, EntityUid target)
+    {
+        _hitEntities.Add(target);
+        if (!TryComp(target, out UserLimitHitsComponent? limit))
+            return;
+
+        limit.HitBy.Add(new Hit(grenade.Owner.Id, _timing.CurTime + limit.Expire, null));
+        Dirty(target, limit);
     }
 
     public override void Update(float frametime)
@@ -144,3 +269,17 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
 /// </summary>
 [ByRefEvent]
 public record struct FragmentIntoProjectilesEvent(EntityUid ContentUid, int TotalCount, Angle Angle, int ShootCount, List<EntityUid> HitEntities, bool Handled = false);
+
+/// <summary>
+///     Raised once before a projectile grenade starts firing its payload.
+/// </summary>
+[ByRefEvent]
+public record struct PrepareFragmentIntoProjectilesEvent(
+    EntityUid ContentUid,
+    int TotalCount,
+    MapCoordinates SpawnCoordinates,
+    EntityUid? User)
+{
+    public HashSet<int> ConsumedProjectileIndices = new();
+    public List<EntityUid> HitEntities = new();
+}
