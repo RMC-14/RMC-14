@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Drones, Hivelords and the Queen can now construct resin spikes, every
-      individual can have up to 15 built at once.
-    type: Add
-  id: 3069
-  time: '2026-04-06T03:27:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9396
 - author: Dutch-VanDerLinde
   changes:
   - message: Civilian survivors now have 17 new unique variants on some maps! Find
@@ -4554,5 +4546,12 @@
   id: 3568
   time: '2026-08-11T06:17:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10421
+- author: x5tink
+  changes:
+  - message: Watches now spawn directly, not in a box.
+    type: Tweak
+  id: 3569
+  time: '2026-08-11T07:30:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10235
 Name: RMC14
 Order: -1
