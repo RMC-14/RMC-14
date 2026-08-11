@@ -1,0 +1,84 @@
+- type: job
+  parent: RMCSurvivorSPPSOFBase
+  id: RMCSurvivorSPPSOFSynth
+  name: rmc-job-name-soro-sof-synth
+  startingGear: RMCGearSPPSOFSynth
+  ranks:
+    RMCRankSyntheticColonist: []
+  icon: "RMCJobIconSPPSynth"
+  spawnMenuRoleName: SPP SOF Synthetic (Sorokyne Special Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Language
+      preset: RMCLanguagePresetSynthColonist
+    - type: LanguageLearning
+      preset: RMCLanguageLearningPresetSynthColonist
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: RMCSurvivor
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: IntelRescueSurvivorObjective
+    - type: JobPrefix
+      prefix: rmc-job-prefix-soro-sof-synth
+    - type: AssignSquad
+      squad: SquadSPP
+    - type: MeleeWeapon
+      soundhit:
+        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
+        params:
+          variation: 0.15
+          volume: -1
+      angle: 30
+      animation: WeaponArcFist
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 35
+    - type: Synth
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearSPPSOFBase
+  id: RMCGearSPPSOFSynth
+  equipment:
+    belt: RMCBeltMedicBagSPP
+    outerClothing: RMCArmorSPPSOFSynth
+    head: RMCHeadCapSPPSOF
+    suitstorage: RMCFlashlight
+    pocket1: RMCPouchToolsSocFilledSPPSynthetic
+    pocket2: RMCPouchSurvivalSynthFill
+  storage:
+    back:
+    - RMCArmorHelmetSPPSOF
+    - CMSheetMetal20
+    - CMRollerBedSpawnFolded
+    - CMMultitool
+    - RMCCableCoil
+    - CMHealthAnalyzer
+    - RMCSynthResetKeyNovaris
+    belt:
+    - CMUpgradedTraumaKit10
+    - CMUpgradedTraumaKit10
+    - CMUpgradedBurnKit10
+    - CMUpgradedBurnKit10
+    # - RMCSplint
+    # - RMCHyposprayOxycodone
+    - CMPillCanisterBicaridine
+    - CMPillCanisterKelotane
+    - CMPillCanisterInaprovaline
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSPPSOFSynth
+  name: special survivor spp sof synth spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSPPSOFSynth
+  - type: Sprite
+    state: surv_spp
