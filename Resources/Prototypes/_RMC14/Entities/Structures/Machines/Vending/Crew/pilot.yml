@@ -4,7 +4,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechDropshipCrewEquipment
-  name: ASRS Dropship Crew Equipment Rack
+  name: ASRS dropship crew equipment rack
   description: An automated equipment vendor for Dropship Crew
   components:
   - type: AccessReader
@@ -226,7 +226,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechDropshipCrewWeapon
-  name: ASRS Dropship Crew Weapon Rack
+  name: ASRS dropship crew weapon rack
   description: An automated combat equipment vendor for Dropship Crew
   components:
   - type: AccessReader

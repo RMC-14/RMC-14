@@ -389,7 +389,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechMunitions
-  name: ASRS munition squad vendor
+  name: ASRS squad munitions vendor
   description: An automated supply rack hooked up to a small storage of various ammunition types. Can be accessed by any Marine Rifleman.
   components:
   - type: AccessReader
@@ -457,7 +457,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechUtilities
-  name: ASRS utilities squad vendor
+  name: ASRS squad utilities vendor
   description: An automated supply rack hooked up to a small storage of various utilities and tools. Can be accessed by any Marine Rifleman.
   components:
   - type: AccessReader
