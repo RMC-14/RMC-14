@@ -10,6 +10,13 @@ rmc-xeno-construction-remote-construct = We focus our plasma into the weeds belo
 rmc-xeno-construction-remote-open-door = We focus our connection to the resin and remotely open the resin door.
 rmc-xeno-construction-remote-close-door = We focus our connection to the resin and remotely close the resin door.
 
+rmc-xeno-remote-structure-removal-title = Remote Structure Removal
+rmc-xeno-remote-structure-removal-start-confirm = Do you want to start removing {$structure}?
+rmc-xeno-remote-structure-removal-cancel-confirm = Do you want to cancel the removal of {$structure}?
+rmc-xeno-remote-structure-removal-started = You start remotely removing {$structure}.
+rmc-xeno-remote-structure-removal-cancelled = You cancel the remote removal of {$structure}.
+rmc-xeno-remote-structure-removal-state-changed = That structure's removal state has changed. Please try again.
+
 rmc-xeno-construction-no-map = The ground isn't solid.
 rmc-xeno-construction-no-map-resin-hole = The ground isn't solid
 rmc-xeno-construction-must-have-weeds-resin-hole = Resin holes must be built on weeds.

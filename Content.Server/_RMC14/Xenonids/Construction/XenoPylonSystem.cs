@@ -2,7 +2,6 @@ using Content.Server._RMC14.Damage;
 using Content.Server.GameTicking;
 using Content.Server.Ghost.Roles;
 using Content.Server.Ghost.Roles.Events;
-using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Egg;
@@ -21,6 +20,7 @@ using Robust.Shared.Utility;
 using Content.Shared.StepTrigger.Systems;
 using Content.Shared.Tag;
 using Content.Shared.IdentityManagement;
+using Robust.Shared.Spawners;
 
 namespace Content.Server._RMC14.Xenonids.Construction;
 
@@ -43,6 +43,7 @@ public sealed class XenoPylonSystem : SharedXenoPylonSystem
         base.Initialize();
 
         SubscribeLocalEvent<HiveCoreComponent, DestructionEventArgs>(OnHiveCoreDestruction);
+        SubscribeLocalEvent<HiveCoreComponent, TimedDespawnEvent>(OnHiveCoreDestruction);
 
         SubscribeLocalEvent<XenoComponent, GhostRoleSpawnerUsedEvent>(OnXenoSpawnerUsed);
 
@@ -53,7 +54,7 @@ public sealed class XenoPylonSystem : SharedXenoPylonSystem
         SubscribeLocalEvent<HiveCoreComponent, StepTriggeredOffEvent>(OnHiveCoreStepTriggered);
     }
 
-    private void OnHiveCoreDestruction(Entity<HiveCoreComponent> ent, ref DestructionEventArgs args)
+    private void OnHiveCoreDestruction<T>(Entity<HiveCoreComponent> ent, ref T args)
     {
         if (_hive.GetHive(ent.Owner) is {} hive &&
             _gameTicker.RoundDuration() > hive.Comp.PreSetupCutoff)

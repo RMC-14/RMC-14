@@ -107,6 +107,11 @@
   - type: HiveConstructionRequiresSpace
   - type: HiveConstructionLimited
     id: HiveEggMorpherXeno
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: morpher
+    opacity: 0.4
   - type: WarpPoint
     location: egg morpher
   - type: RMCAlternateSprite
