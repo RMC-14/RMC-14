@@ -3,7 +3,7 @@
 - type: entity
   abstract: true
   id: ColMarTechBase
-  name: ASRS vendor
+  name: vendor
   placement:
     mode: SnapgridCenter
   components:

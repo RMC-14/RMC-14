@@ -3,7 +3,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechSLGear
-  name: ASRS squad leader gear rack
+  name: squad leader gear rack
   description: An automated gear rack for Squad Leaders.
   components:
   - type: AccessReader
@@ -216,7 +216,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechSLEquipment
-  name: ASRS squad leader equipment rack
+  name: squad leader equipment rack
   description: An automated rack hooked up to a colossal storage of Squad Leader standard-issue equipment.
   components:
   - type: AccessReader
