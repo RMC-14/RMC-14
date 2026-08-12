@@ -100,6 +100,7 @@ public sealed partial class AccessibilityTab
             _cfg.SetCVar(RMCCVars.RMCAnnouncementLayout, string.Empty);
             _cfg.SetCVar(RMCCVars.RMCAnnouncementLayoutOverrides, string.Empty);
             UpdateAnnouncementLayoutSummary();
+            _cfg.SaveToFile();
         };
 
         _cfg.OnValueChanged(RMCCVars.RMCAnnouncementLayout, _ => UpdateAnnouncementLayoutSummary(), true);

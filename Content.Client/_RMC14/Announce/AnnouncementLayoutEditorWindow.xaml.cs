@@ -68,6 +68,7 @@ public sealed partial class AnnouncementLayoutEditorWindow : DefaultWindow
         {
             ResetEditedLayout();
             RefreshPreview();
+            _cfg.SaveToFile();
         };
 
         ResetAllButton.OnPressed += _ =>
@@ -75,6 +76,7 @@ public sealed partial class AnnouncementLayoutEditorWindow : DefaultWindow
             _cfg.SetCVar(RMCCVars.RMCAnnouncementLayout, string.Empty);
             _cfg.SetCVar(RMCCVars.RMCAnnouncementLayoutOverrides, string.Empty);
             RefreshPreview();
+            _cfg.SaveToFile();
         };
 
         OnClose += () =>
@@ -82,6 +84,7 @@ public sealed partial class AnnouncementLayoutEditorWindow : DefaultWindow
             _layoutController.HidePreview();
             _layoutController.PreviewPositionChanged -= OnControllerPreviewPositionChanged;
             _layoutController.PreviewScaleChanged -= OnControllerPreviewScaleChanged;
+            _cfg.SaveToFile();
         };
 
         _layoutController.PreviewPositionChanged += OnControllerPreviewPositionChanged;
