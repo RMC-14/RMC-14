@@ -34,8 +34,9 @@ internal sealed class RMCGhostTargetRequestState
         return true;
     }
 
-    public void CancelQueued()
+    public void Reset()
     {
+        _pendingRequestId = null;
         _refreshQueued = false;
     }
 }

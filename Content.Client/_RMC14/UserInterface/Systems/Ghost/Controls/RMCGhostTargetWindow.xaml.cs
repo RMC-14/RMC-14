@@ -76,6 +76,7 @@ public sealed partial class RMCGhostTargetWindow : DefaultWindow
 
     public void ClearContent()
     {
+        SearchBar.SetText(string.Empty, true);
         _ghostnadoHovered = false;
         _ghostnadoPressed = false;
         _targets.Clear();
