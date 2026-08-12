@@ -90,10 +90,10 @@ public sealed class AnnouncementControllerSystem : EntitySystem
         }
     }
 
-    private void OnAnnouncementDone(NetEntity? speaker)
+    private void OnAnnouncementDone(uint overrideId)
     {
-        if (speaker.HasValue && _net.IsConnected)
-            RaiseNetworkEvent(new AnnouncementPlaybackDoneMsg(speaker.Value));
+        if (overrideId != 0 && _net.IsConnected)
+            RaiseNetworkEvent(new AnnouncementPlaybackDoneMsg(overrideId));
     }
 
     private void OnPreferenceChanged(AnnouncementDisplayPreference preference)

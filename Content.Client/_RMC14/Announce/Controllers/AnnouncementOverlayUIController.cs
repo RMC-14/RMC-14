@@ -57,11 +57,11 @@ public sealed class AnnouncementOverlayUIController : UIController, IOnStateEnte
         widget.ShowAnnouncement(announcement);
     }
 
-    public event Action<NetEntity?>? AnnouncementDone;
+    public event Action<uint>? AnnouncementDone;
 
-    private void OnAnnouncementFinished(NetEntity? speaker)
+    private void OnAnnouncementFinished(uint overrideId)
     {
-        AnnouncementDone?.Invoke(speaker);
+        AnnouncementDone?.Invoke(overrideId);
         TryShowNextQueuedAnnouncement();
     }
 

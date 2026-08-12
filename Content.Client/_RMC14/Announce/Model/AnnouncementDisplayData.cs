@@ -16,6 +16,7 @@ public sealed class AnnouncementDisplayData
     public AnnouncementPresentation Presentation { get; set; } = new();
     public NetEntity? SpeakerEntity { get; set; }
     public string? SpeakerName { get; set; }
+    public uint OverrideId { get; set; }
     public Vector2? ScreenPositionOverride { get; set; }
     public float LayoutScale { get; set; } = 1f;
     public bool? ShowTitleOverride { get; set; }

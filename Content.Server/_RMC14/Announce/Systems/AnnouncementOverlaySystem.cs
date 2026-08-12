@@ -1,10 +1,9 @@
-using System.Linq;
+using System.Collections.Generic;
 using Content.Server._RMC14.Announce.Core;
 using Content.Server.Administration.Logs;
 using Content.Shared._RMC14.Announce;
 using Content.Shared.Database;
 using Robust.Server.GameStates;
-using Robust.Shared.Enums;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -19,6 +18,9 @@ public sealed partial class AnnouncementOverlaySystem : EntitySystem
     [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
 
     private const float PvsFallbackTimeoutSeconds = 30f;
+    private uint _nextOverrideId = 1;
+    private readonly Dictionary<(EntityUid Speaker, ICommonSession Session), int> _overrideRefs = new();
+    private readonly Dictionary<uint, OverrideTracker> _pendingOverrides = new();
 
     public override void Initialize()
     {
@@ -28,11 +30,10 @@ public sealed partial class AnnouncementOverlaySystem : EntitySystem
 
     private void OnPlaybackDone(AnnouncementPlaybackDoneMsg msg, EntitySessionEventArgs args)
     {
-        if (_net.IsClient || !TryGetEntity(msg.Speaker, out var speaker))
+        if (_net.IsClient)
             return;
 
-        if (Exists(speaker))
-            _pvsOverride.RemoveSessionOverride(speaker.Value, args.SenderSession);
+        CompleteOverrideSession(msg.OverrideId, args.SenderSession);
     }
 
     internal void Dispatch(
@@ -45,10 +46,12 @@ public sealed partial class AnnouncementOverlaySystem : EntitySystem
 
         var lines = AnnouncementLineHelper.NormalizeAndSplit(request.Message);
         var speakerName = ResolveSpeakerName(request);
-        var clientData = BuildClientData(request, preset, lines, speakerName);
 
-        if (AnyPresentationShowsSprite(preset))
-            EnsureSpeakerPvs(request, filter);
+        var overrideId = AnyPresentationShowsSprite(preset)
+            ? EnsureSpeakerPvs(request, filter)
+            : 0u;
+
+        var clientData = BuildClientData(request, preset, lines, speakerName, overrideId);
 
         RaiseNetworkEvent(new AnnouncementNetMessage(clientData), filter);
         LogAnnouncement(preset.ID, lines, request.Route.Target, request.Route.Source, filter.Count);
@@ -58,7 +61,8 @@ public sealed partial class AnnouncementOverlaySystem : EntitySystem
         AnnouncementRequest request,
         AnnouncementPresetPrototype preset,
         string[] lines,
-        string? speakerName)
+        string? speakerName,
+        uint overrideId)
     {
         return new AnnouncementNetData
         {
@@ -68,34 +72,100 @@ public sealed partial class AnnouncementOverlaySystem : EntitySystem
             CanInterrupt = request.CanInterrupt ?? preset.CanInterrupt,
             CanBeInterrupted = request.CanBeInterrupted ?? preset.CanBeInterrupted,
             SpeakerEntity = GetNetEntity(request.Route.Speaker),
-            SpeakerName = speakerName
+            SpeakerName = speakerName,
+            OverrideId = overrideId
         };
     }
 
-    private void EnsureSpeakerPvs(AnnouncementRequest request, Filter filter)
+    private uint EnsureSpeakerPvs(AnnouncementRequest request, Filter filter)
     {
         if (!request.Route.Speaker.HasValue)
-            return;
+            return 0;
 
         var speaker = request.Route.Speaker.Value;
         if (!Exists(speaker))
-            return;
+            return 0;
 
-        _pvsOverride.AddSessionOverrides(speaker, filter);
+        var tracker = new OverrideTracker(speaker);
+        foreach (var session in filter.Recipients)
+        {
+            if (tracker.Sessions.Add(session))
+                AddOverrideRef(speaker, session);
+        }
 
-        var recipients = filter.Recipients.ToArray();
-        Timer.Spawn(TimeSpan.FromSeconds(PvsFallbackTimeoutSeconds), () => RemoveSpeakerOverrides(speaker, recipients));
+        if (tracker.Sessions.Count == 0)
+            return 0;
+
+        var overrideId = _nextOverrideId++;
+        _pendingOverrides[overrideId] = tracker;
+
+        Timer.Spawn(TimeSpan.FromSeconds(PvsFallbackTimeoutSeconds), () => CompleteOverride(overrideId));
+        return overrideId;
     }
 
-    private void RemoveSpeakerOverrides(EntityUid speaker, ICommonSession[] sessions)
+    private void AddOverrideRef(EntityUid speaker, ICommonSession session)
     {
-        if (!Exists(speaker))
+        var key = (speaker, session);
+        if (_overrideRefs.TryGetValue(key, out var count))
+        {
+            _overrideRefs[key] = count + 1;
+            return;
+        }
+
+        _overrideRefs[key] = 1;
+        _pvsOverride.AddSessionOverride(speaker, session);
+    }
+
+    private void ReleaseOverrideRef(EntityUid speaker, ICommonSession session)
+    {
+        var key = (speaker, session);
+        if (!_overrideRefs.TryGetValue(key, out var count))
             return;
 
-        foreach (var session in sessions)
+        if (count > 1)
         {
-            if (session.Status == SessionStatus.Connected)
-                _pvsOverride.RemoveSessionOverride(speaker, session);
+            _overrideRefs[key] = count - 1;
+            return;
+        }
+
+        _overrideRefs.Remove(key);
+        if (Exists(speaker))
+            _pvsOverride.RemoveSessionOverride(speaker, session);
+    }
+
+    private void CompleteOverrideSession(uint overrideId, ICommonSession session)
+    {
+        if (overrideId == 0 || !_pendingOverrides.TryGetValue(overrideId, out var tracker))
+            return;
+
+        if (!tracker.Sessions.Remove(session))
+            return;
+
+        ReleaseOverrideRef(tracker.Speaker, session);
+
+        if (tracker.Sessions.Count == 0)
+            _pendingOverrides.Remove(overrideId);
+    }
+
+    private void CompleteOverride(uint overrideId)
+    {
+        if (!_pendingOverrides.Remove(overrideId, out var tracker))
+            return;
+
+        foreach (var session in tracker.Sessions)
+        {
+            ReleaseOverrideRef(tracker.Speaker, session);
+        }
+    }
+
+    private sealed class OverrideTracker
+    {
+        public readonly EntityUid Speaker;
+        public readonly HashSet<ICommonSession> Sessions = new();
+
+        public OverrideTracker(EntityUid speaker)
+        {
+            Speaker = speaker;
         }
     }
 }

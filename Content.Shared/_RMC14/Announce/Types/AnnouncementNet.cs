@@ -15,6 +15,7 @@ public sealed class AnnouncementNetData
     public bool CanBeInterrupted { get; set; }
     public NetEntity? SpeakerEntity { get; set; }
     public string? SpeakerName { get; set; }
+    public uint OverrideId { get; set; }
 }
 
 [Serializable, NetSerializable]
@@ -31,11 +32,11 @@ public sealed class AnnouncementNetMessage : EntityEventArgs
 [Serializable, NetSerializable]
 public sealed class AnnouncementPlaybackDoneMsg : EntityEventArgs
 {
-    public NetEntity Speaker { get; }
+    public uint OverrideId { get; }
 
-    public AnnouncementPlaybackDoneMsg(NetEntity speaker)
+    public AnnouncementPlaybackDoneMsg(uint overrideId)
     {
-        Speaker = speaker;
+        OverrideId = overrideId;
     }
 }
 

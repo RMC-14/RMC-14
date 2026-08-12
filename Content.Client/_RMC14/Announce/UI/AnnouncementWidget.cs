@@ -26,7 +26,7 @@ public sealed partial class AnnouncementWidget : UIWidget
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
 
-    public event Action<NetEntity?>? OnAnnouncementFinished;
+    public event Action<uint>? OnAnnouncementFinished;
 
     public ActiveAnnouncement? ActiveAnnouncement { get; private set; }
     public bool PreviewMode { get; set; }
@@ -109,10 +109,10 @@ public sealed partial class AnnouncementWidget : UIWidget
 
     private void FinishAnnouncement()
     {
-        var speaker = ActiveAnnouncement?.Data.SpeakerEntity;
+        var overrideId = ActiveAnnouncement?.Data.OverrideId ?? 0;
         CleanupCurrentAnnouncement();
         Visible = false;
-        OnAnnouncementFinished?.Invoke(speaker);
+        OnAnnouncementFinished?.Invoke(overrideId);
     }
 
     private void CleanupCurrentAnnouncement()

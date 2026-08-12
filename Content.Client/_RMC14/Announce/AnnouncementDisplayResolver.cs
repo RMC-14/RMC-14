@@ -31,7 +31,8 @@ public static class AnnouncementDisplayResolver
             CanBeInterrupted = data.CanBeInterrupted,
             Presentation = presentation,
             SpeakerEntity = data.SpeakerEntity,
-            SpeakerName = data.SpeakerName
+            SpeakerName = data.SpeakerName,
+            OverrideId = data.OverrideId
         };
         return true;
     }
