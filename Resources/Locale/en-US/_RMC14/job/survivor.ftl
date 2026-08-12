@@ -205,7 +205,7 @@ rmc-job-name-survivor-heavy-vehicle-operator = Heavy Vehicle Operator
 
 rmc-job-greeting-para = You are a member of the RCM's 24th Paramarine Regiment!
 
-  Outpost Souter was your final posting before withdrawal. With Weston-Yamada buying out Hybrisa, the TSE began pulling its forces off-world. Your regiment was standing down, preparing to hand over control during the transition. Then the outbreak hit. You've spent the last weeks barely holding the outpost together, repelling wave after wave while sheltering what few survivors you could. Now, only your squad remains. The outpost is falling apart, the armoury's dry, and the dropship in the hangar still has no fuel. A distress signal was sent over a week ago. All you can do now is hold your ground — and pray someone answers.
+  Outpost Souter was your most recent posting. Although it was going to be purchased and turned into an office complex by Weston-Yamada, recent CLF activity prompted the TSE to renovate the base to prevent insurgent activity. Then the outbreak hit. You've spent the last weeks barely holding the outpost together, repelling wave after wave while sheltering what few survivors you could. Now, only your squad remains. The outpost is falling apart, the armoury's dry, and the dropship in the hangar still has no fuel. A distress signal was sent over a week ago. All you can do now is hold your ground — and pray someone answers.
 
   You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
 
