@@ -15,11 +15,11 @@ cl-briefing-kutjevo =
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
     LV-686, also known as Dykuma I, is a relatively large desert world known for rock outcroppings and mountainous terrain. Although it was initially believed to pose a valid target for terraforming efforts, the discovery of highly-pure aquifiers lead to the planet being deemed a high-value site.
 
-    Multiple Corporations would begin to bid for ownership of the region, with Weston-Yamada gaining the rights to establish multiple bottling plants, with Kutjevo Refinery, official referred to as [italic]Weston Spring Bottling Center No. 8[/italic], being one among many.
+    Multiple Corporations would begin to bid for ownership of the region. Weston-Yamada would outbid their competitors, gaining the rights to establish multiple bottling plants, with Kutjevo Refinery, official referred to as [italic]Weston Spring Bottling Center No. 8[/italic], being one among many.
 
     Kutjevo Refinery itself has become one of the foremost sites for water refinement and exportation. Located east of a sizable United Nations colony, it produces over 1.6 Million gallons of water per day, which is bottled under the [italic]Weston Spring[/italic] brand.
 
-    Due to concerns over the aquafiers across Dykuma eventually drying up, Kutjevo Refinery has invested in botanical research and exportation. Due to the environment of Dykuma I, crop yields remain minimal, although there are hopes that continued research will lead to increased growth.
+    Due to concerns over the aquafiers across Dykuma eventually drying up, Kutjevo Refinery has invested in botanical research and exportation. Dykuma I's harsh environs has led to minimal crop yields, although there are hopes that continued research will lead to increased growth.
 
     Internally, Weston-Yamada remains split on what will happen to Dykuma I if the aquifiers cease to produce water, with ideas such as research facilities, mining operations, terraforming, and manufacturing being proposed.
 
