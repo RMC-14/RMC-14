@@ -19,7 +19,7 @@
 - type: entity
   parent: ColMarTechCargo
   id: ColMarTechCargoGuns
-  name: automated armament vendor
+  name: ASRS automated armaments vendor
   description: An automated supply rack hooked up to a big storage of various firearms, explosives, load carrying equipment, and other miscellaneous items. Can be accessed by the Logistics Officer and Requisitions Technicians.
   components:
   - type: Sprite
@@ -371,7 +371,7 @@
 - type: entity
   parent: ColMarTechCargo
   id: ColMarTechCargoAmmo
-  name: surplus munitions vendor
+  name: ASRS surplus munition vendor
   description: An automated supply rack hooked up to a big storage of various ammunition types. Can be accessed by the Logistics Officer and Requisitions Technicians.
   components:
   - type: Sprite
@@ -639,7 +639,7 @@
 - type: entity
   parent: ColMarTechCargo
   id: ColMarTechCargoAttachments
-  name: surplus attachments vendor
+  name: ASRS surplus attachments vendor
   description: An automated supply rack hooked up to a big storage of weapons attachments. Can be accessed by the Logistics Officer and Requisitions Technicians.
   components:
   - type: Sprite
@@ -748,7 +748,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCargoUniform
-  name: surplus uniform vendor
+  name: ASRS surplus uniform vendor
   description: An automated supply rack hooked up to a big storage of standard marine uniforms. Can be accessed by the Logistics Officer and Requisitions Technicians.
   suffix: Requisitions
   components:
