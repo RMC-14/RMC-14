@@ -85,7 +85,7 @@
   texturePath: /Textures/Effects/fire.rsi
   fireColor: Transparent
   sound:
-    collection: CMExplosion # TODO RMC14 bigboom
+    collection: CMExplosion
     params:
       volume: -3
   smallSound:
