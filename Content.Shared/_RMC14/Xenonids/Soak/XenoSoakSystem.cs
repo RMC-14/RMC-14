@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Stab;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -46,7 +47,19 @@ public sealed class XenoSoakSystem : EntitySystem
         soak.DamageAccumulated = 0;
         Dirty(xeno.Owner, soak);
 
-        _popup.PopupPredicted(Loc.GetString("rmc-xeno-soak-self"), Loc.GetString("rmc-xeno-soak-others", ("xeno", xeno)), xeno, xeno, PopupType.MediumCaution);
+        var selfMessage = Loc.GetString("rmc-xeno-soak-self");
+        _popup.PopupClient(selfMessage, xeno, xeno, PopupType.MediumCaution);
+
+        var others = Filter.PvsExcept(xeno).Recipients;
+        foreach (var other in others)
+        {
+            if (other.AttachedEntity is not { } otherEnt)
+            continue;
+
+            var otherMessage = Loc.GetString("rmc-xeno-soak-others", ("xeno", Identity.Name(xeno, EntityManager, otherEnt)));
+            _popup.PopupEntity(otherMessage, xeno, otherEnt, PopupType.MediumCaution);
+        }
+
         _aura.GiveAura(xeno, soak.SoakColor, xeno.Comp.Duration);
     }
 
@@ -73,8 +86,19 @@ public sealed class XenoSoakSystem : EntitySystem
 
         if (_net.IsServer)
         {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-soak-end-self"), xeno, xeno, PopupType.MediumCaution);
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-soak-end-others", ("xeno", xeno)), xeno, Filter.PvsExcept(xeno), true, PopupType.MediumCaution);
+            var selfMessage = Loc.GetString("rmc-xeno-soak-end-self");
+            _popup.PopupClient(selfMessage, xeno, xeno, PopupType.MediumCaution);
+
+            var others = Filter.PvsExcept(xeno).Recipients;
+            foreach (var other in others)
+            {
+                if (other.AttachedEntity is not { } otherEnt)
+                continue;
+
+                var otherMessage = Loc.GetString("rmc-xeno-soak-end-others", ("xeno", Identity.Name(xeno, EntityManager, otherEnt)));
+                _popup.PopupEntity(otherMessage, xeno, otherEnt, PopupType.MediumCaution);
+            }
+
         }
     }
 

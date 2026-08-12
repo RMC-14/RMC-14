@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
 using Content.Shared.Coordinates;
 using Content.Shared.Explosion;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -49,8 +50,18 @@ public sealed partial class CrusherShieldSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        _popup.PopupEntity(Loc.GetString("rmc-xeno-defensive-shield-activate", ("user", xeno)), xeno, Filter.PvsExcept(xeno), true, PopupType.MediumCaution);
-        _popup.PopupEntity(Loc.GetString("rmc-xeno-defensive-shield-activate-self", ("user", xeno)), xeno, xeno, PopupType.Medium);
+        var selfMessage = Loc.GetString("rmc-xeno-defensive-shield-activate-self");
+        _popup.PopupClient(selfMessage, xeno, xeno, PopupType.Medium);
+
+        var others = Filter.PvsExcept(xeno).Recipients;
+        foreach (var other in others)
+        {
+            if (other.AttachedEntity is not { } otherEnt)
+                continue;
+
+            var otherMessage = Loc.GetString("rmc-xeno-defensive-shield-activate", ("user", Identity.Name(xeno, EntityManager, otherEnt)));
+            _popup.PopupEntity(otherMessage, xeno, otherEnt, PopupType.MediumCaution);
+        }
         SpawnAttachedTo(xeno.Comp.Effect, xeno.Owner.ToCoordinates());
         foreach (var action in _rmcActions.GetActionsWithEvent<XenoDefensiveShieldActionEvent>(xeno))
         {
