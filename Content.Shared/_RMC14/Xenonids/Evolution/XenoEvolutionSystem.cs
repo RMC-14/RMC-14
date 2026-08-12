@@ -643,17 +643,12 @@ public sealed class XenoEvolutionSystem : EntitySystem
         }
 
         var cand = EnsureComp<XenoRaffleCandidateComponent>(xeno);
-        RestoreLeapfrogMax(xeno, cand);
         cand.Target = target;
         cand.Tier = targetXeno.Tier;
         cand.Leapfrog = leapfrog;
 
-        if (leapfrog)
-        {
-            cand.OriginalMax = xeno.Comp.Max;
-            xeno.Comp.Max = ComputeLeapfrogCost(xeno, target);
-            Dirty(xeno.Owner, xeno.Comp);
-        }
+        cand.RaffleProgress = FixedPoint2.Zero;
+        cand.RaffleCost = leapfrog ? ComputeLeapfrogCost(xeno, target) : FixedPoint2.Zero;
 
         Dirty(xeno, cand);
 
@@ -691,26 +686,11 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
     private void LeaveRaffle(EntityUid xeno)
     {
-        if (!TryComp(xeno, out XenoRaffleCandidateComponent? cand))
+        if (!RemComp<XenoRaffleCandidateComponent>(xeno))
             return;
-
-        if (TryComp(xeno, out XenoEvolutionComponent? evo))
-            RestoreLeapfrogMax((xeno, evo), cand);
-
-        RemComp<XenoRaffleCandidateComponent>(xeno);
 
         if (_xenoHive.GetHive(xeno) is { } hive)
             RefreshRaffleUi(hive);
-    }
-
-    private void RestoreLeapfrogMax(Entity<XenoEvolutionComponent> xeno, XenoRaffleCandidateComponent cand)
-    {
-        if (cand.OriginalMax is not { } original)
-            return;
-
-        xeno.Comp.Max = original;
-        cand.OriginalMax = null;
-        Dirty(xeno.Owner, xeno.Comp);
     }
 
     private FixedPoint2 ComputeLeapfrogCost(Entity<XenoEvolutionComponent> xeno, EntProtoId target)
@@ -822,6 +802,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
             NotifyLeapfrogBlocked(cand, blockedTier);
             return ClearGraceIfHeld(cand);
         }
+
+        if (cand.Comp.Leapfrog && cand.Comp.RaffleProgress < cand.Comp.RaffleCost)
+            return ClearGraceIfHeld(cand);
 
         if (GetUnmetGraceRequirement((cand.Owner, evo)) is { } reason)
         {
@@ -1295,6 +1278,16 @@ public sealed class XenoEvolutionSystem : EntitySystem
             }
             var points = (_earlyEvoBoostBefore > _gameTicker.RoundDuration()) ? comp.EarlyPointsPerSecond : comp.PointsPerSecond;
             var gain = evoOverride ?? points + evoBonus;
+
+            if (TryComp(uid, out XenoRaffleCandidateComponent? raffleCand) &&
+                raffleCand.Leapfrog &&
+                raffleCand.RaffleProgress < raffleCand.RaffleCost &&
+                (!needsOvipositor || !comp.RequiresGranter || hasGranter))
+            {
+                raffleCand.RaffleProgress = FixedPoint2.Min(raffleCand.RaffleCost, raffleCand.RaffleProgress + gain);
+                Dirty(uid, raffleCand);
+            }
+
             if (comp.Points < comp.Max || roundDuration < _evolutionAccumulatePointsBefore)
             {
                 if (needsOvipositor && comp.RequiresGranter && !hasGranter)

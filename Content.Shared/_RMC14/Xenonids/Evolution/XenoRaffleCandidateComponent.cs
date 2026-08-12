@@ -28,5 +28,8 @@ public sealed partial class XenoRaffleCandidateComponent : Component
     public bool Evolving;
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2? OriginalMax;
+    public FixedPoint2 RaffleCost;
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 RaffleProgress;
 }
