@@ -22,6 +22,7 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
@@ -59,6 +60,8 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
         SubscribeLocalEvent<RMCExplosiveDeleteComponent, CMExplosiveTriggeredEvent>(OnDeleteWallsTriggered);
 
         SubscribeLocalEvent<ExplosionRandomResistanceComponent, GetExplosionResistanceEvent>(OnExplosionRandomResistanceGet);
+
+        SubscribeLocalEvent<RMCExplosionResistanceWhenNotCollidableComponent, GetExplosionResistanceEvent>(OnExplosionResistanceWhenNotCollidableGet);
 
         SubscribeLocalEvent<StunOnExplosionReceivedComponent, ExplosionReceivedEvent>(OnStunOnExplosionReceivedBeforeExplode);
 
@@ -98,6 +101,20 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
         // this only gets used on the server so randomness isn't an issue for prediction
         var resistance = _random.NextFloat(ent.Comp.Min.Float(), ent.Comp.Max.Float());
         args.DamageCoefficient *= resistance;
+    }
+
+    private void OnExplosionResistanceWhenNotCollidableGet(
+        Entity<RMCExplosionResistanceWhenNotCollidableComponent> ent,
+        ref GetExplosionResistanceEvent args)
+    {
+        if (!TryComp(ent, out PhysicsComponent? physics) ||
+            physics.CanCollide ||
+            !ent.Comp.Modifiers.TryGetValue(args.ExplosionPrototype, out var modifier))
+        {
+            return;
+        }
+
+        args.DamageCoefficient *= modifier;
     }
 
     public void ChangeExplosionStunResistance(EntityUid ent, StunOnExplosionReceivedComponent? comp, bool isStunnable)

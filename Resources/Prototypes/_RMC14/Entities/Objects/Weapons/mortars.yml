@@ -143,6 +143,43 @@
 
 - type: entity
   parent: RMCMortarShellBase
+  id: RMCMortarShellFrag
+  name: 80mm fragmentation mortar shell
+  description: An 80mm mortar shell, loaded with a fragmentation charge.
+  components:
+  - type: Item
+    heldPrefix: frag
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/mortar.rsi
+    state: mortar_ammo_frag
+  - type: Explosive
+    explosionType: RMCMortarFrag
+    maxIntensity: 4.8 # max 30 brute, 30 burn
+    intensitySlope: 1.6
+    totalIntensity: 96
+    maxTileBreak: 1
+    canCreateVacuum: false
+  - type: ProjectileGrenade
+    fillPrototype: RMCMortarShellFragShrapnel
+    capacity: 60
+    spreadAngle: 360
+    minVelocity: 0
+    maxVelocity: 0
+    projectileSpeed: 20
+    directHit: true
+    directHitChance: 0.15
+    triggerUserIsShooter: true
+    minProjectileDamageMultiplier: 1.06
+    maxProjectileDamageMultiplier: 1.13
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+  - type: CMExplosionEffect
+  - type: RMCScorchEffect
+  - type: MortarShell
+
+- type: entity
+  parent: RMCMortarShellBase
   id: RMCMortarShellIncendiary
   name: 80mm incendiary mortar shell
   description: An 80mm mortar shell, loaded with a Type B napalm charge. Perfect for long-range area denial.

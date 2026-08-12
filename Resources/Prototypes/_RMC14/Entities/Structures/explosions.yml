@@ -42,6 +42,41 @@
 
 - type: entity
   parent: MarkerBase
+  id: RMCMortarExplosionFrag
+  name: fragmentation mortar explosion
+  suffix: Fires a mortar shell!
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Explosive
+    explosionType: RMCMortarFrag
+    maxIntensity: 4.8 # max 30 brute, 30 burn
+    intensitySlope: 1.6
+    totalIntensity: 96
+    maxTileBreak: 1
+    canCreateVacuum: false
+  - type: ProjectileGrenade
+    fillPrototype: RMCMortarShellFragShrapnel
+    capacity: 60
+    spreadAngle: 360
+    minVelocity: 0
+    maxVelocity: 0
+    projectileSpeed: 20
+    directHit: true
+    directHitChance: 0.15
+    triggerUserIsShooter: true
+    minProjectileDamageMultiplier: 1.06
+    maxProjectileDamageMultiplier: 1.13
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+  - type: CMExplosionEffect
+  - type: RMCScorchEffect
+  - type: MortarShell
+  - type: ActivateMortarShellOnSpawn
+
+- type: entity
+  parent: MarkerBase
   id: RMCMortarExplosionFlare
   name: mortar flare/camera
   suffix: Fires a mortar shell!

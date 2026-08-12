@@ -127,6 +127,10 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
         if (!TryComp(payloadUid, out ProjectileComponent? projectile))
             return;
 
+        var armorPiercing = 0;
+        if (TryComp(payloadUid, out CMArmorPiercingComponent? armorPiercingComp))
+            armorPiercing = armorPiercingComp.Amount;
+
         var nearbyEntities = _entityLookup.GetEntitiesInRange<MobStateComponent>(spawnCoordinates, MathF.Sqrt(0.5f));
 
         EntityUid? standingTarget = null;
@@ -152,23 +156,18 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
         if (standingTarget is { } fragmentationSource)
             IgnoreRemainingProjectiles(ent, fragmentationSource);
 
-        if (standingTarget == null && downedTarget == null)
+        var directHitTarget = standingTarget ?? downedTarget;
+        if (directHitTarget == null)
             return;
 
         directHitChance = Math.Clamp(directHitChance, 0, 1);
         for (var i = 0; i < projectileCount; i++)
         {
-            EntityUid? target = null;
-            if (standingTarget != null && _random.Prob(directHitChance))
-                target = standingTarget;
-            else if (downedTarget != null && _random.Prob(directHitChance))
-                target = downedTarget;
-
-            if (target == null)
+            if (!_random.Prob(directHitChance))
                 continue;
 
             consumedProjectileIndices.Add(i);
-            ApplyDirectHit(ent, target.Value, payloadUid, projectile, user, true);
+            ApplyDirectHit(ent, directHitTarget.Value, payloadUid, projectile, user, true, armorPiercing);
         }
     }
 
@@ -229,12 +228,15 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
         if (minDamageMultiplier != maxDamageMultiplier)
             damageMultiplier = _random.NextFloat(minDamageMultiplier, maxDamageMultiplier);
         var damage = projectile.Damage * damageMultiplier;
+        // CMArmorSystem also reads armor piercing from an attributed projectile tool. Keep the
+        // explicit value for legacy direct hits, which do not provide the tool. RMC14
+        var explicitArmorPiercing = attribute ? 0 : armorPiercing;
         _damage.TryChangeDamage(
             target,
             damage,
             origin: attribute ? user : null,
             tool: attribute ? payloadUid : null,
-            armorPiercing: armorPiercing);
+            armorPiercing: explicitArmorPiercing);
 
         if (attribute &&
             TryComp(payloadUid, out RMCStaminaDamageOnCollideComponent? staminaDamage) &&

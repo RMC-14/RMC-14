@@ -137,7 +137,13 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
 
     private void OnGetResistance(EntityUid uid, ExplosionResistanceComponent component, ref GetExplosionResistanceEvent args)
     {
-        args.DamageCoefficient *= component.DamageCoefficient;
+        // RMC14
+        var damageCoefficient = component.DamageCoefficient;
+        if (component.DamageCoefficientOverrides.TryGetValue(args.ExplosionPrototype, out var damageCoefficientOverride))
+            damageCoefficient = damageCoefficientOverride;
+
+        args.DamageCoefficient *= damageCoefficient;
+        // RMC14
         if (component.Modifiers.TryGetValue(args.ExplosionPrototype, out var modifier))
             args.DamageCoefficient *= modifier;
     }
@@ -273,7 +279,7 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
             canCreateVacuum,
             addLog: false,
             throwDirection: throwDirection,
-            user: throwDirection is { } direction && !direction.IsLengthZero() ? user : null,
+            user: user, // RMC14
             proneDamageMultiplier: proneDamageMultiplier); // RMC14
 
         if (!addLog)
@@ -334,8 +340,13 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
             // try to combine explosions on the same tile if they are the same type
             foreach (var queued in _queuedExplosions)
             {
+                // Preserve attribution without changing how anonymous explosions are combined. RMC14
+                var attributionDiffers = (queued.User != null || user != null) &&
+                    (queued.Cause != cause || queued.User != user);
+
                 // ignore different types, directional explosions, or those on different maps
                 if (queued.ThrowDirection != null ||
+                    attributionDiffers ||
                     queued.ProneDamageMultiplier != proneDamageMultiplier ||
                     queued.Proto.ID != type.ID ||
                     queued.Epicenter.MapId != epicenter.MapId)

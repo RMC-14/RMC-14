@@ -19,6 +19,7 @@
         - Impassable
         - BulletImpassable
         - LowImpassable
+        - BarricadeImpassable
       fly-by:
         shape: !type:PhysShapeCircle
           radius: 1.5
@@ -56,7 +57,20 @@
     max: 8
   - type: RMCProjectileAccuracy
     accuracy: 125
-  - type: RMCProjectileIgnoreDowned
+
+- type: entity
+  parent: CMProjectileShrapnel
+  id: RMCMortarShellFragShrapnel
+  name: fragmentation mortar shell shrapnel
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ProjectileMaxRange
+    max: 8
+  - type: DamageMultipliers
+    multipliers:
+      Turf: 5
+      Breaching: 10.8
+      Pylon: 5
 
 - type: entity
   parent: CMProjectileShrapnel
@@ -73,4 +87,3 @@
     amount: 0
   - type: ProjectileMaxRange
     max: 8
-  - type: RMCProjectileIgnoreDowned
