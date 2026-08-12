@@ -11,5 +11,4 @@ public readonly record struct ExplosionReceivedEvent(
     ProtoId<ExplosionPrototype> Explosion,
     MapCoordinates Epicenter,
     DamageSpecifier Damage,
-    Vector2? ThrowDirection = null,
-    bool ProneDamageAdjusted = false);
+    Vector2? ThrowDirection = null);

@@ -16,7 +16,6 @@ using Content.Shared.Explosion.EntitySystems;
 using Content.Shared.GameTicking;
 using Content.Shared.Inventory;
 using Content.Shared.Projectiles;
-using Content.Shared.Standing;
 using Content.Shared.Throwing;
 using Robust.Server.GameObjects;
 using Robust.Server.GameStates;
@@ -53,7 +52,6 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
 
     private EntityQuery<FlammableComponent> _flammableQuery;
     private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -183,8 +181,7 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
             explosive.MaxTileBreak,
             explosive.CanCreateVacuum,
             user,
-            throwDirection: throwDirection,
-            proneDamageMultiplier: explosive.ProneDamageMultiplier); // RMC14
+            throwDirection: throwDirection); // RMC14
 
         var ev = new CMExplosiveTriggeredEvent();
         RaiseLocalEvent(uid, ref ev);
@@ -258,8 +255,7 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
         bool canCreateVacuum = true,
         EntityUid? user = null,
         bool addLog = true,
-        Vector2? throwDirection = null,
-        float proneDamageMultiplier = 1f)
+        Vector2? throwDirection = null)
     {
         var pos = Transform(uid);
 
@@ -279,8 +275,7 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
             canCreateVacuum,
             addLog: false,
             throwDirection: throwDirection,
-            user: user, // RMC14
-            proneDamageMultiplier: proneDamageMultiplier); // RMC14
+            user: user); // RMC14
 
         if (!addLog)
             return;
@@ -315,8 +310,7 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
         bool canCreateVacuum = true,
         bool addLog = true,
         Vector2? throwDirection = null,
-        EntityUid? user = null,
-        float proneDamageMultiplier = 1f)
+        EntityUid? user = null)
     {
         if (totalIntensity <= 0 || slope <= 0)
             return;
@@ -347,7 +341,6 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
                 // ignore different types, directional explosions, or those on different maps
                 if (queued.ThrowDirection != null ||
                     attributionDiffers ||
-                    queued.ProneDamageMultiplier != proneDamageMultiplier ||
                     queued.Proto.ID != type.ID ||
                     queued.Epicenter.MapId != epicenter.MapId)
                 {
@@ -376,8 +369,7 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
             CanCreateVacuum = canCreateVacuum,
             Cause = cause,
             ThrowDirection = normalizedThrowDirection,
-            User = user,
-            ProneDamageMultiplier = MathF.Max(proneDamageMultiplier, 0) // RMC14
+            User = user
         };
         _explosionQueue.Enqueue(boom);
         _queuedExplosions.Add(boom);
@@ -455,7 +447,6 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
             queued.Cause,
             queued.ThrowDirection,
             queued.User,
-            queued.ProneDamageMultiplier,
             _map);
     }
 

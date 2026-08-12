@@ -30,7 +30,6 @@
     maxIntensity: 6
     maxTileBreak: 1
     canCreateVacuum: false
-    proneDamageMultiplier: 0.5
   - type: RMCBreachingCharge
   - type: ProjectileGrenade
     fillPrototype: RMCBreachingChargeShrapnel
@@ -113,7 +112,6 @@
     intensitySlope: 6
     maxIntensity: 20
     maxTileBreak: 2147483647
-    proneDamageMultiplier: 1
   - type: ExplodeOnTrigger
   - type: RemoveComponents
     components:

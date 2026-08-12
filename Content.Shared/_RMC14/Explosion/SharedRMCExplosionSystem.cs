@@ -132,7 +132,7 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
         factor = Math.Min(20, factor);
 
         // TODO RMC14 don't reduce if explosion is on same tile
-        if (_standing.IsDown(ent) && !args.ProneDamageAdjusted)
+        if (_standing.IsDown(ent))
             factor *= 0.5;
 
         _sizeStun.TryGetSize(ent, out var size);
