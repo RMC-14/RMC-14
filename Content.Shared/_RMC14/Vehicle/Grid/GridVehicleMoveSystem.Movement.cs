@@ -154,6 +154,14 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
                 mover.CurrentSpeed *= MathF.Pow(mover.WeedsSpeedFactor, frameTime);
         }
 
+        var waterCoords = Transform(uid).Coordinates;
+        if (_rmcMap.HasAnchoredEntityEnumerator<VehicleWaterSlowTileComponent>(waterCoords, out var waterTile) &&
+            waterTile.Comp.SpeedFactors.TryGetValue(mover.WeightClass, out var waterFactor) &&
+            waterFactor < 1f)
+        {
+            mover.CurrentSpeed *= MathF.Pow(waterFactor, frameTime);
+        }
+
         var hasInput = inputDir != Vector2i.Zero;
         var facing = mover.CurrentDirection;
         var hadFacing = facing != Vector2i.Zero;
