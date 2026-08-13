@@ -115,6 +115,9 @@ public sealed partial class CMDistressSignalRuleSystem
         if (!IsJobAllowed(id, comp.CivilianSurvivorJob) || !IsJobAllowed(id, job))
             return;
 
+        if (IsActiveSurvivorRollDisabledForPlayer(id))
+            return;
+
         if (comp.SurvivorJobOverrides != null)
         {
             foreach (var (originalJob, overrideJob) in comp.SurvivorJobOverrides)
@@ -142,6 +145,40 @@ public sealed partial class CMDistressSignalRuleSystem
         {
             players[(int)prio].Add(id);
         }
+    }
+
+    private bool IsActiveSurvivorRollDisabledForPlayer(NetUserId id)
+    {
+        var scenario = ActiveNightmareScenario;
+        var isRegular = string.IsNullOrWhiteSpace(scenario) ||
+                        scenario.Equals("none", StringComparison.OrdinalIgnoreCase);
+
+        string key;
+        if (isRegular)
+        {
+            if (SelectedPlanetMapId is not { } mapId)
+                return false;
+
+            key = HumanoidCharacterProfile.GetSurvivorBaseScenarioKey(mapId.Id);
+        }
+        else
+        {
+            key = scenario!;
+        }
+
+        if (!_prefsManager.TryGetCachedPreferences(id, out var preferences))
+            return false;
+
+        foreach (var character in preferences.Characters.Values)
+        {
+            if (character is HumanoidCharacterProfile humanoid &&
+                humanoid.DisabledSurvivorInserts.Contains(key))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private bool TryGetSurvivorPriority(
@@ -395,7 +432,7 @@ public sealed partial class CMDistressSignalRuleSystem
         RulePlayerSpawningEvent ev)
     {
         if (_prefsManager.TryGetCachedPreferences(playerId, out var preferences))
-            return preferences.SelectProfileForJob(job, SelectedPlanetMapId) != null;
+            return preferences.SelectProfileForJob(job) != null;
 
         return ev.Profiles.TryGetValue(playerId, out var profile) &&
                profile.JobPreferences.Contains(job);
@@ -406,7 +443,7 @@ public sealed partial class CMDistressSignalRuleSystem
         ProtoId<JobPrototype> job,
         CMDistressSignalRuleComponent comp)
     {
-        if (preferences.SelectProfileForJob(job, SelectedPlanetMapId) != null)
+        if (preferences.SelectProfileForJob(job) != null)
             return true;
 
         if (comp.SurvivorJobVariants != null &&
@@ -414,7 +451,7 @@ public sealed partial class CMDistressSignalRuleSystem
         {
             foreach (var (variant, _) in variants)
             {
-                if (preferences.SelectProfileForJob(variant, SelectedPlanetMapId) != null)
+                if (preferences.SelectProfileForJob(variant) != null)
                     return true;
             }
         }
@@ -424,7 +461,7 @@ public sealed partial class CMDistressSignalRuleSystem
         {
             foreach (var (variant, _) in scenarioVariants)
             {
-                if (preferences.SelectProfileForJob(variant, SelectedPlanetMapId) != null)
+                if (preferences.SelectProfileForJob(variant) != null)
                     return true;
             }
         }
@@ -432,7 +469,7 @@ public sealed partial class CMDistressSignalRuleSystem
         if (comp.SurvivorJobOverrides != null &&
             comp.SurvivorJobOverrides.TryGetValue(job, out var overrideJob))
         {
-            return preferences.SelectProfileForJob(overrideJob, SelectedPlanetMapId) != null;
+            return preferences.SelectProfileForJob(overrideJob) != null;
         }
 
         return false;

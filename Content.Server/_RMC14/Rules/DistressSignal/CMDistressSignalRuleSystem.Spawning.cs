@@ -191,11 +191,11 @@ public sealed partial class CMDistressSignalRuleSystem
         if (!_prefsManager.TryGetCachedPreferences(player.UserId, out var preferences))
             return fallbackProfile;
 
-        if (preferences.SelectProfileForJob(primaryJob, SelectedPlanetMapId) is { } primaryProfile)
+        if (preferences.SelectProfileForJob(primaryJob) is { } primaryProfile)
             return primaryProfile;
 
         if (secondaryJob is { } secondary &&
-            preferences.SelectProfileForJob(secondary, SelectedPlanetMapId) is { } secondaryProfile)
+            preferences.SelectProfileForJob(secondary) is { } secondaryProfile)
         {
             return secondaryProfile;
         }

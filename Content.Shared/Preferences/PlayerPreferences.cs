@@ -1,5 +1,4 @@
 using System.Linq;
-using Content.Shared._RMC14.Rules;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Roles;
 using Robust.Shared.Random;
@@ -126,7 +125,6 @@ namespace Content.Shared.Preferences
         /// </summary>
         public HumanoidCharacterProfile? SelectProfileForJob(
             ProtoId<JobPrototype> job,
-            EntProtoId<RMCPlanetMapPrototypeComponent>? currentMap = null,
             Predicate<HumanoidCharacterProfile>? filter = null)
         {
             List<HumanoidCharacterProfile> pool = [];
@@ -144,20 +142,10 @@ namespace Content.Shared.Preferences
                 pool.Add(humanoid);
             }
 
-            var random = IoCManager.Resolve<IRobustRandom>();
             if (pool.Count == 0)
                 return null;
 
-            if (currentMap is { } map)
-            {
-                var mapPreferredPool = pool
-                    .Where(profile => profile.PreferredMap == map)
-                    .ToList();
-
-                if (mapPreferredPool.Count > 0)
-                    return random.Pick(mapPreferredPool);
-            }
-
+            var random = IoCManager.Resolve<IRobustRandom>();
             return random.Pick(pool);
         }
 

@@ -116,6 +116,12 @@ namespace Content.Client.Lobby.UI
 
         private List<(ProtoId<JobPrototype> JobId, Action UpdateStyle)> _survivorVariantPriorityButtons = new();
 
+        private List<(string ScenarioName, Action UpdateStyle)> _survivorVariantInsertButtons = new();
+
+        private static readonly Color SurvivorInsertHeaderColor = Color.FromHex("#34374e");
+        private static readonly Color SurvivorInsertHeaderDisabledColor = Color.FromHex("#5c2f34");
+        private static readonly Color SurvivorInsertDisabledModulate = Color.FromHex("#ff9a9a");
+
         private readonly Dictionary<string, BoxContainer> _jobCategories;
 
         private Direction _previewRotation = Direction.North;
@@ -992,6 +998,7 @@ namespace Content.Client.Lobby.UI
             _jobPriorities.Clear();
             _rankPriorities.Clear();
             _survivorVariantPriorityButtons.Clear();
+            _survivorVariantInsertButtons.Clear();
             var firstCategory = true;
 
             // Get all displayed departments
@@ -1192,10 +1199,9 @@ namespace Content.Client.Lobby.UI
             foreach (var mapGroup in mapGroups)
             {
                 var mapHeaderText = GetSurvivorVariantMapLabel(mapGroup);
-                var header = new PanelContainer
+                var headerRow = new BoxContainer
                 {
-                    Margin = new Thickness(3f, 4f, 3f, 1f),
-                    PanelOverride = new StyleBoxFlat { BackgroundColor = Color.FromHex("#3a3d55") },
+                    Orientation = LayoutOrientation.Horizontal,
                     Children =
                     {
                         new Label
@@ -1203,10 +1209,17 @@ namespace Content.Client.Lobby.UI
                             Text = mapHeaderText,
                             ToolTip = mapHeaderText,
                             ClipText = true,
+                            HorizontalExpand = true,
                             Margin = new Thickness(5f, 0f, 0f, 0f),
                             StyleClasses = { StyleBase.StyleClassLabelSubText },
-                        }
-                    }
+                        },
+                    },
+                };
+                var header = new PanelContainer
+                {
+                    Margin = new Thickness(3f, 4f, 3f, 1f),
+                    PanelOverride = new StyleBoxFlat { BackgroundColor = Color.FromHex("#3a3d55") },
+                    Children = { headerRow },
                 };
                 variantsContainer.AddChild(header);
 
@@ -1215,6 +1228,10 @@ namespace Content.Client.Lobby.UI
                     variantsContainer,
                     null,
                     titleSize);
+
+                if (mapGroup.RegularJobs.Count > 0)
+                    AddSurvivorVariantBaseToggle(headerRow, regularRows, mapGroup.MapId);
+
                 var insertRows = new List<SurvivorVariantInsertRows>();
                 foreach (var insert in mapGroup.Inserts)
                     insertRows.Add(AddSurvivorVariantInsertRows(insert, variantsContainer, titleSize));
@@ -1278,26 +1295,92 @@ namespace Content.Client.Lobby.UI
             string SearchText,
             Control Row);
 
+        private void RefreshSurvivorVariantDisableButtons(string key)
+        {
+            foreach (var (scenario, updateStyle) in _survivorVariantInsertButtons)
+            {
+                if (scenario == key)
+                    updateStyle();
+            }
+        }
+
+        private void AddSurvivorVariantBaseToggle(BoxContainer headerRow, List<SurvivorVariantJobRow> regularRows, string mapId)
+        {
+            var key = HumanoidCharacterProfile.GetSurvivorBaseScenarioKey(mapId);
+            var disableBtn = new Button
+            {
+                Text = Loc.GetString("humanoid-profile-editor-survivor-base-disable-button"),
+                ToolTip = Loc.GetString("humanoid-profile-editor-survivor-base-disable-tooltip"),
+                VerticalAlignment = VAlignment.Center,
+                Margin = new Thickness(3f, 1f, 3f, 1f),
+                MinWidth = 90,
+            };
+            headerRow.AddChild(disableBtn);
+
+            void UpdateBaseStyle()
+            {
+                var disabled = Profile?.DisabledSurvivorInserts.Contains(key) ?? false;
+                if (disabled)
+                    disableBtn.StyleClasses.Add(StyleNano.StyleClassButtonColorRed);
+                else
+                    disableBtn.StyleClasses.Remove(StyleNano.StyleClassButtonColorRed);
+
+                var rowModulate = disabled ? SurvivorInsertDisabledModulate : Color.White;
+                foreach (var row in regularRows)
+                    row.Row.Modulate = rowModulate;
+            }
+
+            disableBtn.OnPressed += _ =>
+            {
+                var disabled = Profile?.DisabledSurvivorInserts.Contains(key) ?? false;
+                Profile = Profile?.WithDisabledSurvivorInsert(key, !disabled);
+                RefreshSurvivorVariantDisableButtons(key);
+                SetDirty();
+            };
+
+            UpdateBaseStyle();
+            _survivorVariantInsertButtons.Add((key, UpdateBaseStyle));
+        }
+
         private SurvivorVariantInsertRows AddSurvivorVariantInsertRows(
             SurvivorVariantJobPreferences.InsertVariantJobs insert,
             BoxContainer variantsContainer,
             int titleSize)
         {
             var insertHeaderText = GetSurvivorVariantInsertLabel(insert);
+            var disableBtn = new Button
+            {
+                Text = Loc.GetString("humanoid-profile-editor-survivor-insert-disable-button"),
+                ToolTip = Loc.GetString("humanoid-profile-editor-survivor-insert-disable-tooltip"),
+                VerticalAlignment = VAlignment.Center,
+                Margin = new Thickness(3f, 1f, 3f, 1f),
+                MinWidth = 90,
+            };
+
+            var headerStyle = new StyleBoxFlat { BackgroundColor = SurvivorInsertHeaderColor };
             var header = new PanelContainer
             {
                 Margin = new Thickness(19f, 4f, 3f, 1f),
-                PanelOverride = new StyleBoxFlat { BackgroundColor = Color.FromHex("#34374e") },
+                PanelOverride = headerStyle,
                 Children =
                 {
-                    new Label
+                    new BoxContainer
                     {
-                        Text = insertHeaderText,
-                        ToolTip = insertHeaderText,
-                        ClipText = true,
-                        Margin = new Thickness(5f, 0f, 0f, 0f),
-                        StyleClasses = { StyleBase.StyleClassLabelSubText },
-                    }
+                        Orientation = LayoutOrientation.Horizontal,
+                        Children =
+                        {
+                            new Label
+                            {
+                                Text = insertHeaderText,
+                                ToolTip = insertHeaderText,
+                                ClipText = true,
+                                HorizontalExpand = true,
+                                Margin = new Thickness(5f, 0f, 0f, 0f),
+                                StyleClasses = { StyleBase.StyleClassLabelSubText },
+                            },
+                            disableBtn,
+                        },
+                    },
                 }
             };
             variantsContainer.AddChild(header);
@@ -1307,6 +1390,32 @@ namespace Content.Client.Lobby.UI
                 variantsContainer,
                 new Thickness(16f, 0f, 0f, 0f),
                 titleSize);
+
+            void UpdateDisableStyle()
+            {
+                var disabled = Profile?.DisabledSurvivorInserts.Contains(insert.ScenarioName) ?? false;
+                if (disabled)
+                    disableBtn.StyleClasses.Add(StyleNano.StyleClassButtonColorRed);
+                else
+                    disableBtn.StyleClasses.Remove(StyleNano.StyleClassButtonColorRed);
+
+                headerStyle.BackgroundColor = disabled ? SurvivorInsertHeaderDisabledColor : SurvivorInsertHeaderColor;
+
+                var rowModulate = disabled ? SurvivorInsertDisabledModulate : Color.White;
+                foreach (var row in rows)
+                    row.Row.Modulate = rowModulate;
+            }
+
+            disableBtn.OnPressed += _ =>
+            {
+                var disabled = Profile?.DisabledSurvivorInserts.Contains(insert.ScenarioName) ?? false;
+                Profile = Profile?.WithDisabledSurvivorInsert(insert.ScenarioName, !disabled);
+                RefreshSurvivorVariantDisableButtons(insert.ScenarioName);
+                SetDirty();
+            };
+
+            UpdateDisableStyle();
+            _survivorVariantInsertButtons.Add((insert.ScenarioName, UpdateDisableStyle));
 
             return new SurvivorVariantInsertRows(
                 $"{insert.DisplayName} {insert.ScenarioName} {insertHeaderText}",
@@ -1442,6 +1551,8 @@ namespace Content.Client.Lobby.UI
                     var current = Profile?.JobPriorities.GetValueOrDefault(job.ID, JobPriority.Never) ?? JobPriority.Never;
                     var next = current > JobPriority.Never ? JobPriority.Never : JobPriority.Low;
                     Profile = Profile?.WithJobPriority(job.ID, next);
+                    JobOverride = next > JobPriority.Never ? job : null;
+
                     UpdateStyle();
                     RefreshSprites();
                     ReloadPreview();
@@ -2001,6 +2112,9 @@ namespace Content.Client.Lobby.UI
             }
 
             foreach (var (_, updateStyle) in _survivorVariantPriorityButtons)
+                updateStyle();
+
+            foreach (var (_, updateStyle) in _survivorVariantInsertButtons)
                 updateStyle();
         }
 

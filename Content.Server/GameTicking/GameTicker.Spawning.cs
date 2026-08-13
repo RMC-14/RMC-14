@@ -144,13 +144,12 @@ namespace Content.Server.GameTicking
             ProtoId<JobPrototype> job,
             IReadOnlyDictionary<NetUserId, HumanoidCharacterProfile> fallbackProfiles)
         {
-            var currentMap = _distressSignal?.SelectedPlanetMapId;
             Predicate<HumanoidCharacterProfile>? compatibility = null;
             compatibility = profile => _distressSignal!.CanSpawnForJob(job, profile);
 
             if (_prefsManager.TryGetCachedPreferences(userId, out var prefs))
             {
-                var selected = prefs.SelectProfileForJob(job, currentMap, compatibility);
+                var selected = prefs.SelectProfileForJob(job, compatibility);
                 if (selected != null)
                     return selected;
 
@@ -311,7 +310,6 @@ namespace Content.Server.GameTicking
                 {
                     matchingProfile = playerPreferences.SelectProfileForJob(
                         jobId,
-                        _distressSignal?.SelectedPlanetMapId,
                         compatibility);
                 }
 

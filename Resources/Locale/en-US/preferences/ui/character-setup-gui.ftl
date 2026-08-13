@@ -13,7 +13,6 @@ character-setup-gui-character-picker-button-delete-button = Delete
 character-setup-gui-character-picker-button-confirm-delete-button = Confirm
 character-setup-gui-character-picker-button-enabled-button = Enabled
 character-setup-gui-character-picker-button-disabled-button = Disabled
-character-setup-gui-character-picker-button-preferred-map = Map: {$map}
 
 character-setup-gui-save-panel-title = Unsaved character changes
 character-setup-gui-save-panel-save = Save

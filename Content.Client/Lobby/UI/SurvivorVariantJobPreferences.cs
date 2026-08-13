@@ -13,13 +13,15 @@ public static class SurvivorVariantJobPreferences
 
     public sealed class MapVariantJobs
     {
-        public MapVariantJobs(string mapName, int order)
+        public MapVariantJobs(string mapName, string mapId, int order)
         {
             MapName = mapName;
+            MapId = mapId;
             Order = order;
         }
 
         public string MapName { get; }
+        public string MapId { get; }
         public int Order { get; }
         public float RegularChance { get; set; }
         public List<JobPrototype> RegularJobs { get; } = new();
@@ -67,6 +69,7 @@ public static class SurvivorVariantJobPreferences
                 baseJobs,
                 grouped,
                 entity.Name,
+                entity.ID,
                 currentMapOrder,
                 null,
                 null,
@@ -86,6 +89,7 @@ public static class SurvivorVariantJobPreferences
                         baseJobs,
                         grouped,
                         entity.Name,
+                        entity.ID,
                         currentMapOrder,
                         scenario,
                         GetScenarioDisplayName(scenario),
@@ -106,6 +110,7 @@ public static class SurvivorVariantJobPreferences
                         baseJobs,
                         grouped,
                         entity.Name,
+                        entity.ID,
                         currentMapOrder,
                         scenario,
                         GetScenarioDisplayName(scenario),
@@ -149,6 +154,7 @@ public static class SurvivorVariantJobPreferences
         HashSet<ProtoId<JobPrototype>> baseJobs,
         Dictionary<ProtoId<JobPrototype>, HashSet<ProtoId<JobPrototype>>> grouped,
         string mapName,
+        string mapId,
         int mapOrder,
         string? scenarioName,
         string? scenarioDisplayName,
@@ -181,10 +187,10 @@ public static class SurvivorVariantJobPreferences
 
             jobs.Sort(JobUIComparer.Instance);
             var mapGroups = result.GetOrNew(baseJob);
-            var mapGroup = mapGroups.FirstOrDefault(group => group.MapName == mapName);
+            var mapGroup = mapGroups.FirstOrDefault(group => group.MapId == mapId);
             if (mapGroup == null)
             {
-                mapGroup = new MapVariantJobs(mapName, mapOrder);
+                mapGroup = new MapVariantJobs(mapName, mapId, mapOrder);
                 mapGroups.Add(mapGroup);
             }
 
