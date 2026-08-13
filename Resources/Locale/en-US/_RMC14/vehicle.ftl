@@ -122,4 +122,4 @@ rmc-vehicle-demolition-frame-intact = The vehicle frame is too intact to rig wit
 rmc-vehicle-demolition-busy = Someone is already rigging this wreck.
 rmc-vehicle-demolition-start = You start rigging the wreck with explosives...
 rmc-vehicle-demolition-no-skill = You do not know how to rig demolition charges.
-rmc-vehicle-demolition-armed = The charge is planted & beeping down!
+rmc-vehicle-demolition-armed = The charge is planted and is counting down!
