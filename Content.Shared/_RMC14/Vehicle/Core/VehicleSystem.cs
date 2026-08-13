@@ -156,7 +156,7 @@ public sealed partial class VehicleSystem : EntitySystem
         var doAfter = new DoAfterArgs(EntityManager, args.User, ent.Comp.EnterDoAfter, new VehicleEnterDoAfterEvent { EntryIndex = entryIndex }, ent.Owner)
         {
             BreakOnMove = true,
-            BreakOnDamage = true,
+            BreakOnDamage = false,
             NeedHand = false,
         };
 
