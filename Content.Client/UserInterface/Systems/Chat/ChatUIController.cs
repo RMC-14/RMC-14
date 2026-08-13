@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Numerics;
 using Content.Client._RMC14.Mentor;
+using Content.Client._RMC14.Mobs.Ghosts;
 using Content.Client.Administration.Managers;
 using Content.Client.Chat;
 using Content.Client.Chat.Managers;
@@ -24,6 +25,7 @@ using Content.Shared.Chat;
 using Content.Shared.Damage.ForceSay;
 using Content.Shared.Decals;
 using Content.Shared.Input;
+using Content.Shared.Popups;
 using Content.Shared.Radio;
 using Content.Shared.Roles.RoleCodeword;
 using Robust.Client.GameObjects;
@@ -71,6 +73,10 @@ public sealed partial class ChatUIController : UIController
     [UISystemDependency] private readonly TransformSystem? _transform = default;
     [UISystemDependency] private readonly MindSystem? _mindSystem = default!;
     [UISystemDependency] private readonly RoleCodewordSystem? _roleCodewordSystem = default!;
+
+    // RMC14
+    [UISystemDependency] private readonly SharedPopupSystem _popup = default!;
+    // RMC14
 
     private static readonly ProtoId<ColorPalettePrototype> ChatNamePalette = "ChatNames";
     private string[] _chatNameColors = default!;
@@ -870,6 +876,17 @@ public sealed partial class ChatUIController : UIController
             text = $";{text}";
         }
 
+        // RMC14
+        if (MapLocalIfGhost(channel) == ChatSelectChannel.Dead &&
+            _player.LocalEntity is { } localEntity &&
+            _ent.HasComponent<RMCDeadChatMutedComponent>(localEntity))
+        {
+            var warning = Loc.GetString("rmc-ghost-dead-chat-send-blocked");
+            _popup.PopupClient(warning, localEntity, localEntity);
+            return;
+        }
+        // RMC14
+
         _manager.SendMessage(text, prefixChannel == 0 ? channel : prefixChannel);
     }
 
@@ -914,7 +931,13 @@ public sealed partial class ChatUIController : UIController
     private void OnChatMessage(MsgChatMessage message)
     {
         var msg = message.Message;
+
         // RMC14
+        if (msg.Channel == ChatChannel.Dead &&
+            _player.LocalEntity is { } localEntity &&
+            _ent.HasComponent<RMCDeadChatMutedComponent>(localEntity))
+            return;
+
         ProcessChatMessage(msg, !msg.HidePopup || msg.UseEmoteSpeechBubble);
         // RMC14
 

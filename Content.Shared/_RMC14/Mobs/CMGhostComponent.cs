@@ -23,6 +23,12 @@ public sealed partial class CMGhostComponent : Component
     public EntityUid? ToggleXenoHudEntity;
 
     [DataField]
+    public EntProtoId ToggleDeadChat = "RMCActionToggleDeadChat";
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? ToggleDeadChatEntity;
+
+    [DataField]
     public EntProtoId FindParasite = "ActionFindParasite";
 
     [DataField, AutoNetworkedField]
@@ -33,3 +39,5 @@ public sealed partial class CMGhostComponent : Component
 public sealed partial class ToggleMarineHudActionEvent : InstantActionEvent { }
 
 public sealed partial class ToggleXenoHudActionEvent : InstantActionEvent { }
+
+public sealed partial class ToggleDeadChatActionEvent : InstantActionEvent;
