@@ -932,22 +932,32 @@ public sealed class XenoEvolutionSystem : EntitySystem
     private XenoEvolveBuiState BuildEvolveState(EntityUid xeno)
     {
         var candidates = new Dictionary<string, int>();
-        var contestedTiers = new HashSet<int>();
+        var raffleGated = new HashSet<string>();
         var leapfrogTargets = new List<string>();
         var phaseAActive = false;
 
-        if (_xenoHive.GetHive(xeno) is { } hive)
+        if (_xenoHive.GetHive(xeno) is { } hive &&
+            TryComp(xeno, out XenoEvolutionComponent? evoComp))
         {
+            var xenoEnt = new Entity<XenoEvolutionComponent>(xeno, evoComp);
             var raffle = EnsureHiveRaffle(hive);
             var currentTier = CompOrNull<XenoComponent>(xeno)?.Tier ?? 0;
+
+            foreach (var target in evoComp.EvolvesTo)
+            {
+                if (ShouldRaffle(xenoEnt, target))
+                    raffleGated.Add(target.Id);
+            }
+
+            foreach (var target in evoComp.EarlyEvolvesTo)
+            {
+                if (ShouldRaffle(xenoEnt, target))
+                    raffleGated.Add(target.Id);
+            }
 
             foreach (var (tier, phaseAEnabled) in raffle.RaffleTiers)
             {
                 var phaseAOpen = phaseAEnabled && !raffle.PhaseAClosedTiers.Contains(tier);
-
-                if (phaseAOpen || !HasTierRoom(hive, string.Empty, tier))
-                    contestedTiers.Add(tier);
-
                 if (!phaseAOpen)
                     continue;
 
@@ -971,7 +981,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             }
         }
 
-        return new XenoEvolveBuiState(LackingOvipositor(), candidates, contestedTiers, leapfrogTargets, phaseAActive);
+        return new XenoEvolveBuiState(LackingOvipositor(), candidates, raffleGated, leapfrogTargets, phaseAActive);
     }
 
     private void RefreshRaffleUi(Entity<HiveComponent> hive)

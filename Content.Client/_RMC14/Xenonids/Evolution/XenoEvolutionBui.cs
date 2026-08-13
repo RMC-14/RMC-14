@@ -259,27 +259,13 @@ public sealed class XenoEvolutionBui : BoundUserInterface
             return;
         }
 
-        if (state != null && IsRaffleContested(evolutionId, state))
+        if (state != null && state.RaffleGatedTargets.Contains(evolutionId.Id))
         {
             AddRaffleChoice(evolutionId, GetCandidateCount(state, evolutionId), false);
             return;
         }
 
         AddEvolution(evolutionId);
-    }
-
-    private bool IsRaffleContested(EntProtoId targetId, XenoEvolveBuiState state)
-    {
-        if (state.ContestedTiers.Count == 0)
-            return false;
-
-        if (!_prototype.TryIndex(targetId, out var proto) ||
-            !proto.TryGetComponent(out XenoComponent? xenoComp, _compFactory))
-        {
-            return false;
-        }
-
-        return state.ContestedTiers.Contains(xenoComp.Tier);
     }
 
     private static int GetCandidateCount(XenoEvolveBuiState? state, EntProtoId targetId)

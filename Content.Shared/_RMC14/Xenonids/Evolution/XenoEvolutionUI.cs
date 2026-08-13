@@ -14,20 +14,21 @@ public sealed class XenoEvolveBuiState : BoundUserInterfaceState
 {
     public readonly bool LackingOvipositor;
     public readonly Dictionary<string, int> RaffleCandidates;
-    public readonly HashSet<int> ContestedTiers;
+    public readonly HashSet<string> RaffleGatedTargets;
+
     public readonly List<string> LeapfrogTargets;
     public readonly bool PhaseAActive;
 
     public XenoEvolveBuiState(
         bool lackingOvipositor,
         Dictionary<string, int> raffleCandidates,
-        HashSet<int> contestedTiers,
+        HashSet<string> raffleGatedTargets,
         List<string> leapfrogTargets,
         bool phaseAActive)
     {
         LackingOvipositor = lackingOvipositor;
         RaffleCandidates = raffleCandidates;
-        ContestedTiers = contestedTiers;
+        RaffleGatedTargets = raffleGatedTargets;
         LeapfrogTargets = leapfrogTargets;
         PhaseAActive = phaseAActive;
     }
