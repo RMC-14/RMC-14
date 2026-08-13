@@ -156,6 +156,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
         var waterCoords = Transform(uid).Coordinates;
         if (_rmcMap.HasAnchoredEntityEnumerator<VehicleWaterSlowTileComponent>(waterCoords, out var waterTile) &&
+            _rmcWater.IsActiveWater(waterTile.Owner, uid) &&
             waterTile.Comp.SpeedFactors.TryGetValue(mover.WeightClass, out var waterFactor) &&
             waterFactor < 1f)
         {

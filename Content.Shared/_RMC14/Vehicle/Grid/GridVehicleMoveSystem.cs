@@ -15,6 +15,7 @@ using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Vehicle;
+using Content.Shared._RMC14.Water;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Fortify;
 using Content.Shared._RMC14.Xenonids.Weeds;
@@ -51,6 +52,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
     [Dependency] private readonly VehicleSystem _rmcVehicles = default!;
+    [Dependency] private readonly RMCWaterSystem _rmcWater = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
     [Dependency] private readonly VehicleSqueezeUnderSystem _squeezeUnder = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;

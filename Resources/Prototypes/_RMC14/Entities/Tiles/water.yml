@@ -31,10 +31,10 @@
     sprintSpeedModifier: 0.5
   - type: VehicleWaterSlowTile
     speedFactors:
-      Weak: 0.2
-      Light: 0.35
-      Medium: 0.5
-      Heavy: 0.65
+      Weak: 0.4
+      Light: 0.55
+      Medium: 0.7
+      Heavy: 0.85
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -78,10 +78,10 @@
     sprintSpeedModifier: 0.25
   - type: VehicleWaterSlowTile
     speedFactors:
-      Weak: 0.1
-      Light: 0.2
-      Medium: 0.35
-      Heavy: 0.55
+      Weak: 0.2
+      Light: 0.35
+      Medium: 0.55
+      Heavy: 0.75
 
 - type: entity
   parent: CMFloorShallowWaterEntity
