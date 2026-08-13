@@ -9,11 +9,12 @@ using Content.Shared.Atmos;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
-using Content.Shared.Interaction;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
@@ -23,7 +24,6 @@ using Content.Shared.Traits.Assorted;
 using Content.Shared.UserInterface;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
-using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -32,8 +32,8 @@ namespace Content.Server._RMC14.Medical.CryoCell;
 public sealed class CryoCellSystem : SharedCryoCellSystem
 {
     [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -41,7 +41,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly RMCSizeStunSystem _rmcSizeStun = default!;
     [Dependency] private readonly SharedRMCTemperatureSystem _rmcTemperature = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly SharedStatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
@@ -51,7 +51,8 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
     private static readonly ProtoId<DamageGroupPrototype> ToxinGroup = "Toxin";
     private static readonly ProtoId<DamageGroupPrototype> AirlossGroup = "Airloss";
 
-    private readonly List<CryoCellBeakerReagent> _beakerReagentBuffer = [];
+    private static readonly ProtoId<ReagentPrototype> Cryoxadone = "CMCryoxadone";
+    private static readonly ProtoId<ReagentPrototype> Clonexadone = "CMClonexadone";
 
     public override void Initialize()
     {
@@ -63,86 +64,61 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         SubscribeLocalEvent<CryoCellComponent, CryoCellToggleAutoEjectBuiMsg>(OnToggleAutoEject);
         SubscribeLocalEvent<CryoCellComponent, CryoCellToggleNotifyBuiMsg>(OnToggleNotify);
         SubscribeLocalEvent<CryoCellComponent, CryoCellEjectBeakerBuiMsg>(OnEjectBeaker);
-        SubscribeLocalEvent<CryoCellComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<CryoCellComponent, PowerChangedEvent>(OnCryoCellPower);
     }
 
-    private void OnCellUIOpened(Entity<CryoCellComponent> cell, ref AfterActivatableUIOpenEvent args)
+    private void OnCellUIOpened(Entity<CryoCellComponent> cryoCell, ref AfterActivatableUIOpenEvent args)
     {
-        UpdateUI(cell);
+        UpdateUI(cryoCell);
     }
 
-    private void OnTogglePower(Entity<CryoCellComponent> cell, ref CryoCellTogglePowerBuiMsg args)
+    private void OnTogglePower(Entity<CryoCellComponent> cryoCell, ref CryoCellTogglePowerBuiMsg args)
     {
-        cell.Comp.IsPoweredOn = !cell.Comp.IsPoweredOn;
-        Dirty(cell);
-        UpdateCryoCellVisuals(cell);
-        UpdateUI(cell);
+        cryoCell.Comp.IsPoweredOn = !cryoCell.Comp.IsPoweredOn;
+        Dirty(cryoCell);
+        UpdateCryoCellVisuals(cryoCell);
+        UpdateUI(cryoCell);
     }
 
-    private void OnEject(Entity<CryoCellComponent> cell, ref CryoCellEjectBuiMsg args)
+    private void OnEject(Entity<CryoCellComponent> cryoCell, ref CryoCellEjectBuiMsg args)
     {
-        if (cell.Comp.Occupant is { } occupant)
-            EjectOccupant(cell, occupant);
+        if (cryoCell.Comp.Occupant is { } occupant)
+            EjectOccupant(cryoCell, occupant);
 
-        UpdateUI(cell);
+        UpdateUI(cryoCell);
     }
 
-    private void OnToggleAutoEject(Entity<CryoCellComponent> cell, ref CryoCellToggleAutoEjectBuiMsg args)
+    private void OnToggleAutoEject(Entity<CryoCellComponent> cryoCell, ref CryoCellToggleAutoEjectBuiMsg args)
     {
-        cell.Comp.AutoEject = !cell.Comp.AutoEject;
-        Dirty(cell);
-        UpdateUI(cell);
+        cryoCell.Comp.AutoEject = !cryoCell.Comp.AutoEject;
+        Dirty(cryoCell);
+        UpdateUI(cryoCell);
     }
 
-    private void OnToggleNotify(Entity<CryoCellComponent> cell, ref CryoCellToggleNotifyBuiMsg args)
+    private void OnToggleNotify(Entity<CryoCellComponent> cryoCell, ref CryoCellToggleNotifyBuiMsg args)
     {
-        cell.Comp.ReleaseNotice = !cell.Comp.ReleaseNotice;
-        Dirty(cell);
-        UpdateUI(cell);
+        cryoCell.Comp.ReleaseNotice = !cryoCell.Comp.ReleaseNotice;
+        Dirty(cryoCell);
+        UpdateUI(cryoCell);
     }
 
-    private void OnEjectBeaker(Entity<CryoCellComponent> cell, ref CryoCellEjectBeakerBuiMsg args)
+    private void OnEjectBeaker(Entity<CryoCellComponent> cryoCell, ref CryoCellEjectBeakerBuiMsg args)
     {
-        if (!TryGetBeaker(cell, out var beaker))
+        if (!TryGetBeaker(cryoCell, out var slot, out _))
             return;
 
-        if (_container.TryGetContainer(cell, cell.Comp.BeakerSlot, out var container))
-            _container.Remove(beaker, container);
+        _itemSlots.TryEjectToHands(cryoCell, slot, args.Actor, true);
 
-        UpdateUI(cell);
+        Dirty(cryoCell);
+        UpdateUI(cryoCell);
     }
 
-    private void OnInteractUsing(Entity<CryoCellComponent> cell, ref InteractUsingEvent args)
+    private void UpdateUI(Entity<CryoCellComponent> cryoCell)
     {
-        if (args.Handled)
+        if (!_ui.IsUiOpen(cryoCell.Owner, CryoCellUIKey.Key))
             return;
 
-        if (!TryComp<FitsInDispenserComponent>(args.Used, out _))
-            return;
-
-        if (TryGetBeaker(cell, out _))
-        {
-            args.Handled = true;
-            return;
-        }
-
-        if (!_container.TryGetContainer(cell, cell.Comp.BeakerSlot, out var container))
-            return;
-
-        if (_container.Insert(args.Used, container))
-        {
-            args.Handled = true;
-            UpdateUI(cell);
-        }
-    }
-
-    private void UpdateUI(Entity<CryoCellComponent> cell)
-    {
-        if (!_ui.IsUiOpen(cell.Owner, CryoCellUIKey.Key))
-            return;
-
-        var occupant = cell.Comp.Occupant;
+        var occupant = cryoCell.Comp.Occupant;
         NetEntity? netOccupant = null;
         string? occupantName = null;
         var occupantState = CryoCellOccupantMobState.None;
@@ -156,8 +132,8 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
 
         if (occupant != null && TerminatingOrDeleted(occupant))
         {
-            cell.Comp.Occupant = null;
-            _ui.CloseUi(cell.Owner, CryoCellUIKey.Key);
+            cryoCell.Comp.Occupant = null;
+            _ui.CloseUi(cryoCell.Owner, CryoCellUIKey.Key);
             return;
         }
 
@@ -190,19 +166,6 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
             _rmcTemperature.TryGetCurrentTemperature(occupant.Value, out bodyTemp);
         }
 
-        _beakerReagentBuffer.Clear();
-        var isBeakerLoaded = false;
-        if (TryGetBeaker(cell, out var beaker) &&
-            TryComp<FitsInDispenserComponent>(beaker, out var fits) &&
-            _solutionContainer.TryGetSolution(beaker, fits.Solution, out _, out var beakerSol))
-        {
-            isBeakerLoaded = true;
-            foreach (var reagent in beakerSol.Contents)
-            {
-                _beakerReagentBuffer.Add(new CryoCellBeakerReagent(reagent.Reagent.Prototype, reagent.Quantity.Float()));
-            }
-        }
-
         var state = new CryoCellBuiState(
             netOccupant,
             occupantName,
@@ -214,14 +177,12 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
             toxinLoss,
             oxyLoss,
             bodyTemp,
-            cell.Comp.CryoCellTemperature,
-            cell.Comp.IsPoweredOn,
-            cell.Comp.AutoEject,
-            cell.Comp.ReleaseNotice,
-            isBeakerLoaded,
-            _beakerReagentBuffer.ToArray());
+            cryoCell.Comp.CryoCellTemperature,
+            cryoCell.Comp.IsPoweredOn,
+            cryoCell.Comp.AutoEject,
+            cryoCell.Comp.ReleaseNotice);
 
-        _ui.SetUiState(cell.Owner, CryoCellUIKey.Key, state);
+        _ui.SetUiState(cryoCell.Owner, CryoCellUIKey.Key, state);
     }
 
     public override void Update(float frameTime)
@@ -230,46 +191,45 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
 
         var time = _timing.CurTime;
         var cells = EntityQueryEnumerator<CryoCellComponent>();
-        while (cells.MoveNext(out var uid, out var cell))
+        while (cells.MoveNext(out var uid, out var cryoCell))
         {
-            if (cell.Occupant == null)
+            if (cryoCell.Occupant == null)
                 continue;
 
             if (TryComp<ApcPowerReceiverComponent>(uid, out var power) && power.Powered)
                 continue;
 
-            if (time < cell.NextTick)
+            if (time < cryoCell.NextTick)
                 continue;
 
-            cell.NextTick = time + cell.TickDelay;
+            cryoCell.NextTick = time + cryoCell.TickDelay;
 
-            ProcessOccupant((uid, cell));
-            UpdateUI((uid, cell));
+            ProcessOccupant((uid, cryoCell));
+            UpdateUI((uid, cryoCell));
         }
     }
 
-    private void ProcessOccupant(Entity<CryoCellComponent> cell)
+    private void ProcessOccupant(Entity<CryoCellComponent> cryoCell)
     {
-        if (cell.Comp.Occupant is not { } occupant)
+        if (cryoCell.Comp.Occupant is not { } occupant)
             return;
 
         if (!TryComp<DamageableComponent>(occupant, out var damageable))
         {
-            EjectOccupant(cell, occupant);
+            EjectOccupant(cryoCell, occupant);
             return;
         }
 
         // Auto-eject if dead and unrevivable
         if (_mobState.IsDead(occupant) && HasComp<UnrevivableComponent>(occupant))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-cryo-cell-patient-dead"), cell);
-            _audio.PlayPvs(cell.Comp.WarningSound, cell);
-            CryoPopupAndSound(cell, dead: true);
+            EjectOccupant(cryoCell, occupant);
+            CryoPopupAndSound(cryoCell, true, true);
             return;
         }
 
         // Cooling the occupant
-        var cryoCellTemp = cell.Comp.CryoCellTemperature;
+        var cryoCellTemp = cryoCell.Comp.CryoCellTemperature;
         _rmcTemperature.TryGetCurrentTemperature(occupant, out var curBodyTemp);
 
         if (Math.Abs(curBodyTemp - cryoCellTemp) >= 0.01)
@@ -287,8 +247,8 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         {
             if (curBodyTemp < Atmospherics.T0C)
             {
-                _statusEffects.TrySetStatusEffectDuration(occupant, SleepingSystem.StatusEffectForcedSleeping, cell.Comp.SleepDuration);
-                _rmcSizeStun.TryKnockOut(occupant, cell.Comp.UnconsciousDuration, true);
+                _statusEffects.TrySetStatusEffectDuration(occupant, SleepingSystem.StatusEffectForcedSleeping, cryoCell.Comp.SleepDuration);
+                _rmcSizeStun.TryKnockOut(occupant, cryoCell.Comp.UnconsciousDuration);
 
                 if (damageable.DamagePerGroup.GetValueOrDefault(AirlossGroup) > 0)
                 {
@@ -326,26 +286,24 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
             }
         }
 
-        // Chemical healing via beaker
-        if (TryGetBeaker(cell, out var beakerEnt) &&
-            TryComp<FitsInDispenserComponent>(beakerEnt, out var fits) &&
-            _solutionContainer.TryGetSolution(beakerEnt, fits.Solution, out _, out var beakerSol) &&
-            _rmcBloodstream.TryGetChemicalSolution(occupant, out var chemSolEnt, out var chemSol))
+        // Chemical healing if there are cryo meds
+        if (TryGetBeaker(cryoCell, out _, out var beakerSol) &&
+            _rmcBloodstream.TryGetChemicalSolution(occupant, out var solutionEnt, out var chemSol) &&
+            beakerSol.Comp.Solution.Volume > FixedPoint2.Zero)
         {
-            if (beakerSol.Volume <= FixedPoint2.Zero)
-                return;
-
             bool HasAtLeastOne(Solution sol, string reagentId)
                 => sol.Contents.Any(r => r.Reagent.Prototype == reagentId && r.Quantity >= FixedPoint2.New(1));
 
-            var occupantHasCryo = HasAtLeastOne(chemSol, "cryoxadone") || HasAtLeastOne(chemSol, "clonexadone");
-            var beakerHasCryo = HasAtLeastOne(beakerSol, "cryoxadone") || HasAtLeastOne(beakerSol, "clonexadone");
+            var occupantHasCryo = HasAtLeastOne(chemSol, Cryoxadone) || HasAtLeastOne(chemSol, Clonexadone);
+            var beakerHasCryo = HasAtLeastOne(beakerSol.Comp.Solution, Cryoxadone) || HasAtLeastOne(beakerSol.Comp.Solution, Clonexadone);
 
-            var canAdminister = (occupantHasCryo ^ beakerHasCryo) && beakerSol.Contents.Count > 0;
+            // To administer, either the occupant has cryo meds and the beaker doesn't or vice versa (not both)
+            var canAdminister = (occupantHasCryo ^ beakerHasCryo) && beakerSol.Comp.Solution.Contents.Count > 0;
             if (canAdminister && occupantHasCryo)
             {
+                // Pacing out the dosage
                 var occupantSol = chemSol.Contents.Select(r => r.Reagent.Prototype).ToHashSet();
-                foreach (var beakerReagent in beakerSol.Contents)
+                foreach (var beakerReagent in beakerSol.Comp.Solution.Contents)
                 {
                     if (occupantSol.Contains(beakerReagent.Reagent.Prototype))
                     {
@@ -356,16 +314,16 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
             }
 
             if (canAdminister)
-                _solutionContainer.TryTransferSolution(chemSolEnt, beakerSol, cell.Comp.BeakerTransferAmount);
+                _solution.TryTransferSolution(solutionEnt, beakerSol.Comp.Solution, cryoCell.Comp.BeakerTransferAmount);
         }
 
         // Auto-eject when fully healed
-        if (cell.Comp.AutoEject)
+        if (cryoCell.Comp.AutoEject)
         {
             if (damageable.TotalDamage <= 0)
             {
-                CryoPopupAndSound(cell);
-                EjectOccupant(cell, occupant);
+                CryoPopupAndSound(cryoCell);
+                EjectOccupant(cryoCell, occupant);
             }
         }
     }
