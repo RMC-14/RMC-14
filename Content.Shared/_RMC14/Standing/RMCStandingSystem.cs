@@ -10,6 +10,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Pulling.Events;
+using Content.Shared.Rotation;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Robust.Shared.Containers;
@@ -27,6 +28,7 @@ public sealed class RMCStandingSystem : EntitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {
@@ -41,6 +43,7 @@ public sealed class RMCStandingSystem : EntitySystem
         SubscribeLocalEvent<DownOnEnterComponent, EntRemovedFromContainerMessage>(OnLeaveDown);
 
         SubscribeLocalEvent<StandingStateComponent, EvasionRefreshModifiersEvent>(OnStandingStateEvasionRefresh);
+        SubscribeLocalEvent<StandingStateComponent, AfterAutoHandleStateEvent>(OnStandingState);
 
         SubscribeLocalEvent<RMCRestComponent, StoodEvent>(OnRestStood);
         SubscribeLocalEvent<RMCRestComponent, StandAttemptEvent>(OnRestStandAttempt);
@@ -168,6 +171,16 @@ public sealed class RMCStandingSystem : EntitySystem
             return;
 
         args.Evasion += (int) EvasionModifiers.Rest;
+    }
+
+    // Resync the rotation visuals after knockdown mispredict
+    private void OnStandingState(Entity<StandingStateComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        var target = _standing.IsDown(ent) ? RotationState.Horizontal : RotationState.Vertical;
+        if (_appearance.TryGetData<RotationState>(ent, RotationVisuals.RotationState, out var current) && current == target)
+            return;
+
+        _appearance.SetData(ent.Owner, RotationVisuals.RotationState, target);
     }
 
     private void OnRestStood(Entity<RMCRestComponent> ent, ref StoodEvent args)
