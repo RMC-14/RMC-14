@@ -288,17 +288,14 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
 
         // Chemical healing if there are cryo meds
         if (TryGetBeaker(cryoCell, out _, out var beakerSol) &&
-            _rmcBloodstream.TryGetChemicalSolution(occupant, out var solutionEnt, out var chemSol))
+            _rmcBloodstream.TryGetChemicalSolution(occupant, out var solutionEnt, out var bloodStream))
         {
             bool HasCryo(Solution solution)
             {
                 foreach (var (reagent, quantity) in solution)
                 {
-                    if (quantity < FixedPoint2.New(1))
-                        continue;
-
-                    if (reagent.Prototype == Cryoxadone ||
-                        reagent.Prototype == Clonexadone)
+                    if (quantity >= 1 &&
+                        (reagent.Prototype == Cryoxadone || reagent.Prototype == Clonexadone))
                     {
                         return true;
                     }
@@ -307,21 +304,22 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
                 return false;
             }
 
-            var occupantHasCryo = HasCryo(chemSol);
-            var beakerHasCryo = HasCryo(beakerSol.Comp.Solution);
+            var beaker = beakerSol.Comp.Solution;
+            var beakerHasCryo = HasCryo(beaker);
+            var occupantHasCryo = HasCryo(bloodStream);
 
-            // To administer, either the occupant has cryo meds and the beaker doesn't or vice versa (not both)
-            var canAdminister = (occupantHasCryo ^ beakerHasCryo) && beakerSol.Comp.Solution.Contents.Count > 0;
+            // To administer, either the occupant has cryo meds and the beaker doesn't, or vice versa (not both).
+            var canAdminister = (occupantHasCryo ^ beakerHasCryo) && beaker.Contents.Count > 0;
             if (canAdminister && occupantHasCryo)
             {
-                // Pacing out the dosage
+                // Pace out the dosage by making sure the occupant doesn't already have any of the beaker's reagents.
                 var occupantReagents = new HashSet<string>();
-                foreach (var reagent in chemSol.Contents)
+                foreach (var reagent in bloodStream.Contents)
                 {
                     occupantReagents.Add(reagent.Reagent.Prototype);
                 }
 
-                foreach (var beakerReagent in beakerSol.Comp.Solution.Contents)
+                foreach (var beakerReagent in beaker.Contents)
                 {
                     if (occupantReagents.Contains(beakerReagent.Reagent.Prototype))
                     {
@@ -332,7 +330,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
             }
 
             if (canAdminister)
-                _solution.TryTransferSolution(solutionEnt, beakerSol.Comp.Solution, cryoCell.Comp.BeakerTransferAmount);
+                _solution.TryTransferSolution(solutionEnt, beaker, cryoCell.Comp.BeakerTransferAmount);
         }
 
         // Auto-eject when fully healed
