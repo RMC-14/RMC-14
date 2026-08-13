@@ -130,7 +130,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             travel,
             frameTime,
             out var blocked);
-        if (blocked)
+        if (blocked && !moved)
             mover.CurrentSpeed = 0f;
 
         if (moved && hasInput && mover.PushCooldown > 0f)
