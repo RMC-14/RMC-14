@@ -288,24 +288,42 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
 
         // Chemical healing if there are cryo meds
         if (TryGetBeaker(cryoCell, out _, out var beakerSol) &&
-            _rmcBloodstream.TryGetChemicalSolution(occupant, out var solutionEnt, out var chemSol) &&
-            beakerSol.Comp.Solution.Volume > FixedPoint2.Zero)
+            _rmcBloodstream.TryGetChemicalSolution(occupant, out var solutionEnt, out var chemSol))
         {
-            bool HasAtLeastOne(Solution sol, string reagentId)
-                => sol.Contents.Any(r => r.Reagent.Prototype == reagentId && r.Quantity >= FixedPoint2.New(1));
+            bool HasCryo(Solution solution)
+            {
+                foreach (var (reagent, quantity) in solution)
+                {
+                    if (quantity < FixedPoint2.New(1))
+                        continue;
 
-            var occupantHasCryo = HasAtLeastOne(chemSol, Cryoxadone) || HasAtLeastOne(chemSol, Clonexadone);
-            var beakerHasCryo = HasAtLeastOne(beakerSol.Comp.Solution, Cryoxadone) || HasAtLeastOne(beakerSol.Comp.Solution, Clonexadone);
+                    if (reagent.Prototype == Cryoxadone ||
+                        reagent.Prototype == Clonexadone)
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
+            var occupantHasCryo = HasCryo(chemSol);
+            var beakerHasCryo = HasCryo(beakerSol.Comp.Solution);
 
             // To administer, either the occupant has cryo meds and the beaker doesn't or vice versa (not both)
             var canAdminister = (occupantHasCryo ^ beakerHasCryo) && beakerSol.Comp.Solution.Contents.Count > 0;
             if (canAdminister && occupantHasCryo)
             {
                 // Pacing out the dosage
-                var occupantSol = chemSol.Contents.Select(r => r.Reagent.Prototype).ToHashSet();
+                var occupantReagents = new HashSet<string>();
+                foreach (var reagent in chemSol.Contents)
+                {
+                    occupantReagents.Add(reagent.Reagent.Prototype);
+                }
+
                 foreach (var beakerReagent in beakerSol.Comp.Solution.Contents)
                 {
-                    if (occupantSol.Contains(beakerReagent.Reagent.Prototype))
+                    if (occupantReagents.Contains(beakerReagent.Reagent.Prototype))
                     {
                         canAdminister = false;
                         break;
