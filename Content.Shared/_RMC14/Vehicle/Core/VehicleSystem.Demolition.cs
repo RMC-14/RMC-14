@@ -144,7 +144,7 @@ public sealed partial class VehicleSystem
         }
     }
 
-    private bool IsVehicleFrameDestroyed(EntityUid vehicle)
+    public bool IsVehicleFrameDestroyed(EntityUid vehicle)
     {
         return TryComp(vehicle, out HardpointIntegrityComponent? integrity) && integrity.Integrity <= 0f;
     }
