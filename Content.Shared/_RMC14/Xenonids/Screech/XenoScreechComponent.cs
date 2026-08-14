@@ -33,7 +33,7 @@ public sealed partial class XenoScreechComponent : Component
     public float ParalyzeRange = CircleAreaFromSquareAbilityRange(4f);
 
     [DataField, AutoNetworkedField]
-    public float ParasiteStunRange = CircleAreaFromSquareAbilityRange(9.5f);
+    public float ParasiteStunRange = CircleAreaFromSquareAbilityRange(10f);
 
     [DataField, AutoNetworkedField]
     public TimeSpan ParasiteStunTime = TimeSpan.FromSeconds(8);
