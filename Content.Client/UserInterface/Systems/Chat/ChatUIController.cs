@@ -13,6 +13,7 @@ using Content.Client.Examine;
 using Content.Client.Gameplay;
 using Content.Client.Ghost;
 using Content.Client.Mind;
+using Content.Client.Popups;
 using Content.Client.Roles;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Screens;
@@ -25,7 +26,6 @@ using Content.Shared.Chat;
 using Content.Shared.Damage.ForceSay;
 using Content.Shared.Decals;
 using Content.Shared.Input;
-using Content.Shared.Popups;
 using Content.Shared.Radio;
 using Content.Shared.Roles.RoleCodeword;
 using Robust.Client.GameObjects;
@@ -76,7 +76,7 @@ public sealed partial class ChatUIController : UIController
 
     // RMC14
     [UISystemDependency] private readonly CMGhostSystem? _cmGhost = default;
-    [UISystemDependency] private readonly SharedPopupSystem? _popup = default!;
+    [UISystemDependency] private readonly PopupSystem? _popup = default!;
     // RMC14
 
     private static readonly ProtoId<ColorPalettePrototype> ChatNamePalette = "ChatNames";
