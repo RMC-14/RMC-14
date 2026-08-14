@@ -15,6 +15,15 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - English
+      - SignLanguage
+      understoodLanguages:
+      - English
+      - SignLanguage
+      currentLanguage: English
+      defaultLanguage: English
     - type: Skills
       skills:
         RMCSkillCqc: 5

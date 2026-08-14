@@ -16,12 +16,14 @@
 
 - type: loadout
   id: WatchCheapRMC
+  cost: 2
   storage:
     back:
     - RMCWatchCheap
 
 - type: loadout
   id: WatchBasicRMC
+  cost: 2
   effects:
     - !type:JobRequirementLoadoutEffect
       requirement:
@@ -34,6 +36,7 @@
 
 - type: loadout
   id: WatchSurvRMC
+  cost: 2
   effects:
     - !type:JobRequirementLoadoutEffect
       requirement:
@@ -46,6 +49,7 @@
 
 - type: loadout
   id: WatchPilotRMC
+  cost: 2
   effects:
     - !type:JobRequirementLoadoutEffect
       requirement:
@@ -58,6 +62,7 @@
 
 - type: loadout
   id: WatchLiaisonRMC
+  cost: 2
   effects:
     - !type:JobRequirementLoadoutEffect
       requirement:
@@ -70,6 +75,7 @@
 
 - type: loadout
   id: WatchSynthRMC
+  cost: 2
   effects:
     - !type:JobRequirementLoadoutEffect
       requirement:

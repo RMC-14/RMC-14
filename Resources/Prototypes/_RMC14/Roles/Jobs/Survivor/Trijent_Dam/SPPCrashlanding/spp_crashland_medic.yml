@@ -26,6 +26,17 @@
         RMCSkillJtac: 1
         RMCSkillEndurance: 2
     - type: IntelRescueSurvivorObjective
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - German
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - German
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
     - type: AssignSquad
       squad: SquadSPP
     - type: JobPrefix

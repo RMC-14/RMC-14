@@ -602,7 +602,7 @@ public sealed class DamageVisualsSystem : VisualizerSystem<DamageVisualsComponen
     ///     it assumes you're updating a layer that is tracking all
     ///     damage.
     /// </summary>
-    private void UpdateTargetLayer(Entity<SpriteComponent> spriteEnt, DamageVisualsComponent damageVisComp, object layerMapKey, FixedPoint2 threshold)
+    private void UpdateTargetLayer(Entity<SpriteComponent> spriteEnt, DamageVisualsComponent damageVisComp, Enum layerMapKey, FixedPoint2 threshold)
     {
         if (damageVisComp.Overlay && damageVisComp.DamageOverlayGroups != null)
         {
@@ -614,25 +614,27 @@ public sealed class DamageVisualsSystem : VisualizerSystem<DamageVisualsComponen
                 UpdateDamageLayerState(spriteEnt,
                     spriteLayer,
                     $"{layerState}",
-                    threshold);
+                    threshold,
+                    true);
             }
         }
         else if (!damageVisComp.Overlay)
         {
             var layerState = damageVisComp.LayerMapKeyStates[layerMapKey];
-            SpriteSystem.LayerMapTryGet(spriteEnt.AsNullable(), $"{layerMapKey}", out var spriteLayer, false);
+            SpriteSystem.LayerMapTryGet(spriteEnt.AsNullable(), layerMapKey, out var spriteLayer, false);
 
             UpdateDamageLayerState(spriteEnt,
                 spriteLayer,
                 $"{layerState}",
-                threshold);
+                threshold,
+                damageVisComp.HideIfZero);
         }
     }
 
     /// <summary>
     ///     Updates a target layer by damage group.
     /// </summary>
-    private void UpdateTargetLayer(Entity<SpriteComponent, DamageVisualsComponent> entity, object layerMapKey, string damageGroup, FixedPoint2 threshold)
+    private void UpdateTargetLayer(Entity<SpriteComponent, DamageVisualsComponent> entity, Enum layerMapKey, string damageGroup, FixedPoint2 threshold)
     {
         var spriteComponent = entity.Comp1;
         var damageVisComp = entity.Comp2;
@@ -648,19 +650,21 @@ public sealed class DamageVisualsSystem : VisualizerSystem<DamageVisualsComponen
                     (entity, spriteComponent),
                     spriteLayer,
                     $"{layerState}_{damageGroup}",
-                    threshold);
+                    threshold,
+                    true);
             }
         }
         else if (!damageVisComp.Overlay)
         {
             var layerState = damageVisComp.LayerMapKeyStates[layerMapKey];
-            SpriteSystem.LayerMapTryGet((entity, spriteComponent), $"{layerMapKey}", out var spriteLayer, false);
+            SpriteSystem.LayerMapTryGet((entity, spriteComponent), layerMapKey, out var spriteLayer, false);
 
             UpdateDamageLayerState(
                 (entity, spriteComponent),
                 spriteLayer,
                 $"{layerState}_{damageGroup}",
-                threshold);
+                threshold,
+                damageVisComp.HideIfZero);
         }
     }
 
@@ -674,7 +678,8 @@ public sealed class DamageVisualsSystem : VisualizerSystem<DamageVisualsComponen
         UpdateDamageLayerState(spriteEnt,
             spriteLayer,
             $"DamageOverlay",
-            threshold);
+            threshold,
+            true);
     }
 
     /// <summary>
@@ -695,7 +700,8 @@ public sealed class DamageVisualsSystem : VisualizerSystem<DamageVisualsComponen
                     (entity, spriteComponent),
                     spriteLayer,
                     $"DamageOverlay_{damageGroup}",
-                    threshold);
+                    threshold,
+                    true);
             }
         }
     }
@@ -706,9 +712,9 @@ public sealed class DamageVisualsSystem : VisualizerSystem<DamageVisualsComponen
     ///     function calls it), and what threshold
     ///     was passed into it.
     /// </summary>
-    private void UpdateDamageLayerState(Entity<SpriteComponent> spriteEnt, int spriteLayer, string statePrefix, FixedPoint2 threshold)
+    private void UpdateDamageLayerState(Entity<SpriteComponent> spriteEnt, int spriteLayer, string statePrefix, FixedPoint2 threshold, bool hideIfZero)
     {
-        if (threshold == 0)
+        if (threshold == 0 && hideIfZero)
         {
             SpriteSystem.LayerSetVisible(spriteEnt.AsNullable(), spriteLayer, false);
         }

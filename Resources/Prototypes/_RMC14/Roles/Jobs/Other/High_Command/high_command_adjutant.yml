@@ -12,6 +12,8 @@
   supervisors: cm-job-supervisors-staff
   accessGroups:
   - ShipMasterAccess
+  access:
+  - CMAccessHighCommand
   special:
   - !type:AddComponentSpecial
     components:
@@ -54,7 +56,7 @@
   parent: CMIDCardGold
   id: RMCIDCardUNMCAdjutant
   name: UNMC Adjutant ID card
-  description: A fancy ID card. Issued to the adjutants of high command.
+  description: Issued to members of UNMC High Command.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/CMIDs/general.rsi
@@ -63,13 +65,10 @@
     slots:
     - idcard
     sprite: _RMC14/Objects/CMIDs/general.rsi
+  - type: PresetIdCard
+    job: CMUNMCAdjutant
   - type: Item
     heldPrefix: green
-  - type: Access
-    groups:
-    - ShipMasterAccess
-    tags:
-    - CMAccessHighCommand
 
 - type: playTimeTracker
   id: CMJobUNMCAdjutant

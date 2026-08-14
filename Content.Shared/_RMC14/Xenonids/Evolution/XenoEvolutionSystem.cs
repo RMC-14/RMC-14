@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.JoinXeno;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
@@ -659,6 +660,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
         var coordinates = _transform.GetMoverCoordinates(xeno);
         var newXeno = Spawn(proto, coordinates);
         _xenoHive.SetSameHive(xeno, newXeno);
+
+        RemComp<CanBeLarvaQueuedComponent>(xeno);
 
         if (_mind.TryGetMind(xeno, out var mindId, out _))
         {

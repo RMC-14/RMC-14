@@ -178,6 +178,18 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret_hos.rsi
 
+- type: entity
+  parent: CMHeadBeret
+  id: RMCHeadBeretChiefOfficer
+  name: chief officer beret
+  description: A beret with the lieutenant-commander insignia emblazoned on it. It emits a dark aura and may corrupt the soul.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_hos.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_hos.rsi
+
+
 # Caps
 - type: entity
   parent: ClothingHeadBase
@@ -537,8 +549,8 @@
 - type: entity
   parent: CMHeadCap
   id: CMHeadCapSurgBlue
-  name: blue surgical cap
-  description: A cap surgeons wear during operations. Keeps their hair from tickling your internal organs.
+  name: doctor's surgical cap
+  description: A cap doctors wear during operations. Keeps their hair from tickling your internal organs. Typically worn by doctors, this one reminds you of blueberries.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/SurgicalCap/blue.rsi
@@ -547,23 +559,113 @@
 
 - type: entity
   parent: CMHeadCapSurgBlue
+  id: CMHeadCapSurgLightBlue
+  name: nurse's surgical cap
+  description: A cap nurses wear while they assist during operations. Keeps their hair from tickling your internal organs. Typically worn by nurses, this one is baby blue.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SurgicalCap/lightblue.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SurgicalCap/lightblue.rsi
+
+- type: entity
+  parent: CMHeadCapSurgBlue
   id: CMHeadCapSurgGreen
-  name: green surgical cap
+  name: surgeon's surgical cap
+  description: A cap surgeons wear during operations. Keeps their hair from tickling your internal organs. Typically worn by surgeons, this one is jade green.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/SurgicalCap/green.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/SurgicalCap/green.rsi
+
+- type: entity
+  parent: CMHeadCapSurgBlue
+  id: CMHeadCapSurgBlack
+  name: morgue surgical cap
+  description: A cap doctors wear while making autopsies, rather than during operations. Keeps their hair from dropping and interfering with incision scans. This one is a black as coal.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SurgicalCap/black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SurgicalCap/black.rsi
+
+- type: entity
+  parent: CMHeadCapSurgBlue
+  id: CMHeadCapSurgPharm
+  name: pharmaceutical physician's surgical cap
+  description: A cap pharmaceutical physicians wear during to protect their scalp from chemical mishaps. It also keeps their hair from tickling your internal organs while they operate. It's white with an orange rim.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SurgicalCap/pharm.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SurgicalCap/pharm.rsi
+
+- type: entity
+  parent: CMHeadCapSurgBlue
+  id: CMHeadCapSurgCMO
+  name: chief medical officer's surgical cap
+  description: A striped cap the Chief Medical Officer wears during operations. Keeps their hair from tickling your internal organs. It's green with peach stripes to match the stripes on their lab coat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SurgicalCap/cmo.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SurgicalCap/cmo.rsi
 
 - type: entity
   parent: CMHeadCapSurgBlue
   id: CMHeadCapSurgPurple
   name: purple surgical cap
+  description: A cap surgeons wear during operations. Keeps their hair from tickling your internal organs. This one is a rich wine color.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/SurgicalCap/purple.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/SurgicalCap/purple.rsi
+
+- type: entity
+  parent: CMHeadCapSurgBlue
+  id: CMHeadCapSurgOlive
+  name: olive surgical cap
+  description: A cap surgeons wear during operations. Keeps their hair from tickling your internal organs. This one is olive green.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SurgicalCap/olive.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SurgicalCap/olive.rsi
+
+- type: entity
+  parent: CMHeadCapSurgBlue
+  id: CMHeadCapSurgBrown
+  name: brown surgical cap
+  description: A cap surgeons wear during operations. Keeps their hair from tickling your internal organs. This one is a rusty brown color.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SurgicalCap/brown.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SurgicalCap/brown.rsi
+
+- type: entity
+  parent: CMHeadCapSurgBlue
+  id: CMHeadCapSurgGrey
+  name: grey surgical cap
+  description: A cap surgeons wear during operations. Keeps their hair from tickling your internal organs. This one is a mundane grey color.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SurgicalCap/grey.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SurgicalCap/grey.rsi
+
+- type: entity
+  parent: CMHeadCapSurgBlue
+  id: CMHeadCapSurgWhite
+  name: white surgical cap
+  description: A cap surgeons wear during operations. Keeps their hair from tickling your internal organs. This one is snow white.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SurgicalCap/white.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SurgicalCap/white.rsi
 
 - type: entity
   parent: CMHeadCapSurgBlue

@@ -8,6 +8,7 @@ using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
 using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
 using Content.Shared.CCVar;
 using Content.Shared.Damage;
@@ -51,7 +52,6 @@ public sealed class XenoToggleChargingSystem : EntitySystem
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedXenoHiveSystem _xenoHive = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
@@ -581,6 +581,9 @@ public sealed class XenoToggleChargingSystem : EntitySystem
             foreach (var hit in _hit)
             {
                 if (TerminatingOrDeleted(hit.Crusher) || TerminatingOrDeleted(hit.Target))
+                    continue;
+
+                if (HasComp<XenoChargeDontHitComponent>(hit.Target))
                     continue;
 
                 if (_xenoToggleChargingRecentlyHitQuery.TryComp(hit.Target, out var recently) &&

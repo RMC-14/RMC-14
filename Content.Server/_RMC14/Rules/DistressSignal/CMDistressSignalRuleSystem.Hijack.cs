@@ -98,6 +98,9 @@ public sealed partial class CMDistressSignalRuleSystem
 
                     var origin = _transform.GetMoverCoordinates(xeno);
                     _popup.PopupCoordinates(Loc.GetString("rmc-xeno-hibernation"), origin, Filter.SinglePlayer(session), true, PopupType.MediumXeno);
+
+                    if (comp.CountedInSlots && _hive.GetHive(xeno) is { } hive)
+                        _larvaQueue.AddToLarvaQueueFront(hive, actor.PlayerSession.UserId);
                 }
 
                 QueueDel(xeno);

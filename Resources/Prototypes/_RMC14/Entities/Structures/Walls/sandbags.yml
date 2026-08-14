@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: CMBarricadeBase
   id: CMBarricadeSandbag
   name: sandbag barricade
@@ -14,7 +14,9 @@
   - type: Sprite
     sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
     layers:
-    - state: sandbag
+    - state: DamageOverlay_0
+      map: [ "enum.RMCDamageOverlayVisuals.DamageOverlay" ]
+      sprite: _RMC14/Structures/Walls/Barricades/sandbag_cracks.rsi
     - map: [ "acided" ]
     drawdepth: WallTops
   - type: GenericVisualizer
@@ -47,10 +49,13 @@
         acts: [ "Destruction" ]
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 25
+    damageDivisor: 28.125
     trackAllDamage: true
-    damageOverlay:
-      sprite: _RMC14/Structures/Walls/Barricades/sandbag_cracks.rsi
+    overlay: false
+    targetLayers:
+    - "enum.RMCDamageOverlayVisuals.DamageOverlay"
+    hideIfZero: false
+    damageGroup: "Brute"
   - type: Barbed
     thornsDamage:
       types:

@@ -8,7 +8,6 @@
   - vvread
   - vvwrite
   - vvinvoke
-  - scale
   - spin
 
 - Flags: DEBUG
@@ -145,3 +144,9 @@
 - Commands:
   - "|"
   - oldhelp
+
+- Flags: RMCMAINTAINER
+  Commands:
+  - tp
+  - tpto
+  - respawn

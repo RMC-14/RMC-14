@@ -96,7 +96,7 @@
         amount: 25
       - id: RMCGrenadeIncendiary
         amount: 4
-      - id: RMCPacketGrenadeWhitePhosphorusCompoundFilled
+      - id: RMCGrenadeWhitePhosphorusCompound
         amount: 4
       - id: CMGrenadeSmoke
         amount: 5
@@ -321,6 +321,11 @@
       - id: RMCPacketGrenadeIncendiaryFilled
         name: 30mm HIDP grenade packet
         box: RMCGrenadeIncendiary
+        boxAmount: 3
+        boxSlots: 3
+      - id: RMCPacketGrenadeWhitePhosphorusCompoundFilled
+        name: 30mm CCDP grenade packet
+        box: RMCGrenadeWhitePhosphorusCompound
         boxAmount: 3
         boxSlots: 3
       - id: RMCPacketGrenadeSmokeFilled
@@ -576,12 +581,15 @@
         box: RMCBox458SOCOM
         boxAmount: 3
         boxSlots: 3
-#      - name: Magazine Box (M2C x 8)
-#        box: CMMagazineSMGM63
-#      - name: Magazine Box (M56B x 8)
-#        box: CMMagazineSMGM63
-#      - name: Magazine Box (ML66D x 8)
-#        box: CMMagazineSMGM63
+#      - id: RMCBoxMagazineM2C
+#        name: Ammo Box (M2C x 8)
+#        box: RMCMagazineM2C
+#      - id: RMCBoxMagazineSmartGun
+#        name: Drum Box (ML66A x 8)
+#        box: RMCMagazineSmartGun
+#      - id: RMCBoxMagazineML66D
+#        name: Drum Box (ML66D x 8)
+#        box: RMCMagazineML66D
 
       - id: RMCBoxMagazineRevolverM44
         name: Magazine Box (M44 x 16)

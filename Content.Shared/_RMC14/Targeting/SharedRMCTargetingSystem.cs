@@ -60,6 +60,9 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
     /// </summary>
     private void OnTargetingDropped<T>(Entity<TargetingComponent> targeting, ref T args)
     {
+        if (_net.IsClient)
+            return;
+
         var ev = new TargetingCancelledEvent();
         RaiseLocalEvent(targeting, ref ev);
 
@@ -71,6 +74,9 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
 
     private void OnTargetedRemove<T>(Entity<RMCTargetedComponent> ent, ref T args)
     {
+        if (_net.IsClient)
+            return;
+
         foreach (var targeting in ent.Comp.TargetedBy)
         {
             if (!TryComp(targeting, out TargetingComponent? targetingComp))
@@ -185,7 +191,7 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
                 continue;
 
             _rmcPvs.AddSessionOverride(target, session);
-            _rmcPvs.AddSessionOverride(user, session);
+            _rmcPvs.AddSessionOverride(equipment, session);
         }
     }
 

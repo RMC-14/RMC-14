@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 05/18/2026 15:23:51
-  entityCount: 1368
+  time: 06/16/2026 11:26:21
+  entityCount: 1378
 maps: []
 grids:
 - 1
@@ -6976,6 +6976,58 @@ entities:
     - type: Transform
       pos: 16.533646,33.53279
       parent: 1
+- proto: RMCBlockerVehicle
+  entities:
+  - uid: 1369
+    components:
+    - type: Transform
+      pos: 5.5,44.5
+      parent: 1
+  - uid: 1370
+    components:
+    - type: Transform
+      pos: 6.5,44.5
+      parent: 1
+  - uid: 1371
+    components:
+    - type: Transform
+      pos: 7.5,44.5
+      parent: 1
+  - uid: 1372
+    components:
+    - type: Transform
+      pos: 8.5,44.5
+      parent: 1
+  - uid: 1373
+    components:
+    - type: Transform
+      pos: 9.5,44.5
+      parent: 1
+  - uid: 1374
+    components:
+    - type: Transform
+      pos: 10.5,44.5
+      parent: 1
+  - uid: 1375
+    components:
+    - type: Transform
+      pos: 42.5,44.5
+      parent: 1
+  - uid: 1376
+    components:
+    - type: Transform
+      pos: 43.5,44.5
+      parent: 1
+  - uid: 1377
+    components:
+    - type: Transform
+      pos: 44.5,44.5
+      parent: 1
+  - uid: 1378
+    components:
+    - type: Transform
+      pos: 45.5,44.5
+      parent: 1
 - proto: RMCBodyScanner
   entities:
   - uid: 649
@@ -8206,9 +8258,9 @@ entities:
       parent: 1
     missingComponents:
     - ApcPowerReceiver
+    - ActivatableUIRequiresPower
     - FaxMachine
     - ActivatableUI
-    - ActivatableUIRequiresPower
     - UserInterface
     - ItemSlots
     - ContainerContainer

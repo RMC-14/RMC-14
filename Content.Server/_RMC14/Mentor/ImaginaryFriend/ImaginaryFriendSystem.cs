@@ -4,6 +4,7 @@ using Content.Server.EUI;
 using Content.Server.Humanoid;
 using Content.Server.Mind;
 using Content.Server.Preferences.Managers;
+using Content.Server.Radio;
 using Content.Server.Station.Systems;
 using Content.Shared._RMC14.Mentor.ImaginaryFriend;
 using Content.Shared._RMC14.Xenonids;
@@ -34,6 +35,8 @@ public sealed class ImaginaryFriendSystem : SharedImaginaryFriendSystem
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly VisibilitySystem _visibility = default!;
 
+    private EntityQuery<ImaginaryFriendComponent> _imaginaryFriendQuery;
+
     private static readonly EntProtoId ImaginaryFriendPrototype = "RMCImaginaryFriendHumanoid";
     private static readonly EntProtoId XenoImaginaryFriendPrototype = "RMCImaginaryFriendXeno";
 
@@ -44,12 +47,16 @@ public sealed class ImaginaryFriendSystem : SharedImaginaryFriendSystem
     {
         base.Initialize();
 
+        _imaginaryFriendQuery = GetEntityQuery<ImaginaryFriendComponent>();
+
         SubscribeLocalEvent<HasImaginaryFriendComponent, ComponentShutdown>(OnHasImaginaryFriendShutdown);
         SubscribeLocalEvent<HasImaginaryFriendComponent, GetVisMaskEvent>(OnHasImaginaryFriendVisMask);
 
         SubscribeLocalEvent<ImaginaryFriendComponent, ImaginaryFriendToggleVisibilityActionEvent>(OnFriendToggleVisibility);
         SubscribeLocalEvent<ImaginaryFriendComponent, ImaginaryFriendStopBeingFriendsActionEvent>(OnStopBeingFriends);
         SubscribeLocalEvent<ImaginaryFriendComponent, ComponentShutdown>(OnFriendShutdown);
+        SubscribeLocalEvent<RadioSendAttemptEvent>(OnRadioSendAttempt);
+        SubscribeLocalEvent<RadioReceiveAttemptEvent>(OnRadioReceiveAttempt);
     }
 
     private void OnHasImaginaryFriendShutdown(Entity<HasImaginaryFriendComponent> ent, ref ComponentShutdown args)
@@ -96,6 +103,18 @@ public sealed class ImaginaryFriendSystem : SharedImaginaryFriendSystem
     private void OnFriendShutdown(Entity<ImaginaryFriendComponent> ent, ref ComponentShutdown args)
     {
         RemoveImaginaryFriend(ent, ent.Comp);
+    }
+
+    private void OnRadioSendAttempt(ref RadioSendAttemptEvent args)
+    {
+        if (_imaginaryFriendQuery.HasComp(Transform(args.RadioSource).ParentUid))
+            args.Cancelled = true;
+    }
+
+    private void OnRadioReceiveAttempt(ref RadioReceiveAttemptEvent args)
+    {
+        if (_imaginaryFriendQuery.HasComp(Transform(args.RadioReceiver).ParentUid))
+            args.Cancelled = true;
     }
 
     public void OpenImaginaryFriendConfirmWindow(ICommonSession session, EntityUid target)

@@ -16,7 +16,7 @@ namespace Content.Shared._RMC14.Xenonids.Designer;
 // - Designers can remotely thicken walls/doors within range of their nodes every 60 seconds.
 // - Greater Resin Surge: Converts all nearby nodes into reflective resin.
 [Access(typeof(SharedXenoConstructionSystem), typeof(DesignerGreaterResinSurgeSystem), typeof(DesignerNodeBindingSystem))]
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
 public sealed partial class DesignerStrainComponent : Component
 {
     // Runtime bookkeeping for placed design nodes.

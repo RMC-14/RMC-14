@@ -14,6 +14,7 @@ namespace Content.Client._RMC14.Xenonids.HiveTeam;
 public sealed partial class HiveTeamPanelControl : BoxContainer
 {
     private XenoPickerWindow? _picker;
+
     public HiveTeamPanelControl()
     {
         RobustXamlLoader.Load(this);
@@ -65,6 +66,7 @@ public sealed partial class HiveTeamPanelControl : BoxContainer
             var btn = new Button
             {
                 HorizontalExpand = true,
+                MinHeight = 56,
                 StyleClasses = { "ButtonSquare" },
             };
             var hbox = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Horizontal };

@@ -61,3 +61,4 @@
     damage:
       types:
         Heat: 2
+  - type: XenoChargeDontHit
