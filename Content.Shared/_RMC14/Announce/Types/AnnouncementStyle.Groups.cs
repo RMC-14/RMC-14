@@ -134,7 +134,7 @@ public sealed partial class AnnouncementTitleConfig
     public bool ShowTitle { get; set; }
 
     [DataField]
-    public string Title { get; set; } = string.Empty;
+    public LocId Title { get; set; } = string.Empty;
 
     [DataField]
     public string TitleFont { get; set; } = "DefaultBold";

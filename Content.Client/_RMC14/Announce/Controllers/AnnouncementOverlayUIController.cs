@@ -19,6 +19,11 @@ public sealed class AnnouncementOverlayUIController : UIController, IOnStateEnte
 
     public void OnStateExited(GameplayState state)
     {
+        foreach (var queued in _queuedAnnouncements)
+        {
+            NotifyAnnouncementDone(queued.Data);
+        }
+
         _queuedAnnouncements.Clear();
 
         var screen = UIManager.ActiveScreen;
@@ -27,6 +32,9 @@ public sealed class AnnouncementOverlayUIController : UIController, IOnStateEnte
             var existingWidget = screen.GetWidget<AnnouncementWidget>();
             if (existingWidget != null)
             {
+                if (existingWidget.ActiveAnnouncement is { } active)
+                    NotifyAnnouncementDone(active.Data);
+
                 existingWidget.OnAnnouncementFinished -= OnAnnouncementFinished;
                 existingWidget.Visible = false;
             }
@@ -47,14 +55,17 @@ public sealed class AnnouncementOverlayUIController : UIController, IOnStateEnte
         widget.OnAnnouncementFinished -= OnAnnouncementFinished;
         widget.OnAnnouncementFinished += OnAnnouncementFinished;
 
-        if (widget.ActiveAnnouncement != null &&
-            !CanInterrupt(widget.ActiveAnnouncement.Data, announcement))
+        var activeAnnouncement = widget.ActiveAnnouncement?.Data;
+        if (activeAnnouncement != null &&
+            !CanInterrupt(activeAnnouncement, announcement))
         {
             EnqueueAnnouncement(announcement);
             return;
         }
 
         widget.ShowAnnouncement(announcement);
+        if (activeAnnouncement != null)
+            NotifyAnnouncementDone(activeAnnouncement);
     }
 
     public event Action<uint>? AnnouncementDone;
@@ -63,6 +74,11 @@ public sealed class AnnouncementOverlayUIController : UIController, IOnStateEnte
     {
         AnnouncementDone?.Invoke(overrideId);
         TryShowNextQueuedAnnouncement();
+    }
+
+    private void NotifyAnnouncementDone(AnnouncementDisplayData announcement)
+    {
+        AnnouncementDone?.Invoke(announcement.OverrideId);
     }
 
     private void TryShowNextQueuedAnnouncement()
@@ -80,9 +96,14 @@ public sealed class AnnouncementOverlayUIController : UIController, IOnStateEnte
         {
             var lowestIndex = FindLowestPriorityIndex();
             if (lowestIndex < 0 || !HasHigherQueuePriority(queued, _queuedAnnouncements[lowestIndex]))
+            {
+                NotifyAnnouncementDone(announcement);
                 return;
+            }
 
+            var removed = _queuedAnnouncements[lowestIndex];
             _queuedAnnouncements.RemoveAt(lowestIndex);
+            NotifyAnnouncementDone(removed.Data);
         }
 
         _queuedAnnouncements.Add(queued);

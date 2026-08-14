@@ -255,9 +255,11 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
             preset = squadComp.OverwatchAnnouncementPreset;
         }
 
-        var colorHex = color.ToHex();
-        var chatMessage =
-            $"[color={colorHex}][bold]Overwatch:[/bold] transmits: [font size=16][bold]{message}[/bold][/font][/color]";
+        var chatMessage = Loc.GetString(
+            "rmc-overwatch-console-announce-message",
+            ("color", color.ToHex()),
+            ("operatorName", Name(sender)),
+            ("message", message));
 
         var filter = Filter.Empty().AddWhereAttachedEntity(e => _squad.IsInSquad(e, squad));
         _announcementRouter.Announce(new AnnouncementRequest
@@ -267,6 +269,8 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
             Route = new AnnouncementRoute
             {
                 Target = AnnouncementTarget.Marines,
+                Speaker = sender,
+                Source = sender,
                 Channels = AnnouncementChannels.Chat | AnnouncementChannels.Overlay | AnnouncementChannels.Sound,
             },
             Chat = new AnnouncementChatOptions

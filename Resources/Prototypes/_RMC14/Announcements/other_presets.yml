@@ -1,6 +1,6 @@
 - type: announcementPreset
   id: Ares
-  name: "A.R.E.S."
+  name: rmc-announcement-preset-name-ares
   description: "Ship AI system announcements"
   target: Marines
   visibleInSettings: false
@@ -41,7 +41,7 @@
           spriteScale: 1
         title:
           showTitle: true
-          title: ">> A.R.E.S. <<"
+          title: rmc-announcement-title-ares
           titleColor: "#00e5b3"
           titleFontSize: 15
           titleFont: "CozetteBold"
@@ -52,7 +52,7 @@
 
 - type: announcementPreset
   id: Critical
-  name: "Critical"
+  name: rmc-announcement-preset-name-critical
   description: "Critical priority announcements"
   target: All
   visibleInSettings: false
@@ -90,7 +90,7 @@
           spriteScale: 1
         title:
           showTitle: true
-          title: "!! CRITICAL !!"
+          title: rmc-announcement-title-critical
           titleColor: "#ff3333"
           titleFontSize: 20
           titleFont: "CozetteBold"
@@ -103,7 +103,7 @@
 
 - type: announcementPreset
   id: CLF
-  name: "C.L.F."
+  name: rmc-announcement-preset-name-clf
   description: "Colonial Liberation Front announcements"
   target: All
   visibleInSettings: false
@@ -144,7 +144,7 @@
           spriteScale: 1
         title:
           showTitle: true
-          title: ">> C.L.F. <<"
+          title: rmc-announcement-title-clf
           titleColor: "#00ff41"
           titleFontSize: 15
           titleFont: "CozetteBold"

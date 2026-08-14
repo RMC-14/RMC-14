@@ -60,10 +60,16 @@ public sealed class AnnouncementControllerSystem : EntitySystem
     {
         var preference = ResolveDisplayPreference(msg.Data.AnnouncementId);
         if (preference == AnnouncementDisplayPreference.Disabled)
+        {
+            ReleaseOverride(msg.Data.OverrideId);
             return;
+        }
 
         if (_uiManager.GetUIController<AnnouncementOverlayUIController>() is not { } controller)
+        {
+            ReleaseOverride(msg.Data.OverrideId);
             return;
+        }
 
         if (_overlayController != controller)
         {
@@ -76,7 +82,18 @@ public sealed class AnnouncementControllerSystem : EntitySystem
         if (AnnouncementDisplayResolver.TryResolve(_prototypeManager, _serialization, msg.Data, preference, out var resolved))
         {
             AnnouncementLayoutResolver.Apply(resolved, ResolveLayoutOverride(msg.Data.AnnouncementId));
+
+            if (!resolved.ShowSprite)
+            {
+                ReleaseOverride(resolved.OverrideId);
+                resolved.OverrideId = 0;
+            }
+
             controller.ShowAnnouncement(resolved);
+        }
+        else
+        {
+            ReleaseOverride(msg.Data.OverrideId);
         }
     }
 
@@ -92,8 +109,15 @@ public sealed class AnnouncementControllerSystem : EntitySystem
 
     private void OnAnnouncementDone(uint overrideId)
     {
-        if (overrideId != 0 && _net.IsConnected)
-            RaiseNetworkEvent(new AnnouncementPlaybackDoneMsg(overrideId));
+        ReleaseOverride(overrideId);
+    }
+
+    private void ReleaseOverride(uint overrideId)
+    {
+        if (overrideId == 0 || !_net.IsConnected)
+            return;
+
+        RaiseNetworkEvent(new AnnouncementPlaybackDoneMsg(overrideId));
     }
 
     private void OnPreferenceChanged(AnnouncementDisplayPreference preference)
@@ -154,8 +178,16 @@ public sealed class AnnouncementControllerSystem : EntitySystem
 
     public AnnouncementLayoutOverride? ResolveLayoutOverride(ProtoId<AnnouncementPresetPrototype> announcementId)
     {
-        if (_layoutOverrides.TryGetValue(announcementId.ToString(), out var overrideValue))
+        var id = announcementId.ToString();
+        if (_layoutOverrides.TryGetValue(id, out var overrideValue))
             return overrideValue;
+
+        if (_presetCache.TryGetValue(id, out var entry) &&
+            entry.GroupId is { } groupId &&
+            _layoutOverrides.TryGetValue(groupId, out var groupOverride))
+        {
+            return groupOverride;
+        }
 
         return _globalLayoutOverride;
     }

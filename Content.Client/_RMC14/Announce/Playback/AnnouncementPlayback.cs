@@ -47,7 +47,7 @@ public sealed class AnnouncementPlayback
         if (IsFinished || _animation == null)
             return;
 
-        var titleText = !string.IsNullOrEmpty(state.Data.Title) ? state.Data.Title : style.TitleConfig.Title;
+        var titleText = state.Data.Title;
         var hasTitle = style.TitleConfig.ShowTitle && !string.IsNullOrEmpty(titleText);
 
         var status = _animation.Update(animationContext, deltaTime);

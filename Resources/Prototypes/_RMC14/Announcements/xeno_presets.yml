@@ -1,6 +1,6 @@
 - type: announcementPreset
   id: XenoQueen
-  name: "Xeno Queen"
+  name: rmc-announcement-preset-name-xeno-queen
   description: "Queen psychic directive announcements"
   target: Xenos
   defaultPreference: Default
@@ -38,7 +38,7 @@
           speakerNameFontSize: 13
         title:
           showTitle: true
-          title: ">> QUEEN <<"
+          title: rmc-announcement-title-queen
           titleColor: "#9d67ff"
           titleFontSize: 34
           titleFont: "CozetteBold"

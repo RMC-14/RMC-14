@@ -68,9 +68,9 @@ public sealed partial class AnnouncementRouterSystem
             Preset = PresetAres,
             Route = new AnnouncementRoute
             {
-                Target = AnnouncementTarget.All,
+                Target = AnnouncementTarget.Marines,
                 Source = source,
-                SpeakerNameOverride = "A.R.E.S.",
+                SpeakerNameOverride = Loc.GetString("rmc-announcement-speaker-ares"),
                 Channels = AnnouncementChannels.Overlay | AnnouncementChannels.Sound,
             },
             Sound = new AnnouncementSoundOptions

@@ -573,6 +573,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         {
             _marineAnnounce.AnnounceSquad(
                 Loc.GetString("rmc-overwatch-console-announce-message",
+                    ("color", "#3C70FF"),
                     ("operatorName", Name(args.Actor)),
                     ("message", message)),
                 squadProto.ID);
