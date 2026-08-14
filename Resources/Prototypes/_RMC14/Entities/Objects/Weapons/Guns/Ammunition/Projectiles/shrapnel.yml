@@ -68,9 +68,9 @@
     max: 8
   - type: DamageMultipliers
     multipliers:
-      Turf: 5
-      Breaching: 10.8
-      Pylon: 5
+      Turf: 7
+      Breaching: 15.12
+      Pylon: 7
 
 - type: entity
   parent: CMProjectileShrapnel

@@ -167,7 +167,7 @@
     maxVelocity: 0
     projectileSpeed: 20
     directHit: true
-    directHitChance: 0.15
+    directHitChance: 0.4
     triggerUserIsShooter: true
     minProjectileDamageMultiplier: 1.06
     maxProjectileDamageMultiplier: 1.13
