@@ -63,11 +63,11 @@
   description: An autoinjector loaded with a special cocktail of chemicals, to be used in life-threatening situations. Doesn't require any training to use.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Medical/emergency_auto_injector.rsi
+    sprite: _RMC14/Objects/Medical/ez_medic_auto_injector.rsi
     layers:
     - state: empty_emergency
+      sprite: _RMC14/Objects/Medical/emergency_auto_injector.rsi
     - state: autoinjector1
-      sprite: _RMC14/Objects/Medical/ez_medic_auto_injector.rsi
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
   - type: Item
