@@ -19,7 +19,10 @@ public sealed partial class CryoCellComponent : Component
 
     // Temperatures in Kelvin
     [DataField, AutoNetworkedField]
-    public float CryoCellTemperature = 0f;
+    public float CryoCellTemperature = 115f;
+
+    [DataField, AutoNetworkedField]
+    public float BodyTempCryoLiquidThreshold = 210f;
 
     [DataField, AutoNetworkedField]
     public bool IsPoweredOn;

@@ -1,4 +1,3 @@
-using System.Linq;
 using Content.Server.Power.Components;
 using Content.Shared._RMC14.Body;
 using Content.Shared._RMC14.Damage;
@@ -54,6 +53,8 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
     private static readonly ProtoId<ReagentPrototype> Cryoxadone = "CMCryoxadone";
     private static readonly ProtoId<ReagentPrototype> Clonexadone = "CMClonexadone";
 
+    private readonly List<CryoCellBeakerReagent> _beakerReagentBuffer = [];
+
     public override void Initialize()
     {
         base.Initialize();
@@ -104,11 +105,10 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
 
     private void OnEjectBeaker(Entity<CryoCellComponent> cryoCell, ref CryoCellEjectBeakerBuiMsg args)
     {
-        if (!TryGetBeaker(cryoCell, out var slot, out _))
+        if (!_itemSlots.TryGetSlot(cryoCell, cryoCell.Comp.BeakerSlot, out var slot))
             return;
 
         _itemSlots.TryEjectToHands(cryoCell, slot, args.Actor, true);
-
         Dirty(cryoCell);
         UpdateUI(cryoCell);
     }
@@ -129,6 +129,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         var toxinLoss = 0f;
         var oxyLoss = 0f;
         var bodyTemp = 0f;
+        var isBeakerLoaded = false;
 
         if (occupant != null && TerminatingOrDeleted(occupant))
         {
@@ -166,6 +167,19 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
             _rmcTemperature.TryGetCurrentTemperature(occupant.Value, out bodyTemp);
         }
 
+        _beakerReagentBuffer.Clear();
+        if (_itemSlots.TryGetSlot(cryoCell, cryoCell.Comp.BeakerSlot, out var slot) &&
+            slot.ContainerSlot?.ContainedEntity is { } contained &&
+            TryComp(contained, out FitsInDispenserComponent? fits) &&
+            _solution.TryGetSolution(contained, fits.Solution, out _, out var beakerSol))
+        {
+            isBeakerLoaded = true;
+            foreach (var reagent in beakerSol.Contents)
+            {
+                _beakerReagentBuffer.Add(new CryoCellBeakerReagent(reagent.Reagent.Prototype, reagent.Quantity.Float()));
+            }
+        }
+
         var state = new CryoCellBuiState(
             netOccupant,
             occupantName,
@@ -180,7 +194,9 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
             cryoCell.Comp.CryoCellTemperature,
             cryoCell.Comp.IsPoweredOn,
             cryoCell.Comp.AutoEject,
-            cryoCell.Comp.ReleaseNotice);
+            cryoCell.Comp.ReleaseNotice,
+            isBeakerLoaded,
+            _beakerReagentBuffer.ToArray());
 
         _ui.SetUiState(cryoCell.Owner, CryoCellUIKey.Key, state);
     }
@@ -257,7 +273,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
                 }
 
                 // Severe damage heals slower without proper chemicals
-                if (curBodyTemp <= 210f) // 210 Kelvin
+                if (curBodyTemp <= cryoCell.Comp.BodyTempCryoLiquidThreshold)
                 {
                     var bruteDamage = damageable.DamagePerGroup.GetValueOrDefault(BruteGroup);
                     if (bruteDamage > 0)
@@ -287,7 +303,10 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         }
 
         // Chemical healing if there are cryo meds
-        if (TryGetBeaker(cryoCell, out _, out var beakerSol) &&
+        if (_itemSlots.TryGetSlot(cryoCell, cryoCell.Comp.BeakerSlot, out var slot) &&
+            slot.ContainerSlot?.ContainedEntity is { } contained &&
+            TryComp(contained, out FitsInDispenserComponent? fits) &&
+            _solution.TryGetSolution(contained, fits.Solution, out _, out var beaker) &&
             _rmcBloodstream.TryGetChemicalSolution(occupant, out var solutionEnt, out var bloodStream))
         {
             bool HasCryo(Solution solution)
@@ -304,7 +323,6 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
                 return false;
             }
 
-            var beaker = beakerSol.Comp.Solution;
             var beakerHasCryo = HasCryo(beaker);
             var occupantHasCryo = HasCryo(bloodStream);
 

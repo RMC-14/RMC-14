@@ -1,9 +1,5 @@
-using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Storage;
-using Content.Shared.Chemistry.Components;
-using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Movement.Events;
 using Content.Shared.Stunnable;
 using Robust.Shared.Containers;
@@ -15,10 +11,8 @@ public abstract class SharedCryoCellSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly SharedPointLightSystem _light = default!;
     [Dependency] private readonly RMCMovementSystem _rmcMovement = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -99,28 +93,6 @@ public abstract class SharedCryoCellSystem : EntitySystem
 
         Dirty(cryoCell);
         UpdateCryoCellVisuals(cryoCell);
-    }
-
-    protected bool TryGetBeaker(
-        Entity<CryoCellComponent> cryoCell,
-        [NotNullWhen(true)] out ItemSlot? slot,
-        out Entity<SolutionComponent> solution)
-    {
-        solution = default;
-        if (!_itemSlots.TryGetSlot(cryoCell, cryoCell.Comp.BeakerSlot, out slot) ||
-            slot.ContainerSlot?.ContainedEntity is not { } contained)
-        {
-            return false;
-        }
-
-        if (!TryComp(contained, out FitsInDispenserComponent? fits))
-            return false;
-
-        if (!_solution.TryGetSolution(contained, fits.Solution, out var solutionNullable))
-            return false;
-
-        solution = solutionNullable.Value;
-        return true;
     }
 
     protected void UpdateCryoCellVisuals(Entity<CryoCellComponent> cryoCell, bool? powered = null)

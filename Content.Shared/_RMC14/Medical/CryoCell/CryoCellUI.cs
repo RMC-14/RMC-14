@@ -17,7 +17,9 @@ public sealed class CryoCellBuiState(
     float cellTemperature,
     bool isOn,
     bool autoEject,
-    bool releaseNotice)
+    bool releaseNotice,
+    bool isBeakerLoaded,
+    CryoCellBeakerReagent[] beakerContents)
     : BoundUserInterfaceState
 {
     public readonly NetEntity? Occupant = occupant;
@@ -34,6 +36,8 @@ public sealed class CryoCellBuiState(
     public readonly bool IsOn = isOn;
     public readonly bool AutoEject = autoEject;
     public readonly bool ReleaseNotice = releaseNotice;
+    public readonly bool IsBeakerLoaded = isBeakerLoaded;
+    public readonly CryoCellBeakerReagent[] BeakerContents = beakerContents;
 }
 
 [Serializable, NetSerializable]
