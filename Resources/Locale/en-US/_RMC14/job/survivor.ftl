@@ -237,7 +237,7 @@ rmc-job-name-survivor-infrastructure-engineer = Inzhener Infrastruktury
 
 rmc-job-name-survivor-reactor-technician = Tekhnik Reaktora
 
-rmc-job-name-survivor-armed-police-officer = Narodnyy Vooruzhennyy Politsioner
+rmc-job-name-survivor-civil-gendarmes-officer = Narodnyye Grazhdanskiye Zhandarmy
 
 rmc-job-name-survivor-army-reservist = Armiyskiy Rezervist
 rmc-job-prefix-army-reservist = 202/ARMY
@@ -283,6 +283,9 @@ rmc-job-prefix-soro-sof-spec = 121/RECON SPEC
 
 rmc-job-name-soro-sof-soldier = SOF Soldier
 rmc-job-prefix-soro-sof-soldier = 121/RECON SOL
+
+rmc-job-name-soro-sof-synth = SOF Support Synthetic
+rmc-job-prefix-soro-sof-synth = 121/RECON SYN
 
 # Trijent survs
 
@@ -332,6 +335,8 @@ rmc-job-prefix-crashland-spec = 173/RECON SPEC
 rmc-job-name-crashland-soldier = Airborne Soldier
 rmc-job-prefix-crashland-soldier = 173/RECON SOL
 
+rmc-job-name-crashland-synth = Airborne Support Synthetic
+rmc-job-prefix-crashland-synth = 173/RECON SYN
 
 # Fiorina Science Annex Survs
 

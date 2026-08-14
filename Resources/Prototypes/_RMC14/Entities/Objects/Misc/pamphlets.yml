@@ -124,7 +124,7 @@
     givePrefix: rmc-job-prefix-spotter
     isAppendPrefix: false
     giveIcon:
-      sprite: _RMC14/Interface/cm_job_icons.rsi
+      sprite: _RMC14/Interface/job_icons/UNMC/marine.rsi
       state: hudsquad_ass
     giveMapBlip:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
@@ -219,7 +219,7 @@
     givePrefix: rmc-job-prefix-loader
     isAppendPrefix: false
     giveIcon:
-      sprite: _RMC14/Interface/cm_job_icons.rsi
+      sprite: _RMC14/Interface/job_icons/UNMC/marine.rsi
       state: hudsquad_load
     giveMapBlip:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
@@ -250,7 +250,7 @@
     givePrefix: rmc-job-prefix-mortar-operator
     isAppendPrefix: false
     giveIcon:
-      sprite: _RMC14/Interface/cm_job_icons.rsi
+      sprite: _RMC14/Interface/job_icons/UNMC/marine.rsi
       state: hudsquad_mortar
     giveMapBlip:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
@@ -380,7 +380,7 @@
     givePrefix: rmc-job-prefix-honor-guard
     isAppendPrefix: false
     giveIcon:
-      sprite: _RMC14/Interface/cm_job_icons.rsi
+      sprite: _RMC14/Interface/job_icons/UNMC/military_police.rsi
       state: hudsquad_hgmp
     giveMapBlip:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
