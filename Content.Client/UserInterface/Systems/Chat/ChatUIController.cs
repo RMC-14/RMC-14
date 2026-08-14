@@ -886,6 +886,14 @@ public sealed partial class ChatUIController : UIController
             _popup?.PopupClient(warning, localEntity, localEntity);
             return;
         }
+
+        if (_cmGhost?.ShouldMutePostDeathChat((ChatChannel) channel) == true &&
+            _player.LocalEntity is { } postDeathMutedEntity)
+        {
+            var warning = Loc.GetString("rmc-ghost-post-death-chat-send-blocked");
+            _popup?.PopupClient(warning, postDeathMutedEntity, postDeathMutedEntity);
+            return;
+        }
         // RMC14
 
         _manager.SendMessage(text, prefixChannel == 0 ? channel : prefixChannel);
