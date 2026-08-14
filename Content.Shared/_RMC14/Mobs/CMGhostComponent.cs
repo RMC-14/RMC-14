@@ -6,7 +6,7 @@ using Content.Shared._RMC14.Roles.FindParasite;
 
 namespace Content.Shared._RMC14.Mobs;
 
-[RegisterComponent, NetworkedComponent, Access([typeof(SharedGhostSystem)])]
+[RegisterComponent, NetworkedComponent, Access([typeof(SharedCMGhostSystem), typeof(SharedGhostSystem)])]
 [AutoGenerateComponentState(true)]
 public sealed partial class CMGhostComponent : Component
 {
@@ -27,6 +27,9 @@ public sealed partial class CMGhostComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntityUid? ToggleDeadChatEntity;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan? PostDeathChatMutedUntil;
 
     [DataField]
     public EntProtoId FindParasite = "ActionFindParasite";

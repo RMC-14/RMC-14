@@ -548,6 +548,12 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCGhostCanBoo =
         CVarDef.Create("rmc.ghosts_can_boo", false, CVar.SERVER | CVar.SERVERONLY);
 
+    public static readonly CVarDef<bool> RMCPostDeathChatMute =
+        CVarDef.Create("rmc.post_death_chat_mute", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<int> RMCPostDeathChatMuteTimeSeconds =
+        CVarDef.Create("rmc.post_death_chat_mute_time_seconds", 10, CVar.SERVER | CVar.SERVERONLY);
+
     public static readonly CVarDef<int> RMCRoyalResinEveryMinutes =
         CVarDef.Create("rmc.royal_resin_every_minutes", 5, CVar.REPLICATED | CVar.SERVER);
 

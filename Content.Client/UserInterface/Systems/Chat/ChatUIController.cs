@@ -75,7 +75,8 @@ public sealed partial class ChatUIController : UIController
     [UISystemDependency] private readonly RoleCodewordSystem? _roleCodewordSystem = default!;
 
     // RMC14
-    [UISystemDependency] private readonly SharedPopupSystem _popup = default!;
+    [UISystemDependency] private readonly CMGhostSystem? _cmGhost = default;
+    [UISystemDependency] private readonly SharedPopupSystem? _popup = default!;
     // RMC14
 
     private static readonly ProtoId<ColorPalettePrototype> ChatNamePalette = "ChatNames";
@@ -882,7 +883,7 @@ public sealed partial class ChatUIController : UIController
             _ent.HasComponent<RMCDeadChatMutedComponent>(localEntity))
         {
             var warning = Loc.GetString("rmc-ghost-dead-chat-send-blocked");
-            _popup.PopupClient(warning, localEntity, localEntity);
+            _popup?.PopupClient(warning, localEntity, localEntity);
             return;
         }
         // RMC14
@@ -938,7 +939,8 @@ public sealed partial class ChatUIController : UIController
             _ent.HasComponent<RMCDeadChatMutedComponent>(localEntity))
             return;
 
-        ProcessChatMessage(msg, !msg.HidePopup || msg.UseEmoteSpeechBubble);
+        if (_cmGhost?.ShouldMutePostDeathChat(msg.Channel) != true)
+            ProcessChatMessage(msg, !msg.HidePopup || msg.UseEmoteSpeechBubble);
         // RMC14
 
         if ((msg.Channel & ChatChannel.AdminRelated) == 0 ||
