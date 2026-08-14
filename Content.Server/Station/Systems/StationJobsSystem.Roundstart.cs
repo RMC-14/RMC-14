@@ -41,6 +41,21 @@ public sealed partial class StationJobsSystem
         _orderedWeights = _jobsByWeight.Keys.OrderByDescending(i => i).ToList();
     }
 
+    public List<ProtoId<JobPrototype>> GetWeightedJobs()
+    {
+        var result = new List<ProtoId<JobPrototype>>();
+
+        InitializeRoundStart();
+
+        foreach (var weight in _orderedWeights)
+        {
+            if (weight > 0)
+                result.AddRange(_jobsByWeight[weight].Select(j => (ProtoId<JobPrototype>)j));
+        }
+
+        return result;
+    }
+
     /// <summary>
     /// Assigns jobs based on the given preferences and list of stations to assign for.
     /// This does NOT change the slots on the station, only figures out where each player should go.

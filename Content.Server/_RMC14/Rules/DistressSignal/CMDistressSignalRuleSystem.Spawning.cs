@@ -1,5 +1,6 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Numerics;
+using Content.Server.Database;
 using Content.Server.GameTicking;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
@@ -23,11 +24,13 @@ using Content.Shared.GameTicking;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
+using JetBrains.FormatRipper.Elf;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Toolshed.TypeParsers;
 
 namespace Content.Server._RMC14.Rules.DistressSignal;
 
@@ -36,6 +39,99 @@ public sealed partial class CMDistressSignalRuleSystem
     private static readonly ProtoId<JobPrototype> VehicleCrewmanJob = "CMVehicleCrewman";
     private static readonly EntProtoId VehicleHumveeArcUnlock = "VehicleHumveeARC";
     private static readonly EntProtoId VehicleTankUnlock = "VehicleTank";
+
+    private List<EntityUid> _xenoSpawnPoints = new List<EntityUid>();
+    private List<EntityUid> _xenoLeaderSpawnPoints = new List<EntityUid>();
+
+    private void OnRMCPrePlayerSpawn(RMCPlayerSpawningEvent ev)
+    {
+        var player = ev.Player;
+        var assignment = player.AssignedJob;
+        var session = player.Session;
+
+        if (assignment == null)
+            return;
+
+        var rule = TryGetActiveRule();
+        if (rule is not { } comp)
+            return;
+
+        if (assignment.JobID == comp.XenoSelectableJob.Id)
+        {
+            var xenoEnt = SpawnXenoEnt(comp.LarvaEnt, session, true, comp, _xenoSpawnPoints, _xenoLeaderSpawnPoints);
+
+            if (!_mind.TryGetMind(session.UserId, out var mind))
+                mind = _mind.CreateMind(session.UserId);
+
+            _mind.TransferTo(mind.Value, xenoEnt);
+        }
+        else if (assignment.JobID == comp.QueenJob.Id)
+        {
+            var xenoEnt = SpawnXenoEnt(comp.QueenEnt, session, false, comp, _xenoSpawnPoints, _xenoLeaderSpawnPoints);
+
+            if (!_mind.TryGetMind(session.UserId, out var mind))
+                mind = _mind.CreateMind(session.UserId);
+
+            _mind.TransferTo(mind.Value, xenoEnt);
+        }
+        else
+        {
+            return;
+        }
+
+        ev.Handled = true;
+    }
+
+    private void OnCollectingAssignments(CollectingAssignmentsEvent ev)
+    {
+        if (TryGetActiveRuleEntity() is not { } rule)
+            return;
+
+        var ruleComp = rule.Comp;
+        var spawnComp = EnsureComp<CMDistressSignalSpawningComponent>(rule);
+
+        var survAssignment = spawnComp.SurvivorAssignment;
+
+        if (ev.IsFirstCollection)
+        {
+            // survivor assignments
+            SetupSurvivorJobs(ruleComp);
+            foreach (var (job, count) in ruleComp.SurvivorJobs)
+            {
+                if (!_prototypes.TryIndex(job, out var jobProto))
+                    continue;
+                var assignment = new JobAssignment(jobProto, null);
+                assignment.AssignmentLimit = count > -1 ? count : null;
+                survAssignment.Assignments.Add(assignment);
+                ev.JobAssignments[job] = new List<JobAssignment> { assignment };
+            }
+
+            // xeno assignments
+            ev.JobAssignments[ruleComp.XenoSelectableJob] = new List<JobAssignment> {
+                new JobAssignment(_prototypes.Index(ruleComp.XenoSelectableJob), null)
+            };
+
+            var queenAssignment = new JobAssignment(_prototypes.Index(ruleComp.QueenJob), null);
+            queenAssignment.AssignmentLimit = 1;
+            ev.JobAssignments[ruleComp.QueenJob] = new List<JobAssignment> {
+                queenAssignment
+            };
+        }
+
+        // calculate total role weight
+        var totalRoleWeight = 0f;
+        foreach (var player in ev.ProcessedPlayers)
+        {
+            if (player.AssignedJob is { } job)
+                totalRoleWeight += job.JobPrototype.RoleWeight;
+        }
+
+        // surv limit
+        survAssignment.AssignmentLimit = (int)Math.Clamp((int)Math.Floor(totalRoleWeight / _marinesPerSurvivor), _minimumSurvivors, _maximumSurvivors);
+
+        // xeno limit
+        ev.JobAssignments[ruleComp.XenoSelectableJob][0].AssignmentLimit = (int)Math.Floor(Math.Max(1, totalRoleWeight / _marinesPerXeno));
+    }
 
     /// <summary>
     /// Main handler for player spawning during the distress signal round.
@@ -93,6 +189,20 @@ public sealed partial class CMDistressSignalRuleSystem
         {
             var bioscan = Spawn(null, MapCoordinates.Nullspace);
             EnsureComp<BioscanComponent>(bioscan);
+        }
+
+        _xenoSpawnPoints.Clear();
+        var spawnQuery = AllEntityQuery<XenoSpawnPointComponent>();
+        while (spawnQuery.MoveNext(out var spawnUid, out _))
+        {
+            _xenoSpawnPoints.Add(spawnUid);
+        }
+
+        _xenoLeaderSpawnPoints.Clear();
+        var leaderSpawnQuery = AllEntityQuery<XenoLeaderSpawnPointComponent>();
+        while (leaderSpawnQuery.MoveNext(out var spawnUid, out _))
+        {
+            _xenoLeaderSpawnPoints.Add(spawnUid);
         }
 
         return true;
