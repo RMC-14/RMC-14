@@ -46,7 +46,8 @@ namespace Content.Shared.Preferences
 
         public const string SurvivorBaseScenarioPrefix = "!base:";
 
-        public static string GetSurvivorBaseScenarioKey(string mapId) => SurvivorBaseScenarioPrefix + mapId;
+        public static string GetSurvivorBaseScenarioKey(string mapId, string jobId) =>
+            SurvivorBaseScenarioPrefix + mapId + ":" + jobId;
 
         [DataField]
         private HashSet<string> _disabledSurvivorInserts = new();

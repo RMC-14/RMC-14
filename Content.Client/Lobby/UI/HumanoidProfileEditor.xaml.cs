@@ -1094,7 +1094,7 @@ namespace Content.Client.Lobby.UI
                     if (department.ID == SurvivorVariantJobPreferences.SurvivorDepartment &&
                         survivorVariantJobs.TryGetValue(job.ID, out var variants))
                     {
-                        AddSurvivorVariantJobSelectors(category, jobRow, variants);
+                        AddSurvivorVariantJobSelectors(category, jobRow, variants, job.ID);
                     }
 
                     // RMC14
@@ -1156,7 +1156,8 @@ namespace Content.Client.Lobby.UI
         private void AddSurvivorVariantJobSelectors(
             BoxContainer category,
             BoxContainer baseJobRow,
-            List<SurvivorVariantJobPreferences.MapVariantJobs> mapGroups)
+            List<SurvivorVariantJobPreferences.MapVariantJobs> mapGroups,
+            string baseJobId)
         {
             if (mapGroups.Count == 0)
                 return;
@@ -1230,7 +1231,7 @@ namespace Content.Client.Lobby.UI
                     titleSize);
 
                 if (mapGroup.RegularJobs.Count > 0)
-                    AddSurvivorVariantBaseToggle(headerRow, regularRows, mapGroup.MapId);
+                    AddSurvivorVariantBaseToggle(headerRow, regularRows, mapGroup.MapId, baseJobId);
 
                 var insertRows = new List<SurvivorVariantInsertRows>();
                 foreach (var insert in mapGroup.Inserts)
@@ -1304,9 +1305,9 @@ namespace Content.Client.Lobby.UI
             }
         }
 
-        private void AddSurvivorVariantBaseToggle(BoxContainer headerRow, List<SurvivorVariantJobRow> regularRows, string mapId)
+        private void AddSurvivorVariantBaseToggle(BoxContainer headerRow, List<SurvivorVariantJobRow> regularRows, string mapId, string baseJobId)
         {
-            var key = HumanoidCharacterProfile.GetSurvivorBaseScenarioKey(mapId);
+            var key = HumanoidCharacterProfile.GetSurvivorBaseScenarioKey(mapId, baseJobId);
             var disableBtn = new Button
             {
                 Text = Loc.GetString("humanoid-profile-editor-survivor-base-disable-button"),

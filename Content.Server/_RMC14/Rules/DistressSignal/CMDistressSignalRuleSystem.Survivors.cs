@@ -115,7 +115,7 @@ public sealed partial class CMDistressSignalRuleSystem
         if (!IsJobAllowed(id, comp.CivilianSurvivorJob) || !IsJobAllowed(id, job))
             return;
 
-        if (IsActiveSurvivorRollDisabledForPlayer(id))
+        if (IsActiveSurvivorRollDisabledForPlayer(id, job))
             return;
 
         if (comp.SurvivorJobOverrides != null)
@@ -147,7 +147,7 @@ public sealed partial class CMDistressSignalRuleSystem
         }
     }
 
-    private bool IsActiveSurvivorRollDisabledForPlayer(NetUserId id)
+    private bool IsActiveSurvivorRollDisabledForPlayer(NetUserId id, ProtoId<JobPrototype> job)
     {
         var scenario = ActiveNightmareScenario;
         var isRegular = string.IsNullOrWhiteSpace(scenario) ||
@@ -159,7 +159,7 @@ public sealed partial class CMDistressSignalRuleSystem
             if (SelectedPlanetMapId is not { } mapId)
                 return false;
 
-            key = HumanoidCharacterProfile.GetSurvivorBaseScenarioKey(mapId.Id);
+            key = HumanoidCharacterProfile.GetSurvivorBaseScenarioKey(mapId.Id, job.Id);
         }
         else
         {
