@@ -65,7 +65,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Medical/emergency_auto_injector.rsi
     layers:
-    - state: autoinjector
+    - state: empty_emergency
     - state: autoinjector1
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
@@ -87,7 +87,6 @@
 #          Quantity: 19
   - type: SolutionContainerVisuals
     maxFillLevels: 1
-    changeColor: false
   - type: MedicallyUnskilledDoAfter
     min: 0
     doAfter: 0
