@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using Content.Server._RMC14.Marines;
 using Content.Shared._RMC14.Announce;
+using Content.Shared._RMC14.Intel;
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Survivor;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Ghost;
 using Robust.Shared.Player;
@@ -30,11 +32,15 @@ public sealed class AnnouncementTargetFilter
                     if (session.AttachedEntity is not { } entity)
                         continue;
 
-                    if (_entityManager.HasComponent<MarineComponent>(entity) ||
-                        _entityManager.HasComponent<GhostComponent>(entity))
-                    {
-                        marineFilter.Add(session);
-                    }
+                    if (!_entityManager.HasComponent<MarineComponent>(entity) &&
+                        !_entityManager.HasComponent<GhostComponent>(entity))
+                        continue;
+
+                    if (_entityManager.HasComponent<RMCSurvivorComponent>(entity) ||
+                        _entityManager.HasComponent<IntelRescueSurvivorObjectiveComponent>(entity))
+                        continue;
+
+                    marineFilter.Add(session);
                 }
                 return Filter.Empty().AddPlayers(marineFilter);
 

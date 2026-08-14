@@ -506,7 +506,7 @@ public sealed partial class AnnouncementLayoutEditorWindow : DefaultWindow
 
     private AnnouncementLayoutOverride? GetEffectiveEditedLayout()
     {
-        return GetStoredEditedLayout() ?? _announcementController.GetGlobalLayoutOverride();
+        return GetStoredEditedLayout() ?? _announcementController.ResolveLayoutOverride(_selectedPreset);
     }
 
     private AnnouncementLayoutOverride? GetStoredEditedLayout()

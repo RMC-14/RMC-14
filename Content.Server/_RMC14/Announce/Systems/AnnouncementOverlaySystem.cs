@@ -17,7 +17,7 @@ public sealed partial class AnnouncementOverlaySystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
 
-    private const float PvsFallbackTimeoutSeconds = 30f;
+    private static readonly TimeSpan PvsFallbackTimeout = TimeSpan.FromMinutes(30);
     private uint _nextOverrideId = 1;
     private readonly Dictionary<(EntityUid Speaker, ICommonSession Session), int> _overrideRefs = new();
     private readonly Dictionary<uint, OverrideTracker> _pendingOverrides = new();
@@ -99,7 +99,7 @@ public sealed partial class AnnouncementOverlaySystem : EntitySystem
         var overrideId = _nextOverrideId++;
         _pendingOverrides[overrideId] = tracker;
 
-        Timer.Spawn(TimeSpan.FromSeconds(PvsFallbackTimeoutSeconds), () => CompleteOverride(overrideId));
+        Timer.Spawn(PvsFallbackTimeout, () => CompleteOverride(overrideId), tracker.FallbackCancellation.Token);
         return overrideId;
     }
 
@@ -144,7 +144,11 @@ public sealed partial class AnnouncementOverlaySystem : EntitySystem
         ReleaseOverrideRef(tracker.Speaker, session);
 
         if (tracker.Sessions.Count == 0)
+        {
             _pendingOverrides.Remove(overrideId);
+            tracker.FallbackCancellation.Cancel();
+            tracker.FallbackCancellation.Dispose();
+        }
     }
 
     private void CompleteOverride(uint overrideId)
@@ -152,6 +156,7 @@ public sealed partial class AnnouncementOverlaySystem : EntitySystem
         if (!_pendingOverrides.Remove(overrideId, out var tracker))
             return;
 
+        tracker.FallbackCancellation.Dispose();
         foreach (var session in tracker.Sessions)
         {
             ReleaseOverrideRef(tracker.Speaker, session);
@@ -162,6 +167,7 @@ public sealed partial class AnnouncementOverlaySystem : EntitySystem
     {
         public readonly EntityUid Speaker;
         public readonly HashSet<ICommonSession> Sessions = new();
+        public readonly System.Threading.CancellationTokenSource FallbackCancellation = new();
 
         public OverrideTracker(EntityUid speaker)
         {

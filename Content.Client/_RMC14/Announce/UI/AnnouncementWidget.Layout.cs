@@ -46,7 +46,8 @@ public sealed partial class AnnouncementWidget
         };
 
         var titleSpansAnnouncement = _hasTitle &&
-            (style.LayoutConfig.SpritePosition == AnnouncementSpritePosition.Left || style.LayoutConfig.SpritePosition == AnnouncementSpritePosition.Right) &&
+            _spriteContainer != null &&
+            style.LayoutConfig.SpritePosition is AnnouncementSpritePosition.Left or AnnouncementSpritePosition.Right &&
             style.LayoutConfig.TitlePosition is AnnouncementTitlePosition.Above or AnnouncementTitlePosition.Below;
 
         var textLayout = _textLayoutBuilder.BuildTextLayout(
@@ -159,11 +160,14 @@ public sealed partial class AnnouncementWidget
 
             _activeTextMaxWidth = resolvedTextWidth;
             var titleAlignment = GetTextAlignment(style, _spriteContainer != null);
+            var standaloneTitleWidth = MathF.Max(
+                preferredAnnouncementWidth,
+                MathF.Max(contentContainer.DesiredSize.X, textLayout.MaxAllowedWidth));
             var titleBuild = _textLayoutBuilder.BuildStandaloneTitleLayout(
                 titleText,
                 style,
                 screenSize,
-                MathF.Max(contentContainer.DesiredSize.X, textLayout.MaxAllowedWidth),
+                standaloneTitleWidth,
                 titleAlignment);
 
             _richTextLabels = new Control[] { titleBuild.PrimaryLabel }.Concat(textLayout.Labels).ToArray();
