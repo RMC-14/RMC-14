@@ -367,7 +367,7 @@
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
     - state: autoinjector_tag
-      sprite: _RMC14/Objects/Medical/auto_injector.rsi
+      sprite: _RMC14/Objects/Medical/auto_injectors.rsi
       color: "#FFFFFF"
   - type: SolutionContainerManager
     solutions:
@@ -390,7 +390,7 @@
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
     - state: autoinjector_tag
-      sprite: _RMC14/Objects/Medical/auto_injector.rsi
+      sprite: _RMC14/Objects/Medical/auto_injectors.rsi
       color: "#DD95FF"
   - type: SolutionContainerManager
     solutions:
@@ -411,7 +411,7 @@
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
     - state: autoinjector_tag
-      sprite: _RMC14/Objects/Medical/auto_injector.rsi
+      sprite: _RMC14/Objects/Medical/auto_injectors.rsi
       color: "#1EF6FF"
   - type: SolutionContainerManager
     solutions:
@@ -432,7 +432,7 @@
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
     - state: autoinjector_tag
-      sprite: _RMC14/Objects/Medical/auto_injector.rsi
+      sprite: _RMC14/Objects/Medical/auto_injectors.rsi
       color: "#21A0FF"
   - type: SolutionContainerManager
     solutions:
@@ -453,7 +453,7 @@
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
     - state: autoinjector_tag
-      sprite: _RMC14/Objects/Medical/auto_injector.rsi
+      sprite: _RMC14/Objects/Medical/auto_injectors.rsi
       color: "#171DFF"
   - type: SolutionContainerManager
     solutions:
@@ -474,7 +474,7 @@
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
     - state: autoinjector_tag
-      sprite: _RMC14/Objects/Medical/auto_injector.rsi
+      sprite: _RMC14/Objects/Medical/auto_injectors.rsi
       color: "#00FF07"
   - type: SolutionContainerManager
     solutions:
@@ -495,7 +495,7 @@
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
     - state: autoinjector_tag
-      sprite: _RMC14/Objects/Medical/auto_injector.rsi
+      sprite: _RMC14/Objects/Medical/auto_injectors.rsi
       color: "#E8FF00"
   - type: SolutionContainerManager
     solutions:
