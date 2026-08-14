@@ -8,9 +8,6 @@
   },
   "states": [
     {
-      "name": "autoinjector1"
-    },
-    {
       "name": "empty_emergency"
     },
     {

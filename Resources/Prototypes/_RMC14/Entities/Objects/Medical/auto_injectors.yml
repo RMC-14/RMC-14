@@ -67,6 +67,7 @@
     layers:
     - state: empty_emergency
     - state: autoinjector1
+      sprite: _RMC14/Objects/Medical/ez_medic_auto_injector.rsi
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
   - type: Item
@@ -603,7 +604,7 @@
   components:
   - type: Sprite
     layers:
-    - state: autoinjector
+    - state: empty_research
     - state: autoinjector1
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
@@ -624,7 +625,7 @@
   components:
   - type: Sprite
     layers:
-    - state: autoinjector
+    - state: empty_research
     - state: autoinjector1
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
@@ -644,7 +645,7 @@
   components:
   - type: Sprite
     layers:
-    - state: autoinjector
+    - state: empty_research
     - state: autoinjector1
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
@@ -664,7 +665,7 @@
   components:
   - type: Sprite
     layers:
-    - state: autoinjector
+    - state: empty_research
     - state: autoinjector1
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
