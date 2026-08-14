@@ -68,6 +68,9 @@
   - type: IgnorePredictionHide
   - type: GunIgnorePrediction
   - type: AssistedReloadWeapon
+  - type: RMCBackblast
+    nearEffect: RMCBackblastSmokeNear
+    farEffect: RMCBackblastSmokeFar
   - type: WieldedCrosshair
     rsi:
       sprite: _RMC14/Interface/MousePointer/explosive_mouse.rsi
@@ -165,6 +168,8 @@
     layers:
     - state: hjra_tank
       map: ["enum.AmmoVisualLayers.Base"]
+  - type: Projectile
+    angle: 90
   - type: IgnorePredictionHide
 
 - type: entity
@@ -182,6 +187,8 @@
     layers:
     - state: hjra_explosive
       map: ["enum.AmmoVisualLayers.Base"]
+  - type: Projectile
+    angle: 90
   - type: IgnorePredictionHide
 
 - type: entity
@@ -215,6 +222,7 @@
         restitution: 0.0
         density: 20
   - type: Projectile
+    angle: 90
     impactEffect: BulletImpactEffect
     damage:
       types:

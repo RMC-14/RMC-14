@@ -19,6 +19,9 @@
     cycleable: false
     whitelist:
       tags: []
+  - type: RMCBackblast
+    nearEffect: RMCBackblastSmokeNear
+    farEffect: RMCBackblastSmokeFar
   - type: RMCFoldableGun
     foldDelay: 2
     foldText: rmc-gun-foldable-launcher-fold-self

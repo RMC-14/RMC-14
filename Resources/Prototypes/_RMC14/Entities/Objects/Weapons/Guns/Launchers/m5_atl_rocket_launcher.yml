@@ -70,7 +70,7 @@
   parent: [RMCBaseWeaponLauncher, RMCBaseAttachableHolder]
   name: M5-ATL
   id: RMCWeaponLauncherM5ATL
-  description: "The M5 Anti-Tank Launcher is a powerful anti-armor infantry weapon, commonly fielded by the UNMC. Used to take out light-tanks and enemy structures, the M5-ATL is a dangerous weapon with a variety of combat uses, depending on the loaded ammunition, and is capable of firing both shells and rocket-propelled grenades.\n\nThis one is missing its smart optics completely, and seems to be damaged, greatly limiting its range..."
+  description: The M5 Anti-Tank Launcher is a powerful anti-armor infantry weapon, commonly fielded by the UNMC. Used to take out light-tanks and enemy structures, the M5-ATL is a dangerous weapon with a variety of combat uses, depending on the loaded ammunition, and is capable of firing both shells and rocket-propelled grenades.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m5atl/m5atl_inhands.rsi
@@ -91,6 +91,34 @@
   - type: Corrodible
     isCorrodible: false
   - type: RMCMagneticItem
+  - type: RMCBackblast
+    nearEffect: RMCBackblastSmokeNear
+    farEffect: RMCBackblastSmokeFar
+
+- type: entity
+  id: RMCBackblastSmokeNear
+  name: backblast smoke
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    drawdepth: Effects
+    sprite: _RMC14/Effects/smoke.rsi
+    state: smoke2
+  - type: TimedDespawn
+    lifetime: 1.5
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  parent: RMCBackblastSmokeNear
+  id: RMCBackblastSmokeFar
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 1
 
 # 84mm HE
 - type: entity

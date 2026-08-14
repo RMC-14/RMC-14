@@ -21,3 +21,6 @@
       tags: []
   - type: Corrodible
     isCorrodible: false
+  - type: RMCBackblast
+    nearEffect: RMCBackblastSmokeNear
+    farEffect: RMCBackblastSmokeFar
