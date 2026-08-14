@@ -1,5 +1,7 @@
+using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
+using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
@@ -57,6 +59,8 @@ public sealed class XenoChargeSystem : EntitySystem
     [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly CMArmorSystem _armor = default!;
+    [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
 
     private readonly ProtoId<DamageTypePrototype> _blunt = "Blunt";
 
@@ -76,6 +80,8 @@ public sealed class XenoChargeSystem : EntitySystem
         SubscribeLocalEvent<XenoChargeComponent, StopThrowEvent>(OnXenoChargeStop);
         SubscribeLocalEvent<XenoChargeComponent, PreventCollideEvent>(OnXenoChargePreventCollide);
         SubscribeLocalEvent<XenoChargingComponent, PreventCollideEvent>(OnXenoChargingPreventCollide);
+
+        SubscribeLocalEvent<XenoChargeWindupComponent, CMGetArmorEvent>(OnXenoWindupChargeGetArmor);
     }
 
     private void OnXenoChargeAction(Entity<XenoChargeComponent> xeno, ref XenoChargeActionEvent args)
@@ -101,12 +107,16 @@ public sealed class XenoChargeSystem : EntitySystem
             Hidden = true,
         };
 
+        EnsureComp<XenoChargeWindupComponent>(xeno);
+        _armor.UpdateArmorValue(xeno.Owner);
         _stun.TrySlowdown(xeno, TimeSpan.FromSeconds(1.75f), false, 0f, 0f);
         _doAfter.TryStartDoAfter(doAfter);
     }
 
     private void OnXenoChargeDoAfterEvent(Entity<XenoChargeComponent> xeno, ref XenoChargeDoAfterEvent args)
     {
+        RemCompDeferred<XenoChargeWindupComponent>(xeno);
+        _armor.UpdateArmorValue(xeno.Owner);
         if (args.Cancelled)
             return;
 
@@ -197,6 +207,9 @@ public sealed class XenoChargeSystem : EntitySystem
             if (crush.SetDamage != null)
                 structDamage = crush.SetDamage;
         }
+
+        if (xeno.Comp.Emote is { } emote)
+            _emote.TryEmoteWithChat(xeno, emote);
 
         //var finalDamage = _xeno.TryApplyXenoSlashDamageMultiplier(targetId, structDamage);
         var damage = _damageable.TryChangeDamage(targetId, structDamage, origin: xeno, tool: xeno, shouldIgnoreClawLogic: true);
@@ -302,5 +315,11 @@ public sealed class XenoChargeSystem : EntitySystem
     {
         if (_xenoChargeDontHitQuery.HasComp(args.OtherEntity))
             args.Cancelled = true;
+    }
+
+    private void OnXenoWindupChargeGetArmor(Entity<XenoChargeWindupComponent> xeno, ref CMGetArmorEvent args)
+    {
+        if (xeno.Comp.Running)
+            args.FrontalArmor += xeno.Comp.FrontalArmor;
     }
 }
