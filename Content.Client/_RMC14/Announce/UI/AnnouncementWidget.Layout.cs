@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Client._RMC14.Announce.Styling;
 using Content.Client.UserInterface.Controls;
+using Content.Client.UserInterface.Systems.Actions.Widgets;
 using Content.Shared._RMC14.Announce;
 using Content.Shared._RMC14.Announce.Animations;
 using Robust.Client.GameObjects;
@@ -16,6 +17,8 @@ namespace Content.Client._RMC14.Announce;
 
 public sealed partial class AnnouncementWidget
 {
+    private const float HudSeparation = 16f;
+
     private void SetupUI()
     {
         if (ActiveAnnouncement == null)
@@ -30,7 +33,7 @@ public sealed partial class AnnouncementWidget
         var screenScaleFactor = AnnouncementStyling.CalculateScreenScaleFactor(screenSize);
         var spriteSeparation = CalculateSpriteSeparation(style, screenScaleFactor);
 
-        var titleText = !string.IsNullOrEmpty(announcement.Title) ? announcement.Title : style.TitleConfig.Title;
+        var titleText = announcement.Title;
         _hasTitle = style.TitleConfig.ShowTitle && !string.IsNullOrEmpty(titleText);
         _titleOffset = _hasTitle ? 1 : 0;
 
@@ -531,8 +534,64 @@ public sealed partial class AnnouncementWidget
 
         var position = CalculatePosition(positioningSize, widgetSize, announcement, style);
         position += viewportOffset;
+        position = AvoidActionBarOverlap(
+            position,
+            widgetSize,
+            parent,
+            viewportOffset,
+            positioningSize,
+            announcement,
+            style);
 
         UpdateLayoutRect(position, widgetSize);
+    }
+
+    private Vector2 AvoidActionBarOverlap(
+        Vector2 position,
+        Vector2 widgetSize,
+        Control parent,
+        Vector2 viewportOffset,
+        Vector2 viewportSize,
+        AnnouncementDisplayData announcement,
+        AnnouncementStyle style)
+    {
+        if (announcement.ScreenPositionOverride != null ||
+            style.LayoutConfig.Position == AnnouncementPosition.FullScreen)
+        {
+            return position;
+        }
+
+        var actions = _uiManager.ActiveScreen?.GetWidget<ActionsBar>()?.ActionsContainer;
+        if (actions is not { VisibleInTree: true } || actions.Size.X <= 0f || actions.Size.Y <= 0f)
+            return position;
+
+        var actionBarPosition = actions.GlobalPosition - parent.GlobalPosition;
+        var actionBarBounds = UIBox2.FromDimensions(actionBarPosition, actions.Size);
+        var viewportBounds = UIBox2.FromDimensions(viewportOffset, viewportSize);
+
+        return AvoidOverlap(position, widgetSize, actionBarBounds, viewportBounds, HudSeparation);
+    }
+
+    internal static Vector2 AvoidOverlap(
+        Vector2 position,
+        Vector2 size,
+        UIBox2 obstacle,
+        UIBox2 bounds,
+        float separation)
+    {
+        var announcementBounds = UIBox2.FromDimensions(position, size);
+        if (!announcementBounds.Intersects(obstacle))
+            return position;
+
+        var positionRight = new Vector2(obstacle.Right + separation, position.Y);
+        if (positionRight.X + size.X <= bounds.Right)
+            return positionRight;
+
+        var positionBelow = new Vector2(position.X, obstacle.Bottom + separation);
+        if (positionBelow.Y + size.Y <= bounds.Bottom)
+            return positionBelow;
+
+        return positionRight;
     }
 
     private static Vector2 CalculatePosition(Vector2 screenSize, Vector2 widgetSize, AnnouncementDisplayData announcement, AnnouncementStyle style)

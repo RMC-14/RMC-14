@@ -1,6 +1,6 @@
 - type: announcementPreset
   id: MarineAlertLevel
-  name: "Evacuation Alert"
+  name: rmc-announcement-preset-name-evacuation-alert
   description: "Alert level announcement styling"
   target: Marines
   visibleInSettings: false
@@ -42,7 +42,7 @@
           spriteScale: 1
         title:
           showTitle: true
-          title: "ALERT LEVEL"
+          title: rmc-announcement-title-alert-level
           titleColor: "#8B0000"
           titleFontSize: 28
           titleFont: "CozetteBold"
@@ -53,7 +53,7 @@
 
 - type: announcementPreset
   id: MarineAlertGreen
-  name: "Green Alert"
+  name: rmc-announcement-preset-name-green-alert
   description: "Green alert announcement styling"
   target: Marines
   visibleInSettings: false
@@ -90,7 +90,7 @@
           spriteScale: 1
         title:
           showTitle: true
-          title: "ALERT LEVEL: GREEN"
+          title: rmc-announcement-title-alert-level-green
           titleColor: "#7CFC00"
           titleFontSize: 28
           titleFont: "CozetteBold"
@@ -101,7 +101,7 @@
 
 - type: announcementPreset
   id: MarineAlertBlue
-  name: "Blue Alert"
+  name: rmc-announcement-preset-name-blue-alert
   description: "Blue alert announcement styling"
   target: Marines
   visibleInSettings: false
@@ -143,7 +143,7 @@
           spriteScale: 1
         title:
           showTitle: true
-          title: "ALERT LEVEL: BLUE"
+          title: rmc-announcement-title-alert-level-blue
           titleColor: "#1E90FF"
           titleFontSize: 28
           titleFont: "CozetteBold"
@@ -154,7 +154,7 @@
 
 - type: announcementPreset
   id: MarineAlertRed
-  name: "Red Alert"
+  name: rmc-announcement-preset-name-red-alert
   description: "Red alert announcement styling"
   target: Marines
   visibleInSettings: false
@@ -196,7 +196,7 @@
           spriteScale: 1
         title:
           showTitle: true
-          title: "ALERT LEVEL: RED"
+          title: rmc-announcement-title-alert-level-red
           titleColor: "#FF0000"
           titleFontSize: 28
           titleFont: "CozetteBold"
@@ -207,7 +207,7 @@
 
 - type: announcementPreset
   id: MarineAlertDelta
-  name: "Delta Alert"
+  name: rmc-announcement-preset-name-delta-alert
   description: "Delta alert announcement styling"
   target: Marines
   visibleInSettings: false
@@ -249,7 +249,7 @@
           spriteScale: 1
         title:
           showTitle: true
-          title: "ALERT LEVEL: DELTA"
+          title: rmc-announcement-title-alert-level-delta
           titleColor: "#8B0000"
           titleFontSize: 28
           titleFont: "CozetteBold"
@@ -260,7 +260,7 @@
 
 - type: announcementPreset
   id: RedAlertAnimated
-  name: "Red Alert"
+  name: rmc-announcement-preset-name-red-alert
   description: "Animated red alert display"
   target: Marines
   visibleInSettings: false
@@ -305,7 +305,7 @@
           showSpriteBox: false
           spriteScale: 1
         title:
-          title: "RED ALERT"
+          title: rmc-announcement-title-red-alert
           titleColor: "#ff4d4d"
           titleFontSize: 28
           titleFont: "DefaultBold"

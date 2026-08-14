@@ -70,7 +70,7 @@ public sealed partial class AnnouncementRouterSystem
             {
                 Target = AnnouncementTarget.Marines,
                 Source = source,
-                SpeakerNameOverride = "A.R.E.S.",
+                SpeakerNameOverride = Loc.GetString("rmc-announcement-speaker-ares"),
                 Channels = AnnouncementChannels.Overlay | AnnouncementChannels.Sound,
             },
             Sound = new AnnouncementSoundOptions

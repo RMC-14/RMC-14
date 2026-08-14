@@ -267,18 +267,21 @@ public sealed partial class AnnouncementLayoutEditorWindow : DefaultWindow
 
     private static List<string> BuildPresetLabels(IReadOnlyList<AnnouncementPresetPrototype> presets)
     {
-        var duplicates = presets
-            .GroupBy(preset => preset.Name)
+        var localizedNames = presets
+            .Select(preset => (Preset: preset, Name: Loc.GetString(preset.Name)))
+            .ToList();
+        var duplicates = localizedNames
+            .GroupBy(entry => entry.Name)
             .Where(group => group.Count() > 1)
             .Select(group => group.Key)
             .ToHashSet();
 
         var labels = new List<string>(presets.Count);
-        foreach (var preset in presets)
+        foreach (var (preset, name) in localizedNames)
         {
-            labels.Add(duplicates.Contains(preset.Name)
-                ? $"{preset.Name} ({preset.ID})"
-                : preset.Name);
+            labels.Add(duplicates.Contains(name)
+                ? $"{name} ({preset.ID})"
+                : name);
         }
 
         return labels;
@@ -543,7 +546,7 @@ public sealed partial class AnnouncementLayoutEditorWindow : DefaultWindow
     {
         return
         [
-            Loc.GetString("rmc-ui-options-announcements-layout-preview-line-1", ("name", preset.Name)),
+            Loc.GetString("rmc-ui-options-announcements-layout-preview-line-1", ("name", Loc.GetString(preset.Name))),
             Loc.GetString("rmc-ui-options-announcements-layout-preview-line-2")
         ];
     }

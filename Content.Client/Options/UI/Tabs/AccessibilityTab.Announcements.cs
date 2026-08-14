@@ -23,7 +23,7 @@ public sealed partial class AccessibilityTab
     private void AddPerAnnouncementOverrides()
     {
         var presets = GetRootPresets()
-            .OrderBy(preset => preset.Name)
+            .OrderBy(preset => Loc.GetString(preset.Name))
             .ToList();
 
         if (presets.Count == 0)
@@ -40,7 +40,7 @@ public sealed partial class AccessibilityTab
 
             var dropDown = new OptionDropDown
             {
-                Title = preset.Name
+                Title = Loc.GetString(preset.Name)
             };
 
             AnnouncementPresetOverridesContainer.AddChild(dropDown);

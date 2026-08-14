@@ -1,6 +1,6 @@
 - type: announcementPreset
   id: MarineCommand
-  name: "Marine Command"
+  name: rmc-announcement-preset-name-marine-command
   description: "Official announcements from Marine Command"
   target: Marines
   defaultPreference: Stylized
@@ -52,7 +52,7 @@
           spriteScale: 1
         title:
           showTitle: true
-          title: ">> COMMAND <<"
+          title: rmc-announcement-title-command
           titleColor: "#4a9eff"
           titleFontSize: 15
           titleFont: "CozetteBold"
@@ -100,7 +100,7 @@
           spriteScale: 1
         title:
           showTitle: true
-          title: ">> COMMAND <<"
+          title: rmc-announcement-title-command
           titleColor: "#4a9eff"
           titleFontSize: 10
           titleFont: "CozetteBold"
@@ -136,7 +136,7 @@
           spriteScale: 0.85
         title:
           showTitle: true
-          title: ">> COMMAND <<"
+          title: rmc-announcement-title-command
           titleColor: "#4a9eff"
           titleFontSize: 10
           titleFont: "CozetteBold"
@@ -147,7 +147,7 @@
 
 - type: announcementPreset
   id: MarineCommandNoPortrait
-  name: "Marine Command"
+  name: rmc-announcement-preset-name-marine-command
   description: "Official announcements from Marine Command"
   target: Marines
   visibleInSettings: false
@@ -190,7 +190,7 @@
           spriteScale: 1
         title:
           showTitle: true
-          title: ">> COMMAND <<"
+          title: rmc-announcement-title-command
           titleColor: "#4a9eff"
           titleFontSize: 10
           titleFont: "CozetteBold"
@@ -201,7 +201,7 @@
 
 - type: announcementPreset
   id: MarineOverwatch
-  name: "Marine Overwatch"
+  name: rmc-announcement-preset-name-marine-overwatch
   description: "Overwatch squad announcements"
   target: Marines
   defaultPreference: Default
@@ -254,7 +254,7 @@
           spriteScale: 1
         title:
           showTitle: true
-          title: ">> OVERWATCH <<"
+          title: rmc-announcement-title-overwatch
           titleColor: "#4a9eff"
           titleFontSize: 20
           titleFont: "CozetteBold"
@@ -265,7 +265,7 @@
 
 - type: announcementPreset
   id: MarineOverwatchAlpha
-  name: "Alpha Overwatch"
+  name: rmc-announcement-preset-name-alpha-overwatch
   description: "Overwatch squad announcements"
   target: Marines
   visibleInSettings: false
@@ -308,7 +308,7 @@
           spriteScale: 1
         title:
           showTitle: true
-          title: ">> ALPHA OVERWATCH <<"
+          title: rmc-announcement-title-alpha-overwatch
           titleColor: "#E61919"
           titleFontSize: 20
           titleFont: "CozetteBold"
@@ -319,7 +319,7 @@
 
 - type: announcementPreset
   id: MarineOverwatchBravo
-  name: "Bravo Overwatch"
+  name: rmc-announcement-preset-name-bravo-overwatch
   description: "Overwatch squad announcements"
   target: Marines
   visibleInSettings: false
@@ -362,7 +362,7 @@
           spriteScale: 1
         title:
           showTitle: true
-          title: ">> BRAVO OVERWATCH <<"
+          title: rmc-announcement-title-bravo-overwatch
           titleColor: "#FFC32D"
           titleFontSize: 20
           titleFont: "CozetteBold"
@@ -373,7 +373,7 @@
 
 - type: announcementPreset
   id: MarineOverwatchCharlie
-  name: "Charlie Overwatch"
+  name: rmc-announcement-preset-name-charlie-overwatch
   description: "Overwatch squad announcements"
   target: Marines
   visibleInSettings: false
@@ -416,7 +416,7 @@
           spriteScale: 1
         title:
           showTitle: true
-          title: ">> CHARLIE OVERWATCH <<"
+          title: rmc-announcement-title-charlie-overwatch
           titleColor: "#C864C8"
           titleFontSize: 20
           titleFont: "CozetteBold"
@@ -427,7 +427,7 @@
 
 - type: announcementPreset
   id: MarineOverwatchDelta
-  name: "Delta Overwatch"
+  name: rmc-announcement-preset-name-delta-overwatch
   description: "Overwatch squad announcements"
   target: Marines
   visibleInSettings: false
@@ -470,7 +470,7 @@
           spriteScale: 1
         title:
           showTitle: true
-          title: ">> DELTA OVERWATCH <<"
+          title: rmc-announcement-title-delta-overwatch
           titleColor: "#4148C8"
           titleFontSize: 20
           titleFont: "CozetteBold"
@@ -481,7 +481,7 @@
 
 - type: announcementPreset
   id: MarineOverwatchEcho
-  name: "Echo Overwatch"
+  name: rmc-announcement-preset-name-echo-overwatch
   description: "Overwatch squad announcements"
   target: Marines
   visibleInSettings: false
@@ -524,7 +524,7 @@
           spriteScale: 1
         title:
           showTitle: true
-          title: ">> ECHO OVERWATCH <<"
+          title: rmc-announcement-title-echo-overwatch
           titleColor: "#67D692"
           titleFontSize: 20
           titleFont: "CozetteBold"
@@ -535,7 +535,7 @@
 
 - type: announcementPreset
   id: MarineOverwatchFoxtrot
-  name: "Foxtrot Overwatch"
+  name: rmc-announcement-preset-name-foxtrot-overwatch
   description: "Overwatch squad announcements"
   target: Marines
   visibleInSettings: false
@@ -578,7 +578,7 @@
           spriteScale: 1
         title:
           showTitle: true
-          title: ">> FOXTROT OVERWATCH <<"
+          title: rmc-announcement-title-foxtrot-overwatch
           titleColor: "#C47A50"
           titleFontSize: 20
           titleFont: "CozetteBold"
@@ -589,7 +589,7 @@
 
 - type: announcementPreset
   id: MarineOverwatchIntel
-  name: "Intel Overwatch"
+  name: rmc-announcement-preset-name-intel-overwatch
   description: "Overwatch squad announcements"
   target: Marines
   visibleInSettings: false
@@ -632,7 +632,7 @@
           spriteScale: 1
         title:
           showTitle: true
-          title: ">> INTEL OVERWATCH <<"
+          title: rmc-announcement-title-intel-overwatch
           titleColor: "#09662B"
           titleFontSize: 20
           titleFont: "CozetteBold"

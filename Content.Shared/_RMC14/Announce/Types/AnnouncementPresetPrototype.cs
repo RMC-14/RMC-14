@@ -11,7 +11,7 @@ public sealed partial class AnnouncementPresetPrototype : IPrototype
     public string ID { get; private set; } = default!;
 
     [DataField]
-    public string Name { get; private set; } = string.Empty;
+    public LocId Name { get; private set; } = string.Empty;
 
     [DataField]
     public string Description { get; private set; } = string.Empty;

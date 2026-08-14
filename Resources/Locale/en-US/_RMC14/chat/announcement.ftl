@@ -2,6 +2,47 @@ rmc-announcement-author = Command
 rmc-announcement-author-shipside = Command Ship
 rmc-announcement-author-highcommand = UNMC High Command
 rmc-announcement-author-queen-mother = The Queen Mother
+rmc-announcement-speaker-ares = A.R.E.S.
+
+rmc-announcement-preset-name-marine-command = Marine Command
+rmc-announcement-preset-name-marine-overwatch = Marine Overwatch
+rmc-announcement-preset-name-alpha-overwatch = Alpha Overwatch
+rmc-announcement-preset-name-bravo-overwatch = Bravo Overwatch
+rmc-announcement-preset-name-charlie-overwatch = Charlie Overwatch
+rmc-announcement-preset-name-delta-overwatch = Delta Overwatch
+rmc-announcement-preset-name-echo-overwatch = Echo Overwatch
+rmc-announcement-preset-name-foxtrot-overwatch = Foxtrot Overwatch
+rmc-announcement-preset-name-intel-overwatch = Intel Overwatch
+rmc-announcement-preset-name-xeno-queen = Xeno Queen
+rmc-announcement-preset-name-ares = A.R.E.S.
+rmc-announcement-preset-name-critical = Critical
+rmc-announcement-preset-name-clf = C.L.F.
+rmc-announcement-preset-name-evacuation-alert = Evacuation Alert
+rmc-announcement-preset-name-green-alert = Green Alert
+rmc-announcement-preset-name-blue-alert = Blue Alert
+rmc-announcement-preset-name-red-alert = Red Alert
+rmc-announcement-preset-name-delta-alert = Delta Alert
+
+rmc-announcement-title-command = >> COMMAND <<
+rmc-announcement-title-overwatch = >> OVERWATCH <<
+rmc-announcement-title-alpha-overwatch = >> ALPHA OVERWATCH <<
+rmc-announcement-title-bravo-overwatch = >> BRAVO OVERWATCH <<
+rmc-announcement-title-charlie-overwatch = >> CHARLIE OVERWATCH <<
+rmc-announcement-title-delta-overwatch = >> DELTA OVERWATCH <<
+rmc-announcement-title-echo-overwatch = >> ECHO OVERWATCH <<
+rmc-announcement-title-foxtrot-overwatch = >> FOXTROT OVERWATCH <<
+rmc-announcement-title-intel-overwatch = >> INTEL OVERWATCH <<
+rmc-announcement-title-queen = >> QUEEN <<
+rmc-announcement-title-ares = >> A.R.E.S. <<
+rmc-announcement-title-critical = !! CRITICAL !!
+rmc-announcement-title-clf = >> C.L.F. <<
+rmc-announcement-title-alert-level = ALERT LEVEL
+rmc-announcement-title-alert-level-green = ALERT LEVEL: GREEN
+rmc-announcement-title-alert-level-blue = ALERT LEVEL: BLUE
+rmc-announcement-title-alert-level-red = ALERT LEVEL: RED
+rmc-announcement-title-alert-level-delta = ALERT LEVEL: DELTA
+rmc-announcement-title-red-alert = RED ALERT
+
 rmc-announcement-message = [font size=16][bold][color=#CECECE]{$author} Announcement[/color][/bold][/font][font size=16][color=red]
 
     {$message}

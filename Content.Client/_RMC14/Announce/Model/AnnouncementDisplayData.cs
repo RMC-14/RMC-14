@@ -44,5 +44,12 @@ public sealed class AnnouncementDisplayData
     public Vector2 DecalOffset => Presentation.DecalOffset * LayoutScale;
     public Vector2 TextOffset => Presentation.TextOffset * LayoutScale;
     public float SpriteScale => 1f;
-    public string Title => Presentation.Style.TitleConfig.Title;
+    public string Title
+    {
+        get
+        {
+            var title = Presentation.Style.TitleConfig.Title;
+            return string.IsNullOrEmpty(title.Id) ? string.Empty : Loc.GetString(title);
+        }
+    }
 }
