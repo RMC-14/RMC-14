@@ -68,7 +68,7 @@ public sealed class XenoTailSweepSystem : EntitySystem
 
         _hit.Clear();
         // Range widened by lagcomp range to check entities that have moved
-        _entityLookup.GetEntitiesInRange(transform.Coordinates, xeno.Comp.Range + xeno.Comp.LagCompensationLookupMargin, _hit, LookupFlags.Dynamic | LookupFlags.Approximate);
+        _entityLookup.GetEntitiesInRange(transform.Coordinates, xeno.Comp.Range + xeno.Comp.LagCompensationLookupMargin, _hit, LookupFlags.Dynamic | LookupFlags.Static | LookupFlags.Approximate);
 
         var origin = _transform.GetMapCoordinates(xeno);
         foreach (var mob in _hit)
