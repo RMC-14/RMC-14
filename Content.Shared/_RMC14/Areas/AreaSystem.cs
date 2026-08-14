@@ -152,7 +152,7 @@ public sealed class AreaSystem : EntitySystem
         if (!grid.Comp2.Areas.TryGetValue(indices, out var areaProtoId))
             return false;
 
-        if (!_prototypes.TryIndex<EntityPrototype>(areaProtoId, out areaPrototype))
+        if (!_prototypes.TryIndex(areaProtoId, out areaPrototype))
             return false;
 
         if (!grid.Comp2.AreaEntities.TryGetValue(areaProtoId, out var areaEnt) ||

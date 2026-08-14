@@ -9,7 +9,7 @@
     components:
     - BorgChassis
   available: false
-  icon: { sprite: _RMC14/Actions/xeno_emotes.rsi, state: roar }
+  icon: _RMC14/Actions/xeno_emotes.rsi/roar.png
   chatMessages: ["rmc-emote-xeno-roar"]
   chatTriggers:
     - roar
@@ -28,7 +28,7 @@
     components:
     - BorgChassis
   available: false
-  icon: { sprite: _RMC14/Actions/xeno_emotes.rsi, state: tailswipe }
+  icon: _RMC14/Actions/xeno_emotes.rsi/tailswipe.png
   chatMessages: ["rmc-emote-xeno-tail-swipe"]
   chatTriggers:
     - swipe
@@ -53,7 +53,7 @@
     components:
     - BorgChassis
   available: false
-  icon: { sprite: _RMC14/Actions/xeno_emotes.rsi, state: help }
+  icon: _RMC14/Actions/xeno_emotes.rsi/help.png
   chatMessages: ["rmc-emote-xeno-help"]
   chatTriggers:
     - help

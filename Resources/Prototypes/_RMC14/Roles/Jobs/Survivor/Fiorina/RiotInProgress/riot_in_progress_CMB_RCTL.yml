@@ -7,7 +7,9 @@
   startingGear: RMCGearSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader
   accessGroups:
   - ColonistSec
-  spawnMenuRoleName: CMB Riot Control Team Leader (Special Survivor)
+  ranks:
+    RMCRankCMBRiotControlOfficer: []
+  spawnMenuRoleName: CMB Riot Control Team Leader (Fiorina Special Survivor)
   icon: "RMCJobIconBureauDeputy"
   hasIcon: true
   special:
@@ -76,12 +78,12 @@
   components:
   - type: EntityPreset
     primaryWeapons:
-    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
-    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
-    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
-    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
-    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
-    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunM12 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunM12 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunM12 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunM12 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunM12 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunM12 ]
     - [ RMCPouchMagazineFilledM16, RMCWeaponRifleM16A5, RMCExplosiveBreachingCharge ]
     - [ RMCPouchMagazineFilledM16, RMCWeaponRifleM16A5, RMCExplosiveBreachingCharge ]
     - [ RMCPouchMagazineFilledMP5, RMCWeaponSMGMP5Alt, RMCMotionDetectorCompact ]

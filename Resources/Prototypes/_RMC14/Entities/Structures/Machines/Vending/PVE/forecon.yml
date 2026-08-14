@@ -21,7 +21,7 @@
       - id: CMHandsBlackMarine
         name: Marine Combat Gloves
         amount: 15
-      - id: CMHandsBrown
+      - id: RMCHandsBrownMarine
         name: Brown Combat Gloves
         amount: 15
       - id: RMCHeadsetGoldenArrow

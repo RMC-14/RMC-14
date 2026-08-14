@@ -2,7 +2,7 @@
 
 namespace Content.Shared._RMC14.Lights;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(PointLightRotationSystem))]
 public sealed partial class PointLightRotationComponent : Component
 {
