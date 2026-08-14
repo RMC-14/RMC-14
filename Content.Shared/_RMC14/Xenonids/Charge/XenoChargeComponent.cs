@@ -31,7 +31,7 @@ public sealed partial class XenoChargeComponent : Component
     public TimeSpan SlowTime = TimeSpan.FromSeconds(3.5);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan StunTime = TimeSpan.FromSeconds(2);
+    public TimeSpan StunTime = TimeSpan.FromSeconds(4);
 
     [DataField, AutoNetworkedField]
     public TimeSpan ChargeDelay = TimeSpan.FromSeconds(1.2);
