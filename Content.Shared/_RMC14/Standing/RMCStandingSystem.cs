@@ -30,6 +30,8 @@ public sealed class RMCStandingSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
 
+    private readonly HashSet<EntityUid> _rotationResync = new();
+
     public override void Initialize()
     {
         SubscribeLocalEvent<DropItemsOnRestComponent, BuckledEvent>(OnDropBuckled);
@@ -173,14 +175,10 @@ public sealed class RMCStandingSystem : EntitySystem
         args.Evasion += (int) EvasionModifiers.Rest;
     }
 
-    // Resync the rotation visuals after knockdown mispredict
+    // SetData no-ops during state application, so queue the rotation resync for the next update after a knockdown mispredict.
     private void OnStandingState(Entity<StandingStateComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        var target = _standing.IsDown(ent) ? RotationState.Horizontal : RotationState.Vertical;
-        if (_appearance.TryGetData<RotationState>(ent, RotationVisuals.RotationState, out var current) && current == target)
-            return;
-
-        _appearance.SetData(ent.Owner, RotationVisuals.RotationState, target);
+        _rotationResync.Add(ent);
     }
 
     private void OnRestStood(Entity<RMCRestComponent> ent, ref StoodEvent args)
@@ -220,5 +218,27 @@ public sealed class RMCStandingSystem : EntitySystem
 
         if (!resting)
             _standing.Stand(rest);
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        if (_rotationResync.Count == 0)
+            return;
+
+        foreach (var uid in _rotationResync)
+        {
+            if (!TryComp(uid, out StandingStateComponent? standing))
+                continue;
+
+            var target = _standing.IsDown(uid, standing) ? RotationState.Horizontal : RotationState.Vertical;
+            if (_appearance.TryGetData<RotationState>(uid, RotationVisuals.RotationState, out var current) && current == target)
+                continue;
+
+            _appearance.SetData(uid, RotationVisuals.RotationState, target);
+        }
+
+        _rotationResync.Clear();
     }
 }
