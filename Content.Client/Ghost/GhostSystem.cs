@@ -108,6 +108,13 @@ namespace Content.Client.Ghost
                 _pointLightSystem.SetEnabled(uid, false, light);
                 _overlay.AddOverlay(new HalfNightVisionBrightnessOverlay());
             }
+            else if ((light?.Enabled ?? false) && !_overlay.HasOverlay<ThreeFourthsVisionBrightnessOverlay>())
+            {
+                //RMC14 half bright mode
+                Popup.PopupEntity(Loc.GetString("rmc-ghost-gui-toggle-lighting-manager-popup-threefourths"), args.Performer);
+                _pointLightSystem.SetEnabled(uid, false, light);
+                _overlay.AddOverlay(new ThreeFourthsVisionBrightnessOverlay());
+            }
             else
             {
                 // fullbright mode
