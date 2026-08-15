@@ -202,8 +202,7 @@
   id: RMCMagazineML66DEmpty
   suffix: Empty
   components:
-  - type: BallisticAmmoProvider
-    proto: null
+  - type: RMCEmptyMag
 
 - type: entity
   parent: RMCMagazineML66D
