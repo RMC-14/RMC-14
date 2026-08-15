@@ -73,18 +73,6 @@
         RMCSkillExecution: 1
         RMCSkillSmartGun: 1
     - type: MarineOrders
-    - type: MeleeWeapon
-      soundHit:
-        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
-        params:
-          variation: 0.15
-          volume: -1
-      angle: 30
-      animation: WeaponArcFist
-      attackRate: 1
-      damage:
-        types:
-          Blunt: 35
     - type: Synth
       canUseGuns: true
     - type: SynthGeneration
