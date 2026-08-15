@@ -116,6 +116,7 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
         if (ent.Comp.Green)
             _overlay.AddOverlay(new NightVisionFilterOverlay());
 
+        _overlay.RemoveOverlay<HalfNightVisionBrightnessOverlay>();
         _overlay.AddOverlay(new ThreeFourthsVisionBrightnessOverlay());
 
         _light.DrawLighting = true;
