@@ -20,6 +20,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
+using Content.Shared.Random.Rules;
 
 namespace Content.Shared._RMC14.MotionDetector;
 
@@ -379,37 +380,23 @@ public sealed class MotionDetectorSystem : EntitySystem
             detector.Blips.Clear();
             foreach (var tracked in _tracked)
             {
-                Console.WriteLine("Has faction?!!: " + hasFaction);
-                if (tracked.Owner == lastUser)
-                    continue;
-                Console.WriteLine("pass 1");
-
                 if (tracked.Comp.LastMove < time - detector.MoveTime)
                     continue;
 
-                Console.WriteLine("pass 2");
+                // Motion detectors always detect infected marines, including infected self regardless of faction. 
+                var infected =
+                    HasComp<VictimInfectedComponent>(tracked.Owner) ||
+                    (TryComp<InfectableComponent>(tracked.Owner, out var infectable) &&
+                        infectable.BeingInfected);
 
-
-                if (TryComp<InfectableComponent>(tracked.Owner, out var infectableComp))
+                if (!infected)
                 {
-                    if (infectableComp.BeingInfected)
-                    {
-                        Console.WriteLine("being infected - send a blip!");
-                        detector.Blips.Add(new Blip(_transform.GetMapCoordinates(tracked), tracked.Comp.IsQueenEye));
+                    if (tracked.Owner == lastUser)
                         continue;
-                    }
-                }
 
-                if (HasComp<VictimInfectedComponent>(tracked.Owner))
-                {
-                    Console.WriteLine("infected - send a blip!");
-                    detector.Blips.Add(new Blip(_transform.GetMapCoordinates(tracked), tracked.Comp.IsQueenEye));
-                    continue;
+                    if (hasFaction && _userFactions.Any(f => _gunIFF.IsInFaction(tracked.Owner, f)))
+                        continue;
                 }
-
-                if (hasFaction && _userFactions.Any(f => _gunIFF.IsInFaction(tracked.Owner, f)))
-                    continue;
-                Console.WriteLine("blip");
 
                 detector.Blips.Add(new Blip(_transform.GetMapCoordinates(tracked), tracked.Comp.IsQueenEye));
             }
