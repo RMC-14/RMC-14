@@ -51,8 +51,8 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     private static readonly Color BlockerOutlineColor = new Color(0.65f, 0.65f, 0.65f);
     private static readonly Color AcidMineOutlineColor = new Color(0.6f, 0.9f, 0.2f);
     private static readonly Color DeployTrapsOutlineColor = new Color(0.8f, 0.6f, 0.2f);
-    private static readonly Color TunnelAllowedFillColor = Color.Green.WithAlpha(0.3f);
-    private static readonly Color TunnelAllowedOutlineColor = Color.Green.WithAlpha(0.6f);
+    private static readonly Color TunnelAllowedFillColor = Color.Green.WithAlpha(0.25f);
+    private static readonly Color TunnelAllowedOutlineColor = Color.Green.WithAlpha(0.5f);
 
     private const float OutlineAlpha = 0.8f;
     private const float OutlineThickness = 0.1f;
@@ -73,6 +73,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     private readonly LineSystem _line;
     private readonly AreaSystem _area;
     private readonly TurfSystem _turf;
+    private readonly SpriteSystem _sprite;
     private readonly EntityQuery<ActionsComponent> _actionsQ;
     private readonly EntityQuery<TargetActionComponent> _targetActionQ;
     private readonly EntityQuery<WorldTargetActionComponent> _worldTargetQ;
@@ -110,6 +111,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         _line = ents.System<LineSystem>();
         _area = ents.System<AreaSystem>();
         _turf = ents.System<TurfSystem>();
+        _sprite = ents.System<SpriteSystem>();
         _actionsQ = ents.GetEntityQuery<ActionsComponent>();
         _targetActionQ = ents.GetEntityQuery<TargetActionComponent>();
         _worldTargetQ = ents.GetEntityQuery<WorldTargetActionComponent>();
@@ -229,12 +231,12 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
                 break;
 
             case XenoDigTunnelActionEvent:
-                DrawTunnelableTiles(args, originMap);
+                DrawTunnelableTiles(args, originMap, (XenoDigTunnelActionEvent)worldTarget.Event);
                 break;
         }
     }
 
-    private void DrawTunnelableTiles(in OverlayDrawArgs args, MapCoordinates originMap)
+    private void DrawTunnelableTiles(in OverlayDrawArgs args, MapCoordinates originMap, XenoDigTunnelActionEvent tunnelEvent)
     {
         if (!_mapManager.TryFindGridAt(originMap, out var gridUid, out var grid))
             return;
@@ -267,6 +269,14 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         // Filled and outlined overlay for all tunnelable tiles.
         DrawTileFilled(args.WorldHandle, gridUid, grid, _tunnleableTileCache, TunnelAllowedFillColor);
         DrawTileBorder(args.WorldHandle, gridUid, grid, _tunnleableTileCache, TunnelAllowedOutlineColor);
+
+        if (TryGetTileIndices(originMap, out var playerTile) && _tunnleableTileCache.Contains(playerTile.Indices))
+        {
+            var spritePosition = _mapSystem.TileToVector((gridUid, grid), playerTile.Indices);
+            var tunnelSprite = _sprite.GetPrototypeIcon(tunnelEvent.Prototype).TextureFor(Direction.South);
+
+            args.WorldHandle.DrawTexture(tunnelSprite, spritePosition, new Color(0f, 0f, 0f, 0.5f));
+        }
     }
 
     private void DrawResinSurge(
