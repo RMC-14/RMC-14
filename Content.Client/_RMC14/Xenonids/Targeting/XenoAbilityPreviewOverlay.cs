@@ -90,6 +90,9 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     private readonly EntityQuery<TransformComponent> _xformQ;
     private readonly EntityQuery<AlmayerComponent> _almayerQ;
 
+    private Box2Rotated? _lastWorldBounds;
+    private readonly HashSet<Vector2i> _tunnleableTileCache = [];
+
     public XenoAbilityPreviewOverlay(IEntityManager ents)
     {
         _input = IoCManager.Resolve<IInputManager>();
@@ -235,28 +238,35 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     {
         if (!_mapManager.TryFindGridAt(originMap, out var gridUid, out var grid))
             return;
-        if (_almayerQ.HasComp(gridUid)) // can't build tunnels on the ship
-            return;
 
-        var tunnelAllowedTiles = new HashSet<Vector2i>();
-        foreach (var tile in _mapSystem.GetTilesIntersecting(gridUid, grid, args.WorldBounds))
+        // Probably unnecessary optimisation to only update when the camera moves.
+        if (_lastWorldBounds != args.WorldBounds)
         {
-            if (!_turf.GetContentTileDefinition(tile).CanPlaceTunnel)
-                continue;
-            if (_turf.IsTileBlocked(tile, CollisionGroup.Impassable | CollisionGroup.MidImpassable | CollisionGroup.HighImpassable))
-                continue;
+            _tunnleableTileCache.Clear();
+            _lastWorldBounds = args.WorldBounds;
 
-            if (!_area.TryGetArea((gridUid, grid), tile.GridIndices, out var area, out _))
-                continue;
-            if (area.Value.Comp.NoTunnel)
-                continue;
+            if (_almayerQ.HasComp(gridUid))
+                return;
 
-            tunnelAllowedTiles.Add(tile.GridIndices);
+            foreach (var tile in _mapSystem.GetTilesIntersecting(gridUid, grid, args.WorldBounds))
+            {
+                if (!_turf.GetContentTileDefinition(tile).CanPlaceTunnel)
+                    continue;
+                if (_turf.IsTileBlocked(tile, CollisionGroup.Impassable | CollisionGroup.MidImpassable | CollisionGroup.HighImpassable))
+                    continue;
+
+                if (!_area.TryGetArea((gridUid, grid), tile.GridIndices, out var area, out _))
+                    continue;
+                if (area.Value.Comp.NoTunnel)
+                    continue;
+
+                _tunnleableTileCache.Add(tile.GridIndices);
+            }
         }
 
         // Filled and outlined overlay for all tunnelable tiles.
-        DrawTileFilled(args.WorldHandle, gridUid, grid, tunnelAllowedTiles, TunnelAllowedFillColor);
-        DrawTileBorder(args.WorldHandle, gridUid, grid, tunnelAllowedTiles, TunnelAllowedOutlineColor);
+        DrawTileFilled(args.WorldHandle, gridUid, grid, _tunnleableTileCache, TunnelAllowedFillColor);
+        DrawTileBorder(args.WorldHandle, gridUid, grid, _tunnleableTileCache, TunnelAllowedOutlineColor);
     }
 
     private void DrawResinSurge(
