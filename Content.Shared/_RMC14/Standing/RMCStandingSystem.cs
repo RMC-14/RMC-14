@@ -172,7 +172,7 @@ public sealed class RMCStandingSystem : EntitySystem
         if (entity.Owner != args.Entity.Owner || !_standing.IsDown(entity.Owner, entity.Comp))
             return;
 
-        args.Evasion += (int) EvasionModifiers.Rest;
+        args.Evasion += (int)EvasionModifiers.Rest;
     }
 
     // SetData no-ops during state application, so queue the rotation resync for the next update after a knockdown mispredict.
