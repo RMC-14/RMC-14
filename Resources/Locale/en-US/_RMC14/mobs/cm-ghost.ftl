@@ -5,4 +5,4 @@ cm-ghost-window-text = Are you -sure- you want to ghost? You are alive.
 cm-ghost-window-stay = Stay in body
 cm-ghost-ghost = Ghost
 rmc-ghost-gui-toggle-lighting-manager-popup-halfbright = Half-bright mode.
-rmc-ghost-gui-toggle-lighting-manager-popup-threefourths = Three-fourths-bright mode
+rmc-ghost-gui-toggle-lighting-manager-popup-threefourths = Three-fourths-bright mode.

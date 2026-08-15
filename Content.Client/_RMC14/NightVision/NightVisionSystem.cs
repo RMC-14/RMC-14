@@ -56,7 +56,7 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
                 Half(ent);
                 break;
             case NightVisionState.ThreeFourths:
-                ThreeForths(ent);
+                ThreeFourths(ent);
                 break;
             case NightVisionState.Full:
                 Full(ent);
@@ -88,6 +88,7 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
         _overlay.RemoveOverlay<NightVisionOverlay>();
         _overlay.RemoveOverlay<NightVisionFilterOverlay>();
         _overlay.RemoveOverlay<HalfNightVisionBrightnessOverlay>();
+        _overlay.RemoveOverlay<ThreeFourthsVisionBrightnessOverlay>();
         _light.DrawLighting = true;
         SetMesons(false);
         SetMesonSprites(false);
@@ -107,7 +108,7 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
         SetMesons(ent.Comp.Mesons);
     }
 
-    private void ThreeForths(Entity<NightVisionComponent> ent)
+    private void ThreeFourths(Entity<NightVisionComponent> ent)
     {
         if (ent.Comp.Overlay)
             _overlay.AddOverlay(new NightVisionOverlay());

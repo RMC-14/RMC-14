@@ -14,7 +14,7 @@ public sealed class ThreeFourthsVisionBrightnessOverlay : Overlay
             return;
 
         var worldBounds = args.WorldAABB;
-        var brightnessColor = new Color(0.70f, 0.70f, 0.70f, 1.0f);
+        var brightnessColor = new Color(0.75f, 0.75f, 0.75f, 1.0f);
 
         worldHandle.DrawRect(worldBounds, brightnessColor);
     }
