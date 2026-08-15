@@ -5,7 +5,7 @@
   description: "The descendent of the microwaves, our newest invention in crayon heating technology: the hotplate!"
   components:
   - type: Sprite
-    sprite: Structures/Machines/hotplate.rsi
+    sprite: _RMC14/Structures/Machines/hotplate.rsi
     drawdepth: SmallObjects
     snapCardinals: true
     layers:
