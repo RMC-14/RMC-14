@@ -4,7 +4,7 @@ using Robust.Shared.Maths;
 
 namespace Content.Client._RMC14.NightVision;
 
-public sealed class ThreeFourthsVisionBrightnessOverlay : Overlay
+public sealed class ThreeQuartersVisionBrightnessOverlay : Overlay
 {
     public override OverlaySpace Space => OverlaySpace.BeforeLighting;
 

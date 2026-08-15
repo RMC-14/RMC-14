@@ -42,6 +42,6 @@ public enum NightVisionState
 {
     Off,
     Half,
-    ThreeFourths,
+    ThreeQuarters,
     Full,
 }

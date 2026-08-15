@@ -7,7 +7,7 @@
   - sprite: /Textures/_RMC14/Interface/Alerts/xeno_night_vision.rsi
     state: nightvision_half
   - sprite: /Textures/_RMC14/Interface/Alerts/xeno_night_vision.rsi
-    state: nightvision_threefourths
+    state: nightvision_threequarters
   - sprite: /Textures/_RMC14/Interface/Alerts/xeno_night_vision.rsi
     state: nightvision_full
   name: Night Vision

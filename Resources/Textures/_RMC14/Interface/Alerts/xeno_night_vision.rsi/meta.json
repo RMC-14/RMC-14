@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/09a5191fb11aab8ddffe3f9be94292b53e4d96f6/icons/mob/hud/alien_standard.dmi. Three-fourths sprite taken from https://github.com/private-tristan/cmss13/blob/ca281cf85f576131440903712d7218b01e5ec5c9/icons/mob/hud/alien_standard.dmi made by private-tristan",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/09a5191fb11aab8ddffe3f9be94292b53e4d96f6/icons/mob/hud/alien_standard.dmi. Three-quarters sprite taken from https://github.com/private-tristan/cmss13/blob/ca281cf85f576131440903712d7218b01e5ec5c9/icons/mob/hud/alien_standard.dmi made by private-tristan",
   "size": {
     "x": 32,
     "y": 32
@@ -14,7 +14,7 @@
       "name": "nightvision_half"
     },
     {
-      "name": "nightvision_threefourths"
+      "name": "nightvision_threequarters"
     },
     {
       "name": "nightvision_full"

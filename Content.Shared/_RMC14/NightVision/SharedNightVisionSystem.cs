@@ -227,8 +227,8 @@ public abstract class SharedNightVisionSystem : EntitySystem
         ent.Comp.State = ent.Comp.State switch
         {
             NightVisionState.Off => NightVisionState.Half,
-            NightVisionState.Half => ent.Comp.OnlyHalf ? NightVisionState.Off : NightVisionState.ThreeFourths,
-            NightVisionState.ThreeFourths => NightVisionState.Full, //no OnlyThreeFourths for now
+            NightVisionState.Half => ent.Comp.OnlyHalf ? NightVisionState.Off : NightVisionState.ThreeQuarters,
+            NightVisionState.ThreeQuarters => NightVisionState.Full,
             NightVisionState.Full => NightVisionState.Off,
             _ => throw new ArgumentOutOfRangeException(),
         };

@@ -95,7 +95,7 @@ namespace Content.Client.Ghost
                 Popup.PopupEntity(Loc.GetString("ghost-gui-toggle-lighting-manager-popup-normal"), args.Performer);
                 _contentEye.RequestEye(component.DrawFov, true);
             }
-            else if ((!light?.Enabled ?? false) && !_overlay.HasOverlay<HalfNightVisionBrightnessOverlay>() && !_overlay.HasOverlay<ThreeFourthsVisionBrightnessOverlay>()) // skip this option if we have no PointLightComponent
+            else if ((!light?.Enabled ?? false) && !_overlay.HasOverlay<HalfNightVisionBrightnessOverlay>() && !_overlay.HasOverlay<ThreeQuartersVisionBrightnessOverlay>()) // skip this option if we have no PointLightComponent
             {
                 // enable personal light
                 Popup.PopupEntity(Loc.GetString("ghost-gui-toggle-lighting-manager-popup-personal-light"), args.Performer);
@@ -108,12 +108,12 @@ namespace Content.Client.Ghost
                 _pointLightSystem.SetEnabled(uid, false, light);
                 _overlay.AddOverlay(new HalfNightVisionBrightnessOverlay());
             }
-            else if (!_overlay.HasOverlay<ThreeFourthsVisionBrightnessOverlay>())
+            else if (!_overlay.HasOverlay<ThreeQuartersVisionBrightnessOverlay>())
             {
                 //RMC14 three-fourths bright mode
-                Popup.PopupEntity(Loc.GetString("rmc-ghost-gui-toggle-lighting-manager-popup-threefourths"), args.Performer);
+                Popup.PopupEntity(Loc.GetString("rmc-ghost-gui-toggle-lighting-manager-popup-threequarters"), args.Performer);
                 _overlay.RemoveOverlay<HalfNightVisionBrightnessOverlay>();
-                _overlay.AddOverlay(new ThreeFourthsVisionBrightnessOverlay());
+                _overlay.AddOverlay(new ThreeQuartersVisionBrightnessOverlay());
             }
             else
             {
@@ -121,7 +121,7 @@ namespace Content.Client.Ghost
                 Popup.PopupEntity(Loc.GetString("ghost-gui-toggle-lighting-manager-popup-fullbright"), args.Performer);
                 _contentEye.RequestEye(component.DrawFov, false);
                 _pointLightSystem.SetEnabled(uid, false, light);
-                _overlay.RemoveOverlay<ThreeFourthsVisionBrightnessOverlay>();
+                _overlay.RemoveOverlay<ThreeQuartersVisionBrightnessOverlay>();
             }
             args.Handled = true;
         }
