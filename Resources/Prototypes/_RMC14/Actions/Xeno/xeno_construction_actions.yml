@@ -223,7 +223,10 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: build_tunnel
     useDelay: 300
-  - type: InstantAction
+  - type: TargetAction
+    deselectOnMiss: true
+    checkCanAccess: false
+  - type: WorldTargetAction
     event: !type:XenoDigTunnelActionEvent
 
 - type: entity

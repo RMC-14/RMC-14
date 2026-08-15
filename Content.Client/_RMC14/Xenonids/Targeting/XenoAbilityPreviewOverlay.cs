@@ -37,6 +37,8 @@ using Robust.Shared.Maths;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
+using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
+using Content.Shared._RMC14.Areas;
 
 namespace Content.Client._RMC14.Xenonids.Targeting;
 
@@ -72,6 +74,8 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     private readonly SharedPhysicsSystem _physics;
     private readonly SharedTransformSystem _transform;
     private readonly LineSystem _line;
+    private readonly AreaSystem _area;
+    private readonly TurfSystem _turf;
     private readonly EntityQuery<ActionsComponent> _actionsQ;
     private readonly EntityQuery<TargetActionComponent> _targetActionQ;
     private readonly EntityQuery<WorldTargetActionComponent> _worldTargetQ;
@@ -103,6 +107,8 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         _physics = ents.System<SharedPhysicsSystem>();
         _transform = ents.System<SharedTransformSystem>();
         _line = ents.System<LineSystem>();
+        _area = ents.System<AreaSystem>();
+        _turf = ents.System<TurfSystem>();
         _actionsQ = ents.GetEntityQuery<ActionsComponent>();
         _targetActionQ = ents.GetEntityQuery<TargetActionComponent>();
         _worldTargetQ = ents.GetEntityQuery<WorldTargetActionComponent>();
@@ -219,6 +225,57 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
                     return;
                 DrawPierce(args, player.Value, xform, originMap, mousePos, pierce);
                 break;
+
+            case XenoDigTunnelActionEvent:
+                DrawTunnelDigAllowed(args, player.Value, originMap, mousePos);
+                break;
+        }
+    }
+
+    /*
+    todos:
+    better method name
+    border around mousepos with highlighted colour
+    */
+    private void DrawTunnelDigAllowed(in OverlayDrawArgs args, EntityUid player, MapCoordinates originMap, MapCoordinates mousePos)
+    {
+        var gridsInView = new List<Entity<MapGridComponent>>();
+        _mapManager.FindGridsIntersecting(args.MapId, args.WorldBounds, ref gridsInView);
+
+        foreach (var grid in gridsInView)
+        {
+            var tunnelAllowedTiles = new HashSet<Vector2i>();
+
+            foreach (var tile in _mapSystem.GetTilesIntersecting(grid, grid.Comp, args.WorldBounds))
+            {
+                if (!_turf.GetContentTileDefinition(tile).CanPlaceTunnel)
+                    continue;
+                if (_turf.IsTileBlocked(tile, CollisionGroup.Impassable | CollisionGroup.MidImpassable | CollisionGroup.HighImpassable))
+                    continue;
+
+                if (!_area.TryGetArea(grid, tile.GridIndices, out var area, out _))
+                    continue;
+                if (area.Value.Comp.NoTunnel)
+                    continue;
+
+                tunnelAllowedTiles.Add(tile.GridIndices);
+            }
+
+            foreach (var tileCoords in tunnelAllowedTiles)
+            {
+                // Filled-in overlay
+                args.WorldHandle.DrawRect(
+                    new Box2(
+                        tileCoords.X,
+                        tileCoords.Y,
+                        tileCoords.X + grid.Comp.TileSize,
+                        tileCoords.Y + grid.Comp.TileSize
+                    ),
+                    Color.Green.WithAlpha(0.5f)
+                );
+            }
+            // Outline overlay
+            DrawTileBorder(args.WorldHandle, grid.Owner, grid.Comp, tunnelAllowedTiles, Color.Green);
         }
     }
 
@@ -274,7 +331,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
             return;
 
         var center = _mapSystem.CoordinatesToTile(gridUid, grid, mousePos);
-        var tileRadius = (int) MathF.Ceiling(radius);
+        var tileRadius = (int)MathF.Ceiling(radius);
         var tiles = new HashSet<Vector2i>();
         for (var x = -tileRadius; x <= tileRadius; x++)
         {
@@ -310,14 +367,14 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         // Convert the orthogonal world vector to a tile-space step
         // by seeing which tile neighbour it points most toward
         var orthoTile = new Vector2i(
-            (int) MathF.Round(ortho.X),
-            (int) MathF.Round(ortho.Y)
+            (int)MathF.Round(ortho.X),
+            (int)MathF.Round(ortho.Y)
         );
 
         if (orthoTile == Vector2i.Zero)
             orthoTile = new Vector2i(1, 0);
 
-        var radius = (int) deployTraps.DeployTrapsRadius;
+        var radius = (int)deployTraps.DeployTrapsRadius;
         var rangeSquared = deployTraps.Range * deployTraps.Range;
         var validTiles = new HashSet<Vector2i>();
         var invalidTiles = new HashSet<Vector2i>();
@@ -443,7 +500,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
 
         var center = _mapSystem.CoordinatesToTile(gridUid, grid, originMap);
         var tileSize = grid.TileSize;
-        var maxTiles = (int) MathF.Ceiling(range / tileSize);
+        var maxTiles = (int)MathF.Ceiling(range / tileSize);
         var tiles = new HashSet<Vector2i>();
         for (var x = -maxTiles; x <= maxTiles; x++)
         {
@@ -754,7 +811,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
                 return mask;
         }
 
-        return (int) (CollisionGroup.Impassable | CollisionGroup.BulletImpassable | CollisionGroup.XenoProjectileImpassable);
+        return (int)(CollisionGroup.Impassable | CollisionGroup.BulletImpassable | CollisionGroup.XenoProjectileImpassable);
     }
 
     private MapCoordinates AdjustProjectileImpact(EntProtoId projectile, MapCoordinates origin, MapCoordinates impact)

@@ -932,7 +932,7 @@ public sealed class SelectDestinationTunnelInterfaceState(Dictionary<string, Net
     public Dictionary<string, NetEntity> HiveTunnels = hiveTunnels;
 }
 
-public sealed partial class XenoDigTunnelActionEvent : InstantActionEvent
+public sealed partial class XenoDigTunnelActionEvent : WorldTargetActionEvent
 {
     [DataField]
     public EntProtoId Prototype = "XenoTunnel";
