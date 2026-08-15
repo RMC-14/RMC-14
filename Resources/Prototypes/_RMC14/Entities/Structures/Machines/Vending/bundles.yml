@@ -84,7 +84,7 @@
   description: Contains 50 metal, 40 plasteel, 25 sandbags, a high-capacity power cell, an entrenching tool, a light replacer, and a nailgun.
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Bombs/c4.rsi
+    sprite: _RMC14/Objects/Weapons/Explosives/plastic_explosives.rsi
     state: icon
   - type: CMVendorBundle
     bundle:
@@ -215,6 +215,27 @@
     - RMCBinoculars
     - CMClipboard # notepad
     - RMCUniversalRecorder
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: CMVendorBundleStaffOfficerEssentialLeaderSet
+  name: essential leader set
+  description: Contains a plastic explosive, a whistle, a box of zipties, a portable fire extinguisher, a laser designator, a signal flare pack, a megaphone, and fultons.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Explosives/plastic_explosives.rsi
+    state: icon
+  - type: CMVendorBundle
+    bundle:
+    - RMCExplosivePlastic
+    - RMCWhistle    #TODO RMC14: Trench Whistle
+    - RMCBoxZiptie
+    - CMFireExtinguisherPortable
+# TODO RMC14:    - Map
+    - RMCLaserDesignator
+    - RMCPackFlareCAS
+    - RMCMegaphone
+    - RMCFulton20
 
 # PVE
 - type: entity
