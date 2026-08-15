@@ -3,7 +3,7 @@ using Robust.Shared.GameStates;
 
 namespace Content.Shared.Standing
 {
-    // AutoGenComponentState set to true for RMCStandingSystem 176 to fix sprite states after knockdown mispredict.
+    // AutoGenComponentState set to true for RMCStandingSystem OnStandingState to resync after knockdown mispredict.
     [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
     [Access(typeof(StandingStateSystem))]
     public sealed partial class StandingStateComponent : Component
