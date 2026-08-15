@@ -1,0 +1,29 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from CMSS13 https://github.com/cmss13-devs/cmss13-pve/blob/master/icons/obj/vehicles/hardpoints/uppapc.dmi",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "apc_autocannon"
+        },
+        {
+            "name": "apc_minigun"
+        },
+        {
+            "name": "hj35launcher"
+        },
+        {
+            "name": "spp_flare_launcher"
+        },
+        {
+            "name": "spp_flare_launcher_installed"
+        },
+        {
+            "name": "spp_tires"
+        }
+    ]
+}

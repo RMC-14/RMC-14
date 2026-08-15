@@ -733,7 +733,6 @@
   - type: AnomalousParticle
     particleType: Sigma
 
-# Launcher projectiles (grenade / rocket)
 - type: entity
   id: BulletRocket
   name: rocket

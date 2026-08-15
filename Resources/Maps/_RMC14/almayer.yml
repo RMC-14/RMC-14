@@ -30461,6 +30461,13 @@ entities:
     - type: Transform
       pos: -23.5,-25.5
       parent: 1
+- proto: CMSpawnPointCrewman
+  entities:
+  - uid: 120000
+    components:
+    - type: Transform
+      pos: -37.5,-22.5
+      parent: 1
 - proto: CMSpawnPointQuartermaster
   entities:
   - uid: 2817

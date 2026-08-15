@@ -12,6 +12,7 @@ using Content.Shared._RMC14.Stealth;
 using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Weapons.Ranged.Whitelist;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
@@ -73,6 +74,7 @@ public sealed class CMGunSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedRMCLagCompensationSystem _rmcLagCompensation = default!;
     [Dependency] private readonly RMCProjectileSystem _rmcProjectileSystem = default!;
+    [Dependency] private readonly VehicleWeaponsSystem _vehicleWeapons = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly ItemSlotsSystem _slots = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
@@ -180,6 +182,8 @@ public sealed class CMGunSystem : EntitySystem
 
         // Find start and end coordinates for vector.
         var from = _transform.GetMapCoordinates(ent);
+        if (args.FiredProjectiles.Count > 0)
+            from = _transform.GetMapCoordinates(args.FiredProjectiles[0]);
         var to = _transform.ToMapCoordinates(target);
         // Must be same map.
         if (from.MapId != to.MapId)
@@ -191,15 +195,15 @@ public sealed class CMGunSystem : EntitySystem
             return;
 
         // Check for a max range from the ShootAtFixedPointComponent. If defined, take the minimum between that and the calculated distance.
-        var distance = ent.Comp.MaxFixedRange != null ? Math.Min(ent.Comp.MaxFixedRange.Value, direction.Length()) : direction.Length();
+        var baseDistance = ent.Comp.MaxFixedRange != null ? Math.Min(ent.Comp.MaxFixedRange.Value, direction.Length()) : direction.Length();
 
         if (ent.Comp.AutoAimClosestObstacle)
         {
             var ray = new CollisionRay(from.Position, direction.Normalized(), ((int)Physics.CollisionGroup.Impassable));
-            var hitResults = _physics.IntersectRay(from.MapId, ray, distance, returnOnFirstHit: true);
+            var hitResults = _physics.IntersectRay(from.MapId, ray, baseDistance, returnOnFirstHit: true);
             if (hitResults.TryFirstOrNull(out var hitResult) && hitResult is RayCastResults trueHit)
             {
-                distance = trueHit.Distance;
+                baseDistance = trueHit.Distance;
             }
         }
         // Get current time and normalize the vector for physics math.
@@ -231,6 +235,7 @@ public sealed class CMGunSystem : EntitySystem
                 comp.ArcProj = true;
 
             // Take the lowest nonzero MaxFixedRange between projectile and gun for the capped vector length.
+            var distance = baseDistance;
             if (TryComp(projectile, out ProjectileComponent? normalProjectile) && normalProjectile.MaxFixedRange > 0)
             {
                 distance = distance > 0 ? Math.Min(normalProjectile.MaxFixedRange.Value, distance) : normalProjectile.MaxFixedRange.Value;
@@ -648,6 +653,11 @@ public sealed class CMGunSystem : EntitySystem
             RemCompDeferred<ProjectileFixedDistanceComponent>(uid);
             var ev = new ProjectileFixedDistanceStopEvent();
             RaiseLocalEvent(uid, ref ev);
+
+            if (_net.IsClient &&
+                IsClientSide(uid) &&
+                HasComp<DeleteOnFixedDistanceStopComponent>(uid))
+                QueueDel(uid);
         }
     }
 
@@ -787,7 +797,14 @@ public sealed class CMGunSystem : EntitySystem
     public bool TryGetGunUser(EntityUid gun, out Entity<HandsComponent> user)
     {
         if (_container.TryGetContainingContainer((gun, null), out var container) &&
-            TryComp(container.Owner, out HandsComponent? hands))
+            _vehicleWeapons.TryGetOperatorForSelectedWeapon(container.Owner, gun, out var operatorUid) &&
+            TryComp(operatorUid, out HandsComponent? operatorHands))
+        {
+            user = (operatorUid, operatorHands);
+            return true;
+        }
+
+        if (container != null && TryComp(container.Owner, out HandsComponent? hands))
         {
             user = (container.Owner, hands);
             return true;

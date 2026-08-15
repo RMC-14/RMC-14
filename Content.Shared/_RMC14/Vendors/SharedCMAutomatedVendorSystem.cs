@@ -179,19 +179,19 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         var transform = Transform(ent.Owner);
         _entries.Clear();
         _boxEntries.Clear();
-        ent.Comp.EntryByPrototype.Clear();
-        ent.Comp.EntryByStackType.Clear();
+        ent.Comp.RestockEntries.Clear();
+        ent.Comp.StackEntries.Clear();
         foreach (var section in ent.Comp.Sections)
         {
             foreach (var entry in section.Entries)
             {
                 _entries.TryAdd(entry.Id, entry);
-                ent.Comp.EntryByPrototype.TryAdd(entry.Id, entry);
+                ent.Comp.RestockEntries.TryAdd(entry.Id, entry);
 
                 if (_prototypes.TryIndex(entry.Id, out var entryProto) &&
                     entryProto.TryGetComponent(out StackComponent? entryStack, _compFactory))
                 {
-                    ent.Comp.EntryByStackType.TryAdd(entryStack.StackTypeId, entry);
+                    ent.Comp.StackEntries.TryAdd(entryStack.StackTypeId, entry);
                 }
 
                 if (entry.Box != null)
@@ -929,6 +929,12 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         Dirty(user);
     }
 
+    public void SetSections(Entity<CMAutomatedVendorComponent> vendor, List<CMVendorSection> sections)
+    {
+        vendor.Comp.Sections = sections;
+        Dirty(vendor);
+    }
+
     public void SetExtraPoints(Entity<CMVendorUserComponent> user, string key, int points)
     {
         user.Comp.ExtraPoints ??= new Dictionary<string, int>();
@@ -1112,11 +1118,11 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             return false;
 
         // Try direct prototype match first
-        vendor.Comp.EntryByPrototype.TryGetValue(itemProto, out var matchingEntry);
+        vendor.Comp.RestockEntries.TryGetValue(itemProto, out var matchingEntry);
 
         // Try stack type match for split/merged stacks (e.g., CMTraumaKit1 matching CMTraumaKit10)
         if (matchingEntry == null && TryComp<StackComponent>(item, out var itemStackComp))
-            vendor.Comp.EntryByStackType.TryGetValue(itemStackComp.StackTypeId, out matchingEntry);
+            vendor.Comp.StackEntries.TryGetValue(itemStackComp.StackTypeId, out matchingEntry);
 
         var ignoreBulkRestock = vendor.Comp.IgnoreBulkRestockById.Contains(itemProto) || IgnoreBulkRestockByComponent(item);
         if (matchingEntry == null || (HasComp<StorageComponent>(item) && !HasComp<ClothingComponent>(item) && !ignoreBulkRestock))
@@ -1151,7 +1157,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (matchingEntry.Box is not { } boxId)
             return false;
 
-        if (!vendor.Comp.EntryByPrototype.TryGetValue(boxId, out var boxEntry))
+        if (!vendor.Comp.RestockEntries.TryGetValue(boxId, out var boxEntry))
             return false;
 
         var amountToAdd = GetBoxRemoveAmount(matchingEntry);
@@ -1287,10 +1293,10 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     /// <returns>True if all applicable validation checks pass, false otherwise.</returns>
     private bool ValidateItemForRestock(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool suppressPopup)
     {
-        return ValidateReagentContainers(item, user, suppressPopup)
-               && (!HasComp<GunComponent>(item) || ValidateGun(item, user, suppressPopup))
-               && ValidateAmmunition(vendor, item, user, suppressPopup)
-               && ValidateEquipment(vendor, item, user, suppressPopup);
+        return ValidateReagentContainers(item, user, suppressPopup) &&
+               (!HasComp<GunComponent>(item) || ValidateGun(item, user, suppressPopup)) &&
+               ValidateAmmunition(vendor, item, user, suppressPopup) &&
+               ValidateEquipment(vendor, item, user, suppressPopup);
     }
 
     /// <summary>

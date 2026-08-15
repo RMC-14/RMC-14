@@ -1,4 +1,7 @@
 - type: Tag
+  id: RMCSkillPamphlet
+
+- type: Tag
   id: CMCartridge10x20mm
 
 - type: Tag
