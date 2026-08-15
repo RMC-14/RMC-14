@@ -507,8 +507,17 @@ public sealed partial class AnnouncementWidget
 
     private void UpdatePosition()
     {
-        if (Parent is not Control parent || ActiveAnnouncement == null)
+        var layout = ResolveLayout();
+        if (layout.Size.X <= 0f || layout.Size.Y <= 0f)
             return;
+
+        ApplyManagedLayout(layout.Position, layout.Size);
+    }
+
+    internal AnnouncementWidgetLayout ResolveLayout(Vector2? sizeOverride = null)
+    {
+        if (Parent is not Control parent || ActiveAnnouncement == null)
+            return default;
 
         var screenSize = parent.Size.X > 0f && parent.Size.Y > 0f
             ? parent.Size
@@ -527,8 +536,17 @@ public sealed partial class AnnouncementWidget
             }
         }
 
-        Measure(positioningSize);
-        var widgetSize = DesiredSize;
+        Vector2 widgetSize;
+        if (sizeOverride is { } resolvedSize)
+        {
+            widgetSize = resolvedSize;
+        }
+        else
+        {
+            Measure(positioningSize);
+            widgetSize = DesiredSize;
+        }
+
         var announcement = ActiveAnnouncement.Data;
         var style = ActiveAnnouncement.ResolvedStyle;
 
@@ -543,7 +561,25 @@ public sealed partial class AnnouncementWidget
             announcement,
             style);
 
-        UpdateLayoutRect(position, widgetSize);
+        return new AnnouncementWidgetLayout(position, widgetSize);
+    }
+
+    internal HAlignment ResolveStackAlignment()
+    {
+        if (ActiveAnnouncement == null || ActiveAnnouncement.Data.ScreenPositionOverride != null)
+            return HAlignment.Left;
+
+        return ActiveAnnouncement.ResolvedStyle.LayoutConfig.Position switch
+        {
+            AnnouncementPosition.TopRight or AnnouncementPosition.MiddleRight or AnnouncementPosition.BottomRight => HAlignment.Right,
+            AnnouncementPosition.TopCenter or AnnouncementPosition.MiddleCenter or AnnouncementPosition.BottomCenter or AnnouncementPosition.FullScreen => HAlignment.Center,
+            _ => HAlignment.Left
+        };
+    }
+
+    internal void ApplyManagedLayout(Vector2 position, Vector2 size)
+    {
+        UpdateLayoutRect(position, size);
     }
 
     private Vector2 AvoidActionBarOverlap(
@@ -655,4 +691,6 @@ public sealed partial class AnnouncementWidget
         LayoutContainer.SetMarginBottom(this, position.Y + size.Y);
     }
 }
+
+internal readonly record struct AnnouncementWidgetLayout(Vector2 Position, Vector2 Size);
 

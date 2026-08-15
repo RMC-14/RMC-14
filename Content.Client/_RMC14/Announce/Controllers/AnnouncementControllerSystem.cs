@@ -148,12 +148,20 @@ public sealed class AnnouncementControllerSystem : EntitySystem
         if (screen == null)
             return;
 
-        var widget = screen.GetWidget<AnnouncementWidget>();
-        if (widget?.ActiveAnnouncement is not { } active)
+        var overlay = screen.GetWidget<AnnouncementOverlayWidget>();
+        if (overlay == null)
             return;
 
-        var layout = ResolveLayoutOverride(active.Data.AnnouncementId);
-        active.Data.ScreenPositionOverride = layout?.Clamp().ScreenPosition;
+        foreach (var widget in overlay.Announcements)
+        {
+            if (widget.ActiveAnnouncement is not { } active)
+                continue;
+
+            var layout = ResolveLayoutOverride(active.Data.AnnouncementId);
+            active.Data.ScreenPositionOverride = layout?.Clamp().ScreenPosition;
+        }
+
+        overlay.Reflow();
     }
 
     public AnnouncementDisplayPreference ResolveDisplayPreference(ProtoId<AnnouncementPresetPrototype> announcementId)

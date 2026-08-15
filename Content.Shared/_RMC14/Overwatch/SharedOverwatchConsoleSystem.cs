@@ -84,8 +84,10 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     private TimeSpan _updateEvery;
     private readonly Dictionary<Entity<SquadTeamComponent>, Queue<EntityUid>> _toProcess = new();
     private readonly HashSet<Entity<SquadTeamComponent>> _toRemove = new();
+    private readonly Dictionary<EntityUid, TimeSpan> _nextSquadAnnouncement = new();
 
     private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabAnnouncementLogs";
+    private static readonly TimeSpan SquadAnnouncementCooldown = TimeSpan.FromSeconds(8);
 
     public override void Initialize()
     {
@@ -104,6 +106,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         SubscribeLocalEvent<OverwatchConsoleComponent, BoundUIOpenedEvent>(OnBUIOpened);
         SubscribeLocalEvent<OverwatchConsoleComponent, OverwatchTransferMarineSelectedEvent>(OnTransferMarineSelected);
         SubscribeLocalEvent<OverwatchConsoleComponent, OverwatchTransferMarineSquadEvent>(OnTransferMarineSquad);
+        SubscribeLocalEvent<SquadTeamComponent, ComponentShutdown>(OnSquadShutdown);
 
         SubscribeLocalEvent<OverwatchWatchingComponent, MoveInputEvent>(OnWatchingMoveInput);
         SubscribeLocalEvent<OverwatchWatchingComponent, DamageChangedEvent>(OnWatchingDamageChanged);
@@ -149,6 +152,25 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             console.HasOrbital = hasOrbital;
             Dirty(uid, console);
         }
+    }
+
+    private void OnSquadShutdown(Entity<SquadTeamComponent> squad, ref ComponentShutdown args)
+    {
+        _nextSquadAnnouncement.Remove(squad.Owner);
+    }
+
+    protected bool TryStartSquadAnnouncementCooldown(EntityUid squad, TimeSpan time, out int remainingSeconds)
+    {
+        if (_nextSquadAnnouncement.TryGetValue(squad, out var nextAnnouncement) &&
+            time < nextAnnouncement)
+        {
+            remainingSeconds = Math.Max(1, (int) Math.Ceiling((nextAnnouncement - time).TotalSeconds));
+            return false;
+        }
+
+        _nextSquadAnnouncement[squad] = time + SquadAnnouncementCooldown;
+        remainingSeconds = 0;
+        return true;
     }
 
     private void OnOrbitalCannonLaunch(ref OrbitalCannonLaunchEvent ev)
@@ -539,11 +561,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
     private void OnOverwatchSendMessageBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleSendMessageBuiMsg args)
     {
-        if (!ent.Comp.CanMessageSquad)
-            return;
-
-        var time = _timing.CurTime;
-        if (time < ent.Comp.LastMessage + ent.Comp.MessageCooldown)
+        if (_net.IsClient || !ent.Comp.CanMessageSquad)
             return;
 
         var message = args.Message;
@@ -559,8 +577,15 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             return;
         }
 
-        ent.Comp.LastMessage = time;
-        Dirty(ent);
+        var time = _timing.CurTime;
+        if (!TryStartSquadAnnouncementCooldown(squad.Value, time, out var remaining))
+        {
+            _popup.PopupClient(
+                Loc.GetString("rmc-overwatch-console-announcement-cooldown", ("seconds", remaining)),
+                args.Actor,
+                PopupType.SmallCaution);
+            return;
+        }
 
         _adminLog.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(args.Actor)} sent {squadProto.Name} squad message: {args.Message}");
         _core.CreateARESLog(ent, LogCat, (string) $"{Name(args.Actor)} sent a squad announcement: {args.Message}");

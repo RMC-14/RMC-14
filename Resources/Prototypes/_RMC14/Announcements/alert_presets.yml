@@ -269,7 +269,7 @@
     path: "/Audio/Misc/redalert.ogg"
     params:
       volume: -2
-  priority: 9
+  priority: 10
   canInterrupt: true
   canBeInterrupted: true
   presentations:

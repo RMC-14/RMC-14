@@ -6,7 +6,7 @@
   defaultPreference: Stylized
   sound:
     path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
-  priority: 8
+  priority: 9
   canInterrupt: true
   canBeInterrupted: false
   aliases:
@@ -154,7 +154,7 @@
   visibleInLayoutEditor: false
   sound:
     path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
-  priority: 8
+  priority: 9
   canInterrupt: true
   canBeInterrupted: false
   presentations:

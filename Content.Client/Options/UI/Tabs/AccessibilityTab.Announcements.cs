@@ -16,6 +16,11 @@ public sealed partial class AccessibilityTab
 
     private void RegisterAnnouncementOptions()
     {
+        Control.AddOptionSlider(
+            RMCCVars.RMCAnnouncementMaxVisible,
+            AnnouncementMaxVisibleSlider,
+            AnnouncementOverlayUIController.MinVisibleAnnouncements,
+            AnnouncementOverlayUIController.MaxVisibleAnnouncements);
         AddPerAnnouncementOverrides();
         RegisterAnnouncementLayoutEditor();
     }
