@@ -72,3 +72,10 @@
     - [ RMCWeaponSMGPDW90, RMCMagazineSMGPDW90, RMCMagazineSMGPDW90 ]
     - [ RMCWeaponSMGM63WhiteNoLock, CMMagazineSMGM63, CMMagazineSMGM63 ]
     primaryWeaponChance: 1
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconWeYaSec
+  icon:
+    sprite: _RMC14/Interface/job_icons/We-Ya/pmc.rsi
+    state: weya_sec
