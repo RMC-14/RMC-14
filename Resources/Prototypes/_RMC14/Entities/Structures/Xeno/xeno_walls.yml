@@ -290,6 +290,8 @@
   - type: XenoConstructionPlasmaCost
     plasma: 145
     scalingCost: true
+  - type: XenoStructureUpgradeable
+    to: null
   - type: RMCReflective
   - type: ExplosionRandomResistance
     min: 0.3
@@ -307,7 +309,7 @@
   parent: WallXenoResinReflective
   id: WallXenoResinReflectiveUnstable
   name: weakened reflective wall
-  description: Weird slime with strange hardened fragments solidified into a wall. It looks like it last for moment before it will collapse.
+  description: "Weird slime with strange, hardened fragments solidified into a wall.\nIt looks ready to collapse at any moment."
   components:
   - type: TimedDespawn
     lifetime: 13.0

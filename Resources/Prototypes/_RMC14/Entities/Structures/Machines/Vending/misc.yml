@@ -56,10 +56,10 @@
         amount: 0
       - id: CMMagazinePistolM1984
         amount: 0
-#      - id: M56D Drum Magazine
-#        amount: 0
-#      - id: M2C Box Magazine
-#        amount: 0
+      - id: RMCMagazineML66D
+        amount: 0
+      - id: RMCMagazineM2C
+        amount: 0
     - name: Armor
       entries:
       - id: ArmorHelmetM10
@@ -154,9 +154,15 @@
       - id: RMCBoxMagazinePistolM1984
         name: Magazine Box (M1984 x 16)
         box: CMMagazinePistolM1984
-#      - name: Magazine Box (M56D x 8)
-#        box: CMMagazineSMGM63
-#      - name: Magazine Box (M2C x 8)
-#        box: CMMagazineSMGM63
-# TODO: Box of M89 Signal Flare Packs (CAS Flare Box)
-# TODO: Box of Flashlights
+#      - id: RMCBoxMagazineML66D
+#        name: Drum Box (ML66D x 8)
+#        box: RMCMagazineML66D
+#      - id: RMCBoxMagazineM2C
+#        name: Ammo Box (M2C x 8)
+#        box: RMCMagazineM2C
+      - id: RMCBoxPackFlareCAS
+        name: box of M89-S flare packs (x10)
+        box: RMCPackFlareCAS
+      - id: RMCBoxFlashlights
+        name: box of flashlights (x8)
+        box: RMCFlashlight

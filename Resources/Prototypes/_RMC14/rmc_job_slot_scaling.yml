@@ -66,3 +66,8 @@
         c: 1
         min: 1
         max: 2
+      CMVehicleCrewman:
+        factor: 1
+        c: 0
+        min: 2
+        max: 2

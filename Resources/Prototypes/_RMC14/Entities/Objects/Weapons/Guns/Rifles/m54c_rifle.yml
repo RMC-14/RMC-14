@@ -252,7 +252,7 @@
 - type: entity
   parent: RMCWeaponRifleM54CSemiStripped
   id: RMCWeaponRifleM54CWhiteNoLock
-  description: A M54C Mk2 with a Weston-Yamada logo imprinted on the reciever. Used primarily by Weston-Yamada's corporate security forces, and comes equipped with a drab corproate white paint job.
+  description: A M54C Mk2 with a Weston-Yamada logo imprinted on the reciever. Used primarily by Weston-Yamada's corporate security forces, and comes equipped with a drab corporate white paint job.
   suffix: Corporate, No UGL, No ID lock
   components:
   - type: Sprite
@@ -452,8 +452,8 @@
       map: ["enum.GunVisualLayers.Mag"]
     - state: ammo_band
       color: "#771A10"
-#  - type: RefillableByBulletBox no bullet box for it yet
-#    bulletType: RMCBoxBulletsRifleAP
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifleIncendiary
 
 - type: entity
   parent: CMMagazineRifleM54C
@@ -487,8 +487,7 @@
   id: RMCMagazineRifleM54CHEAPEmpty
   suffix: HEAP, Empty
   components:
-  - type: BallisticAmmoProvider
-    proto: null
+  - type: RMCEmptyMag
 
 - type: entity
   parent: CMMagazineRifleM54C
@@ -575,8 +574,8 @@
 - type: entity
   parent: CMCartridgeRifle10x24mm
   id: RMCCartridgeRifle10x24mmIncendiary
-  name: AP cartridge (10x24mm)
-  description: An armor piercing 10x24mm cartridge. Fits in 10x24mm AP magazines.
+  name: Incendiary cartridge (10x24mm)
+  description: An incendiary 10x24mm cartridge. Fits in 10x24mm Incendiary magazines.
   components:
   - type: Tag
     tags:

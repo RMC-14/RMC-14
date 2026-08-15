@@ -302,6 +302,7 @@
   - type: NpcFactionMember
     factions:
       - Passive
+  - type: RMCNightVisionVisible
 #  - type: HTN
 #    rootTask:
 #      task: SimpleHostileCompound

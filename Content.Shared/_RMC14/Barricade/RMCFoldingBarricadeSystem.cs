@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Construction;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Repairable;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Acid;
 using Content.Shared._RMC14.Xenonids.Spray;
 using Content.Shared.ActionBlocker;
@@ -284,6 +285,9 @@ public sealed class RMCFoldingBarricadeSystem : EntitySystem
         if (!args.CanAccess || !args.CanInteract)
             return;
 
+        if (HasComp<XenoComponent>(args.User))
+            return;
+
         var user = args.User;
         args.Verbs.Add(new AlternativeVerb
         {
@@ -303,6 +307,9 @@ public sealed class RMCFoldingBarricadeSystem : EntitySystem
         if (args.User != args.Target)
             return;
 
+        if (HasComp<XenoComponent>(args.User))
+            return;
+
         args.CanDrop = true;
         args.Handled = true;
     }
@@ -310,6 +317,9 @@ public sealed class RMCFoldingBarricadeSystem : EntitySystem
     private void OnBarricadeDragDropDragged(Entity<RMCFoldingBarricadeComponent> ent, ref DragDropDraggedEvent args)
     {
         if (args.User != args.Target)
+            return;
+
+        if (HasComp<XenoComponent>(args.User))
             return;
 
         args.Handled = true;
@@ -344,6 +354,9 @@ public sealed class RMCFoldingBarricadeSystem : EntitySystem
 
     private void OnBarricadeExamined(Entity<RMCFoldingBarricadeComponent> ent, ref ExaminedEvent args)
     {
+        if (HasComp<XenoComponent>(args.Examiner))
+            return;
+
         using (args.PushGroup(nameof(RMCFoldingBarricadeComponent)))
         {
             args.PushMarkup(Loc.GetString("rmc-folding-barricade-deployed-examine"));

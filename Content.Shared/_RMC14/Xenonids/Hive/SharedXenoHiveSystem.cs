@@ -353,6 +353,12 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         return hive.Comp.HiveStructureSlots.TryGetValue(structureProtoId, out limit);
     }
 
+    public void RecordGib(Entity<HiveComponent> hive, GibbedXenoInfo info)
+    {
+        hive.Comp.GibbedXenos.Add(info);
+        Dirty(hive);
+    }
+
     public void SetSeeThroughContainers(Entity<HiveComponent?> hive, bool see)
     {
         if (!_query.Resolve(hive, ref hive.Comp, false))

@@ -32,6 +32,15 @@
         RMCSkillMedical: 1
         RMCSkillJtac: 2
         RMCSkillPowerLoader: 2
+    - type: Language
+      spokenLanguages:
+      - English
+      - SignLanguage
+      understoodLanguages:
+      - English
+      - SignLanguage
+      currentLanguage: English
+      defaultLanguage: English
     - type: NpcFactionMember
       factions:
       - UNMC
