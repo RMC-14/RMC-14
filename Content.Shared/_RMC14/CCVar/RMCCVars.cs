@@ -458,6 +458,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<AnnouncementDisplayPreference> RMCAnnouncementStyle =
         CVarDef.Create("rmc.announcement_style", AnnouncementDisplayPreference.Stylized, CVar.ARCHIVE | CVar.CLIENTONLY);
 
+    public static readonly CVarDef<int> RMCAnnouncementMaxVisible =
+        CVarDef.Create("rmc.announcement_max_visible", 2, CVar.ARCHIVE | CVar.CLIENTONLY);
+
     public static readonly CVarDef<string> RMCAnnouncementStyleOverrides =
         CVarDef.Create("rmc.announcement_style_overrides", string.Empty, CVar.ARCHIVE | CVar.CLIENTONLY);
 

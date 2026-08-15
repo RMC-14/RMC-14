@@ -26,11 +26,12 @@ public sealed partial class AnnouncementWidget : UIWidget
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
 
-    public event Action<uint>? OnAnnouncementFinished;
+    public event Action<AnnouncementWidget, uint>? OnAnnouncementFinished;
 
     public ActiveAnnouncement? ActiveAnnouncement { get; private set; }
     public bool PreviewMode { get; set; }
     public Vector2? ForcedScreenSize { get; set; }
+    internal bool PositionManaged { get; set; }
 
     private Control[] _richTextLabels = Array.Empty<Control>();
     private Control? _spriteContainer;
@@ -104,7 +105,8 @@ public sealed partial class AnnouncementWidget : UIWidget
         }
 
         UpdateAnnouncement(deltaTime, currentTime);
-        UpdatePosition();
+        if (!PositionManaged)
+            UpdatePosition();
     }
 
     private void FinishAnnouncement()
@@ -112,7 +114,15 @@ public sealed partial class AnnouncementWidget : UIWidget
         var overrideId = ActiveAnnouncement?.Data.OverrideId ?? 0;
         CleanupCurrentAnnouncement();
         Visible = false;
-        OnAnnouncementFinished?.Invoke(overrideId);
+        OnAnnouncementFinished?.Invoke(this, overrideId);
+    }
+
+    internal void CancelAnnouncement()
+    {
+        if (ActiveAnnouncement == null)
+            return;
+
+        CleanupCurrentAnnouncement();
     }
 
     private void CleanupCurrentAnnouncement()

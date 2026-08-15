@@ -7,7 +7,7 @@
   visibleInLayoutEditor: false
   sound:
     path: "/Audio/_RMC14/Announcements/ARES/attention_jingle.ogg"
-  priority: 9
+  priority: 10
   canInterrupt: true
   canBeInterrupted: false
   presentations:
@@ -57,7 +57,7 @@
   target: All
   visibleInSettings: false
   visibleInLayoutEditor: false
-  priority: 10
+  priority: 11
   canInterrupt: true
   canBeInterrupted: false
   presentations:
