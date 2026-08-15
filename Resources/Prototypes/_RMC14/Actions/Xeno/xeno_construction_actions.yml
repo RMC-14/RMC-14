@@ -224,10 +224,12 @@
       state: build_tunnel
     useDelay: 300
   - type: TargetAction
+    range: 16
     deselectOnMiss: true
     checkCanAccess: false
   - type: WorldTargetAction
     event: !type:XenoDigTunnelActionEvent
+  - type: ActionBlockIfResting
 
 - type: entity
   parent: CMGuidebookActionXenoBase

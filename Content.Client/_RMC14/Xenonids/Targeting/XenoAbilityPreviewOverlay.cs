@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
 using Content.Client.Gameplay;
 using Content.Client.UserInterface.Systems.Actions;
@@ -29,16 +26,14 @@ using Robust.Client.State;
 using Robust.Client.UserInterface;
 using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
-using Robust.Shared.GameObjects;
-using Robust.Shared.IoC;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Maths;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Marines;
 
 namespace Content.Client._RMC14.Xenonids.Targeting;
 
@@ -56,6 +51,8 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     private static readonly Color BlockerOutlineColor = new Color(0.65f, 0.65f, 0.65f);
     private static readonly Color AcidMineOutlineColor = new Color(0.6f, 0.9f, 0.2f);
     private static readonly Color DeployTrapsOutlineColor = new Color(0.8f, 0.6f, 0.2f);
+    private static readonly Color TunnelAllowedFillColor = Color.Green.WithAlpha(0.3f);
+    private static readonly Color TunnelAllowedOutlineColor = Color.Green.WithAlpha(0.6f);
 
     private const float OutlineAlpha = 0.8f;
     private const float OutlineThickness = 0.1f;
@@ -91,6 +88,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     private readonly EntityQuery<XenoAbductComponent> _abductQ;
     private readonly EntityQuery<XenoPierceComponent> _pierceQ;
     private readonly EntityQuery<TransformComponent> _xformQ;
+    private readonly EntityQuery<AlmayerComponent> _almayerQ;
 
     public XenoAbilityPreviewOverlay(IEntityManager ents)
     {
@@ -124,6 +122,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         _abductQ = ents.GetEntityQuery<XenoAbductComponent>();
         _pierceQ = ents.GetEntityQuery<XenoPierceComponent>();
         _xformQ = ents.GetEntityQuery<TransformComponent>();
+        _almayerQ = ents.GetEntityQuery<AlmayerComponent>();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
@@ -227,56 +226,37 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
                 break;
 
             case XenoDigTunnelActionEvent:
-                DrawTunnelDigAllowed(args, player.Value, originMap, mousePos);
+                DrawTunnelableTiles(args, originMap);
                 break;
         }
     }
 
-    /*
-    todos:
-    better method name
-    border around mousepos with highlighted colour
-    */
-    private void DrawTunnelDigAllowed(in OverlayDrawArgs args, EntityUid player, MapCoordinates originMap, MapCoordinates mousePos)
+    private void DrawTunnelableTiles(in OverlayDrawArgs args, MapCoordinates originMap)
     {
-        var gridsInView = new List<Entity<MapGridComponent>>();
-        _mapManager.FindGridsIntersecting(args.MapId, args.WorldBounds, ref gridsInView);
+        if (!_mapManager.TryFindGridAt(originMap, out var gridUid, out var grid))
+            return;
+        if (_almayerQ.HasComp(gridUid)) // can't build tunnels on the ship
+            return;
 
-        foreach (var grid in gridsInView)
+        var tunnelAllowedTiles = new HashSet<Vector2i>();
+        foreach (var tile in _mapSystem.GetTilesIntersecting(gridUid, grid, args.WorldBounds))
         {
-            var tunnelAllowedTiles = new HashSet<Vector2i>();
+            if (!_turf.GetContentTileDefinition(tile).CanPlaceTunnel)
+                continue;
+            if (_turf.IsTileBlocked(tile, CollisionGroup.Impassable | CollisionGroup.MidImpassable | CollisionGroup.HighImpassable))
+                continue;
 
-            foreach (var tile in _mapSystem.GetTilesIntersecting(grid, grid.Comp, args.WorldBounds))
-            {
-                if (!_turf.GetContentTileDefinition(tile).CanPlaceTunnel)
-                    continue;
-                if (_turf.IsTileBlocked(tile, CollisionGroup.Impassable | CollisionGroup.MidImpassable | CollisionGroup.HighImpassable))
-                    continue;
+            if (!_area.TryGetArea((gridUid, grid), tile.GridIndices, out var area, out _))
+                continue;
+            if (area.Value.Comp.NoTunnel)
+                continue;
 
-                if (!_area.TryGetArea(grid, tile.GridIndices, out var area, out _))
-                    continue;
-                if (area.Value.Comp.NoTunnel)
-                    continue;
-
-                tunnelAllowedTiles.Add(tile.GridIndices);
-            }
-
-            foreach (var tileCoords in tunnelAllowedTiles)
-            {
-                // Filled-in overlay
-                args.WorldHandle.DrawRect(
-                    new Box2(
-                        tileCoords.X,
-                        tileCoords.Y,
-                        tileCoords.X + grid.Comp.TileSize,
-                        tileCoords.Y + grid.Comp.TileSize
-                    ),
-                    Color.Green.WithAlpha(0.5f)
-                );
-            }
-            // Outline overlay
-            DrawTileBorder(args.WorldHandle, grid.Owner, grid.Comp, tunnelAllowedTiles, Color.Green);
+            tunnelAllowedTiles.Add(tile.GridIndices);
         }
+
+        // Filled and outlined overlay for all tunnelable tiles.
+        DrawTileFilled(args.WorldHandle, gridUid, grid, tunnelAllowedTiles, TunnelAllowedFillColor);
+        DrawTileBorder(args.WorldHandle, gridUid, grid, tunnelAllowedTiles, TunnelAllowedOutlineColor);
     }
 
     private void DrawResinSurge(
@@ -745,24 +725,53 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
             return;
 
         var tileSize = grid.TileSize;
-        var tileSizeVec = new Vector2(tileSize, tileSize);
+        var gridMatrix = _transform.GetWorldMatrix(gridUid);
 
         foreach (var indices in tiles)
         {
-            var baseLocal = new Vector2(indices.X * tileSize, indices.Y * tileSize);
-            var p00 = _transform.ToMapCoordinates(new EntityCoordinates(gridUid, baseLocal)).Position;
-            var p10 = _transform.ToMapCoordinates(new EntityCoordinates(gridUid, baseLocal + new Vector2(tileSize, 0f))).Position;
-            var p11 = _transform.ToMapCoordinates(new EntityCoordinates(gridUid, baseLocal + tileSizeVec)).Position;
-            var p01 = _transform.ToMapCoordinates(new EntityCoordinates(gridUid, baseLocal + new Vector2(0f, tileSize))).Position;
+            var baseLocal = _mapSystem.TileToVector((gridUid, grid), indices);
+            var bottomLeft = Vector2.Transform(baseLocal, gridMatrix);
+            var bottomRight = Vector2.Transform(baseLocal + new Vector2(tileSize, 0f), gridMatrix);
+            var topLeft = Vector2.Transform(baseLocal + new Vector2(0f, tileSize), gridMatrix);
+            var topRight = Vector2.Transform(baseLocal + grid.TileSizeVector, gridMatrix);
 
             if (!tiles.Contains(new Vector2i(indices.X, indices.Y + 1)))
-                DrawEdge(handle, p01, p11, color);
+                DrawEdge(handle, topLeft, topRight, color);
             if (!tiles.Contains(new Vector2i(indices.X, indices.Y - 1)))
-                DrawEdge(handle, p00, p10, color);
+                DrawEdge(handle, bottomLeft, bottomRight, color);
             if (!tiles.Contains(new Vector2i(indices.X + 1, indices.Y)))
-                DrawEdge(handle, p10, p11, color);
+                DrawEdge(handle, bottomRight, topRight, color);
             if (!tiles.Contains(new Vector2i(indices.X - 1, indices.Y)))
-                DrawEdge(handle, p00, p01, color);
+                DrawEdge(handle, bottomLeft, topLeft, color);
+        }
+    }
+
+    // Overcommented to maybe help make the grid->world stuff less confusing, because it certainly confused me.
+    private void DrawTileFilled(DrawingHandleWorld handle, EntityUid gridUid, MapGridComponent grid, HashSet<Vector2i> tiles, Color color)
+    {
+        if (tiles.Count == 0)
+            return;
+
+        var halfTileSize = grid.TileSizeHalfVector;
+
+        // This grid's position and rotation relative to the base world.
+        var (worldPos, worldRot) = _transform.GetWorldPositionRotation(gridUid);
+        // Transform matrix to quickly convert from grid-based coords to world coords.
+        var gridMatrix = Matrix3Helpers.CreateTransform(worldPos, worldRot);
+
+        foreach (var indices in tiles)
+        {
+            // Grid-based coords of the center point of this tile.
+            var localCenter = _mapSystem.TileCenterToVector(gridUid, grid, indices);
+            // "Real" world coords of the center point.
+            var worldCenter = Vector2.Transform(localCenter, gridMatrix);
+
+            // A tile-sized `Box2` centered around `worldCenter`.
+            var centeredBox = new Box2(worldCenter - halfTileSize, worldCenter + halfTileSize);
+            // `centeredBox` rotated to match the rotation of the grid, and thus the rotation of the tile.
+            var rotatedBox = new Box2Rotated(centeredBox, worldRot, worldCenter);
+
+            handle.DrawRect(rotatedBox, color);
         }
     }
 
