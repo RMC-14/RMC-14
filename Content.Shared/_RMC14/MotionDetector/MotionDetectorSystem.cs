@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Inventory;
+using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Weapons.Ranged.Battery;
 using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -379,14 +379,37 @@ public sealed class MotionDetectorSystem : EntitySystem
             detector.Blips.Clear();
             foreach (var tracked in _tracked)
             {
+                Console.WriteLine("Has faction?!!: " + hasFaction);
                 if (tracked.Owner == lastUser)
                     continue;
+                Console.WriteLine("pass 1");
 
                 if (tracked.Comp.LastMove < time - detector.MoveTime)
                     continue;
 
+                Console.WriteLine("pass 2");
+
+
+                if (TryComp<InfectableComponent>(tracked.Owner, out var infectableComp))
+                {
+                    if (infectableComp.BeingInfected)
+                    {
+                        Console.WriteLine("being infected - send a blip!");
+                        detector.Blips.Add(new Blip(_transform.GetMapCoordinates(tracked), tracked.Comp.IsQueenEye));
+                        continue;
+                    }
+                }
+
+                if (HasComp<VictimInfectedComponent>(tracked.Owner))
+                {
+                    Console.WriteLine("infected - send a blip!");
+                    detector.Blips.Add(new Blip(_transform.GetMapCoordinates(tracked), tracked.Comp.IsQueenEye));
+                    continue;
+                }
+
                 if (hasFaction && _userFactions.Any(f => _gunIFF.IsInFaction(tracked.Owner, f)))
                     continue;
+                Console.WriteLine("blip");
 
                 detector.Blips.Add(new Blip(_transform.GetMapCoordinates(tracked), tracked.Comp.IsQueenEye));
             }
