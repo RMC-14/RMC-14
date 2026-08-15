@@ -3,8 +3,10 @@ using Robust.Shared.GameStates;
 
 namespace Content.Shared.Standing
 {
-    // AutoGenComponentState set to true for RMCStandingSystem OnStandingState to resync after knockdown mispredict.
+    // RMC14
+    // AutoGenComponentState set to true for RMCStandingSystem OnStandingState
     [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+    // RMC14
     [Access(typeof(StandingStateSystem))]
     public sealed partial class StandingStateComponent : Component
     {
