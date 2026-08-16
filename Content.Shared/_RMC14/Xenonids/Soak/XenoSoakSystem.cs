@@ -87,7 +87,7 @@ public sealed class XenoSoakSystem : EntitySystem
         if (_net.IsServer)
         {
             var selfMessage = Loc.GetString("rmc-xeno-soak-end-self");
-            _popup.PopupClient(selfMessage, xeno, xeno, PopupType.MediumCaution);
+            _popup.PopupEntity(selfMessage, xeno, xeno, PopupType.MediumCaution);
 
             var others = Filter.PvsExcept(xeno).Recipients;
             foreach (var other in others)

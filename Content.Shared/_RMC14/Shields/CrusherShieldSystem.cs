@@ -51,7 +51,7 @@ public sealed partial class CrusherShieldSystem : EntitySystem
             return;
 
         var selfMessage = Loc.GetString("rmc-xeno-defensive-shield-activate-self");
-        _popup.PopupClient(selfMessage, xeno, xeno, PopupType.Medium);
+        _popup.PopupEntity(selfMessage, xeno, xeno, PopupType.Medium);
 
         var others = Filter.PvsExcept(xeno).Recipients;
         foreach (var other in others)
