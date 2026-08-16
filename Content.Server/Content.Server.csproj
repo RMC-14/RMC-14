@@ -29,6 +29,13 @@
     <ProjectReference Include="..\Content.Shared\Content.Shared.csproj" />
   </ItemGroup>
   <Import Project="..\RobustToolbox\MSBuild\Robust.Properties.targets" />
+  <!-- RMC14-Mcp-Start
+       Включение MCP-сервера маппера в релизную сборку: dotnet build -p:EnableMcp=true.
+       В сборках без FULL_RELEASE (Debug/DebugOpt/Tools) MCP включён всегда. -->
+  <PropertyGroup Condition="'$(EnableMcp)' == 'true'">
+    <DefineConstants>$(DefineConstants);RMC_MCP</DefineConstants>
+  </PropertyGroup>
+  <!-- RMC14-Mcp-End -->
 
   <ItemGroup>
     <ProjectReference Include="..\Content.Analyzers\Content.Analyzers.csproj" Condition="'$(SkipRobustAnalyzer)' != 'true'" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />

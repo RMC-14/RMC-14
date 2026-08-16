@@ -128,6 +128,30 @@ public sealed class AreaSystem : EntitySystem
         EnsureAreaEntityExists(areaGrid, area);
     }
 
+    /// <summary>
+    /// Writes or clears (area = null) one tile's area assignment straight into the grid's dictionary.
+    /// Unlike area markers + areas:save this is per-grid and works on uninitialized (mapping) grids,
+    /// where per-area entities must not exist yet; on initialized grids the area entity is ensured
+    /// like in ReplaceArea.
+    /// </summary>
+    public void SetAreaProto(Entity<AreaGridComponent?> grid, Vector2i position, EntProtoId<AreaComponent>? area)
+    {
+        grid.Comp ??= EnsureComp<AreaGridComponent>(grid);
+
+        if (area is { } proto)
+        {
+            grid.Comp.Areas[position] = proto;
+            if (MetaData(grid).EntityLifeStage >= EntityLifeStage.MapInitialized)
+                EnsureAreaEntityExists(grid.Comp, proto);
+        }
+        else if (!grid.Comp.Areas.Remove(position))
+        {
+            return;
+        }
+
+        Dirty(grid.Owner, grid.Comp);
+    }
+
     public bool SetAlwaysPowered(Entity<AreaComponent> area, bool alwaysPowered)
     {
         if (area.Comp.AlwaysPowered == alwaysPowered)
@@ -197,6 +221,43 @@ public sealed class AreaSystem : EntitySystem
         [NotNullWhen(true)] out EntityPrototype? areaPrototype)
     {
         return TryGetArea(coordinates.ToCoordinates(), out area, out areaPrototype);
+    }
+
+    /// <summary>
+    /// Reads a tile's area assignment straight from the grid's dictionary. Unlike TryGetArea this
+    /// works on uninitialized (mapping) grids, where the per-area entities don't exist yet.
+    /// </summary>
+    public bool TryGetAreaProto(Entity<AreaGridComponent?> grid, Vector2i indices, out EntProtoId<AreaComponent> areaProto)
+    {
+        areaProto = default;
+        return Resolve(grid, ref grid.Comp, false) && grid.Comp.Areas.TryGetValue(indices, out areaProto);
+    }
+
+    /// <summary>
+    /// Counts the assigned tiles of every area on a grid, optionally clipped to a rectangle
+    /// (south-west corner + size). Like TryGetAreaProto this works on uninitialized (mapping) grids.
+    /// </summary>
+    public Dictionary<EntProtoId<AreaComponent>, int> GetAreaTileCounts(
+        Entity<AreaGridComponent?> grid,
+        Vector2i? corner = null,
+        Vector2i? size = null)
+    {
+        var counts = new Dictionary<EntProtoId<AreaComponent>, int>();
+        if (!Resolve(grid, ref grid.Comp, false))
+            return counts;
+
+        foreach (var (indices, areaProto) in grid.Comp.Areas)
+        {
+            if (corner is { } c && size is { } s &&
+                (indices.X < c.X || indices.X >= c.X + s.X || indices.Y < c.Y || indices.Y >= c.Y + s.Y))
+            {
+                continue;
+            }
+
+            counts[areaProto] = counts.GetValueOrDefault(areaProto) + 1;
+        }
+
+        return counts;
     }
 
     public bool TryGetAllAreas(EntityCoordinates coordinates, [NotNullWhen(true)] out Entity<AreaGridComponent>? areaGrid)

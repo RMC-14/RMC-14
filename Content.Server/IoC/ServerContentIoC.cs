@@ -75,6 +75,11 @@ namespace Content.Server.IoC
             IoCManager.Register<ServerDbEntryManager>();
             IoCManager.Register<ISharedPlaytimeManager, PlayTimeTrackingManager>();
             IoCManager.Register<ServerApi>();
+            // RMC14-Mcp-Start
+#if !FULL_RELEASE || RMC_MCP
+            IoCManager.Register<_RMC14.Mcp.McpManager>();
+#endif
+            // RMC14-Mcp-End
             IoCManager.Register<JobWhitelistManager>();
             IoCManager.Register<PlayerRateLimitManager>();
             IoCManager.Register<SharedPlayerRateLimitManager, PlayerRateLimitManager>();
