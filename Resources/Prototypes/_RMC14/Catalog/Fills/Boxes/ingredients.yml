@@ -1,0 +1,223 @@
+# Meats
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxFish
+  name: box of fish
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCFoodMeatFish
+      amount: 7
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxMeat
+  name: box of meat
+  components:
+  - type: StorageFill
+    contents:
+    - id: FoodMeat
+      amount: 7
+
+# Milk
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxMilk
+  name: box of milk
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCDrinkMilkCarton
+      amount: 7
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxSoyMilk
+  name: box of soy milk
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCDrinkSoyMilkCarton
+      amount: 7
+
+# Condiments
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxEnzyme
+  name: box of enzyme
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCCondimentEnzyme
+      amount: 7
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxFlour
+  name: box of flour
+  components:
+  - type: StorageFill
+    contents:
+    - id: ReagentContainerFlour
+      amount: 7
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxSugar
+  name: box of sugar
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCCondimentSugar
+      amount: 7
+
+# Fruit and Veg
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxApple
+  name: box of apples
+  components:
+  - type: StorageFill
+    contents:
+    - id: FoodApple
+      amount: 7
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxBanana
+  name: box of bananas
+  components:
+  - type: StorageFill
+    contents:
+    - id: FoodBanana
+      amount: 7
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxChanterelle
+  name: box of chanterelles
+  components:
+  - type: StorageFill
+    contents:
+    - id: FoodMushroom
+      amount: 7
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxCherries
+  name: box of cherries
+  components:
+  - type: StorageFill
+    contents:
+    - id: FoodCherry
+      amount: 7
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxChili
+  name: box of chili
+  components:
+  - type: StorageFill
+    contents:
+    - id: FoodChiliPepper
+      amount: 7
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxCabbage
+  name: box of cabbages
+  components:
+  - type: StorageFill
+    contents:
+    - id: FoodCabbage
+      amount: 7
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxCarrot
+  name: box of carrots
+  components:
+  - type: StorageFill
+    contents:
+    - id: FoodCarrot
+      amount: 7
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxCorn
+  name: box of corn
+  components:
+  - type: StorageFill
+    contents:
+    - id: FoodCorn
+      amount: 7
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxEggplant
+  name: box of eggplants
+  components:
+  - type: StorageFill
+    contents:
+    - id: FoodEggplant
+      amount: 7
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxLemon
+  name: box of lemons
+  components:
+  - type: StorageFill
+    contents:
+    - id: FoodLemon
+      amount: 7
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxLime
+  name: box of limes
+  components:
+  - type: StorageFill
+    contents:
+    - id: FoodLime
+      amount: 7
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxOrange
+  name: box of oranges
+  components:
+  - type: StorageFill
+    contents:
+    - id: FoodOrange
+      amount: 7
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxPotato
+  name: box of potatoes
+  components:
+  - type: StorageFill
+    contents:
+    - id: FoodPotato
+      amount: 7
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxTomato
+  name: box of tomatoes
+  components:
+  - type: StorageFill
+    contents:
+    - id: FoodTomato
+      amount: 7
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxWhiteBeet
+  name: box of whitebeet
+  components:
+  - type: StorageFill
+    contents:
+    - id: FoodWhiteBeet
+      amount: 7

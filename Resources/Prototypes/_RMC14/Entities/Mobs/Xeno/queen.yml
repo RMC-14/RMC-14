@@ -16,6 +16,13 @@
     - RMCGuideRoleQueen
   - type: GhostRole
     name: cm-job-name-xeno-queen
+    makeSentient: true
+    allowSpeech: true
+    allowMovement: true
+    description: cm-xeno-description
+    raffle:
+      settings: short
+    rules: cm-xeno-rules
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Queen/queen.rsi
     layers:
@@ -58,8 +65,9 @@
     - ActionXenoAcidNormal
     - ActionXenoPheromones
     - ActionXenoWordQueen
-#    - ActionXenoPsychicWhisper
-#    - ActionXenoPsychicRadiance
+    - ActionXenoPsychicWhisper
+    - ActionXenoPsychicRadiance
+    - ActionXenoGiveOrder
     - ActionXenoGut
     - ActionXenoPlantWeeds
     - ActionXenoChooseStructure
@@ -104,6 +112,9 @@
     xenoArmor: 25
     explosionArmor: 100
   - type: XenoWordQueen
+  - type: VehicleDamageMultiplier
+    multiplier: 2
+  - type: XenoPsychicCommunication
   - type: InnateCommandSpeech
   - type: RMCInnateRadioTextIncrease
     radioTextIncrease: 3
@@ -277,6 +288,7 @@
   - type: RemoveComponents
     components:
     - type: Gibbable
+    - type: CanBeLarvaQueued
 
 - type: entity
   parent: RMCXenoQueenBase
@@ -284,9 +296,10 @@
   components:
   - type: RMCActionOrder
     id: CMXenoQueen
-  # - type: XenoEvolution #can be enabled for events like april fools.
-  #   strains:
-  #   - RMCXenoQueenMaid
+    #  - type: XenoEvolution #can be enabled for events like april fools.
+    #    strains:
+    #    - RMCXenoQueenMaid
+    #    - RMCXenoQueenMagical
 
 - type: entity
   id: XenoLeaderPheromoneRelay
@@ -306,6 +319,10 @@
       state: alive
     - map: [ "enum.XenoVisualLayers.Ovipositor" ]
       sprite: _RMC14/Mobs/Xenonids/Extras/Maid_queen/maid_ovipositor.rsi
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
       visible: false
   - type: XenoStrain
@@ -315,6 +332,29 @@
   - type: OwOAccent
   - type: Speech
     speechSounds: Cat
+
+- type: entity
+  parent: RMCXenoQueenBase
+  id: RMCXenoQueenMagical
+  suffix: Magical Girl Queen
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Extras/magicalgirl_queen/magical_queen.rsi
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.XenoVisualLayers.Ovipositor" ]
+      sprite: _RMC14/Mobs/Xenonids/Extras/magicalgirl_queen/magical_ovipositor.rsi
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+  - type: XenoStrain
+    name: rmc-xeno-magicalgirl-name
+    description: rmc-xeno-magicalgirl-description
+    popup: rmc-xeno-magicalgirl-popup
 
 - type: entity
   parent: StationAiHolo

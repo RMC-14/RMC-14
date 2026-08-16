@@ -9,8 +9,16 @@
   startingGear: RMCGearProvostDeputyMarshal
   icon: RMCJobIconProvostMarshal
   joinNotifyCrew: false
+  supervisors: rmc-job-supervisors-provost-sector-marshal
   accessGroups:
   - ShipMasterAccess
+  - Colony
+  - Corp
+  - RMCWeYa
+  access:
+  - CMAccessHighCommand
+  - CMAccessXenoQueen
+  - CMAccessXeno
   special:
   - !type:AddComponentSpecial
     components:
@@ -77,12 +85,12 @@
     ears: CMHeadsetHighCommand
     jumpsuit: CMJumpsuitProvostMarshal
     outerClothing: RMCProvostCoatMarshalFilled
-    gloves: CMHandsBlackMarine # TODO RMC14 black gloves
+    gloves: RMCHandsBlackFireResistance
     shoes: CMBootsBlackFilled
     id: RMCIDCardProvostDeputyMarshal
     belt: RMCMatebaBeltLuxuriousFilled
     back: CMSatchelSecurityFilledProvostDeputyMarshal
-#    pocket1: # TODO RMC14 tape recorder
+    pocket1: RMCUniversalRecorder
     pocket2: RMCPouchMagazinePistolFilledMateba # TODO RMC14 3 listening devices
 
 - type: playTimeTracker

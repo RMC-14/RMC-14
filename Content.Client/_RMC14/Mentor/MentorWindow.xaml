@@ -31,6 +31,8 @@
                           Editable="False" />
                 <Button Name="ClaimButton" Access="Public" Text="Claim"
                         StyleClasses="OpenBoth" Visible="False" />
+                <Button Name="TeleportButton" Access="Public" Text="Teleport"
+                        StyleClasses="OpenBoth" Visible="False" />
             </BoxContainer>
         </BoxContainer>
     </BoxContainer>

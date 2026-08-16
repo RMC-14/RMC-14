@@ -353,7 +353,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 2.5,7.5
       parent: 1
-- proto: RMCMagazineRifleAK4047Empty
+- proto: RMCMagazineRifleType77Empty
   entities:
   - uid: 9
     components:

@@ -1,0 +1,42 @@
+<widgets:LanguageButton xmlns="https://spacestation14.io"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:widgets="clr-namespace:Content.Client._RMC14.UserInterface.Systems.Language">
+    <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+        <PanelContainer Name="Background" HorizontalExpand="True">
+            <BoxContainer Orientation="Horizontal"
+                          HorizontalExpand="True"
+                          VerticalAlignment="Center"
+                          Margin="10 6"
+                          SeparationOverride="8">
+                <TextureRect Name="Icon"
+                             SetWidth="28"
+                             SetHeight="28"
+                             Stretch="KeepAspectCentered"
+                             VerticalAlignment="Center"
+                             Visible="False"/>
+                <Label Name="NameLabel"
+                       StyleClasses="LabelHeading"
+                       HorizontalExpand="True"
+                       VerticalAlignment="Center"/>
+                <ContainerButton Name="DescriptionToggle"
+                                 SetWidth="20"
+                                 SetHeight="20"
+                                 VerticalAlignment="Center"
+                                 Visible="False">
+                    <Label Text="ⓘ"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontColorOverride="#888888"/>
+                </ContainerButton>
+            </BoxContainer>
+        </PanelContainer>
+        <PanelContainer Name="DescriptionPanel"
+                        HorizontalExpand="True"
+                        Visible="False">
+            <Label Name="DescriptionLabel"
+                   StyleClasses="LabelSubText"
+                   HorizontalExpand="True"
+                   Margin="10 4 10 6"/>
+        </PanelContainer>
+    </BoxContainer>
+</widgets:LanguageButton>

@@ -3,6 +3,7 @@ rmc-rangefinder-header = [bold]SIMPLIFIED COORDINATES OF TARGET[/bold]
 rmc-rangefinder-longitude = [font size=28]LONGITUDE : {$x},[/font]
 rmc-rangefinder-latitude = [font size=28]LATITUDE : {$y}[/font]
 rmc-rangefinder-examine = {CAPITALIZE(THE($item))} reads: LONGITUDE {$x}, LATITUDE {$y}
+rmc-rangefinder-orbital-bombardment = Orbital Bombardment
 
 rmc-laser-designator-out-of-range = You can't see that far!
 rmc-laser-designator-already-targeting = You're already targeting something!

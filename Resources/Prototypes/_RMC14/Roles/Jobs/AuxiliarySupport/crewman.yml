@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: CMJobSquadBase
+  parent: CMJobBase
   id: CMVehicleCrewman
   name: cm-job-name-vc
   description: cm-job-description-vc
@@ -49,8 +49,7 @@
         state: vc
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_intel
-  hidden: true #TODO RMC14 - Remove when vehicles are fully added.
+        state: background_shipside
 
 - type: startingGear
   id: CMGearVehicleCrewman
@@ -60,7 +59,6 @@
     id: CMDogtagCrewman
     ears: RMCHeadsetCrewman
     outerClothing: RMCCoatTanker
-    back: CMSatchelMarine
 
 - type: entity
   parent: CMSpawnPointJobBase

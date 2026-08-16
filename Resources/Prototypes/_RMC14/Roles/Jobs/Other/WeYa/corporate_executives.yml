@@ -60,12 +60,13 @@
 - type: startingGear
   id: RMCGearCorporateExecutiveSupervisorLegal
   equipment:
-    ears: RMCHeadsetDistressWeYa # TODO RMC14 tape recorder
+    ears: RMCHeadsetDistressWeYa
     back: CMSatchel
     jumpsuit: CMJumpsuitLiaisonBlack
     outerClothing: RMCJacketCorporateBlack
     shoes: RMCShoesLaceup
     id: RMCIDCardExecutiveCorporateSupervisor
+    pocket1: RMCUniversalRecorder
     pocket2: CMClipboard # TODO RMC14 notepad
   inhand:
   - RMCBriefcasePaperPen # TODO RMC14 secure briefcase
@@ -138,12 +139,13 @@
 - type: startingGear
   id: RMCGearCorporateExecutiveSpecialistLegal
   equipment:
-    ears: RMCHeadsetDistressWeYa # TODO RMC14 tape recorder
+    ears: RMCHeadsetDistressWeYa
     back: CMSatchel
     jumpsuit: CMJumpsuitLiaisonBlue
     outerClothing: RMCJacketCorporateBlue
     shoes: RMCShoesLaceup
     id: RMCIDCardExecutiveCorporateSpecialist
+    pocket1: RMCUniversalRecorder
     pocket2: CMClipboard # TODO RMC14 notepad
   inhand:
   - CMPaper

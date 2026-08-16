@@ -25,7 +25,9 @@ public abstract class SharedRMCActionsSystem : EntitySystem
 
         SubscribeLocalEvent<ActionInRangeUnobstructedComponent, RMCActionUseAttemptEvent>(OnInRangeUnobstructedUseAttempt);
 
-        SubscribeLocalEvent<ActionComponent, ActionReducedUseDelayEvent>(OnReducedUseDelayEvent);
+        SubscribeLocalEvent<ActionReducedUseDelayComponent, ActionReducedUseDelayEvent>(OnReducedUseDelayEvent);
+
+        SubscribeLocalEvent<ActionReducedUseDelayComponent, StartUseDelayEvent>(OnReducedStartUseDelay);
     }
 
     private void OnMissedTargetAction(RMCMissedTargetActionEvent args)
@@ -106,49 +108,14 @@ public abstract class SharedRMCActionsSystem : EntitySystem
         }
     }
 
-    private void OnReducedUseDelayEvent(EntityUid uid, ActionComponent component, ActionReducedUseDelayEvent args)
+    private void OnReducedUseDelayEvent(Entity<ActionReducedUseDelayComponent> ent, ref ActionReducedUseDelayEvent args)
     {
-        if (!TryComp(uid, out ActionReducedUseDelayComponent? comp))
+        if (args.Amount < 0 || args.Amount > 1 || args.Amount == ent.Comp.UseDelayReduction)
             return;
 
-        if (args.Amount < 0 || args.Amount > 1)
-            return;
+        ent.Comp.UseDelayReduction = args.Amount;
 
-        comp.UseDelayReduction = args.Amount;
-
-        if (TryComp(uid, out ActionSharedCooldownComponent? shared))
-        {
-            comp.UseDelayBase ??= shared.Cooldown;
-
-            RefreshSharedUseDelay((uid, comp), shared);
-            return;
-        }
-
-        // Should be fine to only set this once as the base use delay should remain constant
-        comp.UseDelayBase ??= component.UseDelay;
-        RefreshUseDelay((uid, comp));
-    }
-
-    private void RefreshUseDelay(Entity<ActionReducedUseDelayComponent> ent)
-    {
-        if (ent.Comp.UseDelayBase is not { } delayBase)
-            return;
-
-        var reduction = ent.Comp.UseDelayReduction.Double();
-        var delayNew = delayBase.Multiply(1 - reduction);
-
-        _actions.SetUseDelay(ent.Owner, delayNew);
-    }
-
-    private void RefreshSharedUseDelay(Entity<ActionReducedUseDelayComponent> ent, ActionSharedCooldownComponent shared)
-    {
-        if (ent.Comp.UseDelayBase is not { } delayBase)
-            return;
-
-        var reduction = ent.Comp.UseDelayReduction.Double();
-        var delayNew = delayBase.Multiply(1 - reduction);
-
-        shared.Cooldown = delayNew;
+        Dirty(ent, ent.Comp);
     }
 
     private void OnCooldownUse(Entity<ActionCooldownComponent> ent, ref RMCActionUseEvent args)
@@ -166,6 +133,13 @@ public abstract class SharedRMCActionsSystem : EntitySystem
 
         if (!_interaction.InRangeUnobstructed(args.User, target, ent.Comp.Range))
             args.Cancelled = true;
+    }
+
+    private void OnReducedStartUseDelay(Entity<ActionReducedUseDelayComponent> ent, ref StartUseDelayEvent args)
+    {
+        var reductionAmount = args.Delay * ent.Comp.UseDelayReduction.Float();
+        args.Start -= reductionAmount;
+        args.End -= reductionAmount;
     }
 
     public bool CanUseActionPopup(EntityUid user, EntityUid action, EntityUid? target = null)

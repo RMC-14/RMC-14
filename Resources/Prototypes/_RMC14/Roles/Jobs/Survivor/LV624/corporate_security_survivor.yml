@@ -5,13 +5,22 @@
   startingGear: RMCGearSurvivorLV624SecurityGuard
   hasIcon: true
   icon: RMCJobIconWeYaSec
-  spawnMenuRoleName: WeYa Security Guard (LV624 Survivor)
+  spawnMenuRoleName: We-Ya Security Guard (LV624 Survivor)
   accessGroups:
   - ColonistSec
   - ColonistCorporate
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      understoodLanguages:
+      - Japanese
+      - English
+      currentLanguage: English
+      defaultLanguage: English
     - type: Skills
       preset: RMCSkillPresetSurvivorMarshal
     - type: RMCSurvivor

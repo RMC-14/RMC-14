@@ -1,0 +1,95 @@
+- type: entity
+  parent: [ BaseItem, PowerCellSlotSmallItem ]
+  id: RMCPDTLocatorTube
+  name: PDT/L locator tube
+  description: A handheld locator tube paired with a wrist PDT bracelet. It gives a direction and range readout to its partner bracelet.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/pdt_locator_tube.rsi
+    layers:
+    - state: icon
+    - state: screen
+      shader: unshaded
+      visible: false
+      map: [ "enum.PDTLocatorVisualLayers.Screen" ]
+    - state: unlinked
+      shader: unshaded
+      visible: false
+      map: [ "enum.PDTLocatorVisualLayers.Bracelet" ]
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - PDTLocator
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PDTLocatorVisuals.Screen:
+        enum.PDTLocatorVisualLayers.Screen:
+          Off: { visible: false }
+          Normal: { state: screen, visible: true }
+          Yellow: { state: screen-yellow, visible: true }
+          Red: { state: screen-red, visible: true }
+      enum.PDTLocatorVisuals.Bracelet:
+        enum.PDTLocatorVisualLayers.Bracelet:
+          Hidden: { visible: false }
+          Linked: { state: linked, visible: true }
+          Unlinked: { state: unlinked, visible: true }
+  - type: PDTLocator
+  - type: UseDelay
+    delay: 1
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: RMCPowerCellCrap
+
+- type: entity
+  parent: RMCWatchBaseL
+  id: RMCPDTBracelet
+  name: PDT wrist bracelet
+  description: A wrist-worn personal data transmitter bracelet intended to be paired with a PDT/L locator tube.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Watches/pdt.rsi
+    layers:
+    - state: icon
+      map: [ "base" ]
+  - type: RandomSprite
+    available:
+    - base:
+        icon: ""
+        icon-1: ""
+        icon-2: ""
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Watches/pdt.rsi
+      state: watchL
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Accessory/Watches/pdt.rsi
+  - type: PDTBracelet
+
+- type: entity
+  parent: RMCWatchCase
+  id: CMSparePDTLBattleBuddyKit
+  name: Boots! PDT/L Battle Buddy kit
+  description: A rugged little case containing a PDT/L locator tube, its paired wrist PDT bracelet, and a spare We-Ya mini-battery.
+  components:
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,5,1
+    whitelist:
+      tags:
+      - PDTLocator
+      - Watch
+      - PowerCell
+  - type: StorageFill
+    contents:
+    - id: RMCPDTLocatorTube
+    - id: RMCPDTBracelet
+    - id: RMCPowerCellCrap
+  - type: PDTKit
+
+- type: Tag
+  id: PDTLocator

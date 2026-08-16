@@ -23,6 +23,12 @@
   - /Audio/_RMC14/Announcements/RoundEnd/xeno_minor.ogg
 
 - type: soundCollection
+  id: RMCSelfDestruct
+  files:
+  - /Audio/_RMC14/Announcements/RoundEnd/its_only_game.ogg
+  - /Audio/_RMC14/Announcements/RoundEnd/lets_get_outta_here.ogg
+
+- type: soundCollection
   id: RMCAllDied
   files: []
 #  - /Audio/_RMC14/Announcements/RoundEnd/neutral_hopeful1.ogg
