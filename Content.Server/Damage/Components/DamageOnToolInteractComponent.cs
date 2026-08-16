@@ -14,6 +14,12 @@ public sealed partial class DamageOnToolInteractComponent : Component
     [DataField]
     public DamageSpecifier? WeldingDamage { get; private set; }
 
+    /// <summary>
+    /// Chance that an activated welder applies <see cref="WeldingDamage"/>.
+    /// </summary>
+    [DataField]
+    public float WeldingDamageChance { get; private set; } = 1f;
+
     [DataField]
     public DamageSpecifier? DefaultDamage { get; private set; }
 }

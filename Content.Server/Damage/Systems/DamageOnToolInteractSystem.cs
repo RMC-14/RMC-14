@@ -5,6 +5,7 @@ using Content.Shared.Database;
 using Content.Shared.Interaction;
 using Content.Shared.Tools.Components;
 using Content.Shared.Tools.Systems;
+using Robust.Shared.Random;
 using ItemToggleComponent = Content.Shared.Item.ItemToggle.Components.ItemToggleComponent;
 
 namespace Content.Server.Damage.Systems
@@ -14,6 +15,7 @@ namespace Content.Server.Damage.Systems
         [Dependency] private readonly DamageableSystem _damageableSystem = default!;
         [Dependency] private readonly IAdminLogManager _adminLogger = default!;
         [Dependency] private readonly SharedToolSystem _toolSystem = default!;
+        [Dependency] private readonly IRobustRandom _random = default!;
 
         public override void Initialize()
         {
@@ -33,7 +35,8 @@ namespace Content.Server.Damage.Systems
             if (component.WeldingDamage is {} weldingDamage
             && TryComp(args.Used, out WelderComponent? welder)
             && itemToggle.Activated
-            && !welder.TankSafe)
+            && !welder.TankSafe
+            && _random.Prob(component.WeldingDamageChance))
             {
                 var dmg = _damageableSystem.TryChangeDamage(args.Target, weldingDamage, origin: args.User);
 

@@ -93,7 +93,7 @@
       collection: Welder
     qualities: Welding
   - type: Welder
-    fuelConsumption: 0.06 # TODO RMC14 change this when welders are fixed
+    fuelConsumption: 0.06072 # TODO RMC14 change this when welders are fixed; non-industrial welders use 1.2% more fuel
     fuelLitCost: 0
   - type: PointLight
     enabled: false
@@ -173,6 +173,9 @@
   - type: Item
     sprite: _RMC14/Objects/Tools/welder_industrial.rsi
   - type: RequiresEyeProtection
+  - type: Welder
+    fuelConsumption: 0.06 # TODO RMC14 change this when welders are fixed
+    fuelLitCost: 0
   - type: SolutionContainerManager
     solutions:
       Welder:

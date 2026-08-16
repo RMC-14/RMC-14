@@ -1,0 +1,75 @@
+- type: entity
+  parent: BaseItem
+  id: CMES11MobileFuelCanister
+  name: ES-11 fuel canister
+  description: 'A robust little pressurized canister that is small enough to fit in most bags and made for use with welding fuel. Upon closer inspection there is faded text on the red tape wrapped around the tank, "WARNING: Contents under pressure! Do not puncture!"'
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/es11_fuel_canister.rsi
+    state: icon
+  - type: Item
+    size: Normal
+    sprite: _RMC14/Objects/Tools/es11_fuel_canister.rsi
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Belt
+  - type: ExaminableSolution
+    solution: tank
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        maxVol: 300 # TODO RMC14 120 when welders are fixed
+        reagents:
+        - ReagentId: WeldingFuel
+          Quantity: 300
+  - type: ReagentTank
+    tankType: Fuel
+  - type: DrainableSolution
+    solution: tank
+  - type: SolutionTransfer
+    transferAmount: 100
+    maxTransferAmount: 100
+    minTransferAmount: 10
+    canChangeTransferAmount: true
+  - type: RefillableSolution
+    solution: tank
+  - type: DrawableSolution
+    solution: tank
+  - type: RMCSolutionTransferWhitelist
+    popup: rmc-solution-transfer-whitelist-failed-not-welding-tank
+    sourceWhitelist:
+      components:
+      - Welder
+    targetWhitelist:
+      tags:
+      - RMCTankFuel
+    showOpenClosedWhenEmpty: true
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 60
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:SolutionExplosionBehavior
+        solution: tank
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: DamageOnToolInteract
+    tools: Welding
+    weldingDamageChance: 0.5
+    weldingDamage:
+      types:
+        Heat: 50
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 100
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno

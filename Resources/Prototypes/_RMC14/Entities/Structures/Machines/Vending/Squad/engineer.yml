@@ -61,8 +61,8 @@
         recommended: true
       - id: RMCPowerCellSuper
         points: 10
-    #- id: CMES11MobileFuelCanister
-    #  points: 4
+      - id: CMES11MobileFuelCanister
+        points: 4
     - name: Explosives
       entries:
       - id: CMPacketGrenadeHighExplosiveFilled
