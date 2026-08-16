@@ -15,7 +15,7 @@ public sealed class RMCChairStackVisualizerSystem : VisualizerSystem<RMCChairSta
         if (args.Sprite == null)
             return;
 
-        if (!_appearance.TryGetData<int>(ent, RMCChairStackVisuals.StackSize, out var stackSize))
+        if (!AppearanceSystem.TryGetData<int>(uid, RMCChairStackVisuals.StackSize, out var stackSize))
             stackSize = 0;
 
         Entity<SpriteComponent?> spriteEnt = (uid, args.Sprite);
@@ -46,11 +46,11 @@ public sealed class RMCChairStackVisualizerSystem : VisualizerSystem<RMCChairSta
             return;
 
         // Get the RSI and state from the first (unfolded) layer for the overlay sprite
-        var rsi = _sprite.LayerGetEffectiveRsi(spriteEnt, 0)?.Path;
+        var rsi = SpriteSystem.LayerGetEffectiveRsi(spriteEnt, 0)?.Path;
         if (rsi == null)
             return;
 
-        var state = _sprite.LayerGetRsiState(spriteEnt, 0).ToString();
+        var state = SpriteSystem.LayerGetRsiState(spriteEnt, 0).ToString();
         if (string.IsNullOrWhiteSpace(state))
             return;
 
@@ -83,8 +83,8 @@ public sealed class RMCChairStackVisualizerSystem : VisualizerSystem<RMCChairSta
             };
 
             var key = StackLayerPrefix + i;
-            var layerIndex = _sprite.AddLayer(spriteEnt, layerData, null);
-            _sprite.LayerMapSet(spriteEnt, key, layerIndex);
+            var layerIndex = SpriteSystem.AddLayer(spriteEnt, layerData, null);
+            SpriteSystem.LayerMapSet(spriteEnt, key, layerIndex);
         }
     }
 }
