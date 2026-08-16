@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: kleinerstation13
-  changes:
-  - message: Added Corporate M63 variant
-    type: Add
-  - message: Fixed Solaris PMC crashlanding survivors starting with an empty M63 instead
-      of a loaded corporate variant
-    type: Fix
-  id: 3072
-  time: '2026-04-07T01:19:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9216
 - author: Vixting
   changes:
   - message: Fixed being able to stack multiple xenonid structures on the same tile
@@ -4541,5 +4531,12 @@
   id: 3571
   time: '2026-08-15T01:10:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10393
+- author: Zezey
+  changes:
+  - message: Employment SOP tweak.
+    type: Tweak
+  id: 3572
+  time: '2026-08-16T12:53:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10702
 Name: RMC14
 Order: -1
