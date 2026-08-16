@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: CatAndHats
   changes:
-  - message: Fixed sentinel resting sprites while they are injured to not have the
-      blood floating in mid-air
-    type: Fix
-  id: 3077
-  time: '2026-04-07T03:16:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9332
-- author: CatAndHats
-  changes:
   - message: Watcher Parasite now has a slightly distinct sprite from base Parasite
     type: Tweak
   id: 3078
@@ -4537,5 +4529,15 @@
   id: 3576
   time: '2026-08-16T13:35:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10603
+- author: Ozehk
+  changes:
+  - message: Added Halcyon paygrades.
+    type: Add
+  - message: Gave the Sorokyne Strata corporate survivor Halcyon paygrades instead
+      of Weston-Yamada ones.
+    type: Tweak
+  id: 3577
+  time: '2026-08-16T13:56:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10612
 Name: RMC14
 Order: -1
