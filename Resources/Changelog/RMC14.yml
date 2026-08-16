@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: CatAndHats
   changes:
-  - message: Fixed plastic Road Barriers giving two metal sheets when deconstructed
-    type: Fix
-  id: 3074
-  time: '2026-04-07T03:11:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9469
-- author: CatAndHats
-  changes:
   - message: Xenonid spit actions remain toggled until deactivated or another ability
       is used
     type: Tweak
@@ -4538,5 +4531,12 @@
   id: 3573
   time: '2026-08-16T13:21:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10683
+- author: Sifb26
+  changes:
+  - message: Chess and checkers sets are now available in the rec vend
+    type: Tweak
+  id: 3574
+  time: '2026-08-16T13:27:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10586
 Name: RMC14
 Order: -1
