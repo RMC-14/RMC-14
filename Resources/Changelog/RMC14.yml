@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: Xenonid spit actions remain toggled until deactivated or another ability
-      is used
-    type: Tweak
-  id: 3075
-  time: '2026-04-07T03:17:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9538
 - author: Dygon
   changes:
   - message: Fixed resting resetting tackle stacks.
@@ -4538,5 +4530,12 @@
   id: 3574
   time: '2026-08-16T13:27:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10586
+- author: Vermidia
+  changes:
+  - message: Fixed extremely rare cases where larva could fail to burst (hopefully).
+    type: Fix
+  id: 3575
+  time: '2026-08-16T13:30:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10573
 Name: RMC14
 Order: -1
