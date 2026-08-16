@@ -58,6 +58,12 @@
     anchored: true
   - type: Physics
     bodyType: Static
+  - type: Appearance
+  - type: RMCChairStack
+    fixtureShape:
+      !type:PhysShapeAabb
+      bounds: "-0.45,-0.45,0.45,0.45"
+  - type: RMCChairStackConstructionBlocker
   - type: Foldable
     anchorOnUnfold: true
   - type: Sprite
@@ -79,18 +85,34 @@
     damage:
       types:
         Blunt: 10
+  - type: EmitSoundOnLand
+    positional: true
+    sound:
+      path: /Audio/_RMC14/Items/metal_chair_clang.ogg
   - type: Construction
     graph: CMSeat
     node: chair
   - type: RMCStaminaDamageOnHit
     requiresWield: true
     damage: 17
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
 
 - type: entity
   parent: CMChair
   id: CMChairFolded
   suffix: RMC|folded
   components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Dynamic
   - type: Foldable
     folded: true
   - type: Strap
