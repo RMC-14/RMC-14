@@ -1,8 +1,8 @@
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Weapons.Ranged.Battery;
+using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Parasite;
-using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Actions;
 using Content.Shared.Coordinates;
 using Content.Shared.Examine;
@@ -14,12 +14,13 @@ using Content.Shared.Mobs;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Content.Shared.Verbs;
-using Robust.Shared.Prototypes;
-using System.Linq;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using System.Linq;
+using System.Security.Cryptography;
 
 namespace Content.Shared._RMC14.MotionDetector;
 
@@ -46,6 +47,7 @@ public sealed class MotionDetectorSystem : EntitySystem
 
     private readonly HashSet<Entity<MotionDetectorTrackedComponent>> _toUpdate = new();
     private readonly HashSet<Entity<MotionDetectorTrackedComponent>> _tracked = new();
+    private readonly HashSet<EntityUid> _addedTracked = new();
     private readonly HashSet<EntProtoId<IFFFactionComponent>> _userFactions = new();
 
     public override void Initialize()
@@ -56,6 +58,7 @@ public sealed class MotionDetectorSystem : EntitySystem
         SubscribeLocalEvent<XenoParasiteInfectEvent>(OnXenoInfect);
         SubscribeLocalEvent<MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<XenoDevouredEvent>(OnMotionDetectorDevoured);
+        SubscribeLocalEvent<VictimInfectedComponent, ComponentRemove>(OnVictimInfectedRemoved);
 
         SubscribeLocalEvent<MotionDetectorComponent, UseInHandEvent>(OnMotionDetectorUseInHand);
         SubscribeLocalEvent<MotionDetectorComponent, GetVerbsEvent<AlternativeVerb>>(OnMotionDetectorGetVerbs);
@@ -79,7 +82,24 @@ public sealed class MotionDetectorSystem : EntitySystem
 
         if (HasComp<MotionDetectorTrackedComponent>(ev.Target))
             return;
-        Dirty(ev.Target, EnsureComp<MotionDetectorTrackedComponent>(ev.Target)); // Adds MotionDetectorTrackedComponent to entities that don't have it so they can be tracked.
+
+        var trackedEnt = new Entity<MotionDetectorTrackedComponent>
+        {
+            Owner = ev.Target,
+            Comp = AddComp<MotionDetectorTrackedComponent>(ev.Target)
+        };
+
+        _addedTracked.Add(ev.Target);
+
+        Dirty(trackedEnt);
+    }
+
+    private void OnVictimInfectedRemoved(Entity<VictimInfectedComponent> victim, ref ComponentRemove args)
+    {
+        if (!_addedTracked.Remove(victim.Owner))
+            return;
+
+        RemComp<MotionDetectorTrackedComponent>(victim.Owner);
     }
 
     private void OnMobStateChanged(MobStateChangedEvent ev)
