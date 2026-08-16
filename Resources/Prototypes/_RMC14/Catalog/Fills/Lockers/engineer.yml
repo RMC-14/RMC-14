@@ -75,7 +75,6 @@
     - id: CMWebbingBrown
     - id: RMCToolboxMechanicalFilled
     - id: CMWebbing
-    - id: RMCHazardVestBlue
 
 - type: entity
   parent: CMLockerEngineerWelder
