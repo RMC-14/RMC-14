@@ -535,7 +535,7 @@ rmc-job-greeting-shivas-panic-room-engineer = You are an Engineer on the Colony!
 
 # Tyrargo Rift survs
 
-rmc-job-greeting-army = You are a UNMC Marine hailing from the Devil Dogs battalion. What began as a training exercise on this planet turned into a nightmare, the unexpected arrival of a massive xenonid hive has turned this world into a warzone. You and your battalion have been tasked to defend the city of Tyrargo Rift to give time for the tens of thousands of civilians to be evacuated to a safe zone. It's been two weeks since the siege of the city began. The last few thousand civilians are held up at the museum evacuation site. You and your squad have been holding this trench line by yourselves for the last week, but your ammo is almost gone and the bugs are making the largest push soon. It's time to prepare for the final fight.
+rmc-job-greeting-tyrargo = You are a UNMC Marine. What began as a training exercise on this planet turned into a nightmare, the unexpected arrival of a massive xenonid hive has turned this world into a warzone. You and your battalion have been tasked to defend the city of Tyrargo Rift to give time for the tens of thousands of civilians to be evacuated to a safe zone. It's been two weeks since the siege of the city began. The last few thousand civilians are held up at the museum evacuation site. You and your squad have been holding this trench line by yourselves for the last week, but your ammo is almost gone and the bugs are making the largest push soon. It's time to prepare for the final fight.
 
   You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
 
@@ -543,12 +543,12 @@ rmc-job-greeting-army = You are a UNMC Marine hailing from the Devil Dogs battal
 
   You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
-rmc-job-name-army = UNMC Devil Dogs Survivor
-rmc-job-description-army = You are a UNMC Marine hailing from the Devil Dogs battalion. Your training exercises have turned into a massive battle against the xenonids. Do what it takes to survive!
+rmc-job-name-tyrargo = UNMC Tyrargo Survivor
+rmc-job-description-tyrargo = You are a UNMC Marine. Your training exercises have turned into a massive battle against the xenonids. Do what it takes to survive!
 
-rmc-job-name-army-cmt = Combat Medical Technician
-rmc-job-prefix-army-cmt = CMT
-rmc-job-name-army-cet = Combat Engineering Technician
-rmc-job-prefix-army-cet = CET
-rmc-job-name-army-heavy-gunner = Heavy Gunner
-rmc-job-prefix-army-heavy-gunner = HVG
+rmc-job-name-tyrargo-cmt = Combat Medical Technician
+rmc-job-prefix-tyrargo-cmt = CMT
+rmc-job-name-tyrargo-cet = Combat Engineering Technician
+rmc-job-prefix-tyrargo-cet = CET
+rmc-job-name-tyrargo-heavy-gunner = Heavy Gunner
+rmc-job-prefix-tyrargo-heavy-gunner = HVG

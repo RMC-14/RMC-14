@@ -18,11 +18,12 @@
           bounds: "-0.5,-0.5,0.5,0.5"
         density: 190
         layer:
-        - MobMask
+        - MachineLayer
   - type: Sprite
     sprite: _RMC14/Structures/illuminator.rsi
     state: illuminator
     offset: 0, 1
+    drawdepth: Mobs
   - type: DeleteOnExplosion
   - type: Damageable
     damageContainer: Inorganic

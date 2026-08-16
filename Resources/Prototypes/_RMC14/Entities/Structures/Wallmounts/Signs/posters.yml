@@ -1006,7 +1006,7 @@
 - type: entity
   parent: CMPosterBase
   id: CMPosterTyrargoCheckpointNotice
-  name: "US military checkpoint notice"
+  name: "UN military checkpoint notice"
   description: "A military notice poster, it reads: Halt. UN Marine Corps checkpoint ahead. Comply or be shot."
   components:
   - type: Sprite
@@ -1016,8 +1016,8 @@
 - type: entity
   parent: CMPosterBase
   id: CMPosterTyrargoQuarantineNotice
-  name: "ICC quarantine notice"
-  description: "A quarantine poster, bearing the ICC's logo, it reads: This area is designated a secure transit zone by the ICC and UN Marine Corps. Non-compliance with military directives is punishable under the Interplanetary Biohazard Preparedness Act."
+  name: "ICB quarantine notice"
+  description: "A quarantine poster, bearing the ICB's logo, it reads: This area is designated a secure transit zone by the ICB and UN Marine Corps. Non-compliance with military directives is punishable under the Interplanetary Biohazard Preparedness Act."
   components:
   - type: Sprite
     state: icc

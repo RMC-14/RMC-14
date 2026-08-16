@@ -39,13 +39,13 @@
     sprite: _RMC14/Structures/Tyrargo_Vehicles/tyrargo_vtol.rsi
     state: vtol_damaged
 
-# EVAC-3
+# F-44
 - type: entity
   parent: RMCPropTyrargoVehicleBase
   id: RMCPropTyrargoVehicleEvacBlack
   suffix: Black
-  name: EVAC-3 Aerospace fighter
-  description: A high tech, silver coated EVAC-3 aerospace fighter used by the UNMC in deep recon missions. The thermal-absorbent paint alone probably costs more than your squad's collective paycheck. Unfortunately however, this jet was in the middle of a repair cycle when the northern defences were breached, necessitating an evacuation.
+  name: F-44 Aerospace fighter
+  description: A high tech, silver coated F-44 aerospace fighter used by the UNMC in deep recon missions. The thermal-absorbent paint alone probably costs more than your squad's collective paycheck. Unfortunately however, this jet was in the middle of a repair cycle when the northern defences were breached, necessitating an evacuation.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Tyrargo_Vehicles/tyrargo_evac.rsi
@@ -56,9 +56,9 @@
 - type: entity
   parent: RMCPropTyrargoVehicleBase
   id: RMCPropTyrargoVehicleEvacGreen
-  name: EVAC-3 Aerospace fighter
+  name: F-44 Aerospace fighter
   suffix: Green
-  description: A state of the art EVAC-3F aerospace fighter used by the UNMC. This fighter has seen better days with extensive internal wiring damage and unfinished repairs to the bomb-bays.
+  description: A state of the art F-44 aerospace fighter used by the UNMC. This fighter has seen better days with extensive internal wiring damage and unfinished repairs to the bomb-bays.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Tyrargo_Vehicles/tyrargo_evac.rsi
@@ -178,7 +178,7 @@
   parent: RMCPropTyrargoVehicleBase
   id: RMCPropTyrargoVehicleIFV
   name: M34 Marshal IFV
-  description: Developed by Weston-Yamada, the RAT (Rover Armed Transport) was originally designed for the TSE military as an armed version of their RT series of expeditionary vehicles, being instead adopted by the UN Marine Corps. It's heavier and and more durable then the M570 series the Marines use, as the army don't have a need for APCs capable of being transported via a dropship.
+  description: Developed by Weston-Yamada, the RAT (Rover Armed Transport) was originally designed for the TSE military as an armed version of their RT series of expeditionary vehicles, being instead adopted by the UN Marine Corps. It's heavier and and more durable then the M570 series the Marines use, as they don't have a need for APCs capable of being transported via a dropship.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Tyrargo_Vehicles/tyrargo_ifv.rsi
@@ -223,8 +223,8 @@
 - type: entity
   parent: RMCPropTyrargoVehicleBase
   id: RMCPropTyrargoVehicleHumvee
-  name: AEG-HVWC # this just uses the ARC name and description in parity but that's lame, should change the lore once vehicles PR is merged though
-  description: The AEGIS High Versatility Wheeled Carrier, colloquially known as the 'Huwick' by your average marine. A vehicle used everywhere in the UNMC for various purposes, ranging from troop transport and medevac to variants refitted to serve as a SAM launcher or anti-armor missile carrier. This one has been rendered inoperable.
+  name: M540-B Armored Recon Carrier
+  description: An M540-B Armored Recon Carrier. A lightly armored reconnaissance and intelligence vehicle. This one has been rendered inoperable.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Tyrargo_Vehicles/tyrargo_humvee.rsi
@@ -289,8 +289,8 @@
     state: humvee_gun_broken
 
 # Longstreet tank
-# Only variants pertinent to Tyrargo ported for now because there is a lot to port 
-# TODO RMC14: Rest of the sprites
+# Only variants pertinent to Tyrargo ported for now because there is a lot to port
+# TODO RMC14: Rest of the tank sprites
 - type: entity
   parent: RMCPropTyrargoVehicleBase
   id: RMCPropTyrargoVehicleTankDestroyed

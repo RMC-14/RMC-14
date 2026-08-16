@@ -782,12 +782,12 @@
 
 - type: entity
   parent: CMArmorM4
-  id: CMArmorM4Army
+  id: CMArmorM4Tyrargo
   name: Personal Body Armor System
   description: The Personal Body Armor System is an experimental armor set issued sparingly to the UN Marine Corps, being the contender to the M4 series pattern armor during field trials. Surprisingly uncomfortable, but offering far superior protection to the M3 or M4 series armor. At four times the price.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/army.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/tyrargo.rsi
   - type: Storage
     maxItemSize: Small
     grid:
@@ -797,12 +797,12 @@
 
 - type: entity
   parent: CMArmorM4
-  id: CMArmorM4ArmySynth
+  id: CMArmorM4TyrargoSynth
   name: Synthetic Body Armor System
   description: This is a variant of the Personal Body Armor System, it has been modified extensively to be used by UN Marine Corps Synthetics. It offers light protection, maximum mobility and more internal storage than the standardised UNMC counterpart. The cost of this item could outfit an entire squad of UNMC Marines, but you are worth this cost.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/army_synth.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/tyrargo_synth.rsi
   - type: Storage
     maxItemSize: Small
     grid:
@@ -810,10 +810,11 @@
   - type: ItemCamouflage
     camouflageVariations: { }
   - type: CMArmor
-    melee: 5
-    bullet: 15
-    bio: 5
-    explosionArmor: 5
+    # RMC14: Removed armor
+    melee: 0 # 5
+    bullet: 0 # 15
+    bio: 0 # 5
+    explosionArmor: 0 # 5
     # armor_laser = CLOTHING_ARMOR_VERYLOW
     # armor_rad = CLOTHING_ARMOR_MEDIUMLOW
   - type: RMCArmorSpeedTier

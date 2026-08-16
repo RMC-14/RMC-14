@@ -274,11 +274,12 @@
     - MarineSOF
     radioTextIncrease: 3
 
+# Tyrargo survs
 - type: entity
   parent: RMCHeadsetMarine
-  id: RMCHeadsetArmy
-  name: UNMC Devil Dogs headset
-  description: Issued to UNMC Devil Dogs Marines.
+  id: RMCHeadsetTyrargo
+  name: UNMC headset
+  description: Issued to UNMC Marines.
   suffix: Survivor
   components:
   - type: Sprite
@@ -290,35 +291,35 @@
       - CMEncryptionKeyColony
   - type: RMCHeadset
     channels:
-    - MarineArmy
+    - MarineSurvivor
   - type: RMCStaticDefaultChannel
   - type: EncryptionKeyHolder
-    defaultChannel: MarineArmy
+    defaultChannel: MarineSurvivor
   - type: GrantSquadLeaderTracker
     defaultMode: SquadLeader
     trackerModes:
     - SquadLeader
 
 - type: entity
-  parent: RMCHeadsetArmy
-  id: RMCHeadsetArmyLeader
-  name: UNMC Devil Dogs leader headset
+  parent: RMCHeadsetTyrargo
+  id: RMCHeadsetTyrargoLeader
+  name: UNMC leader headset
   suffix: Survivor
   components:
   - type: RMCHeadset
     channels:
-    - MarineArmy
+    - MarineSurvivor
     radioTextIncrease: 2
 
 - type: entity
-  parent: RMCHeadsetArmy
-  id: RMCHeadsetArmyCommander
-  name: UNMC Devil Dogs commander headset
+  parent: RMCHeadsetTyrargo
+  id: RMCHeadsetTyrargoCommander
+  name: UNMC commander headset
   suffix: Survivor
   components:
   - type: RMCHeadset
     channels:
-    - MarineArmy
+    - MarineSurvivor
     radioTextIncrease: 3
 
 # Paramarine Hybrisa survivor insert

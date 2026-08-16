@@ -112,8 +112,8 @@
 
 - type: entity
   parent: WeaponRifleM4SPRFilled
-  id: WeaponRifleM4SPRArmy
-  suffix: Army
+  id: WeaponRifleM4SPRSurvivor
+  suffix: Tyrargo, Survivor
   components:
   - type: AttachableHolder
     slots:
@@ -145,7 +145,7 @@
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentLaserSight
           - RMCAttachmentVerticalGrip
-          - RMCAttachmentExtinguisher
+          - RMCAttachmentUnderbarrelExtinguisher
 
 - type: entity
   parent: WeaponRifleM4SPR
@@ -412,8 +412,7 @@
   id: RMCMagazineRifleM4SPRHEAPEmpty
   suffix: HEAP, Empty
   components:
-  - type: BallisticAmmoProvider
-    proto: null
+  - type: RMCEmptyMag
 
 - type: entity
   parent: CMMagazineRifleM4SPR
