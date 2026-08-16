@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Content.Shared._RMC14.ARES;
 using Content.Shared._RMC14.ARES.Logs;
@@ -31,10 +32,11 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
+using Robust.Shared.Maths;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
-using System.Linq;
 
 namespace Content.Shared._RMC14.Dropship;
 
@@ -361,7 +363,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         var closestLZ = FindClosestLZ(terminal);
         if (closestLZ is not { } lz)
         {
-            var failedState = new DropshipTerminalBuiState("???", []);
+            var failedState = new DropshipTerminalBuiState(Loc.GetString("rmc-dropship-terminal-unknown-location"), []);
             _ui.SetUiState(terminal.Owner, DropshipTerminalUiKey.Key, failedState);
             return;
         }
@@ -373,7 +375,7 @@ public abstract class SharedDropshipSystem : EntitySystem
             var computerQuery = EntityQueryEnumerator<DropshipNavigationComputerComponent>();
             while (computerQuery.MoveNext(out var computerId, out var computer))
             {
-                // ERT-Ships can't be hijacked, so we can use this to filter them out.
+                // Restricted shuttles can opt out of hijacking, so this filters them out of planetside terminals.
                 if (!computer.Hijackable)
                     continue;
 
@@ -519,6 +521,24 @@ public abstract class SharedDropshipSystem : EntitySystem
         {
             Log.Warning(
                 $"{ToPrettyString(args.Actor)} tried to launch to invalid dropship destination {ToPrettyString(destination)}");
+            return;
+        }
+
+        if (!IsDestinationAllowed(ent, destination.Value, out var reason))
+        {
+            if (!string.IsNullOrWhiteSpace(reason))
+                _popup.PopupEntity(reason, ent, args.Actor, PopupType.MediumCaution);
+
+            Log.Warning($"{ToPrettyString(args.Actor)} tried to launch {ToPrettyString(ent)} to disallowed destination {ToPrettyString(destination.Value)}");
+            return;
+        }
+
+        if (!CanPlayerLaunchToDestination(ent, destination.Value, out reason))
+        {
+            if (!string.IsNullOrWhiteSpace(reason))
+                _popup.PopupEntity(reason, ent, args.Actor, PopupType.MediumCaution);
+
+            Log.Warning($"{ToPrettyString(args.Actor)} tried to launch {ToPrettyString(ent)} to route-locked destination {ToPrettyString(destination.Value)}");
             return;
         }
 
@@ -673,6 +693,249 @@ public abstract class SharedDropshipSystem : EntitySystem
     protected virtual bool IsInFTL(EntityUid dropship)
     {
         return false;
+    }
+
+    protected bool IsDestinationAllowed(
+        Entity<DropshipNavigationComputerComponent> computer,
+        EntityUid destination,
+        out string reason)
+    {
+        reason = string.Empty;
+
+        if (!TryComp(destination, out DropshipDestinationComponent? destinationComp))
+        {
+            reason = Loc.GetString("rmc-dropship-destination-unavailable");
+            return false;
+        }
+
+        if (computer.Comp.PlanetOnly &&
+            !IsPlanetsideDestination(destination))
+        {
+            reason = Loc.GetString("rmc-dropship-planetside-only");
+            return false;
+        }
+
+        if (destinationComp.Reserved &&
+            !computer.Comp.RequiresRestrictedDestination)
+        {
+            reason = Loc.GetString("rmc-dropship-destination-reserved");
+            return false;
+        }
+
+        if (!computer.Comp.RequiresRestrictedDestination)
+            return true;
+
+        // Restricted shuttle routing stays on the shared dropship path, but applies an extra destination filter once a console opts into it.
+        if (!destinationComp.Enabled ||
+            destinationComp.LandingClasses.Count == 0 &&
+            destinationComp.LandingTags.Count == 0)
+        {
+            reason = Loc.GetString("rmc-dropship-destination-not-configured");
+            return false;
+        }
+
+        var allowedDockClasses = RMCShuttleDocking.GetAllowedDockClasses(computer.Comp.ShuttleDockingClass);
+
+        if (allowedDockClasses.Length > 0 &&
+            !MatchesAny(destinationComp.LandingClasses, allowedDockClasses))
+        {
+            reason = Loc.GetString("rmc-dropship-destination-invalid-class");
+            return false;
+        }
+
+        if (computer.Comp.AllowedLandingTags.Count > 0 &&
+            !MatchesAny(destinationComp.LandingTags, computer.Comp.AllowedLandingTags))
+        {
+            reason = Loc.GetString("rmc-dropship-destination-invalid-tags");
+            return false;
+        }
+
+        if (MatchesAny(destinationComp.LandingTags, computer.Comp.DeniedLandingTags))
+        {
+            reason = Loc.GetString("rmc-dropship-destination-blocked-tags");
+            return false;
+        }
+
+        return true;
+    }
+
+    protected bool CanPlayerLaunchToDestination(
+        Entity<DropshipNavigationComputerComponent> computer,
+        EntityUid destination,
+        out string reason)
+    {
+        reason = string.Empty;
+        if (!computer.Comp.PlayerDestinationLockEnabled)
+            return true;
+
+        if (computer.Comp.PlayerAllowedDestination == destination)
+            return true;
+
+        reason = Loc.GetString("rmc-dropship-destination-unavailable");
+        return false;
+    }
+
+    public bool CanUseDestination(
+        Entity<DropshipNavigationComputerComponent> computer,
+        EntityUid destination,
+        out string reason)
+    {
+        // First validate routing rules, then validate transient destination state such as occupation and fit.
+        if (!IsDestinationAllowed(computer, destination, out reason))
+            return false;
+
+        if (!TryComp(destination, out DropshipDestinationComponent? destinationComp))
+        {
+            reason = Loc.GetString("rmc-dropship-destination-unavailable");
+            return false;
+        }
+
+        var shuttle = Transform(computer).GridUid;
+        if (destinationComp.Ship is { } occupiedBy &&
+            shuttle != occupiedBy)
+        {
+            reason = Loc.GetString("rmc-dropship-destination-occupied");
+            return false;
+        }
+
+        if (!TryGetDockingBounds(computer, out var shuttleBounds, out reason))
+            return false;
+
+        if (destinationComp.DockBounds is { } dockBounds &&
+            !TryValidateDockFit(dockBounds, shuttleBounds, out reason))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public void ConfigureRestrictedNavigationComputer(
+        Entity<DropshipNavigationComputerComponent?> computer,
+        bool hijackable,
+        bool planetOnly,
+        bool requiresRestrictedDestination,
+        IReadOnlyCollection<string>? allowedLandingTags = null,
+        IReadOnlyCollection<string>? deniedLandingTags = null)
+    {
+        if (!Resolve(computer, ref computer.Comp, false))
+            return;
+
+        // Restricted shuttle routing rules can be pushed in at load time by systems such as ERT.
+        computer.Comp.Hijackable = hijackable;
+        computer.Comp.PlanetOnly = planetOnly;
+        computer.Comp.RequiresRestrictedDestination = requiresRestrictedDestination;
+        computer.Comp.AllowedLandingTags = allowedLandingTags?.ToList() ?? [];
+        computer.Comp.DeniedLandingTags = deniedLandingTags?.ToList() ?? [];
+        Dirty(computer, computer.Comp);
+    }
+
+    public void SetDestinationShip(Entity<DropshipDestinationComponent?> destination, EntityUid? ship)
+    {
+        if (!Resolve(destination, ref destination.Comp, false))
+            return;
+
+        // Track the occupying shuttle on the destination itself so both UI and launch validation see it as reserved.
+        destination.Comp.Ship = ship;
+        Dirty(destination, destination.Comp);
+    }
+
+    protected bool IsPlanetsideDestination(EntityUid destination)
+    {
+        var xform = Transform(destination);
+        return xform.GridUid is { } grid && HasComp<RMCPlanetComponent>(grid) ||
+               HasComp<RMCPlanetComponent>(xform.MapUid);
+    }
+
+    private bool TryGetDockingBounds(
+        Entity<DropshipNavigationComputerComponent> computer,
+        out Box2 bounds,
+        out string reason)
+    {
+        if (computer.Comp.DockingBounds is { } dockingBounds)
+        {
+            bounds = dockingBounds;
+            reason = string.Empty;
+            return true;
+        }
+
+        if (Transform(computer).GridUid is not { } grid ||
+            !TryComp<MapGridComponent>(grid, out var gridComp))
+        {
+            bounds = default;
+            reason = Loc.GetString("rmc-dropship-invalid-docking-footprint");
+            return false;
+        }
+
+        bounds = gridComp.LocalAABB;
+        reason = string.Empty;
+        return true;
+    }
+
+    private static bool MatchesAny(IReadOnlyCollection<string> left, IReadOnlyCollection<string> right)
+    {
+        if (left.Count == 0 || right.Count == 0)
+            return false;
+
+        return left.Any(right.Contains);
+    }
+
+    private static bool TryValidateDockFit(Box2 destination, Box2 shuttle, out string reason)
+    {
+        var destinationSize = FormatBoundsSize(destination);
+        var shuttleSize = FormatBoundsSize(shuttle);
+
+        // Compare the shuttle footprint against each destination edge so oversized craft fail with a precise clearance reason.
+        if (shuttle.Left < destination.Left)
+        {
+            reason = Robust.Shared.Localization.Loc.GetString("rmc-dropship-clearance-port",
+                ("shuttleSize", shuttleSize),
+                ("destinationSize", destinationSize));
+            return false;
+        }
+
+        if (shuttle.Right > destination.Right)
+        {
+            reason = Robust.Shared.Localization.Loc.GetString("rmc-dropship-clearance-starboard",
+                ("shuttleSize", shuttleSize),
+                ("destinationSize", destinationSize));
+            return false;
+        }
+
+        if (shuttle.Bottom < destination.Bottom)
+        {
+            reason = Robust.Shared.Localization.Loc.GetString("rmc-dropship-clearance-aft",
+                ("shuttleSize", shuttleSize),
+                ("destinationSize", destinationSize));
+            return false;
+        }
+
+        if (shuttle.Top > destination.Top)
+        {
+            reason = Robust.Shared.Localization.Loc.GetString("rmc-dropship-clearance-forward",
+                ("shuttleSize", shuttleSize),
+                ("destinationSize", destinationSize));
+            return false;
+        }
+
+        reason = string.Empty;
+        return true;
+    }
+
+    private static string FormatBoundsSize(Box2 bounds)
+    {
+        var size = bounds.Size;
+        return $"{FormatDimension(size.X)}x{FormatDimension(size.Y)}";
+    }
+
+    private static string FormatDimension(float value)
+    {
+        var rounded = MathF.Round(value, 2);
+        var nearestInt = MathF.Round(rounded);
+        if (Math.Abs(rounded - nearestInt) < 0.01f)
+            return nearestInt.ToString("0");
+
+        return rounded.ToString("0.##");
     }
 
     private bool TryDropshipLaunchPopup(EntityUid computer, EntityUid user, bool predicted)

@@ -10,10 +10,11 @@
   startingGear: RMCJobWeYaGoon
   icon: "RMCJobIconPMCGoonStandard"
   joinNotifyCrew: false
+  access: [ CMAccessERT ]
   accessGroups:
   - Colony
   - RMCWeYa
-  spawnMenuRoleName: WEYA PMC Goon
+  spawnMenuRoleName: We-Ya PMC Goon
   special:
   - !type:AddComponentSpecial
     components:
@@ -59,10 +60,10 @@
     gloves: RMCHandsVeteranPMC
     head: ArmorHelmetPMCCorporate
     shoes: RMCBootsPMCFilled
-    back: RMCSatchelLightpack # TODO RMC14: PMC combat backpack
+    back: RMCSatchelPMC
     belt: RMCM77BeltPMCFilled
-    suitstorage: RMCWeaponRifleM54C # TODO RMC14: Corporate re-sprite (white)
-    pocket1: RMCPouchMagazine # TODO RMC14: PMC re-sprite
+    suitstorage: RMCWeaponRifleM54CWhite
+    pocket1: RMCPouchMagazineLargePMC
     pocket2: RMCPouchFirstAidPMCFill
   storage:
     back:
@@ -83,7 +84,7 @@
 - type: entity
   parent: MarkerBase
   id: RMCRandomHumanoidWeYaGoon
-  name: weya corporate ghost role goon
+  name: we-ya corporate ghost role goon
   suffix: Spawner, Player
   components:
   - type: Sprite

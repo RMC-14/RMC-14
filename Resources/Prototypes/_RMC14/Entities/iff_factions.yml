@@ -49,6 +49,16 @@
     - WEYA
 
 - type: entity
+  id: FactionVAI
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: IFFFaction
+  - type: FactionFrequencies
+    channels:
+    - Colony
+    - WEYA
+
+- type: entity
   id: FactionTSE
   categories: [ HideSpawnMenu ]
   components:

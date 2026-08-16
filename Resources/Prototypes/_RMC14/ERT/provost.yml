@@ -1,0 +1,53 @@
+- type: rmcERTCall
+  id: RMCERTCallProvost
+  name: rmc-ert-call-provost-name
+  organization: rmc-ert-organization-provost
+  npcFactions: [ UNMC ]
+  category: rmc-ert-category-law
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-provost
+  randomWeight: 0
+  allowedSources: [ Handheld, Admin ]
+  # TODO RMC14 replace with a dedicated Provost shuttle once ported.
+  shuttleMap: /Maps/_RMC14/Shuttles/ERT/ert_response_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttle
+  shuttleSpawnMarker: RMCERTShuttleStartPadLaw
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  objectives:
+  - rmc-ert-objective-provost-enforce-marine-law
+  roles:
+  - id: leader
+    name: rmc-ert-role-provost-leader
+    job: CMProvostTeamLeader
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidProvostTeamLeader
+      weight: 100
+    min: 1
+    max: 1
+    leader: true
+    roleTags: [ leader, police ]
+    seatTags: [ command ]
+    priority: 100
+  - id: enforcer
+    name: rmc-ert-role-provost-enforcer
+    job: CMProvostEnforcer
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidProvostEnforcer
+      weight: 100
+    min: 4
+    max: 4
+    roleTags: [ police ]
+    seatTags: [ troop ]
+  announcements:
+    request:
+      title: rmc-ert-announcement-title-priority-alert
+      message: rmc-ert-announcement-provost-request
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 5
+    maxSlots: 5
