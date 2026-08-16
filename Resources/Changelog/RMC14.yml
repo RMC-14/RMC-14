@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: Praetorian Oppressor's Abduct and Vanguard's Pierce abilities now have
-      a tile preview overlay
-    type: Add
-  id: 3079
-  time: '2026-04-07T03:18:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9468
 - author: Arykh
   changes:
   - message: Fixed Nutritious Property restoring less nutrition than intended. (again)
@@ -4542,5 +4534,12 @@
   id: 3578
   time: '2026-08-16T14:22:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9830
+- author: CatAndHats
+  changes:
+  - message: Added colony medical lockers with their parity contents
+    type: Add
+  id: 3579
+  time: '2026-08-16T14:37:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10227
 Name: RMC14
 Order: -1
