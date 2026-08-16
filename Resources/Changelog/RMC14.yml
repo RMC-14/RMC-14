@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Arykh
-  changes:
-  - message: Fixed Nutritious Property restoring less nutrition than intended. (again)
-    type: Fix
-  id: 3080
-  time: '2026-04-07T03:21:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9532
 - author: monomethylhydrazine
   changes:
   - message: Added the SPP Support Synthetic.
@@ -4541,5 +4534,13 @@
   id: 3579
   time: '2026-08-16T14:37:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10227
+- author: Hank-Hill-Propane-Man
+  changes:
+  - message: Added filled versions of the Engineer's Locker and Welding Locker for
+      mapping
+    type: Add
+  id: 3580
+  time: '2026-08-16T14:52:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10483
 Name: RMC14
 Order: -1
