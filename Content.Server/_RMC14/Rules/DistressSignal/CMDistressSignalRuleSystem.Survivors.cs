@@ -1,4 +1,5 @@
-﻿using System.Linq;
+using System.Linq;
+using Content.Server.Database;
 using Content.Server.GameTicking;
 using Content.Server.Spawners.Components;
 using Content.Shared._RMC14.Rules;
@@ -16,6 +17,40 @@ namespace Content.Server._RMC14.Rules.DistressSignal;
 
 public sealed partial class CMDistressSignalRuleSystem
 {
+    private Dictionary<ProtoId<JobPrototype>, List<EntityUid>> _survivorSpawners = new Dictionary<ProtoId<JobPrototype>, List<EntityUid>>();
+
+    /// <summary>
+    /// Spawns a player as the survivor they're assigned as.
+    /// </summary>
+    /// <param name="player"></param>
+    private void SpawnSurvivor(PlayerSpawnInfo player, CMDistressSignalRuleComponent comp)
+    {
+        if (player.AssignedJob is not { } assignment)
+            return;
+
+        var playerId = player.Session.UserId;
+
+        var actualJob = DetermineSurvivorJob(assignment.JobID, player.Session.UserId, comp, out var _, out var _);
+
+        var spawner = _random.PickAndTake(_survivorSpawners[actualJob]);
+
+        var survivorMob = _stationSpawning.SpawnPlayerMob(
+            _transform.GetMoverCoordinates(spawner),
+            actualJob,
+            player.Profile,
+            null);
+
+        if (!_mind.TryGetMind(playerId, out var mind))
+            mind = _mind.CreateMind(playerId);
+
+        RemCompDeferred<TacticalMapUserComponent>(survivorMob);
+        _mind.TransferTo(mind.Value, survivorMob);
+        _roles.MindAddJobRole(mind.Value, jobPrototype: actualJob);
+        _playTime.PlayerRolesChanged(player.Session);
+
+        RaiseLocalEvent(survivorMob, new PlayerSpawnCompleteEvent(survivorMob, player.Session, actualJob, false, true, 0, default, player.Profile), true);
+    }
+
     /// <summary>
     /// Main survivor spawning handler. Delegates to helper methods for job collection,
     /// candidate assignment, and individual survivor spawning.

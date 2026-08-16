@@ -74,6 +74,10 @@ public sealed partial class CMDistressSignalRuleSystem
 
             _mind.TransferTo(mind.Value, xenoEnt);
         }
+        else if (comp.SurvivorJobs.Any(item => item.Job == assignment.JobID))
+        {
+            SpawnSurvivor(player, comp);
+        }
         else
         {
             return;
