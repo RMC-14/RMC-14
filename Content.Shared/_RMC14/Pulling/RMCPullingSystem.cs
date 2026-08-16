@@ -447,9 +447,9 @@ public sealed class RMCPullingSystem : EntitySystem
     {
         TryStopPullsOn(pullie);
 
-        if (TryComp(pullie, out PullerComponent? puller) &&
-             puller.Pulling != null &&
-             TryComp(puller.Pulling, out PullableComponent? pullable2))
+       if (TryComp(pullie, out PullerComponent? puller) &&
+            puller.Pulling != null &&
+            TryComp(puller.Pulling, out PullableComponent? pullable2))
         {
             _pulling.TryStopPull(puller.Pulling.Value, pullable2, pullie);
             return;
