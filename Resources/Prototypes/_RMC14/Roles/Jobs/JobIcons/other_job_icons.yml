@@ -14,34 +14,6 @@
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconExecutiveBodyguard
-  icon:
-    sprite: _RMC14/Interface/job_icons/We-Ya/executive_bodyguard.rsi
-    state: weya_bodyguard_ppo
-
-- type: jobIcon
-  parent: CMJobIconBase
-  id: RMCJobIconExecutiveBodyguardPPC
-  icon:
-    sprite: _RMC14/Interface/job_icons/We-Ya/executive_bodyguard.rsi
-    state: weya_bodyguard_ppc
-
-- type: jobIcon
-  parent: CMJobIconBase
-  id: RMCJobIconExecutiveBodyguardPPS
-  icon:
-    sprite: _RMC14/Interface/job_icons/We-Ya/executive_bodyguard.rsi
-    state: weya_bodyguard_pps
-
-- type: jobIcon
-  parent: CMJobIconBase
-  id: RMCJobIconExecutiveBodyguardTPPO
-  icon:
-    sprite: _RMC14/Interface/job_icons/We-Ya/executive_bodyguard.rsi
-    state: weya_bodyguard_tppo
-
-- type: jobIcon
-  parent: CMJobIconBase
   id: RMCJobIconSynth
   icon:
     sprite: _RMC14/Interface/job_icons/UNMC/other.rsi
@@ -102,7 +74,21 @@
     sprite: _RMC14/Interface/job_icons/halcyon.rsi
     state: hc_exec
 
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPSynth
+  icon:
+    sprite: _RMC14/Interface/job_icons/SPP/standard.rsi
+    state: spp_synth
+
 # WEYA Job Icons
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconWeYaTrainee
+  icon:
+    sprite: _RMC14/Interface/job_icons/We-Ya/liaison_ranks.rsi
+    state: weya_trainee
+
 - type: jobIcon
   parent: CMJobIconBase
   id: RMCJobIconExecJunior
@@ -180,9 +166,88 @@
     sprite: _RMC14/Interface/job_icons/We-Ya/pmc.rsi
     state: pmc_syn
 
+# Executive Bodyguard
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconSPPSynth
+  id: RMCJobIconExecutiveBodyguardTPPO
   icon:
-    sprite: _RMC14/Interface/job_icons/SPP/standard.rsi
-    state: spp_synth
+    sprite: _RMC14/Interface/job_icons/We-Ya/executive_bodyguard.rsi
+    state: weya_bodyguard_tppo
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconExecutiveBodyguard
+  icon:
+    sprite: _RMC14/Interface/job_icons/We-Ya/executive_bodyguard.rsi
+    state: weya_bodyguard_ppo
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconExecutiveBodyguardPPS
+  icon:
+    sprite: _RMC14/Interface/job_icons/We-Ya/executive_bodyguard.rsi
+    state: weya_bodyguard_pps
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconExecutiveBodyguardPPC
+  icon:
+    sprite: _RMC14/Interface/job_icons/We-Ya/executive_bodyguard.rsi
+    state: weya_bodyguard_ppc
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconExecutiveBodyguardDPO
+  icon:
+    sprite: _RMC14/Interface/job_icons/We-Ya/executive_bodyguard.rsi
+    state: weya_bodyguard_dpo
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconExecutiveBodyguardDPS
+  icon:
+    sprite: _RMC14/Interface/job_icons/We-Ya/executive_bodyguard.rsi
+    state: weya_bodyguard_dps
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconExecutiveBodyguardDPC
+  icon:
+    sprite: _RMC14/Interface/job_icons/We-Ya/executive_bodyguard.rsi
+    state: weya_bodyguard_dpc
+
+# Halcyon
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconHalcyonTrainee
+  icon:
+    sprite: _RMC14/Interface/job_icons/halcyon.rsi
+    state: hc_trainee
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconHalcyonJuniorExecutive
+  icon:
+    sprite: _RMC14/Interface/job_icons/halcyon.rsi
+    state: hc_jrexec
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconHalcyonExecutive
+  icon:
+    sprite: _RMC14/Interface/job_icons/halcyon.rsi
+    state: hc_exec
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconHalcyonSeniorExecutive
+  icon:
+    sprite: _RMC14/Interface/job_icons/halcyon.rsi
+    state: hc_srexec
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconHalcyonExecutiveSpecialist
+  icon:
+    sprite: _RMC14/Interface/job_icons/halcyon.rsi
+    state: hc_execspec
