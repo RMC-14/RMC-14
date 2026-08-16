@@ -30,7 +30,6 @@ public sealed class RMCChairStackVisualizerSystem : VisualizerSystem<RMCChairSta
 
     private void UpdateStackLayers(Entity<SpriteComponent?> spriteEnt, int stackSize, int maxStableStack)
     {
-
         var oldChairIdx = 0;
         var oldChairKey = StackLayerPrefix + oldChairIdx;
         while (SpriteSystem.LayerMapTryGet(spriteEnt, oldChairKey, out var index, false))

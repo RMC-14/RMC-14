@@ -1,7 +1,6 @@
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
-using Content.Shared.Construction.EntitySystems;
 using Content.Shared.Damage;
 using Content.Shared.Destructible;
 using Content.Shared.Foldable;
@@ -95,7 +94,7 @@ public sealed class RMCChairStackSystem : EntitySystem
             return;
 
         // You can't stack ONTO a folded chair. It needs to be an unfolded chair.
-        if (TryComp<FoldableComponent>(ent, out var entFoldable) && entFoldable.IsFolded)
+        if (foldable.IsFolded)
             return;
 
         if (TryComp<StrapComponent>(ent, out var strap) && strap.BuckledEntities.Count > 0)

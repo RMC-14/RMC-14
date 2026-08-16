@@ -48,7 +48,7 @@ public sealed class DeployableItemSystem : EntitySystem
     {
         SubscribeLocalEvent<DeployableItemComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<DeployableItemComponent, InteractHandEvent>(OnInteractHand);
-        SubscribeLocalEvent<DeployableItemComponent, UseInHandEvent>(OnUseInHand, after: [typeof(SharedWieldableSystem)]);
+        SubscribeLocalEvent<DeployableItemComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<DeployableItemComponent, CanDragEvent>(OnCanDrag);
         SubscribeLocalEvent<DeployableItemComponent, CanDropDraggedEvent>(OnCanDropDragged);
         SubscribeLocalEvent<DeployableItemComponent, DragDropDraggedEvent>(OnDragDropDragged);
