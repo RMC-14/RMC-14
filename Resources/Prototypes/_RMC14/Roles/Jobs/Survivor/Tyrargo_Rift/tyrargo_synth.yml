@@ -1,0 +1,89 @@
+﻿- type: job
+  parent: RMCSurvivorTyrargoBase
+  id: RMCSurvivorTyrargoSynth
+  name: rmc-job-name-forecon-synth
+  playTimeTracker: RMCJobSyntheticColony
+  ranks:
+    RMCRankFirstSergeant: []
+  supervisors: rmc-job-supervisors-commander
+  accessGroups:
+  - ColonistEngi
+  - Synth
+  startingGear: RMCGearTyrargoSynthetic
+  spawnMenuRoleName: UNMC Synthetic (Tyrargo Rift Survivor)
+  roleWeight: 0.25
+  icon: "RMCJobIconTyrargoSynth"
+  whitelisted: true
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Language
+      preset: RMCLanguagePresetSynthColonist
+    - type: LanguageLearning
+      preset: RMCLanguageLearningPresetSynthColonist
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: tyrargo_synth
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadUNMC
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: JobPrefix
+      prefix: rmc-job-prefix-synth
+    - type: MeleeWeapon
+      soundHit:
+        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
+        params:
+          variation: 0.15
+          volume: -1
+      angle: 30
+      animation: WeaponArcFist
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 35
+    - type: Synth
+  hidden: true
+
+- type: startingGear
+  id: RMCGearTyrargoSynthetic
+  equipment:
+    id: RMCIDCardSynth
+    back: RMCSatchelTyrargoSurvivorSynthFill
+    jumpsuit: RMCJumpsuitMarineTyrargoWebbing
+    eyes: RMCGlassesTriMaxBronzeFake
+    head: RMCHeadCapFlippable
+    outerClothing: CMArmorM4TyrargoSynthSurvivorFill
+    suitstorage: RMCScabbardMacheteFilled
+    shoes: CMBootsBlackFilled
+    ears: RMCHeadsetTyrargo
+    gloves: CMHandsBlackMarine
+    belt: CMBeltMedicalFilled
+    pocket1: RMCPouchSling
+    pocket2: RMCPouchToolsFill
+  inhand:
+    - CMFirstAidKitFilled
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointTyrargoSynth
+  name: tyrargo marine synthetic spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorTyrargoSynth
+  - type: Sprite
+    state: syn_spawn
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconTyrargoSynth
+  icon:
+    sprite: _RMC14/Interface/job_icons/UNMC/tyrargo.rsi
+    state: hudsquad_tyrargo_synth
