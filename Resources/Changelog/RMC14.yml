@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Fixed being able to stack multiple xenonid structures on the same tile
-    type: Fix
-  id: 3073
-  time: '2026-04-07T03:10:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9615
 - author: CatAndHats
   changes:
   - message: Fixed plastic Road Barriers giving two metal sheets when deconstructed
@@ -4538,5 +4531,12 @@
   id: 3572
   time: '2026-08-16T12:53:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10702
+- author: Ozehk
+  changes:
+  - message: Fixed ICBL and ILRO tacmap blips being swapped.
+    type: Fix
+  id: 3573
+  time: '2026-08-16T13:21:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10683
 Name: RMC14
 Order: -1
