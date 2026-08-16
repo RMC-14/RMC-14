@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/05eaa3484b1a35aa759300bcfc8f0119f009daae/icons/mob/humans/onmob/head_1.dmi and https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/items/clothing/cm_hats.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/2f4c415e5681333e6de474f1f027087101452d31/icons/mob/humans/onmob/clothing/head/hats_by_faction/UA.dmi and https://github.com/cmss13-devs/cmss13/blob/2f4c415e5681333e6de474f1f027087101452d31/icons/obj/items/clothing/hats/hats_by_faction/UA.dmi",
   "size": {
     "x": 32,
     "y": 32

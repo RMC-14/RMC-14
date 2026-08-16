@@ -24,8 +24,6 @@
     skills:
       RMCSkillConstruction: 2
       RMCSkillEngineer: 2
-      RMCSkillFirearms: 1
-      RMCSkillMedical: 1
       RMCSkillVehicles: 2
       RMCSkillJtac: 2
       RMCSkillPowerLoader: 1
