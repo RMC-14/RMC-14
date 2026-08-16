@@ -10,7 +10,7 @@ rmc-elevator-status-cooldown = Courtesy Time
 rmc-elevator-status-available = Standby
 rmc-elevator-status-unknown = Unknown
 
-rmc-elevator-status-progress-availible = Ready to Depart
+rmc-elevator-status-progress-available = Ready to Depart
 
 rmc-elevator-location = Located At
 rmc-elevator-travelling = Travelling To
