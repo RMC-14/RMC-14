@@ -1,4 +1,4 @@
-﻿rmc-elevator-panel-name = Elevator Control Panel
+rmc-elevator-panel-name = Elevator Control Panel
 rmc-elevator-call-name = Elevator Call Panel
 
 rmc-elevator-call-button-text = Call

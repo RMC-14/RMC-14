@@ -56,6 +56,7 @@ public sealed class RMCElevatorSystem : SharedRMCElevatorSystem
         SubscribeLocalEvent<RMCElevatorComponent, BeforeFTLStartedEvent>(OnRefreshBoth);
         SubscribeLocalEvent<RMCElevatorComponent, FTLUpdatedEvent>(OnRefreshUpdate);
     }
+
     private void OnPanelMapInit(Entity<RMCElevatorPanelComponent> ent, ref MapInitEvent args)
     {
         TryLink(ent);
@@ -129,7 +130,7 @@ public sealed class RMCElevatorSystem : SharedRMCElevatorSystem
 
         _shuttle.FTLToCoordinates(ent, shuttleComp, destCoords, rotation, ent.Comp.StartupTime, hyperspaceTime);
 
-        _adminLog.Add(LogType.RMCDropshipLaunch,
+        _adminLog.Add(LogType.RMCElevatorLaunched,
             $"{ToPrettyString(user):player} started sending {ToPrettyString(ent):elevator} to {ToPrettyString(destination):destination}");
 
         return true;

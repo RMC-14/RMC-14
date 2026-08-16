@@ -8,7 +8,7 @@ using Robust.Shared.Timing;
 namespace Content.Client._RMC14.Elevators;
 
 [UsedImplicitly]
-public sealed class ElevatorPanelBui: BoundUserInterface
+public sealed class ElevatorPanelBui : BoundUserInterface
 {
     [Dependency] private readonly IEntityManager _entities = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -47,7 +47,6 @@ public sealed class ElevatorPanelBui: BoundUserInterface
             SetStatus(dest);
             return;
         }
-
     }
 
     private void OpenWindow()
@@ -143,7 +142,7 @@ public sealed class ElevatorPanelBui: BoundUserInterface
         if (travelling.State != FTLState.Available)
             _window.StatusProgress.Text = $"[font size=14][bold]{time}[/bold][/font]";
         else
-            _window.StatusProgress.Text = $"[font size=14][bold]{Loc.GetString("rmc-elevator-status-progress-availible")}[/bold][/font]";
+            _window.StatusProgress.Text = $"[font size=14][bold]{Loc.GetString("rmc-elevator-status-progress-available")}[/bold][/font]";
 
         if (travelling.State == FTLState.Cooldown || travelling.State == FTLState.Available)
             _window.LocationStatus.Text = Loc.GetString("rmc-elevator-location");
@@ -162,5 +161,3 @@ public sealed class ElevatorPanelBui: BoundUserInterface
             SetStatus(_travelling);
     }
 }
-
-
