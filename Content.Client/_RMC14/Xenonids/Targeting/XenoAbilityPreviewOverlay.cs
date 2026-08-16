@@ -1,20 +1,23 @@
-using System.Numerics;
 using Content.Client.Gameplay;
 using Content.Client.UserInterface.Systems.Actions;
+using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Line;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Smoke;
+using Content.Shared._RMC14.Xenonids.Abduct;
 using Content.Shared._RMC14.Xenonids.AcidMine;
 using Content.Shared._RMC14.Xenonids.Bombard;
 using Content.Shared._RMC14.Xenonids.Burrow;
+using Content.Shared._RMC14.Xenonids.Construction;
+using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.DeployTraps;
 using Content.Shared._RMC14.Xenonids.Fruit.Components;
+using Content.Shared._RMC14.Xenonids.Pierce;
 using Content.Shared._RMC14.Xenonids.ResinSurge;
 using Content.Shared._RMC14.Xenonids.Spray;
 using Content.Shared._RMC14.Xenonids.Weeds;
-using Content.Shared._RMC14.Xenonids.Abduct;
-using Content.Shared._RMC14.Xenonids.Pierce;
 using Content.Shared.Actions.Components;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
@@ -31,9 +34,8 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
-using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
-using Content.Shared._RMC14.Areas;
-using Content.Shared._RMC14.Marines;
+using System.Linq;
+using System.Numerics;
 
 namespace Content.Client._RMC14.Xenonids.Targeting;
 
@@ -75,6 +77,8 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     private readonly TurfSystem _turf;
     private readonly SpriteSystem _sprite;
     private readonly EntityQuery<ActionsComponent> _actionsQ;
+    private readonly EntityQuery<AlmayerComponent> _almayerQ;
+    private readonly EntityQuery<BlockXenoConstructionComponent> _blockXenoConstructionQ;
     private readonly EntityQuery<TargetActionComponent> _targetActionQ;
     private readonly EntityQuery<WorldTargetActionComponent> _worldTargetQ;
     private readonly EntityQuery<XenoSprayAcidComponent> _sprayQ;
@@ -89,7 +93,6 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     private readonly EntityQuery<XenoAbductComponent> _abductQ;
     private readonly EntityQuery<XenoPierceComponent> _pierceQ;
     private readonly EntityQuery<TransformComponent> _xformQ;
-    private readonly EntityQuery<AlmayerComponent> _almayerQ;
 
     private Box2Rotated? _lastWorldBounds;
     private readonly HashSet<Vector2i> _tunnleableTileCache = [];
@@ -113,6 +116,8 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         _turf = ents.System<TurfSystem>();
         _sprite = ents.System<SpriteSystem>();
         _actionsQ = ents.GetEntityQuery<ActionsComponent>();
+        _almayerQ = ents.GetEntityQuery<AlmayerComponent>();
+        _blockXenoConstructionQ = ents.GetEntityQuery<BlockXenoConstructionComponent>();
         _targetActionQ = ents.GetEntityQuery<TargetActionComponent>();
         _worldTargetQ = ents.GetEntityQuery<WorldTargetActionComponent>();
         _sprayQ = ents.GetEntityQuery<XenoSprayAcidComponent>();
@@ -127,7 +132,6 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         _abductQ = ents.GetEntityQuery<XenoAbductComponent>();
         _pierceQ = ents.GetEntityQuery<XenoPierceComponent>();
         _xformQ = ents.GetEntityQuery<TransformComponent>();
-        _almayerQ = ents.GetEntityQuery<AlmayerComponent>();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
@@ -241,8 +245,23 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         if (!_mapManager.TryFindGridAt(originMap, out var gridUid, out var grid))
             return;
 
-        // Probably unnecessary optimisation to only update when the camera moves.
-        if (_lastWorldBounds != args.WorldBounds)
+        bool updateTileCache;
+        // If `_lastWorldBounds` hasn't been set yet or the screen's rotation has changed, update the tile cache.
+        if (_lastWorldBounds is not { } lastWorldBounds ||
+            lastWorldBounds.Rotation.GetCardinalDir() != args.WorldBounds.Rotation.GetCardinalDir())
+        {
+            updateTileCache = true;
+        }
+        // Otherwise, only update if the screen has moved more than a quarter tile in any direction.
+        else
+        {
+            var quarterTile = grid.TileSize / 4;
+            var diff = System.Numerics.Vector4.Abs(lastWorldBounds.Box.AsVector4 - args.WorldBounds.Box.AsVector4);
+
+            updateTileCache = diff.X > quarterTile || diff.Y > quarterTile || diff.Z > quarterTile || diff.W > quarterTile;
+        }
+
+        if (updateTileCache)
         {
             _tunnleableTileCache.Clear();
             _lastWorldBounds = args.WorldBounds;
@@ -254,12 +273,15 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
             {
                 if (!_turf.GetContentTileDefinition(tile).CanPlaceTunnel)
                     continue;
-                if (_turf.IsTileBlocked(tile, CollisionGroup.Impassable | CollisionGroup.MidImpassable | CollisionGroup.HighImpassable))
-                    continue;
 
                 if (!_area.TryGetArea((gridUid, grid), tile.GridIndices, out var area, out _))
                     continue;
                 if (area.Value.Comp.NoTunnel)
+                    continue;
+
+                if (_turf.IsTileBlocked(tile, CollisionGroup.Impassable | CollisionGroup.MidImpassable | CollisionGroup.HighImpassable))
+                    continue;
+                if (_mapSystem.GetAnchoredEntities(gridUid, grid, tile.GridIndices).Any(_blockXenoConstructionQ.HasComp))
                     continue;
 
                 _tunnleableTileCache.Add(tile.GridIndices);
@@ -270,6 +292,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         DrawTileFilled(args.WorldHandle, gridUid, grid, _tunnleableTileCache, TunnelAllowedFillColor);
         DrawTileBorder(args.WorldHandle, gridUid, grid, _tunnleableTileCache, TunnelAllowedOutlineColor);
 
+        // Little "ghost" tunnel sprite on the tile that it will be placed.
         if (TryGetTileIndices(originMap, out var playerTile) && _tunnleableTileCache.Contains(playerTile.Indices))
         {
             var spritePosition = _mapSystem.TileToVector((gridUid, grid), playerTile.Indices);
