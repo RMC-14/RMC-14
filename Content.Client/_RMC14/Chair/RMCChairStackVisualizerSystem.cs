@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Shared._RMC14.Chair;
 using Robust.Client.GameObjects;
+using Robust.Client.Graphics;
 using Robust.Shared.Utility;
 using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 
@@ -13,10 +14,12 @@ public sealed class RMCChairStackVisualizerSystem : EntitySystem
     private static readonly ResPath ChairRsi = new("_RMC14/Structures/Furniture/folding_chair.rsi");
 
     [Dependency] private readonly AppearanceSystem _appearance = default!;
+    [Dependency] private readonly IEyeManager _eye = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private readonly Dictionary<EntityUid, int> _visualizedCounts = new();
+    private Direction _lastEyeDirection = Direction.Invalid;
 
     public override void Initialize()
     {
@@ -26,10 +29,26 @@ public sealed class RMCChairStackVisualizerSystem : EntitySystem
         SubscribeLocalEvent<RMCChairStackComponent, ComponentRemove>(OnRemove);
     }
 
+    public override void FrameUpdate(float frameTime)
+    {
+        var eyeDirection = _eye.CurrentEye.Rotation.GetCardinalDir();
+        if (eyeDirection == _lastEyeDirection)
+            return;
+
+        _lastEyeDirection = eyeDirection;
+
+        var query = EntityQueryEnumerator<RMCChairStackComponent, AppearanceComponent, SpriteComponent>();
+        while (query.MoveNext(out var uid, out var stack, out var appearance, out var sprite))
+        {
+            if (_appearance.TryGetData<int>(uid, RMCChairStackVisuals.Count, out var count, appearance) && count > 0)
+                UpdateVisuals((uid, sprite), stack, appearance);
+        }
+    }
+
     private void OnAppearanceChange(Entity<RMCChairStackComponent> ent, ref AppearanceChangeEvent args)
     {
         if (args.Sprite != null)
-            UpdateVisuals((ent.Owner, args.Sprite), args.Component);
+            UpdateVisuals((ent.Owner, args.Sprite), ent.Comp, args.Component);
     }
 
     private void OnMove(Entity<RMCChairStackComponent> ent, ref MoveEvent args)
@@ -41,7 +60,7 @@ public sealed class RMCChairStackVisualizerSystem : EntitySystem
             return;
         }
 
-        UpdateVisuals((ent.Owner, sprite), appearance);
+        UpdateVisuals((ent.Owner, sprite), ent.Comp, appearance);
     }
 
     private void OnRemove(Entity<RMCChairStackComponent> ent, ref ComponentRemove args)
@@ -49,7 +68,9 @@ public sealed class RMCChairStackVisualizerSystem : EntitySystem
         _visualizedCounts.Remove(ent);
     }
 
-    private void UpdateVisuals(Entity<SpriteComponent> ent, AppearanceComponent appearance)
+    private void UpdateVisuals(Entity<SpriteComponent> ent,
+        RMCChairStackComponent stack,
+        AppearanceComponent appearance)
     {
         _appearance.TryGetData<int>(ent, RMCChairStackVisuals.Count, out var count, appearance);
         var sprite = ent.AsNullable();
@@ -68,7 +89,7 @@ public sealed class RMCChairStackVisualizerSystem : EntitySystem
         if (count == 0)
             return;
 
-        var direction = _transform.GetWorldRotation(ent).GetCardinalDir();
+        var direction = (_transform.GetWorldRotation(ent) + _eye.CurrentEye.Rotation).GetCardinalDir();
         var offset = Vector2.Zero;
         var step = direction switch
         {
@@ -81,7 +102,7 @@ public sealed class RMCChairStackVisualizerSystem : EntitySystem
         for (var i = 1; i <= count; i++)
         {
             offset += step;
-            if (count > 8)
+            if (count > stack.UnstableThreshold)
             {
                 var wobble = ((netId + (uint) i * 1103515245U) & 1) == 0 ? -Pixel : Pixel;
                 offset.X += wobble;

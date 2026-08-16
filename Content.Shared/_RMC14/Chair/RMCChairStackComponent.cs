@@ -88,7 +88,7 @@ public sealed partial class RMCChairStackComponent : Component
     public EntProtoId PowerLoaderVirtualRight = "RMCVirtualChairStackRight";
 
     [DataField]
-    public SoundSpecifier CollapseSound = new SoundPathSpecifier("/Audio/_RMC14/Effects/metal_crash.ogg");
+    public SoundSpecifier CollapseSound = new SoundPathSpecifier("/Audio/_RMC14/Items/metal_chair_crash.ogg");
 
     [DataField]
     public SoundSpecifier DestructionSound = new SoundCollectionSpecifier("MetalBreak");
@@ -100,6 +100,10 @@ public sealed partial class RMCChairStackComponent : Component
     [DataField]
     public SoundSpecifier PowerLoaderDropSound =
         new SoundPathSpecifier("/Audio/_RMC14/Machines/hydraulics_1.ogg");
+
+    [DataField]
+    public SoundSpecifier ThrownHitSound =
+        new SoundPathSpecifier("/Audio/_RMC14/Items/metal_chair_slam.ogg");
 
     [ViewVariables]
     public bool Collapsing;

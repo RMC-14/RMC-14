@@ -73,6 +73,7 @@ public sealed class SharedRMCChairStackSystem : EntitySystem
 
         SubscribeLocalEvent<RMCChairStackComponent, AttackedEvent>(OnAttacked);
         SubscribeLocalEvent<RMCChairStackComponent, ExplosionReceivedEvent>(OnExplosionReceived);
+        SubscribeLocalEvent<RMCChairStackComponent, ThrowDoHitEvent>(OnThrowDoHit);
         SubscribeLocalEvent<RMCChairStackComponent, ThrowHitByEvent>(OnThrowHitBy);
         SubscribeLocalEvent<RMCChairStackComponent, DestructionEventArgs>(OnDestruction);
         SubscribeLocalEvent<RMCChairStackComponent, RMCBeforeProjectileAccuracyEvent>(OnBeforeProjectileAccuracy);
@@ -80,7 +81,7 @@ public sealed class SharedRMCChairStackSystem : EntitySystem
         SubscribeLocalEvent<RMCChairStackComponent, GettingPickedUpAttemptEvent>(OnGettingPickedUp,
             after: new[] { typeof(PowerLoaderSystem) });
         SubscribeLocalEvent<RMCChairStackComponent, AfterInteractEvent>(OnAfterInteract,
-            after: new[] { typeof(PowerLoaderSystem) });
+            after: [typeof(DeployFoldableSystem), typeof(PowerLoaderSystem)]);
     }
 
     private void OnStartup(Entity<RMCChairStackComponent> ent, ref ComponentStartup args)
@@ -175,6 +176,12 @@ public sealed class SharedRMCChairStackSystem : EntitySystem
             Collapse(ent);
     }
 
+    private void OnThrowDoHit(Entity<RMCChairStackComponent> ent, ref ThrowDoHitEvent args)
+    {
+        if (_net.IsServer && HasComp<MobStateComponent>(args.Target))
+            _audio.PlayPvs(ent.Comp.ThrownHitSound, ent);
+    }
+
     private void OnThrowHitBy(Entity<RMCChairStackComponent> ent, ref ThrowHitByEvent args)
     {
         if (ent.Comp.StackedCount == 0)
@@ -231,13 +238,13 @@ public sealed class SharedRMCChairStackSystem : EntitySystem
 
     private void OnGettingPickedUp(Entity<RMCChairStackComponent> ent, ref GettingPickedUpAttemptEvent args)
     {
-        if (args.Cancelled || !IsUnstable(ent.Comp) || !HasComp<PowerLoaderComponent>(args.User))
+        if (args.Cancelled || ent.Comp.StackedCount == 0 || !HasComp<PowerLoaderComponent>(args.User))
             return;
 
         if (!_net.IsServer)
             return;
 
-        if (_random.Prob(GetPowerLoaderCollapseChance(ent.Comp, args.User)))
+        if (IsUnstable(ent.Comp) && _random.Prob(GetPowerLoaderCollapseChance(ent.Comp, args.User)))
         {
             args.Cancel();
             Collapse(ent);
@@ -249,13 +256,19 @@ public sealed class SharedRMCChairStackSystem : EntitySystem
 
     private void OnAfterInteract(Entity<RMCChairStackComponent> ent, ref AfterInteractEvent args)
     {
-        if (!_net.IsServer ||
-            args.Used != ent.Owner ||
-            !HasComp<PowerLoaderComponent>(args.User) ||
-            _hands.IsHolding(args.User, ent.Owner))
+        if (args.Used != ent.Owner)
+            return;
+
+        if (!HasComp<PowerLoaderComponent>(args.User))
         {
+            if (args.Handled && HasComp<DeployFoldableComponent>(ent))
+                _transform.SetWorldRotation(ent, _transform.GetWorldRotation(args.User));
+
             return;
         }
+
+        if (!_net.IsServer || _hands.IsHolding(args.User, ent.Owner))
+            return;
 
         _transform.SetWorldRotation(ent, _transform.GetWorldRotation(args.User));
         _audio.PlayPvs(ent.Comp.PowerLoaderDropSound, ent);

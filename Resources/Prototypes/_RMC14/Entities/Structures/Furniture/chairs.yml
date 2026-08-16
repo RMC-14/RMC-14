@@ -66,6 +66,7 @@
   - type: RMCChairStackConstructionBlocker
   - type: Foldable
     anchorOnUnfold: true
+    canFoldInsideContainer: true
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/folding_chair.rsi
     layers:
@@ -85,6 +86,10 @@
     damage:
       types:
         Blunt: 10
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 3
   - type: EmitSoundOnLand
     positional: true
     sound:
