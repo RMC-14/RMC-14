@@ -82,7 +82,7 @@ public sealed class RMCChairStackSystem : EntitySystem
             return;
         }
 
-        // The chair being USED FOR stacking must be folded.
+        // The chair being used to add onto the stack must be folded.
         if (!TryComp<FoldableComponent>(used, out var usedFoldable) || !usedFoldable.IsFolded)
             return;
 
@@ -92,7 +92,7 @@ public sealed class RMCChairStackSystem : EntitySystem
         if (TryComp<WieldableComponent>(used, out var wieldable) && wieldable.Wielded)
             return;
 
-        // You can't stack ONTO a folded chair. It needs to be an unfolded chair.
+        // The target chair being stacked on must be unfolded.
         if (TryComp<FoldableComponent>(ent, out var targetFoldable) && targetFoldable.IsFolded)
             return;
 
