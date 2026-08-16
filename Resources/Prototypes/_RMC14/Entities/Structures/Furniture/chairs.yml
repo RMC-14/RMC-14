@@ -60,6 +60,7 @@
     bodyType: Static
   - type: Foldable
     anchorOnUnfold: true
+    canFoldInsideContainer: true
   - type: RMCChairStackable
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/folding_chair.rsi

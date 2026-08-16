@@ -1,3 +1,5 @@
+using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.PowerLoader;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
@@ -38,6 +40,7 @@ public sealed class RMCChairStackSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly SharedToolSystem _tool = default!;
@@ -45,17 +48,18 @@ public sealed class RMCChairStackSystem : EntitySystem
 
     private const string ContainerId = "rmc_chair_stack";
     private const float SpeedFast = 6.67f;
+
+    private static readonly EntProtoId<SkillDefinitionComponent> PowerLoaderSkill = "RMCSkillPowerLoader";
     private static readonly ProtoId<ToolQualityPrototype> WrenchQuality = "Anchoring";
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RMCChairStackableComponent, MapInitEvent>(OnMapInit);
-
         SubscribeLocalEvent<RMCChairStackableComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<RMCChairStackableComponent, InteractHandEvent>(OnInteractHand, before: [typeof(SharedBuckleSystem)]);
         SubscribeLocalEvent<RMCChairStackableComponent, AfterInteractEvent>(OnAfterInteract, after: [typeof(DeployFoldableSystem)]);
+        SubscribeLocalEvent<RMCChairStackableComponent, PowerLoaderGrabEvent>(OnPowerLoaderGrab);
         SubscribeLocalEvent<RMCChairStackableComponent, FoldAttemptEvent>(OnFoldAttempt);
 
         SubscribeLocalEvent<RMCChairStackableComponent, DestructionEventArgs>(OnDestruction);
@@ -63,11 +67,6 @@ public sealed class RMCChairStackSystem : EntitySystem
 
         SubscribeLocalEvent<RMCChairStackableComponent, ThrowDoHitEvent>(OnThrowDoHit);
         SubscribeLocalEvent<RMCChairStackableComponent, ThrowHitByEvent>(OnThrowHitBy);
-    }
-
-    private void OnMapInit(Entity<RMCChairStackableComponent> ent, ref MapInitEvent args)
-    {
-        _container.EnsureContainer<Container>(ent, ContainerId);
     }
 
     private void OnInteractUsing(Entity<RMCChairStackableComponent> ent, ref InteractUsingEvent args)
@@ -84,7 +83,7 @@ public sealed class RMCChairStackSystem : EntitySystem
         }
 
         // The chair being USED FOR stacking must be folded.
-        if (!TryComp<FoldableComponent>(used, out var foldable) || !foldable.IsFolded)
+        if (!TryComp<FoldableComponent>(used, out var usedFoldable) || !usedFoldable.IsFolded)
             return;
 
         if (!HasComp<RMCChairStackableComponent>(used))
@@ -94,7 +93,7 @@ public sealed class RMCChairStackSystem : EntitySystem
             return;
 
         // You can't stack ONTO a folded chair. It needs to be an unfolded chair.
-        if (foldable.IsFolded)
+        if (TryComp<FoldableComponent>(ent, out var targetFoldable) && targetFoldable.IsFolded)
             return;
 
         if (TryComp<StrapComponent>(ent, out var strap) && strap.BuckledEntities.Count > 0)
@@ -162,6 +161,48 @@ public sealed class RMCChairStackSystem : EntitySystem
 
         var userDir = Transform(args.User).LocalRotation.GetCardinalDir();
         _transform.SetLocalRotation(ent, userDir.ToAngle());
+    }
+
+    private void OnPowerLoaderGrab(Entity<RMCChairStackableComponent> ent, ref PowerLoaderGrabEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (ent.Comp.CurrentStackSize <= 0)
+        {
+            foreach (var buckled in args.Buckled)
+            {
+                _popup.PopupClient(Loc.GetString("rmc-chair-stack-power-loader-grab"), ent, buckled);
+            }
+
+            args.Handled = true;
+            return;
+        }
+
+        if (_net.IsClient)
+            return;
+
+        var highestSkill = 0;
+        foreach (var buckled in args.Buckled)
+        {
+            var skill = _skills.GetSkill(buckled, PowerLoaderSkill);
+            if (skill > highestSkill)
+                highestSkill = skill;
+        }
+
+        if (ent.Comp.CurrentStackSize > 8)
+        {
+            var collapseChance = 0.5f / Math.Max(1, highestSkill);
+            if (_random.Prob(collapseChance))
+            {
+                StackCollapse(ent);
+                args.Handled = true;
+                return;
+            }
+        }
+
+        args.ToGrab = ent.Owner;
+        args.Handled = true;
     }
 
     private static void OnFoldAttempt(Entity<RMCChairStackableComponent> ent, ref FoldAttemptEvent args)
