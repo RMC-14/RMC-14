@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/19/2026 23:18:05
+  time: 07/12/2026 09:19:37
   entityCount: 22479
 maps:
 - 1
@@ -99752,7 +99752,7 @@ entities:
   - uid: 7876
     components:
     - type: MetaData
-      name: Survivor Camp
+      name: Cargo Comms Relay
     - type: Transform
       pos: 78.5,12.5
       parent: 1
@@ -165435,7 +165435,7 @@ entities:
     - type: Transform
       pos: 30.5,41.5
       parent: 1
-- proto: RMCWeaponShotgunHG3712
+- proto: RMCWeaponShotgunM12
   entities:
   - uid: 20318
     components:

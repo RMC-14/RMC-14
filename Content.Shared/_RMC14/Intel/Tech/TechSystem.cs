@@ -136,11 +136,11 @@ public sealed class TechSystem : EntitySystem
         if (_idCard.TryFindIdCard(args.Actor, out var idCard) && TryComp(idCard, out ItemIFFComponent? idCardIFF))
             foreach (var faction in idCardIFF.Factions)
             {
-                _core.CreateARESLog(faction, LogCat, (string)$"{Name(args.Actor)} purchased intel node: {option.Name}");
+                _core.CreateARESLog(faction, LogCat, (string)$"{Name(args.Actor)} purchased intel node: {Loc.GetString(option.Name)}");
             }
         else
-        {
-            _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} purchased intel node: {option.Name}");
+        {   
+            _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} purchased intel node: {Loc.GetString(option.Name)}");
         }
     }
 
