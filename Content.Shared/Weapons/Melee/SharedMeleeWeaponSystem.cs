@@ -986,7 +986,8 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             }
         }
 
-        if (!InRange(user, target.Value, component.Range, session))
+        // RMC14
+        if (!InRange(user, target.Value, _rmcMelee.GetUserDisarmRange(user, target.Value, component), session))
         {
             return false;
         }

@@ -72,6 +72,7 @@ public sealed class RMCPullingSystem : EntitySystem
         SubscribeLocalEvent<BuckleComponent, RMCGetPullTargetEvent>(OnGetPullTarget);
 
         SubscribeLocalEvent<XenoComponent, RMCPullToggleEvent>(OnXenoPullToggle);
+        SubscribeLocalEvent<XenoComponent, RMCMeleeUserGetDisarmRangeEvent>(OnXenoPullAlwaysAllowTackle);
 
         SubscribeLocalEvent<ParalyzeOnPullAttemptComponent, PullAttemptEvent>(OnParalyzeOnPullAttempt);
         SubscribeLocalEvent<InfectOnPullAttemptComponent, PullAttemptEvent>(OnInfectOnPullAttempt);
@@ -379,6 +380,18 @@ public sealed class RMCPullingSystem : EntitySystem
         EnsureComp<ActivePreventPulledWhileAliveComponent>(ent);
     }
 
+
+    private void OnXenoPullAlwaysAllowTackle(Entity<XenoComponent> ent, ref RMCMeleeUserGetDisarmRangeEvent args)
+    {
+        if (args.Target is not { } target)
+            return;
+
+        if (!TryComp(ent, out PullerComponent? puller) || puller.Pulling != target)
+            return;
+
+        args.Range = 100f;
+    }
+
     private void OnPreventPulledWhileAliveStop(Entity<PreventPulledWhileAliveComponent> ent, ref PullStoppedMessage args)
     {
         if (args.PulledUid != ent.Owner)
@@ -434,9 +447,9 @@ public sealed class RMCPullingSystem : EntitySystem
     {
         TryStopPullsOn(pullie);
 
-       if (TryComp(pullie, out PullerComponent? puller) &&
-            puller.Pulling != null &&
-            TryComp(puller.Pulling, out PullableComponent? pullable2))
+        if (TryComp(pullie, out PullerComponent? puller) &&
+             puller.Pulling != null &&
+             TryComp(puller.Pulling, out PullableComponent? pullable2))
         {
             _pulling.TryStopPull(puller.Pulling.Value, pullable2, pullie);
             return;

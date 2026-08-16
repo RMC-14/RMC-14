@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines.Skills;
@@ -289,6 +289,20 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
     public float GetUserLightAttackRange(EntityUid user, EntityUid? target, MeleeWeaponComponent melee)
     {
         var ev = new RMCMeleeUserGetRangeEvent(target, melee.Range);
+        RaiseLocalEvent(user, ref ev);
+        return ev.Range;
+    }
+
+    /// <summary>
+    ///     Melee range for a disarm/tackle. Defaults to <paramref name="melee"/>.Range;
+    ///     Allows for modification via <see cref="RMCMeleeUserGetDisarmRangeEvent"/>.
+    /// </summary>
+    /// <param name="user">The entity doing the disarm/tackle</param>
+    /// <param name="target">The initial target of the disarm/tackle</param>
+    /// <param name="melee">The melee weapon component of the weapon being used to disarm/tackle</param>
+    public float GetUserDisarmRange(EntityUid user, EntityUid? target, MeleeWeaponComponent melee)
+    {
+        var ev = new RMCMeleeUserGetDisarmRangeEvent(target, melee.Range);
         RaiseLocalEvent(user, ref ev);
         return ev.Range;
     }
