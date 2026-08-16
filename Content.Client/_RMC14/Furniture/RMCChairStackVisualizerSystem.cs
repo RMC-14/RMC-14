@@ -18,19 +18,18 @@ public sealed class RMCChairStackVisualizerSystem : VisualizerSystem<RMCChairSta
         if (!_appearance.TryGetData<int>(ent, RMCChairStackVisuals.StackSize, out var stackSize))
             stackSize = 0;
 
-        UpdateStackLayers(ent, args.Sprite, stackSize, ent.Comp.MaxStableStack);
+        Entity<SpriteComponent?> spriteEnt = (uid, args.Sprite);
+        UpdateStackLayers(spriteEnt, stackSize, component.MaxStableStack);
 
         // Raise draw depth above mobs when stacked, reset when unstacked
-        Entity<SpriteComponent?> spriteEnt = (ent, args.Sprite);
         if (stackSize > 0)
-            _sprite.SetDrawDepth(spriteEnt, (int)DrawDepth.OverMobs);
+            SpriteSystem.SetDrawDepth(spriteEnt, (int)DrawDepth.OverMobs);
         else
-            _sprite.SetDrawDepth(spriteEnt, (int)DrawDepth.Objects);
+            SpriteSystem.SetDrawDepth(spriteEnt, (int)DrawDepth.Objects);
     }
 
-    private void UpdateStackLayers(EntityUid uid, SpriteComponent sprite, int stackSize, int maxStableStack)
+    private void UpdateStackLayers(Entity<SpriteComponent?> spriteEnt, int stackSize, int maxStableStack)
     {
-        Entity<SpriteComponent?> spriteEnt = (uid, sprite);
 
         var oldChairIdx = 0;
         var oldChairKey = StackLayerPrefix + oldChairIdx;
