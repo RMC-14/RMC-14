@@ -789,13 +789,17 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         }
     }
 
-    // Overcommented to maybe help make the grid->world stuff less confusing, because it certainly confused me.
     private void DrawTileFilled(DrawingHandleWorld handle, EntityUid gridUid, MapGridComponent grid, HashSet<Vector2i> tiles, Color color)
     {
         if (tiles.Count == 0)
             return;
 
         var halfTileSize = grid.TileSizeHalfVector;
+
+        // Overcommented to maybe help make the grid->world stuff less confusing, because it certainly confused me.
+        // This is essentially the same as converting from grid-based `EntityCoordinates` to world-based `MapCoordinates`,
+        // just using raw `Vector2`s instead of the structs since they would fetch the grid's pos+rot for each tile rather than just once.
+        // (maybe a small optimisation, but this is potentially a lot of tiles updating every frame)
 
         // This grid's position and rotation relative to the base world.
         var (worldPos, worldRot) = _transform.GetWorldPositionRotation(gridUid);
