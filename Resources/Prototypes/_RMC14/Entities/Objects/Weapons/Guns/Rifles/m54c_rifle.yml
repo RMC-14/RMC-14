@@ -251,8 +251,8 @@
 
 - type: entity
   parent: RMCWeaponRifleM54CFilled
-  id: RMCWeaponRifleM54CArmy
-  suffix: Army
+  id: RMCWeaponRifleM54CSurvivor
+  suffix: Tyrargo, Survivor
   components:
   - type: AttachableHolder
     slots:

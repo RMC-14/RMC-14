@@ -32,10 +32,10 @@
   - type: IdCard
     jobTitle: rmc-job-name-forecon-spotter
 
-# Tyrargo Army
+# Tyrargo
 - type: entity
   parent: CMIDCardStandardDogtag
-  id: RMCIDCardArmyTrooper
+  id: RMCIDCardTyrargoTrooper
   name: Rifleman's dogtags
   components:
   - type: IdCard
@@ -43,11 +43,11 @@
 
 - type: entity
   parent: CMIDCardStandardDogtag
-  id: RMCIDCardArmyMedic
+  id: RMCIDCardTyrargoMedic
   name: Medic's dogtags
   components:
   - type: IdCard
-    jobTitle: rmc-job-name-army-cmt
+    jobTitle: rmc-job-name-tyrargo-cmt
 
 # Misc
 - type: entity

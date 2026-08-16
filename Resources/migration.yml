@@ -1531,3 +1531,6 @@ RMCJumpsuitSPPPaP: RMCJumpsuitSPPPCG
 RMCIDCardPaP: RMCIDCardPCG
 RMCHeadsetSPPPaP: RMCHeadsetSPPPCG
 RMCCoatPaP: RMCCoatPCG
+
+# 2026-07-31
+FoodBoxPizzaFilled: RMCBoxPizzaRandom

@@ -112,8 +112,8 @@
 
 - type: entity
   parent: WeaponRifleM4SPRFilled
-  id: WeaponRifleM4SPRArmy
-  suffix: Army
+  id: WeaponRifleM4SPRSurvivor
+  suffix: Tyrargo, Survivor
   components:
   - type: AttachableHolder
     slots:

@@ -157,8 +157,8 @@
 
 - type: entity
   parent: WeaponSMGM63
-  id: RMCWeaponSMGM63FilledArmy
-  suffix: Filled, Army
+  id: RMCWeaponSMGM63FilledSurvivor
+  suffix: Survivor
   components:
   - type: ItemSlots
     slots:

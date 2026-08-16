@@ -7,7 +7,9 @@
   startingGear: RMCGearSurvivorFiorinaRiotOfficer
   accessGroups:
   - ColonistSec
-  spawnMenuRoleName: Fiorina Riot Officer (Survivor)
+  ranks:
+    RMCRankCMBRiotControlOfficer: []
+  spawnMenuRoleName: Fiorina CMB Riot Officer (Survivor)
   icon: "RMCJobIconBureauRCO"
   hasIcon: true
   special:

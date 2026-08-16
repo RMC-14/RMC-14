@@ -516,7 +516,7 @@
 - type: entity
   parent: SquadBase
   id: RMCSquadUNMC
-  name: Devil Dogs
+  name: UNMC
   components:
   - type: SquadTeam
     color: "#349c30"
@@ -525,7 +525,7 @@
     - Goggles
     - Armor
     - Gloves
-    radio: MarineArmy
+    radio: MarineSurvivor
     minimapBackground:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: background_unmc

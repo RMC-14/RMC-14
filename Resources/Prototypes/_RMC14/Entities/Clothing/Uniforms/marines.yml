@@ -577,30 +577,28 @@
     - RMCPatchUNMC
     - RMCPatchFORECON
 
-- type: entity
-  parent: JumpsuitMarine
-  id: RMCJumpsuitSurvivorMarineFirefighter
-  suffix: Firefighter, Survivor, Webbing, Patch
-  components:
-  - type: WebbingClothing
-    startingWebbing: RMCWebbingHolsterM77Survivor
-
 # Tyrargo
 - type: entity
   parent: RMCMarineUniformBase
-  id: RMCJumpsuitMarineArmy
-  name: UNMC Devil Dogs uniform
+  id: RMCJumpsuitMarineTyrargo
+  name: UNMC uniform
   description: Standard-issue Marine uniform. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/army_uniform.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/tyrargo_uniform.rsi
   - type: ItemCamouflage
     camouflageVariations: { }
-  - type: WebbingClothing
-    startingWebbing: RMCWebbingPouchForecon
   - type: UniformAccessoryHolder
     startingAccessories:
     - RMCPatchUNMC
+
+- type: entity
+  parent: RMCJumpsuitMarineTyrargo
+  id: RMCJumpsuitMarineTyrargoWebbing
+  suffix: Webbing
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingPouchForecon
 
 # High Command
 

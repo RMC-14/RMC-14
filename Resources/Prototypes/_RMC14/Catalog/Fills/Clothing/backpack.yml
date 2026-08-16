@@ -1,7 +1,7 @@
 - type: entity
-  parent: RMCBackpackArmy
-  id: RMCBackpackArmySurvivorFillCMT
-  suffix: Army CMT, Filled
+  parent: RMCBackpackTyrargo
+  id: RMCBackpackTyrargoSurvivorFillCMT
+  suffix: Tyrargo Medic Tech, Filled
   components:
   - type: StorageFill
     contents:
@@ -11,9 +11,9 @@
     - id: CMHealthAnalyzer
 
 - type: entity
-  parent: RMCBackpackArmy
-  id: RMCBackpackArmySurvivorFillCET
-  suffix: Army CET, Filled
+  parent: RMCBackpackTyrargo
+  id: RMCBackpackTyrargoSurvivorFillCET
+  suffix: Tyrargo Engineer Tech, Filled
   components:
   - type: StorageFill
     contents:
