@@ -421,10 +421,10 @@
     group: UNMC
   - type: Tag
     tags:
-    - RMCSquadUNMC
+    - RMCSquadNVUNMC
 
 - type: Tag
-  id: RMCSquadUNMC
+  id: RMCSquadNVUNMC
 
 - type: entity
   parent: SquadBase

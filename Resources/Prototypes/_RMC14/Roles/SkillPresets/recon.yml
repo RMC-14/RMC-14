@@ -87,7 +87,7 @@
       RMCSkillDomestics: 2
       RMCSkillNavigations: 1
 
-# Varadero UNMC
+# Varadero UNMC (LACN on CM)
 # They're in the same file as FORECON survivors on CM, so I'm applying the same logic here
 
 - type: entity

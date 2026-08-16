@@ -14,7 +14,7 @@
     - type: AssignSquad
       whitelist:
         tags:
-        - RMCSquadUNMC
+        - RMCSquadNVUNMC
     - type: Skills
       preset: RMCSkillPresetSurvivorChaplain
     - type: EquipSurvivorPreset

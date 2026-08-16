@@ -17,7 +17,7 @@
     - type: AssignSquad
       whitelist:
         tags:
-        - RMCSquadUNMC
+        - RMCSquadNVUNMC
     - type: Skills
       preset: RMCSkillPresetSurvivorUNMCRifleman
     - type: RMCSurvivor
@@ -49,7 +49,7 @@
   useLoadoutOfJob: CMSurvivorSecurity # for inheritance
 
 - type: startingGear
-  id: RMCGearSurvivorUNMCBasePolice # This loadout is supposed to have MP stuff but these are not real MP's. Replaced the jacket and jumpsuit with their counterparts
+  id: RMCGearSurvivorUNMCBasePolice # This loadout is supposed to have MP stuff but these are not real MP's. Replaced the jacket and jumpsuit with their marine counterparts
   equipment:
     jumpsuit: JumpsuitMarine
     outerClothing: RMCCoatService
@@ -69,7 +69,7 @@
   id: RMCSurvivorPresetUNMCBasePolice
   name: varadero base police preset
   categories: [ HideSpawnMenu ]
-  components: # This preset is supposed to have MP stuff but these are not real MP's. Replaced the cap and helmet with their counterparts
+  components: # This preset is supposed to have MP stuff but these are not real MP's. Replaced the cap and helmet with their marine counterparts
     - type: EntityPreset
       randomOutfits:
         - [ ArmorHelmetM10 ]

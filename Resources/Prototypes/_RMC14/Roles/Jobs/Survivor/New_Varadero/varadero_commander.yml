@@ -41,7 +41,7 @@
     - type: AssignSquad
       whitelist:
         tags:
-        - RMCSquadUNMC
+        - RMCSquadNVUNMC
   hidden: true
   useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
 
@@ -54,7 +54,7 @@
     outerClothing: RMCCoatServiceFolded
     shoes: CMBootsBlackFilled
     back: CMSatchelLiaisonSecure
-    belt: RMCMatebaBeltForeconFilled # TODO RMC14: M1911 CO Variant. Mateba for now since it's the closest thing
+    belt: RMCMatebaBeltForeconFilled # TODO RMC14: M1911 CO Variant (PR #9863). Mateba for now since both guns are about equal in power
     id: CMIDCardGold
     pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchGeneralLarge
