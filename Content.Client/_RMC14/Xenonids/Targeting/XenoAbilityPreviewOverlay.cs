@@ -240,68 +240,6 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         }
     }
 
-    private void DrawTunnelableTiles(in OverlayDrawArgs args, MapCoordinates originMap, XenoDigTunnelActionEvent tunnelEvent)
-    {
-        if (!_mapManager.TryFindGridAt(originMap, out var gridUid, out var grid))
-            return;
-
-        bool updateTileCache;
-        // If `_lastWorldBounds` hasn't been set yet or the screen's rotation has changed, update the tile cache.
-        if (_lastWorldBounds is not { } lastWorldBounds ||
-            lastWorldBounds.Rotation.GetCardinalDir() != args.WorldBounds.Rotation.GetCardinalDir())
-        {
-            updateTileCache = true;
-        }
-        // Otherwise, only update if the screen has moved more than a quarter tile in any direction.
-        else
-        {
-            var quarterTile = grid.TileSize / 4;
-            var diff = System.Numerics.Vector4.Abs(lastWorldBounds.Box.AsVector4 - args.WorldBounds.Box.AsVector4);
-
-            updateTileCache = diff.X > quarterTile || diff.Y > quarterTile || diff.Z > quarterTile || diff.W > quarterTile;
-        }
-
-        if (updateTileCache)
-        {
-            _tunnleableTileCache.Clear();
-            _lastWorldBounds = args.WorldBounds;
-
-            if (_almayerQ.HasComp(gridUid))
-                return;
-
-            foreach (var tile in _mapSystem.GetTilesIntersecting(gridUid, grid, args.WorldBounds))
-            {
-                if (!_turf.GetContentTileDefinition(tile).CanPlaceTunnel)
-                    continue;
-
-                if (!_area.TryGetArea((gridUid, grid), tile.GridIndices, out var area, out _))
-                    continue;
-                if (area.Value.Comp.NoTunnel)
-                    continue;
-
-                if (_turf.IsTileBlocked(tile, CollisionGroup.Impassable | CollisionGroup.MidImpassable | CollisionGroup.HighImpassable))
-                    continue;
-                if (_mapSystem.GetAnchoredEntities(gridUid, grid, tile.GridIndices).Any(_blockXenoConstructionQ.HasComp))
-                    continue;
-
-                _tunnleableTileCache.Add(tile.GridIndices);
-            }
-        }
-
-        // Filled and outlined overlay for all tunnelable tiles.
-        DrawTileFilled(args.WorldHandle, gridUid, grid, _tunnleableTileCache, TunnelAllowedFillColor);
-        DrawTileBorder(args.WorldHandle, gridUid, grid, _tunnleableTileCache, TunnelAllowedOutlineColor);
-
-        // Little "ghost" tunnel sprite on the tile that it will be placed.
-        if (TryGetTileIndices(originMap, out var playerTile) && _tunnleableTileCache.Contains(playerTile.Indices))
-        {
-            var spritePosition = _mapSystem.TileToVector((gridUid, grid), playerTile.Indices);
-            var tunnelSprite = _sprite.GetPrototypeIcon(tunnelEvent.Prototype).TextureFor(Direction.South);
-
-            args.WorldHandle.DrawTexture(tunnelSprite, spritePosition, new Color(0f, 0f, 0f, 0.5f));
-        }
-    }
-
     private void DrawResinSurge(
         in OverlayDrawArgs args,
         MapCoordinates originMap,
@@ -498,6 +436,68 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         }
 
         DrawTileBorder(args.WorldHandle, gridUid, grid, aoeTiles, color);
+    }
+
+    private void DrawTunnelableTiles(in OverlayDrawArgs args, MapCoordinates originMap, XenoDigTunnelActionEvent tunnelEvent)
+    {
+        if (!_mapManager.TryFindGridAt(originMap, out var gridUid, out var grid))
+            return;
+
+        bool updateTileCache;
+        // If `_lastWorldBounds` hasn't been set yet or the screen's rotation has changed, update the tile cache.
+        if (_lastWorldBounds is not { } lastWorldBounds ||
+            lastWorldBounds.Rotation.GetCardinalDir() != args.WorldBounds.Rotation.GetCardinalDir())
+        {
+            updateTileCache = true;
+        }
+        // Otherwise, only update if the screen has moved more than a quarter tile in any direction.
+        else
+        {
+            var quarterTile = grid.TileSize / 4;
+            var diff = System.Numerics.Vector4.Abs(lastWorldBounds.Box.AsVector4 - args.WorldBounds.Box.AsVector4);
+
+            updateTileCache = diff.X > quarterTile || diff.Y > quarterTile || diff.Z > quarterTile || diff.W > quarterTile;
+        }
+
+        if (updateTileCache)
+        {
+            _tunnleableTileCache.Clear();
+            _lastWorldBounds = args.WorldBounds;
+
+            if (_almayerQ.HasComp(gridUid))
+                return;
+
+            foreach (var tile in _mapSystem.GetTilesIntersecting(gridUid, grid, args.WorldBounds))
+            {
+                if (!_turf.GetContentTileDefinition(tile).CanPlaceTunnel)
+                    continue;
+
+                if (!_area.TryGetArea((gridUid, grid), tile.GridIndices, out var area, out _))
+                    continue;
+                if (area.Value.Comp.NoTunnel)
+                    continue;
+
+                if (_turf.IsTileBlocked(tile, CollisionGroup.Impassable | CollisionGroup.MidImpassable | CollisionGroup.HighImpassable))
+                    continue;
+                if (_mapSystem.GetAnchoredEntities(gridUid, grid, tile.GridIndices).Any(_blockXenoConstructionQ.HasComp))
+                    continue;
+
+                _tunnleableTileCache.Add(tile.GridIndices);
+            }
+        }
+
+        // Filled and outlined overlay for all tunnelable tiles.
+        DrawTileFilled(args.WorldHandle, gridUid, grid, _tunnleableTileCache, TunnelAllowedFillColor);
+        DrawTileBorder(args.WorldHandle, gridUid, grid, _tunnleableTileCache, TunnelAllowedOutlineColor);
+
+        // Little "ghost" tunnel sprite on the tile that it will be placed.
+        if (TryGetTileIndices(originMap, out var playerTile) && _tunnleableTileCache.Contains(playerTile.Indices))
+        {
+            var spritePosition = _mapSystem.TileToVector((gridUid, grid), playerTile.Indices);
+            var tunnelSprite = _sprite.GetPrototypeIcon(tunnelEvent.Prototype).TextureFor(Direction.South);
+
+            args.WorldHandle.DrawTexture(tunnelSprite, spritePosition, new Color(0f, 0f, 0f, 0.5f));
+        }
     }
 
     private void DrawBurrowRange(
