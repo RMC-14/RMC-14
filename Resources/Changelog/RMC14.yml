@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: monomethylhydrazine
   changes:
-  - message: Added the SPP Support Synthetic.
-    type: Add
-  id: 3081
-  time: '2026-04-07T03:20:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8388
-- author: monomethylhydrazine
-  changes:
   - message: Added jobs for survivors of 173/RECON, an SPP special forces unit crashlanded
       on Trijent Dam.
     type: Add
@@ -4542,5 +4535,14 @@
   id: 3580
   time: '2026-08-16T14:52:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10483
+- author: Vermidia
+  changes:
+  - message: Fixed spray acid and bone chips needing LOS to use on a tile.
+    type: Fix
+  - message: Fixed pierce preview showing it'd be blocked by cades.
+    type: Fix
+  id: 3581
+  time: '2026-08-16T14:54:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10416
 Name: RMC14
 Order: -1
