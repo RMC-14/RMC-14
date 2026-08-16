@@ -77,6 +77,10 @@ public sealed class MotionDetectorSystem : EntitySystem
     private void OnXenoInfect(XenoParasiteInfectEvent ev)
     {
         DisableDetectorsOnMob(ev.Target);
+
+        if (HasComp<MotionDetectorTrackedComponent>(ev.Target))
+            return;
+        Dirty(ev.Target, EnsureComp<MotionDetectorTrackedComponent>(ev.Target)); // Adds MotionDetectorTrackedComponent to entities that don't have it so they can be tracked.
     }
 
     private void OnMobStateChanged(MobStateChangedEvent ev)
