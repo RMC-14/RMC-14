@@ -105,9 +105,6 @@ public sealed class RMCChairStackSystem : EntitySystem
             return;
         }
 
-        if (_net.IsClient)
-            return;
-
         var container = _container.EnsureContainer<Container>(ent, ContainerId);
 
         if (!_hands.TryDrop(args.User, used))
@@ -126,9 +123,9 @@ public sealed class RMCChairStackSystem : EntitySystem
 
         if (ent.Comp.CurrentStackSize > ent.Comp.MaxStableStack)
         {
-            _popup.PopupClient(Loc.GetString("rmc-chair-stack-unstable"), ent, args.User);
+            _popup.PopupClient(Loc.GetString("rmc-chair-stack-unstable"), ent, args.User, PopupType.SmallCaution);
 
-            var collapseChance = (float) Math.Sqrt(50 * ent.Comp.CurrentStackSize) / 100;
+            var collapseChance = (float)Math.Sqrt(50 * ent.Comp.CurrentStackSize) / 100;
             if (_random.Prob(collapseChance))
                 StackCollapse(ent);
         }
@@ -140,9 +137,6 @@ public sealed class RMCChairStackSystem : EntitySystem
             return;
 
         if (ent.Comp.CurrentStackSize <= 0)
-            return;
-
-        if (_net.IsClient)
             return;
 
         var container = _container.EnsureContainer<Container>(ent, ContainerId);
@@ -200,8 +194,7 @@ public sealed class RMCChairStackSystem : EntitySystem
         if (!HasComp<MobStateComponent>(args.Target))
             return;
 
-        if (_net.IsServer)
-            _audio.PlayPvs(ent.Comp.ThrownHitSound, ent);
+        _audio.PlayPvs(ent.Comp.ThrownHitSound, ent);
     }
 
     private void OnThrowHitBy(Entity<RMCChairStackableComponent> ent, ref ThrowHitByEvent args)
@@ -244,7 +237,7 @@ public sealed class RMCChairStackSystem : EntitySystem
                     new PhysShapeCircle(ent.Comp.StackFixtureRadius),
                     ent.Comp.StackFixtureId,
                     hard: true,
-                    collisionLayer: (int) CollisionGroup.MidImpassable);
+                    collisionLayer: (int)CollisionGroup.MidImpassable);
 
                 stackFixture = _fixture.GetFixtureOrNull(ent, ent.Comp.StackFixtureId);
             }
@@ -252,7 +245,7 @@ public sealed class RMCChairStackSystem : EntitySystem
             if (stackFixture != null)
             {
                 _physics.SetHard(ent, stackFixture, true);
-                _physics.AddCollisionLayer(ent, ent.Comp.StackFixtureId, stackFixture, (int) CollisionGroup.MidImpassable);
+                _physics.AddCollisionLayer(ent, ent.Comp.StackFixtureId, stackFixture, (int)CollisionGroup.MidImpassable);
             }
         }
         else
@@ -278,7 +271,7 @@ public sealed class RMCChairStackSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        _popup.PopupEntity(Loc.GetString("rmc-chair-stack-collapse"), ent);
+        _popup.PopupEntity(Loc.GetString("rmc-chair-stack-collapse"), ent, PopupType.LargeCaution);
         _audio.PlayPvs(ent.Comp.CollapseSound, ent);
 
         var container = _container.EnsureContainer<Container>(ent, ContainerId);

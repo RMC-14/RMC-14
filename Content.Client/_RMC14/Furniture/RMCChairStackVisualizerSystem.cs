@@ -6,21 +6,11 @@ using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 
 namespace Content.Client._RMC14.Furniture;
 
-public sealed class RMCChairStackVisualizerSystem : EntitySystem
+public sealed class RMCChairStackVisualizerSystem : VisualizerSystem<RMCChairStackableComponent>
 {
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-
     private const string StackLayerPrefix = "rmc_chair_stack_";
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<RMCChairStackableComponent, AppearanceChangeEvent>(OnAppearanceChange);
-    }
-
-    private void OnAppearanceChange(Entity<RMCChairStackableComponent> ent, ref AppearanceChangeEvent args)
+    protected override void OnAppearanceChange(EntityUid uid, RMCChairStackableComponent component, ref AppearanceChangeEvent args)
     {
         if (args.Sprite == null)
             return;
@@ -33,30 +23,24 @@ public sealed class RMCChairStackVisualizerSystem : EntitySystem
         // Raise draw depth above mobs when stacked, reset when unstacked
         Entity<SpriteComponent?> spriteEnt = (ent, args.Sprite);
         if (stackSize > 0)
-            _sprite.SetDrawDepth(spriteEnt, (int) DrawDepth.OverMobs);
+            _sprite.SetDrawDepth(spriteEnt, (int)DrawDepth.OverMobs);
         else
-            _sprite.SetDrawDepth(spriteEnt, (int) DrawDepth.Objects);
+            _sprite.SetDrawDepth(spriteEnt, (int)DrawDepth.Objects);
     }
 
     private void UpdateStackLayers(EntityUid uid, SpriteComponent sprite, int stackSize, int maxStableStack)
     {
         Entity<SpriteComponent?> spriteEnt = (uid, sprite);
 
-        var toRemove = new List<(string Key, int Index)>();
-        for (var i = 0; i < 50; i++)
+        var oldChairIdx = 0;
+        var oldChairKey = StackLayerPrefix + oldChairIdx;
+        while (SpriteSystem.LayerMapTryGet(spriteEnt, oldChairKey, out var index, false))
         {
-            var key = StackLayerPrefix + i;
-            if (_sprite.LayerMapTryGet(spriteEnt, key, out var index, false))
-                toRemove.Add((key, index));
-            else
-                break;
-        }
+            SpriteSystem.LayerMapRemove(spriteEnt, oldChairKey);
+            SpriteSystem.RemoveLayer(spriteEnt, index);
 
-        toRemove.Sort((a, b) => b.Index.CompareTo(a.Index));
-        foreach (var (key, index) in toRemove)
-        {
-            _sprite.LayerMapRemove(spriteEnt, key);
-            _sprite.RemoveLayer(spriteEnt, index);
+            oldChairIdx++;
+            oldChairKey = StackLayerPrefix + oldChairIdx;
         }
 
         if (stackSize <= 0)
@@ -72,49 +56,30 @@ public sealed class RMCChairStackVisualizerSystem : EntitySystem
             return;
 
         const float pxToWorld = 1f / EyeManager.PixelsPerMeter;
-        float deltaX;
-        float deltaY;
 
-        var dir = Transform(uid).LocalRotation.GetCardinalDir();
-        switch (dir)
+        var dir = Transform(spriteEnt).LocalRotation.GetCardinalDir();
+        var delta = dir switch
         {
-            case Direction.South:
-                deltaX = 0;
-                deltaY = 2 * pxToWorld;
-                break;
-            case Direction.East:
-                deltaX = 1 * pxToWorld;
-                deltaY = 3 * pxToWorld;
-                break;
-            case Direction.North:
-                deltaX = 0;
-                deltaY = 2 * pxToWorld;
-                break;
-            case Direction.West:
-                deltaX = -1 * pxToWorld;
-                deltaY = 3 * pxToWorld;
-                break;
-            default:
-                deltaX = 0;
-                deltaY = 2 * pxToWorld;
-                break;
-        }
+            Direction.East => new Vector2(1 * pxToWorld, 3 * pxToWorld),
+            Direction.West => new Vector2(-1 * pxToWorld, 3 * pxToWorld),
+            // North and south both have the same offset.
+            _ => new Vector2(0, 2 * pxToWorld)
+        };
 
         for (var i = 0; i < stackSize; i++)
         {
             var level = i + 1; // level 1 = first stacked chair above base
-            var offsetX = deltaX * level;
-            var offsetY = deltaY * level;
+            var offset = delta * level;
 
             // if(stacked_size > 8) I.pixel_x += pick(list(-1, 1))
             if (stackSize > maxStableStack)
-                offsetX += (i % 2 == 0 ? -1 : 1) * pxToWorld;
+                offset.X += (i % 2 == 0 ? -1 : 1) * pxToWorld;
 
             var layerData = new PrototypeLayerData
             {
                 RsiPath = rsi.ToString(),
                 State = state,
-                Offset = new Vector2(offsetX, offsetY),
+                Offset = offset,
                 Visible = true,
             };
 

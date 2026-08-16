@@ -16,12 +16,12 @@
 - files: ["metal_chair_crash.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
-  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/weapons/metal_chair_crash.ogg"
+  source: "https://github.com/cmss13-devs/cmss13/blob/fcd8706ca5a7496da205aa6349ccaa2ed515ca97/sound/weapons/metal_chair_crash.ogg"
 
 - files: ["metal_chair_slam.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
-  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/weapons/metal_chair_slam.ogg"
+  source: "https://github.com/cmss13-devs/cmss13/blob/fcd8706ca5a7496da205aa6349ccaa2ed515ca97/sound/weapons/metal_chair_slam.ogg"
 
 - files: ["megaphone.ogg"]
   license: "CC-BY-SA-3.0"

@@ -4,7 +4,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Furniture;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class RMCChairStackableComponent : Component
 {
     /// <summary>
@@ -28,7 +28,7 @@ public sealed partial class RMCChairStackableComponent : Component
     public string StackFixtureId = "stack_block";
 
     [DataField]
-    public float StackFixtureRadius = 0.35f;
+    public float StackFixtureRadius = 0.3f;
 
     [DataField]
     public TimeSpan ThrownMobStatusDuration = TimeSpan.FromSeconds(4);
