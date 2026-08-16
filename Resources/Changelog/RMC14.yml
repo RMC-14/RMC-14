@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: CatAndHats
   changes:
-  - message: Watcher Parasite now has a slightly distinct sprite from base Parasite
-    type: Tweak
-  id: 3078
-  time: '2026-04-07T03:19:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9512
-- author: CatAndHats
-  changes:
   - message: Praetorian Oppressor's Abduct and Vanguard's Pierce abilities now have
       a tile preview overlay
     type: Add
@@ -4539,5 +4532,15 @@
   id: 3577
   time: '2026-08-16T13:56:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10612
+- author: kleinerstation13
+  changes:
+  - message: Ported US Army Tyrargo Rift survivors from CM13, currently unused
+    type: Add
+  - message: Ported a lot of Tyrargo Rift tile types, props and forest hull wall types
+      for mappers
+    type: Add
+  id: 3578
+  time: '2026-08-16T14:22:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9830
 Name: RMC14
 Order: -1
