@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: SharkSnake98
-  changes:
-  - message: Added a 4x2 WEYA floor decal for mapping use
-    type: Add
-  id: 3083
-  time: '2026-04-08T04:27:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9488
 - author: Ian321
   changes:
   - message: Requisitions now also stocks replacement squad headsets with built in
@@ -4543,5 +4536,12 @@
   id: 3582
   time: '2026-08-16T18:13:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10319
+- author: CatAndHats
+  changes:
+  - message: Fixed xenonids being able to plant eggs inside vehicles
+    type: Fix
+  id: 3583
+  time: '2026-08-16T22:15:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10693
 Name: RMC14
 Order: -1
