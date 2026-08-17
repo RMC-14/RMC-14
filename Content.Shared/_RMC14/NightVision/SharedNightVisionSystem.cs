@@ -27,7 +27,7 @@ public abstract class SharedNightVisionSystem : EntitySystem
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly VisorSystem _visor = default!;
-    [Dependency] private readonly Whitelist _whitelist = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {

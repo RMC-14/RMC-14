@@ -64,9 +64,9 @@
   - type: NightVisionItem
     mesons: true
     defaultState: half
-      whitelist:
+    whitelist:
       components:
-        - SniperWhitelist
+      - SniperWhitelist
   - type: RMCCryoUnavailableOnStore
   - type: Appearance
   - type: GenericVisualizer

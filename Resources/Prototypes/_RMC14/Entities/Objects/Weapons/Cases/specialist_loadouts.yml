@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: RMCBaseEquipmentCase
   id: CMSniperEquipmentCase
   name: sniper equipment case
@@ -274,7 +274,7 @@
     contents:
     - id: CMArmorM45
     - id: CMArmorHelmetM45
-    - id: CMGlassesM42ScoutSight
+    - id: CMGlassesM42SpotterSight
     - id: CMBackpackSniper
     - id: RMCLaserDesignatorSpotter
     - id: CMPamphletSpotter
