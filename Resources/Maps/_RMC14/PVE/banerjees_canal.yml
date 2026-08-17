@@ -372124,8 +372124,6 @@ entities:
     - type: Transform
       pos: 19.470451,12.547643
       parent: 1
-- proto: RMCLaptopBudget
-  entities:
   - uid: 73443
     components:
     - type: Transform
