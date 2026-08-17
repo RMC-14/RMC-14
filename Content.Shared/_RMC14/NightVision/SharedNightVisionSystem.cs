@@ -10,6 +10,7 @@ using Content.Shared.Popups;
 using Content.Shared.Rounding;
 using Content.Shared.Toggleable;
 using Content.Shared.Verbs;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 
@@ -26,6 +27,7 @@ public abstract class SharedNightVisionSystem : EntitySystem
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly VisorSystem _visor = default!;
+    [Dependency] private readonly Whitelist _whitelist = default!;
 
     public override void Initialize()
     {
@@ -269,6 +271,12 @@ public abstract class SharedNightVisionSystem : EntitySystem
         DisableNightVisionItem(item, item.Comp.User);
 
         if (item.Comp.Skills != null && !_skills.HasAllSkills(user, item.Comp.Skills))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-skills-hud-toggle"), user, user, PopupType.MediumCaution);
+            return;
+        }
+
+        if (item.Comp.Whitelist != null && !_whitelist.IsWhitelistPass(item.Comp.Whitelist, user))
         {
             _popup.PopupClient(Loc.GetString("rmc-skills-hud-toggle"), user, user, PopupType.MediumCaution);
             return;
