@@ -40,5 +40,5 @@
   parent: CMJobIconBase
   id: RMCJobIconForeconRifleman
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/marine.rsi
     state: hudsquad_rifleman

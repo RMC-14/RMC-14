@@ -18,7 +18,7 @@
     rank: RMCRankWeYaOperator
   - type: Marine
     icon:
-      sprite: _RMC14/Interface/cm_job_icons.rsi
+      sprite: _RMC14/Interface/job_icons/We-Ya/pmc.rsi
       state: pmc_gun
 
 - type: startingGear
@@ -64,7 +64,7 @@
     rank: RMCRankCivilianOfficer
   - type: Marine
     icon:
-      sprite: _RMC14/Interface/cm_job_icons.rsi
+      sprite: _RMC14/Interface/job_icons/We-Ya/goon.rsi
       state: weya_goon_standard
 
 - type: startingGear
@@ -120,7 +120,7 @@
     rank: RMCRankCivilianSeniorOfficer
   - type: Marine
     icon:
-      sprite: _RMC14/Interface/cm_job_icons.rsi
+      sprite: _RMC14/Interface/job_icons/We-Ya/goon.rsi
       state: weya_goon_lead
 
 - type: randomHumanoidSettings
