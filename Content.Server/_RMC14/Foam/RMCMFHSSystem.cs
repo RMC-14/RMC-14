@@ -147,7 +147,7 @@ public sealed class RMCMFHSSystem : EntitySystem
                 QueueDel(target);
 
             if (HasComp<MobStateComponent>(target))
-                _stun.TryKnockdown(target, component.StunTime, true);
+                _stun.TryKnockdown(target, component.StunTime, true, force: true);
 
             if (!TryComp<PhysicsComponent>(target, out var physics) || Transform(target).Anchored)
                 continue;
@@ -164,7 +164,10 @@ public sealed class RMCMFHSSystem : EntitySystem
 
     private void TryStartFoam(EntityCoordinates tile, EntProtoId foam, RMCMFHSComponent component)
     {
-        if (!CanFormFoam(tile))
+        // Mobs do not prevent the expansion from starting: the footprint-wide clear has
+        // already knocked them down and pushed them outward. Only a mob that remains on
+        // the tile when it is ready to become dense suppresses that final wall.
+        if (!CanFormFoam(tile, ignoreMobs: true))
             return;
 
         SpawnAtPosition(foam, tile);
@@ -179,7 +182,7 @@ public sealed class RMCMFHSSystem : EntitySystem
         });
     }
 
-    private bool CanFormFoam(EntityCoordinates tile, bool ignoreExpandingFoam = false)
+    private bool CanFormFoam(EntityCoordinates tile, bool ignoreExpandingFoam = false, bool ignoreMobs = false)
     {
         _entities.Clear();
         _lookup.GetEntitiesInRange(tile, 0.45f, _entities, LookupFlags.Uncontained);
@@ -187,7 +190,7 @@ public sealed class RMCMFHSSystem : EntitySystem
         foreach (var target in _entities)
         {
             // Never solidify around a mob, even if the initial knockback could not move it.
-            if (HasComp<MobStateComponent>(target))
+            if (!ignoreMobs && HasComp<MobStateComponent>(target))
                 return false;
         }
 
