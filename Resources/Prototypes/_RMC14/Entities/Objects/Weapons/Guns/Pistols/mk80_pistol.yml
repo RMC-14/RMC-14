@@ -82,8 +82,8 @@
 
 - type: entity
   parent: RMCMK80
-  id: RMCMK80Army
-  suffix: Army
+  id: RMCMK80Survivor
+  suffix: Survivor
   components:
   - type: AttachableHolder
     slots:

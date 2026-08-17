@@ -124,8 +124,8 @@
     - id: RMCBaseballBat
 
 - type: entity
-  parent: RMCSatchelArmy
-  id: RMCSatchelArmySurvivorFill
+  parent: RMCSatchelTyrargo
+  id: RMCSatchelTyrargoSurvivorFill
   suffix: Survivor, Filled
   components:
   - type: StorageFill
@@ -133,8 +133,8 @@
     - id: RMCRadioHandheldColony
 
 - type: entity
-  parent: RMCSatchelArmy
-  id: RMCSatchelArmySurvivorSquadLeaderFill
+  parent: RMCSatchelTyrargo
+  id: RMCSatchelTyrargoSurvivorSquadLeaderFill
   suffix: Survivor, Filled, Squad Leader
   components:
   - type: StorageFill
@@ -143,8 +143,8 @@
     - id: RMCRangefinder
 
 - type: entity
-  parent: RMCSatchelArmy
-  id: RMCSatchelArmySurvivorHeavyGunnerFill
+  parent: RMCSatchelTyrargo
+  id: RMCSatchelTyrargoSurvivorHeavyGunnerFill
   suffix: Survivor, Filled, Heavy Gunner
   components:
   - type: StorageFill
@@ -153,8 +153,8 @@
     - id: RMCPowerCellSmartgun
 
 - type: entity
-  parent: RMCSatchelArmy
-  id: RMCSatchelArmySurvivorSynthFill
+  parent: RMCSatchelTyrargo
+  id: RMCSatchelTyrargoSurvivorSynthFill
   suffix: Survivor, Filled, Synth
   components:
   - type: StorageFill
@@ -167,9 +167,9 @@
     - id: RMCCableCoil
 
 - type: entity
-  parent: RMCSatchelArmy
-  id: RMCSatchelArmySurvivorCommanderFill
-  suffix: Army Commander, Filled
+  parent: RMCSatchelTyrargo
+  id: RMCSatchelTyrargoSurvivorCommanderFill
+  suffix: Tyrargo Commander, Filled
   components:
   - type: StorageFill
     contents:

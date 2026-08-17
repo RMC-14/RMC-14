@@ -411,6 +411,15 @@
     state: horizon
 
 - type: entity
+  parent: CMPosterBase
+  id: CMPosterTartarus
+  name: "Tartarus Mining Co. poster"
+  description: "A simplified version of the Tartarus Mining Co. logo. The Tartarus Mining Company is of course a subsidiary company of the Weston-Yamada Corporation, what did you expect?"
+  components:
+  - type: Sprite
+    state: tartarus
+
+- type: entity
   parent: CMPosterElectro
   id: CMPosterElectroMan
   description: "Electro Golds - lovingly machine rolled for YOUR pleasure."
@@ -705,6 +714,15 @@
   components:
   - type: Sprite
     state: weya_5
+
+- type: entity
+  parent: RMCPosterWEYA1
+  id: RMCPosterROCreed
+  name: founders plaque
+  description: A plaque with the names of the research team of this facility, including the founders and contributors.
+  components:
+  - type: Sprite
+    state: rocreed
 
 # Daniel
 - type: entity
@@ -1005,7 +1023,7 @@
 - type: entity
   parent: CMPosterBase
   id: CMPosterTyrargoCheckpointNotice
-  name: "US military checkpoint notice"
+  name: "UN military checkpoint notice"
   description: "A military notice poster, it reads: Halt. UN Marine Corps checkpoint ahead. Comply or be shot."
   components:
   - type: Sprite
@@ -1015,8 +1033,8 @@
 - type: entity
   parent: CMPosterBase
   id: CMPosterTyrargoQuarantineNotice
-  name: "ICC quarantine notice"
-  description: "A quarantine poster, bearing the ICC's logo, it reads: This area is designated a secure transit zone by the ICC and UN Marine Corps. Non-compliance with military directives is punishable under the Interplanetary Biohazard Preparedness Act."
+  name: "ICB quarantine notice"
+  description: "A quarantine poster, bearing the ICB's logo, it reads: This area is designated a secure transit zone by the ICB and UN Marine Corps. Non-compliance with military directives is punishable under the Interplanetary Biohazard Preparedness Act."
   components:
   - type: Sprite
     state: icc

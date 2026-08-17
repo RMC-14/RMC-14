@@ -2,7 +2,7 @@
   parent: CMSurvivor
   id: RMCSurvivorShivasPanicRoomCivilian
   name: cm-job-name-survivor
-  spawnMenuRoleName: Civilian (Shivas Panic Room Special Survivor)
+  spawnMenuRoleName: Civilian (Shivas Special Survivor)
   playTimeTracker: CMJobSurvivor
 
 - type: entity
