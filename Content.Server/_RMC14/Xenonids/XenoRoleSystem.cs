@@ -2,6 +2,7 @@ using Content.Server.GameTicking;
 using Content.Server.Mind;
 using Content.Server.Players.PlayTimeTracking;
 using Content.Server.Roles;
+using Content.Server._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -44,10 +45,10 @@ public sealed class XenoRoleSystem : EntitySystem
     private TimeSpan _rankFiveTime;
     private TimeSpan _rankSixTime;
 
-    private int _rankMatureThreshold;
-    private int _rankElderThreshold;
-    private int _rankAncientThreshold;
-    private int _rankPrimeThreshold;
+    private int _rankParaFledgelingThreshold;
+    private int _rankParaVeteranThreshold;
+    private int _rankParaBanefulThreshold;
+    private int _rankParaMercilessThreshold;
 
     private readonly List<Entity<XenoComponent>> _toUpdate = new();
 
@@ -71,10 +72,10 @@ public sealed class XenoRoleSystem : EntitySystem
         Subs.CVar(_config, RMCCVars.RMCPlaytimePlatinumMedalTimeHours, v => _rankFiveTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimeRubyMedalTimeHours, v => _rankSixTime = TimeSpan.FromHours(v), true);
 
-        Subs.CVar(_config, RMCCVars.RMCXenoInfectRankMatureThreshold, v => _rankMatureThreshold = v, true);
-        Subs.CVar(_config, RMCCVars.RMCXenoInfectRankElderThreshold, v => _rankElderThreshold = v, true);
-        Subs.CVar(_config, RMCCVars.RMCXenoInfectRankAncientThreshold, v => _rankAncientThreshold = v, true);
-        Subs.CVar(_config, RMCCVars.RMCXenoInfectRankPrimeThreshold, v => _rankPrimeThreshold = v, true);
+        Subs.CVar(_config, RMCCVars.RMCXenoInfectRankMatureThreshold, v => _rankParaFledgelingThreshold = v, true);
+        Subs.CVar(_config, RMCCVars.RMCXenoInfectRankElderThreshold, v => _rankParaVeteranThreshold = v, true);
+        Subs.CVar(_config, RMCCVars.RMCXenoInfectRankAncientThreshold, v => _rankParaBanefulThreshold = v, true);
+        Subs.CVar(_config, RMCCVars.RMCXenoInfectRankPrimeThreshold, v => _rankParaMercilessThreshold = v, true);
 
         Subs.CVar(_config, RMCCVars.RMCDisconnectedXenoGhostRoleTimeSeconds, v => _disconnectedXenoGhostRoleTime = TimeSpan.FromSeconds(v), true);
     }
@@ -154,16 +155,16 @@ public sealed class XenoRoleSystem : EntitySystem
             // The parasite role is ranked by total successful infections instead of playtime.
             // Note: parasites currently top out at rank 5 (Prime/Merciless); a rank 6 of Royal however is parity but undesired at this time.
             // TODO RMC14: Parasites need a rank 6 when a name is devised, which needs to be added here when ready.
-            var infects = _infectionsManager.GetInfects(player.UserId);
+            var infects = _infectionsManager.GetInfects(player);
             if (infects <= 0)
                 rank = 0;
-            else if (infects >= _rankPrimeThreshold)
+            else if (infects >= _rankParaMercilessThreshold)
                 rank = 5;
-            else if (infects >= _rankAncientThreshold)
+            else if (infects >= _rankParaBanefulThreshold)
                 rank = 4;
-            else if (infects >= _rankElderThreshold)
+            else if (infects >= _rankParaVeteranThreshold)
                 rank = 3;
-            else if (infects >= _rankMatureThreshold)
+            else if (infects >= _rankParaFledgelingThreshold)
                 rank = 2;
             else
                 rank = 0;

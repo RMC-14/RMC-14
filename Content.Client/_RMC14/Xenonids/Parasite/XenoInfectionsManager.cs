@@ -1,7 +1,7 @@
-using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Robust.Shared.Network;
 
-namespace Content.Client._RMC14.Xenonids;
+namespace Content.Client._RMC14.Xenonids.Parasite;
 
 /// <summary>
 /// Receives and caches the local player's total successful parasite infections, sent by the server.

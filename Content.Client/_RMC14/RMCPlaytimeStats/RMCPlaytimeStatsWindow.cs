@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Content.Client._RMC14.Xenonids;
+using Content.Client._RMC14.Xenonids.Parasite;
 using Content.Client.Players.PlayTimeTracking;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Roles;
@@ -30,7 +31,7 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
     [Dependency] private readonly XenoInfectionsManager _infectionsManager = default!;
 
     // The parasite role is ranked by total successful infections instead of playtime.
-    private const string ParasiteJob = "CMXenoParasite";
+    private readonly ProtoId<JobPrototype> _parasiteJob = "CMXenoParasite";
 
     private readonly Color _altColor = Color.FromHex("#292B38");
     private readonly Color _defaultColor = Color.FromHex("#2F2F3B");
@@ -67,6 +68,7 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
         ShowGeneralTab();
 
         _infectionsManager.Updated += OnInfectionsUpdated;
+        OnClose += () => _infectionsManager.Updated -= OnInfectionsUpdated;
     }
 
     private void OnInfectionsUpdated()
@@ -76,14 +78,6 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
             ShowDepartmentTab(dept, roles);
         else
             ShowGeneralTab();
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-        base.Dispose(disposing);
-
-        if (disposing)
-            _infectionsManager.Updated -= OnInfectionsUpdated;
     }
 
     private void LoadMedalTimes()
@@ -340,7 +334,7 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
         _useAltColor = false;
         foreach (var (job, playtime) in roles.OrderBy(r => Loc.GetString(r.Job.Name)))
         {
-            var isParasite = job.ID == ParasiteJob;
+            var isParasite = job.ID == _parasiteJob;
             var entry = new RMCPlaytimeStatsEntry(
                 Loc.GetString(job.Name),
                 playtime,
@@ -429,7 +423,7 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
                 .Where(d => d.Roles.Contains(job.ID))
                 .FirstOrDefault();
 
-            var isParasite = kvp.Key == ParasiteJob;
+            var isParasite = kvp.Key == _parasiteJob;
             var entry = new RMCPlaytimeStatsEntry(
                 job.LocalizedName,
                 kvp.Value,

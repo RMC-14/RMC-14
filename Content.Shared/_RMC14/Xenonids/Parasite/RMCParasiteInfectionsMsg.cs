@@ -2,14 +2,14 @@ using Lidgren.Network;
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._RMC14.Xenonids;
+namespace Content.Shared._RMC14.Xenonids.Parasite;
 
 /// <summary>
 /// Sent server -> client to inform the client of their total successful parasite infections.
 /// </summary>
 public sealed class RMCParasiteInfectionsMsg : NetMessage
 {
-    public override MsgGroups MsgGroup => MsgGroups.Core;
+    public override MsgGroups MsgGroup => MsgGroups.EntityEvent;
 
     public int Infections;
 

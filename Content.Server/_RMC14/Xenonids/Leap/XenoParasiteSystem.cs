@@ -3,6 +3,7 @@ using Content.Server.Ghost.Roles.Components;
 using Content.Server.Ghost;
 using Content.Server.Mind;
 using Content.Server._RMC14.Xenonids;
+using Content.Server._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Mind;
 using Content.Shared.Popups;
@@ -49,7 +50,7 @@ public sealed class XenoParasiteSystem : SharedXenoParasiteSystem
         }
 
         _db.IncreaseInfects(session.UserId);
-        _infections.IncreaseInfects(session.UserId);
+        _infections.IncreaseInfects(session);
     }
 
     protected override void ChangeHTN(EntityUid parasite, ParasiteMode mode)
