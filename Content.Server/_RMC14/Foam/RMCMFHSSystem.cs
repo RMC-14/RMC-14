@@ -11,6 +11,7 @@ using Content.Shared.Atmos.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Stunnable;
+using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -51,6 +52,16 @@ public sealed class RMCMFHSSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<RMCMFHSComponent, RMCTriggerEvent>(OnTriggered);
+        SubscribeLocalEvent<RMCMFHSPostThrowStunComponent, StopThrowEvent>(OnKnockbackStopped);
+    }
+
+    private void OnKnockbackStopped(Entity<RMCMFHSPostThrowStunComponent> ent, ref StopThrowEvent args)
+    {
+        // Starting a 0.3 second paralysis before the throw means it expires while the mob is
+        // airborne. Reapply it when RMC's knockback throw ends so the victim actually lands
+        // knocked down and action-stunned for the configured duration.
+        _stun.TryParalyze(ent, ent.Comp.Duration, true, force: true);
+        RemCompDeferred<RMCMFHSPostThrowStunComponent>(ent);
     }
 
     private void OnTriggered(Entity<RMCMFHSComponent> ent, ref RMCTriggerEvent args)
@@ -176,6 +187,12 @@ public sealed class RMCMFHSSystem : EntitySystem
                 // Mob movement controllers immediately overwrite a raw velocity change. Use RMC's
                 // established knockback path, while suppressing its obstacle-impact damage.
                 _obstacleSlamming.MakeImmune(target);
+                if (!largeXeno)
+                {
+                    var postThrowStun = EnsureComp<RMCMFHSPostThrowStunComponent>(target);
+                    postThrowStun.Duration = component.StunTime;
+                }
+
                 _sizeStun.KnockBack(
                     target,
                     knockbackOrigin,
@@ -240,4 +257,10 @@ public sealed class RMCMFHSSystem : EntitySystem
 
         return true;
     }
+}
+
+[RegisterComponent]
+public sealed partial class RMCMFHSPostThrowStunComponent : Component
+{
+    public TimeSpan Duration = TimeSpan.FromSeconds(0.3);
 }
