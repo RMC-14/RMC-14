@@ -10,9 +10,7 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Mobs.Components;
-using Content.Shared.Standing;
 using Content.Shared.Stunnable;
-using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -25,6 +23,10 @@ namespace Content.Server._RMC14.Foam;
 
 public sealed class RMCMFHSSystem : EntitySystem
 {
+    // HEDP's maximum-intensity humanoid blast resolves to a 2.5 tile throw at speed 25.
+    private const float HedpKnockbackDistance = 2.5f;
+    private const float HedpKnockbackSpeed = 25f;
+
     private static readonly HashSet<string> FoamPrototypes =
     [
         "MetalFoam",
@@ -45,7 +47,6 @@ public sealed class RMCMFHSSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly RMCObstacleSlammingSystem _obstacleSlamming = default!;
     [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private readonly HashSet<EntityUid> _entities = new();
@@ -54,46 +55,6 @@ public sealed class RMCMFHSSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<RMCMFHSComponent, RMCTriggerEvent>(OnTriggered);
-        SubscribeLocalEvent<RMCMFHSPostThrowStunComponent, LandEvent>(OnKnockbackLanded);
-        SubscribeLocalEvent<RMCMFHSPostThrowStunComponent, StopThrowEvent>(OnKnockbackStopped);
-    }
-
-    private void OnKnockbackLanded(Entity<RMCMFHSPostThrowStunComponent> ent, ref LandEvent args)
-    {
-        ApplyPostThrowStun(ent);
-    }
-
-    private void OnKnockbackStopped(Entity<RMCMFHSPostThrowStunComponent> ent, ref StopThrowEvent args)
-    {
-        ApplyPostThrowStun(ent);
-    }
-
-    private void ApplyPostThrowStun(Entity<RMCMFHSPostThrowStunComponent> ent)
-    {
-        var duration = ent.Comp.Duration;
-        RemComp<RMCMFHSPostThrowStunComponent>(ent);
-        ApplyRMCBlastKnockdown(ent, duration);
-    }
-
-    private void ApplyRMCBlastKnockdown(EntityUid target, TimeSpan duration)
-    {
-        // RMC explosion knockdowns use the normal KnockedDown status. Its component startup
-        // drives StandingStateSystem.Down, including the horizontal visual and dropping held
-        // items. Apply knockdown and stun independently so one failure cannot skip the other.
-        var knockedDown = _stun.TryKnockdown(target, duration, true, force: true);
-        _stun.TryStun(target, duration, true, force: true);
-
-        if (knockedDown || HasComp<KnockedDownComponent>(target))
-            return;
-
-        // A mob without a usable status container still gets the same forced down visual and
-        // hand-item drop, then recovers unless another knockdown was applied in the meantime.
-        _standing.Down(target, dropHeldItems: true, force: true);
-        Timer.Spawn(duration, () =>
-        {
-            if (!TerminatingOrDeleted(target) && !HasComp<KnockedDownComponent>(target))
-                _standing.Stand(target, force: true);
-        });
     }
 
     private void OnTriggered(Entity<RMCMFHSComponent> ent, ref RMCTriggerEvent args)
@@ -198,13 +159,15 @@ public sealed class RMCMFHSSystem : EntitySystem
             var largeXeno = HasComp<XenoComponent>(target) &&
                             TryComp<RMCSizeComponent>(target, out var size) &&
                             size.Size >= RMCSizes.Big;
-            if (!TryComp<PhysicsComponent>(target, out var physics) || Transform(target).Anchored)
-            {
-                if (mob && !largeXeno)
-                    ApplyRMCBlastKnockdown(target, component.StunTime);
 
+            // Match HEDP ordering: victims are paralyzed (which drops held items and puts them
+            // horizontal) before the blast throw begins. MFHS fixes the duration at one second
+            // and deliberately omits all explosion damage, deafness, daze and blindness.
+            if (mob && !largeXeno)
+                _stun.TryParalyze(target, component.StunTime, false, force: true);
+
+            if (!TryComp<PhysicsComponent>(target, out var physics) || Transform(target).Anchored)
                 continue;
-            }
 
             var targetMap = _transform.GetMapCoordinates(target);
             var direction = targetMap.Position - originMap.Position;
@@ -221,18 +184,12 @@ public sealed class RMCMFHSSystem : EntitySystem
                 // Mob movement controllers immediately overwrite a raw velocity change. Use RMC's
                 // established knockback path, while suppressing its obstacle-impact damage.
                 _obstacleSlamming.MakeImmune(target);
-                if (!largeXeno)
-                {
-                    var postThrowStun = EnsureComp<RMCMFHSPostThrowStunComponent>(target);
-                    postThrowStun.Duration = component.StunTime;
-                }
-
                 _sizeStun.KnockBack(
                     target,
                     knockbackOrigin,
-                    component.Range + 1f,
-                    component.Range + 1f,
-                    component.KnockbackSpeed,
+                    HedpKnockbackDistance,
+                    HedpKnockbackDistance,
+                    HedpKnockbackSpeed,
                     ignoreSize: true);
             }
             else
@@ -291,10 +248,4 @@ public sealed class RMCMFHSSystem : EntitySystem
 
         return true;
     }
-}
-
-[RegisterComponent]
-public sealed partial class RMCMFHSPostThrowStunComponent : Component
-{
-    public TimeSpan Duration = TimeSpan.FromSeconds(1);
 }
