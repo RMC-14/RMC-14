@@ -67,6 +67,7 @@
       whitelist:
       components:
         - SniperWhitelist
+  - type: RMCCryoUnavailableOnStore
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -130,6 +131,7 @@
     whitelist:
       components:
         - ScoutWhitelist
+  - type: RMCCryoUnavailableOnStore
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -167,6 +169,7 @@
     whitelist:
       components:
       - SmartGun
+  - type: RMCCryoUnavailableOnStore
   - type: Appearance
   - type: GenericVisualizer
     visuals:
