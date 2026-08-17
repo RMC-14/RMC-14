@@ -78,6 +78,7 @@ public sealed class MotionDetectorSystem : EntitySystem
     {
         DisableDetectorsOnMob(ev.Target);
 
+        // Add a MotionDetectorTrackedComponent to the infected entity if it doesn't already have one.
         if (HasComp<MotionDetectorTrackedComponent>(ev.Target))
             return;
 
@@ -92,6 +93,7 @@ public sealed class MotionDetectorSystem : EntitySystem
 
     public void RemoveAddedTrackedComponent(EntityUid ent)
     {
+        // Remove the MotionDetectorTrackedComponent from the entity upon removal of VictimInfectedComponent if it didn't have it before addition.
         if (!_addedTracked.Remove(ent))
             return;
 
@@ -402,7 +404,7 @@ public sealed class MotionDetectorSystem : EntitySystem
                 if (tracked.Comp.LastMove < time - detector.MoveTime)
                     continue;
 
-                // Motion detectors always detect infected marines, including infected self regardless of faction. 
+                // Motion detectors always detect infected marines, including if the user is infected regardless of faction. 
                 var infected =
                     HasComp<VictimInfectedComponent>(tracked.Owner) ||
                     (TryComp<InfectableComponent>(tracked.Owner, out var infectable) &&
