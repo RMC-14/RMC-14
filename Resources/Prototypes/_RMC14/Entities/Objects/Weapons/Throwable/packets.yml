@@ -142,6 +142,29 @@
 
 - type: entity
   parent: CMPacketBase
+  id: RMCPacketGrenadeM40MFHS
+  name: MFHS grenade packet
+  description: It contains three M40 MFHS metal-foam grenades.
+  components:
+  - type: Sprite
+    layers:
+    - state: mfhs_packet
+      map: [ "closedLayer" ]
+    - state: mfhs_packet_e
+      map: [ "openLayer", "emptyLayer" ]
+
+- type: entity
+  parent: RMCPacketGrenadeM40MFHS
+  id: RMCPacketGrenadeM40MFHSFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCGrenadeM40MFHS
+      amount: 3
+
+- type: entity
+  parent: CMPacketBase
   id: RMCPacketGrenadeM74AGMF
   name: M74AGM-F grenade packet
   description: It contains three M74AGM-Frag airburst grenades.

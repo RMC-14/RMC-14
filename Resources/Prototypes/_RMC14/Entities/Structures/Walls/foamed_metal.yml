@@ -130,3 +130,45 @@
           path: /Audio/_RMC14/Effects/meteorimpact.ogg
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+
+- type: entity
+  id: RMCMFHSFoam
+  name: metal foam
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    drawdepth: Effects
+    sprite: _RMC14/Effects/mfhs_foam.rsi
+    state: foam
+  - type: TimedDespawn
+    lifetime: 0.1
+  - type: SpawnOnDespawn
+    prototype: RMCMFHSFoamedIron
+
+- type: entity
+  parent: RMCBaseFoamedMetal
+  id: RMCMFHSFoamedIron
+  name: foamed iron
+  description: A slightly stronger lightweight foamed iron wall.
+  suffix: RMC, MFHS
+  components:
+  - type: Sprite
+    drawdepth: Walls
+    sprite: _RMC14/Effects/mfhs_foam.rsi
+    state: ironfoam
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: RMCMFHSFoamWall
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 70
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_RMC14/Effects/meteorimpact.ogg
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]

@@ -129,6 +129,34 @@
   - type: Ammo
 
 - type: entity
+  parent:
+  - CMGrenadeBase
+  - RMCM40DPTags
+  id: RMCGrenadeM40MFHS
+  name: M40 MFHS grenade
+  description: A Metal-Foam Hull-Sealant grenade originally used for emergency repairs, but which has found other practical applications in the field. Based on the same platform as the M40 HEDP. It has a 2 second fuse.
+  components:
+  - type: OnUseTimerTrigger
+    delay: 2
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/m40mfhs.rsi
+  - type: TimerTriggerVisuals
+  - type: RMCMFHS
+  - type: DeleteOnTrigger
+  - type: SoundOnTrigger
+    sound:
+      path: /Audio/Effects/Chemistry/bubbles.ogg
+      params:
+        variation: 0.2
+  - type: Ammo
+  - type: Tag
+    tags:
+    - Grenade
+    - LauncherCompatibleGrenade
+    - RMCGrenadeM40
+    - RMCGrenadeMetalFoam
+
+- type: entity
   parent: Smoke
   id: RMCSmokeExplosionProof
   components:

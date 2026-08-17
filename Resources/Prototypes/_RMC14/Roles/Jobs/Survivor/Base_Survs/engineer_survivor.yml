@@ -67,6 +67,11 @@
     randomGearOther:
     -
       - [ CMBeltUtilityFilled ]
+    -
+      - [ RMCGrenadeM40MFHS ]
+      - []
+      - []
+      - []
 
 - type: entity
   parent: MarkerBase

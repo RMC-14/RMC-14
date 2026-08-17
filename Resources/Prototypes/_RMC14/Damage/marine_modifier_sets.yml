@@ -79,6 +79,15 @@
     # TODO fire should deal 50 times the normal damage
 
 - type: damageModifierSet
+  id: RMCMFHSFoamWall
+  coefficients:
+    Blunt: 2
+    Slash: 2
+    Piercing: 2
+    Structural: 1
+    Heat: 50
+
+- type: damageModifierSet
   id: RMCGirder
   coefficients:
     Blunt: 0.5

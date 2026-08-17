@@ -64,7 +64,7 @@
     randomGearOther:
     -
       - [ RMCMotionDetector ]
-      - [ RMCGrenadeCustomMetalFoam ]
+      - [ RMCGrenadeM40MFHS ]
       - [ RMCGrenadeCustomWeedkiller ]
       - [ RMCThermalTarpV2Folded ]
 
