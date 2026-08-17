@@ -65,12 +65,13 @@ public sealed class RMCMFHSSystem : EntitySystem
         var waves = GetFootprint(grid, originTile, ent.Comp.Range);
         var origin = _map.GridTileToLocal(grid, grid, originTile.GridIndices);
         var foam = ent.Comp.Foam;
+        var clearedEntities = new HashSet<EntityUid>();
 
         // The entire final footprint is cleared before the first foam entity is created.
         foreach (var wave in waves)
         {
             foreach (var tile in wave)
-                ClearTile(ent.Owner, origin, tile, ent.Comp);
+                ClearTile(ent.Owner, origin, tile, ent.Comp, clearedEntities);
         }
 
         for (var i = 0; i < waves.Count; i++)
@@ -138,7 +139,12 @@ public sealed class RMCMFHSSystem : EntitySystem
         return false;
     }
 
-    private void ClearTile(EntityUid grenade, EntityCoordinates origin, EntityCoordinates tile, RMCMFHSComponent component)
+    private void ClearTile(
+        EntityUid grenade,
+        EntityCoordinates origin,
+        EntityCoordinates tile,
+        RMCMFHSComponent component,
+        HashSet<EntityUid> clearedEntities)
     {
         _entities.Clear();
         _lookup.GetEntitiesInRange(tile, 0.45f, _entities, LookupFlags.Uncontained);
@@ -146,7 +152,7 @@ public sealed class RMCMFHSSystem : EntitySystem
         var originMap = _transform.ToMapCoordinates(origin);
         foreach (var target in _entities)
         {
-            if (target == grenade || TerminatingOrDeleted(target))
+            if (target == grenade || TerminatingOrDeleted(target) || !clearedEntities.Add(target))
                 continue;
 
             if (TryComp<FlammableComponent>(target, out var flammable) && flammable.OnFire)
@@ -183,7 +189,9 @@ public sealed class RMCMFHSSystem : EntitySystem
             {
                 // Mob movement controllers immediately overwrite a raw velocity change. Use RMC's
                 // established knockback path, while suppressing its obstacle-impact damage.
-                _obstacleSlamming.MakeImmune(target);
+                // The HEDP-speed throw lasts about 0.1 seconds. Keep immunity only long enough
+                // to cover that throw so an unrelated later wall slam is not suppressed.
+                _obstacleSlamming.MakeImmune(target, 0.2f);
                 _sizeStun.KnockBack(
                     target,
                     knockbackOrigin,
