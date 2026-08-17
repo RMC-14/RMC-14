@@ -67,11 +67,9 @@
     randomGearOther:
     -
       - [ CMBeltUtilityFilled ]
-    -
-      - [ RMCGrenadeM40MFHS ]
-      - []
-      - []
-      - []
+    rareItemCoefficient: 101
+    rareItems:
+      RMCGrenadeM40MFHS: [ 1, 15 ] # 15%
 
 - type: entity
   parent: MarkerBase
