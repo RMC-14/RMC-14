@@ -156,7 +156,7 @@ public sealed class RMCMFHSSystem : EntitySystem
                             TryComp<RMCSizeComponent>(target, out var size) &&
                             size.Size >= RMCSizes.Big;
             if (mob && !largeXeno)
-                _stun.TryKnockdown(target, component.StunTime, true, force: true);
+                _stun.TryParalyze(target, component.StunTime, true, force: true);
 
             if (!TryComp<PhysicsComponent>(target, out var physics) || Transform(target).Anchored)
                 continue;
