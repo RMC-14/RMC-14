@@ -23,10 +23,6 @@
         - WallLayer
   - type: Occluder
   - type: Appearance
-  - type: SmoothEdge
-  - type: IconSmooth
-    key: walls
-    mode: NoSprite
   - type: Transform
     anchored: true
   - type: Airtight
@@ -81,6 +77,10 @@
   description: A lightweight foamed metal wall.
   suffix: RMC
   components:
+  - type: SmoothEdge
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
   - type: Sprite
     drawdepth: Effects
     color: "#ffffffcc"
@@ -104,6 +104,10 @@
   description: A slightly stronger lightweight foamed iron wall.
   suffix: RMC
   components:
+  - type: SmoothEdge
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
   - type: Sprite
     drawdepth: Effects
     color: "#ffffffcc"
