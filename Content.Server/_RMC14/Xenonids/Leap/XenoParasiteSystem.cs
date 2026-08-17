@@ -2,7 +2,6 @@ using Content.Server.Database;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Ghost;
 using Content.Server.Mind;
-using Content.Server._RMC14.Xenonids;
 using Content.Server._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Mind;
