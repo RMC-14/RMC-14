@@ -144,7 +144,7 @@
   parent: CMPacketBase
   id: RMCPacketGrenadeM40MFHS
   name: MFHS grenade packet
-  description: It contains three M40 MFHS metal-foam grenades.
+  description: It contains three 40mm MFHS metal-foam grenades.
   components:
   - type: Sprite
     layers:

@@ -8,10 +8,11 @@ using Content.Shared.Atmos.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Stunnable;
-using Content.Shared.Throwing;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Foam;
@@ -23,7 +24,8 @@ public sealed class RMCMFHSSystem : EntitySystem
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedRMCFlammableSystem _flammable = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private readonly HashSet<EntityUid> _entities = new();
@@ -56,7 +58,10 @@ public sealed class RMCMFHSSystem : EntitySystem
             Timer.Spawn(ent.Comp.SpreadDelay * i, () =>
             {
                 foreach (var tile in wave)
+                {
                     SpawnAtPosition(foam, tile);
+                    _audio.PlayPvs(ent.Comp.DeploySound, tile);
+                }
             });
         }
     }
@@ -133,16 +138,16 @@ public sealed class RMCMFHSSystem : EntitySystem
             if (HasComp<MobStateComponent>(target))
                 _stun.TryStun(target, component.StunTime, true);
 
-            if (!TryComp<PhysicsComponent>(target, out _) || Transform(target).Anchored)
+            if (!TryComp<PhysicsComponent>(target, out var physics) || Transform(target).Anchored)
                 continue;
 
             var direction = _transform.GetMapCoordinates(target).Position - originMap.Position;
             var distance = direction.Length();
             if (distance < 0.001f)
                 direction = Vector2.UnitX;
-            var knockback = MathF.Max(component.Knockback, component.Range + 1f - distance);
-            _throwing.TryThrow(target, direction.Normalized() * knockback, component.KnockbackSpeed,
-                animated: false, playSound: false, compensateFriction: true);
+            // Do not use ThrowingSystem here: thrown-item collision events can deal impact damage.
+            // A direct velocity change provides the radial shove without making the target an attacking projectile.
+            _physics.SetLinearVelocity(target, direction.Normalized() * component.KnockbackSpeed, body: physics);
         }
     }
 }
