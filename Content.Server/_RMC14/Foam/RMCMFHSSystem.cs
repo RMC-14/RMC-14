@@ -1,9 +1,12 @@
 using System.Numerics;
 using Content.Server.Atmos.Components;
 using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Foam;
 using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Mobs.Components;
@@ -38,6 +41,8 @@ public sealed class RMCMFHSSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly RMCObstacleSlammingSystem _obstacleSlamming = default!;
+    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private readonly HashSet<EntityUid> _entities = new();
@@ -146,19 +151,44 @@ public sealed class RMCMFHSSystem : EntitySystem
             if (HasComp<TileFireComponent>(target))
                 QueueDel(target);
 
-            if (HasComp<MobStateComponent>(target))
+            var mob = HasComp<MobStateComponent>(target);
+            var largeXeno = HasComp<XenoComponent>(target) &&
+                            TryComp<RMCSizeComponent>(target, out var size) &&
+                            size.Size >= RMCSizes.Big;
+            if (mob && !largeXeno)
                 _stun.TryKnockdown(target, component.StunTime, true, force: true);
 
             if (!TryComp<PhysicsComponent>(target, out var physics) || Transform(target).Anchored)
                 continue;
 
-            var direction = _transform.GetMapCoordinates(target).Position - originMap.Position;
+            var targetMap = _transform.GetMapCoordinates(target);
+            var direction = targetMap.Position - originMap.Position;
             var distance = direction.Length();
+            var knockbackOrigin = originMap;
             if (distance < 0.001f)
+            {
                 direction = Vector2.UnitX;
-            // Do not use ThrowingSystem here: thrown-item collision events can deal impact damage.
-            // A direct velocity change provides the radial shove without making the target an attacking projectile.
-            _physics.SetLinearVelocity(target, direction.Normalized() * component.KnockbackSpeed, body: physics);
+                knockbackOrigin = new MapCoordinates(targetMap.Position - direction * 0.1f, targetMap.MapId);
+            }
+
+            if (mob)
+            {
+                // Mob movement controllers immediately overwrite a raw velocity change. Use RMC's
+                // established knockback path, while suppressing its obstacle-impact damage.
+                _obstacleSlamming.MakeImmune(target);
+                _sizeStun.KnockBack(
+                    target,
+                    knockbackOrigin,
+                    component.Range + 1f,
+                    component.Range + 1f,
+                    component.KnockbackSpeed,
+                    ignoreSize: true);
+            }
+            else
+            {
+                // Loose objects do not have a movement controller, so a harmless velocity shove is sufficient.
+                _physics.SetLinearVelocity(target, direction.Normalized() * component.KnockbackSpeed, body: physics);
+            }
         }
     }
 
