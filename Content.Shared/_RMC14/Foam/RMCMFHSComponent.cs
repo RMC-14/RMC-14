@@ -11,7 +11,7 @@ public sealed partial class RMCMFHSComponent : Component
     public int Range = 2;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan StunTime = TimeSpan.FromSeconds(0.3);
+    public TimeSpan StunTime = TimeSpan.FromSeconds(1);
 
     [DataField, AutoNetworkedField]
     public float KnockbackSpeed = 10f;

@@ -300,5 +300,5 @@ public sealed class RMCMFHSSystem : EntitySystem
 [RegisterComponent]
 public sealed partial class RMCMFHSPostThrowStunComponent : Component
 {
-    public TimeSpan Duration = TimeSpan.FromSeconds(0.3);
+    public TimeSpan Duration = TimeSpan.FromSeconds(1);
 }
