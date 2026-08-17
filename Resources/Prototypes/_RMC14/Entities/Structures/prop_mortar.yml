@@ -1,0 +1,18 @@
+- type: entity
+  id: RMCPropMortar
+  name: M402 mortar
+  suffix: Prop
+  description: A manual, crew-operated mortar system intended to rain down 80mm goodness on anything it's aimed at. Uses an advanced targeting computer. This one has fired so many rounds the barrel is warped, leaving it non-functional.
+  components:
+  - type: Transform
+    noRot: false
+  - type: Physics
+    fixedRotation: false
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/mortar.rsi
+    drawdepth: Effects # no idea if there is a cleaner way to do this
+    state: mortar_m402
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Corrodible
+    isCorrodible: false
