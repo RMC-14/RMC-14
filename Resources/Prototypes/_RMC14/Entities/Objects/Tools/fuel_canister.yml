@@ -44,7 +44,6 @@
     targetWhitelist:
       tags:
       - RMCTankFuel
-    showOpenClosedWhenEmpty: true
   - type: Damageable
     damageContainer: Inorganic
   - type: Explosive
