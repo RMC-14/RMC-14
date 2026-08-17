@@ -58,7 +58,6 @@ public sealed class MotionDetectorSystem : EntitySystem
         SubscribeLocalEvent<XenoParasiteInfectEvent>(OnXenoInfect);
         SubscribeLocalEvent<MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<XenoDevouredEvent>(OnMotionDetectorDevoured);
-        SubscribeLocalEvent<VictimInfectedComponent, ComponentRemove>(OnVictimInfectedRemoved);
 
         SubscribeLocalEvent<MotionDetectorComponent, UseInHandEvent>(OnMotionDetectorUseInHand);
         SubscribeLocalEvent<MotionDetectorComponent, GetVerbsEvent<AlternativeVerb>>(OnMotionDetectorGetVerbs);
@@ -90,16 +89,14 @@ public sealed class MotionDetectorSystem : EntitySystem
         };
 
         _addedTracked.Add(ev.Target);
-
-        Dirty(trackedEnt);
     }
 
-    private void OnVictimInfectedRemoved(Entity<VictimInfectedComponent> victim, ref ComponentRemove args)
+    public void RemoveAddedTrackedComponent(EntityUid ent)
     {
-        if (!_addedTracked.Remove(victim.Owner))
+        if (!_addedTracked.Remove(ent))
             return;
 
-        RemComp<MotionDetectorTrackedComponent>(victim.Owner);
+        RemComp<MotionDetectorTrackedComponent>(ent);
     }
 
     private void OnMobStateChanged(MobStateChangedEvent ev)
