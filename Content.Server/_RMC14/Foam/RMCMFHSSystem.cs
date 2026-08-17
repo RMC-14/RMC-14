@@ -72,23 +72,27 @@ public sealed class RMCMFHSSystem : EntitySystem
     {
         var duration = ent.Comp.Duration;
         RemComp<RMCMFHSPostThrowStunComponent>(ent);
+        ApplyRMCBlastKnockdown(ent, duration);
+    }
 
-        // Use the two underlying effects independently. TryParalyze short-circuits if its
-        // knockdown status cannot be added and can consequently skip the action stun too.
-        // Explicitly forcing the standing state also guarantees the blast victim visibly
-        // lands on the ground instead of merely sliding to the destination.
-        _standing.Down(ent, dropHeldItems: false, force: true);
-        _stun.TryStun(ent, duration, true, force: true);
+    private void ApplyRMCBlastKnockdown(EntityUid target, TimeSpan duration)
+    {
+        // RMC explosion knockdowns use the normal KnockedDown status. Its component startup
+        // drives StandingStateSystem.Down, including the horizontal visual and dropping held
+        // items. Apply knockdown and stun independently so one failure cannot skip the other.
+        var knockedDown = _stun.TryKnockdown(target, duration, true, force: true);
+        _stun.TryStun(target, duration, true, force: true);
 
+        if (knockedDown || HasComp<KnockedDownComponent>(target))
+            return;
+
+        // A mob without a usable status container still gets the same forced down visual and
+        // hand-item drop, then recovers unless another knockdown was applied in the meantime.
+        _standing.Down(target, dropHeldItems: true, force: true);
         Timer.Spawn(duration, () =>
         {
-            if (TerminatingOrDeleted(ent))
-                return;
-
-            // Do not stand somebody who acquired a genuine knockdown from another source
-            // during the MFHS recovery window.
-            if (!HasComp<KnockedDownComponent>(ent))
-                _standing.Stand(ent, force: true);
+            if (!TerminatingOrDeleted(target) && !HasComp<KnockedDownComponent>(target))
+                _standing.Stand(target, force: true);
         });
     }
 
@@ -197,15 +201,7 @@ public sealed class RMCMFHSSystem : EntitySystem
             if (!TryComp<PhysicsComponent>(target, out var physics) || Transform(target).Anchored)
             {
                 if (mob && !largeXeno)
-                {
-                    _standing.Down(target, dropHeldItems: false, force: true);
-                    _stun.TryStun(target, component.StunTime, true, force: true);
-                    Timer.Spawn(component.StunTime, () =>
-                    {
-                        if (!TerminatingOrDeleted(target) && !HasComp<KnockedDownComponent>(target))
-                            _standing.Stand(target, force: true);
-                    });
-                }
+                    ApplyRMCBlastKnockdown(target, component.StunTime);
 
                 continue;
             }
