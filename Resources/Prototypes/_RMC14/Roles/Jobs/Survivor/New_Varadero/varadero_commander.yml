@@ -35,20 +35,20 @@
         state: xo
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_ua
+        state: background_unmc
     - type: JobPrefix
       prefix: rmc-job-prefix-survivor-varadero-commander
     - type: AssignSquad
       whitelist:
         tags:
-        - RMCSquadNVUNMC
+        - RMCSquadUNMC
   hidden: true
   useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
 
 - type: startingGear
   id: RMCGearSurvivorCommanderNewVaradero
   equipment:
-    ears: RMCHeadsetMarineDistress # TODO RMC14: Placeholder on CM
+    ears: RMCHeadsetMarineNV
     jumpsuit: CMJumpsuitBO
     head: RMCHeadCapFlippable
     outerClothing: RMCCoatServiceFolded

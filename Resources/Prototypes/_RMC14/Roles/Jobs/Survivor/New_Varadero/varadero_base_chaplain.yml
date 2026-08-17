@@ -14,7 +14,7 @@
     - type: AssignSquad
       whitelist:
         tags:
-        - RMCSquadNVUNMC
+        - RMCSquadUNMC
     - type: Skills
       preset: RMCSkillPresetSurvivorChaplain
     - type: EquipSurvivorPreset
@@ -45,6 +45,7 @@
   parent: RMCGearSurvivorEquipped
   id: RMCGearSurvivorVaraderoChaplain
   equipment:
+    ears: RMCHeadsetMarineNV
     id: CMIDCardStandardDogtag
     jumpsuit: RMCJumpsuitCivilianGreen
     outerClothing: RMCClothingPriestRobes

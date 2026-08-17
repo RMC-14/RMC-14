@@ -20,7 +20,7 @@
     - type: AssignSquad
       whitelist:
         tags:
-        - RMCSquadNVUNMC
+        - RMCSquadUNMC
     - type: Skills
       preset: RMCSkillPresetSurvivorDoctor
     - type: RMCSurvivor
@@ -57,7 +57,7 @@
   id: RMCGearSurvivorMedicalTechnician
   equipment:
     jumpsuit: RMCJumpsuitCivilianGreen
-    ears: RMCHeadsetMarineDistress # TODO RMC14: Placeholder on CM
+    ears: RMCHeadsetMarineNV
     gloves: CMHandsLatex
     shoes: CMBootsBlackFilled
     back: CMSatchelMedical

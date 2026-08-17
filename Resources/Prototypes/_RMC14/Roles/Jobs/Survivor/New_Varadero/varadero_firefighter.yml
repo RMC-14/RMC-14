@@ -18,7 +18,7 @@
     - type: AssignSquad
       whitelist:
         tags:
-        - RMCSquadNVUNMC
+        - RMCSquadUNMC
     - type: Skills
       preset: RMCSkillPresetSurvivorDoctor
     - type: RMCSurvivor
@@ -35,7 +35,7 @@
         state: nurse
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_ua
+        state: background_unmc
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
@@ -54,7 +54,7 @@
 - type: startingGear
   id: RMCGearSurvivorAirportFirefighter
   equipment:
-    ears: RMCHeadsetMarineDistress # TODO RMC14: Placeholder on CM
+    ears: RMCHeadsetMarineNV
     gloves: RMCHandsVeteran
     outerClothing: RMCArmorFirefighter
     shoes: CMBootsBlackFilled

@@ -403,7 +403,7 @@
 
 - type: entity
   parent: SquadBase
-  id: SquadUNMC
+  id: RMCSquadUNMC
   name: UNMC
   components:
   - type: SquadTeam
@@ -413,18 +413,18 @@
     - Goggles
     - Armor
     - Gloves
-    radio: Colony
+    radio: MarineSurvivor
     minimapBackground:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
-      state: background_ua
+      state: background_unmc
     canSupplyDrop: false
     group: UNMC
   - type: Tag
     tags:
-    - RMCSquadNVUNMC
+    - RMCSquadUNMC
 
 - type: Tag
-  id: RMCSquadNVUNMC
+  id: RMCSquadUNMC
 
 - type: entity
   parent: SquadBase
@@ -512,28 +512,3 @@
 
 - type: Tag
   id: RMCSquadSunRiders
-
-- type: entity
-  parent: SquadBase
-  id: RMCSquadUNMC
-  name: UNMC
-  components:
-  - type: SquadTeam
-    color: "#349c30"
-    blacklistedSquadArmor:
-    - Helmet
-    - Goggles
-    - Armor
-    - Gloves
-    radio: MarineSurvivor
-    minimapBackground:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
-      state: background_unmc
-    canSupplyDrop: false
-    group: UNMC
-  - type: Tag
-    tags:
-    - RMCSquadUNMC
-
-- type: Tag
-  id: RMCSquadUNMC

@@ -16,7 +16,7 @@
     - type: AssignSquad
       whitelist:
         tags:
-        - RMCSquadNVUNMC
+        - RMCSquadUNMC
     - type: Skills
       preset: RMCSkillPresetSurvivorUNMCRifleman
     - type: RMCSurvivor
@@ -37,7 +37,7 @@
         state: private
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_ua
+        state: background_unmc
     - type: Language
       spokenLanguages:
         - Spanish
@@ -54,7 +54,7 @@
   equipment:
     jumpsuit: JumpsuitMarine
     outerClothing: RMCCoatService
-    ears: RMCHeadsetMarineDistress # TODO RMC14: Placeholder on CM
+    ears: RMCHeadsetMarineNV
     gloves: RMCHandsVeteran
     id: CMIDCardStandardDogtag
     pocket1: RMCPouchSurvivalFill

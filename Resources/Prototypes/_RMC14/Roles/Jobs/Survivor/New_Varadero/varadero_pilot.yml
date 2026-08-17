@@ -16,7 +16,7 @@
     - type: AssignSquad
       whitelist:
         tags:
-        - RMCSquadNVUNMC
+        - RMCSquadUNMC
     - type: Skills
       preset: RMCSkillPresetSurvivorUNMCPilot
     - type: RMCSurvivor
@@ -38,7 +38,7 @@
         state: pilot # TODO RMC14: wy_pilot
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_ua
+        state: background_unmc
     - type: Language
       spokenLanguages:
         - Spanish
@@ -54,7 +54,7 @@
   id: RMCGearSurvivorUNMCPilot
   equipment:
     jumpsuit: RMCJumpsuitPilotAlt
-    ears: RMCHeadsetMarineDistress # TODO RMC14: Placeholder on CM
+    ears: RMCHeadsetMarineNV
     gloves: CMHandsInsulated
     head: CMArmorHelmetM30
     id: CMIDCardStandardDogtag

@@ -154,6 +154,14 @@ rmc-job-greeting-corporate-dome-goon-engi = You are a Corporate Security Technic
 
 # New Varadero Survs
 
+rmc-job-greeting-varadero = The stench of burning phoron still lingers in the salty evening breeze of the ruined New Varadero Naval Base. The specter's dying cackle echoes through your mind as you realise that you're now one of just a handful of living people left standing on these battle worn shores. Through sheer cunning, grit, and United Nations fire power, you've managed to survive against both ceaseless tides of xenonids and a now slain lone specter... the cry of a new mother snaps you back to reality. It's only a matter of time before another acidic wave of those horrid things attempts to wash over you.
+
+   You are aware of the xenonid threat.
+
+   Your primary objective is to survive the outbreak.
+
+   You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
 rmc-job-name-survivor-commander-new-varadero = Commander
 rmc-job-prefix-survivor-varadero-commander = UNMC CDR
 

@@ -360,7 +360,7 @@
   name: Pilot's dogtags
   components:
   - type: PresetIdCard
-    job: CMPilotDropship # TODO RMC14: Pilot surv role incase i forget to replace this at one point
+    job: RMCSurvivorUNMCPilot
 
 - type: entity
   id: RMCIDCardAegis
