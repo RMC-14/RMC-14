@@ -64,6 +64,9 @@
   - type: NightVisionItem
     mesons: true
     defaultState: half
+      whitelist:
+      components:
+        - SniperWhitelist
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -77,6 +80,11 @@
   id: CMGlassesM42SpotterSight
   name: M96 spotter sight
   description: A companion headset and night vision goggles system for UNMC spotters. Allows highlighted imaging of surroundings.
+  components:
+  - type: NightVisionItem
+    whitelist:
+      components:
+        - SpotterWhitelist
 
 - type: entity
   parent: CMGlassesM42ScoutSight
@@ -119,6 +127,9 @@
   - type: NightVisionItem
     mesons: true
     defaultState: half
+    whitelist:
+      components:
+        - ScoutWhitelist
   - type: Appearance
   - type: GenericVisualizer
     visuals:
