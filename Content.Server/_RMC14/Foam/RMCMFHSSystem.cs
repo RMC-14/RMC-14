@@ -10,6 +10,7 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
@@ -44,6 +45,7 @@ public sealed class RMCMFHSSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly RMCObstacleSlammingSystem _obstacleSlamming = default!;
     [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
+    [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private readonly HashSet<EntityUid> _entities = new();
@@ -52,16 +54,42 @@ public sealed class RMCMFHSSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<RMCMFHSComponent, RMCTriggerEvent>(OnTriggered);
+        SubscribeLocalEvent<RMCMFHSPostThrowStunComponent, LandEvent>(OnKnockbackLanded);
         SubscribeLocalEvent<RMCMFHSPostThrowStunComponent, StopThrowEvent>(OnKnockbackStopped);
+    }
+
+    private void OnKnockbackLanded(Entity<RMCMFHSPostThrowStunComponent> ent, ref LandEvent args)
+    {
+        ApplyPostThrowStun(ent);
     }
 
     private void OnKnockbackStopped(Entity<RMCMFHSPostThrowStunComponent> ent, ref StopThrowEvent args)
     {
-        // Starting a 0.3 second paralysis before the throw means it expires while the mob is
-        // airborne. Reapply it when RMC's knockback throw ends so the victim actually lands
-        // knocked down and action-stunned for the configured duration.
-        _stun.TryParalyze(ent, ent.Comp.Duration, true, force: true);
-        RemCompDeferred<RMCMFHSPostThrowStunComponent>(ent);
+        ApplyPostThrowStun(ent);
+    }
+
+    private void ApplyPostThrowStun(Entity<RMCMFHSPostThrowStunComponent> ent)
+    {
+        var duration = ent.Comp.Duration;
+        RemComp<RMCMFHSPostThrowStunComponent>(ent);
+
+        // Use the two underlying effects independently. TryParalyze short-circuits if its
+        // knockdown status cannot be added and can consequently skip the action stun too.
+        // Explicitly forcing the standing state also guarantees the blast victim visibly
+        // lands on the ground instead of merely sliding to the destination.
+        _standing.Down(ent, dropHeldItems: false, force: true);
+        _stun.TryStun(ent, duration, true, force: true);
+
+        Timer.Spawn(duration, () =>
+        {
+            if (TerminatingOrDeleted(ent))
+                return;
+
+            // Do not stand somebody who acquired a genuine knockdown from another source
+            // during the MFHS recovery window.
+            if (!HasComp<KnockedDownComponent>(ent))
+                _standing.Stand(ent, force: true);
+        });
     }
 
     private void OnTriggered(Entity<RMCMFHSComponent> ent, ref RMCTriggerEvent args)
@@ -166,11 +194,21 @@ public sealed class RMCMFHSSystem : EntitySystem
             var largeXeno = HasComp<XenoComponent>(target) &&
                             TryComp<RMCSizeComponent>(target, out var size) &&
                             size.Size >= RMCSizes.Big;
-            if (mob && !largeXeno)
-                _stun.TryParalyze(target, component.StunTime, true, force: true);
-
             if (!TryComp<PhysicsComponent>(target, out var physics) || Transform(target).Anchored)
+            {
+                if (mob && !largeXeno)
+                {
+                    _standing.Down(target, dropHeldItems: false, force: true);
+                    _stun.TryStun(target, component.StunTime, true, force: true);
+                    Timer.Spawn(component.StunTime, () =>
+                    {
+                        if (!TerminatingOrDeleted(target) && !HasComp<KnockedDownComponent>(target))
+                            _standing.Stand(target, force: true);
+                    });
+                }
+
                 continue;
+            }
 
             var targetMap = _transform.GetMapCoordinates(target);
             var direction = targetMap.Position - originMap.Position;
