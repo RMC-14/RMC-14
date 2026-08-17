@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 04/27/2026 02:48:36
-  entityCount: 16294
+  time: 08/17/2026 02:41:56
+  entityCount: 16340
 maps:
 - 1
 grids:
@@ -21613,26 +21613,36 @@ entities:
     - type: Transform
       pos: 5.185768,-94.23981
       parent: 1
+    - type: HideLayerClothing
+      slots: null
   - uid: 12161
     components:
     - type: Transform
       pos: 47.389862,52.615215
       parent: 1
+    - type: HideLayerClothing
+      slots: null
   - uid: 12162
     components:
     - type: Transform
       pos: 47.639862,52.615215
       parent: 1
+    - type: HideLayerClothing
+      slots: null
   - uid: 12163
     components:
     - type: Transform
       pos: 47.624237,52.34959
       parent: 1
+    - type: HideLayerClothing
+      slots: null
   - uid: 12164
     components:
     - type: Transform
       pos: 47.405487,52.34959
       parent: 1
+    - type: HideLayerClothing
+      slots: null
 - proto: BarbedWire15
   entities:
   - uid: 12141
@@ -53914,6 +53924,75 @@ entities:
     - type: Transform
       pos: 80.53012,-120.54572
       parent: 1
+- proto: RMCBoards1
+  entities:
+  - uid: 16312
+    components:
+    - type: Transform
+      pos: 47.62435,-48.92045
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+  - uid: 16318
+    components:
+    - type: Transform
+      pos: 10.048695,-89.30271
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+- proto: RMCBoards2
+  entities:
+  - uid: 16310
+    components:
+    - type: Transform
+      pos: 72.59554,-21.5399
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+  - uid: 16313
+    components:
+    - type: Transform
+      pos: 54.22919,-68.81894
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+- proto: RMCBoards3
+  entities:
+  - uid: 16311
+    components:
+    - type: Transform
+      pos: 61.65693,-44.700474
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+  - uid: 16314
+    components:
+    - type: Transform
+      pos: 40.149376,-87.15036
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+  - uid: 16315
+    components:
+    - type: Transform
+      pos: 62.387688,-121.21838
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+  - uid: 16316
+    components:
+    - type: Transform
+      pos: 69.43664,-121.53088
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+  - uid: 16317
+    components:
+    - type: Transform
+      pos: 83.4414,-128.55563
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
 - proto: RMCBoxFlashlights
   entities:
   - uid: 11958
@@ -67177,6 +67256,199 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 90.715195,-85.3031
       parent: 1
+- proto: RMCFloraTreeTyrargoBald01
+  entities:
+  - uid: 6903
+    components:
+    - type: Transform
+      pos: 38.23562,-30.578777
+      parent: 1
+  - uid: 16296
+    components:
+    - type: Transform
+      pos: 40.946426,-11.874678
+      parent: 1
+  - uid: 16297
+    components:
+    - type: Transform
+      pos: 42.21205,-20.92938
+      parent: 1
+  - uid: 16299
+    components:
+    - type: Transform
+      pos: 40.941284,-91.632706
+      parent: 1
+  - uid: 16300
+    components:
+    - type: Transform
+      pos: 44.847534,-103.070206
+      parent: 1
+  - uid: 16302
+    components:
+    - type: Transform
+      pos: 98.64786,-104.475784
+      parent: 1
+  - uid: 16303
+    components:
+    - type: Transform
+      pos: 105.53518,-87.43905
+      parent: 1
+  - uid: 16306
+    components:
+    - type: Transform
+      pos: 89.33276,-28.730179
+      parent: 1
+  - uid: 16307
+    components:
+    - type: Transform
+      pos: 91.48901,-18.012703
+      parent: 1
+  - uid: 16308
+    components:
+    - type: Transform
+      pos: 97.10536,5.137991
+      parent: 1
+  - uid: 16309
+    components:
+    - type: Transform
+      pos: 63.236343,-14.2369995
+      parent: 1
+  - uid: 16320
+    components:
+    - type: Transform
+      pos: 41.23963,-43.811787
+      parent: 1
+  - uid: 16321
+    components:
+    - type: Transform
+      pos: 33.10922,-56.75945
+      parent: 1
+  - uid: 16322
+    components:
+    - type: Transform
+      pos: 34.48422,-64.05752
+      parent: 1
+  - uid: 16323
+    components:
+    - type: Transform
+      pos: 27.98545,-69.70418
+      parent: 1
+  - uid: 16324
+    components:
+    - type: Transform
+      pos: 25.157326,-78.79537
+      parent: 1
+  - uid: 16326
+    components:
+    - type: Transform
+      pos: 0.24816036,-96.28335
+      parent: 1
+  - uid: 16327
+    components:
+    - type: Transform
+      pos: 3.8443584,-102.12325
+      parent: 1
+  - uid: 16328
+    components:
+    - type: Transform
+      pos: 16.86515,-107.26922
+      parent: 1
+  - uid: 16329
+    components:
+    - type: Transform
+      pos: 31.578215,-107.44109
+      parent: 1
+  - uid: 16330
+    components:
+    - type: Transform
+      pos: 56.068333,-97.55438
+      parent: 1
+  - uid: 16331
+    components:
+    - type: Transform
+      pos: 71.59011,-93.42022
+      parent: 1
+  - uid: 16332
+    components:
+    - type: Transform
+      pos: 71.418236,-112.9257
+      parent: 1
+  - uid: 16333
+    components:
+    - type: Transform
+      pos: 71.46511,-83.77724
+      parent: 1
+  - uid: 16334
+    components:
+    - type: Transform
+      pos: 67.230736,-67.08529
+      parent: 1
+  - uid: 16335
+    components:
+    - type: Transform
+      pos: 68.740974,-61.963573
+      parent: 1
+  - uid: 16336
+    components:
+    - type: Transform
+      pos: 69.439,-45.328384
+      parent: 1
+  - uid: 16337
+    components:
+    - type: Transform
+      pos: 67.65502,-30.316006
+      parent: 1
+  - uid: 16338
+    components:
+    - type: Transform
+      pos: 69.693375,-11.766556
+      parent: 1
+  - uid: 16339
+    components:
+    - type: Transform
+      pos: 99.093475,-8.07723
+      parent: 1
+- proto: RMCFloraTreeTyrargoDead01
+  entities:
+  - uid: 16325
+    components:
+    - type: Transform
+      pos: 29.632318,-86.19534
+      parent: 1
+- proto: RMCFloraTreeTyrargoDead02
+  entities:
+  - uid: 15446
+    components:
+    - type: Transform
+      pos: 11.795624,4.4633274
+      parent: 1
+  - uid: 16304
+    components:
+    - type: Transform
+      pos: 85.339584,-64.0026
+      parent: 1
+- proto: RMCFloraTreeTyrargoDead03
+  entities:
+  - uid: 12346
+    components:
+    - type: Transform
+      pos: -5.7908983,-3.0969727
+      parent: 1
+  - uid: 16298
+    components:
+    - type: Transform
+      pos: 28.708536,-48.454533
+      parent: 1
+  - uid: 16301
+    components:
+    - type: Transform
+      pos: 85.08632,-114.18071
+      parent: 1
+  - uid: 16305
+    components:
+    - type: Transform
+      pos: 98.99965,-45.59458
+      parent: 1
 - proto: RMCFogWallPermanent
   entities:
   - uid: 270
@@ -74170,6 +74442,12 @@ entities:
     components:
     - type: Transform
       pos: -3.5,-27.5
+      parent: 1
+  - uid: 4041
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 85.5,-53.5
       parent: 1
   - uid: 4048
     components:
@@ -88148,12 +88426,6 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 83.5,-54.5
-      parent: 1
-  - uid: 15446
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 85.5,-53.5
       parent: 1
   - uid: 15447
     components:
@@ -106730,23 +107002,21 @@ entities:
       parent: 1
 - proto: RMCSemioticWoodBunks
   entities:
+  - uid: 6922
+    components:
+    - type: Transform
+      pos: 61.467842,22.567621
+      parent: 1
   - uid: 10924
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 61.5,22.5
+      pos: 66.58923,56.498264
       parent: 1
   - uid: 11395
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 54.5,37.5
-      parent: 1
-  - uid: 12346
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 66.5,56.5
       parent: 1
 - proto: RMCSemioticWoodCommand
   entities:
@@ -106848,8 +107118,7 @@ entities:
   - uid: 6924
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 55.49101,-101.72808
+      pos: 55.520466,-101.73312
       parent: 1
   - uid: 6934
     components:
@@ -106962,17 +107231,15 @@ entities:
       parent: 1
 - proto: RMCSemioticWoodMortarPit
   entities:
-  - uid: 6903
+  - uid: 7045
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 56.503494,-28.696184
+      pos: 56.50098,-28.691828
       parent: 1
-  - uid: 6922
+  - uid: 16319
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 55.506634,-91.68209
+      pos: 55.522892,-91.714424
       parent: 1
 - proto: RMCSemioticWoodStairs
   entities:
@@ -107050,16 +107317,15 @@ entities:
     - type: Transform
       pos: 45.5,-22.5
       parent: 1
-  - uid: 4041
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 33.382847,-46.24098
-      parent: 1
   - uid: 10833
     components:
     - type: Transform
       pos: 51.5,30.5
+      parent: 1
+  - uid: 16340
+    components:
+    - type: Transform
+      pos: 33.42683,-46.259525
       parent: 1
 - proto: RMCSpaceCash10
   entities:
