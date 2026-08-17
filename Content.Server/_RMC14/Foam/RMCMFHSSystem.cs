@@ -23,7 +23,7 @@ namespace Content.Server._RMC14.Foam;
 
 public sealed class RMCMFHSSystem : EntitySystem
 {
-    // HEDP's maximum-intensity humanoid blast resolves to a 2.5 tile throw at speed 25.
+    // HEDP's maximum-intensity humanoid blast resolves to a 2.5 tile throw at speed 25. Good ref. point.
     private const float HedpKnockbackDistance = 2.5f;
     private const float HedpKnockbackSpeed = 25f;
 
@@ -166,9 +166,9 @@ public sealed class RMCMFHSSystem : EntitySystem
                             TryComp<RMCSizeComponent>(target, out var size) &&
                             size.Size >= RMCSizes.Big;
 
-            // Match HEDP ordering: victims are paralyzed (which drops held items and puts them
+            // Victims are paralyzed (which drops held items and puts them
             // horizontal) before the blast throw begins. MFHS fixes the duration at one second
-            // and deliberately omits all explosion damage, deafness, daze and blindness.
+            // and deliberately omits all explosion damage, deafness, daze and blindness, that way it is just the knockback force.
             if (mob && !largeXeno)
                 _stun.TryParalyze(target, component.StunTime, false, force: true);
 
@@ -187,8 +187,7 @@ public sealed class RMCMFHSSystem : EntitySystem
 
             if (mob)
             {
-                // Mob movement controllers immediately overwrite a raw velocity change. Use RMC's
-                // established knockback path, while suppressing its obstacle-impact damage.
+                // Mob movement controllers immediately overwrite a raw velocity change.
                 // The HEDP-speed throw lasts about 0.1 seconds. Keep immunity only long enough
                 // to cover that throw so an unrelated later wall slam is not suppressed.
                 _obstacleSlamming.MakeImmune(target, 0.2f);
@@ -221,8 +220,7 @@ public sealed class RMCMFHSSystem : EntitySystem
 
         Timer.Spawn(component.SolidifyDelay, () =>
         {
-            // Recheck immediately before becoming dense. A mob can enter the tile during
-            // the brief expansion animation, or another foam wall can finish first.
+            // Recheck immediately before becoming dense. 
             if (CanFormFoam(tile, ignoreExpandingFoam: true))
                 SpawnAtPosition(component.SolidFoam, tile);
         });
