@@ -144,8 +144,6 @@
     state: foam
   - type: TimedDespawn
     lifetime: 0.1
-  - type: SpawnOnDespawn
-    prototype: RMCMFHSFoamedIron
 
 - type: entity
   parent: RMCBaseFoamedMetal

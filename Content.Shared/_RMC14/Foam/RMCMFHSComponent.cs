@@ -20,8 +20,14 @@ public sealed partial class RMCMFHSComponent : Component
     public TimeSpan SpreadDelay = TimeSpan.FromSeconds(0.1);
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier DeploySound = new SoundPathSpecifier("/Audio/_RMC14/Items/fulton.ogg");
+    public SoundSpecifier DeploySound = new SoundCollectionSpecifier("XenoTailSwipe");
 
     [DataField, AutoNetworkedField]
     public EntProtoId Foam = "RMCMFHSFoam";
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId SolidFoam = "RMCMFHSFoamedIron";
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan SolidifyDelay = TimeSpan.FromSeconds(0.1);
 }

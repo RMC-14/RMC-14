@@ -13,12 +13,24 @@ using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Foam;
 
 public sealed class RMCMFHSSystem : EntitySystem
 {
+    private static readonly HashSet<string> FoamPrototypes =
+    [
+        "MetalFoam",
+        "RMCAluminiumMetalFoamEffect",
+        "RMCIronMetalFoamEffect",
+        "RMCFoamedAluminiumMetal",
+        "RMCFoamedIronMetal",
+        "RMCMFHSFoam",
+        "RMCMFHSFoamedIron",
+    ];
+
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
@@ -59,8 +71,7 @@ public sealed class RMCMFHSSystem : EntitySystem
             {
                 foreach (var tile in wave)
                 {
-                    SpawnAtPosition(foam, tile);
-                    _audio.PlayPvs(ent.Comp.DeploySound, tile);
+                    TryStartFoam(tile, foam, ent.Comp);
                 }
             });
         }
@@ -136,7 +147,7 @@ public sealed class RMCMFHSSystem : EntitySystem
                 QueueDel(target);
 
             if (HasComp<MobStateComponent>(target))
-                _stun.TryStun(target, component.StunTime, true);
+                _stun.TryKnockdown(target, component.StunTime, true);
 
             if (!TryComp<PhysicsComponent>(target, out var physics) || Transform(target).Anchored)
                 continue;
@@ -149,5 +160,51 @@ public sealed class RMCMFHSSystem : EntitySystem
             // A direct velocity change provides the radial shove without making the target an attacking projectile.
             _physics.SetLinearVelocity(target, direction.Normalized() * component.KnockbackSpeed, body: physics);
         }
+    }
+
+    private void TryStartFoam(EntityCoordinates tile, EntProtoId foam, RMCMFHSComponent component)
+    {
+        if (!CanFormFoam(tile))
+            return;
+
+        SpawnAtPosition(foam, tile);
+        _audio.PlayPvs(component.DeploySound, tile);
+
+        Timer.Spawn(component.SolidifyDelay, () =>
+        {
+            // Recheck immediately before becoming dense. A mob can enter the tile during
+            // the brief expansion animation, or another foam wall can finish first.
+            if (CanFormFoam(tile, ignoreExpandingFoam: true))
+                SpawnAtPosition(component.SolidFoam, tile);
+        });
+    }
+
+    private bool CanFormFoam(EntityCoordinates tile, bool ignoreExpandingFoam = false)
+    {
+        _entities.Clear();
+        _lookup.GetEntitiesInRange(tile, 0.45f, _entities, LookupFlags.Uncontained);
+
+        foreach (var target in _entities)
+        {
+            // Never solidify around a mob, even if the initial knockback could not move it.
+            if (HasComp<MobStateComponent>(target))
+                return false;
+        }
+
+        var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(tile);
+        while (anchored.MoveNext(out var uid))
+        {
+            var prototype = MetaData(uid).EntityPrototype?.ID ?? string.Empty;
+            if (ignoreExpandingFoam && prototype == "RMCMFHSFoam")
+                continue;
+
+            if (FoamPrototypes.Contains(prototype))
+                return false;
+
+            if (TryComp<AirtightComponent>(uid, out var airtight) && airtight.AirBlocked)
+                return false;
+        }
+
+        return true;
     }
 }
