@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Inventory;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -28,6 +29,9 @@ public sealed partial class NightVisionItemComponent : Component
 
     [DataField, AutoNetworkedField]
     public Dictionary<EntProtoId<SkillDefinitionComponent>, int>? Skills;
+
+    [DataField, AutoNetworkedField]
+    public EntityWhitelist? Whitelist;
 
     [DataField, AutoNetworkedField]
     public bool Green;
