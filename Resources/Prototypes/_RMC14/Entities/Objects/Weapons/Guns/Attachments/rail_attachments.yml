@@ -732,7 +732,7 @@
   - type: Tag
     tags:
     - RMCAttachmentRail
-    - RMCAttachmente290Scope
+    - RMCAttachmentE290Scope
 
 - type: Tag
   id: RMCAttachmentRail
@@ -798,4 +798,4 @@
   id: RMCAttachmentMGLIntegratedScope
 
 - type: Tag
-  id: RMCAttachmentL89Scope
+  id: RMCAttachmentE290Scope

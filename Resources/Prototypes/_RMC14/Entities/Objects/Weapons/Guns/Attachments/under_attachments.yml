@@ -1038,7 +1038,6 @@
     sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
     state: mkey-e290
   - type: AttachableToggleable
-    wieldedUseOnly: false # poor code in parity means this doesnt function like this however it seems to be intended to do this soo
     actionName: Switch to the E290 integrated underbarrel shotgun
     actionDesc: Switch to using the E290A1/B's integrated underbarrel shotgun.
     icon:
