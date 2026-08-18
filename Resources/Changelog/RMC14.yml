@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: Requisitions now also stocks replacement squad headsets with built in
-      tracking.
-    type: Add
-  id: 3084
-  time: '2026-04-08T04:30:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9502
 - author: Dygon
   changes:
   - message: Pilots can now play a far reaching sound using the dropship navigation
@@ -4543,5 +4535,17 @@
   id: 3583
   time: '2026-08-16T22:15:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10693
+- author: Thereisabear
+  changes:
+  - message: JTAC and Spotter pamphlets will now result in JTAC 2 regardless of which
+      one used first.
+    type: Tweak
+  - message: Fixed pamphlets stacking skills erroneously.
+    type: Fix
+  - message: Fixed survivor jobs names getting erased  after using a pamphlet.
+    type: Fix
+  id: 3584
+  time: '2026-08-18T15:37:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10276
 Name: RMC14
 Order: -1
