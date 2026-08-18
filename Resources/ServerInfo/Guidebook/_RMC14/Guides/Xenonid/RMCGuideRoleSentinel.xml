@@ -21,7 +21,7 @@
   Paratoxin Stacks only go up to 30!
 
   ##Abilities:
-  - [bold]Paratoxin Spit[/bold]: Glob a spit that slows hosts, drains their chemicals, and applies 5 paratoxin stacks. If they have no armor it will stun them down.
+  - [bold]Paratoxin Spit[/bold]: Glob a spit that slows hosts, drains their chemicals, and applies 5 paratoxin stacks. If they have no armor it will stun them down. This isn't blocked by allied xenos!
   <GuideEntityEmbed Entity="RMCGuidebookActionXenoParatoxinSpit"/>
   - [bold]Paratoxin Slashes[/bold]: Empowers your next 3 attacks or tailstabs to inject 10 paratoxin stacks.
   <GuideEntityEmbed Entity="RMCGuidebookActionXenoCripplingStrike"/>
