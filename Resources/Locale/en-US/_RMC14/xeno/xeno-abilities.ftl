@@ -475,3 +475,14 @@ rmc-xeno-swift-steps-others = {CAPITALIZE(THE($user))} darts aside, evading {THE
 rmc-xeno-marked-critical-apply = You feel fear washing down your spine... you could be next!
 rmc-xeno-marked-critical-disappear = You calm down and get back to your senses.
 rmc-xeno-marked-critical-consumed = You've been knocked back to your senses!
+
+# Paratoxin Slashes
+rmc-xeno-paratoxin-slashes-apply = Our next {$number ->
+[1] slash
+*[other] {$number} slashes
+} will apply paratoxin!
+rmc-xeno-paratoxin-slashes-expire = We have waited too long, our slashes will no longer apply paratoxin!
+
+# Catalytic Tail Stab
+rmc-xeno-catalytic-tail-stab-buff = We are faster and more armored for a short time!
+rmc-xeno-catalytic-tail-stab-buff-expire = We feel our speed and armor dissipate!

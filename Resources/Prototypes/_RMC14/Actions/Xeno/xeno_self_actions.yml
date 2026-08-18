@@ -107,6 +107,7 @@
     useDelay: 2
   - type: InstantAction
     event: !type:XenoToggleCrestActionEvent
+  - type: RMCDazeableAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -276,6 +277,7 @@
   - type: InstantAction
     event: !type:XenoGrowOvipositorActionEvent
   - type: XenoGrowOvipositorAction
+  - type: RMCDazeableAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -323,6 +325,7 @@
     useDelay: 26
   - type: InstantAction
     event: !type:XenoDefensiveShieldActionEvent
+  - type: RMCDazeableAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -423,6 +426,7 @@
     useDelay: 0.5
   - type: InstantAction
     event: !type:ManageHiveActionEvent
+  - type: RMCDazeableAction
 
 - type: entity
   id: ActionXenoDodge
@@ -438,6 +442,7 @@
     useDelay: 13
   - type: InstantAction
     event: !type:XenoDodgeActionEvent
+  - type: RMCDazeableAction
 
 - type: entity
   parent: ActionXenoBase
@@ -483,6 +488,7 @@
   - type: InstantAction
     event: !type:XenoSoakActionEvent
   - type: ActionBlockIfResting
+  - type: RMCDazeableAction
 
 - type: entity
   parent: ActionXenoBase
@@ -498,6 +504,7 @@
   - type: InstantAction
     event: !type:XenoEmpowerActionEvent
   - type: ActionBlockIfResting
+  - type: RMCDazeableAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase

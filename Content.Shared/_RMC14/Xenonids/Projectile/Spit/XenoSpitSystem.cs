@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.Explosion;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.OnCollide;
 using Content.Shared._RMC14.Shields;
 using Content.Shared._RMC14.Slow;
@@ -28,6 +29,7 @@ using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Effects;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
@@ -71,6 +73,7 @@ public sealed class XenoSpitSystem : EntitySystem
     [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
 
     private static readonly ProtoId<AlertPrototype> FireAlert = "Fire";
     private static readonly ProtoId<ReagentPrototype> AcidRemovedBy = "Water";
@@ -295,10 +298,11 @@ public sealed class XenoSpitSystem : EntitySystem
             return;
         }
 
-        if (HasComp<SynthComponent>(target))
+        if (HasComp<SynthComponent>(target) || _skills.HasSkill(target, spit.Comp.ResistSkill, spit.Comp.ResistLevel))
         {
-            var immuneMsg = Loc.GetString("cm-xeno-paralyzing-slash-immune", ("target", target));
-            _popup.PopupEntity(immuneMsg, target, target, PopupType.SmallCaution);
+            var immuneMsg = Loc.GetString("cm-xeno-paralyzing-slash-immune", ("target", Identity.Name(target, EntityManager, args.Shooter)));
+            if (args.Shooter != null)
+                _popup.PopupEntity(immuneMsg, target, args.Shooter.Value, PopupType.SmallCaution);
             return;
         }
 

@@ -2,17 +2,31 @@
   #Sentinel, Tier 1
   <GuideEntityEmbed Entity="CMXenoSentinel"/>
   ##Playing as a Sentinel
-  You are relatively fragile and ranged. Use your spits to disrupt hosts on the frontline and transport hosts.
+  You are relatively fragile, but fast and ranged. Use your spits to disrupt hosts on the frontline and transport hosts.
 
-  Corner peak around corners and stack scattered spit and slowing spit in the same volley, this lets you spit while minimizing risk to yourself, if any host gets too close then you can paralyzing slash them.
+  Corner peak around corners or behind other xenos, and stack paratoxin stacks on hosts, this lets you spit while minimizing risk to yourself, if any host gets too close then you can use your catalytic tail stab to gain speed and armor to escape.
 
-  You can also capture hosts that are alone by scatter spitting them and slashing them with paralyzing slash, wait for them to drop and then tackle them.
+  You can also capture hosts that are alone by paratoxin spitting them to max stacks and biting them with draining bite, then tackle them.
+
+  ##Paratoxin Stacks:
+  <Box>
+    <GuideEntityEmbed Entity="RMCGuidebookParatoxin"/>
+    <GuideEntityEmbed Entity="RMCGuidebookParatoxinMedium"/>
+    <GuideEntityEmbed Entity="RMCGuidebookParatoxinMax"/>
+  </Box>
+  Your paratoxin spit and paratoxin slashes give hosts paratoxin stacks, which on their own do oxygen damage over time, and isn't very dangerous by itself. You mainly should focus on using them to combo with your draining bite and/or catalytic tail stab.
+
+  The damage from stacks can only go up to 50, so you won't kill a host just spitting them! Stacks will naturally dissapate after some time if you stop applying them.
+
+  Paratoxin Stacks only go up to 30!
 
   ##Abilities:
-  - [bold]Slowing Spit[/bold]: Glob a spit that slows hosts and drains their chemicals, if they have no armor it will stun them down.
-  <GuideEntityEmbed Entity="RMCGuidebookActionXenoSpit"/>
-  - [bold]Scattered Spit[/bold]: Glob spits in a shotgun like fashion that briefly knocks down hosts, very useful for any hosts that are pushing.
-  <GuideEntityEmbed Entity="RMCGuidebookActionXenoScatteredSpit"/>
-  - [bold]Paralyzing Slash[/bold]: Empowers your next attack or tailstab to inject neurotoxin which will make them fall over after a brief period of time.
+  - [bold]Paratoxin Spit[/bold]: Glob a spit that slows hosts, drains their chemicals, and applies 5 paratoxin stacks. If they have no armor it will stun them down.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoParatoxinSpit"/>
+  - [bold]Paratoxin Slashes[/bold]: Empowers your next 3 attacks or tailstabs to inject 10 paratoxin stacks.
   <GuideEntityEmbed Entity="RMCGuidebookActionXenoCripplingStrike"/>
+  - [bold]Catalytic Tail Stab[/bold]: Does extra burn damage for each paratoxin stack on a host. Gives you 25 armor and double speed for 3.5 seconds if they have at least 10 stacks, great for hosts pushing you. Drains 1/2 of the paratoxin stacks from the host.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoTailStabSentinel"/>
+  - [bold]Draining Bite[/bold]: Stuns a host for a very short time with no paratoxin stacks. With paratoxin stacks the stun time is much higher and it also drains medical chems. Drains 1/3 of the paratoxin stacks from the host. Great for capturing at max stacks.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoHeadbite"/>
 </Document>
