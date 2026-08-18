@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Body;
 using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Marines.Skills;
@@ -74,6 +75,7 @@ public sealed class XenoSpitSystem : EntitySystem
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private readonly SharedRMCBloodstreamSystem _rmcblood = default!;
 
     private static readonly ProtoId<AlertPrototype> FireAlert = "Fire";
     private static readonly ProtoId<ReagentPrototype> AcidRemovedBy = "Water";
@@ -570,17 +572,18 @@ public sealed class XenoSpitSystem : EntitySystem
             return;
 
         var target = args.Target;
-        if (_hive.FromSameHive(spit.Owner, target) || !_solution.TryGetSolution(target, spit.Comp.TargetSolution, out var solEnt, out var solu))
+
+        if (_hive.FromSameHive(spit.Owner, target) || !_rmcblood.TryGetChemicalSolution(target, out var solEnt, out var solu))
             return;
 
-        if (solu == null || solEnt == null)
+        if (solu == null)
             return;
 
         //TODO RMC-14 resisting neuro should prevent medicine drain but not stim drain
         foreach (var chemical in solu.GetReagentPrototypes(_prototypeManager).Keys)
         {
             if (chemical.Group == spit.Comp.DrainGroup)
-                _solution.RemoveReagent(solEnt.Value, chemical.ID, spit.Comp.DrainAmount);
+                _solution.RemoveReagent(solEnt, chemical.ID, spit.Comp.DrainAmount);
         }
     }
 
