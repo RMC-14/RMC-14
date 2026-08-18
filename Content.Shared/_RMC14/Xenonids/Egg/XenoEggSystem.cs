@@ -264,6 +264,13 @@ public sealed class XenoEggSystem : EntitySystem
             return;
         }
 
+        if (HasComp<VehicleInteriorOccupantComponent>(args.User))
+        {
+            var failMessage = Loc.GetString("rmc-xeno-egg-blocked-vehicle");
+            _popup.PopupClient(failMessage, args.User, args.User, PopupType.SmallCaution);
+            return;
+        }
+
         if (!CanPlaceEggPopup(args.User, egg, args.ClickLocation, args.Handled, out _))
         {
             args.Handled = true;
