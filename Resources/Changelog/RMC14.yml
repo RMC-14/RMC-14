@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Pilots can now play a far reaching sound using the dropship navigation
-      computer to announce that they are about to take off.
-    type: Add
-  id: 3085
-  time: '2026-04-08T04:37:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9448
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed PMC-FOL survivor and Paramarine Commander not counting towards
@@ -4547,5 +4539,12 @@
   id: 3584
   time: '2026-08-18T15:37:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10276
+- author: Vermidia
+  changes:
+  - message: Fixed parasites being unable to interact with eggmorphers.
+    type: Fix
+  id: 3585
+  time: '2026-08-18T16:20:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10369
 Name: RMC14
 Order: -1
