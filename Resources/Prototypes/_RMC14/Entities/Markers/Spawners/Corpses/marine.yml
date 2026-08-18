@@ -33,7 +33,7 @@
 - type: entity
   parent: RMCSpawnerCorpse
   id: RMCSpawnerCorpseUNMCMilitaryPoliceRandom
-  name: Corpse Spawner - UNMC Military Police
+  name: Corpse Spawner - UNMC Base Police
   components:
   - type: CorpseSpawner
     spawn: RMCCorpseUNMCMilitaryPoliceRandom

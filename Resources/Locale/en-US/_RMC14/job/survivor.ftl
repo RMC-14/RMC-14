@@ -165,6 +165,9 @@ rmc-job-greeting-varadero = The stench of burning phoron still lingers in the sa
 rmc-job-name-survivor-commander-new-varadero = Commander
 rmc-job-prefix-survivor-varadero-commander = UNMC CDR
 
+rmc-job-name-survivor-varadero-synth = Varadero Base Synthetic
+rmc-job-prefix-survivor-varadero-synth = UNMC SYN
+
 cm-job-name-surivor-beach-bum = Beach Bum
 
 cm-job-name-survivor-varadero-chaplain = Base Chaplain

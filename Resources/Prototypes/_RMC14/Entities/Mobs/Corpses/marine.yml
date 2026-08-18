@@ -219,7 +219,7 @@
     ears: CMHeadsetColony
     eyes: CMGlassesSecurity
     shoes: CMBootsBlackFilled
-    id: CMIDCardMedicalTechnician
+    id: CMIDCardBasePolice
     gloves: CMHandsBlackMarine
     belt: CMBeltSecurityMPFilled
     outerClothing: CMCoatMP

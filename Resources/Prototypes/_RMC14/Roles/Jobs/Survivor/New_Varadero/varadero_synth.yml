@@ -1,0 +1,86 @@
+- type: job
+  parent: RMCSyntheticColony
+  id: RMCSurvivorUNMCSynth
+  name: rmc-job-name-survivor-varadero-synth
+  ranks:
+    RMCRankChiefWarrantOfficer:
+    - !type:RoleTimeRequirement
+      role: RMCJobSyntheticColony
+      time: 270000 # 75 hours
+    RMCRankWarrantOfficer: [ ]
+  supervisors: rmc-job-supervisors-commander
+  accessGroups:
+  - Colony
+  - ColonistSynthShipside
+  startingGear: RMCGearSurvivorUNMCSynthetic
+  spawnMenuRoleName: UNMC Support Synthetic (NV Survivor)
+  roleWeight: 0.25
+  icon: "RMCJobIconSurvivorUNMCSynth"
+  hasIcon: true
+  whitelisted: true
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+      - Civilian
+    - type: Language
+      preset: RMCLanguagePresetSynthColonist
+    - type: LanguageLearning
+      preset: RMCLanguageLearningPresetSynthColonist
+    - type: RMCAllowSuitStorage
+    - type: MarineOrders
+    - type: JobPrefix
+      prefix: rmc-job-prefix-survivor-varadero-synth
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: synth
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadUNMC
+    - type: JobPrefix
+      prefix: rmc-job-prefix-synth
+    - type: MeleeWeapon
+      soundHit:
+        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
+        params:
+          variation: 0.15
+          volume: -1
+      angle: 30
+      animation: WeaponArcFist
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 35
+    - type: Synth
+  hidden: true
+
+- type: startingGear
+  id: RMCGearSurvivorUNMCSynthetic
+  equipment:
+    id: RMCIDCardSynth
+    back: RMCSatchelMarineLogisticsBig
+    jumpsuit: RMCJumpsuitCivilianGreen
+    shoes: CMBootsBlackFilled
+    ears: RMCHeadsetMarineNV
+    pocket1: RMCPouchToolsFill
+    pocket2: RMCPouchSurvivalSynthFill
+    belt: RMCBeltMedicalDefibAnalyzerFilled
+    outerClothing: RMCHazardVestEMTGreen
+  inhand:
+  - RMCMotionDetector
+  - CMFirstAidKitFilled
+  storage:
+    back:
+    - RMCSynthResetKey
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSurvivorUNMCSynth
+  icon:
+    sprite: _RMC14/Interface/job_icons/UNMC/other.rsi
+    state: hudsquad_nv_synth

@@ -330,15 +330,15 @@
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/tanker/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/tanker/urban.rsi
 
-# m2
+# am2
 - type: entity
   parent: CMArmorM3VLBallistics
   id: RMCArmorAM2
   name: AM2 pattern armor
-  description: A non-standard variant of the Marine M2 Pattern Chestplate. Protects the chest from ballistic rounds, bladed objects and accidents. It has a small leather pouch strapped to it for limited storage. Notably, this model of the M2 lacks the rigging and such of the later generation M2's still in use by the UNMC making it easier to handle.
+  description: A non-standard variant of the Marine M2 Pattern Chestplate. Protects the chest from ballistic rounds, bladed objects and accidents. It has a small leather pouch strapped to it for limited storage. Notably, this model of the M2 lacks the rigging and such of the later generation M2's still in use by the UNMC, making it easier to handle.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/cbrn.rsi # TODO RMC14: Sprites
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/tyrargo.rsi # TODO RMC14: sprites
   - type: CMArmor # TODO RMC14: BODY_FLAG_CHEST|BODY_FLAG_GROIN|BODY_FLAG_LEGS
     bullet: 20
     bio: 15
