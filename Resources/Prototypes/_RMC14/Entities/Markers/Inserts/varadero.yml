@@ -9,7 +9,7 @@
     clearDecals: true
     replaceAreas: true
 
-- type: entity
+- type: entity # TODO RMC14: Update this for LACN rework
   parent: RMCMapInsertVaraderoBase
   id: RMCMapInsertVaraderoCLFRaid
   name: CLF Raid
@@ -23,13 +23,13 @@
 
 - type: entity
   parent: RMCMapInsertVaraderoBase
-  id: RMCMapInsertVaraderoResturant
-  name: Resturant
+  id: RMCMapInsertVaraderoArmoryToGallery
+  name: Armory to Gallery
   suffix: Insert Varadero
   components:
   - type: MapInsert
     variations:
-    - spawn: "/Maps/_RMC14/Inserts/Varadero/varadero_resturant.yml"
+    - spawn: "/Maps/_RMC14/Inserts/Varadero/armory_to_gallery.yml"
       probability: 0.33
 
 - type: entity

@@ -37,7 +37,7 @@
         state: field_doctor
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_ua
+        state: background_unmc
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
