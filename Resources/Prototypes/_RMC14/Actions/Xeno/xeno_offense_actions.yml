@@ -481,6 +481,7 @@
     id: ActionXenoQueenSpitAcid
     ids:
     - ActionXenoQueenSpitNeuro
+    cooldown: 2.5
 
 - type: entity
   id: ActionXenoQueenSpitNeuro
@@ -497,6 +498,7 @@
     id: ActionXenoQueenSpitNeuro
     ids:
     - ActionXenoQueenSpitAcid
+    cooldown: 2.5
 
 - type: entity
   id: ActionXenoSpitPraetorian
