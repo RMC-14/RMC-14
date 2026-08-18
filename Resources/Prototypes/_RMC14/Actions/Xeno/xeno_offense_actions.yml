@@ -492,6 +492,7 @@
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: shift_spit_neurotoxin
+    useDelay: 2.5
   - type: ActionSharedCooldown
     id: ActionXenoQueenSpitNeuro
     ids:
