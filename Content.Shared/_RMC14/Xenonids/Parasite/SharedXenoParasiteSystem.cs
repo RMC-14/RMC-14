@@ -446,8 +446,8 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         }
         _standing.Stand(victim);
 
-        // Prevents uninfected marines from being tracked by the Motion Detector after being infected before.
-        _motionDetector.RemoveAddedTrackedComponent(victim.Owner);
+        // Removes the MotionDetectorTrackedComponent from the victim if they didn't have it before infection.
+        _motionDetector.RemoveTempTrackedComponent(victim.Owner);
     }
 
     private void OnVictimInfectedCancel<T>(Entity<VictimInfectedComponent> victim, ref T args) where T : CancellableEntityEventArgs

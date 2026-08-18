@@ -43,6 +43,8 @@ public sealed class MotionDetectorSystem : EntitySystem
 
     private EntityQuery<MotionDetectorComponent> _detectorQuery = default!;
     private EntityQuery<StorageComponent> _storageQuery = default!;
+    private EntityQuery<VictimInfectedComponent> _infectedQuery = default!;
+    private EntityQuery<InfectableComponent> _infectableQuery = default!;
 
     private readonly HashSet<Entity<MotionDetectorTrackedComponent>> _toUpdate = new();
     private readonly HashSet<Entity<MotionDetectorTrackedComponent>> _tracked = new();
@@ -53,6 +55,8 @@ public sealed class MotionDetectorSystem : EntitySystem
     {
         _detectorQuery = GetEntityQuery<MotionDetectorComponent>();
         _storageQuery = GetEntityQuery<StorageComponent>();
+        _infectedQuery = GetEntityQuery<VictimInfectedComponent>();
+        _infectableQuery = GetEntityQuery<InfectableComponent>();
 
         SubscribeLocalEvent<XenoParasiteInfectEvent>(OnXenoInfect);
         SubscribeLocalEvent<MobStateChangedEvent>(OnMobStateChanged);
@@ -79,19 +83,14 @@ public sealed class MotionDetectorSystem : EntitySystem
         DisableDetectorsOnMob(ev.Target);
 
         // Add a MotionDetectorTrackedComponent to the infected entity if it doesn't already have one.
-        if (HasComp<MotionDetectorTrackedComponent>(ev.Target))
-            return;
-
-        var trackedEnt = new Entity<MotionDetectorTrackedComponent>
+        if (!HasComp<MotionDetectorTrackedComponent>(ev.Target))
         {
-            Owner = ev.Target,
-            Comp = AddComp<MotionDetectorTrackedComponent>(ev.Target)
-        };
-
-        _addedTracked.Add(ev.Target);
+            AddComp<MotionDetectorTrackedComponent>(ev.Target);
+            _addedTracked.Add(ev.Target);
+        }
     }
 
-    public void RemoveAddedTrackedComponent(EntityUid ent)
+    public void RemoveTempTrackedComponent(EntityUid ent)
     {
         // Remove the MotionDetectorTrackedComponent from the entity upon removal of VictimInfectedComponent if it didn't have it before addition.
         if (!_addedTracked.Remove(ent))
@@ -286,7 +285,7 @@ public sealed class MotionDetectorSystem : EntitySystem
             UpdateAppearance((ent, detector));
             MotionDetectorUpdated((ent, detector));
         }
-
+        
         if (_storageQuery.TryComp(ent, out var storage))
         {
             foreach (var stored in storage.StoredItems.Keys)
@@ -406,8 +405,8 @@ public sealed class MotionDetectorSystem : EntitySystem
 
                 // Motion detectors always detect infected marines, including if the user is infected regardless of faction. 
                 var infected =
-                    HasComp<VictimInfectedComponent>(tracked.Owner) ||
-                    (TryComp<InfectableComponent>(tracked.Owner, out var infectable) &&
+                    _infectedQuery.HasComp(tracked.Owner) ||
+                    (_infectableQuery.TryComp(tracked.Owner, out var infectable) &&
                         infectable.BeingInfected);
 
                 if (!infected)
