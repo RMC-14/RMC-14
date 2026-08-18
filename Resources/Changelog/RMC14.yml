@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed PMC-FOL survivor and Paramarine Commander not counting towards
-      Survivor CO time.
-    type: Fix
-  - message: Fixed the paramarine commander not using the loadout of your survivor
-      commander profile.
-    type: Fix
-  id: 3086
-  time: '2026-04-10T06:41:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9432
 - author: Arykh
   changes:
   - message: Using binoculars will now put them on your eyes.
@@ -4546,5 +4535,12 @@
   id: 3585
   time: '2026-08-18T16:20:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10369
+- author: IceNoobXD
+  changes:
+  - message: Added a small research bubble in excavation on Trijent Dam!
+    type: Add
+  id: 3586
+  time: '2026-08-18T16:25:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10555
 Name: RMC14
 Order: -1
