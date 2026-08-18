@@ -149,7 +149,7 @@ tilemap:
   147: CMPlanetDesert6
   164: CMPlanetForest1
   6: CMPlanetGCircuit
-  57: CMPlanetGrass1
+  57: CMPlanetGrass1Weedable
   127: CMPlanetGrassDirtNE2
   136: CMPlanetGrassDirtNW2
   128: CMPlanetGrassDirtNorth
