@@ -1,13 +1,19 @@
 # Base SMES
 - type: entity
   abstract: true
-  parent: BaseSMES
+  parent: [ BaseMachine, ConstructibleMachine ]
   id: CMSMESBase
   name: SMES
   description: A high-capacity superconducting magnetic energy storage (SMES) unit.
   components:
+    - type: AmbientSound
+      volume: -7
+      range: 3
+      sound:
+        path: /Audio/Ambience/Objects/periodic_beep.ogg
     - type: GuideHelp
       guides:
+      - RMCGuidePower
       - RMCGuideRoleCombatTechnician
     - type: Sprite
       sprite: _RMC14/Structures/Power/smes.rsi
@@ -23,8 +29,38 @@
       - map: ["enum.SmesVisualLayers.Output"]
         state: "smes-op1"
         shader: unshaded
+      - map: ["enum.WiresVisualLayers.MaintenancePanel"]
+        sprite: Structures/Power/smes.rsi
+        state: smes-open
+    - type: Smes
+    - type: Appearance
+    - type: Battery
+      maxCharge: 200000000
+      startingCharge: 0
+    - type: ExaminableBattery
+    - type: PointLight
+      radius: 1.5
+      energy: 1.6
+      color: "#c9c042"
+      castShadows: false
+    - type: WiresPanel
+    - type: WiresVisuals
     - type: Machine
       board: CMSMESMachineCircuitboard
+    - type: RMCPowerStorage
+      inputEnabled: false
+      inputLimit: 200000
+      maxInput: 200000
+      outputEnabled: true
+      outputLimit: 50000
+      maxOutput: 200000
+    - type: RMCSmes
+    - type: UserInterface
+      interfaces:
+        enum.RMCSmesUiKey.Key:
+          type: RMCSmesBui
+    - type: ActivatableUI
+      key: enum.RMCSmesUiKey.Key
     - type: InteractedBlacklist
       blacklist:
         components:
@@ -36,11 +72,11 @@
 - type: entity
   parent: CMSMESBase
   id: CMSMESBasic
-  suffix: Basic, 8MW
+  suffix: Basic, 200 MJ
   components:
   - type: Battery
-    maxCharge: 8000000
-    startingCharge: 8000000
+    maxCharge: 200000000
+    startingCharge: 200000000
 
 - type: entity
   parent: CMSMESBasic

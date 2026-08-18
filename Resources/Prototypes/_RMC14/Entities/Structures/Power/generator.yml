@@ -36,6 +36,7 @@
   components:
   - type: GuideHelp
     guides:
+    - RMCGuidePower
     - RMCGuideRoleCombatTechnician
   - type: InteractionOutline
   - type: Appearance
@@ -43,6 +44,7 @@
     isCorrodible: false
   - type: RMCFusionReactor
     watts: 50000
+  - type: RMCPowerSource
   - type: ActivatableUIBlacklist
     blacklist:
       components:
@@ -61,6 +63,7 @@
           SeventyFive: { state: "on-75" }
           Hundred: { state: "on-100" }
           Overloaded: { state: "overloaded" }
+          Empty: { state: "cell_missing" }
   - type: BlockXenoConstruction
   - type: RMCMesonsNonviewable
 
@@ -73,6 +76,9 @@
   - type: RMCFusionReactor
     watts: 100000
     randomizeDamage: true
+    enabled: false
+    baseFailureChance: 10
+    failureChance: 10
   - type: IntelPowerObjective
   - type: Sprite
     drawdepth: WallMountedItems
@@ -90,6 +96,7 @@
           Fifty: { state: "on-50" }
           SeventyFive: { state: "on-75" }
           Hundred: { state: "on-100" }
+          Empty: { state: "cell_missing" }
   - type: MarineMapTracked
   - type: XenoMapTracked
   - type: TacticalMapTracked
@@ -121,10 +128,34 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Power/fusion_fuel_cell.rsi
-    state: cell-full
+    layers:
+    - state: cell-full
+      map: [ "base" ]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCFusionCellVisuals.Fuel:
+        base:
+          Empty: { state: cell-empty }
+          Low: { state: cell-low }
+          Medium: { state: cell-medium }
+          High: { state: cell-high }
+          Full: { state: cell-full }
   - type: Item
     size: Normal
+  - type: GuideHelp
+    guides:
+    - RMCGuidePower
   - type: RMCFusionCell
+
+- type: entity
+  parent: RMCGeneratorFusionCell
+  id: RMCGeneratorFusionCellEmpty
+  suffix: Empty
+  components:
+  - type: RMCFusionCell
+    fuel: 0
+    isFresh: false
 
 - type: entity
   abstract: true

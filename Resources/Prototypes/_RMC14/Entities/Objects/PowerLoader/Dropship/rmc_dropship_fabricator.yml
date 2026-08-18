@@ -17,7 +17,11 @@
       offset: 0.5, 0
   - type: DropshipFabricator
   - type: ApcPowerReceiver
-    needsPower: false # TODO RMC14 power
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 20
+    activeLoad: 0
+    channel: Equipment
   - type: UserInterface
     interfaces:
       enum.DropshipFabricatorUi.Key:

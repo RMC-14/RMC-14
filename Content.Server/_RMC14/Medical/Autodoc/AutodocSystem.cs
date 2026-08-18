@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Medical.Autodoc;
 using Content.Shared._RMC14.Medical.Surgery.Steps.Parts;
 using Content.Shared._RMC14.Mobs;
+using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.RMCMedicalRecords;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Body.Components;
@@ -33,6 +34,7 @@ public sealed class AutodocSystem : SharedAutodocSystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedRMCPowerSystem _power = default!;
     [Dependency] private readonly SharedRMCMedicalRecordsSystem _records = default!;
     [Dependency] private readonly SharedRMCBloodstreamSystem _rmcBloodstream = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
@@ -531,12 +533,12 @@ public sealed class AutodocSystem : SharedAutodocSystem
         var autodocs = EntityQueryEnumerator<AutodocComponent>();
         while (autodocs.MoveNext(out var uid, out var autodoc))
         {
-            if (autodoc.Occupant == null)
+            var occupied = autodoc.Occupant != null;
+            _power.SetPowerMode(uid, occupied ? RMCPowerMode.Active : RMCPowerMode.Idle);
+            if (!occupied || !autodoc.IsSurgeryInProgress || !_power.IsPowered(uid))
                 continue;
 
-            var occupant = autodoc.Occupant.Value;
-            if (!autodoc.IsSurgeryInProgress)
-                continue;
+            var occupant = autodoc.Occupant!.Value;
 
             if (time < autodoc.NextTick)
                 continue;

@@ -49,6 +49,12 @@
     - map: ["enum.PowerDeviceVisualLayers.Powered"]
       state: "on"
   - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
   - type: ApcPowerReceiver
     powerLoad: 250
     needsPower: true
@@ -154,6 +160,7 @@
     excludeWhitelistedRoles: true
   - type: ActivatableUI
     key: enum.RMCCryoRecoveryUiKey.Key
+  - type: ActivatableUIRequiresPower
   - type: ActivatableUIRequiresAccess
   - type: AccessReader
     access: [ [ "CMAccessRequisitions" ] ]
@@ -172,8 +179,12 @@
     - Cargo
   - type: CargoSellBlacklist
   - type: ApcPowerReceiver
-    powerLoad: 0
-    needsPower: false
+    powerLoad: 300
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 300
+    activeLoad: 300
+    channel: Equipment
   - type: Appearance
   - type: LitOnPowered
   - type: EmitSoundOnUIOpen

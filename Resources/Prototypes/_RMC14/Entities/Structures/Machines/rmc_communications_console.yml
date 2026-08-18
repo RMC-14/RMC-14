@@ -80,6 +80,30 @@
 
 - type: entity
   parent: RMCCommunicationsConsoleBase
+  id: RMCPowerMonitoringConsole
+  name: power monitoring console
+  description: A console that displays the power state of its local named network.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    layers:
+    - map: ["base"]
+      state: "power0"
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "power"
+  - type: ActivatableUI
+    key: enum.RMCPowerMonitorUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.RMCPowerMonitorUiKey.Key:
+        type: RMCPowerMonitorBui
+  - type: RMCPowerMonitor
+  - type: GuideHelp
+    guides:
+    - RMCGuidePower
+
+- type: entity
+  parent: RMCCommunicationsConsoleBase
   id: RMCWarshipControlConsole
   name: almayer control console
   description: This is used for controlling ship and its related functions.
@@ -181,8 +205,8 @@
     state: maptable
     layers: []
   - type: RMCPowerReceiver
-    idleLoad: 0
-    activeLoad: 2
+    idleLoad: 2
+    activeLoad: 0
   - type: InteractionOutline
   - type: ActivatableUI
     key: enum.TacticalMapComputerUi.Key
@@ -234,8 +258,8 @@
     powerLoad: 250
     needsPower: true
   - type: RMCPowerReceiver
-    idleLoad: 5
-    activeLoad: 10
+    idleLoad: 2
+    activeLoad: 0
     channel: Equipment
   - type: GenericVisualizer
     visuals:

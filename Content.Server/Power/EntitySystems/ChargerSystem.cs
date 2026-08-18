@@ -12,6 +12,7 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Storage.Components;
 using Robust.Server.Containers;
 using Content.Shared.Whitelist;
+using Content.Shared._RMC14.Power; // RMC14
 
 namespace Content.Server.Power.EntitySystems;
 
@@ -23,6 +24,7 @@ internal sealed class ChargerSystem : EntitySystem
     [Dependency] private readonly BatterySystem _battery = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!; // RMC14
 
     public override void Initialize()
     {
@@ -154,6 +156,7 @@ internal sealed class ChargerSystem : EntitySystem
     private void UpdateStatus(EntityUid uid, ChargerComponent component)
     {
         var status = GetStatus(uid, component);
+        _rmcPower.SetPowerMode(uid, WantsCharge(uid, component) ? RMCPowerMode.Active : RMCPowerMode.Idle); // RMC14
         TryComp(uid, out AppearanceComponent? appearance);
 
         if (!_container.TryGetContainer(uid, component.SlotId, out var container))
@@ -283,6 +286,25 @@ internal sealed class ChargerSystem : EntitySystem
             return CellChargerStatus.Charged;
 
         return CellChargerStatus.Charging;
+    }
+
+    private bool WantsCharge(EntityUid uid, ChargerComponent component)
+    {
+        if (!component.Portable &&
+            (!TryComp(uid, out TransformComponent? transform) || !transform.Anchored))
+        {
+            return false;
+        }
+
+        if (HasComp<EmpDisabledComponent>(uid) ||
+            !_container.TryGetContainer(uid, component.SlotId, out var container) ||
+            container.ContainedEntities.Count == 0 ||
+            !SearchForBattery(container.ContainedEntities[0], out var heldEnt, out var battery))
+        {
+            return false;
+        }
+
+        return !_battery.IsFull(heldEnt.Value, battery);
     }
 
     private void TransferPower(EntityUid uid, EntityUid targetEntity, ChargerComponent component, float frameTime)

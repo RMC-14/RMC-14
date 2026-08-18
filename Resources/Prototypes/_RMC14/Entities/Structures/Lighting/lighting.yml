@@ -156,8 +156,8 @@
   - type: ApcPowerReceiver
   - type: Appearance
   - type: RMCPowerReceiver
-    idleLoad: 1
-    activeLoad: 40
+    idleLoad: 2
+    activeLoad: 80
     channel: Lighting
   - type: DeviceLinkSink
     ports:
@@ -389,6 +389,10 @@
   components:
   - type: PoweredLight
     hasLampOnSpawn: RMCLightTubeRed
+  - type: RMCPowerReceiver
+    idleLoad: 2
+    activeLoad: 40
+    channel: Lighting
   - type: Sprite
     sprite: _RMC14/Structures/Wallmounts/LightingOffset/light_tube.rsi
 
@@ -413,6 +417,10 @@
       map: ["enum.PoweredLightLayers.Base"]
   - type: PoweredLight
     hasLampOnSpawn: RMCLightTubeBlue
+  - type: RMCPowerReceiver
+    idleLoad: 2
+    activeLoad: 120
+    channel: Lighting
   - type: PoweredLightVisuals
     spriteStateMap:
       Empty: bslight-empty
@@ -532,7 +540,7 @@
   - type: ApcPowerReceiver
   - type: Appearance
   - type: RMCPowerReceiver
-    idleLoad: 1
+    idleLoad: 2
     activeLoad: 40
     channel: Lighting
   - type: DeviceLinkSink
