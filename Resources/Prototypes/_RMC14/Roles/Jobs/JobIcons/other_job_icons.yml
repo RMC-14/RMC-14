@@ -251,3 +251,59 @@
   icon:
     sprite: _RMC14/Interface/job_icons/halcyon.rsi
     state: hc_execspec
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CMJobIconHalcyonExecutiveSupervisor
+  icon:
+    sprite: _RMC14/Interface/job_icons/halcyon.rsi
+    state: hc_execsuper
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CMJobIconHalcyonAssistantManager
+  icon:
+    sprite: _RMC14/Interface/job_icons/halcyon.rsi
+    state: hc_assman
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CMJobIconHalcyonDivisionManager
+  icon:
+    sprite: _RMC14/Interface/job_icons/halcyon.rsi
+    state: hc_divman
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CMJobIconHalcyonChiefExecutive
+  icon:
+    sprite: _RMC14/Interface/job_icons/halcyon.rsi
+    state: hc_chiefman
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CMJobIconHalcyonDeputyDirector
+  icon:
+    sprite: _RMC14/Interface/job_icons/halcyon.rsi
+    state: hc_depdirector
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CMJobIconHalcyonDirector
+  icon:
+    sprite: _RMC14/Interface/job_icons/halcyon.rsi
+    state: hc_director
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CMJobIconHalcyonSecurity
+  icon:
+    sprite: _RMC14/Interface/job_icons/halcyon.rsi
+    state: hc_security
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CMJobIconHalcyonSynth
+  icon:
+    sprite: _RMC14/Interface/job_icons/halcyon.rsi
+    state: hc_synth

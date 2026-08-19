@@ -1,26 +1,50 @@
 {
   "version": 1,
   "license": "CC-BY-SA-4.0",
-  "copyright": "Sprited by sharksnake (Github)",
+  "copyright": "hc_trainee and halcyon logo sprited by sharksnake (Github), halcyon logo modified and copied on the hyperdyne icons by @IceNoobXD on Github, hc_security and hc_synth taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/a46fad702be27fedec2b0bca69ed3b316e482095/icons/mob/hud/factions/hyperdyne.dmi",
   "size": {
     "x": 16,
     "y": 16
   },
     "states": [
         {
-            "name": "hc_exec"
-        },
-        {
-            "name": "hc_execspec"
+            "name": "hc_trainee"
         },
         {
             "name": "hc_jrexec"
         },
         {
+            "name": "hc_exec"
+        },
+        {
             "name": "hc_srexec"
         },
         {
-            "name": "hc_trainee"
+            "name": "hc_execspec"
+        },
+        {
+            "name": "hc_execsuper"
+        },
+        {
+            "name": "hc_assman"
+        },
+        {
+            "name": "hc_divman"
+        },
+        {
+            "name": "hc_chiefman"
+        },
+        {
+            "name": "hc_depdirect"
+        },
+        {
+            "name": "hc_director"
+        },
+        {
+            "name": "hc_synth"
+        },
+        {
+            "name": "hc_security"
         }
     ]
 }
