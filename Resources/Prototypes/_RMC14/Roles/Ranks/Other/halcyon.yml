@@ -38,39 +38,39 @@
   name: Executive Supervisor
   prefix: Exec. Spvsr.
   paygrade: HC6
-  jobicon: CMJobIconHalcyonExecutiveSupervisor
+  jobIcon: CMJobIconHalcyonExecutiveSupervisor
 
 - type: rank
   id: RMCRankHalcyonAssistantManager
   name: Assistant Manager
   prefix: Assis. Mng.
   paygrade: HC7
-  jobicon: CMJobIconHalcyonAssistantManager
+  jobIcon: CMJobIconHalcyonAssistantManager
 
 - type: rank
   id: RMCRankHalcyonDivisionManager
   name: Division Manager
   prefix: Div. Mng.
   paygrade: HC8
-  jobicon: CMJobIconHalcyonDivisionManager
+  jobIcon: CMJobIconHalcyonDivisionManager
 
 - type: rank
   id: RMCRankHalcyonChiefExecutive
   name: Chief Executive
   prefix: Chief. Exec.
   paygrade: HC9
-  jobicon: CMJobIconHalcyonChiefExecutive
+  jobIcon: CMJobIconHalcyonChiefExecutive
 
 - type: rank
   id: RMCRankHalcyonDeputyDirector
   name: Deputy Director
   prefix: Dep. Director
   paygrade: HC10
-  jobicon: CMJobIconHalcyonDeputyDirector
+  jobIcon: CMJobIconHalcyonDeputyDirector
 
 - type: rank
   id: RMCRankHalcyonDirector
   name: Director
   prefix: Director
   paygrade: HC11
-  jobicon: CMJobIconHalcyonDirector
+  jobIcon: CMJobIconHalcyonDirector
