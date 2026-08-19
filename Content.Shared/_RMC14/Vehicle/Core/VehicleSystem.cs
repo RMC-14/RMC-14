@@ -8,10 +8,12 @@ using Content.Shared._RMC14.Construction;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.PowerLoader;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Teleporter;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
+using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Ghost;
 using Content.Shared.Interaction;
@@ -26,6 +28,7 @@ using Content.Shared.Roles.Jobs;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Vehicle.Components;
+using Content.Shared.Weapons.Melee;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameObjects;
@@ -74,6 +77,7 @@ public sealed partial class VehicleSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
     [Dependency] private readonly SharedRMCTeleporterSystem _rmcTeleporter = default!;
+    [Dependency] private readonly RMCSizeStunSystem _rmcSize = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
@@ -86,8 +90,14 @@ public sealed partial class VehicleSystem : EntitySystem
 
     private readonly HashSet<EntityUid> _intersecting = new();
 
+    private EntityQuery<MeleeWeaponComponent> _meleeWeaponQuery;
+
     public override void Initialize()
     {
+        _meleeWeaponQuery = GetEntityQuery<MeleeWeaponComponent>();
+
+        SubscribeLocalEvent<VehicleXenoSizeComponent, DamageModifyEvent>(OnVehicleXenoSizeDamageModify);
+
         SubscribeLocalEvent<VehicleEnterComponent, ActivateInWorldEvent>(OnVehicleEnterActivate);
         SubscribeLocalEvent<VehicleEnterComponent, ComponentShutdown>(OnVehicleEnterShutdown);
         SubscribeLocalEvent<VehicleExitComponent, ActivateInWorldEvent>(OnVehicleExitActivate);
@@ -110,6 +120,29 @@ public sealed partial class VehicleSystem : EntitySystem
 
         SubscribeLocalEvent<VehicleDemolitionComponent, InteractUsingEvent>(OnDemolitionInteractUsing);
         SubscribeLocalEvent<VehicleDemolitionComponent, VehicleDemolitionDoAfterEvent>(OnDemolitionDoAfter);
+    }
+
+    private void OnVehicleXenoSizeDamageModify(Entity<VehicleXenoSizeComponent> ent, ref DamageModifyEvent args)
+    {
+        if (args.ShouldIgnoreClawLogic)
+            return;
+
+        if (args.Tool is not { } attacker ||
+            !HasComp<XenoComponent>(attacker) ||
+            !_meleeWeaponQuery.HasComp(attacker))
+        {
+            return;
+        }
+
+        if (!_rmcSize.TryGetSize(attacker, out var size) || size >= ent.Comp.MinimumSize)
+            return;
+
+        args.Damage = new DamageSpecifier();
+
+        if (_net.IsClient)
+            return;
+
+        _popup.PopupEntity(Loc.GetString("rmc-vehicle-too-small-to-damage"), ent, attacker, PopupType.MediumCaution);
     }
 
     private void OnVehicleEnterActivate(Entity<VehicleEnterComponent> ent, ref ActivateInWorldEvent args)

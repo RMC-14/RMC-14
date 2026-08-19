@@ -72,6 +72,8 @@
   - type: Damageable
     damageContainer: StructuralMarine
     damageModifierSet: StructuralMarine
+  - type: VehicleXenoSize
+    minimumSize: Xeno
   - type: InteractionOutline
   - type: Sprite
     drawdepth: Mobs
