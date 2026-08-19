@@ -43,7 +43,7 @@
 - type: rank
   id: RMCRankTSESecondLieutenant
   name: Second Lieutenant
-  prefix: 2nd LT
+  prefix: 2ndLt.
   paygrade: O1
 
 - type: rank

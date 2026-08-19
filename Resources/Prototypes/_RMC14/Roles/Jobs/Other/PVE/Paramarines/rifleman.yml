@@ -1,0 +1,89 @@
+- type: job
+  parent: CMJobBase
+  id: CMRoyalParamarinesRiflemanPVE
+  name: rmc-job-name-rcm-pve-rifleman
+  description: rmc-ghost-role-information-rcm-description
+  playTimeTracker: RMCJobRoyalParaRiflemanPVE
+  ranks:
+    RMCRankTSELanceCorporal: [ ]
+  startingGear: RMCGearRoyalParaRiflemanPVE
+  icon: "RMCJobIconParaRiflemanPVE"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-royal-tl
+  spawnMenuRoleName: Royal Paramarine Rifleman (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - RoyalMarines
+      - TSE
+    - type: Language
+      spokenLanguages:
+      - English
+      - Japanese
+      understoodLanguages:
+      - English
+      - Japanese
+      currentLanguage: English
+      defaultLanguage: English
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillCqc: 3
+        RMCSkillEndurance: 3
+        RMCSkillEngineer: 1
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 3
+        RMCSkillJtac: 1
+        RMCSkillMedical: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillSurgery: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-rcm-pve-rifleman
+    - type: AssignSquad
+      squad: SquadPara
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: rmc_rifleman_pve
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_para
+  hidden: true
+
+- type: startingGear
+  id: RMCGearRoyalParaRiflemanPVE
+  equipment:
+    head: RMCHeadRoyalHelmet
+    ears: RMCHeadsetRoyalParaPVE
+    jumpsuit: RMCJumpsuitMarinePara
+    gloves: RMCHandsVeteranRoyalMarine
+    id: RMCIDRoyalMarines
+    belt: RMCBeltHolsterPistolParaM44
+    back: RMCSatchelRoyalMOLS
+    shoes: RMCBootsRoyalFilled
+    pocket1: RMCPouchToolsFilledRCM
+    pocket2: RMCPouchMedkitFillRoyal
+    outerClothing: RMCArmorParaVest
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointRCMPVEParaRifleman
+  name: paramarine rifleman spawn point (PVE)
+  components:
+  - type: SpawnPoint
+    job_id: CMRoyalParamarinesRiflemanPVE
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/ballistic.rsi
+    state: icon
+
+- type: playTimeTracker
+  id: RMCJobRoyalParaRiflemanPVE
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconParaRiflemanPVE
+  icon:
+    sprite: _RMC14/Interface/job_icons/TSE/RCM/paramarine.rsi
+    state: para_rifleman_alt

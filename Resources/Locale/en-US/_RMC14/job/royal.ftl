@@ -67,3 +67,9 @@ rmc-job-prefix-rcm-pve-bombardment-specialist = BMBRD
 
 rmc-job-name-rcm-pve-troop-commander = Commander
 rmc-job-prefix-rcm-pve-troop-commander = Com
+
+rmc-job-name-rcm-pve-lieutenant = Lieutenant
+rmc-job-prefix-rcm-pve-lieutenant = LT
+
+rmc-job-name-rcm-pve-pilot = Fleet Air Arm Pilot
+rmc-job-prefix-rcm-pve-pilot = Pilot

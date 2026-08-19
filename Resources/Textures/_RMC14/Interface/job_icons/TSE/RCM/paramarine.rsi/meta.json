@@ -26,6 +26,9 @@
             "name": "para_lieutenant_alt"
         },
         {
+            "name": "para_lieutenant_pve"
+        },
+        {
             "name": "para_medic"
         },
         {
@@ -33,6 +36,9 @@
         },
         {
             "name": "para_rifleman"
+        },
+        {
+            "name": "para_rifleman_alt"
         },
         {
             "name": "para_smartgunner"

@@ -1,0 +1,94 @@
+- type: job
+  parent: CMJobBase
+  id: CMRoyalMarinesPilotPVE
+  name: rmc-job-name-rcm-pve-pilot
+  description: rmc-ghost-role-information-rcm-description
+  playTimeTracker: RMCJobRoyalPilotPVE
+  ranks:
+    RMCRankTSESecondLieutenant: [ ]
+  startingGear: RMCGearRoyalPilotPVE
+  icon: "RMCJobIconRoyalPilotPVE"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-royal-troop-commander
+  spawnMenuRoleName: RCM Fleet Air Arm Pilot (PVE) 
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - RoyalMarines
+      - TSE
+    - type: Language
+      spokenLanguages:
+      - English
+      - Japanese
+      understoodLanguages:
+      - English
+      - Japanese
+      currentLanguage: English
+      defaultLanguage: English
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillCqc: 3
+        RMCSkillEndurance: 3
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 3
+        RMCSkillJtac: 2
+        RMCSkillLeadership: 1
+        RMCSkillMedical: 2
+        RMCSkillOverwatch: 1
+        RMCSkillPilot: 2
+        RMCSkillPowerLoader: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillSurgery: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-rcm-pve-pilot
+    - type: AssignSquad
+      squad: SquadRoyalMarinesPVE
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pilot
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_twe
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearRoyalRiflemanPVE
+  id: RMCGearRoyalPilotPVE
+  equipment:
+    head: RMCHeadRoyalFlightHelmet
+    ears: RMCHeadsetRoyalMarineLeaderPVE
+    jumpsuit: RMCJumpsuitMarineRoyalPVE
+    gloves: RMCHandsVeteranRoyalMarine
+    id: RMCIDRoyalMarines
+    belt: RMCBeltHolsterPistolRCMFilled
+    back: RMCSatchelRoyalMOLS
+    shoes: RMCBootsRoyalFilled
+    pocket1: RMCPouchToolsFilledRCM
+    pocket2: RMCPouchMedkitFillRoyal
+    outerClothing: RMCArmorRoyalLight
+
+- type: playTimeTracker
+  id: RMCJobRoyalPilotPVE
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointRCMPVEPilot
+  name: RCM pilot spawn point (PVE)
+  components:
+  - type: SpawnPoint
+    job_id: CMRoyalMarinesPilotPVE
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/flighthelmet.rsi
+    state: icon
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconRoyalPilotPVE
+  icon:
+    sprite: _RMC14/Interface/job_icons/TSE/RCM/pve.rsi
+    state: rcm_pilot_pve

@@ -192,6 +192,16 @@
   alert: SquadTrackerRCMLieutenant
 
 - type: trackerMode
+  id: RCMPVEParaLieutenant
+  job: CMRoyalMarinesParaLieutenantPVE
+  alert: SquadTrackerRCMLieutenant
+
+- type: trackerMode
+  id: RCMPVEParaTeamLead
+  job: CMRoyalMarinesParaTeamLeaderPVE
+  alert: SquadTrackerRCMTeamLead
+
+- type: trackerMode
   id: MARSOCLeader
   job: CMMarineRaiderLeader
 

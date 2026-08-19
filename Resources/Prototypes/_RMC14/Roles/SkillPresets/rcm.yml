@@ -51,17 +51,7 @@
     skills:
       #RMCSkillSpecialistWeapons: 1 #TODO give them WS skill for scout rifle
       RMCSkillFirearms: 2 #Should be 3 post recoil changes
-
-- type: entity
-  parent: RMCSkillPresetRoyalRifleman
-  id: RMCSkillPresetRoyalSmartGunner
-  name: Royal Marine Smart Gun Operator
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: SkillPreset
-    skills:
-      RMCSkillSmartGun: 1
-
+      
 - type: entity
   parent: RMCSkillPresetRoyalRifleman
   id: RMCSkillPresetRoyalTeamLeader

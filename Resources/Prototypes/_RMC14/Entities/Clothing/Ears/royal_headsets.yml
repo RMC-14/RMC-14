@@ -68,9 +68,56 @@
   - type: GrantTacMapAlert
 
 - type: entity
-  parent: RMCHeadsetRoyalMarinePVE
+  parent: RMCHeadsetRoyalMarine
   id: RMCHeadsetRoyalMarineLeaderPVE
   name: royal marine leader's headset
+  suffix: PVE
+  description: A sleek headset used by the Royal Crown Marines. Low profile enough to fit under their unique helmets. This one is heavier with the weight of responsibility.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeyRoyalMarineCommand
+  - type: RMCHeadset
+    radioTextIncrease: 3
+  - type: GrantTacMapAlert
+
+- type: entity
+  parent: RMCHeadsetRoyalMarine
+  id: RMCHeadsetRoyalParaPVE
+  name: royal paramarine headset
+  suffix: PVE
+  description: A sleek headset used by the Royal Crown Marines. Low profile enough to fit under their unique helmets. 
+  components:
+  - type: GrantSquadLeaderTracker
+    defaultMode: RCMPVEParaLieutenant
+    trackerModes:
+    - RCMPVEParaLieutenant
+    - RCMPVEParaTeamLead
+  - type: RMCHeadset
+    channels:
+    - RoyalMarine
+  - type: GrantTacMapAlert
+
+- type: entity
+  parent: RMCHeadsetRoyalParaPVE
+  id: RMCHeadsetRoyalParaLeaderPVE
+  name: royal paramarine leader's headset
+  suffix: PVE
+  description: A sleek headset used by the Royal Crown Marines. Low profile enough to fit under their unique helmets.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeyRoyalMarineCommand
+  - type: RMCHeadset
+    radioTextIncrease: 2
+  - type: GrantTacMapAlert
+
+- type: entity
+  parent: RMCHeadsetRoyalParaPVE
+  id: RMCHeadsetRoyalParaOfficerPVE
+  name: royal paramarine officer's headset
   suffix: PVE
   description: A sleek headset used by the Royal Crown Marines. Low profile enough to fit under their unique helmets. This one is heavier with the weight of responsibility.
   components:

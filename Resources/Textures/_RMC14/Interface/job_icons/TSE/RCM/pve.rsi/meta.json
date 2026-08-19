@@ -26,6 +26,9 @@
             "name": "rcm_medic_pve"
         },
         {
+            "name": "rcm_pilot_pve"
+        },
+        {
             "name": "rcm_rifleman_pve"
         },
         {

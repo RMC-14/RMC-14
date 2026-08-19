@@ -69,6 +69,8 @@ rmc-squad-info-RCMPVESectionLead = Section Leader
 rmc-squad-info-RCMPVETeamLead = Team Leader
 rmc-squad-info-RCMPVETroopSergeant = Troop Sergeant
 rmc-squad-info-RCMPVETroopCommander = Troop Commander
+rmc-squad-info-RCMPVEParaLieutenant = Lieutenant
+rmc-squad-info-RCMPVEParaTeamLead = Team Leader
 
 rmc-squad-info-RCMTeamLead = Team Leader
 rmc-squad-info-RCMLieutenant = Lieutenant
