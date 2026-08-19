@@ -385,11 +385,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
             var squeezeVehicleMove = GetVehicleMoveDelta(grid, vehicleWorldPosition, mapId, mover);
             if (PushMobOutOfVehicle(vehicle, xeno, vehicleAabb, xenoAabb, squeezeVehicleMove))
-            {
-                mover.CurrentSpeed *= SqueezeUnderPushSlowFactor;
-                Dirty(vehicle, mover);
                 return CollisionHandlingResult.Continue;
-            }
 
             AddBlockingCollision(vehicle, xeno, collisionAabb, xenoAabb, clearance, mapId, debug, blockers);
             return CollisionHandlingResult.Blocked;
@@ -687,7 +683,6 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     }
 
     private const float FortifiedLightSlowFactor = 1f / 3f;
-    private const float SqueezeUnderPushSlowFactor = 0.8f;
 
     private bool ShouldBlockXeno(GridVehicleMoverComponent mover, EntityUid xeno)
     {
