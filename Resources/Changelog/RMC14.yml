@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: Fixed marines being able to paradrop into the out of bounds water area
-      of New Varadero
-    type: Fix
-  id: 3088
-  time: '2026-04-10T06:43:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9605
 - author: IceNoobXD
   changes:
   - message: Added CBRN squad and ghost roles!
@@ -4541,5 +4533,12 @@
   id: 3587
   time: '2026-08-19T10:24:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10711
+- author: CatAndHats
+  changes:
+  - message: Added landing pad number decals
+    type: Add
+  id: 3588
+  time: '2026-08-19T16:41:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10741
 Name: RMC14
 Order: -1
