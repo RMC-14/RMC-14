@@ -38,7 +38,7 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.bleed_time_multiplier", 1f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> CMMarinesPerXeno =
-        CVarDef.Create("rmc.marines_per_xeno", 3f, CVar.SERVER | CVar.SERVERONLY);
+        CVarDef.Create("rmc.marines_per_xeno", 4f, CVar.SERVER | CVar.SERVERONLY);
 
     public static readonly CVarDef<bool> RMCAutoBalance =
         CVarDef.Create("rmc.auto_balance", true, CVar.SERVER | CVar.SERVERONLY);
@@ -232,6 +232,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<int> RMCSurvivorsMaximum =
         CVarDef.Create("rmc.survivors_maximum", 7, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<int> RMCVehicleRoundstartThresholdPlayers =
+        CVarDef.Create("rmc.vehicle_roundstart_threshold_players", 200, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<int> RMCSpawnerMaxCorpses =
         CVarDef.Create("rmc.spawner_max_corpses", 100, CVar.REPLICATED | CVar.SERVER);
 
@@ -390,6 +393,12 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<int> RMCIntelDisks =
         CVarDef.Create("rmc.intel_disks", 30, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<int> RMCIntelDataTerminals =
+        CVarDef.Create("rmc.intel_data_terminals", 6, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCIntelSafes =
+        CVarDef.Create("rmc.intel_safes", 3, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<int> RMCIntelExperimentalDevices =
         CVarDef.Create("rmc.intel_experimental_devices", 15, CVar.REPLICATED | CVar.SERVER);
 
@@ -454,6 +463,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<int> RMCForceEndHijackTimeMinutes =
         CVarDef.Create("rmc.force_hijack_end_time_minutes", 25, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<int> RMCHijackCrashStunTimeSeconds =
+        CVarDef.Create("rmc.hijack_crash_stun_time_seconds", 5, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<float> RMCMovementPenCapSubtract =
         CVarDef.Create("rmc.movement_pen_cap_subtract", 0.8f, CVar.REPLICATED | CVar.SERVER);
 
@@ -503,13 +515,15 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.lobby_start_paused", false, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCChatRepeatHistory =
-        CVarDef.Create("rmc.chat_repeat_history", 4, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.chat_repeat_history", 5, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<bool> RMCChatSquadColorMode =
         CVarDef.Create("rmc.chat_squad_color_mode", true, CVar.CLIENTONLY | CVar.ARCHIVE);
 
     public static readonly CVarDef<bool> RMCXenoAbilityPreviews =
         CVarDef.Create("rmc.xeno_ability_previews", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+    public static readonly CVarDef<bool> RMCMarineEquipmentPreviews =
+        CVarDef.Create("rmc.marine_equipment_previews", true, CVar.CLIENTONLY | CVar.ARCHIVE);
 
     public static readonly CVarDef<int> RMCXenoDefaultNightVision =
         CVarDef.Create("rmc.xeno_default_night_vision", (int) NightVisionState.Half, CVar.CLIENT | CVar.ARCHIVE | CVar.REPLICATED);
@@ -567,6 +581,27 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<int> RMCLarvaQueueWaitSeconds =
         CVarDef.Create("rmc.larva_queue_wait_seconds", 300, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<int> RMCLarvaQueueOfferTimeoutSeconds =
+        CVarDef.Create("rmc.larva_queue_offer_timeout_seconds", 30, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<string> RMCChemMasterPresets =
         CVarDef.Create("rmc.chemmaster_presets", "", CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<int> RMCLightningMaxAmountLightNearbyCount =
+        CVarDef.Create("rmc.lighting_max_amount_light_nearby_count", 6, CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<float> RMCLightningMaxAmountLightNearbyAreaSize =
+        CVarDef.Create("rmc.lighting_max_amount_light_nearby_area_size", 2.5f, CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<float> RMCLightningMaxAmountLightNearbyCheckIntervalSeconds =
+        CVarDef.Create("rmc.lighting_max_amount_light_nearby_check_interval_seconds", 1f, CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> RMCLightningMaxAmountLightNearbyEnabled =
+        CVarDef.Create("rmc.lighting_max_amount_light_nearby_enabled", true, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCWeedSpreadMaxProcessTimeMilliseconds =
+        CVarDef.Create("rmc.weed_spread_max_process_time_milliseconds", 1f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCDoAfterCancelMaxProcessTimeMilliseconds =
+        CVarDef.Create("rmc.do_after_cancel_max_process_time_milliseconds", 1f, CVar.REPLICATED | CVar.SERVER);
 }

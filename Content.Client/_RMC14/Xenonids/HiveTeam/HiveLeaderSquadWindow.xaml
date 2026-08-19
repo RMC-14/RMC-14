@@ -4,8 +4,31 @@
     Title="My Hive Squad"
     MinSize="500 600">
     <BoxContainer Orientation="Vertical" VerticalExpand="True">
-        <BoxContainer Orientation="Vertical" Name="TeamContainer" Access="Public"
-                      HorizontalExpand="True" VerticalExpand="True" />
+        <PanelContainer Name="LeaderPanel" Access="Public" HorizontalExpand="True"
+                        Margin="4 4 4 2">
+            <BoxContainer Orientation="Vertical" Margin="4">
+                <Label Text="Hive Leader" HorizontalAlignment="Center"
+                       FontColorOverride="#aaaaaa" Margin="0 0 0 4" />
+                <BoxContainer Name="LeaderSlot" Access="Public"
+                              Orientation="Vertical" HorizontalExpand="True"
+                              MinHeight="48" MaxHeight="48" />
+            </BoxContainer>
+        </PanelContainer>
+        <PanelContainer Name="MembersPanel" Access="Public" HorizontalExpand="True"
+                        VerticalExpand="True" Margin="4 2 4 0">
+            <BoxContainer Orientation="Vertical" Margin="4" VerticalExpand="True">
+                <Label Text="Members" HorizontalAlignment="Center"
+                       FontColorOverride="#aaaaaa" Margin="0 0 0 4" />
+                <ScrollContainer HScrollEnabled="False" HorizontalExpand="True"
+                                 VerticalExpand="True">
+                    <GridContainer Name="MembersSlot" Access="Public"
+                                   Columns="2" HorizontalExpand="True" />
+                </ScrollContainer>
+                <Button Name="AddMemberButton" Access="Public" Text="+ Add Member"
+                        HorizontalExpand="True" Margin="0 4 0 0"
+                        StyleClasses="ButtonSquare" />
+            </BoxContainer>
+        </PanelContainer>
         <BoxContainer Orientation="Horizontal" Margin="4">
             <LineEdit Name="AnnounceBox" Access="Public" HorizontalExpand="True"
                       PlaceHolder="Send announcement to your squad..." />

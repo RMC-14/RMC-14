@@ -1,49 +1,57 @@
+using Content.Shared._RMC14.Hands;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
-using Content.Shared.Timing;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
-using Robust.Shared.Player;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.PlayingCards;
 
 public abstract class SharedPlayingCardSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedAudioSystem _audio = default!;
+    [Dependency] protected readonly SharedAudioSystem Audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] protected readonly SharedHandsSystem _hands = default!;
+    [Dependency] protected readonly SharedHandsSystem Hands = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly MetaDataSystem _meta = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] protected readonly SharedPopupSystem _popup = default!;
+    [Dependency] protected readonly SharedPopupSystem Popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] protected readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] protected readonly SharedUserInterfaceSystem Ui = default!;
 
     private readonly HashSet<Entity<PlayingCardComponent>> _cardLookup = new();
     private readonly HashSet<Entity<PlayingCardHandComponent>> _handLookup = new();
 
-    protected EntityQuery<PlayingCardComponent> _cardQuery;
-    protected EntityQuery<PlayingCardHandComponent> _handQuery;
+    private EntityQuery<PlayingCardComponent> _cardQuery;
+    private EntityQuery<PlayingCardDeckComponent> _deckQuery;
+    private EntityQuery<PlayingCardHandComponent> _handQuery;
+
+    private static readonly VerbCategory DrawCategory = new("rmc-playing-card-verb-category-draw", null);
 
     private const float AreaPickupRadius = 1f;
     private const float AreaPickupDelayPerCard = 0.1f;
+    private const int StackThreshold = 5;
+    private const int DrawFiveCount = 5;
+    private const int AceSortValue = 14;
 
     public override void Initialize()
     {
         base.Initialize();
 
         _cardQuery = GetEntityQuery<PlayingCardComponent>();
+        _deckQuery = GetEntityQuery<PlayingCardDeckComponent>();
         _handQuery = GetEntityQuery<PlayingCardHandComponent>();
 
         // Card events
@@ -62,6 +70,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         SubscribeLocalEvent<PlayingCardDeckComponent, MapInitEvent>(OnDeckMapInit);
         SubscribeLocalEvent<PlayingCardDeckComponent, InteractUsingEvent>(OnDeckInteractUsing);
         SubscribeLocalEvent<PlayingCardDeckComponent, PlayingCardDeckPickupDoAfterEvent>(OnDeckPickupDoAfter);
+        SubscribeLocalEvent<PlayingCardDeckComponent, RMCStorageEjectHandItemEvent>(OnDeckEjectHand);
 
         // Hand of cards events
         SubscribeLocalEvent<PlayingCardHandComponent, UseInHandEvent>(OnHandUseInHand);
@@ -70,6 +79,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         SubscribeLocalEvent<PlayingCardHandComponent, GetVerbsEvent<ExamineVerb>>(OnHandGetExamineVerbs);
         SubscribeLocalEvent<PlayingCardHandComponent, GetVerbsEvent<AlternativeVerb>>(OnHandGetAltVerbs);
         SubscribeLocalEvent<PlayingCardHandComponent, InteractUsingEvent>(OnHandInteractUsing);
+        SubscribeLocalEvent<PlayingCardHandComponent, RMCStorageEjectHandItemEvent>(OnHandEjectHand);
 
         // BUI events
         Subs.BuiEvents<PlayingCardHandComponent>(PlayingCardHandUi.Key,
@@ -81,10 +91,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
 
     private void OnHandBuiMsg(Entity<PlayingCardHandComponent> ent, ref PlayingCardHandBuiMsg args)
     {
-        if (args.Actor is not { Valid: true } user)
-            return;
-
-        DrawSpecificCard(ent, user, args.CardIndex);
+        DrawSpecificCard(ent, args.Actor, args.CardIndex);
     }
 
     #region Card Events
@@ -144,8 +151,15 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         // Add card to existing hand
         if (_handQuery.TryComp(args.Used, out var hand))
         {
-            if (_net.IsServer)
-                AddCardToHand((args.Used, hand), ent, args.User);
+            AddCardToHand((args.Used, hand), ent, args.User);
+            args.Handled = true;
+            return;
+        }
+
+        // Add card to deck (deck in active hand clicked on this card)
+        if (_deckQuery.TryComp(args.Used, out var deck))
+        {
+            AddCardToDeck((args.Used, deck), ent, args.User);
             args.Handled = true;
         }
     }
@@ -216,22 +230,50 @@ public abstract class SharedPlayingCardSystem : EntitySystem
             Text = Loc.GetString("rmc-playing-card-verb-shuffle"),
             Act = () =>
             {
-                ShuffleDeck(ent);
-                _popup.PopupPredicted(Loc.GetString("rmc-playing-card-deck-shuffle", ("deck", ent.Owner)), ent, user);
-                _audio.PlayPredicted(ent.Comp.ShuffleSound, ent, user);
+                if (_net.IsServer)
+                    ShuffleDeck(ent);
+                Popup.PopupPredicted(Loc.GetString("rmc-playing-card-deck-shuffle", ("deck", ent.Owner)), null, ent, user);
+                Audio.PlayPredicted(ent.Comp.ShuffleSound, ent, user);
+            },
+            Priority = 2
+        });
+
+        var deckCount = ent.Comp.CardOrder.Count;
+
+        args.Verbs.Add(new AlternativeVerb
+        {
+            Text = Loc.GetString("rmc-playing-card-verb-draw-5"),
+            Category = DrawCategory,
+            Act = () =>
+            {
+                if (_net.IsServer)
+                    DrawMultiple(ent, user, DrawFiveCount);
             },
             Priority = 2
         });
 
         args.Verbs.Add(new AlternativeVerb
         {
-            Text = Loc.GetString("rmc-playing-card-verb-draw"),
+            Text = Loc.GetString("rmc-playing-card-verb-draw-half"),
+            Category = DrawCategory,
             Act = () =>
             {
                 if (_net.IsServer)
-                    DrawCard(ent, user);
+                    DrawMultiple(ent, user, Math.Max(1, deckCount / 2));
             },
             Priority = 1
+        });
+
+        args.Verbs.Add(new AlternativeVerb
+        {
+            Text = Loc.GetString("rmc-playing-card-verb-draw-all"),
+            Category = DrawCategory,
+            Act = () =>
+            {
+                if (_net.IsServer)
+                    DrawMultiple(ent, user, deckCount);
+            },
+            Priority = 0
         });
     }
 
@@ -243,8 +285,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         // Add single card to deck
         if (_cardQuery.TryComp(args.Used, out var card))
         {
-            if (_net.IsServer)
-                AddCardToDeck(ent, (args.Used, card), args.User);
+            AddCardToDeck(ent, (args.Used, card), args.User);
             args.Handled = true;
             return;
         }
@@ -252,8 +293,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         // Add hand of cards to deck
         if (_handQuery.TryComp(args.Used, out var hand))
         {
-            if (_net.IsServer)
-                AddHandToDeck(ent, (args.Used, hand), args.User);
+            AddHandToDeck(ent, (args.Used, hand), args.User);
             args.Handled = true;
         }
     }
@@ -261,9 +301,6 @@ public abstract class SharedPlayingCardSystem : EntitySystem
     private void OnDeckAfterInteract(Entity<PlayingCardDeckComponent> ent, ref AfterInteractEvent args)
     {
         if (args.Handled || !args.CanReach)
-            return;
-
-        if (!_useDelay.TryResetDelay(ent, checkDelayed: true))
             return;
 
         if (args.Target != null && (HasComp<PlayingCardComponent>(args.Target) || HasComp<PlayingCardHandComponent>(args.Target)))
@@ -325,7 +362,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
 
         if (ent.Comp.CardOrder.Count >= ent.Comp.MaxCards)
         {
-            _popup.PopupEntity(Loc.GetString("rmc-playing-card-deck-full"), ent, args.User);
+            Popup.PopupEntity(Loc.GetString("rmc-playing-card-deck-full"), ent, args.User);
             return;
         }
 
@@ -348,12 +385,12 @@ public abstract class SharedPlayingCardSystem : EntitySystem
             else if (_handQuery.TryComp(entity, out var hand))
             {
                 var handAdded = 0;
-                for (var i = 0; i < hand.Cards.Count; i++)
+                foreach (var encodedCard in hand.Cards)
                 {
                     if (ent.Comp.CardOrder.Count >= ent.Comp.MaxCards)
                         break;
 
-                    ent.Comp.CardOrder.Add(hand.Cards[i]);
+                    ent.Comp.CardOrder.Add(encodedCard);
                     handAdded++;
                     added++;
                 }
@@ -370,8 +407,8 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         if (added > 0)
         {
             Dirty(ent);
-            _popup.PopupEntity(Loc.GetString("rmc-playing-card-deck-pickup", ("count", added)), ent, args.User);
-            _audio.PlayPvs(ent.Comp.DrawSound, ent);
+            Popup.PopupEntity(Loc.GetString("rmc-playing-card-deck-pickup", ("count", added)), ent, args.User);
+            Audio.PlayPvs(ent.Comp.DrawSound, ent);
         }
     }
 
@@ -384,7 +421,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         if (args.Handled)
             return;
         if (ent.Comp.FaceUp && ent.Comp.Cards.Count > 0)
-            _ui.OpenUi(ent.Owner, PlayingCardHandUi.Key, args.User);
+            Ui.OpenUi(ent.Owner, PlayingCardHandUi.Key, args.User);
         else if (_net.IsServer)
             DrawFromHand(ent, args.User);
         args.Handled = true;
@@ -395,7 +432,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         if (args.Handled)
             return;
         if (ent.Comp.FaceUp && ent.Comp.Cards.Count > 0)
-            _ui.OpenUi(ent.Owner, PlayingCardHandUi.Key, args.User);
+            Ui.OpenUi(ent.Owner, PlayingCardHandUi.Key, args.User);
         else if (_net.IsServer)
             DrawFromHand(ent, args.User);
         args.Handled = true;
@@ -413,19 +450,39 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         // If in someone's hands and not the examiner's, hide the cards
         if (_container.TryGetContainingContainer(ent.Owner, out var container) &&
             container.Owner != args.Examiner &&
-            _hands.IsHolding(container.Owner, ent.Owner))
+            Hands.IsHolding(container.Owner, ent.Owner))
         {
             args.PushMarkup(Loc.GetString("rmc-playing-card-hand-examine-hidden", ("count", count)));
             return;
         }
 
         args.PushMarkup(Loc.GetString("rmc-playing-card-hand-examine", ("count", count)));
+
+        var suitOrder = new List<CardSuit>();
+        var bySuit = new Dictionary<CardSuit, List<CardRank>>();
         foreach (var encoded in ent.Comp.Cards)
         {
             var (suit, rank) = DecodeCard(encoded);
+            if (!bySuit.TryGetValue(suit, out var ranks))
+            {
+                ranks = new List<CardRank>();
+                bySuit[suit] = ranks;
+                suitOrder.Add(suit);
+            }
+            ranks.Add(rank);
+        }
+
+        foreach (var suit in suitOrder)
+        {
+            bySuit[suit].Sort((a, b) =>
+            {
+                var va = a == CardRank.Ace ? AceSortValue : (int)a;
+                var vb = b == CardRank.Ace ? AceSortValue : (int)b;
+                return va.CompareTo(vb);
+            });
             var suitName = GetSuitDisplayName(suit);
-            var rankName = GetRankDisplayName(rank);
-            args.PushMarkup(Loc.GetString("rmc-playing-card-hand-card", ("rank", rankName), ("suit", suitName)));
+            var rankList = string.Join(", ", bySuit[suit].ConvertAll(GetRankShortName));
+            args.PushMarkup(Loc.GetString("rmc-playing-card-hand-suit-group", ("ranks", rankList), ("suit", suitName)));
         }
     }
 
@@ -469,9 +526,10 @@ public abstract class SharedPlayingCardSystem : EntitySystem
             Text = Loc.GetString("rmc-playing-card-verb-shuffle"),
             Act = () =>
             {
-                ShuffleHand(ent);
-                _popup.PopupPredicted(Loc.GetString("rmc-playing-card-hand-shuffle", ("hand", ent.Owner)), ent, user);
-                _audio.PlayPredicted(ent.Comp.ShuffleSound, ent, user);
+                if (_net.IsServer)
+                    ShuffleHand(ent);
+                Popup.PopupPredicted(Loc.GetString("rmc-playing-card-hand-shuffle", ("hand", ent.Owner)), null, ent, user);
+                Audio.PlayPredicted(ent.Comp.ShuffleSound, ent, user);
             },
             Priority = 2
         });
@@ -484,7 +542,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
                 args.Verbs.Add(new AlternativeVerb
                 {
                     Text = Loc.GetString("rmc-playing-card-verb-pick"),
-                    Act = () => _ui.OpenUi(ent.Owner, PlayingCardHandUi.Key, user),
+                    Act = () => Ui.OpenUi(ent.Owner, PlayingCardHandUi.Key, user),
                     Priority = 1
                 });
             }
@@ -513,8 +571,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         // Add card to hand
         if (_cardQuery.TryComp(args.Used, out var card))
         {
-            if (_net.IsServer)
-                AddCardToHand(ent, (args.Used, card), args.User);
+            AddCardToHand(ent, (args.Used, card), args.User);
             args.Handled = true;
             return;
         }
@@ -522,32 +579,55 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         // Merge hands
         if (_handQuery.TryComp(args.Used, out var otherHand))
         {
-            if (_net.IsServer)
-                MergeHands(ent, (args.Used, otherHand), args.User);
+            MergeHands(ent, (args.Used, otherHand), args.User);
+            args.Handled = true;
+            return;
+        }
+
+        // Add hand to deck
+        if (_deckQuery.TryComp(args.Used, out var deck))
+        {
+            AddHandToDeck((args.Used, deck), ent, args.User);
             args.Handled = true;
         }
+    }
+
+    private void OnDeckEjectHand(Entity<PlayingCardDeckComponent> ent, ref RMCStorageEjectHandItemEvent args)
+    {
+        if (_net.IsServer)
+            DrawCard(ent, args.User);
+        args.Handled = true;
+    }
+
+    private void OnHandEjectHand(Entity<PlayingCardHandComponent> ent, ref RMCStorageEjectHandItemEvent args)
+    {
+        if (ent.Comp.FaceUp)
+            return;
+        if (_net.IsServer)
+            DrawFromHand(ent, args.User);
+        args.Handled = true;
     }
 
     #endregion
 
     #region Card Logic
 
-    public virtual void FlipCard(Entity<PlayingCardComponent> card, EntityUid user)
+    protected virtual void FlipCard(Entity<PlayingCardComponent> card, EntityUid user)
     {
         card.Comp.FaceUp = !card.Comp.FaceUp;
         Dirty(card);
 
         var direction = card.Comp.FaceUp ? "up" : "down";
-        _popup.PopupPredicted(Loc.GetString("rmc-playing-card-flip", ("direction", direction)), card, user);
+        Popup.PopupPredicted(Loc.GetString("rmc-playing-card-flip", ("direction", direction)), null, card, user);
     }
 
-    public virtual void FlipHand(Entity<PlayingCardHandComponent> hand, EntityUid user)
+    protected virtual void FlipHand(Entity<PlayingCardHandComponent> hand, EntityUid user)
     {
         hand.Comp.FaceUp = !hand.Comp.FaceUp;
         Dirty(hand);
 
         var direction = hand.Comp.FaceUp ? "up" : "down";
-        _popup.PopupPredicted(Loc.GetString("rmc-playing-card-hand-flip", ("direction", direction)), hand, user);
+        Popup.PopupPredicted(Loc.GetString("rmc-playing-card-hand-flip", ("direction", direction)), null, hand, user);
     }
 
     protected virtual void CombineCards(Entity<PlayingCardComponent> card1, Entity<PlayingCardComponent> card2, EntityUid user)
@@ -556,10 +636,20 @@ public abstract class SharedPlayingCardSystem : EntitySystem
 
     protected virtual void AddCardToHand(Entity<PlayingCardHandComponent> hand, Entity<PlayingCardComponent> card, EntityUid user)
     {
+        hand.Comp.Cards.Add(EncodeCard(card.Comp.Suit, card.Comp.Rank));
+        Dirty(hand);
+        PredictedQueueDel(card.Owner);
+        UpdateHandName(hand);
+        TryPopup(hand, Loc.GetString("rmc-playing-card-add-to-hand", ("count", hand.Comp.Cards.Count)), user);
     }
 
     protected virtual void MergeHands(Entity<PlayingCardHandComponent> hand1, Entity<PlayingCardHandComponent> hand2, EntityUid user)
     {
+        hand1.Comp.Cards.AddRange(hand2.Comp.Cards);
+        Dirty(hand1);
+        PredictedQueueDel(hand2.Owner);
+        UpdateHandName(hand1);
+        TryPopup(hand1, Loc.GetString("rmc-playing-card-merge-hands", ("count", hand1.Comp.Cards.Count)), user);
     }
 
     protected virtual void DrawFromHand(Entity<PlayingCardHandComponent> hand, EntityUid user)
@@ -570,18 +660,36 @@ public abstract class SharedPlayingCardSystem : EntitySystem
     {
     }
 
+    protected void UpdateHandName(Entity<PlayingCardHandComponent> hand)
+    {
+        var name = hand.Comp.Cards.Count > StackThreshold
+            ? Loc.GetString("rmc-playing-card-stack-name")
+            : Loc.GetString("rmc-playing-card-hand-name");
+        _meta.SetEntityName(hand, name);
+    }
+
+    protected void TryPopup(Entity<PlayingCardHandComponent> hand, string message, EntityUid user)
+    {
+        var curTime = _timing.CurTime;
+        if (curTime < hand.Comp.LastPopupTime + TimeSpan.FromSeconds(hand.Comp.PopupCooldown))
+            return;
+
+        hand.Comp.LastPopupTime = curTime;
+        Popup.PopupPredicted(message, null, hand, user);
+    }
+
     #endregion
 
     #region Deck Logic
 
-    public void InitializeDeck(Entity<PlayingCardDeckComponent> deck)
+    private void InitializeDeck(Entity<PlayingCardDeckComponent> deck)
     {
         deck.Comp.CardOrder.Clear();
 
         // Create all 52 cards
-        foreach (CardSuit suit in Enum.GetValues<CardSuit>())
+        foreach (var suit in Enum.GetValues<CardSuit>())
         {
-            foreach (CardRank rank in Enum.GetValues<CardRank>())
+            foreach (var rank in Enum.GetValues<CardRank>())
             {
                 deck.Comp.CardOrder.Add(EncodeCard(suit, rank));
             }
@@ -590,7 +698,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         Dirty(deck);
     }
 
-    public void ShuffleDeck(Entity<PlayingCardDeckComponent> deck)
+    private void ShuffleDeck(Entity<PlayingCardDeckComponent> deck)
     {
         // Fisher-Yates shuffle of remaining cards only
         for (var i = deck.Comp.CardOrder.Count - 1; i > 0; i--)
@@ -602,7 +710,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         Dirty(deck);
     }
 
-    public void ShuffleHand(Entity<PlayingCardHandComponent> hand)
+    private void ShuffleHand(Entity<PlayingCardHandComponent> hand)
     {
         for (var i = hand.Comp.Cards.Count - 1; i > 0; i--)
         {
@@ -617,19 +725,63 @@ public abstract class SharedPlayingCardSystem : EntitySystem
     {
     }
 
+    protected virtual void DrawMultiple(Entity<PlayingCardDeckComponent> deck, EntityUid user, int count)
+    {
+    }
+
     protected virtual void AddCardToDeck(Entity<PlayingCardDeckComponent> deck, Entity<PlayingCardComponent> card, EntityUid user)
     {
+        if (deck.Comp.CardOrder.Count >= deck.Comp.MaxCards)
+        {
+            Popup.PopupPredicted(Loc.GetString("rmc-playing-card-deck-full"), null, deck, user);
+            return;
+        }
+
+        deck.Comp.CardOrder.Add(EncodeCard(card.Comp.Suit, card.Comp.Rank));
+        Dirty(deck);
+        PredictedQueueDel(card.Owner);
+
+        Popup.PopupPredicted(Loc.GetString("rmc-playing-card-added-to-deck"), null, deck, user);
+        Audio.PlayPredicted(deck.Comp.DrawSound, deck, user);
     }
 
     protected virtual void AddHandToDeck(Entity<PlayingCardDeckComponent> deck, Entity<PlayingCardHandComponent> hand, EntityUid user)
     {
+        if (deck.Comp.CardOrder.Count >= deck.Comp.MaxCards)
+        {
+            Popup.PopupPredicted(Loc.GetString("rmc-playing-card-deck-full"), null, deck, user);
+            return;
+        }
+
+        var added = 0;
+        foreach (var card in hand.Comp.Cards)
+        {
+            if (deck.Comp.CardOrder.Count >= deck.Comp.MaxCards)
+                break;
+            deck.Comp.CardOrder.Add(card);
+            added++;
+        }
+
+        hand.Comp.Cards.RemoveRange(0, added);
+        Dirty(deck);
+
+        if (hand.Comp.Cards.Count == 0)
+            PredictedQueueDel(hand.Owner);
+        else
+            Dirty(hand);
+
+        if (added > 0)
+        {
+            Popup.PopupPredicted(Loc.GetString("rmc-playing-card-added-cards-to-deck", ("count", added)), null, deck, user);
+            Audio.PlayPredicted(deck.Comp.DrawSound, deck, user);
+        }
     }
 
     #endregion
 
     #region Helpers
 
-    public static int EncodeCard(CardSuit suit, CardRank rank)
+    protected static int EncodeCard(CardSuit suit, CardRank rank)
     {
         return ((int)suit << 8) | (int)rank;
     }
@@ -662,6 +814,19 @@ public abstract class SharedPlayingCardSystem : EntitySystem
             CardRank.Jack => Loc.GetString("rmc-playing-card-rank-jack"),
             CardRank.Queen => Loc.GetString("rmc-playing-card-rank-queen"),
             CardRank.King => Loc.GetString("rmc-playing-card-rank-king"),
+            _ => ((int)rank).ToString()
+        };
+    }
+
+    private string GetRankShortName(CardRank rank)
+    {
+        return rank switch
+        {
+            CardRank.Ace => Loc.GetString("rmc-playing-card-rank-ace-short"),
+            >= CardRank.Two and <= CardRank.Ten => ((int)rank).ToString(),
+            CardRank.Jack => Loc.GetString("rmc-playing-card-rank-jack-short"),
+            CardRank.Queen => Loc.GetString("rmc-playing-card-rank-queen-short"),
+            CardRank.King => Loc.GetString("rmc-playing-card-rank-king-short"),
             _ => ((int)rank).ToString()
         };
     }

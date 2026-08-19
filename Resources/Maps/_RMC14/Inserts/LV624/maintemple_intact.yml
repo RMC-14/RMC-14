@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 05/17/2026 10:19:10
-  entityCount: 630
+  time: 06/16/2026 11:29:43
+  entityCount: 652
 maps: []
 grids:
 - 1
@@ -1266,6 +1266,118 @@ entities:
     components:
     - type: Transform
       pos: 41.5,11.5
+      parent: 1
+- proto: RMCBlockerVehicle
+  entities:
+  - uid: 520
+    components:
+    - type: Transform
+      pos: 15.5,22.5
+      parent: 1
+  - uid: 521
+    components:
+    - type: Transform
+      pos: 17.5,22.5
+      parent: 1
+  - uid: 556
+    components:
+    - type: Transform
+      pos: 18.5,22.5
+      parent: 1
+  - uid: 557
+    components:
+    - type: Transform
+      pos: 16.5,22.5
+      parent: 1
+  - uid: 558
+    components:
+    - type: Transform
+      pos: 19.5,22.5
+      parent: 1
+  - uid: 620
+    components:
+    - type: Transform
+      pos: 34.5,23.5
+      parent: 1
+  - uid: 621
+    components:
+    - type: Transform
+      pos: 35.5,23.5
+      parent: 1
+  - uid: 622
+    components:
+    - type: Transform
+      pos: 25.5,10.5
+      parent: 1
+  - uid: 623
+    components:
+    - type: Transform
+      pos: 27.5,10.5
+      parent: 1
+  - uid: 624
+    components:
+    - type: Transform
+      pos: 26.5,10.5
+      parent: 1
+  - uid: 625
+    components:
+    - type: Transform
+      pos: 27.5,9.5
+      parent: 1
+  - uid: 626
+    components:
+    - type: Transform
+      pos: 28.5,9.5
+      parent: 1
+  - uid: 627
+    components:
+    - type: Transform
+      pos: 29.5,9.5
+      parent: 1
+  - uid: 628
+    components:
+    - type: Transform
+      pos: 30.5,9.5
+      parent: 1
+  - uid: 629
+    components:
+    - type: Transform
+      pos: 30.5,8.5
+      parent: 1
+  - uid: 630
+    components:
+    - type: Transform
+      pos: 15.5,10.5
+      parent: 1
+  - uid: 631
+    components:
+    - type: Transform
+      pos: 15.5,11.5
+      parent: 1
+  - uid: 632
+    components:
+    - type: Transform
+      pos: 16.5,11.5
+      parent: 1
+  - uid: 633
+    components:
+    - type: Transform
+      pos: 17.5,11.5
+      parent: 1
+  - uid: 634
+    components:
+    - type: Transform
+      pos: 18.5,11.5
+      parent: 1
+  - uid: 635
+    components:
+    - type: Transform
+      pos: 19.5,11.5
+      parent: 1
+  - uid: 636
+    components:
+    - type: Transform
+      pos: 19.5,10.5
       parent: 1
 - proto: RMCBrazier
   entities:

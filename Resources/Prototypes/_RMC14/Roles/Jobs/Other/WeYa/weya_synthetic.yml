@@ -17,27 +17,35 @@
     - type: NpcFactionMember
       factions:
       - WeYa
-    - type: Skills
-      skills:
-        RMCSkillCqc: 5
-        RMCSkillEndurance: 1
-        RMCSkillEngineer: 4
-        RMCSkillConstruction: 3
-        # RMCSkillFirearms: 2 // Inherited from base synth but WTF?
-        RMCSkillOverwatch: 1
-        RMCSkillMedical: 4
-        RMCSkillSurgery: 3
-        RMCSkillResearch: 1
-        RMCSkillMeleeWeapons: 2
-        RMCSkillPilot: 2
-        RMCSkillPolice: 2
-        RMCSkillFireman: 5
-        RMCSkillPowerLoader: 2
-        RMCSkillVehicles: 2
-        RMCSkillJtac: 3
-        RMCSkillIntel: 2
-        RMCSkillDomestics: 2
-        RMCSkillNavigations: 1
+    - type: Language
+      spokenLanguages:
+      - English
+      - French
+      - Japanese
+      - Russian
+      - Scandinavian
+      - German
+      - Chinese
+      - Spanish
+      understoodLanguages:
+      - English
+      - French
+      - Japanese
+      - Russian
+      - Scandinavian
+      - German
+      - Chinese
+      - Spanish
+      currentLanguage: English
+      defaultLanguage: English
+    - type: LanguageLearning
+      learnableLanguages:
+      - Xeno
+      firstContactLanguages:
+      - Xeno
+      comprehensionThreshold: 0.8
+      learningRange: 8.0
+      baseWordLearningRate: 0.05
     - type: JobPrefix
       prefix: rmc-job-prefix-synth
     - type: RMCTrackable

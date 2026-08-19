@@ -17,6 +17,7 @@
   - type: Appearance
   - type: Speech
     speechSounds: Alto
+  - type: SeeNewPlayers
 
 - type: entity
   parent: RMCImaginaryFriend
@@ -82,6 +83,14 @@
       shader: ""
   - type: Speech
     speechSounds: Xenonid
+  - type: Language
+    spokenLanguages:
+      - English
+      - Xeno
+    understoodLanguages:
+      - Xeno
+    currentLanguage: Xeno
+    defaultLanguage: Xeno
 
 - type: startingGear
   id: RMCMobXippyGear

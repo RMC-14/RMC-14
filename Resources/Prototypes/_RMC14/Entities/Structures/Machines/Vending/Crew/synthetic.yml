@@ -16,7 +16,8 @@
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
-      - id: RMCSynthExperimentalToolsToken
+      # /obj/item/coin/marine/synth
+      # /obj/item/device/defibrillator/synthetic
       - id: RMCSynthResetKey
       - id: RMCHeadsetSynth
     - name: Uniform
@@ -25,14 +26,8 @@
       - id: RMCJumpsuitSynthetic
         # mandatory: true, TODO allow vendors to mark entries as mandatory
         # /obj/item/clothing/under/rank/synthetic/old
-      - id: CMJumpsuitSyntheticPristine
-      - id: CMJumpsuitSyntheticOutdated
-      - id: CMJumpsuitAverageJoe
       - id: JumpsuitMarine
       - id: CMJumpsuitMarineMedic
-      - id: CMJumpsuitSPP
-      - id: CMJumpsuitSPPMedic
-      - id: CMJumpsuitSPPEngi
     - name: Webbing
       choices: { CMAccessories: 1 }
       entries:
@@ -53,9 +48,6 @@
       - id: RMCShoesWhite
         recommended: true
       - id: CMBootsBlackFilled
-      - id: CMBootsBrownFilled
-      - id: CMBootsGreyFilled
-      - id: CMBootsJungleFilled
     - name: Helmet
       choices: { CMHelmet: 1 }
       entries:
@@ -68,17 +60,11 @@
       entries:
       - id: CMArmorM3VLSynth
         recommended: true
-      - id: CMArmorM3VLSynthGray
-      - id: CMArmorM3VLSynthDarkGray
       - id: CMArmorM3VLSynthJungle
       - id: CMArmorM3VLSynthDesert
       - id: CMArmorM3VLSynthSnow
       - id: CMArmorM3VLSynthClassic
       - id: CMArmorM3VLSynthUrban
-      - id: RMCSuitBioGeneral
-      - id: RMCSuitBioWeYa
-      - id: RMCCoatSnow
-      - id: RMCCoatSnowSoviet
     - name: Gloves
       choices: { CMGloves: 1 }
       entries:
@@ -87,9 +73,6 @@
       - id: CMHandsBlackInsulated
         recommended: true
       - id: CMHandsBlackMarine
-      - id: RMCHandsBrownMarine
-      - id: RMCHandsGreyMarine
-      - id: RMCHandsFingerlessMarine
       - id: CMHandsLatex
     - name: Backpack
       choices: { CMBackpack: 1 }
@@ -115,8 +98,6 @@
         name: S-V42A1 smartpack, tan
       - id: RMCSmartpackA1White
         name: S-V42A1 smartpack, white
-      - id: RMCSatchelSPPSynth
-        name: UCP3 combat pack, synthetic
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
@@ -127,8 +108,6 @@
         name: M276 medical storage rig (Full)
       - id: CMBeltUtilityFilled
         name: M276 Toolbelt Rig (Full)
-      - id: RMCBeltConstruction
-        name: M277 pattern construction rig
     - name: Pouches
       choices: { CMPouch: 2 }
       entries:
@@ -183,39 +162,6 @@
 
 - type: entity
   parent: ColMarTechBase
-  id: WeYaK9SynthVendor
-  name: We-Ya Synthetic K9 Equipment Requisitions
-  description: A vendor specially designed to dispense Synthetic K9 equipment.
-  components:
-  - type: AccessReader
-    access:
-    - [ "RMCAccessSynth" ]
-  - type: Sprite
-    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
-  - type: CMAutomatedVendor
-    jobs:
-    - RMCJobSynthetic
-    sections:
-    - name: Standard Equipment
-      takeAll: CMStandard
-      entries:
-      - id: RMCHeadsetSynth
-      - id: RMCK9SerialIdTags
-      - id: RMCK9NameImplanter
-    - name: Handler Kit
-      choices: { RMCK9HandlerKit: 1 }
-      entries:
-      - id: RMCVendorBundleK9HandlerCorpsman
-      - id: RMCVendorBundleK9HandlerMP
-    - name: Carry Harness
-      choices: { CMBackpack: 1 }
-      entries:
-      - id: RMCK9SynthMedicalHarness
-      - id: RMCK9SynthCargoHarness
-      - id: RMCK9SynthMPHarness
-
-- type: entity
-  parent: ColMarTechBase
   id: ColMarTechCrewSyntheticGear
   name: ColMarTech Synthetic Auxiliary Gear Rack
   description: An automated gear rack hooked up to a colossal storage of various medical and engineering supplies. Can be accessed only by synthetic units.
@@ -231,8 +177,7 @@
     sections:
     - name: Engineer Supplies
       entries:
-      - id: CMAirlockCircuitBoard
-        points: 2
+      # /obj/item/circuitboard/airlock - 2 Points
       - id: CMAPCElectronics
         points: 2
       - id: CMEntrenchingTool
@@ -251,14 +196,10 @@
         points: 7
       - id: CMSandbagEmpty25
         name: sandbags x25
-        points: 10
+        points: 7
       - id: RMCExplosivePlastic
         points: 3
-      - id: RMCES11MobileFuelCanister
-        points: 4
-      - id: RMCWelderIndustrialHighCapacity
-        name: industrial blowtorch
-        points: 4
+      # /obj/item/tool/weldpack/minitank - 4 Points
       - id: RMCEngineerKit
         points: 1
       - id: RMCTacticalPrybar
@@ -277,10 +218,6 @@
         points: 6
       - id: RMCRadiationAidKit
         points: 6
-      - id: RMCSynthRepairKitFilled
-        points: 8
-      - id: RMCSynthRepairKitEliteFilled
-        points: 15
     - name: Medical Supplies
       entries:
       - id: CMBurnKit1
@@ -373,6 +310,7 @@
   name: We-Ya Experimental Tools Vendor
   description: A smaller vendor hooked up to a cache of specially provisioned, experimental tools and equipment provided by the We-Ya Research and Development Division(TM). Handle with care.
   components:
+  # TODO RMC14 : Use a token instead of access
   - type: AccessReader
     access:
     - [ "RMCAccessSynth" ]
@@ -391,27 +329,20 @@
         points: 15
       - id: RMCVendorBundleCompactNailgunKit
         points: 15
-      - id: RMCGlassesExperimentalMeson
-        points: 15
-      - id: RMCMaintenanceJack
-        points: 15
-      - id: RMCWelderExperimental
-        points: 15
       - id: RMCTelescopicBaton
         points: 15
       - id: RMCWebbingSurgicalGreen
         points: 15
       - id: RMCWebbingSurgicalBlue
         points: 15
-      - id: RMCToolWebbingFilled
-        points: 15
-      - id: RMCToolDropPouchFilled
-        points: 15
+      # Surgical Drop Pouch (Green) - 15 Points
+      # Surgical Drop Pouch (Blue) - 15 Points
+      # Surgical Drop Pouch (Black) - 15 Points
+      # Tool Webbing (Not small) - 15 Points
+      # Tool Drop Pouch (Not small) - 15 Points
       - id: CMSatchelMarineLogistics
         points: 15
       - id: RMCSatchelMarineIntelChestrig
-        points: 15
-      - id: RMCSatchelMarineIntelSatchel
         points: 15
 
 - type: entity
@@ -429,25 +360,3 @@
     - RMCMagazineSMGNailgun
     - RMCMagazineSMGNailgun
     - RMCBeltHolsterNailgun
-
-- type: entity
-  parent: CMVendorBundleRiflemanApparel
-  id: RMCVendorBundleK9HandlerCorpsman
-  name: K9 corpsman handler kit
-  description: Contains a medical headset and K9 handler instructional pamphlet.
-  components:
-  - type: CMVendorBundle
-    bundle:
-    - CMHeadsetMedical
-    - RMCPamphletCanine
-
-- type: entity
-  parent: CMVendorBundleRiflemanApparel
-  id: RMCVendorBundleK9HandlerMP
-  name: K9 MP handler kit
-  description: Contains a military police headset and K9 handler instructional pamphlet.
-  components:
-  - type: CMVendorBundle
-    bundle:
-    - CMHeadsetMPO
-    - RMCPamphletCanine

@@ -1,4 +1,7 @@
 - type: Tag
+  id: RMCSkillPamphlet
+
+- type: Tag
   id: CMCartridge10x20mm
 
 - type: Tag
@@ -33,9 +36,6 @@
 
 - type: Tag
   id: CMOintment
-
-- type: Tag
-  id: CMSplint
 
 - type: Tag
   id: CMFirstAidKit
@@ -98,6 +98,9 @@
   id: RMCGlass
 
 - type: Tag
+  id: RMCFoldingBarricade
+
+- type: Tag
   id: RMCHelmet
 
 - type: Tag
@@ -111,6 +114,9 @@
 
 - type: Tag
   id: RMCMacheteScabbard
+
+- type: Tag
+  id: RMCMacheteHolder
 
 - type: Tag
   id: RMCScalpel

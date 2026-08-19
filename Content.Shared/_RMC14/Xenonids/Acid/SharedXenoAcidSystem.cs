@@ -264,13 +264,15 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             if (!solution.Comp.Solution.ContainsReagent(AcidRemovedBy, null))
                 continue;
 
-            if (HasComp<GunComponent>(ent.Owner) &&
-                (!TryComp(ent.Owner, out GunSecondWindComponent? secondWind) || !secondWind.HasSecondWind))
+            if (!TryComp(ent.Owner, out GunSecondWindComponent? secondWind) || !secondWind.HasSecondWind)
             {
-                _popup.PopupEntity(
-                    Loc.GetString("rmc-acid-gun-second-wind-spent", ("target", ent.Owner)),
-                    ent.Owner,
-                    PopupType.SmallCaution);
+                if (secondWind != null)
+                {
+                    _popup.PopupEntity(
+                        Loc.GetString("rmc-acid-gun-second-wind-spent", ("target", ent.Owner)),
+                        ent.Owner,
+                        PopupType.SmallCaution);
+                }
                 return;
             }
 

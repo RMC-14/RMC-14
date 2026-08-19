@@ -160,7 +160,7 @@
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentBipod
-          - RMCAttachmentExtinguisher
+          - RMCAttachmentUnderbarrelExtinguisher
           - RMCAttachmentLaserSight
           - RMCAttachmentL90GL
           - RMCAttachmentL90UBS
@@ -422,7 +422,7 @@
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentBipod
-          - RMCAttachmentExtinguisher
+          - RMCAttachmentUnderbarrelExtinguisher
           - RMCAttachmentLaserSight
           - RMCAttachmentL90GL
           - RMCAttachmentL90UBS
@@ -462,7 +462,7 @@
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentBipod
-          - RMCAttachmentExtinguisher
+          - RMCAttachmentUnderbarrelExtinguisher
           - RMCAttachmentLaserSight
           - RMCAttachmentL90GL
           - RMCAttachmentL90UBS
@@ -504,7 +504,7 @@
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentBipod
-          - RMCAttachmentExtinguisher
+          - RMCAttachmentUnderbarrelExtinguisher
           - RMCAttachmentLaserSight
           - RMCAttachmentL90GL
           - RMCAttachmentL90UBS

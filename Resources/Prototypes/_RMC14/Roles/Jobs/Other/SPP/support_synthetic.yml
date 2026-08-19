@@ -19,6 +19,35 @@
     - type: NpcFactionMember
       factions:
       - SPP
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - Scandinavian
+      - English
+      - Japanese
+      - Chinese
+      - German
+      - French
+      - Spanish
+      understoodLanguages:
+      - Russian
+      - Scandinavian
+      - English
+      - Japanese
+      - Chinese
+      - German
+      - French
+      - Spanish
+      currentLanguage: Russian
+      defaultLanguage: Russian
+    - type: LanguageLearning
+      learnableLanguages:
+      - Xeno
+      firstContactLanguages:
+      - Xeno
+      comprehensionThreshold: 0.8
+      learningRange: 8.0
+      baseWordLearningRate: 0.05
     - type: Skills
       skills:
         RMCSkillCqc: 5

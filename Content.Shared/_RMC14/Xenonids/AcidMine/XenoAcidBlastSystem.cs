@@ -101,7 +101,7 @@ public sealed class XenoAcidBlastSystem : EntitySystem
         var hits = 0;
         var position = _transform.GetMapCoordinates(ent);
         _targets.Clear();
-        _lookup.GetEntitiesInRange(position.MapId, position.Position, ent.Comp.BlastRadius, _targets);
+        _lookup.GetEntitiesInRange(position.MapId, position.Position, ent.Comp.BlastRadius, _targets, LookupFlags.Uncontained);
 
         foreach (var target in _targets)
         {
@@ -149,9 +149,7 @@ public sealed class XenoAcidBlastSystem : EntitySystem
         return !HasComp<MobStateComponent>(target) &&
                !_hive.FromSameHive(ent.Owner, target) &&
                HasComp<DamageableComponent>(target) &&
-               (HasComp<WeaponMountComponent>(target) ||
-                HasComp<SentryComponent>(target) ||
-                HasComp<BarricadeComponent>(target));
+               HasComp<BarricadeComponent>(target);
     }
 
     private void ApplyStructureDamage(Entity<XenoAcidBlastComponent> ent, EntityUid target)

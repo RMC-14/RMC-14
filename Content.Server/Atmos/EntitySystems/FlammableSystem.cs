@@ -70,6 +70,8 @@ namespace Content.Server.Atmos.EntitySystems
         private readonly Dictionary<Entity<FlammableComponent>, float> _fireEvents = new();
 
         // RMC14
+        private static readonly ProtoId<AlertPrototype> FireAlert = "Fire";
+
         private EntityQuery<SteppingOnFireComponent> _steppingOnFireQuery;
 
         public override void Initialize()
@@ -456,7 +458,8 @@ namespace Content.Server.Atmos.EntitySystems
             if (!Resolve(uid, ref flammable))
                 return;
 
-            if (!flammable.OnFire || !_actionBlockerSystem.CanInteract(uid, null) || flammable.Resisting)
+            // RMC14 use CanMove instead of CanInteract
+            if (!flammable.OnFire || flammable.Resisting || !_actionBlockerSystem.CanMove(uid))
                 return;
 
             flammable.Resisting = true;
@@ -499,8 +502,8 @@ namespace Content.Server.Atmos.EntitySystems
             _timer -= UpdateTime;
 
             // TODO: This needs cleanup to take off the crust from TemperatureComponent and shit.
-            var query = EntityQueryEnumerator<FlammableComponent, TransformComponent>();
-            while (query.MoveNext(out var uid, out var flammable, out _))
+            var query = EntityQueryEnumerator<FlammableComponent>();
+            while (query.MoveNext(out var uid, out var flammable))
             {
                 // Slowly dry ourselves off if wet.
                 if (flammable.FireStacks < 0)
@@ -509,13 +512,20 @@ namespace Content.Server.Atmos.EntitySystems
                     Dirty(uid, flammable);
                 }
 
-                if (!flammable.OnFire)
+                var last = flammable.LastOnFire;
+                flammable.LastOnFire = flammable.OnFire;
+                if (flammable.LastOnFire != last)
                 {
-                    _rmcFlammable.UpdateFireAlert(uid);
-                    continue;
+                    Dirty(uid, flammable);
+
+                    if (flammable.OnFire)
+                        _alertsSystem.ShowAlert(uid, FireAlert);
+                    else
+                        _alertsSystem.ClearAlert(uid, FireAlert);
                 }
 
-                _rmcFlammable.UpdateFireAlert(uid);
+                if (!flammable.OnFire)
+                    continue;
 
                 if (flammable.FireStacks > 0)
                 {

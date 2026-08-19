@@ -287,54 +287,6 @@
       path: /Audio/_RMC14/Weapons/genhit3.ogg
 
 - type: entity
-  parent: [BaseItem, RMCBaseMeleeWeapon]
-  id: RMCMaintenanceJack
-  name: maintenance jack
-  description: A heavy synthetic-grade maintenance tool that can pry doors and work as a wrench.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Tools/maintenance_jack.rsi
-    state: icon
-  - type: Item
-    size: Normal
-    sprite: _RMC14/Objects/Tools/maintenance_jack.rsi
-    storedRotation: 0
-  - type: Clothing
-    quickEquip: false
-    sprite: _RMC14/Objects/Tools/maintenance_jack.rsi
-    slots:
-    - Back
-    - Suitstorage
-  - type: Tool
-    qualities:
-    - Prying
-    - Anchoring
-    useSound:
-      path: /Audio/Items/jaws_pry.ogg
-  - type: Prying
-    pryPowered: true
-    force: true
-    speedModifier: 2
-    useSound:
-      path: /Audio/Items/jaws_pry.ogg
-  - type: ToolTileCompatible
-    delay: 0
-  - type: MeleeWeapon
-    wideAnimationRotation: -135
-    attackRate: 0.8
-    damage:
-      types:
-        Blunt: 20
-        Structural: 30
-    soundHit:
-      collection: MetalThud
-  - type: RMCSynthItemRestriction
-    checkPickup: false
-  - type: PhysicalComposition
-    materialComposition:
-      CMSteel: 200
-
-- type: entity
   parent: HandLabeler
   id: CMHandLabeler
   suffix: RMC14

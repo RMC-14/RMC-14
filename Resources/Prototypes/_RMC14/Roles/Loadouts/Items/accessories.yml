@@ -16,12 +16,14 @@
 
 - type: loadout
   id: WatchCheapRMC
+  cost: 2
   storage:
     back:
     - RMCWatchCheap
 
 - type: loadout
   id: WatchBasicRMC
+  cost: 2
   effects:
     - !type:JobRequirementLoadoutEffect
       requirement:
@@ -30,10 +32,11 @@
         time: 90000 # 25 hrs
   storage:
     back:
-    - RMCWatchCaseBasic
+    - RMCWatchBasic
 
 - type: loadout
   id: WatchSurvRMC
+  cost: 2
   effects:
     - !type:JobRequirementLoadoutEffect
       requirement:
@@ -42,10 +45,11 @@
         time: 36000 # 10 hrs
   storage:
     back:
-    - RMCWatchCaseSurv
+    - RMCWatchSurv
 
 - type: loadout
   id: WatchPilotRMC
+  cost: 2
   effects:
     - !type:JobRequirementLoadoutEffect
       requirement:
@@ -54,10 +58,11 @@
         time: 43200 # 12 hrs
   storage:
     back:
-    - RMCWatchCasePilot
+    - RMCWatchPilot
 
 - type: loadout
   id: WatchLiaisonRMC
+  cost: 2
   effects:
     - !type:JobRequirementLoadoutEffect
       requirement:
@@ -66,10 +71,11 @@
         time: 126000 # 35 hrs
   storage:
     back:
-    - RMCWatchCaseLiaison
+    - RMCWatchLiaison
 
 - type: loadout
   id: WatchSynthRMC
+  cost: 2
   effects:
     - !type:JobRequirementLoadoutEffect
       requirement:
@@ -78,7 +84,7 @@
         time: 126000 # 35 hrs
   storage:
     back:
-    - RMCWatchCaseSynth
+    - RMCWatchSynth
 
 - type: loadout
   id: PatchPeaceRMC

@@ -215,6 +215,7 @@
     name: rmc-xeno-trapper-name
     description: rmc-xeno-trapper-description
     popup: rmc-xeno-trapper-popup
+  - type: XenoHidden
   - type: CMArmor
     xenoArmor: 0
     explosionArmor: 20
@@ -227,7 +228,7 @@
       590: Critical
       690: Dead
   - type: XenoZoom
-    zoom: 1.9, 1.9
+    zoom: 1.8, 1.8
     offsetLength: 0
     speed: 1
     doAfter: 0

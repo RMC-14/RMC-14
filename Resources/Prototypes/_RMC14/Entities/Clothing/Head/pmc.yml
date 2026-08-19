@@ -359,7 +359,7 @@
 
 # PPO
 - type: entity
-  parent: CMHeadCapMP
+  parent: ArmorHelmetPMC
   id: RMCHeadCapExecutiveBodyguard
   name: executive bodyguard cap
   description: A protective cap made from flexible reinforced fiber. Standard issue for most security firms in the place of a helmet.
