@@ -1,48 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: Requisitions now also stocks replacement squad headsets with built in
-      tracking.
-    type: Add
-  id: 3084
-  time: '2026-04-08T04:30:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9502
-- author: Dygon
-  changes:
-  - message: Pilots can now play a far reaching sound using the dropship navigation
-      computer to announce that they are about to take off.
-    type: Add
-  id: 3085
-  time: '2026-04-08T04:37:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9448
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed PMC-FOL survivor and Paramarine Commander not counting towards
-      Survivor CO time.
-    type: Fix
-  - message: Fixed the paramarine commander not using the loadout of your survivor
-      commander profile.
-    type: Fix
-  id: 3086
-  time: '2026-04-10T06:41:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9432
-- author: Arykh
-  changes:
-  - message: Using binoculars will now put them on your eyes.
-    type: Tweak
-  - message: Fixes binoculars not using their camouflage in-hand sprites.
-    type: Fix
-  id: 3087
-  time: '2026-04-10T06:43:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9507
-- author: CatAndHats
-  changes:
-  - message: Fixed marines being able to paradrop into the out of bounds water area
-      of New Varadero
-    type: Fix
-  id: 3088
-  time: '2026-04-10T06:43:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9605
 - author: IceNoobXD
   changes:
   - message: Added CBRN squad and ghost roles!
@@ -4543,5 +4499,46 @@
   id: 3583
   time: '2026-08-16T22:15:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10693
+- author: Thereisabear
+  changes:
+  - message: JTAC and Spotter pamphlets will now result in JTAC 2 regardless of which
+      one used first.
+    type: Tweak
+  - message: Fixed pamphlets stacking skills erroneously.
+    type: Fix
+  - message: Fixed survivor jobs names getting erased  after using a pamphlet.
+    type: Fix
+  id: 3584
+  time: '2026-08-18T15:37:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10276
+- author: Vermidia
+  changes:
+  - message: Fixed parasites being unable to interact with eggmorphers.
+    type: Fix
+  id: 3585
+  time: '2026-08-18T16:20:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10369
+- author: IceNoobXD
+  changes:
+  - message: Added a small research bubble in excavation on Trijent Dam!
+    type: Add
+  id: 3586
+  time: '2026-08-18T16:25:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10555
+- author: Thereisabear
+  changes:
+  - message: Fixed SMES using upstream construction graph, using upstream damage modifiers
+      and being able to anchor and unanchor.
+    type: Fix
+  id: 3587
+  time: '2026-08-19T10:24:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10711
+- author: CatAndHats
+  changes:
+  - message: Added landing pad number decals
+    type: Add
+  id: 3588
+  time: '2026-08-19T16:41:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10741
 Name: RMC14
 Order: -1
