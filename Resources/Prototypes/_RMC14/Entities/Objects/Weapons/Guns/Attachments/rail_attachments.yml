@@ -720,7 +720,7 @@
 
 - type: entity
   parent: RMCAttachmentS42xTelescopicMiniscope
-  id: RMCAttachmente290Scope
+  id: RMCAttachmentE290Scope
   name: E290A1/D integrated optic
   description: The rifle's about as useful as you are now, you wanker. Put it back on.
   components:
