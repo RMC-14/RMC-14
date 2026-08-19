@@ -1,122 +1,4 @@
 ﻿Entries:
-- author: kleinerstation13
-  changes:
-  - message: Added Corporate M63 variant
-    type: Add
-  - message: Fixed Solaris PMC crashlanding survivors starting with an empty M63 instead
-      of a loaded corporate variant
-    type: Fix
-  id: 3072
-  time: '2026-04-07T01:19:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9216
-- author: Vixting
-  changes:
-  - message: Fixed being able to stack multiple xenonid structures on the same tile
-    type: Fix
-  id: 3073
-  time: '2026-04-07T03:10:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9615
-- author: CatAndHats
-  changes:
-  - message: Fixed plastic Road Barriers giving two metal sheets when deconstructed
-    type: Fix
-  id: 3074
-  time: '2026-04-07T03:11:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9469
-- author: CatAndHats
-  changes:
-  - message: Xenonid spit actions remain toggled until deactivated or another ability
-      is used
-    type: Tweak
-  id: 3075
-  time: '2026-04-07T03:17:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9538
-- author: Dygon
-  changes:
-  - message: Fixed resting resetting tackle stacks.
-    type: Fix
-  id: 3076
-  time: '2026-04-07T03:16:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9526
-- author: CatAndHats
-  changes:
-  - message: Fixed sentinel resting sprites while they are injured to not have the
-      blood floating in mid-air
-    type: Fix
-  id: 3077
-  time: '2026-04-07T03:16:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9332
-- author: CatAndHats
-  changes:
-  - message: Watcher Parasite now has a slightly distinct sprite from base Parasite
-    type: Tweak
-  id: 3078
-  time: '2026-04-07T03:19:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9512
-- author: CatAndHats
-  changes:
-  - message: Praetorian Oppressor's Abduct and Vanguard's Pierce abilities now have
-      a tile preview overlay
-    type: Add
-  id: 3079
-  time: '2026-04-07T03:18:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9468
-- author: Arykh
-  changes:
-  - message: Fixed Nutritious Property restoring less nutrition than intended. (again)
-    type: Fix
-  id: 3080
-  time: '2026-04-07T03:21:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9532
-- author: monomethylhydrazine
-  changes:
-  - message: Added the SPP Support Synthetic.
-    type: Add
-  id: 3081
-  time: '2026-04-07T03:20:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8388
-- author: monomethylhydrazine
-  changes:
-  - message: Added jobs for survivors of 173/RECON, an SPP special forces unit crashlanded
-      on Trijent Dam.
-    type: Add
-  id: 3082
-  time: '2026-04-07T03:23:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8602
-- author: SharkSnake98
-  changes:
-  - message: Added a 4x2 WEYA floor decal for mapping use
-    type: Add
-  id: 3083
-  time: '2026-04-08T04:27:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9488
-- author: Ian321
-  changes:
-  - message: Requisitions now also stocks replacement squad headsets with built in
-      tracking.
-    type: Add
-  id: 3084
-  time: '2026-04-08T04:30:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9502
-- author: Dygon
-  changes:
-  - message: Pilots can now play a far reaching sound using the dropship navigation
-      computer to announce that they are about to take off.
-    type: Add
-  id: 3085
-  time: '2026-04-08T04:37:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9448
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed PMC-FOL survivor and Paramarine Commander not counting towards
-      Survivor CO time.
-    type: Fix
-  - message: Fixed the paramarine commander not using the loadout of your survivor
-      commander profile.
-    type: Fix
-  id: 3086
-  time: '2026-04-10T06:41:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9432
 - author: Arykh
   changes:
   - message: Using binoculars will now put them on your eyes.
@@ -4541,5 +4423,124 @@
   id: 3571
   time: '2026-08-15T01:10:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10393
+- author: Zezey
+  changes:
+  - message: Employment SOP tweak.
+    type: Tweak
+  id: 3572
+  time: '2026-08-16T12:53:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10702
+- author: Ozehk
+  changes:
+  - message: Fixed ICBL and ILRO tacmap blips being swapped.
+    type: Fix
+  id: 3573
+  time: '2026-08-16T13:21:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10683
+- author: Sifb26
+  changes:
+  - message: Chess and checkers sets are now available in the rec vend
+    type: Tweak
+  id: 3574
+  time: '2026-08-16T13:27:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10586
+- author: Vermidia
+  changes:
+  - message: Fixed extremely rare cases where larva could fail to burst (hopefully).
+    type: Fix
+  id: 3575
+  time: '2026-08-16T13:30:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10573
+- author: TadJohnson00
+  changes:
+  - message: Added desk plants for mappers to use as they deem fit.
+    type: Add
+  id: 3576
+  time: '2026-08-16T13:35:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10603
+- author: Ozehk
+  changes:
+  - message: Added Halcyon paygrades.
+    type: Add
+  - message: Gave the Sorokyne Strata corporate survivor Halcyon paygrades instead
+      of Weston-Yamada ones.
+    type: Tweak
+  id: 3577
+  time: '2026-08-16T13:56:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10612
+- author: kleinerstation13
+  changes:
+  - message: Ported US Army Tyrargo Rift survivors from CM13, currently unused
+    type: Add
+  - message: Ported a lot of Tyrargo Rift tile types, props and forest hull wall types
+      for mappers
+    type: Add
+  id: 3578
+  time: '2026-08-16T14:22:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9830
+- author: CatAndHats
+  changes:
+  - message: Added colony medical lockers with their parity contents
+    type: Add
+  id: 3579
+  time: '2026-08-16T14:37:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10227
+- author: Hank-Hill-Propane-Man
+  changes:
+  - message: Added filled versions of the Engineer's Locker and Welding Locker for
+      mapping
+    type: Add
+  id: 3580
+  time: '2026-08-16T14:52:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10483
+- author: Vermidia
+  changes:
+  - message: Fixed spray acid and bone chips needing LOS to use on a tile.
+    type: Fix
+  - message: Fixed pierce preview showing it'd be blocked by cades.
+    type: Fix
+  id: 3581
+  time: '2026-08-16T14:54:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10416
+- author: Vermidia
+  changes:
+  - message: Added functionality for elevators.
+    type: Add
+  id: 3582
+  time: '2026-08-16T18:13:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10319
+- author: CatAndHats
+  changes:
+  - message: Fixed xenonids being able to plant eggs inside vehicles
+    type: Fix
+  id: 3583
+  time: '2026-08-16T22:15:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10693
+- author: Thereisabear
+  changes:
+  - message: JTAC and Spotter pamphlets will now result in JTAC 2 regardless of which
+      one used first.
+    type: Tweak
+  - message: Fixed pamphlets stacking skills erroneously.
+    type: Fix
+  - message: Fixed survivor jobs names getting erased  after using a pamphlet.
+    type: Fix
+  id: 3584
+  time: '2026-08-18T15:37:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10276
+- author: Vermidia
+  changes:
+  - message: Fixed parasites being unable to interact with eggmorphers.
+    type: Fix
+  id: 3585
+  time: '2026-08-18T16:20:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10369
+- author: IceNoobXD
+  changes:
+  - message: Added a small research bubble in excavation on Trijent Dam!
+    type: Add
+  id: 3586
+  time: '2026-08-18T16:25:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10555
 Name: RMC14
 Order: -1
