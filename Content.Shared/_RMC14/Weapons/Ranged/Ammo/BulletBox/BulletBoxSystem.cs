@@ -144,19 +144,23 @@ public sealed class BulletBoxSystem : EntitySystem
 
             transfer = Math.Min(transfer, used.Comp2.Count);
 
-            var taken = new List<(EntityUid? Entity, IShootable Shootable)>();
-            var takeEv = new TakeAmmoEvent(transfer, taken, Transform(usedId).Coordinates, user);
-            RaiseLocalEvent(usedId, takeEv);
+            var fromUnspawned = Math.Min(transfer, used.Comp2.UnspawnedCount);
+            if (fromUnspawned > 0)
+                _gun.SetBallisticUnspawned((used, used.Comp2), used.Comp2.UnspawnedCount - fromUnspawned);
 
-            transfer = taken.Count;
-            foreach (var (round, _) in taken)
+            var remaining = transfer - fromUnspawned;
+            if (remaining > 0)
             {
-                if (round is { } roundId)
-                    PredictedDel(roundId);
-            }
+                var taken = new List<(EntityUid? Entity, IShootable Shootable)>();
+                var takeEv = new TakeAmmoEvent(remaining, taken, Transform(usedId).Coordinates, user);
+                RaiseLocalEvent(usedId, takeEv);
 
-            if (transfer <= 0)
-                return;
+                foreach (var (round, _) in taken)
+                {
+                    if (round is { } roundId)
+                        PredictedDel(roundId);
+                }
+            }
 
             ent.Comp.Amount += transfer;
         }
