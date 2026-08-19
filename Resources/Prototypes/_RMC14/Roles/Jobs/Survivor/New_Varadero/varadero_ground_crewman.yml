@@ -4,6 +4,7 @@
   name: cm-job-name-survivor-ground-crew
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorEngineer
+  greeting: rmc-job-greeting-varadero
   startingGear: RMCGearSurvivorUNMCGroundCrewman
   ranks:
     RMCRankLanceCorporal: []

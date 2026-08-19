@@ -5,6 +5,7 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivor
   startingGear: RMCGearSurvivorBeachBum
+  greeting: rmc-job-greeting-varadero
   spawnMenuRoleName: Beach Bum (NV Survivor)
   special:
   - !type:AddComponentSpecial

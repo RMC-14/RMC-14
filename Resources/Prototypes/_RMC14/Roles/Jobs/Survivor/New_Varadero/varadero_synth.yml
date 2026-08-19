@@ -13,6 +13,7 @@
   - Colony
   - ColonistSynthShipside
   startingGear: RMCGearSurvivorUNMCSynthetic
+  greeting: rmc-job-greeting-varadero
   spawnMenuRoleName: UNMC Support Synthetic (NV Survivor)
   roleWeight: 0.25
   icon: "RMCJobIconSurvivorUNMCSynth"

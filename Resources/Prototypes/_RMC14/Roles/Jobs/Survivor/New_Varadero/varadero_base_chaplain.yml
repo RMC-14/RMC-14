@@ -5,6 +5,7 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivor
   startingGear: RMCGearSurvivorVaraderoChaplain
+  greeting: rmc-job-greeting-varadero
   ranks:
     RMCRankCorporal: []
   spawnMenuRoleName: UNMC Base Chaplain (NV Survivor)

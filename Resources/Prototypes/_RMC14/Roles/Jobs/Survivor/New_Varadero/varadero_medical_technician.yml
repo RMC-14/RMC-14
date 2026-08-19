@@ -5,8 +5,9 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorDoctor
   startingGear: RMCGearSurvivorMedicalTechnician
+  greeting: rmc-job-greeting-varadero
   spawnMenuRoleName: UNMC Medical Technician (NV Survivor)
-  icon: "CMJobIconHospitalCorpsman"
+  icon: "RMCJobIconSurvivorNVMedicalTechnician"
   hasIcon: true
   ranks:
     RMCRankSergeant:
@@ -102,3 +103,10 @@
       - [ CMFirstAidKitFilledRobust ]
       - [ RMCGlassesMedicalHUDGlasses, CMFirstAidKitFilledRobust ]
       - [ RMCGlassesMedicalHUDGlasses, CMFirstAidKitFilledRobust, CMFirstAidKitSurgeryFilled ]
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSurvivorNVMedicalTechnician
+  icon:
+    sprite: _RMC14/Interface/job_icons/UNMC/other.rsi
+    state: hudsquad_nv_field_doctor

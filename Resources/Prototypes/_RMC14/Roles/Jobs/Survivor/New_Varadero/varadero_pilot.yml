@@ -5,6 +5,7 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorEngineer
   startingGear: RMCGearSurvivorUNMCPilot
+  greeting: rmc-job-greeting-varadero
   ranks:
     RMCRankSecondLT: []
   spawnMenuRoleName: UNMC Pilot (NV Survivor)

@@ -5,6 +5,7 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorDoctor
   startingGear: RMCGearSurvivorAirportFirefighter
+  greeting: rmc-job-greeting-varadero
   spawnMenuRoleName: UNMC Airport Firefighter (NV Survivor)
   ranks:
     RMCRankSergeant:

@@ -6,6 +6,7 @@
   playTimeTracker: CMJobSurvivor
   startingGear: RMCGearSurvivorUNRepresentative
   spawnMenuRoleName: UN Assistant Representative (NV Survivor)
+  greeting: rmc-job-greeting-varadero
   ranks:
     RMCRankCivilianRepresentative: []
   hasIcon: false

@@ -5,6 +5,7 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorScientist
   startingGear: RMCGearSurvivorNewVaraderoXenoarchaeologist
+  greeting: rmc-job-greeting-varadero
   spawnMenuRoleName: New Varadero Xenoarchaeologist (NV Survivor)
   accessGroups:
   - ColonistMedical

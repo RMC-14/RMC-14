@@ -7,6 +7,7 @@
   ranks:
     RMCRankLieutenantColonel: []
   startingGear: RMCGearSurvivorCommanderNewVaradero
+  greeting: rmc-job-greeting-varadero
   supervisors: cm-job-supervisors-marine-high-command
   roleWeight: 0.25
   icon: "RMCJobIconSurvivorCommanderNewVaradero"

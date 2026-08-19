@@ -5,6 +5,7 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorSecurity
   startingGear: RMCGearSurvivorUNMCRifleman
+  greeting: rmc-job-greeting-varadero
   ranks:
     RMCRankPrivateFirstClass: []
   spawnMenuRoleName: UNMC Rifleman (NV Survivor)

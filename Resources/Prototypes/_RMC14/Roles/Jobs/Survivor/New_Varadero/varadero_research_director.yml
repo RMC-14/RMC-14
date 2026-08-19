@@ -5,6 +5,7 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorScientist
   startingGear: RMCGearSurvivorNewVaraderoResearchDirector
+  greeting: rmc-job-greeting-varadero
   spawnMenuRoleName: New Varadero Research Director (NV Survivor)
   ranks:
     RMCRankCivilianProfessor: []

@@ -5,6 +5,7 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorEngineer
   startingGear: RMCGearSurvivorUNMCVehicleCrewman
+  greeting: rmc-job-greeting-varadero
   ranks:
     RMCRankLanceCorporal: []
   spawnMenuRoleName: UNMC Vehicle Crewman (NV Survivor)

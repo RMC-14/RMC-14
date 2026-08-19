@@ -6,6 +6,7 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorSecurity
   startingGear: RMCGearSurvivorUNMCBasePolice
+  greeting: rmc-job-greeting-varadero
   ranks:
     RMCRankSergeant: []
   spawnMenuRoleName: UNMC Base Police (NV Survivor)
