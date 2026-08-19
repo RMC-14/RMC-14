@@ -285,7 +285,7 @@
   id: CMJobIconHalcyonDeputyDirector
   icon:
     sprite: _RMC14/Interface/job_icons/halcyon.rsi
-    state: hc_depdirector
+    state: hc_depdirect
 
 - type: jobIcon
   parent: CMJobIconBase
