@@ -221,10 +221,10 @@
           - RMCAttachmentExtendedCompensator
       rmc-aslot-rail:
         locked: true
-        startingAttachable: RMCAttachmente290Scope
+        startingAttachable: RMCAttachmentE290Scope
         whitelist:
           tags:
-          - RMCAttachmente290Scope
+          - RMCAttachmentE290Scope
       rmc-aslot-underbarrel:
         locked: true
         startingAttachable: RMCAttachmentE290Grip
@@ -327,7 +327,10 @@
       map: [ "enum.GunVisualLayers.Mag" ]
     - state: ammo_band
       color: "#9C9A19"
-  - type: RefillableByBulletBox
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRifle10x24mmHEAP
     proto: RMCCartridgeRifle10x24mmHEAP
 
 # Tags
