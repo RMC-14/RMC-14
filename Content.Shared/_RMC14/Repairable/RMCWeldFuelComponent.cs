@@ -10,5 +10,5 @@ public sealed partial class RMCWeldFuelComponent : Component
     public float WeldFuelMultiplier = 0.33f;
 
     [DataField, AutoNetworkedField]
-    public float MinWeldFuel = 0f;
+    public float MinWeldFuel = 1f;
 }
