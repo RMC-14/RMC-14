@@ -73,14 +73,14 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     private readonly IPrototypeManager _prototypes;
     private readonly IComponentFactory _componentFactory;
     private readonly IStateManager _stateManager;
+    private readonly AreaSystem _area;
+    private readonly LineSystem _line;
     private readonly SharedMapSystem _mapSystem;
     private readonly SharedPhysicsSystem _physics;
     private readonly SharedTransformSystem _transform;
-    private readonly LineSystem _line;
-    private readonly AreaSystem _area;
+    private readonly SpriteSystem _sprite;
     private readonly TagSystem _tags;
     private readonly TurfSystem _turf;
-    private readonly SpriteSystem _sprite;
     private readonly EntityQuery<ActionsComponent> _actionsQ;
     private readonly EntityQuery<AlmayerComponent> _almayerQ;
     private readonly EntityQuery<BlockXenoConstructionComponent> _blockXenoConstructionQ;
@@ -113,14 +113,14 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         _prototypes = IoCManager.Resolve<IPrototypeManager>();
         _componentFactory = IoCManager.Resolve<IComponentFactory>();
         _stateManager = IoCManager.Resolve<IStateManager>();
+        _area = ents.System<AreaSystem>();
+        _line = ents.System<LineSystem>();
         _mapSystem = ents.System<SharedMapSystem>();
         _physics = ents.System<SharedPhysicsSystem>();
-        _transform = ents.System<SharedTransformSystem>();
-        _line = ents.System<LineSystem>();
-        _area = ents.System<AreaSystem>();
-        _tags = ents.System<TagSystem>();
-        _turf = ents.System<TurfSystem>();
         _sprite = ents.System<SpriteSystem>();
+        _tags = ents.System<TagSystem>();
+        _transform = ents.System<SharedTransformSystem>();
+        _turf = ents.System<TurfSystem>();
         _actionsQ = ents.GetEntityQuery<ActionsComponent>();
         _almayerQ = ents.GetEntityQuery<AlmayerComponent>();
         _blockXenoConstructionQ = ents.GetEntityQuery<BlockXenoConstructionComponent>();
@@ -240,8 +240,8 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
                 DrawPierce(args, player.Value, xform, originMap, mousePos, pierce);
                 break;
 
-            case XenoDigTunnelActionEvent:
-                DrawTunnelableTiles(args, originMap, (XenoDigTunnelActionEvent)worldTarget.Event);
+            case XenoDigTunnelActionEvent tunnelEvent:
+                DrawTunnelableTiles(args, originMap, tunnelEvent);
                 break;
         }
     }
@@ -805,7 +805,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
 
         var halfTileSize = grid.TileSizeHalfVector;
 
-        // Overcommented to maybe help make the grid->world stuff less confusing, because it certainly confused me.
+        // Overcommented to maybe help make the grid -> world stuff less confusing, because it certainly confused me.
         // This is essentially the same as converting from grid-based `EntityCoordinates` to world-based `MapCoordinates`,
         // just using raw `Vector2`s instead of the structs since they would fetch the grid's pos+rot for each tile rather than just once.
         // (maybe a small optimisation, but this is potentially a lot of tiles updating every frame)
