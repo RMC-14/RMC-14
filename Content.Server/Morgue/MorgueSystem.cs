@@ -63,7 +63,9 @@ public sealed class MorgueSystem : EntitySystem
             if (!hasMob && HasComp<BodyComponent>(ent))
                 hasMob = true;
 
+            // RMC14
             if (HasComp<ActorComponent>(ent) && !HasComp<UnrevivableComponent>(ent))
+            // RMC14
             {
                 _appearance.SetData(uid, MorgueVisuals.Contents, MorgueContents.HasSoul, app);
                 return;
