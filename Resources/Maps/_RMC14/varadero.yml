@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 08/18/2026 23:08:08
-  entityCount: 31516
+  time: 08/19/2026 16:27:54
+  entityCount: 31561
 maps:
 - 1
 grids:
@@ -151119,7 +151119,7 @@ entities:
       pos: 68.5,53.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -62604.004
+      secondsUntilStateChange: -62991.703
       state: Opening
   - uid: 29540
     components:
@@ -161017,7 +161017,7 @@ entities:
       pos: 73.5,59.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -302448.53
+      secondsUntilStateChange: -302836.22
       state: Opening
   - uid: 21267
     components:
@@ -181894,6 +181894,11 @@ entities:
     - type: Transform
       pos: 15.5,68.5
       parent: 1
+  - uid: 31561
+    components:
+    - type: Transform
+      pos: 170.5,161.5
+      parent: 1
 - proto: RMCPlasmaOre1
   entities:
   - uid: 11271
@@ -194222,6 +194227,127 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 34.5,128.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+- proto: RMCPropVaraderoAACannon1
+  entities:
+  - uid: 31539
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 113.5,162.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 31540
+    components:
+    - type: Transform
+      pos: 117.5,166.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 31550
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 91.5,161.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 31551
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 87.5,165.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+- proto: RMCPropVaraderoAACannon3
+  entities:
+  - uid: 31542
+    components:
+    - type: Transform
+      pos: 113.5,162.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 31552
+    components:
+    - type: Transform
+      pos: 87.5,165.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 31553
+    components:
+    - type: Transform
+      pos: 91.5,161.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+- proto: RMCPropVaraderoAACannon5
+  entities:
+  - uid: 31541
+    components:
+    - type: Transform
+      pos: 117.5,166.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+- proto: RMCPropVaraderoCannon
+  entities:
+  - uid: 31517
+    components:
+    - type: Transform
+      pos: 162.5,141.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 31519
+    components:
+    - type: Transform
+      pos: 163.5,158.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+- proto: RMCPropVaraderoCannon1
+  entities:
+  - uid: 31518
+    components:
+    - type: Transform
+      pos: 165.99165,141.49966
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 31520
+    components:
+    - type: Transform
+      pos: 166.98814,158.50102
       parent: 1
     - type: Physics
       canCollide: False
@@ -213828,6 +213954,166 @@ entities:
     components:
     - type: Transform
       pos: 77.5,51.5
+      parent: 1
+  - uid: 31521
+    components:
+    - type: Transform
+      pos: 162.5,159.5
+      parent: 1
+  - uid: 31522
+    components:
+    - type: Transform
+      pos: 162.5,158.5
+      parent: 1
+  - uid: 31523
+    components:
+    - type: Transform
+      pos: 162.5,157.5
+      parent: 1
+  - uid: 31524
+    components:
+    - type: Transform
+      pos: 163.5,159.5
+      parent: 1
+  - uid: 31525
+    components:
+    - type: Transform
+      pos: 163.5,158.5
+      parent: 1
+  - uid: 31526
+    components:
+    - type: Transform
+      pos: 163.5,157.5
+      parent: 1
+  - uid: 31527
+    components:
+    - type: Transform
+      pos: 164.5,159.5
+      parent: 1
+  - uid: 31528
+    components:
+    - type: Transform
+      pos: 164.5,158.5
+      parent: 1
+  - uid: 31529
+    components:
+    - type: Transform
+      pos: 164.5,157.5
+      parent: 1
+  - uid: 31530
+    components:
+    - type: Transform
+      pos: 161.5,142.5
+      parent: 1
+  - uid: 31531
+    components:
+    - type: Transform
+      pos: 161.5,141.5
+      parent: 1
+  - uid: 31532
+    components:
+    - type: Transform
+      pos: 161.5,140.5
+      parent: 1
+  - uid: 31533
+    components:
+    - type: Transform
+      pos: 162.5,142.5
+      parent: 1
+  - uid: 31534
+    components:
+    - type: Transform
+      pos: 162.5,141.5
+      parent: 1
+  - uid: 31535
+    components:
+    - type: Transform
+      pos: 162.5,140.5
+      parent: 1
+  - uid: 31536
+    components:
+    - type: Transform
+      pos: 163.5,142.5
+      parent: 1
+  - uid: 31537
+    components:
+    - type: Transform
+      pos: 163.5,141.5
+      parent: 1
+  - uid: 31538
+    components:
+    - type: Transform
+      pos: 163.5,140.5
+      parent: 1
+  - uid: 31543
+    components:
+    - type: Transform
+      pos: 113.5,162.5
+      parent: 1
+  - uid: 31544
+    components:
+    - type: Transform
+      pos: 118.5,166.5
+      parent: 1
+  - uid: 31545
+    components:
+    - type: Transform
+      pos: 118.5,167.5
+      parent: 1
+  - uid: 31546
+    components:
+    - type: Transform
+      pos: 117.5,166.5
+      parent: 1
+  - uid: 31547
+    components:
+    - type: Transform
+      pos: 117.5,167.5
+      parent: 1
+  - uid: 31548
+    components:
+    - type: Transform
+      pos: 116.5,166.5
+      parent: 1
+  - uid: 31549
+    components:
+    - type: Transform
+      pos: 116.5,167.5
+      parent: 1
+  - uid: 31554
+    components:
+    - type: Transform
+      pos: 91.5,161.5
+      parent: 1
+  - uid: 31555
+    components:
+    - type: Transform
+      pos: 86.5,165.5
+      parent: 1
+  - uid: 31556
+    components:
+    - type: Transform
+      pos: 86.5,166.5
+      parent: 1
+  - uid: 31557
+    components:
+    - type: Transform
+      pos: 87.5,166.5
+      parent: 1
+  - uid: 31558
+    components:
+    - type: Transform
+      pos: 88.5,165.5
+      parent: 1
+  - uid: 31559
+    components:
+    - type: Transform
+      pos: 88.5,166.5
+      parent: 1
+  - uid: 31560
+    components:
+    - type: Transform
+      pos: 87.5,165.5
       parent: 1
 - proto: VehicleTankTreads
   entities:

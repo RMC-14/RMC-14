@@ -1,0 +1,97 @@
+## Varadero props
+# they intentionally do not have collision
+
+# railcannon
+- type: entity
+  id: RMCPropVaraderoCannon
+  name: M2168A2 200-inch Celestial Defense Cold Launch Railgun
+  description: A large super heavy 200-inch cold launch railgun designed for protection of strategic points of interest from hostile orbital inclusion. Operated via a fire-control system console deck nearby. Fires HIM-85 Multi-Stage Anti-Aerospace Missiles.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    noRot: true
+  - type: Physics
+    fixedRotation: true
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _RMC14/Structures/varadero_cannon.rsi
+    state: cannon
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Corrodible
+    isCorrodible: false
+
+- type: entity
+  parent: RMCPropVaraderoCannon
+  id: RMCPropVaraderoCannon1
+  name: M2168A2 200-inch Celestial Defense Cold Launch Railgun Cannon
+  description: The actual barrel of a large super heavy 200-inch cold launch railgun designed for protection of strategic points of interest from hostile orbital inclusion. Operated via a fire-control system console deck nearby. Fires HIM-85 Multi-Stage Anti-Aerospace Missiles.
+  suffix: Barrel
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    state: cannon1
+
+# AA cannon
+- type: entity
+  abstract: true
+  id: RMCPropVaraderoAACannon
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    noRot: false
+  - type: Physics
+    fixedRotation: false
+  - type: Sprite
+    sprite: _RMC14/Structures/varadero_AA.rsi
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Corrodible
+    isCorrodible: false
+
+- type: entity
+  parent: RMCPropVaraderoAACannon
+  id: RMCPropVaraderoAACannon1
+  name: M83 'Skysweeper' platform
+  description: The base of a M83 'Skysweeper' AA gun. Its' wiring has been completely fried.
+  components:
+  - type: Sprite
+    state: aa_base
+
+- type: entity
+  parent: RMCPropVaraderoAACannon1
+  id: RMCPropVaraderoAACannon2
+  suffix: Destroyed
+  components:
+  - type: Sprite
+    state: aa_base_wreck
+
+- type: entity
+  parent: RMCPropVaraderoAACannon
+  id: RMCPropVaraderoAACannon3
+  name: M83 'Skysweeper
+  description: An M83 anti-aircraft dual barreled flak cannon. The design features two rotary fire 80mm cannons, which typically fire proximity fuse HEAP rounds. This one appears to have been fried by some kind of electronic pulse...
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    state: aa_turret
+
+- type: entity
+  parent: RMCPropVaraderoAACannon3
+  id: RMCPropVaraderoAACannon4
+  suffix: Up
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    state: aa_turret_up
+
+- type: entity
+  parent: RMCPropVaraderoAACannon3
+  id: RMCPropVaraderoAACannon5
+  suffix: Destroyed
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    state: aa_turret_wreck

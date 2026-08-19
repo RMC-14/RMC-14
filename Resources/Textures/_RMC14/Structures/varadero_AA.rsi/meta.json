@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "license": "CC-BY-3.0",
+  "copyright": "taken from cmss13 at https://github.com/Drazamuffin/cmss13/blob/068d2bf2ff6a10a579db4bfef47b9edf4562ca41/icons/obj/structures/props/AA.dmi",
+  "size": {
+    "x": 160,
+    "y": 160
+  },
+  "states": [
+    {
+      "name": "aa_base",
+      "directions": 4
+    },
+    {
+      "name": "aa_turret",
+      "directions": 4
+    },
+    {
+      "name": "aa_turret_up",
+      "directions": 4
+    },
+    {
+      "name": "aa_turret_wreck",
+      "directions": 4
+    },
+    {
+      "name": "aa_base_wreck",
+      "directions": 4
+    }
+  ]
+}
