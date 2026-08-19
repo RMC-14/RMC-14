@@ -3,6 +3,7 @@ using Content.Shared.Body.Components;
 using Content.Shared.Examine;
 using Content.Shared.Morgue;
 using Content.Shared.Morgue.Components;
+using Content.Shared.Traits.Assorted;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 
@@ -62,7 +63,7 @@ public sealed class MorgueSystem : EntitySystem
             if (!hasMob && HasComp<BodyComponent>(ent))
                 hasMob = true;
 
-            if (HasComp<ActorComponent>(ent))
+            if (HasComp<ActorComponent>(ent) && !HasComp<UnrevivableComponent>(ent))
             {
                 _appearance.SetData(uid, MorgueVisuals.Contents, MorgueContents.HasSoul, app);
                 return;
