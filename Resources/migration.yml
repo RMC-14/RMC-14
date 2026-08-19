@@ -1538,7 +1538,9 @@ FoodBoxPizzaFilled: RMCBoxPizzaRandom
 
 # 2026-08-06
 RMCWeaponRifleL88A1: RMCWeaponRifleE290A2
+RMCWeaponRifleL88A1Filled: RMCWeaponRifleE290A2
 RMCWeaponRifleL88A2: RMCWeaponRifleE290A1
+RMCWeaponRifleL88A2Filled: RMCWeaponRifleE290A1
 RMCWeaponRifleL89A1: RMCWeaponRifleE290A1D
 RMCWeaponRifleL89A2: RMCWeaponRifleE290A1D
 RMCMagazineRifleL88: RMCMagazineRifleE290
