@@ -269,6 +269,7 @@ public sealed class RMCChairStackSystem : EntitySystem
             _metaData.SetEntityName(ent, Loc.GetString("rmc-chair-stack-name"));
             _metaData.SetEntityDescription(ent, Loc.GetString("rmc-chair-stack-description", ("count", total)));
             _buckle.StrapSetEnabled(ent, false);
+            EnsureComp<PowerLoaderGrabbableComponent>(ent);
 
             if (stackFixture == null)
             {
@@ -298,6 +299,7 @@ public sealed class RMCChairStackSystem : EntitySystem
             }
 
             _buckle.StrapSetEnabled(ent, true);
+            RemComp<PowerLoaderGrabbableComponent>(ent);
 
             if (stackFixture != null)
                 _fixture.DestroyFixture(ent, ent.Comp.StackFixtureId, stackFixture);
