@@ -68,7 +68,7 @@
   - type: GrantTacMapAlert
 
 - type: entity
-  parent: RMCHeadsetRoyalMarine
+  parent: RMCHeadsetRoyalMarinePVE
   id: RMCHeadsetRoyalMarineLeaderPVE
   name: royal marine leader's headset
   suffix: PVE
