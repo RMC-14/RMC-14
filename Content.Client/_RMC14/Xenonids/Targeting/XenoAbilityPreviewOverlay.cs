@@ -21,6 +21,7 @@ using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions.Components;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
+using Content.Shared.Tag;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
@@ -56,6 +57,9 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     private static readonly Color TunnelAllowedFillColor = Color.Green.WithAlpha(0.25f);
     private static readonly Color TunnelAllowedOutlineColor = Color.Green.WithAlpha(0.5f);
 
+    private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
+    private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
+
     private const float OutlineAlpha = 0.8f;
     private const float OutlineThickness = 0.1f;
     private const int BombardDefaultRadius = 3;
@@ -74,6 +78,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     private readonly SharedTransformSystem _transform;
     private readonly LineSystem _line;
     private readonly AreaSystem _area;
+    private readonly TagSystem _tags;
     private readonly TurfSystem _turf;
     private readonly SpriteSystem _sprite;
     private readonly EntityQuery<ActionsComponent> _actionsQ;
@@ -113,6 +118,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         _transform = ents.System<SharedTransformSystem>();
         _line = ents.System<LineSystem>();
         _area = ents.System<AreaSystem>();
+        _tags = ents.System<TagSystem>();
         _turf = ents.System<TurfSystem>();
         _sprite = ents.System<SpriteSystem>();
         _actionsQ = ents.GetEntityQuery<ActionsComponent>();
@@ -479,8 +485,11 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
 
                 if (_turf.IsTileBlocked(tile, CollisionGroup.Impassable | CollisionGroup.MidImpassable | CollisionGroup.HighImpassable))
                     continue;
-                if (_mapSystem.GetAnchoredEntities(gridUid, grid, tile.GridIndices).Any(_blockXenoConstructionQ.HasComp))
+                if (_mapSystem.GetAnchoredEntities(gridUid, grid, tile.GridIndices)
+                    .Any(e => _blockXenoConstructionQ.HasComp(e) || _tags.HasAnyTag(e, AirlockTag, StructureTag)))
+                {
                     continue;
+                }
 
                 _tunnleableTileCache.Add(tile.GridIndices);
             }
