@@ -118,9 +118,9 @@ rmc-vehicle-key-examine-blank = [color=lightblue]This blank key can be imprinted
 rmc-vehicle-key-examine-duplicator = [color=lightblue]This blank key can copy an existing vehicle key by using it on that key.[/color]
 rmc-vehicle-key-examine-bound = [color=lightblue]This key is bound to a vehicle lock.[/color]
 rmc-hardpoint-remove-blocked = That hardpoint is fixed in place.
-rmc-vehicle-demolition-frame-intact = The vehicle frame is too intact to rig with charges. Wreck it first.
+rmc-vehicle-demolition-frame-intact = The vehicle frame is too intact to rig with charges. Destroy it first.
 rmc-vehicle-demolition-busy = Someone is already rigging this wreck.
 rmc-vehicle-demolition-start = You start rigging the wreck with explosives...
 rmc-vehicle-demolition-no-skill = You do not know how to rig demolition charges.
-rmc-vehicle-demolition-armed = The charge is planted & beeping down!
 rmc-vehicle-too-small-to-damage = We're too small to do any significant damage to this vehicle!
+rmc-vehicle-demolition-armed = The charge is planted and is counting down!
