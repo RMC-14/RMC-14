@@ -261,7 +261,7 @@
     proto: CMCartridgeRifle10x24mm
     capacity: 30
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/E290.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/e290.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -289,7 +289,7 @@
     proto: CMCartridgeRifle10x24mmAP
     capacity: 20
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/E290a.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/e290a.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
