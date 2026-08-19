@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Arykh
-  changes:
-  - message: Using binoculars will now put them on your eyes.
-    type: Tweak
-  - message: Fixes binoculars not using their camouflage in-hand sprites.
-    type: Fix
-  id: 3087
-  time: '2026-04-10T06:43:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9507
 - author: CatAndHats
   changes:
   - message: Fixed marines being able to paradrop into the out of bounds water area
@@ -4542,5 +4533,13 @@
   id: 3586
   time: '2026-08-18T16:25:35.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10555
+- author: Thereisabear
+  changes:
+  - message: Fixed SMES using upstream construction graph, using upstream damage modifiers
+      and being able to anchor and unanchor.
+    type: Fix
+  id: 3587
+  time: '2026-08-19T10:24:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10711
 Name: RMC14
 Order: -1
