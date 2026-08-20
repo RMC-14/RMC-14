@@ -584,6 +584,12 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<int> RMCLarvaQueueOfferTimeoutSeconds =
         CVarDef.Create("rmc.larva_queue_offer_timeout_seconds", 30, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<bool> RMCLarvaQueueVictimPriorityEnabled =
+        CVarDef.Create("rmc.larva_queue_victim_priority_enabled", false, CVar.CLIENT | CVar.REPLICATED | CVar.ARCHIVE);
+
+    public static readonly CVarDef<int> RMCLarvaQueueVictimPriorityOfferTimeoutSeconds =
+        CVarDef.Create("rmc.larva_queue_victim_priority_offer_timeout_seconds", 15, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<string> RMCChemMasterPresets =
         CVarDef.Create("rmc.chemmaster_presets", "", CVar.CLIENT | CVar.ARCHIVE);
 

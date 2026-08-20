@@ -27,6 +27,7 @@ public sealed class LarvaQueueSystem : EntitySystem
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly INetConfigurationManager _netConfig = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
@@ -52,6 +53,7 @@ public sealed class LarvaQueueSystem : EntitySystem
     }
 
     private int _offerTimeoutSeconds;
+    private int _victimPriorityOfferTimeoutSeconds;
     private TimeSpan _disconnectGracePeriod;
 
     public override void Initialize()
@@ -72,6 +74,7 @@ public sealed class LarvaQueueSystem : EntitySystem
         }
 
         Subs.CVar(_config, RMCCVars.RMCLarvaQueueOfferTimeoutSeconds, v => _offerTimeoutSeconds = v, true);
+        Subs.CVar(_config, RMCCVars.RMCLarvaQueueVictimPriorityOfferTimeoutSeconds, v => _victimPriorityOfferTimeoutSeconds = v, true);
         Subs.CVar(_config, RMCCVars.RMCDisconnectedXenoGhostRoleTimeSeconds, v => _disconnectGracePeriod = TimeSpan.FromSeconds(v), true);
     }
 
@@ -92,12 +95,12 @@ public sealed class LarvaQueueSystem : EntitySystem
             var larvaEntity = ev.SpawnedLarva.HasValue ? GetEntity(ev.SpawnedLarva.Value) : EntityUid.Invalid;
 
             if (larvaEntity.IsValid()
-                && TryComp<BursterComponent>(larvaEntity, out var burster)
-                && _player.TryGetSessionByEntity(burster.BurstFrom, out var victimSession)
-                && victimSession.UserId == victimId)
+                && HasComp<BursterComponent>(larvaEntity)
+                && _player.TryGetSessionById(victimId, out var victimSession)
+                && _netConfig.GetClientCVar(victimSession.Channel, RMCCVars.RMCLarvaQueueVictimPriorityEnabled))
             {
                 _reservedBurstLarva.Add(larvaEntity);
-                SendOffer(victimSession, larvaEntity, hive, "Burst Victim", 1);
+                SendOffer(victimSession, larvaEntity, hive, "Burst Victim", 1, _victimPriorityOfferTimeoutSeconds);
             }
         }
 
@@ -380,7 +383,7 @@ public sealed class LarvaQueueSystem : EntitySystem
         }
     }
 
-    private void SendOffer(ICommonSession session, EntityUid? targetLarva, Entity<HiveComponent> hive, string tier, int position)
+    private void SendOffer(ICommonSession session, EntityUid? targetLarva, Entity<HiveComponent> hive, string tier, int position, int? timeoutSecondsOverride = null)
     {
         if (_pendingOffers.TryGetValue(session.UserId, out var existing))
         {
@@ -390,7 +393,7 @@ public sealed class LarvaQueueSystem : EntitySystem
                 DecrementPendingBurrowed(existing.Hive);
         }
 
-        var expiresAt = _gameTiming.CurTime.TotalSeconds + _offerTimeoutSeconds;
+        var expiresAt = _gameTiming.CurTime.TotalSeconds + (timeoutSecondsOverride ?? _offerTimeoutSeconds);
         _pendingOffers[session.UserId] = new PendingOffer
         {
             TargetLarva = targetLarva,
