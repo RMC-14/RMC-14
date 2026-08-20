@@ -3,7 +3,6 @@ using System.Linq;
 using Content.Shared.CCVar;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Random;
-using Content.Shared.Roles;
 using Content.Shared.Players.PlayTimeTracking;
 using Robust.Shared.Collections;
 using Robust.Shared.Configuration;
@@ -80,10 +79,6 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
             EntityName = null;
         }
 
-        // RMC14 - Set loadout points and work out playtime point rewards.
-        var calculatedRolePoints = CalculatePointsFromPlaytime(session);
-        // End RMC14
-
         // Validate name length
         // TODO: Probably allow regex to be supplied?
         if (EntityName != null)
@@ -114,7 +109,9 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
 
         // RMC14
         // Reset points to recalculate. 
-        Points = calculatedRolePoints;
+        Points = roleProto.Points != null
+            ? CalculatePointsFromPlaytime(session, collection, roleProto.Points.Value)
+            : null;
         // End RMC14
 
         foreach (var (group, groupLoadouts) in SelectedLoadouts)
@@ -202,7 +199,7 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
             SelectedLoadouts.Remove(value);
         }
 
-        RecalculatePoints(protoManager); // RMC14 Loadout Fix
+        RecalculatePoints(protoManager, session, collection);
     }
 
     private void Apply(LoadoutPrototype loadoutProto)
@@ -217,7 +214,7 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
     }
 
     // RMC14 Loadout Fix Start
-    public void RecalculatePoints(IPrototypeManager protoManager)
+    public void RecalculatePoints(IPrototypeManager protoManager, ICommonSession? session, IDependencyCollection collection)
     {
         if (!protoManager.TryIndex(Role, out var roleProto) || roleProto.Points == null)
         {
@@ -225,7 +222,7 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
             return;
         }
 
-        var points = roleProto.Points.Value;
+        var points = CalculatePointsFromPlaytime(session, collection, roleProto.Points.Value);
 
         foreach (var (_, groupLoadouts) in SelectedLoadouts)
         {
@@ -257,7 +254,11 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
         var collection = IoCManager.Instance!;
         var roleProto = protoManager.Index(Role);
 
-        Points = roleProto.Points; // RMC14 Loadout Fix
+        // RMC14 - Set loadout points and work out playtime point rewards.
+        Points = roleProto.Points != null
+            ? CalculatePointsFromPlaytime(session, collection, roleProto.Points.Value)
+            : null;
+        // End RMC14
 
         for (var i = roleProto.Groups.Count - 1; i >= 0; i--)
         {
@@ -271,10 +272,6 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
 
             var loadouts = new List<Loadout>();
             SelectedLoadouts[group] = loadouts;
-
-            // RMC14 - Set loadout points and work out playtime point rewards.
-            Points = CalculatePointsFromPlaytime(session);
-            // End RMC14
 
             if (groupProto.MinLimit > 0)
             {
@@ -303,7 +300,7 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
             }
         }
 
-        RecalculatePoints(protoManager); // RMC14 Loadout Fix
+        RecalculatePoints(protoManager, session, collection);
     }
 
     /// <summary>
@@ -350,7 +347,12 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
     /// <summary>
     /// Applies the specified loadout to this group.
     /// </summary>
-    public bool AddLoadout(ProtoId<LoadoutGroupPrototype> selectedGroup, ProtoId<LoadoutPrototype> selectedLoadout, IPrototypeManager protoManager)
+    public bool AddLoadout(
+        ProtoId<LoadoutGroupPrototype> selectedGroup,
+        ProtoId<LoadoutPrototype> selectedLoadout,
+        IPrototypeManager protoManager,
+        ICommonSession? session,
+        IDependencyCollection collection)
     {
         // RMC14
         if (!SelectedLoadouts.TryGetValue(selectedGroup, out var groupLoadouts))
@@ -390,6 +392,11 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
 
                 continue;
             }
+
+            // RMC14 - EnsureValid and this did not play well because Shork broke it.
+            // DebugTools.Assert(false);
+            // End RMC14
+
             return false;
         }
 
@@ -398,7 +405,7 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
             Prototype = selectedLoadout,
         });
 
-        RecalculatePoints(protoManager); // RMC14 Loadout Fix
+        RecalculatePoints(protoManager, session, collection);
 
         return true;
     }
@@ -406,7 +413,12 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
     /// <summary>
     /// Removed the specified loadout from this group.
     /// </summary>
-    public bool RemoveLoadout(ProtoId<LoadoutGroupPrototype> selectedGroup, ProtoId<LoadoutPrototype> selectedLoadout, IPrototypeManager protoManager)
+    public bool RemoveLoadout(
+        ProtoId<LoadoutGroupPrototype> selectedGroup,
+        ProtoId<LoadoutPrototype> selectedLoadout,
+        IPrototypeManager protoManager,
+        ICommonSession? session,
+        IDependencyCollection collection)
     {
         // Although this may bring us below minimum we'll let EnsureValid handle it.
 
@@ -420,7 +432,7 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
                 continue;
 
             groupLoadouts.RemoveAt(i);
-            RecalculatePoints(protoManager); // RMC14 Loadout Fix
+            RecalculatePoints(protoManager, session, collection);
             return true;
         }
 
@@ -465,44 +477,33 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
 
     // RMC14
     // Public helper so client code can reuse the same playtime -> points calculation
-    public static int CalculatePointsFromPlaytime(ICommonSession? session)
+    public static int CalculatePointsFromPlaytime(
+        ICommonSession? session,
+        IDependencyCollection collection,
+        int basePoints)
     {
-        // If we don't have a session or can't resolve playtimes, treat as 0 hours
-        try
-        {
-            if (session == null)
-                return CalculatePointsFromHours(0);
+        if (session == null)
+            return CalculatePointsFromHours(0, basePoints);
 
-            var playtimeManager = IoCManager.Resolve<ISharedPlaytimeManager>();
-            var playtimes = playtimeManager.GetPlayTimes(session);
+        var playtimes = collection.Resolve<ISharedPlaytimeManager>().GetPlayTimes(session);
 
-            if (playtimes == null || playtimes.Count == 0)
-                return CalculatePointsFromHours(0);
+        var overallKey = PlayTimeTrackingShared.TrackerOverall.ToString();
 
-            var overallKey = PlayTimeTrackingShared.TrackerOverall.ToString();
+        var totalTicks = playtimes
+            .Where(kvp => kvp.Key != overallKey)
+            .Sum(kvp => kvp.Value.Ticks);
 
-            var totalTicks = playtimes
-                .Where(kvp => kvp.Key != overallKey)
-                .Sum(kvp => kvp.Value.Ticks);
+        var playtimeHours = (int)new TimeSpan(totalTicks).TotalHours;
 
-            var playtimeHours = (int)new TimeSpan(totalTicks).TotalHours;
-
-            return CalculatePointsFromHours(playtimeHours);
-        }
-        catch
-        {
-            return CalculatePointsFromHours(0);
-        }
+        return CalculatePointsFromHours(playtimeHours, basePoints);
     }
 
-    private static int CalculatePointsFromHours(int playtimeHours)
+    private const int PlaytimeHoursPerPoint = 100;
+    private const int MaxLoadoutPoints = 20;
+    private static int CalculatePointsFromHours(int playtimeHours, int basePoints)
     {
-        // Every 100 hours = 1 additional point + base amount 7, capped at 20
-        int points = (int)(playtimeHours / 100) + 7;
-        if (points > 20)
-            points = 20;
-
-        return points;
+        var points = playtimeHours / PlaytimeHoursPerPoint + basePoints;
+        return Math.Min(points, MaxLoadoutPoints);
     }
     // End RMC14
 }

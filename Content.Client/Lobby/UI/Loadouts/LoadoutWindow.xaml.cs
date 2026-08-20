@@ -68,8 +68,6 @@ public sealed partial class LoadoutWindow : FancyWindow
         {
             foreach (var group in proto.Groups)
             {
-                //RMC14 edits
-                var groupId = group;
                 if (!protoManager.TryIndex(group, out var groupProto))
                     continue;
 
@@ -82,15 +80,13 @@ public sealed partial class LoadoutWindow : FancyWindow
 
                 container.OnLoadoutPressed += args =>
                 {
-                    OnLoadoutPressed?.Invoke(groupId, args);
+                    OnLoadoutPressed?.Invoke(group, args);
                 };
 
                 container.OnLoadoutUnpressed += args =>
                 {
-                    OnLoadoutUnpressed?.Invoke(groupId, args);
+                    OnLoadoutUnpressed?.Invoke(group, args);
                 };
-
-                //End RMC14 edits
             }
         }
     }
