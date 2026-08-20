@@ -80,6 +80,7 @@
   name: NPZ92 pistol
   description: The NPZ92 is a version of the NP92 that includes an integrated suppressor, issued sparingly to Kommando units.
   components:
+  - type: GunClickToFire
   - type: Tag
     tags:
     - Sidearm
