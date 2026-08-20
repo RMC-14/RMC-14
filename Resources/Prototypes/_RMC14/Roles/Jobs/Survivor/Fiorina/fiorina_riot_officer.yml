@@ -9,7 +9,7 @@
   - ColonistSec
   ranks:
     RMCRankCMBRiotControlOfficer: []
-  spawnMenuRoleName: Fiorina CMB Riot Officer (Survivor)
+  spawnMenuRoleName: CMB Riot Officer (Fiorina Survivor)
   icon: "RMCJobIconBureauRCO"
   hasIcon: true
   special:
