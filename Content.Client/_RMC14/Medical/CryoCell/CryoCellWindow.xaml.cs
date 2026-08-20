@@ -50,7 +50,10 @@ public sealed partial class CryoCellWindow : DefaultWindow
 
         UpdateHealth(state);
         UpdateTemperature(state);
-        UpdateDamageBars(state);
+        UpdateDamageBar(BruteBar, BruteBarText, state.BruteLoss);
+        UpdateDamageBar(BurnBar, BurnBarText, state.BurnLoss);
+        UpdateDamageBar(ToxinBar, ToxinBarText, state.ToxinLoss);
+        UpdateDamageBar(OxygenBar, OxygenBarText, state.OxyLoss);
     }
 
     private void UpdateCellButtons(CryoCellComponent state)
@@ -123,14 +126,6 @@ public sealed partial class CryoCellWindow : DefaultWindow
             CellTemperatureBar.ForegroundStyleBoxOverride = StyleWarning;
         else
             CellTemperatureBar.ForegroundStyleBoxOverride = StyleDanger;
-    }
-
-    private void UpdateDamageBars(CryoCellComponent state)
-    {
-        UpdateDamageBar(BruteBar, BruteBarText, state.BruteLoss);
-        UpdateDamageBar(BurnBar, BurnBarText, state.BurnLoss);
-        UpdateDamageBar(ToxinBar, ToxinBarText, state.ToxinLoss);
-        UpdateDamageBar(OxygenBar, OxygenBarText, state.OxyLoss);
     }
 
     private static void UpdateDamageBar(ProgressBar bar, Label label, float damage)
