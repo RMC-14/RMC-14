@@ -271,8 +271,8 @@
 - type: entity
   parent: RMCCommunicationsConsoleBase
   id: RMCComputerIntelDatabase
-  name: Intel Database computer
-  description: An UNMC Intel Computer used for consulting the current intel database.
+  name: intel database computer
+  description: A UNMC intel computer used for consulting the current intel database.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
