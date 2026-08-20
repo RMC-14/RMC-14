@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/20db6e3fc344d59ed9502ee7626d9fea89674713/icons/mob/xenos/effects.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/20db6e3fc344d59ed9502ee7626d9fea89674713/icons/mob/xenos/effects.dmi, fast and sticky modified by CatAndHats (github) from original sprites by Aleksh",
   "size": {
     "x": 32,
     "y": 32
@@ -166,6 +166,40 @@
           0.05,
           0.05,
           0.05
+        ]
+      ]
+    },
+    {
+      "name": "fast",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "sticky",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
         ]
       ]
     }
