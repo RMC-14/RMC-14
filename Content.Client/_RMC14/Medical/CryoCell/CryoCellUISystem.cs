@@ -6,6 +6,7 @@ namespace Content.Client._RMC14.Medical.CryoCell;
 
 public sealed class CryoCellUISystem : EntitySystem
 {
+    [Dependency] private readonly ISawmill _sawmill = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
 
     public override void Initialize()
@@ -19,7 +20,14 @@ public sealed class CryoCellUISystem : EntitySystem
 
     private void OnAfterAutoHandleState(Entity<CryoCellComponent> cryoCell, ref AfterAutoHandleStateEvent args)
     {
-        UpdateUi(cryoCell);
+        try
+        {
+            UpdateUi(cryoCell);
+        }
+        catch (Exception e)
+        {
+            _sawmill.Log(LogLevel.Error, e, "Failed to update Cryo Cell UI.");
+        }
     }
 
     private void OnContainerChanged(Entity<CryoCellComponent> cryoCell, ref EntInsertedIntoContainerMessage args)
@@ -35,20 +43,11 @@ public sealed class CryoCellUISystem : EntitySystem
     private void UpdateUi(Entity<CryoCellComponent> cryoCell)
     {
         if (!_ui.TryGetOpenUi(cryoCell.Owner, CryoCellUIKey.Key, out var bui))
-        {
             return;
-        }
 
         if (bui is not CryoCellBui cryoCellBui)
             return;
 
-        try
-        {
-            cryoCellBui.UpdateUi();
-        }
-        catch (Exception e)
-        {
-            Log.Error($"Failed to update Cryo Cell UI: {e}");
-        }
+        cryoCellBui.UpdateUI();
     }
 }

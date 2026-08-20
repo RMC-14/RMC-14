@@ -70,28 +70,26 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
     {
         cryoCell.Comp.IsPoweredOn = !cryoCell.Comp.IsPoweredOn;
 
+        Dirty(cryoCell);
         UpdateCryoCellVisuals(cryoCell);
-        UpdateUiState(cryoCell);
     }
 
     private void OnEject(Entity<CryoCellComponent> cryoCell, ref CryoCellEjectBuiMsg args)
     {
         if (cryoCell.Comp.Occupant is { } occupant)
             EjectOccupant(cryoCell, occupant);
-
-        UpdateUiState(cryoCell);
     }
 
     private void OnToggleAutoEject(Entity<CryoCellComponent> cryoCell, ref CryoCellToggleAutoEjectBuiMsg args)
     {
         cryoCell.Comp.AutoEject = !cryoCell.Comp.AutoEject;
-        UpdateUiState(cryoCell);
+        Dirty(cryoCell);
     }
 
     private void OnToggleNotify(Entity<CryoCellComponent> cryoCell, ref CryoCellToggleNotifyBuiMsg args)
     {
         cryoCell.Comp.ReleaseNotice = !cryoCell.Comp.ReleaseNotice;
-        UpdateUiState(cryoCell);
+        Dirty(cryoCell);
     }
 
     private void OnEjectBeaker(Entity<CryoCellComponent> cryoCell, ref CryoCellEjectBeakerBuiMsg args)
@@ -100,10 +98,10 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
             return;
 
         _itemSlots.TryEjectToHands(cryoCell, slot, args.Actor, true);
-        UpdateUiState(cryoCell);
+        UpdateComponentState(cryoCell);
     }
 
-    private void UpdateUiState(Entity<CryoCellComponent> cryoCell)
+    private void UpdateComponentState(Entity<CryoCellComponent> cryoCell)
     {
         var occupant = cryoCell.Comp.Occupant;
 
@@ -169,9 +167,15 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         base.Update(frameTime);
 
         var time = _timing.CurTime;
-        var cells = EntityQueryEnumerator<CryoCellComponent, CryoCellProcessingComponent>();
-        while (cells.MoveNext(out var uid, out var cryoCell, out _))
+        var cells = EntityQueryEnumerator<CryoCellComponent>();
+        while (cells.MoveNext(out var uid, out var cryoCell))
         {
+            if (cryoCell.Occupant is not { } occupant)
+                continue;
+
+            if (TerminatingOrDeleted(occupant))
+                continue;
+
             if (TryComp<ApcPowerReceiverComponent>(uid, out var power) && !power.Powered)
                 continue;
 
@@ -181,7 +185,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
             cryoCell.NextTick = time + cryoCell.TickDelay;
 
             ProcessOccupant((uid, cryoCell));
-            UpdateUiState((uid, cryoCell));
+            UpdateComponentState((uid, cryoCell));
         }
     }
 

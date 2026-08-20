@@ -1,7 +1,6 @@
 using Content.Shared._RMC14.Medical.CryoCell;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
-using Serilog;
 
 namespace Content.Client._RMC14.Medical.CryoCell;
 
@@ -19,10 +18,10 @@ public sealed class CryoCellBui(EntityUid owner, Enum uiKey) : BoundUserInterfac
         _window.Title = Loc.GetString("rmc-cryo-cell-window-title");
         _window.SetBui(this);
 
-        UpdateUi();
+        UpdateUI();
     }
 
-    public void UpdateUi()
+    public void UpdateUI()
     {
         if (_window == null)
             return;
@@ -30,14 +29,7 @@ public sealed class CryoCellBui(EntityUid owner, Enum uiKey) : BoundUserInterfac
         if (!EntMan.TryGetComponent<CryoCellComponent>(Owner, out var cryoCell))
             return;
 
-        try
-        {
-            _window.UpdateState(cryoCell);
-        }
-        catch (Exception e)
-        {
-            Log.Error($"Failed to update Cryo Cell UI: {e}");
-        }
+        _window.UpdateState(cryoCell);
     }
 
     public void TogglePower()
