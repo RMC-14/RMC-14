@@ -341,6 +341,41 @@
   - type: NoMixingReagents
 
 - type: entity
+  parent: RMCAttachmentMiniFlamethrower
+  id: RMCAttachmentMiniFlamethrowerAdvanced
+  name: advanced underbarrel flamethrower # TODO RMC14: No intensity switch on this one, remove the regular UBF as a parent once we get it
+  components:
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentMiniFlamethrowerAdvanced
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCNapalmUT
+          Quantity: 50
+  - type: RMCFlamerAmmoProvider
+  - type: RMCFlamerTank
+    maxIntensity: 30
+    maxDuration: 20
+    maxRange: 6
+    reagentWhitelist:
+    - RMCNapalmUT
+    - WeldingFuel
+
+- type: entity
+  parent: RMCAttachmentMiniFlamethrowerAdvanced
+  id: RMCAttachmentMiniFlamethrowerAdvancedIntegrated
+  name: integrated flamethrower
+  components:
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentMiniFlamethrowerAdvancedIntegrated
+
+- type: entity
   parent: RMCUnderAttachmentBase
   id: CMAttachmentXMVESG1FlamerNozzle
   name: XM-VESG-1 flamer nozzle
@@ -1075,6 +1110,12 @@
 
 - type: Tag
   id: RMCAttachmentMiniFlamethrower
+
+- type: Tag
+  id: RMCAttachmentMiniFlamethrowerAdvanced
+
+- type: Tag
+  id: RMCAttachmentMiniFlamethrowerAdvancedIntegrated
 
 - type: Tag
   id: RMCAttachmentUnderbarrelExtinguisher
