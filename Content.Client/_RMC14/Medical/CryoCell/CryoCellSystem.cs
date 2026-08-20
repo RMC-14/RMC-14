@@ -1,43 +1,54 @@
-using Robust.Client.GameObjects;
 using Content.Shared._RMC14.Medical.CryoCell;
+using Robust.Client.GameObjects;
+using Robust.Shared.Containers;
 
 namespace Content.Client._RMC14.Medical.CryoCell;
 
-public sealed class CryoCellSystem : SharedCryoCellSystem
+public sealed class CryoCellUISystem : EntitySystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private readonly UserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<CryoCellComponent, ComponentInit>(OnInit);
-        SubscribeLocalEvent<CryoCellComponent, AppearanceChangeEvent>(OnAppearanceChange);
+        SubscribeLocalEvent<CryoCellComponent, AfterAutoHandleStateEvent>(OnAfterAutoHandleState);
+        SubscribeLocalEvent<CryoCellComponent, EntInsertedIntoContainerMessage>(OnContainerChanged);
+        SubscribeLocalEvent<CryoCellComponent, EntRemovedFromContainerMessage>(OnContainerChanged);
     }
 
-    private void OnInit(EntityUid uid, CryoCellComponent comp, ComponentInit args)
+    private void OnAfterAutoHandleState(Entity<CryoCellComponent> cryoCell, ref AfterAutoHandleStateEvent args)
     {
-        UpdateCryoCellAppearance(uid, comp);
+        UpdateUi(cryoCell);
     }
 
-    private void OnAppearanceChange(EntityUid uid, CryoCellComponent comp, ref AppearanceChangeEvent args)
+    private void OnContainerChanged(Entity<CryoCellComponent> cryoCell, ref EntInsertedIntoContainerMessage args)
     {
-        UpdateCryoCellAppearance(uid, comp, args.Sprite);
+        UpdateUi(cryoCell);
     }
 
-    private void UpdateCryoCellAppearance(EntityUid uid, CryoCellComponent comp, SpriteComponent? sprite = null)
+    private void OnContainerChanged(Entity<CryoCellComponent> cryoCell, ref EntRemovedFromContainerMessage args)
     {
-        if (sprite == null && !TryComp(uid, out sprite))
+        UpdateUi(cryoCell);
+    }
+
+    private void UpdateUi(Entity<CryoCellComponent> cryoCell)
+    {
+        if (!_ui.TryGetOpenUi(cryoCell.Owner, CryoCellUIKey.Key, out var bui))
+        {
+            return;
+        }
+
+        if (bui is not CryoCellBui cryoCellBui)
             return;
 
-        if (!_sprite.LayerMapTryGet((uid, sprite), CryoCellVisualLayers.Base, out var baseLayer, false))
-            return;
-
-        var rsiState = comp.Occupant != null
-            ? (comp.IsPoweredOn ? "cell-on-occupied" : "cell-off-occupied")
-            : (comp.IsPoweredOn ? "cell-on-empty" : "cell-off-empty");
-
-        _sprite.LayerSetRsiState((uid, sprite), baseLayer, rsiState);
-        _sprite.LayerSetVisible((uid, sprite), baseLayer, true);
+        try
+        {
+            cryoCellBui.UpdateUi();
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Failed to update Cryo Cell UI: {e}");
+        }
     }
 }

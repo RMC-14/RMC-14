@@ -41,6 +41,7 @@ public abstract class SharedCryoCellSystem : EntitySystem
         cryoCell.Comp.Occupant = args.Entity;
 
         Dirty(cryoCell);
+        EnsureComp<CryoCellProcessingComponent>(args.Entity);
         UpdateCryoCellVisuals(cryoCell);
 
         if (!_timing.ApplyingState)
@@ -58,8 +59,9 @@ public abstract class SharedCryoCellSystem : EntitySystem
             Dirty(cryoCell);
         }
 
-        UpdateCryoCellVisuals(cryoCell);
+        RemCompDeferred<CryoCellProcessingComponent>(args.Entity);
         RemCompDeferred<InsideCryoCellComponent>(args.Entity);
+        UpdateCryoCellVisuals(cryoCell);
         _rmcMovement.SuppressCollisionOnExit(args.Entity, cryoCell.Owner);
     }
 

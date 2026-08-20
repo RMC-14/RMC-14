@@ -4,7 +4,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Medical.CryoCell;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), AutoGenerateComponentPause]
 [Access(typeof(SharedCryoCellSystem))]
 public sealed partial class CryoCellComponent : Component
 {
@@ -18,10 +18,10 @@ public sealed partial class CryoCellComponent : Component
     public EntityUid? Occupant;
 
     // Temperatures in Kelvin
-    [DataField, AutoNetworkedField]
+    [DataField]
     public float CryoCellTemperature = 115f;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public float BodyTempCryoLiquidThreshold = 210f;
 
     [DataField, AutoNetworkedField]
@@ -62,4 +62,37 @@ public sealed partial class CryoCellComponent : Component
 
     [DataField]
     public SoundSpecifier HealingCompleteSound = new SoundPathSpecifier("/Audio/Effects/Cargo/ping.ogg");
+
+    [AutoNetworkedField]
+    public string? OccupantName;
+
+    [AutoNetworkedField]
+    public CryoCellOccupantMobState OccupantState;
+
+    [AutoNetworkedField]
+    public float Health;
+
+    [AutoNetworkedField]
+    public float MaxHealth;
+
+    [AutoNetworkedField]
+    public float BruteLoss;
+
+    [AutoNetworkedField]
+    public float BurnLoss;
+
+    [AutoNetworkedField]
+    public float ToxinLoss;
+
+    [AutoNetworkedField]
+    public float OxyLoss;
+
+    [AutoNetworkedField]
+    public float BodyTemperature;
+
+    [AutoNetworkedField]
+    public bool IsBeakerLoaded;
+
+    [AutoNetworkedField]
+    public CryoCellBeakerReagent[] BeakerContents = [];
 }
