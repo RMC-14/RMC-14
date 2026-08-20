@@ -62,7 +62,7 @@
     back: CMSatchelSecureStandard
     belt: RMCBeltHolsterPistolSPP
     outerClothing: RMCCoatSPP
-    id: CMIDCardGold
+    id: CMIDCardGoldSPPMSIOfficer
     head: CMHeadCapSPPPeaked
     pocket1: RMCPouchFirstAid
     pocket2: RMCPouchDocumentSmall
@@ -77,13 +77,13 @@
     pocket2:
     - CMClipboard
     belt:
+    - RMCMagazinePistolT73
+    - RMCMagazinePistolT73
+    - RMCMagazinePistolT73
+    - RMCMagazinePistolT73
+    - RMCMagazinePistolT73
+    - RMCMagazinePistolT73
     - RMCWeaponPistolT74
-    - RMCMagazinePistolT73
-    - RMCMagazinePistolT73
-    - RMCMagazinePistolT73
-    - RMCMagazinePistolT73
-    - RMCMagazinePistolT73
-    - RMCMagazinePistolT73
     outerClothing:
     - RMCBinoculars
     - CMCrowbar
