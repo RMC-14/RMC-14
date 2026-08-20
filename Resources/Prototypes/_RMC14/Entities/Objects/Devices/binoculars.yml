@@ -213,7 +213,7 @@
   - type: PointLight
     enabled: true
     radius: 3
-  - type: RMCNightVisionVisibleInView
+  - type: RMCNightVisionVisible
 
 - type: entity
   parent: RMCRangefinderTarget
