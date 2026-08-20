@@ -37,6 +37,7 @@ highlights-corporate-liaison = Corporate Liaison, "CL", Liaison, Weston-Yamada, 
 highlights-correspondent = Correspondent, "CC", News
 highlights-mess-technician = Mess Technician, "MST", Mess Tech, "Mess", Kitchen, Food, Hungry
 highlights-executive-bodyguard = Executive Bodyguard, "EB", Bodyguard, "CL", "PPO", "Alert", Liaison, Corporate Liaison
+highlights-unmc-synthetic = Synthetic, Synth, "ARES"
 
 # Marines
 highlights-squad-leader = Squad Leader, "SL", Command, Queen, "OB", Coords, Coordinates, Supply, Tacmap, Comms, Map, "FT", Fireteam, Squad
