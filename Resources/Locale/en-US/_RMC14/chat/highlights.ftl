@@ -36,6 +36,7 @@ highlights-provost-inspector = Provost Inspector, Inspector, @"PvI", "CMP", "MP"
 highlights-corporate-liaison = Corporate Liaison, "CL", Liaison, Weston-Yamada, Weston Yamada, "WeYa", We-Ya
 highlights-correspondent = Correspondent, "CC", News
 highlights-mess-technician = Mess Technician, "MST", Mess Tech, "Mess", Kitchen, Food, Hungry
+highlights-executive-bodyguard = Executive Bodyguard, "EB", Bodyguard, "CL", "PPO", "Alert", Liaison, Corporate Liaison
 
 # Marines
 highlights-squad-leader = Squad Leader, "SL", Command, Queen, "OB", Coords, Coordinates, Supply, Tacmap, Comms, Map, "FT", Fireteam, Squad
