@@ -22,6 +22,7 @@ using Content.Shared.Database;
 using Content.Shared.Fax.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.Nutrition.Components;
+using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using JetBrains.FormatRipper.Elf;
@@ -31,6 +32,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Toolshed.TypeParsers;
+using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Rules.DistressSignal;
 
@@ -98,6 +100,21 @@ public sealed partial class CMDistressSignalRuleSystem
 
         if (ev.IsFirstCollection)
         {
+            // TODO RMC14 this isn't the right place for this initialization work
+            OperationName ??= GetRandomOperationName();
+
+            if (!InitializeXenoMap(rule, ruleComp))
+                return;
+
+            SetupSurvivorJobs(ruleComp);
+
+            if (!_spawnedDropships)
+            {
+                _spawnedDropships = true;
+                InitializeDropships(ruleComp);
+            }
+
+
             // survivor assignments
             SetupSurvivorJobs(ruleComp);
             foreach (var (job, count) in ruleComp.SurvivorJobs)
@@ -121,20 +138,52 @@ public sealed partial class CMDistressSignalRuleSystem
                 queenAssignment
             };
         }
-
-        // calculate total role weight
-        var totalRoleWeight = 0f;
+        // calculate total role weights
+        var marineCount = 0f;
+        var playerCount = 0f;
         foreach (var player in ev.ProcessedPlayers)
         {
-            if (player.AssignedJob is { } job)
-                totalRoleWeight += job.JobPrototype.RoleWeight;
+            if (player.AssignedJob is not { } assignment)
+                continue;
+
+            playerCount += assignment.JobPrototype.RoleWeight;
+            foreach (var accessGroup in assignment.JobPrototype.AccessGroups.Select(item => _prototypes.Index(item)))
+            {
+                if (accessGroup.Faction == ruleComp.MarineFaction)
+                {
+                    marineCount += assignment.JobPrototype.RoleWeight;
+                }
+            }
         }
+        ApplyJobSlotScaling(ruleComp, marineCount, playerCount);
 
         // surv limit
-        survAssignment.AssignmentLimit = (int)Math.Clamp((int)Math.Floor(totalRoleWeight / _marinesPerSurvivor), _minimumSurvivors, _maximumSurvivors);
+        survAssignment.AssignmentLimit = (int)Math.Clamp((int)Math.Floor(marineCount / _marinesPerSurvivor), _minimumSurvivors, _maximumSurvivors);
 
         // xeno limit
-        ev.JobAssignments[ruleComp.XenoSelectableJob][0].AssignmentLimit = (int)Math.Floor(Math.Max(1, totalRoleWeight / _marinesPerXeno));
+        ev.JobAssignments[ruleComp.XenoSelectableJob][0].AssignmentLimit = (int)Math.Floor(Math.Max(1, marineCount / _marinesPerXeno));
+
+        // TODO RMC14 may want to move this part somewhere else, since this is mostly just
+        // converting station jobs into assignments
+        // marine limits
+        var stations = EntityQueryEnumerator<StationJobsComponent, StationSpawningComponent>();
+        while (stations.MoveNext(out var stationId, out var stationJobs, out _))
+        {
+            foreach (var (jobId, available) in stationJobs.SetupAvailableJobs)
+            {
+                var assignments = ev.JobAssignments.GetOrNew(jobId, out var exists);
+
+                // TODO RMC14 separate job assignments by squad
+                if (!exists)
+                    assignments.Add(new JobAssignment(_prototypes.Index(jobId), stationId));
+
+                foreach (var assignment in assignments)
+                {
+                    var limit = available[0];
+                    assignment.AssignmentLimit = limit != -1 ? limit : null;
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -242,12 +291,12 @@ public sealed partial class CMDistressSignalRuleSystem
 
     private void ApplyJobSlotScaling(CMDistressSignalRuleComponent comp, RulePlayerSpawningEvent ev)
     {
-        var totalPlayers = ev.PlayerPool.Count;
+        ApplyJobSlotScaling(comp, ev.PlayerPool.Count, ev.PlayerPool.Count);
+    }
+
+    private void ApplyJobSlotScaling(CMDistressSignalRuleComponent comp, float marines, float players)
+    {
         var vehicleThreshold = _config.GetCVar(RMCCVars.RMCVehicleRoundstartThresholdPlayers);
-        var totalXenos = (int) Math.Round(Math.Max(1, totalPlayers / _marinesPerXeno));
-        // TODO RMC14 dont count survivors
-        var totalSurvivors = (int) Math.Clamp((int) Math.Round(totalPlayers / _marinesPerSurvivor), _minimumSurvivors, _maximumSurvivors);
-        var marines = totalPlayers - totalXenos - totalSurvivors;
         var roundstartTank = _player.Sessions.Count() >= vehicleThreshold;
         var crewmanSlots = roundstartTank ? 2 : 0;
 
@@ -269,7 +318,7 @@ public sealed partial class CMDistressSignalRuleSystem
                         ? vehicleThreshold
                         : scaling.MinimumPlayers;
 
-                    var slots = minimumPlayers > 0 && totalPlayers < minimumPlayers
+                    var slots = minimumPlayers > 0 && players < minimumPlayers
                         ? 0
                         : _rmcStationJobs.GetSlots(marines, scaling.Factor, scaling.C, scaling.Min, scaling.Max);
 

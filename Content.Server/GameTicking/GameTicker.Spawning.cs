@@ -178,6 +178,14 @@ namespace Content.Server.GameTicking
 
                 AssignAll();
             }
+            ;
+            Log.Debug($"""
+                Collected job assignments:
+                  {string.Join("\n  ", jobAssignments.Select(x => $"{x.Key}: {x.Value[0].AssignmentLimit}"))}
+
+                Player assigmnets:
+                  {string.Join("\n  ", processingPlayers.Select(x => $"{x.Session}: {x.AssignedJob?.JobID}"))}
+                """);
 
             return processingPlayers;
 
@@ -192,8 +200,11 @@ namespace Content.Server.GameTicking
                 // Now assign un-taken priority jobs (such as heads of departments)
                 foreach (var weightedJob in weightedJobs)
                 {
+                    if (!jobAssignments.ContainsKey(weightedJob))
+                        continue;
+
                     var reprocessStartIndex = processingPlayers.Count;
-                    foreach (var unassigned in jobAssignments[weightedJob].Where(item => item.AssignedPlayers.Count() < item.AssignmentLimit))
+                    foreach (var unassigned in jobAssignments[weightedJob].Where(item => item.IsAssignable))
                     {
                         if (AssignWeightedJobs(unassigned) is { } assignedIndex
                             && assignedIndex < reprocessStartIndex)
@@ -298,7 +309,10 @@ namespace Content.Server.GameTicking
             RaiseLocalEvent(ev);
 
             if (ev.Handled)
+            {
+                PlayerJoinGame(player.Session);
                 return;
+            }
 
             SpawnPlayer(player.Session, player.Profile, player.AssignedJob.StationId ?? EntityUid.Invalid, player.AssignedJob.JobID, false);
         }
