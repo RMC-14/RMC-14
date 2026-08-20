@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: IceNoobXD
-  changes:
-  - message: Added CBRN squad and ghost roles!
-    type: Add
-  id: 3089
-  time: '2026-04-11T01:37:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9565
 - author: CatAndHats
   changes:
   - message: Added a HEFA faction icon
@@ -4540,5 +4533,12 @@
   id: 3588
   time: '2026-08-19T16:41:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10741
+- author: carccborg
+  changes:
+  - message: BGens now spawn with one (1) CCDP grenade in their satchel
+    type: Fix
+  id: 3589
+  time: '2026-08-20T22:27:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10730
 Name: RMC14
 Order: -1
