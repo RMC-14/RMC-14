@@ -8,6 +8,20 @@
   - ColonistCorporate
   spawnMenuRoleName: Halcyon Dynamics Liaison (Sorokyne Survivor)
   icon: "RMCJobIconHalcyonExec"
+  ranks:
+    RMCRankHalcyonExecutiveSpecialist:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorCorporate
+      time: 630000 # 175 hours
+    RMCRankHalcyonSeniorExecutive:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorCorporate
+      time: 252000 # 70 hours
+    RMCRankHalcyonExecutive:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorCorporate
+      time: 90000 # 25 hours
+    RMCRankHalcyonJuniorExecutive: []
   special:
   - !type:AddComponentSpecial
     components:
