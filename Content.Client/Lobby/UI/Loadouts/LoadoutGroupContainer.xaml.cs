@@ -65,40 +65,26 @@ public sealed partial class LoadoutGroupContainer : BoxContainer
             });
         }
         //RMC14
-        if (protoMan.TryIndex(loadout.Role, out var roleProto) && loadout.Points != null)
+        if (protoMan.TryIndex(loadout.Role, out var roleProto) &&
+            roleProto.Points != null &&
+            loadout.Points != null)
         {
-            // Recalculate maximum points based on playtime so the UI updates live.
-            int calculatedMaxPoints;
-
-            try
-            {
-                // Defer to shared RoleLoadout logic for calculating points from playtime.
-                // If there are no playtimes available fall back to the role/default value like before.
-                var playtimeManager = IoCManager.Resolve<ISharedPlaytimeManager>();
-                var playtimes = playtimeManager.GetPlayTimes(session);
-
-                if (playtimes == null || playtimes.Count == 0)
-                {
-                    calculatedMaxPoints = roleProto.Points ?? loadout.Points.Value;
-                }
-                else
-                {
-                    calculatedMaxPoints = RoleLoadout.CalculatePointsFromPlaytime(session);
-                }
-            }
-            catch
-            {
-                // If we can't access playtime manager, fallback gracefully
-                calculatedMaxPoints = roleProto.Points ?? loadout.Points.Value;
-            }
+            var calculatedMaxPoints =
+                RoleLoadout.CalculatePointsFromPlaytime(
+                    session,
+                    collection,
+                    roleProto.Points.Value);
 
             RestrictionsContainer.AddChild(new Label()
             {
-                Text = Loc.GetString("loadouts-points-limit", ("count", loadout.Points.Value), ("max", calculatedMaxPoints)),
+                Text = Loc.GetString(
+                    "loadouts-points-limit",
+                    ("count", loadout.Points.Value),
+                    ("max", calculatedMaxPoints)),
                 Margin = new Thickness(5, 0, 5, 5),
             });
-            // End RMC14
         }
+        // End RMC14
 
         LoadoutsContainer.DisposeAllChildren();
 

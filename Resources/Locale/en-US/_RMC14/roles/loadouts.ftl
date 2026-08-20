@@ -1,4 +1,4 @@
-﻿rmc-loadout-group-backpack = Backpack
+rmc-loadout-group-backpack = Backpack
 rmc-loadout-group-eyewear = Eyewear
 rmc-loadout-group-masks = Masks and scarves
 rmc-loadout-group-headwear = Headwear
@@ -32,3 +32,5 @@ rmc-loadout-group-synthetic-headwear = Synthetic Headwear
 rmc-loadout-group-synthetic-suits = Synthetic Outerwear
 
 loadout-group-points-insufficient = You have insufficient points!
+
+rmc-loadout-item-cost = {$cost}P | {$name}
