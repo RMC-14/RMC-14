@@ -107,7 +107,7 @@
     - Burst
     scatterWielded: 5
     scatterUnwielded: 5
-    baseFireRate: 3.5
+    baseFireRate: 10
     burstScatterMult: 5
     modifiers:
       Burst:
