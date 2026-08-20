@@ -20,11 +20,6 @@
       preset: RMCLanguagePresetSynthColonist
     - type: LanguageLearning
       preset: RMCLanguageLearningPresetSynthColonist
-    - type: DemoSpecWhitelist
-    - type: GrenadeSpecWhitelist
-    - type: ScoutWhitelist
-    - type: SniperWhitelist
-    - type: PyroWhitelist
     - type: MeleeWeapon
       soundHit:
         path: /Audio/_RMC14/Weapons/synthpunch1.ogg

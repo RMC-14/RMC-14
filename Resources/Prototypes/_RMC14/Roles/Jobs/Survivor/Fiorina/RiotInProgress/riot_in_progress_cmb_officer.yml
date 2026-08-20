@@ -5,6 +5,8 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorSecurity
   startingGear: RMCGearSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
+  ranks:
+    RMCRankCMBRiotControlOfficer: []
   accessGroups:
   - ColonistSec
   spawnMenuRoleName: CMB Riot Control Officer (Fiorina Special Survivor)
