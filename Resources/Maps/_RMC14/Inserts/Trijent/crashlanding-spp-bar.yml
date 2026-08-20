@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/27/2026 21:30:17
-  entityCount: 671
+  time: 08/20/2026 03:13:52
+  entityCount: 672
 maps: []
 grids:
 - 1
@@ -1062,6 +1062,13 @@ entities:
     components:
     - type: Transform
       pos: 7.5,-6.5
+      parent: 1
+- proto: CMSpawnPointSPPCrashlandMSIOfficer
+  entities:
+  - uid: 672
+    components:
+    - type: Transform
+      pos: 8.5,-6.5
       parent: 1
 - proto: CMSpawnPointSPPCrashlandRifleman
   entities:

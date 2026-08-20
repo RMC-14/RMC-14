@@ -1,0 +1,109 @@
+- type: job
+  parent: RMCSurvivorSPPCrashlandBase
+  id: RMCSurvivorSPPCrashlandMSIOfficer
+  name: rmc-job-name-crashland-msi-officer
+  startingGear: RMCGearSPPCrashlandMSIOfficer
+  ranks:
+    RMCRankSPPMayjor: []
+  icon: "RMCJobIconSurvivorSPPCrashlandMSIOfficer"
+  playTimeTracker: RMCJobSurvivorCO
+  greeting: rmc-job-greeting-crashland-msi-officer
+  spawnMenuRoleName: SPP Ministry of Strategic Intelligence Officer (Trijent Special Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: CommandAccent
+    - type: InnateCommandSpeech
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      preset: RMCSkillPresetSurvivorSPPMSIOfficer
+    - type: Language
+      spokenLanguages:
+      - English
+      - French
+      - Japanese
+      - Scandinavian
+      - Russian
+      - German
+      - Chinese
+      - Spanish
+      understoodLanguages:
+      - English
+      - French
+      - Japanese
+      - Russian
+      - Scandinavian
+      - German
+      - Chinese
+      - Spanish
+      currentLanguage: Russian
+      defaultLanguage: Russian
+    - type: MarineOrders
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      squad: SquadSPP
+    - type: JobPrefix
+      prefix: rmc-job-prefix-crashland-msi-officer
+    - type: RMCTrackable
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetSPPCrashlandWeaponOnly
+    - type: RMCSurvivor
+    - type: RMCAllowSuitStorage
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearSPPCrashlandBase
+  id: RMCGearSPPCrashlandMSIOfficer
+  equipment:
+    jumpsuit: CMJumpsuitSPPOfficer
+    ears: RMCHeadsetSPPCrashlandMSIOfficer
+    back: CMSatchelSecureStandard
+    belt: RMCBeltHolsterPistolSPP
+    outerClothing: RMCCoatSPP
+    id: CMIDCardGold
+    head: CMHeadCapSPPPeaked
+    pocket1: RMCPouchFirstAid
+    pocket2: RMCPouchDocumentSmall
+  storage:
+    back: # They're supposed to get a cyanide pill, but I don't trust survivors to not accidentally swallow it
+    - RMCRadioHandheldColony
+    pocket1:
+    - CMBicaridineAutoInjector
+    - CMKelotaneAutoInjector
+    - CMEmergencyAutoInjector
+    - CMGauze10
+    pocket2:
+    - CMClipboard
+    belt:
+    - RMCWeaponPistolT74
+    - RMCMagazinePistolT73
+    - RMCMagazinePistolT73
+    - RMCMagazinePistolT73
+    - RMCMagazinePistolT73
+    - RMCMagazinePistolT73
+    - RMCMagazinePistolT73
+    outerClothing:
+    - RMCBinoculars
+    - CMCrowbar
+    - RMCHandcuffs
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSPPCrashlandMSIOfficer
+  name: special survivor spp crashland ministry of strategic intelligence officer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSPPCrashlandMSIOfficer
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv_spp
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSurvivorSPPCrashlandMSIOfficer
+  icon:
+    sprite: _RMC14/Interface/job_icons/SPP/standard.rsi
+    state: spp_commi
