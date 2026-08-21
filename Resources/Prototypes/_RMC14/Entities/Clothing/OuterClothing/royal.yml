@@ -191,6 +191,11 @@
     - type: Storage
       grid:
         - 0,0,7,1 # 4 slots
+    - type: ClothingRequireEquipped
+      whitelist: null
+    - type: Tag
+      tags:
+        - RMCSynthAllowedArmor
 
 - type: entity
   parent: RMCArmorParaSynthVest
