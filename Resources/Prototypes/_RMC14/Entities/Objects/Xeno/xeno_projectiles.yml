@@ -177,6 +177,8 @@
     deleteOnFriendlyXeno: false
   - type: ProjectileMaxRange
     max: 5
+  - type: ProjectileCoverInteraction
+    stoppedByCover: true
 
 - type: entity
   id: XenoBoneChipsProjectile
