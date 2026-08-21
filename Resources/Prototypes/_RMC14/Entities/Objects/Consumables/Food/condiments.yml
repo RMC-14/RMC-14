@@ -86,6 +86,9 @@
   name: sugar
   description: Tasty space sugar!
   components:
+  - type: Sprite
+    sprite: Objects/Consumable/Food/ingredients.rsi
+    state: sugar-big
   - type: SolutionContainerManager
     solutions:
       food:
