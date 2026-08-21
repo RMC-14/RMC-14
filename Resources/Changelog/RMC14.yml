@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: PursuitinAshes
-  changes:
-  - message: Added a guidebook entry under "Humanoid Roles" explaining what each New
-      Player Icon represents.
-    type: Add
-  id: 3091
-  time: '2026-04-11T01:41:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9528
 - author: TadJohnson00
   changes:
   - message: '[PVE] Added lots of missing equipment for the RCM, including faction-specific
@@ -4541,5 +4533,12 @@
   id: 3590
   time: '2026-08-21T21:30:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10306
+- author: MrFish-100
+  changes:
+  - message: Fixed morgue's unintended beeping
+    type: Fix
+  id: 3591
+  time: '2026-08-21T23:32:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10738
 Name: RMC14
 Order: -1
