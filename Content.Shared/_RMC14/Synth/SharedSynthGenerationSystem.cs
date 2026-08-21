@@ -80,6 +80,9 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
 
     private void OnGenerationSelectAction(Entity<SynthGenerationComponent> ent, ref GenerationSelectActionEvent args)
     {
+        if (ent.Comp.Generation != null)
+            return;
+
         GenerationPopup(ent);
     }
 
@@ -164,7 +167,7 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
             return;
         }
 
-        var actionEntity = ent.Comp.SelectGenerationActionEntity;
+        var actionEntity = ent.Comp.SelectGenerationActionEntity ?? FindGenerationActionEntity(ent);
 
         EntityManager.AddComponents(ent, proto);
 
@@ -172,5 +175,16 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
             ApplyGenerationModifier((ent.Owner, gen));
 
         _actions.RemoveAction(ent.Owner, actionEntity);
+    }
+
+    private EntityUid? FindGenerationActionEntity(Entity<SynthGenerationComponent> ent)
+    {
+        foreach (var action in _actions.GetActions(ent.Owner))
+        {
+            if (Prototype(action.Owner) is { } proto && proto.ID == ent.Comp.GenerationAction)
+                return action.Owner;
+        }
+
+        return null;
     }
 }

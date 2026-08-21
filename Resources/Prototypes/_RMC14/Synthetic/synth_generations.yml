@@ -134,7 +134,7 @@
   components:
   - type: SynthGeneration
     generation: RMCSynthWhiteout
-    priority: 3
+    priority: 4
     description: Generation Grill.
   - type: Skills
     skills:
