@@ -15,6 +15,7 @@ public sealed class CryoCellBuiState(
     float oxyLoss,
     float bodyTemperature,
     float cellTemperature,
+    float bodyTempCryoLiquidThreshold,
     bool isPoweredOn,
     bool autoEject,
     bool releaseNotice,
@@ -33,6 +34,7 @@ public sealed class CryoCellBuiState(
     public readonly float OxyLoss = oxyLoss;
     public readonly float BodyTemperature = bodyTemperature;
     public readonly float CellTemperature = cellTemperature;
+    public readonly float BodyTempCryoLiquidThreshold = bodyTempCryoLiquidThreshold;
     public readonly bool IsPoweredOn = isPoweredOn;
     public readonly bool AutoEject = autoEject;
     public readonly bool ReleaseNotice = releaseNotice;

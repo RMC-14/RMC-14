@@ -21,7 +21,7 @@ public sealed partial class CryoCellComponent : Component
     [DataField, AutoNetworkedField]
     public float CryoCellTemperature = 115f;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float BodyTempCryoLiquidThreshold = 210f;
 
     [DataField, AutoNetworkedField]

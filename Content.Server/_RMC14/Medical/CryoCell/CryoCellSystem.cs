@@ -192,6 +192,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
             oxyLoss,
             bodyTemp,
             cryoCell.Comp.CryoCellTemperature,
+            cryoCell.Comp.BodyTempCryoLiquidThreshold,
             cryoCell.Comp.IsPoweredOn,
             cryoCell.Comp.AutoEject,
             cryoCell.Comp.ReleaseNotice,

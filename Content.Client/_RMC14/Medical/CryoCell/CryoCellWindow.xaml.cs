@@ -109,21 +109,23 @@ public sealed partial class CryoCellWindow : DefaultWindow
     {
         BodyTemperatureBar.Value = state.BodyTemperature;
         BodyTemperatureText.Text = $"{state.BodyTemperature:F0} K";
-        BodyTemperatureBar.ForegroundStyleBoxOverride = state.BodyTemperature switch
-        {
-            <= 210f => StyleGood,
-            < Atmospherics.T0C => StyleWarning,
-            _ => StyleDanger
-        };
+
+        if (state.BodyTemperature <= state.BodyTempCryoLiquidThreshold)
+            BodyTemperatureBar.ForegroundStyleBoxOverride = StyleGood;
+        else if (state.BodyTemperature < Atmospherics.T0C)
+            BodyTemperatureBar.ForegroundStyleBoxOverride = StyleWarning;
+        else
+            BodyTemperatureBar.ForegroundStyleBoxOverride = StyleDanger;
 
         CellTemperatureBar.Value = state.CellTemperature;
         CellTemperatureText.Text = $"{state.CellTemperature:F0} K";
-        CellTemperatureBar.ForegroundStyleBoxOverride = state.CellTemperature switch
-        {
-            <= 210f => StyleGood,
-            < Atmospherics.T0C => StyleWarning,
-            _ => StyleDanger
-        };
+
+        if (state.CellTemperature <= state.BodyTempCryoLiquidThreshold)
+            CellTemperatureBar.ForegroundStyleBoxOverride = StyleGood;
+        else if (state.CellTemperature < Atmospherics.T0C)
+            CellTemperatureBar.ForegroundStyleBoxOverride = StyleWarning;
+        else
+            CellTemperatureBar.ForegroundStyleBoxOverride = StyleDanger;
     }
 
     private static void UpdateDamageBar(ProgressBar bar, Label label, float damage)
