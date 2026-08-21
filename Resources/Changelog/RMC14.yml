@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: Added a HEFA faction icon
-    type: Add
-  id: 3090
-  time: '2026-04-11T01:40:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9166
 - author: PursuitinAshes
   changes:
   - message: Added a guidebook entry under "Humanoid Roles" explaining what each New
@@ -4540,5 +4533,13 @@
   id: 3589
   time: '2026-08-20T22:27:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10730
+- author: SabreML
+  changes:
+  - message: Added sound effects for using corrosive acid, clearing an empty egg,
+      and thickening resin structures.
+    type: Add
+  id: 3590
+  time: '2026-08-21T21:30:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10306
 Name: RMC14
 Order: -1
