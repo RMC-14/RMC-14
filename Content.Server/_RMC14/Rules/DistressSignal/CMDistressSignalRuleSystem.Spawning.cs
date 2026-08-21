@@ -106,8 +106,6 @@ public sealed partial class CMDistressSignalRuleSystem
             if (!InitializeXenoMap(rule, ruleComp))
                 return;
 
-            SetupSurvivorJobs(ruleComp);
-
             if (!_spawnedDropships)
             {
                 _spawnedDropships = true;
