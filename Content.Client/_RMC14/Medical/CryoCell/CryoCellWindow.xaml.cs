@@ -34,7 +34,7 @@ public sealed partial class CryoCellWindow : DefaultWindow
         _bui = bui;
     }
 
-    public void UpdateState(CryoCellComponent state)
+    public void UpdateState(CryoCellBuiState state)
     {
         var hasOccupant = state.Occupant != null;
         EmptyPanel.Visible = !hasOccupant;
@@ -56,7 +56,7 @@ public sealed partial class CryoCellWindow : DefaultWindow
         UpdateDamageBar(OxygenBar, OxygenBarText, state.OxyLoss);
     }
 
-    private void UpdateCellButtons(CryoCellComponent state)
+    private void UpdateCellButtons(CryoCellBuiState state)
     {
         PowerButton.Pressed = state.IsPoweredOn;
         PowerButton.Text = state.IsPoweredOn
@@ -76,7 +76,7 @@ public sealed partial class CryoCellWindow : DefaultWindow
             : Loc.GetString("rmc-cryo-cell-silent");
     }
 
-    private void UpdateHealth(CryoCellComponent state)
+    private void UpdateHealth(CryoCellBuiState state)
     {
         HealthBar.Value = state.Health;
         HealthBar.MaxValue = state.MaxHealth;
@@ -105,27 +105,25 @@ public sealed partial class CryoCellWindow : DefaultWindow
         };
     }
 
-    private void UpdateTemperature(CryoCellComponent state)
+    private void UpdateTemperature(CryoCellBuiState state)
     {
         BodyTemperatureBar.Value = state.BodyTemperature;
         BodyTemperatureText.Text = $"{state.BodyTemperature:F0} K";
+        BodyTemperatureBar.ForegroundStyleBoxOverride = state.BodyTemperature switch
+        {
+            <= 210f => StyleGood,
+            < Atmospherics.T0C => StyleWarning,
+            _ => StyleDanger
+        };
 
-        if (state.BodyTemperature <= state.BodyTempCryoLiquidThreshold)
-            BodyTemperatureBar.ForegroundStyleBoxOverride = StyleGood;
-        else if (state.BodyTemperature < Atmospherics.T0C)
-            BodyTemperatureBar.ForegroundStyleBoxOverride = StyleWarning;
-        else
-            BodyTemperatureBar.ForegroundStyleBoxOverride = StyleDanger;
-
-        CellTemperatureBar.Value = state.CryoCellTemperature;
-        CellTemperatureText.Text = $"{state.CryoCellTemperature:F0} K";
-
-        if (state.CryoCellTemperature <= state.BodyTempCryoLiquidThreshold)
-            CellTemperatureBar.ForegroundStyleBoxOverride = StyleGood;
-        else if (state.CryoCellTemperature < Atmospherics.T0C)
-            CellTemperatureBar.ForegroundStyleBoxOverride = StyleWarning;
-        else
-            CellTemperatureBar.ForegroundStyleBoxOverride = StyleDanger;
+        CellTemperatureBar.Value = state.CellTemperature;
+        CellTemperatureText.Text = $"{state.CellTemperature:F0} K";
+        CellTemperatureBar.ForegroundStyleBoxOverride = state.CellTemperature switch
+        {
+            <= 210f => StyleGood,
+            < Atmospherics.T0C => StyleWarning,
+            _ => StyleDanger
+        };
     }
 
     private static void UpdateDamageBar(ProgressBar bar, Label label, float damage)
@@ -140,7 +138,7 @@ public sealed partial class CryoCellWindow : DefaultWindow
         };
     }
 
-    private void UpdateBeaker(CryoCellComponent state)
+    private void UpdateBeaker(CryoCellBuiState state)
     {
         EjectBeakerButton.Disabled = !state.IsBeakerLoaded;
 

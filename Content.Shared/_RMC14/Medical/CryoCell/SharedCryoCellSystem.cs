@@ -88,7 +88,7 @@ public abstract class SharedCryoCellSystem : EntitySystem
         _container.Remove(occupant, container);
         cryoCell.Comp.IsPoweredOn = false;
 
-        if (cryoCell.Comp.ExitStun > TimeSpan.Zero && !HasComp<NoStunOnExitComponent>(cryoCell))
+        if (cryoCell.Comp.ExitStun > TimeSpan.Zero && HasComp<NoStunOnExitComponent>(cryoCell))
             _stun.TryStun(occupant, cryoCell.Comp.ExitStun, true);
 
         Dirty(cryoCell);
@@ -101,9 +101,7 @@ public abstract class SharedCryoCellSystem : EntitySystem
         var hasOccupant = cryoCell.Comp.Occupant != null;
 
         if (_light.TryGetLight(cryoCell.Owner, out var light))
-        {
             _light.SetEnabled(cryoCell.Owner, isOn, light);
-        }
 
         var newState = (isOn, hasOccupant) switch
         {

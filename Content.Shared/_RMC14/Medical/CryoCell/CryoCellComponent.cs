@@ -4,7 +4,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Medical.CryoCell;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), AutoGenerateComponentPause]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 [Access(typeof(SharedCryoCellSystem))]
 public sealed partial class CryoCellComponent : Component
 {
@@ -18,7 +18,7 @@ public sealed partial class CryoCellComponent : Component
     public EntityUid? Occupant;
 
     // Temperatures in Kelvin
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float CryoCellTemperature = 115f;
 
     [DataField]
@@ -33,11 +33,11 @@ public sealed partial class CryoCellComponent : Component
     [DataField, AutoNetworkedField]
     public bool ReleaseNotice;
 
-    [DataField]
-    public TimeSpan TickDelay = TimeSpan.FromSeconds(3);
-
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
-    public TimeSpan NextTick;
+    public TimeSpan NextUpdate;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan UpdateInterval = TimeSpan.FromSeconds(3);
 
     [DataField]
     public float BeakerTransferAmount = 5f;
@@ -62,37 +62,4 @@ public sealed partial class CryoCellComponent : Component
 
     [DataField]
     public SoundSpecifier HealingCompleteSound = new SoundPathSpecifier("/Audio/Effects/Cargo/ping.ogg");
-
-    [AutoNetworkedField]
-    public string? OccupantName;
-
-    [AutoNetworkedField]
-    public CryoCellOccupantMobState OccupantState;
-
-    [AutoNetworkedField]
-    public float Health;
-
-    [AutoNetworkedField]
-    public float MaxHealth;
-
-    [AutoNetworkedField]
-    public float BruteLoss;
-
-    [AutoNetworkedField]
-    public float BurnLoss;
-
-    [AutoNetworkedField]
-    public float ToxinLoss;
-
-    [AutoNetworkedField]
-    public float OxyLoss;
-
-    [AutoNetworkedField]
-    public float BodyTemperature;
-
-    [AutoNetworkedField]
-    public bool IsBeakerLoaded;
-
-    [AutoNetworkedField]
-    public CryoCellBeakerReagent[] BeakerContents = [];
 }

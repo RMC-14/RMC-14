@@ -18,18 +18,16 @@ public sealed class CryoCellBui(EntityUid owner, Enum uiKey) : BoundUserInterfac
         _window.Title = Loc.GetString("rmc-cryo-cell-window-title");
         _window.SetBui(this);
 
-        UpdateUI();
+        if (State is CryoCellBuiState state)
+            _window.UpdateState(state);
     }
 
-    public void UpdateUI()
+    protected override void UpdateState(BoundUserInterfaceState state)
     {
-        if (_window == null)
-            return;
+        base.UpdateState(state);
 
-        if (!EntMan.TryGetComponent<CryoCellComponent>(Owner, out var cryoCell))
-            return;
-
-        _window.UpdateState(cryoCell);
+        if (state is CryoCellBuiState cryoState)
+            _window?.UpdateState(cryoState);
     }
 
     public void TogglePower()
