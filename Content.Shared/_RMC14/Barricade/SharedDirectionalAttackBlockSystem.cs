@@ -140,7 +140,6 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
     {
         var passed = EnsureComp<ProjectileCoverPassedComponent>(projectile);
         passed.Barricades.Add(barricadeNet);
-        Dirty(projectile, passed);
     }
 
     /// <summary>
