@@ -127,9 +127,14 @@
     bullet: 35 # CLOTHING_ARMOR_HIGHPLUS (bullets)
     bio: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 30 # CLOTHING_ARMOR_HIGH
+  - type: RMCGrantLeapProtection
   - type: Storage
     grid:
     - 0,0,5,1 # 3 slots
+  - type: IgnoreContentsSize # TODO RMC14: Also ignores minigun mags size
+    items:
+      tags:
+      - RMCMagazineLMGQYJ72
 
 - type: entity
   parent: RMCArmorSPPHeavy
