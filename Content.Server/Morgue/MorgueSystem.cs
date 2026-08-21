@@ -3,7 +3,7 @@ using Content.Shared.Body.Components;
 using Content.Shared.Examine;
 using Content.Shared.Morgue;
 using Content.Shared.Morgue.Components;
-using Content.Shared.Traits.Assorted;
+using Content.Shared.Traits.Assorted; //RMC14
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 
