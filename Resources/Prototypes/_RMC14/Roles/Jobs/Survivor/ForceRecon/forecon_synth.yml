@@ -37,18 +37,6 @@
         - RMCSquadFORECON
     - type: JobPrefix
       prefix: rmc-job-prefix-synth
-    - type: MeleeWeapon
-      soundHit:
-        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
-        params:
-          variation: 0.15
-          volume: -1
-      angle: 30
-      animation: WeaponArcFist
-      attackRate: 1
-      damage:
-        types:
-          Blunt: 35
     - type: Synth
   hidden: true
 
@@ -63,8 +51,8 @@
     pocket1: RMCPouchToolsFill
     pocket2: RMCPouchSurvivalSynthFill
   inhand:
-    - RMCMotionDetector
-    - CMFirstAidKitFilled
+  - RMCMotionDetector
+  - CMFirstAidKitFilled
 
 - type: entity
   parent: CMSpawnPointJobBase
