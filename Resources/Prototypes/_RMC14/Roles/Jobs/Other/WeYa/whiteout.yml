@@ -48,31 +48,6 @@
       comprehensionThreshold: 0.8
       learningRange: 8.0
       baseWordLearningRate: 0.05
-    - type: Skills
-      skills:
-        RMCSkillCqc: 5
-        RMCSkillLeadership: 3
-        RMCSkillEndurance: 5
-        RMCSkillEngineer: 4
-        RMCSkillConstruction: 3
-        RMCSkillFirearms: 3
-        RMCSkillOverwatch: 1
-        RMCSkillMedical: 4
-        RMCSkillSurgery: 3
-        RMCSkillResearch: 1
-        RMCSkillMeleeWeapons: 2
-        RMCSkillPilot: 2
-        RMCSkillPolice: 2
-        RMCSkillFireman: 5
-        RMCSkillPowerLoader: 2
-        RMCSkillVehicles: 3
-        RMCSkillJtac: 4
-        RMCSkillIntel: 2
-        RMCSkillDomestics: 2
-        RMCSkillNavigations: 1
-        RMCSkillExecution: 1
-        RMCSkillSmartGun: 1
-    - type: MarineOrders
     - type: Synth
       canUseGuns: true
     - type: SynthGeneration

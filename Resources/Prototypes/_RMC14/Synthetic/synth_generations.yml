@@ -160,6 +160,7 @@
         RMCSkillNavigations: 1
         RMCSkillExecution: 1
         RMCSkillSmartGun: 1
+  - type: MarineOrders
   - type: MobThresholds
     thresholds:
       0: Alive
