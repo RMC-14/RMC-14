@@ -14,11 +14,6 @@
       preset: RMCLanguagePresetSynthColonist
     - type: LanguageLearning
       preset: RMCLanguageLearningPresetSynthColonist
-    - type: DemoSpecWhitelist
-    - type: GrenadeSpecWhitelist
-    - type: ScoutWhitelist
-    - type: SniperWhitelist
-    - type: PyroWhitelist
     - type: RMCSurvivor
     - type: NpcFactionMember
       factions:
