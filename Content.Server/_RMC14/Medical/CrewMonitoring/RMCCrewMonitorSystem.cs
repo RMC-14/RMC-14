@@ -1,4 +1,3 @@
-using Content.Server.Access.Systems;
 using Content.Server.Destructible;
 using Content.Server.Medical.SuitSensors;
 using Content.Shared._RMC14.Areas;
@@ -7,8 +6,6 @@ using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Medical.CrewMonitoring;
 using Content.Shared._RMC14.Roles;
 using Content.Shared._RMC14.Rules;
-using Content.Shared._RMC14.Weapons.Ranged.IFF;
-using Content.Shared.Access.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Destructible;
@@ -16,13 +13,11 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Medical.SuitSensor;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
-using Content.Shared.NPC.Systems;
 using Content.Shared.Roles;
 using Content.Shared.StatusIcon;
 using Content.Shared.UserInterface;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map;
-using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Medical.CrewMonitoring;
@@ -31,10 +26,8 @@ public sealed class RMCCrewMonitorSystem : SharedRMCCrewMonitorSystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly GunIFFSystem _gunIFF = default!;
-    [Dependency] private readonly IdCardSystem _idCard = default!;
+    [Dependency] private readonly RMCCrewMonitorDataSystem _data = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
 
@@ -42,6 +35,8 @@ public sealed class RMCCrewMonitorSystem : SharedRMCCrewMonitorSystem
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
     private static readonly ProtoId<DamageGroupPrototype> ToxinGroup = "Toxin";
+
+    private readonly Dictionary<EntityUid, Entity<SuitSensorComponent>> _sensors = new();
 
     public override void Initialize()
     {
@@ -97,50 +92,20 @@ public sealed class RMCCrewMonitorSystem : SharedRMCCrewMonitorSystem
 
     private List<RMCCrewMonitorEntry> BuildSnapshot(RMCCrewMonitorComponent monitor)
     {
-        var unique = new Dictionary<EntityUid, Entity<SuitSensorComponent>>();
-        var sensors = EntityQueryEnumerator<SuitSensorComponent>();
-        while (sensors.MoveNext(out var sensorId, out var sensor))
-        {
-            if (sensor.Mode == SuitSensorMode.SensorOff ||
-                sensor.User is not { } user ||
-                TerminatingOrDeleted(user) ||
-                (!HasComp<ActorComponent>(user) && !HasComp<OriginalRoleComponent>(user)) ||
-                !TryComp(user, out TransformComponent? xform) ||
-                !_map.TryGetMap(xform.MapID, out var mapId) ||
-                _map.IsPaused(mapId.Value) ||
-                !IsTracked(user, monitor))
-            {
-                continue;
-            }
+        _data.CollectSensors(
+            monitor.NpcFactions,
+            monitor.IffFactions,
+            SuitSensorMode.SensorBinary,
+            _sensors);
 
-            if (unique.TryGetValue(user, out var existing) && existing.Comp.Mode >= sensor.Mode)
-                continue;
-
-            unique[user] = (sensorId, sensor);
-        }
-
-        var entries = new List<RMCCrewMonitorEntry>(unique.Count);
-        foreach (var (user, sensor) in unique)
+        var entries = new List<RMCCrewMonitorEntry>(_sensors.Count);
+        foreach (var (user, sensor) in _sensors)
         {
             if (TryCreateEntry(user, sensor.Comp, out var entry))
                 entries.Add(entry);
         }
 
         return entries;
-    }
-
-    private bool IsTracked(EntityUid user, RMCCrewMonitorComponent monitor)
-    {
-        if (_npcFaction.IsMemberOfAny((user, null), monitor.NpcFactions))
-            return true;
-
-        foreach (var faction in monitor.IffFactions)
-        {
-            if (_gunIFF.IsInFaction(user, faction))
-                return true;
-        }
-
-        return false;
     }
 
     private bool TryCreateEntry(EntityUid user, SuitSensorComponent sensor, out RMCCrewMonitorEntry entry)
@@ -158,23 +123,7 @@ public sealed class RMCCrewMonitorSystem : SharedRMCCrewMonitorSystem
         if (!isPlanet && !isShip)
             return false;
 
-        var name = Loc.GetString("suit-sensor-component-unknown-name");
-        var jobTitle = Loc.GetString("suit-sensor-component-unknown-job");
-        ProtoId<JobIconPrototype> jobIcon = "JobIconNoId";
-        var departments = new List<ProtoId<DepartmentPrototype>>();
-        if (_idCard.TryFindIdCard(user, out var card))
-        {
-            if (!string.IsNullOrWhiteSpace(card.Comp.FullName))
-                name = card.Comp.FullName;
-            if (!string.IsNullOrWhiteSpace(card.Comp.LocalizedJobTitle))
-                jobTitle = card.Comp.LocalizedJobTitle;
-            jobIcon = card.Comp.JobIcon;
-            departments.AddRange(card.Comp.JobDepartments);
-        }
-
-        ProtoId<JobPrototype>? job = null;
-        if (TryComp(user, out OriginalRoleComponent? originalRole))
-            job = originalRole.Job;
+        var identity = _data.GetIdentity(user);
 
         string? squad = null;
         Color? squadColor = null;
@@ -218,11 +167,11 @@ public sealed class RMCCrewMonitorSystem : SharedRMCCrewMonitorSystem
 
         entry = new RMCCrewMonitorEntry(
             GetNetEntity(user),
-            name,
-            jobTitle,
-            job,
-            jobIcon,
-            departments,
+            identity.Name,
+            identity.JobTitle,
+            identity.Job,
+            identity.JobIcon,
+            identity.Departments,
             squad,
             squadColor,
             sensor.Mode,

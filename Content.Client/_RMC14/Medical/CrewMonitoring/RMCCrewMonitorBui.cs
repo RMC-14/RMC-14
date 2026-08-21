@@ -243,8 +243,8 @@ public sealed class RMCCrewMonitorBui : RMCPopOutBui<RMCCrewMonitorWindow>
         if (_prototypes.TryIndex(entry.JobIcon, out JobIconPrototype? jobIcon))
             row.JobIcon.Texture = _sprite.Frame0(jobIcon.Icon);
 
-        row.StatusLabel.Text = GetStatusName(entry.State);
-        row.StatusLabel.FontColorOverride = GetStatusColor(entry.State);
+        row.StatusLabel.Text = RMCCrewMonitorUIHelpers.GetStatusName(entry.State);
+        row.StatusLabel.FontColorOverride = RMCCrewMonitorUIHelpers.GetStatusColor(entry.State);
 
         SetDamage(row.BruteLabel, entry.Brute, Color.FromHex("#DF3E3E"));
         SetDamage(row.BurnLabel, entry.Burn, Color.FromHex("#FFB833"));
@@ -265,26 +265,6 @@ public sealed class RMCCrewMonitorBui : RMCPopOutBui<RMCCrewMonitorWindow>
     {
         label.Text = damage == null ? "—" : MathF.Round(damage.Value).ToString("0");
         label.FontColorOverride = damage == null ? Color.Gray : color;
-    }
-
-    private string GetStatusName(MobState state)
-    {
-        return state switch
-        {
-            MobState.Dead => Loc.GetString("rmc-crew-monitor-status-dead"),
-            MobState.Critical => Loc.GetString("rmc-crew-monitor-status-critical"),
-            _ => Loc.GetString("rmc-crew-monitor-status-alive"),
-        };
-    }
-
-    private static Color GetStatusColor(MobState state)
-    {
-        return state switch
-        {
-            MobState.Dead => Color.FromHex("#FF5C5C"),
-            MobState.Critical => Color.FromHex("#FFB347"),
-            _ => Color.FromHex("#56D364"),
-        };
     }
 
     private string GetLocation(RMCCrewMonitorEntry entry)
