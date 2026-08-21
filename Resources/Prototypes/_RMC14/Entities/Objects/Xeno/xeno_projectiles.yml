@@ -204,6 +204,8 @@
     max: 4
   - type: RMCProjectileAccuracy
     accuracy: 135
+  - type: ProjectileCoverInteraction
+    stoppedByCover: true
 
 - type: entity
   parent: XenoBoneChipsProjectile # TODO one projectile out of the 8 spawned for fire spikes is this one
@@ -373,6 +375,8 @@
     accuracy: 110
   - type: ProjectileMaxRange
     max: 3
+  - type: ProjectileCoverInteraction
+    stoppedByCover: true
 
 - type: entity
   parent: XenoAcidBallSpitProjectile
@@ -475,6 +479,8 @@
     drawDepth: Effects # Draws above mobs
   - type: ProjectileMaxRange
     max: 3.5
+  - type: ProjectileCoverInteraction
+    stoppedByCover: true
   - type: PreventCollideWithDead
   - type: Projectile
     impactEffect: null

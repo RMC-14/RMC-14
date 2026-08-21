@@ -1,15 +1,19 @@
 using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Random;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared.Atmos;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
+using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Physics;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 
@@ -24,6 +28,7 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<MobStateComponent, MeleeAttackAttemptEvent>(OnMeleeAttackAttempt);
+        SubscribeLocalEvent<ProjectileCoverComponent, PreventCollideEvent>(OnBarricadePreventCollide);
     }
 
     private void OnMeleeAttackAttempt(Entity<MobStateComponent> ent, ref MeleeAttackAttemptEvent args)
@@ -53,6 +58,89 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
             }
             break;
         }
+    }
+
+    private void OnBarricadePreventCollide(Entity<ProjectileCoverComponent> ent, ref PreventCollideEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (!TryComp(args.OtherEntity, out ProjectileComponent? projectile))
+            return;
+
+        if (!Transform(ent).Anchored)
+            return;
+
+        var barricadeNet = GetNetEntity(ent.Owner);
+
+        if (TryComp(args.OtherEntity, out ProjectileCoverPassedComponent? passed) && passed.Barricades.Contains(barricadeNet))
+        {
+            args.Cancelled = true;
+            return;
+        }
+
+        // Shots aimed at barricade hit it
+        if (TryComp(args.OtherEntity, out TargetedProjectileComponent? targeted) && targeted.Target == ent.Owner)
+            return;
+
+        if (TryComp(args.OtherEntity, out ProjectileCoverInteractionComponent? interaction) && interaction.IgnoreCover)
+        {
+            args.Cancelled = true;
+            MarkPassed(args.OtherEntity, barricadeNet);
+            return;
+        }
+
+        if (!TryComp(args.OtherEntity, out RMCProjectileAccuracyComponent? accuracy) || accuracy.ShotFrom is not { } shotFrom)
+            return;
+
+        var facing = IsFacingTarget(ent.Owner, args.OtherEntity, shotFrom);
+        var behind = !facing && IsBehindTarget(ent.Owner, args.OtherEntity, shotFrom);
+        if (!facing && !behind)
+        {
+            args.Cancelled = true;
+            MarkPassed(args.OtherEntity, barricadeNet);
+            return;
+        }
+
+        var currentCoords = _transform.GetMoverCoordinates(args.OtherEntity);
+        var distance = (currentCoords.Position - shotFrom.Position).Length();
+
+        if (behind)
+        {
+            if (interaction is { StoppedByCover: true })
+                return;
+
+            distance -= 1;
+        }
+
+        if (distance < 1)
+        {
+            args.Cancelled = true;
+            MarkPassed(args.OtherEntity, barricadeNet);
+            return;
+        }
+
+        // accuracy can go over 100 (idk)
+        var accuracyValue = Math.Clamp((float) accuracy.Accuracy, 0f, 100f);
+        var coverage = (float) ent.Comp.Coverage;
+        var hitChance = Math.Min(coverage, coverage * distance / 6f + 50f * (1f - accuracyValue / 100f));
+
+        var tick = _timing.CurTick.Value;
+        var barricadeId = (long) barricadeNet.Id;
+        var roll = new Xoshiro128P(accuracy.GunSeed, ((long) tick << 32) | barricadeId).NextFloat(0, 100);
+
+        if (roll >= hitChance)
+        {
+            args.Cancelled = true;
+            MarkPassed(args.OtherEntity, barricadeNet);
+        }
+    }
+
+    private void MarkPassed(EntityUid projectile, NetEntity barricadeNet)
+    {
+        var passed = EnsureComp<ProjectileCoverPassedComponent>(projectile);
+        passed.Barricades.Add(barricadeNet);
+        Dirty(projectile, passed);
     }
 
     /// <summary>
