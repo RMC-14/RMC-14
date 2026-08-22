@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Server._RMC14.Chat.Chat;
 using Content.Server.GameTicking.Events;
 using Content.Shared._RMC14.Language;
 using Content.Shared._RMC14.Language.Components;
@@ -14,13 +15,63 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     [Dependency] private readonly LanguageLearningSystem _learning = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
 
+    private EntityQuery<LanguageComponent> _languageQuery;
+    private EntityQuery<LanguageLearningComponent> _learningQuery;
+
     public override void Initialize()
     {
         base.Initialize();
 
+        _languageQuery = GetEntityQuery<LanguageComponent>();
+        _learningQuery = GetEntityQuery<LanguageLearningComponent>();
+
         SubscribeLocalEvent<LanguageComponent, MapInitEvent>(OnInitLanguageSpeaker);
         SubscribeLocalEvent<RoundStartingEvent>(OnRoundStarting);
         SubscribeNetworkEvent<LanguagesSetMessage>(OnClientSetLanguage);
+    }
+
+    /// <summary>
+    /// Check whether <paramref name="recipient"/> should be able to see a chat message as a popup and in their chat box,
+    /// based on the message's <paramref name="spokenLanguage"/>.
+    /// <para>
+    /// This is primarily used to hide speech between different factions.
+    /// </para>
+    /// </summary>
+    /// <param name="recipient">The entity hearing the message.</param>
+    /// <param name="spokenLanguage">The message's language.</param>
+    /// <returns>
+    /// <see langword="true"/> if <paramref name="spokenLanguage"/> can be understood or learned by <paramref name="recipient"/>,
+    /// and <see langword="false"/> otherwise.
+    /// </returns>
+    public bool CanSeeSpokenMessage(EntityUid recipient, ProtoId<LanguagePrototype> spokenLanguage)
+    {
+        if (!_prototypeManager.TryIndex(spokenLanguage, out var spokenProto))
+            return false;
+
+        // If `recipient` understands the language, or understands a similar language in the same "category" (i.e. english and german)
+        if (_languageQuery.TryComp(recipient, out var langComp))
+        {
+            foreach (var understood in langComp.UnderstoodLanguages)
+            {
+                if (understood == spokenLanguage)
+                    return true;
+
+                if (_prototypeManager.TryIndex(understood, out var understoodProto) &&
+                    understoodProto.Category == spokenProto.Category)
+                {
+                    return true;
+                }
+            }
+        }
+
+        // If `recipient` doesn't understand the language, but is able to learn it.
+        if (_learningQuery.TryComp(recipient, out var learningComp) &&
+            learningComp.LearnableLanguages.Contains(spokenLanguage))
+        {
+            return true;
+        }
+
+        return false;
     }
 
     private void OnInitLanguageSpeaker(Entity<LanguageComponent> ent, ref MapInitEvent args)
