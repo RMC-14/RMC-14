@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: TadJohnson00
   changes:
-  - message: '[PVE] Added lots of missing equipment for the RCM, including faction-specific
-      webbing, hats, eyepro, and gas mask.'
-    type: Add
-  id: 3092
-  time: '2026-04-11T01:38:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9537
-- author: TadJohnson00
-  changes:
   - message: '[PVE] Added a few missing weapons to the RCM''s arsenal, including loadout
       sidearms, a flamethrower, and throwing knife.'
     type: Add
@@ -4540,5 +4532,14 @@
   id: 3591
   time: '2026-08-21T23:32:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10738
+- author: GNUtopia
+  changes:
+  - message: Jugs and pressurized canisters can now transfer up to their full volume
+    type: Fix
+  - message: Janitorial buckets no longer have a useless 500u transfer option
+    type: Fix
+  id: 3592
+  time: '2026-08-22T16:22:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10247
 Name: RMC14
 Order: -1
