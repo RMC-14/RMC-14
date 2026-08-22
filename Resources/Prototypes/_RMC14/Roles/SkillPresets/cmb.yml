@@ -61,7 +61,6 @@
   components:
   - type: SkillPreset
     skills:
-      RMCSkillFirearms: 1
       RMCSkillMedical: 2
       RMCSkillSurgery: 1
 
@@ -73,6 +72,5 @@
   components:
   - type: SkillPreset
     skills:
-      RMCSkillFirearms: 1
       RMCSkillConstruction: 2
       RMCSkillPowerLoader: 1
