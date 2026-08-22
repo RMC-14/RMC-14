@@ -105,13 +105,12 @@
 
 - type: entity
   parent: RMCSkillPresetSurvivor
-  id: RMCSkillPresetSurvivorUNMCMilitaryPolice
-  name: Survivor UNMC Military Police
+  id: RMCSkillPresetSurvivorUNMCBaseGuard
+  name: Survivor UNMC Base Guard
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
     skills:
-      RMCSkillEngineer: 1
       RMCSkillCqc: 2
       RMCSkillPolice: 0 # RMC14: Survs don't get police skill
       RMCSkillFirearms: 2
@@ -145,7 +144,6 @@
       RMCSkillEngineer: 3
       RMCSkillConstruction: 2
       RMCSkillMedical: 1
-      RMCSkillSurgery: 1
       RMCSkillDomestics: 2
       RMCSkillVehicles: 2
       RMCSkillPowerLoader: 1

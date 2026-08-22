@@ -19,7 +19,7 @@
     - type: AssignSquad
       whitelist:
         tags:
-        - RMCSquadUNMC
+        - RMCSquadMarineVaradero
     - type: Skills
       preset: RMCSkillPresetSurvivorDoctor
     - type: RMCSurvivor

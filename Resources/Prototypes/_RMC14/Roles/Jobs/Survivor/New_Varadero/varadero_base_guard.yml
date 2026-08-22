@@ -9,7 +9,7 @@
   greeting: rmc-job-greeting-varadero
   ranks:
     RMCRankSergeant: []
-  spawnMenuRoleName: UNMC Base Police (NV Survivor)
+  spawnMenuRoleName: UNMC Varadero Base Peacekeeper (NV Survivor)
   icon: "RMCJobIconSurvivorBasePolice"
   hasIcon: true
   special:
@@ -18,9 +18,9 @@
     - type: AssignSquad
       whitelist:
         tags:
-        - RMCSquadUNMC
+        - RMCSquadMarineVaradero
     - type: Skills
-      preset: RMCSkillPresetSurvivorUNMCRifleman
+      preset: RMCSkillPresetSurvivorUNMCBaseGuard
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -34,7 +34,7 @@
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: mp
+        state: peacekeeper
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_unmc
@@ -50,7 +50,7 @@
   useLoadoutOfJob: CMSurvivorSecurity # for inheritance
 
 - type: startingGear
-  id: RMCGearSurvivorUNMCBasePolice # This loadout is supposed to have MP stuff but these are not real MP's. Replaced the jacket and jumpsuit with their marine counterparts
+  id: RMCGearSurvivorUNMCBasePolice # This loadout is supposed to have MP stuff but these are not MP's. Replaced the jacket and jumpsuit with their marine counterparts
   equipment:
     jumpsuit: JumpsuitMarine
     outerClothing: RMCCoatService
@@ -70,7 +70,7 @@
   id: RMCSurvivorPresetUNMCBasePolice
   name: varadero base police preset
   categories: [ HideSpawnMenu ]
-  components: # This preset is supposed to have MP stuff but these are not real MP's. Replaced the cap and helmet with their marine counterparts
+  components: # This preset is supposed to have MP stuff but these are not MP's. Replaced the cap and helmet with their marine counterparts
     - type: EntityPreset
       randomOutfits:
         - [ ArmorHelmetM10 ]

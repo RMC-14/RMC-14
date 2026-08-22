@@ -201,7 +201,7 @@
     belt: RMCBeltMedicalDefibAnalyzerFilled
     head: ArmorHelmetM10
 
-# MP
+# MP (no MP clothes!!)
 - type: randomHumanoidSettings
   parent: RMCCorpse
   id: RMCCorpseUNMCMilitaryPoliceRandom
@@ -214,7 +214,7 @@
 - type: startingGear
   id: RMCGearCorpseUNMCMilitaryPoliceBase
   equipment:
-    jumpsuit: JumpsuitMarine # This isn't the MP uniform because giving marines mass access to MP uniforms probably isn't a great idea.
+    jumpsuit: JumpsuitMarine
     back: CMSatchelSecurity
     ears: CMHeadsetColony
     eyes: CMGlassesSecurity
@@ -222,7 +222,7 @@
     id: CMIDCardBasePolice
     gloves: CMHandsBlackMarine
     belt: CMBeltSecurityMPFilled
-    outerClothing: CMCoatMP
+    outerClothing: RMCCoatService
 
 - type: startingGear
   parent: RMCGearCorpseUNMCMilitaryPoliceBase

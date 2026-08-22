@@ -17,7 +17,7 @@
     - type: AssignSquad
       whitelist:
         tags:
-        - RMCSquadUNMC
+        - RMCSquadMarineVaradero
     - type: Skills
       preset: RMCSkillPresetSurvivorUNMCVehicleCrewman
     - type: RMCSurvivor

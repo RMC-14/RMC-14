@@ -162,10 +162,10 @@ rmc-job-greeting-varadero = The stench of burning phoron still lingers in the sa
 
    You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
-rmc-job-name-survivor-commander-new-varadero = Commander
+rmc-job-name-survivor-commander-new-varadero = Base Commander
 rmc-job-prefix-survivor-varadero-commander = UNMC CDR
 
-rmc-job-name-survivor-varadero-synth = Varadero Base Synthetic
+rmc-job-name-survivor-varadero-synth = Support Synthetic
 rmc-job-prefix-survivor-varadero-synth = UNMC SYN
 
 cm-job-name-surivor-beach-bum = Beach Bum
@@ -176,7 +176,7 @@ rmc-job-prefix-survivor-varadero-chaplain = UNMC CHAP
 cm-job-name-survivor-varadero-un-asst-rep = UN Assistant Representative
 rmc-job-prefix-survivor-varadero-un-asst-rep = UN AST REP
 
-cm-job-name-survivor-varadero-base-guard = Varadero Base Guard
+cm-job-name-survivor-varadero-base-guard = Peacekeeper
 
 cm-job-name-survivor-varadero-firefighter = Airport Firefighter
 rmc-job-prefix-survivor-varadero-firefighter = UNMC ARFPS
@@ -184,7 +184,7 @@ rmc-job-prefix-survivor-varadero-firefighter = UNMC ARFPS
 cm-job-name-survivor-ground-crew = Ground Crewman
 rmc-job-prefix-survivor-ground-crew = UNMC GCM
 
-cm-job-name-survivor-pilot = Pilot
+cm-job-name-survivor-pilot = Fighter Pilot
 rmc-job-prefix-survivor-pilot = UNMC PO
 
 cm-job-name-survivor-medical-technician = Medical Technician

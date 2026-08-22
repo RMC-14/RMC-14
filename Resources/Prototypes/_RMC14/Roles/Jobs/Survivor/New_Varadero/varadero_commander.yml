@@ -12,7 +12,7 @@
   roleWeight: 0.25
   icon: "RMCJobIconSurvivorCommanderNewVaradero"
   hasIcon: true
-  spawnMenuRoleName: UNMC Commander (NV Survivor)
+  spawnMenuRoleName: UNMC Varadero Base Commander (NV Survivor)
   accessGroups:
   - Colony
   special:
@@ -42,7 +42,7 @@
     - type: AssignSquad
       whitelist:
         tags:
-        - RMCSquadUNMC
+        - RMCSquadMarineVaradero
   hidden: true
   useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
 

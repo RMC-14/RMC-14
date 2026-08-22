@@ -8,14 +8,14 @@
   greeting: rmc-job-greeting-varadero
   ranks:
     RMCRankCorporal: []
-  spawnMenuRoleName: UNMC Base Chaplain (NV Survivor)
+  spawnMenuRoleName: UNMC Varadero Base Chaplain (NV Survivor)
   special:
   - !type:AddComponentSpecial
     components:
     - type: AssignSquad
       whitelist:
         tags:
-        - RMCSquadUNMC
+        - RMCSquadMarineVaradero
     - type: Skills
       preset: RMCSkillPresetSurvivorChaplain
     - type: EquipSurvivorPreset

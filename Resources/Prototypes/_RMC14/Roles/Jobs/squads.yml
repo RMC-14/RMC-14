@@ -428,6 +428,30 @@
 
 - type: entity
   parent: SquadBase
+  id: RMCSquadMarineVaradero
+  name: Varadero Garrison - # the hyphen is intentional
+  components:
+  - type: SquadTeam
+    color: "#3b62a7" # Shares the same color as the generic UNMC squad for now
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+    radio: MarineSurvivor
+    minimapBackground:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: background_unmc
+    canSupplyDrop: false
+  - type: Tag
+    tags:
+    - RMCSquadMarineVaradero
+
+- type: Tag
+  id: RMCSquadMarineVaradero
+
+- type: entity
+  parent: SquadBase
   id: SquadSOF
   name: SOF
   components:

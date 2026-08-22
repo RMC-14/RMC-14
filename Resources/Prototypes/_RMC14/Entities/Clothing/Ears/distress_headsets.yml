@@ -327,12 +327,12 @@
   parent: RMCHeadsetTyrargo
   id: RMCHeadsetMarineNV
   name: UNMC headset
-  description: Issued to UNMC Marines.
+  description: A standard issue UNMC headset.
   suffix: Survivor, Varadero
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/headsets.rsi
-    state: soc_headset
+    state: generic_headset
   - type: ContainerFill
     containers:
       key_slots:
