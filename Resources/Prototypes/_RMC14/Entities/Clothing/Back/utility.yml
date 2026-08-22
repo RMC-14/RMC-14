@@ -81,3 +81,44 @@
     targetWhitelist:
       tags:
       - RMCTankFuel
+
+- type: entity
+  parent: Clothing
+  id: RMCSGRTO
+  name: ML66A harness radio telephone
+  description: A lighweight telecommunications pack, designed to connect to the ML66A combat harness
+  components:
+  - type: Item
+    size: Huge
+  - type: Clothing
+    slots:
+    - back
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/sg_rto.rsi
+    state: icon
+  - type: RotaryPhone
+    category: Marine
+    canDnd: true
+  - type: RotaryPhoneBackpack
+  - type: UserInterface
+    interfaces:
+      enum.RMCTelephoneUiKey.Key:
+        type: RMCTelephoneBui
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: GenericVisualizer
+    visuals:
+      enum.RotaryPhoneLayers.Layer:
+        base:
+          Base: { state: icon }
+          Ring: { state: ring }
+          Ear: { state: ear }
+  - type: ClothingIgnoreBlockBackpack
+  - type: ClothingRequireEquipped
+    whitelist:
+      components:
+      - SmartGun
