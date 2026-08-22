@@ -253,7 +253,10 @@ public sealed partial class LoadoutGroupContainer : BoxContainer
         }
         else
         {
-            cont.Text = ($"({proto.Cost}Pts) " + loadoutSystem.GetName(proto));
+            cont.Text = Loc.GetString(
+                "rmc-loadout-item-cost",
+                ("cost", proto.Cost.Value),
+                ("name", loadoutSystem.GetName(proto)));
         }
         // End RMC14
 

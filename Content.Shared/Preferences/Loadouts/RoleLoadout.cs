@@ -108,7 +108,7 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
         }
 
         // RMC14
-        // Reset points to recalculate. 
+        // Reset points to recalculate.
         Points = roleProto.Points != null
             ? CalculatePointsFromPlaytime(session, collection, roleProto.Points.Value)
             : null;
@@ -338,17 +338,6 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
                 // Remove any other loadouts that might push it above the limit.
                 if (limit > 0)
                 {
-                    // RMC14
-                    // Refund points for the removed loadout selection immediately so UI can reflect cost changes.
-                    if (Points != null)
-                    {
-                        if (protoManager.TryIndex(loadout.Prototype, out var removedProto) && removedProto.Cost != null)
-                        {
-                            Points += removedProto.Cost.Value;
-                        }
-                    }
-                    // End RMC14
-
                     limit--;
                     groupLoadouts.RemoveAt(i);
                     i--;
