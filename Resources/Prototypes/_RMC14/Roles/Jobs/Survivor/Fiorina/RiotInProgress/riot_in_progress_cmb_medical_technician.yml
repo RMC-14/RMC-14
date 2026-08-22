@@ -1,0 +1,78 @@
+- type: job
+  parent: CMSurvivorFiorinaRiotOfficer
+  id: RMCSurvivorFiorinaRiotInProgressCMBRiotControlMedicalTechnician
+  name: rmc-job-name-bureau-riot-control-medical-technician
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorSecurity
+  startingGear: RMCGearSurvivorFiorinaRiotInProgressCMBMedicalTechnician
+  accessGroups:
+  - ColonistSec
+  ranks:
+    RMCRankCMBMedicalTechnician: []
+  spawnMenuRoleName: CMB Medical Technician (Fiorina Special Survivor)
+  icon: "RMCJobIconCMBRiotInProgressMedicalTechnician"
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      understoodLanguages:
+      - Japanese
+      - English
+      currentLanguage: English
+      defaultLanguage: English
+    - type: Skills
+      preset: RMCSkillPresetSurvivorRiotControlMedicalTechnician
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Bureau
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetRiotInProgressCMBRCO
+    - type: JobPrefix
+      prefix: rmc-job-prefix-bureau-riot-control-medical-technician
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: medic
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_cmb
+  greeting: rmc-job-greeting-riot-in-progress-CMB-RCO
+
+- type: startingGear
+  parent: RMCGearSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
+  id: RMCGearSurvivorFiorinaRiotInProgressCMBMedicalTechnician
+  equipment:
+    hands: CMHandsLatex
+    belt: CMBeltMedicalFilled
+  storage:
+    belt:
+    - CMDefibrillator
+    - CMHealthAnalyzer
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlMedicalTechnician
+  name: cmb riot control medical technician spawn point
+  suffix: special survivor, fiorina riot in progress
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorFiorinaRiotInProgressCMBRiotControlMedicalTechnician
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconCMBRiotInProgressMedicalTechnician
+  icon:
+    sprite: _RMC14/Interface/job_icons/CMB.rsi
+    state: cmb_medt

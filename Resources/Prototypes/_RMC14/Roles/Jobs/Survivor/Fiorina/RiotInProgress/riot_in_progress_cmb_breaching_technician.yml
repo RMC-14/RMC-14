@@ -1,0 +1,75 @@
+- type: job
+  parent: CMSurvivorFiorinaRiotOfficer
+  id: RMCSurvivorFiorinaRiotInProgressCMBRiotControlBreachingTechnician
+  name: rmc-job-name-bureau-riot-control-breaching-technician
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorSecurity
+  startingGear: RMCGearSurvivorFiorinaRiotInProgressCMBBreachingTechnician
+  accessGroups:
+  - ColonistSec
+  ranks:
+    RMCRankCMBBreachingTechnician: []
+  spawnMenuRoleName: CMB Breaching Technician (Fiorina Special Survivor)
+  icon: "RMCJobIconCMBRiotInProgressBreachingTechnician"
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      understoodLanguages:
+      - Japanese
+      - English
+      currentLanguage: English
+      defaultLanguage: English
+    - type: Skills
+      preset: RMCSkillPresetSurvivorRiotControlBreachingTechnician
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Bureau
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetRiotInProgressCMBRCO
+    - type: JobPrefix
+      prefix: rmc-job-prefix-bureau-riot-control-breaching-technician
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: engi
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_cmb
+  greeting: rmc-job-greeting-riot-in-progress-CMB-RCO
+
+- type: startingGear
+  parent: RMCGearSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
+  id: RMCGearSurvivorFiorinaRiotInProgressCMBBreachingTechnician
+  equipment:
+    belt: CMBeltUtilityFilled
+    eyes: RMCWeldingGoggles
+    gloves: CMHandsInsulated
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlBreachingTechnician
+  name: cmb riot control breaching technician spawn point
+  suffix: special survivor, fiorina riot in progress
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorFiorinaRiotInProgressCMBRiotControlBreachingTechnician
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconCMBRiotInProgressBreachingTechnician
+  icon:
+    sprite: _RMC14/Interface/job_icons/CMB.rsi
+    state: cmb_brch

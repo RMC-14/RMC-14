@@ -24,16 +24,19 @@
   id: RMCRankCMBRiotControlOfficer
   name: CMB Riot Control Officer
   prefix: Off.
+  paygrade: CMBR
 
 - type: rank
   id: RMCRankCMBMedicalTechnician
   name: CMB Medical Technician
   prefix: Med.
+  paygrade: CMBMT
 
 - type: rank
   id: RMCRankCMBBreachingTechnician
   name: CMB Breaching Technician
   prefix: Breach.
+  paygrade: CMBBT
 
 - type: rank
   id: RMCRankCMBSWATSpecialist
