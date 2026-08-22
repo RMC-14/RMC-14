@@ -6,9 +6,11 @@ using Content.Server.Speech.EntitySystems;
 using Content.Server.Speech.Prototypes;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Language.Components;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Mentor.ImaginaryFriend;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chat;
+using Content.Shared.Ghost;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.Radio;
@@ -30,6 +32,10 @@ public sealed class CMChatSystem : SharedCMChatSystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly LanguageSystem _language = default!;
 
+    private EntityQuery<GhostComponent> _ghostQuery;
+    private EntityQuery<MarineComponent> _marineQuery;
+    private EntityQuery<XenoComponent> _xenoQuery;
+
     private static readonly ProtoId<ReplacementAccentPrototype> ChatSanitize = "CMChatSanitize";
     private static readonly ProtoId<ReplacementAccentPrototype> MarineChatSanitize = "CMChatSanitizeMarine";
     private static readonly ProtoId<ReplacementAccentPrototype> XenoChatSanitize = "CMChatSanitizeXeno";
@@ -40,24 +46,38 @@ public sealed class CMChatSystem : SharedCMChatSystem
     public override void Initialize()
     {
         base.Initialize();
+
+        _ghostQuery = GetEntityQuery<GhostComponent>();
+        _marineQuery = GetEntityQuery<MarineComponent>();
+        _xenoQuery = GetEntityQuery<XenoComponent>();
+
         SubscribeLocalEvent<LanguageComponent, ChatMessageAfterGetRecipients>(OnLanguageGetRecipients);
         SubscribeLocalEvent<ImaginaryFriendComponent, ChatMessageAfterGetRecipients>(OnImaginaryFriendGetRecipients);
     }
 
     private void OnLanguageGetRecipients(Entity<LanguageComponent> ent, ref ChatMessageAfterGetRecipients args)
     {
-        if (args.Language is not { } spokenLanguage)
-            return;
-
         _toRemove.Clear();
-        foreach (var (session, data) in args.Recipients)
-        {
-            if (data.Observer)
-                continue;
 
+        var entIsMarine = _marineQuery.HasComp(ent);
+        var entIsXeno = _xenoQuery.HasComp(ent);
+        foreach (var (session, _) in args.Recipients)
+        {
             if (session.AttachedEntity is not { } sessionEntity)
                 continue;
 
+            if (_ghostQuery.HasComp(sessionEntity))
+                continue;
+
+            // If the message has no language (LOOC for example) just go with the standard faction check.
+            if (args.Language is not { } spokenLanguage)
+            {
+                if (entIsMarine != _marineQuery.HasComp(sessionEntity) || entIsXeno != _xenoQuery.HasComp(sessionEntity))
+                    _toRemove.Add(session);
+                continue;
+            }
+
+            // Otherwise check if the language is visible to `sessionEntity`.
             if (!_language.CanSeeSpokenMessage(sessionEntity, spokenLanguage))
                 _toRemove.Add(session);
         }
@@ -72,9 +92,9 @@ public sealed class CMChatSystem : SharedCMChatSystem
     {
         _toRemove.Clear();
 
-        foreach (var (session, data) in args.Recipients)
+        foreach (var (session, _) in args.Recipients)
         {
-            if (data.Observer)
+            if (_ghostQuery.HasComp(session.AttachedEntity))
                 continue;
 
             if (ent.Comp.Imaginer != session.AttachedEntity)
