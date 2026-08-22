@@ -17,6 +17,7 @@ rmc-hardpoint-ui-integrity = {$current}/{$max} ({$percent}%)
 rmc-hardpoint-ui-no-integrity = No integrity data
 rmc-hardpoint-ui-remove = Remove
 rmc-hardpoint-ui-removing = Removing...
+rmc-hardpoint-disintegrates = {CAPITALIZE(THE($item))} disintegrates into a useless pile of scrap under the damage it suffered.
 rmc-vehicle-ammo-loader-no-vehicle = The loader isn't connected to a vehicle.
 rmc-vehicle-ammo-loader-no-hardpoint = No compatible hardpoint is installed.
 rmc-vehicle-ammo-loader-wrong-ammo = That ammo doesn't fit this loader.
