@@ -65,7 +65,8 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointSurvivorFiorinaRiotInProgressILRCPeacekeeper
-  name: special survivor fiorina riot in progress ILRC peacekeeper spawn point
+  name: ILRC peacekeeper spawn point
+  suffix: special survivor, fiorina riot
   components:
   - type: SpawnPoint
     job_id: RMCSurvivorFiorinaRiotInProgressILRCPeacekeeper

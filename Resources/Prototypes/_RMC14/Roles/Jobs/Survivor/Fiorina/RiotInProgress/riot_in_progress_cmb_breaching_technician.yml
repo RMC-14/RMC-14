@@ -64,7 +64,7 @@
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlBreachingTechnician
   name: cmb riot control breaching technician spawn point
-  suffix: special survivor, fiorina riot in progress
+  suffix: special survivor, fiorina riot
   components:
   - type: SpawnPoint
     job_id: RMCSurvivorFiorinaRiotInProgressCMBRiotControlBreachingTechnician
