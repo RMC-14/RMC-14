@@ -116,6 +116,7 @@
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Fiorina/poolparty.yml"
       probability: 0.2
+      nightmareScenario: none
 
 - type: entity
   parent: RMCMapInsertFiorinaBase
