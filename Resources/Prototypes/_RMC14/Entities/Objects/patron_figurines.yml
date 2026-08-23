@@ -3157,3 +3157,14 @@
     state: shy_peeps_junie
   - type: PatronFigurine
     id: 025498ea-e4eb-4ceb-adff-450fbcde6669
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronFeels-The-Burn
+  name: Feels-The-Burn figurine
+  description: "Smells burnt, careful not to step in his way..."
+  components:
+  - type: Sprite
+    state: feels-the-burn
+  - type: PatronFigurine
+    id: be07c424-ed74-4029-8e29-1bf6901789c2
