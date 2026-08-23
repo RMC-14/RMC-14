@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: The logistics officer can now use the consoles in the command bubble,
-      the command tablet and launch the lifeboats.
-    type: Tweak
-  id: 3097
-  time: '2026-04-11T01:44:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9481
 - author: wheelwrightt
   changes:
   - message: Coffee machines now can brew coffee into mugs.
@@ -4542,5 +4534,12 @@
   id: 3596
   time: '2026-08-23T22:12:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10768
+- author: carccborg
+  changes:
+  - message: Larva and parasites can fit under single-entity double doors again
+    type: Fix
+  id: 3597
+  time: '2026-08-23T22:14:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10760
 Name: RMC14
 Order: -1
