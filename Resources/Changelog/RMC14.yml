@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: IceNoobXD
-  changes:
-  - message: fixed the TacMap icons for the MST, RT, and Correspondent.
-    type: Fix
-  id: 3096
-  time: '2026-04-11T01:37:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9572
 - author: Ian321
   changes:
   - message: The logistics officer can now use the consoles in the command bubble,
@@ -4542,5 +4535,12 @@
   id: 3595
   time: '2026-08-23T16:31:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10739
+- author: x5tink
+  changes:
+  - message: Emerald Medals now appear properly in Stats Window.
+    type: Fix
+  id: 3596
+  time: '2026-08-23T22:12:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10768
 Name: RMC14
 Order: -1
