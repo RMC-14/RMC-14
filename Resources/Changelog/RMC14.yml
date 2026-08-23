@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: SharkSnake98
-  changes:
-  - message: Added a version of the dwarf beard without eyebrows
-    type: Add
-  id: 3095
-  time: '2026-04-11T01:39:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9371
 - author: IceNoobXD
   changes:
   - message: fixed the TacMap icons for the MST, RT, and Correspondent.
@@ -4541,5 +4534,13 @@
   id: 3594
   time: '2026-08-23T16:04:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10360
+- author: kleinerstation13
+  changes:
+  - message: Tweaked some LV-624 inserts (Cargo special inserts, nexus barricaded,
+      hydro destroyed, corpodome)
+    type: Tweak
+  id: 3595
+  time: '2026-08-23T16:31:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10739
 Name: RMC14
 Order: -1
