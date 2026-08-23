@@ -16,6 +16,7 @@
   - type: Action
     checkCanInteract: false
     checkConsciousness: false
+  - type: RMCInContainerAction
 
 - type: entity
   abstract: true

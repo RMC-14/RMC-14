@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   id: RMCActionOpenTacticalMap
   name: Open Tactical Map
@@ -7,6 +7,7 @@
     itemIconStyle: NoItem
   - type: InstantAction
     event: !type:OpenTacticalMapActionEvent
+  - type: RMCInContainerAction
 
 - type: entity
   parent: RMCActionOpenTacticalMap
