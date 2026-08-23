@@ -1,0 +1,42 @@
+﻿- type: entity
+  id: RMCSignRequisitions
+  name: UNMC requisitions office guidelines
+  description: 1. You are not entitled to service or equipment. Attachments are a privilege, not a right.
+
+    2. You must be fully dressed to obtain service. Cryosleep underwear is non-permissible.
+
+    3. The Logistics Officer has the final say and the right to decline service. Only the Acting Commander may override their decisions.
+
+    4. Please treat your Requisitions staff with respect. They work hard.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/decals.rsi
+    state: roplaque
+  - type: InteractionOutline
+  - type: Clickable
+
+- type: entity
+  parent: RMCSignRequisitions
+  id: RMCSignRequisitionsCreed
+  name: LOC creed plaque
+  description: The short version of the Logistics Officer Creed made by the UN Logistics Officer Corps, this on is purely decorative and ceremonial version which is much shorter and doesn't include more modern edits.
+  components:
+  - type: Sprite
+    state: rocreed
+
+- type: entity
+  parent: RMCSignRequisitions
+  id: RMCSignWeYaRestrictedArea
+  name: weston-yamada restricted area sign
+  description: 1. The shipside Weston-Yamada Executive Bodyguard is permitted to non-lethally detain and/or disable trespassing or trouble-causing personnel in accordance with Marine Law in this area. Detained personnel must be transferred to Military Police custody.
+
+                    2. The Executive Bodyguard is permitted longarms within the office while on Code Green.
+
+    3. These rights are suspended outside of this office. Exception to the first rule is when the Bodyguard and/or Liaison are in immediate danger. Accordance to proper escalation is required.
+  components:
+  - type: Sprite
+    state: weyarestrictedarea

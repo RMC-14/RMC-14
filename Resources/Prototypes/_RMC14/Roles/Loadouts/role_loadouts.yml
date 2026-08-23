@@ -124,6 +124,29 @@
   - MiscellaneousRMC
   - MeleeWeaponsRMC
 
+- type: roleLoadout
+  id: JobCMVehicleCrewman
+  points: 7
+  groups:
+  - MarineBackpack
+  - HeadwearRMC
+  - EyewearRMC
+  - MasksRMC
+  - HelmetGarbsRMC
+  - AccessoriesRMC
+  - WatchesBasicRMC
+  - PaperworkRMC
+  - RecreationalRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+  - RMCLoadoutGroupPins
+  - SmokablesRMC
+
 # Command
 - type: roleLoadout
   id: JobCMCommandingOfficer
@@ -591,6 +614,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - AccessoriesRMC
+  - WatchesBasicRMC
   - PaperworkRMC
   - RecreationalRMC
   - PlushiesRMC
@@ -695,6 +719,7 @@
   - WatchesLiaisonRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
   - FlasksRMC
@@ -707,10 +732,35 @@
   - CivilianOnlyRMC
 
 - type: roleLoadout
+  id: JobCMCombatCorrespondent
+  points: 7
+  groups:
+  - MarineBackpack
+  - HeadwearRMC
+  - EyewearRMC
+  - MasksRMC
+  - HelmetGarbsRMC
+  - AccessoriesRMC
+  - WatchesBasicRMC
+  - PaperworkRMC
+  - RecreationalRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+  - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
+
+- type: roleLoadout
   id: JobCMLiaison
   points: 7
   groups:
-  - MarineLeatherBackpack
+  - LiaisonBackpackRMC
   - LiaisonRoleSpecificRMC
   - HeadwearRMC
   - EyewearRMC
@@ -720,6 +770,32 @@
   - WatchesLiaisonRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+  - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - CivilianOnlyRMC
+
+- type: roleLoadout
+  id: JobRMCWeYaExecutiveBodyguard
+  points: 7
+  groups:
+  - ExecutiveSecurityGuardBackpack
+  - HeadwearRMC
+  - EyewearRMC
+  - MasksRMC
+  - HelmetGarbsRMC
+  - AccessoriesRMC
+  - WatchesLiaisonRMC
+  - PaperworkRMC
+  - RecreationalRMC
+  - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
   - FlasksRMC
@@ -785,6 +861,7 @@
   id: JobRMCJobSynthetic
   points: 7
   groups:
+  - SynthGenRMC
   - SynthBackpackRMC
   - SynthHeadwearRMC
   - SynthGlassesRMC
@@ -864,6 +941,7 @@
   - MasksRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - CannedDrinksRMC
   - FoodSweetsRMC
   - FoodPackagedRMC
@@ -882,6 +960,7 @@
   - MasksRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - CannedDrinksRMC
   - FoodSweetsRMC
   - FoodPackagedRMC
@@ -900,6 +979,7 @@
   - MasksRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - CannedDrinksRMC
   - FoodSweetsRMC
   - FoodPackagedRMC
@@ -918,6 +998,7 @@
   - MasksRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - CannedDrinksRMC
   - FoodSweetsRMC
   - FoodPackagedRMC
@@ -936,6 +1017,7 @@
   - MasksRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - CannedDrinksRMC
   - FoodSweetsRMC
   - FoodPackagedRMC
@@ -954,6 +1036,7 @@
   - MasksRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - CannedDrinksRMC
   - FoodSweetsRMC
   - FoodPackagedRMC
@@ -972,6 +1055,7 @@
   - MasksRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - CannedDrinksRMC
   - FoodSweetsRMC
   - FoodPackagedRMC
@@ -990,6 +1074,7 @@
   - MasksRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - CannedDrinksRMC
   - FoodSweetsRMC
   - FoodPackagedRMC
@@ -1011,6 +1096,7 @@
   - MasksRMCPVE
   - HelmetGarbsRMCPVE
   - AccessoriesRMCPVE
+  - WatchesBasicRMC
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins
@@ -1025,6 +1111,7 @@
   - MasksRMCPVE
   - HelmetGarbsRMCPVE
   - AccessoriesRMCPVE
+  - WatchesBasicRMC
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins
@@ -1039,6 +1126,7 @@
   - MasksRMCPVE
   - HelmetGarbsRMCPVE
   - AccessoriesRMCPVE
+  - WatchesBasicRMC
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins
@@ -1053,6 +1141,7 @@
   - MasksRMCPVE
   - HelmetGarbsRMCPVE
   - AccessoriesRMCPVE
+  - WatchesBasicRMC
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins
@@ -1067,6 +1156,7 @@
   - MasksRMCPVE
   - HelmetGarbsRMCPVE
   - AccessoriesRMCPVE
+  - WatchesBasicRMC
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins
@@ -1080,6 +1170,7 @@
   - MasksRMCPVE
   - HelmetGarbsRMCPVE
   - AccessoriesRMCPVE
+  - WatchesBasicRMC
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins

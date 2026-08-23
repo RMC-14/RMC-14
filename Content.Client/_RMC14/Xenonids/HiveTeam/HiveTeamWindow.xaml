@@ -1,0 +1,12 @@
+<cc:HiveTeamWindow
+    xmlns="https://spacestation14.io"
+    xmlns:cc="clr-namespace:Content.Client._RMC14.Xenonids.HiveTeam"
+    Title="Hive Teams"
+    MinSize="900 750">
+    <BoxContainer Orientation="Vertical" VerticalExpand="True">
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" VerticalExpand="True"
+                      Name="TopRow" Access="Public" />
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" VerticalExpand="True"
+                      Name="BottomRow" Access="Public" />
+    </BoxContainer>
+</cc:HiveTeamWindow>

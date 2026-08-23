@@ -10,15 +10,33 @@
   - type: Sprite
     drawdepth: SmallObjects
     sprite: _RMC14/Structures/Machines/rmc_groundside_communications_console.rsi
-    state: on
-    layers: [ ]
+    layers:
+    - map: ["base"]
+      state: "off"
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "on"
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+        base:
+          True: { visible: false }
+          False: { visible: true }
   - type: Clickable
   - type: InteractionOutline
   - type: Corrodible
     isCorrodible: false
   - type: ApcPowerReceiver
-    powerLoad: 0
-    needsPower: false # TODO RMC14
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 300
+    activeLoad: 300
+    channel: Equipment
+  - type: ActivatableUIRequiresPower
   - type: WallMount
     arc: 360
   - type: EmitSoundOnUIOpen
@@ -82,8 +100,9 @@
   - type: MarineControlComputer
 
 - type: entity
+  abstract: true
   parent: RMCCommunicationsConsoleBase
-  id: RMCOverwatchConsole
+  id: RMCOverwatchConsoleBase
   name: overwatch console
   description: State of the art machinery for giving orders to a squad.
   components:
@@ -91,11 +110,6 @@
     anchored: false
   - type: Physics
     bodyType: Static
-  - type: Sprite
-    sprite: _RMC14/Structures/Machines/computer.rsi
-    state: overwatch
-    overrideDir: West
-    enableOverrideDir: true
   - type: InteractionOutline
   - type: ActivatableUI
     key: enum.OverwatchConsoleUI.Key
@@ -125,6 +139,20 @@
     - RMCGuideRoleMaintenanceTechnician
 
 - type: entity
+  parent: RMCOverwatchConsoleBase
+  id: RMCOverwatchConsole
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    layers:
+    - map: ["base"]
+      state: "overwatch0"
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "overwatch"
+    overrideDir: West
+    enableOverrideDir: true
+
+- type: entity
   parent: RMCOverwatchConsole
   id: RMCOverwatchConsoleRotating
   suffix: Rotating
@@ -151,6 +179,10 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/map_table.rsi
     state: maptable
+    layers: []
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 2
   - type: InteractionOutline
   - type: ActivatableUI
     key: enum.TacticalMapComputerUi.Key
@@ -275,7 +307,11 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/escape_pod_panel.rsi
-    state: airlock_control_standby
+    layers:
+    - map: ["base"]
+      state: "airlock_control_off"
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "airlock_control_standby"
   - type: InteractionOutline
   - type: ActivatableUI
     key: enum.EvacuationComputerUi.Key
@@ -289,10 +325,18 @@
     blacklist:
       components:
       - Xeno
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 300
+    activeLoad: 300
+    channel: Equipment
 
 - type: entity
   parent: RMCEscapePodController
   id: RMCEscapePodControllerLiaison
+  suffix: Liaison, Fueled
   components:
   - type: EvacuationComputer
     earlyCrashChance: 0
@@ -308,7 +352,11 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
-    state: terminal
+    layers:
+    - map: ["base"]
+      state: "terminal0"
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "terminal"
   - type: InteractionOutline
   - type: ActivatableUI
     key: enum.LifeboatComputerUi.Key

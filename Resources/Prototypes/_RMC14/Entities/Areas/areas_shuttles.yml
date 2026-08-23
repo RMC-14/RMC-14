@@ -1,0 +1,51 @@
+# Alamo and Normandy areas are in areas_sulaco.yml
+- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaShuttleNS #Not Sulaco
+  name: Shuttle
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_shiva.rsi
+    state: shuttle
+  - type: Area
+    resinAllowed: false
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    weatherEnabled: false
+    alwaysPowered: true
+
+- type: entity
+  parent: RMCAreaShuttleNS
+  id: RMCAreaShuttleERT
+  name: ERT Shuttle
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_almayer.rsi
+    state: lifeboat
+
+- type: entity
+  parent: RMCAreaShuttleNS
+  id: RMCAreaShuttleEscapePod
+  name: Escape Pod
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_almayer.rsi
+    state: lifeboat
+
+- type: entity
+  parent: RMCAreaShuttleNS
+  id: RMCAreaShuttleLifeboat
+  name: Lifeboat
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_almayer.rsi
+    state: lifeboat

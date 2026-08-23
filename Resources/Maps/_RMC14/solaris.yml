@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 05/05/2026 12:46:42
-  entityCount: 30116
+  time: 07/28/2026 18:28:11
+  entityCount: 30305
 maps:
 - 1
 grids:
@@ -27249,14 +27249,14 @@ entities:
         71,-182: RMCAreaBigredv2CavesResearch
         71,-183: RMCAreaBigredv2CavesResearch
         71,-184: RMCAreaBigredv2CavesResearch
-        70,-177: RMCAreaBigredv2CavesResearch
-        70,-178: RMCAreaBigredv2CavesResearch
-        70,-179: RMCAreaBigredv2CavesResearch
-        70,-180: RMCAreaBigredv2CavesResearch
-        70,-181: RMCAreaBigredv2CavesResearch
-        70,-182: RMCAreaBigredv2CavesResearch
-        70,-183: RMCAreaBigredv2CavesResearch
-        70,-184: RMCAreaBigredv2CavesResearch
+        70,-177: RMCAreaBigredv2CavesMining
+        70,-178: RMCAreaBigredv2CavesMining
+        70,-179: RMCAreaBigredv2CavesMining
+        70,-180: RMCAreaBigredv2CavesMining
+        70,-181: RMCAreaBigredv2CavesMining
+        70,-182: RMCAreaBigredv2CavesMining
+        70,-183: RMCAreaBigredv2CavesMining
+        70,-184: RMCAreaBigredv2CavesMining
         207,-137: RMCAreaBigredv2CavesSe
         207,-177: RMCAreaBigredv2CavesSe
         207,-178: RMCAreaBigredv2CavesSe
@@ -29283,7 +29283,7 @@ entities:
         40,-158: RMCAreaBigredv2CavesSw
         40,-159: RMCAreaBigredv2CavesSw
         40,-160: RMCAreaBigredv2CavesSw
-        40,-161: RMCAreaBigredv2CavesSw
+        40,-161: RMCAreaBigredv2CavesMining
         39,-154: RMCAreaBigredv2CavesSw
         39,-155: RMCAreaBigredv2CavesSw
         39,-156: RMCAreaBigredv2CavesSw
@@ -29291,7 +29291,7 @@ entities:
         39,-158: RMCAreaBigredv2CavesSw
         39,-159: RMCAreaBigredv2CavesSw
         39,-160: RMCAreaBigredv2CavesSw
-        39,-161: RMCAreaBigredv2CavesSw
+        39,-161: RMCAreaBigredv2CavesMining
         38,-154: RMCAreaBigredv2CavesSw
         38,-155: RMCAreaBigredv2CavesSw
         38,-156: RMCAreaBigredv2CavesSw
@@ -29299,7 +29299,7 @@ entities:
         38,-158: RMCAreaBigredv2CavesSw
         38,-159: RMCAreaBigredv2CavesSw
         38,-160: RMCAreaBigredv2CavesSw
-        38,-161: RMCAreaBigredv2CavesSw
+        38,-161: RMCAreaBigredv2CavesMining
         37,-151: RMCAreaBigredv2CavesSw
         37,-152: RMCAreaBigredv2CavesSw
         37,-153: RMCAreaBigredv2CavesSw
@@ -29310,7 +29310,7 @@ entities:
         37,-158: RMCAreaBigredv2CavesSw
         37,-159: RMCAreaBigredv2CavesSw
         37,-160: RMCAreaBigredv2CavesSw
-        37,-161: RMCAreaBigredv2CavesSw
+        37,-161: RMCAreaBigredv2CavesMining
         36,-151: RMCAreaBigredv2CavesSw
         36,-152: RMCAreaBigredv2CavesSw
         36,-153: RMCAreaBigredv2CavesSw
@@ -38827,7 +38827,7 @@ entities:
         61,-86: RMCAreaBigredv2OutsideGeneralStore
         61,-87: RMCAreaBigredv2OutsideGeneralStore
         61,-88: RMCAreaBigredv2OutsideGeneralStore
-        61,-89: RMCAreaBigredv2OutsideGeneralStore
+        61,-89: RMCAreaBigredv2OutsideCargo
         60,-78: RMCAreaBigredv2OutsideGeneralStore
         60,-79: RMCAreaBigredv2OutsideGeneralStore
         60,-80: RMCAreaBigredv2OutsideGeneralStore
@@ -40372,22 +40372,22 @@ entities:
         44,-158: RMCAreaBigredv2OutsideLz2SouthCas
         44,-159: RMCAreaBigredv2OutsideLz2SouthCas
         44,-160: RMCAreaBigredv2OutsideLz2SouthCas
-        44,-161: RMCAreaBigredv2CavesSw
+        44,-161: RMCAreaBigredv2CavesMining
         43,-157: RMCAreaBigredv2OutsideLz2SouthCas
         43,-158: RMCAreaBigredv2OutsideLz2SouthCas
         43,-159: RMCAreaBigredv2CavesSw
         43,-160: RMCAreaBigredv2CavesSw
-        43,-161: RMCAreaBigredv2CavesSw
+        43,-161: RMCAreaBigredv2CavesMining
         42,-157: RMCAreaBigredv2CavesSw
         42,-158: RMCAreaBigredv2CavesSw
         42,-159: RMCAreaBigredv2CavesSw
         42,-160: RMCAreaBigredv2CavesSw
-        42,-161: RMCAreaBigredv2CavesSw
+        42,-161: RMCAreaBigredv2CavesMining
         41,-157: RMCAreaBigredv2CavesSw
         41,-158: RMCAreaBigredv2CavesSw
         41,-159: RMCAreaBigredv2CavesSw
         41,-160: RMCAreaBigredv2CavesSw
-        41,-161: RMCAreaBigredv2CavesSw
+        41,-161: RMCAreaBigredv2CavesMining
         17,-112: RMCAreaBigredv2OutsideLz2WestCas
         17,-113: RMCAreaBigredv2OutsideLz2WestCas
         17,-114: RMCAreaBigredv2OutsideLz2WestCas
@@ -49445,1616 +49445,1616 @@ entities:
         222,-213: RMCAreaSpace
         221,1: RMCAreaSpace
         221,0: RMCAreaSpace
-        221,-105: RMCAreaSpace
-        221,-106: RMCAreaSpace
-        221,-107: RMCAreaSpace
-        221,-108: RMCAreaSpace
-        221,-109: RMCAreaSpace
-        221,-110: RMCAreaSpace
-        221,-111: RMCAreaSpace
-        221,-112: RMCAreaSpace
-        221,-113: RMCAreaSpace
-        221,-114: RMCAreaSpace
-        221,-115: RMCAreaSpace
-        221,-116: RMCAreaSpace
-        221,-117: RMCAreaSpace
-        221,-118: RMCAreaSpace
-        221,-119: RMCAreaSpace
-        221,-120: RMCAreaSpace
-        221,-121: RMCAreaSpace
-        221,-122: RMCAreaSpace
-        221,-123: RMCAreaSpace
-        221,-124: RMCAreaSpace
-        221,-125: RMCAreaSpace
-        221,-126: RMCAreaSpace
-        221,-127: RMCAreaSpace
-        221,-128: RMCAreaSpace
-        221,-129: RMCAreaSpace
-        221,-130: RMCAreaSpace
-        221,-131: RMCAreaSpace
-        221,-132: RMCAreaSpace
-        221,-133: RMCAreaSpace
-        221,-134: RMCAreaSpace
-        221,-135: RMCAreaSpace
-        221,-136: RMCAreaSpace
-        221,-137: RMCAreaSpace
-        221,-138: RMCAreaSpace
-        221,-139: RMCAreaSpace
-        221,-140: RMCAreaSpace
-        221,-141: RMCAreaSpace
-        221,-142: RMCAreaSpace
-        221,-143: RMCAreaSpace
-        221,-144: RMCAreaSpace
-        221,-145: RMCAreaSpace
-        221,-146: RMCAreaSpace
-        221,-147: RMCAreaSpace
-        221,-148: RMCAreaSpace
-        221,-149: RMCAreaSpace
-        221,-150: RMCAreaSpace
-        221,-151: RMCAreaSpace
-        221,-152: RMCAreaSpace
-        221,-153: RMCAreaSpace
-        221,-154: RMCAreaSpace
-        221,-155: RMCAreaSpace
-        221,-156: RMCAreaSpace
-        221,-157: RMCAreaSpace
-        221,-158: RMCAreaSpace
-        221,-159: RMCAreaSpace
-        221,-160: RMCAreaSpace
-        221,-161: RMCAreaSpace
-        221,-162: RMCAreaSpace
-        221,-163: RMCAreaSpace
-        221,-164: RMCAreaSpace
-        221,-165: RMCAreaSpace
-        221,-166: RMCAreaSpace
-        221,-167: RMCAreaSpace
-        221,-168: RMCAreaSpace
-        221,-169: RMCAreaSpace
-        221,-170: RMCAreaSpace
-        221,-171: RMCAreaSpace
-        221,-172: RMCAreaSpace
-        221,-173: RMCAreaSpace
-        221,-174: RMCAreaSpace
-        221,-175: RMCAreaSpace
-        221,-176: RMCAreaSpace
-        221,-177: RMCAreaSpace
-        221,-178: RMCAreaSpace
-        221,-179: RMCAreaSpace
-        221,-180: RMCAreaSpace
-        221,-181: RMCAreaSpace
-        221,-182: RMCAreaSpace
-        221,-183: RMCAreaSpace
-        221,-184: RMCAreaSpace
-        221,-185: RMCAreaSpace
-        221,-186: RMCAreaSpace
-        221,-187: RMCAreaSpace
-        221,-188: RMCAreaSpace
-        221,-189: RMCAreaSpace
-        221,-190: RMCAreaSpace
-        221,-191: RMCAreaSpace
-        221,-192: RMCAreaSpace
-        221,-193: RMCAreaSpace
-        221,-194: RMCAreaSpace
-        221,-195: RMCAreaSpace
-        221,-196: RMCAreaSpace
-        221,-197: RMCAreaSpace
-        221,-198: RMCAreaSpace
-        221,-199: RMCAreaSpace
-        221,-200: RMCAreaSpace
-        221,-201: RMCAreaSpace
-        221,-202: RMCAreaSpace
-        221,-203: RMCAreaSpace
-        221,-204: RMCAreaSpace
-        221,-205: RMCAreaSpace
-        221,-206: RMCAreaSpace
-        221,-207: RMCAreaSpace
-        221,-208: RMCAreaSpace
-        221,-209: RMCAreaSpace
+        221,-105: RMCAreaBigredv2Caves
+        221,-106: RMCAreaBigredv2Caves
+        221,-107: RMCAreaBigredv2Caves
+        221,-108: RMCAreaBigredv2Caves
+        221,-109: RMCAreaBigredv2Caves
+        221,-110: RMCAreaBigredv2Caves
+        221,-111: RMCAreaBigredv2Caves
+        221,-112: RMCAreaBigredv2Caves
+        221,-113: RMCAreaBigredv2Caves
+        221,-114: RMCAreaBigredv2Caves
+        221,-115: RMCAreaBigredv2Caves
+        221,-116: RMCAreaBigredv2Caves
+        221,-117: RMCAreaBigredv2Caves
+        221,-118: RMCAreaBigredv2Caves
+        221,-119: RMCAreaBigredv2Caves
+        221,-120: RMCAreaBigredv2Caves
+        221,-121: RMCAreaBigredv2Caves
+        221,-122: RMCAreaBigredv2Caves
+        221,-123: RMCAreaBigredv2Caves
+        221,-124: RMCAreaBigredv2Caves
+        221,-125: RMCAreaBigredv2Caves
+        221,-126: RMCAreaBigredv2Caves
+        221,-127: RMCAreaBigredv2Caves
+        221,-128: RMCAreaBigredv2Caves
+        221,-129: RMCAreaBigredv2Caves
+        221,-130: RMCAreaBigredv2Caves
+        221,-131: RMCAreaBigredv2Caves
+        221,-132: RMCAreaBigredv2Caves
+        221,-133: RMCAreaBigredv2Caves
+        221,-134: RMCAreaBigredv2Caves
+        221,-135: RMCAreaBigredv2Caves
+        221,-136: RMCAreaBigredv2Caves
+        221,-137: RMCAreaBigredv2Caves
+        221,-138: RMCAreaBigredv2Caves
+        221,-139: RMCAreaBigredv2Caves
+        221,-140: RMCAreaBigredv2Caves
+        221,-141: RMCAreaBigredv2Caves
+        221,-142: RMCAreaBigredv2Caves
+        221,-143: RMCAreaBigredv2Caves
+        221,-144: RMCAreaBigredv2Caves
+        221,-145: RMCAreaBigredv2Caves
+        221,-146: RMCAreaBigredv2Caves
+        221,-147: RMCAreaBigredv2Caves
+        221,-148: RMCAreaBigredv2Caves
+        221,-149: RMCAreaBigredv2Caves
+        221,-150: RMCAreaBigredv2Caves
+        221,-151: RMCAreaBigredv2Caves
+        221,-152: RMCAreaBigredv2Caves
+        221,-153: RMCAreaBigredv2Caves
+        221,-154: RMCAreaBigredv2Caves
+        221,-155: RMCAreaBigredv2Caves
+        221,-156: RMCAreaBigredv2Caves
+        221,-157: RMCAreaBigredv2Caves
+        221,-158: RMCAreaBigredv2Caves
+        221,-159: RMCAreaBigredv2Caves
+        221,-160: RMCAreaBigredv2Caves
+        221,-161: RMCAreaBigredv2Caves
+        221,-162: RMCAreaBigredv2Caves
+        221,-163: RMCAreaBigredv2Caves
+        221,-164: RMCAreaBigredv2Caves
+        221,-165: RMCAreaBigredv2Caves
+        221,-166: RMCAreaBigredv2Caves
+        221,-167: RMCAreaBigredv2Caves
+        221,-168: RMCAreaBigredv2Caves
+        221,-169: RMCAreaBigredv2Caves
+        221,-170: RMCAreaBigredv2Caves
+        221,-171: RMCAreaBigredv2Caves
+        221,-172: RMCAreaBigredv2Caves
+        221,-173: RMCAreaBigredv2Caves
+        221,-174: RMCAreaBigredv2Caves
+        221,-175: RMCAreaBigredv2Caves
+        221,-176: RMCAreaBigredv2Caves
+        221,-177: RMCAreaBigredv2Caves
+        221,-178: RMCAreaBigredv2Caves
+        221,-179: RMCAreaBigredv2Caves
+        221,-180: RMCAreaBigredv2Caves
+        221,-181: RMCAreaBigredv2Caves
+        221,-182: RMCAreaBigredv2Caves
+        221,-183: RMCAreaBigredv2Caves
+        221,-184: RMCAreaBigredv2Caves
+        221,-185: RMCAreaBigredv2Caves
+        221,-186: RMCAreaBigredv2Caves
+        221,-187: RMCAreaBigredv2Caves
+        221,-188: RMCAreaBigredv2Caves
+        221,-189: RMCAreaBigredv2Caves
+        221,-190: RMCAreaBigredv2Caves
+        221,-191: RMCAreaBigredv2Caves
+        221,-192: RMCAreaBigredv2Caves
+        221,-193: RMCAreaBigredv2Caves
+        221,-194: RMCAreaBigredv2Caves
+        221,-195: RMCAreaBigredv2Caves
+        221,-196: RMCAreaBigredv2Caves
+        221,-197: RMCAreaBigredv2Caves
+        221,-198: RMCAreaBigredv2Caves
+        221,-199: RMCAreaBigredv2Caves
+        221,-200: RMCAreaBigredv2Caves
+        221,-201: RMCAreaBigredv2Caves
+        221,-202: RMCAreaBigredv2Caves
+        221,-203: RMCAreaBigredv2Caves
+        221,-204: RMCAreaBigredv2Caves
+        221,-205: RMCAreaBigredv2Caves
+        221,-206: RMCAreaBigredv2Caves
+        221,-207: RMCAreaBigredv2Caves
+        221,-208: RMCAreaBigredv2Caves
+        221,-209: RMCAreaBigredv2Caves
         221,-210: RMCAreaSpace
         221,-211: RMCAreaSpace
         221,-212: RMCAreaSpace
         221,-213: RMCAreaSpace
         220,1: RMCAreaSpace
         220,0: RMCAreaSpace
-        220,-105: RMCAreaSpace
-        220,-106: RMCAreaSpace
-        220,-107: RMCAreaSpace
-        220,-108: RMCAreaSpace
-        220,-109: RMCAreaSpace
-        220,-110: RMCAreaSpace
-        220,-111: RMCAreaSpace
-        220,-112: RMCAreaSpace
-        220,-113: RMCAreaSpace
-        220,-114: RMCAreaSpace
-        220,-115: RMCAreaSpace
-        220,-116: RMCAreaSpace
-        220,-117: RMCAreaSpace
-        220,-118: RMCAreaSpace
-        220,-119: RMCAreaSpace
-        220,-120: RMCAreaSpace
-        220,-121: RMCAreaSpace
-        220,-122: RMCAreaSpace
-        220,-123: RMCAreaSpace
-        220,-124: RMCAreaSpace
-        220,-125: RMCAreaSpace
-        220,-126: RMCAreaSpace
-        220,-127: RMCAreaSpace
-        220,-128: RMCAreaSpace
-        220,-129: RMCAreaSpace
-        220,-130: RMCAreaSpace
-        220,-131: RMCAreaSpace
-        220,-132: RMCAreaSpace
-        220,-133: RMCAreaSpace
-        220,-134: RMCAreaSpace
-        220,-135: RMCAreaSpace
-        220,-136: RMCAreaSpace
-        220,-137: RMCAreaSpace
-        220,-138: RMCAreaSpace
-        220,-139: RMCAreaSpace
-        220,-140: RMCAreaSpace
-        220,-141: RMCAreaSpace
-        220,-142: RMCAreaSpace
-        220,-143: RMCAreaSpace
-        220,-144: RMCAreaSpace
-        220,-145: RMCAreaSpace
-        220,-146: RMCAreaSpace
-        220,-147: RMCAreaSpace
-        220,-148: RMCAreaSpace
-        220,-149: RMCAreaSpace
-        220,-150: RMCAreaSpace
-        220,-151: RMCAreaSpace
-        220,-152: RMCAreaSpace
-        220,-153: RMCAreaSpace
-        220,-154: RMCAreaSpace
-        220,-155: RMCAreaSpace
-        220,-156: RMCAreaSpace
-        220,-157: RMCAreaSpace
-        220,-158: RMCAreaSpace
-        220,-159: RMCAreaSpace
-        220,-160: RMCAreaSpace
-        220,-161: RMCAreaSpace
-        220,-162: RMCAreaSpace
-        220,-163: RMCAreaSpace
-        220,-164: RMCAreaSpace
-        220,-165: RMCAreaSpace
-        220,-166: RMCAreaSpace
-        220,-167: RMCAreaSpace
-        220,-168: RMCAreaSpace
-        220,-169: RMCAreaSpace
-        220,-170: RMCAreaSpace
-        220,-171: RMCAreaSpace
-        220,-172: RMCAreaSpace
-        220,-173: RMCAreaSpace
-        220,-174: RMCAreaSpace
-        220,-175: RMCAreaSpace
-        220,-176: RMCAreaSpace
-        220,-177: RMCAreaSpace
-        220,-178: RMCAreaSpace
-        220,-179: RMCAreaSpace
-        220,-180: RMCAreaSpace
-        220,-181: RMCAreaSpace
-        220,-182: RMCAreaSpace
-        220,-183: RMCAreaSpace
-        220,-184: RMCAreaSpace
-        220,-185: RMCAreaSpace
-        220,-186: RMCAreaSpace
-        220,-187: RMCAreaSpace
-        220,-188: RMCAreaSpace
-        220,-189: RMCAreaSpace
-        220,-190: RMCAreaSpace
-        220,-191: RMCAreaSpace
-        220,-192: RMCAreaSpace
-        220,-193: RMCAreaSpace
-        220,-194: RMCAreaSpace
-        220,-195: RMCAreaSpace
-        220,-196: RMCAreaSpace
-        220,-197: RMCAreaSpace
-        220,-198: RMCAreaSpace
-        220,-199: RMCAreaSpace
-        220,-200: RMCAreaSpace
-        220,-201: RMCAreaSpace
-        220,-202: RMCAreaSpace
-        220,-203: RMCAreaSpace
-        220,-204: RMCAreaSpace
-        220,-205: RMCAreaSpace
-        220,-206: RMCAreaSpace
-        220,-207: RMCAreaSpace
-        220,-208: RMCAreaSpace
-        220,-209: RMCAreaSpace
+        220,-105: RMCAreaBigredv2Caves
+        220,-106: RMCAreaBigredv2Caves
+        220,-107: RMCAreaBigredv2Caves
+        220,-108: RMCAreaBigredv2Caves
+        220,-109: RMCAreaBigredv2Caves
+        220,-110: RMCAreaBigredv2Caves
+        220,-111: RMCAreaBigredv2Caves
+        220,-112: RMCAreaBigredv2Caves
+        220,-113: RMCAreaBigredv2Caves
+        220,-114: RMCAreaBigredv2Caves
+        220,-115: RMCAreaBigredv2Caves
+        220,-116: RMCAreaBigredv2Caves
+        220,-117: RMCAreaBigredv2Caves
+        220,-118: RMCAreaBigredv2Caves
+        220,-119: RMCAreaBigredv2Caves
+        220,-120: RMCAreaBigredv2Caves
+        220,-121: RMCAreaBigredv2Caves
+        220,-122: RMCAreaBigredv2Caves
+        220,-123: RMCAreaBigredv2Caves
+        220,-124: RMCAreaBigredv2Caves
+        220,-125: RMCAreaBigredv2Caves
+        220,-126: RMCAreaBigredv2Caves
+        220,-127: RMCAreaBigredv2Caves
+        220,-128: RMCAreaBigredv2Caves
+        220,-129: RMCAreaBigredv2Caves
+        220,-130: RMCAreaBigredv2Caves
+        220,-131: RMCAreaBigredv2Caves
+        220,-132: RMCAreaBigredv2Caves
+        220,-133: RMCAreaBigredv2Caves
+        220,-134: RMCAreaBigredv2Caves
+        220,-135: RMCAreaBigredv2Caves
+        220,-136: RMCAreaBigredv2Caves
+        220,-137: RMCAreaBigredv2Caves
+        220,-138: RMCAreaBigredv2Caves
+        220,-139: RMCAreaBigredv2Caves
+        220,-140: RMCAreaBigredv2Caves
+        220,-141: RMCAreaBigredv2Caves
+        220,-142: RMCAreaBigredv2Caves
+        220,-143: RMCAreaBigredv2Caves
+        220,-144: RMCAreaBigredv2Caves
+        220,-145: RMCAreaBigredv2Caves
+        220,-146: RMCAreaBigredv2Caves
+        220,-147: RMCAreaBigredv2Caves
+        220,-148: RMCAreaBigredv2Caves
+        220,-149: RMCAreaBigredv2Caves
+        220,-150: RMCAreaBigredv2Caves
+        220,-151: RMCAreaBigredv2Caves
+        220,-152: RMCAreaBigredv2Caves
+        220,-153: RMCAreaBigredv2Caves
+        220,-154: RMCAreaBigredv2Caves
+        220,-155: RMCAreaBigredv2Caves
+        220,-156: RMCAreaBigredv2Caves
+        220,-157: RMCAreaBigredv2Caves
+        220,-158: RMCAreaBigredv2Caves
+        220,-159: RMCAreaBigredv2Caves
+        220,-160: RMCAreaBigredv2Caves
+        220,-161: RMCAreaBigredv2Caves
+        220,-162: RMCAreaBigredv2Caves
+        220,-163: RMCAreaBigredv2Caves
+        220,-164: RMCAreaBigredv2Caves
+        220,-165: RMCAreaBigredv2Caves
+        220,-166: RMCAreaBigredv2Caves
+        220,-167: RMCAreaBigredv2Caves
+        220,-168: RMCAreaBigredv2Caves
+        220,-169: RMCAreaBigredv2Caves
+        220,-170: RMCAreaBigredv2Caves
+        220,-171: RMCAreaBigredv2Caves
+        220,-172: RMCAreaBigredv2Caves
+        220,-173: RMCAreaBigredv2Caves
+        220,-174: RMCAreaBigredv2Caves
+        220,-175: RMCAreaBigredv2Caves
+        220,-176: RMCAreaBigredv2Caves
+        220,-177: RMCAreaBigredv2Caves
+        220,-178: RMCAreaBigredv2Caves
+        220,-179: RMCAreaBigredv2Caves
+        220,-180: RMCAreaBigredv2Caves
+        220,-181: RMCAreaBigredv2Caves
+        220,-182: RMCAreaBigredv2Caves
+        220,-183: RMCAreaBigredv2Caves
+        220,-184: RMCAreaBigredv2Caves
+        220,-185: RMCAreaBigredv2Caves
+        220,-186: RMCAreaBigredv2Caves
+        220,-187: RMCAreaBigredv2Caves
+        220,-188: RMCAreaBigredv2Caves
+        220,-189: RMCAreaBigredv2Caves
+        220,-190: RMCAreaBigredv2Caves
+        220,-191: RMCAreaBigredv2Caves
+        220,-192: RMCAreaBigredv2Caves
+        220,-193: RMCAreaBigredv2Caves
+        220,-194: RMCAreaBigredv2Caves
+        220,-195: RMCAreaBigredv2Caves
+        220,-196: RMCAreaBigredv2Caves
+        220,-197: RMCAreaBigredv2Caves
+        220,-198: RMCAreaBigredv2Caves
+        220,-199: RMCAreaBigredv2Caves
+        220,-200: RMCAreaBigredv2Caves
+        220,-201: RMCAreaBigredv2Caves
+        220,-202: RMCAreaBigredv2Caves
+        220,-203: RMCAreaBigredv2Caves
+        220,-204: RMCAreaBigredv2Caves
+        220,-205: RMCAreaBigredv2Caves
+        220,-206: RMCAreaBigredv2Caves
+        220,-207: RMCAreaBigredv2Caves
+        220,-208: RMCAreaBigredv2Caves
+        220,-209: RMCAreaBigredv2Caves
         220,-210: RMCAreaSpace
         220,-211: RMCAreaSpace
         220,-212: RMCAreaSpace
         220,-213: RMCAreaSpace
         219,1: RMCAreaSpace
         219,0: RMCAreaSpace
-        219,-105: RMCAreaSpace
-        219,-106: RMCAreaSpace
-        219,-107: RMCAreaSpace
-        219,-108: RMCAreaSpace
-        219,-109: RMCAreaSpace
-        219,-110: RMCAreaSpace
-        219,-111: RMCAreaSpace
-        219,-112: RMCAreaSpace
-        219,-113: RMCAreaSpace
-        219,-114: RMCAreaSpace
-        219,-115: RMCAreaSpace
-        219,-116: RMCAreaSpace
-        219,-117: RMCAreaSpace
-        219,-118: RMCAreaSpace
-        219,-119: RMCAreaSpace
-        219,-120: RMCAreaSpace
-        219,-121: RMCAreaSpace
-        219,-122: RMCAreaSpace
-        219,-123: RMCAreaSpace
-        219,-124: RMCAreaSpace
-        219,-125: RMCAreaSpace
-        219,-126: RMCAreaSpace
-        219,-127: RMCAreaSpace
-        219,-128: RMCAreaSpace
-        219,-129: RMCAreaSpace
-        219,-130: RMCAreaSpace
-        219,-131: RMCAreaSpace
-        219,-132: RMCAreaSpace
-        219,-133: RMCAreaSpace
-        219,-134: RMCAreaSpace
-        219,-135: RMCAreaSpace
-        219,-136: RMCAreaSpace
-        219,-137: RMCAreaSpace
-        219,-138: RMCAreaSpace
-        219,-139: RMCAreaSpace
-        219,-140: RMCAreaSpace
-        219,-141: RMCAreaSpace
-        219,-142: RMCAreaSpace
-        219,-143: RMCAreaSpace
-        219,-144: RMCAreaSpace
-        219,-145: RMCAreaSpace
-        219,-146: RMCAreaSpace
-        219,-147: RMCAreaSpace
-        219,-148: RMCAreaSpace
-        219,-149: RMCAreaSpace
-        219,-150: RMCAreaSpace
-        219,-151: RMCAreaSpace
-        219,-152: RMCAreaSpace
-        219,-153: RMCAreaSpace
-        219,-154: RMCAreaSpace
-        219,-155: RMCAreaSpace
-        219,-156: RMCAreaSpace
-        219,-157: RMCAreaSpace
-        219,-158: RMCAreaSpace
-        219,-159: RMCAreaSpace
-        219,-160: RMCAreaSpace
-        219,-161: RMCAreaSpace
-        219,-162: RMCAreaSpace
-        219,-163: RMCAreaSpace
-        219,-164: RMCAreaSpace
-        219,-165: RMCAreaSpace
-        219,-166: RMCAreaSpace
-        219,-167: RMCAreaSpace
-        219,-168: RMCAreaSpace
-        219,-169: RMCAreaSpace
-        219,-170: RMCAreaSpace
-        219,-171: RMCAreaSpace
-        219,-172: RMCAreaSpace
-        219,-173: RMCAreaSpace
-        219,-174: RMCAreaSpace
-        219,-175: RMCAreaSpace
-        219,-176: RMCAreaSpace
-        219,-177: RMCAreaSpace
-        219,-178: RMCAreaSpace
-        219,-179: RMCAreaSpace
-        219,-180: RMCAreaSpace
-        219,-181: RMCAreaSpace
-        219,-182: RMCAreaSpace
-        219,-183: RMCAreaSpace
-        219,-184: RMCAreaSpace
-        219,-185: RMCAreaSpace
-        219,-186: RMCAreaSpace
-        219,-187: RMCAreaSpace
-        219,-188: RMCAreaSpace
-        219,-189: RMCAreaSpace
-        219,-190: RMCAreaSpace
-        219,-191: RMCAreaSpace
-        219,-192: RMCAreaSpace
-        219,-193: RMCAreaSpace
-        219,-194: RMCAreaSpace
-        219,-195: RMCAreaSpace
-        219,-196: RMCAreaSpace
-        219,-197: RMCAreaSpace
-        219,-198: RMCAreaSpace
-        219,-199: RMCAreaSpace
-        219,-200: RMCAreaSpace
-        219,-201: RMCAreaSpace
-        219,-202: RMCAreaSpace
-        219,-203: RMCAreaSpace
-        219,-204: RMCAreaSpace
-        219,-205: RMCAreaSpace
-        219,-206: RMCAreaSpace
-        219,-207: RMCAreaSpace
-        219,-208: RMCAreaSpace
-        219,-209: RMCAreaSpace
+        219,-105: RMCAreaBigredv2Caves
+        219,-106: RMCAreaBigredv2Caves
+        219,-107: RMCAreaBigredv2Caves
+        219,-108: RMCAreaBigredv2Caves
+        219,-109: RMCAreaBigredv2Caves
+        219,-110: RMCAreaBigredv2Caves
+        219,-111: RMCAreaBigredv2Caves
+        219,-112: RMCAreaBigredv2Caves
+        219,-113: RMCAreaBigredv2Caves
+        219,-114: RMCAreaBigredv2Caves
+        219,-115: RMCAreaBigredv2Caves
+        219,-116: RMCAreaBigredv2Caves
+        219,-117: RMCAreaBigredv2Caves
+        219,-118: RMCAreaBigredv2Caves
+        219,-119: RMCAreaBigredv2Caves
+        219,-120: RMCAreaBigredv2Caves
+        219,-121: RMCAreaBigredv2Caves
+        219,-122: RMCAreaBigredv2Caves
+        219,-123: RMCAreaBigredv2Caves
+        219,-124: RMCAreaBigredv2Caves
+        219,-125: RMCAreaBigredv2Caves
+        219,-126: RMCAreaBigredv2Caves
+        219,-127: RMCAreaBigredv2Caves
+        219,-128: RMCAreaBigredv2Caves
+        219,-129: RMCAreaBigredv2Caves
+        219,-130: RMCAreaBigredv2Caves
+        219,-131: RMCAreaBigredv2Caves
+        219,-132: RMCAreaBigredv2Caves
+        219,-133: RMCAreaBigredv2Caves
+        219,-134: RMCAreaBigredv2Caves
+        219,-135: RMCAreaBigredv2Caves
+        219,-136: RMCAreaBigredv2Caves
+        219,-137: RMCAreaBigredv2Caves
+        219,-138: RMCAreaBigredv2Caves
+        219,-139: RMCAreaBigredv2Caves
+        219,-140: RMCAreaBigredv2Caves
+        219,-141: RMCAreaBigredv2Caves
+        219,-142: RMCAreaBigredv2Caves
+        219,-143: RMCAreaBigredv2Caves
+        219,-144: RMCAreaBigredv2Caves
+        219,-145: RMCAreaBigredv2Caves
+        219,-146: RMCAreaBigredv2Caves
+        219,-147: RMCAreaBigredv2Caves
+        219,-148: RMCAreaBigredv2Caves
+        219,-149: RMCAreaBigredv2Caves
+        219,-150: RMCAreaBigredv2Caves
+        219,-151: RMCAreaBigredv2Caves
+        219,-152: RMCAreaBigredv2Caves
+        219,-153: RMCAreaBigredv2Caves
+        219,-154: RMCAreaBigredv2Caves
+        219,-155: RMCAreaBigredv2Caves
+        219,-156: RMCAreaBigredv2Caves
+        219,-157: RMCAreaBigredv2Caves
+        219,-158: RMCAreaBigredv2Caves
+        219,-159: RMCAreaBigredv2Caves
+        219,-160: RMCAreaBigredv2Caves
+        219,-161: RMCAreaBigredv2Caves
+        219,-162: RMCAreaBigredv2Caves
+        219,-163: RMCAreaBigredv2Caves
+        219,-164: RMCAreaBigredv2Caves
+        219,-165: RMCAreaBigredv2Caves
+        219,-166: RMCAreaBigredv2Caves
+        219,-167: RMCAreaBigredv2Caves
+        219,-168: RMCAreaBigredv2Caves
+        219,-169: RMCAreaBigredv2Caves
+        219,-170: RMCAreaBigredv2Caves
+        219,-171: RMCAreaBigredv2Caves
+        219,-172: RMCAreaBigredv2Caves
+        219,-173: RMCAreaBigredv2Caves
+        219,-174: RMCAreaBigredv2Caves
+        219,-175: RMCAreaBigredv2Caves
+        219,-176: RMCAreaBigredv2Caves
+        219,-177: RMCAreaBigredv2Caves
+        219,-178: RMCAreaBigredv2Caves
+        219,-179: RMCAreaBigredv2Caves
+        219,-180: RMCAreaBigredv2Caves
+        219,-181: RMCAreaBigredv2Caves
+        219,-182: RMCAreaBigredv2Caves
+        219,-183: RMCAreaBigredv2Caves
+        219,-184: RMCAreaBigredv2Caves
+        219,-185: RMCAreaBigredv2Caves
+        219,-186: RMCAreaBigredv2Caves
+        219,-187: RMCAreaBigredv2Caves
+        219,-188: RMCAreaBigredv2Caves
+        219,-189: RMCAreaBigredv2Caves
+        219,-190: RMCAreaBigredv2Caves
+        219,-191: RMCAreaBigredv2Caves
+        219,-192: RMCAreaBigredv2Caves
+        219,-193: RMCAreaBigredv2Caves
+        219,-194: RMCAreaBigredv2Caves
+        219,-195: RMCAreaBigredv2Caves
+        219,-196: RMCAreaBigredv2Caves
+        219,-197: RMCAreaBigredv2Caves
+        219,-198: RMCAreaBigredv2Caves
+        219,-199: RMCAreaBigredv2Caves
+        219,-200: RMCAreaBigredv2Caves
+        219,-201: RMCAreaBigredv2Caves
+        219,-202: RMCAreaBigredv2Caves
+        219,-203: RMCAreaBigredv2Caves
+        219,-204: RMCAreaBigredv2Caves
+        219,-205: RMCAreaBigredv2Caves
+        219,-206: RMCAreaBigredv2Caves
+        219,-207: RMCAreaBigredv2Caves
+        219,-208: RMCAreaBigredv2Caves
+        219,-209: RMCAreaBigredv2Caves
         219,-210: RMCAreaSpace
         219,-211: RMCAreaSpace
         219,-212: RMCAreaSpace
         219,-213: RMCAreaSpace
         218,1: RMCAreaSpace
         218,0: RMCAreaSpace
-        218,-105: RMCAreaSpace
-        218,-106: RMCAreaSpace
-        218,-107: RMCAreaSpace
-        218,-108: RMCAreaSpace
-        218,-109: RMCAreaSpace
-        218,-110: RMCAreaSpace
-        218,-111: RMCAreaSpace
-        218,-112: RMCAreaSpace
-        218,-113: RMCAreaSpace
-        218,-114: RMCAreaSpace
-        218,-115: RMCAreaSpace
-        218,-116: RMCAreaSpace
-        218,-117: RMCAreaSpace
-        218,-118: RMCAreaSpace
-        218,-119: RMCAreaSpace
-        218,-120: RMCAreaSpace
-        218,-121: RMCAreaSpace
-        218,-122: RMCAreaSpace
-        218,-123: RMCAreaSpace
-        218,-124: RMCAreaSpace
-        218,-125: RMCAreaSpace
-        218,-126: RMCAreaSpace
-        218,-127: RMCAreaSpace
-        218,-128: RMCAreaSpace
-        218,-129: RMCAreaSpace
-        218,-130: RMCAreaSpace
-        218,-131: RMCAreaSpace
-        218,-132: RMCAreaSpace
-        218,-133: RMCAreaSpace
-        218,-134: RMCAreaSpace
-        218,-135: RMCAreaSpace
-        218,-136: RMCAreaSpace
-        218,-137: RMCAreaSpace
-        218,-138: RMCAreaSpace
-        218,-139: RMCAreaSpace
-        218,-140: RMCAreaSpace
-        218,-141: RMCAreaSpace
-        218,-142: RMCAreaSpace
-        218,-143: RMCAreaSpace
-        218,-144: RMCAreaSpace
-        218,-145: RMCAreaSpace
-        218,-146: RMCAreaSpace
-        218,-147: RMCAreaSpace
-        218,-148: RMCAreaSpace
-        218,-149: RMCAreaSpace
-        218,-150: RMCAreaSpace
-        218,-151: RMCAreaSpace
-        218,-152: RMCAreaSpace
-        218,-153: RMCAreaSpace
-        218,-154: RMCAreaSpace
-        218,-155: RMCAreaSpace
-        218,-156: RMCAreaSpace
-        218,-157: RMCAreaSpace
-        218,-158: RMCAreaSpace
-        218,-159: RMCAreaSpace
-        218,-160: RMCAreaSpace
-        218,-161: RMCAreaSpace
-        218,-162: RMCAreaSpace
-        218,-163: RMCAreaSpace
-        218,-164: RMCAreaSpace
-        218,-165: RMCAreaSpace
-        218,-166: RMCAreaSpace
-        218,-167: RMCAreaSpace
-        218,-168: RMCAreaSpace
-        218,-169: RMCAreaSpace
-        218,-170: RMCAreaSpace
-        218,-171: RMCAreaSpace
-        218,-172: RMCAreaSpace
-        218,-173: RMCAreaSpace
-        218,-174: RMCAreaSpace
-        218,-175: RMCAreaSpace
-        218,-176: RMCAreaSpace
-        218,-177: RMCAreaSpace
-        218,-178: RMCAreaSpace
-        218,-179: RMCAreaSpace
-        218,-180: RMCAreaSpace
-        218,-181: RMCAreaSpace
-        218,-182: RMCAreaSpace
-        218,-183: RMCAreaSpace
-        218,-184: RMCAreaSpace
-        218,-185: RMCAreaSpace
-        218,-186: RMCAreaSpace
-        218,-187: RMCAreaSpace
-        218,-188: RMCAreaSpace
-        218,-189: RMCAreaSpace
-        218,-190: RMCAreaSpace
-        218,-191: RMCAreaSpace
-        218,-192: RMCAreaSpace
-        218,-193: RMCAreaSpace
-        218,-194: RMCAreaSpace
-        218,-195: RMCAreaSpace
-        218,-196: RMCAreaSpace
-        218,-197: RMCAreaSpace
-        218,-198: RMCAreaSpace
-        218,-199: RMCAreaSpace
-        218,-200: RMCAreaSpace
-        218,-201: RMCAreaSpace
-        218,-202: RMCAreaSpace
-        218,-203: RMCAreaSpace
-        218,-204: RMCAreaSpace
-        218,-205: RMCAreaSpace
-        218,-206: RMCAreaSpace
-        218,-207: RMCAreaSpace
-        218,-208: RMCAreaSpace
-        218,-209: RMCAreaSpace
+        218,-105: RMCAreaBigredv2Caves
+        218,-106: RMCAreaBigredv2Caves
+        218,-107: RMCAreaBigredv2Caves
+        218,-108: RMCAreaBigredv2Caves
+        218,-109: RMCAreaBigredv2Caves
+        218,-110: RMCAreaBigredv2Caves
+        218,-111: RMCAreaBigredv2Caves
+        218,-112: RMCAreaBigredv2Caves
+        218,-113: RMCAreaBigredv2Caves
+        218,-114: RMCAreaBigredv2Caves
+        218,-115: RMCAreaBigredv2Caves
+        218,-116: RMCAreaBigredv2Caves
+        218,-117: RMCAreaBigredv2Caves
+        218,-118: RMCAreaBigredv2Caves
+        218,-119: RMCAreaBigredv2Caves
+        218,-120: RMCAreaBigredv2Caves
+        218,-121: RMCAreaBigredv2Caves
+        218,-122: RMCAreaBigredv2Caves
+        218,-123: RMCAreaBigredv2Caves
+        218,-124: RMCAreaBigredv2Caves
+        218,-125: RMCAreaBigredv2Caves
+        218,-126: RMCAreaBigredv2Caves
+        218,-127: RMCAreaBigredv2Caves
+        218,-128: RMCAreaBigredv2Caves
+        218,-129: RMCAreaBigredv2Caves
+        218,-130: RMCAreaBigredv2Caves
+        218,-131: RMCAreaBigredv2Caves
+        218,-132: RMCAreaBigredv2Caves
+        218,-133: RMCAreaBigredv2Caves
+        218,-134: RMCAreaBigredv2Caves
+        218,-135: RMCAreaBigredv2Caves
+        218,-136: RMCAreaBigredv2Caves
+        218,-137: RMCAreaBigredv2Caves
+        218,-138: RMCAreaBigredv2Caves
+        218,-139: RMCAreaBigredv2Caves
+        218,-140: RMCAreaBigredv2Caves
+        218,-141: RMCAreaBigredv2Caves
+        218,-142: RMCAreaBigredv2Caves
+        218,-143: RMCAreaBigredv2Caves
+        218,-144: RMCAreaBigredv2Caves
+        218,-145: RMCAreaBigredv2Caves
+        218,-146: RMCAreaBigredv2Caves
+        218,-147: RMCAreaBigredv2Caves
+        218,-148: RMCAreaBigredv2Caves
+        218,-149: RMCAreaBigredv2Caves
+        218,-150: RMCAreaBigredv2Caves
+        218,-151: RMCAreaBigredv2Caves
+        218,-152: RMCAreaBigredv2Caves
+        218,-153: RMCAreaBigredv2Caves
+        218,-154: RMCAreaBigredv2Caves
+        218,-155: RMCAreaBigredv2Caves
+        218,-156: RMCAreaBigredv2Caves
+        218,-157: RMCAreaBigredv2Caves
+        218,-158: RMCAreaBigredv2Caves
+        218,-159: RMCAreaBigredv2Caves
+        218,-160: RMCAreaBigredv2Caves
+        218,-161: RMCAreaBigredv2Caves
+        218,-162: RMCAreaBigredv2Caves
+        218,-163: RMCAreaBigredv2Caves
+        218,-164: RMCAreaBigredv2Caves
+        218,-165: RMCAreaBigredv2Caves
+        218,-166: RMCAreaBigredv2Caves
+        218,-167: RMCAreaBigredv2Caves
+        218,-168: RMCAreaBigredv2Caves
+        218,-169: RMCAreaBigredv2Caves
+        218,-170: RMCAreaBigredv2Caves
+        218,-171: RMCAreaBigredv2Caves
+        218,-172: RMCAreaBigredv2Caves
+        218,-173: RMCAreaBigredv2Caves
+        218,-174: RMCAreaBigredv2Caves
+        218,-175: RMCAreaBigredv2Caves
+        218,-176: RMCAreaBigredv2Caves
+        218,-177: RMCAreaBigredv2Caves
+        218,-178: RMCAreaBigredv2Caves
+        218,-179: RMCAreaBigredv2Caves
+        218,-180: RMCAreaBigredv2Caves
+        218,-181: RMCAreaBigredv2Caves
+        218,-182: RMCAreaBigredv2Caves
+        218,-183: RMCAreaBigredv2Caves
+        218,-184: RMCAreaBigredv2Caves
+        218,-185: RMCAreaBigredv2Caves
+        218,-186: RMCAreaBigredv2Caves
+        218,-187: RMCAreaBigredv2Caves
+        218,-188: RMCAreaBigredv2Caves
+        218,-189: RMCAreaBigredv2Caves
+        218,-190: RMCAreaBigredv2Caves
+        218,-191: RMCAreaBigredv2Caves
+        218,-192: RMCAreaBigredv2Caves
+        218,-193: RMCAreaBigredv2Caves
+        218,-194: RMCAreaBigredv2Caves
+        218,-195: RMCAreaBigredv2Caves
+        218,-196: RMCAreaBigredv2Caves
+        218,-197: RMCAreaBigredv2Caves
+        218,-198: RMCAreaBigredv2Caves
+        218,-199: RMCAreaBigredv2Caves
+        218,-200: RMCAreaBigredv2Caves
+        218,-201: RMCAreaBigredv2Caves
+        218,-202: RMCAreaBigredv2Caves
+        218,-203: RMCAreaBigredv2Caves
+        218,-204: RMCAreaBigredv2Caves
+        218,-205: RMCAreaBigredv2Caves
+        218,-206: RMCAreaBigredv2Caves
+        218,-207: RMCAreaBigredv2Caves
+        218,-208: RMCAreaBigredv2Caves
+        218,-209: RMCAreaBigredv2Caves
         218,-210: RMCAreaSpace
         218,-211: RMCAreaSpace
         218,-212: RMCAreaSpace
         218,-213: RMCAreaSpace
         217,1: RMCAreaSpace
         217,0: RMCAreaSpace
-        217,-105: RMCAreaSpace
-        217,-106: RMCAreaSpace
-        217,-107: RMCAreaSpace
-        217,-108: RMCAreaSpace
-        217,-109: RMCAreaSpace
-        217,-110: RMCAreaSpace
-        217,-111: RMCAreaSpace
-        217,-112: RMCAreaSpace
-        217,-113: RMCAreaSpace
-        217,-114: RMCAreaSpace
-        217,-115: RMCAreaSpace
-        217,-116: RMCAreaSpace
-        217,-117: RMCAreaSpace
-        217,-118: RMCAreaSpace
-        217,-119: RMCAreaSpace
-        217,-120: RMCAreaSpace
-        217,-121: RMCAreaSpace
-        217,-122: RMCAreaSpace
-        217,-123: RMCAreaSpace
-        217,-124: RMCAreaSpace
-        217,-125: RMCAreaSpace
-        217,-126: RMCAreaSpace
-        217,-127: RMCAreaSpace
-        217,-128: RMCAreaSpace
-        217,-129: RMCAreaSpace
-        217,-130: RMCAreaSpace
-        217,-131: RMCAreaSpace
-        217,-132: RMCAreaSpace
-        217,-133: RMCAreaSpace
-        217,-134: RMCAreaSpace
-        217,-135: RMCAreaSpace
-        217,-136: RMCAreaSpace
-        217,-137: RMCAreaSpace
-        217,-138: RMCAreaSpace
-        217,-139: RMCAreaSpace
-        217,-140: RMCAreaSpace
-        217,-141: RMCAreaSpace
-        217,-142: RMCAreaSpace
-        217,-143: RMCAreaSpace
-        217,-144: RMCAreaSpace
-        217,-145: RMCAreaSpace
-        217,-146: RMCAreaSpace
-        217,-147: RMCAreaSpace
-        217,-148: RMCAreaSpace
-        217,-149: RMCAreaSpace
-        217,-150: RMCAreaSpace
-        217,-151: RMCAreaSpace
-        217,-152: RMCAreaSpace
-        217,-153: RMCAreaSpace
-        217,-154: RMCAreaSpace
-        217,-155: RMCAreaSpace
-        217,-156: RMCAreaSpace
-        217,-157: RMCAreaSpace
-        217,-158: RMCAreaSpace
-        217,-159: RMCAreaSpace
-        217,-160: RMCAreaSpace
-        217,-161: RMCAreaSpace
-        217,-162: RMCAreaSpace
-        217,-163: RMCAreaSpace
-        217,-164: RMCAreaSpace
-        217,-165: RMCAreaSpace
-        217,-166: RMCAreaSpace
-        217,-167: RMCAreaSpace
-        217,-168: RMCAreaSpace
-        217,-169: RMCAreaSpace
-        217,-170: RMCAreaSpace
-        217,-171: RMCAreaSpace
-        217,-172: RMCAreaSpace
-        217,-173: RMCAreaSpace
-        217,-174: RMCAreaSpace
-        217,-175: RMCAreaSpace
-        217,-176: RMCAreaSpace
-        217,-177: RMCAreaSpace
-        217,-178: RMCAreaSpace
-        217,-179: RMCAreaSpace
-        217,-180: RMCAreaSpace
-        217,-181: RMCAreaSpace
-        217,-182: RMCAreaSpace
-        217,-183: RMCAreaSpace
-        217,-184: RMCAreaSpace
-        217,-185: RMCAreaSpace
-        217,-186: RMCAreaSpace
-        217,-187: RMCAreaSpace
-        217,-188: RMCAreaSpace
-        217,-189: RMCAreaSpace
-        217,-190: RMCAreaSpace
-        217,-191: RMCAreaSpace
-        217,-192: RMCAreaSpace
-        217,-193: RMCAreaSpace
-        217,-194: RMCAreaSpace
-        217,-195: RMCAreaSpace
-        217,-196: RMCAreaSpace
-        217,-197: RMCAreaSpace
-        217,-198: RMCAreaSpace
-        217,-199: RMCAreaSpace
-        217,-200: RMCAreaSpace
-        217,-201: RMCAreaSpace
-        217,-202: RMCAreaSpace
-        217,-203: RMCAreaSpace
-        217,-204: RMCAreaSpace
-        217,-205: RMCAreaSpace
-        217,-206: RMCAreaSpace
-        217,-207: RMCAreaSpace
-        217,-208: RMCAreaSpace
-        217,-209: RMCAreaSpace
+        217,-105: RMCAreaBigredv2Caves
+        217,-106: RMCAreaBigredv2Caves
+        217,-107: RMCAreaBigredv2Caves
+        217,-108: RMCAreaBigredv2Caves
+        217,-109: RMCAreaBigredv2Caves
+        217,-110: RMCAreaBigredv2Caves
+        217,-111: RMCAreaBigredv2Caves
+        217,-112: RMCAreaBigredv2Caves
+        217,-113: RMCAreaBigredv2Caves
+        217,-114: RMCAreaBigredv2Caves
+        217,-115: RMCAreaBigredv2Caves
+        217,-116: RMCAreaBigredv2Caves
+        217,-117: RMCAreaBigredv2Caves
+        217,-118: RMCAreaBigredv2Caves
+        217,-119: RMCAreaBigredv2Caves
+        217,-120: RMCAreaBigredv2Caves
+        217,-121: RMCAreaBigredv2Caves
+        217,-122: RMCAreaBigredv2Caves
+        217,-123: RMCAreaBigredv2Caves
+        217,-124: RMCAreaBigredv2Caves
+        217,-125: RMCAreaBigredv2Caves
+        217,-126: RMCAreaBigredv2Caves
+        217,-127: RMCAreaBigredv2Caves
+        217,-128: RMCAreaBigredv2Caves
+        217,-129: RMCAreaBigredv2Caves
+        217,-130: RMCAreaBigredv2Caves
+        217,-131: RMCAreaBigredv2Caves
+        217,-132: RMCAreaBigredv2Caves
+        217,-133: RMCAreaBigredv2Caves
+        217,-134: RMCAreaBigredv2Caves
+        217,-135: RMCAreaBigredv2Caves
+        217,-136: RMCAreaBigredv2Caves
+        217,-137: RMCAreaBigredv2Caves
+        217,-138: RMCAreaBigredv2Caves
+        217,-139: RMCAreaBigredv2Caves
+        217,-140: RMCAreaBigredv2Caves
+        217,-141: RMCAreaBigredv2Caves
+        217,-142: RMCAreaBigredv2Caves
+        217,-143: RMCAreaBigredv2Caves
+        217,-144: RMCAreaBigredv2Caves
+        217,-145: RMCAreaBigredv2Caves
+        217,-146: RMCAreaBigredv2Caves
+        217,-147: RMCAreaBigredv2Caves
+        217,-148: RMCAreaBigredv2Caves
+        217,-149: RMCAreaBigredv2Caves
+        217,-150: RMCAreaBigredv2Caves
+        217,-151: RMCAreaBigredv2Caves
+        217,-152: RMCAreaBigredv2Caves
+        217,-153: RMCAreaBigredv2Caves
+        217,-154: RMCAreaBigredv2Caves
+        217,-155: RMCAreaBigredv2Caves
+        217,-156: RMCAreaBigredv2Caves
+        217,-157: RMCAreaBigredv2Caves
+        217,-158: RMCAreaBigredv2Caves
+        217,-159: RMCAreaBigredv2Caves
+        217,-160: RMCAreaBigredv2Caves
+        217,-161: RMCAreaBigredv2Caves
+        217,-162: RMCAreaBigredv2Caves
+        217,-163: RMCAreaBigredv2Caves
+        217,-164: RMCAreaBigredv2Caves
+        217,-165: RMCAreaBigredv2Caves
+        217,-166: RMCAreaBigredv2Caves
+        217,-167: RMCAreaBigredv2Caves
+        217,-168: RMCAreaBigredv2Caves
+        217,-169: RMCAreaBigredv2Caves
+        217,-170: RMCAreaBigredv2Caves
+        217,-171: RMCAreaBigredv2Caves
+        217,-172: RMCAreaBigredv2Caves
+        217,-173: RMCAreaBigredv2Caves
+        217,-174: RMCAreaBigredv2Caves
+        217,-175: RMCAreaBigredv2Caves
+        217,-176: RMCAreaBigredv2Caves
+        217,-177: RMCAreaBigredv2Caves
+        217,-178: RMCAreaBigredv2Caves
+        217,-179: RMCAreaBigredv2Caves
+        217,-180: RMCAreaBigredv2Caves
+        217,-181: RMCAreaBigredv2Caves
+        217,-182: RMCAreaBigredv2Caves
+        217,-183: RMCAreaBigredv2Caves
+        217,-184: RMCAreaBigredv2Caves
+        217,-185: RMCAreaBigredv2Caves
+        217,-186: RMCAreaBigredv2Caves
+        217,-187: RMCAreaBigredv2Caves
+        217,-188: RMCAreaBigredv2Caves
+        217,-189: RMCAreaBigredv2Caves
+        217,-190: RMCAreaBigredv2Caves
+        217,-191: RMCAreaBigredv2Caves
+        217,-192: RMCAreaBigredv2Caves
+        217,-193: RMCAreaBigredv2Caves
+        217,-194: RMCAreaBigredv2Caves
+        217,-195: RMCAreaBigredv2Caves
+        217,-196: RMCAreaBigredv2Caves
+        217,-197: RMCAreaBigredv2Caves
+        217,-198: RMCAreaBigredv2Caves
+        217,-199: RMCAreaBigredv2Caves
+        217,-200: RMCAreaBigredv2Caves
+        217,-201: RMCAreaBigredv2Caves
+        217,-202: RMCAreaBigredv2Caves
+        217,-203: RMCAreaBigredv2Caves
+        217,-204: RMCAreaBigredv2Caves
+        217,-205: RMCAreaBigredv2Caves
+        217,-206: RMCAreaBigredv2Caves
+        217,-207: RMCAreaBigredv2Caves
+        217,-208: RMCAreaBigredv2Caves
+        217,-209: RMCAreaBigredv2Caves
         217,-210: RMCAreaSpace
         217,-211: RMCAreaSpace
         217,-212: RMCAreaSpace
         217,-213: RMCAreaSpace
         216,1: RMCAreaSpace
         216,0: RMCAreaSpace
-        216,-105: RMCAreaSpace
-        216,-106: RMCAreaSpace
-        216,-107: RMCAreaSpace
-        216,-108: RMCAreaSpace
-        216,-109: RMCAreaSpace
-        216,-110: RMCAreaSpace
-        216,-111: RMCAreaSpace
-        216,-112: RMCAreaSpace
-        216,-113: RMCAreaSpace
-        216,-114: RMCAreaSpace
-        216,-115: RMCAreaSpace
-        216,-116: RMCAreaSpace
-        216,-117: RMCAreaSpace
-        216,-118: RMCAreaSpace
-        216,-119: RMCAreaSpace
-        216,-120: RMCAreaSpace
-        216,-121: RMCAreaSpace
-        216,-122: RMCAreaSpace
-        216,-123: RMCAreaSpace
-        216,-124: RMCAreaSpace
-        216,-125: RMCAreaSpace
-        216,-126: RMCAreaSpace
-        216,-127: RMCAreaSpace
-        216,-128: RMCAreaSpace
-        216,-129: RMCAreaSpace
-        216,-130: RMCAreaSpace
-        216,-131: RMCAreaSpace
-        216,-132: RMCAreaSpace
-        216,-133: RMCAreaSpace
-        216,-134: RMCAreaSpace
-        216,-135: RMCAreaSpace
-        216,-136: RMCAreaSpace
-        216,-137: RMCAreaSpace
-        216,-138: RMCAreaSpace
-        216,-139: RMCAreaSpace
-        216,-140: RMCAreaSpace
-        216,-141: RMCAreaSpace
-        216,-142: RMCAreaSpace
-        216,-143: RMCAreaSpace
-        216,-144: RMCAreaSpace
-        216,-145: RMCAreaSpace
-        216,-146: RMCAreaSpace
-        216,-147: RMCAreaSpace
-        216,-148: RMCAreaSpace
-        216,-149: RMCAreaSpace
-        216,-150: RMCAreaSpace
-        216,-151: RMCAreaSpace
-        216,-152: RMCAreaSpace
-        216,-153: RMCAreaSpace
-        216,-154: RMCAreaSpace
-        216,-155: RMCAreaSpace
-        216,-156: RMCAreaSpace
-        216,-157: RMCAreaSpace
-        216,-158: RMCAreaSpace
-        216,-159: RMCAreaSpace
-        216,-160: RMCAreaSpace
-        216,-161: RMCAreaSpace
-        216,-162: RMCAreaSpace
-        216,-163: RMCAreaSpace
-        216,-164: RMCAreaSpace
-        216,-165: RMCAreaSpace
-        216,-166: RMCAreaSpace
-        216,-167: RMCAreaSpace
-        216,-168: RMCAreaSpace
-        216,-169: RMCAreaSpace
-        216,-170: RMCAreaSpace
-        216,-171: RMCAreaSpace
-        216,-172: RMCAreaSpace
-        216,-173: RMCAreaSpace
-        216,-174: RMCAreaSpace
-        216,-175: RMCAreaSpace
-        216,-176: RMCAreaSpace
-        216,-177: RMCAreaSpace
-        216,-178: RMCAreaSpace
-        216,-179: RMCAreaSpace
-        216,-180: RMCAreaSpace
-        216,-181: RMCAreaSpace
-        216,-182: RMCAreaSpace
-        216,-183: RMCAreaSpace
-        216,-184: RMCAreaSpace
-        216,-185: RMCAreaSpace
-        216,-186: RMCAreaSpace
-        216,-187: RMCAreaSpace
-        216,-188: RMCAreaSpace
-        216,-189: RMCAreaSpace
-        216,-190: RMCAreaSpace
-        216,-191: RMCAreaSpace
-        216,-192: RMCAreaSpace
-        216,-193: RMCAreaSpace
-        216,-194: RMCAreaSpace
-        216,-195: RMCAreaSpace
-        216,-196: RMCAreaSpace
-        216,-197: RMCAreaSpace
-        216,-198: RMCAreaSpace
-        216,-199: RMCAreaSpace
-        216,-200: RMCAreaSpace
-        216,-201: RMCAreaSpace
-        216,-202: RMCAreaSpace
-        216,-203: RMCAreaSpace
-        216,-204: RMCAreaSpace
-        216,-205: RMCAreaSpace
-        216,-206: RMCAreaSpace
-        216,-207: RMCAreaSpace
-        216,-208: RMCAreaSpace
-        216,-209: RMCAreaSpace
+        216,-105: RMCAreaBigredv2Caves
+        216,-106: RMCAreaBigredv2Caves
+        216,-107: RMCAreaBigredv2Caves
+        216,-108: RMCAreaBigredv2Caves
+        216,-109: RMCAreaBigredv2Caves
+        216,-110: RMCAreaBigredv2Caves
+        216,-111: RMCAreaBigredv2Caves
+        216,-112: RMCAreaBigredv2Caves
+        216,-113: RMCAreaBigredv2Caves
+        216,-114: RMCAreaBigredv2Caves
+        216,-115: RMCAreaBigredv2Caves
+        216,-116: RMCAreaBigredv2Caves
+        216,-117: RMCAreaBigredv2Caves
+        216,-118: RMCAreaBigredv2Caves
+        216,-119: RMCAreaBigredv2Caves
+        216,-120: RMCAreaBigredv2Caves
+        216,-121: RMCAreaBigredv2Caves
+        216,-122: RMCAreaBigredv2Caves
+        216,-123: RMCAreaBigredv2Caves
+        216,-124: RMCAreaBigredv2Caves
+        216,-125: RMCAreaBigredv2Caves
+        216,-126: RMCAreaBigredv2Caves
+        216,-127: RMCAreaBigredv2Caves
+        216,-128: RMCAreaBigredv2Caves
+        216,-129: RMCAreaBigredv2Caves
+        216,-130: RMCAreaBigredv2Caves
+        216,-131: RMCAreaBigredv2Caves
+        216,-132: RMCAreaBigredv2Caves
+        216,-133: RMCAreaBigredv2Caves
+        216,-134: RMCAreaBigredv2Caves
+        216,-135: RMCAreaBigredv2Caves
+        216,-136: RMCAreaBigredv2Caves
+        216,-137: RMCAreaBigredv2Caves
+        216,-138: RMCAreaBigredv2Caves
+        216,-139: RMCAreaBigredv2Caves
+        216,-140: RMCAreaBigredv2Caves
+        216,-141: RMCAreaBigredv2Caves
+        216,-142: RMCAreaBigredv2Caves
+        216,-143: RMCAreaBigredv2Caves
+        216,-144: RMCAreaBigredv2Caves
+        216,-145: RMCAreaBigredv2Caves
+        216,-146: RMCAreaBigredv2Caves
+        216,-147: RMCAreaBigredv2Caves
+        216,-148: RMCAreaBigredv2Caves
+        216,-149: RMCAreaBigredv2Caves
+        216,-150: RMCAreaBigredv2Caves
+        216,-151: RMCAreaBigredv2Caves
+        216,-152: RMCAreaBigredv2Caves
+        216,-153: RMCAreaBigredv2Caves
+        216,-154: RMCAreaBigredv2Caves
+        216,-155: RMCAreaBigredv2Caves
+        216,-156: RMCAreaBigredv2Caves
+        216,-157: RMCAreaBigredv2Caves
+        216,-158: RMCAreaBigredv2Caves
+        216,-159: RMCAreaBigredv2Caves
+        216,-160: RMCAreaBigredv2Caves
+        216,-161: RMCAreaBigredv2Caves
+        216,-162: RMCAreaBigredv2Caves
+        216,-163: RMCAreaBigredv2Caves
+        216,-164: RMCAreaBigredv2Caves
+        216,-165: RMCAreaBigredv2Caves
+        216,-166: RMCAreaBigredv2Caves
+        216,-167: RMCAreaBigredv2Caves
+        216,-168: RMCAreaBigredv2Caves
+        216,-169: RMCAreaBigredv2Caves
+        216,-170: RMCAreaBigredv2Caves
+        216,-171: RMCAreaBigredv2Caves
+        216,-172: RMCAreaBigredv2Caves
+        216,-173: RMCAreaBigredv2Caves
+        216,-174: RMCAreaBigredv2Caves
+        216,-175: RMCAreaBigredv2Caves
+        216,-176: RMCAreaBigredv2Caves
+        216,-177: RMCAreaBigredv2Caves
+        216,-178: RMCAreaBigredv2Caves
+        216,-179: RMCAreaBigredv2Caves
+        216,-180: RMCAreaBigredv2Caves
+        216,-181: RMCAreaBigredv2Caves
+        216,-182: RMCAreaBigredv2Caves
+        216,-183: RMCAreaBigredv2Caves
+        216,-184: RMCAreaBigredv2Caves
+        216,-185: RMCAreaBigredv2Caves
+        216,-186: RMCAreaBigredv2Caves
+        216,-187: RMCAreaBigredv2Caves
+        216,-188: RMCAreaBigredv2Caves
+        216,-189: RMCAreaBigredv2Caves
+        216,-190: RMCAreaBigredv2Caves
+        216,-191: RMCAreaBigredv2Caves
+        216,-192: RMCAreaBigredv2Caves
+        216,-193: RMCAreaBigredv2Caves
+        216,-194: RMCAreaBigredv2Caves
+        216,-195: RMCAreaBigredv2Caves
+        216,-196: RMCAreaBigredv2Caves
+        216,-197: RMCAreaBigredv2Caves
+        216,-198: RMCAreaBigredv2Caves
+        216,-199: RMCAreaBigredv2Caves
+        216,-200: RMCAreaBigredv2Caves
+        216,-201: RMCAreaBigredv2Caves
+        216,-202: RMCAreaBigredv2Caves
+        216,-203: RMCAreaBigredv2Caves
+        216,-204: RMCAreaBigredv2Caves
+        216,-205: RMCAreaBigredv2Caves
+        216,-206: RMCAreaBigredv2Caves
+        216,-207: RMCAreaBigredv2Caves
+        216,-208: RMCAreaBigredv2Caves
+        216,-209: RMCAreaBigredv2Caves
         216,-210: RMCAreaSpace
         216,-211: RMCAreaSpace
         216,-212: RMCAreaSpace
         216,-213: RMCAreaSpace
         215,1: RMCAreaSpace
         215,0: RMCAreaSpace
-        215,-105: RMCAreaSpace
-        215,-106: RMCAreaSpace
-        215,-107: RMCAreaSpace
-        215,-108: RMCAreaSpace
-        215,-109: RMCAreaSpace
-        215,-110: RMCAreaSpace
-        215,-111: RMCAreaSpace
-        215,-112: RMCAreaSpace
-        215,-113: RMCAreaSpace
-        215,-114: RMCAreaSpace
-        215,-115: RMCAreaSpace
-        215,-116: RMCAreaSpace
-        215,-117: RMCAreaSpace
-        215,-118: RMCAreaSpace
-        215,-119: RMCAreaSpace
-        215,-120: RMCAreaSpace
-        215,-121: RMCAreaSpace
-        215,-122: RMCAreaSpace
-        215,-123: RMCAreaSpace
-        215,-124: RMCAreaSpace
-        215,-125: RMCAreaSpace
-        215,-126: RMCAreaSpace
-        215,-127: RMCAreaSpace
-        215,-128: RMCAreaSpace
-        215,-129: RMCAreaSpace
-        215,-130: RMCAreaSpace
-        215,-131: RMCAreaSpace
-        215,-132: RMCAreaSpace
-        215,-133: RMCAreaSpace
-        215,-134: RMCAreaSpace
-        215,-135: RMCAreaSpace
-        215,-136: RMCAreaSpace
-        215,-137: RMCAreaSpace
-        215,-138: RMCAreaSpace
-        215,-139: RMCAreaSpace
-        215,-140: RMCAreaSpace
-        215,-141: RMCAreaSpace
-        215,-142: RMCAreaSpace
-        215,-143: RMCAreaSpace
-        215,-144: RMCAreaSpace
-        215,-145: RMCAreaSpace
-        215,-146: RMCAreaSpace
-        215,-147: RMCAreaSpace
-        215,-148: RMCAreaSpace
-        215,-149: RMCAreaSpace
-        215,-150: RMCAreaSpace
-        215,-151: RMCAreaSpace
-        215,-152: RMCAreaSpace
-        215,-153: RMCAreaSpace
-        215,-154: RMCAreaSpace
-        215,-155: RMCAreaSpace
-        215,-156: RMCAreaSpace
-        215,-157: RMCAreaSpace
-        215,-158: RMCAreaSpace
-        215,-159: RMCAreaSpace
-        215,-160: RMCAreaSpace
-        215,-161: RMCAreaSpace
-        215,-162: RMCAreaSpace
-        215,-163: RMCAreaSpace
-        215,-164: RMCAreaSpace
-        215,-165: RMCAreaSpace
-        215,-166: RMCAreaSpace
-        215,-167: RMCAreaSpace
-        215,-168: RMCAreaSpace
-        215,-169: RMCAreaSpace
-        215,-170: RMCAreaSpace
-        215,-171: RMCAreaSpace
-        215,-172: RMCAreaSpace
-        215,-173: RMCAreaSpace
-        215,-174: RMCAreaSpace
-        215,-175: RMCAreaSpace
-        215,-176: RMCAreaSpace
-        215,-177: RMCAreaSpace
-        215,-178: RMCAreaSpace
-        215,-179: RMCAreaSpace
-        215,-180: RMCAreaSpace
-        215,-181: RMCAreaSpace
-        215,-182: RMCAreaSpace
-        215,-183: RMCAreaSpace
-        215,-184: RMCAreaSpace
-        215,-185: RMCAreaSpace
-        215,-186: RMCAreaSpace
-        215,-187: RMCAreaSpace
-        215,-188: RMCAreaSpace
-        215,-189: RMCAreaSpace
-        215,-190: RMCAreaSpace
-        215,-191: RMCAreaSpace
-        215,-192: RMCAreaSpace
-        215,-193: RMCAreaSpace
-        215,-194: RMCAreaSpace
-        215,-195: RMCAreaSpace
-        215,-196: RMCAreaSpace
-        215,-197: RMCAreaSpace
-        215,-198: RMCAreaSpace
-        215,-199: RMCAreaSpace
-        215,-200: RMCAreaSpace
-        215,-201: RMCAreaSpace
-        215,-202: RMCAreaSpace
-        215,-203: RMCAreaSpace
-        215,-204: RMCAreaSpace
-        215,-205: RMCAreaSpace
-        215,-206: RMCAreaSpace
-        215,-207: RMCAreaSpace
-        215,-208: RMCAreaSpace
-        215,-209: RMCAreaSpace
+        215,-105: RMCAreaBigredv2Caves
+        215,-106: RMCAreaBigredv2Caves
+        215,-107: RMCAreaBigredv2Caves
+        215,-108: RMCAreaBigredv2Caves
+        215,-109: RMCAreaBigredv2Caves
+        215,-110: RMCAreaBigredv2Caves
+        215,-111: RMCAreaBigredv2Caves
+        215,-112: RMCAreaBigredv2Caves
+        215,-113: RMCAreaBigredv2Caves
+        215,-114: RMCAreaBigredv2Caves
+        215,-115: RMCAreaBigredv2Caves
+        215,-116: RMCAreaBigredv2Caves
+        215,-117: RMCAreaBigredv2Caves
+        215,-118: RMCAreaBigredv2Caves
+        215,-119: RMCAreaBigredv2Caves
+        215,-120: RMCAreaBigredv2Caves
+        215,-121: RMCAreaBigredv2Caves
+        215,-122: RMCAreaBigredv2Caves
+        215,-123: RMCAreaBigredv2Caves
+        215,-124: RMCAreaBigredv2Caves
+        215,-125: RMCAreaBigredv2Caves
+        215,-126: RMCAreaBigredv2Caves
+        215,-127: RMCAreaBigredv2Caves
+        215,-128: RMCAreaBigredv2Caves
+        215,-129: RMCAreaBigredv2Caves
+        215,-130: RMCAreaBigredv2Caves
+        215,-131: RMCAreaBigredv2Caves
+        215,-132: RMCAreaBigredv2Caves
+        215,-133: RMCAreaBigredv2Caves
+        215,-134: RMCAreaBigredv2Caves
+        215,-135: RMCAreaBigredv2Caves
+        215,-136: RMCAreaBigredv2Caves
+        215,-137: RMCAreaBigredv2Caves
+        215,-138: RMCAreaBigredv2Caves
+        215,-139: RMCAreaBigredv2Caves
+        215,-140: RMCAreaBigredv2Caves
+        215,-141: RMCAreaBigredv2Caves
+        215,-142: RMCAreaBigredv2Caves
+        215,-143: RMCAreaBigredv2Caves
+        215,-144: RMCAreaBigredv2Caves
+        215,-145: RMCAreaBigredv2Caves
+        215,-146: RMCAreaBigredv2Caves
+        215,-147: RMCAreaBigredv2Caves
+        215,-148: RMCAreaBigredv2Caves
+        215,-149: RMCAreaBigredv2Caves
+        215,-150: RMCAreaBigredv2Caves
+        215,-151: RMCAreaBigredv2Caves
+        215,-152: RMCAreaBigredv2Caves
+        215,-153: RMCAreaBigredv2Caves
+        215,-154: RMCAreaBigredv2Caves
+        215,-155: RMCAreaBigredv2Caves
+        215,-156: RMCAreaBigredv2Caves
+        215,-157: RMCAreaBigredv2Caves
+        215,-158: RMCAreaBigredv2Caves
+        215,-159: RMCAreaBigredv2Caves
+        215,-160: RMCAreaBigredv2Caves
+        215,-161: RMCAreaBigredv2Caves
+        215,-162: RMCAreaBigredv2Caves
+        215,-163: RMCAreaBigredv2Caves
+        215,-164: RMCAreaBigredv2Caves
+        215,-165: RMCAreaBigredv2Caves
+        215,-166: RMCAreaBigredv2Caves
+        215,-167: RMCAreaBigredv2Caves
+        215,-168: RMCAreaBigredv2Caves
+        215,-169: RMCAreaBigredv2Caves
+        215,-170: RMCAreaBigredv2Caves
+        215,-171: RMCAreaBigredv2Caves
+        215,-172: RMCAreaBigredv2Caves
+        215,-173: RMCAreaBigredv2Caves
+        215,-174: RMCAreaBigredv2Caves
+        215,-175: RMCAreaBigredv2Caves
+        215,-176: RMCAreaBigredv2Caves
+        215,-177: RMCAreaBigredv2Caves
+        215,-178: RMCAreaBigredv2Caves
+        215,-179: RMCAreaBigredv2Caves
+        215,-180: RMCAreaBigredv2Caves
+        215,-181: RMCAreaBigredv2Caves
+        215,-182: RMCAreaBigredv2Caves
+        215,-183: RMCAreaBigredv2Caves
+        215,-184: RMCAreaBigredv2Caves
+        215,-185: RMCAreaBigredv2Caves
+        215,-186: RMCAreaBigredv2Caves
+        215,-187: RMCAreaBigredv2Caves
+        215,-188: RMCAreaBigredv2Caves
+        215,-189: RMCAreaBigredv2Caves
+        215,-190: RMCAreaBigredv2Caves
+        215,-191: RMCAreaBigredv2Caves
+        215,-192: RMCAreaBigredv2Caves
+        215,-193: RMCAreaBigredv2Caves
+        215,-194: RMCAreaBigredv2Caves
+        215,-195: RMCAreaBigredv2Caves
+        215,-196: RMCAreaBigredv2Caves
+        215,-197: RMCAreaBigredv2Caves
+        215,-198: RMCAreaBigredv2Caves
+        215,-199: RMCAreaBigredv2Caves
+        215,-200: RMCAreaBigredv2Caves
+        215,-201: RMCAreaBigredv2Caves
+        215,-202: RMCAreaBigredv2Caves
+        215,-203: RMCAreaBigredv2Caves
+        215,-204: RMCAreaBigredv2Caves
+        215,-205: RMCAreaBigredv2Caves
+        215,-206: RMCAreaBigredv2Caves
+        215,-207: RMCAreaBigredv2Caves
+        215,-208: RMCAreaBigredv2Caves
+        215,-209: RMCAreaBigredv2Caves
         215,-210: RMCAreaSpace
         215,-211: RMCAreaSpace
         215,-212: RMCAreaSpace
         215,-213: RMCAreaSpace
         214,1: RMCAreaSpace
         214,0: RMCAreaSpace
-        214,-105: RMCAreaSpace
-        214,-106: RMCAreaSpace
-        214,-107: RMCAreaSpace
-        214,-108: RMCAreaSpace
-        214,-109: RMCAreaSpace
-        214,-110: RMCAreaSpace
-        214,-111: RMCAreaSpace
-        214,-112: RMCAreaSpace
-        214,-113: RMCAreaSpace
-        214,-114: RMCAreaSpace
-        214,-115: RMCAreaSpace
-        214,-116: RMCAreaSpace
-        214,-117: RMCAreaSpace
-        214,-118: RMCAreaSpace
-        214,-119: RMCAreaSpace
-        214,-120: RMCAreaSpace
-        214,-121: RMCAreaSpace
-        214,-122: RMCAreaSpace
-        214,-123: RMCAreaSpace
-        214,-124: RMCAreaSpace
-        214,-125: RMCAreaSpace
-        214,-126: RMCAreaSpace
-        214,-127: RMCAreaSpace
-        214,-128: RMCAreaSpace
-        214,-129: RMCAreaSpace
-        214,-130: RMCAreaSpace
-        214,-131: RMCAreaSpace
-        214,-132: RMCAreaSpace
-        214,-133: RMCAreaSpace
-        214,-134: RMCAreaSpace
-        214,-135: RMCAreaSpace
-        214,-136: RMCAreaSpace
-        214,-137: RMCAreaSpace
-        214,-138: RMCAreaSpace
-        214,-139: RMCAreaSpace
-        214,-140: RMCAreaSpace
-        214,-141: RMCAreaSpace
-        214,-142: RMCAreaSpace
-        214,-143: RMCAreaSpace
-        214,-144: RMCAreaSpace
-        214,-145: RMCAreaSpace
-        214,-146: RMCAreaSpace
-        214,-147: RMCAreaSpace
-        214,-148: RMCAreaSpace
-        214,-149: RMCAreaSpace
-        214,-150: RMCAreaSpace
-        214,-151: RMCAreaSpace
-        214,-152: RMCAreaSpace
-        214,-153: RMCAreaSpace
-        214,-154: RMCAreaSpace
-        214,-155: RMCAreaSpace
-        214,-156: RMCAreaSpace
-        214,-157: RMCAreaSpace
-        214,-158: RMCAreaSpace
-        214,-159: RMCAreaSpace
-        214,-160: RMCAreaSpace
-        214,-161: RMCAreaSpace
-        214,-162: RMCAreaSpace
-        214,-163: RMCAreaSpace
-        214,-164: RMCAreaSpace
-        214,-165: RMCAreaSpace
-        214,-166: RMCAreaSpace
-        214,-167: RMCAreaSpace
-        214,-168: RMCAreaSpace
-        214,-169: RMCAreaSpace
-        214,-170: RMCAreaSpace
-        214,-171: RMCAreaSpace
-        214,-172: RMCAreaSpace
-        214,-173: RMCAreaSpace
-        214,-174: RMCAreaSpace
-        214,-175: RMCAreaSpace
-        214,-176: RMCAreaSpace
-        214,-177: RMCAreaSpace
-        214,-178: RMCAreaSpace
-        214,-179: RMCAreaSpace
-        214,-180: RMCAreaSpace
-        214,-181: RMCAreaSpace
-        214,-182: RMCAreaSpace
-        214,-183: RMCAreaSpace
-        214,-184: RMCAreaSpace
-        214,-185: RMCAreaSpace
-        214,-186: RMCAreaSpace
-        214,-187: RMCAreaSpace
-        214,-188: RMCAreaSpace
-        214,-189: RMCAreaSpace
-        214,-190: RMCAreaSpace
-        214,-191: RMCAreaSpace
-        214,-192: RMCAreaSpace
-        214,-193: RMCAreaSpace
-        214,-194: RMCAreaSpace
-        214,-195: RMCAreaSpace
-        214,-196: RMCAreaSpace
-        214,-197: RMCAreaSpace
-        214,-198: RMCAreaSpace
-        214,-199: RMCAreaSpace
-        214,-200: RMCAreaSpace
-        214,-201: RMCAreaSpace
-        214,-202: RMCAreaSpace
-        214,-203: RMCAreaSpace
-        214,-204: RMCAreaSpace
-        214,-205: RMCAreaSpace
-        214,-206: RMCAreaSpace
-        214,-207: RMCAreaSpace
-        214,-208: RMCAreaSpace
-        214,-209: RMCAreaSpace
+        214,-105: RMCAreaBigredv2Caves
+        214,-106: RMCAreaBigredv2Caves
+        214,-107: RMCAreaBigredv2Caves
+        214,-108: RMCAreaBigredv2Caves
+        214,-109: RMCAreaBigredv2Caves
+        214,-110: RMCAreaBigredv2Caves
+        214,-111: RMCAreaBigredv2Caves
+        214,-112: RMCAreaBigredv2Caves
+        214,-113: RMCAreaBigredv2Caves
+        214,-114: RMCAreaBigredv2Caves
+        214,-115: RMCAreaBigredv2Caves
+        214,-116: RMCAreaBigredv2Caves
+        214,-117: RMCAreaBigredv2Caves
+        214,-118: RMCAreaBigredv2Caves
+        214,-119: RMCAreaBigredv2Caves
+        214,-120: RMCAreaBigredv2Caves
+        214,-121: RMCAreaBigredv2Caves
+        214,-122: RMCAreaBigredv2Caves
+        214,-123: RMCAreaBigredv2Caves
+        214,-124: RMCAreaBigredv2Caves
+        214,-125: RMCAreaBigredv2Caves
+        214,-126: RMCAreaBigredv2Caves
+        214,-127: RMCAreaBigredv2Caves
+        214,-128: RMCAreaBigredv2Caves
+        214,-129: RMCAreaBigredv2Caves
+        214,-130: RMCAreaBigredv2Caves
+        214,-131: RMCAreaBigredv2Caves
+        214,-132: RMCAreaBigredv2Caves
+        214,-133: RMCAreaBigredv2Caves
+        214,-134: RMCAreaBigredv2Caves
+        214,-135: RMCAreaBigredv2Caves
+        214,-136: RMCAreaBigredv2Caves
+        214,-137: RMCAreaBigredv2Caves
+        214,-138: RMCAreaBigredv2Caves
+        214,-139: RMCAreaBigredv2Caves
+        214,-140: RMCAreaBigredv2Caves
+        214,-141: RMCAreaBigredv2Caves
+        214,-142: RMCAreaBigredv2Caves
+        214,-143: RMCAreaBigredv2Caves
+        214,-144: RMCAreaBigredv2Caves
+        214,-145: RMCAreaBigredv2Caves
+        214,-146: RMCAreaBigredv2Caves
+        214,-147: RMCAreaBigredv2Caves
+        214,-148: RMCAreaBigredv2Caves
+        214,-149: RMCAreaBigredv2Caves
+        214,-150: RMCAreaBigredv2Caves
+        214,-151: RMCAreaBigredv2Caves
+        214,-152: RMCAreaBigredv2Caves
+        214,-153: RMCAreaBigredv2Caves
+        214,-154: RMCAreaBigredv2Caves
+        214,-155: RMCAreaBigredv2Caves
+        214,-156: RMCAreaBigredv2Caves
+        214,-157: RMCAreaBigredv2Caves
+        214,-158: RMCAreaBigredv2Caves
+        214,-159: RMCAreaBigredv2Caves
+        214,-160: RMCAreaBigredv2Caves
+        214,-161: RMCAreaBigredv2Caves
+        214,-162: RMCAreaBigredv2Caves
+        214,-163: RMCAreaBigredv2Caves
+        214,-164: RMCAreaBigredv2Caves
+        214,-165: RMCAreaBigredv2Caves
+        214,-166: RMCAreaBigredv2Caves
+        214,-167: RMCAreaBigredv2Caves
+        214,-168: RMCAreaBigredv2Caves
+        214,-169: RMCAreaBigredv2Caves
+        214,-170: RMCAreaBigredv2Caves
+        214,-171: RMCAreaBigredv2Caves
+        214,-172: RMCAreaBigredv2Caves
+        214,-173: RMCAreaBigredv2Caves
+        214,-174: RMCAreaBigredv2Caves
+        214,-175: RMCAreaBigredv2Caves
+        214,-176: RMCAreaBigredv2Caves
+        214,-177: RMCAreaBigredv2Caves
+        214,-178: RMCAreaBigredv2Caves
+        214,-179: RMCAreaBigredv2Caves
+        214,-180: RMCAreaBigredv2Caves
+        214,-181: RMCAreaBigredv2Caves
+        214,-182: RMCAreaBigredv2Caves
+        214,-183: RMCAreaBigredv2Caves
+        214,-184: RMCAreaBigredv2Caves
+        214,-185: RMCAreaBigredv2Caves
+        214,-186: RMCAreaBigredv2Caves
+        214,-187: RMCAreaBigredv2Caves
+        214,-188: RMCAreaBigredv2Caves
+        214,-189: RMCAreaBigredv2Caves
+        214,-190: RMCAreaBigredv2Caves
+        214,-191: RMCAreaBigredv2Caves
+        214,-192: RMCAreaBigredv2Caves
+        214,-193: RMCAreaBigredv2Caves
+        214,-194: RMCAreaBigredv2Caves
+        214,-195: RMCAreaBigredv2Caves
+        214,-196: RMCAreaBigredv2Caves
+        214,-197: RMCAreaBigredv2Caves
+        214,-198: RMCAreaBigredv2Caves
+        214,-199: RMCAreaBigredv2Caves
+        214,-200: RMCAreaBigredv2Caves
+        214,-201: RMCAreaBigredv2Caves
+        214,-202: RMCAreaBigredv2Caves
+        214,-203: RMCAreaBigredv2Caves
+        214,-204: RMCAreaBigredv2Caves
+        214,-205: RMCAreaBigredv2Caves
+        214,-206: RMCAreaBigredv2Caves
+        214,-207: RMCAreaBigredv2Caves
+        214,-208: RMCAreaBigredv2Caves
+        214,-209: RMCAreaBigredv2Caves
         214,-210: RMCAreaSpace
         214,-211: RMCAreaSpace
         214,-212: RMCAreaSpace
         214,-213: RMCAreaSpace
         213,1: RMCAreaSpace
         213,0: RMCAreaSpace
-        213,-203: RMCAreaSpace
-        213,-204: RMCAreaSpace
-        213,-205: RMCAreaSpace
-        213,-206: RMCAreaSpace
-        213,-207: RMCAreaSpace
-        213,-208: RMCAreaSpace
-        213,-209: RMCAreaSpace
+        213,-203: RMCAreaBigredv2Caves
+        213,-204: RMCAreaBigredv2Caves
+        213,-205: RMCAreaBigredv2Caves
+        213,-206: RMCAreaBigredv2Caves
+        213,-207: RMCAreaBigredv2Caves
+        213,-208: RMCAreaBigredv2Caves
+        213,-209: RMCAreaBigredv2Caves
         213,-210: RMCAreaSpace
         213,-211: RMCAreaSpace
         213,-212: RMCAreaSpace
         213,-213: RMCAreaSpace
         212,1: RMCAreaSpace
         212,0: RMCAreaSpace
-        212,-203: RMCAreaSpace
-        212,-204: RMCAreaSpace
-        212,-205: RMCAreaSpace
-        212,-206: RMCAreaSpace
-        212,-207: RMCAreaSpace
-        212,-208: RMCAreaSpace
-        212,-209: RMCAreaSpace
+        212,-203: RMCAreaBigredv2Caves
+        212,-204: RMCAreaBigredv2Caves
+        212,-205: RMCAreaBigredv2Caves
+        212,-206: RMCAreaBigredv2Caves
+        212,-207: RMCAreaBigredv2Caves
+        212,-208: RMCAreaBigredv2Caves
+        212,-209: RMCAreaBigredv2Caves
         212,-210: RMCAreaSpace
         212,-211: RMCAreaSpace
         212,-212: RMCAreaSpace
         212,-213: RMCAreaSpace
         211,1: RMCAreaSpace
         211,0: RMCAreaSpace
-        211,-203: RMCAreaSpace
-        211,-204: RMCAreaSpace
-        211,-205: RMCAreaSpace
-        211,-206: RMCAreaSpace
-        211,-207: RMCAreaSpace
-        211,-208: RMCAreaSpace
-        211,-209: RMCAreaSpace
+        211,-203: RMCAreaBigredv2Caves
+        211,-204: RMCAreaBigredv2Caves
+        211,-205: RMCAreaBigredv2Caves
+        211,-206: RMCAreaBigredv2Caves
+        211,-207: RMCAreaBigredv2Caves
+        211,-208: RMCAreaBigredv2Caves
+        211,-209: RMCAreaBigredv2Caves
         211,-210: RMCAreaSpace
         211,-211: RMCAreaSpace
         211,-212: RMCAreaSpace
         211,-213: RMCAreaSpace
         210,1: RMCAreaSpace
         210,0: RMCAreaSpace
-        210,-203: RMCAreaSpace
-        210,-204: RMCAreaSpace
-        210,-205: RMCAreaSpace
-        210,-206: RMCAreaSpace
-        210,-207: RMCAreaSpace
-        210,-208: RMCAreaSpace
-        210,-209: RMCAreaSpace
+        210,-203: RMCAreaBigredv2Caves
+        210,-204: RMCAreaBigredv2Caves
+        210,-205: RMCAreaBigredv2Caves
+        210,-206: RMCAreaBigredv2Caves
+        210,-207: RMCAreaBigredv2Caves
+        210,-208: RMCAreaBigredv2Caves
+        210,-209: RMCAreaBigredv2Caves
         210,-210: RMCAreaSpace
         210,-211: RMCAreaSpace
         210,-212: RMCAreaSpace
         210,-213: RMCAreaSpace
         209,1: RMCAreaSpace
         209,0: RMCAreaSpace
-        209,-203: RMCAreaSpace
-        209,-204: RMCAreaSpace
-        209,-205: RMCAreaSpace
-        209,-206: RMCAreaSpace
-        209,-207: RMCAreaSpace
-        209,-208: RMCAreaSpace
-        209,-209: RMCAreaSpace
+        209,-203: RMCAreaBigredv2Caves
+        209,-204: RMCAreaBigredv2Caves
+        209,-205: RMCAreaBigredv2Caves
+        209,-206: RMCAreaBigredv2Caves
+        209,-207: RMCAreaBigredv2Caves
+        209,-208: RMCAreaBigredv2Caves
+        209,-209: RMCAreaBigredv2Caves
         209,-210: RMCAreaSpace
         209,-211: RMCAreaSpace
         209,-212: RMCAreaSpace
         209,-213: RMCAreaSpace
         208,1: RMCAreaSpace
         208,0: RMCAreaSpace
-        208,-203: RMCAreaSpace
-        208,-204: RMCAreaSpace
-        208,-205: RMCAreaSpace
-        208,-206: RMCAreaSpace
-        208,-207: RMCAreaSpace
-        208,-208: RMCAreaSpace
-        208,-209: RMCAreaSpace
+        208,-203: RMCAreaBigredv2Caves
+        208,-204: RMCAreaBigredv2Caves
+        208,-205: RMCAreaBigredv2Caves
+        208,-206: RMCAreaBigredv2Caves
+        208,-207: RMCAreaBigredv2Caves
+        208,-208: RMCAreaBigredv2Caves
+        208,-209: RMCAreaBigredv2Caves
         208,-210: RMCAreaSpace
         208,-211: RMCAreaSpace
         208,-212: RMCAreaSpace
         208,-213: RMCAreaSpace
         207,1: RMCAreaSpace
         207,0: RMCAreaSpace
-        207,-203: RMCAreaSpace
-        207,-204: RMCAreaSpace
-        207,-205: RMCAreaSpace
-        207,-206: RMCAreaSpace
-        207,-207: RMCAreaSpace
-        207,-208: RMCAreaSpace
-        207,-209: RMCAreaSpace
+        207,-203: RMCAreaBigredv2Caves
+        207,-204: RMCAreaBigredv2Caves
+        207,-205: RMCAreaBigredv2Caves
+        207,-206: RMCAreaBigredv2Caves
+        207,-207: RMCAreaBigredv2Caves
+        207,-208: RMCAreaBigredv2Caves
+        207,-209: RMCAreaBigredv2Caves
         207,-210: RMCAreaSpace
         207,-211: RMCAreaSpace
         207,-212: RMCAreaSpace
         207,-213: RMCAreaSpace
         206,1: RMCAreaSpace
         206,0: RMCAreaSpace
-        206,-203: RMCAreaSpace
-        206,-204: RMCAreaSpace
-        206,-205: RMCAreaSpace
-        206,-206: RMCAreaSpace
-        206,-207: RMCAreaSpace
-        206,-208: RMCAreaSpace
-        206,-209: RMCAreaSpace
+        206,-203: RMCAreaBigredv2Caves
+        206,-204: RMCAreaBigredv2Caves
+        206,-205: RMCAreaBigredv2Caves
+        206,-206: RMCAreaBigredv2Caves
+        206,-207: RMCAreaBigredv2Caves
+        206,-208: RMCAreaBigredv2Caves
+        206,-209: RMCAreaBigredv2Caves
         206,-210: RMCAreaSpace
         206,-211: RMCAreaSpace
         206,-212: RMCAreaSpace
         206,-213: RMCAreaSpace
         205,1: RMCAreaSpace
         205,0: RMCAreaSpace
-        205,-203: RMCAreaSpace
-        205,-204: RMCAreaSpace
-        205,-205: RMCAreaSpace
-        205,-206: RMCAreaSpace
-        205,-207: RMCAreaSpace
-        205,-208: RMCAreaSpace
-        205,-209: RMCAreaSpace
+        205,-203: RMCAreaBigredv2Caves
+        205,-204: RMCAreaBigredv2Caves
+        205,-205: RMCAreaBigredv2Caves
+        205,-206: RMCAreaBigredv2Caves
+        205,-207: RMCAreaBigredv2Caves
+        205,-208: RMCAreaBigredv2Caves
+        205,-209: RMCAreaBigredv2Caves
         205,-210: RMCAreaSpace
         205,-211: RMCAreaSpace
         205,-212: RMCAreaSpace
         205,-213: RMCAreaSpace
         204,1: RMCAreaSpace
         204,0: RMCAreaSpace
-        204,-203: RMCAreaSpace
-        204,-204: RMCAreaSpace
-        204,-205: RMCAreaSpace
-        204,-206: RMCAreaSpace
-        204,-207: RMCAreaSpace
-        204,-208: RMCAreaSpace
-        204,-209: RMCAreaSpace
+        204,-203: RMCAreaBigredv2Caves
+        204,-204: RMCAreaBigredv2Caves
+        204,-205: RMCAreaBigredv2Caves
+        204,-206: RMCAreaBigredv2Caves
+        204,-207: RMCAreaBigredv2Caves
+        204,-208: RMCAreaBigredv2Caves
+        204,-209: RMCAreaBigredv2Caves
         204,-210: RMCAreaSpace
         204,-211: RMCAreaSpace
         204,-212: RMCAreaSpace
         204,-213: RMCAreaSpace
         203,1: RMCAreaSpace
         203,0: RMCAreaSpace
-        203,-203: RMCAreaSpace
-        203,-204: RMCAreaSpace
-        203,-205: RMCAreaSpace
-        203,-206: RMCAreaSpace
-        203,-207: RMCAreaSpace
-        203,-208: RMCAreaSpace
-        203,-209: RMCAreaSpace
+        203,-203: RMCAreaBigredv2Caves
+        203,-204: RMCAreaBigredv2Caves
+        203,-205: RMCAreaBigredv2Caves
+        203,-206: RMCAreaBigredv2Caves
+        203,-207: RMCAreaBigredv2Caves
+        203,-208: RMCAreaBigredv2Caves
+        203,-209: RMCAreaBigredv2Caves
         203,-210: RMCAreaSpace
         203,-211: RMCAreaSpace
         203,-212: RMCAreaSpace
         203,-213: RMCAreaSpace
         202,1: RMCAreaSpace
         202,0: RMCAreaSpace
-        202,-203: RMCAreaSpace
-        202,-204: RMCAreaSpace
-        202,-205: RMCAreaSpace
-        202,-206: RMCAreaSpace
-        202,-207: RMCAreaSpace
-        202,-208: RMCAreaSpace
-        202,-209: RMCAreaSpace
+        202,-203: RMCAreaBigredv2Caves
+        202,-204: RMCAreaBigredv2Caves
+        202,-205: RMCAreaBigredv2Caves
+        202,-206: RMCAreaBigredv2Caves
+        202,-207: RMCAreaBigredv2Caves
+        202,-208: RMCAreaBigredv2Caves
+        202,-209: RMCAreaBigredv2Caves
         202,-210: RMCAreaSpace
         202,-211: RMCAreaSpace
         202,-212: RMCAreaSpace
         202,-213: RMCAreaSpace
         201,1: RMCAreaSpace
         201,0: RMCAreaSpace
-        201,-203: RMCAreaSpace
-        201,-204: RMCAreaSpace
-        201,-205: RMCAreaSpace
-        201,-206: RMCAreaSpace
-        201,-207: RMCAreaSpace
-        201,-208: RMCAreaSpace
-        201,-209: RMCAreaSpace
+        201,-203: RMCAreaBigredv2Caves
+        201,-204: RMCAreaBigredv2Caves
+        201,-205: RMCAreaBigredv2Caves
+        201,-206: RMCAreaBigredv2Caves
+        201,-207: RMCAreaBigredv2Caves
+        201,-208: RMCAreaBigredv2Caves
+        201,-209: RMCAreaBigredv2Caves
         201,-210: RMCAreaSpace
         201,-211: RMCAreaSpace
         201,-212: RMCAreaSpace
         201,-213: RMCAreaSpace
         200,1: RMCAreaSpace
         200,0: RMCAreaSpace
-        200,-203: RMCAreaSpace
-        200,-204: RMCAreaSpace
-        200,-205: RMCAreaSpace
-        200,-206: RMCAreaSpace
-        200,-207: RMCAreaSpace
-        200,-208: RMCAreaSpace
-        200,-209: RMCAreaSpace
+        200,-203: RMCAreaBigredv2Caves
+        200,-204: RMCAreaBigredv2Caves
+        200,-205: RMCAreaBigredv2Caves
+        200,-206: RMCAreaBigredv2Caves
+        200,-207: RMCAreaBigredv2Caves
+        200,-208: RMCAreaBigredv2Caves
+        200,-209: RMCAreaBigredv2Caves
         200,-210: RMCAreaSpace
         200,-211: RMCAreaSpace
         200,-212: RMCAreaSpace
         200,-213: RMCAreaSpace
         199,1: RMCAreaSpace
         199,0: RMCAreaSpace
-        199,-203: RMCAreaSpace
-        199,-204: RMCAreaSpace
-        199,-205: RMCAreaSpace
-        199,-206: RMCAreaSpace
-        199,-207: RMCAreaSpace
-        199,-208: RMCAreaSpace
-        199,-209: RMCAreaSpace
+        199,-203: RMCAreaBigredv2Caves
+        199,-204: RMCAreaBigredv2Caves
+        199,-205: RMCAreaBigredv2Caves
+        199,-206: RMCAreaBigredv2Caves
+        199,-207: RMCAreaBigredv2Caves
+        199,-208: RMCAreaBigredv2Caves
+        199,-209: RMCAreaBigredv2Caves
         199,-210: RMCAreaSpace
         199,-211: RMCAreaSpace
         199,-212: RMCAreaSpace
         199,-213: RMCAreaSpace
         198,1: RMCAreaSpace
         198,0: RMCAreaSpace
-        198,-203: RMCAreaSpace
-        198,-204: RMCAreaSpace
-        198,-205: RMCAreaSpace
-        198,-206: RMCAreaSpace
-        198,-207: RMCAreaSpace
-        198,-208: RMCAreaSpace
-        198,-209: RMCAreaSpace
+        198,-203: RMCAreaBigredv2Caves
+        198,-204: RMCAreaBigredv2Caves
+        198,-205: RMCAreaBigredv2Caves
+        198,-206: RMCAreaBigredv2Caves
+        198,-207: RMCAreaBigredv2Caves
+        198,-208: RMCAreaBigredv2Caves
+        198,-209: RMCAreaBigredv2Caves
         198,-210: RMCAreaSpace
         198,-211: RMCAreaSpace
         198,-212: RMCAreaSpace
         198,-213: RMCAreaSpace
         197,1: RMCAreaSpace
         197,0: RMCAreaSpace
-        197,-203: RMCAreaSpace
-        197,-204: RMCAreaSpace
-        197,-205: RMCAreaSpace
-        197,-206: RMCAreaSpace
-        197,-207: RMCAreaSpace
-        197,-208: RMCAreaSpace
-        197,-209: RMCAreaSpace
+        197,-203: RMCAreaBigredv2Caves
+        197,-204: RMCAreaBigredv2Caves
+        197,-205: RMCAreaBigredv2Caves
+        197,-206: RMCAreaBigredv2Caves
+        197,-207: RMCAreaBigredv2Caves
+        197,-208: RMCAreaBigredv2Caves
+        197,-209: RMCAreaBigredv2Caves
         197,-210: RMCAreaSpace
         197,-211: RMCAreaSpace
         197,-212: RMCAreaSpace
         197,-213: RMCAreaSpace
         196,1: RMCAreaSpace
         196,0: RMCAreaSpace
-        196,-203: RMCAreaSpace
-        196,-204: RMCAreaSpace
-        196,-205: RMCAreaSpace
-        196,-206: RMCAreaSpace
-        196,-207: RMCAreaSpace
-        196,-208: RMCAreaSpace
-        196,-209: RMCAreaSpace
+        196,-203: RMCAreaBigredv2Caves
+        196,-204: RMCAreaBigredv2Caves
+        196,-205: RMCAreaBigredv2Caves
+        196,-206: RMCAreaBigredv2Caves
+        196,-207: RMCAreaBigredv2Caves
+        196,-208: RMCAreaBigredv2Caves
+        196,-209: RMCAreaBigredv2Caves
         196,-210: RMCAreaSpace
         196,-211: RMCAreaSpace
         196,-212: RMCAreaSpace
         196,-213: RMCAreaSpace
         195,1: RMCAreaSpace
         195,0: RMCAreaSpace
-        195,-203: RMCAreaSpace
-        195,-204: RMCAreaSpace
-        195,-205: RMCAreaSpace
-        195,-206: RMCAreaSpace
-        195,-207: RMCAreaSpace
-        195,-208: RMCAreaSpace
-        195,-209: RMCAreaSpace
+        195,-203: RMCAreaBigredv2Caves
+        195,-204: RMCAreaBigredv2Caves
+        195,-205: RMCAreaBigredv2Caves
+        195,-206: RMCAreaBigredv2Caves
+        195,-207: RMCAreaBigredv2Caves
+        195,-208: RMCAreaBigredv2Caves
+        195,-209: RMCAreaBigredv2Caves
         195,-210: RMCAreaSpace
         195,-211: RMCAreaSpace
         195,-212: RMCAreaSpace
         195,-213: RMCAreaSpace
         194,1: RMCAreaSpace
         194,0: RMCAreaSpace
-        194,-203: RMCAreaSpace
-        194,-204: RMCAreaSpace
-        194,-205: RMCAreaSpace
-        194,-206: RMCAreaSpace
-        194,-207: RMCAreaSpace
-        194,-208: RMCAreaSpace
-        194,-209: RMCAreaSpace
+        194,-203: RMCAreaBigredv2Caves
+        194,-204: RMCAreaBigredv2Caves
+        194,-205: RMCAreaBigredv2Caves
+        194,-206: RMCAreaBigredv2Caves
+        194,-207: RMCAreaBigredv2Caves
+        194,-208: RMCAreaBigredv2Caves
+        194,-209: RMCAreaBigredv2Caves
         194,-210: RMCAreaSpace
         194,-211: RMCAreaSpace
         194,-212: RMCAreaSpace
         194,-213: RMCAreaSpace
         193,1: RMCAreaSpace
         193,0: RMCAreaSpace
-        193,-203: RMCAreaSpace
-        193,-204: RMCAreaSpace
-        193,-205: RMCAreaSpace
-        193,-206: RMCAreaSpace
-        193,-207: RMCAreaSpace
-        193,-208: RMCAreaSpace
-        193,-209: RMCAreaSpace
+        193,-203: RMCAreaBigredv2Caves
+        193,-204: RMCAreaBigredv2Caves
+        193,-205: RMCAreaBigredv2Caves
+        193,-206: RMCAreaBigredv2Caves
+        193,-207: RMCAreaBigredv2Caves
+        193,-208: RMCAreaBigredv2Caves
+        193,-209: RMCAreaBigredv2Caves
         193,-210: RMCAreaSpace
         193,-211: RMCAreaSpace
         193,-212: RMCAreaSpace
         193,-213: RMCAreaSpace
         192,1: RMCAreaSpace
         192,0: RMCAreaSpace
-        192,-203: RMCAreaSpace
-        192,-204: RMCAreaSpace
-        192,-205: RMCAreaSpace
-        192,-206: RMCAreaSpace
-        192,-207: RMCAreaSpace
-        192,-208: RMCAreaSpace
-        192,-209: RMCAreaSpace
+        192,-203: RMCAreaBigredv2Caves
+        192,-204: RMCAreaBigredv2Caves
+        192,-205: RMCAreaBigredv2Caves
+        192,-206: RMCAreaBigredv2Caves
+        192,-207: RMCAreaBigredv2Caves
+        192,-208: RMCAreaBigredv2Caves
+        192,-209: RMCAreaBigredv2Caves
         192,-210: RMCAreaSpace
         192,-211: RMCAreaSpace
         192,-212: RMCAreaSpace
         192,-213: RMCAreaSpace
         191,1: RMCAreaSpace
         191,0: RMCAreaSpace
-        191,-203: RMCAreaSpace
-        191,-204: RMCAreaSpace
-        191,-205: RMCAreaSpace
-        191,-206: RMCAreaSpace
-        191,-207: RMCAreaSpace
-        191,-208: RMCAreaSpace
-        191,-209: RMCAreaSpace
+        191,-203: RMCAreaBigredv2Caves
+        191,-204: RMCAreaBigredv2Caves
+        191,-205: RMCAreaBigredv2Caves
+        191,-206: RMCAreaBigredv2Caves
+        191,-207: RMCAreaBigredv2Caves
+        191,-208: RMCAreaBigredv2Caves
+        191,-209: RMCAreaBigredv2Caves
         191,-210: RMCAreaSpace
         191,-211: RMCAreaSpace
         191,-212: RMCAreaSpace
         191,-213: RMCAreaSpace
         190,1: RMCAreaSpace
         190,0: RMCAreaSpace
-        190,-203: RMCAreaSpace
-        190,-204: RMCAreaSpace
-        190,-205: RMCAreaSpace
-        190,-206: RMCAreaSpace
-        190,-207: RMCAreaSpace
-        190,-208: RMCAreaSpace
-        190,-209: RMCAreaSpace
+        190,-203: RMCAreaBigredv2Caves
+        190,-204: RMCAreaBigredv2Caves
+        190,-205: RMCAreaBigredv2Caves
+        190,-206: RMCAreaBigredv2Caves
+        190,-207: RMCAreaBigredv2Caves
+        190,-208: RMCAreaBigredv2Caves
+        190,-209: RMCAreaBigredv2Caves
         190,-210: RMCAreaSpace
         190,-211: RMCAreaSpace
         190,-212: RMCAreaSpace
         190,-213: RMCAreaSpace
         189,1: RMCAreaSpace
         189,0: RMCAreaSpace
-        189,-203: RMCAreaSpace
-        189,-204: RMCAreaSpace
-        189,-205: RMCAreaSpace
-        189,-206: RMCAreaSpace
-        189,-207: RMCAreaSpace
-        189,-208: RMCAreaSpace
-        189,-209: RMCAreaSpace
+        189,-203: RMCAreaBigredv2Caves
+        189,-204: RMCAreaBigredv2Caves
+        189,-205: RMCAreaBigredv2Caves
+        189,-206: RMCAreaBigredv2Caves
+        189,-207: RMCAreaBigredv2Caves
+        189,-208: RMCAreaBigredv2Caves
+        189,-209: RMCAreaBigredv2Caves
         189,-210: RMCAreaSpace
         189,-211: RMCAreaSpace
         189,-212: RMCAreaSpace
         189,-213: RMCAreaSpace
         188,1: RMCAreaSpace
         188,0: RMCAreaSpace
-        188,-203: RMCAreaSpace
-        188,-204: RMCAreaSpace
-        188,-205: RMCAreaSpace
-        188,-206: RMCAreaSpace
-        188,-207: RMCAreaSpace
-        188,-208: RMCAreaSpace
-        188,-209: RMCAreaSpace
+        188,-203: RMCAreaBigredv2Caves
+        188,-204: RMCAreaBigredv2Caves
+        188,-205: RMCAreaBigredv2Caves
+        188,-206: RMCAreaBigredv2Caves
+        188,-207: RMCAreaBigredv2Caves
+        188,-208: RMCAreaBigredv2Caves
+        188,-209: RMCAreaBigredv2Caves
         188,-210: RMCAreaSpace
         188,-211: RMCAreaSpace
         188,-212: RMCAreaSpace
         188,-213: RMCAreaSpace
         187,1: RMCAreaSpace
         187,0: RMCAreaSpace
-        187,-203: RMCAreaSpace
-        187,-204: RMCAreaSpace
-        187,-205: RMCAreaSpace
-        187,-206: RMCAreaSpace
-        187,-207: RMCAreaSpace
-        187,-208: RMCAreaSpace
-        187,-209: RMCAreaSpace
+        187,-203: RMCAreaBigredv2Caves
+        187,-204: RMCAreaBigredv2Caves
+        187,-205: RMCAreaBigredv2Caves
+        187,-206: RMCAreaBigredv2Caves
+        187,-207: RMCAreaBigredv2Caves
+        187,-208: RMCAreaBigredv2Caves
+        187,-209: RMCAreaBigredv2Caves
         187,-210: RMCAreaSpace
         187,-211: RMCAreaSpace
         187,-212: RMCAreaSpace
         187,-213: RMCAreaSpace
         186,1: RMCAreaSpace
         186,0: RMCAreaSpace
-        186,-203: RMCAreaSpace
-        186,-204: RMCAreaSpace
-        186,-205: RMCAreaSpace
-        186,-206: RMCAreaSpace
-        186,-207: RMCAreaSpace
-        186,-208: RMCAreaSpace
-        186,-209: RMCAreaSpace
+        186,-203: RMCAreaBigredv2Caves
+        186,-204: RMCAreaBigredv2Caves
+        186,-205: RMCAreaBigredv2Caves
+        186,-206: RMCAreaBigredv2Caves
+        186,-207: RMCAreaBigredv2Caves
+        186,-208: RMCAreaBigredv2Caves
+        186,-209: RMCAreaBigredv2Caves
         186,-210: RMCAreaSpace
         186,-211: RMCAreaSpace
         186,-212: RMCAreaSpace
         186,-213: RMCAreaSpace
         185,1: RMCAreaSpace
         185,0: RMCAreaSpace
-        185,-203: RMCAreaSpace
-        185,-204: RMCAreaSpace
-        185,-205: RMCAreaSpace
-        185,-206: RMCAreaSpace
-        185,-207: RMCAreaSpace
-        185,-208: RMCAreaSpace
-        185,-209: RMCAreaSpace
+        185,-203: RMCAreaBigredv2Caves
+        185,-204: RMCAreaBigredv2Caves
+        185,-205: RMCAreaBigredv2Caves
+        185,-206: RMCAreaBigredv2Caves
+        185,-207: RMCAreaBigredv2Caves
+        185,-208: RMCAreaBigredv2Caves
+        185,-209: RMCAreaBigredv2Caves
         185,-210: RMCAreaSpace
         185,-211: RMCAreaSpace
         185,-212: RMCAreaSpace
         185,-213: RMCAreaSpace
         184,1: RMCAreaSpace
         184,0: RMCAreaSpace
-        184,-203: RMCAreaSpace
-        184,-204: RMCAreaSpace
-        184,-205: RMCAreaSpace
-        184,-206: RMCAreaSpace
-        184,-207: RMCAreaSpace
-        184,-208: RMCAreaSpace
-        184,-209: RMCAreaSpace
+        184,-203: RMCAreaBigredv2Caves
+        184,-204: RMCAreaBigredv2Caves
+        184,-205: RMCAreaBigredv2Caves
+        184,-206: RMCAreaBigredv2Caves
+        184,-207: RMCAreaBigredv2Caves
+        184,-208: RMCAreaBigredv2Caves
+        184,-209: RMCAreaBigredv2Caves
         184,-210: RMCAreaSpace
         184,-211: RMCAreaSpace
         184,-212: RMCAreaSpace
         184,-213: RMCAreaSpace
         183,1: RMCAreaSpace
         183,0: RMCAreaSpace
-        183,-203: RMCAreaSpace
-        183,-204: RMCAreaSpace
-        183,-205: RMCAreaSpace
-        183,-206: RMCAreaSpace
-        183,-207: RMCAreaSpace
-        183,-208: RMCAreaSpace
-        183,-209: RMCAreaSpace
+        183,-203: RMCAreaBigredv2Caves
+        183,-204: RMCAreaBigredv2Caves
+        183,-205: RMCAreaBigredv2Caves
+        183,-206: RMCAreaBigredv2Caves
+        183,-207: RMCAreaBigredv2Caves
+        183,-208: RMCAreaBigredv2Caves
+        183,-209: RMCAreaBigredv2Caves
         183,-210: RMCAreaSpace
         183,-211: RMCAreaSpace
         183,-212: RMCAreaSpace
         183,-213: RMCAreaSpace
         182,1: RMCAreaSpace
         182,0: RMCAreaSpace
-        182,-203: RMCAreaSpace
-        182,-204: RMCAreaSpace
-        182,-205: RMCAreaSpace
-        182,-206: RMCAreaSpace
-        182,-207: RMCAreaSpace
-        182,-208: RMCAreaSpace
-        182,-209: RMCAreaSpace
+        182,-203: RMCAreaBigredv2Caves
+        182,-204: RMCAreaBigredv2Caves
+        182,-205: RMCAreaBigredv2Caves
+        182,-206: RMCAreaBigredv2Caves
+        182,-207: RMCAreaBigredv2Caves
+        182,-208: RMCAreaBigredv2Caves
+        182,-209: RMCAreaBigredv2Caves
         182,-210: RMCAreaSpace
         182,-211: RMCAreaSpace
         182,-212: RMCAreaSpace
         182,-213: RMCAreaSpace
         181,1: RMCAreaSpace
         181,0: RMCAreaSpace
-        181,-203: RMCAreaSpace
-        181,-204: RMCAreaSpace
-        181,-205: RMCAreaSpace
-        181,-206: RMCAreaSpace
-        181,-207: RMCAreaSpace
-        181,-208: RMCAreaSpace
-        181,-209: RMCAreaSpace
+        181,-203: RMCAreaBigredv2Caves
+        181,-204: RMCAreaBigredv2Caves
+        181,-205: RMCAreaBigredv2Caves
+        181,-206: RMCAreaBigredv2Caves
+        181,-207: RMCAreaBigredv2Caves
+        181,-208: RMCAreaBigredv2Caves
+        181,-209: RMCAreaBigredv2Caves
         181,-210: RMCAreaSpace
         181,-211: RMCAreaSpace
         181,-212: RMCAreaSpace
         181,-213: RMCAreaSpace
         180,1: RMCAreaSpace
         180,0: RMCAreaSpace
-        180,-203: RMCAreaSpace
-        180,-204: RMCAreaSpace
-        180,-205: RMCAreaSpace
-        180,-206: RMCAreaSpace
-        180,-207: RMCAreaSpace
-        180,-208: RMCAreaSpace
-        180,-209: RMCAreaSpace
+        180,-203: RMCAreaBigredv2Caves
+        180,-204: RMCAreaBigredv2Caves
+        180,-205: RMCAreaBigredv2Caves
+        180,-206: RMCAreaBigredv2Caves
+        180,-207: RMCAreaBigredv2Caves
+        180,-208: RMCAreaBigredv2Caves
+        180,-209: RMCAreaBigredv2Caves
         180,-210: RMCAreaSpace
         180,-211: RMCAreaSpace
         180,-212: RMCAreaSpace
         180,-213: RMCAreaSpace
         179,1: RMCAreaSpace
         179,0: RMCAreaSpace
-        179,-203: RMCAreaSpace
-        179,-204: RMCAreaSpace
-        179,-205: RMCAreaSpace
-        179,-206: RMCAreaSpace
-        179,-207: RMCAreaSpace
-        179,-208: RMCAreaSpace
-        179,-209: RMCAreaSpace
+        179,-203: RMCAreaBigredv2Caves
+        179,-204: RMCAreaBigredv2Caves
+        179,-205: RMCAreaBigredv2Caves
+        179,-206: RMCAreaBigredv2Caves
+        179,-207: RMCAreaBigredv2Caves
+        179,-208: RMCAreaBigredv2Caves
+        179,-209: RMCAreaBigredv2Caves
         179,-210: RMCAreaSpace
         179,-211: RMCAreaSpace
         179,-212: RMCAreaSpace
         179,-213: RMCAreaSpace
         178,1: RMCAreaSpace
         178,0: RMCAreaSpace
-        178,-203: RMCAreaSpace
-        178,-204: RMCAreaSpace
-        178,-205: RMCAreaSpace
-        178,-206: RMCAreaSpace
-        178,-207: RMCAreaSpace
-        178,-208: RMCAreaSpace
-        178,-209: RMCAreaSpace
+        178,-203: RMCAreaBigredv2Caves
+        178,-204: RMCAreaBigredv2Caves
+        178,-205: RMCAreaBigredv2Caves
+        178,-206: RMCAreaBigredv2Caves
+        178,-207: RMCAreaBigredv2Caves
+        178,-208: RMCAreaBigredv2Caves
+        178,-209: RMCAreaBigredv2Caves
         178,-210: RMCAreaSpace
         178,-211: RMCAreaSpace
         178,-212: RMCAreaSpace
         178,-213: RMCAreaSpace
         177,1: RMCAreaSpace
         177,0: RMCAreaSpace
-        177,-203: RMCAreaSpace
-        177,-204: RMCAreaSpace
-        177,-205: RMCAreaSpace
-        177,-206: RMCAreaSpace
-        177,-207: RMCAreaSpace
-        177,-208: RMCAreaSpace
-        177,-209: RMCAreaSpace
+        177,-203: RMCAreaBigredv2Caves
+        177,-204: RMCAreaBigredv2Caves
+        177,-205: RMCAreaBigredv2Caves
+        177,-206: RMCAreaBigredv2Caves
+        177,-207: RMCAreaBigredv2Caves
+        177,-208: RMCAreaBigredv2Caves
+        177,-209: RMCAreaBigredv2Caves
         177,-210: RMCAreaSpace
         177,-211: RMCAreaSpace
         177,-212: RMCAreaSpace
         177,-213: RMCAreaSpace
         176,1: RMCAreaSpace
         176,0: RMCAreaSpace
-        176,-203: RMCAreaSpace
-        176,-204: RMCAreaSpace
-        176,-205: RMCAreaSpace
-        176,-206: RMCAreaSpace
-        176,-207: RMCAreaSpace
-        176,-208: RMCAreaSpace
-        176,-209: RMCAreaSpace
+        176,-203: RMCAreaBigredv2Caves
+        176,-204: RMCAreaBigredv2Caves
+        176,-205: RMCAreaBigredv2Caves
+        176,-206: RMCAreaBigredv2Caves
+        176,-207: RMCAreaBigredv2Caves
+        176,-208: RMCAreaBigredv2Caves
+        176,-209: RMCAreaBigredv2Caves
         176,-210: RMCAreaSpace
         176,-211: RMCAreaSpace
         176,-212: RMCAreaSpace
         176,-213: RMCAreaSpace
         175,1: RMCAreaSpace
         175,0: RMCAreaSpace
-        175,-203: RMCAreaSpace
-        175,-204: RMCAreaSpace
-        175,-205: RMCAreaSpace
-        175,-206: RMCAreaSpace
-        175,-207: RMCAreaSpace
-        175,-208: RMCAreaSpace
-        175,-209: RMCAreaSpace
+        175,-203: RMCAreaBigredv2Caves
+        175,-204: RMCAreaBigredv2Caves
+        175,-205: RMCAreaBigredv2Caves
+        175,-206: RMCAreaBigredv2Caves
+        175,-207: RMCAreaBigredv2Caves
+        175,-208: RMCAreaBigredv2Caves
+        175,-209: RMCAreaBigredv2Caves
         175,-210: RMCAreaSpace
         175,-211: RMCAreaSpace
         175,-212: RMCAreaSpace
         175,-213: RMCAreaSpace
         174,1: RMCAreaSpace
         174,0: RMCAreaSpace
-        174,-203: RMCAreaSpace
-        174,-204: RMCAreaSpace
-        174,-205: RMCAreaSpace
-        174,-206: RMCAreaSpace
-        174,-207: RMCAreaSpace
-        174,-208: RMCAreaSpace
-        174,-209: RMCAreaSpace
+        174,-203: RMCAreaBigredv2Caves
+        174,-204: RMCAreaBigredv2Caves
+        174,-205: RMCAreaBigredv2Caves
+        174,-206: RMCAreaBigredv2Caves
+        174,-207: RMCAreaBigredv2Caves
+        174,-208: RMCAreaBigredv2Caves
+        174,-209: RMCAreaBigredv2Caves
         174,-210: RMCAreaSpace
         174,-211: RMCAreaSpace
         174,-212: RMCAreaSpace
         174,-213: RMCAreaSpace
         173,1: RMCAreaSpace
         173,0: RMCAreaSpace
-        173,-203: RMCAreaSpace
-        173,-204: RMCAreaSpace
-        173,-205: RMCAreaSpace
-        173,-206: RMCAreaSpace
-        173,-207: RMCAreaSpace
-        173,-208: RMCAreaSpace
-        173,-209: RMCAreaSpace
+        173,-203: RMCAreaBigredv2Caves
+        173,-204: RMCAreaBigredv2Caves
+        173,-205: RMCAreaBigredv2Caves
+        173,-206: RMCAreaBigredv2Caves
+        173,-207: RMCAreaBigredv2Caves
+        173,-208: RMCAreaBigredv2Caves
+        173,-209: RMCAreaBigredv2Caves
         173,-210: RMCAreaSpace
         173,-211: RMCAreaSpace
         173,-212: RMCAreaSpace
         173,-213: RMCAreaSpace
         172,1: RMCAreaSpace
         172,0: RMCAreaSpace
-        172,-203: RMCAreaSpace
-        172,-204: RMCAreaSpace
-        172,-205: RMCAreaSpace
-        172,-206: RMCAreaSpace
-        172,-207: RMCAreaSpace
-        172,-208: RMCAreaSpace
-        172,-209: RMCAreaSpace
+        172,-203: RMCAreaBigredv2Caves
+        172,-204: RMCAreaBigredv2Caves
+        172,-205: RMCAreaBigredv2Caves
+        172,-206: RMCAreaBigredv2Caves
+        172,-207: RMCAreaBigredv2Caves
+        172,-208: RMCAreaBigredv2Caves
+        172,-209: RMCAreaBigredv2Caves
         172,-210: RMCAreaSpace
         172,-211: RMCAreaSpace
         172,-212: RMCAreaSpace
         172,-213: RMCAreaSpace
         171,1: RMCAreaSpace
         171,0: RMCAreaSpace
-        171,-203: RMCAreaSpace
-        171,-204: RMCAreaSpace
-        171,-205: RMCAreaSpace
-        171,-206: RMCAreaSpace
-        171,-207: RMCAreaSpace
-        171,-208: RMCAreaSpace
-        171,-209: RMCAreaSpace
+        171,-203: RMCAreaBigredv2Caves
+        171,-204: RMCAreaBigredv2Caves
+        171,-205: RMCAreaBigredv2Caves
+        171,-206: RMCAreaBigredv2Caves
+        171,-207: RMCAreaBigredv2Caves
+        171,-208: RMCAreaBigredv2Caves
+        171,-209: RMCAreaBigredv2Caves
         171,-210: RMCAreaSpace
         171,-211: RMCAreaSpace
         171,-212: RMCAreaSpace
         171,-213: RMCAreaSpace
         170,1: RMCAreaSpace
         170,0: RMCAreaSpace
-        170,-203: RMCAreaSpace
-        170,-204: RMCAreaSpace
-        170,-205: RMCAreaSpace
-        170,-206: RMCAreaSpace
-        170,-207: RMCAreaSpace
-        170,-208: RMCAreaSpace
-        170,-209: RMCAreaSpace
+        170,-203: RMCAreaBigredv2Caves
+        170,-204: RMCAreaBigredv2Caves
+        170,-205: RMCAreaBigredv2Caves
+        170,-206: RMCAreaBigredv2Caves
+        170,-207: RMCAreaBigredv2Caves
+        170,-208: RMCAreaBigredv2Caves
+        170,-209: RMCAreaBigredv2Caves
         170,-210: RMCAreaSpace
         170,-211: RMCAreaSpace
         170,-212: RMCAreaSpace
         170,-213: RMCAreaSpace
         169,1: RMCAreaSpace
         169,0: RMCAreaSpace
-        169,-203: RMCAreaSpace
-        169,-204: RMCAreaSpace
-        169,-205: RMCAreaSpace
-        169,-206: RMCAreaSpace
-        169,-207: RMCAreaSpace
-        169,-208: RMCAreaSpace
-        169,-209: RMCAreaSpace
+        169,-203: RMCAreaBigredv2Caves
+        169,-204: RMCAreaBigredv2Caves
+        169,-205: RMCAreaBigredv2Caves
+        169,-206: RMCAreaBigredv2Caves
+        169,-207: RMCAreaBigredv2Caves
+        169,-208: RMCAreaBigredv2Caves
+        169,-209: RMCAreaBigredv2Caves
         169,-210: RMCAreaSpace
         169,-211: RMCAreaSpace
         169,-212: RMCAreaSpace
         169,-213: RMCAreaSpace
         168,1: RMCAreaSpace
         168,0: RMCAreaSpace
-        168,-203: RMCAreaSpace
-        168,-204: RMCAreaSpace
-        168,-205: RMCAreaSpace
-        168,-206: RMCAreaSpace
-        168,-207: RMCAreaSpace
-        168,-208: RMCAreaSpace
-        168,-209: RMCAreaSpace
+        168,-203: RMCAreaBigredv2Caves
+        168,-204: RMCAreaBigredv2Caves
+        168,-205: RMCAreaBigredv2Caves
+        168,-206: RMCAreaBigredv2Caves
+        168,-207: RMCAreaBigredv2Caves
+        168,-208: RMCAreaBigredv2Caves
+        168,-209: RMCAreaBigredv2Caves
         168,-210: RMCAreaSpace
         168,-211: RMCAreaSpace
         168,-212: RMCAreaSpace
         168,-213: RMCAreaSpace
         167,1: RMCAreaSpace
         167,0: RMCAreaSpace
-        167,-203: RMCAreaSpace
-        167,-204: RMCAreaSpace
-        167,-205: RMCAreaSpace
-        167,-206: RMCAreaSpace
-        167,-207: RMCAreaSpace
-        167,-208: RMCAreaSpace
-        167,-209: RMCAreaSpace
+        167,-203: RMCAreaBigredv2Caves
+        167,-204: RMCAreaBigredv2Caves
+        167,-205: RMCAreaBigredv2Caves
+        167,-206: RMCAreaBigredv2Caves
+        167,-207: RMCAreaBigredv2Caves
+        167,-208: RMCAreaBigredv2Caves
+        167,-209: RMCAreaBigredv2Caves
         167,-210: RMCAreaSpace
         167,-211: RMCAreaSpace
         167,-212: RMCAreaSpace
         167,-213: RMCAreaSpace
         166,1: RMCAreaSpace
         166,0: RMCAreaSpace
-        166,-203: RMCAreaSpace
-        166,-204: RMCAreaSpace
-        166,-205: RMCAreaSpace
-        166,-206: RMCAreaSpace
-        166,-207: RMCAreaSpace
-        166,-208: RMCAreaSpace
-        166,-209: RMCAreaSpace
+        166,-203: RMCAreaBigredv2Caves
+        166,-204: RMCAreaBigredv2Caves
+        166,-205: RMCAreaBigredv2Caves
+        166,-206: RMCAreaBigredv2Caves
+        166,-207: RMCAreaBigredv2Caves
+        166,-208: RMCAreaBigredv2Caves
+        166,-209: RMCAreaBigredv2Caves
         166,-210: RMCAreaSpace
         166,-211: RMCAreaSpace
         166,-212: RMCAreaSpace
         166,-213: RMCAreaSpace
         165,1: RMCAreaSpace
         165,0: RMCAreaSpace
-        165,-203: RMCAreaSpace
-        165,-204: RMCAreaSpace
-        165,-205: RMCAreaSpace
-        165,-206: RMCAreaSpace
-        165,-207: RMCAreaSpace
-        165,-208: RMCAreaSpace
-        165,-209: RMCAreaSpace
+        165,-203: RMCAreaBigredv2Caves
+        165,-204: RMCAreaBigredv2Caves
+        165,-205: RMCAreaBigredv2Caves
+        165,-206: RMCAreaBigredv2Caves
+        165,-207: RMCAreaBigredv2Caves
+        165,-208: RMCAreaBigredv2Caves
+        165,-209: RMCAreaBigredv2Caves
         165,-210: RMCAreaSpace
         165,-211: RMCAreaSpace
         165,-212: RMCAreaSpace
         165,-213: RMCAreaSpace
         164,1: RMCAreaSpace
         164,0: RMCAreaSpace
-        164,-203: RMCAreaSpace
-        164,-204: RMCAreaSpace
-        164,-205: RMCAreaSpace
-        164,-206: RMCAreaSpace
-        164,-207: RMCAreaSpace
-        164,-208: RMCAreaSpace
-        164,-209: RMCAreaSpace
+        164,-203: RMCAreaBigredv2Caves
+        164,-204: RMCAreaBigredv2Caves
+        164,-205: RMCAreaBigredv2Caves
+        164,-206: RMCAreaBigredv2Caves
+        164,-207: RMCAreaBigredv2Caves
+        164,-208: RMCAreaBigredv2Caves
+        164,-209: RMCAreaBigredv2Caves
         164,-210: RMCAreaSpace
         164,-211: RMCAreaSpace
         164,-212: RMCAreaSpace
         164,-213: RMCAreaSpace
         163,1: RMCAreaSpace
         163,0: RMCAreaSpace
-        163,-203: RMCAreaSpace
-        163,-204: RMCAreaSpace
-        163,-205: RMCAreaSpace
-        163,-206: RMCAreaSpace
-        163,-207: RMCAreaSpace
-        163,-208: RMCAreaSpace
-        163,-209: RMCAreaSpace
+        163,-203: RMCAreaBigredv2Caves
+        163,-204: RMCAreaBigredv2Caves
+        163,-205: RMCAreaBigredv2Caves
+        163,-206: RMCAreaBigredv2Caves
+        163,-207: RMCAreaBigredv2Caves
+        163,-208: RMCAreaBigredv2Caves
+        163,-209: RMCAreaBigredv2Caves
         163,-210: RMCAreaSpace
         163,-211: RMCAreaSpace
         163,-212: RMCAreaSpace
         163,-213: RMCAreaSpace
         162,1: RMCAreaSpace
         162,0: RMCAreaSpace
-        162,-203: RMCAreaSpace
-        162,-204: RMCAreaSpace
-        162,-205: RMCAreaSpace
-        162,-206: RMCAreaSpace
-        162,-207: RMCAreaSpace
-        162,-208: RMCAreaSpace
-        162,-209: RMCAreaSpace
+        162,-203: RMCAreaBigredv2Caves
+        162,-204: RMCAreaBigredv2Caves
+        162,-205: RMCAreaBigredv2Caves
+        162,-206: RMCAreaBigredv2Caves
+        162,-207: RMCAreaBigredv2Caves
+        162,-208: RMCAreaBigredv2Caves
+        162,-209: RMCAreaBigredv2Caves
         162,-210: RMCAreaSpace
         162,-211: RMCAreaSpace
         162,-212: RMCAreaSpace
         162,-213: RMCAreaSpace
         161,1: RMCAreaSpace
         161,0: RMCAreaSpace
-        161,-203: RMCAreaSpace
-        161,-204: RMCAreaSpace
-        161,-205: RMCAreaSpace
-        161,-206: RMCAreaSpace
-        161,-207: RMCAreaSpace
-        161,-208: RMCAreaSpace
-        161,-209: RMCAreaSpace
+        161,-203: RMCAreaBigredv2Caves
+        161,-204: RMCAreaBigredv2Caves
+        161,-205: RMCAreaBigredv2Caves
+        161,-206: RMCAreaBigredv2Caves
+        161,-207: RMCAreaBigredv2Caves
+        161,-208: RMCAreaBigredv2Caves
+        161,-209: RMCAreaBigredv2Caves
         161,-210: RMCAreaSpace
         161,-211: RMCAreaSpace
         161,-212: RMCAreaSpace
         161,-213: RMCAreaSpace
         160,1: RMCAreaSpace
         160,0: RMCAreaSpace
-        160,-203: RMCAreaSpace
-        160,-204: RMCAreaSpace
-        160,-205: RMCAreaSpace
-        160,-206: RMCAreaSpace
-        160,-207: RMCAreaSpace
-        160,-208: RMCAreaSpace
-        160,-209: RMCAreaSpace
+        160,-203: RMCAreaBigredv2Caves
+        160,-204: RMCAreaBigredv2Caves
+        160,-205: RMCAreaBigredv2Caves
+        160,-206: RMCAreaBigredv2Caves
+        160,-207: RMCAreaBigredv2Caves
+        160,-208: RMCAreaBigredv2Caves
+        160,-209: RMCAreaBigredv2Caves
         160,-210: RMCAreaSpace
         160,-211: RMCAreaSpace
         160,-212: RMCAreaSpace
         160,-213: RMCAreaSpace
         159,1: RMCAreaSpace
         159,0: RMCAreaSpace
-        159,-203: RMCAreaSpace
-        159,-204: RMCAreaSpace
-        159,-205: RMCAreaSpace
-        159,-206: RMCAreaSpace
-        159,-207: RMCAreaSpace
-        159,-208: RMCAreaSpace
-        159,-209: RMCAreaSpace
+        159,-203: RMCAreaBigredv2Caves
+        159,-204: RMCAreaBigredv2Caves
+        159,-205: RMCAreaBigredv2Caves
+        159,-206: RMCAreaBigredv2Caves
+        159,-207: RMCAreaBigredv2Caves
+        159,-208: RMCAreaBigredv2Caves
+        159,-209: RMCAreaBigredv2Caves
         159,-210: RMCAreaSpace
         159,-211: RMCAreaSpace
         159,-212: RMCAreaSpace
         159,-213: RMCAreaSpace
         158,1: RMCAreaSpace
         158,0: RMCAreaSpace
-        158,-203: RMCAreaSpace
-        158,-204: RMCAreaSpace
-        158,-205: RMCAreaSpace
-        158,-206: RMCAreaSpace
-        158,-207: RMCAreaSpace
-        158,-208: RMCAreaSpace
-        158,-209: RMCAreaSpace
+        158,-203: RMCAreaBigredv2Caves
+        158,-204: RMCAreaBigredv2Caves
+        158,-205: RMCAreaBigredv2Caves
+        158,-206: RMCAreaBigredv2Caves
+        158,-207: RMCAreaBigredv2Caves
+        158,-208: RMCAreaBigredv2Caves
+        158,-209: RMCAreaBigredv2Caves
         158,-210: RMCAreaSpace
         158,-211: RMCAreaSpace
         158,-212: RMCAreaSpace
@@ -51967,45 +51967,45 @@ entities:
         7,-213: RMCAreaSpace
         6,1: RMCAreaSpace
         6,0: RMCAreaSpace
-        6,-4: RMCAreaSpace
-        6,-5: RMCAreaSpace
+        6,-4: RMCAreaBigredv2Caves
+        6,-5: RMCAreaBigredv2Caves
         6,-210: RMCAreaSpace
         6,-211: RMCAreaSpace
         6,-212: RMCAreaSpace
         6,-213: RMCAreaSpace
         5,1: RMCAreaSpace
         5,0: RMCAreaSpace
-        5,-4: RMCAreaSpace
-        5,-5: RMCAreaSpace
-        5,-6: RMCAreaSpace
+        5,-4: RMCAreaBigredv2Caves
+        5,-5: RMCAreaBigredv2Caves
+        5,-6: RMCAreaBigredv2Caves
         5,-210: RMCAreaSpace
         5,-211: RMCAreaSpace
         5,-212: RMCAreaSpace
         5,-213: RMCAreaSpace
         4,1: RMCAreaSpace
         4,0: RMCAreaSpace
-        4,-3: RMCAreaSpace
-        4,-4: RMCAreaSpace
-        4,-5: RMCAreaSpace
-        4,-6: RMCAreaSpace
+        4,-3: RMCAreaBigredv2Caves
+        4,-4: RMCAreaBigredv2Caves
+        4,-5: RMCAreaBigredv2Caves
+        4,-6: RMCAreaBigredv2Caves
         4,-210: RMCAreaSpace
         4,-211: RMCAreaSpace
         4,-212: RMCAreaSpace
         4,-213: RMCAreaSpace
         3,1: RMCAreaSpace
         3,0: RMCAreaSpace
-        3,-2: RMCAreaSpace
-        3,-3: RMCAreaSpace
-        3,-4: RMCAreaSpace
-        3,-5: RMCAreaSpace
+        3,-2: RMCAreaBigredv2Caves
+        3,-3: RMCAreaBigredv2Caves
+        3,-4: RMCAreaBigredv2Caves
+        3,-5: RMCAreaBigredv2Caves
         3,-210: RMCAreaSpace
         3,-211: RMCAreaSpace
         3,-212: RMCAreaSpace
         3,-213: RMCAreaSpace
         2,1: RMCAreaSpace
         2,0: RMCAreaSpace
-        2,-3: RMCAreaSpace
-        2,-4: RMCAreaSpace
+        2,-3: RMCAreaBigredv2Caves
+        2,-4: RMCAreaBigredv2Caves
         2,-120: RMCAreaSpace
         2,-121: RMCAreaSpace
         2,-122: RMCAreaSpace
@@ -53454,7 +53454,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -50308.867
+      secondsUntilStateChange: -53970.336
       state: Opening
   - uid: 133
     components:
@@ -53950,7 +53950,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -52388.3
+      secondsUntilStateChange: -56049.77
       state: Opening
   - uid: 200
     components:
@@ -53962,7 +53962,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -52389.332
+      secondsUntilStateChange: -56050.8
       state: Opening
   - uid: 201
     components:
@@ -53995,7 +53995,7 @@ entities:
       pos: 127.5,-79.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -54831.97
+      secondsUntilStateChange: -58493.438
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -54067,7 +54067,7 @@ entities:
       pos: 77.5,-75.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -51393.332
+      secondsUntilStateChange: -55054.8
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -54088,7 +54088,7 @@ entities:
       pos: 80.5,-75.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -51393.035
+      secondsUntilStateChange: -55054.504
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -54193,7 +54193,7 @@ entities:
       pos: 63.5,-64.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -51689
+      secondsUntilStateChange: -55350.47
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -54590,7 +54590,7 @@ entities:
       pos: 68.5,-33.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -52871.465
+      secondsUntilStateChange: -56532.934
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -55069,20 +55069,19 @@ entities:
   - uid: 355
     components:
     - type: Transform
-      pos: 129.5,-50.5
-      parent: 1
-    - type: SpriteSetRenderOrder
-      offset: 0.45,-0.32
-  - uid: 356
-    components:
-    - type: MetaData
-      name: Interview Room APC
-    - type: Transform
       rot: 3.141592653589793 rad
-      pos: 129.5,-97.5
+      pos: 130.5,-97.5
       parent: 1
     - type: SpriteSetRenderOrder
       offset: -0.5,-1.5
+  - uid: 356
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 64.5,-134.5
+      parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.7,-0.4
   - uid: 357
     components:
     - type: MetaData
@@ -55163,7 +55162,7 @@ entities:
     components:
     - type: Transform
       rot: 3.141592653589793 rad
-      pos: 60.5,-107.5
+      pos: 40.5,-94.5
       parent: 1
     - type: SpriteSetRenderOrder
       offset: -0.5,-1.5
@@ -55217,6 +55216,30 @@ entities:
       parent: 1
     - type: SpriteSetRenderOrder
       offset: -0.5,-1.5
+  - uid: 383
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 58.5,-89.5
+      parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.5,-1.5
+  - uid: 30304
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 121.5,-56.5
+      parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.5,-1.5
+  - uid: 30305
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 46.5,-107.5
+      parent: 1
+    - type: SpriteSetRenderOrder
+      offset: 0.7,-1.45
 - proto: CMApcNoPower
   entities:
   - uid: 373
@@ -55296,19 +55319,10 @@ entities:
   - uid: 382
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 61.5,-88.5
+      pos: 56.5,-87.5
       parent: 1
     - type: SpriteSetRenderOrder
-      offset: -0.5,-1.5
-  - uid: 383
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 60.5,-88.5
-      parent: 1
-    - type: SpriteSetRenderOrder
-      offset: -0.5,-1.5
+      offset: 0.45,-0.32
   - uid: 384
     components:
     - type: Transform
@@ -59973,7 +59987,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 865.2991347
     - type: Door
-      secondsUntilStateChange: -52921.566
+      secondsUntilStateChange: -56583.035
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -59988,7 +60002,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 865.2991347
     - type: Door
-      secondsUntilStateChange: -52921.566
+      secondsUntilStateChange: -56583.035
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -60519,7 +60533,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 2393.0309403
     - type: Door
-      secondsUntilStateChange: -51393.832
+      secondsUntilStateChange: -55055.3
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -60535,7 +60549,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 2393.0309403
     - type: Door
-      secondsUntilStateChange: -51393.832
+      secondsUntilStateChange: -55055.3
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -60551,7 +60565,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 2078.4979215
     - type: Door
-      secondsUntilStateChange: -51708.367
+      secondsUntilStateChange: -55369.836
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -60567,7 +60581,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 2078.4979215
     - type: Door
-      secondsUntilStateChange: -51708.367
+      secondsUntilStateChange: -55369.836
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -60815,9 +60829,9 @@ entities:
       parent: 1
     missingComponents:
     - ApcPowerReceiver
+    - ActivatableUIRequiresPower
     - FaxMachine
     - ActivatableUI
-    - ActivatableUIRequiresPower
     - UserInterface
     - Faxecute
     - ItemSlots
@@ -60833,9 +60847,9 @@ entities:
       containers: {}
     missingComponents:
     - ApcPowerReceiver
+    - ActivatableUIRequiresPower
     - FaxMachine
     - ActivatableUI
-    - ActivatableUIRequiresPower
     - UserInterface
     - Faxecute
     - ItemSlots
@@ -60848,7 +60862,6 @@ entities:
       parent: 1
     - type: ApcPowerReceiver
       powerLoad: 5
-      needsPower: True
     - type: FaxMachine
       name: LV-1413 Research
   - uid: 1276
@@ -60858,7 +60871,6 @@ entities:
       parent: 1
     - type: ApcPowerReceiver
       powerLoad: 5
-      needsPower: True
     - type: FaxMachine
       name: LV-1413 Lambda
   - uid: 1277
@@ -60868,9 +60880,9 @@ entities:
       parent: 1
     missingComponents:
     - ApcPowerReceiver
+    - ActivatableUIRequiresPower
     - FaxMachine
     - ActivatableUI
-    - ActivatableUIRequiresPower
     - UserInterface
     - Faxecute
     - ItemSlots
@@ -64756,6 +64768,11 @@ entities:
       rot: 3.141592653589793 rad
       pos: 18.5,-186.5
       parent: 1
+  - uid: 30012
+    components:
+    - type: Transform
+      pos: 45.5,-179.5
+      parent: 1
 - proto: CMPosterSuspicious
   entities:
   - uid: 1956
@@ -65403,6 +65420,11 @@ entities:
     - type: Transform
       pos: 20.5,-77.5
       parent: 1
+  - uid: 30013
+    components:
+    - type: Transform
+      pos: 76.960365,-198.4958
+      parent: 1
 - proto: CMSemioticBulkhead_door
   entities:
   - uid: 2075
@@ -65601,6 +65623,13 @@ entities:
     components:
     - type: Transform
       pos: 78.5,-87.5
+      parent: 1
+- proto: CMSemioticWest
+  entities:
+  - uid: 30014
+    components:
+    - type: Transform
+      pos: 76.5,-198.5
       parent: 1
 - proto: CMShardGlass
   entities:
@@ -177718,8 +177747,58 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 153.5,-159.5
       parent: 1
+  - uid: 29968
+    components:
+    - type: Transform
+      pos: 12.5,-149.5
+      parent: 1
+  - uid: 30005
+    components:
+    - type: Transform
+      pos: 10.5,-149.5
+      parent: 1
+  - uid: 30006
+    components:
+    - type: Transform
+      pos: 11.5,-149.5
+      parent: 1
+  - uid: 30007
+    components:
+    - type: Transform
+      pos: 22.5,-153.5
+      parent: 1
+  - uid: 30008
+    components:
+    - type: Transform
+      pos: 21.5,-153.5
+      parent: 1
+  - uid: 30009
+    components:
+    - type: Transform
+      pos: 20.5,-153.5
+      parent: 1
+  - uid: 30010
+    components:
+    - type: Transform
+      pos: 20.5,-152.5
+      parent: 1
+  - uid: 30011
+    components:
+    - type: Transform
+      pos: 20.5,-151.5
+      parent: 1
 - proto: DoorXenoResinImpenetrable
   entities:
+  - uid: 2247
+    components:
+    - type: Transform
+      pos: 37.5,-201.5
+      parent: 1
+  - uid: 2249
+    components:
+    - type: Transform
+      pos: 195.5,-168.5
+      parent: 1
   - uid: 17861
     components:
     - type: Transform
@@ -177890,7 +177969,7 @@ entities:
   - uid: 24227
     components:
     - type: Transform
-      pos: 37.5,-198.5
+      pos: 156.5,-46.5
       parent: 1
   - uid: 24228
     components:
@@ -178037,10 +178116,25 @@ entities:
     - type: Transform
       pos: 192.5,-107.5
       parent: 1
-  - uid: 29267
+  - uid: 27172
     components:
     - type: Transform
-      pos: 37.5,-199.5
+      pos: 156.5,-47.5
+      parent: 1
+  - uid: 27174
+    components:
+    - type: Transform
+      pos: 152.5,-46.5
+      parent: 1
+  - uid: 27176
+    components:
+    - type: Transform
+      pos: 200.5,-169.5
+      parent: 1
+  - uid: 27177
+    components:
+    - type: Transform
+      pos: 198.5,-169.5
       parent: 1
   - uid: 29280
     components:
@@ -178053,10 +178147,45 @@ entities:
     - type: Transform
       pos: 162.5,-45.5
       parent: 1
+  - uid: 29357
+    components:
+    - type: Transform
+      pos: 191.5,-172.5
+      parent: 1
   - uid: 29372
     components:
     - type: Transform
       pos: 162.5,-46.5
+      parent: 1
+  - uid: 29964
+    components:
+    - type: Transform
+      pos: 37.5,-198.5
+      parent: 1
+  - uid: 29965
+    components:
+    - type: Transform
+      pos: 161.5,-54.5
+      parent: 1
+  - uid: 29966
+    components:
+    - type: Transform
+      pos: 169.5,-70.5
+      parent: 1
+  - uid: 29967
+    components:
+    - type: Transform
+      pos: 166.5,-70.5
+      parent: 1
+  - uid: 29970
+    components:
+    - type: Transform
+      pos: 156.5,-50.5
+      parent: 1
+  - uid: 29972
+    components:
+    - type: Transform
+      pos: 155.5,-46.5
       parent: 1
   - uid: 29982
     components:
@@ -178073,6 +178202,106 @@ entities:
     - type: Transform
       pos: 28.5,-194.5
       parent: 1
+  - uid: 29996
+    components:
+    - type: Transform
+      pos: 199.5,-169.5
+      parent: 1
+  - uid: 29997
+    components:
+    - type: Transform
+      pos: 194.5,-168.5
+      parent: 1
+  - uid: 29998
+    components:
+    - type: Transform
+      pos: 191.5,-173.5
+      parent: 1
+  - uid: 30001
+    components:
+    - type: Transform
+      pos: 171.5,-95.5
+      parent: 1
+  - uid: 30018
+    components:
+    - type: Transform
+      pos: 188.5,-193.5
+      parent: 1
+  - uid: 30019
+    components:
+    - type: Transform
+      pos: 188.5,-192.5
+      parent: 1
+  - uid: 30020
+    components:
+    - type: Transform
+      pos: 189.5,-189.5
+      parent: 1
+  - uid: 30021
+    components:
+    - type: Transform
+      pos: 189.5,-188.5
+      parent: 1
+  - uid: 30023
+    components:
+    - type: Transform
+      pos: 200.5,-110.5
+      parent: 1
+  - uid: 30024
+    components:
+    - type: Transform
+      pos: 201.5,-110.5
+      parent: 1
+  - uid: 30025
+    components:
+    - type: Transform
+      pos: 202.5,-110.5
+      parent: 1
+  - uid: 30026
+    components:
+    - type: Transform
+      pos: 203.5,-110.5
+      parent: 1
+  - uid: 30027
+    components:
+    - type: Transform
+      pos: 204.5,-110.5
+      parent: 1
+  - uid: 30028
+    components:
+    - type: Transform
+      pos: 205.5,-110.5
+      parent: 1
+  - uid: 30029
+    components:
+    - type: Transform
+      pos: 211.5,-89.5
+      parent: 1
+  - uid: 30030
+    components:
+    - type: Transform
+      pos: 212.5,-89.5
+      parent: 1
+  - uid: 30031
+    components:
+    - type: Transform
+      pos: 213.5,-89.5
+      parent: 1
+  - uid: 30032
+    components:
+    - type: Transform
+      pos: 214.5,-89.5
+      parent: 1
+  - uid: 30033
+    components:
+    - type: Transform
+      pos: 216.5,-89.5
+      parent: 1
+  - uid: 30034
+    components:
+    - type: Transform
+      pos: 215.5,-89.5
+      parent: 1
   - uid: 30089
     components:
     - type: Transform
@@ -178083,65 +178312,10 @@ entities:
     - type: Transform
       pos: 105.5,-170.5
       parent: 1
-  - uid: 30091
-    components:
-    - type: Transform
-      pos: 190.5,-172.5
-      parent: 1
-  - uid: 30092
-    components:
-    - type: Transform
-      pos: 190.5,-173.5
-      parent: 1
   - uid: 30093
     components:
     - type: Transform
       pos: 190.5,-169.5
-      parent: 1
-  - uid: 30094
-    components:
-    - type: Transform
-      pos: 194.5,-167.5
-      parent: 1
-  - uid: 30095
-    components:
-    - type: Transform
-      pos: 195.5,-167.5
-      parent: 1
-  - uid: 30096
-    components:
-    - type: Transform
-      pos: 198.5,-167.5
-      parent: 1
-  - uid: 30097
-    components:
-    - type: Transform
-      pos: 200.5,-167.5
-      parent: 1
-  - uid: 30098
-    components:
-    - type: Transform
-      pos: 199.5,-167.5
-      parent: 1
-  - uid: 30104
-    components:
-    - type: Transform
-      pos: 190.5,-188.5
-      parent: 1
-  - uid: 30105
-    components:
-    - type: Transform
-      pos: 190.5,-189.5
-      parent: 1
-  - uid: 30106
-    components:
-    - type: Transform
-      pos: 190.5,-192.5
-      parent: 1
-  - uid: 30107
-    components:
-    - type: Transform
-      pos: 190.5,-193.5
       parent: 1
   - uid: 30110
     components:
@@ -178152,11 +178326,6 @@ entities:
     components:
     - type: Transform
       pos: 174.5,-94.5
-      parent: 1
-  - uid: 30112
-    components:
-    - type: Transform
-      pos: 173.5,-94.5
       parent: 1
   - uid: 30117
     components:
@@ -178187,36 +178356,6 @@ entities:
     components:
     - type: Transform
       pos: 189.5,-113.5
-      parent: 1
-  - uid: 30136
-    components:
-    - type: Transform
-      pos: 156.5,-50.5
-      parent: 1
-  - uid: 30137
-    components:
-    - type: Transform
-      pos: 155.5,-46.5
-      parent: 1
-  - uid: 30138
-    components:
-    - type: Transform
-      pos: 156.5,-46.5
-      parent: 1
-  - uid: 30142
-    components:
-    - type: Transform
-      pos: 156.5,-51.5
-      parent: 1
-  - uid: 30143
-    components:
-    - type: Transform
-      pos: 152.5,-46.5
-      parent: 1
-  - uid: 30144
-    components:
-    - type: Transform
-      pos: 151.5,-46.5
       parent: 1
   - uid: 30145
     components:
@@ -178289,13 +178428,6 @@ entities:
     - type: Transform
       pos: 35.4219,-179.63689
       parent: 1
-- proto: FoodBoxDonkpocket
-  entities:
-  - uid: 24310
-    components:
-    - type: Transform
-      pos: 208.79808,-86.36202
-      parent: 1
 - proto: FoodBreadBun
   entities:
   - uid: 24311
@@ -178336,18 +178468,6 @@ entities:
     components:
     - type: Transform
       pos: 43.5,-85.5
-      parent: 1
-- proto: FoodDonkpocket
-  entities:
-  - uid: 24318
-    components:
-    - type: Transform
-      pos: 44.5,-82.5
-      parent: 1
-  - uid: 24319
-    components:
-    - type: Transform
-      pos: 44.5,-84.5
       parent: 1
 - proto: FoodPacketEnergyTrash
   entities:
@@ -179463,6 +179583,33 @@ entities:
     components:
     - type: Transform
       pos: 84.47628,-91.47252
+      parent: 1
+- proto: RMCArcadeSpaceVillain
+  entities:
+  - uid: 29227
+    components:
+    - type: Transform
+      pos: 115.5,-69.5
+      parent: 1
+  - uid: 29228
+    components:
+    - type: Transform
+      pos: 115.5,-68.5
+      parent: 1
+  - uid: 29229
+    components:
+    - type: Transform
+      pos: 113.5,-67.5
+      parent: 1
+  - uid: 29230
+    components:
+    - type: Transform
+      pos: 112.5,-65.5
+      parent: 1
+  - uid: 29231
+    components:
+    - type: Transform
+      pos: 113.5,-64.5
       parent: 1
 - proto: RMCArmorDetective
   entities:
@@ -181402,6 +181549,808 @@ entities:
     - type: Transform
       pos: 101.5,-79.5
       parent: 1
+- proto: RMCBlockerVehicle
+  entities:
+  - uid: 30037
+    components:
+    - type: Transform
+      pos: 9.5,-44.5
+      parent: 1
+  - uid: 30038
+    components:
+    - type: Transform
+      pos: 10.5,-44.5
+      parent: 1
+  - uid: 30039
+    components:
+    - type: Transform
+      pos: 11.5,-44.5
+      parent: 1
+  - uid: 30040
+    components:
+    - type: Transform
+      pos: 12.5,-44.5
+      parent: 1
+  - uid: 30041
+    components:
+    - type: Transform
+      pos: 13.5,-44.5
+      parent: 1
+  - uid: 30042
+    components:
+    - type: Transform
+      pos: 15.5,-46.5
+      parent: 1
+  - uid: 30091
+    components:
+    - type: Transform
+      pos: 15.5,-47.5
+      parent: 1
+  - uid: 30092
+    components:
+    - type: Transform
+      pos: 15.5,-48.5
+      parent: 1
+  - uid: 30094
+    components:
+    - type: Transform
+      pos: 15.5,-49.5
+      parent: 1
+  - uid: 30095
+    components:
+    - type: Transform
+      pos: 15.5,-50.5
+      parent: 1
+  - uid: 30096
+    components:
+    - type: Transform
+      pos: 15.5,-51.5
+      parent: 1
+  - uid: 30097
+    components:
+    - type: Transform
+      pos: 15.5,-52.5
+      parent: 1
+  - uid: 30098
+    components:
+    - type: Transform
+      pos: 13.5,-68.5
+      parent: 1
+  - uid: 30099
+    components:
+    - type: Transform
+      pos: 13.5,-70.5
+      parent: 1
+  - uid: 30100
+    components:
+    - type: Transform
+      pos: 13.5,-69.5
+      parent: 1
+  - uid: 30101
+    components:
+    - type: Transform
+      pos: 13.5,-71.5
+      parent: 1
+  - uid: 30102
+    components:
+    - type: Transform
+      pos: 15.5,-81.5
+      parent: 1
+  - uid: 30103
+    components:
+    - type: Transform
+      pos: 15.5,-82.5
+      parent: 1
+  - uid: 30104
+    components:
+    - type: Transform
+      pos: 15.5,-83.5
+      parent: 1
+  - uid: 30105
+    components:
+    - type: Transform
+      pos: 15.5,-91.5
+      parent: 1
+  - uid: 30106
+    components:
+    - type: Transform
+      pos: 15.5,-92.5
+      parent: 1
+  - uid: 30107
+    components:
+    - type: Transform
+      pos: 17.5,-111.5
+      parent: 1
+  - uid: 30108
+    components:
+    - type: Transform
+      pos: 17.5,-112.5
+      parent: 1
+  - uid: 30109
+    components:
+    - type: Transform
+      pos: 17.5,-113.5
+      parent: 1
+  - uid: 30112
+    components:
+    - type: Transform
+      pos: 17.5,-114.5
+      parent: 1
+  - uid: 30115
+    components:
+    - type: Transform
+      pos: 17.5,-115.5
+      parent: 1
+  - uid: 30116
+    components:
+    - type: Transform
+      pos: 17.5,-116.5
+      parent: 1
+  - uid: 30136
+    components:
+    - type: Transform
+      pos: 17.5,-117.5
+      parent: 1
+  - uid: 30137
+    components:
+    - type: Transform
+      pos: 43.5,-136.5
+      parent: 1
+  - uid: 30138
+    components:
+    - type: Transform
+      pos: 44.5,-136.5
+      parent: 1
+  - uid: 30139
+    components:
+    - type: Transform
+      pos: 45.5,-136.5
+      parent: 1
+  - uid: 30140
+    components:
+    - type: Transform
+      pos: 46.5,-136.5
+      parent: 1
+  - uid: 30141
+    components:
+    - type: Transform
+      pos: 47.5,-136.5
+      parent: 1
+  - uid: 30142
+    components:
+    - type: Transform
+      pos: 48.5,-136.5
+      parent: 1
+  - uid: 30143
+    components:
+    - type: Transform
+      pos: 49.5,-136.5
+      parent: 1
+  - uid: 30144
+    components:
+    - type: Transform
+      pos: 50.5,-136.5
+      parent: 1
+  - uid: 30179
+    components:
+    - type: Transform
+      pos: 59.5,-134.5
+      parent: 1
+  - uid: 30180
+    components:
+    - type: Transform
+      pos: 60.5,-134.5
+      parent: 1
+  - uid: 30181
+    components:
+    - type: Transform
+      pos: 61.5,-134.5
+      parent: 1
+  - uid: 30182
+    components:
+    - type: Transform
+      pos: 62.5,-134.5
+      parent: 1
+  - uid: 30183
+    components:
+    - type: Transform
+      pos: 62.5,-135.5
+      parent: 1
+  - uid: 30184
+    components:
+    - type: Transform
+      pos: 62.5,-139.5
+      parent: 1
+  - uid: 30185
+    components:
+    - type: Transform
+      pos: 62.5,-140.5
+      parent: 1
+  - uid: 30186
+    components:
+    - type: Transform
+      pos: 62.5,-141.5
+      parent: 1
+  - uid: 30187
+    components:
+    - type: Transform
+      pos: 62.5,-142.5
+      parent: 1
+  - uid: 30188
+    components:
+    - type: Transform
+      pos: 62.5,-143.5
+      parent: 1
+  - uid: 30189
+    components:
+    - type: Transform
+      pos: 62.5,-144.5
+      parent: 1
+  - uid: 30190
+    components:
+    - type: Transform
+      pos: 62.5,-146.5
+      parent: 1
+  - uid: 30191
+    components:
+    - type: Transform
+      pos: 62.5,-147.5
+      parent: 1
+  - uid: 30192
+    components:
+    - type: Transform
+      pos: 62.5,-145.5
+      parent: 1
+  - uid: 30193
+    components:
+    - type: Transform
+      pos: 70.5,-150.5
+      parent: 1
+  - uid: 30194
+    components:
+    - type: Transform
+      pos: 71.5,-150.5
+      parent: 1
+  - uid: 30195
+    components:
+    - type: Transform
+      pos: 72.5,-150.5
+      parent: 1
+  - uid: 30196
+    components:
+    - type: Transform
+      pos: 74.5,-150.5
+      parent: 1
+  - uid: 30197
+    components:
+    - type: Transform
+      pos: 75.5,-150.5
+      parent: 1
+  - uid: 30198
+    components:
+    - type: Transform
+      pos: 76.5,-150.5
+      parent: 1
+  - uid: 30199
+    components:
+    - type: Transform
+      pos: 73.5,-150.5
+      parent: 1
+  - uid: 30200
+    components:
+    - type: Transform
+      pos: 90.5,-143.5
+      parent: 1
+  - uid: 30201
+    components:
+    - type: Transform
+      pos: 91.5,-143.5
+      parent: 1
+  - uid: 30202
+    components:
+    - type: Transform
+      pos: 92.5,-143.5
+      parent: 1
+  - uid: 30203
+    components:
+    - type: Transform
+      pos: 93.5,-143.5
+      parent: 1
+  - uid: 30204
+    components:
+    - type: Transform
+      pos: 102.5,-143.5
+      parent: 1
+  - uid: 30205
+    components:
+    - type: Transform
+      pos: 103.5,-143.5
+      parent: 1
+  - uid: 30206
+    components:
+    - type: Transform
+      pos: 104.5,-143.5
+      parent: 1
+  - uid: 30207
+    components:
+    - type: Transform
+      pos: 105.5,-143.5
+      parent: 1
+  - uid: 30208
+    components:
+    - type: Transform
+      pos: 110.5,-141.5
+      parent: 1
+  - uid: 30209
+    components:
+    - type: Transform
+      pos: 110.5,-140.5
+      parent: 1
+  - uid: 30210
+    components:
+    - type: Transform
+      pos: 110.5,-139.5
+      parent: 1
+  - uid: 30211
+    components:
+    - type: Transform
+      pos: 110.5,-138.5
+      parent: 1
+  - uid: 30212
+    components:
+    - type: Transform
+      pos: 110.5,-137.5
+      parent: 1
+  - uid: 30213
+    components:
+    - type: Transform
+      pos: 113.5,-135.5
+      parent: 1
+  - uid: 30214
+    components:
+    - type: Transform
+      pos: 114.5,-135.5
+      parent: 1
+  - uid: 30215
+    components:
+    - type: Transform
+      pos: 115.5,-135.5
+      parent: 1
+  - uid: 30216
+    components:
+    - type: Transform
+      pos: 116.5,-135.5
+      parent: 1
+  - uid: 30217
+    components:
+    - type: Transform
+      pos: 117.5,-135.5
+      parent: 1
+  - uid: 30218
+    components:
+    - type: Transform
+      pos: 118.5,-135.5
+      parent: 1
+  - uid: 30219
+    components:
+    - type: Transform
+      pos: 119.5,-135.5
+      parent: 1
+  - uid: 30220
+    components:
+    - type: Transform
+      pos: 120.5,-135.5
+      parent: 1
+  - uid: 30221
+    components:
+    - type: Transform
+      pos: 124.5,-135.5
+      parent: 1
+  - uid: 30222
+    components:
+    - type: Transform
+      pos: 125.5,-135.5
+      parent: 1
+  - uid: 30223
+    components:
+    - type: Transform
+      pos: 126.5,-135.5
+      parent: 1
+  - uid: 30224
+    components:
+    - type: Transform
+      pos: 128.5,-135.5
+      parent: 1
+  - uid: 30225
+    components:
+    - type: Transform
+      pos: 127.5,-135.5
+      parent: 1
+  - uid: 30226
+    components:
+    - type: Transform
+      pos: 129.5,-135.5
+      parent: 1
+  - uid: 30227
+    components:
+    - type: Transform
+      pos: 134.5,-129.5
+      parent: 1
+  - uid: 30228
+    components:
+    - type: Transform
+      pos: 135.5,-129.5
+      parent: 1
+  - uid: 30229
+    components:
+    - type: Transform
+      pos: 136.5,-129.5
+      parent: 1
+  - uid: 30230
+    components:
+    - type: Transform
+      pos: 137.5,-129.5
+      parent: 1
+  - uid: 30231
+    components:
+    - type: Transform
+      pos: 138.5,-129.5
+      parent: 1
+  - uid: 30232
+    components:
+    - type: Transform
+      pos: 139.5,-129.5
+      parent: 1
+  - uid: 30233
+    components:
+    - type: Transform
+      pos: 140.5,-129.5
+      parent: 1
+  - uid: 30234
+    components:
+    - type: Transform
+      pos: 141.5,-129.5
+      parent: 1
+  - uid: 30235
+    components:
+    - type: Transform
+      pos: 142.5,-129.5
+      parent: 1
+  - uid: 30236
+    components:
+    - type: Transform
+      pos: 143.5,-129.5
+      parent: 1
+  - uid: 30237
+    components:
+    - type: Transform
+      pos: 144.5,-129.5
+      parent: 1
+  - uid: 30238
+    components:
+    - type: Transform
+      pos: 145.5,-129.5
+      parent: 1
+  - uid: 30239
+    components:
+    - type: Transform
+      pos: 145.5,-128.5
+      parent: 1
+  - uid: 30240
+    components:
+    - type: Transform
+      pos: 145.5,-127.5
+      parent: 1
+  - uid: 30241
+    components:
+    - type: Transform
+      pos: 145.5,-126.5
+      parent: 1
+  - uid: 30242
+    components:
+    - type: Transform
+      pos: 145.5,-125.5
+      parent: 1
+  - uid: 30243
+    components:
+    - type: Transform
+      pos: 145.5,-124.5
+      parent: 1
+  - uid: 30244
+    components:
+    - type: Transform
+      pos: 145.5,-123.5
+      parent: 1
+  - uid: 30245
+    components:
+    - type: Transform
+      pos: 145.5,-122.5
+      parent: 1
+  - uid: 30246
+    components:
+    - type: Transform
+      pos: 145.5,-119.5
+      parent: 1
+  - uid: 30247
+    components:
+    - type: Transform
+      pos: 145.5,-117.5
+      parent: 1
+  - uid: 30248
+    components:
+    - type: Transform
+      pos: 145.5,-121.5
+      parent: 1
+  - uid: 30249
+    components:
+    - type: Transform
+      pos: 145.5,-118.5
+      parent: 1
+  - uid: 30250
+    components:
+    - type: Transform
+      pos: 145.5,-120.5
+      parent: 1
+  - uid: 30251
+    components:
+    - type: Transform
+      pos: 166.5,-91.5
+      parent: 1
+  - uid: 30252
+    components:
+    - type: Transform
+      pos: 165.5,-91.5
+      parent: 1
+  - uid: 30253
+    components:
+    - type: Transform
+      pos: 164.5,-91.5
+      parent: 1
+  - uid: 30254
+    components:
+    - type: Transform
+      pos: 163.5,-91.5
+      parent: 1
+  - uid: 30255
+    components:
+    - type: Transform
+      pos: 163.5,-90.5
+      parent: 1
+  - uid: 30256
+    components:
+    - type: Transform
+      pos: 163.5,-89.5
+      parent: 1
+  - uid: 30257
+    components:
+    - type: Transform
+      pos: 163.5,-87.5
+      parent: 1
+  - uid: 30258
+    components:
+    - type: Transform
+      pos: 163.5,-86.5
+      parent: 1
+  - uid: 30259
+    components:
+    - type: Transform
+      pos: 163.5,-85.5
+      parent: 1
+  - uid: 30260
+    components:
+    - type: Transform
+      pos: 163.5,-84.5
+      parent: 1
+  - uid: 30261
+    components:
+    - type: Transform
+      pos: 163.5,-83.5
+      parent: 1
+  - uid: 30262
+    components:
+    - type: Transform
+      pos: 163.5,-82.5
+      parent: 1
+  - uid: 30263
+    components:
+    - type: Transform
+      pos: 163.5,-88.5
+      parent: 1
+  - uid: 30264
+    components:
+    - type: Transform
+      pos: 163.5,-81.5
+      parent: 1
+  - uid: 30265
+    components:
+    - type: Transform
+      pos: 153.5,-57.5
+      parent: 1
+  - uid: 30266
+    components:
+    - type: Transform
+      pos: 152.5,-57.5
+      parent: 1
+  - uid: 30267
+    components:
+    - type: Transform
+      pos: 151.5,-57.5
+      parent: 1
+  - uid: 30268
+    components:
+    - type: Transform
+      pos: 150.5,-57.5
+      parent: 1
+  - uid: 30269
+    components:
+    - type: Transform
+      pos: 149.5,-57.5
+      parent: 1
+  - uid: 30270
+    components:
+    - type: Transform
+      pos: 147.5,-54.5
+      parent: 1
+  - uid: 30271
+    components:
+    - type: Transform
+      pos: 147.5,-53.5
+      parent: 1
+  - uid: 30272
+    components:
+    - type: Transform
+      pos: 134.5,-44.5
+      parent: 1
+  - uid: 30273
+    components:
+    - type: Transform
+      pos: 133.5,-44.5
+      parent: 1
+  - uid: 30274
+    components:
+    - type: Transform
+      pos: 132.5,-44.5
+      parent: 1
+  - uid: 30275
+    components:
+    - type: Transform
+      pos: 131.5,-44.5
+      parent: 1
+  - uid: 30276
+    components:
+    - type: Transform
+      pos: 130.5,-44.5
+      parent: 1
+  - uid: 30277
+    components:
+    - type: Transform
+      pos: 129.5,-44.5
+      parent: 1
+  - uid: 30278
+    components:
+    - type: Transform
+      pos: 133.5,-24.5
+      parent: 1
+  - uid: 30279
+    components:
+    - type: Transform
+      pos: 133.5,-25.5
+      parent: 1
+  - uid: 30280
+    components:
+    - type: Transform
+      pos: 133.5,-26.5
+      parent: 1
+  - uid: 30281
+    components:
+    - type: Transform
+      pos: 133.5,-27.5
+      parent: 1
+  - uid: 30282
+    components:
+    - type: Transform
+      pos: 133.5,-28.5
+      parent: 1
+  - uid: 30283
+    components:
+    - type: Transform
+      pos: 38.5,-5.5
+      parent: 1
+  - uid: 30284
+    components:
+    - type: Transform
+      pos: 39.5,-5.5
+      parent: 1
+  - uid: 30285
+    components:
+    - type: Transform
+      pos: 39.5,-6.5
+      parent: 1
+  - uid: 30286
+    components:
+    - type: Transform
+      pos: 39.5,-7.5
+      parent: 1
+  - uid: 30287
+    components:
+    - type: Transform
+      pos: 39.5,-8.5
+      parent: 1
+  - uid: 30288
+    components:
+    - type: Transform
+      pos: 40.5,-8.5
+      parent: 1
+  - uid: 30289
+    components:
+    - type: Transform
+      pos: 41.5,-8.5
+      parent: 1
+  - uid: 30290
+    components:
+    - type: Transform
+      pos: 42.5,-8.5
+      parent: 1
+  - uid: 30291
+    components:
+    - type: Transform
+      pos: 44.5,-8.5
+      parent: 1
+  - uid: 30292
+    components:
+    - type: Transform
+      pos: 43.5,-8.5
+      parent: 1
+  - uid: 30293
+    components:
+    - type: Transform
+      pos: 45.5,-8.5
+      parent: 1
+  - uid: 30294
+    components:
+    - type: Transform
+      pos: 46.5,-8.5
+      parent: 1
+  - uid: 30295
+    components:
+    - type: Transform
+      pos: 67.5,-16.5
+      parent: 1
+  - uid: 30296
+    components:
+    - type: Transform
+      pos: 68.5,-16.5
+      parent: 1
+  - uid: 30297
+    components:
+    - type: Transform
+      pos: 70.5,-16.5
+      parent: 1
+  - uid: 30298
+    components:
+    - type: Transform
+      pos: 71.5,-16.5
+      parent: 1
+  - uid: 30299
+    components:
+    - type: Transform
+      pos: 72.5,-16.5
+      parent: 1
+  - uid: 30300
+    components:
+    - type: Transform
+      pos: 73.5,-16.5
+      parent: 1
+  - uid: 30301
+    components:
+    - type: Transform
+      pos: 74.5,-16.5
+      parent: 1
+  - uid: 30302
+    components:
+    - type: Transform
+      pos: 69.5,-16.5
+      parent: 1
 - proto: RMCBookcase
   entities:
   - uid: 24724
@@ -181504,6 +182453,13 @@ entities:
     components:
     - type: Transform
       pos: 136.57494,-99.63055
+      parent: 1
+- proto: RMCBoxDonkpockets
+  entities:
+  - uid: 24310
+    components:
+    - type: Transform
+      pos: 208.79808,-86.36202
       parent: 1
 - proto: RMCBoxDonut
   entities:
@@ -183910,7 +184866,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 181.5,-35.5
       parent: 1
-- proto: RMCFogWallWeed30
+- proto: RMCFogWallWeed
   entities:
   - uid: 24211
     components:
@@ -184422,6 +185378,18 @@ entities:
     components:
     - type: Transform
       pos: 187.5,-50.5
+      parent: 1
+- proto: RMCFoodDonkpocket
+  entities:
+  - uid: 24318
+    components:
+    - type: Transform
+      pos: 44.5,-82.5
+      parent: 1
+  - uid: 24319
+    components:
+    - type: Transform
+      pos: 44.5,-84.5
       parent: 1
 - proto: RMCFoodDonut
   entities:
@@ -195536,6 +196504,29 @@ entities:
     - type: Transform
       pos: 195.5,-55.5
       parent: 1
+- proto: RMCIntelDataTerminal
+  entities:
+  - uid: 27706
+    components:
+    - type: Transform
+      pos: 177.5,-61.5
+      parent: 1
+  - uid: 27828
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 119.5,-186.5
+      parent: 1
+  - uid: 30035
+    components:
+    - type: Transform
+      pos: 76.5,-78.5
+      parent: 1
+  - uid: 30036
+    components:
+    - type: Transform
+      pos: 19.5,-85.5
+      parent: 1
 - proto: RMCIronOre1
   entities:
   - uid: 27009
@@ -196396,41 +197387,6 @@ entities:
     components:
     - type: Transform
       pos: 134.16971,-107.511894
-      parent: 1
-- proto: RMCLightFixtureDouble
-  entities:
-  - uid: 27172
-    components:
-    - type: Transform
-      pos: 37.5,-160.5
-      parent: 1
-  - uid: 27173
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 45.5,-157.5
-      parent: 1
-  - uid: 27174
-    components:
-    - type: Transform
-      pos: 45.5,-160.5
-      parent: 1
-  - uid: 27175
-    components:
-    - type: Transform
-      pos: 43.5,-160.5
-      parent: 1
-  - uid: 27176
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 37.5,-167.5
-      parent: 1
-  - uid: 27177
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 43.5,-167.5
       parent: 1
 - proto: RMCLightFixtureEmpty
   entities:
@@ -199052,6 +200008,39 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 131.5,-61.5
       parent: 1
+  - uid: 29320
+    components:
+    - type: Transform
+      pos: 43.5,-160.5
+      parent: 1
+  - uid: 29321
+    components:
+    - type: Transform
+      pos: 45.5,-160.5
+      parent: 1
+  - uid: 29322
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 45.5,-157.5
+      parent: 1
+  - uid: 29323
+    components:
+    - type: Transform
+      pos: 37.5,-160.5
+      parent: 1
+  - uid: 29351
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 37.5,-167.5
+      parent: 1
+  - uid: 29352
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 43.5,-167.5
+      parent: 1
 - proto: RMCLightFixtureSmallOffset
   entities:
   - uid: 27630
@@ -199522,7 +200511,7 @@ entities:
       parent: 1
 - proto: RMCLockerSecureSafe
   entities:
-  - uid: 27706
+  - uid: 27829
     components:
     - type: Transform
       pos: 93.5,-95.5
@@ -199877,40 +200866,12 @@ entities:
     - type: Transform
       pos: 134.5,-129.5
       parent: 1
-- proto: RMCMapInsertSolarisSurvSpawnAdmin
+- proto: RMCMapInsertSolarisSurvSpawnTogether
   entities:
   - uid: 2251
     components:
     - type: Transform
       pos: 74.5,-83.5
-      parent: 1
-- proto: RMCMapInsertSolarisSurvSpawnBar
-  entities:
-  - uid: 2248
-    components:
-    - type: Transform
-      pos: 110.5,-82.5
-      parent: 1
-- proto: RMCMapInsertSolarisSurvSpawnOffice
-  entities:
-  - uid: 2247
-    components:
-    - type: Transform
-      pos: 124.5,-102.5
-      parent: 1
-- proto: RMCMapInsertSolarisSurvSpawnSouthMarshals
-  entities:
-  - uid: 2250
-    components:
-    - type: Transform
-      pos: 88.5,-63.5
-      parent: 1
-- proto: RMCMapInsertSolarisSurvSpawnStorage
-  entities:
-  - uid: 2249
-    components:
-    - type: Transform
-      pos: 84.5,-114.5
       parent: 1
 - proto: RMCMapInsertSolarisTCommsOpen
   entities:
@@ -200407,16 +201368,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 153.5,-67.5
-      parent: 1
-  - uid: 27828
-    components:
-    - type: Transform
-      pos: 19.5,-85.5
-      parent: 1
-  - uid: 27829
-    components:
-    - type: Transform
-      pos: 76.5,-78.5
       parent: 1
 - proto: RMCPhotocopier
   entities:
@@ -208482,76 +209433,121 @@ entities:
     - type: Transform
       pos: 192.5,-75.5
       parent: 1
+    missingComponents:
+    - ApcPowerReceiver
+    - RMCPowerReceiver
   - uid: 29011
     components:
     - type: Transform
       pos: 189.5,-75.5
       parent: 1
+    missingComponents:
+    - ApcPowerReceiver
+    - RMCPowerReceiver
   - uid: 29012
     components:
     - type: Transform
       pos: 189.5,-77.5
       parent: 1
+    missingComponents:
+    - ApcPowerReceiver
+    - RMCPowerReceiver
   - uid: 29013
     components:
     - type: Transform
       pos: 192.5,-77.5
       parent: 1
+    missingComponents:
+    - ApcPowerReceiver
+    - RMCPowerReceiver
   - uid: 29014
     components:
     - type: Transform
       pos: 194.5,-81.5
       parent: 1
+    missingComponents:
+    - ApcPowerReceiver
+    - RMCPowerReceiver
   - uid: 29015
     components:
     - type: Transform
       pos: 192.5,-79.5
       parent: 1
+    missingComponents:
+    - ApcPowerReceiver
+    - RMCPowerReceiver
   - uid: 29016
     components:
     - type: Transform
       pos: 189.5,-79.5
       parent: 1
+    missingComponents:
+    - ApcPowerReceiver
+    - RMCPowerReceiver
   - uid: 29017
     components:
     - type: Transform
       pos: 189.5,-81.5
       parent: 1
+    missingComponents:
+    - ApcPowerReceiver
+    - RMCPowerReceiver
   - uid: 29018
     components:
     - type: Transform
       pos: 192.5,-81.5
       parent: 1
+    missingComponents:
+    - ApcPowerReceiver
+    - RMCPowerReceiver
   - uid: 29019
     components:
     - type: Transform
       pos: 104.5,-119.5
       parent: 1
+    missingComponents:
+    - ApcPowerReceiver
+    - RMCPowerReceiver
   - uid: 29020
     components:
     - type: Transform
       pos: 104.5,-121.5
       parent: 1
+    missingComponents:
+    - ApcPowerReceiver
+    - RMCPowerReceiver
   - uid: 29021
     components:
     - type: Transform
       pos: 104.5,-122.5
       parent: 1
+    missingComponents:
+    - ApcPowerReceiver
+    - RMCPowerReceiver
   - uid: 29022
     components:
     - type: Transform
       pos: 104.5,-120.5
       parent: 1
+    missingComponents:
+    - ApcPowerReceiver
+    - RMCPowerReceiver
   - uid: 29023
     components:
     - type: Transform
       pos: 99.5,-120.5
       parent: 1
+    missingComponents:
+    - ApcPowerReceiver
+    - RMCPowerReceiver
   - uid: 29024
     components:
     - type: Transform
       pos: 99.5,-117.5
       parent: 1
+    missingComponents:
+    - ApcPowerReceiver
+    - RMCPowerReceiver
 - proto: RMCTelephone
   entities:
   - uid: 29025
@@ -209451,7 +210447,7 @@ entities:
     - type: InsideEntityStorage
     missingComponents:
     - GunIDLock
-- proto: RMCWeaponShotgunHG3712
+- proto: RMCWeaponShotgunM12
   entities:
   - uid: 29174
     components:
@@ -209798,33 +210794,6 @@ entities:
     - type: Transform
       pos: 54.5,-80.5
       parent: 1
-- proto: SpaceVillainArcade
-  entities:
-  - uid: 29227
-    components:
-    - type: Transform
-      pos: 115.5,-69.5
-      parent: 1
-  - uid: 29228
-    components:
-    - type: Transform
-      pos: 115.5,-68.5
-      parent: 1
-  - uid: 29229
-    components:
-    - type: Transform
-      pos: 113.5,-67.5
-      parent: 1
-  - uid: 29230
-    components:
-    - type: Transform
-      pos: 112.5,-65.5
-      parent: 1
-  - uid: 29231
-    components:
-    - type: Transform
-      pos: 113.5,-64.5
-      parent: 1
 - proto: TableReinforced
   entities:
   - uid: 29232
@@ -209924,6 +210893,13 @@ entities:
     - type: Transform
       pos: 46.5,-88.5
       parent: 1
+- proto: VehicleVan
+  entities:
+  - uid: 30303
+    components:
+    - type: Transform
+      pos: 25,-43.5
+      parent: 1
 - proto: WallXenoResin
   entities:
   - uid: 29261
@@ -209976,17 +210952,6 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 106.5,-160.5
-      parent: 1
-  - uid: 29274
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 191.5,-171.5
-      parent: 1
-  - uid: 29277
-    components:
-    - type: Transform
-      pos: 155.5,-29.5
       parent: 1
   - uid: 29278
     components:
@@ -210194,30 +211159,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 194.5,-188.5
       parent: 1
-  - uid: 29320
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 188.5,-191.5
-      parent: 1
-  - uid: 29321
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 188.5,-190.5
-      parent: 1
-  - uid: 29322
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 189.5,-191.5
-      parent: 1
-  - uid: 29323
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 189.5,-190.5
-      parent: 1
   - uid: 29324
     components:
     - type: Transform
@@ -210380,48 +211321,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 195.5,-173.5
       parent: 1
-  - uid: 29351
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 196.5,-169.5
-      parent: 1
-  - uid: 29352
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 196.5,-168.5
-      parent: 1
-  - uid: 29353
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 197.5,-169.5
-      parent: 1
-  - uid: 29354
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 197.5,-168.5
-      parent: 1
-  - uid: 29355
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 190.5,-170.5
-      parent: 1
-  - uid: 29356
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 190.5,-171.5
-      parent: 1
-  - uid: 29357
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 191.5,-170.5
-      parent: 1
   - uid: 29358
     components:
     - type: Transform
@@ -210480,23 +211379,13 @@ entities:
     - type: Transform
       pos: 153.5,-30.5
       parent: 1
-  - uid: 29378
-    components:
-    - type: Transform
-      pos: 155.5,-28.5
-      parent: 1
-  - uid: 29379
-    components:
-    - type: Transform
-      pos: 156.5,-28.5
-      parent: 1
-  - uid: 29380
-    components:
-    - type: Transform
-      pos: 156.5,-29.5
-      parent: 1
 - proto: WallXenoResinImpenetrable
   entities:
+  - uid: 2248
+    components:
+    - type: Transform
+      pos: 37.5,-199.5
+      parent: 1
   - uid: 18038
     components:
     - type: Transform
@@ -210518,13 +211407,18 @@ entities:
   - uid: 24229
     components:
     - type: Transform
-      pos: 37.5,-201.5
+      pos: 151.5,-46.5
       parent: 1
   - uid: 24236
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 87.5,-198.5
+      parent: 1
+  - uid: 27173
+    components:
+    - type: Transform
+      pos: 173.5,-95.5
       parent: 1
   - uid: 29112
     components:
@@ -210594,17 +211488,12 @@ entities:
   - uid: 29257
     components:
     - type: Transform
-      pos: 161.5,-54.5
-      parent: 1
-  - uid: 29258
-    components:
-    - type: Transform
-      pos: 169.5,-70.5
+      pos: 173.5,-94.5
       parent: 1
   - uid: 29259
     components:
     - type: Transform
-      pos: 166.5,-70.5
+      pos: 153.5,-45.5
       parent: 1
   - uid: 29260
     components:
@@ -210641,11 +211530,6 @@ entities:
     - type: Transform
       pos: 12.5,-192.5
       parent: 1
-  - uid: 29285
-    components:
-    - type: Transform
-      pos: 23.5,-153.5
-      parent: 1
   - uid: 29286
     components:
     - type: Transform
@@ -210661,6 +211545,26 @@ entities:
     - type: Transform
       pos: 157.5,-49.5
       parent: 1
+  - uid: 29353
+    components:
+    - type: Transform
+      pos: 191.5,-170.5
+      parent: 1
+  - uid: 29354
+    components:
+    - type: Transform
+      pos: 155.5,-28.5
+      parent: 1
+  - uid: 29355
+    components:
+    - type: Transform
+      pos: 189.5,-190.5
+      parent: 1
+  - uid: 29356
+    components:
+    - type: Transform
+      pos: 188.5,-191.5
+      parent: 1
   - uid: 29361
     components:
     - type: Transform
@@ -210674,7 +211578,7 @@ entities:
   - uid: 29365
     components:
     - type: Transform
-      pos: 153.5,-45.5
+      pos: 189.5,-191.5
       parent: 1
   - uid: 29366
     components:
@@ -210684,7 +211588,7 @@ entities:
   - uid: 29367
     components:
     - type: Transform
-      pos: 154.5,-45.5
+      pos: 196.5,-169.5
       parent: 1
   - uid: 29373
     components:
@@ -210704,6 +211608,66 @@ entities:
       rot: 3.141592653589793 rad
       pos: 88.5,-202.5
       parent: 1
+  - uid: 29378
+    components:
+    - type: Transform
+      pos: 196.5,-168.5
+      parent: 1
+  - uid: 29379
+    components:
+    - type: Transform
+      pos: 197.5,-168.5
+      parent: 1
+  - uid: 29380
+    components:
+    - type: Transform
+      pos: 197.5,-169.5
+      parent: 1
+  - uid: 29958
+    components:
+    - type: Transform
+      pos: 190.5,-171.5
+      parent: 1
+  - uid: 29959
+    components:
+    - type: Transform
+      pos: 190.5,-170.5
+      parent: 1
+  - uid: 29960
+    components:
+    - type: Transform
+      pos: 191.5,-171.5
+      parent: 1
+  - uid: 29961
+    components:
+    - type: Transform
+      pos: 156.5,-29.5
+      parent: 1
+  - uid: 29962
+    components:
+    - type: Transform
+      pos: 156.5,-28.5
+      parent: 1
+  - uid: 29963
+    components:
+    - type: Transform
+      pos: 155.5,-29.5
+      parent: 1
+  - uid: 29969
+    components:
+    - type: Transform
+      pos: 156.5,-48.5
+      parent: 1
+  - uid: 29971
+    components:
+    - type: Transform
+      pos: 156.5,-51.5
+      parent: 1
+  - uid: 29973
+    components:
+    - type: Transform
+      pos: 193.5,-168.5
+      parent: 1
   - uid: 29980
     components:
     - type: Transform
@@ -210719,45 +211683,35 @@ entities:
     - type: Transform
       pos: 30.5,-194.5
       parent: 1
+  - uid: 29999
+    components:
+    - type: Transform
+      pos: 188.5,-190.5
+      parent: 1
+  - uid: 30004
+    components:
+    - type: Transform
+      pos: 154.5,-45.5
+      parent: 1
   - uid: 30015
     components:
     - type: Transform
       pos: 78.5,-183.5
       parent: 1
-  - uid: 30099
+  - uid: 30016
     components:
     - type: Transform
-      pos: 196.5,-167.5
+      pos: 189.5,-187.5
       parent: 1
-  - uid: 30100
+  - uid: 30017
     components:
     - type: Transform
-      pos: 197.5,-167.5
+      pos: 188.5,-194.5
       parent: 1
-  - uid: 30101
+  - uid: 30022
     components:
     - type: Transform
-      pos: 201.5,-167.5
-      parent: 1
-  - uid: 30102
-    components:
-    - type: Transform
-      pos: 190.5,-191.5
-      parent: 1
-  - uid: 30103
-    components:
-    - type: Transform
-      pos: 190.5,-190.5
-      parent: 1
-  - uid: 30108
-    components:
-    - type: Transform
-      pos: 190.5,-194.5
-      parent: 1
-  - uid: 30109
-    components:
-    - type: Transform
-      pos: 190.5,-195.5
+      pos: 154.5,-25.5
       parent: 1
   - uid: 30113
     components:
@@ -210768,31 +211722,6 @@ entities:
     components:
     - type: Transform
       pos: 172.5,-95.5
-      parent: 1
-  - uid: 30115
-    components:
-    - type: Transform
-      pos: 171.5,-94.5
-      parent: 1
-  - uid: 30116
-    components:
-    - type: Transform
-      pos: 171.5,-95.5
-      parent: 1
-  - uid: 30139
-    components:
-    - type: Transform
-      pos: 157.5,-46.5
-      parent: 1
-  - uid: 30140
-    components:
-    - type: Transform
-      pos: 157.5,-47.5
-      parent: 1
-  - uid: 30141
-    components:
-    - type: Transform
-      pos: 156.5,-48.5
       parent: 1
   - uid: 30149
     components:
@@ -211098,6 +212027,41 @@ entities:
       parent: 1
 - proto: XenoWeedsSource
   entities:
+  - uid: 2250
+    components:
+    - type: Transform
+      pos: 150.5,-49.5
+      parent: 1
+  - uid: 27175
+    components:
+    - type: Transform
+      pos: 144.5,-30.5
+      parent: 1
+  - uid: 29258
+    components:
+    - type: Transform
+      pos: 160.5,-41.5
+      parent: 1
+  - uid: 29267
+    components:
+    - type: Transform
+      pos: 149.5,-44.5
+      parent: 1
+  - uid: 29274
+    components:
+    - type: Transform
+      pos: 152.5,-45.5
+      parent: 1
+  - uid: 29277
+    components:
+    - type: Transform
+      pos: 155.5,-48.5
+      parent: 1
+  - uid: 29285
+    components:
+    - type: Transform
+      pos: 161.5,-50.5
+      parent: 1
   - uid: 29417
     components:
     - type: Transform
@@ -213112,5 +214076,20 @@ entities:
     components:
     - type: Transform
       pos: 204.5,-174.5
+      parent: 1
+  - uid: 30000
+    components:
+    - type: Transform
+      pos: 159.5,-48.5
+      parent: 1
+  - uid: 30002
+    components:
+    - type: Transform
+      pos: 158.5,-50.5
+      parent: 1
+  - uid: 30003
+    components:
+    - type: Transform
+      pos: 159.5,-45.5
       parent: 1
 ...

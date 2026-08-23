@@ -77,6 +77,8 @@
       - id: CMWebbingBlack
       - id: RMCWebbingLegPouch
       - id: RMCWebbingLegPouchBlack
+      - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
       - id: RMCWebbingHolsterBlack
       - id: CMWebbing
@@ -87,6 +89,12 @@
         amount: 10
       - id: RMCGuidebookSOP
         amount: 10
+    - name: Investigation
+      entries:
+      - id: RMCUniversalRecorder
+        amount: 3
+      - id: RMCBoxRegulationTapes
+        amount: 5
 
 # WARDEN
 - type: entity
@@ -168,12 +176,21 @@
       - id: CMWebbingBlack
       - id: RMCWebbingLegPouch
       - id: RMCWebbingLegPouchBlack
+      - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
       - id: RMCWebbingHolsterBlack
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
     - name: Books
       entries:
       - id: RMCGuidebookLawMarine
         amount: 10
       - id: RMCGuidebookSOP
         amount: 10
+    - name: Investigation
+      entries:
+      - id: RMCUniversalRecorder
+        amount: 3
+      - id: RMCBoxRegulationTapes
+        amount: 5

@@ -42,6 +42,10 @@
   - type: RemoveComponents
     components:
     - type: IngestionBlocker
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: Tag
   id: RMCHelmetWelding

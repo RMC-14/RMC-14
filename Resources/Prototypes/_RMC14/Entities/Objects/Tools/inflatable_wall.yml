@@ -26,6 +26,9 @@
       doAfter: 1
       removeOnInteract: true
     - type: Clickable
+    - type: Tag
+      tags:
+      - RMCInflatableBarrier
 
 - type: entity
   parent: RMCInflatableWallFolded
@@ -65,6 +68,9 @@
       doAfter: 1
       removeOnInteract: true
     - type: Clickable
+    - type: Tag
+      tags:
+      - RMCInflatableBarrier
 
 - type: entity
   parent: RMCInflatableDoorFolded
@@ -75,3 +81,6 @@
       state: folded_door
     - type: Stack
       count: 1
+
+- type: Tag
+  id: RMCInflatableBarrier

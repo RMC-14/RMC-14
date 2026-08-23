@@ -17,3 +17,16 @@
         path: /Audio/_RMC14/Handling/crowbar_pickup.ogg
       rmc-sound-select-detector:
         path: /Audio/_RMC14/Effects/motion_detector.ogg
+
+- type: entity
+  parent: BaseItem
+  id: RMCElevatorLinker
+  name: elevator linker
+  description: Tap on an elevator panel or elevator destination door to attempt to re-link it's destination. Tapping an elevator destination will open up its View Variables menu.
+  suffix: DO NOT MAP
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/t-ray.rsi
+    state: tray-on
+    color: Green
+  - type: RMCElevatorLinking

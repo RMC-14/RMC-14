@@ -4,6 +4,7 @@
   name: wooden barricade
   description: A wall made out of wooden planks nailed together. Not very sturdy, but can provide some concealment.
   components:
+  - type: VehicleSmashable
   - type: Sprite
     drawdepth: WallTops
     sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi

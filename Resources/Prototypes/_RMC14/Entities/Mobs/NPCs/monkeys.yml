@@ -1,0 +1,339 @@
+# THE SHIT I NEED TO DO JUST SO WE DONT HAVE TO FUCKING SPECIFY A GHOST ROLE CHANCE OF 0
+- type: entity
+  parent: [RMCSmallHost]
+  id: CMMobSmallHostMonkey
+  name: monkey
+  suffix: RMC, Small Host
+  components:
+  - type: Speech
+    speechSounds: Monkey
+    speechVerb: Monkey
+  - type: MonkeyAccent
+
+- type: entity
+  parent: [RMCSmallHost]
+  id: CMMobSmallHostKobold
+  name: kobold
+  suffix: RMC, Small Host
+  components:
+  - type: LizardAccent
+  - type: ReplacementAccent
+    accent: kobold
+  - type: Speech
+    speechSounds: Lizard
+    speechVerb: Reptilian
+    allowedEmotes: ['Thump']
+  - type: Vocal
+    sounds:
+      Male: MaleReptilian
+      Female: FemaleReptilian
+      Unsexed: MaleReptilian
+  - type: BodyEmotes
+    soundsId: ReptilianBodyEmotes
+  - type: TypingIndicator
+    proto: lizard
+  - type: MeleeWeapon
+    soundHit:
+      collection: AlienClaw
+    animation: WeaponArcClaw
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      sprite: _RMC14/Mobs/Animals/monkeys/kobold.rsi
+      state: kobold
+    - map: [enum.HumanoidVisualLayers.Eyes]
+      sprite: _RMC14/Mobs/Animals/monkeys/kobold.rsi
+      state: eyes
+    - map: [ "horns" ]
+      sprite: Mobs/Customization/reptilian_parts.rsi
+      state: horns_short
+    - map: [ "enum.HumanoidVisualLayers.Handcuffs" ]
+      color: "#ffffff"
+      sprite: Objects/Misc/handcuffs.rsi
+      state: body-overlay-2
+      visible: false
+    - map: [ "ears" ]
+    - map: [ "id" ]
+    - map: [ "mask" ]
+    - map: [ "head" ]
+    - map: [ "clownedon" ]
+      sprite: "Effects/creampie.rsi"
+      state: "creampie_human"
+      visible: false
+  - type: RandomSprite
+    getAllGroups: true
+    available:
+      - enum.DamageStateVisualLayers.Base:
+          kobold: KoboldColors
+      - horns:
+          horns_curled: KoboldHornColors
+          horns_ram: KoboldHornColors
+          horns_short: KoboldHornColors
+          horns_myrsore: KoboldHornColors
+          horns_bighorn: KoboldHornColors
+          horns_argali: KoboldHornColors
+          horns_ayrshire: KoboldHornColors
+          horns_floppy_kobold_ears: Inherit
+          horns_double: Inherit
+          horns_kobold_ears: Inherit
+
+- type: entity
+  parent: [RMCSmallHost]
+  id: RMCMobSmallHostFarwa
+  name: farwa
+  suffix: RMC, Small Host
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      sprite: _RMC14/Mobs/Animals/monkeys/farwa.rsi
+      state: farwa
+    - map: [ "enum.HumanoidVisualLayers.Handcuffs" ]
+      color: "#ffffff"
+      sprite: Objects/Misc/handcuffs.rsi
+      state: body-overlay-2
+      visible: false
+    - map: [ "ears" ]
+    - map: [ "id" ]
+    - map: [ "mask" ]
+    - map: [ "head" ]
+    - map: [ "clownedon" ]
+      sprite: "Effects/creampie.rsi"
+      state: "creampie_human"
+      visible: false
+    - map: [ "acided" ]
+    - map: [ "hooked" ]
+      sprite: "_RMC14/Effects/xeno_spray_acid.rsi"
+      state: hooked
+      visible: false
+  - type: ReplacementAccent
+    accent: dog
+  - type: VulpkaninAccent
+  - type: Speech
+    speechVerb: Vulpkanin
+    allowedEmotes: [ 'Bark', 'Snarl', 'Whine', 'Growl', 'Yip' ]
+  - type: Vocal
+    sounds:
+      Male: RMCMaleVulpkanin
+      Female: RMCFemaleVulpkanin
+      Unsexed: RMCMaleVulpkanin
+  - type: MeleeWeapon
+    soundHit:
+      collection: AlienClaw
+    animation: WeaponArcClaw
+
+- type: entity
+  parent: [RMCSmallHost]
+  id: RMCMobSmallHostNeaera
+  name: neaera
+  suffix: RMC, Small Host
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      sprite: _RMC14/Mobs/Animals/monkeys/neaera.rsi
+      state: neaera
+    - map: [ "enum.HumanoidVisualLayers.Handcuffs" ]
+      color: "#ffffff"
+      sprite: Objects/Misc/handcuffs.rsi
+      state: body-overlay-2
+      visible: false
+    - map: [ "ears" ]
+    - map: [ "id" ]
+    - map: [ "mask" ]
+    - map: [ "head" ]
+    - map: [ "clownedon" ]
+      sprite: "Effects/creampie.rsi"
+      state: "creampie_human"
+      visible: false
+    - map: [ "acided" ]
+    - map: [ "hooked" ]
+      sprite: "_RMC14/Effects/xeno_spray_acid.rsi"
+      state: hooked
+      visible: false
+  - type: ReplacementAccent
+    accent: crab # I can't be arsed to type out like 5 different verisons of croaking right now
+  - type: Speech
+    speechVerb: Skrell
+    allowedEmotes: [ 'RMCSkrellPeep', 'RMCSkrellAnger', 'RMCSkrellTrill', 'RMCSkrellWarble' ]
+  - type: Vocal
+    sounds:
+      Male: RMCMaleSkrell
+      Unsexed: RMCMaleSkrell
+      Female: RMCFemaleSkrell
+
+- type: entity
+  parent: [RMCSmallHost]
+  id: RMCMobSmallHostStok
+  name: stok
+  suffix: RMC, Small Host
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      sprite: _RMC14/Mobs/Animals/monkeys/stok.rsi
+      state: stok
+    - map: [ "enum.HumanoidVisualLayers.Handcuffs" ]
+      color: "#ffffff"
+      sprite: Objects/Misc/handcuffs.rsi
+      state: body-overlay-2
+      visible: false
+    - map: [ "ears" ]
+    - map: [ "id" ]
+    - map: [ "mask" ]
+    - map: [ "head" ]
+    - map: [ "clownedon" ]
+      sprite: "Effects/creampie.rsi"
+      state: "creampie_human"
+      visible: false
+    - map: [ "acided" ]
+    - map: [ "hooked" ]
+      sprite: "_RMC14/Effects/xeno_spray_acid.rsi"
+      state: hooked
+      visible: false
+  - type: ReplacementAccent
+    accent: kangaroo
+  - type: Speech
+    speechVerb: Vox
+    speechSounds: Vox
+  - type: TypingIndicator
+    proto: vox
+  - type: Vocal
+    sounds:
+      Male: UnisexVox
+      Female: UnisexVox
+      Unsexed: UnisexVox
+  - type: MeleeWeapon
+    soundHit:
+      collection: AlienClaw
+    animation: WeaponArcClaw
+
+- type: entity
+  parent: [RMCSmallHost]
+  id: RMCMobSmallHostYiren
+  name: yiren
+  suffix: RMC, Small Host
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      sprite: _RMC14/Mobs/Animals/monkeys/yiren.rsi
+      state: yiren
+    - map: [ "enum.HumanoidVisualLayers.Handcuffs" ]
+      color: "#ffffff"
+      sprite: Objects/Misc/handcuffs.rsi
+      state: body-overlay-2
+      visible: false
+    - map: [ "ears" ]
+    - map: [ "id" ]
+    - map: [ "mask" ]
+    - map: [ "head" ]
+    - map: [ "clownedon" ]
+      sprite: "Effects/creampie.rsi"
+      state: "creampie_human"
+      visible: false
+    - map: [ "acided" ]
+    - map: [ "hooked" ]
+      sprite: "_RMC14/Effects/xeno_spray_acid.rsi"
+      state: hooked
+      visible: false
+  - type: ReplacementAccent
+    accent: nymph
+  - type: Vocal
+    sounds:
+      Male: RMCMaleAvali
+      Unsexed: RMCMaleAvali
+      Female: RMCFemaleAvali
+  - type: Wagging
+    action: ActionToggleAvaliWagging
+  - type: Speech
+    speechVerb: Parrot
+    speechSounds: MaleAvali
+
+# Spawners
+
+- type: entity
+  parent: MarkerBase
+  id: CMSpawnMobMonkey
+  name: Small host spawner
+  suffix: RMC
+  components:
+  - type: Sprite
+    layers:
+    - state: monkey_spawn
+      sprite: _RMC14/Markers/landmarks.rsi
+  - type: ProportionalSpawner
+    id: CMSpawnMobMonkey
+    prototypes:
+    - CMMobSmallHostMonkey
+
+- type: entity
+  parent: CMSpawnMobMonkey
+  id: CMSpawnMobKobold
+  components:
+  - type: Sprite
+    layers:
+    - state: monkey_spawn
+      sprite: _RMC14/Markers/landmarks.rsi
+  - type: ProportionalSpawner
+    id: CMSpawnMobKobold
+    prototypes:
+    - CMMobSmallHostKobold
+
+- type: entity
+  parent: CMSpawnMobMonkey
+  id: RMCSpawnMobFarwa
+  components:
+  - type: Sprite
+    layers:
+    - state: monkey_spawn
+      sprite: _RMC14/Markers/landmarks.rsi
+  - type: ProportionalSpawner
+    id: RMCSpawnMobFarwa
+    prototypes:
+    - RMCMobSmallHostFarwa
+
+- type: entity
+  parent: CMSpawnMobMonkey
+  id: RMCSpawnMobNeaera
+  components:
+  - type: Sprite
+    layers:
+    - state: monkey_spawn
+      sprite: _RMC14/Markers/landmarks.rsi
+  - type: ProportionalSpawner
+    id: RMCSpawnMobNeaera
+    prototypes:
+    - RMCMobSmallHostNeaera
+
+- type: entity
+  parent: CMSpawnMobMonkey
+  id: RMCSpawnMobStok
+  components:
+  - type: Sprite
+    layers:
+    - state: monkey_spawn
+      sprite: _RMC14/Markers/landmarks.rsi
+  - type: ProportionalSpawner
+    id: RMCSpawnMobStok
+    prototypes:
+    - RMCMobSmallHostStok
+
+
+- type: entity
+  parent: CMSpawnMobMonkey
+  id: RMCSpawnMobYiren
+  components:
+  - type: Sprite
+    layers:
+    - state: monkey_spawn
+      sprite: _RMC14/Markers/landmarks.rsi
+  - type: ProportionalSpawner
+    id: RMCSpawnMobYiren
+    prototypes:
+    - RMCMobSmallHostYiren

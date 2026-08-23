@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-4.0",
-  "copyright": "Sprites by github noctyrnal",
+  "copyright": "Sprites by github noctyrnal, on-equipped sprites altered by CrystalClover (github)",
   "size": {
     "x": 32,
     "y": 32
@@ -21,18 +21,6 @@
     },
     {
       "name": "equipped-HELMET",
-      "directions": 4
-    },
-    {
-      "name": "on-equipped-HELMET-reptilian",
-      "directions": 4
-    },
-    {
-      "name": "on-equipped-HELMET-vulpkanin",
-      "directions": 4
-    },
-    {
-      "name": "on-equipped-HELMET-feroxi",
       "directions": 4
     },
     {

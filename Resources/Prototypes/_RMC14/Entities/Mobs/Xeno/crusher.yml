@@ -14,8 +14,6 @@
   - type: GuideHelp
     guides:
     - RMCGuideRoleCrusher
-  - type: GhostRole
-    name: cm-job-name-xeno-crusher
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Crusher/crusher.rsi
   - type: MobState
@@ -200,6 +198,22 @@
       types:
         Blunt: 75
   - type: XenoToggleCharging
+  - type: XenoToggleChargingDefaultCollide
+    damagePerStage:
+      types:
+        Blunt: 5
+        Structural: 5
+    barricadeDamagePerStage: # CM13: momentum * 22
+      types:
+        Blunt: 22
+        Structural: 22
+    structureDamagePerStage: # CM13: momentum * 40
+      types:
+        Blunt: 40
+        Structural: 40
+    maxStageDamageMultiplier: 1.0
+    sound:
+      path: /Audio/_RMC14/Effects/metal_crash.ogg
   - type: XenoHidden
   - type: RMCActionOrder
     id: RMCXenoCrusherCharger

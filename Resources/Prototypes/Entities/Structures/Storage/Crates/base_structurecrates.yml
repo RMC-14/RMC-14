@@ -101,6 +101,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Weldable
+  - type: RMCWeldEffectSource
+    startingOffset: -0.45, 0
+    endingOffset: 0.45, 0
   - type: ResistLocker
 
 - type: entity

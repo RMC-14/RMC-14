@@ -17,7 +17,7 @@
     size: Small
   - type: Storage
     grid:
-    - 0,0,13,1
+    - 0,0,15,1
     maxItemSize: Small
     whitelist:
       components:
@@ -78,6 +78,16 @@
     - id: CMMREComponentHoneyFlan
       orGroup: dessert
     - id: CMDrinkWEYAWaterBottle30
+    - id: RMCMREInstantPowderOrange
+      orGroup: drink
+    - id: RMCMREInstantPowderWatermelon
+      orGroup: drink
+    - id: RMCMREInstantPowderApple
+      orGroup: drink
+    - id: RMCMREInstantPowderPineapple
+      orGroup: drink
+    - id: RMCMREInstantPowderGrape
+      orGroup: drink
     - id: CMFortuneCookie
       prob: 0.333
     - id: CMCigarettePackLuckySlothsMini
@@ -145,6 +155,9 @@
       orGroup: side
     # snack
     - id: RMCFoodSnackHotdogPackaged
+      orGroup: snack
+    - id: RMCFoodSnackSamosaPackaged
+      orGroup: snack
     # dessert
     - id: RMCFoodSnackEATBar
       orGroup: dessert

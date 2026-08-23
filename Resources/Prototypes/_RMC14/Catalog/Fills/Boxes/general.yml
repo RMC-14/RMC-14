@@ -14,7 +14,7 @@
   - type: Storage
     maxItemSize: Small
     grid:
-    - 0,0,13,1
+    - 0,0,13,1 # 14 slots
   - type: Tag
     tags:
     - RMCBoxStorage
@@ -83,3 +83,118 @@
       orGroup: SetTwo
     - id: RMCAttachmentS42xTelescopicMiniscope
       orGroup: SetTwo
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxPrescriptionGlasses
+  name: box of prescription glasses
+  description: This box contains nerd glasses.
+  components:
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCPrescriptionGlasses
+  - type: StorageFill
+    contents:
+    - id: RMCGlassesMarineRpg
+      amount: 7
+  - type: Sprite
+    state: glasses
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxCompanyCaps
+  name: box of Company baseball caps
+  description: This box contains seven Weston-Yamada brand baseball caps. Give them away at your leisure.
+  components:
+  - type: Storage
+    whitelist:
+      tags:
+      - ClothMade
+  - type: StorageFill
+    contents:
+    - id: RMCHeadCapWestonYamadaDark
+      amount: 6
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxDrinkingGlasses
+  name: box of drinking glasses
+  description: It has a picture of drinking glasses on it.
+  components:
+  - type: Storage
+    whitelist:
+      tags:
+      - DrinkGlass
+  - type: StorageFill
+    contents:
+    - id: RMCDrinkGlass
+      amount: 6
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxPaperCups
+  name: box of paper cups
+  description: It has pictures of paper cups on it.
+  components:
+  - type: Storage
+    whitelist:
+      tags:
+      - DrinkGlass
+  - type: StorageFill
+    contents:
+    - id: RMCPaperCup
+      amount: 7
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxMousetraps
+  name: Pest-B-Gon mousetraps
+  description: "WARNING: Keep out of reach of children."
+  components:
+  - type: Storage
+    whitelist:
+      components:
+      - Mousetrap
+  - type: StorageFill
+    contents:
+    - id: Mousetrap
+      amount: 6
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxInflatableWallsSmall
+  name: inflatable barrier box
+  description: Contains inflatable walls and doors.
+  suffix: Small
+  components:
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,3,1 # 2 slots
+    whitelist:
+      tags:
+      - RMCInflatableBarrier
+  - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - RMCInflatableBarrier
+  - type: StorageFill
+    contents:
+    - id: RMCInflatableDoorFolded1
+      amount: 3
+    - id: RMCInflatableWallFolded1
+      amount: 4
+  - type: Sprite
+    state: inf_box
+  - type: Item
+    size: Normal
+
+- type: entity
+  parent: RMCBoxInflatableWallsSmall
+  id: RMCBoxInflatableWallsNormal
+  suffix: Normal
+  components:
+  - type: Item
+    size: Large

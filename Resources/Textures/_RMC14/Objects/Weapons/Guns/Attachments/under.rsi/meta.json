@@ -266,6 +266,18 @@
     },
     {
       "name": "laserlight-on"
+    },
+    {
+      "name": "qyj72_bipod"
+    },
+    {
+      "name": "qyj72_bipod-on"
+    },
+    {
+      "name": "qyj72_bipod_a"
+    },
+    {
+      "name": "qyj72_bipod_a-on"
     }
   ]
 }

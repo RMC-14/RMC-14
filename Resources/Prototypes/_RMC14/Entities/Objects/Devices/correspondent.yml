@@ -11,3 +11,33 @@
   - type: Item
     size: Small
     sprite: Objects/Fun/Instruments/microphone.rsi
+
+- type: entity
+  parent: BaseItem
+  id: RMCPortablePressFax
+  name: portable press fax machine
+  description: A standard issue portable fax machine for correspondents. Activate it in-hand to deploy it.
+  components:
+  - type: Item
+    size: Huge
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Civilians/fax_backpack.rsi
+    state: fax_backpack
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - back
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Civilians/fax_backpack.rsi
+  - type: RMCDeployable
+    deployTime: 3
+    collapseTime: 3
+    collapseWithoutTool: true
+    deployArea:
+      !type:PhysShapeAabb
+      bounds: "-0.4,-0.4,0.4,0.4"
+    areaBlockedCheck: true
+    failIfNotSurface: false
+    deploySetups:
+    - prototype: CMFaxPressPortable
+      mode: ReactiveParental
+      anchor: true

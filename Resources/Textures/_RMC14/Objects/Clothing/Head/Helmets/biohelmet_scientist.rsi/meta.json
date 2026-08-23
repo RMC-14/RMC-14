@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/492e090ce1c74a8ddb7ecbdae22d529ddec61d9b/icons/obj/items/clothing/hats/hazard.dmi, https://github.com/cmss13-devs/cmss13/blob/492e090ce1c74a8ddb7ecbdae22d529ddec61d9b/icons/mob/humans/onmob/clothing/head/hazard.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "equipped-HELMET",
+      "directions": 4
+    }
+  ]
+}
