@@ -42,8 +42,8 @@
 # Riot in Progress insert
 - type: entity
   parent: RMCSkillPresetSurvivorMarshal
-  id: RMCSkillPresetSurvivorRiotControlTeamLeader
-  name: Survivor CMB Riot Control Team Leader
+  id: RMCSkillPresetSurvivorRiotControlOfficer
+  name: Survivor CMB Riot Control Officer
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset

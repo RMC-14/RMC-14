@@ -80,3 +80,20 @@
     worn: false
   - type: ItemCamouflage
     camouflageVariations: { }
+
+# CMB version of the UN-M1 riot armor for Riot in Progress insert - Identical to riot armor except for sprites and uniform whitelist
+- type: entity
+  parent: RMCArmorPMCRiot
+  id: RMCArmorPMCRiotCMB
+  name: M4R pattern CMB support vest
+  description: A dark set of armor, which is a modification of the security variant of AEGIS Armaments M3 armor. This vest is issued to support elements of SWAT teams in high-risk situations, and as such its' limb protection has been reduced in favor of mobility. The side of it has a metallic insignia with 'CMB RIOT CONTROL' on it.
+  suffix: ""
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/CMB/cmb_mobility_armor.rsi
+  - type: ClothingRequireEquipped
+    autoUnequip: true
+    denyReason: rmc-armor-not-cmb-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformCMB

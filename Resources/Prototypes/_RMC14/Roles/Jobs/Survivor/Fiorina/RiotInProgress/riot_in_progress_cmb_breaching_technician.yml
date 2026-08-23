@@ -34,7 +34,7 @@
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
-      preset: RMCSurvivorPresetRiotInProgressCMBRCO
+      preset: RMCSurvivorPresetRiotInProgressCMBSpecialist
     - type: JobPrefix
       prefix: rmc-job-prefix-bureau-riot-control-breaching-technician
     - type: TacticalMapIcon
@@ -44,15 +44,21 @@
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_cmb
-  greeting: rmc-job-greeting-riot-in-progress-CMB-RCO
+  greeting: rmc-job-greeting-riot-in-progress-CMB
 
 - type: startingGear
-  parent: RMCGearSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
   id: RMCGearSurvivorFiorinaRiotInProgressCMBBreachingTechnician
   equipment:
+    jumpsuit: RMCSwatCMBUniformSpearhead
+    id: RMCIDCardCMBDeputySurvivor
+    back: CMSatchelSecuritySurvivorFill
+    outerClothing: RMCArmorPMCRiotCMB
+    ears: RMCHeadsetDistressBureauDamaged
+    shoes: RMCBootsPMCFilled
+    pocket1: RMCPouchSurvivalBlackFilled
     belt: CMBeltUtilityFilled
     eyes: RMCWeldingGoggles
-    gloves: CMHandsInsulated
+    gloves: RMCHandsVeteran
 
 - type: entity
   parent: CMSpawnPointJobBase
