@@ -64,8 +64,9 @@ public sealed class CMChatSystem : SharedCMChatSystem
         if (_friendComponent.HasComp(ent))
             return; // handled separately
 
-        var entIsMarine = _marineQuery.HasComp(ent);
-        var entIsXeno = _xenoQuery.HasComp(ent);
+        var speakerIsMarine = _marineQuery.HasComp(ent);
+        var speakerIsXeno = _xenoQuery.HasComp(ent);
+
         foreach (var (session, _) in args.Recipients)
         {
             if (session.AttachedEntity is not { } sessionEntity)
@@ -77,13 +78,13 @@ public sealed class CMChatSystem : SharedCMChatSystem
             // If the message has a language, check if it should be visible to `sessionEntity`.
             if (args.Language is { } spokenLanguage)
             {
-                if (!_language.CanSeeSpokenMessage(sessionEntity, spokenLanguage))
+                if (!_language.CanSeeSpokenMessage(sessionEntity, ent, spokenLanguage))
                     _toRemove.Add(session);
                 continue;
             }
 
             // If there isn't a language (LOOC for example), just go with the standard "same faction" check.
-            if (entIsMarine != _marineQuery.HasComp(sessionEntity) || entIsXeno != _xenoQuery.HasComp(sessionEntity))
+            if (speakerIsMarine != _marineQuery.HasComp(sessionEntity) || speakerIsXeno != _xenoQuery.HasComp(sessionEntity))
                 _toRemove.Add(session);
         }
 

@@ -31,19 +31,24 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     }
 
     /// <summary>
-    /// Check whether <paramref name="recipient"/> should be able to see a chat message as a popup and in their chat box,
-    /// based on the message's <paramref name="spokenLanguage"/>.
+    /// Check whether <paramref name="recipient"/> should be able to see a chat message from <paramref name="speaker"/>
+    /// as a popup and in their chat box, based on the message's <paramref name="spokenLanguage"/>.
     /// <para>
     /// This is primarily used to hide speech between different factions.
     /// </para>
     /// </summary>
+    /// <remarks>
+    /// There is one special case included for if <paramref name="speaker"/> is able to learn <paramref name="recipient"/>'s languages.<br/>
+    /// If this is the case then their speech will always be visible in order to flag them as someone of interest. (e.g. Xenos hearing a synth)
+    /// </remarks>
     /// <param name="recipient">The entity hearing the message.</param>
+    /// <param name="speaker">The entity that created the message.</param>
     /// <param name="spokenLanguage">The message's language.</param>
     /// <returns>
     /// <see langword="true"/> if <paramref name="spokenLanguage"/> can be understood or learned by <paramref name="recipient"/>,
     /// and <see langword="false"/> otherwise.
     /// </returns>
-    public bool CanSeeSpokenMessage(EntityUid recipient, ProtoId<LanguagePrototype> spokenLanguage)
+    public bool CanSeeSpokenMessage(EntityUid recipient, EntityUid speaker, ProtoId<LanguagePrototype> spokenLanguage)
     {
         if (!_prototypeManager.TryIndex(spokenLanguage, out var spokenProto))
             return false;
@@ -61,6 +66,13 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
                 {
                     return true;
                 }
+            }
+
+            // Special case for if `speaker` is able to learn a language understood by `recipient`.
+            if (_learningQuery.TryComp(speaker, out var speakerLearning) &&
+                speakerLearning.Languages.Keys.Intersect(langComp.UnderstoodLanguages).Any())
+            {
+                return true;
             }
         }
 
