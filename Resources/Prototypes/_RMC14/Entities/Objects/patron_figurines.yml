@@ -3168,3 +3168,14 @@
     state: feels-the-burn
   - type: PatronFigurine
     id: be07c424-ed74-4029-8e29-1bf6901789c2
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronJulianUberchargeCompton
+  name: Julian 'Ubercharge' Compton figurine
+  description: "A steely eyed HM that has seen the worst of wipes and seems now unfazed by death. A closer look shows a touch of madness and grief in the eyes."
+  components:
+  - type: Sprite
+    state: julian_ubercharge_compton
+  - type: PatronFigurine
+    id: d0859845-a60c-4f01-baab-178751ec4220
