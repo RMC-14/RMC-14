@@ -253,7 +253,7 @@
     survivorJobVariantScenarios:
       riot_in_progress: # Riot In Progress Riot Control team
         CMSurvivor:
-        - RMCSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader: 1
+        - RMCSurvivorFiorinaRiotInProgressCMBRiotControlOfficer: 1
         - RMCSurvivorFiorinaRiotInProgressILRCPeacekeeper: -1
         CMSurvivorDoctor:
         - RMCSurvivorFiorinaRiotInProgressCMBRiotControlMedicalTechnician: 1
