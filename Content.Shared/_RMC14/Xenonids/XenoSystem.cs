@@ -1,6 +1,6 @@
-using System.Linq;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Commendations;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Marines;
@@ -27,6 +27,7 @@ using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Access.Components;
 using Content.Shared.Actions;
 using Content.Shared.Atmos;
+using Content.Shared.Body.Events;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Chat;
 using Content.Shared.CombatMode;
@@ -56,6 +57,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using System.Linq;
 
 namespace Content.Shared._RMC14.Xenonids;
 
@@ -74,6 +76,7 @@ public sealed partial class XenoSystem : EntitySystem
     [Dependency] private readonly MobThresholdSystem _mobThresholds = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly SharedNightVisionSystem _nightVision = default!;
+    [Dependency] private readonly XenoRestSystem _rest = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
@@ -140,6 +143,8 @@ public sealed partial class XenoSystem : EntitySystem
             before: [typeof(SharedHandsSystem), typeof(SharedStaminaSystem)],
             after: [typeof(TackleSystem)]);
         SubscribeLocalEvent<XenoComponent, DisarmedEvent>(OnDisarmed, before: new[] { typeof(SharedHandsSystem) });
+        SubscribeLocalEvent<XenoComponent, BeingGibbedEvent>(OnBeingGibbed);
+        SubscribeLocalEvent<XenoComponent, PlayerDetachedEvent>(OnXenoPlayerDetached);
 
         SubscribeLocalEvent<XenoRegenComponent, MapInitEvent>(OnXenoRegenMapInit, before: [typeof(SharedXenoPheromonesSystem)]);
         SubscribeLocalEvent<XenoRegenComponent, DamageStateCritBeforeDamageEvent>(OnXenoRegenBeforeCritDamage, before: [typeof(SharedXenoPheromonesSystem)]);
@@ -376,6 +381,14 @@ public sealed partial class XenoSystem : EntitySystem
         args.Handled = true;
     }
 
+    private void OnXenoPlayerDetached(Entity<XenoComponent> ent, ref PlayerDetachedEvent args)
+    {
+        if (TerminatingOrDeleted(ent) || _rest.IsResting(ent.Owner))
+            return;
+
+        _rest.TryRestAction(ent.AsNullable(), true, true);
+    }
+
     private void OnXenoRegenMapInit(Entity<XenoRegenComponent> ent, ref MapInitEvent args)
     {
         ent.Comp.NextRegenTime = _timing.CurTime + ent.Comp.RegenCooldown;
@@ -405,6 +418,31 @@ public sealed partial class XenoSystem : EntitySystem
     public void MakeXeno(Entity<XenoComponent?> xeno)
     {
         EnsureComp<XenoComponent>(xeno);
+    }
+
+    private void OnBeingGibbed(Entity<XenoComponent> xeno, ref BeingGibbedEvent args)
+    {
+        if (!TryComp<HiveMemberComponent>(xeno, out var member))
+            return;
+
+        var hive = _hive.GetHive((xeno, member));
+
+        if (hive == null)
+            return;
+
+        if (!TryComp(xeno, out CommendationReceiverComponent? receiver) ||
+    receiver.LastPlayerId == null || receiver.LastPlayerId == string.Empty)
+        {
+            return;
+        }
+
+        var gibbed = new GibbedXenoInfo
+        {
+            Name = Name(xeno),
+            LastPlayerId = receiver.LastPlayerId
+        };
+
+        _hive.RecordGib(hive.Value, gibbed);
     }
 
     private FixedPoint2 GetWeedsHealAmount(Entity<XenoRegenComponent> xeno)

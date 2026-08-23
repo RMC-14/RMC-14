@@ -15,7 +15,7 @@
   joinNotifyCrew: false
   greeting: rmc-job-greeting-solaris-pmc
   playTimeTracker: RMCJobSurvivorMilitary
-  spawnMenuRoleName: Survivor — PMC (Base)
+  spawnMenuRoleName: PMC (Solaris Special Survivor - Base)
   special:
   - !type:AddComponentSpecial
     components:

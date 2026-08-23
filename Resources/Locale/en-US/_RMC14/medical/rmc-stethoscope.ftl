@@ -19,6 +19,6 @@ rmc-stethoscope-verb-message = Listen using the stethoscope.
 
 # Temporary until real organs are implemented. Delete when fully implemented.
 rmc-stethoscope-normal = You hear [color=green]normal heart beating patterns[/color] and [color=green]normal respiration sounds[/color] as well, {POSS-ADJ($target)} heart and lungs are [color=green]healthy[/color], probably.
-rmc-stethoscope-raggedy = You hear [color=yellow]small murmurs with each heart beat[/color] and [color=yellow]some crackles when {SUBJECT($target)} breath[/color].
+rmc-stethoscope-raggedy = You hear [color=yellow]small murmurs with each heart beat[/color] and [color=yellow]some crackles when {SUBJECT($target)} breathes[/color].
 rmc-stethoscope-hyper = You hear [color=orange]deviant heart beating patterns[/color] and [color=orange]unusual respiration sounds[/color].
 rmc-stethoscope-irregular = You hear [color=red]irregular and additional heart beating patterns[/color] and [color=red]barely hear any respiration sounds[/color], {SUBJECT($target)} is having a lot of difficulty breathing.

@@ -271,7 +271,7 @@
 - type: entity
   parent: RMCIDCardProvost
   id: RMCIDCardProvostAdvisor
-  name: provost advisor ID card
+  name: Provost Advisor ID card
   components:
   - type: PresetIdCard
     job: CMProvostAdvisor
@@ -279,7 +279,7 @@
 - type: entity
   parent: RMCIDCardProvost
   id: RMCIDCardProvostEnforcer
-  name: provost enforcer ID card
+  name: Provost Enforcer ID card
   components:
   - type: PresetIdCard
     job: CMProvostEnforcer
@@ -287,7 +287,7 @@
 - type: entity
   parent: RMCIDCardProvost
   id: RMCIDCardProvostTeamLeader
-  name: provost team leader ID card
+  name: Provost Team Leader ID card
   components:
   - type: PresetIdCard
     job: CMProvostTeamLeader
@@ -303,7 +303,8 @@
 - type: entity
   parent: RMCIDCardProvost
   id: RMCIDCardProvostDeputyMarshal
-  name: provost deputy marshal ID card
+  name: Provost Deputy Marshal ID card
+  suffix: Admin
   components:
   - type: PresetIdCard
     job: CMProvostDeputyMarshal
@@ -311,7 +312,7 @@
 - type: entity
   parent: RMCIDCardProvost
   id: RMCIDCardProvostInspector
-  name: provost inspector ID card
+  name: Provost Inspector ID card
   components:
   - type: PresetIdCard
     job: CMProvostInspector
@@ -319,7 +320,8 @@
 - type: entity
   parent: RMCIDCardProvost
   id: RMCIDCardProvostMarshal
-  name: provost marshal ID card
+  name: Provost Marshal ID card
+  suffix: Admin
   components:
   - type: PresetIdCard
     job: CMProvostMarshal

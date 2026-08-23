@@ -75,6 +75,7 @@ rmc-xeno-evolution-failed-early-weeds = The hive hasn't developed enough yet for
 rmc-xeno-evolution-failed-bad-location = We can't evolve here.
 rmc-xeno-evolution-failed-marines-dropped = The sky talls have already landed, we can no longer evolve into this form.
 rmc-xeno-evolution-failed-queen-exists = The hive already has a Queen!
+rmc-xeno-evolution-failed-not-enough-points = We need more evolution material.
 rmc-xeno-evolution-start-self = We begin to twist and contort.
 rmc-xeno-evolution-start-others = {$xeno} begins to twist and contort.
 
@@ -204,6 +205,7 @@ rmc-xeno-invisibility-expire-bump = We bumped into someone and lost our invisibi
 # Ovipositor
 cm-xeno-ovipositor-attach = We start attaching to the ovipositor.
 cm-xeno-ovipositor-detach = We start detaching from the ovipositor.
+cm-xeno-ovipositor-vehicle = We cannot enter the ovipositor inside a vehicle!
 
 # Retrieve Egg
 cm-xeno-retrieve-egg-no-eggs = We don't have any eggs stored!
@@ -336,8 +338,9 @@ rmc-xeno-sacrifice-heal-target-enviorment = {$healer_xeno} explodes in a deluge 
 rmc-xeno-sacrifice-heal-announce = ;OUR SISTER WILL NOT DIE!!!
 
 # Dodge
-rmc-xeno-dodge-self = We can now weave through our enemies!
-rmc-xeno-dodge-end = We can no longer weave through our enemies!
+rmc-xeno-dodge-self = We can now weave through our enemies and allies!
+rmc-xeno-dodge-end = We can no longer weave through our enemies and allies!
+rmc-xeno-dodge-end-manual = We end our dance early!
 
 # Vanguard Shield
 rmc-xeno-shield-vanguard-hit = Our shield took the hit!
@@ -458,7 +461,17 @@ rmc-doomed-fail = It's not working...
 rmc-destroy-cant-reach = We don't have a clear path to that location!
 rmc-destroy-cant-area = We can't leap to that area!
 
+# Queen Eye
 rmc-xeno-weeds-no-nearby-node = We require weeds to be closer!
 rmc-xeno-queen-eye-no-weeds = We can't move our eye there, there are no weeds!
 rmc-xeno-queen-eye-expand-weeds-name = Expand Weeds (50)
 rmc-xeno-queen-eye-expand-weeds-desc = Expand existing weeds or turn a weed tile into a node.
+
+# Swift Steps
+rmc-xeno-swift-steps-self = We narrowly dodge {THE($bullet)}!
+rmc-xeno-swift-steps-others = {CAPITALIZE(THE($user))} darts aside, evading {THE($bullet)}!
+
+# Finesse
+rmc-xeno-marked-critical-apply = You feel fear washing down your spine... you could be next!
+rmc-xeno-marked-critical-disappear = You calm down and get back to your senses.
+rmc-xeno-marked-critical-consumed = You've been knocked back to your senses!

@@ -182,3 +182,4 @@
     - id: CMFireExtinguisherPortable
     - id: CMRollerBedSpawnFolded
     - id: CMPortableSurgicalBedSpawnFolded
+  # - id: RMCPortableCrewMonitor // TODO RMC14 handheld crew monitors

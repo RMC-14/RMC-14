@@ -21,6 +21,17 @@
     - type: NpcFactionMember
       factions:
       - SPP
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - English
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - English
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
   - !type:AddComponentSpecial
     components:
     - type: Skills
@@ -81,5 +92,5 @@
   parent: CMJobIconBase
   id: RMCJobIconSPPCO
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: upp_co
+    sprite: _RMC14/Interface/job_icons/SPP/standard.rsi
+    state: spp_co

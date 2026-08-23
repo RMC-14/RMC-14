@@ -3,7 +3,7 @@
   id: CMSurvivorVaraderoICB
   name: cm-job-name-survivor-icb
   description: cm-job-description-survivor
-  spawnMenuRoleName: Interstellar Commerce Bureau Liaison (NV Survivor)
+  spawnMenuRoleName: Interstellar Commerce Bureau Liaison (New Varadero Survivor)
   startingGear: RMCGearSurvivorVaraderoICB
 
 - type: startingGear

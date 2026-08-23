@@ -70,10 +70,10 @@
     - map: [ "eyes" ]
     - map: [ "belt" ]
     - map: [ "enum.HumanoidVisualLayers.Tail" ] # Mentioned in moth code: This needs renaming lol.
-    - map: [ "back" ]
     - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
     - map: [ "neck" ] # RMC14 re-arrange neck slot
     - map: [ "enum.HumanoidVisualLayers.Hair" ] # Do these need to be here? (arachnid hair arachnid hair)
+    - map: [ "back" ] # RMC14 re-arrange back slot
     - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
     - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
     - map: [ "mask" ]

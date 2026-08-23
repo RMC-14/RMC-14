@@ -19,6 +19,17 @@
     - type: NpcFactionMember
       factions:
       - SPP
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - English
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - English
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
     - type: Skills
       skills:
         RMCSkillEndurance: 1
@@ -114,5 +125,5 @@
   parent: CMJobIconBase
   id: RMCJobIconSPPMedic
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: upp_med
+    sprite: _RMC14/Interface/job_icons/SPP/standard.rsi
+    state: spp_med

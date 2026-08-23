@@ -427,17 +427,20 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCArmorProvostFlexi # TODO RMC14 provost office handheld beacon
+    - id: RMCArmorProvostFlexi
+    - id: RMCProvostClipboard
+    # TODO RMC14 provost office handheld beacon
 
 - type: entity
   parent: CMSatchelSecurity
-  suffix: Provost
+  suffix: Provost, Inspector
   id: CMSatchelSecurityFilledProvostInspector
   components:
   - type: StorageFill
     contents:
     - id: RMCArmorProvostFlexi
     - id: RMCStampProvostInspector
+    - id: RMCProvostClipboard
 
 - type: entity
   parent: CMSatchelSecurity
@@ -446,7 +449,9 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCArmorProvostMarshal # TODO RMC14 provost office handheld beacon
+    - id: RMCArmorProvostMarshal
+    - id: RMCProvostClipboard
+    # TODO RMC14 provost office handheld beacon
 
 - type: entity
   parent: CMSatchelSecurity
@@ -455,8 +460,10 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCArmorProvostMarshal # TODO RMC14 provost office handheld beacon
+    - id: RMCArmorProvostMarshal
+    - id: RMCProvostClipboard
     - id: RMCTabletCO
+    # TODO RMC14 provost office handheld beacon
 
 - type: entity
   parent: CMSatchelSecurity
@@ -465,8 +472,10 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCArmorProvostMarshal # TODO RMC14 provost office handheld beacon
+    - id: RMCArmorProvostMarshal
+    - id: RMCProvostClipboard
     - id: RMCTabletCO
+    # TODO RMC14 provost office handheld beacon
 
 - type: entity
   parent: CMSatchelSecurity
@@ -476,7 +485,8 @@
   - type: StorageFill
     contents:
     - id: RMCPacketGrenadeFlashBang
-    - id: RMCWeaponTaser # TODO RMC14 4 tear gas grenades
+    - id: RMCWeaponTaser
+    # TODO RMC14 4 tear gas grenades
 
 - type: entity
   parent: CMSatchel
@@ -490,13 +500,24 @@
     - id: CMStampDenied
 
 - type: entity
-  parent: CMSatchelSecurity
-  id: CMSatchelSecurityFilledFaxResponder
-  suffix: Fax Responder
+  parent: CMSatchel
+  id: RMCSatchelFilledFaxResponderHighComm
+  suffix: Fax Responder, HComm
   components:
   - type: StorageFill
     contents:
     - id: CMPenFountain
+    - id: CMStampApproved
+    - id: CMStampDenied
+
+- type: entity
+  parent: CMSatchelSecurity
+  id: CMSatchelSecurityFilledFaxResponderProvost
+  suffix: Fax Responder, Provost
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCProvostPen
     - id: CMStampApproved
     - id: CMStampDenied
 
@@ -744,6 +765,16 @@
     maxItemSize: Normal
     grid:
     - 0,0,20,1 # same as backpack, up to 7 normal size rockets
+
+- type: entity
+  parent: RMCSatchelLightpack
+  id: RMCSatchelTyrargo
+  name: T13 MOLLE Satchel
+  suffix: UNMC
+  description: A tactical satchel manufactured by one of the Weston-Yamada subsidiaries. Very lightweight beltbag variant that utilizes UN standard MOLLE fastening systems. Can be often found in hands of colonial security and various private military groups.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/molle.rsi
 
 - type: entity
   parent: CMSatchel
@@ -1069,7 +1100,7 @@
   components:
   - type: StorageFill
     contents:
-    # M40 CCDP Greande #RMC14 TODO
+    - id: RMCGrenadeWhitePhosphorusCompound
     - id: RMCGrenadeFlashBang
     - id: RMCTabletCO
     - id: RMCLaserDesignator
