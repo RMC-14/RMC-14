@@ -3146,3 +3146,14 @@
     state: aelica_mom_danara
   - type: PatronFigurine
     id: fc6f4f20-8c81-4e64-a485-fc9766445f27
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronShyPeepsJunie
+  name: Shy 'Peeps' Junie figurine
+  description: "\"Ma, can a rodentia still be brave if she is afraid?\""
+  components:
+  - type: Sprite
+    state: shy_peeps_junie
+  - type: PatronFigurine
+    id: 025498ea-e4eb-4ceb-adff-450fbcde6669
