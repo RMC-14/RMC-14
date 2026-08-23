@@ -33,6 +33,7 @@ public sealed class CMChatSystem : SharedCMChatSystem
     [Dependency] private readonly LanguageSystem _language = default!;
 
     private EntityQuery<GhostComponent> _ghostQuery;
+    private EntityQuery<ImaginaryFriendComponent> _friendComponent;
     private EntityQuery<MarineComponent> _marineQuery;
     private EntityQuery<XenoComponent> _xenoQuery;
 
@@ -48,6 +49,7 @@ public sealed class CMChatSystem : SharedCMChatSystem
         base.Initialize();
 
         _ghostQuery = GetEntityQuery<GhostComponent>();
+        _friendComponent = GetEntityQuery<ImaginaryFriendComponent>();
         _marineQuery = GetEntityQuery<MarineComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
 
@@ -59,6 +61,9 @@ public sealed class CMChatSystem : SharedCMChatSystem
     {
         _toRemove.Clear();
 
+        if (_friendComponent.HasComp(ent))
+            return; // handled separately
+
         var entIsMarine = _marineQuery.HasComp(ent);
         var entIsXeno = _xenoQuery.HasComp(ent);
         foreach (var (session, _) in args.Recipients)
@@ -69,16 +74,16 @@ public sealed class CMChatSystem : SharedCMChatSystem
             if (_ghostQuery.HasComp(sessionEntity))
                 continue;
 
-            // If the message has no language (LOOC for example) just go with the standard faction check.
-            if (args.Language is not { } spokenLanguage)
+            // If the message has a language, check if it should be visible to `sessionEntity`.
+            if (args.Language is { } spokenLanguage)
             {
-                if (entIsMarine != _marineQuery.HasComp(sessionEntity) || entIsXeno != _xenoQuery.HasComp(sessionEntity))
+                if (!_language.CanSeeSpokenMessage(sessionEntity, spokenLanguage))
                     _toRemove.Add(session);
                 continue;
             }
 
-            // Otherwise check if the language is visible to `sessionEntity`.
-            if (!_language.CanSeeSpokenMessage(sessionEntity, spokenLanguage))
+            // If there isn't a language (LOOC for example), just go with the standard "same faction" check.
+            if (entIsMarine != _marineQuery.HasComp(sessionEntity) || entIsXeno != _xenoQuery.HasComp(sessionEntity))
                 _toRemove.Add(session);
         }
 
