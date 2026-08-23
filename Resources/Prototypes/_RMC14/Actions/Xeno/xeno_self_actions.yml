@@ -236,7 +236,7 @@
       components:
       - MobState
   - type: RMCDazeableAction
-  - type: RMCInContainerAction
+  # - type: RMCInContainerAction # TODO can't target mobs from inside tunnels but this would be nice to have in the future
 
 - type: entity
   id: ActionXenoPsychicRadiance
