@@ -3179,3 +3179,14 @@
     state: julian_ubercharge_compton
   - type: PatronFigurine
     id: d0859845-a60c-4f01-baab-178751ec4220
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronBuckPrettyTern
+  name: Buck 'Pretty' Tern figurine
+  description: "A strange moff with colorful wings. Get on his good side and he'll fight the world for you.. or at least try."
+  components:
+  - type: Sprite
+    state: buck_pretty_tern
+  - type: PatronFigurine
+    id: 54d2b7d9-8b7b-42f5-84a1-ec45f539d62f
