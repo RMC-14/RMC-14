@@ -68,9 +68,6 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
         if (!TryComp(args.OtherEntity, out ProjectileComponent? projectile))
             return;
 
-        if (!Transform(ent).Anchored)
-            return;
-
         var barricadeNet = GetNetEntity(ent.Owner);
 
         if (TryComp(args.OtherEntity, out ProjectileCoverPassedComponent? passed) && passed.Barricades.Contains(barricadeNet))
