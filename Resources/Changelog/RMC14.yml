@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: SharkSnake98
   changes:
-  - message: Added new armour, helmets, and uniforms for freelancers, as well as a
-      freelance clothes vendor
-    type: Add
-  id: 3094
-  time: '2026-04-11T01:38:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9574
-- author: SharkSnake98
-  changes:
   - message: Added a version of the dwarf beard without eyebrows
     type: Add
   id: 3095
@@ -4541,5 +4533,13 @@
   id: 3593
   time: '2026-08-23T15:25:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10731
+- author: IceNoobXD
+  changes:
+  - message: Adjusted the ranks of the CBRN SL, WS and added white phosphorus grenades
+      to their kits! (Admin exclusive roles)
+    type: Tweak
+  id: 3594
+  time: '2026-08-23T16:04:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10360
 Name: RMC14
 Order: -1
