@@ -184,6 +184,18 @@ public sealed partial class CMDistressSignalRuleSystem
         }
     }
 
+    public void OnRoundstartPlayersSpawned(RoundstartPlayersSpawnedEvent ev)
+    {
+        if (TryGetActiveRule() is not { } rule)
+            return;
+
+        // Give xenos burrowed larva for every xeno slot that was unassigned
+        var xenoAssignment = ev.JobAssignments[rule.XenoSelectableJob][0];
+
+        if (xenoAssignment.AssignmentLimit is { } limit)
+            _hive.ChangeBurrowedLarva(limit - xenoAssignment.AssignedPlayers.Count);
+    }
+
     /// <summary>
     /// Main handler for player spawning during the distress signal round.
     /// Initializes the xeno map, sets up survivor jobs, applies job slot scaling,

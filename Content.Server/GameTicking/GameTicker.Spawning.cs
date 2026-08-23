@@ -67,12 +67,12 @@ namespace Content.Server.GameTicking
             Dictionary<NetUserId, HumanoidCharacterProfile> profiles,
             bool force)
         {
-            var assignments = GetPlayerAssignments(readyPlayers, profiles, force);
+            var (playerAssignments, jobAssignments) = GetPlayerAssignments(readyPlayers, profiles, force);
 
             // Calculate extended access for stations.
             var spawnableStations = GetSpawnableStations();
             var stationJobCounts = spawnableStations.ToDictionary(e => e, _ => 0);
-            foreach (var player in assignments)
+            foreach (var player in playerAssignments)
             {
                 if (player.AssignedJob == null)
                 {
@@ -91,7 +91,7 @@ namespace Content.Server.GameTicking
             _stationJobs.CalcExtendedAccess(stationJobCounts);
 
             // Spawn everybody in!
-            foreach (var player in assignments)
+            foreach (var player in playerAssignments)
             {
                 if (player.AssignedJob == null)
                     continue;
@@ -101,14 +101,20 @@ namespace Content.Server.GameTicking
 
             RefreshLateJoinAllowed();
 
+            // RMC version of the event to allow systems to react to player assignments,
+            // as well as unassigned roles
+            RaiseLocalEvent(new RoundstartPlayersSpawnedEvent(
+                playerAssignments,
+                jobAssignments));
+
             // Allow rules to add roles to players who have been spawned in. (For example, on-station traitors)
             RaiseLocalEvent(new RulePlayerJobsAssignedEvent(
-                assignments.Select(player => player.Session).ToArray(),
+                playerAssignments.Select(player => player.Session).ToArray(),
                 profiles,
                 force));
         }
 
-        private List<PlayerSpawnInfo> GetPlayerAssignments(List<ICommonSession> readyPlayers,
+        private (List<PlayerSpawnInfo>, JobAssignmentsDict) GetPlayerAssignments(List<ICommonSession> readyPlayers,
             Dictionary<NetUserId, HumanoidCharacterProfile> profiles,
             bool force)
         {
@@ -187,7 +193,7 @@ namespace Content.Server.GameTicking
                   {string.Join("\n  ", processingPlayers.Select(x => $"{x.Session}: {x.AssignedJob?.JobID}"))}
                 """);
 
-            return processingPlayers;
+            return (processingPlayers, jobAssignments);
 
             void AssignAll()
             {
@@ -937,6 +943,19 @@ namespace Content.Server.GameTicking
                 return ProcessedPlayers.Count <= 0;
             }
         }
+    }
+
+    /// <summary>
+    ///     Event raised after all players have been assigned and spawned in.
+    ///     Note that processed players may not necessarily have been assigned,
+    ///     due to not getting one of their preferred roles.
+    /// </summary>
+    public sealed class RoundstartPlayersSpawnedEvent(
+        List<PlayerSpawnInfo> processedPlayers,
+        JobAssignmentsDict jobAssignments)
+    {
+        public readonly List<PlayerSpawnInfo> ProcessedPlayers = processedPlayers;
+        public readonly JobAssignmentsDict JobAssignments = jobAssignments;
     }
 
     public sealed class PrePlayerAssignmentEvent(
