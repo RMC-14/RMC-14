@@ -5,7 +5,7 @@
   description: rmc-job-description-cbrn-ws
   playTimeTracker: RMCJobCBRNWS
   ranks:
-    RMCRankOperator: []
+    RMCRankCorporal: []
   startingGear: RMCGearCBRNWS
   icon: "CMJobIconWeaponsSpecialist"
   joinNotifyCrew: false
@@ -111,8 +111,8 @@
   storage:
     outerClothing:
     - CMMRE
-    - CMGrenadeHighExplosive     #RMC TODO: M40 HPDP White Phosphorus
-    - CMGrenadeHighExplosive     #RMC TODO: M40 HPDP White Phosphorus
+    - RMCGrenadeWhitePhosphorus
+    - RMCGrenadeWhitePhosphorus
     pocket1:
     - RMCTankFlamerLargeX
     - RMCTankFlamerLargeX
