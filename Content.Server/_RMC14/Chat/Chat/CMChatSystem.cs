@@ -63,10 +63,6 @@ public sealed class CMChatSystem : SharedCMChatSystem
     {
         _toRemove.Clear();
 
-        // Emotes are always visible.
-        if (args.Channel.HasFlag(ChatChannel.Emotes))
-            return;
-
         if (_friendComponent.HasComp(ent))
             return; // handled separately
 
@@ -89,7 +85,7 @@ public sealed class CMChatSystem : SharedCMChatSystem
                 continue;
             }
 
-            // If there isn't a language (LOOC or similar), only show it to members of the same faction.
+            // If there isn't a language (LOOC for example), just go with the standard "same faction" check.
             if (speakerIsMarine != _marineQuery.HasComp(sessionEntity) || speakerIsXeno != _xenoQuery.HasComp(sessionEntity))
                 _toRemove.Add(session);
         }

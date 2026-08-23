@@ -185,7 +185,7 @@ public sealed partial class ChatSystem
         var languageIcon = showLanguageName ? languagePrototype?.DisplayedLanguageIcon : null;
         var visibleLanguage = !(languagePrototype?.NeedsSpeech ?? true);
 
-        foreach (var (session, data) in GetRecipients(source, ChatChannel.Whisper, WhisperMuffledRange, language))
+        foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange, language))
         {
             if (session.AttachedEntity is not { Valid: true } listener)
                 continue;
@@ -322,7 +322,7 @@ public sealed partial class ChatSystem
         var visibleLanguage = !(languagePrototype?.NeedsSpeech ?? true);
         var transformedName = nameOverride ?? Identity.Name(source, EntityManager).Name;
 
-        foreach (var (session, data) in GetRecipients(source, ChatChannel.Whisper, WhisperMuffledRange, language))
+        foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange, language))
         {
             if (session.AttachedEntity is not { Valid: true } listener)
                 continue;
@@ -454,7 +454,7 @@ public sealed partial class ChatSystem
         string? transformedName = null,
         bool needsLos = false)
     {
-        foreach (var (session, data) in GetRecipients(source, channel, VoiceRange, language))
+        foreach (var (session, data) in GetRecipients(source, VoiceRange, language))
         {
             var entRange = MessageRangeCheck(session, data, range);
             if (entRange == MessageRangeCheckResult.Disallowed)
