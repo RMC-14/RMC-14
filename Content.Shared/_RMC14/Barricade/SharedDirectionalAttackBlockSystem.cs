@@ -105,12 +105,18 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
         var currentCoords = _transform.GetMoverCoordinates(args.OtherEntity);
         var distance = (currentCoords.Position - shotFrom.Position).Length();
 
-        if (behind)
+        if (facing)
         {
             if (interaction is { StoppedByCover: true })
                 return;
 
             distance -= 1;
+        }
+        else if (distance > 3)
+        {
+            args.Cancelled = true;
+            MarkPassed(args.OtherEntity, barricadeNet);
+            return;
         }
 
         if (distance < 1)
