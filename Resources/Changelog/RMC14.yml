@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: TadJohnson00
-  changes:
-  - message: '[PVE] Added a few missing weapons to the RCM''s arsenal, including loadout
-      sidearms, a flamethrower, and throwing knife.'
-    type: Add
-  id: 3093
-  time: '2026-04-11T01:39:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9542
 - author: SharkSnake98
   changes:
   - message: Added new armour, helmets, and uniforms for freelancers, as well as a
@@ -4541,5 +4533,13 @@
   id: 3592
   time: '2026-08-22T16:22:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10247
+- author: carccborg
+  changes:
+  - message: Added many plurals of role names to the default chat highlights for many
+      roles
+    type: Tweak
+  id: 3593
+  time: '2026-08-23T15:25:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10731
 Name: RMC14
 Order: -1
