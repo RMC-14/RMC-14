@@ -501,6 +501,15 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot_alt.rsi
 
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitPilotFighter
+  name: ASU-25F/P g-suit
+  description: The ASU-25F/P Antipressure Suit is an anti-G garment commonly seen in use by Aerofighter pilots across the Marine Corps, meant to sustain a pilot's consciousness during high-speed turns. While considered bulky and uncomfortable to wear, it has been attributed as the source of the unusually high survival rate among Aerofighter pilots during Operation Justice.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot_fighter.rsi
+
 # Dropship Crew Chief
 - type: entity
   parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]

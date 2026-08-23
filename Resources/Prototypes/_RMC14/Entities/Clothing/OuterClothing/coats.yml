@@ -426,6 +426,20 @@
     foldedEquippedPrefix: jacket
     foldedHeldPrefix: jacket
 
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatPilotFighter
+  name: PDU-80 pilot mobility vest
+  description: The PDU-80 is an older-generation vest currently in use by Marine Aerofighter pilots. It is a combination of both a survival vest and a modular body armor system. The chestpiece can be worn alone to provide protection against fragmentation and smaller calibers while allowing the attachment of life preservers and additional armor inserts to suit the individual needs of the pilot.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/pilot_fighter.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/pilot_fighter.rsi
+  - type: CMArmor
+    melee: 10
+    bullet: 10
+
 # Commanding Officer
 - type: entity
   parent: RMCBaseJacket

@@ -87,7 +87,7 @@
       RMCSkillDomestics: 2
       RMCSkillNavigations: 1
 
-# Varadero UNMC (LACN on CM)
+# Varadero survs (LACN on CM)
 # They're in the same file as FORECON survivors on CM, so I'm applying the same logic here
 
 - type: entity
@@ -150,8 +150,8 @@
 
 - type: entity
   parent: RMCSkillPresetSurvivor
-  id: RMCSkillPresetSurvivorUNMCPilot
-  name: Survivor UNMC Pilot
+  id: RMCSkillPresetSurvivorUNMCFighterPilot
+  name: Survivor UNMC Fighter Pilot
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
@@ -162,8 +162,7 @@
       RMCSkillConstruction: 2
       RMCSkillMedical: 1
       RMCSkillVehicles: 1
-      RMCSkillJtac: 4
-      RMCSkillLeadership: 2
+      RMCSkillJtac: 3
       RMCSkillDomestics: 1
       RMCSkillFireman: 2
       RMCSkillMeleeWeapons: 1

@@ -8,7 +8,7 @@
   greeting: rmc-job-greeting-varadero
   ranks:
     RMCRankSecondLT: []
-  spawnMenuRoleName: UNMC Pilot (NV Survivor)
+  spawnMenuRoleName: UNMC Fighter Pilot (NV Survivor)
   icon: "RMCJobIconSurvivorPilot"
   hasIcon: true
   special:
@@ -19,7 +19,7 @@
         tags:
         - RMCSquadMarineVaradero
     - type: Skills
-      preset: RMCSkillPresetSurvivorUNMCPilot
+      preset: RMCSkillPresetSurvivorUNMCFighterPilot
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -28,7 +28,6 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
-    - type: MarineOrders
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetUNMCPilot
     - type: JobPrefix
@@ -54,14 +53,14 @@
 - type: startingGear
   id: RMCGearSurvivorUNMCPilot
   equipment:
-    jumpsuit: RMCJumpsuitPilotAlt
+    jumpsuit: RMCJumpsuitPilotFighter
     ears: RMCHeadsetMarineNV
-    gloves: CMHandsInsulated
-    head: CMArmorHelmetM30
+    gloves: CMHandsInsulatedPilot
+    head: CMArmorHelmetHDU44
     id: CMIDCardStandardDogtag
     pocket1: RMCPouchSurvivalFill
     belt: CMBeltUtilityFilled
-    outerClothing: RMCCoatPilot
+    outerClothing: RMCCoatPilotFighter
     back: RMCSatchelLightpack5Slot
     shoes: CMBootsBlackFilled
   storage:

@@ -1,4 +1,4 @@
-# RMC14: these are MP survs on CM
+# RMC14: MP surv on CM
 - type: job
   parent: CMSurvivorSecurity
   id: RMCSurvivorUNMCBasePolice
@@ -50,7 +50,7 @@
   useLoadoutOfJob: CMSurvivorSecurity # for inheritance
 
 - type: startingGear
-  id: RMCGearSurvivorUNMCBasePolice # This loadout is supposed to have MP stuff but these are not MP's. Replaced the jacket and jumpsuit with their marine counterparts
+  id: RMCGearSurvivorUNMCBasePolice
   equipment:
     jumpsuit: JumpsuitMarine
     outerClothing: RMCCoatService
@@ -70,7 +70,7 @@
   id: RMCSurvivorPresetUNMCBasePolice
   name: varadero base police preset
   categories: [ HideSpawnMenu ]
-  components: # This preset is supposed to have MP stuff but these are not MP's. Replaced the cap and helmet with their marine counterparts
+  components:
     - type: EntityPreset
       randomOutfits:
         - [ ArmorHelmetM10 ]
