@@ -1,11 +1,12 @@
 using System.Linq;
 using System.Text.RegularExpressions;
-using Content.Server._RMC14.Language.Systems;
 using Content.Server.Chat.Managers;
+using Content.Server.Radio.Components;
 using Content.Server.Speech.EntitySystems;
 using Content.Server.Speech.Prototypes;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Language.Components;
+using Content.Server._RMC14.Language.Systems;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Mentor.ImaginaryFriend;
 using Content.Shared._RMC14.Xenonids;
@@ -26,14 +27,14 @@ public sealed class CMChatSystem : SharedCMChatSystem
 {
     [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly LanguageSystem _language = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ReplacementAccentSystem _wordreplacement = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly LanguageSystem _language = default!;
 
-    private EntityQuery<GhostComponent> _ghostQuery;
     private EntityQuery<ImaginaryFriendComponent> _friendComponent;
+    private EntityQuery<GhostComponent> _ghostQuery;
     private EntityQuery<MarineComponent> _marineQuery;
     private EntityQuery<XenoComponent> _xenoQuery;
 
@@ -48,13 +49,14 @@ public sealed class CMChatSystem : SharedCMChatSystem
     {
         base.Initialize();
 
-        _ghostQuery = GetEntityQuery<GhostComponent>();
         _friendComponent = GetEntityQuery<ImaginaryFriendComponent>();
+        _ghostQuery = GetEntityQuery<GhostComponent>();
         _marineQuery = GetEntityQuery<MarineComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
 
         SubscribeLocalEvent<LanguageComponent, ChatMessageAfterGetRecipients>(OnLanguageGetRecipients);
         SubscribeLocalEvent<ImaginaryFriendComponent, ChatMessageAfterGetRecipients>(OnImaginaryFriendGetRecipients);
+        SubscribeLocalEvent<RadioSpeakerComponent, ChatMessageAfterGetRecipients>(OnRadioSpeakerGetRecipients);
     }
 
     private void OnLanguageGetRecipients(Entity<LanguageComponent> ent, ref ChatMessageAfterGetRecipients args)
@@ -104,6 +106,22 @@ public sealed class CMChatSystem : SharedCMChatSystem
                 continue;
 
             if (ent.Comp.Imaginer != session.AttachedEntity)
+                _toRemove.Add(session);
+        }
+
+        foreach (var session in _toRemove)
+        {
+            args.Recipients.Remove(session);
+        }
+    }
+
+    private void OnRadioSpeakerGetRecipients(Entity<RadioSpeakerComponent> ent, ref ChatMessageAfterGetRecipients args)
+    {
+        _toRemove.Clear();
+
+        foreach (var (session, _) in args.Recipients)
+        {
+            if (_xenoQuery.HasComp(session.AttachedEntity))
                 _toRemove.Add(session);
         }
 
