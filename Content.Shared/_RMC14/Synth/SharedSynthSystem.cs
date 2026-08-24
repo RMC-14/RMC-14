@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Clothing;
 using Content.Shared._RMC14.IdentityManagement;
 using Content.Shared._RMC14.Medical.HUD.Components;
 using Content.Shared._RMC14.Medical.Unrevivable;
@@ -67,7 +68,7 @@ public abstract class SharedSynthSystem : EntitySystem
         SubscribeLocalEvent<SynthComponent, TargetDefibrillatedEvent>(OnSynthResetKey);
 
         SubscribeLocalEvent<UseOnSynthBlockedComponent, BeforeRangedInteractEvent>(OnSynthBlockedBeforeRangedInteract);
-        SubscribeLocalEvent<CMArmorComponent, BeingEquippedAttemptEvent>(OnArmorBeingEquippedAttempt);
+        SubscribeLocalEvent<CMArmorComponent, BeingEquippedAttemptEvent>(OnArmorBeingEquippedAttempt, before: [typeof(RMCClothingSystem)]);
     }
 
     private void OnMapInit(Entity<SynthComponent> ent, ref MapInitEvent args)
@@ -348,6 +349,9 @@ public abstract class SharedSynthSystem : EntitySystem
 
     private void OnArmorBeingEquippedAttempt(Entity<CMArmorComponent> ent, ref BeingEquippedAttemptEvent args)
     {
+        if(args.Cancelled)
+            return;
+
         if ((args.SlotFlags & SlotFlags.OUTERCLOTHING) == 0)
             return;
 
