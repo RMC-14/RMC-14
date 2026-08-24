@@ -317,6 +317,8 @@ rmc-job-greeting-crashland = You are a member of an SPP recon force!
   You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
 
   You are NOT aware of the marines or their intentions.
+  
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
 rmc-job-greeting-crashland-officer = You are the commander in charge of an SPP recon mission!
 
