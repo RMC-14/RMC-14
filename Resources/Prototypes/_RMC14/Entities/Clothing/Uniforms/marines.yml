@@ -271,7 +271,7 @@
 
 # Commanding Officer / CO
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
   id: CMJumpsuitCO
   name: commanding officer uniform
   description: Standard-issue Commanding Officer uniform.
@@ -310,19 +310,20 @@
     camouflageVariations: { }
 
 - type: entity
-  parent: CMJumpsuitCO
+  parent: RMCMarineUniformBase
   id: CMJumpsuitCOService
   name: commanding officer's dress shirt
   description: The shirt and tie of a two-piece Navy service dress uniform for high-ranking officers. Wear with style and substance.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Command/CO/service.rsi
+  - type: Appearance
   - type: ItemCamouflage
     camouflageVariations: { }
 
 - type: entity
   parent: CMJumpsuitCOService
-  id: RMCJumsuitWhiteService
+  id: RMCJumpsuitWhiteService
   name: white service uniform
   description: A white dress shirt and tie with sleek pants. Standard clothing for anyone on professional business.
 
