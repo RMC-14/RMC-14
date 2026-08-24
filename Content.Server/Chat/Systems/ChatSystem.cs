@@ -662,7 +662,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     /// </summary>
     private void SendInVoiceRange(ChatChannel channel, string message, string wrappedMessage, EntityUid source, ChatTransmitRange range, NetUserId? author = null)
     {
-        foreach (var (session, data) in GetRecipients(source, VoiceRange))
+        foreach (var (session, data) in GetRecipients(source, channel, VoiceRange)) // RMC14
         {
             var entRange = MessageRangeCheck(session, data, range);
             if (entRange == MessageRangeCheckResult.Disallowed)
@@ -795,6 +795,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     /// </summary>
     private Dictionary<ICommonSession, ICChatRecipientData> GetRecipients(
         EntityUid source,
+        ChatChannel channel, // RMC14
         float voiceGetRange,
         ProtoId<LanguagePrototype>? language = null) // RMC14
     {
@@ -846,8 +847,10 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         RaiseLocalEvent(new ExpandICChatRecipientsEvent(source, voiceGetRange, recipients));
 
-        var ev = new ChatMessageAfterGetRecipients(recipients, language);
+        // RMC14
+        var ev = new ChatMessageAfterGetRecipients(recipients, channel, language);
         RaiseLocalEvent(source, ref ev);
+        // RMC14
 
         return recipients;
     }
