@@ -1063,7 +1063,7 @@ entities:
     - type: Transform
       pos: 7.5,-6.5
       parent: 1
-- proto: CMSpawnPointSPPCrashlandMSIOfficer
+- proto: CMSpawnPointSPPCrashlandCommander
   entities:
   - uid: 672
     components:

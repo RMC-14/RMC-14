@@ -1,14 +1,14 @@
 - type: job
   parent: RMCSurvivorSPPCrashlandBase
-  id: RMCSurvivorSPPCrashlandMSIOfficer
-  name: rmc-job-name-crashland-msi-officer
-  startingGear: RMCGearSPPCrashlandMSIOfficer
+  id: RMCSurvivorSPPCrashlandCommander
+  name: rmc-job-name-crashland-officer
+  startingGear: RMCGearSPPCrashlandCommander
   ranks:
     RMCRankSPPMayjor: []
-  icon: "RMCJobIconSurvivorSPPCrashlandMSIOfficer"
+  icon: "RMCJobIconSurvivorSPPCrashlandCommander"
   playTimeTracker: RMCJobSurvivorCO
-  greeting: rmc-job-greeting-crashland-msi-officer
-  spawnMenuRoleName: SPP Ministry of Strategic Intelligence Officer (Trijent Special Survivor)
+  greeting: rmc-job-greeting-crashland-officer
+  spawnMenuRoleName: SPP Airborne Commander (Trijent Special Survivor)
   special:
   - !type:AddComponentSpecial
     components:
@@ -18,7 +18,7 @@
       factions:
       - SPP
     - type: Skills
-      preset: RMCSkillPresetSurvivorSPPMSIOfficer
+      preset: RMCSkillPresetSurvivorSPPCommander
     - type: Language
       spokenLanguages:
       - English
@@ -45,7 +45,7 @@
     - type: AssignSquad
       squad: SquadSPP
     - type: JobPrefix
-      prefix: rmc-job-prefix-crashland-msi-officer
+      prefix: rmc-job-prefix-crashland-officer
     - type: RMCTrackable
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetSPPCrashlandWeaponOnly
@@ -55,14 +55,14 @@
 
 - type: startingGear
   parent: RMCGearSPPCrashlandBase
-  id: RMCGearSPPCrashlandMSIOfficer
+  id: RMCGearSPPCrashlandCommander
   equipment:
     jumpsuit: CMJumpsuitSPPOfficer
-    ears: RMCHeadsetSPPCrashlandMSIOfficer
+    ears: RMCHeadsetSPPCrashland
     back: CMSatchelSecureStandard
     belt: RMCBeltHolsterPistolSPP
     outerClothing: RMCCoatSPP
-    id: CMIDCardGoldSPPMSIOfficer
+    id: CMIDCardGoldSPPOfficer
     head: CMHeadCapSPPPeaked
     pocket1: RMCPouchFirstAid
     pocket2: RMCPouchDocumentSmall
@@ -91,11 +91,11 @@
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: CMSpawnPointSPPCrashlandMSIOfficer
-  name: special survivor spp crashland ministry of strategic intelligence officer spawn point
+  id: CMSpawnPointSPPCrashlandCommander
+  name: special survivor spp crashland commander spawn point
   components:
   - type: SpawnPoint
-    job_id: RMCSurvivorSPPCrashlandMSIOfficer
+    job_id: RMCSurvivorSPPCrashlandCommander
   - type: Sprite
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
@@ -103,7 +103,7 @@
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconSurvivorSPPCrashlandMSIOfficer
+  id: RMCJobIconSurvivorSPPCrashlandCommander
   icon:
     sprite: _RMC14/Interface/job_icons/SPP/standard.rsi
-    state: spp_commi
+    state: spp_co

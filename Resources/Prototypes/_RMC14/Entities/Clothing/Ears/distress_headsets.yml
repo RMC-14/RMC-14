@@ -422,19 +422,6 @@
     trackerModes:
     - SPPAirborneSL
 
-- type: entity
-  parent: RMCHeadsetSPPCrashland
-  id: RMCHeadsetSPPCrashlandMSIOfficer
-  name: SPP-CMD headset
-  description: An updated, modular intercom that fits over the head. Takes encryption keys.
-  components:
-  - type: ContainerFill
-    containers:
-      key_slots:
-      - RMCEncryptionKeySPP
-      - CMEncryptionKeyColony
-      - RMCEncryptionKeySPPCommand
-
 # For Sorokyne SPP SOF
 
 - type: entity

@@ -61,11 +61,11 @@
 
 - type: entity
   parent: CMIDCardGold
-  id: CMIDCardGoldSPPMSIOfficer
-  description: A gold plated holo-badge which shows power and might. You start to feel like the owner of this badge is watching you.
+  id: CMIDCardGoldSPPOfficer
+  description: A gold plated holo-badge which shows power and might.
   components:
   - type: PresetIdCard
-    job: RMCSurvivorSPPCrashlandMSIOfficer
+    job: RMCSurvivorSPPCrashlandCommander
   - type: ItemIFF
     factions:
     - FactionSurvivor

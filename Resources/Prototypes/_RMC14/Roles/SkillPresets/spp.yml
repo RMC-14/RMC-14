@@ -73,8 +73,8 @@
 
 - type: entity
   parent: RMCSkillPresetSurvivorSPPLeader
-  id: RMCSkillPresetSurvivorSPPMSIOfficer
-  name: Survivor SPP Ministry of Strategic Intelligence Officer
+  id: RMCSkillPresetSurvivorSPPCommander
+  name: Survivor SPP Commander
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
