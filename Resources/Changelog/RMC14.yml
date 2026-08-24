@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: TadJohnson00
-  changes:
-  - message: '[PVE] Loadouts have been added for RCM characters, make sure to customise
-      your character.'
-    type: Add
-  - message: '[PVE] Adjusted the organisation and contents of the vendors and lockers
-      in the HMS Pratchett.'
-    type: Tweak
-  id: 3100
-  time: '2026-04-11T03:50:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9543
 - author: kleinerstation13
   changes:
   - message: Added SPP Airborne Bar Crashlanding scenario
@@ -4545,5 +4534,12 @@
   id: 3599
   time: '2026-08-24T16:15:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8884
+- author: kleinerstation13
+  changes:
+  - message: Changed SOF radio channel color to make it distinguishable
+    type: Tweak
+  id: 3600
+  time: '2026-08-24T22:31:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10354
 Name: RMC14
 Order: -1
