@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: wheelwrightt
-  changes:
-  - message: Coffee machines now can brew coffee into mugs.
-    type: Add
-  id: 3098
-  time: '2026-04-11T01:44:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9490
 - author: KompaniLinge
   changes:
   - message: Fixed Kommissar prefix being inconsistent between ranks
@@ -4541,5 +4534,13 @@
   id: 3597
   time: '2026-08-23T22:14:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10760
+- author: JustMyselfUwU
+  changes:
+  - message: Activated defibs of all kinds are now unable to fit inside any storage
+      container
+    type: Fix
+  id: 3598
+  time: '2026-08-24T09:11:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9859
 Name: RMC14
 Order: -1
