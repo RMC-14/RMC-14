@@ -309,7 +309,7 @@
     survivorJobVariantScenarios:
       spp_bar:
         RMCSurvivorCommandingOfficer:
-        - RMCSurvivorSPPCrashlandMSIOfficer: 1
+        - RMCSurvivorSPPCrashlandCommander: 1
         CMSurvivorDoctor:
         - RMCSurvivorSPPCrashlandMedic: 1
         CMSurvivorEngineer:
