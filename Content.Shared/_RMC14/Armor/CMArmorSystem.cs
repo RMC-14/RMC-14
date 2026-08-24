@@ -3,6 +3,7 @@ using System.Text;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Medical.Surgery;
 using Content.Shared._RMC14.Medical.Surgery.Steps;
+using Content.Shared._RMC14.Synth;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Slowing;
@@ -341,9 +342,17 @@ public sealed class CMArmorSystem : EntitySystem
         var immuneToAP = TryComp<CMArmorComponent>(ent, out var armorComp) && armorComp.ImmuneToAP;
         if (HasComp<XenoComponent>(ent))
         {
-            ev.XenoArmor = (int)(ev.XenoArmor * ev.ArmorModifier);
-            if (!immuneToAP)
-                ev.XenoArmor -= armorPiercing;
+            // Synth unarmed melee ignores xeno armor
+            if (args.Tool is { } synthTool && HasComp<SynthComponent>(synthTool))
+            {
+                ev.XenoArmor = 0;
+            }
+            else
+            {
+                ev.XenoArmor = (int)(ev.XenoArmor * ev.ArmorModifier);
+                if (!immuneToAP)
+                    ev.XenoArmor -= armorPiercing;
+            }
         }
         else
         {
