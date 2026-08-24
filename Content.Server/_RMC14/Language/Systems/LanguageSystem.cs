@@ -16,7 +16,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
 
     private EntityQuery<LanguageLearningComponent> _learningQuery;
 
-    private readonly HashSet<ProtoId<LanguagePrototype>> _checkedLanguages = [];
+    private readonly Dictionary<ProtoId<LanguagePrototype>, EntityUid> _checkedLanguages = [];
 
     public override void Initialize()
     {
@@ -55,7 +55,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         _checkedLanguages.Clear();
         foreach (var language in recipient.Comp.UnderstoodLanguages)
         {
-            _checkedLanguages.Add(language);
+            _checkedLanguages.Add(language, recipient);
 
             // If `speaker` is able to learn a language understood by `recipient`.
             if (speakerLearning?.LearnableLanguages.Contains(language) == true)
@@ -63,8 +63,8 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         }
         foreach (var language in speaker.Comp.UnderstoodLanguages)
         {
-            // If this language is already present in the list from `recipient`.
-            if (!_checkedLanguages.Add(language))
+            // If this language is already present in the dict from `recipient`.
+            if (!_checkedLanguages.TryAdd(language, speaker))
                 // both sides understand the language!
                 return true;
 
@@ -73,14 +73,13 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
                 return true;
         }
 
-        // If neither side directly understand each other's languages and can't learn them either, check if there's any languages with the same `Category`.
-        // (E.g. English and German are both `LanguageCategory.Humanoid`, so should be visible to each other)
+        // If neither side directly understand each other's languages and can't learn them either, check if either of them know any languages with the same `Category`.
+        // (E.g. English, German, Russian, etc. are all `LanguageCategory.Humanoid`, so should be visible to each other)
         return _checkedLanguages
-            .Where(_prototypeManager.HasIndex)
-            .Select(_prototypeManager.Index)
-            .GroupBy(lang => lang.Category)
-            .Any(group => group.Count() > 1);
-        // (convert `ProtoId<LanguagePrototype>` -> `LanguagePrototype`, group them together by their `Category`, then check if any group has more than 1 member)
+            .Where(kvp => _prototypeManager.HasIndex(kvp.Key))
+            .ToLookup(kvp => _prototypeManager.Index(kvp.Key).Category, kvp => kvp.Value)
+            .Any(g => g.Count() > 1);
+        // Dict of `{Language ProtoId: Language "owner"}` -> Lookup of `{Language category: [List of language "owners"]}`, then check if any category has more than one match.
     }
 
     private void OnInitLanguageSpeaker(Entity<LanguageComponent> ent, ref MapInitEvent args)
