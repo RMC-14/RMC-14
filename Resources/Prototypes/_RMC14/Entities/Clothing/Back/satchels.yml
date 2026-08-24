@@ -1100,7 +1100,7 @@
   components:
   - type: StorageFill
     contents:
-    # M40 CCDP Greande #RMC14 TODO
+    - id: RMCGrenadeWhitePhosphorusCompound
     - id: RMCGrenadeFlashBang
     - id: RMCTabletCO
     - id: RMCLaserDesignator
