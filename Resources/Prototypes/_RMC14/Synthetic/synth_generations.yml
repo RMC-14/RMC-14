@@ -28,7 +28,7 @@
       RMCSkillIntel: 1
       RMCSkillDomestics: 2
   - type: RMCLeapProtection
-    inherentStunDuration: 1.5
+    inherentStunDuration: 3
     fullProtection: true
   - type: MobThresholds
     thresholds:
@@ -73,7 +73,7 @@
       RMCSkillIntel: 1
       RMCSkillDomestics: 2
   - type: RMCLeapProtection
-    inherentStunDuration: 1.5
+    inherentStunDuration: 3
     fullProtection: true
   - type: MobThresholds
     thresholds:
@@ -160,6 +160,9 @@
         RMCSkillNavigations: 1
         RMCSkillExecution: 1
         RMCSkillSmartGun: 1
+  - type: RMCLeapProtection
+    inherentStunDuration: 3
+    fullProtection: true
   - type: MarineOrders
   - type: MobThresholds
     thresholds:
