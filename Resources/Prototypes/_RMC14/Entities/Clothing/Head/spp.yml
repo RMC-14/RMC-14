@@ -186,8 +186,8 @@
 - type: entity
   parent: CMHeadCapSPPPeaked
   id: CMHeadCapSPPPeakedPolice
-  name: UL3 PaP peaked cap
-  description: Standard issue peaked cap of the People's Armed Police.
+  name: UL3 PCG peaked cap
+  description: Standard issue peaked cap of the People's Civil Gendarmes.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/SPP/peaked_police.rsi

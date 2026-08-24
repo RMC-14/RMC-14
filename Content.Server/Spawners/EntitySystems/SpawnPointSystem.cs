@@ -64,10 +64,14 @@ public sealed class SpawnPointSystem : EntitySystem
 
         var spawnLoc = _random.Pick(possiblePositions);
 
+        //RMC14
         args.SpawnResult = _stationSpawning.SpawnPlayerMob(
             spawnLoc,
             args.Job,
             args.HumanoidCharacterProfile,
-            args.Station);
+            args.Station,
+            null,
+            args.AdminSpawned);
+        //RMC14
     }
 }

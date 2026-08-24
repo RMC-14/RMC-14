@@ -469,6 +469,17 @@
     - id: RMCWeaponPistolPK7
 
 - type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCMK80BeltSurvivorFill
+  suffix: Filled, MK80, Tyrargo, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolMK80
+      amount: 3
+    - id: RMCMK80Survivor
+
+- type: entity
   parent: RMCM276ShotgunShellLoadingRig
   id: RMCM276ShotgunShellLoadingRigFill
   suffix: Filled
@@ -512,6 +523,17 @@
     - id: CMWeaponPistolM1911
 
 - type: entity
+  parent: RMCBeltSmartGunOperatorPistol
+  id: RMCBeltSmartGunOperatorPistolSurvivorFilled
+  suffix: Filled, Tyrargo, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolM77AP
+      amount: 2
+    - id: RMCWeaponPistolM77Survivor
+
+- type: entity
   parent: RMCBeltHolsterSMGPouch
   id: RMCHolsterSMGPouchFilledExtended
   suffix: Filled, Extended Mag
@@ -521,6 +543,17 @@
     - id: CMMagazineSMGM63Ext
       amount: 2
     - id: RMCWeaponSMGM63ExtendedFilled
+
+- type: entity
+  parent: RMCBeltHolsterSMGPouch
+  id: RMCHolsterSMGPouchFilledSurvivor
+  suffix: Filled, Tyrargo, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineSMGM63
+      amount: 2
+    - id: RMCWeaponSMGM63FilledSurvivor
 
 - type: entity
   parent: RMCMatebaBeltLuxurious

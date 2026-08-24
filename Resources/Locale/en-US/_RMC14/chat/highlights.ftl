@@ -1,23 +1,23 @@
 # Auxiliary Support
 highlights-auxiliary-support-officer = Auxiliary Support Officer, "ASO", Auxiliary Support, "Intel", Flight Crew
-highlights-dropship-crew-chief = Dropship Crew Chief, "DCC", Alamo, Normandy, Flight Crew, Dropship, "Evac", Evacuation, Medevac, Fulton, "JTAC"
+highlights-dropship-crew-chief = Dropship Crew Chief, "DCC", "DCCs", Alamo, Normandy, Flight Crew, Dropship, "Evac", Evacuation, Medevac, Fulton, "JTAC"
 highlights-dropship-pilot = Dropship Pilot, "DP", Pilot, Alamo, Flight Crew, Dropship, "Evac", Evacuation, Medevac, Fulton, "JTAC"
 highlights-gunship-pilot = Gunship Pilot, "GP", Pilot, Normandy, Flight Crew, Gunship, "CAS", Medevac, Fulton, "JTAC"
-highlights-intelligence-officer = Intelligence Officer, "IO", "Intel", Intelligence, Survivors
+highlights-intelligence-officer = Intelligence Officer, "IO", "IOs", "Intel", Intelligence, Survivors
 highlights-senior-enlisted-advisor = Senior Enlisted Advisor, "SEA", New Recruit, E1, New Player, Training, Mentor
 
 # Command
-highlights-commanding-officer = Commanding Officer, "CO", Major, Lieutenant Colonel, Colonel, Combat Information Center, "CIC", Command, Overwatch, "OW", Appeal, Queen, "OB", Coords, Coordinates, Supply, Loose, Burst, "FOB", Comms, Tacmap, Map, "Intel", Phone, "TECH REPORT", "SL", Commander
-highlights-executive-officer = Executive Officer, "XO", Captain, "Cap", Combat Information Center, "CIC", Command, Overwatch, "OW", Appeal, Queen, "OB", Coords, Coordinates, Supply, Loose, Burst, "FOB", Comms, Tacmap, Map, "Intel", Phone, "TECH REPORT", "SL", Commander
-highlights-staff-officer = Staff Officer, "SO", Combat Information Center, "CIC", Command, Overwatch, "OW", Appeal, Queen, "OB", Coords, Coordinates, Supply, Loose, Burst, "FOB", Comms, Tacmap, Map, Phone, "TECH REPORT", "SL", Commander
+highlights-commanding-officer = Commanding Officer, "CO", Major, Lieutenant Colonel, Colonel, Combat Information Center, "CIC", Command, Overwatch, "OW", Appeal, Queen, "OB", Coords, Coordinates, Supply, Loose, Burst, "FOB", Comms, Tacmap, Map, "Intel", Phone, "TECH REPORT", "SL", "SLs", Commander
+highlights-executive-officer = Executive Officer, "XO", Captain, "Cap", Combat Information Center, "CIC", Command, Overwatch, "OW", Appeal, Queen, "OB", Coords, Coordinates, Supply, Loose, Burst, "FOB", Comms, Tacmap, Map, "Intel", Phone, "TECH REPORT", "SL", "SLs", Commander
+highlights-staff-officer = Staff Officer, "SO", "SOs", Combat Information Center, "CIC", Command, Overwatch, "OW", Appeal, Queen, "OB", Coords, Coordinates, Supply, Loose, Burst, "FOB", Comms, Tacmap, Map, Phone, "TECH REPORT", "SL", "SLs", Commander
 
 # Requisitions
 highlights-logistics-officer = Logistics Officer, "LO", Requisitions, "Req", Command, Supply, "Drop", Crate, Budget, Ammo
-highlights-requisitions-technician = Requisitions Technician, Req Technician, Requisitions Tech, Req Tech, "RT", Requisitions, "Req", Supply, "Drop", Crate, Budget, Ammo
+highlights-requisitions-technician = Requisitions Technician, Req Technician, Requisitions Tech, Req Tech, "RT", "RTs", Requisitions, "Req", Supply, "Drop", Crate, Budget, Ammo
 
 # Engineering
-highlights-chief-engineer = Chief Engineer, "CE", Engineering, Engineer, "Engi", Command, "OB", "OT"
-highlights-maintenance-technician = Maintenance Technician, "MT", Engineering, Engineer, "Engi", "OB"
+highlights-chief-engineer = Chief Engineer, "CE", "MT", "MTs", Engineering, Engineer, "Engi", Command, "OB", "OT"
+highlights-maintenance-technician = Maintenance Technician, "MT", "MTs", Engineering, Engineer, "Engi", "OB"
 highlights-ordnance-technician = Ordnance Technician, "OT", Engineering, Engineer, "Engi", "OB"
 
 # Medical
@@ -38,12 +38,12 @@ highlights-correspondent = Correspondent, "CC", News
 highlights-mess-technician = Mess Technician, "MST", Mess Tech, "Mess", Kitchen, Food, Hungry
 
 # Marines
-highlights-squad-leader = Squad Leader, "SL", Command, Queen, "OB", Coords, Coordinates, Supply, Tacmap, Comms, Map, "FT", Fireteam, Squad
-highlights-fireteam-leader = Fireteam Leader, "FTL", "JTAC", "CAS", Normandy, "FT", Fireteam, Coords, Coordinates, "SL", Command
+highlights-squad-leader = Squad Leader, "SL", "SLs", Command, Queen, "OB", Coords, Coordinates, Supply, Tacmap, Comms, Map, "FT", Fireteam, Squad
+highlights-fireteam-leader = Fireteam Leader, "FTL", "FTLs", "JTAC", "CAS", Normandy, "FT", Fireteam, Coords, Coordinates, "SL", "SLs", Command
 highlights-smart-gun-operator = Smart Gun Operator, "SGO", "SG", "SL", Command
 highlights-weapons-specialist = Weapons Specialist, "WS", "SADAR", Grenadier, Scout, Pyro, "AMR", Sniper, "SL", Command
 highlights-combat-technician = Combat Technician, "CT", "ComTech", Engineer, Barricade, Cade, "SL", Command
-highlights-hospital-corpsman = Hospital Corpsman, "HM", Corpsman, "Medic", Injured, Infected, Hugged, "SL", Command
+highlights-hospital-corpsman = Hospital Corpsman, "HM", "HMs", Corpsman, "Medic", Injured, Infected, Hugged, "SL", Command
 highlights-rifleman = Rifleman, "RFN", "SL", Command
 
 # Xenonids

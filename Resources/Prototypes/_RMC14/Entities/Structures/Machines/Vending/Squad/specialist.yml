@@ -18,7 +18,7 @@
         givePrefix: rmc-job-prefix-weapons-specialist-demo
         isAppendPrefix: true
         giveIcon:
-          sprite: _RMC14/Interface/cm_job_icons.rsi
+          sprite: _RMC14/Interface/job_icons/UNMC/marine.rsi
           state: hudsquad_spec_demo
         giveMapBlip:
           sprite: /Textures/_RMC14/Interface/map_blips.rsi
@@ -29,7 +29,7 @@
         givePrefix: rmc-job-prefix-weapons-specialist-grenadier
         isAppendPrefix: true
         giveIcon:
-          sprite: _RMC14/Interface/cm_job_icons.rsi
+          sprite: _RMC14/Interface/job_icons/UNMC/marine.rsi
           state: hudsquad_spec_grenadier
         giveMapBlip:
           sprite: /Textures/_RMC14/Interface/map_blips.rsi
@@ -40,7 +40,7 @@
         givePrefix: rmc-job-prefix-weapons-specialist-pyro
         isAppendPrefix: true
         giveIcon:
-          sprite: _RMC14/Interface/cm_job_icons.rsi
+          sprite: _RMC14/Interface/job_icons/UNMC/marine.rsi
           state: hudsquad_spec_pyro
         giveMapBlip:
           sprite: /Textures/_RMC14/Interface/map_blips.rsi
@@ -57,7 +57,7 @@
         givePrefix: rmc-job-prefix-weapons-specialist-sniper
         isAppendPrefix: true
         giveIcon:
-          sprite: _RMC14/Interface/cm_job_icons.rsi
+          sprite: _RMC14/Interface/job_icons/UNMC/marine.rsi
           state: hudsquad_spec_sniper
         giveMapBlip:
           sprite: /Textures/_RMC14/Interface/map_blips.rsi
@@ -70,7 +70,7 @@
         givePrefix: rmc-job-prefix-weapons-specialist-anti-materiel-sniper
         isAppendPrefix: true
         giveIcon:
-          sprite: _RMC14/Interface/cm_job_icons.rsi
+          sprite: _RMC14/Interface/job_icons/UNMC/marine.rsi
           state: hudsquad_spec_anti_materiel_sniper
         giveMapBlip:
           sprite: /Textures/_RMC14/Interface/map_blips.rsi

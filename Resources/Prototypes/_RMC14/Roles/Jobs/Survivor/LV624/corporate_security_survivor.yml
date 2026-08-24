@@ -5,7 +5,7 @@
   startingGear: RMCGearSurvivorLV624SecurityGuard
   hasIcon: true
   icon: RMCJobIconWeYaSec
-  spawnMenuRoleName: WeYa Security Guard (LV624 Survivor)
+  spawnMenuRoleName: We-Ya Security Guard (LV624 Survivor)
   accessGroups:
   - ColonistSec
   - ColonistCorporate

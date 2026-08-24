@@ -522,6 +522,17 @@
     - id: CMMagazinePistolMK80
 
 - type: entity
+  parent: CMWebbingHolster
+  id: RMCShoulderHolsterPK7
+  suffix: PK7
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolPK7
+    - id: RMCMagazinePistolPK7
+    - id: RMCMagazinePistolPK7
+
+- type: entity
   parent: RMCWebbingDropPouch
   id: RMCWebbingDropPouchBlack
   name: black drop pouch

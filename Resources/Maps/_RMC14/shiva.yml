@@ -42909,7 +42909,7 @@ entities:
   - uid: 1168
     components:
     - type: MetaData
-      name: LZ1 Landing Zone
+      name: 'LZ1: Aerodrome Landing Zone'
     - type: Transform
       pos: 23.5,32.5
       parent: 1
