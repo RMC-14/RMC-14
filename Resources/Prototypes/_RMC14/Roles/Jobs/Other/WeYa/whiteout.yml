@@ -50,6 +50,7 @@
       baseWordLearningRate: 0.05
     - type: Synth
       canUseGuns: true
+      canWearArmor: true
     - type: SynthGeneration
       availableGenerations:
       - RMCSynthWhiteout
