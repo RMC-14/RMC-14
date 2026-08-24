@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: KompaniLinge
-  changes:
-  - message: Fixed Kommissar prefix being inconsistent between ranks
-    type: Fix
-  - message: Fixed spp officer shirt disappearing when attempting to fold it.
-    type: Fix
-  id: 3099
-  time: '2026-04-11T03:37:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9412
 - author: TadJohnson00
   changes:
   - message: '[PVE] Loadouts have been added for RCM characters, make sure to customise
@@ -4542,5 +4533,17 @@
   id: 3598
   time: '2026-08-24T09:11:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9859
+- author: Thereisabear
+  changes:
+  - message: Fixed blowtorches using too much fuel when deconstructing walls or reinforced
+      tables.
+    type: Fix
+  - message: Welding satchels & bags now hold their intended capacities.
+    type: Tweak
+  - message: Welders now have their intended fuel usage, storage and passive lit cost.
+    type: Tweak
+  id: 3599
+  time: '2026-08-24T16:15:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8884
 Name: RMC14
 Order: -1
