@@ -258,7 +258,7 @@
         - RMCSurvivorFiorinaRiotInProgressCMBRiotControlMedicalTechnician: 1
         CMSurvivor:
         - RMCSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader: 1
-        - RMCSurvivorFiorinaRiotInProgressCMBRiotControlOfficer: -1
+        - RMCSurvivorFiorinaRiotInProgressCMBOfficer: -1
     survivorJobOverrideScenarios:
       riot_in_progress: # Riot In Progress job overrides.
         CMSurvivorCorporate: CMSurvivor
