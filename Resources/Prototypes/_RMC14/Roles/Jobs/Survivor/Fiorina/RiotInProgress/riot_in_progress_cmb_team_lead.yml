@@ -1,0 +1,120 @@
+- type: job
+  parent: CMSurvivorSecurity
+  id: RMCSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader
+  name: cm-job-name-survivor-riot-TL
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorSecurity
+  startingGear: RMCGearSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader
+  accessGroups:
+  - ColonistSec
+  ranks:
+    RMCRankCMBRiotControlTeamLeader: []
+  spawnMenuRoleName: CMB Riot Control Team Leader (Fiorina Special Survivor)
+  icon: "RMCJobIconCMBRiotInProgressTeamLeader"
+  hasIcon: true
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: MarineOrders # tacticool callouts
+      moveCallouts:
+      - move-order-callout-1-swat
+      - move-order-callout-2-swat
+      - move-order-callout-3-swat
+      - move-order-callout-4-swat
+      holdCallouts:
+      - hold-order-callout-1-swat
+      - hold-order-callout-2-swat
+      - hold-order-callout-3-swat
+      - hold-order-callout-4-swat
+      focusCallouts:
+      - focus-order-callout-1-swat
+      - focus-order-callout-2-swat
+      - focus-order-callout-3-swat
+      - focus-order-callout-4-swat
+    - type: RMCPointing
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      understoodLanguages:
+      - Japanese
+      - English
+      currentLanguage: English
+      defaultLanguage: English
+    - type: Skills
+      preset: RMCSkillPresetSurvivorRiotControlTeamLeader
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: InnateCommandSpeech
+    - type: NpcFactionMember
+      factions:
+      - Bureau
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetRiotInProgressCMBTL
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: cmp
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_cmb
+    - type: JobPrefix
+      prefix: cm-job-prefix-survivor-riot-TL
+  greeting: rmc-job-greeting-riot-in-progress-CMB-TL
+
+- type: startingGear
+  id: RMCGearSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader
+  equipment:
+    id: RMCIDCardCMBDeputySurvivor
+    jumpsuit: RMCSwatCMBUniformSpearhead
+    outerClothing: RMCArmorM4RMedium
+    mask: RMCMaskSWAT
+    head: RMCArmorHelmetM10CMBVisorSWAT
+    back: RMCSatchelSecuritySurvivorFillRiotControlOfficer
+    eyes: RMCGlassesSecuritySwat
+    ears: RMCHeadsetDistressBureauDamaged
+    gloves: CMHandsBlackMarine
+    shoes: RMCBootsPMCFilled
+    pocket1: RMCPouchSurvivalBlackFilled
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader
+  name: cmb riot control team leader spawn point
+  suffix: special survivor, fiorina riot
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: entity
+  id: RMCSurvivorPresetRiotInProgressCMBTL
+  name: riot in progress team lead preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    primaryWeapons:
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunM12 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunM12 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunM12 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunM12 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunM12 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunM12 ]
+    - [ RMCPouchMagazineFilledM16, RMCWeaponRifleM16A5, RMCExplosiveBreachingCharge ]
+    - [ RMCPouchMagazineFilledM16, RMCWeaponRifleM16A5, RMCExplosiveBreachingCharge ]
+    - [ RMCPouchMagazineFilledMP5, RMCWeaponSMGMP5Alt, RMCMotionDetectorCompact ]
+    - [ RMCPouchMagazineFilledMP5, RMCWeaponSMGMP5Alt, RMCMotionDetectorCompact ]
+    primaryWeaponChance: 1
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconCMBRiotInProgressTeamLeader
+  icon:
+    sprite: _RMC14/Interface/job_icons/CMB.rsi
+    state: cmb_rctl

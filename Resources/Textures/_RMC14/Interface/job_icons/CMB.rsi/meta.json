@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from https://github.com/cmss13-devs/cmss13/blob/b5fdd521893688496435d65c5f52abdf4233c8e5/icons/mob/hud/factions/cmb.dmi with cmb_icc and cmb_obv being renamed to flip one another by PursuitinAshes (Github). cmb_icb_pk by kleinerstation13 (Github)",
+  "copyright": "Taken from https://github.com/cmss13-devs/cmss13/blob/b5fdd521893688496435d65c5f52abdf4233c8e5/icons/mob/hud/factions/cmb.dmi with cmb_icc and cmb_obv being renamed to flip one another by PursuitinAshes (Github). cmb_rctl by kleinerstation13 (Github)",
   "size": {
     "x": 16,
     "y": 16
@@ -32,7 +32,7 @@
             "name": "cmb_brch"
         },
         {
-            "name": "cmb_icb_pk"
+            "name": "cmb_rctl"
         }
     ]
 }

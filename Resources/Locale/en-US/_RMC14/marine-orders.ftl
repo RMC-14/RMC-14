@@ -49,3 +49,18 @@ focus-order-callout-16 = Steady your aim!!
 focus-order-callout-17 = Eyes up and fire!!
 focus-order-callout-18 = Crosshairs, people!!
 focus-order-callout-19 = Strike!!
+
+move-order-callout-1-swat = Make entry, move!!
+move-order-callout-2-swat = Breach and clear!!
+move-order-callout-3-swat = GO, GO, GO!!
+move-order-callout-4-swat = MOVE, MOVE, MOVE!!
+
+hold-order-callout-1-swat = Watch your sectors!!
+hold-order-callout-2-swat = Maintain perimeter!!
+hold-order-callout-3-swat = Watch those corners!!
+hold-order-callout-4-swat = Secure positions!!
+
+focus-order-callout-1-swat = AOR is hot, clear to engage!!
+focus-order-callout-2-swat = Dial in targets, weapons hot!!
+focus-order-callout-3-swat = Weapons cleared hot, engage!!
+focus-order-callout-4-swat = Lock and load, weapons cleared hot!!

@@ -27,6 +27,12 @@
   paygrade: CMBR
 
 - type: rank
+  id: RMCRankCMBRiotControlTeamLeader
+  name: CMB Riot Control Team Leader
+  prefix: Sr. Off.
+  paygrade: CMBTL
+
+- type: rank
   id: RMCRankCMBMedicalTechnician
   name: CMB Medical Technician
   prefix: Med.

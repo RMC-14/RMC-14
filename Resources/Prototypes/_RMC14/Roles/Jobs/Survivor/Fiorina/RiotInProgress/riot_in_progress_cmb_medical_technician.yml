@@ -34,7 +34,7 @@
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
-      preset: RMCSurvivorPresetRiotInProgressCMBSpecialist
+      preset: RMCSurvivorPresetRiotInProgressCMB
     - type: JobPrefix
       prefix: rmc-job-prefix-bureau-riot-control-medical-technician
     - type: TacticalMapIcon
@@ -50,12 +50,11 @@
   id: RMCGearSurvivorFiorinaRiotInProgressCMBMedicalTechnician
   equipment:
     belt: CMBeltMedicalFilled
-    jumpsuit: RMCSwatCMBUniformSpearhead
     id: RMCIDCardCMBDeputySurvivor
     back: CMSatchelSecuritySurvivorFill
     outerClothing: RMCArmorPMCRiotCMB
     ears: RMCHeadsetDistressBureauDamaged
-    eyes: RMCGlassesSecurityBlue
+    eyes: RMCGlassesMedicalHUDGlasses
     gloves: RMCHandsVeteran
     shoes: RMCBootsPMCFilled
     pocket1: RMCPouchSurvivalBlackFilled
@@ -83,22 +82,3 @@
   icon:
     sprite: _RMC14/Interface/job_icons/CMB.rsi
     state: cmb_medt
-
-- type: entity # ILRC Peacekeeper preset but replaced with statistically identical CMB gear
-  id: RMCSurvivorPresetRiotInProgressCMBSpecialist
-  name: riot in progress CMB specialist preset
-  categories: [ HideSpawnMenu ]
-  components:
-    - type: EntityPreset
-      primaryWeapons:
-        - [ RMCPouchMagazineFilledM16, WeaponRifleM16, RMCArmorHelmetM10CMB ]
-        - [ RMCPouchMagazineFilledM16, WeaponRifleM16, RMCArmorHelmetM10CMB ]
-        - [ RMCPouchMagazineFilledM16, WeaponRifleM16, RMCArmorHelmetM10CMB ]
-        - [ RMCPouchMagazineFilledM16, WeaponRifleM16, RMCArmorHelmetM10CMB ]
-        - [ RMCPouchMagazineFilledM16, WeaponRifleM16, RMCArmorHelmetM10CMB ]
-        - [ RMCPouchMagazineFilledM16, WeaponRifleM16, RMCArmorHelmetM10CMB ]
-        - [ RMCPouchShotgunFilledBeanbag, RMCWeaponShotgunM890Riot, CMHeadBeretCMB ]
-        - [ RMCPouchExplosiveFilledHIRR, RMCWeaponLauncherM85A1, CMHeadBeretCMB ]
-        - [ RMCPouchMagazineFilledMP5, WeaponSMGMP5, RMCMotionDetectorCompact, RMCExplosiveBreachingCharge, RMCArmorHelmetM10CMB ]
-        - [ RMCPouchMagazineFilledMP5, WeaponSMGMP5, RMCMotionDetectorCompact, RMCExplosiveBreachingCharge, RMCArmorHelmetM10CMB ]
-      primaryWeaponChance: 1

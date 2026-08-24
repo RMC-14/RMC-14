@@ -252,13 +252,13 @@
         - CMSurvivorEngineer: 1
     survivorJobVariantScenarios:
       riot_in_progress: # Riot In Progress Riot Control team
-        CMSurvivor:
-        - RMCSurvivorFiorinaRiotInProgressCMBRiotControlOfficer: 1
-        - RMCSurvivorFiorinaRiotInProgressILRCPeacekeeper: -1
-        CMSurvivorDoctor:
-        - RMCSurvivorFiorinaRiotInProgressCMBRiotControlMedicalTechnician: 1
         CMSurvivorEngineer:
         - RMCSurvivorFiorinaRiotInProgressCMBRiotControlBreachingTechnician: 1
+        CMSurvivorDoctor:
+        - RMCSurvivorFiorinaRiotInProgressCMBRiotControlMedicalTechnician: 1
+        CMSurvivor:
+        - RMCSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader: 1
+        - RMCSurvivorFiorinaRiotInProgressCMBRiotControlOfficer: -1
     survivorJobOverrideScenarios:
       riot_in_progress: # Riot In Progress job overrides.
         CMSurvivorCorporate: CMSurvivor

@@ -34,7 +34,7 @@
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
-      preset: RMCSurvivorPresetRiotInProgressCMBSpecialist
+      preset: RMCSurvivorPresetRiotInProgressCMB
     - type: JobPrefix
       prefix: rmc-job-prefix-bureau-riot-control-breaching-technician
     - type: TacticalMapIcon
@@ -49,7 +49,6 @@
 - type: startingGear
   id: RMCGearSurvivorFiorinaRiotInProgressCMBBreachingTechnician
   equipment:
-    jumpsuit: RMCSwatCMBUniformSpearhead
     id: RMCIDCardCMBDeputySurvivor
     back: CMSatchelSecuritySurvivorFill
     outerClothing: RMCArmorPMCRiotCMB
