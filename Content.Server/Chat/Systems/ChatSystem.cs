@@ -793,11 +793,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     /// <summary>
     ///     Returns list of players and ranges for all players withing some range. Also returns observers with a range of -1.
     /// </summary>
-    private Dictionary<ICommonSession, ICChatRecipientData> GetRecipients(
-        EntityUid source,
-        ChatChannel channel, // RMC14
-        float voiceGetRange,
-        ProtoId<LanguagePrototype>? language = null) // RMC14
+    private Dictionary<ICommonSession, ICChatRecipientData> GetRecipients(EntityUid source, ChatChannel channel, float voiceGetRange) // RMC14 channel param
     {
         // TODO proper speech occlusion
 
@@ -848,7 +844,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         RaiseLocalEvent(new ExpandICChatRecipientsEvent(source, voiceGetRange, recipients));
 
         // RMC14
-        var ev = new ChatMessageAfterGetRecipients(recipients, channel, language);
+        var ev = new ChatMessageAfterGetRecipientsEvent(recipients, channel);
         RaiseLocalEvent(source, ref ev);
         // RMC14
 

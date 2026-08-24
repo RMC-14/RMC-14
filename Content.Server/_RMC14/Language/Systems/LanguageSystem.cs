@@ -28,9 +28,10 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         SubscribeNetworkEvent<LanguagesSetMessage>(OnClientSetLanguage);
     }
 
+    // todo: redo docs
     /// <summary>
     /// Check whether <paramref name="recipient"/> should be able to see a chat message from <paramref name="speaker"/>
-    /// as a popup and in their chat box, based on the message's <paramref name="spokenLanguage"/>.
+    /// as a popup and in their chat box, based on the message's <paramref name="messageLanguage"/>.
     /// <para>
     /// This is primarily used to hide speech between different factions.
     /// </para>
@@ -41,46 +42,43 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     /// </remarks>
     /// <param name="recipient">The entity hearing the message.</param>
     /// <param name="speaker">The entity that created the message.</param>
-    /// <param name="spokenLanguage">The message's language.</param>
+    /// <param name="messageLanguage">The message's language.</param>
     /// <returns>
-    /// <see langword="true"/> if <paramref name="spokenLanguage"/> can be understood or learned by <paramref name="recipient"/>,
+    /// <see langword="true"/> if <paramref name="messageLanguage"/> can be understood or learned by <paramref name="recipient"/>,
     /// and <see langword="false"/> otherwise.
     /// </returns>
-    public bool CanSeeSpokenMessage(EntityUid recipient, EntityUid speaker, ProtoId<LanguagePrototype> spokenLanguage)
+    public bool CanSeeICMessage(Entity<LanguageComponent?> recipient, Entity<LanguageComponent?> speaker)
     {
-        if (!_prototypeManager.TryIndex(spokenLanguage, out var spokenProto))
-            return false;
-
-        // If `recipient` understands the language, or understands a similar language in the same "category" (i.e. english and german)
-        if (_languageQuery.TryComp(recipient, out var langComp))
-        {
-            foreach (var understood in langComp.UnderstoodLanguages)
-            {
-                if (understood == spokenLanguage)
-                    return true;
-
-                if (_prototypeManager.TryIndex(understood, out var understoodProto) &&
-                    understoodProto.Category == spokenProto.Category)
-                {
-                    return true;
-                }
-            }
-
-            // Special case for if `speaker` is able to learn a language understood by `recipient`.
-            if (_learningQuery.TryComp(speaker, out var speakerLearning) &&
-                speakerLearning.Languages.Keys.Intersect(langComp.UnderstoodLanguages).Any())
-            {
-                return true;
-            }
-        }
-
-        // If `recipient` doesn't understand the language, but is able to learn it.
-        if (_learningQuery.TryComp(recipient, out var learningComp) &&
-            learningComp.LearnableLanguages.Contains(spokenLanguage))
-        {
+        // Always allow if there's no language barrier.
+        if (!Resolve(recipient, ref recipient.Comp, false) || !Resolve(speaker, ref speaker.Comp, false))
             return true;
-        }
 
+        var recipientLearning = _learningQuery.CompOrNull(recipient);
+        var speakerLearning = _learningQuery.CompOrNull(speaker);
+
+        foreach (var recipientLanguage in recipient.Comp.UnderstoodLanguages)
+        {
+            if (!_prototypeManager.TryIndex(recipientLanguage, out var recipientLanguageProto))
+                continue;
+
+            foreach (var speakerLanguage in speaker.Comp.UnderstoodLanguages)
+            {
+                if (!_prototypeManager.TryIndex(speakerLanguage, out var speakerLanguageProto))
+                    continue;
+
+                if (speakerLanguage == recipientLanguage)
+                    return true;
+
+                if (recipientLanguageProto.Category == speakerLanguageProto.Category)
+                    return true;
+
+                if (recipientLearning?.LearnableLanguages.Contains(speakerLanguage) == true)
+                    return true;
+            }
+
+            if (speakerLearning?.LearnableLanguages.Contains(recipientLanguage) == true)
+                return true;
+        }
         return false;
     }
 

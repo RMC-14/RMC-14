@@ -54,42 +54,42 @@ public sealed class CMChatSystem : SharedCMChatSystem
         _marineQuery = GetEntityQuery<MarineComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
 
-        SubscribeLocalEvent<LanguageComponent, ChatMessageAfterGetRecipients>(OnLanguageGetRecipients);
-        SubscribeLocalEvent<ImaginaryFriendComponent, ChatMessageAfterGetRecipients>(OnImaginaryFriendGetRecipients);
-        SubscribeLocalEvent<RadioSpeakerComponent, ChatMessageAfterGetRecipients>(OnRadioSpeakerGetRecipients);
+        SubscribeLocalEvent<LanguageComponent, ChatMessageAfterGetRecipientsEvent>(OnLanguageGetRecipients);
+        SubscribeLocalEvent<ImaginaryFriendComponent, ChatMessageAfterGetRecipientsEvent>(OnImaginaryFriendGetRecipients);
+        SubscribeLocalEvent<RadioSpeakerComponent, ChatMessageAfterGetRecipientsEvent>(OnRadioSpeakerGetRecipients);
     }
 
-    private void OnLanguageGetRecipients(Entity<LanguageComponent> ent, ref ChatMessageAfterGetRecipients args)
+    private void OnLanguageGetRecipients(Entity<LanguageComponent> ent, ref ChatMessageAfterGetRecipientsEvent args)
     {
         _toRemove.Clear();
-
-        // Emotes are always visible.
-        if (args.Channel.HasFlag(ChatChannel.Emotes))
-            return;
 
         if (_friendComponent.HasComp(ent))
             return; // handled separately
 
         var speakerIsMarine = _marineQuery.HasComp(ent);
         var speakerIsXeno = _xenoQuery.HasComp(ent);
-
         foreach (var (session, _) in args.Recipients)
         {
             if (session.AttachedEntity is not { } sessionEntity)
                 continue;
 
+            if (sessionEntity == ent.Owner)
+                continue;
+
+            // Observers are allowed to see everything.
             if (_ghostQuery.HasComp(sessionEntity))
                 continue;
 
-            // If the message has a language, check if it should be visible to `sessionEntity`.
-            if (args.Language is { } spokenLanguage)
+            // If it's an IC message (speech, whispering, emotes, etc.), check if `ent` and `recipient`'s language components allow them to communicate.
+            // (if applicable)
+            if ((args.Channel & ChatChannel.IC) != 0)
             {
-                if (!_language.CanSeeSpokenMessage(sessionEntity, ent, spokenLanguage))
+                if (!_language.CanSeeICMessage(sessionEntity, ent.AsNullable()))
                     _toRemove.Add(session);
                 continue;
             }
 
-            // If there isn't a language (LOOC or similar), only show it to members of the same faction.
+            // If it's LOOC or something similar (not IC), only show it to members of the same faction.
             if (speakerIsMarine != _marineQuery.HasComp(sessionEntity) || speakerIsXeno != _xenoQuery.HasComp(sessionEntity))
                 _toRemove.Add(session);
         }
@@ -100,7 +100,7 @@ public sealed class CMChatSystem : SharedCMChatSystem
         }
     }
 
-    private void OnImaginaryFriendGetRecipients(Entity<ImaginaryFriendComponent> ent, ref ChatMessageAfterGetRecipients args)
+    private void OnImaginaryFriendGetRecipients(Entity<ImaginaryFriendComponent> ent, ref ChatMessageAfterGetRecipientsEvent args)
     {
         _toRemove.Clear();
 
@@ -119,7 +119,7 @@ public sealed class CMChatSystem : SharedCMChatSystem
         }
     }
 
-    private void OnRadioSpeakerGetRecipients(Entity<RadioSpeakerComponent> ent, ref ChatMessageAfterGetRecipients args)
+    private void OnRadioSpeakerGetRecipients(Entity<RadioSpeakerComponent> ent, ref ChatMessageAfterGetRecipientsEvent args)
     {
         _toRemove.Clear();
 
