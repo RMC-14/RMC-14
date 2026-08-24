@@ -14,17 +14,14 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     [Dependency] private readonly LanguageLearningSystem _learning = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
 
-    private EntityQuery<LanguageComponent> _languageQuery;
     private EntityQuery<LanguageLearningComponent> _learningQuery;
 
     private readonly HashSet<ProtoId<LanguagePrototype>> _checkedLanguages = [];
-    private readonly HashSet<LanguageCategory> _checkedLanguageCategories = [];
 
     public override void Initialize()
     {
         base.Initialize();
 
-        _languageQuery = GetEntityQuery<LanguageComponent>();
         _learningQuery = GetEntityQuery<LanguageLearningComponent>();
 
         SubscribeLocalEvent<LanguageComponent, MapInitEvent>(OnInitLanguageSpeaker);
@@ -35,13 +32,15 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     /// <summary>
     /// Check whether <paramref name="recipient"/> should be able to see <see cref="ChatChannel.IC"/> chat messages from
     /// <paramref name="speaker"/> as a popup and in their chat box, based on the <see cref="LanguageComponent"/> of each.
-    /// <para>This is primarily used to hide speech between different factions.</para>
+    /// <para>
+    /// This is primarily used to hide speech between different factions.
+    /// </para>
     /// </summary>
     /// <param name="recipient">The entity hearing the message.</param>
     /// <param name="speaker">The entity that created the message.</param>
     /// <returns>
     /// <see langword="true"/> if both entities understand the same language, both understand a language with the same <see cref="LanguagePrototype.Category"/>,
-    /// or if one entity has <see cref="LanguageLearningComponent"/> and is able to learn a language known by the other. <see langword="false"/> otherwise.
+    /// or if one entity has <see cref="LanguageLearningComponent"/> and is able to learn a language known by the other. Otherwise <see langword="false"/>.
     /// </returns>
     /// <seealso cref="LanguageCategory"/>
     public bool CanSeeICMessage(Entity<LanguageComponent?> recipient, Entity<LanguageComponent?> speaker)
@@ -50,42 +49,38 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         if (!Resolve(recipient, ref recipient.Comp, false) || !Resolve(speaker, ref speaker.Comp, false))
             return true;
 
+        var recipientLearning = _learningQuery.CompOrNull(recipient);
+        var speakerLearning = _learningQuery.CompOrNull(speaker);
+
         _checkedLanguages.Clear();
-        _checkedLanguageCategories.Clear();
-
-        // Comps are resolved above so the `!` is safe.
-        if (CheckLanguages(recipient!, speaker))
-            return true;
-        if (CheckLanguages(speaker!, recipient))
-            return true;
-
-        return false;
-
-        // Go through each of `EntA`'s understood languages, checking to see if any have been seen previously, or are learnable by `entB`.
-        bool CheckLanguages(Entity<LanguageComponent> entA, EntityUid entB)
+        foreach (var language in recipient.Comp.UnderstoodLanguages)
         {
-            var entBLearning = _learningQuery.CompOrNull(entB);
-            foreach (var language in entA.Comp.UnderstoodLanguages)
-            {
-                // If the language is already present in the list, that will have come from a previous `CheckLanguages` call.
-                if (!_checkedLanguages.Add(language))
-                    // both sides understand the language!
-                    return true;
+            _checkedLanguages.Add(language);
 
-                if (!_prototypeManager.TryIndex(language, out var languageProto))
-                    continue;
-
-                // Same if the language's category is already present. Both sides understand similar enough languages (same category) that
-                // they're allowed to see each other's messages.
-                if (!_checkedLanguageCategories.Add(languageProto.Category))
-                    return true;
-
-                // If `entB` is able to learn a language understood by `entA`.
-                if (entBLearning?.LearnableLanguages.Contains(language) == true)
-                    return true;
-            }
-            return false;
+            // If `speaker` is able to learn a language understood by `recipient`.
+            if (speakerLearning?.LearnableLanguages.Contains(language) == true)
+                return true;
         }
+        foreach (var language in speaker.Comp.UnderstoodLanguages)
+        {
+            // If this language is already present in the list from `recipient`.
+            if (!_checkedLanguages.Add(language))
+                // both sides understand the language!
+                return true;
+
+            // If `recipient` is able to learn a language understood by `speaker`.
+            if (recipientLearning?.LearnableLanguages.Contains(language) == true)
+                return true;
+        }
+
+        // If neither side directly understand each other's languages and can't learn them either, check if there's any languages with the same `Category`.
+        // (E.g. English and German are both `LanguageCategory.Humanoid`, so should be visible to each other)
+        return _checkedLanguages
+            .Where(_prototypeManager.HasIndex)
+            .Select(_prototypeManager.Index)
+            .GroupBy(lang => lang.Category)
+            .Any(group => group.Count() > 1);
+        // (convert `ProtoId<LanguagePrototype>` -> `LanguagePrototype`, group them together by their `Category`, then check if any group has more than 1 member)
     }
 
     private void OnInitLanguageSpeaker(Entity<LanguageComponent> ent, ref MapInitEvent args)
