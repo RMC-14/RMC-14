@@ -125,7 +125,7 @@
 - type: entity
   parent: RMCAreaVaraderoExterior
   id: RMCAreaVaraderoExteriorComms4
-  name: New Varadero - Parking Lo
+  name: New Varadero - Parking Lot
   components:
   - type: Sprite
     state: comms4
@@ -202,6 +202,17 @@
   parent: RMCAreaVaraderoExterior
   id: RMCAreaVaraderoExteriorPontoonBeach
   name: New Varadero - Hydrogenerator Beach
+  components:
+  - type: Sprite
+    state: varadero0
+  - type: Area
+    linkedLz: dropship_lz1, dropship_lz2
+    minimapColor: '#2B5B2BEE'
+
+- type: entity
+  parent: RMCAreaVaraderoExterior
+  id: RMCAreaVaraderoExteriorIslands
+  name: New Varadero - Islands # TODO RMC14: can't build on these
   components:
   - type: Sprite
     state: varadero0
