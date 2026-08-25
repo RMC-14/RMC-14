@@ -775,8 +775,8 @@
 - type: entity
   parent: CMPosterBase
   id: CMPosterMarineCorp1
-  name: "marine corp poster"
-  description: "Join the Marine Corp. Enlist today, protect tomorrow!"
+  name: "marine corps poster"
+  description: "Join the Marine Corps. Enlist today, protect tomorrow!"
   components:
   - type: Sprite
     state: marine_corp_1
@@ -784,8 +784,8 @@
 - type: entity
   parent: CMPosterMarineCorp1
   id: CMPosterMarineCorp2
-  name: "marine corp poster"
-  description: "Join the Marine Corp. Enlist today, protect tomorrow!"
+  name: "marine corps poster"
+  description: "Join the Marine Corps. Enlist today, protect tomorrow!"
   components:
   - type: Sprite
     state: marine_corp_2
@@ -793,8 +793,8 @@
 - type: entity
   parent: CMPosterMarineCorp1
   id: CMPosterMarineCorp3
-  name: "marine corp poster"
-  description: "Every Paycheck a Fortune! Every Formation a Parade! - Join the Colonial Marines!"
+  name: "marine corps poster"
+  description: "Every Paycheck a Fortune! Every Formation a Parade! - Join the UN Marine Corps!"
   components:
   - type: Sprite
     state: marine_corp_3
@@ -802,7 +802,7 @@
 - type: entity
   parent: CMPosterMarineCorp1
   id: CMPosterMarineCorp4
-  name: "marine corp poster"
+  name: "marine corps poster"
   description: "This poster depicts the logo of the UN Marine Corps, Oorah!"
   components:
   - type: Sprite
@@ -811,8 +811,8 @@
 - type: entity
   parent: CMPosterMarineCorp1
   id: CMPosterMarineCorp5
-  name: "UN marine corp poster"
-  description: "YOU GIVE US WINGS, WINGS OF LIBERTY - United Nations Marine Corp."
+  name: "UN marine corps poster"
+  description: "YOU GIVE US WINGS, WINGS OF LIBERTY - United Nations Marine Corps."
   components:
   - type: Sprite
     state: marine_corp_5
@@ -820,7 +820,7 @@
 - type: entity
   parent: CMPosterMarineCorp1
   id: CMPosterMarineCorp6
-  name: "UN marine corp poster"
+  name: "UN marine corps poster"
   description: "UNMC MARINES - FIRST TO FIGHT."
   components:
   - type: Sprite
@@ -829,8 +829,8 @@
 - type: entity
   parent: CMPosterMarineCorp1
   id: CMPosterMarineCorp7
-  name: "UN marine corp poster"
-  description: "No one stands alone with the United Nations Marine Corp - JOIN US!"
+  name: "UN marine corps poster"
+  description: "No one stands alone with the United Nations Marine Corps - JOIN US!"
   components:
   - type: Sprite
     state: marine_corp_7
