@@ -46,8 +46,8 @@
   - type: EntityPreset
     randomOutfits:
     - [ RMCJacketCorporateBrown, RMCJumpsuitLiaisonStowaway, RMCShoesLaceupBrown, CMSatchel]
-    - [ RMCJacketCorporateBlack, RMCJumsuitWhiteService, RMCShoesLaceup, RMCSatchelBlack]
+    - [ RMCJacketCorporateBlack, RMCJumpsuitWhiteService, RMCShoesLaceup, RMCSatchelBlack]
     - [ RMCJacketCorporateBlue, CMJumpsuitLiaisonSuspenders, RMCShoesLaceup, RMCSatchelBlue]
     - [ RMCJacketCorporateBrown, CMJumpsuitLiaison, RMCShoesLaceupBrown, CMSatchel]
-    - [ RMCCoatWaistcoat, RMCJumsuitWhiteService, RMCShoesLaceup, CMSatchel]
+    - [ RMCCoatWaistcoat, RMCJumpsuitWhiteService, RMCShoesLaceup, CMSatchel]
     - [ RMCJacketCorporateBlue, CMJumpsuitLiaisonBlazer, RMCShoesLaceup, RMCSatchelBlue]
