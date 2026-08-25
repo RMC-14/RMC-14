@@ -1,99 +1,4 @@
 ﻿Entries:
-- author: IceNoobXD
-  changes:
-  - message: Added CBRN squad and ghost roles!
-    type: Add
-  id: 3089
-  time: '2026-04-11T01:37:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9565
-- author: CatAndHats
-  changes:
-  - message: Added a HEFA faction icon
-    type: Add
-  id: 3090
-  time: '2026-04-11T01:40:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9166
-- author: PursuitinAshes
-  changes:
-  - message: Added a guidebook entry under "Humanoid Roles" explaining what each New
-      Player Icon represents.
-    type: Add
-  id: 3091
-  time: '2026-04-11T01:41:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9528
-- author: TadJohnson00
-  changes:
-  - message: '[PVE] Added lots of missing equipment for the RCM, including faction-specific
-      webbing, hats, eyepro, and gas mask.'
-    type: Add
-  id: 3092
-  time: '2026-04-11T01:38:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9537
-- author: TadJohnson00
-  changes:
-  - message: '[PVE] Added a few missing weapons to the RCM''s arsenal, including loadout
-      sidearms, a flamethrower, and throwing knife.'
-    type: Add
-  id: 3093
-  time: '2026-04-11T01:39:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9542
-- author: SharkSnake98
-  changes:
-  - message: Added new armour, helmets, and uniforms for freelancers, as well as a
-      freelance clothes vendor
-    type: Add
-  id: 3094
-  time: '2026-04-11T01:38:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9574
-- author: SharkSnake98
-  changes:
-  - message: Added a version of the dwarf beard without eyebrows
-    type: Add
-  id: 3095
-  time: '2026-04-11T01:39:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9371
-- author: IceNoobXD
-  changes:
-  - message: fixed the TacMap icons for the MST, RT, and Correspondent.
-    type: Fix
-  id: 3096
-  time: '2026-04-11T01:37:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9572
-- author: Ian321
-  changes:
-  - message: The logistics officer can now use the consoles in the command bubble,
-      the command tablet and launch the lifeboats.
-    type: Tweak
-  id: 3097
-  time: '2026-04-11T01:44:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9481
-- author: wheelwrightt
-  changes:
-  - message: Coffee machines now can brew coffee into mugs.
-    type: Add
-  id: 3098
-  time: '2026-04-11T01:44:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9490
-- author: KompaniLinge
-  changes:
-  - message: Fixed Kommissar prefix being inconsistent between ranks
-    type: Fix
-  - message: Fixed spp officer shirt disappearing when attempting to fold it.
-    type: Fix
-  id: 3099
-  time: '2026-04-11T03:37:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9412
-- author: TadJohnson00
-  changes:
-  - message: '[PVE] Loadouts have been added for RCM characters, make sure to customise
-      your character.'
-    type: Add
-  - message: '[PVE] Adjusted the organisation and contents of the vendors and lockers
-      in the HMS Pratchett.'
-    type: Tweak
-  id: 3100
-  time: '2026-04-11T03:50:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9543
 - author: kleinerstation13
   changes:
   - message: Added SPP Airborne Bar Crashlanding scenario
@@ -4540,5 +4445,101 @@
   id: 3588
   time: '2026-08-19T16:41:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10741
+- author: carccborg
+  changes:
+  - message: BGens now spawn with one (1) CCDP grenade in their satchel
+    type: Fix
+  id: 3589
+  time: '2026-08-20T22:27:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10730
+- author: SabreML
+  changes:
+  - message: Added sound effects for using corrosive acid, clearing an empty egg,
+      and thickening resin structures.
+    type: Add
+  id: 3590
+  time: '2026-08-21T21:30:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10306
+- author: MrFish-100
+  changes:
+  - message: Fixed morgue's unintended beeping
+    type: Fix
+  id: 3591
+  time: '2026-08-21T23:32:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10738
+- author: GNUtopia
+  changes:
+  - message: Jugs and pressurized canisters can now transfer up to their full volume
+    type: Fix
+  - message: Janitorial buckets no longer have a useless 500u transfer option
+    type: Fix
+  id: 3592
+  time: '2026-08-22T16:22:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10247
+- author: carccborg
+  changes:
+  - message: Added many plurals of role names to the default chat highlights for many
+      roles
+    type: Tweak
+  id: 3593
+  time: '2026-08-23T15:25:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10731
+- author: IceNoobXD
+  changes:
+  - message: Adjusted the ranks of the CBRN SL, WS and added white phosphorus grenades
+      to their kits! (Admin exclusive roles)
+    type: Tweak
+  id: 3594
+  time: '2026-08-23T16:04:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10360
+- author: kleinerstation13
+  changes:
+  - message: Tweaked some LV-624 inserts (Cargo special inserts, nexus barricaded,
+      hydro destroyed, corpodome)
+    type: Tweak
+  id: 3595
+  time: '2026-08-23T16:31:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10739
+- author: x5tink
+  changes:
+  - message: Emerald Medals now appear properly in Stats Window.
+    type: Fix
+  id: 3596
+  time: '2026-08-23T22:12:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10768
+- author: carccborg
+  changes:
+  - message: Larva and parasites can fit under single-entity double doors again
+    type: Fix
+  id: 3597
+  time: '2026-08-23T22:14:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10760
+- author: JustMyselfUwU
+  changes:
+  - message: Activated defibs of all kinds are now unable to fit inside any storage
+      container
+    type: Fix
+  id: 3598
+  time: '2026-08-24T09:11:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9859
+- author: Thereisabear
+  changes:
+  - message: Fixed blowtorches using too much fuel when deconstructing walls or reinforced
+      tables.
+    type: Fix
+  - message: Welding satchels & bags now hold their intended capacities.
+    type: Tweak
+  - message: Welders now have their intended fuel usage, storage and passive lit cost.
+    type: Tweak
+  id: 3599
+  time: '2026-08-24T16:15:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8884
+- author: kleinerstation13
+  changes:
+  - message: Changed SOF radio channel color to make it distinguishable
+    type: Tweak
+  id: 3600
+  time: '2026-08-24T22:31:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10354
 Name: RMC14
 Order: -1
