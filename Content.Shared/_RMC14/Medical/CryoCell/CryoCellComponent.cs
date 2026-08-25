@@ -58,8 +58,11 @@ public sealed partial class CryoCellComponent : Component
     public TimeSpan UnconsciousDuration = TimeSpan.FromSeconds(20);
 
     [DataField]
-    public SoundSpecifier WarningSound = new SoundPathSpecifier("/Audio/Machines/twobeep.ogg");
+    public SoundSpecifier EjectSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/hydraulics_3.ogg");
 
     [DataField]
-    public SoundSpecifier HealingCompleteSound = new SoundPathSpecifier("/Audio/Effects/Cargo/ping.ogg");
+    public SoundSpecifier BeepBeep = new SoundPathSpecifier("/Audio/Machines/twobeep.ogg");
+
+    [DataField]
+    public SoundSpecifier Ping = new SoundPathSpecifier("/Audio/Effects/Cargo/ping.ogg");
 }

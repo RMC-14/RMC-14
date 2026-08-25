@@ -1,7 +1,10 @@
+using Content.Shared._RMC14.ARES;
 using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Storage;
 using Content.Shared.Movement.Events;
+using Content.Shared.Popups;
 using Content.Shared.Stunnable;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 
@@ -9,9 +12,12 @@ namespace Content.Shared._RMC14.Medical.CryoCell;
 
 public abstract class SharedCryoCellSystem : EntitySystem
 {
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly ARESCoreSystem _core = default!;
     [Dependency] private readonly SharedPointLightSystem _light = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCMovementSystem _rmcMovement = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -80,19 +86,49 @@ public abstract class SharedCryoCellSystem : EntitySystem
         EjectOccupant((cellId, cellComp), ent);
     }
 
-    protected void EjectOccupant(Entity<CryoCellComponent> cryoCell, EntityUid occupant)
+    protected void EjectOccupant(Entity<CryoCellComponent> cryoCell, EntityUid occupant, bool dead = false, bool isAutoEject = false)
     {
         if (!_container.TryGetContainer(cryoCell, cryoCell.Comp.OccupantId, out var container))
             return;
 
         _container.Remove(occupant, container);
-        cryoCell.Comp.IsPoweredOn = false;
 
         if (cryoCell.Comp.ExitStun > TimeSpan.Zero && HasComp<NoStunOnExitComponent>(cryoCell))
             _stun.TryStun(occupant, cryoCell.Comp.ExitStun, true);
 
+        _audio.PlayPvs(cryoCell.Comp.EjectSound, cryoCell);
+
+        if (isAutoEject)
+        {
+            cryoCell.Comp.IsPoweredOn = false;
+            if (cryoCell.Comp.ReleaseNotice)
+            {
+                var reason = dead
+                    ? "rmc-cryo-cell-reason-dead"
+                    : "rmc-cryo-cell-reason-recovered";
+                // TODO ai_silent_announcement("Patient [occupant] has been automatically released from [src] at: [sanitize_area((get_area(occupant))?.name)]. [reason]", ":m")
+            }
+        }
+
         Dirty(cryoCell);
         UpdateCryoCellVisuals(cryoCell);
+    }
+
+    protected void CryoPopupAndSound(Entity<CryoCellComponent> cryoCell, string msg, bool silent = false, bool warningSound = false)
+    {
+        if (!silent)
+        {
+            var sound = warningSound
+                ? cryoCell.Comp.BeepBeep
+                : cryoCell.Comp.Ping;
+            _audio.PlayPvs(sound, cryoCell);
+
+            _popup.PopupEntity(warningSound
+                    ? Loc.GetString("rmc-cryo-cell-popup-beep", ("cryoCell", cryoCell.Owner), ("msg", msg))
+                    : Loc.GetString("rmc-cryo-cell-popup-ping", ("cryoCell", cryoCell.Owner), ("msg", msg)),
+                cryoCell,
+                PopupType.MediumCaution);
+        }
     }
 
     protected void UpdateCryoCellVisuals(Entity<CryoCellComponent> cryoCell, bool? powered = null)

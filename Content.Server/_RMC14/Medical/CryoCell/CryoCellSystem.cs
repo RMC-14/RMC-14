@@ -2,6 +2,7 @@ using Content.Server.Power.Components;
 using Content.Shared._RMC14.Body;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Medical.CryoCell;
+using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Temperature;
 using Content.Shared.Atmos;
@@ -16,12 +17,9 @@ using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Popups;
 using Content.Shared.Power;
 using Content.Shared.StatusEffectNew;
-using Content.Shared.Traits.Assorted;
 using Content.Shared.UserInterface;
-using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -30,12 +28,10 @@ namespace Content.Server._RMC14.Medical.CryoCell;
 
 public sealed class CryoCellSystem : SharedCryoCellSystem
 {
-    [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedRMCBloodstreamSystem _rmcBloodstream = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly RMCSizeStunSystem _rmcSizeStun = default!;
@@ -44,6 +40,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
     [Dependency] private readonly SharedStatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private readonly RMCUnrevivableSystem _unrevivable = default!;
 
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
@@ -76,6 +73,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
     private void OnTogglePower(Entity<CryoCellComponent> cryoCell, ref CryoCellTogglePowerBuiMsg args)
     {
         cryoCell.Comp.IsPoweredOn = !cryoCell.Comp.IsPoweredOn;
+
         Dirty(cryoCell);
         UpdateCryoCellVisuals(cryoCell);
         UpdateUI(cryoCell);
@@ -86,12 +84,15 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         if (cryoCell.Comp.Occupant is { } occupant)
             EjectOccupant(cryoCell, occupant);
 
+        Dirty(cryoCell);
+        UpdateCryoCellVisuals(cryoCell);
         UpdateUI(cryoCell);
     }
 
     private void OnToggleAutoEject(Entity<CryoCellComponent> cryoCell, ref CryoCellToggleAutoEjectBuiMsg args)
     {
         cryoCell.Comp.AutoEject = !cryoCell.Comp.AutoEject;
+
         Dirty(cryoCell);
         UpdateUI(cryoCell);
     }
@@ -99,6 +100,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
     private void OnToggleNotify(Entity<CryoCellComponent> cryoCell, ref CryoCellToggleNotifyBuiMsg args)
     {
         cryoCell.Comp.ReleaseNotice = !cryoCell.Comp.ReleaseNotice;
+
         Dirty(cryoCell);
         UpdateUI(cryoCell);
     }
@@ -233,16 +235,32 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
 
         if (!TryComp<DamageableComponent>(occupant, out var damageable))
         {
+            CryoPopupAndSound(cryoCell, "rmc-cryo-cell-popup-incompatible", false, true);
             EjectOccupant(cryoCell, occupant);
             return;
         }
 
         // Auto-eject if dead and unrevivable
-        if (_mobState.IsDead(occupant) && HasComp<UnrevivableComponent>(occupant))
+        if (_mobState.IsDead(occupant) && _unrevivable.IsUnrevivable(occupant))
         {
-            EjectOccupant(cryoCell, occupant);
-            CryoPopupAndSound(cryoCell, true, true);
+            CryoPopupAndSound(cryoCell, "rmc-cryo-cell-popup-dead", false, true);
+            EjectOccupant(cryoCell, occupant, true, true);
             return;
+        }
+
+        // Warnings if dead and revivable
+        if (_mobState.IsDead(occupant) && !_unrevivable.IsUnrevivable(occupant))
+        {
+            var stage = _unrevivable.GetUnrevivableStage(occupant, 10);
+            switch (stage)
+            {
+                case >= 8:
+                    CryoPopupAndSound(cryoCell, "rmc-cryo-cell-popup-revive-now", false, true);
+                    break;
+                case >= 5:
+                    CryoPopupAndSound(cryoCell, "rmc-cryo-cell-popup-warning", false, true);
+                    break;
+            }
         }
 
         // Cooling the occupant
@@ -343,8 +361,8 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         {
             if (damageable.TotalDamage <= 0)
             {
-                CryoPopupAndSound(cryoCell);
-                EjectOccupant(cryoCell, occupant);
+                CryoPopupAndSound(cryoCell, "rmc-cryo-cell-popup-healed");
+                EjectOccupant(cryoCell, occupant, isAutoEject: true);
             }
         }
     }
@@ -361,22 +379,6 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         }
 
         return false;
-    }
-
-    private void CryoPopupAndSound(Entity<CryoCellComponent> cell, bool dead = false, bool warning = false)
-    {
-        if (cell.Comp.ReleaseNotice)
-        {
-            var reason = dead
-                ? "rmc-cryo-cell-patient-dead"
-                : "rmc-cryo-cell-patient-recovered";
-            _popup.PopupEntity(Loc.GetString(reason), cell, PopupType.Large);
-
-            var sound = warning
-                ? cell.Comp.WarningSound
-                : cell.Comp.HealingCompleteSound;
-            _audio.PlayPvs(sound, cell);
-        }
     }
 
     private void OnCryoCellPower(Entity<CryoCellComponent> cryoCell, ref PowerChangedEvent args)
