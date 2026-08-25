@@ -80,18 +80,6 @@
   components:
   - type: MapInsert
     variations:
-    - spawn: "/Maps/_RMC14/Inserts/Varadero/surv_spawn_dorms.yml"
-      probability: 0.25
+    - spawn: "/Maps/_RMC14/Inserts/Varadero/surv_spawn_barracks.yml"
+      probability: 1
       nightmareScenario: none
-    - spawn: "/Maps/_RMC14/Inserts/Varadero/surv_spawn_admin.yml"
-      probability: 0.25
-      nightmareScenario: none
-      offset: -27,6
-    - spawn: "/Maps/_RMC14/Inserts/Varadero/surv_spawn_engineering.yml"
-      probability: 0.25
-      nightmareScenario: none
-      offset: 16,33
-    - spawn: "/Maps/_RMC14/Inserts/Varadero/surv_spawn_chapel.yml"
-      probability: 0.25
-      nightmareScenario: none
-      offset: -42,38

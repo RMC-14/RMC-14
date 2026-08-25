@@ -249,15 +249,14 @@
 - type: startingGear
   id: RMCGearCorpseUNMCPilot
   equipment:
-    head: CMArmorHelmetM30
-    jumpsuit: RMCJumpsuitPilotAlt
+    head: CMArmorHelmetHDU44
+    jumpsuit: RMCJumpsuitPilotFighter
     back: RMCParachute
     ears: CMHeadsetColony
-    mask: RMCMaskBreath
     shoes: CMBootsBlackFilled
     id: CMDogtagUNMCPilot
-    gloves: CMHandsBlackMarine
-    outerClothing: RMCArmorVestFlak
+    gloves: CMHandsInsulatedPilot
+    outerClothing: RMCCoatPilotFighter
 
 # Ground crew
 - type: randomHumanoidSettings
