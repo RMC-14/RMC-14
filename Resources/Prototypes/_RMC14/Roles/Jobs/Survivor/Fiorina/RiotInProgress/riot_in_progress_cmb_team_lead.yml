@@ -1,7 +1,7 @@
 - type: job
   parent: CMSurvivorSecurity
   id: RMCSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader
-  name: cm-job-name-survivor-riot-TL
+  name: rmc-job-name-survivor-riot-TL
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorSecurity
   startingGear: RMCGearSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader
@@ -62,7 +62,7 @@
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_cmb
     - type: JobPrefix
-      prefix: cm-job-prefix-survivor-riot-TL
+      prefix: rmc-job-prefix-survivor-riot-TL
   greeting: rmc-job-greeting-riot-in-progress-CMB-TL
 
 - type: startingGear

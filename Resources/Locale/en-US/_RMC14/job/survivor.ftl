@@ -356,8 +356,8 @@ cm-job-name-survivor-riot-officer = CMB Riot Control Officer
 CMSurvivorFiorinaRiotOfficer = CMB Riot Control Officer
 cm-job-prefix-survivor-riot-officer = CMB RCO
 
-cm-job-name-survivor-riot-TL = CMB Riot Control Team Leader
-cm-job-prefix-survivor-riot-TL = CMB RCTL
+rmc-job-name-survivor-riot-TL = CMB Riot Control Team Leader
+rmc-job-prefix-survivor-riot-TL = CMB RCTL
 
 CMSurvivorFiorinaPrisonGuard = We-Ya Corporate Security
 
