@@ -305,7 +305,7 @@
 
 # Mess Seargeant/Tech
 - type: entity
-  parent: RMCBaseJacket
+  parent: [RMCBaseJacketButtonable, RMCBaseJacket]
   id: CMCoatMessTech
   name: mess technician jacket
   description: Smells like vanilla. Signifies prestige and power, if a little flashy.
@@ -316,6 +316,9 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/chef.rsi
   - type: CMArmor
     melee: 10
+  - type: FoldableClothing
+    foldedEquippedPrefix: jacket
+    foldedHeldPrefix: jacket
 
 # Tanker
 - type: entity
