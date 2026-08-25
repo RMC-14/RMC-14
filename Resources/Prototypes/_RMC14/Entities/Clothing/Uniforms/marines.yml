@@ -28,6 +28,14 @@
   id: RMCJumpsuitMarinePatch
   suffix: Patch
 
+- type: entity
+  parent: JumpsuitMarine
+  id: RMCJumpsuitSurvivorMarineFirefighter
+  suffix: Varadero Firefighter
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingHolsterM77Survivor
+
 # Formal
 - type: entity
   parent: RMCMarineUniformBase
