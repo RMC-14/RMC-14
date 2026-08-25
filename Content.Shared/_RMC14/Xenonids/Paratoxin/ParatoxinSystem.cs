@@ -223,9 +223,11 @@ public sealed class ParatoxinSystem : EntitySystem
             if (!damage.DamagePerGroup.TryGetValue(paratoxin.DamageGroup, out var oxy))
                 continue;
 
-            if (oxy < 50 && _proto.TryIndex(paratoxin.DamageType, out var damageType))
+            var max = paratoxin.MaxDamageBase + (((float)paratoxin.Stacks / paratoxin.MaxStacks) * paratoxin.MaxDamageBonus);
+
+            if (oxy < max && _proto.TryIndex(paratoxin.DamageType, out var damageType))
             {
-                var damageAmount = FixedPoint2.Min([paratoxin.MaxDamage - oxy, paratoxin.DamagePerStack * paratoxin.Stacks, paratoxin.MaxDamagePerEffect]);
+                var damageAmount = FixedPoint2.Min([max - oxy, paratoxin.DamagePerStack * paratoxin.Stacks, paratoxin.MaxDamagePerEffect]);
 
                 var doDamage = new DamageSpecifier(damageType, damageAmount);
 

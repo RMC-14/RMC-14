@@ -13,6 +13,7 @@ public sealed partial class ParatoxinAffectedComponent : Component
     [DataField, AutoNetworkedField]
     public int Stacks;
 
+
     [DataField, AutoNetworkedField]
     public int MaxStacks = 30;
 
@@ -38,7 +39,10 @@ public sealed partial class ParatoxinAffectedComponent : Component
     public FixedPoint2 MaxDamagePerEffect = 5;
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 MaxDamage = 50;
+    public FixedPoint2 MaxDamageBase = 10;
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 MaxDamageBonus = 30;
 
     [DataField, AutoNetworkedField]
     public ProtoId<DamageGroupPrototype> DamageGroup = "Airloss";
