@@ -53,6 +53,15 @@
       currentLanguage: English
       defaultLanguage: English
   useLoadoutOfJob: CMSurvivorDoctor # for inheritance
+  medals:
+    Bronze: RMCMedalBronzeService
+    Silver: RMCMedalSilverService
+    Gold: RMCMedalGoldService
+    Platinum: RMCMedalPlatinumService
+    Ruby: RMCMedalRubyService
+    Amethyst: RMCMedalAmethystService
+    Emerald: RMCMedalEmeraldService
+    Prismatic: RMCMedalPrismaticService
 
 - type: startingGear
   id: RMCGearSurvivorMedicalTechnician

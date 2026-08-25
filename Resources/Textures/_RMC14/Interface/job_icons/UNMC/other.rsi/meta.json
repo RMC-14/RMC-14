@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Correspondent by @IceNoobXD on Github, messtech and syn from https://github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi,nv_tc, nv_pilot, nv_synth, nv_field_doctor modified from source by kleinerstation13 (Github). hudsquad_nv_co made by Dutch-VanDerLinde (Github) based off CO sprite in https://github.com/cmss13-devs/cmss13/blob/a46fad702be27fedec2b0bca69ed3b316e482095/icons/mob/hud/factions/marine.dmi and further modified background by kleinerstation13 (Github). nv_baseguard based off weya_goon_standard by kleinerstation13 (Github)",
+  "copyright": "Correspondent by @IceNoobXD on Github, messtech and syn from https://github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi,nv_tc, nv_pilot, nv_synth, nv_field_doctor modified from source by kleinerstation13 (Github). hudsquad_nv_co made by Dutch-VanDerLinde (Github) based off CO sprite in https://github.com/cmss13-devs/cmss13/blob/a46fad702be27fedec2b0bca69ed3b316e482095/icons/mob/hud/factions/marine.dmi and further modified background by kleinerstation13 (Github).",
   "size": {
     "x": 16,
     "y": 16
@@ -15,9 +15,6 @@
         },
         {
             "name": "hudsquad_syn"
-        },
-        {
-            "name": "hudsquad_nv_baseguard"
         },
         {
             "name": "hudsquad_nv_pilot"

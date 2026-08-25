@@ -59,6 +59,15 @@
           Blunt: 35
     - type: Synth
   hidden: true
+  medals:
+    Bronze: RMCMedalBronzeService
+    Silver: RMCMedalSilverService
+    Gold: RMCMedalGoldService
+    Platinum: RMCMedalPlatinumService
+    Ruby: RMCMedalRubyService
+    Amethyst: RMCMedalAmethystService
+    Emerald: RMCMedalEmeraldService
+    Prismatic: RMCMedalPrismaticService
 
 - type: startingGear
   id: RMCGearSurvivorUNMCSynthetic

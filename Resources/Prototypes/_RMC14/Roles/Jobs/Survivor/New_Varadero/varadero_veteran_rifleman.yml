@@ -1,16 +1,16 @@
 # RMC14: MP surv on CM
 - type: job
   parent: CMSurvivorSecurity
-  id: RMCSurvivorUNMCBasePolice
-  name: cm-job-name-survivor-varadero-base-guard
+  id: RMCSurvivorUNMCVeteranRifleman
+  name: cm-job-name-rifleman
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorSecurity
-  startingGear: RMCGearSurvivorUNMCBasePolice
+  startingGear: RMCGearSurvivorUNMCVeteranRifleman
   greeting: rmc-job-greeting-varadero
   ranks:
-    RMCRankSergeant: []
-  spawnMenuRoleName: UNMC Varadero Base Peacekeeper (NV Survivor)
-  icon: "RMCJobIconSurvivorBasePolice"
+    RMCRankLanceCorporal: []
+  spawnMenuRoleName: UNMC Veteran Rifleman (NV Survivor)
+  icon: "RMCJobIconForeconRifleman"
   hasIcon: true
   special:
   - !type:AddComponentSpecial
@@ -20,7 +20,7 @@
         tags:
         - RMCSquadMarineVaradero
     - type: Skills
-      preset: RMCSkillPresetSurvivorUNMCBaseGuard
+      preset: RMCSkillPresetSurvivorUNMCVeteranRifleman
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -30,11 +30,11 @@
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
-      preset: RMCSurvivorPresetUNMCBasePolice
+      preset: RMCSurvivorPresetUNMCVeteranRifleman
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: peacekeeper
+        state: private
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_unmc
@@ -48,18 +48,27 @@
       currentLanguage: English
       defaultLanguage: English
   useLoadoutOfJob: CMSurvivorSecurity # for inheritance
+  medals:
+    Bronze: RMCMedalBronzeService
+    Silver: RMCMedalSilverService
+    Gold: RMCMedalGoldService
+    Platinum: RMCMedalPlatinumService
+    Ruby: RMCMedalRubyService
+    Amethyst: RMCMedalAmethystService
+    Emerald: RMCMedalEmeraldService
+    Prismatic: RMCMedalPrismaticService
 
 - type: startingGear
-  id: RMCGearSurvivorUNMCBasePolice
+  id: RMCGearSurvivorUNMCVeteranRifleman
   equipment:
     jumpsuit: JumpsuitMarine
     outerClothing: RMCCoatService
     ears: RMCHeadsetMarineNV
-    belt: CMBeltSecurityMPFilled
+    belt: CMBeltMarine
     gloves: RMCHandsVeteran
     id: CMIDCardStandardDogtag
     pocket1: RMCPouchSurvivalFill
-    back: CMSatchelSecurity
+    back: CMSatchelMarineTech
     shoes: CMBootsBlackFilled
   storage:
     back:
@@ -67,8 +76,8 @@
 
 - type: entity
   parent: RMCGearSurvivorPresetUNMC
-  id: RMCSurvivorPresetUNMCBasePolice
-  name: varadero base police preset
+  id: RMCSurvivorPresetUNMCVeteranRifleman
+  name: varadero veteran rifleman preset
   categories: [ HideSpawnMenu ]
   components:
     - type: EntityPreset
@@ -76,10 +85,3 @@
         - [ ArmorHelmetM10 ]
         - [ RMCHeadCapFlippable ]
         - [ RMCBoonie ]
-
-- type: jobIcon
-  parent: CMJobIconBase
-  id: RMCJobIconSurvivorBasePolice
-  icon:
-    sprite: _RMC14/Interface/job_icons/UNMC/other.rsi
-    state: hudsquad_nv_baseguard

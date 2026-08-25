@@ -1,5 +1,5 @@
 - type: job
-  parent: CMSurvivor
+  parent: RMCSurvivorCommandingOfficer
   id: RMCSurvivorCommanderNewVaradero
   name: rmc-job-name-survivor-commander-new-varadero
   description: cm-job-description-commanding-officer

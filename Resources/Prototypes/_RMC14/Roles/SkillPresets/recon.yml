@@ -105,8 +105,8 @@
 
 - type: entity
   parent: RMCSkillPresetSurvivor
-  id: RMCSkillPresetSurvivorUNMCBaseGuard
-  name: Survivor UNMC Base Guard
+  id: RMCSkillPresetSurvivorUNMCVeteranRifleman
+  name: Survivor UNMC Veteran Rifleman
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset

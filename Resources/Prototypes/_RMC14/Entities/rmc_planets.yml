@@ -407,7 +407,7 @@
       - RMCSurvivorUNMCGroundCrewman: 2
       CMSurvivorSecurity:
       - RMCSurvivorUNMCRifleman: 2
-      - RMCSurvivorUNMCBasePolice: 2
+      - RMCSurvivorUNMCVeteranRifleman: 2
       CMSurvivorScientist:
       - RMCSurvivorNewVaraderoXenoarchaeologist: 2
       - RMCSurvivorNewVaraderoXenobiologist: 2
