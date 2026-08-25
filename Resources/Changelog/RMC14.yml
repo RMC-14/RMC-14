@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: kleinerstation13
-  changes:
-  - message: Added SPP Airborne Bar Crashlanding scenario
-    type: Add
-  - message: 5.45x39 ammo box, Type 71 HEAP magazine box.
-    type: Add
-  id: 3101
-  time: '2026-04-11T04:10:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9514
 - author: CatAndHats
   changes:
   - message: Fixed an error where map inserts wouldn't spawn when a survivor scenario
@@ -4541,5 +4532,15 @@
   id: 3600
   time: '2026-08-24T22:31:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10354
+- author: kleinerstation13
+  changes:
+  - message: Replaced We-Ya Security Guard with We-Ya Corporate Security Goon secsurv
+      variant on Trijent
+    type: Tweak
+  - message: Fixed LV cargo tech not spawning with van wheels like intended
+    type: Fix
+  id: 3601
+  time: '2026-08-25T22:08:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10606
 Name: RMC14
 Order: -1
