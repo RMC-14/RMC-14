@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: Fixed an error where map inserts wouldn't spawn when a survivor scenario
-      would roll, Solaris is saved
-    type: Fix
-  id: 3102
-  time: '2026-04-11T09:09:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9625
 - author: Ian321
   changes:
   - message: Marines can no longer see the identity of parasites.
@@ -4542,5 +4534,12 @@
   id: 3601
   time: '2026-08-25T22:08:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10606
+- author: Vermidia
+  changes:
+  - message: Fixed Crusher's slash slow time (2s -> 3.5s).
+    type: Fix
+  id: 3602
+  time: '2026-08-26T07:07:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10772
 Name: RMC14
 Order: -1
