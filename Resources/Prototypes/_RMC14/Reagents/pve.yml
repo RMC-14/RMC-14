@@ -1,0 +1,13 @@
+- type: reagent
+  parent: [ CMReagentMedicine ]
+  id: RMCNaloxone
+  name: reagent-name-rmcnaloxone
+  desc: reagent-desc-rmcnaloxone
+  color: "#22282b"
+  physicalDesc: reagent-physical-desc-inky
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:CleanBloodstream
+        cleanseRate: 3
