@@ -2,6 +2,7 @@ using System.Numerics;
 using Content.Client._RMC14.Announce.Styling;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.Actions.Widgets;
+using Content.Client.UserInterface.Systems.Inventory.Widgets;
 using Content.Shared._RMC14.Announce;
 using Content.Shared._RMC14.Announce.Animations;
 using Robust.Client.GameObjects;
@@ -182,7 +183,7 @@ public sealed partial class AnnouncementWidget
             ActiveAnnouncement.TitleText = titleText;
             ActiveAnnouncement.TitleRenderedFontSize = titleBuild.TitleRenderedFontSize;
 
-            var rootSeparation = Math.Max(2, (int) MathF.Ceiling(style.TextConfig.LineHeight * 0.15f));
+            var rootSeparation = Math.Max(2, (int)MathF.Ceiling(style.TextConfig.LineHeight * 0.15f));
             var root = new BoxContainer
             {
                 Orientation = BoxContainer.LayoutOrientation.Vertical,
@@ -552,7 +553,7 @@ public sealed partial class AnnouncementWidget
 
         var position = CalculatePosition(positioningSize, widgetSize, announcement, style);
         position += viewportOffset;
-        position = AvoidActionBarOverlap(
+        position = AvoidHudOverlap(
             position,
             widgetSize,
             parent,
@@ -582,7 +583,7 @@ public sealed partial class AnnouncementWidget
         UpdateLayoutRect(position, size);
     }
 
-    private Vector2 AvoidActionBarOverlap(
+    private Vector2 AvoidHudOverlap(
         Vector2 position,
         Vector2 widgetSize,
         Control parent,
@@ -597,15 +598,80 @@ public sealed partial class AnnouncementWidget
             return position;
         }
 
+        var viewportBounds = UIBox2.FromDimensions(viewportOffset, viewportSize);
+        if (style.LayoutConfig.Position == AnnouncementPosition.BottomLeft)
+        {
+            position = AvoidExpandedInventory(
+                position,
+                widgetSize,
+                parent,
+                viewportSize,
+                viewportBounds);
+        }
+
         var actions = _uiManager.ActiveScreen?.GetWidget<ActionsBar>()?.ActionsContainer;
         if (actions is not { VisibleInTree: true } || actions.Size.X <= 0f || actions.Size.Y <= 0f)
             return position;
 
         var actionBarPosition = actions.GlobalPosition - parent.GlobalPosition;
         var actionBarBounds = UIBox2.FromDimensions(actionBarPosition, actions.Size);
-        var viewportBounds = UIBox2.FromDimensions(viewportOffset, viewportSize);
 
         return AvoidOverlap(position, widgetSize, actionBarBounds, viewportBounds, HudSeparation);
+    }
+
+    private Vector2 AvoidExpandedInventory(
+        Vector2 position,
+        Vector2 widgetSize,
+        Control parent,
+        Vector2 viewportSize,
+        UIBox2 viewportBounds)
+    {
+        var inventory = _uiManager.ActiveScreen?.GetWidget<InventoryGui>();
+        if (inventory == null)
+            return position;
+
+        // Measure the slot grid directly so the reserved area is identical whether the inventory is open or closed.
+        var expandedSize = inventory.InventoryHotbar.GetExpandedDesiredSize(viewportSize);
+        if (expandedSize.X <= 0f || expandedSize.Y <= 0f)
+            return position;
+
+        var inventoryPosition = inventory.GlobalPosition - parent.GlobalPosition;
+        var inventoryBottom = inventoryPosition.Y + inventory.Size.Y;
+        var expandedBounds = UIBox2.FromDimensions(
+            new Vector2(inventoryPosition.X, inventoryBottom - expandedSize.Y),
+            expandedSize);
+
+        return PlaceOutsideBottomLeftHudArea(
+            position,
+            widgetSize,
+            expandedBounds,
+            viewportBounds,
+            HudSeparation);
+    }
+
+    internal static Vector2 PlaceOutsideBottomLeftHudArea(
+        Vector2 position,
+        Vector2 size,
+        UIBox2 reservedArea,
+        UIBox2 bounds,
+        float separation)
+    {
+        var positionRight = new Vector2(
+            Math.Max(position.X, reservedArea.Right + separation),
+            position.Y);
+        if (positionRight.X + size.X <= bounds.Right)
+            return positionRight;
+
+        var positionAbove = new Vector2(
+            Math.Clamp(position.X, bounds.Left, Math.Max(bounds.Left, bounds.Right - size.X)),
+            reservedArea.Top - size.Y - separation);
+        if (positionAbove.Y >= bounds.Top)
+            return positionAbove;
+
+        // Extremely small viewports cannot fit both rectangles without overlap. Keep the title on-screen.
+        return new Vector2(
+            Math.Clamp(positionRight.X, bounds.Left, Math.Max(bounds.Left, bounds.Right - size.X)),
+            Math.Clamp(position.Y, bounds.Top, Math.Max(bounds.Top, bounds.Bottom - size.Y)));
     }
 
     internal static Vector2 AvoidOverlap(

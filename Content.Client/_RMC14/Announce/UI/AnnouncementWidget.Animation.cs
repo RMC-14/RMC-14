@@ -3,6 +3,7 @@ using Content.Client._RMC14.Announce.Animations;
 using Content.Client._RMC14.Announce.Effects;
 using Content.Shared._RMC14.Announce;
 using Robust.Client.UserInterface.Controls;
+using Robust.Shared.Maths;
 
 namespace Content.Client._RMC14.Announce;
 
@@ -18,8 +19,10 @@ public sealed partial class AnnouncementWidget
 
         var animation = AnnouncementAnimationFactory.Create(ActiveAnnouncement.ResolvedStyle);
         var effects = AnnouncementEffectsRegistry.BuildEffects(ActiveAnnouncement.ResolvedStyle);
+        ActiveAnnouncement.FadeAlpha = 1f;
         _animationContext = CreateAnimationContext();
         _playback.Configure(animation, effects, _animationContext);
+        ApplyFadeAlpha();
     }
 
     private void UpdateAnnouncement(float deltaTime, TimeSpan currentTime)
@@ -37,10 +40,20 @@ public sealed partial class AnnouncementWidget
             _richTextLabels,
             currentTime,
             deltaTime);
+        ApplyFadeAlpha();
+
         if (_playback.IsFinished && !PreviewMode)
         {
             FinishAnnouncement();
         }
+    }
+
+    private void ApplyFadeAlpha()
+    {
+        if (ActiveAnnouncement == null)
+            return;
+
+        Modulate = Color.White.WithAlpha(ActiveAnnouncement.FadeAlpha);
     }
 
     private AnnouncementAnimationContext CreateAnimationContext()

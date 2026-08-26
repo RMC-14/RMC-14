@@ -34,6 +34,12 @@ public sealed partial class AnnouncementPresetPrototype : IPrototype
     [DataField]
     public bool CanBeInterrupted { get; private set; } = true;
 
+    /// <summary>
+    /// Displays outside the shared announcement queue and stack.
+    /// </summary>
+    [DataField]
+    public bool Standalone { get; private set; }
+
     [DataField]
     public List<string> Aliases { get; private set; } = new();
 

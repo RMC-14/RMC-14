@@ -13,6 +13,7 @@ public sealed class AnnouncementDisplayData
     public float Priority { get; set; }
     public bool CanInterrupt { get; set; }
     public bool CanBeInterrupted { get; set; }
+    public bool Standalone { get; set; }
     public AnnouncementPresentation Presentation { get; set; } = new();
     public NetEntity? SpeakerEntity { get; set; }
     public string? SpeakerName { get; set; }

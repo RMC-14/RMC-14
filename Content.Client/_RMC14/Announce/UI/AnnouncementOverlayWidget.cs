@@ -11,6 +11,7 @@ public sealed class AnnouncementOverlayWidget : UIWidget
 
     private readonly LayoutContainer _layout;
     private readonly List<AnnouncementWidget> _announcements = new();
+    private readonly List<AnnouncementWidget> _managedAnnouncements = new();
 
     public IReadOnlyList<AnnouncementWidget> Announcements => _announcements;
 
@@ -33,19 +34,35 @@ public sealed class AnnouncementOverlayWidget : UIWidget
 
     public void AddAnnouncement(AnnouncementWidget widget)
     {
-        widget.PositionManaged = true;
+        AddAnnouncement(widget, true);
+    }
+
+    public void AddStandaloneAnnouncement(AnnouncementWidget widget)
+    {
+        AddAnnouncement(widget, false);
+    }
+
+    private void AddAnnouncement(AnnouncementWidget widget, bool managed)
+    {
+        widget.PositionManaged = managed;
         _announcements.Add(widget);
+        if (managed)
+            _managedAnnouncements.Add(widget);
+
         _layout.AddChild(widget);
         Visible = true;
-        Reflow();
+        if (managed)
+            Reflow();
     }
 
     public void RemoveAnnouncement(AnnouncementWidget widget)
     {
         _announcements.Remove(widget);
+        var managed = _managedAnnouncements.Remove(widget);
         widget.Parent?.RemoveChild(widget);
         Visible = _announcements.Count > 0;
-        Reflow();
+        if (managed)
+            Reflow();
     }
 
     public void ClearAnnouncements()
@@ -56,35 +73,36 @@ public sealed class AnnouncementOverlayWidget : UIWidget
         }
 
         _announcements.Clear();
+        _managedAnnouncements.Clear();
         Visible = false;
     }
 
     public void Reflow()
     {
-        if (_announcements.Count == 0)
+        if (_managedAnnouncements.Count == 0)
             return;
 
-        var sizes = new Vector2[_announcements.Count];
+        var sizes = new Vector2[_managedAnnouncements.Count];
         var stackWidth = 0f;
         var stackHeight = 0f;
 
-        for (var i = 0; i < _announcements.Count; i++)
+        for (var i = 0; i < _managedAnnouncements.Count; i++)
         {
-            var layout = _announcements[i].ResolveLayout();
+            var layout = _managedAnnouncements[i].ResolveLayout();
             sizes[i] = layout.Size;
             stackWidth = MathF.Max(stackWidth, layout.Size.X);
             stackHeight += layout.Size.Y;
         }
 
-        stackHeight += StackSeparation * (_announcements.Count - 1);
+        stackHeight += StackSeparation * (_managedAnnouncements.Count - 1);
         var stackSize = new Vector2(stackWidth, stackHeight);
-        var anchorLayout = _announcements[0].ResolveLayout(stackSize);
-        var alignment = _announcements[0].ResolveStackAlignment();
+        var anchorLayout = _managedAnnouncements[0].ResolveLayout(stackSize);
+        var alignment = _managedAnnouncements[0].ResolveStackAlignment();
         var positions = CalculateStackPositions(anchorLayout.Position, stackWidth, sizes, alignment, StackSeparation);
 
-        for (var i = 0; i < _announcements.Count; i++)
+        for (var i = 0; i < _managedAnnouncements.Count; i++)
         {
-            _announcements[i].ApplyManagedLayout(positions[i], sizes[i]);
+            _managedAnnouncements[i].ApplyManagedLayout(positions[i], sizes[i]);
         }
     }
 

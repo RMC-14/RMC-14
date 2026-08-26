@@ -120,10 +120,9 @@ public sealed class DropshipSystem : SharedDropshipSystem
     {
         OnRefreshUI(ent, ref args);
 
-        var map = args.FromMapUid;
-        if (HasComp<AlmayerComponent>(map))
+        if (args.FromMapUid is { } warship && HasComp<AlmayerComponent>(warship))
         {
-            var ev = new DropshipLaunchedFromWarshipEvent(ent);
+            var ev = new DropshipLaunchedFromWarshipEvent(ent, warship);
             RaiseLocalEvent(ent, ref ev, true);
         }
 
