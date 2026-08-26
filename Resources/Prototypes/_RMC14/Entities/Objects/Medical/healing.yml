@@ -484,6 +484,7 @@
   parent: CMGauze
   name: bulk medical gauze
   abstract: true
+  suffix: PvE
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Medical/pve_med_stacks.rsi
@@ -503,7 +504,7 @@
 - type: entity
   id: RMCBulkGauze1
   parent: RMCBulkGauze
-  suffix: One
+  suffix: One, PvE
   components:
   - type: Stack
     count: 1
@@ -511,7 +512,7 @@
 - type: entity
   id: RMCBulkGauze10
   parent: RMCBulkGauze
-  suffix: Ten
+  suffix: Ten, PvE
   components:
   - type: Stack
     count: 10
@@ -519,7 +520,7 @@
 - type: entity
   id: RMCBulkGauze30
   parent: RMCBulkGauze
-  suffix: Thirty
+  suffix: Thirty, PvE
   components:
   - type: Stack
     count: 30
@@ -548,7 +549,7 @@
 - type: entity
   id: RMCBulkOintment1
   parent: RMCBulkOintment
-  suffix: One
+  suffix: One, PvE
   components:
   - type: Stack
     count: 1
@@ -556,7 +557,7 @@
 - type: entity
   id: RMCBulkOintment10
   parent: RMCBulkOintment
-  suffix: Ten
+  suffix: Ten, PvE
   components:
   - type: Stack
     count: 10
@@ -564,7 +565,7 @@
 - type: entity
   id: RMCBulkOintment30
   parent: RMCBulkOintment
-  suffix: Thirty
+  suffix: Thirty, PvE
   components:
   - type: Stack
     count: 30

@@ -311,6 +311,7 @@
   id: RMCNaloxoneAutoInjector
   name: naloxone plus autoinjector
   description: An autoinjector loaded with 3 uses of Naloxone+, designed to flush the body of most chemicals.
+  suffix: PvE
   components:
   - type: Hypospray
     transferAmount: 1
@@ -332,6 +333,7 @@
   id: RMCNaloxoneAutoInjectorEmergency
   name: overdose autoinjector
   description: An autoinjector loaded with a single use of Naloxone+, designed to flush the body of most chemicals. Doesn't require any training to use.
+  suffix: PvE
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Medical/ez_medic_auto_injector.rsi # TODO RMC14 fix sprites when autoinjector sprite changes merge
