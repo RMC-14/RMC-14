@@ -31,6 +31,8 @@
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetUNMCVeteranRifleman
+    - type: JobPrefix
+      prefix: cm-job-prefix-rifleman
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
