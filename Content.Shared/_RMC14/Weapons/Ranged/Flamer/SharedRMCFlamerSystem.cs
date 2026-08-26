@@ -729,6 +729,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
     public void OnFlamerIntenseModeUniqueActionExamine(Entity<RMCFlamerIntenseModeComponent> ent, ref ExaminedEvent args)
     {
         args.PushMarkup(Loc.GetString(ent.Comp.ExamineText), 1);
+    }
 
     public void ShootNozzle(Entity<RMCFlamerNozzleComponent> nozzle,
         Entity<GunComponent> gun,
