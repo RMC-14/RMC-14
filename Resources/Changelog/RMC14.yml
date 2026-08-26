@@ -1,32 +1,6 @@
 ﻿Entries:
 - author: Dygon
   changes:
-  - message: White phosphorus rockets are now available from the Weapon Specialist
-      vendor and through requisitions. Instead of exploding, they create a large area
-      of fire and smoke and have slightly more range than other rockets.
-    type: Add
-  - message: WPDP White Phosphorus grenades can now be purchased from most squad role
-      vendors, and CCDP Chemical Compound grenades can now be acquired through requisitions.
-      These grenades create short-lasting incendiary smoke clouds, with the CCDP grenade
-      producing a slightly longer-lasting and more potent smoke effect than the WPDP.
-    type: Add
-  - message: The Demolitionist kit and the Loader kit now have one HE rocket replaced
-      with a white phosphorus rocket.
-    type: Tweak
-  - message: One of the HE rockets in the mixed rocket crate has been replaced with
-      a white phosphorus rocket.
-    type: Tweak
-  - message: Reduced the duration of the tile fire created by the UN 45-FM mini-sentry
-      from 20 seconds to 5 seconds.
-    type: Fix
-  - message: Smoke created by the UN 60-FP plasma sentry now ignites entities that
-      come into contact with it.
-    type: Fix
-  id: 3104
-  time: '2026-04-13T20:52:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9434
-- author: Dygon
-  changes:
   - message: The Queen and base Hivelords can now build reflective resin walls, these
       walls have a high chance to reflect projectiles. Every individual can have a
       maximum of 5 built at the same time.
@@ -4541,5 +4515,15 @@
   id: 3603
   time: '2026-08-26T07:08:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10748
+- author: Ian321
+  changes:
+  - message: The VESG flamer nozzle can be attached to an incinerator and allows it
+      to shoot a ball of fuel at a target.
+    type: Add
+  - message: Fires set by sentries no longer stack.
+    type: Fix
+  id: 3604
+  time: '2026-08-26T07:53:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9623
 Name: RMC14
 Order: -1
