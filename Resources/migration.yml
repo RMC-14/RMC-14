@@ -1539,3 +1539,6 @@ FoodBoxPizzaFilled: RMCBoxPizzaRandom
 # 2026-08-23
 RMCSpawnPointSurvivorFiorinaRiotInProgressUNRiotOfficer: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBOfficer
 RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlOfficer: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader
+
+# 2026-08-26
+CMAttachmentXMVESG1FlamerNozzle: RMCAttachmentXMVESG1FlamerNozzle

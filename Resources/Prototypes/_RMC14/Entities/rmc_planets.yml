@@ -299,7 +299,7 @@
       - CMSurvivorTrijentDamTech: 2
       - CMSurvivorTrijentTrucker: 2
       CMSurvivorSecurity:
-      - CMSurvivorTrijentGoon: 1
+      - RMCSurvivorTrijentGoon: 1
       - CMSurvivorCMBDeputy: 1
       CMSurvivorScientist:
       - CMSurvivorTrijentResearcher: 2
