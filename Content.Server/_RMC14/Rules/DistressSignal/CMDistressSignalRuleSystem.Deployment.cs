@@ -237,21 +237,22 @@ public sealed partial class CMDistressSignalRuleSystem
                group.Jobs.Contains(job);
     }
 
-    internal static string FormatFirstDeploymentTime(DateTime worldDate)
+    internal string FormatFirstDeploymentTime(DateTime worldDate)
     {
-        return worldDate
-            .ToString("HHmm 'HRS,' dd-MMM-yyyy", CultureInfo.InvariantCulture)
-            .ToUpperInvariant();
+        return Loc.GetString("rmc-announcement-first-deployment-time",
+            ("time", worldDate.ToString("HHmm", CultureInfo.InvariantCulture)),
+            ("date", worldDate.ToString("dd-MMM-yyyy", CultureInfo.InvariantCulture).ToUpperInvariant()),
+            ("numericDate", worldDate.ToString("dd.MM.yyyy", CultureInfo.InvariantCulture)));
     }
 
-    internal static string FormatFirstDeploymentOperationName(string operationName)
+    internal string FormatFirstDeploymentOperationName(string operationName)
     {
         const string prefix = "Operation ";
         var name = operationName.Trim();
         if (name.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
             name = name[prefix.Length..].TrimStart();
 
-        return $"{prefix}{name}".ToUpperInvariant();
+        return Loc.GetString("rmc-announcement-first-deployment-operation", ("name", name)).ToUpperInvariant();
     }
 
     private string? GetWarshipName(EntityUid warship)

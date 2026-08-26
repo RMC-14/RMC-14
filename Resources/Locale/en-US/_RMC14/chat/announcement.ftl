@@ -48,6 +48,8 @@ rmc-announcement-first-deployment-message = [font="CozetteBold"]{$operation}[/fo
     {$time}
     {$planet}
     {$assignment}
+rmc-announcement-first-deployment-time = {$time} HRS, {$date}
+rmc-announcement-first-deployment-operation = Operation {$name}
 rmc-announcement-first-deployment-assignment-combat = 2nd Company "Falling Falcons"
 rmc-announcement-first-deployment-assignment-flight-crew = Flight Crew, {$warship}
 rmc-announcement-first-deployment-assignment-security = Security, {$warship}
