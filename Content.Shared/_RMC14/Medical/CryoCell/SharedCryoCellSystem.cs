@@ -1,4 +1,4 @@
-using Content.Shared._RMC14.ARES;
+using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Storage;
 using Content.Shared.Movement.Events;
@@ -15,8 +15,8 @@ public abstract class SharedCryoCellSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly ARESCoreSystem _core = default!;
     [Dependency] private readonly SharedPointLightSystem _light = default!;
+    [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCMovementSystem _rmcMovement = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
@@ -104,9 +104,10 @@ public abstract class SharedCryoCellSystem : EntitySystem
             if (cryoCell.Comp.ReleaseNotice)
             {
                 var reason = dead
-                    ? "rmc-cryo-cell-reason-dead"
-                    : "rmc-cryo-cell-reason-recovered";
-                // TODO ai_silent_announcement("Patient [occupant] has been automatically released from [src] at: [sanitize_area((get_area(occupant))?.name)]. [reason]", ":m")
+                    ? Loc.GetString("rmc-cryo-cell-reason-dead")
+                    : Loc.GetString("rmc-cryo-cell-reason-recovered");
+                _marineAnnounce.AnnounceRadio(cryoCell, reason, cryoCell.Comp.ReleaseNoticeAnnouncement);
+// ai_silent_announcement("Patient [occupant] has been automatically released from [src] at: [sanitize_area((get_area(occupant))?.name)]. [reason]", ":m")
             }
         }
 

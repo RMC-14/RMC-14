@@ -1,5 +1,7 @@
+using Content.Shared.Radio;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Medical.CryoCell;
@@ -56,6 +58,9 @@ public sealed partial class CryoCellComponent : Component
     /// </summary>
     [DataField]
     public TimeSpan UnconsciousDuration = TimeSpan.FromSeconds(20);
+
+    [DataField]
+    public ProtoId<RadioChannelPrototype> ReleaseNoticeAnnouncement = "MarineMedical";
 
     [DataField]
     public SoundSpecifier EjectSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/hydraulics_3.ogg");
