@@ -761,7 +761,7 @@
         mask:
         - SmallMobMask
         layer:
-        - MachineLayer
+        - Opaque
   - type: PlaceableSurface
     isPlaceable: false
   - type: Damageable
@@ -898,7 +898,7 @@
         mask:
         - SmallMobMask
         layer:
-        - MachineLayer
+        - Opaque
   - type: PlaceableSurface
     isPlaceable: false
   - type: Damageable
