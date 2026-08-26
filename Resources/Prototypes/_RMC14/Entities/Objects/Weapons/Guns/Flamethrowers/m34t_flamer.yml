@@ -50,6 +50,19 @@
     locked: true
 
 - type: entity
+  parent: RMCWeaponFlamerSpec
+  id: RMCWeaponFlamerSpecAuto
+  name: M34-T2 incinerator unit
+  description: A prototyped model of the M34-T incinerator unit, it was discontinued after its automatic mode was deemed too expensive to deploy in the field.
+  components:
+    - type: Gun
+    fireRate: 2
+    selectedMode: FullAuto
+    availableModes:
+    - SemiAuto
+    - FullAuto
+
+- type: entity
   parent: RMCTankFlamer
   id: RMCTankFlamerLarge
   name: M34 large incinerator tank
