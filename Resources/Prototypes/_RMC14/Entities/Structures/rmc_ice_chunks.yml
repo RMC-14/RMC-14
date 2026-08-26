@@ -27,7 +27,7 @@
   parent: RMCIcechunk
   id: RMCIcechunkElsa
   name: large ice chunk sample
-  description: A large chunk of glacial ice sitting atop a purpose built, metal pallet secured via a set of sharp spikes built into the pallet. Four large bolts with complex locking mechanisms hold the pallet in place. Forget moving it. Inside the ice floats a frozen creatrue of colossal size. You sense its eyes stalking you...
+  description: A large chunk of glacial ice sitting atop a purpose built, metal pallet secured via a set of sharp spikes built into the pallet. Four large bolts with complex locking mechanisms hold the pallet in place. Forget moving it. Inside the ice floats a frozen creature of colossal size. You sense its eyes stalking you...
   suffix: Elsa
   components:
   - type: Sprite
