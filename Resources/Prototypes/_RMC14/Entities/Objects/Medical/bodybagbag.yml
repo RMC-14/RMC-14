@@ -3,6 +3,7 @@
   id: RMCPackBodybags
   name: body bag pack
   description: A pack of ten bodybags.
+  suffix: PVE
   components:
   - type: Item
     size: Small
