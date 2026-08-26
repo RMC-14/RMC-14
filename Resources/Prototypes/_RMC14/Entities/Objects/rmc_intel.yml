@@ -267,6 +267,9 @@
       enum.DialogUiKey.Key:
         type: DialogBui
   - type: IntelDataTerminalCandidate
+  - type: Physics
+    bodyType: Static
+    canCollide: false
 
 - type: entity
   id: RMCIntelTechTree
