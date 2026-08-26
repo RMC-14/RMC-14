@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: Marines can no longer see the identity of parasites.
-    type: Fix
-  id: 3103
-  time: '2026-04-13T20:49:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9380
 - author: Dygon
   changes:
   - message: White phosphorus rockets are now available from the Weapon Specialist
@@ -4541,5 +4534,12 @@
   id: 3602
   time: '2026-08-26T07:07:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10772
+- author: Vermidia
+  changes:
+  - message: Fixed valkyrie fight or flight range being slightly too small.
+    type: Fix
+  id: 3603
+  time: '2026-08-26T07:08:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10748
 Name: RMC14
 Order: -1
