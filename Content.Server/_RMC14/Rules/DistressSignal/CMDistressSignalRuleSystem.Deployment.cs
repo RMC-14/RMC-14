@@ -7,7 +7,6 @@ using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Roles;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Survivor;
-using Content.Shared.Clock;
 using Content.Shared.Ghost;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -122,8 +121,7 @@ public sealed partial class CMDistressSignalRuleSystem
         if (recipients.Count == 0)
             return;
 
-        var worldDate = GetFirstDeploymentWorldDate();
-        var time = FormatFirstDeploymentTime(worldDate);
+        var time = FormatFirstDeploymentTime(_rmcClock.GetWorldTime());
 
         foreach (var (assignment, sessions) in recipients)
         {
@@ -237,13 +235,6 @@ public sealed partial class CMDistressSignalRuleSystem
         return _prototypes.TryIndex(DropshipJobsGroup, out EntityPrototype? groupPrototype) &&
                groupPrototype.TryGetComponent(out JobGroupComponent? group) &&
                group.Jobs.Contains(job);
-    }
-
-    private DateTime GetFirstDeploymentWorldDate()
-    {
-        var globalTime = EntityQuery<GlobalTimeManagerComponent>().FirstOrDefault();
-        var worldTime = (globalTime?.TimeOffset ?? TimeSpan.Zero) + GameTicker.RoundDuration();
-        return (globalTime?.DateOffset ?? DateTime.Today.AddYears(100)) + worldTime;
     }
 
     internal static string FormatFirstDeploymentTime(DateTime worldDate)
