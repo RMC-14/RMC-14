@@ -23,7 +23,7 @@
         mask:
         - MachineMask
         layer:
-        - MobMask
+        - Opaque
   - type: Damageable
     damageContainer: StructuralMarine
     damageModifierSet: StructuralMarine
