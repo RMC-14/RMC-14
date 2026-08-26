@@ -751,6 +751,7 @@
     noRot: true
   - type: InteractionOutline
   - type: Physics
+    canCollide: false
   - type: Fixtures
     fixtures:
       fix1:
@@ -761,7 +762,7 @@
         mask:
         - SmallMobMask
         layer:
-        - Opaque
+        - MachineLayer
   - type: PlaceableSurface
     isPlaceable: false
   - type: Damageable
@@ -888,6 +889,7 @@
     noRot: true
   - type: InteractionOutline
   - type: Physics
+    canCollide: false
   - type: Fixtures
     fixtures:
       fix1:
@@ -898,7 +900,7 @@
         mask:
         - SmallMobMask
         layer:
-        - Opaque
+        - MachineLayer
   - type: PlaceableSurface
     isPlaceable: false
   - type: Damageable
