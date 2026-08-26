@@ -1,11 +1,10 @@
 # Desert Excavation
 
 - type: tile
-  parent: CMPlanetBase
+  parent: RMCPlanetRedDesertDirt
   id: RMCPlanetDesertExcavationBase
   name: excavation
   sprite: /Textures/_RMC14/Tiles/planet/desert_excavation/0.png
-  minimapColor: "#9c906dc2"
 
 - type: tile
   parent: RMCPlanetDesertExcavationBase

@@ -381,7 +381,7 @@
       - id: CMBootsBlackFilled
       - id: CMBootsBrown
       - id: CMHandsBlackMarine
-      - id: CMHandsBrown
+      - id: RMCHandsBrownMarine
     - name: Utility Extras
       entries:
       - id: RMCSunglasses

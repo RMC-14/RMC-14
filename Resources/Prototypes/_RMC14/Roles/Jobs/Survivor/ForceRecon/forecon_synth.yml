@@ -5,11 +5,15 @@
   description: rmc-job-description-forecon
   playTimeTracker: RMCJobSyntheticColony
   ranks:
-    RMCRankMasterSergeant: []
+    RMCRankChiefWarrantOfficer:
+    - !type:RoleTimeRequirement
+      role: RMCJobSyntheticColony
+      time: 270000 # 75 hours
+    RMCRankWarrantOfficer: [ ]
   supervisors: rmc-job-supervisors-commander
-  accessGroups: # TODO RMC14 verify parity access groups with FORECON synthetic, i can't find the actual file that stores this
-  - ColonistEngi
-  - Synth
+  accessGroups:
+  - Colony # ACCESS_LIST_COLONIAL_ALL
+  - ColonistSynthShipside # All medbay + engineering + synth accesses
   startingGear: RMCGearForeconSynthetic
   spawnMenuRoleName: FORECON Synthetic (Survivor)
   roleWeight: 0.25
