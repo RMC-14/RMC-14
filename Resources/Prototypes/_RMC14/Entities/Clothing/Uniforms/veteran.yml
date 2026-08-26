@@ -71,6 +71,17 @@
     - RMCPatchWeYa
 
 - type: entity
+  parent: RMCJumpsuitVeteranPMCNoWebbing
+  id: RMCJumpsuitVeteranPMCSurvivorSynth
+  suffix: PMC Synthetic, Survivor
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingPouchSurvivorPMCSynth
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchWeYa
+
+- type: entity
   parent: RMCVeteranUniformBase
   id: RMCJumpsuitVeteranPMCEngineerNoWebbing
   name: PMC engineer fatigues

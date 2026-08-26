@@ -195,6 +195,15 @@
 
 - type: entity
   parent: CMBackpack
+  id: RMCBackpackNotWornAccessible
+  suffix: Not Worn Accessible
+  description: A tactical backpack manufactured by one of the Weston-Yamada subsidiaries. Very lightweight backpack that utilizes UN standard MOLLE fastening systems, which allows easy access and optimal weight distribution. Can be often found in hands of colonial security and various private military groups.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/molle.rsi
+
+- type: entity
+  parent: CMBackpack
   id: CMBackpackMortar
   name: UNMC mortar shell backpack
   description: A backpack specifically designed to hold ammunition for the M402 mortar.

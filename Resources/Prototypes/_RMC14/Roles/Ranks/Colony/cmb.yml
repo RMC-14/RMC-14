@@ -16,9 +16,16 @@
   prefix: Syn.
 
 - type: rank
+  id: RMCRankCMBSupportSynthetic
+  name: CMB Support Synthetic
+  prefix: Syn.
+  paygrade: CMBS
+
+- type: rank
   id: RMCRankCMBRiotControlSynthetic
   name: CMB Riot Control Synthetic
   prefix: Syn.
+  paygrade: CMBS
 
 - type: rank
   id: RMCRankCMBRiotControlOfficer
