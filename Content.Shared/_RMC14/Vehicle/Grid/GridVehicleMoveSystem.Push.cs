@@ -50,6 +50,12 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             return Vector2i.Zero;
         }
 
+        if (TryComp(uid, out RMCVehicleAutopilotComponent? autopilot))
+        {
+            _activeXenoPushers.Remove(uid);
+            return autopilot.Direction;
+        }
+
         if (!TryGetActivePusher(uid, mover, out var pusher))
         {
             if (mover.IsPushMove &&

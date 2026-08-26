@@ -14,6 +14,10 @@
   name: tank turret
   description: A tank turret hardpoint.
   components:
+  - type: PowerLoaderGrabbable
+    delay: 2
+    virtualRight: RMCVirtualDropshipGearRight
+    virtualLeft: RMCVirtualDropshipGearLeft
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/tank.rsi
     state: tank_turret_0
@@ -27,11 +31,12 @@
     maxIntegrity: 450
   - type: VehicleTurret
     rotateToCursor: true
-    stabilizedRotation: false
+    stabilizedRotation: true
     rotationSpeed: 60
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
     overlayState: tank_turret_0
+    overlayDamagedState: tank_turret_1
     useDirectionalOffsets: false
     pixelOffsetNorth: "0,-10"
     pixelOffsetEast: "-10,0"

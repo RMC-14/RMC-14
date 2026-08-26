@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 04/26/2026 06:02:42
-  entityCount: 73
+  entityCount: 72
 maps:
 - 1
 grids:
@@ -322,17 +322,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 3.5,-0.5
-      parent: 2
-    missingComponents:
-    - Corrodible
-    - Damageable
-    - Destructible
-- proto: RMCSeatArmoredPortGunOperator
-  entities:
-  - uid: 31
-    components:
-    - type: Transform
-      pos: 0.5,-1.5
       parent: 2
     missingComponents:
     - Corrodible

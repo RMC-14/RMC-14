@@ -108,26 +108,19 @@
     soundHit:
       path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
   - type: RMCProjectileAccuracy
-    accuracy: 130
+    accuracy: 125
     thresholds:
     - range: 32
-      falloff: 5
+      falloff: 10
   - type: RMCProjectileDamageFalloff
     thresholds:
     - range: 32
       falloff: 9999
       ignoreModifiers: true
-  - type: ProjectileGrenade
-    evenSpread: true
-    minVelocity: 0.4
-    maxVelocity: 1.8
-    fillPrototype: RMCShrapnelJagged
-    rebounds: true
-    capacity: 10
-    spreadAngle: 28
   - type: RMCAreaDamage
-    damageArea: 2.5
-    falloffDistance: 1.5
+    damageArea: 2
+    falloffDistance: 0.67
+    xenoDamageMultiplier: 2
   - type: CMArmorPiercing
     amount: 30
   - type: IgnorePredictionHide
@@ -162,6 +155,7 @@
   - type: DeleteOnTrigger
   - type: SpawnOnTerminate
     spawn: VehicleDragonFlameImpact
+    spawnOffset: 0.5
   - type: IgnoreArc
   - type: IgnorePredictionHide
   - type: Fixtures
@@ -187,6 +181,11 @@
         Piercing: 40
   - type: CMArmorPiercing
     amount: 30
+  - type: RMCProjectileAccuracy
+    accuracy: 80
+    thresholds:
+    - range: 12
+      falloff: 10
 
 - type: entity
   id: VehicleDragonFlameImpact

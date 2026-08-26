@@ -1,15 +1,13 @@
 - type: entity
+  parent: RMCVehicleBase
   id: VehicleTankBase
   abstract: true
   name: tank
   description: A heavy armored tank built for battlefield dominance.
   components:
-  - type: Vehicle
-    movementKind: Grid
-  - type: LagCompensation
-  - type: Clickable
-  - type: RMCIgnoreGhostInteractionLimits
-  - type: RequireProjectileTarget
+  - type: WarpPoint
+    follow: true
+    location: Tank
   - type: GridVehicleMover
     maxSpeed: 3
     acceleration: 1.154
@@ -37,16 +35,13 @@
   - type: VehicleSound
     runningSound: /Audio/Effects/Vehicle/vehicleengineidle.ogg
     runningSoundCooldown: 2
-    hornSound: /Audio/Effects/Vehicle/carhorn.ogg
+    hornSound: /Audio/Effects/Vehicle/carhorn.ogg # todo rmc14 add unique tank horn
     hornCooldown: 1
-    collisionSoundCooldown: 0.5
     mobCollisionSound: /Audio/_RMC14/Xeno/alien_claw_block.ogg
   - type: VehicleSpotlight
     radius: 8
     energy: 3
     softness: 2
-  - type: Physics
-    bodyType: Dynamic
   - type: Fixtures
     fixtures:
       world:
@@ -76,8 +71,7 @@
         - LargeMobLayer
   - type: Damageable
     damageContainer: StructuralMarine
-    damageModifierSet: VehicleFrameTank
-  - type: InteractionOutline
+    damageModifierSet: VehicleFrameTank # tank damage modifier
   - type: Sprite
     drawdepth: Mobs
     sprite: _RMC14/Structures/Vehicles/tank.rsi
@@ -89,6 +83,7 @@
       visible: false
     - map: [ primary ]
       state: tank_turret_0
+      visible: false
     - map: [ secondary ]
       state: SECONDARY
       visible: false
@@ -97,13 +92,6 @@
       visible: false
     - map: [ rmc-wheels ]
       state: wheels_1
-  - type: SpriteMovement
-    movementLayers:
-      rmc-wheels:
-        state: wheels_0
-    noMovementLayers:
-      rmc-wheels:
-        state: wheels_1
   - type: PointLight
     enabled: false
     radius: 12
@@ -111,18 +99,7 @@
     softness: 2
     autoRot: true
     offset: "0,0.9"
-  - type: Corrodible
-    isCorrodible: false
-  - type: DoAfter
-  - type: UserInterface
-    interfaces:
-      enum.HardpointUiKey.Key:
-        type: HardpointBoundUserInterface
-      enum.VehicleWeaponsUiKey.Key:
-        type: VehicleWeaponsBoundUserInterface
-  - type: VehicleWeapons
   - type: VehicleHardpointVisuals
-  - type: InputMover
   - type: ItemSlots
     slots:
       armor:
@@ -147,7 +124,6 @@
           components:
           - HardpointItem
       wheel-1:
-        startingItem: VehicleTankTreads
         disableEject: true
         whitelist:
           components:
@@ -182,12 +158,6 @@
       hardpointType: HardpointTypeWheel
       slotType: HardpointSlotTypeTreads
       insertDelay: 2.0
-  - type: VehicleWheelSlots
-    slotCount: 1
-  - type: HardpointIntegrity
-    maxIntegrity: 1000
-    bypassEntryOnZero: true
-  - type: Appearance
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/tank_interior.yml
     enterDoAfter: 1.0
@@ -201,7 +171,18 @@
 
 - type: entity
   parent: VehicleTankBase
+  id: VehicleTankTest
+  name: test tank (autodrive)
+  description: A test tank that automatically drives east on spawn.
+  suffix: Debug
+  components:
+  - type: RMCVehicleAutopilot
+    direction: 1,0
+
+- type: entity
+  parent: VehicleTankBase
   id: VehicleTank
+  suffix: Drivable, Tank, Base, Tracked
   components:
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/tank_interior.yml
@@ -224,11 +205,14 @@
       sprite: /Textures/_RMC14/Interface/map_blips_large.rsi
       state: tank
 
+## SPP
+
 - type: entity
   parent: VehicleTankBase
   id: VehicleSPPTank
   name: SPP tank
   description: A heavy SPP battle tank.
+  suffix: Drivable, Tank, SPP
   components:
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/spp_tank_interior.yml
@@ -250,6 +234,7 @@
       visible: false
     - map: [ primary ]
       state: tank_turret_0
+      visible: false
     - map: [ secondary ]
       state: SECONDARY
       visible: false
@@ -327,6 +312,7 @@
   id: VehicleSPPTankCommand
   name: SPP command tank
   description: A heavy SPP command tank.
+  suffix: Drivable, Tank, SPP, Command Interior
   components:
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/spp_tank_command_interior.yml

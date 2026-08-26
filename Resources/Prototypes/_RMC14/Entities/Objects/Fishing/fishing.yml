@@ -43,6 +43,10 @@
   description: A fishing pole. You reckon you might need water for this.
   components:
   - type: RMCFishingRod
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
   - type: Sprite
     sprite: _RMC14/Objects/Fishing/Rod/fishing_rod.rsi
     noRot: true
