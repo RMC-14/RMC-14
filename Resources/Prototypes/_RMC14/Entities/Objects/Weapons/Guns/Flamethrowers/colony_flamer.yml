@@ -71,6 +71,7 @@
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-rail: 0.05, 0.092
+      rmc-aslot-underbarrel: 0.44, -0.245
   - type: WieldedCrosshair
     rsi:
       sprite: _RMC14/Interface/MousePointer/flamer_mouse.rsi
