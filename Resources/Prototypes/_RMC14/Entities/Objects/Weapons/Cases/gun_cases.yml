@@ -225,7 +225,7 @@
       - CMWeaponPistolM1911
   - type: StorageFill
     contents:
-    - id: CMWeaponPistolM48A4Fluff
+    - id: CMWeaponPistolM48A4Loadout
     - id: CMMagazinePistolM1911
       amount: 6
 
