@@ -73,9 +73,6 @@ public sealed partial class GhostRoleApplySpecialSystem : EntitySystem
 
         if (ent.Comp.Squad is { } squadProto && _squad.TryEnsureSquad(squadProto, out var squad))
         {
-            if (_squad.TryGetSquadLeader(squad, out _))
-                RemComp<SquadLeaderComponent>(ent);
-
             _squad.AssignSquad(ent, squad.Owner, jobProto);
         }
 

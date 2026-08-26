@@ -1,0 +1,58 @@
+light_mode unshaded;
+
+uniform highp vec2 size;
+uniform bool horizontalScanlines;
+uniform bool rgbSubpixels;
+uniform bool diagonalStripes;
+uniform highp float scanlineSpacing;
+uniform highp float scanlineThickness;
+uniform highp float rgbWidth;
+uniform highp float stripeWidth;
+uniform highp float scanlineOpacity;
+uniform highp float rgbOpacity;
+uniform highp vec4 stripeColor;
+
+highp vec4 compositeOver(highp vec4 base, highp vec4 overlay)
+{
+    highp float alpha = overlay.a + base.a * (1.0 - overlay.a);
+    if (alpha <= 0.0)
+        return vec4(0.0);
+
+    highp vec3 color = (overlay.rgb * overlay.a +
+        base.rgb * base.a * (1.0 - overlay.a)) / alpha;
+    return vec4(color, alpha);
+}
+
+void fragment()
+{
+    highp vec2 pixel = UV * size;
+    highp vec4 effect = vec4(0.0);
+
+    if (horizontalScanlines &&
+        mod(pixel.y - 1.0, scanlineSpacing) < scanlineThickness)
+    {
+        effect = compositeOver(effect, vec4(0.0, 0.0, 0.0, scanlineOpacity));
+    }
+
+    if (rgbSubpixels)
+    {
+        highp float subpixel = mod(pixel.x, rgbWidth * 3.0);
+        highp vec4 rgbColor;
+        if (subpixel < rgbWidth)
+            rgbColor = vec4(1.0, 0.0, 0.0, rgbOpacity);
+        else if (subpixel < rgbWidth * 2.0)
+            rgbColor = vec4(0.0, 1.0, 0.0, rgbOpacity * 0.35);
+        else
+            rgbColor = vec4(0.0, 0.0, 1.0, rgbOpacity);
+
+        effect = compositeOver(effect, rgbColor);
+    }
+
+    if (diagonalStripes &&
+        mod(pixel.x - pixel.y + size.y, stripeWidth * 2.0) < stripeWidth)
+    {
+        effect = compositeOver(effect, stripeColor);
+    }
+
+    COLOR = zTexture(UV) * effect;
+}

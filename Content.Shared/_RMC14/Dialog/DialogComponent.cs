@@ -6,6 +6,9 @@ namespace Content.Shared._RMC14.Dialog;
 [Access(typeof(DialogSystem))]
 public sealed partial class DialogComponent : Component
 {
+    [DataField]
+    public EntityUid EventTarget;
+
     [DataField, AutoNetworkedField]
     public DialogType DialogType;
 
