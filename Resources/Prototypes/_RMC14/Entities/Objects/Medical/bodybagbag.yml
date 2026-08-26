@@ -1,0 +1,50 @@
+- type: entity
+  parent: BaseItem
+  id: RMCPackBodybags
+  name: body bag pack
+  description: A pack of ten bodybags.
+  components:
+  - type: Item
+    size: Small
+  - type: CMItemSlots
+    count: 10
+    slot:
+      name: Bodybag
+      insertSound:
+        collection: storageRustle
+      ejectSound:
+        collection: storageRustle
+      whitelist:
+        tags:
+        - BodyBag
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/bodybagbag.rsi
+    layers:
+    - state: bodybagbagopen
+      map: [ "emptyLayer" ]
+    - state: bodybagbag
+      map: [ "fullLayer" ]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.CMItemSlotsLayers.Fill:
+        fullLayer:
+          Empty: { visible: false }
+          Low: { visible: true }
+          Medium: { visible: true }
+          High: { visible: true }
+          Full: { visible: true }
+        emptyLayer:
+          Empty: { visible: true }
+          Low: { visible: false }
+          Medium: { visible: false }
+          High: { visible: false }
+          Full: { visible: false }
+
+- type: entity
+  parent: RMCPackBodybags
+  id: RMCPackBodybagsFull
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: CMBodyBagFolded
