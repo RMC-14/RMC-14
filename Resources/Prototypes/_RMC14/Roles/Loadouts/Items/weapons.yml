@@ -13,10 +13,10 @@
     - RMCGunCasePistolM1984Custom
 
 - type: loadout
-  id: M48A4FluffRMC
+  id: M48A4LoadoutRMC
   cost: 4
   inhand:
-  - RMCGunCasePistolM48A4Fluff
+  - RMCGunCasePistolM48A4Loadout
 
 - type: loadout
   id: CustomM44RMC
