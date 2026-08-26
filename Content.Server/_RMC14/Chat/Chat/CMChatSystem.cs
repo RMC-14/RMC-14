@@ -80,7 +80,7 @@ public sealed class CMChatSystem : SharedCMChatSystem
             if (_ghostQuery.HasComp(sessionEntity))
                 continue;
 
-            // If it's an IC message (speech, whispering, emotes, etc.), check if `ent` and `recipient`'s language components allow them to communicate.
+            // If it's an IC message (speech, whispering, emotes, etc.), check if `ent` and `sessionEntity`'s language components allow them to communicate.
             if ((args.Channel & ChatChannel.IC) != 0)
             {
                 if (!_language.CanSeeICMessage(sessionEntity, ent.AsNullable()))
