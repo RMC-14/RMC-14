@@ -88,7 +88,8 @@
 - type: entity
   parent: CMClipboard
   id: RMCProvostClipboard
-  name: Provost clipboard
+  name: clipboard
+  suffix: Provost
   components:
   - type: ItemSlots
     slots:
