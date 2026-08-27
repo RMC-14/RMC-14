@@ -81,5 +81,13 @@
   - type: MapInsert
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Varadero/surv_spawn_barracks.yml"
-      probability: 1
+      probability: 0.34
+      nightmareScenario: none
+    - spawn: "/Maps/_RMC14/Inserts/Varadero/surv_spawn_administration.yml"
+      probability: 0.33
+      offset: -15,11
+      nightmareScenario: none
+    - spawn: "/Maps/_RMC14/Inserts/Varadero/surv_spawn_annex.yml"
+      probability: 0.33
+      offset: 17,34
       nightmareScenario: none

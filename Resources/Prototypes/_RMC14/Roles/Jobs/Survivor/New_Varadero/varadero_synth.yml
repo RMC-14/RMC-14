@@ -32,8 +32,6 @@
       preset: RMCLanguageLearningPresetSynthColonist
     - type: RMCAllowSuitStorage
     - type: MarineOrders
-    - type: JobPrefix
-      prefix: rmc-job-prefix-survivor-varadero-synth
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi

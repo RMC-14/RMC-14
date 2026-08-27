@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 264.0.2-fix-physics
+  engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 08/26/2026 15:53:56
-  entityCount: 33068
+  time: 08/26/2026 23:36:20
+  entityCount: 33077
 maps:
 - 1
 grids:
@@ -152044,7 +152044,7 @@ entities:
       pos: 68.5,53.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -92709.64
+      secondsUntilStateChange: -95898.39
       state: Opening
   - uid: 20158
     components:
@@ -152357,7 +152357,7 @@ entities:
       pos: 159.5,41.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -22574.885
+      secondsUntilStateChange: -25763.637
       state: Opening
   - uid: 20219
     components:
@@ -162239,7 +162239,7 @@ entities:
       pos: 73.5,59.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -332554.16
+      secondsUntilStateChange: -335742.9
       state: Opening
   - uid: 21932
     components:
@@ -185397,6 +185397,46 @@ entities:
     - type: Transform
       pos: 174.05263,133.06425
       parent: 1
+  - uid: 33069
+    components:
+    - type: Transform
+      pos: 174.05725,129.11755
+      parent: 1
+  - uid: 33070
+    components:
+    - type: Transform
+      pos: 176.92795,129.14844
+      parent: 1
+  - uid: 33071
+    components:
+    - type: Transform
+      pos: 174.06215,132.00156
+      parent: 1
+  - uid: 33072
+    components:
+    - type: Transform
+      pos: 176.93326,132.00156
+      parent: 1
+  - uid: 33073
+    components:
+    - type: Transform
+      pos: 176.94252,137.12033
+      parent: 1
+  - uid: 33074
+    components:
+    - type: Transform
+      pos: 174.0575,137.11415
+      parent: 1
+  - uid: 33075
+    components:
+    - type: Transform
+      pos: 174.0575,140.00714
+      parent: 1
+  - uid: 33076
+    components:
+    - type: Transform
+      pos: 176.92892,140.00404
+      parent: 1
 - proto: RMCLockerDetective
   entities:
   - uid: 25776
@@ -186491,6 +186531,13 @@ entities:
     components:
     - type: Transform
       pos: 46.5,68.5
+      parent: 1
+- proto: RMCMapInsertVaraderoSurvSpawnTogether
+  entities:
+  - uid: 33077
+    components:
+    - type: Transform
+      pos: 88.5,68.5
       parent: 1
 - proto: RMCMarineCorpsCup
   entities:
@@ -214671,6 +214718,9 @@ entities:
     - type: Transform
       pos: 106.5,75.5
       parent: 1
+    - type: RMCPassiveStealth
+      enabled: False
+    - type: EntityTurnInvisible
   - uid: 30882
     components:
     - type: Transform
