@@ -33,7 +33,6 @@ rmc-announcement-title-delta-overwatch = >> DELTA OVERWATCH <<
 rmc-announcement-title-echo-overwatch = >> ECHO OVERWATCH <<
 rmc-announcement-title-foxtrot-overwatch = >> FOXTROT OVERWATCH <<
 rmc-announcement-title-intel-overwatch = >> INTEL OVERWATCH <<
-rmc-announcement-title-first-deployment = FIRST DEPLOYMENT
 rmc-announcement-title-queen = >> QUEEN <<
 rmc-announcement-title-ares = >> A.R.E.S. <<
 rmc-announcement-title-critical = !! CRITICAL !!

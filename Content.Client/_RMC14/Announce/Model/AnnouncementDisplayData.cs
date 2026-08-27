@@ -50,7 +50,7 @@ public sealed class AnnouncementDisplayData
         get
         {
             var title = Presentation.Style.TitleConfig.Title;
-            return string.IsNullOrEmpty(title.Id) ? string.Empty : Loc.GetString(title);
+            return title is null || string.IsNullOrEmpty(title.Value.Id) ? string.Empty : Loc.GetString(title.Value);
         }
     }
 }
