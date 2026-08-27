@@ -19,7 +19,9 @@ public sealed class AnnouncementOverlayUIController : UIController, IOnStateEnte
     [Dependency] private readonly IConfigurationManager _cfg = default!;
 
     private readonly List<ActiveAnnouncement> _activeAnnouncements = new();
+    private readonly List<ActiveAnnouncement> _standaloneAnnouncements = new();
     private readonly List<QueuedAnnouncement> _queuedAnnouncements = new();
+    private readonly List<AnnouncementDisplayData> _pendingStandaloneAnnouncements = new();
     private long _nextOrder;
     private int _maxVisibleAnnouncements = 2;
 
@@ -33,6 +35,7 @@ public sealed class AnnouncementOverlayUIController : UIController, IOnStateEnte
 
     public void OnStateEntered(GameplayState state)
     {
+        ShowPendingStandaloneAnnouncements();
         FillAvailableSlots();
     }
 
@@ -45,9 +48,21 @@ public sealed class AnnouncementOverlayUIController : UIController, IOnStateEnte
 
         _queuedAnnouncements.Clear();
 
+        foreach (var pending in _pendingStandaloneAnnouncements)
+        {
+            NotifyAnnouncementDone(pending);
+        }
+
+        _pendingStandaloneAnnouncements.Clear();
+
         for (var i = _activeAnnouncements.Count - 1; i >= 0; i--)
         {
             RemoveActiveAt(i, notifyDone: true, cancelPlayback: true);
+        }
+
+        for (var i = _standaloneAnnouncements.Count - 1; i >= 0; i--)
+        {
+            RemoveStandaloneAt(i, notifyDone: true, cancelPlayback: true);
         }
 
         GetOverlay(create: false)?.ClearAnnouncements();
@@ -55,6 +70,12 @@ public sealed class AnnouncementOverlayUIController : UIController, IOnStateEnte
 
     public void ShowAnnouncement(AnnouncementDisplayData announcement)
     {
+        if (announcement.Standalone)
+        {
+            ShowStandalone(announcement);
+            return;
+        }
+
         var queued = new QueuedAnnouncement(announcement, _nextOrder++);
         if (GetOverlay(create: true) == null)
         {
@@ -128,6 +149,41 @@ public sealed class AnnouncementOverlayUIController : UIController, IOnStateEnte
         overlay.Reflow();
     }
 
+    private void ShowStandalone(AnnouncementDisplayData announcement)
+    {
+        var overlay = GetOverlay(create: true);
+        if (overlay == null)
+        {
+            if (_pendingStandaloneAnnouncements.Count >= MaxQueuedAnnouncements)
+            {
+                NotifyAnnouncementDone(announcement);
+                return;
+            }
+
+            _pendingStandaloneAnnouncements.Add(announcement);
+            return;
+        }
+
+        var widget = new AnnouncementWidget();
+        widget.OnAnnouncementFinished += OnAnnouncementFinished;
+        _standaloneAnnouncements.Add(new ActiveAnnouncement(announcement, widget));
+        overlay.AddStandaloneAnnouncement(widget);
+        widget.ShowAnnouncement(announcement);
+    }
+
+    private void ShowPendingStandaloneAnnouncements()
+    {
+        if (_pendingStandaloneAnnouncements.Count == 0 || GetOverlay(create: true) == null)
+            return;
+
+        var pending = _pendingStandaloneAnnouncements.ToArray();
+        _pendingStandaloneAnnouncements.Clear();
+        foreach (var announcement in pending)
+        {
+            ShowStandalone(announcement);
+        }
+    }
+
     private void OnAnnouncementFinished(AnnouncementWidget widget, uint overrideId)
     {
         UIManager.DeferAction(() => CompleteActiveAnnouncement(widget, overrideId));
@@ -136,18 +192,41 @@ public sealed class AnnouncementOverlayUIController : UIController, IOnStateEnte
     private void CompleteActiveAnnouncement(AnnouncementWidget widget, uint overrideId)
     {
         var index = _activeAnnouncements.FindIndex(active => active.Widget == widget);
+        if (index >= 0)
+        {
+            RemoveActiveAt(index, notifyDone: false, cancelPlayback: false);
+            AnnouncementDone?.Invoke(overrideId);
+            FillAvailableSlots();
+            return;
+        }
+
+        index = _standaloneAnnouncements.FindIndex(active => active.Widget == widget);
         if (index < 0)
             return;
 
-        RemoveActiveAt(index, notifyDone: false, cancelPlayback: false);
+        RemoveStandaloneAt(index, notifyDone: false, cancelPlayback: false);
         AnnouncementDone?.Invoke(overrideId);
-        FillAvailableSlots();
     }
 
     private void RemoveActiveAt(int index, bool notifyDone, bool cancelPlayback)
     {
         var active = _activeAnnouncements[index];
         _activeAnnouncements.RemoveAt(index);
+
+        active.Widget.OnAnnouncementFinished -= OnAnnouncementFinished;
+        if (cancelPlayback)
+            active.Widget.CancelAnnouncement();
+
+        GetOverlay(create: false)?.RemoveAnnouncement(active.Widget);
+
+        if (notifyDone)
+            NotifyAnnouncementDone(active.Data);
+    }
+
+    private void RemoveStandaloneAt(int index, bool notifyDone, bool cancelPlayback)
+    {
+        var active = _standaloneAnnouncements[index];
+        _standaloneAnnouncements.RemoveAt(index);
 
         active.Widget.OnAnnouncementFinished -= OnAnnouncementFinished;
         if (cancelPlayback)

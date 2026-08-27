@@ -1,3 +1,4 @@
+using System.Text;
 using Content.Shared._RMC14.Announce.Animations;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Utility;
@@ -13,6 +14,8 @@ public sealed class TypewriterAnimation : IAnnouncementAnimation
     private int _currentLine;
     private int _currentChar;
     private float _timer;
+    private FormattedMessage[] _formattedLines = [];
+    private string[] _plainLines = [];
 
     public TypewriterAnimation(TypewriterAnimationConfig config) => _config = config;
 
@@ -21,6 +24,15 @@ public sealed class TypewriterAnimation : IAnnouncementAnimation
         _currentLine = 0;
         _currentChar = 0;
         _timer = 0f;
+        _formattedLines = new FormattedMessage[context.OriginalText.Length];
+        _plainLines = new string[context.OriginalText.Length];
+
+        for (var i = 0; i < context.OriginalText.Length; i++)
+        {
+            var formatted = FormattedMessage.FromMarkupPermissive(context.OriginalText[i]);
+            _formattedLines[i] = formatted;
+            _plainLines[i] = formatted.ToString();
+        }
 
         for (var i = context.TitleOffset; i < context.Labels.Length; i++)
         {
@@ -65,16 +77,15 @@ public sealed class TypewriterAnimation : IAnnouncementAnimation
     {
         printed = false;
 
-        var cleanText = context.CleanText;
-        if (_currentLine >= cleanText.Length)
+        if (_currentLine >= _plainLines.Length)
             return true;
 
-        var lineText = cleanText[_currentLine];
+        var lineText = _plainLines[_currentLine];
         if (_currentChar >= lineText.Length)
         {
             _currentLine++;
             _currentChar = 0;
-            return _currentLine >= cleanText.Length;
+            return _currentLine >= _plainLines.Length;
         }
 
         _currentChar++;
@@ -84,7 +95,6 @@ public sealed class TypewriterAnimation : IAnnouncementAnimation
 
     private void UpdateDisplay(AnnouncementAnimationContext context)
     {
-        var cleanText = context.CleanText;
         var originalText = context.OriginalText;
         var style = context.Style;
 
@@ -98,9 +108,9 @@ public sealed class TypewriterAnimation : IAnnouncementAnimation
             }
             else if (textIndex == _currentLine)
             {
-                var currentLineText = cleanText[textIndex];
+                var currentLineText = _plainLines[textIndex];
                 var maxLength = Math.Min(_currentChar, currentLineText.Length);
-                var partialText = currentLineText[..maxLength];
+                var partialText = CreatePartialMarkup(_formattedLines[textIndex], maxLength);
                 var message = context.FormatMessage(partialText, style);
                 (context.Labels[i] as RichTextLabel)?.SetMessage(message);
             }
@@ -109,5 +119,59 @@ public sealed class TypewriterAnimation : IAnnouncementAnimation
                 (context.Labels[i] as RichTextLabel)?.SetMessage(FormattedMessage.FromMarkupPermissive(string.Empty));
             }
         }
+    }
+
+    internal static string CreatePartialMarkup(FormattedMessage source, int visibleLength)
+    {
+        if (visibleLength <= 0)
+            return string.Empty;
+
+        var result = new StringBuilder();
+        var openTags = new Stack<string>();
+        var remaining = visibleLength;
+
+        foreach (var node in source)
+        {
+            if (node.Name == null)
+            {
+                if (remaining <= 0)
+                    break;
+
+                var text = node.Value.StringValue ?? string.Empty;
+                var length = Math.Min(remaining, text.Length);
+                result.Append(FormattedMessage.EscapeText(text[..length]));
+                remaining -= length;
+
+                if (remaining <= 0)
+                    break;
+
+                continue;
+            }
+
+            if (node.Closing)
+            {
+                if (openTags.TryPop(out var tag))
+                    AppendClosingTag(result, tag);
+
+                continue;
+            }
+
+            result.Append(node);
+            openTags.Push(node.Name);
+        }
+
+        while (openTags.TryPop(out var tag))
+        {
+            AppendClosingTag(result, tag);
+        }
+
+        return result.ToString();
+    }
+
+    private static void AppendClosingTag(StringBuilder builder, string tag)
+    {
+        builder.Append("[/");
+        builder.Append(tag);
+        builder.Append(']');
     }
 }

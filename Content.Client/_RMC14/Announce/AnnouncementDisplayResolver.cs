@@ -29,6 +29,7 @@ public static class AnnouncementDisplayResolver
             Priority = data.Priority,
             CanInterrupt = data.CanInterrupt,
             CanBeInterrupted = data.CanBeInterrupted,
+            Standalone = data.Standalone,
             Presentation = presentation,
             SpeakerEntity = data.SpeakerEntity,
             SpeakerName = data.SpeakerName,

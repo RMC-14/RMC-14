@@ -13,6 +13,7 @@ rmc-announcement-preset-name-delta-overwatch = Delta Overwatch
 rmc-announcement-preset-name-echo-overwatch = Echo Overwatch
 rmc-announcement-preset-name-foxtrot-overwatch = Foxtrot Overwatch
 rmc-announcement-preset-name-intel-overwatch = Intel Overwatch
+rmc-announcement-preset-name-first-deployment = First Deployment
 rmc-announcement-preset-name-xeno-queen = Xeno Queen
 rmc-announcement-preset-name-ares = A.R.E.S.
 rmc-announcement-preset-name-critical = Critical
@@ -42,6 +43,21 @@ rmc-announcement-title-alert-level-blue = ALERT LEVEL: BLUE
 rmc-announcement-title-alert-level-red = ALERT LEVEL: RED
 rmc-announcement-title-alert-level-delta = ALERT LEVEL: DELTA
 rmc-announcement-title-red-alert = RED ALERT
+
+rmc-announcement-first-deployment-message = [font="CozetteBold"]{$operation}[/font]
+    {$time}
+    {$planet}
+    {$assignment}
+rmc-announcement-first-deployment-time = {$time} HRS, {$date}
+rmc-announcement-first-deployment-operation = Operation {$name}
+rmc-announcement-first-deployment-assignment-combat = 2nd Company "Falling Falcons"
+rmc-announcement-first-deployment-assignment-flight-crew = Flight Crew, {$warship}
+rmc-announcement-first-deployment-assignment-security = Security, {$warship}
+rmc-announcement-first-deployment-assignment-engineering = Engineering, {$warship}
+rmc-announcement-first-deployment-assignment-medical = Medical, {$warship}
+rmc-announcement-first-deployment-assignment-logistics = Logistics, {$warship}
+rmc-announcement-first-deployment-assignment-liaison = Liaison, {$warship}
+rmc-announcement-first-deployment-assignment-crew = Crew, {$warship}
 
 rmc-announcement-message = [font size=16][bold][color=#CECECE]{$author} Announcement[/color][/bold][/font][font size=16][color=red]
 

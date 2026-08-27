@@ -15,6 +15,9 @@ public sealed partial class AnnouncementAnimationConfig
     public float HoldDuration { get; set; } = 3f;
 
     [DataField]
+    public float FadeOutDuration { get; set; } = 0.5f;
+
+    [DataField]
     public float FlickerChance { get; set; } = 0.01f;
 
     [DataField]

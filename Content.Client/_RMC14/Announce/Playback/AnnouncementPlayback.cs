@@ -52,7 +52,6 @@ public sealed class AnnouncementPlayback
 
         var status = _animation.Update(animationContext, deltaTime);
 
-        ResetBaseLabelColor(style, state, labels, hasTitle);
         if (status == AnnouncementAnimationStatus.Hold || status == AnnouncementAnimationStatus.Finished)
         {
             BeginHold(state, animationContext, currentTime);
@@ -62,14 +61,33 @@ public sealed class AnnouncementPlayback
             state.State = AnnouncementState.Animating;
         }
 
+        var finished = false;
         if (_holdStartedAt.HasValue)
         {
             var elapsedHold = (float) (currentTime - _holdStartedAt.Value).TotalSeconds;
-            if (elapsedHold >= style.AnimationConfig.HoldDuration)
+            var holdDuration = Math.Max(0f, style.AnimationConfig.HoldDuration);
+            if (elapsedHold >= holdDuration)
             {
-                IsFinished = true;
-                return;
+                var fadeOutDuration = Math.Max(0f, style.AnimationConfig.FadeOutDuration);
+                if (fadeOutDuration <= 0f)
+                {
+                    finished = true;
+                }
+                else
+                {
+                    var elapsedFadeOut = elapsedHold - holdDuration;
+                    state.State = AnnouncementState.FadingOut;
+                    state.FadeAlpha = Math.Clamp(1f - elapsedFadeOut / fadeOutDuration, 0f, 1f);
+                    finished = elapsedFadeOut >= fadeOutDuration;
+                }
             }
+        }
+
+        ResetBaseLabelColor(style, state, labels, hasTitle);
+        if (finished)
+        {
+            IsFinished = true;
+            return;
         }
 
         ApplyVisualEffects(style, state, labels, currentTime, hasTitle);
@@ -87,20 +105,19 @@ public sealed class AnnouncementPlayback
 
     private static void ResetBaseLabelColor(AnnouncementStyle style, ActiveAnnouncement state, IReadOnlyList<Control> labels, bool hasTitle)
     {
-        var alpha = state.FadeAlpha;
         for (var i = 0; i < labels.Count; i++)
         {
             var baseColor = hasTitle && i == 0
                 ? style.TitleConfig.TitleColor
                 : style.TextConfig.PrimaryColor;
-            // Color is already embedded in the markup or FontColorOverride; Modulate carries only alpha for fades.
-            labels[i].Modulate = new Color(1f, 1f, 1f, baseColor.A * alpha);
+            // Color is already embedded in the markup or FontColorOverride.
+            labels[i].Modulate = new Color(1f, 1f, 1f, baseColor.A);
         }
 
         foreach (var titleLabel in state.TitleLabels)
         {
             var baseColor = style.TitleConfig.TitleColor;
-            titleLabel.Modulate = new Color(1f, 1f, 1f, baseColor.A * alpha);
+            titleLabel.Modulate = new Color(1f, 1f, 1f, baseColor.A);
         }
     }
 

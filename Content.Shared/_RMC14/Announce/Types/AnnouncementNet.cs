@@ -13,6 +13,7 @@ public sealed class AnnouncementNetData
     public float Priority { get; set; }
     public bool CanInterrupt { get; set; }
     public bool CanBeInterrupted { get; set; }
+    public bool Standalone { get; set; }
     public NetEntity? SpeakerEntity { get; set; }
     public string? SpeakerName { get; set; }
     public uint OverrideId { get; set; }

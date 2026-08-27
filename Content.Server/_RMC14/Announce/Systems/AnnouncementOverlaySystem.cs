@@ -71,6 +71,7 @@ public sealed partial class AnnouncementOverlaySystem : EntitySystem
             Priority = request.PriorityOverride ?? preset.Priority,
             CanInterrupt = request.CanInterrupt ?? preset.CanInterrupt,
             CanBeInterrupted = request.CanBeInterrupted ?? preset.CanBeInterrupted,
+            Standalone = preset.Standalone,
             SpeakerEntity = GetNetEntity(request.Route.Speaker),
             SpeakerName = speakerName,
             OverrideId = overrideId

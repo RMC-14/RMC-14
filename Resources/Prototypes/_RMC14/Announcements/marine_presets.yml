@@ -640,3 +640,39 @@
           titleUnderlineThickness: 2
         scaling:
           responsiveScaleFactor: 1.15
+
+- type: announcementPreset
+  id: MarineFirstDeployment
+  name: rmc-announcement-preset-name-first-deployment
+  description: "Atmospheric title shown before the first deployment to the planet"
+  target: Marines
+  defaultPreference: Default
+  standalone: true
+  presentations:
+    default:
+      showSprite: false
+      style:
+        animation:
+          animation: !type:TypewriterAnimationConfig
+            printSpeed: 0.1
+          holdDuration: 3
+          flickerChance: 0
+        layout:
+          position: BottomLeft
+          uIScale: 1
+        background:
+          showBackground: false
+        text:
+          primaryColor: "#FFFFFF"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 34
+          showSpeakerName: false
+        sprite:
+          showSpriteBox: false
+        title:
+          showTitle: false
+        scaling:
+          responsiveScaleFactor: 1
+          minScale: 0.75
+          maxScale: 1
