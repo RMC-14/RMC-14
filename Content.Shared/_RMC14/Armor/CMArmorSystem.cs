@@ -278,6 +278,7 @@ public sealed class CMArmorSystem : EntitySystem
     private void OnPiercingGetArmor(Entity<CMArmorPiercingComponent> piercing, ref CMGetArmorPiercingEvent args)
     {
         args.Piercing += piercing.Comp.Amount;
+        args.IgnoreXenoArmor |= piercing.Comp.IgnoreXenoArmor;
     }
 
     private void OnBlockBackpackEquippedAttempt(Entity<ClothingBlockBackpackComponent> ent, ref BeingEquippedAttemptEvent args)
@@ -332,27 +333,21 @@ public sealed class CMArmorSystem : EntitySystem
         RaiseLocalEvent(ent, ref ev);
 
         var armorPiercing = args.ArmorPiercing;
+        var ignoreXenoArmor = false;
         if (args.Tool is { } tool && Exists(tool))
         {
             var piercingEv = new CMGetArmorPiercingEvent(ent);
             RaiseLocalEvent(tool, ref piercingEv);
             armorPiercing += piercingEv.Piercing;
+            ignoreXenoArmor = piercingEv.IgnoreXenoArmor;
         }
 
         var immuneToAP = TryComp<CMArmorComponent>(ent, out var armorComp) && armorComp.ImmuneToAP;
         if (HasComp<XenoComponent>(ent))
         {
-            // Synth unarmed melee ignores xeno armor
-            if (args.Tool is { } synthTool && HasComp<SynthComponent>(synthTool))
-            {
-                ev.XenoArmor = 0;
-            }
-            else
-            {
-                ev.XenoArmor = (int)(ev.XenoArmor * ev.ArmorModifier);
-                if (!immuneToAP)
-                    ev.XenoArmor -= armorPiercing;
-            }
+            ev.XenoArmor = (int)(ev.XenoArmor * ev.ArmorModifier);
+            if (!immuneToAP)
+                ev.XenoArmor -= armorPiercing;
         }
         else
         {
@@ -392,6 +387,9 @@ public sealed class CMArmorSystem : EntitySystem
                 }
             }
         }
+
+        if (ignoreXenoArmor && !immuneToAP)
+            ev.XenoArmor = 0;
 
         //Default modifier
         var mod = EnsureComp<RMCArmorModifierComponent>(ent);
