@@ -19,7 +19,7 @@
   id: RMCRankCMBCorporal
   name: Corporal
   prefix: Cpl.
-  suffix: CMB
+  paygrade: CMB
 
 # Sergeant (Specialists)
 - type: rank
