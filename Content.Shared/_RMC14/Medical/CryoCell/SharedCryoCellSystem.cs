@@ -107,10 +107,10 @@ public abstract class SharedCryoCellSystem : EntitySystem
             {
                 var areaName = _area.GetAreaName(cryoCell);
                 var reason = dead
-                    ? Loc.GetString("rmc-cryo-cell-reason-dead")
-                    : Loc.GetString("rmc-cryo-cell-reason-recovery");
+                    ? Loc.GetString("rmc-cryo-cell-auto-eject-reason-dead")
+                    : Loc.GetString("rmc-cryo-cell-auto-eject-reason-recovery");
 
-                var announce = Loc.GetString("rmc-cryo-cell-reason-release",
+                var announce = Loc.GetString("rmc-cryo-cell-auto-eject-reason-release",
                     ("occupant", occupant),
                     ("cryoCell", cryoCell.Owner),
                     ("area", areaName),

@@ -67,7 +67,7 @@ public sealed partial class CryoCellWindow : DefaultWindow
 
         AutoEjectButton.Pressed = state.AutoEject;
         AutoEjectButton.Text = state.AutoEject
-            ? Loc.GetString("rmc-cryo-cell-autoeject")
+            ? Loc.GetString("rmc-cryo-cell-auto-eject")
             : Loc.GetString("rmc-cryo-cell-manual");
 
         NotifyButton.Pressed = state.ReleaseNotice;
