@@ -95,5 +95,5 @@
   id: CMIDCardBasePolice
   name: base police ID card
   components:
-  - type: PresetIdCard
+  - type: IdCard
     jobTitle: cm-job-name-survivor-varadero-base-police
