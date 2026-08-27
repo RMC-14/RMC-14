@@ -8,7 +8,15 @@
   accessGroups:
   - ColonistSec
   ranks:
-    RMCRankCMBRiotControlOfficer: []
+    RMCRankCMBCorporal:
+      - !type:RoleTimeRequirement
+        role: CMJobSurvivorSecurity
+        time: 630000 # 175 hours
+    RMCRankCMBSeniorDeputy:
+      - !type:RoleTimeRequirement
+        role: CMJobSurvivorSecurity
+        time: 90000 # 25 hours
+    RMCRankCMBDeputy: []
   icon: "RMCJobIconBureauRCO"
   spawnMenuRoleName: CMB Riot Control Officer (Fiorina Special Survivor)
   special:

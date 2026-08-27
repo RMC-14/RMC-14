@@ -8,7 +8,7 @@
   accessGroups:
   - ColonistSec
   ranks:
-    RMCRankCMBRiotControlTeamLeader: []
+    RMCRankCMBLieutenant: []
   spawnMenuRoleName: CMB Riot Control Team Leader (Fiorina Special Survivor)
   icon: "RMCJobIconCMBRiotInProgressTeamLeader"
   hasIcon: true

@@ -8,7 +8,11 @@
   accessGroups:
   - ColonistSec
   ranks:
-    RMCRankCMBMedicalTechnician: []
+    RMCRankCMBSergeant:
+      - !type:RoleTimeRequirement
+        role: CMJobSurvivorSecurity
+        time: 252000 # 70 hours
+    RMCRankCMBCorporal: []
   spawnMenuRoleName: CMB Medical Technician (Fiorina Special Survivor)
   icon: "RMCJobIconCMBRiotInProgressMedicalTechnician"
   special:
