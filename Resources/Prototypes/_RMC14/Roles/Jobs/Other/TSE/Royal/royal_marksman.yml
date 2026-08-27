@@ -19,18 +19,7 @@
       - RoyalMarines
       - TSE
     - type: Skills
-      skills:
-        RMCSkillCqc: 2
-        RMCSkillFirearms: 2
-        RMCSkillPolice: 2
-        RMCSkillFireman: 2
-        RMCSkillConstruction: 1
-        RMCSkillEngineer: 1
-        RMCSkillEndurance: 3
-        RMCSkillMedical: 2
-        RMCSkillMeleeWeapons: 1
-        RMCSkillJtac: 1
-        RMCSkillVehicles: 1
+      preset: RMCSkillPresetRoyalMarksman
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-marksman
     - type: TacticalMapIcon
@@ -71,7 +60,7 @@
       time: 36000 # 10 Hours
   - type: GhostRoleApplySpecial
     squad: SquadRoyalMarines
-  
+
 - type: startingGear
   id: RMCGearRoyalMarksman
   equipment:
@@ -97,5 +86,5 @@
   parent: CMJobIconBase
   id: RMCJobIconRoyalMarinesMarksman
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_marksman
+    sprite: _RMC14/Interface/job_icons/TSE/RCM/standard.rsi
+    state: rcm_marksman

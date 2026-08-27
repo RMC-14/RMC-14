@@ -197,3 +197,7 @@ rmc-xeno-designer-description = You lose:
     - Greater Resin Surge turns design nodes into weaker reflective walls
     - Slightly stronger tackle
 rmc-xeno-designer-popup = You are hive's designer, go and expand the hive beyond its limit.
+
+rmc-xeno-magicalgirl-name = Magical Girl
+rmc-xeno-magicalgirl-description = Receive your Plasma Wand from The Queen Mother and transform into your Magical Girl form to combat the forces of evil!
+rmc-xeno-magicalgirl-popup = With the power of Plasma and Resin! Transform!

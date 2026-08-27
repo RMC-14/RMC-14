@@ -99,9 +99,9 @@ rmc-overwatch-console-objective-secondary = [bold]Secondary Objective[/bold]
 rmc-overwatch-console-objective-placeholder = Enter objective text...
 rmc-overwatch-console-objective-update = Update
 rmc-overwatch-console-objective-cancel = Cancel
-rmc-overwatch-console-announce-objective-updated = [color=#50ECA3][bold]Overwatch:[/bold] { $operatorName } [bold]updated[/bold] the squad { $objectiveType }: [font size=16][bold]{ $objective }[/bold][/font][/color]
-rmc-overwatch-console-announce-objective-cancelled = [color=#50ECA3][bold]Overwatch:[/bold] { $operatorName } [bold]cancelled[/bold] the squad { $objectiveType }: [font size=16][bold]{ $objective }[/bold][/font][/color]
-rmc-overwatch-console-objective-updated = [bold][color=#7FFFD4]'{ $squadName }' { $objectiveType } updated: '{ $objective }'.[/color][/bold]
-rmc-overwatch-console-objective-cancelled = [bold][color=#7FFFD4]'{ $squadName }' { $objectiveType } '{ $objective }' cancelled.[/color][/bold]
+rmc-overwatch-console-announce-objective-updated = [color=#50ECA3][bold]Overwatch:[/bold] { $operatorName } [color=#008000][bold]updated[/bold][color=#50ECA3] the squad { $objectiveType }: [font size=16][bold]{ $objective }[/bold][/font][/color]
+rmc-overwatch-console-announce-objective-cancelled = [color=#50ECA3][bold]Overwatch:[/bold] { $operatorName } [color=#FF0000][bold]cancelled[/bold][color=#50ECA3] the squad { $objectiveType }: [font size=16][bold]{ $objective }[/bold][/font][/color]
+rmc-overwatch-console-objective-updated = [bold][color=#7FFFD4]'{ $squadName }' { $objectiveType } [color=#008000]updated[/color]: '{ $objective }'.[/color][/bold]
+rmc-overwatch-console-objective-cancelled = [bold][color=#7FFFD4]'{ $squadName }' { $objectiveType } '{ $objective }' [color=#FF0000]cancelled[/color].[/bold]
 rmc-overwatch-console-objectives = Your squad objectives:
     { $objectives }

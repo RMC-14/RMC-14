@@ -95,7 +95,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCTankFlamer
+    - id: VehicleFlamerTankLZRN
       amount: 2
 
 - type: entity

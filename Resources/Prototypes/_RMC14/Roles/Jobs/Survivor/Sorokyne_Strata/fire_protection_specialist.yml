@@ -9,6 +9,15 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
     - type: Skills
       preset: RMCSkillPresetSurvivorFireProtectionSpecialist
     - type: EquipSurvivorPreset

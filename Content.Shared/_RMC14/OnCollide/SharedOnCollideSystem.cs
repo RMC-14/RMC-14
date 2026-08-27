@@ -69,6 +69,9 @@ public abstract class SharedOnCollideSystem : EntitySystem
 
     private void OnCollide(Entity<DamageOnCollideComponent> ent, EntityUid other)
     {
+        if (ent.Comp.Disabled)
+            return;
+
         if (ent.Comp.Damaged.Contains(other))
             return;
 
@@ -187,6 +190,15 @@ public abstract class SharedOnCollideSystem : EntitySystem
         }
 
         return refs;
+    }
+
+    public void DisableDamageOnCollide(Entity<DamageOnCollideComponent?> ent)
+    {
+        if (!_damageOnCollideQuery.Resolve(ent, ref ent.Comp, false))
+            return;
+
+        ent.Comp.Disabled = true;
+        Dirty(ent);
     }
 
     public override void Update(float frameTime)
