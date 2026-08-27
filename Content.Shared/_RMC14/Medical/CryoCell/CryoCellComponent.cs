@@ -60,7 +60,7 @@ public sealed partial class CryoCellComponent : Component
     public TimeSpan UnconsciousDuration = TimeSpan.FromSeconds(20);
 
     [DataField]
-    public ProtoId<RadioChannelPrototype> ReleaseNoticeAnnouncement = "MarineMedical";
+    public ProtoId<RadioChannelPrototype> ReleaseNoticeRadioChannel = "MarineMedical";
 
     [DataField]
     public SoundSpecifier EjectSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/hydraulics_3.ogg");

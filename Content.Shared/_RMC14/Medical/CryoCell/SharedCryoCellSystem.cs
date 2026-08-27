@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Storage;
@@ -12,6 +13,7 @@ namespace Content.Shared._RMC14.Medical.CryoCell;
 
 public abstract class SharedCryoCellSystem : EntitySystem
 {
+    [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
@@ -103,11 +105,17 @@ public abstract class SharedCryoCellSystem : EntitySystem
             cryoCell.Comp.IsPoweredOn = false;
             if (cryoCell.Comp.ReleaseNotice)
             {
+                var areaName = _area.GetAreaName(cryoCell);
                 var reason = dead
                     ? Loc.GetString("rmc-cryo-cell-reason-dead")
-                    : Loc.GetString("rmc-cryo-cell-reason-recovered");
-                _marineAnnounce.AnnounceRadio(cryoCell, reason, cryoCell.Comp.ReleaseNoticeAnnouncement);
-// ai_silent_announcement("Patient [occupant] has been automatically released from [src] at: [sanitize_area((get_area(occupant))?.name)]. [reason]", ":m")
+                    : Loc.GetString("rmc-cryo-cell-reason-recovery");
+
+                var announce = Loc.GetString("rmc-cryo-cell-reason-release",
+                    ("occupant", occupant),
+                    ("cryoCell", cryoCell.Owner),
+                    ("area", areaName),
+                    ("reason", reason));
+                _marineAnnounce.AnnounceRadio(cryoCell, announce, cryoCell.Comp.ReleaseNoticeRadioChannel);
             }
         }
 
@@ -119,16 +127,16 @@ public abstract class SharedCryoCellSystem : EntitySystem
     {
         if (!silent)
         {
-            var sound = warningSound
-                ? cryoCell.Comp.BeepBeep
-                : cryoCell.Comp.Ping;
-            _audio.PlayPvs(sound, cryoCell);
-
-            _popup.PopupEntity(warningSound
-                    ? Loc.GetString("rmc-cryo-cell-popup-beep", ("cryoCell", cryoCell.Owner), ("msg", msg))
-                    : Loc.GetString("rmc-cryo-cell-popup-ping", ("cryoCell", cryoCell.Owner), ("msg", msg)),
-                cryoCell,
-                PopupType.MediumCaution);
+            if (warningSound)
+            {
+                _audio.PlayPvs(cryoCell.Comp.BeepBeep, cryoCell);
+                _popup.PopupEntity(Loc.GetString("rmc-cryo-cell-popup-beep", ("cryoCell", cryoCell.Owner), ("msg", msg)), cryoCell, PopupType.MediumCaution);
+            }
+            else
+            {
+                _audio.PlayPvs(cryoCell.Comp.Ping, cryoCell);
+                _popup.PopupEntity(Loc.GetString("rmc-cryo-cell-popup-ping", ("cryoCell", cryoCell.Owner), ("msg", msg)), cryoCell, PopupType.Medium);
+            }
         }
     }
 

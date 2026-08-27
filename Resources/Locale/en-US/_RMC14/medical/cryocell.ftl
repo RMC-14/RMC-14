@@ -32,8 +32,9 @@ rmc-cryo-cell-beaker-header = Beaker
 rmc-cryo-cell-beaker-empty = No beaker loaded.
 rmc-cryo-cell-beaker-eject = Eject
 
-rmc-cryo-cell-reason-dead = Reason for release: Patient death.
-rmc-cryo-cell-reason-recovered = Reason for release: Patient recovery.
+rmc-cryo-cell-reason-release = Patient {CAPITALIZE(SUBJECT($occupant))} has been automatically released from {$cryoCell} at: {$area}. {$reason}
+rmc-cryo-cell-reason-dead = Reason for release: [color=red]Patient death[/color].
+rmc-cryo-cell-reason-recovery = Reason for release: [color=green]Patient recovery[/color].
 
 rmc-cryo-cell-popup-beep = {CAPITALIZE(THE($cryoCell))} beeps: {$msg}
 rmc-cryo-cell-popup-ping = {CAPITALIZE(THE($cryoCell))} pings: {$msg}
@@ -41,4 +42,4 @@ rmc-cryo-cell-popup-incompatible = Incompatible lifeform detected!
 rmc-cryo-cell-popup-healed = Patient's external wounds are healed.
 rmc-cryo-cell-popup-dead = Patient is dead!
 rmc-cryo-cell-popup-warning = Patient requires defibrillation!
-rmc-cryo-cell-popup-revive-now = Patient critical! [color=red][bold]REQUESTING IMMEDIATE DEFIBRILLATION![/bold][/color]
+rmc-cryo-cell-popup-revive-now = Patient critical! REQUESTING IMMEDIATE DEFIBRILLATION!!!
