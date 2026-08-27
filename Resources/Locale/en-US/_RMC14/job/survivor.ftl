@@ -176,8 +176,6 @@ rmc-job-prefix-survivor-varadero-chaplain = UNMC CHAP
 cm-job-name-survivor-varadero-un-asst-rep = UN Assistant Representative
 rmc-job-prefix-survivor-varadero-un-asst-rep = UN AST REP
 
-cm-job-name-survivor-varadero-base-guard = Peacekeeper
-
 cm-job-name-survivor-varadero-firefighter = Airport Firefighter
 rmc-job-prefix-survivor-varadero-firefighter = UNMC ARFPS
 
