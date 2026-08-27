@@ -89,3 +89,11 @@
   components:
   - type: PresetIdCard
     job: RMCSurvivorHybrisaTSEPAConstable
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMIDCardBasePolice
+  name: base police ID card
+  components:
+  - type: PresetIdCard
+    jobTitle: cm-job-name-survivor-varadero-base-police

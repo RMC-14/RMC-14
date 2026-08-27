@@ -356,14 +356,6 @@
 
 - type: entity
   parent: CMIDCardStandardDogtag
-  id: CMIDCardBasePolice
-  name: base police ID card
-  components:
-  - type: PresetIdCard
-    job: RMCSurvivorUNMCBasePolice
-
-- type: entity
-  parent: CMIDCardStandardDogtag
   id: CMDogtagUNMCPilot
   name: Pilot's dogtags
   components:

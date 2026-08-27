@@ -200,6 +200,8 @@ rmc-job-prefix-survivor-new-varadero-xenobiologist = WY XBIO
 cm-job-name-survivor-new-varadero-rd = New Varadero Research Director
 rmc-job-prefix-survivor-new-varadero-rd = WY RD
 
+cm-job-name-survivor-varadero-base-police = Base Police
+
 # Hybrisa Prospera Survs
 
 rmc-job-name-survivor-hybrisa-civilian = Civilian
