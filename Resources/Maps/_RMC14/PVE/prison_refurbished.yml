@@ -83286,7 +83286,7 @@ entities:
     - type: Transform
       pos: -68.52756,48.61691
       parent: 1
-- proto: CMSatchelSecurityFilledFaxResponder
+- proto: RMCSatchelBartenderFill
   entities:
   - uid: 22262
     components:
