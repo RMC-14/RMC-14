@@ -5,7 +5,7 @@
 - type: rank
   id: RMCRankCMBDeputy
   name: Officer
-  prefix: Dep.
+  prefix: Off.
   paygrade: CMB
 
 - type: rank
