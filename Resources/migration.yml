@@ -1534,3 +1534,6 @@ RMCCoatPaP: RMCCoatPCG
 
 # 2026-07-31
 FoodBoxPizzaFilled: RMCBoxPizzaRandom
+
+# 2026-08-26
+CMAttachmentXMVESG1FlamerNozzle: RMCAttachmentXMVESG1FlamerNozzle
