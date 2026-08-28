@@ -973,6 +973,16 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         }
     }
 
+    public void IgniteOnProjectileHit(EntityUid projectile, Reagent reagent)
+    {
+        AddComp(projectile, new IgniteOnProjectileHitComponent
+        {
+            BurnColor = reagent.SubstanceColor,
+            Duration = reagent.Duration,
+            Intensity = reagent.Intensity,
+        }, true);
+    }
+
     private void RunIgniteOnCollide()
     {
         try

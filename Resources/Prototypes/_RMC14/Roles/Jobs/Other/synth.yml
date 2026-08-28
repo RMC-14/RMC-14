@@ -57,31 +57,13 @@
       points: 45
       extraPoints:
         ExperimentalTools: 30
-    - type: DemoSpecWhitelist
-    - type: GrenadeSpecWhitelist
-    - type: ScoutWhitelist
-    - type: SniperWhitelist
-    - type: PyroWhitelist
     - type: JobPrefix
       prefix: rmc-job-prefix-synth
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: synth
-    - type: MeleeWeapon
-      soundHit:
-        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
-        params:
-          variation: 0.15
-          volume: -1
-      angle: 30
-      animation: WeaponArcFist
-      attackRate: 1
-      damage:
-        types:
-          Blunt: 35
     - type: Synth
-  hidden: true
 
 - type: startingGear
   id: RMCGearSyntheticEquipped
@@ -106,41 +88,3 @@
 - type: playTimeTracker
   id: RMCJobSynthetic
   isHumanoid: true
-
-- type: entity
-  id: RMCSynthAddComponents
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: NightVision
-    innate: true
-    state: half
-    onlyHalf: true
-    alert: SynthNightVision
-  - type: EyeProtection
-  - type: WoundableUntreatable
-  - type: Insulated
-  - type: ZombieImmune
-  - type: ShowHealthIcons
-  - type: ShowHealthBars
-  - type: ParalyzeImmuneFrom
-    whitelist:
-      tags:
-      - RMCSynthGrabbable
-
-- type: entity
-  id: RMCSynthRemoveComponents
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: CMSurgeryTarget
-  - type: Infectable
-  - type: Hunger
-  - type: Thirst
-  - type: Perishable
-  - type: ThermalRegulator
-  - type: Stamina
-  - type: DamageForceSay
-  - type: Dna
-  - type: InjectableSolution
-  - type: IVDripTarget
-  - type: RMCSuicide
-    damage: { }
