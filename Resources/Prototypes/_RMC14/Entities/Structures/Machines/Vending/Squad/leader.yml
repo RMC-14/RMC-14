@@ -405,9 +405,9 @@
   - type: StorageFill
     contents:
     - id: RMCBackpackFlamer
-    - id: RMCWeaponFlamer
+    - id: RMCWeaponFlamerExtinguisher
     - id: RMCTankFlamer
-      amount: 2 # TODO RMC14 projectile nozzle
+      amount: 2
     - id: RMCTankFlamerBGel
     - id: CMFireExtinguisherPortable
 

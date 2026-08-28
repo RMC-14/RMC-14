@@ -17,18 +17,19 @@
     - type: Skills
       skills:
         RMCSkillConstruction: 2
-        RMCSkillCqc: 3
+        RMCSkillCqc: 4
         RMCSkillEndurance: 5
         RMCSkillEngineer: 2
         RMCSkillExecution: 1
         RMCSkillFirearms: 2
-        RMCSkillFireman: 2
+        RMCSkillFireman: 5
         RMCSkillIntel: 2
         RMCSkillJtac: 4
         RMCSkillLeadership: 3
         RMCSkillMedical: 3
         RMCSkillSurgery: 3
         RMCSkillMeleeWeapons: 1
+        RMCSkillNavigations: 1
         RMCSkillOverwatch: 1
         RMCSkillPolice: 2
         RMCSkillPowerLoader: 2
@@ -75,7 +76,7 @@
     belt: RMCMatebaBeltFilled
     back: RMCBackpackPIDFilled
     mask: RMCMaskCoifPMC
-    #    pocket1: # TODO RMC14 tape recorder
+    pocket1: RMCUniversalRecorder
     pocket2: RMCPouchMagazinePistolFilledMateba # TODO RMC14 3 listening devices
   inhand:
     - RMCMatebaCustomizationCase
@@ -87,6 +88,6 @@
   parent: CMJobIconBase
   id: RMCJobIconProvostOperative
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/provost.rsi
     state: hudsquad_tisio
 

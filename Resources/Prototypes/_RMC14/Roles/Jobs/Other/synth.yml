@@ -29,6 +29,7 @@
       - French
       - Japanese
       - Russian
+      - Scandinavian
       - German
       - Chinese
       - Spanish
@@ -37,6 +38,7 @@
       - French
       - Japanese
       - Russian
+      - Scandinavian
       - German
       - Chinese
       - Spanish
@@ -50,57 +52,19 @@
       comprehensionThreshold: 0.8
       learningRange: 8.0
       baseWordLearningRate: 0.05
-    - type: Skills
-      skills:
-        RMCSkillCqc: 5
-        RMCSkillEndurance: 1
-        RMCSkillEngineer: 4
-        RMCSkillConstruction: 3
-        RMCSkillFirearms: 2
-        RMCSkillOverwatch: 1
-        RMCSkillMedical: 4
-        RMCSkillSurgery: 3
-        RMCSkillResearch: 1
-        RMCSkillMeleeWeapons: 2
-        RMCSkillPilot: 2
-        RMCSkillPolice: 2
-        RMCSkillFireman: 5
-        RMCSkillPowerLoader: 2
-        RMCSkillVehicles: 2
-        RMCSkillJtac: 3
-        RMCSkillIntel: 2
-        RMCSkillDomestics: 2
-        RMCSkillNavigations: 1
     - type: CMVendorUser
       id: RMCJobSynthetic
       points: 45
       extraPoints:
         ExperimentalTools: 30
-    - type: DemoSpecWhitelist
-    - type: GrenadeSpecWhitelist
-    - type: ScoutWhitelist
-    - type: SniperWhitelist
-    - type: PyroWhitelist
     - type: JobPrefix
       prefix: rmc-job-prefix-synth
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: synth
-    - type: MeleeWeapon
-      soundHit:
-        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
-        params:
-          variation: 0.15
-          volume: -1
-      angle: 30
-      animation: WeaponArcFist
-      attackRate: 1
-      damage:
-        types:
-          Blunt: 35
     - type: Synth
-  hidden: true
+
 - type: startingGear
   id: RMCGearSyntheticEquipped
   equipment:
@@ -124,41 +88,3 @@
 - type: playTimeTracker
   id: RMCJobSynthetic
   isHumanoid: true
-
-- type: entity
-  id: RMCSynthAddComponents
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: NightVision
-    innate: true
-    state: half
-    onlyHalf: true
-    alert: SynthNightVision
-  - type: EyeProtection
-  - type: WoundableUntreatable
-  - type: Insulated
-  - type: RMCLeapProtection
-    inherentStunDuration: 3
-  - type: ZombieImmune
-  - type: ParalyzeImmuneFrom
-    whitelist:
-      tags:
-      - RMCSynthGrabbable
-
-- type: entity
-  id: RMCSynthRemoveComponents
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: CMSurgeryTarget
-  - type: Infectable
-  - type: Hunger
-  - type: Thirst
-  - type: Perishable
-  - type: ThermalRegulator
-  - type: Stamina
-  - type: DamageForceSay
-  - type: Dna
-  - type: InjectableSolution
-  - type: IVDripTarget
-  - type: RMCSuicide
-    damage: { }

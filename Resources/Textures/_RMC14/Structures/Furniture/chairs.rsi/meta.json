@@ -93,6 +93,9 @@
     {
       "name": "wheelchair",
       "directions": 4
+    },
+    {
+      "name": "stool_red"
     }
   ]
 }
