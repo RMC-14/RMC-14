@@ -46,6 +46,9 @@ public sealed partial class RMCFusionReactorComponent : Component
     public TimeSpan EmergencyFailureCheckInterval = TimeSpan.FromSeconds(34);
 
     [DataField]
+    public TimeSpan ToggleDelay = TimeSpan.FromSeconds(2);
+
+    [DataField]
     public TimeSpan EmergencyStartDelay = TimeSpan.FromSeconds(3);
 
     [ViewVariables]
@@ -175,3 +178,6 @@ public enum RMCFusionReactorVisuals
 
 [Serializable, NetSerializable]
 public sealed partial class RMCFusionReactorToggleDoAfterEvent : SimpleDoAfterEvent;
+
+[Serializable, NetSerializable]
+public sealed partial class RMCFusionReactorShutdownDoAfterEvent : SimpleDoAfterEvent;

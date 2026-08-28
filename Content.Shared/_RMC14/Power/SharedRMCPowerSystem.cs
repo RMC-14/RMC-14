@@ -138,6 +138,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         SubscribeLocalEvent<RMCFusionReactorComponent, RMCFusionReactorRemoveCellDoAfterEvent>(OnFusionReactorRemoveCellDoAfter);
         SubscribeLocalEvent<RMCFusionReactorComponent, RMCFusionReactorRepairDoAfterEvent>(OnFusionReactorRepairWeldingDoAfter);
         SubscribeLocalEvent<RMCFusionReactorComponent, RMCFusionReactorToggleDoAfterEvent>(OnFusionReactorToggleDoAfter);
+        SubscribeLocalEvent<RMCFusionReactorComponent, RMCFusionReactorShutdownDoAfterEvent>(OnFusionReactorShutdownDoAfter);
         SubscribeLocalEvent<RMCFusionReactorComponent, RMCFusionReactorOverloadDoAfterEvent>(OnFusionReactorOverloadDoAfter);
         SubscribeLocalEvent<RMCFusionReactorComponent, InteractHandEvent>(OnFusionReactorInteractHand);
         SubscribeLocalEvent<RMCFusionReactorComponent, RMCFusionReactorStopOverloadDoAfterEvent>(OnFusionReactorStopOverloadDoAfter);
@@ -1560,8 +1561,19 @@ public abstract class SharedRMCPowerSystem : EntitySystem
 
             if (ent.Comp.Enabled)
             {
-                SetFusionReactorEnabled(ent, false);
-                _popup.PopupClient(Loc.GetString("rmc-fusion-reactor-shut-down", ("reactor", ent)), ent, user);
+                var shutdown = new RMCFusionReactorShutdownDoAfterEvent();
+                var shutdownDoAfter = new DoAfterArgs(EntityManager, user, ent.Comp.ToggleDelay, shutdown, ent)
+                {
+                    BreakOnMove = true,
+                    DuplicateCondition = DuplicateConditions.SameEvent,
+                };
+                if (_doAfter.TryStartDoAfter(shutdownDoAfter))
+                {
+                    _popup.PopupClient(Loc.GetString("rmc-fusion-reactor-shutting-down", ("reactor", ent)),
+                        ent,
+                        user);
+                }
+
                 return;
             }
 
@@ -1576,8 +1588,19 @@ public abstract class SharedRMCPowerSystem : EntitySystem
 
             if (ent.Comp.State == RMCFusionReactorState.Working && HasUsableFusionReactorCell(ent))
             {
-                SetFusionReactorEnabled(ent, true);
-                _popup.PopupClient(Loc.GetString("rmc-fusion-reactor-started", ("reactor", ent)), ent, user);
+                var start = new RMCFusionReactorToggleDoAfterEvent();
+                var startDoAfter = new DoAfterArgs(EntityManager, user, ent.Comp.ToggleDelay, start, ent)
+                {
+                    BreakOnMove = true,
+                    DuplicateCondition = DuplicateConditions.SameEvent,
+                };
+                if (_doAfter.TryStartDoAfter(startDoAfter))
+                {
+                    _popup.PopupClient(Loc.GetString("rmc-fusion-reactor-starting", ("reactor", ent)),
+                        ent,
+                        user);
+                }
+
                 return;
             }
 
@@ -1644,6 +1667,18 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         args.Handled = true;
         SetFusionReactorEnabled(ent, true);
         _popup.PopupClient(Loc.GetString("rmc-fusion-reactor-started", ("reactor", ent)), ent, args.User);
+    }
+
+    private void OnFusionReactorShutdownDoAfter(
+        Entity<RMCFusionReactorComponent> ent,
+        ref RMCFusionReactorShutdownDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled || !ent.Comp.Enabled || ent.Comp.Overloaded)
+            return;
+
+        args.Handled = true;
+        SetFusionReactorEnabled(ent, false);
+        _popup.PopupClient(Loc.GetString("rmc-fusion-reactor-shut-down", ("reactor", ent)), ent, args.User);
     }
 
     public void SetFusionReactorEnabled(
