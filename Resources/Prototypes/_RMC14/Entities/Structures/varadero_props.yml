@@ -13,6 +13,7 @@
     noRot: true
   - type: Physics
     fixedRotation: true
+    canCollide: False
   - type: Sprite
     drawdepth: Mobs
     sprite: _RMC14/Structures/varadero_cannon.rsi
@@ -21,6 +22,7 @@
   - type: InteractionOutline
   - type: Corrodible
     isCorrodible: false
+
 
 - type: entity
   parent: RMCPropVaraderoCannon
@@ -44,6 +46,7 @@
     noRot: false
   - type: Physics
     fixedRotation: false
+    canCollide: False
   - type: Sprite
     sprite: _RMC14/Structures/varadero_AA.rsi
   - type: Clickable
