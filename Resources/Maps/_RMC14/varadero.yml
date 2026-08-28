@@ -45821,8 +45821,6 @@ entities:
     components:
     - type: Transform
       parent: 435
-    - type: Physics
-      canCollide: False
     - type: InsideEntityStorage
 - proto: CMBloodPack
   entities:
@@ -88172,8 +88170,6 @@ entities:
     components:
     - type: Transform
       parent: 435
-    - type: Physics
-      canCollide: False
     - type: InsideEntityStorage
   - uid: 8764
     components:
@@ -158170,8 +158166,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 85.5,96.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 21230
@@ -158180,8 +158174,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 97.5,96.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCBedAlt
@@ -201396,8 +201388,6 @@ entities:
     components:
     - type: Transform
       parent: 25776
-    - type: Physics
-      canCollide: False
     - type: InsideEntityStorage
 - proto: RMCPouchMagazinePistolFilledM1911
   entities:
@@ -201631,8 +201621,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 37.5,12.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPropDropshipdamage
@@ -201642,8 +201630,6 @@ entities:
     - type: Transform
       pos: 108.5,150.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 28522
@@ -201651,8 +201637,6 @@ entities:
     - type: Transform
       pos: 99.5,150.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPropGenerator
@@ -202665,8 +202649,6 @@ entities:
     - type: Transform
       pos: 3.4214008,128.08572
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 28712
@@ -202675,8 +202657,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 147.9182,127.02651
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPropTyrargoVehicleAPCMedicalDestroyed
@@ -202686,8 +202666,6 @@ entities:
     - type: Transform
       pos: 41.577232,91.97171
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPropTyrargoVehicleATVOpenDestroyed
@@ -202698,8 +202676,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 42.12177,137.13527
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPropTyrargoVehicleEvacGreen
@@ -202711,8 +202687,6 @@ entities:
     - type: Transform
       pos: 159.10161,124.09399
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPropTyrargoVehicleHalfTrack
@@ -202723,8 +202697,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 123.5,106.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPropTyrargoVehicleHalfTrackAlt
@@ -202735,8 +202707,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 20.50896,137.10628
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 28718
@@ -202745,8 +202715,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 130.48714,115.93645
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPropTyrargoVehicleHalfTrackAltDestroyed
@@ -202757,8 +202725,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 10.600388,126.96442
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPropTyrargoVehicleHumvee
@@ -202768,8 +202734,6 @@ entities:
     - type: Transform
       pos: 150.0035,95.44412
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPropTyrargoVehicleHumveeCarrier
@@ -202780,8 +202744,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 26.578667,134.93333
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPropTyrargoVehicleHumveeDestroyed
@@ -202792,8 +202754,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 16.641163,129.15544
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 28723
@@ -202801,8 +202761,6 @@ entities:
     - type: Transform
       pos: 10.152248,129.27852
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 28724
@@ -202810,8 +202768,6 @@ entities:
     - type: Transform
       pos: 76.98263,50.285046
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPropTyrargoVehicleTruckAlt
@@ -202822,8 +202778,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 22.999529,130.51714
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 28726
@@ -202832,8 +202786,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 34.5,128.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPropVaraderoAACannon1
@@ -202844,8 +202796,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 175.5,52.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 28727
@@ -202854,8 +202804,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 113.5,162.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 28728
@@ -202863,8 +202811,6 @@ entities:
     - type: Transform
       pos: 117.5,166.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 28729
@@ -202873,8 +202819,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 91.5,161.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 28730
@@ -202883,8 +202827,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 87.5,165.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 33056
@@ -202892,8 +202834,6 @@ entities:
     - type: Transform
       pos: 175.5,130.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 33057
@@ -202902,8 +202842,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 175.5,134.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPropVaraderoAACannon2
@@ -202914,8 +202852,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 175.5,138.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPropVaraderoAACannon3
@@ -202925,8 +202861,6 @@ entities:
     - type: Transform
       pos: 113.5,162.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 28732
@@ -202934,8 +202868,6 @@ entities:
     - type: Transform
       pos: 87.5,165.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 28733
@@ -202943,8 +202875,6 @@ entities:
     - type: Transform
       pos: 91.5,161.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 33059
@@ -202953,8 +202883,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 175.5,130.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPropVaraderoAACannon4
@@ -202965,8 +202893,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 175.5,52.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 33061
@@ -202975,8 +202901,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 175.5,134.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPropVaraderoAACannon5
@@ -202986,8 +202910,6 @@ entities:
     - type: Transform
       pos: 117.5,166.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 33060
@@ -202996,8 +202918,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 175.5,138.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPropVaraderoCannon
@@ -203007,8 +202927,6 @@ entities:
     - type: Transform
       pos: 162.5,141.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 28736
@@ -203016,8 +202934,6 @@ entities:
     - type: Transform
       pos: 163.5,158.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 28737
@@ -203025,8 +202941,6 @@ entities:
     - type: Transform
       pos: 136.5,107.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPropVaraderoCannon1
@@ -203036,8 +202950,6 @@ entities:
     - type: Transform
       pos: 165.99165,141.49966
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 28739
@@ -203045,8 +202957,6 @@ entities:
     - type: Transform
       pos: 166.98814,158.50102
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 28740
@@ -203054,8 +202964,6 @@ entities:
     - type: Transform
       pos: 139.99759,107.502335
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPropVehicleCargoCrane
@@ -208627,8 +208535,6 @@ entities:
       parent: 29779
     - type: Stack
       count: 3
-    - type: Physics
-      canCollide: False
     - type: InsideEntityStorage
   - uid: 29782
     components:
@@ -208636,8 +208542,6 @@ entities:
       parent: 29781
     - type: Stack
       count: 3
-    - type: Physics
-      canCollide: False
     - type: InsideEntityStorage
 - proto: RMCSheetPlastic1
   entities:
