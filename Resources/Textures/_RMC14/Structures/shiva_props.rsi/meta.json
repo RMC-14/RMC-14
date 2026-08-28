@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/7cb618c69b75873f3ce893022fe08d1233b3152d/icons/obj/structures/props/ice_colony/props.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/7cb618c69b75873f3ce893022fe08d1233b3152d/icons/obj/structures/props/ice_colony/props.dmi, https://github.com/cmss13-devs/cmss13/blob/426f900f16ff1c070bdd910e8e06e30e549d7f21/icons/effects/effects.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -22,6 +22,24 @@
     {
         "name": "flamingo",
         "directions": 4
+    },
+    {
+        "name": "cocoon_large1"
+    },
+    {
+        "name": "cocoon_large2"
+    },
+    {
+        "name": "cocoon_large3"
+    },
+    {
+        "name": "cocoon1"
+    },
+    {
+        "name": "cocoon2"
+    },
+    {
+        "name": "cocoon3"
     }
   ]
 }

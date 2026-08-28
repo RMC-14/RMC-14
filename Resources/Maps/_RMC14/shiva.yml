@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/17/2026 17:05:09
-  entityCount: 18724
+  time: 08/28/2026 20:56:10
+  entityCount: 18738
 maps:
 - 1
 grids:
@@ -54822,7 +54822,7 @@ entities:
       pos: 198.5,44.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -5327.868
+      secondsUntilStateChange: -5489.9854
       state: Opening
   - uid: 3195
     components:
@@ -55136,7 +55136,7 @@ entities:
     - type: Occluder
       enabled: False
     - type: Door
-      secondsUntilStateChange: -14827.975
+      secondsUntilStateChange: -14990.092
       state: Denying
   - uid: 3256
     components:
@@ -127794,6 +127794,88 @@ entities:
     - type: Transform
       pos: 95.5,48.5
       parent: 1
+- proto: RMCPropCocoon1
+  entities:
+  - uid: 18727
+    components:
+    - type: Transform
+      pos: 181.5,103.5
+      parent: 1
+  - uid: 18728
+    components:
+    - type: Transform
+      pos: 186.5,105.5
+      parent: 1
+  - uid: 18730
+    components:
+    - type: Transform
+      pos: 180.5,99.5
+      parent: 1
+  - uid: 18734
+    components:
+    - type: Transform
+      pos: 205.5,97.5
+      parent: 1
+  - uid: 18735
+    components:
+    - type: Transform
+      pos: 208.5,91.5
+      parent: 1
+- proto: RMCPropCocoon2
+  entities:
+  - uid: 18737
+    components:
+    - type: Transform
+      pos: 209.5,82.5
+      parent: 1
+- proto: RMCPropCocoon3
+  entities:
+  - uid: 18736
+    components:
+    - type: Transform
+      pos: 210.5,88.5
+      parent: 1
+- proto: RMCPropCocoonLarge1
+  entities:
+  - uid: 18725
+    components:
+    - type: Transform
+      pos: 178.5,104.5
+      parent: 1
+  - uid: 18731
+    components:
+    - type: Transform
+      pos: 213.5,93.5
+      parent: 1
+- proto: RMCPropCocoonLarge2
+  entities:
+  - uid: 18726
+    components:
+    - type: Transform
+      pos: 179.5,106.5
+      parent: 1
+  - uid: 18733
+    components:
+    - type: Transform
+      pos: 206.5,97.5
+      parent: 1
+- proto: RMCPropCocoonLarge3
+  entities:
+  - uid: 18729
+    components:
+    - type: Transform
+      pos: 186.5,98.5
+      parent: 1
+  - uid: 18732
+    components:
+    - type: Transform
+      pos: 205.5,92.5
+      parent: 1
+  - uid: 18738
+    components:
+    - type: Transform
+      pos: 205.5,85.5
+      parent: 1
 - proto: RMCPropCommunicationsConsole
   entities:
   - uid: 16527
@@ -128357,12 +128439,16 @@ entities:
     - type: Transform
       pos: 70.1529,147.09105
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 16625
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 57.5,30.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
 - proto: RMCPropLawnFlamingoSnow
   entities:
   - uid: 16626
@@ -128370,29 +128456,39 @@ entities:
     - type: Transform
       pos: 70.475815,146.46562
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 16627
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 68.32998,145.44408
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 16628
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 54.5,33.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 16629
     components:
     - type: Transform
       pos: 58.5,33.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 16630
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 52.5,32.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
 - proto: RMCPropMeasuringDevice
   entities:
   - uid: 16631
@@ -137179,7 +137275,7 @@ entities:
     - type: Transform
       pos: 53.5,21.5
       parent: 1
-- proto: RMCWeaponShotgunHG3712
+- proto: RMCWeaponShotgunM12
   entities:
   - uid: 18169
     components:
