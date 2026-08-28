@@ -155,6 +155,11 @@ namespace Content.Client.Input
             human.AddFunction(CMKeyFunctions.CMHolsterQuaternary);
             human.AddFunction(CMKeyFunctions.RMCPickUpDroppedItems);
             human.AddFunction(CMKeyFunctions.RMCInteractWithOtherHand);
+            // RMC14 start
+            human.AddFunction(CMKeyFunctions.RMCPushup);
+            human.AddFunction(CMKeyFunctions.RMCPushupRoutine);
+            human.AddFunction(CMKeyFunctions.RMCWeakPushup);
+            // RMC14 end
             human.AddFunction(CMKeyFunctions.RMCRest);
             human.AddFunction(CMKeyFunctions.RMCResist);
 
