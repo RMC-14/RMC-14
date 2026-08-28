@@ -226,12 +226,12 @@
 - files: ["gun_ssg45_1.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
-  source: "https://github.com/cmss13-devs/cmss13/blob/eb11a226994fb140fb0f713dd05525a0f8b3b3ae/sound/weapons/gun_nsg23_1.ogg"
+  source: "Taken from https://github.com/cmss13-devs/cmss13/blob/eb11a226994fb140fb0f713dd05525a0f8b3b3ae/sound/weapons/gun_nsg23_1.ogg and michorvath -- https://freesound.org/s/427596/. Edited by SharkSnake98 on GitHub"
 
 - files: ["gun_ssg45_2.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
-  source: "https://github.com/cmss13-devs/cmss13/blob/eb11a226994fb140fb0f713dd05525a0f8b3b3ae/sound/weapons/gun_nsg23_2.ogg"
+  source: "Taken from https://github.com/cmss13-devs/cmss13/blob/eb11a226994fb140fb0f713dd05525a0f8b3b3ae/sound/weapons/gun_nsg23_1.ogg and michorvath -- https://freesound.org/s/427596/. Edited by SharkSnake98 on GitHub"
 
 - files: ["gun_type64.ogg"]
   license: "CC-BY-SA-3.0"
