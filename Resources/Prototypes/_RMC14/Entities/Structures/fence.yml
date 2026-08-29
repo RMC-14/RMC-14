@@ -104,6 +104,7 @@
 - type: entity
   parent: CMFence
   id: RMCFenceHybrisa
+  suffix: Dark
   components:
   - type: Sprite
     sprite: _RMC14/Structures/hybrisa_fences.rsi
@@ -115,6 +116,7 @@
 - type: entity
   parent: RMCFenceBroken
   id: RMCFenceHybrisaBroken
+  suffix: Dark
   components:
   - type: Sprite
     sprite: _RMC14/Structures/hybrisa_fences.rsi
@@ -126,7 +128,7 @@
 - type: entity
   parent: CMFence
   id: RMCFenceHybrisaElectric
-  suffix: electric
+  suffix: dark, electric
   components:
   - type: Sprite
     sprite: _RMC14/Structures/hybrisa_fences_electric.rsi
@@ -144,7 +146,7 @@
 - type: entity
   parent: RMCFenceBroken
   id: RMCFenceHybrisaElectricBroken
-  suffix: electric
+  suffix: dark, electric
   components:
   - type: Sprite
     sprite: _RMC14/Structures/hybrisa_fences_electric.rsi
@@ -202,3 +204,52 @@
   - type: Construction
     graph: RMCFenceSPP
     node: rmcFenceBroken
+
+- type: entity
+  parent: CMFence
+  id: RMCFenceAlt
+  suffix: Alt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/fences_alt.rsi
+    state: fence0
+  - type: Construction
+    graph: RMCFenceAlt
+    node: fenceMetal
+
+- type: entity
+  parent: RMCFenceBroken
+  id: RMCFenceAltBroken
+  suffix: Alt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/fences_alt.rsi
+    state: brokenfence0
+  - type: Construction
+    graph: RMCFenceAlt
+    node: rmcFenceBroken
+
+- type: entity
+  parent: CMFence
+  id: RMCFenceDarkAlt
+  suffix: Dark, Alt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/fences_dark_alt.rsi
+    state: fence0
+  - type: Construction
+    graph: RMCFenceDarkAlt
+    node: fenceMetal
+
+- type: entity
+  parent: RMCFenceBroken
+  id: RMCFenceDarkAltBroken
+  suffix: Dark, Alt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/fences_dark_alt.rsi
+    state: brokenfence0
+  - type: Construction
+    graph: RMCFenceDarkAlt
+    node: rmcFenceBroken
+
