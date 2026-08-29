@@ -119,8 +119,8 @@
   parent: RMCPodDoor
   id: RMCPodDoorAlmayerBlendedLiaison
   suffix: Poddoor, Blended, Liaison
-  name: wall
-  description: A huge chunk of metal used to separate rooms.
+  name: reinforced hull
+  description: A reinforced metal wall used to separate rooms and make up the ship.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Shutters/Almayer/liaison_poddoor.rsi
