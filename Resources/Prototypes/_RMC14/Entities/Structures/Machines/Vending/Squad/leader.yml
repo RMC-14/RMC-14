@@ -317,6 +317,7 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleCrewLeader
+  categories: [ HideSpawnMenu ]
   name: essential SL kit
   description: Contains a laser designator, a pack of signal flares, a breaching charge and a fire extinguisher.
   components:

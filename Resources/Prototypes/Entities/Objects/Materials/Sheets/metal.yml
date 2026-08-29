@@ -97,6 +97,7 @@
 - type: entity
   parent: SheetSteel
   id: SheetSteelLingering0
+  categories: [ HideSpawnMenu ] # RMC 14
   suffix: Lingering, 0
   components:
   - type: Stack
@@ -233,6 +234,7 @@
 - type: entity
   parent: SheetPlasteel
   id: SheetPlasteelLingering0
+  categories: [ HideSpawnMenu ] # RMC 14
   suffix: Lingering, 0
   components:
   - type: Stack
