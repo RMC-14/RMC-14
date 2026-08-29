@@ -430,7 +430,7 @@
   parent: CMWallReinforcedHeavy
   id: CMWallReinforcedHeavyAlmayer
   name: heavy reinforced hull
-  description: A highly reinforced metal wall used to separate rooms and make up the ship. It would take a great impact to weaken this wall.
+  description: A highly reinforced metal wall used to separate rooms and make up the ship.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/almayer_black.rsi
@@ -495,6 +495,13 @@
     key: walls
     mode: NoSprite
 
+# Temp Hull
+- type: entity
+  parent: CMWallReinforcedHeavyAlmayer
+  id: RMCWallReinforcedHeavyAlmayerHijackBustable
+  description: A highly reinforced metal wall used to separate rooms and make up the ship. It would take a great impact to weaken this wall.
+  suffix: Hijack Bustable
+
 - type: entity
   parent: RMCWallAlmayerReinforcedHeavyDeco1
   id: RMCWallAlmayerReinforcedHeavyDecoElevator
@@ -523,7 +530,7 @@
   parent: CMWallReinforcedHeavy
   id: CMWallReinforcedHeavyAlmayerWhite
   name: heavy reinforced hull
-  description: A highly reinforced metal wall used to separate rooms and make up the ship. It would take a great impact to weaken this wall.
+  description: A highly reinforced metal wall used to separate rooms and make up the ship.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/almayer_white.rsi
