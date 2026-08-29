@@ -495,10 +495,9 @@
     key: walls
     mode: NoSprite
 
-# Temp Hull
 - type: entity
   parent: CMWallReinforcedHeavyAlmayer
-  id: RMCWallReinforcedHeavyAlmayerHijackBustable
+  id: RMCWallReinforcedHeavyAlmayerHijackBustable # RMC14 TODO: Add functionality
   description: A highly reinforced metal wall used to separate rooms and make up the ship. It would take a great impact to weaken this wall.
   suffix: Hijack Bustable
 
