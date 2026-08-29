@@ -117,6 +117,18 @@
 
 - type: entity
   parent: RMCPodDoor
+  id: RMCPodDoorAlmayerBlendedLiaison
+  suffix: Poddoor, Blended, Liaison
+  name: wall
+  description: A huge chunk of metal used to separate rooms.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Shutters/Almayer/liaison_poddoor.rsi
+  - type: MinimapColor
+    color: "#451e5eb8"
+
+- type: entity
+  parent: RMCPodDoor
   id: RMCPodDoorHybrisaWhite
   components:
   - type: Sprite
