@@ -31,7 +31,6 @@
     - type: LanguageLearning
       preset: RMCLanguageLearningPresetSynthColonist
     - type: RMCAllowSuitStorage
-    - type: MarineOrders
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
