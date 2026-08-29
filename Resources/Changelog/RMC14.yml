@@ -1,16 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: The Queen and base Hivelords can now build reflective resin walls, these
-      walls have a high chance to reflect projectiles. Every individual can have a
-      maximum of 5 built at the same time.
-    type: Add
-  - message: The Designer Hivelord's Resin Surge ability now creates weak reflective
-      walls, these are less resilient versions of the normal reflective walls.
-    type: Fix
-  id: 3105
-  time: '2026-04-13T20:53:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9389
 - author: PursuitinAshes
   changes:
   - message: '[PvE] CORSAT''s Generators will no longer flood the tactical map with
@@ -4525,5 +4513,13 @@
   id: 3604
   time: '2026-08-26T07:53:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9623
+- author: Vixting
+  changes:
+  - message: Fixed reagent goggles haveing medical skill instead of research skill
+      check
+    type: Fix
+  id: 3605
+  time: '2026-08-29T05:34:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10792
 Name: RMC14
 Order: -1
