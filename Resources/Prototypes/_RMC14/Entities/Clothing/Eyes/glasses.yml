@@ -326,10 +326,10 @@
   - type: Appearance
   - type: ItemToggleRequiresSkill
     skills:
-      RMCSkillMedical: 1
+      RMCSkillResearch: 1
   - type: ItemToggleDeactivateUnskilled
     skills:
-      RMCSkillMedical: 1
+      RMCSkillResearch: 1
     popup: rmc-skills-hud-toggle
 
 - type: entity

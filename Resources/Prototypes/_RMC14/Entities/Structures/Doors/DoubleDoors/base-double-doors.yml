@@ -20,7 +20,7 @@
         mask:
         - FullTileMask
         layer:
-        - FullTileLayer
+        - AirlockLayer
 
 - type: entity
   parent: RMCDoubleDoorBase

@@ -258,6 +258,7 @@
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleCrewFireteamLeader
   name: essential fireteam leader utilities
+  categories: [ HideSpawnMenu ]
   description: Contains a laser designator, and two packs of signal flares.
   components:
   - type: Sprite

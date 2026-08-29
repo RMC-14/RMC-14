@@ -1549,3 +1549,6 @@ RMCAttachmentL88Grip: RMCAttachmentE290Grip
 RMCAttachmentL89Scope: RMCAttachmentE290Scope
 RMCJumpsuitMarineParaL88: RMCJumpsuitMarineParaE290
 RMCParaWebbingL88: RMCParaWebbingE290
+
+# 2026-08-26
+CMAttachmentXMVESG1FlamerNozzle: RMCAttachmentXMVESG1FlamerNozzle

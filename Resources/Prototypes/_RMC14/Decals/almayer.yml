@@ -170,3 +170,110 @@
   sprite:
     sprite: _RMC14/Decals/almayer.rsi
     state: weya_3
+
+# Landing Pad Number 1
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerDropshipOne1
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: dropshipone1
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerDropshipOne2
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: dropshipone2
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerDropshipOne3
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: dropshipone3
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerDropshipOne4
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: dropshipone4
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerDropshipOne5
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: dropshipone5
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerDropshipOne6
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: dropshipone6
+
+# Landing Pad Number 2
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerDropshipTwo1
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: dropshiptwo1
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerDropshipTwo2
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: dropshiptwo2
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerDropshipTwo3
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: dropshiptwo3
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerDropshipTwo4
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: dropshiptwo4
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerDropshipTwo5
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: dropshiptwo5
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerDropshipTwo6
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: dropshiptwo6
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerDropshipTwo7
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: dropshiptwo7
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerDropshipTwo8
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: dropshiptwo8
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerDropshipTwo9
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: dropshiptwo9
