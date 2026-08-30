@@ -864,7 +864,7 @@
   description: A heavy-duty pack, used for telecommunications between central command. Commonly carried by RTOs. This one has had its' antenna damaged.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto/jungle-desert-classic.rsi
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto/broken.rsi
     layers:
     - state: icon
       map: [ "base" ]
