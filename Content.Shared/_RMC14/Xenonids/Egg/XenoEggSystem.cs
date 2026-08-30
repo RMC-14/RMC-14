@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines;
@@ -503,6 +503,8 @@ public sealed class XenoEggSystem : EntitySystem
             {
                 if (user != null)
                     _popup.PopupClient(Loc.GetString("cm-xeno-egg-clear"), egg, user.Value);
+
+                _audio.PlayPredicted(egg.Comp.ClearSound, Transform(egg).Coordinates, user);
 
                 if (_net.IsClient)
                     return true;
