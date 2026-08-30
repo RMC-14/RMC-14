@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Medals and uniform accessories from loadouts now automatically equip
-      when you spawn in to your jumpsuit or jacket. Notably, this fixes roles that
-      spawn with weapons in their hands not spawning if you are full of uniform accessory
-      loadouts/medals.
-    type: Fix
-  id: 3108
-  time: '2026-04-13T20:54:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9419
 - author: Dygon
   changes:
   - message: Reduced gun projectile speed by 3.6%.
@@ -4520,5 +4510,13 @@
   id: 3607
   time: '2026-08-30T18:30:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10797
+- author: kleinerstation13
+  changes:
+  - message: Fixed certain areas of the map being accessible where they shouldn't
+      be on Sorokyne
+    type: Fix
+  id: 3608
+  time: '2026-08-30T21:09:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10791
 Name: RMC14
 Order: -1
