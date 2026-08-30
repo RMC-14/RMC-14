@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: You can now find your patreon figurine inside your backpack when you
-      wake up.
-    type: Tweak
-  id: 3107
-  time: '2026-04-13T20:55:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9624
 - author: Dutch-VanDerLinde
   changes:
   - message: Medals and uniform accessories from loadouts now automatically equip
@@ -4521,5 +4513,12 @@
   id: 3606
   time: '2026-08-30T16:22:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10352
+- author: IceNoobXD
+  changes:
+  - message: Added poddoors which blend into the almayers walls!
+    type: Add
+  id: 3607
+  time: '2026-08-30T18:30:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10797
 Name: RMC14
 Order: -1
