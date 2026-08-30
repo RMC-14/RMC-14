@@ -13,6 +13,7 @@
   parent: RMCBaseBush
   id: RMCPropLawnFlamingoSnow
   name: lawn flamingo
+  suffix: Snow
   description: For ornamenting your suburban lawn... or your ice colony.
   components:
   - type: Sprite
