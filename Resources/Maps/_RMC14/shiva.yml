@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 08/28/2026 20:56:10
+  time: 08/30/2026 16:57:30
   entityCount: 18738
 maps:
 - 1
@@ -49150,27 +49150,23 @@ entities:
     - type: Transform
       pos: 183.5,76.5
       parent: 1
-- proto: CMSheetPlasteel1
+- proto: CMSheetPlasteel30
   entities:
   - uid: 2126
     components:
     - type: Transform
-      pos: 9.5,99.5
+      pos: 25.5,90.5
       parent: 1
   - uid: 2127
     components:
     - type: Transform
       pos: 15.5,99.5
       parent: 1
-- proto: CMSheetPlasteel10
-  entities:
   - uid: 2128
     components:
     - type: Transform
-      pos: 25.5,90.5
+      pos: 9.5,99.5
       parent: 1
-- proto: CMSheetPlasteel30
-  entities:
   - uid: 2129
     components:
     - type: Transform
@@ -54822,7 +54818,7 @@ entities:
       pos: 198.5,44.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -5489.9854
+      secondsUntilStateChange: -5657.043
       state: Opening
   - uid: 3195
     components:
@@ -55136,7 +55132,7 @@ entities:
     - type: Occluder
       enabled: False
     - type: Door
-      secondsUntilStateChange: -14990.092
+      secondsUntilStateChange: -15157.149
       state: Denying
   - uid: 3256
     components:
@@ -111957,31 +111953,6 @@ entities:
     - type: Transform
       pos: 25.5,90.5
       parent: 1
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.4,-0.4
-            - 0.4,-0.4
-            - 0.4,0.29
-            - -0.4,0.29
-          mask:
-          - Impassable
-          - HighImpassable
-          - LowImpassable
-          layer:
-          - Opaque
-          density: 50
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: EntityStorage
-      open: True
-      removedMasks: 20
-    - type: PlaceableSurface
-      isPlaceable: True
   - uid: 13885
     components:
     - type: Transform
