@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 07/03/2026 07:22:09
+  time: 08/27/2026 21:35:36
   entityCount: 37500
 maps:
 - 1
@@ -3363,91 +3363,91 @@ entities:
         1,25: RMCAreaStrataInteriorOutOfBounds
         1,26: RMCAreaStrataInteriorOutOfBounds
         2,26: RMCAreaStrataInteriorOutOfBounds
-        5,0: RMCAreaStrataExteriorMarshWater
-        12,1: RMCAreaStrataExteriorMarshWater
-        12,2: RMCAreaStrataExteriorMarshWater
-        12,3: RMCAreaStrataExteriorMarshWater
-        12,4: RMCAreaStrataExteriorMarshWater
-        6,0: RMCAreaStrataExteriorMarshWater
-        11,1: RMCAreaStrataExteriorMarshWater
-        11,2: RMCAreaStrataExteriorMarshWater
-        11,3: RMCAreaStrataExteriorMarshWater
-        11,4: RMCAreaStrataExteriorMarshWater
-        7,0: RMCAreaStrataExteriorMarshWater
-        10,1: RMCAreaStrataExteriorMarshWater
-        10,2: RMCAreaStrataExteriorMarshWater
-        10,3: RMCAreaStrataExteriorMarshWater
-        10,4: RMCAreaStrataExteriorMarshWater
-        8,0: RMCAreaStrataExteriorMarshWater
-        9,1: RMCAreaStrataExteriorMarshWater
-        9,2: RMCAreaStrataExteriorMarshWater
-        9,3: RMCAreaStrataExteriorMarshWater
-        9,4: RMCAreaStrataExteriorMarshWater
-        9,0: RMCAreaStrataExteriorMarshWater
-        8,1: RMCAreaStrataExteriorMarshWater
-        8,2: RMCAreaStrataExteriorMarshWater
-        8,3: RMCAreaStrataExteriorMarshWater
-        8,4: RMCAreaStrataExteriorMarshWater
-        10,0: RMCAreaStrataExteriorMarshWater
-        7,1: RMCAreaStrataExteriorMarshWater
-        7,2: RMCAreaStrataExteriorMarshWater
-        7,3: RMCAreaStrataExteriorMarshWater
-        7,4: RMCAreaStrataExteriorMarshWater
-        11,0: RMCAreaStrataExteriorMarshWater
-        6,1: RMCAreaStrataExteriorMarshWater
-        6,2: RMCAreaStrataExteriorMarshWater
-        6,3: RMCAreaStrataExteriorMarshWater
-        6,4: RMCAreaStrataExteriorMarshWater
-        12,0: RMCAreaStrataExteriorMarshWater
-        5,1: RMCAreaStrataExteriorMarshWater
-        5,2: RMCAreaStrataExteriorMarshWater
-        5,3: RMCAreaStrataExteriorMarshWater
-        5,4: RMCAreaStrataExteriorMarshWater
-        6,-1: RMCAreaStrataExteriorMarshWater
-        7,-1: RMCAreaStrataExteriorMarshWater
-        8,-1: RMCAreaStrataExteriorMarshWater
-        9,-1: RMCAreaStrataExteriorMarshWater
-        10,-1: RMCAreaStrataExteriorMarshWater
-        11,-1: RMCAreaStrataExteriorMarshWater
-        12,-1: RMCAreaStrataExteriorMarshWater
-        5,-1: RMCAreaStrataExteriorMarshWater
-        6,5: RMCAreaStrataExteriorMarshWater
-        6,6: RMCAreaStrataExteriorMarshWater
-        7,5: RMCAreaStrataExteriorMarshWater
-        7,6: RMCAreaStrataExteriorMarshWater
-        8,5: RMCAreaStrataExteriorMarshWater
-        8,6: RMCAreaStrataExteriorMarshWater
-        9,5: RMCAreaStrataExteriorMarshWater
-        9,6: RMCAreaStrataExteriorMarshWater
-        10,5: RMCAreaStrataExteriorMarshWater
-        10,6: RMCAreaStrataExteriorMarshWater
-        11,5: RMCAreaStrataExteriorMarshWater
-        11,6: RMCAreaStrataExteriorMarshWater
-        12,5: RMCAreaStrataExteriorMarshWater
-        12,6: RMCAreaStrataExteriorMarshWater
-        11,7: RMCAreaStrataExteriorMarshWater
-        10,7: RMCAreaStrataExteriorMarshWater
-        9,7: RMCAreaStrataExteriorMarshWater
-        8,7: RMCAreaStrataExteriorMarshWater
-        7,7: RMCAreaStrataExteriorMarshWater
-        6,7: RMCAreaStrataExteriorMarshWater
-        7,8: RMCAreaStrataExteriorMarshWater
-        8,8: RMCAreaStrataExteriorMarshWater
-        9,8: RMCAreaStrataExteriorMarshWater
-        10,8: RMCAreaStrataExteriorMarshWater
-        11,8: RMCAreaStrataExteriorMarshWater
-        11,9: RMCAreaStrataExteriorMarshWater
-        11,10: RMCAreaStrataExteriorMarshWater
-        11,11: RMCAreaStrataExteriorMarshWater
-        10,9: RMCAreaStrataExteriorMarshWater
-        10,10: RMCAreaStrataExteriorMarshWater
-        10,11: RMCAreaStrataExteriorMarshWater
-        9,9: RMCAreaStrataExteriorMarshWater
-        9,10: RMCAreaStrataExteriorMarshWater
-        9,11: RMCAreaStrataExteriorMarshWater
-        8,9: RMCAreaStrataExteriorMarshWater
-        8,10: RMCAreaStrataExteriorMarshWater
-        8,11: RMCAreaStrataExteriorMarshWater
+        5,0: RMCAreaStrataInteriorOutOfBounds
+        12,1: RMCAreaStrataInteriorOutOfBounds
+        12,2: RMCAreaStrataInteriorOutOfBounds
+        12,3: RMCAreaStrataInteriorOutOfBounds
+        12,4: RMCAreaStrataInteriorOutOfBounds
+        6,0: RMCAreaStrataInteriorOutOfBounds
+        11,1: RMCAreaStrataInteriorOutOfBounds
+        11,2: RMCAreaStrataInteriorOutOfBounds
+        11,3: RMCAreaStrataInteriorOutOfBounds
+        11,4: RMCAreaStrataInteriorOutOfBounds
+        7,0: RMCAreaStrataInteriorOutOfBounds
+        10,1: RMCAreaStrataInteriorOutOfBounds
+        10,2: RMCAreaStrataInteriorOutOfBounds
+        10,3: RMCAreaStrataInteriorOutOfBounds
+        10,4: RMCAreaStrataInteriorOutOfBounds
+        8,0: RMCAreaStrataInteriorOutOfBounds
+        9,1: RMCAreaStrataInteriorOutOfBounds
+        9,2: RMCAreaStrataInteriorOutOfBounds
+        9,3: RMCAreaStrataInteriorOutOfBounds
+        9,4: RMCAreaStrataInteriorOutOfBounds
+        9,0: RMCAreaStrataInteriorOutOfBounds
+        8,1: RMCAreaStrataInteriorOutOfBounds
+        8,2: RMCAreaStrataInteriorOutOfBounds
+        8,3: RMCAreaStrataInteriorOutOfBounds
+        8,4: RMCAreaStrataInteriorOutOfBounds
+        10,0: RMCAreaStrataInteriorOutOfBounds
+        7,1: RMCAreaStrataInteriorOutOfBounds
+        7,2: RMCAreaStrataInteriorOutOfBounds
+        7,3: RMCAreaStrataInteriorOutOfBounds
+        7,4: RMCAreaStrataInteriorOutOfBounds
+        11,0: RMCAreaStrataInteriorOutOfBounds
+        6,1: RMCAreaStrataInteriorOutOfBounds
+        6,2: RMCAreaStrataInteriorOutOfBounds
+        6,3: RMCAreaStrataInteriorOutOfBounds
+        6,4: RMCAreaStrataInteriorOutOfBounds
+        12,0: RMCAreaStrataInteriorOutOfBounds
+        5,1: RMCAreaStrataInteriorOutOfBounds
+        5,2: RMCAreaStrataInteriorOutOfBounds
+        5,3: RMCAreaStrataInteriorOutOfBounds
+        5,4: RMCAreaStrataInteriorOutOfBounds
+        6,-1: RMCAreaStrataInteriorOutOfBounds
+        7,-1: RMCAreaStrataInteriorOutOfBounds
+        8,-1: RMCAreaStrataInteriorOutOfBounds
+        9,-1: RMCAreaStrataInteriorOutOfBounds
+        10,-1: RMCAreaStrataInteriorOutOfBounds
+        11,-1: RMCAreaStrataInteriorOutOfBounds
+        12,-1: RMCAreaStrataInteriorOutOfBounds
+        5,-1: RMCAreaStrataInteriorOutOfBounds
+        6,5: RMCAreaStrataInteriorOutOfBounds
+        6,6: RMCAreaStrataInteriorOutOfBounds
+        7,5: RMCAreaStrataInteriorOutOfBounds
+        7,6: RMCAreaStrataInteriorOutOfBounds
+        8,5: RMCAreaStrataInteriorOutOfBounds
+        8,6: RMCAreaStrataInteriorOutOfBounds
+        9,5: RMCAreaStrataInteriorOutOfBounds
+        9,6: RMCAreaStrataInteriorOutOfBounds
+        10,5: RMCAreaStrataInteriorOutOfBounds
+        10,6: RMCAreaStrataInteriorOutOfBounds
+        11,5: RMCAreaStrataInteriorOutOfBounds
+        11,6: RMCAreaStrataInteriorOutOfBounds
+        12,5: RMCAreaStrataInteriorOutOfBounds
+        12,6: RMCAreaStrataInteriorOutOfBounds
+        11,7: RMCAreaStrataInteriorOutOfBounds
+        10,7: RMCAreaStrataInteriorOutOfBounds
+        9,7: RMCAreaStrataInteriorOutOfBounds
+        8,7: RMCAreaStrataInteriorOutOfBounds
+        7,7: RMCAreaStrataInteriorOutOfBounds
+        6,7: RMCAreaStrataInteriorOutOfBounds
+        7,8: RMCAreaStrataInteriorOutOfBounds
+        8,8: RMCAreaStrataInteriorOutOfBounds
+        9,8: RMCAreaStrataInteriorOutOfBounds
+        10,8: RMCAreaStrataInteriorOutOfBounds
+        11,8: RMCAreaStrataInteriorOutOfBounds
+        11,9: RMCAreaStrataInteriorOutOfBounds
+        11,10: RMCAreaStrataInteriorOutOfBounds
+        11,11: RMCAreaStrataInteriorOutOfBounds
+        10,9: RMCAreaStrataInteriorOutOfBounds
+        10,10: RMCAreaStrataInteriorOutOfBounds
+        10,11: RMCAreaStrataInteriorOutOfBounds
+        9,9: RMCAreaStrataInteriorOutOfBounds
+        9,10: RMCAreaStrataInteriorOutOfBounds
+        9,11: RMCAreaStrataInteriorOutOfBounds
+        8,9: RMCAreaStrataInteriorOutOfBounds
+        8,10: RMCAreaStrataInteriorOutOfBounds
+        8,11: RMCAreaStrataInteriorOutOfBounds
         1,27: RMCAreaStrataExteriorMarshWater
         1,28: RMCAreaStrataExteriorMarshWater
         1,29: RMCAreaStrataExteriorMarshWater
@@ -3485,18 +3485,18 @@ entities:
         6,30: RMCAreaStrataExteriorMarshWater
         6,31: RMCAreaStrataExteriorMarshWater
         6,29: RMCAreaStrataExteriorMarshWater
-        12,12: RMCAreaStrataExteriorMarshWater
-        12,13: RMCAreaStrataExteriorMarshWater
-        12,14: RMCAreaStrataExteriorMarshWater
-        11,12: RMCAreaStrataExteriorMarshWater
-        11,13: RMCAreaStrataExteriorMarshWater
-        11,14: RMCAreaStrataExteriorMarshWater
-        10,12: RMCAreaStrataExteriorMarshWater
-        10,13: RMCAreaStrataExteriorMarshWater
-        10,14: RMCAreaStrataExteriorMarshWater
-        9,12: RMCAreaStrataExteriorMarshWater
-        9,13: RMCAreaStrataExteriorMarshWater
-        9,14: RMCAreaStrataExteriorMarshWater
+        12,12: RMCAreaStrataInteriorOutOfBounds
+        12,13: RMCAreaStrataInteriorOutOfBounds
+        12,14: RMCAreaStrataInteriorOutOfBounds
+        11,12: RMCAreaStrataInteriorOutOfBounds
+        11,13: RMCAreaStrataInteriorOutOfBounds
+        11,14: RMCAreaStrataInteriorOutOfBounds
+        10,12: RMCAreaStrataInteriorOutOfBounds
+        10,13: RMCAreaStrataInteriorOutOfBounds
+        10,14: RMCAreaStrataInteriorOutOfBounds
+        9,12: RMCAreaStrataInteriorOutOfBounds
+        9,13: RMCAreaStrataInteriorOutOfBounds
+        9,14: RMCAreaStrataInteriorOutOfBounds
         9,16: RMCAreaStrataExteriorMarshWater
         9,15: RMCAreaStrataExteriorMarshWater
         10,16: RMCAreaStrataExteriorMarshWater
@@ -44791,54 +44791,54 @@ entities:
         235,55: RMCAreaStrataExteriorDeepJungleEast
         235,56: RMCAreaStrataExteriorDeepJungleEast
         235,57: RMCAreaStrataExteriorDeepJungleEast
-        254,27: RMCAreaStrataExteriorDeepJungleSouth
-        254,26: RMCAreaStrataExteriorDeepJungleSouth
-        253,27: RMCAreaStrataExteriorDeepJungleSouth
-        253,26: RMCAreaStrataExteriorDeepJungleSouth
-        252,27: RMCAreaStrataExteriorDeepJungleSouth
-        252,26: RMCAreaStrataExteriorDeepJungleSouth
-        251,26: RMCAreaStrataExteriorDeepJungleSouth
-        251,25: RMCAreaStrataExteriorDeepJungleSouth
-        250,26: RMCAreaStrataExteriorDeepJungleSouth
-        250,25: RMCAreaStrataExteriorDeepJungleSouth
-        249,25: RMCAreaStrataExteriorDeepJungleSouth
-        249,24: RMCAreaStrataExteriorDeepJungleSouth
-        248,25: RMCAreaStrataExteriorDeepJungleSouth
-        248,24: RMCAreaStrataExteriorDeepJungleSouth
-        248,23: RMCAreaStrataExteriorDeepJungleSouth
-        247,24: RMCAreaStrataExteriorDeepJungleSouth
-        247,22: RMCAreaStrataExteriorDeepJungleSouth
-        247,23: RMCAreaStrataExteriorDeepJungleSouth
-        246,23: RMCAreaStrataExteriorDeepJungleSouth
-        246,22: RMCAreaStrataExteriorDeepJungleSouth
-        245,23: RMCAreaStrataExteriorDeepJungleSouth
-        245,22: RMCAreaStrataExteriorDeepJungleSouth
-        244,23: RMCAreaStrataExteriorDeepJungleSouth
-        244,22: RMCAreaStrataExteriorDeepJungleSouth
-        243,21: RMCAreaStrataExteriorDeepJungleSouth
-        243,22: RMCAreaStrataExteriorDeepJungleSouth
-        242,21: RMCAreaStrataExteriorDeepJungleSouth
-        242,22: RMCAreaStrataExteriorDeepJungleSouth
-        241,21: RMCAreaStrataExteriorDeepJungleSouth
-        241,22: RMCAreaStrataExteriorDeepJungleSouth
-        240,21: RMCAreaStrataExteriorDeepJungleSouth
-        240,22: RMCAreaStrataExteriorDeepJungleSouth
-        239,21: RMCAreaStrataExteriorDeepJungleSouth
-        239,22: RMCAreaStrataExteriorDeepJungleSouth
-        244,21: RMCAreaStrataExteriorDeepJungleSouth
-        238,22: RMCAreaStrataExteriorDeepJungleSouth
-        238,23: RMCAreaStrataExteriorDeepJungleSouth
-        237,22: RMCAreaStrataExteriorDeepJungleSouth
-        237,23: RMCAreaStrataExteriorDeepJungleSouth
-        236,22: RMCAreaStrataExteriorDeepJungleSouth
-        236,23: RMCAreaStrataExteriorDeepJungleSouth
-        235,23: RMCAreaStrataExteriorDeepJungleSouth
-        234,23: RMCAreaStrataExteriorDeepJungleSouth
-        234,24: RMCAreaStrataExteriorDeepJungleSouth
-        233,23: RMCAreaStrataExteriorDeepJungleSouth
-        233,24: RMCAreaStrataExteriorDeepJungleSouth
-        214,9: RMCAreaStrataExteriorDeepJungleSouth
-        214,8: RMCAreaStrataExteriorDeepJungleSouth
+        254,27: RMCAreaStrataInteriorOutOfBounds
+        254,26: RMCAreaStrataInteriorOutOfBounds
+        253,27: RMCAreaStrataInteriorOutOfBounds
+        253,26: RMCAreaStrataInteriorOutOfBounds
+        252,27: RMCAreaStrataInteriorOutOfBounds
+        252,26: RMCAreaStrataInteriorOutOfBounds
+        251,26: RMCAreaStrataInteriorOutOfBounds
+        251,25: RMCAreaStrataInteriorOutOfBounds
+        250,26: RMCAreaStrataInteriorOutOfBounds
+        250,25: RMCAreaStrataInteriorOutOfBounds
+        249,25: RMCAreaStrataInteriorOutOfBounds
+        249,24: RMCAreaStrataInteriorOutOfBounds
+        248,25: RMCAreaStrataInteriorOutOfBounds
+        248,24: RMCAreaStrataInteriorOutOfBounds
+        248,23: RMCAreaStrataInteriorOutOfBounds
+        247,24: RMCAreaStrataInteriorOutOfBounds
+        247,22: RMCAreaStrataInteriorOutOfBounds
+        247,23: RMCAreaStrataInteriorOutOfBounds
+        246,23: RMCAreaStrataInteriorOutOfBounds
+        246,22: RMCAreaStrataInteriorOutOfBounds
+        245,23: RMCAreaStrataInteriorOutOfBounds
+        245,22: RMCAreaStrataInteriorOutOfBounds
+        244,23: RMCAreaStrataInteriorOutOfBounds
+        244,22: RMCAreaStrataInteriorOutOfBounds
+        243,21: RMCAreaStrataInteriorOutOfBounds
+        243,22: RMCAreaStrataInteriorOutOfBounds
+        242,21: RMCAreaStrataInteriorOutOfBounds
+        242,22: RMCAreaStrataInteriorOutOfBounds
+        241,21: RMCAreaStrataInteriorOutOfBounds
+        241,22: RMCAreaStrataInteriorOutOfBounds
+        240,21: RMCAreaStrataInteriorOutOfBounds
+        240,22: RMCAreaStrataInteriorOutOfBounds
+        239,21: RMCAreaStrataInteriorOutOfBounds
+        239,22: RMCAreaStrataInteriorOutOfBounds
+        244,21: RMCAreaStrataInteriorOutOfBounds
+        238,22: RMCAreaStrataInteriorOutOfBounds
+        238,23: RMCAreaStrataInteriorOutOfBounds
+        237,22: RMCAreaStrataInteriorOutOfBounds
+        237,23: RMCAreaStrataInteriorOutOfBounds
+        236,22: RMCAreaStrataInteriorOutOfBounds
+        236,23: RMCAreaStrataInteriorOutOfBounds
+        235,23: RMCAreaStrataInteriorOutOfBounds
+        234,23: RMCAreaStrataInteriorOutOfBounds
+        234,24: RMCAreaStrataInteriorOutOfBounds
+        233,23: RMCAreaStrataInteriorOutOfBounds
+        233,24: RMCAreaStrataInteriorOutOfBounds
+        214,9: RMCAreaStrataInteriorOutOfBounds
+        214,8: RMCAreaStrataInteriorOutOfBounds
         204,19: RMCAreaStrataExteriorDeepJungleSouth
         203,20: RMCAreaStrataExteriorDeepJungleSouth
         202,21: RMCAreaStrataExteriorDeepJungleSouth
@@ -44937,57 +44937,57 @@ entities:
         213,25: RMCAreaStrataExteriorDeepJungleSouth
         213,26: RMCAreaStrataExteriorDeepJungleSouth
         213,27: RMCAreaStrataExteriorDeepJungleSouth
-        219,20: RMCAreaStrataExteriorDeepJungleSouth
-        219,21: RMCAreaStrataExteriorDeepJungleSouth
-        220,20: RMCAreaStrataExteriorDeepJungleSouth
-        220,21: RMCAreaStrataExteriorDeepJungleSouth
-        221,20: RMCAreaStrataExteriorDeepJungleSouth
-        221,21: RMCAreaStrataExteriorDeepJungleSouth
-        220,19: RMCAreaStrataExteriorDeepJungleSouth
-        220,18: RMCAreaStrataExteriorDeepJungleSouth
-        220,17: RMCAreaStrataExteriorDeepJungleSouth
-        220,16: RMCAreaStrataExteriorDeepJungleSouth
-        220,15: RMCAreaStrataExteriorDeepJungleSouth
-        221,19: RMCAreaStrataExteriorDeepJungleSouth
-        221,18: RMCAreaStrataExteriorDeepJungleSouth
-        221,17: RMCAreaStrataExteriorDeepJungleSouth
-        221,16: RMCAreaStrataExteriorDeepJungleSouth
-        221,15: RMCAreaStrataExteriorDeepJungleSouth
-        222,19: RMCAreaStrataExteriorDeepJungleSouth
-        222,18: RMCAreaStrataExteriorDeepJungleSouth
-        222,17: RMCAreaStrataExteriorDeepJungleSouth
-        222,16: RMCAreaStrataExteriorDeepJungleSouth
-        222,15: RMCAreaStrataExteriorDeepJungleSouth
-        221,14: RMCAreaStrataExteriorDeepJungleSouth
-        221,13: RMCAreaStrataExteriorDeepJungleSouth
-        221,12: RMCAreaStrataExteriorDeepJungleSouth
-        220,14: RMCAreaStrataExteriorDeepJungleSouth
-        220,13: RMCAreaStrataExteriorDeepJungleSouth
-        220,12: RMCAreaStrataExteriorDeepJungleSouth
-        219,14: RMCAreaStrataExteriorDeepJungleSouth
-        219,13: RMCAreaStrataExteriorDeepJungleSouth
-        219,12: RMCAreaStrataExteriorDeepJungleSouth
-        220,11: RMCAreaStrataExteriorDeepJungleSouth
-        219,11: RMCAreaStrataExteriorDeepJungleSouth
-        218,11: RMCAreaStrataExteriorDeepJungleSouth
-        218,12: RMCAreaStrataExteriorDeepJungleSouth
-        218,13: RMCAreaStrataExteriorDeepJungleSouth
-        217,12: RMCAreaStrataExteriorDeepJungleSouth
-        217,11: RMCAreaStrataExteriorDeepJungleSouth
-        217,10: RMCAreaStrataExteriorDeepJungleSouth
-        218,10: RMCAreaStrataExteriorDeepJungleSouth
-        219,10: RMCAreaStrataExteriorDeepJungleSouth
-        218,9: RMCAreaStrataExteriorDeepJungleSouth
-        217,9: RMCAreaStrataExteriorDeepJungleSouth
-        215,10: RMCAreaStrataExteriorDeepJungleSouth
-        215,9: RMCAreaStrataExteriorDeepJungleSouth
-        215,8: RMCAreaStrataExteriorDeepJungleSouth
-        216,10: RMCAreaStrataExteriorDeepJungleSouth
-        216,9: RMCAreaStrataExteriorDeepJungleSouth
-        216,8: RMCAreaStrataExteriorDeepJungleSouth
-        220,22: RMCAreaStrataExteriorDeepJungleSouth
+        219,20: RMCAreaStrataInteriorOutOfBounds
+        219,21: RMCAreaStrataInteriorOutOfBounds
+        220,20: RMCAreaStrataInteriorOutOfBounds
+        220,21: RMCAreaStrataInteriorOutOfBounds
+        221,20: RMCAreaStrataInteriorOutOfBounds
+        221,21: RMCAreaStrataInteriorOutOfBounds
+        220,19: RMCAreaStrataInteriorOutOfBounds
+        220,18: RMCAreaStrataInteriorOutOfBounds
+        220,17: RMCAreaStrataInteriorOutOfBounds
+        220,16: RMCAreaStrataInteriorOutOfBounds
+        220,15: RMCAreaStrataInteriorOutOfBounds
+        221,19: RMCAreaStrataInteriorOutOfBounds
+        221,18: RMCAreaStrataInteriorOutOfBounds
+        221,17: RMCAreaStrataInteriorOutOfBounds
+        221,16: RMCAreaStrataInteriorOutOfBounds
+        221,15: RMCAreaStrataInteriorOutOfBounds
+        222,19: RMCAreaStrataInteriorOutOfBounds
+        222,18: RMCAreaStrataInteriorOutOfBounds
+        222,17: RMCAreaStrataInteriorOutOfBounds
+        222,16: RMCAreaStrataInteriorOutOfBounds
+        222,15: RMCAreaStrataInteriorOutOfBounds
+        221,14: RMCAreaStrataInteriorOutOfBounds
+        221,13: RMCAreaStrataInteriorOutOfBounds
+        221,12: RMCAreaStrataInteriorOutOfBounds
+        220,14: RMCAreaStrataInteriorOutOfBounds
+        220,13: RMCAreaStrataInteriorOutOfBounds
+        220,12: RMCAreaStrataInteriorOutOfBounds
+        219,14: RMCAreaStrataInteriorOutOfBounds
+        219,13: RMCAreaStrataInteriorOutOfBounds
+        219,12: RMCAreaStrataInteriorOutOfBounds
+        220,11: RMCAreaStrataInteriorOutOfBounds
+        219,11: RMCAreaStrataInteriorOutOfBounds
+        218,11: RMCAreaStrataInteriorOutOfBounds
+        218,12: RMCAreaStrataInteriorOutOfBounds
+        218,13: RMCAreaStrataInteriorOutOfBounds
+        217,12: RMCAreaStrataInteriorOutOfBounds
+        217,11: RMCAreaStrataInteriorOutOfBounds
+        217,10: RMCAreaStrataInteriorOutOfBounds
+        218,10: RMCAreaStrataInteriorOutOfBounds
+        219,10: RMCAreaStrataInteriorOutOfBounds
+        218,9: RMCAreaStrataInteriorOutOfBounds
+        217,9: RMCAreaStrataInteriorOutOfBounds
+        215,10: RMCAreaStrataInteriorOutOfBounds
+        215,9: RMCAreaStrataInteriorOutOfBounds
+        215,8: RMCAreaStrataInteriorOutOfBounds
+        216,10: RMCAreaStrataInteriorOutOfBounds
+        216,9: RMCAreaStrataInteriorOutOfBounds
+        216,8: RMCAreaStrataInteriorOutOfBounds
+        220,22: RMCAreaStrataInteriorOutOfBounds
         220,23: RMCAreaStrataExteriorDeepJungleSouth
-        219,22: RMCAreaStrataExteriorDeepJungleSouth
+        219,22: RMCAreaStrataInteriorOutOfBounds
         219,23: RMCAreaStrataExteriorDeepJungleSouth
         218,22: RMCAreaStrataExteriorDeepJungleSouth
         218,23: RMCAreaStrataExteriorDeepJungleSouth
@@ -45412,48 +45412,48 @@ entities:
         242,32: RMCAreaStrataExteriorDeepJungleSouth
         242,33: RMCAreaStrataExteriorDeepJungleSouth
         242,34: RMCAreaStrataExteriorDeepJungleSouth
-        213,8: RMCAreaStrataExteriorDeepJungleTearlake
-        213,7: RMCAreaStrataExteriorDeepJungleTearlake
-        212,8: RMCAreaStrataExteriorDeepJungleTearlake
-        212,7: RMCAreaStrataExteriorDeepJungleTearlake
-        211,8: RMCAreaStrataExteriorDeepJungleTearlake
-        211,7: RMCAreaStrataExteriorDeepJungleTearlake
-        211,6: RMCAreaStrataExteriorDeepJungleTearlake
-        210,7: RMCAreaStrataExteriorDeepJungleTearlake
-        209,6: RMCAreaStrataExteriorDeepJungleTearlake
-        209,7: RMCAreaStrataExteriorDeepJungleTearlake
-        210,6: RMCAreaStrataExteriorDeepJungleTearlake
-        208,5: RMCAreaStrataExteriorDeepJungleTearlake
-        208,6: RMCAreaStrataExteriorDeepJungleTearlake
-        208,7: RMCAreaStrataExteriorDeepJungleTearlake
-        207,5: RMCAreaStrataExteriorDeepJungleTearlake
-        207,6: RMCAreaStrataExteriorDeepJungleTearlake
-        207,7: RMCAreaStrataExteriorDeepJungleTearlake
-        206,5: RMCAreaStrataExteriorDeepJungleTearlake
-        206,6: RMCAreaStrataExteriorDeepJungleTearlake
-        206,7: RMCAreaStrataExteriorDeepJungleTearlake
-        205,5: RMCAreaStrataExteriorDeepJungleTearlake
-        205,6: RMCAreaStrataExteriorDeepJungleTearlake
-        204,5: RMCAreaStrataExteriorDeepJungleTearlake
-        204,6: RMCAreaStrataExteriorDeepJungleTearlake
-        205,7: RMCAreaStrataExteriorDeepJungleTearlake
-        204,7: RMCAreaStrataExteriorDeepJungleTearlake
-        203,5: RMCAreaStrataExteriorDeepJungleTearlake
-        203,6: RMCAreaStrataExteriorDeepJungleTearlake
-        203,7: RMCAreaStrataExteriorDeepJungleTearlake
-        202,6: RMCAreaStrataExteriorDeepJungleTearlake
-        202,7: RMCAreaStrataExteriorDeepJungleTearlake
-        202,8: RMCAreaStrataExteriorDeepJungleTearlake
-        201,8: RMCAreaStrataExteriorDeepJungleTearlake
-        201,9: RMCAreaStrataExteriorDeepJungleTearlake
-        200,7: RMCAreaStrataExteriorDeepJungleTearlake
-        200,8: RMCAreaStrataExteriorDeepJungleTearlake
-        200,9: RMCAreaStrataExteriorDeepJungleTearlake
-        201,7: RMCAreaStrataExteriorDeepJungleTearlake
-        199,8: RMCAreaStrataExteriorDeepJungleTearlake
-        199,9: RMCAreaStrataExteriorDeepJungleTearlake
+        213,8: RMCAreaStrataInteriorOutOfBounds
+        213,7: RMCAreaStrataInteriorOutOfBounds
+        212,8: RMCAreaStrataInteriorOutOfBounds
+        212,7: RMCAreaStrataInteriorOutOfBounds
+        211,8: RMCAreaStrataInteriorOutOfBounds
+        211,7: RMCAreaStrataInteriorOutOfBounds
+        211,6: RMCAreaStrataInteriorOutOfBounds
+        210,7: RMCAreaStrataInteriorOutOfBounds
+        209,6: RMCAreaStrataInteriorOutOfBounds
+        209,7: RMCAreaStrataInteriorOutOfBounds
+        210,6: RMCAreaStrataInteriorOutOfBounds
+        208,5: RMCAreaStrataInteriorOutOfBounds
+        208,6: RMCAreaStrataInteriorOutOfBounds
+        208,7: RMCAreaStrataInteriorOutOfBounds
+        207,5: RMCAreaStrataInteriorOutOfBounds
+        207,6: RMCAreaStrataInteriorOutOfBounds
+        207,7: RMCAreaStrataInteriorOutOfBounds
+        206,5: RMCAreaStrataInteriorOutOfBounds
+        206,6: RMCAreaStrataInteriorOutOfBounds
+        206,7: RMCAreaStrataInteriorOutOfBounds
+        205,5: RMCAreaStrataInteriorOutOfBounds
+        205,6: RMCAreaStrataInteriorOutOfBounds
+        204,5: RMCAreaStrataInteriorOutOfBounds
+        204,6: RMCAreaStrataInteriorOutOfBounds
+        205,7: RMCAreaStrataInteriorOutOfBounds
+        204,7: RMCAreaStrataInteriorOutOfBounds
+        203,5: RMCAreaStrataInteriorOutOfBounds
+        203,6: RMCAreaStrataInteriorOutOfBounds
+        203,7: RMCAreaStrataInteriorOutOfBounds
+        202,6: RMCAreaStrataInteriorOutOfBounds
+        202,7: RMCAreaStrataInteriorOutOfBounds
+        202,8: RMCAreaStrataInteriorOutOfBounds
+        201,8: RMCAreaStrataInteriorOutOfBounds
+        201,9: RMCAreaStrataInteriorOutOfBounds
+        200,7: RMCAreaStrataInteriorOutOfBounds
+        200,8: RMCAreaStrataInteriorOutOfBounds
+        200,9: RMCAreaStrataInteriorOutOfBounds
+        201,7: RMCAreaStrataInteriorOutOfBounds
+        199,8: RMCAreaStrataInteriorOutOfBounds
+        199,9: RMCAreaStrataInteriorOutOfBounds
         199,10: RMCAreaStrataExteriorDeepJungleTearlake
-        198,8: RMCAreaStrataExteriorDeepJungleTearlake
+        198,8: RMCAreaStrataInteriorOutOfBounds
         198,9: RMCAreaStrataExteriorDeepJungleTearlake
         198,10: RMCAreaStrataExteriorDeepJungleTearlake
         188,31: RMCAreaStrataExteriorDeepJungleTearlake
@@ -82185,7 +82185,7 @@ entities:
     - type: Transform
       pos: 155.5,126.5
       parent: 1
-- proto: RMCCoatPaP
+- proto: RMCCoatPCG
   entities:
   - uid: 6042
     components:
@@ -112282,7 +112282,7 @@ entities:
     - type: Transform
       pos: 106.5,82.5
       parent: 1
-- proto: RMCJumpsuitSPPPaP
+- proto: RMCJumpsuitSPPPCG
   entities:
   - uid: 11154
     components:
@@ -243569,7 +243569,7 @@ entities:
     - type: Transform
       pos: 133.5,103.5
       parent: 1
-- proto: RMCWeaponShotgunHG3712
+- proto: RMCWeaponShotgunM12
   entities:
   - uid: 36219
     components:
