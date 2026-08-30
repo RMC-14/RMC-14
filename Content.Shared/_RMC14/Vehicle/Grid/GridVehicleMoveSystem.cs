@@ -19,6 +19,7 @@ using Content.Shared._RMC14.Water;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Fortify;
 using Content.Shared._RMC14.Xenonids.Weeds;
+using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
@@ -49,6 +50,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
     [Dependency] private readonly VehicleSystem _rmcVehicles = default!;
@@ -175,6 +177,68 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         SubscribeLocalEvent<GridVehicleMoverComponent, ReAnchorEvent>(OnMoverReAnchor);
         SubscribeLocalEvent<GridVehicleMoverComponent, VehicleCanRunEvent>(OnMoverCanRun);
         SubscribeLocalEvent<GridVehicleMoverComponent, PreventCollideEvent>(OnMoverPreventCollide);
+        SubscribeLocalEvent<XenoComponent, XenoFortifyAttemptEvent>(OnXenoFortifyAttemptVehicleBounds);
+    }
+
+    private void OnXenoFortifyAttemptVehicleBounds(Entity<XenoComponent> xeno, ref XenoFortifyAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (!IsWithinVehicleBounds(xeno.Owner))
+            return;
+
+        _popup.PopupClient(Loc.GetString("cm-xeno-fortify-cant-vehicle"), xeno, xeno);
+        args.Cancelled = true;
+    }
+
+    private bool IsWithinVehicleBounds(EntityUid xeno)
+    {
+        var xform = Transform(xeno);
+        if (xform.MapUid == null)
+            return false;
+
+        if (!fixtureQ.TryComp(xeno, out var xenoFixtures))
+            return false;
+
+        var xenoTx = _physics.GetPhysicsTransform(xeno, xform);
+        if (!TryGetFixtureAabb(xenoFixtures, xenoTx, out var xenoAabb))
+            return false;
+
+        if (xform.GridUid is { } grid && gridQ.TryComp(grid, out var gridComp))
+        {
+            var tileIndices = _map.TileIndicesFor(grid, gridComp, xform.Coordinates);
+            var tileLocal = _map.GridTileToLocal(grid, gridComp, tileIndices);
+            var tileWorld = _transform.ToMapCoordinates(tileLocal).Position;
+            xenoAabb = Box2.CenteredAround(tileWorld, xenoAabb.Size);
+        }
+
+        _intersecting.Clear();
+        _lookup.GetEntitiesIntersecting(xform.MapID, xenoAabb, _intersecting, LookupFlags.Dynamic | LookupFlags.Static);
+
+        foreach (var other in _intersecting)
+        {
+            if (other == xeno)
+                continue;
+
+            if (!HasComp<GridVehicleMoverComponent>(other))
+                continue;
+
+            if (!TryComp(other, out VehicleComponent? vehicle) || vehicle.MovementKind != VehicleMovementKind.Grid)
+                continue;
+
+            if (!fixtureQ.TryComp(other, out var vehicleFixtures))
+                continue;
+
+            var vehicleTx = _physics.GetPhysicsTransform(other, Transform(other));
+            if (!TryGetFixtureAabb(vehicleFixtures, vehicleTx, out var vehicleAabb))
+                continue;
+
+            if (vehicleAabb.Intersects(xenoAabb))
+                return true;
+        }
+
+        return false;
     }
 
     private void OnMoverStartup(Entity<GridVehicleMoverComponent> ent, ref ComponentStartup args)
