@@ -1,6 +1,5 @@
 using System.Linq;
 using System.Numerics;
-using Content.Server.Database;
 using Content.Server.GameTicking;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
@@ -22,16 +21,13 @@ using Content.Shared.Database;
 using Content.Shared.Fax.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.Nutrition.Components;
-using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
-using JetBrains.FormatRipper.Elf;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Toolshed.TypeParsers;
 using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Rules.DistressSignal;
@@ -136,30 +132,16 @@ public sealed partial class CMDistressSignalRuleSystem
                 queenAssignment
             };
         }
-        // calculate total role weights
-        var marineCount = 0f;
-        var playerCount = 0f;
-        foreach (var player in ev.ProcessedPlayers)
-        {
-            if (player.AssignedJob is not { } assignment)
-                continue;
 
-            playerCount += assignment.JobPrototype.RoleWeight;
-            foreach (var accessGroup in assignment.JobPrototype.AccessGroups.Select(item => _prototypes.Index(item)))
-            {
-                if (accessGroup.Faction == ruleComp.MarineFaction)
-                {
-                    marineCount += assignment.JobPrototype.RoleWeight;
-                }
-            }
-        }
-        ApplyJobSlotScaling(ruleComp, marineCount, playerCount);
+        var roleWeights = GetRoleWeights(ev.ProcessedPlayers);
+
+        ApplyJobSlotScaling(ruleComp, roleWeights.MarineWeight, roleWeights.AssignedCount);
 
         // surv limit
-        survAssignment.AssignmentLimit = (int)Math.Clamp((int)Math.Floor(marineCount / _marinesPerSurvivor), _minimumSurvivors, _maximumSurvivors);
+        survAssignment.AssignmentLimit = GetRoundstartSurvCount(roleWeights);
 
         // xeno limit
-        ev.JobAssignments[ruleComp.XenoSelectableJob][0].AssignmentLimit = (int)Math.Floor(Math.Max(1, marineCount / _marinesPerXeno));
+        ev.JobAssignments[ruleComp.XenoSelectableJob][0].AssignmentLimit = GetRoundstartXenoCount(roleWeights).XenoCount;
 
         // TODO RMC14 may want to move this part somewhere else, since this is mostly just
         // converting station jobs into assignments
@@ -182,18 +164,6 @@ public sealed partial class CMDistressSignalRuleSystem
                 }
             }
         }
-    }
-
-    public void OnRoundstartPlayersSpawned(RoundstartPlayersSpawnedEvent ev)
-    {
-        if (TryGetActiveRule() is not { } rule)
-            return;
-
-        // Give xenos burrowed larva for every xeno slot that was unassigned
-        var xenoAssignment = ev.JobAssignments[rule.XenoSelectableJob][0];
-
-        if (xenoAssignment.AssignmentLimit is { } limit)
-            _hive.ChangeBurrowedLarva(limit - xenoAssignment.AssignedPlayers.Count);
     }
 
     /// <summary>
