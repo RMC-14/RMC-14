@@ -54,6 +54,7 @@
   id: RMCWeaponFlamerSpecAuto
   name: M34-T2 incinerator unit
   description: A prototyped model of the M34-T incinerator unit, it was discontinued after its automatic mode was deemed too expensive to deploy in the field.
+  suffix: DO NOT MAP
   components:
     - type: Gun
       fireRate: 2
