@@ -80,6 +80,25 @@
     sprite: _RMC14/Tiles/planet/sorokyne/sorokyne_water.rsi
 
 - type: entity
+  parent: RMCRiverSorokyne
+  id: RMCRiverSorokyneBoiling
+  name: boiling river
+  description: This water is bubbling and you can feel the heat emanating off of it.
+  components:
+  - type: DamageOverTime
+    affectsDead: false
+    cover:
+      tags:
+      - Catwalk
+    armorPiercingDamage:
+      types:
+        Heat: 1.25 # TODO RMC14: meant to be 0.25 to both feet and both legs when stood up, or 1.25 damage when lying down
+    emotes:
+    popup: "The water is scalding hot!"
+    sound:
+      collection: ToxicWaterSizzle
+
+- type: entity
   parent: CMFloorShallowWaterEntity
   id: RMCFloorShallowWaterEntityRed
   suffix: Red
