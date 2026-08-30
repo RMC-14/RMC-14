@@ -1,7 +1,7 @@
 - type: job
   parent: CMSurvivorDoctor
   id: CMSurvivorMedicalTechnician
-  name: cm-job-name-survivor-medical-technician
+  name: rmc-job-name-survivor-medical-technician
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorDoctor
   startingGear: RMCGearSurvivorMedicalTechnician

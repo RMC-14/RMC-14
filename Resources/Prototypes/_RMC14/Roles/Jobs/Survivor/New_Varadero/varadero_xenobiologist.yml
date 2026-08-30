@@ -1,7 +1,7 @@
 - type: job
   parent: CMSurvivorScientist
   id: RMCSurvivorNewVaraderoXenobiologist
-  name: cm-job-name-survivor-new-varadero-xenobiologist
+  name: rmc-job-name-survivor-new-varadero-xenobiologist
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorScientist
   startingGear: RMCGearSurvivorNewVaraderoXenobiologist

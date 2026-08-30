@@ -96,4 +96,4 @@
   name: base police ID card
   components:
   - type: IdCard
-    jobTitle: cm-job-name-survivor-varadero-base-police
+    jobTitle: rmc-job-name-survivor-varadero-base-police

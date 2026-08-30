@@ -168,39 +168,39 @@ rmc-job-prefix-survivor-varadero-commander = UNMC CDR
 rmc-job-name-survivor-varadero-synth = Support Synthetic
 rmc-job-prefix-survivor-varadero-synth = UNMC SYN
 
-cm-job-name-surivor-beach-bum = Beach Bum
+rmc-job-name-surivor-beach-bum = Beach Bum
 
-cm-job-name-survivor-varadero-chaplain = Base Chaplain
+rmc-job-name-survivor-varadero-chaplain = Base Chaplain
 rmc-job-prefix-survivor-varadero-chaplain = UNMC CHAP
 
-cm-job-name-survivor-varadero-un-asst-rep = UN Assistant Representative
+rmc-job-name-survivor-varadero-un-asst-rep = UN Assistant Representative
 rmc-job-prefix-survivor-varadero-un-asst-rep = UN AST REP
 
-cm-job-name-survivor-varadero-firefighter = Airport Firefighter
+rmc-job-name-survivor-varadero-firefighter = Airport Firefighter
 rmc-job-prefix-survivor-varadero-firefighter = UNMC ARFPS
 
-cm-job-name-survivor-ground-crew = Ground Crewman
+rmc-job-name-survivor-ground-crew = Ground Crewman
 rmc-job-prefix-survivor-ground-crew = UNMC GCM
 
-cm-job-name-survivor-pilot = Fighter Pilot
+rmc-job-name-survivor-pilot = Fighter Pilot
 rmc-job-prefix-survivor-pilot = UNMC PO
 
-cm-job-name-survivor-medical-technician = Medical Technician
+rmc-job-name-survivor-medical-technician = Medical Technician
 rmc-job-prefix-survivor-medical-technician = UNMC MEDTECH
 
-cm-job-name-survivor-new-varadero-researcher = New Varadero Researcher
+rmc-job-name-survivor-new-varadero-researcher = New Varadero Researcher
 rmc-job-prefix-survivor-new-varadero-researcher = WY RSR
 
-cm-job-name-survivor-new-varadero-xenoarchaeologist = New Varadero Xenoarchaeologist
+rmc-job-name-survivor-new-varadero-xenoarchaeologist = New Varadero Xenoarchaeologist
 rmc-job-prefix-survivor-new-varadero-xenoarchaeologist = WY XARC
 
-cm-job-name-survivor-new-varadero-xenobiologist = New Varadero Xenobiologist
+rmc-job-name-survivor-new-varadero-xenobiologist = New Varadero Xenobiologist
 rmc-job-prefix-survivor-new-varadero-xenobiologist = WY XBIO
 
-cm-job-name-survivor-new-varadero-rd = New Varadero Research Director
+rmc-job-name-survivor-new-varadero-rd = New Varadero Research Director
 rmc-job-prefix-survivor-new-varadero-rd = WY RD
 
-cm-job-name-survivor-varadero-base-police = Base Police
+rmc-job-name-survivor-varadero-base-police = Base Police
 
 # Hybrisa Prospera Survs
 

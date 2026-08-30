@@ -1,7 +1,7 @@
 - type: job
   parent: CMSurvivorCorporate
   id: RMCSurvivorNewVaraderoUNRepresentative
-  name: cm-job-name-survivor-varadero-un-asst-rep
+  name: rmc-job-name-survivor-varadero-un-asst-rep
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivor
   startingGear: RMCGearSurvivorUNRepresentative

@@ -1,7 +1,7 @@
 - type: job
   parent: CMSurvivor
   id: CMSurvivorBeachBum
-  name: cm-job-name-surivor-beach-bum
+  name: rmc-job-name-surivor-beach-bum
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivor
   startingGear: RMCGearSurvivorBeachBum

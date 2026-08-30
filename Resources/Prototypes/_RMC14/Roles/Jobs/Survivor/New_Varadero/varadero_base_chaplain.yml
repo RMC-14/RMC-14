@@ -1,7 +1,7 @@
 - type: job
   parent: CMSurvivor
   id: RMCSurvivorNewVaraderoChaplain
-  name: cm-job-name-survivor-varadero-chaplain
+  name: rmc-job-name-survivor-varadero-chaplain
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivor
   startingGear: RMCGearSurvivorVaraderoChaplain

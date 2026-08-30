@@ -1,7 +1,7 @@
 - type: job
   parent: CMSurvivorEngineer
   id: RMCSurvivorUNMCPilot
-  name: cm-job-name-survivor-pilot
+  name: rmc-job-name-survivor-pilot
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorEngineer
   startingGear: RMCGearSurvivorUNMCPilot

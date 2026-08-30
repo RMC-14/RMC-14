@@ -1,7 +1,7 @@
 - type: job
   parent: CMSurvivorCorporate
   id: RMCSurvivorNewVaraderoResearchDirector
-  name: cm-job-name-survivor-new-varadero-rd
+  name: rmc-job-name-survivor-new-varadero-rd
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorScientist
   startingGear: RMCGearSurvivorNewVaraderoResearchDirector

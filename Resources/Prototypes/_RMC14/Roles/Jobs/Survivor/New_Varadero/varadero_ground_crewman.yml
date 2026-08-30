@@ -1,7 +1,7 @@
 - type: job
   parent: CMSurvivorEngineer
   id: RMCSurvivorUNMCGroundCrewman
-  name: cm-job-name-survivor-ground-crew
+  name: rmc-job-name-survivor-ground-crew
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorEngineer
   greeting: rmc-job-greeting-varadero
