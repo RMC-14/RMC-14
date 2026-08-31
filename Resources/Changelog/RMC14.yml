@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: monomethylhydrazine
-  changes:
-  - message: '[PVE] Added unique marking flares for the SPP and PMC factions.'
-    type: Add
-  id: 3112
-  time: '2026-04-19T01:32:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9549
 - author: Vixting
   changes:
   - message: Queens scream will now apply camera shake to those affected.
@@ -4505,5 +4498,12 @@
   id: 3611
   time: '2026-08-31T15:50:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10395
+- author: kleinerstation13
+  changes:
+  - message: Changed the SFX of the M37 and M12 pump shotguns.
+    type: Tweak
+  id: 3612
+  time: '2026-08-31T17:02:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10464
 Name: RMC14
 Order: -1
