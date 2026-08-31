@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: kleinerstation13
-  changes:
-  - message: Resprited SPP lifesaver belt
-    type: Tweak
-  id: 3111
-  time: '2026-04-17T17:42:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9626
 - author: monomethylhydrazine
   changes:
   - message: '[PVE] Added unique marking flares for the SPP and PMC factions.'
@@ -4505,5 +4498,12 @@
   id: 3610
   time: '2026-08-31T00:28:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10799
+- author: BreakpointDebug1234
+  changes:
+  - message: Fridges are now all-access
+    type: Tweak
+  id: 3611
+  time: '2026-08-31T15:50:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10395
 Name: RMC14
 Order: -1
