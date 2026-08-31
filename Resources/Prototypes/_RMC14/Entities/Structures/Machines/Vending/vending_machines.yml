@@ -561,8 +561,8 @@
     CMHeadBeretRed: 6
     CMGlassesSecurity: 3
     CMHeadset: 6
-    #RegulationTape: 5
-    #TapeRecorder: 3
+    RMCUniversalRecorder: 3
+    RMCBoxRegulationTapes: 5
     #ClueScanner: 3
     #Camera: 8
     #CameraFilm: 8
