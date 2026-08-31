@@ -840,9 +840,9 @@ namespace Content.Server.GameTicking
     /// <param name="name"></param>
     public sealed class MetaJobAssignment(string name)
     {
+        // For debugging/logging, not functionality
         public string Name = name;
         public HashSet<JobAssignment> Assignments = new HashSet<JobAssignment>();
-        public HashSet<string> Tags = new HashSet<string>();
 
         /// <summary>
         /// The max amount of assigned players this meta assignment can have. Null if unlimited.
