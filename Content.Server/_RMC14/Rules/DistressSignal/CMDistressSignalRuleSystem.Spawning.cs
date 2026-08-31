@@ -117,6 +117,15 @@ public sealed partial class CMDistressSignalRuleSystem
             survAssignment.Assignments.Add(assignment);
             ev.JobAssignments[job] = new List<JobAssignment> { assignment };
         }
+        foreach (var job in ruleComp.IgnoreMaximumSurvivorJobs)
+        {
+            if (!_prototypes.TryIndex(job, out var jobProto))
+                continue;
+            var assignment = new JobAssignment(jobProto, null);
+            assignment.AssignmentLimit = 1;
+            survAssignment.Assignments.Add(assignment);
+            ev.JobAssignments[job] = new List<JobAssignment> { assignment };
+        }
 
         // xeno assignments
         ev.JobAssignments[ruleComp.XenoSelectableJob] = new List<JobAssignment> {
