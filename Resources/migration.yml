@@ -1533,6 +1533,9 @@ RMCIDCardPaP: RMCIDCardPCG
 RMCHeadsetSPPPaP: RMCHeadsetSPPPCG
 RMCCoatPaP: RMCCoatPCG
 
+#2026-07-11
+BoxMousetrap: RMCBoxMousetraps
+
 # 2026-07-31
 FoodBoxPizzaFilled: RMCBoxPizzaRandom
 
