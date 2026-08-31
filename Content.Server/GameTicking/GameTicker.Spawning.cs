@@ -175,6 +175,8 @@ namespace Content.Server.GameTicking
             var metaJobAssignments = new HashSet<MetaJobAssignment>();
             var metaPlayerAssignments = new HashSet<MetaPlayerAssignment>();
 
+            RaiseLocalEvent(new InitializingAssignmentsEvent(jobAssignments, metaJobAssignments, metaPlayerAssignments));
+
             foreach (var newPlayer in players)
             {
                 // Game rules or systems add slots that can be assigned to players.
@@ -918,6 +920,22 @@ namespace Content.Server.GameTicking
     }
 
     /// <summary>
+    /// Event raised before any players are assigned, to allow systems to set up initial job assignments.
+    /// </summary>
+    /// <param name="jobAssignments"></param>
+    /// <param name="metaJobAssignments"></param>
+    /// <param name="metaPlayerAssignments"></param>
+    public sealed class InitializingAssignmentsEvent(
+        JobAssignmentsDict jobAssignments,
+        HashSet<MetaJobAssignment> metaJobAssignments,
+        HashSet<MetaPlayerAssignment> metaPlayerAssignments)
+    {
+        public readonly JobAssignmentsDict JobAssignments = jobAssignments;
+        public readonly HashSet<MetaJobAssignment> MetaJobAssignments = metaJobAssignments;
+        public readonly HashSet<MetaPlayerAssignment> MetaPlayerAssignments = metaPlayerAssignments;
+    }
+
+    /// <summary>
     ///     Event raised before each player is assigned, to allow systems and rules to add
     ///     assignments that players can be assigned to.
     ///     This event is not involved in actually assigning players, only for collecting the available assignments.
@@ -932,17 +950,6 @@ namespace Content.Server.GameTicking
         public readonly JobAssignmentsDict JobAssignments = jobAssignments;
         public readonly HashSet<MetaJobAssignment> MetaJobAssignments = metaJobAssignments;
         public readonly HashSet<MetaPlayerAssignment> MetaPlayerAssignments = metaPlayerAssignments;
-
-        /// <summary>
-        /// Returns true if this is the first time assignments are being collected.
-        /// </summary>
-        public bool IsFirstCollection
-        {
-            get
-            {
-                return ProcessedPlayers.Count <= 0;
-            }
-        }
     }
 
     /// <summary>
@@ -956,20 +963,6 @@ namespace Content.Server.GameTicking
     {
         public readonly List<PlayerSpawnInfo> ProcessedPlayers = processedPlayers;
         public readonly JobAssignmentsDict JobAssignments = jobAssignments;
-    }
-
-    public sealed class PrePlayerAssignmentEvent(
-        PlayerSpawnInfo player,
-        List<PlayerSpawnInfo> processedPlayers,
-        JobAssignmentsDict jobAssignments,
-        HashSet<MetaJobAssignment> metaJobAssignments,
-        HashSet<MetaPlayerAssignment> metaPlayerAssignments)
-    {
-        public readonly PlayerSpawnInfo Player = player;
-        public readonly List<PlayerSpawnInfo> ProcessedPlayers = processedPlayers;
-        public readonly JobAssignmentsDict JobAssignments = jobAssignments;
-        public readonly HashSet<MetaJobAssignment> MetaJobAssignments = metaJobAssignments;
-        public readonly HashSet<MetaPlayerAssignment> MetaPlayerAssignments = metaPlayerAssignments;
     }
 
     public sealed class RMCPlayerSpawningEvent(

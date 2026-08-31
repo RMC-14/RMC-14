@@ -84,6 +84,54 @@ public sealed partial class CMDistressSignalRuleSystem
         ev.Handled = true;
     }
 
+    private void OnInitializingAssignments(InitializingAssignmentsEvent ev)
+    {
+        if (TryGetActiveRuleEntity() is not { } rule)
+            return;
+
+        var ruleComp = rule.Comp;
+        var spawnComp = EnsureComp<CMDistressSignalSpawningComponent>(rule);
+
+        var survAssignment = spawnComp.SurvivorAssignment;
+
+        // TODO RMC14 this isn't the right place for this initialization work
+        OperationName ??= GetRandomOperationName();
+
+        if (!InitializeXenoMap(rule, ruleComp))
+            return;
+
+        if (!_spawnedDropships)
+        {
+            _spawnedDropships = true;
+            InitializeDropships(ruleComp);
+        }
+
+        // survivor assignments
+        SetupSurvivorJobs(ruleComp);
+        foreach (var (job, count) in ruleComp.SurvivorJobs)
+        {
+            if (!_prototypes.TryIndex(job, out var jobProto))
+                continue;
+            var assignment = new JobAssignment(jobProto, null);
+            assignment.AssignmentLimit = count > -1 ? count : null;
+            survAssignment.Assignments.Add(assignment);
+            ev.JobAssignments[job] = new List<JobAssignment> { assignment };
+        }
+
+        // xeno assignments
+        ev.JobAssignments[ruleComp.XenoSelectableJob] = new List<JobAssignment> {
+                new JobAssignment(_prototypes.Index(ruleComp.XenoSelectableJob), null)
+            };
+
+        var queenAssignment = new JobAssignment(_prototypes.Index(ruleComp.QueenJob), null)
+        {
+            AssignmentLimit = 1
+        };
+        ev.JobAssignments[ruleComp.QueenJob] = new List<JobAssignment> {
+                queenAssignment
+            };
+    }
+
     private void OnCollectingAssignments(CollectingAssignmentsEvent ev)
     {
         if (TryGetActiveRuleEntity() is not { } rule)
@@ -94,48 +142,7 @@ public sealed partial class CMDistressSignalRuleSystem
 
         var survAssignment = spawnComp.SurvivorAssignment;
 
-        if (ev.IsFirstCollection)
-        {
-            // TODO RMC14 this isn't the right place for this initialization work
-            OperationName ??= GetRandomOperationName();
-
-            if (!InitializeXenoMap(rule, ruleComp))
-                return;
-
-            if (!_spawnedDropships)
-            {
-                _spawnedDropships = true;
-                InitializeDropships(ruleComp);
-            }
-
-
-            // survivor assignments
-            SetupSurvivorJobs(ruleComp);
-            foreach (var (job, count) in ruleComp.SurvivorJobs)
-            {
-                if (!_prototypes.TryIndex(job, out var jobProto))
-                    continue;
-                var assignment = new JobAssignment(jobProto, null);
-                assignment.AssignmentLimit = count > -1 ? count : null;
-                survAssignment.Assignments.Add(assignment);
-                ev.JobAssignments[job] = new List<JobAssignment> { assignment };
-            }
-
-            // xeno assignments
-            ev.JobAssignments[ruleComp.XenoSelectableJob] = new List<JobAssignment> {
-                new JobAssignment(_prototypes.Index(ruleComp.XenoSelectableJob), null)
-            };
-
-            var queenAssignment = new JobAssignment(_prototypes.Index(ruleComp.QueenJob), null);
-            queenAssignment.AssignmentLimit = 1;
-            ev.JobAssignments[ruleComp.QueenJob] = new List<JobAssignment> {
-                queenAssignment
-            };
-        }
-
         var roleWeights = GetRoleWeights(ev.ProcessedPlayers);
-
-        ApplyJobSlotScaling(ruleComp, roleWeights.MarineWeight, roleWeights.AssignedCount);
 
         // surv limit
         survAssignment.AssignmentLimit = GetRoundstartSurvCount(roleWeights);
@@ -143,27 +150,10 @@ public sealed partial class CMDistressSignalRuleSystem
         // xeno limit
         ev.JobAssignments[ruleComp.XenoSelectableJob][0].AssignmentLimit = GetRoundstartXenoCount(roleWeights).XenoCount;
 
-        // TODO RMC14 may want to move this part somewhere else, since this is mostly just
-        // converting station jobs into assignments
-        // marine limits
-        var stations = EntityQueryEnumerator<StationJobsComponent, StationSpawningComponent>();
-        while (stations.MoveNext(out var stationId, out var stationJobs, out _))
-        {
-            foreach (var (jobId, available) in stationJobs.SetupAvailableJobs)
-            {
-                var assignments = ev.JobAssignments.GetOrNew(jobId, out var exists);
-
-                // TODO RMC14 separate job assignments by squad
-                if (!exists)
-                    assignments.Add(new JobAssignment(_prototypes.Index(jobId), stationId));
-
-                foreach (var assignment in assignments)
-                {
-                    var limit = available[0];
-                    assignment.AssignmentLimit = limit != -1 ? limit : null;
-                }
-            }
-        }
+        // marine slot modifications
+        // marine slots use station job slots. StationJobsSystem is responsible for converting
+        // job slots into assignments. Thus this system must handle the event before StationJobsSystem.
+        ApplyJobSlotScaling(ruleComp, roleWeights.MarineWeight, roleWeights.AssignedCount);
     }
 
     /// <summary>
