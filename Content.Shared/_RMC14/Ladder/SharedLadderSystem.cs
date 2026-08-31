@@ -85,16 +85,22 @@ public abstract class SharedLadderSystem : EntitySystem
 
     private void OnLadderActivateInWorld(Entity<LadderComponent> ent, ref ActivateInWorldEvent args)
     {
+        if (GetDestinationLadder(ent, args.User) is { } destinationLadder)
+            TryStartClimbing(ent, destinationLadder, args.User);
+    }
+
+    private EntityUid? GetDestinationLadder(Entity<LadderComponent> ent, EntityUid user)
+    {
         switch (ent.Comp.Connected.Count)
         {
             case 0:
-                _popup.PopupClient(Loc.GetString("rmc-ladder-leads-nowhere"), ent, args.User, PopupType.SmallCaution);
-                break;
+                _popup.PopupClient(Loc.GetString("rmc-ladder-leads-nowhere"), ent, user, PopupType.SmallCaution);
+                return null;
             case 1:
-                TryStartClimbing(ent, ent.Comp.Connected.First(), args.User);
-                break;
+                return ent.Comp.Connected.First();
             default:
-                throw new NotImplementedException();
+                ShowRadialMenu(ent, user);
+                return null; // done through the radial menu
         }
     }
 
@@ -257,6 +263,9 @@ public abstract class SharedLadderSystem : EntitySystem
         else if (TryComp(ent, out ActorComponent? actor))
             Unwatch(ent.Owner, actor.PlayerSession);
     }
+
+    protected virtual void ShowRadialMenu(Entity<LadderComponent> ent, EntityUid user)
+    { }
 
     protected virtual void AddViewer(Entity<LadderComponent> ent, ICommonSession player)
     { }

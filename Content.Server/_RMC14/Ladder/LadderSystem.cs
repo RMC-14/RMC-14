@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared._RMC14.Ladder;
 using Content.Shared.GameTicking;
 using Robust.Server.GameObjects;
@@ -153,6 +153,13 @@ public sealed class LadderSystem : SharedLadderSystem
 
             if (!_toUpdateIds.TryGetValue(ladder.Id, out var ids))
                 continue;
+
+            // Debug-only check to make sure that each direction appears a max of once in each ID group.
+            // (this means that there's currently a maximum of 3 ladders per group)
+            // todo: just move this over to the mapping command as a console error thingy
+            DebugTools.Assert(!ids
+                .GroupBy(i => i.Comp.Direction)
+                .Any(i => i.Count() > 1));
 
             var connectedLadders = ids
                 .Where(l => l.Owner != uid)

@@ -1,4 +1,4 @@
-﻿using Content.Shared.Interaction;
+using Content.Shared.Interaction;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Ladder;
@@ -9,6 +9,9 @@ public sealed partial class LadderComponent : Component
 {
     [DataField, AutoNetworkedField]
     public string? Id;
+
+    [DataField(required: true), AutoNetworkedField]
+    public LadderDirection Direction;
 
     [DataField, AutoNetworkedField]
     public HashSet<EntityUid> Connected = new();
@@ -30,4 +33,14 @@ public sealed partial class LadderComponent : Component
 
     [DataField, AutoNetworkedField]
     public HashSet<EntityUid> Watching = new();
+}
+
+[Flags]
+public enum LadderDirection : byte
+{
+    Invalid = 0,
+    Up = 1 << 0,
+    Down = 1 << 1,
+
+    Both = Up | Down,
 }
