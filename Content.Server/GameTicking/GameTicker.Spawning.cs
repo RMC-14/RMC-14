@@ -266,6 +266,10 @@ namespace Content.Server.GameTicking
                 for (var i = 0; i < (player.AssignedPreferenceIndex ?? player.JobPreferenceOrder.Count); ++i)
                 {
                     var preferredJob = player.JobPreferenceOrder[i];
+
+                    if (!jobAssignments.ContainsKey(preferredJob))
+                        continue;
+
                     foreach (var assignment in jobAssignments[preferredJob])
                     {
                         if (!assignment.IsAssignable)
