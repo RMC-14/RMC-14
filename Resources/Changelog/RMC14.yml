@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Queens scream will now apply camera shake to those affected.
-    type: Add
-  id: 3113
-  time: '2026-04-19T01:33:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9608
 - author: Dygon
   changes:
   - message: Avali can now chirp.
@@ -4505,5 +4498,12 @@
   id: 3612
   time: '2026-08-31T17:02:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10464
+- author: Sifb26
+  changes:
+  - message: Moved spare recorders and tapes to the SecTech
+    type: Tweak
+  id: 3613
+  time: '2026-08-31T17:04:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10687
 Name: RMC14
 Order: -1
