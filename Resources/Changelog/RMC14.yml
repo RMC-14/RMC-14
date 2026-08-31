@@ -1,32 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Reduced gun projectile speed by 3.6%.
-    type: Tweak
-  - message: Flares fired from flare guns no longer spawn inside walls.
-    type: Fix
-  id: 3109
-  time: '2026-04-13T20:57:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9628
-- author: kleinerstation13
-  changes:
-  - message: Added the M1911 service pistol, it can be acquired from spawning as a
-      survivor, the Black Market Firearm crate or pistol spawners on the colony.
-    type: Add
-  - message: Fixed FORECON spawning with a fully loaded M1984 belt instead of a M1911
-      belt with 2 magazines
-    type: Fix
-  - message: Fixed survivors spawning with an M1984 instead of an M1911
-    type: Fix
-  - message: Fixed .38 revolver not having 2x damage multplier
-    type: Fix
-  - message: Fixed KT-42 using 9mm instead of .45 ACP
-    type: Fix
-  - message: Fixed KT-42 not spawning in pistol spawners
-    type: Fix
-  id: 3110
-  time: '2026-04-15T01:36:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9284
 - author: kleinerstation13
   changes:
   - message: Resprited SPP lifesaver belt
@@ -4518,5 +4490,20 @@
   id: 3608
   time: '2026-08-30T21:09:40.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10791
+- author: kleinerstation13
+  changes:
+  - message: Fixed the tech tree console being accessible to everyone instead of being
+      locked behind command access
+    type: Fix
+  id: 3609
+  time: '2026-08-31T00:28:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10803
+- author: Vixting
+  changes:
+  - message: Added animation to the command tablet
+    type: Add
+  id: 3610
+  time: '2026-08-31T00:28:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10799
 Name: RMC14
 Order: -1
