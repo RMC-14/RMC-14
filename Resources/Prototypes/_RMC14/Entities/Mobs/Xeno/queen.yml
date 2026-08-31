@@ -300,6 +300,7 @@
     #    strains:
     #    - RMCXenoQueenMaid
     #    - RMCXenoQueenMagical
+    #    - RMCXenoQueenWitch
 
 - type: entity
   id: XenoLeaderPheromoneRelay
@@ -355,6 +356,29 @@
     name: rmc-xeno-magicalgirl-name
     description: rmc-xeno-magicalgirl-description
     popup: rmc-xeno-magicalgirl-popup
+
+- type: entity
+  parent: RMCXenoQueenBase
+  id: RMCXenoQueenWitch
+  suffix: Witch Queen
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Extras/witch_queen/witch_queen.rsi
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.XenoVisualLayers.Ovipositor" ]
+      sprite: _RMC14/Mobs/Xenonids/Extras/witch_queen/witch_ovipositor.rsi
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+  - type: XenoStrain
+    name: rmc-xeno-witch-name
+    description: rmc-xeno-witch-description
+    popup: rmc-xeno-witch-popup
 
 - type: entity
   parent: StationAiHolo
