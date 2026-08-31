@@ -782,3 +782,20 @@
           Quantity: 8
         - ReagentId: Protein
           Quantity: 4
+
+- type: entity
+  name: chicken noodle soup
+  parent: FoodBowlBase
+  id: RMCSoupChickenNoodle
+  description: Better than the canned stuff!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - savory
+    - chicken
+    - cheapnoodles
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/soup.rsi
+    layers:
+    - state: bowl
+    - state: chicken-noodle

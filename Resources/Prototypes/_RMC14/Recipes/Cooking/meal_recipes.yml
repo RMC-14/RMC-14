@@ -784,3 +784,18 @@
     FoodBreadBaguette: 1
     FoodMeatCutlet: 3
     FoodCheeseSlice: 1
+
+- type: microwaveMealRecipe
+  id: RecipeChickenNoodleSoup
+  name: chicken noodle soup recipe
+  result: RMCSoupChickenNoodle
+  time: 15
+  group: Savory
+  reagents:
+    Water: 10
+  solids:
+    FoodBowlBig: 1
+    FoodMeatChickenCutlet: 1
+    FoodNoodlesBoiled: 1
+    FoodCarrot: 1
+
