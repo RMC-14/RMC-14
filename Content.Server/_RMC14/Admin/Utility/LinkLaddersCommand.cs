@@ -1,20 +1,20 @@
 using Content.Server.Administration;
-using Content.Shared._RMC14.Ladder;
+using Content.Server._RMC14.Ladder;
 using Content.Shared.Administration;
+using Content.Shared._RMC14.Ladder;
 using Robust.Shared.Toolshed;
-using Robust.Shared.Toolshed.Syntax;
 
 namespace Content.Server._RMC14.Admin.Utility;
 
 [ToolshedCommand, AdminCommand(AdminFlags.VarEdit)]
 internal sealed class LinkLaddersCommand : ToolshedCommand
 {
-    private SharedLadderSystem? _ladder;
+    private LadderSystem? _ladder;
 
     [CommandImplementation]
     public void LinkLadders(IInvocationContext ctx, [CommandArgument] string sharedId, [CommandArgument] EntityUid ladder1, [CommandArgument] EntityUid ladder2)
     {
-        _ladder ??= Sys<SharedLadderSystem>();
+        _ladder ??= Sys<LadderSystem>();
 
         if (_ladder.LadderIdInUse(sharedId))
         {

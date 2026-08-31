@@ -11,7 +11,7 @@ public sealed partial class LadderComponent : Component
     public string? Id;
 
     [DataField, AutoNetworkedField]
-    public EntityUid? Other;
+    public HashSet<EntityUid> Connected = new();
 
     [DataField, AutoNetworkedField]
     public TimeSpan Delay = TimeSpan.FromSeconds(2);

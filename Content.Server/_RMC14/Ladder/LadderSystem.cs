@@ -1,6 +1,9 @@
-﻿using Content.Shared._RMC14.Ladder;
+﻿using System.Linq;
+using Content.Shared._RMC14.Ladder;
+using Content.Shared.GameTicking;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
+using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Ladder;
 
@@ -9,12 +12,51 @@ public sealed class LadderSystem : SharedLadderSystem
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
 
+    private readonly HashSet<EntityUid> _toUpdate = [];
+    private readonly Dictionary<string, HashSet<Entity<LadderComponent>>> _toUpdateIds = [];
+
     public override void Initialize()
     {
         base.Initialize();
 
+        SubscribeLocalEvent<LadderComponent, MapInitEvent>(OnLadderMapInit);
+        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
         SubscribeLocalEvent<LadderWatchingComponent, ComponentRemove>(OnWatchingRemove);
         SubscribeLocalEvent<LadderWatchingComponent, EntityTerminatingEvent>(OnWatchingRemove);
+    }
+
+    public bool LadderIdInUse(string id)
+    {
+        var ladders = EntityQueryEnumerator<LadderComponent>();
+        while (ladders.MoveNext(out _, out var ladder))
+            if (ladder.Id == id)
+                return true;
+        return false;
+    }
+
+    public void ReassignLadderId(Entity<LadderComponent> ent, string? newId)
+    {
+        foreach (var connectedLadder in ent.Comp.Connected)
+        {
+            // Remove `ent` from `connectedLadder`.
+            RemoveConnectedLadder(connectedLadder, ent);
+        }
+        ent.Comp.Connected.Clear();
+
+        ent.Comp.Id = newId;
+        Dirty(ent);
+        _toUpdate.Add(ent);
+    }
+
+    private void OnLadderMapInit(Entity<LadderComponent> ent, ref MapInitEvent args)
+    {
+        _toUpdate.Add(ent);
+    }
+
+    private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
+    {
+        _toUpdate.Clear();
+        _toUpdateIds.Clear();
     }
 
     private void OnWatchingRemove<T>(Entity<LadderWatchingComponent> ent, ref T args)
@@ -83,5 +125,44 @@ public sealed class LadderSystem : SharedLadderSystem
     {
         base.RemoveViewer(ent, player);
         _viewSubscriber.RemoveViewSubscriber(ent, player);
+    }
+
+    public override void Update(float frameTime)
+    {
+        if (_toUpdate.Count == 0)
+            return;
+
+        _toUpdateIds.Clear();
+        foreach (var entity in _toUpdate)
+        {
+            if (!LadderQuery.TryComp(entity, out var ladderComp))
+                continue;
+
+            if (ladderComp.Id is not { } id)
+                continue;
+
+            _toUpdateIds.GetOrNew(id).Add((entity, ladderComp));
+        }
+        _toUpdate.Clear();
+
+        var ladders = EntityQueryEnumerator<LadderComponent>();
+        while (ladders.MoveNext(out var uid, out var ladder))
+        {
+            if (ladder.Id == null)
+                continue;
+
+            if (!_toUpdateIds.TryGetValue(ladder.Id, out var ids))
+                continue;
+
+            var connectedLadders = ids
+                .Where(l => l.Owner != uid)
+                .Select(l => l.Owner);
+
+            if (!connectedLadders.Any())
+                continue;
+
+            ladder.Connected = connectedLadders.ToHashSet();
+            Dirty(uid, ladder);
+        }
     }
 }
