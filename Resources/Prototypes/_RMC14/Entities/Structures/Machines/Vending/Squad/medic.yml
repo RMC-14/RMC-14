@@ -561,11 +561,10 @@
         points: 40
       - id: RMCLargeBottleDexalinPlus
         points: 30
-    # TODO RMC14: the minitank is currently non functional
-    # - name: Injectors
-    #   entries:
-    #   - id: CMMiniTank
-    #     points: 40
+    - name: Injectors
+      entries:
+      - id: CMMiniTank
+        points: 40
 
 - type: entity
   parent: ColMarTechMedicalChemicalPVE
@@ -608,8 +607,7 @@
         points: 40
       - id: RMCLargeBottleDexalinPlus
         points: 30
-    # TODO RMC14: the minitank is currently non functional
-    # - name: Injectors
-    #   entries:
-    #   - id: CMMiniTank
-    #     points: 40
+    - name: Injectors
+      entries:
+      - id: CMMiniTank
+        points: 40
