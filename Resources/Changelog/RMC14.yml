@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: The dropship's camera controls console can now be used to view targets.
-    type: Tweak
-  - message: Swapping camera views repeatedly without closing the UI no longer causes
-      FPS drops.
-    type: Fix
-  id: 3116
-  time: '2026-04-19T01:37:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9589
 - author: IceNoobXD
   changes:
   - message: Added inhand sprites to all of the materials (glass, metal, plastic,
@@ -4505,5 +4495,12 @@
   id: 3615
   time: '2026-09-01T00:33:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10752
+- author: Vermidia
+  changes:
+  - message: '[PVE] Added smart refill tanks to medical chemical racks.'
+    type: Add
+  id: 3616
+  time: '2026-09-01T00:36:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10781
 Name: RMC14
 Order: -1
