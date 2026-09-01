@@ -162,6 +162,61 @@
     mode: NoSprite
 
 - type: entity
+  parent: RMCWallAlmayerDeco1
+  id: RMCWallAlmayerLabelDeck1A
+  suffix: Deck 1
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/athena_wall_labels.rsi
+    state: athena_deck1_1
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/athena_wall_labels.rsi
+    state: athena_deck1_1
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+
+- type: entity
+  parent: RMCWallAlmayerLabelDeck1A
+  id: RMCWallAlmayerLabelDeck1B
+  suffix: Deck 1
+  components:
+  - type: Sprite
+    state: athena_deck1_2
+  - type: Icon
+    state: athena_deck1_2
+
+- type: entity
+  parent: RMCWallAlmayerLabelDeck1A
+  id: RMCWallAlmayerLabelDeck2B
+  suffix: Deck 2
+  components:
+  - type: Sprite
+    state: athena_deck2_2
+  - type: Icon
+    state: athena_deck2_2
+
+- type: entity
+  parent: RMCWallAlmayerLabelDeck1A
+  id: RMCWallAlmayerLabelDeck2C
+  suffix: Deck 2
+  components:
+  - type: Sprite
+    state: athena_deck2_2A
+  - type: Icon
+    state: athena_deck2_2A
+
+- type: entity
+  parent: RMCWallAlmayerLabelDeck1A
+  id: RMCWallAlmayerLabelDeck3B
+  suffix: Deck 3
+  components:
+  - type: Sprite
+    state: athena_deck3_2
+  - type: Icon
+    state: athena_deck3_2
+
+- type: entity
   parent: CMWallMetal
   id: CMWallMetalAlmayerWhite
   name: wall
@@ -494,6 +549,61 @@
   - type: IconSmooth
     key: walls
     mode: NoSprite
+
+- type: entity
+  parent: RMCWallAlmayerReinforcedHeavyDeco1
+  id: RMCWallAlmayerReinforcedHeavyLabelDeck1A
+  suffix: Deck 1
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/athena_wall_labels.rsi
+    state: athena_deck1_1
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/athena_wall_labels.rsi
+    state: athena_deck1_1
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+
+- type: entity
+  parent: RMCWallAlmayerReinforcedHeavyLabelDeck1A
+  id: RMCWallAlmayerReinforcedHeavyLabelDeck1B
+  suffix: Deck 1
+  components:
+  - type: Sprite
+    state: athena_deck1_2
+  - type: Icon
+    state: athena_deck1_2
+
+- type: entity
+  parent: RMCWallAlmayerReinforcedHeavyLabelDeck1A
+  id: RMCWallAlmayerReinforcedHeavyLabelDeck2B
+  suffix: Deck 2
+  components:
+  - type: Sprite
+    state: athena_deck2_2
+  - type: Icon
+    state: athena_deck2_2
+
+- type: entity
+  parent: RMCWallAlmayerReinforcedHeavyLabelDeck1A
+  id: RMCWallAlmayerReinforcedHeavyLabelDeck2C
+  suffix: Deck 2
+  components:
+  - type: Sprite
+    state: athena_deck2_2A
+  - type: Icon
+    state: athena_deck2_2A
+
+- type: entity
+  parent: RMCWallAlmayerReinforcedHeavyLabelDeck1A
+  id: RMCWallAlmayerReinforcedHeavyLabelDeck3B
+  suffix: Deck 3
+  components:
+  - type: Sprite
+    state: athena_deck3_2
+  - type: Icon
+    state: athena_deck3_2
 
 - type: entity
   parent: CMWallReinforcedHeavyAlmayer
