@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: SharkSnake98
-  changes:
-  - message: Added new drinks and mains for the colony ration packs
-    type: Add
-  - message: Replaced the current Colony MRE fills with the correct ones.
-    type: Tweak
-  id: 3115
-  time: '2026-04-19T01:35:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9650
 - author: Dygon
   changes:
   - message: The dropship's camera controls console can now be used to view targets.
@@ -4505,5 +4496,14 @@
   id: 3614
   time: '2026-08-31T17:13:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10455
+- author: stuff3541
+  changes:
+  - message: Executive bodyguard default highlights
+    type: Add
+  - message: Synthetic default highlights
+    type: Add
+  id: 3615
+  time: '2026-09-01T00:33:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10752
 Name: RMC14
 Order: -1
