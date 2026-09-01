@@ -145,6 +145,34 @@
     state: spec1
 
 - type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerStairs1
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: stairs_1_down
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerStairs2
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: stairs_2_down
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerStairs2Alt
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: stairs_2_up
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerStairs3
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: stairs_3_up
+
+- type: decal
   id: RMCDecalWeYaTile1
   parent: CMDecalBase
   tags: ["station"]

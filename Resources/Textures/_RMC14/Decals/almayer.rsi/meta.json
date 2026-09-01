@@ -117,6 +117,18 @@
     },
     {
       "name": "dropshiptwo9"
+    },
+    {
+      "name": "stairs_1_down"
+    },
+    {
+      "name": "stairs_2_down"
+    },
+    {
+      "name": "stairs_2_up"
+    },
+    {
+      "name": "stairs_3_up"
     }
   ]
 }
