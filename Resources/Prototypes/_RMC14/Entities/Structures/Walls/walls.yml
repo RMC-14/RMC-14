@@ -411,6 +411,7 @@
   id: CMWallReinforcedHeavy
   name: heavy reinforced hull
   description: A huge chunk of ultra-reinforced metal used to separate rooms. Looks virtually indestructible.
+  suffix: Indestructible
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/rwall.rsi
@@ -426,11 +427,12 @@
     - doors
     base: rwall
 
+# Outer Hull Walls
 - type: entity
   parent: CMWallReinforcedHeavy
   id: CMWallReinforcedHeavyAlmayer
-  name: heavy reinforced hull
-  description: A highly reinforced metal wall used to separate rooms and make up the ship.
+  name: outer hull
+  description: A metal wall used to separate space from the ship. Looks virtually indestructible.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/almayer_black.rsi
@@ -444,10 +446,16 @@
     - doors
     base: wall
 
+# Inner Hull Walls
 - type: entity
   parent: CMWallReinforcedHeavyAlmayer
+  id: CMWallReinforcedHeavyAlmayerInner
+  name: structural hull
+  description: The core structure of the hull, it holds the ship together. Looks virtually indestructible.
+
+- type: entity
+  parent: CMWallReinforcedHeavyAlmayerInner
   id: RMCWallAlmayerReinforcedHeavyDeco1
-  name: heavy reinforced hull
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/almayer_black.rsi
@@ -495,9 +503,11 @@
     key: walls
     mode: NoSprite
 
+# Hull wall until hijack
 - type: entity
   parent: CMWallReinforcedHeavyAlmayer
-  id: RMCWallReinforcedHeavyAlmayerHijackBustable # RMC14 TODO: Add functionality
+  id: RMCWallReinforcedHeavyAlmayerHijackBustable # TODO RMC14: Add functionality - This hull wall should turn into a reinforced wall upon hijack landing.
+  name: heavy reinforced hull
   description: A highly reinforced metal wall used to separate rooms and make up the ship. It would take a great impact to weaken this wall.
   suffix: Hijack Bustable
 
@@ -528,8 +538,8 @@
 - type: entity
   parent: CMWallReinforcedHeavy
   id: CMWallReinforcedHeavyAlmayerWhite
-  name: heavy reinforced hull
-  description: A highly reinforced metal wall used to separate rooms and make up the ship.
+  name: ultra reinforced hull
+  description: An extremely reinforced metal wall used to isolate potentially dangerous areas. Looks virtually indestructible.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/almayer_white.rsi
@@ -546,7 +556,7 @@
 - type: entity
   parent: CMWallReinforcedHeavy
   id: CMWallReinforcedHeavyAlmayerAI
-  name: heavy reinforced hull
+  name: ultra reinforced hull
   description: An extremely reinforced metal wall used to isolate potentially dangerous areas. Looks virtually indestructible.
   components:
   - type: Sprite
@@ -578,8 +588,6 @@
     - windows
     - doors
     base: aiwall
-
-# TODO RMC14 temp hull, breakable only after hijack
 
 # Shuttle
 - type: entity
