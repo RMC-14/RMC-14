@@ -17,8 +17,6 @@ namespace Content.Server._RMC14.Rules.DistressSignal;
 
 public sealed partial class CMDistressSignalRuleSystem
 {
-    private Dictionary<ProtoId<JobPrototype>, List<EntityUid>> _survivorSpawners = new Dictionary<ProtoId<JobPrototype>, List<EntityUid>>();
-
     /// <summary>
     /// Spawns a player as the survivor they're assigned as.
     /// </summary>
@@ -28,11 +26,53 @@ public sealed partial class CMDistressSignalRuleSystem
         if (player.AssignedJob is not { } assignment)
             return;
 
+        Log.Debug($"Trying to spawn {player.Session} as survivor {player.AssignedJob.JobID}");
+
         var playerId = player.Session.UserId;
 
         var actualJob = DetermineSurvivorJob(assignment.JobID, player.Session.UserId, comp, out var _, out var _);
 
-        var spawner = _random.PickAndTake(_survivorSpawners[actualJob]);
+        if (!_survivorSpawners.TryGetValue(actualJob, out var spawners))
+        {
+            // No spawners exist for their actual job. Use civilian instead.
+            if (!_survivorSpawners.TryGetValue(comp.CivilianSurvivorJob, out spawners))
+            {
+                // No spawners exist for civilian jobs either. Probably a mapping error?
+                // Don't spawn the surv.
+                Log.Error($"Failed to find spawners for {actualJob} or {comp.CivilianSurvivorJob}. Could not spawn survivor {player.Session}.");
+                return;
+            }
+
+            if (spawners.Count <= 0)
+            {
+                // Ran out of civilian spawn locations. Repopulate them.
+                var spawnerQuery = EntityQueryEnumerator<SpawnPointComponent>();
+                while (spawnerQuery.MoveNext(out var spawnId, out var spawnComp))
+                {
+                    if (spawnComp.Job == comp.CivilianSurvivorJob)
+                        spawners.Add(spawnId);
+                }
+            }
+        }
+        else if (spawners.Count <= 0)
+        {
+            // Spawners exist for their actual job but we ran out of spawners. Repopulate them.
+            var spawnerQuery = EntityQueryEnumerator<SpawnPointComponent>();
+            while (spawnerQuery.MoveNext(out var spawnId, out var spawnComp))
+            {
+                if (spawnComp.Job == actualJob)
+                    spawners.Add(spawnId);
+            }
+        }
+
+        if (spawners.Count <= 0)
+        {
+            // Even after trying to repopulate spawners, we still ended up with none. Something went wrong.
+            Log.Error($"Failed to repopulate spawners for either {actualJob} or {comp.CivilianSurvivorJob}. Could not spawn survivor {player.Session}.");
+            return;
+        }
+
+        var spawner = _random.PickAndTake(spawners);
 
         var survivorMob = _stationSpawning.SpawnPlayerMob(
             _transform.GetMoverCoordinates(spawner),

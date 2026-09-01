@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Numerics;
 using Content.Server.GameTicking;
+using Content.Server.Spawners.Components;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared._RMC14.Bioscan;
@@ -40,6 +41,7 @@ public sealed partial class CMDistressSignalRuleSystem
 
     private List<EntityUid> _xenoSpawnPoints = new List<EntityUid>();
     private List<EntityUid> _xenoLeaderSpawnPoints = new List<EntityUid>();
+    private Dictionary<ProtoId<JobPrototype>, List<EntityUid>> _survivorSpawners = new Dictionary<ProtoId<JobPrototype>, List<EntityUid>>();
 
     private void OnRMCPrePlayerSpawn(RMCPlayerSpawningEvent ev)
     {
@@ -235,6 +237,14 @@ public sealed partial class CMDistressSignalRuleSystem
         while (leaderSpawnQuery.MoveNext(out var spawnUid, out _))
         {
             _xenoLeaderSpawnPoints.Add(spawnUid);
+        }
+
+        _survivorSpawners.Clear();
+        var spawnerQuery = EntityQueryEnumerator<SpawnPointComponent>();
+        while (spawnerQuery.MoveNext(out var spawnId, out var spawnComp))
+        {
+            if (spawnComp.Job is { } job)
+                _survivorSpawners.GetOrNew(job).Add(spawnId);
         }
 
         return true;
