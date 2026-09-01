@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: IceNoobXD
-  changes:
-  - message: Added inhand sprites to all of the materials (glass, metal, plastic,
-      etc.) and some other items
-    type: Add
-  id: 3117
-  time: '2026-04-19T01:36:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9551
 - author: Flowylove
   changes:
   - message: Makes patient on the surgery table unable to scream because of surgical
@@ -4502,5 +4494,12 @@
   id: 3616
   time: '2026-09-01T00:36:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10781
+- author: CatAndHats
+  changes:
+  - message: Fixed almayer hull wall descriptions and names
+    type: Fix
+  id: 3617
+  time: '2026-09-01T21:45:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10805
 Name: RMC14
 Order: -1
