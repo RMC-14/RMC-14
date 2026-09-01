@@ -10,47 +10,114 @@ namespace Content.Server._RMC14.Ladder;
 public sealed class LadderSystem : SharedLadderSystem
 {
     [Dependency] private readonly SharedEyeSystem _eye = default!;
+    [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
     [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
 
     private readonly HashSet<EntityUid> _toUpdate = [];
     private readonly Dictionary<string, HashSet<Entity<LadderComponent>>> _toUpdateIds = [];
 
+
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<LadderComponent, MapInitEvent>(OnLadderMapInit);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
+        SubscribeLocalEvent<LadderComponent, MapInitEvent>(OnLadderMapInit);
         SubscribeLocalEvent<LadderWatchingComponent, ComponentRemove>(OnWatchingRemove);
         SubscribeLocalEvent<LadderWatchingComponent, EntityTerminatingEvent>(OnWatchingRemove);
     }
 
-    public bool LadderIdInUse(string id)
+    public List<Entity<LadderComponent>> GetLadderGroup(string groupId)
     {
+        List<Entity<LadderComponent>> ladderGroup = [];
+
         var ladders = EntityQueryEnumerator<LadderComponent>();
-        while (ladders.MoveNext(out _, out var ladder))
-            if (ladder.Id == id)
-                return true;
-        return false;
-    }
-
-    public void ReassignLadderId(Entity<LadderComponent> ent, string? newId)
-    {
-        foreach (var connectedLadder in ent.Comp.Connected)
+        while (ladders.MoveNext(out var ladder, out var ladderComp))
         {
-            // Remove `ent` from `connectedLadder`.
-            RemoveConnectedLadder(connectedLadder, ent);
+            if (ladderComp.GroupId == groupId)
+                ladderGroup.Add((ladder, ladderComp));
         }
-        ent.Comp.Connected.Clear();
 
-        ent.Comp.Id = newId;
-        Dirty(ent);
-        _toUpdate.Add(ent);
+        return ladderGroup;
     }
 
-    private void OnLadderMapInit(Entity<LadderComponent> ent, ref MapInitEvent args)
+    /// <summary>
+    /// Link <paramref name="ladder"/> to any other ladders with an <see cref="LadderComponent.Id"/> of <paramref name="newGroupId"/>,
+    /// by updating the <see cref="LadderComponent.Above"/> and <see cref="LadderComponent.Below"/> of each.
+    /// </summary>
+    /// <remarks>
+    /// If there aren't any <paramref name="newGroupId"/> ladders yet, <paramref name="ladder"/> will be set as the first.
+    /// </remarks>
+    /// <param name="ladder">Ladder entity to be added to the group.</param>
+    /// <param name="newGroupId">ID string of the group <paramref name="ladder"/> should be added to.</param>
+    /// <seealso cref="TryRemoveFromGroup(string, Entity{LadderComponent}, out string?)"/>
+    public bool TryAddToGroup(Entity<LadderComponent?> ladder, string newGroupId)
     {
-        _toUpdate.Add(ent);
+        if (!Resolve(ladder, ref ladder.Comp))
+            return false;
+
+        var group = GetLadderGroup(newGroupId);
+        if (group.TryFirstOrNull(l => l.Comp.Level == ladder.Comp.Level, out var sameLevelLadder))
+        {
+            Log.Error($"Failed to add {ToPrettyString(ladder)} to group '{newGroupId}'. {ToPrettyString(sameLevelLadder)} has a duplicate 'Level' value of {ladder.Comp.Level}!");
+            return false;
+        }
+
+        ladder.Comp.GroupId = newGroupId;
+        group.Add((ladder.Owner, ladder.Comp));
+        UpdateAdjacent(group);
+        return true;
+    }
+
+    /// <summary>
+    /// Unlink <paramref name="ladder"/> from any other ladders with an <see cref="LadderComponent.Id"/> of <paramref name="oldGroupId"/>,
+    /// and update the <see cref="LadderComponent.Above"/> and <see cref="LadderComponent.Below"/> of any ladders remaining.
+    /// </summary>
+    /// <param name="ladder">Ladder entity to be removed from the group.</param>
+    /// <param name="oldGroupId">ID string of the group <paramref name="ladder"/> should be removed from.</param>
+    /// <seealso cref="TryAddToGroup(Entity{LadderComponent?}, string)"/>
+    public bool TryRemoveFromGroup(Entity<LadderComponent?> ladder, string oldGroupId)
+    {
+        if (!Resolve(ladder, ref ladder.Comp))
+            return false;
+
+        if (ladder.Comp.GroupId != oldGroupId)
+            return false;
+
+        var group = GetLadderGroup(oldGroupId);
+        group.Remove((ladder.Owner, ladder.Comp));
+        UpdateAdjacent(group);
+        return true;
+    }
+
+    /// <summary>
+    /// Change the <see cref="LadderComponent.Level"/> of <paramref name="ladder"/> to <paramref name="newLevel"/>.
+    /// </summary>
+    /// <remarks>
+    /// If <paramref name="ladder"/> shares a <see cref="LadderComponent.GroupId"/> with other ladders,
+    /// then <paramref name="newLevel"/> must be a unique value among them.
+    /// </remarks>
+    public bool TrySetLevel(Entity<LadderComponent?> ladder, int newLevel)
+    {
+        if (!Resolve(ladder, ref ladder.Comp))
+            return false;
+
+        if (ladder.Comp.GroupId == null)
+        {
+            ladder.Comp.Level = newLevel;
+            return true;
+        }
+
+        var group = GetLadderGroup(ladder.Comp.GroupId);
+        if (group.TryFirstOrNull(l => l.Comp.Level == newLevel, out var sameLevelLadder))
+        {
+            Log.Error($"Failed to change the Level of {ToPrettyString(ladder)} to {newLevel}, as {ToPrettyString(sameLevelLadder)} already holds that position!");
+            return false;
+        }
+
+        ladder.Comp.Level = newLevel;
+        UpdateAdjacent(group);
+        return true;
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
@@ -59,9 +126,26 @@ public sealed class LadderSystem : SharedLadderSystem
         _toUpdateIds.Clear();
     }
 
+    private void OnLadderMapInit(Entity<LadderComponent> ent, ref MapInitEvent args)
+    {
+        _toUpdate.Add(ent);
+    }
+
     private void OnWatchingRemove<T>(Entity<LadderWatchingComponent> ent, ref T args)
     {
         RemoveWatcher(ent);
+    }
+
+    protected override void OpenRadialMenu(Entity<LadderComponent> ent, EntityUid user)
+    {
+        if (ent.Comp.Above == null && ent.Comp.Below == null)
+        {
+            Log.Error($"Ladder {ToPrettyString(ent)} tried to open a radial menu, but has no valid ladders connected!");
+            return;
+        }
+
+        _uiSystem.OpenUi(ent.Owner, LadderRadialBuiKey.Key, user);
+        _uiSystem.SetUiState(ent.Owner, LadderRadialBuiKey.Key, new LadderRadialBuiState(GetNetEntity(ent.Comp.Above), GetNetEntity(ent.Comp.Below)));
     }
 
     protected override void Watch(Entity<ActorComponent?, EyeComponent?> watcher, Entity<LadderComponent?> toWatch)
@@ -127,6 +211,34 @@ public sealed class LadderSystem : SharedLadderSystem
         _viewSubscriber.RemoveViewSubscriber(ent, player);
     }
 
+    /// <summary>
+    /// Given a list of ladders with the same <see cref="LadderComponent.Id"/>, loop through the list in pairs of two and link each ladder's
+    /// <see cref="LadderComponent.Above"/> and <see cref="LadderComponent.Below"/> to each other, in order of their <see cref="LadderComponent.Level"/>.
+    /// </summary>
+    /// <param name="group">List of ladders to link. (LLL)</param>
+    private void UpdateAdjacent(IEnumerable<Entity<LadderComponent>> group)
+    {
+        var orderedGroup = group.OrderBy(l => l.Comp.Level).ToList();
+        if (orderedGroup.Count < 2)
+            return;
+
+        // Reset the top and bottom elements just in case something got deleted.
+        orderedGroup[0].Comp.Below = null;
+        orderedGroup[^1].Comp.Above = null;
+
+        // `.Zip()` of the list, and the list with the first element skipped, so it returns a tuple of two elements at a time.
+        foreach (var (current, next) in orderedGroup.Zip(orderedGroup.Skip(1)))
+        {
+            DebugTools.AssertEqual(current.Comp.GroupId, next.Comp.GroupId); // shouldn't ever get this far but you know ¯\(ツ)/¯
+            current.Comp.Above = next;
+            next.Comp.Below = current;
+        }
+
+        // Doing this seperately for the sake of simplicity. If it was in the loop above each ladder could be dirtied twice.
+        foreach (var ladder in orderedGroup)
+            Dirty(ladder);
+    }
+
     public override void Update(float frameTime)
     {
         if (_toUpdate.Count == 0)
@@ -138,7 +250,7 @@ public sealed class LadderSystem : SharedLadderSystem
             if (!LadderQuery.TryComp(entity, out var ladderComp))
                 continue;
 
-            if (ladderComp.Id is not { } id)
+            if (ladderComp.GroupId is not { } id)
                 continue;
 
             _toUpdateIds.GetOrNew(id).Add((entity, ladderComp));
@@ -146,30 +258,15 @@ public sealed class LadderSystem : SharedLadderSystem
         _toUpdate.Clear();
 
         var ladders = EntityQueryEnumerator<LadderComponent>();
-        while (ladders.MoveNext(out var uid, out var ladder))
+        while (ladders.MoveNext(out _, out var ladder))
         {
-            if (ladder.Id == null)
+            if (ladder.GroupId == null)
                 continue;
 
-            if (!_toUpdateIds.TryGetValue(ladder.Id, out var ids))
+            if (!_toUpdateIds.TryGetValue(ladder.GroupId, out var ladderGroup))
                 continue;
 
-            // Debug-only check to make sure that each direction appears a max of once in each ID group.
-            // (this means that there's currently a maximum of 3 ladders per group)
-            // todo: just move this over to the mapping command as a console error thingy
-            DebugTools.Assert(!ids
-                .GroupBy(i => i.Comp.Direction)
-                .Any(i => i.Count() > 1));
-
-            var connectedLadders = ids
-                .Where(l => l.Owner != uid)
-                .Select(l => l.Owner);
-
-            if (!connectedLadders.Any())
-                continue;
-
-            ladder.Connected = connectedLadders.ToHashSet();
-            Dirty(uid, ladder);
+            UpdateAdjacent(ladderGroup);
         }
     }
 }

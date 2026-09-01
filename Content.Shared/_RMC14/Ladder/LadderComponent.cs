@@ -7,14 +7,38 @@ namespace Content.Shared._RMC14.Ladder;
 [Access(typeof(SharedLadderSystem))]
 public sealed partial class LadderComponent : Component
 {
+    /// <summary>
+    /// The "Group ID" string of this ladder. On mapload, all ladders with matching IDs will be
+    /// linked together in order of their <see cref="Level"/>.
+    /// </summary>
+    /// <remarks>
+    /// When mapping, this should be set using the ladder commands.
+    /// </remarks>
+    [ViewVariables(VVAccess.ReadOnly)]
     [DataField, AutoNetworkedField]
-    public string? Id;
+    public string? GroupId;
 
-    [DataField(required: true), AutoNetworkedField]
-    public LadderDirection Direction;
-
+    /// <summary>
+    /// The ""floor level"" that the ladder is on.
+    /// Moving from a lower to higher level means you're climbing upwards, and vice versa.
+    /// </summary>
+    /// <remarks>
+    /// When mapping, this should be set using the ladder commands, or with the View Variables menu.
+    /// </remarks>
     [DataField, AutoNetworkedField]
-    public HashSet<EntityUid> Connected = new();
+    public int Level;
+
+    /// <summary>
+    /// The ladder entity "above" this one, if any.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityUid? Above;
+
+    /// <summary>
+    /// The ladder entity "below" this one, if any.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityUid? Below;
 
     [DataField, AutoNetworkedField]
     public TimeSpan Delay = TimeSpan.FromSeconds(2);
@@ -32,15 +56,5 @@ public sealed partial class LadderComponent : Component
     public TimeSpan LastDoAfterTime;
 
     [DataField, AutoNetworkedField]
-    public HashSet<EntityUid> Watching = new();
-}
-
-[Flags]
-public enum LadderDirection : byte
-{
-    Invalid = 0,
-    Up = 1 << 0,
-    Down = 1 << 1,
-
-    Both = Up | Down,
+    public HashSet<EntityUid> Watching = [];
 }

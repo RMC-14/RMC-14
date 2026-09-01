@@ -1,6 +1,7 @@
 ﻿- type: entity
   id: RMCLadder
   name: ladder
+  suffix: Down
   description: A sturdy metal ladder.
   placement:
     mode: SnapgridCenter
@@ -19,13 +20,12 @@
   - type: PlacementReplacement
     key: ladders
   - type: Ladder
-    direction: Down
   - type: BlockXenoConstruction
   - type: RMCMesonsNonviewable
   - type: RMCIgnoreGhostInteractionLimits
   - type: UserInterface
     interfaces:
-      enum.LadderBuiKey.Key:
+      enum.LadderRadialBuiKey.Key:
         type: LadderBoundUserInterface
 
 - type: entity
@@ -35,8 +35,6 @@
   components:
   - type: Sprite
     state: ladderup
-  - type: Ladder
-    direction: Up
 
 - type: entity
   parent: RMCLadder
@@ -45,8 +43,6 @@
   components:
   - type: Sprite
     state: ladder11
-  - type: Ladder
-    direction: Both
 
 - type: entity
   parent: RMCLadder

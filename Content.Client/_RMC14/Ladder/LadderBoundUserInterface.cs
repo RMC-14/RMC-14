@@ -9,65 +9,58 @@ namespace Content.Client._RMC14.Ladder;
 [UsedImplicitly]
 public sealed class LadderBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    private static readonly Dictionary<RadialDirection, SpriteSpecifier> ButtonSprites = new()
-    {
-        { RadialDirection.Up, new SpriteSpecifier.Rsi(new ResPath("_RMC14/Interface/radial.rsi"), "radial_up") },
-        { RadialDirection.Down, new SpriteSpecifier.Rsi(new ResPath("_RMC14/Interface/radial.rsi"), "radial_down") }
-    };
-
     private SimpleRadialMenu? _menu;
 
     protected override void Open()
     {
-        if (!EntMan.TryGetComponent<LadderComponent>(Owner, out var ladderComp)
-            || ladderComp.Connected.Count < 2)
-        {
+        base.Open();
+        EnsureWindow();
+    }
+
+    protected override void UpdateState(BoundUserInterfaceState state)
+    {
+        if (state is not LadderRadialBuiState ladderState)
             return;
+
+        var window = EnsureWindow();
+
+        var buttons = new List<RadialMenuActionOption>();
+        if (ladderState.Above is { } ladderAbove)
+        {
+            var upButton = new RadialMenuActionOption<NetEntity>(SelectDirection, ladderAbove)
+            {
+                Sprite = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Interface/radial.rsi"), "radial_up")
+            };
+            buttons.Add(upButton);
+        }
+        if (ladderState.Below is { } ladderBelow)
+        {
+            var downButton = new RadialMenuActionOption<NetEntity>(SelectDirection, ladderBelow)
+            {
+                Sprite = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Interface/radial.rsi"), "radial_down")
+            };
+            buttons.Add(downButton);
         }
 
-        base.Open();
-
-        _menu = this.CreateWindow<SimpleRadialMenu>();
-        _menu.Track(Owner);
-        _menu.SetButtons(CreateButtons(ladderComp), new SimpleRadialMenuSettings
+        window.SetButtons(buttons, new SimpleRadialMenuSettings()
         {
             UseSectors = false
         });
     }
 
-    private List<RadialMenuActionOption> CreateButtons(LadderComponent ladderComp)
+    private SimpleRadialMenu EnsureWindow()
     {
-        var buttons = new List<RadialMenuActionOption>();
+        if (_menu != null)
+            return _menu;
 
-        var ownerDirection = ladderComp.Direction;
-        foreach (var connected in ladderComp.Connected)
-        {
-            if (!EntMan.TryGetComponent<LadderComponent>(connected, out var connectedLadder))
-                continue;
-
-            // this is a bit hacky but it works
-            var relativeDirection = connectedLadder.Direction > ownerDirection ? RadialDirection.Up : RadialDirection.Down;
-            var buttonIcon = ButtonSprites[relativeDirection];
-
-            var button = new RadialMenuActionOption<NetEntity>(SelectDirection, EntMan.GetNetEntity(connected))
-            {
-                Sprite = buttonIcon
-            };
-            buttons.Add(button);
-        }
-
-        return buttons;
+        _menu ??= this.CreateWindow<SimpleRadialMenu>();
+        _menu.Track(Owner);
+        return _menu;
     }
 
-    private void SelectDirection(NetEntity selected)
+    private void SelectDirection(NetEntity selectedLadder)
     {
-        var message = new RadialLadderSelectedMessage(selected);
+        var message = new LadderRadialSelectedMessage(selectedLadder);
         SendPredictedMessage(message);
     }
-}
-
-public enum RadialDirection
-{
-    Up,
-    Down
 }

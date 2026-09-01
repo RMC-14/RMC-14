@@ -38,6 +38,7 @@ public abstract class SharedLadderSystem : EntitySystem
         SubscribeLocalEvent<LadderComponent, ComponentRemove>(OnLadderRemove);
         SubscribeLocalEvent<LadderComponent, EntityTerminatingEvent>(OnLadderRemove);
         SubscribeLocalEvent<LadderComponent, ActivateInWorldEvent>(OnLadderActivateInWorld);
+        SubscribeLocalEvent<LadderComponent, LadderRadialSelectedMessage>(OnRadialMenuSelected);
         SubscribeLocalEvent<LadderComponent, DoAfterAttemptEvent<LadderDoAfterEvent>>(OnLadderDoAfterAttempt);
         SubscribeLocalEvent<LadderComponent, LadderDoAfterEvent>(OnLadderDoAfter);
         //SubscribeLocalEvent<LadderComponent, GetVerbsEvent<AlternativeVerb>>(OnLadderGetAltVerbs);
@@ -46,20 +47,6 @@ public abstract class SharedLadderSystem : EntitySystem
         //SubscribeLocalEvent<LadderComponent, DragDropDraggedEvent>(OnLadderDragDropDragged);
 
         SubscribeLocalEvent<LadderWatchingComponent, MoveInputEvent>(OnWatchingMoveInput);
-    }
-
-    protected void RemoveConnectedLadder(Entity<LadderComponent?> ent, EntityUid toRemove)
-    {
-        if (!Resolve(ent, ref ent.Comp))
-            return;
-
-        if (!ent.Comp.Connected.Remove(toRemove))
-            return;
-
-        // If `toRemove` was the last ladder connected to `ent`.
-        if (ent.Comp.Connected.Count < 2)
-            ent.Comp.Id = null;
-        Dirty(ent);
     }
 
     private void OnLadderRemove<T>(Entity<LadderComponent> ent, ref T args)
@@ -72,39 +59,50 @@ public abstract class SharedLadderSystem : EntitySystem
             RemCompDeferred<LadderWatchingComponent>(watching);
         }
 
-        foreach (var ladder in ent.Comp.Connected)
+        if (ent.Comp.Above is { } above &&
+            !TerminatingOrDeleted(above) &&
+            LadderQuery.TryComp(above, out var aboveComp))
         {
-            if (!TerminatingOrDeleted(ladder) &&
-                LadderQuery.TryComp(ladder, out var ladderComp))
-            {
-                // Remove this ladder from any others that are connected to it.
-                RemoveConnectedLadder((ladder, ladderComp), ent);
-            }
+            aboveComp.Below = null;
+            Dirty(above, aboveComp);
+        }
+
+        if (ent.Comp.Below is { } below &&
+            !TerminatingOrDeleted(below) &&
+            LadderQuery.TryComp(below, out var belowComp))
+        {
+            belowComp.Above = null;
+            Dirty(below, belowComp);
         }
     }
 
     private void OnLadderActivateInWorld(Entity<LadderComponent> ent, ref ActivateInWorldEvent args)
     {
-        if (GetDestinationLadder(ent, args.User) is { } destinationLadder)
-            TryStartClimbing(ent, destinationLadder, args.User);
-    }
-
-    private EntityUid? GetDestinationLadder(Entity<LadderComponent> ent, EntityUid user)
-    {
-        switch (ent.Comp.Connected.Count)
+        // todo: make this less stupid
+        if (ent.Comp.Above != null && ent.Comp.Below != null)
         {
-            case 0:
-                _popup.PopupClient(Loc.GetString("rmc-ladder-leads-nowhere"), ent, user, PopupType.SmallCaution);
-                return null;
-            case 1:
-                return ent.Comp.Connected.First();
-            default:
-                ShowRadialMenu(ent, user);
-                return null; // done through the radial menu
+            OpenRadialMenu(ent, args.User);
+        }
+        else if (ent.Comp.Above != null)
+        {
+            StartClimbing(ent, ent.Comp.Above.Value, args.User);
+        }
+        else if (ent.Comp.Below != null)
+        {
+            StartClimbing(ent, ent.Comp.Below.Value, args.User);
+        }
+        else
+        {
+            _popup.PopupClient(Loc.GetString("rmc-ladder-leads-nowhere"), ent, args.User, PopupType.SmallCaution);
         }
     }
 
-    private void TryStartClimbing(Entity<LadderComponent> ent, EntityUid destinationLadder, EntityUid user)
+    private void OnRadialMenuSelected(Entity<LadderComponent> ent, ref LadderRadialSelectedMessage args)
+    {
+        StartClimbing(ent, GetEntity(args.DestinationLadder), args.Actor);
+    }
+
+    private void StartClimbing(Entity<LadderComponent> ent, EntityUid destinationLadder, EntityUid user)
     {
         var time = _timing.CurTime;
         if (ent.Comp.LastDoAfterEnt is { } lastEnt &&
@@ -264,7 +262,7 @@ public abstract class SharedLadderSystem : EntitySystem
             Unwatch(ent.Owner, actor.PlayerSession);
     }
 
-    protected virtual void ShowRadialMenu(Entity<LadderComponent> ent, EntityUid user)
+    protected virtual void OpenRadialMenu(Entity<LadderComponent> ent, EntityUid user)
     { }
 
     protected virtual void AddViewer(Entity<LadderComponent> ent, ICommonSession player)
