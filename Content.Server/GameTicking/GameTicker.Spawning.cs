@@ -198,7 +198,10 @@ namespace Content.Server.GameTicking
             ;
             Log.Debug($"""
                 Collected job assignments:
-                  {string.Join("\n  ", jobAssignments.Select(x => $"{x.Key}: {x.Value[0].AssignmentLimit}"))}
+                  {string.Join("\n  ", jobAssignments.Select(x => $"{x.Key}: {string.Join(", ", x.Value.Select(x => x.AssignmentLimit))}"))}
+
+                Meta job assignments:
+                  {string.Join("\n  ", metaJobAssignments.Select(x => $"{x.Name}: {x.AssignmentLimit}"))}
 
                 Player assigmnets:
                   {string.Join("\n  ", processingPlayers.Select(x => $"{x.Session}: {x.AssignedJob?.JobID}"))}
