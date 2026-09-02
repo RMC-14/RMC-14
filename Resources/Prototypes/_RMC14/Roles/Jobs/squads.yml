@@ -134,7 +134,7 @@
      state: background_intel
     canSupplyDrop: false
     maxRoles: # Parity says no squad marines in intel outside RFN
-      CMCombatTech: 0 
+      CMCombatTech: 0
       CMHospitalCorpsman: 0
       CMSmartGunOperator: 0
       CMWeaponsSpecialist: 0
