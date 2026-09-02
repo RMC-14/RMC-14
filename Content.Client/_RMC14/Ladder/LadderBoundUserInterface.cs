@@ -1,18 +1,31 @@
 using Content.Client.UserInterface.Controls;
 using Content.Shared._RMC14.Ladder;
 using JetBrains.Annotations;
+using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
+using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Utility;
+using System.Linq;
 using System.Numerics;
 
 namespace Content.Client._RMC14.Ladder;
 
 [UsedImplicitly]
-public sealed class LadderBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed class LadderBoundUserInterface : BoundUserInterface
 {
+    private readonly SpriteSystem _sprite;
+
     private SimpleRadialMenu? _menu;
 
     private SelectionReason? _reason;
+
+    private static readonly SpriteSpecifier UpIcon = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Interface/radial.rsi"), "radial_up");
+    private static readonly SpriteSpecifier DownIcon = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Interface/radial.rsi"), "radial_down");
+
+    public LadderBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
+    {
+        _sprite = EntMan.System<SpriteSystem>();
+    }
 
     protected override void Open()
     {
@@ -36,24 +49,18 @@ public sealed class LadderBoundUserInterface(EntityUid owner, Enum uiKey) : Boun
         };
 
         var buttons = new List<RadialMenuActionOption>();
-        if (ladderState.Above is { } ladderAbove)
+        var upButton = new RadialMenuActionOption<NetEntity>(SelectDirection, ladderState.Above)
         {
-            var upButton = new RadialMenuActionOption<NetEntity>(SelectDirection, ladderAbove)
-            {
-                Sprite = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Interface/radial.rsi"), "radial_up"),
-                ToolTip = actionString == null ? null : Loc.GetString("rmc-ladder-radial-tooltip-up", ("action", actionString))
-            };
-            buttons.Add(upButton);
-        }
-        if (ladderState.Below is { } ladderBelow)
+            ToolTip = actionString == null ? null : Loc.GetString("rmc-ladder-radial-tooltip-up", ("action", actionString))
+        };
+        buttons.Add(upButton);
+
+        var downButton = new RadialMenuActionOption<NetEntity>(SelectDirection, ladderState.Below)
         {
-            var downButton = new RadialMenuActionOption<NetEntity>(SelectDirection, ladderBelow)
-            {
-                Sprite = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Interface/radial.rsi"), "radial_down"),
-                ToolTip = actionString == null ? null : Loc.GetString("rmc-ladder-radial-tooltip-down", ("action", actionString))
-            };
-            buttons.Add(downButton);
-        }
+            ToolTip = actionString == null ? null : Loc.GetString("rmc-ladder-radial-tooltip-down", ("action", actionString))
+        };
+        buttons.Add(downButton);
+
 
         window.SetButtons(buttons, new SimpleRadialMenuSettings()
         {
@@ -69,13 +76,32 @@ public sealed class LadderBoundUserInterface(EntityUid owner, Enum uiKey) : Boun
             container.RadialAlignment = RadialContainer.RAlignment.AntiClockwise;
             container.AngularRange = new Vector2(MathF.Tau / 4, MathF.Tau * 3 / 4);
 
-            foreach (var button in container.Children)
-            {
-                button.AddStyleClass("RadialMenuButton");
-                // Todo: this doesn't actually work yet :(
-            }
+            if (container.ChildCount < 2)
+                return;
+
+            // In order of the buttons' creation above.
+            AddButtonIcon(container.Children.ElementAt(0), UpIcon);
+            AddButtonIcon(container.Children.ElementAt(1), DownIcon);
             break;
         }
+    }
+
+    // Workaround until `RadialMenuIconSpecifier` is ported from upstream.
+    //
+    // Basically, radial menu buttons can only have a background if their icon is set as a child
+    // of the button for various confusing reasons. The current implementation of `SimpleRadialMenu`
+    // sets the icon as the button's `TextureNormal`, so this is to get around that.
+    private void AddButtonIcon(Control button, SpriteSpecifier icon)
+    {
+        var actualButtonSprite = new TextureRect
+        {
+            VerticalAlignment = Control.VAlignment.Center,
+            HorizontalAlignment = Control.HAlignment.Center,
+            Texture = _sprite.Frame0(icon),
+            TextureScale = new Vector2(2f, 2f)
+        };
+        button.AddChild(actualButtonSprite);
+        button.AddStyleClass("RadialMenuButton");
     }
 
     private SimpleRadialMenu EnsureWindow()

@@ -9,10 +9,10 @@ public enum LadderRadialBuiKey : byte
 }
 
 [Serializable, NetSerializable]
-public sealed class LadderRadialBuiState(NetEntity? above, NetEntity? below, SelectionReason reason) : BoundUserInterfaceState
+public sealed class LadderRadialBuiState(NetEntity above, NetEntity below, SelectionReason reason) : BoundUserInterfaceState
 {
-    public readonly NetEntity? Above = above;
-    public readonly NetEntity? Below = below;
+    public readonly NetEntity Above = above;
+    public readonly NetEntity Below = below;
     public readonly SelectionReason Reason = reason;
 }
 

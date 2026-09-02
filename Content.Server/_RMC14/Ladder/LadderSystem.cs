@@ -143,14 +143,14 @@ public sealed class LadderSystem : SharedLadderSystem
 
     protected override void OpenRadialMenu(Entity<LadderComponent> ent, EntityUid user, SelectionReason reason)
     {
-        if (ent.Comp.Above == null && ent.Comp.Below == null)
+        if (ent.Comp.Above is not { } above || ent.Comp.Below is not { } below)
         {
-            Log.Error($"Ladder {ToPrettyString(ent)} tried to open a radial menu, but has no valid ladders connected!");
+            Log.Error($"Ladder {ToPrettyString(ent)} tried to open a radial menu, but doesn't have two connected ladders! (Above: {ToPrettyString(ent.Comp.Above)} | Below: {ToPrettyString(ent.Comp.Below)})");
             return;
         }
 
         _uiSystem.OpenUi(ent.Owner, LadderRadialBuiKey.Key, user);
-        _uiSystem.SetUiState(ent.Owner, LadderRadialBuiKey.Key, new LadderRadialBuiState(GetNetEntity(ent.Comp.Above), GetNetEntity(ent.Comp.Below), reason));
+        _uiSystem.SetUiState(ent.Owner, LadderRadialBuiKey.Key, new LadderRadialBuiState(GetNetEntity(above), GetNetEntity(below), reason));
     }
 
     protected override void Watch(Entity<ActorComponent?, EyeComponent?> watcher, Entity<LadderComponent?> toWatch)
