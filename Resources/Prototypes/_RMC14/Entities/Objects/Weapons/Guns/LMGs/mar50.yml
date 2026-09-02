@@ -25,7 +25,7 @@
     - Burst
     - FullAuto
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_mar40.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_mar50.ogg
       params:
         volume: -0.2
         pitch: 0.85
