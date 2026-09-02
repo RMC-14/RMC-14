@@ -30,7 +30,7 @@ using Content.Server._RMC14.Announce;
 
 namespace Content.Server.GameTicking
 {
-    using JobAssignmentsDict = Dictionary<ProtoId<JobPrototype>, List<JobAssignment>>;
+    using JobAssignmentsDict = Dictionary<ProtoId<JobPrototype>, List<JobAssignment>>; // RMC
 
     public sealed partial class GameTicker
     {
