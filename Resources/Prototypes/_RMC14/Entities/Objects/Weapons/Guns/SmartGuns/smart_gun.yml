@@ -281,6 +281,7 @@
   - type: Gun
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a.ogg
+      volume: -1
   - type: ItemSlots
     slots:
       gun_magazine:

@@ -173,6 +173,11 @@
   copyright: "Taken and modified from freesound.org. Mixed with CC0-1.0 sample from https://freesound.org/people/areniporgen/sounds/702225/ by Serithi (discord)"
   source: "https://freesound.org/people/SuperPhat/sounds/417686/"
 
+- files: ["gun_m54c_2.ogg"]
+  license: "CC0-1.0"
+  copyright: "Taken and modified from freesound.org"
+  source: "https://freesound.org/people/SuperPhat/sounds/417686/"
+
 - files: ["gun_shotgun_small.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13. Modified by kleinerstation13 (Github)"
