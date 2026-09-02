@@ -41,12 +41,19 @@ public abstract class SharedLadderSystem : EntitySystem
         SubscribeLocalEvent<LadderComponent, LadderRadialSelectedMessage>(OnRadialMenuSelected);
         SubscribeLocalEvent<LadderComponent, DoAfterAttemptEvent<LadderDoAfterEvent>>(OnLadderDoAfterAttempt);
         SubscribeLocalEvent<LadderComponent, LadderDoAfterEvent>(OnLadderDoAfter);
-        //SubscribeLocalEvent<LadderComponent, GetVerbsEvent<AlternativeVerb>>(OnLadderGetAltVerbs);
+        SubscribeLocalEvent<LadderComponent, GetVerbsEvent<AlternativeVerb>>(OnLadderGetAltVerbs);
         SubscribeLocalEvent<LadderComponent, CanDropDraggedEvent>(OnLadderCanDropDragged);
         SubscribeLocalEvent<LadderComponent, CanDragEvent>(OnLadderCanDrag);
-        //SubscribeLocalEvent<LadderComponent, DragDropDraggedEvent>(OnLadderDragDropDragged);
+        SubscribeLocalEvent<LadderComponent, DragDropDraggedEvent>(OnLadderDragDropDragged);
 
         SubscribeLocalEvent<LadderWatchingComponent, MoveInputEvent>(OnWatchingMoveInput);
+    }
+
+    public bool LadderIsConnected(Entity<LadderComponent?> ent)
+    {
+        if (!Resolve(ent, ref ent.Comp))
+            return false;
+        return ent.Comp.Above.HasValue || ent.Comp.Below.HasValue;
     }
 
     private void OnLadderRemove<T>(Entity<LadderComponent> ent, ref T args)
@@ -78,28 +85,44 @@ public abstract class SharedLadderSystem : EntitySystem
 
     private void OnLadderActivateInWorld(Entity<LadderComponent> ent, ref ActivateInWorldEvent args)
     {
-        // todo: make this less stupid
-        if (ent.Comp.Above != null && ent.Comp.Below != null)
+        if (SelectConnectedLadder(ent, args.User, SelectionReason.Climb) is { } connecedLadder)
+            StartClimbing(ent, connecedLadder, args.User);
+    }
+
+    // Returns either the UID of the sole connected ladder, or opens a radial menu for the user to pick one and returns null.
+    private EntityUid? SelectConnectedLadder(Entity<LadderComponent> ent, EntityUid user, SelectionReason reason)
+    {
+        switch (ent.Comp.Above, ent.Comp.Below)
         {
-            OpenRadialMenu(ent, args.User);
-        }
-        else if (ent.Comp.Above != null)
-        {
-            StartClimbing(ent, ent.Comp.Above.Value, args.User);
-        }
-        else if (ent.Comp.Below != null)
-        {
-            StartClimbing(ent, ent.Comp.Below.Value, args.User);
-        }
-        else
-        {
-            _popup.PopupClient(Loc.GetString("rmc-ladder-leads-nowhere"), ent, args.User, PopupType.SmallCaution);
+            // `Above` and `Below` are both set.
+            case (not null, not null):
+                OpenRadialMenu(ent, user, reason);
+                // Return null since the radial menu handles it from here.
+                return null;
+            // Only `Above` is set.
+            case (not null, null):
+                return ent.Comp.Above;
+            // Only `Below` is set.
+            case (null, not null):
+                return ent.Comp.Below;
+            // None of the above.
+            default:
+                _popup.PopupClient(Loc.GetString("rmc-ladder-leads-nowhere"), ent, user, PopupType.SmallCaution);
+                return null;
         }
     }
 
     private void OnRadialMenuSelected(Entity<LadderComponent> ent, ref LadderRadialSelectedMessage args)
     {
-        StartClimbing(ent, GetEntity(args.DestinationLadder), args.Actor);
+        switch (args.Reason)
+        {
+            case SelectionReason.Climb:
+                StartClimbing(ent, GetEntity(args.DestinationLadder), args.Actor);
+                break;
+            case SelectionReason.Watch:
+                Watch(args.Actor, GetEntity(args.DestinationLadder));
+                break;
+        }
     }
 
     private void StartClimbing(Entity<LadderComponent> ent, EntityUid destinationLadder, EntityUid user)
@@ -198,27 +221,29 @@ public abstract class SharedLadderSystem : EntitySystem
         _rmcTeleporter.HandlePulling(user, coordinates);
     }
 
-    // TODO: Use the same selection radial menu when you click the verb
-    // private void OnLadderGetAltVerbs(Entity<LadderComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
-    // {
-    //     if (ent.Comp.Other is not { } other)
-    //         return;
+    private void OnLadderGetAltVerbs(Entity<LadderComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!LadderIsConnected(ent.AsNullable()))
+            return;
 
-    //     var user = args.User;
-    //     if (!CanWatchPopup(ent, user))
-    //         return;
+        var user = args.User;
+        if (!_interaction.InRangeUnobstructed(user, ent.Owner))
+            return;
 
-    //     args.Verbs.Add(new AlternativeVerb
-    //     {
-    //         Priority = 100,
-    //         Act = () =>
-    //         {
-    //             if (CanWatchPopup(ent, user))
-    //                 Watch(user, other);
-    //         },
-    //         Text = Loc.GetString("rmc-ladder-look-through"),
-    //     });
-    // }
+        args.Verbs.Add(new AlternativeVerb
+        {
+            Priority = 100,
+            Act = () =>
+            {
+                if (CanWatchPopup(ent, user) &&
+                    SelectConnectedLadder(ent, user, SelectionReason.Watch) is { } otherLadder)
+                {
+                    Watch(user, otherLadder);
+                }
+            },
+            Text = Loc.GetString("rmc-ladder-look-through"),
+        });
+    }
 
     private void OnLadderCanDropDragged(Entity<LadderComponent> ent, ref CanDropDraggedEvent args)
     {
@@ -234,22 +259,19 @@ public abstract class SharedLadderSystem : EntitySystem
         args.Handled = true;
     }
 
-    // todo
-    // private void OnLadderDragDropDragged(Entity<LadderComponent> ent, ref DragDropDraggedEvent args)
-    // {
-    //     var user = args.User;
-    //     if (ent.Comp.Other is not { } other ||
-    //         user != args.Target)
-    //     {
-    //         return;
-    //     }
+    private void OnLadderDragDropDragged(Entity<LadderComponent> ent, ref DragDropDraggedEvent args)
+    {
+        var user = args.User;
+        if (user != args.Target || !LadderIsConnected(ent.AsNullable()))
+            return;
 
-    //     if (!CanWatchPopup(ent, user))
-    //         return;
+        if (!CanWatchPopup(ent, user))
+            return;
 
-    //     args.Handled = true;
-    //     Watch(user, other);
-    // }
+        args.Handled = true;
+        if (SelectConnectedLadder(ent, user, SelectionReason.Watch) is { } otherLadder)
+            Watch(user, otherLadder);
+    }
 
     private void OnWatchingMoveInput(Entity<LadderWatchingComponent> ent, ref MoveInputEvent args)
     {
@@ -262,7 +284,7 @@ public abstract class SharedLadderSystem : EntitySystem
             Unwatch(ent.Owner, actor.PlayerSession);
     }
 
-    protected virtual void OpenRadialMenu(Entity<LadderComponent> ent, EntityUid user)
+    protected virtual void OpenRadialMenu(Entity<LadderComponent> ent, EntityUid user, SelectionReason reason)
     { }
 
     protected virtual void AddViewer(Entity<LadderComponent> ent, ICommonSession player)

@@ -9,14 +9,26 @@ public enum LadderRadialBuiKey : byte
 }
 
 [Serializable, NetSerializable]
-public sealed class LadderRadialBuiState(NetEntity? above, NetEntity? below) : BoundUserInterfaceState
+public sealed class LadderRadialBuiState(NetEntity? above, NetEntity? below, SelectionReason reason) : BoundUserInterfaceState
 {
     public readonly NetEntity? Above = above;
     public readonly NetEntity? Below = below;
+    public readonly SelectionReason Reason = reason;
 }
 
 [Serializable, NetSerializable]
-public sealed class LadderRadialSelectedMessage(NetEntity destinationLadder) : BoundUserInterfaceMessage
+public sealed class LadderRadialSelectedMessage(NetEntity destinationLadder, SelectionReason reason) : BoundUserInterfaceMessage
 {
-    public NetEntity DestinationLadder = destinationLadder;
+    public readonly NetEntity DestinationLadder = destinationLadder;
+    public readonly SelectionReason Reason = reason;
+}
+
+/// <summary>
+/// Used so that the ladder system knows what to do with the selected ladder once it's sent back.
+/// </summary>
+[Serializable, NetSerializable]
+public enum SelectionReason : byte
+{
+    Climb,
+    Watch
 }

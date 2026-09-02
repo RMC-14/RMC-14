@@ -141,7 +141,7 @@ public sealed class LadderSystem : SharedLadderSystem
         RemoveWatcher(ent);
     }
 
-    protected override void OpenRadialMenu(Entity<LadderComponent> ent, EntityUid user)
+    protected override void OpenRadialMenu(Entity<LadderComponent> ent, EntityUid user, SelectionReason reason)
     {
         if (ent.Comp.Above == null && ent.Comp.Below == null)
         {
@@ -150,7 +150,7 @@ public sealed class LadderSystem : SharedLadderSystem
         }
 
         _uiSystem.OpenUi(ent.Owner, LadderRadialBuiKey.Key, user);
-        _uiSystem.SetUiState(ent.Owner, LadderRadialBuiKey.Key, new LadderRadialBuiState(GetNetEntity(ent.Comp.Above), GetNetEntity(ent.Comp.Below)));
+        _uiSystem.SetUiState(ent.Owner, LadderRadialBuiKey.Key, new LadderRadialBuiState(GetNetEntity(ent.Comp.Above), GetNetEntity(ent.Comp.Below), reason));
     }
 
     protected override void Watch(Entity<ActorComponent?, EyeComponent?> watcher, Entity<LadderComponent?> toWatch)

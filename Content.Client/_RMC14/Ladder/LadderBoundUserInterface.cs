@@ -12,6 +12,8 @@ public sealed class LadderBoundUserInterface(EntityUid owner, Enum uiKey) : Boun
 {
     private SimpleRadialMenu? _menu;
 
+    private SelectionReason? _reason;
+
     protected override void Open()
     {
         base.Open();
@@ -23,14 +25,23 @@ public sealed class LadderBoundUserInterface(EntityUid owner, Enum uiKey) : Boun
         if (state is not LadderRadialBuiState ladderState)
             return;
 
+        _reason = ladderState.Reason;
         var window = EnsureWindow();
+
+        var actionString = _reason switch
+        {
+            SelectionReason.Climb => Loc.GetString("rmc-ladder-radial-action-climb"),
+            SelectionReason.Watch => Loc.GetString("rmc-ladder-radial-action-look"),
+            _ => null,
+        };
 
         var buttons = new List<RadialMenuActionOption>();
         if (ladderState.Above is { } ladderAbove)
         {
             var upButton = new RadialMenuActionOption<NetEntity>(SelectDirection, ladderAbove)
             {
-                Sprite = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Interface/radial.rsi"), "radial_up")
+                Sprite = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Interface/radial.rsi"), "radial_up"),
+                ToolTip = actionString == null ? null : Loc.GetString("rmc-ladder-radial-tooltip-up", ("action", actionString))
             };
             buttons.Add(upButton);
         }
@@ -38,7 +49,8 @@ public sealed class LadderBoundUserInterface(EntityUid owner, Enum uiKey) : Boun
         {
             var downButton = new RadialMenuActionOption<NetEntity>(SelectDirection, ladderBelow)
             {
-                Sprite = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Interface/radial.rsi"), "radial_down")
+                Sprite = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Interface/radial.rsi"), "radial_down"),
+                ToolTip = actionString == null ? null : Loc.GetString("rmc-ladder-radial-tooltip-down", ("action", actionString))
             };
             buttons.Add(downButton);
         }
@@ -78,7 +90,10 @@ public sealed class LadderBoundUserInterface(EntityUid owner, Enum uiKey) : Boun
 
     private void SelectDirection(NetEntity selectedLadder)
     {
-        var message = new LadderRadialSelectedMessage(selectedLadder);
-        SendPredictedMessage(message);
+        if (_reason is { } selectionReason)
+        {
+            var message = new LadderRadialSelectedMessage(selectedLadder, selectionReason);
+            SendPredictedMessage(message);
+        }
     }
 }
