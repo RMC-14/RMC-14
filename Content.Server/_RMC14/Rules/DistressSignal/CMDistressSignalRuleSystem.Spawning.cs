@@ -127,7 +127,6 @@ public sealed partial class CMDistressSignalRuleSystem
                 continue;
             var assignment = new JobAssignment(jobProto, null);
             assignment.AssignmentLimit = 1;
-            survAssignment.Assignments.Add(assignment);
             ev.JobAssignments[job] = new List<JobAssignment> { assignment };
         }
 
