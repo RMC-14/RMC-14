@@ -133,12 +133,12 @@
      sprite: /Textures/_RMC14/Interface/map_blips.rsi
      state: background_intel
     canSupplyDrop: false
-    maxRoles:
-      CMCombatTech: 3
-      CMHospitalCorpsman: 4
-      CMSmartGunOperator: 1 # for astor
-      CMWeaponsSpecialist: 1
-      CMFireteamLeader: 1
+    maxRoles: # Parity says no squad marines in intel outside RFN
+      CMCombatTech: 0 
+      CMHospitalCorpsman: 0
+      CMSmartGunOperator: 0
+      CMWeaponsSpecialist: 0
+      CMFireteamLeader: 0
       CMSquadLeader: 0
   - type: Tag
     tags:
