@@ -43,7 +43,7 @@ public sealed partial class CMDistressSignalRuleSystem
     private List<EntityUid> _xenoLeaderSpawnPoints = new List<EntityUid>();
     private Dictionary<ProtoId<JobPrototype>, List<EntityUid>> _survivorSpawners = new Dictionary<ProtoId<JobPrototype>, List<EntityUid>>();
 
-    private void OnRMCPrePlayerSpawn(RMCPlayerSpawningEvent ev)
+    private void OnRMCPlayerSpawning(RMCPlayerSpawningEvent ev)
     {
         var player = ev.Player;
         var assignment = player.AssignedJob;
@@ -74,7 +74,8 @@ public sealed partial class CMDistressSignalRuleSystem
 
             _mind.TransferTo(mind.Value, xenoEnt);
         }
-        else if (comp.SurvivorJobs.Any(item => item.Job == assignment.JobID))
+        else if (comp.SurvivorJobs.Any(item => item.Job == assignment.JobID)
+            || comp.IgnoreMaximumSurvivorJobs.Contains(assignment.JobID))
         {
             SpawnSurvivor(player, comp);
         }
@@ -165,6 +166,20 @@ public sealed partial class CMDistressSignalRuleSystem
         // marine slots use station job slots. StationJobsSystem is responsible for converting
         // job slots into assignments. Thus this system must handle the event before StationJobsSystem.
         ApplyJobSlotScaling(ruleComp, roleWeights.MarineWeight, roleWeights.AssignedCount);
+    }
+
+    private void OnReplaceJob(ref ReplaceJobEvent ev)
+    {
+        if (TryGetActiveRule() is not { } rule)
+            return;
+
+        if (rule.SurvivorJobOverrides != null
+            && rule.SurvivorJobOverrides.TryGetValue(ev.JobId, out var replacementJob))
+        {
+            Log.Debug($"Replacing {ev.JobId} preference with {replacementJob}");
+            // replace original survivor job with the overriden one
+            ev.JobId = replacementJob;
+        }
     }
 
     /// <summary>

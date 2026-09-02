@@ -257,9 +257,10 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
 
         SubscribeLocalEvent<LoadingMapsEvent>(OnMapLoading);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
-        SubscribeLocalEvent<RMCPlayerSpawningEvent>(OnRMCPrePlayerSpawn);
+        SubscribeLocalEvent<RMCPlayerSpawningEvent>(OnRMCPlayerSpawning);
         SubscribeLocalEvent<InitializingAssignmentsEvent>(OnInitializingAssignments);
         SubscribeLocalEvent<CollectingAssignmentsEvent>(OnCollectingAssignments, before: [typeof(StationJobsSystem)]);
+        SubscribeLocalEvent<ReplaceJobEvent>(OnReplaceJob);
         SubscribeLocalEvent<RulePlayerSpawningEvent>(OnRulePlayerSpawning);
         SubscribeLocalEvent<PlayerSpawningEvent>(OnPlayerSpawning,
              before: [typeof(ArrivalsSystem), typeof(SpawnPointSystem)]);

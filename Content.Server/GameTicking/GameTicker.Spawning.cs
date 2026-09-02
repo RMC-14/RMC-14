@@ -118,6 +118,14 @@ namespace Content.Server.GameTicking
             Dictionary<NetUserId, HumanoidCharacterProfile> profiles,
             bool force)
         {
+            var processingPlayers = new List<PlayerSpawnInfo>();
+            var jobAssignments = new JobAssignmentsDict();
+            var weightedJobs = _stationJobs.GetWeightedJobs();
+            var metaJobAssignments = new HashSet<MetaJobAssignment>();
+            var metaPlayerAssignments = new HashSet<MetaPlayerAssignment>();
+
+            RaiseLocalEvent(new InitializingAssignmentsEvent(jobAssignments, metaJobAssignments, metaPlayerAssignments));
+
             var players = readyPlayers.Select(p => new PlayerSpawnInfo(p, profiles[p.UserId])).ToList();
             Random.Shared.Shuffle(players);
 
@@ -142,16 +150,23 @@ namespace Content.Server.GameTicking
                     if (ev.Cancelled)
                         continue; // player not whitelisted for this job
 
+                    // This might result in the same job appearing multiple times if multiple jobs
+                    // get replaced into the same one, but other than the occasional duplication of work
+                    // it should not cause problems with the behavior.
+                    var replaceEv = new ReplaceJobEvent(job);
+                    RaiseLocalEvent(ref replaceEv);
+                    var actualJob = replaceEv.JobId;
+
                     switch (priority)
                     {
                         case JobPriority.High:
-                            high.Add(job);
+                            high.Add(actualJob);
                             break;
                         case JobPriority.Medium:
-                            medium.Add(job);
+                            medium.Add(actualJob);
                             break;
                         case JobPriority.Low:
-                            low.Add(job);
+                            low.Add(actualJob);
                             break;
                         default:
                             break;
@@ -167,15 +182,9 @@ namespace Content.Server.GameTicking
                 player.JobPreferenceOrder.AddRange(high);
                 player.JobPreferenceOrder.AddRange(medium);
                 player.JobPreferenceOrder.AddRange(low);
+
+                Log.Debug($"Player {player.Session} preferences: [{string.Join(", ", player.JobPreferenceOrder)}]");
             }
-
-            var processingPlayers = new List<PlayerSpawnInfo>();
-            var jobAssignments = new JobAssignmentsDict();
-            var weightedJobs = _stationJobs.GetWeightedJobs();
-            var metaJobAssignments = new HashSet<MetaJobAssignment>();
-            var metaPlayerAssignments = new HashSet<MetaPlayerAssignment>();
-
-            RaiseLocalEvent(new InitializingAssignmentsEvent(jobAssignments, metaJobAssignments, metaPlayerAssignments));
 
             foreach (var newPlayer in players)
             {
@@ -200,6 +209,7 @@ namespace Content.Server.GameTicking
             void AssignAll()
             {
                 // Re-process all processed players so they can get more preferrable jobs if they were added to the pool.
+                Log.Debug("Assigning preferred jobs.");
                 foreach (var player in processingPlayers)
                 {
                     AssignPreferredAvailableJob(player, false);
@@ -211,6 +221,7 @@ namespace Content.Server.GameTicking
                     if (!jobAssignments.ContainsKey(weightedJob))
                         continue;
 
+                    Log.Debug($"Assigning weighted job {weightedJob}");
                     var reprocessStartIndex = processingPlayers.Count;
                     foreach (var unassigned in jobAssignments[weightedJob].Where(item => item.IsAssignable))
                     {
@@ -220,6 +231,9 @@ namespace Content.Server.GameTicking
                             reprocessStartIndex = assignedIndex;
                         }
                     }
+
+                    if (reprocessStartIndex >= processingPlayers.Count)
+                        Log.Debug($"Some players reassigned to weighted job {weightedJob}");
 
                     // If someone was re-assigned we have to reprocess all players that came after,
                     // except we must not re-assign players who were assigned higher weight jobs.
@@ -267,6 +281,8 @@ namespace Content.Server.GameTicking
                 {
                     var preferredJob = player.JobPreferenceOrder[i];
 
+                    Log.Debug($"Checking {player.Session} available slot for {preferredJob.Id}");
+
                     if (!jobAssignments.ContainsKey(preferredJob))
                         continue;
 
@@ -309,6 +325,8 @@ namespace Content.Server.GameTicking
                 newAssignment.AssignedPlayers.Add(player);
                 player.AssignedJob = newAssignment;
                 player.AssignedPreferenceIndex = newPreferenceIndex;
+
+                Log.Debug($"Assigned {player.Session} to job {newAssignment.JobID}");
             }
         }
 
@@ -974,5 +992,14 @@ namespace Content.Server.GameTicking
     {
         public readonly PlayerSpawnInfo Player = player;
     }
+
+    /// <summary>
+    /// Systems can subscribe to this event if a player's selected preferred job needs to be replaced
+    /// with a different job. As an RMC example, a civilian survivor preference might have to be replaced
+    /// with preference for a different kind of survivor, if no civilian survivor jobs exist.
+    /// </summary>
+    /// <param name="JobId"></param>
+    [ByRefEvent]
+    public record struct ReplaceJobEvent(ProtoId<JobPrototype> JobId);
     // RMC end
 }

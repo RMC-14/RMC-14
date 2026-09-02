@@ -22,6 +22,8 @@ public sealed partial class StationJobsSystem : EntitySystem
                 if (!exists)
                     assignments.Add(new JobAssignment(_prototypeManager.Index(jobId), stationId));
 
+                Log.Debug($"Setting assignment limit for {jobId} based on setup info {available}");
+
                 foreach (var assignment in assignments)
                 {
                     var limit = available[0];
