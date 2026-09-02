@@ -257,6 +257,20 @@
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/ocp_generic_glass.rsi
 
+- type: entity
+  parent: CMAirlock
+  id: RMCAirlockBlack
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/almayer_door_black.rsi
+
+- type: entity
+  parent: CMAirlockGlass
+  id: RMCAirlockGlassBlack
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/almayer_door_black_glass.rsi
+
 # Prep
 - type: entity
   parent: CMAirlockGlass
