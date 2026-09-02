@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Ladder;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 using Robust.Shared.Utility;
+using System.Numerics;
 
 namespace Content.Client._RMC14.Ladder;
 
@@ -46,6 +47,23 @@ public sealed class LadderBoundUserInterface(EntityUid owner, Enum uiKey) : Boun
         {
             UseSectors = false
         });
+
+        // Styling override thing because `SimpleRadialMenu` doesn't let you do this in a more "normal" way.
+        foreach (var child in window.Children)
+        {
+            if (child is not RadialContainer container)
+                continue;
+
+            container.RadialAlignment = RadialContainer.RAlignment.AntiClockwise;
+            container.AngularRange = new Vector2(MathF.Tau / 4, MathF.Tau * 3 / 4);
+
+            foreach (var button in container.Children)
+            {
+                button.AddStyleClass("RadialMenuButton");
+                // Todo: this doesn't actually work yet :(
+            }
+            break;
+        }
     }
 
     private SimpleRadialMenu EnsureWindow()

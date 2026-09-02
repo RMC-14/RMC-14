@@ -26,7 +26,7 @@ public sealed partial class LadderComponent : Component
     /// When mapping, this should be set using the ladder commands, or with the View Variables menu.
     /// </remarks>
     [DataField, AutoNetworkedField]
-    public int Level;
+    public int Level = 0;
 
     /// <summary>
     /// The ladder entity "above" this one, if any.

@@ -56,6 +56,9 @@ public sealed class LadderSystem : SharedLadderSystem
         if (!Resolve(ladder, ref ladder.Comp))
             return false;
 
+        if (ladder.Comp.GroupId == newGroupId)
+            return false;
+
         var group = GetLadderGroup(newGroupId);
         if (group.TryFirstOrNull(l => l.Comp.Level == ladder.Comp.Level, out var sameLevelLadder))
         {
@@ -84,6 +87,8 @@ public sealed class LadderSystem : SharedLadderSystem
         if (ladder.Comp.GroupId != oldGroupId)
             return false;
 
+        ladder.Comp.GroupId = null;
+        Dirty(ladder);
         var group = GetLadderGroup(oldGroupId);
         group.Remove((ladder.Owner, ladder.Comp));
         UpdateAdjacent(group);
@@ -111,7 +116,7 @@ public sealed class LadderSystem : SharedLadderSystem
         var group = GetLadderGroup(ladder.Comp.GroupId);
         if (group.TryFirstOrNull(l => l.Comp.Level == newLevel, out var sameLevelLadder))
         {
-            Log.Error($"Failed to change the Level of {ToPrettyString(ladder)} to {newLevel}, as {ToPrettyString(sameLevelLadder)} already holds that position!");
+            Log.Error($"Failed to change the Level of {ToPrettyString(ladder)} to {newLevel}. {ToPrettyString(sameLevelLadder)} already holds that position!");
             return false;
         }
 
