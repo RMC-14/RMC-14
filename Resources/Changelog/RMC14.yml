@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: PursuitInAshes
-  changes:
-  - message: Fixed the double lights located on New Varadero.
-    type: Fix
-  id: 3119
-  time: '2026-04-19T01:40:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9681
 - author: Magicocity1
   changes:
   - message: Fixed some pistols not having sprites underlay on the pistol pouch
@@ -4506,5 +4499,13 @@
   id: 3618
   time: '2026-09-02T00:57:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10812
+- author: muratendmo
+  changes:
+  - message: The Construction Pouch can now pick up valid sheets by clicking on them
+      with the pouch inhand.
+    type: Tweak
+  id: 3619
+  time: '2026-09-02T15:29:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10786
 Name: RMC14
 Order: -1
