@@ -96,8 +96,9 @@ public sealed partial class CMDistressSignalRuleSystem
         var spawnComp = EnsureComp<CMDistressSignalSpawningComponent>(rule);
 
         var survAssignment = spawnComp.SurvivorAssignment;
+        ev.MetaJobAssignments.Add(survAssignment);
 
-        // TODO RMC14 this isn't the right place for this initialization work
+        // TODO RMC14 this isn't the ideal place for this initialization work
         OperationName ??= GetRandomOperationName();
 
         if (!InitializeXenoMap(rule, ruleComp))
