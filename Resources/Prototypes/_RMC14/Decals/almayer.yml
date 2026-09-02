@@ -305,3 +305,255 @@
   sprite:
     sprite: _RMC14/Decals/almayer.rsi
     state: dropshiptwo9
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepAlphaUp1
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: alpha_up_1
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepAlphaUp2
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: alpha_up_2
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepAlphaUp3
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: alpha_up_3
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepAlphaDown1
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: alpha_down_1
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepAlphaDown2
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: alpha_down_2
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepAlphaDown3
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: alpha_down_3
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepBravoUp1
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: bravo_up_1
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepBravoUp2
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: bravo_up_2
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepBravoUp3
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: bravo_up_3
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepBravoDown1
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: bravo_down_1
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepBravoDown2
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: bravo_down_2
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepBravoDown3
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: bravo_down_3
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepCharlieUp1
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: charlie_up_1
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepCharlieUp2
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: charlie_up_2
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepCharlieUp3
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: charlie_up_3
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepCharlieDown1
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: charlie_down_1
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepCharlieDown2
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: charlie_down_2
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepCharlieDown3
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: charlie_down_3
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepDeltaUp1
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: delta_up_1
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepDeltaUp2
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: delta_up_2
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepDeltaUp3
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: delta_up_3
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepDeltaDown1
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: delta_down_1
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepDeltaDown2
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: delta_down_2
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepDeltaDown3
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: delta_down_3
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepEchoLeft1
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: echo_left_1
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepEchoLeft2
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: echo_left_2
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepEchoLeft3
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: echo_left_3
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepEchoRight1
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: echo_right_1
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepEchoRight2
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: echo_right_2
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepEchoRight3
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: echo_right_3
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepFoxtrotLeft1
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: foxtrot_left_1
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepFoxtrotLeft2
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: foxtrot_left_2
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepFoxtrotLeft3
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: foxtrot_left_3
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepFoxtrotRight1
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: foxtrot_right_1
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepFoxtrotRight2
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: foxtrot_right_2
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerPrepFoxtrotRight3
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: foxtrot_right_3
