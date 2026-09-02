@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Flowylove
-  changes:
-  - message: Makes patient on the surgery table unable to scream because of surgical
-      manipulations while rendered unconscious.
-    type: Tweak
-  id: 3118
-  time: '2026-04-19T01:38:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9603
 - author: PursuitInAshes
   changes:
   - message: Fixed the double lights located on New Varadero.
@@ -4501,5 +4493,18 @@
   id: 3617
   time: '2026-09-01T21:45:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10805
+- author: noctyrnal
+  changes:
+  - message: Added labels for prep and stairs.
+    type: Add
+  - message: Added single door variants of the double black doors found on the Almayer.
+    type: Add
+  - message: Added a new plating variant for the Almayer.
+    type: Add
+  - message: Added double prep doors for Echo and Foxtrot.
+    type: Add
+  id: 3618
+  time: '2026-09-02T00:57:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10812
 Name: RMC14
 Order: -1
