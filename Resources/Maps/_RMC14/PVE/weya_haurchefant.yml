@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 10/20/2025 02:16:29
+  time: 09/03/2026 16:09:01
   entityCount: 2758
 maps:
 - 1
@@ -12646,7 +12646,7 @@ entities:
       pos: 33.5,-1.5
       parent: 1
     - type: Ladder
-      id: WEYA_COMMAND_1
+      groupId: WEYA_COMMAND_1
     - type: Fixtures
       fixtures: {}
   - uid: 859
@@ -12655,7 +12655,7 @@ entities:
       pos: 33.5,-3.5
       parent: 1
     - type: Ladder
-      id: WEYA_COMMAND_2
+      groupId: WEYA_COMMAND_2
     - type: Fixtures
       fixtures: {}
   - uid: 2515
@@ -12664,7 +12664,8 @@ entities:
       pos: 4.5,-19.5
       parent: 1
     - type: Ladder
-      id: WEYA_COMMAND_1
+      level: 1
+      groupId: WEYA_COMMAND_1
     - type: Fixtures
       fixtures: {}
   - uid: 2516
@@ -12673,7 +12674,8 @@ entities:
       pos: 4.5,-21.5
       parent: 1
     - type: Ladder
-      id: WEYA_COMMAND_2
+      level: 1
+      groupId: WEYA_COMMAND_2
     - type: Fixtures
       fixtures: {}
 - proto: RMCLampGreen
