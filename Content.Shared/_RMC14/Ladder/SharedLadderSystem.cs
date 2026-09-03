@@ -49,11 +49,24 @@ public abstract class SharedLadderSystem : EntitySystem
         SubscribeLocalEvent<LadderWatchingComponent, MoveInputEvent>(OnWatchingMoveInput);
     }
 
+    /// <summary>
+    /// Check if the ladder <paramref name="ent"/> is connected to any other ladders.
+    /// </summary>
     public bool LadderIsConnected(Entity<LadderComponent?> ent)
     {
         if (!Resolve(ent, ref ent.Comp))
             return false;
         return ent.Comp.Above.HasValue || ent.Comp.Below.HasValue;
+    }
+
+    /// <summary>
+    /// Check if the ladder <paramref name="ent"/> is connected to <paramref name="checkConnected"/>.
+    /// </summary>
+    public bool LadderIsConnected(Entity<LadderComponent?> ent, Entity<LadderComponent?> checkConnected)
+    {
+        if (!Resolve(ent, ref ent.Comp) || !Resolve(checkConnected, ref checkConnected.Comp))
+            return false;
+        return ent.Comp.Above == checkConnected || ent.Comp.Below == checkConnected;
     }
 
     private void OnLadderRemove<T>(Entity<LadderComponent> ent, ref T args)
@@ -125,45 +138,57 @@ public abstract class SharedLadderSystem : EntitySystem
         }
     }
 
+    private string? GetDirectionText(Entity<LadderComponent> ent, EntityUid destinationLadder)
+    {
+        if (destinationLadder == ent.Comp.Above)
+            return Loc.GetString("rmc-ladder-direction-up");
+        if (destinationLadder == ent.Comp.Below)
+            return Loc.GetString("rmc-ladder-direction-down");
+        return null;
+    }
+
     private void StartClimbing(Entity<LadderComponent> ent, EntityUid destinationLadder, EntityUid user)
     {
-        var time = _timing.CurTime;
-        if (ent.Comp.LastDoAfterEnt is { } lastEnt &&
-            ent.Comp.LastDoAfterId is { } lastId &&
-            time - ent.Comp.LastDoAfterTime < ent.Comp.Delay * 5 && // todo: check why `LastDoAfterTime` exists
-            _doAfter.GetStatus(new DoAfterId(lastEnt, lastId)) == DoAfterStatus.Running &&
-            !HasComp<GhostComponent>(user))
+        if (HasComp<GhostComponent>(user))
         {
-            if (ent.Comp.LastDoAfterEnt != user) // todo: rename to `LastDoAfterUser`?
-                _popup.PopupClient(Loc.GetString("rmc-ladder-someone-else-climbing"), ent, user, PopupType.SmallCaution);
-
+            MoveToDestinationLadder(ent, destinationLadder, user, false);
             return;
         }
 
-        var ev = new LadderDoAfterEvent(GetNetEntity(destinationLadder));
-        var delay = ent.Comp.Delay;
-        if (HasComp<GhostComponent>(user))
-            delay = TimeSpan.Zero;
-
-        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, ent, ent, ent)
+        if (ent.Comp.CurrentDoAfterUser is { } currentDoAfterUser &&
+            ent.Comp.CurrentDoAfterId is { } currentDoAfterId &&
+            _doAfter.IsRunning(currentDoAfterUser, currentDoAfterId))
         {
-            AttemptFrequency = delay == TimeSpan.Zero ? AttemptFrequency.Never : AttemptFrequency.EveryTick,
+            if (currentDoAfterUser != user)
+                _popup.PopupClient(Loc.GetString("rmc-ladder-someone-else-climbing"), ent, user, PopupType.SmallCaution);
+            return;
+        }
+
+        var direction = GetDirectionText(ent, destinationLadder);
+        if (direction == null)
+            throw new ArgumentException($"The provided destination ladder '{ToPrettyString(destinationLadder)}' is not connected to the source '{ToPrettyString(ent)}'!");
+
+        var ev = new LadderDoAfterEvent(GetNetEntity(destinationLadder));
+        var doAfter = new DoAfterArgs(EntityManager, user, ent.Comp.Delay, ev, ent, ent)
+        {
+            AttemptFrequency = AttemptFrequency.EveryTick,
+            NeedHand = true,
+            BreakOnHandChange = false,
+            BreakOnDropItem = false,
+            BreakOnMove = true,
+            DistanceThreshold = ent.Comp.Range,
         };
 
         if (!_doAfter.TryStartDoAfter(doAfter, out var doAfterId))
             return;
 
-        ent.Comp.LastDoAfterEnt = doAfterId.Value.Uid;
-        ent.Comp.LastDoAfterId = doAfterId.Value.Index;
-        ent.Comp.LastDoAfterTime = time;
+        ent.Comp.CurrentDoAfterId = doAfterId.Value.Index;
+        ent.Comp.CurrentDoAfterUser = user;
         Dirty(ent);
 
-        if (ent.Comp.Delay > TimeSpan.Zero)
-        {
-            var selfMessage = Loc.GetString("rmc-ladder-start-climbing-self");
-            var othersMessage = Loc.GetString("rmc-ladder-start-climbing-others", ("user", user));
-            _popup.PopupPredicted(selfMessage, othersMessage, user, user);
-        }
+        var selfMessage = Loc.GetString("rmc-ladder-start-climbing-self", ("direction", direction));
+        var othersMessage = Loc.GetString("rmc-ladder-start-climbing-others", ("user", user), ("direction", direction));
+        _popup.PopupPredicted(selfMessage, othersMessage, user, user);
 
         if (_actorQuery.TryComp(user, out var actor))
             AddViewer(ent, actor.PlayerSession);
@@ -174,51 +199,55 @@ public abstract class SharedLadderSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        var user = args.DoAfter.Args.User;
-        var target = ent.Owner.ToCoordinates();
-        if (user.ToCoordinates().TryDistance(EntityManager, _transform, target, out var distance) &&
-            distance > ent.Comp.Range)
-        {
-            args.Cancel();
-        }
-
-        if (Transform(user).Anchored)
+        // if the user anchors themself for some reason (e.g. defender fortify)
+        if (Transform(args.DoAfter.Args.User).Anchored)
             args.Cancel();
     }
 
     private void OnLadderDoAfter(Entity<LadderComponent> ent, ref LadderDoAfterEvent args)
     {
-        var user = args.User;
-        if (_net.IsClient && user != _player.LocalEntity)
+        if (args.Handled)
             return;
 
-        if (_actorQuery.TryComp(user, out var actor))
-            RemoveViewer(ent, actor.PlayerSession);
+        ent.Comp.CurrentDoAfterId = null;
+        ent.Comp.CurrentDoAfterUser = null;
+        Dirty(ent);
 
-        if (args.Cancelled || args.Handled)
+        if (args.Cancelled)
+            return;
+
+        if (_net.IsClient && args.User != _player.LocalEntity)
             return;
 
         args.Handled = true;
 
         var destination = GetEntity(args.DestinationLadder);
+        MoveToDestinationLadder(ent, destination, args.User);
+    }
+
+    private void MoveToDestinationLadder(Entity<LadderComponent> source, EntityUid destination, EntityUid toMove, bool showMsg = true)
+    {
         if (TerminatingOrDeleted(destination))
             return;
 
-        var coordinates = _transform.GetMapCoordinates(destination);
-        if (coordinates.MapId == MapId.Nullspace)
+        if (_actorQuery.TryComp(toMove, out var actor))
+            RemoveViewer(source, actor.PlayerSession);
+
+        var destCoords = _transform.GetMapCoordinates(destination);
+        if (destCoords.MapId == MapId.Nullspace)
             return;
 
-        _transform.SetMapCoordinates(user, coordinates);
+        _transform.SetMapCoordinates(toMove, destCoords);
+        _rmcTeleporter.HandlePulling(toMove, destCoords);
 
-        var selfMessage = Loc.GetString("rmc-ladder-finish-climbing-self");
-        var othersMessage = Loc.GetString("rmc-ladder-finish-climbing-others", ("user", user));
-        _popup.PopupPredicted(selfMessage, othersMessage, user, user);
+        if (showMsg)
+        {
+            var direction = GetDirectionText(source, destination) ?? Loc.GetString("rmc-ladder-direction-up");
 
-        ent.Comp.LastDoAfterEnt = null;
-        ent.Comp.LastDoAfterId = null;
-        Dirty(ent);
-
-        _rmcTeleporter.HandlePulling(user, coordinates);
+            var selfMessage = Loc.GetString("rmc-ladder-finish-climbing-self", ("direction", direction));
+            var othersMessage = Loc.GetString("rmc-ladder-finish-climbing-others", ("user", toMove), ("direction", direction));
+            _popup.PopupPredicted(selfMessage, othersMessage, toMove, toMove);
+        }
     }
 
     private void OnLadderGetAltVerbs(Entity<LadderComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)

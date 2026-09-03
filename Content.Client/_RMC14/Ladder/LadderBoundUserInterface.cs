@@ -41,26 +41,37 @@ public sealed class LadderBoundUserInterface : BoundUserInterface
         _reason = ladderState.Reason;
         var window = EnsureWindow();
 
+        string? upTooltip = null;
+        string? downTooltip = null;
         var actionString = _reason switch
         {
             SelectionReason.Climb => Loc.GetString("rmc-ladder-radial-action-climb"),
             SelectionReason.Watch => Loc.GetString("rmc-ladder-radial-action-look"),
             _ => null,
         };
+        if (actionString != null)
+        {
+            upTooltip = Loc.GetString("rmc-ladder-radial-tooltip",
+                ("action", actionString),
+                ("direction", Loc.GetString("rmc-ladder-direction-up")));
+
+            downTooltip = Loc.GetString("rmc-ladder-radial-tooltip",
+                ("action", actionString),
+                ("direction", Loc.GetString("rmc-ladder-direction-down")));
+        }
 
         var buttons = new List<RadialMenuActionOption>();
         var upButton = new RadialMenuActionOption<NetEntity>(SelectDirection, ladderState.Above)
         {
-            ToolTip = actionString == null ? null : Loc.GetString("rmc-ladder-radial-tooltip-up", ("action", actionString))
+            ToolTip = upTooltip
         };
         buttons.Add(upButton);
 
         var downButton = new RadialMenuActionOption<NetEntity>(SelectDirection, ladderState.Below)
         {
-            ToolTip = actionString == null ? null : Loc.GetString("rmc-ladder-radial-tooltip-down", ("action", actionString))
+            ToolTip = downTooltip
         };
         buttons.Add(downButton);
-
 
         window.SetButtons(buttons, new SimpleRadialMenuSettings()
         {

@@ -3,7 +3,7 @@ using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Ladder;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedLadderSystem))]
 public sealed partial class LadderComponent : Component
 {
@@ -47,13 +47,10 @@ public sealed partial class LadderComponent : Component
     public float Range = SharedInteractionSystem.InteractionRange + 0.1f;
 
     [DataField, AutoNetworkedField]
-    public EntityUid? LastDoAfterEnt;
+    public ushort? CurrentDoAfterId;
 
     [DataField, AutoNetworkedField]
-    public ushort? LastDoAfterId;
-
-    [DataField, AutoNetworkedField, AutoPausedField]
-    public TimeSpan LastDoAfterTime;
+    public EntityUid? CurrentDoAfterUser;
 
     [DataField, AutoNetworkedField]
     public HashSet<EntityUid> Watching = [];

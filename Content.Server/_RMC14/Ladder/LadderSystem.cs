@@ -206,13 +206,11 @@ public sealed class LadderSystem : SharedLadderSystem
 
     protected override void AddViewer(Entity<LadderComponent> ent, ICommonSession player)
     {
-        base.AddViewer(ent, player);
         _viewSubscriber.AddViewSubscriber(ent, player);
     }
 
     protected override void RemoveViewer(Entity<LadderComponent> ent, ICommonSession player)
     {
-        base.RemoveViewer(ent, player);
         _viewSubscriber.RemoveViewSubscriber(ent, player);
     }
 
