@@ -130,6 +130,7 @@
 - type: entity
   parent: CMWindowReinforcedAlmayerHull
   id: RMCWindowReinforcedAlmayerHullHijackBustable
+  description: A glass window with a special rod matrix inside a wall frame. This one was made out of exotic materials to prevent hull breaches. It would take a great impact to weaken this window.
   suffix: Hijack Bustable
 
 - type: entity
