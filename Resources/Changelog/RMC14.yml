@@ -1,18 +1,6 @@
 ﻿Entries:
 - author: kleinerstation13
   changes:
-  - message: Special gun loot spawner no longer spawns M54C's
-    type: Tweak
-  - message: Special gun loot spawner now spawns M34 incinerator units and MK80 pistols
-    type: Tweak
-  - message: Fixed random grenade packet spawner spawning empty WP nade packets instead
-      of full packets
-    type: Fix
-  id: 3124
-  time: '2026-04-21T00:04:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9706
-- author: kleinerstation13
-  changes:
   - message: Added various missing corpse spawners to Solaris Ridge Mining
     type: Add
   - message: Ported CMB Riot Control Team beret
@@ -4485,5 +4473,13 @@
   id: 3623
   time: '2026-09-03T17:22:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10776
+- author: CatAndHats
+  changes:
+  - message: The Late Join menu now lets you know why you cannot join the round after
+      Hijack has occured
+    type: Tweak
+  id: 3624
+  time: '2026-09-03T18:07:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10546
 Name: RMC14
 Order: -1
