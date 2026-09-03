@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Dygon
   changes:
-  - message: Attacking a phone as a xenonid will stop any sound it's currently playing.
-    type: Tweak
-  id: 3126
-  time: '2026-04-22T00:00:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9629
-- author: Dygon
-  changes:
   - message: Claymores no longer explode while undeployed.
     type: Fix
   id: 3127
@@ -4471,5 +4464,13 @@
   id: 3625
   time: '2026-09-03T18:26:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10515
+- author: IceNoobXD
+  changes:
+  - message: Shiva Snowball has recived a whole map parity passover so that its more
+      inline with its cmss13 counterpart, this is primarily a prop passover!
+    type: Tweak
+  id: 3626
+  time: '2026-09-03T21:22:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9934
 Name: RMC14
 Order: -1
