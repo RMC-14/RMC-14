@@ -53,7 +53,6 @@ public sealed class LarvaQueueSystem : EntitySystem
     }
 
     private int _offerTimeoutSeconds;
-    private int _victimPriorityOfferTimeoutSeconds;
     private TimeSpan _disconnectGracePeriod;
 
     public override void Initialize()
@@ -74,7 +73,6 @@ public sealed class LarvaQueueSystem : EntitySystem
         }
 
         Subs.CVar(_config, RMCCVars.RMCLarvaQueueOfferTimeoutSeconds, v => _offerTimeoutSeconds = v, true);
-        Subs.CVar(_config, RMCCVars.RMCLarvaQueueVictimPriorityOfferTimeoutSeconds, v => _victimPriorityOfferTimeoutSeconds = v, true);
         Subs.CVar(_config, RMCCVars.RMCDisconnectedXenoGhostRoleTimeSeconds, v => _disconnectGracePeriod = TimeSpan.FromSeconds(v), true);
     }
 
@@ -100,7 +98,7 @@ public sealed class LarvaQueueSystem : EntitySystem
                 && _netConfig.GetClientCVar(victimSession.Channel, RMCCVars.RMCLarvaQueueVictimPriorityEnabled))
             {
                 _reservedBurstLarva.Add(larvaEntity);
-                SendOffer(victimSession, larvaEntity, hive, "Burst Victim", 1, _victimPriorityOfferTimeoutSeconds);
+                SendOffer(victimSession, larvaEntity, hive, "Burst Victim", 1, _offerTimeoutSeconds);
             }
         }
 
