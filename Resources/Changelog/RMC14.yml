@@ -1,19 +1,6 @@
 ﻿Entries:
 - author: kleinerstation13
   changes:
-  - message: Medic lightpack
-    type: Add
-  - message: SOF medic now correctly spawns with a medic lightpack
-    type: Tweak
-  - message: A bunch of tweaks to loot on Sorokyne Strata
-    type: Tweak
-  - message: Moved Type-71 magazines and Type 71 in Deep Security to NW Carp Lake
-    type: Tweak
-  id: 3123
-  time: '2026-04-21T00:03:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9647
-- author: kleinerstation13
-  changes:
   - message: Special gun loot spawner no longer spawns M54C's
     type: Tweak
   - message: Special gun loot spawner now spawns M34 incinerator units and MK80 pistols
@@ -4488,5 +4475,15 @@
   id: 3622
   time: '2026-09-03T16:47:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10426
+- author: BlueMoon059
+  changes:
+  - message: Some posters have been adjusted so that mentions of a "marine corp" now
+      read "marine corps".
+    type: Tweak
+  - message: Removed a mention of the Colonial Marines from a poster.
+    type: Tweak
+  id: 3623
+  time: '2026-09-03T17:22:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10776
 Name: RMC14
 Order: -1
