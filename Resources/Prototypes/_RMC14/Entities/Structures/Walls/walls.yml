@@ -162,6 +162,61 @@
     mode: NoSprite
 
 - type: entity
+  parent: RMCWallAlmayerDeco1
+  id: RMCWallAlmayerLabelDeck1A
+  suffix: Deck 1
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/athena_wall_labels.rsi
+    state: athena_deck1_1
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/athena_wall_labels.rsi
+    state: athena_deck1_1
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+
+- type: entity
+  parent: RMCWallAlmayerLabelDeck1A
+  id: RMCWallAlmayerLabelDeck1B
+  suffix: Deck 1
+  components:
+  - type: Sprite
+    state: athena_deck1_2
+  - type: Icon
+    state: athena_deck1_2
+
+- type: entity
+  parent: RMCWallAlmayerLabelDeck1A
+  id: RMCWallAlmayerLabelDeck2B
+  suffix: Deck 2
+  components:
+  - type: Sprite
+    state: athena_deck2_2
+  - type: Icon
+    state: athena_deck2_2
+
+- type: entity
+  parent: RMCWallAlmayerLabelDeck1A
+  id: RMCWallAlmayerLabelDeck2C
+  suffix: Deck 2
+  components:
+  - type: Sprite
+    state: athena_deck2_2A
+  - type: Icon
+    state: athena_deck2_2A
+
+- type: entity
+  parent: RMCWallAlmayerLabelDeck1A
+  id: RMCWallAlmayerLabelDeck3B
+  suffix: Deck 3
+  components:
+  - type: Sprite
+    state: athena_deck3_2
+  - type: Icon
+    state: athena_deck3_2
+
+- type: entity
   parent: CMWallMetal
   id: CMWallMetalAlmayerWhite
   name: wall
@@ -411,6 +466,7 @@
   id: CMWallReinforcedHeavy
   name: heavy reinforced hull
   description: A huge chunk of ultra-reinforced metal used to separate rooms. Looks virtually indestructible.
+  suffix: Indestructible
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/rwall.rsi
@@ -426,11 +482,12 @@
     - doors
     base: rwall
 
+# Outer Hull Walls
 - type: entity
   parent: CMWallReinforcedHeavy
   id: CMWallReinforcedHeavyAlmayer
-  name: heavy reinforced hull
-  description: A highly reinforced metal wall used to separate rooms and make up the ship. It would take a great impact to weaken this wall.
+  name: outer hull
+  description: A metal wall used to separate space from the ship. Looks virtually indestructible.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/almayer_black.rsi
@@ -444,10 +501,16 @@
     - doors
     base: wall
 
+# Inner Hull Walls
 - type: entity
   parent: CMWallReinforcedHeavyAlmayer
+  id: CMWallReinforcedHeavyAlmayerInner
+  name: structural hull
+  description: The core structure of the hull, it holds the ship together. Looks virtually indestructible.
+
+- type: entity
+  parent: CMWallReinforcedHeavyAlmayerInner
   id: RMCWallAlmayerReinforcedHeavyDeco1
-  name: heavy reinforced hull
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/almayer_black.rsi
@@ -495,6 +558,69 @@
     key: walls
     mode: NoSprite
 
+# Hull wall until hijack
+- type: entity
+  parent: RMCWallAlmayerReinforcedHeavyDeco1
+  id: RMCWallAlmayerReinforcedHeavyLabelDeck1A
+  suffix: Deck 1
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/athena_wall_labels.rsi
+    state: athena_deck1_1
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/athena_wall_labels.rsi
+    state: athena_deck1_1
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+
+- type: entity
+  parent: RMCWallAlmayerReinforcedHeavyLabelDeck1A
+  id: RMCWallAlmayerReinforcedHeavyLabelDeck1B
+  suffix: Deck 1
+  components:
+  - type: Sprite
+    state: athena_deck1_2
+  - type: Icon
+    state: athena_deck1_2
+
+- type: entity
+  parent: RMCWallAlmayerReinforcedHeavyLabelDeck1A
+  id: RMCWallAlmayerReinforcedHeavyLabelDeck2B
+  suffix: Deck 2
+  components:
+  - type: Sprite
+    state: athena_deck2_2
+  - type: Icon
+    state: athena_deck2_2
+
+- type: entity
+  parent: RMCWallAlmayerReinforcedHeavyLabelDeck1A
+  id: RMCWallAlmayerReinforcedHeavyLabelDeck2C
+  suffix: Deck 2
+  components:
+  - type: Sprite
+    state: athena_deck2_2A
+  - type: Icon
+    state: athena_deck2_2A
+
+- type: entity
+  parent: RMCWallAlmayerReinforcedHeavyLabelDeck1A
+  id: RMCWallAlmayerReinforcedHeavyLabelDeck3B
+  suffix: Deck 3
+  components:
+  - type: Sprite
+    state: athena_deck3_2
+  - type: Icon
+    state: athena_deck3_2
+
+- type: entity
+  parent: CMWallReinforcedHeavyAlmayer
+  id: RMCWallReinforcedHeavyAlmayerHijackBustable # TODO RMC14: Add functionality - This hull wall should turn into a reinforced wall upon hijack landing.
+  name: heavy reinforced hull
+  description: A highly reinforced metal wall used to separate rooms and make up the ship. It would take a great impact to weaken this wall.
+  suffix: Hijack Bustable
+
 - type: entity
   parent: RMCWallAlmayerReinforcedHeavyDeco1
   id: RMCWallAlmayerReinforcedHeavyDecoElevator
@@ -522,8 +648,8 @@
 - type: entity
   parent: CMWallReinforcedHeavy
   id: CMWallReinforcedHeavyAlmayerWhite
-  name: heavy reinforced hull
-  description: A highly reinforced metal wall used to separate rooms and make up the ship. It would take a great impact to weaken this wall.
+  name: ultra reinforced hull
+  description: An extremely reinforced metal wall used to isolate potentially dangerous areas. Looks virtually indestructible.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/almayer_white.rsi
@@ -540,7 +666,7 @@
 - type: entity
   parent: CMWallReinforcedHeavy
   id: CMWallReinforcedHeavyAlmayerAI
-  name: heavy reinforced hull
+  name: ultra reinforced hull
   description: An extremely reinforced metal wall used to isolate potentially dangerous areas. Looks virtually indestructible.
   components:
   - type: Sprite
@@ -572,8 +698,6 @@
     - windows
     - doors
     base: aiwall
-
-# TODO RMC14 temp hull, breakable only after hijack
 
 # Shuttle
 - type: entity
@@ -736,6 +860,66 @@
     - windows
     - doors
     base: strata_jungle
+
+# Forest
+- type: entity
+  parent: CMWallJungle
+  id: CMWallForest
+  name: forest vegetation
+  description: Exceptionally dense vegetation that you can't see through.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/forest.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/forest.rsi
+    state: forest_veg
+  - type: Tag
+    tags:
+    - Wall
+  - type: IconSmooth
+    key: walls
+    additionalKeys:
+    - windows
+    - doors
+    base: forest_veg
+
+# Forest Rock
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: RMCWallRockForest
+  name: rock columns
+  description: Exceptionally dense rock formations.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/rock_forest.rsi
+    state: rock_forest
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/rock_forest.rsi
+    state: rock_forest
+  - type: IconSmooth
+    key: walls
+    additionalKeys:
+    - windows
+    - doors
+    base: rock_forest
+
+- type: entity
+  parent: RMCWallRockForest
+  id: RMCWallRockForestDirty
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/rock_forest_dirty.rsi
+    state: rock_forest_dirty
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/rock_forest_dirty.rsi
+    state: rock_forest_dirty
+  - type: IconSmooth
+    key: walls
+    additionalKeys:
+    - windows
+    - doors
+    base: rock_forest_dirty
 
 # Elevator
 

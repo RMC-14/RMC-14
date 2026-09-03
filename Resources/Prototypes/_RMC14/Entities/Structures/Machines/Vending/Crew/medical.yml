@@ -3,7 +3,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCrewMedicalEquipment
-  name: ColMarTech medical equipment rack
+  name: ASRS medical equipment rack
   description: An automated equipment vendor for the Medical Department.
   components:
   - type: AccessReader

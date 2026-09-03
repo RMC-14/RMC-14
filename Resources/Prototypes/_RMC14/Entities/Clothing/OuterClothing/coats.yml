@@ -34,6 +34,9 @@
     blacklist:
       components:
       - Xeno
+  - type: Tag
+    tags:
+    - RMCSynthAllowedArmor
 
 - type: entity
   abstract: True
