@@ -67,7 +67,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
 
     private void OnCellUIOpened(Entity<CryoCellComponent> cryoCell, ref AfterActivatableUIOpenEvent args)
     {
-        UpdateUI(cryoCell);
+        UpdateUIState(cryoCell);
     }
 
     private void OnTogglePower(Entity<CryoCellComponent> cryoCell, ref CryoCellTogglePowerBuiMsg args)
@@ -76,7 +76,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
 
         Dirty(cryoCell);
         UpdateCryoCellVisuals(cryoCell);
-        UpdateUI(cryoCell);
+        UpdateUIState(cryoCell);
     }
 
     private void OnEject(Entity<CryoCellComponent> cryoCell, ref CryoCellEjectBuiMsg args)
@@ -86,7 +86,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
 
         Dirty(cryoCell);
         UpdateCryoCellVisuals(cryoCell);
-        UpdateUI(cryoCell);
+        UpdateUIState(cryoCell);
     }
 
     private void OnToggleAutoEject(Entity<CryoCellComponent> cryoCell, ref CryoCellToggleAutoEjectBuiMsg args)
@@ -94,7 +94,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         cryoCell.Comp.AutoEject = !cryoCell.Comp.AutoEject;
 
         Dirty(cryoCell);
-        UpdateUI(cryoCell);
+        UpdateUIState(cryoCell);
     }
 
     private void OnToggleNotify(Entity<CryoCellComponent> cryoCell, ref CryoCellToggleNotifyBuiMsg args)
@@ -102,7 +102,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         cryoCell.Comp.ReleaseNotice = !cryoCell.Comp.ReleaseNotice;
 
         Dirty(cryoCell);
-        UpdateUI(cryoCell);
+        UpdateUIState(cryoCell);
     }
 
     private void OnEjectBeaker(Entity<CryoCellComponent> cryoCell, ref CryoCellEjectBeakerBuiMsg args)
@@ -112,96 +112,96 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
 
         _itemSlots.TryEjectToHands(cryoCell, slot, args.Actor, true);
         Dirty(cryoCell);
-        UpdateUI(cryoCell);
+        UpdateUIState(cryoCell);
     }
 
-    private void UpdateUI(Entity<CryoCellComponent> cryoCell)
+    private void UpdateUIState(Entity<CryoCellComponent> cryoCell)
     {
         if (!_ui.IsUiOpen(cryoCell.Owner, CryoCellUIKey.Key))
             return;
 
         var occupant = cryoCell.Comp.Occupant;
-        NetEntity? netOccupant = null;
-        string? occupantName = null;
-        var occupantState = CryoCellOccupantMobState.None;
-        var health = 0f;
-        var maxHealth = 0f;
-        var bruteLoss = 0f;
-        var burnLoss = 0f;
-        var toxinLoss = 0f;
-        var oxyLoss = 0f;
-        var bodyTemp = 0f;
-        var isBeakerLoaded = false;
+        cryoCell.Comp.UIOccupant = null;
+        cryoCell.Comp.UIOccupantName = null;
+        cryoCell.Comp.UIOccupantState = CryoCellOccupantMobState.None;
+        cryoCell.Comp.UIHealth = 0f;
+        cryoCell.Comp.UIMaxHealth = 0f;
+        cryoCell.Comp.UIBruteLoss = 0f;
+        cryoCell.Comp.UIBurnLoss = 0f;
+        cryoCell.Comp.UIToxinLoss = 0f;
+        cryoCell.Comp.UIOxygenLoss = 0f;
+        cryoCell.Comp.UIBodyTemperature = 0f;
+        cryoCell.Comp.UIIsBeakerLoaded = false;
+        cryoCell.Comp.UIBeakerContents = [];
 
         if (occupant != null && TerminatingOrDeleted(occupant))
         {
             cryoCell.Comp.Occupant = null;
             _ui.CloseUi(cryoCell.Owner, CryoCellUIKey.Key);
+            Dirty(cryoCell);
             return;
         }
 
-        if (occupant != null)
+        if (occupant == null)
         {
-            netOccupant = GetNetEntity(occupant.Value);
-            occupantName = Identity.Name(occupant.Value, EntityManager);
-
-            if (_mobState.IsDead(occupant.Value))
-                occupantState = CryoCellOccupantMobState.Dead;
-            else if (_mobState.IsCritical(occupant.Value))
-                occupantState = CryoCellOccupantMobState.Critical;
-            else
-                occupantState = CryoCellOccupantMobState.Alive;
-
-            if (TryComp<DamageableComponent>(occupant.Value, out var damageable))
-            {
-                if (_mobThreshold.TryGetThresholdForState(occupant.Value, MobState.Critical, out var critThreshold))
-                {
-                    maxHealth = (float) critThreshold;
-                    health = (float) (critThreshold - damageable.TotalDamage);
-                }
-
-                bruteLoss = damageable.DamagePerGroup.GetValueOrDefault(BruteGroup).Float();
-                burnLoss = damageable.DamagePerGroup.GetValueOrDefault(BurnGroup).Float();
-                toxinLoss = damageable.DamagePerGroup.GetValueOrDefault(ToxinGroup).Float();
-                oxyLoss = damageable.DamagePerGroup.GetValueOrDefault(AirlossGroup).Float();
-            }
-
-            _rmcTemperature.TryGetCurrentTemperature(occupant.Value, out bodyTemp);
+            Dirty(cryoCell);
+            return;
         }
 
+        UpdateOccupantData(cryoCell, occupant.Value);
+        UpdateBeakerData(cryoCell);
+        Dirty(cryoCell);
+    }
+
+    private void UpdateOccupantData(Entity<CryoCellComponent> cryoCell, EntityUid occupant)
+    {
+        cryoCell.Comp.UIOccupant = GetNetEntity(occupant);
+        cryoCell.Comp.UIOccupantName = Identity.Name(occupant, EntityManager);
+
+        if (_mobState.IsDead(occupant))
+            cryoCell.Comp.UIOccupantState = CryoCellOccupantMobState.Dead;
+        else if (_mobState.IsCritical(occupant))
+            cryoCell.Comp.UIOccupantState = CryoCellOccupantMobState.Critical;
+        else
+            cryoCell.Comp.UIOccupantState = CryoCellOccupantMobState.Alive;
+
+        if (TryComp<DamageableComponent>(occupant, out var damageable))
+        {
+            if (_mobThreshold.TryGetThresholdForState(occupant, MobState.Critical, out var critThreshold))
+            {
+                cryoCell.Comp.UIMaxHealth = (float) critThreshold;
+                cryoCell.Comp.UIHealth = (float) (critThreshold - damageable.TotalDamage);
+            }
+
+            cryoCell.Comp.UIBruteLoss = damageable.DamagePerGroup.GetValueOrDefault(BruteGroup).Float();
+            cryoCell.Comp.UIBurnLoss = damageable.DamagePerGroup.GetValueOrDefault(BurnGroup).Float();
+            cryoCell.Comp.UIToxinLoss = damageable.DamagePerGroup.GetValueOrDefault(ToxinGroup).Float();
+            cryoCell.Comp.UIOxygenLoss = damageable.DamagePerGroup.GetValueOrDefault(AirlossGroup).Float();
+        }
+
+        _rmcTemperature.TryGetCurrentTemperature(occupant, out var bodyTemp);
+        cryoCell.Comp.UIBodyTemperature = bodyTemp;
+    }
+
+    private void UpdateBeakerData(Entity<CryoCellComponent> cryoCell)
+    {
         _beakerReagentBuffer.Clear();
-        if (_itemSlots.TryGetSlot(cryoCell, cryoCell.Comp.BeakerSlot, out var slot) &&
-            slot.ContainerSlot?.ContainedEntity is { } contained &&
-            TryComp(contained, out FitsInDispenserComponent? fits) &&
-            _solution.TryGetSolution(contained, fits.Solution, out _, out var beakerSol))
+
+        if (!_itemSlots.TryGetSlot(cryoCell, cryoCell.Comp.BeakerSlot, out var slot) ||
+            slot.ContainerSlot?.ContainedEntity is not { } contained ||
+            !TryComp(contained, out FitsInDispenserComponent? fits) ||
+            !_solution.TryGetSolution(contained, fits.Solution, out _, out var beakerSol))
         {
-            isBeakerLoaded = true;
-            foreach (var reagent in beakerSol.Contents)
-            {
-                _beakerReagentBuffer.Add(new CryoCellBeakerReagent(reagent.Reagent.Prototype, reagent.Quantity.Float()));
-            }
+            return;
         }
 
-        var state = new CryoCellBuiState(
-            netOccupant,
-            occupantName,
-            occupantState,
-            health,
-            maxHealth,
-            bruteLoss,
-            burnLoss,
-            toxinLoss,
-            oxyLoss,
-            bodyTemp,
-            cryoCell.Comp.CryoCellTemperature,
-            cryoCell.Comp.BodyTempCryoLiquidThreshold,
-            cryoCell.Comp.IsPoweredOn,
-            cryoCell.Comp.AutoEject,
-            cryoCell.Comp.ReleaseNotice,
-            isBeakerLoaded,
-            _beakerReagentBuffer.ToArray());
+        cryoCell.Comp.UIIsBeakerLoaded = true;
+        foreach (var reagent in beakerSol.Contents)
+        {
+            _beakerReagentBuffer.Add(new CryoCellBeakerReagent(reagent.Reagent.Prototype, reagent.Quantity.Float()));
+        }
 
-        _ui.SetUiState(cryoCell.Owner, CryoCellUIKey.Key, state);
+        cryoCell.Comp.UIBeakerContents = _beakerReagentBuffer.ToArray();
     }
 
     public override void Update(float frameTime)
@@ -215,7 +215,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
             if (cryoCell.Occupant == null)
                 continue;
 
-            if (TryComp<ApcPowerReceiverComponent>(uid, out var power) && power.Powered)
+            if (TryComp<ApcPowerReceiverComponent>(uid, out var power) && !power.Powered)
                 continue;
 
             if (time < cryoCell.NextUpdate)
@@ -224,7 +224,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
             cryoCell.NextUpdate = time + cryoCell.UpdateInterval;
 
             ProcessOccupant((uid, cryoCell));
-            UpdateUI((uid, cryoCell));
+            UpdateUIState((uid, cryoCell));
         }
     }
 
@@ -254,10 +254,10 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
             var stage = _unrevivable.GetUnrevivableStage(occupant, 10);
             switch (stage)
             {
-                case >= 8:
+                case >= 8: // One minute left
                     CryoPopupAndSound(cryoCell, "rmc-cryo-cell-popup-revive-now", false, true);
                     break;
-                case >= 5:
+                case >= 5: // Halfway to unrevivable
                     CryoPopupAndSound(cryoCell, "rmc-cryo-cell-popup-warning", false, true);
                     break;
             }

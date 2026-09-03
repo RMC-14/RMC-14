@@ -34,69 +34,66 @@ public sealed partial class CryoCellWindow : DefaultWindow
         _bui = bui;
     }
 
-    public void UpdateState(CryoCellBuiState state)
+    public void UpdateFromComponent(CryoCellComponent cryoCell)
     {
-        var hasOccupant = state.Occupant != null;
+        var hasOccupant = cryoCell.UIOccupant != null;
         EmptyPanel.Visible = !hasOccupant;
         OccupantPanel.Visible = hasOccupant;
 
-        UpdateCellButtons(state);
-        UpdateBeaker(state);
+        UpdateCellButtons(cryoCell);
+        UpdateBeaker(cryoCell);
 
         if (!hasOccupant)
             return;
 
-        OccupantNameLabel.Text = state.OccupantName ?? string.Empty;
+        OccupantNameLabel.Text = cryoCell.UIOccupantName ?? string.Empty;
 
-        UpdateHealth(state);
-        UpdateTemperature(state);
-        UpdateDamageBar(BruteBar, BruteBarText, state.BruteLoss);
-        UpdateDamageBar(BurnBar, BurnBarText, state.BurnLoss);
-        UpdateDamageBar(ToxinBar, ToxinBarText, state.ToxinLoss);
-        UpdateDamageBar(OxygenBar, OxygenBarText, state.OxyLoss);
+        UpdateHealth(cryoCell);
+        UpdateTemperature(cryoCell);
+        UpdateDamageBars(cryoCell);
     }
 
-    private void UpdateCellButtons(CryoCellBuiState state)
+    private void UpdateCellButtons(CryoCellComponent cryoCell)
     {
-        PowerButton.Pressed = state.IsPoweredOn;
-        PowerButton.Text = state.IsPoweredOn
+        PowerButton.Pressed = cryoCell.IsPoweredOn;
+        PowerButton.Text = cryoCell.IsPoweredOn
             ? Loc.GetString("rmc-cryo-cell-power-on")
             : Loc.GetString("rmc-cryo-cell-power-off");
 
-        EjectButton.Disabled = state.Occupant == null;
+        EjectButton.Disabled = cryoCell.UIOccupant == null;
 
-        AutoEjectButton.Pressed = state.AutoEject;
-        AutoEjectButton.Text = state.AutoEject
+        AutoEjectButton.Pressed = cryoCell.AutoEject;
+        AutoEjectButton.Text = cryoCell.AutoEject
             ? Loc.GetString("rmc-cryo-cell-auto-eject")
             : Loc.GetString("rmc-cryo-cell-manual");
 
-        NotifyButton.Pressed = state.ReleaseNotice;
-        NotifyButton.Text = state.ReleaseNotice
+        NotifyButton.Pressed = cryoCell.ReleaseNotice;
+        NotifyButton.Text = cryoCell.ReleaseNotice
             ? Loc.GetString("rmc-cryo-cell-notify")
             : Loc.GetString("rmc-cryo-cell-silent");
     }
 
-    private void UpdateHealth(CryoCellBuiState state)
+    private void UpdateHealth(CryoCellComponent cryoCell)
     {
-        HealthBar.Value = state.Health;
-        HealthBar.MaxValue = state.MaxHealth;
-        HealthBarText.Text = $"{state.Health:F0}";
+        HealthBar.Value = cryoCell.UIHealth;
+        HealthBar.MaxValue = cryoCell.UIMaxHealth;
+        HealthBarText.Text = $"{cryoCell.UIHealth:F0}";
 
-        HealthBar.ForegroundStyleBoxOverride = state.Health switch
+        HealthBar.ForegroundStyleBoxOverride = cryoCell.UIHealth switch
         {
-            _ when state.Health >= state.MaxHealth * 0.5f => StyleGood,
+            _ when cryoCell.UIHealth >= cryoCell.UIMaxHealth * 0.5f => StyleGood,
             >= 0 => StyleWarning,
             _ => StyleDanger
         };
 
-        StatusLabel.Text = state.OccupantState switch
+        StatusLabel.Text = cryoCell.UIOccupantState switch
         {
             CryoCellOccupantMobState.Alive => Loc.GetString("rmc-cryo-cell-status-alive"),
             CryoCellOccupantMobState.Critical => Loc.GetString("rmc-cryo-cell-status-critical"),
             CryoCellOccupantMobState.Dead => Loc.GetString("rmc-cryo-cell-status-dead"),
             _ => string.Empty
         };
-        StatusLabel.Modulate = state.OccupantState switch
+        StatusLabel.Modulate = cryoCell.UIOccupantState switch
         {
             CryoCellOccupantMobState.Alive => Color.Lime,
             CryoCellOccupantMobState.Critical => Color.Yellow,
@@ -105,30 +102,38 @@ public sealed partial class CryoCellWindow : DefaultWindow
         };
     }
 
-    private void UpdateTemperature(CryoCellBuiState state)
+    private void UpdateTemperature(CryoCellComponent cryoCell)
     {
-        BodyTemperatureBar.Value = state.BodyTemperature;
-        BodyTemperatureText.Text = $"{state.BodyTemperature:F0} K";
+        BodyTemperatureBar.Value = cryoCell.UIBodyTemperature;
+        BodyTemperatureText.Text = $"{cryoCell.UIBodyTemperature:F0} K";
 
-        if (state.BodyTemperature <= state.BodyTempCryoLiquidThreshold)
+        if (cryoCell.UIBodyTemperature <= cryoCell.BodyTempCryoLiquidThreshold)
             BodyTemperatureBar.ForegroundStyleBoxOverride = StyleGood;
-        else if (state.BodyTemperature < Atmospherics.T0C)
+        else if (cryoCell.UIBodyTemperature < Atmospherics.T0C)
             BodyTemperatureBar.ForegroundStyleBoxOverride = StyleWarning;
         else
             BodyTemperatureBar.ForegroundStyleBoxOverride = StyleDanger;
 
-        CellTemperatureBar.Value = state.CellTemperature;
-        CellTemperatureText.Text = $"{state.CellTemperature:F0} K";
+        CellTemperatureBar.Value = cryoCell.CryoCellTemperature;
+        CellTemperatureText.Text = $"{cryoCell.CryoCellTemperature:F0} K";
 
-        if (state.CellTemperature <= state.BodyTempCryoLiquidThreshold)
+        if (cryoCell.CryoCellTemperature <= cryoCell.BodyTempCryoLiquidThreshold)
             CellTemperatureBar.ForegroundStyleBoxOverride = StyleGood;
-        else if (state.CellTemperature < Atmospherics.T0C)
+        else if (cryoCell.CryoCellTemperature < Atmospherics.T0C)
             CellTemperatureBar.ForegroundStyleBoxOverride = StyleWarning;
         else
             CellTemperatureBar.ForegroundStyleBoxOverride = StyleDanger;
     }
 
-    private static void UpdateDamageBar(ProgressBar bar, Label label, float damage)
+    private void UpdateDamageBars(CryoCellComponent cryoCell)
+    {
+        DamageBars(BruteBar, BruteBarText, cryoCell.UIBruteLoss);
+        DamageBars(BurnBar, BurnBarText, cryoCell.UIBurnLoss);
+        DamageBars(ToxinBar, ToxinBarText, cryoCell.UIToxinLoss);
+        DamageBars(OxygenBar, OxygenBarText, cryoCell.UIOxygenLoss);
+    }
+
+    private static void DamageBars(ProgressBar bar, Label label, float damage)
     {
         bar.Value = damage;
         label.Text = damage.ToString("F0");
@@ -140,11 +145,11 @@ public sealed partial class CryoCellWindow : DefaultWindow
         };
     }
 
-    private void UpdateBeaker(CryoCellBuiState state)
+    private void UpdateBeaker(CryoCellComponent cryoCell)
     {
-        EjectBeakerButton.Disabled = !state.IsBeakerLoaded;
+        EjectBeakerButton.Disabled = !cryoCell.UIIsBeakerLoaded;
 
-        if (!state.IsBeakerLoaded || state.BeakerContents.Length == 0)
+        if (!cryoCell.UIIsBeakerLoaded || cryoCell.UIBeakerContents.Length == 0)
         {
             BeakerStatusLabel.Visible = true;
             BeakerStatusLabel.Text = Loc.GetString("rmc-cryo-cell-beaker-empty");
@@ -157,16 +162,12 @@ public sealed partial class CryoCellWindow : DefaultWindow
         BeakerContentsLabel.Visible = true;
 
         var builder = new StringBuilder();
-        for (var i = 0; i < state.BeakerContents.Length; i++)
+        foreach (var reagent in cryoCell.UIBeakerContents)
         {
-            if (i > 0)
-                builder.Append('\n');
+            if (builder.Length > 0)
+                builder.AppendLine();
 
-            var reagent = state.BeakerContents[i];
-            builder.Append(reagent.Name);
-            builder.Append(": ");
-            builder.Append((int) reagent.Volume);
-            builder.Append(" u");
+            builder.Append($"{reagent.Volume} units of {reagent.Name}");
         }
 
         BeakerContentsLabel.Text = builder.ToString();
