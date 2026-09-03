@@ -36,7 +36,7 @@
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m60.ogg
       params:
-        volume: -1
+        volume: -2
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
   - type: RMCSelectiveFire
