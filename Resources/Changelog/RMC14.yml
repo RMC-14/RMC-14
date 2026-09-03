@@ -1,21 +1,4 @@
 ﻿Entries:
-- author: kleinerstation13
-  changes:
-  - message: Added various missing corpse spawners to Solaris Ridge Mining
-    type: Add
-  - message: Ported CMB Riot Control Team beret
-    type: Add
-  - message: Ported PMC lifesaver bag sprites
-    type: Add
-  - message: Replaced various corpse spawners on Solaris Ridge with UN RCO and CMB
-      Deputy corpses
-    type: Tweak
-  - message: Mapping passover on Solaris Ridge Mining, Solaris Ridge PMC Offices Crashlanding
-      insert and PMC Offices insert.
-    type: Tweak
-  id: 3125
-  time: '2026-04-21T00:03:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9638
 - author: Dygon
   changes:
   - message: Attacking a phone as a xenonid will stop any sound it's currently playing.
@@ -4481,5 +4464,12 @@
   id: 3624
   time: '2026-09-03T18:07:07.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10546
+- author: CatAndHats
+  changes:
+  - message: The Area Info HUD alert now gives weedkiller information
+    type: Add
+  id: 3625
+  time: '2026-09-03T18:26:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10515
 Name: RMC14
 Order: -1
