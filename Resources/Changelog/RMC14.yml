@@ -1,27 +1,6 @@
 ﻿Entries:
 - author: kleinerstation13
   changes:
-  - message: Ported Armory No Gear insert (20%) and Birthday Party insert (15%) on
-      Fiorina
-    type: Add
-  - message: Ported the ML66D in the Survivor Camp on Fiorina
-    type: Add
-  - message: Replaced all instances of We-Ya goon corpses in Fiorina with riot control
-      officer corpses
-    type: Tweak
-  - message: A bunch of tweaks to loot on Fiorina
-    type: Tweak
-  - message: Flamethrower on Fiorina has been moved to western Transit Hub, M890 has
-      been moved to chapel, and the special weapons as well as turret spawner was
-      moved to NE Hospital.
-    type: Tweak
-  - message: Fixed the Riot In Progress insert not overriding non-insert armory loot.
-    type: Fix
-  id: 3122
-  time: '2026-04-21T00:04:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9640
-- author: kleinerstation13
-  changes:
   - message: Medic lightpack
     type: Add
   - message: SOF medic now correctly spawns with a medic lightpack
@@ -4501,5 +4480,13 @@
   id: 3621
   time: '2026-09-03T07:12:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10780
+- author: SabreML
+  changes:
+  - message: Fixed the muzzle flash effect sometimes looping back to the start on
+      the last frame.
+    type: Fix
+  id: 3622
+  time: '2026-09-03T16:47:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10426
 Name: RMC14
 Order: -1
