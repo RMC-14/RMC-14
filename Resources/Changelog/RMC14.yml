@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: Added the pipe network to Hybrisa Prospera
-    type: Add
-  - message: The Hybrisa Prospera Celestia queen spawn has been removed and in its
-      place is a queen spawn in south-east caves, the survivor spawn in that area
-      has been removed and the nearby loot moved to biogen armoury and biogen dropship.
-    type: Tweak
-  - message: Hybrisa Prospera's Dynagrid has recieved minor internal changes to tear
-      down a few walls in the coridoor south and west of the generators.
-    type: Tweak
-  id: 3121
-  time: '2026-04-20T23:23:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9654
 - author: kleinerstation13
   changes:
   - message: Ported Armory No Gear insert (20%) and Birthday Party insert (15%) on
@@ -4507,5 +4493,13 @@
   id: 3620
   time: '2026-09-03T06:51:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10802
+- author: MidZik
+  changes:
+  - message: Small crates, coat racks, desktop computers, televisions, hospital dividers,
+      and small platform corners no longer collide with players.
+    type: Tweak
+  id: 3621
+  time: '2026-09-03T07:12:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10780
 Name: RMC14
 Order: -1
