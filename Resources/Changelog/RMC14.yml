@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Claymores no longer explode while undeployed.
-    type: Fix
-  id: 3127
-  time: '2026-04-21T23:59:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9578
 - author: MidZik
   changes:
   - message: Fixed Steelcrest's Soak ability occasionally healing for more than intended.
@@ -4472,5 +4465,12 @@
   id: 3626
   time: '2026-09-03T21:22:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9934
+- author: Vermidia
+  changes:
+  - message: '[PVE] Added drink mixes to the standard NutriCo AutoChef'
+    type: Add
+  id: 3627
+  time: '2026-09-03T22:40:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10182
 Name: RMC14
 Order: -1
