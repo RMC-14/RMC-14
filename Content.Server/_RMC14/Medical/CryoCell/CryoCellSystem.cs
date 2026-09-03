@@ -142,66 +142,52 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
             return;
         }
 
-        if (occupant == null)
+        if (occupant is { } occupantUid)
         {
-            Dirty(cryoCell);
-            return;
-        }
+            cryoCell.Comp.UIOccupant = GetNetEntity(occupantUid);
+            cryoCell.Comp.UIOccupantName = Identity.Name(occupantUid, EntityManager);
 
-        UpdateOccupantData(cryoCell, occupant.Value);
-        UpdateBeakerData(cryoCell);
-        Dirty(cryoCell);
-    }
+            if (_mobState.IsDead(occupantUid))
+                cryoCell.Comp.UIOccupantState = CryoCellOccupantMobState.Dead;
+            else if (_mobState.IsCritical(occupantUid))
+                cryoCell.Comp.UIOccupantState = CryoCellOccupantMobState.Critical;
+            else
+                cryoCell.Comp.UIOccupantState = CryoCellOccupantMobState.Alive;
 
-    private void UpdateOccupantData(Entity<CryoCellComponent> cryoCell, EntityUid occupant)
-    {
-        cryoCell.Comp.UIOccupant = GetNetEntity(occupant);
-        cryoCell.Comp.UIOccupantName = Identity.Name(occupant, EntityManager);
-
-        if (_mobState.IsDead(occupant))
-            cryoCell.Comp.UIOccupantState = CryoCellOccupantMobState.Dead;
-        else if (_mobState.IsCritical(occupant))
-            cryoCell.Comp.UIOccupantState = CryoCellOccupantMobState.Critical;
-        else
-            cryoCell.Comp.UIOccupantState = CryoCellOccupantMobState.Alive;
-
-        if (TryComp<DamageableComponent>(occupant, out var damageable))
-        {
-            if (_mobThreshold.TryGetThresholdForState(occupant, MobState.Critical, out var critThreshold))
+            if (TryComp<DamageableComponent>(occupantUid, out var damageable))
             {
-                cryoCell.Comp.UIMaxHealth = (float) critThreshold;
-                cryoCell.Comp.UIHealth = (float) (critThreshold - damageable.TotalDamage);
+                if (_mobThreshold.TryGetThresholdForState(occupantUid, MobState.Critical, out var critThreshold))
+                {
+                    cryoCell.Comp.UIMaxHealth = (float) critThreshold;
+                    cryoCell.Comp.UIHealth = (float) (critThreshold - damageable.TotalDamage);
+                }
+
+                cryoCell.Comp.UIBruteLoss = damageable.DamagePerGroup.GetValueOrDefault(BruteGroup).Float();
+                cryoCell.Comp.UIBurnLoss = damageable.DamagePerGroup.GetValueOrDefault(BurnGroup).Float();
+                cryoCell.Comp.UIToxinLoss = damageable.DamagePerGroup.GetValueOrDefault(ToxinGroup).Float();
+                cryoCell.Comp.UIOxygenLoss = damageable.DamagePerGroup.GetValueOrDefault(AirlossGroup).Float();
             }
 
-            cryoCell.Comp.UIBruteLoss = damageable.DamagePerGroup.GetValueOrDefault(BruteGroup).Float();
-            cryoCell.Comp.UIBurnLoss = damageable.DamagePerGroup.GetValueOrDefault(BurnGroup).Float();
-            cryoCell.Comp.UIToxinLoss = damageable.DamagePerGroup.GetValueOrDefault(ToxinGroup).Float();
-            cryoCell.Comp.UIOxygenLoss = damageable.DamagePerGroup.GetValueOrDefault(AirlossGroup).Float();
+            _rmcTemperature.TryGetCurrentTemperature(occupantUid, out var bodyTemp);
+            cryoCell.Comp.UIBodyTemperature = bodyTemp;
         }
 
-        _rmcTemperature.TryGetCurrentTemperature(occupant, out var bodyTemp);
-        cryoCell.Comp.UIBodyTemperature = bodyTemp;
-    }
-
-    private void UpdateBeakerData(Entity<CryoCellComponent> cryoCell)
-    {
         _beakerReagentBuffer.Clear();
-
-        if (!_itemSlots.TryGetSlot(cryoCell, cryoCell.Comp.BeakerSlot, out var slot) ||
-            slot.ContainerSlot?.ContainedEntity is not { } contained ||
-            !TryComp(contained, out FitsInDispenserComponent? fits) ||
-            !_solution.TryGetSolution(contained, fits.Solution, out _, out var beakerSol))
+        if (_itemSlots.TryGetSlot(cryoCell, cryoCell.Comp.BeakerSlot, out var slot) &&
+            slot.ContainerSlot?.ContainedEntity is { } contained &&
+            TryComp(contained, out FitsInDispenserComponent? fits) &&
+            _solution.TryGetSolution(contained, fits.Solution, out _, out var beakerSol))
         {
-            return;
+            cryoCell.Comp.UIIsBeakerLoaded = true;
+            foreach (var reagent in beakerSol.Contents)
+            {
+                _beakerReagentBuffer.Add(new CryoCellBeakerReagent(reagent.Reagent.Prototype, reagent.Quantity.Float()));
+            }
+
+            cryoCell.Comp.UIBeakerContents = _beakerReagentBuffer.ToArray();
         }
 
-        cryoCell.Comp.UIIsBeakerLoaded = true;
-        foreach (var reagent in beakerSol.Contents)
-        {
-            _beakerReagentBuffer.Add(new CryoCellBeakerReagent(reagent.Reagent.Prototype, reagent.Quantity.Float()));
-        }
-
-        cryoCell.Comp.UIBeakerContents = _beakerReagentBuffer.ToArray();
+        Dirty(cryoCell);
     }
 
     public override void Update(float frameTime)
