@@ -79,16 +79,26 @@ public sealed class LadderSystem : SharedLadderSystem
     /// <param name="ladder">Ladder entity to be removed from the group.</param>
     /// <param name="oldGroupId">ID string of the group <paramref name="ladder"/> should be removed from.</param>
     /// <seealso cref="TryAddToGroup(Entity{LadderComponent?}, string)"/>
-    public bool TryRemoveFromGroup(Entity<LadderComponent?> ladder, string oldGroupId)
+    public bool TryRemoveFromGroup(Entity<LadderComponent?> ladder)
     {
         if (!Resolve(ladder, ref ladder.Comp))
             return false;
 
-        if (ladder.Comp.GroupId != oldGroupId)
+        if (ladder.Comp.GroupId == null)
+        {
+            // There should be nothing connected if it isn't in a group. If there somehow is anyway, clean that up.
+            if (LadderIsConnected(ladder))
+            {
+                ladder.Comp.Above = null;
+                ladder.Comp.Below = null;
+            }
             return false;
+        }
 
+        var oldGroupId = ladder.Comp.GroupId;
         ladder.Comp.GroupId = null;
         Dirty(ladder);
+
         var group = GetLadderGroup(oldGroupId);
         group.Remove((ladder.Owner, ladder.Comp));
         UpdateAdjacent(group);
@@ -256,7 +266,10 @@ public sealed class LadderSystem : SharedLadderSystem
             if (ladderComp.GroupId is not { } id)
                 continue;
 
-            _toUpdateIds.GetOrNew(id).Add((entity, ladderComp));
+            var idGroup = _toUpdateIds.GetOrNew(id);
+            if (idGroup.TryFirstOrNull(l => l.Comp.Level == ladderComp.Level, out var sameLevelLadder))
+                Log.Error($"Ladders '{ToPrettyString(entity)}' and '{sameLevelLadder}' in group '{id}' have duplicate Level values of {ladderComp.Level}! This can cause unwanted ladder connections.");
+            idGroup.Add((entity, ladderComp));
         }
         _toUpdate.Clear();
 

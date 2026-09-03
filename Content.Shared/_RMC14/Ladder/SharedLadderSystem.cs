@@ -156,11 +156,11 @@ public abstract class SharedLadderSystem : EntitySystem
         }
 
         if (ent.Comp.CurrentDoAfterUser is { } currentDoAfterUser &&
+            currentDoAfterUser != user &&
             ent.Comp.CurrentDoAfterId is { } currentDoAfterId &&
             _doAfter.IsRunning(currentDoAfterUser, currentDoAfterId))
         {
-            if (currentDoAfterUser != user)
-                _popup.PopupClient(Loc.GetString("rmc-ladder-someone-else-climbing"), ent, user, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-ladder-someone-else-climbing"), ent, user, PopupType.SmallCaution);
             return;
         }
 

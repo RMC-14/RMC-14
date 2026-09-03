@@ -45,7 +45,7 @@ internal sealed class LadderCommand : ToolshedCommand
     }
 
     [CommandImplementation("group_rem")]
-    public void GroupRem(IInvocationContext ctx, EntityUid ladder, string groupId)
+    public void GroupRem(IInvocationContext ctx, EntityUid ladder)
     {
         _ladder ??= Sys<LadderSystem>();
 
@@ -55,14 +55,10 @@ internal sealed class LadderCommand : ToolshedCommand
             return;
         }
 
-        if (ladderComp.GroupId != groupId)
-        {
-            ctx.WriteLine($"{EntityManager.ToPrettyString(ladder)} isn't in the '{groupId}' group! ('{ladderComp.GroupId}' != '{groupId}')");
-            return;
-        }
+        var oldGroupId = ladderComp.GroupId;
 
-        if (_ladder.TryRemoveFromGroup((ladder, ladderComp), groupId))
-            ctx.WriteLine($"{EntityManager.ToPrettyString(ladder)} removed from group '{groupId}'!");
+        if (_ladder.TryRemoveFromGroup((ladder, ladderComp)))
+            ctx.WriteLine($"{EntityManager.ToPrettyString(ladder)} removed from group '{oldGroupId}'!");
     }
 
     [CommandImplementation("set_level")]
