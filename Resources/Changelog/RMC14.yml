@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Magicocity1
-  changes:
-  - message: Fixed some pistols not having sprites underlay on the pistol pouch
-    type: Fix
-  id: 3120
-  time: '2026-04-19T01:39:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9602
 - author: CatAndHats
   changes:
   - message: Added the pipe network to Hybrisa Prospera
@@ -4507,5 +4500,12 @@
   id: 3619
   time: '2026-09-02T15:29:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10786
+- author: CatAndHats
+  changes:
+  - message: Added new small tacmap table animation
+    type: Add
+  id: 3620
+  time: '2026-09-03T06:51:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10802
 Name: RMC14
 Order: -1
