@@ -83,3 +83,33 @@
   storage:
     back:
     - RMCWeaponPistolHandcannonWinterWyvern
+
+- type: loadout
+  id: Mateba2006MRMC
+  storage:
+    back:
+    - RMCWeaponRevolverMateba2006M
+
+- type: loadout
+  id: Mateba2006MRMCGold
+  storage:
+    back:
+    - RMCWeaponRevolverMateba2006MGold
+
+- type: loadout
+  id: Mateba2006MRMCBlackGold
+  storage:
+    back:
+    - RMCWeaponRevolverMateba2006MBlackGold
+
+- type: loadout
+  id: Mateba2006MRMCSilver
+  storage:
+    back:
+    - RMCWeaponRevolverMateba2006MSilver
+
+- type: loadout
+  id: M1911CRMC
+  storage:
+    back:
+    - RMCWeaponPistolM1911C

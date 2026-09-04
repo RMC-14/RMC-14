@@ -1,0 +1,177 @@
+- type: entity
+  parent: CMWeaponPistolM1911
+  id: RMCWeaponPistolM1911C
+  name: M1911C service pistol
+  description: A variant of the legendary M1911 pistol in use by UNMC command elements. Based off the modernized M2100, it has been modified to more closely resemble a classic M1911 in shape, while retaining modern technology features like a discreet ammo counter. Chambered in .45 ACP.
+  components:
+  - type: RMCSelectiveFire
+    scatterWielded: 6
+    scatterUnwielded: 6
+    baseFireRate: 4
+    burstScatterMult: 5
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.25
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCWeaponPistolM1911C
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m1911c.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m1911c.rsi
+  - type: Gun
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    - FullAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m1911c.ogg
+      params:
+        pitch: 0.95
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mk80_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazinePistolM1911
+          - RMCMagazinePistolM1911HI
+          - RMCMagazinePistolM1911HIAP
+        startingItem: RMCMagazinePistolM1911HI
+  - type: RMCBattleExecute
+  - type: RMCAirShot
+    preparationTime: 1.5
+    requiresCombat: true
+    doAfterBreakOnMove: false
+    ignoreRoof: true
+    shakeAmount: 5
+    requiredSkills:
+      RMCSkillLeadership: 3
+
+- type: Tag
+  id: RMCWeaponPistolM1911C
+
+#45ACP HI
+
+- type: entity
+  parent: CMMagazinePistolM1911
+  id: RMCMagazinePistolM1911HI
+  name: M1911 high-impact magazine (.45)
+  description: A magazine for the legendary M1911 pistol. Holds eight concussive rounds that can briefly knock people down.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolM1911HI
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgePistol45ACPHI
+    proto: RMCCartridgePistol45ACPHI
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#00CDEA"
+
+- type: entity
+  parent: CMCartridgePistol45ACP
+  id: RMCCartridgePistol45ACPHI
+  name: cartridge (.45 ACP HI)
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgePistol45ACPHI
+  - type: CartridgeAmmo
+    proto: RMCBulletPistol45ACPHI
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletPistol45ACPHI
+  name: bullet (.45 ACP HI)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 55
+  - type: RMCStunOnHit
+    stuns:
+    - whitelist:
+        minMobSize: VerySmallXeno
+      maxRange: 4.5
+      stunTime: 1
+
+- type: Tag
+  id: RMCMagazinePistolM1911HI
+
+- type: Tag
+  id: RMCCartridgePistol45ACPHI
+
+#45ACP HIAP
+
+- type: entity
+  parent: CMMagazinePistolM1911
+  id: RMCMagazinePistolM1911HIAP
+  name: M1911 high-impact armor-piercing magazine (.45)
+  description: A magazine for the legendary M1911 pistol. Holds eight concussive armor-piercing rounds that can briefly knock people down.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolM1911HIAP
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgePistol45ACPHIAP
+    proto: RMCCartridgePistol45ACPHIAP
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#e2da00"
+
+- type: entity
+  parent: CMCartridgePistol45ACP
+  id: RMCCartridgePistol45ACPHIAP
+  name: cartridge (.45 ACP HIAP)
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgePistol45ACPHIAP
+  - type: CartridgeAmmo
+    proto: RMCBulletPistol45ACPHIAP
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletPistol45ACPHIAP
+  name: bullet (.45 ACP HIAP)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 40
+  - type: CMArmorPiercing
+    amount: 50
+  - type: RMCStunOnHit
+    stuns:
+    - whitelist:
+        minMobSize: VerySmallXeno
+      maxRange: 4.5
+      stunTime: 1
+
+- type: Tag
+  id: RMCMagazinePistolM1911HIAP
+
+- type: Tag
+  id: RMCCartridgePistol45ACPHIAP
