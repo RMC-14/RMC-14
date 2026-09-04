@@ -9,19 +9,22 @@ using Content.Shared.Verbs;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Ladder;
 
 public abstract class SharedLadderSystem : EntitySystem
 {
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedRMCTeleporterSystem _rmcTeleporter = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
 
     private EntityQuery<ActorComponent> _actorQuery;
     protected EntityQuery<LadderComponent> LadderQuery;
@@ -127,6 +130,20 @@ public abstract class SharedLadderSystem : EntitySystem
                 _popup.PopupClient(Loc.GetString("rmc-ladder-leads-nowhere"), ent, user, PopupType.SmallCaution);
                 return null;
         }
+    }
+
+    private void OpenRadialMenu(Entity<LadderComponent> ent, EntityUid user, SelectionReason reason)
+    {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+        if (ent.Comp.Above is not { } above || ent.Comp.Below is not { } below)
+        {
+            Log.Error($"Ladder {ToPrettyString(ent)} tried to open a radial menu, but doesn't have two connected ladders! (Above: {ToPrettyString(ent.Comp.Above)} | Below: {ToPrettyString(ent.Comp.Below)})");
+            return;
+        }
+
+        _uiSystem.OpenUi(ent.Owner, LadderRadialBuiKey.Key, user, true);
+        _uiSystem.SetUiState(ent.Owner, LadderRadialBuiKey.Key, new LadderRadialBuiState(GetNetEntity(above), GetNetEntity(below), reason));
     }
 
     private void OnRadialMenuSelected(Entity<LadderComponent> ent, ref LadderRadialSelectedMessage args)
@@ -316,9 +333,6 @@ public abstract class SharedLadderSystem : EntitySystem
         else if (TryComp(ent, out ActorComponent? actor))
             Unwatch(ent.Owner, actor.PlayerSession);
     }
-
-    protected virtual void OpenRadialMenu(Entity<LadderComponent> ent, EntityUid user, SelectionReason reason)
-    { }
 
     protected virtual void AddViewer(Entity<LadderComponent> ent, ICommonSession player)
     { }

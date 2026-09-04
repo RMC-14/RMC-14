@@ -10,7 +10,6 @@ namespace Content.Server._RMC14.Ladder;
 public sealed class LadderSystem : SharedLadderSystem
 {
     [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
     [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
 
     // Ladders to be processed in `Update()`. Added by `MapInitEvent`.
@@ -149,18 +148,6 @@ public sealed class LadderSystem : SharedLadderSystem
     private void OnWatchingRemove<T>(Entity<LadderWatchingComponent> ent, ref T args)
     {
         RemoveWatcher(ent);
-    }
-
-    protected override void OpenRadialMenu(Entity<LadderComponent> ent, EntityUid user, SelectionReason reason)
-    {
-        if (ent.Comp.Above is not { } above || ent.Comp.Below is not { } below)
-        {
-            Log.Error($"Ladder {ToPrettyString(ent)} tried to open a radial menu, but doesn't have two connected ladders! (Above: {ToPrettyString(ent.Comp.Above)} | Below: {ToPrettyString(ent.Comp.Below)})");
-            return;
-        }
-
-        _uiSystem.OpenUi(ent.Owner, LadderRadialBuiKey.Key, user);
-        _uiSystem.SetUiState(ent.Owner, LadderRadialBuiKey.Key, new LadderRadialBuiState(GetNetEntity(above), GetNetEntity(below), reason));
     }
 
     protected override void Watch(Entity<ActorComponent?, EyeComponent?> watcher, Entity<LadderComponent?> toWatch)
