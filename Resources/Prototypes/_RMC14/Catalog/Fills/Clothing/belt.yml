@@ -404,6 +404,17 @@
 
 - type: entity
   parent: RMCBeltHolsterPistol
+  id:  RMCBeltHolsterPistolHandcannonProvostFilled
+  suffix: Filled, Provost Handcannon
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolHandcannon
+      amount: 6
+    - id: RMCWeaponPistolHandcannonProvost
+   
+- type: entity
+  parent: RMCBeltHolsterPistol
   id: RMCM77BeltFilled
   suffix: Filled, M77
   components:
