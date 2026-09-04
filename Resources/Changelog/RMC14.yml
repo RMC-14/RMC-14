@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: MidZik
-  changes:
-  - message: Fixed Steelcrest's Soak ability occasionally healing for more than intended.
-    type: Fix
-  id: 3128
-  time: '2026-04-22T00:00:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9424
 - author: Dygon
   changes:
   - message: Increased Tesla Coil range from 3 to 3.95 tiles.
@@ -4472,5 +4465,13 @@
   id: 3627
   time: '2026-09-03T22:40:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10182
+- author: Thereisabear
+  changes:
+  - message: Fixed tools being placed when trying to deconstruct/repair placeable
+      surfaces.
+    type: Fix
+  id: 3628
+  time: '2026-09-04T21:54:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10495
 Name: RMC14
 Order: -1
