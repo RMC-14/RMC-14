@@ -1,6 +1,17 @@
 ﻿#Put it in here because the other 2 yml files didnt sound right for this
 
 - type: reaction
+  id: RMCSoySauce
+  reactants:
+    MilkSoy:
+      amount: 2
+    RMCSulphuricAcid:
+      amount: 1
+  products:
+    RMCSoysauce:
+      amount: 3
+
+- type: reaction
   id: RMCCherryJelly
   minTemp: 342
   reactants:
