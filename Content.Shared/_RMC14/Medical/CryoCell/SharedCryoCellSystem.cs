@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Storage;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
+using Content.Shared.Power;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -23,12 +24,14 @@ public abstract class SharedCryoCellSystem : EntitySystem
     [Dependency] private readonly RMCMovementSystem _rmcMovement = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<CryoCellComponent, ComponentInit>(OnCryoCellInit);
+        SubscribeLocalEvent<CryoCellComponent, PowerChangedEvent>(OnCryoCellPower);
         SubscribeLocalEvent<CryoCellComponent, EntInsertedIntoContainerMessage>(OnCryoCellEntInserted);
         SubscribeLocalEvent<CryoCellComponent, EntRemovedFromContainerMessage>(OnCryoCellEntRemoved);
 
@@ -39,6 +42,14 @@ public abstract class SharedCryoCellSystem : EntitySystem
     {
         _container.EnsureContainer<ContainerSlot>(cryoCell, cryoCell.Comp.OccupantId);
         UpdateCryoCellVisuals(cryoCell);
+    }
+
+    private void OnCryoCellPower(Entity<CryoCellComponent> cryoCell, ref PowerChangedEvent args)
+    {
+        if (!args.Powered)
+            _ui.CloseUi(cryoCell.Owner, CryoCellUIKey.Key);
+
+        UpdateCryoCellVisuals(cryoCell, args.Powered);
     }
 
     private void OnCryoCellEntInserted(Entity<CryoCellComponent> cryoCell, ref EntInsertedIntoContainerMessage args)
@@ -146,7 +157,7 @@ public abstract class SharedCryoCellSystem : EntitySystem
         var hasOccupant = cryoCell.Comp.Occupant != null;
 
         if (_light.TryGetLight(cryoCell.Owner, out var light))
-            _light.SetEnabled(cryoCell.Owner, isOn, light);
+            _light.SetEnabled(cryoCell.Owner, isOn && hasOccupant, light);
 
         var newState = (isOn, hasOccupant) switch
         {

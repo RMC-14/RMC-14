@@ -17,7 +17,6 @@ using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Power;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.UserInterface;
 using Robust.Server.GameObjects;
@@ -62,7 +61,6 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         SubscribeLocalEvent<CryoCellComponent, CryoCellToggleAutoEjectBuiMsg>(OnToggleAutoEject);
         SubscribeLocalEvent<CryoCellComponent, CryoCellToggleNotifyBuiMsg>(OnToggleNotify);
         SubscribeLocalEvent<CryoCellComponent, CryoCellEjectBeakerBuiMsg>(OnEjectBeaker);
-        SubscribeLocalEvent<CryoCellComponent, PowerChangedEvent>(OnCryoCellPower);
     }
 
     private void OnCellUIOpened(Entity<CryoCellComponent> cryoCell, ref AfterActivatableUIOpenEvent args)
@@ -201,7 +199,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
             if (cryoCell.Occupant == null)
                 continue;
 
-            if (TryComp<ApcPowerReceiverComponent>(uid, out var power) && !power.Powered)
+            if (!cryoCell.IsPoweredOn || !TryComp<ApcPowerReceiverComponent>(uid, out var power) || !power.Powered)
                 continue;
 
             if (time < cryoCell.NextUpdate)
@@ -365,14 +363,5 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         }
 
         return false;
-    }
-
-    private void OnCryoCellPower(Entity<CryoCellComponent> cryoCell, ref PowerChangedEvent args)
-    {
-        if (TryComp<ApcPowerReceiverComponent>(cryoCell, out var power) && power.Powered)
-            return;
-
-        _ui.CloseUi(cryoCell.Owner, CryoCellUIKey.Key);
-        UpdateCryoCellVisuals(cryoCell);
     }
 }
