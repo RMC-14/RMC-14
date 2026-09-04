@@ -311,7 +311,7 @@
   reactants:
     MilkSoy:
       amount: 2
-    SulfuricAcid:
+    RMCSulphuricAcid: # Changed for RMC
       amount: 1
   products:
     Soysauce: 3
