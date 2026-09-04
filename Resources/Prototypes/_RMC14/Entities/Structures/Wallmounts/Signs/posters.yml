@@ -775,8 +775,8 @@
 - type: entity
   parent: CMPosterBase
   id: CMPosterMarineCorp1
-  name: "marine corp poster"
-  description: "Join the Marine Corp. Enlist today, protect tomorrow!"
+  name: "marine corps poster"
+  description: "Join the Marine Corps. Enlist today, protect tomorrow!"
   components:
   - type: Sprite
     state: marine_corp_1
@@ -784,8 +784,8 @@
 - type: entity
   parent: CMPosterMarineCorp1
   id: CMPosterMarineCorp2
-  name: "marine corp poster"
-  description: "Join the Marine Corp. Enlist today, protect tomorrow!"
+  name: "marine corps poster"
+  description: "Join the Marine Corps. Enlist today, protect tomorrow!"
   components:
   - type: Sprite
     state: marine_corp_2
@@ -793,8 +793,8 @@
 - type: entity
   parent: CMPosterMarineCorp1
   id: CMPosterMarineCorp3
-  name: "marine corp poster"
-  description: "Every Paycheck a Fortune! Every Formation a Parade! - Join the Colonial Marines!"
+  name: "marine corps poster"
+  description: "Every Paycheck a Fortune! Every Formation a Parade! - Join the UN Marine Corps!"
   components:
   - type: Sprite
     state: marine_corp_3
@@ -802,7 +802,7 @@
 - type: entity
   parent: CMPosterMarineCorp1
   id: CMPosterMarineCorp4
-  name: "marine corp poster"
+  name: "marine corps poster"
   description: "This poster depicts the logo of the UN Marine Corps, Oorah!"
   components:
   - type: Sprite
@@ -811,8 +811,8 @@
 - type: entity
   parent: CMPosterMarineCorp1
   id: CMPosterMarineCorp5
-  name: "UN marine corp poster"
-  description: "YOU GIVE US WINGS, WINGS OF LIBERTY - United Nations Marine Corp."
+  name: "UN marine corps poster"
+  description: "YOU GIVE US WINGS, WINGS OF LIBERTY - United Nations Marine Corps."
   components:
   - type: Sprite
     state: marine_corp_5
@@ -820,7 +820,7 @@
 - type: entity
   parent: CMPosterMarineCorp1
   id: CMPosterMarineCorp6
-  name: "UN marine corp poster"
+  name: "UN marine corps poster"
   description: "UNMC MARINES - FIRST TO FIGHT."
   components:
   - type: Sprite
@@ -829,8 +829,8 @@
 - type: entity
   parent: CMPosterMarineCorp1
   id: CMPosterMarineCorp7
-  name: "UN marine corp poster"
-  description: "No one stands alone with the United Nations Marine Corp - JOIN US!"
+  name: "UN marine corps poster"
+  description: "No one stands alone with the United Nations Marine Corps - JOIN US!"
   components:
   - type: Sprite
     state: marine_corp_7
@@ -989,3 +989,35 @@
   components:
   - type: Sprite
     state: SPP_13
+
+# Tyrargo posters
+
+- type: entity
+  parent: CMPosterBase
+  id: CMPosterTyrargoEvacNotice
+  name: "UNMC evacuation notice"
+  description: "A evacuation poster, it reads: All residents of Tyrargo Rift and outlying areas are required to evacuate by 5:45pm. All evacuees will be asked to provide identification and may be subject to medical testing. Evacuees resisting official direction will be detained. Evacuation is mandatory."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/posters_32x64.rsi
+    state: tyrargo_evac
+    offset: 0.5, 0
+
+- type: entity
+  parent: CMPosterBase
+  id: CMPosterTyrargoCheckpointNotice
+  name: "UN military checkpoint notice"
+  description: "A military notice poster, it reads: Halt. UN Marine Corps checkpoint ahead. Comply or be shot."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/posters_64x64.rsi
+    state: tyrargo_checkpoint
+
+- type: entity
+  parent: CMPosterBase
+  id: CMPosterTyrargoQuarantineNotice
+  name: "ICB quarantine notice"
+  description: "A quarantine poster, bearing the ICB's logo, it reads: This area is designated a secure transit zone by the ICB and UN Marine Corps. Non-compliance with military directives is punishable under the Interplanetary Biohazard Preparedness Act."
+  components:
+  - type: Sprite
+    state: icc
