@@ -37,11 +37,10 @@ internal sealed class LadderCommand : ToolshedCommand
 
         // If the ladder failed to be added above, check if it was due to a level conflict.
         var group = _ladder.GetLadderGroup(groupId);
-
         if (group.TryFirstOrNull(l => l.Comp.Level == ladderComp.Level, out var sameLevelLadder))
-            // This is exactly the same as one of the checks in `TryAddToGroup()` so that the error message can be shown to the client running the command as well.
+            // This is exactly the same as one of the server-side checks in `TryAddToGroup()`, so that the error message can be shown to the client running the command as well.
             // (There's probably a better way of doing this)
-            ctx.WriteLine($"Failed to add {EntityManager.ToPrettyString(ladder)} to group '{groupId}'. {EntityManager.ToPrettyString(sameLevelLadder)} has a duplicate 'Level' value of {ladderComp.Level}!");
+            ctx.WriteLine($"Failed to add {EntityManager.ToPrettyString(ladder)} to group '{groupId}'. {EntityManager.ToPrettyString(sameLevelLadder)} has a duplicate Level value of {ladderComp.Level}!");
     }
 
     [CommandImplementation("group_rem")]
@@ -78,13 +77,13 @@ internal sealed class LadderCommand : ToolshedCommand
             return;
         }
 
-        // Same as above in `LinkLadder()`, this is a copy of one of the checks in `TrySetLevel()` in order to pass the error message along.
+        // Same as above, this is a copy of one of the checks in `TrySetLevel()` in order to pass the error message along.
         if (ladderComp.GroupId != null)
         {
             var group = _ladder.GetLadderGroup(ladderComp.GroupId);
             if (group.TryFirstOrNull(l => l.Comp.Level == newLevel, out var sameLevelLadder))
             {
-                ctx.WriteLine($"Failed to change the Level of {EntityManager.ToPrettyString(ladder)} to {newLevel}. {EntityManager.ToPrettyString(sameLevelLadder)} already holds that position!");
+                ctx.WriteLine($"Failed to change the Level of {EntityManager.ToPrettyString(ladder)} to {newLevel}. {EntityManager.ToPrettyString(sameLevelLadder)} already holds that position in group '{ladderComp.GroupId}'!");
             }
         }
     }

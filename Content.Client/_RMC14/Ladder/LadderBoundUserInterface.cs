@@ -84,6 +84,7 @@ public sealed class LadderBoundUserInterface : BoundUserInterface
             if (child is not RadialContainer container)
                 continue;
 
+            // Position the buttons at the top and bottom of the radial menu.
             container.RadialAlignment = RadialContainer.RAlignment.AntiClockwise;
             container.AngularRange = new Vector2(MathF.Tau / 4, MathF.Tau * 3 / 4);
 
@@ -99,9 +100,11 @@ public sealed class LadderBoundUserInterface : BoundUserInterface
 
     // Workaround until `RadialMenuIconSpecifier` is ported from upstream.
     //
-    // Basically, radial menu buttons can only have a background if their icon is set as a child
-    // of the button for various confusing reasons. The current implementation of `SimpleRadialMenu`
-    // sets the icon as the button's `TextureNormal`, so this is to get around that.
+    // Basically, radial menu buttons can only have a background (added through the "RadialMenuButton" style)
+    // if their icon is set as a TextureRect child of the button, for various confusing reasons.
+    // The current implementation of `SimpleRadialMenu` sets the icon as the button's `TextureNormal`,
+    // so this is to get around that.
+    // (The wizden PR adding `RadialMenuIconSpecifier` seems to solve this, so this can all be changed when that gets ported)
     private void AddButtonIcon(Control button, SpriteSpecifier icon)
     {
         var actualButtonSprite = new TextureRect

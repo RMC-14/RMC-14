@@ -1,4 +1,4 @@
-using Content.Shared._RMC14.Ladder;
+﻿using Content.Shared._RMC14.Ladder;
 
 namespace Content.Client._RMC14.Ladder;
 

@@ -1,6 +1,4 @@
-using System.Linq;
 using Content.Shared._RMC14.Teleporter;
-using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.Ghost;
@@ -11,7 +9,6 @@ using Content.Shared.Verbs;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Ladder;
 
@@ -24,7 +21,6 @@ public abstract class SharedLadderSystem : EntitySystem
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedRMCTeleporterSystem _rmcTeleporter = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private EntityQuery<ActorComponent> _actorQuery;
@@ -62,9 +58,9 @@ public abstract class SharedLadderSystem : EntitySystem
     /// <summary>
     /// Check if the ladder <paramref name="ent"/> is connected to <paramref name="checkConnected"/>.
     /// </summary>
-    public bool LadderIsConnected(Entity<LadderComponent?> ent, Entity<LadderComponent?> checkConnected)
+    public bool LadderIsConnected(Entity<LadderComponent?> ent, EntityUid checkConnected)
     {
-        if (!Resolve(ent, ref ent.Comp) || !Resolve(checkConnected, ref checkConnected.Comp))
+        if (!Resolve(ent, ref ent.Comp))
             return false;
         return ent.Comp.Above == checkConnected || ent.Comp.Below == checkConnected;
     }
@@ -98,6 +94,14 @@ public abstract class SharedLadderSystem : EntitySystem
 
     private void OnLadderActivateInWorld(Entity<LadderComponent> ent, ref ActivateInWorldEvent args)
     {
+        // Weird ghost interaction range edge case ("Looking through" Ladder A to remotely view Ladder B, then interacting with Ladder B despite being miles away.)
+        if (HasComp<GhostComponent>(args.User) &&
+            TryComp<LadderWatchingComponent>(args.User, out var watching) &&
+            watching.Watching == ent)
+        {
+            return;
+        }
+
         if (SelectConnectedLadder(ent, args.User, SelectionReason.Climb) is { } connecedLadder)
             StartClimbing(ent, connecedLadder, args.User);
     }
@@ -256,7 +260,7 @@ public abstract class SharedLadderSystem : EntitySystem
             return;
 
         var user = args.User;
-        if (!_interaction.InRangeUnobstructed(user, ent.Owner))
+        if (!CanWatch(ent, user, false))
             return;
 
         args.Verbs.Add(new AlternativeVerb
@@ -264,7 +268,7 @@ public abstract class SharedLadderSystem : EntitySystem
             Priority = 100,
             Act = () =>
             {
-                if (CanWatchPopup(ent, user) &&
+                if (CanWatch(ent, user) &&
                     SelectConnectedLadder(ent, user, SelectionReason.Watch) is { } otherLadder)
                 {
                     Watch(user, otherLadder);
@@ -294,7 +298,7 @@ public abstract class SharedLadderSystem : EntitySystem
         if (user != args.Target || !LadderIsConnected(ent.AsNullable()))
             return;
 
-        if (!CanWatchPopup(ent, user))
+        if (!CanWatch(ent, user))
             return;
 
         args.Handled = true;
@@ -333,10 +337,18 @@ public abstract class SharedLadderSystem : EntitySystem
         _eye.SetTarget(watcher, null);
     }
 
-    protected bool CanWatchPopup(Entity<LadderComponent> ladder, EntityUid user)
+    protected bool CanWatch(Entity<LadderComponent> ladder, EntityUid user, bool popup = true)
     {
-        if (!_interaction.InRangeUnobstructed(user, ladder.Owner, popup: true))
+        if (!_interaction.InRangeUnobstructed(user, ladder.Owner, popup: popup))
             return false;
+
+        // Weird ghost interaction range edge case ("Looking through" Ladder A to remotely view Ladder B, then interacting with Ladder B despite being miles away.)
+        if (HasComp<GhostComponent>(user) &&
+            TryComp<LadderWatchingComponent>(user, out var watching) &&
+            watching.Watching == ladder)
+        {
+            return false;
+        }
 
         return true;
     }
