@@ -1,5 +1,5 @@
 rmc-cryo-cell-window-title = Cryo Cell
-rmc-cryo-cell-no-occupant = No occupant detected.
+rmc-cryo-cell-no-occupant = No occupant
 
 rmc-cryo-cell-occupant-header = Occupant
 rmc-cryo-cell-name-label = Name:

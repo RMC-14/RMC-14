@@ -3,87 +3,75 @@
     xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
     MinSize="400 550">
     <BoxContainer Orientation="Vertical">
-        <!-- Empty State -->
-        <BoxContainer Name="EmptyPanel" Orientation="Vertical" VerticalExpand="True">
-            <Control VerticalExpand="True" />
-            <Label Text="{Loc rmc-cryo-cell-no-occupant}" Align="Center" StyleClasses="LabelBig" />
-            <Control VerticalExpand="True" />
-        </BoxContainer>
-
-        <!-- Occupant State Panel -->
-        <BoxContainer Name="OccupantPanel" Orientation="Vertical" Visible="False">
-            <!-- Occupant Section -->
-            <BoxContainer Orientation="Vertical" Margin="0 0 0 6">
-                <Label Text="{Loc rmc-cryo-cell-occupant-header}" StyleClasses="LabelKeyText" Margin="0 0 0 4" />
-                <cc:HSeparator Color="#4972A1" Margin="0 0 0 4" />
-                <BoxContainer Orientation="Horizontal" Margin="0 2 0 2">
-                    <Label Text="{Loc rmc-cryo-cell-name-label}" MinWidth="120" Modulate="#5B88B0" />
-                    <Label Name="OccupantNameLabel" Text="" />
-                </BoxContainer>
-                <BoxContainer Orientation="Horizontal" Margin="0 2 0 2">
-                    <Label Text="{Loc rmc-cryo-cell-state-label}" MinWidth="120" Modulate="#5B88B0" />
-                    <Label Name="StatusLabel" Text="" />
-                </BoxContainer>
-                <BoxContainer Orientation="Horizontal" Margin="0 2 0 2">
-                    <Label Text="{Loc rmc-cryo-cell-temperature-label}" MinWidth="120" Modulate="#5B88B0" />
-                    <ProgressBar Name="BodyTemperatureBar" HorizontalExpand="True" MinValue="0" MaxValue="1000" MinHeight="16">
-                        <Label Name="BodyTemperatureText" Align="Right" Margin="0 0 5 0" />
-                    </ProgressBar>
-                </BoxContainer>
-                <BoxContainer Orientation="Horizontal" Margin="0 2 0 2">
-                    <Label Text="{Loc rmc-cryo-cell-health-label}" MinWidth="120" Modulate="#5B88B0" />
-                    <ProgressBar Name="HealthBar" HorizontalExpand="True" MinValue="0" MinHeight="16">
-                        <Label Name="HealthBarText" Align="Right" Margin="0 0 5 0" />
-                    </ProgressBar>
-                </BoxContainer>
-                <BoxContainer Orientation="Horizontal" Margin="0 2 0 2">
-                    <Label Text="{Loc rmc-cryo-cell-brute-label}" MinWidth="120" Modulate="#5B88B0" />
-                    <ProgressBar Name="BruteBar" HorizontalExpand="True" MinValue="0" MaxValue="100" MinHeight="16">
-                        <Label Name="BruteBarText" Align="Right" Margin="0 0 5 0" />
-                    </ProgressBar>
-                </BoxContainer>
-                <BoxContainer Orientation="Horizontal" Margin="0 2 0 2">
-                    <Label Text="{Loc rmc-cryo-cell-burn-label}" MinWidth="120" Modulate="#5B88B0" />
-                    <ProgressBar Name="BurnBar" HorizontalExpand="True" MinValue="0" MaxValue="100" MinHeight="16">
-                        <Label Name="BurnBarText" Align="Right" Margin="0 0 5 0" />
-                    </ProgressBar>
-                </BoxContainer>
-                <BoxContainer Orientation="Horizontal" Margin="0 2 0 2">
-                    <Label Text="{Loc rmc-cryo-cell-toxin-label}" MinWidth="120" Modulate="#5B88B0" />
-                    <ProgressBar Name="ToxinBar" HorizontalExpand="True" MinValue="0" MaxValue="100" MinHeight="16">
-                        <Label Name="ToxinBarText" Align="Right" Margin="0 0 5 0" />
-                    </ProgressBar>
-                </BoxContainer>
-                <BoxContainer Orientation="Horizontal" Margin="0 2 0 2">
-                    <Label Text="{Loc rmc-cryo-cell-oxygen-label}" MinWidth="120" Modulate="#5B88B0" />
-                    <ProgressBar Name="OxygenBar" HorizontalExpand="True" MinValue="0" MaxValue="100" MinHeight="16">
-                        <Label Name="OxygenBarText" Align="Right" Margin="0 0 5 0" />
-                    </ProgressBar>
-                </BoxContainer>
+        <!-- Occupant Section -->
+        <BoxContainer Name="OccupantPanel" Orientation="Vertical" Margin="0 6">
+            <Label Text="{Loc rmc-cryo-cell-occupant-header}" StyleClasses="LabelKeyText" Margin="0 4" />
+            <cc:HSeparator Color="#4972A1" Margin="0 4" />
+            <BoxContainer Orientation="Horizontal" Margin="0 2">
+                <Label Text="{Loc rmc-cryo-cell-name-label}" MinWidth="120" Modulate="#5B88B0" />
+                <Label Name="OccupantNameLabel" />
+            </BoxContainer>
+            <BoxContainer Orientation="Horizontal" Margin="0 2">
+                <Label Text="{Loc rmc-cryo-cell-state-label}" MinWidth="120" Modulate="#5B88B0" />
+                <Label Name="StatusLabel" />
+            </BoxContainer>
+            <BoxContainer Orientation="Horizontal" Margin="0 2">
+                <Label Text="{Loc rmc-cryo-cell-temperature-label}" MinWidth="120" Modulate="#5B88B0" />
+                <ProgressBar Name="BodyTemperatureBar" HorizontalExpand="True" MinValue="0" MaxValue="1000" MinHeight="16">
+                    <Label Name="BodyTemperatureText" Align="Right" Margin="0 0 5 0" />
+                </ProgressBar>
+            </BoxContainer>
+            <BoxContainer Orientation="Horizontal" Margin="0 2">
+                <Label Text="{Loc rmc-cryo-cell-health-label}" MinWidth="120" Modulate="#5B88B0" />
+                <ProgressBar Name="HealthBar" HorizontalExpand="True" MinValue="0" MinHeight="16">
+                    <Label Name="HealthBarText" Align="Right" Margin="0 0 5 0" />
+                </ProgressBar>
+            </BoxContainer>
+            <BoxContainer Orientation="Horizontal" Margin="0 2">
+                <Label Text="{Loc rmc-cryo-cell-brute-label}" MinWidth="120" Modulate="#5B88B0" />
+                <ProgressBar Name="BruteBar" HorizontalExpand="True" MinValue="0" MaxValue="100" MinHeight="16">
+                    <Label Name="BruteBarText" Align="Right" Margin="0 0 5 0" />
+                </ProgressBar>
+            </BoxContainer>
+            <BoxContainer Orientation="Horizontal" Margin="0 2">
+                <Label Text="{Loc rmc-cryo-cell-burn-label}" MinWidth="120" Modulate="#5B88B0" />
+                <ProgressBar Name="BurnBar" HorizontalExpand="True" MinValue="0" MaxValue="100" MinHeight="16">
+                    <Label Name="BurnBarText" Align="Right" Margin="0 0 5 0" />
+                </ProgressBar>
+            </BoxContainer>
+            <BoxContainer Orientation="Horizontal" Margin="0 2">
+                <Label Text="{Loc rmc-cryo-cell-toxin-label}" MinWidth="120" Modulate="#5B88B0" />
+                <ProgressBar Name="ToxinBar" HorizontalExpand="True" MinValue="0" MaxValue="100" MinHeight="16">
+                    <Label Name="ToxinBarText" Align="Right" Margin="0 0 5 0" />
+                </ProgressBar>
+            </BoxContainer>
+            <BoxContainer Orientation="Horizontal" Margin="0 2">
+                <Label Text="{Loc rmc-cryo-cell-oxygen-label}" MinWidth="120" Modulate="#5B88B0" />
+                <ProgressBar Name="OxygenBar" HorizontalExpand="True" MinValue="0" MaxValue="100" MinHeight="16">
+                    <Label Name="OxygenBarText" Align="Right" Margin="0 0 5 0" />
+                </ProgressBar>
             </BoxContainer>
         </BoxContainer>
 
         <!-- Cell Section -->
-        <BoxContainer Orientation="Vertical" Margin="0 0 0 6">
-            <BoxContainer Orientation="Horizontal" Margin="0 0 0 4">
-                <Label Text="{Loc rmc-cryo-cell-header}" StyleClasses="LabelKeyText" />
-            </BoxContainer>
-            <cc:HSeparator Color="#4972A1" Margin="0 0 0 4" />
-            <BoxContainer Orientation="Horizontal" Margin="0 2 0 2">
+        <BoxContainer Orientation="Vertical" Margin="0 6">
+            <Label Text="{Loc rmc-cryo-cell-header}" StyleClasses="LabelKeyText" />
+            <cc:HSeparator Color="#4972A1" Margin="0 4" />
+            <BoxContainer Orientation="Horizontal" Margin="0 2">
                 <Label Text="{Loc rmc-cryo-cell-power-label}" MinWidth="120" Modulate="#5B88B0" />
-                <Button Name="PowerButton" Text="{Loc rmc-cryo-cell-power-off}" ToggleMode="True" MinWidth="40" />
+                <Button Name="PowerButton" Text="{Loc rmc-cryo-cell-power-off}" ToggleMode="True" MinWidth="45" MinHeight="24" />
             </BoxContainer>
-            <BoxContainer Orientation="Horizontal" Margin="0 2 0 2">
+            <BoxContainer Orientation="Horizontal" Margin="0 2">
                 <Label Text="{Loc rmc-cryo-cell-temperature-label}" MinWidth="120" Modulate="#5B88B0" />
                 <ProgressBar Name="CellTemperatureBar" HorizontalExpand="True" MinValue="0" MaxValue="1000" MinHeight="16">
                     <Label Name="CellTemperatureText" Align="Right" Margin="0 0 5 0" />
                 </ProgressBar>
             </BoxContainer>
-            <BoxContainer Orientation="Horizontal" Margin="0 2 0 2">
+            <BoxContainer Orientation="Horizontal" Margin="0 2">
                 <Label Text="{Loc rmc-cryo-cell-door-label}" MinWidth="120" Modulate="#5B88B0" />
-                <Button Name="EjectButton" Text="{Loc rmc-cryo-cell-eject}" MinWidth="100" />
-                <Button Name="AutoEjectButton" Text="{Loc rmc-cryo-cell-manual}" ToggleMode="True" MinWidth="60" Margin="2" />
-                <Button Name="NotifyButton" Text="{Loc rmc-cryo-cell-silent}" ToggleMode="True" MinWidth="60" Margin="2" />
+                <Button Name="EjectButton" Text="{Loc rmc-cryo-cell-eject}" MinWidth="75" MinHeight="24" />
+                <Button Name="AutoEjectButton" Text="{Loc rmc-cryo-cell-manual}" ToggleMode="True" MinWidth="65" MinHeight="24" Margin="2 0 0 0" />
+                <Button Name="NotifyButton" Text="{Loc rmc-cryo-cell-silent}" ToggleMode="True" MinWidth="65" MinHeight="24" Margin="2 0 0 0" />
             </BoxContainer>
         </BoxContainer>
 
@@ -93,10 +81,9 @@
                 <Label Text="{Loc rmc-cryo-cell-beaker-header}" StyleClasses="LabelKeyText" HorizontalExpand="True" />
                 <Button Name="EjectBeakerButton" Text="{Loc rmc-cryo-cell-beaker-eject}" MinWidth="60" />
             </BoxContainer>
-            <cc:HSeparator Color="#4972A1" Margin="0 0 0 4" />
+            <cc:HSeparator Color="#4972A1" Margin="0 4" />
             <Label Name="BeakerStatusLabel" Text="{Loc rmc-cryo-cell-beaker-empty}" />
             <Label Name="BeakerContentsLabel" Visible="False" />
         </BoxContainer>
-
     </BoxContainer>
 </DefaultWindow>

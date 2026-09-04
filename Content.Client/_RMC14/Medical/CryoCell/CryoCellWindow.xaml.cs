@@ -37,7 +37,6 @@ public sealed partial class CryoCellWindow : DefaultWindow
     public void UpdateFromComponent(CryoCellComponent cryoCell)
     {
         var hasOccupant = cryoCell.UIOccupant != null;
-        EmptyPanel.Visible = !hasOccupant;
         OccupantPanel.Visible = hasOccupant;
 
         UpdateCellButtons(cryoCell);
