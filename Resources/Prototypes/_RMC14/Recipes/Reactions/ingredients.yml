@@ -1,17 +1,6 @@
 ﻿#Put it in here because the other 2 yml files didnt sound right for this
 
 - type: reaction
-  id: RMCSoySauce
-  reactants:
-    MilkSoy:
-      amount: 2
-    RMCSulphuricAcid:
-      amount: 1
-  products:
-    RMCSoysauce:
-      amount: 3
-
-- type: reaction
   id: RMCCherryJelly
   minTemp: 342
   reactants:
@@ -231,20 +220,6 @@
       amount: 2
   products:
     SwissLemonade: 5
-
-- type: reaction
-  id: CreateMeat
-  impact: Low
-  quantized: true
-  conserveEnergy: false
-  reactants:
-    CMClonexadone:
-      amount: 1
-    Blood:
-      amount: 5
-  effects:
-  - !type:CreateEntityReactionEffect
-    entity: FoodMeat
 
 - type: reaction
   id: CreateFriedEgg
