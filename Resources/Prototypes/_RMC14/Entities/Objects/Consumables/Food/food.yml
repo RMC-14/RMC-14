@@ -799,3 +799,19 @@
     layers:
     - state: bowl
     - state: chicken-noodle
+
+- type: entity
+  name: clam chowder soup
+  parent: FoodBowlBase
+  id: RMCSoupClamChowder
+  description: What's this Chow-DER, it's CHOWDAH! Say it roight!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - savory
+    - creamy
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/soup.rsi
+    layers:
+    - state: bowl
+    - state: clam-chowder

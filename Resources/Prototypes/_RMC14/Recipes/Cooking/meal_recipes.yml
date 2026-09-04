@@ -799,3 +799,17 @@
     FoodNoodlesBoiled: 1
     FoodCarrot: 1
 
+- type: microwaveMealRecipe
+  id: RecipeClamChowder
+  name: clam chowder recipe
+  result: RMCSoupClamChowder
+  time: 15
+  group: Savory
+  reagents:
+    Milk: 10
+  solids:
+    FoodBowlBig: 1
+    FoodButterSlice: 1
+    RMCFoodFishClam: 1
+    FoodCarrot: 1
+    FoodPotato: 1

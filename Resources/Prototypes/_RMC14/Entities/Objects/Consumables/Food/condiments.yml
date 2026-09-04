@@ -212,7 +212,7 @@
       food:
         reagents:
         - ReagentId: TableSalt
-          Quantity: 20
+          Quantity: 50
 
 # Pepper
 - type: entity

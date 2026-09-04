@@ -71,6 +71,26 @@
     - id: RMCCondimentSugar
       amount: 7
 
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxSalt
+  name: box of salt shakers
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCCondimentSmallSalt
+      amount: 7
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxPepper
+  name: box of pepper mills
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCCondimentSmallPepper
+      amount: 7
+
 # Fruit and Veg
 - type: entity
   parent: RMCBoxCardboard
