@@ -5,6 +5,7 @@ namespace Content.Client._RMC14.Medical.CryoCell;
 
 public sealed class CryoCellSystem : SharedCryoCellSystem
 {
+    [Dependency] private readonly AppearanceSystem _appearance = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
 
     private ISawmill _sawmill = default!;
@@ -17,19 +18,29 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
 
         _sawmill = Logger.GetSawmill("cryo_cell");
 
-        SubscribeLocalEvent<CryoCellComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<CryoCellComponent, AppearanceChangeEvent>(OnAppearanceChange);
         SubscribeLocalEvent<CryoCellComponent, AfterAutoHandleStateEvent>(OnComponentStateChanged);
     }
 
-    private void OnInit(EntityUid uid, CryoCellComponent comp, ComponentInit args)
-    {
-        UpdateCryoCellAppearance(uid, comp);
-    }
-
     private void OnAppearanceChange(EntityUid uid, CryoCellComponent comp, ref AppearanceChangeEvent args)
     {
-        UpdateCryoCellAppearance(uid, comp, args.Sprite);
+        if (!_appearance.TryGetData<CryoCellVisualState>(uid, CryoCellVisuals.State, out var state))
+            return;
+
+        if (!_sprite.LayerMapTryGet((uid, args.Sprite), CryoCellVisualLayers.Base, out var baseLayer, false))
+            return;
+
+        var rsiState = state switch
+        {
+            CryoCellVisualState.OnEmpty => "cell-on-empty",
+            CryoCellVisualState.OnOccupied => "cell-on-occupied",
+            CryoCellVisualState.OffEmpty => "cell-off-empty",
+            CryoCellVisualState.OffOccupied => "cell-off-occupied",
+            _ => "cell-off-empty",
+        };
+
+        _sprite.LayerSetRsiState((uid, args.Sprite), baseLayer, rsiState);
+        _sprite.LayerSetVisible((uid, args.Sprite), baseLayer, true);
     }
 
     private void OnComponentStateChanged(Entity<CryoCellComponent> ent, ref AfterAutoHandleStateEvent args)
@@ -52,21 +63,5 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
     {
         _window = window;
         _windowOwner = owner;
-    }
-
-    private void UpdateCryoCellAppearance(EntityUid uid, CryoCellComponent comp, SpriteComponent? sprite = null)
-    {
-        if (sprite == null && !TryComp(uid, out sprite))
-            return;
-
-        if (!_sprite.LayerMapTryGet((uid, sprite), CryoCellVisualLayers.Base, out var baseLayer, false))
-            return;
-
-        var rsiState = comp.Occupant != null
-            ? (comp.IsPoweredOn ? "cell-on-occupied" : "cell-off-occupied")
-            : (comp.IsPoweredOn ? "cell-on-empty" : "cell-off-empty");
-
-        _sprite.LayerSetRsiState((uid, sprite), baseLayer, rsiState);
-        _sprite.LayerSetVisible((uid, sprite), baseLayer, true);
     }
 }

@@ -83,9 +83,9 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
     {
         if (cryoCell.Comp.Occupant is { } occupant)
             EjectOccupant(cryoCell, occupant);
+        else
+            UpdateCryoCellVisuals(cryoCell);
 
-        Dirty(cryoCell);
-        UpdateCryoCellVisuals(cryoCell);
         UpdateUIState(cryoCell);
     }
 

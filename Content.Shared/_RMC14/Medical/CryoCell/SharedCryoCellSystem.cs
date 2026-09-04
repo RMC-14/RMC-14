@@ -156,10 +156,10 @@ public abstract class SharedCryoCellSystem : EntitySystem
             (false, true) => CryoCellVisualState.OffOccupied,
         };
 
-        if (_appearance.TryGetData<CryoCellVisualState>(cryoCell.Owner, CryoCellVisuals.State, out var oldState))
+        if (_appearance.TryGetData<CryoCellVisualState>(cryoCell.Owner, CryoCellVisuals.State, out var oldState) &&
+            oldState == newState)
         {
-            if (oldState == newState)
-                return;
+            return;
         }
 
         _appearance.SetData(cryoCell, CryoCellVisuals.State, newState);
