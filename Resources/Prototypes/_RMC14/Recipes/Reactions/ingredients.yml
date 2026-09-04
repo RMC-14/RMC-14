@@ -3,6 +3,16 @@
 # Condiments
 
 - type: reaction
+  id: RMCSoysauce
+  reactants:
+    RMCSulphuricAcid:
+      amount: 1
+    RMCSoyMilk:
+      amount: 2
+  products:
+    RMCSoysauce: 3
+
+- type: reaction
   id: RMCCherryJelly
   minTemp: 342
   reactants:
