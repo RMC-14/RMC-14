@@ -1,5 +1,7 @@
 ﻿#Put it in here because the other 2 yml files didnt sound right for this
 
+# Condiments
+
 - type: reaction
   id: RMCCherryJelly
   minTemp: 342
@@ -36,6 +38,8 @@
       amount: 6
   products:
     Mayo: 15
+
+# Alcohol recipes
 
 - type: reaction
   id: Grenadine
@@ -122,6 +126,8 @@
       amount: 1
   products:
     Wine: 2
+
+# RMC Cocktails
 
 - type: reaction
   id: RMCMilkshake
@@ -221,6 +227,8 @@
   products:
     SwissLemonade: 5
 
+# food reactions
+
 - type: reaction
   id: CreateFriedEgg
   impact: Low
@@ -236,6 +244,8 @@
   effects:
   - !type:CreateEntityReactionEffect
     entity: FoodMealFriedegg
+
+# Instant drinks
 
 - type: reaction
   id: RMCInstantOrange
