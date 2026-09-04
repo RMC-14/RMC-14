@@ -81,6 +81,9 @@
   name: golden peregrine handcannon
   description: A Peregrine Handcannon anodized in gold and adorned with rosewood grips. The living definition of ostentatious, it's flashy, unwieldy, tremendously heavy, and kicks like a mule. But as a symbol of power, there's nothing like it.
   components:
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_DE50_alt.ogg
   - type: Corrodible
     isCorrodible: false
   - type: RMCSelectiveFire
@@ -133,7 +136,7 @@
   parent: RMCWeaponPistolHandcannonGold
   id: RMCWeaponPistolHandcannonWinterWyvern
   name: winter wyvern handcannon
-  description: A Peregrine Handcannon hand crafted from the finest blacksteel with an ivory grip bolted together with gold studs. Tt's flashy, unwieldy, tremendously heavy, and kicks like a mule - Very elegant.
+  description: A Peregrine Handcannon hand crafted from the finest blacksteel with an ivory grip bolted together with gold studs. It's flashy, unwieldy, tremendously heavy, and kicks like a mule - Very elegant.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/handcannon_winter.rsi
