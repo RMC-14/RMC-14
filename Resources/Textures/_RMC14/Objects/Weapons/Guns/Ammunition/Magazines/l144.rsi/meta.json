@@ -8,16 +8,13 @@
   },
   "states": [
     {
-      "name": "suppressor_l112"
+      "name": "mag-1"
     },
     {
-      "name": "suppressor_l112_a"
+      "name": "base"
     },
     {
-      "name": "suppressor_l144"
-    },
-    {
-      "name": "suppressor_l144_a"
+      "name": "ammo_band"
     }
   ]
 }
