@@ -11,45 +11,49 @@
                 <Label Text="{Loc rmc-cryo-cell-name-label}" MinWidth="120" Modulate="#5B88B0" />
                 <Label Name="OccupantNameLabel" />
             </BoxContainer>
-            <BoxContainer Orientation="Horizontal" Margin="0 2">
-                <Label Text="{Loc rmc-cryo-cell-state-label}" MinWidth="120" Modulate="#5B88B0" />
-                <Label Name="StatusLabel" />
-            </BoxContainer>
-            <BoxContainer Orientation="Horizontal" Margin="0 2">
-                <Label Text="{Loc rmc-cryo-cell-temperature-label}" MinWidth="120" Modulate="#5B88B0" />
-                <ProgressBar Name="BodyTemperatureBar" HorizontalExpand="True" MinValue="0" MaxValue="1000" MinHeight="16">
-                    <Label Name="BodyTemperatureText" Align="Right" Margin="0 0 5 0" />
-                </ProgressBar>
-            </BoxContainer>
-            <BoxContainer Orientation="Horizontal" Margin="0 2">
-                <Label Text="{Loc rmc-cryo-cell-health-label}" MinWidth="120" Modulate="#5B88B0" />
-                <ProgressBar Name="HealthBar" HorizontalExpand="True" MinValue="0" MinHeight="16">
-                    <Label Name="HealthBarText" Align="Right" Margin="0 0 5 0" />
-                </ProgressBar>
-            </BoxContainer>
-            <BoxContainer Orientation="Horizontal" Margin="0 2">
-                <Label Text="{Loc rmc-cryo-cell-brute-label}" MinWidth="120" Modulate="#5B88B0" />
-                <ProgressBar Name="BruteBar" HorizontalExpand="True" MinValue="0" MaxValue="100" MinHeight="16">
-                    <Label Name="BruteBarText" Align="Right" Margin="0 0 5 0" />
-                </ProgressBar>
-            </BoxContainer>
-            <BoxContainer Orientation="Horizontal" Margin="0 2">
-                <Label Text="{Loc rmc-cryo-cell-burn-label}" MinWidth="120" Modulate="#5B88B0" />
-                <ProgressBar Name="BurnBar" HorizontalExpand="True" MinValue="0" MaxValue="100" MinHeight="16">
-                    <Label Name="BurnBarText" Align="Right" Margin="0 0 5 0" />
-                </ProgressBar>
-            </BoxContainer>
-            <BoxContainer Orientation="Horizontal" Margin="0 2">
-                <Label Text="{Loc rmc-cryo-cell-toxin-label}" MinWidth="120" Modulate="#5B88B0" />
-                <ProgressBar Name="ToxinBar" HorizontalExpand="True" MinValue="0" MaxValue="100" MinHeight="16">
-                    <Label Name="ToxinBarText" Align="Right" Margin="0 0 5 0" />
-                </ProgressBar>
-            </BoxContainer>
-            <BoxContainer Orientation="Horizontal" Margin="0 2">
-                <Label Text="{Loc rmc-cryo-cell-oxygen-label}" MinWidth="120" Modulate="#5B88B0" />
-                <ProgressBar Name="OxygenBar" HorizontalExpand="True" MinValue="0" MaxValue="100" MinHeight="16">
-                    <Label Name="OxygenBarText" Align="Right" Margin="0 0 5 0" />
-                </ProgressBar>
+
+            <!-- Only visible with an occupant -->
+            <BoxContainer Name="OccupantDetailsPanel" Orientation="Vertical" Visible="False">
+                <BoxContainer Orientation="Horizontal" Margin="0 2">
+                    <Label Text="{Loc rmc-cryo-cell-state-label}" MinWidth="120" Modulate="#5B88B0" />
+                    <Label Name="StatusLabel" />
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal" Margin="0 2">
+                    <Label Text="{Loc rmc-cryo-cell-temperature-label}" MinWidth="120" Modulate="#5B88B0" />
+                    <ProgressBar Name="BodyTemperatureBar" HorizontalExpand="True" MinValue="0" MaxValue="1000" MinHeight="16">
+                        <Label Name="BodyTemperatureText" Align="Right" Margin="0 0 5 0" />
+                    </ProgressBar>
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal" Margin="0 2">
+                    <Label Text="{Loc rmc-cryo-cell-health-label}" MinWidth="120" Modulate="#5B88B0" />
+                    <ProgressBar Name="HealthBar" HorizontalExpand="True" MinValue="0" MinHeight="16">
+                        <Label Name="HealthBarText" Align="Right" Margin="0 0 5 0" />
+                    </ProgressBar>
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal" Margin="0 2">
+                    <Label Text="{Loc rmc-cryo-cell-brute-label}" MinWidth="120" Modulate="#5B88B0" />
+                    <ProgressBar Name="BruteBar" HorizontalExpand="True" MinValue="0" MaxValue="100" MinHeight="16">
+                        <Label Name="BruteBarText" Align="Right" Margin="0 0 5 0" />
+                    </ProgressBar>
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal" Margin="0 2">
+                    <Label Text="{Loc rmc-cryo-cell-burn-label}" MinWidth="120" Modulate="#5B88B0" />
+                    <ProgressBar Name="BurnBar" HorizontalExpand="True" MinValue="0" MaxValue="100" MinHeight="16">
+                        <Label Name="BurnBarText" Align="Right" Margin="0 0 5 0" />
+                    </ProgressBar>
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal" Margin="0 2">
+                    <Label Text="{Loc rmc-cryo-cell-toxin-label}" MinWidth="120" Modulate="#5B88B0" />
+                    <ProgressBar Name="ToxinBar" HorizontalExpand="True" MinValue="0" MaxValue="100" MinHeight="16">
+                        <Label Name="ToxinBarText" Align="Right" Margin="0 0 5 0" />
+                    </ProgressBar>
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal" Margin="0 2">
+                    <Label Text="{Loc rmc-cryo-cell-oxygen-label}" MinWidth="120" Modulate="#5B88B0" />
+                    <ProgressBar Name="OxygenBar" HorizontalExpand="True" MinValue="0" MaxValue="100" MinHeight="16">
+                        <Label Name="OxygenBarText" Align="Right" Margin="0 0 5 0" />
+                    </ProgressBar>
+                </BoxContainer>
             </BoxContainer>
         </BoxContainer>
 

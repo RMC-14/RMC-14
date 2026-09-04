@@ -37,15 +37,17 @@ public sealed partial class CryoCellWindow : DefaultWindow
     public void UpdateFromComponent(CryoCellComponent cryoCell)
     {
         var hasOccupant = cryoCell.UIOccupant != null;
-        OccupantPanel.Visible = hasOccupant;
+        OccupantDetailsPanel.Visible = hasOccupant;
 
         UpdateCellButtons(cryoCell);
         UpdateBeaker(cryoCell);
 
+        OccupantNameLabel.Text = hasOccupant
+            ? cryoCell.UIOccupantName ?? string.Empty
+            : Loc.GetString("rmc-cryo-cell-no-occupant");
+
         if (!hasOccupant)
             return;
-
-        OccupantNameLabel.Text = cryoCell.UIOccupantName ?? string.Empty;
 
         UpdateHealth(cryoCell);
         UpdateTemperature(cryoCell);
