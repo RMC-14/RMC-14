@@ -42,7 +42,7 @@ public sealed partial class CryoCellWindow : DefaultWindow
         UpdateCellButtons(cryoCell);
         UpdateBeaker(cryoCell);
 
-        OccupantNameLabel.Text = hasOccupant
+        OccupantLabel.Text = hasOccupant
             ? cryoCell.UIOccupantName ?? string.Empty
             : Loc.GetString("rmc-cryo-cell-no-occupant");
 
@@ -150,7 +150,16 @@ public sealed partial class CryoCellWindow : DefaultWindow
     {
         EjectBeakerButton.Disabled = !cryoCell.UIIsBeakerLoaded;
 
-        if (!cryoCell.UIIsBeakerLoaded || cryoCell.UIBeakerContents.Length == 0)
+        if (!cryoCell.UIIsBeakerLoaded)
+        {
+            BeakerStatusLabel.Visible = true;
+            BeakerStatusLabel.Text = Loc.GetString("rmc-cryo-cell-beaker-no-beaker");
+            BeakerContentsLabel.Visible = false;
+            BeakerContentsLabel.Text = string.Empty;
+            return;
+        }
+
+        if (cryoCell.UIBeakerContents.Length == 0)
         {
             BeakerStatusLabel.Visible = true;
             BeakerStatusLabel.Text = Loc.GetString("rmc-cryo-cell-beaker-empty");

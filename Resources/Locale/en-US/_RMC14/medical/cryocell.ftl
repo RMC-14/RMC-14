@@ -2,7 +2,7 @@ rmc-cryo-cell-window-title = Cryo Cell
 rmc-cryo-cell-no-occupant = No occupant
 
 rmc-cryo-cell-occupant-header = Occupant
-rmc-cryo-cell-name-label = Name:
+rmc-cryo-cell-occupant-label = Occupant:
 rmc-cryo-cell-state-label = State:
 rmc-cryo-cell-temperature-label = Temperature:
 
@@ -29,12 +29,13 @@ rmc-cryo-cell-notify = Notify
 rmc-cryo-cell-silent = Silent
 
 rmc-cryo-cell-beaker-header = Beaker
-rmc-cryo-cell-beaker-empty = No beaker loaded.
+rmc-cryo-cell-beaker-no-beaker = No beaker loaded!
+rmc-cryo-cell-beaker-empty = Beaker is empty!
 rmc-cryo-cell-beaker-eject = Eject
 
 rmc-cryo-cell-auto-eject-reason-release = Patient {CAPITALIZE(SUBJECT($occupant))} has been automatically released from {$cryoCell} at: {$area}. {$reason}
-rmc-cryo-cell-auto-eject-reason-dead = Reason for release: Patient death.
-rmc-cryo-cell-auto-eject-reason-recovery = Reason for release: Patient recovery.
+rmc-cryo-cell-auto-eject-reason-dead = [bold]Reason for release: Patient death.[/bold]
+rmc-cryo-cell-auto-eject-reason-recovery = [bold]Reason for release: Patient recovery.[/bold]
 
 rmc-cryo-cell-popup-beep = {CAPITALIZE(THE($cryoCell))} beeps: {$msg}
 rmc-cryo-cell-popup-ping = {CAPITALIZE(THE($cryoCell))} pings: {$msg}

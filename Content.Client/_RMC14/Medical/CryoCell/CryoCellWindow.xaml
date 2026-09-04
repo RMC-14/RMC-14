@@ -4,12 +4,12 @@
     MinSize="400 550">
     <BoxContainer Orientation="Vertical">
         <!-- Occupant Section -->
-        <BoxContainer Name="OccupantPanel" Orientation="Vertical" Margin="0 6">
+        <BoxContainer Orientation="Vertical">
             <Label Text="{Loc rmc-cryo-cell-occupant-header}" StyleClasses="LabelKeyText" Margin="0 4" />
             <cc:HSeparator Color="#4972A1" Margin="0 4" />
             <BoxContainer Orientation="Horizontal" Margin="0 2">
-                <Label Text="{Loc rmc-cryo-cell-name-label}" MinWidth="120" Modulate="#5B88B0" />
-                <Label Name="OccupantNameLabel" />
+                <Label Text="{Loc rmc-cryo-cell-occupant-label}" MinWidth="120" Modulate="#5B88B0" />
+                <Label Name="OccupantLabel" />
             </BoxContainer>
 
             <!-- Only visible with an occupant -->
@@ -86,7 +86,7 @@
                 <Button Name="EjectBeakerButton" Text="{Loc rmc-cryo-cell-beaker-eject}" MinWidth="60" />
             </BoxContainer>
             <cc:HSeparator Color="#4972A1" Margin="0 4" />
-            <Label Name="BeakerStatusLabel" Text="{Loc rmc-cryo-cell-beaker-empty}" />
+            <Label Name="BeakerStatusLabel" Text="{Loc rmc-cryo-cell-beaker-no-beaker}" />
             <Label Name="BeakerContentsLabel" Visible="False" />
         </BoxContainer>
     </BoxContainer>
