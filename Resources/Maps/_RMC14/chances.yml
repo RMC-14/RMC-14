@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 09/05/2026 18:50:07
-  entityCount: 30956
+  time: 09/05/2026 19:48:16
+  entityCount: 30966
 maps:
 - 1
 grids:
@@ -46542,7 +46542,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -123667.375
+      secondsUntilStateChange: -123906.164
       state: Opening
 - proto: CMAirlockMedicalLocked
   entities:
@@ -47103,6 +47103,15 @@ entities:
     components:
     - type: Transform
       pos: 29.78125,68.9375
+      parent: 1
+    - type: HideLayerClothing
+      slots: null
+- proto: CMArmorHelmetM30
+  entities:
+  - uid: 30965
+    components:
+    - type: Transform
+      pos: 31.5,67.5
       parent: 1
     - type: HideLayerClothing
       slots: null
@@ -57263,7 +57272,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 10666.0893339
     - type: Door
-      secondsUntilStateChange: -111246.03
+      secondsUntilStateChange: -111484.82
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -57279,7 +57288,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 10666.0893339
     - type: Door
-      secondsUntilStateChange: -111246.03
+      secondsUntilStateChange: -111484.82
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -59974,6 +59983,8 @@ entities:
       parent: 1
   - uid: 2699
     components:
+    - type: MetaData
+      name: UNMC classified intelligence folder
     - type: Transform
       pos: 29.5,69.5
       parent: 1
@@ -81838,17 +81849,24 @@ entities:
     - type: Transform
       pos: -14.424027,-17.262228
       parent: 1
-  - uid: 6584
-    components:
-    - type: Transform
-      pos: 30.5,68.5
-      parent: 1
 - proto: FoodMeatCooked
   entities:
   - uid: 30533
     components:
     - type: Transform
       pos: 54.47664,42.412743
+      parent: 1
+- proto: FoodMeatHuman
+  entities:
+  - uid: 6584
+    components:
+    - type: Transform
+      pos: 30.5,68.5
+      parent: 1
+  - uid: 30963
+    components:
+    - type: Transform
+      pos: 27.5,65.5
       parent: 1
 - proto: FoodOrange
   entities:
@@ -86683,13 +86701,6 @@ entities:
     - type: Transform
       pos: -10.5,4.5
       parent: 1
-- proto: RMCBoxShotgunBuckshot
-  entities:
-  - uid: 7303
-    components:
-    - type: Transform
-      pos: 31.5,69.5
-      parent: 1
 - proto: RMCBucket
   entities:
   - uid: 7304
@@ -87736,6 +87747,13 @@ entities:
     components:
     - type: Transform
       pos: 68.695564,-36.58202
+      parent: 1
+- proto: RMCCoatPilot
+  entities:
+  - uid: 30964
+    components:
+    - type: Transform
+      pos: 32.5,66.5
       parent: 1
 - proto: RMCCoatRack
   entities:
@@ -114544,16 +114562,22 @@ entities:
       parent: 1
   - uid: 9163
     components:
+    - type: MetaData
+      desc: A fallen marine's information dog tag. It reads, Captain Hashim ibn Al-Waqqas
     - type: Transform
       pos: 30.5,67.5
       parent: 1
   - uid: 9164
     components:
+    - type: MetaData
+      desc: A fallen marine's information dog tag. It reads, Staff Sergeant Thomas 'Dog' Smith
     - type: Transform
       pos: 27.5,66.5
       parent: 1
   - uid: 9165
     components:
+    - type: MetaData
+      desc: A fallen marine's information dog tag. It reads, Ensign Robert 'Roach' Yangley
     - type: Transform
       pos: 31.5,65.5
       parent: 1
@@ -114599,6 +114623,11 @@ entities:
       parent: 1
 - proto: RMCItemPoolBuckshot
   entities:
+  - uid: 7303
+    components:
+    - type: Transform
+      pos: 31.5,69.5
+      parent: 1
   - uid: 9169
     components:
     - type: Transform
@@ -120101,11 +120130,43 @@ entities:
       parent: 1
 - proto: RMCOverheadFuelLine10
   entities:
+  - uid: 30843
+    components:
+    - type: Transform
+      pos: 32.5,65.5
+      parent: 1
+  - uid: 30844
+    components:
+    - type: Transform
+      pos: 32.5,67.5
+      parent: 1
+  - uid: 30857
+    components:
+    - type: Transform
+      pos: 32.5,69.5
+      parent: 1
   - uid: 30868
     components:
     - type: Transform
       anchored: True
       pos: 44.5,91.5
+      parent: 1
+- proto: RMCOverheadFuelLine11
+  entities:
+  - uid: 30960
+    components:
+    - type: Transform
+      pos: 26.5,65.5
+      parent: 1
+  - uid: 30961
+    components:
+    - type: Transform
+      pos: 26.5,67.5
+      parent: 1
+  - uid: 30962
+    components:
+    - type: Transform
+      pos: 26.5,69.5
       parent: 1
 - proto: RMCOverheadFuelLine2
   entities:
@@ -129333,6 +129394,11 @@ entities:
     - type: Transform
       pos: 66.5,-60.5
       parent: 1
+  - uid: 30966
+    components:
+    - type: Transform
+      pos: 29.5,70.5
+      parent: 1
 - proto: RMCSensorTower
   entities:
   - uid: 11187
@@ -137759,12 +137825,12 @@ entities:
     - type: Transform
       pos: -31.5,48.5
       parent: 1
-- proto: RMCTankFlamer
+- proto: RMCTankFlamerEmpty
   entities:
   - uid: 12344
     components:
     - type: Transform
-      pos: -13.482605,2.4914112
+      pos: -13.5,2.5
       parent: 1
 - proto: RMCTankReagentFuel
   entities:
