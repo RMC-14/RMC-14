@@ -1,0 +1,89 @@
+- type: job
+  parent: CMSurvivorEngineer
+  id: RMCSurvivorUNMCGroundCrewman
+  name: rmc-job-name-survivor-ground-crew
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorEngineer
+  greeting: rmc-job-greeting-varadero
+  startingGear: RMCGearSurvivorUNMCGroundCrewman
+  ranks:
+    RMCRankLanceCorporal: []
+  spawnMenuRoleName: UNMC Ground Crew (NV Survivor)
+  icon: "CMJobIconCombatTech"
+  hasIcon: true
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadMarineVaradero
+    - type: Skills
+      preset: RMCSkillPresetSurvivorUNMCGroundCrew
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetUNMCGroundCrewman
+    - type: JobPrefix
+      prefix: rmc-job-prefix-survivor-ground-crew
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: engi
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_unmc
+    - type: Language
+      spokenLanguages:
+        - Spanish
+        - English
+      understoodLanguages:
+        - Spanish
+        - English
+      currentLanguage: English
+      defaultLanguage: English
+  useLoadoutOfJob: CMSurvivorEngineer # for inheritance
+  medals:
+    Bronze: RMCMedalBronzeService
+    Silver: RMCMedalSilverService
+    Gold: RMCMedalGoldService
+    Platinum: RMCMedalPlatinumService
+    Ruby: RMCMedalRubyService
+    Amethyst: RMCMedalAmethystService
+    Emerald: RMCMedalEmeraldService
+    Prismatic: RMCMedalPrismaticService
+
+- type: startingGear
+  id: RMCGearSurvivorUNMCGroundCrewman
+  equipment:
+    jumpsuit: JumpsuitMarine
+    ears: RMCHeadsetMarineNV
+    gloves: CMHandsInsulated
+    id: CMIDCardStandardDogtag
+    pocket1: RMCPouchSurvivalFill
+    back: CMSatchelMarineTech
+    shoes: CMBootsBlackFilled
+  storage:
+    back:
+      - CMSheetMetal20
+
+- type: entity
+  parent: RMCGearSurvivorPresetUNMC
+  id: RMCSurvivorPresetUNMCGroundCrewman
+  name: varadero ground crew preset
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: EntityPreset
+      randomOutfits:
+        - [ RMCHeadUNMCHeadset, RMCHazardVestBlue, CMSheetPlasteel20, RMCWeldingGoggles ]
+        - [ RMCHeadUNMCHeadset, RMCHazardVestYellow, CMSheetPlasteel10, RMCWeldingGoggles, RMCPouchToolsFill ]
+        - [ ClothingHeadHatWelding, RMCHazardVest, CMSheetPlasteel20, RMCPouchToolsFill ]
+        - [ CMBeltUtilityFilled, ClothingHeadHatWelding, RMCHazardVestBlue, CMSheetPlasteel10 ]
+        - [ RMCHeadCapFlippable, RMCHazardVest, CMBeltUtilityFilled, CMSheetPlasteel20, RMCWeldingGoggles ]
+        - [ RMCHardhatOrange, CMBeltUtilityFilled, RMCHazardVest, WeaponNailgun, CMSheetPlasteel10, RMCWeldingGoggles ]

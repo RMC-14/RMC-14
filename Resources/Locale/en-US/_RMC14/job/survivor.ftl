@@ -154,19 +154,53 @@ rmc-job-greeting-corporate-dome-goon-engi = You are a Corporate Security Technic
 
 # New Varadero Survs
 
-rmc-job-name-survivor-commander-new-varadero = UNMC Commander
+rmc-job-greeting-varadero = The stench of burning phoron still lingers in the salty evening breeze of the ruined New Varadero Naval Base. The specter's dying cackle echoes through your mind as you realise that you're now one of just a handful of living people left standing on these battle worn shores. Through sheer cunning, grit, and United Nations fire power, you've managed to survive against both ceaseless tides of xenonids and a now slain lone specter... the cry of a new mother snaps you back to reality. It's only a matter of time before another acidic wave of those horrid things attempts to wash over you.
 
-cm-job-name-surivor-beach-bum = Beach Bum
+   You are aware of the xenonid threat.
 
-cm-job-name-survivor-cargo-technician = New Varadero Cargo Technician
+   Your primary objective is to survive the outbreak.
 
-cm-job-name-survivor-medical-technician = New Varadero Medical Technician
+   You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
-cm-job-name-survivor-technician = New Varadero Engineering Technician
+rmc-job-name-survivor-commander-new-varadero = Base Commander
+rmc-job-prefix-survivor-varadero-commander = UNMC CDR
 
-cm-job-name-survivor-un-peacekeeper = ILRC Peacekeeper
+rmc-job-name-survivor-varadero-synth = Support Synthetic
+rmc-job-prefix-survivor-varadero-synth = UNMC SYN
 
-cm-job-name-survivor-new-varadero-researcher = New Varadero Researcher
+rmc-job-name-surivor-beach-bum = Beach Bum
+
+rmc-job-name-survivor-varadero-chaplain = Base Chaplain
+rmc-job-prefix-survivor-varadero-chaplain = UNMC CHAP
+
+rmc-job-name-survivor-varadero-un-asst-rep = UN Assistant Representative
+rmc-job-prefix-survivor-varadero-un-asst-rep = UN AST REP
+
+rmc-job-name-survivor-varadero-firefighter = Airport Firefighter
+rmc-job-prefix-survivor-varadero-firefighter = UNMC ARFPS
+
+rmc-job-name-survivor-ground-crew = Ground Crewman
+rmc-job-prefix-survivor-ground-crew = UNMC GCM
+
+rmc-job-name-survivor-pilot = Fighter Pilot
+rmc-job-prefix-survivor-pilot = UNMC PO
+
+rmc-job-name-survivor-medical-technician = Medical Technician
+rmc-job-prefix-survivor-medical-technician = UNMC MEDTECH
+
+rmc-job-name-survivor-new-varadero-researcher = New Varadero Researcher
+rmc-job-prefix-survivor-new-varadero-researcher = WY RSR
+
+rmc-job-name-survivor-new-varadero-xenoarchaeologist = New Varadero Xenoarchaeologist
+rmc-job-prefix-survivor-new-varadero-xenoarchaeologist = WY XARC
+
+rmc-job-name-survivor-new-varadero-xenobiologist = New Varadero Xenobiologist
+rmc-job-prefix-survivor-new-varadero-xenobiologist = WY XBIO
+
+rmc-job-name-survivor-new-varadero-rd = New Varadero Research Director
+rmc-job-prefix-survivor-new-varadero-rd = WY RD
+
+rmc-job-name-survivor-varadero-base-police = Base Police
 
 # Hybrisa Prospera Survs
 
@@ -409,6 +443,8 @@ rmc-job-name-survivor-solaris-scientist = Solaris Scientist
 rmc-job-name-survivor-solaris-trucker = Solaris Heavy Vehicle Operator
 
 rmc-job-name-survivor-unmc-recruiter = UNMC Recruiter
+
+cm-job-name-survivor-un-peacekeeper = ILRC Peacekeeper
 
 rmc-job-name-survivor-solaris-corporate-supervisor = Colony Supervisor
 rmc-job-prefix-survivor-solaris-corporate-supervisor = Supervisor

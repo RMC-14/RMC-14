@@ -1,0 +1,86 @@
+- type: job
+  parent: CMSurvivor
+  id: RMCSurvivorNewVaraderoChaplain
+  name: rmc-job-name-survivor-varadero-chaplain
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivor
+  startingGear: RMCGearSurvivorVaraderoChaplain
+  greeting: rmc-job-greeting-varadero
+  ranks:
+    RMCRankCorporal: []
+  spawnMenuRoleName: UNMC Varadero Base Chaplain (NV Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadMarineVaradero
+    - type: Skills
+      preset: RMCSkillPresetSurvivorChaplain
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetVaraderoChaplain
+    - type: MarineOrders
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: JobPrefix
+      prefix: rmc-job-prefix-survivor-varadero-chaplain
+    - type: RMCAllowSuitStorage
+    - type: Language
+      spokenLanguages:
+      - Spanish
+      - English
+      understoodLanguages:
+      - Spanish
+      - English
+      currentLanguage: English
+      defaultLanguage: English
+  useLoadoutOfJob: CMSurvivor # for inheritance
+  medals:
+    Bronze: RMCMedalBronzeService
+    Silver: RMCMedalSilverService
+    Gold: RMCMedalGoldService
+    Platinum: RMCMedalPlatinumService
+    Ruby: RMCMedalRubyService
+    Amethyst: RMCMedalAmethystService
+    Emerald: RMCMedalEmeraldService
+    Prismatic: RMCMedalPrismaticService
+
+- type: startingGear
+  parent: RMCGearSurvivorEquipped
+  id: RMCGearSurvivorVaraderoChaplain
+  equipment:
+    ears: RMCHeadsetMarineNV
+    id: CMIDCardStandardDogtag
+    jumpsuit: RMCJumpsuitCivilianGreen
+    outerClothing: RMCClothingPriestRobes
+    back: CMSatchel
+    shoes: RMCShoesLaceup
+    pocket2: RMCPouchGeneralLarge
+  storage:
+    back:
+    - RMCBible
+    - CMSheetMetal20
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorVaraderoChaplain
+  name: survivor priest spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivorPriest
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: entity
+  parent: [RMCSurvivorPresetCivilianRareItem, RMCGearSurvivorPresetUNMC]
+  id: RMCGearSurvivorPresetVaraderoChaplain
+  name: priest colonist preset
+  categories: [ HideSpawnMenu ]

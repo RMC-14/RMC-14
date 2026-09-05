@@ -498,6 +498,20 @@
       amount: 3
 
 - type: entity
+  parent: RMCM276ShotgunShellLoadingRig
+  id: RMCM276ShotgunShellLoadingRigFillNV
+  suffix: Filled, NV
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBuckshot
+      amount: 2
+    - id: CMShellShotgunSlugs
+      amount: 3
+    - id: CMShellShotgunFlechette
+      amount: 3
+
+- type: entity
   parent: RMCBeltSmartGunOperatorPistol
   id: RMCBeltSmartGunOperatorPistolCLF
   name: M802 pattern 'Freedom' smart gun operator sidearm rig

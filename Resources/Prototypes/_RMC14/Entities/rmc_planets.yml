@@ -7,7 +7,8 @@
     camouflage: Jungle
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingLV624
-    announcement: "An automated distress signal has been received from the archaeological site of Lazarus Landing, on the border world of LV-624. A response team from the UNS Almayer will be dispatched shortly to investigate."
+    announcements:
+    - text: rmc-announcement-planet-lv
     #smallHostVariants:
       #- RMCMobSmallHostFarwa
       #- CMMobSmallHostMonkey
@@ -72,7 +73,8 @@
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/solaris.yml
     camouflage: Desert
-    announcement: "Weston-Yamada has lost contact with one of its Biological Storage Facilities, Solaris Ridge, on the planet of LV-1413. The UNS Almayer has been requested to look into the blackout by Weston-Yamada."
+    announcements:
+    - text: rmc-announcement-planet-solaris
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingSolaris
     #smallHostVariants:
@@ -167,7 +169,8 @@
     camouflage: Snow
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingShivas
-    announcement: "An automated distress signal has been received from archaeology site \"Shiva's Snowball\", on border ice world \"Ifrit\". A response team from the UNS Almayer will be dispatched shortly to investigate."
+    announcements:
+    - text: rmc-announcement-planet-shiva
     #smallHostVariants:
       #RMCMobSmallHostYiren
     nightmareScenarios:
@@ -220,7 +223,8 @@
     minPlayers: 130
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingFiorina
-    announcement: "An automated distress signal has been received from maximum-security prison \"Fiorina Orbital Penitentiary\". A response team from the UNS Almayer will be dispatched shortly to investigate."
+    announcements:
+    - text: rmc-announcement-planet-fiorina
     #smallHostVariants:
       #RMCMobSmallHostFarwa
     nightmareScenarios:
@@ -269,7 +273,8 @@
     map: /Maps/_RMC14/trijent.yml
     camouflage: Desert
     minPlayers: 130
-    announcement: "We've lost contact with Weston-Yamada's extra-solar colony, \"Trijent Dam\", on the planet \"Raijin.\" The UNS Almayer has been dispatched to assist."
+    announcements:
+    - text: rmc-announcement-planet-trijent
     #smallHostVariants:
       #RMCMobSmallHostStok
     nightmareScenarios:
@@ -366,15 +371,29 @@
     camouflage: Jungle
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingVaradero
-    announcement: "An automated distress signal has been received from UN Outpost New Varadero. A response team from the UNS Almayer will be dispatched shortly to investigate.
-      Designation: Island research station and mining facility
-
-      Population: 47
-      Current Temperature: 68F Interior, 97F Exterior
-      Outpost Commander: UN Rep. Steve Haifisch
-      Telecommunications Array: Repairs required
-
-      No further information available at this time."
+    announcements:
+    - text: rmc-announcement-planet-varadero
+    - text: rmc-announcement-planet-varadero-1
+      announcement: "rmc-announcement-ares-varadero"
+      delay: 300 # 5 minutes
+    - text: rmc-announcement-planet-varadero-2
+      announcement: "rmc-announcement-ares-varadero"
+      delay: 1200 # 20 minutes
+    - text: rmc-announcement-planet-varadero-3
+      announcement: "rmc-announcement-ares-varadero"
+      delay: 2700 # 45 minutes
+    - text: rmc-announcement-planet-varadero-4
+      announcement: "rmc-announcement-ares-varadero"
+      delay: 4200 # 70 minutes
+    - text: rmc-announcement-planet-varadero-5
+      announcement: "rmc-announcement-ares-varadero"
+      delay: 6000 # 100 minutes
+    - text: rmc-announcement-planet-varadero-6
+      announcement: "rmc-announcement-ares-varadero"
+      delay: 7200 # 120 minutes
+    - text: rmc-announcement-planet-varadero-7
+      announcement: "rmc-announcement-ares-varadero"
+      delay: 8400 # 140 minutes
     #smallHostVariants:
       #CMMobSmallHostKobold
     nightmareScenarios: # 100% chance of regular survivors, reduce to 0.9 once CLF survs are in
@@ -392,21 +411,25 @@
       RMCSurvivorCommandingOfficer:
       - RMCSurvivorCommanderNewVaradero: 1
       CMSurvivor:
-      - CMSurvivor: -1
-      - RMCSurvivorCivilianUnique: -1
       - CMSurvivorBeachBum: -1
       - RMCSurvivorHybrisaTMCCMiner: -1
-      - CMSurvivorPriest: 1
+      - RMCSurvivorNewVaraderoChaplain: -1
       CMSurvivorCorporate:
-      - CMSurvivorVaraderoICB: 2
+      - RMCSurvivorNewVaraderoResearchDirector: 1
+      - RMCSurvivorNewVaraderoUNRepresentative: 1
       CMSurvivorDoctor:
       - CMSurvivorMedicalTechnician: 3
+      - RMCSurvivorAirportFirefighter: 3
       CMSurvivorEngineer:
-      - CMSurvivorTechnician: 2
-      - CMSurvivorCargoTechnician: 2
+      - RMCSurvivorUNMCPilot: 2
+      - RMCSurvivorUNMCVehicleCrewman: 2
+      - RMCSurvivorUNMCGroundCrewman: 2
       CMSurvivorSecurity:
-      - CMSurvivorILRCPeacekeeper: 2
+      - RMCSurvivorUNMCRifleman: 2
+      - RMCSurvivorUNMCVeteranRifleman: 2
       CMSurvivorScientist:
+      - RMCSurvivorNewVaraderoXenoarchaeologist: 2
+      - RMCSurvivorNewVaraderoXenobiologist: 2
       - RMCSurvivorNewVaraderoResearcher: 2
 
 - type: entity
@@ -416,7 +439,8 @@
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/kutjevo.yml
     camouflage: Desert
-    announcement: "An automated distress signal has been received from Weston-Yamada colony Kutjevo Refinery, known for botanical research, export, and raw materials processing and refinement. The UNS Almayer has been dispatched to investigate."
+    announcements:
+    - text: rmc-announcement-planet-kutjevo
     #smallHostVariants:
       #RMCMobSmallHostNeaera
       #RMCMobSmallHostStok
@@ -451,7 +475,8 @@
     camouflage: Classic
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingChances
-    announcement: "Pan-Pan. This is the commander of the UNS Hanyut, UNMC FORECON. We are currently grounded on planet LV-522 in the immediate area of Chance's Claim. We are unable to contact the Hanyut and our dropships are unable to take off at this time. We are requesting assistance from any nearby vessels; this broadcast is set to repeat every 24 hours."
+    announcements:
+    - text: rmc-announcement-planet-chances
     #smallHostVariants:
       #RMCSmallHostMobNaera
       #RMCSmallHostMobStok
@@ -486,7 +511,8 @@
     camouflage: Urban
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingHybrisa
-    announcement: "An automated distress signal has been received from the Weston-Yamada colony, Hybrisa Prospera — a vast, city-like settlement renowned for its immense wealth, extensive mining operations, and thriving commerce. Recently fully acquired from the TSE, this former colony is now a key asset for Weston-Yamada, with a sprawling urban center housing thousands of residents and numerous smaller outer colonies under its control. The UNS Almayer has been dispatched to investigate the situation."
+    announcements:
+    - text: rmc-announcement-planet-hybrisa
     #smallHostVariants:
       #CMMobSmallHostMonkey
     nightmareScenarios:
@@ -560,7 +586,8 @@
     minPlayers: 130
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingSorokyne
-    announcement: "An automated distress signal has been recieved from a mining colony on border world LV-976, \"Sorokyne Outpost\". A response team from the UNS Almayer will be dispatched shortly to investigate."
+    announcements:
+    - text: rmc-announcement-planet-sorokyne
     #smallHostVariants:
       #RMCMobSmallHostStok
       #CMMobSmallHostKobold

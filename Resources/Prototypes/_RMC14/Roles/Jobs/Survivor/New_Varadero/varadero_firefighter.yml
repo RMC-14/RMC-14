@@ -1,0 +1,117 @@
+- type: job
+  parent: CMSurvivorDoctor
+  id: RMCSurvivorAirportFirefighter
+  name: rmc-job-name-survivor-varadero-firefighter
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorDoctor
+  startingGear: RMCGearSurvivorAirportFirefighter
+  greeting: rmc-job-greeting-varadero
+  spawnMenuRoleName: UNMC Airport Firefighter (NV Survivor)
+  ranks:
+    RMCRankSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorDoctor
+      time: 252000 # 70 hours
+    RMCRankCorporal: []
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadMarineVaradero
+    - type: Skills
+      preset: RMCSkillPresetSurvivorDoctor
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+      - Civilian
+    - type: JobPrefix
+      prefix: rmc-job-prefix-survivor-varadero-firefighter
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: nurse
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_unmc
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetAirportFirefighter
+    - type: Language
+      spokenLanguages:
+      - Spanish
+      - English
+      understoodLanguages:
+      - Spanish
+      - English
+      currentLanguage: English
+      defaultLanguage: English
+  useLoadoutOfJob: CMSurvivorDoctor # for inheritance
+  medals:
+    Bronze: RMCMedalBronzeService
+    Silver: RMCMedalSilverService
+    Gold: RMCMedalGoldService
+    Platinum: RMCMedalPlatinumService
+    Ruby: RMCMedalRubyService
+    Amethyst: RMCMedalAmethystService
+    Emerald: RMCMedalEmeraldService
+    Prismatic: RMCMedalPrismaticService
+
+- type: startingGear
+  id: RMCGearSurvivorAirportFirefighter
+  equipment:
+    ears: RMCHeadsetMarineNV
+    gloves: RMCHandsVeteran
+    outerClothing: RMCArmorFirefighter
+    shoes: CMBootsBlackFilled
+    back: RMCSatchelLightpack5Slot
+    pocket1: RMCPouchSurvivalFill
+    id: CMIDCardColonistDoctor
+  storage:
+    back:
+    - RMCJacketWindbreakerFirstResponder
+    - CMSheetMetal20
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorAirportFirefighter
+  name: survivor airport firefighter spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: entity
+  parent: RMCGearSurvivorPresetUNMC
+  id: RMCGearSurvivorPresetAirportFirefighter
+  name: varadero airport firefighter preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    randomOutfits:
+    - [ RMCArmorHelmetFirefighter, RMCPouchMedkit, JumpsuitMarine ]
+    - [ RMCArmorHelmetFirefighter, RMCPouchMedkit, JumpsuitMarine ]
+    - [ RMCArmorHelmetFirefighter, RMCPouchMedkit, JumpsuitMarine ]
+    - [ RMCHeadCapFlippable, CMMaskGas, JumpsuitMarine, CMBeltMedicBagFilled ]
+    - [ RMCHeadCapFlippable, CMMaskGas, JumpsuitMarine, CMBeltMedicBagFilled ]
+    - [ RMCHeadCapFlippable, CMMaskGas, JumpsuitMarine, CMBeltMedicBagFilled ]
+    - [ RMCBeltMedicalDefibAnalyzerFilled, CMMaskSterile, RMCJumpsuitSurvivorMarineFirefighter ]
+    randomGearOther:
+    -
+      - [ RMCPouchFirstAidSplintsGauzeOintment ]
+      - [ RMCPouchMedicalFill ]
+      - [ RMCPouchFirstAidInjectors ]
+      - [ RMCPouchFirstResponderFill ]
+      - [ RMCPouchMedkitFillAdvanced ]
+    -
+      - [ RMCGlassesMedicalHUDGlasses ]
+      - [ CMFirstAidKitFilledRobust ]
+      - [ RMCGlassesMedicalHUDGlasses, CMFirstAidKitFilledRobust ]
+      - [ RMCGlassesMedicalHUDGlasses, CMFirstAidKitFilledRobust, CMFirstAidKitSurgeryFilled ]
