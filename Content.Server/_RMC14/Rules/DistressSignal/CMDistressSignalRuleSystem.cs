@@ -351,15 +351,18 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
                 _marineAnnounce.AnnounceARESStaging(default, Loc.GetString("rmc-distress-signal-ares-online"), component.AresGreetingAudio,"rmc-announcement-ares-online");
         }
 
-        if (!component.AresMapDone && announcementTime >= component.AresMapDelay)
+        if (component.StartARESAnnouncements &&
+            SelectedPlanetMap != null &&
+            SelectedPlanetMap.Value.Comp.Announcements is { } announcements &&
+            component.AresAnnouncementIndex < announcements.Count)
         {
-            component.AresMapDone = true;
+            var announcement = announcements[component.AresAnnouncementIndex];
 
-            if (SelectedPlanetMap != null &&
-                component.StartARESAnnouncements &&
-                SelectedPlanetMap.Value.Comp.Announcement is { } announcement)
+            if (announcementTime >= announcement.Delay)
             {
-                _marineAnnounce.AnnounceARESStaging(default, announcement, announcement: "rmc-announcement-ares-map");
+                component.AresAnnouncementIndex++;
+
+                _marineAnnounce.AnnounceARESStaging(default, announcement.Text, announcement: announcement.Announcement);
             }
         }
 
