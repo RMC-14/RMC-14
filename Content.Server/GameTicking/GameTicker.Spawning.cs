@@ -4,7 +4,6 @@ using System.Numerics;
 using Content.Server.Administration.Managers;
 using Content.Server.Administration.Systems;
 using Content.Server.GameTicking.Events;
-using Content.Server.Ghost;
 using Content.Server.Spawners.Components;
 using Content.Server.Speech.Components;
 using Content.Server.Station.Components;
@@ -31,6 +30,8 @@ using Content.Server._RMC14.Announce;
 
 namespace Content.Server.GameTicking
 {
+    using JobAssignmentsDict = Dictionary<ProtoId<JobPrototype>, List<JobAssignment>>; // RMC
+
     public sealed partial class GameTicker
     {
         [Dependency] private readonly IAdminManager _adminManager = default!;
@@ -60,6 +61,293 @@ namespace Content.Server.GameTicking
             }
 
             return spawnableStations;
+        }
+
+        private void RMCSpawnPlayers(List<ICommonSession> readyPlayers,
+            Dictionary<NetUserId, HumanoidCharacterProfile> profiles,
+            bool force)
+        {
+            var (playerAssignments, jobAssignments) = GetPlayerAssignments(readyPlayers, profiles, force);
+
+            // Calculate extended access for stations.
+            var spawnableStations = GetSpawnableStations();
+            var stationJobCounts = spawnableStations.ToDictionary(e => e, _ => 0);
+            foreach (var player in playerAssignments)
+            {
+                if (player.AssignedJob == null)
+                {
+                    var playerSession = _playerManager.GetSessionById(player.Session.UserId);
+                    var evNoJobs = new NoJobsAvailableSpawningEvent(playerSession); // Used by gamerules to wipe their antag slot, if they got one
+                    RaiseLocalEvent(evNoJobs);
+
+                    _chatManager.DispatchServerMessage(playerSession, Loc.GetString("job-not-available-wait-in-lobby"));
+                }
+                else if (player.AssignedJob.StationId is { } stationId)
+                {
+                    stationJobCounts[stationId] += 1;
+                }
+            }
+
+            _stationJobs.CalcExtendedAccess(stationJobCounts);
+
+            // Spawn everybody in!
+            foreach (var player in playerAssignments)
+            {
+                if (player.AssignedJob == null)
+                    continue;
+
+                RMCSpawnPlayer(player);
+            }
+
+            RefreshLateJoinAllowed();
+
+            // RMC version of the event to allow systems to react to player assignments,
+            // as well as unassigned roles
+            RaiseLocalEvent(new RoundstartPlayersSpawnedEvent(
+                playerAssignments,
+                jobAssignments));
+
+            // Allow rules to add roles to players who have been spawned in. (For example, on-station traitors)
+            RaiseLocalEvent(new RulePlayerJobsAssignedEvent(
+                playerAssignments.Select(player => player.Session).ToArray(),
+                profiles,
+                force));
+        }
+
+        private (List<PlayerSpawnInfo>, JobAssignmentsDict) GetPlayerAssignments(List<ICommonSession> readyPlayers,
+            Dictionary<NetUserId, HumanoidCharacterProfile> profiles,
+            bool force)
+        {
+            var processingPlayers = new List<PlayerSpawnInfo>();
+            var jobAssignments = new JobAssignmentsDict();
+            var weightedJobs = _stationJobs.GetWeightedJobs();
+            var metaJobAssignments = new HashSet<MetaJobAssignment>();
+            var metaPlayerAssignments = new HashSet<MetaPlayerAssignment>();
+
+            RaiseLocalEvent(new InitializingAssignmentsEvent(jobAssignments, metaJobAssignments, metaPlayerAssignments));
+
+            var players = readyPlayers.Select(p => new PlayerSpawnInfo(p, profiles[p.UserId])).ToList();
+            Random.Shared.Shuffle(players);
+
+            var high = new List<ProtoId<JobPrototype>>();
+            var medium = new List<ProtoId<JobPrototype>>();
+            var low = new List<ProtoId<JobPrototype>>();
+
+            // populate player info with their job priorities
+            foreach (var player in players)
+            {
+                high.Clear();
+                medium.Clear();
+                low.Clear();
+                foreach (var (job, priority) in player.Profile.JobPriorities)
+                {
+                    var jobBans = _banManager.GetJobBans(player.Session.UserId);
+                    if (jobBans == null || jobBans.Contains(job))
+                        continue; // player banned from this job
+
+                    var ev = new IsJobAllowedEvent(player.Session, job);
+                    RaiseLocalEvent(ref ev);
+                    if (ev.Cancelled)
+                        continue; // player not whitelisted for this job
+
+                    // This might result in the same job appearing multiple times if multiple jobs
+                    // get replaced into the same one, but other than the occasional duplication of work
+                    // it should not cause problems with the behavior.
+                    var replaceEv = new ReplaceJobEvent(job);
+                    RaiseLocalEvent(ref replaceEv);
+                    var actualJob = replaceEv.JobId;
+
+                    switch (priority)
+                    {
+                        case JobPriority.High:
+                            high.Add(actualJob);
+                            break;
+                        case JobPriority.Medium:
+                            medium.Add(actualJob);
+                            break;
+                        case JobPriority.Low:
+                            low.Add(actualJob);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                // In order to make sure jobs with equal preference have an equal chance of being
+                // selected on average, randomize their order.
+                Random.Shared.Shuffle(high);
+                Random.Shared.Shuffle(medium);
+                Random.Shared.Shuffle(low);
+
+                player.JobPreferenceOrder.AddRange(high);
+                player.JobPreferenceOrder.AddRange(medium);
+                player.JobPreferenceOrder.AddRange(low);
+
+                Log.Debug($"Player {player.Session} preferences: [{string.Join(", ", player.JobPreferenceOrder)}]");
+            }
+
+            foreach (var newPlayer in players)
+            {
+                // Game rules or systems add slots that can be assigned to players.
+                RaiseLocalEvent(new CollectingAssignmentsEvent(processingPlayers, jobAssignments, metaJobAssignments, metaPlayerAssignments));
+
+                processingPlayers.Add(newPlayer);
+
+                AssignAll();
+            }
+            ;
+            Log.Debug($"""
+                Collected job assignments:
+                  {string.Join("\n  ", jobAssignments.Select(x => $"{x.Key}: {string.Join(", ", x.Value.Select(x => x.AssignmentLimit))}"))}
+
+                Meta job assignments:
+                  {string.Join("\n  ", metaJobAssignments.Select(x => $"{x.Name}: {x.AssignmentLimit}"))}
+
+                Player assigmnets:
+                  {string.Join("\n  ", processingPlayers.Select(x => $"{x.Session}: {x.AssignedJob?.JobID}"))}
+                """);
+
+            return (processingPlayers, jobAssignments);
+
+            void AssignAll()
+            {
+                // Re-process all processed players so they can get more preferrable jobs if they were added to the pool.
+                Log.Debug("Assigning preferred jobs.");
+                foreach (var player in processingPlayers)
+                {
+                    AssignPreferredAvailableJob(player, false);
+                }
+
+                // Now assign un-taken priority jobs (such as heads of departments)
+                foreach (var weightedJob in weightedJobs)
+                {
+                    if (!jobAssignments.ContainsKey(weightedJob))
+                        continue;
+
+                    Log.Debug($"Assigning weighted job {weightedJob}");
+                    var reprocessStartIndex = processingPlayers.Count;
+                    foreach (var unassigned in jobAssignments[weightedJob].Where(item => item.IsAssignable))
+                    {
+                        if (AssignWeightedJobs(unassigned) is { } assignedIndex
+                            && assignedIndex < reprocessStartIndex)
+                        {
+                            reprocessStartIndex = assignedIndex;
+                        }
+                    }
+
+                    if (reprocessStartIndex >= processingPlayers.Count)
+                        Log.Debug($"Some players reassigned to weighted job {weightedJob}");
+
+                    // If someone was re-assigned we have to reprocess all players that came after,
+                    // except we must not re-assign players who were assigned higher weight jobs.
+                    foreach (var player in processingPlayers.Skip(reprocessStartIndex + 1))
+                    {
+                        AssignPreferredAvailableJob(player, true);
+                    }
+                }
+            }
+
+            int? AssignWeightedJobs(JobAssignment assignment)
+            {
+                if (assignment.AssignmentLimit is not { } assignmentLimit)
+                {
+                    Log.Error($"Attempted to assign a weighted job \"{assignment.JobID}\" with no assignment limit.");
+                    return null;
+                }
+                var playersNeeded = assignment.AssignedPlayers.Count() - assignmentLimit;
+                int? lowestAssigned = null;
+                // Forcefully assigned weighted jobs are assigned in reverse lottery order
+                for (var i = processingPlayers.Count - 1; i >= 0; --i)
+                {
+                    var player = processingPlayers[i];
+                    if (player.AssignedJob is { } playerAssignment
+                        && playerAssignment.JobPrototype.Weight > assignment.JobPrototype.Weight)
+                        continue; // player has a higher weight job already
+
+                    var preferenceIndex = player.JobPreferenceOrder.IndexOf(assignment.JobID);
+                    if (preferenceIndex < 0)
+                        continue; // player has this job set as Never
+
+                    AssignToPlayer(player, assignment, preferenceIndex);
+                    lowestAssigned = i;
+                    --playersNeeded;
+                    if (playersNeeded <= 0)
+                        break;
+                }
+                return lowestAssigned;
+            }
+
+            void AssignPreferredAvailableJob(PlayerSpawnInfo player, bool keepHigherWeight)
+            {
+                // TODO add functionality that assigns players to desired meta assignments like Traitors (not needed in RMC)
+                for (var i = 0; i < (player.AssignedPreferenceIndex ?? player.JobPreferenceOrder.Count); ++i)
+                {
+                    var preferredJob = player.JobPreferenceOrder[i];
+
+                    Log.Debug($"Checking {player.Session} available slot for {preferredJob.Id}");
+
+                    if (!jobAssignments.ContainsKey(preferredJob))
+                        continue;
+
+                    foreach (var assignment in jobAssignments[preferredJob])
+                    {
+                        if (!assignment.IsAssignable)
+                            continue;
+
+                        if (keepHigherWeight
+                            && player.AssignedJob != null
+                            && assignment.JobPrototype.Weight < player.AssignedJob.JobPrototype.Weight)
+                            continue;
+
+                        AssignToPlayer(player, assignment, i);
+                        return;
+                    }
+                }
+            }
+
+            void AssignToPlayer(PlayerSpawnInfo player, JobAssignment newAssignment, int preferenceIndex = 0)
+            {
+                if (!newAssignment.IsAssignable)
+                {
+                    Log.Error($"Tried to assign player {player.Session} to unassignable job {newAssignment.JobID}");
+                    return;
+                }
+
+                var newPreferenceIndex = player.JobPreferenceOrder.IndexOf(newAssignment.JobID, preferenceIndex);
+                if (newPreferenceIndex < 0)
+                {
+                    Log.Error($"Tried to assign player {player.Session} to Never job {newAssignment.JobID}");
+                    return;
+                }
+
+                if (player.AssignedJob is { } oldAssignment)
+                {
+                    oldAssignment.AssignedPlayers.Remove(player);
+                }
+
+                newAssignment.AssignedPlayers.Add(player);
+                player.AssignedJob = newAssignment;
+                player.AssignedPreferenceIndex = newPreferenceIndex;
+
+                Log.Debug($"Assigned {player.Session} to job {newAssignment.JobID}");
+            }
+        }
+
+        private void RMCSpawnPlayer(PlayerSpawnInfo player)
+        {
+            if (player.AssignedJob == null)
+                return;
+
+            var ev = new RMCPlayerSpawningEvent(player);
+            RaiseLocalEvent(ev);
+
+            if (ev.Handled)
+            {
+                PlayerJoinGame(player.Session);
+                return;
+            }
+
+            SpawnPlayer(player.Session, player.Profile, player.AssignedJob.StationId ?? EntityUid.Invalid, player.AssignedJob.JobID, false);
         }
 
         private void SpawnPlayers(List<ICommonSession> readyPlayers,
@@ -512,4 +800,209 @@ namespace Content.Server.GameTicking
 
         #endregion
     }
+
+    // RMC start
+    /// <summary>
+    /// A job that a player can start as at round start.
+    /// </summary>
+    /// <param name="jobId"></param>
+    /// <param name="stationId"></param>
+    public sealed class JobAssignment(JobPrototype jobPrototype, EntityUid? stationId)
+    {
+        public JobPrototype JobPrototype = jobPrototype;
+        public EntityUid? StationId = stationId;
+        public HashSet<PlayerSpawnInfo> AssignedPlayers = new HashSet<PlayerSpawnInfo>();
+        public HashSet<MetaJobAssignment> MetaAssignments = new HashSet<MetaJobAssignment>();
+
+        /// <summary>
+        /// The max amount of assigned players this job can have. Null if unlimited.
+        /// </summary>
+        public int? AssignmentLimit = null;
+
+        /// <summary>
+        /// If this assignment is at max capacity
+        /// </summary>
+        public bool IsFull
+        {
+            get
+            {
+                return AssignmentLimit != null && AssignedPlayers.Count >= AssignmentLimit.Value;
+            }
+        }
+
+        /// <summary>
+        /// If this assignment and all its meta assignments have space for another player.
+        /// </summary>
+        public bool IsAssignable
+        {
+            get
+            {
+                return !IsFull && MetaAssignments.All(m => !m.IsFull);
+            }
+        }
+
+        public ProtoId<JobPrototype> JobID
+        {
+            get
+            {
+                return JobPrototype.ID;
+            }
+        }
+    }
+
+    /// <summary>
+    /// A category for job assignments. Allows job assignments to be "linked" so that there is a player limit across multiple jobs,
+    /// or allows classifying jobs so that a player can specify a preference for a broader category.
+    ///
+    /// For an RMC example, "Survivor" is a meta job assignment. Although there is a max of say 4 engineers, 3 doctors, 2 security,
+    /// and no limit for civilian survs, the maximum amount of "Survivor" roles total may be 7. You can't have 4 engineers, 3 doctors,
+    /// and 2 security all together, even if that is the maximum amount of each role individually.
+    /// </summary>
+    /// <param name="name"></param>
+    public sealed class MetaJobAssignment(string name)
+    {
+        // For debugging/logging, not functionality
+        public string Name = name;
+        public HashSet<JobAssignment> Assignments = new HashSet<JobAssignment>();
+
+        /// <summary>
+        /// The max amount of assigned players this meta assignment can have. Null if unlimited.
+        /// </summary>
+        public int? AssignmentLimit = null;
+
+        /// <summary>
+        /// If this meta assignment is at max capacity.
+        /// </summary>
+        public bool IsFull
+        {
+            get
+            {
+                if (AssignmentLimit is not { } limit)
+                    return false;
+
+                var filledCount = 0;
+                foreach (var assignment in Assignments)
+                {
+                    filledCount += assignment.AssignedPlayers.Count;
+                }
+                return filledCount >= limit;
+            }
+        }
+    }
+
+    /// <summary>
+    /// A category for player assignments. Allows players assignments to be categorized further than just by the job they have,
+    /// potentially having a limit that isn't linked to any particular job.
+    ///
+    /// For example, "Traitor" is a meta player assignment. There are only so many traitor slots at the start of the round
+    /// that can be filled, but if the traitor assignments are maxed out that does not limit which jobs can be taken.
+    /// </summary>
+    /// <param name="name"></param>
+    public sealed class MetaPlayerAssignment(string name)
+    {
+        public string Name = name;
+        public HashSet<PlayerSpawnInfo> AssignedPlayers = new HashSet<PlayerSpawnInfo>();
+
+        /// <summary>
+        /// The only jobs that are allowed to be assigned to players with this meta assignment.
+        /// </summary>
+        public HashSet<ProtoId<JobPrototype>> JobWhitelist = new HashSet<ProtoId<JobPrototype>>();
+
+        /// <summary>
+        /// Jobs that are not allowed to be assigned to players with this meta assignment.
+        /// </summary>
+        public HashSet<ProtoId<JobPrototype>> JobBlacklist = new HashSet<ProtoId<JobPrototype>>();
+
+        /// <summary>
+        /// The max amount of assigned players this meta assignment can have. Null if unlimited.
+        /// </summary>
+        public int? AssignmentLimit = null;
+
+        /// <summary>
+        /// If this meta assignment is at max capacity.
+        /// </summary>
+        public bool IsFull
+        {
+            get
+            {
+                return AssignmentLimit != null && AssignedPlayers.Count >= AssignmentLimit.Value;
+            }
+        }
+    }
+
+    public sealed class PlayerSpawnInfo(ICommonSession player, HumanoidCharacterProfile profile)
+    {
+        public ICommonSession Session = player;
+        public HumanoidCharacterProfile Profile = profile;
+        public JobAssignment? AssignedJob;
+        public HashSet<MetaPlayerAssignment> MetaAssignments = new HashSet<MetaPlayerAssignment>();
+
+        // The list of jobs this player prefers, in preference order.
+        public List<ProtoId<JobPrototype>> JobPreferenceOrder = new List<ProtoId<JobPrototype>>();
+
+        // The index of the job the player is currently assigned.
+        public int? AssignedPreferenceIndex;
+    }
+
+    /// <summary>
+    /// Event raised before any players are assigned, to allow systems to set up initial job assignments.
+    /// </summary>
+    /// <param name="jobAssignments"></param>
+    /// <param name="metaJobAssignments"></param>
+    /// <param name="metaPlayerAssignments"></param>
+    public sealed class InitializingAssignmentsEvent(
+        JobAssignmentsDict jobAssignments,
+        HashSet<MetaJobAssignment> metaJobAssignments,
+        HashSet<MetaPlayerAssignment> metaPlayerAssignments)
+    {
+        public readonly JobAssignmentsDict JobAssignments = jobAssignments;
+        public readonly HashSet<MetaJobAssignment> MetaJobAssignments = metaJobAssignments;
+        public readonly HashSet<MetaPlayerAssignment> MetaPlayerAssignments = metaPlayerAssignments;
+    }
+
+    /// <summary>
+    ///     Event raised before each player is assigned, to allow systems and rules to add
+    ///     assignments that players can be assigned to.
+    ///     This event is not involved in actually assigning players, only for collecting the available assignments.
+    /// </summary>
+    public sealed class CollectingAssignmentsEvent(
+        List<PlayerSpawnInfo> processedPlayers,
+        JobAssignmentsDict jobAssignments,
+        HashSet<MetaJobAssignment> metaJobAssignments,
+        HashSet<MetaPlayerAssignment> metaPlayerAssignments)
+    {
+        public readonly List<PlayerSpawnInfo> ProcessedPlayers = processedPlayers;
+        public readonly JobAssignmentsDict JobAssignments = jobAssignments;
+        public readonly HashSet<MetaJobAssignment> MetaJobAssignments = metaJobAssignments;
+        public readonly HashSet<MetaPlayerAssignment> MetaPlayerAssignments = metaPlayerAssignments;
+    }
+
+    /// <summary>
+    ///     Event raised after all players have been assigned and spawned in.
+    ///     Note that processed players may not necessarily have been assigned,
+    ///     due to not getting one of their preferred roles.
+    /// </summary>
+    public sealed class RoundstartPlayersSpawnedEvent(
+        List<PlayerSpawnInfo> processedPlayers,
+        JobAssignmentsDict jobAssignments)
+    {
+        public readonly List<PlayerSpawnInfo> ProcessedPlayers = processedPlayers;
+        public readonly JobAssignmentsDict JobAssignments = jobAssignments;
+    }
+
+    public sealed class RMCPlayerSpawningEvent(
+        PlayerSpawnInfo player) : HandledEntityEventArgs
+    {
+        public readonly PlayerSpawnInfo Player = player;
+    }
+
+    /// <summary>
+    /// Systems can subscribe to this event if a player's selected preferred job needs to be replaced
+    /// with a different job. As an RMC example, a civilian survivor preference might have to be replaced
+    /// with preference for a different kind of survivor, if no civilian survivor jobs exist.
+    /// </summary>
+    /// <param name="JobId"></param>
+    [ByRefEvent]
+    public record struct ReplaceJobEvent(ProtoId<JobPrototype> JobId);
+    // RMC end
 }
