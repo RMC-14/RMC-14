@@ -199,7 +199,7 @@
         points: 10
       - id: CMMagazineRifleM54CExt
         points: 10
-      - id: RMCSpeedLoader44Marksman
+      - id: RMCSpeedLoader44Heavy
         points: 10
     - name: Utilities
       entries:

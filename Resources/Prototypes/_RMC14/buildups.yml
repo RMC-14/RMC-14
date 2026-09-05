@@ -1,0 +1,13 @@
+- type: rmcBuildup
+  id: RMCHeavyRevolver
+  threshold: 3
+  decayAmount: 1
+  decayEvery: 2
+  refreshDecayOnApply: false
+  minimumSize: VerySmallXeno
+  maximumSize: Xeno
+  whitelist:
+    components:
+    - Xeno
+  appliedPopup: rmc-heavy-revolver-buildup
+  triggeredPopup: rmc-heavy-revolver-knockdown

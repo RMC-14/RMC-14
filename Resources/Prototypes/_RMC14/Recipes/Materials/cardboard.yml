@@ -262,6 +262,7 @@
   - RMCDividerConstruction
   - RMCBoxMagazineRevolverM44EmptyBuild
   - RMCBoxMagazineRevolverM44MarksmanEmptyBuild
+  - RMCBoxMagazineRevolverM44HeavyEmptyBuild
   - RMCDividerConstruction
   - RMCBoxMagazinePistolM13EmptyBuild
   - RMCBoxMagazinePistolM13ExtEmptyBuild
@@ -318,6 +319,12 @@
   id: RMCBoxMagazineRevolverM44MarksmanEmptyBuild
   name: M44 speedloader box (Marksman)
   prototype: RMCBoxMagazineRevolverM44MarksmanEmpty
+
+- type: rmcConstruction
+  parent: RMCCardboardBuildBase
+  id: RMCBoxMagazineRevolverM44HeavyEmptyBuild
+  name: M44 speedloader box (Heavy)
+  prototype: RMCBoxMagazineRevolverM44HeavyEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase

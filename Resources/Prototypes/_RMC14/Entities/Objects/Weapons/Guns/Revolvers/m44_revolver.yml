@@ -18,8 +18,10 @@
       tags:
       - RMCSpeedLoaderM44
       - RMCSpeedLoader44Marksman
+      - RMCSpeedLoader44Heavy
       - RMCCartridgeRevolver44
       - RMCCartridgeRevolver44Marksman
+      - RMCCartridgeRevolver44Heavy
     proto: RMCCartridgeRevolver44
     capacity: 7
     chambers: [ True, True, True, True, True, True, True ]
@@ -156,7 +158,37 @@
       color: "#FF744F"
       map: [ "enum.GunVisualLayers.MagUnshaded" ]
   - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRevolver44Marksman
     proto: RMCCartridgeRevolver44Marksman
+    capacity: 7
+
+- type: entity
+  parent: RMCSpeedLoaderM44
+  id: RMCSpeedLoader44Heavy
+  name: "M44 heavy speed loader (.44)"
+  description: A 7-round .44 revolver speed loader containing heavy bullets. While less damaging than traditional .44 rounds, they deliver a higher stopping power.
+  components:
+  - type: Tag
+    tags:
+    - RMCMagazineRevolver
+    - RMCSpeedLoader44Heavy
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/SpeedLoaders/m44.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: base-5
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: base-unshaded-5
+      color: "#7866FF"
+      map: [ "enum.GunVisualLayers.MagUnshaded" ]
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRevolver44Heavy
+    proto: RMCCartridgeRevolver44Heavy
     capacity: 7
 
 - type: entity
@@ -179,9 +211,21 @@
   - type: Tag
     tags:
     - Cartridge
-    - RMCCartridgeRevolver44
+    - RMCCartridgeRevolver44Marksman
   - type: CartridgeAmmo
     proto: RMCBulletRevolver44Marksman
+
+- type: entity
+  id: RMCCartridgeRevolver44Heavy
+  name: cartridge (.44 Heavy)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRevolver44Heavy
+  - type: CartridgeAmmo
+    proto: RMCBulletRevolver44Heavy
 
 - type: entity
   parent: CMBulletBase
@@ -221,8 +265,31 @@
     - range: 12
       falloff: 10
 
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletRevolver44Heavy
+  name: bullet (.44 Heavy)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 35
+  - type: CMArmorPiercing
+    amount: 20
+  - type: RMCProjectileAccuracy
+    accuracy: 100
+  - type: RMCApplyBuildupOnHit
+    buildup: RMCHeavyRevolver
+  - type: RMCKnockdownOnBuildup
+    duration: 1
+    refresh: false
+
 - type: Tag
   id: RMCSpeedLoaderM44
 
 - type: Tag
   id: RMCSpeedLoader44Marksman
+
+- type: Tag
+  id: RMCSpeedLoader44Heavy

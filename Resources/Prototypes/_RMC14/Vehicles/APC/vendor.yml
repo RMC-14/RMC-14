@@ -56,6 +56,10 @@
         amount: 0
       - id: RMCSpeedLoaderM44
         amount: 0
+      - id: RMCSpeedLoader44Heavy
+        amount: 0
+      - id: RMCSpeedLoader44Marksman
+        amount: 0
       - id: CMMagazinePistolM1984
         amount: 0
       - id: RMCMagazinePistolM13
