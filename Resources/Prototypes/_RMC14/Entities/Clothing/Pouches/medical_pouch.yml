@@ -55,7 +55,7 @@
   components:
   - type: StorageFill
     contents:
-    # TODO RMC14 pill bottle tramadol
+    - id: CMPillCanisterTramadol
     - id: CMPillCanisterBicaridine
     - id: CMPillCanisterKelotane
     - id: CMPillCanisterDexalin
