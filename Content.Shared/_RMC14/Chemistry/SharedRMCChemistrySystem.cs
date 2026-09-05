@@ -1,8 +1,9 @@
-﻿using System.Linq;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Scaling;
+using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Containers;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
@@ -14,6 +15,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using System.Linq;
 
 namespace Content.Shared._RMC14.Chemistry;
 
@@ -29,6 +31,7 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
     [Dependency] private readonly ScalingSystem _scaling = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
 
     private readonly List<Entity<RMCChemicalDispenserComponent>> _dispensers = new();
 
@@ -50,6 +53,14 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
         SubscribeLocalEvent<NoMixingReagentsComponent, SolutionTransferAttemptEvent>(OnNoMixingReagentsTransferAttempt);
 
         SubscribeLocalEvent<RMCEmptySolutionComponent, GetVerbsEvent<AlternativeVerb>>(OnEmptySolutionGetVerbs);
+
+        SubscribeLocalEvent<RMCConnectedContainerComponent, GetConnectedContainerEvent>(OnConnectedContainerGet);
+        SubscribeLocalEvent<RMCConnectedContainerComponent, EntInsertedIntoContainerMessage>(OnConnectedContainerInsert);
+        SubscribeLocalEvent<RMCConnectedContainerComponent, EntRemovedFromContainerMessage>(OnConnectedContainerRemove);
+
+        SubscribeLocalEvent<RMCConnectContainerRelayComponent, SolutionContainerChangedEvent>(OnConnectSolutionChanged);
+
+        SubscribeLocalEvent<RMCHypoTransferAmountsComponent, GetVerbsEvent<AlternativeVerb>>(AddTransferVerbs);
 
         Subs.BuiEvents<RMCChemicalDispenserComponent>(RMCChemicalDispenserUi.Key,
             subs =>
@@ -288,6 +299,104 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
 
         ChangeStorageEnergy(storage, storage.Comp.Energy - cost);
         _solution.TryAddReagent(solutionEnt.Value, args.Reagent, ent.Comp.DispenseSetting);
+    }
+
+    private void OnConnectedContainerGet(Entity<RMCConnectedContainerComponent> ent, ref GetConnectedContainerEvent args)
+    {
+        if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container) || container.ContainedEntities.Count <= 0)
+            return;
+
+        args.ContainerEntity = container.ContainedEntities[0];
+    }
+
+    private void OnConnectedContainerInsert(Entity<RMCConnectedContainerComponent> ent, ref EntInsertedIntoContainerMessage args)
+    {
+        if (_timing.ApplyingState)
+            return;
+
+        if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var conContainer) || args.Container != conContainer)
+            return;
+
+        var contained = EnsureComp<RMCConnectContainerRelayComponent>(args.Entity);
+        contained.ContainerOwner = ent;
+        Dirty(args.Entity, contained);
+
+        if (_solution.TryGetMixableSolution(args.Entity, out _, out var solu))
+            UpdateConnectedAppearance(ent, solu);
+    }
+
+    private void OnConnectedContainerRemove(Entity<RMCConnectedContainerComponent> ent, ref EntRemovedFromContainerMessage args)
+    {
+        if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container) || args.Container != container)
+            return;
+
+        RemCompDeferred<RMCConnectContainerRelayComponent>(args.Entity);
+        UpdateConnectedAppearance(ent, null);
+    }
+
+    private void OnConnectSolutionChanged(Entity<RMCConnectContainerRelayComponent> ent, ref SolutionContainerChangedEvent args)
+    {
+        if (ent.Comp.ContainerOwner == null)
+            return;
+
+        UpdateConnectedAppearance(ent.Comp.ContainerOwner.Value, args.Solution);
+    }
+
+    private void UpdateConnectedAppearance(EntityUid container, Solution? solu)
+    {
+        if (!HasComp<SolutionContainerVisualsComponent>(container))
+            return;
+
+        var solution = new Solution();
+
+        if (solu != null)
+            solution = solu;
+
+        _appearance.SetData(container, SolutionContainerVisuals.FillFraction, solution.FillFraction);
+        _appearance.SetData(container, SolutionContainerVisuals.Color, solution.GetColor(_prototypes));
+        _appearance.SetData(container, SolutionContainerVisuals.SolutionName, Name(container));
+
+        if(solution.GetPrimaryReagentId() is { } reagent)
+            _appearance.SetData(container, SolutionContainerVisuals.BaseOverride, reagent.ToString());
+    }
+
+    // TODO RMC14 obselete this when upstream hypos + injectors merge is merged
+    private void AddTransferVerbs(Entity<RMCHypoTransferAmountsComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!args.CanAccess || !args.CanInteract || args.Hands == null)
+            return;
+
+        if (!TryComp<HyposprayComponent>(ent, out var hypo))
+            return;
+
+        var @event = args;
+
+        var priority = 0;
+        var user = args.User;
+        var amounts = ent.Comp.TransferAmounts;
+        foreach (var amount in amounts)
+        {
+            if (amount < ent.Comp.MinTransferAmount || amount > ent.Comp.MaxTransferAmount)
+                continue;
+
+            AlternativeVerb verb = new();
+            verb.Text = Loc.GetString("comp-solution-transfer-verb-amount", ("amount", amount));
+            verb.Category = VerbCategory.SetTransferAmount;
+            verb.Act = () =>
+            {
+                hypo.TransferAmount = amount;
+
+                _popup.PopupClient(Loc.GetString("comp-solution-transfer-set-amount", ("amount", amount)), ent, user);
+
+                Dirty(ent, hypo);
+            };
+
+            // we want to sort by size, not alphabetically by the verb text.
+            verb.Priority = priority;
+            priority--;
+
+            args.Verbs.Add(verb);
+        }
     }
 
     public bool TryGetStorage(EntProtoId network, out Entity<RMCChemicalStorageComponent> storage)
