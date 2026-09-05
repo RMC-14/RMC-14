@@ -417,7 +417,7 @@
     - RMCGearCorpseUnitedNationsRiotOfficerAltFour
     - RMCGearCorpseUnitedNationsRiotOfficerAltFive
   - type: Rank
-    rank: RMCRankCMBRiotControlOfficer
+    rank: RMCRankCMBDeputy
 
 - type: randomHumanoidSettings
   parent: RMCCorpseUnitedNationsRiotOfficer

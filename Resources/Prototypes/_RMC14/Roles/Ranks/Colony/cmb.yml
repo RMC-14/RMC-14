@@ -1,45 +1,55 @@
+# Names inspired after police ranks
+# Differs from CM - Deputies are Officers, specialists in their field are Corporals/Sergeants, Riot Control unit leaders are Lieutenants, Marshals are Captains. CMB Synthetics are either ranked Detective/Corporal/Sergeant depending on their speciality
+
+# Deputy
 - type: rank
   id: RMCRankCMBDeputy
-  name: CMB Deputy
-  prefix: Dep.
-  paygrade: CMBD
+  name: Officer
+  prefix: Off.
+  paygrade: CMB
 
+- type: rank
+  id: RMCRankCMBSeniorDeputy
+  name: Senior Officer
+  prefix: Sr. Off.
+  paygrade: CMB
+
+# Corporal (Specialists/Very senior deputies)
+- type: rank
+  id: RMCRankCMBCorporal
+  name: Corporal
+  prefix: Cpl.
+  paygrade: CMB
+
+# Sergeant (Specialists)
+- type: rank
+  id: RMCRankCMBSergeant
+  name: Sergeant
+  prefix: Sgt.
+  paygrade: CMB
+
+# Lieutenant (Team Leaders)
+- type: rank
+  id: RMCRankCMBLieutenant
+  name: Lieutenant
+  prefix: Lt.
+  paygrade: CMB
+
+# Captain (Marshal)
 - type: rank
   id: RMCRankCMBMarshal
-  name: CMB Marshal
-  prefix: Marshal
-  paygrade: CMBM
+  name: Captain
+  prefix: Capt.
+  paygrade: CMB
 
+# Detective
 - type: rank
-  id: RMCRankCMBInvestigativeSynthetic
-  name: CMB Investigative Synthetic
-  prefix: Syn.
+  id: RMCRankCMBDetective
+  name: Detective
+  prefix: Det.
 
-- type: rank
-  id: RMCRankCMBRiotControlSynthetic
-  name: CMB Riot Control Synthetic
-  prefix: Syn.
 
-- type: rank
-  id: RMCRankCMBRiotControlOfficer
-  name: CMB Riot Control Officer
-  prefix: Off.
-
-- type: rank
-  id: RMCRankCMBMedicalTechnician
-  name: CMB Medical Technician
-  prefix: Med.
-
-- type: rank
-  id: RMCRankCMBBreachingTechnician
-  name: CMB Breaching Technician
-  prefix: Breach.
-
-- type: rank
-  id: RMCRankCMBSWATSpecialist
-  name: CMB SWAT Specialist
-  prefix: Spec.
-
+# ICB ranks
 - type: rank
   id: RMCRankICBAgent
   name: Interstellar Commerce Bureau Agent

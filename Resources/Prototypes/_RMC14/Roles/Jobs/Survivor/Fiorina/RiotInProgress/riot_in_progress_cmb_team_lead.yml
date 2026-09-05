@@ -1,20 +1,37 @@
 - type: job
   parent: CMSurvivorSecurity
   id: RMCSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader
-  name: rmc-job-name-bureau-riot-control-team-leader
+  name: rmc-job-name-survivor-riot-TL
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorSecurity
   startingGear: RMCGearSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader
   accessGroups:
   - ColonistSec
   ranks:
-    RMCRankCMBRiotControlOfficer: []
+    RMCRankCMBLieutenant: []
   spawnMenuRoleName: CMB Riot Control Team Leader (Fiorina Special Survivor)
-  icon: "RMCJobIconBureauDeputy"
+  icon: "RMCJobIconCMBRiotInProgressTeamLeader"
   hasIcon: true
   special:
   - !type:AddComponentSpecial
     components:
+    - type: MarineOrders # tacticool callouts
+      moveCallouts:
+      - move-order-callout-1-swat
+      - move-order-callout-2-swat
+      - move-order-callout-3-swat
+      - move-order-callout-4-swat
+      holdCallouts:
+      - hold-order-callout-1-swat
+      - hold-order-callout-2-swat
+      - hold-order-callout-3-swat
+      - hold-order-callout-4-swat
+      focusCallouts:
+      - focus-order-callout-1-swat
+      - focus-order-callout-2-swat
+      - focus-order-callout-3-swat
+      - focus-order-callout-4-swat
+    - type: RMCPointing
     - type: Language
       spokenLanguages:
       - Japanese
@@ -28,6 +45,7 @@
       preset: RMCSkillPresetSurvivorRiotControlTeamLeader
     - type: RMCSurvivor
     - type: MotionDetectorTracked
+    - type: InnateCommandSpeech
     - type: NpcFactionMember
       factions:
       - Bureau
@@ -35,34 +53,38 @@
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
-      preset: RMCSurvivorPresetRiotInProgressCMBRCTL
+      preset: RMCSurvivorPresetRiotInProgressCMBTL
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: deputy
+        state: cmp
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_cmb
     - type: JobPrefix
-      prefix: rmc-job-prefix-bureau-riot-control-team-leader
-  greeting: rmc-job-greeting-riot-in-progress-CMB-RCTL
+      prefix: rmc-job-prefix-survivor-riot-TL
+  greeting: rmc-job-greeting-riot-in-progress-CMB-TL
 
 - type: startingGear
-  parent: RMCGearSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
   id: RMCGearSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader
   equipment:
+    id: RMCIDCardCMBDeputySurvivor
     jumpsuit: RMCSwatCMBUniformSpearhead
     outerClothing: RMCArmorM4RMedium
     mask: RMCMaskSWAT
     head: RMCArmorHelmetM10CMBVisorSWAT
     back: RMCSatchelSecuritySurvivorFillRiotControlOfficer
     eyes: RMCGlassesSecuritySwat
-
+    ears: RMCHeadsetDistressBureauDamaged
+    gloves: CMHandsBlackMarine
+    shoes: RMCBootsPMCFilled
+    pocket1: RMCPouchSurvivalBlackFilled
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
-  name: special survivor fiorina riot in progress colony marshal bureau riot control team leader spawn point
+  id: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader
+  name: cmb riot control team leader spawn point
+  suffix: special survivor, fiorina riot
   components:
   - type: SpawnPoint
     job_id: RMCSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader
@@ -72,8 +94,8 @@
       state: surv
 
 - type: entity
-  id: RMCSurvivorPresetRiotInProgressCMBRCTL
-  name: riot in progress CMB RCTL preset
+  id: RMCSurvivorPresetRiotInProgressCMBTL
+  name: riot in progress team lead preset
   categories: [ HideSpawnMenu ]
   components:
   - type: EntityPreset
@@ -89,3 +111,10 @@
     - [ RMCPouchMagazineFilledMP5, RMCWeaponSMGMP5Alt, RMCMotionDetectorCompact ]
     - [ RMCPouchMagazineFilledMP5, RMCWeaponSMGMP5Alt, RMCMotionDetectorCompact ]
     primaryWeaponChance: 1
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconCMBRiotInProgressTeamLeader
+  icon:
+    sprite: _RMC14/Interface/job_icons/CMB.rsi
+    state: cmb_rctl
