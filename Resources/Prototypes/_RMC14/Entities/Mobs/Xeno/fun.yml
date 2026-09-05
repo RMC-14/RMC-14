@@ -79,7 +79,9 @@
     - ActionXenoRetrieveEgg
     - ActionXenoParasiteReserve
     tier: 0
-    hudOffset: -0.15,-0.03
+    hudOffset: -0.45,-0.03
+    hudRankIconScale: 0.85
+    hudRankIconOffset: 0.06,0.15
     contributesToVictory: false
     countedInSlots: false
     unlockAt: 0
