@@ -3,6 +3,7 @@
   id: CMFireteamLeader
   name: cm-job-name-fireteam-leader
   description: cm-job-description-fireteam-leader
+  newToJobInfo: rmc-new-to-job-fireteam-leader
   playTimeTracker: CMJobFireteamLeader
   requirements:
   - !type:DepartmentTimeRequirement
