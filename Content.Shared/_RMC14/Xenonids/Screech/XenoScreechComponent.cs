@@ -34,6 +34,11 @@ public sealed partial class XenoScreechComponent : Component
     [DataField, AutoNetworkedField]
     public float ParasiteStunRange = 11.2838f;
 
+    //range we add to ability entity checking range. loosely based on the distance a vest marine can travel in 750ms.
+    //lagcomp will always be clamped to 750ms anyway, so only downside of larger values is a miniscule performance hit.
+    [DataField]
+    public float LagCompensationLookupMargin = 4f;
+
     [DataField, AutoNetworkedField]
     public TimeSpan ParasiteStunTime = TimeSpan.FromSeconds(8);
 
