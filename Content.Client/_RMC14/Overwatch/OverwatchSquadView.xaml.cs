@@ -47,23 +47,7 @@ public sealed partial class OverwatchSquadView : Control
         LatitudeContainer.AddChild(Latitude);
         Latitude.SetPositionFirst();
 
-        Longitude.OnKeyBindDown += args =>
-        {
-            if (args.Function == EngineKeyFunctions.GuiTabNavigateNext ||
-                args.Function == EngineKeyFunctions.GuiTabNavigatePrev)
-            {
-                Latitude.GrabKeyboardFocus();
-            }
-        };
-
-        Latitude.OnKeyBindDown += args =>
-        {
-            if (args.Function == EngineKeyFunctions.GuiTabNavigateNext ||
-                args.Function == EngineKeyFunctions.GuiTabNavigatePrev)
-            {
-                Longitude.GrabKeyboardFocus();
-            }
-        };
+        FocusChainExtensions.LinkTabFocus(Longitude, Latitude);
 
         OrbitalLongitude = UIExtensions.CreateDialSpinBox(buttons: false, minWidth: 100);
         OrbitalLongitudeContainer.AddChild(OrbitalLongitude);
@@ -73,23 +57,7 @@ public sealed partial class OverwatchSquadView : Control
         OrbitalLatitudeContainer.AddChild(OrbitalLatitude);
         OrbitalLatitude.SetPositionFirst();
 
-        OrbitalLongitude.OnKeyBindDown += args =>
-        {
-            if (args.Function == EngineKeyFunctions.GuiTabNavigateNext ||
-                args.Function == EngineKeyFunctions.GuiTabNavigatePrev)
-            {
-                OrbitalLatitude.GrabKeyboardFocus();
-            }
-        };
-
-        OrbitalLatitude.OnKeyBindDown += args =>
-        {
-            if (args.Function == EngineKeyFunctions.GuiTabNavigateNext ||
-                args.Function == EngineKeyFunctions.GuiTabNavigatePrev)
-            {
-                OrbitalLongitude.GrabKeyboardFocus();
-            }
-        };
+        FocusChainExtensions.LinkTabFocus(OrbitalLongitude, OrbitalLatitude);
 
         StopOverwatchButton.OnPressed += OnStopOverwatchPressed;
         HideSquadInfoButton.OnPressed += OnHideSquadInfoPressed;
