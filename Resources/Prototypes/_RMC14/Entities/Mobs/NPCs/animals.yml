@@ -223,6 +223,17 @@
       gender: epicene
   - type: FixedIdentity
     name: cm-chatsan-replacement-dog
+  - type: Inventory
+    templateId: RMCCorgi
+    speciesId: dog
+  - type: DropHatOnDeadOrCrit
+  - type: InventorySlots
+  - type: Strippable
+  - type: UserInterface
+    interfaces:
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+  - type: InteractionPopup
 
 - type: entity
   parent: RMCMobCorgi
@@ -257,6 +268,10 @@
   - type: WarpPoint
     follow: true
     location: Mister Wiggles
+  - type: Inventory
+    templateId: RMCCorgi
+    speciesId: dog     
+  - type: DropHatOnDeadOrCrit
 
 
 - type: entity
@@ -324,6 +339,17 @@
       gender: epicene
   - type: FixedIdentity
     name: cm-chatsan-replacement-cat
+  - type: Inventory
+    templateId: RMCCat
+    speciesId: cat
+  - type: DropHatOnDeadOrCrit
+  - type: InventorySlots
+  - type: Strippable
+  - type: UserInterface
+    interfaces:
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+  - type: InteractionPopup
 
 - type: entity
   parent: RMCMobCat
@@ -372,6 +398,10 @@
   - type: WarpPoint
     follow: true
     location: Jones
+  - type: Inventory
+    templateId: RMCCat
+    speciesId: cat
+  - type: DropHatOnDeadOrCrit
 
 - type: entity
   parent: RMCMobCatCalico
@@ -382,6 +412,10 @@
   - type: WarpPoint
     follow: true
     location: Orion
+  - type: Inventory
+    templateId: RMCCat
+    speciesId: cat
+  - type: DropHatOnDeadOrCrit
 
 - type: entity
   parent: RMCMobCat
@@ -420,6 +454,40 @@
   - type: WarpPoint
     follow: true
     location: Buttons
+
+- type: entity
+  parent: [RMCSimpleMob, MobFox]
+  id: RMCMobFox
+  name: Fox
+  suffix: RMC
+  components:
+  - type: CrashLandable
+  - type: PressureImmunity
+  - type: Respirator
+    minSaturation: 5.0
+  - type: GhostRole
+    prob: 0
+  - type: Inventory
+    templateId: RMCFox
+    speciesId: fox 
+  - type: DropHatOnDeadOrCrit
+
+- type: entity
+  parent: [RMCSimpleMob, MobMothroach]
+  id: RMCMobMothroach
+  name: Mothroach
+  suffix: RMC
+  components:
+  - type: CrashLandable
+  - type: PressureImmunity
+  - type: Respirator
+    minSaturation: 5.0
+  - type: GhostRole
+    prob: 0
+  - type: Inventory
+    templateId: RMCMothRoach    
+    speciesId: hamster
+  - type: DropHatOnDeadOrCrit
 
 # Spawners
 - type: entity
