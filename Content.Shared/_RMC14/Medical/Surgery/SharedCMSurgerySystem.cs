@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Content.Shared._RMC14.Embeds;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Surgery.Conditions;
 using Content.Shared._RMC14.Medical.Surgery.Steps;
@@ -61,6 +62,7 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
         SubscribeLocalEvent<CMSurgeryTargetComponent, CMSurgeryDoAfterEvent>(OnTargetDoAfter);
 
         SubscribeLocalEvent<CMSurgeryCloseIncisionConditionComponent, CMSurgeryValidEvent>(OnCloseIncisionValid);
+        SubscribeLocalEvent<RMCSurgeryForeignObjectConditionComponent, CMSurgeryValidEvent>(OnForeignObjectValid);
         SubscribeLocalEvent<CMSurgeryLarvaConditionComponent, CMSurgeryValidEvent>(OnLarvaValid);
         SubscribeLocalEvent<CMSurgeryPartConditionComponent, CMSurgeryValidEvent>(OnPartConditionValid);
         SubscribeLocalEvent<RMCSurgeryDeadConditionComponent, CMSurgeryValidEvent>(OnIsDead);
@@ -114,6 +116,19 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
         {
             args.Cancelled = true;
         }
+    }
+
+    private void OnForeignObjectValid(Entity<RMCSurgeryForeignObjectConditionComponent> ent, ref CMSurgeryValidEvent args)
+    {
+        if (!TryComp(args.Body, out ForeignObjectEmbeddedComponent? embedded) ||
+            !TryComp(args.Part, out BodyPartComponent? part))
+        {
+            args.Cancelled = true;
+            return;
+        }
+
+        if (!embedded.Entries.Any(entry => entry.BodyPart == part.PartType && entry.Symmetry == part.Symmetry))
+            args.Cancelled = true;
     }
 
     private void OnLarvaValid(Entity<CMSurgeryLarvaConditionComponent> ent, ref CMSurgeryValidEvent args)

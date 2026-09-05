@@ -235,6 +235,48 @@
       types:
         Heat: 3
 
+- type: entity
+  parent: CMSurgeryStepBase
+  id: RMCSurgeryStepExtractForeignObject
+  name: Extract foreign object
+  components:
+  - type: CMSurgeryStep
+    skill: 1
+    tool:
+    - Hemostat
+    endSound:
+      path: /Audio/_RMC14/Medical/Surgery/hemostat1.ogg
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/hemostat.rsi
+    state: hemostat
+  - type: RMCSurgeryStepForeignObjectEffect
+  - type: RMCSurgeryComplicationEffects
+    FailureDirectDamage:
+      types:
+        Blunt: 5
+
+- type: entity
+  parent: CMSurgeryStepBase
+  id: RMCSelfStepExtractForeignObject
+  name: Extract foreign object
+  components:
+  - type: CMSurgeryStep
+    tool:
+    - Scalpel
+    endSound:
+      path: /Audio/_RMC14/Medical/Surgery/scalpel2.ogg
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/scalpel.rsi
+    state: scalpel
+  - type: RMCSurgeryStepForeignObjectEffect
+  - type: RMCSurgeryComplicationEffects
+    SuccessDirectDamage:
+      types:
+        Blunt: 5
+    FailureDirectDamage:
+      types:
+        Blunt: 10
+
 ## Damage from xeno surgeries is suppose to be depenedt on wearing a biosuit, and inflicted on the doctor, but im unsure how to handle this at this time.
 - type: entity
   parent: CMSurgeryStepBase

@@ -200,6 +200,10 @@
         Slash: 10
   - type: XenoProjectile
     deleteOnFriendlyXeno: false
+  - type: ShrapnelChanceProjectile
+    sourceId: XenoBoneChips
+    embedChance: 0.6
+    count: 1
   - type: ProjectileMaxRange
     max: 4
   - type: RMCProjectileAccuracy

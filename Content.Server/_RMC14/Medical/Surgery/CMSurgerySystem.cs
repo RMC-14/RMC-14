@@ -2,6 +2,8 @@
 using Content.Server.Body.Systems;
 using Content.Server.Chat.Systems;
 using Content.Server.Popups;
+using Content.Shared._RMC14.Embeds;
+using Content.Shared.Alert;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Surgery;
@@ -13,6 +15,7 @@ using Content.Shared._RMC14.Medical.Wounds;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Organs;
 using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared.Body.Part;
 using Content.Shared.Damage;
 using Content.Shared.Interaction;
 using Content.Shared.Prototypes;
@@ -28,6 +31,9 @@ namespace Content.Server._RMC14.Medical.Surgery;
 
 public sealed class CMSurgerySystem : SharedCMSurgerySystem
 {
+    private static readonly ProtoId<AlertPrototype> EmbeddedObjectAlert = "ForeignObjectEmbedded";
+
+    [Dependency] private readonly AlertsSystem _alerts = default!;
     [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
@@ -56,6 +62,7 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
         SubscribeLocalEvent<CMSurgeryClampBleedEffectComponent, CMSurgeryStepEvent>(OnStepClampBleedComplete);
         SubscribeLocalEvent<CMSurgeryStepEmoteEffectComponent, CMSurgeryStepEvent>(OnStepScreamComplete);
         SubscribeLocalEvent<RMCSurgeryStepSpawnEffectComponent, CMSurgeryStepEvent>(OnStepSpawnComplete);
+        SubscribeLocalEvent<RMCSurgeryStepForeignObjectEffectComponent, CMSurgeryStepEvent>(OnStepForeignObjectComplete);
         SubscribeLocalEvent<RMCSurgeryStepLarvaEffectComponent, CMSurgeryStepEvent>(OnStepLarvaComplete);
         SubscribeLocalEvent<RMCSurgeryStepXenoHeartEffectComponent, CMSurgeryStepEvent>(OnStepXenoHeartComplete);
 
@@ -297,6 +304,30 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
     {
         if (TryComp(args.Body, out TransformComponent? xform))
             SpawnAtPosition(ent.Comp.Entity, xform.Coordinates);
+    }
+
+    private void OnStepForeignObjectComplete(Entity<RMCSurgeryStepForeignObjectEffectComponent> ent, ref CMSurgeryStepEvent args)
+    {
+        if (!TryComp(args.Body, out ForeignObjectEmbeddedComponent? embedded) ||
+            !TryComp(args.Part, out BodyPartComponent? part))
+        {
+            return;
+        }
+
+        if (embedded.StackCount <= 0)
+            return;
+
+        if (!ForeignObjectEmbeddedUtility.TryRemoveMatchingBodyPart(embedded, part.PartType, part.Symmetry, 1))
+            return;
+
+        if (embedded.StackCount <= 0)
+        {
+            _alerts.ClearAlert(args.Body, EmbeddedObjectAlert);
+            RemCompDeferred<ForeignObjectEmbeddedComponent>(args.Body);
+            RemCompDeferred<EmbeddedMovementDamageComponent>(args.Body);
+        }
+
+        Dirty(args.Body, embedded);
     }
 
     private void OnStepLarvaComplete(Entity<RMCSurgeryStepLarvaEffectComponent> ent, ref CMSurgeryStepEvent args)
