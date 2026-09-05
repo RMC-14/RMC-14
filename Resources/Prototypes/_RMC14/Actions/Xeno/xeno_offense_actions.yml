@@ -166,6 +166,25 @@
   description: Strikes the targeted enemy or barricade. The cooldown is faster if you miss. [color=red]It also injects diluted molecular acid or neurotoxin into the target, dealing damage or stunning over time. Which type depends on current gas type.[/color]
 
 - type: entity
+  parent: ActionXenoTailStabCorrosive
+  id: ActionXenoTailStabSentinel
+  name: Catalytic Tail Stab
+  description: Strikes the targeted enemy or barricade. The cooldown is faster if you miss. Does additional burn damage if the target has paratoxin stacks, and if they have at least 10, gain a large speed and armor boost. Reduces paratoxin stacks by 1/3.
+  components:
+  - type: Action
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: tail_attack_acid
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoTailStabSentinel
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: tail_attack_acid
+
+- type: entity
   id: ActionXenoTailStabLance
   parent: ActionXenoTailStab
   name: Tail Lance Stab
@@ -214,7 +233,6 @@
     checkCanAccess: false
   - type: WorldTargetAction
     event: !type:XenoLeapActionEvent
-  - type: RMCDazeableAction
 
 - type: entity
   id: ActionXenoRush
@@ -246,7 +264,6 @@
     checkCanAccess: false
   - type: WorldTargetAction
     event: !type:XenoLeapActionEvent
-  - type: RMCDazeableAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -371,7 +388,7 @@
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
-      state: xeno_spit
+      state: xeno_spit_neuro
     useDelay: 2
   - type: TargetAction
     repeat: true
@@ -381,6 +398,23 @@
   - type: WorldTargetAction
     event: !type:XenoSlowingSpitActionEvent
   - type: ActionBlockIfResting
+
+- type: entity
+  id: ActionXenoParatoxinSpit
+  parent: ActionXenoSlowingSpit
+  name: Paratoxin Spit (30)
+  description: Launches a damageless projectile that goes over allies and will slow the first enemy that it hits, then paralyze them if they have no armor. It'll also drain helpful substances from their body and apply 5 paratoxin stacks. [color=yellow]Paratoxin stacks do oxygen damage over time, and max out at 30 stacks.[/color]
+  components:
+  - type: Action
+    useDelay: 1
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoParatoxinSpit
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: xeno_spit_neuro
 
 - type: entity
   id: ActionXenoScatteredSpit
@@ -434,6 +468,39 @@
   - type: ActionBlockIfResting
 
 - type: entity
+  id: ActionXenoQueenSpitAcid
+  parent: ActionXenoSpit
+  name: Acid Spit (25)
+  description: Launches a projectile that will deal damage to the first enemy that it hits and coat them in acid.
+  components:
+  - type: Action
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: shift_spit_xeno_acid
+  - type: ActionSharedCooldown
+    id: ActionXenoQueenSpitAcid
+    ids:
+    - ActionXenoQueenSpitNeuro
+    cooldown: 2.5
+
+- type: entity
+  id: ActionXenoQueenSpitNeuro
+  parent: ActionXenoSlowingSpit
+  name: Neurotoxin Spit (50)
+  description: Launches a projectile that goes over allies and stuns the first enemy that it hits.
+  components:
+  - type: Action
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: shift_spit_neurotoxin
+    useDelay: 2.5
+  - type: ActionSharedCooldown
+    id: ActionXenoQueenSpitNeuro
+    ids:
+    - ActionXenoQueenSpitAcid
+    cooldown: 2.5
+
+- type: entity
   id: ActionXenoSpitPraetorian
   parent: ActionXenoSpit
   components:
@@ -464,6 +531,7 @@
     event: !type:XenoChargeSpitActionEvent
   - type: XenoActionPlasma
     cost: 50
+  - type: RMCDazeableAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -576,6 +644,23 @@
     cost: 50
 
 - type: entity
+  id: ActionXenoParatoxinSlash
+  parent: ActionXenoBase
+  name: Paratoxin Slashes (100)
+  description: Coat your claws and tail with paratoxin, applying 10 paratoxin stacks for your next 3 slashes. Lasts 5 seconds. [color=yellow]Paratoxin stacks do oxygen damage over time, and max out at 30 stacks.[/color]
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: lurker_inject_neuro
+    useDelay: 10
+  - type: InstantAction
+    event: !type:XenoParatoxinSlashActionEvent
+  - type: XenoActionPlasma
+    cost: 100
+
+- type: entity
   parent: ActionXenoBase
   id: ActionXenoCripplingStrike
   name: Crippling Strike (20) # TODO RMC14 proper plasma costs
@@ -674,7 +759,6 @@
     event: !type:XenoFlingActionEvent
     toggleOutline: false
   - type: XenoOffensiveAction
-  - type: RMCDazeableAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -704,7 +788,6 @@
   - type: WorldTargetAction
     event: !type:XenoLungeActionEvent
   - type: XenoOffensiveAction
-  - type: RMCDazeableAction
   - type: RMCCooldownOnMiss
 
 - type: entity
@@ -761,6 +844,7 @@
     useDelay: 18
   - type: InstantAction
     event: !type:XenoStompActionEvent
+  - type: RMCDazeableAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -784,6 +868,7 @@
     useDelay: 12
   - type: InstantAction
     event: !type:XenoStompActionEvent
+  - type: RMCDazeableAction
 
 - type: entity
   id: ActionXenoCharge
@@ -825,6 +910,7 @@
     useDelay: 0.25
   - type: InstantAction
     event: !type:XenoToggleChargingActionEvent
+  - type: RMCDazeableAction
 
 - type: entity
   parent: ActionXenoFling
@@ -920,6 +1006,7 @@
     - ActionXenoSprayAcidBoiler
     cooldown: 30
     onPerform: false
+  - type: RMCDazeableAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -943,6 +1030,7 @@
     useDelay: 30
   - type: InstantAction
     event: !type:XenoStompActionEvent
+  - type: RMCDazeableAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -1428,6 +1516,7 @@
   - type: InstantAction
     event: !type:XenoCripplingStrikeActionEvent
   - type: ActionBlockIfResting
+  - type: RMCDazeableAction
 
 - type: entity
   parent: ActionXenoBase
@@ -1444,7 +1533,6 @@
   - type: InstantAction
     event: !type:XenoEviscerateActionEvent
   - type: ActionBlockIfResting
-  - type: RMCDazeableAction
 
 - type: entity
   parent: ActionXenoBase
@@ -1464,7 +1552,6 @@
   - type: EntityTargetAction
     event: !type:XenoFlingActionEvent
   - type: XenoOffensiveAction
-  - type: RMCDazeableAction
 
 - type: entity
   parent: ActionXenoBase
@@ -1544,6 +1631,7 @@
   - type: ActionBlockIfResting
   - type: XenoActionPlasma
     cost: 50
+  - type: RMCDazeableAction
 
 - type: entity
   parent: ActionXenoBase
@@ -1651,3 +1739,22 @@
   components:
   - type: Sprite
     state: gas_mine
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoDrainingBite
+  name: Draining Bite
+  description: Drain an enemy, stunning them and removing helpful chemicals from their system, scaling with paratoxin stacks.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: headbite
+    useDelay: 12
+  - type: TargetAction
+    range: 1.5
+    deselectOnMiss: false
+  - type: EntityTargetAction
+    event: !type:XenoDrainingBiteActionEvent
+  - type: XenoOffensiveAction

@@ -37,4 +37,7 @@ public sealed partial class XenoTailJabComponent : Component
 
     [DataField, AutoNetworkedField]
     public float ThrowRange = 1;
+
+    [DataField, AutoNetworkedField]
+    public float BonusDamageMult = 1f;
 }
