@@ -11,13 +11,19 @@ namespace Content.Client._RMC14.Rangefinder;
 [UsedImplicitly]
 public sealed class RangefinderBui : BoundUserInterface
 {
+    [Dependency] private readonly IClipboardManager _clipboard = default!;
+
     private RangefinderWindow? _window;
 
     private readonly AreaSystem _area;
     private readonly SharedTransformSystem _transform;
 
+    private int _lastX;
+    private int _lastY;
+
     public RangefinderBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
+        IoCManager.InjectDependencies(this);
         _area = EntMan.System<AreaSystem>();
         _transform = EntMan.System<SharedTransformSystem>();
     }
@@ -27,6 +33,9 @@ public sealed class RangefinderBui : BoundUserInterface
         base.Open();
         _window = this.CreateWindow<RangefinderWindow>();
         _window.Header.SetMarkupPermissive(Loc.GetString("rmc-rangefinder-header"));
+
+        _window.CopyButton.OnPressed += _ => _clipboard.SetText($"Longitude ({_lastX}), Latitude ({_lastY})");
+
         Refresh();
     }
 
@@ -40,6 +49,9 @@ public sealed class RangefinderBui : BoundUserInterface
 
         if (rangefinder.LastTarget is { } target)
         {
+            _lastX = target.X;
+            _lastY = target.Y;
+
             var msg = Loc.GetString("rmc-rangefinder-longitude", ("x", target.X));
             _window.Longitude.SetMarkupPermissive(msg);
 
