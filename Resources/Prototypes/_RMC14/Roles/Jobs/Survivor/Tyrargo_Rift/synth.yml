@@ -1,0 +1,88 @@
+- type: job
+  parent: RMCSurvivorArmyBase
+  id: RMCSurvivorArmySynth
+  name: rmc-job-name-forecon-synth
+  description: rmc-job-description-forecon
+  playTimeTracker: RMCJobSyntheticColony
+  ranks:
+    RMCRankFirstSergeant: []
+  supervisors: rmc-job-supervisors-commander
+  accessGroups:
+  - ColonistEngi
+  - Synth
+  startingGear: RMCGearArmySynthetic
+  spawnMenuRoleName: UNMC Devil Dogs - Synthetic (Tyrargo Rift Survivor)
+  roleWeight: 0.25
+  icon: "RMCJobIconArmySynth"
+  whitelisted: true
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetArmySynth
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: army_synth
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadUNMC
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: JobPrefix
+      prefix: rmc-job-prefix-synth
+    - type: MeleeWeapon
+      soundHit:
+        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
+        params:
+          variation: 0.15
+          volume: -1
+      angle: 30
+      animation: WeaponArcFist
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 35
+    - type: Synth
+  hidden: true
+
+- type: startingGear
+  id: RMCGearArmySynthetic
+  equipment:
+    id: RMCIDCardSynth
+    back: RMCSatchelArmySurvivorSynthFill
+    jumpsuit: RMCJumpsuitMarineArmy
+    eyes: RMCGlassesTriMaxBronzeFake
+    head: RMCHeadCapFlippable
+    outerClothing: CMArmorM4ArmySynthSurvivorFill
+    suitstorage: RMCScabbardMacheteFilled
+    shoes: CMBootsBlackFilled
+    ears: RMCHeadsetArmy
+    gloves: CMHandsBlackMarine
+    belt: CMBeltMedicalFilled
+    pocket1: RMCPouchSling
+    pocket2: RMCPouchToolsFill
+  inhand:
+    - CMFirstAidKitFilled
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointArmySynth
+  name: army synthetic spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorArmySynth
+  - type: Sprite
+    state: syn_spawn
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconArmySynth
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_army_synth

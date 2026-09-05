@@ -1,0 +1,109 @@
+- type: entity
+  parent: RMCSkillPresetSurvivor
+  id: RMCSkillPresetArmyTrooper
+  name: UNMC Devil Dogs Rifleman
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillConstruction: 0
+      RMCSkillEndurance: 2
+      RMCSkillEngineer: 1
+      RMCSkillFirearms: 1
+      RMCSkillFireman: 1
+      RMCSkillMedical: 1
+      RMCSkillVehicles: 1
+
+- type: entity
+  parent: RMCSkillPresetArmyTrooper
+  id: RMCSkillPresetEngineeringTechnician
+  name: UNMC Devil Dogs Engineering Technician
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillConstruction: 2
+      RMCSkillEngineer: 2
+      RMCSkillFirearms: 1
+      RMCSkillMedical: 1
+      RMCSkillVehicles: 2
+      RMCSkillJtac: 2
+      RMCSkillPowerLoader: 1
+
+- type: entity
+  parent: RMCSkillPresetArmyTrooper
+  id: RMCSkillPresetArmyMedicalTechnician
+  name: UNMC Devil Dogs Medical Technician
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillMedical: 2
+      RMCSkillSurgery: 1
+
+- type: entity
+  parent: RMCSkillPresetArmyTrooper
+  id: RMCSkillPresetArmyMarksman
+  name: UNMC Devil Dogs Marksman
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillMedical: 2
+      RMCSkillFirearms: 2
+      RMCSkillJtac: 2
+      RMCSkillSpecialistWeapons: 1
+
+- type: entity
+  parent: RMCSkillPresetArmyTrooper
+  id: RMCSkillPresetArmyHeavyGunner
+  name: UNMC Devil Dogs Heavy Gunner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillMedical: 2
+      RMCSkillFirearms: 2
+      RMCSkillSmartGun: 1
+
+- type: entity
+  parent: RMCSkillPresetArmyTrooper
+  id: RMCSkillPresetArmySquadLeader
+  name: UNMC Devil Dogs Squad Leader
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillFirearms: 2
+      RMCSkillMedical: 2
+      RMCSkillJtac: 3
+      RMCSkillSmartGun: 1
+      RMCSkillConstruction: 1
+      RMCSkillEngineer: 2
+      RMCSkillLeadership: 2
+
+- type: entity
+  id: RMCSkillPresetArmySynth
+  name: UNMC Devil Dogs Synth
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillCqc: 5
+      RMCSkillEngineer: 4
+      RMCSkillConstruction: 3
+      RMCSkillFirearms: 2
+      RMCSkillOverwatch: 1
+      RMCSkillMedical: 4
+      RMCSkillSurgery: 3
+      RMCSkillResearch: 1
+      RMCSkillMeleeWeapons: 2
+      RMCSkillPilot: 2
+      RMCSkillPolice: 2
+      RMCSkillFireman: 5
+      RMCSkillPowerLoader: 2
+      RMCSkillVehicles: 2
+      RMCSkillJtac: 3
+      RMCSkillIntel: 2
+      RMCSkillDomestics: 2
+      RMCSkillNavigations: 1

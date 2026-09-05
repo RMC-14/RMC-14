@@ -1,0 +1,19 @@
+# ranks needed for tyrargo survivors
+
+- type: rank
+  id: RMCRankArmySpecialist
+  name: Specialist
+  prefix: Spc.
+  paygrade: E4E
+
+- type: rank
+  id: RMCRankArmyPrivateFirstClass
+  name: Private First Class
+  prefix: PFC.
+  paygrade: E3
+
+- type: rank
+  id: RMCRankArmyPrivateSecondClass
+  name: Private Second Class
+  prefix: PSC.
+  paygrade: E2

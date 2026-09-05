@@ -1,0 +1,42 @@
+- type: job
+  parent: RMCSurvivorArmyBase
+  id: RMCSurvivorArmyRifleman
+  name: cm-job-name-rifleman
+  icon: "RMCJobIconArmyRifleman"
+  spawnMenuRoleName: UNMC Devil Dogs - Rifleman (Tyrargo Rift Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetArmyTrooper
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: private
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadUNMC
+    - type: JobPrefix
+      prefix: cm-job-prefix-rifleman
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetArmyFull
+  hidden: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointArmyRifleman
+  name: army rifleman spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorArmyRifleman
+  - type: Sprite
+    state: marine_spawn
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconArmyRifleman
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_trpr

@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/Zenith00000/cmss13/blob/4392fc4ecb1fba8e8bec166bcbf0cac4c0b2ef64/icons/obj/items/clothing/uniforms/uniforms_by_faction/UPP.dmi. Icon modified by kleinerstation13 (Github)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "equipped-INNERCLOTHING",
+      "directions": 4
+    }
+  ]
+}

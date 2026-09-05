@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Made by SharkSnake98 on GitHub",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "bridge"
+    },
+    {
+      "name": "upper_floor"
+    },
+    {
+      "name": "middle_floor"
+    },
+    {
+      "name": "lower_floor"
+    },
+    {
+      "name": "engi"
+    },
+    {
+      "name": "med"
+    },
+    {
+      "name": "mess"
+    },
+    {
+      "name": "maints"
+    },
+    {
+      "name": "dorms"
+    },
+    {
+      "name": "rec_room"
+    },
+    {
+      "name": "cargo"
+    },
+    {
+      "name": "cryo"
+    },
+    {
+      "name": "ai_core"
+    },
+    {
+      "name": "armory"
+    },
+    {
+      "name": "hangar"
+    },
+    {
+      "name": "oob"
+    }
+  ]
+}

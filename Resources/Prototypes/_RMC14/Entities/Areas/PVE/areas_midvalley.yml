@@ -1,0 +1,148 @@
+﻿- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaMidvalleyAICore
+  name: Midvalley AI Core
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_midvalley.rsi
+    state: ai_core
+  - type: Area
+    buildSpecial: true
+    powerNet: ground
+    minimapColor: '#285cb7'
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    paradropping: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: true
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
+    weatherEnabled: false
+
+- type: entity
+  parent: RMCAreaMidvalleyAICore
+  id: RMCAreaMidvalleyArmory
+  name: Midvalley Armory
+  components:
+  - type: Sprite
+    state: armory
+
+- type: entity
+  parent: RMCAreaMidvalleyAICore
+  id: RMCAreaMidvalleyBridge
+  name: Midvalley Bridge
+  components:
+  - type: Sprite
+    state: bridge
+
+- type: entity
+  parent: RMCAreaMidvalleyAICore
+  id: RMCAreaMidvalleyCargo
+  name: Midvalley Cargo
+  components:
+  - type: Sprite
+    state: cargo
+
+- type: entity
+  parent: RMCAreaMidvalleyAICore
+  id: RMCAreaMidvalleyCryo
+  name: Midvalley Cryo
+  components:
+  - type: Sprite
+    state: cryo
+
+- type: entity
+  parent: RMCAreaMidvalleyAICore
+  id: RMCAreaMidvalleyDorms
+  name: Midvalley Dorms
+  components:
+  - type: Sprite
+    state: dorms
+
+- type: entity
+  parent: RMCAreaMidvalleyAICore
+  id: RMCAreaMidvalleyEngi
+  name: Midvalley Engineering
+  components:
+  - type: Sprite
+    state: engi
+
+- type: entity
+  parent: RMCAreaMidvalleyAICore
+  id: RMCAreaMidvalleyHangar
+  name: Midvalley Hangar
+  components:
+  - type: Sprite
+    state: hangar
+
+- type: entity
+  parent: RMCAreaMidvalleyAICore
+  id: RMCAreaMidvalleyLowerFloor
+  name: Midvalley Lower Floor
+  components:
+  - type: Sprite
+    state: lower_floor
+
+- type: entity
+  parent: RMCAreaMidvalleyAICore
+  id: RMCAreaMidvalleyMaints
+  name: Midvalley Maintenance
+  components:
+  - type: Sprite
+    state: maints
+
+- type: entity
+  parent: RMCAreaMidvalleyAICore
+  id: RMCAreaMidvalleyMed
+  name: Midvalley Medical Bay
+  components:
+  - type: Sprite
+    state: med
+
+- type: entity
+  parent: RMCAreaMidvalleyAICore
+  id: RMCAreaMidvalleyMess
+  name: Midvalley Mess Hall
+  components:
+  - type: Sprite
+    state: mess
+
+- type: entity
+  parent: RMCAreaMidvalleyAICore
+  id: RMCAreaMidvalleyMiddleFloor
+  name: Midvalley Middle Floor
+  components:
+  - type: Sprite
+    state: middle_floor
+
+- type: entity
+  parent: RMCAreaMidvalleyAICore
+  id: RMCAreaMidvalleyOOB
+  name: Midvalley Out Of Bounds
+  components:
+  - type: Sprite
+    state: oob
+  - type: Area
+    alwaysPowered: true
+
+- type: entity
+  parent: RMCAreaMidvalleyAICore
+  id: RMCAreaMidvalleyRecRoom
+  name: Midvalley Rec-Room
+  components:
+  - type: Sprite
+    state: rec_room
+
+- type: entity
+  parent: RMCAreaMidvalleyAICore
+  id: RMCAreaMidvalleyUpperFloor
+  name: Midvalley Upper Floor
+  components:
+  - type: Sprite
+    state: upper_floor
