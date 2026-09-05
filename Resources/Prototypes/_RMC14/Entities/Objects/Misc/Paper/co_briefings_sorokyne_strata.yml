@@ -1,0 +1,33 @@
+# Sorokyne Strata
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingSorokyneUnaligned
+  suffix: Sorokyne Strata, Unaligned
+  components:
+  - type: Paper
+    content: rmc-co-briefing-sorokyne-unaligned
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingSorokyneHawks
+  suffix: Sorokyne Strata, Hawks
+  components:
+  - type: Paper
+    content: rmc-co-briefing-sorokyne-hawks
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingSorokyneDoves
+  suffix: Sorokyne Strata, Doves
+  components:
+  - type: Paper
+    content: rmc-co-briefing-sorokyne-doves
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingSorokyneMagpies
+  suffix: Sorokyne Strata, Magpies
+  components:
+  - type: Paper
+    content: rmc-co-briefing-sorokyne-magpies

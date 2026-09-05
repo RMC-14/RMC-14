@@ -537,6 +537,16 @@
 
 - type: entity
   parent: CMCoatCO
+  id: RMCCoatCOPatchless
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/patchless.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/patchless.rsi
+
+- type: entity
+  parent: CMCoatCO
   id: CMCoatCOFormalWhite
   name: commanding officer white dress jacket
   description: A white dress tunic for hot-weather parades. Bright, unstained, and immaculate with gold accents.
