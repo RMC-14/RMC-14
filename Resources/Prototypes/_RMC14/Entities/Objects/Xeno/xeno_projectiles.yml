@@ -77,14 +77,7 @@
     damage:
       types:
         Heat: 30 # TODO RMC14 damage fall-off and higher at close range
-  - type: ModifyTargetOnHit
-    add:
-    - type: UserAcided
-      armorPiercing: 40
-      damage:
-        types:
-          Heat: 1
-      duration: 20
+  - type: XenoAcidOnHit
     whitelist:
       components:
       - Marine
@@ -260,14 +253,7 @@
     slow: 0
     paralyze: 4
     armorResistsKnockdown: false
-  - type: ModifyTargetOnHit
-    add:
-    - type: UserAcided
-      armorPiercing: 40
-      damage:
-        types:
-          Heat: 1
-      duration: 20
+  - type: XenoAcidOnHit
     whitelist:
       components:
       - Marine
