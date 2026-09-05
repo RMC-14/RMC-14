@@ -42,7 +42,7 @@ public sealed partial class LoadoutGroupContainer : BoxContainer
     {
         var protoMan = collection.Resolve<IPrototypeManager>();
         var loadoutSystem = collection.Resolve<IEntityManager>().System<LoadoutSystem>();
-        RestrictionsContainer.DisposeAllChildren();
+        RestrictionsContainer.RemoveAllChildren();
 
         if (_groupProto.MinLimit > 0)
         {
@@ -62,16 +62,18 @@ public sealed partial class LoadoutGroupContainer : BoxContainer
             });
         }
 
-        if (protoMan.TryIndex(loadout.Role, out var roleProto) && roleProto.Points != null && loadout.Points != null)
+        if (protoMan.TryIndex(loadout.Role, out var roleProto) &&
+            roleProto.Points is { } maxPoints &&
+            loadout.Points is { } points)
         {
             RestrictionsContainer.AddChild(new Label()
             {
-                Text = Loc.GetString("loadouts-points-limit", ("count", loadout.Points.Value), ("max", roleProto.Points.Value)),
+                Text = Loc.GetString("loadouts-points-limit", ("count", points), ("max", maxPoints)),
                 Margin = new Thickness(5, 0, 5, 5),
             });
         }
 
-        LoadoutsContainer.DisposeAllChildren();
+        LoadoutsContainer.RemoveAllChildren();
 
         // Get all loadout prototypes for this group.
         var validProtos = _groupProto.Loadouts.Select(id => protoMan.Index(id));
@@ -219,15 +221,6 @@ public sealed partial class LoadoutGroupContainer : BoxContainer
         var pressed = selected.Any(e => e.Prototype == proto.ID);
 
         var enabled = loadout.IsValid(profile, session, proto.ID, collection, out var reason);
-
-        if (proto.Cost != null && loadout.Points != null)
-        {
-            if (loadout.Points < proto.Cost && pressed)
-            {
-                reason = null;
-                enabled = true;
-            }
-        }
 
         var cont = new LoadoutContainer(proto, !enabled, reason);
 

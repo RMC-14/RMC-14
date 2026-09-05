@@ -52,4 +52,10 @@ public sealed partial class AntagPrototype : IPrototype
     /// </summary>
     [DataField]
     public List<ProtoId<GuideEntryPrototype>>? Guides;
+
+    /// <summary>
+    /// Optional starting gear used for character preview when no jobs are selected.
+    /// </summary>
+    [DataField]
+    public ProtoId<StartingGearPrototype>? PreviewStartingGear { get; private set; }
 }
