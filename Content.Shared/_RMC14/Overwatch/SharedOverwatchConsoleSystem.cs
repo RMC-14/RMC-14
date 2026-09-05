@@ -445,7 +445,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             return;
         }
 
-        _squad.PromoteSquadLeader((target.Value, member), args.Actor, args.Icon);
+        _squad.PromoteSquadLeader((target.Value, member), args.Actor, args.HasLeaderIcon, args.Icon);
         var state = GetOverwatchBuiState(ent);
         _ui.SetUiState(ent.Owner, OverwatchConsoleUI.Key, state);
     }
@@ -702,7 +702,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
                 continue;
 
             var netUid = GetNetEntity(uid);
-            var squad = new OverwatchSquad(netUid, Name(uid), team.Color, null, team.CanSupplyDrop, team.LeaderIcon, new Dictionary<SquadObjectiveType, string>(team.Objectives));
+            var squad = new OverwatchSquad(netUid, Name(uid), team.Color, null, team.CanSupplyDrop, team.HasLeaderIcon, team.LeaderIcon, new Dictionary<SquadObjectiveType, string>(team.Objectives));
             var members = marines.GetOrNew(netUid);
 
             foreach (var member in team.Members)
