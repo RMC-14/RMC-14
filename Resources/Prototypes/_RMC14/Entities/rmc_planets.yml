@@ -301,12 +301,15 @@
       - CMSurvivorTrijentResearcher: 2
     survivorJobScenarios:
       spp_bar:
+      - RMCSurvivorCommandingOfficer: 1
       - CMSurvivorDoctor: 1
       - CMSurvivorEngineer: 1
       - CMSurvivorSecurity: 2
       - CMSurvivor: -1
     survivorJobVariantScenarios:
       spp_bar:
+        RMCSurvivorCommandingOfficer:
+        - RMCSurvivorSPPCrashlandCommander: 1
         CMSurvivorDoctor:
         - RMCSurvivorSPPCrashlandMedic: 1
         CMSurvivorEngineer:

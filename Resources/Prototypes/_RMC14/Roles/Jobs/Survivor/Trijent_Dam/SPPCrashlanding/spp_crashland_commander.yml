@@ -1,0 +1,109 @@
+- type: job
+  parent: RMCSurvivorSPPCrashlandBase
+  id: RMCSurvivorSPPCrashlandCommander
+  name: rmc-job-name-crashland-officer
+  startingGear: RMCGearSPPCrashlandCommander
+  ranks:
+    RMCRankSPPMayjor: []
+  icon: "RMCJobIconSurvivorSPPCrashlandCommander"
+  playTimeTracker: RMCJobSurvivorCO
+  greeting: rmc-job-greeting-crashland-officer
+  spawnMenuRoleName: SPP Airborne Commander (Trijent Special Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: CommandAccent
+    - type: InnateCommandSpeech
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      preset: RMCSkillPresetSurvivorSPPCommander
+    - type: Language
+      spokenLanguages:
+      - English
+      - French
+      - Japanese
+      - Scandinavian
+      - Russian
+      - German
+      - Chinese
+      - Spanish
+      understoodLanguages:
+      - English
+      - French
+      - Japanese
+      - Russian
+      - Scandinavian
+      - German
+      - Chinese
+      - Spanish
+      currentLanguage: Russian
+      defaultLanguage: Russian
+    - type: MarineOrders
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      squad: SquadSPP
+    - type: JobPrefix
+      prefix: rmc-job-prefix-crashland-officer
+    - type: RMCTrackable
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetSPPCrashlandWeaponOnly
+    - type: RMCSurvivor
+    - type: RMCAllowSuitStorage
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearSPPCrashlandBase
+  id: RMCGearSPPCrashlandCommander
+  equipment:
+    jumpsuit: CMJumpsuitSPPOfficer
+    ears: RMCHeadsetSPPCrashland
+    back: CMSatchelSecureStandard
+    belt: RMCBeltHolsterPistolSPP
+    outerClothing: RMCCoatSPP
+    id: CMIDCardGoldSPPOfficer
+    head: CMHeadCapSPPPeaked
+    pocket1: RMCPouchFirstAid
+    pocket2: RMCPouchDocumentSmall
+  storage:
+    back: # They're supposed to get a cyanide pill, but I don't trust survivors to not accidentally swallow it
+    - RMCRadioHandheldColony
+    pocket1:
+    - CMBicaridineAutoInjector
+    - CMKelotaneAutoInjector
+    - CMEmergencyAutoInjector
+    - CMGauze10
+    pocket2:
+    - CMClipboard
+    belt:
+    - RMCMagazinePistolT73
+    - RMCMagazinePistolT73
+    - RMCMagazinePistolT73
+    - RMCMagazinePistolT73
+    - RMCMagazinePistolT73
+    - RMCMagazinePistolT73
+    - RMCWeaponPistolT74
+    outerClothing:
+    - RMCBinoculars
+    - CMCrowbar
+    - RMCHandcuffs
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSPPCrashlandCommander
+  name: special survivor spp crashland commander spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSPPCrashlandCommander
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv_spp
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSurvivorSPPCrashlandCommander
+  icon:
+    sprite: _RMC14/Interface/job_icons/SPP/standard.rsi
+    state: spp_co
