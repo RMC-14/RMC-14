@@ -168,6 +168,11 @@
     - offset: 0,2
       radius: 1
       interiorCoords: 0.5,-1
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-tank
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: VehicleTankBase

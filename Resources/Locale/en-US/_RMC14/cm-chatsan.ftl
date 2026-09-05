@@ -58,11 +58,16 @@ cm-chatsan-replacement-eorg-xeno = sister harm
 cm-chatsan-word-sniper = sniper
 cm-chatsan-replacement-sniper = long spitter
 
+cm-chatsan-replacement-xm43e1 = special heavy long spitter
+cm-chatsan-replacement-m96s = special long spitter
+
 cm-chatsan-word-flare = flare
 cm-chatsan-replacement-flare = glow stick
 
 cm-chatsan-word-flares = flares
 cm-chatsan-replacement-flares = glow sticks
+
+cm-chatsan-replacement-flare-cas = green stick
 
 cm-chatsan-word-synth = synth
 cm-chatsan-replacement-synth = fake host
@@ -180,6 +185,10 @@ cm-chatsan-replacement-orbital-bomb = skyfire
 
 cm-chatsan-word-orbital-bombardment = orbital bombardment
 cm-chatsan-replacement-orbital-bombardment = skyfire
+
+cm-chatsan-replacement-orbital-cannon = skyfire launcher
+cm-chatsan-replacement-orbital-cannon-shell = skyfire stick
+cm-chatsan-replacement-orbital-cannon-fuel = skyfire plasma
 
 cm-chatsan-word-engie = engie
 cm-chatsan-replacement-engie = tall builder
@@ -395,6 +404,11 @@ cm-chatsan-replacement-grenade = boomstick
 cm-chatsan-word-grenades = grenades
 cm-chatsan-replacement-grenades = boomsticks
 
+cm-chatsan-replacement-training-grenade = fake boomstick
+cm-chatsan-replacement-incendiary-grenade = fire boomstick
+cm-chatsan-replacement-smoke-grenade = smoke boomstick
+cm-chatsan-replacement-wp-grenade = fire smoke boomstick
+
 cm-chatsan-word-gl = gl
 cm-chatsan-replacement-gl = boomstick launcher
 
@@ -413,7 +427,9 @@ cm-chatsan-replacement-ammo = spits
 # TODO RMC14 rouny > runner but only if no rouny was spawned in the round
 
 # cm-chatsan-word-#tank = #tank
-# cm-chatsan-replacement-#tank = turtle
+cm-chatsan-replacement-tank = metal beast
+
+cm-chatsan-replacement-arc = metal beetle
 
 cm-chatsan-word-laser = laser
 cm-chatsan-replacement-laser = dot
@@ -421,11 +437,21 @@ cm-chatsan-replacement-laser = dot
 cm-chatsan-word-lazer = lazer
 cm-chatsan-replacement-lazer = dot
 
+cm-chatsan-replacement-laser-cas = red dot
+cm-chatsan-replacement-laser-range = green dot
+
+cm-chatsan-replacement-binoculars = far seer
+cm-chatsan-replacement-rangefinder = green dot caller
+cm-chatsan-replacement-laser-designator = red dot caller
+cm-chatsan-replacement-laser-designator-special = special red dot caller
+
 cm-chatsan-word-flamer = flamer
 cm-chatsan-replacement-flamer = fire spitter
 
 cm-chatsan-word-flamethrower = flamethrower
 cm-chatsan-replacement-flamethrower = fire spitter
+
+cm-chatsan-replacement-m34t = special fire spitter
 
 cm-chatsan-word-sadar = sadar
 cm-chatsan-replacement-sadar = tuber
@@ -433,8 +459,12 @@ cm-chatsan-replacement-sadar = tuber
 cm-chatsan-word-rocket = rocket
 cm-chatsan-replacement-rocket = boom spit
 
+cm-chatsan-replacement-rocket-wp = burning boom spit
+
 cm-chatsan-word-grenadier = grenadier
 cm-chatsan-replacement-grenadier = boomstick spitter
+
+cm-chatsan-replacement-m83 = special boomstick launcher
 
 cm-chatsan-word-scout = scout spec
 cm-chatsan-replacement-scout = tall lurker
@@ -442,14 +472,22 @@ cm-chatsan-replacement-scout = tall lurker
 cm-chatsan-word-scout-specialist = scout specialist
 cm-chatsan-replacement-scout-specialist = tall lurker
 
+cm-chatsan-replacement-scout-m4spr = special spitter
+
 cm-chatsan-word-mortar = mortar
 cm-chatsan-replacement-mortar = skyboom
+
+cm-chatsan-replacement-mortar-kit = skyboom launcher
+cm-chatsan-replacement-mortar-shell = skyboom stick
 
 cm-chatsan-word-demo = demo
 cm-chatsan-replacement-demo = boom tuber
 
 cm-chatsan-word-demolitionist = demolitionist
 cm-chatsan-replacement-demolitionist = boom tuber
+
+cm-chatsan-replacement-rocket-launcher = boom tube
+cm-chatsan-replacement-m5atl = special boom tube
 
 cm-chatsan-word-ws = ws
 cm-chatsan-replacement-ws = special tall
@@ -493,6 +531,8 @@ cm-chatsan-replacement-smartgunner = smart spitter
 cm-chatsan-word-smart-gunner = smart gunner
 cm-chatsan-replacement-smart-gunner = smart spitter
 
+cm-chatsan-replacement-su6 = small smart spitter
+
 cm-chatsan-word-sentry = sentry
 cm-chatsan-word-turret = turret
 cm-chatsan-replacement-sentry = auto spitter
@@ -500,6 +540,11 @@ cm-chatsan-replacement-sentry = auto spitter
 cm-chatsan-word-sentries = sentries
 cm-chatsan-word-turrets = turrets
 cm-chatsan-replacement-sentries = auto spitters
+
+cm-chatsan-replacement-sniper-sentry = long auto spitter
+cm-chatsan-replacement-shotgun-sentry = scatter auto spitter
+cm-chatsan-replacement-fire-sentry = fire auto spitter
+cm-chatsan-replacement-tesla-sentry = zapping pillar
 
 cm-chatsan-word-squad = squad
 cm-chatsan-replacement-squad = caste
@@ -635,6 +680,11 @@ cm-chatsan-word-barricades = barricades
 cm-chatsan-word-cades = cades
 cm-chatsan-replacement-barricades = metal resin
 
+cm-chatsan-replacement-folding-barricade = metal resin door
+
+cm-chatsan-replacement-plasteel-barricade = hard metal resin
+cm-chatsan-replacement-folding-plasteel-barricade = hard metal resin door
+
 cm-chatsan-word-barbed = barbed
 cm-chatsan-replacement-barbed = spiked
 
@@ -731,6 +781,8 @@ cm-chatsan-replacement-generators = light cores
 
 cm-chatsan-word-gens = gens
 cm-chatsan-word-replacement-gens = light cores
+
+cm-chatsan-replacement-wall-apc = light box
 
 cm-chatsan-word-disk = disk
 cm-chatsan-word-disc = disc
@@ -852,6 +904,10 @@ cm-chatsan-word-replacement-m54c = spitter
 
 cm-chatsan-word-m42a2 = m42a2
 cm-chatsan-word-replacement-m42a2 = scatter spitter
+
+cm-chatsan-word-replacement-xm51 = wall-melting spitter
+
+cm-chatsan-word-replacement-xm88 = clicking spitter
 
 cm-chatsan-word-m34 = m34
 cm-chatsan-word-replacement-m34 = fire spitter

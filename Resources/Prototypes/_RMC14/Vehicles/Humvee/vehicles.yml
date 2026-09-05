@@ -340,3 +340,9 @@
     - offset: 1,-0.1
       radius: 0.5
       interiorCoords: 3.56, -0.42
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-arc
+    whitelist:
+      components:
+      - Xeno
+
