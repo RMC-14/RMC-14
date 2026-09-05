@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Increased Tesla Coil range from 3 to 3.95 tiles.
-    type: Fix
-  id: 3129
-  time: '2026-04-22T00:05:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9687
 - author: Vixting
   changes:
   - message: Resin surge now has an overlay.
@@ -4473,5 +4466,12 @@
   id: 3628
   time: '2026-09-04T21:54:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10495
+- author: MortalBaguette
+  changes:
+  - message: The ability to make Lexorin has been disabled.
+    type: Fix
+  id: 3629
+  time: '2026-09-05T00:04:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10570
 Name: RMC14
 Order: -1
