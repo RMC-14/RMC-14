@@ -9,6 +9,7 @@
   startingGear: RMCJobCLFDoctorPVE
   icon: RMCJobIconCLFMedic
   joinNotifyCrew: false
+  supervisors: cm-job-supervisors-clf-cmdr-lead
   accessGroups:
   - Colony
   - HospitalCorpsman
@@ -21,7 +22,18 @@
       - CLF
     - type: Skills
       preset: RMCSkillPresetPVECLFDoctor
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      understoodLanguages:
+      - Japanese
+      - English
+      currentLanguage: Japanese
+      defaultLanguage: Japanese
     - type: SquadArmorWearer
+    - type: AssignSquad
+      squad: SquadCLF
     - type: JobPrefix
       prefix: rmc-job-prefix-clf-pve-doctor
     - type: DemoSpecWhitelist
@@ -47,10 +59,9 @@
   id: RMCJobCLFDoctorPVE
   equipment:
     id: RMCIDCardCLFDoctorPVE
-    jumpsuit: RMCJumpsuitCLFSoldier
-    shoes: RMCShoesJackbootsFilled
-    outerClothing: RMCLabcoat
-    ears: RMCHeadsetDistressCLF
+    jumpsuit: RMCJumpsuitCLFPVEDoctor
+    shoes: RMCShoesCombat
+    ears: RMCHeadsetDistressCLFPVE
 
 - type: playTimeTracker
   id: CMJobCLFDoctorPVE

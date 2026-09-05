@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/789a362bc55d2d6331bc89699bb4f9f792695853/icons/obj/items/storage/packets.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/789a362bc55d2d6331bc89699bb4f9f792695853/icons/obj/items/storage/packets.dmi, improvbox, IED, and IFB sprites by Drazamuffin",
   "size": {
     "x": 32,
     "y": 32
@@ -48,6 +48,12 @@
     },
     {
       "name": "teargas_nade_placeholder_e"
+    },
+    {
+      "name": "improvbox_nade_placeholder"
+    },
+    {
+      "name": "improvbox_nade_placeholder_e"
     },
     {
       "name": "m94"
@@ -192,6 +198,12 @@
     },
     {
       "name": "ccdp"
+    },
+    {
+      "name": "ied"
+    },
+    {
+      "name": "ifb"
     },
     {
       "name": "ccdp_packet"

@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Empty sprite taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/structures/gun_racks.dmi modified by Drazamuffin, filled state by Drazamuffin modified from https://github.com/cmss13-devs/cmss13/blob/168c8a79a3d858a8c531ff7ed0bc3033e47d1d16/icons/mob/humans/onmob/items_righthand_1.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "empty"
+    },
+    {
+      "name": "fill_1"
+    },
+    {
+      "name": "fill_2"
+    },
+    {
+      "name": "fill_3"
+    },
+    {
+      "name": "fill_4"
+    },
+    {
+      "name": "fill_5"
+    },
+    {
+      "name": "fill_6"
+    },
+    {
+      "name": "fill_7"
+    }
+  ]
+}
