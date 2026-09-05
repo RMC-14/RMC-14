@@ -111,6 +111,13 @@
   parent: RMCXenoCarrierBase
   id: CMXenoCarrier
   components:
+  - type: RMCKeybindActions
+    actions:
+      XenoPrimaryOne: [ ActionXenoPlantWeeds ]
+      XenoPrimaryTwo: [ ActionXenoResinHole ]
+      XenoPrimaryThree: [ ActionXenoThrowParasite ]
+      XenoPrimaryFour: [ ActionXenoRetrieveEgg ]
+      XenoPrimaryFive: [ ActionXenoOrderConstruction ]
   - type: GuideHelp
     guides:
     - RMCGuideRoleCarrier
@@ -162,6 +169,12 @@
   id: RMCXenoCarrierEggsac
   suffix: Eggsac
   components:
+  - type: RMCKeybindActions
+    actions:
+      XenoPrimaryOne: [ ActionXenoPlantWeeds ]
+      XenoPrimaryThree: [ ActionXenoGenerateEggs ]
+      XenoPrimaryFour: [ ActionXenoRetrieveEgg ]
+      XenoPrimaryFive: [ ActionXenoOrderConstruction ]
   - type: CanBuildThickFromConstructNode
   - type: GuideHelp
     guides:
