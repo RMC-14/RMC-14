@@ -295,7 +295,7 @@
     - RMCWeaponLauncherDisposable: RMCSpawnerRandomRocketsDisposable
     - RMCWeaponFlamer: RMCTankFlamer
     - WeaponShotgunM890: RMCSpawnerRandomShotgunBoxes
-    - RMCWeaponLauncherM85A1: RMCSpawnerRandomGrenadePackets
+    - RMCWeaponLauncherM79: RMCSpawnerRandomGrenadePackets
     - RMCMK80: CMMagazinePistolMK80
 
 - type: entity
