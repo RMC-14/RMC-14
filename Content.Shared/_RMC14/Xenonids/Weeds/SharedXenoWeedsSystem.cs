@@ -240,11 +240,17 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
     private void OnWallWeedsRemove<T>(Entity<XenoWallWeedsComponent> ent, ref T args)
     {
-        if (!TryComp(ent.Comp.Weeds, out XenoWeedsComponent? weeds))
-            return;
+        if (_weedsQuery.TryComp(ent.Comp.Weeds, out var weeds))
+        {
+            weeds.Spread.Remove(ent);
+            Dirty(ent.Comp.Weeds.Value, weeds);
+        }
 
-        weeds.Spread.Remove(ent);
-        Dirty(ent.Comp.Weeds.Value, weeds);
+        if (TryComp(ent.Comp.WeededSurface, out XenoWeedableComponent? weedable))
+        {
+            weedable.Entity = null;
+            Dirty(ent.Comp.WeededSurface.Value, weedable);
+        }
     }
 
     private void OnWeedableAnchorStateChanged(Entity<XenoWeedableComponent> weedable, ref AnchorStateChangedEvent args)
