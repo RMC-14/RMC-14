@@ -12,4 +12,7 @@ public sealed partial class TacticalMapIconComponent : Component
 
     [DataField, AutoNetworkedField]
     public SpriteSpecifier.Rsi? Background;
+
+    [DataField, AutoNetworkedField]
+    public float Opacity = 1f;
 }

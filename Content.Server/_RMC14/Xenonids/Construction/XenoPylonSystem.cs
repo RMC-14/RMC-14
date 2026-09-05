@@ -22,6 +22,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Robust.Shared.Spawners;
 
 namespace Content.Server._RMC14.Xenonids.Construction;
 
@@ -47,6 +48,7 @@ public sealed class XenoPylonSystem : SharedXenoPylonSystem
         base.Initialize();
 
         SubscribeLocalEvent<HiveCoreComponent, DestructionEventArgs>(OnHiveCoreDestruction);
+        SubscribeLocalEvent<HiveCoreComponent, TimedDespawnEvent>(OnHiveCoreDestruction);
 
         SubscribeLocalEvent<XenoComponent, GhostRoleSpawnerUsedEvent>(OnXenoSpawnerUsed);
 
@@ -57,7 +59,7 @@ public sealed class XenoPylonSystem : SharedXenoPylonSystem
         SubscribeLocalEvent<HiveCoreComponent, StepTriggeredOffEvent>(OnHiveCoreStepTriggered);
     }
 
-    private void OnHiveCoreDestruction(Entity<HiveCoreComponent> ent, ref DestructionEventArgs args)
+    private void OnHiveCoreDestruction<T>(Entity<HiveCoreComponent> ent, ref T args)
     {
         if (_hive.GetHive(ent.Owner) is { } hive &&
             _gameTicker.RoundDuration() > hive.Comp.PreSetupCutoff)
