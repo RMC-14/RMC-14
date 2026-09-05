@@ -305,9 +305,6 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public bool AresPreflightDone;
 
     [DataField]
-    public bool AresMapDone;
-
-    [DataField]
     public int AresAnnouncementIndex;
 
     [DataField]
