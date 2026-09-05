@@ -116,7 +116,7 @@
 - type: loadout
   id: WhiteServiceJumpsuitRMC
   equipment:
-    jumpsuit: RMCJumsuitWhiteService
+    jumpsuit: RMCJumpsuitWhiteService
 
 - type: loadout
   id: LiaisonBlueJumpsuitRMC
