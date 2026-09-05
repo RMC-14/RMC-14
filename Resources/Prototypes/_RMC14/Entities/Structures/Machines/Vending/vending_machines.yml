@@ -839,6 +839,8 @@
         amount: 2
       - id: DrinkMugRed
         amount: 2
+      - id: RMCHeadCapChefPaperHat
+        amount: 3
 
 - type: entity
   parent: CMVendorDinnerware
@@ -889,72 +891,72 @@
       entries:
       - id: FoodContainerEgg
         amount: 12
-      - id: FoodMeatChicken
-        amount: 24
-      - id: FoodMeatFish
-        amount: 18
-      - id: RMCFoodMeatFish
+      - id: RMCBoxChicken
         amount: 12
-      - id: FoodMeat
-        amount: 24
-      - id: FoodMeatBacon
-        amount: 24
-      - id: FoodMeatSausage
-        amount: 18
-      - id: RMCDrinkMilkCarton
-        amount: 24
-      - id: RMCDrinkSoyMilkCarton
+      - id: RMCBoxCarp
         amount: 12
-      - id: RMCCondimentEnzyme
+      - id: RMCBoxFish
         amount: 12
-      - id: ReagentContainerFlour
+      - id: RMCBoxMeat
         amount: 12
-      - id: RMCCondimentSugar
+      - id: RMCBoxBacon
         amount: 12
-      - id: RMCCondimentCornOil
+      - id: RMCBoxSausage
         amount: 12
-      - id: RMCCondimentSmallSalt
+      - id: RMCBoxMilk
         amount: 12
-      - id: RMCCondimentSmallPepper
+      - id: RMCBoxSoyMilk
+        amount: 12
+      - id: RMCBoxEnzyme
+        amount: 12
+      - id: RMCBoxFlour
+        amount: 12
+      - id: RMCBoxSugar
+        amount: 12
+      - id: RMCBoxCornOil
+        amount: 12
+      - id: RMCBoxSalt
+        amount: 12
+      - id: RMCBoxPepper
         amount: 12
       # TODO RMC14 Mint 12
-      - id: FoodApple
+      - id: RMCBoxApple
         amount: 12
-      - id: FoodBanana
+      - id: RMCBoxBanana
         amount: 12
-      - id: FoodMushroom
+      - id: RMCBoxChanterelle
         amount: 12
-      - id: FoodCherry
+      - id: RMCBoxCherries
         amount: 12
-      - id: FoodChiliPepper
+      - id: RMCBoxChili
         amount: 12
-      - id: FoodCabbage
+      - id: RMCBoxCabbage
         amount: 12
-      - id: FoodCarrot
+      - id: RMCBoxCarrot
         amount: 12
-      - id: FoodCorn
+      - id: RMCBoxCorn
         amount: 12
-      - id: FoodEggplant
+      - id: RMCBoxEggplant
         amount: 12
-      - id: FoodLemon
+      - id: RMCBoxLemon
         amount: 12
-      - id: FoodLime
+      - id: RMCBoxLime
         amount: 12
-      - id: FoodOrange
+      - id: RMCBoxOrange
         amount: 12
-      - id: FoodPotato
+      - id: RMCBoxPotato
         amount: 12
-      - id: FoodTomato
+      - id: RMCBoxTomato
         amount: 12
-      - id: FoodWhiteBeet
+      - id: RMCBoxWhiteBeet
         amount: 12
-      - id: FoodOnion
+      - id: RMCBoxOnion
         amount: 12
-      - id: FoodOnionRed
+      - id: RMCBoxOnionRed
         amount: 12
-      - id: FoodGarlic
+      - id: RMCBoxGarlic
         amount: 12
-      - id: ReagentContainerRice
+      - id: RMCBoxRice
         amount: 12
       - id: ReagentContainerOliveoil
         amount: 12

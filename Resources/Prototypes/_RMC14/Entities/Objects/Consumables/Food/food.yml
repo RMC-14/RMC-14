@@ -554,6 +554,15 @@
     - meaty
   - type: Food
     transferAmount: 5
+  - type: Temperature
+    currentTemperature: 290
+  - type: InternalTemperature
+    thickness: 0.02
+    area: 0.02
+  - type: Construction
+    graph: Sausage
+    node: start
+    defaultTarget: cooked sausage
   - type: SolutionContainerManager
     solutions:
       food:
@@ -561,9 +570,6 @@
         reagents:
         - ReagentId: Protein
           Quantity: 4
-  - type: Construction
-    graph: FoodMeatSausage
-    node: start
 
 - type: entity
   name: cooked sausage
@@ -577,6 +583,9 @@
   - type: FlavorProfile
     flavors:
     - meaty
+  - type: Construction
+    graph: Sausage
+    node: cooked sausage
   - type: Food
     transferAmount: 5
   - type: SolutionContainerManager
@@ -773,3 +782,36 @@
           Quantity: 8
         - ReagentId: Protein
           Quantity: 4
+
+- type: entity
+  name: chicken noodle soup
+  parent: FoodBowlBase
+  id: RMCSoupChickenNoodle
+  description: Better than the canned stuff!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - savory
+    - chicken
+    - cheapnoodles
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/soup.rsi
+    layers:
+    - state: bowl
+    - state: chicken-noodle
+
+- type: entity
+  name: clam chowder soup
+  parent: FoodBowlBase
+  id: RMCSoupClamChowder
+  description: What's this Chow-DER, it's CHOWDAH! Say it roight!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - savory
+    - creamy
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/soup.rsi
+    layers:
+    - state: bowl
+    - state: clam-chowder

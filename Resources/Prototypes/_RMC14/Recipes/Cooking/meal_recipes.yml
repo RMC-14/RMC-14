@@ -449,6 +449,16 @@
     Rice: 5
 
 - type: microwaveMealRecipe
+  id: RecipeRMCCrabBurger
+  name: rmc crab burger recipe
+  result: FoodBurgerCrab
+  time: 10
+  group: Savory
+  solids:
+    RMCFoodMeatFishCrab: 2
+    FoodBreadBun: 1
+
+- type: microwaveMealRecipe
   id: RecipeRMCFishSushiCrabShell
   name: shelled crab sushi roll recipe
   result: RMCFoodMeatFishSushi
@@ -572,6 +582,7 @@
   id: RecipeBlackForest
   name: black forest cake recipe
   result: FoodCakeBlackForest
+  group: Cake
   time: 5
   solids:
     FoodCakeChocolate: 1
@@ -583,6 +594,7 @@
   id: RecipeRMCPizzaSupreme
   name: supreme pizza recipe
   result: RMCFoodPizzaSupremeFull
+  group: Pizza
   time: 30
   solids:
     FoodDoughFlat: 1
@@ -598,23 +610,13 @@
   name: calabresa pizza recipe
   result: RMCFoodPizzaCalabresaFull
   time: 30
+  group: Pizza
   solids:
     FoodDoughFlat: 1
     FoodMeatSausage: 2
     FoodCheeseSlice: 1
     FoodTomato: 1
     FoodOnionSlice: 1
-
-- type: microwaveMealRecipe
-  id: RecipeCakeBlackForest
-  name: black forest cake recipe
-  result: FoodCakeBlackForest
-  time: 5
-  solids:
-    FoodCakeChocolate: 1
-    FoodCherry: 1
-  reagents:
-    Cream: 10
 
 - type: microwaveMealRecipe
   id: RecipeVanillaCake
@@ -772,3 +774,32 @@
     FoodBreadBaguette: 1
     FoodMeatCutlet: 3
     FoodCheeseSlice: 1
+
+- type: microwaveMealRecipe
+  id: RecipeChickenNoodleSoup
+  name: chicken noodle soup recipe
+  result: RMCSoupChickenNoodle
+  time: 15
+  group: Savory
+  reagents:
+    Water: 10
+  solids:
+    FoodBowlBig: 1
+    FoodMeatChickenCutlet: 1
+    FoodNoodlesBoiled: 1
+    FoodCarrot: 1
+
+- type: microwaveMealRecipe
+  id: RecipeClamChowder
+  name: clam chowder recipe
+  result: RMCSoupClamChowder
+  time: 15
+  group: Savory
+  reagents:
+    Milk: 10
+  solids:
+    FoodBowlBig: 1
+    FoodButterSlice: 1
+    RMCFoodFishClam: 1
+    FoodCarrot: 1
+    FoodPotato: 1
