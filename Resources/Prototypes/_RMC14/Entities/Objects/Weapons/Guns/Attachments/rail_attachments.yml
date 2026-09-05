@@ -720,19 +720,19 @@
 
 - type: entity
   parent: RMCAttachmentS42xTelescopicMiniscope
-  id: RMCAttachmentL89Scope
-  name: L89 integrated optic
+  id: RMCAttachmentE290Scope
+  name: E290A1/D integrated optic
   description: The rifle's about as useful as you are now, you wanker. Put it back on.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_rail.rsi
-    state: l89_scope
+    state: e290_scope
   - type: AttachableVisuals
     suffix: ""
   - type: Tag
     tags:
     - RMCAttachmentRail
-    - RMCAttachmentL89Scope
+    - RMCAttachmentE290Scope
 
 - type: Tag
   id: RMCAttachmentRail
@@ -798,4 +798,4 @@
   id: RMCAttachmentMGLIntegratedScope
 
 - type: Tag
-  id: RMCAttachmentL89Scope
+  id: RMCAttachmentE290Scope
