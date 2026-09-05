@@ -149,3 +149,62 @@
     drawFov: false
   - type: FTLSmashImmune
   - type: NoFTL
+
+- type: entity
+  id: RMCSurveillanceCameraProp
+  name: security camera
+  description: It's used to monitor rooms.
+  suffix: Prop
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wallmount
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Clickable
+  - type: InteractionOutline
+  - type: WallMount
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 5
+    activeLoad: 10
+    channel: Equipment
+  - type: Eye
+    zoom: 0.5, 0.5
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: _RMC14/Structures/Wallmounts/camera.rsi
+    layers:
+    - map: [ "enum.SurveillanceCameraVisualsKey.Layer" ]
+      state: camera
+      cycle: true
+  - type: Appearance
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -8
+  - type: Corrodible
+    isCorrodible: false

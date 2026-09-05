@@ -89,3 +89,18 @@
       amount: 3
     - id: RMCHelmetWelding
       amount: 3
+
+- type: entity
+  parent: RMCLockerEngineerAtmos
+  id: RMCLockerEngineerAtmosFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMWebbing
+    - id: RMCSuitFirefighter
+    - id: CMBackpackEngineer
+    - id: RMCFlashlight
+    - id: CMFireExtinguisher
+    - id: RMCHazardVest
+    - id: CMMaskGas
