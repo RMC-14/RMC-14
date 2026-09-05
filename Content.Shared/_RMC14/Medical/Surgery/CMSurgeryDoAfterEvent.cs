@@ -9,10 +9,12 @@ public sealed partial class CMSurgeryDoAfterEvent : SimpleDoAfterEvent
 {
     public readonly EntProtoId Surgery;
     public readonly EntProtoId Step;
+    public readonly float SuccessChance;
 
-    public CMSurgeryDoAfterEvent(EntProtoId surgery, EntProtoId step)
+    public CMSurgeryDoAfterEvent(EntProtoId surgery, EntProtoId step, float successChance)
     {
         Surgery = surgery;
         Step = step;
+        SuccessChance = successChance;
     }
 }

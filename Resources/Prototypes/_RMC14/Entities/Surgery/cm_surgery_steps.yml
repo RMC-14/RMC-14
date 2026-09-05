@@ -11,14 +11,21 @@
   components:
   - type: CMSurgeryStep
     tool:
-    - type: CMScalpel
+    - Scalpel
+    startSound:
+      path: /Audio/_RMC14/Medical/Surgery/scalpel1.ogg
+    endSound:
+      path: /Audio/_RMC14/Medical/Surgery/scalpel2.ogg
     add:
     - type: CMIncisionOpen
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/scalpel.rsi
     state: scalpel
-  - type: CMSurgeryStepBleedEffect
-    damage: 10
+  - type: RMCSurgeryComplicationEffects
+    successBleedDamage: 10
+    failureDirectDamage:
+      types:
+        Blunt: 10
   - type: CMSurgeryStepEmoteEffect
 
 - type: entity
@@ -28,12 +35,19 @@
   components:
   - type: CMSurgeryStep
     tool:
-    - type: CMHemostat
+    - Hemostat
+    endSound:
+      path: /Audio/_RMC14/Medical/Surgery/hemostat1.ogg
     add:
     - type: CMBleedersClamped
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/hemostat.rsi
     state: hemostat
+  - type: RMCSurgeryComplicationEffects
+    failureBleedDamage: 15
+    failureDirectDamage:
+      types:
+        Blunt: 4
   - type: CMSurgeryClampBleedEffect
 
 - type: entity
@@ -43,12 +57,20 @@
   components:
   - type: CMSurgeryStep
     tool:
-    - type: CMRetractor
+    - Retractor
+    startSound:
+      path: /Audio/_RMC14/Medical/Surgery/retractor1.ogg
+    endSound:
+      path: /Audio/_RMC14/Medical/Surgery/retractor2.ogg
     add:
     - type: CMSkinRetracted
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/retractor.rsi
     state: retractor
+  - type: RMCSurgeryComplicationEffects
+    failureDirectDamage:
+      types:
+        Blunt: 15
 
 - type: entity
   parent: CMSurgeryStepBase
@@ -57,13 +79,19 @@
   components:
   - type: CMSurgeryStep
     tool:
-    - type: CMBoneSaw
+    - BoneSaw
+    startSound:
+      path: /Audio/_RMC14/Medical/Surgery/saw.ogg
     add:
     - type: CMRibcageSawed
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/saw.rsi
     state: saw
   - type: CMSurgeryStepEmoteEffect
+  - type: RMCSurgeryComplicationEffects
+    failureDirectDamage:
+      types:
+        Blunt: 20
 
 - type: entity
   parent: CMSurgeryStepBase
@@ -72,12 +100,20 @@
   components:
   - type: CMSurgeryStep
     tool:
-    - type: CMRetractor
+    - Retractor
+    startSound:
+      path: /Audio/_RMC14/Medical/Surgery/retractor1.ogg
+    endSound:
+      path: /Audio/_RMC14/Medical/Surgery/retractor2.ogg
     add:
     - type: CMRibcageOpen
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/retractor.rsi
     state: retractor
+  - type: RMCSurgeryComplicationEffects
+    failureDirectDamage:
+      types:
+        Blunt: 15
 
 - type: entity
   parent: CMSurgeryStepBase
@@ -87,12 +123,29 @@
   - type: CMSurgeryStep
     skill: 2
     tool:
-    - type: CMScalpel
+    - Scalpel
+    startSound:
+      path: /Audio/_RMC14/Medical/Surgery/scalpel1.ogg
+    endSound:
+      path: /Audio/_RMC14/Medical/Surgery/scalpel2.ogg
   - type: CMSurgeryCutLarvaRootsStep
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/scalpel.rsi
     state: scalpel
   - type: CMSurgeryOperatingTableCondition
+  - type: RMCSurgeryComplicationEffects
+    successSplashEnabled: true
+    failureSplashEnabled: true
+    splashAffectsBody: true
+    splashDamage:
+      types:
+        Heat: 12
+    splashSound:
+      collection: XenoAcidSizzle
+    splashDecalSpawner: RMCDecalSpawnerAcidBloodSplash
+    failureDirectDamage:
+      types:
+        Heat: 15
 
 - type: entity
   parent: CMSurgeryStepBase
@@ -102,7 +155,9 @@
   - type: CMSurgeryStep
     skill: 2
     tool:
-    - type: CMHemostat
+    - Hemostat
+    endSound:
+      path: /Audio/_RMC14/Medical/Surgery/hemostat1.ogg
     bodyRemove:
     - type: VictimInfected
   - type: Sprite
@@ -110,6 +165,10 @@
     state: hemostat
   - type: CMSurgeryOperatingTableCondition
   - type: RMCSurgeryStepLarvaEffect
+  - type: RMCSurgeryComplicationEffects
+    failureDirectDamage:
+      types:
+        Heat: 15
 
 - type: entity
   parent: CMSurgeryStepBase
@@ -118,12 +177,20 @@
   components:
   - type: CMSurgeryStep
     tool:
-    - type: CMRetractor
+    - Retractor
+    startSound:
+      path: /Audio/_RMC14/Medical/Surgery/retractor1.ogg
+    endSound:
+      path: /Audio/_RMC14/Medical/Surgery/retractor2.ogg
     remove:
     - type: CMRibcageOpen
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/retractor.rsi
     state: retractor
+  - type: RMCSurgeryComplicationEffects
+    failureDirectDamage:
+      types:
+        Blunt: 15
 
 - type: entity
   parent: CMSurgeryStepBase
@@ -132,12 +199,16 @@
   components:
   - type: CMSurgeryStep
     tool:
-    - type: CMBoneGel
+    - BoneGel
     remove:
     - type: CMRibcageSawed
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/bone_gel.rsi
     state: bone-gel
+  - type: RMCSurgeryComplicationEffects
+    failureDirectDamage:
+      types:
+        Blunt: 10
 
 - type: entity
   parent: CMSurgeryStepBase
@@ -146,7 +217,11 @@
   components:
   - type: CMSurgeryStep
     tool:
-    - type: CMCautery
+    - Cautery
+    startSound:
+      path: /Audio/_RMC14/Medical/Surgery/cautery1.ogg
+    endSound:
+      path: /Audio/_RMC14/Medical/Surgery/cautery2.ogg
     remove:
     - type: CMSkinRetracted
     - type: CMBleedersClamped
@@ -155,7 +230,12 @@
     sprite: _RMC14/Objects/Medical/Surgery/cautery.rsi
     state: cautery
   - type: CMSurgeryStepEmoteEffect
+  - type: RMCSurgeryComplicationEffects
+    failureDirectDamage:
+      types:
+        Heat: 3
 
+## Damage from xeno surgeries is suppose to be depenedt on wearing a biosuit, and inflicted on the doctor, but im unsure how to handle this at this time.
 - type: entity
   parent: CMSurgeryStepBase
   id: RMCSurgeryCutExoskeleton
@@ -164,7 +244,9 @@
   - type: CMSurgeryStep
     skill: 2
     tool:
-    - type: CMBoneSaw
+    - BoneSaw
+    startSound:
+      path: /Audio/_RMC14/Medical/Surgery/saw.ogg
     add:
     - type: RMCXenoOpen
   - type: Sprite
@@ -179,7 +261,11 @@
   - type: CMSurgeryStep
     skill: 2
     tool:
-    - type: CMRetractor
+    - Retractor
+    startSound:
+      path: /Audio/_RMC14/Medical/Surgery/retractor1.ogg
+    endSound:
+      path: /Audio/_RMC14/Medical/Surgery/retractor2.ogg
     add:
     - type: RMCXenoPryed
   - type: Sprite
@@ -194,7 +280,11 @@
   - type: CMSurgeryStep
     skill: 2
     tool:
-    - type: CMScalpel
+    - Scalpel
+    startSound:
+      path: /Audio/_RMC14/Medical/Surgery/scalpel1.ogg
+    endSound:
+      path: /Audio/_RMC14/Medical/Surgery/scalpel2.ogg
     add:
     - type: RMCXenoCut
   - type: Sprite
@@ -209,10 +299,113 @@
   - type: CMSurgeryStep
     skill: 2
     tool:
-    - type: CMHemostat
+    - Hemostat
+    endSound:
+      path: /Audio/_RMC14/Medical/Surgery/hemostat1.ogg
     add:
     - type: RMCXenoRemoved
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/hemostat.rsi
     state: hemostat
   - type: RMCSurgeryStepXenoHeartEffect
+
+- type: entity
+  parent: CMSurgeryStepBase
+  id: RMCSurgeryStepOpenIncisionWithIMS
+  name: Open incision with an Incision Management System
+  components:
+  - type: CMSurgeryStep
+    skill: 2
+    tool:
+    - ScalpelManager
+    startSound:
+      path: /Audio/_RMC14/Medical/Surgery/scalpel1.ogg
+    endSound:
+      path: /Audio/_RMC14/Medical/Surgery/scalpel2.ogg
+    add:
+    - type: CMIncisionOpen
+    - type: CMBleedersClamped
+    - type: CMSkinRetracted
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/scalpel.rsi
+    state: scalpel_manager
+  - type: CMSurgeryStepEmoteEffect
+  - type: RMCSurgeryComplicationEffects
+    failureDirectDamage:
+      types:
+        Blunt: 15
+        Heat: 15
+
+- type: entity
+  parent: CMSurgeryStepBase
+  id: RMCSurgeryStepOpenIncisionWithLaserScalpel
+  name: Open incision with a Laser Scalpel
+  components:
+  - type: CMSurgeryStep
+    skill: 2
+    tool:
+    - LaserScalpel
+    startSound:
+      path: /Audio/_RMC14/Medical/Surgery/cautery1.ogg
+    endSound:
+      path: /Audio/_RMC14/Medical/Surgery/cautery2.ogg
+    add:
+    - type: CMIncisionOpen
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/scalpel.rsi
+    state: scalpel_laser
+  - type: RMCSurgeryLaserScalpelClampChanceEffect
+  - type: CMSurgeryStepEmoteEffect
+  - type: RMCSurgeryComplicationEffects
+    failureDirectDamage:
+      types:
+        Blunt: 7.5
+        Heat: 12.5
+
+- type: entity
+  parent: CMSurgeryStepBase
+  id: RMCSurgeryStepCutLarvaRootsWithPict
+  name: Cut larva roots With the PICT System
+  components:
+  - type: CMSurgeryStep
+    skill: 2
+    tool:
+    - PictSystem
+    startSound:
+      path: /Audio/_RMC14/Medical/Surgery/cautery1.ogg
+    endSound:
+      path: /Audio/_RMC14/Medical/Surgery/cautery2.ogg
+  - type: CMSurgeryCutLarvaRootsStep
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/scalpel.rsi
+    state: pict_system
+  - type: CMSurgeryOperatingTableCondition
+  - type: RMCSurgeryComplicationEffects
+    failureDirectDamage:
+      types:
+        Heat: 15
+
+- type: entity
+  parent: CMSurgeryStepBase
+  id: RMCSurgeryStepRemoveLarvaWithPict
+  name: Remove larva with the PICT System
+  components:
+  - type: CMSurgeryStep
+    skill: 2
+    tool:
+    - PictSystem
+    startSound:
+      path: /Audio/_RMC14/Medical/Surgery/cautery1.ogg
+    endSound:
+      path: /Audio/_RMC14/Medical/Surgery/cautery2.ogg
+    bodyRemove:
+    - type: VictimInfected
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/scalpel.rsi
+    state: pict_system
+  - type: CMSurgeryOperatingTableCondition
+  - type: RMCSurgeryStepLarvaEffect
+  - type: RMCSurgeryComplicationEffects
+    failureDirectDamage:
+      types:
+        Heat: 15
