@@ -20,7 +20,6 @@
       role: CMJobChiefMP
       time: 252000 # 70 hours
     RMCRankSecondLT: []
-  weight: 5
   startingGear: CMGearChiefMP
   icon: "CMJobIconChiefMP"
   requireAdminNotify: true

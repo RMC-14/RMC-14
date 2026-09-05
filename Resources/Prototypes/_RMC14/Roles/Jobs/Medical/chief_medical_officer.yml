@@ -18,7 +18,6 @@
       role: CMJobCMO
       time: 252000 # 70 hours
     RMCRankSecondLT: []
-  weight: 5
   startingGear: CMGearCMO
   icon: "CMJobIconCMO"
   requireAdminNotify: true
