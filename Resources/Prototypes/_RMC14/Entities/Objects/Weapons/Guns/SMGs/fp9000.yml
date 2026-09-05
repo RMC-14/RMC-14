@@ -73,6 +73,9 @@
           - RMCAttachmentExtendedBarrel
           - RMCAttachmentExtendedCompensator
           - RMCAttachmentRecoilCompensator
+        random:
+        - RMCAttachmentExtendedBarrel
+        - RMCAttachmentRecoilCompensator
       rmc-aslot-rail:
         locked: true
         startingAttachable: RMCAttachmentFP9000Scope
@@ -83,6 +86,8 @@
         whitelist:
           tags:
           - RMCAttachmentLaserSight
+        random:
+        - RMCAttachmentLaserSight
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-rail: 0.06, .15
