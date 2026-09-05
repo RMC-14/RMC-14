@@ -53,6 +53,15 @@
     - type: Corrodible
 
 - type: entity
+  parent: RMCSeatDriver
+  id: RMCSeatVanDriver
+  name: van driver seat
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/chairs.rsi
+    state: comfychair
+
+- type: entity
   parent: CMSeatBase
   id: RMCSeatHunter
   name: hunter chair
