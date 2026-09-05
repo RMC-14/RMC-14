@@ -889,7 +889,19 @@ public abstract class SharedActionsSystem : EntitySystem
         if (!comp.Enabled)
             return false;
 
+        // RMC14
+        // When we're not in simulation, such as when using actions, CurTime might be a value
+        // that's between ticks. We queue actions for the next update cycle, so we also have
+        // to make sure CurTime will have the same value here as during that cycle. We can do
+        // this by temporarily setting InSimulation to true, which changes how CurTime is
+        // calculated so that it matches what it WILL be during the updates.
+        var oldInSim = GameTiming.InSimulation; // RMC14
+        GameTiming.InSimulation = true; // RMC14
+
         var curTime = GameTiming.CurTime;
+
+        GameTiming.InSimulation = oldInSim; // RMC14
+
         if (comp.Cooldown.HasValue && comp.Cooldown.Value.End > curTime)
             return false;
 
