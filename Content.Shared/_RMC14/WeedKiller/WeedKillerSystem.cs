@@ -113,6 +113,39 @@ public sealed class WeedKillerSystem : EntitySystem
         }
     }
 
+    /// <summary>
+    /// Removes all anchored entities on the same tile that opt into weed-killer cleanup.
+    /// Hive cores are destroyed through the destructible system so their teardown events still run.
+    /// </summary>
+    public void RemoveMarkedAt(EntityUid origin)
+    {
+        if (_net.IsClient ||
+            !_rmcMap.TryGetTileRefForEnt(origin.ToCoordinates(), out var grid, out var tile))
+        {
+            return;
+        }
+
+        RemoveMarkedAt(grid, tile.GridIndices);
+    }
+
+    public void RemoveMarkedAt(Entity<MapGridComponent> grid, Vector2i indices)
+    {
+        if (_net.IsClient)
+            return;
+
+        var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(grid, indices);
+        while (anchored.MoveNext(out var anchoredId))
+        {
+            if (!_deletedByWeedKillerQuery.HasComp(anchoredId))
+                continue;
+
+            if (TryComp(anchoredId, out HiveCoreComponent? _))
+                _destructible.DestroyEntity(anchoredId);
+            else
+                QueueDel(anchoredId);
+        }
+    }
+
     private void KillWeeds(Entity<WeedKillerComponent> killer)
     {
         foreach (var areaId in killer.Comp.LinkedAreas)
@@ -139,17 +172,7 @@ public sealed class WeedKillerSystem : EntitySystem
         foreach (var position in killer.Comp.Positions)
         {
             Spawn(WeedKiller, _map.ToCoordinates(position.Grid, position.Indices, position.Grid));
-            var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(position.Grid, position.Indices);
-            while (anchored.MoveNext(out var anchoredId))
-            {
-                if (!_deletedByWeedKillerQuery.HasComp(anchoredId))
-                    continue;
-
-                if (TryComp(anchoredId, out HiveCoreComponent? _))
-                    _destructible.DestroyEntity(anchoredId);
-                else
-                    QueueDel(anchoredId);
-            }
+            RemoveMarkedAt(position.Grid, position.Indices);
         }
     }
 
