@@ -173,6 +173,8 @@
   - RMCComfyChairBravoBuild
   - RMCComfyChairCharlieBuild
   - RMCComfyChairDeltaBuild
+  - RMCComfyChairEchoBuild
+  - RMCComfyChairFoxtrotBuild
 
 - type: rmcConstruction
   id: RMCComfyChairAlphaBuild
@@ -199,6 +201,20 @@
   id: RMCComfyChairDeltaBuild
   name: delta squad chair
   prototype: CMChairComfyDelta
+  materialCost: 2
+  restrictedTags: [RMCSeat]
+
+- type: rmcConstruction
+  id: RMCComfyChairEchoBuild
+  name: echo squad chair
+  prototype: CMChairComfyEcho
+  materialCost: 2
+  restrictedTags: [RMCSeat]
+
+- type: rmcConstruction
+  id: RMCComfyChairFoxtrotBuild
+  name: foxtrot squad chair
+  prototype: CMChairComfyFoxtrot
   materialCost: 2
   restrictedTags: [RMCSeat]
 

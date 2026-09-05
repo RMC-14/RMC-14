@@ -265,6 +265,24 @@
 
 - type: entity
   parent: CMChairComfy
+  id: CMChairComfyEcho
+  description: A simple chair permanently attached to the floor, with the spinning parts removed to force soldiers with low attention spans to keep still during briefings. Covered with a squeaky and way too hard faux-leather, unevenly painted in Echo squad turquoise. This multi-purpose chair can be used for many things, just like the marine sitting on it.
+  suffix: RMC|Echo
+  components:
+  - type: Sprite
+    state: comfychair_echo
+
+- type: entity
+  parent: CMChairComfy
+  id: CMChairComfyFoxtrot
+  description: A simple chair permanently attached to the floor, with the spinning parts removed to force soldiers with low attention spans to keep still during briefings. Covered with a squeaky and way too hard faux-leather, unevenly painted in Foxtrot squad brown. The perfect place to fall asleep during briefings.
+  suffix: RMC|Foxtrot
+  components:
+  - type: Sprite
+    state: comfychair_foxtrot
+
+- type: entity
+  parent: CMChairComfy
   id: RMCChairComfyAlien
   name: alien chair
   suffix: RMC|Alien
