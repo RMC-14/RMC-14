@@ -3,7 +3,7 @@
   id: RMCSurvivorParaCommander
   name: rmc-job-name-para-commander
   ranks:
-    RMCRankParaLieutenantColonel: [ ]
+    RMCRankTSELieutenantColonel: [ ]
   accessGroups:
   - ColonistAllAccessNoArmory
   startingGear: RMCGearParaCommander
