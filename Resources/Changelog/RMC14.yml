@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Resin surge now has an overlay.
-    type: Add
-  - message: Resin surge is now predicted
-    type: Tweak
-  - message: Burrower overlay is now visible through walls.
-    type: Tweak
-  id: 3130
-  time: '2026-04-22T00:04:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9567
 - author: Dygon
   changes:
   - message: You can now see local chat near the observed player while using the Overwatch
@@ -4473,5 +4462,24 @@
   id: 3629
   time: '2026-09-05T00:04:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10570
+- author: J C Denton and BramvanZijp
+  changes:
+  - message: Added polished Peregrine Handcannon, silver Mateba variant for COs.
+    type: Add
+  - message: Enables Mateba special for COs.
+    type: Tweak
+  - message: CO weapons now come with a belt on spawn.
+    type: Tweak
+  - message: Winter Wyvern handcannon has been renamed to custom Peregrine Handcannon.
+    type: Tweak
+  - message: Fixed Mateba belts not having underlays for inserted revolvers.
+    type: Fix
+  - message: Fixed being able to store all kinds of items in Mateba Belt.
+    type: Fix
+  - message: Fixed a few wrong descriptions on CO's sidearm belts and weapons.
+    type: Fix
+  id: 3630
+  time: '2026-09-05T18:46:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9696
 Name: RMC14
 Order: -1
