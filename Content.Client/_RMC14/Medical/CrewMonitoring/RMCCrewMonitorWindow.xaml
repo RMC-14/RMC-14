@@ -1,0 +1,74 @@
+<controls:RMCCrewMonitorWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Medical.CrewMonitoring"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    Title="{Loc rmc-crew-monitor-title}"
+    MinSize="1000 500"
+    SetSize="1000 650">
+    <PanelContainer Name="MainContainer" Access="Public" StyleClasses="WindowBackground">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BackgroundColor="#121212" />
+        </PanelContainer.PanelOverride>
+        <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="6">
+            <PanelContainer>
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat BackgroundColor="#20252A" BorderColor="#3A454F" BorderThickness="1" />
+                </PanelContainer.PanelOverride>
+                <BoxContainer Orientation="Horizontal" Margin="8 6" SeparationOverride="14">
+                    <Label Name="TotalCount" Access="Public" StyleClasses="LabelKeyText" />
+                    <Label Name="AliveCount" Access="Public" StyleClasses="LabelKeyText" FontColorOverride="#56D364" />
+                    <Label Name="CriticalCount" Access="Public" StyleClasses="LabelKeyText" FontColorOverride="#FFB347" />
+                    <Label Name="DeadCount" Access="Public" StyleClasses="LabelKeyText" FontColorOverride="#FF5C5C" />
+                    <Control HorizontalExpand="True" />
+                    <Button Name="RefreshButton" Access="Public" MinSize="34 28"
+                            ToolTip="{Loc rmc-crew-monitor-refresh}">
+                        <TextureButton MouseFilter="Ignore"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Scale="0.8 0.8"
+                                       StyleClasses="Refresh" />
+                    </Button>
+                </BoxContainer>
+            </PanelContainer>
+
+            <BoxContainer Orientation="Horizontal" SeparationOverride="6">
+                <LineEdit Name="Search" Access="Public" HorizontalExpand="True"
+                          PlaceHolder="{Loc rmc-crew-monitor-search-placeholder}" />
+                <Label Text="{Loc rmc-crew-monitor-filter-status}" VerticalAlignment="Center" />
+                <OptionButton Name="StatusFilter" Access="Public" MinWidth="110" />
+                <Label Text="{Loc rmc-crew-monitor-filter-location}" VerticalAlignment="Center" />
+                <OptionButton Name="LocationFilter" Access="Public" MinWidth="110" />
+            </BoxContainer>
+
+            <PanelContainer Name="TableHeader" Access="Public">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat BackgroundColor="#252B31" BorderColor="#3A454F" BorderThickness="0 0 0 1" />
+                </PanelContainer.PanelOverride>
+                <BoxContainer Orientation="Horizontal" Margin="6 4" SeparationOverride="6">
+                    <Control MinWidth="38" MaxWidth="38" />
+                    <Label Text="{Loc rmc-crew-monitor-column-personnel}" MinWidth="235" HorizontalExpand="True"
+                           StyleClasses="LabelKeyText" ClipText="True" Align="Center" />
+                    <Label Text="{Loc rmc-crew-monitor-column-status}" MinWidth="76" MaxWidth="76"
+                           StyleClasses="LabelKeyText" ClipText="True" Align="Center" />
+                    <Label Text="BRUTE" MinWidth="65" MaxWidth="65" Align="Center"
+                           StyleClasses="LabelKeyText" FontColorOverride="#DF3E3E" />
+                    <Label Text="BURN" MinWidth="65" MaxWidth="65" Align="Center"
+                           StyleClasses="LabelKeyText" FontColorOverride="#FFB833" />
+                    <Label Text="TOX" MinWidth="65" MaxWidth="65" Align="Center"
+                           StyleClasses="LabelKeyText" FontColorOverride="#25CA4C" />
+                    <Label Name="OxygenHeader" Access="Public" Text="O2" MinWidth="65" MaxWidth="65" Align="Center"
+                           StyleClasses="LabelKeyText" FontColorOverride="#2E93DE" />
+                    <Label Text="{Loc rmc-crew-monitor-column-location}" MinWidth="250" HorizontalExpand="True"
+                           StyleClasses="LabelKeyText" ClipText="True" Align="Center" />
+                </BoxContainer>
+            </PanelContainer>
+
+            <ScrollContainer Name="ResultsScroll" Access="Public" HScrollEnabled="False" VScrollEnabled="True"
+                             HorizontalExpand="True" VerticalExpand="True">
+                <BoxContainer Name="Groups" Access="Public" Orientation="Vertical" HorizontalExpand="True" SeparationOverride="4" />
+            </ScrollContainer>
+            <Label Name="Empty" Access="Public" Text="{Loc rmc-crew-monitor-empty}" StyleClasses="LabelHeading"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" VerticalExpand="True" Visible="False" />
+        </BoxContainer>
+    </PanelContainer>
+</controls:RMCCrewMonitorWindow>
