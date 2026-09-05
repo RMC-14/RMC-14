@@ -17,6 +17,8 @@
     shotsPerBurst: 3
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m63.ogg
+      params:
+        volume: -1.5
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
