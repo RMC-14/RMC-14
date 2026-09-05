@@ -4,14 +4,6 @@
   - message: MRE ration packs now have to be torn open before you can access their
       contents.
     type: Fix
-  id: 3132
-  time: '2026-04-22T00:07:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9673
-- author: nbstrong
-  changes:
-  - message: MRE ration packs now have to be torn open before you can access their
-      contents.
-    type: Fix
   id: 3133
   time: '2026-04-22T00:08:35.958844+00:00'
   url: null
@@ -4482,5 +4474,13 @@
   id: 3631
   time: '2026-09-05T18:52:21.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9981
+- author: CatAndHats
+  changes:
+  - message: Added Echo and Foxtrot comfy chairs, and made them craftable like the
+      others
+    type: Add
+  id: 3632
+  time: '2026-09-05T19:08:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10825
 Name: RMC14
 Order: -1
