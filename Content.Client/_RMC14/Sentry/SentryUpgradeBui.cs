@@ -1,6 +1,7 @@
 ﻿using System.Numerics;
 using Content.Client.UserInterface.Controls;
 using Content.Shared._RMC14.Sentry;
+using Content.Shared._RMC14.Sentry.Flag;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -36,8 +37,14 @@ public sealed class SentryUpgradeBui : BoundUserInterface
         base.Open();
 
         _menu = this.CreateWindow<SentryUpgradeMenu>();
-        if (EntMan.TryGetComponent(Owner, out SentryComponent? sentry) &&
-            sentry.Upgrades is { } upgrades)
+
+        EntProtoId[]? upgrades = null;
+        if (EntMan.TryGetComponent(Owner, out SentryComponent? sentry))
+            upgrades = sentry.Upgrades;
+        else if (EntMan.TryGetComponent(Owner, out PlantedFlagComponent? flag))
+            upgrades = flag.Upgrades;
+
+        if (upgrades != null)
         {
             foreach (var upgradeId in upgrades)
             {
