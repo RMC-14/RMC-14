@@ -27,6 +27,7 @@
     - category: Breathing # Vox gang not calling this oxygen
     - category: Pressure  
     - alertType: Bleed
+    - alertType: ForeignObjectEmbedded
     - category: Temperature
     - category: Hunger
     - category: Thirst
@@ -437,6 +438,15 @@
   description: alerts-bleed-desc
   minSeverity: 0
   maxSeverity: 10
+
+- type: alert
+  id: ForeignObjectEmbedded
+  clickEvent: !type:ForeignObjectSelfExtractionAlertEvent
+  icons:
+  - sprite: /Textures/_RMC14/Objects/Materials/shards.rsi
+    state: EmbeddedStatus
+  name: alerts-foreign-object-embedded-name
+  description: alerts-foreign-object-embedded-desc
 
 - type: alert
   id: Pacified

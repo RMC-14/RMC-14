@@ -1,8 +1,11 @@
 using System.Globalization;
+using System.Numerics;
 using Content.Client._RMC14.Medical.HUD;
 using Content.Client.Atmos.Rotting;
 using Content.Client.Message;
 using Content.Shared._RMC14.Chemistry.Reagent;
+using Content.Shared.Body.Part;
+using Content.Shared._RMC14.Embeds;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Defibrillator;
 using Content.Shared._RMC14.Medical.HUD;
@@ -17,8 +20,11 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Temperature;
+using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface.Controls;
+using Robust.Shared.Graphics.RSI;
+using Robust.Shared.Maths;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -327,7 +333,16 @@ public sealed class HealthScannerUiData
             AddAdvice(larvaSurgery, window);
         }
 
-        // TODO RMC14 more surgery advice
+        if (uiState.EmbeddedObjectInBodyParts is { Count: > 0 })
+        {
+            foreach (var embeddedEntry in uiState.EmbeddedObjectInBodyParts)
+            {
+                AddAdvice(
+                    Loc.GetString("health-analyzer-window-entity-embedded-text", ("bodyPart", GetBodyPartName(embeddedEntry.BodyPart, embeddedEntry.Symmetry))),
+                    window,
+                    "XenoBoneChipsProjectile");
+            }
+        }
 
         // Wound related
         if (hasBruteWounds)
@@ -398,10 +413,60 @@ public sealed class HealthScannerUiData
         // TODO RMC14 Clone damage advice
     }
 
-    private static void AddAdvice(string text, HealthScannerWindow window)
+    private void AddAdvice(string text, HealthScannerWindow window, string? iconPrototypeId = null)
     {
-        var label = new RichTextLabel();
+        var row = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Horizontal,
+            Margin = new Thickness(0, 2),
+        };
+
+        if (iconPrototypeId != null && IoCManager.Resolve<IPrototypeManager>().TryIndex(iconPrototypeId, out EntityPrototype? proto))
+        {
+            var iconRect = new TextureRect
+            {
+                Texture = IoCManager.Resolve<IEntityManager>().System<SpriteSystem>().GetPrototypeIcon(proto).GetFrame(RsiDirection.South, 0),
+                Stretch = TextureRect.StretchMode.KeepAspectCentered,
+                MinSize = new Vector2(18, 18),
+                Margin = new Thickness(0, 0, 6, 0),
+            };
+            row.AddChild(iconRect);
+        }
+
+        var label = new RichTextLabel { MinSize = new Vector2(0, 18) };
         label.SetMarkupPermissive(text);
-        window.AdviceContainer.AddChild(label);
+        row.AddChild(label);
+
+        window.AdviceContainer.AddChild(row);
+    }
+
+    private static string GetBodyPartName(BodyPartType bodyPart, BodyPartSymmetry symmetry = BodyPartSymmetry.None)
+    {
+        var baseName = bodyPart switch
+        {
+            BodyPartType.Other => "Other",
+            BodyPartType.Torso => "Torso",
+            BodyPartType.Head => "Head",
+            BodyPartType.Arm => "Arm",
+            BodyPartType.Hand => "Hand",
+            BodyPartType.Leg => "Leg",
+            BodyPartType.Foot => "Foot",
+            BodyPartType.Tail => "Tail",
+            _ => bodyPart.ToString(),
+        };
+
+        if (bodyPart is BodyPartType.Arm or BodyPartType.Hand or BodyPartType.Leg or BodyPartType.Foot && symmetry != BodyPartSymmetry.None)
+        {
+            var sidePrefix = symmetry switch
+            {
+                BodyPartSymmetry.Left => "Left",
+                BodyPartSymmetry.Right => "Right",
+                _ => string.Empty,
+            };
+
+            return sidePrefix == string.Empty ? baseName : $"{sidePrefix} {baseName}";
+        }
+
+        return baseName;
     }
 }

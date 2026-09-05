@@ -8,8 +8,10 @@ using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.NodeContainer.NodeGroups;
 using Content.Server.NodeContainer.Nodes;
 using Content.Server.Temperature.Components;
+using Content.Shared._RMC14.Embeds;
 using Content.Shared.Atmos;
 using Content.Shared.Body.Components;
+using Content.Shared.Body.Part;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
@@ -198,16 +200,18 @@ public sealed partial class CryoPodSystem : SharedCryoPodSystem
         _uiSystem.ServerSendUiMessage(
             entity.Owner,
             HealthAnalyzerUiKey.Key,
-            new HealthAnalyzerScannedUserMessage(GetNetEntity(entity.Comp.BodyContainer.ContainedEntity),
-            temp?.CurrentTemperature ?? 0,
-            (bloodstream != null && _solutionContainerSystem.ResolveSolution(entity.Comp.BodyContainer.ContainedEntity.Value,
-                bloodstream.BloodSolutionName, ref bloodstream.BloodSolution, out var bloodSolution))
-                ? bloodSolution.FillFraction
-                : 0,
-            null,
-            null,
-            null
-        ));
+            new HealthAnalyzerScannedUserMessage(
+                GetNetEntity(entity.Comp.BodyContainer.ContainedEntity),
+                temp?.CurrentTemperature ?? 0,
+                (bloodstream != null && _solutionContainerSystem.ResolveSolution(entity.Comp.BodyContainer.ContainedEntity.Value,
+                    bloodstream.BloodSolutionName, ref bloodstream.BloodSolution, out var bloodSolution))
+                    ? bloodSolution.FillFraction
+                    : 0,
+                null,
+                null,
+                null,
+                new List<ForeignObjectEmbeddedEntry>()
+            ));
     }
 
     private void OnInteractUsing(Entity<CryoPodComponent> entity, ref InteractUsingEvent args)

@@ -207,7 +207,6 @@
       components:
       - RMCLighter
       - RMCFlask
-      - CMScalpel
       - Figurine
       - HelmetAccessory
       - CassettePlayer
@@ -227,6 +226,7 @@
       - CMAutoInjector
       - PillPacket
       - RMCGrenadeHEFA # Repeating all these just to fit HEFA nades. :(
+      - RMCScalpel
   - type: Appearance
   - type: AnimationPlayer
   - type: GenericVisualizer

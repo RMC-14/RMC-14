@@ -191,7 +191,6 @@
   - type: AllowSuitStorage
     whitelist:
       components:
-      - CMSurgeryTool
       - RMCLighter
       - Stunbaton
       - Gun
@@ -229,6 +228,7 @@
       - Crowbar
       - Radio
       - RMCDetector
+      - RMCSurgeryTool
 
 - type: entity
   abstract: true
