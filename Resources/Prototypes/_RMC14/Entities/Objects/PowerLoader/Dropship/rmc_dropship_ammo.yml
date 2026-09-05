@@ -142,9 +142,9 @@
   - type: DropshipAmmo
     travelTime: 3
     explosion:
-      total: 3000
-      slope: 5.5
-      max: 55
+      total: 2371
+      slope: 3.95
+      max: 30
 
 - type: entity
   parent: RMCDropshipAttachmentAmmoRocket
@@ -161,8 +161,8 @@
   - type: DropshipAmmo
     travelTime: 2
     explosion:
-      total: 905
-      slope: 15
+      total: 694
+      slope: 24.95
       max: 45
 
 - type: entity
@@ -180,9 +180,9 @@
   - type: DropshipAmmo # TODO RMC14 not usable in fire mission, only direct bombardment
     travelTime: 6
     explosion:
-      total: 1780
-      slope: 7.2
-      max: 50
+      total: 1749
+      slope: 2.25
+      max: 20
     fire:
       type: RMCTileFireNapalm
       range: 3
@@ -203,9 +203,9 @@
   - type: DropshipAmmo
     travelTime: 5
     explosion:
-      total: 1850
-      slope: 3.2
-      max: 32
+      total: 1702
+      slope: 1.75
+      max: 15
 
 - type: entity
   parent: RMCDropshipAttachmentAmmoRocket
@@ -248,9 +248,9 @@
   - type: DropshipAmmo
     travelTime: 6
     explosion:
-      total: 2000
-      slope: 5.5
-      max: 40
+      total: 1768
+      slope: 1.95
+      max: 17
     fire:
       type: RMCTileFireBanshee
       range: 1
@@ -290,9 +290,9 @@
   - type: DropshipAmmo
     ammoType: minirocket
     explosion:
-      total: 850
-      slope: 8
-      max: 40
+      total: 736
+      slope: 4.25
+      max: 20
     impactEffects:
     - RMCEffectExplosionParticle
     - RMCSmokeExplosionProofSmall
