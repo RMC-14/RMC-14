@@ -2,6 +2,7 @@
 using Content.Client._RMC14.Xenonids.UI;
 using Content.Client.Administration.UI.CustomControls;
 using Content.Client.Hands.Systems;
+using Content.Shared._RMC14.Embeds;
 using Content.Shared._RMC14.Medical.Surgery;
 using Content.Shared._RMC14.Medical.Surgery.Tools;
 using Content.Shared.Body.Part;
@@ -159,6 +160,7 @@ public sealed class CMSurgeryBui : BoundUserInterface
             return GetScore(a) - GetScore(b);
         });
 
+        var restoredSelectionToPart = false;
         foreach (var part in parts)
         {
             var netPart = _entities.GetNetEntity(part.Owner);
@@ -182,13 +184,25 @@ public sealed class CMSurgeryBui : BoundUserInterface
                 if (oldPart == part && oldSurgery?.Proto == surgeryId)
                 {
                     OnSurgeryPressed((surgery, surgeryComp), netPart, surgeryId);
+                    restoredSelectionToPart = true;
                     break;
                 }
             }
 
-            if (oldPart == part && oldSurgery == null)
+            if (!restoredSelectionToPart && oldPart == part && oldSurgery == null)
+            {
                 OnPartPressed(netPart, surgeries);
+                restoredSelectionToPart = true;
+            }
         }
+
+        if (!restoredSelectionToPart && oldPart is { } previousPart &&
+            _entities.TryGetNetEntity(previousPart, out var previousNetPart) &&
+            state.Choices.TryGetValue(previousNetPart.Value, out var previousSurgeries))
+        {
+            OnPartPressed(previousNetPart.Value, previousSurgeries);
+        }
+
         RefreshUI();
         UpdateDisabledPanel();
 
@@ -209,10 +223,11 @@ public sealed class CMSurgeryBui : BoundUserInterface
         }
 
         var stepName = new FormattedMessage();
-        stepName.AddText(_entities.GetComponent<MetaDataComponent>(step).EntityName);
+        stepName.AddText(GetStepDisplayName(Owner, _entities.GetEntity(netPart), step));
 
         var stepButton = new CMSurgeryStepButton { Step = step };
         stepButton.Button.OnPressed += _ => SendMessage(new CMSurgeryStepChosenBuiMsg(netPart, surgeryId, effectiveStepId));
+        stepButton.Set(stepName, null);
 
         _window.Steps.AddChild(stepButton);
     }
@@ -305,6 +320,28 @@ public sealed class CMSurgeryBui : BoundUserInterface
 
         RefreshUI();
         View(ViewType.Surgeries);
+    }
+
+    private string GetStepDisplayName(EntityUid body, EntityUid? part, EntityUid step)
+    {
+        var baseName = _entities.GetComponent<MetaDataComponent>(step).EntityName;
+        var stepId = _entities.GetComponent<MetaDataComponent>(step).EntityPrototype?.ID;
+
+        if (stepId != "RMCSurgeryStepExtractForeignObject" || part == null)
+            return baseName;
+
+        var selectedPart = part.Value;
+        if (!_entities.TryGetComponent(body, out ForeignObjectEmbeddedComponent? embedded) ||
+            !_entities.TryGetComponent(selectedPart, out BodyPartComponent? bodyPart))
+        {
+            return baseName;
+        }
+
+        var count = embedded.Entries
+            .Where(entry => entry.BodyPart == bodyPart.PartType && entry.Symmetry == bodyPart.Symmetry)
+            .Sum(entry => entry.Quantity);
+
+        return count > 1 ? $"{baseName} x{count}" : baseName;
     }
 
     private EntProtoId GetEffectiveStepId(EntProtoId surgeryId, EntProtoId stepId)
@@ -442,7 +479,7 @@ public sealed class CMSurgeryBui : BoundUserInterface
             stepButton.Button.Disabled = status != StepStatus.Next;
 
             var stepName = new FormattedMessage();
-            stepName.AddText(_entities.GetComponent<MetaDataComponent>(stepButton.Step).EntityName);
+            stepName.AddText(GetStepDisplayName(Owner, _part, stepButton.Step));
 
             if (status == StepStatus.Complete)
             {

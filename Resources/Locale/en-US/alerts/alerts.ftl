@@ -96,6 +96,12 @@ alerts-pulling-desc = You're pulling something. Click the alert to stop.
 alerts-bleed-name = [color=red]Bleed[/color]
 alerts-bleed-desc = You're [color=red]bleeding[/color].
 
+alerts-foreign-object-embedded-name = [color=yellow]Embedded Foreign Object[/color]
+alerts-foreign-object-embedded-desc = You have a foreign object embedded in your body, Seek surgery or grab your knife and expect it to hurt...
+
+rmc-embedded-self-extraction-success = You manage to remove an embedded object from yourself.
+rmc-embedded-self-extraction-failed = You fail to get the embedded object out, and hurt yourself more in the process.
+
 alerts-pacified-name = [color=green]Pacified[/color]
 alerts-pacified-desc = You're pacified; you won't be able to harm living creatures.
 
