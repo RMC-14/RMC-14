@@ -1,12 +1,16 @@
+using System.Numerics;
 using Robust.Shared.GameStates;
 
-namespace Content.Shared.ParaDrop;
+namespace Content.Shared._RMC14.ParaDrop;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ParaDroppingComponent : Component
 {
     [DataField, AutoNetworkedField]
     public float RemainingTime;
+
+    [DataField]
+    public Vector2 OriginalSpriteOffset;
 
     [DataField, AutoNetworkedField]
     public Dictionary<string, int> OriginalLayers = new();
