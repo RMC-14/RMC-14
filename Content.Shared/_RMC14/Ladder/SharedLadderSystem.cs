@@ -1,9 +1,6 @@
-using System.Linq;
 using Content.Shared._RMC14.Teleporter;
-using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
-using Content.Shared.GameTicking;
 using Content.Shared.Ghost;
 using Content.Shared.Interaction;
 using Content.Shared.Movement.Events;
@@ -13,39 +10,34 @@ using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Ladder;
 
 public abstract class SharedLadderSystem : EntitySystem
 {
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedRMCTeleporterSystem _rmcTeleporter = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-
-    private readonly HashSet<Entity<LadderComponent>> _toUpdate = new();
-    private readonly Dictionary<string, HashSet<Entity<LadderComponent>>> _toUpdateIds = new();
+    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
 
     private EntityQuery<ActorComponent> _actorQuery;
-    private EntityQuery<LadderComponent> _ladderQuery;
+    protected EntityQuery<LadderComponent> LadderQuery;
 
     public override void Initialize()
     {
         _actorQuery = GetEntityQuery<ActorComponent>();
-        _ladderQuery = GetEntityQuery<LadderComponent>();
+        LadderQuery = GetEntityQuery<LadderComponent>();
 
-        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
-
-        SubscribeLocalEvent<LadderComponent, MapInitEvent>(OnLadderMapInit);
         SubscribeLocalEvent<LadderComponent, ComponentRemove>(OnLadderRemove);
         SubscribeLocalEvent<LadderComponent, EntityTerminatingEvent>(OnLadderRemove);
         SubscribeLocalEvent<LadderComponent, ActivateInWorldEvent>(OnLadderActivateInWorld);
+        SubscribeLocalEvent<LadderComponent, LadderRadialSelectedMessage>(OnRadialMenuSelected);
         SubscribeLocalEvent<LadderComponent, DoAfterAttemptEvent<LadderDoAfterEvent>>(OnLadderDoAfterAttempt);
         SubscribeLocalEvent<LadderComponent, LadderDoAfterEvent>(OnLadderDoAfter);
         SubscribeLocalEvent<LadderComponent, GetVerbsEvent<AlternativeVerb>>(OnLadderGetAltVerbs);
@@ -56,45 +48,24 @@ public abstract class SharedLadderSystem : EntitySystem
         SubscribeLocalEvent<LadderWatchingComponent, MoveInputEvent>(OnWatchingMoveInput);
     }
 
-    private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
+    /// <summary>
+    /// Check if the ladder <paramref name="ent"/> is connected to any other ladders.
+    /// </summary>
+    public bool LadderIsConnected(Entity<LadderComponent?> ent)
     {
-        _toUpdate.Clear();
-        _toUpdateIds.Clear();
+        if (!Resolve(ent, ref ent.Comp))
+            return false;
+        return ent.Comp.Above.HasValue || ent.Comp.Below.HasValue;
     }
 
-    private void OnLadderMapInit(Entity<LadderComponent> ent, ref MapInitEvent args)
+    /// <summary>
+    /// Check if the ladder <paramref name="ent"/> is connected to <paramref name="checkConnected"/>.
+    /// </summary>
+    public bool LadderIsConnected(Entity<LadderComponent?> ent, EntityUid checkConnected)
     {
-        _toUpdate.Add(ent);
-    }
-
-    public bool LadderIdInUse(string id)
-    {
-        if (_toUpdateIds.ContainsKey(id))
-            return true;
-        return false;
-    }
-
-    public void ReassignLadderId(Entity<LadderComponent> ent, string? newId)
-    {
-        if (ent.Comp.Other != null)
-        {
-            if (TryComp<LadderComponent>(ent.Comp.Other, out var ladder))
-            {
-                var other = ent.Comp.Other.Value;
-                //Remove other ladder connect
-                ent.Comp.Other = null;
-                ladder.Id = null;
-                ladder.Other = null;
-                Dirty(other, ladder);
-            }
-        }
-
-        if (ent.Comp.Id != null)
-            _toUpdateIds.Remove(ent.Comp.Id);
-
-        ent.Comp.Id = newId;
-        Dirty(ent);
-        _toUpdate.Add(ent);
+        if (!Resolve(ent, ref ent.Comp))
+            return false;
+        return ent.Comp.Above == checkConnected || ent.Comp.Below == checkConnected;
     }
 
     private void OnLadderRemove<T>(Entity<LadderComponent> ent, ref T args)
@@ -107,66 +78,138 @@ public abstract class SharedLadderSystem : EntitySystem
             RemCompDeferred<LadderWatchingComponent>(watching);
         }
 
-        if (!TerminatingOrDeleted(ent.Comp.Other) &&
-            _ladderQuery.TryComp(ent.Comp.Other, out var otherLadder))
+        if (ent.Comp.Above is { } above &&
+            !TerminatingOrDeleted(above) &&
+            LadderQuery.TryComp(above, out var aboveComp))
         {
-            otherLadder.Other = null;
-            Dirty(ent.Comp.Other.Value, otherLadder);
+            aboveComp.Below = null;
+            Dirty(above, aboveComp);
         }
 
-        ent.Comp.Other = null;
+        if (ent.Comp.Below is { } below &&
+            !TerminatingOrDeleted(below) &&
+            LadderQuery.TryComp(below, out var belowComp))
+        {
+            belowComp.Above = null;
+            Dirty(below, belowComp);
+        }
     }
 
     private void OnLadderActivateInWorld(Entity<LadderComponent> ent, ref ActivateInWorldEvent args)
     {
-        var user = args.User;
-        if (ent.Comp.Other == null)
+        // Weird ghost interaction range edge case ("Looking through" Ladder A to remotely view Ladder B, then interacting with Ladder B despite being miles away.)
+        if (HasComp<GhostComponent>(args.User) &&
+            TryComp<LadderWatchingComponent>(args.User, out var watching) &&
+            watching.Watching == ent)
         {
-            var msg = Loc.GetString("rmc-ladder-leads-nowhere");
-            _popup.PopupClient(msg, ent, user, PopupType.SmallCaution);
             return;
         }
 
-        var time = _timing.CurTime;
-        if (ent.Comp.LastDoAfterEnt is { } lastEnt &&
-            ent.Comp.LastDoAfterId is { } lastId &&
-            time - ent.Comp.LastDoAfterTime < ent.Comp.Delay * 5 &&
-            _doAfter.GetStatus(new DoAfterId(lastEnt, lastId)) == DoAfterStatus.Running &&
-            !HasComp<GhostComponent>(user))
-        {
-            if (ent.Comp.LastDoAfterEnt != user)
-            {
-                var msg = Loc.GetString("rmc-ladder-someone-else-climbing");
-                _popup.PopupClient(msg, ent, user, PopupType.SmallCaution);
-            }
+        if (SelectConnectedLadder(ent, args.User, SelectionReason.Climb) is { } connecedLadder)
+            StartClimbing(ent, connecedLadder, args.User);
+    }
 
+    // Returns either the UID of the sole connected ladder, or opens a radial menu for the user to pick one and returns null.
+    private EntityUid? SelectConnectedLadder(Entity<LadderComponent> ent, EntityUid user, SelectionReason reason)
+    {
+        switch (ent.Comp.Above, ent.Comp.Below)
+        {
+            // `Above` and `Below` are both set.
+            case (not null, not null):
+                OpenRadialMenu(ent, user, reason);
+                // Return null since the radial menu handles it from here.
+                return null;
+            // Only `Above` is set.
+            case (not null, null):
+                return ent.Comp.Above;
+            // Only `Below` is set.
+            case (null, not null):
+                return ent.Comp.Below;
+            // None of the above.
+            default:
+                _popup.PopupClient(Loc.GetString("rmc-ladder-leads-nowhere"), ent, user, PopupType.SmallCaution);
+                return null;
+        }
+    }
+
+    private void OpenRadialMenu(Entity<LadderComponent> ent, EntityUid user, SelectionReason reason)
+    {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+        if (ent.Comp.Above is not { } above || ent.Comp.Below is not { } below)
+        {
+            Log.Error($"Ladder {ToPrettyString(ent)} tried to open a radial menu, but doesn't have two connected ladders! (Above: {ToPrettyString(ent.Comp.Above)} | Below: {ToPrettyString(ent.Comp.Below)})");
             return;
         }
 
-        var ev = new LadderDoAfterEvent();
-        var delay = ent.Comp.Delay;
-        if (HasComp<GhostComponent>(args.User))
-            delay = TimeSpan.Zero;
+        _uiSystem.OpenUi(ent.Owner, LadderRadialBuiKey.Key, user, true);
+        _uiSystem.SetUiState(ent.Owner, LadderRadialBuiKey.Key, new LadderRadialBuiState(GetNetEntity(above), GetNetEntity(below), reason));
+    }
 
-        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, ent, ent, ent)
+    private void OnRadialMenuSelected(Entity<LadderComponent> ent, ref LadderRadialSelectedMessage args)
+    {
+        switch (args.Reason)
         {
-            AttemptFrequency = delay == TimeSpan.Zero ? AttemptFrequency.Never : AttemptFrequency.EveryTick,
+            case SelectionReason.Climb:
+                StartClimbing(ent, GetEntity(args.DestinationLadder), args.Actor);
+                break;
+            case SelectionReason.Watch:
+                Watch(args.Actor, GetEntity(args.DestinationLadder));
+                break;
+        }
+    }
+
+    private string? GetDirectionText(Entity<LadderComponent> ent, EntityUid destinationLadder)
+    {
+        if (destinationLadder == ent.Comp.Above)
+            return Loc.GetString("rmc-ladder-direction-up");
+        if (destinationLadder == ent.Comp.Below)
+            return Loc.GetString("rmc-ladder-direction-down");
+        return null;
+    }
+
+    private void StartClimbing(Entity<LadderComponent> ent, EntityUid destinationLadder, EntityUid user)
+    {
+        if (HasComp<GhostComponent>(user))
+        {
+            MoveToDestinationLadder(ent, destinationLadder, user, false);
+            return;
+        }
+
+        if (ent.Comp.CurrentDoAfterUser is { } currentDoAfterUser &&
+            currentDoAfterUser != user &&
+            ent.Comp.CurrentDoAfterId is { } currentDoAfterId &&
+            _doAfter.IsRunning(currentDoAfterUser, currentDoAfterId))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-ladder-someone-else-climbing"), ent, user, PopupType.SmallCaution);
+            return;
+        }
+
+        var direction = GetDirectionText(ent, destinationLadder);
+        if (direction == null)
+            throw new ArgumentException($"The provided destination ladder '{ToPrettyString(destinationLadder)}' is not connected to the source '{ToPrettyString(ent)}'!");
+
+        var ev = new LadderDoAfterEvent(GetNetEntity(destinationLadder));
+        var doAfter = new DoAfterArgs(EntityManager, user, ent.Comp.Delay, ev, ent, ent)
+        {
+            AttemptFrequency = AttemptFrequency.EveryTick,
+            NeedHand = true,
+            BreakOnHandChange = false,
+            BreakOnDropItem = false,
+            BreakOnMove = true,
+            DistanceThreshold = ent.Comp.Range,
         };
 
         if (!_doAfter.TryStartDoAfter(doAfter, out var doAfterId))
             return;
 
-        ent.Comp.LastDoAfterEnt = doAfterId.Value.Uid;
-        ent.Comp.LastDoAfterId = doAfterId.Value.Index;
-        ent.Comp.LastDoAfterTime = time;
+        ent.Comp.CurrentDoAfterId = doAfterId.Value.Index;
+        ent.Comp.CurrentDoAfterUser = user;
         Dirty(ent);
 
-        if (ent.Comp.Delay > TimeSpan.Zero)
-        {
-            var selfMessage = Loc.GetString("rmc-ladder-start-climbing-self");
-            var othersMessage = Loc.GetString("rmc-ladder-start-climbing-others", ("user", user));
-            _popup.PopupPredicted(selfMessage, othersMessage, user, user);
-        }
+        var selfMessage = Loc.GetString("rmc-ladder-start-climbing-self", ("direction", direction));
+        var othersMessage = Loc.GetString("rmc-ladder-start-climbing-others", ("user", user), ("direction", direction));
+        _popup.PopupPredicted(selfMessage, othersMessage, user, user);
 
         if (_actorQuery.TryComp(user, out var actor))
             AddViewer(ent, actor.PlayerSession);
@@ -177,59 +220,64 @@ public abstract class SharedLadderSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        var user = args.DoAfter.Args.User;
-        var target = ent.Owner.ToCoordinates();
-        if (user.ToCoordinates().TryDistance(EntityManager, _transform, target, out var distance) &&
-            distance > ent.Comp.Range)
-        {
-            args.Cancel();
-        }
-
-        if (Transform(user).Anchored)
+        // if the user anchors themself for some reason (e.g. defender fortify)
+        if (Transform(args.DoAfter.Args.User).Anchored)
             args.Cancel();
     }
 
     private void OnLadderDoAfter(Entity<LadderComponent> ent, ref LadderDoAfterEvent args)
     {
-        var user = args.User;
-        if (_net.IsClient && user != _player.LocalEntity)
+        if (args.Handled)
             return;
 
-        if (_actorQuery.TryComp(user, out var actor))
-            RemoveViewer(ent, actor.PlayerSession);
+        ent.Comp.CurrentDoAfterId = null;
+        ent.Comp.CurrentDoAfterUser = null;
+        Dirty(ent);
 
-        if (args.Cancelled || args.Handled)
+        if (args.Cancelled)
+            return;
+
+        if (_net.IsClient && args.User != _player.LocalEntity)
             return;
 
         args.Handled = true;
 
-        if (ent.Comp.Other is not { } other || TerminatingOrDeleted(ent.Comp.Other))
+        var destination = GetEntity(args.DestinationLadder);
+        MoveToDestinationLadder(ent, destination, args.User);
+    }
+
+    private void MoveToDestinationLadder(Entity<LadderComponent> source, EntityUid destination, EntityUid toMove, bool showMsg = true)
+    {
+        if (TerminatingOrDeleted(destination))
             return;
 
-        var coordinates = _transform.GetMapCoordinates(other);
-        if (coordinates.MapId == MapId.Nullspace)
+        if (_actorQuery.TryComp(toMove, out var actor))
+            RemoveViewer(source, actor.PlayerSession);
+
+        var destCoords = _transform.GetMapCoordinates(destination);
+        if (destCoords.MapId == MapId.Nullspace)
             return;
 
-        _transform.SetMapCoordinates(user, coordinates);
+        _transform.SetMapCoordinates(toMove, destCoords);
+        _rmcTeleporter.HandlePulling(toMove, destCoords);
 
-        var selfMessage = Loc.GetString("rmc-ladder-finish-climbing-self");
-        var othersMessage = Loc.GetString("rmc-ladder-finish-climbing-others", ("user", user));
-        _popup.PopupPredicted(selfMessage, othersMessage, user, user);
+        if (showMsg)
+        {
+            var direction = GetDirectionText(source, destination) ?? Loc.GetString("rmc-ladder-direction-up");
 
-        ent.Comp.LastDoAfterEnt = null;
-        ent.Comp.LastDoAfterId = null;
-        Dirty(ent);
-
-        _rmcTeleporter.HandlePulling(user, coordinates);
+            var selfMessage = Loc.GetString("rmc-ladder-finish-climbing-self", ("direction", direction));
+            var othersMessage = Loc.GetString("rmc-ladder-finish-climbing-others", ("user", toMove), ("direction", direction));
+            _popup.PopupPredicted(selfMessage, othersMessage, toMove, toMove);
+        }
     }
 
     private void OnLadderGetAltVerbs(Entity<LadderComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
-        if (ent.Comp.Other is not { } other)
+        if (!LadderIsConnected(ent.AsNullable()))
             return;
 
         var user = args.User;
-        if (!CanWatchPopup(ent, user))
+        if (!CanWatch(ent, user, false))
             return;
 
         args.Verbs.Add(new AlternativeVerb
@@ -237,10 +285,11 @@ public abstract class SharedLadderSystem : EntitySystem
             Priority = 100,
             Act = () =>
             {
-                if (!CanWatchPopup(ent, user))
-                    return;
-
-                Watch(user, other);
+                if (CanWatch(ent, user) &&
+                    SelectConnectedLadder(ent, user, SelectionReason.Watch) is { } otherLadder)
+                {
+                    Watch(user, otherLadder);
+                }
             },
             Text = Loc.GetString("rmc-ladder-look-through"),
         });
@@ -263,17 +312,15 @@ public abstract class SharedLadderSystem : EntitySystem
     private void OnLadderDragDropDragged(Entity<LadderComponent> ent, ref DragDropDraggedEvent args)
     {
         var user = args.User;
-        if (ent.Comp.Other is not { } other ||
-            user != args.Target)
-        {
+        if (user != args.Target || !LadderIsConnected(ent.AsNullable()))
             return;
-        }
 
-        if (!CanWatchPopup(ent, user))
+        if (!CanWatch(ent, user))
             return;
 
         args.Handled = true;
-        Watch(user, other);
+        if (SelectConnectedLadder(ent, user, SelectionReason.Watch) is { } otherLadder)
+            Watch(user, otherLadder);
     }
 
     private void OnWatchingMoveInput(Entity<LadderWatchingComponent> ent, ref MoveInputEvent args)
@@ -288,16 +335,13 @@ public abstract class SharedLadderSystem : EntitySystem
     }
 
     protected virtual void AddViewer(Entity<LadderComponent> ent, ICommonSession player)
-    {
-    }
+    { }
 
     protected virtual void RemoveViewer(Entity<LadderComponent> ent, ICommonSession player)
-    {
-    }
+    { }
 
     protected virtual void Watch(Entity<ActorComponent?, EyeComponent?> watcher, Entity<LadderComponent?> toWatch)
-    {
-    }
+    { }
 
     protected virtual void Unwatch(Entity<EyeComponent?> watcher, ICommonSession player)
     {
@@ -307,67 +351,19 @@ public abstract class SharedLadderSystem : EntitySystem
         _eye.SetTarget(watcher, null);
     }
 
-    protected bool CanWatchPopup(Entity<LadderComponent> ladder, EntityUid user)
+    protected bool CanWatch(Entity<LadderComponent> ladder, EntityUid user, bool popup = true)
     {
-        if (!_interaction.InRangeUnobstructed(user, ladder.Owner, popup: true))
+        if (!_interaction.InRangeUnobstructed(user, ladder.Owner, popup: popup))
             return false;
 
+        // Weird ghost interaction range edge case ("Looking through" Ladder A to remotely view Ladder B, then interacting with Ladder B despite being miles away.)
+        if (HasComp<GhostComponent>(user) &&
+            TryComp<LadderWatchingComponent>(user, out var watching) &&
+            watching.Watching == ladder)
+        {
+            return false;
+        }
+
         return true;
-    }
-
-    public override void Update(float frameTime)
-    {
-        if (_toUpdate.Count == 0)
-            return;
-
-        if (_net.IsClient)
-        {
-            _toUpdateIds.Clear();
-            _toUpdate.Clear();
-            return;
-        }
-
-        _toUpdateIds.Clear();
-        foreach (var entity in _toUpdate)
-        {
-            if (entity.Comp.Id is not { } id)
-                continue;
-
-            var ids = _toUpdateIds.GetOrNew(id);
-            if (ids.Count > 2)
-            {
-                var idsString = string.Join(",", ids.Select(e => ToPrettyString(e)));
-                Log.Error($"Found more than 2 ladders with id {id}, current ladder: {ToPrettyString(entity)}, previous ladders: {idsString}");
-            }
-
-            ids.Add(entity);
-        }
-
-        _toUpdate.Clear();
-
-        var ladders = EntityQueryEnumerator<LadderComponent>();
-        while (ladders.MoveNext(out var uid, out var ladder))
-        {
-            if (ladder.Id == null)
-                continue;
-
-            if (!_toUpdateIds.TryGetValue(ladder.Id, out var ids))
-                continue;
-
-            if (ids.FirstOrNull(e => e.Owner != uid) is not { } toUpdate)
-                continue;
-
-            if (toUpdate.Owner == uid)
-                continue;
-
-            if (ladder.Other is { } old && old != toUpdate.Owner)
-                Log.Error($"Found {ToPrettyString(toUpdate)} with duplicate ID {toUpdate.Comp.Id}, previous ladder: {ToPrettyString(old)}");
-
-            ladder.Other = toUpdate;
-            Dirty(uid, ladder);
-
-            toUpdate.Comp.Other = uid;
-            Dirty(toUpdate);
-        }
     }
 }

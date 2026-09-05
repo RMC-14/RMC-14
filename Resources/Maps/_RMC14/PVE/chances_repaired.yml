@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/12/2026 22:43:21
+  time: 09/03/2026 15:41:20
   entityCount: 24563
 maps:
 - 1
@@ -83976,7 +83976,8 @@ entities:
       pos: 89.5,99.5
       parent: 1
     - type: Ladder
-      id: hatch_pve
+      level: 1
+      groupId: hatch_pve
     - type: Fixtures
       fixtures: {}
 - proto: RMCLadderUp
@@ -83987,7 +83988,7 @@ entities:
       pos: 33.5,42.5
       parent: 1
     - type: Ladder
-      id: hatch_pve
+      groupId: hatch_pve
     - type: Fixtures
       fixtures: {}
 - proto: RMCLamp

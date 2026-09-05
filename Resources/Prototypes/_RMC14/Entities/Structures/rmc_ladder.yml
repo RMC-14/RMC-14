@@ -1,6 +1,7 @@
 ﻿- type: entity
   id: RMCLadder
   name: ladder
+  suffix: Down
   description: A sturdy metal ladder.
   placement:
     mode: SnapgridCenter
@@ -22,6 +23,10 @@
   - type: BlockXenoConstruction
   - type: RMCMesonsNonviewable
   - type: RMCIgnoreGhostInteractionLimits
+  - type: UserInterface
+    interfaces:
+      enum.LadderRadialBuiKey.Key:
+        type: LadderBoundUserInterface
 
 - type: entity
   parent: RMCLadder
