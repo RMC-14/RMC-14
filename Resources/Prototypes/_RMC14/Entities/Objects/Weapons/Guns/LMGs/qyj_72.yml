@@ -34,9 +34,9 @@
     - Burst
     - FullAuto
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m60.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_qyj.ogg
       params:
-        volume: -4
+        volume: 3
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
   - type: RMCSelectiveFire
