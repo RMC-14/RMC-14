@@ -1,4 +1,6 @@
-﻿using Content.Shared._RMC14.Medical.Surgery.Conditions;
+﻿using Content.Shared._RMC14.Embeds;
+using Content.Shared._RMC14.Medical.Surgery.Conditions;
+using Content.Shared._RMC14.Medical.Surgery.Effects.Step;
 using Content.Shared._RMC14.Medical.Surgery.Steps;
 using Content.Shared._RMC14.Medical.Surgery.Tools;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -19,6 +21,8 @@ public abstract partial class SharedCMSurgerySystem
         SubscribeLocalEvent<CMSurgeryStepComponent, CMSurgeryStepEvent>(OnToolStep);
         SubscribeLocalEvent<CMSurgeryStepComponent, CMSurgeryStepCompleteCheckEvent>(OnToolCheck);
         SubscribeLocalEvent<CMSurgeryStepComponent, CMSurgeryCanPerformStepEvent>(OnToolCanPerform);
+
+        SubscribeLocalEvent<RMCSurgeryStepForeignObjectEffectComponent, CMSurgeryStepCompleteCheckEvent>(OnForeignObjectStepCheck);
 
         SubSurgery<CMSurgeryCutLarvaRootsStepComponent>(OnCutLarvaRootsStep, OnCutLarvaRootsCheck);
 
@@ -190,6 +194,22 @@ public abstract partial class SharedCMSurgerySystem
         // The larva is bursting
         if (infected != null && infected.IsBursting)
             args.Cancelled = true;
+    }
+
+    private void OnForeignObjectStepCheck(Entity<RMCSurgeryStepForeignObjectEffectComponent> ent, ref CMSurgeryStepCompleteCheckEvent args)
+    {
+        if (!TryComp(args.Body, out ForeignObjectEmbeddedComponent? embedded) ||
+            !TryComp(args.Part, out BodyPartComponent? part))
+        {
+            args.Cancelled = true;
+            return;
+        }
+
+        if (embedded.StackCount > 0 &&
+            embedded.Entries.Any(entry => entry.BodyPart == part.PartType && entry.Symmetry == part.Symmetry))
+        {
+            args.Cancelled = true;
+        }
     }
 
     private void OnSurgeryTargetStepChosen(Entity<CMSurgeryTargetComponent> ent, ref CMSurgeryStepChosenBuiMsg args)

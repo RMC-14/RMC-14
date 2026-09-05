@@ -1,6 +1,7 @@
 using Content.Server.StationRecords.Systems;
 using Content.Shared._RMC14.Body;
 using Content.Shared._RMC14.Chemistry.Reagent;
+using Content.Shared._RMC14.Embeds;
 using Content.Shared._RMC14.Medical.Scanner;
 using Content.Shared._RMC14.Medical.Surgery.Steps.Parts;
 using Content.Shared._RMC14.Medical.Wounds;
@@ -84,6 +85,10 @@ public sealed class RMCMedicalRecordsSystem : SharedRMCMedicalRecordsSystem
         var woundTypes = wound != null ? wound.WoundGroups : new();
         var state = TryComp<MobStateComponent>(target, out var mobState) ? mobState.CurrentState : MobState.Alive;
 
+        var embeddedObjectInBodyParts = new List<ForeignObjectEmbeddedEntry>();
+        if (TryComp<ForeignObjectEmbeddedComponent>(target, out var embeddedComponent))
+            embeddedObjectInBodyParts = ForeignObjectEmbeddedUtility.GetEmbeddedObjectInBodyParts(embeddedComponent);
+
         return new HealthScanState(
             GetNetEntity(target),
             state,
@@ -96,7 +101,8 @@ public sealed class RMCMedicalRecordsSystem : SharedRMCMedicalRecordsSystem
             pulse,
             chemicals,
             bleeding,
-            detailLevel);
+            detailLevel,
+            embeddedObjectInBodyParts);
     }
 
     private List<RMCAutodocScanData> GenerateAutodocData(EntityUid target)
