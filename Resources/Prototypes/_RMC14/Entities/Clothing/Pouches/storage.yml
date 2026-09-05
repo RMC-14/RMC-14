@@ -390,6 +390,17 @@
     grid:
     - 0,0,13,1 #7 slots
 
+# Medium Documents Pouch
+- type: entity
+  parent: RMCPouchDocument
+  id: RMCPouchDocumentMedium
+  name: medium document pouch
+  description: A slighly smaller version of the document pouch. It can contain papers, folders, disks, technical manuals, and clipboards.
+  components:
+  - type: Storage
+    grid:
+    - 0,0,13,3 #14 slots
+
 # Flare Pouch
 - type: entity
   parent: RMCPouchFill
