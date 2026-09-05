@@ -331,6 +331,8 @@
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: background_xeno
   - type: XenoMapTracked
+  - type: RMCMobStateDrawDepth
+  - type: FloorOcclusion
   - type: Evasion
   - type: RMCWeaponAccuracy # This is so projectiles fired by xenos get a correctly-generated seed for RNG.
   - type: StunOnExplosionReceived
