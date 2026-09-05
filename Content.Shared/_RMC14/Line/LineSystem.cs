@@ -160,6 +160,11 @@ public sealed class LineSystem : EntitySystem
                 if (!_tag.HasAnyTag(entity, StructureTag, WallTag))
                     continue;
 
+                // open or opening doors don't count as blockers
+                // if the entity is a door, and the door isn't closed, denying, or welded, ignore it as a blocker
+                if (_doorQuery.TryComp(entity, out var door) && door.State != DoorState.Closed && door.State != DoorState.Denying && door.State != DoorState.Welded)
+                    continue;
+
                 blockCount++;
 
                 if (blockCount < 2)
