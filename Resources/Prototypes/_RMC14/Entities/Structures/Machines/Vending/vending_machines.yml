@@ -891,18 +891,18 @@
       entries:
       - id: FoodContainerEgg
         amount: 12
-      - id: FoodMeatChicken
-        amount: 24
-      - id: FoodMeatFish
-        amount: 18
+      - id: RMCBoxChicken
+        amount: 12
+      - id: RMCBoxCarp
+        amount: 12
       - id: RMCBoxFish
         amount: 12
       - id: RMCBoxMeat
         amount: 12
-      - id: FoodMeatBacon
-        amount: 24
-      - id: FoodMeatSausage
-        amount: 18
+      - id: RMCBoxBacon
+        amount: 12
+      - id: RMCBoxSausage
+        amount: 12
       - id: RMCBoxMilk
         amount: 12
       - id: RMCBoxSoyMilk
@@ -913,7 +913,7 @@
         amount: 12
       - id: RMCBoxSugar
         amount: 12
-      - id: RMCCondimentCornOil
+      - id: RMCBoxCornOil
         amount: 12
       - id: RMCBoxSalt
         amount: 12
@@ -950,13 +950,13 @@
         amount: 12
       - id: RMCBoxWhiteBeet
         amount: 12
-      - id: FoodOnion
+      - id: RMCBoxOnion
         amount: 12
-      - id: FoodOnionRed
+      - id: RMCBoxOnionRed
         amount: 12
-      - id: FoodGarlic
+      - id: RMCBoxGarlic
         amount: 12
-      - id: ReagentContainerRice
+      - id: RMCBoxRice
         amount: 12
       - id: ReagentContainerOliveoil
         amount: 12

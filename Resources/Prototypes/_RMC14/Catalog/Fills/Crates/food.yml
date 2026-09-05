@@ -47,8 +47,13 @@
     - id: FoodContainerEgg
     - id: RMCBoxFish
     - id: RMCBoxMeat
+    - id: RMCBoxSausage
+    - id: RMCBoxCarp
+    - id: RMCBoxChicken
+    - id: RMCBoxBacon
     - id: RMCBoxMilk
     - id: RMCBoxSoyMilk
+    - id: RMCBoxCornOil
     - id: RMCBoxEnzyme
     - id: RMCBoxFlour
     - id: RMCBoxSugar
@@ -64,9 +69,16 @@
     - id: RMCBoxLemon
     - id: RMCBoxLime
     - id: RMCBoxOrange
+    - id: RMCBoxOnion
+    - id: RMCBoxOnion
+    - id: RMCBoxOnionRed
+    - id: RMCBoxGarlic
+    - id: RMCBoxRice
     - id: RMCBoxPotato
     - id: RMCBoxTomato
     - id: RMCBoxWhiteBeet
+    - id: RMCBoxSalt
+    - id: RMCBoxPepper
     - id: RMCCondimentHotsauceCholula
     - id: RMCCondimentHotsauceFranks
     - id: RMCCondimentHotsauceSriracha
