@@ -106,6 +106,13 @@
     - RMCCartridgeRifle10x24mmRubber
   - type: CartridgeAmmo
     proto: BulletRifle10x24mmRubber
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#0A00C8"
 
 - type: entity
   parent: RMCBaseBullet
@@ -165,6 +172,13 @@
     - RMCCartridge10x20mmRubber
   - type: CartridgeAmmo
     proto: Bullet10x20mmRubber
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#0A00C8"
 
 - type: entity
   parent: RMCBaseBullet
@@ -252,6 +266,13 @@
     - RMCCartridgePistol9mmRubber
   - type: CartridgeAmmo
     proto: RMCBulletPistol9mmRubber
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#0A00C8"
 
 - type: entity
   parent: CMBulletBase
@@ -265,6 +286,65 @@
         Blunt: 3
   - type: RMCStaminaDamageOnCollide
     damage: 10
+
+- type: entity
+  parent: RMCSpeedLoaderM44
+  id: RMCSpeedLoader44Rubber
+  name: "M44 speed loader rubber (.44)"
+  description: A revolver speed loader filled with less-lethal rubber ammo.
+  components:
+  - type: Tag
+    tags:
+    - RMCMagazineRevolver
+    - RMCSpeedLoader44Rubber
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/SpeedLoaders/m44.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: base-5
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: base-unshaded-5
+      color: "#0A00C8"
+      map: [ "enum.GunVisualLayers.MagUnshaded" ]
+  - type: BallisticAmmoProvider
+    proto: RMCCartridgeRevolver44Rubber
+    capacity: 7
+
+- type: entity
+  id: RMCCartridgeRevolver44Rubber
+  name: rubber cartridge (.44)
+  description: A less-lethal .44 rubber round.
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRevolver44Rubber
+    - RMCCartridgeRevolver44
+  - type: CartridgeAmmo
+    proto: RMCBulletRevolver44Rubber
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#0A00C8"
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletRevolver44Rubber
+  name: rubber bullet (.44)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 5
+  - type: RMCStaminaDamageOnCollide
+    damage: 15
+  - type: RMCProjectileAccuracy
+    accuracy: 90
 
 ## Tags
 
@@ -297,3 +377,9 @@
 
 - type: Tag
   id: RMCCartridgePistol9mmRubber
+
+- type: Tag
+  id: RMCCartridgeRevolver44Rubber
+
+- type: Tag
+  id: RMCSpeedLoader44Rubber
