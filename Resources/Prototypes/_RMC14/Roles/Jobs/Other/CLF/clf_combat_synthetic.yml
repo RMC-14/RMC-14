@@ -1,0 +1,83 @@
+- type: job
+  parent: CMJobBase
+  id: RMCCLFSyntheticCombat
+  name: rmc-clf-synthetic-combat
+  description: rmc-ghost-role-information-clf-description
+  playTimeTracker: RMCJobSyntheticCLF
+  ranks:
+    RMCRankSyntheticColonist: [ ]
+  icon: "RMCJobIconCLFSynthetic"
+  joinNotifyCrew: false
+  spawnMenuRoleName: CLF Combat Synthetic
+  startingGear: RMCGearSyntheticCLFCombat
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - CLF
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      understoodLanguages:
+      - Japanese
+      - English
+      currentLanguage: Japanese
+      defaultLanguage: Japanese
+    - type: LanguageLearning
+      learnableLanguages:
+      - Xeno
+      firstContactLanguages:
+      - Xeno
+      comprehensionThreshold: 0.8
+      learningRange: 8.0
+      baseWordLearningRate: 0.05
+    - type: JobPrefix
+      prefix: rmc-job-prefix-clf-synth
+    - type: MeleeWeapon
+      soundHit:
+        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
+        params:
+          variation: 0.15
+          volume: -1
+      angle: 30
+      animation: WeaponArcFist
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 35
+    - type: Synth
+      canUseGuns: true
+  hidden: true
+
+- type: startingGear
+  id: RMCGearSyntheticCLFCombat
+  equipment:
+    head: RMCHeadBeretPurple
+    mask: RMCCombatUtilityKnifeA
+    ears: RMCHeadsetDistressCLF
+    eyes: RMCGlassesMedicalHUDGlasses
+    jumpsuit: RMCJumpsuitCLFWebbing
+    outerClothing: RMCCoatMilitia
+    gloves: CMHandsBlackMarine
+    shoes: RMCShoesCombat
+    suitstorage: WeaponRifleMAR40
+    id: RMCIDCardCLFSyntheticCombat
+    belt: RMCBeltMedicalDefibAnalyzerFilled
+    back: RMCSatchelLightpackWelder
+    pocket1: RMCPouchToolsFill
+    pocket2: RMCPouchConstructionFillLowGrade
+  storage:
+    back:
+    - CMFireExtinguisherPortable
+    - CMRollerBedSpawnFolded
+    - RMCExplosivePlastic
+    - RMCExplosivePlastic
+    - CMCrowbar
+    - RMCSynthResetKeyMakeshift
+    - CMSurgicalLine
+    - CMSynthGraft
+    outerClothing:
+    - RMCMagazineRifleMAR40
+    - RMCMagazineRifleMAR40
