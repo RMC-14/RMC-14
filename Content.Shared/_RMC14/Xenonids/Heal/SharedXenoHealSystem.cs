@@ -55,6 +55,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
     [Dependency] private readonly XenoStrainSystem _xenoStrain = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
@@ -360,6 +361,9 @@ public abstract class SharedXenoHealSystem : EntitySystem
 
     public void Heal(EntityUid target, FixedPoint2 amount)
     {
+        if (!_xeno.CanHeal(target))
+            return;
+
         var damage = _rmcDamageable.DistributeDamageCached(target, BruteGroup, amount);
         var totalHeal = damage.GetTotal();
         var leftover = amount - totalHeal;

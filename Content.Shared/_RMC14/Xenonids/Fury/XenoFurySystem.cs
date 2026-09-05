@@ -61,8 +61,7 @@ public sealed partial class XenoFurySystem : EntitySystem
             if (!_hive.FromSameHive(xeno.Owner, otherXeno.Owner))
                 continue;
 
-            var toHeal = -_rmcDamageable.DistributeTypesTotal(otherXeno.Owner, healAmount);
-            _damageable.TryChangeDamage(otherXeno.Owner, toHeal, origin: xeno, tool: xeno);
+            _xeno.HealDamage(otherXeno.Owner, healAmount);
 
             if (_net.IsServer)
                 SpawnAttachedTo(xeno.Comp.Effect, otherXeno.Owner.ToCoordinates());
