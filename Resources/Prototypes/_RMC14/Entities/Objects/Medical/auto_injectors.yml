@@ -307,6 +307,62 @@
     labelTextLocId: rmc-dermaline-container-label-text
 
 - type: entity
+  parent: CMAutoInjector
+  id: RMCNaloxoneAutoInjector
+  name: naloxone plus autoinjector
+  description: An autoinjector loaded with 3 uses of Naloxone+, designed to flush the body of most chemicals.
+  suffix: PvE
+  components:
+  - type: Hypospray
+    transferAmount: 1
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 3
+        reagents:
+        - ReagentId: RMCNaloxone
+          Quantity: 3
+  - type: CMRefillableSolution
+    reagents:
+      RMCNaloxone: 3
+  - type: IconLabel
+    labelTextLocId: rmc-naloxone-container-label-text
+
+- type: entity
+  parent: CMAutoInjector
+  id: RMCNaloxoneAutoInjectorEmergency
+  name: overdose autoinjector
+  description: An autoinjector loaded with a single use of Naloxone+, designed to flush the body of most chemicals. Doesn't require any training to use.
+  suffix: PvE
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/ez_medic_auto_injector.rsi # TODO RMC14 fix sprites when autoinjector sprite changes merge
+    layers:
+    - state: autoinjector
+    - state: autoinjector1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+  - type: Item
+    sprite: null
+  - type: Hypospray
+    transferAmount: 1
+    injectSound: /Audio/_RMC14/Medical/air_release.ogg
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 1
+        reagents:
+        - ReagentId: RMCNaloxone
+          Quantity: 1
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+  - type: MedicallyUnskilledDoAfter
+    min: 0
+    doAfter: 0
+  - type: IconLabel
+    labelTextLocId: rmc-naloxone-container-label-text
+
+- type: entity
   parent: RMCMedicAutoInjectorBase
   id: RMCMedicAutoInjector15
   name: medic autoinjector (M-XL)
