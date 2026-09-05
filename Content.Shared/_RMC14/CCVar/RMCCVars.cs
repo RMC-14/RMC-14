@@ -587,6 +587,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<string> RMCChemMasterPresets =
         CVarDef.Create("rmc.chemmaster_presets", "", CVar.CLIENT | CVar.ARCHIVE);
 
+    public static readonly CVarDef<bool> RMCLoadoutLowestRankSelectable =
+        CVarDef.Create("rmc.loadout_lowest_rank_selectable", false, CVar.REPLICATED | CVar.SERVER);
+        
     public static readonly CVarDef<int> RMCLightningMaxAmountLightNearbyCount =
         CVarDef.Create("rmc.lighting_max_amount_light_nearby_count", 6, CVar.CLIENT | CVar.ARCHIVE);
 
