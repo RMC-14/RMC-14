@@ -14,5 +14,3 @@
   id: RMCAttachableToggleableBase
   components:
   - type: AttachableToggleable
-  - type: UseDelay
-    delay: 0
