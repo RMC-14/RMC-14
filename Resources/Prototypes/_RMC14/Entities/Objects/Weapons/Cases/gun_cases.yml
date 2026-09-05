@@ -533,6 +533,25 @@
     - id: CMMagazineRifleM54CE2
     - id: CMMagazineRifleM54CE2HT
 
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCGunCaseRifleM54CE2Smart
+  name: M54CE2 smartgun conversion case
+  description: A gun case containing the M54CE2 smartgun conversion attachment and harness. Gun not included.
+  components:
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,3,1
+    whitelist:
+      tags:
+      - RMCAttachmentM54CE2Smart
+      - RMCM54CE2SmartHarness
+  - type: StorageFill
+    contents:
+    - id: RMCAttachmentM54CE2Smart
+    - id: RMCM54CE2SmartHarness
+
 # XM88
 - type: entity
   parent: RMCGunCaseBase
