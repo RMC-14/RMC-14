@@ -74,3 +74,19 @@
   toolName: tool-quality-brushing-tool-name
   spawn: WireBrush
   icon: { sprite: Objects/Specific/Janitorial/wirebrush.rsi, state: icon }
+
+# begin RMC14
+- type: tool
+  id: FenceCutting
+  name: tool-quality-fencecutting-name
+  toolName: tool-quality-fencecutting-tool-name
+  spawn: RMCM5Bayonet
+  icon: { sprite: _RMC14/Objects/Weapons/Melee/m5_bayonet.rsi, state: icon }
+
+- type: tool
+  id: DoorPrying
+  name: tool-quality-doorprying-name
+  toolName: tool-quality-doorprying-tool-name
+  spawn: RMCM5Bayonet
+  icon: { sprite: _RMC14/Objects/Weapons/Melee/machete.rsi, state: icon }
+# end RMC14
