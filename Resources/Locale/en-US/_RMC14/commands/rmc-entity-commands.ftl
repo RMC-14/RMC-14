@@ -6,3 +6,7 @@ cmd-nukemap-help = nukemap <mapID>
 
 cmd-orbitaldrop-desc = Puts an entity in a drop pod and supply drops it to the given coordinates.
 cmd-orbitaldrop-help = orbitaldrop <entity> <x> <y> <mapId> [dropDelay=5] [dropDuration=3] [timeToOpen=2] [scatter=0] [useParachute=true]
+
+cmd-unlockvehicle-desc = Adds the vehicle to the vehicle lift.
+cmd-unlockvehicle-help = unlockvehicle <entity>
+cmd-unlockvehicle-hint = Entities that are valid vehicles.
