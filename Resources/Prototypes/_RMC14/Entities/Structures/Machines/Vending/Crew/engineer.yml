@@ -106,6 +106,8 @@
       entries:
       - id: RMCSynthResetKey
         points: 20
+      - id: RMCOverwatchCameraTripod
+        points: 10
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel

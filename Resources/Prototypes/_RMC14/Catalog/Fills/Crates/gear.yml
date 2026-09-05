@@ -33,6 +33,16 @@
       amount: 2
 
 - type: entity
+  parent: RMCCrateSupply
+  id: RMCCrateGearOverwatchCameraTripod
+  name: field camera tripod crate (x3)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCOverwatchCameraTripod
+      amount: 3
+
+- type: entity
   parent: RMCCrateAmmo
   id: RMCCrateGearPackFlareCAS
   name: signal flare packs crate (x4)

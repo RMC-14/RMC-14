@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared.Mobs;
@@ -27,10 +27,12 @@ public enum OverwatchConsoleUI
 [Serializable, NetSerializable]
 public sealed class OverwatchConsoleBuiState(
     List<OverwatchSquad> squads,
-    Dictionary<NetEntity, List<OverwatchMarine>> marines) : BoundUserInterfaceState
+    Dictionary<NetEntity, List<OverwatchMarine>> marines,
+    Dictionary<NetEntity, List<OverwatchTripodCamera>> cameras) : BoundUserInterfaceState
 {
     public readonly List<OverwatchSquad> Squads = squads;
     public readonly Dictionary<NetEntity, List<OverwatchMarine>> Marines = marines;
+    public readonly Dictionary<NetEntity, List<OverwatchTripodCamera>> Cameras = cameras;
 }
 
 [Serializable, NetSerializable]
@@ -186,4 +188,12 @@ public readonly record struct OverwatchMarine(
     Vector2? LeaderDistance,
     ProtoId<RankPrototype>? Rank,
     LocId? RoleOverride
+);
+
+[Serializable, NetSerializable]
+public readonly record struct OverwatchTripodCamera(
+    NetEntity Id,
+    string Name,
+    string AreaName,
+    OverwatchLocation Location
 );
