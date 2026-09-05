@@ -180,3 +180,92 @@
     rotationSpeed: 180
     simple4DirMode: false
   - type: Turret
+
+- type: entity
+  parent: RMCSentryPremade
+  id: RMCTurretColony
+  name: UN-635 static gauss turret
+  description: A fully-automated defence turret with mid-range targeting capabilities. Armed with a modified M32-S Autocannon and an internal belt feed.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
+    drawdepth: Mobs
+    noRot: true
+    layers:
+    - state: defense_base
+    - state: omni_uad_sentry_on
+  - type: InteractionPopup
+    interactDelay: 0.2
+    successChance: 0.8
+    interactSuccessString: petting-success-generic
+    interactFailureString: petting-failure-generic
+    interactSuccessSound:
+      path: /Audio/Effects/double_beep.ogg
+  - type: Corrodible
+    isCorrodible: false
+  - type: Gun
+    fireRate: 2.5
+  - type: BallisticAmmoProvider
+    cycleable: false
+    proto: RMCCartridgeSentry
+    capacity: 99999
+  - type: NpcFactionMember
+    factions:
+    - UNMC
+  - type: MarineIFF
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: UserIFF
+    factions:
+    - FactionMarine
+  - type: RMCHealthExaminable
+    speciesType: Mechanical
+
+- type: entity
+  parent: CMBaseStructure
+  id: RMCDeployerSentryCheckpoint
+  name: checkpoint sentry deployment system
+  description: A box that deploys a sentry turret.
+  components:
+  - type: Transform
+    anchored: true
+  - type: Appearance
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/sentry_deployer.rsi
+    layers:
+    - state: sentry_system_installed
+      map: [ "enum.EquipmentDeployState.UnDeployed" ]
+    - state: sentry_system_deployed
+      map: [ "enum.EquipmentDeployState.Deployed" ]
+      visible: false
+  - type: ApcPowerReceiver
+    needsPower: true
+  - type: WallMount
+    arc: 360
+  - type: RMCPowerReceiver
+    idleLoad: 1000
+    activeLoad: 5000
+    channel: Equipment
+  - type: RMCEquipmentDeployer
+    deployPrototype: RMCTurretColony
+    isDeployableByHand: true
+    isDeployable: true
+    powerTogglesDeployable: true
+    deployOffset: 0, -1
+    blacklist:
+      components:
+      - Xeno
+  - type: InteractionOutline
+  - type: Corrodible
+    isCorrodible: false
