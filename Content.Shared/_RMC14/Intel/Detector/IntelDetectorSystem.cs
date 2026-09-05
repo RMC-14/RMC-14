@@ -3,11 +3,13 @@ using Content.Shared._RMC14.MotionDetector;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Coordinates;
 using Content.Shared.Examine;
+using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs;
+using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
@@ -29,9 +31,11 @@ public sealed class IntelDetectorSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private EntityQuery<IntelDetectorComponent> _detectorQuery;
     private EntityQuery<StorageComponent> _storageQuery;
+    private EntityQuery<IntelDetectorTrackedComponent> _trackedIntelQuery;
 
     private readonly HashSet<Entity<IntelDetectorTrackedComponent>> _tracked = new();
 
@@ -39,12 +43,14 @@ public sealed class IntelDetectorSystem : EntitySystem
     {
         _detectorQuery = GetEntityQuery<IntelDetectorComponent>();
         _storageQuery = GetEntityQuery<StorageComponent>();
+        _trackedIntelQuery = GetEntityQuery<IntelDetectorTrackedComponent>();
 
         SubscribeLocalEvent<XenoParasiteInfectEvent>(OnXenoInfect);
         SubscribeLocalEvent<MobStateChangedEvent>(OnMobStateChanged);
 
         SubscribeLocalEvent<IntelDetectorComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<IntelDetectorComponent, ActivateInWorldEvent>(OnActivateInWorld);
+        SubscribeLocalEvent<IntelDetectorComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<IntelDetectorComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbs);
         SubscribeLocalEvent<IntelDetectorComponent, DroppedEvent>(OnDisable);
         SubscribeLocalEvent<IntelDetectorComponent, RMCDroppedEvent>(OnDisable);
@@ -84,6 +90,40 @@ public sealed class IntelDetectorSystem : EntitySystem
         args.Handled = true;
         Toggle(ent);
         _audio.PlayPredicted(ent.Comp.ToggleSound, ent, args.User);
+    }
+
+    private void OnAfterInteract(Entity<IntelDetectorComponent> ent, ref AfterInteractEvent args)
+    {
+        if (args.Handled || args.Target is not { } target || target != args.User)
+            return;
+
+        args.Handled = true;
+
+        if (!ent.Comp.Enabled)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-intel-detector-not-on"), args.User, args.User);
+            return;
+        }
+
+        if (_timing.CurTime < ent.Comp.NextSelfCheckAt)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-intel-detector-cooldown"), args.User, args.User);
+            return;
+        }
+
+        var hasIntel = HasIntelOnPerson(args.User);
+        var msg = hasIntel
+            ? Loc.GetString("rmc-intel-detector-has-intel")
+            : Loc.GetString("rmc-intel-detector-no-intel");
+
+        _popup.PopupClient(msg, args.User, args.User);
+
+        if (hasIntel)
+        {
+            _audio.PlayPredicted(ent.Comp.ScanSound, ent, args.User);
+            ent.Comp.NextSelfCheckAt = _timing.CurTime + ent.Comp.SelfCheckCooldown;
+            Dirty(ent);
+        }
     }
 
     private void OnGetVerbs(Entity<IntelDetectorComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
@@ -144,12 +184,66 @@ public sealed class IntelDetectorSystem : EntitySystem
         }
     }
 
+    private bool HasIntelOnPerson(EntityUid uid)
+    {
+        foreach (var held in _hands.EnumerateHeld(uid))
+        {
+            if (ItemHasIntel(held))
+                return true;
+        }
+
+        var slots = _inventory.GetSlotEnumerator(uid);
+        while (slots.MoveNext(out var slot))
+        {
+            if (slot.ContainedEntity is { } contained && ItemHasIntel(contained))
+                return true;
+        }
+
+        return false;
+    }
+
+    private bool ItemHasIntel(EntityUid ent)
+    {
+        if (_trackedIntelQuery.HasComp(ent))
+            return true;
+
+        if (_storageQuery.TryComp(ent, out var storage))
+        {
+            foreach (var stored in storage.StoredItems.Keys)
+            {
+                if (ItemHasIntel(stored))
+                    return true;
+            }
+        }
+
+        return false;
+    }
+
+    private bool TryGetCarrier(EntityUid item, out EntityUid carrier)
+    {
+        carrier = default;
+        var current = item;
+        while (_container.TryGetContainingContainer((current, null), out var container))
+        {
+            if (HasComp<HandsComponent>(container.Owner) || HasComp<InventoryComponent>(container.Owner))
+            {
+                carrier = container.Owner;
+                return true;
+            }
+
+            current = container.Owner;
+        }
+
+        return false;
+    }
+
     private void OnExamined(Entity<IntelDetectorComponent> ent, ref ExaminedEvent args)
     {
         using (args.PushGroup(nameof(IntelDetectorComponent)))
         {
             var mode = ent.Comp.Short ? "short" : "long";
             args.PushMarkup($"The motion detector is in [color=cyan]{mode}[/color] scanning mode.");
+            args.PushMarkup(Loc.GetString("rmc-intel-detector-self-check-examine"));
         }
     }
 
@@ -199,9 +293,18 @@ public sealed class IntelDetectorSystem : EntitySystem
             _tracked.Clear();
             _entityLookup.GetEntitiesInRange(uid.ToCoordinates(), range, _tracked);
 
+            TryGetCarrier(uid, out var detectorCarrier);
+
             detector.Blips.Clear();
             foreach (var tracked in _tracked)
             {
+                if (detectorCarrier != default &&
+                    TryGetCarrier(tracked.Owner, out var trackedCarrier) &&
+                    trackedCarrier == detectorCarrier)
+                {
+                    continue;
+                }
+
                 detector.Blips.Add(new Blip(_transform.GetMapCoordinates(tracked), false));
             }
 
