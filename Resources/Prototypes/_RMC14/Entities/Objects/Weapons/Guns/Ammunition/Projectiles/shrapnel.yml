@@ -40,3 +40,5 @@
     thresholds:
     - range: 32
       falloff: 10
+  - type: ProjectileCoverInteraction
+    stoppedByCover: true
