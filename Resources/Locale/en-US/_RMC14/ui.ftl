@@ -91,6 +91,7 @@ rmc-ui-patreon = Patreon
 
 rmc-other-credits-tab = Other
 
+rmc-ui-chat-preview = Show typed messages as a centred preview in the middle of the screen
 rmc-ui-auto-punctuate = Automatically punctuate in-character messages
 rmc-ui-auto-eject-magazines = Automatically eject magazines from guns
 rmc-ui-damage-yourself = Enable being able to hurt yourself with melee and guns
