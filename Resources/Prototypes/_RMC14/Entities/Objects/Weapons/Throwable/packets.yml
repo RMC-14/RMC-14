@@ -370,6 +370,98 @@
     - id: CMGrenadeFragOld
       amount: 3
 
+- type: entity
+  parent: CMPacketBase
+  id: CMPacketGrenadeHighExplosiveRCM
+  name: L115A1 HEDP grenade packet
+  description: It contains three L115A1 high explosive grenades.
+  components:
+  - type: Sprite
+    layers:
+    - state: rcmhe_packet
+      map: [ "closedLayer" ]
+    - state: rcmhe_packet_e
+      map: [ "openLayer", "emptyLayer" ]
+
+- type: entity
+  parent: CMPacketGrenadeHighExplosiveRCM
+  id: CMPacketGrenadeHighExplosiveRCMFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeHighExplosiveRCM
+      amount: 3
+
+- type: entity
+  parent: CMPacketBase
+  id: CMPacketGrenadeIncendiaryRCM
+  name: L117A1 HIDP grenade packet
+  description: It contains three L117A1 HIDP incendiary grenades.
+  components:
+  - type: Sprite
+    layers:
+    - state: rcmhi_packet
+      map: [ "closedLayer" ]
+    - state: rcmhi_packet_e
+      map: [ "openLayer", "emptyLayer" ]
+
+- type: entity
+  parent: CMPacketGrenadeIncendiaryRCM
+  id: CMPacketGrenadeIncendiaryRCMFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCGrenadeIncendiaryRCM
+      amount: 3
+
+- type: entity
+  parent: CMPacketBase
+  id: CMPacketGrenadeFragSPP
+  name: Type 6 shrapnel grenade packet
+  description: It contains three Type 6 shrapnel grenades.
+  components:
+  - type: Sprite
+    layers:
+    - state: spphf_packet
+      map: [ "closedLayer" ]
+    - state: spphf_packet_e
+      map: [ "openLayer", "emptyLayer" ]
+
+- type: entity
+  parent: CMPacketGrenadeFragSPP
+  id: CMPacketGrenadeFragSPPFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeFragSPP
+      amount: 3
+
+- type: entity
+  parent: CMPacketBase
+  id: CMPacketGrenadeWPSPP
+  name: Type 6 WP grenade packet
+  description: It contains three Type 6 White Phosphorous grenades.
+  components:
+  - type: Sprite
+    layers:
+    - state: sppwp_packet
+      map: [ "closedLayer" ]
+    - state: sppwp_packet_e
+      map: [ "openLayer", "emptyLayer" ]
+
+- type: entity
+  parent: CMPacketGrenadeWPSPP
+  id: CMPacketGrenadeWPSPPFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCGrenadeWhitePhosphorusSPP
+      amount: 3
+
 - type: Tag
   id: RMCPacketGrenade
 
