@@ -194,7 +194,7 @@ namespace Content.Shared.Chemistry.Reagent
 
             var entMan = IoCManager.Resolve<IEntityManager>();
             var random = IoCManager.Resolve<IRobustRandom>();
-            var args = new EntityEffectReagentArgs(plantHolder.Value, entMan, null, solution, amount.Quantity, this, null, 1f);
+            var args = new EntityEffectReagentArgs(plantHolder.Value, entMan, null, solution, amount.Quantity, this, null, 1f, null);
             foreach (var plantMetabolizable in PlantMetabolisms)
             {
                 if (!plantMetabolizable.ShouldApply(args, random))
@@ -210,10 +210,6 @@ namespace Content.Shared.Chemistry.Reagent
                 plantMetabolizable.Effect(args);
             }
         }
-
-        // TODO RMC14 move out to a partial when https://github.com/space-wizards/RobustToolbox/pull/5160 is merged
-        [DataField]
-        public bool IsCM { get; set; }
     }
 
     [Serializable, NetSerializable]

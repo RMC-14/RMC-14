@@ -201,9 +201,9 @@
       metabolismRate: 0.1
       effects:
       - !type:Corrosive
-        potency: 6
+        level: 6
       - !type:Toxic
-        potency: 6
+        level: 6
 
 - type: reagent
   parent: [ CMReagent, BasePyrotechnic ]
@@ -225,4 +225,4 @@
       metabolismRate: 0.1
       effects:
       - !type:Toxic
-        potency: 2
+        level: 2
