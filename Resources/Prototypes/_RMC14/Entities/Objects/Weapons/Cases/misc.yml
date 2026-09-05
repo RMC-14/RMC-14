@@ -12,6 +12,11 @@
     - 0,0,8,0
   - type: Sprite
     sprite: _RMC14/Objects/Storage/procase_mini.rsi
+    layers:
+    - state: closed
+      map: [ base ]
+    - state: shield
+      map: [ label ]
   - type: Icon
     sprite: _RMC14/Objects/Storage/procase_mini.rsi
   - type: StorageFill
