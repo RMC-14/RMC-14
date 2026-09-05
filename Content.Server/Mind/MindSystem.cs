@@ -131,6 +131,7 @@ public sealed class MindSystem : SharedMindSystem
         // EnsureComp instead of AddComp to deal with deferred deletions.
         var comp = EnsureComp<VisitingMindComponent>(entity);
         comp.MindId = mindId;
+        RaiseLocalEvent(entity, new MindVisitedMessage(mindId), true);
 
         // Do this AFTER the entity changes above as this will fire off a player-detached event
         // which will run ghosting twice.
