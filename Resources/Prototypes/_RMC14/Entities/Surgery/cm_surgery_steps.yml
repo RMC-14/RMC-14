@@ -251,7 +251,7 @@
     state: hemostat
   - type: RMCSurgeryStepForeignObjectEffect
   - type: RMCSurgeryComplicationEffects
-    FailureDirectDamage:
+    failureDirectDamage:
       types:
         Blunt: 5
 
@@ -270,10 +270,10 @@
     state: scalpel
   - type: RMCSurgeryStepForeignObjectEffect
   - type: RMCSurgeryComplicationEffects
-    SuccessDirectDamage:
+    successDirectDamage:
       types:
         Blunt: 5
-    FailureDirectDamage:
+    failureDirectDamage:
       types:
         Blunt: 10
 
