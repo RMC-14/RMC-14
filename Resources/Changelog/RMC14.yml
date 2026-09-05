@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: You can now see local chat near the observed player while using the Overwatch
-      Console or Watch Xeno action.
-    type: Tweak
-  id: 3131
-  time: '2026-04-22T00:06:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9672
 - author: nbstrong
   changes:
   - message: MRE ration packs now have to be torn open before you can access their
@@ -4481,5 +4473,14 @@
   id: 3630
   time: '2026-09-05T18:46:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9696
+- author: IceNoobXD
+  changes:
+  - message: Added 9 new inserts to Fiorina! Basketball (20%), Research Pristine (25%),
+      Pool Party (20%), Pizza Time (30%), Repair Panels LZ (30%), Scav Ship Holder
+      (10%), Engineer Office (30%,) Warden Office Decorated (15%) and Gamer Time (20%)!
+    type: Add
+  id: 3631
+  time: '2026-09-05T18:52:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9981
 Name: RMC14
 Order: -1
