@@ -1,10 +1,11 @@
-﻿using Robust.Shared.GameStates;
+﻿using Content.Shared._RMC14.Chair;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.PowerLoader;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(PowerLoaderSystem))]
+[Access(typeof(PowerLoaderSystem), typeof(SharedRMCChairStackSystem))]
 public sealed partial class PowerLoaderGrabbableComponent : Component
 {
     [DataField, AutoNetworkedField]
