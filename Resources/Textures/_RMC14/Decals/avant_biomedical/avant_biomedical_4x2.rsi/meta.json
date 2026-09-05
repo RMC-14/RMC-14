@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Made by SharkSnake98 on GitHub",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "avant_1"
+    },
+    {
+      "name": "avant_2"
+    },
+    {
+      "name": "avant_3"
+    },
+    {
+      "name": "avant_4"
+    },
+    {
+      "name": "avant_5"
+    },
+    {
+      "name": "avant_6"
+    },
+    {
+      "name": "avant_7"
+    },
+    {
+      "name": "avant_8"
+    }
+  ]
+}
