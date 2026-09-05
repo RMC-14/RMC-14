@@ -1,0 +1,79 @@
+- type: entity
+  parent: CMBaseStructureCorrodible
+  id: RMCCryoCell
+  name: cryo cell
+  description: A donation from the old A.W. project, using cryogenic technology. It slowly heals whoever is inside the tube.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    noRot: true
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/Medical/cryo_cell.rsi
+    drawdepth: Mobs
+    noRot: true
+    offset: 0, 0.5
+    layers:
+    - state: cell-off-empty
+      map: [ "enum.CryoCellVisualLayers.Base" ]
+  - type: Appearance
+  - type: InteractionOutline
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: CryoCell
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 20
+    activeLoad: 200
+    channel: Equipment
+  - type: DragInsertContainer
+    containerId: cryo_cell
+    entryDelay: 2
+    delaySelfEntry: true
+  - type: NoStunOnExit
+  - type: ContainerContainer
+    containers:
+      cryo_cell:
+        !type:ContainerSlot
+        showEnts: true
+      beakerSlot: !type:ContainerSlot {}
+  - type: ItemSlots
+    slots:
+      beakerSlot:
+        whitelist:
+          components:
+          - FitsInDispenser
+  - type: UserInterface
+    interfaces:
+      enum.CryoCellUIKey.Key:
+        type: CryoCellBui
+  - type: ActivatableUI
+    key: enum.CryoCellUIKey.Key
+    requiresComplex: false
+  - type: ActivatableUIRequiresPower
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: PointLight
+    color: "#43752c"
+    radius: 2
+    energy: 10
+    enabled: false
+  - type: InsertBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: RMCMesonsNonviewable
