@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Intel.Detector;
 using Content.Shared._RMC14.MotionDetector;
+using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Hands.Components;
@@ -128,6 +129,11 @@ public sealed class SmartEquipSystem : EntitySystem
         var session = playerSession;
         var equipmentSlot = msg.EquipmentSlot;
         if (playerSession.AttachedEntity is not { Valid: true } uid || !Exists(uid))
+            return;
+
+        // RMC14
+        // Disable smartequip if player is devoured
+        if (HasComp<DevouredComponent>(uid))
             return;
 
         // early out if we don't have any hands or a valid inventory slot
