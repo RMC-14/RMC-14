@@ -28,7 +28,7 @@
     head: RMCHeadBlueSoftCap
     jumpsuit: RMCJumpsuitBlueWorkwear
     outerClothing: RMCJacketWindbreakerFirstResponder
-    eyes: RMCGlassesMedicalHUDGlasses
+    eyes: RMCGlassesMedicalHUDGlassesAdvanced
 
 - type: entity
   parent: CMSpawnPointJobBase

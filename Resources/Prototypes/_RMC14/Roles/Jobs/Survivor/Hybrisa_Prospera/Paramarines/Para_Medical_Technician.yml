@@ -50,7 +50,7 @@
     id: RMCIDRoyalParamarinesMedicalTechnician
     jumpsuit: RMCJumpsuitMarineParaPDW90
     back: RMCBackpackRCMMedicPVPFilledParaMedic
-    eyes: RMCGlassesMedicalHUDGlasses
+    eyes: RMCGlassesMedicalHUDGlassesAdvanced
     belt: RMCMedicalL75RCMFillPara
     outerClothing: RMCArmorParaVest
     suitstorage: RMCWeaponSMGPDW90TSE

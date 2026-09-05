@@ -124,7 +124,7 @@
   id: RMCGearFreelancerLeader
   equipment:
     head: RMCHeadBeretFreelancer
-    eyes: RMCGlassesMedicalHUDGlasses
+    eyes: RMCGlassesMedicalHUDGlassesAdvanced
     belt: RMCMAR50BeltFilled
     suitstorage: RMCWeaponMar50LMG
     back: RMCSatchelLightpackFreelancerLeader
