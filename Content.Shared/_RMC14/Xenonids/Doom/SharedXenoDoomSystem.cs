@@ -147,7 +147,7 @@ public abstract class SharedXenoDoomSystem : EntitySystem
             _daze.TryDaze(mob, xeno.Comp.DazeTime);
             _slow.TrySuperSlowdown(mob, xeno.Comp.SlowTime, ignoreDurationModifier: true);
 
-            if (!_rmcblood.TryGetChemicalSolution(mob.Owner, out var solEnt, out var solu))
+            if (_rmcblood.TryGetChemicalSolution(mob.Owner, out var solEnt, out var solu))
             {
                 if (solu == null)
                     continue;
