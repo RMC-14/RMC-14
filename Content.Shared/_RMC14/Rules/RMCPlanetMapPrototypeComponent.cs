@@ -104,10 +104,10 @@ public sealed partial record RMCNightmareScenario
 public sealed partial record RMCPlanetAnnouncement
 {
     [DataField]
-    public TimeSpan Delay = TimeSpan.FromSeconds(10);
+    public TimeSpan Delay = TimeSpan.FromSeconds(20);
 
     [DataField(required: true)]
-    public string Text = string.Empty;
+    public LocId Text;
 
     [DataField]
     public LocId Announcement = "rmc-announcement-ares-map";

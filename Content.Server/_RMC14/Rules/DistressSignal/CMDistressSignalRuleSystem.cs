@@ -362,7 +362,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
             {
                 component.AresAnnouncementIndex++;
 
-                _marineAnnounce.AnnounceARESStaging(default, announcement.Text, announcement: announcement.Announcement);
+                _marineAnnounce.AnnounceARESStaging(default, Loc.GetString(announcement.Text), announcement: announcement.Announcement);
             }
         }
 
