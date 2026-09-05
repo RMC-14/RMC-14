@@ -1,9 +1,11 @@
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Heal;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Rest;
-using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
+using Content.Shared.Examine;
+using Content.Shared.Ghost;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
@@ -11,11 +13,6 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Content.Shared._RMC14.Xenonids.Construction.RecoveryNode;
 
@@ -27,7 +24,6 @@ public sealed partial class RecoveryNodeSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedXenoHealSystem _heal = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly MobStateSystem _mob = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedDoAfterSystem _doafter = default!;
@@ -36,7 +32,7 @@ public sealed partial class RecoveryNodeSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<RecoveryNodeComponent, RecoveryNodeRecoverDoAfterEvent>(OnRecoveryDoAfter);
-
+        SubscribeLocalEvent<RecoveryNodeComponent, ExaminedEvent>(OnExamined);
     }
 
     public override void Update(float frameTime)
@@ -107,5 +103,11 @@ public sealed partial class RecoveryNodeSystem : EntitySystem
             return;
 
         _heal.Heal(args.Target.Value, recoveryNode.Comp.HealAmount);
+    }
+
+    private void OnExamined(Entity<RecoveryNodeComponent> ent, ref ExaminedEvent args)
+    {
+        if (HasComp<XenoComponent>(args.Examiner) || HasComp<GhostComponent>(args.Examiner))
+            args.PushMarkup(Loc.GetString("rmc-xeno-construction-recovery-node-xeno-examine"));
     }
 }

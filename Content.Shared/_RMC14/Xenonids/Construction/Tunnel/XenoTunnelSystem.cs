@@ -18,6 +18,7 @@ using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
+using Content.Shared.Ghost;
 using Content.Shared.Hands;
 using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle.Components;
@@ -148,27 +149,28 @@ public sealed class XenoTunnelSystem : EntitySystem
 
     private void OnExamine(Entity<XenoTunnelComponent> xenoTunnel, ref ExaminedEvent args)
     {
-        if (!HasComp<XenoComponent>(args.Examiner) || !_hive.FromSameHive(args.Examiner, xenoTunnel.Owner))
+        if (HasComp<GhostComponent>(args.Examiner) || (HasComp<XenoComponent>(args.Examiner) && _hive.FromSameHive(args.Examiner, xenoTunnel.Owner)))
         {
-            LocId message = "rmc-xeno-construction-tunnel-examine-not-xeno-empty";
-
-            var container = _container.EnsureContainer<Container>(xenoTunnel, XenoTunnelComponent.ContainedMobsContainerId);
-            if (container.ContainedEntities.Count > 0)
-                message = "rmc-xeno-construction-tunnel-examine-not-xeno";
+            if (!TryGetHiveTunnelName(xenoTunnel, out var tunnelName))
+                return;
 
             using (args.PushGroup(nameof(XenoTunnelComponent)))
             {
-                args.PushMarkup(Loc.GetString(message));
+                args.PushMarkup(Loc.GetString("rmc-xeno-construction-tunnel-examine", ("tunnelName", tunnelName)));
             }
+
             return;
         }
 
-        if (!TryGetHiveTunnelName(xenoTunnel, out var tunnelName))
-            return;
+        LocId message = "rmc-xeno-construction-tunnel-examine-not-xeno-empty";
+
+        var container = _container.EnsureContainer<Container>(xenoTunnel, XenoTunnelComponent.ContainedMobsContainerId);
+        if (container.ContainedEntities.Count > 0)
+            message = "rmc-xeno-construction-tunnel-examine-not-xeno";
 
         using (args.PushGroup(nameof(XenoTunnelComponent)))
         {
-            args.PushMarkup(Loc.GetString("rmc-xeno-construction-tunnel-examine", ("tunnelName", tunnelName)));
+            args.PushMarkup(Loc.GetString(message));
         }
     }
 
