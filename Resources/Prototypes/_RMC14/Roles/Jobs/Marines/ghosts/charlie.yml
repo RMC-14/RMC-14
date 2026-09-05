@@ -3,7 +3,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidCharlieCombatTech
   name: charlie ghost role combat technician
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
@@ -20,7 +20,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidCharlieFireteamLeader
   name: charlie ghost role fireteam leader
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
@@ -37,7 +37,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidCharlieHospitalCorpsman
   name: charlie ghost role hospital corpsman
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
@@ -54,7 +54,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidCharlieRifleman
   name: charlie ghost role rifleman
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
@@ -71,7 +71,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidCharlieSmartGunOperator
   name: charlie ghost role smart gun operator
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
@@ -88,7 +88,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidCharlieSquadLeader
   name: charlie ghost role squad leader
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
@@ -105,7 +105,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidCharlieWeaponsSpecialist
   name: charlie ghost role weapons specialist
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
