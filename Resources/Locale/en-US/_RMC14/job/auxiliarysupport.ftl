@@ -1,6 +1,6 @@
 # auxiliary support
 cm-job-name-aso = Auxiliary Support Officer
-cm-job-description-aso = Coordinate the intelligence department, and assist the Executive Officer.
+cm-job-description-aso = Coordinate marine intelligence and oversee the flight crew and vehicle crewmen. Ensure the operations of the Almayer run smoothly. 
 cm-job-prefix-aso = ASO
 CMJobAuxiliarySupportOfficer = Auxiliary Support Officer
 
