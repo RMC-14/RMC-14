@@ -18,7 +18,7 @@
   name: explosive warning
   components:
   - type: TimedDespawn
-    lifetime: 5
+    lifetime: 6
   - type: Sprite
     state: alert_greyscale
     color: "#ff0000"
