@@ -1,10 +1,11 @@
-using System.Numerics;
 using Content.Shared._RMC14.Maths;
+using Content.Shared.Chat.Prototypes;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using System.Numerics;
 
 namespace Content.Shared._RMC14.Xenonids.Charge;
 
@@ -31,7 +32,7 @@ public sealed partial class XenoChargeComponent : Component
     public TimeSpan SlowTime = TimeSpan.FromSeconds(3.5);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan StunTime = TimeSpan.FromSeconds(2);
+    public TimeSpan StunTime = TimeSpan.FromSeconds(4);
 
     [DataField, AutoNetworkedField]
     public TimeSpan ChargeDelay = TimeSpan.FromSeconds(1.2);
@@ -48,4 +49,7 @@ public sealed partial class XenoChargeComponent : Component
 
     [DataField]
     public HashSet<EntityUid> AlreadyHit = new();
+
+    [DataField, AutoNetworkedField]
+    public ProtoId<EmotePrototype>? Emote = "XenoRoar";
 }
