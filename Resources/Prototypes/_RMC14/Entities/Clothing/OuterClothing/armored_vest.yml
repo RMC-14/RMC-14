@@ -268,3 +268,17 @@
         - RMCBoxZipties
       whitelist: null
       count: 2
+
+#PvE
+- type: entity
+  parent: RMCArmorVestXLBase
+  id: RMCPVEArmorVestPrisonGuard
+  name: ML80C5 correctional peace officer flak jacket
+  description: A modern take on the M70B1 flak jacket, designed for movement over protection. The C5 can barely even be called a flak jacket as it's designed to protect more from bladed objects.
+  suffix: PVE
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/CMB/cmb_prison_guard.rsi
+  - type: CMArmor
+    melee: 20
+    bullet: 5
