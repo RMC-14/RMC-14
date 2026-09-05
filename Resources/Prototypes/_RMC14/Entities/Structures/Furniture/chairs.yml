@@ -89,7 +89,7 @@
 - type: entity
   parent: CMChair
   id: CMChairFolded
-  suffix: RMC|folded
+  suffix: RMC, folded
   components:
   - type: Foldable
     folded: true
@@ -165,7 +165,7 @@
   parent: CMChairComfy
   id: CMChairComfyARES
   description: A functional chair designed for comfortably sitting a single person with intent to facilitate interactions with the ship AI.
-  suffix: RMC|ARES
+  suffix: RMC, ARES
   components:
   - type: Sprite
     state: comfychair_ares
@@ -174,7 +174,7 @@
   parent: CMChairComfyARES
   id: RMCChairComfyAI
   name: AI interface chair
-  suffix: RMC|AI
+  suffix: RMC, AI
   components:
   - type: Sprite
     state: ai_interface_chair
@@ -182,7 +182,7 @@
 - type: entity
   parent: CMChairComfy
   id: CMChairComfyBeige
-  suffix: RMC|Beige
+  suffix: RMC, Beige
   components:
   - type: Sprite
     state: comfychair_beige
@@ -190,7 +190,7 @@
 - type: entity
   parent: CMChairComfy
   id: CMChairComfyBlack
-  suffix: RMC|Black
+  suffix: RMC, Black
   components:
   - type: Sprite
     state: comfychair_black
@@ -198,7 +198,7 @@
 - type: entity
   parent: CMChairComfy
   id: CMChairComfyBlue
-  suffix: RMC|Blue
+  suffix: RMC, Blue
   components:
   - type: Sprite
     state: comfychair_blue
@@ -206,7 +206,7 @@
 - type: entity
   parent: CMChairComfy
   id: CMChairComfyLime
-  suffix: RMC|Lime
+  suffix: RMC, Lime
   components:
   - type: Sprite
     state: comfychair_lime
@@ -214,7 +214,7 @@
 - type: entity
   parent: CMChairComfy
   id: CMChairComfyOrange
-  suffix: RMC|Orange
+  suffix: RMC, Orange
   components:
   - type: Sprite
     state: comfychair_orange
@@ -222,7 +222,7 @@
 - type: entity
   parent: CMChairComfy
   id: CMChairComfyTeal
-  suffix: RMC|Teal
+  suffix: RMC, Teal
   components:
   - type: Sprite
     state: comfychair_teal
@@ -231,7 +231,7 @@
   parent: CMChairComfy
   id: CMChairComfyAlpha
   description: A simple chair permanently attached to the floor, with the spinning parts removed to force soldiers with low attention spans to keep still during briefings. Covered with a squeaky and way too hard faux-leather, unevenly painted in Alpha squad red. Only for the bravest and freshest Marine recruits.
-  suffix: RMC|Alpha
+  suffix: RMC, Alpha
   components:
   - type: Sprite
     state: comfychair_alpha
@@ -240,7 +240,7 @@
   parent: CMChairComfy
   id: CMChairComfyBravo
   description: A simple chair permanently attached to the floor, with the spinning parts removed to force soldiers with low attention spans to keep still during briefings. Covered with a squeaky and way too hard faux-leather, unevenly painted in Bravo squad yellow. Certified fortified on all sides from enemy incursion.
-  suffix: RMC|Bravo
+  suffix: RMC, Bravo
   components:
   - type: Sprite
     state: comfychair_bravo
@@ -249,7 +249,7 @@
   parent: CMChairComfy
   id: CMChairComfyCharlie
   description: A simple chair permanently attached to the floor, with the spinning parts removed to force soldiers with low attention spans to keep still during briefings. Covered with a squeaky and way too hard faux-leather, unevenly painted in Charlie squad purple. Feels out of place without a full breakfast to accompany it.
-  suffix: RMC|Charlie
+  suffix: RMC, Charlie
   components:
   - type: Sprite
     state: comfychair_charlie
@@ -258,7 +258,7 @@
   parent: CMChairComfy
   id: CMChairComfyDelta
   description: A simple chair permanently attached to the floor, with the spinning parts removed to force soldiers with low attention spans to keep still during briefings. Covered with a squeaky and way too hard faux-leather, unevenly painted in Delta squad blue. This chair is most likely to be the first to fight and first to die.
-  suffix: RMC|Delta
+  suffix: RMC, Delta
   components:
   - type: Sprite
     state: comfychair_delta
@@ -267,7 +267,7 @@
   parent: CMChairComfy
   id: CMChairComfyEcho
   description: A simple chair permanently attached to the floor, with the spinning parts removed to force soldiers with low attention spans to keep still during briefings. Covered with a squeaky and way too hard faux-leather, unevenly painted in Echo squad turquoise. This multi-purpose chair can be used for many things, just like the marine sitting on it.
-  suffix: RMC|Echo
+  suffix: RMC, Echo
   components:
   - type: Sprite
     state: comfychair_echo
@@ -276,7 +276,7 @@
   parent: CMChairComfy
   id: CMChairComfyFoxtrot
   description: A simple chair permanently attached to the floor, with the spinning parts removed to force soldiers with low attention spans to keep still during briefings. Covered with a squeaky and way too hard faux-leather, unevenly painted in Foxtrot squad orange. The perfect place to fall asleep during briefings.
-  suffix: RMC|Foxtrot
+  suffix: RMC, Foxtrot
   components:
   - type: Sprite
     state: comfychair_foxtrot
@@ -285,7 +285,7 @@
   parent: CMChairComfy
   id: RMCChairComfyAlien
   name: alien chair
-  suffix: RMC|Alien
+  suffix: RMC, Alien
   components:
   - type: Sprite
     state: comfychair_alien
