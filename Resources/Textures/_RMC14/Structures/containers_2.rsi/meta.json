@@ -1,0 +1,65 @@
+﻿{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Made by SharkSnake98 on GitHub",
+  "size": {
+    "x": 32,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "halcyoncontainerleft"
+    },
+    {
+      "name": "halcyoncontainermiddle"
+    },
+    {
+      "name": "halcyoncontainerright"
+    },
+    {
+      "name": "halcyoncontainerleft_alt"
+    },
+    {
+      "name": "halcyoncontainermiddle_alt"
+    },
+    {
+      "name": "halcyoncontainerright_alt"
+    },
+    {
+      "name": "weyafuelcontainerleft"
+    },
+    {
+      "name": "weyafuelcontainermiddle"
+    },
+    {
+      "name": "weyafuelcontainerright"
+    },
+    {
+      "name": "tartaruscontainerleft"
+    },
+    {
+      "name": "tartaruscontainermiddle"
+    },
+    {
+      "name": "tartaruscontainerright"
+    },
+    {
+      "name": "miyahiracontainerright"
+    },
+    {
+      "name": "miyahiracontainermiddle"
+    },
+    {
+      "name": "halcyon_l"
+    },
+    {
+      "name": "halcyon_r"
+    },
+    {
+      "name": "novaris_l"
+    },
+    {
+      "name": "novaris_r"
+    }
+  ]
+}
