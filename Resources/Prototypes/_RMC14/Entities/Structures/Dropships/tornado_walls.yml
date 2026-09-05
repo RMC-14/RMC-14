@@ -591,6 +591,8 @@
     state: 95
   - type: Icon
     state: 95
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: RMCBaseTornadoWall
@@ -601,6 +603,8 @@
     state: 99
   - type: Icon
     state: 99
+  - type: Occluder
+    enabled: false
 
 # Windows ----
 
@@ -681,3 +685,58 @@
     state: 102
   - type: Occluder
     enabled: false
+
+# Attachments points
+- type: entity
+  parent: RMCTornadoWindow102
+  id: RMCTornadoWindow84
+  name: port fore weapon attach point 
+  suffix: 84, Tornado
+  components:
+  - type: Sprite
+    state: 84
+  - type: Icon
+    state: 84
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCTornadoWindow102
+  id: RMCTornadoWindow85
+  name: electronic system attach point 
+  suffix: 85, Tornado
+  components:
+  - type: Sprite
+    state: 85
+  - type: Icon
+    state: 85
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCTornadoWindow102
+  id: RMCTornadoWindow90
+  name: electronic system attach point 
+  suffix: 90, Tornado
+  components:
+  - type: Sprite
+    state: 90
+  - type: Icon
+    state: 90
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCTornadoWindow102
+  id: RMCTornadoWindow91
+  name: starboard fore weapon attach point
+  suffix: 91, Tornado
+  components:
+  - type: Sprite
+    state: 91
+  - type: Icon
+    state: 91
+  - type: Occluder
+    enabled: false
+
+

@@ -1,0 +1,8 @@
+- type: entity
+  parent: CMLockerBase #RMC14 TODO: Needs function, is just a locker right now
+  id: CMLockerSuitStorageUnit
+  name: Suit Storage Unit
+  description: An industrial U-Stor-It Storage unit designed to accommodate all kinds of space suits. Its on-board equipment also allows the user to decontaminate the contents through a UV-ray purging cycle. There's a warning label dangling from the control pad, reading "STRICTLY NO BIOLOGICALS IN THE CONFINES OF THE UNIT". It appears somebody destroyed this unit's control panel, and the UV purging cycle is no longer functional.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/suit_storage_unit.rsi
