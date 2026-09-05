@@ -63,6 +63,17 @@
 
 - type: entity
   parent: CMHeadBeret
+  id: CMHeadBeretCentcom
+  name: officers beret
+  description: A black beret adorned with a silver kite shield and an engraved sword of the We-Ya security forces, announcing to the world that the wearer is a defender of We-Ya.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_centcom.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_centcom.rsi
+
+- type: entity
+  parent: CMHeadBeret
   id: CMHeadBeretCMP
   name: UNMC Chief MP beret
   description: A beret with the UNMC Military Police insignia emblazoned on it. It shines with the glow of corrupt authority and a smudge of doughnut.
