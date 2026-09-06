@@ -23,9 +23,6 @@ public sealed partial class Antitoxic : RMCChemicalEffect
     {
         TryHealDamageGroup(args, ToxinGroup, potency * 2f);
 
-        // TODO RMC14 remove genetic heal once other meds are in for genetic damage
-        TryHealDamageGroup(args, GeneticGroup, potency * 2f);
-
         var rmcBloodstream = System<SharedRMCBloodstreamSystem>(args);
         rmcBloodstream.RemoveBloodstreamToxins(args.TargetEntity, 0.125f);
     }
