@@ -1,7 +1,7 @@
 <DefaultWindow
     xmlns="https://spacestation14.io"
     xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
-    MinSize="400 550">
+    MinSize="450 600">
     <BoxContainer Orientation="Vertical">
         <!-- Occupant Section -->
         <BoxContainer Orientation="Vertical">
@@ -73,9 +73,9 @@
             </BoxContainer>
             <BoxContainer Orientation="Horizontal" Margin="0 2">
                 <Label Text="{Loc rmc-cryo-cell-door-label}" MinWidth="120" Modulate="#5B88B0" />
-                <Button Name="EjectButton" Text="{Loc rmc-cryo-cell-eject}" MinWidth="75" MinHeight="24" />
-                <Button Name="AutoEjectButton" Text="{Loc rmc-cryo-cell-manual}" ToggleMode="True" MinWidth="65" MinHeight="24" Margin="2 0 0 0" />
-                <Button Name="NotifyButton" Text="{Loc rmc-cryo-cell-silent}" ToggleMode="True" MinWidth="65" MinHeight="24" Margin="2 0 0 0" />
+                <Button Name="EjectButton" Text="{Loc rmc-cryo-cell-eject}" MinWidth="75" />
+                <Button Name="AutoEjectButton" Text="{Loc rmc-cryo-cell-manual}" ToggleMode="True" MinWidth="75" Margin="2 0 0 0" />
+                <Button Name="NotifyButton" Text="{Loc rmc-cryo-cell-silent}" ToggleMode="True" MinWidth="75" Margin="2 0 0 0" />
             </BoxContainer>
         </BoxContainer>
 

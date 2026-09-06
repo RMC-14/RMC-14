@@ -34,8 +34,8 @@ rmc-cryo-cell-beaker-empty = Beaker is empty!
 rmc-cryo-cell-beaker-eject = Eject
 
 rmc-cryo-cell-auto-eject-reason-release = Patient {CAPITALIZE(SUBJECT($occupant))} has been automatically released from {$cryoCell} at: {$area}. {$reason}
-rmc-cryo-cell-auto-eject-reason-dead = [bold]Reason for release: Patient death.[/bold]
-rmc-cryo-cell-auto-eject-reason-recovery = [bold]Reason for release: Patient recovery.[/bold]
+rmc-cryo-cell-auto-eject-reason-dead = Reason for release: Patient death.
+rmc-cryo-cell-auto-eject-reason-recovery = Reason for release: Patient recovery.
 
 rmc-cryo-cell-popup-beep = {CAPITALIZE(THE($cryoCell))} beeps: {$msg}
 rmc-cryo-cell-popup-ping = {CAPITALIZE(THE($cryoCell))} pings: {$msg}

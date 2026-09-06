@@ -45,9 +45,7 @@
   - type: NoStunOnExit
   - type: ContainerContainer
     containers:
-      cryo_cell:
-        !type:ContainerSlot
-        showEnts: true
+      cryo_cell: !type:ContainerSlot {}
       beakerSlot: !type:ContainerSlot {}
   - type: ItemSlots
     slots:
