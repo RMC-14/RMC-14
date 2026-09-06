@@ -1,7 +1,8 @@
 - type: entity
+  abstract: true
   parent: BaseItem
   id: RMCComputerDisk
-  abstract: true
+  name: computer disk
   description: "A boring looking computer disk. The name label is just gibberish collection of letters and numbers."
   components:
   - type: Tag

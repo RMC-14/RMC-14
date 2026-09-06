@@ -1,0 +1,50 @@
+- type: entity
+  id: ActionVehicleToggleView
+  name: Toggle View
+  description: Switch between the interior and exterior view.
+  components:
+  - type: InstantAction
+    event: !type:VehicleToggleViewActionEvent
+  - type: Action
+    icon: Interface/Actions/eyeopen.png
+    iconOn: Interface/Actions/eyeclose.png
+    itemIconStyle: BigAction
+
+- type: entity
+  id: ActionVehicleDeploy
+  name: Deploy Vehicle
+  description: Deploy or retract the vehicle.
+  components:
+  - type: InstantAction
+    event: !type:VehicleDeployActionEvent
+  - type: Action
+    itemIconStyle: BigItem
+
+- type: entity
+  id: ActionVehicleLock
+  name: Toggle Vehicle Lock
+  description: Locks or unlocks vehicle entry doors.
+  components:
+  - type: InstantAction
+    event: !type:VehicleLockActionEvent
+  - type: Action
+    icon:
+      sprite: _RMC14/Actions/id_lock_actions.rsi
+      state: id_lock_unlocked
+    iconOn:
+      sprite: _RMC14/Actions/id_lock_actions.rsi
+      state: id_lock_locked
+    itemIconStyle: BigItem
+
+- type: entity
+  id: ActionVehicleSelectHardpoint
+  name: Select Hardpoint
+  description: Select this hardpoint for firing.
+  components:
+  - type: InstantAction
+    event: !type:VehicleHardpointSelectActionEvent
+  - type: Action
+    autoPopulate: false
+    temporary: false
+    raiseOnUser: true
+    itemIconStyle: BigItem

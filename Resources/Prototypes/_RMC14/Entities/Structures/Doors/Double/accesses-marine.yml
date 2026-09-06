@@ -29,3 +29,19 @@
   components:
   - type: AccessReader
     access: [ [ "CMAccessMarinePrep" ], [ "CMAccessRequisitions" ], [ "CMAccessCharlie" ], [ "CMAccessDelta" ] ]
+
+- type: entity
+  parent: RMCDoubleDoorPreparationsEcho
+  id: RMCDoubleDoorPreparationsEchoLocked
+  suffix: Preparations, Echo, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessMarinePrep" ], [ "CMAccessRequisitions" ], [ "RMCAccessEcho" ], [ "RMCAccessFoxtrot" ] ]
+
+- type: entity
+  parent: RMCDoubleDoorPreparationsFoxtrot
+  id: RMCDoubleDoorPreparationsFoxtrotLocked
+  suffix: Preparations, Foxtrot, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessMarinePrep" ], [ "CMAccessRequisitions" ], [ "RMCAccessEcho" ], [ "RMCAccessFoxtrot" ] ]

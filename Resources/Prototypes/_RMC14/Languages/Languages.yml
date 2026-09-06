@@ -1,0 +1,265 @@
+- type: language
+  id: English
+  name: "English"
+  description: "The standard galactic English language."
+  isVisibleLanguage: true
+  typefaceId: Default
+  textSize: null
+  showLanguageName: false
+  showLanguageIcon: false
+  languageIcon:
+    sprite: /Textures/_RMC14/Interface/flags.rsi
+    state: GB
+  canUseRadio: true
+  needsSpeech: true
+  expectedVocabularySize: 150
+  obfuscationMethod:
+    !type:SyllableObfuscation
+    replacement: ["uh", "eh", "hm", "mm", "huh", "erm", "..."]
+    minSyllables: 1
+    maxSyllables: 3
+  speechOverride:
+    chatTypeOverride: null
+    speechVerbOverrides: null
+    messageWrapOverrides: {}
+
+- type: language
+  id: Xeno
+  name: "Xenonid"
+  description: "The alien language of the Xenonids."
+  isVisibleLanguage: true
+  typefaceId: null
+  textSize: null
+  languageIcon:
+    sprite: /Textures/_RMC14/Actions/xeno_actions.rsi
+    state: queen_word
+  canUseRadio: true
+  needsSpeech: true
+  showLanguageIcon: false
+  showLanguageName: false
+  randomizeObfuscation: true
+  firstContactMeaning: language-Xeno-first-contact
+  expectedVocabularySize: 120
+  minimumRequiredLearnedWords: 20
+  learningRateMultiplier: 0.45
+  obfuscationMethod:
+    !type:XenoObfuscation
+    xenoSounds: ["hss", "sss", "tss", "chk", "krr", "hrr", "skr", "tsk", "rrk", "hsk", "ssk"]
+    garbleChars: ['~', '?', '*', '#', '¿', '§']
+    intensityMultiplier: 1.0
+  speechOverride:
+    speechSoundsOverride: Xenonid
+    chatTypeOverride: null
+    speechVerbOverrides: null
+    messageWrapOverrides: {}
+
+- type: language
+  id: French
+  name: "French"
+  description: "An old Earth language."
+  isVisibleLanguage: true
+  typefaceId: DefaultItalic
+  textSize: null
+  showLanguageName: true
+  languageIcon:
+    sprite: /Textures/_RMC14/Interface/flags.rsi
+    state: FR
+  canUseRadio: true
+  needsSpeech: true
+  expectedVocabularySize: 120
+  obfuscationMethod:
+    !type:SyllableObfuscation
+    replacement: ["le", "de", "un", "ce", "ne", "se", "que", "qui", "son", "une"]
+    minSyllables: 1
+    maxSyllables: 3
+  speechOverride:
+    chatTypeOverride: null
+    speechVerbOverrides: null
+    messageWrapOverrides: {}
+
+- type: language
+  id: Spanish
+  name: "Spanish"
+  description: "An old Earth language."
+  isVisibleLanguage: true
+  typefaceId: DefaultItalic
+  textSize: null
+  showLanguageName: true
+  languageIcon:
+    sprite: /Textures/_RMC14/Interface/flags.rsi
+    state: ES
+  canUseRadio: true
+  needsSpeech: true
+  expectedVocabularySize: 120
+  obfuscationMethod:
+    !type:SyllableObfuscation
+    replacement: ["el", "la", "de", "que", "los", "las", "por", "con", "una", "para"]
+    minSyllables: 1
+    maxSyllables: 3
+  speechOverride:
+    chatTypeOverride: null
+    speechVerbOverrides: null
+    messageWrapOverrides: {}
+
+- type: language
+  id: Japanese
+  name: "Japanese"
+  description: "An old Earth language."
+  isVisibleLanguage: true
+  typefaceId: NotoSansDisplay
+  textSize: null
+  showLanguageName: true
+  languageIcon:
+    sprite: /Textures/_RMC14/Interface/flags.rsi
+    state: JP
+  canUseRadio: true
+  needsSpeech: true
+  expectedVocabularySize: 140
+  obfuscationMethod:
+    !type:SyllableObfuscation
+    replacement: ["ka", "ki", "ku", "ke", "ko", "sa", "shi", "su", "se", "so", "ta", "chi", "tsu", "te", "to", "na", "ni", "nu", "ne", "no"]
+    minSyllables: 2
+    maxSyllables: 5
+  speechOverride:
+    chatTypeOverride: null
+    speechVerbOverrides: null
+    messageWrapOverrides: {}
+
+- type: language
+  id: Chinese
+  name: "Chinese"
+  description: "An old Earth language."
+  isVisibleLanguage: true
+  typefaceId: NotoSansDisplay
+  textSize: null
+  showLanguageName: true
+  languageIcon:
+    sprite: /Textures/_RMC14/Interface/flags.rsi
+    state: CN
+  canUseRadio: true
+  needsSpeech: true
+  expectedVocabularySize: 140
+  obfuscationMethod:
+    !type:SyllableObfuscation
+    replacement: ["ni", "hao", "shi", "de", "wo", "men", "zhe", "na", "ma", "le", "qing", "xie", "zai", "guo"]
+    minSyllables: 1
+    maxSyllables: 4
+  speechOverride:
+    chatTypeOverride: null
+    speechVerbOverrides: null
+    messageWrapOverrides: {}
+
+- type: language
+  id: Russian
+  name: "Russian"
+  description: "An old Earth language."
+  isVisibleLanguage: true
+  typefaceId: DefaultBold
+  textSize: null
+  showLanguageName: true
+  languageIcon:
+    sprite: /Textures/_RMC14/Interface/flags.rsi
+    state: RU
+  canUseRadio: true
+  needsSpeech: true
+  expectedVocabularySize: 130
+  obfuscationMethod:
+    !type:SyllableObfuscation
+    replacement: ["да", "нет", "что", "как", "где", "кто", "все", "это", "был", "она"]
+    minSyllables: 1
+    maxSyllables: 4
+  speechOverride:
+    chatTypeOverride: null
+    speechVerbOverrides: null
+    messageWrapOverrides: {}
+
+- type: language
+  id: German
+  name: "German"
+  description: "An old Earth language."
+  isVisibleLanguage: true
+  typefaceId: DefaultBold
+  textSize: null
+  showLanguageName: true
+  languageIcon:
+    sprite: /Textures/_RMC14/Interface/flags.rsi
+    state: DE
+  canUseRadio: true
+  needsSpeech: true
+  expectedVocabularySize: 125
+  obfuscationMethod:
+    !type:SyllableObfuscation
+    replacement: ["der", "die", "das", "ein", "ist", "und", "mit", "von", "auf", "für"]
+    minSyllables: 1
+    maxSyllables: 3
+  speechOverride:
+    chatTypeOverride: null
+    speechVerbOverrides: null
+    messageWrapOverrides: {}
+
+- type: language
+  id: Scandinavian
+  name: "Scandinavian"
+  description: "An old Earth language."
+  isVisibleLanguage: true
+  typefaceId: DefaultBold
+  textSize: null
+  showLanguageName: true
+  languageIcon:
+    sprite: /Textures/_RMC14/Interface/flags.rsi
+    state: SE
+  canUseRadio: true
+  needsSpeech: true
+  expectedVocabularySize: 140
+  obfuscationMethod:
+    !type:SyllableObfuscation
+    replacement: ["de", "vin", "meg", "og", "vi", "en", "nei", "ing", "gen", "et", "pur", "ke", "er", "nei", "hjort", "tysk", "de", "kjae", "en", "stein", "ja", "ull", "sil", "pa", "hun", "kjo", "erg", "ba", "re", "ol", "kyll", "menn", "esk", "gul", "gronn", "natt", "makt", "to", "fi", "re", "dag", "god", "jul", "ild", "fem", "jeg", "deg", "bjor", "en", "russ", "land", "sve", "rig", "nor", "ge", "dan", "is"]
+    minSyllables: 2
+    maxSyllables: 4
+  speechOverride:
+    chatTypeOverride: null
+    speechVerbOverrides: null
+    messageWrapOverrides: {}
+
+- type: language
+  id: SignLanguage
+  name: "Sign Language"
+  description: "A visual language using hand gestures and body movements."
+  isVisibleLanguage: true
+  typefaceId: DefaultItalic
+  textSize: null
+  showLanguageName: true
+  languageIcon: "/Textures/Interface/Default/Slots/hand_m.png"
+  canUseRadio: false
+  needsSpeech: false
+  needsLOS: true
+  expectedVocabularySize: 100
+  obfuscationMethod:
+    !type:SyllableObfuscation
+    replacement: ["*waves*", "*gestures*", "*points*", "*nods*", "*shakes head*", "*thumbs up*", "*claps*", "*motions*", "*indicates*", "*signals*"]
+    minSyllables: 1
+    maxSyllables: 1
+
+- type: language
+  id: Primitive
+  name: "Primitive"
+  description: "A primitive animal language made up of screeches, hoots, and emphatic gestures."
+  isVisibleLanguage: true
+  typefaceId: DefaultItalic
+  textSize: null
+  showLanguageName: true
+  languageIcon:
+    sprite: /Textures/Mobs/Animals/monkey.rsi
+    state: monkey
+  canUseRadio: true
+  needsSpeech: true
+  expectedVocabularySize: 40
+  obfuscationMethod:
+    !type:SyllableObfuscation
+    replacement: ["ook", "eek", "aa", "hoo", "ooka", "kee", "rah", "ik", "uh", "chit"]
+    minSyllables: 1
+    maxSyllables: 3
+  speechOverride:
+    chatTypeOverride: null
+    speechVerbOverrides: null
+    messageWrapOverrides: {}

@@ -7,5 +7,7 @@ cm-action-popup-scoping-user-must-not-contained = You can't use optics of {$scop
 cm-action-popup-scoping-user-must-wield = You must hold {THE($scope)} with two hands to use the scope.
 cm-action-popup-scoping-must-attach = {CAPITALIZE(THE($scope))} must be attached to a gun in order to function!
 rmc-action-popup-scoping-user-cannot-view-cameras = You cannot use the optics of {$scope} while watching cameras!
+rmc-action-popup-scoping-user-cannot-viewport = You cannot use the optics of {$scope} while looking through a viewport!
+rmc-action-popup-scoping-user-cannot-vehicle = You cannot use the optics of {$scope} while operating a vehicle!
 
 rcm-action-popup-scope-cycle-zoom = Magnification level changed to {$zoom}.

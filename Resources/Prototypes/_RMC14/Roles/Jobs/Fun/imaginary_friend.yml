@@ -83,6 +83,14 @@
       shader: ""
   - type: Speech
     speechSounds: Xenonid
+  - type: Language
+    spokenLanguages:
+      - English
+      - Xeno
+    understoodLanguages:
+      - Xeno
+    currentLanguage: Xeno
+    defaultLanguage: Xeno
 
 - type: startingGear
   id: RMCMobXippyGear

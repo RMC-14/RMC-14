@@ -522,6 +522,17 @@
     - id: CMMagazinePistolMK80
 
 - type: entity
+  parent: CMWebbingHolster
+  id: RMCShoulderHolsterPK7
+  suffix: PK7
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolPK7
+    - id: RMCMagazinePistolPK7
+    - id: RMCMagazinePistolPK7
+
+- type: entity
   parent: RMCWebbingDropPouch
   id: RMCWebbingDropPouchBlack
   name: black drop pouch
@@ -1090,38 +1101,6 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_surgical_blue.rsi
     state: webbing
-
-- type: entity
-  parent: RMCWebbingDropPouch
-  id: RMCToolDropPouchFilled
-  name: tool drop pouch
-  description: A drop pouch loaded with essential field repair tools.
-  components:
-  - type: Storage
-    grid:
-    - 0,0,13,1
-    whitelist:
-      tags:
-      - Crowbar
-      - Screwdriver
-      - Wirecutter
-      - Wrench
-      - CableCoil
-      - Multitool
-      - PowerCell
-      components:
-      - Welder
-      - PowerCell
-      - EntrenchingTool
-  - type: StorageFill
-    contents:
-    - id: CMScrewdriver
-    - id: CMWrench
-    - id: CMWelder
-    - id: CMCrowbar
-    - id: CMWirecutter
-    - id: RMCCableCoil30
-    - id: CMMultitool
 
 - type: entity
   parent: CMWebbingBase
