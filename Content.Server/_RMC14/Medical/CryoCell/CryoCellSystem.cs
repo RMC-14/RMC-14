@@ -196,6 +196,12 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         var cells = EntityQueryEnumerator<CryoCellComponent>();
         while (cells.MoveNext(out var uid, out var cryoCell))
         {
+            if (time >= cryoCell.NextUIUpdate)
+            {
+                cryoCell.NextUIUpdate = time + cryoCell.UIUpdateInterval;
+                UpdateUIState((uid, cryoCell));
+            }
+
             if (cryoCell.Occupant == null)
                 continue;
 
@@ -206,9 +212,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
                 continue;
 
             cryoCell.NextUpdate = time + cryoCell.UpdateInterval;
-
             ProcessOccupant((uid, cryoCell));
-            UpdateUIState((uid, cryoCell));
         }
     }
 

@@ -1,5 +1,5 @@
-using Robust.Client.GameObjects;
 using Content.Shared._RMC14.Medical.CryoCell;
+using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.Medical.CryoCell;
 
@@ -8,15 +8,9 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
     [Dependency] private readonly AppearanceSystem _appearance = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
 
-    private ISawmill _sawmill = default!;
-    private CryoCellWindow? _window;
-    private EntityUid _windowOwner;
-
     public override void Initialize()
     {
         base.Initialize();
-
-        _sawmill = Logger.GetSawmill("cryo_cell");
 
         SubscribeLocalEvent<CryoCellComponent, AppearanceChangeEvent>(OnAppearanceChange);
         SubscribeLocalEvent<CryoCellComponent, AfterAutoHandleStateEvent>(OnComponentStateChanged);
@@ -47,21 +41,18 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
     {
         try
         {
-            if (_window != null &&
-                ent.Owner == _windowOwner)
+            if (!TryComp(ent, out UserInterfaceComponent? ui))
+                return;
+
+            foreach (var bui in ui.ClientOpenInterfaces.Values)
             {
-                _window.UpdateFromComponent(ent.Comp);
+                if (bui is CryoCellBui cryoCellUi)
+                    cryoCellUi.Refresh();
             }
         }
         catch (Exception ex)
         {
-            _sawmill.Error($"Error updating Cryo Cell UI on state change: {ex}");
+            Log.Error($"Error refreshing {nameof(CryoCellBui)}\n{ex}");
         }
-    }
-
-    public void SetWindow(CryoCellWindow? window, EntityUid owner)
-    {
-        _window = window;
-        _windowOwner = owner;
     }
 }

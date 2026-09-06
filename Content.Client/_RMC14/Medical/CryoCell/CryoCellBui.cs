@@ -18,42 +18,42 @@ public sealed class CryoCellBui(EntityUid owner, Enum uiKey) : BoundUserInterfac
         _window.Title = Loc.GetString("rmc-cryo-cell-window-title");
         _window.SetBui(this);
 
-        if (EntMan.TryGetComponent(Owner, out CryoCellComponent? cryoCell))
-            _window.UpdateFromComponent(cryoCell);
-
-        EntMan.System<CryoCellSystem>().SetWindow(_window, Owner);
+        Refresh();
     }
 
-    protected override void Dispose(bool disposing)
+    public void Refresh()
     {
-        if (disposing)
-            EntMan.System<CryoCellSystem>().SetWindow(null, EntityUid.Invalid);
+        if (_window is not { IsOpen: true })
+            return;
 
-        base.Dispose(disposing);
+        if (!EntMan.TryGetComponent(Owner, out CryoCellComponent? cryoCell))
+            return;
+
+        _window.UpdateFromComponent(cryoCell);
     }
 
     public void TogglePower()
     {
-        SendMessage(new CryoCellTogglePowerBuiMsg());
+        SendPredictedMessage(new CryoCellTogglePowerBuiMsg());
     }
 
     public void ToggleAutoEject()
     {
-        SendMessage(new CryoCellToggleAutoEjectBuiMsg());
+        SendPredictedMessage(new CryoCellToggleAutoEjectBuiMsg());
     }
 
     public void Eject()
     {
-        SendMessage(new CryoCellEjectBuiMsg());
+        SendPredictedMessage(new CryoCellEjectBuiMsg());
     }
 
     public void EjectBeaker()
     {
-        SendMessage(new CryoCellEjectBeakerBuiMsg());
+        SendPredictedMessage(new CryoCellEjectBeakerBuiMsg());
     }
 
     public void ToggleNotify()
     {
-        SendMessage(new CryoCellToggleNotifyBuiMsg());
+        SendPredictedMessage(new CryoCellToggleNotifyBuiMsg());
     }
 }

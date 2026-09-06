@@ -79,6 +79,12 @@ public sealed partial class CryoCellComponent : Component
 
     #region UI Fields
 
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    public TimeSpan NextUIUpdate;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan UIUpdateInterval = TimeSpan.FromSeconds(1);
+
     [AutoNetworkedField]
     public NetEntity? UIOccupant;
 
