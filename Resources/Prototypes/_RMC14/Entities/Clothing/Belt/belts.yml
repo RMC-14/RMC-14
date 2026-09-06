@@ -812,7 +812,8 @@
       co_handcannon_fill:
         whitelist:
           tags:
-          - RMCWeaponPistolHandcannonWyvern
+          - RMCWeaponPistolHandcannonCustom #RMC 14 TODO: ideally should have it's own inbelt sprite
+          - RMCWeaponPistolHandcannonPolished
       pmo_handcannon_fill:
         whitelist:
           tags:
