@@ -223,7 +223,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
 
         if (!TryComp<DamageableComponent>(occupant, out var damageable))
         {
-            CryoPopupAndSound(cryoCell, "rmc-cryo-cell-popup-incompatible", false, true);
+            CryoPopupAndSound(cryoCell, Loc.GetString("rmc-cryo-cell-popup-incompatible"), false, true);
             EjectOccupant(cryoCell, occupant);
             return;
         }
@@ -231,7 +231,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         // Auto-eject if dead and unrevivable
         if (_mobState.IsDead(occupant) && _unrevivable.IsUnrevivable(occupant))
         {
-            CryoPopupAndSound(cryoCell, "rmc-cryo-cell-popup-dead", false, true);
+            CryoPopupAndSound(cryoCell, Loc.GetString("rmc-cryo-cell-popup-dead"), false, true);
             EjectOccupant(cryoCell, occupant, true, true);
             return;
         }
@@ -243,10 +243,10 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
             switch (stage)
             {
                 case >= 8: // One minute left
-                    CryoPopupAndSound(cryoCell, "rmc-cryo-cell-popup-revive-now", false, true);
+                    CryoPopupAndSound(cryoCell, Loc.GetString("rmc-cryo-cell-popup-revive-now"), false, true);
                     break;
                 case >= 5: // Halfway to unrevivable
-                    CryoPopupAndSound(cryoCell, "rmc-cryo-cell-popup-warning", false, true);
+                    CryoPopupAndSound(cryoCell, Loc.GetString("rmc-cryo-cell-popup-warning"), false, true);
                     break;
             }
         }
@@ -349,7 +349,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         {
             if (damageable.TotalDamage <= 0)
             {
-                CryoPopupAndSound(cryoCell, "rmc-cryo-cell-popup-healed");
+                CryoPopupAndSound(cryoCell, Loc.GetString("rmc-cryo-cell-popup-healed"));
                 EjectOccupant(cryoCell, occupant, isAutoEject: true);
             }
         }

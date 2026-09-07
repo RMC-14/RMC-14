@@ -73,9 +73,9 @@
             </BoxContainer>
             <BoxContainer Orientation="Horizontal" Margin="0 2">
                 <Label Text="{Loc rmc-cryo-cell-door-label}" MinWidth="120" Modulate="#5B88B0" />
-                <Button Name="EjectButton" Text="{Loc rmc-cryo-cell-eject}" StyleClasses="Caution" MinWidth="75" />
-                <Button Name="AutoEjectButton" Text="{Loc rmc-cryo-cell-manual}" StyleClasses="OpenLeft" ToggleMode="True" MinWidth="75" Margin="2 0 0 0" />
-                <Button Name="NotifyButton" Text="{Loc rmc-cryo-cell-silent}" StyleClasses="OpenRight" ToggleMode="True" MinWidth="75" Margin="2 0 0 0" />
+                <Button Name="EjectButton" Text="{Loc rmc-cryo-cell-eject}" StyleClasses="Caution" MinWidth="80" Margin="0 0 5 0" />
+                <Button Name="AutoEjectButton" Text="{Loc rmc-cryo-cell-manual}" StyleClasses="OpenRight" ToggleMode="True" MinWidth="80" />
+                <Button Name="NotifyButton" Text="{Loc rmc-cryo-cell-silent}" StyleClasses="OpenLeft" ToggleMode="True" MinWidth="80" />
             </BoxContainer>
         </BoxContainer>
 

@@ -122,7 +122,7 @@ public abstract class SharedCryoCellSystem : EntitySystem
                     : Loc.GetString("rmc-cryo-cell-auto-eject-reason-recovery");
 
                 var announce = Loc.GetString("rmc-cryo-cell-auto-eject-reason-release",
-                    ("occupant", occupant),
+                    ("occupant", Name(occupant)),
                     ("cryoCell", cryoCell.Owner),
                     ("area", areaName),
                     ("reason", reason));
