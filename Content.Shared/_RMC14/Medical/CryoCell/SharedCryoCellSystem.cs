@@ -153,6 +153,9 @@ public abstract class SharedCryoCellSystem : EntitySystem
 
     protected void UpdateCryoCellVisuals(Entity<CryoCellComponent> cryoCell, bool? powered = null)
     {
+        if (!TryComp<AppearanceComponent>(cryoCell, out var appearance))
+            return;
+
         var isOn = cryoCell.Comp.IsPoweredOn && (powered ?? true);
         var hasOccupant = cryoCell.Comp.Occupant != null;
 
@@ -167,7 +170,7 @@ public abstract class SharedCryoCellSystem : EntitySystem
             (false, true) => CryoCellVisualState.OffOccupied,
         };
 
-        if (_appearance.TryGetData<CryoCellVisualState>(cryoCell.Owner, CryoCellVisuals.State, out var oldState) &&
+        if (_appearance.TryGetData<CryoCellVisualState>(cryoCell.Owner, CryoCellVisuals.State, out var oldState, appearance) &&
             oldState == newState)
         {
             return;
