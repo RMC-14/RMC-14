@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: nbstrong
-  changes:
-  - message: MRE ration packs now have to be torn open before you can access their
-      contents.
-    type: Fix
-  id: 3133
-  time: '2026-04-22T00:08:35.958844+00:00'
-  url: null
 - author: CatAndHats
   changes:
   - message: 'Chance''s Claim has recieved a passover: the pipe network has been added
@@ -4482,5 +4474,15 @@
   id: 3632
   time: '2026-09-05T19:08:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10825
+- author: CatAndHats
+  changes:
+  - message: Added function to Hijack Bustable Walls, they now turn into Reinforced
+      wall on Hijack
+    type: Add
+  - message: Fixed Hijack Bustable windows not breaking into window frames
+    type: Fix
+  id: 3633
+  time: '2026-09-07T10:49:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10833
 Name: RMC14
 Order: -1
