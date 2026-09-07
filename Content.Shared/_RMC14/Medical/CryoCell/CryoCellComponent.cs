@@ -12,7 +12,7 @@ namespace Content.Shared._RMC14.Medical.CryoCell;
 public sealed partial class CryoCellComponent : Component
 {
     [DataField]
-    public string OccupantId = "cryo_cell";
+    public string OccupantSlot = "cryo_cell";
 
     [DataField]
     public string BeakerSlot = "beakerSlot";

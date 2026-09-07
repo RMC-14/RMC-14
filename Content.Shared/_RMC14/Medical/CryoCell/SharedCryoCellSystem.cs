@@ -40,7 +40,8 @@ public abstract class SharedCryoCellSystem : EntitySystem
 
     private void OnCryoCellInit(Entity<CryoCellComponent> cryoCell, ref ComponentInit args)
     {
-        _container.EnsureContainer<ContainerSlot>(cryoCell, cryoCell.Comp.OccupantId);
+        _container.EnsureContainer<ContainerSlot>(cryoCell, cryoCell.Comp.OccupantSlot);
+        _container.EnsureContainer<ContainerSlot>(cryoCell, cryoCell.Comp.BeakerSlot);
         UpdateCryoCellVisuals(cryoCell);
     }
 
@@ -54,7 +55,7 @@ public abstract class SharedCryoCellSystem : EntitySystem
 
     private void OnCryoCellEntInserted(Entity<CryoCellComponent> cryoCell, ref EntInsertedIntoContainerMessage args)
     {
-        if (args.Container.ID != cryoCell.Comp.OccupantId)
+        if (args.Container.ID != cryoCell.Comp.OccupantSlot)
             return;
 
         cryoCell.Comp.Occupant = args.Entity;
@@ -68,7 +69,7 @@ public abstract class SharedCryoCellSystem : EntitySystem
 
     private void OnCryoCellEntRemoved(Entity<CryoCellComponent> cryoCell, ref EntRemovedFromContainerMessage args)
     {
-        if (args.Container.ID != cryoCell.Comp.OccupantId)
+        if (args.Container.ID != cryoCell.Comp.OccupantSlot)
             return;
 
         if (cryoCell.Comp.Occupant == args.Entity)
@@ -101,7 +102,7 @@ public abstract class SharedCryoCellSystem : EntitySystem
 
     protected void EjectOccupant(Entity<CryoCellComponent> cryoCell, EntityUid occupant, bool dead = false, bool isAutoEject = false)
     {
-        if (!_container.TryGetContainer(cryoCell, cryoCell.Comp.OccupantId, out var container))
+        if (!_container.TryGetContainer(cryoCell, cryoCell.Comp.OccupantSlot, out var container))
             return;
 
         _container.Remove(occupant, container);
