@@ -4,7 +4,7 @@
     MinSize="450 600">
     <BoxContainer Orientation="Vertical">
         <!-- Occupant Section -->
-        <BoxContainer Orientation="Vertical">
+        <BoxContainer Orientation="Vertical" Margin="0 0 0 6">
             <Label Text="{Loc rmc-cryo-cell-occupant-header}" StyleClasses="LabelKeyText" Margin="0 4" />
             <cc:HSeparator Color="#4972A1" Margin="0 4" />
             <BoxContainer Orientation="Horizontal" Margin="0 2">

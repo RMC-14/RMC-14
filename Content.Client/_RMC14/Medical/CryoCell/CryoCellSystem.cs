@@ -13,7 +13,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         base.Initialize();
 
         SubscribeLocalEvent<CryoCellComponent, AppearanceChangeEvent>(OnAppearanceChange);
-        SubscribeLocalEvent<CryoCellComponent, AfterAutoHandleStateEvent>(OnComponentStateChanged);
+        SubscribeLocalEvent<CryoCellComponent, AfterAutoHandleStateEvent>(OnCryoCellAfterState);
     }
 
     private void OnAppearanceChange(EntityUid uid, CryoCellComponent comp, ref AppearanceChangeEvent args)
@@ -37,7 +37,12 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         _sprite.LayerSetVisible((uid, args.Sprite), baseLayer, true);
     }
 
-    private void OnComponentStateChanged(Entity<CryoCellComponent> ent, ref AfterAutoHandleStateEvent args)
+    private void OnCryoCellAfterState(Entity<CryoCellComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        UpdateCryoCellUI(ent);
+    }
+
+    private void UpdateCryoCellUI(Entity<CryoCellComponent> ent)
     {
         try
         {
