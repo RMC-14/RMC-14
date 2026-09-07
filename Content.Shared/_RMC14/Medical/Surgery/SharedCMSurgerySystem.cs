@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Surgery.Conditions;
 using Content.Shared._RMC14.Medical.Surgery.Steps;
@@ -81,7 +81,7 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
         if (args.Cancelled ||
             args.Handled ||
             args.Target is not { } target ||
-            !IsSurgeryValid(ent, target, args.Surgery, args.Step, out var surgery, out var part, out var step) ||
+            !IsSurgeryValid(ent, target, args.Surgery, canonicalStep, out var surgery, out var part, out var step) ||
             !PreviousStepsComplete(ent, part, surgery, canonicalStep) ||
             !CanPerformStep(args.User, ent, part.Comp.PartType, step, false, out _, out _, out var validTools))
         {
@@ -159,7 +159,7 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
             GetSingleton(surgery) is not { } surgeryEntId ||
             !TryComp(surgeryEntId, out CMSurgeryComponent? surgeryComp) ||
             !surgeryComp.Steps.Contains(canonicalStepId) ||
-            GetSingleton(stepId) is not { } stepEnt)
+            GetSingleton(canonicalStepId) is not { } stepEnt)
         {
             return false;
         }
