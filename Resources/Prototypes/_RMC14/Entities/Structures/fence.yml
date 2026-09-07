@@ -128,7 +128,7 @@
 - type: entity
   parent: CMFence
   id: RMCFenceHybrisaElectric
-  suffix: dark, electric
+  suffix: Dark, Electric
   components:
   - type: Sprite
     sprite: _RMC14/Structures/hybrisa_fences_electric.rsi
@@ -146,7 +146,7 @@
 - type: entity
   parent: RMCFenceBroken
   id: RMCFenceHybrisaElectricBroken
-  suffix: dark, electric
+  suffix: Dark, Electric
   components:
   - type: Sprite
     sprite: _RMC14/Structures/hybrisa_fences_electric.rsi
