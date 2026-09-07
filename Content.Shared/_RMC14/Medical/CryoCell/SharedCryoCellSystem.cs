@@ -8,6 +8,7 @@ using Content.Shared.Power;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
+using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Medical.CryoCell;
@@ -20,6 +21,7 @@ public abstract class SharedCryoCellSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedPointLightSystem _light = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCMovementSystem _rmcMovement = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
@@ -110,7 +112,8 @@ public abstract class SharedCryoCellSystem : EntitySystem
         if (cryoCell.Comp.ExitStun > TimeSpan.Zero && HasComp<NoStunOnExitComponent>(cryoCell))
             _stun.TryStun(occupant, cryoCell.Comp.ExitStun, true);
 
-        _audio.PlayPvs(cryoCell.Comp.EjectSound, cryoCell);
+        if (_net.IsServer)
+            _audio.PlayPvs(cryoCell.Comp.EjectSound, cryoCell);
 
         if (isAutoEject)
         {
@@ -137,18 +140,21 @@ public abstract class SharedCryoCellSystem : EntitySystem
 
     protected void CryoPopupAndSound(Entity<CryoCellComponent> cryoCell, string msg, bool silent = false, bool warningSound = false)
     {
-        if (!silent)
+        if (_net.IsClient)
+            return;
+
+        if (silent)
+            return;
+
+        if (warningSound)
         {
-            if (warningSound)
-            {
-                _audio.PlayPvs(cryoCell.Comp.BeepBeep, cryoCell);
-                _popup.PopupEntity(Loc.GetString("rmc-cryo-cell-popup-beep", ("cryoCell", cryoCell.Owner), ("msg", msg)), cryoCell, PopupType.MediumCaution);
-            }
-            else
-            {
-                _audio.PlayPvs(cryoCell.Comp.Ping, cryoCell);
-                _popup.PopupEntity(Loc.GetString("rmc-cryo-cell-popup-ping", ("cryoCell", cryoCell.Owner), ("msg", msg)), cryoCell, PopupType.Medium);
-            }
+            _audio.PlayPvs(cryoCell.Comp.BeepBeep, cryoCell);
+            _popup.PopupEntity(Loc.GetString("rmc-cryo-cell-popup-beep", ("cryoCell", cryoCell.Owner), ("msg", msg)), cryoCell, PopupType.MediumCaution);
+        }
+        else
+        {
+            _audio.PlayPvs(cryoCell.Comp.Ping, cryoCell);
+            _popup.PopupEntity(Loc.GetString("rmc-cryo-cell-popup-ping", ("cryoCell", cryoCell.Owner), ("msg", msg)), cryoCell, PopupType.Medium);
         }
     }
 
