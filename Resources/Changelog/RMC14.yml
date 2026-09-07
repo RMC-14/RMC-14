@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: 'Chance''s Claim has recieved a passover: the pipe network has been added
-      which is expansive stretching across the entire map, LZ1 (West LZ) North Comms
-      spawn now has a shortcut to its north giving a new route to the west of A-block,
-      survivor loot has been changed at both dropships and the scout cloak has been
-      moved eastward out of the hive to the reactor entrance, the map is now grimier
-      and has recieved lots of missing prop items, and the landing zones now have
-      much better gauss turret coverage.'
-    type: Add
-  - message: Added pre-armed CLF and UNMC IFF claymores for mapping/event purposes.
-    type: Add
-  id: 3134
-  time: '2026-04-22T00:08:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9580
 - author: Ian321
   changes:
   - message: When a foxtrot marine enters cryosleep a new one will be woken up to
@@ -4484,5 +4469,13 @@
   id: 3633
   time: '2026-09-07T10:49:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10833
+- author: Meara1179
+  changes:
+  - message: Fixed a bug as the Executive Bodyguard where selecting a suit before
+      your armor would prevent you from being able to pick an armor.
+    type: Fix
+  id: 3634
+  time: '2026-09-07T14:27:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10831
 Name: RMC14
 Order: -1
