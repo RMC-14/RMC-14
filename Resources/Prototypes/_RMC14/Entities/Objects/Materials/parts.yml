@@ -12,6 +12,11 @@
     heldPrefix: rods
     size: Small
     sprite: _RMC14/Objects/Materials/parts.rsi
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
   - type: Stack
     count: 60
     stackType: CMRodMetal

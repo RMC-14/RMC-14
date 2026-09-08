@@ -9,11 +9,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
+      preset: RMCSkillPresetSurvivor
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetHybrisaMaterialReprocessingTechnician
     - type: RMCSurvivor
@@ -47,7 +43,7 @@
   name: hybrisa material reprocessing technician preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCJumpsuitSanitation, CMSatchelEngineer, RMCCoatSanitation, CMHandsBrown, CMBootsBrown]
     - [ RMCJumpsuitSanitation, CMSatchelEngineer, RMCCoatSanitation, CMHandsBrown, CMBootsBrown]

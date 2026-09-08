@@ -13,6 +13,17 @@
     - HideContextMenu
 
 - type: entity
+  parent: RMCEffectAlert
+  id: RMCHijackPipeExplosionWarning
+  name: explosive warning
+  components:
+  - type: TimedDespawn
+    lifetime: 5
+  - type: Sprite
+    state: alert_greyscale
+    color: "#ff0000"
+
+- type: entity
   id: RMCActiveAlertEffect
   name: exclamation
   categories: [ HideSpawnMenu ]

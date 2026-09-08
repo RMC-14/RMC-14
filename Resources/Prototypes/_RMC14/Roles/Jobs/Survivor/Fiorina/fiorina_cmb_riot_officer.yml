@@ -1,0 +1,70 @@
+- type: job
+  parent: CMSurvivorSecurity
+  id: CMSurvivorFiorinaRiotOfficer
+  name: cm-job-name-survivor-riot-officer
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorSecurity
+  startingGear: RMCGearSurvivorFiorinaRiotOfficer
+  accessGroups:
+  - ColonistSec
+  ranks:
+    RMCRankCMBRiotControlOfficer: []
+  spawnMenuRoleName: Fiorina CMB Riot Officer (Survivor)
+  icon: "RMCJobIconBureauRCO"
+  hasIcon: true
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetSurvivorMarshal
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Bureau
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetCMBDeputy
+    - type: JobPrefix
+      prefix: cm-job-prefix-survivor-riot-officer
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: mp
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_cmb
+  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorCMBDeputy
+  id: RMCGearSurvivorFiorinaRiotOfficer
+  equipment:
+    jumpsuit: RMCJumpsuitRiotControl
+    outerClothing: RMCArmorPMCRiot
+    head: ArmorHelmetPMCRiotShield
+    gloves: CMHandsBlackMarine
+    shoes: RMCBootsPMCFilled
+    pocket2: RMCPouchMagazineLarge
+    eyes: RMCGlassesSecurityBlue
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorFiorinaRiotOfficer
+  name: survivor fiorina riot officer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivorFiorinaRiotOfficer
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconBureauRCO
+  icon:
+    sprite: _RMC14/Interface/job_icons/CMB.rsi
+    state: cmb_rco

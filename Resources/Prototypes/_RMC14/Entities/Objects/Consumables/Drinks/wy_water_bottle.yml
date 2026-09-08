@@ -13,9 +13,16 @@
           Quantity: 30
   - type: Drink
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Drinks/we_ya_water_bottle.rsi
-    state: base
-    layers: []
+    sprite: _RMC14/Objects/Consumable/Drinks/WEYADrinks/weya_water_bottle.rsi
+    layers:
+    - state: icon
+      map: ["enum.OpenableVisuals.Layer"]
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: {state: "icon_open"}
+          False: {state: "icon"}
   - type: Item
     size: Small
   - type: DamageOnLand
@@ -34,3 +41,68 @@
   - type: PhysicalComposition
     materialComposition:
       RMCPlastic: 5
+
+- type: entity
+  parent: CMDrinkWEYAWaterBottle30
+  id: RMCDrinkWEYABugJuice
+  name: Weston-Yamada Bug Juice Protein Drink
+  description: We-Ya brand plastic bottle full of toxic looking green goo, tastes like kiwi, but you are more than sure that there is none of it here.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: RMCJuiceBug
+          Quantity: 30
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/WEYADrinks/weya_bug_juice.rsi
+    layers:
+    - state: icon
+      map: ["enum.OpenableVisuals.Layer"]
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-bug-juice
+
+- type: entity
+  parent: CMDrinkWEYAWaterBottle30
+  id: RMCDrinkWEYACocoMilk
+  name: Weston-Yamada Bottled Coconut Milk
+  description: Rich in vitamins and (artificial) flavor, quenches thirst in a few sips. Bottled by the Weston-Yamada Corporation.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: RMCCocoMilk
+          Quantity: 30
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/WEYADrinks/weya_coco_milk.rsi
+    layers:
+    - state: icon
+      map: ["enum.OpenableVisuals.Layer"]
+
+- type: entity
+  parent: CMDrinkWEYAWaterBottle30
+  id: RMCDrinkWEYASoylent
+  name: Weston-Yamada Premium Choco Soylent
+  description: A plastic bottle full of gooey goodness, choco flavor. One bottle has enough calories for a lunch - don't drink it all in one sitting, better not risk getting a stomachache.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: RMCSoyMilk
+          Quantity: 10
+        - ReagentId: RMCChocolateDrink
+          Quantity: 10
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/WEYADrinks/weya_soylent.rsi
+    layers:
+    - state: icon
+      map: ["enum.OpenableVisuals.Layer"]
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-soylent

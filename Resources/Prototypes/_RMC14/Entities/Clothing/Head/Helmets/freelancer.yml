@@ -1,0 +1,25 @@
+﻿- type: entity
+  parent: ArmorHelmetM10
+  id: RMCArmorHelmetMercenaryAHPS30
+  name: AHPS30 ballistic helmet
+  description: The Advanced Head Protection System is a ballistic helmet sold widely on civilian markets, especially on the frontier. Originally produce by AEGIS, the design would see widespread production by other corporations and groups once the patent expired. Often found in the hands of mercenary groups.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Freelancer/merc_helmet.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Freelancer/merc_helmet.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
+  parent: [RMCArmorHelmetMercenaryAHPS30, RMCMarineHelmetWithLightBase]
+  id: RMCArmorHelmetMercenaryAHPS30Lamp
+  suffix: Light
+  description: The Advanced Head Protection System is a ballistic helmet sold widely on civilian markets, especially on the frontier. Originally produce by AEGIS, the design would see widespread production by other corporations and groups once the patent expired. Often found in the hands of mercenary groups. This one has been modified to have a lamp built-in.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Freelancer/merc_helmet_lamp.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Freelancer/merc_helmet_lamp.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}

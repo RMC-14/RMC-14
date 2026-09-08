@@ -7,6 +7,7 @@
   ranks:
     RMCRankCivilianDoctor: []
   startingGear: RMCGearSurvivorDoctor
+  icon: "RMCJobIconGenericColonistDoctor"
   accessGroups:
   - ColonistMedical
   basePlaytimeTracker: true
@@ -14,13 +15,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
-        RMCSkillMedical: 3
-        RMCSkillSurgery: 2
+      preset: RMCSkillPresetSurvivorDoctor
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetDoctor
     - type: RMCSurvivor
@@ -68,7 +63,7 @@
   name: doctor colonist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomGearOther:
     -
       - [ RMCPouchFirstAidSplintsGauzeOintment ]

@@ -14,6 +14,7 @@ using Content.Shared.Doors.Components;
 using Content.Shared.Examine;
 using Content.Shared.Maps;
 using Content.Shared.Popups;
+using Content.Shared.Spawning;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
@@ -49,9 +50,9 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
         if (!target.IsValid(EntityManager))
             return;
 
-        if (_net.IsServer)
+        if (PredictedSpawnAtPosition(xeno.Comp.UnstableWallId, target) is { } wall &&
+            _net.IsServer)
         {
-            var wall = Spawn(xeno.Comp.UnstableWallId, target);
             _hive.SetSameHive(xeno.Owner, wall);
         }
     }
@@ -61,9 +62,9 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
         if (!target.IsValid(EntityManager))
             return;
 
-        if (_net.IsServer)
+        if (PredictedSpawnAtPosition(xeno.Comp.StickyResinId, target) is { } resin &&
+            _net.IsServer)
         {
-            var resin = SpawnAtPosition(xeno.Comp.StickyResinId, target);
             _hive.SetSameHive(xeno.Owner, resin);
         }
     }
@@ -98,20 +99,20 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
         if (args.Handled)
             return;
 
+        var target = args.Target.SnapToGrid(EntityManager, _map);
+
         // Check if target on grid
-        if (_transform.GetGrid(args.Target) is not { } gridId ||
+        if (_transform.GetGrid(target) is not { } gridId ||
             !TryComp(gridId, out MapGridComponent? grid))
             return;
 
-        if (!_examine.InRangeUnOccluded(xeno.Owner, args.Target, xeno.Comp.Range))
+        if (!_examine.InRangeUnOccluded(xeno.Owner, target, xeno.Comp.Range))
         {
             _popup.PopupClient(Loc.GetString("rmc-xeno-resin-surge-see-fail"), xeno, xeno);
             return;
         }
 
         args.Handled = true;
-
-        var target = args.Target.SnapToGrid(EntityManager, _map);
 
         // Check if user has enough plasma
         if (xeno.Comp.ResinDoafter != null || !_xenoPlasma.TryRemovePlasmaPopup((xeno.Owner, null), args.PlasmaCost))
@@ -139,13 +140,11 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
                 _popup.PopupPredicted(popupSelf, popupOthers, xeno, xeno);
 
                 _xenoReinforce.Reinforce(entity, xeno.Comp.ReinforceAmount, xeno.Comp.ReinforceDuration);
-                if (_net.IsServer)
-                {
-                    if (HasComp<DoorComponent>(entity))
-                        SpawnAttachedTo(xeno.Comp.SurgeDoorEffect, entity.ToCoordinates());
-                    else
-                        SpawnAttachedTo(xeno.Comp.SurgeWallEffect, entity.ToCoordinates());
-                }
+
+                if (HasComp<DoorComponent>(entity))
+                    PredictedSpawnAttachedTo(xeno.Comp.SurgeDoorEffect, entity.ToCoordinates());
+                else
+                    PredictedSpawnAttachedTo(xeno.Comp.SurgeWallEffect, entity.ToCoordinates());
                 return;
             }
 

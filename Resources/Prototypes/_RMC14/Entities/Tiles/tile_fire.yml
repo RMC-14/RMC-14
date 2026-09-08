@@ -121,6 +121,7 @@
     burnColor: "#00b8ff"
   - type: TileFire
     id: RMCTileFireBlue
+    duration: 40
     extinguishInstantly: false
     patExtinguishMultiplier: 2
   - type: GenericVisualizer
@@ -234,6 +235,22 @@
   - type: RMCIgniteOnCollide
     maxStacks: 60
     intensity: 30
+
+- type: entity
+  parent: RMCTileFire
+  id: RMCHijackPipeFire
+  suffix: Hijack pipe
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TileFire
+    duration: 30
+  - type: RMCIgniteOnCollide
+    intensity: 20
+    duration: 30
+  - type: DamageOnCollide
+    damage:
+      types:
+        Heat: 60
 
 - type: entity
   parent: RMCTileFireLaser

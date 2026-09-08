@@ -1,0 +1,43 @@
+- type: entity
+  parent: BaseItem
+  id: RMCNewIconGuidebookPurple
+  name: purple new
+  suffix: (GuideBookEntity)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Interface/new_player.rsi
+    state: new_player_marker_4
+
+- type: entity
+  parent: BaseItem
+  id: RMCNewIconGuidebookRed
+  name: red new
+  suffix: (GuideBookEntity)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Interface/new_player.rsi
+    state: new_player_marker_1
+
+- type: entity
+  parent: BaseItem
+  id: RMCNewIconGuidebookYellow
+  name: yellow new
+  suffix: (GuideBookEntity)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Interface/new_player.rsi
+    state: new_player_marker_2
+
+- type: entity
+  parent: BaseItem
+  id: RMCNewIconGuidebookGreen
+  name: green new
+  suffix: (GuideBookEntity)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Interface/new_player.rsi
+    state: new_player_marker_3

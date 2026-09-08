@@ -1,8 +1,6 @@
-using System.Linq;
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Explosion;
-using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Crest;
 using Content.Shared._RMC14.Xenonids.Headbutt;
@@ -22,6 +20,8 @@ using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Player;
+using System.Linq;
 using static Content.Shared._RMC14.Xenonids.Fortify.XenoFortifyComponent;
 using static Content.Shared.Physics.CollisionGroup;
 
@@ -46,6 +46,7 @@ public sealed class XenoFortifySystem : EntitySystem
     {
         // TODO RMC14 resist knockback from small explosives
         SubscribeLocalEvent<XenoFortifyComponent, XenoFortifyActionEvent>(OnXenoFortifyAction);
+        SubscribeLocalEvent<XenoFortifyComponent, PlayerDetachedEvent>(OnXenoFortifyPlayerDetached, before: [typeof(XenoSystem)]);
 
         SubscribeLocalEvent<XenoFortifyComponent, CMGetArmorEvent>(OnXenoFortifyGetArmor);
         SubscribeLocalEvent<XenoFortifyComponent, BeforeStatusEffectAddedEvent>(OnXenoFortifyBeforeStatusAdded);
@@ -83,6 +84,12 @@ public sealed class XenoFortifySystem : EntitySystem
             Unfortify(xeno);
         else
             Fortify(xeno);
+    }
+
+    private void OnXenoFortifyPlayerDetached(Entity<XenoFortifyComponent> ent, ref PlayerDetachedEvent args)
+    {
+        if (!TerminatingOrDeleted(ent) && ent.Comp.Fortified)
+            Unfortify(ent);
     }
 
     private void OnXenoFortifyGetArmor(Entity<XenoFortifyComponent> xeno, ref CMGetArmorEvent args)

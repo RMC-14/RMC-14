@@ -1,6 +1,5 @@
 using Content.Server._RMC14.Commendations;
 using Content.Server.GameTicking;
-using Content.Shared._RMC14.Commendations;
 using Content.Shared._RMC14.Marines.Dogtags;
 using Content.Shared.Database;
 using System.Linq;

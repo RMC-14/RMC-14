@@ -33,10 +33,25 @@ public abstract partial class SharedRMCEquipmentDeployerSystem : EntitySystem
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<RMCAlertLevelChangedEvent>(OnAlertLevelChanged);
+
         SubscribeLocalEvent<RMCEquipmentDeployerComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<RMCEquipmentDeployerComponent, InteractHandEvent>(OnInteract);
         SubscribeLocalEvent<RMCEquipmentDeployerComponent, EntGotInsertedIntoContainerMessage>(OnInserted);
         SubscribeLocalEvent<RMCEquipmentDeployerComponent, EntGotRemovedFromContainerMessage>(OnRemovedFromContainer);
+    }
+
+    private void OnAlertLevelChanged(ref RMCAlertLevelChangedEvent ev)
+    {
+        var query = EntityQueryEnumerator<RMCEquipmentDeployerComponent>();
+        while (query.MoveNext(out var uid, out var deployer))
+        {
+            if (deployer.AlertLevelRequired == null || !deployer.IsDeployed)
+                continue;
+
+            if (deployer.AlertLevelRequired > ev.Level)
+                TryDeploy(uid, false);
+        }
     }
 
     private void OnMapInit(Entity<RMCEquipmentDeployerComponent> ent, ref MapInitEvent args)

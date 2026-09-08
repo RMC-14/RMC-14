@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 02/24/2026 19:19:33
+  time: 04/10/2026 12:00:28
   entityCount: 146
 maps: []
 grids:
@@ -212,6 +212,8 @@ entities:
     - type: Transform
       pos: 3.5,-6.5
       parent: 1
+    - type: HideLayerClothing
+      slots: null
 - proto: CMAirlockCommandLockedColony
   entities:
   - uid: 17
@@ -997,7 +999,9 @@ entities:
     - type: Transform
       pos: 5.5,-1.5
       parent: 1
-  - uid: 65
+- proto: RMCSpawnerCorpseWeYaGoonLead
+  entities:
+  - uid: 62
     components:
     - type: Transform
       pos: 1.5,-4.5
@@ -1030,12 +1034,12 @@ entities:
     - type: Transform
       pos: 10.5,-4.5
       parent: 1
-- proto: RMCWeaponRifleM54C
+- proto: RMCWeaponRifleM54CWhite
   entities:
-  - uid: 80
+  - uid: 65
     components:
     - type: Transform
-      pos: 4.5,-1.5
+      pos: 4.6210017,-1.5042671
       parent: 1
 - proto: RMCWindowFrameSolaris
   entities:

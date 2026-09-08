@@ -11,11 +11,20 @@
   startingGear: RMCGearSurvivorPMCCommander
   icon: RMCJobIconPMCCommander
   greeting: rmc-job-greeting-solaris-pmc-commander
-  playTimeTracker: RMCJobSurvivorMilitary
-  spawnMenuRoleName: Survivor — PMC Field Operations Leader (Solaris Ridge special survivor)
+  playTimeTracker: RMCJobSurvivorCO
+  spawnMenuRoleName: PMC Field Operations Leader (Solaris Special Survivor)
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      understoodLanguages:
+      - Japanese
+      - English
+      currentLanguage: English
+      defaultLanguage: English
     - type: Skills
       preset: RMCSkillPresetSurvivorWeYaPMCCommander
     - type: MarineOrders
@@ -43,7 +52,7 @@
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_pmc
-  useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
+  useLoadoutOfJob: RMCSurvivorCommandingOfficer
 
 - type: startingGear
   parent: RMCGearSurvivorPMCBase
@@ -88,5 +97,5 @@
   parent: CMJobIconBase
   id: RMCJobIconPMCCommander
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/We-Ya/pmc.rsi
     state: pmc_fol

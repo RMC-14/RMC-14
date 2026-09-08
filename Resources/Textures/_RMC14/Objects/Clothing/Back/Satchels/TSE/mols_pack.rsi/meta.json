@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "license": "CC0-1.0",
+  "copyright": "Created for RMC-14/RMC-14 by @TadJohnson (GitHub).",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "equipped-BACKPACK",
+      "directions": 4
+    },
+    {
+      "name": "open"
+    },
+    {
+      "name": "closed"
+    }
+  ]
+}

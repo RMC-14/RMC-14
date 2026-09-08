@@ -12,6 +12,7 @@ using Content.Shared.Popups;
 using Content.Shared.Prying.Components;
 using Content.Shared.Prying.Systems;
 using Content.Shared.Tools.Components;
+using Content.Shared.Tools.Systems;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Map.Enumerators;
 using Robust.Shared.Network;
@@ -27,26 +28,30 @@ public sealed class CMDoorSystem : EntitySystem
 {
     [Dependency] private readonly AccessReaderSystem _accessReader = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _announce = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoorSystem _doors = default!;
     [Dependency] private readonly SharedGameTicker _gameTicker = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
     [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly WeldableSystem _weldable = default!;
 
     private EntityQuery<DoorComponent> _doorQuery;
     private EntityQuery<CMDoubleDoorComponent> _doubleQuery;
+    private readonly HashSet<EntityUid> _pairCloseCheck = new();
 
     public override void Initialize()
     {
         _doorQuery = GetEntityQuery<DoorComponent>();
         _doubleQuery = GetEntityQuery<CMDoubleDoorComponent>();
 
-        // TODO RMC14 there is an edge case where one door can close but the other can't, to fix this CanClose should be checked on the adjacent door when a double door tries to close
         SubscribeLocalEvent<CMDoubleDoorComponent, DoorStateChangedEvent>(OnDoorStateChanged);
+        SubscribeLocalEvent<CMDoubleDoorComponent, BeforeDoorClosedEvent>(OnDoubleDoorBeforeClosed);
+        SubscribeLocalEvent<CMDoubleDoorComponent, WeldableChangedEvent>(OnDoubleDoorWeldChanged);
+        SubscribeLocalEvent<CMDoubleDoorComponent, EntityTerminatingEvent>(OnDoubleDoorTerminating);
 
         SubscribeLocalEvent<RMCDoorButtonComponent, ActivateInWorldEvent>(OnButtonActivateInWorld);
 
@@ -72,6 +77,60 @@ public sealed class CMDoorSystem : EntitySystem
                 Close(door);
                 break;
         }
+    }
+
+    private void OnDoubleDoorBeforeClosed(Entity<CMDoubleDoorComponent> ent, ref BeforeDoorClosedEvent args)
+    {
+        if (_pairCloseCheck.Contains(ent.Owner))
+            return;
+
+        if (!TryGetPairedDoubleDoor(ent, out var paired))
+            return;
+
+        if (!_doorQuery.TryGetComponent(paired, out var pairedDoor))
+            return;
+
+        _pairCloseCheck.Add(ent.Owner);
+        _pairCloseCheck.Add(paired.Owner);
+
+        try
+        {
+            if (!_doors.CanClose(paired.Owner, pairedDoor, partial: args.Partial))
+                args.Cancel();
+        }
+        finally
+        {
+            _pairCloseCheck.Remove(ent.Owner);
+            _pairCloseCheck.Remove(paired.Owner);
+        }
+    }
+
+    private void OnDoubleDoorWeldChanged(Entity<CMDoubleDoorComponent> ent, ref WeldableChangedEvent args)
+    {
+        if (!TryGetPairedDoubleDoor(ent, out var paired))
+            return;
+
+        if (!TryComp<WeldableComponent>(paired, out var weldable) ||
+            weldable.IsWelded == args.IsWelded)
+        {
+            return;
+        }
+
+        _weldable.SetWeldedState(paired.Owner, args.IsWelded, weldable);
+    }
+
+    private void OnDoubleDoorTerminating(Entity<CMDoubleDoorComponent> ent, ref EntityTerminatingEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!TryGetPairedDoubleDoor(ent, out var paired))
+            return;
+
+        if (TerminatingOrDeleted(paired))
+            return;
+
+        QueueDel(paired);
     }
 
     private void OnButtonActivateInWorld(Entity<RMCDoorButtonComponent> button, ref ActivateInWorldEvent args)
@@ -171,7 +230,6 @@ public sealed class CMDoorSystem : EntitySystem
                 args.Cancelled = true;
         }
 
-        // Xenos can pry powered airlocks
         if (HasComp<XenoComponent>(args.User) && HasComp<AirlockComponent>(ent))
             return;
 
@@ -183,17 +241,17 @@ public sealed class CMDoorSystem : EntitySystem
     {
         if (args.Cancelled)
         {
-            _audioSystem.Stop(ent.Comp.SoundEntity);
+            _audio.Stop(ent.Comp.SoundEntity);
         }
         if (HasComp<XenoComponent>(args.User) && _net.IsServer && !args.Cancelled)
         {
             if (HasComp<RMCPodDoorComponent>(ent.Owner))
             {
-                ent.Comp.SoundEntity = _audioSystem.PlayPredicted(ent.Comp.XenoPodDoorPrySound, ent.Owner, ent.Owner)?.Entity;
+                ent.Comp.SoundEntity = _audio.PlayPredicted(ent.Comp.XenoPodDoorPrySound, ent.Owner, ent.Owner)?.Entity;
             }
             else
             {
-                ent.Comp.SoundEntity = _audioSystem.PlayPredicted(ent.Comp.XenoPrySound, ent.Owner, ent.Owner)?.Entity;
+                ent.Comp.SoundEntity = _audio.PlayPredicted(ent.Comp.XenoPrySound, ent.Owner, ent.Owner)?.Entity;
             }
         }
     }
@@ -249,6 +307,32 @@ public sealed class CMDoorSystem : EntitySystem
         return _map.GetAnchoredEntitiesEnumerator(transform.GridUid.Value, grid, position);
     }
 
+    // RMC TODO: Once all legacy CMDoubleDoors are removed this can be removed
+    private bool TryGetPairedDoubleDoor(Entity<CMDoubleDoorComponent> ent, out Entity<CMDoubleDoorComponent> paired)
+    {
+        paired = default;
+
+        if (GetAdjacentEnumerator(ent) is not { } enumerator)
+            return false;
+
+        while (enumerator.MoveNext(out var anchored))
+        {
+            if (anchored == ent.Owner || TerminatingOrDeleted(anchored))
+                continue;
+
+            if (!_doubleQuery.TryGetComponent(anchored, out var doubleDoor) ||
+                !AreFacing(ent, anchored.Value))
+            {
+                continue;
+            }
+
+            paired = (anchored.Value, doubleDoor);
+            return true;
+        }
+
+        return false;
+    }
+
     private bool AreFacing(EntityUid one, EntityUid two)
     {
         return TryComp(one, out TransformComponent? transformOne) &&
@@ -259,7 +343,7 @@ public sealed class CMDoorSystem : EntitySystem
 
     private void Open(Entity<CMDoubleDoorComponent> ent)
     {
-        if (GetAdjacentEnumerator(ent) is not { } enumerator)
+        if (!TryGetPairedDoubleDoor(ent, out var paired))
             return;
 
         var time = _timing.CurTime;
@@ -267,29 +351,24 @@ public sealed class CMDoorSystem : EntitySystem
         ent.Comp.LastOpeningAt = time;
         Dirty(ent);
 
-        while (enumerator.MoveNext(out var anchored))
+        if (paired.Comp.LastOpeningAt != time &&
+            _doorQuery.TryGetComponent(paired, out var door) &&
+            door.State != DoorState.Opening)
         {
-            if (_doubleQuery.TryGetComponent(anchored, out var doubleDoor) &&
-                doubleDoor.LastOpeningAt != time &&
-                AreFacing(ent, anchored.Value) &&
-                _doorQuery.TryGetComponent(anchored, out var door) &&
-                door.State != DoorState.Opening)
-            {
-                doubleDoor.LastOpeningAt = time;
-                Dirty(anchored.Value, doubleDoor);
+            paired.Comp.LastOpeningAt = time;
+            Dirty(paired);
 
-                var sound = door.OpenSound;
-                door.OpenSound = null;
-                door.Partial = false;
-                _doors.StartOpening(anchored.Value, door);
-                door.OpenSound = sound;
-            }
+            var sound = door.OpenSound;
+            door.OpenSound = null;
+            door.Partial = false;
+            _doors.StartOpening(paired, door);
+            door.OpenSound = sound;
         }
     }
 
     private void Close(Entity<CMDoubleDoorComponent> ent)
     {
-        if (GetAdjacentEnumerator(ent) is not { } enumerator)
+        if (!TryGetPairedDoubleDoor(ent, out var paired))
             return;
 
         var time = _timing.CurTime;
@@ -297,23 +376,18 @@ public sealed class CMDoorSystem : EntitySystem
         ent.Comp.LastClosingAt = time;
         Dirty(ent);
 
-        while (enumerator.MoveNext(out var anchored))
+        if (paired.Comp.LastClosingAt != time &&
+            _doorQuery.TryGetComponent(paired, out var door) &&
+            door.State != DoorState.Closing)
         {
-            if (_doubleQuery.TryGetComponent(anchored, out var doubleDoor) &&
-                doubleDoor.LastClosingAt != time &&
-                AreFacing(ent, anchored.Value) &&
-                _doorQuery.TryGetComponent(anchored, out var door) &&
-                door.State != DoorState.Closing)
-            {
-                doubleDoor.LastClosingAt = time;
-                Dirty(anchored.Value, doubleDoor);
+            paired.Comp.LastClosingAt = time;
+            Dirty(paired);
 
-                var sound = door.CloseSound;
-                door.CloseSound = null;
-                door.Partial = false;
-                _doors.StartClosing(anchored.Value, door);
-                door.CloseSound = sound;
-            }
+            var sound = door.CloseSound;
+            door.CloseSound = null;
+            door.Partial = false;
+            _doors.StartClosing(paired, door);
+            door.CloseSound = sound;
         }
     }
 }

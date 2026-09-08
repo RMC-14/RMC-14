@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Made by SharkSnake98 on GitHub",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "wyfloor-1"
+    },
+    {
+      "name": "wyfloor-2"
+    },
+    {
+      "name": "wyfloor-3"
+    },
+    {
+      "name": "wyfloor-4"
+    },
+    {
+      "name": "wyfloor-5"
+    },
+    {
+      "name": "wyfloor-6"
+    },
+    {
+      "name": "wyfloor-7"
+    },
+    {
+      "name": "wyfloor-8"
+    }
+  ]
+}

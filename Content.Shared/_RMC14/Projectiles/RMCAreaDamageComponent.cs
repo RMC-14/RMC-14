@@ -14,4 +14,10 @@ public sealed partial class RMCAreaDamageComponent : Component
     /// </summary>
     [DataField]
     public float FalloffDistance = 0.5f;
+
+    /// <summary>
+    ///     The damage multiplier for xenonid targets
+    /// </summary>
+    [DataField]
+    public float XenoDamageMultiplier = 1f;
 }

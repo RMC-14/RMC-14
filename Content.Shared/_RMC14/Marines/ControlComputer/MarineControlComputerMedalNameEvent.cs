@@ -5,4 +5,4 @@ namespace Content.Shared._RMC14.Marines.ControlComputer;
 
 [ByRefEvent]
 [Serializable, NetSerializable]
-public sealed record MarineControlComputerMedalNameEvent(NetEntity Actor, NetEntity? Marine, ProtoId<EntityPrototype> MedalEntityId, string? LastPlayerId = null);
+public sealed record MarineControlComputerMedalNameEvent(NetEntity Actor, NetEntity? Marine, EntProtoId MedalEntityId, string? LastPlayerId = null);

@@ -22,7 +22,7 @@ public readonly record struct Commendation(
 [Serializable, NetSerializable]
 public readonly record struct RoundCommendationEntry(
     Commendation Commendation,
-    ProtoId<EntityPrototype>? CommendationPrototypeId,
+    EntProtoId? CommendationPrototypeId,
     NetEntity? ReceiverEntity,
     string? ReceiverLastPlayerId
 );

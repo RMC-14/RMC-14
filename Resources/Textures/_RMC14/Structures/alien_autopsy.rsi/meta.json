@@ -14,6 +14,12 @@
       "name": "tank_broken"
     },
     {
+      "name": "labcage_broken"
+    },
+    {
+      "name": "labcage"
+    },
+    {
       "name": "tank_larva",
       "delays": [
         [

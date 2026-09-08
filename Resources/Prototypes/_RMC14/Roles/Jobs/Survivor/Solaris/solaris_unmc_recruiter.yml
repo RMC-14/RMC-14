@@ -14,13 +14,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillOverwatch: 1
-        RMCSkillLeadership: 1
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 2
-        RMCSkillFirearms: 1
+      preset: RMCSkillPresetSurvivorRecruiter
     - type: MarineOrders
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetCivilian

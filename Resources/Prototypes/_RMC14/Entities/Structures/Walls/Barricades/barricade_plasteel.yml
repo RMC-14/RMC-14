@@ -15,7 +15,9 @@
   - type: Sprite
     sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
     layers:
-    - state: plasteel
+    - state: DamageOverlay_0
+      map: [ "enum.RMCDamageOverlayVisuals.DamageOverlay" ]
+      sprite: _RMC14/Structures/Walls/Barricades/plasteel_barricade_cracks.rsi
     - map: [ "acided" ]
     drawdepth: WallTops
   - type: GenericVisualizer
@@ -45,7 +47,8 @@
     repairableDamageLimit: 675
   - type: NailgunRepairable
     # cm13 max_health%: 0.45
-    repairPlasteel: 400
+    repairValues:
+      CMPlasteel: 400
   - type: Destructible
     thresholds:
     - trigger:
@@ -64,10 +67,13 @@
         acts: [ "Destruction" ]
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 25
+    damageDivisor: 56.25
     trackAllDamage: true
-    damageOverlay:
-      sprite: _RMC14/Structures/Walls/Barricades/plasteel_barricade_cracks.rsi
+    overlay: false
+    targetLayers:
+    - "enum.RMCDamageOverlayVisuals.DamageOverlay"
+    damageGroup: "Brute"
+    hideIfZero: false
   - type: Barbed
     thornsDamage:
       types:
@@ -93,20 +99,23 @@
     - type: Sprite
       sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
       layers:
-      - state: plasteel
-      - state: burn_upgrade
+      - state: DamageOverlay_0
+        map: [ "enum.RMCDamageOverlayVisuals.DamageOverlay" ]
+        sprite: _RMC14/Structures/Walls/Barricades/plasteel_barricade_cracks.rsi
+      - state: AdditionalDamageOverlay_0
+        map: [ "enum.RMCDamageOverlayVisuals.AdditionalDamageOverlay" ]
+        sprite: _RMC14/Structures/Walls/Barricades/burn_barricade_cracks.rsi
       - map: [ "acided" ]
+    - type: DamageVisuals
+      targetLayers:
+      - "enum.RMCDamageOverlayVisuals.DamageOverlay"
+      - "enum.RMCDamageOverlayVisuals.AdditionalDamageOverlay"
     - type: Damageable
       damageContainer: Inorganic
       damageModifierSet: CMBurnBarricade
-    - type: DamageVisuals
-      thresholds: [4, 8, 12]
-      damageDivisor: 25
-      trackAllDamage: true
-      damageOverlay:
-        sprite: _RMC14/Structures/Walls/Barricades/burn_barricade_cracks.rsi
     - type: RMCConstructionUpgradeTarget
       upgrades: null
+      downgrade: RMCBiohazardUpgradePlasteel
     - type: Flammable
       damage:
         types:
@@ -120,20 +129,23 @@
     - type: Sprite
       sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
       layers:
-      - state: plasteel
-      - state: brute_upgrade
+      - state: DamageOverlay_0
+        map: [ "enum.RMCDamageOverlayVisuals.DamageOverlay" ]
+        sprite: _RMC14/Structures/Walls/Barricades/plasteel_barricade_cracks.rsi
+      - state: AdditionalDamageOverlay_0
+        map: [ "enum.RMCDamageOverlayVisuals.AdditionalDamageOverlay" ]
+        sprite: _RMC14/Structures/Walls/Barricades/brute_barricade_cracks.rsi
       - map: [ "acided" ]
+    - type: DamageVisuals
+      targetLayers:
+      - "enum.RMCDamageOverlayVisuals.DamageOverlay"
+      - "enum.RMCDamageOverlayVisuals.AdditionalDamageOverlay"
     - type: Damageable
       damageContainer: Inorganic
       damageModifierSet: CMBruteBarricade
-    - type: DamageVisuals
-      thresholds: [4, 8, 12]
-      damageDivisor: 25
-      trackAllDamage: true
-      damageOverlay:
-        sprite: _RMC14/Structures/Walls/Barricades/brute_barricade_cracks.rsi
     - type: RMCConstructionUpgradeTarget
       upgrades: null
+      downgrade: RMCBruteUpgradePlasteel
 
 - type: entity
   parent: RMCBarricadePlasteel
@@ -143,19 +155,22 @@
     - type: Sprite
       sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
       layers:
-      - state: plasteel
-      - state: explosive_upgrade
+      - state: DamageOverlay_0
+        map: [ "enum.RMCDamageOverlayVisuals.DamageOverlay" ]
+        sprite: _RMC14/Structures/Walls/Barricades/plasteel_barricade_cracks.rsi
+      - state: AdditionalDamageOverlay_0
+        map: [ "enum.RMCDamageOverlayVisuals.AdditionalDamageOverlay" ]
+        sprite: _RMC14/Structures/Walls/Barricades/explosive_barricade_cracks.rsi
       - map: [ "acided" ]
+    - type: DamageVisuals
+      targetLayers:
+      - "enum.RMCDamageOverlayVisuals.DamageOverlay"
+      - "enum.RMCDamageOverlayVisuals.AdditionalDamageOverlay"
     - type: ExplosionResistance
       damageCoefficient: 0.5
-    - type: DamageVisuals
-      thresholds: [4, 8, 12]
-      damageDivisor: 25
-      trackAllDamage: true
-      damageOverlay:
-        sprite: _RMC14/Structures/Walls/Barricades/explosive_barricade_cracks.rsi
     - type: RMCConstructionUpgradeTarget
       upgrades: null
+      downgrade: RMCExplosiveUpgradePlasteel
     - type: Flammable
       damage:
         types:
@@ -172,8 +187,48 @@
     layers:
     - state: folding_plasteel
       map: ["enum.DoorVisualLayers.Base"]
+      visible: false
+    - state: DamageOverlay_0
+      map: [ "enum.RMCDamageOverlayVisuals.DamageOverlay" ]
+      sprite: _RMC14/Structures/Walls/Barricades/folding_plasteel_cracks.rsi
+    - state: folding_plasteel_connection_1
+      map: ["enum.RMCFoldingBarricadeLinkingVisualLayers.North"]
+      visible: false
+    - state: folding_plasteel_connection_2
+      map: ["enum.RMCFoldingBarricadeLinkingVisualLayers.South"]
+      visible: false
+    - state: folding_plasteel_connection_4
+      map: ["enum.RMCFoldingBarricadeLinkingVisualLayers.East"]
+      visible: false
+    - state: folding_plasteel_connection_8
+      map: ["enum.RMCFoldingBarricadeLinkingVisualLayers.West"]
+      visible: false
     - map: [ "acided" ]
     drawdepth: WallTops
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 50
+    trackAllDamage: true
+    overlay: false
+    targetLayers:
+    - "enum.RMCDamageOverlayVisuals.DamageOverlay"
+    damageGroup: "Brute"
+    hideIfZero: false
+  - type: RMCFoldingBarricadeLinking
+    linkable: true
+    connectionStates:
+      North:
+        Closed: folding_plasteel_connection_1
+        Open: folding_plasteel_closed_connection_1
+      South:
+        Closed: folding_plasteel_connection_2
+        Open: folding_plasteel_closed_connection_2
+      East:
+        Closed: folding_plasteel_connection_4
+        Open: folding_plasteel_closed_connection_4
+      West:
+        Closed: folding_plasteel_connection_8
+        Open: folding_plasteel_closed_connection_8
   - type: RMCRepairable
     heal: 200
     skill: RMCSkillConstruction
@@ -182,7 +237,8 @@
     repairableDamageLimit: 600
   - type: NailgunRepairable
     # cm13 max_health%: 0.3
-    repairPlasteel: 240
+    repairValues:
+      CMPlasteel: 240
   - type: Destructible
     thresholds:
     - trigger:
@@ -201,6 +257,26 @@
         acts: [ "Destruction" ]
   - type: GenericVisualizer
     visuals:
+      enum.RMCFoldingBarricadeLinkingVisuals.North:
+        enum.RMCFoldingBarricadeLinkingVisualLayers.North:
+          None: { visible: false }
+          Closed: { state: folding_plasteel_connection_1, visible: true }
+          Open: { state: folding_plasteel_closed_connection_1, visible: true }
+      enum.RMCFoldingBarricadeLinkingVisuals.South:
+        enum.RMCFoldingBarricadeLinkingVisualLayers.South:
+          None: { visible: false }
+          Closed: { state: folding_plasteel_connection_2, visible: true }
+          Open: { state: folding_plasteel_closed_connection_2, visible: true }
+      enum.RMCFoldingBarricadeLinkingVisuals.East:
+        enum.RMCFoldingBarricadeLinkingVisualLayers.East:
+          None: { visible: false }
+          Closed: { state: folding_plasteel_connection_4, visible: true }
+          Open: { state: folding_plasteel_closed_connection_4, visible: true }
+      enum.RMCFoldingBarricadeLinkingVisuals.West:
+        enum.RMCFoldingBarricadeLinkingVisualLayers.West:
+          None: { visible: false }
+          Closed: { state: folding_plasteel_connection_8, visible: true }
+          Open: { state: folding_plasteel_closed_connection_8, visible: true }
       enum.BarbedWireVisualLayers.Wire:
         barbWired:
           UnWired: { state: folding_plasteel_closed_wire, visible: false }
@@ -214,6 +290,10 @@
             visible: true
           False:
             visible: false
+      enum.DoorVisuals.State:
+        enum.RMCDamageOverlayVisuals.DamageOverlay:
+          Open: { sprite: _RMC14/Structures/Walls/Barricades/folding_plasteel_closed_cracks.rsi }
+          Closed: { sprite: _RMC14/Structures/Walls/Barricades/folding_plasteel_cracks.rsi }
   - type: Door
     openSpriteState: folding_plasteel_closed
     closedSpriteState: folding_plasteel

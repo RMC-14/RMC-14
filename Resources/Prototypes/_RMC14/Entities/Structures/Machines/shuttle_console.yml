@@ -9,6 +9,13 @@
   - type: Corrodible
     isCorrodible: false
   - type: InteractionOutline
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 300
+    activeLoad: 300
+    channel: Equipment
 
 - type: entity
   parent: CMComputerDropship
@@ -46,6 +53,34 @@
     hijackable: false
 
 - type: entity
+  parent: CMComputerDropshipNavigation
+  id: CMComputerDropshipNavigationERTTSE
+  name: transport shuttle
+  description: A transport shuttle flight computer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_computer_props.rsi
+    state: blacksensor_comp2
+  - type: DropshipNavigationComputer
+    hijackable: false
+  - type: Transform
+    anchored: false
+
+- type: entity
+  parent: CMComputerDropshipNavigation
+  id: CMComputerDropshipNavigationERTCLF
+  name: transport shuttle
+  description: A transport shuttle flight computer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/clf.rsi
+    state: 93
+  - type: DropshipNavigationComputer
+    hijackable: false
+  - type: Transform
+    anchored: false
+
+- type: entity
   parent: CMComputerDropship
   id: CMComputerDropshipNavigationPlanetside
   name: dropship navigation computer
@@ -54,7 +89,12 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/dropship_nav_computer.rsi
-    state: on
+    layers:
+    - map: ["base"]
+      state: off
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "on"
+  - type: Appearance
   - type: ActivatableUI
     key: enum.DropshipTerminalUiKey.Key
   - type: AccessReader
@@ -85,6 +125,9 @@
   - type: RMCCameraComputer
     protoIds:
     - RMCMonitorCameraAlamo
+    - RMCFlareCAS
+    - RMCAirFlareCAS
+    - RMCLaserDesignatorTarget
   - type: ActivatableUI
     key: enum.RMCCameraUiKey.Key
 
@@ -98,6 +141,9 @@
   - type: RMCCameraComputer
     protoIds:
     - RMCMonitorCameraNormandy
+    - RMCFlareCAS
+    - RMCAirFlareCAS
+    - RMCLaserDesignatorTarget
 
 - type: entity
   parent: CMComputerDropship
@@ -139,8 +185,17 @@
   - type: Sprite
     drawdepth: Objects
     sprite: _RMC14/Structures/Machines/computer.rsi
-    state: security_cam
-    layers: [ ]
+    layers:
+    - state: "security_cam0"
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "security_cam"
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 300
+    activeLoad: 300
+    channel: Equipment
   - type: Clickable
   - type: Corrodible
     isCorrodible: false
@@ -186,8 +241,10 @@
   - type: Sprite
     drawdepth: Objects
     sprite: _RMC14/Structures/Machines/computer.rsi
-    state: security_cam
-    layers: [ ]
+    layers:
+    - state: "security_cam0"
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "security_cam"
   - type: Clickable
   - type: Corrodible
     isCorrodible: false
@@ -232,6 +289,22 @@
   - type: DropshipDestination
   - type: FTLSmashImmune
   - type: NoFTL
+
+- type: entity
+  parent: CMDropshipDestination
+  id: CMDropshipDestinationAlamo
+  suffix: Alamo
+  components:
+  - type: DropshipDestination
+    spawn: "/Maps/_RMC14/alamo.yml" # The actual Dropship files are private. These are debug versions to ensure tests pass.
+
+- type: entity
+  parent: CMDropshipDestination
+  id: CMDropshipDestinationNormandy
+  suffix: Normandy
+  components:
+  - type: DropshipDestination
+    spawn: "/Maps/_RMC14/normandy.yml" # The actual Dropship files are private. These are debug versions to ensure tests pass.
 
 - type: entity
   parent: MarkerBase

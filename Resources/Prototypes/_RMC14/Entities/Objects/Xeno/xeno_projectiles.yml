@@ -153,6 +153,32 @@
     max: 4
 
 - type: entity
+  id: XenoAcidShotgunProjectile
+  parent: XenoBaseProjectile
+  name: shotgun spit
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: xeno_acid_strong
+      shader: unshaded
+  - type: XenoAcidShotgun
+    bonusDamage:
+      types:
+        Heat: 7.5
+  - type: Projectile
+    impactEffect: null
+    ignoreResistances: true
+    damage:
+      types:
+        Heat: 9
+  - type: XenoProjectile
+    deleteOnFriendlyXeno: false
+  - type: ProjectileMaxRange
+    max: 5
+
+- type: entity
   id: XenoBoneChipsProjectile
   parent: XenoBaseProjectile
   name: bone chips
@@ -227,6 +253,7 @@
     spawn: RMCSmokeAcid
     popup: rmc-glob-land
     popupType: LargeCaution
+    spawnOffset: -0.5
   - type: ProjectileMaxRange
     max: 10
   - type: XenoSlowingSpitProjectile
@@ -283,6 +310,7 @@
     spawn: RMCSmokeNeurotoxin
     popup: rmc-glob-land
     popupType: LargeCaution
+    spawnOffset: -0.5
   - type: ProjectileMaxRange
     max: 10
   - type: XenoSlowingSpitProjectile

@@ -1,5 +1,6 @@
-using Content.Shared._RMC14.Sentry;
+using Content.Shared._RMC14.SupplyDrop;
 using Content.Shared.Damage;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -47,13 +48,19 @@ public sealed partial class RMCOrbitalDeployableComponent : Component
 
     /// <summary>
     ///     The amount of damage dealt to entities near the target location when the drop is finished.
-    ///     Only used if <see cref="DropPod"/> is false.
+    ///     If <see cref="DropPod"/> is true, the landing damage specified on the drop pod prototype's <see cref="SupplyDropPodComponent"/> will be used instead.
     /// </summary>
     [DataField, AutoNetworkedField]
     public DamageSpecifier? LandingDamage;
 
     /// <summary>
-    ///     The range to check for entities with the <see cref="TurretComponent"/>, deployment is not possible if one is found.
+    ///     The whitelist to check for in the <see cref="DefenseExclusionRange"/>, deployment is not possible if any found entity matches the whitelist.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityWhitelist? DeployBlacklist;
+
+    /// <summary>
+    ///     The range to check for entities matching the <see cref="DeployBlacklist"/>.
     /// </summary>
     [DataField, AutoNetworkedField]
     public int DefenseExclusionRange = 4;
@@ -78,6 +85,7 @@ public sealed partial class RMCOrbitalDeployableComponent : Component
 
     /// <summary>
     ///     The sound to play on the target location when the dropped entity start it's dropping animation.
+    ///     If <see cref="DropPod"/> is true, the arriving sound stored on the drop pod prototype's <see cref="SupplyDropPodComponent"/> will be used instead.
     /// </summary>
     [DataField, AutoNetworkedField]
     public SoundSpecifier? ArrivingSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/Techpod/techpod_drill.ogg");

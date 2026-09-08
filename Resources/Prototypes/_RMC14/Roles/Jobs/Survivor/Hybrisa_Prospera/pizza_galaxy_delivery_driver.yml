@@ -51,7 +51,7 @@
   name: hybrisa pizza galaxy delivery driver preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCShoesRed ] # Repeated entries for rarity
     - [ RMCShoesRed ]

@@ -3,6 +3,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Storage;
 using Content.Shared.Storage.Components;
+using Content.Shared.Tools.Components; // RMC14
 
 namespace Content.Shared.Placeable;
 
@@ -58,6 +59,11 @@ public sealed class PlaceableSurfaceSystem : EntitySystem
 
         if (!surface.IsPlaceable)
             return;
+
+        // RMC14
+        if (HasComp<ToolComponent>(args.Used))
+            return;
+        // RMC14
 
         // 99% of the time they want to dump the stuff inside on the table, they can manually place with q if they really need to.
         // Just causes prediction CBT otherwise.

@@ -1,0 +1,449 @@
+meta:
+  format: 7
+  category: Grid
+  engineVersion: 264.0.2
+  forkId: ""
+  forkVersion: ""
+  time: 04/16/2026 21:26:25
+  entityCount: 55
+maps: []
+grids:
+- 1
+orphans:
+- 1
+nullspace: []
+tilemap:
+  0: Space
+  198: CMFloorPlating
+  5: RMCFloorKutjevoGreen1
+  6: RMCFloorKutjevoMulti1
+  4: RMCFloorKutjevoMulti2
+  2: RMCFloorKutjevoTan1
+  1: RMCFloorKutjevoTanMulti0
+  3: RMCFloorResearchContainmentFloor2North
+entities:
+- proto: ""
+  entities:
+  - uid: 1
+    components:
+    - type: MetaData
+      name: grid
+    - type: Transform
+      parent: invalid
+    - type: MapGrid
+      chunks:
+        0,0:
+          ind: 0,0
+          tiles: AQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAABQAAAAAAAAEAAAAAAAAFAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAUAAAAAAAABAAAAAAAABQAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAADAAAAAAAABgAAAAAAAAMAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+          version: 7
+    - type: Broadphase
+    - type: Physics
+      bodyStatus: InAir
+      angularDamping: 0.05
+      linearDamping: 0.05
+      fixedRotation: False
+      bodyType: Dynamic
+    - type: Fixtures
+      fixtures: {}
+    - type: OccluderTree
+    - type: SpreaderGrid
+    - type: Shuttle
+      dampingModifier: 0.25
+    - type: GridPathfinding
+    - type: Gravity
+      gravityShakeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/alert.ogg
+    - type: DecalGrid
+      chunkCollection:
+        version: 2
+        nodes:
+        - node:
+            cleanable: True
+            color: '#FFFFFFFF'
+            id: Dirt
+          decals:
+            9: 3,3
+            10: 4,3
+            11: 4,4
+            12: 3,4
+            13: 3,5
+            14: 4,5
+            15: 2,3
+            16: 2,4
+            17: 4,6
+            18: 3,6
+            19: 4,7
+            21: 0,1
+            22: 0,0
+            23: 1,0
+            24: 0,2
+            25: 2,0
+            26: 2,1
+            27: 1,1
+        - node:
+            color: '#FFFFFFFF'
+            id: DirtHeavyMonotile
+          decals:
+            20: 1,6
+        - node:
+            color: '#FFFFFFFF'
+            id: DirtLight
+          decals:
+            1: 1,1
+        - node:
+            color: '#FFFFFFFF'
+            id: DirtMedium
+          decals:
+            2: 5,2
+    - type: GridAtmosphere
+      version: 2
+      data:
+        chunkSize: 4
+    - type: GasTileOverlay
+    - type: RadiationGridResistance
+    - type: ImplicitRoof
+- proto: CMSpawnPointSurvivor
+  entities:
+  - uid: 2
+    components:
+    - type: Transform
+      pos: 4.5,5.5
+      parent: 1
+  - uid: 3
+    components:
+    - type: Transform
+      pos: 3.5,2.5
+      parent: 1
+  - uid: 4
+    components:
+    - type: Transform
+      pos: 0.5,4.5
+      parent: 1
+  - uid: 5
+    components:
+    - type: Transform
+      pos: 2.5,1.5
+      parent: 1
+  - uid: 8
+    components:
+    - type: Transform
+      pos: 1.5,2.5
+      parent: 1
+  - uid: 15
+    components:
+    - type: Transform
+      pos: 3.5,3.5
+      parent: 1
+  - uid: 34
+    components:
+    - type: Transform
+      pos: 4.5,2.5
+      parent: 1
+  - uid: 35
+    components:
+    - type: Transform
+      pos: 3.5,0.5
+      parent: 1
+  - uid: 46
+    components:
+    - type: Transform
+      pos: 1.5,5.5
+      parent: 1
+  - uid: 48
+    components:
+    - type: Transform
+      pos: 2.5,5.5
+      parent: 1
+  - uid: 54
+    components:
+    - type: Transform
+      pos: 5.5,1.5
+      parent: 1
+  - uid: 55
+    components:
+    - type: Transform
+      pos: 0.5,3.5
+      parent: 1
+- proto: CMTableAlmayer
+  entities:
+  - uid: 17
+    components:
+    - type: Transform
+      pos: 2.5,3.5
+      parent: 1
+  - uid: 49
+    components:
+    - type: Transform
+      pos: 2.5,2.5
+      parent: 1
+- proto: RMCBarricadeWood
+  entities:
+  - uid: 10
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 0.5,6.5
+      parent: 1
+  - uid: 11
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 0.5,6.5
+      parent: 1
+  - uid: 12
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 4.5,6.5
+      parent: 1
+  - uid: 13
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 3.5,6.5
+      parent: 1
+  - uid: 14
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 3.5,6.5
+      parent: 1
+  - uid: 16
+    components:
+    - type: Transform
+      pos: 1.5,0.5
+      parent: 1
+  - uid: 18
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 0.5,0.5
+      parent: 1
+  - uid: 19
+    components:
+    - type: Transform
+      pos: 0.5,0.5
+      parent: 1
+  - uid: 20
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 0.5,1.5
+      parent: 1
+  - uid: 21
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 0.5,2.5
+      parent: 1
+  - uid: 23
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 4.5,1.5
+      parent: 1
+  - uid: 24
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 4.5,0.5
+      parent: 1
+- proto: RMCCigaretteSpent
+  entities:
+  - uid: 51
+    components:
+    - type: Transform
+      pos: 2.5605211,3.3817134
+      parent: 1
+  - uid: 52
+    components:
+    - type: Transform
+      pos: 2.7636461,3.2254634
+      parent: 1
+  - uid: 53
+    components:
+    - type: Transform
+      pos: 2.6855211,2.9754634
+      parent: 1
+- proto: RMCDecalSpawnerBloodSplatters
+  entities:
+  - uid: 36
+    components:
+    - type: Transform
+      pos: 1.5,3.5
+      parent: 1
+  - uid: 37
+    components:
+    - type: Transform
+      pos: 2.5,0.5
+      parent: 1
+  - uid: 38
+    components:
+    - type: Transform
+      pos: 0.5,5.5
+      parent: 1
+  - uid: 39
+    components:
+    - type: Transform
+      pos: 1.5,4.5
+      parent: 1
+- proto: RMCDecalSpawnerGibsDrone
+  entities:
+  - uid: 6
+    components:
+    - type: Transform
+      pos: 1.5,7.5
+      parent: 1
+- proto: RMCDecalSpawnerXenoSplatters
+  entities:
+  - uid: 40
+    components:
+    - type: Transform
+      pos: 3.5,7.5
+      parent: 1
+  - uid: 41
+    components:
+    - type: Transform
+      pos: 2.5,6.5
+      parent: 1
+  - uid: 42
+    components:
+    - type: Transform
+      pos: 6.5,2.5
+      parent: 1
+  - uid: 43
+    components:
+    - type: Transform
+      pos: 5.5,0.5
+      parent: 1
+  - uid: 44
+    components:
+    - type: Transform
+      pos: 3.5,5.5
+      parent: 1
+- proto: RMCFlashlightLantern
+  entities:
+  - uid: 7
+    components:
+    - type: Transform
+      pos: 2.247179,3.6439216
+      parent: 1
+- proto: RMCSecureCaseStrapped
+  entities:
+  - uid: 45
+    components:
+    - type: Transform
+      pos: 4.5,3.5
+      parent: 1
+  - uid: 47
+    components:
+    - type: Transform
+      pos: 4.5,4.5
+      parent: 1
+- proto: RMCShutterAlmayerOpen
+  entities:
+  - uid: 22
+    components:
+    - type: MetaData
+      name: Botany North Shutters
+    - type: Transform
+      pos: 0.5,7.5
+      parent: 1
+    - type: RMCPodDoor
+      id: kutjevo_hydlock_west
+  - uid: 25
+    components:
+    - type: MetaData
+      name: Botany North Shutters
+    - type: Transform
+      pos: 2.5,7.5
+      parent: 1
+    - type: RMCPodDoor
+      id: kutjevo_hydlock_west
+  - uid: 26
+    components:
+    - type: MetaData
+      name: Botany North Shutters
+    - type: Transform
+      pos: 3.5,7.5
+      parent: 1
+    - type: RMCPodDoor
+      id: kutjevo_hydlock_west
+  - uid: 27
+    components:
+    - type: MetaData
+      name: Botany North Shutters
+    - type: Transform
+      pos: 1.5,7.5
+      parent: 1
+    - type: RMCPodDoor
+      id: kutjevo_hydlock_west
+  - uid: 28
+    components:
+    - type: MetaData
+      name: Botany North Shutters
+    - type: Transform
+      pos: 4.5,7.5
+      parent: 1
+    - type: RMCPodDoor
+      id: kutjevo_hydlock_west
+  - uid: 29
+    components:
+    - type: MetaData
+      name: Botany North Shutters
+    - type: Transform
+      pos: 4.5,4.5
+      parent: 1
+    - type: RMCPodDoor
+      id: kutjevo_hydlock_west
+  - uid: 30
+    components:
+    - type: MetaData
+      name: Botany North Shutters
+    - type: Transform
+      pos: 2.5,4.5
+      parent: 1
+    - type: RMCPodDoor
+      id: kutjevo_hydlock_west
+  - uid: 31
+    components:
+    - type: MetaData
+      name: Botany North Shutters
+    - type: Transform
+      pos: 1.5,4.5
+      parent: 1
+    - type: RMCPodDoor
+      id: kutjevo_hydlock_west
+  - uid: 32
+    components:
+    - type: MetaData
+      name: Botany North Shutters
+    - type: Transform
+      pos: 0.5,4.5
+      parent: 1
+    - type: RMCPodDoor
+      id: kutjevo_hydlock_west
+  - uid: 33
+    components:
+    - type: MetaData
+      name: Botany North Shutters
+    - type: Transform
+      pos: 3.5,4.5
+      parent: 1
+    - type: RMCPodDoor
+      id: kutjevo_hydlock_west
+- proto: RMCSpawnerCorpseWeYaGoonKutjevo
+  entities:
+  - uid: 9
+    components:
+    - type: Transform
+      pos: 0.5,5.5
+      parent: 1
+- proto: RMCToolboxElectricalFilled
+  entities:
+  - uid: 50
+    components:
+    - type: Transform
+      pos: 2.3680243,2.4579592
+      parent: 1
+...

@@ -93,19 +93,23 @@
 - type: entity
   parent: RMCEmergencySurgicalCabinet
   id: RMCEmergencySurgicalCabinetFilled
-  suffix: Filled, Hijack
+  suffix: Fills on Hijack
   components:
-  - type: StorageFill
-    contents:
-    - id: RMCWebbingSurgicalGreen
-    - id: RMCWebbingSurgicalGreen
-    - id: RMCWebbingSurgicalBlue
-    - id: RMCWebbingSurgicalBlue
-    - id: CMPortableSurgicalBedSpawnFolded
-    - id: CMPortableSurgicalBedSpawnFolded
-    - id: CMPortableSurgicalBedSpawnFolded
+  - type: RMCOnHijackFill
+    jobs:
+    - CMCMO
+    - CMDoctor
+    scaleWithJobs: true
+    table: !type:NestedSelector
+      tableId: RMCEmergencySurgicalCabinetTable
+
+- type: entityTable
+  id: RMCEmergencySurgicalCabinetTable
+  table: !type:AllSelector
+    children:
     - id: CMPortableSurgicalBedSpawnFolded
     - id: RMCPortableDialysis
-    - id: RMCPortableDialysis
-    - id: RMCPortableDialysis
-    - id: RMCPortableDialysis
+    - !type:GroupSelector
+      children:
+      - id: RMCWebbingSurgicalGreen
+      - id: RMCWebbingSurgicalBlue

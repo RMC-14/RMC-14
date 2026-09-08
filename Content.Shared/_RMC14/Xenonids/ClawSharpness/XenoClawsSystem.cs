@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Xenonids.Charge;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Doors.Components;
@@ -49,6 +50,10 @@ public sealed class XenoClawsSystem : EntitySystem
     {
         var xeno = args.Tool;
         var receiver = ent.Comp;
+
+        if (args.ShouldIgnoreClawLogic)
+            return;
+
         if (!_meleeWeaponQuery.HasComp(xeno) || !_xenoClawsQuery.TryComp(xeno, out var claws))
             return;
 
@@ -72,10 +77,19 @@ public sealed class XenoClawsSystem : EntitySystem
         }
     }
 
+    public bool HasClawStrength(EntityUid uid, XenoClawType minimum)
+    {
+        return _xenoClawsQuery.TryComp(uid, out var claws) &&
+               claws.ClawType.CompareTo(minimum) >= 0;
+    }
+
     private void OnAirlockReceiverDamageModify(Entity<AirlockReceiverXenoClawsComponent> ent, ref DamageModifyEvent args)
     {
         var xeno = args.Tool;
         var receiver = ent.Comp;
+
+        if (args.ShouldIgnoreClawLogic)
+            return;
 
         if (!_meleeWeaponQuery.HasComp(xeno))
             return;

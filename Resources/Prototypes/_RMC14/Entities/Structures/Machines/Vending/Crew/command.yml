@@ -4,7 +4,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechStaffOfficerEquipment
-  name: ColMarTech Staff Officer Equipment Rack
+  name: ASRS staff officer equipment rack
   description: An automated equipment vendor for Staff Officers
   components:
   - type: AccessReader
@@ -105,7 +105,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechStaffOfficerWeapon
-  name: ColMarTech Staff Officer Armory Weapon Rack
+  name: ASRS staff officer armory weapon rack
   description: An automated combat equipment vendor for Staff Officers.
   components:
   - type: AccessReader
@@ -234,7 +234,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechExecutiveOfficerWeapon
-  name: ColMarTech Executive Officer Weapon Rack
+  name: ASRS executive officer weapon rack
   description: An automated weapons rack for the Executive Officer. It features a decent selection of weaponry meant only for the second in command of a ship.
   components:
   - type: AccessReader
@@ -278,8 +278,8 @@
         points: 15
       - id: CMPacketGrenadeFragFilled
         points: 15
-      #- id: CMPacketGrenadeWPFilled # TODO RMC14 White Phosphorus (WP) Grenades
-      #  points: 15
+      - id: RMCPacketGrenadeWhitePhosphorusFilled
+        points: 15
     - name: Rail Attachments
       entries:
       - id: RMCAttachmentMagneticHarness
@@ -358,7 +358,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCommandingOfficerClothing
-  name: ColMarTech Commanding Officer Clothing Rack
+  name: ASRS commanding officer clothing rack
   description: An automated closet hooked up to a colossal storage of standard-issue dress uniform variants.
   components:
   - type: AccessReader
@@ -381,7 +381,7 @@
       - id: CMBootsBlackFilled
       - id: CMBootsBrown
       - id: CMHandsBlackMarine
-      - id: CMHandsBrown
+      - id: RMCHandsBrownMarine
     - name: Utility Extras
       entries:
       - id: RMCSunglasses
@@ -430,7 +430,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCommandingOfficerEquipment
-  name: ColMarTech Commanding Officer Equipment Rack
+  name: ASRS commanding officer equipment rack
   description: An automated equipment vendor for the Commanding Officer. Contains a prime selection of equipment for only the UNMC's top officers.
   components:
   - type: AccessReader
@@ -455,7 +455,7 @@
       choices: { CMBag: 1 }
       entries:
       - id: CMBackpackCommand
-      #- id: CMSatchelCommandSecure # TODO RMC14 Secure Satchel (ID LOCK)
+      - id: CMSatchelCommandSecure
       - id: RMCBackpackRTO
       - id: CMSatchelMarineIntel
       - id: RMCSatchelMarineIntelChestrig
@@ -548,7 +548,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCommandingOfficerWeapon
-  name: ColMarTech Commanding Officer Weapon Rack
+  name: ASRS commanding officer weapon rack
   description: An automated weapons rack for the Commanding Officer. It features a robust selection of weaponry meant only for the UNMC's top officers.
   components:
   - type: AccessReader
@@ -568,11 +568,6 @@
       - id: CMCOSmartGunOperatorEquipmentCaseBelt
         name: Commander's Smartgun
         recommended: true # TODO RMC14 Make choices: colour the options brown
-    - name: Commander's Secondary Belt
-      choices: { CMSecondary: 1 }
-      entries:
-      - id: RMCD50WinterWyvernBeltFilledAmmo
-      - id: RMCMatebaBeltFilledAmmo
     - name: Ceremonial Weapon
       choices: { CMCeremonial: 1 }
       entries:
@@ -622,7 +617,8 @@
         points: 15
       - id: CMPacketGrenadeFragFilled
         points: 15
-      #- id: CMPacketGrenadesWPFilled # TODO RMC14 Port White Phosphorus (WP) Grenades
+      - id: RMCPacketGrenadeWhitePhosphorusFilled
+        points: 15
       #- id: CMPacketGrenadesG2Filled (x3) # TODO RMC14 Port Electroshock (G2) Grenades
     - name: Rail Attachments
       entries:
@@ -710,9 +706,9 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleMilitaryPoliceApparelCMP
+  categories: [ HideSpawnMenu ]
   name: Essential Police Set
   description: Contains security HUD-glasses and a filled security belt.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses.rsi
@@ -727,7 +723,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechSeniorOfficerEquipment
-  name: ColMarTech Senior Officer Equipment Rack
+  name: ASRS senior officer equipment rack
   description: An automated equipment vendor for Senior Officers.
   components:
   - type: AccessReader
@@ -880,7 +876,7 @@
       - CMExecutiveOfficer
       choices: { CMHat: 1 }
       entries:
-      - id: RMCHeadBeret # TODO: Port Officer Beret
+      - id: RMCHeadBeretChiefOfficer
       - id: CMHeadCapPeakedService
       - id: RMCHeadCapFlippable # TODO: Port Patrol Cap
       - id: CMHeadCapOfficer
@@ -1323,12 +1319,19 @@
       entries:
       - id: CMJumpsuitCMO
         recommended: true
-      - id: CMScrubsGreen
+      - id: RMCScrubsCMO
+        recommended: true
+      - id: RMCJumpsuitDoctor
       - id: CMScrubsBlue
       - id: RMCScrubsLightBlue
+      - id: CMScrubsGreen
+      - id: RMCScrubsPharm
       - id: CMScrubsPurple
       - id: RMCScrubsOlive
       - id: RMCScrubsGrey
+      - id: RMCScrubsBrown
+      - id: RMCScrubsWhite
+      - id: RMCScrubsBlack
     - name: Suit
       jobs:
       - CMCMO
@@ -1337,18 +1340,39 @@
       - id: RMCLabcoatCMO
         recommended: true
       - id: RMCLabcoat
-        recommended: true
+      - id: RMCLabcoatPharm
+      - id: RMCLabcoatShort
+        name: High-Cut Labcoat
+      - id: RMCLabcoatLong
+        name: Low-Cut Labcoat
       - id: RMCMedicalApron
+    - name: Snow gear (Snow use only)
+      jobs:
+      - CMCMO
+      takeAll: CMSnowgear
+      entries:
+      - id: RMCCoatSnow
+      - id: RMCMaskBalaclava
+      - id: RMCMaskTornScarfBlack
+        name: Snow Scarf
     - name: Headwear
       jobs:
       - CMCMO
       choices: { CMHelmet: 1 }
       entries:
       - id: CMHeadCapCMO
-      - id: CMHeadCapSurgOrange
+        recommended: true
+      - id: CMHeadCapSurgCMO
+        recommended: true
       - id: CMHeadCapSurgBlue
-      - id: CMHeadCapSurgPurple
       - id: CMHeadCapSurgGreen
+      - id: CMHeadCapSurgPharm
+      - id: CMHeadCapSurgPurple
+      - id: CMHeadCapSurgOlive
+      - id: CMHeadCapSurgGrey
+      - id: CMHeadCapSurgBrown
+      - id: CMHeadCapSurgWhite
+      - id: CMHeadCapSurgBlack
     - name: Bag
       jobs:
       - CMCMO
@@ -1367,8 +1391,10 @@
       entries:
       - id: CMBeltMedicBagFilled
         name: M276 pattern lifesaver bag (Full)
+        recommended: true
       - id: CMBeltMedicalFilled
         name: M276 medical storage rig (Full)
+        recommended: true
     - name: Personal Sidearm
       jobs:
       - CMCMO
@@ -1419,7 +1445,9 @@
         name: first-aid pouch (pills)
       - id: RMCPouchFirstResponder
       - id: RMCPouchMedical
+        recommended: true
       - id: RMCPouchMedkit
+        recommended: true
       - id: RMCPouchReagentCanisterBicaridine
         recommended: true
         name: Pressurized Reagent Canister Pouch\n(Bicaridine)
@@ -1460,7 +1488,9 @@
       - id: CMHeadsetMedical
         amount: 15
       - id: CMHeadsetResearcher
-        amount: 15
+        amount: 30
+      - id: RMCCPRDummy
+        amount: 5
     # ////////////////////////////////////
     # Auxiliary Support Officer
     # ////////////////////////////////////

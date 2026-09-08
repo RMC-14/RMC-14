@@ -1,10 +1,9 @@
 ﻿using System.Numerics;
-using Content.Server._RMC14.Rules;
+using Content.Server._RMC14.Rules.DistressSignal;
 using Content.Server.Decals;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Rules;
 using Content.Shared.Decals;
-using Content.Shared.GameTicking;
 using Robust.Server.Physics;
 using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Map;
@@ -80,7 +79,8 @@ public sealed class MapInsertSystem : EntitySystem
         {
             cumulativeProbability += variation.Probability;
             if (!forceSpawn &&
-                ((variation.NightmareScenario != _distressSignal.ActiveNightmareScenario) ||
+                ((variation.NightmareScenario != _distressSignal.ActiveNightmareScenario) &&
+                 !string.IsNullOrEmpty(variation.NightmareScenario) || //only allows either inserts with the correct scenario or no scenario to spawn
                  cumulativeProbability < randomProbability))
                 continue;
             spawn = variation.Spawn;

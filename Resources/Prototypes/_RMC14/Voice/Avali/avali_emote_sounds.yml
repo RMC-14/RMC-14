@@ -5,6 +5,8 @@
       path: /Audio/_RMC14/Voice/Avali/avali_scream.ogg
     Laugh:
       path: /Audio/_RMC14/Voice/Avali/avali_laugh.ogg
+    RMCAvaliChirp:
+      collection: RMCAvaliChirps
 
 - type: emoteSounds
   parent: [RMCUnisexAvali, RMCMaleHuman]

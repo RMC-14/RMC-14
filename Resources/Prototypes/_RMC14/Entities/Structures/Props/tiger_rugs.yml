@@ -1,0 +1,43 @@
+- type: entity
+  parent: RMCPropBase
+  id: RMCPropTigerRugOrange
+  suffix: Orange
+  name: tiger rug
+  description: A rather tasteless but impressive tiger rug. Must've costed a fortune to get this exported to the rim.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/tiger_rugs.rsi
+    state: orange
+    offset: "-0.5, -0.5"
+
+- type: entity
+  parent: RMCPropTigerRugOrange
+  id: RMCPropTigerRugGrey
+  suffix: Grey
+  components:
+  - type: Sprite
+    state: grey
+
+- type: entity
+  parent: RMCPropTigerRugOrange
+  id: RMCPropTigerRugWhite
+  suffix: White
+  components:
+  - type: Sprite
+    state: white
+
+- type: entity
+  parent: RMCPropTigerRugOrange
+  id: RMCPropTigerRugSkin
+  suffix: Skin
+  components:
+  - type: Sprite
+    state: skin
+
+- type: entity
+  parent: RMCPropTigerRugOrange
+  id: RMCPropTigerRugHotline
+  suffix: Hotline
+  components:
+  - type: Sprite
+    state: hotline

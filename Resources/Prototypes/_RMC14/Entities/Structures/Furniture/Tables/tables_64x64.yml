@@ -1,0 +1,120 @@
+- type: entity
+  parent: BaseStructure
+  id: RMCTableCardsTable
+  name: cards table
+  suffix: Purple
+  description: A table covered in felt, perfect for a game of cards.
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Transform
+    anchored: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Tables/tables_64x64.rsi
+    state: table_cards1
+    offset: 0.5, 0.5
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -4
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: PlaceableSurface
+  - type: Climbable
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "0.0,-0.4,1.2,0.4"
+        density: 55
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+
+- type: entity
+  parent: RMCTableCardsTable
+  id: RMCTableCardsRed
+  suffix: Red
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Tables/tables_64x64.rsi
+    state: table_cards2
+    offset: 0.5, 0.5
+
+- type: entity
+  parent: RMCTableCardsTable
+  id: RMCTablePoolTable
+  suffix: brown
+  name: pool table
+  description: A large green felt table used for playing pool.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Tables/tables_64x64.rsi
+    state: table_pool1
+    offset: 0.5, 0.5
+
+- type: entity
+  parent: RMCTablePoolTable
+  id: RMCTablePoolTableBlack
+  suffix: black
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Tables/tables_64x64.rsi
+    state: table_pool2
+    offset: 0.5, 0.5
+
+- type: entity
+  parent: RMCTablePoolTable
+  id: RMCTableLargeMetalTableComputer
+  name: large metal table
+  description: A large metal table, perfect for heavy-duty work or dining.
+  suffix: Computer
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Tables/tables_64x64.rsi
+    state: blackmetaltable_computer
+    offset: 0.5, 0.5
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,1.5,0.5"
+        density: 55
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+
+- type: entity
+  parent: RMCTableLargeMetalTableComputer
+  id: RMCTableLargeMetalTableComputer1
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Tables/tables_64x64.rsi
+    state: blackmetaltable_computer1
+    offset: 0.5, 0.5
+
+- type: entity
+  parent: RMCTableLargeMetalTableComputer
+  id: RMCTableLargeMetalTable
+  suffix: RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Tables/tables_64x64.rsi
+    state: blackmetaltable
+    offset: 0.5, 0.5

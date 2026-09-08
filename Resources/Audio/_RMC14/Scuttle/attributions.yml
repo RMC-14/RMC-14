@@ -1,0 +1,9 @@
+- files: ["creak1.ogg", "creak2.ogg", "creak3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/tree/b26246cf7710ac6f2c2e4eddf94a49eb47f40800/sound/effects"
+
+- files: ["nuclear_detonation1.ogg", "nuclear_detonation2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/tree/b26246cf7710ac6f2c2e4eddf94a49eb47f40800/sound/theme"

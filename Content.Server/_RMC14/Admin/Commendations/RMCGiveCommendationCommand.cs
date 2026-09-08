@@ -34,8 +34,8 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
 
     private LocalizedDatasetPrototype? _jelliesDataset;
     private LocalizedDatasetPrototype? _jelliesSpecialDataset;
-    private IReadOnlyList<ProtoId<EntityPrototype>>? _medalIds;
-    private IReadOnlyList<ProtoId<EntityPrototype>>? _specialMedalIds;
+    private IReadOnlyList<EntProtoId>? _medalIds;
+    private IReadOnlyList<EntProtoId>? _specialMedalIds;
 
     public override string Command => "rmcgivecommendation";
 
@@ -366,8 +366,8 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
 
     private string GetMedalAwardName(int awardNum)
     {
-        var medalIds = _medalIds ?? Array.Empty<ProtoId<EntityPrototype>>();
-        var specialMedalIds = _specialMedalIds ?? Array.Empty<ProtoId<EntityPrototype>>();
+        var medalIds = _medalIds ?? Array.Empty<EntProtoId>();
+        var specialMedalIds = _specialMedalIds ?? Array.Empty<EntProtoId>();
 
         if (awardNum <= medalIds.Count)
         {
@@ -383,8 +383,8 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
     private CompletionOption[] GetMedalCompletionOptions()
     {
         var options = new List<CompletionOption>();
-        var medalIds = _medalIds ?? Array.Empty<ProtoId<EntityPrototype>>();
-        var specialMedalIds = _specialMedalIds ?? Array.Empty<ProtoId<EntityPrototype>>();
+        var medalIds = _medalIds ?? Array.Empty<EntProtoId>();
+        var specialMedalIds = _specialMedalIds ?? Array.Empty<EntProtoId>();
 
         for (var i = 0; i < medalIds.Count; i++)
         {
@@ -402,10 +402,10 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
         return options.ToArray();
     }
 
-    private ProtoId<EntityPrototype>? GetMedalPrototypeId(int awardNum)
+    private EntProtoId? GetMedalPrototypeId(int awardNum)
     {
-        var medalIds = _medalIds ?? Array.Empty<ProtoId<EntityPrototype>>();
-        var specialMedalIds = _specialMedalIds ?? Array.Empty<ProtoId<EntityPrototype>>();
+        var medalIds = _medalIds ?? Array.Empty<EntProtoId>();
+        var specialMedalIds = _specialMedalIds ?? Array.Empty<EntProtoId>();
 
         if (awardNum <= medalIds.Count)
             return medalIds[awardNum - 1];
