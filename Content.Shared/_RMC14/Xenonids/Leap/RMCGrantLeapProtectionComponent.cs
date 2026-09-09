@@ -8,9 +8,9 @@ namespace Content.Shared._RMC14.Xenonids.Leap;
 public sealed partial class RMCGrantLeapProtectionComponent : Component
 {
     /// <summary>
-    ///     Conversion of DM value to seconds for stun calcs
-    ///     Multiply the apply_effect/proc(value) by 2.
-    ///     Duration for xeno modified further via RMCStatusEffectTimeEvent.
+    ///     NOT actual duration.
+    ///     This value is CM's apply_effect(value) x 2
+    ///     Actual duration = StunDuration x the appropriate factor in RMCStatusEffectSystem.
     /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan StunDuration = TimeSpan.FromSeconds(2);
