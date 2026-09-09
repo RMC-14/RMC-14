@@ -232,7 +232,7 @@
         Bloodloss: -1
     damageBleedModifiers: CMBloodlossHuman
   - type: Speech
-    allowedEmotes: [ 'Bark', 'Snarl', 'Whine', 'Growl', 'Yip' ]
+    allowedEmotes: [ 'Bark', 'Snarl', 'Whine', 'Growl' ]
   - type: Vocal
     screamAction: null
     sounds:
