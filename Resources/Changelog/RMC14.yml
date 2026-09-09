@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: When a foxtrot marine enters cryosleep a new one will be woken up to
-      replace them.
-    type: Add
-  id: 3135
-  time: '2026-04-22T00:09:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9698
 - author: IceNoobXD
   changes:
   - message: The tool webbing can now take light replacers!
@@ -4477,5 +4469,12 @@
   id: 3634
   time: '2026-09-07T14:27:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10831
+- author: Vermidia
+  changes:
+  - message: Fixed carriers showing up and being takeable from the ghost role menu.
+    type: Fix
+  id: 3635
+  time: '2026-09-09T11:48:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10835
 Name: RMC14
 Order: -1
