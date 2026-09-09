@@ -225,3 +225,17 @@
     slots:
     - idcard
     sprite: _RMC14/Objects/CMIDs/lanyard.rsi
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: RMCIDCardK9Dogtag
+  name: military dog dog tag
+  description: A military dog's dog tag.
+  suffix: PVE
+  components:
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - RMCK9Wearable
+    - PetOnly
+
