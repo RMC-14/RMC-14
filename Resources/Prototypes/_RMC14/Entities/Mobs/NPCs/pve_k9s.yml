@@ -272,6 +272,9 @@
       proper: true
   - type: NameIdentifier
     group: null
+  - type: RMCDefibrillatorBlocked
+    popup: defibrillator-unrevivable
+    showOnExamine: false
   - type: Tag
     tags:
     - RMCK9
