@@ -40,6 +40,7 @@
     channel: Equipment
   - type: DragInsertContainer
     containerId: cryo_cell
+    useVerbs: false
     entryDelay: 2
     delaySelfEntry: true
   - type: NoStunOnExit
@@ -59,7 +60,7 @@
         type: CryoCellBui
   - type: ActivatableUI
     key: enum.CryoCellUIKey.Key
-    requiresComplex: false
+    requiresComplex: true
   - type: ActivatableUIRequiresPower
   - type: ActivatableUIBlacklist
     blacklist:

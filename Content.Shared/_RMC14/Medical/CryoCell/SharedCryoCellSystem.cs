@@ -2,10 +2,12 @@ using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Storage;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
 using Content.Shared.Power;
 using Content.Shared.Stunnable;
+using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
@@ -21,12 +23,14 @@ public abstract class SharedCryoCellSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedPointLightSystem _light = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCMovementSystem _rmcMovement = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly SharedVerbSystem _verb = default!;
 
     public override void Initialize()
     {
@@ -36,6 +40,7 @@ public abstract class SharedCryoCellSystem : EntitySystem
         SubscribeLocalEvent<CryoCellComponent, PowerChangedEvent>(OnCryoCellPower);
         SubscribeLocalEvent<CryoCellComponent, EntInsertedIntoContainerMessage>(OnCryoCellEntInserted);
         SubscribeLocalEvent<CryoCellComponent, EntRemovedFromContainerMessage>(OnCryoCellEntRemoved);
+        SubscribeLocalEvent<CryoCellComponent, GetVerbsEvent<AlternativeVerb>>(OnGetAltVerbs);
 
         SubscribeLocalEvent<InsideCryoCellComponent, MoveInputEvent>(OnInsideCryoCellMoveInput);
     }
@@ -85,6 +90,39 @@ public abstract class SharedCryoCellSystem : EntitySystem
         _rmcMovement.SuppressCollisionOnExit(args.Entity, cryoCell.Owner);
     }
 
+    private void OnGetAltVerbs(Entity<CryoCellComponent> cryoCell, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!args.CanInteract || !args.CanAccess)
+            return;
+
+        if (cryoCell.Comp.Occupant is not { } occupant)
+            return;
+
+        if (args.User == occupant)
+        {
+            if (_mobState.IsIncapacitated(occupant))
+                return;
+
+            args.Verbs.Add(new AlternativeVerb
+            {
+                Text = Loc.GetString("rmc-cryo-cell-verb-eject-inside"),
+                ConfirmationPopup = true,
+                Category = VerbCategory.Eject,
+                Act = () => StartDelayedEject(cryoCell, occupant),
+            });
+
+            return;
+        }
+
+        // Outside user gets normal eject
+        args.Verbs.Add(new AlternativeVerb
+        {
+            Text = Loc.GetString("rmc-cryo-cell-verb-eject-outside"),
+            Category = VerbCategory.Eject,
+            Act = () => EjectOccupant(cryoCell, occupant),
+        });
+    }
+
     private void OnInsideCryoCellMoveInput(Entity<InsideCryoCellComponent> ent, ref MoveInputEvent args)
     {
         if (!args.HasDirectionalMovement)
@@ -96,10 +134,39 @@ public abstract class SharedCryoCellSystem : EntitySystem
         if (ent.Comp.Chamber is not { } cellId)
             return;
 
-        if (!TryComp<CryoCellComponent>(cellId, out var cellComp))
+        if (_mobState.IsIncapacitated(ent))
             return;
 
-        EjectOccupant((cellId, cellComp), ent);
+        foreach (var verb in _verb.GetLocalVerbs(cellId, ent.Owner, typeof(Verb)))
+        {
+            if (!verb.Text.Equals(Loc.GetString("rmc-cryo-cell-verb-eject-inside")))
+                continue;
+
+            _verb.ExecuteVerb(verb, ent.Owner, cellId);
+            break;
+        }
+    }
+
+    private void StartDelayedEject(Entity<CryoCellComponent> cryoCell, EntityUid occupant)
+    {
+        if (cryoCell.Comp.Occupant != occupant)
+            return;
+
+        Timer.Spawn(TimeSpan.FromSeconds(30), () => FinishDelayedEject(cryoCell, occupant));
+    }
+
+    private void FinishDelayedEject(Entity<CryoCellComponent> cryoCell, EntityUid occupant)
+    {
+        if (TerminatingOrDeleted(cryoCell))
+            return;
+
+        if (TerminatingOrDeleted(occupant))
+            return;
+
+        if (cryoCell.Comp.Occupant != occupant)
+            return;
+
+        EjectOccupant(cryoCell, occupant);
     }
 
     protected void EjectOccupant(Entity<CryoCellComponent> cryoCell, EntityUid occupant, bool dead = false, bool isAutoEject = false)
