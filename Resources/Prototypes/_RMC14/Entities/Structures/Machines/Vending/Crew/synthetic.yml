@@ -1,7 +1,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCrewSynthetic
-  name: ColMarTech Synthetic Equipment Rack
+  name: ASRS synthetic equipment rack
   description: An automated rack hooked up to a colossal storage of various equipment. Can be accessed only by synthetic units.
   components:
   - type: AccessReader
@@ -153,7 +153,7 @@
 - type: entity
   parent: ColMarTechCrewSynthetic
   id: ColMarTechCrewSyntheticColony
-  name: ColMarTech Synthetic Equipment Rack
+  name: ASRS synthetic equipment rack
   suffix: Colony Synth Access
   components:
   - type: CMAutomatedVendor
@@ -163,7 +163,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCrewSyntheticGear
-  name: ColMarTech Synthetic Auxiliary Gear Rack
+  name: ASRS synthetic auxiliary gear rack
   description: An automated gear rack hooked up to a colossal storage of various medical and engineering supplies. Can be accessed only by synthetic units.
   components:
   - type: AccessReader
@@ -307,7 +307,7 @@
 - type: entity
   parent: ColMarTechBase
   id: WeYaExperimentalToolsVendor
-  name: We-Ya Experimental Tools Vendor
+  name: We-Ya experimental tools vendor
   description: A smaller vendor hooked up to a cache of specially provisioned, experimental tools and equipment provided by the We-Ya Research and Development Division(TM). Handle with care.
   components:
   # TODO RMC14 : Use a token instead of access

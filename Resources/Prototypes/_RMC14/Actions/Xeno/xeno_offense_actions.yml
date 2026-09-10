@@ -487,6 +487,7 @@
     useDelay: 8
   - type: TargetAction
     range: 15
+    checkCanAccess: false
   - type: WorldTargetAction
     event: !type:XenoSprayAcidActionEvent
   - type: ActionBlockIfResting
@@ -613,6 +614,7 @@
     useDelay: 12
   - type: TargetAction
     range: 15
+    checkCanAccess: false
   - type: EntityTargetAction
   - type: WorldTargetAction
     event: !type:XenoBoneChipsActionEvent
