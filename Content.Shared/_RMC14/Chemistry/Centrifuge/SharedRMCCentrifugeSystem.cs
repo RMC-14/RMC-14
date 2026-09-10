@@ -224,6 +224,9 @@ public sealed class SharedRMCCentrifugeSystem : EntitySystem
             return;
         }
 
+        if (!HasComp<ItemSlotsComponent>(ent))
+            return;
+
         var hasInput = _itemSlots.TryGetSlot(ent, comp.InputSlotId, out var inputSlot) &&
                        inputSlot.ContainerSlot?.ContainedEntity != null;
         var hasOutput = _itemSlots.TryGetSlot(ent, comp.OutputBoxSlotId, out var outputSlot) &&
