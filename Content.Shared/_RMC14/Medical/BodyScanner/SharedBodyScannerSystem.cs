@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Storage;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Damage;
@@ -20,6 +21,7 @@ public abstract class SharedBodyScannerSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly RMCMovementSystem _rmcMovement = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -91,11 +93,7 @@ public abstract class SharedBodyScannerSystem : EntitySystem
         UpdateBodyScannerVisuals(scanner);
 
         if (!_timing.ApplyingState)
-        {
-            var inside = EnsureComp<InsideBodyScannerComponent>(args.Entity);
-            inside.BodyScanner = scanner;
-            Dirty(args.Entity, inside);
-        }
+            EnsureComp<InsideBodyScannerComponent>(args.Entity).Chamber = scanner;
     }
 
     private void OnBodyScannerEntRemoved(Entity<BodyScannerComponent> scanner, ref EntRemovedFromContainerMessage args)
@@ -111,6 +109,7 @@ public abstract class SharedBodyScannerSystem : EntitySystem
 
         UpdateBodyScannerVisuals(scanner);
         RemCompDeferred<InsideBodyScannerComponent>(args.Entity);
+        _rmcMovement.SuppressCollisionOnExit(args.Entity, scanner.Owner);
     }
 
     private void OnBodyScannerInteractHand(Entity<BodyScannerComponent> scanner, ref InteractHandEvent args)
@@ -196,11 +195,13 @@ public abstract class SharedBodyScannerSystem : EntitySystem
             return;
 
         _container.Remove(occupant, container);
+
         if (scanner.Comp.ExitStun > TimeSpan.Zero && !HasComp<NoStunOnExitComponent>(scanner))
             _stun.TryStun(occupant, scanner.Comp.ExitStun, true);
 
-        if (!_net.IsServer)
+        if (_net.IsClient)
             return;
+
         _audio.PlayPvs(scanner.Comp.EjectSound, scanner);
         _popup.PopupEntity(Loc.GetString("rmc-body-scanner-ejected", ("entity", occupant)), scanner);
     }
@@ -219,7 +220,7 @@ public abstract class SharedBodyScannerSystem : EntitySystem
         if (_timing.ApplyingState)
             return;
 
-        if (ent.Comp.BodyScanner is not { } scannerId)
+        if (ent.Comp.Chamber is not { } scannerId)
             return;
 
         if (!TryComp<BodyScannerComponent>(scannerId, out var scanner))

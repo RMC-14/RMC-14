@@ -374,7 +374,7 @@ public sealed class XenoHudOverlay : Overlay
             var matrix = Matrix3x2.Multiply(rotationMatrix, scaledWorld);
             handle.SetTransform(matrix);
 
-            var icon = new Rsi(_rsiPath, $"prae_tag");
+            var icon = new Rsi(_rsiPath, (comp.IsCriticalTag ? $"prae_tag_yellow" : $"prae_tag"));
             var texture = _sprite.GetFrame(icon, _timing.CurTime - comp.TimeAdded, false);
 
             var yOffset = (bounds.Height + sprite.Offset.Y) / 2f - (float)texture.Height / EyeManager.PixelsPerMeter * bounds.Height;

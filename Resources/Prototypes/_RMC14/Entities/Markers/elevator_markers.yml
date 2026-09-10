@@ -1,0 +1,73 @@
+- type: entity
+  abstract: true
+  id: RMCElevatorDestination
+  name: elevator destination
+  description: Defines a location for an elevator to travel to and from.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Markers/elevator.rsi
+    state: Destination
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Tag
+    tags:
+    - ForceFixRotations
+  - type: FTLSmashImmune
+  - type: NoFTL
+  - type: RMCElevatorDestination
+
+- type: entity
+  parent: RMCElevatorDestination
+  id: RMCElevatorDestinationVisible
+  name: elevator destination
+  suffix: GhostVisible
+  components:
+  - type: Sprite
+    layers:
+    - state: Destination
+      map: ["enum.RMCGhostVisibleOnlyVisualLayers.Base"]
+  - type: RMCVisibleToGhostsOnly
+  - type: Tag
+    tags:
+    - ForceFixRotations
+    - HideContextMenu
+  - type: Appearance
+
+- type: entity
+  parent: RMCElevatorDestination
+  id: RMCElevatorDestinationMarker
+  name: elevator destination
+  suffix: Mapping
+  components:
+  - type: Marker
+
+- type: entity
+  parent: RMCElevatorDestinationMarker
+  id: RMCElevatorDestinationMarkerSpawner
+  name: elevator origin
+  description: Defines a location for an elevator to travel to and from and spawns an elevator.
+  components:
+  - type: Sprite
+    state: Elevator
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/Shuttles/basic_elevator.yml"
+    
+
+- type: entity
+  parent: RMCElevatorDestinationVisible
+  id: RMCElevatorDestinationVisibleSpawner
+  name: elevator origin
+  description: Defines a location for an elevator to travel to and from and spawns an elevator.
+  components:
+  - type: Sprite
+    layers:
+    - state: Elevator
+      map: ["enum.RMCGhostVisibleOnlyVisualLayers.Base"]
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/Shuttles/basic_elevator.yml"
+    ignoreGridFill: true
+    offset: "-3.5, 1.5"

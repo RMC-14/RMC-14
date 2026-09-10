@@ -155,6 +155,9 @@
       orGroup: side
     # snack
     - id: RMCFoodSnackHotdogPackaged
+      orGroup: snack
+    - id: RMCFoodSnackSamosaPackaged
+      orGroup: snack
     # dessert
     - id: RMCFoodSnackEATBar
       orGroup: dessert

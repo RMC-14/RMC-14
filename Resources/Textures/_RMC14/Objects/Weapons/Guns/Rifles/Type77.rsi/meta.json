@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-4.0",
-  "copyright": "Sprites by github noctyrnal, wielded-inhand-left.png and wielded-inhand-right.png edited by CatAndHats (github). mag-1, mag-2, and mag-3 by kleinerstation13 (Github)",
+  "copyright": "Sprites by github noctyrnal, wielded-inhand-left.png and wielded-inhand-right.png edited by CatAndHats (github). mag-1, mag-2, and mag-3 by kleinerstation13 (Github). mag-4 by Ian321 (github).",
   "size": {
     "x": 32,
     "y": 32
@@ -33,6 +33,9 @@
     },
     {
       "name": "mag-3"
+    },
+    {
+      "name": "mag-4"
     },
     {
       "name": "wielded-inhand-left",

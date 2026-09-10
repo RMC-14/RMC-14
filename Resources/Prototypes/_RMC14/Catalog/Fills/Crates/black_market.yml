@@ -1228,17 +1228,17 @@
     stateDoorClosed: closed
   - type: StorageFill
     contents:
-    - id: CMMobMonkey
+    - id: CMMobSmallHostMonkey
       orGroup: BlackMarketSecuredWildlife
-    - id: RMCMobFarwa
+    - id: RMCMobSmallHostFarwa
       orGroup: BlackMarketSecuredWildlife
-    - id: RMCMobStok
+    - id: RMCMobSmallHostStok
       orGroup: BlackMarketSecuredWildlife
-    - id: RMCMobYiren
+    - id: RMCMobSmallHostYiren
       orGroup: BlackMarketSecuredWildlife
-    - id: RMCMobNeaera
+    - id: RMCMobSmallHostNeaera
       orGroup: BlackMarketSecuredWildlife
-    - id: CMMobKobold
+    - id: CMMobSmallHostKobold
       orGroup: BlackMarketSecuredWildlife
     - id: CMMobMouse
       orGroup: BlackMarketSecuredWildlife
@@ -1262,11 +1262,11 @@
       orGroup: BlackMarketSecuredWildlife
     - id: RMCMobGarry
       orGroup: BlackMarketSecuredWildlife
-    - id: RMCMobGoat
+    - id: MobGoat
       orGroup: BlackMarketSecuredWildlife
-    - id: RMCMobBear
+    - id: MobBearSpace
       orGroup: BlackMarketSecuredWildlife
-    - id: RMCMobGiantSpider
+    - id: MobGiantSpider
       orGroup: BlackMarketSecuredWildlife
 
 - type: entity

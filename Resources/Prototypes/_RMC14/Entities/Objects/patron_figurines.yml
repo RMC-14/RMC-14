@@ -1601,17 +1601,6 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronCaineRuffRuffalo
-  name: Caine 'Ruff' Ruffalo figurine
-  description: "Ruff as a Ruffalo. Always Ruffs. Is always Rough as a Ruff."
-  components:
-  - type: Sprite
-    state: caine_ruff_ruffalo
-  - type: PatronFigurine
-    id: d4b8cf96-c8cd-4f23-9a52-744497ca6eb7
-
-- type: entity
-  parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronAnneTaylor
   name: Anne Taylor figurine
   description: "If you see her piloting the Alamo and it still looks normal, something is horribly wrong."
@@ -3000,9 +2989,64 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronWyattHossCross
   name: Wyatt 'Hoss' Cross figurine
-  #description: ""
+  description: "It's a bird, it’s a plane, it's a little Hoss! With a big old smile, he's equipped with a mini cornbread MRE and a miniature smartgun!"
   components:
   - type: Sprite
     state: wyatt_hoss_cross
   - type: PatronFigurine
     id: b9428c37-5698-4eab-8b7a-d59094b8cf81
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMixes-the-Fuel
+  name: Mixes-the-Fuel figurine
+  description: "Mixes is a small kobold with a positive attitude that always speaks in third person, but always tries to follow their duties to the letter. They always like be as friendly as they can be, and they are a bit silly and goofy at times, although they tend to be quite happy about completing their assigned tasks.\n\nWarning: Do not give them a flamer under any circumstance. It will only end up in a disaster."
+  components:
+  - type: Sprite
+    state: mixes-the-fuel
+  - type: PatronFigurine
+    id: d4b8cf96-c8cd-4f23-9a52-744497ca6eb7
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronShanaSnowMcTavish
+  name: Shana 'Snow' McTavish figurine
+  description: "Hates walls. Likes marines being nearby. Smells like vanilla."
+  components:
+  - type: Sprite
+    state: shana_snow_mctavish
+  - type: PatronFigurine
+    id: 2748a7ed-7c12-40bf-a0bd-b43f33828782
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRhonaDeerHanes
+  name: Rhona 'Deer' Hanes figurine
+  description: "Looks like someone who hates rain, and snow, and sun, and heat, and cold."
+  components:
+  - type: Sprite
+    state: rhona_deer_hanes
+  - type: PatronFigurine
+    id: b7b2b907-1a35-4eef-a5d3-6a373dc131d2
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronJatayuNerdCorvuson
+  name: Jatayu 'Nerd' Corvuson figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: jatayu_nerd_corvuson
+  - type: PatronFigurine
+    id: e75feb1b-2b5c-4f56-bccb-b0c45bff5d54
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronCadeStripesSagan
+  name: Cade 'Stripes' Sagan figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: cade_stripes_sagan
+  - type: PatronFigurine
+    id: 26f7eb05-ab44-460a-bd6b-036929ef9951

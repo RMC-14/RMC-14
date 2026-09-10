@@ -20,6 +20,19 @@
     - type: NpcFactionMember
       factions:
       - WeYa
+    - type: Language
+      spokenLanguages:
+      - English
+      - Russian
+      - Chinese
+      - Japanese
+      understoodLanguages:
+      - English
+      - Russian
+      - Chinese
+      - Japanese
+      currentLanguage: English
+      defaultLanguage: English
     - type: Skills
       skills:
         RMCSkillFireman: 1
@@ -117,5 +130,5 @@
   parent: CMJobIconBase
   id: RMCJobIconFreelancerMedic
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/freelancer.rsi
     state: free_med

@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.NightVision;
@@ -315,6 +316,18 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         return GetHiveCore(hive) is not null;
     }
 
+    public bool TryGetHiveCore(EntityUid xeno, [NotNullWhen(true)] out EntityUid? core)
+    {
+        if (GetHive(xeno) is not { } hive || GetHiveCore(hive) is not { } coreEnt)
+        {
+            core = null;
+            return false;
+        }
+
+        core = coreEnt;
+        return true;
+    }
+
     public EntityUid? GetHiveCore(Entity<HiveComponent> hive)
     {
         var hiveCoreQuerry = EntityQueryEnumerator<HiveCoreComponent>();
@@ -338,6 +351,12 @@ public abstract class SharedXenoHiveSystem : EntitySystem
     public bool TryGetStructureLimit(Entity<HiveComponent> hive, EntProtoId structureProtoId, out int limit)
     {
         return hive.Comp.HiveStructureSlots.TryGetValue(structureProtoId, out limit);
+    }
+
+    public void RecordGib(Entity<HiveComponent> hive, GibbedXenoInfo info)
+    {
+        hive.Comp.GibbedXenos.Add(info);
+        Dirty(hive);
     }
 
     public void SetSeeThroughContainers(Entity<HiveComponent?> hive, bool see)

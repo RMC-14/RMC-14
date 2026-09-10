@@ -1,0 +1,258 @@
+- type: entity
+  abstract: true
+  id: VehicleSPPAPCInteriorBase
+  name: SPP APC interior piece
+  description: A decorative interior piece for an SPP APC.
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/sppapc.rsi
+    drawdepth: Overdoors
+  - type: InteractionTransparency
+
+- type: entity
+  abstract: true
+  id: VehicleSPPAPCRoofBase
+  name: SPP APC Side Door
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/sppapc.rsi
+    drawdepth: Overdoors
+  - type: InteractionTransparency
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+    fadeOnSharedGrid: true
+    fadeLayers:
+    - "roof"
+
+- type: entity
+  abstract: true
+  id: VehicleSPPAPCChassisBase
+  name: SPP APC interior chassis
+  description: A chassis segment for an SPP APC interior.
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/sppapc_chassis.rsi
+    drawdepth: FloorTiles
+  - type: InteractionTransparency
+
+- type: entity
+  parent: VehicleSPPAPCChassisBase
+  id: VehicleSPPAPCChassis
+  components:
+  - type: Sprite
+    state: sppapc_chassis
+
+- type: entity
+  abstract: true
+  parent: VehicleSPPAPCInteriorBase
+  id: VehicleSPPAPCWallBase
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Physics
+    bodyType: Static
+    canCollide: true
+  - type: Occluder
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 20000
+        hard: true
+        mask:
+        - FullTileMask
+        layer:
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
+        - Opaque
+        - InteractImpassable
+
+- type: entity
+  abstract: true
+  parent: VehicleSPPAPCWallBase
+  id: VehicleSPPAPCDoorBase
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RMCIgnoreGhostInteractionLimits
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
+
+- type: entity
+  parent: VehicleSPPAPCDoorBase
+  id: VehicleSPPAPCDoorFront
+  components:
+  - type: Sprite
+    state: door_front
+  - type: Occluder
+    enabled: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 20000
+        hard: true
+        mask:
+        - FullTileMask
+        layer:
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
+        - InteractImpassable
+
+- type: entity
+  parent: VehicleSPPAPCRoofBase
+  id: VehicleSPPAPCDoorBack
+  components:
+  - type: Sprite
+    drawdepth: BelowMobs
+    layers:
+    - state: door_back
+      map: [ "roof" ]
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
+
+- type: entity
+  parent: VehicleSPPAPCDoorBase
+  id: VehicleSPPAPCDoorRearCenter
+  components:
+  - type: Sprite
+    state: door_rear_center
+
+- type: entity
+  parent: VehicleSPPAPCDoorBase
+  id: VehicleSPPAPCExitDoor
+  components:
+  - type: Sprite
+    state: exit_door
+  - type: VehicleExit
+  - type: RMCIgnoreGhostInteractionLimits
+
+- type: entity
+  abstract: true
+  parent: VehicleInteriorWallMountedBase
+  id: VehicleSPPAPCConsoleBase
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/sppapc.rsi
+
+- type: entity
+  parent: VehicleSPPAPCConsoleBase
+  id: VehicleSPPAPCDriverConsole
+  name: SPP APC driver console
+  components:
+  - type: Sprite
+    state: Driveconsole
+
+- type: entity
+  parent: VehicleSPPAPCConsoleBase
+  id: VehicleSPPAPCDriverConsoleOff
+  name: SPP APC driver console (off)
+  components:
+  - type: Sprite
+    state: Driveconsole0
+
+- type: entity
+  parent: VehicleSPPAPCConsoleBase
+  id: VehicleSPPAPCDriverConsoleBroken
+  name: SPP APC driver console (broken)
+  components:
+  - type: Sprite
+    state: Driveconsoleb
+
+- type: entity
+  parent: VehicleSPPAPCConsoleBase
+  id: VehicleSPPAPCWeaponConsole
+  name: SPP APC weapon console
+  components:
+  - type: Sprite
+    state: Weaponconsole
+
+- type: entity
+  parent: VehicleSPPAPCConsoleBase
+  id: VehicleSPPAPCWeaponConsoleOff
+  name: SPP APC weapon console (off)
+  components:
+  - type: Sprite
+    state: Weaponconsole0
+
+- type: entity
+  parent: VehicleSPPAPCConsoleBase
+  id: VehicleSPPAPCWeaponConsoleBroken
+  name: SPP APC weapon console (broken)
+  components:
+  - type: Sprite
+    state: Weaponconsoleb
+
+- type: entity
+  abstract: true
+  parent: CMClosetBase
+  id: VehicleSPPAPCLockerBase
+  name: SPP APC locker
+  description: A storage locker for SPP APC interiors.
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+  - type: WallMount
+    arc: 360
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/sppapc.rsi
+    drawdepth: Overdoors
+    layers:
+    - state: locker
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: locker
+      map: ["enum.StorageVisualLayers.Door"]
+  - type: EntityStorageVisuals
+    stateBaseClosed: locker
+    stateBaseOpen: locker_open
+    stateDoorClosed:
+    stateDoorOpen:
+
+- type: entity
+  parent: VehicleSPPAPCLockerBase
+  id: VehicleSPPAPCLocker
+  name: SPP APC locker
+
+- type: entity
+  parent: VehicleInteriorWallMountedBase
+  id: VehicleSPPAPCAmmoLoader
+  name: SPP APC ammo loader
+  description: A loader for SPP APC hardpoint ammunition.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/sppapc.rsi
+    state: weapons_loader
+  - type: VehicleAmmoLoader
+  - type: UserInterface
+    interfaces:
+      enum.VehicleAmmoLoaderUiKey.Key:
+        type: VehicleAmmoLoaderBoundUserInterface
