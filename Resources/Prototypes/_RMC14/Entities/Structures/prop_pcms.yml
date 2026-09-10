@@ -1,0 +1,94 @@
+- type: entity
+  id: RMCPropPCMS
+  name: Portable Changeable Message Sign
+  description: A PCMS, it displays official instructions by the local authorities.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    noRot: true
+  - type: Physics
+    bodyType: Static
+    fixedRotation: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.7"
+        density: 190
+        layer:
+        - MobMask
+  - type: Sprite
+    sprite: _RMC14/Structures/pcms.rsi
+    offset: 0.5, 0.5
+    state: base
+  - type: DeleteOnExplosion
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 500
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Corrodible
+    isCorrodible: false
+  - type: PointLight
+    enabled: true
+    radius: 2
+    netsync: false
+    energy: 2
+    color: "#FA9632"
+
+- type: entity
+  parent: RMCPropPCMS
+  id: RMCPropPCMS1
+  suffix: Slow Down
+  description: A PCMS, it displays official instructions by the local authorities. This one reads 'SLOW DOWN'.
+  components:
+  - type: Sprite
+    state: slow_down
+
+- type: entity
+  parent: RMCPropPCMS
+  id: RMCPropPCMS2
+  suffix: Tune To
+  description: A PCMS, it displays official instructions by the local authorities. This one reads 'TUNE TO 91.7 AM'.
+  components:
+  - type: Sprite
+    state: tuneto
+
+- type: entity
+  parent: RMCPropPCMS
+  id: RMCPropPCMS3
+  suffix: Follow Orders
+  description: A PCMS, it displays official instructions by the local authorities. This one reads 'FOLLOW UNMC ORDERS'.
+  components:
+  - type: Sprite
+    state: follow_orders
+
+- type: entity
+  parent: RMCPropPCMS
+  id: RMCPropPCMS4
+  suffix: Checkpoint Ahead
+  description: A PCMS, it displays official instructions by the local authorities. This one reads 'CHECKPOINT AHEAD'.
+  components:
+  - type: Sprite
+    state: checkpoint
+
+- type: entity
+  parent: RMCPropPCMS
+  id: RMCPropPCMS5
+  suffix: Evac Center
+  description: A PCMS, it displays official instructions by the local authorities. This one reads 'EVAC CENTER'.
+  components:
+  - type: Sprite
+    state: evac_center

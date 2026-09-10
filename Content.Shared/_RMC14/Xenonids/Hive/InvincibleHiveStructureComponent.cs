@@ -17,7 +17,7 @@ public sealed partial class InvincibleHiveStructureComponent : Component
     public EntityUid? Blocker;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan Duration = TimeSpan.FromMinutes(30);
+    public TimeSpan Duration = TimeSpan.FromMinutes(25);
 
     [DataField, AutoNetworkedField, AutoPausedField]
     public TimeSpan ReplaceAt;

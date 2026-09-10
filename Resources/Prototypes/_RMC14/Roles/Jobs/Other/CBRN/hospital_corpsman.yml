@@ -32,6 +32,15 @@
         RMCSkillMedical: 2
         RMCSkillSurgery: 1
         RMCSkillEndurance: 3
+    - type: Language
+      spokenLanguages:
+      - English
+      - SignLanguage
+      understoodLanguages:
+      - English
+      - SignLanguage
+      currentLanguage: English
+      defaultLanguage: English
     - type: NpcFactionMember
       factions:
       - UNMC

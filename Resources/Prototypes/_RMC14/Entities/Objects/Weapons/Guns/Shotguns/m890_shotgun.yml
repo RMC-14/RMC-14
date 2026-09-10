@@ -61,3 +61,66 @@
       rmc-aslot-rail: -0.035, 0.095
       rmc-aslot-stock: -0.65, 0
       rmc-aslot-underbarrel: 0.34, -0.28
+
+# Riot
+- type: entity
+  parent: WeaponShotgunM890
+  name: M890 riot shotgun
+  id: RMCWeaponShotgunM890Riot
+  description: The Weston-Yamada M890 Shotgun, a semi-automatic shotgun with a quick fire rate. Equipped with a steel blue finish to signify use in riot control. It has been modified to only fire 20G beanbags.
+  suffix: Riot, Beanbags
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m890_riot.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m890_riot.rsi
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCShellShotgunBeanbag
+    proto: CMShellShotgunBeanbag
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleMilitaryPolice
+
+# Honor Guard
+- type: entity
+  parent: WeaponShotgunM890
+  id: WeaponShotgunM890Guard
+  description: The Weston-Yamada M890 Shotgun, a semi-automatic shotgun with a quick fire rate. Equipped with a red handle to signify its use with Military Police Honor Guards.
+  suffix: Honor Guard
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m890_guard.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m890_guard.rsi
+  - type: BallisticAmmoProvider
+    proto: CMShellShotgunBuckshot
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        startingAttachable: RMCM5Bayonet
+        whitelist:
+          tags:
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        startingAttachable: RMCAttachmentMagneticHarness
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-stock:
+        startingAttachable: RMCAttachmentM890StockGuard
+        whitelist:
+          tags:
+          - RMCAttachmentM890Stock
+      rmc-aslot-underbarrel:
+        locked: true
+        startingAttachable: RMCAttachmentU1GrenadeLauncher
+        whitelist:
+          tags:
+          - RMCAttachmentU1GrenadeLauncher

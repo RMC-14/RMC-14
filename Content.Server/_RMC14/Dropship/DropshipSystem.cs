@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Numerics;
 using Content.Server._RMC14.GameStates;
 using Content.Server._RMC14.Marines;
@@ -379,6 +379,12 @@ public sealed class DropshipSystem : SharedDropshipSystem
         if (TrySummonAnyAvailableDropship(user, landingZone))
         {
             _popup.PopupEntity(Loc.GetString("rmc-dropship-remote-xeno-called"), user, user, PopupType.LargeCaution);
+
+            var locationName = "Unknown";
+            if (_area.TryGetArea(landingZone, out _, out var areaProto))
+                locationName = areaProto.Name;
+
+            _xenoAnnounce.AnnounceSameHiveDefaultSound(user, $"The Queen has commanded the metal bird to the hive at {locationName}");
             return;
         }
 

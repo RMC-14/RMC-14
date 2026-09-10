@@ -9,7 +9,9 @@
 #  - CMAndroid # TODO RMC14
   - RMCJobSynthetic
   - CMLiaison
+  - RMCWeYaExecutiveBodyguard
   - CMCorrespondent
+  - CMCombatCorrespondent
   - CMMessTech
   departmentRadio: null
   headOfDepartment: null

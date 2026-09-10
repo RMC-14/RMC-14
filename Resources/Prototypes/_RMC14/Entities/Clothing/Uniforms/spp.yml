@@ -39,12 +39,12 @@
 
 - type: entity
   parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
-  id: RMCJumpsuitSPPPaP
-  name: PaP service uniform
+  id: RMCJumpsuitSPPPCG
+  name: PCG service uniform
   description: A pair of blue-grey slacks coupled with a blue shirt, featuring venlar armor inserts at critical areas to protect from blades and low caliber ballistics.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/pap.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/pcg.rsi
   - type: UniformAccessoryHolder
     startingAccessories:
     - RMCPatchSPP
@@ -53,10 +53,10 @@
     - RMCUniformSPP
 
 - type: entity
-  parent: RMCJumpsuitSPPPaP
+  parent: RMCJumpsuitSPPPCG
   id: RMCJumpsuitSPPArmy
   name: SPP army fatigues
-  description: A set of SPP fatigues, mass produced for the Armed Collective of the Socialitsts Progressive Peoples. A rare sight, especially in TSE zones. This particular set sports the standard SPP pattern of the SPP Army's 202nd Infantry Regiment.
+  description: A set of SPP fatigues, mass produced for the Armed Collective of the Socialist Progressive Peoples. A rare sight, especially in TSE zones. This particular set sports the standard SPP pattern of the SPP Army's 202nd Infantry Regiment.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/SPP/army.rsi

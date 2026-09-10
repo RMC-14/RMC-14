@@ -10,6 +10,7 @@
     clearDecals: true
     replaceAreas: true
 
+
 # Standalones
 - type: entity
   parent: RMCMapInsertTrijentBase
@@ -64,26 +65,6 @@
 # Sprinkles
 - type: entity
   parent: RMCMapInsertTrijentBase
-  id: RMCMapInsertTrijentGreenBridge
-  name: Green River New Bridge
-  components:
-  - type: MapInsert
-    variations:
-    - spawn: "/Maps/_RMC14/Inserts/Trijent/green_river_new_bridge.yml"
-      probability: 0.25
-
-- type: entity
-  parent: RMCMapInsertTrijentBase
-  id: RMCMapInsertTrijentPurpleBridge
-  name: Purple River New Bridge
-  components:
-  - type: MapInsert
-    variations:
-    - spawn: "/Maps/_RMC14/Inserts/Trijent/purple_river_new_bridge.yml"
-      probability: 0.25
-
-- type: entity
-  parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentTempleIntact
   name: Temple Intact
   components:
@@ -104,6 +85,18 @@
 
 - type: entity
   parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentMiniEvacWestResearch
+  name: Mini-evac West Research
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/minievac_westresearch.yml"
+      probability: 0.2
+    clearDecals: false
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentLoaderdude
   name: Loader dude
   components:
@@ -112,6 +105,26 @@
     - spawn: "/Maps/_RMC14/Inserts/Trijent/loaderdude.yml"
       probability: 0.25
     replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentGreenBridge
+  name: Green River New Bridge
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/green_river_new_bridge.yml"
+      probability: 0.25
+
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentPurpleBridge
+  name: Purple River New Bridge
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/purple_river_new_bridge.yml"
+      probability: 0.25
 
 - type: entity
   parent: RMCMapInsertTrijentBase
@@ -170,17 +183,6 @@
 
 - type: entity
   parent: RMCMapInsertTrijentBase
-  id: RMCMapInsertTrijentEngiCentralRepaired
-  name: Engineer Central Repaired
-  components:
-  - type: MapInsert
-    variations:
-    - spawn: "/Maps/_RMC14/Inserts/Trijent/engi_central_repaired.yml"
-      probability: 0.7
-    replaceAreas: false
-
-- type: entity
-  parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentSensorhold
   name: Sensor Hold
   components:
@@ -192,19 +194,29 @@
 
 - type: entity
   parent: RMCMapInsertTrijentBase
-  id: RMCMapInsertTrijentCLFPods
-  name: CLF Pods
+  id: RMCMapInsertTrijentEngiCentralRepaired
+  name: Engineer Central Repaired
   components:
   - type: MapInsert
     variations:
-    - spawn: "/Maps/_RMC14/Inserts/Trijent/clfpods.yml"
-      probability: 1
-      offset: 0,-2.0
-      nightmareScenario: clf_pods
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/engi_central_repaired.yml"
+      probability: 0.7
     replaceAreas: false
 
+
+# Survivor Scenario Inserts
 - type: entity
+  abstract: true
   parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentBaseScenario
+  suffix: Insert Trijent
+  components:
+  - type: MapInsert
+    replaceAreas: false
+
+# SPP Crashlanding
+- type: entity
+  parent: RMCMapInsertTrijentBaseScenario
   id: RMCMapInsertTrijentCrashlandingSPPBar
   name: Crashlanding SPP Bar
   components:
@@ -214,10 +226,9 @@
       probability: 1
       offset: 0,-2.0
       nightmareScenario: spp_bar
-    replaceAreas: false
 
 - type: entity
-  parent: RMCMapInsertTrijentBase
+  parent: RMCMapInsertTrijentBaseScenario
   id: RMCMapInsertTrijentCrashlandingSPPAlt
   name: Crashlanding SPP Alt
   components:
@@ -227,66 +238,41 @@
       probability: 1
       offset: 0,-2
       nightmareScenario: spp_bar
-    replaceAreas: false
 
+# CLF Pods
 - type: entity
-  parent: RMCMapInsertTrijentBase
-  id: RMCMapInsertTrijentMiniEvacWestResearch
-  name: Mini-evac West Research
+  parent: RMCMapInsertTrijentBaseScenario
+  id: RMCMapInsertTrijentCLFPods
+  name: CLF Pods
   components:
   - type: MapInsert
     variations:
-    - spawn: "/Maps/_RMC14/Inserts/Trijent/minievac_westresearch.yml"
-      probability: 0.2
-    clearDecals: false
-    replaceAreas: false
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/clfpods.yml"
+      probability: 1
+      offset: 0,-2.0
+      nightmareScenario: clf_pods
 
 # Regular Surv Spawns
-
 - type: entity
-  parent: RMCMapInsertTrijentBase
-  id: RMCMapInsertTrijentSurvSpawnHospital
-  name: Hospital Surv Spawn
-  components:
-  - type: MapInsert
-    variations:
-    - spawn: "/Maps/_RMC14/Inserts/Trijent/surv_spawn_hospital.yml"
-      probability: 1
-      nightmareScenario: trijent_surv_spawn_hospital
-    replaceAreas: false
-
-- type: entity
-  parent: RMCMapInsertTrijentBase
-  id: RMCMapInsertTrijentSurvSpawnDam
-  name: Dam Surv Spawn
-  components:
-  - type: MapInsert
-    variations:
-    - spawn: "/Maps/_RMC14/Inserts/Trijent/surv_spawn_dam.yml"
-      probability: 1
-      nightmareScenario: trijent_surv_spawn_dam
-    replaceAreas: false
-
-- type: entity
-  parent: RMCMapInsertTrijentBase
-  id: RMCMapInsertTrijentSurvSpawnBar
-  name: Bar Surv Spawn
+  parent: RMCMapInsertTrijentBaseScenario
+  id: RMCMapInsertTrijentSurvSpawnTogether
+  name: Together Surv Spawn
+  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Trijent/surv_spawn_bar.yml"
-      probability: 1
-      nightmareScenario: trijent_surv_spawn_bar
-    replaceAreas: false
-
-- type: entity
-  parent: RMCMapInsertTrijentBase
-  id: RMCMapInsertTrijentSurvSpawnTunnelDorm
-  name: Tunnel Dorm Surv Spawn
-  components:
-  - type: MapInsert
-    variations:
+      probability: 0.25
+      nightmareScenario: none
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/surv_spawn_dam.yml"
+      probability: 0.25
+      nightmareScenario: none
+      offset: 61,59
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/surv_spawn_hospital.yml"
+      probability: 0.25
+      nightmareScenario: none
+      offset: 69,-3
     - spawn: "/Maps/_RMC14/Inserts/Trijent/surv_spawn_tunneldorm.yml"
-      probability: 1
-      nightmareScenario: trijent_surv_spawn_tunneldorm
-    replaceAreas: false
+      probability: 0.25
+      nightmareScenario: none
+      offset: 14,29

@@ -67,6 +67,38 @@
 
 - type: entity
   parent: RMCBasePVEEquipmentCase
+  id: RMCPVECaseSyracuseShotgun
+  name: Syracuse shotgun case
+  description: A heavy case for storing a Syracuse pump-action shotgun, an all-time classic.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/shotgun.rsi
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,7,1
+    whitelist:
+      tags:
+      - RMCWeaponShotgunSyracuse
+      - RMCHandful
+      - RMCAttachmentM42A1WoodenStock
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponShotgunSyracuse
+    - id: RMCAttachmentM42A1WoodenStock
+    - id: CMShellShotgunBuckshot
+    - id: CMShellShotgunBuckshot
+    - id: CMShellShotgunBuckshot
+    - id: CMShellShotgunBuckshot
+  - type: ItemMapper
+    mapLayers:
+      gun:
+        whitelist:
+          tags:
+          - RMCWeaponShotgunSyracuse
+
+- type: entity
+  parent: RMCBasePVEEquipmentCase
   id: RMCPVECaseM5SPR
   name: M5SPR battle rifle case
   description: A large case for storing an M5SPR, a modified UNMC battle rifle equipped with HV-P Rounds.

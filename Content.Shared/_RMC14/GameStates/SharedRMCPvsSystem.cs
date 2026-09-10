@@ -28,4 +28,8 @@ public abstract class SharedRMCPvsSystem : EntitySystem
         if (_player.TryGetSessionById(sessionId, out var session))
             AddSessionOverride(ent, session);
     }
+
+    public virtual void RemoveSessionOverride(EntityUid ent, ICommonSession session)
+    {
+    }
 }
