@@ -7,6 +7,9 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: CMCommand
+    time: 54000 # 15 hours
+  - !type:RoleTimeRequirement
+    role: CMJobSquadLeader
     time: 36000 # 10 hours
   - !type:DepartmentTimeRequirement
     department: CMMilitaryPolice

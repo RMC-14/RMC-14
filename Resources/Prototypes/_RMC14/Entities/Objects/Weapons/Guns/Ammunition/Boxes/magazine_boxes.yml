@@ -2925,6 +2925,49 @@
         tags:
         - RMCMagazinePistolL14AP
 
+# M1911
+- type: entity
+  parent: RMCBoxMagazinePistolBase
+  id: RMCBoxMagazinePistolM1911Empty
+  name: magazine box (M1911 x 16)
+  components:
+  - type: Sprite
+    layers:
+    - state: pistol_box
+      color: "#b2976e"
+    - state: pistol_ammo_full
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#ffc000"
+    - state: pistol_box_11
+      color: "#ffcb26"
+    - state: pistol_box_marking
+      color: "#7c4c1b"
+    - state: pistol_lid
+      map: [ "lid" ]
+      color: "#b2976e"
+    - state: pistol_lid_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - CMMagazinePistolM1911
+
+- type: entity
+  parent: RMCBoxMagazinePistolM1911Empty
+  id: RMCBoxMagazinePistolM1911
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: CMMagazinePistolM1911
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - CMMagazinePistolM1911
+
 # -- MISC AMMO BOXES --
 
 - type: entity

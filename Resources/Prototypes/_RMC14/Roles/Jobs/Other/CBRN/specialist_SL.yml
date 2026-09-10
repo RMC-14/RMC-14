@@ -5,7 +5,7 @@
   description: rmc-job-description-cbrn-squad-leader
   playTimeTracker: RMCJobCBRNSquadLeader
   ranks:
-    RMCRankOperator: []
+    RMCRankStaffSergeant: []
   startingGear: RMCGearCBRNSquadLeader
   icon: "CMJobIconSquadLeader"
   joinNotifyCrew: false
@@ -120,8 +120,8 @@
   storage:
     outerClothing:
     - CMMRE
-    - CMGrenadeHighExplosive     #RMC TODO: M40 HPDP White Phosphorus
-    - CMGrenadeHighExplosive     #RMC TODO: M40 HPDP White Phosphorus
+    - RMCGrenadeWhitePhosphorus
+    - RMCGrenadeWhitePhosphorus
     pocket1:
     - RMCTankFlamerLargeX
     - RMCTankFlamerLargeX

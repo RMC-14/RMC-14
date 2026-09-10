@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Content.Shared._RMC14.Weapons.Ranged.Ammo.BulletBox;
 using Content.Shared._RMC14.Weapons.Ranged.Flamer;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DoAfter;
@@ -60,6 +61,9 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         if (args.Handled || _net.IsClient)
             return;
 
+        if (HasComp<XenoComponent>(args.User))
+            return;
+
         var isBox = TryComp(args.Used, out BulletBoxComponent? _);
         var isFlamerTank = !isBox && IsHandheldFlamerTank(args.Used);
         if (!isBox && !isFlamerTank)
@@ -79,6 +83,9 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
     private void OnInteractHand(Entity<VehicleAmmoLoaderComponent> ent, ref InteractHandEvent args)
     {
         if (args.Handled || _net.IsClient)
+            return;
+
+        if (HasComp<XenoComponent>(args.User))
             return;
 
         if (!TryOpenUi(ent, args.User))

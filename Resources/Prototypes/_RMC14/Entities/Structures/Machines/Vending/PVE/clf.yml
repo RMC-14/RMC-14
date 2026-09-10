@@ -1,7 +1,7 @@
 - type: entity
   parent: ColMarTechSurplus
   id: RMCCLFSurplusPVE
-  name: CLF Clothing Rack
+  name: CLF clothing rack
   description: A sturdy metal rack made by local friends of the front, filled to the brim with all the load-bearing gear and clothing a rebel could want, coincidentally also made by local friends of the front.
   suffix: PVE, CLF
   components:
@@ -142,7 +142,7 @@
 - type: entity
   parent: ColMarTechUtilities
   id: RMCCLFUtilitiesPVE
-  name: CLF Utilities Rack
+  name: CLF utilities rack
   description: A sturdy metal rack taken from a captured UN military shipment loaded with all the gear a rebel could ever want.
   suffix: PVE, CLF
   components:
