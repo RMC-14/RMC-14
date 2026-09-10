@@ -2,20 +2,14 @@
   id: RMCOverheadSign
   abstract: true
   name: sign
-  placement:
-    mode: SnapgridCenter
-    snap:
-    - Wall
   components:
   - type: SpriteFade
   - type: Transform
-    anchored: true
   - type: Sprite
     noRot: true
     sprite: _RMC14/Structures/overhead_signs.rsi
     offset: 0.25,0.5
     drawdepth: Overdoors
-  - type: Anchorable
   - type: Clickable
 
 - type: entity

@@ -122,7 +122,7 @@
   - type: SolutionTransfer
     transferAmount: 100
     minTransferAmount: 5
-    maxTransferAmount: 500
+    maxTransferAmount: 300
     transferAmounts:
     - 5
     - 10
@@ -137,7 +137,6 @@
     - 120
     - 240
     - 300
-    - 500
   - type: PhysicalComposition
     materialComposition:
       CMSteel: 8000

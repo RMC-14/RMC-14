@@ -1,4 +1,7 @@
 - type: Tag
+  id: RMCSkillPamphlet
+
+- type: Tag
   id: CMCartridge10x20mm
 
 - type: Tag
@@ -33,9 +36,6 @@
 
 - type: Tag
   id: CMOintment
-
-- type: Tag
-  id: CMSplint
 
 - type: Tag
   id: CMFirstAidKit
@@ -116,6 +116,9 @@
   id: RMCMacheteScabbard
 
 - type: Tag
+  id: RMCMacheteHolder
+
+- type: Tag
   id: RMCScalpel
 
 - type: Tag
@@ -188,6 +191,9 @@
 
 - type: Tag
   id: RMCSynthGrabbable # whitelist tag for synths being able to grab particular xenos
+
+- type: Tag
+  id: RMCSynthAllowedArmor # armor items synths are permitted to wear regardless of CanWearArmor
 
 - type: Tag
   id: RMCSentryLaptop

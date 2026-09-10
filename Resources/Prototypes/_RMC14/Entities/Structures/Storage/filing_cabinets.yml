@@ -148,6 +148,8 @@
   - type: Sprite
     state: sidecabinet
     noRot: false
+  - type: Transform
+    noRot: false
   - type: Fixtures
     fixtures:
       fix1:

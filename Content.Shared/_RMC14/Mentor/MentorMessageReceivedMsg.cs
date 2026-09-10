@@ -31,7 +31,8 @@ public sealed class MentorMessagesReceivedMsg : NetMessage
             var isMentor = buffer.ReadBoolean();
             var isAdmin = buffer.ReadBoolean();
             var create = buffer.ReadBoolean();
-            var message = new MentorMessage(destination, destinationName, author, authorName, text, time, isMentor, isAdmin, create);
+            var title = buffer.ReadString();
+            var message = new MentorMessage(destination, destinationName, author, authorName, text, time, isMentor, isAdmin, create, title);
             Messages.Add(message);
         }
     }
@@ -60,6 +61,7 @@ public sealed class MentorMessagesReceivedMsg : NetMessage
             buffer.Write(message.IsMentor);
             buffer.Write(message.IsAdmin);
             buffer.Write(message.Create);
+            buffer.Write(message.Title);
         }
     }
 }

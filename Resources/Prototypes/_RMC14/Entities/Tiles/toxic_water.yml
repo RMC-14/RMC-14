@@ -23,8 +23,8 @@
       tags:
       - Catwalk
     armorPiercingDamage:
-      groups:
-        Burn: 15
+      types:
+        Heat: 7.5
     emotes:
     - Cough
     - Gasp
@@ -32,11 +32,11 @@
     sound:
       collection: ToxicWaterSizzle
     multipliers:
-    - multiplier: 0.13333
+    - multiplier: 0.050  # 0.98
       whitelist:
         tags:
         - RMCXenoLarva
-    - multiplier: 2.26666
+    - multiplier: 0.866  # 17.04
       whitelist:
         components:
         - Xeno

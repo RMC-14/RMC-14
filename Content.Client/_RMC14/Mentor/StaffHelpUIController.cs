@@ -487,7 +487,7 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
         else if (message.Author.Value != message.Destination)
         {
             if (message.IsAdmin)
-                author = $"[bold][color=red](Admin) {author}[/color][/bold]";
+                author = $"[bold][color=red]({message.Title}) {author}[/color][/bold]";
             else if (message.IsMentor)
                 author = $"[bold][color=orange](Mentor) {author}[/color][/bold]";
 

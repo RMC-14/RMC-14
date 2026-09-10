@@ -145,7 +145,7 @@
   parent: RMCBaseJacket
   id: RMCCorporateLogisticsJacket
   name: corporate logistics jacket
-  description: A white jacket with brown accents. A popular choice among WEYA Logistic Managers.
+  description: A white jacket with brown padded accents. A popular choice among WEYA Logistic Managers. The logo of the Weston-Yamada Corporation is proudly embroidered on the back.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/logistics_jacket.rsi
@@ -153,7 +153,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/logistics_jacket.rsi
 
 - type: entity
-  parent: RMCBaseJacket
+  parent: RMCJacketWindbreaker
   id: RMCCorporateDutyJacket
   name: corporate duty jacket
   description: A brown coat, built to withstand the conditions of the frontier, to orbital space stations, ships, and colonies. Surprisingly comfortable and warm.

@@ -144,6 +144,28 @@
     bulletType: RMCBoxBulletsRifleAP
 
 - type: entity
+  parent: RMCBoxBulletsBase
+  id: RMCBoxBulletsRifleIncendiary
+  name: rifle ammunition box (10x24mm Incendiary)
+  description: A 10x24mm incendiary ammunition box. Used to refill M54C MK2, and M4SPR incendiary magazines. It comes with a leather strap allowing someone to wear it on their back.
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#7b8246"
+    - state: rifle_box_marking
+      color: "#318b11"
+    - state: rifle_box_generic
+      color: "#ffcb26"
+    - state: rifle_ammo_full_rounds_base
+      map: [ "enum.BulletBoxLayers.Fill" ]
+    - state: rifle_ammo_full_rounds_color
+      map: [ "enum.BulletBoxLayers2.Fill" ]
+      color: "#318b11"
+  - type: BulletBox
+    bulletType: RMCBoxBulletsRifleIncendiary
+
+- type: entity
   parent: RMCBoxBulletsRifleAP
   id: RMCBoxBulletsRifleAPEmpty
   suffix: Empty

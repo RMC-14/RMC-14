@@ -20,6 +20,8 @@ using Content.Shared._RMC14.Xenonids.Projectile.Spit.Stacks;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Standard;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
+using Content.Shared.Alert;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Coordinates;
@@ -45,6 +47,7 @@ public sealed class XenoSpitSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private readonly AlertsSystem _alerts = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
@@ -69,6 +72,7 @@ public sealed class XenoSpitSystem : EntitySystem
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
 
+    private static readonly ProtoId<AlertPrototype> FireAlert = "Fire";
     private static readonly ProtoId<ReagentPrototype> AcidRemovedBy = "Water";
 
     private EntityQuery<ProjectileComponent> _projectileQuery;
@@ -424,11 +428,21 @@ public sealed class XenoSpitSystem : EntitySystem
         ent.Comp.ExpiresAt = _timing.CurTime + ent.Comp.Duration;
         Dirty(ent);
         UpdateAppearance(ent);
+
+        _alerts.ShowAlert(ent, FireAlert);
     }
 
     private void OnUserAcidedRemove(Entity<UserAcidedComponent> ent, ref ComponentRemove args)
     {
         _appearance.SetData(ent, UserAcidedVisuals.Acided, UserAcidedEffects.None);
+
+        if (TryComp(ent, out FlammableComponent? flammable) &&
+            flammable.FireStacks > 0)
+        {
+            return;
+        }
+
+        _alerts.ClearAlert(ent, FireAlert);
     }
 
     private void OnUserAcidedShowFireAlert(Entity<UserAcidedComponent> ent, ref ShowFireAlertEvent args)

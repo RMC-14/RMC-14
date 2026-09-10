@@ -51,6 +51,7 @@
     West: /Textures/_RMC14/Tiles/planet/auto_strata_grass/grass_double_edge_w.png
   footstepSounds:
     collection: FootstepAsteroid
+  isSubfloor: false 
 
 - type: tile
   parent: CMPlanetMattedGrass
@@ -83,8 +84,10 @@
   - 1.0
   footstepSounds:
     collection: FootstepAsteroid
+  isSubfloor: false 
 
 - type: tile
   parent: CMPlanetMattedGrass3
   id: CMPlanetMattedGrass4
   sprite: /Textures/_RMC14/Tiles/planet/auto_strata_grass/grass_mud_alt.png
+  isSubfloor: false 

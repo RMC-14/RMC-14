@@ -134,6 +134,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - AccessoriesRMC
+  - WatchesBasicRMC
   - PaperworkRMC
   - RecreationalRMC
   - PlushiesRMC
@@ -613,6 +614,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - AccessoriesRMC
+  - WatchesBasicRMC
   - PaperworkRMC
   - RecreationalRMC
   - PlushiesRMC
@@ -717,6 +719,7 @@
   - WatchesLiaisonRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
   - FlasksRMC
@@ -741,6 +744,7 @@
   - WatchesBasicRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
   - FlasksRMC
@@ -766,6 +770,7 @@
   - WatchesLiaisonRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
   - FlasksRMC
@@ -787,9 +792,10 @@
   - MasksRMC
   - HelmetGarbsRMC
   - AccessoriesRMC
-  - WatchesBasicRMC
+  - WatchesLiaisonRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
   - FlasksRMC
@@ -855,6 +861,7 @@
   id: JobRMCJobSynthetic
   points: 7
   groups:
+  - SynthGenRMC
   - SynthBackpackRMC
   - SynthHeadwearRMC
   - SynthGlassesRMC
@@ -934,6 +941,7 @@
   - MasksRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - CannedDrinksRMC
   - FoodSweetsRMC
   - FoodPackagedRMC
@@ -952,6 +960,7 @@
   - MasksRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - CannedDrinksRMC
   - FoodSweetsRMC
   - FoodPackagedRMC
@@ -970,6 +979,7 @@
   - MasksRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - CannedDrinksRMC
   - FoodSweetsRMC
   - FoodPackagedRMC
@@ -988,6 +998,7 @@
   - MasksRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - CannedDrinksRMC
   - FoodSweetsRMC
   - FoodPackagedRMC
@@ -1006,6 +1017,7 @@
   - MasksRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - CannedDrinksRMC
   - FoodSweetsRMC
   - FoodPackagedRMC
@@ -1024,6 +1036,7 @@
   - MasksRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - CannedDrinksRMC
   - FoodSweetsRMC
   - FoodPackagedRMC
@@ -1042,6 +1055,7 @@
   - MasksRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - CannedDrinksRMC
   - FoodSweetsRMC
   - FoodPackagedRMC
@@ -1060,6 +1074,7 @@
   - MasksRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - CannedDrinksRMC
   - FoodSweetsRMC
   - FoodPackagedRMC
@@ -1081,6 +1096,7 @@
   - MasksRMCPVE
   - HelmetGarbsRMCPVE
   - AccessoriesRMCPVE
+  - WatchesBasicRMC
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins
@@ -1095,6 +1111,7 @@
   - MasksRMCPVE
   - HelmetGarbsRMCPVE
   - AccessoriesRMCPVE
+  - WatchesBasicRMC
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins
@@ -1109,6 +1126,7 @@
   - MasksRMCPVE
   - HelmetGarbsRMCPVE
   - AccessoriesRMCPVE
+  - WatchesBasicRMC
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins
@@ -1123,6 +1141,7 @@
   - MasksRMCPVE
   - HelmetGarbsRMCPVE
   - AccessoriesRMCPVE
+  - WatchesBasicRMC
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins
@@ -1137,6 +1156,7 @@
   - MasksRMCPVE
   - HelmetGarbsRMCPVE
   - AccessoriesRMCPVE
+  - WatchesBasicRMC
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins
@@ -1150,6 +1170,7 @@
   - MasksRMCPVE
   - HelmetGarbsRMCPVE
   - AccessoriesRMCPVE
+  - WatchesBasicRMC
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins

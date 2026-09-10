@@ -5,7 +5,7 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorSecurity
   startingGear: RMCGearSurvivorSolarisILRCPeacekeeper
-  spawnMenuRoleName: ILRC peacekeeper (Solaris Survivor)
+  spawnMenuRoleName: ILRC Peacekeeper (Solaris Survivor)
   special:
   - !type:AddComponentSpecial
     components:

@@ -251,7 +251,77 @@
     trackerModes:
     - SquadLeader
     - FORECONCommandingOfficer
-      
+
+- type: entity
+  parent: RMCHeadsetForecon
+  id: RMCHeadsetForeconSL
+  name: UNMC SOF squad leader headset
+  suffix: Survivor, Recon SL
+  components:
+  - type: RMCHeadset
+    channels:
+    - MarineSOF
+    radioTextIncrease: 2
+
+- type: entity
+  parent: RMCHeadsetForecon
+  id: RMCHeadsetForeconCommander
+  name: UNMC SOF commander headset
+  suffix: Survivor, Recon Commander
+  components:
+  - type: RMCHeadset
+    channels:
+    - MarineSOF
+    radioTextIncrease: 3
+
+# Tyrargo survs
+- type: entity
+  parent: RMCHeadsetMarine
+  id: RMCHeadsetTyrargo
+  name: UNMC headset
+  description: Issued to UNMC Marines.
+  suffix: Survivor
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/headsets.rsi
+    state: soc_headset
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyColony
+  - type: RMCHeadset
+    channels:
+    - MarineSurvivor
+  - type: RMCStaticDefaultChannel
+  - type: EncryptionKeyHolder
+    defaultChannel: MarineSurvivor
+  - type: GrantSquadLeaderTracker
+    defaultMode: SquadLeader
+    trackerModes:
+    - SquadLeader
+
+- type: entity
+  parent: RMCHeadsetTyrargo
+  id: RMCHeadsetTyrargoLeader
+  name: UNMC leader headset
+  suffix: Survivor
+  components:
+  - type: RMCHeadset
+    channels:
+    - MarineSurvivor
+    radioTextIncrease: 2
+
+- type: entity
+  parent: RMCHeadsetTyrargo
+  id: RMCHeadsetTyrargoCommander
+  name: UNMC commander headset
+  suffix: Survivor
+  components:
+  - type: RMCHeadset
+    channels:
+    - MarineSurvivor
+    radioTextIncrease: 3
+
 # Paramarine Hybrisa survivor insert
 - type: entity
   parent: RMCHeadsetIconsPara
@@ -289,7 +359,7 @@
       radioTextIncrease: 2
     - type: GrantSquadLeaderTracker
       defaultMode: ParaCommander
-          
+
 - type: entity
   parent: RMCHeadsetPara
   id: RMCHeadsetParaOfficer
@@ -339,7 +409,7 @@
 - type: entity
   parent: RMCHeadsetColonyIcons
   id: RMCHeadsetSPPCrashland
-  name: SPP 173/Airborne headset 
+  name: SPP 173/Airborne headset
   description: A headset used by members of the 173rd Airborne Reconnaissance unit.
   components:
   - type: ContainerFill
@@ -351,3 +421,17 @@
     defaultMode: SPPAirborneSL
     trackerModes:
     - SPPAirborneSL
+
+# For Sorokyne SPP SOF
+
+- type: entity
+  parent: RMCHeadsetColonyIcons
+  id: RMCHeadsetSPPSOFCrashland
+  name: SPP 121/RECON headset
+  description: A special headset used by recon elements of the SPP military.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeySPP
+      - CMEncryptionKeyColony
