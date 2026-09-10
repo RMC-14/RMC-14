@@ -54,11 +54,6 @@ public sealed class RMCGhostWarpToTargetRequestEvent : EntityEventArgs
 }
 
 [Serializable, NetSerializable]
-public sealed class RMCGhostnadoRequestEvent : EntityEventArgs
-{
-}
-
-[Serializable, NetSerializable]
 public sealed class RMCGhostTargetSection
 {
     public RMCGhostTargetSection(

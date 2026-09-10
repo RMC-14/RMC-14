@@ -35,6 +35,7 @@ public sealed partial class RMCGhostTargetWindow : DefaultWindow
     private static readonly Color TguiTransparentButtonHoverColor = Color.FromHex("#737373");
 
     public event Action<NetEntity>? WarpClicked;
+    public event Action? OnGhostnadoClicked;
     public event Action? OnRefreshClicked;
 
     public RMCGhostTargetWindow()
@@ -49,7 +50,7 @@ public sealed partial class RMCGhostTargetWindow : DefaultWindow
         SetupSearchBarStyle();
         GhostnadoButton.ModulateSelfOverride = Color.White;
         RefreshButton.ModulateSelfOverride = Color.White;
-        GhostnadoButton.OnPressed += _ => WarpToMostFollowed();
+        GhostnadoButton.OnPressed += _ => OnGhostnadoClicked?.Invoke();
         RefreshButton.OnPressed += _ => OnRefreshClicked?.Invoke();
         OnClose += ClearContent;
         SetupGhostnadoButtonColors();
@@ -266,12 +267,6 @@ public sealed partial class RMCGhostTargetWindow : DefaultWindow
     {
         GhostnadoButton.Disabled = GetMostFollowedEntry() == null;
         UpdateGhostnadoButtonColor();
-    }
-
-    private void WarpToMostFollowed()
-    {
-        if (GetMostFollowedEntry() is { } entry)
-            WarpClicked?.Invoke(entry.Entity);
     }
 
     private void WarpToMostRelevantSearchResult()

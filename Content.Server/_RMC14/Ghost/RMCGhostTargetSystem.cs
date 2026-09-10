@@ -97,7 +97,6 @@ public sealed class RMCGhostTargetSystem : EntitySystem
 
         SubscribeNetworkEvent<RMCGhostWarpsRequestEvent>(OnGhostWarpsRequest);
         SubscribeNetworkEvent<RMCGhostWarpToTargetRequestEvent>(OnGhostWarpToTargetRequest);
-        SubscribeNetworkEvent<RMCGhostnadoRequestEvent>(OnGhostnadoRequest);
 
         SubscribeLocalEvent<RoundStartingEvent>(OnRoundStarting);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
@@ -217,20 +216,6 @@ public sealed class RMCGhostTargetSystem : EntitySystem
         WarpTo(ghost, target);
     }
 
-    private void OnGhostnadoRequest(RMCGhostnadoRequestEvent msg, EntitySessionEventArgs args)
-    {
-        if (!TryGetSenderGhost(args, out var ghost))
-        {
-            Log.Warning($"User {args.SenderSession.Name} tried to RMC ghostnado without being a ghost.");
-            return;
-        }
-
-        if (_follower.GetMostGhostFollowed() is not { } target)
-            return;
-
-        WarpTo(ghost, target);
-    }
-
     private static RMCGhostTargetPreparedView GetView(RMCGhostTargetStoreComponent store, bool admin)
     {
         return admin ? store.Admin : store.Public;
@@ -252,20 +237,27 @@ public sealed class RMCGhostTargetSystem : EntitySystem
     private Entity<RMCGhostTargetStoreComponent> EnsureStore()
     {
         if (_store is { } storeUid &&
+            !EntityManager.IsQueuedForDeletion(storeUid) &&
             TryComp(storeUid, out RMCGhostTargetStoreComponent? existing))
         {
             return (storeUid, existing);
         }
 
         var query = EntityQueryEnumerator<RMCGhostTargetStoreComponent>();
-        if (query.MoveNext(out storeUid, out existing))
+        while (query.MoveNext(out storeUid, out existing))
         {
+            if (EntityManager.IsQueuedForDeletion(storeUid))
+                continue;
+
             _store = storeUid;
             if (!existing.IsInitialized)
                 InitializeStore((storeUid, existing));
 
             while (query.MoveNext(out var duplicate, out _))
             {
+                if (EntityManager.IsQueuedForDeletion(duplicate))
+                    continue;
+
                 Log.Error($"Removing duplicate {nameof(RMCGhostTargetStoreComponent)} from {ToPrettyString(duplicate)}.");
                 QueueDel(duplicate);
             }
@@ -452,12 +444,9 @@ public sealed class RMCGhostTargetSystem : EntitySystem
         RefreshEntry(args.Following);
     }
 
-    private void OnGhostVisibilityChanged(
-        EntityUid uid,
-        GhostComponent component,
-        GhostCanInteractChangedEvent args)
+    private void OnGhostVisibilityChanged(Entity<GhostComponent> ent, ref GhostCanInteractChangedEvent args)
     {
-        RefreshTarget(uid);
+        RefreshTarget(ent);
     }
 
     private void OnGhostTerminating(Entity<GhostComponent> ent, ref EntityTerminatingEvent args)
@@ -482,12 +471,9 @@ public sealed class RMCGhostTargetSystem : EntitySystem
             RefreshTarget(ent);
     }
 
-    private void OnWarpPointLocationChanged(
-        EntityUid uid,
-        WarpPointComponent component,
-        WarpPointLocationChangedEvent args)
+    private void OnWarpPointLocationChanged(Entity<WarpPointComponent> ent, ref WarpPointLocationChangedEvent args)
     {
-        RefreshTarget(uid);
+        RefreshTarget(ent);
     }
 
     private void OnWarpPointTerminating(Entity<WarpPointComponent> ent, ref EntityTerminatingEvent args)

@@ -1,5 +1,5 @@
 rmc-faction-name-unmc = United Nations Marine Corps
-rmc-faction-name-xeno = Xenomorphs
+rmc-faction-name-xeno = Xenonids
 rmc-faction-name-spp = Socialist Progressive Peoples
 rmc-faction-name-halcyon = PMC
 rmc-faction-name-clf = Colony Liberation Front

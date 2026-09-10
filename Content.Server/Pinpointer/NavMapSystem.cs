@@ -2,7 +2,7 @@ using Content.Server.Administration.Logs;
 using Content.Server.Atmos.Components;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Station.Systems;
-using Content.Server.Warps;
+using Content.Server.Warps; // RMC14
 using Content.Shared.Database;
 using Content.Shared.Examine;
 using Content.Shared.Localizations;
@@ -29,7 +29,7 @@ public sealed partial class NavMapSystem : SharedNavMapSystem
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly TurfSystem _turfSystem = default!;
-    [Dependency] private readonly WarpPointSystem _warpPoint = default!;
+    [Dependency] private readonly WarpPointSystem _warpPoint = default!; // RMC14
 
     public const float CloseDistance = 15f;
     public const float FarDistance = 30f;
@@ -200,7 +200,7 @@ public sealed partial class NavMapSystem : SharedNavMapSystem
             $"{ToPrettyString(args.Actor):player} configured NavMapBeacon \'{ToPrettyString(ent):entity}\' with text \'{args.Text}\', color {args.Color.ToHexNoAlpha()}, and {(args.Enabled ? "enabled" : "disabled")} it.");
 
         if (TryComp<WarpPointComponent>(ent, out var warpPoint))
-            _warpPoint.SetLocation((ent, warpPoint), args.Text);
+            _warpPoint.SetLocation((ent, warpPoint), args.Text); // RMC14
 
         beacon.Text = args.Text;
         beacon.Color = args.Color;
@@ -218,7 +218,7 @@ public sealed partial class NavMapSystem : SharedNavMapSystem
 
         // We set this on mapinit just in case the text was edited via VV or something.
         if (TryComp<WarpPointComponent>(ent, out var warpPoint))
-            _warpPoint.SetLocation((ent, warpPoint), navMap.Text);
+            _warpPoint.SetLocation((ent, warpPoint), navMap.Text); // RMC14
 
         UpdateBeaconEnabledVisuals((ent, navMap));
     }

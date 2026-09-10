@@ -71,6 +71,11 @@ public sealed class RMCGhostTargetUIController : UIController, IOnSystemChanged<
         RequestWarps();
     }
 
+    private void OnGhostnadoClicked()
+    {
+        _net.SendSystemNetworkMessage(new GhostnadoRequestEvent());
+    }
+
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent msg, EntitySessionEventArgs args)
     {
         CloseWindow();
@@ -107,6 +112,7 @@ public sealed class RMCGhostTargetUIController : UIController, IOnSystemChanged<
 
         _window = new RMCGhostTargetWindow();
         _window.WarpClicked += OnWarpClicked;
+        _window.OnGhostnadoClicked += OnGhostnadoClicked;
         _window.OnRefreshClicked += OnRefreshClicked;
         _window.OnClose += OnWindowClosed;
         return _window;

@@ -1,6 +1,6 @@
 using Content.Shared.Examine;
 using Content.Shared.Ghost;
-using Content.Shared.Warps;
+using Content.Shared.Warps; // RMC14
 
 namespace Content.Server.Warps;
 
@@ -21,6 +21,7 @@ public sealed class WarpPointSystem : EntitySystem
         args.PushText(Loc.GetString("warp-point-component-on-examine-success", ("location", loc)));
     }
 
+    // RMC14 start
     public void SetLocation(Entity<WarpPointComponent?> entity, string? location)
     {
         if (!Resolve(entity, ref entity.Comp, false) ||
@@ -35,4 +36,5 @@ public sealed class WarpPointSystem : EntitySystem
         var ev = new WarpPointLocationChangedEvent(oldLocation, location);
         RaiseLocalEvent(entity, ev);
     }
+    // RMC14 end
 }
