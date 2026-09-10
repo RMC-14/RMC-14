@@ -105,25 +105,21 @@ public sealed partial class CryoCellWindow : DefaultWindow
 
     private void UpdateTemperature(CryoCellComponent cryoCell)
     {
-        BodyTemperatureBar.Value = cryoCell.UIBodyTemperature;
         BodyTemperatureText.Text = $"{cryoCell.UIBodyTemperature:F0} K";
-
         if (cryoCell.UIBodyTemperature <= cryoCell.BodyTempCryoLiquidThreshold)
-            BodyTemperatureBar.ForegroundStyleBoxOverride = StyleGood;
+            BodyTemperatureText.Modulate = Color.Lime;
         else if (cryoCell.UIBodyTemperature < Atmospherics.T0C)
-            BodyTemperatureBar.ForegroundStyleBoxOverride = StyleWarning;
+            BodyTemperatureText.Modulate = Color.Yellow;
         else
-            BodyTemperatureBar.ForegroundStyleBoxOverride = StyleDanger;
+            BodyTemperatureText.Modulate = Color.Red;
 
-        CellTemperatureBar.Value = cryoCell.CryoCellTemperature;
         CellTemperatureText.Text = $"{cryoCell.CryoCellTemperature:F0} K";
-
         if (cryoCell.CryoCellTemperature <= cryoCell.BodyTempCryoLiquidThreshold)
-            CellTemperatureBar.ForegroundStyleBoxOverride = StyleGood;
+            CellTemperatureText.Modulate = Color.Lime;
         else if (cryoCell.CryoCellTemperature < Atmospherics.T0C)
-            CellTemperatureBar.ForegroundStyleBoxOverride = StyleWarning;
+            CellTemperatureText.Modulate = Color.Yellow;
         else
-            CellTemperatureBar.ForegroundStyleBoxOverride = StyleDanger;
+            CellTemperatureText.Modulate = Color.Red;
     }
 
     private void UpdateDamageBars(CryoCellComponent cryoCell)

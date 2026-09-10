@@ -20,9 +20,7 @@
                 </BoxContainer>
                 <BoxContainer Orientation="Horizontal" Margin="0 2">
                     <Label Text="{Loc rmc-cryo-cell-temperature-label}" MinWidth="120" Modulate="#5B88B0" />
-                    <ProgressBar Name="BodyTemperatureBar" HorizontalExpand="True" MinValue="0" MaxValue="1000" MinHeight="16">
-                        <Label Name="BodyTemperatureText" Align="Right" Margin="0 0 5 0" />
-                    </ProgressBar>
+                    <Label Name="BodyTemperatureText" Align="Left" Margin="5 0 0 0" />
                 </BoxContainer>
                 <BoxContainer Orientation="Horizontal" Margin="0 2">
                     <Label Text="{Loc rmc-cryo-cell-health-label}" MinWidth="120" Modulate="#5B88B0" />
@@ -67,9 +65,7 @@
             </BoxContainer>
             <BoxContainer Orientation="Horizontal" Margin="0 2">
                 <Label Text="{Loc rmc-cryo-cell-temperature-label}" MinWidth="120" Modulate="#5B88B0" />
-                <ProgressBar Name="CellTemperatureBar" HorizontalExpand="True" MinValue="0" MaxValue="1000" MinHeight="16">
-                    <Label Name="CellTemperatureText" Align="Right" Margin="0 0 5 0" />
-                </ProgressBar>
+                <Label Name="CellTemperatureText" Align="Left" Margin="5 0 0 0" />
             </BoxContainer>
             <BoxContainer Orientation="Horizontal" Margin="0 2">
                 <Label Text="{Loc rmc-cryo-cell-door-label}" MinWidth="120" Modulate="#5B88B0" />

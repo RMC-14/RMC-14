@@ -108,7 +108,7 @@ public abstract class SharedCryoCellSystem : EntitySystem
                 Text = Loc.GetString("rmc-cryo-cell-verb-eject-inside"),
                 ConfirmationPopup = true,
                 Category = VerbCategory.Eject,
-                Act = () => StartDelayedEject(cryoCell, occupant),
+                Act = () => EjectOccupant(cryoCell, occupant),
             });
 
             return;
@@ -137,7 +137,7 @@ public abstract class SharedCryoCellSystem : EntitySystem
         if (_mobState.IsIncapacitated(ent))
             return;
 
-        foreach (var verb in _verb.GetLocalVerbs(cellId, ent.Owner, typeof(Verb)))
+        foreach (var verb in _verb.GetLocalVerbs(cellId, ent.Owner, typeof(AlternativeVerb)))
         {
             if (!verb.Text.Equals(Loc.GetString("rmc-cryo-cell-verb-eject-inside")))
                 continue;
@@ -157,10 +157,7 @@ public abstract class SharedCryoCellSystem : EntitySystem
 
     private void FinishDelayedEject(Entity<CryoCellComponent> cryoCell, EntityUid occupant)
     {
-        if (TerminatingOrDeleted(cryoCell))
-            return;
-
-        if (TerminatingOrDeleted(occupant))
+        if (TerminatingOrDeleted(cryoCell) || TerminatingOrDeleted(occupant))
             return;
 
         if (cryoCell.Comp.Occupant != occupant)

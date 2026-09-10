@@ -252,12 +252,12 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         }
 
         // Cooling the occupant
-        var cryoCellTemp = cryoCell.Comp.CryoCellTemperature;
+        var cryoCellTemp = Math.Max(Atmospherics.TCMB, cryoCell.Comp.CryoCellTemperature);
         _rmcTemperature.TryGetCurrentTemperature(occupant, out var curBodyTemp);
 
         if (Math.Abs(curBodyTemp - cryoCellTemp) >= 0.01)
         {
-            var change = 2 * (cryoCellTemp + curBodyTemp);
+            var change = Math.Abs(cryoCellTemp - curBodyTemp) * 0.8f;
             var temp = curBodyTemp > cryoCellTemp
                 ? Math.Max(cryoCellTemp, curBodyTemp - change)
                 : Math.Min(cryoCellTemp, curBodyTemp + change);
