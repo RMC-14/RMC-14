@@ -124,6 +124,7 @@ public sealed class SharedRMCPushupSystem : EntitySystem
 
         args.Handled = true;
         ent.Comp.Count++;
+        Dirty(ent);
 
         var cost = CalculateStaminaCost(ent.Owner);
         var minimum = stamina.Max * ent.Comp.MinimumStaminaFraction;

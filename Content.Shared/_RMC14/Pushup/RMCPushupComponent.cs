@@ -62,6 +62,7 @@ public sealed partial class RMCPushupComponent : Component
 
     public ushort? CurrentDoAfter;
 
+    [DataField, AutoNetworkedField]
     public int Count;
 }
 
