@@ -15,6 +15,8 @@ public sealed partial class RMCBatSystem : RMCAnimalSystem
     [Dependency] private readonly NPCSystem _npc = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
 
+    private readonly HashSet<Entity<MobStateComponent>> _nearbyMobs = new();
+
     public override void Initialize()
     {
         base.Initialize();
@@ -26,6 +28,9 @@ public sealed partial class RMCBatSystem : RMCAnimalSystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
+        if (!ShouldRunPeriodicUpdate())
+            return;
 
         var now = Timing.CurTime;
         var query = EntityQueryEnumerator<RMCBatHangingComponent>();

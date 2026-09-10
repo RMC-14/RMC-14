@@ -1,4 +1,3 @@
-using System.Linq;
 using Content.Shared._RMC14.Mobs.Animals;
 
 namespace Content.Server._RMC14.Mobs.Animals;
@@ -8,7 +7,9 @@ public sealed partial class RMCGiantLizardSystem
     private void AlertPack(EntityUid lizard, EntityUid target, RMCGiantLizardComponent comp)
     {
         var coords = Transform.GetMapCoordinates(lizard);
-        foreach (var ally in Lookup.GetEntitiesInRange<RMCGiantLizardComponent>(coords, comp.PackAlertRange))
+        _nearbyLizards.Clear();
+        Lookup.GetEntitiesInRange(coords, comp.PackAlertRange, _nearbyLizards);
+        foreach (var ally in _nearbyLizards)
         {
             if (ally.Owner == lizard || !MobState.IsAlive(ally.Owner))
                 continue;
@@ -41,13 +42,14 @@ public sealed partial class RMCGiantLizardSystem
 
     private bool ClearAggression(Entity<RMCGiantLizardComponent> ent)
     {
-        var hostiles = Faction.GetHostiles(ent.Owner).ToArray();
-        foreach (var hostile in hostiles)
+        _hostilesToRemove.Clear();
+        _hostilesToRemove.UnionWith(Faction.GetHostiles(ent.Owner));
+        foreach (var hostile in _hostilesToRemove)
         {
             Faction.DeAggroEntity(ent.Owner, hostile);
         }
 
         ent.Comp.LastAggroAt = TimeSpan.MinValue;
-        return hostiles.Length > 0;
+        return _hostilesToRemove.Count > 0;
     }
 }

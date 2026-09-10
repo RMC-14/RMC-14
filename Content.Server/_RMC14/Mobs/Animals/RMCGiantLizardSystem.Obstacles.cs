@@ -11,7 +11,9 @@ public sealed partial class RMCGiantLizardSystem
             return;
 
         var coords = Transform.GetMapCoordinates((ent.Owner, ent.Comp2));
-        foreach (var obstacle in Lookup.GetEntitiesInRange<DamageableComponent>(coords, 1.25f))
+        _nearbyDamageables.Clear();
+        Lookup.GetEntitiesInRange(coords, 1.25f, _nearbyDamageables);
+        foreach (var obstacle in _nearbyDamageables)
         {
             if (obstacle.Owner == ent.Owner ||
                 MobQuery.HasComp(obstacle.Owner) ||

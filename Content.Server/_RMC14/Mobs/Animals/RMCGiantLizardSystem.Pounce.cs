@@ -1,6 +1,5 @@
 using System.Numerics;
 using Content.Shared._RMC14.Mobs.Animals;
-using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Robust.Shared.Map;
 using Robust.Shared.Physics;
@@ -13,15 +12,8 @@ public sealed partial class RMCGiantLizardSystem
 {
     private void UpdatePounce(Entity<RMCGiantLizardComponent, TransformComponent> ent)
     {
-        var now = Timing.CurTime;
-        var mapCoords = Transform.GetMapCoordinates((ent.Owner, ent.Comp2));
-        foreach (var mob in Lookup.GetEntitiesInRange<MobStateComponent>(mapCoords, 0.9f))
-        {
-            if (TryApplyPounceHit((ent.Owner, ent.Comp1), mob.Owner))
-                return;
-        }
-
-        if (ent.Comp1.PounceEndAt <= now)
+        // Pounce impacts are handled by OnStartCollide. This update only handles a missed pounce timing out.
+        if (ent.Comp1.PounceEndAt <= Timing.CurTime)
             StopPounce((ent.Owner, ent.Comp1));
     }
 

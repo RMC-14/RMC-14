@@ -157,11 +157,28 @@ public sealed partial class NPCLeapSystem : EntitySystem
 
                 // Means the action was cancelled for some reason
                 if (doafter == after.NextId)
-                    comp.CurrentDoAfter = null;
-                else // Note instant doafter increment the counter but don't make a doafter so count has to be checked
                 {
-                    if (after.DoAfters.Count > 0)
-                        comp.CurrentDoAfter = after.DoAfters[doafter].Id;
+                    comp.CurrentDoAfter = null;
+                    comp.Status = LeapStatus.Unspecified;
+                }
+                else
+                {
+                    var currentDoAfter = new DoAfterId(uid, doafter);
+                    switch (_doafter.GetStatus(currentDoAfter, after))
+                    {
+                        case DoAfterStatus.Running:
+                            comp.CurrentDoAfter = currentDoAfter;
+                            break;
+                        case DoAfterStatus.Finished:
+                        case DoAfterStatus.Invalid: // Instant do-afters are not added to the tracked entries.
+                            comp.CurrentDoAfter = null;
+                            comp.Status = LeapStatus.Finished;
+                            break;
+                        default:
+                            comp.CurrentDoAfter = null;
+                            comp.Status = LeapStatus.Unspecified;
+                            break;
+                    }
                 }
             }
         }

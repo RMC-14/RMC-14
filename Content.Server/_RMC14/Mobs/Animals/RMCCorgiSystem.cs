@@ -28,6 +28,9 @@ public sealed partial class RMCCorgiSystem : RMCAnimalSystem
     {
         base.Update(frameTime);
 
+        if (!ShouldRunPeriodicUpdate())
+            return;
+
         var now = Timing.CurTime;
         UpdateCorgis(now);
         UpdateLisaCorgis(now);

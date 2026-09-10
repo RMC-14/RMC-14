@@ -11,35 +11,16 @@
     visuals:
       enum.RMCGiantLizardVisuals.Body:
         enum.RMCGiantLizardVisualLayers.Base:
-          Running: { state: running }
-          Sleeping: { state: sleeping }
-          KnockedDown: { state: knocked-down }
+          Running: { state: lizard }
+          Sleeping: { state: lizard }
+          KnockedDown: { state: lizard }
           Dead: { state: dead }
-      enum.RMCGiantLizardVisuals.Wounds:
-        enum.RMCGiantLizardVisualLayers.Wounds:
-          None: { visible: false }
-          Small: { state: wounds-small, visible: true }
-          Big: { state: wounds-big, visible: true }
-          SmallRest: { state: wounds-small-rest, visible: true }
-          BigRest: { state: wounds-big-rest, visible: true }
-          SmallStun: { state: wounds-small-stun, visible: true }
-          BigStun: { state: wounds-big-stun, visible: true }
-      enum.RMCGiantLizardVisuals.Tongue:
-        enum.RMCGiantLizardVisualLayers.Tongue:
-          True: { visible: true }
-          False: { visible: false }
   - type: Sprite
     drawdepth: Mobs
-    sprite: _RMC14/Mobs/Animals/giant_lizard.rsi
+    sprite: Mobs/Animals/lizard.rsi # Placeholder until original giant lizard sprites are available.
     layers:
     - map: ["enum.RMCGiantLizardVisualLayers.Base"]
-      state: running
-    - map: ["enum.RMCGiantLizardVisualLayers.Wounds"]
-      state: wounds-small
-      visible: false
-    - map: ["enum.RMCGiantLizardVisualLayers.Tongue"]
-      state: tongue
-      visible: false
+      state: lizard
   - type: Physics
   - type: Fixtures
     fixtures:

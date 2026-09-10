@@ -29,14 +29,21 @@ public sealed partial class RMCGiantLizardSystem
 
         if (ent.Comp1.SkirmishUntil <= Timing.CurTime ||
             ent.Comp1.SkirmishTarget is not { } target ||
-            !ValidLizardTarget(target) ||
-            !Transform.GetMoverCoordinates(ent.Owner).TryDistance(EntityManager, Transform.GetMoverCoordinates(target), out _))
+            !ValidLizardTarget(target))
         {
             StopSkirmish((ent.Owner, ent.Comp1));
             return false;
         }
 
-        TryMoveAwayFrom(ent.Owner, Transform.GetMoverCoordinates(target), ent.Comp1.SkirmishSpeed);
+        var targetCoordinates = Transform.GetMoverCoordinates(target);
+        if (!Transform.GetMoverCoordinates(ent.Owner).TryDistance(EntityManager, targetCoordinates, out var distance) ||
+            distance > ent.Comp1.SkirmishMaxRange)
+        {
+            StopSkirmish((ent.Owner, ent.Comp1));
+            return false;
+        }
+
+        TryMoveAwayFrom(ent.Owner, targetCoordinates, ent.Comp1.SkirmishSpeed);
         return true;
     }
 

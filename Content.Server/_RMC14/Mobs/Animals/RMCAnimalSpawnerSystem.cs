@@ -28,6 +28,9 @@ public sealed class RMCAnimalSpawnerSystem : RMCAnimalSystem
     {
         base.Update(frameTime);
 
+        if (!ShouldRunPeriodicUpdate())
+            return;
+
         var now = Timing.CurTime;
         var query = EntityQueryEnumerator<RMCAnimalSpawnerComponent>();
         while (query.MoveNext(out var uid, out var spawner))

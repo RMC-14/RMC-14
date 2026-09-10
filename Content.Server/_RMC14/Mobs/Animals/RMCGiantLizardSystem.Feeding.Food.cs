@@ -53,17 +53,6 @@ public sealed partial class RMCGiantLizardSystem
         if (!HasComp<FoodComponent>(food))
             return false;
 
-        if (Tags.HasAnyTag(food, "Meat"))
-            return true;
-
-        var proto = MetaData(food).EntityPrototype?.ID;
-        if (proto == null)
-            return false;
-
-        return proto.Contains("Meat", StringComparison.OrdinalIgnoreCase) ||
-               proto.Contains("MRE", StringComparison.OrdinalIgnoreCase) ||
-               proto.Contains("PreparedMeal", StringComparison.OrdinalIgnoreCase) ||
-               proto.Contains("Protein", StringComparison.OrdinalIgnoreCase) ||
-               proto.Contains("ResinFruit", StringComparison.OrdinalIgnoreCase);
+        return Tags.HasTag(food, MeatTag);
     }
 }

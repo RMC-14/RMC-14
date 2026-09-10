@@ -57,6 +57,15 @@ namespace Content.Server._RMC14.Mobs.Animals;
 
 public sealed partial class RMCGiantLizardSystem : RMCAnimalSystem
 {
+    private static readonly ProtoId<TagPrototype> MeatTag = "Meat";
+    private static readonly string[] FriendlyPetPopups =
+    [
+        "rmc-giant-lizard-pet-happy",
+        "rmc-giant-lizard-pet-nuzzle",
+        "rmc-giant-lizard-pet-lick",
+        "rmc-giant-lizard-pet-stare",
+    ];
+
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -68,6 +77,12 @@ public sealed partial class RMCGiantLizardSystem : RMCAnimalSystem
     [Dependency] private readonly StandingStateSystem _standing = default!;
 
     private readonly Dictionary<EntityUid, EntityUid> _lastFoodHolder = new();
+    private readonly HashSet<Entity<DamageableComponent>> _nearbyDamageables = new();
+    private readonly HashSet<Entity<FoodComponent>> _nearbyFood = new();
+    private readonly HashSet<Entity<MobStateComponent>> _nearbyMobs = new();
+    private readonly HashSet<Entity<RMCGiantLizardComponent>> _nearbyLizards = new();
+    private readonly HashSet<Entity<RMCGiantLizardComponent>> _foodSeekingLizards = new();
+    private readonly HashSet<EntityUid> _hostilesToRemove = new();
 
     public override void Initialize()
     {
@@ -88,6 +103,7 @@ public sealed partial class RMCGiantLizardSystem : RMCAnimalSystem
         SubscribeLocalEvent<RMCGiantLizardComponent, EmoteEvent>(OnEmote);
         SubscribeLocalEvent<FoodComponent, GotEquippedHandEvent>(OnFoodPickedUp);
         SubscribeLocalEvent<FoodComponent, GotUnequippedHandEvent>(OnFoodDropped);
+        SubscribeLocalEvent<FoodComponent, ComponentRemove>(OnFoodRemoved);
         SubscribeLocalEvent<FoodComponent, EntityTerminatingEvent>(OnFoodTerminating);
     }
 

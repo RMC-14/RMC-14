@@ -4,13 +4,7 @@ public sealed partial class RMCGiantLizardSystem
 {
     private bool WasRecentLizardTime(TimeSpan time, TimeSpan memory)
     {
-        if (time <= TimeSpan.Zero)
-            return false;
-
         var now = Timing.CurTime;
-        if (time >= now)
-            return true;
-
-        return now - time <= memory;
+        return time > TimeSpan.Zero && (time >= now || now - time <= memory);
     }
 }

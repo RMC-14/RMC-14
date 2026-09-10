@@ -28,6 +28,9 @@ public sealed partial class RMCRodentSystem : RMCAnimalSystem
     {
         base.Update(frameTime);
 
+        if (!ShouldRunPeriodicUpdate())
+            return;
+
         var now = Timing.CurTime;
         var query = EntityQueryEnumerator<RMCRodentBehaviorComponent>();
         while (query.MoveNext(out var uid, out var rodent))

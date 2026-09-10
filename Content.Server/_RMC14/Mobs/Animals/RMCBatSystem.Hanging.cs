@@ -17,7 +17,9 @@ public sealed partial class RMCBatSystem
             return false;
 
         var coords = Transform.GetMapCoordinates(ent.Owner);
-        foreach (var mob in Lookup.GetEntitiesInRange<MobStateComponent>(coords, ent.Comp.DisturbanceRange))
+        _nearbyMobs.Clear();
+        Lookup.GetEntitiesInRange(coords, ent.Comp.DisturbanceRange, _nearbyMobs);
+        foreach (var mob in _nearbyMobs)
         {
             if (mob.Owner == ent.Owner ||
                 HasComp<RMCBatHangingComponent>(mob.Owner) ||

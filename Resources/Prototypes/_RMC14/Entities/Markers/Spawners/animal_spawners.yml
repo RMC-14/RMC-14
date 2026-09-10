@@ -9,8 +9,8 @@
   - type: Sprite
     layers:
     - state: green
-    - sprite: _RMC14/Mobs/Animals/giant_lizard.rsi
-      state: running
+    - sprite: Mobs/Animals/lizard.rsi # Placeholder until original giant lizard sprites are available.
+      state: lizard
     - state: timed
   - type: RMCAnimalSpawner
     prototype: RMCMobGiantLizard

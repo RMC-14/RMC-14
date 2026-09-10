@@ -11,7 +11,9 @@ public sealed partial class RMCGiantLizardSystem
         EntityUid? bestFood = null;
         var bestDistance = float.MaxValue;
 
-        foreach (var food in Lookup.GetEntitiesInRange<FoodComponent>(mapCoords, ent.Comp1.FoodSearchRange))
+        _nearbyFood.Clear();
+        Lookup.GetEntitiesInRange(mapCoords, ent.Comp1.FoodSearchRange, _nearbyFood);
+        foreach (var food in _nearbyFood)
         {
             if (!IsAcceptedLizardFood(food.Owner) || !XformQuery.TryGetComponent(food.Owner, out var foodXform))
                 continue;

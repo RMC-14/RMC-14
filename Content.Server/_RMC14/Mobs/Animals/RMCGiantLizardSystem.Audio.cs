@@ -16,12 +16,6 @@ public sealed partial class RMCGiantLizardSystem
 
     private string PickFriendlyPetPopup()
     {
-        return Random.Pick(new[]
-        {
-            "rmc-giant-lizard-pet-happy",
-            "rmc-giant-lizard-pet-nuzzle",
-            "rmc-giant-lizard-pet-lick",
-            "rmc-giant-lizard-pet-stare",
-        });
+        return Random.Pick(FriendlyPetPopups);
     }
 }

@@ -14,6 +14,8 @@ public sealed partial class RMCCatHuntingSystem : RMCAnimalSystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
+    private readonly HashSet<Entity<RMCAnimalPreyComponent>> _nearbyPrey = new();
+
     public override void Initialize()
     {
         base.Initialize();
@@ -38,6 +40,9 @@ public sealed partial class RMCCatHuntingSystem : RMCAnimalSystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
+        if (!ShouldRunPeriodicUpdate())
+            return;
 
         var now = Timing.CurTime;
         var query = EntityQueryEnumerator<RMCCatHunterComponent, TransformComponent>();

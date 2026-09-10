@@ -20,6 +20,8 @@ namespace Content.Server._RMC14.Mobs.Animals;
 
 public abstract partial class RMCAnimalSystem : EntitySystem
 {
+    private static readonly TimeSpan PeriodicUpdateInterval = TimeSpan.FromSeconds(1);
+
     [Dependency] protected readonly SharedContainerSystem Container = default!;
     [Dependency] protected readonly DamageableSystem Damageable = default!;
     [Dependency] protected readonly EntityLookupSystem Lookup = default!;
@@ -44,6 +46,8 @@ public abstract partial class RMCAnimalSystem : EntitySystem
     protected EntityQuery<PhysicsComponent> PhysicsQuery;
     protected EntityQuery<TransformComponent> XformQuery;
 
+    private TimeSpan _nextPeriodicUpdate;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -59,4 +63,13 @@ public abstract partial class RMCAnimalSystem : EntitySystem
         XformQuery = GetEntityQuery<TransformComponent>();
     }
 
+    protected bool ShouldRunPeriodicUpdate()
+    {
+        var now = Timing.CurTime;
+        if (_nextPeriodicUpdate > now)
+            return false;
+
+        _nextPeriodicUpdate = now + PeriodicUpdateInterval;
+        return true;
+    }
 }

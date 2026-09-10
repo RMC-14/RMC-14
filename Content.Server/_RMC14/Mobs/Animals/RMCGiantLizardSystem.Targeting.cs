@@ -38,7 +38,9 @@ public sealed partial class RMCGiantLizardSystem
         EntityUid? warning = null;
         var warningDistance = float.MaxValue;
 
-        foreach (var target in Lookup.GetEntitiesInRange<MobStateComponent>(mapCoords, ent.Comp1.WarningRange))
+        _nearbyMobs.Clear();
+        Lookup.GetEntitiesInRange(mapCoords, ent.Comp1.WarningRange, _nearbyMobs);
+        foreach (var target in _nearbyMobs)
         {
             if (target.Owner == ent.Owner ||
                 !ValidLizardTarget(target.Owner) ||

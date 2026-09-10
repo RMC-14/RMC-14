@@ -24,6 +24,9 @@ public sealed partial class RMCSmallAnimalSystem : RMCAnimalSystem
     {
         base.Update(frameTime);
 
+        if (!ShouldRunPeriodicUpdate())
+            return;
+
         var now = Timing.CurTime;
         UpdateBunnies(now);
     }

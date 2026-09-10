@@ -12,7 +12,9 @@ public sealed partial class RMCCatHuntingSystem
         EntityUid? best = null;
         var bestDistance = float.MaxValue;
 
-        foreach (var prey in Lookup.GetEntitiesInRange<RMCAnimalPreyComponent>(mapCoords, ent.Comp1.SearchRange))
+        _nearbyPrey.Clear();
+        Lookup.GetEntitiesInRange(mapCoords, ent.Comp1.SearchRange, _nearbyPrey);
+        foreach (var prey in _nearbyPrey)
         {
             if (prey.Owner == ent.Owner || !ValidLivingMob(prey.Owner))
                 continue;
@@ -39,13 +41,17 @@ public sealed partial class RMCCatHuntingSystem
         Popup.PopupEntity(Loc.GetString(PickCatAttackPopup(), ("cat", cat), ("prey", prey)), cat);
         _audio.PlayPvs(hunter.HuntHitSound, cat);
 
-        var damage = ActorQuery.HasComp(prey)
+        var playerPrey = ActorQuery.HasComp(prey);
+        var damage = playerPrey
             ? hunter.PlayerPreyDamage
             : hunter.NpcPreyDamage;
 
         Damageable.TryChangeDamage(prey, damage, origin: cat, tool: cat);
-        Stun.TryKnockdown(prey, hunter.PlayerPreyKnockdown, true);
-        Stun.TrySlowdown(prey, hunter.PlayerPreySlowdown, true, 0.3f, 0.3f);
+        if (playerPrey)
+        {
+            Stun.TryKnockdown(prey, hunter.PlayerPreyKnockdown, true);
+            Stun.TrySlowdown(prey, hunter.PlayerPreySlowdown, true, 0.3f, 0.3f);
+        }
     }
 
     private void TryThreatenPrey(EntityUid cat, EntityUid prey, RMCCatHunterComponent hunter, float distance, TimeSpan now)

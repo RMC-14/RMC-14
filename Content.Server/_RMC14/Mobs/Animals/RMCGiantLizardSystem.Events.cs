@@ -211,7 +211,9 @@ public sealed partial class RMCGiantLizardSystem
             return;
 
         var holderCoords = Transform.GetMapCoordinates(args.User);
-        foreach (var lizard in Lookup.GetEntitiesInRange<RMCGiantLizardComponent>(holderCoords, 8f))
+        _foodSeekingLizards.Clear();
+        Lookup.GetEntitiesInRange(holderCoords, 8f, _foodSeekingLizards);
+        foreach (var lizard in _foodSeekingLizards)
         {
             if (lizard.Comp.FoodTarget != ent.Owner ||
                 ActorQuery.HasComp(lizard.Owner) ||
@@ -229,8 +231,25 @@ public sealed partial class RMCGiantLizardSystem
         _lastFoodHolder[ent.Owner] = args.User;
     }
 
+    private void OnFoodRemoved(Entity<FoodComponent> ent, ref ComponentRemove args)
+    {
+        ClearFoodTracking(ent.Owner);
+    }
+
     private void OnFoodTerminating(Entity<FoodComponent> ent, ref EntityTerminatingEvent args)
     {
-        _lastFoodHolder.Remove(ent.Owner);
+        ClearFoodTracking(ent.Owner);
+    }
+
+    private void ClearFoodTracking(EntityUid food)
+    {
+        _lastFoodHolder.Remove(food);
+
+        var query = EntityQueryEnumerator<RMCGiantLizardComponent>();
+        while (query.MoveNext(out var uid, out var lizard))
+        {
+            if (lizard.FoodTarget == food)
+                LoseFoodTarget((uid, lizard));
+        }
     }
 }

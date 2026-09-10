@@ -109,7 +109,9 @@ public sealed partial class RMCGiantLizardSystem
     private bool HasFriendlyMobOnTile(Entity<RMCGiantLizardComponent, TransformComponent> ent)
     {
         var coords = Transform.GetMapCoordinates((ent.Owner, ent.Comp2));
-        foreach (var mob in Lookup.GetEntitiesInRange<MobStateComponent>(coords, 0.45f))
+        _nearbyMobs.Clear();
+        Lookup.GetEntitiesInRange(coords, 0.45f, _nearbyMobs);
+        foreach (var mob in _nearbyMobs)
         {
             if (mob.Owner == ent.Owner ||
                 !MobState.IsAlive(mob.Owner, mob.Comp) ||

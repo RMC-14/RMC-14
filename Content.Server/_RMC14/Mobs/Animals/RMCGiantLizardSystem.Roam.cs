@@ -98,7 +98,9 @@ public sealed partial class RMCGiantLizardSystem
         var nearestDistance = float.MaxValue;
         var packCount = 0;
 
-        foreach (var lizard in Lookup.GetEntitiesInRange<RMCGiantLizardComponent>(current, ent.Comp1.RoamPackSearchRange))
+        _nearbyLizards.Clear();
+        Lookup.GetEntitiesInRange(current, ent.Comp1.RoamPackSearchRange, _nearbyLizards);
+        foreach (var lizard in _nearbyLizards)
         {
             if (lizard.Owner == ent.Owner ||
                 ActorQuery.HasComp(lizard.Owner) ||

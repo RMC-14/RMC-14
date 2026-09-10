@@ -88,6 +88,9 @@ public sealed partial class RMCGiantLizardComponent
     public float SkirmishSpeed = 4.5f;
 
     [DataField]
+    public float SkirmishMaxRange = 6f;
+
+    [DataField]
     public TimeSpan SkirmishDuration = TimeSpan.FromSeconds(2);
 
     [ViewVariables]

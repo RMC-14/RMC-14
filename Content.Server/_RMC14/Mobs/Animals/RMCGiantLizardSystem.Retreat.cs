@@ -133,7 +133,9 @@ public sealed partial class RMCGiantLizardSystem
         var coords = Transform.GetMapCoordinates(ent.Owner);
         var bestDistance = float.MaxValue;
 
-        foreach (var candidate in Lookup.GetEntitiesInRange<MobStateComponent>(coords, ent.Comp.RetreatReattemptRange))
+        _nearbyMobs.Clear();
+        Lookup.GetEntitiesInRange(coords, ent.Comp.RetreatReattemptRange, _nearbyMobs);
+        foreach (var candidate in _nearbyMobs)
         {
             if (candidate.Owner == ent.Owner ||
                 !ValidLizardTarget(candidate.Owner) ||
