@@ -26,42 +26,40 @@ rmc-announcement-planet-varadero = An automated distress signal has been receive
 
                                            No further information available at this time.
 
-rmc-announcement-planet-varadero-1 = Inbound UNMC forces, this is the New Varadero Garrison Acting Commander Lieutenant -wzzt-, do you read? Repeat, this is the New Varadero Garrison Acting Commander -bzzt-, do you read?
+    rmc-announcement-planet-varadero-1 = Pan-Pan. UNS Almayer, we are detecting you on approach. This is Lieutenant Colonel #%-#^-@%#, authorization code Lima Alfa Sierra Niner, broadcasting on all stations. Stand by for a situation report.
 
 
-                                             The base has been overrun by an infestation of xenonids, most of our forces have been killed in action. Me and what remains of the garrison are set up in entrenchments across the coast, on the other side of the collapsed tunnel.
+                                             The base has been overrun by xenonid lifeforms at this time. What’s left of our forces has retreated through the tunnel to New Varadero City and collapsed it behind us. If you’re here to render aid, your best course of action would be to cut the infestation off from the source and secure the base itself. We’ll focus on keeping the city secure.
 
 
-                                             Ain’t cut these things off, but we’re doing our best to keep the bugs from reaching New Varadero Actual. You lot need to get in there, and wipe out whatever the source of these damn bugs is and stat. Over.
+                                             Our dropships will be unable to take off and assist you due to the monsoon weather, and we’ve sealed the only land connection left to the island, so you’re on your own unless this weather clears up. Out.
 
-rmc-announcement-planet-varadero-2 = Almayer! You still read me? We’re trying to get through to you via any two-way communications we got, but there's some kinda radio interference on anything weaker then this emergency relay this far from the base's comms towers.
-
-
-                                             Regardless, local law enforcement is lending a hand here in coastal quarantine and preparing the city for the worst. Plan still stands, we’re gonna need you to deploy to the base if you haven't already and cut off this thing off from the source. Over.
-
-rmc-announcement-planet-varadero-3 = Almayer, you still there? The situation is worsening, they've overwhelmed our coastal defences near the tunnel.
+rmc-announcement-planet-varadero-2 = Almayer, do you read? Our two-way comms towers are too weak, the only thing with a transceiver strong enough to work through the weather is this relay station.
 
 
-                                             We’ve pulled back to New Varadero City limits, the civilians are taking up arms to defend their homes, but they're completely untrained. We’re being bombarded by acid, and the dockyards are under siege by those things, we’re losing ground here.
+                                             The local law enforcement is helping us establish a quarantine around the island. We’ll try to keep them busy until you are able to secure the base. Out.
+
+rmc-announcement-planet-varadero-3 = Almayer, heads up. Our forces are pulling back from the coast and setting up positions outside the suburbs, we have a new plan.
 
 
-                                             The plan still stands, we need you to wipe out the hive on that island, NOW. Over.
-
-rmc-announcement-planet-varadero-4 = Almayer! Status report, the eastern suburbs and dockyards have been fully overwhelmed! We're fighting block by block out here, I've barely got a visual from where I'm standing!
+                                             There's a choke point set up along the Haldin River Parkway. We're going to draw them into the funnel using our armored carriers and establish a kill zone, it should trap enough of them inside to give us both some breathing room.
 
 
-                                             I've ordered the last of my men to organize into a fighting force with the armed civilians and a handful of peacekeepers.
+                                             The weather's getting worse, so we might lose contact temporarily. We'll update you once it clears up. Out.
+
+rmc-announcement-planet-varadero-4 = Almayer, do you hear me? I repeat, do you hear me? The trap was unsuccessful, our position is untenable. We're being forced to withdraw deeper into the city.
 
 
-                                             I hope that you're close to decapitating that source, or there won't be anything left of this city. Over.
-
-rmc-announcement-planet-varadero-5 = Almayer, this is Private First Class Torres, the Lieutenant is gone. The city is almost entirely overran, a handful of us are held up in the Central Business District.
+                                             I have designated Saint Ferrier's Hospital as the official evacuation point. The city's defenses will be consolidated there, and peacekeepers are working to move as many civilians as possible underground.
 
 
-                                             As the acting Garrison Commander, I am officially requesting immediate aid. Please send anything you can, our sentries have ran dry and we’re almost out of ammo down here!
+                                             We have to abandon the relay station, but we're hoping to hear from you soon. Godspeed. Out.
 
-rmc-announcement-planet-varadero-6 = Private First Class Torres again- What little is left of us are held out in Saint Ferrer’s Hospital.
+rmc-announcement-planet-varadero-5 = This is Private First Class Torres reporting, the Lieutenant is KIA. The others are still at the evac site, but some of us managed to break out towards the relay station and reclaim it.
 
-                                             The lower floors are completely infested already, it's FUBAR. I've ordered via hospital PA system for whoever is left to retreat to the hospital landing pad on the roof. I’m cut off with a few others, so I ain't got a clear way to link up with them... Tell my mamma I loved her.
+                                             If the monsoon clears up, we need you to start landing dropships on the hospital's roof and getting people out of here. Everyone is holding out hope for your arrival.  Out.
 
-rmc-announcement-planet-varadero-7 = Th#s is Commision#%r #%#^-@#%##! Po#% k#% s^#& #%#sel%! I% #%e marine# th#t the Lieu#%^## menti##%d ar# readi#% th#s, every#%# is dea#@$--#%^-fa#le#^#-------
+rmc-announcement-planet-varadero-6 =  He--o, is any-ne st-ll th--e? It- T---es! I'm sti-- at t-e re--- st---on wi-h a f-w oth-r-, -ut we-- cut o--!
+
+                                             W- ca- st--l he-- shot- com---g fro- th- hosp---- w- ca-- h--d --ch lon----
+

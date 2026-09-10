@@ -384,16 +384,13 @@
       delay: 2700 # 45 minutes
     - text: rmc-announcement-planet-varadero-4
       announcement: "rmc-announcement-ares-varadero"
-      delay: 4200 # 70 minutes
+      delay: 4800 # 80 minutes
     - text: rmc-announcement-planet-varadero-5
       announcement: "rmc-announcement-ares-varadero"
-      delay: 6000 # 100 minutes
+      delay: 7200 # 120 minutes
     - text: rmc-announcement-planet-varadero-6
       announcement: "rmc-announcement-ares-varadero"
-      delay: 7200 # 120 minutes
-    - text: rmc-announcement-planet-varadero-7
-      announcement: "rmc-announcement-ares-varadero"
-      delay: 8400 # 140 minutes
+      delay: 9000 # 150 minutes
     #smallHostVariants:
       #CMMobSmallHostKobold
     nightmareScenarios: # 100% chance of regular survivors, reduce to 0.9 once CLF survs are in
