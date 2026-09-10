@@ -18,6 +18,19 @@
     - type: NpcFactionMember
       factions:
       - Civilian
+    - type: Language
+      spokenLanguages:
+      - English
+      - Russian
+      - Japanese
+      - Chinese
+      understoodLanguages:
+      - English
+      - Russian
+      - Japanese
+      - Chinese
+      currentLanguage: English
+      defaultLanguage: English
     - type: Skills
       skills:
         RMCSkillEndurance: 0

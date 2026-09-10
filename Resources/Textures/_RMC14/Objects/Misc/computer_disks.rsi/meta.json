@@ -1,0 +1,252 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/items/disk.dmi, https://github.com/cmss13-devs/cmss13/blob/8d3eabd2575fcb859ab4320a298cdbc185910f6f/icons/mob/humans/onmob/inhands/equipment/devices_lefthand.dmi, https://github.com/cmss13-devs/cmss13/blob/8d3eabd2575fcb859ab4320a298cdbc185910f6f/icons/mob/humans/onmob/inhands/equipment/devices_righthand.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "disk1"
+    },
+    {
+      "name": "disk1-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "disk1-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "disk2",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "disk2-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "disk2-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "disk3",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "disk3-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "disk3-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "disk4",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "disk4-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "disk4-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "disk5",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "disk5-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "disk5-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "disk6",
+      "delays": [
+        [
+          0.4,
+          0.4
+        ]
+      ]
+    },
+    {
+      "name": "disk6-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "disk6-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "disk7"
+    },
+    {
+      "name": "disk7-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "disk7-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "disk8",
+      "delays": [
+        [
+          0.6,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "disk8-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "disk8-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "disk9",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "disk9-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "disk9-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "disk10"
+    },
+    {
+      "name": "disk10-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "disk10-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "disk11",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "disk11-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "disk11-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "disk12",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "disk12-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "disk12-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "disk13",
+      "delays": [
+        [
+          0.2,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "disk13-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "disk13-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "disk14",
+      "delays": [
+        [
+          0.8,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "disk14-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "disk14-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "disk15",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "disk15-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "disk15-inhand-right",
+      "directions": 4
+    }
+  ]
+}

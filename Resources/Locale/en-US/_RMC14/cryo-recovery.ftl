@@ -1,0 +1,12 @@
+rmc-cryo-recovery-window-title = Hypersleep Recovery Console
+rmc-cryo-recovery-header = Stored Equipment
+rmc-cryo-recovery-summary = {$players} personnel / {$items} items
+rmc-cryo-recovery-search-placeholder = Search personnel, role, or item...
+rmc-cryo-recovery-no-items = No recoverable hypersleep equipment found.
+rmc-cryo-recovery-recover = Recover
+rmc-cryo-recovery-recover-all = Recover all
+rmc-cryo-recovery-item-count = {$count} items
+rmc-cryo-recovery-unknown-assignment = Unknown assignment
+rmc-cryo-recovery-location-slot = {$slot}
+rmc-cryo-recovery-location-hand = Hand: {$hand}
+rmc-cryo-recovery-location-attached-webbing = Attached webbing: {$location}

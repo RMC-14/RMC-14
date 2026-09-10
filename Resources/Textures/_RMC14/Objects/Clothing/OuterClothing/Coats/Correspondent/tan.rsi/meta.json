@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/b26246cf7710ac6f2c2e4eddf94a49eb47f40800/icons/obj/items/clothing/suits/jackets.dmi, https://github.com/cmss13-devs/cmss13/blob/b26246cf7710ac6f2c2e4eddf94a49eb47f40800/icons/mob/humans/onmob/clothing/suits/jackets.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "equipped-OUTERCLOTHING",
+      "directions": 4
+    }
+  ]
+}

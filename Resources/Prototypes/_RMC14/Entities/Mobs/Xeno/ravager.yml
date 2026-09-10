@@ -14,8 +14,6 @@
   - type: GuideHelp
     guides:
     - RMCGuideRoleRavager
-  - type: GhostRole
-    name: cm-job-name-xeno-ravager
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Ravager/ravager.rsi
     layers:
@@ -164,6 +162,8 @@
     leapDamage:
       groups:
         Brute: 45
+  - type: VehicleDamageMultiplier
+    multiplier: 2
   - type: XenoScissorCut
     damage:
       types:
@@ -183,6 +183,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Ravager/berserker_ravager.rsi
+  - type: XenoCappedPheromones
+    cappedPheromones:
+      Frenzy: 2.9
   - type: Xeno
     actionIds:
     - ActionXenoRest

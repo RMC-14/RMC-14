@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/structures/props/hybrisa/computers.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/structures/props/hybrisa/computers.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/structures/props/hybrisa/wall_egg.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/structures/machinery/status_display.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/structures/props/server_equipment.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -196,6 +196,15 @@
       ]
     },
     {
+      "name": "brokenmeter",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
       "name": "telescreen"
     },
     {
@@ -379,6 +388,89 @@
         [
           0.1,
           0.1
+        ]
+      ]
+    },
+    {
+      "name": "wallegg_off"
+    },
+    {
+      "name": "wallegg_on"
+    },
+    {
+      "name": "redalarm",
+      "delays": [
+        [
+         0.2,
+         0.2,
+         0.2,
+         0.2,
+         0.2,
+         0.2,
+         0.2,
+         0.2,
+         0.2,
+         0.2,
+         0.2,
+         0.2,
+         0.2,
+         0.2,
+         0.2,
+         0.2
+       ]
+      ]
+     },
+     {
+      "name": "messageserver_black",
+      "directions": 4
+     },
+     {
+      "name": "messageserver_brown",
+      "directions": 4
+     },
+     {
+      "name": "messageserver_white",
+      "directions": 4
+    },
+    {
+      "name": "entertainment",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0
         ]
       ]
     }

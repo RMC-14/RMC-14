@@ -206,6 +206,7 @@
 - type: entity
   parent: CMPelletShotgunBase
   id: RMCPelletShotgunL49B # RMC14 - separate from regular light breaching shells since the XM51 uses a GunDamageModifier to create its breaching effect and the L49 does not.
+  categories: [ HideSpawnMenu ]
   name: L49B pellets
   components:
   - type: Sprite

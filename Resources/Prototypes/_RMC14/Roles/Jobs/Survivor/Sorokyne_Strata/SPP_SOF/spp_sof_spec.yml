@@ -6,10 +6,24 @@
   ranks:
     RMCRankSPPSerzhant: []
   icon: "RMCJobIconSPPSpecialist"
-  spawnMenuRoleName: SPP SOF Specialist (Survivor)
+  spawnMenuRoleName: SPP SOF Specialist (Sorokyne Special Survivor)
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - English
+      - German
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - English
+      - German
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
+    - type: RMCAllowSuitStorage
     - type: RMCSurvivor
     - type: NpcFactionMember
       factions:
@@ -21,6 +35,7 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-soro-sof-spec
     - type: DemoSpecWhitelist
+    - type: QYJWhitelist
     - type: AssignSquad
       squad: SquadSPP
   hidden: true
@@ -35,8 +50,8 @@
     - CMSheetMetal20
     outerClothing:
     - RMCTacticalPrybar
-    - RMCMagazineRifleAK4047
-    - RMCMagazineRifleAK4047
+    - RMCMagazineRifleType77
+    - RMCMagazineRifleType77
     - RMCRadioHandheldColony
 
 - type: entity

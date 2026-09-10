@@ -12,19 +12,6 @@ public sealed class RMCFlammableSystem : SharedRMCFlammableSystem
     [Dependency] private readonly FlammableSystem _flammable = default!;
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<FlammableComponent, ShowFireAlertEvent>(OnShowFireAlert);
-    }
-
-    private void OnShowFireAlert(Entity<FlammableComponent> ent, ref ShowFireAlertEvent args)
-    {
-        if (ent.Comp.OnFire)
-            args.Show = true;
-    }
-
     public override bool Ignite(Entity<FlammableComponent?> flammable, int intensity, int duration, int? maxStacks, bool igniteDamage = true, DamageSpecifier? tileDamage = null)
     {
         base.Ignite(flammable, intensity, duration, maxStacks, igniteDamage, tileDamage);
@@ -85,7 +72,7 @@ public sealed class RMCFlammableSystem : SharedRMCFlammableSystem
 
     public override void DoStopDropRollAnimation(EntityUid uid)
     {
-        if (!_actionBlocker.CanInteract(uid, null))
+        if (!_actionBlocker.CanMove(uid))
             return;
 
         RaiseNetworkEvent(new RMCStopDropRollVisualsNetworkEvent(GetNetEntity(uid)), Filter.Pvs(uid)); // RMC14

@@ -241,7 +241,7 @@ public abstract partial class SharedParaDropSystem : EntitySystem
         if (dropTarget == null)
         {
             EntityCoordinates? randomCoordinates = null;
-            if (_crashLand.TryGetCrashLandLocation(out var location))
+            if (_crashLand.TryGetCrashLandLocation(false, out var location))
                 randomCoordinates = location;
 
             // Cancel the jump if there is no viable target

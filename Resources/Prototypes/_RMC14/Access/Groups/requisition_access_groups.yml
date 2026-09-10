@@ -12,6 +12,7 @@
   - CMAccessDelta
   - CMAccessMarinePrep
   - RMCAccessDatabase
+  - RMCAccessLogs
   - RMCAccessSeniorCommand
 
 - type: accessGroup

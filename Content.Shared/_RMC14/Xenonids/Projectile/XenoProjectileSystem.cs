@@ -26,6 +26,7 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Serialization.Manager.Exceptions;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -41,7 +42,7 @@ public sealed class XenoProjectileSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedProjectileSystem _projectile = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedRMCLagCompensationSystem _rmcLagCompensation = default!;
+    [Dependency] private readonly SharedRMCLagCompensationSystem _rmcLag = default!;
     [Dependency] private readonly CMPoweredLightSystem _rmcPoweredLight = default!;
     [Dependency] private readonly RMCPseudoRandomSystem _rmcPseudoRandom = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -53,6 +54,9 @@ public sealed class XenoProjectileSystem : EntitySystem
     private EntityQuery<PreventAttackLightOffComponent> _preventAttackLightOffQuery;
 
     private int _limitHitsId;
+    private bool _logPrediction = false;
+    private bool _predictingSpecificShooter = false;
+    private List<(EntityUid Shooter, GameTick PredictedHitTick, XenoProjectilePredictedHitEvent Message, EntitySessionEventArgs Args)> _predictedHitMessages = [];
 
     public override void Initialize()
     {
@@ -68,16 +72,19 @@ public sealed class XenoProjectileSystem : EntitySystem
         SubscribeLocalEvent<XenoProjectileShotComponent, ComponentRemove>(OnShotRemove);
         SubscribeLocalEvent<XenoProjectileShotComponent, EntityTerminatingEvent>(OnShotRemove);
 
-        SubscribeLocalEvent<XenoClientProjectileShotComponent, StartCollideEvent>(OnShotCollide);
+        SubscribeLocalEvent<XenoClientProjectileShotComponent, ProjectileHitEvent>(OnShotHit);
 
         SubscribeLocalEvent<XenoProjectileComponent, PreventCollideEvent>(OnPreventCollide);
         SubscribeLocalEvent<XenoProjectileComponent, ProjectileHitEvent>(OnProjectileHit);
         SubscribeLocalEvent<XenoProjectileComponent, CMClusterSpawnedEvent>(OnClusterSpawned);
+
+        UpdatesBefore.Add(typeof(SharedPhysicsSystem));
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
         _limitHitsId = 0;
+        _predictedHitMessages.Clear();
     }
 
     private void OnPredictedHit(XenoProjectilePredictedHitEvent msg, EntitySessionEventArgs args)
@@ -85,37 +92,170 @@ public sealed class XenoProjectileSystem : EntitySystem
         if (_net.IsClient || !_gunPrediction.GunPrediction)
             return;
 
+        if (msg.Tick > _timing.CurTick + 10)
+        {
+            // protection against naughty clients, or weird networking issues, or server is lagging bad.
+            Log.Warning($"Discarding extremely early predicted hit message from '{args.SenderSession} for tick {msg.Tick}. Current tick is {_timing.CurTick}.");
+            return;
+        }
+
         if (args.SenderSession.AttachedEntity is not { } ent)
             return;
 
-        if (GetEntity(msg.Target) is not { Valid: true } target)
-            return;
+        if (_logPrediction)
+            Log.Debug($"""
+                Received predicted hit:
+                  Session:  {args.SenderSession}
+                  Cur Tick: {_timing.CurTick}
+                  Target:   {msg.Target}
+                  Shot ID:  {msg.Id}
+                  Shot At:  {msg.ShotAtTick}
+                  Hit Tick: {msg.Tick}
+                  Substep:  {msg.Substep}
+                """);
 
-        if (!TryComp(ent, out XenoProjectileShooterComponent? shooter) ||
-            shooter.Shot.Count == 0)
+        _predictedHitMessages.Add((ent, msg.Tick, msg, args));
+    }
+
+    /// <summary>
+    /// Handles a predicted hit message. Returns true if the message has been handled,
+    /// or false if the message should be handled again later.
+    /// </summary>
+    /// <param name="msg"></param>
+    /// <param name="args"></param>
+    /// <returns></returns>
+    private bool HandlePredictedHit(XenoProjectilePredictedHitEvent msg, EntitySessionEventArgs args)
+    {
+        if (args.SenderSession.AttachedEntity is not { } ent
+            || GetEntity(msg.Target) is not { Valid: true } target
+            || !TryComp<XenoProjectileShooterComponent>(ent, out var shooter))
         {
-            return;
+            if (_logPrediction)
+                Log.Warning($"Predicted hit from '{args.SenderSession}' discarded due to invalid data.");
+            return true;
         }
 
-        if (!shooter.Shot.TryFirstOrNull(e => CompOrNull<XenoProjectileShotComponent>(e)?.Id == msg.Id, out var shot))
-            return;
+        var tick = msg.Tick;
+        var substep = msg.Substep;
+        var shotTick = msg.ShotAtTick;
 
-        if (TerminatingOrDeleted(shot))
-            return;
-
-        _rmcLagCompensation.SetLastRealTick(args.SenderSession.UserId, msg.LastRealTick);
-        var coordinates = _transform.ToMapCoordinates(_rmcLagCompensation.GetCoordinates(target, args.SenderSession));
-
-        if (!TryComp(shot, out ProjectileComponent? projectile) ||
-            !TryComp(shot, out PhysicsComponent? physics))
+        if (substep < 0 || substep > _rmcLag.GetSubsteps())
         {
-            return;
+            Log.Warning($"Predicted hit from '{args.SenderSession}' contained out-of-range substep {substep}. Sanitizing it.");
+            substep = Math.Clamp(substep, 0, _rmcLag.GetSubsteps());
         }
 
-        if (!_rmcLagCompensation.Collides(target, (shot.Value, physics), coordinates))
-            return;
+        if (tick > _timing.CurTick)
+        {
+            // This shouldn't happen, ProcessPredictedMessages should be delaying it.
+            DebugTools.Assert(!(tick > _timing.CurTick));
+            return false;
+        }
+        else if (tick <= _timing.CurTick - 2) // we allow processing a message up to one tick late
+        {
+            // This shouldn't happen, ProcessPredictedMessages should have discarded it.
+            DebugTools.Assert(!(tick <= _timing.CurTick - 2));
+            return true;
+        }
 
-        _projectile.ProjectileCollide((shot.Value, projectile, physics), target, true);
+        if (shooter.NextId <= msg.Id)
+        {
+            // The shooter hasn't shot our predicted shot yet.
+            // The message is either being processed too early, OR
+            // the server is shooting the shot later than expected, OR
+            // the server was unable to shoot the projectile as predicted.
+            if (_logPrediction)
+                Log.Debug($"Predicted hit from '{args.SenderSession}' for shot {msg.Id} at tick {tick}, but the latest shot was {shooter.NextId - 1} at tick {_timing.CurTick})");
+            return false;
+        }
+
+        if (shooter.Shot.Count == 0
+            || !shooter.Shot.TryFirstOrNull(e => CompOrNull<XenoProjectileShotComponent>(e)?.Id == msg.Id, out var shot)
+            || TerminatingOrDeleted(shot))
+        {
+            // The shooter shot our predicted shot, but we failed to find it. It has either hit something
+            // or its duration has expired.
+            if (_logPrediction)
+                Log.Debug($"Predicted hit from '{args.SenderSession}' could not find shot {msg.Id} after it was shot.");
+            return true;
+        }
+
+        if (!TryComp(shot, out XenoProjectileShotComponent? xenoShot)
+            || !TryComp(shot, out ProjectileComponent? projectile)
+            || !TryComp(shot, out PhysicsComponent? physics))
+        {
+            Log.Warning($"Predicted hit from '{args.SenderSession}' found a shot without a necessary component.");
+            return true;
+        }
+
+        if (projectile.ProjectileSpent)
+        {
+            if (_logPrediction)
+                Log.Debug($"Predicted hit from '{args.SenderSession}' shot {msg.Id} is spent and cannot hit anything anymore.");
+            return true;
+        }
+
+        // server shot later than predicted, adjust the shot forward to try and hit
+        if (xenoShot.ShotAtTick > msg.ShotAtTick)
+        {
+            if (_logPrediction)
+                Log.Debug($"Predicted hit from '{args.SenderSession}' predicted shot at {msg.ShotAtTick} but it was shot at {xenoShot.ShotAtTick}. Adjusting forward.");
+            substep += _rmcLag.GetSubsteps();
+        }
+
+        // predicted hit message processed late, adjust the shot backwards to try and hit
+        if (_timing.CurTick > msg.Tick)
+        {
+            if (_logPrediction)
+                Log.Debug($"Predicted hit from '{args.SenderSession}' on tick {msg.Tick} but it's currently {_timing.CurTick}. Adjusting backwards.");
+            substep -= _rmcLag.GetSubsteps();
+        }
+
+        if (substep > _rmcLag.GetSubsteps())
+        {
+            // We're trying to predict over a tick ahead. Delay the message if we can,
+            // but it will be discarded if it's too late.
+            if (_logPrediction)
+                Log.Debug($"Predicted hit from '{args.SenderSession} needs to be pushed forward by {substep} substeps, " +
+                    $"above the limit of {_rmcLag.GetSubsteps()}. Delaying processing.");
+
+            return false;
+        }
+
+        if (_logPrediction)
+            Log.Debug($"""
+                Predicted hit checks passed, will test collision. Details:
+                  Session Name:   {args.SenderSession}
+                  Last Real Tick: {msg.LastRealTick}
+                  Shot ID:        {msg.Id}
+                  During shoot?   {_predictingSpecificShooter}
+
+                  Cur Tick:       {_timing.CurTick}
+                  Pred Hit Tick:  {msg.Tick}
+
+                  Shot Tick:      {xenoShot.ShotAtTick}
+                  Pred Shot Tick: {msg.ShotAtTick}
+
+                  Pred Substep:   {msg.Substep}
+                  Adjust Substep: {substep}
+                """);
+
+        _rmcLag.SetLastRealTick(args.SenderSession.UserId, msg.LastRealTick);
+        var hitConfirmed = _rmcLag.Collides(target, (shot.Value, physics), args.SenderSession, substep);
+
+        if (hitConfirmed)
+        {
+            if (_logPrediction)
+                Log.Debug($"Predicted hit from '{args.SenderSession}' ++ CONFIRMED!! ++");
+
+            _projectile.ProjectileCollide((shot.Value, projectile, physics), target, true);
+        }
+        else if (_logPrediction)
+        {
+            Log.Warning($"Predicted hit from '{args.SenderSession}' -- denied --");
+        }
+
+        return true;
     }
 
     private void OnShooterRemove<T>(Entity<XenoProjectileShooterComponent> ent, ref T args)
@@ -144,7 +284,10 @@ public sealed class XenoProjectileSystem : EntitySystem
         }
     }
 
-    private void OnShotCollide(Entity<XenoClientProjectileShotComponent> ent, ref StartCollideEvent args)
+    // TODO RMC14 There is a bug with clients trying to predict StartCollideEvent on our version of RT.
+    // This should be fixed in the newest versions of RT (2026 or later), and then we can change this back
+    // to react to StartCollideEvent.
+    private void OnShotHit(Entity<XenoClientProjectileShotComponent> ent, ref ProjectileHitEvent args)
     {
         if (_net.IsServer || !IsClientSide(ent))
             return;
@@ -152,10 +295,46 @@ public sealed class XenoProjectileSystem : EntitySystem
         if (!TryComp(ent, out XenoProjectileShotComponent? shot))
             return;
 
+        // If a collision happens during a re-predicted frame, the projectile is actually at substep 0
+        // for the next frame. This is because on tick x, after the physics system runs, objects will
+        // actually be at their starting positions for tick x + 1. This includes our projectile.
+        // We don't have an up-to-date value for LatestPredictedTick because tick x + 1 hasn't run yet.
+        var tick = ent.Comp.LatestPredictedTick;
+        var substep = _rmcLag.GetClientSubstep();
+        if (!_timing.IsFirstTimePredicted)
+        {
+            tick += 1;
+            substep = 0;
+        }
+
+        if (_logPrediction)
+        {
+            TryComp(args.Target, out TransformComponent? targetTransform);
+            TryComp(ent, out TransformComponent? shotTransform);
+            Log.Debug($"""
+                SENDING PREDICTED PROJECTILE HIT!!
+                  Shot ID:        {shot.Id}
+                  Cur Tick:       {_timing.CurTick}
+                  LastRealTick:   {_rmcLag.GetLastRealTick(null)}
+                  Phys Substep:   {_rmcLag.GetCurrentSubstep()}
+                  In simulation?  {_timing.InSimulation}
+                  ApplyingState?  {_timing.ApplyingState}
+                  FirstTimePred?  {_timing.IsFirstTimePredicted}
+                  Shot At Tick:   {shot.ShotAtTick}
+                  Pred Hit Tick:  {tick}
+                  Substep:        {substep}
+                  Shot Coords:    {shotTransform?.Coordinates}
+                  Target Coords:  {targetTransform?.Coordinates}
+                """);
+        }
+
         var ev = new XenoProjectilePredictedHitEvent(
             shot.Id,
-            GetNetEntity(args.OtherEntity),
-            _rmcLagCompensation.GetLastRealTick(null)
+            GetNetEntity(args.Target),
+            _rmcLag.GetLastRealTick(null),
+            tick,
+            substep,
+            shot.ShotAtTick
         );
         RaiseNetworkEvent(ev);
     }
@@ -211,6 +390,42 @@ public sealed class XenoProjectileSystem : EntitySystem
         foreach (var spawned in args.Spawned)
         {
             _hive.SetHive(spawned, hive);
+        }
+    }
+
+    /// <summary>
+    /// Processes predicted hits that arrived too early.
+    /// </summary>
+    /// <param name="forShooter">Only process hits for a specific shooter</param>
+    private void ProcessPredictedMessages(EntityUid? forShooter = null)
+    {
+        if (_net.IsClient)
+            return;
+
+        for (var i = _predictedHitMessages.Count - 1; i >= 0; --i)
+        {
+            var item = _predictedHitMessages[i];
+            var lastIndex = _predictedHitMessages.Count - 1;
+            if (item.PredictedHitTick <= _timing.CurTick - 2) // messages two ticks in the past are considered expired
+            {
+                if (_logPrediction)
+                    Log.Warning("Removed expired prediction message: " +
+                        $"Shooter {item.Args.SenderSession}, Shot ID {item.Message.Id}, Tick {item.PredictedHitTick}, CurTick {_timing.CurTick}");
+                if (i != lastIndex)
+                    _predictedHitMessages[i] = _predictedHitMessages[lastIndex];
+                _predictedHitMessages.RemoveAt(lastIndex);
+            }
+            else if (item.PredictedHitTick <= _timing.CurTick) // process messages on their tick or up to one tick behind
+            {
+                if (forShooter != null && item.Shooter != forShooter)
+                    continue;
+
+                if (!HandlePredictedHit(item.Message, item.Args))
+                    continue; // wasn't handled yet, keep it around
+                if (i != lastIndex)
+                    _predictedHitMessages[i] = _predictedHitMessages[lastIndex];
+                _predictedHitMessages.RemoveAt(lastIndex);
+            }
         }
     }
 
@@ -318,17 +533,47 @@ public sealed class XenoProjectileSystem : EntitySystem
                 shot.Id = shooter.NextId++;
                 shot.Shooter = shooterPlayer;
                 shot.ShooterEnt = xeno;
+                shot.ShotAtTick = _timing.CurTick;
                 Dirty(projectile, shot);
             }
 
             if (_net.IsServer)
                 continue;
 
-            EnsureComp<XenoClientProjectileShotComponent>(projectile);
+            var clientShot = EnsureComp<XenoClientProjectileShotComponent>(projectile);
+            clientShot.LatestPredictedTick = _timing.CurTick;
             _physics.UpdateIsPredicted(projectile);
         }
 
         RaiseLocalEvent(xeno, ammoShotEvent);
+
+        // Client may have already predicted hits for this projectile, check before we test collisions.
+        if (_net.IsServer && predicted)
+        {
+            _predictingSpecificShooter = true;
+            ProcessPredictedMessages(xeno);
+            _predictingSpecificShooter = false;
+        }
+
         return true;
+    }
+
+    public override void Update(float frameTime)
+    {
+        if (_net.IsClient)
+        {
+            if (!_timing.IsFirstTimePredicted)
+                return;
+
+            var shotQuery = EntityQueryEnumerator<XenoClientProjectileShotComponent>();
+            while (shotQuery.MoveNext(out var uid, out var comp))
+            {
+                comp.LatestPredictedTick = _timing.CurTick;
+            }
+        }
+        else // server
+        {
+            ProcessPredictedMessages();
+        }
     }
 }

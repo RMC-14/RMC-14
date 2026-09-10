@@ -110,3 +110,16 @@
         amount: 7
   - type: Sprite
     state: beaker
+
+- type: entity
+  name: box of vials
+  parent: RMCBoxCardboard
+  id: RMCBoxVialCardboard
+  description: It's just an ordinary box.
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCVial
+        amount: 7
+  - type: Sprite
+    state: vial

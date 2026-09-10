@@ -53,6 +53,7 @@
     collection: FootstepAsteroid
   rmcTerrainLayerSet: StrataGrass
   rmcTerrainLayer: 0
+  isSubfloor: false
 
 - type: tile
   parent: CMPlanetMattedGrass
@@ -88,11 +89,13 @@
     collection: FootstepAsteroid
   rmcTerrainLayerSet: StrataGrass
   rmcTerrainLayer: 0
+  isSubfloor: false
 
 - type: tile
   parent: CMPlanetMattedGrass3
   id: CMPlanetMattedGrass4
   sprite: /Textures/_RMC14/Tiles/planet/auto_strata_grass/grass_mud_alt.png
+  isSubfloor: false
 
 # Tyrargo uses the same layered grass behavior as Strata in CMSS13.
 - type: tile

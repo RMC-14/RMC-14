@@ -24,6 +24,18 @@
     },
     {
       "name": "oxycodone_packet"
+    },
+    {
+      "name": "pill_packet_1"
+    },
+    {
+      "name": "pill_packet_2"
+    },
+    {
+      "name": "pill_packet_3"
+    },
+    {
+      "name": "pill_packet_4"
     }
   ]
 }

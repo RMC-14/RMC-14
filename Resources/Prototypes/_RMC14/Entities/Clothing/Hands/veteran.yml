@@ -76,6 +76,18 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/gauntlets.rsi
 
+# PPO
+- type: entity
+  parent: RMCHandsVeteran
+  id: RMCHandsVeteranExecutiveBodyguard
+  name: executive bodyguard gloves
+  description: Standard issue reinforced fiber gloves manufactured by Weston-Yamada for the Security Division. They are insulated against electrical shock.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/ppo.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/ppo.rsi
+
 # Royal Marine
 - type: entity
   parent: RMCHandsVeteran

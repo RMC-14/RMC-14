@@ -63,6 +63,7 @@
 
 - type: entity
   id: Ointment10Lingering
+  categories: [ HideSpawnMenu ] # RMC 14
   parent: Ointment
   suffix: 10, Lingering
   components:
@@ -121,6 +122,7 @@
 - type: entity
   parent: RegenerativeMesh
   id: RegenerativeMeshLingering0
+  categories: [ HideSpawnMenu ] # RMC 14
   suffix: 0, Lingering
   components:
   - type: Stack
@@ -174,6 +176,7 @@
 
 - type: entity
   id: Brutepack10Lingering
+  categories: [ HideSpawnMenu ] # RMC 14
   parent: Brutepack
   suffix: 10, Lingering
   components:
@@ -231,6 +234,7 @@
 - type: entity
   parent: MedicatedSuture
   id: MedicatedSutureLingering0
+  categories: [ HideSpawnMenu ] # RMC 14
   suffix: 0, Lingering
   components:
   - type: Stack
@@ -286,6 +290,7 @@
 - type: entity
   parent: Bloodpack
   id: Bloodpack10Lingering
+  categories: [ HideSpawnMenu ] # RMC 14
   suffix: 10, Lingering
   components:
   - type: Stack
@@ -377,6 +382,7 @@
 
 - type: entity
   id: Gauze10Lingering
+  categories: [ HideSpawnMenu ] # RMC 14
   parent: Gauze
   suffix: 10, Lingering
   components:

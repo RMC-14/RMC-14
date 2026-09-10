@@ -2,6 +2,7 @@
   parent: CMJobBase
   id: CMProvostResponder
   name: rmc-job-name-provost-responder
+  spawnMenuRoleName: Provost Communications Officer (Fax Responder)
   description: rmc-job-description-provost-responder
   playTimeTracker: CMJobProvostResponder
   ranks:
@@ -46,7 +47,7 @@
     shoes: CMBootsBlackFilled
     id: RMCIDCardProvostResponder
     belt: CMClipboard
-    back: CMSatchelSecurityFilledFaxResponder
+    back: CMSatchelSecurityFilledFaxResponderProvost
     pocket1: RMCPouchDocument
     pocket2: RMCPouchGeneralLarge
   inhand:
