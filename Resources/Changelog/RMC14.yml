@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: keegaroo65
-  changes:
-  - message: Fixed lack of hive core destroyed announcement from weedkiller
-    type: Fix
-  id: 3137
-  time: '2026-04-22T03:53:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9451
 - author: TadJohnson00
   changes:
   - message: '[PVE] [RCM] added the L49 assault shotgun, available for use by Assault
@@ -4470,5 +4463,13 @@
   id: 3636
   time: '2026-09-09T19:01:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10385
+- author: JustMyselfUwU
+  changes:
+  - message: Fixed a microscopic typo in the text that is displayed when hitting barbed
+      barricades
+    type: Fix
+  id: 3637
+  time: '2026-09-10T15:00:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10839
 Name: RMC14
 Order: -1
