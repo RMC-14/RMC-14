@@ -115,3 +115,6 @@
         points: 15
       - id: CMEncryptionKeyColony
         points: 20
+  - type: GuideHelp
+    guides:
+    - RMCGuideCorporateLiaison

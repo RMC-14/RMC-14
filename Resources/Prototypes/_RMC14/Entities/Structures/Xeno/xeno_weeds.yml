@@ -125,6 +125,7 @@
         damage:
           types:
             Heat: 4
+  - type: XenoChargeDontHit
 #  - type: Physics
 #    bodyType: Static
 #  - type: FootstepModifier
@@ -404,6 +405,7 @@
   - type: RMCNightVisionVisible
     priority: -1
     transparency: 0.2
+  - type: XenoChargeDontHit
 
 # Gardener's weeds
 - type: entity # TODO RMC14 sound
@@ -465,7 +467,7 @@
   - type: Tag
     tags:
     - XenoWeedNode
-    
+
 
 - type: entity
   parent: XenoHardyWeeds

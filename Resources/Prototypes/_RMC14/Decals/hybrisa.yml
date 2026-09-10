@@ -883,3 +883,12 @@
   sprite:
     sprite: _RMC14/Decals/hybrisa.rsi
     state: checkpoint_decal2
+
+# Gold line
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaCasinoGoldline
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: goldline

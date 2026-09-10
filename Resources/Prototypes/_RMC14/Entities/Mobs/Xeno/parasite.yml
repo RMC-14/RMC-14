@@ -19,6 +19,11 @@
       settings: parasiteTimeRequirement
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Parasite/parasite.rsi
+  - type: FiremanCarriable
+    canThrow: true
+    carrierWhitelist:
+      components:
+      - Synth
   - type: MobState
     allowedStates:
     - Alive
@@ -143,9 +148,12 @@
     ventCrawlIcon: parasite
   - type: Unshieldable
   - type: ExcludedFromKingVote
+  - type: MindTakeoverBehavior
+    ejectFromLarvaQueues: false
   - type: RemoveComponents
     components:
     - type: ComplexInteraction
+    - type: CanBeLarvaQueued
 
 - type: entity
   parent: CMXenoParasiteBase

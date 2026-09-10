@@ -15,6 +15,17 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - English
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - English
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
     - type: RMCTrackable
     - type: NpcFactionMember
       factions:
@@ -84,7 +95,7 @@
   parent: CMJobIconBase
   id: RMCJobIconSPPKommissar
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/SPP/kommissar.rsi
     state: spp_kommissar
 
 #Above is base Kommissar, paygrade p2.
@@ -106,6 +117,17 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - English
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - English
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
     - type: RMCTrackable
     - type: NpcFactionMember
       factions:
@@ -155,7 +177,7 @@
   parent: CMJobIconBase
   id: RMCJobIconSPPBattalionKommissar
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/SPP/kommissar.rsi
     state: spp_battkommissar
 
 #Above is Battalion Kommissar, paygrade p3.
@@ -177,6 +199,17 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - English
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - English
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
     - type: RMCTrackable
     - type: NpcFactionMember
       factions:
@@ -226,7 +259,7 @@
   parent: CMJobIconBase
   id: RMCJobIconSPPSrBattalionKommissar
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/SPP/kommissar.rsi
     state: spp_srbattkommissar
 
 #Above is Sr Battalion Kommissar, paygrade 4.
@@ -248,6 +281,17 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - English
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - English
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
     - type: RMCTrackable
     - type: NpcFactionMember
       factions:
@@ -297,7 +341,7 @@
   parent: CMJobIconBase
   id: RMCJobIconSPPRegimentalKommissar
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/SPP/kommissar.rsi
     state: spp_regkommissar
 
 #Above is Regiment Kommissar, paygrade 5.
@@ -319,6 +363,17 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - English
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - English
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
     - type: RMCTrackable
     - type: NpcFactionMember
       factions:
@@ -368,7 +423,7 @@
   parent: CMJobIconBase
   id: RMCJobIconSPPBrigadeKommissar
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/SPP/kommissar.rsi
     state: spp_brigkommissar
 
 #above brigade kommissar, paygrade 6.
@@ -390,6 +445,17 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - English
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - English
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
     - type: RMCTrackable
     - type: NpcFactionMember
       factions:
@@ -435,7 +501,7 @@
   parent: CMJobIconBase
   id: RMCJobIconSPPDivisionKommissar
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/SPP/kommissar.rsi
     state: spp_divkommissar
 
 #Above is the P7 Kommissar. PLEASE only use this for events or admin shit, thanks.

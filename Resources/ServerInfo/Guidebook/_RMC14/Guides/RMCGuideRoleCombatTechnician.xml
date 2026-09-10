@@ -118,11 +118,13 @@
   - [bold]Metal Folding Barricade[/bold]: A metal barricade that can be folded down to allow passage. Is extremely fragile, so do not rely on it to provide much safety. Requires 6 metal.
   - [bold]Plasteel Barricade[/bold]: Much more durable but expensive version of the metal barricade. Requires 6 Plasteel.
   - [bold]Plasteel Folding Barricade[/bold]: This folding barricade is more durable than its metal counterparts, and as such is recommended for making doorways in sturdy fortifications. Requires 8 plasteel.
+  - [bold]MB-6 Folding Barricade[/bold]: A portable composite barricade issued in stacks of three from squad utilities or Requisitions. Use it in-hand to deploy it in the direction you are facing. Drag the deployed barricade onto yourself to fold it back up, or use a crowbar if you are trained in engineering. It can be carried on your back or suit storage, but it cannot be wired or upgraded.
 
   <Box>
     <GuideEntityEmbed Entity="CMBarricadeMetalDoor"/>
     <GuideEntityEmbed Entity="RMCBarricadePlasteel"/>
     <GuideEntityEmbed Entity="CMBarricadePlasteelDoor"/>
+    <GuideEntityEmbed Entity="CMFoldingBarricadesMB6x3"/>
   </Box>
 
   The cheap alternative to metal barricades are [bold]sandbag barricades[/bold]. These can be deployed faster than a barricade and do not need specialised training to construct, but the bags need to be filled using an entrenching tool beforehand. Sandbags also have limited repair options, so they are only reliable for so long.
@@ -131,7 +133,7 @@
     <GuideEntityEmbed Entity="CMBarricadeSandbag"/>
   </Box>
 
-  Once a Barricade is built, it isn't finished until you lace it with barbed wire, which you can craft for 1 metal per barricade. A Barbed barricade will harm anything that strikes it, as well as completely prevent anything from vaulting over it. [bold]Every Barricade should have some barbed wire[/bold].
+  Once a Barricade is built, it isn't finished until you lace it with barbed wire, which you can craft for 1 metal per barricade. A Barbed barricade will harm anything that strikes it, as well as completely prevent anything from vaulting over it. [bold]Every Barricade that can be wired should have some barbed wire[/bold]. Portable MB-6 barricades are the exception: they are meant to be folded and moved, so they cannot take wire or permanent upgrades.
 
   <Box>
     <GuideEntityEmbed Entity="BarbedWire1"/>

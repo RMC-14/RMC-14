@@ -11,6 +11,17 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      - Russian
+      understoodLanguages:
+      - Japanese
+      - English
+      - Russian
+      currentLanguage: English
+      defaultLanguage: English
     - type: Skills
       preset: RMCSkillPresetSurvivorWeYaManager
     - type: EquipSurvivorPreset
@@ -50,4 +61,5 @@
 - type: entity
   parent: RMCSurvivorPresetCorporate
   id: RMCGearSurvivorPresetLV624CorporateDomeCL
+  categories: [ HideSpawnMenu ]
   name: lv624 colonist preset

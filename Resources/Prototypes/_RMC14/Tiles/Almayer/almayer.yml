@@ -43,6 +43,11 @@
 
 - type: tile
   parent: CMFloorSteel
+  id: RMCFloorPlatingAlt
+  sprite: /Textures/_RMC14/Tiles/almayer/plating_alt.png
+
+- type: tile
+  parent: CMFloorSteel
   id: RMCFloorUnderplatingNoBuild
   baseTurf: ""
   deconstructTools: [ ]

@@ -577,6 +577,29 @@
     - RMCPatchUNMC
     - RMCPatchFORECON
 
+# Tyrargo
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitMarineTyrargo
+  name: UNMC uniform
+  description: Standard-issue Marine uniform. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/tyrargo_uniform.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchUNMC
+
+- type: entity
+  parent: RMCJumpsuitMarineTyrargo
+  id: RMCJumpsuitMarineTyrargoWebbing
+  suffix: Webbing
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingPouchForecon
+
 # High Command
 
 # General

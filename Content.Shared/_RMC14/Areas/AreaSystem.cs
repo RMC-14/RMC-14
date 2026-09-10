@@ -128,6 +128,16 @@ public sealed class AreaSystem : EntitySystem
         EnsureAreaEntityExists(areaGrid, area);
     }
 
+    public bool SetAlwaysPowered(Entity<AreaComponent> area, bool alwaysPowered)
+    {
+        if (area.Comp.AlwaysPowered == alwaysPowered)
+            return false;
+
+        area.Comp.AlwaysPowered = alwaysPowered;
+        Dirty(area);
+        return true;
+    }
+
     public bool TryGetArea(
         Entity<MapGridComponent, AreaGridComponent?> grid,
         Vector2i indices,

@@ -49,7 +49,7 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<VentEntranceComponent, ExaminedEvent>(OnVentEntranceExamine);
-        SubscribeLocalEvent<VentEntranceComponent, InteractHandEvent>(OnVentEntranceInteract);
+        SubscribeLocalEvent<VentEntranceComponent, ActivateInWorldEvent>(OnVentEntranceInteract);
         SubscribeLocalEvent<VentEntranceComponent, VentEnterDoafterEvent>(OnVentEnterDoafter);
 
         SubscribeLocalEvent<VentExitComponent, VentExitDoafterEvent>(OnVentExitDoafter);
@@ -161,7 +161,7 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
         return true;
     }
 
-    private void OnVentEntranceInteract(Entity<VentEntranceComponent> vent, ref InteractHandEvent args)
+    private void OnVentEntranceInteract(Entity<VentEntranceComponent> vent, ref ActivateInWorldEvent args)
     {
         if (args.Handled)
             return;

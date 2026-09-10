@@ -282,7 +282,7 @@
   parent: RMCMobRat
   id: RMCMobRatMilky
   name: Milky
-  description: An escaped test rat from the Weyland-Yutani Research Facility. Hope it doesn't have some sort of genetically engineered disease or something...
+  description: An escaped test rat from the Weston-Yamada Research Facility. Hope it doesn't have some sort of genetically engineered disease or something...
   suffix: RMC
   components:
   - type: Grammar
@@ -297,6 +297,18 @@
   parent: RMCMobRatMilky
   id: CMMobRatWhiteMilky
   suffix: RMC
+
+- type: entity
+  parent: RMCMobRat
+  id: RMCMobRatMilkyHybrisa
+  name: Milky
+  description: An escaped test rat from the Weston-Yamada Research Facility. Hope it doesn't have some sort of genetically engineered disease or something...
+
+- type: entity
+  parent: RMCMobRatBrown
+  id: RMCMobRatTimmyHybrisa
+  name: Old Timmy
+  description: An ancient looking rat from the old days of the colony.
 
 #-- Pets --
 - type: entity
@@ -621,7 +633,7 @@
   parent: CMMobCatBlack
   id: RMCMobBernard
   name: Bernard
-  description: His fur has the look and feel of velvet, and his tail quivers occasionally.
+  description: Also known as Bernie. Fond of potted plants and Space Carp flavored treats.
   suffix: RMC
   components:
   - type: Grammar
@@ -669,6 +681,17 @@
   - type: Grammar
     attributes:
       gender: neuter
+
+- type: entity
+  parent: CMMobCatBlack
+  id: RMCMobButtons
+  name: Buttons
+  description: It's a cat, now in black!
+  suffix: RMC
+  components:
+  - type: WarpPoint
+    follow: true
+    location: Buttons
 
 # Spawners
 - type: entity
@@ -768,6 +791,24 @@
   - type: ConditionalSpawner
     prototypes:
     - RMCMobRatMilky
+
+- type: entity
+  parent: RMCSpawnRatWhite
+  id: RMCSpawnRatWhiteMilkyHybrisa
+  suffix: Milky
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobRatMilkyHybrisa
+
+- type: entity
+  parent: RMCSpawnRatBrown
+  id: RMCSpawnRatBrownTimmyHybrisa
+  suffix: Old Timmy
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobRatTimmyHybrisa
 
 - type: entity
   parent: MarkerBase
@@ -888,6 +929,21 @@
   - type: ConditionalSpawner
     prototypes:
     - CMMobCatKitten
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnMobButtons
+  name: Buttons Spawner
+  suffix: RMC
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: cat
+      sprite: Mobs/Pets/cat.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobButtons
 
 - type: entity
   parent: SpawnMobMouse

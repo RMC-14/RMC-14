@@ -71,7 +71,7 @@ public sealed partial class MaterialDisplay : PanelContainer
         if (!_canEject)
             return;
 
-        int[] sheetsToEjectArray = { 1, 5, 10 };
+        int[] sheetsToEjectArray = { 1, 5, 10, 25, 50 }; //RMC - Added 25 and 50 options
 
         for (var i = 0; i < sheetsToEjectArray.Length; i++)
         {

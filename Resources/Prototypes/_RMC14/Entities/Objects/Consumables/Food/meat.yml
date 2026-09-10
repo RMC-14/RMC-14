@@ -1,8 +1,8 @@
-﻿- type: entity
+- type: entity
   parent: CMFoodBase
   id: RMCFoodMeatFish
-  name: raw fish fillet
-  description: Some sort of fish, probably dredged from some ocean somewhere, or grown in a vat.
+  name: fish meat
+  description: Meat from a fish.
   components:
   - type: FlavorProfile
     flavors:
@@ -34,6 +34,86 @@
     solution: food
   - type: DrawableSolution
     solution: food
+
+- type: entity
+  parent: RMCFoodMeatFish
+  id: RMCFoodMeatFishCrab
+  name: crab meat
+  description: Delicious crab meat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Fishing/Food/fish.rsi
+    state: crab_meat
+
+- type: entity
+  parent: RMCFoodMeatFish
+  id: RMCFoodMeatFishCrabShell
+  name: crab meat
+  description: Delicious crab meat still attached to bits of shell.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Fishing/Food/fish.rsi
+    state: crab_meat_2
+
+- type: entity
+  parent: RMCFoodMeatFish
+  id: RMCFoodMeatFishSquid
+  name: squid meat
+  description: Mmm, calamari.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Fishing/Food/fish.rsi
+    state: squid_meat
+
+- type: entity
+  parent: RMCFoodMeatFish
+  id: RMCFoodMeatFishSockSquid
+  name: sock squid meat
+  description: Pink squishy meat from a squid-like creature.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Fishing/Food/fish.rsi
+    state: squid_meat_2
+
+- type: entity
+  parent: RMCFoodMeatFish
+  id: RMCFoodMeatFishBass
+  name: bass meat
+  description: Sizeable hunks of cooking fish.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Fishing/Food/fish.rsi
+    state: bass_meat
+
+- type: entity
+  parent: RMCFoodMeatFish
+  id: RMCFoodMeatFishBluegill
+  name: bluegill meat
+  description: Small strips of pan frying meat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Fishing/Food/fish.rsi
+    state: bluegill_meat
+
+- type: entity
+  parent: RMCFoodMeatFish
+  id: RMCFoodMeatFishSalmon
+  name: salmon meat
+  description: Considered a fancy cut of fish.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Fishing/Food/fish.rsi
+    state: salmon_meat
+
+- type: entity
+  parent: RMCFoodMeatFish
+  id: RMCFoodMeatFishWhitePerch
+  name: white perch meat
+  description: Meat of an invasive fish, a little oily.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Fishing/Food/fish.rsi
+    state: white_perch_meat
 
 - type: entity
   parent: CMFoodBase
@@ -90,7 +170,7 @@
   - type: Food
     transferAmount: 5
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Food/misc.rsi
+    sprite: Objects/Consumable/Food/meals.rsi
     state: fishandchips
   - type: SolutionContainerManager
     solutions:
@@ -103,13 +183,118 @@
           Quantity: 5
   - type: Item
     size: Small
-    sprite: _RMC14/Objects/Consumable/Food/misc.rsi
+    sprite: Objects/Consumable/Food/meals.rsi
   - type: Extractable
     grindableSolutionName: food
   - type: InjectableSolution
     solution: food
   - type: DrawableSolution
     solution: food
+
+- type: entity
+  parent: CMFoodBase
+  id: RMCFoodFishFingers
+  name: fish fingers
+  description: A finger of fish.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - fishy
+  - type: Food
+    transferAmount: 3
+  - type: Sprite
+    sprite: _RMC14/Objects/Fishing/Food/fish.rsi
+    state: fishfingers
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Fishing/Food/fish.rsi
+  - type: Extractable
+    grindableSolutionName: food
+  - type: InjectableSolution
+    solution: food
+  - type: DrawableSolution
+    solution: food
+
+- type: entity
+  parent: CMFoodBase
+  id: RMCFoodCubanCarp
+  name: Cuban carp
+  description: A grifftastic sandwich that burns your tongue and then leaves it numb.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - fishy
+    - spicy
+  - type: Food
+    transferAmount: 3
+  - type: Sprite
+    sprite: Objects/Consumable/Food/meals.rsi
+    state: cubancarp
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 6
+        - ReagentId: Hotsauce
+          Quantity: 3
+  - type: Item
+    size: Small
+    sprite: Objects/Consumable/Food/meals.rsi
+  - type: Extractable
+    grindableSolutionName: food
+  - type: InjectableSolution
+    solution: food
+  - type: DrawableSolution
+    solution: food
+
+- type: entity
+  parent: CMFoodBase
+  id: RMCFoodFishSnacks
+  name: fish snacks
+  description: A small serving of preserved fish.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - fishy
+  - type: Food
+    transferAmount: 2
+  - type: Sprite
+    sprite: _RMC14/Objects/Fishing/Food/fish.rsi
+    state: fish_snacks_meat
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 2
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Fishing/Food/fish.rsi
+  - type: Extractable
+    grindableSolutionName: food
+  - type: InjectableSolution
+    solution: food
+  - type: DrawableSolution
+    solution: food
+
+- type: entity
+  parent: RMCFoodFishSnacks
+  id: RMCFoodLegacyBay
+  name: legacy bay fish snack
+  description: A preserved fish snack from an older seafood label.
+  components:
+  - type: Sprite
+    state: legacy_bay
 
 - type: entity
   parent: CMFoodBase

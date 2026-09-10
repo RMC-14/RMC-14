@@ -531,6 +531,12 @@
         },
         {
             "name": "dislocate"
+        },
+        {
+            "name": "acid_mine_empowered"
+        },
+        {
+            "name": "gas_mine_empowered"
         }
     ]
 }

@@ -61,6 +61,12 @@ public sealed partial class RMCDeployableComponent : Component, ISerializationHo
     public EntProtoId? CollapseToolPrototype;
 
     /// <summary>
+    /// If true, the deployed parent can be collapsed from its context menu without using a tool.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool CollapseWithoutTool;
+
+    /// <summary>
     /// The current person deploying this entity (regardless of success).
     /// </summary>
     [DataField, AutoNetworkedField]
