@@ -21,14 +21,16 @@ public sealed partial class CryoCellComponent : Component
     public EntityUid? Occupant;
 
     /// <summary>
-    /// Temperature in Kelvin
+    /// The temperature in the Cryo Cell
     /// </summary>
+    /// <remarks>Temperature in Kelvin</remarks>
     [DataField, AutoNetworkedField]
     public float CryoCellTemperature = 115f;
 
     /// <summary>
-    /// Temperature in Kelvin
+    /// The temperature threshold needed to reach in freezing liquids for cryo effects in Kelvin
     /// </summary>
+    /// <remarks>Temperature in Kelvin</remarks>
     [DataField, AutoNetworkedField]
     public float BodyTempCryoLiquidThreshold = 210f;
 

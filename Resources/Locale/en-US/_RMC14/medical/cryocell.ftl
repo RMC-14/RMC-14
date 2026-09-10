@@ -35,7 +35,6 @@ rmc-cryo-cell-beaker-eject = Eject
 
 rmc-cryo-cell-verb-eject-inside = Eject self
 rmc-cryo-cell-verb-eject-outside = Eject occupant
-# rmc-cryo-cell-verb-eject-message = Would you like to activate the ejection sequence of the cryo cell? Healing may be in progress.
 
 rmc-cryo-cell-auto-eject-reason-release = Patient {CAPITALIZE($occupant)} has been automatically released from {$cryoCell} at: {$area}. {$reason}
 rmc-cryo-cell-auto-eject-reason-dead = Reason for release: Patient death.
