@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 07/12/2026 09:19:37
-  entityCount: 22479
+  time: 08/08/2026 02:41:40
+  entityCount: 22488
 maps:
 - 1
 grids:
@@ -80536,7 +80536,7 @@ entities:
       pos: -89.5,-19.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -19842.463
+      secondsUntilStateChange: -19998.771
       state: Opening
   - uid: 4516
     components:
@@ -80571,7 +80571,7 @@ entities:
       pos: -91.5,-33.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -1802.3336
+      secondsUntilStateChange: -1958.6412
       state: Opening
   - uid: 4522
     components:
@@ -80624,7 +80624,7 @@ entities:
       pos: -114.5,-10.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -13121.078
+      secondsUntilStateChange: -13277.386
       state: Opening
   - uid: 4532
     components:
@@ -99691,12 +99691,54 @@ entities:
     - type: Transform
       pos: 80.5,6.5
       parent: 1
+- proto: RMCMapInsertFiorinaEngineerOffice
+  entities:
+  - uid: 22487
+    components:
+    - type: Transform
+      pos: -88.5,14.5
+      parent: 1
+- proto: RMCMapInsertFiorinaGamerTime
+  entities:
+  - uid: 22488
+    components:
+    - type: Transform
+      pos: -31.5,54.5
+      parent: 1
 - proto: RMCMapInsertFiorinaNoGear
   entities:
   - uid: 7868
     components:
     - type: Transform
       pos: 9.5,-54.5
+      parent: 1
+- proto: RMCMapInsertFiorinaPizzaTime
+  entities:
+  - uid: 22483
+    components:
+    - type: Transform
+      pos: 89.5,-67.5
+      parent: 1
+- proto: RMCMapInsertFiorinaPoolParty
+  entities:
+  - uid: 22485
+    components:
+    - type: Transform
+      pos: -67.5,-82.5
+      parent: 1
+- proto: RMCMapInsertFiorinaRepairPanelsLZ
+  entities:
+  - uid: 22482
+    components:
+    - type: Transform
+      pos: 91.5,-8.5
+      parent: 1
+- proto: RMCMapInsertFiorinaResearchPristine
+  entities:
+  - uid: 22481
+    components:
+    - type: Transform
+      pos: 44.5,33.5
       parent: 1
 - proto: RMCMapInsertFiorinaRiotInProgress
   entities:
@@ -99712,12 +99754,33 @@ entities:
     - type: Transform
       pos: -56.5,-90.5
       parent: 1
+- proto: RMCMapInsertFiorinaScavShipHolder
+  entities:
+  - uid: 22486
+    components:
+    - type: Transform
+      pos: -118.5,-44.5
+      parent: 1
 - proto: RMCMapInsertFiorinaSurvSpawnTogether
   entities:
   - uid: 7871
     components:
     - type: Transform
       pos: 27.5,-23.5
+      parent: 1
+- proto: RMCMapInsertFiorinaWardenOfficeDecorated
+  entities:
+  - uid: 22484
+    components:
+    - type: Transform
+      pos: 9.5,-95.5
+      parent: 1
+- proto: RMCMapInsertFiorinaYardBasketball
+  entities:
+  - uid: 22480
+    components:
+    - type: Transform
+      pos: 14.5,-0.5
       parent: 1
 - proto: RMCMarkerAreaLabel
   entities:

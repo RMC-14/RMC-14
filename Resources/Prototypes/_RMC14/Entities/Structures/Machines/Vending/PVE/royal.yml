@@ -38,7 +38,7 @@
       - id: RMCBeltHolsterPistolRCM
       - id: RMCBeltUtilityGeneralRCMPVE
     - name: Armor Webbing
-      choices: { RMCArmorWebbing: 1 } 
+      choices: { RMCArmorWebbing: 1 }
       entries:
       - id: RMCArmorWebbingShellRCM
         name: shell armor webbing
@@ -81,7 +81,7 @@
     - name: Medical Storage Set (Mandatory)
       takeOne: CMAccessories
       choices: { CMBelt: 1 }
-      entries: 
+      entries:
       - id: RMCMedicalL75RCM
       - id: RMCBeltUtilityGeneralRCMPVE
     - name: Specialist Equipment (Mandatory)
@@ -109,7 +109,7 @@
       - id: RMCPouchVialFill
         name: vial pouch (Full)
     - name: Armor Webbing
-      choices: { RMCArmorWebbing: 1 } 
+      choices: { RMCArmorWebbing: 1 }
       entries:
       - id: RMCArmorWebbingMagRCM
         name: magazine armor webbing
@@ -121,7 +121,7 @@
       - id: RMCArmorWebbingPouchRCM
         name: general armor webbing
     - name: Uniform Webbing
-      choices: { RMCWebbing: 1 } 
+      choices: { RMCWebbing: 1 }
       entries:
       - id: RMCWebbingRCM
         name: leg pouches
@@ -134,7 +134,7 @@
 - type: entity
   parent: ColMarTechBase
   id: RMCRoyalBombSpecVendor
-  name: We-Ya Section Fire Support Gear Rack # Labeled "OFS" in parity.
+  name: We-Ya section fire support gear rack
   description: An automated rack hooked up to a colossal storage of bombardment specialist standard-issue equipment.
   suffix: PVE, RCM
   components:
@@ -156,7 +156,7 @@
       - id: RMCVendorBundleRCMPVEMortar
         name: assault mortar kit
     - name: Specialist Equipment (Mandatory)
-      takeAll: RMCAccessories 
+      takeAll: RMCAccessories
       entries:
       - id: RMCPVEArmorCaseRoyalPointman
         name: modular armor kit
@@ -180,7 +180,7 @@
       - id: RMCArmorWebbingPouchRCM
         name: general armor webbing
     - name: Uniform Webbing
-      choices: { RMCWebbing: 1 } 
+      choices: { RMCWebbing: 1 }
       entries:
       - id: RMCWebbingRCM
         name: leg pouches
@@ -217,7 +217,7 @@
 - type: entity
   parent: ColMarTechBase
   id: RMCRoyalScoutSniperVendor
-  name: We-Ya Section Scout-Sniper Gear Rack
+  name: We-Ya section scout-sniper gear rack
   description: An automated rack hooked up to a colossal storage of scout-sniper standard-issue equipment.
   suffix: PVE, RCM
   components:
@@ -239,7 +239,7 @@
       - id: RMCScoutSniperMarksmanEquipmentCase
         name: Marksman Equipment Kit
     - name: Specialist Equipment (Mandatory)
-      takeAll: RMCAccessories 
+      takeAll: RMCAccessories
       entries:
       - id: RMCPVEArmorCaseRoyalLight
         name: modular armor kit
@@ -270,7 +270,7 @@
       - id: RMCArmorWebbingPouchRCM
         name: general armor webbing
     - name: Uniform Webbing
-      choices: { RMCWebbing: 1 } 
+      choices: { RMCWebbing: 1 }
       entries:
       - id: RMCWebbingRCM
         name: leg pouches
@@ -284,7 +284,7 @@
 - type: entity
   parent: ColMarTechBase
   id: RMCColMarTechSurplusRCMPVE
-  name: We-Ya Section Surplus Uniform Vendor
+  name: We-Ya section surplus uniform vendor
   description: An automated rack hooked up to a small storage of Royal Crown Marines uniforms.
   suffix: PVE, RCM
   components:
@@ -348,7 +348,7 @@
         name: drop pouch
         amount: 5
     - name: Backpacks
-      entries: 
+      entries:
       - id: RMCBackpackRCMMedium
         recommended: true
         amount: 15
@@ -423,7 +423,7 @@
   parent: ColMarTechBase
   id: RMCColMarTechUtilitiesRCMPVE
   suffix: PVE, RCM
-  name: We-Ya Automated Utilities Section Vendor
+  name: We-Ya automated utilities section vendor
   description: An automated supply rack hooked up to a small storage of various utilities, tools, and medical supplies. Can be accessed by any Royal marine.
   components:
   - type: Sprite
