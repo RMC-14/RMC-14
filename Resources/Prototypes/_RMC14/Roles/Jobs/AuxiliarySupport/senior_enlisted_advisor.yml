@@ -23,12 +23,20 @@
   - !type:DepartmentTimeRequirement
     department: CMRequisitions
     time: 36000 # 10 hours
-  ranks: # TODO Selectable Ranks for SEA
+  ranks:
     RMCRankSergeantMajor:
     - !type:RoleTimeRequirement
       role: CMJobSeniorEnlistedAdvisor
       time: 252000 # 70 hours
+    RMCRankMasterGunnerySergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobSeniorEnlistedAdvisor
+      time: 252000 # 70 hours
     RMCRankFirstSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobSeniorEnlistedAdvisor
+      time: 36000 # 10 hours
+    RMCRankMasterSergeant:
     - !type:RoleTimeRequirement
       role: CMJobSeniorEnlistedAdvisor
       time: 36000 # 10 hours

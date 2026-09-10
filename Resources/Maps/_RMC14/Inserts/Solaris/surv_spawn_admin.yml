@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 02/24/2026 19:25:04
+  time: 06/16/2026 10:50:22
   entityCount: 129
 maps: []
 grids:
@@ -667,9 +667,9 @@ entities:
       parent: 1
     missingComponents:
     - ApcPowerReceiver
+    - ActivatableUIRequiresPower
     - FaxMachine
     - ActivatableUI
-    - ActivatableUIRequiresPower
     - UserInterface
     - ItemSlots
     - ContainerContainer
@@ -800,6 +800,13 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 12.5,4.5
       parent: 1
+- proto: RMCIntelDataTerminal
+  entities:
+  - uid: 26
+    components:
+    - type: Transform
+      pos: 2.5,5.5
+      parent: 1
 - proto: RMCLamp
   entities:
   - uid: 81
@@ -818,13 +825,6 @@ entities:
     components:
     - type: Transform
       pos: 10.5,2.5
-      parent: 1
-- proto: RMCPersonalDesktop
-  entities:
-  - uid: 70
-    components:
-    - type: Transform
-      pos: 2.6020966,5.7907996
       parent: 1
 - proto: RMCPhotocopier
   entities:

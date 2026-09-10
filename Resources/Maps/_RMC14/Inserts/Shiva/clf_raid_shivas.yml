@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/08/2026 21:29:20
-  entityCount: 739
+  time: 06/17/2026 18:14:48
+  entityCount: 740
 maps: []
 grids:
 - 1
@@ -4129,6 +4129,13 @@ entities:
     - type: Transform
       pos: 17.385706,20.65537
       parent: 1
+- proto: RMCIntelDataTerminal
+  entities:
+  - uid: 562
+    components:
+    - type: Transform
+      pos: 18.5,7.5
+      parent: 1
 - proto: RMCItemPoolBuckshot
   entities:
   - uid: 612
@@ -4834,13 +4841,6 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: RMCPersonalDesktop
-  entities:
-  - uid: 562
-    components:
-    - type: Transform
-      pos: 18.57551,7.6561403
-      parent: 1
 - proto: RMCPhotocopier
   entities:
   - uid: 531
@@ -4952,13 +4952,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 7.5,18.5
-      parent: 1
-- proto: RMCPropVehicleLoaderTruckWhite
-  entities:
-  - uid: 553
-    components:
-    - type: Transform
-      pos: 19.5,14.5
       parent: 1
 - proto: RMCRadioHandheldColonyOff
   entities:
@@ -5592,6 +5585,16 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 36.5,9.5
       parent: 1
+- proto: RMCVanWheel
+  entities:
+  - uid: 740
+    components:
+    - type: Transform
+      parent: 553
+    - type: Physics
+      canCollide: False
+    - type: HardpointIntegrity
+      integrity: 250
 - proto: RMCVendorCigsElectro
   entities:
   - uid: 605
@@ -5728,6 +5731,21 @@ entities:
     - type: Transform
       pos: 21.5,15.5
       parent: 1
+- proto: VehicleCLFVan
+  entities:
+  - uid: 553
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 20.5,14
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        wheel-1: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: 740
+    - type: VehicleLock
 - proto: WeaponRifleM16
   entities:
   - uid: 420

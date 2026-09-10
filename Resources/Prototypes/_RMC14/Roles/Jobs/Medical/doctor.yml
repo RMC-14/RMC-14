@@ -3,6 +3,7 @@
   id: CMDoctor
   name: rmc-job-name-doctor
   description: rmc-job-description-doctor
+  newToJobInfo: rmc-new-to-job-doctor
   playTimeTracker: CMJobDoctor
   requirements:
   - !type:TotalJobsTimeRequirement

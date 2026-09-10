@@ -105,6 +105,7 @@
       ballistic-ammo: !type:Container
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-xm-88-heavy-rifle # Mention Favela Wars lore analogue here
+  - type: ShootUseDelay
 
 - type: entity
   parent: BulletRifle10x24mm

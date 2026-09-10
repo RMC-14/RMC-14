@@ -15,6 +15,15 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
     - type: NpcFactionMember
       factions:
       - SPP
@@ -30,6 +39,7 @@
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
+    - type: QYJWhitelist
   hidden: true
 
 

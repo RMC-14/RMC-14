@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.GameTicking;
 using Content.Shared._RMC14.Rules;
@@ -18,13 +18,14 @@ namespace Content.Shared._RMC14.Xenonids.JoinXeno;
 public sealed class JoinXenoSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly LarvaQueueSystem _larvaQueue = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedRMCGameTickerSystem _rmcGameTicker = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedGameTicker _gameTicker = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public int ClientBurrowedLarva { get; private set; }
@@ -72,21 +73,45 @@ public sealed class JoinXenoSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        var user = args.Performer;
-        if (!CanJoinXeno(user))
+        var denyQueuing = _config.GetCVar(RMCCVars.RMCLarvaQueueRoundstartDelaySeconds);
+        if (_gameTicker.RoundDuration().TotalSeconds <= denyQueuing)
+        {
+            _popup.PopupEntity($"Joining a hive while observing is disabled for the first {denyQueuing} seconds of the round.", args.Performer, args.Performer);
             return;
+        }
+
+        TryComp<ActorComponent>(ent, out var actor);
 
         var options = new List<DialogOption>();
         var hives = EntityQueryEnumerator<HiveComponent>();
         while (hives.MoveNext(out var hiveId, out var hive))
         {
-            if (hive.BurrowedLarva <= 0)
-                continue;
+            var inQueue = actor != null && _larvaQueue.IsAlreadyQueued(actor.PlayerSession.UserId, hiveId);
+            string optionText;
+            if (inQueue && actor != null)
+            {
+                var pos = _larvaQueue.GetQueuePosition(actor.PlayerSession.UserId, hiveId);
+                if (pos > 0)
+                {
+                    optionText = $"Leave Larva Queue for ({Name(hiveId)})\n[Position: {pos}]";
+                }
+                else
+                {
+                    var remaining = _larvaQueue.GetPreQueueTimeRemaining(actor.PlayerSession.UserId, hiveId);
+                    optionText = remaining.HasValue
+                        ? $"Leave Larva Queue for ({Name(hiveId)})\n[Waiting: {remaining.Value.TotalSeconds:F0}s remaining]"
+                        : $"Leave Larva Queue for ({Name(hiveId)})";
+                }
+            }
+            else
+            {
+                optionText = $"Join Larva Queue for ({Name(hiveId)})";
+            }
 
-            options.Add(new DialogOption("Burrowed Larva", new JoinXenoBurrowedLarvaEvent(GetNetEntity(hiveId))));
+            options.Add(new DialogOption(optionText, new JoinLarvaQueueEvent(GetNetEntity(hiveId))));
         }
 
-        _dialog.OpenOptions(ent, "Join as Xeno", options, "Available Xenonids");
+        _dialog.OpenOptions(ent, "Join as Xeno", options, "Available Hives");
     }
 
     public bool CanJoinXeno(EntityUid user)

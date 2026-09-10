@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/085c7449b99d1239433d23bb2467faf2224b292f/icons/obj/items/weapons/guns/guns_by_faction/USCM/revolvers.dmi, https://github.com/cmss13-devs/cmss13/blob/085c7449b99d1239433d23bb2467faf2224b292f/icons/mob/humans/onmob/inhands/weapons/guns/revolvers_lefthand.dmi, https://github.com/cmss13-devs/cmss13/blob/085c7449b99d1239433d23bb2467faf2224b292f/icons/mob/humans/onmob/inhands/weapons/guns/revolvers_righthand.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "base"
+    },
+    {
+      "name": "bolt-open"
+    },
+    {
+      "name": "icon"
+    },
+    {
+      "name": "wielded-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "wielded-inhand-right",
+      "directions": 4
+    }
+  ]
+}

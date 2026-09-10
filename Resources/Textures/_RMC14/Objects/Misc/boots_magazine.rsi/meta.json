@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from https://github.com/cmss13-devs/cmss13/blob/8ebd2f8cb96c2cee31df43f39634d65147a8a265/icons/obj/items/paper.dmi, WeYa Orrery made by SharkSnake98 on GitHub",
+  "copyright": "Taken from https://github.com/cmss13-devs/cmss13/blob/8ebd2f8cb96c2cee31df43f39634d65147a8a265/icons/obj/items/paper.dmi, WeYa Orrery & La Voz made by SharkSnake98 on GitHub",
   "size": {
     "x": 32,
     "y": 32
@@ -12,6 +12,9 @@
     },
     {
       "name": "icon-2"
+    },
+    {
+      "name": "icon-3"
     }
   ]
 }

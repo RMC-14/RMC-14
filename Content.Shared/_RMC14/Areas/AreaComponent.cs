@@ -1,5 +1,7 @@
+using Content.Shared._RMC14.Fishing;
 using Content.Shared._RMC14.WeedKiller;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Areas;
 
@@ -99,4 +101,7 @@ public sealed partial class AreaComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan? XenoHiveSetupRestriction = TimeSpan.FromMinutes(25);
+
+    [DataField]
+    public ProtoId<RMCFishingLootPrototype>? FishingLoot;
 }

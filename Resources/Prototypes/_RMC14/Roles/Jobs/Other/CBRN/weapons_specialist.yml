@@ -5,7 +5,7 @@
   description: rmc-job-description-cbrn-ws
   playTimeTracker: RMCJobCBRNWS
   ranks:
-    RMCRankOperator: []
+    RMCRankCorporal: []
   startingGear: RMCGearCBRNWS
   icon: "CMJobIconWeaponsSpecialist"
   joinNotifyCrew: false
@@ -38,6 +38,15 @@
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
+    - type: Language
+      spokenLanguages:
+      - English
+      - SignLanguage
+      understoodLanguages:
+      - English
+      - SignLanguage
+      currentLanguage: English
+      defaultLanguage: English
     - type: NpcFactionMember
       factions:
       - UNMC
@@ -102,8 +111,8 @@
   storage:
     outerClothing:
     - CMMRE
-    - CMGrenadeHighExplosive     #RMC TODO: M40 HPDP White Phosphorus
-    - CMGrenadeHighExplosive     #RMC TODO: M40 HPDP White Phosphorus
+    - RMCGrenadeWhitePhosphorus
+    - RMCGrenadeWhitePhosphorus
     pocket1:
     - RMCTankFlamerLargeX
     - RMCTankFlamerLargeX

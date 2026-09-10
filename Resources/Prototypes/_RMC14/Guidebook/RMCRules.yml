@@ -5,19 +5,10 @@
   priority: 0
   text: "/ServerInfo/Guidebook/_RMC14/Rules/RMCOverview.xml"
   children:
-  - RMCBanTypes
   - RMCZeroTolerance
   - RMCRulesGeneralInformation
-  - RMCRulesCommunity
   - RMCRulesCommand
   - RMCRulesRoleplayStandards
-
-- type: guideEntry
-  parent: RMC
-  id: RMCBanTypes
-  name: rmc-guide-entry-rules-ban-types
-  priority: 1
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/RMCBanTypes.xml"
 
 - type: guideEntry
   parent: RMC
@@ -35,9 +26,7 @@
   text: "/ServerInfo/Guidebook/_RMC14/Rules/RMCRulesCore.xml"
   children:
   - RMCLanguage
-  - RMCMultikey
   - RMCRulesEscalation
-  - RMCMetaknowledge
   - RMCKindness
   - RMCMutinies
 
@@ -50,24 +39,10 @@
 
 - type: guideEntry
   parent: RMC
-  id: RMCMultikey
-  name: rmc-guide-entry-rules-multikey
-  priority: 2
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/Core/RMCMultikey.xml"
-
-- type: guideEntry
-  parent: RMC
   id: RMCRulesEscalation
   name: rmc-guide-entry-rules-escalation
   priority: 3
   text: "/ServerInfo/Guidebook/_RMC14/Rules/Core/RMCRulesEscalation.xml"
-
-- type: guideEntry
-  parent: RMC
-  id: RMCMetaknowledge
-  name: rmc-guide-entry-rules-metaknowledge
-  priority: 4
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/Core/RMCMetaknowledge.xml"
 
 - type: guideEntry
   parent: RMC
@@ -82,14 +57,6 @@
   name: rmc-guide-entry-rules-mutinies
   priority: 6
   text: "/ServerInfo/Guidebook/_RMC14/Rules/RMCMutinies.xml"
-
-# Community Rules
-- type: guideEntry
-  parent: RMC
-  id: RMCRulesCommunity
-  name: rmc-guide-entry-rules-community
-  priority: 4
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/RMCRulesCommunity.xml"
 
 # command
 - type: guideEntry

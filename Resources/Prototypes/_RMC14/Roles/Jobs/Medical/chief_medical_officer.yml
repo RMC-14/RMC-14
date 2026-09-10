@@ -3,6 +3,7 @@
   id: CMCMO
   name: rmc-job-name-cmo
   description: rmc-job-description-cmo
+  newToJobInfo: rmc-new-to-job-cmo
   playTimeTracker: CMJobCMO
   requirements:
   - !type:TotalJobsTimeRequirement

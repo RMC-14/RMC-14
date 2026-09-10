@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Hands;
@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Egg.EggRetriever;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -144,6 +145,12 @@ public sealed class XenoEggSystem : EntitySystem
             return;
 
         var hasOvipositor = HasComp<XenoAttachedOvipositorComponent>(xeno);
+        if (!hasOvipositor && HasComp<VehicleInteriorOccupantComponent>(xeno.Owner))
+        {
+            _popup.PopupClient(Loc.GetString("cm-xeno-ovipositor-vehicle"), xeno, xeno, PopupType.SmallCaution);
+            return;
+        }
+
         if (!hasOvipositor &&
             !_plasma.HasPlasmaPopup(xeno.Owner, args.AttachPlasmaCost))
         {
@@ -265,6 +272,13 @@ public sealed class XenoEggSystem : EntitySystem
             if (_timing.IsFirstTimePredicted)
                 _popup.PopupCoordinates(Loc.GetString("cm-xeno-cant-reach-there"), args.ClickLocation, Filter.Local(), true);
 
+            return;
+        }
+
+        if (HasComp<VehicleInteriorOccupantComponent>(args.User))
+        {
+            var failMessage = Loc.GetString("rmc-xeno-egg-blocked-vehicle");
+            _popup.PopupClient(failMessage, args.User, args.User, PopupType.SmallCaution);
             return;
         }
 
@@ -500,6 +514,8 @@ public sealed class XenoEggSystem : EntitySystem
             {
                 if (user != null)
                     _popup.PopupClient(Loc.GetString("cm-xeno-egg-clear"), egg, user.Value);
+
+                _audio.PlayPredicted(egg.Comp.ClearSound, Transform(egg).Coordinates, user);
 
                 if (_net.IsClient)
                     return true;
