@@ -80,11 +80,9 @@
     - doors
     base: shiva_fab_r
 
-- type: entity
-  parent: RMCBaseWallReinforced
+- type: entity # TODO RMC14: Clean up the ID's for the colored walls, they are supposed to regular fab walls
+  parent: RCMWallShivaFab
   id: RCMWallShivaReinforcedFabOrange
-  name: reinforced prefabricated structure wall
-  description: This structure is made of metal support rods. The poly-kevlon has been replaced with sheet metal, reinforcing it.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/shiva_fab_oj.rsi
@@ -100,10 +98,8 @@
     base: shiva_fab_oj
 
 - type: entity
-  parent: RMCBaseWallReinforced
+  parent: RCMWallShivaFab
   id: RCMWallShivaReinforcedFabBlue
-  name: reinforced prefabricated structure wall
-  description: This structure is made of metal support rods. The poly-kevlon has been replaced with sheet metal, reinforcing it.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/shiva_fab_blu.rsi
@@ -119,10 +115,8 @@
     base: shiva_fab_blu
 
 - type: entity
-  parent: RMCBaseWallReinforced
+  parent: RCMWallShivaFab
   id: RCMWallShivaReinforcedFabPink
-  name: reinforced prefabricated structure wall
-  description: This structure is made of metal support rods. The poly-kevlon has been replaced with sheet metal, reinforcing it.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/shiva_fab_pnk.rsi
@@ -138,10 +132,8 @@
     base: shiva_fab_pnk
 
 - type: entity
-  parent: RMCBaseWallReinforced
+  parent: RCMWallShivaFab
   id: RCMWallShivaReinforcedFabWhite
-  name: reinforced prefabricated structure wall
-  description: This structure is made of metal support rods. The poly-kevlon has been replaced with sheet metal, reinforcing it.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/shiva_fab_wht.rsi
@@ -157,10 +149,8 @@
     base: shiva_fab_wht
 
 - type: entity
-  parent: RMCBaseWallReinforced
+  parent: RCMWallShivaFab
   id: RCMWallShivaReinforcedFabRed
-  name: reinforced prefabricated structure wall
-  description: This structure is made of metal support rods. The poly-kevlon has been replaced with sheet metal, reinforcing it.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/shiva_fab_red.rsi
