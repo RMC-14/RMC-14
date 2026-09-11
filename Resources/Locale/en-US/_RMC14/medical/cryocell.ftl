@@ -47,3 +47,8 @@ rmc-cryo-cell-popup-healed = Patient's external wounds are healed.
 rmc-cryo-cell-popup-dead = Patient is dead!
 rmc-cryo-cell-popup-warning = Patient requires defibrillation!
 rmc-cryo-cell-popup-revive-now = Patient critical! REQUESTING IMMEDIATE DEFIBRILLATION!!!
+
+rmc-cryo-cell-eject-confirmation-title = Eject from Cryo Cell?
+rmc-cryo-cell-eject-confirmation-text = Are you sure you want to eject yourself from the cryo cell?
+rmc-cryo-cell-eject-confirmation-confirm = Eject
+rmc-cryo-cell-eject-confirmation-cancel = Stay Inside

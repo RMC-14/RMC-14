@@ -1,3 +1,4 @@
+using Content.Server.EUI;
 using Content.Server.Power.Components;
 using Content.Shared._RMC14.Body;
 using Content.Shared._RMC14.Damage;
@@ -20,6 +21,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.UserInterface;
 using Robust.Server.GameObjects;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -28,6 +30,7 @@ namespace Content.Server._RMC14.Medical.CryoCell;
 public sealed class CryoCellSystem : SharedCryoCellSystem
 {
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly EuiManager _euiManager = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
@@ -61,6 +64,8 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         SubscribeLocalEvent<CryoCellComponent, CryoCellToggleAutoEjectBuiMsg>(OnToggleAutoEject);
         SubscribeLocalEvent<CryoCellComponent, CryoCellToggleNotifyBuiMsg>(OnToggleNotify);
         SubscribeLocalEvent<CryoCellComponent, CryoCellEjectBeakerBuiMsg>(OnEjectBeaker);
+
+        SubscribeNetworkEvent<CryoCellEjectConfirmationRequestEvent>(OnEjectConfirmationRequest);
     }
 
     private void OnCellUIOpened(Entity<CryoCellComponent> cryoCell, ref AfterActivatableUIOpenEvent args)
@@ -111,6 +116,30 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         _itemSlots.TryEjectToHands(cryoCell, slot, args.Actor, true);
         Dirty(cryoCell);
         UpdateUIState(cryoCell);
+    }
+
+    private void OnEjectConfirmationRequest(CryoCellEjectConfirmationRequestEvent args, EntitySessionEventArgs session)
+    {
+        if (session.SenderSession.AttachedEntity is not { } user)
+            return;
+
+        var cell = GetEntity(args.CryoCell);
+
+        if (!TryComp<CryoCellComponent>(cell, out var cryoCell))
+            return;
+
+        if (cryoCell.Occupant != user)
+            return;
+
+        if (_mobState.IsIncapacitated(user))
+            return;
+
+        OpenEjectConfirmation(session.SenderSession, cell);
+    }
+
+    private void OpenEjectConfirmation(ICommonSession session, EntityUid cell)
+    {
+        _euiManager.OpenEui(new CryoCellEjectEui(this, cell, session), session);
     }
 
     private void UpdateUIState(Entity<CryoCellComponent> cryoCell)
@@ -367,5 +396,20 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         }
 
         return false;
+    }
+
+    public void TryEjectFromInside(EntityUid cell, EntityUid user)
+    {
+        if (!TryComp<CryoCellComponent>(cell, out var cryoCell))
+            return;
+
+        if (cryoCell.Occupant != user)
+            return;
+
+        if (_mobState.IsIncapacitated(user))
+            return;
+
+        EjectOccupant((cell, cryoCell), user);
+        UpdateUIState((cell, cryoCell));
     }
 }
