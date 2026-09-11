@@ -1,16 +1,4 @@
 ﻿Entries:
-- author: TadJohnson00
-  changes:
-  - message: '[PVE] [RCM] added the L49 assault shotgun, available for use by Assault
-      Engineers.'
-    type: Add
-  - message: '[PVE] [RCM] tweaked the L90U1 underbarrel shotgun, allowing it to take
-      a wider variety of shotgun shells while reducing its effectiveness as a breaching
-      tool.'
-    type: Tweak
-  id: 3138
-  time: '2026-04-22T03:55:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9350
 - author: wheelwrightt
   changes:
   - message: NVGs now display their charge upon examining helmet even when not turned
@@ -4471,5 +4459,12 @@
   id: 3637
   time: '2026-09-10T15:00:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10839
+- author: IceNoobXD
+  changes:
+  - message: Fixed posters not layering above cargo containers or tables!
+    type: Fix
+  id: 3638
+  time: '2026-09-11T15:02:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9893
 Name: RMC14
 Order: -1
