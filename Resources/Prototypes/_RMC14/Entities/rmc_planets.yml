@@ -364,7 +364,7 @@
 
 - type: entity
   id: RMCPlanetVaradero
-  name: New Varadero
+  name: New Varadero Naval Base
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/varadero.yml

@@ -16,17 +16,17 @@ rmc-announcement-planet-hybrisa = An automated distress signal has been received
 
 rmc-announcement-planet-sorokyne = An automated distress signal has been recieved from a mining colony on border world LV-976, "Sorokyne Outpost". A response team from the UNS Almayer will be dispatched shortly to investigate.
 
-rmc-announcement-planet-varadero = An automated distress signal has been received from UNMC New Varadero Naval Base. A response team from the UNS Almayer will be dispatched shortly to investigate.
-                                           Designation: UNMC Naval base, research site and mining facility
+rmc-announcement-planet-varadero = An automated distress signal has been received from New Varadero Naval Base. A response team from the UNS Almayer will be dispatched shortly to investigate.
+                                           Designation: UNMC Naval base, primary defensive garrison for New Varadero City, research site and mining facility
 
-                                           Population: 47
+                                           Total Personnel: 47
                                            Current Temperature: 68F Interior, 97F Exterior
-                                           Outpost Commander: UN Rep. Steve Haifisch
+                                           Onsite Representative: UN Rep. Steve Haifisch
                                            Telecommunications Array: Repairs required
 
                                            No further information available at this time.
 
-rmc-announcement-planet-varadero-1 = Pan-Pan. UNS Almayer, we are detecting you on approach. This is Lieutenant Colonel #%-#^-@%#, authorization code Lima Alfa Sierra Niner, broadcasting on all stations. Stand by for a situation report.
+rmc-announcement-planet-varadero-1 = Pan-Pan. UNS Almayer, we are detecting you on approach. This is Lieutenant #%-#^-@%#, authorization code Lima Alfa Sierra Niner, broadcasting on all stations. Stand by for a situation report.
 
 
                                              The base has been overrun by xenonid lifeforms at this time. What’s left of our forces has retreated through the tunnel to New Varadero City and collapsed it behind us. If you’re here to render aid, your best course of action would be to cut the infestation off from the source and secure the base itself. We’ll focus on keeping the city secure.
