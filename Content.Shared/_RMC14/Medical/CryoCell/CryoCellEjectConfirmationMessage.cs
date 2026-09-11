@@ -9,12 +9,8 @@ public sealed class CryoCellEjectConfirmationRequestEvent : EntityEventArgs
     public NetEntity CryoCell;
 }
 
-public sealed class CryoCellEjectConfirmationMessage : EuiMessageBase
+[Serializable, NetSerializable]
+public sealed class CryoCellEjectConfirmationMessage(bool accepted) : EuiMessageBase
 {
-    public bool Accepted { get; }
-
-    public CryoCellEjectConfirmationMessage(bool accepted)
-    {
-        Accepted = accepted;
-    }
+    public readonly bool Accepted = accepted;
 }
