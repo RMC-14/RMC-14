@@ -195,6 +195,23 @@
 
 - type: entity
   parent: CMBottleFilled
+  id: CMBottleParacetamol
+  name: paracetamol bottle
+  description: A small bottle. Contains paracetamol - A commonly used, but weak painkiller.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 60
+        reagents:
+        - ReagentId: CMParacetamol
+          Quantity: 60
+  - type: CMRefillableSolution
+    reagents:
+      CMParacetamol: 60
+
+- type: entity
+  parent: CMBottleFilled
   id: CMBottleTramadol
   name: tramadol bottle
   description: A small bottle. Contains tramadol - Used as a basic painkiller.
@@ -214,7 +231,7 @@
   parent: CMBottleFilled
   id: CMBottleOxycodone
   name: oxycodone bottle
-  description: A small bottle. Contains oxycodone - Used as an Extreme Painkiller. ILLEGAL TO DISTRIBUTE.
+  description: A small bottle. Contains oxycodone - Used as an Extreme Painkiller. Use with Caution.
   components:
   - type: SolutionContainerManager
     solutions:
@@ -381,3 +398,20 @@
     reagents:
       CMKelotane: 70
       CMDermaline: 70
+
+- type: entity
+  parent: RMCLargeBottleFilled
+  id: RMCLargeBottleOxycodone
+  name: large oxycodone bottle
+  description: A large bottle. Contains oxycodone - Used as an Extreme Painkiller. Use with Caution.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 140
+        reagents:
+        - ReagentId: CMOxycodone
+          Quantity: 140
+  - type: CMRefillableSolution
+    reagents:
+      CMOxycodone: 140

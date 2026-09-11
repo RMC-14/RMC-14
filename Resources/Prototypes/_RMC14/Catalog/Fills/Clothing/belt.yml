@@ -57,6 +57,8 @@
       amount: 1
     - id: CMPillCanisterTramadol
       amount: 1
+    - id: CMPillCanisterOxycodone
+      amount: 1
     # TODO RMC14 perixadon pills, splint
     - id: CMBurnKit10
       amount: 1
@@ -81,6 +83,8 @@
     - id: CMPillCanisterInaprovaline
       amount: 1
     - id: CMPillCanisterTramadol
+      amount: 1
+    - id: CMPillCanisterOxycodone
       amount: 1
     # TODO RMC14 perixadon pills, splint
     - id: CMBurnKit10
@@ -121,6 +125,8 @@
       amount: 1
     - id: CMPillCanisterTramadol
       amount: 1
+    - id: CMPillCanisterOxycodone
+      amount: 1
     # TODO RMC14 perixadon pills, splint
 
 - type: entity
@@ -151,6 +157,8 @@
     - id: CMPillCanisterInaprovaline
       amount: 1
     - id: CMPillCanisterTramadol
+      amount: 1
+    - id: CMPillCanisterOxycodone
       amount: 1
     # TODO RMC14 perixadon pills, splint
 
@@ -964,7 +972,7 @@
     - id: CMPillCanisterKelotane
     - id: CMPillCanisterKelotane
     - id: CMPillCanisterTramadol
-    - id: CMPillCanisterTramadol
+    - id: CMPillCanisterOxycodone
     - id: CMPillCanisterDylovene
     # - id: CMPillCanisterPeridaxon
     - id: CMPillCanisterDexalin

@@ -59,6 +59,7 @@
     - CMPillCanisterBicaridine
     - CMPillCanisterKelotane
     - CMPillCanisterInaprovaline
+    - CMPillCanisterTramadol
 
 - type: entity
   parent: CMSpawnPointJobBase

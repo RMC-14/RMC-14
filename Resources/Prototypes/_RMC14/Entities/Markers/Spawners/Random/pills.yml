@@ -28,6 +28,7 @@
     - RMCPillCanisterBicaridineNoSkill
     - RMCPillCanisterKelotaneNoSkill
     #- TODO RMC14 Peridaxon
+    - CMPillCanisterOxycodoneNoSkill
     - CMPacketPillsOxycodone
 
 - type: entity

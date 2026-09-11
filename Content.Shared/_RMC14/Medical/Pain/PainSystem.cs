@@ -198,9 +198,14 @@ public sealed partial class PainSystem : EntitySystem
             pain.NextUpdateTime = time + pain.UpdateRate;
             DirtyField(uid, pain, nameof(PainComponent.NextUpdateTime));
 
-            if (pain.CurrentPain == 0 && pain.CurrentPainPercentage == 0 && pain.PainModifiers.Count == 0)
+            if (pain.CurrentPain == 0 &&
+                pain.CurrentPainPercentage == 0 &&
+                pain.CurrentPainLevel == 0 &&
+                pain.PainModifiers.Count == 0)
+            {
                 // Nothing to process!
                 continue;
+            }
 
             // Remove any expired modifiers.
             // (expire timings get messy on client due to the `EntityEffect` problem mentioned below, so server only here)

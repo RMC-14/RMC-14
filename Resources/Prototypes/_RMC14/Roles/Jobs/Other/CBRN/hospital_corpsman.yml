@@ -141,7 +141,7 @@
     - CMPillCanisterKelotane
     - CMPillCanisterInaprovaline
     - CMPillCanisterTramadol
-    # RMC TODO: Oxycodone pill bottle
+    - CMPillCanisterOxycodone
     # RMC TODO: Peridaxon pill bottle
     # RMC TODO: nano splints
     - CMHealthAnalyzer

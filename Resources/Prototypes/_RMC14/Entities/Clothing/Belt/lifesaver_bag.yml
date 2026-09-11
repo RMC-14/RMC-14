@@ -76,6 +76,8 @@
       amount: 1
     - id: CMPillCanisterTramadol
       amount: 1
+    - id: CMPillCanisterOxycodone
+      amount: 1
     # TODO RMC14 1 pill canister of peridaxon
 
 - type: entity
@@ -115,6 +117,7 @@
     - id: CMPillCanisterDylovene
     - id: CMPillCanisterInaprovaline
     - id: CMPillCanisterTramadol
+    - id: CMPillCanisterOxycodone
     # TODO RMC: peridaxon
 
 - type: entity
@@ -147,6 +150,7 @@
     - id: CMPillCanisterKelotane
     - id: CMPillCanisterKelotane
     - id: CMPillCanisterTramadol
+    - id: CMPillCanisterOxycodone
     - id: CMPillCanisterDylovene
     # - id: CMPillCanisterAlkysine
     - id: RMCPillCanisterImidazoline
@@ -191,6 +195,7 @@
     - id: CMPillCanisterKelotane
     - id: CMPillCanisterInaprovaline
     - id: CMPillCanisterTramadol
+    - id: CMPillCanisterOxycodone
     # TODO RMC: splint nano
     - id: CMHealthAnalyzer
     - id: RMCPillCanisterImidazoline # you're welcome, whoever was here last. fly high, mercenary

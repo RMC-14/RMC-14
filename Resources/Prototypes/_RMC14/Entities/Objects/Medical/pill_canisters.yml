@@ -392,6 +392,30 @@
 
 - type: entity
   parent: RMCPillCanisterNoSkill
+  id: CMPillCanisterParacetamolNoSkill
+  name: paracetamol pill bottle
+  description: This is probably someone's prescription pain pill bottle.
+  suffix: Paracetamol, 16, No Skill
+  components:
+  - type: Item
+    heldPrefix: 7
+  - type: Sprite
+    layers:
+    - state: pill_canister7
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: CMPillParacetamol
+      amount: 16
+  - type: IconLabel
+    labelTextLocId: rmc-paracetamol-container-label-text
+
+- type: entity
+  parent: RMCPillCanisterNoSkill
   id: CMPillCanisterTramadolNoSkill
   name: tramadol pill bottle
   description: A pill bottle filled with Tramadol. Treats pain.
@@ -418,6 +442,39 @@
   parent: CMPillCanisterTramadolNoSkill
   id: CMPillCanisterTramadol
   suffix: Tramadol, 16
+  components:
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2
+
+- type: entity
+  parent: RMCPillCanisterNoSkill
+  id: CMPillCanisterOxycodoneNoSkill
+  name: oxycodone pill bottle
+  description: This contains pills that treat severe pain, even during live surgery. Do not take more than two pills in a short period.
+  suffix: Oxycodone, 16, No Skill
+  components:
+  - type: Item
+    heldPrefix: 9
+  - type: Sprite
+    layers:
+    - state: pill_canister9
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: CMPillOxycodone
+      amount: 16
+  - type: IconLabel
+    labelTextLocId: rmc-oxycodone-container-label-text
+
+- type: entity
+  parent: CMPillCanisterOxycodoneNoSkill
+  id: CMPillCanisterOxycodone
+  suffix: Oxycodone, 16
   components:
   - type: StorageSkillRequired
     skills:

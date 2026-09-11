@@ -344,6 +344,7 @@
         amount: 10
       - id: CMGauze10
         amount: 10
+      # TODO RMC14 - Splints
     - name: Autoinjectors
       entries:
       - id: CMBicaridineAutoInjector
@@ -357,6 +358,11 @@
       - id: CMInaprovalineAutoInjector
         amount: 5
       - id: CMKelotaneAutoInjector
+        amount: 5
+      - id: CMOxycodoneAutoInjector
+        amount: 5
+      # TODO RMC14 - Peridaxon
+      - id: CMTramadolAutoInjector
         amount: 5
       - id: CMTricordrazineAutoInjector
         amount: 5
@@ -372,6 +378,11 @@
         amount: 3
       - id: CMBottleKelotane
         amount: 3
+      - id: CMBottleOxycodone
+        amount: 3
+      # TODO RMC14 - Peridaxon
+      - id: CMBottleTramadol
+        amount: 3
     - name: Pill bottles
       entries:
       - id: CMPillCanisterBicaridine
@@ -383,6 +394,10 @@
       - id: CMPillCanisterInaprovaline
         amount: 4
       - id: CMPillCanisterKelotane
+        amount: 4
+      - id: CMPillCanisterOxycodone
+      # TODO RMC14 - Peridaxon
+      - id: CMPillCanisterTramadol
         amount: 4
     - name: Medical utilities
       entries:
@@ -680,5 +695,3 @@
     sprite: _RMC14/Markers/landmarks.rsi
     state: invisible_wall
     drawdepth: Overdoors
-
-

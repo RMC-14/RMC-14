@@ -140,8 +140,8 @@
         amount: 4
       - id: CMPillCanisterKelotane
         amount: 4
-#      - id: CMPillCanisterOxycodone # TODO RMC14
-#        amount: 3
+      - id: CMPillCanisterOxycodone
+        amount: 3
       # - id: CMPillCanisterPeridaxon # TODO RMC14
       #  amount: 3
       - id: CMPillCanisterTramadol
@@ -254,8 +254,8 @@
         amount: 4
       - id: CMPillCanisterKelotane
         amount: 4
-#      - id: CMPillCanisterOxycodone # TODO RMC14
-#        amount: 3
+      - id: CMPillCanisterOxycodone
+        amount: 3
 #      - id: CMPillCanisterPeridaxon # TODO RMC14
 #        amount: 3
       - id: CMPillCanisterTramadol

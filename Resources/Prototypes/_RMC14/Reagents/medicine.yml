@@ -456,10 +456,12 @@
               min: 5
 
 - type: reagent
-  parent: [ CMReagentMedicine, CMTramadol ]
+  parent: CMReagentMedicine
   id: CMParacetamol
   name: reagent-name-cmparacetamol
   desc: reagent-desc-cmparacetamol
+  physicalDesc: reagent-physical-desc-soothing
+  flavor: medicine
   color: "#C855DC"
   overdose: 60
   criticalOverdose: 100
@@ -471,7 +473,7 @@
         potency: 1
 
 - type: reagent
-  parent: [ CMReagentMedicine, CMTricordrazine ]
+  parent: [ CMReagentMedicine, CMParacetamol ]
   id: CMTramadol
   name: reagent-name-cmtramadol
   desc: reagent-desc-cmtramadol
@@ -486,7 +488,7 @@
         potency: 2.5
 
 - type: reagent
-  parent: [ CMReagentMedicine, CMTramadol ]
+  parent: [ CMReagentMedicine, CMParacetamol ]
   id: CMOxycodone
   name: reagent-name-cmoxycodone
   desc: reagent-desc-cmoxycodone
