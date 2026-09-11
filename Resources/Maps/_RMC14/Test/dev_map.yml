@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 07/28/2026 23:25:13
-  entityCount: 1481
+  time: 09/11/2026 13:15:34
+  entityCount: 1482
 maps:
 - 1
 grids:
@@ -3624,6 +3624,13 @@ entities:
     components:
     - type: Transform
       pos: -8.5,1.5
+      parent: 2
+- proto: CMOxycodoneAutoInjector
+  entities:
+  - uid: 1482
+    components:
+    - type: Transform
+      pos: -5.193238,-3.481322
       parent: 2
 - proto: CMPaperBin10
   entities:

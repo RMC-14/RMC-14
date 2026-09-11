@@ -210,12 +210,12 @@
         amount: 5
       - id: CMKelotaneAutoInjector
         amount: 5
-#      - id: CMOxycodoneAutoinjector # TODO RMC14
-#        amount: 5
+      - id: CMOxycodoneAutoInjector
+        amount: 5
 #      - id: CMPeridaxonAutoinjector # TODO RMC14
 #        amount: 5
-#      - id: CMTramadolAutoinjector # TODO RMC14
-#        amount: 5
+      - id: CMTramadolAutoInjector
+        amount: 5
       - id: CMTricordrazineAutoInjector
         amount: 5
     - name: Liquid bottles
@@ -230,12 +230,12 @@
         amount: 3
       - id: CMBottleKelotane
         amount: 3
-#      - id: CMBottleOxycodone # TODO RMC14
-#        amount: 3
+      - id: CMBottleOxycodone
+        amount: 3
 #      - id: CMBottlePeridaxon # TODO RMC14
 #        amount: 3
-#      - id: CMBottleTramadol # TODO RMC14
-#        amount: 3
+      - id: CMBottleTramadol
+        amount: 3
     - name: Pill bottles
       entries:
       - id: RMCPillCanisterMeralyneBicaridine
@@ -258,8 +258,8 @@
 #        amount: 3
 #      - id: CMPillCanisterPeridaxon # TODO RMC14
 #        amount: 3
-#      - id: CMPillCanisterTramadol # TODO RMC14
-#        amount: 4
+      - id: CMPillCanisterTramadol
+        amount: 4
     - name: Medical utilities
       entries:
       - id: CMSurgicalLine
@@ -452,8 +452,8 @@
         amount: 2
       - id: CMTricordrazineAutoInjectorNoSkill
         amount: 2
-#      - id: CMPainStopAutoinjector
-#        amount: 2
+      - id: CMTramadolAutoInjectorNoSkill
+        amount: 2
       - id: CMGauze10
         amount: 4
       - id: CMOintment10
@@ -481,7 +481,7 @@
     rechargeCooldown: 4
     reagents:
     - CMTricordrazine
-    #- CMTramadol TODO RMC14
+    - CMTramadol
     whitelist:
       components:
       - Hypospray
@@ -503,9 +503,9 @@
       - id: CMTricordrazineAutoInjectorNoSkill
         name: First-Aid Autoinjector
         amount: 2
-#      - id: CMPainStopAutoinjector
-#        name: Pain-Stop Autoinjector
-#        amount: 2
+      - id: CMTramadolAutoInjectorNoSkill
+        name: Pain-Stop Autoinjector
+        amount: 2
       - id: CMGauze10
         name: Roll of Gauze
         amount: 4

@@ -74,7 +74,7 @@
     contents:
     - id: CMBicaridineAutoInjector
     - id: CMKelotaneAutoInjector
-    # RMC14 TODO: Tramadol autoinjector
+    - id: CMTramadolAutoInjector
     - id: CMEmergencyAutoInjector
     - id: CMGauze10
 
@@ -134,5 +134,5 @@
     contents:
     - id: CMBicaridineAutoInjector
     - id: CMKelotaneAutoInjector
-    #- id: CMTramadolAutoInjector
+    - id: CMTramadolAutoInjector
     - id: CMEmergencyAutoInjector

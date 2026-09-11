@@ -18,9 +18,9 @@
     sections:
     - name: Autoinjectors
       entries:
-      # - id: CMPainStopAutoinjector
-      #   amount: 8
       - id: CMTricordrazineAutoInjectorNoSkill
+        amount: 8
+      - id: CMTramadolAutoInjectorNoSkill
         amount: 8
     - name: Devices
       entries:

@@ -18,7 +18,7 @@
     contents:
     - id: RMCHeadsetMPHonor
     - id: RMCPamphletHonorGuard
-    # - id: CMPacketPillsOxycodone    TODO: Pain system
+    - id: CMPacketPillsOxycodone
     - id: CMPacketPillsKelotane
     - id: CMPacketPillsBicaridine
     - id: WeaponShotgunM890Guard

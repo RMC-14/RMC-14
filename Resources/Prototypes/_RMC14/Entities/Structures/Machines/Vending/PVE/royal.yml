@@ -462,8 +462,8 @@
         amount: 15
       - id: CMTricordrazineAutoInjector
         amount: 15
-      #- id: RMCTramadolAutoInjector # TODO RMC14 implement newmed
-      #  amount: 15
+      - id: CMTramadolAutoInjector
+        amount: 15
     - name: Flare and Light
       entries:
       - id: RMCFlashlight
@@ -525,4 +525,3 @@
         amount: 25
       - id: RMCM5CameraGear #RMC14 TODO: TSE Camera Gear
         amount: 20
-

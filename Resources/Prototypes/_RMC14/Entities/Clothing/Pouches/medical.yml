@@ -33,7 +33,7 @@
   id: RMCPouchMedicalSocFill
   suffix: Filled
   components:
-  - type: StorageFill # todo rmc14 autoinjectors oxycodone
+  - type: StorageFill
     contents:
     - id: CMHealthAnalyzer
       # splint

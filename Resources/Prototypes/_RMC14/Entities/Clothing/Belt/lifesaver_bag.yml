@@ -58,7 +58,8 @@
     - id: CMTraumaKit10
       amount: 2
     - id: CMBurnKit10
-      amount: 2 # TODO RMC14 2x5 splints
+      amount: 2
+    # TODO RMC14 2x5 splints
     - id: CMEpinephrineAutoInjector
     - id: CMDexalinPlusAutoInjector
     - id: CMOxycodoneAutoInjector
@@ -104,7 +105,8 @@
     # TODO RMC: splints
     - id: CMEpinephrineAutoInjector
     - id: CMDexalinPlusAutoInjector
-    # TODO RMC: oxycodone autoinjector
+    - id: CMOxycodoneAutoInjector
+    - id: CMOxycodoneAutoInjector
     - id: CMPillCanisterBicaridine
     - id: CMPillCanisterBicaridine
     - id: CMPillCanisterKelotane
@@ -112,7 +114,7 @@
     - id: CMPillCanisterDexalin
     - id: CMPillCanisterDylovene
     - id: CMPillCanisterInaprovaline
-    # TODO RMC: tramadol pills
+    - id: CMPillCanisterTramadol
     # TODO RMC: peridaxon
 
 - type: entity
@@ -127,10 +129,11 @@
     - id: CMUpgradedBurnKit10
       amount: 2
     # - id: RMCSplint
-    # - id: RMCHyposprayOxycodone
+    - id: CMOxycodoneAutoInjector
     - id: CMPillCanisterBicaridine
     - id: CMPillCanisterKelotane
     - id: CMPillCanisterInaprovaline
+    - id: CMPillCanisterTramadol
 
 - type: entity
   parent: RMCBeltMedicBagSPP
@@ -143,8 +146,7 @@
     - id: CMPillCanisterBicaridine
     - id: CMPillCanisterKelotane
     - id: CMPillCanisterKelotane
-    # - id: CMPillCanisterTramadol
-    # - id: CMPillCanisterOxycodone
+    - id: CMPillCanisterTramadol
     - id: CMPillCanisterDylovene
     # - id: CMPillCanisterAlkysine
     - id: RMCPillCanisterImidazoline
@@ -155,7 +157,7 @@
     # - id: RMCSplints10
     #   amount: 3
     - id: CMDexalinPlusAutoInjector
-    #- id: CMOxycodoneAutoInjector
+    - id: CMOxycodoneAutoInjector
     - id: CMHealthAnalyzer
 
 - type: entity

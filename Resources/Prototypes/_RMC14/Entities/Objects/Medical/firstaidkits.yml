@@ -373,7 +373,7 @@
     - id: CMBurnKit10
     - id: CMBurnKit10
 #   - id: CMMedicalSplint5
-#   - id: CMOxycodoneAutoInjector
+    - id: CMOxycodoneAutoInjector
     - id: CMDexalinPlusAutoInjector
 
 - type: entity
@@ -476,4 +476,4 @@
     - id: CMSynthGraft
     - id: RMCDermalineAutoInjector
     - id: CMKelotaneAutoInjector
-#   - id: CMOxycodoneAutoInjector
+    - id: CMOxycodoneAutoInjector

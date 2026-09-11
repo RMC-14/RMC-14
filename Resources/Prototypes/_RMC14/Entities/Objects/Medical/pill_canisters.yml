@@ -382,13 +382,23 @@
     labelTextLocId: rmc-russianred-container-label-text
 
 - type: entity
-  parent: CMPillCanister
-  id: CMPillCanisterTramadol
+  parent: RMCPillCanisterRussianRedNoSkill
+  id: RMCPillCanisterRussianRed
+  suffix: Russian Red, 16
+  components:
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2
+
+- type: entity
+  parent: RMCPillCanisterNoSkill
+  id: CMPillCanisterTramadolNoSkill
   name: tramadol pill bottle
-  suffix: Tramadol, 16
+  description: A pill bottle filled with Tramadol. Treats pain.
+  suffix: Tramadol, 16, No Skill
   components:
   - type: Item
-    heldPrefix: 5 # TODO not sure this is correct
+    heldPrefix: 5
   - type: Sprite
     layers:
     - state: pill_canister5
@@ -405,9 +415,9 @@
     labelTextLocId: rmc-tramadol-container-label-text
 
 - type: entity
-  parent: RMCPillCanisterRussianRedNoSkill
-  id: RMCPillCanisterRussianRed
-  suffix: Russian Red, 16
+  parent: CMPillCanisterTramadolNoSkill
+  id: CMPillCanisterTramadol
+  suffix: Tramadol, 16
   components:
   - type: StorageSkillRequired
     skills:

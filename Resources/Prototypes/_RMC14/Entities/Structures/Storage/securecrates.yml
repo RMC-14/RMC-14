@@ -74,11 +74,11 @@
     - CMScrewdriver
     - CMTraumaKit10
     - CMPillCanisterTricordrazine
+    - CMPacketPillsTramadol
     - CMBurnKit10
     - CMCrowbar
     - CMEntrenchingTool
-
-#TODO RMC14: tramadol,splint,
+    #TODO RMC14: splint
 
 - type: entity
   parent: MarkerBase
