@@ -25,8 +25,7 @@
 
   <Box>
     <GuideEntityEmbed Entity="CMComputerDropshipNavigation" Caption="Onboard Flight Computer"/>
-    <GuideEntityEmbed Entity="CMComputerDropshipNavigationRemote" Caption="Remote Flight Computer"/>
-    <GuideEntityEmbed Entity="CMComputerDropshipNavigationPlanetside" Caption="Planetside Flight Computer"/>
+    <GuideEntityEmbed Entity="CMComputerDropshipRemoteControl" Caption="Remote Flight Computer"/>
   </Box>
 
   Dropship movement is coordinated through flight computers. Some are used by the pilot from inside the cockpit, while others are used remotely by flight control or from a landing zone.
@@ -49,7 +48,7 @@
   -   [bold]Send it manually:[/bold] Under [bold]Manual Launch[/bold], select a valid destination and press [bold]Send to destination[/bold].
   -   [bold]Watch occupied pads:[/bold] Occupied destinations are shown, but another dropship cannot be sent into them.
 
-  Remote flight computers placed planetside use the same remote interface, but are positioned near landing zones for local control. Xenonids do not use the marine remote interface; their linked-LZ summon behavior is handled by interacting with the landing zone console directly.
+  The remote flight computer can be placed either on a warship for flight control or planetside near a landing zone for local control. Xenonids do not use the marine remote interface; when the computer is planetside, their linked-LZ summon behavior is handled by interacting with it directly.
 
   ### C. Automated Routes
 

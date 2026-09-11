@@ -37,13 +37,7 @@ public sealed partial class DropshipAutopilotComponent : Component
 public sealed partial class DropshipRemoteControlConsoleComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public DropshipRemoteConsoleKind Kind = DropshipRemoteConsoleKind.Shipside;
-
-    [DataField, AutoNetworkedField]
     public EntityUid? LinkedLandingZone;
-
-    [DataField, AutoNetworkedField]
-    public bool AllowQuickSummon;
 }
 
 public enum DropshipAutopilotMode
@@ -71,11 +65,4 @@ public enum DropshipLaunchSource
     PlanetsideTerminal,
     Hijack,
     Autopilot,
-}
-
-[Serializable, NetSerializable]
-public enum DropshipRemoteConsoleKind
-{
-    Shipside,
-    Planetside,
 }

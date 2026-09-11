@@ -10,7 +10,7 @@ public enum DropshipRemoteControlUiKey
 
 [Serializable, NetSerializable]
 public sealed class DropshipRemoteControlBuiState(
-    DropshipRemoteConsoleKind kind,
+    bool planetside,
     NetEntity? linkedLandingZone,
     string linkedLandingZoneName,
     List<DropshipRemoteControlDropshipEntry> dropships,
@@ -21,7 +21,7 @@ public sealed class DropshipRemoteControlBuiState(
     int minDelaySeconds,
     int maxDelaySeconds) : BoundUserInterfaceState
 {
-    public readonly DropshipRemoteConsoleKind Kind = kind;
+    public readonly bool Planetside = planetside;
     public readonly NetEntity? LinkedLandingZone = linkedLandingZone;
     public readonly string LinkedLandingZoneName = linkedLandingZoneName;
     public readonly List<DropshipRemoteControlDropshipEntry> Dropships = dropships;

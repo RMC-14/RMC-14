@@ -322,7 +322,6 @@ public sealed class DropshipSystem : SharedDropshipSystem
     private void OnNavigationLockout(Entity<DropshipNavigationComputerComponent> ent, ref DropshipLockoutDoAfterEvent args)
     {
         ent.Comp.LockedOutUntil = _timing.CurTime + ent.Comp.LockoutDuration;
-        ent.Comp.RemoteControl = false;
         Dirty(ent);
 
         _ui.CloseUis(ent.Owner);
@@ -339,7 +338,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
         args.Handled = true;
 
-        if (!ent.Comp.AllowQuickSummon)
+        if (!IsRemoteControlConsolePlanetside(ent))
         {
             _popup.PopupEntity(Loc.GetString("rmc-dropship-remote-xeno-clueless", ("console", ent.Owner)), user, user);
             return;
@@ -683,6 +682,13 @@ public sealed class DropshipSystem : SharedDropshipSystem
         }
 
         return closestLandingZone;
+    }
+
+    private bool IsRemoteControlConsolePlanetside(EntityUid console)
+    {
+        var xform = Transform(console);
+        return HasComp<RMCPlanetComponent>(xform.GridUid) ||
+               HasComp<RMCPlanetComponent>(xform.MapUid);
     }
 
     private bool TrySummonAnyAvailableDropship(
@@ -1656,7 +1662,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         }
 
         var state = new DropshipRemoteControlBuiState(
-            console.Comp.Kind,
+            IsRemoteControlConsolePlanetside(console),
             linkedLandingZone,
             linkedLandingZoneName,
             dropships,

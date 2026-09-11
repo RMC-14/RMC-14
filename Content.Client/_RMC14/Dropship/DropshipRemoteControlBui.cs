@@ -104,7 +104,7 @@ public sealed class DropshipRemoteControlBui : BoundUserInterface
 
         _state = state;
         _delaySeconds = _delaySeconds == 0 ? state.DefaultDelaySeconds : _delaySeconds;
-        _window.Title = state.Kind == DropshipRemoteConsoleKind.Planetside
+        _window.Title = state.Planetside
             ? Loc.GetString("rmc-dropship-remote-ui-title-planetside")
             : Loc.GetString("rmc-dropship-remote-ui-title");
 
@@ -404,7 +404,7 @@ public sealed class DropshipRemoteControlBui : BoundUserInterface
                 ? $"T-{departIn}s"
                 : $"{details} T-{departIn}s";
 
-        var linked = _state.Kind == DropshipRemoteConsoleKind.Planetside
+        var linked = _state.Planetside
             ? "\n" + Loc.GetString("rmc-dropship-remote-ui-linked-lz", ("lz", _state.LinkedLandingZoneName))
             : string.Empty;
 
