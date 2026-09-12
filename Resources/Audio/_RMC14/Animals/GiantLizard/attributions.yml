@@ -1,0 +1,9 @@
+- files:
+  - giant_lizard_death.ogg
+  - giant_lizard_growl1.ogg
+  - giant_lizard_growl2.ogg
+  - giant_lizard_hiss1.wav
+  - giant_lizard_hiss2.wav
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/b26246cf7710ac6f2c2e4eddf94a49eb47f40800/sound/effects"
