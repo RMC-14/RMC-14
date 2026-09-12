@@ -30,7 +30,47 @@
 
 - type: entity
   parent: RMCBriefcase
+  id: RMCBriefcaseMaroon
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/Briefcases/maroon.rsi
+
+- type: entity
+  parent: RMCBriefcase
+  id: RMCBriefcaseBlack
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/Briefcases/black.rsi
+
+- type: entity
+  parent: RMCBriefcase
+  id: RMCBriefcaseFlap
+  name: flap-closure brown briefcase
+  description: It's made of AUTHENTIC faux-leather and has a price-tag still attached. Its owner must be a real professional. This one is less rigid, made with a flap and softer leather.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/Briefcases/brown_flap.rsi
+
+- type: entity
+  parent: RMCBriefcaseFlap
+  id: RMCBriefcaseFlapBlack
+  name: flap-closure black briefcase
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/Briefcases/black_flap.rsi
+
+- type: entity
+  parent: RMCBriefcaseFlap
+  id: RMCBriefcaseFlapMaroon
+  name: flap-closure maroon briefcase
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/Briefcases/maroon_flap.rsi
+
+- type: entity
+  parent: RMCBriefcase
   id: RMCBriefcasePaperPen
+  suffix: Filled, Pen & Paper
   components:
   - type: StorageFill
     contents:
