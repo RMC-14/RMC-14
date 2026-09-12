@@ -2,6 +2,7 @@ using Content.Server._RMC14.Actions;
 using Content.Server._RMC14.Admin;
 using Content.Server._RMC14.Commendations;
 using Content.Server._RMC14.Discord;
+using Content.Server._RMC14.GMRequest;
 using Content.Server._RMC14.LinkAccount;
 using Content.Server._RMC14.Mentor;
 using Content.Server._RMC14.PlayTimeTracking;
@@ -95,6 +96,7 @@ namespace Content.Server.IoC
             IoCManager.Register<CommendationManager>();
             IoCManager.Register<RMCActionsManager>();
             IoCManager.Register<RMCChatBansManager>();
+            IoCManager.Register<GMRequestManager>();
         }
     }
 }
