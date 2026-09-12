@@ -31,5 +31,5 @@ public sealed partial class HiveKingCocoonComponent : Component
     public EntProtoId Spawn = "RMCXenoKing";
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier KingMusic = new SoundPathSpecifier("/Audio/_RMC14/Hijack/retribution.ogg");
+    public SoundSpecifier KingMusic = new SoundPathSpecifier("/Audio/_RMC14/King/retribution.ogg");
 }
