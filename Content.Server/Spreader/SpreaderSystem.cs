@@ -10,6 +10,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Server.Spreader;
@@ -24,6 +25,7 @@ public sealed class SpreaderSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private readonly IGameTiming _timing = default!; // RMC14
 
     /// <summary>
     /// Cached maximum number of updates per spreader prototype. This is applied per-grid.
@@ -88,23 +90,6 @@ public sealed class SpreaderSystem : EntitySystem
     /// <inheritdoc/>
     public override void Update(float frameTime)
     {
-        // Check which grids are valid for spreading
-        var spreadGrids = EntityQueryEnumerator<SpreaderGridComponent>();
-
-        _gridUpdates.Clear();
-        while (spreadGrids.MoveNext(out var uid, out var grid))
-        {
-            grid.UpdateAccumulator -= frameTime;
-            if (grid.UpdateAccumulator > 0)
-                continue;
-
-            _gridUpdates[uid] = _prototypeUpdates.ShallowClone();
-            grid.UpdateAccumulator += SpreadCooldownSeconds;
-        }
-
-        if (_gridUpdates.Count == 0)
-            return;
-
         var query = EntityQueryEnumerator<ActiveEdgeSpreaderComponent>();
         var xforms = GetEntityQuery<TransformComponent>();
         var spreaderQuery = GetEntityQuery<EdgeSpreaderComponent>();
@@ -114,10 +99,40 @@ public sealed class SpreaderSystem : EntitySystem
         // Build a list of all existing Edgespreaders, shuffle them
         while (query.MoveNext(out var uid, out var comp))
         {
+            // RMC14
+            if (comp.NextSpread > _timing.CurTime)
+            {
+                continue;
+            }
             spreaders.Add((uid, comp));
         }
 
+        if (spreaders.Count <= 0)
+        {
+            return;
+        }
+
         _robustRandom.Shuffle(spreaders);
+
+        // RMC14 _gridUpdates changes moved after collecting spreaders (only updates if there are any spreaders that need updating)
+        // Check which grids are valid for spreading
+        var spreadGrids = EntityQueryEnumerator<SpreaderGridComponent>();
+
+        _gridUpdates.Clear();
+        while (spreadGrids.MoveNext(out var uid, out var grid))
+        {
+            // RMC14 removed
+            //grid.UpdateAccumulator -= frameTime;
+            //if (grid.UpdateAccumulator > 0)
+            //    continue;
+            // RMC14 end
+
+            _gridUpdates[uid] = _prototypeUpdates.ShallowClone();
+            //grid.UpdateAccumulator += SpreadCooldownSeconds; // RMC14 removed
+        }
+
+        if (_gridUpdates.Count == 0)
+            return;
 
         // Remove the EdgeSpreaderComponent from any entity
         // that doesn't meet a few trivial prerequisites
@@ -144,6 +159,8 @@ public sealed class SpreaderSystem : EntitySystem
 
             if (!groupUpdates.TryGetValue(spreader.Id, out var updates) || updates < 1)
                 continue;
+
+            comp.NextSpread += spreader.SpreadDelay; // RMC14
 
             // Edge detection logic is to be handled
             // by the subscribing system, see KudzuSystem
