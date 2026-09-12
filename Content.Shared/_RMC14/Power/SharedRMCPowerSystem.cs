@@ -1,9 +1,11 @@
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Sprite;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Tools;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Access.Components;
+using Content.Shared.Audio;
 using Content.Shared.Damage;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
@@ -16,6 +18,7 @@ using Content.Shared.Power;
 using Content.Shared.Power.Components;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.PowerCell;
+using Content.Shared.Stacks;
 using Content.Shared.Toggleable;
 using Content.Shared.Tools.Systems;
 using Content.Shared.UserInterface;
@@ -34,7 +37,6 @@ namespace Content.Shared._RMC14.Power;
 public abstract class SharedRMCPowerSystem : EntitySystem
 {
     [Dependency] protected readonly SharedPointLightSystem Pointlight = default!;
-
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly AreaSystem _area = default!;
