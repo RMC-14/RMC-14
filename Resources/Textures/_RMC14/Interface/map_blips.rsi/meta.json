@@ -785,6 +785,9 @@
       "name": "clf_spec"
     },
     {
+      "name": "clf_cr"
+    },
+    {
       "name": "background_ua"
     },
     {

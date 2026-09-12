@@ -49,6 +49,30 @@
 
 - type: entity
   parent: RMCIDCardCLFBase
+  id: RMCIDCardCLFCoordinator
+  name: clf coordinator's ID card
+  components:
+  - type: PresetIdCard
+    job: RMCCLFCoordinator
+
+- type: entity
+  parent: RMCIDCardCLFBase
+  id: RMCIDCardCLFSynthetic
+  name: clf multipurpose synthetic's ID card
+  components:
+  - type: PresetIdCard
+    job: RMCCLFSynthetic
+
+- type: entity
+  parent: RMCIDCardCLFBase
+  id: RMCIDCardCLFSyntheticCombat
+  name: clf combat synthetic's ID card
+  components:
+  - type: PresetIdCard
+    job: RMCCLFSyntheticCombat
+
+- type: entity
+  parent: RMCIDCardCLFBase
   id: RMCIDCardCLFCellCommander
   name: clf cell commander's ID card
   components:
