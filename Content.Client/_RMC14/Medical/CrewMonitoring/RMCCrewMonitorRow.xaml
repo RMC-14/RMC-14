@@ -1,0 +1,26 @@
+<PanelContainer
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Medical.CrewMonitoring"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    HorizontalExpand="True"
+    MinHeight="38">
+    <PanelContainer.PanelOverride>
+        <graphics:StyleBoxFlat BackgroundColor="#15191D" BorderColor="#252C32" BorderThickness="0 0 0 1" />
+    </PanelContainer.PanelOverride>
+    <BoxContainer Orientation="Horizontal" Margin="6 3" SeparationOverride="6">
+        <TextureRect Name="JobIcon" Access="Public" MinSize="38 32" MaxWidth="38" TextureScale="2 2" Stretch="KeepCentered" />
+        <BoxContainer Orientation="Vertical" MinWidth="235" HorizontalExpand="True" VerticalAlignment="Center">
+            <Label Name="NameLabel" Access="Public" HorizontalExpand="True" ClipText="True" Align="Center" />
+            <Label Name="JobLabel" Access="Public" HorizontalExpand="True" ClipText="True" Align="Center" FontColorOverride="#8FA3B2" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal" MinWidth="76" MaxWidth="76" VerticalAlignment="Center">
+            <Label Name="StatusLabel" Access="Public" HorizontalExpand="True" Align="Center" VerticalAlignment="Center" />
+        </BoxContainer>
+        <Label Name="BruteLabel" Access="Public" MinWidth="65" MaxWidth="65" Align="Center" VerticalAlignment="Center" ToolTip="{Loc rmc-crew-monitor-damage-brute}" />
+        <Label Name="BurnLabel" Access="Public" MinWidth="65" MaxWidth="65" Align="Center" VerticalAlignment="Center" ToolTip="{Loc rmc-crew-monitor-damage-burn}" />
+        <Label Name="ToxinLabel" Access="Public" MinWidth="65" MaxWidth="65" Align="Center" VerticalAlignment="Center" ToolTip="{Loc rmc-crew-monitor-damage-toxin}" />
+        <Label Name="OxygenLabel" Access="Public" MinWidth="65" MaxWidth="65" Align="Center" VerticalAlignment="Center" ToolTip="{Loc rmc-crew-monitor-damage-oxygen}" />
+        <Label Name="LocationLabel" Access="Public" MinWidth="250" HorizontalExpand="True"
+               ClipText="True" Align="Center" VerticalAlignment="Center" />
+    </BoxContainer>
+</PanelContainer>
