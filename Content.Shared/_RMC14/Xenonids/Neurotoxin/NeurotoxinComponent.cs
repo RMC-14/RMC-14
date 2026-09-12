@@ -115,7 +115,7 @@ public sealed partial class NeurotoxinComponent : Component
     {
         new SoundPathSpecifier("/Audio/_RMC14/Xeno/alien_distantroar_3.ogg"),
         new SoundPathSpecifier("/Audio/_RMC14/Xeno/xenos_roaring.ogg"),
-        // new SoundCollectionSpecifier("XenoQueenBreath"), TODO RMC14 Queen Breath
+        new SoundCollectionSpecifier("XenoQueenBreath"),
         new SoundCollectionSpecifier("XenoRoar"),
         new SoundPathSpecifier("/Audio/_RMC14/Announcements/Marine/notice2.ogg"),
         new SoundPathSpecifier("/Audio/_RMC14/Weapons/alien_knockdown.ogg"), //TODO RMC14 Bonebreak sound
