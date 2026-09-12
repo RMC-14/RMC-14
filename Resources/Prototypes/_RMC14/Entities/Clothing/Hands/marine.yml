@@ -103,3 +103,8 @@
   id: RMCHandsFingerlessMarine
   name: marine fingerless combat gloves
   description: "Standard issue marine tactical gloves. It reads: 'knit by Marine Widows Association'. These ones have been modified by having the fingertips removed."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/fingerless.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/fingerless.rsi
