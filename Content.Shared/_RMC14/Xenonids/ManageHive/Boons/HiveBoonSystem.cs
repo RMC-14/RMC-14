@@ -17,6 +17,7 @@ using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Coordinates;
+using Content.Shared.Damage;
 using Content.Shared.Examine;
 using Content.Shared.GameTicking;
 using Content.Shared.Mind;
@@ -24,6 +25,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
+using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -90,6 +92,10 @@ public sealed class HiveBoonSystem : EntitySystem
         SubscribeLocalEvent<HiveBoonActivateFireResistanceEvent>(OnActivateFireResistance);
         SubscribeLocalEvent<HiveBoonActivateLarvaSurgeEvent>(OnActivateLarvaSurge);
         SubscribeLocalEvent<HiveBoonActivateKingEvent>(OnActivateKing);
+        SubscribeLocalEvent<HiveBoonActivateEvolutionEvent>(OnActivateEvolution);
+        SubscribeLocalEvent<HiveBoonActivateAggressionEvent>(OnActivateAggression);
+
+        SubscribeLocalEvent<GetMeleeDamageEvent>(OnGetMeleeDamage);
 
         SubscribeLocalEvent<XenoComponent, RMCGetFireImmunityEvent>(OnGetTileFireImmunity);
         SubscribeLocalEvent<XenoComponent, GetIgnitionImmunityEvent>(OnGetTileFireIgnitionImmunity);
@@ -167,6 +173,16 @@ public sealed class HiveBoonSystem : EntitySystem
         _xenoAnnounce.AnnounceSameHiveDefaultSound(ev.Boon, "The Queen has awakened 5 extra burrowed larva to join the hive!");
     }
 
+    private void OnActivateEvolution(HiveBoonActivateEvolutionEvent ev)
+    {
+        _xenoAnnounce.AnnounceSameHiveDefaultSound(ev.Boon, "The Queen has hastened our growth. We will mature far quicker!");
+    }
+
+    private void OnActivateAggression(HiveBoonActivateAggressionEvent ev)
+    {
+        _xenoAnnounce.AnnounceSameHiveDefaultSound(ev.Boon, "The Queen has sharpened our claws. Our strikes will land far harder!");
+    }
+
     private void OnActivateKing(HiveBoonActivateKingEvent ev)
     {
         var pylonQuery = EntityQueryEnumerator<HivePylonComponent>();
@@ -207,6 +223,21 @@ public sealed class HiveBoonSystem : EntitySystem
         {
             if (_hive.FromSameHive(uid, xeno.Owner))
                 args.Ignite = false;
+        }
+    }
+
+    private void OnGetMeleeDamage(ref GetMeleeDamageEvent args)
+    {
+        if (!HasComp<XenoComponent>(args.User))
+            return;
+
+        var query = EntityQueryEnumerator<HiveBoonMeleeDamageComponent>();
+        while (query.MoveNext(out var uid, out var boon))
+        {
+            if (!_hive.FromSameHive(uid, args.User))
+                continue;
+
+            args.Damage += new DamageSpecifier(_prototype.Index(boon.DamageGroup), boon.Amount);
         }
     }
 
