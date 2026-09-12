@@ -1055,19 +1055,43 @@
 
 - type: entity
   parent: RMCAttachableBase
-  id: RMCAttachmentL88Grip
-  name: L88 integrated foregrip
+  id: RMCAttachmentE290Grip
+  name: E290 integrated foregrip
   description: Oi, you bloody galah! Put this back on your rifle and get back to it!
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
-    state: l88grip
+    state: grip-e290
   - type: AttachableVisuals
     suffix: ""
   - type: Tag
     tags:
     - RMCAttachmentUnderbarrel
-    - RMCAttachmentL88Grip
+    - RMCAttachmentE290Grip
+
+- type: entity
+  parent: RMCAttachmentU7UnderbarrelShotgun
+  id: RMCAttachmentE290mkey # can't find where this is in cm13, commit that added gun & intergrated attachment doesnt define?? Parenting to UBS because thats how its code inherentence should be working in game.
+  name: E290 integrated underbarrel shotgun
+  description: What the bloody hell?! How'd ya managed this one ya damned drongo!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
+    state: mkey-e290
+  - type: AttachableToggleable
+    actionName: Switch to the E290 integrated underbarrel shotgun
+    actionDesc: Switch to using the E290A1/B's integrated underbarrel shotgun.
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
+      state: mkey-e290
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
+      state: mkey-e290-on
+  - type: AttachableVisuals
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentE290mkey
 
 - type: Tag
   id: RMCAttachmentUnderbarrel
@@ -1133,7 +1157,10 @@
   id: RMCAttachmentL91Bipod
 
 - type: Tag
-  id: RMCAttachmentL88Grip
+  id: RMCAttachmentE290Grip
+
+- type: Tag
+  id: RMCAttachmentE290mkey
 
 - type: Tag
   id: RMCAttachmentFlamerNozzle
