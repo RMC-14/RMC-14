@@ -1207,6 +1207,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private void OnXenoConstructMapInit(Entity<XenoConstructComponent> ent, ref MapInitEvent args)
     {
+        if (_net.IsServer && _hive.GetHive(ent.Owner) == null && _hive.TryGetHiveBySlot(HiveSlots.Normal, out var normalHive))
+            _hive.SetHive(ent.Owner, normalHive);
+
         if (!_area.TryGetArea(ent, out var area, out _))
             return;
 
