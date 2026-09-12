@@ -16,6 +16,11 @@ public sealed partial class XenoTailSweepComponent : Component
     [DataField, AutoNetworkedField]
     public float Range = 1.5f;
 
+    //range we add to ability entity checking range. loosely based on the distance a vest marine can travel in 750ms.
+    //lagcomp will always be clamped to 750ms anyway, so only downside of larger values is a miniscule performance hit.
+    [DataField]
+    public float LagCompensationLookupMargin = 4f;
+
     [DataField, AutoNetworkedField]
     public float KnockBackDistance = 1f;
 

@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
+using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -32,6 +33,7 @@ public sealed class XenoTailSweepSystem : EntitySystem
     [Dependency] private readonly SharedInteractionSystem _interact = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
     [Dependency] private readonly RMCObstacleSlammingSystem _obstacleSlamming = default!;
+    [Dependency] private readonly SharedRMCLagCompensationSystem _rmcLagCompensation = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _hit = new();
 
@@ -42,7 +44,6 @@ public sealed class XenoTailSweepSystem : EntitySystem
 
     private void OnXenoTailSweepAction(Entity<XenoTailSweepComponent> xeno, ref XenoTailSweepActionEvent args)
     {
-        // TODO RMC14 lag compensation
         if (!TryComp(xeno, out TransformComponent? transform))
             return;
 
@@ -63,13 +64,21 @@ public sealed class XenoTailSweepSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        var session = CompOrNull<ActorComponent>(xeno)?.PlayerSession;
+
         _hit.Clear();
-        _entityLookup.GetEntitiesInRange(transform.Coordinates, xeno.Comp.Range, _hit);
+        // Range widened by lagcomp range to check entities that have moved
+        _entityLookup.GetEntitiesInRange(transform.Coordinates, xeno.Comp.Range + xeno.Comp.LagCompensationLookupMargin, _hit, LookupFlags.Dynamic | LookupFlags.Static | LookupFlags.Approximate);
 
         var origin = _transform.GetMapCoordinates(xeno);
         foreach (var mob in _hit)
         {
             if (!_xeno.CanAbilityAttackTarget(xeno, mob))
+                continue;
+
+            // Range check against the target's lag-compensated position, without margin
+            var mobCoords = _rmcLagCompensation.GetCoordinates(mob, session);
+            if (!_transform.InRange(xeno.Owner.ToCoordinates(), mobCoords, xeno.Comp.Range))
                 continue;
 
             if (!_interact.InRangeUnobstructed(xeno.Owner, mob.Owner, xeno.Comp.Range))
