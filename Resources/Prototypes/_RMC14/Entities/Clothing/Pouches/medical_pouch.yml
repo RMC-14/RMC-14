@@ -35,6 +35,9 @@
       components:
       - Hypospray
   - type: FixedItemSizeStorage
+  - type: Tag
+    tags:
+    - RMCPouchMedical
 
 - type: entity
   parent: RMCPouchMedical
