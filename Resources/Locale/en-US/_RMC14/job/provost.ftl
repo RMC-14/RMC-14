@@ -35,3 +35,7 @@ rmc-job-prefix-provost-marshal = PvM
 rmc-ghost-name-corp-provost-team-leader = Provost Team Leader (Friendly)
 rmc-job-name-corp-provost-team-leader = Team Leader
 rmc-job-prefix-provost-team-leader = PvTML
+
+rmc-ghost-name-corp-provost-operative = Provost Intelligence Operative
+rmc-job-name-corp-provost-operative = Provost Intelligence Operative
+rmc-job-prefix-provost-operative = PvIO
