@@ -1113,6 +1113,132 @@
     startingItem: RMCMagazineRifleM16
     count: 12
 
+# F50 REG
+- type: entity
+  parent: RMCBoxMagazineRifleBase
+  id: RMCBoxMagazineRifleSLREmpty
+  name: magazine box (F50 x 16)
+  description: A box of rifle magazines for the F50 SLR.
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#485c63"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#ffc000"
+    - state: rifle_box_50
+      color: "#ffcb26"
+    - state: rifle_box_marking
+      color: "#7c4c1b"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#485c63"
+    - state: rifle_lid_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleSLR
+
+- type: entity
+  parent: RMCBoxMagazineRifleSLREmpty
+  id: RMCBoxMagazineRifleSLR
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleSLR
+    count: 16
+
+# F50 EXT
+- type: entity
+  parent: RMCBoxMagazineRifleBase
+  id: RMCBoxMagazineRifleSLRExtEmpty
+  name: magazine box (Ext F50 x 12)
+  description: A box of extended rifle magazines for the F50 SLR.
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#485c63"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#ffc000"
+    - state: rifle_box_50
+      color: "#ffcb26"
+    - state: rifle_box_marking
+      color: "#ffcb26"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#485c63"
+    - state: rifle_lid_marking
+      map: [ "lid_marking" ]
+      color: "#ffcb26"
+  - type: CMItemSlots
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleSLRExt
+
+- type: entity
+  parent: RMCBoxMagazineRifleSLRExtEmpty
+  id: RMCBoxMagazineRifleSLRExt
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleSLRExt
+    count: 12
+
+# F50 AP
+- type: entity
+  parent: RMCBoxMagazineRifleBase
+  id: RMCBoxMagazineRifleSLRAPEmpty
+  name: magazine box (AP F50 x 16)
+  description: A box of rifle magazines containing armor-penetrating ammunition for the F50 SLR.
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#485c63"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#ffc000"
+    - state: rifle_box_50
+      color: "#ffcb26"
+    - state: rifle_box_marking
+      color: "#318b11"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#485c63"
+    - state: rifle_lid_marking
+      map: [ "lid_marking" ]
+      color: "#318b11"
+  - type: CMItemSlots
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleSLRAP
+
+- type: entity
+  parent: RMCBoxMagazineRifleSLRAPEmpty
+  id: RMCBoxMagazineRifleSLRAP
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleSLRAP
+    count: 16
+
 # L83A3 REG
 - type: entity
   parent: RMCBoxMagazineRifleBase
