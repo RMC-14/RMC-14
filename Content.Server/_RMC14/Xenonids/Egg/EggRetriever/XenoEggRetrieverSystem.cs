@@ -1,11 +1,14 @@
 using System.Numerics;
+using Content.Server.DoAfter;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Announce;
+using Content.Shared._RMC14.Xenonids.Construction.EggMorpher;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Egg.EggRetriever;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs;
@@ -29,6 +32,7 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
     [Dependency] private readonly SharedXenoAnnounceSystem _announce = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
+    [Dependency] private readonly DoAfterSystem _doafter = default!;
 
     public override void Initialize()
     {
@@ -57,10 +61,28 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
         {
             var clickedEntities = _lookup.GetEntitiesIntersecting(target);
             var tileHasEggs = false;
+            var tileHasMorpher = false;
 
-            foreach (var possibleEgg in clickedEntities)
+            foreach (var possibleEggOrMorpher in clickedEntities)
             {
-                if (!TryComp<XenoEggComponent>(possibleEgg, out var egg) ||
+                if (TryComp<EggMorpherComponent>(possibleEggOrMorpher, out var morpher) && _hive.FromSameHive(eggRetriever.Owner, possibleEggOrMorpher))
+                {
+                    if (eggRetriever.Comp.CurEggs <= 0 || morpher.CurParasites >= morpher.MaxParasites)
+                        continue;
+
+                    var ev = new EggMorpherFillDoafterEvent();
+                    var doAfter = new DoAfterArgs(EntityManager, eggRetriever, eggRetriever.Comp.InsertEggsDoafter, ev, possibleEggOrMorpher)
+                    {
+                        BreakOnMove = true,
+                    };
+
+                    _popup.PopupEntity(Loc.GetString("rmc-xeno-retrieve-egg-fill", ("morpher", possibleEggOrMorpher)), eggRetriever, PopupType.Medium);
+                    _doafter.TryStartDoAfter(doAfter);
+                    tileHasMorpher = true;
+                    continue;
+                }
+
+                if (!TryComp<XenoEggComponent>(possibleEggOrMorpher, out var egg) ||
                     egg.State != XenoEggState.Item)
                     continue;
 
@@ -72,7 +94,7 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
                     return;
                 }
 
-                AddEgg(possibleEgg, eggRetriever);
+                AddEgg(possibleEggOrMorpher, eggRetriever);
             }
 
             if (tileHasEggs)
@@ -81,6 +103,9 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
                 _popup.PopupEntity(stashMsg, eggRetriever, eggRetriever);
                 return;
             }
+
+            if (tileHasMorpher)
+                return;
         }
 
         if (eggRetriever.Comp.CurEggs == 0)
