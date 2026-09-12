@@ -19,6 +19,7 @@
   - type: PlacementReplacement
     key: ladders
   - type: Ladder
+    direction: Down
   - type: BlockXenoConstruction
   - type: RMCMesonsNonviewable
   - type: RMCIgnoreGhostInteractionLimits
@@ -30,6 +31,8 @@
   components:
   - type: Sprite
     state: ladderup
+  - type: Ladder
+    direction: Up
 
 - type: entity
   parent: RMCLadder
