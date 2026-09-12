@@ -578,3 +578,51 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/movie_ticket.rsi
       state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbBase
+  id: RMCHelmetGarbSpaceJamTickets
+  name: Tickets to Space Jam
+  description: Two original, crisp, orange tickets to the one and only Space Jam of 2181. And what a jam it was.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/spacejam_tickets.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/spacejam_tickets.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/spacejam_tickets.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbBase
+  id: RMCHelmetGarbRabbitFoot
+  name: Rabbit's Foot
+  description: Lucky for you, but not the rabbit, didn't really do it much good.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/rabbitsfoot.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/rabbitsfoot.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/rabbitsfoot.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbBase
+  id: RMCHelmetGarbBulletPipe
+  name: 10x99mm XM43E1 casing pipe
+  description: The XM43E1 was an experimental weapons platform briefly fielded by the UNMC and We-Ya PMC teams. It was manufactured by AEGIS at the Atlas weapons facility. This spent casing has been converted into a pipe, but there is too much tar in the mouthpiece for it to be usable.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/bullet_pipe.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/bullet_pipe.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/bullet_pipe.rsi
+      state: helmet

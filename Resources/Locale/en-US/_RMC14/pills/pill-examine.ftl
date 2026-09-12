@@ -17,3 +17,4 @@ rmc-pill-contents-antized = A pill of some unique medicine. You believe it can t
 rmc-pill-contents-imidazoline = An Imidazoline pill. Used to restore vision from non-congenital eye damage.
 rmc-pill-contents-dexalin-plus = A Dexalin Plus pill. Used to instantly treat oxygen deprivation.
 rmc-pill-contents-iron = A Iron pill. Used to quickly restore blood.
+rmc-pill-contents-happy = A Happy Pill! Happy happy joy joy!

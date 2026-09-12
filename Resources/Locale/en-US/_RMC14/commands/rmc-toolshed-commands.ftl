@@ -38,8 +38,12 @@ command-description-marine-randomizewithjob = Deletes and then spawns a marine o
 
 command-description-removeinvalidweeds = Removes any weeds that should not have normally spread to where they are from the map.
 
-command-description-requisitions-addbudget = Adds budget to the default Requisitions account.
-command-description-requisitions-removebudget = Removes budget from the default Requisitions account.
+command-description-requisitions-addbudget = Adds budget to the selected Requisitions account. Defaults to Cargo.
+command-description-requisitions-removebudget = Removes budget from the selected Requisitions account. Defaults to Cargo.
+command-arg-sig-requisitions-addbudget-money = <amount (int)>
+command-arg-sig-requisitions-addbudget-account = [account (Cargo|BlackMarket)]
+command-arg-sig-requisitions-removebudget-money = <amount (int)>
+command-arg-sig-requisitions-removebudget-account = [account (Cargo|BlackMarket)]
 
 command-description-rmcrejuvenate-marineplayersinrange = Rejuvenates all marines within a specific range, restoring them to full health, clearing status effects, etc.
 

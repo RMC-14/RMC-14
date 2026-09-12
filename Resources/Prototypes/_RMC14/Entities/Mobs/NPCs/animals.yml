@@ -257,6 +257,9 @@
   - type: WarpPoint
     follow: true
     location: Mister Wiggles
+  - type: BlackMarketValue
+    value: 50
+    deadValue: 0
 
 
 - type: entity
@@ -372,6 +375,9 @@
   - type: WarpPoint
     follow: true
     location: Jones
+  - type: BlackMarketValue
+    value: 50
+    deadValue: 0
 
 - type: entity
   parent: RMCMobCatCalico
@@ -382,6 +388,9 @@
   - type: WarpPoint
     follow: true
     location: Orion
+  - type: BlackMarketValue
+    value: 50
+    deadValue: 0
 
 - type: entity
   parent: RMCMobCat
@@ -396,6 +405,9 @@
   - type: WarpPoint
     follow: true
     location: Garry
+  - type: BlackMarketValue
+    value: 50
+    deadValue: 0
 
 - type: entity
   parent: RMCMobCat

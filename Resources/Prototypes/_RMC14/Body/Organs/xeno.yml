@@ -11,6 +11,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Xeno/xeno_organs.rsi
     state: heart_t1
+  - type: BlackMarketValue
+    value: 60
 
 - type: entity
   parent: RMCOrganXenoHeart

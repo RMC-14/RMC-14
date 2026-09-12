@@ -63,6 +63,8 @@
     - belt
   - type: Item
     size: Small
+  - type: BlackMarketValue
+    value: 30
 
 - type: entity
   parent: CigarCase
@@ -116,6 +118,8 @@
     blacklist:
       components:
       - Xeno
+  - type: BlackMarketValue
+    value: 30
 
 - type: entity
   parent: RMCTarbackCase

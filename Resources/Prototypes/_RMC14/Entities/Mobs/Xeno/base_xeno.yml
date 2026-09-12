@@ -46,6 +46,9 @@
     simple: true
     deadText: rmc-medical-examine-dead-xeno
   - type: RMCBlockMedicalExamine
+  - type: BlackMarketValue
+    deadValue: 50
+    killsMendozaWhenSoldAlive: true
   - type: MobState
     allowedStates:
     - Alive

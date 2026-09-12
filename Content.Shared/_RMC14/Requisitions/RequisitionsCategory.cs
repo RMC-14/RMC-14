@@ -1,4 +1,5 @@
-﻿using Robust.Shared.Serialization;
+using Robust.Shared.Localization;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Requisitions;
 
@@ -7,7 +8,7 @@ namespace Content.Shared._RMC14.Requisitions;
 public sealed partial class RequisitionsCategory
 {
     [DataField(required: true)]
-    public string Name = string.Empty;
+    public LocId Name;
 
     [DataField(required: true)]
     public List<RequisitionsEntry> Entries = new();

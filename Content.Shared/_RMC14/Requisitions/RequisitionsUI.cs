@@ -10,27 +10,37 @@ public enum RequisitionsUIKey
 }
 
 [Serializable, NetSerializable]
-public sealed class RequisitionsBuiState : BoundUserInterfaceState
-{
-    public RequisitionsElevatorMode? PlatformLowered;
-    public bool Busy;
-    public int Balance;
-    public bool Full;
-
-    public RequisitionsBuiState(RequisitionsElevatorMode? platformLowered, bool busy, int balance, bool full)
-    {
-        PlatformLowered = platformLowered;
-        Busy = busy;
-        Balance = balance;
-        Full = full;
-    }
-}
-
-[Serializable, NetSerializable]
 public sealed class RequisitionsBuyMsg(int category, int order) : BoundUserInterfaceMessage
 {
     public int Category = category;
     public int Order = order;
+}
+
+[Serializable, NetSerializable]
+public sealed class RequisitionsCartItem(int category, int order, int amount)
+{
+    public int Category = category;
+    public int Order = order;
+    public int Amount = amount;
+}
+
+[Serializable, NetSerializable]
+public sealed class RequisitionsBuyCartMsg(List<RequisitionsCartItem> items) : BoundUserInterfaceMessage
+{
+    public List<RequisitionsCartItem> Items = items;
+}
+
+[Serializable, NetSerializable]
+public sealed class RequisitionsBuyBlackMarketCartMsg(List<RequisitionsCartItem> items) : BoundUserInterfaceMessage
+{
+    public List<RequisitionsCartItem> Items = items;
+}
+
+[Serializable, NetSerializable]
+public sealed class RequisitionsPendingOrder(RequisitionsEntry entry, int amount)
+{
+    public RequisitionsEntry Entry = entry;
+    public int Amount = amount;
 }
 
 [Serializable, NetSerializable]
