@@ -251,3 +251,14 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/weya_windbreaker.rsi
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-weya-windbreaker
+
+- type: entity
+  parent: RMCJacketWindbreaker
+  id: RMCJacketWindbreakerWEYASecurity
+  name: Weston-Yamada security windbreaker
+  description: A stylish windbreaker, designed for use by members of the Security Division who need stylish protection from the elements.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/security_windbreaker.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/security_windbreaker.rsi
