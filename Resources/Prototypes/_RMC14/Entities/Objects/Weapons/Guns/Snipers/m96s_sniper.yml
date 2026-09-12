@@ -214,6 +214,8 @@
   - type: AimedShotEffect
     extraHits: 2
   - type: IgnoreSwiftSteps
+  - type: ProjectileCoverInteraction
+    ignoreCover: true
 
 - type: entity
   parent: CMBulletSniper10x28mm

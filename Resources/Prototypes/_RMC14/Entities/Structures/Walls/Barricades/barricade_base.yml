@@ -30,7 +30,7 @@
         layer:
         - TableLayer
         - BarricadeImpassable
-        # - BulletImpassable TODO
+        - BulletImpassable
   - type: RotationDrawDepth
     southDrawDepth: OverMobs
   - type: Barricade
@@ -38,6 +38,7 @@
     damageContainer: Inorganic
     damageModifierSet: CMBarricade
   - type: DirectionalAttackBlocker
+  - type: ProjectileCover
   - type: RMCLeapProtection
     inherentStunDuration: 3
     fullProtection: true
