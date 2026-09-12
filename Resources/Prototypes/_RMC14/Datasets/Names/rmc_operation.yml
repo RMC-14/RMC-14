@@ -1,0 +1,17 @@
+﻿- type: localizedDataset
+  id: RMCOperationNames
+  values:
+    prefix: names-rmc-operation-dataset-
+    count: 15
+
+- type: localizedDataset
+  id: RMCOperationPrefixes
+  values:
+    prefix: names-rmc-operation-prefix-dataset-
+    count: 123
+
+- type: localizedDataset
+  id: RMCOperationSuffixes
+  values:
+    prefix: names-rmc-operation-suffix-dataset-
+    count: 88
