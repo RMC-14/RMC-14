@@ -16,7 +16,7 @@
   startingGear: CMGearVehicleCrewman
   icon: "CMJobIconVehicleCrewman"
   joinNotifyCrew: false
-  supervisors: cm-job-supervisors-co
+  supervisors: cm-job-supervisors-aso
   accessGroups:
   - VehicleCrewman
   roleWeight: 0.25

@@ -138,3 +138,13 @@ rmc-new-to-job-executive-bodyguard = Your job as an Executive Bodyguard is to en
                                              Whenever possible, attempt to verbally discourage the Liaison from taking antagonistic action against the ship, causing trouble for other players, or being excessively rude without IC reason. You are also encouraged to report any illegal action the CL commits to the MPs, and detain them and transfer them to the MPs if they are an active threat to other players.
 
                                              Do not deploy to fight the Xenonids, and remember that your greatest strength is in the roleplay you can provide the CL and the ship. You are permitted to carry a sidearm on Code Green and a longarm on Code Blue, although this right can be revoked by the Commander or CMP. Remember to strictly adhere to both escalation rules and MLaw.
+
+rmc-new-to-job-auxiliary-support-officer = As the Auxiliary Support Officer, you are responsible for managing and processing intel, as well as overseeing the flight crew and vehicle crewmen.
+                                                
+                                            You are primarily responsible for the overwatch and management of intelligence, as well as the processing and sorting of the documents they retrieve.
+
+                                            You oversee the flight crew and vehicle crewmen. Ensure they have what they need for the operation and advise them if necessary.
+
+                                            You are also responsible for maintaining shipside operations. If you notice a department struggling, you may offer yourself to help, but respect their decision if they refuse. If you insist, instead bring the issue to the current Commander for them to resolve.
+
+                                            Your quarters are located to the northeast of the Combat Information Center, just outside the main entrance. The computer lab, where you can overwatch intel and process documents, is located east of research.

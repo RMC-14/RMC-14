@@ -520,6 +520,30 @@
   - type: Sprite
     state: cap_key
 
+# Auxiliary Support Officer
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyAuxiliarySupportOfficer
+  name: auxiliary support officer encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCommand
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+    - MarineEngineer
+    - MarineMedical
+    - MarineRequisition
+    - MarineJTAC
+    - MarineIntel
+    defaultChannel: MarineCommand
+  - type: Sprite
+    state: cmp_key
+
 # Vehicle Crewman
 - type: entity
   parent: CMEncryptionKey
