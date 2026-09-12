@@ -336,9 +336,10 @@
   suffix: PvE
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Medical/ez_medic_auto_injector.rsi # TODO RMC14 fix sprites when autoinjector sprite changes merge
+    sprite: _RMC14/Objects/Medical/ez_medic_auto_injector.rsi
     layers:
-    - state: autoinjector
+    - sprite: _RMC14/Objects/Medical/emergency_auto_injector.rsi
+      state: empty_oneuse
     - state: autoinjector1
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
