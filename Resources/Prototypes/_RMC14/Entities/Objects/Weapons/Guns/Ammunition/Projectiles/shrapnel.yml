@@ -33,6 +33,11 @@
       types:
         Piercing: 25
     deleteOnCollide: true
+  - type: ShrapnelChanceProjectile
+    sourceId: shrapnel
+    embedChance: 0.15
+    count: 1
+    randomizeBodyPart: true
   - type: CMArmorPiercing
     amount: 20
   - type: RMCProjectileAccuracy

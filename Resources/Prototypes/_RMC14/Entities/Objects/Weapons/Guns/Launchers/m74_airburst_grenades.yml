@@ -135,6 +135,9 @@
   id: RMCBaseAirBurstProjectile
   categories: [ HideSpawnMenu ]
   components:
+  - type: RemoveComponents
+    components:
+    - type: ShrapnelChanceProjectile
   - type: TriggerOnFixedDistanceStop
     delay: 0
   - type: SpawnOnTrigger
@@ -311,6 +314,9 @@
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/airburst_projectiles.rsi
     layers:
     - state: starshell_bullet
+  - type: RemoveComponents
+    components:
+    - type: ShrapnelChanceProjectile
   - type: GunIFF
     enabled: true
   - type: Projectile
@@ -390,6 +396,9 @@
     layers:
     - state: buckshot
       shader: unshaded
+  - type: ShrapnelChanceProjectile
+    sourceId: grenade_shrapnel
+    embedChance: 0.15
   - type: Projectile
     impactEffect: BulletImpactEffect
     damage:
@@ -453,6 +462,9 @@
   components:
   - type: TriggerOnFixedDistanceStop
     delay: 0
+  - type: RemoveComponents
+    components:
+    - type: ShrapnelChanceProjectile
   - type: IgnorePredictionHide
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/grenade_launcher.rsi
