@@ -464,3 +464,43 @@
   sprites:
     - sprite: _RMC14/Mobs/Avali/avali_parts.rsi
       state: avali_tail_wag
+
+- type: marking
+  id: AvaliTailStripeOneAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: []
+  sprites:
+    - sprite: _RMC14/Mobs/Avali/avali_parts.rsi
+      state: avali_tailstripedbase_wag
+    - sprite: _RMC14/Mobs/Avali/avali_parts.rsi
+      state: avali_tailstripedprimary_wag
+    - sprite: _RMC14/Mobs/Avali/avali_parts.rsi
+      state: avali_tailstripedsecondary_wag
+
+- type: marking
+  id: AvaliTailTrimOneAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: []
+  sprites:
+    - sprite: _RMC14/Mobs/Avali/avali_parts.rsi
+      state: avali_tailtrimmedonebase_wag
+    - sprite: _RMC14/Mobs/Avali/avali_parts.rsi
+      state: avali_tailtrimmedoneprimary_wag
+    - sprite: _RMC14/Mobs/Avali/avali_parts.rsi
+      state: avali_tailtrimmedonesecondary_wag
+
+- type: marking
+  id: AvaliTailTrimTwoAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: []
+  sprites:
+    - sprite: _RMC14/Mobs/Avali/avali_parts.rsi
+      state: avali_tailtrimmedtwobase_wag
+    - sprite: _RMC14/Mobs/Avali/avali_parts.rsi
+      state: avali_tailtrimmedtwoprimary_wag
+    - sprite: _RMC14/Mobs/Avali/avali_parts.rsi
+      state: avali_tailtrimmedtwosecondary_wag
+      
