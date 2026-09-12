@@ -184,19 +184,6 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         return (uid, comp);
     }
 
-    public Entity<HiveComponent>? GetHiveByName(string hiveName)
-    {
-        var query = EntityQueryEnumerator<HiveComponent>();
-
-        while (query.MoveNext(out var uid, out var hive))
-        {
-            if (MetaData(uid).EntityName == hiveName)
-                return (uid, hive);
-        }
-
-        return null;
-    }
-
     public bool TryGetHiveBySlot(int position, out EntityUid hive)
     {
         var query = EntityQueryEnumerator<HiveSlotComponent>();
@@ -574,11 +561,9 @@ public abstract class SharedXenoHiveSystem : EntitySystem
 
     private void OnAutoAssignHiveAdded(Entity<AutoAssignHiveComponent> ent, ref ComponentStartup args)
     {
-        var hive = GetHiveByName(ent.Comp.Hive);
-
-        if (hive == null)
+        if (!TryGetHiveBySlot(ent.Comp.Hive, out var hive))
         {
-            Log.Debug($"Tried to auto assign hive to {ent.Comp.Hive}, but no such hive was found");
+            Log.Debug($"Tried to auto assign hive to slot {ent.Comp.Hive}, but no such hive was found");
             return;
         }
 
@@ -646,12 +631,25 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         return _npcFaction.IsMemberOfAny(member.Owner, hiveComp.AlliedFactions);
     }
 
+    public bool IsFactionAllyBanned(Entity<HiveComponent> hive, ProtoId<NpcFactionPrototype> faction)
+    {
+        return hive.Comp.BannedFactionAllies.Contains(faction);
+    }
+
+    public bool IsHiveAllyBanned(Entity<HiveComponent> hive, EntityUid otherHive)
+    {
+        if (!TryComp(otherHive, out HiveSlotComponent? slot))
+            return false;
+
+        return hive.Comp.BannedHiveSlots.Contains(slot.Position);
+    }
+
     public void SetFactionAlly(Entity<HiveComponent> hive, ProtoId<NpcFactionPrototype> faction, bool allied)
     {
         if (hive.Comp.AlliedFactions.Contains(faction) == allied)
             return;
 
-        if (allied && hive.Comp.BanHumanoidAlliances)
+        if (allied && IsFactionAllyBanned(hive, faction))
             return;
 
         if (allied)
@@ -673,7 +671,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         if (hive.Comp.AlliedHives.Contains(otherHive) == allied)
             return;
 
-        if (allied && hive.Comp.BanHiveAlliances)
+        if (allied && IsHiveAllyBanned(hive, otherHive))
             return;
 
         if (allied)

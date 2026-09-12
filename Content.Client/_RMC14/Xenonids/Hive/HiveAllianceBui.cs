@@ -39,21 +39,21 @@ public sealed class HiveAllianceBui : BoundUserInterface
         if (_hiveSystem.GetHive(Owner) is not { } hive)
             return;
 
-        var factions = new List<(ProtoId<NpcFactionPrototype> Id, string Name, bool Allied)>();
+        var factions = new List<(ProtoId<NpcFactionPrototype> Id, string Name, bool Allied, bool Banned)>();
         foreach (var faction in HiveAlliableFactions.All)
         {
             var name = _prototype.TryIndex(faction, out var proto) ? proto.ID : faction.Id;
-            factions.Add((faction, name, _hiveSystem.IsFactionAllied(hive, faction)));
+            factions.Add((faction, name, _hiveSystem.IsFactionAllied(hive, faction), _hiveSystem.IsFactionAllyBanned(hive, faction)));
         }
 
-        var hives = new List<(NetEntity Entity, string Name, bool Allied)>();
+        var hives = new List<(NetEntity Entity, string Name, bool Allied, bool Banned)>();
         var query = EntMan.AllEntityQueryEnumerator<HiveComponent, MetaDataComponent>();
         while (query.MoveNext(out var uid, out var otherHive, out var meta))
         {
             if (uid == hive.Owner)
                 continue;
 
-            hives.Add((EntMan.GetNetEntity(uid), meta.EntityName, _hiveSystem.IsHiveAllied(hive, uid)));
+            hives.Add((EntMan.GetNetEntity(uid), meta.EntityName, _hiveSystem.IsHiveAllied(hive, uid), _hiveSystem.IsHiveAllyBanned(hive, uid)));
         }
 
         _window.UpdateState(factions, hives, OnSetFactionAlly, OnSetHiveAlly);

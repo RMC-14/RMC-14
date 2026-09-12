@@ -114,10 +114,20 @@ public sealed partial class HiveComponent : Component
     public HashSet<EntityUid> AlliedHives = new();
 
     [DataField, AutoNetworkedField]
-    public bool BanHumanoidAlliances = true;
+    public HashSet<ProtoId<NpcFactionPrototype>> BannedFactionAllies = new(HiveAlliableFactions.All);
 
     [DataField, AutoNetworkedField]
-    public bool BanHiveAlliances = true;
+    public HashSet<int> BannedHiveSlots = new()
+    {
+        HiveSlots.Normal,
+        HiveSlots.Corrupted,
+        HiveSlots.Alpha,
+        HiveSlots.Bravo,
+        HiveSlots.Charlie,
+        HiveSlots.Delta,
+        HiveSlots.Renegade,
+        HiveSlots.Forsaken,
+    };
 
     [DataField, AutoNetworkedField]
     public bool TacticalMapAlwaysLive;

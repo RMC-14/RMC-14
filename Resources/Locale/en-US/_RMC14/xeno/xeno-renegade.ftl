@@ -7,6 +7,7 @@ rmc-xeno-renegade-defect-message = Our Queen has broken the alliance with the { 
 rmc-xeno-renegade-defect-obey-queen = Obey the Queen
 rmc-xeno-renegade-defect-obey-talls = Obey the talls
 rmc-xeno-renegade-defect-timed-out = Offer expired.
+rmc-dialog-countdown = { $seconds } seconds remaining
 
 rmc-xeno-renegade-defect-self = You lost the connection with your Hive. Now you have no Queen, only your masters.
 rmc-xeno-renegade-defect-others = { $xeno } seems to have lost its connection to its Hive!

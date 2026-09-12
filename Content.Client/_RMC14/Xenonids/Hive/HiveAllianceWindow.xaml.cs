@@ -17,30 +17,32 @@ public sealed partial class HiveAllianceWindow : DefaultWindow
     }
 
     public void UpdateState(
-        List<(ProtoId<NpcFactionPrototype> Id, string Name, bool Allied)> factions,
-        List<(NetEntity Entity, string Name, bool Allied)> hives,
+        List<(ProtoId<NpcFactionPrototype> Id, string Name, bool Allied, bool Banned)> factions,
+        List<(NetEntity Entity, string Name, bool Allied, bool Banned)> hives,
         Action<ProtoId<NpcFactionPrototype>, bool> onSetFactionAlly,
         Action<NetEntity, bool> onSetHiveAlly)
     {
         FactionsContainer.DisposeAllChildren();
-        foreach (var (id, name, allied) in factions)
+        foreach (var (id, name, allied, banned) in factions)
         {
-            FactionsContainer.AddChild(BuildEntry(name, allied, isAllied => onSetFactionAlly(id, isAllied)));
+            FactionsContainer.AddChild(BuildEntry(name, allied, banned, isAllied => onSetFactionAlly(id, isAllied)));
         }
 
         HivesContainer.DisposeAllChildren();
-        foreach (var (entity, name, allied) in hives)
+        foreach (var (entity, name, allied, banned) in hives)
         {
-            HivesContainer.AddChild(BuildEntry(name, allied, isAllied => onSetHiveAlly(entity, isAllied)));
+            HivesContainer.AddChild(BuildEntry(name, allied, banned, isAllied => onSetHiveAlly(entity, isAllied)));
         }
     }
 
-    private static Control BuildEntry(string name, bool allied, Action<bool> onToggled)
+    private static Control BuildEntry(string name, bool allied, bool disabled, Action<bool> onToggled)
     {
         var checkBox = new CheckBox
         {
             Text = name,
             Pressed = allied,
+            Disabled = disabled,
+            Modulate = disabled ? Color.White.WithAlpha(0.5f) : Color.White,
             Margin = new Thickness(2, 1, 2, 1),
         };
         checkBox.OnToggled += args => onToggled(args.Pressed);

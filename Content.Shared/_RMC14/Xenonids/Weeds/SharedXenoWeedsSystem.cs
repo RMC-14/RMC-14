@@ -209,6 +209,9 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
     private void OnWeedsMapInit(Entity<XenoWeedsComponent> ent, ref MapInitEvent args)
     {
+        if (_net.IsServer && _hive.GetHive(ent.Owner) == null && _hive.TryGetHiveBySlot(HiveSlots.Normal, out var normalHive))
+            _hive.SetHive(ent.Owner, normalHive);
+
         // Weedbound structures register themselves on their own MapInit/Startup.
         // Only do the expensive rebuild pass if we have serialized runtime bookkeeping to clear.
         if (ent.Comp.WeedboundStructures.Count > 0)
@@ -477,8 +480,11 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         if (weeds == null)
             return false;
 
-        if (!_hive.FromSameHive(entity.Owner, weeds.Value.Owner))
+        if (_hive.GetHive(weeds.Value.Owner) is not { } weedsHive ||
+            !_hive.IsMemberOrAlly(entity.Owner, weedsHive.Owner))
+        {
             return false;
+        }
 
         return true;
     }
