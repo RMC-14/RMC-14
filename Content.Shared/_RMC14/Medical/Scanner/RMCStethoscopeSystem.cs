@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.UniformAccessories;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
@@ -112,7 +113,13 @@ public sealed class RMCStethoscopeSystem : EntitySystem
 
         if (_mobState.IsDead(target))
         {
-            msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-dead"));
+            if (HasComp<VictimBurstComponent>(target))
+            {
+                msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-dead-infected-bursting"));
+                return msg;
+            }
+            var deathMsg = (HasComp<VictimInfectedComponent>(target)) ? Loc.GetString("rmc-stethoscope-dead-infected") : Loc.GetString("rmc-stethoscope-dead");
+            msg.AddMarkupOrThrow(deathMsg);
             return msg;
         }
 
@@ -130,10 +137,22 @@ public sealed class RMCStethoscopeSystem : EntitySystem
             ? Loc.GetString(totalHealth)
             : Loc.GetString(totalHealth, ("target", target));
 
+        locString = AppendInfection(target, locString);
         msg.AddMarkupOrThrow(locString);
         return msg;
     }
 
+    private string AppendInfection(EntityUid target, string msg)
+    {
+        if (HasComp<VictimInfectedComponent>(target))
+        {
+            var infectedMsg = (HasComp<VictimBurstComponent>(target)) ? Loc.GetString("rmc-stethoscope-infected-bursting") : Loc.GetString("rmc-stethoscope-infected");
+            var fullMsg = msg + "\n" + infectedMsg;
+            return fullMsg;
+        }
+        return msg;
+    }
+       
     private float? GetPercentHealth(EntityUid target)
     {
         if (!TryComp<DamageableComponent>(target, out var damageable) ||
