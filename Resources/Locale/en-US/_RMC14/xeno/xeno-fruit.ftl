@@ -109,5 +109,5 @@ rmc-xeno-fruit-speed = As {$caste ->
         [Queen] the {$caste}
         [King] the {$caste}
         *[other] a {$caste}
-    }, boosts our speed by [bold]{$amount}%[/bold] for {$time} seconds.
+    }, it boosts our speed by [bold]{$amount}%[/bold] for {$time} seconds.
 rmc-xeno-fruit-regen-plasma = Regenerates [bold]{$amount}[/bold] plasma per second for {$time} seconds.
