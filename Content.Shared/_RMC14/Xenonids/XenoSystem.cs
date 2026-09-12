@@ -472,7 +472,7 @@ public sealed partial class XenoSystem : EntitySystem
 
     public void HealDamage(Entity<DamageableComponent?> xeno, FixedPoint2 amount)
     {
-        if (_rmcFlammable.IsOnFire(xeno.Owner))
+        if (!CanHeal(xeno))
             return;
 
         if (!_damageableQuery.Resolve(xeno, ref xeno.Comp, false) ||

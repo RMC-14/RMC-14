@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Server.GameTicking;
 using Content.Server.Ghost.Roles.Components;
 using Content.Shared._RMC14.Armor.Ghillie;
@@ -12,6 +12,7 @@ using Content.Shared._RMC14.Synth;
 using Content.Shared._RMC14.Thunderdome;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Evolution;
+using Content.Shared._RMC14.Xenonids.LastStand;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
@@ -27,6 +28,8 @@ namespace Content.Server._RMC14.Rules.DistressSignal;
 public sealed partial class CMDistressSignalRuleSystem
 {
     private const int LastMarineEquipmentCooldownHours = 2;
+
+    private const int XenoLastStandMinNumber = 1;
 
     /// <summary>
     /// Performs all round end condition checks including hijack status, faction live counts,
@@ -61,6 +64,7 @@ public sealed partial class CMDistressSignalRuleSystem
 
         ApplyLastMarineEffects(time);
         CheckQueenDeath(distress);
+        CheckLastXenoAlive();
     }
 
     private void UpdateHijackState(CMDistressSignalRuleComponent distress)
@@ -428,6 +432,27 @@ public sealed partial class CMDistressSignalRuleSystem
             _chatManager.SendAdminAnnouncement(msg);
             _chatManager.DispatchServerAnnouncement(msg);
             ev.Cancel();
+        }
+    }
+
+    private void CheckLastXenoAlive()
+    {
+        //TODO RMC14 check main hive only
+        var xenoCount = _xenoEvolution.GetLiving<XenoComponent>(x => x.Comp.CountedInSlots);
+
+        if (xenoCount > XenoLastStandMinNumber)
+            return;
+
+        var xenos = EntityQueryEnumerator<ActorComponent, XenoLastStandableComponent, MobStateComponent, TransformComponent>();
+        while (xenos.MoveNext(out var xenoId, out _, out var xeno, out var mobState, out var xform))
+        {
+            if (HasComp<ThunderdomeMapComponent>(xform.MapUid))
+                continue;
+
+            if (_mobState.IsDead(xenoId))
+                continue;
+
+            EnsureComp<XenoLastStandComponent>(xenoId);
         }
     }
 }
