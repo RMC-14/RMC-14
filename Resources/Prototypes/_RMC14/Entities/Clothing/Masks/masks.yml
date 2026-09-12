@@ -372,6 +372,7 @@
 - type: entity
   parent: RMCMaskKeffiyeh
   id: RMCMaskKeffiyehBlack
+  name: black keffiyeh
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh_black.rsi
@@ -381,6 +382,7 @@
 - type: entity
   parent: RMCMaskKeffiyeh
   id: RMCMaskKeffiyehBlue
+  name: blue keffiyeh
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh_blue.rsi
@@ -390,6 +392,7 @@
 - type: entity
   parent: RMCMaskKeffiyeh
   id: RMCMaskKeffiyehGreen
+  name: green keffiyeh
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh_green.rsi
@@ -399,6 +402,7 @@
 - type: entity
   parent: RMCMaskKeffiyeh
   id: RMCMaskKeffiyehWhite
+  name: white keffiyeh
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh_white.rsi
@@ -408,6 +412,7 @@
 - type: entity
   parent: RMCMaskKeffiyeh
   id: RMCMaskKeffiyehRed
+  name: red keffiyeh
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh_red.rsi
