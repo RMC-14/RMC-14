@@ -1,4 +1,4 @@
-﻿using Content.Shared.FixedPoint;
+using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -36,4 +36,7 @@ public sealed partial class CrusherShieldComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntProtoId Effect = "RMCEffectEmpowerBrown";
+
+    [DataField, AutoNetworkedField]
+    public string? ShieldEffect;
 }

@@ -357,6 +357,102 @@
     popup: rmc-xeno-magicalgirl-popup
 
 - type: entity
+  parent: RMCXenoQueenBase
+  id: RMCXenoQueenBlood
+  suffix: Blood Queen
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Extras/blood_queen.rsi
+  - type: XenoStrain
+    name: rmc-xeno-bloodqueen-name
+    description: rmc-xeno-bloodqueen-description
+    popup: rmc-xeno-bloodqueen-popup
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoAcidWeak
+    - ActionXenoPheromones
+    - ActionXenoWordQueen
+    - ActionXenoPsychicWhisper
+    - ActionXenoPsychicRadiance
+    - ActionXenoGiveOrder
+    - ActionXenoMassacre
+    - ActionXenoBloodDrain
+    - ActionXenoManageHive
+  - type: XenoMaturing
+    critThreshold: 1500
+    deadThreshold: 1600
+    addComponents:
+    - type: XenoDoom
+    - type: CrusherShield
+      shieldEffect: blood-shield
+      plasmaCost: 200
+      shieldDuration: 5
+      explosionResistanceDuration: 0
+      damageReduction: 5
+    addActions:
+    - ActionXenoDoomBloodQueen
+    - ActionXenoDefensiveShieldBloodQueen
+  - type: CMArmor
+    xenoArmor: 35
+  - type: AcidTrap
+    trapLevel: 1
+    cost: 70
+  - type: XenoPheromones
+    pheromonesMultiplier: 3
+    pheroSuffix: strong  
+  - type: WhitelistPickup
+    whitelist:
+      components:
+      - XenoFruit
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 50
+  - type: XenoBrutalize
+    damage:
+      groups:
+        Brute: 40
+    baseCooldownReduction: 0
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 68
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.66
+    baseSprintSpeed: 3
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.68
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.755
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.5275
+      whitelist:
+        components:
+        - XenoHeavy
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: XenoFootstepLarge
+      params:
+        volume: 4
+  - type: XenoMassacre
+  - type: XenoBloodDrain
+    biteDamage:
+      groups:
+        Brute: 20
+  - type: RMCActionOrder
+    id: RMCXenoQueenBlood
+      
+
+- type: entity
   parent: StationAiHolo
   id: RMCQueenEye
   name: queen eye

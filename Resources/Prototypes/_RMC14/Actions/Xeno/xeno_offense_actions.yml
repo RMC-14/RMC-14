@@ -1651,3 +1651,19 @@
   components:
   - type: Sprite
     state: gas_mine
+
+- type: entity
+  id: ActionXenoMassacre
+  parent: ActionXenoBase
+  name: Massacre (300)
+  description: Gibs dead enemies in an area. Gives a burrowed larva for each enemy gibbed.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: gut
+  - type: TargetAction
+    range: 2
+  - type: WorldTargetAction
+    event: !type:XenoMassacreActionEvent

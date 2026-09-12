@@ -1,18 +1,15 @@
-using System.Numerics;
-using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._RMC14.Xenonids.Gut;
+namespace Content.Shared._RMC14.Xenonids.Massacre;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedXenoGutSystem))]
-public sealed partial class XenoGutComponent : Component
+public sealed partial class XenoMassacreComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public FixedPoint2 PlasmaCost = 200;
+    public FixedPoint2 PlasmaCost = 300;
 
     [DataField, AutoNetworkedField]
     public TimeSpan Delay = TimeSpan.FromSeconds(8);
@@ -22,4 +19,16 @@ public sealed partial class XenoGutComponent : Component
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/_RMC14/Voice/Xeno/alien_roar1.ogg", AudioParams.Default.WithVolume(-5));
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId Effects = "RMCEffectGutting";
+
+    [DataField, AutoNetworkedField]
+    public float GibRange = 2.5f;
+
+    [DataField]
+    public List<(EntityUid ent, EntityUid effect)> Targets = new();
+
+    [DataField, AutoNetworkedField]
+    public int BurrowedPerGib = 1;
 }
