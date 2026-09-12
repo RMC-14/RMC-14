@@ -69,6 +69,27 @@ namespace Content.Shared.Chat
             LanguageIcon = languageIcon;
         }
         // RMC14
+
+        public ChatMessage(ChatMessage copyFrom)
+        {
+            Channel = copyFrom.Channel;
+            Message = copyFrom.Message;
+            WrappedMessage = copyFrom.WrappedMessage;
+            SenderEntity = copyFrom.SenderEntity;
+            SenderKey = copyFrom.SenderKey;
+            HideChat = copyFrom.HideChat;
+            MessageColorOverride = copyFrom.MessageColorOverride;
+            AudioPath = copyFrom.AudioPath;
+            AudioVolume = copyFrom.AudioVolume;
+            Read = copyFrom.Read;
+            // RMC14
+            HidePopup = copyFrom.HidePopup;
+            UseEmoteSpeechBubble = copyFrom.UseEmoteSpeechBubble;
+            SpeechStyleClass = copyFrom.SpeechStyleClass;
+            RepeatCheckSender = copyFrom.RepeatCheckSender;
+            LanguageIcon = copyFrom.LanguageIcon;
+            // RMC14
+        }
     }
 
     /// <summary>
