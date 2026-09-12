@@ -1,42 +1,52 @@
+using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Heal;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Rest;
-using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
-using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Content.Shared._RMC14.Xenonids.Construction.RecoveryNode;
 
 public sealed partial class RecoveryNodeSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _time = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedXenoHealSystem _heal = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
+    [Dependency] private readonly IGameTiming _time = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly MobStateSystem _mob = default!;
     [Dependency] private readonly SharedDoAfterSystem _doafter = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedXenoHealSystem _heal = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
+
+    private EntityQuery<XenoAttachedOvipositorComponent> _attachedOviQuery;
+    private EntityQuery<DamageableComponent> _damageableQuery;
+    private EntityQuery<XenoPlasmaComponent> _plasmaQuery;
+    private EntityQuery<XenoRestingComponent> _restingQuery;
+    private EntityQuery<XenoComponent> _xenoQuery;
+
+    private readonly HashSet<EntityUid> _nearbyEntities = [];
+    private readonly HashSet<EntityUid> _possibleTargets = [];
+
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RecoveryNodeComponent, RecoveryNodeRecoverDoAfterEvent>(OnRecoveryDoAfter);
+        _attachedOviQuery = GetEntityQuery<XenoAttachedOvipositorComponent>();
+        _damageableQuery = GetEntityQuery<DamageableComponent>();
+        _plasmaQuery = GetEntityQuery<XenoPlasmaComponent>();
+        _restingQuery = GetEntityQuery<XenoRestingComponent>();
+        _xenoQuery = GetEntityQuery<XenoComponent>();
 
+        SubscribeLocalEvent<RecoveryNodeComponent, RecoveryNodeRecoverDoAfterEvent>(OnRecoveryDoAfter);
     }
 
     public override void Update(float frameTime)
@@ -49,63 +59,98 @@ public sealed partial class RecoveryNodeSystem : EntitySystem
 
         while (recoverNodes.MoveNext(out var ent, out var comp))
         {
-            if (comp.NextHealAt < curTime && comp.HealDoAfter == null)
+            if (comp.NextRecoveryAt < curTime && comp.DoAfter == null)
             {
-                TryHealRandomXeno((ent, comp));
+                TryRecoverRandomXeno((ent, comp));
             }
         }
     }
 
-    private void TryHealRandomXeno(Entity<RecoveryNodeComponent> recoveryNode)
+    private void TryRecoverRandomXeno(Entity<RecoveryNodeComponent> recoveryNode)
     {
-        var (ent, comp) = recoveryNode;
-        var nearbyEntities = _lookup.GetEntitiesInRange(ent, comp.HealRange);
-        var possibleTargets = new List<EntityUid>();
-        foreach (var nearbyEntity in nearbyEntities)
+        _nearbyEntities.Clear();
+        _possibleTargets.Clear();
+
+        _lookup.GetEntitiesInRange(recoveryNode, recoveryNode.Comp.Range, _nearbyEntities);
+        foreach (var nearbyEntity in _nearbyEntities)
         {
-            if (!_hive.FromSameHive(ent, nearbyEntity) ||
-                !HasComp<XenoComponent>(nearbyEntity) ||
-                !HasComp<XenoRestingComponent>(nearbyEntity) ||
-                !TryComp<DamageableComponent>(nearbyEntity, out var damageComp) ||
-                damageComp.TotalDamage <= 0 ||
-                !HasComp<MobStateComponent>(nearbyEntity) ||
-                _mob.IsDead(nearbyEntity))
+            if (!_xenoQuery.HasComp(nearbyEntity) ||
+                !(_restingQuery.HasComp(nearbyEntity) || _attachedOviQuery.HasComp(nearbyEntity)) ||
+                _mob.IsDead(nearbyEntity) ||
+                !_hive.FromSameHive(recoveryNode.Owner, nearbyEntity))
             {
                 continue;
             }
 
-            possibleTargets.Add(nearbyEntity);
+            // Extra conditions depending on the recovery type.
+            switch (recoveryNode.Comp.RecoveryType)
+            {
+                case RecoveryType.Health:
+                    if (!_damageableQuery.TryComp(nearbyEntity, out var damageComp) || damageComp.TotalDamage <= 0)
+                        continue; // continue the foreach loop
+                    break; // break the switch statement, not the foreach loop
+
+                case RecoveryType.Plasma:
+                    if (!_plasmaQuery.TryComp(nearbyEntity, out var plasmaComp) || plasmaComp.Plasma == plasmaComp.MaxPlasma)
+                        continue;
+                    break;
+            }
+
+            _possibleTargets.Add(nearbyEntity);
         }
 
-        recoveryNode.Comp.NextHealAt = _time.CurTime + recoveryNode.Comp.HealCooldown;
+        recoveryNode.Comp.NextRecoveryAt = _time.CurTime + recoveryNode.Comp.Cooldown;
 
-        if (possibleTargets.Count == 0)
+        if (_possibleTargets.Count == 0)
+        {
+            Dirty(recoveryNode);
             return;
+        }
 
-        var selectedTarget = _random.Pick(possibleTargets);
-        var recover = new DoAfterArgs(EntityManager, recoveryNode, recoveryNode.Comp.HealCooldown, new RecoveryNodeRecoverDoAfterEvent(), recoveryNode, selectedTarget)
+        var selectedTarget = _random.Pick(_possibleTargets);
+        var recover = new DoAfterArgs(EntityManager,
+            recoveryNode,
+            recoveryNode.Comp.Cooldown,
+            new RecoveryNodeRecoverDoAfterEvent(),
+            recoveryNode,
+            selectedTarget)
         {
             BreakOnMove = true,
             MovementThreshold = 0.5f,
             DuplicateCondition = DuplicateConditions.SameEvent,
-            TargetEffect = "RMCEffectHealBusy",
+            TargetEffect = recoveryNode.Comp.RecoveryEffect,
         };
 
         if (_doafter.TryStartDoAfter(recover, out var id))
         {
-            recoveryNode.Comp.HealDoAfter = id;
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-recovery-node-heal-target"), selectedTarget, selectedTarget);
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-recovery-node-heal-other", ("target", selectedTarget)), selectedTarget, Filter.PvsExcept(selectedTarget), true);
+            recoveryNode.Comp.DoAfter = id;
+            Dirty(recoveryNode);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-recovery-node-heal-target"),
+                selectedTarget,
+                selectedTarget);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-recovery-node-heal-other", ("target", selectedTarget)),
+                selectedTarget,
+                Filter.PvsExcept(selectedTarget),
+                true);
         }
     }
 
     private void OnRecoveryDoAfter(Entity<RecoveryNodeComponent> recoveryNode, ref RecoveryNodeRecoverDoAfterEvent args)
     {
-        recoveryNode.Comp.HealDoAfter = null;
+        recoveryNode.Comp.DoAfter = null;
+        Dirty(recoveryNode);
 
         if (args.Handled || args.Cancelled || args.Target == null)
             return;
 
-        _heal.Heal(args.Target.Value, recoveryNode.Comp.HealAmount);
+        switch (recoveryNode.Comp.RecoveryType)
+        {
+            case RecoveryType.Health:
+                _heal.Heal(args.Target.Value, recoveryNode.Comp.RecoveryAmount);
+                break;
+            case RecoveryType.Plasma:
+                _plasma.RegenPlasma(args.Target.Value, recoveryNode.Comp.RecoveryAmount);
+                break;
+        }
     }
 }
