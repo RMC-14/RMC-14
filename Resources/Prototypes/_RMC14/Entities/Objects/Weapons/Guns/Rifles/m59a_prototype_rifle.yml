@@ -25,6 +25,8 @@
     - FullAuto
     soundGunshot:
       collection: CMM54CShoot
+      params:
+        volume: -1
     shotsPerBurst: 4
   - type: Corrodible
     isCorrodible: false

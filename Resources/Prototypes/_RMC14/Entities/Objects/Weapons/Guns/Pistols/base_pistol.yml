@@ -84,6 +84,9 @@
           tags:
           - RMCAttachmentBurstFireAssembly
           - RMCAttachmentLaserSight
+  - type: RMCGunChamber
+    sound:
+      path: /Audio/_RMC14/Weapons/Guns/Cock/gun_pistol_cocked.ogg
 
 - type: entity
   abstract: true
