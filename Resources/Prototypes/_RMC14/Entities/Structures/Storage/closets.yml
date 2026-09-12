@@ -305,14 +305,14 @@
 
 - type: entity
   parent: RMCClosetGoldenArrowGear
-  id: RMCClosetRCMGPMGGear
-  name: GPMG gunner locker
-  suffix: PVE, RCM, GPMG Gunner
+  id: RMCClosetRCMSGOGear
+  name: smart gun operator locker
+  suffix: PVE, RCM, SGO
   components:
   - type: EntityTableContainerFill
     containers:
       entity_storage: !type:NestedSelector
-        tableId: RMCClosetRCMGPMGFill
+        tableId: RMCClosetRCMSGOFill
 
 - type: entity
   parent: RMCClosetGoldenArrowGear

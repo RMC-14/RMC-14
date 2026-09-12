@@ -50,11 +50,11 @@ rmc-job-prefix-rcm-pve-section-leader = STL
 rmc-job-name-rcm-pve-team-leader = Team Leader
 rmc-job-prefix-rcm-pve-team-leader = TL
 
-rmc-job-name-rcm-pve-gpmg-gunner = GPMG Gunner
-rmc-job-prefix-rcm-pve-gpmg-gunner = GPMG
+rmc-job-name-rcm-pve-smart-gunner = Smart Gun Operator
+rmc-job-prefix-rcm-pve-smart-gunner = SGO
 
-rmc-job-name-rcm-pve-medical-assistant = Medical Assistant
-rmc-job-prefix-rcm-pve-medical-assistant = MA
+rmc-job-name-rcm-pve-medical-technician = Medical Technician
+rmc-job-prefix-rcm-pve-medical-technician = MT
 
 rmc-job-name-rcm-pve-assault-engineer = Assault Engineer
 rmc-job-prefix-rcm-pve-assault-engineer = AE

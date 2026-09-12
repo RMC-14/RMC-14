@@ -3,7 +3,7 @@
   id: RMCSurvivorParaTeamLeader
   name: rmc-job-name-para-team-leader
   ranks:
-    RMCRankParaSergeant: [ ]
+    RMCRankTSESergeant: [ ]
   supervisors: rmc-job-supervisors-commander
   startingGear: RMCGearParaTeamLeader
   icon: RMCJobIconParaTeamLeader

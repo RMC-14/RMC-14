@@ -3,7 +3,7 @@
   id: RMCSurvivorParaAssaultEngineer
   name: rmc-job-name-para-engineer
   ranks:
-    RMCRankParaLanceCorporal: [ ]
+    RMCRankTSELanceCorporal: [ ]
   startingGear: RMCGearParaAssaultEngineer
   icon: RMCJobIconParaAssaultEngineer
   playTimeTracker: RMCJobSurvivorMilitary
