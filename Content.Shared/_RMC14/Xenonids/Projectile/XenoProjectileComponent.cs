@@ -8,4 +8,10 @@ public sealed partial class XenoProjectileComponent : Component
 {
     [DataField, AutoNetworkedField]
     public bool DeleteOnFriendlyXeno;
+
+    [DataField, AutoNetworkedField]
+    public bool StopOnFriendlyXeno;
+
+    [DataField, AutoNetworkedField]
+    public bool StopOnCollide;
 }
