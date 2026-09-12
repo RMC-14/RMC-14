@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.IffTag;
 using Content.Shared._RMC14.Xenonids.JoinXeno;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
@@ -51,6 +52,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedGameTicker _gameTicker = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly RMCXenoIffTagSystem _iffTag = default!;
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
@@ -380,6 +382,14 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
     private bool CanEvolvePopup(Entity<XenoEvolutionComponent> xeno, EntProtoId newXeno, bool doPopup = true)
     {
+        if (HasComp<XenoEvolutionLockedComponent>(xeno.Owner))
+        {
+            if (doPopup)
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-failed-locked"), xeno, xeno, PopupType.MediumCaution);
+
+            return false;
+        }
+
         var isEarlyEvo = xeno.Comp.EarlyEvolvesTo.Contains(newXeno);
         if (!xeno.Comp.EvolvesTo.Contains(newXeno) && !xeno.Comp.EvolvesToWithoutPoints.Contains(newXeno) && !isEarlyEvo)
             return false;
@@ -408,6 +418,16 @@ public sealed class XenoEvolutionSystem : EntitySystem
         {
             if (doPopup)
                 _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-failed-queen-exists"), xeno, xeno, PopupType.MediumCaution);
+            return false;
+        }
+
+        if (prototype.HasComponent<XenoEvolutionGranterComponent>(_compFactory) &&
+            _xenoHive.GetHive(xeno.Owner) is { } evolveHive &&
+            TryComp(evolveHive.Owner, out HiveSlotComponent? evolveSlot) &&
+            evolveSlot.Position == HiveSlots.Renegade)
+        {
+            if (doPopup)
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-failed-renegade"), xeno, xeno, PopupType.MediumCaution);
             return false;
         }
 
@@ -703,6 +723,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         if (Prototype(xeno)?.ID is { } oldId)
             newRecently.Recent[oldId] = _timing.CurTime;
+
+        _iffTag.TransferTag(xeno, newXeno);
 
         return newXeno;
     }

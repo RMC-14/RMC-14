@@ -90,6 +90,12 @@
     damage:
       types:
         Heat: 25
+  - type: Bloodstream
+    bloodReagent: RMCXenoBlood
+    maxBleedAmount: 0
+    bloodlossDamage: {}
+    bloodlossHealDamage: {}
+  - type: IVDripTarget
   - type: RMCDefibrillatorBlocked
     popup: defibrillator-xeno
     showOnExamine: false
@@ -125,6 +131,7 @@
     groups:
       Flammable: [ Touch ]
       Extinguish: [ Touch ]
+      RMCGenerated: [ Touch ]
   - type: FireVisuals
     sprite: _RMC14/Mobs/Effects/on_fire_xeno.rsi
     normalState: simple_onfire
@@ -209,6 +216,8 @@
         type: HiveTeamBui
       enum.HiveLeaderSquadUIKey.Key:
         type: HiveLeaderSquadBui
+      enum.HiveAllianceUIKey.Key:
+        type: HiveAllianceBui
       enum.TacticalMapUserUi.Key:
         type: TacticalMapUserBui
       enum.XenoReserveParasiteChangeUI.Key:

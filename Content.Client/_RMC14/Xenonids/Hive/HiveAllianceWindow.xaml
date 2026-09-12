@@ -1,0 +1,14 @@
+<controls:HiveAllianceWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Xenonids.Hive"
+    Title="{Loc rmc-hivealliance-title}"
+    MinSize="350 400">
+    <ScrollContainer VerticalExpand="True" HorizontalExpand="True">
+        <BoxContainer Orientation="Vertical" Margin="6" SeparationOverride="6">
+            <Label Text="{Loc rmc-hivealliance-factions}" StyleClasses="LabelSubText" />
+            <BoxContainer Name="FactionsContainer" Access="Public" Orientation="Vertical" />
+            <Label Text="{Loc rmc-hivealliance-hives}" StyleClasses="LabelSubText" />
+            <BoxContainer Name="HivesContainer" Access="Public" Orientation="Vertical" />
+        </BoxContainer>
+    </ScrollContainer>
+</controls:HiveAllianceWindow>

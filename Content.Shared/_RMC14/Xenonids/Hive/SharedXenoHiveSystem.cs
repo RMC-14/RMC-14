@@ -1,7 +1,9 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.NightVision;
+using Content.Shared._RMC14.Sprite;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Evolution;
@@ -12,6 +14,8 @@ using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Systems;
+using Content.Shared.NPC.Prototypes;
+using Content.Shared.NPC.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Prototypes;
 using Content.Shared.Stunnable;
@@ -34,6 +38,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
     [Dependency] private readonly SharedBroadphaseSystem _broadphase = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedNightVisionSystem _nightVision = default!;
@@ -41,6 +46,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
+    [Dependency] private readonly SharedRMCSpriteSystem _rmcSprite = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
@@ -71,6 +77,14 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         SubscribeLocalEvent<HiveGunComponent, AmmoShotEvent>(OnHiveGunShot);
 
         SubscribeLocalEvent<XenoStunnedPreventCollisionComponent, PreventCollideEvent>(OnStunnedPreventCollide);
+
+        SubscribeLocalEvent<HiveColoredComponent, HiveChangedEvent>(OnHiveColoredHiveChanged);
+    }
+
+    private void OnHiveColoredHiveChanged(Entity<HiveColoredComponent> ent, ref HiveChangedEvent args)
+    {
+        var color = args.Hive is { } hive ? hive.Comp.Color : Color.White;
+        _rmcSprite.SetColor(ent.Owner, color);
     }
 
     private void OnDropshipHijackStart(ref DropshipHijackStartEvent ev)
@@ -183,6 +197,22 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         return null;
     }
 
+    public bool TryGetHiveBySlot(int position, out EntityUid hive)
+    {
+        var query = EntityQueryEnumerator<HiveSlotComponent>();
+        while (query.MoveNext(out var uid, out var slot))
+        {
+            if (slot.Position == position)
+            {
+                hive = uid;
+                return true;
+            }
+        }
+
+        hive = default;
+        return false;
+    }
+
     /// <summary>
     /// Returns true if the entity has a valid hive, i.e. it isn't a rogue xeno.
     /// Only use this if you don't need to use the hive for anything after.
@@ -230,6 +260,22 @@ public abstract class SharedXenoHiveSystem : EntitySystem
 
         var ev = new HiveChangedEvent(hiveEnt, old);
         RaiseLocalEvent(member, ref ev);
+    }
+
+    public void SetColor(Entity<HiveComponent> hive, Color color)
+    {
+        hive.Comp.Color = color;
+        Dirty(hive);
+    }
+
+    public Color GetColor(Entity<HiveComponent> hive)
+    {
+        return hive.Comp.Color;
+    }
+
+    public Color GetMemberColor(Entity<HiveMemberComponent?> member)
+    {
+        return GetHive(member) is { } hive ? hive.Comp.Color : Color.White;
     }
 
     /// <summary>
@@ -303,6 +349,24 @@ public abstract class SharedXenoHiveSystem : EntitySystem
             hive.Comp.AnnouncedQueenDeathCooldownOver = false;
             hive.Comp.AnnouncedNoQueenCooldownOver = false;
             hive.Comp.NewQueenAt = _timing.CurTime + hive.Comp.NewQueenCooldown;
+
+            if (hive.Comp.AlliedFactions.Count > 0 || hive.Comp.AlliedHives.Count > 0)
+            {
+                var factions = hive.Comp.AlliedFactions.ToList();
+                var hives = hive.Comp.AlliedHives.ToList();
+
+                foreach (var faction in factions)
+                {
+                    SetFactionAlly(hive, faction, false);
+                }
+
+                foreach (var otherHive in hives)
+                {
+                    SetHiveAlly(hive, otherHive, false);
+                }
+
+                _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hive.Owner, Loc.GetString("rmc-xeno-hive-alliances-broken"));
+            }
         }
 
         Dirty(hive);
@@ -538,12 +602,100 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         args.Cancelled = true;
     }
 
-    public bool FromSameHiveOrAlly(Entity<HiveMemberComponent?> a, Entity<HiveMemberComponent?> b)
+
+    public bool FromSameHiveOrAlly(Entity<HiveMemberComponent?> a, EntityUid b)
     {
-        // TODO RMC14
-        return FromSameHive(a, b);
+        if (FromSameHive(a, b))
+            return true;
+
+        if (GetHive(a) is not { } aHive)
+            return false;
+
+        if (GetHive(b) is { } bHive)
+            return aHive.Comp.AlliedHives.Contains(bHive.Owner);
+
+        return _npcFaction.IsMemberOfAny(b, aHive.Comp.AlliedFactions);
+    }
+
+    public bool IsMemberOrAlly(Entity<HiveMemberComponent?> member, EntityUid? hive)
+    {
+        if (hive == null)
+            return false;
+
+        if (IsMember(member, hive))
+            return true;
+
+        if (!_query.TryComp(hive, out var hiveComp))
+            return false;
+
+        if (GetHive(member) is { } memberHive)
+            return hiveComp.AlliedHives.Contains(memberHive.Owner);
+
+        return _npcFaction.IsMemberOfAny(member.Owner, hiveComp.AlliedFactions);
+    }
+
+    public void SetFactionAlly(Entity<HiveComponent> hive, ProtoId<NpcFactionPrototype> faction, bool allied)
+    {
+        if (hive.Comp.AlliedFactions.Contains(faction) == allied)
+            return;
+
+        if (allied && hive.Comp.BanHumanoidAlliances)
+            return;
+
+        if (allied)
+            hive.Comp.AlliedFactions.Add(faction);
+        else
+            hive.Comp.AlliedFactions.Remove(faction);
+
+        Dirty(hive);
+
+        var ev = new HiveFactionAllyChangedEvent(hive.Owner, faction, allied);
+        RaiseLocalEvent(ref ev);
+    }
+
+    public void SetHiveAlly(Entity<HiveComponent> hive, EntityUid otherHive, bool allied)
+    {
+        if (hive.Comp.AlliedHives.Contains(otherHive) == allied)
+            return;
+
+        if (allied && hive.Comp.BanHiveAlliances)
+            return;
+
+        if (allied)
+            hive.Comp.AlliedHives.Add(otherHive);
+        else
+            hive.Comp.AlliedHives.Remove(otherHive);
+
+        Dirty(hive);
+
+        if (!_query.TryComp(otherHive, out var otherHiveComp))
+            return;
+
+        if (allied)
+        {
+            _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, otherHive, Loc.GetString("rmc-xeno-hive-alliance-formed-by", ("hive", Name(hive.Owner))));
+            return;
+        }
+
+        _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, otherHive, Loc.GetString("rmc-xeno-hive-alliance-broken-by", ("hive", Name(hive.Owner))));
+
+        if (otherHiveComp.AlliedHives.Contains(hive.Owner))
+            SetHiveAlly((otherHive, otherHiveComp), hive.Owner, false);
+    }
+
+    public bool IsFactionAllied(Entity<HiveComponent> hive, ProtoId<NpcFactionPrototype> faction)
+    {
+        return hive.Comp.AlliedFactions.Contains(faction);
+    }
+
+    public bool IsHiveAllied(Entity<HiveComponent> hive, EntityUid otherHive)
+    {
+        return hive.Comp.AlliedHives.Contains(otherHive);
     }
 }
+
+[ByRefEvent]
+public record struct HiveFactionAllyChangedEvent(EntityUid Hive, ProtoId<NpcFactionPrototype> Faction, bool Allied);
 
 /// <summary>
 /// Raised on an entity after its hive is changed.

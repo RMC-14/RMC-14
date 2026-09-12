@@ -461,6 +461,16 @@ rmc-doomed-fail = It's not working...
 rmc-destroy-cant-reach = We don't have a clear path to that location!
 rmc-destroy-cant-area = We can't leap to that area!
 
+# Hive Alliances
+rmc-xeno-hive-alliances-broken = With the death of the Queen, all alliances have been broken.
+rmc-xeno-hive-alliance-formed-by = We sense that { $hive } Queen set up an alliance with us!
+rmc-xeno-hive-alliance-broken-by = We sense that { $hive } Queen broke the alliance with us!
+rmc-hivealliance-title = Hive Alliances
+rmc-hivealliance-factions = Factions
+rmc-hivealliance-hives = Other Hives
+rmc-hivealliance-no-other-hives = No other hives exist.
+rmc-hivealliance-allied = Allied
+
 # Queen Eye
 rmc-xeno-weeds-no-nearby-node = We require weeds to be closer!
 rmc-xeno-queen-eye-no-weeds = We can't move our eye there, there are no weeds!

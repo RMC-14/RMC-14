@@ -15,6 +15,7 @@ using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Spawners;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Coordinates;
 using Content.Shared.Database;
@@ -71,7 +72,9 @@ public sealed partial class CMDistressSignalRuleSystem
     private bool InitializeXenoMap(Entity<CMDistressSignalRuleComponent> rule, CMDistressSignalRuleComponent comp)
     {
         // TODO: come up with random name like operation name, in a function that can be reused for hive v hive
-        comp.Hive = _hive.CreateHive("xenonid hive", comp.HiveId);
+        comp.Hive = _hive.TryGetHiveBySlot(HiveSlots.Normal, out var normalHive)
+            ? normalHive
+            : _hive.CreateHive("xenonid hive", comp.HiveId);
         if (comp.SpawnPlanet && !SpawnXenoMap((rule.Owner, comp)))
         {
             Log.Error("Failed to load xeno map");

@@ -556,6 +556,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (_net.IsServer && _prototype.HasIndex(effectId))
         {
             effect = Spawn(effectId, entityCoords);
+
+            EnsureComp<HiveColoredComponent>(effect.Value);
+            _hive.SetSameHive(xeno.Owner, effect.Value);
+
             RaiseNetworkEvent(new XenoConstructionAnimationStartEvent(GetNetEntity(effect.Value), GetNetEntity(xeno), finalBuildTime), Filter.PvsExcept(effect.Value));
         }
 
