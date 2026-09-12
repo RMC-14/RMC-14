@@ -595,6 +595,7 @@
   - type: Sprite
     state: deepcaves0
   - type: Area
+    xenoHiveSetupRestriction: null
     minimapColor: '#2D1342EE'
 
 - type: entity
@@ -636,6 +637,7 @@
   - type: Sprite
     state: deepcaves4
   - type: Area
+    xenoHiveSetupRestriction: null
     minimapColor: '#3F3C3CEF'
 
 - type: entity
@@ -646,6 +648,7 @@
   - type: Sprite
     state: predship
   - type: Area
+    xenoHiveSetupRestriction: null
     minimapColor: '#885A04E7'
 
 - type: entity

@@ -285,6 +285,8 @@
   components:
   - type: Sprite
     state: path
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaStrataExterior
@@ -572,6 +574,7 @@
   - type: Sprite
     state: cabin3
   - type: Area
+    xenoHiveSetupRestriction: null
     minimapColor: "#3f3c3cef"
 
 - type: entity
@@ -582,6 +585,7 @@
   - type: Sprite
     state: cabin3
   - type: Area
+    xenoHiveSetupRestriction: null
     minimapColor: "#3f3c3cef"
 
 - type: entity
@@ -697,6 +701,7 @@
   - type: Sprite
     state: hive_1
   - type: Area
+    xenoHiveSetupRestriction: null
     minimapColor: "#272525ef"
     CAS: false
     fulton: false
@@ -716,6 +721,7 @@
   - type: Sprite
     state: outpost_engi_0
   - type: Area
+    xenoHiveSetupRestriction: null
     minimapColor: "#272525ef"
     CAS: false
     fulton: false
@@ -750,11 +756,17 @@
   parent: RMCAreaStrataInteriorUndergroundDorms
   id: RMCAreaStrataInteriorUndergroundDormsSec1
   name: Deep Jungle - Security Dorm \#1
+  components:
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaStrataInteriorUndergroundDorms
   id: RMCAreaStrataInteriorUndergroundDormsSec2
   name: Deep Jungle - Security Dorm \#2
+  components:
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaStrataInteriorUndergroundDorms
@@ -765,16 +777,25 @@
   parent: RMCAreaStrataInteriorUndergroundDorms
   id: RMCAreaStrataInteriorUndergroundDormsAdmin2
   name: Deep Jungle - General Staff Dorm \#2
+  components:
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaStrataInteriorUndergroundDorms
   id: RMCAreaStrataInteriorUndergroundDormsAdmin3
   name: Deep Jungle - General Staff Dorm \#3
+  components:
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaStrataInteriorUndergroundDorms
   id: RMCAreaStrataInteriorUndergroundDormsAdmin4
   name: Deep Jungle - General Staff Dorm \#4
+  components:
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaStrataInteriorUndergroundDorms
@@ -808,6 +829,8 @@
   components:
   - type: Sprite
     state: ug_jung_1
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaStrataExterior
@@ -851,6 +874,8 @@
   components:
   - type: Sprite
     state: ug_jung_4
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaStrataExteriorDeepJungle
@@ -860,6 +885,7 @@
   - type: Sprite
     state: ug_jung_0
   - type: Area
+    xenoHiveSetupRestriction: null
     CAS: true
     fulton: true
     mortarPlacement: true
@@ -956,6 +982,8 @@
   components:
   - type: Sprite
     state: ug_jung_mine_4
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaStrataExteriorDeepJungle
@@ -964,6 +992,8 @@
   components:
   - type: Sprite
     state: ug_jung_3
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaStrataInterior
@@ -973,6 +1003,7 @@
   - type: Sprite
     state: ug_jung_5
   - type: Area
+    xenoHiveSetupRestriction: null
     minimapColor: "#5b5757"
     CAS: false
     fulton: false
@@ -992,6 +1023,7 @@
   - type: Sprite
     state: ug_jung_2
   - type: Area
+    xenoHiveSetupRestriction: null
     minimapColor: "#812da2ee"
     CAS: false
     fulton: false

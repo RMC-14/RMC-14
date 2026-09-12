@@ -452,6 +452,7 @@
   - type: Sprite
     state: cave
   - type: Area
+    xenoHiveSetupRestriction: null
     CAS: false
     fulton: false
     lasing: false
