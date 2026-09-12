@@ -65,6 +65,11 @@
       rmc-aslot-barrel: 0.65, 0.09375
       rmc-aslot-rail: -0.15625, 0.15625
       rmc-aslot-underbarrel: 0.25, -0.3125
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-su6
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMBaseMagazinePistol

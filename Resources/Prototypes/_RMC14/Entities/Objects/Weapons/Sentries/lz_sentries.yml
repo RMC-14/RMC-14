@@ -60,6 +60,11 @@
     intrinsic: true
   - type: PointLight
   - type: HomingShots
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-sentry
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCBaseTurret

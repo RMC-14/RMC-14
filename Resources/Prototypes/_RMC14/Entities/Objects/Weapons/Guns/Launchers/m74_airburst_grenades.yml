@@ -91,7 +91,7 @@
   parent: RMC40MMGrenadeM74AGMF
   id: RMCBatonSlugHIRR
   name: HIRR baton slug
-  description: Cousin to the M15 Rubber pellet, the HIRR baton slug was recalled from military and civilian police forces due to over-packed propellant in the sabot casing. Now it is utilized as a less-than-lethal option in engagements with human, and sometimes non-human, forces. Historically, the HIRR was incredibly popular during the Arcturus conflict, as the impact force was found to reliably incapacitate Arcturian resistance forces by breaking their ribs into their lungs.
+  description: Cousin to the M15 Rubber pellet, the HIRR baton slug was recalled from military and civilian police forces due to over-packed propellant in the sabot casing. Now it is utilized as a less-than-lethal option in engagements with human, and sometimes non-human, forces.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/grenade_launcher.rsi
@@ -105,6 +105,11 @@
     - Grenade
     - LauncherCompatibleGrenade
   - type: InheritAcid
+  - type: FixedIdentity
+    name: cm-chatsan-word-replacement-batong
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMC40MMGrenadeM74AGMF
@@ -448,7 +453,7 @@
   parent: RMCBaseBullet
   id: RMCBatonSlugProjectile
   name: HIRR baton slug
-  description: Cousin to the M15 Rubber pellet, the HIRR baton slug was recalled from military and civilian police forces due to over-packed propellant in the sabot casing. Now it is utilized as a less-than-lethal option in engagements with human, and sometimes non-human, forces. Historically, the HIRR was incredibly popular during the Arcturus conflict, as the impact force was found to reliably incapacitate Arcturian resistance forces by breaking their ribs into their lungs.
+  description: Cousin to the M15 Rubber pellet, the HIRR baton slug was recalled from military and civilian police forces due to over-packed propellant in the sabot casing. Now it is utilized as a less-than-lethal option in engagements with human, and sometimes non-human, forces.
   categories: [ HideSpawnMenu ]
   components:
   - type: TriggerOnFixedDistanceStop

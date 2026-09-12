@@ -9,6 +9,11 @@
   - type: DeviceNetwork
   - type: DeviceLinkSink
     ports: [ SentryControl ]
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-sentry
+    whitelist:
+      components:
+      - Xeno
 
 - type: htnCompound
   id: RMCSentryCompound
@@ -280,6 +285,11 @@
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 4
     accuracyMultiplierUnwielded: 4
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-sniper-sentry
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCSentry
@@ -390,6 +400,11 @@
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 2
     accuracyMultiplierUnwielded: 2
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-shotgun-sentry
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCBaseTurret
@@ -489,6 +504,11 @@
     upgrades: null
     startingMagazine: RMCMagazineSentryFire
     magazineTag: RMCMagazineSentryFire
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-fire-sentry
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCSentry
@@ -523,6 +543,11 @@
     upgrades: ["RMCSentryMiniFire", "RMCSentrySniperFire"]
     startingMagazine: RMCMagazineSentryFireBlue
     magazineTag: RMCMagazineSentryFireBlue
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-fire-sentry
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCSentry
@@ -584,6 +609,11 @@
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 4
     accuracyMultiplierUnwielded: 4
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-fire-sentry
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCTurretGaussDumb

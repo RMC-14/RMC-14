@@ -114,6 +114,11 @@
       state: all
   - type: RMCGunChamber
     enabled: false
+  - type: FixedIdentity
+    name: cm-chatsan-word-replacement-xm51
+    whitelist:
+      components:
+      - Xeno
 
 - type: Tag
   id: RMCWeaponShotgunXM51
