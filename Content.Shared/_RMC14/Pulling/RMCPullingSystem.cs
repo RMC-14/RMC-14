@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Fireman;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids;
@@ -23,6 +24,7 @@ using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Whitelist;
 using Content.Shared._RMC14.Synth;
+using Robust.Shared.Configuration;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Random;
@@ -30,7 +32,11 @@ using Robust.Shared.Timing;
 using Content.Shared._RMC14.Xenonids.Crest;
 using Content.Shared._RMC14.Xenonids.Fortify;
 using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Xenonids.Evolution;
+using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.HiveLeader;
 using Content.Shared.IdentityManagement;
+using Content.Shared.Pulling.Events;
 
 namespace Content.Shared._RMC14.Pulling;
 
@@ -38,6 +44,7 @@ public sealed class RMCPullingSystem : EntitySystem
 {
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
@@ -49,6 +56,7 @@ public sealed class RMCPullingSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _xenoHive = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly RotateToFaceSystem _rotateTo = default!;
     [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
@@ -64,14 +72,18 @@ public sealed class RMCPullingSystem : EntitySystem
     private const string PullEffect = "CMEffectGrab";
 
     private EntityQuery<FiremanCarriableComponent> _firemanQuery;
+    private bool _xenoPullBlockOverride = true;
 
     public override void Initialize()
     {
         _firemanQuery = GetEntityQuery<FiremanCarriableComponent>();
 
+        Subs.CVar(_config, RMCCVars.RMCXenoPullBlockOverride, v => _xenoPullBlockOverride = v, true);
+
         SubscribeLocalEvent<BuckleComponent, RMCGetPullTargetEvent>(OnGetPullTarget);
 
         SubscribeLocalEvent<XenoComponent, RMCPullToggleEvent>(OnXenoPullToggle);
+        SubscribeLocalEvent<XenoComponent, StartPullAttemptEvent>(OnXenoStartPullAttempt);
 
         SubscribeLocalEvent<ParalyzeOnPullAttemptComponent, PullAttemptEvent>(OnParalyzeOnPullAttempt);
         SubscribeLocalEvent<InfectOnPullAttemptComponent, PullAttemptEvent>(OnInfectOnPullAttempt);
@@ -369,6 +381,31 @@ public sealed class RMCPullingSystem : EntitySystem
     private void OnXenoPullToggle(Entity<XenoComponent> ent, ref RMCPullToggleEvent args)
     {
         args.Handled = true;
+    }
+
+    private void OnXenoStartPullAttempt(Entity<XenoComponent> ent, ref StartPullAttemptEvent args)
+    {
+        if (!_xenoPullBlockOverride)
+            return;
+
+        if (!TryComp(args.Pulled, out PullableComponent? pullable) ||
+            pullable.Puller is not { } currentPuller)
+        {
+            return;
+        }
+
+        if (!HasComp<XenoComponent>(currentPuller) ||
+            HasComp<XenoComponent>(args.Pulled) ||
+            !_xenoHive.FromSameHive(args.Puller, currentPuller) ||
+            HasComp<HiveLeaderComponent>(args.Puller) ||
+            HasComp<XenoEvolutionGranterComponent>(args.Puller))
+        {
+            return;
+        }
+
+        args.Cancel();
+        var msg = Loc.GetString("rmc-xeno-pull-cant-override");
+        _popup.PopupClient(msg, args.Pulled, args.Puller, PopupType.SmallCaution);
     }
 
     private void OnPreventPulledWhileAliveStart(Entity<PreventPulledWhileAliveComponent> ent, ref PullStartedMessage args)
