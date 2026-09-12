@@ -17,20 +17,40 @@ public sealed partial class RMCZombieSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<ZombifyOnDeathComponent, EntityZombifiedEvent>(OnZombified);
+        SubscribeLocalEvent<ZombieComponent, ComponentInit>(OnZombieInit);
     }
 
     private void OnZombified(Entity<ZombifyOnDeathComponent> ent, ref EntityZombifiedEvent args)
     {
         var target = ent.Owner;
 
+        RemoveRMCZombieIncompatibleComponents(target, true);
+        ApplyRMCZombie(target);
+    }
+
+    private void OnZombieInit(Entity<ZombieComponent> ent, ref ComponentInit args)
+    {
+        RemoveRMCZombieIncompatibleComponents(ent.Owner, false);
+        ApplyRMCZombie(ent.Owner);
+    }
+
+    private void RemoveRMCZombieIncompatibleComponents(EntityUid target, bool stripGhostRole)
+    {
         RemComp<MarineOrdersComponent>(target);
         RemComp<ScoutWhitelistComponent>(target);
         RemComp<SniperWhitelistComponent>(target);
         RemComp<PyroWhitelistComponent>(target);
         RemComp<InfectableComponent>(target);
+
+        if (!stripGhostRole)
+            return;
+
         RemComp<GhostRoleComponent>(target);
         RemComp<GhostTakeoverAvailableComponent>(target);
+    }
 
+    private void ApplyRMCZombie(EntityUid target)
+    {
         EnsureComp<NightVisionComponent>(target);
         _faction.AddFaction(target, "RMCDumb");
 
@@ -38,7 +58,7 @@ public sealed partial class RMCZombieSystem : EntitySystem
         {
             zombieComponent.PassiveHealing = new()
             {
-                DamageDict = new ()
+                DamageDict = new()
                 {
                     { "Blunt", -10 },
                     { "Slash", -10 },
@@ -48,7 +68,7 @@ public sealed partial class RMCZombieSystem : EntitySystem
             };
             zombieComponent.HealingOnBite = new()
             {
-                DamageDict = new ()
+                DamageDict = new()
                 {
                     { "Blunt", -20 },
                     { "Slash", -20 },
@@ -57,7 +77,7 @@ public sealed partial class RMCZombieSystem : EntitySystem
             };
             zombieComponent.PassiveHealingCritMultiplier = 1.5f;
             zombieComponent.ZombieMovementSpeedDebuff = 0.80f;
-        };
+        }
 
         var accentType = "RMCZombie";
         if (TryComp<ZombieAccentOverrideComponent>(target, out var accent))

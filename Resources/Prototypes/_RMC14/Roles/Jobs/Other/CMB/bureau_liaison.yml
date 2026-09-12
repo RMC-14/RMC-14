@@ -10,6 +10,7 @@
   startingGear: RMCGearICBLiaison
   icon: "RMCJobIconICBLiaison"
   joinNotifyCrew: false
+  access: [ CMAccessERT ]
   accessGroups:
   - RMCWeYaExecColony
   special:

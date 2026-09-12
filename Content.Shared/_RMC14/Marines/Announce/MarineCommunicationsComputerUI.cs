@@ -18,6 +18,9 @@ public sealed class MarineCommunicationsEchoSquadMsg : BoundUserInterfaceMessage
 public sealed class MarineCommunicationsOverwatchMsg : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
+public sealed class MarineCommunicationsDistressBeaconMsg : BoundUserInterfaceMessage;
+
+[Serializable, NetSerializable]
 public sealed class MarineCommunicationsComputerMsg(string text) : BoundUserInterfaceMessage
 {
     public readonly string Text = text;
@@ -30,11 +33,16 @@ public sealed class MarineCommunicationsDesignatePrimaryLZMsg(NetEntity lz) : Bo
 }
 
 [Serializable, NetSerializable]
-public sealed class MarineCommunicationsComputerBuiState(string planet, string operation, List<LandingZone> landingZones) : BoundUserInterfaceState
+public sealed class MarineCommunicationsComputerBuiState(
+    string planet,
+    string operation,
+    List<LandingZone> landingZones,
+    bool distressBeaconEnabled) : BoundUserInterfaceState
 {
     public readonly string Planet = planet;
     public readonly string Operation = operation;
     public readonly List<LandingZone> LandingZones = landingZones;
+    public readonly bool DistressBeaconEnabled = distressBeaconEnabled;
 }
 
 [Serializable, NetSerializable]

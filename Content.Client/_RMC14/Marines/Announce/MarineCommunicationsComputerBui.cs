@@ -49,6 +49,17 @@ public sealed class MarineCommunicationsComputerBui(EntityUid owner, Enum uiKey)
             _window.EchoButton.OnPressed += _ => SendPredictedMessage(new MarineCommunicationsEchoSquadMsg());
         }
 
+        if (EntMan.TryGetComponent<MarineCommunicationsComputerComponent>(Owner, out var distressComputer) &&
+            distressComputer.CanTransmitDistress)
+        {
+            _window.DistressButton.OnPressed += _ => SendPredictedMessage(new MarineCommunicationsDistressBeaconMsg());
+        }
+        else
+        {
+            _window.DistressButton.Visible = false;
+            _window.DistressSeparator.Visible = false;
+        }
+
         if (EntMan.TryGetComponent(Owner, out MarineCommunicationsComputerComponent? communicationsEvac) &&
             communicationsEvac.CanInitiateEvac)
         {
@@ -95,11 +106,13 @@ public sealed class MarineCommunicationsComputerBui(EntityUid owner, Enum uiKey)
         if (_window == null)
             return;
 
+        var distressBeaconEnabled = false;
         if (State is MarineCommunicationsComputerBuiState s)
         {
             _window.LandingZonesContainer.DisposeAllChildren();
             _window.PlanetName.Text = s.Planet;
             _window.OperationName.Text = s.Operation;
+            distressBeaconEnabled = s.DistressBeaconEnabled;
 
             foreach (var zone in s.LandingZones)
             {
@@ -119,6 +132,9 @@ public sealed class MarineCommunicationsComputerBui(EntityUid owner, Enum uiKey)
             EntMan.TryGetComponent<MarineCommunicationsComputerComponent>(Owner, out var computer) &&
             computer.CanCreateEcho;
         _window.EchoSeparator.Visible = _window.EchoButton.Visible;
+        _window.DistressButton.Visible = computer?.CanTransmitDistress == true;
+        _window.DistressButton.Disabled = !distressBeaconEnabled;
+        _window.DistressSeparator.Visible = _window.DistressButton.Visible;
 
         if (EntMan.TryGetComponent(Owner, out MarineControlComputerComponent? evaccomputer))
         {

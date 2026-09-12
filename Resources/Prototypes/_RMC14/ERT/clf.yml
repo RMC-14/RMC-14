@@ -1,0 +1,85 @@
+- type: rmcERTCall
+  id: RMCERTCallCLF
+  name: rmc-ert-call-clf-name
+  organization: rmc-ert-organization-clf
+  npcFactions: [ CLF ]
+  iffFaction: FactionCLF
+  category: rmc-ert-category-hostile
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-clf
+  randomWeight: 20
+  allowedSources: [ Console, Admin ]
+  # TODO RMC14 replace with /Maps/_RMC14/Shuttles/ERT/ert_clf_shuttle.yml once ported.
+  shuttleMap: /Maps/_RMC14/Shuttles/ERT/ert_response_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttle
+  shuttleSpawnMarker: RMCERTShuttleStartPadHostile
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  roles:
+  - id: leader
+    name: rmc-ert-role-clf-leader
+    job: RMCCLFCellLeader
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidCLFCellLeader
+      weight: 100
+    min: 1
+    max: 1
+    leader: true
+    roleTags: [ leader, command ]
+    seatTags: [ command ]
+    priority: 100
+  - id: soldier
+    name: rmc-ert-role-clf-soldier
+    job: RMCCLFSoldier
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidCLFSoldier
+      weight: 100
+    min: 2
+    max: 6
+    roleTags: [ rifleman ]
+    seatTags: [ troop ]
+  - id: medic
+    name: rmc-ert-role-clf-medic
+    job: RMCCLFMedic
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidCLFMedic
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ medic ]
+    seatTags: [ medic, troop ]
+  - id: engineer
+    name: rmc-ert-role-clf-engineer
+    job: RMCCLFEngineer
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidCLFEngineer
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ engineer ]
+    seatTags: [ engineer, troop ]
+  - id: specialist
+    name: rmc-ert-role-clf-specialist
+    job: RMCCLFSpecialist
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidCLFSpecialist
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ specialist, rifleman ]
+    seatTags: [ troop ]
+  announcements:
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-clf-arrival
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 3
+    maxSlots: 10

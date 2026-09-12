@@ -1,0 +1,64 @@
+# We-Ya Commandos
+- type: job
+  parent: RMCPMCLeader
+  id: RMCWeYaCommandoLeader
+  access: [ CMAccessERT ]
+  name: rmc-job-name-weya-commando-leader
+  playTimeTracker: RMCJobWeYaCommandoLeader
+  startingGear: RMCGearWeYaCommandoLeader
+  spawnMenuRoleName: We-Ya Commando Squad Leader
+
+- type: entity
+  parent: RMCRandomHumanoidPMCLeader
+  id: RMCRandomHumanoidWeYaCommandoLeader
+  name: we-ya commando ghost role leader
+  suffix: Spawner, Player, Low Threat
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCWeYaCommandoLeader
+
+- type: randomHumanoidSettings
+  parent: RMCPMCLeader
+  id: RMCWeYaCommandoLeader
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-weya-commando-leader
+    job: RMCWeYaCommandoLeader
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 18000 # 5 Hours
+
+- type: startingGear
+  id: RMCGearWeYaCommandoLeader
+  equipment:
+    id: CMIDCardCommando
+    ears: RMCHeadsetDistressPMCLeader
+    jumpsuit: RMCJumpsuitVeteranPMCCommando
+    outerClothing: CMArmorM4PMCCommando
+    gloves: RMCHandsVeteranPMCCommando
+    head: RMCArmorHelmetPMCCommando
+    shoes: RMCBootsPMCCommandoFilled
+    mask: RMCMaskCoifPMC
+    eyes: RMCGlassesHUDSecurity
+    back: RMCSatchelPMCCommandoFilled
+    belt: RMCBeltPMCFilledCommando
+    pocket1: RMCPouchMedicalSocFill
+    pocket2: RMCPouchMagazineLargePMC
+    suitstorage: RMCWeaponRifleM54CWhiteCommando
+  storage:
+    back:
+    - RMCRangefinder
+    - RMCMotionDetector
+    - RMCExplosiveBreachingCharge
+    - RMCGrenadeBlastM12
+    - RMCGrenadeBlastM12
+    - RMCHandheldDistressBeaconWeYa
+    pocket2:
+    - CMMagazineRifleM54C
+    - CMMagazineRifleM54C
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+
+- type: playTimeTracker
+  id: RMCJobWeYaCommandoLeader

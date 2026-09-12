@@ -3,7 +3,7 @@
   id: RMCPMCWhiteoutGunner
   name: rmc-job-name-pmc-whiteout-gunner
   startingGear: RMCPMCWhiteoutGunner
-  spawnMenuRoleName: WEYA Whiteout Combat Gunner Unit
+  spawnMenuRoleName: We-Ya Whiteout Combat Gunner Unit
 
 - type: entity
   parent: RMCRandomHumanoidPMCWhiteout

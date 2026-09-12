@@ -17,6 +17,23 @@ rmc-job-prefix-bureau-deputy = CMB DEP
 
 rmc-job-name-bureau-riot-control-team-leader = CMB Riot Control Team Leader
 rmc-job-prefix-bureau-riot-control-team-leader = CMB RCTL
+rmc-ghost-name-bureau-riot-control-team-leader = CMB Riot Control Team Leader (Friendly)
+
+rmc-ghost-name-bureau-riot-control-officer = CMB Riot Control Officer (Friendly)
+rmc-job-name-bureau-riot-control-officer = CMB Riot Control Officer
+rmc-job-prefix-bureau-riot-control-officer = CMB RCO
+
+rmc-ghost-name-bureau-riot-control-medic = CMB Riot Control Medic (Friendly)
+rmc-job-name-bureau-riot-control-medic = CMB Riot Control Medic
+rmc-job-prefix-bureau-riot-control-medic = CMB MED
+
+rmc-ghost-name-bureau-riot-control-engineer = CMB Riot Control Breaching Technician (Friendly)
+rmc-job-name-bureau-riot-control-engineer = CMB Riot Control Breaching Technician
+rmc-job-prefix-bureau-riot-control-engineer = CMB BTC
+
+rmc-ghost-name-bureau-riot-control-specialist = CMB Riot Control SWAT Specialist (Friendly)
+rmc-job-name-bureau-riot-control-specialist = CMB Riot Control SWAT Specialist
+rmc-job-prefix-bureau-riot-control-specialist = CMB SPT
 
 rmc-ghost-name-bureau-observer = Interstellar Life Rights Observer (Friendly)
 rmc-job-name-bureau-observer = Interstellar Life Rights Observer

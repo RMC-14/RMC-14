@@ -71,6 +71,9 @@ public sealed class DialogSystem : EntitySystem
         dialog.Message = new DialogOption(message);
         dialog.DialogType = DialogType.Options;
         dialog.Options = options;
+        dialog.Event = null;
+        dialog.InputEvent = null;
+        dialog.ConfirmEvent = null;
         dialog.EnableSearch = enableSearch;
         Dirty(target, dialog);
 
@@ -86,7 +89,9 @@ public sealed class DialogSystem : EntitySystem
     {
         var dialog = EnsureComp<DialogComponent>(target);
         dialog.DialogType = DialogType.Input;
-        dialog.Message = new DialogOption(message, ev);
+        dialog.Message = new DialogOption(message);
+        dialog.Event = null;
+        dialog.ConfirmEvent = null;
         dialog.InputEvent = ev;
         dialog.LargeInput = largeInput;
         dialog.CharacterLimit = characterLimit;
@@ -109,7 +114,9 @@ public sealed class DialogSystem : EntitySystem
         var dialog = EnsureComp<DialogComponent>(target);
         dialog.DialogType = DialogType.Confirm;
         dialog.Title = title;
-        dialog.Message = new DialogOption(message, ev);
+        dialog.Message = new DialogOption(message);
+        dialog.Event = null;
+        dialog.InputEvent = null;
         dialog.ConfirmEvent = ev;
         Dirty(target, dialog);
 

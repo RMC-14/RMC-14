@@ -10,7 +10,7 @@
     - state: base
       map: [ "enum.BreechVisuals.Open" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m79.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m81.rsi
     slots:
     - Back
     - suitStorage

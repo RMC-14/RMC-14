@@ -1,0 +1,42 @@
+- type: rmcERTCall
+  id: RMCERTCallPizza
+  name: rmc-ert-call-pizza-name
+  organization: rmc-ert-organization-pizza
+  npcFactions: [ Civilian ]
+  category: rmc-ert-category-civilian
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-pizza
+  randomWeight: 2
+  allowedSources: [ Console, Handheld, Admin ]
+  shuttleMap: /Maps/_RMC14/Shuttles/ERT/ert_pizza_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttlePizza
+  shuttleSpawnMarker: RMCERTShuttleStartPadEvent
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  roles:
+  - id: deliverer
+    name: rmc-ert-role-pizza-deliverer
+    job: CMPizzaDeliverer
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidPizzaDeliveryBoy
+      weight: 100
+    min: 1
+    max: 1
+    roleTags: [ pizza, support ]
+    seatTags: [ pizza, troop ]
+  objectives:
+  - rmc-ert-objective-pizza-tip
+  features:
+  - rmc-ert-feature-pizza-wrong-place
+  announcements:
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-pizza-arrival
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 1
+    maxSlots: 1

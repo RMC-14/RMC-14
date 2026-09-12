@@ -34,7 +34,7 @@
   parent: RMCHeadsetIconsCMB
   id: RMCHeadsetDistressBureau
   name: bureau earpiece
-  description: A sleek headset used by The Colony Marshal Bureau. Low profile and comfortable. No one is above the law.
+  description: A sleek headset used by the Colony Marshal Bureau. Low profile and comfortable. No one is above the law.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/headsets.rsi
@@ -49,7 +49,7 @@
   parent: RMCHeadsetDistressBureau
   id: RMCHeadsetDistressBureauDamaged
   name: damaged bureau earpiece
-  description: A sleek headset used by The Colony Marshal Bureau. Low profile and comfortable. No one is above the law. This one is pretty beat up, and seems to be missing a few frequencies.
+  description: A sleek headset used by the Colony Marshal Bureau. Low profile and comfortable. No one is above the law. This one is pretty beat up, and seems to be missing a few frequencies.
   components:
   - type: ContainerFill
     containers:
@@ -118,7 +118,7 @@
   parent: RMCHeadsetDistressPMC
   id: RMCHeadsetDistressPMCLeader
   suffix: Leader
-  description:
+  description: A special headset used by corporate personnel.
   components:
   - type: RMCHeadset
     radioTextIncrease: 2
@@ -150,7 +150,7 @@
   parent: RMCHeadsetDistressWeYa
   id: RMCHeadsetDistressGoon
   name: We-Ya headset
-  description: A special headset used by corporate personnel.
+  description: A special headset used by corporate security personnel.
   components:
   - type: ContainerFill
     containers:
@@ -173,7 +173,7 @@
   parent: RMCHeadsetDistressGoon
   id: RMCHeadsetDistressGoonLeader
   suffix: Leader
-  description:
+  description: A special headset used by corporate security personnel.
   components:
   - type: RMCHeadset
     radioTextIncrease: 2
@@ -182,7 +182,7 @@
   parent: RMCHeadsetDistressWeYa
   id: RMCHeadsetDistressLawyerWeYa
   name: We-Ya headset
-  description: A special headset used by corporate personnel.
+  description: A special headset used by corporate legal personnel.
   suffix: Director
   components:
   - type: ContainerFill
@@ -221,6 +221,23 @@
 - type: entity
   parent: RMCHeadsetDistressDukes
   id: RMCHeadsetDistressDukesLeader
+  components:
+  - type: RMCHeadset
+    radioTextIncrease: 3
+
+- type: entity
+  parent: RMCHeadsetDistressDukes
+  id: RMCHeadsetDistressVAI
+  name: VAI contractor headset
+  description: A corporate contractor headset used by Vanguard's Arrow Incorporated response teams.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/headsets.rsi
+    state: vai_headset
+
+- type: entity
+  parent: RMCHeadsetDistressVAI
+  id: RMCHeadsetDistressVAILeader
   components:
   - type: RMCHeadset
     radioTextIncrease: 3
