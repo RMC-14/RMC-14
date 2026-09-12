@@ -117,6 +117,24 @@
     state: ob_warhead_aegis
 
 - type: entity
+  parent: RMCVirtualPowerLoaderLeft
+  id: RMCVirtualChairStackLeft
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Interface/power_loader_clamps.rsi
+    state: chairs
+
+- type: entity
+  parent: RMCVirtualPowerLoaderRight
+  id: RMCVirtualChairStackRight
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Interface/power_loader_clamps.rsi
+    state: chairs_right
+
+- type: entity
   parent: RMCVirtualPowerLoaderRight
   id: RMCVirtualWarheadRightAegis
   categories: [ HideSpawnMenu ]
