@@ -184,7 +184,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
     /// <summary>
     /// Adds an order component to an entity. If the order already exists then the multiplier and duration is overriden.
     /// </summary>
-    private void AddOrder<T>(Entity<MarineComponent> receiver, int multiplier, TimeSpan duration) where T : IOrderComponent, new()
+    public void AddOrder<T>(Entity<MarineComponent> receiver, int multiplier, TimeSpan duration) where T : IOrderComponent, new()
     {
         var time = _timing.CurTime;
         var comp = EnsureComp<T>(receiver);
