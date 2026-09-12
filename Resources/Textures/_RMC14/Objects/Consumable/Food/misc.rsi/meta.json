@@ -1,7 +1,7 @@
 ﻿{
     "version": 1,
     "license": "CC-BY-SA-4.0",
-    "copyright": "peanut butter cookie sprite by Crow/noctrn., -silog sprites by Kezu, other sprites sprites by SurfinNinja, Raw Fish, Grilled Fish, Fish & Chips by SharkSnake98",
+    "copyright": "peanut butter cookie sprite by Crow/noctrn., -silog sprites by Kezu, other sprites sprites by SurfinNinja, Raw Fish, Grilled Fish, Fish & Chips by SharkSnake98., French sprites Cassoulet, Bouillabaisse, Bourguignon by Ardy The Ape",
     "size": {
         "x": 32,
         "y": 32
@@ -66,6 +66,15 @@
         },
         {
             "name": "pie-mash"
+        },
+         {
+           "name": "cassoulet"
+        },
+        {
+           "name": "bouillabaisse"
+        },
+        {
+           "name": "bourguignon"
         }
     ]
 }
