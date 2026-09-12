@@ -1172,6 +1172,17 @@
 
 - type: entity
   parent: CMHeadCap
+  id: RMCHeadCapChefPaperHat
+  name: soda jerk hat
+  description: The special hat of all diner cooks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/chefpaperhat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/chefpaperhat.rsi
+
+- type: entity
+  parent: CMHeadCap
   id: RMCHeadHorizonsWreath
   name: new horizons day wreath
   description: A wreath of blue and white flowers, traditionally worn on New Horizons Day.

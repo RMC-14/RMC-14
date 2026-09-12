@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Power;
 using Content.Shared.Examine;
 using Content.Shared.Popups;
 using Content.Shared.Power;
@@ -15,7 +16,7 @@ public abstract partial class SharedEntityHeaterSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedPowerReceiverSystem _receiver = default!;
+    [Dependency] private readonly SharedRMCPowerSystem _receiver = default!; //Changed for RMC
     [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     private readonly int _settingCount = Enum.GetValues<EntityHeaterSetting>().Length;
@@ -91,7 +92,7 @@ public abstract partial class SharedEntityHeaterSystem : EntitySystem
             EntityHeaterSetting.Low => max / 3f,
             EntityHeaterSetting.Medium => max * 2f / 3f,
             EntityHeaterSetting.High => max,
-            _ => 0.01f,
+            EntityHeaterSetting.Off => 0.01f,
         };
     }
 }
