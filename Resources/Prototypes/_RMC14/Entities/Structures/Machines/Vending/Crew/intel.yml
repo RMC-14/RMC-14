@@ -42,7 +42,9 @@
       - id: RMCMagazinePistolM13Ext
         points: 10
       - id: RMCSpeedLoader44Marksman
-        points: 10 # TODO RMC14 heavy speed revolver
+        points: 10
+      - id: RMCSpeedLoader44Heavy
+        points: 10
       - id: RMCMagazinePistolM1984AP
         points: 5
       - id: RMCMagazinePistolM1984HP

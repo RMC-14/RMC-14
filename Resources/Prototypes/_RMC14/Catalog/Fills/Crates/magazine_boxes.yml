@@ -262,7 +262,7 @@
       - id: RMCSpeedLoaderM44
       - id: RMCSpeedLoaderM44
       - id: RMCSpeedLoader44Marksman
-      # - id: RMCSpeedLoader44Heavy # TODO RMC14: Heavy m44 speedloader
+      - id: RMCSpeedLoader44Heavy
       - id: RMCBoxShotgunSlugs
       - id: RMCBoxShotgunSlugs
       - id: RMCBoxShotgunBuckshot
@@ -311,6 +311,15 @@
   - type: StorageFill
     contents:
     - id: RMCBoxMagazineRevolverM44Marksman
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazineRevolverM44Heavy
+  name: Speedloader box (Heavy M44, 16x loaders)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineRevolverM44Heavy
 
 - type: entity
   parent: RMCCrateAmmo
