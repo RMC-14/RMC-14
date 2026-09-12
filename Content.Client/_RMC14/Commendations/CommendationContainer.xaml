@@ -5,9 +5,9 @@
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     HorizontalExpand="True">
     <PanelContainer.PanelOverride>
-        <graphics:StyleBoxFlat 
-            BorderColor="#3A3A3A" 
-            BorderThickness="1" 
+        <graphics:StyleBoxFlat
+            BorderColor="#3A3A3A"
+            BorderThickness="1"
             BackgroundColor="#1F1F1F" />
     </PanelContainer.PanelOverride>
     <BoxContainer Orientation="Vertical" Margin="8" HorizontalExpand="True">
@@ -20,7 +20,7 @@
                          SetSize="64 64"
                          Stretch="KeepAspectCentered"
                          VerticalAlignment="Top"
-                         Margin="0 0 2 0" />
+                         Margin="0 0 6 0" />
             <RichTextLabel Name="Description" Access="Public" HorizontalExpand="True" />
         </BoxContainer>
     </BoxContainer>
