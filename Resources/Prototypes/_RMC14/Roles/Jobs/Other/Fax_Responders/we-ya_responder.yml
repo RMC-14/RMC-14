@@ -42,7 +42,7 @@
   id: RMCGearWeYaResponder
   equipment:
     ears: RMCHeadsetDistressPMCDirector
-    eyes: RMCGlassesMedicalHUDGlasses
+    eyes: RMCGlassesMedicalHUDGlassesAdvanced
     back: CMSatchelFilledFaxResponder
     belt: CMClipboard
     head: RMCHeadCapWestonYamadaDark

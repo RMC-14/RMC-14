@@ -162,7 +162,7 @@
         amount: 5
       - id: CMBeltMedical
         amount: 2
-      - id: RMCGlassesMedicalHUDGlasses
+      - id: RMCGlassesMedicalHUDGlassesAdvanced
         amount: 3
       - id: CMStasisBagFolded
         amount: 3
@@ -272,7 +272,7 @@
         amount: 5
       - id: CMBeltMedical
         amount: 2
-      - id: RMCGlassesMedicalHUDGlasses
+      - id: RMCGlassesMedicalHUDGlassesAdvanced
         amount: 3
       - id: CMStasisBagFolded
         amount: 3

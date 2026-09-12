@@ -79,7 +79,7 @@
 - type: startingGear
   id: RMCGearBureauObserver
   equipment:
-    eyes: RMCGlassesMedicalHUDGlasses # TODO RMC14 sensormate hud
+    eyes: RMCGlassesMedicalHUDGlassesAdvanced # TODO RMC14 sensormate hud
     mask: CMMaskSterile
     back: RMCSatchelBureauObserverSecureFill
     gloves: CMHandsInsulated

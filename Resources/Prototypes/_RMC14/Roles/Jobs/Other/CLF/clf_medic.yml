@@ -73,7 +73,7 @@
   equipment:
     mask: RMCCombatUtilityKnifeA
     ears: RMCHeadsetDistressCLF
-    eyes: RMCGlassesMedicalHUDGlasses
+    eyes: RMCGlassesMedicalHUDGlassesAdvanced
     head: CMHeadBandRed
     jumpsuit: RMCJumpsuitCLFWebbingSurgical
     outerClothing: RMCCoatMilitiaVest

@@ -207,15 +207,15 @@
 - type: entity
   parent: [ClothingEyesHudMedical, BaseToggleClothing]
   id: RMCGlassesMedicalHUDGlasses
-  name: HealthMate HUD
-  description: A heads-up display that scans the humanoids in view and provides accurate data about their health status.
+  name: SensorMate HUD
+  description: A much older heads-up display that displays the last known biometric data from suit sensors of any given individual.
   components:
   - type: Item
     storedRotation: 0
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud.rsi
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud/medicalhud.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud.rsi
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud/medicalhud.rsi
   - type: ItemToggle
     activated: true
     soundActivate:
@@ -245,6 +245,17 @@
           True: {state: icon-on}
           False: {state: icon}
   - type: Appearance
+
+- type: entity
+  parent: RMCGlassesMedicalHUDGlasses
+  id: RMCGlassesMedicalHUDGlassesAdvanced
+  name: HealthMate HUD
+  description: A heads-up display that scans the humanoids in view and provides accurate data about their health status.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud/medicalhudadvanced.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud/medicalhudadvanced.rsi
   - type: ItemToggleRequiresSkill
     skills:
       RMCSkillMedical: 1

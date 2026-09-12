@@ -65,7 +65,7 @@
   id: RMCGearRoyalMedic
   equipment:
     head: RMCHeadRoyalHelmet # TODO RMC14 TSE medic helmet
-    eyes: RMCGlassesMedicalHUDGlasses
+    eyes: RMCGlassesMedicalHUDGlassesAdvanced
     ears: RMCHeadsetRoyalMarine
     jumpsuit: RMCJumpsuitMarineRoyalMedic
     outerClothing: RMCArmorRoyalLightFilledMedic
