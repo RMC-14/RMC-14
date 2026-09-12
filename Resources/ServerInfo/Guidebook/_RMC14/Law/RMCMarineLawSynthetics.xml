@@ -1,19 +1,21 @@
 ﻿<Document>
   # Synthetics
 
-  Synthetics must be given a chance to stand down, however must be repaired to serve its sentence if lethal force is used.
+  - All Synthetics must be given a chance to stand down, however [bold]must[/bold] be repaired to serve its sentence if lethal force is used.
+  - All Synthetics are capable of making advanced and critical decisions for [bold]themselves[/bold] based off their surroundings and events, compliant with their programming.
 
   ## UNMC Synthetics
-  - UNMC Synthetics are programmed against being able to break Marine Law, and should not be arrested unless [color=#ffa500][bold]Provost Marshal Office[/bold][/color] have approved their arrest.
-  - These synthetic units are also granted the same rights and privileges of regular marines.
+  - UNMC Synthetics are programmed against being able to break Marine Law, and should not be arrested unless the [color=#ffa500][bold]Provost Marshal Office[/bold][/color] has approved their arrest.
+  - These synthetic units are granted the same rights and privileges of regular marines.
   - If any [color=#ff000d][bold]MP[/bold][/color] believes they have broken Marine Law, a report should be faxed to the [color=#ffa500][bold]Provost Marshal Office[/bold][/color].
   - Synthetics not directly part of UNMC do not have the above immunities.
 
-  ## Survivor Synthetics
-  - Any non-UNMC Synthetics (From colonies or otherwise) are granted similar rights and privileges as UNMC Synthetics.
+  ## Third-Party Synthetics
+  - Should be treated as if they are [bold][textlink="recovered personnel" link="RMCMarineSOPNONModThirdparty"][/bold].
+  - Recovered Colony Synthetics, due to emergency or otherwise severe circumstances, may choose as they wish to align themselves with whoever they wish and provide assistance. Due to this, the [color=#008000][bold]Commander[/bold][/color] may request the assistance of recovered Synthetics for the duration of the operation; similar to [bold][textlink="Contracting" link="RMCMarineSOPNONModThirdparty"][/bold].
   - They may have their arrest ordered by the [color=#008000][bold]Commander[/bold][/color] or [color=#8B0000][bold]Chief MP[/bold][/color] without the need to provide a report to the [color=#ffa500][bold]Provost Marshal Office[/bold][/color].
-  - Any of these synthetics that act against the UNMC such as taking valuable supplies without request, or destroying property and defenses can be declared rogue by the [color=#008000][bold]Commander[/bold][/color].
-  - When declared rogue, the synthetic loses any protections and lethal force may be used freely.
+  - Any of these synthetics that act against the UNMC; such as taking [italic]valuable[/italic] supplies without request, or destroying property and defenses, may be declared rogue by [bold]either[/bold] the [color=#008000][bold]Commander[/bold][/color] or [color=#8B0000][bold]Chief MP[/bold][/color], where the [color=#008000][bold]Commander[/bold][/color] takes priority. Synthetics should receive a warning before being declared rogue, unless not viable or actively detrimental to the lives of others.
+  - When declared rogue, the synthetic loses any protections and lethal force may be used freely. Once resolved, their rogue status should be lifted by the [color=#008000][bold]Commander[/bold][/color] or [color=#8B0000][bold]Chief MP[/bold][/color].
 
 
 </Document>
