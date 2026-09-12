@@ -7,6 +7,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Explosives/satchel_charge.rsi
     state: icon
+    noRot: true
     layers:
     - state: icon
       map: ["base"]
@@ -24,11 +25,30 @@
       - RMCWallExplosionDeletable
   - type: Explosive
     explosionType: RMC
-    totalIntensity: 1
-    intensitySlope: 5
-    maxIntensity: 1
+    totalIntensity: 6
+    intensitySlope: 6
+    maxIntensity: 6
+    maxTileBreak: 1
     canCreateVacuum: false
-  - type: ExplodeOnTrigger
+  - type: RMCBreachingCharge
+  - type: ProjectileGrenade
+    fillPrototype: RMCBreachingChargeShrapnel
+    capacity: 40
+    spreadAngle: 110
+    minVelocity: 0
+    maxVelocity: 0
+    projectileSpeed: 20
+    projectileSpeedVariance: 0.15
+    minProjectileDamageMultiplier: 1.06
+    maxProjectileDamageMultiplier: 1.13
+    spawnOffset: 1
+    tileAlignedSpawnOffset: true
+    directHit: true
+    directHitChance: 0.4
+    triggerUserIsShooter: true
+  - type: ClusterLimitHits
+    limit: 0
+    ignoreFirstHit: true
   - type: StickyVisualizer
   - type: Appearance
   - type: GenericVisualizer
@@ -57,7 +77,12 @@
     layers:
     - state: icon
       map: ["base"]
-  # TODO Shrapnel volume 20
+  - type: ProjectileGrenade
+    fillPrototype: RMCBreachingChargeRubberPellet
+    capacity: 20
+    projectileSpeed: 20
+    minProjectileDamageMultiplier: 1
+    maxProjectileDamageMultiplier: 1
   - type: RequiresSkill
     skills:
       RMCSkillPolice: 1
@@ -81,10 +106,18 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Explosives/plastic_explosives.rsi
+    noRot: false
   - type: Explosive
     totalIntensity: 350
     intensitySlope: 6
     maxIntensity: 20
+    maxTileBreak: 2147483647
+  - type: ExplodeOnTrigger
+  - type: RemoveComponents
+    components:
+    - type: RMCBreachingCharge
+    - type: ProjectileGrenade
+    - type: ClusterLimitHits
   - type: Sticky
     stickDelay: 5
     whitelist:

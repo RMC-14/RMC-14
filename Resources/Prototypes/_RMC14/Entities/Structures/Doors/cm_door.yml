@@ -148,6 +148,13 @@
   - type: Damageable
     damageContainer: StructuralMarine
     damageModifierSet: StructuralMarine
+  - type: ExplosionResistance
+    worn: false
+    damageCoefficientOverrides:
+      RMCMortarFrag: 15
+  - type: RMCExplosionResistanceWhenNotCollidable
+    modifiers:
+      RMCMortarFrag: 0.5
   - type: Destructible
     thresholds:
     - trigger:

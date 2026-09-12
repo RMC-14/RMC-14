@@ -9,6 +9,9 @@ namespace Content.Shared._RMC14.Mortar;
 public sealed partial class ActiveMortarShellComponent : Component
 {
     [DataField, AutoNetworkedField]
+    public EntityUid? User;
+
+    [DataField, AutoNetworkedField]
     public EntityCoordinates Coordinates;
 
     [DataField, AutoNetworkedField]
