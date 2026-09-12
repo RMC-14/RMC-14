@@ -123,6 +123,12 @@
   parent: CMXenoPraetorianBase
   id: CMXenoPraetorian
   components:
+  - type: RMCKeybindActions
+    actions:
+      XenoPrimaryOne: [ ActionXenoSpitPraetorian ]
+      XenoPrimaryTwo: [ ActionXenoDash ]
+      XenoPrimaryThree: [ ActionXenoAcidBall ]
+      XenoPrimaryFour: [ ActionXenoSprayAcidPraetorian ]
   - type: GuideHelp
     guides:
     - RMCGuideRolePraetorian
@@ -156,6 +162,12 @@
   id: RMCXenoPraetorianValkyrie
   suffix: Valkyrie
   components:
+  - type: RMCKeybindActions
+    actions:
+      XenoPrimaryOne: [ ActionXenoTantrum ]
+      XenoPrimaryTwo: [ ActionXenoHighGallop ]
+      XenoPrimaryThree: [ ActionXenoFightOrFlight ]
+      XenoPrimaryFour: [ ActionXenoRetrieve ]
   - type: GuideHelp
     guides:
     - RMCGuideRoleValkyrie
@@ -229,6 +241,11 @@
   id: RMCXenoPraetorianDancer
   suffix: Dancer
   components:
+  - type: RMCKeybindActions
+    actions:
+      XenoPrimaryOne: [ ActionXenoImpale ]
+      XenoPrimaryTwo: [ ActionXenoDodge ]
+      XenoPrimaryThree: [ ActionXenoTailTrip ]
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Praetorian/dancer_praetorian.rsi
   - type: XenoRegen
@@ -278,6 +295,12 @@
   id: RMCXenoPraetorianVanguard
   suffix: Vanguard
   components:
+  - type: RMCKeybindActions
+    actions:
+      XenoPrimaryOne: [ ActionXenoPierce ]
+      XenoPrimaryTwo: [ ActionXenoBlitz ]
+      XenoPrimaryThree: [ ActionXenoCleaveRoot ]
+      XenoPrimaryFour: [ ActionXenoCleaveFling ]
   - type: GuideHelp
     guides:
     - RMCGuideRoleVanguard
@@ -331,6 +354,11 @@
   id: RMCXenoPraetorianOppressor
   suffix: Oppressor
   components:
+  - type: RMCKeybindActions
+    actions:
+      XenoPrimaryOne: [ ActionXenoAbduct ]
+      XenoPrimaryTwo: [ ActionXenoDislocate ]
+      XenoPrimaryThree: [ ActionXenoTailLash ]
   - type: GuideHelp
     guides:
     - RMCGuideRoleOppressor

@@ -11,6 +11,11 @@
   name: Spitter
   description: A gross, oozing alien of some kind.
   components:
+  - type: RMCKeybindActions
+    actions:
+      XenoPrimaryOne: [ ActionXenoSpit ]
+      XenoPrimaryTwo: [ ActionXenoChargeSpit ]
+      XenoPrimaryThree: [ ActionXenoSprayAcid ]
   - type: GuideHelp
     guides:
     - RMCGuideRoleSpitter

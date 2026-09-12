@@ -143,6 +143,11 @@
   parent: RMCXenoRavagerBase
   id: CMXenoRavager
   components:
+  - type: RMCKeybindActions
+    actions:
+      XenoPrimaryOne: [ ActionXenoAssault ]
+      XenoPrimaryTwo: [ ActionXenoEmpower ]
+      XenoPrimaryThree: [ ActionXenoScissorCut ]
   - type: XenoShield
   - type: XenoLeap
     delay: 0
@@ -181,6 +186,11 @@
   id: RMCXenoRavagerBerserker
   suffix: Berserker
   components:
+  - type: RMCKeybindActions
+    actions:
+      XenoPrimaryOne: [ ActionXenoApprehend ]
+      XenoPrimaryTwo: [ ActionXenoClothesline ]
+      XenoPrimaryThree: [ ActionXenoEviscerate ]
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Ravager/berserker_ravager.rsi
   - type: XenoCappedPheromones
@@ -257,6 +267,11 @@
   id: RMCXenoRavagerHedgehog
   suffix: Hedgehog
   components:
+  - type: RMCKeybindActions
+    actions:
+      XenoPrimaryOne: [ ActionXenoSpikeShield ]
+      XenoPrimaryTwo: [ ActionXenoFireSpikes ]
+      XenoPrimaryThree: [ ActionXenoSpikeShed ]
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Ravager/hedgehog_ravager.rsi
   - type: Xeno

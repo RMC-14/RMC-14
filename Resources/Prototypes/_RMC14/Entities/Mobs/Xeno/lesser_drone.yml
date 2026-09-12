@@ -9,6 +9,11 @@
   name: Lesser Drone
   description: An alien drone. Looks... smaller.
   components:
+  - type: RMCKeybindActions
+    actions:
+      XenoPrimaryOne: [ ActionLesserDronePlantWeeds ]
+      XenoPrimaryTwo: [ ActionXenoChooseStructure ]
+      XenoPrimaryThree: [ ActionXenoSecreteStructure ]
   - type: GhostRole
     name: cm-job-name-xeno-lesser-drone
     description: roles-lesser-drone-description

@@ -100,6 +100,31 @@
   - type: Insulated
   - type: Input
     context: "xenonid"
+  - type: RMCKeybindActions
+    actions:
+      XenoCorrosiveAcid:
+      - ActionXenoAcidWeak
+      - ActionXenoAcidNormal
+      - ActionXenoAcidStrong
+      - ActionXenoAcidAcider
+      XenoPheromones:
+      - ActionXenoPheromones
+      XenoScreech:
+      - ActionXenoScreech
+      XenoWordQueen:
+      - ActionXenoWordQueen
+      XenoTailStab:
+      - ActionXenoTailStab
+      - ActionXenoTailStabCorrosive
+      - ActionXenoTailStabBoiler
+      - ActionXenoTailSlam
+      - ActionXenoTailFountain
+      - ActionXenoTailStabLance
+      - ActionXenoTailSeize
+      XenoHide:
+      - ActionXenoHide
+      XenoEvolve:
+      - ActionXenoEvolve
   - type: Clickable
   - type: InteractionOutline
   - type: InputMover
