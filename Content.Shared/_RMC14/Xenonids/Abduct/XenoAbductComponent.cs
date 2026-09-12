@@ -32,7 +32,7 @@ public sealed partial class XenoAbductComponent : Component
     public TimeSpan Cooldown = TimeSpan.FromSeconds(15);
 
     [DataField, AutoNetworkedField]
-    public int Range = 6;
+    public int Range = 7;
 
     [DataField, AutoNetworkedField]
     public TimeSpan SlowTime = TimeSpan.FromSeconds(2.5);
