@@ -13609,7 +13609,11 @@ entities:
         - 0
     - type: RadiationGridResistance
     - type: RMCWeatherCycle
-      minTimeBetweenEvents: 900
+      minTimeBetweenEvents: 720
+      warnTime: 60
+      minTimeBetweenChecks: 0
+      minCheckVariance: 0
+      startChance: 1
       weatherEvents:
       - lightningSound: !type:SoundCollectionSpecifier
           collection: RMCThunder
@@ -13617,18 +13621,24 @@ entities:
         - RMCColorSequenceLightningSharpPeak
         - RMCColorSequenceLightningFlicker
         lightningChance: 0.04
+        fireSmotheringStrength: 1
         weatherType: RMCHybrisaRainLight
+        screenOverlay: Low
         duration: 900
         name: Hybrisa Light Rain
+        displayName: rmc-weather-name-light-rain
       - lightningSound: !type:SoundCollectionSpecifier
           collection: RMCThunder
         lightningEffects:
         - RMCColorSequenceLightningSharpPeak
         - RMCColorSequenceLightningFlicker
         lightningChance: 0.02
+        fireSmotheringStrength: 0
         weatherType: RMCHybrisaRainVeryLight
+        screenOverlay: Low
         duration: 900
         name: Hybrisa Very Light Rain
+        displayName: rmc-weather-name-very-light-rain
     - type: GravityShake
       shakeTimes: 10
     - type: AreaGrid

@@ -21,7 +21,6 @@ public abstract class SharedWeatherSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly SharedRoofSystem _roof = default!;
-    [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly RMCWeatherSystem _rmcWeather = default!;
 
     private EntityQuery<BlockWeatherComponent> _blockQuery;
@@ -46,9 +45,11 @@ public abstract class SharedWeatherSystem : EntitySystem
 
     public bool CanWeatherAffect(EntityUid uid, MapGridComponent grid, TileRef tileRef, RoofComponent? roofComp = null)
     {
-        //RMC14 - This goes first, if the grid uses areas, we use the RMC Area Weather system instead of upstream.
+        // RMC14 start - area weather.
+        // Area grids use RMC area weather flags instead of upstream tile weather.
         if (TryComp<AreaGridComponent>(uid, out _))
             return _rmcWeather.CanWeatherAffectArea(uid, grid, tileRef, roofComp);
+        // RMC14 end
 
         if (tileRef.Tile.IsEmpty)
             return true;
