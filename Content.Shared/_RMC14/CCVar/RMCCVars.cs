@@ -525,6 +525,12 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCMarineEquipmentPreviews =
         CVarDef.Create("rmc.marine_equipment_previews", true, CVar.CLIENTONLY | CVar.ARCHIVE);
 
+    public static readonly CVarDef<bool> RMCTacticalMapXenoClickWatch =
+        CVarDef.Create("rmc.tactical_map_xeno_click_watch", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> RMCTacticalMapGhostClickTeleport =
+        CVarDef.Create("rmc.tactical_map_ghost_click_teleport", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
     public static readonly CVarDef<int> RMCXenoDefaultNightVision =
         CVarDef.Create("rmc.xeno_default_night_vision", (int) NightVisionState.Half, CVar.CLIENT | CVar.ARCHIVE | CVar.REPLICATED);
 

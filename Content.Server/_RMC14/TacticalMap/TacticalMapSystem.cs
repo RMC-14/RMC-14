@@ -11,14 +11,17 @@ using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.TacticalMap;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Eye;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
+using Content.Shared._RMC14.Xenonids.Watch;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Database;
+using Content.Shared.Ghost;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -32,6 +35,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -44,9 +48,11 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly CMDistressSignalRuleSystem _distressSignal = default!;
     [Dependency] private readonly XenoEvolutionSystem _evolution = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
@@ -55,6 +61,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _weeds = default!;
     [Dependency] private readonly XenoAnnounceSystem _xenoAnnounce = default!;
+    [Dependency] private readonly SharedXenoWatchSystem _xenoWatch = default!;
     [Dependency] private readonly RMCUnrevivableSystem _unrevivableSystem = default!;
 
     private EntityQuery<ActiveTacticalMapTrackedComponent> _activeTacticalMapTrackedQuery;
@@ -139,7 +146,10 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
                 subs.Event<BoundUIClosedEvent>(OnUserBUIClosed);
                 subs.Event<TacticalMapUpdateCanvasMsg>(OnUserUpdateCanvasMsg);
                 subs.Event<TacticalMapQueenEyeMoveMsg>(OnUserQueenEyeMoveMsg);
+                subs.Event<TacticalMapWatchXenoMsg>(OnUserWatchXenoMsg);
             });
+
+        SubscribeAllEvent<TacticalMapGhostTeleportRequestEvent>(OnGhostTeleportRequest);
 
         Subs.BuiEvents<TacticalMapComputerComponent>(TacticalMapComputerUi.Key,
             subs =>
@@ -377,14 +387,14 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             squadObjectives = _squad.GetSquadObjectives((squad.Owner, squad.Comp));
         }
 
-        var state = new TacticalMapBuiState(mapName, squadObjectives);
+        var state = new TacticalMapBuiState(mapName, squadObjectives, _distressSignal.SelectedPlanetMapId);
         _ui.SetUiState(ent.Owner, TacticalMapUserUi.Key, state);
     }
 
     private void UpdateTacticalMapComputerState(Entity<TacticalMapComputerComponent> computer)
     {
         var mapName = _distressSignal.SelectedPlanetMapName ?? string.Empty;
-        var state = new TacticalMapBuiState(mapName);
+        var state = new TacticalMapBuiState(mapName, null, _distressSignal.SelectedPlanetMapId);
         _ui.SetUiState(computer.Owner, TacticalMapComputerUi.Key, state);
     }
 
@@ -616,6 +626,47 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         var worldPos = _transform.ToMapCoordinates(targetCoords);
 
         _transform.SetWorldPosition(eye, worldPos.Position);
+    }
+
+    private void OnUserWatchXenoMsg(Entity<TacticalMapUserComponent> ent, ref TacticalMapWatchXenoMsg args)
+    {
+        var user = args.Actor;
+        if (!TryGetEntity(args.Target, out var target))
+            return;
+
+        // Only allow watching from live blips; stale snapshot blips would leak
+        // the xeno's current position.
+        if (!ent.Comp.LiveUpdate)
+            return;
+
+        if (!HasComp<XenoComponent>(user) || !HasComp<XenoComponent>(target))
+            return;
+
+        _xenoWatch.Watch(user, target.Value);
+    }
+
+    private void OnGhostTeleportRequest(TacticalMapGhostTeleportRequestEvent args, EntitySessionEventArgs session)
+    {
+        if (session.SenderSession.AttachedEntity is not { } user ||
+            !HasComp<GhostComponent>(user))
+            return;
+
+        if (!TryGetTacticalMap(out var map) ||
+            !TryComp<MapGridComponent>(map.Owner, out var grid))
+            return;
+
+        if (!_map.TryGetTileRef(map.Owner, grid, args.Position, out var tile) || tile.Tile.IsEmpty)
+            return;
+
+        var tileCenter = new Vector2(args.Position.X + 0.5f, args.Position.Y + 0.5f) * grid.TileSize;
+        var targetCoords = new EntityCoordinates(map.Owner, tileCenter);
+
+        var xform = Transform(user);
+        _transform.SetCoordinates(user, xform, targetCoords);
+        _transform.AttachToGridOrMap(user, xform);
+        _physics.SetLinearVelocity(user, Vector2.Zero);
+
+        _adminLog.Add(LogType.GhostWarp, $"{ToPrettyString(user)} teleported to {args.Position} via the tactical map");
     }
 
     public void OpenComputerMap(Entity<TacticalMapComputerComponent?> computer, EntityUid user)
