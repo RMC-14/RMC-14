@@ -50,6 +50,16 @@
   requiredSkillLevel: 1
 
 - type: rmcConstruction
+  id: RMCAPCFrameBuild
+  name: APC frame
+  prototype: CMAPCFrame
+  doAfterTime: 1
+  doAfterTimeMin: 0.5
+  materialCost: 2
+  skill: RMCSkillConstruction
+  requiredSkillLevel: 2
+
+- type: rmcConstruction
   id: RMCFloorTileBuild
   name: floor tile (x4)
   prototype: CMTileItemSteel

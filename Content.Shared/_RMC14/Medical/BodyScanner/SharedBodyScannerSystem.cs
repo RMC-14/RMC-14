@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Movement;
+using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Storage;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Damage;
@@ -21,6 +22,7 @@ public abstract class SharedBodyScannerSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedRMCPowerSystem _power = default!;
     [Dependency] private readonly RMCMovementSystem _rmcMovement = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -87,6 +89,7 @@ public abstract class SharedBodyScannerSystem : EntitySystem
             return;
 
         scanner.Comp.Occupant = args.Entity;
+        _power.SetPowerMode(scanner.Owner, RMCPowerMode.Active);
         if (_net.IsServer)
             _audio.PlayPvs(scanner.Comp.InsertSound, scanner);
         Dirty(scanner);
@@ -104,6 +107,7 @@ public abstract class SharedBodyScannerSystem : EntitySystem
         if (scanner.Comp.Occupant == args.Entity)
         {
             scanner.Comp.Occupant = null;
+            _power.SetPowerMode(scanner.Owner, RMCPowerMode.Idle);
             Dirty(scanner);
         }
 
@@ -139,6 +143,12 @@ public abstract class SharedBodyScannerSystem : EntitySystem
 
         if (!TryGetLinkedScanner(console, out var scanner))
             return;
+
+        if (!_power.IsPowered(console) || !_power.IsPowered(scanner))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-machines-unpowered"), console, args.User, PopupType.SmallCaution);
+            return;
+        }
 
         if (scanner.Comp.Occupant is not { } occupant || TerminatingOrDeleted(occupant))
         {

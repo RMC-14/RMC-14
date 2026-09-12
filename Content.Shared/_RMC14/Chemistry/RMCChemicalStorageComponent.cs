@@ -36,6 +36,12 @@ public sealed partial class RMCChemicalStorageComponent : Component
     [DataField, AutoNetworkedField]
     public FixedPoint2 RechargePer = 5;
 
+    /// <summary>
+    /// Energy charged to the APC network after a successful recharge tick, in joules.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float RechargeEnergy = 1500;
+
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan RechargeAt;
 

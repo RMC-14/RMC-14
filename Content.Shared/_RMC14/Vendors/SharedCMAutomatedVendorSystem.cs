@@ -14,6 +14,7 @@ using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Medical.IV;
 using Content.Shared._RMC14.Medical.Refill;
+using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Scaling;
 using Content.Shared._RMC14.TacticalMap;
@@ -90,6 +91,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedRMCHolidaySystem _rmcHoliday = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
+    [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly SquadSystem _squads = default!;
@@ -838,6 +840,8 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     private void AfterVend(EntityUid spawn, EntityUid player, EntityUid vendor, Vector2 offset, bool vended = false, SlotFlags? replaceSlot = null)
     {
+        _rmcPower.AddOneOffEnergy(vendor, Comp<CMAutomatedVendorComponent>(vendor).VendEnergy);
+
         var recently = EnsureComp<RMCRecentlyVendedComponent>(spawn);
         var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(spawn);
         while (anchored.MoveNext(out var uid))

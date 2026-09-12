@@ -57,6 +57,7 @@ public sealed class CommunicationsTowerSystem : EntitySystem
 
     private void OnTowerMapInit(Entity<CommunicationsTowerComponent> ent, ref MapInitEvent args)
     {
+        ChangePowerMode(ent);
         UpdateAppearance(ent);
     }
 
@@ -217,22 +218,27 @@ public sealed class CommunicationsTowerSystem : EntitySystem
             return;
 
         if (args.Powered)
-        {
             _intel.RestoreColonyCommunications();
-            return;
-        }
 
-        ChangeState(ent, CommunicationsTowerState.Off);
+        UpdateAppearance(ent);
     }
 
     private void ChangeState(Entity<CommunicationsTowerComponent> tower, CommunicationsTowerState newState)
     {
         tower.Comp.State = newState;
         Dirty(tower);
+        ChangePowerMode(tower);
 
         var ev = new CommunicationsTowerStateChangedEvent(tower);
         RaiseLocalEvent(tower, ev);
         UpdateAppearance(tower);
+    }
+
+    private void ChangePowerMode(Entity<CommunicationsTowerComponent> tower)
+    {
+        _rmcPower.SetPowerMode(tower.Owner, tower.Comp.State == CommunicationsTowerState.On
+            ? RMCPowerMode.Active
+            : RMCPowerMode.Off);
     }
 
     public bool CanTransmit(ProtoId<RadioChannelPrototype>? channel = null)
@@ -241,6 +247,7 @@ public sealed class CommunicationsTowerSystem : EntitySystem
         while (towers.MoveNext(out var tower))
         {
             if (tower.State != CommunicationsTowerState.On ||
+                !_rmcPower.IsPowered(tower.Owner) ||
                 channel != null && !tower.Channels.Contains(channel.Value))
             {
                 continue;
@@ -254,7 +261,10 @@ public sealed class CommunicationsTowerSystem : EntitySystem
 
     public void UpdateAppearance(Entity<CommunicationsTowerComponent> tower)
     {
-        _appearance.SetData(tower, CommunicationsTowerLayers.Layer, tower.Comp.State);
+        var state = tower.Comp.State == CommunicationsTowerState.On && !_rmcPower.IsPowered(tower.Owner)
+            ? CommunicationsTowerState.Off
+            : tower.Comp.State;
+        _appearance.SetData(tower, CommunicationsTowerLayers.Layer, state);
     }
 
     public override void Update(float frameTime)

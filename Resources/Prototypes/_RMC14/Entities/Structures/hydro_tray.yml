@@ -17,13 +17,14 @@
         - MachineMask
         layer:
         - MachineLayer
-  # - type: ApcPowerReceiver  TODO RMC14 power figure out the unpowered visuals
-  #   powerLoad: 250
-  #   needsPower: true
-  # - type: RMCPowerReceiver
-  #   idleLoad: 0
-  #   activeLoad: 0
-  #   channel: Equipment
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
+    # CM13 trays require Equipment power but use the machinery defaults of zero load.
+    channel: Equipment
   - type: Anchorable
   - type: Pullable
   - type: Destructible
@@ -40,7 +41,10 @@
   - type: Sprite
     sprite: _RMC14/Structures/hydroponics.rsi
     layers:
+    - state: hydrotray3_d
+      map: [ "unpowered" ]
     - state: hydrotray3
+      map: [ "powered" ]
     - state: over_lowhealth3
       map: [ "health_alert" ]
       visible: false
@@ -79,6 +83,14 @@
         harvest_alert:
           True: { visible: true }
           False: { visible: false }
+      enum.PowerDeviceVisuals.Powered:
+        powered:
+          True: { visible: true }
+          False: { visible: false }
+        unpowered:
+          True: { visible: false }
+          False: { visible: true }
+  - type: AmbientOnPowered
   - type: PlantHolder
     drawWarnings: true
   - type: AmbientSound

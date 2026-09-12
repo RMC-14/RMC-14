@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Dropship.Weapon;
+using Content.Shared._RMC14.Power;
 using Content.Shared.GameTicking;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -13,6 +14,7 @@ public abstract class SharedRMCCameraSystem : EntitySystem
 {
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedRMCPowerSystem _power = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private readonly HashSet<EntProtoId> _refresh = new();
@@ -131,6 +133,7 @@ public abstract class SharedRMCCameraSystem : EntitySystem
 
         var actor = args.Actor;
         ent.Comp.Watchers.Add(actor);
+        _power.SetPowerMode(ent.Owner, RMCPowerMode.Active);
         Dirty(ent);
 
         var watcher = EnsureComp<RMCCameraWatcherComponent>(actor);
@@ -147,6 +150,8 @@ public abstract class SharedRMCCameraSystem : EntitySystem
 
         var actor = args.Actor;
         ent.Comp.Watchers.Remove(actor);
+        if (ent.Comp.Watchers.Count == 0 && !ent.Comp.StayConnected)
+            _power.SetPowerMode(ent.Owner, RMCPowerMode.Idle);
         Dirty(ent);
 
         RemCompDeferred<RMCCameraWatcherComponent>(actor);
@@ -222,6 +227,8 @@ public abstract class SharedRMCCameraSystem : EntitySystem
         if (TryComp(watcher.Comp.Computer, out RMCCameraComputerComponent? computer))
         {
             computer.Watchers.Remove(watcher);
+            if (computer.Watchers.Count == 0 && !computer.StayConnected)
+                _power.SetPowerMode(watcher.Comp.Computer.Value, RMCPowerMode.Idle);
             Dirty(watcher.Comp.Computer.Value, computer);
         }
     }

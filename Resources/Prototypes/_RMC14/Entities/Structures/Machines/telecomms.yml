@@ -4,6 +4,10 @@
   name: telecommunication server
   description: When powered and filled with encryption keys it allows radio headset communication.
   components:
+  - type: RMCPowerReceiver
+    idleLoad: 300
+    activeLoad: 0
+    channel: Equipment
   - type: Sprite
     sprite: _RMC14/Structures/Machines/telecomms.rsi
     snapCardinals: true

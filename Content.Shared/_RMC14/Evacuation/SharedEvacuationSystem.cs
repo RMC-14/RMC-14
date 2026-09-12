@@ -458,6 +458,15 @@ public abstract class SharedEvacuationSystem : EntitySystem
         }
     }
 
+    private void SetPumpPowerMode(RMCPowerMode mode)
+    {
+        var pumps = EntityQueryEnumerator<EvacuationPumpComponent>();
+        while (pumps.MoveNext(out var uid, out _))
+        {
+            _rmcPower.SetPowerMode(uid, mode);
+        }
+    }
+
     private string EvacuationAreaStatus(EntityUid area, bool powered)
     {
         var status = Loc.GetString(powered
@@ -512,6 +521,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
         }
         else
         {
+            SetPumpPowerMode(RMCPowerMode.Idle);
             _marineAnnounce.AnnounceARESStaging(null, Loc.GetString("rmc-evacuation-cancelled"), cancelSound);
             var ev = new EvacuationDisabledEvent();
             RaiseLocalEvent(map.Value, ref ev, true);
@@ -586,6 +596,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
             {
                 progress.StartAnnounced = true;
                 SetPumpAppearance(EvacuationPumpVisuals.Empty);
+                SetPumpPowerMode(RMCPowerMode.Active);
                 SetPumpAmbience();
 
                 var areas = new StringBuilder();
@@ -679,6 +690,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
                     _marineAnnounce.AnnounceARESStaging(null, Loc.GetString("rmc-evacuation-fuel-progress-complete"));
                     _xenoAnnounce.AnnounceAll(default, Loc.GetString("rmc-evacuation-xeno-progress-complete"));
                     SetPumpAppearance(EvacuationPumpVisuals.Full);
+                    SetPumpPowerMode(RMCPowerMode.Idle);
                     var ev = new EvacuationProgressEvent(100);
                     RaiseLocalEvent(uid, ref ev, true);
                 }
