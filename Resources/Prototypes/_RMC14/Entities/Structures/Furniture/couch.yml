@@ -79,6 +79,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/Couches/red_couch.rsi
     state: couch_mid
+  - type: Transform
+    anchored: false
 
 - type: entity
   parent: RMCCouchMidRed

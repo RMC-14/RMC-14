@@ -721,6 +721,8 @@
       state: 78
     - type: Icon
       state: 78
+    - type: Occluder
+      enabled: false
 
 - type: entity
   parent: RMCBaseTSEDropshipWall
