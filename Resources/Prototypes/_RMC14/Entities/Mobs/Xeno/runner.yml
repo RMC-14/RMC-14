@@ -228,25 +228,12 @@
     autoRot: true
     color: "#22FF22"
   - type: XenoAcidSlash
-    acid:
-    - type: UserAcided
-      armorPiercing: 40
-      damage:
-        types:
-          Heat: 1
-      duration: 20
   - type: ForTheHive
     baseSprite: _RMC14/Mobs/Xenonids/Runner/acider_runner.rsi
     activeSprite: _RMC14/Mobs/Xenonids/Runner/acider_runner_primed.rsi
     baseDamage:
       types:
         Heat: 1
-    acid:
-    - type: UserAcided
-      armorPiercing: 40
-      damage:
-        types:
-          Heat: 1
   - type: XenoAciderGeneration
   - type: AcidTrap
     trapLevel: 3
