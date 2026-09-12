@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: PursuitInAshes
-  changes:
-  - message: The CPR Dummy in the SEA vendor is now in the SEA Tech. The CMO now also
-      has access to CPR Dummies in their vendor.
-    type: Tweak
-  id: 3140
-  time: '2026-04-22T03:57:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9198
 - author: Ian321
   changes:
   - message: Surplus explosives crate can now be bought by requisitions.
@@ -4465,5 +4457,12 @@
   id: 3639
   time: '2026-09-12T15:02:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10706
+- author: CatAndHats
+  changes:
+  - message: Removed "Fish" as a xenonid chatsan
+    type: Remove
+  id: 3640
+  time: '2026-09-12T18:15:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10817
 Name: RMC14
 Order: -1
