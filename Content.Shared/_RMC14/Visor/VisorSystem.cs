@@ -105,7 +105,7 @@ public sealed class VisorSystem : EntitySystem
             return;
         }
 
-        var layer = $"enum.{nameof(VisorVisualLayers)}.{VisorVisualLayers.Base}";
+        var layer = $"visor_{nameof(VisorVisualLayers)}.{VisorVisualLayers.Base}";
         if (args.Layers.Any(l => l.Item1 == layer))
             return;
 
