@@ -82,6 +82,7 @@
     chance: 0.35
     stunMin: 4
     stunMax: 5
+    slashChance: 0.25
   - type: Fixtures
     fixtures:
       fix1:
