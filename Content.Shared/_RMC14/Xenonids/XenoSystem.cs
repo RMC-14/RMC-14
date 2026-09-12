@@ -3,11 +3,13 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Commendations;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Entrenching;
+using Content.Shared._RMC14.Language.Systems;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Medical.Scanner;
 using Content.Shared._RMC14.Mentor.ImaginaryFriend;
 using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Sprite;
 using Content.Shared._RMC14.Tackle;
 using Content.Shared._RMC14.Vendors;
 using Content.Shared._RMC14.Weapons.Melee;
@@ -18,6 +20,7 @@ using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Fortify;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
+using Content.Shared._RMC14.Xenonids.IffTag;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -71,7 +74,9 @@ public sealed partial class XenoSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly HiveLeaderSystem _hiveLeader = default!;
+    [Dependency] private readonly RMCXenoIffTagSystem _iffTag = default!;
     [Dependency] private readonly SharedImaginaryFriendSystem _imaginaryFriend = default!;
+    [Dependency] private readonly SharedLanguageSystem _language = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThresholds = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
@@ -80,6 +85,7 @@ public sealed partial class XenoSystem : EntitySystem
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
+    [Dependency] private readonly SharedRMCSpriteSystem _rmcSprite = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
@@ -93,6 +99,8 @@ public sealed partial class XenoSystem : EntitySystem
 
     private EntityQuery<AffectableByWeedsComponent> _affectableQuery;
     private EntityQuery<DamageableComponent> _damageableQuery;
+    private EntityQuery<HiveSlotComponent> _hiveSlotQuery;
+    private EntityQuery<HiveStatModifierComponent> _hiveStatModifierQuery;
     private EntityQuery<MobStateComponent> _mobStateQuery;
     private EntityQuery<MobThresholdsComponent> _mobThresholdsQuery;
     private EntityQuery<XenoFriendlyComponent> _xenoFriendlyQuery;
@@ -112,6 +120,8 @@ public sealed partial class XenoSystem : EntitySystem
 
         _affectableQuery = GetEntityQuery<AffectableByWeedsComponent>();
         _damageableQuery = GetEntityQuery<DamageableComponent>();
+        _hiveSlotQuery = GetEntityQuery<HiveSlotComponent>();
+        _hiveStatModifierQuery = GetEntityQuery<HiveStatModifierComponent>();
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
         _mobThresholdsQuery = GetEntityQuery<MobThresholdsComponent>();
         _xenoFriendlyQuery = GetEntityQuery<XenoFriendlyComponent>();
@@ -224,7 +234,7 @@ public sealed partial class XenoSystem : EntitySystem
             return;
 
         // TODO RMC14 this still falsely plays the hit red flash effect on xenos if others are hit in a wide swing
-        if ((_xenoFriendlyQuery.HasComp(target) && _hive.FromSameHive(xeno.Owner, target)) ||
+        if ((_xenoFriendlyQuery.HasComp(target) && IsProtectedFromAttack(xeno.Owner, target)) ||
             _mobState.IsDead(target))
         {
             if (!args.Disarm)
@@ -244,7 +254,7 @@ public sealed partial class XenoSystem : EntitySystem
     {
         if (!TryComp<XenoNestComponent>(GetEntity(args.Target), out var nest) ||
             nest.Nested == null ||
-            !_hive.FromSameHive(xeno.Owner, GetEntity(args.Target)))
+            !_hive.FromSameHiveOrAlly(xeno.Owner, GetEntity(args.Target)))
         {
             return;
         }
@@ -325,6 +335,19 @@ public sealed partial class XenoSystem : EntitySystem
     {
         // leaving the hive makes you lose container vision post hijack :)
         _nightVision.SetSeeThroughContainers(ent.Owner, args.Hive?.Comp.SeeThroughContainers ?? false);
+
+        _rmcSprite.SetColor(ent.Owner, args.Hive?.Comp.Color ?? Color.White);
+
+        // corrupted hive understands english (cant speak it tho)
+        if (TryComp(args.OldHive, out HiveSlotComponent? oldSlot) && oldSlot.Position == HiveSlots.Corrupted)
+            _language.RemoveUnderstoodLanguage(ent.Owner, SharedLanguageSystem.CommonLanguage);
+
+        if (args.Hive is { } hive &&
+            TryComp(hive.Owner, out HiveSlotComponent? slot) &&
+            slot.Position == HiveSlots.Corrupted)
+        {
+            _language.AddUnderstoodLanguage(ent.Owner, SharedLanguageSystem.CommonLanguage);
+        }
     }
 
     private void OnXenoIgnite(Entity<XenoComponent> ent, ref IgnitedEvent args)
@@ -498,13 +521,25 @@ public sealed partial class XenoSystem : EntitySystem
         _damageable.TryChangeDamage(xeno, heal, true, origin: xeno);
     }
 
+    public bool IsProtectedFromAttack(EntityUid attacker, EntityUid target)
+    {
+        if (_hive.GetHive(attacker) is { } hive &&
+            _hiveSlotQuery.TryGetComponent(hive.Owner, out var slot) &&
+            slot.Position == HiveSlots.Renegade)
+        {
+            return _iffTag.IffProtects(attacker, target);
+        }
+
+        return _hive.FromSameHiveOrAlly(attacker, target);
+    }
+
     public bool CanAbilityAttackTarget(EntityUid xeno, EntityUid target, bool canAttackBarricades = false, bool canAttackWindows = false)
     {
         if (xeno == target)
             return false;
 
         // hiveless xenos can attack eachother
-        if (_hive.FromSameHive(xeno, target))
+        if (IsProtectedFromAttack(xeno, target))
             return false;
 
         if (_mobState.IsDead(target))
@@ -596,6 +631,9 @@ public sealed partial class XenoSystem : EntitySystem
                     if (_xenoPlasmaQuery.TryComp(uid, out var plasmaComp))
                     {
                         var amount = FixedPoint2.Max(plasmaComp.PlasmaRegenOffWeeds * plasmaComp.MaxPlasma / 100 / 2, 0.01);
+                        if (_hiveStatModifierQuery.TryComp(uid, out var offWeedsGain))
+                            amount *= offWeedsGain.PlasmaGainMultiplier;
+
                         _xenoPlasma.RegenPlasma((uid, plasmaComp), amount);
                     }
 
@@ -611,6 +649,9 @@ public sealed partial class XenoSystem : EntitySystem
                 if (_xenoPlasmaQuery.TryComp(uid, out var plasma))
                 {
                     var plasmaRestored = plasma.PlasmaRegenOnWeeds * plasma.MaxPlasma / 100 / 2;
+                    if (_hiveStatModifierQuery.TryComp(uid, out var onWeedsGain))
+                        plasmaRestored *= onWeedsGain.PlasmaGainMultiplier;
+
                     _xenoPlasma.RegenPlasma((uid, plasma), plasmaRestored);
 
                     if (_xenoRecoveryQuery.TryComp(uid, out var recovery))

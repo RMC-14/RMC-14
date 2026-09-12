@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared.FixedPoint;
+using Content.Shared.NPC.Prototypes;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -102,4 +103,35 @@ public sealed partial class HiveComponent : Component
 
     [DataField, AutoNetworkedField]
     public HashSet<GibbedXenoInfo> GibbedXenos = new();
+
+    [DataField, AutoNetworkedField]
+    public Color Color = Color.White;
+
+    [DataField, AutoNetworkedField]
+    public HashSet<ProtoId<NpcFactionPrototype>> AlliedFactions = new();
+
+    [DataField, AutoNetworkedField]
+    public HashSet<EntityUid> AlliedHives = new();
+
+    [DataField, AutoNetworkedField]
+    public HashSet<ProtoId<NpcFactionPrototype>> BannedFactionAllies = new(HiveAlliableFactions.All);
+
+    [DataField, AutoNetworkedField]
+    public HashSet<int> BannedHiveSlots = new()
+    {
+        HiveSlots.Normal,
+        HiveSlots.Corrupted,
+        HiveSlots.Alpha,
+        HiveSlots.Bravo,
+        HiveSlots.Charlie,
+        HiveSlots.Delta,
+        HiveSlots.Renegade,
+        HiveSlots.Forsaken,
+    };
+
+    [DataField, AutoNetworkedField]
+    public bool TacticalMapAlwaysLive;
+
+    [DataField, AutoNetworkedField]
+    public int? LarvaQueueWaitSecondsOverride;
 }
