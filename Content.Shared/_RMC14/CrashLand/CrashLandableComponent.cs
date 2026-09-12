@@ -1,4 +1,3 @@
-﻿using System.Numerics;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 
@@ -26,6 +25,6 @@ public sealed partial class CrashLandableComponent : Component
     [DataField, AutoNetworkedField]
     public float SkyFallDuration = 1.5f;
 
-    [DataField]
-    public Vector2 OriginalSpriteOffset;
+    [DataField, AutoNetworkedField]
+    public bool RemoveComponentAfterCrash;
 }

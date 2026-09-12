@@ -1,9 +1,8 @@
-using System.Numerics;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.ParaDrop;
+namespace Content.Shared._RMC14.ParaDrop;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ParaDroppableComponent : Component
@@ -24,6 +23,9 @@ public sealed partial class ParaDroppableComponent : Component
     public EntProtoId ParachutePrototype = "RMCParachuteDeployed";
 
     [DataField, AutoNetworkedField]
+    public float ParachuteScale = 1;
+
+    [DataField, AutoNetworkedField]
     public TimeSpan? LastParaDrop;
 
     [DataField, AutoNetworkedField]
@@ -31,7 +33,4 @@ public sealed partial class ParaDroppableComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool RemoveComponentAfterDrop;
-
-    [DataField]
-    public Vector2 OriginalSpriteOffset;
 }

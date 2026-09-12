@@ -1,6 +1,9 @@
+using System.Linq;
+using System.Numerics;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.ParaDrop;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Xenonids.Neurotoxin;
@@ -12,10 +15,10 @@ using Content.Shared.Maps;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Systems;
-using Content.Shared.ParaDrop;
 using Content.Shared.Physics;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Throwing;
+using Content.Shared.Vehicle.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
@@ -25,6 +28,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
@@ -42,6 +46,7 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -69,7 +74,10 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
 
         SubscribeLocalEvent<DeleteCrashLandableOnTouchComponent, StartCollideEvent>(OnDeleteCrashLandableOnTouchStartCollide);
 
+        SubscribeLocalEvent<CrashLandingComponent, MapInitEvent>(OnCrashLandingMapInit);
+        SubscribeLocalEvent<CrashLandingComponent, ComponentShutdown>(OnCrashLandingShutdown);
         SubscribeLocalEvent<CrashLandingComponent, UpdateCanMoveEvent>(OnUpdateCanMove);
+        SubscribeLocalEvent<CrashLandingComponent, VehicleCanRunEvent>(OnVehicleCanRun);
         SubscribeLocalEvent<CrashLandingComponent, RMCIgniteAttemptEvent>(OnIgniteAttempt);
         SubscribeLocalEvent<CrashLandingComponent, GettingAttackedAttemptEvent>(OnGettingAttacked);
         SubscribeLocalEvent<CrashLandingComponent, AttemptMobCollideEvent>(OnAttemptMobCollide);
@@ -129,9 +137,59 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
         QueueDel(args.OtherEntity);
     }
 
+    private void OnCrashLandingMapInit(Entity<CrashLandingComponent> ent, ref MapInitEvent args)
+    {
+        DisableFallingCollisions(ent, ent.Comp.OriginalLayers, ent.Comp.OriginalMasks);
+        Dirty(ent);
+    }
+
+    private void OnCrashLandingShutdown(Entity<CrashLandingComponent> ent, ref ComponentShutdown args)
+    {
+        RestoreFallingCollisions(ent, ent.Comp.OriginalLayers, ent.Comp.OriginalMasks);
+    }
+
+    public void DisableFallingCollisions(EntityUid entity, Dictionary<string, int> originalLayers, Dictionary<string, int> originalMasks)
+    {
+        if (!HasComp<PhysicsComponent>(entity) || !TryComp(entity, out FixturesComponent? fixtures))
+            return;
+
+        foreach (var fixture in fixtures.Fixtures)
+        {
+            originalLayers.TryAdd(fixture.Key, fixture.Value.CollisionLayer);
+            originalMasks.TryAdd(fixture.Key, fixture.Value.CollisionMask);
+
+            _physics.SetCollisionLayer(entity, fixture.Key, fixture.Value, (int) CollisionGroup.None);
+            _physics.SetCollisionMask(entity, fixture.Key, fixture.Value, (int) CollisionGroup.None);
+        }
+    }
+
+    public void RestoreFallingCollisions(
+        EntityUid entity,
+        IReadOnlyDictionary<string, int> originalLayers,
+        IReadOnlyDictionary<string, int> originalMasks)
+    {
+        if (!HasComp<PhysicsComponent>(entity) || !TryComp(entity, out FixturesComponent? fixtures))
+            return;
+
+        foreach (var fixture in fixtures.Fixtures)
+        {
+            if (!originalLayers.TryGetValue(fixture.Key, out var originalLayer) ||
+                !originalMasks.TryGetValue(fixture.Key, out var originalMask))
+                continue;
+
+            _physics.SetCollisionLayer(entity, fixture.Key, fixture.Value, originalLayer);
+            _physics.SetCollisionMask(entity, fixture.Key, fixture.Value, originalMask);
+        }
+    }
+
     private void OnUpdateCanMove(Entity<CrashLandingComponent> ent, ref UpdateCanMoveEvent args)
     {
         args.Cancel();
+    }
+
+    private void OnVehicleCanRun(Entity<CrashLandingComponent> ent, ref VehicleCanRunEvent args)
+    {
+        args.CanRun = false;
     }
 
     private void OnIgniteAttempt(Entity<CrashLandingComponent> ent, ref RMCIgniteAttemptEvent args)
@@ -195,6 +253,11 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
 
     public bool IsLandableTile(Entity<MapGridComponent> grid, TileRef tileRef)
     {
+        return IsLandableTile(grid, tileRef, false);
+    }
+
+    public bool IsLandableTile(Entity<MapGridComponent> grid, TileRef tileRef, bool ignoreParadropRestrictions)
+    {
         var tile = tileRef.GridIndices;
         var location = _mapSystem.GridTileToLocal(grid, grid, tile);
 
@@ -208,7 +271,7 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
             return false;
         }
 
-        if (!_area.CanParadrop(location))
+        if (!ignoreParadropRestrictions && !_area.CanParadrop(location))
             return false;
 
         // don't spawn inside of solid objects
@@ -233,6 +296,49 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
         return valid;
     }
 
+    public bool TryGetLandableFootprint(EntityUid landing, Entity<MapGridComponent> grid, Vector2i center, bool ignoreParadropRestrictions, out List<TileRef> footprint)
+    {
+        footprint = GetLandingFootprint(landing, grid, center);
+        foreach (var tile in footprint)
+        {
+            if (!IsLandableTile(grid, tile, ignoreParadropRestrictions))
+                return false;
+        }
+
+        return footprint.Count > 0;
+    }
+
+    public List<TileRef> GetLandingFootprint(EntityUid landing, Entity<MapGridComponent> grid, Vector2i center)
+    {
+        var centerCoordinates = _mapSystem.GridTileToLocal(grid, grid, center);
+        var rotation = _transform.GetWorldRotation(landing) - _transform.GetWorldRotation(grid);
+        var bounds = _entityLookup.GetAABBNoContainer(landing, centerCoordinates.Position, rotation);
+
+        // Prevent exact 1 tile sized fixtures from putting warnings on the neighboring tiles.
+        var horizontalInset = MathF.Min(PhysicsConstants.PolygonRadius, bounds.Width / 2);
+        var verticalInset = MathF.Min(PhysicsConstants.PolygonRadius, bounds.Height / 2);
+        var footprintBounds = new Box2(
+            bounds.Left + horizontalInset,
+            bounds.Bottom + verticalInset,
+            bounds.Right - horizontalInset,
+            bounds.Top - verticalInset);
+        var tileBounds = Box2.CenteredAround(centerCoordinates.Position, new Vector2(grid.Comp.TileSize));
+        if (tileBounds.Enlarged(PhysicsConstants.LinearSlop).Contains(footprintBounds))
+        {
+            var centerFootprint = new List<TileRef>();
+            if (_mapSystem.TryGetTileRef(grid, grid, center, out var centerTile))
+                centerFootprint.Add(centerTile);
+
+            return centerFootprint;
+        }
+
+        var footprint = _mapSystem.GetLocalTilesIntersecting(grid, grid, footprintBounds, false).ToList();
+        if (footprint.Count == 0 && _mapSystem.TryGetTileRef(grid, grid, center, out var fallbackTile))
+            footprint.Add(fallbackTile);
+
+        return footprint;
+    }
+
     /// <summary>
     /// Try and get a valid position to crash land on.
     /// Used for blind para-dropping and failed evacuation pods/shuttles.
@@ -241,6 +347,16 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
     /// <param name="location"></param>
     /// <returns>True if a valid location has been found.</returns>
     public bool TryGetCrashLandLocation(bool blocking, out EntityCoordinates location)
+    {
+        return TryGetCrashLandLocation(null, blocking, out location);
+    }
+
+    public bool TryGetCrashLandLocation(EntityUid landing, bool blocking, out EntityCoordinates location)
+    {
+        return TryGetCrashLandLocation((EntityUid?) landing, blocking, out location);
+    }
+
+    private bool TryGetCrashLandLocation(EntityUid? landing, bool blocking, out EntityCoordinates location)
     {
         location = default;
         var distressQuery = EntityQueryEnumerator<RMCPlanetComponent>();
@@ -260,20 +376,25 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
                 if (!_mapSystem.TryGetTileRef(grid, gridComp, tile, out var tileRef))
                     continue;
 
-                if (!IsLandableTile((grid, gridComp), tileRef))
+                if (landing is { } entity)
+                {
+                    if (!TryGetLandableFootprint(entity, (grid, gridComp), tile, false, out _))
+                        continue;
+                }
+                else if (!IsLandableTile((grid, gridComp), tileRef))
                     continue;
 
                 location = _mapSystem.GridTileToLocal(grid, gridComp, tile);
 
-                if (blocking)
-                {
-                    _crashLandingBlockers.Clear();
-                    _entityLookup.GetEntitiesInRange(location, _crashLandingBlockerRadius, _crashLandingBlockers);
-                    if (_crashLandingBlockers.Count > 0)
-                        continue;
+                if (!blocking)
+                    return true;
 
-                    SpawnAtPosition(_crashLandingBlocker, location);
-                }
+                _crashLandingBlockers.Clear();
+                _entityLookup.GetEntitiesInRange(location, _crashLandingBlockerRadius, _crashLandingBlockers);
+                if (_crashLandingBlockers.Count > 0)
+                    continue;
+
+                SpawnAtPosition(_crashLandingBlocker, location);
 
                 return true;
             }
@@ -287,7 +408,7 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (!TryGetCrashLandLocation(false, out var location))
+        if (!TryGetCrashLandLocation(crashLandable, false, out var location))
             return;
 
         TryCrashLand(crashLandable.Owner, doDamage, location);
@@ -328,7 +449,9 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
 
     public void DoCrashLand(EntityUid crashing, EntityCoordinates crashLocation, float skyFallDuration = 1.5f, float crashDuration = 0.75f, bool doDamage = true, SoundSpecifier? dropSound = null, SoundSpecifier? crashSound = null)
     {
-        var crashLandable = EnsureComp<CrashLandableComponent>(crashing);
+        if (!EnsureComp<CrashLandableComponent>(crashing, out var crashLandable))
+            crashLandable.RemoveComponentAfterCrash = true;
+
         crashLandable.CrashSound = crashSound;
         crashLandable.SkyFallDuration = skyFallDuration;
         crashLandable.CrashDuration = crashDuration;
@@ -363,6 +486,9 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
 
             if (crashLanding.DoDamage)
                 ApplyFallingDamage(uid);
+
+            if (crashLandable.RemoveComponentAfterCrash)
+                RemCompDeferred<CrashLandableComponent>(uid);
 
             Blocker.UpdateCanMove(uid);
         }

@@ -143,6 +143,22 @@ public sealed class RMCPlanetSystem : EntitySystem
         return false;
     }
 
+    public bool TryPlanetToCoordinates(Vector2i coordinates, MapId mapId, out MapCoordinates mapCoordinates)
+    {
+        var planets = EntityQueryEnumerator<RMCPlanetComponent, TransformComponent>();
+        while (planets.MoveNext(out _, out var planet, out var xform))
+        {
+            if (xform.MapID != mapId)
+                continue;
+
+            mapCoordinates = new MapCoordinates(coordinates - planet.Offset, mapId);
+            return true;
+        }
+
+        mapCoordinates = default;
+        return false;
+    }
+
     public bool TryPlanetToCoordinates(Vector2i coordinates, out MapCoordinates mapCoordinates)
     {
         var planets = EntityQueryEnumerator<RMCPlanetComponent>();
