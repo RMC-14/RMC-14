@@ -61,11 +61,11 @@
       - id: CMPillCanisterKelotane
         points: 5
         recommended: true
-#      - id: CMPillCanisterPeridaxon
-#        points: 5
-#      - id: CMPillCanisterTramadol
-#        points: 5
-#        recommended: true
+      # - id: CMPillCanisterPeridaxon
+      #   points: 5
+      - id: CMPillCanisterTramadol
+        points: 5
+        recommended: true
     - name: Autoinjectors
       entries:
       - id: CMBicaridineAutoInjector
@@ -78,10 +78,10 @@
         points: 1
       - id: CMKelotaneAutoInjector
         points: 1
-#      - id: CMAutoinjectorOxycodone
-#        points: 2
-#      - id: CMAutoinjectorTramadol
-#        points: 1
+      - id: CMOxycodoneAutoInjector
+        points: 2
+      - id: CMTramadolAutoInjector
+        points: 1
       - id: CMTricordrazineAutoInjector
         points: 1
     - name: Medical Utilities

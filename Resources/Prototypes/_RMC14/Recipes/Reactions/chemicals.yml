@@ -16,6 +16,27 @@
     maxTotalIntensity: 100
 
 - type: reaction
+  id: RMCEthylredoxrazineOxidation
+  reactants:
+    RMCEthanol:
+      amount: 1
+    CMEthylredoxrazine:
+      amount: 1
+  products:
+    Water: 2
+
+# variant for vanilla ethanol from drinks
+- type: reaction
+  id: EthylredoxrazineOxidation
+  reactants:
+    Ethanol:
+      amount: 1
+    CMEthylredoxrazine:
+      amount: 1
+  products:
+    Water: 2
+
+- type: reaction
   id: RMCTableSalt
   reactants:
     RMCChlorine:

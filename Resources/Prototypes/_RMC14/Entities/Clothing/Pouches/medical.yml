@@ -41,7 +41,7 @@
     - id: CMBurnKit10
     - id: CMKelotaneAutoInjector
     - id: CMBicaridineAutoInjector
-    #- id: CMOxycodoneAutoInjector
+    - id: CMOxycodoneAutoInjector
     - id: CMEmergencyAutoInjector
     - id: CMEmergencyAutoInjector
 
@@ -66,9 +66,8 @@
       amount: 2
     - id: CMBurnKit10
       amount: 2
-    # todo rmc14 autoinjectors oxycodone x2
-#    - id: CMOxycodoneAutoInjector
-#      amount: 2
+    - id: CMOxycodoneAutoInjector
+      amount: 2
     - id: CMEmergencyAutoInjector
       amount: 1
 
