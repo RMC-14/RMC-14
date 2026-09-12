@@ -743,10 +743,10 @@ cm-chatsan-word-flashlights = flashlights
 cm-chatsan-replacement-flashlights = glow tubes
 
 cm-chatsan-word-window = window
-cm-chatsan-replacement-window = tall membrane
+cm-chatsan-replacement-window = glass membrane
 
 cm-chatsan-word-windows = windows
-cm-chatsan-replacement-windows = tall membranes
+cm-chatsan-replacement-windows = glass membranes
 
 cm-chatsan-word-light-bulb = light bulb
 cm-chatsan-word-lightbulb = lightbulb
