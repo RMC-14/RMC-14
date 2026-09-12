@@ -5,6 +5,7 @@ using Content.Server.Popups;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Radio.Components;
+using Content.Server._RMC14.Radio;
 using Content.Server.Speech;
 using Content.Server.Speech.Components;
 using Content.Shared._RMC14.Xenonids;
@@ -108,6 +109,24 @@ public sealed class RadioDeviceSystem : EntitySystem
         if (!Resolve(uid, ref component))
             return;
 
+        // RMC14
+        if (TryComp(uid, out RMCRadioListenOnlyModeComponent? comp))
+        {
+            if (!comp.Enabled && component.Enabled)
+            {
+                comp.Enabled = true;
+                EnsureComp<BlockListeningComponent>(uid);
+
+                var state = Loc.GetString("handheld-radio-component-listen-only-state");
+                var message = Loc.GetString("handheld-radio-component-on-use", ("radioState", state));
+                _popup.PopupEntity(message, user, user);
+
+                _appearance.SetData(uid, RadioDeviceVisuals.Broadcasting, !comp.Enabled);
+
+                return;
+            }
+        }
+
         SetMicrophoneEnabled(uid, user, !component.Enabled, quiet, component);
     }
 
@@ -135,6 +154,13 @@ public sealed class RadioDeviceSystem : EntitySystem
             _popup.PopupEntity(message, user.Value, user.Value);
         }
 
+        // RMC14
+        if (TryComp(uid, out RMCRadioListenOnlyModeComponent? comp) && comp.Enabled && !enabled)
+        {
+            comp.Enabled = false;
+            RemCompDeferred<BlockListeningComponent>(uid);
+        }
+
         _appearance.SetData(uid, RadioDeviceVisuals.Broadcasting, component.Enabled);
         if (component.Enabled)
             EnsureComp<ActiveListenerComponent>(uid).Range = component.ListenRange;
@@ -145,6 +171,10 @@ public sealed class RadioDeviceSystem : EntitySystem
     public void ToggleRadioSpeaker(EntityUid uid, EntityUid user, bool quiet = false, RadioSpeakerComponent? component = null)
     {
         if (!Resolve(uid, ref component))
+            return;
+
+        // RMC14
+        if (TryComp(uid, out RMCRadioListenOnlyModeComponent? comp) && comp.Enabled && component.Enabled)
             return;
 
         SetSpeakerEnabled(uid, user, !component.Enabled, quiet, component);
@@ -184,6 +214,16 @@ public sealed class RadioDeviceSystem : EntitySystem
             args.PushMarkup(Loc.GetString("handheld-radio-component-on-examine", ("frequency", proto.Frequency)));
             args.PushMarkup(Loc.GetString("handheld-radio-component-chennel-examine",
                 ("channel", proto.LocalizedName)));
+
+            if (component.ToggleOnInteract)
+            {
+                var state = Loc.GetString(component.Enabled ? "handheld-radio-component-on-state" : "handheld-radio-component-off-state");
+
+                if (TryComp(uid, out RMCRadioListenOnlyModeComponent? comp) && comp.Enabled)
+                    state = Loc.GetString("handheld-radio-component-listen-only-state");
+
+                args.PushMarkup(Loc.GetString("handheld-radio-component-state-examine", ("radioState", state)));
+            }
         }
     }
 
