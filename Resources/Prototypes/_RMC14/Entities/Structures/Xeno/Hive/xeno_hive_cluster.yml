@@ -78,6 +78,11 @@
   - type: HiveConstructionRequiresWeedableSurface
   - type: HiveConstructionLimited
     id: HiveClusterXeno
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: cluster
+    opacity: 0.4
   - type: WarpPoint
     location: hive cluster
   - type: RMCAlternateSprite

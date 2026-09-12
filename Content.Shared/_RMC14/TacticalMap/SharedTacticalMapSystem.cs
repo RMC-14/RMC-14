@@ -47,6 +47,18 @@ public abstract class SharedTacticalMapSystem : EntitySystem
         return false;
     }
 
+    public bool IsXenoStructureOnUserMap(Entity<TacticalMapUserComponent> user, EntityUid structure)
+    {
+        if (!user.Comp.Xenos ||
+            user.Comp.Map is not { } map ||
+            !user.Comp.XenoStructureBlips.ContainsKey(structure.Id))
+        {
+            return false;
+        }
+
+        return Transform(structure).GridUid == map;
+    }
+
     protected void UpdateMapData(Entity<TacticalMapComputerComponent> computer)
     {
         if (!TryGetTacticalMap(out var map))
