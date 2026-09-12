@@ -830,7 +830,7 @@
   solids:
     FoodBowlBig: 1
     FoodMeatBacon: 2
-    FoodNoodlesBoiled:
+    FoodNoodlesBoiled: 1
 
 - type: microwaveMealRecipe
   id: RecipeRamenXenokotsu
