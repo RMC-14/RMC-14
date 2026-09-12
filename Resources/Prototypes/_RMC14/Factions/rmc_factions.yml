@@ -1,5 +1,6 @@
 ﻿- type: npcFaction
   id: UNMC
+  name: rmc-faction-name-unmc
   hostile:
   - RMCXeno
   - CLF
@@ -7,6 +8,7 @@
 
 - type: npcFaction
   id: RMCXeno
+  name: rmc-faction-name-xeno
   hostile:
   - UNMC
   - SPP
@@ -32,47 +34,71 @@
 
 - type: npcFaction
   id: SPP
+  name: rmc-faction-name-spp
+  color: "#c72418"
   hostile:
   - RMCXeno
 
 - type: npcFaction
   id: Halcyon
+  name: rmc-faction-name-halcyon
+  color: "#d6a920"
   hostile:
   - RMCXeno
 
 - type: npcFaction
   id: CLF
+  name: rmc-faction-name-clf
+  color: "#206e0d"
   hostile:
   - RMCXeno
   - UNMC
 
 - type: npcFaction
   id: WeYa
+  name: rmc-faction-name-we-ya
+  color: "#d6a920"
+  subgroups: [Halcyon]
   hostile:
   - RMCXeno
 
 - type: npcFaction
   id: Civilian
+  name: rmc-faction-name-civilian
+  color: "#4e9120"
   hostile:
   - RMCXeno
 
 - type: npcFaction
   id: RoyalMarines
+  name: rmc-faction-name-royal-marines
   hostile:
   - RMCXeno
 
 - type: npcFaction
   id: Bureau
+  name: rmc-faction-name-bureau
+  color: "#2631ad"
   hostile:
   - RMCXeno
 
 - type: npcFaction
   id: TSE
+  name: rmc-faction-name-tse
+  color: "#bf2441"
+  hostile:
+  - RMCXeno
+
+- type: npcFaction
+  id: Provost
+  name: rmc-faction-name-provost
+  color: "#5c0616"
   hostile:
   - RMCXeno
 
 - type: npcFaction
   id: HEFA
+  name: rmc-faction-name-hefa
   hostile:
   - RMCXeno
   - UNMC
