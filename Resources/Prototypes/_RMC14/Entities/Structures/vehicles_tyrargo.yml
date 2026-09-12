@@ -1,0 +1,335 @@
+## Tyrargo vehicle props
+# they don't have collisions here and in CM cause Tyrargo vehicles are all walled off by invisible walls so they don't need it
+- type: entity
+  abstract: true
+  id: RMCPropTyrargoVehicleBase
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    noRot: false
+  - type: Physics
+    fixedRotation: false
+  - type: Sprite
+    sprite: _RMC14/Structures/tyrargo_vehicles.rsi
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Corrodible
+    isCorrodible: false
+
+# AD-71E VTOL
+- type: entity
+  parent: RMCPropTyrargoVehicleBase
+  id: RMCPropTyrargoVehicleVTOL
+  name: AD-71E VTOL
+  description: A twin tilt-jet VTOL, the Blackfoot is the Bearcat's ugly big sister. For what she lacks in fire power and agility, she more than makes up for in utility and love handles. First tested by UN Northridge on United Nations soil, the Blackfoot is currently undergoing active combat trials. This craft appears to be undergoing maintenance and is not ready to fly.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Tyrargo_Vehicles/tyrargo_vtol.rsi
+    state: vtol
+
+- type: entity
+  parent: RMCPropTyrargoVehicleBase
+  id: RMCPropTyrargoVehicleVTOLCrashed
+  suffix: Crashed
+  name: AD-71E VTOL
+  description: A twin tilt-jet VTOL, the Blackfoot is the Bearcat's ugly big sister. For what she lacks in fire power and agility, she more than makes up for in utility and love handles. First tested by UN Northridge on United Nations soil, the Blackfoot is currently undergoing active combat trials. This craft appears to have crash landed, and is inoperable.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Tyrargo_Vehicles/tyrargo_vtol.rsi
+    state: vtol_damaged
+
+# F-44
+- type: entity
+  parent: RMCPropTyrargoVehicleBase
+  id: RMCPropTyrargoVehicleEvacBlack
+  suffix: Black
+  name: F-44 Aerospace fighter
+  description: A high tech, silver coated F-44 aerospace fighter used by the UNMC in deep recon missions. The thermal-absorbent paint alone probably costs more than your squad's collective paycheck. Unfortunately however, this jet was in the middle of a repair cycle when the northern defences were breached, necessitating an evacuation.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Tyrargo_Vehicles/tyrargo_evac.rsi
+    state: evac_black
+  - type: Physics
+    fixedRotation: true
+
+- type: entity
+  parent: RMCPropTyrargoVehicleBase
+  id: RMCPropTyrargoVehicleEvacGreen
+  name: F-44 Aerospace fighter
+  suffix: Green
+  description: A state of the art F-44 aerospace fighter used by the UNMC. This fighter has seen better days with extensive internal wiring damage and unfinished repairs to the bomb-bays.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Tyrargo_Vehicles/tyrargo_evac.rsi
+    state: evac_green
+  - type: Physics
+    fixedRotation: true
+
+# M887
+- type: entity
+  parent: RMCPropTyrargoVehicleBase
+  id: RMCPropTyrargoVehicleTruck
+  name: M887 Truck
+  description: A small box-type van. It's a compact vehicle with a rectangular cargo area, typically designed for transporting goods or small equipment. It features a high roof and straight sides, providing ample vertical space for storage. Its size makes it maneuverable and ideal for urban driving and tight spaces. This van appears to be non-functional, likely due to excessive use during the recent outbreak.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Tyrargo_Vehicles/tyrargo_truck.rsi
+    state: truck
+
+- type: entity
+  parent: RMCPropTyrargoVehicleTruck
+  id: RMCPropTyrargoVehicleTruckBroken
+  suffix: Broken
+  components:
+  - type: Sprite
+    state: truck_broken
+
+# M991
+- type: entity
+  parent: RMCPropTyrargoVehicleTruck
+  id: RMCPropTyrargoVehicleTruckAlt
+  name: M991 Truck
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Tyrargo_Vehicles/tyrargo_truck.rsi
+    state: truck_alt
+
+- type: entity
+  parent: RMCPropTyrargoVehicleTruckAlt
+  id: RMCPropTyrargoVehicleTruckAltBroken
+  suffix: Broken
+  components:
+  - type: Sprite
+    state: truck_alt_broken
+
+# M557 APC
+- type: entity
+  parent: RMCPropTyrargoVehicleBase
+  id: RMCPropTyrargoVehicleAPC
+  name: M577 Armored Personnel Carrier
+  description: An M577 Armored Personnel Carrier. An armored transport with four big wheels. This one is no longer in working order, serving now as a roadblock.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Tyrargo_Vehicles/tyrargo_apc.rsi
+    state: apc
+
+- type: entity
+  parent: RMCPropTyrargoVehicleAPC
+  id: RMCPropTyrargoVehicleAPCDestroyed
+  suffix: Destroyed
+  components:
+  - type: Sprite
+    state: apc_destroyed
+
+- type: entity
+  parent: RMCPropTyrargoVehicleAPC
+  id: RMCPropTyrargoVehicleAPCMedical
+  suffix: Medical
+  components:
+  - type: Sprite
+    state: apc_med
+
+- type: entity
+  parent: RMCPropTyrargoVehicleAPC
+  id: RMCPropTyrargoVehicleAPCMedicalDestroyed
+  suffix: Medical, Destroyed
+  components:
+  - type: Sprite
+    state: apc_med_destroyed
+
+# Bison ATV
+- type: entity
+  parent: RMCPropTyrargoVehicleBase
+  id: RMCPropTyrargoVehicleATV
+  name: BISON Automated Transport Vehicle
+  description: The BISON ATV is an remote-controlled logistical supply vehicle, intended to assist UNMC rear-line logistics forces in moving supplies. It requires someone to be standing near it for the auto-pilot functions to work. This model is non-functional.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Tyrargo_Vehicles/tyrargo_bison.rsi
+    state: bison
+
+- type: entity
+  parent: RMCPropTyrargoVehicleATV
+  id: RMCPropTyrargoVehicleATVDestroyed
+  suffix: Destroyed
+  components:
+  - type: Sprite
+    state: bison_destroyed
+
+- type: entity
+  parent: RMCPropTyrargoVehicleATV
+  id: RMCPropTyrargoVehicleATVOpen
+  suffix: Open
+  components:
+  - type: Sprite
+    state: bison_open
+
+- type: entity
+  parent: RMCPropTyrargoVehicleATV
+  id: RMCPropTyrargoVehicleATVOpenDestroyed
+  suffix: Open, Destroyed
+  components:
+  - type: Sprite
+    state: bison_open_destroyed
+
+# Marshal IFV
+- type: entity
+  parent: RMCPropTyrargoVehicleBase
+  id: RMCPropTyrargoVehicleIFV
+  name: M34 Marshal IFV
+  description: Developed by Weston-Yamada, the RAT (Rover Armed Transport) was originally designed for the TSE military as an armed version of their RT series of expeditionary vehicles, being instead adopted by the UN Marine Corps. It's heavier and and more durable then the M570 series the Marines use, as they don't have a need for APCs capable of being transported via a dropship.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Tyrargo_Vehicles/tyrargo_ifv.rsi
+    state: ifv
+
+# M255 Halftrack
+- type: entity
+  parent: RMCPropTyrargoVehicleBase
+  id: RMCPropTyrargoVehicleHalfTrack
+  name: M255 Armored Half-Track
+  description: A UN half-track, used everywhere in the Marine Corps. Comes in multiple different configurations, from being able to haul troops to mounting a mobile mortar. Versatile and cheap. This one appears to be non-functional due to overuse during the recent outbreak.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Tyrargo_Vehicles/tyrargo_halftrack.rsi
+    state: truck
+
+- type: entity
+  parent: RMCPropTyrargoVehicleHalfTrack
+  id: RMCPropTyrargoVehicleHalfTrackBroken
+  suffix: Destroyed
+  components:
+  - type: Sprite
+    state: truck_broken
+
+- type: entity
+  parent: RMCPropTyrargoVehicleHalfTrack
+  id: RMCPropTyrargoVehicleHalfTrackAlt
+  suffix: Alt
+  components:
+  - type: Sprite
+    state: truck_alt
+
+- type: entity
+  parent: RMCPropTyrargoVehicleHalfTrack
+  id: RMCPropTyrargoVehicleHalfTrackAltDestroyed
+  suffix: Alt, Destroyed
+  components:
+  - type: Sprite
+    state: truck_alt_broken
+
+# Humvee
+- type: entity
+  parent: RMCPropTyrargoVehicleBase
+  id: RMCPropTyrargoVehicleHumvee
+  name: M540-B Armored Recon Carrier
+  description: An M540-B Armored Recon Carrier. A lightly armored reconnaissance and intelligence vehicle. This one has been rendered inoperable.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Tyrargo_Vehicles/tyrargo_humvee.rsi
+    state: humvee
+
+- type: entity
+  parent: RMCPropTyrargoVehicleHumvee
+  id: RMCPropTyrargoVehicleHumveeDestroyed
+  suffix: Destroyed
+  components:
+  - type: Sprite
+    state: humvee_broken
+
+- type: entity
+  parent: RMCPropTyrargoVehicleHumvee
+  id: RMCPropTyrargoVehicleHumveeCarrier
+  suffix: Carrier
+  components:
+  - type: Sprite
+    state: humvee_carrier
+
+- type: entity
+  parent: RMCPropTyrargoVehicleHumvee
+  id: RMCPropTyrargoVehicleHumveeCarrierDestroyed
+  suffix: Carrier, Destroyed
+  components:
+  - type: Sprite
+    state: humvee_carrier_broken
+
+- type: entity
+  parent: RMCPropTyrargoVehicleHumvee
+  id: RMCPropTyrargoVehicleHumveeMed
+  suffix: Medical
+  components:
+  - type: Sprite
+    state: humvee_med
+
+- type: entity
+  parent: RMCPropTyrargoVehicleHumvee
+  id: RMCPropTyrargoVehicleHumveeMedDestroyed
+  suffix: Medical, Destroyed
+  components:
+  - type: Sprite
+    state: humvee_med_broken
+
+# Humvee turret
+- type: entity
+  parent: RMCPropTyrargoVehicleBase
+  id: RMCPropTyrargoVehicleHumveeTurret
+  name: M356 'Rattlesnake' 25mm autocannon
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Tyrargo_Vehicles/tyrargo_humvee.rsi
+    state: humvee_gun
+
+- type: entity
+  parent: RMCPropTyrargoVehicleHumveeTurret
+  id: RMCPropTyrargoVehicleHumveeTurretDestroyed
+  suffix: Destroyed
+  components:
+  - type: Sprite
+    state: humvee_gun_broken
+
+# Longstreet tank
+# Only variants pertinent to Tyrargo ported for now because there is a lot to port
+# TODO RMC14: Rest of the tank sprites
+- type: entity
+  parent: RMCPropTyrargoVehicleBase
+  id: RMCPropTyrargoVehicleTankDestroyed
+  name: M34A2 Longstreet Light Tank
+  suffix: Destroyed
+  description: A giant piece of armor with a big gun, it knew what it had to do, and it served its duty.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Tyrargo_Vehicles/tyrargo_tank.rsi
+    state: tank_broken
+
+- type: entity
+  parent: RMCPropTyrargoVehicleBase
+  id: RMCPropTyrargoVehicleTankTurret
+  name: M34A2 Longstreet Light Tank turret
+  description:
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Tyrargo_Vehicles/tyrargo_tank.rsi
+    state: turret_broken
+
+- type: entity
+  parent: RMCPropTyrargoVehicleBase
+  id: RMCPropTyrargoVehicleTankGLDestroyed
+  name: M34A2 Longstreet Light Tank grenade launcher
+  suffix: Destroyed
+  description:
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Tyrargo_Vehicles/tyrargo_tank.rsi
+    state: glauncher_broken
+
+- type: entity
+  parent: RMCPropTyrargoVehicleBase
+  id: RMCPropTyrargoVehicleTankBarrelDestroyed
+  name: M34A2 Longstreet Light Tank barrel
+  suffix: Destroyed
+  description:
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Tyrargo_Vehicles/tyrargo_tank.rsi
+    state: ltb_broken

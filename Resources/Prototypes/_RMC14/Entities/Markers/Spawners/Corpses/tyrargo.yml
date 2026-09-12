@@ -1,0 +1,17 @@
+# Tyrargo Rift corpses
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseTyrargoTrooper
+  name: Corpse Spawner - Tyrargo Rifleman
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseTyrargoTrooper
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseTyrargoMedic
+  name: Corpse Spawner - Tyrargo Medic
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseTyrargoMedic

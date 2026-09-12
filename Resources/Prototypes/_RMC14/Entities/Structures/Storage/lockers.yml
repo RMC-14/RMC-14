@@ -268,6 +268,35 @@
 
 - type: entity
   parent: CMLockerBase
+  id: RMCLethalInjectionLocker
+  name: Lethal Injection Locker
+  components:
+  - type: AccessReader
+    access: [["CMAccessArmory"], ["CMAccessCMP"], ["RMCAccessSeniorCommand"], ["CMAccessHighCommand"]] # Warden, CMP, XO/CO, (Admins provost marshals)
+  - type: StorageFill
+    contents:
+      - id: RMCSyringeLethalPrefilled
+      - id: RMCSyringeLethalPrefilled
+      - id: RMCSyringeLethalPrefilled
+      - id: RMCSyringeLethalPrefilled
+      - id: RMCSyringeLethalPrefilled
+
+- type: entity
+  parent: CMLockerBase
+  id: RMCExecutionFirearmsLocker
+  name: Execution Firearms Locker
+  components:
+  - type: AccessReader
+    access: [["CMAccessArmory"], ["CMAccessCMP"], ["RMCAccessSeniorCommand"], ["CMAccessHighCommand"]] # Warden, CMP, XO/CO, Admins (provost marshals)
+  - type: StorageFill
+    contents:
+      - id: WeaponRifleM4SPR
+      - id: WeaponRifleM4SPR
+      - id: WeaponRifleM4SPR
+      - id: RMCBoxMagazineRifleM4SPR
+
+- type: entity
+  parent: CMLockerBase
   id: CMLockerMedical
   name: medical doctor's locker
   components:

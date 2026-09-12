@@ -6,7 +6,7 @@
   - type: WallMount
     arc: 360
   - type: Sprite
-    drawdepth: WallTops
+    drawdepth: WallMountedItems    
     sprite: _RMC14/Structures/Wallmounts/posters.rsi
     snapCardinals: true
   - type: Destructible
@@ -22,7 +22,7 @@
         acts: [ "Destruction" ]
       - !type:SpawnEntitiesBehavior
         spawn:
-          PosterBroken:
+          CMPosterBroken:
             min: 1
             max: 1
         offset: 0
@@ -34,7 +34,7 @@
   description: "You can't make out anything from the poster's original print. It's ruined."
   components:
   - type: Sprite
-    drawdepth: WallTops
+    drawdepth: WallMountedItems
     sprite: _RMC14/Structures/Wallmounts/posters.rsi
     state: poster_ripped
   - type: Destructible
@@ -153,7 +153,7 @@
   parent: CMPosterBase
   id: CMPosterMissJanuary
   name: "'Miss January' pinup"
-  description: "This poster features Roxanne Straski. She was the January 2180 centerfold in House Bunny Gentleman's Magazine. Don't ask how you know that."
+  description: "This poster features Roxanne Straski. She was the January 2120 centerfold in House Bunny Gentleman's Magazine. Don't ask how you know that."
   components:
   - type: Sprite
     state: miss_january
@@ -180,7 +180,7 @@
   parent: CMPosterBase
   id: CMPosterMissJuly
   name: "'Miss July' pinup"
-  description: "This poster features Audrey Rainwater standing in a jacuzzi. She was the July 2180 centerfold in House Bunny Gentleman's Magazine. Don't ask how you know that."
+  description: "This poster features Audrey Rainwater standing in a jacuzzi. She was the July 2124 centerfold in House Bunny Gentleman's Magazine. Don't ask how you know that."
   components:
   - type: Sprite
     state: miss_july
@@ -189,7 +189,7 @@
   parent: CMPosterBase
   id: CMPosterMissApril
   name: "'Miss April' pinup"
-  description: "This poster features Juliette Simmons. She was the April 2179 centerfold in House Bunny Gentleman's Magazine. Don't ask how you know that."
+  description: "This poster features Juliette Simmons. She was the April 2123 centerfold in House Bunny Gentleman's Magazine. Don't ask how you know that."
   components:
   - type: Sprite
     state: miss_april
@@ -270,7 +270,7 @@
   parent: CMPosterBase
   id: CMPosterMissFebruary
   name: "'Miss February' pinup"
-  description: "This poster features Miranda Noel. She was the February 2180 centerfold in House Bunny Gentleman's Magazine. Don't ask how you know that."
+  description: "This poster features Miranda Noel. She was the February 2124 centerfold in House Bunny Gentleman's Magazine. Don't ask how you know that."
   components:
   - type: Sprite
     state: miss_february
@@ -287,8 +287,8 @@
 - type: entity
   parent: CMPosterBase
   id: CMPosterMrUniverse1
-  name: "Mr. Universe 2170-74"
-  description: "This poster depicts Lance McDonell, the winner of Mr. Universe 2170-74. Don't ask how you know that. He bears a striking resemblance to the 42nd President of the United States, Arnold Schwarzenegger."
+  name: "Mr. Universe 2114-18"
+  description: "This poster depicts Lance McDonell, the winner of Mr. Universe 2114-18. Don't ask how you know that. He bears a striking resemblance to the 42nd President of the United States, Arnold Schwarzenegger."
   components:
   - type: Sprite
     state: mr_universe_1
@@ -296,8 +296,8 @@
 - type: entity
   parent: CMPosterBase
   id: CMPosterMrUniverse2
-  name: "Mr. Universe 2174-76"
-  description: "This poster depicts Rockwell Jordan, the winner of Mr. Universe 2174-76. Don't ask how you know that."
+  name: "Mr. Universe 2118-20"
+  description: "This poster depicts Rockwell Jordan, the winner of Mr. Universe 2118-20. Don't ask how you know that."
   components:
   - type: Sprite
     state: mr_universe_2
@@ -305,7 +305,7 @@
 - type: entity
   parent: CMPosterBase
   id: CMPosterMrUniverse3
-  name: "Mr. Universe 2176-present"
+  name: "Mr. Universe 2120-present"
   description: "This poster depicts Wilson Winslow, the current Mr. Universe reigning champion. Don't ask how you know that."
   components:
   - type: Sprite
@@ -342,7 +342,7 @@
   parent: CMPosterBase
   id: CMPosterMTV
   name: "MTV"
-  description: "MTV: Broadcasting nothing but music videos for over 200 years. Bootleg tapes of current music fetch a premium in the Outer Rim barter market."
+  description: "MTV: Broadcasting nothing but music videos for over 140 years. Bootleg tapes of current music fetch a premium in the Outer Rim barter market."
   components:
   - type: Sprite
     state: mtv
@@ -360,7 +360,7 @@
   parent: CMPosterBase
   id: CMPosterVoteNo
   name: "Vote 'NO' to Proposition 339 and Vote 'NO!' to the Colony Protection Act"
-  description: "This poster demands that you vote 'NO!' to that new piece of legislation that would give the military carte blanche permission to stick its nose in corporate affairs. Many view the bill as government overreach, but many others view it as the lesser of two evils compared to letting the megacorps do whatever they want. Because space is friggin' huge, it's going to take a while to gather all of the votes and even if it's passed, it likely won't go into effect until 2186 at the earliest."
+  description: "This poster demands that you vote 'NO!' to that new piece of legislation that would give the military carte blanche permission to stick its nose in corporate affairs. Many view the bill as government overreach, but many others view it as the lesser of two evils compared to letting the megacorps do whatever they want. Because space is friggin' huge, it's going to take a while to gather all of the votes and even if it's passed, it likely won't go into effect until 2130 at the earliest."
   components:
   - type: Sprite
     state: vote_no
@@ -775,8 +775,8 @@
 - type: entity
   parent: CMPosterBase
   id: CMPosterMarineCorp1
-  name: "marine corp poster"
-  description: "Join the Marine Corp. Enlist today, protect tomorrow!"
+  name: "marine corps poster"
+  description: "Join the Marine Corps. Enlist today, protect tomorrow!"
   components:
   - type: Sprite
     state: marine_corp_1
@@ -784,8 +784,8 @@
 - type: entity
   parent: CMPosterMarineCorp1
   id: CMPosterMarineCorp2
-  name: "marine corp poster"
-  description: "Join the Marine Corp. Enlist today, protect tomorrow!"
+  name: "marine corps poster"
+  description: "Join the Marine Corps. Enlist today, protect tomorrow!"
   components:
   - type: Sprite
     state: marine_corp_2
@@ -793,8 +793,8 @@
 - type: entity
   parent: CMPosterMarineCorp1
   id: CMPosterMarineCorp3
-  name: "marine corp poster"
-  description: "Every Paycheck a Fortune! Every Formation a Parade! - Join the Colonial Marines!"
+  name: "marine corps poster"
+  description: "Every Paycheck a Fortune! Every Formation a Parade! - Join the UN Marine Corps!"
   components:
   - type: Sprite
     state: marine_corp_3
@@ -802,7 +802,7 @@
 - type: entity
   parent: CMPosterMarineCorp1
   id: CMPosterMarineCorp4
-  name: "marine corp poster"
+  name: "marine corps poster"
   description: "This poster depicts the logo of the UN Marine Corps, Oorah!"
   components:
   - type: Sprite
@@ -811,8 +811,8 @@
 - type: entity
   parent: CMPosterMarineCorp1
   id: CMPosterMarineCorp5
-  name: "UN marine corp poster"
-  description: "YOU GIVE US WINGS, WINGS OF LIBERTY - United Nations Marine Corp."
+  name: "UN marine corps poster"
+  description: "YOU GIVE US WINGS, WINGS OF LIBERTY - United Nations Marine Corps."
   components:
   - type: Sprite
     state: marine_corp_5
@@ -820,7 +820,7 @@
 - type: entity
   parent: CMPosterMarineCorp1
   id: CMPosterMarineCorp6
-  name: "UN marine corp poster"
+  name: "UN marine corps poster"
   description: "UNMC MARINES - FIRST TO FIGHT."
   components:
   - type: Sprite
@@ -829,8 +829,8 @@
 - type: entity
   parent: CMPosterMarineCorp1
   id: CMPosterMarineCorp7
-  name: "UN marine corp poster"
-  description: "No one stands alone with the United Nations Marine Corp - JOIN US!"
+  name: "UN marine corps poster"
+  description: "No one stands alone with the United Nations Marine Corps - JOIN US!"
   components:
   - type: Sprite
     state: marine_corp_7
@@ -989,3 +989,35 @@
   components:
   - type: Sprite
     state: SPP_13
+
+# Tyrargo posters
+
+- type: entity
+  parent: CMPosterBase
+  id: CMPosterTyrargoEvacNotice
+  name: "UNMC evacuation notice"
+  description: "A evacuation poster, it reads: All residents of Tyrargo Rift and outlying areas are required to evacuate by 5:45pm. All evacuees will be asked to provide identification and may be subject to medical testing. Evacuees resisting official direction will be detained. Evacuation is mandatory."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/posters_32x64.rsi
+    state: tyrargo_evac
+    offset: 0.5, 0
+
+- type: entity
+  parent: CMPosterBase
+  id: CMPosterTyrargoCheckpointNotice
+  name: "UN military checkpoint notice"
+  description: "A military notice poster, it reads: Halt. UN Marine Corps checkpoint ahead. Comply or be shot."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/posters_64x64.rsi
+    state: tyrargo_checkpoint
+
+- type: entity
+  parent: CMPosterBase
+  id: CMPosterTyrargoQuarantineNotice
+  name: "ICB quarantine notice"
+  description: "A quarantine poster, bearing the ICB's logo, it reads: This area is designated a secure transit zone by the ICB and UN Marine Corps. Non-compliance with military directives is punishable under the Interplanetary Biohazard Preparedness Act."
+  components:
+  - type: Sprite
+    state: icc

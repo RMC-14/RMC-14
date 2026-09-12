@@ -1,0 +1,73 @@
+- type: job
+  parent: RMCSurvivorTyrargoBase
+  id: RMCSurvivorTyrargoCMT
+  name: rmc-job-name-tyrargo-cmt
+  startingGear: RMCGearTyrargoCMT
+  icon: "RMCJobIconTyrargoCMT"
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobHospitalCorpsman
+    time: 36000 # 10 hours
+  - !type:TotalJobsTimeRequirement
+    group: RMCJobsSurvivor
+    time: 5400 # 1.5 hours
+  spawnMenuRoleName: UNMC Combat Medical Technician (Tyrargo Rift Survivor)
+  ranks:
+    RMCRankLanceCorporal: []
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetTyrargoMedicalTechnician
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: medic
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadUNMC
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetTyrargoCMT
+    - type: JobPrefix
+      prefix: rmc-job-prefix-tyrargo-cmt
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearTyrargoBase
+  id: RMCGearTyrargoCMT
+  equipment:
+    head: RMCArmorHelmetTyrargoMedic
+    eyes: RMCGogglesBallisticPolarizedBlue
+    back: RMCBackpackTyrargoSurvivorFillCMT
+    belt: CMBeltMedicalFilled
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointTyrargoCMT
+  name: tyrargo marine combat medical technician spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorTyrargoCMT
+  - type: Sprite
+    state: spec_spawn
+
+- type: entity
+  parent: RMCSurvivorPresetTyrargoSurvivorNoPistol
+  id: RMCSurvivorPresetTyrargoCMT
+  name: tyrargo marine combat medical technician survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    randomGear:
+    - [ CMAdvFirstAidKitFilled ]
+    randomOutfits:
+    - []
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconTyrargoCMT
+  icon:
+    sprite: _RMC14/Interface/job_icons/UNMC/tyrargo.rsi
+    state: hudsquad_cmt
