@@ -403,6 +403,7 @@
   - type: Tag
     tags:
     - Grenade
+    - RMCGrenadeMolotov
 
 - type: entity
   parent: CMGrenadeBase
@@ -560,3 +561,6 @@
 
 - type: Tag
   id: RMCGrenade20mm
+
+- type: Tag
+  id: RMCGrenadeMolotov

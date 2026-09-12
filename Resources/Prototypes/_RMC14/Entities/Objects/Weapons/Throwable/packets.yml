@@ -539,6 +539,52 @@
       amount: 25
 
 - type: entity
+  parent: RMCBoxBase
+  id: RMCBoxIED
+  name: improvised explosive device box
+  description: A handmade wooden box containing improvised explosive devices. Pretty explosive, don't store near the flamer fuel.
+  suffix: PVE
+  components:
+  - type: Sprite
+    layers:
+    - state: improvbox_nade_placeholder
+      map: [ "closedLayer" ]
+    - state: ied
+    - state: improvbox_nade_placeholder_e
+      map: [ "openLayer", "emptyLayer" ]
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCGrenadeIED
+  - type: StorageFill
+    contents:
+    - id: RMCGrenadeIED
+      amount: 25
+
+- type: entity
+  parent: RMCBoxBase
+  id: RMCBoxMolotov
+  name: improvised firebomb box
+  description: A handmade wooden box containing improvised firebombs. Pretty flammable, don't store near the flamer fuel.
+  suffix: PVE
+  components:
+  - type: Sprite
+    layers:
+    - state: improvbox_nade_placeholder
+      map: [ "closedLayer" ]
+    - state: ifb
+    - state: improvbox_nade_placeholder_e
+      map: [ "openLayer", "emptyLayer" ]
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCGrenadeMolotov
+  - type: StorageFill
+    contents:
+    - id: RMCGrenadeMolotov
+      amount: 25
+
+- type: entity
   parent: CMPacketBase
   id: RMCPacketGrenade20mmHE
   name: L109A1 HE grenade packet

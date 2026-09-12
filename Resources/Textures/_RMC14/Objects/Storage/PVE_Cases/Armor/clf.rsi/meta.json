@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Created for RMC-14/RMC-14 by Drazamuffin",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "base"
+    },
+    {
+      "name": "icon"
+    },
+    {
+      "name": "lid_open"
+    },
+    {
+      "name": "armor"
+    },
+    {
+      "name": "lid_closed"
+    },
+    {
+      "name": "lid_closed_v"
+    },
+    {
+      "name": "lid_closed_h"
+    }
+  ]
+}

@@ -9,6 +9,7 @@
   startingGear: RMCJobCLFHeavyGunnerPVE
   icon: RMCJobIconCLFSpecialist
   joinNotifyCrew: false
+  supervisors: cm-job-supervisors-clf-cmdr-lead
   accessGroups:
   - Colony
   - SmartGunOperator
@@ -21,7 +22,18 @@
       - CLF
     - type: Skills
       preset: RMCSkillPresetPVESGO
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      understoodLanguages:
+      - Japanese
+      - English
+      currentLanguage: Japanese
+      defaultLanguage: Japanese
     - type: SquadArmorWearer
+    - type: AssignSquad
+      squad: SquadCLF
     - type: JobPrefix
       prefix: rmc-job-prefix-clf-pve-heavy-gunner
     - type: DemoSpecWhitelist
@@ -47,9 +59,6 @@
   id: RMCJobCLFHeavyGunnerPVE
   equipment:
     id: RMCIDCardCLFHeavyGunnerPVE
-    jumpsuit: RMCJumpsuitCLFSoldier
-    shoes: RMCShoesJackbootsFilled
-    ears: RMCHeadsetDistressCLF
 
 - type: playTimeTracker
   id: CMJobCLFHeavyGunnerPVE

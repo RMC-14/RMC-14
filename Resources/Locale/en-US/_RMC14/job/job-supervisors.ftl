@@ -17,9 +17,11 @@ cm-job-supervisors-sl = the acting Squad Leader
 cm-job-supervisors-staff = Server Staff
 cm-job-supervisors-nobody = nobody, you are on your own
 cm-job-supervisors-colonists = the colonists
+#PVE
 cm-job-supervisors-secserg = the Section Sergeant
 cm-job-supervisors-platco = the Platoon Commander
 cm-job-supervisors-company-command = Company Command
+#RCM
 cm-job-supervisors-royal-tl = the Team Leader
 cm-job-supervisors-royal-lieutenant = the Lieutenant
 cm-job-supervisors-royal-captain = the Captain
@@ -28,3 +30,7 @@ cm-job-supervisors-royal-section-leader = the Section Leader
 cm-job-supervisors-royal-troop-sergeant = the Troop Sergeant
 cm-job-supervisors-royal-troop-commander = the Troop Commander
 cm-job-supervisors-squadron-command = Squadron Command
+# CLF
+cm-job-supervisors-clf-cmdr-lead = the Cell's Commander and Cell Leaders
+cm-job-supervisors-clf-cmdr = the Cell's Commander
+cm-job-supervisors-clf-sectcoord = the Sector's Cellular Coordination Ciruit

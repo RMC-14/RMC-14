@@ -790,3 +790,415 @@
       - RMCWeaponRifleL90A2Filled
       item_5:
       - RMCWeaponRifleL90A2Filled
+
+# MAR-30
+
+- type: entity
+  parent: RMCGunRackBase
+  id: RMCGunRackMAR30Empty
+  name: MAR-30 gun rack
+  suffix: MAR-30, Empty
+  description: A large, outdated 21st century weapons rack, designed to store MAR-30s. It's still painted in that multi-century old, military jungle green. The rifles' heavily faded '30' designation is still painted on the top of the rack - These racks, the rifles, and even the rifle's magazines were all designed for, and used in, quite a few of Earth's Broken Backed conflicts during the latter end of the 21st century.
+  components:
+  - type: ContainerContainer
+    containers:
+      item_1: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_2: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_3: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_4: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_5: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_6: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_7: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/GunRacks/mar30_rack.rsi
+  - type: ItemSlots
+    slots:
+      item_1:
+        name: MAR-30
+        whitelist:
+          tags:
+          - RMCWeaponRifleMAR30
+      item_2:
+        name: MAR-30
+        whitelist:
+          tags:
+          - RMCWeaponRifleMAR30
+      item_3:
+        name: MAR-30
+        whitelist:
+          tags:
+          - RMCWeaponRifleMAR30
+      item_4:
+        name: MAR-30
+        whitelist:
+          tags:
+          - RMCWeaponRifleMAR30
+      item_5:
+        name: MAR-30
+        whitelist:
+          tags:
+          - RMCWeaponRifleMAR30
+      item_6:
+        name: MAR-30
+        whitelist:
+          tags:
+          - RMCWeaponRifleMAR30
+      item_7:
+        name: MAR-30
+        whitelist:
+          tags:
+          - RMCWeaponRifleMAR30
+  - type: ItemMapper
+    mapLayers:
+      fill_1:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCWeaponRifleMAR30
+      fill_2:
+        minCount: 2
+        whitelist:
+          tags:
+          - RMCWeaponRifleMAR30
+      fill_3:
+        minCount: 3
+        whitelist:
+          tags:
+          - RMCWeaponRifleMAR30
+      fill_4:
+        minCount: 4
+        whitelist:
+          tags:
+          - RMCWeaponRifleMAR30
+      fill_5:
+        minCount: 5
+        whitelist:
+          tags:
+          - RMCWeaponRifleMAR30
+      fill_6:
+        minCount: 6
+        whitelist:
+          tags:
+          - RMCWeaponRifleMAR30
+      fill_7:
+        minCount: 7
+        whitelist:
+          tags:
+          - RMCWeaponRifleMAR30
+
+- type: entity
+  parent: RMCGunRackMAR30Empty
+  id: RMCGunRackMAR30Filled
+  suffix: MAR30, Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item_1:
+      - RMCWeaponRifleMAR30FilledStripped
+      item_2:
+      - RMCWeaponRifleMAR30FilledStripped
+      item_3:
+      - RMCWeaponRifleMAR30FilledStripped
+      item_4:
+      - RMCWeaponRifleMAR30FilledStripped
+      item_5:
+      - RMCWeaponRifleMAR30FilledStripped
+      item_6:
+      - RMCWeaponRifleMAR30FilledStripped
+      item_7:
+      - RMCWeaponRifleMAR30FilledStripped
+
+#MAR40
+
+- type: entity
+  parent: RMCGunRackMAR30Empty
+  id: RMCGunRackMAR40Empty
+  name: MAR-40 gun rack
+  suffix: MAR-40, Empty
+  description: A large, outdated, 21st century weapons rack, designed to store MAR-40s. It's still painted in that multi-century old, military jungle green. The rifles' faded '40' designation is still painted on the top of the rack - These racks, the rifles, and even the rifle's magazines were all designed for, and used in, quite a few of Earth's Broken Backed conflicts during the latter end of the 21st century.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/GunRacks/mar40_rack.rsi
+  - type: ItemSlots
+    slots:
+      item_1:
+        name: MAR-40
+        whitelist:
+          tags:
+          - RMCWeaponRifleMAR40
+      item_2:
+        name: MAR-40
+        whitelist:
+          tags:
+          - RMCWeaponRifleMAR40
+      item_3:
+        name: MAR-40
+        whitelist:
+          tags:
+          - RMCWeaponRifleMAR40
+      item_4:
+        name: MAR-40
+        whitelist:
+          tags:
+          - RMCWeaponRifleMAR40
+      item_5:
+        name: MAR-40
+        whitelist:
+          tags:
+          - RMCWeaponRifleMAR40
+      item_6:
+        name: MAR-40
+        whitelist:
+          tags:
+          - RMCWeaponRifleMAR40
+      item_7:
+        name: MAR-40
+        whitelist:
+          tags:
+          - RMCWeaponRifleMAR40
+  - type: ItemMapper
+    mapLayers:
+      fill_1:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCWeaponRifleMAR40
+      fill_2:
+        minCount: 2
+        whitelist:
+          tags:
+          - RMCWeaponRifleMAR40
+      fill_3:
+        minCount: 3
+        whitelist:
+          tags:
+          - RMCWeaponRifleMAR40
+      fill_4:
+        minCount: 4
+        whitelist:
+          tags:
+          - RMCWeaponRifleMAR40
+      fill_5:
+        minCount: 5
+        whitelist:
+          tags:
+          - RMCWeaponRifleMAR40
+      fill_6:
+        minCount: 6
+        whitelist:
+          tags:
+          - RMCWeaponRifleMAR40
+      fill_7:
+        minCount: 7
+        whitelist:
+          tags:
+          - RMCWeaponRifleMAR40
+
+- type: entity
+  parent: RMCGunRackMAR40Empty
+  id: RMCGunRackMAR40Filled
+  suffix: MAR40, Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item_1:
+      - RMCWeaponRifleMAR40FilledStripped
+      item_2:
+      - RMCWeaponRifleMAR40FilledStripped
+      item_3:
+      - RMCWeaponRifleMAR40FilledStripped
+      item_4:
+      - RMCWeaponRifleMAR40FilledStripped
+      item_5:
+      - RMCWeaponRifleMAR40FilledStripped
+      item_6:
+      - RMCWeaponRifleMAR40FilledStripped
+      item_7:
+      - RMCWeaponRifleMAR40FilledStripped
+
+#M16
+
+- type: entity
+  parent: RMCGunRackBase
+  id: RMCGunRackM16Empty
+  name: M16 gun rack
+  suffix: M16, Empty
+  description: A large, outdated, 20th century weapons rack, designed to store M16s. It's still painted in that multi-century old, military jungle green. The rifle's faded 'M16' designation is still painted on the top of the rack. - The guns stored on this rack are locked and loaded, ready for combat. Even despite the original Department of Defence standards for rifle storage! To be fair; it may have something to do with the fact that said goverment body hasn't existed for multiple decades now....
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/GunRacks/m16_rack.rsi
+  - type: ItemSlots
+    slots:
+      item_1:
+        name: M16
+        whitelist:
+          tags:
+          - RMCWeaponRifleM16
+      item_2:
+        name: M16
+        whitelist:
+          tags:
+          - RMCWeaponRifleM16
+      item_3:
+        name: M16
+        whitelist:
+          tags:
+          - RMCWeaponRifleM16
+      item_4:
+        name: M16
+        whitelist:
+          tags:
+          - RMCWeaponRifleM16
+      item_5:
+        name: M16
+        whitelist:
+          tags:
+          - RMCWeaponRifleM16
+  - type: ItemMapper
+    mapLayers:
+      fill_1:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCWeaponRifleM16
+      fill_2:
+        minCount: 2
+        whitelist:
+          tags:
+          - RMCWeaponRifleM16
+      fill_3:
+        minCount: 3
+        whitelist:
+          tags:
+          - RMCWeaponRifleM16
+      fill_4:
+        minCount: 4
+        whitelist:
+          tags:
+          - RMCWeaponRifleM16
+      fill_5:
+        minCount: 5
+        whitelist:
+          tags:
+          - RMCWeaponRifleM16
+
+- type: entity
+  parent: RMCGunRackM16Empty
+  id: RMCGunRackM16Filled
+  suffix: M16, Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item_1:
+      - RMCWeaponRifleM16FilledStripped
+      item_2:
+      - RMCWeaponRifleM16FilledStripped
+      item_3:
+      - RMCWeaponRifleM16FilledStripped
+      item_4:
+      - RMCWeaponRifleM16FilledStripped
+      item_5:
+      - RMCWeaponRifleM16FilledStripped
+
+- type: entity
+  parent: RMCGunRackM16Empty
+  id: RMCGunRackM16A5Empty
+  name: M16A5 gun rack
+  suffix: M16A5, Empty
+  description: A large, outdated, 20th century weapons rack, designed to store M16A5s. It's still painted in that multi-century old, military jungle green. The rifles faded 'M16' designation is still painted on the top of the rack. - The guns stored on this rack are locked and loaded, ready for combat. Even despite the original Department of Defence standards for rifle storage! To be fair it may have something to do with the fact that said goverment body hasn't existed for multiple decades now....
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/GunRacks/m16_rack.rsi
+  - type: ItemSlots
+    slots:
+      item_1:
+        name: M16A5
+        whitelist:
+          tags:
+          - RMCWeaponRifleM16A5
+      item_2:
+        name: M16A5
+        whitelist:
+          tags:
+          - RMCWeaponRifleM16A5
+      item_3:
+        name: M16A5
+        whitelist:
+          tags:
+          - RMCWeaponRifleM16A5
+      item_4:
+        name: M16A5
+        whitelist:
+          tags:
+          - RMCWeaponRifleM16A5
+      item_5:
+        name: M16A5
+        whitelist:
+          tags:
+          - RMCWeaponRifleM16A5
+  - type: ItemMapper
+    mapLayers:
+      fill_1:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCWeaponRifleM16A5
+      fill_2:
+        minCount: 2
+        whitelist:
+          tags:
+          - RMCWeaponRifleM16A5
+      fill_3:
+        minCount: 3
+        whitelist:
+          tags:
+          - RMCWeaponRifleM16A5
+      fill_4:
+        minCount: 4
+        whitelist:
+          tags:
+          - RMCWeaponRifleM16A5
+      fill_5:
+        minCount: 5
+        whitelist:
+          tags:
+          - RMCWeaponRifleM16A5
+
+- type: entity
+  parent: RMCGunRackM16A5Empty
+  id: RMCGunRackM16A5Filled
+  suffix: M16A5, Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item_1:
+      - RMCWeaponRifleM16A5FilledStripped
+      item_2:
+      - RMCWeaponRifleM16A5FilledStripped
+      item_3:
+      - RMCWeaponRifleM16A5FilledStripped
+      item_4:
+      - RMCWeaponRifleM16A5FilledStripped
+      item_5:
+      - RMCWeaponRifleM16A5FilledStripped

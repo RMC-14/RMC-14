@@ -75,3 +75,6 @@ rmc-squad-info-RCMLieutenant = Lieutenant
 
 rmc-squad-info-ParaTeamLeader = Team Leader
 rmc-squad-info-ParaCommander = Commander
+
+rmc-squad-info-PVECLFCellTeamLead = Sub-Cell leader
+rmc-squad-info-PVECLFCellCmdr = Cell Commander
