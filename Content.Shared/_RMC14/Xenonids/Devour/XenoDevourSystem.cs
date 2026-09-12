@@ -4,8 +4,10 @@ using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.CombatMode;
 using Content.Shared._RMC14.Fireman;
+using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Pulling;
+using Content.Shared._RMC14.Storage;
 using Content.Shared._RMC14.Synth;
 using Content.Shared._RMC14.TrainingDummy;
 using Content.Shared._RMC14.Vents;
@@ -33,6 +35,8 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Popups;
+using Content.Shared.Storage;
+using Content.Shared.Storage.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee;
@@ -86,7 +90,7 @@ public sealed class XenoDevourSystem : EntitySystem
         SubscribeLocalEvent<DevouredComponent, InteractionAttemptEvent>(OnDevouredInteractionAttempt);
         SubscribeLocalEvent<DevouredComponent, UpdateCanMoveEvent>(OnDevouredAttempt);
         SubscribeLocalEvent<DevouredComponent, ThrowAttemptEvent>(OnDevouredAttempt);
-        SubscribeLocalEvent<DevouredComponent, DropAttemptEvent>(OnDevouredAttempt);
+        SubscribeLocalEvent<DevouredComponent, DropAttemptEvent>(OnDevouredDropAttempt);
         SubscribeLocalEvent<DevouredComponent, UseAttemptEvent>(OnUseAttempt);
         SubscribeLocalEvent<DevouredComponent, PickupAttemptEvent>(OnDevouredPickupAttempt);
         SubscribeLocalEvent<DevouredComponent, IsEquippingAttemptEvent>(OnDevouredIsEquippingAttempt);
@@ -191,7 +195,8 @@ public sealed class XenoDevourSystem : EntitySystem
         if (args.Target == null)
             return;
 
-        if (!HasComp<UsableWhileDevouredComponent>(args.Target) && (!_container.TryGetContainingContainer(ent.Owner, out var container) ||
+        if ((!HasComp<UsableWhileDevouredComponent>(args.Target) && (!HasComp<StorageComponent>(args.Target) || HasComp<StorageOpenDoAfterComponent>(args.Target)))
+            && (!_container.TryGetContainingContainer(ent.Owner, out var container) ||
             !HasComp<XenoDevourComponent>(container.Owner) || args.Target != container.Owner))
         {
             args.Cancelled = true;
@@ -210,6 +215,12 @@ public sealed class XenoDevourSystem : EntitySystem
 
         args.Handled = true;
         DevouredHandleBreakout((args.User, devoured));
+    }
+
+    private void OnDevouredDropAttempt(Entity<DevouredComponent> devoured, ref DropAttemptEvent args)
+    {
+        if (_hands.TryGetActiveItem(devoured.Owner, out var heldItem) && !HasComp<UsableWhileDevouredComponent>(heldItem))
+            args.Cancel();
     }
 
     private void OnDevouredAttempt<T>(Entity<DevouredComponent> devoured, ref T args) where T : CancellableEntityEventArgs
