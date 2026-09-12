@@ -1,4 +1,4 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Power;
 
@@ -20,4 +20,10 @@ public sealed partial class RMCAreaPowerComponent : Component
 
     [DataField, AutoNetworkedField]
     public int[] Load = new int[Enum.GetValues<RMCPowerChannel>().Length];
+
+    /// <summary>
+    /// Transient load charged once by the next server power update.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public int OneOffLoad;
 }

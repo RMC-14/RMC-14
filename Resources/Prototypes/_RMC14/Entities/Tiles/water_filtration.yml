@@ -1,0 +1,226 @@
+# Reusable link bundles. Concrete map entities inherit one of these to join a filter network.
+
+- type: entity
+  id: RMCWaterFilterGroupOne
+  abstract: true
+  components:
+  - type: WaterLink
+    id: "filter 1"
+
+- type: entity
+  id: RMCWaterFilterGroupTwo
+  abstract: true
+  components:
+  - type: WaterLink
+    id: "filter 2"
+
+# Filter machinery and hidden graph markers.
+
+- type: entity
+  id: RMCWaterFiltrationButtonBase
+  abstract: true
+  name: Filtration Activation
+  description: Activates the filtration mechanism.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wallmount
+  components:
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    drawdepth: SmallObjects
+    sprite: _RMC14/Objects/door_button_br.rsi
+    layers:
+    - state: doorctrl
+      map: [ "enum.WaterFilterLayers.Base" ]
+    - state: doorctrl-p
+      visible: false
+      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+  - type: Clickable
+  - type: InteractionOutline
+  - type: WallMount
+    arc: 360
+  - type: WaterFilter
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WaterFilterVisuals.Active:
+        enum.WaterFilterLayers.Base:
+          True: { state: doorctrl1 }
+          False: { state: doorctrl }
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: false }
+          False: { visible: true }
+  - type: ApcPowerReceiver
+  - type: RMCPowerReceiver
+    idleLoad: 2
+    activeLoad: 4
+    channel: Environment
+    requestedMode: Idle
+  - type: RMCMesonsNonviewable
+
+- type: entity
+  parent: [ RMCWaterFiltrationButtonBase, RMCWaterFilterGroupOne ]
+  id: RMCWaterFiltrationButtonFilterOne
+  suffix: Filter 1
+
+- type: entity
+  parent: [ RMCWaterFiltrationButtonBase, RMCWaterFilterGroupTwo ]
+  id: RMCWaterFiltrationButtonFilterTwo
+  suffix: Filter 2
+
+- type: entity
+  parent: MarkerBase
+  id: RMCWaterFilterInitiatorBase
+  abstract: true
+  name: water filtration initiator
+  components:
+  - type: Sprite
+    state: green
+  - type: WaterFilterInitiator
+
+- type: entity
+  parent: [ RMCWaterFilterInitiatorBase, RMCWaterFilterGroupOne ]
+  id: RMCWaterFilterInitiatorFilterOne
+  suffix: Filter 1
+
+- type: entity
+  parent: [ RMCWaterFilterInitiatorBase, RMCWaterFilterGroupTwo ]
+  id: RMCWaterFilterInitiatorFilterTwo
+  suffix: Filter 2
+
+- type: entity
+  parent: MarkerBase
+  id: RMCWaterPurificationRelayBase
+  abstract: true
+  name: water purification relay
+  components:
+  - type: Sprite
+    state: blue
+  - type: Appearance
+  - type: PurifiableWater
+
+- type: entity
+  parent: RMCWaterPurificationRelayBase
+  id: RMCWaterPurificationRelayDelayedBase
+  abstract: true
+  components:
+  - type: Sprite
+    state: timed
+  - type: PurifiableWater
+    delay: 10
+
+- type: entity
+  parent: [ RMCWaterPurificationRelayBase, RMCWaterFilterGroupOne ]
+  id: RMCWaterPurificationRelayFilterOne
+  suffix: Filter 1
+
+- type: entity
+  parent: [ RMCWaterPurificationRelayBase, RMCWaterFilterGroupTwo ]
+  id: RMCWaterPurificationRelayFilterTwo
+  suffix: Filter 2
+
+- type: entity
+  parent: [ RMCWaterPurificationRelayDelayedBase, RMCWaterFilterGroupOne ]
+  id: RMCWaterPurificationRelayDelayedFilterOne
+  suffix: Filter 1, Delayed
+
+- type: entity
+  parent: [ RMCWaterPurificationRelayDelayedBase, RMCWaterFilterGroupTwo ]
+  id: RMCWaterPurificationRelayDelayedFilterTwo
+  suffix: Filter 2, Delayed
+
+# Purifiable water bundles. Only the river bundle is hazardous; shore variants are visual graph nodes.
+
+- type: entity
+  id: RMCDesertWaterPurifiableBase
+  abstract: true
+  components:
+  - type: PurifiableWater
+
+- type: entity
+  parent: [ RMCDesertWaterPurifiableBase, RMCToxicWaterHazardBase ]
+  id: RMCDesertWaterPurifiableRiverBase
+  abstract: true
+
+- type: entity
+  parent: [ RMCEntityDesertWaterShallow, RMCDesertWaterPurifiableRiverBase ]
+  id: RMCDesertWaterPurifiableShallowBase
+  abstract: true
+
+- type: entity
+  parent: [ RMCEntityDesertWaterDeep, RMCDesertWaterPurifiableRiverBase ]
+  id: RMCDesertWaterPurifiableDeepBase
+  abstract: true
+
+- type: entity
+  parent: [ RMCEntityDesertWaterShallowCorner, RMCDesertWaterPurifiableBase ]
+  id: RMCDesertWaterPurifiableShoreCornerBase
+  abstract: true
+
+- type: entity
+  parent: [ RMCEntityDesertWaterShallowCornerEdge, RMCDesertWaterPurifiableBase ]
+  id: RMCDesertWaterPurifiableShoreCornerEdgeBase
+  abstract: true
+
+- type: entity
+  parent: [ RMCEntityDesertWaterShallowEdge, RMCDesertWaterPurifiableBase ]
+  id: RMCDesertWaterPurifiableShoreEdgeBase
+  abstract: true
+
+# Ready-to-map filter 1 water.
+
+- type: entity
+  parent: [ RMCDesertWaterPurifiableShallowBase, RMCWaterFilterGroupOne ]
+  id: RMCDesertWaterPurifiableShallowFilterOne
+  suffix: Toxic, Purifiable, Filter 1
+
+- type: entity
+  parent: [ RMCDesertWaterPurifiableDeepBase, RMCWaterFilterGroupOne ]
+  id: RMCDesertWaterPurifiableDeepFilterOne
+  suffix: Toxic, Purifiable, Filter 1
+
+- type: entity
+  parent: [ RMCDesertWaterPurifiableShoreCornerBase, RMCWaterFilterGroupOne ]
+  id: RMCDesertWaterPurifiableShoreCornerFilterOne
+  suffix: Toxic Visual, Purifiable, Filter 1
+
+- type: entity
+  parent: [ RMCDesertWaterPurifiableShoreCornerEdgeBase, RMCWaterFilterGroupOne ]
+  id: RMCDesertWaterPurifiableShoreCornerEdgeFilterOne
+  suffix: Toxic Visual, Purifiable, Filter 1
+
+- type: entity
+  parent: [ RMCDesertWaterPurifiableShoreEdgeBase, RMCWaterFilterGroupOne ]
+  id: RMCDesertWaterPurifiableShoreEdgeFilterOne
+  suffix: Toxic Visual, Purifiable, Filter 1
+
+# Ready-to-map filter 2 water.
+
+- type: entity
+  parent: [ RMCDesertWaterPurifiableShallowBase, RMCWaterFilterGroupTwo ]
+  id: RMCDesertWaterPurifiableShallowFilterTwo
+  suffix: Toxic, Purifiable, Filter 2
+
+- type: entity
+  parent: [ RMCDesertWaterPurifiableDeepBase, RMCWaterFilterGroupTwo ]
+  id: RMCDesertWaterPurifiableDeepFilterTwo
+  suffix: Toxic, Purifiable, Filter 2
+
+- type: entity
+  parent: [ RMCDesertWaterPurifiableShoreCornerBase, RMCWaterFilterGroupTwo ]
+  id: RMCDesertWaterPurifiableShoreCornerFilterTwo
+  suffix: Toxic Visual, Purifiable, Filter 2
+
+- type: entity
+  parent: [ RMCDesertWaterPurifiableShoreCornerEdgeBase, RMCWaterFilterGroupTwo ]
+  id: RMCDesertWaterPurifiableShoreCornerEdgeFilterTwo
+  suffix: Toxic Visual, Purifiable, Filter 2
+
+- type: entity
+  parent: [ RMCDesertWaterPurifiableShoreEdgeBase, RMCWaterFilterGroupTwo ]
+  id: RMCDesertWaterPurifiableShoreEdgeFilterTwo
+  suffix: Toxic Visual, Purifiable, Filter 2

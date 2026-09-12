@@ -1,4 +1,4 @@
-﻿using Content.Shared.Physics;
+using Content.Shared.Physics;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Damage;
