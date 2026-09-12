@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Spawners;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.JoinXeno;
 using Content.Shared.Coordinates;
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Prototypes;
@@ -44,6 +45,7 @@ public sealed class ForsakenXenoSystem : EntitySystem
 
             _xeno.MakeXeno(xeno);
             _hive.SetHive(xeno, hive);
+            EnsureComp<LarvaQueuedComponent>(xeno);
 
             spawned.Add(xeno);
         }

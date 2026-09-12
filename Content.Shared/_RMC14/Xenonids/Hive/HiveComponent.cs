@@ -121,4 +121,7 @@ public sealed partial class HiveComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool TacticalMapAlwaysLive;
+
+    [DataField, AutoNetworkedField]
+    public int? LarvaQueueWaitSecondsOverride;
 }

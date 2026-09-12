@@ -95,6 +95,7 @@
     color: "#cc8ec4"
     lateJoinGainLarva: false
     tacticalMapAlwaysLive: true
+    larvaQueueWaitSecondsOverride: 0
   - type: HiveSlot
     position: 8
 

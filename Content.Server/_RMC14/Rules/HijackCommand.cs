@@ -1,6 +1,8 @@
 ﻿using Content.Server.Administration;
 using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Rules;
 using Content.Shared.Administration;
+using Robust.Shared.Timing;
 using Robust.Shared.Toolshed;
 
 namespace Content.Server._RMC14.Rules;
@@ -20,5 +22,31 @@ public sealed class HijackCommand : ToolshedCommand
 
         var ev = new DropshipHijackLandedEvent(map);
         EntityManager.EventBus.RaiseEvent(EventSource.Local, ref ev);
+    }
+}
+
+[ToolshedCommand, AdminCommand(AdminFlags.Fun)]
+public sealed class ForceHijackCommand : ToolshedCommand
+{
+    [Dependency] private readonly IGameTiming _timing = default!;
+
+    [CommandImplementation("trigger")]
+    public void Trigger([CommandInvocationContext] IInvocationContext ctx)
+    {
+        var found = false;
+        var query = EntityManager.EntityQueryEnumerator<CMDistressSignalRuleComponent>();
+        while (query.MoveNext(out var comp))
+        {
+            found = true;
+
+            if (comp.Hijack)
+                continue;
+
+            comp.Hijack = true;
+            comp.AbandonedAt ??= _timing.CurTime + comp.AbandonedDelay;
+        }
+
+        if (!found)
+            ctx.WriteLine("No active Distress Signal rule found.");
     }
 }

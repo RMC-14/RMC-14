@@ -25,45 +25,26 @@ public sealed partial class HiveAllianceWindow : DefaultWindow
         FactionsContainer.DisposeAllChildren();
         foreach (var (id, name, allied) in factions)
         {
-            FactionsContainer.AddChild(BuildRow(name, allied, isAllied => onSetFactionAlly(id, isAllied)));
+            FactionsContainer.AddChild(BuildEntry(name, allied, isAllied => onSetFactionAlly(id, isAllied)));
         }
 
         HivesContainer.DisposeAllChildren();
-        if (hives.Count == 0)
-        {
-            HivesContainer.AddChild(new Label { Text = Loc.GetString("rmc-hivealliance-no-other-hives") });
-            return;
-        }
-
         foreach (var (entity, name, allied) in hives)
         {
-            HivesContainer.AddChild(BuildRow(name, allied, isAllied => onSetHiveAlly(entity, isAllied)));
+            HivesContainer.AddChild(BuildEntry(name, allied, isAllied => onSetHiveAlly(entity, isAllied)));
         }
     }
 
-    private static Control BuildRow(string name, bool allied, Action<bool> onToggled)
+    private static Control BuildEntry(string name, bool allied, Action<bool> onToggled)
     {
-        var row = new BoxContainer
-        {
-            Orientation = BoxContainer.LayoutOrientation.Horizontal,
-            Margin = new Thickness(2, 1, 2, 1),
-            HorizontalExpand = true,
-        };
-
-        row.AddChild(new Label
-        {
-            Text = name,
-            HorizontalExpand = true,
-        });
-
         var checkBox = new CheckBox
         {
-            Text = Loc.GetString("rmc-hivealliance-allied"),
+            Text = name,
             Pressed = allied,
+            Margin = new Thickness(2, 1, 2, 1),
         };
         checkBox.OnToggled += args => onToggled(args.Pressed);
-        row.AddChild(checkBox);
 
-        return row;
+        return checkBox;
     }
 }

@@ -661,6 +661,9 @@ public abstract class SharedXenoHiveSystem : EntitySystem
 
         Dirty(hive);
 
+        var selfMsg = allied ? "rmc-xeno-faction-alliance-formed-self" : "rmc-xeno-faction-alliance-broken-self";
+        _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hive.Owner, Loc.GetString(selfMsg, ("faction", faction.Id)));
+
         var ev = new HiveFactionAllyChangedEvent(hive.Owner, faction, allied);
         RaiseLocalEvent(ref ev);
     }
@@ -679,6 +682,9 @@ public abstract class SharedXenoHiveSystem : EntitySystem
             hive.Comp.AlliedHives.Remove(otherHive);
 
         Dirty(hive);
+
+        var selfMsg = allied ? "rmc-xeno-hive-alliance-formed-self" : "rmc-xeno-hive-alliance-broken-self";
+        _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hive.Owner, Loc.GetString(selfMsg, ("hive", Name(otherHive))));
 
         if (!_query.TryComp(otherHive, out var otherHiveComp))
             return;

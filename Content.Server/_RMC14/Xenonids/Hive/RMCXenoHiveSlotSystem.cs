@@ -1,5 +1,6 @@
 using Content.Server._RMC14.Rules.DistressSignal;
 using Content.Server.GameTicking;
+using Content.Shared._RMC14.GameStates;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Robust.Shared.Prototypes;
 
@@ -7,6 +8,8 @@ namespace Content.Server._RMC14.Xenonids.Hive;
 
 public sealed class RMCXenoHiveSlotSystem : EntitySystem
 {
+    [Dependency] private readonly SharedRMCPvsSystem _rmcPvs = default!;
+
     private static readonly EntProtoId[] SlotProtos =
     [
         "CMXenoHiveNormal",
@@ -39,7 +42,11 @@ public sealed class RMCXenoHiveSlotSystem : EntitySystem
             return created;
 
         foreach (var proto in SlotProtos)
-            created.Add(Spawn(proto));
+        {
+            var slot = Spawn(proto);
+            _rmcPvs.AddGlobalOverride(slot);
+            created.Add(slot);
+        }
 
         return created;
     }
