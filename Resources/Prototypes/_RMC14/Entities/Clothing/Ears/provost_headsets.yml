@@ -32,7 +32,6 @@
     - ExecutiveOfficer
     - ChiefMilitaryPolice
     - MilitaryWarden
-    - MilitaryPolice
 
 - type: entity
   parent: RMCHeadsetProvost
