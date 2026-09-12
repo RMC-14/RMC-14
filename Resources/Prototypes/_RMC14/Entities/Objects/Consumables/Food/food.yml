@@ -784,6 +784,32 @@
           Quantity: 4
 
 - type: entity
+  name: toast and gravy
+  parent: CMFoodBase
+  id: RMCToastGravy
+  description: The breakfast of the Deep South.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - creamy
+    - bread
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/misc.rsi
+    layers:
+    - state: toast-gravy
+  - type: Food
+    transferAmount: 4
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 16
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+        - ReagentId: Protein
+          Quantity: 4
+
+- type: entity
   name: chicken noodle soup
   parent: FoodBowlBase
   id: RMCSoupChickenNoodle
@@ -825,7 +851,9 @@
   - type: FlavorProfile
     flavors:
     - savory
-    - creamy
+    - cheapnoodles
+    - meaty
+    - egg
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/soup.rsi
     layers:

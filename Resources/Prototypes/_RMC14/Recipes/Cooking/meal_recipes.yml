@@ -845,3 +845,17 @@
     FoodBowlBig: 1
     FoodMeatXenoCutlet: 3
     FoodNoodlesBoiled: 1
+
+- type: microwaveMealRecipe
+  id: RecipeToastGravy
+  name: toast and gravy recipe
+  result: RMCToastGravy
+  time: 10
+  group: Savory
+  reagents:
+    Flour: 5
+    Cream: 10
+    Blackpepper: 5
+  solids:
+    FoodBreadPlainSlice: 1
+    FoodMeatSausage: 1
