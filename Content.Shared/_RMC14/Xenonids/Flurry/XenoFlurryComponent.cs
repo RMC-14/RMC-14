@@ -44,4 +44,7 @@ public sealed partial class XenoFlurryComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntProtoId HealEffect = "RMCEffectHealFlurry";
+
+    [DataField, AutoNetworkedField]
+    public float BonusDamageMult = 1f;
 }
