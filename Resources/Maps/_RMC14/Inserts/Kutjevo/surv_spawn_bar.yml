@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 04/16/2026 20:53:51
+  time: 08/21/2026 10:37:29
   entityCount: 67
 maps: []
 grids:
@@ -135,7 +135,7 @@ entities:
       parent: 1
     - type: SpriteSetRenderOrder
       offset: -0.5,-1.5
-- proto: CMBarricadeMetal
+- proto: CMBarricadeFolding
   entities:
   - uid: 34
     components:
