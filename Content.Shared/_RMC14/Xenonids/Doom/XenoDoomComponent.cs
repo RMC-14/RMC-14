@@ -37,8 +37,5 @@ public sealed partial class XenoDoomComponent : Component
     public int CameraShakeStrength = 1;
 
     [DataField, AutoNetworkedField]
-    public string TargetSolution = "chemicals";
-
-    [DataField, AutoNetworkedField]
     public TimeSpan OverlayTime = TimeSpan.FromSeconds(5);
 }
