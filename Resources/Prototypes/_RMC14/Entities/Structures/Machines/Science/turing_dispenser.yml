@@ -1,0 +1,122 @@
+- type: entity
+  id: RMCTuringDispenser
+  name: Turing Dispenser
+  description: A chem dispenser variant that cannot be operated manually, but will instead automatically dispense chemicals based on a program of chemicals, loaded using a vial box. Despite having a digital screen, the machine is mostly analog.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: null
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/Science/autodispenser.rsi
+    layers:
+    - state: base
+    - state: open
+      map: ["open"]
+      visible: false
+    - state: beaker
+      map: ["beaker"]
+      visible: false
+    - state: running
+      map: ["status"]
+      visible: false
+    snapCardinals: true
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+      enum.TuringDispenserVisuals.HasBox:
+        open:
+          True: { visible: false }
+          False: { visible: true }
+      enum.TuringDispenserVisuals.HasBeaker:
+        beaker:
+          True: { visible: true }
+          False: { visible: false }
+      enum.TuringDispenserVisuals.Status:
+        status:
+          Idle: { visible: false }
+          Running: { state: running, visible: true }
+          Finished: { state: full, visible: true }
+          Stuck: { state: stuck, visible: true }
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 20
+    activeLoad: 40
+    channel: Equipment
+  - type: ActivatableUIRequiresPower
+  - type: RMCTuringDispenser
+  - type: ItemSlots
+    slots:
+      turing_input_box_slot:
+        name: Vial Box
+        whitelist:
+          tags:
+          - VialBox
+      turing_output_beaker_slot:
+        name: Output Beaker
+        whitelist:
+          tags:
+          - GlassBeaker
+          - ChemDispensable
+  - type: ContainerContainer
+    containers:
+      turing_input_box_slot: !type:ContainerSlot
+      turing_output_beaker_slot: !type:ContainerSlot
+  - type: SolutionContainerManager
+    solutions:
+      buffer:
+        maxVol: 1080
+  - type: UserInterface
+    interfaces:
+      enum.RMCTuringDispenserUi.Key:
+        type: RMCTuringDispenserBui
+  - type: ActivatableUI
+    key: enum.RMCTuringDispenserUi.Key
+  - type: RequiresSkill
+    skills:
+      RMCSkillResearch: 1
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
