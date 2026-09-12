@@ -303,7 +303,8 @@
         - RMCRankWeYaBodyguardPPC
         choices: { CMVendorBundleRiflemanApparel: 1 }
         entries:
-        # RMC14 TODO: Shock Shotgun 15p
+        - id: RMCVendorBundleShotgunPK10
+          points: 10
         - id: RMCVendorBundleM54CWhiteNoLock
         - id: RMCVendorBundleSMGM63WhiteNoLock
         - id: RMCVendorBundleSMGSSG45NoLockStripped
@@ -325,7 +326,10 @@
         - RMCRankWeYaBodyguardPPS
         - RMCRankWeYaBodyguardPPC
         entries:
-        #RMC14 TODO: Shock Shotgun lethal 15p & Stun shells 10p
+        - id: RMCBoxShotgunMX24Electrostatic
+          points: 10
+        - id: RMCBoxShotgunMX24Lethal
+          points: 15
         - id: CMMagazineSMGM63
           points: 6
         - id: CMMagazineSMGM63Ext
