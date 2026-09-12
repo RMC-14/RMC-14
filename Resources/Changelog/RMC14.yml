@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: Surplus explosives crate can now be bought by requisitions.
-    type: Add
-  id: 3141
-  time: '2026-04-22T03:56:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9239
 - author: Arykh
   changes:
   - message: Vitamin and Protein now convert themselves into Nutriment.
@@ -4464,5 +4457,12 @@
   id: 3640
   time: '2026-09-12T18:15:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10817
+- author: Vermidia
+  changes:
+  - message: Fixed turnstiles not working
+    type: Fix
+  id: 3641
+  time: '2026-09-12T18:47:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10253
 Name: RMC14
 Order: -1
