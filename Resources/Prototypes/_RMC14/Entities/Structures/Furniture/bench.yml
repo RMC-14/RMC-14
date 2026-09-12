@@ -48,3 +48,12 @@
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/bench.rsi
     state: bench_right
+
+- type: entity
+  parent: RMCBenchLeft
+  id: RMCBenchMid
+  suffix: Mid
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/bench.rsi
+    state: bench_mid

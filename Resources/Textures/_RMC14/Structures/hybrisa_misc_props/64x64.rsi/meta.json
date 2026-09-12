@@ -15,11 +15,47 @@
     },
     {
       "name": "factory_roboticarm",
-      "directions": 4
+      "directions": 4,
+      "delays": [
+        [
+          0.5,
+          2.5
+        ],
+        [
+          0.5,
+          2.5
+        ],
+        [
+          0.5,
+          2.5
+        ],
+        [
+          0.5,
+          2.5
+        ]
+      ]
     },
     {
       "name": "factory_roboticarm2",
-      "directions": 4
+      "directions": 4,
+      "delays": [
+        [
+          0.4,
+          2.4
+        ],
+        [
+          0.4,
+          2.4
+        ],
+        [
+          0.4,
+          2.4
+        ],
+        [
+          0.4,
+          2.4
+        ]
+      ]
     },
     {
       "name": "fire_barrel",
@@ -41,6 +77,19 @@
       "name": "pole"
     },
     {
+      "name": "slotmachine",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
       "name": "slotmachine_broken"
     },
     {
@@ -55,6 +104,22 @@
              0.1
           ]
        ]
+    },
+    {
+      "name": "slotmachine_working",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "slotmachine_off"
     }
   ]
 }

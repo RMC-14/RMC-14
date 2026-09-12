@@ -1,0 +1,131 @@
+﻿- type: entity
+  parent: RMCAreaShuttleDrop1
+  id: RMCAreaShuttleDrop1BanerjeesCanal
+  name: Araki Oil Field - LZ1
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_shiva.rsi
+    state: shuttle
+  - type: Area
+    linkedLz: dropship_lz1
+    minimapColor: '#EBE5E5E3'
+    weatherEnabled: true
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    paradropping: true
+    OB: true
+    supplyDrop: true
+    landingZone: true
+
+- type: entity
+  parent: RMCAreaShuttleDrop1BanerjeesCanal
+  id: RMCAreaShuttleDrop2BanerjeesCanal
+  name: Anderson Interstellar Spaceport - LZ2
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_shiva.rsi
+    state: shuttle2
+  - type: Area
+    linkedLz: dropship_lz2
+    minimapColor: '#EBE5E5E3'
+
+- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaBanerjeesCanalOutside
+  name: Banerjee's Canal - Outside
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_varadero.rsi
+    state: comms2
+  - type: Area
+    weatherEnabled: true
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    paradropping: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaBanerjeesCanalOutside
+  id: RMCAreaBanerjeesCanalRoadSystem
+  name: Banerjee's Canal - Road System
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_varadero.rsi
+    state: hall2
+  - type: Area
+    minimapColor: '#434544'
+    weatherEnabled: true
+
+- type: entity
+  parent: RMCAreaProtectionTwo
+  id: RMCAreaBanerjeesCanalInside
+  name: Banerjee's Canal - Indoors
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_varadero.rsi
+    state: offices4
+  - type: Area
+    minimapColor: '#3498d1'
+    weatherEnabled: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: true
+    medevac: false
+    paradropping: false
+    CAS: true
+    fulton: false
+    OB: true
+    supplyDrop: false
+
+- type: entity
+  parent: RMCAreaProtectionFour
+  id: RMCAreaBanerjeesCanalNuclearReactor
+  name: Banerjee's Canal - Nuclear Reactor Complex
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_kutjevo.rsi
+    state: colony_caves_0
+  - type: Area
+    minimapColor: '#2c9171'
+    weatherEnabled: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    paradropping: false
+    CAS: false
+    fulton: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent: RMCAreaVaraderoInteriorOob
+  id: RMCAreaBanerjeesCanalOob
+  name: Banerjee's Canal - Out Of Bounds
+  components:
+  - type: Sprite
+    state: oob
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    paradropping: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: false
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: true
+    weatherEnabled: false
