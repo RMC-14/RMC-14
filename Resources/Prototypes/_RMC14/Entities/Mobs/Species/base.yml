@@ -337,6 +337,7 @@
   - type: MobCollision
   - type: RMCMobCollision
   - type: RMCRest
+  - type: RMCPushup
   - type: RMCMeleeDamageSkill
   - type: RMCStripTimeSkill
   - type: RMCDisarm
