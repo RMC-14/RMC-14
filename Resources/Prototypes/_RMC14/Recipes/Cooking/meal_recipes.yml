@@ -833,9 +833,9 @@
     FoodNoodlesBoiled:
 
 - type: microwaveMealRecipe
-  id: RecipeRamenTonkotsu
+  id: RecipeRamenXenokotsu
   name: tonkotsu ramen recipe
-  result: RMCSoupTonkotsu
+  result: RMCSoupXenokotsu
   time: 15
   group: Savory
   reagents:
