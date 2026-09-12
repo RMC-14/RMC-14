@@ -7,7 +7,6 @@ using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Fruit.Components;
 using Content.Shared._RMC14.Xenonids.Fruit.Events;
-using Content.Shared._RMC14.Xenonids.Hedgehog;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -191,7 +190,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         };
 
         args.PushMarkup(Loc.GetString("rmc-xeno-fruit-examine-base",
-            ("growthStatus", Loc.GetString(state))));
+            ("growthStatus", Loc.GetString(state))), -9);
 
         if (!HasComp<XenoComponent>(args.Examiner))
             return;
@@ -236,10 +235,17 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
     private void OnXenoSpeedFruitExamined(EntityUid uid, XenoFruitSpeedComponent fruit, ExaminedEvent args)
     {
-        if (!HasComp<XenoComponent>(args.Examiner))
+        if (!TryComp<XenoComponent>(args.Examiner, out var xenoComp) ||
+            !TryComp<MovementSpeedModifierComponent>(args.Examiner, out var movementSpeed) ||
+            !_prototype.TryIndex(xenoComp.Role, out var casteJob))
+        {
             return;
+        }
 
-        args.PushMarkup(Loc.GetString("rmc-xeno-fruit-speed", ("amount", fruit.SpeedModifier), ("time", fruit.Duration.TotalSeconds)), -12);
+        args.PushMarkup(Loc.GetString("rmc-xeno-fruit-speed",
+            ("caste", casteJob.LocalizedName),
+            ("amount", fruit.SpeedModifier / movementSpeed.BaseWalkSpeed * 100),
+            ("time", fruit.Duration.TotalSeconds)), -12);
     }
 
     private void OnXenoPlasmaFruitExamined(EntityUid uid, XenoFruitPlasmaComponent fruit, ExaminedEvent args)
@@ -681,7 +687,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         // Can't feed non-xenos
         if (!HasComp<XenoComponent>(target))
         {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-feed-refuse", ("target",target), ("fruit", fruit)), user, user, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-feed-refuse", ("target", target), ("fruit", fruit)), user, user, PopupType.SmallCaution);
             return false;
         }
 
@@ -693,7 +699,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         }
 
         // TODO: check for hive
-        if(!_hive.FromSameHive(fruit.Owner, user))
+        if (!_hive.FromSameHive(fruit.Owner, user))
         {
             _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-wrong-hive"), user, user, PopupType.SmallCaution);
             return false;
