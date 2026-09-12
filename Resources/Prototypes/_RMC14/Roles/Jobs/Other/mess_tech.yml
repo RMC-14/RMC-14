@@ -9,10 +9,18 @@
     department: CMSquad
     time: 7200 # 2 hours
   ranks:
-    RMCRankLanceCorporal:
+    RMCRankSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobMessTech
+      time: 630000 # 175 hours
+    RMCRankCorporal:
     - !type:RoleTimeRequirement
       role: CMJobMessTech
       time: 252000 # 70 hours
+    RMCRankLanceCorporal:
+    - !type:RoleTimeRequirement
+      role: CMJobMessTech
+      time: 90000 # 25 hours
     RMCRankPrivateFirstClass:
     - !type:RoleTimeRequirement
       role: CMJobMessTech
