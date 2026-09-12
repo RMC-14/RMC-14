@@ -62,6 +62,8 @@
     - ActionXenoDevolve
     tier: 3
     hudOffset: -0.15,0.05
+    hudRankIconScale: 0.95
+    hudRankIconOffset: 0,0.15
     unlockAt: 900 # 15 minutes
   - type: XenoHeavy
   - type: XenoDevolve
