@@ -30,7 +30,7 @@ public sealed class PainKnockOutSystem : EntitySystem
         ent.Comp.PreviousCritThreshold = _mobThresholds.GetThresholdForState(ent, MobState.Critical, thresholds);
         var alive = _mobThresholds.GetThresholdForState(ent, MobState.Alive, thresholds);
         ent.Comp.PreviousAliveThreshold = alive;
-        _mobThresholds.SetMobStateThreshold(ent, alive + 1, MobState.Critical, thresholds); // +1 needed to rejuvenation working propertly
+        _mobThresholds.SetMobStateThreshold(ent, alive + 1, MobState.Critical, thresholds); // +1 needed to make rejuvenation work properly
         Dirty(ent);
     }
 

@@ -40,7 +40,7 @@ public sealed partial class PainSystem : EntitySystem
     private void OnInit(Entity<PainComponent> ent, ref ComponentInit args)
     {
         DebugTools.Assert(ent.Comp.PainLevels.SequenceEqual(ent.Comp.PainLevels.OrderBy(level => level.Threshold)),
-            $"{nameof(PainComponent.PainLevels)} must be written in order of their thresholds!");
+            $"{nameof(PainComponent)}.{nameof(PainComponent.PainLevels)} entries must be written in order of their thresholds. (Low -> High)");
     }
 
     private void OnRejuvenate(Entity<PainComponent> ent, ref RejuvenateEvent args)
@@ -177,7 +177,9 @@ public sealed partial class PainSystem : EntitySystem
 
     private FixedPoint2 GetDamageGroupPain(DamageSpecifier damage, ProtoId<DamageGroupPrototype> damageGroup, FixedPoint2 painMultiplier)
     {
-        if (_prototypes.TryIndex(damageGroup, out var groupPrototype) && damage.TryGetDamageInGroup(groupPrototype, out var groupDamage))
+        if (painMultiplier != 0 &&
+            _prototypes.TryIndex(damageGroup, out var groupPrototype) &&
+            damage.TryGetDamageInGroup(groupPrototype, out var groupDamage))
         {
             return groupDamage * painMultiplier;
         }
