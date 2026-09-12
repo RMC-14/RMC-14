@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Server.Administration.Managers;
 using Content.Server.Antag;
 using Content.Server.Players.PlayTimeTracking;
+using Content.Server.Preferences.Managers;
 using Content.Server.Station.Components;
 using Content.Server.Station.Events;
 using Content.Shared.Preferences;
@@ -20,6 +21,7 @@ public sealed partial class StationJobsSystem
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IBanManager _banManager = default!;
     [Dependency] private readonly AntagSelectionSystem _antag = default!;
+    [Dependency] private readonly IServerPreferencesManager _serverPreferences = default!;
 
     private Dictionary<int, HashSet<string>> _jobsByWeight = default!;
     private List<int> _orderedWeights = default!;
@@ -349,7 +351,21 @@ public sealed partial class StationJobsSystem
         {
             var roleBans = _banManager.GetJobBans(player);
             var antagBlocked = _antag.GetPreSelectedAntagSessions();
-            var profileJobs = profile.JobPriorities.Keys.Select(k => new ProtoId<JobPrototype>(k)).ToList();
+            Dictionary<ProtoId<JobPrototype>, JobPriority> playerJobs;
+
+            if (_serverPreferences.TryGetCachedPreferences(player, out var playerPreferences))
+            {
+                playerJobs = playerPreferences.JobPrioritiesFiltered();
+            }
+            else
+            {
+                // Tests & other synthetic callers may provide profiles without a backing cached preference entry
+                playerJobs = profile.JobPriorities
+                    .Where(kvp => kvp.Value != JobPriority.Never)
+                    .ToDictionary();
+            }
+
+            var profileJobs = playerJobs.Keys.ToList();
             var ev = new StationJobsGetCandidatesEvent(player, profileJobs);
             RaiseLocalEvent(ref ev);
 
@@ -357,7 +373,7 @@ public sealed partial class StationJobsSystem
 
             foreach (var jobId in profileJobs)
             {
-                var priority = profile.JobPriorities[jobId];
+                var priority = playerJobs[jobId];
 
                 if (!(priority == selectedPriority || selectedPriority is null))
                     continue;
@@ -374,7 +390,7 @@ public sealed partial class StationJobsSystem
                 if (!(roleBans == null || !roleBans.Contains(jobId)))
                     continue;
 
-                availableJobs ??= new List<string>(profile.JobPriorities.Count);
+                availableJobs ??= new List<string>(playerJobs.Count);
                 availableJobs.Add(jobId);
             }
 
