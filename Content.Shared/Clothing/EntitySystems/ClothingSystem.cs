@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -10,8 +11,46 @@ using Robust.Shared.GameStates;
 
 namespace Content.Shared.Clothing.EntitySystems;
 
-public abstract class ClothingSystem : EntitySystem
+// RMC
+public enum ClothingVisualResolution
 {
+    None,
+    Species,
+    Explicit,
+    Default,
+}
+
+// RMC partial
+public abstract partial class ClothingSystem : EntitySystem
+{
+    // RMC begin
+
+    /// <summary>
+    /// This is a shitty hotfix written by me (Paul) to save me from renaming all files.
+    /// For some context, im currently refactoring inventory. Part of that is slots not being indexed by a massive enum anymore, but by strings.
+    /// Problem here: Every rsi-state is using the old enum-names in their state. I already used the new inventoryslots ALOT. tldr: its this or another week of renaming files.
+    /// </summary>
+    public static readonly IReadOnlyDictionary<string, string> EquippedStateSlotMap = new Dictionary<string, string>
+    {
+        {"head", "HELMET"},
+        {"eyes", "EYES"},
+        {"ears", "EARS"},
+        {"ears2", "EARS"},
+        {"mask", "MASK"},
+        {"outerClothing", "OUTERCLOTHING"},
+        {"jumpsuit", "INNERCLOTHING"},
+        {"neck", "NECK"},
+        {"back", "BACKPACK"},
+        {"belt", "BELT"},
+        {"gloves", "HAND"},
+        {"shoes", "FEET"},
+        {"id", "IDCARD"},
+        {"pocket1", "POCKET1"},
+        {"pocket2", "POCKET2"},
+        {"suitstorage", "SUITSTORAGE"},
+    };
+    // RMC end
+
     [Dependency] private readonly SharedItemSystem _itemSys = default!;
     [Dependency] private readonly InventorySystem _invSystem = default!;
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
@@ -203,6 +242,136 @@ public abstract class ClothingSystem : EntitySystem
             layer.State = state;
         }
     }
+
+    // RMC begin
+    public static ClothingVisualResolution ResolveEquippedVisuals(
+        ClothingComponent clothing,
+        string slot,
+        string? speciesId,
+        string? fallbackRsiPath,
+        Func<string, bool> hasState,
+        [NotNullWhen(true)] out List<PrototypeLayerData>? layers)
+    {
+        return ResolveEquippedVisuals(
+            clothing.ClothingVisuals,
+            clothing.EquippedPrefix,
+            clothing.EquippedState,
+            slot,
+            speciesId,
+            fallbackRsiPath,
+            hasState,
+            out layers);
+    }
+
+    public static ClothingVisualResolution ResolveEquippedVisuals(
+        Dictionary<string, List<PrototypeLayerData>> clothingVisuals,
+        string? equippedPrefix,
+        string? equippedState,
+        string slot,
+        string? speciesId,
+        string? fallbackRsiPath,
+        Func<string, bool> hasState,
+        [NotNullWhen(true)] out List<PrototypeLayerData>? layers)
+    {
+        layers = null;
+
+        if (speciesId != null &&
+            clothingVisuals.TryGetValue($"{slot}-{speciesId}", out var speciesLayers))
+        {
+            layers = speciesLayers;
+            return ClothingVisualResolution.Species;
+        }
+
+        if (clothingVisuals.TryGetValue(slot, out var slotLayers))
+        {
+            layers = slotLayers;
+            return ClothingVisualResolution.Explicit;
+        }
+
+        if (string.IsNullOrWhiteSpace(fallbackRsiPath) ||
+            !TryCreateDefaultEquippedVisual(equippedPrefix, equippedState, slot, speciesId, fallbackRsiPath, hasState, out layers))
+        {
+            return ClothingVisualResolution.None;
+        }
+
+        return ClothingVisualResolution.Default;
+    }
+
+    public static string GetEquippedState(ClothingComponent clothing, string slot)
+    {
+        return GetEquippedState(clothing.EquippedPrefix, clothing.EquippedState, slot);
+    }
+
+    public static string GetEquippedState(string? equippedPrefix, string? equippedState, string slot)
+    {
+        var correctedSlot = EquippedStateSlotMap.GetValueOrDefault(slot, slot);
+
+        if (equippedState != null)
+            return equippedState;
+
+        if (!string.IsNullOrEmpty(equippedPrefix))
+            return $"{equippedPrefix}-equipped-{correctedSlot}";
+
+        return $"equipped-{correctedSlot}";
+    }
+
+    private static bool TryCreateDefaultEquippedVisual(
+        string? equippedPrefix,
+        string? equippedState,
+        string slot,
+        string? speciesId,
+        string fallbackRsiPath,
+        Func<string, bool> hasState,
+        [NotNullWhen(true)] out List<PrototypeLayerData>? layers)
+    {
+        layers = null;
+
+        var state = GetEquippedState(equippedPrefix, equippedState, slot);
+
+        if (speciesId != null && hasState($"{state}-{speciesId}"))
+            state = $"{state}-{speciesId}";
+        else if (!hasState(state))
+            return false;
+
+        layers = new()
+        {
+            new PrototypeLayerData
+            {
+                RsiPath = fallbackRsiPath,
+                State = state,
+            },
+        };
+
+        return true;
+    }
+
+    public static PrototypeLayerData CopyLayer(PrototypeLayerData layer)
+    {
+        return new PrototypeLayerData
+        {
+            Shader = layer.Shader,
+            TexturePath = layer.TexturePath,
+            RsiPath = layer.RsiPath,
+            State = layer.State,
+            Scale = layer.Scale,
+            Rotation = layer.Rotation,
+            Offset = layer.Offset,
+            Visible = layer.Visible,
+            Color = layer.Color,
+            MapKeys = layer.MapKeys == null ? null : new(layer.MapKeys),
+            RenderingStrategy = layer.RenderingStrategy,
+            CopyToShaderParameters = layer.CopyToShaderParameters == null
+                ? null
+                : new()
+                {
+                    LayerKey = layer.CopyToShaderParameters.LayerKey,
+                    ParameterTexture = layer.CopyToShaderParameters.ParameterTexture,
+                    ParameterUV = layer.CopyToShaderParameters.ParameterUV,
+                },
+            Cycle = layer.Cycle,
+        };
+    }
+    // RMC end
 
     #endregion
 }

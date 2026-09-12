@@ -1,4 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Client.DisplacementMap;
 using Content.Client.Inventory;
@@ -21,30 +20,6 @@ namespace Content.Client.Clothing;
 public sealed class ClientClothingSystem : ClothingSystem
 {
     public const string Jumpsuit = "jumpsuit";
-
-    /// <summary>
-    /// This is a shitty hotfix written by me (Paul) to save me from renaming all files.
-    /// For some context, im currently refactoring inventory. Part of that is slots not being indexed by a massive enum anymore, but by strings.
-    /// Problem here: Every rsi-state is using the old enum-names in their state. I already used the new inventoryslots ALOT. tldr: its this or another week of renaming files.
-    /// </summary>
-    private static readonly Dictionary<string, string> TemporarySlotMap = new()
-    {
-        {"head", "HELMET"},
-        {"eyes", "EYES"},
-        {"ears", "EARS"},
-        {"mask", "MASK"},
-        {"outerClothing", "OUTERCLOTHING"},
-        {Jumpsuit, "INNERCLOTHING"},
-        {"neck", "NECK"},
-        {"back", "BACKPACK"},
-        {"belt", "BELT"},
-        {"gloves", "HAND"},
-        {"shoes", "FEET"},
-        {"id", "IDCARD"},
-        {"pocket1", "POCKET1"},
-        {"pocket2", "POCKET2"},
-        {"suitstorage", "SUITSTORAGE"},
-    };
 
     [Dependency] private readonly IResourceCache _cache = default!;
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
@@ -101,18 +76,24 @@ public sealed class ClientClothingSystem : ClothingSystem
         if (!TryComp(args.Equipee, out InventoryComponent? inventory))
             return;
 
-        List<PrototypeLayerData>? layers = null;
+        RSI? rsi = null;
+        if (item.RsiPath != null)
+            rsi = _cache.GetResource<RSIResource>(SpriteSpecifierSerializer.TextureRoot / item.RsiPath).RSI;
+        else if (TryComp(uid, out SpriteComponent? sprite))
+            rsi = sprite.BaseRSI;
 
-        // first attempt to get species specific data.
-        if (inventory.SpeciesId != null)
-            item.ClothingVisuals.TryGetValue($"{args.Slot}-{inventory.SpeciesId}", out layers);
+        var rsiPath = rsi?.Path.ToString();
+        var resolution = ResolveEquippedVisuals(
+            item,
+            args.Slot,
+            inventory.SpeciesId,
+            rsiPath,
+            state => rsi != null && rsi.TryGetState(state, out _),
+            out var layers);
 
-        // if that returned nothing, attempt to find generic data
-        if (layers == null && !item.ClothingVisuals.TryGetValue(args.Slot, out layers))
+        if (resolution == ClothingVisualResolution.None || layers == null)
         {
-            // No generic data either. Attempt to generate defaults from the item's RSI & item-prefixes
-            if (!TryGetDefaultVisuals(uid, item, args.Slot, inventory.SpeciesId, out layers))
-                return;
+            return;
         }
 
         // add each layer to the visuals
@@ -130,54 +111,6 @@ public sealed class ClientClothingSystem : ClothingSystem
             item.MappedLayer = key;
             args.Layers.Add((key, layer));
         }
-    }
-
-    /// <summary>
-    ///     If no explicit clothing visuals were specified, this attempts to populate with default values.
-    /// </summary>
-    /// <remarks>
-    ///     Useful for lazily adding clothing sprites without modifying yaml. And for backwards compatibility.
-    /// </remarks>
-    private bool TryGetDefaultVisuals(EntityUid uid, ClothingComponent clothing, string slot, string? speciesId,
-        [NotNullWhen(true)] out List<PrototypeLayerData>? layers)
-    {
-        layers = null;
-
-        RSI? rsi = null;
-
-        if (clothing.RsiPath != null)
-            rsi = _cache.GetResource<RSIResource>(SpriteSpecifierSerializer.TextureRoot / clothing.RsiPath).RSI;
-        else if (TryComp(uid, out SpriteComponent? sprite))
-            rsi = sprite.BaseRSI;
-
-        if (rsi == null)
-            return false;
-
-        var correctedSlot = slot;
-        TemporarySlotMap.TryGetValue(correctedSlot, out correctedSlot);
-
-
-
-        var state = $"equipped-{correctedSlot}";
-
-        if (!string.IsNullOrEmpty(clothing.EquippedPrefix))
-            state = $"{clothing.EquippedPrefix}-equipped-{correctedSlot}";
-
-        if (clothing.EquippedState != null)
-            state = $"{clothing.EquippedState}";
-
-        // species specific
-        if (speciesId != null && rsi.TryGetState($"{state}-{speciesId}", out _))
-            state = $"{state}-{speciesId}";
-        else if (!rsi.TryGetState(state, out _))
-            return false;
-
-        var layer = new PrototypeLayerData();
-        layer.RsiPath = rsi.Path.ToString();
-        layer.State = state;
-        layers = new() { layer };
-
-        return true;
     }
 
     private void OnVisualsChanged(EntityUid uid, InventoryComponent component, VisualsChangedEvent args)
