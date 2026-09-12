@@ -815,3 +815,53 @@
     layers:
     - state: bowl
     - state: clam-chowder
+
+- type: entity
+  name: tonkotsu ramen
+  parent: FoodBowlBase
+  id: RMCSoupTonkotsu
+  description: The 1AM favorite of the Salaryman.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - savory
+    - creamy
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/soup.rsi
+    layers:
+    - state: bowl
+    - state: tonkotsu
+
+- type: entity
+  name: xenokotsu ramen
+  parent: FoodBowlBase
+  id: RMCSoupXenokotsu
+  description: Eat your greens, marine!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - savory
+    - acid
+    - meaty
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/soup.rsi
+    layers:
+    - state: bowl
+    - state: xenokotsu
+
+- type: entity
+  name: chicken and dumplings
+  parent: FoodBowlBase
+  id: RMCSoupChickenDumplings
+  description: The ultimate comfort food for a cold night.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - creamy
+    - chicken
+    - dough
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/soup.rsi
+    layers:
+    - state: bowl
+    - state: chicken-and-dumplings

@@ -790,6 +790,20 @@
     FoodCarrot: 1
 
 - type: microwaveMealRecipe
+  id: RecipeChickenDumplings
+  name: chicken noodle soup recipe
+  result: RMCSoupChickenNoodle
+  time: 15
+  group: Savory
+  reagents:
+    Water: 10
+  solids:
+    FoodBowlBig: 1
+    FoodMeatChickenCutlet: 1
+    FoodDoughSlice: 2
+    FoodCarrot: 1
+
+- type: microwaveMealRecipe
   id: RecipeClamChowder
   name: clam chowder recipe
   result: RMCSoupClamChowder
@@ -803,3 +817,31 @@
     RMCFoodFishClam: 1
     FoodCarrot: 1
     FoodPotato: 1
+
+- type: microwaveMealRecipe
+  id: RecipeRamenTonkotsu
+  name: tonkotsu ramen recipe
+  result: RMCSoupTonkotsu
+  time: 15
+  group: Savory
+  reagents:
+    Water: 10
+    RMCSoysauce: 5
+  solids:
+    FoodBowlBig: 1
+    FoodMeatBacon: 2
+    FoodNoodlesBoiled:
+
+- type: microwaveMealRecipe
+  id: RecipeRamenTonkotsu
+  name: tonkotsu ramen recipe
+  result: RMCSoupTonkotsu
+  time: 15
+  group: Savory
+  reagents:
+    Water: 10
+    RMCSoysauce: 5
+  solids:
+    FoodBowlBig: 1
+    FoodMeatXenoCutlet: 3
+    FoodNoodlesBoiled: 1
