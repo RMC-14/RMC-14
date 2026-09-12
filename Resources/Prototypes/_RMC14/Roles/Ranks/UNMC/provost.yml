@@ -26,12 +26,7 @@
   prefix: PvDM.
   paygrade: O6
 
-- type: rank
-  id: RMCRankProvostChiefInspector
-  name: Chief Inspector
-  prefix: PvCI.
-  paygrade: O5
-
+# Whitelisted
 - type: rank
   id: RMCRankProvostInspector
   name: Provost Inspector
@@ -45,21 +40,18 @@
   prefix: ComOff.
   paygrade: O2
 
-# Any player with low law understanding, with guidance
 - type: rank
   id: RMCRankProvostAdvisor
   name: Sergeant Major
   prefix: SgtMaj.
   paygrade: E9E
 
-# Any player with given objective, possible team leader
 - type: rank
   id: RMCRankProvostProvostTeamLeader
   name: Master Sergeant
   prefix: MSgt.
   paygrade: E8
 
-# Any player with given objective, squad member
 - type: rank
   id: RMCRankProvostProvostEnforcer
   name: Staff Sergeant
