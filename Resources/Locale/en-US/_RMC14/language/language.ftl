@@ -13,6 +13,7 @@ language-Chinese-name = Chinese
 language-Russian-name = Russian
 language-German-name = German
 language-Scandinavian-name = Scandinavian
+language-Hindi-name = Hindi
 language-SignLanguage-name = Sign Language
 language-Primitive-name = Primitive
 
@@ -27,6 +28,7 @@ language-Chinese-description = Earth language.
 language-Russian-description = Earth language.
 language-German-description = Earth language.
 language-Scandinavian-description = Earth language.
+language-Hindi-description = Earth language.
 language-SignLanguage-description = A visual language using hand gestures and body movements.
 language-Primitive-description = A primitive language of screeches, hoots, and gestures.
 
