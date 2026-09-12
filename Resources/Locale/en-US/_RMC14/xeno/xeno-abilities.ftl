@@ -242,10 +242,9 @@ rmc-xeno-retrieve-anchored = That sister cannot move!
 rmc-xeno-retrieve-too-big = {$target} is too big to retrieve while standing up!
 rmc-xeno-retrieve-dead = {$target} is already dead!
 rmc-xeno-retrieve-blocked = We can't reach {$target} with our resin retrieval hook!
-rmc-xeno-retrieve-start-self = We prepare to fire our resin retrieval hook at {$target}!
-rmc-xeno-retrieve-start-others = {$user} prepares to fire its resin retrieval hook at {$target}!
-rmc-xeno-retrieve-finish-user = We fling {$target} over our head with our resin hook!
-rmc-xeno-retrieve-finish-target = We are pulled toward {$user}!
+rmc-xeno-retrieve-finish-self = We fling {$target} over our head with our resin hook!
+rmc-xeno-retrieve-finish-target = We are pulled over {$user}'s head!
+rmc-xeno-retrieve-finish-others = {$target} is pulled over {$user}'s head!
 
 # Aid
 rmc-xeno-aid-self = We cannot heal ourself!
