@@ -476,12 +476,17 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             return false;
         }
 
-        var weeds = GetWeedsOnFloor((gridUid, grid), coordinates);
+        return IsOnFriendlyWeeds((gridUid, grid), coordinates, entity.Owner);
+    }
+
+    public bool IsOnFriendlyWeeds(Entity<MapGridComponent> grid, EntityCoordinates coordinates, EntityUid entity)
+    {
+        var weeds = GetWeedsOnFloor(grid, coordinates);
         if (weeds == null)
             return false;
 
         if (_hive.GetHive(weeds.Value.Owner) is not { } weedsHive ||
-            !_hive.IsMemberOrAlly(entity.Owner, weedsHive.Owner))
+            !_hive.IsMemberOrAlly(entity, weedsHive.Owner))
         {
             return false;
         }

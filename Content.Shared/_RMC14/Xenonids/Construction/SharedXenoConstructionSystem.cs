@@ -1411,6 +1411,14 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return false;
         }
 
+        if (checkWeeds && !_xenoWeeds.IsOnFriendlyWeeds((gridId, grid), target, xeno.Owner))
+        {
+            if (popup)
+                _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-hostile-weeds"), target, xeno);
+
+            return false;
+        }
+
         var ev = new XenoConstructionRangeEvent(xeno.Comp.BuildRange);
         RaiseLocalEvent(xeno, ref ev);
 
