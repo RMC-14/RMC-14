@@ -1,0 +1,183 @@
+﻿# Large White
+- type: decal
+  id: RMCDecalAvantLargeTile1
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/avant_biomedical/avant_biomedical_4x2.rsi
+    state: avant_1
+
+- type: decal
+  id: RMCDecalAvantLargeTile2
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/avant_biomedical/avant_biomedical_4x2.rsi
+    state: avant_2
+
+- type: decal
+  id: RMCDecalAvantLargeTile3
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/avant_biomedical/avant_biomedical_4x2.rsi
+    state: avant_3
+
+- type: decal
+  id: RMCDecalAvantLargeTile4
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/avant_biomedical/avant_biomedical_4x2.rsi
+    state: avant_4
+
+- type: decal
+  id: RMCDecalAvantLargeTile5
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/avant_biomedical/avant_biomedical_4x2.rsi
+    state: avant_5
+
+- type: decal
+  id: RMCDecalAvantLargeTile6
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/avant_biomedical/avant_biomedical_4x2.rsi
+    state: avant_6
+
+- type: decal
+  id: RMCDecalAvantLargeTile7
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/avant_biomedical/avant_biomedical_4x2.rsi
+    state: avant_7
+
+- type: decal
+  id: RMCDecalAvantLargeTile8
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/avant_biomedical/avant_biomedical_4x2.rsi
+    state: avant_8
+
+# Large Blue
+- type: decal
+  id: RMCDecalAvantLargeBlueTile1
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/avant_biomedical/avant_biomedical_blue_4x2.rsi
+    state: avant_1
+
+- type: decal
+  id: RMCDecalAvantLargeBlueTile2
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/avant_biomedical/avant_biomedical_blue_4x2.rsi
+    state: avant_2
+
+- type: decal
+  id: RMCDecalAvantLargeBlueTile3
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/avant_biomedical/avant_biomedical_blue_4x2.rsi
+    state: avant_3
+
+- type: decal
+  id: RMCDecalAvantLargeBlueTile4
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/avant_biomedical/avant_biomedical_blue_4x2.rsi
+    state: avant_4
+
+- type: decal
+  id: RMCDecalAvantLargeBlueTile5
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/avant_biomedical/avant_biomedical_blue_4x2.rsi
+    state: avant_5
+
+- type: decal
+  id: RMCDecalAvantLargeBlueTile6
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/avant_biomedical/avant_biomedical_blue_4x2.rsi
+    state: avant_6
+
+- type: decal
+  id: RMCDecalAvantLargeBlueTile7
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/avant_biomedical/avant_biomedical_blue_4x2.rsi
+    state: avant_7
+
+- type: decal
+  id: RMCDecalAvantLargeBlueTile8
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/avant_biomedical/avant_biomedical_blue_4x2.rsi
+    state: avant_8
+
+# White
+- type: decal
+  id: RMCDecalAvantTile1
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/avant_biomedical/avant_biomedical_2x1.rsi
+    state: avant_1
+
+- type: decal
+  id: RMCDecalAvantTile2
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/avant_biomedical/avant_biomedical_2x1.rsi
+    state: avant_2
+
+# Blue
+- type: decal
+  id: RMCDecalAvantTileBlue1
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/avant_biomedical/avant_biomedical_blue_2x1.rsi
+    state: avant_1
+
+- type: decal
+  id: RMCDecalAvantTileBlue2
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/avant_biomedical/avant_biomedical_blue_2x1.rsi
+    state: avant_2
