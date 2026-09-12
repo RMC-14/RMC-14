@@ -14,6 +14,7 @@ using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Eye;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
@@ -50,6 +51,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
@@ -131,6 +133,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         SubscribeLocalEvent<TacticalMapLiveUpdateOnOviComponent, MapInitEvent>(OnLiveUpdateOnOviMapInit);
         SubscribeLocalEvent<TacticalMapLiveUpdateOnOviComponent, MobStateChangedEvent>(OnLiveUpdateOnOviStateChanged);
+        SubscribeLocalEvent<TacticalMapLiveUpdateOnOviComponent, HiveChangedEvent>(OnLiveUpdateOnOviHiveChanged);
 
         Subs.BuiEvents<TacticalMapUserComponent>(TacticalMapUserUi.Key,
             subs =>
@@ -172,9 +175,17 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             if (!onOvi.Enabled)
                 continue;
 
-            user.LiveUpdate = ev.Attached;
+            user.LiveUpdate = GetTacticalMapLiveUpdate(uid);
             Dirty(uid, user);
         }
+    }
+
+    private bool GetTacticalMapLiveUpdate(EntityUid xeno)
+    {
+        if (_hive.GetHive(xeno) is not { } hive)
+            return false;
+
+        return hive.Comp.TacticalMapAlwaysLive || _evolution.HasOvipositor(hive.Owner);
     }
 
     private void OnTacticalMapMapInit(Entity<TacticalMapComponent> ent, ref MapInitEvent args)
@@ -344,7 +355,16 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             return;
         }
 
-        user.LiveUpdate = _evolution.HasOvipositor();
+        user.LiveUpdate = GetTacticalMapLiveUpdate(ent);
+        Dirty(ent, user);
+    }
+
+    private void OnLiveUpdateOnOviHiveChanged(Entity<TacticalMapLiveUpdateOnOviComponent> ent, ref HiveChangedEvent args)
+    {
+        if (!ent.Comp.Enabled || !TryComp(ent, out TacticalMapUserComponent? user))
+            return;
+
+        user.LiveUpdate = GetTacticalMapLiveUpdate(ent);
         Dirty(ent, user);
     }
 

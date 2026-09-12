@@ -300,8 +300,8 @@ public sealed partial class CMDistressSignalRuleSystem
             }
         }
 
-        if (totalXenos - selectedXenos > 0)
-            _hive.ChangeBurrowedLarva(totalXenos - selectedXenos);
+        if (totalXenos - selectedXenos > 0 && TryComp(comp.Hive, out HiveComponent? hiveComp))
+            _hive.ChangeBurrowedLarva((comp.Hive, hiveComp), totalXenos - selectedXenos);
     }
 
     private EntityUid SpawnXenoEnt(EntProtoId ent, ICommonSession player, bool doBurst,

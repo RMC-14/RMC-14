@@ -433,7 +433,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         // TODO RMC14 revive jelly when added should not bring back dead queens
         if (prototype.TryGetComponent(out XenoEvolutionCappedComponent? capped, _compFactory) &&
-            HasLiving<XenoEvolutionCappedComponent>(capped.Max, e => e.Comp.Id == capped.Id))
+            HasLiving<XenoEvolutionCappedComponent>(capped.Max, e => e.Comp.Id == capped.Id && _xenoHive.FromSameHive(xeno.Owner, e.Owner)))
         {
             if (doPopup)
                 _popup.PopupEntity(Loc.GetString("cm-xeno-evolution-failed-already-have", ("prototype", prototype.Name)), xeno, xeno, PopupType.MediumCaution);
@@ -441,7 +441,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             return false;
         }
 
-        if (!xeno.Comp.CanEvolveWithoutGranter && !HasLiving<XenoEvolutionGranterComponent>(1))
+        if (!xeno.Comp.CanEvolveWithoutGranter && !HiveHasGranter(xeno.Owner))
         {
             if (doPopup)
             {
@@ -654,6 +654,12 @@ public sealed class XenoEvolutionSystem : EntitySystem
         return HasLiving<XenoEvolutionGranterComponent>(1, e => HasComp<XenoAttachedOvipositorComponent>(e));
     }
 
+    public bool HasOvipositor(EntityUid hive)
+    {
+        return HasLiving<XenoEvolutionGranterComponent>(1,
+            e => HasComp<XenoAttachedOvipositorComponent>(e) && _xenoHive.IsMember(e.Owner, hive));
+    }
+
     public bool LackingOvipositor()
     {
         return NeedsOvipositor() && !HasOvipositor();
@@ -668,6 +674,19 @@ public sealed class XenoEvolutionSystem : EntitySystem
         }
 
         return false;
+    }
+
+    private bool HiveHasGranter(EntityUid xeno)
+    {
+        if (_xenoHive.GetHive(xeno) is not { } hive)
+            return false;
+
+        return HasLiving<XenoEvolutionGranterComponent>(1, e => _xenoHive.IsMember(e.Owner, hive.Owner));
+    }
+
+    private bool HiveHasOvipositor(EntityUid xeno)
+    {
+        return _xenoHive.GetHive(xeno) is { } hive && HasOvipositor(hive.Owner);
     }
 
     private bool HiveHasLivingQueen(EntityUid xeno)
@@ -806,9 +825,6 @@ public sealed class XenoEvolutionSystem : EntitySystem
         var time = _timing.CurTime;
         var roundDuration = _gameTicker.RoundDuration();
         var needsOvipositor = NeedsOvipositor();
-        var hasGranter = needsOvipositor
-            ? HasOvipositor()
-            : HasLiving<XenoEvolutionGranterComponent>(1);
         if (needsOvipositor)
         {
             var granters = EntityQueryEnumerator<XenoEvolutionGranterComponent>();
@@ -869,7 +885,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             var gain = evoOverride ?? points + evoBonus;
             if (comp.Points < comp.Max || roundDuration < _evolutionAccumulatePointsBefore)
             {
-                if (needsOvipositor && comp.RequiresGranter && !hasGranter)
+                if (needsOvipositor && comp.RequiresGranter && !HiveHasOvipositor(uid))
                     continue;
 
                 SetPoints((uid, comp), comp.Points + gain);

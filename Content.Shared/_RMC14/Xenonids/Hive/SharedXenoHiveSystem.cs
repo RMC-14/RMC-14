@@ -318,6 +318,18 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         return (hive.Comp.CurrentQueen is not null);
     }
 
+    public bool HasAnyMembers(EntityUid hive)
+    {
+        var members = EntityQueryEnumerator<HiveMemberComponent>();
+        while (members.MoveNext(out _, out var member))
+        {
+            if (member.Hive == hive)
+                return true;
+        }
+
+        return false;
+    }
+
     public bool SetHiveQueen(EntityUid queen, Entity<HiveComponent> hive)
     {
         if (hive.Comp.CurrentQueen == queen)

@@ -94,10 +94,10 @@
   - type: Hive
     color: "#cc8ec4"
     lateJoinGainLarva: false
+    tacticalMapAlwaysLive: true
   - type: HiveSlot
     position: 8
 
-# xenoArmor 20, explosionArmor 40 -> +15/+30 = 35/70
 - type: entity
   parent: CMXenoWarrior
   id: RMCXenoWarriorForsaken
@@ -117,9 +117,8 @@
         Brute: 10
     healthMultiplier: 1.25
     plasmaGainMultiplier: 1.15
-    speedMultiplier: 0.8
+    speedMultiplier: 1.25
 
-# xenoArmor 20, explosionArmor 20 -> +15/+30 = 35/50
 - type: entity
   parent: CMXenoLurker
   id: RMCXenoLurkerForsaken
@@ -131,7 +130,7 @@
     marines: true
   - type: XenoEvolutionLocked
   - type: CMArmor
-    xenoArmor: 35
+    xenoArmor: 15
     explosionArmor: 50
   - type: HiveStatModifier
     damageIncrease:
@@ -139,9 +138,8 @@
         Brute: 10
     healthMultiplier: 1.25
     plasmaGainMultiplier: 1.15
-    speedMultiplier: 0.8
+    speedMultiplier: 1.25
 
-# xenoArmor 15, explosionArmor 20 -> +15/+30 = 30/50
 - type: entity
   parent: CMXenoSpitter
   id: RMCXenoSpitterForsaken
@@ -161,9 +159,8 @@
         Brute: 10
     healthMultiplier: 1.25
     plasmaGainMultiplier: 1.15
-    speedMultiplier: 0.8
+    speedMultiplier: 1.25
 
-# xenoArmor 0, explosionArmor 0 (inherited base_xeno default) -> +15/+30 = 15/30
 - type: entity
   parent: CMXenoDrone
   id: RMCXenoDroneForsaken
@@ -183,9 +180,8 @@
         Brute: 10
     healthMultiplier: 1.25
     plasmaGainMultiplier: 1.15
-    speedMultiplier: 0.8
+    speedMultiplier: 1.25
 
-# xenoArmor 15, explosionArmor 10 -> +15/+30 = 30/40
 - type: entity
   parent: CMXenoRunner
   id: RMCXenoRunnerForsaken
@@ -197,7 +193,7 @@
     marines: true
   - type: XenoEvolutionLocked
   - type: CMArmor
-    xenoArmor: 30
+    xenoArmor: 15
     explosionArmor: 40
   - type: HiveStatModifier
     damageIncrease:
@@ -205,4 +201,4 @@
         Brute: 10
     healthMultiplier: 1.25
     plasmaGainMultiplier: 1.15
-    speedMultiplier: 0.8
+    speedMultiplier: 1.25

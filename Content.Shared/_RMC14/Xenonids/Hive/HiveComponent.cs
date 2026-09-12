@@ -118,4 +118,7 @@ public sealed partial class HiveComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool BanHiveAlliances = true;
+
+    [DataField, AutoNetworkedField]
+    public bool TacticalMapAlwaysLive;
 }
