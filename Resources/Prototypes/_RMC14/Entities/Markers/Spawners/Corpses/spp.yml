@@ -6,3 +6,19 @@
   components:
   - type: CorpseSpawner
     spawn: RMCCorpseSPPSoldier
+#SPP Colonist (Random job)
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseSPPColonist
+  name: Corpse Spawner - SPP Colonist (Randomized Job)
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseSPPColonist
+#SPP Chef
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseSPPChef
+  name: Corpse Spawner - SPP Chef
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseSPPChef
