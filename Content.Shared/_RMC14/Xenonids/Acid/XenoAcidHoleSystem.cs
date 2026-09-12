@@ -15,7 +15,6 @@ using Content.Shared.Climbing.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.Components;
@@ -48,7 +47,6 @@ public sealed class XenoAcidHoleSystem : EntitySystem
     [Dependency] private readonly OccluderSystem _occluder = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly RMCPullingSystem _pulling = default!;
     [Dependency] private readonly RMCRepairableSystem _repairable = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
@@ -67,7 +65,6 @@ public sealed class XenoAcidHoleSystem : EntitySystem
     private EntityQuery<XenoAcidHoleWallComponent> _holeWallQuery;
 
     private static readonly ProtoId<StackPrototype> PlasteelStack = "CMPlasteel";
-    private static readonly ProtoId<DamageGroupPrototype> AcidHoleDamage = "Brute";
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
     private static readonly EntProtoId DamagedGirderPrototype = "RMCGirderDamaged";
     private const CollisionGroup HoleBlockMask = CollisionGroup.Impassable |
@@ -142,14 +139,6 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         {
             wallComp.PendingDirection = null;
             return true;
-        }
-
-        if (_damageableQuery.TryComp(wall, out var damageable) &&
-            _receiverClawsQuery.TryComp(wall, out var receiver))
-        {
-            var targetDamage = FixedPoint2.New(receiver.MaxHealth * 0.9f);
-            if (damageable.TotalDamage < targetDamage)
-                SetWallDamage((wall, damageable), targetDamage);
         }
 
         var direction = wallComp.PendingDirection ?? Direction.South;
@@ -663,12 +652,6 @@ public sealed class XenoAcidHoleSystem : EntitySystem
             _occluder.SetEnabled(wall.Owner, false, occluder);
 
         return true;
-    }
-
-    private void SetWallDamage(Entity<DamageableComponent> wall, FixedPoint2 damage)
-    {
-        var damageSpecifier = new DamageSpecifier(_prototype.Index(AcidHoleDamage), damage);
-        _damageable.SetDamage(wall.Owner, wall.Comp, damageSpecifier);
     }
 
     private void ReplaceWallWithDamagedGirder(Entity<XenoAcidHoleWallComponent> wall)
