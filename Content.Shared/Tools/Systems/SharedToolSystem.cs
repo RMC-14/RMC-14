@@ -260,7 +260,7 @@ public abstract partial class SharedToolSystem : EntitySystem
             return false;
 
         // check if the tool can do what's required
-        if (!toolComponent.Qualities.ContainsAll(toolQualitiesNeeded))
+        if (!toolComponent.Qualities.ContainsAny(toolQualitiesNeeded))
             return false;
 
         // check if the user allows using the tool

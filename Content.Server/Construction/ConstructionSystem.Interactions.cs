@@ -356,10 +356,15 @@ namespace Content.Server.Construction
                     // If we're validating whether this event handles the step...
                     if (validation)
                     {
-                        // Then we only really need to check whether the tool entity has that quality or not.
-                        return _toolSystem.HasQuality(interactUsing.Used, toolInsertStep.Tool)
-                            ? HandleResult.Validated
-                            : HandleResult.False;
+                        // begin RMC14
+                        // Then we only really need to check whether the tool entity has a valid quality or not.
+                        foreach (var tool in toolInsertStep.Tools)
+                        {
+                            if (_toolSystem.HasQuality(interactUsing.Used, tool))
+                                return HandleResult.Validated;
+                        }
+                        return HandleResult.False;
+                        // end RMC14
                     }
 
                     // If we're handling an event after its DoAfter finished...
@@ -371,7 +376,7 @@ namespace Content.Server.Construction
                         interactUsing.User,
                         uid,
                         TimeSpan.FromSeconds(toolInsertStep.DoAfter),
-                        new [] { toolInsertStep.Tool },
+                        toolInsertStep.Tools,
                         new ConstructionInteractDoAfterEvent(EntityManager, interactUsing),
                         out var doAfter,
                         toolInsertStep.Fuel,
