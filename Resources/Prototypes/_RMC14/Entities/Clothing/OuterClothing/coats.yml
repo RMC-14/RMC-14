@@ -663,7 +663,7 @@
   id: RMCCoatAllWeatherFolded
   name: marine all-weather coat
   description: A water-resistant trench coat issued to marines not expected to see frontline combat. You think you remember hearing something about these bleeding orange into the wash.
-  suffix: Unbuttoned
+  suffix: Folded
 
 - type: entity
   parent: CMCoatOfficer
