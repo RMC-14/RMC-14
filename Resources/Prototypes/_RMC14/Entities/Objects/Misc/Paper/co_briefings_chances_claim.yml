@@ -1,0 +1,33 @@
+# Chance's Claim
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingChancesUnaligned
+  suffix: Chance's Claim, Unaligned
+  components:
+  - type: Paper
+    content: rmc-co-briefing-chances-unaligned
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingChancesHawks
+  suffix: Chance's Claim, Hawks
+  components:
+  - type: Paper
+    content: rmc-co-briefing-chances-hawks
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingChancesDoves
+  suffix: Chance's Claim, Doves
+  components:
+  - type: Paper
+    content: rmc-co-briefing-chances-doves
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingChancesMagpies
+  suffix: Chance's Claim, Magpies
+  components:
+  - type: Paper
+    content: rmc-co-briefing-chances-magpies

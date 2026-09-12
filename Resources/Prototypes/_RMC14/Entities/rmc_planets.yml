@@ -7,6 +7,11 @@
     camouflage: Jungle
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingLV624
+    commandingOfficerBriefings:
+      Unaligned: RMCPaperCOBriefingLV624Unaligned
+      Hawks: RMCPaperCOBriefingLV624Hawks
+      Doves: RMCPaperCOBriefingLV624Doves
+      Magpies: RMCPaperCOBriefingLV624Magpies
     announcement: "An automated distress signal has been received from the archaeological site of Lazarus Landing, on the border world of LV-624. A response team from the UNS Almayer will be dispatched shortly to investigate."
     #smallHostVariants:
       #- RMCMobSmallHostFarwa
@@ -75,6 +80,11 @@
     announcement: "Weston-Yamada has lost contact with one of its Biological Storage Facilities, Solaris Ridge, on the planet of LV-1413. The UNS Almayer has been requested to look into the blackout by Weston-Yamada."
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingSolaris
+    commandingOfficerBriefings:
+      Unaligned: RMCPaperCOBriefingSolarisUnaligned
+      Hawks: RMCPaperCOBriefingSolarisHawks
+      Doves: RMCPaperCOBriefingSolarisDoves
+      Magpies: RMCPaperCOBriefingSolarisMagpies
     #smallHostVariants:
       #RMCMobSmallHostNeaera
     nightmareScenarios:
@@ -167,6 +177,11 @@
     camouflage: Snow
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingShivas
+    commandingOfficerBriefings:
+      Unaligned: RMCPaperCOBriefingShivasUnaligned
+      Hawks: RMCPaperCOBriefingShivasHawks
+      Doves: RMCPaperCOBriefingShivasDoves
+      Magpies: RMCPaperCOBriefingShivasMagpies
     announcement: "An automated distress signal has been received from archaeology site \"Shiva's Snowball\", on border ice world \"Ifrit\". A response team from the UNS Almayer will be dispatched shortly to investigate."
     #smallHostVariants:
       #RMCMobSmallHostYiren
@@ -220,6 +235,11 @@
     minPlayers: 130
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingFiorina
+    commandingOfficerBriefings:
+      Unaligned: RMCPaperCOBriefingFiorinaUnaligned
+      Hawks: RMCPaperCOBriefingFiorinaHawks
+      Doves: RMCPaperCOBriefingFiorinaDoves
+      Magpies: RMCPaperCOBriefingFiorinaMagpies
     announcement: "An automated distress signal has been received from maximum-security prison \"Fiorina Orbital Penitentiary\". A response team from the UNS Almayer will be dispatched shortly to investigate."
     #smallHostVariants:
       #RMCMobSmallHostFarwa
@@ -269,6 +289,11 @@
     map: /Maps/_RMC14/trijent.yml
     camouflage: Desert
     minPlayers: 130
+    commandingOfficerBriefings:
+      Unaligned: RMCPaperCOBriefingTrijentUnaligned
+      Hawks: RMCPaperCOBriefingTrijentHawks
+      Doves: RMCPaperCOBriefingTrijentDoves
+      Magpies: RMCPaperCOBriefingTrijentMagpies
     announcement: "We've lost contact with Weston-Yamada's extra-solar colony, \"Trijent Dam\", on the planet \"Raijin.\" The UNS Almayer has been dispatched to assist."
     #smallHostVariants:
       #RMCMobSmallHostStok
@@ -366,6 +391,11 @@
     camouflage: Jungle
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingVaradero
+    commandingOfficerBriefings:
+      Unaligned: RMCPaperCOBriefingVaraderoUnaligned
+      Hawks: RMCPaperCOBriefingVaraderoHawks
+      Doves: RMCPaperCOBriefingVaraderoDoves
+      Magpies: RMCPaperCOBriefingVaraderoMagpies
     announcement: "An automated distress signal has been received from UN Outpost New Varadero. A response team from the UNS Almayer will be dispatched shortly to investigate.
       Designation: Island research station and mining facility
 
@@ -416,6 +446,11 @@
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/kutjevo.yml
     camouflage: Desert
+    commandingOfficerBriefings:
+      Unaligned: RMCPaperCOBriefingKutjevoUnaligned
+      Hawks: RMCPaperCOBriefingKutjevoHawks
+      Doves: RMCPaperCOBriefingKutjevoDoves
+      Magpies: RMCPaperCOBriefingKutjevoMagpies
     announcement: "An automated distress signal has been received from Weston-Yamada colony Kutjevo Refinery, known for botanical research, export, and raw materials processing and refinement. The UNS Almayer has been dispatched to investigate."
     #smallHostVariants:
       #RMCMobSmallHostNeaera
@@ -451,6 +486,11 @@
     camouflage: Classic
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingChances
+    commandingOfficerBriefings:
+      Unaligned: RMCPaperCOBriefingChancesUnaligned
+      Hawks: RMCPaperCOBriefingChancesHawks
+      Doves: RMCPaperCOBriefingChancesDoves
+      Magpies: RMCPaperCOBriefingChancesMagpies
     announcement: "Pan-Pan. This is the commander of the UNS Hanyut, UNMC FORECON. We are currently grounded on planet LV-522 in the immediate area of Chance's Claim. We are unable to contact the Hanyut and our dropships are unable to take off at this time. We are requesting assistance from any nearby vessels; this broadcast is set to repeat every 24 hours."
     #smallHostVariants:
       #RMCSmallHostMobNaera
@@ -486,6 +526,11 @@
     camouflage: Urban
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingHybrisa
+    commandingOfficerBriefings:
+      Unaligned: RMCPaperCOBriefingHybrisaUnaligned
+      Hawks: RMCPaperCOBriefingHybrisaHawks
+      Doves: RMCPaperCOBriefingHybrisaDoves
+      Magpies: RMCPaperCOBriefingHybrisaMagpies
     announcement: "An automated distress signal has been received from the Weston-Yamada colony, Hybrisa Prospera — a vast, city-like settlement renowned for its immense wealth, extensive mining operations, and thriving commerce. Recently fully acquired from the TSE, this former colony is now a key asset for Weston-Yamada, with a sprawling urban center housing thousands of residents and numerous smaller outer colonies under its control. The UNS Almayer has been dispatched to investigate the situation."
     #smallHostVariants:
       #CMMobSmallHostMonkey
@@ -560,6 +605,11 @@
     minPlayers: 130
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingSorokyne
+    commandingOfficerBriefings:
+      Unaligned: RMCPaperCOBriefingSorokyneUnaligned
+      Hawks: RMCPaperCOBriefingSorokyneHawks
+      Doves: RMCPaperCOBriefingSorokyneDoves
+      Magpies: RMCPaperCOBriefingSorokyneMagpies
     announcement: "An automated distress signal has been recieved from a mining colony on border world LV-976, \"Sorokyne Outpost\". A response team from the UNS Almayer will be dispatched shortly to investigate."
     #smallHostVariants:
       #RMCMobSmallHostStok

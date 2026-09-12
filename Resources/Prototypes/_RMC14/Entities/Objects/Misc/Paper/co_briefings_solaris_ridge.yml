@@ -1,0 +1,33 @@
+# Solaris Ridge
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingSolarisUnaligned
+  suffix: Solaris Ridge, Unaligned
+  components:
+  - type: Paper
+    content: rmc-co-briefing-solaris-unaligned
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingSolarisHawks
+  suffix: Solaris Ridge, Hawks
+  components:
+  - type: Paper
+    content: rmc-co-briefing-solaris-hawks
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingSolarisDoves
+  suffix: Solaris Ridge, Doves
+  components:
+  - type: Paper
+    content: rmc-co-briefing-solaris-doves
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingSolarisMagpies
+  suffix: Solaris Ridge, Magpies
+  components:
+  - type: Paper
+    content: rmc-co-briefing-solaris-magpies
