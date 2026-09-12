@@ -487,6 +487,12 @@
   - PlushieTherapyRMC
   - PlushieGnarpGnarpRMC
   - PlushieGnarpGnarpAltRMC
+  - PlushieArachnidRMC
+  - PlushieLizardRMC
+  - PlushieDionaRMC
+  - PlushieHampterRMC
+  - PlushiePenguinRMC
+  - PlushieExperimentRMC
 
 # Recreational
 - type: loadoutGroup
