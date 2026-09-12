@@ -35,4 +35,7 @@ public sealed partial class XenoFragileEggComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool InRange = true;
+
+    [DataField, AutoNetworkedField]
+    public bool ApplyNameModifier = true;
 }
