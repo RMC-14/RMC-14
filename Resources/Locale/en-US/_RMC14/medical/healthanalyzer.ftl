@@ -11,6 +11,9 @@ rmc-health-analyzer-permadead = Permanently deceased
 
 rmc-health-analyzer-healthy = {$percent} healthy
 
+rmc-health-analyzer-reagent-listing = [color={$reagentColor}]█[/color] {$amount}u {$reagentName}
+    .overdose = [color={$reagentColor}]█[/color] [bold][color=orange]{$amount}u {$reagentName} OD[/color][/bold]
+    .critical-overdose = [color={$reagentColor}]█[/color] [bold][color=red]{$amount}u {$reagentName} OD[/color][/bold]
 rmc-health-analyzer-unknown-reagents = [color=white][italic]Unknown reagents detected.[/italic][/color]
 
 rmc-health-analyzer-advice-epinephrine = [color=#6bd43c][font="Emoji"]💉[/font][/color] Administer a single dose of epinephrine.
