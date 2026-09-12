@@ -251,9 +251,9 @@ public sealed class GhostRoleSystem : EntitySystem
                 raffle.CurrentMembers.AsEnumerable(),
                 session =>
                 {
-                    var success = TryTakeover(session, raffle.Identifier);
+                    var success = TryTakeover(session, raffle.Identifier, out var moreAvailable); // RMC14
                     foundWinner |= success;
-                    return success;
+                    return success && !moreAvailable; // RMC14
                 }
             );
 
@@ -268,8 +268,12 @@ public sealed class GhostRoleSystem : EntitySystem
         }
     }
 
-    private bool TryTakeover(ICommonSession player, uint identifier)
+    private bool TryTakeover(ICommonSession player, uint identifier, out bool moreAvailable) // RMC14
     {
+        // <RMC14>
+        moreAvailable = false;
+        // </RMC14>
+
         // TODO: the following two checks are kind of redundant since they should already be removed
         //           from the raffle
         // can't win if you are disconnected (although you shouldn't be a candidate anyway)
@@ -280,7 +284,7 @@ public sealed class GhostRoleSystem : EntitySystem
         if (player.AttachedEntity == null || !HasComp<GhostComponent>(player.AttachedEntity))
             return false;
 
-        if (Takeover(player, identifier))
+        if (Takeover(player, identifier, out moreAvailable))
         {
             // takeover successful, we have a winner! remove the winner from other raffles they might be in
             LeaveAllRaffles(player);
@@ -474,7 +478,7 @@ public sealed class GhostRoleSystem : EntitySystem
         }
         else
         {
-            Takeover(player, identifier);
+            Takeover(player, identifier, out _); // RMC14
         }
     }
 
@@ -482,13 +486,20 @@ public sealed class GhostRoleSystem : EntitySystem
     /// Attempts having the player take over the ghost role with the corresponding ID. Does not start a raffle.
     /// </summary>
     /// <returns>True if takeover was successful, otherwise false.</returns>
-    public bool Takeover(ICommonSession player, uint identifier)
+    public bool Takeover(ICommonSession player, uint identifier, out bool moreAvailable) // RMC14
     {
+        // <RMC14>
+        moreAvailable = false;
+        // </RMC14>
+
         if (!_ghostRoles.TryGetValue(identifier, out var role))
             return false;
 
         var ev = new TakeGhostRoleEvent(player);
         RaiseLocalEvent(role, ref ev);
+        // <RMC14>
+        moreAvailable = ev.MoreAvailable;
+        // </RMC14>
 
         if (!ev.TookRole)
             return false;

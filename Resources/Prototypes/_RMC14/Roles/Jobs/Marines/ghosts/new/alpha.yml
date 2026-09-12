@@ -1,0 +1,47 @@
+- type: entity
+  parent: [RMCNewAlphaBase, RMCNewGhostCombatTech]
+  id: RMCNewGhostAlphaCombatTech
+  name: alpha ghost role combat technician
+  suffix: Spawner, Player
+
+- type: entity
+  parent: [RMCNewAlphaBase, RMCNewGhostFireteamLeader]
+  id: RMCNewGhostAlphaFireteamLeader
+  name: alpha ghost role fireteam leader
+  suffix: Spawner, Player
+
+- type: entity
+  parent: [RMCNewAlphaBase, RMCNewGhostHospitalCorpsman]
+  id: RMCNewGhostAlphaHospitalCorpsman
+  name: alpha ghost role hospital corpsman
+  suffix: Spawner, Player
+
+- type: entity
+  parent: [RMCNewAlphaBase, RMCNewGhostRecruit]
+  id: RMCNewGhostAlphaRecruit
+  name: alpha ghost role recruit
+  suffix: Spawner, Player
+
+- type: entity
+  parent: [RMCNewAlphaBase, RMCNewGhostRifleman]
+  id: RMCNewGhostAlphaRifleman
+  name: alpha ghost role rifleman
+  suffix: Spawner, Player
+
+- type: entity
+  parent: [RMCNewAlphaBase, RMCNewGhostSmartGunOperator]
+  id: RMCNewGhostAlphaSmartGunOperator
+  name: alpha ghost role smart gun operator
+  suffix: Spawner, Player
+
+- type: entity
+  parent: [RMCNewAlphaBase, RMCNewGhostSquadLeader]
+  id: RMCNewGhostAlphaSquadLeader
+  name: alpha ghost role squad leader
+  suffix: Spawner, Player
+
+- type: entity
+  parent: [RMCNewAlphaBase, RMCNewGhostWeaponsSpecialist]
+  id: RMCNewGhostAlphaWeaponsSpecialist
+  name: alpha ghost role weapons specialist
+  suffix: Spawner, Player

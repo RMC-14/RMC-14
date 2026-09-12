@@ -6,4 +6,7 @@ namespace Content.Server.Ghost.Roles.Components;
 public record struct TakeGhostRoleEvent(ICommonSession Player)
 {
     public bool TookRole { get; set; }
+    // <RMC14>
+    public bool MoreAvailable { get; set; }
+    // </RMC14>
 }
