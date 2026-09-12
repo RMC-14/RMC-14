@@ -118,6 +118,7 @@
   - type: InstantAction
     event: !type:XenoRegurgitateActionEvent
   - type: RMCDazeableAction
+  - type: RMCInContainerAction
 
 - type: entity
   id: ActionXenoTailStab
@@ -574,6 +575,7 @@
     event: !type:XenoParalyzingSlashActionEvent
   - type: XenoActionPlasma
     cost: 50
+  - type: RMCInContainerAction
 
 - type: entity
   parent: ActionXenoBase
@@ -591,6 +593,7 @@
     event: !type:XenoCripplingStrikeActionEvent
   - type: XenoActionPlasma
     cost: 20
+  - type: RMCInContainerAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -825,6 +828,7 @@
     useDelay: 0.25
   - type: InstantAction
     event: !type:XenoToggleChargingActionEvent
+  - type: RMCInContainerAction
 
 - type: entity
   parent: ActionXenoFling
@@ -890,6 +894,7 @@
     useDelay: 1
   - type: InstantAction
     event: !type:XenoGasToggleActionEvent
+  - type: RMCInContainerAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -965,6 +970,7 @@
       state: screech
   - type: InstantAction
     event: !type:XenoForTheHiveActionEvent
+  - type: RMCInContainerAction
 
 - type: entity
   parent: ActionXenoBase
@@ -1161,6 +1167,7 @@
       state: shift_spit_xeno_acid
   - type: InstantAction
     event: !type:XenoSpitToggleActionEvent
+  - type: RMCInContainerAction
 
 - type: entity
   parent: ActionXenoBase
@@ -1428,6 +1435,7 @@
   - type: InstantAction
     event: !type:XenoCripplingStrikeActionEvent
   - type: ActionBlockIfResting
+  - type: RMCInContainerAction
 
 - type: entity
   parent: ActionXenoBase

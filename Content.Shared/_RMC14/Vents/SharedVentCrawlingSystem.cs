@@ -26,6 +26,7 @@ using Content.Shared.Hands;
 using Content.Shared.Item;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs.Systems;
+using Content.Shared._RMC14.Actions;
 
 namespace Content.Shared._RMC14.Vents;
 public abstract class SharedVentCrawlingSystem : EntitySystem
@@ -330,7 +331,8 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
         var actions = _actions.GetActions(ent);
         foreach (var action in actions)
         {
-            _actions.SetEnabled(action.AsNullable(), false);
+            if (!HasComp<RMCInContainerActionComponent>(action))
+                _actions.SetEnabled(action.AsNullable(), false);
         }
     }
 
@@ -339,7 +341,8 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
         var actions = _actions.GetActions(ent);
         foreach (var action in actions)
         {
-            _actions.SetEnabled(action.AsNullable(), true);
+            if (!HasComp<RMCInContainerActionComponent>(action))
+                _actions.SetEnabled(action.AsNullable(), true);
         }
     }
 
