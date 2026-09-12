@@ -1,9 +1,10 @@
 using Content.Server.Body.Systems;
+using Content.Shared._RMC14.Medical.Syringe;
+using Content.Shared.Body.Components;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.Body.Components;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
@@ -11,8 +12,9 @@ using Content.Shared.Forensics;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
-using Content.Shared.Stacks;
 using Content.Shared.Nutrition.EntitySystems;
+using Content.Shared.Stacks;
+using System.Xml.Schema;
 
 namespace Content.Server.Chemistry.EntitySystems;
 
@@ -36,14 +38,14 @@ public sealed class InjectorSystem : SharedInjectorSystem
         // Handle injecting/drawing for solutions
         if (injector.Comp.ToggleState == InjectorToggleMode.Inject)
         {
+            if (TryComp<BloodstreamComponent>(target, out var bloodstream)) // RMC14 move to top
+                return TryInjectIntoBloodstream(injector, (target, bloodstream), user);
+
             if (isOpenOrIgnored && SolutionContainers.TryGetInjectableSolution(target, out var injectableSolution, out _))
                 return TryInject(injector, target, injectableSolution.Value, user, false);
 
             if (isOpenOrIgnored && SolutionContainers.TryGetRefillableSolution(target, out var refillableSolution, out _))
                 return TryInject(injector, target, refillableSolution.Value, user, true);
-
-            if (TryComp<BloodstreamComponent>(target, out var bloodstream))
-                return TryInjectIntoBloodstream(injector, (target, bloodstream), user);
 
             Popup.PopupEntity(Loc.GetString("injector-component-cannot-transfer-message",
                 ("target", Identity.Entity(target, EntityManager))), injector, user);
@@ -73,7 +75,11 @@ public sealed class InjectorSystem : SharedInjectorSystem
     private void OnInjectDoAfter(Entity<InjectorComponent> entity, ref InjectorDoAfterEvent args)
     {
         if (args.Cancelled || args.Handled || args.Args.Target == null)
+        {
+            // RMC14
+            entity.Comp.DoAfterId = null;
             return;
+        }
 
         args.Handled = TryUseInjector(entity, args.Args.Target.Value, args.Args.User);
     }
@@ -107,15 +113,7 @@ public sealed class InjectorSystem : SharedInjectorSystem
     /// </summary>
     private void InjectDoAfter(Entity<InjectorComponent> injector, EntityUid target, EntityUid user)
     {
-        // Create a pop-up for the user
-        if (injector.Comp.ToggleState == InjectorToggleMode.Draw)
-        {
-            Popup.PopupEntity(Loc.GetString("injector-component-drawing-user"), target, user);
-        }
-        else
-        {
-            Popup.PopupEntity(Loc.GetString("injector-component-injecting-user"), target, user);
-        }
+        // RMC14 moved popup
 
         if (!SolutionContainers.TryGetSolution(injector.Owner, injector.Comp.SolutionName, out _, out var solution))
             return;
@@ -136,6 +134,10 @@ public sealed class InjectorSystem : SharedInjectorSystem
         // Injections take 0.5 seconds longer per 5u of possible space/content
         // First 5u(MinimumTransferAmount) doesn't incur delay
         actualDelay += injector.Comp.DelayPerVolume * FixedPoint2.Max(0, amountToInject - injector.Comp.MinimumTransferAmount).Double();
+
+        // RMC14 - ignore actual delay
+        var baseDelay = actualDelay;
+        // RMC14
 
         // Ensure that minimum delay before incapacitation checks is 1 seconds
         actualDelay = MathHelper.Max(actualDelay, TimeSpan.FromSeconds(1));
@@ -200,20 +202,48 @@ public sealed class InjectorSystem : SharedInjectorSystem
             }
         }
 
-        DoAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, actualDelay, new InjectorDoAfterEvent(), injector.Owner, target: target, used: injector.Owner)
+        // RMC14
+        var ev = new RMCSyringeGetDelayEvent(baseDelay, injector.Comp.ToggleState, user, target);
+        RaiseLocalEvent(injector, ref ev);
+
+        if (ev.Cancelled)
+            return;
+
+        if (ev.Delay > TimeSpan.Zero)
+        {
+            // Create a pop-up for the user
+            if (injector.Comp.ToggleState == InjectorToggleMode.Draw)
+            {
+                Popup.PopupEntity(Loc.GetString("injector-component-drawing-user"), target, user);
+            }
+            else
+            {
+                Popup.PopupEntity(Loc.GetString("injector-component-injecting-user"), target, user);
+            }
+        }
+
+        DoAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, ev.Delay, new InjectorDoAfterEvent(), injector.Owner, target: target, used: injector.Owner)
         {
             BreakOnMove = true,
             BreakOnWeightlessMove = false,
-            BreakOnDamage = true,
+            BreakOnDamage = false,
             NeedHand = injector.Comp.NeedHand,
             BreakOnHandChange = injector.Comp.BreakOnHandChange,
             MovementThreshold = injector.Comp.MovementThreshold,
-        });
+            TargetEffect = "RMCEffectHealBusy",
+            DuplicateCondition = DuplicateConditions.SameTool
+        }, out injector.Comp.DoAfterId);
+        // RMC14
     }
 
+    // RMC14
     private bool TryInjectIntoBloodstream(Entity<InjectorComponent> injector, Entity<BloodstreamComponent> target,
         EntityUid user)
     {
+        if (!SolutionContainers.TryGetSolution(injector.Owner, injector.Comp.SolutionName, out var soln,
+        out var solution) || solution.Volume == 0)
+            return false;
+
         // Get transfer amount. May be smaller than _transferAmount if not enough room
         if (!SolutionContainers.ResolveSolution(target.Owner, target.Comp.ChemicalSolutionName,
                 ref target.Comp.ChemicalSolution, out var chemSolution))
@@ -224,8 +254,17 @@ public sealed class InjectorSystem : SharedInjectorSystem
             return false;
         }
 
+        Solution? bloodSolution = null;
+        Entity<SolutionComponent>? bloodEnt = null;
+
+        if (injector.Comp.CanDirectInjectIntoBlood)
+            SolutionContainers.TryGetSolution(target.Owner, target.Comp.BloodSolutionName, out bloodEnt, out bloodSolution);
+
+        var bloodTransferAmount = bloodSolution != null ? FixedPoint2.Min(injector.Comp.TransferAmount, bloodSolution.AvailableVolume) : 0;
+
         var realTransferAmount = FixedPoint2.Min(injector.Comp.TransferAmount, chemSolution.AvailableVolume);
-        if (realTransferAmount <= 0)
+
+        if (realTransferAmount <= 0 && bloodTransferAmount <= 0)
         {
             Popup.PopupEntity(
                 Loc.GetString("injector-component-cannot-inject-message",
@@ -233,21 +272,37 @@ public sealed class InjectorSystem : SharedInjectorSystem
             return false;
         }
 
+        // Seperate chems from blood
+        var tempSolution = bloodSolution != null ? SolutionContainers.SplitSolutionWithout(soln.Value, solution.Volume, target.Comp.BloodReagent) : SolutionContainers.SplitSolution(soln.Value, solution.Volume);
+
         // Move units from attackSolution to targetSolution
-        var removedSolution = SolutionContainers.SplitSolution(target.Comp.ChemicalSolution.Value, realTransferAmount);
+        // TODO RMC14 support multiple blood reagents (?)
+        var removedSolution = tempSolution.SplitSolution(realTransferAmount);
+        var bloodRemoveSolution = bloodSolution != null ? SolutionContainers.SplitSolution(soln.Value, bloodTransferAmount - removedSolution.Volume) : null;
+        var bloodRemoveVol = bloodRemoveSolution != null ? bloodRemoveSolution.Volume : 0;
+
+        // Add back sepearted
+        SolutionContainers.TryAddSolution(soln.Value, tempSolution);
 
         _blood.TryAddToChemicals(target.AsNullable(), removedSolution);
 
+        if (bloodRemoveSolution != null && bloodSolution != null && bloodEnt != null)
+            SolutionContainers.TryTransferSolution(bloodEnt.Value, bloodRemoveSolution, bloodTransferAmount);
+
         _reactiveSystem.DoEntityReaction(target, removedSolution, ReactionMethod.Injection);
 
+        if (bloodRemoveSolution != null)
+            _reactiveSystem.DoEntityReaction(target, bloodRemoveSolution, ReactionMethod.Injection);
+
         Popup.PopupEntity(Loc.GetString("injector-component-inject-success-message",
-            ("amount", removedSolution.Volume),
+            ("amount", removedSolution.Volume + bloodRemoveVol),
             ("target", Identity.Entity(target, EntityManager))), injector.Owner, user);
 
         Dirty(injector);
         AfterInject(injector, target);
         return true;
     }
+    // RMC14
 
     private bool TryInject(Entity<InjectorComponent> injector, EntityUid targetEntity,
         Entity<SolutionComponent> targetSolution, EntityUid user, bool asRefill)
@@ -389,8 +444,8 @@ public sealed class InjectorSystem : SharedInjectorSystem
     {
         var drawAmount = (float) transferAmount;
 
-        if (SolutionContainers.ResolveSolution(target.Owner, target.Comp.ChemicalSolutionName,
-                ref target.Comp.ChemicalSolution))
+        if (injector.Comp.CanRemoveBloodChemicals && SolutionContainers.ResolveSolution(target.Owner, target.Comp.ChemicalSolutionName,
+                ref target.Comp.ChemicalSolution)) // RMC 14
         {
             var chemTemp = SolutionContainers.SplitSolution(target.Comp.ChemicalSolution.Value, drawAmount * 0.15f);
             SolutionContainers.TryAddSolution(injectorSolution, chemTemp);
@@ -410,5 +465,13 @@ public sealed class InjectorSystem : SharedInjectorSystem
 
         Dirty(injector);
         AfterDraw(injector, target);
+    }
+
+    // RMC14
+    public override void TryForceInject(Entity<InjectorComponent> injector, EntityUid target, EntityUid user)
+    {
+        base.TryForceInject(injector, target, user);
+
+        TryUseInjector(injector, target, user);
     }
 }
