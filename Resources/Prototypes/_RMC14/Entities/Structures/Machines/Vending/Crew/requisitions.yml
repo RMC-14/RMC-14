@@ -118,6 +118,8 @@
         amount: 3
       - id: RMCExplosiveBreachingCharge
         amount: 2
+      - id: RMCRocketM5510Brute
+        amount: 3
     - name: Webbings
       entries:
       - id: CMWebbingBrown

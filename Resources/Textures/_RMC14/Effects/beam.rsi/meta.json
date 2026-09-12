@@ -397,6 +397,9 @@
     },
     {
       "name": "laser_beam_spotter"
+    },
+    {
+      "name": "laser_beam_guided"
     }
   ]
 }
