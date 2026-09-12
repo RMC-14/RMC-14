@@ -1,3 +1,8 @@
+# Used as a chat routing sentinel for :i, .i, and #i. It is not a selectable radio channel.
+- type: radioChannel
+  id: RMCIntercom
+  name: chat-radio-intercom
+
 # High Command
 - type: radioChannel #UNMC High Command, for events and such, basically CentComm channel
   id: MarineHighCommand
