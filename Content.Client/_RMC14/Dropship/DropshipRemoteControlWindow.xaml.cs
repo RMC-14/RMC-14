@@ -5,9 +5,9 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client._RMC14.Dropship;
 
 [GenerateTypedNameReferences]
-public sealed partial class DropshipTerminalWindow : FancyWindow
+public sealed partial class DropshipRemoteControlWindow : FancyWindow
 {
-    public DropshipTerminalWindow()
+    public DropshipRemoteControlWindow()
     {
         RobustXamlLoader.Load(this);
     }
