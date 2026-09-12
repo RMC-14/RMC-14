@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Arykh
-  changes:
-  - message: Vitamin and Protein now convert themselves into Nutriment.
-    type: Tweak
-  - message: Nutriment now has an OD of 60u. Going over 60u will cause nausea and
-      vomiting as Nutriment tries to rapidly lower itself below 60u.
-    type: Tweak
-  id: 3142
-  time: '2026-04-22T03:58:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9023
 - author: Vixting
   changes:
   - message: Acid on guns can be removed with extinguishers provided the gun still
@@ -4464,5 +4454,12 @@
   id: 3641
   time: '2026-09-12T18:47:37.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10253
+- author: kleinerstation13
+  changes:
+  - message: Changed the sound of incoming missles (Widowmaker, Banshee, Napalm, etc.)
+    type: Tweak
+  id: 3642
+  time: '2026-09-12T23:21:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10145
 Name: RMC14
 Order: -1
