@@ -34,6 +34,9 @@ public sealed partial class LanguagePrototype : IPrototype
     public bool IsVisibleLanguage;
 
     [DataField]
+    public LanguageCategory Category = LanguageCategory.Humanoid;
+
+    [DataField]
     public string? TypefaceId;
 
     [DataField]
@@ -109,6 +112,13 @@ public sealed partial class LanguagePrototype : IPrototype
     public string ChatName => Loc.GetString($"chat-language-{ID}-name");
     public string LocalizedDescription => Loc.GetString($"language-{ID}-description");
     public string? DisplayedLanguageIcon => ShowLanguageIcon ? ID : null;
+}
+
+[Serializable, NetSerializable]
+public enum LanguageCategory : byte
+{
+    Humanoid,
+    Xenonid
 }
 
 [DataDefinition]
