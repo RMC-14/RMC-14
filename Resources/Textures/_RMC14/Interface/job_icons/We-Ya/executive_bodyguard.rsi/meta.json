@@ -8,7 +8,7 @@
   },
     "states": [
         {
-            "name": "weya_bodyguard_ppc"
+            "name": "weya_bodyguard_tppo"
         },
         {
             "name": "weya_bodyguard_ppo"
@@ -17,7 +17,16 @@
             "name": "weya_bodyguard_pps"
         },
         {
-            "name": "weya_bodyguard_tppo"
+            "name": "weya_bodyguard_ppc"
+        },
+        {
+            "name": "weya_bodyguard_dpo"
+        },
+        {
+            "name": "weya_bodyguard_dps"
+        },
+        {
+            "name": "weya_bodyguard_dpc"
         }
     ]
 }
