@@ -78,6 +78,15 @@ rmc-xeno-evolution-failed-queen-exists = The hive already has a Queen!
 rmc-xeno-evolution-failed-not-enough-points = We need more evolution material.
 rmc-xeno-evolution-start-self = We begin to twist and contort.
 rmc-xeno-evolution-start-others = {$xeno} begins to twist and contort.
+rmc-xeno-evolution-raffle-entered = We put ourselves forward to become a {$caste}. The hive will decide when a slot opens.
+rmc-xeno-evolution-raffle-won = The hive has chosen us!
+rmc-xeno-evolution-raffle-grace-health = A slot has opened for us, but we must be at full health! We have {$seconds} seconds.
+rmc-xeno-evolution-raffle-grace-location = A slot has opened for us, but we cannot evolve here! We have {$seconds} seconds.
+rmc-xeno-evolution-raffle-grace-weeds = A slot has opened for us, but we must be on weeds! We have {$seconds} seconds.
+rmc-xeno-evolution-raffle-missed = We were not ready in time and lost our place in the raffle.
+rmc-xeno-evolution-raffle-blocked-lower = A slot has opened for us, but the hive already has too many Tier {$tier} and higher sisters — one must fall or a Tier {$tier} slot open before we can ascend directly.
+rmc-xeno-evolution-tab-evolve = Evolve
+rmc-xeno-evolution-tab-raffle = Raffle
 
 # Insight
 rmc-xeno-insight-empower = We have gained sufficient insight in our prey to empower our next Deploy Traps!
