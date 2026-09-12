@@ -179,6 +179,16 @@
     intensitySlope: 10
     totalIntensity: 290
     maxTileBreak: 0
+  - type: RMCExplosiveDamageOnHit
+    explosions:
+      - whitelist:
+          components:
+            - Marine
+        damage:
+          types:
+            Blunt: 175
+            Heat: 175
+        armorPiercing: 100
   - type: CMExplosionEffect
   - type: RMCScorchEffect
   - type: PointLight
@@ -219,13 +229,25 @@
     impactEffect: BulletImpactEffect
     damage:
       types:
-        Blunt: 160
-        Heat: 150
-        # 10 brute damage + 150 brute and 150 burn to simulate direct explosive damage.
-        # Temporary mechanic to make it consistent with intended main target damage.
+        Blunt: 10
     maxFixedRange: 5 # 6 tiles
   - type: CMArmorPiercing
-    amount: 100 # Ignores all armor.
+    amount: 50
+  - type: RMCExplosiveDamageOnHit
+    explosions:
+      - damage:
+          types:
+            Blunt: 75
+            Heat: 75
+        armorPiercing: 100
+      - whitelist:
+          components:
+            - Marine
+        damage:
+          types:
+            Blunt: 150
+            Heat: 150
+        armorPiercing: 100
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/m5spec_projectiles.rsi
     layers:

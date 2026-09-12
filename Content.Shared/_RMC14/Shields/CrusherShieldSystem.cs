@@ -30,6 +30,7 @@ public sealed partial class CrusherShieldSystem : EntitySystem
         SubscribeLocalEvent<CrusherShieldComponent, GetExplosionResistanceEvent>(OnGetExplosionResistance);
         SubscribeLocalEvent<CrusherShieldComponent, RemovedShieldEvent>(OnShieldRemove);
         SubscribeLocalEvent<CrusherShieldComponent, XenoDefensiveShieldActionEvent>(OnXenoDefensiveShieldAction);
+        SubscribeLocalEvent<CrusherShieldComponent, CMGetArmorEvent>(OnXenoDefensiveShieldGetArmor);
     }
 
     private void OnXenoDefensiveShieldAction(Entity<CrusherShieldComponent> xeno, ref XenoDefensiveShieldActionEvent args)
@@ -59,7 +60,7 @@ public sealed partial class CrusherShieldSystem : EntitySystem
     }
 
 
-    public void ApplyEffects(Entity<CrusherShieldComponent> ent)
+    private void ApplyEffects(Entity<CrusherShieldComponent> ent)
     {
         if (!TryComp<CMArmorComponent>(ent, out var armor))
             return;
@@ -70,7 +71,7 @@ public sealed partial class CrusherShieldSystem : EntitySystem
 
     }
 
-    public void OnShieldRemove(Entity<CrusherShieldComponent> ent, ref RemovedShieldEvent args)
+    private void OnShieldRemove(Entity<CrusherShieldComponent> ent, ref RemovedShieldEvent args)
     {
         if (args.Type == XenoShieldSystem.ShieldType.Crusher)
         {
@@ -103,7 +104,7 @@ public sealed partial class CrusherShieldSystem : EntitySystem
         }
     }
 
-    public void OnDamage(Entity<CrusherShieldComponent> ent, ref DamageModifyAfterResistEvent args)
+    private void OnDamage(Entity<CrusherShieldComponent> ent, ref DamageModifyAfterResistEvent args)
     {
         if (!TryComp<XenoShieldComponent>(ent, out var shield))
             return;
@@ -123,7 +124,7 @@ public sealed partial class CrusherShieldSystem : EntitySystem
         }
     }
 
-    public void OnGetExplosionResistance(Entity<CrusherShieldComponent> ent, ref GetExplosionResistanceEvent args)
+    private void OnGetExplosionResistance(Entity<CrusherShieldComponent> ent, ref GetExplosionResistanceEvent args)
     {
         if (!ent.Comp.ExplosionResistApplying)
             return;
@@ -132,5 +133,13 @@ public sealed partial class CrusherShieldSystem : EntitySystem
 
         var resist = (float) Math.Pow(1.1, explosionResist / 5.0); // From armor calcualtion
         args.DamageCoefficient /= resist;
+    }
+
+    private void OnXenoDefensiveShieldGetArmor(Entity<CrusherShieldComponent> ent, ref CMGetArmorEvent args)
+    {
+        if (!ent.Comp.ExplosionResistApplying)
+            return;
+
+        args.ExplosionArmor += ent.Comp.ExplosionResistance;
     }
 }
