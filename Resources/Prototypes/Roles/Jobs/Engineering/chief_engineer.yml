@@ -13,7 +13,6 @@
     - !type:DepartmentTimeRequirement
       department: Engineering
       time: 36000 #10 hrs
-  weight: 10
   startingGear: ChiefEngineerGear
   icon: "JobIconChiefEngineer"
   supervisors: job-supervisors-captain
