@@ -12,6 +12,7 @@
   name: Drone
   description: An alien drone.
   components:
+  - type: XenoBuilderCaste
   - type: MobState
     allowedStates:
     - Alive
