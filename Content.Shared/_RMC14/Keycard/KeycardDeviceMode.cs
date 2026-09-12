@@ -7,4 +7,5 @@ public enum KeycardDeviceMode
 {
     None = 0,
     RedAlert,
+    OrbitalBombardmentSafety,
 }

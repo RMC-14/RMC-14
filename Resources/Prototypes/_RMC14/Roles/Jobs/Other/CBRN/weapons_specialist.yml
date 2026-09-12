@@ -16,7 +16,7 @@
   spawnMenuRoleName: CBRN Weapons Specialist
   overwatchSortPriority: -4
   overwatchShowName: true
-  overwatchRoleName: Specialist
+  overwatchRoleName: rmc-overwatch-role-specialist
   roleWeight: 1
   displayWeight: 4
   special:

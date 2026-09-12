@@ -441,6 +441,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<float> RMCOverwatchConsoleUpdateEverySeconds =
         CVarDef.Create("rmc.overwatch_console_update_every_seconds", 0.5f, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<float> RMCGroundsideOperationsGeneralQuartersCooldownMinutes =
+        CVarDef.Create("rmc.groundside_operations_general_quarters_cooldown_minutes", 10f, CVar.REPLICATED | CVar.SERVER);
+
     /// <summary>
     ///     If the amount of resin constructs divided by the amount of buildable tiles in an area is higher than this value, the
     ///     plasma cost of new constructs in the area is increased.
@@ -519,6 +522,12 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<bool> RMCChatSquadColorMode =
         CVarDef.Create("rmc.chat_squad_color_mode", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> RMCCrtThemeEnabled =
+        CVarDef.Create("rmc.crt_theme_enabled", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> RMCCrtEffectsEnabled =
+        CVarDef.Create("rmc.crt_effects_enabled", true, CVar.CLIENTONLY | CVar.ARCHIVE);
 
     public static readonly CVarDef<bool> RMCXenoAbilityPreviews =
         CVarDef.Create("rmc.xeno_ability_previews", true, CVar.CLIENTONLY | CVar.ARCHIVE);
