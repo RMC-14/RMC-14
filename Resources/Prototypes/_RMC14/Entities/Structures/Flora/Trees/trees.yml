@@ -3,6 +3,11 @@
   description: Yep, it's a tree.
   abstract: true
   components:
+  - type: VehicleSmashable
+    minDestroyWeightClass: Light
+    slowdownBelowWeightClass: Medium
+    slowdownMultiplier: 0.5
+    slowdownDuration: 0.4
   - type: SpriteFade
   - type: Clickable
   - type: Sprite
