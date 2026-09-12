@@ -59,7 +59,7 @@
     gloves: RMCHandsVeteranPMC
     head: ArmorHelmetPMCCorporate
     shoes: RMCBootsPMCFilled
-    back: RMCSatchelLightpack # TODO RMC14: PMC combat backpack
+    back: RMCSatchelPMC
     belt: RMCM77BeltPMCFilled
     suitstorage: RMCWeaponRifleM54C # TODO RMC14: Corporate re-sprite (white)
     pocket1: RMCPouchMagazine # TODO RMC14: PMC re-sprite
