@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Marines.Armor;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared.Actions;
 using Content.Shared.Clothing;
 using Content.Shared.Inventory;
 using Content.Shared.Light.Components;
@@ -24,6 +25,18 @@ public sealed class RMCSuitLightSystem : EntitySystem
         SubscribeLocalEvent<RMCSuitLightComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<RMCSuitLightComponent, XenoParasiteInfectEvent>(OnParasiteInfect);
         SubscribeLocalEvent<RMCSuitLightComponent, XenoDevouredEvent>(OnDevour);
+        SubscribeLocalEvent<RMCSuitLightComponent, GetItemActionsEvent>(OnGetActions,
+            after: [typeof(HandheldLightSystem)]);
+    }
+
+    private void OnGetActions(Entity<RMCSuitLightComponent> ent, ref GetItemActionsEvent args)
+    {
+        if (args.InHands &&
+            TryComp(ent, out HandheldLightComponent? light) &&
+            light.ToggleActionEntity is { } action)
+        {
+            args.Actions.Remove(action);
+        }
     }
 
     private void OnUnequip(Entity<RMCSuitLightComponent> ent, ref ClothingGotUnequippedEvent args)
