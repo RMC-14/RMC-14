@@ -1,4 +1,5 @@
-﻿using System.Linq;
+using System.Linq;
+using Content.Server.Database;
 using Content.Server.GameTicking;
 using Content.Server.Spawners.Components;
 using Content.Shared._RMC14.Rules;
@@ -17,236 +18,77 @@ namespace Content.Server._RMC14.Rules.DistressSignal;
 public sealed partial class CMDistressSignalRuleSystem
 {
     /// <summary>
-    /// Main survivor spawning handler. Delegates to helper methods for job collection,
-    /// candidate assignment, and individual survivor spawning.
+    /// Spawns a player as the survivor they're assigned as.
     /// </summary>
-    /// <param name="comp">The distress signal rule component.</param>
-    /// <param name="ev">The rule player spawning event.</param>
-    /// <param name="initialPlayerCount">Player count before any players were removed from the pool (for correct totalSurvivors calculation).</param>
-    private void SpawnSurvivors(CMDistressSignalRuleComponent comp, RulePlayerSpawningEvent ev, int initialPlayerCount)
+    /// <param name="player"></param>
+    private void SpawnSurvivor(PlayerSpawnInfo player, CMDistressSignalRuleComponent comp)
     {
-        if (!comp.SpawnSurvivors || comp.SurvivorJobs.Count == 0)
+        if (player.AssignedJob is not { } assignment)
             return;
 
-        if (ActiveNightmareScenario == null)
+        Log.Debug($"Trying to spawn {player.Session} as survivor {player.AssignedJob.JobID}");
+
+        var playerId = player.Session.UserId;
+
+        var actualJob = DetermineSurvivorJob(assignment.JobID, player.Session.UserId, comp, out var _, out var _);
+
+        if (!_survivorSpawners.TryGetValue(actualJob, out var spawners))
         {
-            var compCopy = comp;
-            IEnumerable<(ProtoId<JobPrototype> Job, int Amount)> jobs = comp.SurvivorJobs
-                .Where(entry => entry.Job != compCopy.CivilianSurvivorJob)
-                .OrderBy(_ => _random.Next());
-
-            if (comp.SurvivorJobs.TryFirstOrNull(entry => entry.Job == compCopy.CivilianSurvivorJob, out var civJob))
-                jobs = jobs.Append(civJob.Value);
-
-            comp.SurvivorJobs = jobs.ToList();
-        }
-
-        var possibleJobs = CollectPossibleSurvivorJobs(comp);
-        var (spawners, spawnersLeft) = FindSurvivorSpawners(possibleJobs);
-        var candidates = CollectSurvivorCandidates(comp, ev);
-
-        SpawnSurvivorsFromCandidates(comp, ev, candidates, spawners, spawnersLeft, initialPlayerCount);
-    }
-
-    private List<ProtoId<JobPrototype>> CollectPossibleSurvivorJobs(CMDistressSignalRuleComponent comp)
-    {
-        var jobs = new List<ProtoId<JobPrototype>>();
-        jobs.AddRange(comp.SurvivorJobs.Select(x => x.Job));
-        if (comp.SurvivorJobOverrides != null)
-            jobs.AddRange(comp.SurvivorJobOverrides.Values);
-        if (comp.SurvivorJobVariants != null)
-            jobs.AddRange(comp.SurvivorJobVariants.Values.SelectMany(x => x).Select(x => x.Variant));
-        if (comp.SurvivorJobVariantScenarios != null)
-            jobs.AddRange(comp.SurvivorJobVariantScenarios.Values.SelectMany(x => x).Select(x => x.Special));
-        return jobs;
-    }
-
-    private (Dictionary<ProtoId<JobPrototype>, List<EntityUid>> Spawners,
-             Dictionary<ProtoId<JobPrototype>, List<EntityUid>> SpawnersLeft)
-        FindSurvivorSpawners(List<ProtoId<JobPrototype>> possibleJobs)
-    {
-        var spawners = new Dictionary<ProtoId<JobPrototype>, List<EntityUid>>();
-        var spawnerQuery = EntityQueryEnumerator<SpawnPointComponent>();
-        while (spawnerQuery.MoveNext(out var spawnId, out var spawnComp))
-        {
-            if (spawnComp.Job is { } job && possibleJobs.Contains(job))
-                spawners.GetOrNew(job).Add(spawnId);
-        }
-
-        var spawnersLeft = spawners.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.ToList());
-        return (spawners, spawnersLeft);
-    }
-
-    private Dictionary<ProtoId<JobPrototype>, List<NetUserId>[]> CollectSurvivorCandidates(
-        CMDistressSignalRuleComponent comp,
-        RulePlayerSpawningEvent ev)
-    {
-        var priorities = Enum.GetValues<JobPriority>().Length;
-        var candidates = new Dictionary<ProtoId<JobPrototype>, List<NetUserId>[]>();
-
-        foreach (var job in comp.SurvivorJobs)
-        {
-            var jobList = new List<NetUserId>[priorities];
-            for (var i = 0; i < jobList.Length; i++)
+            // No spawners exist for their actual job. Use civilian instead.
+            if (!_survivorSpawners.TryGetValue(comp.CivilianSurvivorJob, out spawners))
             {
-                jobList[i] = [];
+                // No spawners exist for civilian jobs either. Probably a mapping error?
+                // Don't spawn the surv.
+                Log.Error($"Failed to find spawners for {actualJob} or {comp.CivilianSurvivorJob}. Could not spawn survivor {player.Session}.");
+                return;
             }
-            candidates[job.Job] = jobList;
-        }
 
-        foreach (var player in ev.PlayerPool)
-        {
-            foreach (var (job, players) in candidates)
+            if (spawners.Count <= 0)
             {
-                TryAddSurvivorCandidate(player.UserId, job, players, comp, ev);
-            }
-        }
-
-        return candidates;
-    }
-
-    private void TryAddSurvivorCandidate(
-        NetUserId id,
-        ProtoId<JobPrototype> job,
-        List<NetUserId>[] players,
-        CMDistressSignalRuleComponent comp,
-        RulePlayerSpawningEvent ev)
-    {
-        if (!IsJobAllowed(id, comp.CivilianSurvivorJob) || !IsJobAllowed(id, job))
-            return;
-
-        if (!ev.Profiles.TryGetValue(id, out var profile))
-            return;
-
-        if (comp.SurvivorJobOverrides != null)
-        {
-            foreach (var (originalJob, overrideJob) in comp.SurvivorJobOverrides)
-            {
-                if (profile.JobPriorities.TryGetValue(originalJob, out var overridePrio) &&
-                    overridePrio > JobPriority.Never && overrideJob == job)
+                // Ran out of civilian spawn locations. Repopulate them.
+                var spawnerQuery = EntityQueryEnumerator<SpawnPointComponent>();
+                while (spawnerQuery.MoveNext(out var spawnId, out var spawnComp))
                 {
-                    players[(int)overridePrio].Add(id);
-                    return;
+                    if (spawnComp.Job == comp.CivilianSurvivorJob)
+                        spawners.Add(spawnId);
                 }
             }
         }
-
-        if (profile.JobPriorities.TryGetValue(job, out var prio) && prio > JobPriority.Never)
+        else if (spawners.Count <= 0)
         {
-            players[(int)prio].Add(id);
-        }
-    }
-
-    private void SpawnSurvivorsFromCandidates(
-        CMDistressSignalRuleComponent comp,
-        RulePlayerSpawningEvent ev,
-        Dictionary<ProtoId<JobPrototype>, List<NetUserId>[]> candidates,
-        Dictionary<ProtoId<JobPrototype>, List<EntityUid>> spawners,
-        Dictionary<ProtoId<JobPrototype>, List<EntityUid>> spawnersLeft,
-        int initialPlayerCount)
-    {
-        var priorities = Enum.GetValues<JobPriority>().Length;
-        var totalSurvivors = (int)Math.Clamp((int)Math.Round(initialPlayerCount / _marinesPerSurvivor), _minimumSurvivors, _maximumSurvivors);
-        var selected = 0;
-
-        for (var i = priorities - 1; i >= 0; i--)
-        {
-            foreach (var (job, players) in candidates)
+            // Spawners exist for their actual job but we ran out of spawners. Repopulate them.
+            var spawnerQuery = EntityQueryEnumerator<SpawnPointComponent>();
+            while (spawnerQuery.MoveNext(out var spawnId, out var spawnComp))
             {
-                var ignoreLimit = comp.IgnoreMaximumSurvivorJobs.Contains(job);
-                var playerNames = players[i].Select(p => ev.Profiles.TryGetValue(p, out var prof) ? prof.Name : p.ToString());
-                Log.Info($"Rolling survivor job {job} with priority {i} and players {string.Join(", ", playerNames)}");
-                while (players[i].Count > 0 && (ignoreLimit || selected < totalSurvivors))
-                {
-                    if (TrySpawnSingleSurvivor(job, players[i], comp, ev, spawnersLeft, spawners, out var playerId))
-                    {
-                        var name = ev.Profiles.TryGetValue(playerId, out var prof) ? prof.Name : playerId.ToString();
-                        Log.Info($"Spawned survivor job {job} with name/id {name}, ignore limit: {ignoreLimit}");
-                        RemoveCandidateFromAllLists(candidates, playerId);
-                        if (!ignoreLimit)
-                            selected++;
-                    }
-                    else
-                    {
-                        Log.Info($"Stopped rolling survivor job {job}");
-                        break;
-                    }
-                }
+                if (spawnComp.Job == actualJob)
+                    spawners.Add(spawnId);
             }
         }
-    }
 
-    private void RemoveCandidateFromAllLists(
-        Dictionary<ProtoId<JobPrototype>, List<NetUserId>[]> candidates,
-        NetUserId playerId)
-    {
-        foreach (var (_, priorityLists) in candidates)
+        if (spawners.Count <= 0)
         {
-            foreach (var list in priorityLists)
-            {
-                list.Remove(playerId);
-            }
-        }
-    }
-
-    private bool TrySpawnSingleSurvivor(
-        ProtoId<JobPrototype> job,
-        List<NetUserId> list,
-        CMDistressSignalRuleComponent comp,
-        RulePlayerSpawningEvent ev,
-        Dictionary<ProtoId<JobPrototype>, List<EntityUid>> spawnersLeft,
-        Dictionary<ProtoId<JobPrototype>, List<EntityUid>> spawners,
-        out NetUserId spawnedId)
-    {
-        var playerId = _random.Pick(list);
-        if (!_player.TryGetSessionById(playerId, out var player))
-        {
-            list.Remove(playerId);
-            spawnedId = default;
-            return false;
+            // Even after trying to repopulate spawners, we still ended up with none. Something went wrong.
+            Log.Error($"Failed to repopulate spawners for either {actualJob} or {comp.CivilianSurvivorJob}. Could not spawn survivor {player.Session}.");
+            return;
         }
 
-        var spawnAsJob = DetermineSurvivorJob(job, playerId, comp, out var scenarioSuccess, out var stop);
-        if (stop)
-        {
-            spawnedId = default;
-            return false;
-        }
+        var spawner = _random.PickAndTake(spawners);
 
-        var selectRandomVariant = SelectedPlanetMap?.Comp.SelectRandomSurvivorVariant ?? false;
-        if (!DecrementOriginalJobSlot(job, comp, selectRandomVariant, scenarioSuccess, ref spawnAsJob))
-        {
-            spawnedId = default;
-            return false;
-        }
-
-        var spawner = FindSurvivorSpawner(spawnAsJob, comp, spawnersLeft, spawners, out stop);
-        if (stop)
-        {
-            spawnedId = default;
-            return false;
-        }
-
-        list.Remove(playerId);
-        ev.PlayerPool.Remove(player);
-        GameTicker.PlayerJoinGame(player);
-
-        var profile = GameTicker.GetPlayerProfile(player);
-        var coordinates = _transform.GetMoverCoordinates(spawner);
-        var survivorMob = _stationSpawning.SpawnPlayerMob(coordinates, spawnAsJob, profile, null);
+        var survivorMob = _stationSpawning.SpawnPlayerMob(
+            _transform.GetMoverCoordinates(spawner),
+            actualJob,
+            player.Profile,
+            null);
 
         if (!_mind.TryGetMind(playerId, out var mind))
             mind = _mind.CreateMind(playerId);
 
         RemCompDeferred<TacticalMapUserComponent>(survivorMob);
         _mind.TransferTo(mind.Value, survivorMob);
-        _roles.MindAddJobRole(mind.Value, jobPrototype: spawnAsJob);
-        _playTime.PlayerRolesChanged(player);
+        _roles.MindAddJobRole(mind.Value, jobPrototype: actualJob);
+        _playTime.PlayerRolesChanged(player.Session);
 
-        RaiseLocalEvent(survivorMob, new PlayerSpawnCompleteEvent(survivorMob, player, spawnAsJob, false, true, 0, default, profile), true);
-
-        spawnedId = playerId;
-        return true;
+        RaiseLocalEvent(survivorMob, new PlayerSpawnCompleteEvent(survivorMob, player.Session, actualJob, false, true, 0, default, player.Profile), true);
     }
 
     private ProtoId<JobPrototype> DetermineSurvivorJob(
@@ -346,75 +188,5 @@ public sealed partial class CMDistressSignalRuleSystem
         }
 
         stop = true;
-    }
-
-    /// <summary>
-    /// Decrements the original job's slot count. Also, handles random variant override when enabled and the scenario didn't succeed.
-    /// This matches legacy behavior where the decrement always targets the original job, not the variant.
-    /// </summary>
-    private bool DecrementOriginalJobSlot(
-        ProtoId<JobPrototype> job,
-        CMDistressSignalRuleComponent comp,
-        bool selectRandomVariant,
-        bool scenarioSuccess,
-        ref ProtoId<JobPrototype> spawnAsJob)
-    {
-        for (var i = 0; i < comp.SurvivorJobs.Count; i++)
-        {
-            var (survJob, amount) = comp.SurvivorJobs[i];
-            if (survJob != job)
-                continue;
-
-            if (!scenarioSuccess && selectRandomVariant &&
-                comp.SurvivorJobVariants != null &&
-                comp.SurvivorJobVariants.TryGetValue(job, out var randomInsertList) &&
-                randomInsertList.Count > 0)
-            {
-                spawnAsJob = _random.Pick(randomInsertList).Variant;
-            }
-
-            if (amount == -1)
-                return true;
-
-            if (amount <= 0)
-                return false;
-
-            comp.SurvivorJobs[i] = (survJob, amount - 1);
-        }
-        return true;
-    }
-
-    private EntityUid FindSurvivorSpawner(
-        ProtoId<JobPrototype> spawnAsJob,
-        CMDistressSignalRuleComponent comp,
-        Dictionary<ProtoId<JobPrototype>, List<EntityUid>> spawnersLeft,
-        Dictionary<ProtoId<JobPrototype>, List<EntityUid>> spawners,
-        out bool stop)
-    {
-        stop = false;
-
-        if (!spawnersLeft.TryGetValue(spawnAsJob, out var jobSpawners) &&
-            !spawnersLeft.TryGetValue(comp.CivilianSurvivorJob, out jobSpawners))
-        {
-            stop = true;
-            return default;
-        }
-
-        if (jobSpawners.Count == 0)
-        {
-            if (spawners.TryGetValue(comp.CivilianSurvivorJob, out var fallbackSpawners))
-            {
-                jobSpawners.Clear();
-                jobSpawners.AddRange(fallbackSpawners);
-            }
-
-            if (jobSpawners.Count == 0)
-            {
-                stop = true;
-                return default;
-            }
-        }
-
-        return _random.PickAndTake(jobSpawners);
     }
 }

@@ -32,6 +32,7 @@ public sealed partial class StationJobsSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<StationInitializedEvent>(OnStationInitialized);
+        SubscribeLocalEvent<CollectingAssignmentsEvent>(OnCollectingAssignments); // RMC
         SubscribeLocalEvent<StationJobsComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<StationJobsComponent, StationRenamedEvent>(OnStationRenamed);
         SubscribeLocalEvent<StationJobsComponent, ComponentShutdown>(OnStationDeletion);
