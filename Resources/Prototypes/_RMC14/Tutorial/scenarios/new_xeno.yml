@@ -1,0 +1,114 @@
+﻿# Sentry that does very little damage
+- type: entity
+  parent: RMCSentry
+  id: RMCTutorialSentry
+  suffix: Tutorial
+  components:
+  - type: RMCTutorialDummy
+    removeComponents:
+    - type: Destructible
+  - type: GunDamageModifier
+    multiplier: 0.1
+
+# Fake Missiles that does very little damage to show off CAS
+- type: entity
+  parent: RMCDropshipMissileExplosionWidowmaker
+  id: RMCTutorialWidowmakerExplosion
+  suffix: Tutorial
+  components:
+  - type: DropshipAmmo
+    travelTime: 0
+
+    explosion:
+      total: 200
+      slope: 10
+      max: 4
+
+- type: entity
+  parent: RMCDropshipMissileExplosionNapalm
+  id: RMCTutorialNapalmExplosion
+  suffix: Tutorial
+  components:
+  - type: DropshipAmmo
+    travelTime: 0
+    explosion:
+      total: 30
+      slope: 3
+      max: 30
+    fire:
+      type: RMCTileFireNapalm
+      range: 1
+      cardinalRange: 2
+
+# Scripted CAS flare, fires "fake" missile when entered
+- type: entity
+  id: RMCTutorialCASFlare
+  name: signal flare
+  suffix: Tutorial
+  description: A green UNMC issued signal flare. The telemetry computer works on chemical reaction that releases smoke and light and thus works only while the flare is burning.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/cas_flares.rsi
+    layers:
+    - map: [ "enum.ExpendableLightVisualLayers.Base" ]
+      state: flare
+    - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
+      sprite: _RMC14/Objects/Misc/cas_flares.rsi
+      state: flare_flame
+      color: "#A7FFA7"
+    - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
+      sprite: _RMC14/Objects/Misc/cas_flares.rsi
+      state: overlay
+  - type: Icon
+    sprite: _RMC14/Objects/Misc/cas_flares.rsi
+    state: flare
+  - type: PointLight
+    enabled: true
+    radius: 1
+    energy: 5.0
+    netsync: false
+    color: "#AACCAA"
+  - type: Physics
+    bodyType: Static
+  - type: AmbientSound
+    enabled: true
+    volume: 0.5
+    range: 4
+    sound:
+      path: /Audio/Items/Flare/flare_burn.ogg
+      params:
+        loop: true
+  - type: RMCTutorialSpawner
+    spawnPrototype: RMCTutorialWidowmakerExplosion
+    spawnOffsetY: 0
+  - type: RMCTutorialDummy
+    factions:
+    - RMCXeno
+  - type: Fixtures
+    fixtures:
+      tutorialTrigger:
+        shape:
+          !type:PhysShapeCircle
+          radius: 2
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+        hard: false
+
+# Dummy Hivelord that should be really easy to kill
+- type: entity
+  parent: CMXenoHivelord
+  id: RMCTutorialHivelordDeathProp
+  suffix: Tutorial
+  components:
+  - type: RMCTutorialDummy
+    removeComponents:
+    - type: GhostRole
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      40: Critical
+      80: Dead
+  - type: CMArmor
+    explosionArmor: 0
