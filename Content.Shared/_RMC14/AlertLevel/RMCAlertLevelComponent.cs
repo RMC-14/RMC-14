@@ -47,7 +47,7 @@ public sealed partial class RMCAlertLevelComponent : Component
 
     // TODO RMC14
     [DataField, AutoNetworkedField]
-    public SoundSpecifier? DeltaSound = new SoundPathSpecifier("/Audio/Misc/gamma.ogg");
+    public SoundSpecifier? DeltaSound = new SoundPathSpecifier("/Audio/_RMC14/Announcements/Marine/notice2.ogg");
 
     [DataField, AutoNetworkedField]
     public ProtoId<RadioChannelPrototype> RadioChannel = "MarineCommon";
