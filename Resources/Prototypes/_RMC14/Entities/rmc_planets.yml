@@ -7,7 +7,7 @@
     camouflage: Jungle
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingLV624
-    announcement: "An automated distress signal has been received from the archaeological site of Lazarus Landing, on the border world of LV-624. A response team from the UNS Almayer will be dispatched shortly to investigate."
+    announcement: "An automated distress signal has been received from the archaeological site of Lazarus Landing, on the exomoon of LV-624. A response team from the UNS Almayer will be dispatched shortly to investigate."
     #smallHostVariants:
       #- RMCMobSmallHostFarwa
       #- CMMobSmallHostMonkey
@@ -167,7 +167,7 @@
     camouflage: Snow
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingShivas
-    announcement: "An automated distress signal has been received from archaeology site \"Shiva's Snowball\", on border ice world \"Ifrit\". A response team from the UNS Almayer will be dispatched shortly to investigate."
+    announcement: "An automated distress signal has been received from multinational research facility \"Shiva's Snowball\", on the isolated ice world \"Ifrit\". A response team from the UNS Almayer will be dispatched shortly to investigate."
     #smallHostVariants:
       #RMCMobSmallHostYiren
     nightmareScenarios:
@@ -486,7 +486,7 @@
     camouflage: Urban
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingHybrisa
-    announcement: "An automated distress signal has been received from the Weston-Yamada colony, Hybrisa Prospera — a vast, city-like settlement renowned for its immense wealth, extensive mining operations, and thriving commerce. Recently fully acquired from the TSE, this former colony is now a key asset for Weston-Yamada, with a sprawling urban center housing thousands of residents and numerous smaller outer colonies under its control. The UNS Almayer has been dispatched to investigate the situation."
+    announcement: "An automated distress signal has been received from the Three Suns Empire colony, Hybrisa Prospera — a vast, city-like settlement renowned for its immense wealth, extensive mining operations, and thriving commerce. Although owned by the TSE, this colony is also a key asset for Weston-Yamada, with a sprawling urban center housing thousands of residents and numerous smaller outer colonies under its control. The UNS Almayer has been dispatched to investigate the situation."
     #smallHostVariants:
       #CMMobSmallHostMonkey
     nightmareScenarios:
@@ -560,7 +560,7 @@
     minPlayers: 130
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingSorokyne
-    announcement: "An automated distress signal has been recieved from a mining colony on border world LV-976, \"Sorokyne Outpost\". A response team from the UNS Almayer will be dispatched shortly to investigate."
+    announcement: "An automated distress signal has been recieved from a Socialist Progressive People's mining colony on the border world LV-976, \"Sorokyne Outpost\". A response team from the UNS Almayer will be dispatched shortly to investigate."
     #smallHostVariants:
       #RMCMobSmallHostStok
       #CMMobSmallHostKobold

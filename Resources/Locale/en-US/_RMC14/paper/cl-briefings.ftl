@@ -7,19 +7,21 @@ cl-briefing-kutjevo =
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
     {"[italic]    The ship AI aboard your stationed ship has informed us that a distress has been picked up from the colony on LV-686, and that a mission is being prepared to investigate the disturbance. As such, the special services division has prepared a briefing on the nature of the colony, and known potential threats to its operation. Classified materials are excluded from this briefing and should be requested separately, and as such, the contents of this document may be shared or withheld at your discretion, unless otherwise specified.[/italic]"}
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-    {"[bold]Planet:[/bold]"} LV-686
+    {"[bold]Planet:[/bold]"} LV-686 (Dykuma I)
     {"[bold]Facility:[/bold]"} Kutjevo Refinery
     {"[bold]Operator:[/bold]"} Weston-Yamada
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
     {"[bold][head=3]History and Purpose[/head][/bold]"}
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-    Discovered in 2097, the planet Dykuma I, also known as LV-686, was originally marked by geological survey as a potentially terraformable desert planet, was later found to be abundantly rich in underground aquifers of exceptionally high purity, and as such an independent core colony began colonization efforts in the 2100s.
+    LV-686, also known as Dykuma I, is a relatively large desert world known for rock outcroppings and mountainous terrain. Although it was initially believed to pose a valid target for terraforming efforts, the discovery of highly-pure aquifiers lead to the planet being deemed a high-value site.
 
-    Shortly after the colonization efforts began, a hostile takeover by the Canadian Space Affairs Ministry in 2105 brought the colony under new ownership, soon sold to the Weston-Yamada Corporation, where in 2107 it began operations as a bottling plant under the [italic]Weston Spring[/italic] brand.
+    Multiple Corporations would begin to bid for ownership of the region. Weston-Yamada would outbid their competitors, gaining the rights to establish multiple bottling plants, with Kutjevo Refinery, official referred to as [italic]Weston Spring Bottling Center No. 8[/italic], being one among many.
 
-    As the demand for spring water and the size of the colony's operations both have grown, the deposits of drinking water at the original site for the colony have dried up, and as such the sprawl has continued to expand outwards, ever in search of more deposits to tap.
+    Kutjevo Refinery itself has become one of the foremost sites for water refinement and exportation. Located east of a sizable United Nations colony, it produces over 1.6 Million gallons of water per day, which is bottled under the [italic]Weston Spring[/italic] brand.
 
-    With an estimated 2500 colonists, the refinery has become a bustling town, and the number one provider of drinkable water in the Zephyron Sector and surrounding space, as well as a significant supplier for the [italic]Weston Spring[/italic] brand.
+    Due to concerns over the aquafiers across Dykuma eventually drying up, Kutjevo Refinery has invested in botanical research and exportation. Dykuma I's harsh environs has led to minimal crop yields, although there are hopes that continued research will lead to increased growth.
+
+    Internally, Weston-Yamada remains split on what will happen to Dykuma I if the aquifiers cease to produce water, with ideas such as research facilities, mining operations, terraforming, and manufacturing being proposed.
 
     {"[bold][head=3]Company Priorities[/head][/bold]"}
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
@@ -81,17 +83,19 @@ cl-briefing-lv624 =
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
     {"[italic]   The ship AI aboard your stationed ship has informed us that a distress signal has been picked up from the colony in orbit on LV-624, and that a mission is being prepared to investigate the disturbance. As such, the Special Services Division has prepared a briefing on the nature of the colony, and known potential threats to it's operation. Classified materials are excluded from this briefing and should be requested separately, and as such, the contents of this document may be shared or withheld at your discretion, unless otherwise specified.[/italic]"}
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-    {"[bold]Planet: [/bold]LV-624"}
+    {"[bold]Planet: [/bold]LV-624 (Cernunnos)"}
     {"[bold]Facility: [/bold]Lazarus Landing"}
     {"[bold]Operator: [/bold]Weston-Yamada"}
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
     {"[head=3]History & Purpose[/head]"}
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-    Lazarus Landing was established by Weston-Yamada following the discovery of multiple xeno-archeological structures in the jungles and caves around the colony grounds.
+    Lazarus Landing is a small research facility located on the Exomoon LV-624, a verdant, humid jungle moon orbiting the gas giant Abnoba.
 
-    Currently, the exact origin of these structures are unknown, although current theories suggest the existence of an interstellar civilization before modern times. R&D's Archeological Department has a large presence on the colony.
+    Due to LV-624's highly active magnetosphere, dense atmosphere, diverse biosphere, and the presence of liquid water, the planet itself became a prime target for environmental research, leading to the exomoon being colonized by Weston-Yamada.
 
-    Furthermore, the United Nations "Whiskey Outpost" military base is also located on LV-624, although interactions between the base and the colony are practically non-existant.
+    During intial surveys by Weston-Yamada's Tartarus Mining subsidiary, a collection of ancient structures of unknown origin were found within the caves north of the colony. R&D's Xenoarcheology Department would utilize connections within the local administration to prevent TMCC from maintaining operations near the structures.
+
+    Lazarus Landing currently maintains a large Research and Development Division presence, with archeological, xenobiological, robotics, and environmental researchers being a common sight, and the majority of funding for the colony being recived by these scientific teams.
 
     {"[head=3]Company Priorities[/head]"}
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
@@ -125,7 +129,11 @@ cl-briefing-fiorina =
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
     Fiorina Science Annex was initially founded by Weston-Yamada to take advantage of the rich platinum veins located on the planet of Fiorina 161. However the sustainability of this operation was overestimated; after less then a decade, extraction of platinum was deemed to be more expensive then could be recouped.
 
-    In order to prevent serious loss of profit, Weston-Yamada partnered with the United Nations to establish Fiorina Science Annex, dedicated to the housing of High-Security inmates, as well as scientific research. Current estimates expect ~300 prisoners and ~120 employees to be on the station. Currently, the decommission of the station is being discussed by Weston-Yamada higher ups due to high operation costs for little gain.
+    In order to prevent serious loss of profit, Weston-Yamada partnered with the United Nations to establish Fiorina Science Annex, dedicated to the housing of High-Security inmates, as well as scientific research, which is spearheaded by Weston-Yamada. Current estimates expect ~300 prisoners and ~120 employees to be on the station.
+
+    Rumors of unethical experimentation have resulted in Observers from the Interstellar Life Rights Council being dispatched and placed among the facility's staff.
+
+    Currently, the decommission of the station is being discussed by Weston-Yamada higher ups due to high operation costs for little gain.
 
     {"[head=3]Company Priorities[/head]"}
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
@@ -153,13 +161,15 @@ cl-briefing-hybrisa =
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
     {"[bold]Planet: [/bold]LV-759"}
     {"[bold]Facility: [/bold]Hybrisa Prospera"}
-    {"[bold]Operator: [/bold]Weston-Yamada"}
+    {"[bold]Operator: [/bold]Three Suns Empire"}
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
     {"[head=3]History & Purpose[/head]"}
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-    Hybrisa Prospera is one of the largest colonies in the Outer Veil and Zypheron Sector. Featuring a population in the tens of thousands, as well as multiple outposts and towns outside of the capital city, it has become a lynchpin in expanding into the Frontier.
+    Hybrisa Prospera is a large, notable urban colony in the Outer Veil and Zypheron Sector. Featuring a population in the tens of thousands, as well as multiple outposts and towns outside of the capital city, it has become a lynchpin in expanding into the Frontier.
 
-    Previously owned by the Three-Sun Empire as a mining colony, Weston-Yamada has recently gained ownership. It's location has allowed it to become a nexus of interstellar trade and transit. It is estimated to become the most populated world in the outer rim.
+    Owned by the Three-Sun Empire as a mining colony, Weston-Yamada retains a substantial presence, owning many operations and businesses within the colony, as well as carrying influence in the local administration. It's location has allowed it to become a nexus of interstellar trade and transit.
+
+    Analysts belonging to the Three Suns Empire and Weston-Yamada Corporation estimate that Hybrisa Prospera could become one of the most populated worlds in the outer rim, given enough time.
 
     Recent reports indicate the presence of a large excavated vessel of unknown origins to the south of the colony, presumed to have crashed thousands of years ago. Little is known about it at this time, as local R&D representatives have kept their cards close to their chest.
 
@@ -197,7 +207,7 @@ cl-briefing-chances =
 
     LV-522's harsh surface and atmospheric conditions made it an ideal testbed for the REK-160, designed to supplant the aging REK-150 line, as well as a location to engage in climatological and atmospheric research
 
-    The colony was initially established following the discovery of gold, cobalt, uranium, and beryllium. Mining-crawlers leaving the protective stormwalls are not an uncommon sight.
+    The colony was initially established following the discovery of gold, cobalt, uranium, and beryllium. Mining-crawlers leaving the protective stormwalls are not an uncommon sight. Due to the harsh planatary conditions, being placed on Chance's Claim is typically viewed as undesirable.
 
     {"[head=3]Company Priorities[/head]"}
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
@@ -258,24 +268,26 @@ cl-briefing-shivas =
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
     {"[italic]   The ship AI aboard your stationed ship has informed us that a distress signal has been picked up from the colony on LV-686, and that a mission is being prepared to investigate the disturbance. As such, the Special Services Division has prepared a briefing on the nature of the colony, and known potential threats to it's operation. Classified materials are excluded from this briefing and should be requested separately, and as such, the contents of this document may be shared or withheld at your discretion, unless otherwise specified.[/italic]"}
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-    {"[bold]Planet: [/bold]LV-52 (Ifrit)"}
+    {"[bold]Planet: [/bold]Galileo 52 (Ifrit)"}
     {"[bold]Facility: [/bold]Shiva's Snowball Research Facility"}
-    {"[bold]Operator: [/bold]Weston-Yamada"}
+    {"[bold]Operator: [/bold]Joint Administration"}
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
     {"[head=3]History & Purpose[/head]"}
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-    Shiva's Snowball was established by Weston-Yamada following a successful bid to purchase ownership of the planet. Initially established for the purposes of Climatological and Geological research, experts in archeological research would later be called in.
+    Shiva's Snowball was established by a team belonging to the United Nations, Three Suns Empire, and Weston-Yamada Corporation for the purposes of climatological and geological research. Weston-Yamada was responsible for establishing a significant quantity of the structures present on the facility, as well as supporting administrative and research operations for the colony.
 
-    The planet lies in the Altalune Drift, making it somewhat isolated. As such, the facility was designed for long-term independent habitation, including life-support systems, a botanical bay, on-site vehical repair garage, and state-of-the-art Aurora Medical Clinic.
+    Because Galileo 52 sits in a region of the Zephyron Sector lacking significant infrastructure or star density, it remains highly isolated, and Shiva's Snowball has been forced to become mostly self-sufficient, and equipped for long-term habitation.
 
-    Shiva's Snowball also has a very small team of UN researchers, CMB Deputies and Peacekeepers stationed on-site, sent to aid joint UN-WEYA research into sub-zero climates.
+    To this end, the colony has life-support systems, a botanical bay, on-site vehicle repair garage, and state-of-the-art Aurora Medical Clinic.
+
+    Due to the tensions that have arisen between staff as a result of "Cabin Fever", the Administration Team for Shiva's Snowball have requested Peacekeepers belonging to the Interstellar Life Rights Council to help maintain the peace.
 
     {"[head=3]Company Priorities[/head]"}
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
     Reestablishment of communications, as well as any other systems (Such as heating and life-support) are a priority.
     Damage to the facility should also be assessed during and after the operation to gauge habitability.
 
-    If the colony is deemed no longer safe for current habitation, due to systems failures or an active threat, any Weston-Yamada or United Nations Researchers should be extracted, along with any other inhabitants of the colony.
+    If the colony is deemed no longer safe for current habitation, due to systems failures or an active threat, any Weston-Yamada, United Nations, or Three Suns Empire Researchers should be extracted, along with any other inhabitants of the colony.
 
     Recovery of important research notes, data, and assets is deemed important, and should be done by the shipside intelligence officers.
 
@@ -304,7 +316,9 @@ cl-briefing-sorokyne =
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
     {"[head=3]History & Purpose[/head]"}
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-    Sorokyne Strata is an average-sized SPP colony in Zypheron, known primarily for its purpose of mining minerals such as carbon, lithium, and silicon, as well as geothermal research. SPP state-owned firm Sestra Solutions was delegated with constructing the colony.
+    Sorokyne Strata is an average-sized SPP colony in Zypheron, known primarily for its purpose of mining minerals such as carbon, lithium, and silicon, as well as geothermal research. The colony itself was established by the SPP's Ministry of Space Colonization.
+
+    The terrain of Thermae I has a highly active lithosphere and asthenosphere, along with a dense jungle canopy across much of the planet.
 
     Little is known about Sorokyne Strata due to it's affiliation and ownership by the SPP. A small military presence is confirmed to be on-site.
 
