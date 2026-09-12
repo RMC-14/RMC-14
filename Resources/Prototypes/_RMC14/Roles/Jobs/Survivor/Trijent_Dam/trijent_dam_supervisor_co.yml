@@ -1,0 +1,70 @@
+﻿- type: job
+  parent: CMSurvivor
+  id: RMCSurvivorTrijentDamSupervisor
+  name: rmc-job-name-survivor-trijent-dam-supervisor
+  description: cm-job-description-commanding-officer
+  playTimeTracker: RMCJobSurvivorCO
+  ranks:
+    RMCRankWeYaExecutiveSupervisor: []
+  startingGear: RMCGearSurvivorTrijentDamSupervisor
+  accessGroups:
+  - ColonistCorporate
+  roleWeight: 0.25
+  icon: "CMJobIconExecSuper"
+  hasIcon: true
+  spawnMenuRoleName: Dam Supervisor (Trijent Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetSurvivorTrijentDamSupervisor
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: CommandAccent
+    - type: RMCSurvivor
+    - type: InnateCommandSpeech
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+      - Civilian
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetNoGun
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: exec_super
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_wy_management
+  useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
+
+- type: startingGear
+  id: RMCGearSurvivorTrijentDamSupervisor
+  equipment:
+    id: CMIDCardLiaisonColony
+    jumpsuit: RMCJumpsuitLiaisonBlueTrijentDamSupervisor
+    outerClothing: RMCHazardVestBlue
+    eyes: RMCWeldingGoggles
+    head: RMCHardhatBlue
+    belt: RMCBeltHolsterNailgunFill
+    back: CMSatchelEngineerSurvivorFill
+    gloves: CMHandsBlackInsulated
+    shoes: RMCShoesJackboots
+    ears: RMCHeadsetDistressWeYa
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchMedkitPMCFilled
+  inhand:
+    - CMPen
+    - RMCWeYaClipboard
+
+- type: entity
+  parent: CMJumpsuitLiaisonBlack
+  id: RMCJumpsuitLiaisonBlueTrijentDamSupervisor
+  components:
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchWeYaBlack
+  - type: WebbingClothing
+    startingWebbing: RMCToolWebbingFilled
