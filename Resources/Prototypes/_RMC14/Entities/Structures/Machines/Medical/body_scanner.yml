@@ -38,6 +38,7 @@
     channel: Equipment
   - type: DragInsertContainer
     containerId: body_scanner
+    useVerbs: false
   - type: NoStunOnExit # Custom stun exit behavior + sound in SharedBodyScannerSystem
   - type: ContainerContainer
     containers:
