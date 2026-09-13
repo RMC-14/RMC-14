@@ -19,6 +19,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/shiva_props.rsi
     state: flamingo_snow
+    drawdepth: Objects
 
 - type: entity
   parent: RMCPropLawnFlamingoSnow

@@ -66,3 +66,15 @@
     solutions:
       drainBuffer:
         maxVol: 200
+
+- type: entity
+  parent: CMSink
+  id: RMCSinkPuddle
+  name: puddle
+  description: A puddle of hopefully clean water.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/sink.rsi
+    layers:
+    - state: puddle
+    drawdepth: FloorObjects

@@ -287,11 +287,90 @@
   id: RMCJumpsuitRedShorts
   name: red shorts
   description: A ratty pair of red shorts. Smells of cigarettes.
+  suffix: Beach Bum
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/varadero_shorts.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Athletic/shorts_red.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/varadero_shorts.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Athletic/shorts_red.rsi
+
+- type: entity
+  parent: RMCJumpsuitRedShorts
+  id: RMCJumpsuitAthleticShortsRed
+  name: red athletic shorts
+  description:  95% Polyester, 5% Spandex! 
+  suffix: athletic
+
+- type: entity
+  parent: RMCJumpsuitAthleticShortsRed
+  id: RMCJumpsuitAthleticShortsGreen
+  name: green athletic shorts
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Athletic/shorts_green.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Athletic/shorts_green.rsi
+
+- type: entity
+  parent: RMCJumpsuitAthleticShortsRed
+  id: RMCJumpsuitAthleticShortsBlue
+  name: blue athletic shorts
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Athletic/shorts_blue.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Athletic/shorts_blue.rsi
+
+- type: entity
+  parent: RMCJumpsuitAthleticShortsRed
+  id: RMCJumpsuitAthleticShortsBlack
+  name: black athletic shorts
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Athletic/shorts_black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Athletic/shorts_black.rsi
+
+- type: entity
+  parent: RMCJumpsuitAthleticShortsRed
+  id: RMCJumpsuitAthleticShortsGrey
+  name: grey athletic shorts
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Athletic/shorts_grey.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Athletic/shorts_grey.rsi
+
+- type: entity
+  parent: RMCJumpsuitAthleticShortsRed
+  id: RMCJumpsuitAthleticSwimsuitBlue
+  name: blue swimsuit
+  description: An old-fashioned swimsuit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Athletic/swimsuit_blue.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Athletic/swimsuit_blue.rsi
+
+- type: entity
+  parent: RMCJumpsuitAthleticSwimsuitBlue
+  id: RMCJumpsuitAthleticSwimsuitGreen
+  name: green swimsuit
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Athletic/swimsuit_green.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Athletic/swimsuit_green.rsi
+
+- type: entity
+  parent: RMCJumpsuitAthleticSwimsuitBlue
+  id: RMCJumpsuitAthleticSwimsuitPurple
+  name: purple swimsuit
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Athletic/swimsuit_purple.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Athletic/swimsuit_purple.rsi
 
 - type: entity
   parent: RMCMarineUniformBase

@@ -258,6 +258,16 @@
     follow: true
     location: Mister Wiggles
 
+- type: entity
+  parent: CMMobWiggles
+  id: CMMobCorgiPuppy
+  name: corgi puppy
+  suffix: RMC
+  description: It's a corgi puppy.
+  components:
+  - type: WarpPoint
+    follow: true
+    location: corgi puppy
 
 - type: entity
   parent: RMCSimpleMob
@@ -421,6 +431,28 @@
     follow: true
     location: Buttons
 
+- type: entity
+  parent: RMCMobCatCalico
+  id: RMCMobCatKitten
+  name: kitten
+  description: D'aaawwww
+  components:
+  - type: Sprite
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: kitten
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: kitten
+      Critical:
+        Base: kitten_dead
+      Dead:
+        Base: kitten_dead
+  - type: WarpPoint
+    follow: true
+    location: kitten
+
 # Spawners
 - type: entity
   parent: SpawnMobMouse
@@ -524,6 +556,15 @@
     - CMMobWiggles
 
 - type: entity
+  parent: CMSpawnMobWiggles
+  id: CMSpawnMobCorgiPuppy
+  name: Corgi Puppy Spawner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - CMMobCorgiPuppy
+
+- type: entity
   parent: MarkerBase
   id: CMSpawnMobJones
   name: Jones Spawner
@@ -597,6 +638,16 @@
   - type: ConditionalSpawner
     prototypes:
     - RMCMobButtons
+
+- type: entity
+  parent: RMCSpawnMobButtons
+  id: RMCSpawnMobKitten
+  name: Kitten Spawner
+  suffix: RMC
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobCatKitten
 
 - type: entity
   parent: SpawnMobMouse

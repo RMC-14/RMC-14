@@ -46,5 +46,6 @@
   - type: Sprite
     sprite: _RMC14/Structures/Props/biomass_turbine.rsi
     state: biomass_turbine_border
+    drawdepth: WallTops
   - type: Physics
     canCollide: false

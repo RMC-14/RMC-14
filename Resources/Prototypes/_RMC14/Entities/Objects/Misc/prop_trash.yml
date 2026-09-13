@@ -53,3 +53,62 @@
   components:
   - type: Sprite
     state: coffeecuppajoelidstack
+
+- type: entity
+  parent: RMCPropTrashFull
+  id: RMCPropPlate
+  name: plate
+  suffix: RMC
+  description: This is rubbish.
+  components:
+  - type: Sprite
+    state: plate
+
+- type: entity
+  parent: RMCPropPlate
+  id: RMCPropPlateCeramic
+  name: ceramic plate
+  description: A ceramic plate, it doesn't seem like it's done its patriotic duty of being a stand for food yet. Now that you look at it, this might make a good throwing weapon...
+  components:
+  - type: Sprite
+    state: ceramic_plate
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 5
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 5
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 5
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -8
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: RMCPropPlate
+  id: RMCPropTrashTray
+  name: tray
+  description: A metal tray to lay food on.
+  components:
+  - type: Sprite
+    state: tray
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 12
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 10

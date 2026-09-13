@@ -198,6 +198,9 @@
     {
       "name": "sink-fill-1",
       "directions": 4
+    },
+    {
+      "name": "puddle"
     }
   ]
 }
