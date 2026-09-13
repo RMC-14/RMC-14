@@ -1,31 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Acid on guns can be removed with extinguishers provided the gun still
-      has its second wind.
-    type: Add
-  - message: Guns now have a second wind effect, requiring a 2nd acid to be destroyed.
-    type: Add
-  - message: Acid on items now prevent picking it.
-    type: Add
-  - message: Acid on stackable item prevents splitting or merging.
-    type: Add
-  - message: Walls can now be weld repaired using alt interact
-    type: Add
-  - message: Walls now show integrity in examine text
-    type: Add
-  - message: Xenos now make acid holes when breaking a wall through claw or acid,
-      can be traversed by small xenos. To remove wall, hit or click on acid hole &
-      you will begin destroying it provided you have strong enough claws. Acid holes
-      can be repaired with sheets & nailgun.
-    type: Add
-  - message: Walls can now be repaired with nailgun & plasteel / metal / wood
-    type: Add
-  - message: Girders now have a damaged state that can be repaired with welder.
-    type: Add
-  id: 3143
-  time: '2026-04-22T04:00:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9019
 - author: TadJohnson00
   changes:
   - message: RCM ERT and the TSE fax responder have had their UNMC equipment replaced
@@ -4461,5 +4434,13 @@
   id: 3642
   time: '2026-09-12T23:21:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10145
+- author: Dygon
+  changes:
+  - message: The Queen can no longer use the rest action while having an attached
+      ovipositor.
+    type: Fix
+  id: 3643
+  time: '2026-09-13T00:08:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9471
 Name: RMC14
 Order: -1
