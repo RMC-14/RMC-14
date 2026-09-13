@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: TadJohnson00
-  changes:
-  - message: RCM ERT and the TSE fax responder have had their UNMC equipment replaced
-      with appropriate RCM equivalents.
-    type: Tweak
-  id: 3144
-  time: '2026-04-22T04:06:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9666
 - author: Ian321
   changes:
   - message: Unstacking upgraded burn and trauma kits no longer turns them into normal
@@ -4442,5 +4434,20 @@
   id: 3643
   time: '2026-09-13T00:08:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9471
+- author: kleinerstation13
+  changes:
+  - message: Reworked the Riot in Progress insert to bring it in line with other military-type
+      inserts - Two specialist roles which spawn alongside the other survivors (a
+      doctor and engineer role) have been added and the Riot Control Team Leader can
+      now construct basic barricades and has leadership skills.
+    type: Tweak
+  - message: Replaced UN gear with CMB Riot Control gear in the Riot in Progress insert.
+      This is a purely visual change
+    type: Tweak
+  - message: Fixed the armory lockers in the Riot in Progress insert being inaccessible
+    type: Fix
+  id: 3644
+  time: '2026-09-13T01:24:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10761
 Name: RMC14
 Order: -1
