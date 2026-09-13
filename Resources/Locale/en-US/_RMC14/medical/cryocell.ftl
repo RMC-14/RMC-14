@@ -33,6 +33,11 @@ rmc-cryo-cell-beaker-no-beaker = No beaker loaded!
 rmc-cryo-cell-beaker-empty = Beaker is empty!
 rmc-cryo-cell-beaker-eject = Eject
 
+rmc-cryo-cell-eject-confirmation-title = Eject Confirmation
+rmc-cryo-cell-eject-confirmation-text = Would you like to eject from the cryo cell? Healing may be in progress.
+rmc-cryo-cell-eject-confirmation-confirm = Eject
+rmc-cryo-cell-eject-confirmation-cancel = Stay inside
+
 rmc-cryo-cell-verb-eject-inside = Eject self
 rmc-cryo-cell-verb-eject-outside = Eject occupant
 
@@ -47,8 +52,3 @@ rmc-cryo-cell-popup-healed = Patient's external wounds are healed.
 rmc-cryo-cell-popup-dead = Patient is dead!
 rmc-cryo-cell-popup-warning = Patient requires defibrillation!
 rmc-cryo-cell-popup-revive-now = Patient critical! REQUESTING IMMEDIATE DEFIBRILLATION!!!
-
-rmc-cryo-cell-eject-confirmation-title = Eject from Cryo Cell?
-rmc-cryo-cell-eject-confirmation-text = Are you sure you want to eject yourself from the cryo cell?
-rmc-cryo-cell-eject-confirmation-confirm = Eject
-rmc-cryo-cell-eject-confirmation-cancel = Stay Inside

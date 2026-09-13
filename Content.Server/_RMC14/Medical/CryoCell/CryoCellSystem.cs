@@ -7,7 +7,6 @@ using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Temperature;
 using Content.Shared.Atmos;
-using Content.Shared.Bed.Sleep;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
@@ -18,7 +17,6 @@ using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.StatusEffectNew;
 using Content.Shared.UserInterface;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
@@ -39,7 +37,6 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
     [Dependency] private readonly RMCSizeStunSystem _rmcSizeStun = default!;
     [Dependency] private readonly SharedRMCTemperatureSystem _rmcTemperature = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly SharedStatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly RMCUnrevivableSystem _unrevivable = default!;
@@ -299,7 +296,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
         {
             if (curBodyTemp < Atmospherics.T0C)
             {
-                _statusEffects.TrySetStatusEffectDuration(occupant, SleepingSystem.StatusEffectForcedSleeping, cryoCell.Comp.SleepDuration);
+                // Upstream sleep status doesn't work well here. You stay blind and can walk around after being ejected.
                 _rmcSizeStun.TryKnockOut(occupant, cryoCell.Comp.UnconsciousDuration);
 
                 if (damageable.DamagePerGroup.GetValueOrDefault(AirlossGroup) > 0)
