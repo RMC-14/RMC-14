@@ -47,6 +47,9 @@
       uiWindowPos: 0,3
       strippingWindowPos: 0,0
       displayName: Eyes
+      blacklist: # RMC14
+        tags:
+        - PetOnly
     - name: ears
       slotTexture: ears
       slotFlags: EARS
@@ -54,6 +57,10 @@
       uiWindowPos: 2,2
       strippingWindowPos: 2,0
       displayName: Left Ear
+      blacklist:
+        tags:
+        - PetOnly
+# RMC14 v
     - name: ears2
       slotTexture: ears
       slotFlags: EARS
@@ -61,6 +68,10 @@
       uiWindowPos: 2,3
       strippingWindowPos: 2,1
       displayName: Right Ear
+      blacklist:
+        tags:
+        - PetOnly
+# RMC14 ^
     - name: head
       slotTexture: head
       slotFlags: HEAD
@@ -108,6 +119,9 @@
       strippingWindowPos: 2,4
 #      dependsOn: jumpsuit
       displayName: ID
+      blacklist: # RMC14
+        tags:
+        - PetOnly
     - name: belt
       slotTexture: belt
       fullTextureName: template_small
