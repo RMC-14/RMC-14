@@ -137,7 +137,7 @@
       CMCombatTech: 0
       CMHospitalCorpsman: 0
       CMSmartGunOperator: 0
-      CMWeaponsSpecialist: 0
+      CMWeaponsSpecialist: 1 # RMC - One allowed rather than zero, for Scouts
       CMFireteamLeader: 0
       CMSquadLeader: 0
   - type: Tag
