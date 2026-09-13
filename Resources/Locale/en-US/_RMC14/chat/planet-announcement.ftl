@@ -26,7 +26,7 @@ rmc-announcement-planet-varadero = An automated distress signal has been receive
 
                                            No further information available at this time.
 
-rmc-announcement-planet-varadero-1 = Pan-Pan. UNS Almayer, we are detecting you on approach. This is Lieutenant #%-#^-@%#, authorization code Lima Alfa Sierra Niner, broadcasting on all stations. Stand by for a situation report.
+rmc-announcement-planet-varadero-1 = Mayday, Mayday, Mayday. UNS Almayer, we are detecting you on approach. This is Lieutenant #%-#^-@%#, authorization code Lima Alfa Sierra Niner, broadcasting on all stations. Stand by for a situation report.
 
 
                                              The base has been overrun by xenonid lifeforms at this time. What’s left of our forces has retreated through the tunnel to New Varadero City and collapsed it behind us. If you’re here to render aid, your best course of action would be to cut the infestation off from the source and secure the base itself. We’ll focus on keeping the city secure.
