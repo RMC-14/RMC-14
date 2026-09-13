@@ -1,0 +1,96 @@
+- type: job
+  parent: CMSurvivorEngineer
+  id: RMCSurvivorUNMCVehicleCrewman
+  name: cm-job-name-vc
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorEngineer
+  startingGear: RMCGearSurvivorUNMCVehicleCrewman
+  greeting: rmc-job-greeting-varadero
+  ranks:
+    RMCRankLanceCorporal: []
+  spawnMenuRoleName: UNMC Vehicle Crewman (NV Survivor)
+  icon: "RMCJobIconSurvivorVehicleCrewman"
+  hasIcon: true
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadMarineVaradero
+    - type: Skills
+      preset: RMCSkillPresetSurvivorUNMCVehicleCrewman
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetUNMCVehicleCrewman
+    - type: JobPrefix
+      prefix: cm-job-prefix-vc
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: vc
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_unmc
+    - type: Language
+      spokenLanguages:
+        - Spanish
+        - English
+      understoodLanguages:
+        - Spanish
+        - English
+      currentLanguage: English
+      defaultLanguage: English
+  useLoadoutOfJob: CMSurvivorEngineer # for inheritance
+  medals:
+    Bronze: RMCMedalBronzeService
+    Silver: RMCMedalSilverService
+    Gold: RMCMedalGoldService
+    Platinum: RMCMedalPlatinumService
+    Ruby: RMCMedalRubyService
+    Amethyst: RMCMedalAmethystService
+    Emerald: RMCMedalEmeraldService
+    Prismatic: RMCMedalPrismaticService
+
+- type: startingGear
+  id: RMCGearSurvivorUNMCVehicleCrewman
+  equipment:
+    jumpsuit: JumpsuitMarine
+    ears: RMCHeadsetMarineNV
+    gloves: RMCHandsVeteran
+    id: CMIDCardStandardDogtag
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchToolsFill
+    back: CMSatchelMarineTech
+    shoes: CMBootsBlackFilled
+  storage:
+    back:
+      - CMSheetMetal20
+  inhand:
+  - RMCVanWheel
+
+- type: entity
+  parent: RMCGearSurvivorPresetUNMC
+  id: RMCSurvivorPresetUNMCVehicleCrewman
+  name: varadero vehicle crewman preset
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: EntityPreset
+      randomOutfits:
+        - [ CMArmorHelmetM50, RMCCoatService ]
+        - [ RMCWeldingGoggles, RMCJacketWindbreaker, CMSheetPlasteel10 ]
+        - [ RMCWeldingGoggles, RMCHazardVestBlack ]
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSurvivorVehicleCrewman
+  icon:
+    sprite: _RMC14/Interface/job_icons/UNMC/other.rsi
+    state: hudsquad_nv_tc

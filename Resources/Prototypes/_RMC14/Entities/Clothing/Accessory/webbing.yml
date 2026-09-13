@@ -394,6 +394,17 @@
 
 - type: entity
   parent: CMWebbingHolster
+  id: RMCWebbingHolsterM77Survivor
+  suffix: Firefighter, Survivor, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolM77
+    - id: CMMagazinePistolM77AP # TODO RMC14: WP magazines
+    - id: CMMagazinePistolM77AP
+
+- type: entity
+  parent: CMWebbingHolster
   id: RMCWebbingHolsterBlack
   name: black shoulder holster
   description: A black handgun holster with an attached pouch, allowing two magazines or speedloaders to be stored along with it.

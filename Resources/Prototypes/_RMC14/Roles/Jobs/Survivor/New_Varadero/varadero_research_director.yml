@@ -1,0 +1,87 @@
+- type: job
+  parent: CMSurvivorCorporate
+  id: RMCSurvivorNewVaraderoResearchDirector
+  name: rmc-job-name-survivor-new-varadero-rd
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorScientist
+  startingGear: RMCGearSurvivorNewVaraderoResearchDirector
+  greeting: rmc-job-greeting-varadero
+  spawnMenuRoleName: New Varadero Research Director (NV Survivor)
+  ranks:
+    RMCRankCivilianProfessor: []
+  hasIcon: false
+  accessGroups:
+  - Colony
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: Skills
+      preset: RMCSkillPresetSurvivorResearcher
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+      - Civilian
+      - WeYa
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: goon_sci_lead
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_pmc
+    - type: JobPrefix
+      prefix: rmc-job-prefix-survivor-new-varadero-rd
+    - type: Language
+      spokenLanguages:
+      - Spanish
+      - English
+      understoodLanguages:
+      - Spanish
+      - English
+      currentLanguage: English
+      defaultLanguage: English
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetNVResearchDirector
+  useLoadoutOfJob: CMSurvivorCorporate # for inheritance
+
+- type: startingGear
+  id: RMCGearSurvivorNewVaraderoResearchDirector
+  equipment:
+    ears: RMCHeadsetDistressWeYa
+    id: RMCIDCardColonistScientist
+    pocket1: RMCPouchSurvivalFill
+    outerClothing: RMCLabcoatScience
+    head: CMHeadBeretTan
+    jumpsuit: CMJumpsuitRD
+    back: CMSatchelLiaisonSecure
+    mask: CMMaskSterile
+    gloves: CMHandsLatex
+    eyes: RMCGlassesReagentHUDGlasses
+    shoes: CMBootsBlackFilled
+  storage:
+    back:
+    - CMSheetMetal20
+    - CMClipboard
+    - CMPenClicky
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorNewVaraderoResearchDirector
+  name: survivor new varadero research director spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorNewVaraderoResearchDirector
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: entity
+  parent: RMCGearSurvivorPresetUNMC
+  id: RMCSurvivorPresetNVResearchDirector
+  name: varadero research director preset # TODO RMC14: research notes
+  categories: [ HideSpawnMenu ]

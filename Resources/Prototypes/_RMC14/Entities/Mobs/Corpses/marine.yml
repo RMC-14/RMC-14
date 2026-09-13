@@ -1,0 +1,315 @@
+# Marine Unarmed
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseUNMCUnarmed
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseUNMCMarineUnarmed ]
+  - type: Rank
+    rank: RMCRankPrivateFirstClass
+
+- type: startingGear
+  id: RMCGearCorpseUNMCMarineUnarmed
+  equipment:
+    jumpsuit: JumpsuitMarine
+    back: CMSatchelMarine
+    head: RMCHeadCapFlippable
+    ears: CMHeadsetColony
+    shoes: CMBootsBlackFilled
+    id: CMDogtagRifleman
+    gloves: CMHandsBlackMarine
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
+
+# Marine
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseUNMCRandom
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseUNMCMarine1, RMCGearCorpseUNMCMarine2, RMCGearCorpseUNMCMarine3, RMCGearCorpseUNMCMarine4 ] # TODO RMC14: Better randomization
+  - type: Rank
+    rank: RMCRankPrivateFirstClass
+
+- type: startingGear
+  id: RMCGearCorpseUNMCMarine1
+  equipment:
+    jumpsuit: JumpsuitMarine
+    back: CMSatchelMarine
+    head: RMCHeadCapFlippable
+    ears: CMHeadsetColony
+    shoes: CMBootsBlackFilled
+    id: CMDogtagRifleman
+    gloves: CMHandsBlackMarine
+    pocket1: RMCPouchFirstAidSplintsGauzeOintment
+    outerClothing: RMCArmorAM2
+  storage:
+    back:
+    - CMDrinkCanBobdaClassic
+
+- type: startingGear
+  id: RMCGearCorpseUNMCMarine2
+  equipment:
+    jumpsuit: JumpsuitMarine
+    back: CMSatchelMarine
+    head: ArmorHelmetM10
+    eyes: RMCSunglassesBigFake
+    ears: CMHeadsetColony
+    shoes: CMBootsBlackFilled
+    id: CMDogtagRifleman
+    gloves: CMHandsBlackMarine
+    pocket1: RMCPouchFirstAidSplintsGauzeOintment
+    outerClothing: RMCArmorAM2
+  storage:
+    back:
+    - RMCCigarettePackLuckySloths
+    - FlippoLighter
+
+- type: startingGear
+  id: RMCGearCorpseUNMCMarine3
+  equipment:
+    jumpsuit: JumpsuitMarine
+    back: CMSatchelMarine
+    head: RMCBoonie
+    ears: CMHeadsetColony
+    shoes: CMBootsBlackFilled
+    id: CMDogtagRifleman
+    gloves: CMHandsBlackMarine
+    pocket1: RMCPouchFirstAidSplintsGauzeOintment
+    suitstorage: RMCWeaponRifleM54CMK1
+    pocket2: RMCPouchMagazine
+    outerClothing: RMCArmorAM2
+  storage:
+    back:
+    - RMCCigarettePackLuckySloths
+    - FlippoLighter
+    - CMMagazineRifleM54CMK1
+    - RMCMagazineRifleM54CMK1HEAPEmpty
+    pocket2:
+    - RMCMagazineRifleM54CMK1HEAPEmpty
+    - RMCMagazineRifleM54CMK1HEAPEmpty
+    - CMMagazineRifleM54CMK1
+
+- type: startingGear
+  id: RMCGearCorpseUNMCMarine4
+  equipment:
+    jumpsuit: JumpsuitMarine
+    back: CMSatchelMarine
+    head: RMCBoonie
+    eyes: RMCGlassesTriMaxBlackFake
+    ears: CMHeadsetColony
+    shoes: CMBootsBlackFilled
+    id: CMDogtagRifleman
+    gloves: CMHandsBlackMarine
+    pocket1: RMCPouchFirstAidSplintsGauzeOintment
+    suitstorage: RMCWeaponRifleL42A
+    pocket2: RMCPouchMagazine
+    outerClothing: RMCArmorAM2
+  storage:
+    back:
+    - RMCCigarettePackLuckySloths
+    - FlippoLighter
+    - RMCMagazineRifleL42A
+    pocket2:
+    - RMCMagazineRifleL42AEmpty
+    - RMCMagazineRifleL42AEmpty
+    - RMCMagazineRifleL42A
+
+# Medic
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseUNMCMedicRandom
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseUNMCMedic1, RMCGearCorpseUNMCMedic1, RMCGearCorpseUNMCMedic1, RMCGearCorpseUNMCMedic2 ] # TODO RMC14: Better randomization than this
+  - type: Rank
+    rank: RMCRankLanceCorporal
+
+- type: startingGear
+  id: RMCGearCorpseUNMCMedic1
+  equipment:
+    jumpsuit: JumpsuitMarine
+    back: CMSatchelMarineTech
+    head: CMArmorHelmetM10Medic
+    ears: CMHeadsetColony
+    shoes: CMBootsBlackFilled
+    id: CMDogtagHospitalCorpsman
+    gloves: CMHandsBlackMarine
+    belt: CMBeltMedical
+    outerClothing: RMCArmorAM2
+
+- type: startingGear
+  id: RMCGearCorpseUNMCMedic2
+  equipment:
+    jumpsuit: JumpsuitMarine
+    back: CMSatchelMarineTech
+    head: CMArmorHelmetM10Medic
+    ears: CMHeadsetColony
+    shoes: CMBootsBlackFilled
+    id: CMDogtagHospitalCorpsman
+    gloves: CMHandsBlackMarine
+    pocket2: RMCPouchMagazine
+    belt: RMCBeltMedicalDefibAnalyzerFilled
+    outerClothing: RMCArmorAM2
+
+# Medtech
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseUNMCMedicalTechnicianRandom
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseUNMCMedicalTechnician1, RMCGearCorpseUNMCMedicalTechnician2, RMCGearCorpseUNMCMedicalTechnician3, RMCGearCorpseUNMCMedicalTechnician4 ] # TODO RMC14: Better randomization
+  - type: Rank
+    rank: RMCRankSergeant
+
+- type: startingGear
+  id: RMCGearCorpseUNMCMedicalTechnicianBase
+  equipment:
+    jumpsuit: RMCJumpsuitCivilianGreen
+    back: CMSatchelMarineTech
+    ears: CMHeadsetColony
+    eyes: RMCGlassesMedicalHUDGlasses
+    shoes: CMBootsBlackFilled
+    id: CMIDCardMedicalTechnician
+    gloves: CMHandsBlackMarine
+    belt: CMBeltMedical
+
+- type: startingGear
+  parent: RMCGearCorpseUNMCMedicalTechnicianBase
+  id: RMCGearCorpseUNMCMedicalTechnician1
+  equipment:
+    outerClothing: RMCArmorAM2
+
+- type: startingGear
+  parent: RMCGearCorpseUNMCMedicalTechnicianBase
+  id: RMCGearCorpseUNMCMedicalTechnician2
+  equipment:
+    outerClothing: RMCJacketWindbreaker
+
+- type: startingGear
+  parent: RMCGearCorpseUNMCMedicalTechnicianBase
+  id: RMCGearCorpseUNMCMedicalTechnician3
+  equipment:
+    outerClothing: RMCLabcoatBrown
+
+- type: startingGear
+  parent: RMCGearCorpseUNMCMedicalTechnicianBase
+  id: RMCGearCorpseUNMCMedicalTechnician4
+  equipment:
+    outerClothing: RMCArmorAM2
+    belt: RMCBeltMedicalDefibAnalyzerFilled
+    head: ArmorHelmetM10
+
+# MP (no MP clothes!!)
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseUNMCMilitaryPoliceRandom
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseUNMCMilitaryPolice1, RMCGearCorpseUNMCMilitaryPolice2 ] # TODO RMC14: Better randomization
+  - type: Rank
+    rank: RMCRankStaffSergeant
+
+- type: startingGear
+  id: RMCGearCorpseUNMCMilitaryPoliceBase
+  equipment:
+    jumpsuit: JumpsuitMarine
+    back: CMSatchelSecurity
+    ears: CMHeadsetColony
+    eyes: CMGlassesSecurity
+    shoes: CMBootsBlackFilled
+    id: CMIDCardBasePolice
+    gloves: CMHandsBlackMarine
+    belt: CMBeltSecurityMPFilled
+    outerClothing: RMCCoatService
+
+- type: startingGear
+  parent: RMCGearCorpseUNMCMilitaryPoliceBase
+  id: RMCGearCorpseUNMCMilitaryPolice1
+  equipment:
+    head: CMArmorHelmetM10MP
+
+- type: startingGear
+  parent: RMCGearCorpseUNMCMilitaryPoliceBase
+  id: RMCGearCorpseUNMCMilitaryPolice2
+  equipment:
+    head: CMHeadCapMP
+
+# Pilot
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseUNMCPilot
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseUNMCPilot ]
+  - type: Rank
+    rank: RMCRankSecondLT
+
+- type: startingGear
+  id: RMCGearCorpseUNMCPilot
+  equipment:
+    head: CMArmorHelmetHDU44
+    jumpsuit: RMCJumpsuitPilotFighter
+    back: RMCParachute
+    ears: CMHeadsetColony
+    shoes: CMBootsBlackFilled
+    id: CMDogtagUNMCPilot
+    gloves: CMHandsInsulatedPilot
+    outerClothing: RMCCoatPilotFighter
+
+# Ground crew
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseUNMCCrewman
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseUNMCCrewman1, RMCGearCorpseUNMCCrewman2, RMCGearCorpseUNMCCrewman3, RMCGearCorpseUNMCCrewman4 ]
+  - type: Rank
+    rank: RMCRankCorporal
+
+- type: startingGear
+  id: RMCGearCorpseUNMCCrewmanBase
+  equipment:
+    jumpsuit: JumpsuitMarine
+    ears: CMHeadsetColony
+    shoes: CMBootsBlackFilled
+    id: CMDogtagCrewman
+    gloves: CMHandsBlackMarine
+    outerClothing: RMCArmorVestFlak
+
+- type: startingGear
+  parent: RMCGearCorpseUNMCCrewmanBase
+  id: RMCGearCorpseUNMCCrewman1
+  equipment:
+    head: RMCHeadCapFlippable
+    outerClothing: RMCHazardVest
+    belt: CMFireExtinguisher
+
+- type: startingGear
+  parent: RMCGearCorpseUNMCCrewmanBase
+  id: RMCGearCorpseUNMCCrewman2
+  equipment:
+    head: ClothingHeadHatWelding
+    outerClothing: RMCHazardVestYellow
+    belt: CMBeltUtility
+    ears: RMCEarmuffs
+
+- type: startingGear
+  parent: RMCGearCorpseUNMCCrewmanBase
+  id: RMCGearCorpseUNMCCrewman3
+  equipment:
+    outerClothing: RMCHazardVestBlue
+    belt: CMBeltUtility
+    ears: RMCEarmuffs
+    pocket1: RMCPouchElectronics
+
+- type: startingGear
+  parent: RMCGearCorpseUNMCCrewmanBase
+  id: RMCGearCorpseUNMCCrewman4
+  equipment:
+    head: RMCHeadBeanie
+    outerClothing: RMCHazardVestBlue
+    belt: CMBeltUtility
+    pocket1: RMCCigarettePackLuckySloths
+    pocket2: RMCMatchboxFull

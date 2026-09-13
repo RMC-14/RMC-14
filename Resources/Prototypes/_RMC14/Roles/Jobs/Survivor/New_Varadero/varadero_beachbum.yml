@@ -1,11 +1,12 @@
 - type: job
   parent: CMSurvivor
   id: CMSurvivorBeachBum
-  name: cm-job-name-surivor-beach-bum
+  name: rmc-job-name-surivor-beach-bum
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivor
   startingGear: RMCGearSurvivorBeachBum
-  spawnMenuRoleName: Beach Bum (New Varadero Survivor)
+  greeting: rmc-job-greeting-varadero
+  spawnMenuRoleName: Beach Bum (NV Survivor)
   special:
   - !type:AddComponentSpecial
     components:

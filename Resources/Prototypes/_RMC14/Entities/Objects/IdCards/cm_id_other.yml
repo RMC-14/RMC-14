@@ -347,6 +347,22 @@
     - FactionSurvivor
 
 - type: entity
+  parent: CMIDCardSilver
+  id: CMIDCardMedicalTechnician
+  name: medical technician ID card
+  components:
+  - type: PresetIdCard
+    job: CMSurvivorMedicalTechnician
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagUNMCPilot
+  name: Pilot's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCSurvivorUNMCPilot
+
+- type: entity
   id: RMCIDCardAegis
   name: AEGIS Access Badge
   description: High-Level AEGIS Access Badge, granting access to many of their restricted areas and equipment. Required to unlock AEGIS crates.

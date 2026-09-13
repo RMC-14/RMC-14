@@ -329,6 +329,20 @@
     - RMCVisorSquadIntegrated
     - RMCVisorPilotBlack
 
+# HDU-44
+- type: entity
+  parent: CMArmorHelmetM30
+  id: CMArmorHelmetHDU44
+  name: HDU-44/P Aerospace Helmet System
+  description: The HDU-44/P is a flight helmet specifically tailored to the needs of Marine F-44 Aerofighter pilots. It features a reinforced graphite shell, an experimental dual comfort helmet liner, and an integrated microprocessor which allows compatible fighters, ships, and ground networks to feed information directly to the pilot's eyepiece, perfect for those who often operate under dangerous and high-G conditions.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/hdu44p.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/hdu44p.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
 # Press
 - type: entity
   parent: ArmorHelmetM10

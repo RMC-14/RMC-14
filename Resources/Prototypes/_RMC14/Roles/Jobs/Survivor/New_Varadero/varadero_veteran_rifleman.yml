@@ -1,0 +1,89 @@
+# RMC14: MP surv on CM
+- type: job
+  parent: CMSurvivorSecurity
+  id: RMCSurvivorUNMCVeteranRifleman
+  name: cm-job-name-rifleman
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorSecurity
+  startingGear: RMCGearSurvivorUNMCVeteranRifleman
+  greeting: rmc-job-greeting-varadero
+  ranks:
+    RMCRankLanceCorporal: []
+  spawnMenuRoleName: UNMC Veteran Rifleman (NV Survivor)
+  icon: "RMCJobIconForeconRifleman"
+  hasIcon: true
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadMarineVaradero
+    - type: Skills
+      preset: RMCSkillPresetSurvivorUNMCVeteranRifleman
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetUNMCVeteranRifleman
+    - type: JobPrefix
+      prefix: cm-job-prefix-rifleman
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: private
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_unmc
+    - type: Language
+      spokenLanguages:
+      - Spanish
+      - English
+      understoodLanguages:
+      - Spanish
+      - English
+      currentLanguage: English
+      defaultLanguage: English
+  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
+  medals:
+    Bronze: RMCMedalBronzeService
+    Silver: RMCMedalSilverService
+    Gold: RMCMedalGoldService
+    Platinum: RMCMedalPlatinumService
+    Ruby: RMCMedalRubyService
+    Amethyst: RMCMedalAmethystService
+    Emerald: RMCMedalEmeraldService
+    Prismatic: RMCMedalPrismaticService
+
+- type: startingGear
+  id: RMCGearSurvivorUNMCVeteranRifleman
+  equipment:
+    jumpsuit: JumpsuitMarine
+    outerClothing: RMCCoatService
+    ears: RMCHeadsetMarineNV
+    belt: CMBeltMarine
+    gloves: RMCHandsVeteran
+    id: CMIDCardStandardDogtag
+    pocket1: RMCPouchSurvivalFill
+    back: CMSatchelMarineTech
+    shoes: CMBootsBlackFilled
+  storage:
+    back:
+      - CMSheetMetal20
+
+- type: entity
+  parent: RMCGearSurvivorPresetUNMC
+  id: RMCSurvivorPresetUNMCVeteranRifleman
+  name: varadero veteran rifleman preset
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: EntityPreset
+      randomOutfits:
+        - [ ArmorHelmetM10 ]
+        - [ RMCHeadCapFlippable ]
+        - [ RMCBoonie ]
