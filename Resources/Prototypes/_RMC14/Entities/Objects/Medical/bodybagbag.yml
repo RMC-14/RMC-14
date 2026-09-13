@@ -2,11 +2,11 @@
   parent: BaseItem
   id: RMCPackBodybags
   name: body bag pack
-  description: A pack of ten bodybags.
+  description: A pack of ten bodybags, designed to fit in bags or containers for space efficiency.
   suffix: PvE
   components:
   - type: Item
-    size: Small
+    size: Normal
   - type: CMItemSlots
     count: 10
     slot:
