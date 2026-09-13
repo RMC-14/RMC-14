@@ -8,6 +8,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Medical.Pain;
 
+[Access(typeof(PainSystem))]
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true), AutoGenerateComponentPause]
 public sealed partial class PainComponent : Component
 {
@@ -43,7 +44,7 @@ public sealed partial class PainComponent : Component
     /// caused by them may be out of sync on the Client's side. <see cref="PainModifier.ExpireAt"/> in particular.
     /// </remarks>
     /// <seealso cref="PainSystem.UpdateCurrentPainPercentage(Entity{PainComponent})"/>
-    [ViewVariables, Access(typeof(PainSystem)), AutoNetworkedField]
+    [ViewVariables, AutoNetworkedField]
     public List<PainModifier> PainModifiers = [];
 
     /// <summary>
