@@ -36,6 +36,8 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
     private readonly Dictionary<NetEntity, OverwatchSquadView> _squadViews = new();
     private readonly Dictionary<NetEntity, PanelContainer> _squads = new();
     private readonly Dictionary<NetEntity, Dictionary<NetEntity, OverwatchRow>> _rows = new();
+    private OverwatchTextInputWindow? _messageWindow;
+    private bool _messagePending;
     private SquadObjectivesWindow? _objectivesWindow;
 
     public OverwatchConsoleBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
@@ -53,9 +55,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
         Window = this.CreatePopOutableWindow<OverwatchConsoleWindow>();
         Window.OverwatchHeader.SetMarkupPermissive($"[color=#88C7FA]{Loc.GetString("rmc-overwatch-console-disabled-select-squad")}[/color]");
 
-        if (State is OverwatchConsoleBuiState s)
-            RefreshState(s);
-
+        Refresh();
         UpdateView();
     }
 
@@ -63,6 +63,23 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
     {
         if (state is OverwatchConsoleBuiState s)
             RefreshState(s);
+    }
+
+    protected override void ReceiveMessage(BoundUserInterfaceMessage message)
+    {
+        base.ReceiveMessage(message);
+
+        if (message is not OverwatchConsoleSendMessageResultBuiMsg result)
+            return;
+
+        _messagePending = false;
+        if (_messageWindow is not { Disposed: false } window)
+            return;
+
+        window.OkButton.Disabled = false;
+        window.CancelButton.Disabled = false;
+        if (result.Sent)
+            window.Close();
     }
 
     private void RefreshState(OverwatchConsoleBuiState s)
@@ -106,7 +123,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
         var roleSorting = new Dictionary<ProtoId<JobPrototype>, int>();
         var activeSquad = GetActiveSquad();
         var margin = new Thickness(2);
-        foreach (var squad in s.Squads)
+        foreach (var squad in squads)
         {
             if (!s.Marines.TryGetValue(squad.Id, out var marines))
                 continue;
@@ -151,7 +168,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                     console.Location,
                     console.ShowDead,
                     console.ShowHidden,
-                    marines,
+                    GetMarines(squad.Id),
                     console
                 );
 
@@ -219,17 +236,31 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
 
                 monitor.MessageSquadButton.OnPressed += _ =>
                 {
+                    if (_messagePending || _messageWindow is { Disposed: false, IsOpen: true })
+                        return;
+
                     var window = new OverwatchTextInputWindow();
+                    _messageWindow = window;
 
                     void SendSquadMessage()
                     {
+                        if (_messagePending)
+                            return;
+
+                        _messagePending = true;
+                        window.OkButton.Disabled = true;
+                        window.CancelButton.Disabled = true;
                         SendPredictedMessage(new OverwatchConsoleSendMessageBuiMsg(window.MessageBox.Text));
-                        window.Close();
                     }
 
                     window.MessageBox.OnTextEntered += _ => SendSquadMessage();
                     window.OkButton.OnPressed += _ => SendSquadMessage();
                     window.CancelButton.OnPressed += _ => window.Close();
+                    window.OnClose += () =>
+                    {
+                        if (_messageWindow == window)
+                            _messageWindow = null;
+                    };
                     window.OpenCentered();
                 };
 
@@ -247,16 +278,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                         return;
                     }
 
-                    // Get objectives from BUI state instead of directly accessing entity
-                    Dictionary<SquadObjectiveType, string> objectives = new();
-                    if (State is OverwatchConsoleBuiState state)
-                    {
-                        var squadData = state.Squads.FirstOrDefault(s => s.Id == overwatch.Squad);
-                        if (squadData.Id != default)
-                        {
-                            objectives = new Dictionary<SquadObjectiveType, string>(squadData.Objectives);
-                        }
-                    }
+                    var objectives = GetObjectives(overwatch.Squad.Value);
 
                     var window = new SquadObjectivesWindow();
                     _objectivesWindow = window;
@@ -334,7 +356,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                 row.Distance.Panel.Orphan();
                 row.Buttons.Container.Orphan();
 
-                _rows.Remove(id);
+                squadRows.Remove(id);
             }
 
             foreach (var marine in marines)
@@ -545,6 +567,11 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                     row.Buttons.Hide.Visible = false;
                     row.Buttons.Promote.Visible = false;
                 }
+                else
+                {
+                    row.Buttons.Hide.Visible = true;
+                    row.Buttons.Promote.Visible = true;
+                }
             }
 
             var rolesList = new List<(string Role, HashSet<OverwatchMarine> Deployed, HashSet<OverwatchMarine> Alive, HashSet<OverwatchMarine> All, bool DisplayName, int Priority)>();
@@ -731,12 +758,11 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
         }
 
         UpdateView();
-        UpdateObjectivesWindow(s);
+        UpdateObjectivesWindow();
     }
 
-    private void UpdateObjectivesWindow(OverwatchConsoleBuiState s)
+    private void UpdateObjectivesWindow()
     {
-        // Update objectives window if it's open
         if (_objectivesWindow == null || _objectivesWindow.Disposed || !_objectivesWindow.IsOpen)
             return;
 
@@ -746,15 +772,8 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
             return;
         }
 
-        // Get updated objectives from state
-        Dictionary<SquadObjectiveType, string> objectives = new();
-        var squadData = s.Squads.FirstOrDefault(squad => squad.Id == overwatch.Squad);
-        if (squadData.Id != default)
-        {
-            objectives = new Dictionary<SquadObjectiveType, string>(squadData.Objectives);
-        }
+        var objectives = GetObjectives(overwatch.Squad.Value);
 
-        // Update window with new objectives only if user hasn't edited them
         foreach (SquadObjectiveType objectiveType in Enum.GetValues<SquadObjectiveType>())
         {
             var currentObjective = objectives.GetValueOrDefault(objectiveType, string.Empty);
@@ -997,6 +1016,40 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
     {
         if (State is OverwatchConsoleBuiState s)
             RefreshState(s);
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            _messageWindow?.Close();
+            _messageWindow = null;
+            _messagePending = false;
+        }
+
+        base.Dispose(disposing);
+    }
+
+    private Dictionary<SquadObjectiveType, string> GetObjectives(NetEntity squad)
+    {
+        if (State is not OverwatchConsoleBuiState s)
+            return new Dictionary<SquadObjectiveType, string>();
+
+        var squadData = s.Squads.FirstOrDefault(data => data.Id == squad);
+        return squadData.Id == default
+            ? new Dictionary<SquadObjectiveType, string>()
+            : new Dictionary<SquadObjectiveType, string>(squadData.Objectives);
+    }
+
+    private List<OverwatchMarine> GetMarines(NetEntity squad)
+    {
+        if (State is OverwatchConsoleBuiState s &&
+            s.Marines.TryGetValue(squad, out var marines))
+        {
+            return marines;
+        }
+
+        return new List<OverwatchMarine>();
     }
 
     private readonly record struct OverwatchRow(

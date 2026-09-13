@@ -42,3 +42,13 @@
     light_boost: 4.0
     light_gamma: 1.0
     light_whitepoint: 1.0
+
+- type: shader
+  id: RMCMarineAnnouncementGrid
+  kind: source
+  path: "/Textures/_RMC14/Shaders/marine_announce_grid.swsl"
+  params:
+    tile_size: 3, 3
+    line_thickness: 0.5
+    grid_color: "#4A9EFF66"
+    scroll_speed: 12.0

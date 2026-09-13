@@ -32,9 +32,6 @@ public sealed partial class OverwatchConsoleComponent : Component
     [DataField, AutoNetworkedField]
     public int LastLocation;
 
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
-    public TimeSpan LastMessage;
-
     [DataField, AutoNetworkedField]
     public TimeSpan MessageCooldown = TimeSpan.FromSeconds(0.5);
 

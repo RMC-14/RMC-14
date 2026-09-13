@@ -507,6 +507,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
                 Loc.GetString("rmc-evacuation-started"),
                 startSound
             );
+            _marineAnnounce.AnnounceAlertLevel("MarineAlertLevel", Loc.GetString("rmc-evacuation-started"));
             var ev = new EvacuationEnabledEvent();
             RaiseLocalEvent(map.Value, ref ev, true);
         }
