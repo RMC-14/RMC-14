@@ -82831,7 +82831,7 @@ entities:
     - ContainerContainer
     - Speech
     - RequisitionsComputer
-- proto: CMAttachmentXMVESG1FlamerNozzle
+- proto: RMCAttachmentXMVESG1FlamerNozzle
   entities:
   - uid: 1341
     components:
