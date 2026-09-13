@@ -258,6 +258,7 @@ public sealed partial class CMDistressSignalRuleSystem
         StartPlanetVote();
         ResetSelectedPlanet();
         _spawnedDropships = false;
+        _commandingOfficerBriefingScheduled = false;
         OperationName = null;
         _usingCustomOperationName = false;
         ActiveNightmareScenario = null;

@@ -1,0 +1,33 @@
+# Fiorina
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingFiorinaUnaligned
+  suffix: Fiorina, Unaligned
+  components:
+  - type: Paper
+    content: rmc-co-briefing-fiorina-unaligned
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingFiorinaHawks
+  suffix: Fiorina, Hawks
+  components:
+  - type: Paper
+    content: rmc-co-briefing-fiorina-hawks
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingFiorinaDoves
+  suffix: Fiorina, Doves
+  components:
+  - type: Paper
+    content: rmc-co-briefing-fiorina-doves
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingFiorinaMagpies
+  suffix: Fiorina, Magpies
+  components:
+  - type: Paper
+    content: rmc-co-briefing-fiorina-magpies

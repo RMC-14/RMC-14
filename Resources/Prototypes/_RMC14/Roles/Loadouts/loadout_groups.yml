@@ -703,6 +703,31 @@
 
 # Commanding Officer
 - type: loadoutGroup
+  id: CommandingOfficerCareerRMC
+  name: rmc-loadout-group-commanding-officer-career
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - RMCCOCareerInfantry
+  - RMCCOCareerEngineering
+  - RMCCOCareerMedical
+  - RMCCOCareerIntel
+  - RMCCOCareerLogistics
+  - RMCCOCareerAviation
+  - RMCCOCareerTanker
+
+- type: loadoutGroup
+  id: CommandingOfficerAffiliationRMC
+  name: rmc-loadout-group-commanding-officer-affiliation
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - RMCCOAffiliationUnaligned
+  - RMCCOAffiliationHawks
+  - RMCCOAffiliationDoves
+  - RMCCOAffiliationMagpies
+
+- type: loadoutGroup
   id: CommandingOfficerRoleSpecificRMC
   name: rmc-loadout-group-role-specific
   minLimit: 0

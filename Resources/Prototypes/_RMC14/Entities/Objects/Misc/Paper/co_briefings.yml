@@ -1,0 +1,11 @@
+- type: entity
+  parent: CMPaper
+  id: RMCPaperCOBriefingBase
+  abstract: true
+  components:
+  - type: Paper
+    editingDisabled: true
+    stampState: paper_stamp-marine
+    stampedBy:
+    - stampedColor: '#4E806AFF'
+      stampedName: stamp-component-stamped-name-cm-marine
