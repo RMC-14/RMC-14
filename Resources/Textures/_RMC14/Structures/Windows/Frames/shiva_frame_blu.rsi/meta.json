@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/09a5191fb11aab8ddffe3f9be94292b53e4d96f6/icons/turf/walls/ice_colony/shiva_windows.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "shivablu_frame0"
+    },
+    {
+      "name": "shivablu_frame1"
+    },
+    {
+      "name": "shivablu_frame2"
+    },
+    {
+      "name": "shivablu_frame3"
+    },
+    {
+      "name": "shivablu_frame4"
+    },
+    {
+      "name": "shivablu_frame5"
+    },
+    {
+      "name": "shivablu_frame6"
+    },
+    {
+      "name": "shivablu_frame7"
+    },
+    {
+      "name": "shivablu_frame8"
+    },
+    {
+      "name": "shivablu_frame9"
+    },
+    {
+      "name": "shivablu_frame10"
+    },
+    {
+      "name": "shivablu_frame11"
+    },
+    {
+      "name": "shivablu_frame12"
+    },
+    {
+      "name": "shivablu_frame13"
+    },
+    {
+      "name": "shivablu_frame14"
+    },
+    {
+      "name": "shivablu_frame15"
+    }
+  ]
+}

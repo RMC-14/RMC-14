@@ -1,3 +1,4 @@
+# Shiva
 - type: entity
   parent: RMCBaseWindowFrame
   id: RMCWindowFrameShiva
@@ -72,6 +73,469 @@
     sound:
       collection: WindowShatter
 
+# Shiva Orange
+- type: entity
+  parent: CMBaseWindow
+  id: CMWindowShivaOrange
+  suffix: Orange
+  name: poly-kevlon framed window
+  description: A semi-transparent (not entirely opaque) pane of material set into a poly-kevlon frame. Very smashable.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/shiva_window_orng.rsi
+    state: shivaoj_window0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/shiva_window_orng.rsi
+    state: shivaoj_window0
+  - type: IconSmooth
+    key: windows
+    additionalKeys:
+    - doors
+    base: shivaoj_window
+    mode: CardinalFlags
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 600 # excessive damage destroys window and frame
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+    - trigger:
+        !type:DamageTrigger
+        damage: 40
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMShardGlass:
+            min: 1
+            max: 1
+      - !type:ChangeConstructionNodeBehavior
+        node: windowFrameShivaOrange
+  - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
+  - type: Construction
+    graph: RMCWindowShivaOrange
+    node: windowShivaOrange
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameShivaOrange
+    sound:
+      collection: WindowShatter
+
+- type: entity
+  parent: RMCBaseWindowFrame
+  suffix: Orange
+  id: RMCWindowFrameShivaOrange
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/Frames/shiva_frame_orng.rsi
+    state: shivaoj_frame0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/Frames/shiva_frame_orng.rsi
+    state: shivaoj_frame0
+  - type: IconSmooth
+    key: windows
+    additionalKeys:
+    - doors
+    base: shivaoj_frame
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowShivaOrange
+    node: windowFrameShivaOrange
+
+# Shiva Blue
+- type: entity
+  parent: CMBaseWindow
+  id: CMWindowShivaBlue
+  suffix: Blue
+  name: poly-kevlon framed window
+  description: A semi-transparent (not entirely opaque) pane of material set into a poly-kevlon frame. Very smashable.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/shiva_window_blu.rsi
+    state: shivablu_window0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/shiva_window_blu.rsi
+    state: shivablu_window0
+  - type: IconSmooth
+    key: windows
+    additionalKeys:
+    - doors
+    base: shivablu_window
+    mode: CardinalFlags
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 600 # excessive damage destroys window and frame
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+    - trigger:
+        !type:DamageTrigger
+        damage: 40
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMShardGlass:
+            min: 1
+            max: 1
+      - !type:ChangeConstructionNodeBehavior
+        node: windowFrameShivaBlue
+  - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
+  - type: Construction
+    graph: RMCWindowShivaBlue
+    node: windowShivaBlue
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameShivaBlue
+    sound:
+      collection: WindowShatter
+
+- type: entity
+  parent: RMCBaseWindowFrame
+  suffix: Blue
+  id: RMCWindowFrameShivaBlue
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/Frames/shiva_frame_blu.rsi
+    state: shivablu_frame0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/Frames/shiva_frame_blu.rsi
+    state: shivablu_frame0
+  - type: IconSmooth
+    key: windows
+    additionalKeys:
+    - doors
+    base: shivablu_frame
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowShivaBlue
+    node: windowFrameShivaBlue
+
+# Shiva Pink
+- type: entity
+  parent: RMCBaseWindowFrame
+  suffix: Pink
+  id: RMCWindowFrameShivaPink
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/Frames/shiva_frame_pnk.rsi
+    state: shivapnk_frame0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/Frames/shiva_frame_pnk.rsi
+    state: shivapnk_frame0
+  - type: IconSmooth
+    key: windows
+    additionalKeys:
+    - doors
+    base: shivapnk_frame
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowShivaPink
+    node: windowFrameShivaPink
+
+- type: entity
+  parent: CMBaseWindow
+  id: CMWindowShivaPink
+  suffix: Pink
+  name: poly-kevlon framed window
+  description: A semi-transparent (not entirely opaque) pane of material set into a poly-kevlon frame. Very smashable.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/shiva_window_pnk.rsi
+    state: shivapnk_window0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/shiva_window_pnk.rsi
+    state: shivapnk_window0
+  - type: IconSmooth
+    key: windows
+    additionalKeys:
+    - doors
+    base: shivapnk_window
+    mode: CardinalFlags
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 600 # excessive damage destroys window and frame
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+    - trigger:
+        !type:DamageTrigger
+        damage: 40
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMShardGlass:
+            min: 1
+            max: 1
+      - !type:ChangeConstructionNodeBehavior
+        node: windowFrameShivaPink
+  - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
+  - type: Construction
+    graph: RMCWindowShivaPink
+    node: windowShivaPink
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameShivaPink
+    sound:
+      collection: WindowShatter
+
+# Shiva Red
+- type: entity
+  parent: RMCBaseWindowFrame
+  suffix: Red
+  id: RMCWindowFrameShivaRed
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/Frames/shiva_frame_red.rsi
+    state: shivared_frame0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/Frames/shiva_frame_red.rsi
+    state: shivared_frame0
+  - type: IconSmooth
+    key: windows
+    additionalKeys:
+    - doors
+    base: shivared_frame
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowShivaRed
+    node: windowFrameShivaRed
+
+- type: entity
+  parent: CMBaseWindow
+  id: CMWindowShivaRed
+  suffix: Red
+  name: poly-kevlon framed window
+  description: A semi-transparent (not entirely opaque) pane of material set into a poly-kevlon frame. Very smashable.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/shiva_window_red.rsi
+    state: shivared_window0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/shiva_window_red.rsi
+    state: shivared_window0
+  - type: IconSmooth
+    key: windows
+    additionalKeys:
+    - doors
+    base: shivared_window
+    mode: CardinalFlags
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 600 # excessive damage destroys window and frame
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+    - trigger:
+        !type:DamageTrigger
+        damage: 40
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMShardGlass:
+            min: 1
+            max: 1
+      - !type:ChangeConstructionNodeBehavior
+        node: windowFrameShivaRed
+  - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
+  - type: Construction
+    graph: RMCWindowShivaRed
+    node: windowShivaRed
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameShivaRed
+    sound:
+      collection: WindowShatter
+
+# Shiva Grey
+- type: entity
+  parent: RMCBaseWindowFrame
+  suffix: Grey
+  id: RMCWindowFrameShivaGrey
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/Frames/shiva_frame_gr.rsi
+    state: shivagr_frame0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/Frames/shiva_frame_gr.rsi
+    state: shivagr_frame0
+  - type: IconSmooth
+    key: windows
+    additionalKeys:
+    - doors
+    base: shivagr_frame
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowShivaGrey
+    node: windowFrameShivaGrey
+
+- type: entity
+  parent: CMBaseWindow
+  id: CMWindowShivaGrey
+  suffix: Grey
+  name: poly-kevlon framed window
+  description: A semi-transparent (not entirely opaque) pane of material set into a poly-kevlon frame. Very smashable.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/shiva_window_gr.rsi
+    state: shivagr_window0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/shiva_window_gr.rsi
+    state: shivagr_window0
+  - type: IconSmooth
+    key: windows
+    additionalKeys:
+    - doors
+    base: shivagr_window
+    mode: CardinalFlags
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 600 # excessive damage destroys window and frame
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+    - trigger:
+        !type:DamageTrigger
+        damage: 40
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMShardGlass:
+            min: 1
+            max: 1
+      - !type:ChangeConstructionNodeBehavior
+        node: windowFrameShivaGrey
+  - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
+  - type: Construction
+    graph: RMCWindowShivaGrey
+    node: windowShivaGrey
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameShivaGrey
+    sound:
+      collection: WindowShatter
+
+# Shiva White
+- type: entity
+  parent: RMCBaseWindowFrame
+  suffix: White
+  id: RMCWindowFrameShivaWhite
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/Frames/shiva_frame_wht.rsi
+    state: shivawht_frame0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/Frames/shiva_frame_wht.rsi
+    state: shivawht_frame0
+  - type: IconSmooth
+    key: windows
+    additionalKeys:
+    - doors
+    base: shivawht_frame
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowShivaWhite
+    node: windowFrameShivaWhite
+
+- type: entity
+  parent: CMBaseWindow
+  id: CMWindowShivaWhite
+  name: poly-kevlon framed window
+  suffix: White
+  description: A semi-transparent (not entirely opaque) pane of material set into a poly-kevlon frame. Very smashable.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/shiva_window_wht.rsi
+    state: shivawht_window0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/shiva_window_wht.rsi
+    state: shivawht_window0
+  - type: IconSmooth
+    key: windows
+    additionalKeys:
+    - doors
+    base: shivawht_window
+    mode: CardinalFlags
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 600 # excessive damage destroys window and frame
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+    - trigger:
+        !type:DamageTrigger
+        damage: 40
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMShardGlass:
+            min: 1
+            max: 1
+      - !type:ChangeConstructionNodeBehavior
+        node: windowFrameShivaWhite
+  - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
+  - type: Construction
+    graph: RMCWindowShivaWhite
+    node: windowShivaWhite
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameShivaWhite
+    sound:
+      collection: WindowShatter
+
+# Shiva Ice
 - type: entity
   parent: CMBaseWindow
   id: CMWindowShivaIce
