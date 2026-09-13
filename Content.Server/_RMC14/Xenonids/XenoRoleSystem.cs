@@ -1,3 +1,4 @@
+using Content.Server._RMC14.PlayTimeTracking;
 using Content.Server.GameTicking;
 using Content.Server.Mind;
 using Content.Server.Players.PlayTimeTracking;
@@ -31,18 +32,26 @@ public sealed class XenoRoleSystem : EntitySystem
     [Dependency] private readonly PlayTimeTrackingManager _playTimeManager = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
+    [Dependency] private readonly RMCPlayTimeManager _rmcPlaytime = default!;
     [Dependency] private readonly RoleSystem _role = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private TimeSpan _disconnectedXenoGhostRoleTime;
+    private float _larvaRankScaleFactor = 1.0f;
 
+    // TODO RMC14 you know what you have to do
     private TimeSpan _rankTwoTime;
     private TimeSpan _rankThreeTime;
     private TimeSpan _rankFourTime;
     private TimeSpan _rankFiveTime;
     private TimeSpan _rankSixTime;
+    private TimeSpan _rankSevenTime;
+    private TimeSpan _rankEightTime;
+    private TimeSpan _rankNineTime;
 
     private readonly List<Entity<XenoComponent>> _toUpdate = new();
+
+    private readonly ProtoId<JobPrototype> _larvaJobProtoId = "CMXenoLarva";
 
     public override void Initialize()
     {
@@ -58,11 +67,15 @@ public sealed class XenoRoleSystem : EntitySystem
 
         SubscribeLocalEvent<XenoRankComponent, RefreshNameModifiersEvent>(OnRankRefreshName, before: new[] { typeof(SharedXenoNameSystem) });
 
+        Subs.CVar(_config, RMCCVars.RMCPlaytimeLarvaRankScaleFactor, v => _larvaRankScaleFactor = v, true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimeBronzeMedalTimeHours, v => _rankTwoTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimeSilverMedalTimeHours, v => _rankThreeTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimeGoldMedalTimeHours, v => _rankFourTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimePlatinumMedalTimeHours, v => _rankFiveTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimeRubyMedalTimeHours, v => _rankSixTime = TimeSpan.FromHours(v), true);
+        Subs.CVar(_config, RMCCVars.RMCPlaytimeAmethystMedalTimeHours, v => _rankSevenTime = TimeSpan.FromHours(v), true);
+        Subs.CVar(_config, RMCCVars.RMCPlaytimeEmeraldMedalTimeHours, v => _rankEightTime = TimeSpan.FromHours(v), true);
+        Subs.CVar(_config, RMCCVars.RMCPlaytimePrismaticMedalTimeHours, v => _rankNineTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCDisconnectedXenoGhostRoleTimeSeconds, v => _disconnectedXenoGhostRoleTime = TimeSpan.FromSeconds(v), true);
     }
 
@@ -132,7 +145,19 @@ public sealed class XenoRoleSystem : EntitySystem
             return;
 
         var time = TimeSpan.Zero;
-        if (_prototype.TryIndex(jobId, out JobPrototype? job) &&
+        if (jobId == _larvaJobProtoId)
+        {
+            // Larva's rank is determined by TOTAL xeno playtime, NOT larva playtime, adjusted by scale factor
+            try
+            {
+                time = _rmcPlaytime.GetTotalXenoPlaytime(player) / _larvaRankScaleFactor;
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Error reading total xeno playtime:\n{e}");
+            }
+        }
+        else if (_prototype.TryIndex(jobId, out JobPrototype? job) &&
             _playTimeManager.TryGetTrackerTime(player, job.PlayTimeTracker, out var nullableTime))
         {
             time = nullableTime.Value;
@@ -141,6 +166,12 @@ public sealed class XenoRoleSystem : EntitySystem
         int rank;
         if (!profile.PlaytimePerks)
             rank = 1;
+        else if (time > _rankNineTime)
+            rank = 9;
+        else if (time > _rankEightTime)
+            rank = 8;
+        else if (time > _rankSevenTime)
+            rank = 7;
         else if (time > _rankSixTime)
             rank = 6;
         else if (time > _rankFiveTime)

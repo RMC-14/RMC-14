@@ -30,6 +30,7 @@ using Content.Server.ServerInfo;
 using Content.Server.ServerUpdates;
 using Content.Server.Voting.Managers;
 using Content.Server.Worldgen.Tools;
+using Content.Shared._RMC14.PlayTimeTracking;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Administration.Managers;
 using Content.Shared.Chat;
@@ -90,6 +91,7 @@ namespace Content.Server.IoC
             // RMC14
             IoCManager.Register<LinkAccountManager>();
             IoCManager.Register<RMCPlayTimeManager>();
+            IoCManager.Register<SharedRMCPlayTimeManager, RMCPlayTimeManager>();
             IoCManager.Register<RMCDiscordManager>();
             IoCManager.Register<MentorManager>();
             IoCManager.Register<CommendationManager>();
