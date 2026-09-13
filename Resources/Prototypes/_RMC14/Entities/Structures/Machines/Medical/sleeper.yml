@@ -39,6 +39,7 @@
     channel: Equipment
   - type: DragInsertContainer
     containerId: sleeper
+    useVerbs: false
     entryDelay: 2
     delaySelfEntry: true
   - type: NoStunOnExit # Custom stun exit behavior + sound in SharedSleeperSystem

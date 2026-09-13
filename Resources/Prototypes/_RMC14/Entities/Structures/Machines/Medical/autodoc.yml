@@ -39,6 +39,7 @@
   - type: Autodoc
   - type: DragInsertContainer
     containerId: autodoc
+    useVerbs: false
     entryDelay: 2
     delaySelfEntry: true
   - type: NoStunOnExit # Custom stun exit behavior + sound in SharedAutodocSystem
