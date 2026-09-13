@@ -14,17 +14,7 @@
       factions:
       - SPP
     - type: Skills
-      skills:
-        RMCSkillCqc: 1
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillEngineer: 1
-        RMCSkillFirearms: 1
-        RMCSkillLeadership: 1
-        RMCSkillFireman: 1
-        RMCSkillJtac: 1
-        RMCSkillMeleeWeapons: 1
-        RMCSkillSpecialistWeapons: 1
+      preset: RMCSkillPresetSurvivorSPPSpecialist
     - type: Language
       spokenLanguages:
       - Russian
@@ -43,10 +33,6 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-crashland-spec
     - type: DemoSpecWhitelist
-    - type: GrenadeSpecWhitelist
-    - type: ScoutWhitelist
-    - type: SniperWhitelist
-    - type: PyroWhitelist
     - type: QYJWhitelist
     - type: RMCSurvivor
     - type: RMCAllowSuitStorage

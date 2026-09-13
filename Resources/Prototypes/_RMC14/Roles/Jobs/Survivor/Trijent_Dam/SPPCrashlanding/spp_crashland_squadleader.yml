@@ -14,19 +14,7 @@
       factions:
       - SPP
     - type: Skills
-      skills:
-        RMCSkillCqc: 1
-        RMCSkillConstruction: 2
-        RMCSkillEndurance: 2
-        RMCSkillEngineer: 3
-        RMCSkillFirearms: 1
-        RMCSkillLeadership: 2
-        RMCSkillFireman: 1
-        RMCSkillJtac: 3
-        RMCSkillMeleeWeapons: 1
-        RMCSkillSpecialistWeapons: 1
-        RMCSkillMedical: 2
-        RMCSkillOverwatch: 1
+      preset: RMCSkillPresetSurvivorSPPLeader
     - type: Language
       spokenLanguages:
       - Russian
@@ -53,11 +41,6 @@
     - type: RMCTrackable
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetSPPCrashlandWeaponOnly
-    - type: DemoSpecWhitelist
-    - type: GrenadeSpecWhitelist
-    - type: ScoutWhitelist
-    - type: SniperWhitelist
-    - type: PyroWhitelist
     - type: QYJWhitelist
     - type: RMCSurvivor
     - type: RMCAllowSuitStorage
@@ -69,7 +52,7 @@
   equipment:
     back: RMCSatchelSPPSurvivor
     belt: RMCBeltHolsterRevolverZHNK72Fill
-    outerClothing: RMCCoatSPPSurvivorFill
+    outerClothing: RMCArmorSPPSurvivorFill
     head: CMHeadCapSPPBeret
 
 - type: entity

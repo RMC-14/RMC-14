@@ -130,9 +130,14 @@
     bullet: 35 # CLOTHING_ARMOR_HIGHPLUS (bullets)
     bio: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 30 # CLOTHING_ARMOR_HIGH
+  - type: RMCGrantLeapProtection
   - type: Storage
     grid:
     - 0,0,5,1 # 3 slots
+  - type: IgnoreContentsSize # TODO RMC14: Also ignores minigun mags size
+    items:
+      tags:
+      - RMCMagazineLMGQYJ72
 
 - type: entity
   parent: RMCArmorSPPHeavy
@@ -288,7 +293,7 @@
 
 # SPP coats
 - type: entity
-  parent: RMCCoatBureauDeputy
+  parent: RMCArmorSPP
   id: RMCCoatSPP
   name: SPP UL4 officer jacket
   description: A lightweight jacket, issued to officers of the SPP's military. Slightly protective from incoming damage, best off with proper armor however.
@@ -309,6 +314,14 @@
     grid:
     - 0,0,5,1 # 3 slots
   - type: FixedItemSizeStorage
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_NONE
+    walkModifier: 1
+    sprintModifier: 1
+  - type: RemoveComponents
+    components:
+    - type: RMCArmorSpeedTier
+    - type: MoveOrderArmor
+
 
 - type: entity
   parent: RMCCoatBureauDeputy
