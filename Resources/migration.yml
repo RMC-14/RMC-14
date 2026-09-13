@@ -1533,6 +1533,9 @@ RMCIDCardPaP: RMCIDCardPCG
 RMCHeadsetSPPPaP: RMCHeadsetSPPPCG
 RMCCoatPaP: RMCCoatPCG
 
+#2026-07-11
+BoxMousetrap: RMCBoxMousetraps
+
 # 2026-07-31
 FoodBoxPizzaFilled: RMCBoxPizzaRandom
 
@@ -1549,6 +1552,10 @@ RMCAttachmentL88Grip: RMCAttachmentE290Grip
 RMCAttachmentL89Scope: RMCAttachmentE290Scope
 RMCJumpsuitMarineParaL88: RMCJumpsuitMarineParaE290
 RMCParaWebbingL88: RMCParaWebbingE290
+
+# 2026-08-23
+RMCSpawnPointSurvivorFiorinaRiotInProgressUNRiotOfficer: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBOfficer
+RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlOfficer: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader
 
 # 2026-08-26
 CMAttachmentXMVESG1FlamerNozzle: RMCAttachmentXMVESG1FlamerNozzle

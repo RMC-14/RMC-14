@@ -1,7 +1,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCrewMaintTech
-  name: ColMarTech Maintenance Technician Equipment Rack
+  name: ASRS maintenance technician equipment rack
   description: An automated rack hooked up to a colossal storage of Maintenance Technician standard-issue equipment.
   components:
   - type: AccessReader

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: CMBaseStructure
   id: RMCCommunicationsConsoleBase
@@ -7,6 +7,7 @@
     anchored: false
   - type: Physics
     bodyType: Static
+    canCollide: false
   - type: Sprite
     drawdepth: SmallObjects
     sprite: _RMC14/Structures/Machines/rmc_groundside_communications_console.rsi
