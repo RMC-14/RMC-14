@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: Unstacking upgraded burn and trauma kits no longer turns them into normal
-      ones.
-    type: Fix
-  id: 3145
-  time: '2026-04-22T04:04:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9710
 - author: PursuitinAshes
   changes:
   - message: Added more turrets to the alternate LZ1 insert on Kutjevo.
@@ -4449,5 +4441,12 @@
   id: 3644
   time: '2026-09-13T01:24:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10761
+- author: x5tink
+  changes:
+  - message: Ext Webbing and Operation Uniform to SEA Vendor
+    type: Add
+  id: 3645
+  time: '2026-09-13T02:08:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10809
 Name: RMC14
 Order: -1
