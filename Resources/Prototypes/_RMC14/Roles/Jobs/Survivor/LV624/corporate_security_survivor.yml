@@ -46,7 +46,7 @@
   id: RMCGearSurvivorLV624SecurityGuard
   equipment:
     head: RMCArmorHelmetPMCDark
-    jumpsuit: RMCJumsuitWhiteService
+    jumpsuit: RMCJumpsuitWhiteService
     outerClothing: RMCArmorVestWeYa
     ears: RMCHeadsetDistressWeYa
     id: CMIDCardLiaisonColony
