@@ -285,9 +285,9 @@
 - type: entity
   parent: RMCMarineUniformBase
   id: RMCJumpsuitRedShorts
-  name: red shorts
-  description: A ratty pair of red shorts. Smells of cigarettes.
-  suffix: Beach Bum
+  name: red athletic shorts
+  description:  95% Polyester, 5% Spandex! 
+  suffix: athletic
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Athletic/shorts_red.rsi
@@ -296,13 +296,6 @@
 
 - type: entity
   parent: RMCJumpsuitRedShorts
-  id: RMCJumpsuitAthleticShortsRed
-  name: red athletic shorts
-  description:  95% Polyester, 5% Spandex! 
-  suffix: athletic
-
-- type: entity
-  parent: RMCJumpsuitAthleticShortsRed
   id: RMCJumpsuitAthleticShortsGreen
   name: green athletic shorts
   components:
@@ -312,7 +305,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Athletic/shorts_green.rsi
 
 - type: entity
-  parent: RMCJumpsuitAthleticShortsRed
+  parent: RMCJumpsuitRedShorts
   id: RMCJumpsuitAthleticShortsBlue
   name: blue athletic shorts
   components:
@@ -322,7 +315,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Athletic/shorts_blue.rsi
 
 - type: entity
-  parent: RMCJumpsuitAthleticShortsRed
+  parent: RMCJumpsuitRedShorts
   id: RMCJumpsuitAthleticShortsBlack
   name: black athletic shorts
   components:
@@ -332,7 +325,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Athletic/shorts_black.rsi
 
 - type: entity
-  parent: RMCJumpsuitAthleticShortsRed
+  parent: RMCJumpsuitRedShorts
   id: RMCJumpsuitAthleticShortsGrey
   name: grey athletic shorts
   components:
@@ -342,7 +335,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Athletic/shorts_grey.rsi
 
 - type: entity
-  parent: RMCJumpsuitAthleticShortsRed
+  parent: RMCJumpsuitRedShorts
   id: RMCJumpsuitAthleticSwimsuitBlue
   name: blue swimsuit
   description: An old-fashioned swimsuit.
