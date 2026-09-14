@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: Added survivor spawn together inserts to Shiva's Snowball at Church,
-      Command Centre, Botany, Crisis Centre, and Garage
-    type: Add
-  - message: Changed survivor loot on Shiva's Snowball. Materials and type-19s moved
-      to Fort Biceps from engineering, Type-23 moved to junkyard from disposals, MK1s
-      moved to south of warehouse from research hab.
-    type: Tweak
-  - message: Fixed incorrect vehicle placement on Shiva causing people to get trapped.
-    type: Fix
-  id: 3148
-  time: '2026-04-22T04:08:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9682
 - author: IceNoobXD
   changes:
   - message: Examining a Pyro WS with the Pyro armor will now display their fire immunity.
@@ -4449,5 +4435,12 @@
   id: 3647
   time: '2026-09-14T16:40:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10241
+- author: Vixting
+  changes:
+  - message: setting to disable tackling other xenos as hive leader
+    type: Add
+  id: 3648
+  time: '2026-09-14T20:50:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9509
 Name: RMC14
 Order: -1
