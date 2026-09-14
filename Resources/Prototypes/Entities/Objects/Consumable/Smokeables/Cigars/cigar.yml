@@ -22,11 +22,13 @@
     size: Tiny
     sprite: Objects/Consumable/Smokeables/Cigars/cigar.rsi
     heldPrefix: unlit
+# RMC
   - type: RMCSurgeryTool
     requiresHotCautery: true
     toolTypes:
     - kind: Cautery
       quality: Awful
+# End RMC
 
 - type: entity
   id: CigarSpent
