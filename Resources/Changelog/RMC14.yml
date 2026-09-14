@@ -1,16 +1,6 @@
 ﻿Entries:
 - author: CatAndHats
   changes:
-  - message: Added survivor spawn together inserts to New Varadero, with help from
-      SharkSnake88
-    type: Add
-  - message: New Varadero Cargo Comms is now further south to make it harder to hold
-    type: Tweak
-  id: 3147
-  time: '2026-04-22T04:04:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9701
-- author: CatAndHats
-  changes:
   - message: Added survivor spawn together inserts to Shiva's Snowball at Church,
       Command Centre, Botany, Crisis Centre, and Garage
     type: Add
@@ -4451,5 +4441,13 @@
   id: 3646
   time: '2026-09-13T14:28:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10656
+- author: Phynexa
+  changes:
+  - message: CO now spawns with their secure satchel instead of a standard leather
+      satchel
+    type: Add
+  id: 3647
+  time: '2026-09-14T16:40:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10241
 Name: RMC14
 Order: -1
