@@ -1,191 +1,4 @@
 ﻿Entries:
-- author: MidZik
-  changes:
-  - message: Fixed Steelcrest's Soak ability occasionally healing for more than intended.
-    type: Fix
-  id: 3128
-  time: '2026-04-22T00:00:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9424
-- author: Dygon
-  changes:
-  - message: Increased Tesla Coil range from 3 to 3.95 tiles.
-    type: Fix
-  id: 3129
-  time: '2026-04-22T00:05:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9687
-- author: Vixting
-  changes:
-  - message: Resin surge now has an overlay.
-    type: Add
-  - message: Resin surge is now predicted
-    type: Tweak
-  - message: Burrower overlay is now visible through walls.
-    type: Tweak
-  id: 3130
-  time: '2026-04-22T00:04:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9567
-- author: Dygon
-  changes:
-  - message: You can now see local chat near the observed player while using the Overwatch
-      Console or Watch Xeno action.
-    type: Tweak
-  id: 3131
-  time: '2026-04-22T00:06:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9672
-- author: nbstrong
-  changes:
-  - message: MRE ration packs now have to be torn open before you can access their
-      contents.
-    type: Fix
-  id: 3132
-  time: '2026-04-22T00:07:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9673
-- author: nbstrong
-  changes:
-  - message: MRE ration packs now have to be torn open before you can access their
-      contents.
-    type: Fix
-  id: 3133
-  time: '2026-04-22T00:08:35.958844+00:00'
-  url: null
-- author: CatAndHats
-  changes:
-  - message: 'Chance''s Claim has recieved a passover: the pipe network has been added
-      which is expansive stretching across the entire map, LZ1 (West LZ) North Comms
-      spawn now has a shortcut to its north giving a new route to the west of A-block,
-      survivor loot has been changed at both dropships and the scout cloak has been
-      moved eastward out of the hive to the reactor entrance, the map is now grimier
-      and has recieved lots of missing prop items, and the landing zones now have
-      much better gauss turret coverage.'
-    type: Add
-  - message: Added pre-armed CLF and UNMC IFF claymores for mapping/event purposes.
-    type: Add
-  id: 3134
-  time: '2026-04-22T00:08:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9580
-- author: Ian321
-  changes:
-  - message: When a foxtrot marine enters cryosleep a new one will be woken up to
-      replace them.
-    type: Add
-  id: 3135
-  time: '2026-04-22T00:09:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9698
-- author: IceNoobXD
-  changes:
-  - message: The tool webbing can now take light replacers!
-    type: Fix
-  - message: Added more Xeno chatsan!
-    type: Add
-  - message: Machine frames are now meltable!
-    type: Fix
-  - message: Deconstructing gas pipes will no longer grant "Upstream" steel!
-    type: Fix
-  id: 3136
-  time: '2026-04-22T00:11:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9694
-- author: keegaroo65
-  changes:
-  - message: Fixed lack of hive core destroyed announcement from weedkiller
-    type: Fix
-  id: 3137
-  time: '2026-04-22T03:53:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9451
-- author: TadJohnson00
-  changes:
-  - message: '[PVE] [RCM] added the L49 assault shotgun, available for use by Assault
-      Engineers.'
-    type: Add
-  - message: '[PVE] [RCM] tweaked the L90U1 underbarrel shotgun, allowing it to take
-      a wider variety of shotgun shells while reducing its effectiveness as a breaching
-      tool.'
-    type: Tweak
-  id: 3138
-  time: '2026-04-22T03:55:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9350
-- author: wheelwrightt
-  changes:
-  - message: NVGs now display their charge upon examining helmet even when not turned
-      on.
-    type: Tweak
-  id: 3139
-  time: '2026-04-22T03:56:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9302
-- author: PursuitInAshes
-  changes:
-  - message: The CPR Dummy in the SEA vendor is now in the SEA Tech. The CMO now also
-      has access to CPR Dummies in their vendor.
-    type: Tweak
-  id: 3140
-  time: '2026-04-22T03:57:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9198
-- author: Ian321
-  changes:
-  - message: Surplus explosives crate can now be bought by requisitions.
-    type: Add
-  id: 3141
-  time: '2026-04-22T03:56:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9239
-- author: Arykh
-  changes:
-  - message: Vitamin and Protein now convert themselves into Nutriment.
-    type: Tweak
-  - message: Nutriment now has an OD of 60u. Going over 60u will cause nausea and
-      vomiting as Nutriment tries to rapidly lower itself below 60u.
-    type: Tweak
-  id: 3142
-  time: '2026-04-22T03:58:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9023
-- author: Vixting
-  changes:
-  - message: Acid on guns can be removed with extinguishers provided the gun still
-      has its second wind.
-    type: Add
-  - message: Guns now have a second wind effect, requiring a 2nd acid to be destroyed.
-    type: Add
-  - message: Acid on items now prevent picking it.
-    type: Add
-  - message: Acid on stackable item prevents splitting or merging.
-    type: Add
-  - message: Walls can now be weld repaired using alt interact
-    type: Add
-  - message: Walls now show integrity in examine text
-    type: Add
-  - message: Xenos now make acid holes when breaking a wall through claw or acid,
-      can be traversed by small xenos. To remove wall, hit or click on acid hole &
-      you will begin destroying it provided you have strong enough claws. Acid holes
-      can be repaired with sheets & nailgun.
-    type: Add
-  - message: Walls can now be repaired with nailgun & plasteel / metal / wood
-    type: Add
-  - message: Girders now have a damaged state that can be repaired with welder.
-    type: Add
-  id: 3143
-  time: '2026-04-22T04:00:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9019
-- author: TadJohnson00
-  changes:
-  - message: RCM ERT and the TSE fax responder have had their UNMC equipment replaced
-      with appropriate RCM equivalents.
-    type: Tweak
-  id: 3144
-  time: '2026-04-22T04:06:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9666
-- author: Ian321
-  changes:
-  - message: Unstacking upgraded burn and trauma kits no longer turns them into normal
-      ones.
-    type: Fix
-  id: 3145
-  time: '2026-04-22T04:04:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9710
-- author: PursuitinAshes
-  changes:
-  - message: Added more turrets to the alternate LZ1 insert on Kutjevo.
-    type: Tweak
-  id: 3146
-  time: '2026-04-22T04:05:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9711
 - author: CatAndHats
   changes:
   - message: Added survivor spawn together inserts to New Varadero, with help from
@@ -4472,5 +4285,171 @@
   id: 3627
   time: '2026-09-03T22:40:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10182
+- author: Thereisabear
+  changes:
+  - message: Fixed tools being placed when trying to deconstruct/repair placeable
+      surfaces.
+    type: Fix
+  id: 3628
+  time: '2026-09-04T21:54:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10495
+- author: MortalBaguette
+  changes:
+  - message: The ability to make Lexorin has been disabled.
+    type: Fix
+  id: 3629
+  time: '2026-09-05T00:04:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10570
+- author: J C Denton and BramvanZijp
+  changes:
+  - message: Added polished Peregrine Handcannon, silver Mateba variant for COs.
+    type: Add
+  - message: Enables Mateba special for COs.
+    type: Tweak
+  - message: CO weapons now come with a belt on spawn.
+    type: Tweak
+  - message: Winter Wyvern handcannon has been renamed to custom Peregrine Handcannon.
+    type: Tweak
+  - message: Fixed Mateba belts not having underlays for inserted revolvers.
+    type: Fix
+  - message: Fixed being able to store all kinds of items in Mateba Belt.
+    type: Fix
+  - message: Fixed a few wrong descriptions on CO's sidearm belts and weapons.
+    type: Fix
+  id: 3630
+  time: '2026-09-05T18:46:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9696
+- author: IceNoobXD
+  changes:
+  - message: Added 9 new inserts to Fiorina! Basketball (20%), Research Pristine (25%),
+      Pool Party (20%), Pizza Time (30%), Repair Panels LZ (30%), Scav Ship Holder
+      (10%), Engineer Office (30%,) Warden Office Decorated (15%) and Gamer Time (20%)!
+    type: Add
+  id: 3631
+  time: '2026-09-05T18:52:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9981
+- author: CatAndHats
+  changes:
+  - message: Added Echo and Foxtrot comfy chairs, and made them craftable like the
+      others
+    type: Add
+  id: 3632
+  time: '2026-09-05T19:08:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10825
+- author: CatAndHats
+  changes:
+  - message: Added function to Hijack Bustable Walls, they now turn into Reinforced
+      wall on Hijack
+    type: Add
+  - message: Fixed Hijack Bustable windows not breaking into window frames
+    type: Fix
+  id: 3633
+  time: '2026-09-07T10:49:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10833
+- author: Meara1179
+  changes:
+  - message: Fixed a bug as the Executive Bodyguard where selecting a suit before
+      your armor would prevent you from being able to pick an armor.
+    type: Fix
+  id: 3634
+  time: '2026-09-07T14:27:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10831
+- author: Vermidia
+  changes:
+  - message: Fixed carriers showing up and being takeable from the ghost role menu.
+    type: Fix
+  id: 3635
+  time: '2026-09-09T11:48:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10835
+- author: Thereisabear
+  changes:
+  - message: Fixed Tallgrass blocking resin.
+    type: Fix
+  id: 3636
+  time: '2026-09-09T19:01:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10385
+- author: JustMyselfUwU
+  changes:
+  - message: Fixed a microscopic typo in the text that is displayed when hitting barbed
+      barricades
+    type: Fix
+  id: 3637
+  time: '2026-09-10T15:00:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10839
+- author: IceNoobXD
+  changes:
+  - message: Fixed posters not layering above cargo containers or tables!
+    type: Fix
+  id: 3638
+  time: '2026-09-11T15:02:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9893
+- author: Vermidia
+  changes:
+  - message: Changed the color of emergency autoinjectors.
+    type: Tweak
+  id: 3639
+  time: '2026-09-12T15:02:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10706
+- author: CatAndHats
+  changes:
+  - message: Removed "Fish" as a xenonid chatsan
+    type: Remove
+  id: 3640
+  time: '2026-09-12T18:15:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10817
+- author: Vermidia
+  changes:
+  - message: Fixed turnstiles not working
+    type: Fix
+  id: 3641
+  time: '2026-09-12T18:47:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10253
+- author: kleinerstation13
+  changes:
+  - message: Changed the sound of incoming missles (Widowmaker, Banshee, Napalm, etc.)
+    type: Tweak
+  id: 3642
+  time: '2026-09-12T23:21:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10145
+- author: Dygon
+  changes:
+  - message: The Queen can no longer use the rest action while having an attached
+      ovipositor.
+    type: Fix
+  id: 3643
+  time: '2026-09-13T00:08:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9471
+- author: kleinerstation13
+  changes:
+  - message: Reworked the Riot in Progress insert to bring it in line with other military-type
+      inserts - Two specialist roles which spawn alongside the other survivors (a
+      doctor and engineer role) have been added and the Riot Control Team Leader can
+      now construct basic barricades and has leadership skills.
+    type: Tweak
+  - message: Replaced UN gear with CMB Riot Control gear in the Riot in Progress insert.
+      This is a purely visual change
+    type: Tweak
+  - message: Fixed the armory lockers in the Riot in Progress insert being inaccessible
+    type: Fix
+  id: 3644
+  time: '2026-09-13T01:24:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10761
+- author: x5tink
+  changes:
+  - message: Ext Webbing and Operation Uniform to SEA Vendor
+    type: Add
+  id: 3645
+  time: '2026-09-13T02:08:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10809
+- author: Thereisabear
+  changes:
+  - message: Fixed Scout's Thermal Cloak not turning off and dropping when armor is
+      unequipped.
+    type: Fix
+  - message: Fixed Sniper's Ghillie not breaking on being moved or buckled.
+    type: Fix
+  id: 3646
+  time: '2026-09-13T14:28:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10656
 Name: RMC14
 Order: -1
