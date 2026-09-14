@@ -7,6 +7,10 @@
   startingGear: RMCGearSurvivorUNMCVehicleCrewman
   greeting: rmc-job-greeting-varadero
   ranks:
+    RMCRankCorporal:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorEngineer
+      time: 252000 # 70 hours
     RMCRankLanceCorporal: []
   spawnMenuRoleName: UNMC Vehicle Crewman (NV Survivor)
   icon: "RMCJobIconSurvivorVehicleCrewman"

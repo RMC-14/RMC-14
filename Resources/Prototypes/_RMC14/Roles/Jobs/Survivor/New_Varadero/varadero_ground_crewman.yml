@@ -7,6 +7,10 @@
   greeting: rmc-job-greeting-varadero
   startingGear: RMCGearSurvivorUNMCGroundCrewman
   ranks:
+    RMCRankCorporal:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorEngineer
+      time: 252000 # 70 hours
     RMCRankLanceCorporal: []
   spawnMenuRoleName: UNMC Ground Crew (NV Survivor)
   icon: "CMJobIconCombatTech"
