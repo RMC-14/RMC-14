@@ -41,7 +41,7 @@ public sealed class RMCPlantSampleSystem : EntitySystem
         }
 
         var growth = Comp<RMCPlantGrowthComponent>(plant);
-        _plantTray.AdjustHealth((plant, comp, growth), -(_random.Next(3, 5) * 10));
+        _plantTray.AdjustHealth((plant, comp, growth), -(_random.Next(3, 6) * 10));
 
         var packet = _plantSeed.SpawnSeedPacket(plant, Transform(user).Coordinates, user, null);
         _randomHelper.RandomOffset(packet, 0.25f);

@@ -36,7 +36,7 @@ public sealed class RMCPlantProduceSystem : EntitySystem
         SubscribeLocalEvent<RMCProduceComponent, ExaminedEvent>(OnProduceExamined);
     }
 
-    public IEnumerable<EntityUid> Harvest(EntityUid plant, EntityUid user, int yieldMod = 1)
+    public IEnumerable<EntityUid> Harvest(EntityUid plant, EntityUid user, float yieldMod = 1f)
     {
         var harvest = Comp<RMCPlantHarvestComponent>(plant);
         if (harvest.ProductPrototypes.Count == 0 || harvest.Yield <= 0)
@@ -55,7 +55,7 @@ public sealed class RMCPlantProduceSystem : EntitySystem
         return GenerateProduct(plant, Transform(user).Coordinates, yieldMod);
     }
 
-    public IEnumerable<EntityUid> AutoHarvest(EntityUid plant, EntityCoordinates position, int yieldMod = 1)
+    public IEnumerable<EntityUid> AutoHarvest(EntityUid plant, EntityCoordinates position, float yieldMod = 1f)
     {
         var harvest = Comp<RMCPlantHarvestComponent>(plant);
         if (!position.IsValid(EntityManager) || harvest.ProductPrototypes.Count == 0)
@@ -70,14 +70,23 @@ public sealed class RMCPlantProduceSystem : EntitySystem
         return GenerateProduct(plant, position, yieldMod);
     }
 
-    public IEnumerable<EntityUid> GenerateProduct(EntityUid plant, EntityCoordinates position, int yieldMod = 1)
+    public IEnumerable<EntityUid> GenerateProduct(EntityUid plant, EntityCoordinates position, float yieldMod = 1f)
     {
         var harvest = Comp<RMCPlantHarvestComponent>(plant);
 
         var totalYield = 0;
         if (harvest.Yield > -1)
         {
-            totalYield = yieldMod < 0 ? harvest.Yield : harvest.Yield * yieldMod;
+            if (yieldMod < 1f)
+            {
+                yieldMod = 0f;
+                totalYield = harvest.Yield;
+            }
+            else
+            {
+                totalYield = harvest.Yield + _robustRandom.Next(1, (int) yieldMod + 1);
+            }
+
             totalYield = Math.Max(1, totalYield);
         }
 

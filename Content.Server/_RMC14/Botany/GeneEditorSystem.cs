@@ -82,7 +82,7 @@ public sealed class GeneEditorSystem : EntitySystem
             }
 
             var snapshot = _plantSeed.GetOrCreateSeedSnapshot(args.Used);
-            if (snapshot.OfType<RMCPlantMutationComponent>().FirstOrDefault() is { Immutable: true })
+            if (snapshot.OfType<RMCPlantMutationComponent>().FirstOrDefault() is { MutationTier: RMCPlantMutationTier.Immutable })
             {
                 _popup.PopupCursor("This seed is not compatible with our genetics technology.", args.User);
                 return;

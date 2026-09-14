@@ -34,6 +34,7 @@ public sealed class RMCPlantMutationSystem : EntitySystem
         public const string Endurance = "Endurance";
         public const string ToxinTolerance = "Toxin Tolerance";
         public const string WeedTolerance = "Weed Tolerance";
+        public const string LightTolerance = "Light Tolerance";
         public const string Production = "Production";
         public const string Lifespan = "Lifespan";
         public const string Potency = "Potency";
@@ -53,6 +54,7 @@ public sealed class RMCPlantMutationSystem : EntitySystem
         Slot.Endurance,
         Slot.ToxinTolerance,
         Slot.WeedTolerance,
+        Slot.LightTolerance,
         Slot.Production,
         Slot.Lifespan,
         Slot.Potency,
@@ -79,12 +81,11 @@ public sealed class RMCPlantMutationSystem : EntitySystem
     /// <summary>
     ///     Applies 1-3 random mutations filtered by the plants mutations slots
     /// </summary>
-    public void MutatePlant(EntityUid plant, float severity)
+    public void MutatePlant(EntityUid plant, int degree)
     {
-        if (!TryComp(plant, out RMCPlantMutationComponent? mutation) || mutation.Immutable)
+        if (!TryComp(plant, out RMCPlantMutationComponent? mutation) || mutation.MutationTier == RMCPlantMutationTier.Immutable)
             return;
 
-        var degree = severity <= 8f ? 1 : 2;
         var controller = mutation.Slots;
 
         var speciesVal = controller.GetValueOrDefault(Slot.MutateSpecies, 0f);
@@ -220,6 +221,15 @@ public sealed class RMCPlantMutationSystem : EntitySystem
                 {
                     if (!RemComp<RMCPlantTraitParasiteComponent>(plant))
                         AddComp<RMCPlantTraitParasiteComponent>(plant);
+                }
+                break;
+
+            case Slot.LightTolerance:
+                if (TryComp(plant, out RMCPlantAtmosphericComponent? lightAtmos))
+                {
+                    _plantTray.SetLightTolerance((plant, lightAtmos),
+                        Math.Clamp(lightAtmos.IdealLight + _robustRandom.Next(-1, 2) * degree, 0f, 30f),
+                        Math.Clamp(lightAtmos.LightTolerance + _robustRandom.Next(-2, 3) * degree, 0f, 10f));
                 }
                 break;
 

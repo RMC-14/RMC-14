@@ -9,7 +9,7 @@
   toxin: true
   plantMetabolism:
   - !type:Toxic
-    potency: 4.0
+    potency: 1.0
   metabolisms:
     Poison:
       metabolismRate: 0.05
@@ -28,7 +28,7 @@
   toxin: true
   plantMetabolism:
   - !type:Toxic
-    potency: 4.0
+    potency: 1.0
   - !type:Corrosive
     potency: 8.0
   metabolisms:

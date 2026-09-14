@@ -34,7 +34,8 @@ public sealed class RMCPlantAtmosphericToleranceSystem : EntitySystem
         var pressure = environment.Pressure;
         if (pressure < atmos.MinPressure || pressure > atmos.MaxPressure)
         {
-            _plantTray.AdjustHealth((plant.Owner, plant.Comp, growth), -healthMod);
+            // no atmos
+            // _plantTray.AdjustHealth((plant.Owner, plant.Comp, growth), -healthMod);
             _plantTray.SetImproperPressure((tray.Owner, tray.Comp), true);
             if (tray.Comp.DrawWarnings)
                 tray.Comp.UpdateSpriteAfterUpdate = true;
@@ -47,7 +48,8 @@ public sealed class RMCPlantAtmosphericToleranceSystem : EntitySystem
         var temperature = environment.Temperature;
         if (temperature < atmos.MinHeat || temperature > atmos.MaxHeat)
         {
-            _plantTray.AdjustHealth((plant.Owner, plant.Comp, growth), -healthMod);
+            // no atmos
+            // _plantTray.AdjustHealth((plant.Owner, plant.Comp, growth), -healthMod);
             _plantTray.SetImproperHeat((tray.Owner, tray.Comp), true);
             if (tray.Comp.DrawWarnings)
                 tray.Comp.UpdateSpriteAfterUpdate = true;

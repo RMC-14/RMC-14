@@ -18,7 +18,7 @@ public sealed class RMCPlantMetabolismSystem : EntitySystem
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
 
     public const float HydroponicsSpeedMultiplier = 1f;
-    public const float HydroponicsConsumptionMultiplier = 2f;
+    public const float HydroponicsConsumptionMultiplier = 1.5f;
 
     /// <summary>
     /// Consumes nutrients/water
@@ -28,14 +28,14 @@ public sealed class RMCPlantMetabolismSystem : EntitySystem
         if (!TryComp(plant, out RMCPlantMetabolismComponent? metabolism))
             return;
 
-        if (metabolism.NutrientConsumption > 0 && tray.Comp.NutritionLevel > 0 && _random.Prob(0.75f))
+        if (metabolism.NutrientConsumption > 0 && tray.Comp.NutritionLevel > 0 && _random.Prob(0.25f))
         {
             AdjustNutrient(tray, -MathF.Max(0f, metabolism.NutrientConsumption * HydroponicsSpeedMultiplier));
             if (tray.Comp.DrawWarnings)
                 tray.Comp.UpdateSpriteAfterUpdate = true;
         }
 
-        if (metabolism.WaterConsumption > 0 && tray.Comp.WaterLevel > 0 && _random.Prob(0.75f))
+        if (metabolism.WaterConsumption > 0 && tray.Comp.WaterLevel > 0 && _random.Prob(0.25f))
         {
             AdjustWater(tray, -MathF.Max(0f,
                 metabolism.WaterConsumption * HydroponicsConsumptionMultiplier * HydroponicsSpeedMultiplier));
@@ -54,13 +54,6 @@ public sealed class RMCPlantMetabolismSystem : EntitySystem
     {
         tray.Comp.WaterLevel += amount;
         DirtyField(tray.Owner, tray.Comp, nameof(RMCPlantTrayComponent.WaterLevel));
-
-        // Water dilutes toxins
-        if (amount > 0)
-        {
-            tray.Comp.Toxins -= amount * 4f;
-            DirtyField(tray.Owner, tray.Comp, nameof(RMCPlantTrayComponent.Toxins));
-        }
     }
 
     public void UpdateReagents(EntityUid trayUid, RMCPlantTrayComponent tray, EntityUid? plant)

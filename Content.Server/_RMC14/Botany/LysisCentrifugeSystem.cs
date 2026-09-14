@@ -91,7 +91,7 @@ public sealed class LysisCentrifugeSystem : EntitySystem
                 return;
             }
 
-            if (mutation.Immutable)
+            if (mutation.MutationTier == RMCPlantMutationTier.Immutable)
             {
                 _popup.PopupCursor("This seed is not compatible with our genetics technology.", args.User);
                 return;

@@ -35,10 +35,10 @@ public sealed class RMCPlantPestSystem : EntitySystem
     /// </summary>
     public void TickSpawn(Entity<RMCPlantTrayComponent> tray)
     {
-        if (!_random.Prob(0.01f))
+        if (!_random.Prob(0.03f))
             return;
 
-        _plantTray.AdjustPestLevel((tray.Owner, tray.Comp), 0.5f * HydroponicsSpeedMultiplier);
+        _plantTray.AdjustPestLevel((tray.Owner, tray.Comp), 0.1f * HydroponicsSpeedMultiplier);
         if (tray.Comp.DrawWarnings)
             tray.Comp.UpdateSpriteAfterUpdate = true;
     }
@@ -55,7 +55,7 @@ public sealed class RMCPlantPestSystem : EntitySystem
             _plantTray.AdjustPestLevel((tray.Owner, tray.Comp), -HydroponicsSpeedMultiplier);
             _plantTray.AdjustHealth((plant.Owner, plant.Comp, growth), HydroponicsSpeedMultiplier);
         }
-        else if (tray.Comp.PestLevel > traits.PestTolerance)
+        else if (tray.Comp.PestLevel >= traits.PestTolerance)
         {
             _plantTray.AdjustHealth((plant.Owner, plant.Comp, growth), -HydroponicsSpeedMultiplier);
         }

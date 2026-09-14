@@ -22,14 +22,14 @@ public sealed class RMCPlantGrowthSystem : EntitySystem
     /// <summary>
     /// Advances age. Runs early in the tick, before the nutrient/water/tolerance/toxin/pest/weed formuls
     /// </summary>
-    public void TickAging(Entity<RMCPlantComponent> plant)
+    public void TickAging(Entity<RMCPlantComponent> plant, RMCPlantTrayComponent tray)
     {
         var comp = plant.Comp;
         if (comp.SkipAging > 0)
             _plantTray.AdjustSkipAging((plant.Owner, comp), -1);
         else
         {
-            if (_random.Prob(0.8f))
+            if (tray.NutritionLevel > 0 && tray.WaterLevel > 0 && _random.Prob(0.3f))
                 _plantTray.AdjustAge((plant.Owner, comp), (int)(1 * HydroponicsSpeedMultiplier));
 
             comp.UpdateSpriteAfterUpdate = true;
@@ -46,7 +46,7 @@ public sealed class RMCPlantGrowthSystem : EntitySystem
 
         if (comp.Age > growth.Lifespan)
         {
-            _plantTray.AdjustHealth((plant.Owner, comp, growth), -(_random.Next(3, 5) * HydroponicsSpeedMultiplier));
+            _plantTray.AdjustHealth((plant.Owner, comp, growth), -(_random.Next(3, 6) * HydroponicsSpeedMultiplier));
             comp.UpdateSpriteAfterUpdate = true;
         }
         else if (comp.Age < 0)
@@ -115,7 +115,6 @@ public sealed class RMCPlantGrowthSystem : EntitySystem
         if (comp.Health > growth.Endurance || comp.Health < 0f)
             _plantTray.AdjustHealth((plant.Owner, comp, growth), 0f);
         _plantTray.SetMutationLevel((plant.Owner, comp), MathHelper.Clamp(comp.MutationLevel, 0f, 100f));
-        _plantTray.SetYieldMod((plant.Owner, comp), MathHelper.Clamp(comp.YieldMod, 0, 2));
         _plantTray.SetMutationMod((plant.Owner, comp), MathHelper.Clamp(comp.MutationMod, 0f, 3f));
     }
 }

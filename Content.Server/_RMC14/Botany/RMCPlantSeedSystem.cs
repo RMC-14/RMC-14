@@ -30,7 +30,6 @@ public sealed class RMCPlantSeedSystem : EntitySystem
         typeof(RMCPlantMutationComponent),
         typeof(RMCPlantMetabolismComponent),
         typeof(RMCPlantTraitLigneousComponent),
-        typeof(RMCPlantTraitKudzuComponent),
         typeof(RMCPlantTraitScreamComponent),
         typeof(RMCPlantTraitCarnivorousComponent),
         typeof(RMCPlantTraitParasiteComponent),

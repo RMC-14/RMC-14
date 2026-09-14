@@ -54,8 +54,9 @@ public sealed class RMCConsumeExudeGasSystem : EntitySystem
 
         if (missingGas > 0)
         {
-            var growth = Comp<RMCPlantGrowthComponent>(plant.Owner);
-            _plantTray.AdjustHealth((plant.Owner, plant.Comp, growth), -missingGas * HydroponicsSpeedMultiplier);
+            // no atmos
+            // var growth = Comp<RMCPlantGrowthComponent>(plant.Owner);
+            // _plantTray.AdjustHealth((plant.Owner, plant.Comp, growth), -missingGas * HydroponicsSpeedMultiplier);
             if (tray.Comp.DrawWarnings)
                 tray.Comp.UpdateSpriteAfterUpdate = true;
         }

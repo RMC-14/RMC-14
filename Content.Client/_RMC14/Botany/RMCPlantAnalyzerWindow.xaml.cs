@@ -85,7 +85,7 @@ public sealed partial class RMCPlantAnalyzerWindow : FancyWindow
         if (comp.IsTray && !comp.TrayEmpty)
         {
             WaterMetric.Update("Water", $"{comp.WaterLevel:0.#}", progress: comp.WaterLevel / 100f);
-            NutritionMetric.Update("Nutrition", $"{comp.NutritionLevel:0.#}", progress: comp.NutritionLevel / 100f);
+            NutritionMetric.Update("Nutrition", $"{comp.NutritionLevel:0.#}", progress: comp.NutritionLevel / 10f);
             PestMetric.Update("Pest", $"{comp.PestLevel:0.#}", progress: comp.PestLevel / 100f);
             WeedMetric.Update("Weed", $"{comp.WeedLevel:0.#}", progress: comp.WeedLevel / 100f);
             ToxinMetric.Update("Toxin", $"{comp.Toxins:0.#}", progress: comp.Toxins / 100f);
