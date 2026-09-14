@@ -30,7 +30,7 @@ public sealed partial class Antitoxic : RMCChemicalEffect
             return;
 
         args.EntityManager.System<SharedRMCPlantTraySystem>()
-            .SetToxins((trayUid, tray), MathF.Max(0f, tray.Toxins - 1.5f * Potency * (float) args.Quantity));
+            .SetToxins((trayUid, tray), MathF.Max(0f, tray.Toxins - 1.5f * Potency));
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

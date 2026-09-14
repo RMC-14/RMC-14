@@ -26,7 +26,7 @@ public sealed partial class Fertilizing : RMCChemicalEffect
 
     protected override void TickHydroTray(Entity<RMCPlantComponent> plant, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var amount = (float) potency;
+        var amount = Potency * (float) args.Quantity;
         var plantTray = args.EntityManager.System<SharedRMCPlantTraySystem>();
         plantTray.AdjustHealth((plant.Owner, plant.Comp, null), amount * HealthMod);
         AddYieldMod(args.EntityManager, plant, amount * YieldMod);

@@ -243,19 +243,27 @@ public sealed class RMCPlantTraySystem : SharedRMCPlantTraySystem
         if (plantComp.SkipAging < 10)
         {
             if (tray.NutritionLevel > 5)
-                AdjustHealth((plant, plantComp, growth), Convert.ToInt32(_random.Prob(0.35f)) * healthMod);
+            {
+                if (_random.Prob(0.35f))
+                    AdjustHealth((plant, plantComp, growth), healthMod);
+            }
             else
             {
                 _plantGrowth.AffectGrowth((plant, plantComp, growth), -1);
-                AdjustHealth((plant, plantComp, growth), -healthMod);
+                if (_random.Prob(0.35f))
+                    AdjustHealth((plant, plantComp, growth), -healthMod);
             }
 
             if (tray.WaterLevel > 10)
-                AdjustHealth((plant, plantComp, growth), Convert.ToInt32(_random.Prob(0.35f)) * healthMod);
+            {
+                if (_random.Prob(0.35f))
+                    AdjustHealth((plant, plantComp, growth), healthMod);
+            }
             else
             {
                 _plantGrowth.AffectGrowth((plant, plantComp, growth), -1);
-                AdjustHealth((plant, plantComp, growth), -healthMod);
+                if (_random.Prob(0.35f))
+                    AdjustHealth((plant, plantComp, growth), -healthMod);
             }
 
             if (tray.DrawWarnings)

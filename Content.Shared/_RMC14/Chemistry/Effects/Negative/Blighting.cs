@@ -27,7 +27,7 @@ public sealed partial class Blighting : RMCChemicalEffect
 
     protected override void TickHydroTray(Entity<RMCPlantComponent> plant, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var amount = (float) potency;
+        var amount = Potency * (float) args.Quantity;
         var plantTray = args.EntityManager.System<SharedRMCPlantTraySystem>();
         if (plant.Comp.Tray is { } trayUid && GetTray(args.EntityManager, plant) is { } tray)
         {

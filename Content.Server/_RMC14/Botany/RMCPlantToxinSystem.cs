@@ -25,7 +25,7 @@ public sealed class RMCPlantToxinSystem : EntitySystem
         if (tray.Comp.Toxins <= 0)
             return;
 
-        var toxinUptake = MathF.Max(1, MathF.Round(tray.Comp.Toxins / 10f));
+        var toxinUptake = MathF.Max(1, MathF.Floor(tray.Comp.Toxins / 10f));
         if (tray.Comp.Toxins > traits.ToxinsTolerance)
         {
             var growth = Comp<RMCPlantGrowthComponent>(plant.Owner);

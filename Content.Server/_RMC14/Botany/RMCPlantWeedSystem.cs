@@ -63,7 +63,7 @@ public sealed class RMCPlantWeedSystem : EntitySystem
             var chance = plant == null ? 0.05f : kudzu != null ? 1f : 0.01f;
 
             if (_random.Prob(chance))
-                _plantTray.AdjustWeedLevel((trayUid, tray), 1 + HydroponicsSpeedMultiplier * tray.WeedCoefficient);
+                _plantTray.AdjustWeedLevel((trayUid, tray), 1f * HydroponicsSpeedMultiplier * tray.WeedCoefficient);
 
             if (tray.DrawWarnings)
                 tray.UpdateSpriteAfterUpdate = true;
