@@ -840,13 +840,13 @@
   - type: RMCPlantGrowth
     lifespan: 25
     maturation: 6
-    production: 7
+    production: 1
     growthStages: 3
   - type: RMCPlantHarvest
     packetPrototype: RMCSunflowerSeeds
     productPrototypes:
     - FoodSunflower
-    yield: 5
+    yield: 2
   - type: RMCPlantChemicals
     potency: 1
     chemicals:
@@ -1050,18 +1050,18 @@
     name: seeds-chiliice-name
     noun: seeds-noun-seeds
   - type: RMCPlantGrowth
-    lifespan: 45
-    maturation: 6
-    production: 6
+    lifespan: 20
+    maturation: 4
+    production: 4
     growthStages: 6
   - type: RMCPlantHarvest
     packetPrototype: RMCIcePepperSeeds
     productPrototypes:
     - RMCFoodIcePepper
-    yield: 6
+    yield: 4
     harvestRepeat: Repeat
   - type: RMCPlantChemicals
-    potency: 10
+    potency: 20
     chemicals:
       FrostOil:
         min: 1
@@ -1089,15 +1089,15 @@
     name: seeds-glowberry-name
     noun: seeds-noun-seeds
   - type: RMCPlantGrowth
-    lifespan: 45
-    maturation: 6
-    production: 6
+    lifespan: 30
+    maturation: 5
+    production: 5
     growthStages: 6
   - type: RMCPlantHarvest
     packetPrototype: RMCGlowberrySeeds
     productPrototypes:
     - RMCFoodGlowberry
-    yield: 6
+    yield: 2
     harvestRepeat: Repeat
   - type: RMCPlantChemicals
     potency: 10
@@ -1131,15 +1131,15 @@
     name: seeds-poisonberry-name
     noun: seeds-noun-seeds
   - type: RMCPlantGrowth
-    lifespan: 45
-    maturation: 6
-    production: 6
+    lifespan: 20
+    maturation: 5
+    production: 5
     growthStages: 6
   - type: RMCPlantHarvest
     packetPrototype: RMCPoisonberrySeeds
     productPrototypes:
     - RMCFoodPoisonberry
-    yield: 6
+    yield: 2
     harvestRepeat: Repeat
   - type: RMCPlantChemicals
     potency: 10
@@ -1175,18 +1175,18 @@
     name: seeds-deathberry-name
     noun: seeds-noun-seeds
   - type: RMCPlantGrowth
-    lifespan: 45
-    maturation: 7
-    production: 7
+    lifespan: 20
+    maturation: 5
+    production: 5
     growthStages: 6
   - type: RMCPlantHarvest
     packetPrototype: RMCDeathberrySeeds
     productPrototypes:
     - RMCFoodDeathberry
-    yield: 5
+    yield: 3
     harvestRepeat: Repeat
   - type: RMCPlantChemicals
-    potency: 10
+    potency: 50
     chemicals:
       Nutriment:
         min: 1
@@ -1503,17 +1503,17 @@
     name: seeds-harebell-name
     noun: seeds-noun-seeds
   - type: RMCPlantGrowth
-    lifespan: 35
-    maturation: 5
-    production: 6
+    lifespan: 100
+    maturation: 7
+    production: 1
     growthStages: 4
   - type: RMCPlantHarvest
     packetPrototype: RMCHarebellSeeds
     productPrototypes:
     - RMCFoodHarebell
-    yield: 3
+    yield: 2
   - type: RMCPlantChemicals
-    potency: 10
+    potency: 1
     chemicals:
       Nutriment:
         min: 1
@@ -1537,15 +1537,15 @@
     name: seeds-greengrape-name
     noun: seeds-noun-seeds
   - type: RMCPlantGrowth
-    lifespan: 40
-    maturation: 6
-    production: 6
+    lifespan: 50
+    maturation: 3
+    production: 5
     growthStages: 2
   - type: RMCPlantHarvest
     packetPrototype: RMCGreengrapeSeeds
     productPrototypes:
     - RMCFoodGreengrape
-    yield: 6
+    yield: 4
     harvestRepeat: Repeat
   - type: RMCPlantChemicals
     potency: 10
@@ -1650,17 +1650,17 @@
     name: seeds-nettle-name
     noun: seeds-noun-seeds
   - type: RMCPlantGrowth
-    lifespan: 25
-    maturation: 8
+    lifespan: 30
+    maturation: 6
     production: 6
     growthStages: 5
   - type: RMCPlantHarvest
     packetPrototype: RMCNettleSeeds
     productPrototypes:
     - Nettle
-    yield: 2
+    yield: 4
   - type: RMCPlantChemicals
-    potency: 20
+    potency: 10
     chemicals:
       Nutriment:
         min: 1
@@ -1690,7 +1690,7 @@
     name: seeds-deathnettle-name
     noun: seeds-noun-seeds
   - type: RMCPlantGrowth
-    lifespan: 25
+    lifespan: 30
     maturation: 8
     production: 6
     growthStages: 5
@@ -1700,7 +1700,7 @@
     - DeathNettle
     yield: 2
   - type: RMCPlantChemicals
-    potency: 20
+    potency: 10
     chemicals:
       Nutriment:
         min: 1
@@ -2310,7 +2310,6 @@
     lifespan: 25
     maturation: 4
     production: 4
-    growthStages: 4
   - type: RMCPlantHarvest
     packetPrototype: RMCSoybeansSeeds
     productPrototypes:
