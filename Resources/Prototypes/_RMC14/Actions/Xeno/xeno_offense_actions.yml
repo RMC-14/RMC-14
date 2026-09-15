@@ -970,7 +970,6 @@
       state: screech
   - type: InstantAction
     event: !type:XenoForTheHiveActionEvent
-  - type: RMCInContainerAction
 
 - type: entity
   parent: ActionXenoBase
