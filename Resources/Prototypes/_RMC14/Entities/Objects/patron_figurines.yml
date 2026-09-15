@@ -3223,3 +3223,14 @@
     state: marla
   - type: PatronFigurine
     id: af1a8ab2-8bc8-4c82-bcba-fd79577261db
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAshlynWinters
+  name: Ashlyn Winters figurine
+  description: "Comes with brushable hair! You did remember to keep the included UNMC Figurine Hair Comb, right?\n\nThe included mini-speaker emits a sound closer to an industrial angle grinder than any coherent speech. The manufacturer elected to apply a sticky label to the figurine’s base instead.\n\n\"When I sing, it is my heartbeat against the ticking of a stopwatch.\""
+  components:
+  - type: Sprite
+    state: ashlyn_winters
+  - type: PatronFigurine
+    id: 5d804f46-a336-4e6a-8638-4e591e741d00
