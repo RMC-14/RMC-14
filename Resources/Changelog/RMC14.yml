@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: IceNoobXD
-  changes:
-  - message: Examining a Pyro WS with the Pyro armor will now display their fire immunity.
-    type: Tweak
-  - message: CBRN is now immune to fire if they have the full MOPP armor equiped!
-    type: Fix
-  id: 3149
-  time: '2026-04-22T04:07:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9695
 - author: CatAndHats
   changes:
   - message: Added survivor spawn together inserts to Kutjevo Refinery
@@ -4442,5 +4433,13 @@
   id: 3648
   time: '2026-09-14T20:50:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9509
+- author: SharkSnake98
+  changes:
+  - message: Changed the sprites for the Pepper Chips, Hot Food Vendor, and both Kepler
+      Chip variations
+    type: Tweak
+  id: 3649
+  time: '2026-09-15T22:47:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10470
 Name: RMC14
 Order: -1
