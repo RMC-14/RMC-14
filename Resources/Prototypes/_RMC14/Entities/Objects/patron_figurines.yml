@@ -3212,3 +3212,14 @@
     state: nala_witch_whitewitch
   - type: PatronFigurine
     id: 73ea9d90-bfbc-418f-a88b-8795700274ff
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMarla
+  name: Marla figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: marla
+  - type: PatronFigurine
+    id: af1a8ab2-8bc8-4c82-bcba-fd79577261db
