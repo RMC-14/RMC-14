@@ -19,4 +19,10 @@ public sealed partial class RMCPlantAtmosphericComponent : Component
 
     [DataField, AutoNetworkedField]
     public float AlterTemperature;
+
+    [DataField, AutoNetworkedField]
+    public float IdealLight;
+
+    [DataField, AutoNetworkedField]
+    public float LightTolerance;
 }

@@ -56,17 +56,9 @@ public sealed class RMCPlantGrowthSystem : EntitySystem
 
         if (TryComp(plant.Owner, out RMCPlantHarvestComponent? harvest) && harvest.ProductPrototypes.Count > 0)
         {
-            if (comp.Age > growth.Production)
+            if (comp.Age > growth.Production && comp.Age - growth.LastProduce > growth.Production && !comp.Harvest)
             {
-                if (comp.Age - growth.LastProduce > growth.Production && !comp.Harvest)
-                {
-                    _plantTray.SetHarvestReady((plant.Owner, comp), true);
-                    _plantTray.SetLastProduce((plant.Owner, growth), comp.Age);
-                }
-            }
-            else if (comp.Harvest)
-            {
-                _plantTray.SetHarvestReady((plant.Owner, comp), false);
+                _plantTray.SetHarvestReady((plant.Owner, comp), true);
                 _plantTray.SetLastProduce((plant.Owner, growth), comp.Age);
             }
         }
@@ -98,15 +90,11 @@ public sealed class RMCPlantGrowthSystem : EntitySystem
     }
 
     /// <summary>
-    /// Decays MetabolismAdjust toward zero by 5 per tick. Called once per tray growth cycle.
+    /// Consumes MetabolismAdjust once its delayed/accelerated cycle has fired. Called once per tray growth cycle.
     /// </summary>
-    public void DecayMetabolismAdjust(Entity<RMCPlantComponent> plant)
+    public void ResetMetabolismAdjust(Entity<RMCPlantComponent> plant)
     {
-        var comp = plant.Comp;
-        if (comp.MetabolismAdjust > 0)
-            _plantTray.SetMetabolismAdjust((plant.Owner, comp), MathF.Max(0f, comp.MetabolismAdjust - 5f));
-        else if (comp.MetabolismAdjust < 0)
-            _plantTray.SetMetabolismAdjust((plant.Owner, comp), MathF.Min(0f, comp.MetabolismAdjust + 5f));
+        _plantTray.SetMetabolismAdjust((plant.Owner, plant.Comp), 0f);
     }
 
     public void CheckLevelSanity(Entity<RMCPlantComponent, RMCPlantGrowthComponent> plant)
@@ -115,6 +103,5 @@ public sealed class RMCPlantGrowthSystem : EntitySystem
         if (comp.Health > growth.Endurance || comp.Health < 0f)
             _plantTray.AdjustHealth((plant.Owner, comp, growth), 0f);
         _plantTray.SetMutationLevel((plant.Owner, comp), MathHelper.Clamp(comp.MutationLevel, 0f, 100f));
-        _plantTray.SetMutationMod((plant.Owner, comp), MathHelper.Clamp(comp.MutationMod, 0f, 3f));
     }
 }

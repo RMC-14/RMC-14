@@ -52,15 +52,13 @@ public sealed class RMCPlantWeedSystem : EntitySystem
     }
 
     /// <summary>
-    /// Weed spawn %, kudzu conversion, & the weed invasion roll
+    /// Weed spawn % & the weed invasion roll
     /// </summary>
     public void TickSpawn(EntityUid trayUid, RMCPlantTrayComponent tray, EntityUid? plant, RMCPlantTraitsComponent? traits)
     {
-        var kudzu = plant != null ? CompOrNull<RMCPlantTraitKudzuComponent>(plant.Value) : null;
-
-        if (tray.WaterLevel > 10 && tray.NutritionLevel > 5)
+        if (tray.WaterLevel > 10 && tray.NutritionLevel > 2)
         {
-            var chance = plant == null ? 0.05f : kudzu != null ? 1f : 0.01f;
+            var chance = plant == null ? 0.05f : 0.01f;
 
             if (_random.Prob(chance))
                 _plantTray.AdjustWeedLevel((trayUid, tray), 1f * HydroponicsSpeedMultiplier * tray.WeedCoefficient);
@@ -69,21 +67,11 @@ public sealed class RMCPlantWeedSystem : EntitySystem
                 tray.UpdateSpriteAfterUpdate = true;
         }
 
-        if (plant != null && kudzu != null && tray.WeedLevel >= kudzu.WeedHighLevelThreshold)
-        {
-            Spawn(kudzu.KudzuPrototype, Transform(trayUid).Coordinates.SnapToGrid(EntityManager));
-            RemComp<RMCPlantTraitKudzuComponent>(plant.Value);
-
-            var killedComp = Comp<RMCPlantComponent>(plant.Value);
-            var killedGrowth = Comp<RMCPlantGrowthComponent>(plant.Value);
-            _plantTray.AdjustHealth((plant.Value, killedComp, killedGrowth), -killedComp.Health);
-        }
-
         // Chance for weed explosion to happen if weeds take over
-        // Plants that are themselves weeds (WeedTolerance > 8) are unaffected
+        // Plants that are themselves weeds (high WeedTolerance) are unaffected
         if (tray.WeedLevel >= 10 && _random.Prob(0.1f))
         {
-            if (plant == null || tray.WeedLevel >= traits!.WeedTolerance + 2)
+            if (plant == null || tray.WeedLevel >= traits!.WeedTolerance)
                 WeedInvasion(trayUid, tray, plant);
         }
     }

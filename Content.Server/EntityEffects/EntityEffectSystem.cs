@@ -204,7 +204,7 @@ public sealed class EntityEffectSystem : EntitySystem
         if (mustHaveAlivePlant && plantComponent.Dead)
             return false;
 
-        if (mustHaveMutableSeed && (!TryComp(plant, out RMCPlantMutationComponent? mutation) || mutation.Immutable))
+        if (mustHaveMutableSeed && (!TryComp(plant, out RMCPlantMutationComponent? mutation) || mutation.MutationTier == RMCPlantMutationTier.Immutable))
             return false;
 
         return true;

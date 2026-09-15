@@ -49,4 +49,7 @@ public sealed partial class RMCPlantChemicalsComponent : Component
 
     [DataField, AutoNetworkedField]
     public float PotencyCounter;
+
+    [DataField, AutoNetworkedField]
+    public float ChemAddCounter;
 }

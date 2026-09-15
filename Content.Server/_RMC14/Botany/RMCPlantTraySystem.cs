@@ -196,7 +196,7 @@ public sealed class RMCPlantTraySystem : SharedRMCPlantTraySystem
             }
 
             if (plantUid != null)
-                _plantGrowth.DecayMetabolismAdjust((plantUid.Value, Comp<RMCPlantComponent>(plantUid.Value)));
+                _plantGrowth.ResetMetabolismAdjust((plantUid.Value, Comp<RMCPlantComponent>(plantUid.Value)));
         }
 
         tray.LastCycle = curTime;
@@ -355,8 +355,8 @@ public sealed class RMCPlantTraySystem : SharedRMCPlantTraySystem
         SetDead((plant, comp), true);
         SetHarvestReady((plant, comp), false);
         SetMutationLevel((plant, comp), 0f);
-        SetYieldMod((plant, comp), 1);
-        SetMutationMod((plant, comp), 1f);
+        SetYieldMod((plant, comp), 0);
+        SetMutationMod((plant, comp), 0f);
         SetImproperHeat((trayUid, tray), false);
         SetImproperPressure((trayUid, tray), false);
         AdjustWeedLevel((trayUid, tray), 1 * HydroponicsSpeedMultiplier);
