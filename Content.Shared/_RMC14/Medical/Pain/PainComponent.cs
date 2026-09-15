@@ -16,34 +16,35 @@ public sealed partial class PainComponent : Component
     /// Base pain value derived from overall damage to the body, without accounting for any <see cref="PainModifiers"/>.
     /// </summary>
     [ViewVariables, AutoNetworkedField]
-    public FixedPoint2 CurrentPain = FixedPoint2.Zero;
+    public FixedPoint2 BasePainValue = FixedPoint2.Zero;
 
     /// <summary>
-    /// 0 to 100 value representing how much pain the player actually <i>feels</i> after applying any <see cref="PainModifiers"/> like painkillers.
+    /// 0 to 100 value representing how much pain the player actually <i>feels</i> after applying any
+    /// <see cref="PainModifiers"/> like painkillers to <see cref="BasePainValue"/>.
     /// </summary>
     [ViewVariables, AutoNetworkedField]
-    public FixedPoint2 CurrentPainPercentage = FixedPoint2.Zero;
+    public FixedPoint2 ActualPainPercentage = FixedPoint2.Zero;
 
     /// <summary>
     /// Zero-based index of the currently active <see cref="PainLevel"/> in the <see cref="PainLevels"/> list.
-    /// This is set based on the highest <see cref="PainLevel.Threshold"/> passed by <see cref="CurrentPainPercentage"/>.
+    /// This is set based on the highest <see cref="PainLevel.Threshold"/> passed by <see cref="ActualPainPercentage"/>.
     /// </summary>
     /// <remarks>
     /// Please use <see cref="PainSystem.SetCurrentPainLevel(Entity{PainComponent}, int)"/> when setting this
     /// so that the user's pain overlay can be updated with <see cref="PainLevelChangedEvent"/>.
     /// </remarks>
     [ViewVariables, AutoNetworkedField]
-    public int CurrentPainLevel = 0;
+    public int CurrentPainLevelIdx = 0;
 
     /// <summary>
     /// List of currently active <see cref="PainModifier"/>s, either increasing or decreasing the amount
-    /// of pain felt by the player in <see cref="CurrentPainPercentage"/>.
+    /// of pain felt by the player in <see cref="ActualPainPercentage"/>.
     /// </summary>
     /// <remarks>
     /// Due to painkiller <see cref="EntityEffect"/>s not being predictable, the values of any <see cref="PainModifier"/>s
     /// caused by them may be out of sync on the Client's side. <see cref="PainModifier.ExpireAt"/> in particular.
     /// </remarks>
-    /// <seealso cref="PainSystem.UpdateCurrentPainPercentage(Entity{PainComponent})"/>
+    /// <seealso cref="PainSystem.UpdateActualPainPercentage(Entity{PainComponent})"/>
     [ViewVariables, AutoNetworkedField]
     public List<PainModifier> PainModifiers = [];
 
@@ -58,7 +59,7 @@ public sealed partial class PainComponent : Component
     public TimeSpan NextUpdateTime = new(0);
 
     /// <summary>
-    /// Time between each update of <see cref="CurrentPainLevel"/>.
+    /// Time between each update of <see cref="CurrentPainLevelIdx"/>.
     /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan PainLevelUpdateRate = TimeSpan.FromSeconds(2);
@@ -87,8 +88,8 @@ public sealed partial class PainComponent : Component
 
     /// <summary>
     /// List of <see cref="PainLevel"/>s structs, each containing its own list of <see cref="EntityEffect"/>s to be triggered when
-    /// <see cref="CurrentPainPercentage"/> passes their <see cref="PainLevel.Threshold"/>.<br/>
-    /// Only one <see cref="PainLevel"/> can be active at a time, with the currently active level indicated by its index in <see cref="CurrentPainLevel"/>.
+    /// <see cref="ActualPainPercentage"/> passes their <see cref="PainLevel.Threshold"/>.<br/>
+    /// Only one <see cref="PainLevel"/> can be active at a time, with the currently active level indicated by its index in <see cref="CurrentPainLevelIdx"/>.
     /// </summary>
     [DataField(required: true)]
     public List<PainLevel> PainLevels = [];

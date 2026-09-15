@@ -397,16 +397,19 @@ public sealed class HealthScannerUiData
         if (uiState.Chemicals != null &&
             !_mob.IsDead(target) &&
             _entities.TryGetComponent<PainComponent>(target, out var pain) &&
-            pain.CurrentPainPercentage > 5)
+            pain.ActualPainPercentage > 5)
         {
-            if (pain.CurrentPainPercentage > 40 &&
-                !uiState.Chemicals.ContainsReagent("CMOxycodone", null))
+            // If there's oxycodone in their system already then other painkillers won't be able to improve on that.
+            if (!uiState.Chemicals.ContainsReagent("CMOxycodone", null))
             {
-                AddAdvice(Loc.GetString("rmc-health-analyzer-advice-oxycodone"), window);
-            }
-            else if (!uiState.Chemicals.ContainsReagent("CMTramadol", null))
-            {
-                AddAdvice(Loc.GetString("rmc-health-analyzer-advice-tramadol"), window);
+                if (pain.ActualPainPercentage > 40)
+                {
+                    AddAdvice(Loc.GetString("rmc-health-analyzer-advice-oxycodone"), window);
+                }
+                else if (!uiState.Chemicals.ContainsReagent("CMTramadol", null))
+                {
+                    AddAdvice(Loc.GetString("rmc-health-analyzer-advice-tramadol"), window);
+                }
             }
         }
 
