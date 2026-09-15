@@ -90,7 +90,7 @@ public sealed partial class PainComponent : Component
     /// <see cref="CurrentPainPercentage"/> passes their <see cref="PainLevel.Threshold"/>.<br/>
     /// Only one <see cref="PainLevel"/> can be active at a time, with the currently active level indicated by its index in <see cref="CurrentPainLevel"/>.
     /// </summary>
-    [DataField(readOnly: true, required: true)]
+    [DataField(required: true)]
     public List<PainLevel> PainLevels = [];
 }
 
