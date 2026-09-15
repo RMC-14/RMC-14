@@ -1701,12 +1701,12 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronRikkiNakesone
-  name: Rikki Nakesone figurine
+  id: RMCFigurinePatronLaveCCOLonomia
+  name: Lave 'CCO' Lonomia figurine
   description: "When one loaf of banana bread isn't enough."
   components:
   - type: Sprite
-    state: rikki_nakesone
+    state: lave_cco_lonomia
   - type: PatronFigurine
     id: ecb46485-1660-4b92-99b9-21ad29b46a17
   - type: EmitSoundOnUse
