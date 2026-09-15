@@ -23,6 +23,7 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-pve-forecon-squad-lead
+    - type: SquadLeader
     - type: AssignSquad
       squad: SquadFORECON
     - type: TacticalMapIcon
