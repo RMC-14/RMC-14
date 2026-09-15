@@ -3201,3 +3201,14 @@
     state: tom_melon_malone
   - type: PatronFigurine
     id: afb34b95-aa17-4ba3-b829-81d9ff390b37
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronNalaWitchWhitewitch
+  name: Nala 'Witch' Whitewitch figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: nala_witch_whitewitch
+  - type: PatronFigurine
+    id: 73ea9d90-bfbc-418f-a88b-8795700274ff
