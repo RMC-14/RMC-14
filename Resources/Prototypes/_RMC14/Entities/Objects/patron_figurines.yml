@@ -3245,3 +3245,14 @@
     state: sahr-shahvee
   - type: PatronFigurine
     id: 77f4047f-9772-44da-99ab-dd3567d149bb
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronBlankaDisaterZaun
+  name: Blanka 'Disater' Zaun figurine
+  description: "Carrying this figurine makes you feel very susceptible to misfortune...and getting blown up..."
+  components:
+  - type: Sprite
+    state: blanka_disater_zaun
+  - type: PatronFigurine
+    id: 09f7766a-f0e9-4ef1-911e-ea646be2582f
