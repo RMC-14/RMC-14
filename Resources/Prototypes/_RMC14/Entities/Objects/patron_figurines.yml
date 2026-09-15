@@ -3234,3 +3234,14 @@
     state: ashlyn_winters
   - type: PatronFigurine
     id: 5d804f46-a336-4e6a-8638-4e591e741d00
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSahr-Shahvee
+  name: Sahr-Shahvee figurine
+  description: "Only the bestest ASO!"
+  components:
+  - type: Sprite
+    state: sahr-shahvee
+  - type: PatronFigurine
+    id: 77f4047f-9772-44da-99ab-dd3567d149bb
