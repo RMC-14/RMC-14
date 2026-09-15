@@ -2607,7 +2607,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronBugsPaperboySwedersson
   name: Bugs 'Paperboy' Swedersson figurine
-  description: "The figurine is warm to the touch."
+  description: "The underside of the base has a sticky note applied...\n\n\"Do not tumble dry\""
   components:
   - type: Sprite
     state: bugs_paperboy_swedersson
