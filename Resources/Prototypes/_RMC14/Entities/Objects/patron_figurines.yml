@@ -3190,3 +3190,14 @@
     state: buck_pretty_tern
   - type: PatronFigurine
     id: 54d2b7d9-8b7b-42f5-84a1-ec45f539d62f
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronTomMelonMalone
+  name: Tom 'Melon' Malone figurine
+  description: "Little Bravo dude who is always seen holding a blowtorch and a lemon."
+  components:
+  - type: Sprite
+    state: tom_melon_malone
+  - type: PatronFigurine
+    id: afb34b95-aa17-4ba3-b829-81d9ff390b37
