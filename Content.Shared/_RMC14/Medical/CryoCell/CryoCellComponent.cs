@@ -28,7 +28,7 @@ public sealed partial class CryoCellComponent : Component
     public float CryoCellTemperature = 115f;
 
     /// <summary>
-    /// The temperature threshold needed to reach in freezing liquids for cryo effects in Kelvin
+    /// The temperature threshold to reach while inside freezing liquids (required for cryo effects)
     /// </summary>
     /// <remarks>Temperature in Kelvin</remarks>
     [DataField, AutoNetworkedField]

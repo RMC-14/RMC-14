@@ -39,7 +39,7 @@
   - type: Autodoc
   - type: DragInsertContainer
     containerId: autodoc
-    useVerbs: false
+    useVerbs: false # Stops Alt-Click from bypassing do-after
     entryDelay: 2
     delaySelfEntry: true
   - type: NoStunOnExit # Custom stun exit behavior + sound in SharedAutodocSystem

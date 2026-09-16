@@ -40,7 +40,7 @@
     channel: Equipment
   - type: DragInsertContainer
     containerId: cryo_cell
-    useVerbs: false
+    useVerbs: false # Stops Alt-Click from bypassing do-after
     entryDelay: 2
     delaySelfEntry: true
   - type: NoStunOnExit
