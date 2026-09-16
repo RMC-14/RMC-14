@@ -63,8 +63,8 @@ public sealed partial class PainSystem : EntitySystem
     {
         var pain = ent.Comp;
         pain.PainModifiers.Clear();
-        pain.BasePainValue = 0;
-        pain.ActualPainPercentage = 0;
+        pain.BasePain = 0;
+        pain.PerceivedPain = 0;
         SetCurrentPainLevelIdx(ent, 0);
         Dirty(ent);
 
@@ -91,10 +91,10 @@ public sealed partial class PainSystem : EntitySystem
         newPainValue += GetDamageGroupPain(damage, ToxinGroup, painComp.ToxinPainMultiplier);
         newPainValue += GetDamageGroupPain(damage, AirlossGroup, painComp.AirlossPainMultiplier);
 
-        if (painComp.BasePainValue != newPainValue)
+        if (painComp.BasePain != newPainValue)
         {
-            painComp.BasePainValue = newPainValue;
-            DirtyField(ent, ent.Comp, nameof(PainComponent.BasePainValue));
+            painComp.BasePain = newPainValue;
+            DirtyField(ent, ent.Comp, nameof(PainComponent.BasePain));
         }
 
         FixedPoint2 GetDamageGroupPain(DamageSpecifier damage, ProtoId<DamageGroupPrototype> damageGroup, FixedPoint2 painMultiplier)
@@ -109,7 +109,7 @@ public sealed partial class PainSystem : EntitySystem
         }
     }
 
-    private void UpdateActualPainPercentage(Entity<PainComponent> ent)
+    private void UpdatePerceivedPain(Entity<PainComponent> ent)
     {
         var maxPainReductionModifierStrength = FixedPoint2.Zero;
         var painIncrease = FixedPoint2.Zero;
@@ -126,15 +126,15 @@ public sealed partial class PainSystem : EntitySystem
             }
         }
 
-        var painWithIncrease = ent.Comp.BasePainValue + painIncrease;
+        var painWithIncrease = ent.Comp.BasePain + painIncrease;
         // Pain reduction effectiveness linearly decreases as the pain goes up
         var newPainReduction = FixedPoint2.Max(0, -painWithIncrease * ent.Comp.PainReductionDecreaseRate + maxPainReductionModifierStrength);
         var newPainPercentage = FixedPoint2.Clamp(painWithIncrease - newPainReduction, 0, 100);
 
-        if (newPainPercentage != ent.Comp.ActualPainPercentage)
+        if (newPainPercentage != ent.Comp.PerceivedPain)
         {
-            ent.Comp.ActualPainPercentage = newPainPercentage;
-            DirtyField(ent, ent.Comp, nameof(PainComponent.ActualPainPercentage));
+            ent.Comp.PerceivedPain = newPainPercentage;
+            DirtyField(ent, ent.Comp, nameof(PainComponent.PerceivedPain));
         }
     }
 
@@ -173,8 +173,8 @@ public sealed partial class PainSystem : EntitySystem
             pain.NextUpdateTime = time + pain.UpdateRate;
             DirtyField(uid, pain, nameof(PainComponent.NextUpdateTime));
 
-            if (pain.BasePainValue == 0 &&
-                pain.ActualPainPercentage == 0 &&
+            if (pain.BasePain == 0 &&
+                pain.PerceivedPain == 0 &&
                 pain.CurrentPainLevelIdx == 0 &&
                 pain.PainModifiers.Count == 0)
             {
@@ -188,15 +188,15 @@ public sealed partial class PainSystem : EntitySystem
                 DirtyField(uid, pain, nameof(PainComponent.PainModifiers));
 
             // Update the pain felt by the player.
-            UpdateActualPainPercentage((uid, pain));
+            UpdatePerceivedPain((uid, pain));
 
             if (time >= pain.NextPainLevelUpdateTime)
             {
                 pain.NextPainLevelUpdateTime = time + pain.PainLevelUpdateRate;
                 DirtyField(uid, pain, nameof(PainComponent.NextPainLevelUpdateTime));
 
-                // Get the highest level in `PainLevels` whose threshold has been passed by `ActualPainPercentage`.
-                var highestPainLevelIdx = pain.PainLevels.FindLastIndex(level => level.Threshold <= pain.ActualPainPercentage);
+                // Get the highest level in `PainLevels` whose threshold has been passed by `PerceivedPain`.
+                var highestPainLevelIdx = pain.PainLevels.FindLastIndex(level => level.Threshold <= pain.PerceivedPain);
 
                 // Move `currentPainLevelIdx` towards `highestPainLevelIdx` by one step.
                 if (highestPainLevelIdx > pain.CurrentPainLevelIdx)

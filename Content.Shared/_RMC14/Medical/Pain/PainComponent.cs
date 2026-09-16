@@ -16,18 +16,22 @@ public sealed partial class PainComponent : Component
     /// Base pain value derived from overall damage to the body, without accounting for any <see cref="PainModifiers"/>.
     /// </summary>
     [ViewVariables, AutoNetworkedField]
-    public FixedPoint2 BasePainValue = FixedPoint2.Zero;
+    public FixedPoint2 BasePain = FixedPoint2.Zero;
 
     /// <summary>
-    /// 0 to 100 value representing how much pain the player actually <i>feels</i> after applying any
-    /// <see cref="PainModifiers"/> like painkillers to <see cref="BasePainValue"/>.
+    /// Value representing how much pain the player actually <i>feels</i> after applying any <see cref="PainModifiers"/>
+    /// like painkillers to <see cref="BasePain"/>.
+    /// <para>
+    /// This is clamped between 0 (no pain) and 100 (maximum pain), and is used to select the highest <see cref="PainLevel"/>
+    /// in <see cref="PainLevels"/> where <c>PainLevel.Threshold &lt;= PerceivedPain</c>.
+    /// </para>
     /// </summary>
     [ViewVariables, AutoNetworkedField]
-    public FixedPoint2 ActualPainPercentage = FixedPoint2.Zero;
+    public FixedPoint2 PerceivedPain = FixedPoint2.Zero;
 
     /// <summary>
     /// Zero-based index of the currently active <see cref="PainLevel"/> in the <see cref="PainLevels"/> list.
-    /// This is set based on the highest <see cref="PainLevel.Threshold"/> passed by <see cref="ActualPainPercentage"/>.
+    /// This is set based on the highest <see cref="PainLevel.Threshold"/> passed by <see cref="PerceivedPain"/>.
     /// </summary>
     /// <remarks>
     /// Please use <see cref="PainSystem.SetCurrentPainLevel(Entity{PainComponent}, int)"/> when setting this
@@ -38,13 +42,13 @@ public sealed partial class PainComponent : Component
 
     /// <summary>
     /// List of currently active <see cref="PainModifier"/>s, either increasing or decreasing the amount
-    /// of pain felt by the player in <see cref="ActualPainPercentage"/>.
+    /// of pain felt by the player in <see cref="PerceivedPain"/>.
     /// </summary>
     /// <remarks>
     /// Due to painkiller <see cref="EntityEffect"/>s not being predictable, the values of any <see cref="PainModifier"/>s
     /// caused by them may be out of sync on the Client's side. <see cref="PainModifier.ExpireAt"/> in particular.
     /// </remarks>
-    /// <seealso cref="PainSystem.UpdateActualPainPercentage(Entity{PainComponent})"/>
+    /// <seealso cref="PainSystem.UpdatePerceivedPain(Entity{PainComponent})"/>
     [ViewVariables, AutoNetworkedField]
     public List<PainModifier> PainModifiers = [];
 
@@ -88,7 +92,7 @@ public sealed partial class PainComponent : Component
 
     /// <summary>
     /// List of <see cref="PainLevel"/>s structs, each containing its own list of <see cref="EntityEffect"/>s to be triggered when
-    /// <see cref="ActualPainPercentage"/> passes their <see cref="PainLevel.Threshold"/>.<br/>
+    /// <see cref="PerceivedPain"/> passes their <see cref="PainLevel.Threshold"/>.<br/>
     /// Only one <see cref="PainLevel"/> can be active at a time, with the currently active level indicated by its index in <see cref="CurrentPainLevelIdx"/>.
     /// </summary>
     [DataField(required: true)]
