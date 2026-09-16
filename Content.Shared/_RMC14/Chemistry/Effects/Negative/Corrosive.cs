@@ -116,6 +116,11 @@ public sealed partial class Corrosive : RMCChemicalEffect
         }
 
         var volume = (float) args.Quantity;
+
+        // TODO RMC14: volume>=10 special case that deals flat damage (4 brute + 2 burn)
+        // to humans head limb specifically, with a chance to scream, once no headgear/mask/eyewear
+        // is left to melt
+
         var rmcDamageable = entities.System<SharedRMCDamageableSystem>();
         var damage = rmcDamageable.DistributeDamageCached(target, BruteGroup, MathF.Min(6f, volume));
         damageable.TryChangeDamage(target, damage, true, interruptsDoAfters: false);

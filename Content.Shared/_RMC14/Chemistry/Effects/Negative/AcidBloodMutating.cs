@@ -20,6 +20,12 @@ public sealed partial class AcidBloodMutating : RMCChemicalEffect
     public float MutateChance = 0.1f;
 
     [DataField]
+    public float RoyalChemAddThreshold = 5f;
+
+    [DataField]
+    public float RoyalChemAddChance = 0.6f;
+
+    [DataField]
     public int MaxChemicals = 10;
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
@@ -40,12 +46,18 @@ public sealed partial class AcidBloodMutating : RMCChemicalEffect
         plantTray.AdjustHealth((plant.Owner, plant.Comp, null), -(Royal ? 4f : 1f) * p);
 
         var random = IoCManager.Resolve<IRobustRandom>();
-        if (!random.Prob(MutateChance))
-            return;
 
         if (Royal)
         {
-            if (chemicals.Chemicals.Count > MaxChemicals)
+            var counter = chemicals.ChemAddCounter + p;
+            plantTray.SetChemAddCounter((plant.Owner, chemicals), counter);
+
+            if (counter < RoyalChemAddThreshold || !random.Prob(RoyalChemAddChance))
+                return;
+
+            plantTray.SetChemAddCounter((plant.Owner, chemicals), counter - RoyalChemAddThreshold);
+
+            if (chemicals.Chemicals.Count > MaxChemicals || !chemicals.Chemicals.ContainsKey(SelfChem))
                 return;
 
             var prototype = IoCManager.Resolve<IPrototypeManager>();
@@ -60,8 +72,13 @@ public sealed partial class AcidBloodMutating : RMCChemicalEffect
             var pick = random.Pick(hydro);
             chemicals.Chemicals.TryAdd(pick, new SeedChemQuantity { Min = 1, Max = random.Next(2, 4), PotencyDivisor = 20, Inherent = false });
             plantTray.DirtyChemicals((plant.Owner, chemicals));
+            return;
         }
-        else if (chemicals.Chemicals.Count > 1)
+
+        if (!random.Prob(MutateChance))
+            return;
+
+        if (chemicals.Chemicals.Count > 1)
         {
             var removed = random.Pick(chemicals.Chemicals.Keys.ToList());
             chemicals.Chemicals.Remove(removed);

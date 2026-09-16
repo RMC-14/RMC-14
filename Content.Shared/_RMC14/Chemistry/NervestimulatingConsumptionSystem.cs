@@ -39,13 +39,27 @@ public sealed class NervestimulatingConsumptionSystem : EntitySystem
 
         foreach (var reagent in solution.Contents.ToArray())
         {
-            if (!_rmcReagent.TryIndex(reagent.Reagent, out var proto) ||
-                proto.Metabolisms is not { } metabolisms ||
-                !metabolisms.TryGetValue("Poison", out var entry) ||
-                !entry.Effects.Any(e => e is Nervestimulating))
-            {
+            if (!_rmcReagent.TryIndex(reagent.Reagent, out var proto) || proto.Metabolisms is not { } metabolisms)
                 continue;
+
+            var hasNervestimulating = false;
+            foreach (var (_, entry) in metabolisms)
+            {
+                foreach (var effect in entry.Effects)
+                {
+                    if (effect is not Nervestimulating)
+                        continue;
+
+                    hasNervestimulating = true;
+                    break;
+                }
+
+                if (hasNervestimulating)
+                    break;
             }
+
+            if (!hasNervestimulating)
+                continue;
 
             _solutionContainer.RemoveReagent(ent.Comp.ChemicalSolution.Value, reagent.Reagent, reduction);
         }

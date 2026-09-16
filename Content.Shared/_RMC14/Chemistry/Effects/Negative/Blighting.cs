@@ -2,7 +2,6 @@ using Content.Shared._RMC14.Botany;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Random;
 
 namespace Content.Shared._RMC14.Chemistry.Effects.Negative;
 
@@ -38,13 +37,18 @@ public sealed partial class Blighting : RMCChemicalEffect
         if (!args.EntityManager.TryGetComponent<RMCPlantGrowthComponent>(plant.Owner, out var growth))
             return;
 
-        var immutable = args.EntityManager.TryGetComponent<RMCPlantMutationComponent>(plant.Owner, out var mutation) && mutation.Immutable;
+        var immutable = args.EntityManager.TryGetComponent<RMCPlantMutationComponent>(plant.Owner, out var mutation) && mutation.MutationTier == RMCPlantMutationTier.Immutable;
         if (immutable || growth.Production <= MinProduction)
             return;
 
-        if (!IoCManager.Resolve<IRobustRandom>().Prob(amount / DivergeVolume))
+        var counter = plant.Comp.BlightProductionCounter + amount;
+        if (counter < DivergeVolume)
+        {
+            plantTray.SetBlightProductionCounter((plant.Owner, plant.Comp), counter);
             return;
+        }
 
+        plantTray.SetBlightProductionCounter((plant.Owner, plant.Comp), 0f);
         plantTray.SetProduction((plant.Owner, growth), MathF.Max(0f, growth.Production - 1f));
     }
 }

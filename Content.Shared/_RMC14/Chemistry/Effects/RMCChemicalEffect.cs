@@ -147,16 +147,9 @@ public abstract partial class RMCChemicalEffect : EntityEffect
         if (delta == 0f)
             return;
 
-        var whole = (int) MathF.Floor(delta);
-        var remainder = delta - whole;
-        if (remainder > 0f && IoCManager.Resolve<IRobustRandom>().Prob(remainder))
-            whole += 1;
-
-        entityManager.System<SharedRMCPlantTraySystem>().SetYieldMod((plant.Owner, plant.Comp), plant.Comp.YieldMod + whole);
+        entityManager.System<SharedRMCPlantTraySystem>().SetYieldMod((plant.Owner, plant.Comp), plant.Comp.YieldMod + delta);
     }
 
-    // The clone-on-write dance the old SeedData-sharing model needed is gone — each plant is its own
-    // entity with its own component instances, so mutating the mutation-controller dict directly is safe.
     protected static void SuppressMutationSlot(IEntityManager entityManager, Entity<RMCPlantComponent> plant, string slot, float value)
     {
         if (!entityManager.TryGetComponent<RMCPlantMutationComponent>(plant.Owner, out var mutation))
