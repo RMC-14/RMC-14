@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 02/02/2026 23:09:29
-  entityCount: 544
+  time: 08/22/2026 13:56:58
+  entityCount: 546
 maps: []
 grids:
 - 1
@@ -140,21 +140,29 @@ entities:
     - type: Transform
       pos: 2.5,-7.5
       parent: 1
+    - type: HideLayerClothing
+      slots: null
   - uid: 403
     components:
     - type: Transform
       pos: 4.5,-8.5
       parent: 1
+    - type: HideLayerClothing
+      slots: null
   - uid: 404
     components:
     - type: Transform
       pos: 2.5,-9.5
       parent: 1
+    - type: HideLayerClothing
+      slots: null
   - uid: 514
     components:
     - type: Transform
       pos: 5.5,-11.5
       parent: 1
+    - type: HideLayerClothing
+      slots: null
 - proto: CMAirlockMaint
   entities:
   - uid: 153
@@ -440,9 +448,9 @@ entities:
       containers: {}
     missingComponents:
     - ApcPowerReceiver
+    - ActivatableUIRequiresPower
     - FaxMachine
     - ActivatableUI
-    - ActivatableUIRequiresPower
     - UserInterface
     - Faxecute
     - ItemSlots
@@ -1214,6 +1222,8 @@ entities:
     components:
     - type: Transform
       parent: 457
+    - type: HideLayerClothing
+      slots: null
     - type: CycleableVisor
       action: 466
     - type: ContainerContainer
@@ -1236,6 +1246,8 @@ entities:
     - type: Transform
       pos: 6.5,-9.5
       parent: 1
+    - type: HideLayerClothing
+      slots: null
 - proto: RMCArmorM4RMedium
   entities:
   - uid: 459
@@ -1750,8 +1762,6 @@ entities:
     - type: Transform
       pos: 7.5,-11.5
       parent: 1
-    - type: AccessReader
-      access: []
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -1770,13 +1780,13 @@ entities:
           showEnts: False
           occludes: True
           ent: null
+    missingComponents:
+    - AccessReader
   - uid: 457
     components:
     - type: Transform
       pos: 7.5,-9.5
       parent: 1
-    - type: AccessReader
-      access: []
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -1795,13 +1805,13 @@ entities:
           showEnts: False
           occludes: True
           ent: null
+    missingComponents:
+    - AccessReader
   - uid: 467
     components:
     - type: Transform
       pos: 7.5,-10.5
       parent: 1
-    - type: AccessReader
-      access: []
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -1820,13 +1830,13 @@ entities:
           showEnts: False
           occludes: True
           ent: null
+    missingComponents:
+    - AccessReader
   - uid: 476
     components:
     - type: Transform
       pos: 5.5,-10.5
       parent: 1
-    - type: AccessReader
-      access: []
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -1844,13 +1854,13 @@ entities:
           showEnts: False
           occludes: True
           ent: null
+    missingComponents:
+    - AccessReader
   - uid: 484
     components:
     - type: Transform
       pos: 4.5,-10.5
       parent: 1
-    - type: AccessReader
-      access: []
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -1865,13 +1875,13 @@ entities:
           showEnts: False
           occludes: True
           ent: null
+    missingComponents:
+    - AccessReader
   - uid: 489
     components:
     - type: Transform
       pos: 3.5,-9.5
       parent: 1
-    - type: AccessReader
-      access: []
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -1885,13 +1895,13 @@ entities:
           showEnts: False
           occludes: True
           ent: null
+    missingComponents:
+    - AccessReader
   - uid: 493
     components:
     - type: Transform
       pos: 3.5,-8.5
       parent: 1
-    - type: AccessReader
-      access: []
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -1907,13 +1917,13 @@ entities:
           showEnts: False
           occludes: True
           ent: null
+    missingComponents:
+    - AccessReader
   - uid: 499
     components:
     - type: Transform
       pos: 1.5,-9.5
       parent: 1
-    - type: AccessReader
-      access: []
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -1926,13 +1936,13 @@ entities:
           showEnts: False
           occludes: True
           ent: null
+    missingComponents:
+    - AccessReader
   - uid: 502
     components:
     - type: Transform
       pos: 1.5,-10.5
       parent: 1
-    - type: AccessReader
-      access: []
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -1946,13 +1956,13 @@ entities:
           showEnts: False
           occludes: True
           ent: null
+    missingComponents:
+    - AccessReader
   - uid: 506
     components:
     - type: Transform
       pos: 1.5,-11.5
       parent: 1
-    - type: AccessReader
-      access: []
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -1965,6 +1975,8 @@ entities:
           showEnts: False
           occludes: True
           ent: null
+    missingComponents:
+    - AccessReader
 - proto: RMCLockerSecureSafe
   entities:
   - uid: 422
@@ -2307,6 +2319,20 @@ entities:
     components:
     - type: Transform
       pos: 10.5,-5.5
+      parent: 1
+- proto: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlBreachingTechnician
+  entities:
+  - uid: 545
+    components:
+    - type: Transform
+      pos: 5.5,-0.5
+      parent: 1
+- proto: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlMedicalTechnician
+  entities:
+  - uid: 546
+    components:
+    - type: Transform
+      pos: 3.5,-1.5
       parent: 1
 - proto: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
   entities:
@@ -3353,7 +3379,7 @@ entities:
     - type: Transform
       pos: 3.5,-2.5
       parent: 1
-- proto: RMCWeaponShotgunHG3712
+- proto: RMCWeaponShotgunM12
   entities:
   - uid: 464
     components:

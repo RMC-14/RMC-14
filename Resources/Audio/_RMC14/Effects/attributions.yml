@@ -87,3 +87,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/1f56b68258df6c17f460c1e7777f2f0e50c236f0/sound/effects/metal_crash.ogg"
+
+- files: ["incoming_rocket.ogg", "incoming_rocket_alt.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13. Length modified by kleinerstation13 (Github)"
+  source: "https://github.com/cmss13-devs/cmss13/blob/8c4eecb1d4ad42c95b3fb0348732b3f8a0efe758/sound/effects/IncomingRocket.ogg"

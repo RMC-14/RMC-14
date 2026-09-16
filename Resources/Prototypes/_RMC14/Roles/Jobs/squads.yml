@@ -83,10 +83,11 @@
     color: "#C47A50"
     radio: MarineFoxtrot
     accessLevels:
-    - CMAccessAlpha
+    - CMAccessAlpha # TODO RMC14 - Remove extra access from squad once this squad has been made into a proper roundstart squad
     - CMAccessBravo
     - CMAccessCharlie
     - CMAccessDelta
+    - RMCAccessFoxtrot
     minimapBackground:
      sprite: /Textures/_RMC14/Interface/map_blips.rsi
      state: background_foxtrot
@@ -101,10 +102,11 @@
     color: "#67D692"
     radio: MarineEcho
     accessLevels:
-    - CMAccessAlpha
+    - CMAccessAlpha # TODO RMC14 - Remove extra access from squad once this squad has been made into a proper roundstart squad
     - CMAccessBravo
     - CMAccessCharlie
     - CMAccessDelta
+    - RMCAccessEcho
     minimapBackground:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: background_echo
