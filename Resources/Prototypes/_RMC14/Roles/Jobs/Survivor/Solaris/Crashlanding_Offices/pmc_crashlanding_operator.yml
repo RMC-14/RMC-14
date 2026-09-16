@@ -9,7 +9,7 @@
   accessGroups:
   - ColonistPMC
   startingGear: RMCGearSurvivorPMCGunner
-  icon: RMCJobIconPMCGunner
+  icon: RMCJobIconPMCStandard
   hasIcon: true
   greeting: rmc-job-greeting-solaris-pmc
   playTimeTracker: RMCJobSurvivorMilitary

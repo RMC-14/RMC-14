@@ -81,7 +81,7 @@
   - type: ItemCamouflage
     camouflageVariations: { }
 
-# CMB version of the UN-M1 riot armor - Identical to riot armor except for sprites and uniform whitelist
+# CMB versions of the UN-M1 riot armor - Identical to riot armor except for sprites and uniform whitelist
 - type: entity
   parent: RMCArmorPMCRiot
   id: RMCArmorPMCRiotCMB
@@ -91,6 +91,24 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/CMB/cmb_mobility_armor.rsi
+  - type: ClothingRequireEquipped
+    autoUnequip: true
+    denyReason: rmc-armor-not-cmb-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformCMB
+
+- type: entity
+  parent: CMArmorM3VLSynth
+  id: RMCArmorPMCRiotCMBSynth
+  name: M4R pattern CMB synthetic vest
+  description: A dark set of armor, which is a modification of the security variant of AEGIS Armaments M3 armor. This variant was designed for CMB Riot Control synthetics, and has had all its' armor inserts removed. The side of it has a metallic insignia with 'CMB RIOT CONTROL' on it.
+  suffix: ""
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/CMB/cmb_mobility_armor.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
   - type: ClothingRequireEquipped
     autoUnequip: true
     denyReason: rmc-armor-not-cmb-jumpsuit
