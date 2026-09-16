@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: Added survivor spawn together inserts to Kutjevo Refinery
-    type: Add
-  - message: Kutjevo North LZ dorms now has an extra route where rock used to be,
-      North LZ eastern entrance now has two dilapidated buildings, North-western colony
-      grounds is no longer a hellchoke and has been widened with multiple new paths,
-      western medical entrance has lost most of the rocks there to open it up, comms
-      spawns have been changed - one will always spawn in the centre two spawns and
-      one will always spawn at the map edge in either the north or south.
-    type: Tweak
-  id: 3150
-  time: '2026-04-22T04:08:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9679
 - author: IceNoobXD
   changes:
   - message: all platforms types have now less health and round platforms are now
@@ -4441,5 +4427,19 @@
   id: 3649
   time: '2026-09-15T22:47:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10470
+- author: CatAndHats
+  changes:
+  - message: Fixed the Synthetic Auxilliary Vendor not having the correct folded rollerbeds,
+      stasis bags, and portable surgery beds
+    type: Fix
+  - message: Fixed the Chief Engineer's Vendor having the Wizden welding meson goggles
+      instead of RMC welding goggles
+    type: Fix
+  - message: Fixed the Dropship Crew Vendor M30 tactical helmet having a black pilot
+      visor in it
+    type: Fix
+  id: 3650
+  time: '2026-09-16T14:21:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10854
 Name: RMC14
 Order: -1
