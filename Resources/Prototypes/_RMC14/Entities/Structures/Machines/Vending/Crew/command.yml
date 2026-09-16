@@ -1018,7 +1018,7 @@
       entries:
       - id: CMHeadsetCE
       - id: CMBootsBlack
-      - id: ClothingEyesGlassesMeson # TODO change to CM13 engi goggles.
+      - id: RMCWeldingGoggles
       - id: RMCNailgunTactical
       # TODO KN5500/2 PDA
     - name: Uniform
