@@ -3,6 +3,7 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
+using Content.Shared.Mobs;
 using Content.Shared.Mobs.Events;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Rejuvenate;
@@ -33,6 +34,7 @@ public sealed partial class PainSystem : EntitySystem
     {
         SubscribeLocalEvent<PainComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<PainComponent, DamageChangedEvent>(OnDamageChanged);
+        SubscribeLocalEvent<PainComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<PainComponent, BeforeAlertSeverityCheckEvent>(OnAlertSeverityCheck);
         SubscribeLocalEvent<PainComponent, RejuvenateEvent>(OnRejuvenate);
     }
@@ -61,14 +63,10 @@ public sealed partial class PainSystem : EntitySystem
 
     private void OnRejuvenate(Entity<PainComponent> ent, ref RejuvenateEvent args)
     {
-        var pain = ent.Comp;
-        pain.PainModifiers.Clear();
-        pain.BasePain = 0;
-        pain.PerceivedPain = 0;
+        ent.Comp.PerceivedPain = 0;
+        ent.Comp.PainModifiers.Clear();
         SetCurrentPainLevelIdx(ent, 0);
-        Dirty(ent);
-
-        _alerts.ShowAlert(ent, pain.Alert, 0);
+        DirtyFields(ent, ent.Comp, null, nameof(PainComponent.PerceivedPain), nameof(PainComponent.PainModifiers));
     }
 
     private void OnAlertSeverityCheck(Entity<PainComponent> ent, ref BeforeAlertSeverityCheckEvent args)
@@ -109,6 +107,17 @@ public sealed partial class PainSystem : EntitySystem
         }
     }
 
+    private void OnMobStateChanged(Entity<PainComponent> ent, ref MobStateChangedEvent args)
+    {
+        if (args.OldMobState != MobState.Dead)
+            return;
+
+        // If `ent` is going from dead to *not* dead, jump their `PainComponent` vars over to
+        // where they would have been if the system hadn't stopped updating after they died.
+        UpdatePerceivedPain(ent);
+        SetCurrentPainLevelIdx(ent, GetHighestValidPainLevelIdx(ent));
+    }
+
     private void UpdatePerceivedPain(Entity<PainComponent> ent)
     {
         var maxPainReductionModifierStrength = FixedPoint2.Zero;
@@ -136,6 +145,16 @@ public sealed partial class PainSystem : EntitySystem
             ent.Comp.PerceivedPain = newPainPercentage;
             DirtyField(ent, ent.Comp, nameof(PainComponent.PerceivedPain));
         }
+    }
+
+    /// <summary>
+    /// Get the index of the highest <see cref="PainLevel"/> in <paramref name="ent"/>'s
+    /// <see cref="PainComponent.PainLevels"/> where <c>PainLevel.Threshold &lt;= ent.Comp.PerceivedPain</c>.
+    /// </summary>
+    /// <seealso cref="PainComponent.PerceivedPain"/>
+    private static int GetHighestValidPainLevelIdx(Entity<PainComponent> ent)
+    {
+        return ent.Comp.PainLevels.FindLastIndex(level => level.Threshold <= ent.Comp.PerceivedPain);
     }
 
     /// <summary>
@@ -188,7 +207,8 @@ public sealed partial class PainSystem : EntitySystem
                 DirtyField(uid, pain, nameof(PainComponent.PainModifiers));
 
             // Update the pain felt by the player.
-            UpdatePerceivedPain((uid, pain));
+            var uidEntity = new Entity<PainComponent>(uid, pain);
+            UpdatePerceivedPain(uidEntity);
 
             if (time >= pain.NextPainLevelUpdateTime)
             {
@@ -196,13 +216,13 @@ public sealed partial class PainSystem : EntitySystem
                 DirtyField(uid, pain, nameof(PainComponent.NextPainLevelUpdateTime));
 
                 // Get the highest level in `PainLevels` whose threshold has been passed by `PerceivedPain`.
-                var highestPainLevelIdx = pain.PainLevels.FindLastIndex(level => level.Threshold <= pain.PerceivedPain);
+                var highestPainLevelIdx = GetHighestValidPainLevelIdx(uidEntity);
 
                 // Move `currentPainLevelIdx` towards `highestPainLevelIdx` by one step.
                 if (highestPainLevelIdx > pain.CurrentPainLevelIdx)
-                    SetCurrentPainLevelIdx((uid, pain), pain.CurrentPainLevelIdx + 1);
+                    SetCurrentPainLevelIdx(uidEntity, pain.CurrentPainLevelIdx + 1);
                 else if (highestPainLevelIdx < pain.CurrentPainLevelIdx)
-                    SetCurrentPainLevelIdx((uid, pain), pain.CurrentPainLevelIdx - 1);
+                    SetCurrentPainLevelIdx(uidEntity, pain.CurrentPainLevelIdx - 1);
             }
 
             // Server-side only from this point because `EntityEffect`s are seemingly unable to be serialized over to the client.
