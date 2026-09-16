@@ -58,9 +58,10 @@
     interfaces:
       enum.CryoCellUIKey.Key:
         type: CryoCellBui
+      enum.CryoCellEjectConfirmationUIKey.Key:
+        type: CryoCellEjectConfirmationBui
   - type: ActivatableUI
     key: enum.CryoCellUIKey.Key
-    requiresComplex: true
   - type: ActivatableUIRequiresPower
   - type: ActivatableUIBlacklist
     blacklist:

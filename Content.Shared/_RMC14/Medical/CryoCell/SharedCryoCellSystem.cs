@@ -3,9 +3,11 @@ using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Storage;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
 using Content.Shared.Power;
 using Content.Shared.Stunnable;
+using Content.Shared.UserInterface;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -38,7 +40,10 @@ public abstract class SharedCryoCellSystem : EntitySystem
         SubscribeLocalEvent<CryoCellComponent, PowerChangedEvent>(OnCryoCellPower);
         SubscribeLocalEvent<CryoCellComponent, EntInsertedIntoContainerMessage>(OnCryoCellEntInserted);
         SubscribeLocalEvent<CryoCellComponent, EntRemovedFromContainerMessage>(OnCryoCellEntRemoved);
+        SubscribeLocalEvent<CryoCellComponent, ActivatableUIOpenAttemptEvent>(OnCryoCellUIOpenAttempt);
         SubscribeLocalEvent<CryoCellComponent, GetVerbsEvent<AlternativeVerb>>(OnGetAltVerbs);
+
+        SubscribeLocalEvent<InsideCryoCellComponent, MoveInputEvent>(OnInsideCryoCellMoveInput);
     }
 
     private void OnCryoCellInit(Entity<CryoCellComponent> cryoCell, ref ComponentInit args)
@@ -86,6 +91,15 @@ public abstract class SharedCryoCellSystem : EntitySystem
         _rmcMovement.SuppressCollisionOnExit(args.Entity, cryoCell.Owner);
     }
 
+    private void OnCryoCellUIOpenAttempt(Entity<CryoCellComponent> cryoCell, ref ActivatableUIOpenAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (cryoCell.Comp.Occupant == args.User)
+            args.Cancel();
+    }
+
     private void OnGetAltVerbs(Entity<CryoCellComponent> cryoCell, ref GetVerbsEvent<AlternativeVerb> args)
     {
         if (!args.CanInteract || !args.CanAccess)
@@ -103,7 +117,13 @@ public abstract class SharedCryoCellSystem : EntitySystem
             {
                 Text = Loc.GetString("rmc-cryo-cell-verb-eject-inside"),
                 Category = VerbCategory.Eject,
-                Act = () => RequestEjectConfirmation(cryoCell.Owner),
+                Act = () =>
+                {
+                    if (_ui.IsUiOpen(cryoCell.Owner, CryoCellEjectConfirmationUIKey.Key, occupant))
+                        return;
+
+                    _ui.OpenUi(cryoCell.Owner, CryoCellEjectConfirmationUIKey.Key, occupant);
+                }
             });
 
             return;
@@ -114,12 +134,28 @@ public abstract class SharedCryoCellSystem : EntitySystem
         {
             Text = Loc.GetString("rmc-cryo-cell-verb-eject-outside"),
             Category = VerbCategory.Eject,
-            Act = () => EjectOccupant(cryoCell, occupant),
+            Act = () => EjectOccupant(cryoCell, occupant)
         });
     }
 
-    protected virtual void RequestEjectConfirmation(EntityUid cell)
+    private void OnInsideCryoCellMoveInput(Entity<InsideCryoCellComponent> ent, ref MoveInputEvent args)
     {
+        if (!args.HasDirectionalMovement)
+            return;
+
+        if (_timing.ApplyingState)
+            return;
+
+        if (ent.Comp.Chamber is not { } cellId)
+            return;
+
+        if (_mobState.IsIncapacitated(ent))
+            return;
+
+        if (_ui.IsUiOpen(cellId, CryoCellEjectConfirmationUIKey.Key, ent.Owner))
+            return;
+
+        _ui.OpenUi(cellId, CryoCellEjectConfirmationUIKey.Key, ent.Owner);
     }
 
     protected void EjectOccupant(Entity<CryoCellComponent> cryoCell, EntityUid occupant, bool dead = false, bool isAutoEject = false)

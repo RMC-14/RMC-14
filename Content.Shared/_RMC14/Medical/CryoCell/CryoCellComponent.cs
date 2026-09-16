@@ -136,6 +136,12 @@ public enum CryoCellUIKey
 }
 
 [Serializable, NetSerializable]
+public enum CryoCellEjectConfirmationUIKey
+{
+    Key
+}
+
+[Serializable, NetSerializable]
 public enum CryoCellVisuals : byte
 {
     State
@@ -163,6 +169,12 @@ public enum CryoCellOccupantMobState : byte
     Alive = 1,
     Critical = 2,
     Dead = 3
+}
+
+[Serializable, NetSerializable]
+public sealed class CryoCellEjectConfirmationBuiMsg(bool accepted) : BoundUserInterfaceMessage
+{
+    public readonly bool Accepted = accepted;
 }
 
 [Serializable, NetSerializable]
