@@ -109,13 +109,25 @@ public sealed partial class PainSystem : EntitySystem
 
     private void OnMobStateChanged(Entity<PainComponent> ent, ref MobStateChangedEvent args)
     {
-        if (args.OldMobState != MobState.Dead)
-            return;
-
-        // If `ent` is going from dead to *not* dead, jump their `PainComponent` vars over to
-        // where they would have been if the system hadn't stopped updating after they died.
-        UpdatePerceivedPain(ent);
-        SetCurrentPainLevelIdx(ent, GetHighestValidPainLevelIdx(ent));
+        // Going from *not* dead to dead.
+        if (args.NewMobState == MobState.Dead)
+        {
+            // Clear out all of their (relevant) `PainComponent` vars, just for the sake of preventing weird edge case behaviour.
+            // If the user gets revived then they all repopulate themselves automatically.
+            ent.Comp.PerceivedPain = 0;
+            ent.Comp.PainModifiers.Clear();
+            SetCurrentPainLevelIdx(ent, 0);
+            DirtyFields(ent, ent.Comp, null, nameof(PainComponent.PerceivedPain), nameof(PainComponent.PainModifiers));
+        }
+        // Going from dead to *not* dead.
+        else if (args.OldMobState == MobState.Dead)
+        {
+            // Jump the vars back over to where they would have been if the system hadn't stopped updating after they died.
+            // This *does* happen automatically in `Update()`, but that only moves `CurrentPainLevelIdx` one step at a time.
+            // Setting it here is just to skip the wait time.
+            UpdatePerceivedPain(ent);
+            SetCurrentPainLevelIdx(ent, GetHighestValidPainLevelIdx(ent));
+        }
     }
 
     private void UpdatePerceivedPain(Entity<PainComponent> ent)
