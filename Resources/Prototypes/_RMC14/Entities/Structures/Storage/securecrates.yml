@@ -751,6 +751,7 @@
     noRot: true
   - type: InteractionOutline
   - type: Physics
+    canCollide: false
   - type: Fixtures
     fixtures:
       fix1:
@@ -888,6 +889,7 @@
     noRot: true
   - type: InteractionOutline
   - type: Physics
+    canCollide: false
   - type: Fixtures
     fixtures:
       fix1:
