@@ -2,7 +2,7 @@
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   id: RMCWeaponRifleE290A1
   name: E290A1 rifle # in CM13 the F903A1
-  description: The E290A1 is the oldest rifle of the TSE still in active service. It's the last of the TSE's older 'E' designation, and these days it's typically only issued to TSE reservists and/or forces not expecting stable supply lines, such as the Paramarines. Uses 10x24mm caseless ammunition.
+  description: The E290A1 is the oldest rifle still in active service with the TSE and the last of the older 'E' designation. These days it's typically only issued to TSE reservists and/or forces not expecting stable supply lines, such as the Paramarines. Uses 10x24mm caseless ammunition.
   suffix: Filled
   components:
   - type: Sprite
@@ -89,7 +89,7 @@
   parent: RMCWeaponRifleE290A1
   id: RMCWeaponRifleE290A2
   name: E290A2 rifle # in CM13 the F903A2
-  description: A non-standard issue rifle of the royal crown marines and comes with an intergrated foregrip. The E290 is the last of the TSE's old 'E' designation, and these days its typically only issued to TSE reservists and/or forces not expecting stable supply lines, such as the Paramarines. Uses 10x24mm caseless ammunition.
+  description: A non-standard issue rifle used by the Royal Crown Marines, featuring an integrated foregrip. The E290 is the last of the TSE's old 'E' designation, and these days is typically issued only to TSE reservists and/or forces not expecting stable supply lines, such as the Paramarines. Uses 10x24mm caseless ammunition.
   suffix: Filled
   components:
   - type: Sprite
@@ -124,7 +124,7 @@
   parent: RMCWeaponRifleE290A1
   id: RMCWeaponRifleE290A1B
   name: E290A1/B 'Breacher' rifle # in CM13 the F903A1/B
-  description: The E290A1/B is the oldest rifle of the TSE still in active service, and the last of the TSE's old 'E' designation. The A1/B configuration is most commonly seen in the hands of TSEPA SWAT teams due to it being one of few TSE rifles designed to be used in one hand with a balistic shield. Uses 10x24mm caseless ammunition.
+  description: The E290A1/B is the oldest rifle still in active service with the TSE and the last of the old 'E' designation. The A1/B configuration is most commonly seen in the hands of TSEPA police teams, as it is one of the few TSE rifles designed to be operated one-handed while using a ballistic shield. Uses 10x24mm caseless ammunition.
   suffix: Filled
   components:
   - type: Sprite
@@ -165,7 +165,7 @@
   parent: RMCWeaponRifleE290A1
   id: RMCWeaponRifleE290A1D
   name: E290A1/D marksman rifle # in CM13 the F903A1 Marksman Rifle
-  description: A rare DMR configuration of the E290A1, a rifle currently being phased out. Its the last of the TSE's older 'E' designation, and these days its typically only issued to TSE reservists and/or forces not expecting stable supply lines, such as the Paramarines. Uses 10x24mm caseless ammunition. # This weapon only accepts the smaller 20 round magazines of 10x24mm. till issue is resolved in parity
+  description: A rare DMR configuration of the E290A1, a rifle which is currently being phased out of service. It's the last of the TSE's older 'E' designation, and these days is typically only issued to TSE reservists and/or forces not expecting stable supply lines, such as the Paramarines. Uses 10x24mm caseless ammunition. # This weapon only accepts the smaller 20 round magazines of 10x24mm. till issue is resolved in parity
   suffix: Filled
   components:
   - type: Sprite
