@@ -176,6 +176,8 @@
       - id: RMCPouchPistol
       - id: RMCPouchSling
       - id: RMCPouchToolsFill
+        name: tools pouch (Full)
+
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
@@ -524,6 +526,7 @@
       - id: RMCPouchPistol
       - id: RMCPouchShotgunLarge
       - id: RMCPouchToolsFill
+        name: tools pouch (Full)
     - name: Mask
       choices: { CMMask: 1 }
       entries:
@@ -851,6 +854,7 @@
       - id: RMCPouchPistol
       - id: RMCPouchSling
       - id: RMCPouchToolsFill
+        name: tools pouch (Full)
       - id: RMCPouchConstruction
       - id: RMCPouchElectronicsFill
       - id: RMCPouchFlareFilled
