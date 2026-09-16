@@ -462,7 +462,7 @@
         amount: 15
       - id: CMTricordrazineAutoInjector
         amount: 15
-      - id: CMTramadolAutoInjector
+      - id: RMCTramadolAutoInjector
         amount: 15
     - name: Flare and Light
       entries:

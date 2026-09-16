@@ -255,8 +255,8 @@
       - CMInaprovaline
       - CMEpinephrine
       # TODO RMC-14 Peridaxon
-      - CMTramadol
-      - CMOxycodone
+      - RMCTramadol
+      - RMCOxycodone
       - CMTricordrazine
 
 - type: entity

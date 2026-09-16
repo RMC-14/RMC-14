@@ -101,7 +101,7 @@
 
 - type: entity
   parent: CMPacketPills
-  id: CMPacketPillsTramadol
+  id: RMCPacketPillsTramadol
   name: tramadol pill packet
   description: This packet contains tramadol pills, a mild painkiller. Once you take them out, they don't go back in. Don't take more than 2 pills in a short period.
   components:
@@ -112,13 +112,13 @@
       map: [ "enum.CMItemSlotsLayers.Fill" ]
       color: "#d7c7e0"
   - type: CMItemSlots
-    startingItem: CMPillTramadol
+    startingItem: RMCPillTramadol
   - type: IconLabel
     labelTextLocId: rmc-tramadol-container-label-text
 
 - type: entity
   parent: CMPacketPills
-  id: CMPacketPillsOxycodone
+  id: RMCPacketPillsOxycodone
   name: oxycodone pill packet
   description: This packet contains oxycodone pills. A highly effective painkiller. Once you take them out, they don't go back in. Don't take more than 1 pill in a short period.
   components:
@@ -129,6 +129,6 @@
       map: [ "enum.CMItemSlotsLayers.Fill" ]
       color: "#37b995"
   - type: CMItemSlots
-    startingItem: CMPillOxycodone
+    startingItem: RMCPillOxycodone
   - type: IconLabel
     labelTextLocId: rmc-oxycodone-container-label-text

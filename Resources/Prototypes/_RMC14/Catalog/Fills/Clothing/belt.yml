@@ -55,9 +55,9 @@
       amount: 1
     - id: CMPillCanisterInaprovaline
       amount: 1
-    - id: CMPillCanisterTramadol
+    - id: RMCPillCanisterTramadol
       amount: 1
-    - id: CMPillCanisterOxycodone
+    - id: RMCPillCanisterOxycodone
       amount: 1
     # TODO RMC14 perixadon pills, splint
     - id: CMBurnKit10
@@ -82,9 +82,9 @@
       amount: 1
     - id: CMPillCanisterInaprovaline
       amount: 1
-    - id: CMPillCanisterTramadol
+    - id: RMCPillCanisterTramadol
       amount: 1
-    - id: CMPillCanisterOxycodone
+    - id: RMCPillCanisterOxycodone
       amount: 1
     # TODO RMC14 perixadon pills, splint
     - id: CMBurnKit10
@@ -111,7 +111,7 @@
       amount: 1
     - id: CMDexalinPlusAutoInjector
       amount: 1
-    - id: CMOxycodoneAutoInjector
+    - id: RMCOxycodoneAutoInjector
       amount: 1
     - id: CMPillCanisterBicaridine
       amount: 1
@@ -123,9 +123,9 @@
       amount: 1
     - id: CMPillCanisterInaprovaline
       amount: 1
-    - id: CMPillCanisterTramadol
+    - id: RMCPillCanisterTramadol
       amount: 1
-    - id: CMPillCanisterOxycodone
+    - id: RMCPillCanisterOxycodone
       amount: 1
     # TODO RMC14 perixadon pills, splint
 
@@ -144,7 +144,7 @@
       amount: 1
     - id: CMDexalinPlusAutoInjector
       amount: 1
-    - id: CMOxycodoneAutoInjector
+    - id: RMCOxycodoneAutoInjector
       amount: 1
     - id: CMPillCanisterBicaridine
       amount: 1
@@ -156,9 +156,9 @@
       amount: 1
     - id: CMPillCanisterInaprovaline
       amount: 1
-    - id: CMPillCanisterTramadol
+    - id: RMCPillCanisterTramadol
       amount: 1
-    - id: CMPillCanisterOxycodone
+    - id: RMCPillCanisterOxycodone
       amount: 1
     # TODO RMC14 perixadon pills, splint
 
@@ -971,8 +971,8 @@
     - id: CMPillCanisterBicaridine
     - id: CMPillCanisterKelotane
     - id: CMPillCanisterKelotane
-    - id: CMPillCanisterTramadol
-    - id: CMPillCanisterOxycodone
+    - id: RMCPillCanisterTramadol
+    - id: RMCPillCanisterOxycodone
     - id: CMPillCanisterDylovene
     # - id: CMPillCanisterPeridaxon
     - id: CMPillCanisterDexalin
@@ -995,7 +995,7 @@
       contents:
         - id: CMPillCanisterBicaridine
         - id: CMPillCanisterKelotane
-        - id: CMPillCanisterTramadol
+        - id: RMCPillCanisterTramadol
         - id: CMPillCanisterTricordrazine
         - id: CMTraumaKit10
         - id: CMBurnKit10

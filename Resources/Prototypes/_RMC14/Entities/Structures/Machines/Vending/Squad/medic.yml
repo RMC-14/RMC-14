@@ -61,12 +61,12 @@
       - id: CMPillCanisterKelotane
         points: 5
         recommended: true
-      - id: CMPillCanisterOxycodone
+      - id: RMCPillCanisterOxycodone
         points: 5
         recommended: true
       # - id: CMPillCanisterPeridaxon
       #   points: 5
-      - id: CMPillCanisterTramadol
+      - id: RMCPillCanisterTramadol
         points: 5
         recommended: true
     - name: Autoinjectors
@@ -81,9 +81,9 @@
         points: 1
       - id: CMKelotaneAutoInjector
         points: 1
-      - id: CMOxycodoneAutoInjector
+      - id: RMCOxycodoneAutoInjector
         points: 2
-      - id: CMTramadolAutoInjector
+      - id: RMCTramadolAutoInjector
         points: 1
       - id: CMTricordrazineAutoInjector
         points: 1
@@ -556,9 +556,9 @@
         points: 30
       - id: RMCPillCanisterIron
         points: 30
-      - id: CMPillCanisterTramadol
+      - id: RMCPillCanisterTramadol
         points: 30
-      - id: CMPillCanisterOxycodone
+      - id: RMCPillCanisterOxycodone
         points: 40
     - name: Liquid Bottles
       entries:
@@ -608,9 +608,9 @@
         points: 30
       - id: RMCPillCanisterIron
         points: 30
-      - id: CMPillCanisterTramadol
+      - id: RMCPillCanisterTramadol
         points: 30
-      - id: CMPillCanisterOxycodone
+      - id: RMCPillCanisterOxycodone
         points: 40
     - name: Liquid Bottles
       entries:

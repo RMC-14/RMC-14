@@ -83,7 +83,7 @@
           Quantity: 29
         - ReagentId: CMKelotane
           Quantity: 29
-        - ReagentId: CMOxycodone
+        - ReagentId: RMCOxycodone
           Quantity: 19
   - type: SolutionContainerVisuals
     maxFillLevels: 1
@@ -186,7 +186,7 @@
 
 - type: entity
   parent: CMAutoInjector
-  id: CMTramadolAutoInjector
+  id: RMCTramadolAutoInjector
   name: tramadol autoinjector
   description: An auto-injector loaded with 3 uses of Tramadol, a weak but effective painkiller for normal wounds.
   components:
@@ -195,17 +195,17 @@
       pen:
         maxVol: 45
         reagents:
-        - ReagentId: CMTramadol
+        - ReagentId: RMCTramadol
           Quantity: 45
   - type: CMRefillableSolution
     reagents:
-      CMTramadol: 45
+      RMCTramadol: 45
   - type: IconLabel
     labelTextLocId: rmc-tramadol-container-label-text
 
 - type: entity
-  parent: CMTramadolAutoInjector
-  id: CMTramadolAutoInjectorNoSkill
+  parent: RMCTramadolAutoInjector
+  id: RMCTramadolAutoInjectorNoSkill
   name: pain-stop autoinjector
   description: An auto-injector loaded with a small amount of painkiller for marines to self-administer.
   components:
@@ -221,7 +221,7 @@
       pen:
         maxVol: 15
         reagents:
-        - ReagentId: CMTramadol
+        - ReagentId: RMCTramadol
           Quantity: 15
   - type: SolutionContainerVisuals
     maxFillLevels: 1
@@ -230,7 +230,7 @@
     changeColor: false
   - type: CMRefillableSolution
     reagents:
-      CMTramadol: 15
+      RMCTramadol: 15
   - type: IconLabel
     labelTextLocId: rmc-pain-stop-container-label-text
 
@@ -295,7 +295,7 @@
 
 - type: entity
   parent: CMAutoInjector
-  id: CMOxycodoneAutoInjector
+  id: RMCOxycodoneAutoInjector
   name: oxycodone autoinjector (EXTREME PAINKILLER)
   description: An auto-injector loaded with 3 uses of Oxycodone, a powerful painkiller intended for life-threatening situations.
   components:
@@ -306,11 +306,11 @@
       pen:
         maxVol: 30
         reagents:
-        - ReagentId: CMOxycodone
+        - ReagentId: RMCOxycodone
           Quantity: 30
   - type: CMRefillableSolution
     reagents:
-      CMOxycodone: 30
+      RMCOxycodone: 30
   - type: IconLabel
     labelTextLocId: rmc-oxycodone-container-label-text
 

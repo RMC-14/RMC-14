@@ -55,7 +55,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMPillCanisterTramadol
+    - id: RMCPillCanisterTramadol
     - id: CMPillCanisterBicaridine
     - id: CMPillCanisterKelotane
     - id: CMPillCanisterDexalin

@@ -3625,7 +3625,7 @@ entities:
     - type: Transform
       pos: -8.5,1.5
       parent: 2
-- proto: CMOxycodoneAutoInjector
+- proto: RMCOxycodoneAutoInjector
   entities:
   - uid: 1482
     components:

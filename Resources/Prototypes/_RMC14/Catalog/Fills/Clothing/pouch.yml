@@ -387,7 +387,7 @@
       amount: 2
     - id: CMKelotaneAutoInjector
       amount: 2
-    - id: CMTramadolAutoInjector
+    - id: RMCTramadolAutoInjector
       amount: 2
     - id: CMEmergencyAutoInjector
       amount: 1

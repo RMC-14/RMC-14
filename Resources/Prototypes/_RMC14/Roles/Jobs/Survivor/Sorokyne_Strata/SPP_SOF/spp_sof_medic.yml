@@ -55,11 +55,11 @@
     - CMUpgradedBurnKit10
     - CMUpgradedBurnKit10
     # - RMCSplint
-    - CMOxycodoneAutoInjector
+    - RMCOxycodoneAutoInjector
     - CMPillCanisterBicaridine
     - CMPillCanisterKelotane
     - CMPillCanisterInaprovaline
-    - CMPillCanisterTramadol
+    - RMCPillCanisterTramadol
 
 - type: entity
   parent: CMSpawnPointJobBase

@@ -200,7 +200,7 @@
 
 - type: entity
   parent: CMPill
-  id: CMPillParacetamol
+  id: RMCPillParacetamol
   suffix: Paracetamol, 15u
   components:
   - type: SolutionContainerManager
@@ -208,18 +208,18 @@
       food:
         maxVol: 15
         reagents:
-        - ReagentId: CMParacetamol
+        - ReagentId: RMCParacetamol
           Quantity: 15
   - type: Sprite
     layers:
     - state: pill5
       map: [ "enum.DamageStateVisualLayers.Base" ]
   - type: ExamineRequiresSkill
-    skilledExamine: cm-pill-contents-paracetamol
+    skilledExamine: rmc-pill-contents-paracetamol
 
 - type: entity
   parent: CMPill
-  id: CMPillTramadol
+  id: RMCPillTramadol
   suffix: Tramadol, 15u
   components:
   - type: SolutionContainerManager
@@ -227,18 +227,18 @@
       food:
         maxVol: 15
         reagents:
-        - ReagentId: CMTramadol
+        - ReagentId: RMCTramadol
           Quantity: 15
   - type: Sprite
     layers:
     - state: pill5
       map: [ "enum.DamageStateVisualLayers.Base" ]
   - type: ExamineRequiresSkill
-    skilledExamine: cm-pill-contents-tramadol
+    skilledExamine: rmc-pill-contents-tramadol
 
 - type: entity
   parent: CMPill
-  id: CMPillOxycodone
+  id: RMCPillOxycodone
   suffix: Oxycodone, 15u
   components:
   - type: SolutionContainerManager
@@ -246,14 +246,14 @@
       food:
         maxVol: 15
         reagents:
-        - ReagentId: CMOxycodone
+        - ReagentId: RMCOxycodone
           Quantity: 15
   - type: Sprite
     layers:
     - state: pill5
       map: [ "enum.DamageStateVisualLayers.Base" ]
   - type: ExamineRequiresSkill
-    skilledExamine: cm-pill-contents-oxycodone
+    skilledExamine: rmc-pill-contents-oxycodone
 
 - type: entity
   parent: CMPill

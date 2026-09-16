@@ -359,10 +359,10 @@
         amount: 5
       - id: CMKelotaneAutoInjector
         amount: 5
-      - id: CMOxycodoneAutoInjector
+      - id: RMCOxycodoneAutoInjector
         amount: 5
       # TODO RMC14 - Peridaxon
-      - id: CMTramadolAutoInjector
+      - id: RMCTramadolAutoInjector
         amount: 5
       - id: CMTricordrazineAutoInjector
         amount: 5
@@ -378,10 +378,10 @@
         amount: 3
       - id: CMBottleKelotane
         amount: 3
-      - id: CMBottleOxycodone
+      - id: RMCBottleOxycodone
         amount: 3
       # TODO RMC14 - Peridaxon
-      - id: CMBottleTramadol
+      - id: RMCBottleTramadol
         amount: 3
     - name: Pill bottles
       entries:
@@ -395,9 +395,9 @@
         amount: 4
       - id: CMPillCanisterKelotane
         amount: 4
-      - id: CMPillCanisterOxycodone
+      - id: RMCPillCanisterOxycodone
       # TODO RMC14 - Peridaxon
-      - id: CMPillCanisterTramadol
+      - id: RMCPillCanisterTramadol
         amount: 4
     - name: Medical utilities
       entries:

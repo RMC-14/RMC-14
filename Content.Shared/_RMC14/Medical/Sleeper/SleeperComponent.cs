@@ -38,7 +38,7 @@ public sealed partial class SleeperComponent : Component
     public ProtoId<ReagentPrototype>[] AvailableChemicals =
     [
         "CMInaprovaline",
-        "CMParacetamol",
+        "RMCParacetamol",
         "CMDylovene",
         "CMDexalin",
         "CMTricordrazine"
@@ -50,7 +50,7 @@ public sealed partial class SleeperComponent : Component
     [DataField, AutoNetworkedField]
     public ProtoId<ReagentPrototype>[] EmergencyChemicals =
     [
-        "CMOxycodone",
+        "RMCOxycodone",
         "CMBicaridine",
         "CMKelotane"
     ];
@@ -63,7 +63,7 @@ public sealed partial class SleeperComponent : Component
     public ProtoId<ReagentPrototype>[] UpgradedChemicals =
     [
         "CMInaprovaline",
-        "CMTramadol",
+        "RMCTramadol",
         "CMDylovene",
         "CMDexalinPlus",
         "CMTricordrazine",
@@ -78,7 +78,7 @@ public sealed partial class SleeperComponent : Component
     [DataField, AutoNetworkedField]
     public ProtoId<ReagentPrototype>[] UpgradedEmergencyChemicals =
     [
-        "CMOxycodone",
+        "RMCOxycodone",
         "CMBicaridine",
         "CMKelotane",
         "CMMeralyne",

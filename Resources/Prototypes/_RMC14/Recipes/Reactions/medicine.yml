@@ -223,19 +223,19 @@
     RMCParoxetine: 3
 
 - type: reaction
-  id: CMParacetamol
+  id: RMCParacetamol
   reactants:
-    CMTramadol:
+    RMCTramadol:
       amount: 1
     Water:
       amount: 1
     RMCNitrogen:
       amount: 1
   products:
-    CMParacetamol: 3
+    RMCParacetamol: 3
 
 - type: reaction
-  id: CMTramadol
+  id: RMCTramadol
   reactants:
     CMInaprovaline:
       amount: 1
@@ -244,20 +244,20 @@
     RMCNitrogen:
       amount: 1
   products:
-    CMTramadol: 3
+    RMCTramadol: 3
 
 - type: reaction
-  id: CMOxycodone
+  id: RMCOxycodone
   reactants:
     RMCEthanol:
       amount: 1
-    CMTramadol:
+    RMCTramadol:
       amount: 1
     RMCPhoron:
       amount: 1
       catalyst: true
   products:
-    CMOxycodone: 1
+    RMCOxycodone: 1
 
 - type: reaction
   id: RMCLipozine

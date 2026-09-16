@@ -392,7 +392,7 @@
 
 - type: entity
   parent: RMCPillCanisterNoSkill
-  id: CMPillCanisterParacetamolNoSkill
+  id: RMCPillCanisterParacetamolNoSkill
   name: paracetamol pill bottle
   description: This is probably someone's prescription pain pill bottle.
   suffix: Paracetamol, 16, No Skill
@@ -409,14 +409,14 @@
       map: [ "closedLayer" ]
   - type: StorageFill
     contents:
-    - id: CMPillParacetamol
+    - id: RMCPillParacetamol
       amount: 16
   - type: IconLabel
     labelTextLocId: rmc-paracetamol-container-label-text
 
 - type: entity
   parent: RMCPillCanisterNoSkill
-  id: CMPillCanisterTramadolNoSkill
+  id: RMCPillCanisterTramadolNoSkill
   name: tramadol pill bottle
   description: A pill bottle filled with Tramadol. Treats pain.
   suffix: Tramadol, 16, No Skill
@@ -433,14 +433,14 @@
       map: [ "closedLayer" ]
   - type: StorageFill
     contents:
-    - id: CMPillTramadol
+    - id: RMCPillTramadol
       amount: 16
   - type: IconLabel
     labelTextLocId: rmc-tramadol-container-label-text
 
 - type: entity
-  parent: CMPillCanisterTramadolNoSkill
-  id: CMPillCanisterTramadol
+  parent: RMCPillCanisterTramadolNoSkill
+  id: RMCPillCanisterTramadol
   suffix: Tramadol, 16
   components:
   - type: StorageSkillRequired
@@ -449,7 +449,7 @@
 
 - type: entity
   parent: RMCPillCanisterNoSkill
-  id: CMPillCanisterOxycodoneNoSkill
+  id: RMCPillCanisterOxycodoneNoSkill
   name: oxycodone pill bottle
   description: This contains pills that treat severe pain, even during live surgery. Do not take more than two pills in a short period.
   suffix: Oxycodone, 16, No Skill
@@ -466,14 +466,14 @@
       map: [ "closedLayer" ]
   - type: StorageFill
     contents:
-    - id: CMPillOxycodone
+    - id: RMCPillOxycodone
       amount: 16
   - type: IconLabel
     labelTextLocId: rmc-oxycodone-container-label-text
 
 - type: entity
-  parent: CMPillCanisterOxycodoneNoSkill
-  id: CMPillCanisterOxycodone
+  parent: RMCPillCanisterOxycodoneNoSkill
+  id: RMCPillCanisterOxycodone
   suffix: Oxycodone, 16
   components:
   - type: StorageSkillRequired

@@ -20,7 +20,7 @@
       entries:
       - id: CMTricordrazineAutoInjectorNoSkill
         amount: 8
-      - id: CMTramadolAutoInjectorNoSkill
+      - id: RMCTramadolAutoInjectorNoSkill
         amount: 8
     - name: Devices
       entries:

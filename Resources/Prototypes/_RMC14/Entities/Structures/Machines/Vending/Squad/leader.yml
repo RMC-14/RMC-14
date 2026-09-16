@@ -142,9 +142,9 @@
         points: 1
       - id: CMKelotaneAutoInjector
         points: 1
-      - id: CMOxycodoneAutoInjector
+      - id: RMCOxycodoneAutoInjector
         points: 1
-      - id: CMTramadolAutoInjector
+      - id: RMCTramadolAutoInjector
         points: 1
       - id: CMTricordrazineAutoInjector
         points: 1

@@ -24,12 +24,12 @@
     #- TODO RMC14 Mystery
     #- TODO RMC14 Alkysine
     #- TODO RMC14 Imidazoline
-    - CMPillCanisterTramadolNoSkill
+    - RMCPillCanisterTramadolNoSkill
     - RMCPillCanisterBicaridineNoSkill
     - RMCPillCanisterKelotaneNoSkill
     #- TODO RMC14 Peridaxon
-    - CMPillCanisterOxycodoneNoSkill
-    - CMPacketPillsOxycodone
+    - RMCPillCanisterOxycodoneNoSkill
+    - RMCPacketPillsOxycodone
 
 - type: entity
   parent: RMCSpawnerRandomPillBottle

@@ -195,7 +195,7 @@
 
 - type: entity
   parent: CMBottleFilled
-  id: CMBottleParacetamol
+  id: RMCBottleParacetamol
   name: paracetamol bottle
   description: A small bottle. Contains paracetamol - A commonly used, but weak painkiller.
   components:
@@ -204,15 +204,15 @@
       drink:
         maxVol: 60
         reagents:
-        - ReagentId: CMParacetamol
+        - ReagentId: RMCParacetamol
           Quantity: 60
   - type: CMRefillableSolution
     reagents:
-      CMParacetamol: 60
+      RMCParacetamol: 60
 
 - type: entity
   parent: CMBottleFilled
-  id: CMBottleTramadol
+  id: RMCBottleTramadol
   name: tramadol bottle
   description: A small bottle. Contains tramadol - Used as a basic painkiller.
   components:
@@ -221,15 +221,15 @@
       drink:
         maxVol: 60
         reagents:
-        - ReagentId: CMTramadol
+        - ReagentId: RMCTramadol
           Quantity: 60
   - type: CMRefillableSolution
     reagents:
-      CMTramadol: 60
+      RMCTramadol: 60
 
 - type: entity
   parent: CMBottleFilled
-  id: CMBottleOxycodone
+  id: RMCBottleOxycodone
   name: oxycodone bottle
   description: A small bottle. Contains oxycodone - Used as an Extreme Painkiller. Use with Caution.
   components:
@@ -238,11 +238,11 @@
       drink:
         maxVol: 60
         reagents:
-        - ReagentId: CMOxycodone
+        - ReagentId: RMCOxycodone
           Quantity: 60
   - type: CMRefillableSolution
     reagents:
-      CMOxycodone: 60
+      RMCOxycodone: 60
 
 # TODO RMC14 peridaxon
 
@@ -410,8 +410,8 @@
       drink:
         maxVol: 140
         reagents:
-        - ReagentId: CMOxycodone
+        - ReagentId: RMCOxycodone
           Quantity: 140
   - type: CMRefillableSolution
     reagents:
-      CMOxycodone: 140
+      RMCOxycodone: 140

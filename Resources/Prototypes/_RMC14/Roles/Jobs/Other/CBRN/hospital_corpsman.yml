@@ -134,14 +134,14 @@
     - CMUpgradedBurnKit10
     - CMEpinephrineAutoInjector
     - CMDexalinPlusAutoInjector
-    - CMOxycodoneAutoInjector
+    - RMCOxycodoneAutoInjector
     - CMPillCanisterBicaridine
     - CMPillCanisterDexalin
     - CMPillCanisterDylovene
     - CMPillCanisterKelotane
     - CMPillCanisterInaprovaline
-    - CMPillCanisterTramadol
-    - CMPillCanisterOxycodone
+    - RMCPillCanisterTramadol
+    - RMCPillCanisterOxycodone
     # RMC TODO: Peridaxon pill bottle
     # RMC TODO: nano splints
     - CMHealthAnalyzer

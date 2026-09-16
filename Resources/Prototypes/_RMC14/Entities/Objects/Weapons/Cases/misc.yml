@@ -18,7 +18,7 @@
     contents:
     - id: RMCHeadsetMPHonor
     - id: RMCPamphletHonorGuard
-    - id: CMPacketPillsOxycodone
+    - id: RMCPacketPillsOxycodone
     - id: CMPacketPillsKelotane
     - id: CMPacketPillsBicaridine
     - id: WeaponShotgunM890Guard

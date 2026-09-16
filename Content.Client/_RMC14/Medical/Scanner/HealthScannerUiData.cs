@@ -400,13 +400,13 @@ public sealed class HealthScannerUiData
             pain.ActualPainPercentage > 5)
         {
             // If there's oxycodone in their system already then other painkillers won't be able to improve on that.
-            if (!uiState.Chemicals.ContainsReagent("CMOxycodone", null))
+            if (!uiState.Chemicals.ContainsReagent("RMCOxycodone", null))
             {
                 if (pain.ActualPainPercentage > 40)
                 {
                     AddAdvice(Loc.GetString("rmc-health-analyzer-advice-oxycodone"), window);
                 }
-                else if (!uiState.Chemicals.ContainsReagent("CMTramadol", null))
+                else if (!uiState.Chemicals.ContainsReagent("RMCTramadol", null))
                 {
                     AddAdvice(Loc.GetString("rmc-health-analyzer-advice-tramadol"), window);
                 }
