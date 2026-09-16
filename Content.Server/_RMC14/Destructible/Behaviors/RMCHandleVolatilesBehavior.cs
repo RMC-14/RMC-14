@@ -71,6 +71,7 @@ public sealed partial class RMCHandleVolatilesBehavior : IThresholdBehavior
         // (Σ volume*power acros explosive property reagents)
         var explosiveReagentSystem = system.EntityManager.System<RMCReagentSystem>();
         var explosivePower = 0f;
+        var explosiveFalloff = 0f;
         foreach (var quantity in solution.Contents)
         {
             if (!explosiveReagentSystem.TryIndex(quantity.Reagent.Prototype, out var quantityReagent) || quantityReagent.Metabolisms == null)
@@ -81,11 +82,15 @@ public sealed partial class RMCHandleVolatilesBehavior : IThresholdBehavior
                 foreach (var effect in entry.Effects)
                 {
                     if (effect is Explosive explosive)
+                    {
                         explosivePower += explosive.PowerDelta * (float) quantity.Quantity;
+                        explosiveFalloff += explosive.FalloffDelta * (float) quantity.Quantity;
+                    }
                 }
             }
         }
         explosivePower *= fillFraction;
+        explosiveFalloff *= fillFraction;
 
         const float powerToIntensity = 40f;
 
@@ -101,8 +106,9 @@ public sealed partial class RMCHandleVolatilesBehavior : IThresholdBehavior
             system.EntityManager.EnsureComponent<RMCScorchEffectComponent>(owner);
 
             var totalIntensity = explosivePower * powerToIntensity;
+            var slope = MathF.Max(0.1f, 1f + explosiveFalloff);
             var mapCoordinates = system.EntityManager.System<SharedTransformSystem>().ToMapCoordinates(coordinates);
-            system.ExplosionSystem.QueueExplosion(mapCoordinates, "RMC", totalIntensity, 1f, MathF.Min(totalIntensity, 30f), cause);
+            system.ExplosionSystem.QueueExplosion(mapCoordinates, "RMC", totalIntensity, slope, MathF.Min(totalIntensity, 30f), cause);
 
             var ev = new CMExplosiveTriggeredEvent();
             system.EntityManager.EventBus.RaiseLocalEvent(owner, ref ev);

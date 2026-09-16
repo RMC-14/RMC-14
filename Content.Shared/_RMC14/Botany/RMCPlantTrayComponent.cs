@@ -37,7 +37,7 @@ public sealed partial class RMCPlantTrayComponent : Component
     public float WaterLevel = 100f;
 
     [DataField, AutoNetworkedField]
-    public float NutritionLevel = 100f;
+    public float NutritionLevel = 10f;
 
     [DataField, AutoNetworkedField]
     public float Toxins;

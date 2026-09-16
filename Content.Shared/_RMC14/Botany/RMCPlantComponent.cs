@@ -33,18 +33,22 @@ public sealed partial class RMCPlantComponent : Component
     /// Multiplier for the number of entities produced at harvest.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public int YieldMod = 1;
+    public float YieldMod;
 
     [DataField, AutoNetworkedField]
-    public float MutationMod = 1f;
+    public float MutationMod;
 
     [DataField, AutoNetworkedField]
     public float MutationLevel;
 
     /// <summary>
     /// Adjusts growth cycle speed
+    /// </summary>
     [DataField, AutoNetworkedField]
     public float MetabolismAdjust;
+
+    [DataField, AutoNetworkedField]
+    public float BlightProductionCounter;
 
     [DataField]
     public EntityUid? Tray;

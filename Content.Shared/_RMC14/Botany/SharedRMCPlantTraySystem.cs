@@ -103,7 +103,7 @@ public abstract class SharedRMCPlantTraySystem : EntitySystem
 
             if (tray.DrawWarnings)
             {
-                if (tray.Toxins > 40f)
+                if (tray.Toxins >= 5)
                     args.PushMarkup(Loc.GetString("plant-holder-component-toxins-high-warning"));
 
                 if (tray.ImproperHeat)
@@ -206,7 +206,7 @@ public abstract class SharedRMCPlantTraySystem : EntitySystem
         if (!Resolve(plant.Owner, ref plant.Comp))
             return;
 
-        plant.Comp.MutationMod = MathF.Max(0f, plant.Comp.MutationMod + amount);
+        plant.Comp.MutationMod += amount;
         DirtyField(plant.Owner, plant.Comp, nameof(RMCPlantComponent.MutationMod));
     }
 
@@ -255,7 +255,7 @@ public abstract class SharedRMCPlantTraySystem : EntitySystem
         DirtyField(plant.Owner, plant.Comp, nameof(RMCPlantComponent.MutationMod));
     }
 
-    public void SetYieldMod(Entity<RMCPlantComponent?> plant, int value)
+    public void SetYieldMod(Entity<RMCPlantComponent?> plant, float value)
     {
         if (!Resolve(plant.Owner, ref plant.Comp) || plant.Comp.YieldMod == value)
             return;
@@ -271,6 +271,15 @@ public abstract class SharedRMCPlantTraySystem : EntitySystem
 
         plant.Comp.MetabolismAdjust = value;
         DirtyField(plant.Owner, plant.Comp, nameof(RMCPlantComponent.MetabolismAdjust));
+    }
+
+    public void SetBlightProductionCounter(Entity<RMCPlantComponent?> plant, float value)
+    {
+        if (!Resolve(plant.Owner, ref plant.Comp))
+            return;
+
+        plant.Comp.BlightProductionCounter = value;
+        DirtyField(plant.Owner, plant.Comp, nameof(RMCPlantComponent.BlightProductionCounter));
     }
 
     public void SetDead(Entity<RMCPlantComponent?> plant, bool value)
@@ -337,6 +346,15 @@ public abstract class SharedRMCPlantTraySystem : EntitySystem
 
         plant.Comp.PotencyCounter = value;
         DirtyField(plant.Owner, plant.Comp, nameof(RMCPlantChemicalsComponent.PotencyCounter));
+    }
+
+    public void SetChemAddCounter(Entity<RMCPlantChemicalsComponent?> plant, float value)
+    {
+        if (!Resolve(plant.Owner, ref plant.Comp))
+            return;
+
+        plant.Comp.ChemAddCounter = value;
+        DirtyField(plant.Owner, plant.Comp, nameof(RMCPlantChemicalsComponent.ChemAddCounter));
     }
 
     public void SetYield(Entity<RMCPlantHarvestComponent?> plant, int value)
@@ -504,6 +522,16 @@ public abstract class SharedRMCPlantTraySystem : EntitySystem
         Dirty(plant.Owner, plant.Comp);
     }
 
+    public void SetLightTolerance(Entity<RMCPlantAtmosphericComponent?> plant, float idealLight, float lightTolerance)
+    {
+        if (!Resolve(plant.Owner, ref plant.Comp))
+            return;
+
+        plant.Comp.IdealLight = idealLight;
+        plant.Comp.LightTolerance = lightTolerance;
+        Dirty(plant.Owner, plant.Comp);
+    }
+
     public void SetMetabolismRates(Entity<RMCPlantMetabolismComponent?> plant, float nutrientConsumption, float waterConsumption)
     {
         if (!Resolve(plant.Owner, ref plant.Comp))
@@ -641,11 +669,11 @@ public abstract class SharedRMCPlantTraySystem : EntitySystem
 
     public void CheckLevelSanity(EntityUid trayUid, RMCPlantTrayComponent tray)
     {
-        SetNutritionLevel((trayUid, tray), MathHelper.Clamp(tray.NutritionLevel, 0f, 100f));
+        SetNutritionLevel((trayUid, tray), MathHelper.Clamp(tray.NutritionLevel, 0f, 10f));
         SetWaterLevel((trayUid, tray), MathHelper.Clamp(tray.WaterLevel, 0f, 100f));
         SetPestLevel((trayUid, tray), MathHelper.Clamp(tray.PestLevel, 0f, 10f));
         SetWeedLevel((trayUid, tray), MathHelper.Clamp(tray.WeedLevel, 0f, 10f));
-        SetToxins((trayUid, tray), MathHelper.Clamp(tray.Toxins, 0f, 100f));
+        SetToxins((trayUid, tray), MathHelper.Clamp(tray.Toxins, 0f, 10f));
     }
 
     public void RemovePlant(EntityUid trayUid, RMCPlantTrayComponent tray)
@@ -693,10 +721,10 @@ public abstract class SharedRMCPlantTraySystem : EntitySystem
         if (!tray.DrawWarnings)
             return;
 
-        _appearance.SetData(trayUid, RMCPlantTrayVisuals.WaterLight, tray.WaterLevel <= 15, app);
-        _appearance.SetData(trayUid, RMCPlantTrayVisuals.NutritionLight, tray.NutritionLevel <= 8, app);
+        _appearance.SetData(trayUid, RMCPlantTrayVisuals.WaterLight, tray.WaterLevel <= 10, app);
+        _appearance.SetData(trayUid, RMCPlantTrayVisuals.NutritionLight, tray.NutritionLevel <= 2, app);
         _appearance.SetData(trayUid, RMCPlantTrayVisuals.AlertLight,
-            tray.WeedLevel >= 5 || tray.PestLevel >= 5 || tray.Toxins >= 40 || tray.ImproperHeat ||
+            tray.WeedLevel >= 5 || tray.PestLevel >= 5 || tray.Toxins >= 5 || tray.ImproperHeat ||
             tray.ImproperPressure || tray.MissingGas > 0, app);
         _appearance.SetData(trayUid, RMCPlantTrayVisuals.HarvestLight,
             plant != null && Comp<RMCPlantComponent>(plant.Value).Harvest, app);

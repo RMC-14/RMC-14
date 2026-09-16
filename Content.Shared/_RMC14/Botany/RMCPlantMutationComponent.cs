@@ -5,6 +5,13 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototy
 
 namespace Content.Shared._RMC14.Botany;
 
+public enum RMCPlantMutationTier
+{
+    Normal,
+    HighlyMutable,
+    Immutable,
+}
+
 /// <summary>
 /// Mutation state for a <see cref="RMCPlantComponent"/>
 /// </summary>
@@ -30,5 +37,5 @@ public sealed partial class RMCPlantMutationComponent : Component
     public List<string> MutationPrototypes = new();
 
     [DataField, AutoNetworkedField]
-    public bool Immutable;
+    public RMCPlantMutationTier MutationTier = RMCPlantMutationTier.Normal;
 }

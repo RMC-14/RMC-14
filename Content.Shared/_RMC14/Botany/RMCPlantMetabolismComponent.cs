@@ -9,7 +9,7 @@ namespace Content.Shared._RMC14.Botany;
 public sealed partial class RMCPlantMetabolismComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public float NutrientConsumption = 0.75f;
+    public float NutrientConsumption = 0.25f;
 
     [DataField, AutoNetworkedField]
     public float WaterConsumption = 0.5f;
