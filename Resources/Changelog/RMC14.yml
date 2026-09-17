@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: IceNoobXD
-  changes:
-  - message: all platforms types have now less health and round platforms are now
-      breakable!
-    type: Tweak
-  id: 3151
-  time: '2026-04-22T04:10:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9582
 - author: Dygon
   changes:
   - message: Supply drops now always drop at the given coordinates.
@@ -4441,5 +4433,12 @@
   id: 3650
   time: '2026-09-16T14:21:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10854
+- author: Dalothis
+  changes:
+  - message: PVE FORECON and Sun Riders now spawn assigned to their respective squads.
+    type: Fix
+  id: 3651
+  time: '2026-09-16T18:37:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10849
 Name: RMC14
 Order: -1

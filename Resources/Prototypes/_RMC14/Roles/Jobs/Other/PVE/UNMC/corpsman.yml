@@ -29,6 +29,8 @@
       points: 0
       extraPoints:
         Chemicals: 120
+    - type: AssignSquad
+      squad: SquadSunRiders
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist

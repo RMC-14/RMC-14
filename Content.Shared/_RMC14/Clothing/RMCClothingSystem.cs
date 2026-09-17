@@ -12,6 +12,7 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Clothing;
@@ -26,6 +27,7 @@ public sealed class RMCClothingSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     private EntityQuery<ClothingLimitComponent> _clothingLimitQuery;
 
@@ -109,6 +111,9 @@ public sealed class RMCClothingSystem : EntitySystem
 
     private void AutoUnequipDependents(EntityUid item, EntityUid user)
     {
+        if (_timing.ApplyingState)
+            return;
+
         var slots = _inventory.GetSlotEnumerator(user);
         while (slots.MoveNext(out var slot))
         {
