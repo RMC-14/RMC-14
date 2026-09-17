@@ -4,7 +4,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechDropshipCrewEquipment
-  name: ColMarTech Dropship Crew Equipment Rack
+  name: ASRS dropship crew equipment rack
   description: An automated equipment vendor for Dropship Crew
   components:
   - type: AccessReader
@@ -27,7 +27,7 @@
       entries:
       - id: CMJumpsuitPilot
       - id: RMCJumpsuitPilotAlt
-      - id: CMArmorHelmetM30
+      - id: RMCArmorHelmetM30NoVisor
       - id: RMCHeadCapPatrol
       - id: CMSatchel
       - id: CMMRE
@@ -37,7 +37,7 @@
       - CMDropshipCrewChief
       takeAll: CMEquipment
       entries:
-      - id: CMArmorHelmetM30
+      - id: RMCArmorHelmetM30NoVisor
       - id: RMCHeadCapPatrol
       - id: CMSatchel
       - id: CMMRE
@@ -238,7 +238,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechDropshipCrewWeapon
-  name: ColMarTech Dropship Crew Weapon Rack
+  name: ASRS dropship crew weapon rack
   description: An automated combat equipment vendor for Dropship Crew
   components:
   - type: AccessReader

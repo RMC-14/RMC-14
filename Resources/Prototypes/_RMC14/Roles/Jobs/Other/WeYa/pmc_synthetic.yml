@@ -50,18 +50,6 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-synth
     - type: RMCTrackable
-    - type: MeleeWeapon
-      soundHit:
-        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
-        params:
-          variation: 0.15
-          volume: -1
-      angle: 30
-      animation: WeaponArcFist
-      attackRate: 1
-      damage:
-        types:
-          Blunt: 35
     - type: Synth
     - type: AssignSquad
       whitelist:

@@ -1,0 +1,81 @@
+﻿- type: job
+  parent: CMSurvivorGoon
+  id: RMCSurvivorTrijentGoon
+  startingGear: RMCGearSurvivorGoonTrijent
+  spawnMenuRoleName: We-Ya Goon (Trijent Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetSurvivorGoon
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetGoonTrijent
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: goon_standard
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
+
+- type: startingGear
+  id: RMCGearSurvivorGoonTrijent
+  equipment:
+    id: RMCIDCardWeYaCorporateSecurity
+    ears: RMCHeadsetDistressWeYa
+    jumpsuit: RMCJumpsuitVeteranPMCKutjevo
+    outerClothing: CMArmorM4PMCCorporate
+    gloves: RMCHandsVeteran
+    shoes: RMCBootsPMCFilled
+    back: RMCSatchelLightpack5Slot
+    belt: RMCM77BeltPMCFilledNearEmpty
+    pocket1: RMCPouchSurvivalBlackFilled
+    pocket2: RMCPouchFirstAidPMCFill
+  storage:
+    back:
+    - CMStunbaton
+    - CMSheetMetal50
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorGoonTrijent
+  name: survivor trijent goon spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorTrijentGoon
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: entity
+  id: RMCSurvivorPresetGoonTrijent
+  name: survivor trijent goon preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    randomOutfits:
+    - [ ArmorHelmetPMCCorporate ]
+    - [ ArmorHelmetPMCCorporate ]
+    - [ ArmorHelmetPMCCorporate ]
+    - [ RMCArmorHelmetPMCDark ]
+    primaryWeapons:
+    - [ RMCWeaponRifleM54CWhiteNoLock, CMMagazineRifleM54C, CMMagazineRifleM54C ]
+    - [ RMCWeaponSMGPDW90, RMCMagazineSMGPDW90, RMCMagazineSMGPDW90 ]
+    - [ RMCWeaponSMGM63WhiteNoLock, CMMagazineSMGM63, CMMagazineSMGM63 ]
+    primaryWeaponChance: 1
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconWeYaSec
+  icon:
+    sprite: _RMC14/Interface/job_icons/We-Ya/pmc.rsi
+    state: weya_sec
