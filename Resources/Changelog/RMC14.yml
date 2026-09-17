@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Supply drops now always drop at the given coordinates.
-    type: Fix
-  id: 3152
-  time: '2026-04-22T04:11:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9581
 - author: Arykh
   changes:
   - message: Emergency surgical cabinet contents now scale with active Doctors and
@@ -4440,5 +4433,13 @@
   id: 3651
   time: '2026-09-16T18:37:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10849
+- author: kleinerstation13
+  changes:
+  - message: Fixed shivas colored prefab wall variants being reinforced instead of
+      soft walls
+    type: Fix
+  id: 3652
+  time: '2026-09-17T19:00:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10842
 Name: RMC14
 Order: -1
