@@ -22,6 +22,8 @@
     - type: Skills
       preset: RMCSkillPresetPVESectionSergeant
     - type: SquadLeader
+    - type: AssignSquad
+      squad: SquadSunRiders
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
