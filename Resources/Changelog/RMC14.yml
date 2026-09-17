@@ -1,66 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: Added survivor spawn together inserts to New Varadero, with help from
-      SharkSnake88
-    type: Add
-  - message: New Varadero Cargo Comms is now further south to make it harder to hold
-    type: Tweak
-  id: 3147
-  time: '2026-04-22T04:04:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9701
-- author: CatAndHats
-  changes:
-  - message: Added survivor spawn together inserts to Shiva's Snowball at Church,
-      Command Centre, Botany, Crisis Centre, and Garage
-    type: Add
-  - message: Changed survivor loot on Shiva's Snowball. Materials and type-19s moved
-      to Fort Biceps from engineering, Type-23 moved to junkyard from disposals, MK1s
-      moved to south of warehouse from research hab.
-    type: Tweak
-  - message: Fixed incorrect vehicle placement on Shiva causing people to get trapped.
-    type: Fix
-  id: 3148
-  time: '2026-04-22T04:08:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9682
-- author: IceNoobXD
-  changes:
-  - message: Examining a Pyro WS with the Pyro armor will now display their fire immunity.
-    type: Tweak
-  - message: CBRN is now immune to fire if they have the full MOPP armor equiped!
-    type: Fix
-  id: 3149
-  time: '2026-04-22T04:07:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9695
-- author: CatAndHats
-  changes:
-  - message: Added survivor spawn together inserts to Kutjevo Refinery
-    type: Add
-  - message: Kutjevo North LZ dorms now has an extra route where rock used to be,
-      North LZ eastern entrance now has two dilapidated buildings, North-western colony
-      grounds is no longer a hellchoke and has been widened with multiple new paths,
-      western medical entrance has lost most of the rocks there to open it up, comms
-      spawns have been changed - one will always spawn in the centre two spawns and
-      one will always spawn at the map edge in either the north or south.
-    type: Tweak
-  id: 3150
-  time: '2026-04-22T04:08:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9679
-- author: IceNoobXD
-  changes:
-  - message: all platforms types have now less health and round platforms are now
-      breakable!
-    type: Tweak
-  id: 3151
-  time: '2026-04-22T04:10:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9582
-- author: Dygon
-  changes:
-  - message: Supply drops now always drop at the given coordinates.
-    type: Fix
-  id: 3152
-  time: '2026-04-22T04:11:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9581
 - author: Arykh
   changes:
   - message: Emergency surgical cabinet contents now scale with active Doctors and
@@ -4451,5 +4389,57 @@
   id: 3646
   time: '2026-09-13T14:28:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10656
+- author: Phynexa
+  changes:
+  - message: CO now spawns with their secure satchel instead of a standard leather
+      satchel
+    type: Add
+  id: 3647
+  time: '2026-09-14T16:40:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10241
+- author: Vixting
+  changes:
+  - message: setting to disable tackling other xenos as hive leader
+    type: Add
+  id: 3648
+  time: '2026-09-14T20:50:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9509
+- author: SharkSnake98
+  changes:
+  - message: Changed the sprites for the Pepper Chips, Hot Food Vendor, and both Kepler
+      Chip variations
+    type: Tweak
+  id: 3649
+  time: '2026-09-15T22:47:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10470
+- author: CatAndHats
+  changes:
+  - message: Fixed the Synthetic Auxilliary Vendor not having the correct folded rollerbeds,
+      stasis bags, and portable surgery beds
+    type: Fix
+  - message: Fixed the Chief Engineer's Vendor having the Wizden welding meson goggles
+      instead of RMC welding goggles
+    type: Fix
+  - message: Fixed the Dropship Crew Vendor M30 tactical helmet having a black pilot
+      visor in it
+    type: Fix
+  id: 3650
+  time: '2026-09-16T14:21:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10854
+- author: Dalothis
+  changes:
+  - message: PVE FORECON and Sun Riders now spawn assigned to their respective squads.
+    type: Fix
+  id: 3651
+  time: '2026-09-16T18:37:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10849
+- author: kleinerstation13
+  changes:
+  - message: Fixed shivas colored prefab wall variants being reinforced instead of
+      soft walls
+    type: Fix
+  id: 3652
+  time: '2026-09-17T19:00:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10842
 Name: RMC14
 Order: -1
