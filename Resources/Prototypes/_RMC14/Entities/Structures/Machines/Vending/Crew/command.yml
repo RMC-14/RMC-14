@@ -176,6 +176,8 @@
       - id: RMCPouchPistol
       - id: RMCPouchSling
       - id: RMCPouchToolsFill
+        name: tools pouch (Full)
+
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
@@ -524,6 +526,7 @@
       - id: RMCPouchPistol
       - id: RMCPouchShotgunLarge
       - id: RMCPouchToolsFill
+        name: tools pouch (Full)
     - name: Mask
       choices: { CMMask: 1 }
       entries:
@@ -568,11 +571,6 @@
       - id: CMCOSmartGunOperatorEquipmentCaseBelt
         name: Commander's Smartgun
         recommended: true # TODO RMC14 Make choices: colour the options brown
-    - name: Commander's Secondary Belt
-      choices: { CMSecondary: 1 }
-      entries:
-      - id: RMCD50WinterWyvernBeltFilledAmmo
-      - id: RMCMatebaBeltFilledAmmo
     - name: Ceremonial Weapon
       choices: { CMCeremonial: 1 }
       entries:
@@ -856,6 +854,7 @@
       - id: RMCPouchPistol
       - id: RMCPouchSling
       - id: RMCPouchToolsFill
+        name: tools pouch (Full)
       - id: RMCPouchConstruction
       - id: RMCPouchElectronicsFill
       - id: RMCPouchFlareFilled
@@ -1023,7 +1022,7 @@
       entries:
       - id: CMHeadsetCE
       - id: CMBootsBlack
-      - id: ClothingEyesGlassesMeson # TODO change to CM13 engi goggles.
+      - id: RMCWeldingGoggles
       - id: RMCNailgunTactical
       # TODO KN5500/2 PDA
     - name: Uniform

@@ -11,7 +11,6 @@
   - type: RandomSpawner
     offset: 0
     prototypes:
-    - CMPosterBroken
     - CMPosterTheFuture
     - CMPosterUnicorn
     - CMPosterRocker1
@@ -112,7 +111,7 @@
     - CMPosterSPP13
     chance: 0.95
     rarePrototypes:
-    - PosterBroken
+    - CMPosterBroken
     rareChance: 0.05
 
 - type: entity
@@ -128,7 +127,6 @@
   - type: RandomSpawner
     offset: 0
     prototypes:
-    - CMPosterBroken
     - CMPosterTheFuture
     - CMPosterUnicorn
     - CMPosterRocker1
@@ -216,7 +214,7 @@
     - RMCPosterTSEPA3
     chance: 0.95
     rarePrototypes:
-    - PosterBroken
+    - CMPosterBroken
     rareChance: 0.05
 
 - type: entity
@@ -233,7 +231,6 @@
     offset: 0
     prototypes:
     - CMPosterSuspicious
-    - CMPosterBroken
     - CMPosterSafetyWaste
     - CMPosterSafetySilence
     - CMPosterSafetySwitch
@@ -260,5 +257,58 @@
     - CMPosterSPP13
     chance: 0.95
     rarePrototypes:
-    - PosterBroken
+    - CMPosterBroken
+    rareChance: 0.05
+
+- type: entity
+  parent: CMRandomPosterAny
+  id: RMCRandomPosterWeYa
+  name: random poster spawner
+  suffix: RMC14, WeYa
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Structures/Wallmounts/posters.rsi
+      state: random_anything
+  - type: RandomSpawner
+    offset: 0
+    prototypes:
+    - RMCPosterWEYA1
+    - RMCPosterWEYA2
+    - RMCPosterWEYA3
+    - RMCPosterWEYA4
+    - RMCPosterWEYA5
+    - CMPosterDaniel1
+    - CMPosterDaniel2
+    - CMPosterDaniel3
+    - CMPosterDaniel4
+    - CMPosterDaniel5
+    - CMPosterDaniel6
+    - CMPosterDaniel7
+    - CMPosterSilicon
+    - CMPosterSilicon2
+    chance: 0.95
+    rarePrototypes:
+    - CMPosterBroken
+    rareChance: 0.05
+
+- type: entity
+  parent: CMRandomPosterAny
+  id: RMCRandomPosterTSEPA
+  name: random poster spawner
+  suffix: RMC14, TSEPA
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Structures/Wallmounts/posters.rsi
+      state: random_anything
+  - type: RandomSpawner
+    offset: 0
+    prototypes:
+    - RMCPosterTSEPA1
+    - RMCPosterTSEPA2
+    - RMCPosterTSEPA3
+    chance: 0.95
+    rarePrototypes:
+    - CMPosterBroken
     rareChance: 0.05
