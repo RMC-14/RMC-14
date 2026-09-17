@@ -30,6 +30,9 @@
         Base: dead-0
       Dead:
         Base: splat-0
+  - type: ClothingSpeedModifier  #RMC14 - its hard to keep a rat on yo head
+    walkModifier: 0.5
+    sprintModifier: 0.5
 
 - type: entity
   parent: CMMobMouse
@@ -84,6 +87,8 @@
   id: RMCMobMouseDoc
   name: Doc
   description: "Senior mouse researcher of the Almayer. Likes: cheese, experiments, explosions."
+  components:
+  - type: RMCRevivable #this stupid mouse keeps dying
 
 - type: entity
   name: rat
@@ -115,6 +120,9 @@
     equippedPrefix: 0
     slots:
     - HEAD
+  - type: ClothingSpeedModifier #RMC14 - its hard to keep a rat on yo head
+    walkModifier: 0.5
+    sprintModifier: 0.5
 
 - type: entity
   parent: RMCMobRat
@@ -258,7 +266,6 @@
     follow: true
     location: Mister Wiggles
 
-
 - type: entity
   parent: RMCSimpleMob
   id: RMCMobCat
@@ -372,6 +379,9 @@
   - type: WarpPoint
     follow: true
     location: Jones
+  - type: ClothingSpeedModifier #RMC14 - To prevent marines catknapping jones, other pets currently dont get it because survs interact with them and have better reasons to put cat on head
+    walkModifier: 0.5
+    sprintModifier: 0.5
 
 - type: entity
   parent: RMCMobCatCalico

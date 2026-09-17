@@ -24,7 +24,6 @@
   - type: Body
     prototype: Animal
   - type: Climbing
-  - type: RMCRevivable
   - type: RMCMedicalExamine
     simple: true
     deadText: rmc-medical-examine-dead-simple-mob
