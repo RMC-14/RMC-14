@@ -1,0 +1,1446 @@
+meta:
+  format: 7
+  category: Grid
+  engineVersion: 264.0.2
+  forkId: ""
+  forkVersion: ""
+  time: 09/18/2026 21:13:11
+  entityCount: 186
+maps: []
+grids:
+- 1
+orphans:
+- 1
+nullspace: []
+tilemap:
+  0: Space
+  198: CMFloorPlating
+  4: RMCFloorKutjevoFloor3
+  6: RMCFloorKutjevoOrange3_0
+  12: RMCFloorKutjevoOrange3_1
+  11: RMCFloorKutjevoOrange4_0
+  13: RMCFloorKutjevoOrange4_1
+  5: RMCFloorKutjevoOrange4_2
+  7: RMCFloorKutjevoOrange4_3
+  9: RMCFloorKutjevoTan1
+  14: RMCFloorKutjevoTan2
+  2: RMCFloorKutjevoTan3_0
+  22: RMCFloorKutjevoTan3_1
+  10: RMCFloorKutjevoTan3_2
+  8: RMCFloorKutjevoTan3_3
+  16: RMCFloorKutjevoTan3_4
+  17: RMCFloorKutjevoTan3_5
+  20: RMCFloorKutjevoTan3_6
+  21: RMCFloorKutjevoTan3_7
+  24: RMCFloorKutjevoTan4_0
+  23: RMCFloorKutjevoTan4_1
+  1: RMCFloorKutjevoTan4_2
+  3: RMCFloorKutjevoTan4_3
+  18: RMCFloorKutjevoTanMulti1
+  19: RMCFloorKutjevoTanMulti2
+  15: RMCFloorPlatingKutjevo
+  25: RMCFloorResearchContainmentFloor2North
+entities:
+- proto: ""
+  entities:
+  - uid: 1
+    components:
+    - type: MetaData
+      name: grid
+    - type: Transform
+      parent: invalid
+    - type: MapGrid
+      chunks:
+        0,0:
+          ind: 0,0
+          tiles: xgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAAEAAAAAAAACAAAAAAAAAwAAAAAAAAQAAAAAAAAFAAAAAAAABgAAAAAAAAcAAAAAAADGAAAAAAAAAAAAAAAAAAQAAAAAAAACAAAAAAAABAAAAAAAAMYAAAAAAAABAAAAAAAAAwAAAAAAAMYAAAAAAAAIAAAAAAAACQAAAAAAAAoAAAAAAADGAAAAAAAACwAAAAAAAAwAAAAAAAANAAAAAAAAxgAAAAAAAAAAAAAAAAAIAAAAAAAADgAAAAAAAAoAAAAAAAAPAAAAAAAACAAAAAAAABAAAAAAAAACAAAAAAAAEQAAAAAAAAkAAAAAAAAKAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAAAAAAAAAAAACAAAAAAAAAkAAAAAAAAKAAAAAAAADwAAAAAAAAgAAAAAAAAJAAAAAAAACQAAAAAAAAkAAAAAAAAJAAAAAAAACgAAAAAAAMYAAAAAAAABAAAAAAAAAgAAAAAAAAIAAAAAAAADAAAAAAAAAAAAAAAAAAgAAAAAAAASAAAAAAAACgAAAAAAAA8AAAAAAAAIAAAAAAAACQAAAAAAAAkAAAAAAAAJAAAAAAAACQAAAAAAABAAAAAAAAAEAAAAAAAAEQAAAAAAAAkAAAAAAAAJAAAAAAAAEAAAAAAAAAMAAAAAAAAIAAAAAAAAEgAAAAAAAAoAAAAAAADGAAAAAAAACAAAAAAAAAkAAAAAAAAJAAAAAAAACQAAAAAAAAkAAAAAAAAJAAAAAAAAEwAAAAAAAAkAAAAAAAAJAAAAAAAACQAAAAAAAAkAAAAAAAAKAAAAAAAACAAAAAAAAAkAAAAAAAAKAAAAAAAABAAAAAAAAAgAAAAAAAAJAAAAAAAACQAAAAAAAAkAAAAAAAAJAAAAAAAACQAAAAAAABMAAAAAAAAJAAAAAAAACQAAAAAAAAkAAAAAAAAJAAAAAAAACgAAAAAAAAgAAAAAAAAOAAAAAAAACgAAAAAAAAQAAAAAAAAIAAAAAAAACQAAAAAAAAkAAAAAAAAJAAAAAAAACQAAAAAAABQAAAAAAAAEAAAAAAAAFQAAAAAAAAkAAAAAAAAUAAAAAAAAFgAAAAAAABcAAAAAAAAEAAAAAAAAFgAAAAAAAAQAAAAAAADGAAAAAAAAGAAAAAAAABYAAAAAAAAWAAAAAAAAFgAAAAAAABYAAAAAAAAXAAAAAAAAxgAAAAAAABgAAAAAAAAWAAAAAAAAFwAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAAAPAAAAAAAADwAAAAAAAA8AAAAAAAAPAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAABAAAAAAAAAQAAAAAAADGAAAAAAAAAAAAAAAAABkAAAAAAAAZAAAAAAAAGQAAAAAAABkAAAAAAAAZAAAAAAAAGQAAAAAAABkAAAAAAAAZAAAAAAAAGQAAAAAAABkAAAAAAAAZAAAAAAAAGQAAAAAAABkAAAAAAAAZAAAAAAAAGQAAAAAAABkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+          version: 7
+        -1,0:
+          ind: -1,0
+          tiles: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+          version: 7
+        0,-1:
+          ind: 0,-1
+          tiles: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxgAAAAAAAA8AAAAAAAAPAAAAAAAADwAAAAAAAMYAAAAAAADGAAAAAAAABAAAAAAAAMYAAAAAAADGAAAAAAAAAAAAAAAAAA==
+          version: 7
+        1,0:
+          ind: 1,0
+          tiles: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+          version: 7
+    - type: Broadphase
+    - type: Physics
+      bodyStatus: InAir
+      angularDamping: 0.05
+      linearDamping: 0.05
+      fixedRotation: False
+      bodyType: Dynamic
+    - type: Fixtures
+      fixtures: {}
+    - type: OccluderTree
+    - type: SpreaderGrid
+    - type: Shuttle
+      dampingModifier: 0.25
+    - type: GridPathfinding
+    - type: Gravity
+      gravityShakeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/alert.ogg
+    - type: DecalGrid
+      chunkCollection:
+        version: 2
+        nodes:
+        - node:
+            cleanable: True
+            color: '#FFFFFFFF'
+            id: Dirt
+          decals:
+            1: 2,1
+            2: 1,1
+            3: 0,4
+            4: 0,8
+            5: 2,8
+            6: 4,4
+            7: 15,7
+            8: 14,7
+            9: 14,3
+            10: 11,1
+            11: 11,0
+            12: 12,0
+            13: 13,1
+        - node:
+            cleanable: True
+            color: '#FFFFFFFF'
+            id: RMCDecalHybrisaTrash1
+          decals:
+            19: 6.0398717,2.1701565
+        - node:
+            cleanable: True
+            color: '#FFFFFFFF'
+            id: RMCDecalHybrisaTrash2
+          decals:
+            18: 9.014708,2.1099296
+        - node:
+            cleanable: True
+            color: '#FFFFFFFF'
+            id: RMCDecalHybrisaTrash3
+          decals:
+            20: 5.877835,1.8690214
+        - node:
+            cleanable: True
+            color: '#FFFFFFFF'
+            id: RMCDecalHybrisaTrash4
+          decals:
+            17: 11.044176,3.9418764
+        - node:
+            cleanable: True
+            color: '#FFFFFFFF'
+            id: RMCDecalHybrisaTrash5
+          decals:
+            16: 14.217039,6.289625
+        - node:
+            cleanable: True
+            color: '#FFFFFFFF'
+            id: RMCDecalHybrisaTrash7
+          decals:
+            15: 14.980927,6.044084
+        - node:
+            cleanable: True
+            color: '#FFFFFFFF'
+            id: RMCDecalHybrisaTrash8
+          decals:
+            21: 5.102045,2.928597
+    - type: GridAtmosphere
+      version: 2
+      data:
+        chunkSize: 4
+    - type: GasTileOverlay
+    - type: RadiationGridResistance
+    - type: ImplicitRoof
+    - type: AreaGrid
+      labels: {}
+      areaEntities: {}
+      colors: {}
+      areas:
+        -1,9: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        0,9: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        1,9: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        2,9: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        3,9: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        4,9: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        5,9: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        6,9: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        7,9: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        8,9: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        9,9: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        10,9: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        11,9: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        12,9: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        13,9: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        14,9: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        15,8: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        15,7: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        15,5: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        15,4: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        15,6: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        14,8: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        14,7: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        14,6: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        14,5: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        14,4: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        13,7: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        13,8: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        13,6: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        13,5: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        13,4: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        12,8: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        12,7: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        12,6: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        12,5: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        12,4: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        11,8: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        11,7: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        11,6: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        11,5: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        11,4: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        10,8: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        10,7: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        10,6: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        10,5: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        10,4: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        9,8: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        9,7: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        9,6: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        9,5: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        9,4: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        8,8: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        8,7: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        8,6: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        8,5: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        8,4: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        7,8: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        7,7: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        7,6: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        7,5: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        7,4: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        6,8: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        6,7: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        6,6: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        6,5: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        6,4: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        5,8: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        5,7: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        5,6: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        5,5: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        5,4: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        4,8: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        4,7: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        4,6: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        4,5: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        4,4: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        3,8: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        3,7: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        3,6: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        3,5: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        3,4: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        2,8: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        2,7: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        2,6: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        2,5: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        2,4: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        1,8: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        1,7: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        1,6: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        1,5: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        1,4: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        0,8: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        0,7: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        0,6: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        0,5: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        0,4: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        0,3: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        0,2: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        0,1: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        0,0: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        1,3: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        1,2: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        1,1: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        1,0: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        2,3: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        2,2: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        2,1: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        2,0: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        3,3: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        3,2: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        3,1: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        3,0: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        4,3: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        4,2: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        4,1: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        4,0: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        5,3: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        5,2: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        5,1: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        5,0: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        6,3: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        6,2: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        6,1: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        6,0: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        7,3: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        7,2: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        7,1: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        7,0: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        8,3: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        8,2: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        8,1: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        8,0: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        9,3: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        9,2: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        9,1: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        9,0: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        10,3: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        10,2: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        10,1: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        10,0: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        11,3: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        11,2: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        11,1: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        11,0: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        12,3: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        12,2: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        12,1: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        12,0: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        13,3: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        13,2: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        13,1: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        13,0: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        14,3: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        14,2: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        14,1: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        14,0: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        14,-1: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        13,-1: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        12,-1: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        11,-1: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        10,-1: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        9,-1: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        8,-1: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        7,-1: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        6,-1: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        -1,0: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+        -1,10: RMCAreaKutjevoExteriorLzPad
+        0,10: RMCAreaKutjevoExteriorLzPad
+        1,10: RMCAreaKutjevoExteriorLzPad
+        2,10: RMCAreaKutjevoExteriorLzPad
+        3,10: RMCAreaKutjevoExteriorLzPad
+        4,10: RMCAreaKutjevoExteriorLzPad
+        5,10: RMCAreaKutjevoExteriorLzPad
+        6,10: RMCAreaKutjevoExteriorLzPad
+        7,10: RMCAreaKutjevoExteriorLzPad
+        8,10: RMCAreaKutjevoExteriorLzPad
+        9,10: RMCAreaKutjevoExteriorLzPad
+        10,10: RMCAreaKutjevoExteriorLzPad
+        11,10: RMCAreaKutjevoExteriorLzPad
+        12,10: RMCAreaKutjevoExteriorLzPad
+        13,10: RMCAreaKutjevoExteriorLzPad
+        14,10: RMCAreaKutjevoExteriorLzPad
+        15,10: RMCAreaKutjevoExteriorLzPad
+        16,10: RMCAreaKutjevoExteriorLzPad
+- proto: CMAirlockMaintLockedColony
+  entities:
+  - uid: 160
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 12.5,-0.5
+      parent: 1
+  - uid: 161
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 10.5,0.5
+      parent: 1
+- proto: CMBucketMop
+  entities:
+  - uid: 157
+    components:
+    - type: Transform
+      pos: 13.223006,0.36978322
+      parent: 1
+- proto: CMChair
+  entities:
+  - uid: 69
+    components:
+    - type: Transform
+      pos: 0.5,3.5
+      parent: 1
+  - uid: 70
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 0.5,1.5
+      parent: 1
+  - uid: 111
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 8.5,7.5
+      parent: 1
+  - uid: 130
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 5.5,2.5
+      parent: 1
+  - uid: 166
+    components:
+    - type: Transform
+      pos: 12.5,4.5
+      parent: 1
+- proto: CMChairFolded
+  entities:
+  - uid: 110
+    components:
+    - type: Transform
+      pos: 6.5,7.5
+      parent: 1
+- proto: CMClipboard
+  entities:
+  - uid: 165
+    components:
+    - type: Transform
+      pos: 11.548733,3.617972
+      parent: 1
+- proto: CMFilingCabinet
+  entities:
+  - uid: 112
+    components:
+    - type: Transform
+      pos: 9.732824,9.044546
+      parent: 1
+  - uid: 114
+    components:
+    - type: Transform
+      pos: 9.237453,9.039913
+      parent: 1
+- proto: CMFolderBase
+  entities:
+  - uid: 134
+    components:
+    - type: Transform
+      pos: 9.340866,2.3561568
+      parent: 1
+- proto: CMFolderBlue
+  entities:
+  - uid: 127
+    components:
+    - type: Transform
+      pos: 5.244441,1.6016927
+      parent: 1
+- proto: CMLockerFridgeColony
+  entities:
+  - uid: 76
+    components:
+    - type: Transform
+      pos: 2.5,4.5
+      parent: 1
+- proto: CMMicrowave
+  entities:
+  - uid: 75
+    components:
+    - type: Transform
+      pos: 2.5,3.5
+      parent: 1
+- proto: CMPaper
+  entities:
+  - uid: 126
+    components:
+    - type: Transform
+      pos: 4.6518483,1.6016927
+      parent: 1
+- proto: CMPen
+  entities:
+  - uid: 105
+    components:
+    - type: Transform
+      pos: 7.1743946,8.690071
+      parent: 1
+  - uid: 164
+    components:
+    - type: Transform
+      pos: 13.636696,3.4465566
+      parent: 1
+- proto: CMPosterCMB1
+  entities:
+  - uid: 182
+    components:
+    - type: Transform
+      pos: 12.662031,2.621546
+      parent: 1
+- proto: CMPosterDaniel1
+  entities:
+  - uid: 180
+    components:
+    - type: Transform
+      pos: 11.215998,2.5685132
+      parent: 1
+- proto: CMPosterSafetyGuidance
+  entities:
+  - uid: 181
+    components:
+    - type: Transform
+      pos: 12.172447,2.496459
+      parent: 1
+- proto: CMPottedPlant10
+  entities:
+  - uid: 174
+    components:
+    - type: Transform
+      pos: 11.498924,8.451003
+      parent: 1
+- proto: CMPottedPlant13
+  entities:
+  - uid: 172
+    components:
+    - type: Transform
+      pos: 14.359351,7.5461574
+      parent: 1
+- proto: CMPottedPlant17
+  entities:
+  - uid: 171
+    components:
+    - type: Transform
+      pos: 14.803796,7.226491
+      parent: 1
+- proto: CMPottedPlant29
+  entities:
+  - uid: 173
+    components:
+    - type: Transform
+      pos: 14.521389,3.3188114
+      parent: 1
+- proto: CMPottedPlant5
+  entities:
+  - uid: 101
+    components:
+    - type: Transform
+      pos: 4.5,8.5
+      parent: 1
+- proto: CMRack
+  entities:
+  - uid: 148
+    components:
+    - type: Transform
+      pos: 12.5,1.5
+      parent: 1
+  - uid: 152
+    components:
+    - type: Transform
+      pos: 13.5,1.5
+      parent: 1
+- proto: CMRodMetal1
+  entities:
+  - uid: 109
+    components:
+    - type: Transform
+      pos: 7.5,9.5
+      parent: 1
+- proto: CMShardGlass
+  entities:
+  - uid: 107
+    components:
+    - type: Transform
+      pos: 7.5,8.5
+      parent: 1
+  - uid: 108
+    components:
+    - type: Transform
+      pos: 6.5,9.5
+      parent: 1
+  - uid: 137
+    components:
+    - type: Transform
+      pos: 7.3784523,-0.41878262
+      parent: 1
+  - uid: 178
+    components:
+    - type: Transform
+      pos: 8.394616,1.6484349
+      parent: 1
+- proto: CMTableAlmayer
+  entities:
+  - uid: 51
+    components:
+    - type: Transform
+      pos: 4.5,3.5
+      parent: 1
+  - uid: 52
+    components:
+    - type: Transform
+      pos: 4.5,2.5
+      parent: 1
+  - uid: 53
+    components:
+    - type: Transform
+      pos: 4.5,1.5
+      parent: 1
+  - uid: 54
+    components:
+    - type: Transform
+      pos: 5.5,1.5
+      parent: 1
+  - uid: 55
+    components:
+    - type: Transform
+      pos: 2.5,1.5
+      parent: 1
+  - uid: 56
+    components:
+    - type: Transform
+      pos: 2.5,2.5
+      parent: 1
+  - uid: 57
+    components:
+    - type: Transform
+      pos: 2.5,3.5
+      parent: 1
+  - uid: 58
+    components:
+    - type: Transform
+      pos: 0.5,2.5
+      parent: 1
+  - uid: 59
+    components:
+    - type: Transform
+      pos: 6.5,8.5
+      parent: 1
+  - uid: 60
+    components:
+    - type: Transform
+      pos: 7.5,8.5
+      parent: 1
+  - uid: 61
+    components:
+    - type: Transform
+      pos: 8.5,8.5
+      parent: 1
+  - uid: 62
+    components:
+    - type: Transform
+      pos: 11.5,3.5
+      parent: 1
+  - uid: 63
+    components:
+    - type: Transform
+      pos: 12.5,3.5
+      parent: 1
+  - uid: 64
+    components:
+    - type: Transform
+      pos: 13.5,3.5
+      parent: 1
+- proto: CMVendorCoffee
+  entities:
+  - uid: 66
+    components:
+    - type: Transform
+      pos: 0.54430795,8.997911
+      parent: 1
+- proto: CMVendorSnack
+  entities:
+  - uid: 67
+    components:
+    - type: Transform
+      pos: 1.3984746,9.039607
+      parent: 1
+- proto: CMWetSign
+  entities:
+  - uid: 154
+    components:
+    - type: Transform
+      pos: 13.736895,0.31882197
+      parent: 1
+  - uid: 155
+    components:
+    - type: Transform
+      pos: 13.746155,0.49023724
+      parent: 1
+  - uid: 156
+    components:
+    - type: Transform
+      pos: 13.750784,0.6940825
+      parent: 1
+- proto: FoodBakedGrilledCheeseSandwich
+  entities:
+  - uid: 79
+    components:
+    - type: Transform
+      pos: 2.5,4.5
+      parent: 1
+- proto: FoodBurgerMcrib
+  entities:
+  - uid: 78
+    components:
+    - type: Transform
+      pos: 2.5,4.5
+      parent: 1
+- proto: RMCBarricadeWood
+  entities:
+  - uid: 90
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 2.5,7.5
+      parent: 1
+  - uid: 100
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 5.5,8.5
+      parent: 1
+  - uid: 135
+    components:
+    - type: Transform
+      pos: 8.5,0.5
+      parent: 1
+  - uid: 136
+    components:
+    - type: Transform
+      pos: 9.5,0.5
+      parent: 1
+  - uid: 144
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 9.5,5.5
+      parent: 1
+  - uid: 145
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 9.5,6.5
+      parent: 1
+  - uid: 146
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 8.5,4.5
+      parent: 1
+  - uid: 175
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 12.5,8.5
+      parent: 1
+  - uid: 176
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 13.5,8.5
+      parent: 1
+- proto: RMCBaseballBatMetal
+  entities:
+  - uid: 120
+    components:
+    - type: Transform
+      pos: 6.5,6.5
+      parent: 1
+- proto: RMCBasePropCasing11
+  entities:
+  - uid: 81
+    components:
+    - type: Transform
+      pos: 1.5,5.5
+      parent: 1
+  - uid: 82
+    components:
+    - type: Transform
+      pos: 1.5,6.5
+      parent: 1
+  - uid: 83
+    components:
+    - type: Transform
+      pos: 0.5,6.5
+      parent: 1
+  - uid: 117
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 4.5033402,7.471508
+      parent: 1
+  - uid: 118
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 5.6005626,6.5958996
+      parent: 1
+- proto: RMCBoxDonkpockets
+  entities:
+  - uid: 77
+    components:
+    - type: Transform
+      pos: 2.5,4.5
+      parent: 1
+- proto: RMCBoxLightsMixed
+  entities:
+  - uid: 149
+    components:
+    - type: Transform
+      pos: 11.28681,1.8569272
+      parent: 1
+- proto: RMCBoxPackFlare
+  entities:
+  - uid: 153
+    components:
+    - type: Transform
+      pos: 13.491525,1.5372609
+      parent: 1
+- proto: RMCCalendarWeYa
+  entities:
+  - uid: 102
+    components:
+    - type: Transform
+      pos: 4.5,9.5
+      parent: 1
+- proto: RMCCigaretteSpent
+  entities:
+  - uid: 85
+    components:
+    - type: Transform
+      pos: 0.5,4.5
+      parent: 1
+  - uid: 86
+    components:
+    - type: Transform
+      pos: 1.5,1.5
+      parent: 1
+  - uid: 158
+    components:
+    - type: Transform
+      pos: 11.389673,0.34661895
+      parent: 1
+  - uid: 159
+    components:
+    - type: Transform
+      pos: 12.607265,0.6662855
+      parent: 1
+- proto: RMCCoffeeCup
+  entities:
+  - uid: 73
+    components:
+    - type: Transform
+      pos: 2.2985947,1.723908
+      parent: 1
+  - uid: 74
+    components:
+    - type: Transform
+      pos: 2.6388726,1.4945819
+      parent: 1
+  - uid: 106
+    components:
+    - type: Transform
+      pos: 7.8757834,8.8568535
+      parent: 1
+- proto: RMCCoffeeMachine
+  entities:
+  - uid: 71
+    components:
+    - type: Transform
+      pos: 2.5,2.5
+      parent: 1
+- proto: RMCDecalSpawnerBloodSplatters
+  entities:
+  - uid: 99
+    components:
+    - type: Transform
+      pos: 1.5,6.5
+      parent: 1
+  - uid: 139
+    components:
+    - type: Transform
+      pos: 7.5,1.5
+      parent: 1
+  - uid: 168
+    components:
+    - type: Transform
+      pos: 12.5,5.5
+      parent: 1
+- proto: RMCDecalSpawnerGibsDrone
+  entities:
+  - uid: 143
+    components:
+    - type: Transform
+      pos: 9.5,4.5
+      parent: 1
+- proto: RMCDecalSpawnerXenoSplatters
+  entities:
+  - uid: 140
+    components:
+    - type: Transform
+      pos: 4.5,6.5
+      parent: 1
+  - uid: 141
+    components:
+    - type: Transform
+      pos: 10.5,7.5
+      parent: 1
+  - uid: 142
+    components:
+    - type: Transform
+      pos: 9.5,4.5
+      parent: 1
+  - uid: 183
+    components:
+    - type: Transform
+      pos: 7.5,10.5
+      parent: 1
+- proto: RMCDoubleDoorGenericGlass
+  entities:
+  - uid: 92
+    components:
+    - type: Transform
+      pos: 3.5,6.5
+      parent: 1
+  - uid: 93
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 12.5,9.5
+      parent: 1
+- proto: RMCDrinkCoffee
+  entities:
+  - uid: 87
+    components:
+    - type: Transform
+      pos: 0.7083168,2.697774
+      parent: 1
+- proto: RMCDrinkTea
+  entities:
+  - uid: 163
+    components:
+    - type: Transform
+      pos: 13.3311405,3.7662232
+      parent: 1
+- proto: RMCFoodSnackKeplarCrisps
+  entities:
+  - uid: 89
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 1.4652612,2.3850565
+      parent: 1
+- proto: RMCHazardVestGreen
+  entities:
+  - uid: 151
+    components:
+    - type: Transform
+      pos: 12.750784,1.6947776
+      parent: 1
+- proto: RMCLamp
+  entities:
+  - uid: 128
+    components:
+    - type: Transform
+      pos: 5.735182,1.7731082
+      parent: 1
+- proto: RMCLightFixtureOffset
+  entities:
+  - uid: 94
+    components:
+    - type: Transform
+      pos: 1.5,1.5
+      parent: 1
+  - uid: 95
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 2.5,5.5
+      parent: 1
+  - uid: 96
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 2.5,8.5
+      parent: 1
+  - uid: 97
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 4.5,5.5
+      parent: 1
+  - uid: 98
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 4.5,8.5
+      parent: 1
+  - uid: 115
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 10.5,7.5
+      parent: 1
+  - uid: 116
+    components:
+    - type: Transform
+      pos: 10.5,4.5
+      parent: 1
+  - uid: 184
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 9.5,2.5
+      parent: 1
+  - uid: 185
+    components:
+    - type: Transform
+      pos: 4.5,1.5
+      parent: 1
+  - uid: 186
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 13.5,1.5
+      parent: 1
+- proto: RMCPaperCup
+  entities:
+  - uid: 129
+    components:
+    - type: Transform
+      pos: 4.281478,1.8055379
+      parent: 1
+- proto: RMCPaperScrapProp
+  entities:
+  - uid: 131
+    components:
+    - type: Transform
+      pos: 4.465811,4.793055
+      parent: 1
+  - uid: 132
+    components:
+    - type: Transform
+      pos: 4.7945147,4.5058184
+      parent: 1
+  - uid: 133
+    components:
+    - type: Transform
+      pos: 4.2528477,4.2463794
+      parent: 1
+  - uid: 177
+    components:
+    - type: Transform
+      pos: 14.690393,6.701601
+      parent: 1
+- proto: RMCParasiteProp
+  entities:
+  - uid: 88
+    components:
+    - type: Transform
+      pos: 1.5,3.5
+      parent: 1
+  - uid: 119
+    components:
+    - type: Transform
+      pos: 5.5,7.5
+      parent: 1
+  - uid: 169
+    components:
+    - type: Transform
+      pos: 13.5,6.5
+      parent: 1
+- proto: RMCPersonalDesktop
+  entities:
+  - uid: 103
+    components:
+    - type: Transform
+      pos: 8.47995,8.6483755
+      parent: 1
+  - uid: 104
+    components:
+    - type: Transform
+      pos: 6.5146723,8.634477
+      parent: 1
+  - uid: 125
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 4.5,2.5
+      parent: 1
+- proto: RMCPhotocopier
+  entities:
+  - uid: 170
+    components:
+    - type: Transform
+      pos: 15.5,7.5
+      parent: 1
+- proto: RMCPlankWood1
+  entities:
+  - uid: 91
+    components:
+    - type: Transform
+      pos: 2.5,6.5
+      parent: 1
+  - uid: 138
+    components:
+    - type: Transform
+      pos: 7.5,0.5
+      parent: 1
+- proto: RMCSecureCaseStrappedWEYAMRE
+  entities:
+  - uid: 147
+    components:
+    - type: Transform
+      pos: 11.5,1.5
+      parent: 1
+- proto: RMCSecurityCameraConsole
+  entities:
+  - uid: 162
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 12.5,3.5
+      parent: 1
+- proto: RMCSpawnerIntelClose
+  entities:
+  - uid: 113
+    components:
+    - type: Transform
+      pos: 9.5,8.5
+      parent: 1
+- proto: RMCSpawnerIntelMedium
+  entities:
+  - uid: 124
+    components:
+    - type: Transform
+      pos: 4.5,3.5
+      parent: 1
+- proto: RMCSpawnerRandomToolbox
+  entities:
+  - uid: 150
+    components:
+    - type: Transform
+      pos: 12.5,1.5
+      parent: 1
+- proto: RMCSpeedLoader357Hollowpoint
+  entities:
+  - uid: 84
+    components:
+    - type: Transform
+      pos: 1.5,7.5
+      parent: 1
+- proto: RMCTurretGaussSpaceborne
+  entities:
+  - uid: 121
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 7.5,7.5
+      parent: 1
+  - uid: 122
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 8.5,6.5
+      parent: 1
+  - uid: 123
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 7.5,4.5
+      parent: 1
+- proto: RMCWallKutjevo
+  entities:
+  - uid: 2
+    components:
+    - type: Transform
+      pos: 0.5,0.5
+      parent: 1
+  - uid: 3
+    components:
+    - type: Transform
+      pos: -0.5,0.5
+      parent: 1
+  - uid: 4
+    components:
+    - type: Transform
+      pos: 1.5,0.5
+      parent: 1
+  - uid: 5
+    components:
+    - type: Transform
+      pos: 2.5,0.5
+      parent: 1
+  - uid: 6
+    components:
+    - type: Transform
+      pos: 3.5,0.5
+      parent: 1
+  - uid: 7
+    components:
+    - type: Transform
+      pos: 4.5,0.5
+      parent: 1
+  - uid: 8
+    components:
+    - type: Transform
+      pos: 5.5,0.5
+      parent: 1
+  - uid: 9
+    components:
+    - type: Transform
+      pos: 6.5,0.5
+      parent: 1
+  - uid: 10
+    components:
+    - type: Transform
+      pos: 6.5,1.5
+      parent: 1
+  - uid: 11
+    components:
+    - type: Transform
+      pos: 6.5,-0.5
+      parent: 1
+  - uid: 12
+    components:
+    - type: Transform
+      pos: 3.5,1.5
+      parent: 1
+  - uid: 13
+    components:
+    - type: Transform
+      pos: 10.5,-0.5
+      parent: 1
+  - uid: 14
+    components:
+    - type: Transform
+      pos: 10.5,1.5
+      parent: 1
+  - uid: 15
+    components:
+    - type: Transform
+      pos: 11.5,-0.5
+      parent: 1
+  - uid: 16
+    components:
+    - type: Transform
+      pos: 13.5,-0.5
+      parent: 1
+  - uid: 17
+    components:
+    - type: Transform
+      pos: 14.5,-0.5
+      parent: 1
+  - uid: 18
+    components:
+    - type: Transform
+      pos: 14.5,0.5
+      parent: 1
+  - uid: 19
+    components:
+    - type: Transform
+      pos: 14.5,1.5
+      parent: 1
+  - uid: 20
+    components:
+    - type: Transform
+      pos: 14.5,2.5
+      parent: 1
+  - uid: 21
+    components:
+    - type: Transform
+      pos: 13.5,2.5
+      parent: 1
+  - uid: 22
+    components:
+    - type: Transform
+      pos: 12.5,2.5
+      parent: 1
+  - uid: 23
+    components:
+    - type: Transform
+      pos: 11.5,2.5
+      parent: 1
+  - uid: 24
+    components:
+    - type: Transform
+      pos: 10.5,2.5
+      parent: 1
+  - uid: 25
+    components:
+    - type: Transform
+      pos: 10.5,3.5
+      parent: 1
+  - uid: 26
+    components:
+    - type: Transform
+      pos: 15.5,8.5
+      parent: 1
+  - uid: 27
+    components:
+    - type: Transform
+      pos: 14.5,8.5
+      parent: 1
+  - uid: 28
+    components:
+    - type: Transform
+      pos: 14.5,9.5
+      parent: 1
+  - uid: 29
+    components:
+    - type: Transform
+      pos: 10.5,9.5
+      parent: 1
+  - uid: 30
+    components:
+    - type: Transform
+      pos: 10.5,8.5
+      parent: 1
+  - uid: 31
+    components:
+    - type: Transform
+      pos: 11.5,9.5
+      parent: 1
+  - uid: 32
+    components:
+    - type: Transform
+      pos: 9.5,9.5
+      parent: 1
+  - uid: 33
+    components:
+    - type: Transform
+      pos: 4.5,9.5
+      parent: 1
+  - uid: 34
+    components:
+    - type: Transform
+      pos: 3.5,9.5
+      parent: 1
+  - uid: 35
+    components:
+    - type: Transform
+      pos: 3.5,8.5
+      parent: 1
+  - uid: 36
+    components:
+    - type: Transform
+      pos: 2.5,9.5
+      parent: 1
+  - uid: 37
+    components:
+    - type: Transform
+      pos: 1.5,9.5
+      parent: 1
+  - uid: 38
+    components:
+    - type: Transform
+      pos: 0.5,9.5
+      parent: 1
+  - uid: 39
+    components:
+    - type: Transform
+      pos: -0.5,9.5
+      parent: 1
+  - uid: 40
+    components:
+    - type: Transform
+      pos: 3.5,5.5
+      parent: 1
+- proto: RMCWallPropBloodWallFloor
+  entities:
+  - uid: 65
+    components:
+    - type: Transform
+      pos: 7.135691,6.481506
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+- proto: RMCWaterCooler
+  entities:
+  - uid: 68
+    components:
+    - type: Transform
+      pos: 2.356808,9.018759
+      parent: 1
+- proto: RMCWeaponRevolverSpearhead
+  entities:
+  - uid: 80
+    components:
+    - type: Transform
+      pos: 2.5,5.5
+      parent: 1
+- proto: RMCWeaponShotgunM12
+  entities:
+  - uid: 167
+    components:
+    - type: Transform
+      pos: 13.581989,4.521377
+      parent: 1
+- proto: RMCWestonYamadaCup
+  entities:
+  - uid: 72
+    components:
+    - type: Transform
+      pos: 2.6735947,1.9810308
+      parent: 1
+- proto: RMCWindowFrameKutjevo
+  entities:
+  - uid: 43
+    components:
+    - type: Transform
+      pos: 7.5,-0.5
+      parent: 1
+  - uid: 44
+    components:
+    - type: Transform
+      pos: 6.5,9.5
+      parent: 1
+  - uid: 45
+    components:
+    - type: Transform
+      pos: 7.5,9.5
+      parent: 1
+- proto: RMCWindowKutjevo
+  entities:
+  - uid: 41
+    components:
+    - type: Transform
+      pos: 9.5,-0.5
+      parent: 1
+  - uid: 42
+    components:
+    - type: Transform
+      pos: 8.5,-0.5
+      parent: 1
+  - uid: 46
+    components:
+    - type: Transform
+      pos: 3.5,2.5
+      parent: 1
+  - uid: 47
+    components:
+    - type: Transform
+      pos: 3.5,3.5
+      parent: 1
+  - uid: 48
+    components:
+    - type: Transform
+      pos: 3.5,4.5
+      parent: 1
+  - uid: 49
+    components:
+    - type: Transform
+      pos: 5.5,9.5
+      parent: 1
+  - uid: 50
+    components:
+    - type: Transform
+      pos: 8.5,9.5
+      parent: 1
+- proto: RMCWoodClock
+  entities:
+  - uid: 179
+    components:
+    - type: Transform
+      pos: 14.859862,8.7346
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+...
