@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/20/2026 00:05:29
-  entityCount: 26682
+  time: 09/18/2026 22:19:33
+  entityCount: 26689
 maps:
 - 1
 grids:
@@ -62412,488 +62412,656 @@ entities:
       rot: 3.141592653589793 rad
       pos: 10.5,-25.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3858
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 11.5,-26.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3859
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 11.5,-35.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3860
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 58.5,-32.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3861
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 52.5,-34.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3862
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 52.5,-58.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3863
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 53.5,-59.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3864
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 54.5,-60.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3865
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 54.5,-61.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3866
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 53.5,-72.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3867
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 52.5,-73.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3868
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 43.5,-87.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3869
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 56.5,-96.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3870
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 55.5,-97.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3871
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 53.5,-100.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3872
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 65.5,-93.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3873
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 65.5,-95.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3874
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 61.5,-95.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3875
     components:
     - type: Transform
       pos: 61.5,-93.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3876
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 36.5,-132.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3877
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 36.5,-128.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3878
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 26.5,-136.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3879
     components:
     - type: Transform
       pos: 26.5,-135.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3880
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 27.5,-135.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3881
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 27.5,-136.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3882
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 29.5,-144.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3883
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 29.5,-147.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3884
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 28.5,-149.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3885
     components:
     - type: Transform
       pos: 19.5,-155.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3886
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 12.5,-155.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3887
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 28.5,-154.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3888
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 30.5,-155.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3889
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 30.5,-157.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3890
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 41.5,-138.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3891
     components:
     - type: Transform
       pos: 40.5,-138.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3892
     components:
     - type: Transform
       pos: 51.5,-139.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3893
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 53.5,-139.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3894
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 53.5,-140.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3895
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 51.5,-140.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3896
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 54.5,-122.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3897
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 54.5,-121.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3898
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 53.5,-122.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3899
     components:
     - type: Transform
       pos: 53.5,-121.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3900
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 57.5,-123.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3901
     components:
     - type: Transform
       pos: 57.5,-122.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3902
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 59.5,-122.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3903
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 59.5,-123.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3904
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 55.5,-117.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3905
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 58.5,-117.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3906
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 50.5,-118.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3907
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 50.5,-117.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3908
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 76.5,-114.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3909
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 84.5,-53.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3910
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 87.5,-53.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3911
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 84.5,-52.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3912
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 86.5,-53.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3913
     components:
     - type: Transform
       pos: 86.5,-52.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3914
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 89.5,-150.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3915
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 128.5,-73.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3916
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 130.5,-73.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3917
     components:
     - type: Transform
       pos: 128.5,-72.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3918
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 130.5,-72.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3919
     components:
     - type: Transform
       pos: 173.5,-147.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3920
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 177.5,-147.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3921
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 178.5,-148.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3922
     components:
     - type: Transform
       pos: 182.5,-141.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3923
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 182.5,-144.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3924
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 173.5,-134.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3925
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 176.5,-134.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3926
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 210.5,-116.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3927
     components:
     - type: Transform
       pos: 210.5,-115.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3928
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 212.5,-115.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3929
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 212.5,-116.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3930
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 198.5,-70.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3931
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 197.5,-71.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3932
     components:
     - type: Transform
       pos: 197.5,-70.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3933
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 198.5,-71.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3934
     components:
     - type: Transform
       pos: 82.5,-52.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3935
     components:
     - type: Transform
       pos: 87.5,-51.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3936
     components:
     - type: Transform
       pos: 49.5,-65.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3937
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 49.5,-68.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3938
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 13.5,-95.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3939
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 14.5,-96.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3940
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 15.5,-97.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
 - proto: RMCGrassTallDesert
   entities:
   - uid: 3941
@@ -62901,466 +63069,652 @@ entities:
     - type: Transform
       pos: 87.5,-52.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3942
     components:
     - type: Transform
       pos: 9.5,-26.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3943
     components:
     - type: Transform
       pos: 9.5,-27.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3944
     components:
     - type: Transform
       pos: 9.5,-32.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3945
     components:
     - type: Transform
       pos: 9.5,-31.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3946
     components:
     - type: Transform
       pos: 9.5,-30.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3947
     components:
     - type: Transform
       pos: 9.5,-29.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3948
     components:
     - type: Transform
       pos: 9.5,-28.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3949
     components:
     - type: Transform
       pos: 10.5,-34.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3950
     components:
     - type: Transform
       pos: 10.5,-33.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3951
     components:
     - type: Transform
       pos: 10.5,-32.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3952
     components:
     - type: Transform
       pos: 10.5,-31.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3953
     components:
     - type: Transform
       pos: 10.5,-30.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3954
     components:
     - type: Transform
       pos: 10.5,-29.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3955
     components:
     - type: Transform
       pos: 10.5,-28.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3956
     components:
     - type: Transform
       pos: 10.5,-27.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3957
     components:
     - type: Transform
       pos: 10.5,-26.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3958
     components:
     - type: Transform
       pos: 53.5,-31.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3959
     components:
     - type: Transform
       pos: 52.5,-31.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3960
     components:
     - type: Transform
       pos: 52.5,-32.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3961
     components:
     - type: Transform
       pos: 51.5,-32.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3962
     components:
     - type: Transform
       pos: 51.5,-33.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3963
     components:
     - type: Transform
       pos: 50.5,-33.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3964
     components:
     - type: Transform
       pos: 49.5,-33.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3965
     components:
     - type: Transform
       pos: 54.5,-31.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3966
     components:
     - type: Transform
       pos: 55.5,-31.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3967
     components:
     - type: Transform
       pos: 56.5,-31.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3968
     components:
     - type: Transform
       pos: 52.5,-59.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3969
     components:
     - type: Transform
       pos: 53.5,-60.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3970
     components:
     - type: Transform
       pos: 52.5,-67.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3971
     components:
     - type: Transform
       pos: 52.5,-68.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3972
     components:
     - type: Transform
       pos: 52.5,-70.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3973
     components:
     - type: Transform
       pos: 52.5,-71.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3974
     components:
     - type: Transform
       pos: 40.5,-86.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3975
     components:
     - type: Transform
       pos: 41.5,-86.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3976
     components:
     - type: Transform
       pos: 42.5,-86.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3977
     components:
     - type: Transform
       pos: 52.5,-98.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3978
     components:
     - type: Transform
       pos: 52.5,-99.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3979
     components:
     - type: Transform
       pos: 53.5,-97.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3980
     components:
     - type: Transform
       pos: 53.5,-96.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3981
     components:
     - type: Transform
       pos: 54.5,-96.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3982
     components:
     - type: Transform
       pos: 54.5,-95.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3983
     components:
     - type: Transform
       pos: 55.5,-95.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3984
     components:
     - type: Transform
       pos: 55.5,-96.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3985
     components:
     - type: Transform
       pos: 35.5,-130.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3986
     components:
     - type: Transform
       pos: 35.5,-131.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3987
     components:
     - type: Transform
       pos: 27.5,-148.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3988
     components:
     - type: Transform
       pos: 27.5,-147.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3989
     components:
     - type: Transform
       pos: 27.5,-146.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3990
     components:
     - type: Transform
       pos: 28.5,-145.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3991
     components:
     - type: Transform
       pos: 28.5,-146.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3992
     components:
     - type: Transform
       pos: 28.5,-147.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3993
     components:
     - type: Transform
       pos: 27.5,-155.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3994
     components:
     - type: Transform
       pos: 28.5,-155.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3995
     components:
     - type: Transform
       pos: 28.5,-156.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3996
     components:
     - type: Transform
       pos: 29.5,-156.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3997
     components:
     - type: Transform
       pos: 75.5,-113.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3998
     components:
     - type: Transform
       pos: 75.5,-150.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 3999
     components:
     - type: Transform
       pos: 76.5,-150.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4000
     components:
     - type: Transform
       pos: 77.5,-150.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4001
     components:
     - type: Transform
       pos: 78.5,-150.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4002
     components:
     - type: Transform
       pos: 84.5,-151.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4003
     components:
     - type: Transform
       pos: 85.5,-151.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4004
     components:
     - type: Transform
       pos: 86.5,-151.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4005
     components:
     - type: Transform
       pos: 87.5,-151.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4006
     components:
     - type: Transform
       pos: 88.5,-151.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4007
     components:
     - type: Transform
       pos: 174.5,-148.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4008
     components:
     - type: Transform
       pos: 175.5,-148.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4009
     components:
     - type: Transform
       pos: 176.5,-148.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4010
     components:
     - type: Transform
       pos: 177.5,-148.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4011
     components:
     - type: Transform
       pos: 177.5,-149.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4012
     components:
     - type: Transform
       pos: 176.5,-149.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4013
     components:
     - type: Transform
       pos: 175.5,-149.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4014
     components:
     - type: Transform
       pos: 174.5,-149.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4015
     components:
     - type: Transform
       pos: 183.5,-142.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4016
     components:
     - type: Transform
       pos: 184.5,-142.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4017
     components:
     - type: Transform
       pos: 184.5,-143.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4018
     components:
     - type: Transform
       pos: 183.5,-143.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4019
     components:
     - type: Transform
       pos: 174.5,-133.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4020
     components:
     - type: Transform
       pos: 175.5,-133.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4021
     components:
     - type: Transform
       pos: 62.5,-94.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4022
     components:
     - type: Transform
       pos: 50.5,-68.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4023
     components:
     - type: Transform
       pos: 50.5,-67.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4024
     components:
     - type: Transform
       pos: 50.5,-66.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4025
     components:
     - type: Transform
       pos: 51.5,-67.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4026
     components:
     - type: Transform
       pos: 51.5,-68.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4027
     components:
     - type: Transform
       pos: 52.5,-72.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4028
     components:
     - type: Transform
       pos: 51.5,-72.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4029
     components:
     - type: Transform
       pos: 51.5,-71.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4030
     components:
     - type: Transform
       pos: 51.5,-70.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4031
     components:
     - type: Transform
       pos: 51.5,-69.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4032
     components:
     - type: Transform
       pos: 14.5,-95.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4033
     components:
     - type: Transform
       pos: 15.5,-96.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
 - proto: RMCGrassTallSidesDesert
   entities:
   - uid: 4034
@@ -63369,607 +63723,819 @@ entities:
       rot: 3.141592653589793 rad
       pos: 83.5,-53.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4035
     components:
     - type: Transform
       pos: 83.5,-52.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4036
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 53.5,-69.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4037
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 11.5,-34.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4038
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 11.5,-27.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4039
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 11.5,-28.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4040
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 11.5,-29.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4041
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 11.5,-30.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4042
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 11.5,-31.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4043
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 11.5,-32.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4044
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 11.5,-33.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4045
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 51.5,-34.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4046
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 53.5,-32.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4047
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 54.5,-32.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4048
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 55.5,-32.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4049
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 56.5,-32.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4050
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 57.5,-32.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4051
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 48.5,-34.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4052
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 49.5,-34.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4053
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 50.5,-34.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4054
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 52.5,-33.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4055
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 53.5,-66.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4056
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 53.5,-67.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4057
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 53.5,-71.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4058
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 43.5,-85.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4059
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 40.5,-87.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4060
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 41.5,-87.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4061
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 42.5,-87.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4062
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 43.5,-86.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4063
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 56.5,-94.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4064
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 56.5,-95.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4065
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 53.5,-98.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4066
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 53.5,-99.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4067
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 52.5,-100.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4068
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 54.5,-97.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4069
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 63.5,-95.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4070
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 64.5,-95.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4071
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 65.5,-94.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4072
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 61.5,-94.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4073
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 62.5,-95.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4074
     components:
     - type: Transform
       pos: 62.5,-93.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4075
     components:
     - type: Transform
       pos: 63.5,-93.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4076
     components:
     - type: Transform
       pos: 64.5,-93.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4077
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 36.5,-129.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4078
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 36.5,-130.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4079
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 36.5,-131.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4080
     components:
     - type: Transform
       pos: 28.5,-144.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4081
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 29.5,-145.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4082
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 29.5,-146.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4083
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 26.5,-149.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4084
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 27.5,-149.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4085
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 28.5,-148.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4086
     components:
     - type: Transform
       pos: 11.5,-155.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4087
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 12.5,-156.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4088
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 19.5,-156.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4089
     components:
     - type: Transform
       pos: 20.5,-155.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4090
     components:
     - type: Transform
       pos: 26.5,-154.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4091
     components:
     - type: Transform
       pos: 27.5,-154.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4092
     components:
     - type: Transform
       pos: 29.5,-155.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4093
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 30.5,-156.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4094
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 29.5,-157.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4095
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 41.5,-139.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4096
     components:
     - type: Transform
       pos: 52.5,-139.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4097
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 52.5,-140.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4098
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 58.5,-123.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4099
     components:
     - type: Transform
       pos: 58.5,-122.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4100
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 56.5,-117.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4101
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 57.5,-117.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4102
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 76.5,-113.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4103
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 74.5,-114.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4104
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 75.5,-114.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4105
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 76.5,-112.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4106
     components:
     - type: Transform
       pos: 75.5,-149.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4107
     components:
     - type: Transform
       pos: 76.5,-149.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4108
     components:
     - type: Transform
       pos: 77.5,-149.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4109
     components:
     - type: Transform
       pos: 78.5,-149.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4110
     components:
     - type: Transform
       pos: 79.5,-149.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4111
     components:
     - type: Transform
       pos: 80.5,-149.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4112
     components:
     - type: Transform
       pos: 85.5,-150.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4113
     components:
     - type: Transform
       pos: 86.5,-150.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4114
     components:
     - type: Transform
       pos: 87.5,-150.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4115
     components:
     - type: Transform
       pos: 88.5,-150.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4116
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 129.5,-73.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4117
     components:
     - type: Transform
       pos: 129.5,-72.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4118
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 173.5,-148.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4119
     components:
     - type: Transform
       pos: 174.5,-147.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4120
     components:
     - type: Transform
       pos: 175.5,-147.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4121
     components:
     - type: Transform
       pos: 176.5,-147.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4122
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 183.5,-144.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4123
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 182.5,-143.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4124
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 182.5,-142.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4125
     components:
     - type: Transform
       pos: 184.5,-141.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4126
     components:
     - type: Transform
       pos: 183.5,-141.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4127
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 174.5,-134.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4128
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 175.5,-134.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4129
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 176.5,-133.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4130
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 211.5,-116.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4131
     components:
     - type: Transform
       pos: 211.5,-115.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4132
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 50.5,-71.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4133
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 50.5,-69.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4134
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 50.5,-70.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4135
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 49.5,-67.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4136
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 49.5,-66.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4137
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 50.5,-72.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4138
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 53.5,-70.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 4139
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 53.5,-68.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
 - proto: RMCGrate
   entities:
   - uid: 4140
@@ -67293,6 +67859,13 @@ entities:
     - type: Transform
       pos: 127.5,-110.5
       parent: 1
+- proto: RMCMapInsertKutjevoCaveHold
+  entities:
+  - uid: 26683
+    components:
+    - type: Transform
+      pos: 171.5,-40.5
+      parent: 1
 - proto: RMCMapInsertKutjevoCleaningProgBotany
   entities:
   - uid: 4683
@@ -67314,12 +67887,40 @@ entities:
     - type: Transform
       pos: 132.5,-78.5
       parent: 1
+- proto: RMCMapInsertKutjevoFaceHuggerExamination
+  entities:
+  - uid: 26688
+    components:
+    - type: Transform
+      pos: 113.5,-64.5
+      parent: 1
+- proto: RMCMapInsertKutjevoFlightcontrolExtension
+  entities:
+  - uid: 26686
+    components:
+    - type: Transform
+      pos: 14.5,-59.5
+      parent: 1
 - proto: RMCMapInsertKutjevoLZ1Alternative
   entities:
   - uid: 4686
     components:
     - type: Transform
       pos: 0.5,-160.5
+      parent: 1
+- proto: RMCMapInsertKutjevoLZ2Containers
+  entities:
+  - uid: 26689
+    components:
+    - type: Transform
+      pos: 33.5,-44.5
+      parent: 1
+- proto: RMCMapInsertKutjevoNorthroadGarage
+  entities:
+  - uid: 26685
+    components:
+    - type: Transform
+      pos: 65.5,-46.5
       parent: 1
 - proto: RMCMapInsertKutjevoSurvSpawnTogether
   entities:
@@ -67334,6 +67935,13 @@ entities:
     components:
     - type: Transform
       pos: 68.5,-100.5
+      parent: 1
+- proto: RMCMapInsertKutjevoWYOffice
+  entities:
+  - uid: 26687
+    components:
+    - type: Transform
+      pos: 30.5,-74.5
       parent: 1
 - proto: RMCMapInsertSolarisPlinkingSpotNorthLZ
   entities:
@@ -175140,7 +175748,7 @@ entities:
     - type: Transform
       pos: 42.5,-109.5
       parent: 1
-- proto: RMCWeaponShotgunHG3712
+- proto: RMCWeaponShotgunM12
   entities:
   - uid: 25801
     components:
