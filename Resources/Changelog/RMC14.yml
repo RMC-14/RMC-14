@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: IceNoobXD
-  changes:
-  - message: new Lobby Icons for the Queen, Xenonid, Correspondent, Rifleman and Colonist
-      roles
-    type: Add
-  id: 3154
-  time: '2026-04-22T04:14:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9457
 - author: TadJohnson00
   changes:
   - message: The TSE's L1 ballistic helmet has been changed to the royal L5A1 ballistic
@@ -4440,5 +4432,12 @@
   id: 3653
   time: '2026-09-18T10:26:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10823
+- author: ffxivsidehoes
+  changes:
+  - message: Adjusted EORG box size
+    type: Fix
+  id: 3654
+  time: '2026-09-18T15:18:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10415
 Name: RMC14
 Order: -1
