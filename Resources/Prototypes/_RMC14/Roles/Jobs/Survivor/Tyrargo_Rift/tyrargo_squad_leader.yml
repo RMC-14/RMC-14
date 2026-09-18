@@ -1,0 +1,66 @@
+- type: job
+  parent: RMCSurvivorTyrargoBase
+  id: RMCSurvivorTyrargoSquadLeader
+  name: cm-job-name-squad-leader
+  startingGear: RMCGearTyrargoSquadLeader
+  ranks:
+    RMCRankGunnerySergeant: []
+  icon: "RMCJobIconTyrargoSquadLeader"
+  roleWeight: 1
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobSquadLeader
+    time: 18000  # 5 hours
+  - !type:TotalJobsTimeRequirement
+    group: RMCJobsSurvivor
+    time: 3600 # 1 hour
+  spawnMenuRoleName: UNMC Squad Leader (Tyrargo Rift Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetTyrargoSquadLeader
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: leader
+    - type: IntelRescueSurvivorObjective
+    - type: CommandAccent
+    - type: InnateCommandSpeech
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadUNMC
+    - type: JobPrefix
+      prefix: cm-job-prefix-squad-leader
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetTyrargoSurvivorFull
+    - type: RMCTrackable
+    - type: RMCAwardRecommendation
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearTyrargoBase
+  id: RMCGearTyrargoSquadLeader
+  equipment:
+    ears: RMCHeadsetTyrargoLeader
+    back: RMCSatchelTyrargoSurvivorSquadLeaderFill
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointTyrargoSquadLeader
+  name: tyrargo marine squad leader spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorTyrargoSquadLeader
+  - type: Sprite
+    state: leader_spawn
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconTyrargoSquadLeader
+  icon:
+    sprite: _RMC14/Interface/job_icons/UNMC/tyrargo.rsi
+    state: hudsquad_tyrargo_sl

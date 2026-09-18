@@ -20,6 +20,8 @@
     components:
     - type: Skills
       preset: RMCSkillPresetPVESGO
+    - type: AssignSquad
+      squad: SquadSunRiders
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist

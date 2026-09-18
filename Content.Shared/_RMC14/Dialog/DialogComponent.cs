@@ -41,4 +41,7 @@ public sealed partial class DialogComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool SmartCheck = false;
+
+    [DataField, AutoNetworkedField]
+    public bool EnableSearch = true;
 }
