@@ -1,0 +1,112 @@
+- type: weightedRandomFillSolution
+  id: RMCRandomPickBotanyReagent
+  fills:
+  # C1 - CHEM_CLASS_BASIC
+  - quantity: 5
+    weight: 10
+    reagents:
+    - Water
+    - RMCOxygen
+    - RMCCopper
+    - RMCNitrogen
+    - RMCHydrogen
+    - RMCPotassium
+    - RMCMercury
+    - RMCSulfur
+    - RMCCarbon
+    - RMCChlorine
+    - RMCFluorine
+    - RMCSodium
+    - RMCPhosphorus
+    - RMCLithium
+    - RMCSugar
+    - RMCRadium
+    - RMCIron
+    - RMCAluminum
+    - RMCSilicon
+    - RMCSulphuricAcid
+  # C2 - CHEM_CLASS_COMMON
+  - quantity: 5
+    weight: 15
+    reagents:
+    - CMInaprovaline
+    - RMCTramadol
+    - RMCOxycodone
+    - CMKelotane
+    - CMDexalin
+    - CMDylovene
+    - RMCPeridaxon
+    - CMBicaridine
+    - CMEpinephrine
+    - RMCAmmonia
+    - RMCMethane
+  # C3 - CHEM_CLASS_UNCOMMON
+  - quantity: 10
+    weight: 25
+    reagents:
+    - Coffee
+    - Tea
+    - RMCLipozine
+    - RMCRyetalyn
+    - RMCParacetamol
+    - RMCSterilizine
+    - CMLeporazine
+    - CMDermaline
+    - CMTricordrazine
+    - CMArithrazine
+    - RMCAlkysine
+    - CMImidazoline
+    - CMMeralyne
+    - CMCryoxadone
+    - CMClonexadone
+    - CMEthylredoxrazine
+    - RMCMethylphenidate
+    - RMCCitalopram
+    - RMCParoxetine
+    - RMCSpaceDrugs
+    - RMCSleen
+    - RMCThermite
+    - RMCSpaceCleaner
+    - RMCCryptobiolin
+    - RMCImpedrezene
+    - RMCFluorosurfactant
+    - RMCFoamingAgent
+    - RMCDiethylamine
+    - ChlorineTrifluoride
+    - RMCUnstableMutagen
+    - RMCLexorin
+    - RMCMindbreakerToxin
+    - RMCDinitroaniline
+    - RMCChloralhydrate
+    - RMCPotassiumChloride
+    - RMCPotassiumChlorophoride
+    - RMCIronSulfate
+    - RMCPolytrinicAcid
+  # C4 - CHEM_CLASS_RARE
+  - quantity: 10
+    weight: 30
+    reagents:
+    - DoctorsDelight
+    - Ketchup
+    - RMCCapsaicin
+    - Hotsauce
+    - FrostOil
+    - Blackpepper
+    - RMCCoco
+    - RMCPsilocybin
+    - RMCCornOil
+    - Enzyme
+    - Blood
+    - RMCGlycerol
+    - RMCVirusFood
+    - RMCGold
+    - RMCSilver
+    - RMCUranium
+    - RMCNicotine
+    - RMCHexamine
+    - RMCPhoron
+    - RMCPotassiumPhorosulfate
+    - RMCIronPhorideSulfate
+    - RMCCopperSulfate
+    - RMCFormaldehyde
+    - RMCParaformaldehyde
