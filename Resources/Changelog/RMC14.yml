@@ -1,20 +1,4 @@
 ﻿Entries:
-- author: TadJohnson00
-  changes:
-  - message: The TSE's L1 ballistic helmet has been changed to the royal L5A1 ballistic
-      helmet.
-    type: Tweak
-  id: 3155
-  time: '2026-04-22T04:13:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9573
-- author: Dygon
-  changes:
-  - message: You can now store the ML66D gun component and the ML66D mount component
-      in the heavy gunner belt.
-    type: Tweak
-  id: 3156
-  time: '2026-04-22T04:16:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9264
 - author: YesNoMaybePerhaps
   changes:
   - message: Changed the capacity of boxes of pill bottles from 7 to 8
@@ -4439,5 +4423,21 @@
   id: 3654
   time: '2026-09-18T15:18:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10415
+- author: Drazamuffin
+  changes:
+  - message: Changed hive collapse announcement to correctly instruct the player what
+      is happening.
+    type: Tweak
+  id: 3655
+  time: '2026-09-18T15:23:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10822
+- author: wheelwrightt
+  changes:
+  - message: First weld upon equipping new welding goggles no longer flashes blindness
+      effect
+    type: Fix
+  id: 3656
+  time: '2026-09-18T15:23:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10545
 Name: RMC14
 Order: -1
