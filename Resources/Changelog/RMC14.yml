@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: TadJohnson00
-  changes:
-  - message: '[PVE] Added the L33 DAAMSL, a shoulder-fired disposable rocket launcher
-      belonging to the Royal Crown Marines faction.'
-    type: Add
-  id: 3158
-  time: '2026-04-22T04:15:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9393
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed squad headsets not having the correct default channel, they should
@@ -4439,5 +4431,12 @@
   id: 3657
   time: '2026-09-18T15:42:40.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10585
+- author: Vermidia
+  changes:
+  - message: Fixed rockets overshooting at aimed spots.
+    type: Fix
+  id: 3658
+  time: '2026-09-18T15:47:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10420
 Name: RMC14
 Order: -1
