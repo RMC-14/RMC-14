@@ -475,3 +475,18 @@ rmc-xeno-swift-steps-others = {CAPITALIZE(THE($user))} darts aside, evading {THE
 rmc-xeno-marked-critical-apply = You feel fear washing down your spine... you could be next!
 rmc-xeno-marked-critical-disappear = You calm down and get back to your senses.
 rmc-xeno-marked-critical-consumed = You've been knocked back to your senses!
+
+# Massacre
+rmc-xeno-massacre-no-targets = There's no dead to tear apart!
+rmc-xeno-massacre-start-self = We start ripping apart the dead!
+rmc-xeno-massacre-start-others = {CAPITALIZE(THE($user))} starts tearing apart the nearby bodies!
+rmc-xeno-massacre-end-self = We tear the dead apart!
+rmc-xeno-massacre-end-others = {CAPITALIZE(THE($user))} tears the nearby bodies apart!
+
+# Blood Drain
+rmc-xeno-blood-drain-target = {CAPITALIZE(THE($user))} is biting into you!
+rmc-xeno-blood-drain-no-blood = {CAPITALIZE(THE($target))} has no blood left!
+rmc-xeno-blood-drain-bad-blood = {CAPITALIZE(THE($target))} has terrible tasting blood!
+rmc-xeno-blood-drain-infected-blood = {CAPITALIZE(THE($target))} has sister blood flowing through them!
+rmc-xeno-blood-drain-pull = We need to pull {CAPITALIZE(THE($target))} to drain blood!
+rmc-xeno-blood-drain-down = We need to keep {CAPITALIZE(THE($target))} down to drain blood!
