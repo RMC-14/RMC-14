@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: YesNoMaybePerhaps
-  changes:
-  - message: Changed the capacity of boxes of pill bottles from 7 to 8
-    type: Tweak
-  id: 3157
-  time: '2026-04-22T04:18:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8915
 - author: TadJohnson00
   changes:
   - message: '[PVE] Added the L33 DAAMSL, a shoulder-fired disposable rocket launcher
@@ -4439,5 +4432,12 @@
   id: 3656
   time: '2026-09-18T15:23:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10545
+- author: Ozehk
+  changes:
+  - message: The FORECON Spotter now has a HUD icon.
+    type: Tweak
+  id: 3657
+  time: '2026-09-18T15:42:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10585
 Name: RMC14
 Order: -1
