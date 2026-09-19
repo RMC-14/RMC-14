@@ -22,6 +22,10 @@
   - type: Damageable
     damageContainer: StructuralXeno
     damageModifierSet: Resin
+  - type: ExplosionResistance
+    worn: false
+    damageCoefficientOverrides:
+      RMCMortarFrag: 0.85
   - type: RMCNightVisionVisible
     priority: -1
     transparency: 0.2

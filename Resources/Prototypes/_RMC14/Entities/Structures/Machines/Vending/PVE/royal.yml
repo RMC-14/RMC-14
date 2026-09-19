@@ -197,8 +197,8 @@
         points: 15
       - id: RMCMortarShellFlare
         points: 10
-      #- id: RMCMortarShellFrag # TODO RMC14 more mortar shell types
-      #  points: 10
+      - id: RMCMortarShellFrag
+        points: 10
       #- id: RMCMortarShellSmoke
       #  points: 10
       #- id: RMCMortarShellWhitePhosphorus
