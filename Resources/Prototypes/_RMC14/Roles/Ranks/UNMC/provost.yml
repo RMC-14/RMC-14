@@ -26,6 +26,14 @@
   prefix: PvDM.
   paygrade: O6
 
+# Any admin with medium-high law understanding. (PID)
+- type: rank
+  id: RMCRankProvostOperative
+  name: Intelligence Operative
+  prefix: PvIO.
+  paygrade: O4
+
+# Any player with high law understanding
 - type: rank
   id: RMCRankProvostChiefInspector
   name: Chief Inspector
