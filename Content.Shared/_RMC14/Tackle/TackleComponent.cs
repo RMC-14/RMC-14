@@ -20,4 +20,7 @@ public sealed partial class TackleComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan StunMax = TimeSpan.FromSeconds(3);
+
+    [DataField, AutoNetworkedField]
+    public float SlashChance;
 }
