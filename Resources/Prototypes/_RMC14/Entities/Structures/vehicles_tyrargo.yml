@@ -50,6 +50,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Tyrargo_Vehicles/tyrargo_evac.rsi
     state: evac_black
+    drawdepth: Mobs
   - type: Physics
     fixedRotation: true
 
@@ -63,6 +64,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Tyrargo_Vehicles/tyrargo_evac.rsi
     state: evac_green
+    drawdepth: Mobs
   - type: Physics
     fixedRotation: true
 

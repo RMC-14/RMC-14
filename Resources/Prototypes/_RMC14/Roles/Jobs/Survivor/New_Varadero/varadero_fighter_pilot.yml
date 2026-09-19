@@ -1,0 +1,92 @@
+- type: job
+  parent: CMSurvivorEngineer
+  id: RMCSurvivorUNMCPilot
+  name: rmc-job-name-survivor-pilot
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorEngineer
+  startingGear: RMCGearSurvivorUNMCPilot
+  greeting: rmc-job-greeting-varadero
+  ranks:
+    RMCRankSecondLT: []
+  spawnMenuRoleName: UNMC Fighter Pilot (NV Survivor)
+  icon: "RMCJobIconSurvivorPilot"
+  hasIcon: true
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadMarineVaradero
+    - type: Skills
+      preset: RMCSkillPresetSurvivorUNMCFighterPilot
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetUNMCPilot
+    - type: JobPrefix
+      prefix: rmc-job-prefix-survivor-pilot
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pilot # TODO RMC14: wy_pilot
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_unmc
+    - type: Language
+      spokenLanguages:
+        - Spanish
+        - English
+      understoodLanguages:
+        - Spanish
+        - English
+      currentLanguage: English
+      defaultLanguage: English
+  useLoadoutOfJob: CMSurvivorEngineer # for inheritance
+  medals:
+    Bronze: RMCMedalBronzeService
+    Silver: RMCMedalSilverService
+    Gold: RMCMedalGoldService
+    Platinum: RMCMedalPlatinumService
+    Ruby: RMCMedalRubyService
+    Amethyst: RMCMedalAmethystService
+    Emerald: RMCMedalEmeraldService
+    Prismatic: RMCMedalPrismaticService
+
+- type: startingGear
+  id: RMCGearSurvivorUNMCPilot
+  equipment:
+    jumpsuit: RMCJumpsuitPilotFighter
+    ears: RMCHeadsetMarineNV
+    gloves: CMHandsInsulatedPilot
+    head: CMArmorHelmetHDU44
+    id: CMIDCardStandardDogtag
+    pocket1: RMCPouchSurvivalFill
+    belt: CMBeltUtilityFilled
+    outerClothing: RMCCoatPilotFighter
+    back: RMCSatchelLightpack5Slot
+    shoes: CMBootsBlackFilled
+  storage:
+    back:
+      - CMSheetMetal20
+      - CMSheetPlasteel10
+      - ClothingHeadHatWelding
+
+- type: entity
+  parent: RMCGearSurvivorPresetUNMC
+  id: RMCSurvivorPresetUNMCPilot
+  name: varadero pilot preset
+  categories: [ HideSpawnMenu ]
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSurvivorPilot
+  icon:
+    sprite: _RMC14/Interface/job_icons/UNMC/other.rsi
+    state: hudsquad_nv_pilot

@@ -859,6 +859,22 @@
 
 - type: entity
   parent: CMSatchel
+  id: RMCBackpackRTOBroken
+  name: broken UNMC radio telephone pack
+  description: A heavy-duty pack, used for telecommunications between central command. Commonly carried by RTOs. This one has had its' antenna damaged.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto/broken.rsi
+    layers:
+    - state: icon
+      map: [ "base" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+
+- type: entity
+  parent: CMSatchel
   id: RMCBackpackRTOPMCBroken
   name: broken We-Ya radio telephone pack
   description: A heavy-duty extended-pack, used for telecommunications between central command. Commonly carried by RTOs. This one bears the logo of Weston-Yamada and internal systems seem to be completely fried and broken.

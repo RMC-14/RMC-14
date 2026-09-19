@@ -1,5 +1,5 @@
 - type: job
-  parent: CMSurvivor
+  parent: RMCSurvivorCommandingOfficer
   id: RMCSurvivorCommanderNewVaradero
   name: rmc-job-name-survivor-commander-new-varadero
   description: cm-job-description-commanding-officer
@@ -7,11 +7,14 @@
   ranks:
     RMCRankLieutenantColonel: []
   startingGear: RMCGearSurvivorCommanderNewVaradero
+  greeting: rmc-job-greeting-varadero
   supervisors: cm-job-supervisors-marine-high-command
   roleWeight: 0.25
   icon: "RMCJobIconSurvivorCommanderNewVaradero"
   hasIcon: true
-  spawnMenuRoleName: UNMC Commander (New Varadero Survivor)
+  spawnMenuRoleName: UNMC Varadero Base Commander (NV Survivor)
+  accessGroups:
+  - Colony
   special:
   - !type:AddComponentSpecial
     components:
@@ -33,35 +36,35 @@
         state: xo
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_shipside
-    - type: EquipSurvivorPreset
-      preset: RMCSurvivorPresetNoGun
+        state: background_unmc
+    - type: JobPrefix
+      prefix: rmc-job-prefix-survivor-varadero-commander
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadMarineVaradero
   hidden: true
   useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
 
 - type: startingGear
   id: RMCGearSurvivorCommanderNewVaradero
   equipment:
-    ears: RMCHeadsetMarineDistress
+    ears: RMCHeadsetMarineNV
     jumpsuit: CMJumpsuitBO
     head: RMCHeadCapFlippable
     outerClothing: RMCCoatServiceFolded
     shoes: CMBootsBlackFilled
-    back: CMSatchelFillSurvivor
-    belt: RMCM1911BeltFilledNVCommander
+    back: CMSatchelLiaisonSecure
+    belt: RMCMatebaBeltForeconFilled # TODO RMC14: M1911 CO Variant (PR #9863). Mateba for now since both guns are about equal in power
     id: CMIDCardGold
     pocket1: RMCPouchSurvivalFill
-    pocket2: RMCPouchGeneralLargeFilledSurvivorCommanderNewVaradero
-
-- type: entity
-  parent: RMCPouchGeneralLarge
-  id: RMCPouchGeneralLargeFilledSurvivorCommanderNewVaradero
-  suffix: Filled, Survivor
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMClipboard
-    - id: CMPenFountain
+    pocket2: RMCPouchGeneralLarge
+  storage:
+    pocket2:
+    - CMClipboard
+    - CMPenFountain
+    back:
+    - CMSheetMetal20
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -77,5 +80,5 @@
   parent: CMJobIconBase
   id: RMCJobIconSurvivorCommanderNewVaradero
   icon:
-    sprite: _RMC14/Interface/job_icons/Misc/other.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/other.rsi
     state: hudsquad_nv_co
