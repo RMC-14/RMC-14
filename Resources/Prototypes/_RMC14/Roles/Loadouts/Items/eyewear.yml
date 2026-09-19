@@ -18,6 +18,18 @@
     eyes: RMCEyepatch
 
 - type: loadout
+  id: GreenEyepatchRMC
+  cost: 2
+  equipment:
+    eyes: RMCGreenEyepatch
+
+- type: loadout
+  id: WhiteEyepatchRMC
+  cost: 2
+  equipment:
+    eyes: RMCWhiteEyepatch
+
+- type: loadout
   id: GlassesRPGRMC
   cost: 2
   equipment:
@@ -142,6 +154,36 @@
   cost: 2
   equipment:
     eyes: RMCSunglassesBigFake
+
+- type: loadout
+  id: PersonalShadesRedRMC
+  cost: 2
+  equipment:
+    eyes: RMCSunglassesBigFakeRed
+
+- type: loadout
+  id: PersonalShadesOrangeRMC
+  cost: 2
+  equipment:
+    eyes: RMCSunglassesBigFakeOrange
+
+- type: loadout
+  id: PersonalShadesYellowRMC
+  cost: 2
+  equipment:
+    eyes: RMCSunglassesBigFakeYellow
+
+- type: loadout
+  id: PersonalShadesGreenRMC
+  cost: 2
+  equipment:
+    eyes: RMCSunglassesBigFakeGreen
+
+- type: loadout
+  id: PersonalShadesBlueRMC
+  cost: 2
+  equipment:
+    eyes: RMCSunglassesBigFakeBlue
 
 - type: loadout
   id: SunglassesRMC

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/5a73e8f825ff279e82949b9329783a9e3070e2da and https://github.com/cmss13-devs/cmss13/blob/5c043a54dd29c82036ee6c6b2eec8f6a5f456d13/icons/mob/humans/onmob/clothing/helmet_garb/goggles.dmi",
+  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/5a73e8f825ff279e82949b9329783a9e3070e2da and https://github.com/cmss13-devs/cmss13/blob/5c043a54dd29c82036ee6c6b2eec8f6a5f456d13/icons/mob/humans/onmob/clothing/helmet_garb/goggles.dmi, https://github.com/cmss13-devs/cmss13/blob/090a692ce28563775eb087083d36cc51847448c2/icons/mob/humans/onmob/clothing/glasses/misc.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -16,6 +16,14 @@
     },
     {
       "name": "equipped-MASK",
+      "directions": 4
+    },
+    {
+      "name": "flipped-equipped-EYES",
+      "directions": 4
+    },
+    {
+      "name": "flipped-equipped-MASK",
       "directions": 4
     },
     {
