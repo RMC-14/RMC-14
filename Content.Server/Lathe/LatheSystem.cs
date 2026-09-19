@@ -28,6 +28,7 @@ using Content.Shared.ReagentSpeed;
 using Content.Shared.Research.Components;
 using Content.Shared.Research.Prototypes;
 using Content.Shared.UserInterface;
+using Content.Shared._RMC14.Power; // RMC14
 using JetBrains.Annotations;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
@@ -57,6 +58,7 @@ namespace Content.Server.Lathe
         [Dependency] private readonly StackSystem _stack = default!;
         [Dependency] private readonly TransformSystem _transform = default!;
         [Dependency] private readonly RadioSystem _radio = default!;
+        [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!; // RMC14
 
         // RMC14
         [Dependency] private readonly IComponentFactory _compFactory = default!;
@@ -98,6 +100,12 @@ namespace Content.Server.Lathe
                 if (lathe.CurrentRecipe == null)
                     continue;
 
+                if (!this.IsPowered(uid, EntityManager))
+                {
+                    comp.StartTime += TimeSpan.FromSeconds(frameTime);
+                    continue;
+                }
+
                 if (_timing.CurTime - comp.StartTime >= comp.ProductionLength)
                     FinishProducing(uid, lathe);
             }
@@ -105,6 +113,9 @@ namespace Content.Server.Lathe
             var heatQuery = EntityQueryEnumerator<LatheHeatProducingComponent, LatheProducingComponent, TransformComponent>();
             while (heatQuery.MoveNext(out var uid, out var heatComp, out _, out var xform))
             {
+                if (!this.IsPowered(uid, EntityManager))
+                    continue;
+
                 if (_timing.CurTime < heatComp.NextSecond)
                     continue;
                 heatComp.NextSecond += TimeSpan.FromSeconds(1);
@@ -220,6 +231,7 @@ namespace Content.Server.Lathe
             //
 
             var lathe = EnsureComp<LatheProducingComponent>(uid);
+            _rmcPower.AddOneOffEnergy(uid, component.PrintEnergy); // RMC14
             lathe.StartTime = _timing.CurTime;
             lathe.ProductionLength = time;
             component.CurrentRecipe = recipe;
@@ -366,16 +378,10 @@ namespace Content.Server.Lathe
 
         private void OnPowerChanged(EntityUid uid, LatheComponent component, ref PowerChangedEvent args)
         {
-            if (!args.Powered)
-            {
-                RemComp<LatheProducingComponent>(uid);
-                UpdateRunningAppearance(uid, false);
-            }
-            else if (component.CurrentRecipe != null)
-            {
-                EnsureComp<LatheProducingComponent>(uid);
-                TryStartProducing(uid, component);
-            }
+            if (component.CurrentRecipe == null)
+                return;
+
+            UpdateRunningAppearance(uid, args.Powered);
         }
 
         private void OnDatabaseModified(EntityUid uid, LatheComponent component, ref TechnologyDatabaseModifiedEvent args)

@@ -14,6 +14,10 @@ namespace Content.Server.Kitchen.Components
         [DataField("cookTimeMultiplier"), ViewVariables(VVAccess.ReadWrite)]
         public float CookTimeMultiplier = 1;
 
+        // RMC14 - CM13 microwaves also call use_power(500) once per second while cooking.
+        [DataField]
+        public float RmcCookEnergyPerSecond;
+
         [DataField("baseHeatMultiplier"), ViewVariables(VVAccess.ReadWrite)]
         public float BaseHeatMultiplier = 100;
 

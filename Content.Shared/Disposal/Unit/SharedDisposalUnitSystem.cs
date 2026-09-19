@@ -17,6 +17,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Item;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
+using Content.Shared._RMC14.Power; // RMC14
 using Content.Shared.Power;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.Throwing;
@@ -52,6 +53,7 @@ public abstract class SharedDisposalUnitSystem : EntitySystem
     [Dependency] protected readonly SharedContainerSystem Containers = default!;
     [Dependency] protected readonly SharedJointSystem Joints = default!;
     [Dependency] private   readonly SharedPowerReceiverSystem _power = default!;
+    [Dependency] private   readonly SharedRMCPowerSystem _rmcPower = default!; // RMC14
     [Dependency] private   readonly SharedDisposalTubeSystem _disposalTubeSystem = default!;
     [Dependency] private   readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private   readonly SharedDoAfterSystem _doAfterSystem = default!;
@@ -542,6 +544,8 @@ public abstract class SharedDisposalUnitSystem : EntitySystem
             return;
 
         component.State = state;
+        _rmcPower.SetPowerMode(uid,
+            state == DisposalsPressureState.Ready ? RMCPowerMode.Idle : RMCPowerMode.Active); // RMC14
         UpdateVisualState(uid, component);
         Dirty(uid, component, metadata);
 

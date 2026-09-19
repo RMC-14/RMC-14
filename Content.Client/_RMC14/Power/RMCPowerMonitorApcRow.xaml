@@ -1,0 +1,24 @@
+<controls:RMCPowerMonitorApcRow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Power"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    HorizontalExpand="True"
+    Margin="0 0 0 2">
+    <PanelContainer.PanelOverride>
+        <graphics:StyleBoxFlat
+            BackgroundColor="#1A1A1A"
+            BorderColor="#2F2F2F"
+            BorderThickness="0 0 0 1" />
+    </PanelContainer.PanelOverride>
+    <GridContainer Columns="7" Margin="6 5">
+        <Label Name="Area" Access="Public" MinWidth="250" />
+        <Label Name="Equipment" Access="Public" MinWidth="75" Align="Center" />
+        <Label Name="Lighting" Access="Public" MinWidth="75" Align="Center" />
+        <Label Name="Environment" Access="Public" MinWidth="95" Align="Center" />
+        <Label Name="Requested" Access="Public" MinWidth="90" Align="Center" />
+        <Label Name="Delivered" Access="Public" MinWidth="90" Align="Center" />
+        <ProgressBar Name="CellBar" Access="Public" MinWidth="120" MinValue="0" MaxValue="1">
+            <Label Name="CellLabel" Access="Public" HorizontalAlignment="Center" Margin="0 3" />
+        </ProgressBar>
+    </GridContainer>
+</controls:RMCPowerMonitorApcRow>
