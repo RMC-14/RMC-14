@@ -62,3 +62,4 @@
       types:
         Heat: 2
   - type: XenoChargeDontHit
+  - type: HiveColored

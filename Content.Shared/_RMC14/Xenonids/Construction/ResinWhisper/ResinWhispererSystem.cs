@@ -1,6 +1,9 @@
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Database;
+using Content.Shared.Doors;
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
 using Content.Shared.Examine;
@@ -15,6 +18,7 @@ public sealed class ResinWhispererSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoorSystem _door = default!;
     [Dependency] private readonly ExamineSystemShared _examineSystem = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -25,9 +29,23 @@ public sealed class ResinWhispererSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<ResinDoorComponent, GetVerbsEvent<AlternativeVerb>>(OnDoorAltVerb);
+        SubscribeLocalEvent<ResinDoorComponent, BeforeDoorOpenedEvent>(OnResinDoorBeforeOpened);
 
         SubscribeLocalEvent<ResinWhispererComponent, XenoSecreteStructureAdjustFields>(OnRemoteSecreteStructure);
         SubscribeLocalEvent<ResinWhispererComponent, InRangeOverrideEvent>(OnInRangeOverride);
+    }
+
+    private void OnResinDoorBeforeOpened(Entity<ResinDoorComponent> door, ref BeforeDoorOpenedEvent args)
+    {
+        if (args.User is not { } user || !HasComp<XenoComponent>(user))
+            return;
+
+        if (_hive.GetHive(door.Owner) is { } doorHive && !_hive.IsMemberOrAlly(user, doorHive.Owner))
+        {
+            args.Cancel();
+            _popup.PopupClient("This is not our hive's door.", user, user);
+            _door.Deny(door.Owner, user: user, predicted: true);
+        }
     }
 
     private void OnDoorAltVerb(Entity<ResinDoorComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
@@ -49,7 +67,7 @@ public sealed class ResinWhispererSystem : EntitySystem
                 if (!TryComp(target, out DoorComponent? doorComp))
                     return;
 
-                if (!_door.TryToggleDoor(target, predicted: true))
+                if (!_door.TryToggleDoor(target, user: user, predicted: true))
                     return;
 
                 if (doorComp.State == DoorState.Opening)
