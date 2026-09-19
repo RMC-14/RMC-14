@@ -35,6 +35,14 @@
   path: /Fonts/Boxfont-round/Boxfont Round.ttf
 
 - type: font
+  id: Cozette
+  path: /Fonts/Cozette/CozetteVector.ttf
+
+- type: font
+  id: CozetteBold
+  path: /Fonts/Cozette/CozetteVectorBold.ttf
+
+- type: font
   id: AnimalSilence
   path: /Fonts/Animal Silence.otf
 

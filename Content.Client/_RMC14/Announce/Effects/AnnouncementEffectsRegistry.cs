@@ -1,0 +1,20 @@
+using System.Collections.Generic;
+using Content.Shared._RMC14.Announce;
+
+namespace Content.Client._RMC14.Announce.Effects;
+
+public static class AnnouncementEffectsRegistry
+{
+    public static IEnumerable<IAnnouncementVisualEffect> BuildEffects(AnnouncementStyle style)
+    {
+        if (style.SpriteConfig.SpriteGlow)
+            yield return new GlowEffect();
+
+        if (style.AnimationConfig.FlickerChance > 0)
+            yield return new FlickerEffect();
+
+        if (style.TitleConfig.Effect.Type == AnnouncementTitleEffectType.AssaultScroll)
+            yield return new TitleAssaultScrollEffect();
+    }
+}
+
