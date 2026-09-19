@@ -24,14 +24,35 @@ public sealed partial class AccessibilityTab : Control
         Control.AddOptionCheckBox(CCVars.ChatAutoFillHighlights, AutoFillHighlightsCheckBox);
         Control.AddOptionColorSlider(CCVars.ChatHighlightsColor, HighlightsColorSlider);
 
-        Control.AddOptionCheckBox(RMCCVars.RMCUseAlternateSprites, RMCUseAlternateSpritesCheckBox); // RMC14
-        Control.AddOptionCheckBox(RMCCVars.RMCChatSquadColorMode, RMCChatSquadColorModeCheckBox); // RMC14
-        Control.AddOptionCheckBox(RMCCVars.RMCXenoAbilityPreviews, XenoAbilityPreviewsCheckBox); // RMC14
-        Control.AddOptionCheckBox(RMCCVars.RMCMarineEquipmentPreviews, MarineEquipmentPreviewsCheckBox); // RMC14
+        // RMC14
+        Control.AddOptionCheckBox(RMCCVars.RMCUseAlternateSprites, RMCUseAlternateSpritesCheckBox);
+        Control.AddOptionCheckBox(RMCCVars.RMCChatSquadColorMode, RMCChatSquadColorModeCheckBox);
+        var crtTheme = Control.AddOptionCheckBox(RMCCVars.RMCCrtThemeEnabled, RMCCrtThemeEnabledCheckBox);
+        Control.AddOptionCheckBox(RMCCVars.RMCCrtEffectsEnabled, RMCCrtEffectsEnabledCheckBox);
+        Control.AddOptionCheckBox(RMCCVars.RMCXenoAbilityPreviews, XenoAbilityPreviewsCheckBox);
+        Control.AddOptionCheckBox(RMCCVars.RMCMarineEquipmentPreviews, MarineEquipmentPreviewsCheckBox);
+        // RMC14
+
+        // RMC14
+        crtTheme.ImmediateValueChanged += _ => UpdateCrtEffectsDisabled();
+        Control.ValuesReset += UpdateCrtEffectsDisabled;
+        // RMC14
 
         Control.AddOptionCheckBox(CCVars.AccessibilityClientCensorNudity, CensorNudityCheckBox);
 
         Control.Initialize();
     }
+
+    // RMC14
+    private void UpdateCrtEffectsDisabled()
+    {
+        RMCCrtEffectsEnabledCheckBox.Disabled = ShouldDisableCrtEffects(RMCCrtThemeEnabledCheckBox.Pressed);
+    }
+
+    internal static bool ShouldDisableCrtEffects(bool themeEnabled)
+    {
+        return !themeEnabled;
+    }
+    // RMC14
 }
 
