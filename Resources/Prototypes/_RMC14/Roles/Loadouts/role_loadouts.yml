@@ -104,9 +104,9 @@
   points: 7
   groups:
   - MarineBackpack
-  - HeadwearRMC
+  - HeadwearRMCSquad
   - EyewearRMC
-  - MasksRMC
+  - MasksRMCSquad
   - HelmetGarbsRMC
   - AccessoriesRMC
   - WatchesBasicRMC
@@ -308,9 +308,9 @@
   points: 7
   groups:
   - MarineTechnicianBackpack
-  - HeadwearRMC
+  - HeadwearRMCSquad
   - EyewearRMC
-  - MasksRMC
+  - MasksRMCSquad
   - HelmetGarbsRMC
   - AccessoriesRMC
   - WatchesBasicRMC
@@ -333,9 +333,9 @@
   points: 7
   groups:
   - MarineBackpack
-  - HeadwearRMC
+  - HeadwearRMCSquad
   - EyewearRMC
-  - MasksRMC
+  - MasksRMCSquad
   - HelmetGarbsRMC
   - AccessoriesRMC
   - WatchesBasicRMC
@@ -358,9 +358,9 @@
   points: 7
   groups:
   - MarineMedicBackpack
-  - HeadwearRMC
+  - HeadwearRMCSquad
   - EyewearRMC
-  - MasksRMC
+  - MasksRMCSquad
   - HelmetGarbsRMC
   - AccessoriesRMC
   - WatchesBasicRMC
@@ -383,9 +383,9 @@
   points: 7
   groups:
   - MarineBackpack
-  - HeadwearRMC
+  - HeadwearRMCSquad
   - EyewearRMC
-  - MasksRMC
+  - MasksRMCSquad
   - HelmetGarbsRMC
   - AccessoriesRMC
   - WatchesBasicRMC
@@ -408,9 +408,9 @@
   points: 7
   groups:
   - MarineBackpack
-  - HeadwearRMC
+  - HeadwearRMCSquad
   - EyewearRMC
-  - MasksRMC
+  - MasksRMCSquad
   - HelmetGarbsRMC
   - AccessoriesRMC
   - WatchesBasicRMC
@@ -433,9 +433,9 @@
   points: 7
   groups:
   - MarineBackpack
-  - HeadwearRMC
+  - HeadwearRMCSquad
   - EyewearRMC
-  - MasksRMC
+  - MasksRMCSquad
   - HelmetGarbsRMC
   - AccessoriesRMC
   - WatchesBasicRMC
@@ -458,9 +458,9 @@
   points: 7
   groups:
   - MarineBackpack
-  - HeadwearRMC
+  - HeadwearRMCSquad
   - EyewearRMC
-  - MasksRMC
+  - MasksRMCSquad
   - HelmetGarbsRMC
   - AccessoriesRMC
   - WatchesBasicRMC
