@@ -55,7 +55,7 @@ public sealed class VanguardShieldSystem : EntitySystem
 
         var explosionResist = xeno.Comp.ExplosionResistance;
 
-        var resist = (float)Math.Pow(1.1, explosionResist / 5.0); // From armor calcualtion
+        var resist = (float)Math.Pow(1.1, explosionResist / 10.0); // From armor calcualtion
         args.DamageCoefficient /= resist;
     }
 
