@@ -6,6 +6,7 @@ using Content.Shared._RMC14.TacticalMap;
 using JetBrains.Annotations;
 using Robust.Client.Player;
 using Robust.Client.UserInterface.Controls;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.TacticalMap;
 
@@ -13,6 +14,7 @@ namespace Content.Client._RMC14.TacticalMap;
 public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPopOutBui<TacticalMapWindow>(owner, uiKey)
 {
     [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     protected override TacticalMapWindow? Window { get; set; }
     private bool _refreshed;
@@ -88,6 +90,7 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
             _currentMapName = tacticalState.MapName;
             Window?.SetMapEntity(_currentMapName);
             Window?.Wrapper.SetMapEntity(_currentMapName);
+            Window?.Wrapper.SetPlanetName(TacticalMapUserBui.GetLocalizedMapName(tacticalState, _prototype));
         }
     }
 

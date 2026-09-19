@@ -201,6 +201,9 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
     public string? SelectedPlanetMapName => SelectedPlanetMap?.Proto.Name;
 
     [ViewVariables]
+    public string? SelectedPlanetMapId => SelectedPlanetMap?.Proto.ID;
+
+    [ViewVariables]
     public string? OperationName { get; private set; }
 
     public string? ActiveNightmareScenario { get; private set; }
