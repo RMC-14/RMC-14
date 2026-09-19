@@ -55,6 +55,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
+using Content.Shared._RMC14.Medical.Pain;
 
 namespace Content.Shared._RMC14.Xenonids.Parasite;
 
@@ -82,6 +83,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly SharedRottingSystem _rotting = default!;
     [Dependency] private readonly TagSystem _tagSystem = default!;
+    [Dependency] private readonly PainSystem _pain = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
     [Dependency] private readonly RMCUnrevivableSystem _unrevivable = default!;
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
@@ -725,8 +727,8 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             }
         }
 
-        var query = EntityQueryEnumerator<VictimInfectedComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out var infected, out var xform))
+        var query = EntityQueryEnumerator<VictimInfectedComponent, PainComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var infected, out var pain, out var xform))
         {
             if (_net.IsClient)
                 continue;
@@ -786,6 +788,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
                 var knockdownTime = infected.BaseKnockdownTime * 75;
                 InfectionShakes(uid, infected, knockdownTime, infected.JitterTime, false);
+                _pain.AddPainModificator(uid, knockdownTime, infected.StrongChestBurstPain, PainModificatorType.PainIncrease, pain);
                 infected.DidBurstWarning = true;
 
                 continue;
@@ -812,6 +815,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                 {
                     var message = Loc.GetString("rmc-xeno-infection-majorpain-" + _random.Pick(new List<string> { "chest", "breathing", "heart" }));
                     _popup.PopupEntity(message, uid, uid, PopupType.SmallCaution);
+                    _pain.AddPainModificator(uid, infected.BaseKnockdownTime * 4, infected.WeakChestBurstPain, PainModificatorType.PainIncrease, pain);
                     if (_random.Prob(0.5f))
                     {
                         var ev = new VictimInfectedEmoteEvent(infected.ScreamId);
@@ -820,7 +824,10 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                 }
 
                 if (_random.Prob(infected.ShakesChance * frameTime))
+                {
                     InfectionShakes(uid, infected, infected.BaseKnockdownTime * 4, infected.JitterTime * 4);
+                    _pain.AddPainModificator(uid, infected.BaseKnockdownTime * 4, infected.WeakChestBurstPain, PainModificatorType.PainIncrease, pain);
+                }
             }
             else if (stage >= infected.MiddlingSymptomsStart)
             {
@@ -844,7 +851,10 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                 }
 
                 if (_random.Prob(infected.ShakesChance * 5 / 6 * frameTime))
+                {
                     InfectionShakes(uid, infected, infected.BaseKnockdownTime * 2, infected.JitterTime * 2);
+                    _pain.AddPainModificator(uid, infected.BaseKnockdownTime * 2, infected.WeakChestBurstPain, PainModificatorType.PainIncrease, pain);
+                }
             }
             else if (stage >= infected.InitialSymptomsStart)
             {
@@ -855,7 +865,10 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                 }
 
                 if (_random.Prob((infected.ShakesChance * 2 / 3) * frameTime))
+                {
                     InfectionShakes(uid, infected, infected.BaseKnockdownTime, infected.JitterTime);
+                    _pain.AddPainModificator(uid, infected.BaseKnockdownTime, infected.WeakChestBurstPain, PainModificatorType.PainIncrease, pain);
+                }
             }
         }
     }
