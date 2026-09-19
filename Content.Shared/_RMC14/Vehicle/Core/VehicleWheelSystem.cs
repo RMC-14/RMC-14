@@ -226,6 +226,14 @@ public sealed class VehicleWheelSystem : EntitySystem
         return integrity.Integrity > 0f;
     }
 
+    public bool HasAnyFunctionalWheel(EntityUid vehicle)
+    {
+        if (!TryComp(vehicle, out VehicleWheelSlotsComponent? wheels))
+            return false;
+
+        return GetFunctionalWheelCount(vehicle, wheels) > 0;
+    }
+
     public void DamageWheels(EntityUid vehicle, float amount)
     {
         if (amount <= 0f || !TryComp(vehicle, out VehicleWheelSlotsComponent? wheels))
@@ -243,6 +251,37 @@ public sealed class VehicleWheelSystem : EntitySystem
                 continue;
 
             if (_hardpoints.DamageHardpoint(vehicle, wheel, amount, skipWheelUpdate: true))
+                changed = true;
+        }
+
+        if (!changed)
+            return;
+
+        UpdateAppearance(vehicle, wheels);
+        RefreshCanRun(vehicle);
+    }
+
+    public void DamageWheelsCorrosive(EntityUid vehicle, float amount, float acidResistantMultiplier)
+    {
+        if (amount <= 0f || !TryComp(vehicle, out VehicleWheelSlotsComponent? wheels))
+            return;
+
+        if (!TryComp(vehicle, out ItemSlotsComponent? itemSlots))
+            return;
+
+        var changed = false;
+
+        foreach (var slotId in wheels.Slots)
+        {
+            if (!_itemSlots.TryGetSlot(vehicle, slotId, out var slot, itemSlots) ||
+                slot.Item is not { } wheel)
+                continue;
+
+            var wheelAmount = amount;
+            if (TryComp(wheel, out VehicleWheelItemComponent? wheelItem) && wheelItem.AcidResistant)
+                wheelAmount *= acidResistantMultiplier;
+
+            if (_hardpoints.DamageHardpoint(vehicle, wheel, wheelAmount, skipWheelUpdate: true))
                 changed = true;
         }
 
