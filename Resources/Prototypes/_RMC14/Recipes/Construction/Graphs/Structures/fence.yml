@@ -21,7 +21,9 @@
     edges:
     - to: rmcFenceBroken
       steps:
-      - tool: Cutting
+      - tools:
+        - Cutting
+        - FenceCutting
         doAfter: 1.0
 
   - node: rmcFenceBroken
@@ -34,7 +36,9 @@
         amount: 10
       - !type:DeleteEntity
       steps:
-      - tool: Cutting
+      - tools:
+        - Cutting
+        - FenceCutting
         doAfter: 5.0
     - to: fenceMetal
       steps:
@@ -47,7 +51,9 @@
     edges:
     - to: gateBroken
       steps:
-      - tool: Cutting
+      - tools:
+        - Cutting
+        - FenceCutting
         doAfter: 1.0
 
   - node: gateBroken
@@ -60,7 +66,9 @@
         amount: 10
       - !type:DeleteEntity
       steps:
-      - tool: Cutting
+      - tools:
+        - Cutting
+        - FenceCutting
         doAfter: 5.0
     - to: gate
       steps:
