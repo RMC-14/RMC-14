@@ -112,9 +112,9 @@
       - Hypospray
       - CMBloodPack
       - CMSurgicalCase
+      - RMCSurgeryTool
       components:
       - Hypospray
-      - CMSurgeryTool
 
 - type: entity
   parent: CMFirstAidKit
