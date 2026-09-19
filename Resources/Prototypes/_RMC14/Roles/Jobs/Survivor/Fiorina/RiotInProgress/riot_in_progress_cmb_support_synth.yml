@@ -1,0 +1,82 @@
+- type: job
+  parent: CMSurvivorFiorinaRiotOfficer
+  id: RMCSurvivorFiorinaRiotInProgressCMBSupportSynth
+  name: cm-job-name-survivor-fiorina-cmb-synth
+  description: cm-job-description-survivor
+  playTimeTracker: RMCJobSyntheticColony
+  startingGear: RMCGearSurvivorFiorinaRiotInProgressCMBSupportSynth
+  icon: "RMCJobIconCMBSupportSynthetic"
+  accessGroups:
+  - ColonistSec
+  spawnMenuRoleName: CMB Support Synthetic (Fiorina Special Survivor)
+  greeting: rmc-job-greeting-riot-in-progress-CMB-synth
+  ranks:
+    RMCRankCMBDetective: []
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Language
+      preset: RMCLanguagePresetSynthColonist
+    - type: LanguageLearning
+      preset: RMCLanguageLearningPresetSynthColonist
+    - type: Synth
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Bureau
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: JobPrefix
+      prefix: cm-job-prefix-survivor-fiorina-cmb-synth
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: synth
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_cmb
+
+- type: startingGear
+  id: RMCGearSurvivorFiorinaRiotInProgressCMBSupportSynth
+  equipment:
+    jumpsuit: RMCSwatCMBUniform # TODO RMC14: Webbing fill
+    id: RMCIDCardCMBDeputySurvivor
+    back: RMCBackpackTyrargo
+    head: RMCHeadCapBureau
+    outerClothing: RMCCoatBureauDeputy
+    ears: RMCHeadsetDistressBureauDamaged
+    eyes: CMGlassesSecurity
+    gloves: RMCHandsVeteran
+    shoes: RMCBootsPMCFilled
+    belt: CMBeltSecurityMPFilled # TODO RMC14: synth fill
+    pocket1: RMCPouchSurvivalSynthFill
+    pocket2: RMCPouchToolsSocFilledSynthetic
+  storage:
+    pocket2:
+    - RMCWelderIndustrialHighCapacity
+    back: # On CM, they have a revolver and ammo
+    - CMDefibrillator # TODO RMC14: Upgraded defib
+    - RMCUniversalRecorder
+    outerClothing:
+    - RMCRangefinder
+    - RMCTelescopicBaton
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointCMBRiotInProgressCMBSupportSynth
+  name: cmb support synthetic spawn point
+  suffix: special survivor, fiorina riot
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorFiorinaRiotInProgressCMBSupportSynth
+  - type: Sprite
+    state: surv
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconCMBSupportSynthetic
+  icon:
+    sprite: _RMC14/Interface/job_icons/CMB.rsi
+    state: cmb_ssyn
