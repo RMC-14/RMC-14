@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/53b8f7f634ef16422e463bd75eeaa16dccab25ab/icons/obj/structures/props/semiotic_standard.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/53b8f7f634ef16422e463bd75eeaa16dccab25ab/icons/obj/structures/props/semiotic_standard.dmi, new Semiotics made by SharkSnake98 on GitHub",
   "size": {
     "x": 32,
     "y": 32
@@ -11,7 +11,13 @@
       "name": "airlock"
     },
     {
+      "name": "airoom"
+    },
+    {
       "name": "airtraffictower"
+    },
+    {
+      "name": "alcoholstorage"
     },
     {
       "name": "ammo"
@@ -38,6 +44,9 @@
       "name": "bathwomens"
     },
     {
+      "name": "bedroom"
+    },
+    {
       "name": "biohazard"
     },
     {
@@ -62,6 +71,9 @@
       "name": "commlineconnection"
     },
     {
+      "name": "commonarea"
+    },
+    {
       "name": "confroom"
     },
     {
@@ -72,6 +84,9 @@
     },
     {
       "name": "distpipe"
+    },
+    {
+      "name": "dockingport"
     },
     {
       "name": "east"
@@ -123,6 +138,9 @@
     },
     {
       "name": "hvacold"
+    },
+    {
+      "name": "hydroponics"
     },
     {
       "name": "ladder"
@@ -185,6 +203,9 @@
       "name": "radshield"
     },
     {
+      "name": "reactor"
+    },
+    {
       "name": "radiorad"
     },
     {
@@ -210,6 +231,9 @@
     },
     {
       "name": "security"
+    },
+    {
+      "name": "shuttlebay"
     },
     {
       "name": "south"
