@@ -1,7 +1,9 @@
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
 using Content.Shared.Smoking;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Nutrition.Components
 {
@@ -45,5 +47,12 @@ namespace Content.Shared.Nutrition.Components
         /// </summary>
         [DataField]
         public SoundSpecifier? SnuffSound = new SoundPathSpecifier("/Audio/Effects/cig_snuff.ogg");
+
+        // RMC14
+        /// <summary>
+        /// Only reagents in the whitelist will be injected into the bloodstream, otherwise they get deleted upon being smoked
+        /// </summary>
+        [DataField]
+        public List<ProtoId<ReagentPrototype>>? ReagentInjectWhitelist = new List<ProtoId<ReagentPrototype>>() { "Nicotine" };
     }
 }
