@@ -48,6 +48,14 @@
           collection: MetalBreak
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: VehicleSmashable
+  - type: XenoCrusherChargable
+    instantDestroy: true
+    passOnDestroy: true
+  - type: XenoToggleChargingDamage
+    sound:
+      collection: MetalBreak
+    destroy: true
   - type: Transform
     anchored: true
   - type: Anchorable
