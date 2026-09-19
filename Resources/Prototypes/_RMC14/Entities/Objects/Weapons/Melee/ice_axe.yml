@@ -26,6 +26,7 @@
   - type: DisarmMalus
     malus: 0.225
   - type: UsableWhileDevoured
+    canUnequip: true
   - type: DeleteOnExplosion
 
 - type: entity
