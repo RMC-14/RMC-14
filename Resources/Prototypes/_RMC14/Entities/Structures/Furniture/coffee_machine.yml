@@ -31,6 +31,27 @@
     - state: coffee_cup_generic
       map: ["enum.CoffeeMachineLayers.Cup"]
       visible: false
+    - state: coffee_mug
+      map: ["enum.CoffeeMachineLayers.CoffeeMug"]
+      visible: false
+    - state: coffee_mug_wy
+      map: ["enum.CoffeeMachineLayers.WestonYamada"]
+      visible: false
+    - state: coffee_mug_unmc
+      map: ["enum.CoffeeMachineLayers.UNMC"]
+      visible: false
+    - state: coffee_mug_un
+      map: ["enum.CoffeeMachineLayers.UnitedNations"]
+      visible: false
+    - state: coffee_mug_spp
+      map: ["enum.CoffeeMachineLayers.SocialistPP"]
+      visible: false
+    - state: coffee_mug_tse
+      map: ["enum.CoffeeMachineLayers.ThreeSunEmpire"]
+      visible: false
+    - state: coffee_mug_clf
+      map: ["enum.CoffeeMachineLayers.ColonyLiberationFront"]
+      visible: false
   - type: InteractionOutline
   - type: Fixtures
     fixtures:

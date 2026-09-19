@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/9e46a4af63818ec5c627c77624a0a9904491f90b/icons/obj/structures/machinery/coffee_machine.dmi",
+  "copyright": "Coffee_empty_on, coffee_cup_generic, coffee_mug from cmss13 at https://github.com/cmss13-devs/cmss13/blob/9e46a4af63818ec5c627c77624a0a9904491f90b/icons/obj/structures/machinery/coffee_machine.dmi. coffee_mug_tse (https://github.com/RMC-14/RMC-14/blob/master/Resources/Textures/_RMC14/Objects/Consumable/Drinks/tsecup.rsi), coffee_mug_wy (https://github.com/RMC-14/RMC-14/tree/master/Resources/Textures/_RMC14/Objects/Consumable/Drinks/weyacup.rsi), UNMC (https://github.com/RMC-14/RMC-14/blob/master/Resources/Textures/_RMC14/Objects/Consumable/Drinks/unmccup.rsi), UN (https://github.com/RMC-14/RMC-14/blob/master/Resources/Textures/_RMC14/Objects/Consumable/Drinks/uncup.rsi), coffee_mug_spp (https://github.com/RMC-14/RMC-14/tree/master/Resources/Textures/_RMC14/Objects/Consumable/Drinks/sppcup.rsi) modified by wheelwrightt (github)",
   "size": {
     "x": 32,
     "y": 32
@@ -12,6 +12,27 @@
     },
     {
       "name": "coffee_cup_generic"
+    },
+    {
+      "name": "coffee_mug"
+    },
+    {
+      "name": "coffee_mug_wy"
+    },
+    {
+      "name": "coffee_mug_unmc"
+    },
+    {
+      "name": "coffee_mug_un"
+    },
+    {
+      "name": "coffee_mug_spp"
+    },
+    {
+      "name": "coffee_mug_tse"
+    },
+    {
+      "name": "coffee_mug_clf"
     }
   ]
 }
