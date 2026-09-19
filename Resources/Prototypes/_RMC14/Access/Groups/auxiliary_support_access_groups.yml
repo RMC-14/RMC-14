@@ -5,15 +5,12 @@
   tags:
   - CMAccessASO
   - RMCAccessCommand
-  - CMAccessBrig
-  - CMAccessArmory
   - CMAccessMedical
   - CMAccessResearch
   - CMAccessCE
   - CMAccessEngineering
   - CMAccessMaint
   - CMAccessOT
-  - CMAccessRequisitions
   - CMAccessMarinePrep
   - CMAccessAlpha
   - CMAccessBravo
@@ -26,7 +23,6 @@
   - CMAccessCrewman
   - RMCAccessDatabase
   - RMCAccessFieldDoctor
-  - RMCAccessSeniorCommand
   - RMCAccessLogs
 
 - type: accessGroup
