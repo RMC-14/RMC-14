@@ -161,11 +161,18 @@ public sealed partial class FaxPrintout
     [DataField]
     public bool Locked { get; private set; }
 
+    // RMC14
+    [DataField]
+    public Color? PaperColor { get; private set; }
+    [DataField]
+    public Color? TextColor { get; private set; }
+    // RMC14
+
     private FaxPrintout()
     {
     }
 
-    public FaxPrintout(string content, string name, string? label = null, string? prototypeId = null, string? stampState = null, List<StampDisplayInfo>? stampedBy = null, bool locked = false)
+    public FaxPrintout(string content, string name, string? label = null, string? prototypeId = null, string? stampState = null, List<StampDisplayInfo>? stampedBy = null, bool locked = false, Color? paperColor = null, Color? textColor = null)
     {
         Content = content;
         Name = name;
@@ -174,5 +181,9 @@ public sealed partial class FaxPrintout
         StampState = stampState;
         StampedBy = stampedBy ?? new List<StampDisplayInfo>();
         Locked = locked;
+        // RMC14
+        PaperColor = paperColor;
+        TextColor = textColor;
+        // RMC14
     }
 }
