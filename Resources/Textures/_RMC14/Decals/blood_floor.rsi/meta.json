@@ -48,6 +48,21 @@
     },
     {
       "name": "xfloor7"
+    },
+    {
+        "name": "drip"
+    },
+    {
+        "name": "vomit_1"
+    },
+    {
+        "name": "vomit_2"
+    },
+    {
+        "name": "vomit_3"
+    },
+    {
+        "name": "vomit_4"
     }
   ]
 }
