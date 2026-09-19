@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Folded;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Placement;
 using Content.Shared._RMC14.Scoping;
 using Content.Shared._RMC14.Stealth;
 using Content.Shared._RMC14.Vehicle;
@@ -81,6 +82,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly RMCPlacementSystem _placement = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCDoAfterSystem _rmcDoAfter = default!;
     [Dependency] private readonly RMCFoldableSystem _rmcFoldable = default!;
@@ -510,9 +512,9 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             return false;
         }
 
-        if (_rmcMap.HasAnchoredEntityEnumerator<WeaponMountComponent>(coordinates))
+        if (_placement.TryFindBlocker(coordinates, ent.Comp.PlacementRestrictions, out var blockingEntity, ent))
         {
-            var msg = Loc.GetString("rmc-sentry-need-open-area", ("sentry", ent));
+            var msg = Loc.GetString("emplacement-mount-too-close", ("mount", blockingEntity));
             _popup.PopupClient(msg, user, user, PopupType.SmallCaution);
             return false;
         }
@@ -520,12 +522,6 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         var grid = _transform.GetGrid((user, Transform(user)));
         if (TryComp(grid, out MapGridComponent? mapGrid))
         {
-            if (!TryComp(ent, out MetaDataComponent? metaData))
-                return false;
-
-            if (HasWeaponMountNearbyPopup((grid.Value, mapGrid), coordinates, ent.Owner, ent.Comp.MountExclusionAreaSize, user))
-                return false;
-
             if (ent.Comp.BarricadeExclusionAreaSize != 0 &&
                 _barricade.HasBarricadeNearbyPopup((grid.Value, mapGrid), user, coordinates, ent.Comp.BarricadeExclusionAreaSize))
                 return false;
@@ -834,17 +830,14 @@ public abstract class SharedWeaponMountSystem : EntitySystem
     /// <returns>True if the mount can be assembled</returns>
     private bool CanAssembleMount(Entity<WeaponMountComponent> ent, EntityUid user)
     {
-        if (ent.Comp.MountExclusionAreaSize == 0)
+        if (!_placement.TryFindBlocker(_transform.GetMoverCoordinates(ent), ent.Comp.PlacementRestrictions, out var blockingEntity, ent))
             return true;
 
-        var grid = _transform.GetGrid((ent, Transform(ent)));
-        if (!TryComp(grid, out MapGridComponent? mapGrid))
-            return true;
+        var msg = Loc.GetString("emplacement-mount-too-close", ("mount", blockingEntity));
+        _popup.PopupClient(msg, user, user, PopupType.SmallCaution);
 
-        if (HasWeaponMountNearbyPopup((grid.Value, mapGrid), _transform.GetMoverCoordinates(ent), ent.Owner, ent.Comp.MountExclusionAreaSize, user))
-            return false;
+        return false;
 
-        return true;
     }
 
     /// <summary>
