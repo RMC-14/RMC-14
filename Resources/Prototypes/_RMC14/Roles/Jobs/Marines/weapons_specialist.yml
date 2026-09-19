@@ -148,3 +148,19 @@
     - !type:RoleTimeRequirement
       role: CMJobWeaponsSpecialist
       time: 1
+
+- type: entity
+  id: RMCNewGhostWeaponsSpecialist
+  abstract: true
+  components:
+  - type: GhostRole
+    name: cm-job-name-weapons-specialist
+    description: cm-job-description-weapons-specialist
+    rules: ghost-role-information-nonantagonist-rules
+    raffle:
+      settings: default
+    job: CMWeaponsSpecialist
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobWeaponsSpecialist
+      time: 1

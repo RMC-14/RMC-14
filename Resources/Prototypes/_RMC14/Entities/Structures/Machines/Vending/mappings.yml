@@ -10,6 +10,8 @@
       SquadDelta: CMHeadsetDelta
       SquadEcho: CMHeadsetEcho
       SquadFoxtrot: CMHeadsetFoxtrot
+      SquadIntel: RMCHeadsetIntel
+      SquadUnassigned: RMCHeadsetUnassigned
 
 - type: entity
   id: CMVendorHeadsetSquadLeader
@@ -23,6 +25,8 @@
       SquadDelta: CMHeadsetDeltaLeader
       SquadEcho: CMHeadsetEchoLeader
       SquadFoxtrot: CMHeadsetFoxtrotLeader
+      SquadIntel: RMCHeadsetIntelLeader
+      SquadUnassigned: RMCHeadsetUnassignedLeader
 
 - type: entity
   id: CMVendorHeadsetSquadFTL
@@ -36,6 +40,8 @@
       SquadDelta: CMHeadsetDeltaTeamLeader
       SquadEcho: CMHeadsetEchoTeamLeader
       SquadFoxtrot: CMHeadsetFoxtrotTeamLeader
+      SquadIntel: RMCHeadsetIntelTeamLeader
+      SquadUnassigned: RMCHeadsetUnassignedTeamLeader
 
 - type: entity
   id: CMVendorHeadsetSquadComTech
@@ -49,6 +55,8 @@
       SquadDelta: CMHeadsetDeltaEngineer
       SquadEcho: CMHeadsetEchoEngineer
       SquadFoxtrot: CMHeadsetFoxtrotEngineer
+      SquadIntel: RMCHeadsetIntelEngineer
+      SquadUnassigned: RMCHeadsetUnassignedEngineer
 
 - type: entity
   id: CMVendorHeadsetSquadCorpsman
@@ -62,3 +70,5 @@
       SquadDelta: CMHeadsetDeltaMedic
       SquadEcho: CMHeadsetEchoMedic
       SquadFoxtrot: CMHeadsetFoxtrotMedic
+      SquadIntel: RMCHeadsetIntelMedic
+      SquadUnassigned: RMCHeadsetUnassignedMedic
