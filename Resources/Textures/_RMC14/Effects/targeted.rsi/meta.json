@@ -47,6 +47,21 @@
     {
       "name": "sniper_lockon_intense_direction",
       "directions": 4
+    },
+    {
+      "name": "sniper_lockon_guided",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "sniper_lockon_guided_direction",
+      "directions": 4
     }
   ]
 }

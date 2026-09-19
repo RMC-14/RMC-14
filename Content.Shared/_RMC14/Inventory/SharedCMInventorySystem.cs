@@ -26,6 +26,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Input.Binding;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -43,6 +44,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedItemSystem _item = default!;
@@ -143,7 +145,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
         if (!args.CanAccess || !args.CanInteract)
             return;
 
-        if (comp.Contents.Count == 0)
+        if (!TryGetLastInserted((holster, comp), out var item))
             return;
 
         // CMItemSlots-based holsters have their own eject verb, no need to add a duplicate
@@ -154,7 +156,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
         {
             Act = () => Unholster(args.User, holster, out _),
             Text = Loc.GetString("rmc-storage-holster-eject-verb"),
-            IconEntity = GetNetEntity(comp.Contents[0]),
+            IconEntity = GetNetEntity(item),
             Priority = 5 // Higher priority to appear above folding verbs (for webbing-based holsters)
         };
         args.Verbs.Add(holsterVerb);
@@ -222,6 +224,9 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
     private void OnHolsterComponentHandleState(Entity<CMHolsterComponent> ent, ref AfterAutoHandleStateEvent args)
     {
+        if (_net.IsClient || _timing.ApplyingState)
+            return;
+
         ContentsUpdated(ent);
     }
 
@@ -325,6 +330,9 @@ public abstract class SharedCMInventorySystem : EntitySystem
             _whitelist.IsWhitelistPass(whitelist, item)))   //  or if item matches whitelist
             ent.Comp.Contents.Add(item);
 
+        if (_net.IsClient && _timing.ApplyingState)
+            return;
+
         ContentsUpdated(ent);
     }
 
@@ -338,6 +346,9 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
         var item = args.Entity;
         ent.Comp.Contents.Remove(item);
+
+        if (_net.IsClient && _timing.ApplyingState)
+            return;
 
         ContentsUpdated(ent);
     }
@@ -430,22 +441,55 @@ public abstract class SharedCMInventorySystem : EntitySystem
     protected virtual void ContentsUpdated(Entity<CMHolsterComponent> ent)
     {
         CMHolsterVisuals visuals = CMHolsterVisuals.Empty;
-        var size = 0;
 
         // TODO: account for the gunslinger belt
-        if (ent.Comp.Contents.Count != 0)
-        {
+        if (HasHolsteredItem(ent))
             // Display weapon underlay
             visuals = CMHolsterVisuals.Full;
-            // Get weapons size to accurately display storage visuals
-            foreach (var item in ent.Comp.Contents)
-            {
-                if (TryComp(item, out ItemComponent? itemComp))
-                    size += _item.GetItemShape(itemComp).GetArea();
-            }
-        }
 
         _appearance.SetData(ent, CMHolsterLayers.Fill, visuals);
+        _item.VisualsChanged(ent);
+    }
+
+    private bool HasHolsteredItem(Entity<CMHolsterComponent> ent)
+    {
+        if (TryComp(ent, out StorageComponent? storage))
+        {
+            if (storage.Container == null)
+                return false;
+
+            foreach (var item in storage.Container.ContainedEntities)
+            {
+                if (IsHolsterItem(ent, item))
+                    return true;
+            }
+
+            return false;
+        }
+
+        foreach (var item in ent.Comp.Contents)
+        {
+            if (IsHolsterItem(ent, item))
+                return true;
+        }
+
+        return false;
+    }
+
+    private bool IsHolsterItem(Entity<CMHolsterComponent> holster, EntityUid item)
+    {
+        if (TerminatingOrDeleted(item))
+            return false;
+
+        if (holster.Comp.Whitelist is { } whitelist &&
+            !_whitelist.IsWhitelistPass(whitelist, item))
+        {
+            return false;
+        }
+
+        var ev = new IsUnholsterableEvent();
+        RaiseLocalEvent(item, ref ev);
+        return ev.Unholsterable;
     }
 
     private bool SlotCanInteract(EntityUid user, EntityUid holster, [NotNullWhen(true)] out ItemSlotsComponent? itemSlots)
@@ -589,7 +633,8 @@ public abstract class SharedCMInventorySystem : EntitySystem
             if (slot.ItemSlot == null &&
                 TryComp(slot.Ent, out StorageComponent? storage) &&
                 TryComp(slot.Ent, out CMHolsterComponent? holster) &&
-                !holster.Contents.Contains(item) &&
+                storage.Container != null &&
+                !storage.Container.ContainedEntities.Contains(item) &&
                 _hands.CanDrop(user, item) &&
                 _storage.CanInsert(slot.Ent, item, user, out _, storage))
             {
@@ -694,11 +739,51 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
         var contents = holster.Comp.Contents;
 
+        if (TryComp(holster, out StorageComponent? storage))
+        {
+            if (storage.Container == null)
+                return false;
+
+            for (var i = contents.Count - 1; i >= 0; i--)
+            {
+                var contained = contents[i];
+                if (!storage.Container.ContainedEntities.Contains(contained) ||
+                    !IsHolsterItem((holster.Owner, holster.Comp), contained))
+                {
+                    continue;
+                }
+
+                item = contained;
+                return true;
+            }
+
+            for (var i = storage.Container.ContainedEntities.Count - 1; i >= 0; i--)
+            {
+                var contained = storage.Container.ContainedEntities[i];
+                if (!IsHolsterItem((holster.Owner, holster.Comp), contained))
+                    continue;
+
+                item = contained;
+                return true;
+            }
+
+            return false;
+        }
+
         if (contents.Count == 0)
             return false;
 
-        item = contents[contents.Count - 1];
-        return true;
+        for (var i = contents.Count - 1; i >= 0; i--)
+        {
+            var contained = contents[i];
+            if (!IsHolsterItem((holster.Owner, holster.Comp), contained))
+                continue;
+
+            item = contained;
+            return true;
+        }
+
+        return false;
     }
 
     private void Unholster(EntityUid user, int startIndex, CMHolsterChoose choose)
@@ -765,13 +850,14 @@ public abstract class SharedCMInventorySystem : EntitySystem
                 return false;
             }
 
-            if (TryComp(item, out StorageComponent? storage) &&
+            if (HasComp<StorageComponent>(item) &&
                 TryGetLastInserted((item, holster), out var weapon))
             {
                 if (!_hands.TryPickup(user, weapon))
                     return false;
 
                 holster.Contents.Remove(weapon);
+                ContentsUpdated((item, holster));
                 _audio.PlayPredicted(holster.EjectSound, item, user);
                 stop = true;
                 return true;
