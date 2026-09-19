@@ -281,7 +281,7 @@
   parent: CMGuidebookActionXenoBase
   id: RMCGuidebookActionXenoGrowOvipositor
   name: Grow Ovipositor
-  description: Become immobile and start laying eggs which will produce parasites.
+  description: Become immobile and start laying eggs which will produce children.
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -336,7 +336,7 @@
   id: ActionXenoRetrieveEgg
   parent: ActionXenoBase
   name: Retrieve Egg
-  description: Retrieves an egg from your storage if you have an empty hand. Using this on an unplanted egg will pick up all nearby unplanted eggs. Using an egg in hand will put it into your storage.
+  description: Retrieves an egg from your storage if you have an empty hand. Using this on an unplanted egg will pick up all nearby unplanted eggs. Using an egg in hand will put it into your storage. Using on an eggmorpher will transfer your eggs as children into it.
   components:
   - type: Action
     itemIconStyle: NoItem
@@ -363,7 +363,7 @@
   id: ActionXenoThrowParasite
   parent: ActionXenoBase
   name: Carrier's Bond
-  description: Retrieves a child from your storage if you have an empty hand. Using this on a child on the ground will pickup all nearby children. Targeting a tile with a child in hand will throw it up to 4 tiles away, where the child will be stunned for 5 seconds. Using a child in hand will add it to your storage. [color=green]Children won't die due to time while you hold or carry them.[/color]
+  description: Retrieves a child from your storage if you have an empty hand. Using this on a child on the ground will pickup all nearby children. Targeting a tile with a child in hand will throw it up to 4 tiles away, where the child will be stunned for 5 seconds. Using a child in hand will add it to your storage. Using on an eggmorpher will take as many possible children from it to put into your storage. [color=green]Children won't die due to time while you hold or carry them.[/color]
   components:
   - type: Action
     itemIconStyle: NoItem
