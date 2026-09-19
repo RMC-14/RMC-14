@@ -34,6 +34,7 @@ public sealed class XenoHeadbiteSystem : EntitySystem
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
     private static readonly ProtoId<StatusEffectPrototype> Unconsciousness = "Unconscious";
 
@@ -83,7 +84,8 @@ public sealed class XenoHeadbiteSystem : EntitySystem
 
         if (_net.IsServer)
         {
-            SpawnAttachedTo(xeno.Comp.HealEffect, xeno.Owner.ToCoordinates());
+            if (_xeno.CanHeal(xeno))
+                SpawnAttachedTo(xeno.Comp.HealEffect, xeno.Owner.ToCoordinates());
             SpawnAttachedTo(xeno.Comp.HeadbiteEffect, target.ToCoordinates());
             _emote.TryEmoteWithChat(xeno, xeno.Comp.Emote, cooldown: xeno.Comp.EmoteCooldown);
             _audio.PlayPvs(xeno.Comp.HitSound, xeno);
