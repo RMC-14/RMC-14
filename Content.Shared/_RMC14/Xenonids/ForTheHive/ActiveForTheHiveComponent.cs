@@ -1,4 +1,4 @@
-﻿using Content.Shared.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Damage;
 using Content.Shared._RMC14.Xenonids.Acid;
 using Robust.Shared.GameStates;
@@ -78,7 +78,7 @@ public sealed partial class ActiveForTheHiveComponent : Component
     public FixedPoint2 SlowDown = FixedPoint2.New(0.45);
 
     [DataField]
-    public ComponentRegistry? MobAcid;
+    public EntProtoId? MobAcid = "RMCWeakLingeringAcid";
 }
 
 
