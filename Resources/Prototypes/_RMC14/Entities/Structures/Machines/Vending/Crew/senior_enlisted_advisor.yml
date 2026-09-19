@@ -68,7 +68,7 @@
       choices: { CMEyewear: 1 }
       entries:
       - id: RMCWeldingGoggles
-      - id: RMCGlassesMedicalHUDGlasses
+      - id: RMCGlassesMedicalHUDGlassesAdvanced
       #Prescription Medical HUD Glasses
       - id: CMGlassesSecurity
       - id: RMCGlassesMarineRpg #Sunglasses Placeholder

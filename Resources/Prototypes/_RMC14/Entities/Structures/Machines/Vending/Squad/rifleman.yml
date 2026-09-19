@@ -216,6 +216,8 @@
         points: 15
       - id: RMCWhistle
         points: 5
+      - id: RMCGlassesMedicalHUDGlasses
+        points: 15
     - name: Binoculars
       entries:
       - id: RMCBinoculars
