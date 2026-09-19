@@ -415,10 +415,15 @@ public sealed class AttachableHolderSystem : EntitySystem
         if (!_container.Insert(attachableUid, container))
             return false;
 
-        if(_hands.IsHolding(userUid, holder.Owner))
+        if (_hands.IsHolding(userUid, holder.Owner))
         {
             var addEv = new GrantAttachableActionsEvent(userUid);
             RaiseLocalEvent(attachableUid, ref addEv);
+        }
+
+        if (TryComp<AttachableAddRemoveComponentsComponent>(attachableUid, out var addRemove))
+        {
+            EntityManager.AddComponents(holder, addRemove.Components);
         }
 
         Dirty(holder);
@@ -517,6 +522,11 @@ public sealed class AttachableHolderSystem : EntitySystem
 
         var removeEv = new RemoveAttachableActionsEvent(userUid);
         RaiseLocalEvent(attachableUid, ref removeEv);
+
+        if (TryComp<AttachableAddRemoveComponentsComponent>(attachableUid, out var addRemove))
+        {
+            EntityManager.RemoveComponents(holder, addRemove.Components);
+        }
 
         _audio.PlayPredicted(Comp<AttachableComponent>(attachableUid).DetachSound,
             holder,
