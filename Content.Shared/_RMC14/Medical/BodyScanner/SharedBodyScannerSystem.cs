@@ -196,7 +196,7 @@ public abstract class SharedBodyScannerSystem : EntitySystem
 
         _container.Remove(occupant, container);
 
-        if (scanner.Comp.ExitStun > TimeSpan.Zero && !HasComp<NoStunOnExitComponent>(scanner))
+        if (scanner.Comp.ExitStun > TimeSpan.Zero && HasComp<NoStunOnExitComponent>(scanner))
             _stun.TryStun(occupant, scanner.Comp.ExitStun, true);
 
         if (_net.IsClient)

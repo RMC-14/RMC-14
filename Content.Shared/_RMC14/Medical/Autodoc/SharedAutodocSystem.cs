@@ -232,7 +232,7 @@ public abstract class SharedAutodocSystem : EntitySystem
 
         _container.Remove(occupant, container);
 
-        if (autodoc.Comp.ExitStun > TimeSpan.Zero && !HasComp<NoStunOnExitComponent>(autodoc))
+        if (autodoc.Comp.ExitStun > TimeSpan.Zero && HasComp<NoStunOnExitComponent>(autodoc))
             _stun.TryStun(occupant, autodoc.Comp.ExitStun, true);
 
         if (_net.IsClient)
