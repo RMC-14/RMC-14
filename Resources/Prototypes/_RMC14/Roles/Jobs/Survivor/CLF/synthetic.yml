@@ -1,0 +1,81 @@
+# RMC14 TODO: Must be changed when CLF Surviors System gets added PR #7950
+- type: job
+  parent: CMJobBase # RMCSurvivorCLFBase
+  id: RMCSurvivorCLFSynthetic
+  name: rmc-clf-synthetic # rmc-job-name-clf-survivor-synthetic must be created first
+  description: rmc-ghost-role-information-clf-description # Can be removed when parent changed
+  ranks:
+    RMCRankSyntheticColonist: [ ]
+  startingGear: RMCGearSurvivorSyntheticCLF
+  icon: "RMCJobIconCLFSynthetic"
+  spawnMenuRoleName: CLF Multipurpose Synthetic (Survivor)
+  playTimeTracker: RMCJobSyntheticCLF # Can be removed when parent changed
+  # antagRole: RMCHostileSurvivor
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - CLF
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      understoodLanguages:
+      - Japanese
+      - English
+      currentLanguage: Japanese
+      defaultLanguage: Japanese
+    - type: LanguageLearning
+      learnableLanguages:
+      - Xeno
+      firstContactLanguages:
+      - Xeno
+      comprehensionThreshold: 0.8
+      learningRange: 8.0
+      baseWordLearningRate: 0.05
+    - type: JobPrefix
+      prefix: rmc-job-prefix-clf-synth # rmc-job-prefix-clf-survivor-synth must be created first
+    - type: MeleeWeapon
+      soundHit:
+        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
+        params:
+          variation: 0.15
+          volume: -1
+      angle: 30
+      animation: WeaponArcFist
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 35
+    - type: Synth
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+  hidden: true
+
+- type: startingGear
+  id: RMCGearSurvivorSyntheticCLF
+  equipment:
+    head: RMCHeadBeretPurple
+    mask: RMCCombatUtilityKnifeA
+    ears: RMCHeadsetDistressCLF
+    eyes: RMCGlassesMedicalHUDGlasses
+    jumpsuit: RMCJumpsuitCLFSoldier
+    outerClothing: RMCCoatMilitia
+    gloves: CMHandsBlackMarine
+    shoes: RMCShoesCombat
+    id: RMCIDCardCLFSynthetic
+    belt: RMCBeltMedicalDefibAnalyzerFilled
+    back: RMCSatchelLightpackWelder
+    pocket1: RMCPouchToolsFill
+    pocket2: RMCPouchConstructionFillLowGrade
+  storage:
+    back:
+    - CMFireExtinguisherPortable
+    - CMRollerBedSpawnFolded
+    - RMCExplosivePlastic
+    - RMCExplosivePlastic
+    - CMCrowbar
+    - RMCSynthResetKeyMakeshift
+    - CMSurgicalLine
+    - CMSynthGraft

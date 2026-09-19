@@ -7,3 +7,18 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Neck/generalformal.rsi
+
+# torn CLF flag
+- type: entity
+  parent: [ RMCMedalBase, ClothingNeckBase ]
+  id: RMCtornCLFflag
+  name: torn CLF flag
+  description: A torn up CLF flag with a pin that allows it be worn as a cape.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/CLF/clf_cape.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/CLF/clf_cape.rsi
+      state: equipped-NECK
