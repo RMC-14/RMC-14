@@ -277,6 +277,11 @@
     contents:
     - id: RMCBatonSlugHIRR
       amount: 3
+  - type: FixedIdentity
+    name: cm-chatsan-word-replacement-batongs
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMPacketBase
