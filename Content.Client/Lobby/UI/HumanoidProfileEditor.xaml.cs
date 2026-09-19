@@ -1161,6 +1161,10 @@ namespace Content.Client.Lobby.UI
                                 loadout = new RoleLoadout(roleLoadoutProto.ID);
                                 loadout.SetDefault(Profile, _playerManager.LocalSession, _prototypeManager);
                             }
+                            else
+                            {
+                                loadout.RecalculatePoints(_prototypeManager); // RMC14 Loadout Fix
+                            }
 
                             OpenLoadout(job, loadout, roleLoadoutProto);
                         };
