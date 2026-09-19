@@ -120,6 +120,54 @@ rmc-new-to-job-cl = You are a Liaison from the Corporate Relations Division of t
                                              You are not an antagonistic role, nor are you a combat role. Do not be antagonistic to other players or take antagonistic action: You are supposed to positively represent Weston-Yamada. Do not deploy to the planet in order to fight xenos. You are not trained to fight, nor are you expected to.
 
                                              If you have any other questions, consult the guidebook's Corporate Liaison page.
+
+rmc-new-to-job-fireteam-leader = As a Fireteam Leader, your role is possibly the most multifaceted in the squad, foremost of which is leading smaller teams and coordinating fire support.
+
+                                             Your room is found at the very end of the preparations hall, containing many advanced support tools. You also have access to breaching explosives (Breaching charges and plastic explosives) and very affordable signal flare packs.
+
+                                             Your primary duty is communication and small unit leadership aided by a wide range of tools, most importantly your radiotelephone backpack. (For further infromation on communication methods please refer to the "Marine Communications" guidebook entry.) Relay and execute your squad leader’s directives and pass on supply requests to requisitions. You are the squad's second-in-command, this means that upon losing your Squad Leader you are first in line to be assgined as Acting Squad Lead (ASL). No one is expecting miracles from you, just listen to your commander and get your jarheads home alive.
+
+                                             You are extensively trained as a Joint Terminal Attack Controller (JTAC), speeding up your laser designator use massively. Use this to mark targets for Close Air Support (CAS) or to obtain coordinates for supply drops (to be transmitted to squad overwatch, preferrably by phone), mortar support, or even an orbital strike. (You can switch the designator between laser designation [Target] and rangefinding [Coordinate] modes by alt+left clicking on it.)
+
+                                             Additionally, your engineering and construction skills rival those of a Combat Technician's; permitting you to do everything they can, only marginally slower. It is recommended that you carry tools with you for this reason.
+
+                                             Help maintain cohesion, ensure everyone gets the supplies they need, and leverage the heaviest of UNMC armaments. Bring the hammer down, Lance Corporal.
+
+rmc-new-to-job-smart-gun-operator = As a Smart Gun Operator your job is to provide a robust base of fire and occasionally information to your squad by making use of your advanced equipment and training.
+
+                                             You will find all your specialized gear in the preparations room assigned to you, look for the appropriate marking on the floor of the preparations hall. Should you require more ammunition, a few can be found in the ASRS munition squad vendor within the general squad preparations room, and also some at requisitions, but keep in mind that drums are somewhat expensive to procure.
+
+                                             A quick summary for the parts of your issued ML66A Smart Gun System:
+
+                                              -Combat harness: Reinforced light armor required to use the smartgun, no backpack can be worn while equipping and wearing this (the sole exception being your optional back scabbard).
+
+                                              -Head mounted sight: An eyepiece that grants complete night vision, allowing the concurrent use of binoculars unlike standard night vision visors, providing unmatched scouting potential.
+
+                                              -Smart gun: The centrepiece of your gear, a high-tech machine gun equipped with an integral motion detector and Identify Friend or Foe (IFF) technology, allowing you to fire from behind your teammates; note that ONLY fellow marines are protected, civilians and other third parties are not. It also has several smaller features, such as an on-demand armor piercing mode (the hotkey for switching ammo types is space by default) and an integrated magnetic harness. 
+
+                                             You should remember that the battery in your weapon has finite charge, though changing it will only be necessary during only the longest and most intense deployments.
+
+                                             Stick close to your squad leader, scout with your sight, and provide mobile area denial to your squad. Light ‘em up, Lance Corporal.
+
+rmc-new-to-job-squad-leader = As a Squad Leader your job is to execute the plan made by shipside command, to navigate, lead, and to keep your squad alive and combat effective.
+
+                                             Your equipment racks are found in the room closest to the cryosleep bay; note that a number of your equipment options are well suited to equipping your squaddies with otherwise limited equipment on the cheap, but you are under no obligation to do so.
+
+                                             Your primary task is to direct and organize your squad. The squad tracker interface (Accessible from the alert on the right edge of your screen) is especially helpful in this regard, allowing you to assign fireteams and track other leaders when needed. Delegate tasks to your squaddies and fireteams or lead by example to inspire your men. (For practical advice on leading a squad refer to the "Squad Leader" guidebook entry)
+
+                                             Your skillset is the widest, but also shallowest in your squad, allowing you to fill in for most basic tasks, but perform them worse than those specially trained. You are also trained in leadership, allowing you to give motivating orders to marines close to you.
+
+                                             As a de-facto command member, you are expected to know and abide by Marine Law and the Standard Operating Procedures (SOP), as well as to report, or in the worst case detain offenders (Your armor is issued with a ziptie box).
+
+                                             Listen to the officers in the Combat Information Centre (CIC), keep in contact with your fellow SLs, study the tactical map and exercise initiative to place your squad in advantageous positions. Do the corps proud, Sergeant.
+
+rmc-new-to-job-weapons-specialist = As a weapon specialist, your job is to bring armaments of unparalleled destructive power to the field, and act as a force multiplier to the squad.
+
+                                             You will find your gear in your assigned room, located next to your squad leader's. You have a multitude of special weapons to choose from, but due to their immense cost only one specialist can employ each specific kit in a given operation. You may choose between Demolitionist (Anti-Tank), Grenadier, Pyro, Scout, Sniper, and Anti-Materiel Rifle kits.  Some choices come with a support kit to be given to a rifleman that allows them to help you become even more lethal. (For further information on specialist equipment please consult the "Specialists” guidebook entry)
+
+                                             Because of your unique ordnance, ammunition conservation and communication with requisitions is essential to stay in the fight. Additionally, heightened situational awareness and careful positioning is vital due to your almost irreplaceable nature. 
+
+                                             Hostile forces will do everything in their power to remove you from the field. Turn the tables on them and help your squad achieve victory. Good hunting, Lance Corporal.
 rmc-new-to-job-cc = As a Correspondent, your job is to keep the masses informed on the efforts of the United Nations Marine Corps! Be that through film and broadcast, pen and paper journalism, or any other means.
 rmc-new-to-job-combat-correspondent = As a Combat Correspondent, you are embedded with the United Nations Marine Corps. Report from the field, follow the operation, and bring the story home.
 
