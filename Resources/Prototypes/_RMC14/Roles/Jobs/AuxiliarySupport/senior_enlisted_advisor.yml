@@ -90,7 +90,7 @@
         state: sea
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_medical
+        state: background_shipside
     - type: RMCTrackable
     - type: RMCAwardRecommendation
 
