@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/6710c72c8a67d4cd21b9fa10b5c52ffa0747b8dc/icons/obj/items/cigarettes.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/6710c72c8a67d4cd21b9fa10b5c52ffa0747b8dc/icons/obj/items/cigarettes.dmi, https://github.com/cmss13-devs/cmss13/blob/aefb9575f85df13fe574f4947c61218afa2c81a7/icons/mob/humans/onmob/inhands/items/smoking_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/aefb9575f85df13fe574f4947c61218afa2c81a7/icons/mob/humans/onmob/inhands/items/smoking_lefthand.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -22,6 +22,98 @@
           0.2
         ]
       ]
+    },
+    {
+      "name": "unlit-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "lit-inhand-right",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "burnt-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "burnt-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "lit-inhand-left",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "unlit-inhand-left",
+      "directions": 4
     }
   ]
 }
