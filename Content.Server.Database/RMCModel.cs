@@ -190,7 +190,7 @@ public sealed class RMCSquadPreference
 
     public Profile Profile { get; set; } = default!;
 
-    public string? Squad { get; set; } // EntProtoId<SquadTeamComponent>
+    public string? Squad { get; set; } // Serialized squad preference payload, legacy single values still supported
 }
 
 [Table("rmc_commendations")]

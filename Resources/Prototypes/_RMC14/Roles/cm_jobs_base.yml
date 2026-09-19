@@ -33,7 +33,7 @@
   id: CMJobXenoBase
   description: null
   joinNotifyCrew: false
-  icon: "CMJobIconEmpty"
+  icon: "RMCJobIconXeno"
   supervisors: cm-job-supervisors-queen
   accessGroups:
   - CMAccessXeno
