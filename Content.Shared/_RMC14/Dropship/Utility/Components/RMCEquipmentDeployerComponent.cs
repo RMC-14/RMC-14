@@ -5,6 +5,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
+using System.Numerics;
 
 namespace Content.Shared._RMC14.Dropship.Utility.Components;
 
@@ -70,6 +71,18 @@ public sealed partial class RMCEquipmentDeployerComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public RMCAlertLevels? AlertLevelRequired;
+    
+    /// <summary>
+    ///     Whether the deployer needs power to activate.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool PowerTogglesDeployable = false;
+
+    /// <summary>
+    ///     The offset of the entity deployed.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public Vector2 DeployOffset = Vector2.Zero;
 
     /// <summary>
     ///     Blacklist for entities not allowed to use the deployer.
