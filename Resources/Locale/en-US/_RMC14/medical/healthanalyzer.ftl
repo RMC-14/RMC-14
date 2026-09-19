@@ -32,3 +32,5 @@ rmc-health-analyzer-advice-dexalin = [color=#5887D5][font="Emoji"]💉[/font][/c
 rmc-health-analyzer-advice-bicaridine = [color=#ed4847][font="Emoji"]💉[/font][/color] Administer a single dose of bicaridine.
 rmc-health-analyzer-advice-kelotane = [color=#f5e123][font="Emoji"]💉[/font][/color] Administer a single dose of kelotane.
 rmc-health-analyzer-advice-dylovene = [color=#3fc92a][font="Emoji"]💉[/font][/color] Administer a single dose of dylovene.
+rmc-health-analyzer-advice-tramadol = [color=#d7c7e0][font="Emoji"]💉[/font][/color] Administer a single dose of tramadol.
+rmc-health-analyzer-advice-oxycodone = [color=#1cc282][font="Emoji"]💉[/font][/color] Administer a single dose of oxycodone.

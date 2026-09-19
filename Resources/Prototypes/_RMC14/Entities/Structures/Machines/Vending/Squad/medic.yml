@@ -61,11 +61,14 @@
       - id: CMPillCanisterKelotane
         points: 5
         recommended: true
-#      - id: CMPillCanisterPeridaxon
-#        points: 5
-#      - id: CMPillCanisterTramadol
-#        points: 5
-#        recommended: true
+      - id: RMCPillCanisterOxycodone
+        points: 5
+        recommended: true
+      # - id: CMPillCanisterPeridaxon
+      #   points: 5
+      - id: RMCPillCanisterTramadol
+        points: 5
+        recommended: true
     - name: Autoinjectors
       entries:
       - id: CMBicaridineAutoInjector
@@ -78,10 +81,10 @@
         points: 1
       - id: CMKelotaneAutoInjector
         points: 1
-#      - id: CMAutoinjectorOxycodone
-#        points: 2
-#      - id: CMAutoinjectorTramadol
-#        points: 1
+      - id: RMCOxycodoneAutoInjector
+        points: 2
+      - id: RMCTramadolAutoInjector
+        points: 1
       - id: CMTricordrazineAutoInjector
         points: 1
     - name: Medical Utilities
@@ -553,6 +556,10 @@
         points: 30
       - id: RMCPillCanisterIron
         points: 30
+      - id: RMCPillCanisterTramadol
+        points: 30
+      - id: RMCPillCanisterOxycodone
+        points: 40
     - name: Liquid Bottles
       entries:
       - id: RMCLargeBottleMeralyneBicaridine
@@ -561,6 +568,8 @@
         points: 40
       - id: RMCLargeBottleDexalinPlus
         points: 30
+      - id: RMCLargeBottleOxycodone
+        points: 40
     - name: Injectors
       entries:
       - id: CMMiniTank
@@ -599,6 +608,10 @@
         points: 30
       - id: RMCPillCanisterIron
         points: 30
+      - id: RMCPillCanisterTramadol
+        points: 30
+      - id: RMCPillCanisterOxycodone
+        points: 40
     - name: Liquid Bottles
       entries:
       - id: RMCLargeBottleMeralyneBicaridine
@@ -607,6 +620,8 @@
         points: 40
       - id: RMCLargeBottleDexalinPlus
         points: 30
+      - id: RMCLargeBottleOxycodone
+        points: 40
     - name: Injectors
       entries:
       - id: CMMiniTank

@@ -55,7 +55,11 @@
       amount: 1
     - id: CMPillCanisterInaprovaline
       amount: 1
-    # TODO RMC14 tramadol and perixadon pills, splint
+    - id: RMCPillCanisterTramadol
+      amount: 1
+    - id: RMCPillCanisterOxycodone
+      amount: 1
+    # TODO RMC14 perixadon pills, splint
     - id: CMBurnKit10
       amount: 1
     - id: CMTraumaKit10
@@ -78,7 +82,11 @@
       amount: 1
     - id: CMPillCanisterInaprovaline
       amount: 1
-    # TODO RMC14 tramadol and perixadon pills, splint
+    - id: RMCPillCanisterTramadol
+      amount: 1
+    - id: RMCPillCanisterOxycodone
+      amount: 1
+    # TODO RMC14 perixadon pills, splint
     - id: CMBurnKit10
       amount: 1
     - id: CMTraumaKit10
@@ -103,7 +111,8 @@
       amount: 1
     - id: CMDexalinPlusAutoInjector
       amount: 1
-    # TODO RMC14 oxycodone autoinjector
+    - id: RMCOxycodoneAutoInjector
+      amount: 1
     - id: CMPillCanisterBicaridine
       amount: 1
     - id: CMPillCanisterDexalin
@@ -114,7 +123,11 @@
       amount: 1
     - id: CMPillCanisterInaprovaline
       amount: 1
-    # TODO RMC14 tramadol and perixadon pills, splint
+    - id: RMCPillCanisterTramadol
+      amount: 1
+    - id: RMCPillCanisterOxycodone
+      amount: 1
+    # TODO RMC14 perixadon pills, splint
 
 - type: entity
   parent: RMCBeltMedicBagSPP
@@ -131,7 +144,8 @@
       amount: 1
     - id: CMDexalinPlusAutoInjector
       amount: 1
-    # TODO RMC14 oxycodone autoinjector
+    - id: RMCOxycodoneAutoInjector
+      amount: 1
     - id: CMPillCanisterBicaridine
       amount: 1
     - id: CMPillCanisterDexalin
@@ -142,7 +156,11 @@
       amount: 1
     - id: CMPillCanisterInaprovaline
       amount: 1
-    # TODO RMC14 tramadol and perixadon pills, splint
+    - id: RMCPillCanisterTramadol
+      amount: 1
+    - id: RMCPillCanisterOxycodone
+      amount: 1
+    # TODO RMC14 perixadon pills, splint
 
 - type: entity
   parent: RMCBeltGrenade
@@ -953,8 +971,8 @@
     - id: CMPillCanisterBicaridine
     - id: CMPillCanisterKelotane
     - id: CMPillCanisterKelotane
-    # - id: CMPillCanisterTramadol
-    # - id: CMPillCanisterTramadol
+    - id: RMCPillCanisterTramadol
+    - id: RMCPillCanisterOxycodone
     - id: CMPillCanisterDylovene
     # - id: CMPillCanisterPeridaxon
     - id: CMPillCanisterDexalin
@@ -977,7 +995,7 @@
       contents:
         - id: CMPillCanisterBicaridine
         - id: CMPillCanisterKelotane
-        # - id: CMPillCanisterTramadol
+        - id: RMCPillCanisterTramadol
         - id: CMPillCanisterTricordrazine
         - id: CMTraumaKit10
         - id: CMBurnKit10
