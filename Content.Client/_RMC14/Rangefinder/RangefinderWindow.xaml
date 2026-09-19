@@ -6,10 +6,17 @@
     <BoxContainer Orientation="Vertical">
         <RichTextLabel Name="Header" Access="Public" />
         <userInterface:BlueHorizontalSeparator Margin="0 5" />
-        <RichTextLabel Name="Longitude" Access="Public" HorizontalAlignment="Center"
-                       VerticalAlignment="Center" Margin="0 20 0 0" />
-        <RichTextLabel Name="Latitude" Access="Public" HorizontalAlignment="Center"
-                       VerticalAlignment="Center" Margin="0 20 0 5" />
+        <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
+            <RichTextLabel Name="Longitude" Access="Public" HorizontalAlignment="Center"
+                           VerticalAlignment="Center" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 5">
+            <RichTextLabel Name="Latitude" Access="Public" HorizontalAlignment="Center"
+                           VerticalAlignment="Center" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
+            <Button Name="CopyButton" Access="Public" Text="{Loc 'rmc-rangefinder-copy-coordinates'}" MinWidth="120" />
+        </BoxContainer>
         <userInterface:BlueHorizontalSeparator Margin="0 5" />
         <BoxContainer Name="BottomContainer" Access="Public" Orientation="Vertical" Margin="5 0" />
     </BoxContainer>
