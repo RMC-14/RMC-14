@@ -266,7 +266,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
         SubscribeLocalEvent<MarineComponent, ComponentRemove>(OnCompRemove);
 
         SubscribeLocalEvent<XenoComponent, MobStateChangedEvent>(OnMobStateChanged);
-        SubscribeLocalEvent<XenoComponent, ComponentRemove>(OnCompRemove);
+        SubscribeLocalEvent<XenoComponent, ComponentRemove>(OnXenoComponentRemoved);
 
         SubscribeLocalEvent<XenoEvolutionGranterComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<XenoComponent, ComponentInit>(OnXenoComponentInit);
