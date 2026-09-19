@@ -117,6 +117,101 @@
 
 - type: entity
   parent: CMFoodBase
+  id: RMCFoodMeatCorgi
+  name: corgi meat
+  description: Tastes like... well you know...
+  components:
+  - type: Food
+    transferAmount: 3
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/meat.rsi
+    state: meat
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/meat.rsi
+  - type: FlavorProfile
+    flavors:
+    - meaty
+  - type: Tag
+    tags:
+    - Raw
+    - Meat
+  - type: SliceableFood
+    count: 3
+    slice: FoodMeatCutlet
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 3
+        reagents:
+        - ReagentId: Protein
+          Quantity: 3
+
+- type: entity
+  parent: CMFoodBase
+  id: RMCFoodMeatXeno
+  name: meat
+  description: A slab of acrid smelling meat.
+  components:
+  - type: Food
+    transferAmount: 6
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/meat.rsi
+    state: xenomeat
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/meat.rsi
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - acid
+  - type: Tag
+    tags:
+    - Raw
+    - Meat
+  - type: SliceableFood
+    count: 3
+    slice: FoodMeatXenoCutlet
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 9
+        reagents:
+        - ReagentId: Protein
+          Quantity: 3
+        - ReagentId: SulfuricAcid
+          Quantity: 6
+
+- type: entity
+  parent: CMFoodBase
+  id: RMCFoodCarpFillet
+  name: carp fillet
+  description: A fillet of spess carp meat.
+  components:
+  - type: Food
+    transferAmount: 6
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/fish.rsi
+    state: fishfillet
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/fish.rsi
+  - type: FlavorProfile
+    flavors:
+    - fishy
+  - type: Tag
+    tags:
+    - Raw
+    - Meat
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 9
+        reagents:
+        - ReagentId: Protein
+          Quantity: 3
+        - ReagentId: CarpoToxin
+          Quantity: 6
+
+- type: entity
+  parent: CMFoodBase
   id: RMCFoodMeatFishGrilled
   name: grilled fish fillet
   description: Some sort of fish, probably dredged from some ocean somewhere, or grown in a vat.

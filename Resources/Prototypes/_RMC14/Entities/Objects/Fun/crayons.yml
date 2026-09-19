@@ -53,6 +53,8 @@
           tags:
           - CrayonPurple
   - type: Appearance
+  - type: BlackMarketValue
+    value: 25
 
 #base   #Todo shade system for crayons.
 - type: entity
@@ -67,6 +69,8 @@
     capacity: 30
   - type: SolutionContainerManager
     solutions: {} #removes upstream reagents
+  - type: BlackMarketValue
+    value: 5
 
 #red
 - type: entity

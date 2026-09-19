@@ -36,3 +36,28 @@
     contents:
     - id: CMPaper
     - id: CMPen
+
+- type: entity
+  parent: BaseStorageItem
+  id: RMCWallet
+  name: wallet
+  description: It can hold a few small and personal things.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/Wallet/wallet.rsi
+    state: wallet
+  - type: Item
+    size: Tiny
+    sprite: _RMC14/Objects/Storage/Wallet/wallet.rsi
+  - type: Storage
+    maxItemSize: Tiny
+    grid:
+    - 0,0,3,1
+    whitelist:
+      tags:
+      - Document
+      - Write
+      - Crayon
+      components:
+      - IdCard
+  - type: FixedItemSizeStorage

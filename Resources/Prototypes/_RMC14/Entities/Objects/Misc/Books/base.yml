@@ -34,6 +34,8 @@
   - type: Tag
     tags:
     - Book
+  - type: BlackMarketValue
+    value: 15
 
 # For Guidebook
 - type: entity
@@ -62,3 +64,5 @@
   - type: Tag
     tags:
     - Book
+  - type: BlackMarketValue
+    value: 15
