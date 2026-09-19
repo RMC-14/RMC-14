@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "hudmutineer from https://github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi hudmutineerleader by noctyrnal (github) based off hudmutineer",
+  "copyright": "hudmutineer from https://github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi; hudmutineerleader by noctyrnal (GitHub) based on hudmutineer; hudloyalist and hudnoncombat from CMSS13 icons/mob/hud/human_status.dmi at https://github.com/cmss13-devs/cmss13/commit/5f3013845f6a994b69b072731d8e5004b2d4dc90, cropped and aligned for 16x16 RMC marine HUD icons",
   "size": {
     "x": 16,
     "y": 16
@@ -12,6 +12,12 @@
         },
         {
             "name": "hudmutineerleader"
+        },
+        {
+            "name": "hudloyalist"
+        },
+        {
+            "name": "hudnoncombat"
         }
     ]
 }

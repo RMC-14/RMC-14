@@ -7,22 +7,22 @@ using Robust.Client.Graphics;
 namespace Content.Client._RMC14.Marines.Mutiny;
 
 [UsedImplicitly]
-public sealed class MutineerInviteEui : BaseEui
+public sealed class MutinyBeginEui : BaseEui
 {
     private readonly ConfirmationWindow _window = new();
     private bool _handled;
 
-    public MutineerInviteEui()
+    public MutinyBeginEui()
     {
         _window.Setup(
-            Loc.GetString("mutineer-invite-title"),
-            Loc.GetString("mutineer-invite-text"),
-            Loc.GetString("mutineer-invite-accept"),
-            Loc.GetString("mutineer-invite-deny"));
+            Loc.GetString("rmc-mutiny-begin-title"),
+            Loc.GetString("rmc-mutiny-begin-text"),
+            Loc.GetString("rmc-mutiny-begin-accept"),
+            Loc.GetString("rmc-mutiny-begin-deny"));
 
-        _window.AcceptButton.OnPressed += _ => SendOnce(MutineerInviteUiButton.Accept);
-        _window.DenyButton.OnPressed += _ => SendOnce(MutineerInviteUiButton.Deny);
-        _window.OnClose += () => SendOnce(MutineerInviteUiButton.Deny, closeWindow: false);
+        _window.AcceptButton.OnPressed += _ => SendOnce(true);
+        _window.DenyButton.OnPressed += _ => SendOnce(false);
+        _window.OnClose += () => SendOnce(false, closeWindow: false);
     }
 
     public override void Opened()
@@ -37,13 +37,13 @@ public sealed class MutineerInviteEui : BaseEui
         _window.Close();
     }
 
-    private void SendOnce(MutineerInviteUiButton button, bool closeWindow = true)
+    private void SendOnce(bool accepted, bool closeWindow = true)
     {
         if (_handled)
             return;
 
         _handled = true;
-        SendMessage(new MutineerInviteChoiceMessage(button));
+        SendMessage(new MutinyBeginChoiceMessage(accepted));
         if (closeWindow)
             _window.Close();
     }

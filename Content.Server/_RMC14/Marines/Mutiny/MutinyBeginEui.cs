@@ -4,25 +4,22 @@ using Content.Shared.Eui;
 
 namespace Content.Server._RMC14.Marines.Mutiny;
 
-public sealed class MutineerInviteEui(
+public sealed class MutinyBeginEui(
     EntityUid leaderMind,
-    EntityUid targetMind,
     EntityUid rule,
     MutinyRuleSystem mutiny) : BaseEui
 {
     private bool _handled;
-
-    public EntityUid LeaderMind => leaderMind;
 
     public override void HandleMessage(EuiMessageBase msg)
     {
         if (_handled)
             return;
 
-        if (msg is MutineerInviteChoiceMessage { Button: MutineerInviteUiButton.Accept })
+        if (msg is MutinyBeginChoiceMessage { Accepted: true })
         {
             _handled = true;
-            mutiny.TryAcceptRecruit(leaderMind, targetMind, rule, this);
+            mutiny.TryBeginMutiny(leaderMind, rule, this);
             if (!IsShutDown)
                 Close();
             return;
@@ -34,7 +31,7 @@ public sealed class MutineerInviteEui(
     public override void Closed()
     {
         _handled = true;
-        mutiny.OnInviteClosed(targetMind, this);
+        mutiny.OnBeginClosed(leaderMind, this);
     }
 
     public void Cancel()
@@ -43,7 +40,7 @@ public sealed class MutineerInviteEui(
             return;
 
         _handled = true;
-        mutiny.OnInviteClosed(targetMind, this);
+        mutiny.OnBeginClosed(leaderMind, this);
         if (!IsShutDown)
             Close();
     }

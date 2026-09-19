@@ -73,10 +73,7 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
         // Give the same IFF faction and enabled state to the projectiles shot from the grenade
         if (ent.Comp.InheritIFF)
         {
-            if (TryComp(ent.Owner, out ProjectileIFFComponent? grenadeIFFComponent))
-            {
-                _gunIFF.GiveAmmoMultiFactionIFF(args.ContentUid, grenadeIFFComponent.Factions, grenadeIFFComponent.Enabled);
-            }
+            _gunIFF.CopyAmmoIFF(ent.Owner, args.ContentUid);
         }
 
         var angleMin = projectileRotation - ent.Comp.SpreadAngle / 2 + segmentAngle * args.ShootCount;
