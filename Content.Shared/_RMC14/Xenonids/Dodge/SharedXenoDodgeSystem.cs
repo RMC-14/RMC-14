@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared._RMC14.Xenonids.SwiftSteps;
 using Content.Shared.Actions;
 using Content.Shared.Mobs.Components;
@@ -120,7 +121,7 @@ public abstract class SharedXenoDodgeSystem : EntitySystem
             bool crowd = false;
             foreach (var mob in _crowd)
             {
-                if (_xeno.CanAbilityAttackTarget(uid, mob) && !_standing.IsDown(mob))
+                if (_xeno.CanAbilityAttackTarget(uid, mob) && !_standing.IsDown(mob) && !HasComp<XenoRestingComponent>(mob))
                 {
                     crowd = true;
                     break;
