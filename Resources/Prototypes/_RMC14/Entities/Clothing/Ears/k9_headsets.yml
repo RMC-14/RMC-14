@@ -1,0 +1,25 @@
+- type: entity
+  parent: RMCHeadsetMarine
+  id: RMCHeadsetK9
+  name: military dog squad radio headset
+  description: A military radio headset made to fit on a dog. Too small to fix on anything else!
+  suffix: PVE
+  components:
+  - type: Tag
+    tags:
+    - PetOnly
+    - RMCK9Wearable
+
+- type: entity
+  parent: RMCHeadsetK9
+  id: RMCHeadsetK9NoRadio
+  name: military dog squad headset
+  description: A military headset made to fit on a dog. Too small to fix on anything else!
+  suffix: PVE, no radio
+  components:
+  - type: RemoveComponents
+    components:
+    - type: Headset
+    - type: RMCHeadset
+    - type: HeadsetMultiBroadcast
+

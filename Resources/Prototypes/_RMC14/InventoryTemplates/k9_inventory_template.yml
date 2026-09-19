@@ -1,0 +1,74 @@
+- type: inventoryTemplate
+  id: RMCK9
+  slots:
+    - name: neck
+      slotTexture: neck
+      slotFlags: NECK
+      uiWindowPos: 0,1
+      strippingWindowPos: 0,1
+      displayName: Neck
+      whitelist:
+        tags:
+        - RMCK9Wearable
+    - name: eyes
+      slotTexture: glasses
+      slotFlags: EYES
+      stripTime: 3
+      uiWindowPos: 0,2
+      strippingWindowPos: 0,0
+      displayName: Eyes
+      whitelist:
+        tags:
+        - RMCK9Wearable
+    - name: ears
+      slotTexture: ears
+      slotFlags: EARS
+      stripTime: 3
+      uiWindowPos: 2,1
+      strippingWindowPos: 2,0
+      displayName: Left Ear
+      whitelist:
+        tags:
+        - RMCK9Wearable
+    - name: ears2
+      slotTexture: ears
+      slotFlags: EARS
+      stripTime: 3
+      uiWindowPos: 2,2
+      strippingWindowPos: 2,1
+      displayName: Right Ear
+      whitelist:
+        tags:
+        - RMCK9Wearable
+    - name: head
+      slotTexture: head
+      slotFlags: HEAD
+      uiWindowPos: 1,1
+      strippingWindowPos: 1,0
+      displayName: Head
+      whitelist:
+        tags:
+        - RMCK9Wearable
+    - name: id
+      slotTexture: id
+      fullTextureName: template_small
+      slotFlags: IDCARD
+      stripTime: 6
+      uiWindowPos: 1,0
+      strippingWindowPos: 2,4
+      displayName: ID
+      whitelist:
+        tags:
+        - RMCK9Wearable
+    - name: back
+      slotTexture: back
+      fullTextureName: template_small
+      slotFlags: BACK
+      stripTime: 6
+      uiWindowPos: 2,0
+      strippingWindowPos: 0,5
+      displayName: Back
+      whitelist:
+        tags:
+        - RMCK9Wearable
+

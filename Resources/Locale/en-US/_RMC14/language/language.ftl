@@ -15,6 +15,7 @@ language-German-name = German
 language-Scandinavian-name = Scandinavian
 language-SignLanguage-name = Sign Language
 language-Primitive-name = Primitive
+language-Canine-name = Canine
 
 # Language descr
 language-English-description = Earth language.
@@ -29,6 +30,7 @@ language-German-description = Earth language.
 language-Scandinavian-description = Earth language.
 language-SignLanguage-description = A visual language using hand gestures and body movements.
 language-Primitive-description = A primitive language of screeches, hoots, and gestures.
+language-Canine-description = The language of dogs, woof!
 
 # Game hud
 game-hud-open-language-menu-button-tooltip = Open Language Menu (Change Speaking Language)

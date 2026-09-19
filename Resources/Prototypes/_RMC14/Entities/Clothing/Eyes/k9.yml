@@ -1,0 +1,15 @@
+- type: entity
+  parent: [RMCGlassesMedicalHUDGlasses]
+  id: RMCGlassesMedicalHUDGlassesk9
+  name: K9 Rescue Unit HealthMate HUD
+  description: A heads-up display that scans the humanoids in view and provides accurate data about their health status, now fitted for a military dog or k9 rescue unit!
+  suffix: PVE
+  components:
+    - type: ItemToggleRequiresSkill
+      skills: {}
+    - type: ItemToggleDeactivateUnskilled
+      skills: {}
+    - type: Tag
+      tags:
+      - RMCK9Wearable
+      - PetOnly

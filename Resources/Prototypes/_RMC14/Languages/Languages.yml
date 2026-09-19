@@ -263,3 +263,27 @@
     chatTypeOverride: null
     speechVerbOverrides: null
     messageWrapOverrides: {}
+
+- type: language
+  id: Canine
+  name: "Canine"
+  description: "The language of dogs, woof!"
+  isVisibleLanguage: true
+  typefaceId: DefaultItalic
+  textSize: null
+  showLanguageName: true
+  languageIcon:
+    sprite: /Textures/_RMC14/Mobs/Animals/k9s/k9.rsi
+    state: icon
+  canUseRadio: true
+  needsSpeech: true
+  expectedVocabularySize: 40
+  obfuscationMethod:
+    !type:SyllableObfuscation
+    replacement: ["woof", "arf", "bark", "grr", "ruff", "bork", "rrr", "grruff", "uff", "boof"]
+    minSyllables: 1
+    maxSyllables: 3
+  speechOverride:
+    chatTypeOverride: null
+    speechVerbOverrides: null
+    messageWrapOverrides: {}
