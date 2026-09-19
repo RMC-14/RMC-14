@@ -10,6 +10,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Pulling.Events;
+using Content.Shared.Rotation;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Robust.Shared.Containers;
@@ -27,6 +28,9 @@ public sealed class RMCStandingSystem : EntitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+
+    private readonly HashSet<EntityUid> _rotationResync = new();
 
     public override void Initialize()
     {
@@ -41,6 +45,7 @@ public sealed class RMCStandingSystem : EntitySystem
         SubscribeLocalEvent<DownOnEnterComponent, EntRemovedFromContainerMessage>(OnLeaveDown);
 
         SubscribeLocalEvent<StandingStateComponent, EvasionRefreshModifiersEvent>(OnStandingStateEvasionRefresh);
+        SubscribeLocalEvent<StandingStateComponent, AfterAutoHandleStateEvent>(OnStandingState);
 
         SubscribeLocalEvent<RMCRestComponent, StoodEvent>(OnRestStood);
         SubscribeLocalEvent<RMCRestComponent, StandAttemptEvent>(OnRestStandAttempt);
@@ -167,7 +172,13 @@ public sealed class RMCStandingSystem : EntitySystem
         if (entity.Owner != args.Entity.Owner || !_standing.IsDown(entity.Owner, entity.Comp))
             return;
 
-        args.Evasion += (int) EvasionModifiers.Rest;
+        args.Evasion += (int)EvasionModifiers.Rest;
+    }
+
+    // SetData no-ops during state application, so queue the rotation resync for the next update after a knockdown mispredict.
+    private void OnStandingState(Entity<StandingStateComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        _rotationResync.Add(ent);
     }
 
     private void OnRestStood(Entity<RMCRestComponent> ent, ref StoodEvent args)
@@ -207,5 +218,27 @@ public sealed class RMCStandingSystem : EntitySystem
 
         if (!resting)
             _standing.Stand(rest);
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        if (_rotationResync.Count == 0)
+            return;
+
+        foreach (var uid in _rotationResync)
+        {
+            if (!TryComp(uid, out StandingStateComponent? standing))
+                continue;
+
+            var target = _standing.IsDown(uid, standing) ? RotationState.Horizontal : RotationState.Vertical;
+            if (_appearance.TryGetData<RotationState>(uid, RotationVisuals.RotationState, out var current) && current == target)
+                continue;
+
+            _appearance.SetData(uid, RotationVisuals.RotationState, target);
+        }
+
+        _rotationResync.Clear();
     }
 }
