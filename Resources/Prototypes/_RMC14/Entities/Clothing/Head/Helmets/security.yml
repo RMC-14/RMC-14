@@ -16,6 +16,7 @@
     # armor_energy = 10
     # armor_internaldamage = 25
   - type: CMHardArmor
+  - type: OverwatchCamera
 
 - type: entity
   parent: ArmorHelmetRiot
