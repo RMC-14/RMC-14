@@ -323,6 +323,13 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             {
                 _popup.PopupClient(Loc.GetString("cm-xeno-leap-blocked"), Transform(ent).Coordinates, ent);
                 args.Cancelled = true;
+                _tagSystem.RemoveTag(ent, ParasiteIsPreparingLeapProtoID);
+                _rmcSprite.UpdateDrawDepth(ent);
+
+                foreach (var action in _rmcActions.GetActionsWithEvent<XenoHideActionEvent>(ent))
+                {
+                    _action.SetEnabled(action.AsNullable(), true);
+                }
                 return;
             }
         }
