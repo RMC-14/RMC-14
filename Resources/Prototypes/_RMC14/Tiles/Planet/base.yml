@@ -179,6 +179,7 @@
     West: /Textures/_RMC14/Tiles/planet/auto_shale/layer1_double_edge.png
   weedsSpreadable: false
   semiWeedable: true
+  isSubfloor: false
 
 - type: tile
   parent: RMCPlanetShale
