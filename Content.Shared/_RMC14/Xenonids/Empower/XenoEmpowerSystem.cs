@@ -162,7 +162,6 @@ public sealed class XenoEmpowerSystem : EntitySystem
             super.PartialExpireAt = _timing.CurTime + xeno.Comp.SuperEmpowerPartialDuration;
             super.EmpoweredTargets = hits;
             super.DamageIncreasePer = xeno.Comp.DamageIncreasePer;
-            super.DamageTailIncreasePer = xeno.Comp.DamageTailIncreasePer;
             super.LeapDamage = xeno.Comp.LeapDamage;
         }
         else
@@ -180,7 +179,7 @@ public sealed class XenoEmpowerSystem : EntitySystem
 
     private void OnXenoSuperEmpoweredGetTailDamage(Entity<XenoSuperEmpoweredComponent> xeno, ref RMCGetTailStabBonusDamageEvent args)
     {
-        args.Damage += xeno.Comp.DamageTailIncreasePer * xeno.Comp.EmpoweredTargets;
+        args.Damage += xeno.Comp.DamageIncreasePer * args.DamageMult * xeno.Comp.EmpoweredTargets;
     }
 
     private void OnXenoSuperEmpoweredLeapHit(Entity<XenoSuperEmpoweredComponent> xeno, ref XenoLeapHitEvent args)

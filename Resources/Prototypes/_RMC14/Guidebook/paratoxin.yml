@@ -1,0 +1,50 @@
+- type: entity
+  parent: CMGuidebookRoleSEA
+  id: RMCGuidebookParatoxin
+  name: Low
+  description: A host with minimal paratoxin stacks.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    layers:
+    - state: senior_enlisted_advisor
+    - state: bub0
+      sprite: _RMC14/Effects/paratoxin_effect.rsi
+    - state: bubble1
+      sprite: _RMC14/Interface/paratoxin_hud.rsi
+    - state: 5
+      sprite: _RMC14/Interface/paratoxin_hud.rsi
+
+- type: entity
+  parent: RMCGuidebookParatoxin
+  id: RMCGuidebookParatoxinMedium
+  name: Some
+  description: A host with just enough paratoxin stacks to catalytic tail stab for a boost!
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    layers:
+    - state: senior_enlisted_advisor
+    - state: bub1
+      sprite: _RMC14/Effects/paratoxin_effect.rsi
+    - state: bubble2
+      sprite: _RMC14/Interface/paratoxin_hud.rsi
+    - state: 10
+      sprite: _RMC14/Interface/paratoxin_hud.rsi
+
+- type: entity
+  parent: RMCGuidebookParatoxin
+  id: RMCGuidebookParatoxinMax
+  name: Max
+  description: A host with maxed out paratoxin stacks! Using draining bite has the best results at max stacks.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    layers:
+    - state: senior_enlisted_advisor
+    - state: bub5
+      sprite: _RMC14/Effects/paratoxin_effect.rsi
+    - state: bubble3
+      sprite: _RMC14/Interface/paratoxin_hud.rsi
+    - state: 30
+      sprite: _RMC14/Interface/paratoxin_hud.rsi

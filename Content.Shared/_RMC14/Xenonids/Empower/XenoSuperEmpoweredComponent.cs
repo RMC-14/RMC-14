@@ -25,9 +25,6 @@ public sealed partial class XenoSuperEmpoweredComponent : Component
     public DamageSpecifier DamageIncreasePer = new();
 
     [DataField, AutoNetworkedField]
-    public DamageSpecifier DamageTailIncreasePer = new();
-
-    [DataField, AutoNetworkedField]
     public DamageSpecifier LeapDamage = new();
 
     [DataField, AutoNetworkedField]
