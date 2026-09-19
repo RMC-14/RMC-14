@@ -197,6 +197,11 @@
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/unfiltered_roll.rsi
     state: unlit-icon
+  - type: RMCSurgeryTool
+    requiresHotCautery: true
+    toolTypes:
+    - kind: Cautery
+      quality: Awful
 
 - type: entity
   id: RMCCigaretteSpent

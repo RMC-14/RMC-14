@@ -45,6 +45,10 @@
     materialComposition:
       CMSteel: 50
       CMGlass: 20
+  - type: RMCSurgeryTool
+    toolTypes:
+    - kind: Hemostat
+      quality: BadSubstitute
 
 - type: entity
   parent: RMCCableCoil
