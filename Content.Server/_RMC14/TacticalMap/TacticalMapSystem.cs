@@ -11,6 +11,7 @@ using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.TacticalMap;
+using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Eye;
@@ -67,6 +68,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private EntityQuery<TacticalMapComponent> _tacticalMapQuery;
     private EntityQuery<TransformComponent> _transformQuery;
     private EntityQuery<XenoMapTrackedComponent> _xenoMapTrackedQuery;
+    private EntityQuery<XenoRemoteStructureRemovalComponent> _xenoRemoteStructureRemovalQuery;
     private EntityQuery<XenoStructureMapTrackedComponent> _xenoStructureMapTrackedQuery;
 
     private readonly HashSet<Entity<TacticalMapTrackedComponent>> _toInit = new();
@@ -92,6 +94,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         _tacticalMapQuery = GetEntityQuery<TacticalMapComponent>();
         _transformQuery = GetEntityQuery<TransformComponent>();
         _xenoMapTrackedQuery = GetEntityQuery<XenoMapTrackedComponent>();
+        _xenoRemoteStructureRemovalQuery = GetEntityQuery<XenoRemoteStructureRemovalComponent>();
         _xenoStructureMapTrackedQuery = GetEntityQuery<XenoStructureMapTrackedComponent>();
 
         SubscribeLocalEvent<XenoOvipositorChangedEvent>(OnOvipositorChanged);
@@ -769,6 +772,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (_tacticalMapIconQuery.TryComp(tracked, out var iconComp))
         {
             tracked.Comp.Icon = mapBlipOverride ?? iconComp.Icon;
+            tracked.Comp.Opacity = iconComp.Opacity;
             tracked.Comp.Background = iconComp.Background;
             UpdateSquadBackground(tracked);
             return;
@@ -870,7 +874,8 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
                 status = TacticalMapBlipStatus.Defibabble4;
         }
 
-        var blip = new TacticalMapBlip(indices, icon, ent.Comp.Color, status, ent.Comp.Background, ent.Comp.HiveLeader);
+        var remotelyRemovable = _xenoRemoteStructureRemovalQuery.HasComp(ent);
+        var blip = new TacticalMapBlip(indices, icon, ent.Comp.Color, status, ent.Comp.Background, ent.Comp.HiveLeader, remotelyRemovable, ent.Comp.Opacity);
         if (_marineMapTrackedQuery.HasComp(ent))
         {
             tacticalMap.MarineBlips[ent.Owner.Id] = blip;

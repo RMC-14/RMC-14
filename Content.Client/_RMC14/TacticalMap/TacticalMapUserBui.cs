@@ -2,10 +2,9 @@ using System.Numerics;
 using Content.Client._RMC14.UserInterface;
 using Robust.Client.Player;
 using Robust.Client.UserInterface.Controls;
-using Robust.Shared.Localization;
-using Robust.Shared.Maths;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.TacticalMap;
+using Content.Shared._RMC14.Xenonids.Egg;
 using JetBrains.Annotations;
 
 namespace Content.Client._RMC14.TacticalMap;
@@ -69,7 +68,19 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
         Refresh();
 
         Window.Wrapper.SetupUpdateButton(msg => SendPredictedMessage(msg));
+        if (EntMan.HasComponent<XenoOvipositorCapableComponent>(Owner))
+            Window.Wrapper.Map.OnEntityBlipClicked = OnEntityBlipClicked;
+
         Window.Wrapper.Map.OnQueenEyeMove += position => SendPredictedMessage(new TacticalMapQueenEyeMoveMsg(position));
+    }
+
+    private bool OnEntityBlipClicked(int entityId, TacticalMapBlip blip)
+    {
+        if (!blip.RemotelyRemovable)
+            return false;
+
+        SendMessage(new XenoRemoteStructureRemovalBuiMsg(new NetEntity(entityId)));
+        return true;
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
