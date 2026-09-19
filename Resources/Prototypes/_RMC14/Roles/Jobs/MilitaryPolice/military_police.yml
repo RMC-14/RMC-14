@@ -19,7 +19,6 @@
       role: CMJobMilitaryPolice
       time: 36000 # 10 hours
     RMCRankCorporal: []
-  weight: 5
   startingGear: CMGearMilitaryPolice
   icon: "CMJobIconMilitaryPolice"
   joinNotifyCrew: false

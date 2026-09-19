@@ -13,7 +13,6 @@
     - !type:DepartmentTimeRequirement
       department: Cargo
       time: 36000 #10 hours
-  weight: 10
   startingGear: QuartermasterGear
   icon: "JobIconQuarterMaster"
   supervisors: job-supervisors-captain
