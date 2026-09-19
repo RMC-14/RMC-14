@@ -10,7 +10,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Damage;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true)]
 [Access(typeof(SharedRMCDamageableSystem))]
 public sealed partial class DamageOverTimeComponent : Component
 {
