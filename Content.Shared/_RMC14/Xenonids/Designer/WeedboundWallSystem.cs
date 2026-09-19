@@ -2,9 +2,9 @@ using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Destructible;
+using Content.Shared.Examine;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
-using System.Linq;
 
 namespace Content.Shared._RMC14.Xenonids.Designer;
 
@@ -27,6 +27,7 @@ public sealed class WeedboundWallSystem : EntitySystem
         SubscribeLocalEvent<WeedboundWallComponent, MapInitEvent>(OnWeedboundMapInit);
         SubscribeLocalEvent<WeedboundWallComponent, EntityTerminatingEvent>(OnWeedboundTerminating);
         SubscribeLocalEvent<WeedboundWallComponent, ComponentRemove>(OnWeedboundRemove);
+        SubscribeLocalEvent<WeedboundWallComponent, ExaminedEvent>(OnWeedboundExamined);
     }
 
     private void OnWeedboundStartup(Entity<WeedboundWallComponent> ent, ref ComponentStartup args)
@@ -37,6 +38,12 @@ public sealed class WeedboundWallSystem : EntitySystem
     private void OnWeedboundMapInit(Entity<WeedboundWallComponent> ent, ref MapInitEvent args)
     {
         BindAndRegister(ent);
+    }
+
+    private void OnWeedboundExamined(Entity<WeedboundWallComponent> ent, ref ExaminedEvent args)
+    {
+        if (HasComp<XenoComponent>(args.Examiner))
+            args.PushText(Loc.GetString("rmc-xeno-weedbound-examined"));
     }
 
     private void BindAndRegister(Entity<WeedboundWallComponent> ent)
