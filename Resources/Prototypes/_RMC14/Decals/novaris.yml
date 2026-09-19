@@ -1,0 +1,156 @@
+﻿# Novaris text logo
+- type: decal
+  id: RMCDecalNovarisTile1
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/novaris/novaris_text.rsi
+    state: novaris_1
+
+- type: decal
+  id: RMCDecalNovarisTile2
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/novaris/novaris_text.rsi
+    state: novaris_2
+
+# Novaris circle logo
+- type: decal
+  id: RMCDecalNovarisTileEyeFull
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/novaris/novaris_circle.rsi
+    state: novaris_circle_full
+
+- type: decal
+  id: RMCDecalNovarisTileEyeHalf1
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/novaris/novaris_circle.rsi
+    state: novaris_circle_half_1
+
+- type: decal
+  id: RMCDecalNovarisTileEyeHalf2
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/novaris/novaris_circle.rsi
+    state: novaris_circle_half_2
+
+# Novaris Logo
+- type: decal
+  id: RMCDecalNovarisLogoTile1
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/novaris/novaris_logo_2x2.rsi
+    state: novaris_1
+
+- type: decal
+  id: RMCDecalNovarisLogoTile2
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/novaris/novaris_logo_2x2.rsi
+    state: novaris_2
+
+- type: decal
+  id: RMCDecalNovarisLogoTile3
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/novaris/novaris_logo_2x2.rsi
+    state: novaris_3
+
+- type: decal
+  id: RMCDecalNovarisLogoTile4
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/novaris/novaris_logo_2x2.rsi
+    state: novaris_4
+
+# Novaris Large
+- type: decal
+  id: RMCDecalNovarisLargeTile1
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/novaris/novaris_logo_4x2.rsi
+    state: novaris_1
+
+- type: decal
+  id: RMCDecalNovarisLargeTile2
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/novaris/novaris_logo_4x2.rsi
+    state: novaris_2
+
+- type: decal
+  id: RMCDecalNovarisLargeTile3
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/novaris/novaris_logo_4x2.rsi
+    state: novaris_3
+
+- type: decal
+  id: RMCDecalNovarisLargeTile4
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/novaris/novaris_logo_4x2.rsi
+    state: novaris_4
+
+- type: decal
+  id: RMCDecalNovarisLargeTile5
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/novaris/novaris_logo_4x2.rsi
+    state: novaris_5
+
+- type: decal
+  id: RMCDecalNovarisLargeTile6
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/novaris/novaris_logo_4x2.rsi
+    state: novaris_6
+
+- type: decal
+  id: RMCDecalNovarisLargeTile7
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/novaris/novaris_logo_4x2.rsi
+    state: novaris_7
+
+- type: decal
+  id: RMCDecalNovarisLargeTile8
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/novaris/novaris_logo_4x2.rsi
+    state: novaris_8
