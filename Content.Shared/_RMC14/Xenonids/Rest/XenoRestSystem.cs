@@ -16,6 +16,7 @@ using Content.Shared._RMC14.Xenonids.Sweep;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
@@ -238,5 +239,18 @@ public sealed class XenoRestSystem : EntitySystem
 
         // Xeno had no rest action for some reason.
         return false;
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        // If a resting xeno tries to move while resting, unrest them if possible.
+        var query = EntityQueryEnumerator<XenoRestingComponent, InputMoverComponent>();
+        while (query.MoveNext(out var xeno, out var rest, out var mover))
+        {
+            if (rest.Running && mover.HasDirectionalMovement)
+                TryRestAction(xeno);
+        }
     }
 }
