@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Damage;
 using Content.Shared.Damage;
 using Content.Shared.Explosion;
 using Content.Shared.Popups;
+using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
@@ -18,6 +19,7 @@ public sealed class VanguardShieldSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<VanguardShieldComponent, MapInitEvent>(OnVanguardShieldInit);
+        SubscribeLocalEvent<VanguardShieldComponent, MeleeHitEvent>(OnVanguardShieldMelee);
         SubscribeLocalEvent<VanguardShieldComponent, DamageModifyAfterResistEvent>(OnVanguardShieldHit, before: [typeof(XenoShieldSystem)]);
         SubscribeLocalEvent<VanguardShieldComponent, GetExplosionResistanceEvent>(OnVanguardShieldGetResistance);
         SubscribeLocalEvent<VanguardShieldComponent, RemovedShieldEvent>(OnVanguardShieldRemoved);
@@ -28,13 +30,21 @@ public sealed class VanguardShieldSystem : EntitySystem
         RegenShield(xeno);
     }
 
-    private void OnVanguardShieldHit(Entity<VanguardShieldComponent> xeno, ref DamageModifyAfterResistEvent args)
+    private void OnVanguardShieldMelee(Entity<VanguardShieldComponent> xeno, ref MeleeHitEvent args)
     {
-        if (args.Damage.GetTotal() <= 0 || (!TryComp<XenoShieldComponent>(xeno, out var shield)) || shield.Shield != XenoShieldSystem.ShieldType.Vanguard)
+        if (args.HitEntities.Count <= 0 || _net.IsServer)
             return;
 
+        xeno.Comp.LastTimeHit = _timing.CurTime;
+    }
+
+    private void OnVanguardShieldHit(Entity<VanguardShieldComponent> xeno, ref DamageModifyAfterResistEvent args)
+    {
         if (_net.IsServer)
             xeno.Comp.LastTimeHit = _timing.CurTime;
+
+        if (args.Damage.GetTotal() <= 0 || (!TryComp<XenoShieldComponent>(xeno, out var shield)) || shield.Shield != XenoShieldSystem.ShieldType.Vanguard)
+            return;
 
         if (!xeno.Comp.WasHit && args.Damage.GetTotal() > xeno.Comp.DecayThreshold)
         {
