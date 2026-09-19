@@ -36,6 +36,12 @@
   - RMCXeno
 
 - type: npcFaction
+  id: SPPHostile
+  hostile:
+  - RMCXeno
+  - UNMC
+
+- type: npcFaction
   id: Halcyon
   hostile:
   - RMCXeno
