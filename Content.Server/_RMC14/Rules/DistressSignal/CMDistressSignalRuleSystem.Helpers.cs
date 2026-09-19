@@ -1,4 +1,6 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using Content.Server.GameTicking;
 using Content.Server.Power.Components;
 using Content.Server.Spawners.Components;
 using Content.Shared._RMC14.Item;
@@ -378,6 +380,74 @@ public sealed partial class CMDistressSignalRuleSystem
         return null;
     }
 
+    /// <summary>
+    /// Returns the total role weight for each faction, given the players who are trying to spawn in.
+    /// </summary>
+    /// <param name="players">The players who are trying to be spawned in at round start.</param>
+    /// <returns>Total assigned role weights for marines, survivors, and xenos.</returns>
+    public TotalRoleWeights GetRoleWeights(IEnumerable<PlayerSpawnInfo> players)
+    {
+        if (TryGetActiveRule() is not { } ruleComp)
+            return new TotalRoleWeights(0, 0, 0, 0);
+
+        var marineWeight = 0f;
+        var survivorWeight = 0f;
+        var xenoWeight = 0f;
+        var assignedCount = 0;
+        foreach (var player in players)
+        {
+            if (player.AssignedJob is not { } assignment)
+                continue;
+
+            assignedCount += 1;
+
+            if (assignment.JobID == ruleComp.XenoSelectableJob
+                || assignment.JobID == ruleComp.QueenJob)
+            {
+                xenoWeight += 1f;
+            }
+            else if (ruleComp.SurvivorJobs.Any(item => item.Job == assignment.JobID)
+                || ruleComp.IgnoreMaximumSurvivorJobs.Contains(assignment.JobID))
+            {
+                survivorWeight += 1f;
+            }
+            else
+            {
+                // Assuming that any non-xeno, non-surv role is a marine role. Should be a safe assumption at this time.
+                marineWeight += assignment.JobPrototype.RoleWeight;
+            }
+        }
+
+        return new TotalRoleWeights(marineWeight, survivorWeight, xenoWeight, assignedCount);
+    }
+
+    /// <summary>
+    /// Returns the amount of xenos there should be at the start of the round, given the role weights provided
+    /// </summary>
+    /// <returns>The amount of xenos there should be, and the remaining unassigned role weight remaining that didn't contribute to a xeno slot.</returns>
+    public (int XenoCount, float RemainderWeight) GetRoundstartXenoCount(TotalRoleWeights roleWeights)
+    {
+        // Parity behavior counts marines and survivors.
+        var relevantWeights = roleWeights.MarineWeight + roleWeights.SurvivorWeight;
+        var xenoCount = (int)Math.Floor(Math.Max(1, relevantWeights / _marinesPerXeno));
+        var remainderWeight = relevantWeights - xenoCount * _marinesPerXeno;
+
+        return (xenoCount, remainderWeight);
+    }
+
+    /// <summary>
+    /// Returns the amount of survivors there should be at the start of the round, given the role weights provided
+    /// </summary>
+    /// <returns>The amount of survivors there should be.</returns>
+    public int GetRoundstartSurvCount(TotalRoleWeights roleWeights)
+    {
+        // Parity behavior counts marines and xenos.
+        // TODO RMC14 counting xenos leads to metagaming. Xenos can potentially late join to reduce survivor numbers.
+        // Relevant weight should be changed to marine only, with the MarinesPerSurvivor CVar adjusted to compensate.
+        var relevantWeights = roleWeights.MarineWeight + roleWeights.XenoWeight;
+        return (int)Math.Clamp((int)Math.Floor(relevantWeights / (_marinesPerSurvivor)), _minimumSurvivors, _maximumSurvivors);
+    }
+
     private void ReloadPrototypes()
     {
         _operationNames.Clear();
@@ -416,4 +486,13 @@ public sealed partial class CMDistressSignalRuleSystem
         // Full non-squad spawners, organized by job
         public readonly Dictionary<ProtoId<JobPrototype>, List<EntityUid>> NonSquadFull = new();
     }
+
+    public struct TotalRoleWeights(float marineWeight, float survivorWeight, float xenoWeight, int assignedCount)
+    {
+        public float MarineWeight = marineWeight;
+        public float SurvivorWeight = survivorWeight;
+        public float XenoWeight = xenoWeight;
+
+        public int AssignedCount = assignedCount;
+    };
 }
