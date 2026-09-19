@@ -9,6 +9,8 @@
     trackerModes:
     - SquadLeader
     - FireteamLeader
+    - CommandingOfficer
+    - ExecutiveOfficer
     - SeniorEnlistedAdvisor
     - PrimaryLandingZone
   - type: GrantTacMapAlert
