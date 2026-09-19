@@ -82,10 +82,9 @@
 
 - type: entity
   parent: CMComputerDropship
-  id: CMComputerDropshipNavigationPlanetside
+  id: CMComputerDropshipRemoteControl
   name: dropship navigation computer
-  description: A flight computer that can be used to direct linked dropships.
-  suffix: Planetside
+  description: A remote flight computer that can be used to direct linked dropships and configure automated routes.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/dropship_nav_computer.rsi
@@ -95,16 +94,19 @@
     - map: ["enum.PowerDeviceVisualLayers.Powered"]
       state: "on"
   - type: Appearance
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleCAS
   - type: ActivatableUI
-    key: enum.DropshipTerminalUiKey.Key
+    key: enum.DropshipRemoteControlUiKey.Key
   - type: AccessReader
-    access: [["CMAccessDropship"], ["CMAccessSquadLeaderPrep"], ["CMAccessXeno"]] # Xeno have access as to not cause the "Access denied!" popup.
+    access: [["CMAccessDropship"], ["CMAccessSquadLeaderPrep"], ["RMCAccessSeniorCommand"], ["CMAccessXeno"]] # Xeno have access as to not cause the "Access denied!" popup.
   - type: ActivatableUIRequiresAccess
-  - type: DropshipTerminal
+  - type: DropshipRemoteControlConsole
   - type: UserInterface
     interfaces:
-      enum.DropshipTerminalUiKey.Key:
-        type: DropshipTerminalBui
+      enum.DropshipRemoteControlUiKey.Key:
+        type: DropshipRemoteControlBui
 
 - type: entity
   parent: CMComputerDropship
@@ -297,6 +299,7 @@
   components:
   - type: DropshipDestination
     spawn: "/Maps/_RMC14/alamo.yml" # The actual Dropship files are private. These are debug versions to ensure tests pass.
+    kind: Hangar
 
 - type: entity
   parent: CMDropshipDestination
@@ -305,6 +308,7 @@
   components:
   - type: DropshipDestination
     spawn: "/Maps/_RMC14/normandy.yml" # The actual Dropship files are private. These are debug versions to ensure tests pass.
+    kind: Hangar
 
 - type: entity
   parent: MarkerBase
