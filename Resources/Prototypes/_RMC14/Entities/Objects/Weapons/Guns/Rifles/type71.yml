@@ -150,10 +150,10 @@
           - RMCAttachmentType71Stock
       rmc-aslot-underbarrel:
         locked: true
-        startingAttachable: RMCAttachmentMiniFlamethrower
+        startingAttachable: RMCAttachmentMiniFlamethrowerAdvancedIntegrated
         whitelist:
           tags:
-          - RMCAttachmentMiniFlamethrower
+          - RMCAttachmentMiniFlamethrowerAdvancedIntegrated
 
 - type: entity
   parent: CMMagazineRifleBase
