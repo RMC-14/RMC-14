@@ -99,6 +99,7 @@
   id: CMGearCombatCorrespondent
   equipment:
     jumpsuit: JumpsuitMarine
+    outerClothing: RMCOuterClothingExternalWebbing
     shoes: CMBootsBlackFilled
     head: RMCHeadCapCorrespondent
     id: CMDogtagCombatCorrespondent
