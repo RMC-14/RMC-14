@@ -70,3 +70,15 @@
       RMCSkillJtac: 3
       RMCSkillOverwatch: 1
       RMCSkillMedical: 2
+
+- type: entity
+  parent: RMCSkillPresetSurvivorSPPLeader
+  id: RMCSkillPresetSurvivorSPPCommander
+  name: Survivor SPP Commander
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillLeadership: 3
+      RMCSkillPolice: 2 # Regular survs don't get police skill, but the preset is for a whitelisted role
+      RMCSkillIntel: 2
