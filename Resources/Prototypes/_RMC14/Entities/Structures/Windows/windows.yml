@@ -42,6 +42,8 @@
   - type: DamageMultiplierFlags
     flags: Breaching
   - type: RMCMesonsNonviewable
+  - type: XenoWeedable
+    spawn: XenoWeedsWindow
 
 - type: entity
   abstract: true

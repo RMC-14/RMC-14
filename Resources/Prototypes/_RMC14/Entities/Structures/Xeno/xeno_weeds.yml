@@ -2,6 +2,7 @@
   id: XenoWeeds
   name: weeds
   description: Weird black weeds...
+  categories: [ HideSpawnMenu ]
   placement:
     mode: SnapgridCenter
     snap:
@@ -199,10 +200,12 @@
     - XenoWeedTile
   - type: RMCVisibleToGhostsOnly
 
+# Hive weeds
 - type: entity # TODO RMC14 sound
   parent: XenoWeeds
   id: XenoHiveWeeds
   name: hive weeds
+  categories: [ HideSpawnMenu ]
   placement:
     mode: SnapgridCenter
     snap:
@@ -278,6 +281,7 @@
 - type: entity
   parent: XenoHiveWeeds
   id: XenoHiveWeedsCluster
+  categories: [ HideSpawnMenu ]
   components:
   - type: XenoWeeds
     range: 6
@@ -287,6 +291,7 @@
 - type: entity
   parent: XenoHiveWeeds
   id: XenoHiveWeedsCore
+  categories: [ HideSpawnMenu ]
   components:
   - type: XenoWeeds
     range: 8
@@ -354,40 +359,17 @@
     - XenoWeedTile
   - type: RMCVisibleToGhostsOnly
 
-
+# `XenoWeedableComponent` entities, for things covered up by nearby weeds
 - type: entity
-  id: XenoWeedsWall
+  abstract: true
+  id: XenoWeedCovering
   name: weeds
-  placement:
-    mode: SnapgridCenter
-    snap:
-    - Wall
   components:
   - type: Transform
     anchored: true
   - type: Physics
     bodyType: Static
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.5,-0.5,0.5,0.5"
-        layer:
-        - WallLayer
-        density: 1000
-        hard: false
   - type: Clickable
-  - type: Sprite
-    sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
-    drawdepth: Objects
-#    layers:
-#    - state: weedwall
-  - type: IconSmooth
-    key: cm_xeno_weeds_walls
-    base: weedwall
-    mode: Corners
-  - type: XenoNestSurface
   - type: XenoFriendly
   - type: Damageable
     damageContainer: StructuralXeno
@@ -399,6 +381,10 @@
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        collection: XenoResinBreak
   - type: ImmuneToUnarmed
   - type: WallMount
     arc: 360
@@ -407,10 +393,83 @@
     transparency: 0.2
   - type: XenoChargeDontHit
 
+- type: entity
+  parent: XenoWeedCovering
+  id: XenoWeedsWall
+  suffix: Wall
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        layer:
+        - WallLayer
+        density: 1000
+        hard: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
+    drawdepth: Objects
+#    layers:
+#    - state: weedwall
+  - type: IconSmooth
+    key: cm_xeno_weeds_walls
+    additionalKeys:
+    - walls
+    - windows
+    base: weedwall
+    mode: Corners
+  - type: XenoNestSurface
+
+- type: entity
+  parent: XenoWeedsWall
+  id: XenoWeedsWindow
+  suffix: Window
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
+    drawdepth: Objects
+    layers:
+    - state: weedwindow0
+  - type: IconSmooth
+    key: cm_xeno_weeds_windows
+    additionalKeys:
+    - windows
+    base: weedwindow
+    mode: CardinalFlags
+
+- type: entity
+  parent: XenoWeedCovering
+  id: XenoWeedsWindowFrame
+  suffix: Window Frame
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
+    drawdepth: Objects
+    layers:
+    - state: weedwindow0
+  - type: IconSmooth
+    key: cm_xeno_weeds_windows
+    additionalKeys:
+    - windows
+    base: weedwindow
+    mode: CardinalFlags
+  # No `XenoNestSurface` for frames.
+
 # Gardener's weeds
 - type: entity # TODO RMC14 sound
   parent: XenoWeeds
   id: XenoHardyWeeds
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     color: "#a1a1a1"
@@ -468,11 +527,10 @@
     tags:
     - XenoWeedNode
 
-
 - type: entity
   parent: XenoHardyWeeds
   id: XenoHardyWeedsSourceHidden
-  suffix: Hidden Node
+  suffix: Hidden Node, Hardy
   components:
   - type: Sprite
     layers:
