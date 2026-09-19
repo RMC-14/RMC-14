@@ -172,3 +172,65 @@
     - state: "terminal0"
     - map: ["enum.PowerDeviceVisualLayers.Powered"]
       state: "terminal"
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCPropLaptopBase
+  name: laptop
+  suffix: Prop, Off
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Structures/Machines/laptop.rsi
+    - state: "terminal0"
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCLaptopBroken
+  name: broken laptop
+  description: Game over man! GAME OVER!
+  suffix: Prop, Damaged
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/laptop.rsi
+    state: laptopb
+
+- type: entity
+  parent: RMCPropLaptopBase
+  id: RMCPropLaptopGeneric
+  suffix: PVE, Prop, Green
+  components:
+  - type: Sprite
+    state: terminal
+
+- type: entity
+  parent: RMCPropLaptopBase
+  id: RMCPropLaptopGenericB
+  suffix: PVE, Prop, Blue
+  components:
+  - type: Sprite
+    state: laptop_genericb
+
+- type: entity
+  parent: RMCPropLaptopBase
+  id: RMCPropLaptopGenericC
+  suffix: PVE, Prop, Orange
+  components:
+  - type: Sprite
+    state: laptop_genericc
+
+- type: entity
+  parent: RMCPropLaptopBase
+  id: RMCPropLaptopAtmos
+  suffix: Prop, Atmos
+  components:
+  - type: Sprite
+    state: laptop_atmos
+
+- type: entity
+  parent: RMCPropLaptopBase
+  id: RMCPropLaptopScan
+  suffix: Prop, Scan
+  components:
+  - type: Sprite
+    state: laptop_scan
