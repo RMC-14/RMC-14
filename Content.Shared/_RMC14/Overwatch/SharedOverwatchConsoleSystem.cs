@@ -123,12 +123,12 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             subs.Event<OverwatchConsoleSupplyDropLatitudeBuiMsg>(OnOverwatchSupplyDropLatitudeBui);
             subs.Event<OverwatchConsoleSupplyDropLaunchBuiMsg>(OnOverwatchSupplyDropLaunchBui);
             subs.Event<OverwatchConsoleSupplyDropSaveBuiMsg>(OnOverwatchSupplyDropSaveBui);
-            subs.Event<OverwatchConsoleLocationCommentBuiMsg>(OnOverwatchSupplyDropCommentBui);
+            subs.Event<OverwatchConsoleSupplyDropCommentBuiMsg>(OnOverwatchSupplyDropCommentBui);
             subs.Event<OverwatchConsoleOrbitalLongitudeBuiMsg>(OnOverwatchOrbitalCoordinatesBui);
             subs.Event<OverwatchConsoleOrbitalLatitudeBuiMsg>(OnOverwatchOrbitalCoordinatesBui);
             subs.Event<OverwatchConsoleOrbitalLaunchBuiMsg>(OnOverwatchOrbitalLaunchBui);
-            // subs.Event<OverwatchConsoleOrbitalSaveBuiMsg>(OnOverwatchOrbitalSaveBui);
-            // subs.Event<OverwatchConsoleOrbitalCommentBuiMsg>(OnOverwatchOrbitalCommentBui);
+            subs.Event<OverwatchConsoleOrbitalSaveBuiMsg>(OnOverwatchOrbitalSaveBui);
+            subs.Event<OverwatchConsoleOrbitalCommentBuiMsg>(OnOverwatchOrbitalCommentBui);
             subs.Event<OverwatchConsoleSendMessageBuiMsg>(OnOverwatchSendMessageBui);
             subs.Event<OverwatchConsoleSetSquadObjectiveBuiMsg>(OnOverwatchSetSquadObjectiveBui);
             subs.Event<OverwatchConsoleClearSquadObjectiveBuiMsg>(OnOverwatchClearSquadObjectiveBui);
@@ -477,44 +477,27 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
     private void OnOverwatchSupplyDropSaveBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleSupplyDropSaveBuiMsg args)
     {
-        var locations = ent.Comp.SavedLocations;
-        if (locations.Length == 0)
+        if (_net.IsClient)
             return;
 
-        ref var last = ref ent.Comp.LastLocation;
-        if (last >= locations.Length)
-            last = 0;
-
-        locations[last] = new OverwatchSavedLocation(args.Longitude, args.Latitude, string.Empty);
-
-        last++;
-        Dirty(ent);
+        SaveLocation(ent, ent.Comp.SavedSupplyDropLocations, args.Longitude, args.Latitude);
     }
 
-    private void OnOverwatchSupplyDropCommentBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleLocationCommentBuiMsg args)
+    private void OnOverwatchSupplyDropCommentBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleSupplyDropCommentBuiMsg args)
     {
-        var locations = ent.Comp.SavedLocations;
-        if (args.Index < 0 || args.Index >= locations.Length)
-            return;
-
-        if (locations[args.Index] is not { } location)
-            return;
-
-        var comment = args.Comment;
-        if (comment.Length > 50)
-            comment = comment[..50];
-
-        locations[args.Index] = location with { Comment = comment };
+        SaveLocationComment(ent, ent.Comp.SavedSupplyDropLocations, args.Index, args.Comment);
     }
 
     private void OnOverwatchOrbitalCoordinatesBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleOrbitalLongitudeBuiMsg args)
     {
         ent.Comp.OrbitalCoordinates = new Vector2i(args.Longitude, ent.Comp.OrbitalCoordinates.Y);
+        Dirty(ent);
     }
 
     private void OnOverwatchOrbitalCoordinatesBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleOrbitalLatitudeBuiMsg args)
     {
         ent.Comp.OrbitalCoordinates = new Vector2i(ent.Comp.OrbitalCoordinates.X, args.Latitude);
+        Dirty(ent);
     }
 
     private void OnOverwatchOrbitalLaunchBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleOrbitalLaunchBuiMsg args)
@@ -532,15 +515,68 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         _orbitalCannon.Fire(cannon, ent.Comp.OrbitalCoordinates, args.Actor, squad);
     }
 
-    // private void OnOverwatchOrbitalSaveBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleOrbitalSaveBuiMsg args)
-    // {
-    //     throw new NotImplementedException();
-    // }
-    //
-    // private void OnOverwatchOrbitalCommentBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleOrbitalCommentBuiMsg args)
-    // {
-    //     throw new NotImplementedException();
-    // }
+    private void OnOverwatchOrbitalSaveBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleOrbitalSaveBuiMsg args)
+    {
+        if (_net.IsClient)
+            return;
+
+        SaveLocation(ent, ent.Comp.SavedOrbitalLocations, args.Longitude, args.Latitude);
+    }
+
+    private void OnOverwatchOrbitalCommentBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleOrbitalCommentBuiMsg args)
+    {
+        SaveLocationComment(ent, ent.Comp.SavedOrbitalLocations, args.Index, args.Comment);
+    }
+
+    private void SaveLocation(
+        Entity<OverwatchConsoleComponent> ent,
+        OverwatchSavedLocation?[] locations,
+        int longitude,
+        int latitude)
+    {
+        if (locations.Length == 0)
+            return;
+
+        if (locations.Any(location =>
+                location is { } saved &&
+                saved.Longitude == longitude &&
+                saved.Latitude == latitude))
+        {
+            return;
+        }
+
+        var index = Array.IndexOf(locations, null);
+        if (index < 0)
+        {
+            Array.Copy(locations, 1, locations, 0, locations.Length - 1);
+            index = locations.Length - 1;
+        }
+
+        locations[index] = new OverwatchSavedLocation(longitude, latitude, string.Empty);
+        Dirty(ent);
+    }
+
+    private void SaveLocationComment(
+        Entity<OverwatchConsoleComponent> ent,
+        OverwatchSavedLocation?[] locations,
+        int index,
+        string comment)
+    {
+        if (index < 0 || index >= locations.Length)
+            return;
+
+        if (locations[index] is not { } location)
+            return;
+
+        if (comment.Length > 50)
+            comment = comment[..50];
+
+        if (location.Comment == comment)
+            return;
+
+        locations[index] = location with { Comment = comment };
+        Dirty(ent);
+    }
 
     private void OnOverwatchSendMessageBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleSendMessageBuiMsg args)
     {

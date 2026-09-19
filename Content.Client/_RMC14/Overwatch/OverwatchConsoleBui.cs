@@ -27,6 +27,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
     private const string GreenColor = "#229132";
     private const string RedColor = "#A42625";
     private const string YellowColor = "#CED22B";
+    private const float SavedLocationRowHeight = 35;
 
     protected override OverwatchConsoleWindow? Window { get; set; }
 
@@ -36,6 +37,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
     private readonly Dictionary<NetEntity, OverwatchSquadView> _squadViews = new();
     private readonly Dictionary<NetEntity, PanelContainer> _squads = new();
     private readonly Dictionary<NetEntity, Dictionary<NetEntity, OverwatchRow>> _rows = new();
+    private readonly Dictionary<BoxContainer, SavedLocationTableState> _savedLocationTables = new();
     private SquadObjectivesWindow? _objectivesWindow;
 
     public OverwatchConsoleBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
@@ -197,7 +199,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                         var longitude = (int)monitor.Longitude.Value;
                         var latitude = (int)monitor.Latitude.Value;
                         var msg = new OverwatchConsoleSupplyDropSaveBuiMsg(longitude, latitude);
-                        SendPredictedMessage(msg);
+                        SendMessage(msg);
                     };
 
                 monitor.OrbitalLongitude.Value = console.OrbitalCoordinates.X;
@@ -211,10 +213,10 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                 monitor.OrbitalSaveButton.OnPressed +=
                     _ =>
                     {
-                        var longitude = (int)monitor.Longitude.Value;
-                        var latitude = (int)monitor.Latitude.Value;
+                        var longitude = (int)monitor.OrbitalLongitude.Value;
+                        var latitude = (int)monitor.OrbitalLatitude.Value;
                         var msg = new OverwatchConsoleOrbitalSaveBuiMsg(longitude, latitude);
-                        SendPredictedMessage(msg);
+                        SendMessage(msg);
                     };
 
                 monitor.MessageSquadButton.OnPressed += _ =>
@@ -813,42 +815,44 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
             {
                 squad.HasCrate = supplyDrop.HasCrate;
                 squad.NextLaunchAt = supplyDrop.NextLaunchAt;
-
-                AddSaving(squad.Longitudes, squad.Latitudes, squad.Comments, squad.Saves, margin);
-                AddSavedLocation(
-                    console.SavedLocations,
-                    margin,
-                    squad.Longitudes,
-                    squad.Latitudes,
-                    squad.Comments,
-                    squad.Saves,
-                    location =>
-                    {
-                        squad.Longitude.Value = location.Longitude;
-                        squad.Latitude.Value = location.Latitude;
-
-                        SendPredictedMessage(new OverwatchConsoleSupplyDropLongitudeBuiMsg(location.Longitude));
-                        SendPredictedMessage(new OverwatchConsoleSupplyDropLatitudeBuiMsg(location.Latitude));
-                    }
-                );
             }
 
-            AddSaving(squad.OrbitalLongitudes, squad.OrbitalLatitudes, squad.OrbitalComments, squad.OrbitalSaves, margin);
-            AddSavedLocation(
-                console.SavedLocations,
+            UpdateSavedLocationTable(
+                console.SavedSupplyDropLocations,
                 margin,
-                squad.OrbitalLongitudes,
-                squad.OrbitalLatitudes,
-                squad.OrbitalComments,
-                squad.OrbitalSaves,
+                squad.Longitudes,
+                squad.Latitudes,
+                squad.Comments,
+                squad.Loads,
                 location =>
                 {
                     squad.Longitude.Value = location.Longitude;
                     squad.Latitude.Value = location.Latitude;
 
+                    SendPredictedMessage(new OverwatchConsoleSupplyDropLongitudeBuiMsg(location.Longitude));
+                    SendPredictedMessage(new OverwatchConsoleSupplyDropLatitudeBuiMsg(location.Latitude));
+                },
+                (index, comment) =>
+                    SendPredictedMessage(new OverwatchConsoleSupplyDropCommentBuiMsg(index, comment))
+            );
+
+            UpdateSavedLocationTable(
+                console.SavedOrbitalLocations,
+                margin,
+                squad.OrbitalLongitudes,
+                squad.OrbitalLatitudes,
+                squad.OrbitalComments,
+                squad.OrbitalLoads,
+                location =>
+                {
+                    squad.OrbitalLongitude.Value = location.Longitude;
+                    squad.OrbitalLatitude.Value = location.Latitude;
+
                     SendPredictedMessage(new OverwatchConsoleOrbitalLongitudeBuiMsg(location.Longitude));
                     SendPredictedMessage(new OverwatchConsoleOrbitalLatitudeBuiMsg(location.Latitude));
-                }
+                },
+                (index, comment) =>
+                    SendPredictedMessage(new OverwatchConsoleOrbitalCommentBuiMsg(index, comment))
             );
 
             squad.HasOrbital = console.HasOrbital;
@@ -856,11 +860,88 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
         }
     }
 
-    private void AddSaving(BoxContainer longitudes, BoxContainer latitudes, BoxContainer comments, BoxContainer saves, Thickness margin)
+    private void UpdateSavedLocationTable(
+        OverwatchSavedLocation?[] locations,
+        Thickness margin,
+        BoxContainer longitudes,
+        BoxContainer latitudes,
+        BoxContainer comments,
+        BoxContainer loads,
+        Action<OverwatchSavedLocation> onSelect,
+        Action<int, string> onComment)
+    {
+        if (!_savedLocationTables.TryGetValue(comments, out var table) ||
+            !SavedLocationCoordinatesMatch(table.Locations, locations))
+        {
+            ResetSavedLocationColumns(longitudes, latitudes, comments, loads, margin);
+            var commentEdits = PopulateSavedLocationRows(
+                locations,
+                margin,
+                longitudes,
+                latitudes,
+                comments,
+                loads,
+                onSelect,
+                onComment);
+
+            _savedLocationTables[comments] = new SavedLocationTableState(locations.ToArray(), commentEdits);
+            return;
+        }
+
+        for (var i = 0; i < locations.Length; i++)
+        {
+            if (locations[i] is not { } location ||
+                !table.Comments.TryGetValue(i, out var commentEdit) ||
+                commentEdit.Control.HasKeyboardFocus())
+            {
+                continue;
+            }
+
+            commentEdit.Control.Text = location.Comment;
+            commentEdit.LastSubmitted = location.Comment;
+        }
+
+        table.Locations = locations.ToArray();
+    }
+
+    private static bool SavedLocationCoordinatesMatch(
+        OverwatchSavedLocation?[] previous,
+        OverwatchSavedLocation?[] current)
+    {
+        if (previous.Length != current.Length)
+            return false;
+
+        for (var i = 0; i < previous.Length; i++)
+        {
+            if (previous[i] is not { } previousLocation)
+            {
+                if (current[i] != null)
+                    return false;
+
+                continue;
+            }
+
+            if (current[i] is not { } currentLocation ||
+                previousLocation.Longitude != currentLocation.Longitude ||
+                previousLocation.Latitude != currentLocation.Latitude)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private void ResetSavedLocationColumns(
+        BoxContainer longitudes,
+        BoxContainer latitudes,
+        BoxContainer comments,
+        BoxContainer loads,
+        Thickness margin)
     {
         longitudes.DisposeAllChildren();
 
-        var panel = CreatePanel(50);
+        var panel = CreatePanel(SavedLocationRowHeight);
         panel.AddChild(new Label
         {
             Text = Loc.GetString("rmc-overwatch-console-longitude-short"),
@@ -869,7 +950,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
         longitudes.AddChild(panel);
 
         latitudes.DisposeAllChildren();
-        panel = CreatePanel(50);
+        panel = CreatePanel(SavedLocationRowHeight);
         panel.AddChild(new Label
         {
             Text = Loc.GetString("rmc-overwatch-console-latitude-short"),
@@ -878,7 +959,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
         latitudes.AddChild(panel);
 
         comments.DisposeAllChildren();
-        panel = CreatePanel(50);
+        panel = CreatePanel(SavedLocationRowHeight);
         panel.AddChild(new Label
         {
             Text = Loc.GetString("rmc-overwatch-console-comment"),
@@ -886,32 +967,34 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
         });
         comments.AddChild(panel);
 
-        saves.DisposeAllChildren();
-        panel = CreatePanel(50);
+        loads.DisposeAllChildren();
+        panel = CreatePanel(SavedLocationRowHeight);
         panel.AddChild(new Label
         {
             Text = " ",
             Margin = margin,
         });
 
-        saves.AddChild(panel);
+        loads.AddChild(panel);
     }
 
-    private void AddSavedLocation(
+    private Dictionary<int, SavedLocationCommentEdit> PopulateSavedLocationRows(
         OverwatchSavedLocation?[] locations,
         Thickness margin,
         BoxContainer longitudes,
         BoxContainer latitudes,
         BoxContainer comments,
-        BoxContainer saves,
-        Action<OverwatchSavedLocation> onSave)
+        BoxContainer loads,
+        Action<OverwatchSavedLocation> onSelect,
+        Action<int, string> onComment)
     {
+        var commentEdits = new Dictionary<int, SavedLocationCommentEdit>();
         for (var i = 0; i < locations.Length; i++)
         {
             if (locations[i] is not { } location)
                 continue;
 
-            var panel = CreatePanel(50);
+            var panel = CreatePanel(SavedLocationRowHeight);
             panel.AddChild(new Label
             {
                 Text = $"{location.Longitude}",
@@ -919,7 +1002,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
             });
             longitudes.AddChild(panel);
 
-            panel = CreatePanel(50);
+            panel = CreatePanel(SavedLocationRowHeight);
             panel.AddChild(new Label
             {
                 Text = $"{location.Latitude}",
@@ -927,30 +1010,43 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
             });
             latitudes.AddChild(panel);
 
-            var comment = new LineEdit { Text = $"{location.Comment}" };
             var index = i;
-            comment.OnTextEntered += args => SaveComment(index, args.Text);
+            var comment = new LineEdit
+            {
+                Text = location.Comment,
+                PlaceHolder = Loc.GetString("rmc-overwatch-console-comment-placeholder"),
+                ToolTip = Loc.GetString("rmc-overwatch-console-comment-autosave"),
+                IsValid = text => text.Length <= 50,
+            };
+            var commentEdit = new SavedLocationCommentEdit(comment, location.Comment);
+            commentEdits[index] = commentEdit;
+            comment.OnTextEntered += args =>
+                SubmitSavedLocationComment(index, args.Text, commentEdit, onComment);
+            comment.OnFocusExit += args =>
+                SubmitSavedLocationComment(index, args.Text, commentEdit, onComment);
 
-            panel = CreatePanel(50);
+            panel = CreatePanel(SavedLocationRowHeight);
             panel.AddChild(comment);
             comments.AddChild(panel);
 
-            panel = CreatePanel(50);
-            var saveButton = new Button
+            panel = CreatePanel(SavedLocationRowHeight);
+            var loadButton = new Button
             {
-                MaxWidth = 25,
+                MinWidth = 55,
                 MaxHeight = 25,
-                VerticalAlignment = VAlignment.Top,
+                VerticalAlignment = VAlignment.Center,
                 StyleClasses = { "OpenBoth" },
-                Text = "<",
+                Text = Loc.GetString("rmc-overwatch-console-load"),
                 ModulateSelfOverride = Color.FromHex("#D3B400"),
-                ToolTip = Loc.GetString("rmc-overwatch-console-save-comment"),
+                ToolTip = Loc.GetString("rmc-overwatch-console-load-coordinates"),
             };
-            saveButton.OnPressed += _ => onSave(location);
+            loadButton.OnPressed += _ => onSelect(location);
 
-            panel.AddChild(saveButton);
-            saves.AddChild(panel);
+            panel.AddChild(loadButton);
+            loads.AddChild(panel);
         }
+
+        return commentEdits;
     }
 
     private PanelContainer CreatePanel(float minHeight = 0, Thickness? thickness = null)
@@ -985,18 +1081,41 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
             : null;
     }
 
-    private void SaveComment(int index, string text)
+    private static void SubmitSavedLocationComment(
+        int index,
+        string comment,
+        SavedLocationCommentEdit commentEdit,
+        Action<int, string> onComment)
     {
-        if (text.Length > 50)
-            text = text[..50];
+        if (comment.Length > 50)
+            comment = comment[..50];
 
-        SendPredictedMessage(new OverwatchConsoleLocationCommentBuiMsg(index, text));
+        commentEdit.Control.Text = comment;
+        if (commentEdit.LastSubmitted == comment)
+            return;
+
+        commentEdit.LastSubmitted = comment;
+        onComment(index, comment);
     }
 
     public void Refresh()
     {
         if (State is OverwatchConsoleBuiState s)
             RefreshState(s);
+    }
+
+    private sealed class SavedLocationTableState(
+        OverwatchSavedLocation?[] locations,
+        Dictionary<int, SavedLocationCommentEdit> comments)
+    {
+        public OverwatchSavedLocation?[] Locations = locations;
+        public readonly Dictionary<int, SavedLocationCommentEdit> Comments = comments;
+    }
+
+    private sealed class SavedLocationCommentEdit(LineEdit control, string lastSubmitted)
+    {
+        public readonly LineEdit Control = control;
+        public string LastSubmitted = lastSubmitted;
     }
 
     private readonly record struct OverwatchRow(
