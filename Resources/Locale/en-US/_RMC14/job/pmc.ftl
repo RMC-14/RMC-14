@@ -108,6 +108,15 @@ rmc-job-name-pmc-whiteout-gunner = Whiteout Team Combat Gunner Unit
 
 rmc-job-prefix-pmc-whiteout = WO
 
+rmc-ghost-name-weya-commando-leader = We-Ya Commando Squad Leader (Friendly)
+rmc-job-name-weya-commando-leader = Commando Squad Leader
+
+rmc-ghost-name-weya-commando = We-Ya Commando (Friendly)
+rmc-job-name-weya-commando = Commando
+
+rmc-ghost-name-weya-commando-gunner = We-Ya Commando Heavy Gunner (Friendly)
+rmc-job-name-weya-commando-gunner = Commando Heavy Gunner
+
 # Executives
 
 rmc-ghost-role-information-corp-exec-description = You are an employee of the Weston-Yamada Corporation. You are to support and maintain Weston-Yamada's interests.

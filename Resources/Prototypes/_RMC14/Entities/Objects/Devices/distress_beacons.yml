@@ -1,0 +1,137 @@
+# RMCERTDistressBeacon field guide:
+# - allowedCalls: explicit ERT call prototypes this beacon may request; empty means all enabled handheld calls.
+# - requestTitle: loc id for the title shown in the reason prompt and admin request text.
+# - recipient: loc id for the authority or organization receiving the request.
+# - reasonRequired: whether the user must enter a non-empty reason.
+# - singleUse: whether the beacon becomes spent after a successful request.
+# - resetOnDeny: whether denial clears the spent/cooldown state for reuse.
+# - cooldown: time before another request can be sent by this beacon.
+# - lastUsed: runtime round time when the beacon last sent a request.
+# - spent: runtime single-use state; normally not set in prototypes.
+# - reasonLimit: maximum number of characters accepted for the request reason.
+
+- type: entity
+  parent: BaseItem
+  id: RMCHandheldDistressBeaconBase
+  name: handheld distress beacon
+  description: A compact encrypted transmitter used to request an emergency response team.
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/handheld_distress_beacon.rsi
+    layers:
+    - state: beacon_inactive
+      map: [ "base" ]
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Devices/handheld_distress_beacon.rsi
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCERTDistressBeaconVisuals.Active:
+        base:
+          "True": { state: beacon_active }
+          "False": { state: beacon_inactive }
+  - type: UserInterface
+    interfaces:
+      enum.DialogUiKey.Key:
+        type: DialogBui
+  - type: RMCERTDistressBeacon
+
+- type: entity
+  parent: RMCHandheldDistressBeaconBase
+  id: RMCHandheldDistressBeaconCMB
+  name: CMB distress beacon
+  suffix: CMB
+  components:
+  - type: RMCERTDistressBeacon
+    recipient: rmc-ert-recipient-anchorpoint
+    requestTitle: rmc-ert-beacon-request-title-cmb
+    allowedCalls:
+    - RMCERTCallCMB
+    - RMCERTCallCMBRiot
+
+- type: entity
+  parent: RMCHandheldDistressBeaconBase
+  id: RMCHandheldDistressBeaconWeYa
+  name: We-Ya distress beacon
+  suffix: We-Ya
+  components:
+  - type: AccessReader
+    access: [ [ "RMCAccessWeYa" ] ]
+  - type: RMCERTDistressBeacon
+    recipient: rmc-ert-recipient-weya-command
+    requestTitle: rmc-ert-beacon-request-title-weya
+    allowedCalls:
+    - RMCERTCallPMC
+    - RMCERTCallWeYaBodyguard
+    - RMCERTCallWeYaBodyguardGoon
+    - RMCERTCallWeYaBodyguardPMC
+    - RMCERTCallWeYaBodyguardPMCEnforcer
+    - RMCERTCallWeYaBodyguardCommando
+    - RMCERTCallWeYaLawyers
+
+- type: entity
+  parent: RMCHandheldDistressBeaconWeYa
+  id: RMCHandheldDistressBeaconWeYaBodyguard
+  name: We-Ya bodyguard distress beacon
+  suffix: We-Ya, Bodyguard
+  components:
+  - type: RMCERTDistressBeacon
+    recipient: rmc-ert-recipient-weya-security
+    requestTitle: rmc-ert-beacon-request-title-weya-bodyguard
+    allowedCalls:
+    - RMCERTCallWeYaBodyguard
+    - RMCERTCallWeYaBodyguardGoon
+    - RMCERTCallWeYaBodyguardPMC
+    - RMCERTCallWeYaBodyguardPMCEnforcer
+    - RMCERTCallWeYaBodyguardCommando
+
+- type: entity
+  parent: RMCHandheldDistressBeaconWeYa
+  id: RMCHandheldDistressBeaconWeYaLawyer
+  name: We-Ya legal distress beacon
+  suffix: We-Ya, Lawyer
+  components:
+  - type: RMCERTDistressBeacon
+    recipient: rmc-ert-recipient-weya-affairs
+    requestTitle: rmc-ert-beacon-request-title-weya-lawyer
+    allowedCalls:
+    - RMCERTCallWeYaLawyers
+
+- type: entity
+  parent: RMCHandheldDistressBeaconBase
+  id: RMCHandheldDistressBeaconProvost
+  name: Provost Office handheld beacon
+  suffix: Provost
+  components:
+  - type: RMCERTDistressBeacon
+    recipient: rmc-ert-recipient-provost
+    requestTitle: rmc-ert-beacon-request-title-provost
+    allowedCalls:
+    - RMCERTCallProvost
+
+- type: entity
+  parent: RMCHandheldDistressBeaconBase
+  id: RMCHandheldDistressBeaconForeign
+  name: foreign distress beacon
+  suffix: SPP, TSE
+  components:
+  - type: RMCERTDistressBeacon
+    recipient: rmc-ert-recipient-allied
+    requestTitle: rmc-ert-beacon-request-title-foreign
+    allowedCalls:
+    - RMCERTCallSPPFriendly
+    - RMCERTCallTSE
+
+- type: entity
+  parent: RMCHandheldDistressBeaconBase
+  id: RMCHandheldDistressBeaconPizza
+  name: pizza delivery distress beacon
+  suffix: Pizza
+  components:
+  - type: RMCERTDistressBeacon
+    recipient: rmc-ert-recipient-pizza
+    requestTitle: rmc-ert-beacon-request-title-pizza
+    allowedCalls:
+    - RMCERTCallPizza

@@ -1,0 +1,28 @@
+- type: rmcERTCall
+  id: RMCERTCallZombies
+  name: rmc-ert-call-zombies-name
+  organization: rmc-ert-organization-civilian
+  npcFactions: [ SimpleHostile ]
+  category: rmc-ert-category-hostile
+  randomWeight: 0
+  allowedSources: [ Admin ]
+  shuttleMap: /Maps/_RMC14/Shuttles/ERT/ert_response_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttle
+  shuttleSpawnMarker: RMCERTShuttleStartPadHostile
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  roles:
+  - id: zombie
+    name: rmc-ert-role-zombie
+    job: CMSurvivor
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidZombie
+      weight: 100
+    min: 2
+    max: 8
+  requirements:
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 2
+    maxSlots: 8

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: CMBaseStructure
   abstract: true
   id: CMComputerDropship
@@ -51,6 +51,68 @@
     state: syndishuttle
   - type: DropshipNavigationComputer
     hijackable: false
+    requiresRestrictedDestination: true
+    shuttleDockingClass: Standard
+    dockingBounds: "-3.5,-7,3.5,6"
+    navigationWindowTitle: ERT Flight Computer
+    showFlyByDestination: false
+    showPrimaryDestinationLabel: false
+    showIndividualDoorControls: false
+    showLaunchAlarmControls: false
+    showRemoteControlControls: false
+  - type: AccessReader
+    access: [["CMAccessERT"]]
+  - type: UserInterface
+    interfaces:
+      enum.DropshipNavigationUiKey.Key:
+        type: DropshipNavigationBui
+      enum.DropshipHijackerUiKey.Key:
+        type: DropshipHijackerBui
+
+- type: entity
+  parent: CMComputerDropshipNavigationERT
+  id: CMComputerDropshipNavigationERTCommAlt
+  suffix: Standard, Comm Alt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: comm_alt
+
+- type: entity
+  parent: CMComputerDropshipNavigationERT
+  id: CMComputerDropshipNavigationERTSmall
+  suffix: Small
+  components:
+  - type: DropshipNavigationComputer
+    shuttleDockingClass: Small
+    dockingBounds: "-3,-5,3,4"
+
+- type: entity
+  parent: CMComputerDropshipNavigationERTSmall
+  id: CMComputerDropshipNavigationERTSmallCommAlt
+  suffix: Small, Comm Alt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: comm_alt
+
+- type: entity
+  parent: CMComputerDropshipNavigationERT
+  id: CMComputerDropshipNavigationERTBig
+  suffix: Big
+  components:
+  - type: DropshipNavigationComputer
+    shuttleDockingClass: Big
+    dockingBounds: "-5.5,-10,5.5,8"
+
+- type: entity
+  parent: CMComputerDropshipNavigationERTBig
+  id: CMComputerDropshipNavigationERTBigCommAlt
+  suffix: Big, Comm Alt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: comm_alt
 
 - type: entity
   parent: CMComputerDropshipNavigation
@@ -305,6 +367,75 @@
   components:
   - type: DropshipDestination
     spawn: "/Maps/_RMC14/normandy.yml" # The actual Dropship files are private. These are debug versions to ensure tests pass.
+
+- type: entity
+  parent: CMDropshipDestination
+  id: RMCRestrictedShuttleDestination
+  abstract: true
+  name: restricted shuttle destination
+  description: Defines a valid landing location for restricted shuttle routing.
+  components:
+  - type: Transform
+    anchored: true
+    noRot: false
+  - type: Rotatable
+
+- type: entity
+  parent: RMCRestrictedShuttleDestination
+  id: RMCRestrictedShuttleDestinationInternal
+  suffix: Shuttle, Internal
+  components:
+  - type: DropshipDestination
+    dockBounds: "-4,-8.5,4,6.5"
+    reserved: true
+    landingClasses: [ internal ]
+    landingTags: [ mainship, ert, internal ]
+
+- type: entity
+  parent: RMCRestrictedShuttleDestinationInternal
+  id: RMCERTShuttleReturnDestination
+  name: Base
+  suffix: ERT, Return, Internal
+
+- type: entity
+  parent: RMCRestrictedShuttleDestinationExternalSide
+  id: RMCERTShuttleReturnDestinationSmall
+  name: Base
+  suffix: ERT, Return, External Side
+
+- type: entity
+  parent: RMCRestrictedShuttleDestinationExternalHangar
+  id: RMCERTShuttleReturnDestinationBig
+  name: Base
+  suffix: ERT, Return, External Hangar
+
+- type: entity
+  parent: RMCRestrictedShuttleDestination
+  id: RMCRestrictedShuttleDestinationExternalSide
+  suffix: Shuttle, External Side
+  components:
+  - type: DropshipDestination
+    dockBounds: "-5,-9.5,5,7.5"
+    reserved: true
+    landingClasses: [ external_side ]
+    landingTags: [ mainship, ert, external_side ]
+  - type: RMCDockingPortAirlockControl
+    airlockTags: [ RMCShuttleAirlockExternalSide ]
+    searchRadius: 5
+
+- type: entity
+  parent: RMCRestrictedShuttleDestination
+  id: RMCRestrictedShuttleDestinationExternalHangar
+  suffix: Shuttle, External Hangar
+  components:
+  - type: DropshipDestination
+    dockBounds: "-6,-10.5,6,8.5"
+    reserved: true
+    landingClasses: [ external_hangar ]
+    landingTags: [ mainship, ert, external_hangar ]
+  - type: RMCDockingPortAirlockControl
+    airlockTags: [ RMCShuttleAirlockExternalHangar ]
+    searchRadius: 8
 
 - type: entity
   parent: MarkerBase

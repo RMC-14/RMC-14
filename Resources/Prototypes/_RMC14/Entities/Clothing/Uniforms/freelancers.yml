@@ -41,3 +41,11 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Freelancer/oliveshirt_blackpants.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Freelancer/oliveshirt_blackpants.rsi
+
+- type: entity
+  parent: RMCJumpsuitFreelancer
+  id: RMCJumpsuitFreelancerSurgicalWebbing
+  suffix: Surgical Webbing
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingSurgicalGreen

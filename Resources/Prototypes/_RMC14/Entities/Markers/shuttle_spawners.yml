@@ -1,3 +1,6 @@
+# RMCERTShuttleStartPad field guide:
+# - offset: local placement offset applied when an ERT shuttle is loaded onto this start pad.
+
 - type: entity
   parent: MarkerBase
   id: RMCSpawnerShuttle
@@ -36,6 +39,7 @@
   - type: GridSpawner
     spawn: "/Maps/_RMC14/Shuttles/ERT/ert_response_shuttle.yml"
     offset: -0.5,-0.5
+    spawnOnMapInit: false
 
 - type: entity
   parent: RMCSpawnerERTShuttle
@@ -44,6 +48,7 @@
   components:
   - type: GridSpawner
     spawn: "/Maps/_RMC14/Shuttles/ERT/ert_pmc_shuttle.yml"
+    spawnOnMapInit: false
 
 - type: entity
   parent: RMCSpawnerERTShuttle
@@ -52,6 +57,7 @@
   components:
   - type: GridSpawner
     spawn: "/Maps/_RMC14/Shuttles/ERT/ert_spp_shuttle.yml"
+    spawnOnMapInit: false
 
 - type: entity
   parent: RMCSpawnerERTShuttle
@@ -60,6 +66,7 @@
   components:
   - type: GridSpawner
     spawn: "/Maps/_RMC14/Shuttles/ERT/ert_tse_shuttle.yml"
+    spawnOnMapInit: false
 
 - type: entity
   parent: RMCSpawnerERTShuttle
@@ -68,6 +75,7 @@
   components:
   - type: GridSpawner
     spawn: "/Maps/_RMC14/Shuttles/ERT/ert_clf_shuttle.yml"
+    spawnOnMapInit: false
 
 - type: entity
   parent: RMCSpawnerERTShuttle
@@ -76,6 +84,25 @@
   components:
   - type: GridSpawner
     spawn: "/Maps/_RMC14/Shuttles/ERT/ert_cmb_shuttle.yml"
+    spawnOnMapInit: false
+
+- type: entity
+  parent: RMCSpawnerERTShuttle
+  id: RMCSpawnerERTShuttlePizza
+  suffix: ERT Pizza
+  components:
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/Shuttles/ERT/ert_pizza_shuttle.yml"
+    spawnOnMapInit: false
+
+- type: entity
+  parent: RMCSpawnerERTShuttle
+  id: RMCSpawnerERTShuttleBig
+  suffix: ERT Big
+  components:
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/Shuttles/ERT/ert_shuttle_big.yml"
+    spawnOnMapInit: false
 
 - type: entity
   parent: RMCSpawnerERTShuttle
@@ -84,6 +111,7 @@
   components:
   - type: GridSpawner
     spawn: "/Maps/_RMC14/Shuttles/ERT/ert_tsepa_shuttle.yml"
+    spawnOnMapInit: false
 
 - type: entity
   parent: RMCSpawnerERTShuttle
@@ -92,3 +120,72 @@
   components:
   - type: GridSpawner
     spawn: "/Maps/_RMC14/Shuttles/cmb_shuttle.yml"
+    spawnOnMapInit: false
+
+- type: entity
+  parent: RMCSpawnerERTShuttle
+  id: RMCSpawnerShuttleTSEPA
+  suffix: TSEPA
+  components:
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/Shuttles/ERT/ert_tsepa_shuttle.yml"
+    spawnOnMapInit: false
+
+- type: entity
+  parent: MarkerBase
+  id: RMCERTShuttleStartPad
+  name: ERT shuttle start pad
+  suffix: ERT
+  abstract: true
+  description: Defines a physical staging pad to load an ERT shuttle onto.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    state: green
+  - type: RMCERTShuttleStartPad
+
+- type: entity
+  parent: RMCERTShuttleStartPad
+  id: RMCERTShuttleStartPadLaw
+  suffix: ERT, Law
+
+- type: entity
+  parent: RMCERTShuttleStartPad
+  id: RMCERTShuttleStartPadTSE
+  suffix: ERT, TSE
+
+- type: entity
+  parent: RMCERTShuttleStartPad
+  id: RMCERTShuttleStartPadWeYa
+  suffix: ERT, WeYa
+
+- type: entity
+  parent: RMCERTShuttleStartPad
+  id: RMCERTShuttleStartPadSPP
+  suffix: ERT, SPP
+
+- type: entity
+  parent: RMCERTShuttleStartPad
+  id: RMCERTShuttleStartPadUNMC
+  suffix: ERT, UNMC
+
+- type: entity
+  parent: RMCERTShuttleStartPad
+  id: RMCERTShuttleStartPadEvent
+  suffix: ERT, Event
+
+- type: entity
+  parent: RMCERTShuttleStartPad
+  id: RMCERTShuttleStartPadHostile
+  suffix: ERT, Hostile
+
+- type: entity
+  parent: RMCERTShuttleStartPad
+  id: RMCERTShuttleStartPadFreelancers
+  suffix: ERT, Freelancers
+
+- type: entity
+  parent: RMCERTShuttleStartPad
+  id: RMCERTShuttleStartPadReserve
+  suffix: ERT, Reserve

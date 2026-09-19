@@ -10,10 +10,11 @@
   startingGear: RMCJobWeYaLawyer
   icon: CMJobIconLiaison
   joinNotifyCrew: false
+  access: [ CMAccessERT ]
   accessGroups:
   - Colony
   - RMCWeYa
-  spawnMenuRoleName: WEYA Corporate Executive Specialist
+  spawnMenuRoleName: We-Ya Corporate Executive Specialist
   special:
   - !type:AddComponentSpecial
     components:
@@ -67,7 +68,7 @@
 - type: entity
   parent: MarkerBase
   id: RMCRandomHumanoidWeYaLawyer
-  name: weya corporate ghost role lawyer
+  name: we-ya corporate ghost role lawyer
   suffix: Spawner, Player
   components:
   - type: Sprite

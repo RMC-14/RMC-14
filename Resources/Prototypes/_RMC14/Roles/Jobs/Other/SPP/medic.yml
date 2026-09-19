@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMJobBase
   id: RMCSPPMedic
   name: rmc-job-name-spp-medic
@@ -9,6 +9,7 @@
   startingGear: RMCGearSPPMedic
   icon: "RMCJobIconSPPMedic"
   joinNotifyCrew: false
+  access: [ CMAccessERT ]
   accessGroups:
   - Colonist
   - HospitalCorpsman
@@ -97,6 +98,9 @@
     raffle:
       settings: short
     requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobHospitalCorpsman
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadSPP
 

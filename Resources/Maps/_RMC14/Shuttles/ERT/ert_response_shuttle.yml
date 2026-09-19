@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 06/07/2025 13:28:34
-  entityCount: 73
+  entityCount: 77
 maps: []
 grids:
 - 1
@@ -537,13 +537,30 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 1.5,-4.5
       parent: 1
-- proto: RMCSeatDark
+- proto: RMCERTSeatDarkCommand
   entities:
   - uid: 4
     components:
     - type: Transform
       pos: 0.5,2.5
       parent: 1
+- proto: RMCERTSeatDarkMedic
+  entities:
+  - uid: 8
+    components:
+    - type: Transform
+      pos: 0.5,1.5
+      parent: 1
+- proto: RMCERTSeatDarkEngineer
+  entities:
+  - uid: 9
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.5,1.5
+      parent: 1
+- proto: RMCERTSeatDarkTroop
+  entities:
   - uid: 5
     components:
     - type: Transform
@@ -558,17 +575,6 @@ entities:
     components:
     - type: Transform
       pos: 0.5,-1.5
-      parent: 1
-  - uid: 8
-    components:
-    - type: Transform
-      pos: 0.5,1.5
-      parent: 1
-  - uid: 9
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 2.5,1.5
       parent: 1
   - uid: 10
     components:
@@ -606,5 +612,33 @@ entities:
     components:
     - type: Transform
       pos: -1.5,3.5
+      parent: 1
+- proto: RMCERTSpawnMarkerCommand
+  entities:
+  - uid: 1001
+    components:
+    - type: Transform
+      pos: 0.5,2.5
+      parent: 1
+- proto: RMCERTSpawnMarkerMedic
+  entities:
+  - uid: 1002
+    components:
+    - type: Transform
+      pos: 0.5,1.5
+      parent: 1
+- proto: RMCERTSpawnMarkerEngineer
+  entities:
+  - uid: 1003
+    components:
+    - type: Transform
+      pos: 2.5,1.5
+      parent: 1
+- proto: RMCERTSpawnMarker
+  entities:
+  - uid: 1004
+    components:
+    - type: Transform
+      pos: -1.5,1.5
       parent: 1
 ...

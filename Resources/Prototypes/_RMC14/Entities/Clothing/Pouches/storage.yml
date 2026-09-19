@@ -188,8 +188,8 @@
       - RMCMagazineShotgun
       - CMMagazineSmg
       - CMMagazineSniper
+      - RMCMagazineLMG
       - RMCShellShotgun
-      # TODO RMC14 m60 mag
   - type: FixedItemSizeStorage
 
 # Large Magazine Pouch
