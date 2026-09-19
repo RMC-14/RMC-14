@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Medical.Vomit;
 using Content.Shared._RMC14.Slow;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;

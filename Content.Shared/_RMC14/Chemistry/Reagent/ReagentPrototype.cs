@@ -8,6 +8,9 @@ namespace Content.Shared.Chemistry.Reagent;
 public partial class ReagentPrototype
 {
     [DataField]
+    public bool IsCM { get; set; }
+
+    [DataField]
     public bool Unknown;
 
     [DataField]

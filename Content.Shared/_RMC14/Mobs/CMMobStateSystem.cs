@@ -1,10 +1,16 @@
-﻿using Content.Shared._RMC14.Sprite;
+﻿using Content.Shared._RMC14.Body;
+using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Sprite;
+using Content.Shared.Chemistry.Reagent;
+using Content.Shared.FixedPoint;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Robust.Shared.Console;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Mobs;
 
@@ -13,8 +19,11 @@ public sealed class CMMobStateSystem : EntitySystem
     [Dependency] private readonly IConsoleHost _host = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedRMCBloodstreamSystem _rmcBloodstream = default!;
     [Dependency] private readonly SharedRMCSpriteSystem _rmcSprite = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+
+    private static readonly ProtoId<ReagentPrototype> Inaprovaline = "CMInaprovaline";
 
     public override void Initialize()
     {
@@ -28,6 +37,8 @@ public sealed class CMMobStateSystem : EntitySystem
             {
                 subs.Event<CMGhostActionBuiMsg>(OnGhostActionBuiMsg);
             });
+
+        SubscribeLocalEvent<MarineComponent, DamageStateCritBeforeDamageEvent>(OnInaprovalineBeforeCritDamage);
     }
 
     private void OnMobStateActionsGhost(Entity<MobStateActionsComponent> ent, ref CMGhostActionEvent args)
@@ -79,5 +90,15 @@ public sealed class CMMobStateSystem : EntitySystem
 
         if (_net.IsServer && TryComp(args.Actor, out ActorComponent? actor))
             _host.ExecuteCommand(actor.PlayerSession, "ghost");
+    }
+
+    private void OnInaprovalineBeforeCritDamage(Entity<MarineComponent> ent, ref DamageStateCritBeforeDamageEvent args)
+    {
+        if (_rmcBloodstream.TryGetChemicalSolution(ent, out _, out var chemicals) &&
+            chemicals.GetTotalPrototypeQuantity(Inaprovaline) > FixedPoint2.Zero)
+        {
+            // Don't take bleedout damage on Inaprovaline
+            args.Damage.ClampMax(0);
+        }
     }
 }
