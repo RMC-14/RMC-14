@@ -16,6 +16,7 @@
   tags:
   - CMAccessMarinePrep
   - CMAccessFTLPrep
+  - CMAccessColonyEngineering # TODO RMC14 APC Access Wire
 
 - type: accessGroup
   id: WeaponSpec
@@ -49,7 +50,7 @@
   tags:
   - CMAccessMarinePrep
   - CMAccessCombatTechPrep
-  - CMAccessColonyEngineering
+  - CMAccessColonyEngineering #TODO RMC14 APC Access Wire
 
 # this exists because other squad members will have their own equipment vendors.
 - type: accessGroup
