@@ -44,6 +44,7 @@ using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Light.Components;
 using Content.Shared.Mind;
+using Robust.Shared.Map;
 using Content.Shared.Popups;
 using Content.Shared.PowerCell.Components;
 using Content.Shared.Roles.Jobs;
@@ -76,6 +77,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
@@ -106,6 +108,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     private readonly Dictionary<EntProtoId, CMVendorEntry> _entries = new();
     private readonly List<CMVendorEntry> _boxEntries = new();
+    private readonly HashSet<Entity<CMAutomatedVendorComponent>> _vendors = new();
 
     private static readonly ProtoId<ReagentPrototype> FlamerTankReagent = "RMCNapalmUT";
     private static readonly ProtoId<TagPrototype> FlarePackTag = "CMFlarePack";
@@ -940,6 +943,54 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         user.Comp.ExtraPoints ??= new Dictionary<string, int>();
         user.Comp.ExtraPoints[key] = points;
         Dirty(user);
+    }
+
+    public bool TryTakeStockedItem(EntityCoordinates coords, float range, EntProtoId prototype, out EntityUid item)
+    {
+        item = default;
+
+        _vendors.Clear();
+        _entityLookup.GetEntitiesInRange(coords, range, _vendors);
+        foreach (var vendor in _vendors)
+        {
+            foreach (var section in vendor.Comp.Sections)
+            {
+                foreach (var entry in section.Entries)
+                {
+                    if (entry.Id != prototype || entry.Amount is not { } amount || amount <= 0)
+                        continue;
+
+                    entry.Amount = amount - 1;
+                    AmountUpdated(vendor, entry);
+                    Dirty(vendor);
+
+                    item = Spawn(prototype, coords);
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public int GetStockedAmount(EntityCoordinates coords, float range, EntProtoId prototype)
+    {
+        var total = 0;
+        _vendors.Clear();
+        _entityLookup.GetEntitiesInRange(coords, range, _vendors);
+        foreach (var vendor in _vendors)
+        {
+            foreach (var section in vendor.Comp.Sections)
+            {
+                foreach (var entry in section.Entries)
+                {
+                    if (entry.Id == prototype && entry.Amount is { } amount)
+                        total += amount;
+                }
+            }
+        }
+
+        return total;
     }
 
     public void AmountUpdated(Entity<CMAutomatedVendorComponent> vendor, CMVendorEntry entry)

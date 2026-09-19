@@ -1,0 +1,9 @@
+<controls:RMCIconLabelRow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.UserInterface"
+    Orientation="Horizontal"
+    VerticalAlignment="Center"
+    SeparationOverride="6">
+    <TextureRect Name="Icon" Access="Public" Stretch="KeepAspectCentered" VerticalAlignment="Center" />
+    <Label Name="Label" Access="Public" VerticalAlignment="Center" FontColorOverride="#000000" />
+</controls:RMCIconLabelRow>
