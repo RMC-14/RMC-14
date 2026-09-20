@@ -18,4 +18,12 @@ public sealed partial class OmaeWaMouShindeiruComponent : Component
     /// <remarks>I AM THE STORM THAT IS APPROACHING</remarks>
     [DataField]
     public int NumberOfCuts = 8;
+
+    [DataField]
+    public bool DamageOnHit;
+
+    /// <summary>
+    /// Targets currently waiting for the delayed attack to trigger
+    /// </summary>
+    public HashSet<EntityUid> PendingTargets = [];
 }

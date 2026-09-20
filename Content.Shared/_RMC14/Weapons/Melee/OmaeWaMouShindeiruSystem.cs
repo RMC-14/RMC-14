@@ -1,6 +1,7 @@
 using Content.Shared.Damage;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
@@ -10,9 +11,8 @@ namespace Content.Shared._RMC14.Weapons.Melee;
 public sealed class OmaeWaMouShindeiruSystem : EntitySystem
 {
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private readonly INetManager _net = default!;
-
-    private readonly HashSet<EntityUid> _alreadyDead = [];
 
     public override void Initialize()
     {
@@ -23,45 +23,55 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
 
     private void OnMeleeHit(Entity<OmaeWaMouShindeiruComponent> ent, ref MeleeHitEvent args)
     {
+        if (!args.IsHit)
+            return;
+
         if (_net.IsClient)
             return;
 
-        if (args.HitEntities.Count == 0)
-            return;
-
+        // Get the weapon's damage at the moment of impact
+        var damage = _melee.GetDamage(ent.Owner, args.User);
         foreach (var target in args.HitEntities)
         {
-            // Don't process the same target multiple times during the delay
-            if (!_alreadyDead.Add(target))
+            // Don't allow multiple delayed executions against the same target while one is already pending
+            if (!ent.Comp.PendingTargets.Add(target))
                 continue;
 
-            var delay = ent.Comp.KillDelay;
-            Timer.Spawn(delay,
-                () =>
-            {
-                _alreadyDead.Remove(target);
-
-                // Target may have been deleted during the delay.
-                if (!Exists(target))
-                    return;
-
-                // Target may already be dead.
-                if (TryComp<MobStateComponent>(target, out var mobState) &&
-                    mobState.CurrentState == MobState.Dead)
-                {
-                    return;
-                }
-
-                OmaeWaMouShindeiru(target, ent.Comp.NumberOfCuts);
-            });
+            ScheduleDelayedAttack(ent, args.User, target, damage);
         }
+
+        if (!ent.Comp.DamageOnHit)
+            args.Handled = true;
     }
 
-    private void OmaeWaMouShindeiru(EntityUid target, int numberOfCuts)
+    private void ScheduleDelayedAttack(Entity<OmaeWaMouShindeiruComponent> ent, EntityUid user, EntityUid target, DamageSpecifier damage)
     {
-        for (var i = 0; i < numberOfCuts; i++)
+        Timer.Spawn(ent.Comp.KillDelay,
+            () =>
         {
+            ent.Comp.PendingTargets.Remove(target);
 
+            if (Deleted(ent.Owner) || Deleted(target))
+                return;
+
+            if (!Exists(target))
+                return;
+
+            if (TryComp<MobStateComponent>(target, out var mobState) &&
+                mobState.CurrentState == MobState.Dead)
+            {
+                return;
+            }
+
+            ExecuteCuts(ent, user, target, damage);
+        });
+    }
+
+    private void ExecuteCuts(Entity<OmaeWaMouShindeiruComponent> ent, EntityUid user, EntityUid target, DamageSpecifier damage)
+    {
+        for (var i = 0; i < ent.Comp.NumberOfCuts; i++)
+        {
+            _damageable.TryChangeDamage(target, damage, origin: user, tool: ent.Owner);
         }
     }
 }
