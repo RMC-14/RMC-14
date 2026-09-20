@@ -3267,3 +3267,14 @@
     state: mi_dan
   - type: PatronFigurine
     id: 9eff96a8-7525-4057-b0bc-4d6b16691d41
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronEulaEventide
+  name: Eula Eventide figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: eula_eventide
+  - type: PatronFigurine
+    id: d10b31b9-9e68-4413-8037-1367dae759b0
