@@ -14,6 +14,4 @@ public sealed partial class RMCStorageShakableComponent : Component
 
     [DataField, AutoNetworkedField]
     public float ShakeFailChance = 0.25f;
-
-    //TODO RMC14 seperate comp for xenos to shake off storages
 }

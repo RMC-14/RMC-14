@@ -747,9 +747,14 @@ public sealed class RMCStorageSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (_random.Prob(shakable.Comp.ShakeFailChance) || storage.Container.ContainedEntities.Count == 0)
+        var isEmpty = storage.Container.ContainedEntities.Count == 0;
+
+        if (isEmpty || _random.Prob(shakable.Comp.ShakeFailChance))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-storage-shake-fail-self", ("target", Identity.Name(shakable, EntityManager, user))), user, user, PopupType.SmallCaution);
+            var selfmessage = isEmpty ? "rmc-storage-shake-fail-self-empty" : "rmc-storage-shake-fail-self";
+            _popup.PopupEntity(Loc.GetString(selfmessage, ("target", Identity.Name(shakable, EntityManager, user))), user, user, PopupType.SmallCaution);
+
+            //TODO RMC14 comp or something so xenos have a chance to shake off the storage when it's empty.
 
             var others2 = Filter.PvsExcept(user).Recipients;
             foreach (var other in others2)
