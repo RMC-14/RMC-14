@@ -33,7 +33,7 @@ rmc-hijack-cabinet-locked = This cabinet will unlock and open itself during evac
 
 rmc-storage-shake = Shake
 rmc-storage-shake-fail-self = You shake {THE($target)} but nothing falls out.
-rmc-storage-shake-fail-self-empty = You shake {THE($target)} but nothing falls out. {CAPITALIZE(THE(SUBJECT($target)))} {CONJUGATE-BASIC($target, "feel", "feels")} empty...
+rmc-storage-shake-fail-self-empty = You shake {THE($target)} but nothing falls out. {CAPITALIZE(SUBJECT($target))} {CONJUGATE-BASIC($target, "feel", "feels")} empty...
 rmc-storage-shake-fail-others = {CAPITALIZE(THE($user))} shakes {THE($target)} but nothing falls out.
 rmc-storage-shake-success-self = You shake {THE($target)} and {INDEFINITE($item)} {$item} falls out.
 rmc-storage-shake-success-others = {CAPITALIZE(THE($user))} shakes {THE($target)} and {INDEFINITE($item)} {$item} falls out.
