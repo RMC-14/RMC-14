@@ -25,6 +25,7 @@ public abstract partial class SharedEntityStorageComponent : Component
         CollisionGroup.LowImpassable |
         // RMC14
         CollisionGroup.BulletImpassable);
+        // RMC14
 
     /// <summary>
     ///     Collision masks that were removed from ANY layer when the storage was opened;
