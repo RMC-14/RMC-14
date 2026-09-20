@@ -3278,3 +3278,14 @@
     state: eula_eventide
   - type: PatronFigurine
     id: d10b31b9-9e68-4413-8037-1367dae759b0
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAdamSalamanderThatcher
+  name: Adam 'Salamander' Thatcher figurine
+  description: "A Japanese man who looks like he has seen the fires of war. This one seems to be kitted in Royal Crown Marine gunner armor and seems ready to serve the Empress. He also has written on the smart gun, \"FOR THE EMPRESS!!\""
+  components:
+  - type: Sprite
+    state: adam_salamander_thatcher
+  - type: PatronFigurine
+    id: 9d95fbe2-0ce1-4e5b-9805-3a1fc8e1c01e
