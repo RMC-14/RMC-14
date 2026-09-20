@@ -16,4 +16,10 @@ public sealed partial class RMCEquippedStorageOpenOnInteractComponent : Componen
 
     [DataField, AutoNetworkedField]
     public bool CountSelf = false;
+
+    /// <summary>
+    /// Only works if count self is true and this isn't relayed, ofc
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool RequireEquipped = true;
 }
