@@ -3256,3 +3256,14 @@
     state: blanka_disater_zaun
   - type: PatronFigurine
     id: 09f7766a-f0e9-4ef1-911e-ea646be2582f
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMiDan
+  name: Mi Dan figurine
+  description: "A special edition Mi Dan Figurine, a homage to the felinid's heritage.\n\nOn the bottom of the figurine stand reads - 'What could've been'.\nSomething just feels off about the figurine, that wasn't the price."
+  components:
+  - type: Sprite
+    state: mi_dan
+  - type: PatronFigurine
+    id: 9eff96a8-7525-4057-b0bc-4d6b16691d41
