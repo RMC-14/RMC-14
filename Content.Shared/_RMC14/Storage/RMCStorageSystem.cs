@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.CrashLand;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Hands;
@@ -115,7 +116,10 @@ public sealed class RMCStorageSystem : EntitySystem
 
         SubscribeLocalEvent<RMCStorageShakableComponent, GetVerbsEvent<AlternativeVerb>>(OnShakableStorageVerbs);
 
+        SubscribeLocalEvent<InventoryComponent, InteractHandEvent>(_inventory.RelayEvent); // See interact hand for modifying checked for slots
+
         SubscribeLocalEvent<RMCEquippedStorageOpenOnInteractComponent, InteractHandEvent>(OnEquippedStorageOpenInteractHand);
+        SubscribeLocalEvent<RMCEquippedStorageOpenOnInteractComponent, InventoryRelayedEvent<InteractHandEvent>>(OnEquippedStorageOpenInteractHandRelay);
 
         Subs.BuiEvents<StorageCloseOnMoveComponent>(StorageUiKey.Key, subs =>
         {
@@ -806,23 +810,29 @@ public sealed class RMCStorageSystem : EntitySystem
         if (!_interact.InRangeAndAccessible(args.User, ent.Owner))
             return;
 
-        if (!_inventory.TryGetContainerSlotEnumerator(ent.Owner, out var invQuery, ent.Comp.AccessSlots))
-            return;
-
         //TODO RMC14 prevent if not allied/wrong faction/etc
 
         EntityUid? foundStorage = null;
 
-        while (invQuery.NextItem(out var item))
-        {
-            if (!_storageQuery.HasComp(item))
-                continue;
-
-            foundStorage = item;
-            break;
-        }
+        if (ent.Comp.CountSelf && _storageQuery.HasComp(ent))
+            foundStorage = ent;
 
         if (foundStorage == null)
+        {
+            if (!_inventory.TryGetContainerSlotEnumerator(ent.Owner, out var invQuery, ent.Comp.AccessSlots))
+                return;
+
+            while (invQuery.NextItem(out var item))
+            {
+                if (!_storageQuery.HasComp(item))
+                    continue;
+
+                foundStorage = item;
+                break;
+            }
+        }
+
+        if (foundStorage == null || Transform(foundStorage.Value).ParentUid == args.User)
             return;
 
         args.Handled = true;
@@ -842,6 +852,11 @@ public sealed class RMCStorageSystem : EntitySystem
         }
 
         _ui.CloseUi(foundStorage.Value, StorageUiKey.Key, args.User);
+    }
+
+    private void OnEquippedStorageOpenInteractHandRelay(Entity<RMCEquippedStorageOpenOnInteractComponent> ent, ref InventoryRelayedEvent<InteractHandEvent> args)
+    {
+        OnEquippedStorageOpenInteractHand(ent, ref args.Args);
     }
 
     public override void Update(float frameTime)

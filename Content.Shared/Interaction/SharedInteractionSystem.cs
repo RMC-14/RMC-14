@@ -1389,7 +1389,7 @@ namespace Content.Shared.Interaction
         /// <inheritdoc cref="CanAccessViaStorage(Robust.Shared.GameObjects.EntityUid,Robust.Shared.GameObjects.EntityUid)"/>
         public bool CanAccessViaStorage(EntityUid user, EntityUid target, BaseContainer container)
         {
-            if (HasComp<RMCEquippedStorageOpenOnInteractComponent>(container.Owner)) // RMC14 - so accessing equipped stuff works, may be a better way to do this
+            if (HasComp<RMCEquippedStorageOpenOnInteractComponent>(container.Owner) || HasComp<RMCEquippedStorageOpenOnInteractComponent>(target)) // RMC14 - so accessing equipped stuff works, may be a better way to do this
                 return true;
 
             if (StorageComponent.ContainerId != container.ID)
