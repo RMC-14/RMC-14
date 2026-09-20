@@ -30,3 +30,12 @@ rmc-storage-hand-eject-unequips = Clicking {THE($storage)} now unequips it.
 rmc-storage-hand-eject-open = Clicking {THE($storage)} now opens it.
 
 rmc-hijack-cabinet-locked = This cabinet will unlock and open itself during evacuation procedures.
+
+rmc-storage-shake = Shake
+rmc-storage-shake-fail-self = You shake {THE($target)} but nothing falls out.
+rmc-storage-shake-fail-others = {CAPITALIZE(THE($user))} shakes {THE($target)} but nothing falls out.
+rmc-storage-shake-success-self = You shake {THE($target)} and {INDEFINITE($item)} {$item} falls out.
+rmc-storage-shake-success-others = {CAPITALIZE(THE($user))} shakes {THE($target)} and {INDEFINITE($item)} {$item} falls out.
+
+rmc-storage-equipped-otheraccessible-self-opening = You start opening the {$item} on {THE($target)}.
+rmc-storage-equipped-otheraccessible-other-opening = {CAPITALIZE(THE($user))} is trying to open your equipped {$item}.

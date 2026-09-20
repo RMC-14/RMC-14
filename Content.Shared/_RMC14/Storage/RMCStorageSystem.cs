@@ -1,16 +1,20 @@
 using Content.Shared._RMC14.CrashLand;
 using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.HyperSleep;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Prototypes;
 using Content.Shared._RMC14.Roles;
 using Content.Shared._RMC14.Storage.Containers;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Bed.Cryostorage;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.EntityTable;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.IdentityManagement;
+using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
@@ -23,11 +27,16 @@ using Content.Shared.Storage;
 using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Stunnable;
+using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using System.ComponentModel;
+using static Content.Shared.Fax.AdminFaxEuiMsg;
 using static Content.Shared.Storage.StorageComponent;
 
 namespace Content.Shared._RMC14.Storage;
@@ -53,6 +62,10 @@ public sealed class RMCStorageSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedInteractionSystem _interact = default!;
 
     private readonly List<EntityUid> _toRemove = new();
     private readonly List<EntityUid> _toClose = new();
@@ -99,6 +112,10 @@ public sealed class RMCStorageSystem : EntitySystem
         SubscribeLocalEvent<RMCLockerOpenOnHijackComponent, StorageOpenAttemptEvent>(OnLockerOpenAttempt);
         SubscribeLocalEvent<RMCLockerOpenOnHijackComponent, LockToggleAttemptEvent>(OnLockerLockToggleAttempt);
         SubscribeLocalEvent<MRERequireOpenBeforeStorageComponent, StorageInteractAttemptEvent>(OnMREInteractAttempt);
+
+        SubscribeLocalEvent<RMCStorageShakableComponent, GetVerbsEvent<AlternativeVerb>>(OnShakableStorageVerbs);
+
+        SubscribeLocalEvent<RMCEquippedStorageOpenOnInteractComponent, InteractHandEvent>(OnEquippedStorageOpenInteractHand);
 
         Subs.BuiEvents<StorageCloseOnMoveComponent>(StorageUiKey.Key, subs =>
         {
@@ -677,6 +694,149 @@ public sealed class RMCStorageSystem : EntitySystem
                 _entityStorage.Insert(ent, uid);
             }
         }
+    }
+
+    private void OnShakableStorageVerbs(Entity<RMCStorageShakableComponent> shakable, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!args.CanAccess || !args.CanInteract)
+            return;
+
+        // If in user's hand and can be shaken in hand, or in correct slots and on user.
+        if (!(shakable.Comp.ShakableInHand && _hands.IsHolding(args.User, shakable)) &&
+            !(_inventory.InSlotWithFlags((shakable, null, null), shakable.Comp.ShakableSlots) && Transform(shakable).ParentUid == args.User))
+            return;
+
+        if (!_blocker.CanDrop(args.User))
+            return;
+
+        var user = args.User;
+
+        AlternativeVerb shakeStorageVerb = new()
+        {
+            Text = Loc.GetString("rmc-storage-shake"),
+            Priority = -3,
+            Act = () => ShakeStorage(shakable, user)
+        };
+
+        args.Verbs.Add(shakeStorageVerb);
+    }
+
+    private void ShakeStorage(Entity<RMCStorageShakableComponent> shakable, EntityUid user)
+    {
+        if (!_storageQuery.TryComp(shakable, out var storage))
+            return;
+
+        _audio.PlayPredicted(storage.StorageOpenSound, shakable, user);
+
+        if (!_storage.CanInteract(user, (shakable, storage), silent: false))
+        {
+            var others = Filter.PvsExcept(user).Recipients;
+            foreach (var other in others)
+            {
+                if (other.AttachedEntity is not { } otherEnt)
+                    continue;
+
+                var userName = Identity.Name(user, EntityManager, otherEnt);
+                var targetName = Identity.Name(shakable, EntityManager, otherEnt);
+                var otherMessage = Loc.GetString("rmc-storage-shake-fail-others", ("user", userName), ("target", targetName));
+                _popup.PopupEntity(otherMessage, user, otherEnt, PopupType.SmallCaution);
+            }
+            return;
+        }
+
+        if (_net.IsClient)
+            return;
+
+        if (_random.Prob(shakable.Comp.ShakeFailChance) || storage.Container.ContainedEntities.Count == 0)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-storage-shake-fail-self", ("target", Identity.Name(shakable, EntityManager, user))), user, user, PopupType.SmallCaution);
+
+            var others2 = Filter.PvsExcept(user).Recipients;
+            foreach (var other in others2)
+            {
+                if (other.AttachedEntity is not { } otherEnt)
+                    continue;
+
+                var userName = Identity.Name(user, EntityManager, otherEnt);
+                var targetName = Identity.Name(shakable, EntityManager, otherEnt);
+                var otherMessage = Loc.GetString("rmc-storage-shake-fail-others", ("user", userName), ("target", targetName));
+                _popup.PopupEntity(otherMessage, user, otherEnt, PopupType.SmallCaution);
+            }
+            return;
+        }
+
+        EntityUid? item = null;
+
+        if (TryComp<RMCStorageEjectHandComponent>(shakable, out var eject) && eject.State == RMCStorageEjectState.Last)
+            item = TryGetLastItem((shakable, storage), out var droppedItem) ? droppedItem : null;
+        else
+            item = TryGetFirstItem((shakable, storage), out var droppedItem) ? droppedItem : null;
+
+        if (item == null)
+            return;
+
+        _container.RemoveEntity(shakable, item.Value);
+
+        _popup.PopupEntity(Loc.GetString("rmc-storage-shake-success-self", ("target", Identity.Name(shakable, EntityManager, user)), ("item", Identity.Name(item.Value, EntityManager, user))), user, user);
+
+        var others3 = Filter.PvsExcept(user).Recipients;
+        foreach (var other in others3)
+        {
+            if (other.AttachedEntity is not { } otherEnt)
+                continue;
+
+            var userName = Identity.Name(user, EntityManager, otherEnt);
+            var targetName = Identity.Name(shakable, EntityManager, otherEnt);
+            var itemName = Identity.Name(item.Value, EntityManager, otherEnt);
+            var otherMessage = Loc.GetString("rmc-storage-shake-success-others", ("user", userName), ("target", targetName), ("item", itemName));
+            _popup.PopupEntity(otherMessage, user, otherEnt, PopupType.Small);
+        }
+    }
+
+    private void OnEquippedStorageOpenInteractHand(Entity<RMCEquippedStorageOpenOnInteractComponent> ent, ref InteractHandEvent args)
+    {
+        if (args.Handled || ent.Owner == args.User)
+            return;
+
+        if (!_interact.InRangeAndAccessible(args.User, ent.Owner))
+            return;
+
+        if (!_inventory.TryGetContainerSlotEnumerator(ent.Owner, out var invQuery, ent.Comp.AccessSlots))
+            return;
+
+        //TODO RMC14 prevent if not allied/wrong faction/etc
+
+        EntityUid? foundStorage = null;
+
+        while (invQuery.NextItem(out var item))
+        {
+            if (!_storageQuery.HasComp(item))
+                continue;
+
+            foundStorage = item;
+            break;
+        }
+
+        if (foundStorage == null)
+            return;
+
+        args.Handled = true;
+
+        if (!_ui.IsUiOpen(foundStorage.Value, StorageUiKey.Key, args.User))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-storage-equipped-otheraccessible-self-opening",
+                ("target", Identity.Name(ent, EntityManager, args.User)),
+                ("item", Identity.Name(foundStorage.Value, EntityManager, args.User))), ent, ent, PopupType.Small);
+
+            _popup.PopupEntity(Loc.GetString("rmc-storage-equipped-otheraccessible-other-opening",
+                ("user", Identity.Name(args.User, EntityManager, ent)),
+                ("item", Identity.Name(foundStorage.Value, EntityManager, ent))), ent, ent, PopupType.LargeCaution);
+
+            _storage.OpenStorageUI(foundStorage.Value, args.User, silent: false);
+            return;
+        }
+
+        _ui.CloseUi(foundStorage.Value, StorageUiKey.Key, args.User);
     }
 
     public override void Update(float frameTime)
