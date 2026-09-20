@@ -814,7 +814,9 @@ public sealed class RMCStorageSystem : EntitySystem
 
         EntityUid? foundStorage = null;
 
-        if (ent.Comp.CountSelf && _storageQuery.HasComp(ent))
+        if (ent.Comp.CountSelf && _storageQuery.HasComp(ent) &&
+            _inventory.TryGetContainingSlot(ent.Owner, out var slot) &&
+            (slot.SlotFlags & ent.Comp.AccessSlots) != 0)
             foundStorage = ent;
 
         if (foundStorage == null)
