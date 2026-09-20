@@ -110,12 +110,11 @@
         Asphyxiation: -0.33
   - type: Language
     spokenLanguages:
-      - Canine
+      - English
     understoodLanguages:
       - English
-      - Canine
-    currentLanguage: Canine
-    defaultLanguage: Canine
+    currentLanguage: English
+    defaultLanguage: English
   - type: MobStateActions
     actions:
       Critical:

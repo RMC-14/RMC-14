@@ -57,10 +57,10 @@
       uiWindowPos: 2,2
       strippingWindowPos: 2,0
       displayName: Left Ear
-      blacklist:
+      blacklist: # RMC14
         tags:
         - PetOnly
-# RMC14 v
+# RMC14 second ear slot
     - name: ears2
       slotTexture: ears
       slotFlags: EARS
@@ -71,7 +71,6 @@
       blacklist:
         tags:
         - PetOnly
-# RMC14 ^
     - name: head
       slotTexture: head
       slotFlags: HEAD
@@ -117,7 +116,7 @@
       stripTime: 6
       uiWindowPos: 2,1
       strippingWindowPos: 2,4
-#      dependsOn: jumpsuit
+#      dependsOn: jumpsuit RMC14
       displayName: ID
       blacklist: # RMC14
         tags:

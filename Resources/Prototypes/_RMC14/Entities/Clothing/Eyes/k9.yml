@@ -3,7 +3,7 @@
   id: RMCGlassesMedicalHUDGlassesk9
   name: K9 Rescue Unit HealthMate HUD
   description: A heads-up display that scans the humanoids in view and provides accurate data about their health status, now fitted for a military dog or k9 rescue unit!
-  suffix: PVE
+  suffix: PVE, K9
   components:
     - type: ItemToggleRequiresSkill
       skills: {}
