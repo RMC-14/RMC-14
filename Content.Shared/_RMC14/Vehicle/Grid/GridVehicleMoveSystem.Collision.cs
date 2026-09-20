@@ -90,183 +90,186 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         _intersecting.Clear();
         _lookup.GetEntitiesIntersecting(world.MapId, aabb, _intersecting, LookupFlags.Dynamic | LookupFlags.Static);
         var hits = _hitsBuffers[_hitsDepth++];
-        hits.Clear();
-        hits.AddRange(_intersecting);
-        var playedCollisionSound = false;
-        var mobHits = new ValueList<EntityUid>(0);
-
-        void AddProbe(bool probeBlocked)
+        try
         {
-            if (!debugEnabled)
-                return;
+            hits.Clear();
+            hits.AddRange(_intersecting);
+            var playedCollisionSound = false;
+            var mobHits = new ValueList<EntityUid>(0);
 
-            AddDebugCollisionProbe(uid, mover, fixtures, tx, aabb, movementAabb, world.MapId, probeBlocked, applyEffects);
-        }
-
-        foreach (var other in hits)
-        {
-            if (other == uid)
-                continue;
-
-            if (TryComp(other, out VehicleRideSurfaceRiderComponent? rider) && rider!.Vehicle == uid)
-                continue;
-
-            if (ignoredEntities != null && ignoredEntities.Contains(other))
-                continue;
-
-            if (!TryBuildCollisionCandidate(
-                    uid,
-                    fixtures,
-                    body,
-                    other,
-                    aabb,
-                    movementAabb,
-                    operatorUid,
-                    out var candidate))
+            void AddProbe(bool probeBlocked)
             {
-                continue;
+                if (!debugEnabled)
+                    return;
+
+                AddDebugCollisionProbe(uid, mover, fixtures, tx, aabb, movementAabb, world.MapId, probeBlocked, applyEffects);
             }
 
-            if (candidate.CollisionClass == VehicleCollisionClass.SoftMob && candidate.IsXeno)
+            foreach (var other in hits)
             {
-                if (candidate.MobState != null && _mobState.IsDead(candidate.Entity, candidate.MobState))
+                if (other == uid)
                     continue;
 
-                var result = HandleSoftXenoCollision(
-                    uid,
-                    mover,
-                    grid,
-                    world.Position,
-                    world.MapId,
-                    candidate.Entity,
-                    aabb,
-                    candidate.Aabb,
-                    candidate.CollisionAabb,
-                    clearance,
-                    applyEffects,
-                    debugEnabled,
-                    blockers,
-                    wheelDamage,
-                    ref playedCollisionSound);
-
-                if (result == CollisionHandlingResult.Blocked)
-                {
-                    _hitsDepth--;
-                    AddProbe(true);
-                    return false;
-                }
-
-                continue;
-            }
-
-            if (candidate.CollisionClass == VehicleCollisionClass.SoftMob &&
-                candidate.MobState != null &&
-                _standing.IsDown(candidate.Entity))
-            {
-                continue;
-            }
-
-            if (applyEffects && candidate.Door is { } door && !_net.IsClient &&
-                (candidate.CollisionClass == VehicleCollisionClass.Breakable || candidate.CollisionClass == VehicleCollisionClass.Ignore))
-            {
-                if (!candidate.IsUnpoweredDoor)
-                {
-                    _door.TryOpen(candidate.Entity, door, operatorUid);
-                    if (candidate.IsBarricade)
-                        _door.OnPartialOpen(candidate.Entity, door);
-                }
-            }
-
-            if (candidate.CollisionClass == VehicleCollisionClass.Ignore)
-                continue;
-
-            if (candidate.CollisionClass == VehicleCollisionClass.Breakable)
-            {
-                var result = HandleBreakableCollision(
-                    uid,
-                    mover,
-                    candidate.Entity,
-                    candidate.CollisionAabb,
-                    candidate.Aabb,
-                    clearance,
-                    world.MapId,
-                    candidate.Door != null,
-                    candidate.IsUnpoweredDoor,
-                    applyEffects,
-                    debugEnabled,
-                    blockers,
-                    wheelDamage,
-                    ref playedCollisionSound);
-
-                if (result == CollisionHandlingResult.Blocked)
-                {
-                    _hitsDepth--;
-                    AddProbe(true);
-                    return false;
-                }
-
-                continue;
-            }
-
-            if (candidate.CollisionClass == VehicleCollisionClass.Hard)
-            {
-                var result = HandleHardCollision(
-                    uid,
-                    mover,
-                    grid,
-                    gridPos,
-                    candidate.Entity,
-                    candidate.CollisionAabb,
-                    candidate.Aabb,
-                    clearance,
-                    world.MapId,
-                    candidate.IsVehicle,
-                    applyEffects,
-                    debugEnabled,
-                    blockers,
-                    wheelDamage,
-                    ref playedCollisionSound);
-
-                if (result == CollisionHandlingResult.Blocked)
-                {
-                    _hitsDepth--;
-                    AddProbe(true);
-                    return false;
-                }
-
-                continue;
-            }
-
-            if (applyEffects &&
-                _net.IsClient &&
-                !candidate.IsXeno &&
-                candidate.MobState != null &&
-                ShouldPredictVehicleInteractions(uid))
-            {
-                PredictRunover(uid, candidate.Entity, candidate.MobState);
-            }
-
-            if (applyEffects && !_net.IsClient && candidate.MobState != null)
-            {
-                if (!mobHits.Contains(candidate.Entity))
-                    mobHits.Add(candidate.Entity);
-            }
-        }
-
-        if (!_net.IsClient && mobHits.Count > 0)
-        {
-            foreach (var mobUid in mobHits)
-            {
-                if (!TryComp(mobUid, out MobStateComponent? mob))
+                if (TryComp(other, out VehicleRideSurfaceRiderComponent? rider) && rider!.Vehicle == uid)
                     continue;
 
-                HandleMobCollision(uid, mobUid, mob, ref playedCollisionSound);
-            }
-        }
+                if (ignoredEntities != null && ignoredEntities.Contains(other))
+                    continue;
 
-        _hitsDepth--;
-        AddProbe(false);
-        return true;
+                if (!TryBuildCollisionCandidate(
+                        uid,
+                        fixtures,
+                        body,
+                        other,
+                        aabb,
+                        movementAabb,
+                        operatorUid,
+                        out var candidate))
+                {
+                    continue;
+                }
+
+                if (candidate.CollisionClass == VehicleCollisionClass.SoftMob && candidate.IsXeno)
+                {
+                    if (candidate.MobState != null && _mobState.IsDead(candidate.Entity, candidate.MobState))
+                        continue;
+
+                    var result = HandleSoftXenoCollision(
+                        uid,
+                        mover,
+                        grid,
+                        world.Position,
+                        world.MapId,
+                        candidate.Entity,
+                        aabb,
+                        candidate.Aabb,
+                        candidate.CollisionAabb,
+                        clearance,
+                        applyEffects,
+                        debugEnabled,
+                        blockers,
+                        wheelDamage,
+                        ref playedCollisionSound);
+
+                    if (result == CollisionHandlingResult.Blocked)
+                    {
+                        AddProbe(true);
+                        return false;
+                    }
+
+                    continue;
+                }
+
+                if (candidate.CollisionClass == VehicleCollisionClass.SoftMob &&
+                    candidate.MobState != null &&
+                    _standing.IsDown(candidate.Entity))
+                {
+                    continue;
+                }
+
+                if (applyEffects && candidate.Door is { } door && !_net.IsClient &&
+                    (candidate.CollisionClass == VehicleCollisionClass.Breakable || candidate.CollisionClass == VehicleCollisionClass.Ignore))
+                {
+                    if (!candidate.IsUnpoweredDoor)
+                    {
+                        _door.TryOpen(candidate.Entity, door, operatorUid);
+                        if (candidate.IsBarricade)
+                            _door.OnPartialOpen(candidate.Entity, door);
+                    }
+                }
+
+                if (candidate.CollisionClass == VehicleCollisionClass.Ignore)
+                    continue;
+
+                if (candidate.CollisionClass == VehicleCollisionClass.Breakable)
+                {
+                    var result = HandleBreakableCollision(
+                        uid,
+                        mover,
+                        candidate.Entity,
+                        candidate.CollisionAabb,
+                        candidate.Aabb,
+                        clearance,
+                        world.MapId,
+                        candidate.Door != null,
+                        candidate.IsUnpoweredDoor,
+                        applyEffects,
+                        debugEnabled,
+                        blockers,
+                        wheelDamage,
+                        ref playedCollisionSound);
+
+                    if (result == CollisionHandlingResult.Blocked)
+                    {
+                        AddProbe(true);
+                        return false;
+                    }
+
+                    continue;
+                }
+
+                if (candidate.CollisionClass == VehicleCollisionClass.Hard)
+                {
+                    var result = HandleHardCollision(
+                        uid,
+                        mover,
+                        grid,
+                        gridPos,
+                        candidate.Entity,
+                        candidate.CollisionAabb,
+                        candidate.Aabb,
+                        clearance,
+                        world.MapId,
+                        candidate.IsVehicle,
+                        applyEffects,
+                        debugEnabled,
+                        blockers,
+                        wheelDamage,
+                        ref playedCollisionSound);
+
+                    if (result == CollisionHandlingResult.Blocked)
+                    {
+                        AddProbe(true);
+                        return false;
+                    }
+
+                    continue;
+                }
+
+                if (applyEffects &&
+                    _net.IsClient &&
+                    !candidate.IsXeno &&
+                    candidate.MobState != null &&
+                    ShouldPredictVehicleInteractions(uid))
+                {
+                    PredictRunover(uid, candidate.Entity, candidate.MobState);
+                }
+
+                if (applyEffects && !_net.IsClient && candidate.MobState != null)
+                {
+                    if (!mobHits.Contains(candidate.Entity))
+                        mobHits.Add(candidate.Entity);
+                }
+            }
+
+            if (!_net.IsClient && mobHits.Count > 0)
+            {
+                foreach (var mobUid in mobHits)
+                {
+                    if (!TryComp(mobUid, out MobStateComponent? mob))
+                        continue;
+
+                    HandleMobCollision(uid, mobUid, mob, ref playedCollisionSound);
+                }
+            }
+
+            AddProbe(false);
+            return true;
+        }
+        finally
+        {
+            _hitsDepth--;
+        }
     }
 
     private bool TryBuildCollisionCandidate(
