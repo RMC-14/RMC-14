@@ -16,6 +16,11 @@
   prefix: Sgt.
 
 - type: rank
+  id: RMCRankTSEPAInspectorAssistant
+  name: Assistant Inspector
+  prefix: Ass. Insp.
+
+- type: rank
   id: RMCRankTSEPAInspector
   name: Inspector
   prefix: Insp.
@@ -39,4 +44,3 @@
   id: RMCRankTSEPACommissioner
   name: Commissioner
   prefix: Com.
-

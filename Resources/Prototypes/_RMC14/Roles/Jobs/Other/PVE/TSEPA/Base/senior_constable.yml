@@ -1,0 +1,88 @@
+- type: job
+  parent: CMJobBase
+  id: RMCTSEPASeniorConstablePVE
+  name: rmc-job-name-tsepa-pve-senior-constable
+  description: rmc-job-description-tsepa-pve-senior-constable
+  playTimeTracker: RMCJobTSEPASeniorConstablePVE
+  ranks:
+    RMCRankTSEPASeniorConstable: []
+  startingGear: RMCGearTSEPASeniorConstablePVE
+  icon: "RMCJobIconTSEPASeniorConstablePVE"
+  joinNotifyCrew: false
+  supervisors: rmc-job-supervisors-tsepa-sergeant
+  accessGroups:
+  - ColonistTSEPA # TODO give actual access
+  spawnMenuRoleName: TSEPA Senior Constable (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Language
+      spokenLanguages:
+      - English
+      - Japanese
+      understoodLanguages:
+      - English
+      - Japanese
+    - type: Skills
+      skills:
+        RMCSkillCqc: 2
+        RMCSkillEndurance: 3
+        RMCSkillEngineer: 1
+        RMCSkillFirearms: 2
+        RMCSkillFireman: 3
+        RMCSkillMedical: 1
+        RMCSkillPolice: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillSurgery: 1
+    - type: NpcFactionMember
+      factions:
+      - TSE
+    - type: JobPrefix
+      prefix: rmc-job-prefix-tsepa-pve-senior-constable
+    - type: AssignSquad
+      squad: SquadTSEPA
+    - type: RMCTrackable
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: tsepa_seniorconstable
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_nspa
+  hidden: true
+
+- type: startingGear
+  id: RMCGearTSEPASeniorConstablePVE
+  equipment:
+    head: RMCHeadCapTSEPAPeaked
+    ears: RMCHeadsetTSEPASeniorConstable
+    eyes: RMCGlassesSecurityBlue
+    jumpsuit: RMCJumpsuitTSEPA
+    belt: RMCBeltHolsterPistolTSEFilledL54 # TODO replace with filled equipment belt
+    shoes: CMBootsBlack
+    id: RMCIDCardTSEPASilverGold
+    back: RMCSatchelTSEPA
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointTSEPASeniorConstablePVE
+  name: tsepa senior constable spawn point
+  suffix: PVE
+  components:
+  - type: SpawnPoint
+    job_id: RMCTSEPASeniorConstablePVE
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/jacket.rsi
+      state: icon
+
+- type: playTimeTracker
+  id: RMCJobTSEPASeniorConstablePVE
+  isHumanoid: true
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconTSEPASeniorConstablePVE
+  icon:
+    sprite: _RMC14/Interface/job_icons/TSE/TSEPA/base.rsi
+    state: tsepa_seniorconstable

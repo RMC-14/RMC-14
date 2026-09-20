@@ -3,7 +3,7 @@
   parent: CMJobBase
   id: RMCTSEPASeniorConstable
   name: rmc-job-name-tsepa-senior-constable
-  description: rmc-job-description-tsepa-senior-constable
+  description: rmc-job-description-tsepa
   playTimeTracker: RMCJobTSEPASeniorConstable
   ranks:
     RMCRankTSEPASeniorConstable: []
@@ -60,5 +60,5 @@
   parent: CMJobIconBase
   id: RMCJobIconTSEPASeniorConstable
   icon:
-    sprite: _RMC14/Interface/job_icons/TSE/TSEPA.rsi
-    state: tse_paseniorconstable
+    sprite: _RMC14/Interface/job_icons/TSE/TSEPA/base.rsi
+    state: tsepa_seniorconstable

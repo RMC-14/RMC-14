@@ -1,0 +1,89 @@
+- type: job
+  parent: CMJobBase
+  id: RMCTSEPASATOperatorPVE
+  name: rmc-job-name-tsepa-pve-operator
+  description: rmc-job-description-tsepa-pve-operator
+  playTimeTracker: RMCJobSATOperatorPVE
+  ranks:
+    RMCRankTSEPAConstable: []
+  startingGear: RMCGearSATOperatorPVE
+  icon: "RMCJobIconSATOperatorPVE"
+  joinNotifyCrew: false
+  supervisors: rmc-job-supervisors-sat-tl
+  accessGroups:
+  - ColonistTSEPA # TODO give actual access
+  spawnMenuRoleName: TSEPA SAT Operator (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Language
+      spokenLanguages:
+      - English
+      - Japanese
+      understoodLanguages:
+      - English
+      - Japanese
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillCqc: 3
+        RMCSkillEndurance: 3
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 2
+        RMCSkillFireman: 3
+        RMCSkillJtac: 2
+        RMCSkillMedical: 1
+        RMCSkillPolice: 1
+        RMCSkillMeleeWeapons: 2
+        RMCSkillSpecialistWeapons: 1
+        RMCSkillSurgery: 1
+    - type: NpcFactionMember
+      factions:
+      - TSE
+    - type: JobPrefix
+      prefix: rmc-job-prefix-tsepa-pve-operator
+    - type: AssignSquad
+      squad: SquadTSEPA
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: rmc_rifleman_pve
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_nspa
+  hidden: true
+
+- type: startingGear
+  id: RMCGearSATOperatorPVE
+  equipment:
+    ears: RMCHeadsetTSEPAConstable
+    eyes: RMCGlassesSecurityBlue
+    jumpsuit: RMCJumpsuitTSEPASAT
+    belt: RMCBeltHolsterPistolTSEFilledL54 # TODO replace with filled equipment belt
+    shoes: CMBootsBlack
+    id: RMCIDTSEPASAT
+    back: RMCSatchelTSEPA
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSATOperatorPVE
+  name: sat operator spawn point
+  suffix: PVE
+  components:
+  - type: SpawnPoint
+    job_id: RMCTSEPASATOperatorPVE
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/jacket.rsi
+      state: icon
+
+- type: playTimeTracker
+  id: RMCJobSATOperatorPVE
+  isHumanoid: true
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSATOperatorPVE
+  icon:
+    sprite: _RMC14/Interface/job_icons/TSE/TSEPA/sat.rsi
+    state: sat_operator

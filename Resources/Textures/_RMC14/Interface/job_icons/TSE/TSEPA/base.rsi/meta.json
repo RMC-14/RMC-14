@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Constable, chief inspector, sergeant, and synth icons made by noctyrnal (Github). All others derivative of and taken from https://github.com/cmss13-devs/cmss13/blob/71660f23ed6fdbd87e09ba595212f1693ed8e5cd/icons/mob/hud/factions/twe.dmi, modified by Ozehk.",
+  "size": {
+    "x": 16,
+    "y": 16
+  },
+    "states": [
+        {
+            "name": "tsepa_assistantinspector"
+        },
+        {
+            "name": "tsepa_chiefinspector"
+        },
+        {
+            "name": "tsepa_commander"
+        },
+        {
+            "name": "tsepa_commissioner"
+        },
+        {
+            "name": "tsepa_constable"
+        },
+        {
+            "name": "tsepa_depcommissioner"
+        },
+        {
+            "name": "tsepa_inspector"
+        },
+        {
+            "name": "tsepa_seniorconstable"
+        },
+        {
+            "name": "tsepa_sergeant"
+        },
+        {
+            "name": "tsepa_synth"
+        }
+    ]
+}
