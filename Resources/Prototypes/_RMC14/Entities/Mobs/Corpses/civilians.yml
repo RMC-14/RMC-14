@@ -418,6 +418,14 @@
     - RMCGearCorpseUnitedNationsRiotOfficerAltFive
   - type: Rank
     rank: RMCRankCMBDeputy
+  - type: Marine
+    icon:
+      sprite: _RMC14/Interface/job_icons/CMB.rsi
+      state: cmb_rco
+  - type: NpcFactionMember
+    factions:
+    - Bureau
+    - Civilian
 
 - type: randomHumanoidSettings
   parent: RMCCorpseUnitedNationsRiotOfficer
