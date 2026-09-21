@@ -89,7 +89,6 @@
   components:
   - type: OverwatchConsole
     canOrbitalBombardment: false
-    canSupplyDrop: false
     group: MP
   - type: AccessReader
     access: [ [ "CMAccessBrig" ] ]
