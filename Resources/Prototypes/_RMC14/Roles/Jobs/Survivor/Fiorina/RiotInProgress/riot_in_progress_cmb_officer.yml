@@ -15,7 +15,7 @@
     RMCRankCMBSeniorDeputy:
       - !type:RoleTimeRequirement
         role: CMJobSurvivorSecurity
-        time: 90000 # 25 hours
+        time: 252000 # 70 hours
     RMCRankCMBDeputy: []
   icon: "RMCJobIconBureauRCO"
   spawnMenuRoleName: CMB Riot Control Officer (Fiorina Special Survivor)
@@ -60,6 +60,7 @@
     id: RMCIDCardCMBDeputySurvivor
     back: CMSatchelSecuritySurvivorFill
     outerClothing: RMCArmorPMCRiotCMB
+    belt: CMBeltSecurityMPFilled
     ears: RMCHeadsetDistressBureauDamaged
     eyes: RMCGlassesSecurityBlue
     gloves: RMCHandsVeteran

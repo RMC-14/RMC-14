@@ -428,9 +428,9 @@
 - type: startingGear
   id: RMCGearCorpseUnitedNationsRiotOfficer
   equipment:
-    head: ArmorHelmetPMCRiotShield
-    jumpsuit: RMCJumpsuitRiotControl
-    outerClothing: RMCArmorPMCRiot
+    head: RMCArmorHelmetM10CMBVisorSWAT
+    jumpsuit: RMCSwatCMBUniform
+    outerClothing: RMCArmorPMCRiotCMB
     belt: CMStunbaton
     gloves: CMHandsBlackMarine
     ears: CMHeadsetColony
