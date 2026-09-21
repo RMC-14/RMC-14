@@ -195,12 +195,6 @@
       - id: RMCPouchSling
       - id: RMCPouchToolsFill
         name: tools pouch (Full)
-
-    - name: Accessories
-      choices: { CMAccessories: 1 }
-      entries:
-      - id: CMWebbingBrown
-        recommended: true
       - id: RMCPouchConstruction
       - id: RMCPouchElectronicsFill
         name: electronics pouch (Full)
