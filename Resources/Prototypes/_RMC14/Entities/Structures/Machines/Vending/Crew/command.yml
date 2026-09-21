@@ -902,6 +902,7 @@
       - id: CMJumpsuitWO
       - id: CMHeadsetCMP
       - id: CMBootsBlackFilled
+      - id: RMCM5CameraGear
     - name: Helmet
       jobs:
       - CMChiefMP

@@ -64,6 +64,14 @@
     - type: RMCTrackable
     - type: RMCAwardRecommendation
     - type: SeeNewPlayers
+    - type: AssignSquad
+      squad: SquadMP
+    - type: SquadNameOverride
+      name: cm-job-name-chief-mp
+    - type: SquadLeader
+      icon:
+        sprite: _RMC14/Interface/job_icons/UNMC/military_police.rsi
+        state: hudsquad_cmp
 
 - type: startingGear
   id: CMGearChiefMP
