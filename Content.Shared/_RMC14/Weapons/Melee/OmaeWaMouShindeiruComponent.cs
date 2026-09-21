@@ -25,5 +25,5 @@ public sealed partial class OmaeWaMouShindeiruComponent : Component
     /// <summary>
     /// Targets currently waiting for the delayed attack to trigger
     /// </summary>
-    public HashSet<EntityUid> PendingTargets = [];
+    public readonly HashSet<EntityUid> PendingTargets = [];
 }
