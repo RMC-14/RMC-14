@@ -19,7 +19,7 @@
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/pdw90_shot.ogg
       params:
-        variation: 0.05
+        variation: 0.02
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
