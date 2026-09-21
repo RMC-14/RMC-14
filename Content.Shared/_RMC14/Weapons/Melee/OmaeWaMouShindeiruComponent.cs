@@ -6,6 +6,9 @@ namespace Content.Shared._RMC14.Weapons.Melee;
 [Access(typeof(OmaeWaMouShindeiruSystem))]
 public sealed partial class OmaeWaMouShindeiruComponent : Component
 {
+    [DataField, AutoNetworkedField]
+    public bool DamageOnHit;
+
     /// <summary>
     /// How long to wait before the cuts happen.
     /// </summary>
@@ -16,11 +19,8 @@ public sealed partial class OmaeWaMouShindeiruComponent : Component
     /// How many cuts are applied when the delay finishes
     /// </summary>
     /// <remarks>I AM THE STORM THAT IS APPROACHING</remarks>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public int NumberOfCuts = 8;
-
-    [DataField]
-    public bool DamageOnHit;
 
     /// <summary>
     /// Targets currently waiting for the delayed attack to trigger

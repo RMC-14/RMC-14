@@ -1,6 +1,8 @@
 using Content.Shared.Damage;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
@@ -11,8 +13,10 @@ namespace Content.Shared._RMC14.Weapons.Melee;
 public sealed class OmaeWaMouShindeiruSystem : EntitySystem
 {
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
 
     public override void Initialize()
     {
@@ -29,22 +33,31 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        // Get the weapon's damage at the moment of impact
         var damage = _melee.GetDamage(ent.Owner, args.User);
         foreach (var target in args.HitEntities)
         {
-            // Don't allow multiple delayed executions against the same target while one is already pending
+            // TODO Make both katana wielders attack each other?
+            if (_hands.IsHolding(args.User, ent.Owner) || _hands.IsHolding(target, ent.Owner) && args.User != target)
+            {
+                _stun.TryStun(args.User, ent.Comp.KillDelay, true);
+                _stun.TryStun(target, ent.Comp.KillDelay, true);
+            }
+            else
+            {
+                _stun.TryStun(target, ent.Comp.KillDelay, true);
+            }
+
             if (!ent.Comp.PendingTargets.Add(target))
                 continue;
 
-            ScheduleDelayedAttack(ent, args.User, target, damage);
+            OmaeWaMouShindeiru(ent, args.User, target, damage);
         }
 
         if (!ent.Comp.DamageOnHit)
             args.Handled = true;
     }
 
-    private void ScheduleDelayedAttack(Entity<OmaeWaMouShindeiruComponent> ent, EntityUid user, EntityUid target, DamageSpecifier damage)
+    private void OmaeWaMouShindeiru(Entity<OmaeWaMouShindeiruComponent> ent, EntityUid user, EntityUid target, DamageSpecifier damage)
     {
         Timer.Spawn(ent.Comp.KillDelay,
             () =>
@@ -63,15 +76,12 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
                 return;
             }
 
-            ExecuteCuts(ent, user, target, damage);
+            // TODO RMC14 hit outer limbs to decap/delimb
+            // var/def_zone = pick("head","l_leg","l_foot","r_leg","r_foot","l_arm","l_hand","r_arm","r_hand")
+            for (var i = 0; i < ent.Comp.NumberOfCuts; i++)
+            {
+                _damageable.TryChangeDamage(target, damage, true, origin: user, tool: ent.Owner);
+            }
         });
-    }
-
-    private void ExecuteCuts(Entity<OmaeWaMouShindeiruComponent> ent, EntityUid user, EntityUid target, DamageSpecifier damage)
-    {
-        for (var i = 0; i < ent.Comp.NumberOfCuts; i++)
-        {
-            _damageable.TryChangeDamage(target, damage, origin: user, tool: ent.Owner);
-        }
     }
 }
