@@ -1,8 +1,6 @@
 - type: entity
   parent: ChessBoard
   id: RMCChessBoard
-  name: chessboard
-  description: A chessboard. Pieces included!
   suffix: RMC
   components:
   - type: InteractedBlacklist
@@ -13,8 +11,6 @@
 - type: entity
   parent: CheckerBoard
   id: RMCCheckerBoard
-  name: checkerboard
-  description: A checkerboard. Pieces included!
   suffix: RMC
   components:
   - type: InteractedBlacklist
