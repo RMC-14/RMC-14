@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Damage;
 using Content.Shared.Alert;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -25,27 +26,20 @@ public sealed partial class PainSystem : EntitySystem
     [Dependency] private readonly AlertsSystem _alerts = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
 
-    private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
-    private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
-    private static readonly ProtoId<DamageGroupPrototype> ToxinGroup = "Toxin";
-    private static readonly ProtoId<DamageGroupPrototype> AirlossGroup = "Airloss";
-
     public override void Initialize()
     {
         SubscribeLocalEvent<PainComponent, ComponentInit>(OnInit);
+        SubscribeLocalEvent<PainComponent, AfterAutoHandleStateEvent>(OnPainState);
         SubscribeLocalEvent<PainComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<PainComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<PainComponent, BeforeAlertSeverityCheckEvent>(OnAlertSeverityCheck);
         SubscribeLocalEvent<PainComponent, RejuvenateEvent>(OnRejuvenate);
     }
 
-    public void AddPainModifier(Entity<PainComponent?> ent, TimeSpan duration, FixedPoint2 effectStrength, PainModifierType type)
-    {
-        var expireAt = _timing.CurTime + duration;
-        var mod = new PainModifier(expireAt, effectStrength, type);
-        AddPainModifier(ent, mod);
-    }
-
+    /// <summary>
+    /// Add a new <see cref="PainModifier"/> to <paramref name="ent"/>'s <see cref="PainComponent.PainModifiers"/>,
+    /// to be removed when its <see cref="PainModifier.ExpireAt"/> time is reached.
+    /// </summary>
     public void AddPainModifier(Entity<PainComponent?> ent, PainModifier mod)
     {
         if (!Resolve(ent, ref ent.Comp, false))
@@ -55,18 +49,101 @@ public sealed partial class PainSystem : EntitySystem
         DirtyField(ent, ent.Comp, nameof(PainComponent.PainModifiers));
     }
 
+    /// <inheritdoc cref="AddPainModifier(Entity{PainComponent?}, PainModifier)"/>
+    public void AddPainModifier(Entity<PainComponent?> ent, TimeSpan duration, FixedPoint2 effectStrength, PainModifierType type)
+    {
+        var expireAt = _timing.CurTime + duration;
+        var mod = new PainModifier(expireAt, effectStrength, type);
+        AddPainModifier(ent, mod);
+    }
+
+    /// <summary>
+    /// Remove all currently active <see cref="PainModifier"/>s in <paramref name="ent"/>'s <see cref="PainComponent.PainModifiers"/>,
+    /// regardless of whether they've reached their <see cref="PainModifier.ExpireAt"/> time or not.
+    /// </summary>
+    /// <remarks>
+    /// Modifiers from painkillers or other <see cref="EntityEffect"/>s will automatically re-apply themselves the next tick.
+    /// In order to prevent that, the source reagent/effect needs to be removed as well.
+    /// </remarks>
+    public void ClearPainModifiers(Entity<PainComponent?> ent)
+    {
+        if (!Resolve(ent, ref ent.Comp))
+            return;
+
+        ent.Comp.PainModifiers.Clear();
+        DirtyField(ent, ent.Comp, nameof(PainComponent.PainModifiers));
+    }
+
+    /// <summary>
+    /// Find and return the highest <see cref="PainLevel"/> in <paramref name="painComp"/>'s <see cref="PainComponent.PainLevels"/> list
+    /// where <c>PainLevel.Threshold &lt;= {painValue}</c>.<br/>
+    /// <c>{painValue}</c> is either <paramref name="painValueOverride"/> if provided, or <paramref name="painComp"/>'s <see cref="PainComponent.PerceivedPain"/> if not.
+    /// </summary>
+    /// <param name="painComp">The <see cref="PainComponent"/> whose <see cref="PainComponent.PainLevels"/> list is being checked.</param>
+    /// <param name="painValueOverride">(Optional) Pain value to compare against each <see cref="PainLevel.Threshold"/> instead of using <see cref="PainComponent.PerceivedPain"/>.</param>
+    /// <returns>
+    /// Tuple of the matching <see cref="PainLevel"/> object and its index in <see cref="PainComponent.PainLevels"/>.
+    /// </returns>
+    public (PainLevel Level, int Index) GetHighestPainLevelReached(PainComponent painComp, FixedPoint2? painValueOverride = null)
+    {
+        if (painValueOverride < FixedPoint2.Zero)
+            throw new ArgumentOutOfRangeException(nameof(painValueOverride), painValueOverride, "Pain values shouldn't ever go below zero!");
+
+        var painValue = painValueOverride ?? painComp.PerceivedPain;
+        for (var i = painComp.PainLevels.Count - 1; i >= 0; i--)
+        {
+            var painLevel = painComp.PainLevels[i];
+            if (painLevel.Threshold <= painValue)
+                return (painLevel, i);
+        }
+
+        // should have been caught by the assertion in `OnInit()` below, but just it wasn't (and to appease the compiler)
+        throw new InvalidOperationException($"The first pain level in {nameof(PainComponent)}.{nameof(PainComponent.PainLevels)} must have a `Threshold` value of 0.");
+    }
+
     private void OnInit(Entity<PainComponent> ent, ref ComponentInit args)
     {
+        DebugTools.AssertEqual(ent.Comp.PainLevels.First().Threshold, 0,
+            $"Assert failed for {ToPrettyString(ent)}: The first pain level in {nameof(PainComponent)}.{nameof(PainComponent.PainLevels)} must have a `Threshold` value of 0.");
         DebugTools.Assert(ent.Comp.PainLevels.SequenceEqual(ent.Comp.PainLevels.OrderBy(level => level.Threshold)),
-            $"{nameof(PainComponent)}.{nameof(PainComponent.PainLevels)} entries must be written in order of their thresholds. (Low -> High)");
+            $"Assert failed for {ToPrettyString(ent)}: {nameof(PainComponent)}.{nameof(PainComponent.PainLevels)} entries must be written in order of their `Threshold`s. (Low -> High)");
+    }
+
+    /// <summary>
+    /// Used to force an update of the client-side damage overlay if the server overrides the client's component state with different values,<br/>
+    /// specifically the <see cref="PainComponent.PerceivedPain"/> and <see cref="PainComponent.CurrentPainLevelIdx"/> datafields.
+    /// </summary>
+    /// <remarks>
+    /// The overlay is <i>usually</i> updated either by its own event subscriptions (e.g. <see cref="MobThresholdChecked"/>), or by the setter methods seen below.<br/>
+    /// If the server overrides the client's component state though, the client never gets a chance to use the setters.<br/>
+    /// This is here to catch that case and raise <see cref="DamageOverlayUpdateEvent"/> manually.
+    /// </remarks>
+    /// <seealso cref="PainComponent.PreviousPerceivedPain"/>
+    /// <seealso cref="PainComponent.PreviousPainLevelIdx"/>
+    /// <seealso cref="SetPerceivedPain(Entity{PainComponent}, FixedPoint2)"/>
+    /// <seealso cref="SetCurrentPainLevelIdx(Entity{PainComponent}, int)"/>
+    private void OnPainState(Entity<PainComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        if (ent.Comp.PreviousPerceivedPain != ent.Comp.PerceivedPain)
+        {
+            ent.Comp.PreviousPerceivedPain = ent.Comp.PerceivedPain;
+            var ev = new DamageOverlayUpdateEvent(ent);
+            RaiseLocalEvent(ent, ref ev, true);
+        }
+        if (ent.Comp.PreviousPainLevelIdx != ent.Comp.CurrentPainLevelIdx)
+        {
+            ent.Comp.PreviousPainLevelIdx = ent.Comp.CurrentPainLevelIdx;
+            var ev = new DamageOverlayUpdateEvent(ent);
+            RaiseLocalEvent(ent, ref ev, true);
+        }
     }
 
     private void OnRejuvenate(Entity<PainComponent> ent, ref RejuvenateEvent args)
     {
-        ent.Comp.PerceivedPain = 0;
-        ent.Comp.PainModifiers.Clear();
+        SetPerceivedPain(ent, 0);
         SetCurrentPainLevelIdx(ent, 0);
-        DirtyFields(ent, ent.Comp, null, nameof(PainComponent.PerceivedPain), nameof(PainComponent.PainModifiers));
+        ent.Comp.PainModifiers.Clear();
+        DirtyField(ent, ent.Comp, nameof(PainComponent.PainModifiers));
     }
 
     private void OnAlertSeverityCheck(Entity<PainComponent> ent, ref BeforeAlertSeverityCheckEvent args)
@@ -84,10 +161,8 @@ public sealed partial class PainSystem : EntitySystem
         var damage = args.Damageable.Damage;
         var newPainValue = FixedPoint2.Zero;
 
-        newPainValue += GetDamageGroupPain(damage, BruteGroup, painComp.BrutePainMultiplier);
-        newPainValue += GetDamageGroupPain(damage, BurnGroup, painComp.BurnPainMultiplier);
-        newPainValue += GetDamageGroupPain(damage, ToxinGroup, painComp.ToxinPainMultiplier);
-        newPainValue += GetDamageGroupPain(damage, AirlossGroup, painComp.AirlossPainMultiplier);
+        foreach (var (groupId, value) in ent.Comp.DamageGroupPainMultipliers)
+            newPainValue += GetDamageGroupPain(damage, groupId, value);
 
         if (painComp.BasePain != newPainValue)
         {
@@ -112,12 +187,13 @@ public sealed partial class PainSystem : EntitySystem
         // Going from *not* dead to dead.
         if (args.NewMobState == MobState.Dead)
         {
-            // Clear out all of their (relevant) `PainComponent` vars, just for the sake of preventing weird edge case behaviour.
-            // If the user gets revived then they all repopulate themselves automatically.
-            ent.Comp.PerceivedPain = 0;
-            ent.Comp.PainModifiers.Clear();
+            // Clear out all of their (relevant) `PainComponent` vars, just for the sake of preventing weird edge case behaviour while they're dead.
+            // (shouldn't be feeling pain anyway if you're dead)
+            // If the user gets revived then they all get set back to normal below.
+            SetPerceivedPain(ent, 0);
             SetCurrentPainLevelIdx(ent, 0);
-            DirtyFields(ent, ent.Comp, null, nameof(PainComponent.PerceivedPain), nameof(PainComponent.PainModifiers));
+            ent.Comp.PainModifiers.Clear();
+            DirtyField(ent, ent.Comp, nameof(PainComponent.PainModifiers));
         }
         // Going from dead to *not* dead.
         else if (args.OldMobState == MobState.Dead)
@@ -126,10 +202,17 @@ public sealed partial class PainSystem : EntitySystem
             // This *does* happen automatically in `Update()`, but that only moves `CurrentPainLevelIdx` one step at a time.
             // Setting it here is just to skip the wait time.
             UpdatePerceivedPain(ent);
-            SetCurrentPainLevelIdx(ent, GetHighestValidPainLevelIdx(ent));
+            SetCurrentPainLevelIdx(ent, GetHighestPainLevelReached(ent).Index);
         }
     }
 
+    /// <summary>
+    /// Calculate a new value for <paramref name="ent"/>'s <see cref="PainComponent.PerceivedPain"/>, starting with their
+    /// <see cref="PainComponent.BasePain"/> and adding any <see cref="PainModifier"/>s in the <see cref="PainComponent.PainModifiers"/> list.
+    /// </summary>
+    /// <remarks>
+    /// Not to be confused with <see cref="SetPerceivedPain(Entity{PainComponent}, FixedPoint2)"/>, which is just a setter for the datafield.
+    /// </remarks>
     private void UpdatePerceivedPain(Entity<PainComponent> ent)
     {
         var maxPainReductionModifierStrength = FixedPoint2.Zero;
@@ -152,42 +235,43 @@ public sealed partial class PainSystem : EntitySystem
         var newPainReduction = FixedPoint2.Max(0, -painWithIncrease * ent.Comp.PainReductionDecreaseRate + maxPainReductionModifierStrength);
         var newPainPercentage = FixedPoint2.Clamp(painWithIncrease - newPainReduction, 0, 100);
 
-        if (newPainPercentage != ent.Comp.PerceivedPain)
-        {
-            ent.Comp.PerceivedPain = newPainPercentage;
-            DirtyField(ent, ent.Comp, nameof(PainComponent.PerceivedPain));
-        }
+        SetPerceivedPain(ent, newPainPercentage);
     }
 
     /// <summary>
-    /// Get the index of the highest <see cref="PainLevel"/> in <paramref name="ent"/>'s
-    /// <see cref="PainComponent.PainLevels"/> where <c>PainLevel.Threshold &lt;= ent.Comp.PerceivedPain</c>.
+    /// Setter for <paramref name="ent"/>'s <see cref="PainComponent.PerceivedPain"/> datafield.
     /// </summary>
-    /// <seealso cref="PainComponent.PerceivedPain"/>
-    private static int GetHighestValidPainLevelIdx(Entity<PainComponent> ent)
+    /// <remarks>
+    /// Not to be confused with <see cref="UpdatePerceivedPain(Entity{PainComponent})"/>.
+    /// </remarks>
+    private void SetPerceivedPain(Entity<PainComponent> ent, FixedPoint2 newValue)
     {
-        return ent.Comp.PainLevels.FindLastIndex(level => level.Threshold <= ent.Comp.PerceivedPain);
-    }
-
-    /// <summary>
-    /// Setter for <see cref="PainComponent.CurrentPainLevelIdx"/>, which also raises <see cref="PainLevelChangedEvent"/>
-    /// so that the client-side pain vignette damage overlay thing can update itself, and updates the health alert.
-    /// </summary>
-    private void SetCurrentPainLevelIdx(Entity<PainComponent> ent, int newLevel)
-    {
-        var painComp = ent.Comp;
-        if (painComp.CurrentPainLevelIdx == newLevel)
+        if (newValue == ent.Comp.PerceivedPain)
             return;
 
-        var previousPainLevel = painComp.CurrentPainLevelIdx;
-        painComp.CurrentPainLevelIdx = newLevel;
-        DirtyField(ent, painComp, nameof(PainComponent.CurrentPainLevelIdx));
+        ent.Comp.PerceivedPain = newValue;
+        DirtyField(ent, ent.Comp, nameof(PainComponent.PerceivedPain));
 
-        var ev = new PainLevelChangedEvent(ent, previousPainLevel, painComp.CurrentPainLevelIdx);
+        var ev = new DamageOverlayUpdateEvent(ent);
+        RaiseLocalEvent(ent, ref ev, true);
+    }
+
+    /// <summary>
+    /// Setter for <paramref name="ent"/>'s <see cref="PainComponent.CurrentPainLevelIdx"/> datafield.
+    /// </summary>
+    private void SetCurrentPainLevelIdx(Entity<PainComponent> ent, int newValue)
+    {
+        if (newValue == ent.Comp.CurrentPainLevelIdx)
+            return;
+
+        ent.Comp.CurrentPainLevelIdx = newValue;
+        DirtyField(ent, ent.Comp, nameof(PainComponent.CurrentPainLevelIdx));
+
+        var ev = new DamageOverlayUpdateEvent(ent);
         RaiseLocalEvent(ent, ref ev, true);
 
-        if (painComp.CurrentPainLevelIdx <= _alerts.GetMaxSeverity(painComp.Alert))
-            _alerts.ShowAlert(ent, painComp.Alert, (short)painComp.CurrentPainLevelIdx);
+        if (ent.Comp.CurrentPainLevelIdx <= _alerts.GetMaxSeverity(ent.Comp.Alert))
+            _alerts.ShowAlert(ent, ent.Comp.Alert, (short)ent.Comp.CurrentPainLevelIdx);
     }
 
     public override void Update(float frameTime)
@@ -228,7 +312,7 @@ public sealed partial class PainSystem : EntitySystem
                 DirtyField(uid, pain, nameof(PainComponent.NextPainLevelUpdateTime));
 
                 // Get the highest level in `PainLevels` whose threshold has been passed by `PerceivedPain`.
-                var highestPainLevelIdx = GetHighestValidPainLevelIdx(uidEntity);
+                var highestPainLevelIdx = GetHighestPainLevelReached(uidEntity).Index;
 
                 // Move `currentPainLevelIdx` towards `highestPainLevelIdx` by one step.
                 if (highestPainLevelIdx > pain.CurrentPainLevelIdx)

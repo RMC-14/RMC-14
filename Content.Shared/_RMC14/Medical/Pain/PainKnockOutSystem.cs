@@ -28,9 +28,8 @@ public sealed class PainKnockOutSystem : EntitySystem
 
         ent.Comp.IsAlreadySaved = true;
         ent.Comp.PreviousCritThreshold = _mobThresholds.GetThresholdForState(ent, MobState.Critical, thresholds);
-        var alive = _mobThresholds.GetThresholdForState(ent, MobState.Alive, thresholds);
-        ent.Comp.PreviousAliveThreshold = alive;
-        _mobThresholds.SetMobStateThreshold(ent, alive + 1, MobState.Critical, thresholds); // +1 needed to make rejuvenation work properly
+        var aliveThreshold = _mobThresholds.GetThresholdForState(ent, MobState.Alive, thresholds);
+        _mobThresholds.SetMobStateThreshold(ent, aliveThreshold + 1, MobState.Critical, thresholds); // +1 needed to make rejuvenation work properly
         Dirty(ent);
     }
 
@@ -42,7 +41,6 @@ public sealed class PainKnockOutSystem : EntitySystem
 
         ent.Comp.IsAlreadySaved = false;
         _mobThresholds.SetMobStateThreshold(ent, ent.Comp.PreviousCritThreshold, MobState.Critical, thresholds);
-        _mobThresholds.SetMobStateThreshold(ent, ent.Comp.PreviousAliveThreshold, MobState.Alive, thresholds);
         Dirty(ent);
     }
 
