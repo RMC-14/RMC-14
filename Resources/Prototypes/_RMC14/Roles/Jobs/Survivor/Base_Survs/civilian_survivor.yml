@@ -14,6 +14,9 @@
   - !type:RoleTimeRequirement
     role: CMJobHospitalCorpsman
     time: 18000 # 5 hours
+  - !type:TotalDepartmentsTimeRequirement
+    group: CMDepartmentsHuman
+    time: 180000 # 50 hours
   ranks:
     RMCRankCivilian: []
   startingGear: RMCGearSurvivorBaseNoBackpack
