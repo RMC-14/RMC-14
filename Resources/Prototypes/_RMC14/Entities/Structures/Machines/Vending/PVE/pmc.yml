@@ -14,8 +14,8 @@
     sections:
     - name: Standard Equipment
       entries:
-      - id: CMBootsBlack
-        name: Combat Boots
+      - id: RMCBootsPMCFilled
+        name: Polished Shoes
         amount: 15
       - id: RMCJumpsuitVeteranPMCNoWebbing
         name: PMC Uniform
@@ -23,11 +23,20 @@
       - id: RMCHandsVeteran
         name: Combat Gloves
         amount: 15
+      - id: RMCHandsVeteranPMC
+        name: WeYa Combat Gloves
+        amount: 15
       - id: RMCHeadsetDistressPMCPVE
         name: PMC Radio Headset
         amount: 15
       - id: RMCCameraGearPMC
         name: Mk3 TOCU headcam
+        amount: 15
+      - id: ArmorHelmetPMC
+        name: Tactical Cap
+        amount: 15
+      - id: RMCArmorHelmetPMCBlack
+        name: Tactical Cap, Black
         amount: 15
     - name: Webbings
       entries:
@@ -37,7 +46,8 @@
       - id: RMCWebbingLegPouchBlack
         name: Leg Pouch, Black
         amount: 10
-      - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
+        name: Drop Pouch, Black
         amount: 5
     - name: Armor
       entries:
@@ -60,11 +70,11 @@
         amount: 1
     - name: Belts
       entries:
-      - id: CMBeltMarine
+      - id: RMCBeltPMC
         amount: 15
       - id: RMCBeltGrenade
         amount: 10
-      - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterPistolPMC
         amount: 15
       - id: RMCBeltHolsterRevolver
         amount: 15
@@ -72,9 +82,14 @@
         amount: 5
       - id: RMCBeltUtilityGeneral
         amount: 5
+    - name: Restricted Belts
+      entries:
+      - id: RMCScabbardShotgunWaist
+        amount: 1
     - name: Pouches
       entries:
-      - id: RMCPouchFirstAid
+      - id: RMCPouchFirstAidPMC
+        name: first-aid pouch
         amount: 15
       - id: RMCPouchFlareC18Filled
         name: flare pouch (Full)
@@ -101,19 +116,30 @@
         amount: 1
       - id: RMCPouchFuelTank
         amount: 1
+      - id: RMCPouchShotgun
+        amount: 1
     - name: Mask
       entries:
       - id: RMCMaskCoifPMC
         amount: 15
+      - id: RMCMaskScarfGray
+        amount: 15
+      - id: RMCMaskScarfRed
+        amount: 15
     - name: Miscellaneous
       entries:
       - id: RMCGogglesBallistic
-        name: Ballistic Goggles
+        amount: 10
+      - id: RMCWeldingGoggles
         amount: 10
       - id: RMCHelmetGarbGunOil
         name: firearm lubricant
         amount: 15
-      - id: ArmorHelmetPMC
+      - id: RMCPatchWeYa
+        amount: 15
+      - id: RMCPatchWeYaBlack
+        amount: 15
+      - id: RMCPatchWeYaBlackSquare
         amount: 15
 
 - type: entity
@@ -198,6 +224,32 @@
         amount: 2
       - id: RMCWeaponPistolM82F
         amount: 1
+    - name: Attachments
+      entries:
+      - id: RMCAttachmentTwoPointSling
+        amount: 10
+      - id: RMCAttachmentRailFlashlight
+        amount: 5
+      - id: RMCAttachmentS6ReflexSight
+        amount: 5
+      - id: RMCAttachmentS5RedDotSight
+        amount: 5
+      - id: RMCAttachmentAngledGrip
+        amount: 5
+      - id: RMCAttachmentVerticalGrip
+        amount: 5
+      - id: RMCAttachmentLaserSight
+        amount: 5
+      - id: RMCAttachmentExtendedBarrel
+        amount: 3
+      - id: RMCAttachmentSuppressor
+        amount: 3
+      - id: RMCAttachmentRecoilCompensator
+        amount: 3
+      - id: RMCAttachmentS42xTelescopicMiniscope
+        amount: 1
+      - id: RMCAttachmentBurstFireAssembly
+        amount: 1
     - name: Miscellaneous
       entries:
       - id: CMFireExtinguisher
@@ -210,10 +262,6 @@
         amount: 2
       - id: RMCScabbardMacheteFilled
         name: Machete Scabbard (Full)
-        amount: 5
-      - id: RMCAttachmentRailFlashlight
-        amount: 5
-      - id: RMCAttachmentTwoPointSling
         amount: 5
       - id: RMCM5Bayonet
         amount: 25
