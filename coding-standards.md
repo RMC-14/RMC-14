@@ -1,4 +1,9 @@
 # Coding Standards
+## Core guidelines
+
+1. Do not rely on language models to do everything for you. You will be ridiculed for this.
+2. If your code is shit, you will be forced to improve it. You will naturally improve as time goes on and you learn more.
+
 ## .editorconfig
 
 Make sure that your editor is correctly reading the project's .editorconfig file at the root of the project.
