@@ -94,7 +94,6 @@
     access: [ [ "CMAccessBrig" ] ]
   - type: RequiresSkill
     skills:
-      RMCSkillOverwatch: 0
       RMCSkillPolice: 2
 
 - type: entity
