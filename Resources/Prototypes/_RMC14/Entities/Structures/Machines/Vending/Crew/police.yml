@@ -23,7 +23,6 @@
       - id: CMBootsBlackFilled
       - id: CMGlassesSecurity
       - id: CMBeltSecurityMPFilled
-      - id: RMCM5CameraGear
     - name: Helmet
       choices: { CMHelmet: 1 }
       entries:
@@ -117,7 +116,6 @@
       - id: CMHandsBlackMarine
       - id: RMCHeadsetMW
       - id: CMBootsBlackFilled
-      - id: RMCM5CameraGear
     - name: Helmet
       choices: { CMHelmet: 1 }
       entries:
