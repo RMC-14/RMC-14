@@ -3,7 +3,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechSGGear
-  name: ColMarTech squad smart gun operator gear rack
+  name: ASRS squad smart gun operator gear rack
   description: An automated gear rack for Squad Smart Gun Operators.
   components:
   - type: AccessReader
@@ -124,7 +124,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechSGEquipment
-  name: ColMarTech squad Smart Gun equipment rack
+  name: ASRS squad Smart Gun equipment rack
   description: An automated rack hooked up to a colossal storage of Squad Smart Gun standard-issue equipment.
   components:
   - type: AccessReader

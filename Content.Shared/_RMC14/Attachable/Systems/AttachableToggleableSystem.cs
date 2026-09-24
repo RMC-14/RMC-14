@@ -2,6 +2,7 @@ using System.Numerics;
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Attachable.Events;
 using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
@@ -485,6 +486,18 @@ public sealed class AttachableToggleableSystem : EntitySystem
             if (!silent)
                 _popupSystem.PopupClient(
                     Loc.GetString("rmc-attachable-activation-fail-not-wielded", ("holder", args.Holder), ("attachable", attachable)),
+                    args.User,
+                    args.User);
+            return false;
+        }
+
+        if (!attachable.Comp.Active &&
+            attachable.Comp.InstantToggle == AttachableInstantToggleConditions.Brace &&
+            HasComp<VehicleRideSurfaceRiderComponent>(args.User))
+        {
+            if (!silent)
+                _popupSystem.PopupClient(
+                    Loc.GetString("rmc-attachable-activation-fail-on-vehicle", ("attachable", attachable)),
                     args.User,
                     args.User);
             return false;

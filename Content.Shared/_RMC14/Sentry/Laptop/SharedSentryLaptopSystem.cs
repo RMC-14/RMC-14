@@ -1,31 +1,19 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.IdentityManagement;
-using Content.Shared._RMC14.Tools;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Damage;
-using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DeviceLinking;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
-using Content.Shared.Item.ItemToggle;
-using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Placeable;
 using Content.Shared.Popups;
-using Content.Shared.Tools.Components;
 using Content.Shared.UserInterface;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
-using Content.Shared.DeviceNetwork.Components;
-using Robust.Shared.GameObjects;
-using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
-using SentryAlertEvent = Content.Shared._RMC14.Sentry.Laptop.SentryAlertEvent;
-using SentryAlertType = Content.Shared._RMC14.Sentry.Laptop.SentryAlertType;
 
 namespace Content.Shared._RMC14.Sentry.Laptop;
 
@@ -33,7 +21,6 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
 {
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly ItemToggleSystem _toggle = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -42,7 +29,6 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedContainerSystem _containers = default!;
     [Dependency] private readonly SharedDeviceLinkSystem _deviceLink = default!;
 
     private const float UpdateInterval = 1.0f;
@@ -378,7 +364,7 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
             return;
 
         var newMode = sentry.Mode == SentryMode.On ? SentryMode.Off : SentryMode.On;
-        EntityManager.System<SentrySystem>().TrySetMode((sentryEnt.Value, sentry), newMode);
+        EntityManager.System<SentrySystem>().TrySetMode((sentryEnt.Value, sentry), newMode, args.Actor, true);
         UpdateUI(laptop);
     }
 

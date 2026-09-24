@@ -1,7 +1,7 @@
 - type: entity
   parent: VehicleTankHardpointBase
   id: VehicleTankFlamer
-  name: tank flamer
+  name: LZR-N flame unit
   description: A tank-mounted flamethrower hardpoint.
   components:
   - type: Sprite
@@ -10,12 +10,14 @@
     hardpointType: HardpointTypeLauncher
     vehicleFamily: HardpointVehicleFamilyTank
     slotType: HardpointSlotTypeLauncher
-    damageMultiplier: 0.0
+    damageMultiplier: 0.125
     repairRate: 0.0125
   - type: HardpointIntegrity
     maxIntegrity: 300
   - type: VehicleTurretAttachment
   - type: VehicleTurret
+    fireWhileRotatingGraceDegrees: 180
+    useBarrelDirectionForShots: true
     offsetRotatesWithTurret: true
     useDirectionalOffsets: true
     pixelOffsetNorth: "0,-10"
@@ -25,11 +27,11 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
     overlayState: flamer_0
+    overlayDamagedState: flamer_1
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
-  - type: GunIgnorePrediction
   - type: Gun
-    fireRate: 1.0
+    fireRate: 0.3333
     projectileSpeed: 20
     selectedMode: SemiAuto
     availableModes:
@@ -39,24 +41,10 @@
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 4
     accuracyMultiplierUnwielded: 4
-  - type: SolutionContainerManager
-    solutions:
-      rmc_flamer_tank:
-        maxVol: 60
-        reagents:
-        - ReagentId: RMCNapalmUTTank
-          Quantity: 60
+  - type: VehicleFlamerTankSlots
+    maxTanks: 2
+    startingItem: VehicleFlamerTankLZRN
   - type: RMCFlamerAmmoProvider
-  - type: RMCFlamerTank
-    maxIntensity: 30
-    maxDuration: 20
-    maxRange: 7
-    reagentWhitelist:
-    - RMCNapalmUTTank
-  - type: RMCFlushableSolution
-    solution: rmc_flamer_tank
-    flushTime: 1.5
-  - type: NoMixingReagents
   - type: GunFireArc
     arc: 120
   - type: GunMuzzleOffset
@@ -68,6 +56,7 @@
     useContainerOwner: false
   - type: HardpointVisual
     vehicleState: flamer_0
+    damagedVehicleState: flamer_1
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -81,12 +70,14 @@
     hardpointType: HardpointTypeLauncher
     vehicleFamily: HardpointVehicleFamilyTank
     slotType: HardpointSlotTypeLauncher
-    damageMultiplier: 0.0
+    damageMultiplier: 0.125
     repairRate: 0.0125
   - type: HardpointIntegrity
     maxIntegrity: 500
   - type: VehicleTurretAttachment
   - type: VehicleTurret
+    fireWhileRotatingGraceDegrees: 180
+    useBarrelDirectionForShots: true
     offsetRotatesWithTurret: true
     useDirectionalOffsets: true
     pixelOffsetNorth: "0,-10"
@@ -96,9 +87,9 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
     overlayState: glauncher_0
+    overlayDamagedState: glauncher_1
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
-  - type: GunIgnorePrediction
   - type: Gun
     fireRate: 0.3333
     projectileSpeed: 18
@@ -127,7 +118,7 @@
   - type: GunFireArc
     arc: 120
   - type: RefillableByBulletBox
-    bulletType: VehicleAmmoBoxSmokeLauncher
+    bulletType: VehicleAmmoBoxGrenadeLauncher
   - type: GunMuzzleOffset
     offset: "0,0"
     useDirectionalOffsets: true
@@ -137,6 +128,7 @@
     useContainerOwner: false
   - type: HardpointVisual
     vehicleState: glauncher_0
+    damagedVehicleState: glauncher_1
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -150,12 +142,14 @@
     hardpointType: HardpointTypeLauncher
     vehicleFamily: HardpointVehicleFamilyTank
     slotType: HardpointSlotTypeLauncher
-    damageMultiplier: 0.0
+    damageMultiplier: 0.125
     repairRate: 0.0125
   - type: HardpointIntegrity
     maxIntegrity: 500
   - type: VehicleTurretAttachment
   - type: VehicleTurret
+    fireWhileRotatingGraceDegrees: 180
+    useBarrelDirectionForShots: true
     offsetRotatesWithTurret: true
     useDirectionalOffsets: true
     pixelOffsetNorth: "0,-10"
@@ -165,9 +159,9 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
     overlayState: towlauncher_0
+    overlayDamagedState: towlauncher_1
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
-  - type: GunIgnorePrediction
   - type: Gun
     fireRate: 0.0667 # 15 seconds between shots
     projectileSpeed: 18
@@ -194,14 +188,17 @@
   - type: RefillableByBulletBox
     bulletType: VehicleAmmoBoxRocketLauncher
   - type: GunMuzzleOffset
-    offset: "0,0"
     useDirectionalOffsets: true
-    offsetEast: "0,0.2"
-    muzzleOffset: "0,-1"
+    rotateDirectionalOffsets: true
+    offsetNorth: "-0.25,0.1"
+    offsetEast: "0.1, 0"
+    offsetSouth: "-0.25,0.1"
+    offsetWest: "-0.8,0"
     useAimDirection: true
     useContainerOwner: false
   - type: HardpointVisual
     vehicleState: towlauncher_0
+    damagedVehicleState: towlauncher_1
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -215,12 +212,14 @@
     hardpointType: HardpointTypeLauncher
     vehicleFamily: HardpointVehicleFamilyTank
     slotType: HardpointSlotTypeLauncher
-    damageMultiplier: 0.0
+    damageMultiplier: 0.125
     repairRate: 0.0125
   - type: HardpointIntegrity
     maxIntegrity: 350
   - type: VehicleTurretAttachment
   - type: VehicleTurret
+    fireWhileRotatingGraceDegrees: 180
+    useBarrelDirectionForShots: true
     offsetRotatesWithTurret: true
     useDirectionalOffsets: true
     pixelOffsetNorth: "0,-10"
@@ -230,10 +229,11 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
     overlayState: m56cupola_0
+    overlayDamagedState: m56cupola_1
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
   - type: Gun
-    fireRate: 6
+    fireRate: 3.3333
     minAngle: 3
     maxAngle: 3
     selectedMode: FullAuto
@@ -262,78 +262,15 @@
   - type: RefillableByBulletBox
     bulletType: VehicleAmmoBoxCupola
   - type: GunMuzzleOffset
-    offset: "0,0"
     useDirectionalOffsets: true
-    offsetEast: "0,0.2"
-    muzzleOffset: "0,-1"
+    rotateDirectionalOffsets: true
+    offsetNorth: "-0.25,0.1"
+    offsetEast: "0.1, 0"
+    offsetSouth: "-0.25,0.1"
+    offsetWest: "-0.8,0"
     useAimDirection: true
     useContainerOwner: false
   - type: HardpointVisual
     vehicleState: m56cupola_0
-
-- type: entity
-  parent: VehicleTankHardpointBase
-  id: VehicleTankRERE700
-  name: RE-RE700 cupola
-  description: A dual-barrel cupola-mounted weapon hardpoint with integrated IFF.
-  components:
-  - type: Sprite
-    state: m56_cupola
-  - type: HardpointItem
-    hardpointType: HardpointTypeLauncher
-    vehicleFamily: HardpointVehicleFamilyTank
-    slotType: HardpointSlotTypeLauncher
-    damageMultiplier: 0.0
-    repairRate: 0.0125
-  - type: HardpointIntegrity
-    maxIntegrity: 350
-  - type: VehicleTurretAttachment
-  - type: VehicleTurret
-    offsetRotatesWithTurret: true
-    useDirectionalOffsets: true
-    pixelOffsetNorth: "0,-10"
-    pixelOffsetEast: "-10,0"
-    pixelOffsetSouth: "0,10"
-    pixelOffsetWest: "10,0"
-    showOverlay: true
-    overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
-    overlayState: m56cupola_0
-  - type: GunUseGunOrigin
-  - type: GunIgnoreContainerOwnerCollision
-  - type: Gun
-    fireRate: 9
-    selectedMode: FullAuto
-    availableModes:
-    - FullAuto
-    soundGunshot: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a_2.ogg
-    cameraRecoilScalar: 0
-  - type: GunIFF
-    enabled: true
-    intrinsic: true
-  - type: UserIFF
-    factions:
-    - FactionMarine
-  - type: RMCWeaponAccuracy
-    accuracyMultiplier: 5
-    accuracyMultiplierUnwielded: 5
-  - type: BallisticAmmoProvider
-    cycleable: false
-    proto: VehicleCartridgeSentry10x50mm
-    capacity: 500
-  - type: VehicleHardpointAmmo
-    magazineSize: 500
-    maxStoredMagazines: 2
-  - type: GunFireArc
-    arc: 180
-  - type: RefillableByBulletBox
-    bulletType: VehicleAmmoBoxCupola
-  - type: GunMuzzleOffset
-    offset: "0,0"
-    useDirectionalOffsets: true
-    offsetEast: "0,0.2"
-    muzzleOffset: "0,-1"
-    useAimDirection: true
-    useContainerOwner: false
-  - type: HardpointVisual
-    vehicleState: m56cupola_0
+    damagedVehicleState: m56cupola_1
 

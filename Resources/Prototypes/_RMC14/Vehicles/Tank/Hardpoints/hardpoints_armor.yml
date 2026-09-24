@@ -19,6 +19,7 @@
     - VehicleArmorBallistic
   - type: HardpointVisual
     vehicleState: ballistic_armor_0
+    damagedVehicleState: ballistic_armor_1
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -42,6 +43,7 @@
     explosionCoefficient: 0.5
   - type: HardpointVisual
     vehicleState: concussive_armor_0
+    damagedVehicleState: concussive_armor_1
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -64,6 +66,7 @@
     - VehicleArmorCaustic
   - type: HardpointVisual
     vehicleState: caustic_armor_0
+    damagedVehicleState: caustic_armor_1
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -87,6 +90,7 @@
     explosionCoefficient: 0.5
   - type: HardpointVisual
     vehicleState: paladin_armor_0
+    damagedVehicleState: paladin_armor_1
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -106,4 +110,5 @@
     maxIntegrity: 150
   - type: HardpointVisual
     vehicleState: snowplow_0
+    damagedVehicleState: snowplow_1
 

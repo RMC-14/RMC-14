@@ -8,6 +8,7 @@ using Content.Server._RMC14.Language.Systems;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
+using Content.Server.Database;
 using Content.Server.GameTicking;
 using Content.Server.Players.RateLimiting;
 using Content.Server.Speech.Components;
@@ -578,12 +579,21 @@ public sealed partial class ChatSystem : SharedChatSystem
             _chatManager.ChatMessageToOne(ChatChannel.Server, bannedMsg, bannedMsg, default, false, player.Channel);
             return;
         }
+
+        var isAdmin = false;
+        var title = "Admin";
+        var data = _adminManager.GetAdminData(player);
+        if (data != null)
+        {
+            isAdmin = true;
+            title = data.Title ?? "Admin";
+        }
         // RMC14
 
-        if (_adminManager.IsAdmin(player))
+        if (isAdmin)
         {
             wrappedMessage = Loc.GetString("chat-manager-send-admin-dead-chat-wrap-message",
-                ("adminChannelName", Loc.GetString("chat-manager-admin-channel-name")),
+                ("adminChannelName", title), //RMC14
                 ("userName", player.Channel.UserName),
                 ("message", FormattedMessage.EscapeText(message)));
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Admin dead chat from {player:Player}: {message}");

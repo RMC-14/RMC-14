@@ -39,6 +39,8 @@
   components:
   - type: Sprite
     state: arc
+  - type: Area
+    retrieveItemObjective: true
 
 - type: entity
   parent: RMCAreaVehicleInterior

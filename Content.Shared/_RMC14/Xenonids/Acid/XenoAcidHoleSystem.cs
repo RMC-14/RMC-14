@@ -883,7 +883,11 @@ public sealed class XenoAcidHoleSystem : EntitySystem
             DuplicateCondition = DuplicateConditions.SameEvent
         };
 
-        return _doAfter.TryStartDoAfter(doAfter);
+        if (!_doAfter.TryStartDoAfter(doAfter))
+            return false;
+
+        _audio.PlayPvs(wall.Comp.HoleExpandSound, wall.Owner);
+        return true;
     }
 
     private bool CanBreakHole(EntityUid user, Entity<XenoAcidHoleWallComponent> wall)

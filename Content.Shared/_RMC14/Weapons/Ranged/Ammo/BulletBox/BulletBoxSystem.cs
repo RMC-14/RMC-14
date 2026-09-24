@@ -36,7 +36,15 @@ public sealed class BulletBoxSystem : EntitySystem
     {
         using (args.PushGroup(nameof(BulletBoxComponent)))
         {
-            args.PushText(Loc.GetString("rmc-bullet-box-amount", ("amount", ent.Comp.Amount)));
+            var color = ((double) ent.Comp.Amount / ent.Comp.Max) switch
+            {
+                >= 1 => "#00c400",
+                >= 0.66 => "#c4c400",
+                >= 0.33 => "#c46400",
+                > 0 => "#c40000",
+                _ => "#808080",
+            };
+            args.PushText(Loc.GetString("rmc-bullet-box-amount", ("amount", ent.Comp.Amount), ("max", ent.Comp.Max), ("color", color)));
 
             if (!string.IsNullOrWhiteSpace(ent.Comp.UsedIn))
                 args.PushText(Loc.GetString("rmc-bullet-box-used-in", ("vehicle", ent.Comp.UsedIn)));

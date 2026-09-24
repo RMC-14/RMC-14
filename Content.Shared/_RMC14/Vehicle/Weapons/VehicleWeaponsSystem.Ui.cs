@@ -13,6 +13,17 @@ namespace Content.Shared._RMC14.Vehicle;
 
 public sealed partial class VehicleWeaponsSystem
 {
+    internal void RefreshVehicleWeaponsUi(EntityUid vehicle)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!TryComp(vehicle, out VehicleWeaponsComponent? weapons))
+            return;
+
+        UpdateWeaponsUiForAllOperators(vehicle, weapons);
+    }
+
     private void OnWeaponsUiOpened(Entity<VehicleWeaponsSeatComponent> ent, ref BoundUIOpenedEvent args)
     {
         if (!Equals(args.UiKey, VehicleWeaponsUiKey.Key))

@@ -1523,3 +1523,25 @@ DrinkMilkCarton: RMCDrinkMilkCarton
 
 #2026-06-06
 RMCBeakerHighCapacity: RMCReagentJug
+
+# 2026-07-04
+RMCWeaponShotgunHG3712: RMCWeaponShotgunM12
+
+# 2026-07-11
+RMCJumpsuitSPPPaP: RMCJumpsuitSPPPCG
+RMCIDCardPaP: RMCIDCardPCG
+RMCHeadsetSPPPaP: RMCHeadsetSPPPCG
+RMCCoatPaP: RMCCoatPCG
+
+#2026-07-11
+BoxMousetrap: RMCBoxMousetraps
+
+# 2026-07-31
+FoodBoxPizzaFilled: RMCBoxPizzaRandom
+
+# 2026-08-23
+RMCSpawnPointSurvivorFiorinaRiotInProgressUNRiotOfficer: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBOfficer
+RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlOfficer: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader
+
+# 2026-08-26
+CMAttachmentXMVESG1FlamerNozzle: RMCAttachmentXMVESG1FlamerNozzle
