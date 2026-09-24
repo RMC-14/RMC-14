@@ -215,6 +215,7 @@
     name: rmc-xeno-trapper-name
     description: rmc-xeno-trapper-description
     popup: rmc-xeno-trapper-popup
+  - type: XenoHidden
   - type: CMArmor
     xenoArmor: 0
     explosionArmor: 20
