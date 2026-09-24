@@ -61,4 +61,5 @@
 - type: entity
   parent: RMCSurvivorPresetCorporate
   id: RMCGearSurvivorPresetLV624CorporateDomeCL
+  categories: [ HideSpawnMenu ]
   name: lv624 colonist preset
