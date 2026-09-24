@@ -35,6 +35,13 @@ public sealed class DropshipTerminalWeaponsChangeScreenMsg(bool first, DropshipT
 }
 
 [Serializable, NetSerializable]
+public sealed class DropshipTerminalWeaponsQuickModeMsg(bool first, bool enabled) : BoundUserInterfaceMessage
+{
+    public readonly bool First = first;
+    public readonly bool Enabled = enabled;
+}
+
+[Serializable, NetSerializable]
 public sealed class DropshipTerminalWeaponsChooseWeaponMsg(bool first, NetEntity weapon) : BoundUserInterfaceMessage
 {
     public readonly bool First = first;

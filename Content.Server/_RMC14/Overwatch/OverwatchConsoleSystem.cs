@@ -59,7 +59,7 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
                 continue;
 
             if (!ev.Recipients.ContainsKey(session))
-                ev.Recipients.Add(session, new ChatSystem.ICChatRecipientData(distance, false));
+                ev.Recipients.Add(session, new ChatSystem.ICChatRecipientData(distance, false, true));
         }
     }
 

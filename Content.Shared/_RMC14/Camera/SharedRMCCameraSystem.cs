@@ -12,7 +12,6 @@ namespace Content.Shared._RMC14.Camera;
 public abstract class SharedRMCCameraSystem : EntitySystem
 {
     [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -60,8 +59,12 @@ public abstract class SharedRMCCameraSystem : EntitySystem
                 return;
 
             var areaName = areaProto.Name;
-            var count = _cameraNames.GetValueOrDefault(areaName);
-            _metaData.SetEntityName(ent, $"{areaName} #{++count}");
+            var count = _cameraNames.GetValueOrDefault(areaName) + 1;
+
+            ent.Comp.Rename = false; // Do not run again.
+            ent.Comp.NameOverride = $"{areaName} #{count}";
+            Dirty(ent);
+
             _cameraNames[areaName] = count;
         }
         else
@@ -70,7 +73,7 @@ public abstract class SharedRMCCameraSystem : EntitySystem
             if (ent.Comp.NameOverride != null)
                 name = ent.Comp.NameOverride;
 
-            var count = _cameraNames.GetValueOrDefault(name);
+            var count = _cameraNames.GetValueOrDefault(name) + 1;
             _cameraNames[name] = count;
         }
     }
@@ -291,25 +294,6 @@ public abstract class SharedRMCCameraSystem : EntitySystem
     {
         _refresh.Add(protoId);
     }
-
-    public void SetCameraId(EntityUid camera,  EntProtoId protoId, RMCCameraComponent? cameraComponent)
-    {
-        if (!Resolve(camera, ref cameraComponent, false))
-            return;
-
-        cameraComponent.Id = protoId;
-        Dirty(camera, cameraComponent);
-    }
-
-    public void SetCameraName(EntityUid camera,  string name, RMCCameraComponent? cameraComponent)
-    {
-        if (!Resolve(camera, ref cameraComponent, false))
-            return;
-
-        cameraComponent.NameOverride = name;
-        Dirty(camera, cameraComponent);
-    }
-
     public override void Update(float frameTime)
     {
         if (_refresh.Count == 0)

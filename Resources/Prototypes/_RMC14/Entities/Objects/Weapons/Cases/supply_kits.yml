@@ -1,0 +1,136 @@
+# Point Man
+- type: entity
+  parent: RMCKitBase
+  id: RMCSupplyKitPursuit
+  name: M63 Point Man Kit
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,9,1
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+    layers:
+    - state: closed
+      map: [ base ]
+    - state: pursuit
+      map: [ label ]
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponSMGM63ExtendedFilled
+    - id: RMCAttachmentM63ArmBrace
+    - id: RMCAttachmentMagneticHarness
+    - id: RMCScabbardMacheteFilled
+    - id: CMMagazineSMGM63Ext
+
+# Self Defense
+- type: entity
+  parent: RMCKitBase
+  id: RMCSupplyKitSelfDefense
+  name: Personal Self Defense Kit
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,17,1
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+    layers:
+    - state: closed
+      map: [ base ]
+    - state: defense
+      map: [ label ]
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+  - type: StorageFill
+    contents:
+    - id: RMCMK80
+    - id: CMMagazinePistolMK80
+      amount: 5
+    - id: RMCAttachmentS5RedDotSight
+    - id: RMCAttachmentLaserSight
+    - id: RMCBeltHolsterPistol
+
+# Mini Medic
+- type: entity
+  parent: RMCKitBase
+  id: RMCSupplyKitMiniMedic
+  name: First Responder Medical Support Kit
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,9,1
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+    layers:
+    - state: closed
+      map: [ base ]
+    - state: medic
+      map: [ label ]
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+  - type: StorageFill
+    contents:
+    - id: CMPamphletMedical
+    - id: RMCPouchFirstResponderFill
+    - id: RMCPouchAutoinjectorFill
+    - id: RMCVisorMedical
+    - id: CMRollerBedSpawnFolded
+
+
+# MOU53 Field Test
+- type: entity
+  parent: RMCKitBase
+  id: RMCSupplyKitMOU53
+  name: MOU53 Field Test Kit
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,9,1
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+    layers:
+    - state: closed
+      map: [ base ]
+    - state: dots
+      map: [ label ]
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+  - type: StorageFill
+    contents:
+    - id: WeaponShotgunMOU53
+    - id: RMCAttachmentMOU53Stock
+    - id: RMCBoxShotgunSlugs
+    - id: RMCBoxShotgunFlechette
+    - id: RMCM276ShotgunShellLoadingRig
+
+# HPR support
+- type: entity
+  parent: RMCKitBase
+  id: RMCSupplyKitHeavySupport
+  name: Forward HAR Shield Kit
+  components:
+    - type: Storage
+      maxItemSize: Huge
+      grid:
+        - 0,0,9,1
+    - type: Sprite
+      sprite: _RMC14/Objects/Storage/procase_mini.rsi
+      layers:
+        - state: closed
+          map: [ base ]
+        - state: shield
+          map: [ label ]
+    - type: Icon
+      sprite: _RMC14/Objects/Storage/procase_mini.rsi
+    - type: StorageFill
+      contents:
+        - id: RMCWeaponRifleM54CE2
+        - id: CMMagazineRifleM54CE2
+        - id: CMFoldingBarricadesMB6x3
+        - id: RMCWeldingGoggles
+        - id: CMWelder

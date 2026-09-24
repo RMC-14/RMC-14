@@ -3,7 +3,7 @@
   id: RMCSurvivorSPPCrashlandSoldier
   name: rmc-job-name-crashland-soldier
   icon: "RMCJobIconSPPRifleman"
-  spawnMenuRoleName: SPP Airborne Rifleman (Survivor)
+  spawnMenuRoleName: SPP Airborne Rifleman (Trijent Special Survivor)
   special:
   - !type:AddComponentSpecial
     components:
@@ -21,16 +21,26 @@
         RMCSkillMedical: 1
         RMCSkillJtac: 1
         RMCSkillEndurance: 2
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - German
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - German
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
     - type: IntelRescueSurvivorObjective
     - type: AssignSquad
-      whitelist:
-        tags:
-        - RMCSquadSPP
+      squad: SquadSPP
     - type: JobPrefix
       prefix: rmc-job-prefix-crashland-soldier
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetSPPCrashland
     - type: RMCSurvivor
+    - type: RMCAllowSuitStorage
   hidden: true
 
 - type: entity

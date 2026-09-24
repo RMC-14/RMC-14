@@ -5,5 +5,6 @@ rmc-wall-integrity-3 = [color=orange]It is heavily damaged and cracked.[/color]
 rmc-wall-integrity-4 = [color=red]It is barely holding together.[/color]
 rmc-structure-girder-examine-tip = It looks ready for a [color=lightgreen]screwdriver[/color] to a dismantle, [color=lightgreen]metal[/color] to create a wall or [color=lightgreen]plasteel[/color] to create a reinforced wall.
 rmc-structure-wall-repair-examine-tip = [color=cyan]Alt+click[/color] this wall with a [color=lightgreen]welder[/color] to repair it.
+rmc-structure-damaged-girder-examine-tip = Use a [color=lightgreen]welder[/color] to repair it.
 
 rmc-structure-displaced-examine-tip = It looks dislodged. [color=lightgreen]Crowbar[/color] to secure it.

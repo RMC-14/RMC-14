@@ -26,6 +26,9 @@ public sealed partial class RMCConstructionUpgradeComponent : Component
     public EntProtoId UpgradedEntity;
 
     [DataField, AutoNetworkedField]
+    public EntProtoId BaseEntity;
+
+    [DataField, AutoNetworkedField]
     public LocId UpgradedPopup;
 
     [DataField, AutoNetworkedField]

@@ -1,0 +1,800 @@
+- type: entity
+  abstract: true
+  id: VehicleAPCInteriorBase
+  name: APC interior piece
+  description: A decorative interior piece for the APC.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/apc.rsi
+    drawdepth: Overdoors
+  - type: InteractionTransparency
+
+- type: entity
+  abstract: true
+  id: VehicleAPCRoofBase
+  name: APC interior roof
+  description: A removable roof section for the APC interior.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/apc.rsi
+    drawdepth: Overdoors
+  - type: InteractionTransparency
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+    fadeOnSharedGrid: true
+    fadeLayers:
+    - "roof"
+
+- type: entity
+  abstract: true
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCWallBase
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Physics
+    bodyType: Static
+    canCollide: true
+  - type: Occluder
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 20000
+        hard: true
+        mask:
+        - FullTileMask
+        layer:
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
+        - Opaque
+        - InteractImpassable
+
+- type: entity
+  abstract: true
+  parent: VehicleAPCWallBase
+  id: VehicleAPCDoorBase
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RMCIgnoreGhostInteractionLimits
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCFront1
+  components:
+  - type: Sprite
+    state: front_1
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCFront2
+  components:
+  - type: Sprite
+    state: front_2
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCFront3
+  components:
+  - type: Sprite
+    state: front_3
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCFront4
+  components:
+  - type: Sprite
+    state: front_4
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCFront5
+  components:
+  - type: Sprite
+    state: front_5
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCFront6
+  components:
+  - type: Sprite
+    state: front_6
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCRear1
+  components:
+  - type: Sprite
+    state: rear_1
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCRear2
+  components:
+  - type: Sprite
+    state: rear_2
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCRear3
+  components:
+  - type: Sprite
+    state: rear_3
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCRear4
+  components:
+  - type: Sprite
+    state: rear_4
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCRear5
+  components:
+  - type: Sprite
+    state: rear_5
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCRear6
+  components:
+  - type: Sprite
+    state: rear_6
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCWall1
+  components:
+  - type: Sprite
+    state: wall_1
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCWall2
+  components:
+  - type: Sprite
+    state: wall_2
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCWall3
+  components:
+  - type: Sprite
+    state: wall_3
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCWall4
+  components:
+  - type: Sprite
+    state: wall_4
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCWall5
+  components:
+  - type: Sprite
+    state: wall_5
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCWall6
+  components:
+  - type: Sprite
+    state: wall_6
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCWall
+  components:
+  - type: Sprite
+    state: wall
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCWallViewport
+  components:
+  - type: Sprite
+    drawdepth: Walls
+    state: wall
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCWallSmallL
+  components:
+  - type: Sprite
+    state: wall_small_L
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCWallSmallR
+  components:
+  - type: Sprite
+    state: wall_small_R
+
+- type: entity
+  parent: VehicleAPCRoofBase
+  id: VehicleAPCWallDoorFront
+  components:
+  - type: Sprite
+    layers:
+    - state: wall_door_front
+      map: [ "roof" ]
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+    fadeOnSharedGrid: true
+    fadeLayers:
+    - "roof"
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RMCIgnoreGhostInteractionLimits
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
+
+- type: entity
+  parent: VehicleAPCDoorBase
+  id: VehicleAPCDoorFront
+  components:
+  - type: Sprite
+    state: door_front
+
+- type: entity
+  parent: VehicleAPCDoorBase
+  id: VehicleAPCDoorBack
+  components:
+  - type: Sprite
+    state: door_back
+
+- type: entity
+  parent: VehicleAPCDoorBase
+  id: VehicleAPCDoorRearRight
+  components:
+  - type: Sprite
+    state: door_rear_right
+
+- type: entity
+  parent: VehicleAPCDoorBase
+  id: VehicleAPCDoorRearCenter
+  components:
+  - type: Sprite
+    state: door_rear_center
+
+- type: entity
+  parent: VehicleAPCDoorBase
+  id: VehicleAPCDoorRearLeft
+  components:
+  - type: Sprite
+    state: door_rear_left
+
+- type: entity
+  parent: VehicleAPCDoorBase
+  id: VehicleAPCExitDoor
+  components:
+  - type: Sprite
+    state: exit_door
+  - type: VehicleExit
+  - type: RMCIgnoreGhostInteractionLimits
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCCornerL
+  components:
+  - type: Sprite
+    state: corner_L
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCCornerR
+  components:
+  - type: Sprite
+    state: corner_R
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCCornerInverseL
+  components:
+  - type: Sprite
+    state: corner_inverse_L
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCCornerInverseL1
+  components:
+  - type: Sprite
+    state: corner_inverse_L_1
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCCornerInverseL2
+  components:
+  - type: Sprite
+    state: corner_inverse_L_2
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCCornerInverseL3
+  components:
+  - type: Sprite
+    state: corner_inverse_L_3
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCCornerInverseL4
+  components:
+  - type: Sprite
+    state: corner_inverse_L_4
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCCornerInverseL5
+  components:
+  - type: Sprite
+    state: corner_inverse_L_5
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCCornerInverseR
+  components:
+  - type: Sprite
+    state: corner_inverse_R
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCCornerInverseR1
+  components:
+  - type: Sprite
+    state: corner_inverse_R_1
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCCornerInverseR2
+  components:
+  - type: Sprite
+    state: corner_inverse_R_2
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCCornerInverseR3
+  components:
+  - type: Sprite
+    state: corner_inverse_R_3
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCCornerInverseR4
+  components:
+  - type: Sprite
+    state: corner_inverse_R_4
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCCornerSmallL
+  components:
+  - type: Sprite
+    state: corner_small_L
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCCornerSmallR
+  components:
+  - type: Sprite
+    state: corner_small_R
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCFrontWheelL
+  components:
+  - type: Sprite
+    state: front_wheel_L
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCFrontWheelR
+  components:
+  - type: Sprite
+    state: front_wheel_R
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCRearWheelL
+  components:
+  - type: Sprite
+    state: rear_wheel_L
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCRearWheelR
+  components:
+  - type: Sprite
+    state: rear_wheel_R
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCApcFront1
+  components:
+  - type: Sprite
+    state: apc_front_1
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCApcFront2
+  components:
+  - type: Sprite
+    state: apc_front_2
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCApcFront3
+  components:
+  - type: Sprite
+    state: apc_front_3
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCApcRight1
+  components:
+  - type: Sprite
+    state: apc_right_1
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCApcRight2
+  components:
+  - type: Sprite
+    state: apc_right_2
+
+- type: entity
+  parent: VehicleAPCRoofBase
+  id: VehicleAPCApcRight3
+  components:
+  - type: Sprite
+    layers:
+    - state: apc_right_3
+      map: [ "roof" ]
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+    fadeOnSharedGrid: true
+    fadeLayers:
+    - "roof"
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCApcRight4
+  components:
+  - type: Sprite
+    state: apc_right_4
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCApcBack1
+  components:
+  - type: Sprite
+    state: apc_back_1
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCApcBack2
+  components:
+  - type: Sprite
+    state: apc_back_2
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCApcBack3
+  components:
+  - type: Sprite
+    state: apc_back_3
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCApcLeft1
+  components:
+  - type: Sprite
+    state: apc_left_1
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCApcLeft2
+  components:
+  - type: Sprite
+    state: apc_left_2
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCApcLeft3
+  components:
+  - type: Sprite
+    state: apc_left_3
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCApcLeft4
+  components:
+  - type: Sprite
+    state: apc_left_4
+
+- type: entity
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCWheelFrontTop1
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    state: wheel_front_top_1
+
+- type: entity
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCWheelFrontTop2
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    state: wheel_front_top_2
+
+- type: entity
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCWheelBackTop1
+  components:
+  - type: Sprite
+    state: wheel_back_top_1
+
+- type: entity
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCWheelBackTop2
+  components:
+  - type: Sprite
+    state: wheel_back_top_2
+
+- type: entity
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCInteriorMarker
+  components:
+  - type: Sprite
+    state: current_interior_sprites
+
+- type: entity
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCM56FPWInterior
+  components:
+  - type: Sprite
+    state: m56_FPW
+  - type: Clickable
+  - type: InteractionOutline
+  - type: WallMount
+    arc: 360
+  - type: VehiclePortGunController
+
+- type: entity
+  parent: VehicleAPCM56FPWInterior
+  id: VehicleAPCM56FPWInteriorNorth
+  components:
+  - type: VehiclePortGunController
+    gunSlotId: port-gun-north
+
+- type: entity
+  parent: VehicleAPCM56FPWInterior
+  id: VehicleAPCM56FPWInteriorSouth
+  components:
+  - type: VehiclePortGunController
+    gunSlotId: port-gun-south
+
+- type: entity
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCSensors
+  components:
+  - type: Sprite
+    state: sensors_equipment
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCBack1
+  components:
+  - type: Sprite
+    state: rear_1
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCBack2
+  components:
+  - type: Sprite
+    state: rear_2
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCBack3
+  components:
+  - type: Sprite
+    state: rear_3
+
+- type: entity
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCBackground1
+  components:
+  - type: Sprite
+    state: wall_1
+
+- type: entity
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCBackground2
+  components:
+  - type: Sprite
+    state: wall_2
+
+- type: entity
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCBackground3
+  components:
+  - type: Sprite
+    state: wall_3
+
+- type: entity
+  parent: VehicleAPCWallBase
+  id: VehicleAPCExterior1
+  components:
+  - type: Sprite
+    state: front_4
+
+- type: entity
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCExterior2
+  components:
+  - type: Sprite
+    state: front_5
+
+- type: entity
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCExterior3
+  components:
+  - type: Sprite
+    state: front_6
+
+- type: entity
+  parent: VehicleAPCDoorBase
+  id: VehicleAPCExteriorDoor
+  components:
+  - type: Sprite
+    state: door_back
+  - type: Occluder
+    enabled: false
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
+
+- type: entity
+  parent: VehicleAPCDoorBase
+  id: VehicleAPCExteriorDoorUnique
+  components:
+  - type: Sprite
+    state: door_front
+
+- type: entity
+  parent: VehicleAPCDoorBase
+  id: VehicleAPCInteriorDoor
+  components:
+  - type: Sprite
+    state: exit_door
+
+- type: entity
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCFrontRoof1
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    state: wheel_front_top_1
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCFrontRoof2
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    state: wheel_front_top_2
+
+- type: entity
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCRoof2
+  components:
+  - type: Sprite
+    state: wall_4
+
+- type: entity
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCWindshieldTop
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    state: wheel_back_top_2
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCWindshieldBottom
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    state: wheel_back_top_1
+  - type: Occluder
+    enabled: false
+

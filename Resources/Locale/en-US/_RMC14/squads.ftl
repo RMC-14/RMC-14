@@ -2,6 +2,8 @@ squad-alpha = Alpha Squad
 squad-bravo = Bravo Squad
 squad-charlie = Charlie Squad
 squad-delta = Delta Squad
+squad-echo = Echo Squad
+squad-foxtrot = Foxtrot Squad
 
 squad-alpha-name = Alpha {$name}
 squad-bravo-name = Bravo {$name}

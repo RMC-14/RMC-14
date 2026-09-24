@@ -15,5 +15,6 @@ public readonly record struct TechOption(
     bool Purchased,
     List<object> Events,
     SpriteSpecifier.Rsi Icon,
-    TimeSpan TimeLock
+    TimeSpan TimeLock,
+    bool Disabled = false
 );

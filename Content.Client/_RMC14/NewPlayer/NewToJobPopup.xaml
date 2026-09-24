@@ -1,22 +1,22 @@
 <controls:FancyWindow xmlns="https://spacestation14.io"
                       xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
                       Title="{Loc 'rmc-new-to-job-popup-title'}"
-                      SetSize="950 950">
+                      SetSize="800 500">
     <BoxContainer Orientation="Vertical" Margin="20">
         <Label Name="TitleLabel"
                StyleClasses="LabelBig"
                HorizontalAlignment="Center"
                Margin="0 0 0 5" />
         <PanelContainer StyleClasses="BackgroundDark" Margin="0 0 0 10" VerticalExpand="True" HorizontalExpand="True">
+            <ScrollContainer VerticalExpand="True" HorizontalExpand="True" VScrollEnabled="True" HScrollEnabled="False">
             <BoxContainer Orientation="Vertical" Margin="10" VerticalExpand="True">
                 <RichTextLabel Name="NewToJobName" HorizontalAlignment="Center" />
                 <Control MinSize="0 5" />
-                <ScrollContainer HScrollEnabled="False" VScrollEnabled="True" HorizontalExpand="True" VerticalExpand="True" MinSize="0 200" Margin="0 5 0 0">
                     <RichTextLabel Name="NewToJobLabel" HorizontalAlignment="Left" Margin="0" />
-                </ScrollContainer>
                 <Control MinSize="0 5" />
                 <RichTextLabel Name="NewToJobAdditional" HorizontalAlignment="Center" Margin="0 5 0 0" />
             </BoxContainer>
+            </ScrollContainer>
         </PanelContainer>
         <BoxContainer Orientation="Vertical" VerticalAlignment="Bottom" Margin="0 10 0 0">
             <Button Name="NewToJobCloseButton"

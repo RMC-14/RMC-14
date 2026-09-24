@@ -1,0 +1,25 @@
+﻿- type: entity
+  id: XenoAcidBlast
+  name: acid blast
+  components:
+  - type: XenoAcidBlast
+    delay: 1.35
+    baseDamage:
+      types:
+        Heat: 45
+
+- type: entity
+  id: XenoAcidBlastEmpowered
+  parent: XenoAcidBlast
+  name: acid blast
+  components:
+  - type: XenoAcidBlast
+    telegraphEffect: RMCEffectXenoTelegraphRedPulse
+    empowered: true
+    delay: 1.35
+    baseDamage:
+      types:
+        Heat: 45
+    acidDamage:
+      types:
+        Heat: 1.25

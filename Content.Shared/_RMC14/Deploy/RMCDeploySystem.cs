@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
@@ -13,6 +14,7 @@ using Content.Shared.Item.ItemToggle.Components;
 using System.Numerics;
 using Content.Shared.Foldable;
 using Content.Shared.Examine;
+using Content.Shared.Verbs;
 using Robust.Shared.Prototypes;
 using Content.Shared.Destructible;
 using Content.Shared.Buckle.Components;
@@ -56,6 +58,7 @@ public sealed class RMCDeploySystem : EntitySystem
         SubscribeLocalEvent<RMCDeployableComponent, ComponentShutdown>(OnDeployableShutdown);
         // React to collapse attempt using a tool
         SubscribeLocalEvent<RMCDeployedEntityComponent, InteractUsingEvent>(OnParentalCollapseInteractUsing);
+        SubscribeLocalEvent<RMCDeployedEntityComponent, GetVerbsEvent<AlternativeVerb>>(OnDeployedGetAlternativeVerbs);
         SubscribeLocalEvent<RMCDeployedEntityComponent, RMCParentalCollapseDoAfterEvent>(OnParentalCollapseDoAfter);
         SubscribeLocalEvent<RMCDeployableComponent, ExaminedEvent>(OnDeployableExamined);
         SubscribeLocalEvent<RMCDeployedEntityComponent, ExaminedEvent>(OnDeployedExamined);
@@ -541,11 +544,7 @@ public sealed class RMCDeploySystem : EntitySystem
         if (args.Handled)
             return;
 
-        // Check if this entity is from a ReactiveParentalSetup
-        if (!TryComp<RMCDeployableComponent>(ent.Comp.OriginalEntity, out var deployable))
-            return;
-        var setup = deployable.DeploySetups[ent.Comp.SetupIndex];
-        if (setup.Mode != RMCDeploySetupMode.ReactiveParental)
+        if (!TryGetReactiveParentalDeployable(ent, out var deployable))
             return;
 
         // Check if deployable has CollapseToolPrototype specified
@@ -564,7 +563,44 @@ public sealed class RMCDeploySystem : EntitySystem
 
         args.Handled = true;
 
-        var doAfter = new DoAfterArgs(_entMan, args.User, TimeSpan.FromSeconds(deployable.CollapseTime), new RMCParentalCollapseDoAfterEvent(), ent.Owner)
+        StartCollapseDoAfter(ent.Owner, args.User, deployable);
+    }
+
+    /// <summary>
+    /// Adds a context menu collapse action for deployables that do not require a collapse tool.
+    /// </summary>
+    private void OnDeployedGetAlternativeVerbs(Entity<RMCDeployedEntityComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!args.CanAccess || !args.CanInteract)
+            return;
+
+        if (!TryGetReactiveParentalDeployable(ent, out var deployable) || !deployable.CollapseWithoutTool)
+            return;
+
+        var user = args.User;
+        args.Verbs.Add(new AlternativeVerb
+        {
+            Text = Loc.GetString("rmc-deployed-collapse-verb"),
+            Act = () => StartCollapseDoAfter(ent.Owner, user, deployable)
+        });
+    }
+
+    private bool TryGetReactiveParentalDeployable(Entity<RMCDeployedEntityComponent> ent, [NotNullWhen(true)] out RMCDeployableComponent? deployable)
+    {
+        deployable = null;
+        if (!TryComp(ent.Comp.OriginalEntity, out deployable))
+            return false;
+
+        if (ent.Comp.SetupIndex < 0 || ent.Comp.SetupIndex >= deployable.DeploySetups.Count)
+            return false;
+
+        var setup = deployable.DeploySetups[ent.Comp.SetupIndex];
+        return setup.Mode == RMCDeploySetupMode.ReactiveParental;
+    }
+
+    private void StartCollapseDoAfter(EntityUid deployed, EntityUid user, RMCDeployableComponent deployable)
+    {
+        var doAfter = new DoAfterArgs(_entMan, user, TimeSpan.FromSeconds(deployable.CollapseTime), new RMCParentalCollapseDoAfterEvent(), deployed)
         {
             BreakOnMove = true,
             BreakOnDamage = true,
@@ -573,8 +609,7 @@ public sealed class RMCDeploySystem : EntitySystem
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))
-            _popup.PopupClient(Loc.GetString("rmc-deployable-collapse-start"), args.User, args.User, PopupType.Small);
-
+            _popup.PopupClient(Loc.GetString("rmc-deployable-collapse-start"), user, user, PopupType.Small);
     }
 
     /// <summary>
@@ -712,6 +747,10 @@ public sealed class RMCDeploySystem : EntitySystem
         {
             var toolName = proto.Name;
             args.PushMarkup(Loc.GetString("rmc-deployed-collapse-hint", ("tool", toolName)));
+        }
+        else if (deployable.CollapseWithoutTool)
+        {
+            args.PushMarkup(Loc.GetString("rmc-deployed-collapse-without-tool-hint"));
         }
     }
 }

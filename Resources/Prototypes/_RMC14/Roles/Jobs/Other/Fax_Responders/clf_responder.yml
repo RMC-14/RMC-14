@@ -2,6 +2,7 @@
   parent: RMCJobRibbonBase
   id: CMCLFResponder
   name: rmc-job-name-clf-responder
+  spawnMenuRoleName: CLF Information Correspondent (Fax Responder)
   description: rmc-job-description-clf-responder
   playTimeTracker: CMJobCLFResponder
   ranks:

@@ -12,8 +12,6 @@
   abstract: true
   components:
   - type: CanBuildThickFromConstructNode
-  - type: GhostRole
-    name: cm-job-name-xeno-carrier
   - type: MobState
     allowedStates:
     - Alive
@@ -132,6 +130,9 @@
     - map: [ "enum.XenoInhandVisualLayers.Left" ]
       visible: false
     - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
+    - map: [ "enum.RMCShieldVisuals.Base" ]
+      sprite: _RMC14/Effects/xeno_shields.rsi
       visible: false
   - type: Xeno
     actionIds:

@@ -188,6 +188,9 @@
     - Cartridge
     - RMCShellShotgun
     - RMCShellShotgunBeanbag
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleMilitaryPolice
 
 - type: stack
   id: RMCShellShotgunBeanbag

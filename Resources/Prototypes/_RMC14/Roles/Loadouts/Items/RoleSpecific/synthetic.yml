@@ -157,13 +157,13 @@
   storage:
     back:
     - RMCTie
-    
+
 - type: loadout
   id: TieGreenRMC
   storage:
     back:
     - RMCTieGreen
-    
+
 - type: loadout
   id: TieBlackRMC
   storage:
@@ -175,7 +175,7 @@
   storage:
     back:
     - RMCTieGold
-    
+
 - type: loadout
   id: TieRedRMC
   storage:
@@ -286,19 +286,19 @@
   storage:
     back:
     - RMCHardHat
-    
+
 - type: loadout
   id: HardHatOrangeRMC
   storage:
     back:
     - RMCHardhatOrange
-    
+
 - type: loadout
   id: HardHatWhiteRMC
   storage:
     back:
     - RMCHardhatWhite
-    
+
 - type: loadout
   id: HardHatBlueRMC
   storage:
@@ -417,3 +417,22 @@
   id: SatchelWelderRMC
   equipment:
     back: RMCSatchelWelder
+
+# Generations
+- type: loadout
+  id: RMCSynthGenOne
+  componentsAdd: true
+  equipment:
+    none: RMCSynthGenOne
+
+- type: loadout
+  id: RMCSynthGenTwo
+  componentsAdd: true
+  equipment:
+    none: RMCSynthGenTwo
+
+- type: loadout
+  id: RMCSynthGenThree
+  componentsAdd: true
+  equipment:
+    none: RMCSynthGenThree

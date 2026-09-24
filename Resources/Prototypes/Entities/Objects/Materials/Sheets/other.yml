@@ -135,6 +135,7 @@
 - type: entity
   parent: SheetPlasma
   id: SheetPlasmaLingering0
+  categories: [ HideSpawnMenu ] # RMC 14
   name: plasma
   suffix: 0, Lingering
   components:

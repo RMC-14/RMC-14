@@ -6,8 +6,10 @@
   components:
   - type: Transform
     noRot: true
+  - type: VehicleSmashable
   - type: Physics
     bodyType: Static
+    canCollide: false
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/hospital_divider.rsi
     state: hospitalcurtain

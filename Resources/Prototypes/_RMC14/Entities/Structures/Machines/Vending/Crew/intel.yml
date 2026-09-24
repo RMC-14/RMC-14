@@ -1,7 +1,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechIntelGear
-  name: ColMarTech intelligence officer gear rack
+  name: ASRS intelligence officer gear rack
   description: An automated gear rack for IOs.
   components:
   - type: AccessReader
@@ -39,6 +39,8 @@
         points: 10
     - name: Sidearm Ammunition
       entries:
+      - id: RMCMagazinePistolM13Ext
+        points: 10
       - id: RMCSpeedLoader44Marksman
         points: 10 # TODO RMC14 heavy speed revolver
       - id: RMCMagazinePistolM1984AP
@@ -112,7 +114,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechIntelEquipment
-  name: ColMarTech intelligence officer equipment rack
+  name: ASRS intelligence officer equipment rack
   description: An automated rack hooked up to a colossal storage of IO standard-issue equipment.
   components:
   - type: AccessReader
@@ -178,6 +180,7 @@
       - id: RMCBeltHolsterPistol
       - id: RMCBeltHolsterSMG
       - id: RMCBeltHolsterRevolver
+      - id: RMCBeltHolsterM13
       - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtilityFilled
         name: M276 pattern toolbelt rig (Full)
@@ -228,7 +231,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechIntelWeapons
-  name: ColMarTech intelligence officer weapons rack
+  name: ASRS intelligence officer weapons rack
   description: An automated weapon rack hooked up to a small storage of standard-issue weapons. Can be accessed only by the Intelligence Officers.
   components:
   - type: AccessReader
@@ -237,6 +240,11 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
+    canManualRestock: true
+    ignoreBulkRestockById:
+    - RMCBoxShotgunBuckshot
+    - RMCBoxShotgunFlechette
+    - RMCBoxShotgunSlugs
     jobs:
     - CMIntelOfficer
     sections:
@@ -272,8 +280,14 @@
         amount: 4
       - id: CMWeaponPistolM1984Empty
         amount: 4
+      - id: RMCWeaponPistolM13Empty
+        amount: 4
     - name: Sidearm Ammunition
       entries:
+      - id: RMCMagazinePistolM13
+        amount: 20
+      - id: RMCMagazinePistolM13Ext
+        amount: 8
       - id: CMMagazinePistolM77AP
         amount: 20
       - id: RMCSpeedLoaderM44
@@ -308,6 +322,7 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleIntel
+  categories: [ HideSpawnMenu ]
   name: essential intel set
   description: Contains a crowbar, fultons, an intel detector, and binoculars.
   components:

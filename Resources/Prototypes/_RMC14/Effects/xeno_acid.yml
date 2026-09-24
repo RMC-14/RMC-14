@@ -208,7 +208,6 @@
   components:
   - type: WallMount
     arc: 360
-  - type: InteractionOutline
   - type: Transform
     anchored: true
   - type: Physics

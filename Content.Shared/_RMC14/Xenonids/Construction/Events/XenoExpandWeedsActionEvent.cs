@@ -17,4 +17,7 @@ public sealed partial class XenoExpandWeedsActionEvent : WorldTargetActionEvent
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 SourcePlasmaCost = 260;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan SourceCooldown = TimeSpan.FromSeconds(7);
 }

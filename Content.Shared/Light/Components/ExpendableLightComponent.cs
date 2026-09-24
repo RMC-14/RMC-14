@@ -49,10 +49,18 @@ public sealed partial class ExpendableLightComponent : Component
     [DataField]
     public Color? GlowColorLit = null;
 
+    //RMC14
+    /// <summary>
+    /// Whether the sprite uses the overlay for animation in addition to the base sprite
+    /// </summary>
+    [DataField]
+    public bool UsesOverlay = true;
+    //RMC14
+
     /// <summary>
     /// The sound that plays when the expendable light is lit.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public EntityUid? PlayingStream;
 
     /// <summary>

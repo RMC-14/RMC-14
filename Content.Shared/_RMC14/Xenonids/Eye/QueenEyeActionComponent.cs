@@ -1,4 +1,4 @@
-﻿using Content.Shared.Eye;
+using Content.Shared.Eye;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 

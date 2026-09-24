@@ -1,0 +1,106 @@
+- type: job
+  parent: CMJobBase
+  id: CMChiefMP
+  name: cm-job-name-chief-mp
+  description: cm-job-description-chief-mp
+  playTimeTracker: CMJobChiefMP
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: CMMilitaryPolice
+    time: 54000 # 15 hours
+  - !type:RoleTimeRequirement
+    role: CMJobMilitaryWarden
+    time: 18000 # 5 hours
+  - !type:DepartmentTimeRequirement
+    department: CMCommand
+    time: 18000 # 5 hours
+  ranks:
+    RMCRankFirstLT:
+    - !type:RoleTimeRequirement
+      role: CMJobChiefMP
+      time: 252000 # 70 hours
+    RMCRankSecondLT: []
+  weight: 5
+  startingGear: CMGearChiefMP
+  icon: "CMJobIconChiefMP"
+  requireAdminNotify: true
+  joinNotifyCrew: false
+  marineAuthorityLevel: 11
+  supervisors: rmc-job-supervisors-commander
+  accessGroups:
+  - CMP
+  roleWeight: 0.25
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillCqc: 2
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillIntel: 1
+        RMCSkillJtac: 3
+        RMCSkillLeadership: 2
+        RMCSkillMedical: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 2
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-mp
+    - type: ViewIntelObjectives
+    - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: cmp
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_mp
+    - type: RMCTrackable
+    - type: RMCAwardRecommendation
+    - type: SeeNewPlayers
+
+- type: startingGear
+  id: CMGearChiefMP
+  equipment:
+    jumpsuit: CMJumpsuitWO
+    shoes: CMBootsBlackFilled
+    head: CMHeadBeretCMP
+    eyes: CMGlassesSecurity
+    gloves: CMHandsBlackMarine
+    id: CMIDCardChiefMP
+    outerClothing: CMArmorM3WO
+    ears: CMHeadsetCMP
+    belt: CMBeltSecurityMPFilled
+    pocket1: RMCUniversalRecorder
+    pocket2: RMCPouchGeneralLarge
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointChiefMP
+  name: chief mp spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMChiefMP
+  - type: Sprite
+    state: cmp_spawn
+
+- type: playTimeTracker
+  id: CMJobChiefMP
+  isHumanoid: true
+
+# Guidebook
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleCMP
+  name: The Chief MP
+  description: The Chief of Military Police.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: chief_military_police

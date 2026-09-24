@@ -498,7 +498,52 @@
     slot:
       whitelist:
         tags:
-        - RMCMagazineRifleType71AP
+        - RMCMagazineRifleType71HEAP
+
+# Type 71 Rubber
+- type: entity
+  parent: RMCBoxMagazineRifleLargeBase
+  id: RMCBoxLargeMagazineRifleType71RubberEmpty
+  name: large magazine box (rubber Type 71 x 32)
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box_large
+      color: "#962e23"
+    - state: rifle_ammo_large_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_large_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#9C9A19"
+    - state: rifle_box_71
+      color: "#ffcb26"
+    - state: rifle_box_large_marking
+      color: "#0A00C8"
+    - state: rifle_lid_large
+      map: [ "lid" ]
+      color: "#962e23"
+    - state: rifle_lid_large_marking
+      map: [ "lid_marking" ]
+      color: "#0A00C8"
+  - type: CMItemSlots
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleType71Rubber
+
+- type: entity
+  parent: RMCBoxLargeMagazineRifleType71RubberEmpty
+  id: RMCBoxLargeMagazineRifleType71Rubber
+  suffix: PVE, Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleType71Rubber
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleType71Rubber
 
 # L90/91 Reg
 - type: entity
