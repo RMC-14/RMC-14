@@ -1,0 +1,69 @@
+- type: job
+  parent: RMCSurvivorSPPCrashlandBase
+  id: RMCSurvivorSPPCrashlandSynth
+  name: rmc-job-name-crashland-synth
+  startingGear: RMCGearSPPCrashlandSynth
+  ranks:
+    RMCRankSyntheticColonist: []
+  icon: "RMCJobIconSPPSynth"
+  spawnMenuRoleName: SPP Airborne Synthetic (Trijent Special Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Language
+      preset: RMCLanguagePresetSynthColonist
+    - type: LanguageLearning
+      preset: RMCLanguageLearningPresetSynthColonist
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      squad: SquadSPP
+    - type: JobPrefix
+      prefix: rmc-job-prefix-crashland-synth
+    - type: RMCSurvivor
+    - type: Synth
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearSPPCrashlandBase
+  id: RMCGearSPPCrashlandSynth
+  equipment:
+    belt: RMCBeltMedicBagSPP
+    outerClothing: RMCOuterClothingExternalWebbingSPPSurvivor
+    head: CMHeadCapSPPBeret
+    back: RMCSatchelSPP
+    suitstorage: RMCFlashlight
+    pocket1: RMCPouchToolsSocFilledSPPSynthetic
+    pocket2: RMCPouchSurvivalSynthFill
+  storage:
+    back:
+    - CMSheetMetal20
+    - CMRollerBedSpawnFolded
+    - CMMultitool
+    - RMCCableCoil
+    - CMHealthAnalyzer
+    - RMCSynthResetKeyNovaris
+    belt:
+    - CMUpgradedTraumaKit10
+    - CMUpgradedTraumaKit10
+    - CMUpgradedBurnKit10
+    - CMUpgradedBurnKit10
+    # - RMCSplint
+    # - RMCHyposprayOxycodone
+    - CMPillCanisterBicaridine
+    - CMPillCanisterKelotane
+    - CMPillCanisterInaprovaline
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSPPCrashlandSynth
+  name: special survivor spp crashland synth spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSPPCrashlandSynth
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv_spp

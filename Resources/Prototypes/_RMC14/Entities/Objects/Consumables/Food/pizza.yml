@@ -472,14 +472,27 @@
   components:
   - type: StorageFill
     contents:
-      - id: RMCFoodPizzaMargheritaFull
-        prob: 0.25
-      - id: RMCFoodPizzaVegetableFull
-        prob: 0.25
-      - id: RMCFoodPizzaMushroomFull
-        prob: 0.25
-      - id: RMCFoodPizzaVegetableFull
-        prob: 0.25
+    - id: RMCFoodPizzaMeatFull
+      prob: 0.15
+      orGroup: Pizza
+    - id: RMCFoodPizzaVegetableFull
+      prob: 0.15
+      orGroup: Pizza
+    - id: RMCFoodPizzaMargheritaFull
+      prob: 0.15
+      orGroup: Pizza
+    - id: RMCFoodPizzaMushroomFull
+      prob: 0.15
+      orGroup: Pizza
+    - id: RMCFoodPizzaHawaiianFull
+      prob: 0.15
+      orGroup: Pizza
+    - id: RMCFoodPizzaSupremeFull
+      prob: 0.15
+      orGroup: Pizza
+    - id: RMCFoodPizzaCalabresaFull
+      prob: 0.15
+      orGroup: Pizza
 
 - type: entity
   parent: RMCBoxPizzaGalaxy
@@ -488,11 +501,24 @@
   components:
   - type: StorageFill
     contents:
-      - id: RMCFoodPizzaMargheritaFull
-        prob: 0.25
-      - id: RMCFoodPizzaVegetableFull
-        prob: 0.25
-      - id: RMCFoodPizzaMushroomFull
-        prob: 0.25
-      - id: RMCFoodPizzaVegetableFull
-        prob: 0.25
+    - id: RMCFoodPizzaMeatFull
+      prob: 0.15
+      orGroup: Pizza
+    - id: RMCFoodPizzaVegetableFull
+      prob: 0.15
+      orGroup: Pizza
+    - id: RMCFoodPizzaMargheritaFull
+      prob: 0.15
+      orGroup: Pizza
+    - id: RMCFoodPizzaMushroomFull
+      prob: 0.15
+      orGroup: Pizza
+    - id: RMCFoodPizzaHawaiianFull
+      prob: 0.15
+      orGroup: Pizza
+    - id: RMCFoodPizzaSupremeFull
+      prob: 0.15
+      orGroup: Pizza
+    - id: RMCFoodPizzaCalabresaFull
+      prob: 0.15
+      orGroup: Pizza
