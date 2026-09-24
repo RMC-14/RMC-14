@@ -53,11 +53,15 @@
   inhand:
   - RMCMotionDetector
   - CMFirstAidKitFilled
+  storage:
+    back:
+    - RMCSynthResetKey
 
 - type: entity
   parent: CMSpawnPointJobBase
   id: CMSpawnPointForeconSynth
   name: forecon synthetic spawn point
+  suffix: survivor
   components:
   - type: SpawnPoint
     job_id: RMCSurvivorForeconSynth
