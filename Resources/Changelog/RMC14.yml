@@ -1,91 +1,6 @@
 ﻿Entries:
 - author: Dygon
   changes:
-  - message: Supply drops now always drop at the given coordinates.
-    type: Fix
-  id: 3152
-  time: '2026-04-22T04:11:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9581
-- author: Arykh
-  changes:
-  - message: Emergency surgical cabinet contents now scale with active Doctors and
-      CMOs at hijack start.
-    type: Tweak
-  id: 3153
-  time: '2026-04-22T04:12:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9555
-- author: IceNoobXD
-  changes:
-  - message: new Lobby Icons for the Queen, Xenonid, Correspondent, Rifleman and Colonist
-      roles
-    type: Add
-  id: 3154
-  time: '2026-04-22T04:14:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9457
-- author: TadJohnson00
-  changes:
-  - message: The TSE's L1 ballistic helmet has been changed to the royal L5A1 ballistic
-      helmet.
-    type: Tweak
-  id: 3155
-  time: '2026-04-22T04:13:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9573
-- author: Dygon
-  changes:
-  - message: You can now store the ML66D gun component and the ML66D mount component
-      in the heavy gunner belt.
-    type: Tweak
-  id: 3156
-  time: '2026-04-22T04:16:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9264
-- author: YesNoMaybePerhaps
-  changes:
-  - message: Changed the capacity of boxes of pill bottles from 7 to 8
-    type: Tweak
-  id: 3157
-  time: '2026-04-22T04:18:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8915
-- author: TadJohnson00
-  changes:
-  - message: '[PVE] Added the L33 DAAMSL, a shoulder-fired disposable rocket launcher
-      belonging to the Royal Crown Marines faction.'
-    type: Add
-  id: 3158
-  time: '2026-04-22T04:15:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9393
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed squad headsets not having the correct default channel, they should
-      now default to your squad.
-    type: Fix
-  id: 3159
-  time: '2026-04-22T04:17:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9175
-- author: Dygon
-  changes:
-  - message: Fixed left clicking a weapon mount as a xenonid dismounting the user.
-    type: Fix
-  - message: You can now pick up a folded weapon mount with harm mode toggled on.
-    type: Fix
-  id: 3160
-  time: '2026-04-23T23:32:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9719
-- author: kleinerstation13
-  changes:
-  - message: Added intact TSE airbase insert, which has a 28% chance of occuring.
-    type: Add
-  id: 3161
-  time: '2026-04-23T23:31:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9671
-- author: SharkSnake98
-  changes:
-  - message: Changed the sprites of the potted plants, palm trees, and red couch
-    type: Tweak
-  id: 3162
-  time: '2026-04-23T23:33:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9707
-- author: Dygon
-  changes:
   - message: Fixed throwing items into disposal bins.
     type: Fix
   - message: Bullets no longer pass through ColMarTech vendors.
@@ -4440,5 +4355,85 @@
   id: 3651
   time: '2026-09-16T18:37:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10849
+- author: kleinerstation13
+  changes:
+  - message: Fixed shivas colored prefab wall variants being reinforced instead of
+      soft walls
+    type: Fix
+  id: 3652
+  time: '2026-09-17T19:00:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10842
+- author: Vermidia
+  changes:
+  - message: Fixed king doom not properly removing chemicals.
+    type: Fix
+  id: 3653
+  time: '2026-09-18T10:26:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10823
+- author: ffxivsidehoes
+  changes:
+  - message: Adjusted EORG box size
+    type: Fix
+  id: 3654
+  time: '2026-09-18T15:18:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10415
+- author: Drazamuffin
+  changes:
+  - message: Changed hive collapse announcement to correctly instruct the player what
+      is happening.
+    type: Tweak
+  id: 3655
+  time: '2026-09-18T15:23:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10822
+- author: wheelwrightt
+  changes:
+  - message: First weld upon equipping new welding goggles no longer flashes blindness
+      effect
+    type: Fix
+  id: 3656
+  time: '2026-09-18T15:23:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10545
+- author: Ozehk
+  changes:
+  - message: The FORECON Spotter now has a HUD icon.
+    type: Tweak
+  id: 3657
+  time: '2026-09-18T15:42:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10585
+- author: Vermidia
+  changes:
+  - message: Fixed rockets overshooting at aimed spots.
+    type: Fix
+  id: 3658
+  time: '2026-09-18T15:47:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10420
+- author: kleinerstation13
+  changes:
+  - message: Fixed lifeboat doors being meltable
+    type: Fix
+  id: 3659
+  time: '2026-09-19T00:35:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10866
+- author: FreeSpy443
+  changes:
+  - message: Enabled Command Tablet Medal printing
+    type: Tweak
+  id: 3660
+  time: '2026-09-21T18:10:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10876
+- author: kleinerstation13
+  changes:
+  - message: Fixed UNMC synthetic not having bigger pointing arrow
+    type: Fix
+  id: 3661
+  time: '2026-09-23T15:31:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10890
+- author: kleinerstation13
+  changes:
+  - message: Fixed a single SPP shuttle wall type incorrectly having occlusion enabled
+    type: Fix
+  id: 3662
+  time: '2026-09-23T15:30:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10891
 Name: RMC14
 Order: -1
