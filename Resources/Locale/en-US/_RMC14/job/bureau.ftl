@@ -35,6 +35,12 @@ rmc-ghost-name-bureau-riot-control-specialist = CMB Riot Control SWAT Specialist
 rmc-job-name-bureau-riot-control-specialist = CMB Riot Control SWAT Specialist
 rmc-job-prefix-bureau-riot-control-specialist = CMB SPT
 
+rmc-job-name-bureau-riot-control-medical-technician = CMB Medical Technician
+rmc-job-prefix-bureau-riot-control-medical-technician = CMB MT
+
+rmc-job-name-bureau-riot-control-breaching-technician = CMB Breaching Technician
+rmc-job-prefix-bureau-riot-control-breaching-technician = CMB BT
+
 rmc-ghost-name-bureau-observer = Interstellar Life Rights Observer (Friendly)
 rmc-job-name-bureau-observer = Interstellar Life Rights Observer
 rmc-job-prefix-bureau-observer = ILR
