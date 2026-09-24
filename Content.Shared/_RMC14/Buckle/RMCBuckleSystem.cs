@@ -7,8 +7,10 @@ using Content.Shared.Interaction;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Shuttles.Components;
+using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Physics.Events;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Buckle;
 
@@ -31,6 +33,7 @@ public sealed class RMCBuckleSystem : EntitySystem
         SubscribeLocalEvent<BuckleComponent, AttemptMobTargetCollideEvent>(OnBuckleAttemptMobTargetCollide);
         SubscribeLocalEvent<StrapComponent, EntParentChangedMessage>(OnBuckleParentChanged);
         SubscribeLocalEvent<StrapComponent, CombatModeShouldHandInteractEvent>(OnStrapCombatModeShouldHandInteract);
+        SubscribeLocalEvent<BuckleComponent, GetVerbsEvent<AlternativeVerb>>(AddAltUnbuckleVerb);
     }
 
     private void OnBuckleClimbableStrapped(Entity<BuckleClimbableComponent> ent, ref StrappedEvent args)
@@ -108,6 +111,24 @@ public sealed class RMCBuckleSystem : EntitySystem
         }
 
         return false;
+    }
+    
+    private void AddAltUnbuckleVerb(EntityUid uid, BuckleComponent component, GetVerbsEvent<AlternativeVerb> args)
+    {
+
+        if (!args.CanAccess || !args.CanInteract || !component.Buckled)
+            return;
+
+        if (!_buckle.CanUnbuckle((uid, component), args.User, false))
+            return;
+
+        AlternativeVerb verb = new()
+        {
+            Act = () => _buckle.TryUnbuckle(uid, args.User, buckleComp: component),
+            Text = Loc.GetString("verb-categories-unbuckle"),
+            Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/unbuckle.svg.192dpi.png"))
+        };
+        args.Verbs.Add(verb);
     }
 
     public override void Update(float frameTime)

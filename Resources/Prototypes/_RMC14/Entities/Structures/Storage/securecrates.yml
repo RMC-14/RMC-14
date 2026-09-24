@@ -17,7 +17,7 @@
     - CMBeltUtilityFilled
     - CMMultitool
     - RMCFlashlight
-    - FoodDonkpocket
+    - RMCFoodDonkpocket
     - CMGrenadeSmoke
     - DoorElectronics
     - CMWirecutter
@@ -399,7 +399,7 @@
     - id: RMCSmallFloodlightUnanchored
       amount: 4
   - type: SpawnOnTerminate
-    spawn: FoodDonkpocket
+    spawn: RMCFoodDonkpocket
 
 - type: entity
   parent: RMCSecureCaseStrapped #Floodlights (funny drag stuff)
@@ -506,6 +506,19 @@
       amount: 1
   - type: SpawnOnTerminate
     spawn: CMSheetPlasteel30
+
+- type: entity
+  parent: RMCSecureCase # x6 Sentry M30 ammo drum
+  id: RMCSecureCaseSentryAmmo6
+  name: UN 571-C ammunition drum case (x6)
+  description: An ammunition case containing 6 M30 ammo drums.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: RMCMagazineSentry
+      amount: 6
+  - type: SpawnOnTerminate
+    spawn: RMCPlankWood2
 
 #Blackmarket will be down from there TODO RMC14: Blackmarket Crates after R4T rifle
 
@@ -738,6 +751,7 @@
     noRot: true
   - type: InteractionOutline
   - type: Physics
+    canCollide: false
   - type: Fixtures
     fixtures:
       fix1:
@@ -875,6 +889,7 @@
     noRot: true
   - type: InteractionOutline
   - type: Physics
+    canCollide: false
   - type: Fixtures
     fixtures:
       fix1:

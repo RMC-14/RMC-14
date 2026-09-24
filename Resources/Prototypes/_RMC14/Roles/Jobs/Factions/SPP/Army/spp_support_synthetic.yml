@@ -1,0 +1,81 @@
+- type: job
+  parent: CMJobBase
+  id: RMCSPPSynthetic
+  name: rmc-job-name-spp-synth
+  description: rmc-ghost-role-information-spp-pve-description
+  playTimeTracker: RMCJobSPPSynthetic
+  ranks:
+    RMCRankSPPSynthetic: [ ]
+  startingGear: RMCGearSPPSynthetic
+  icon: "RMCJobIconSPPSynth"
+  joinNotifyCrew: false
+  accessGroups:
+  - ShipMasterAccess
+  - Synth
+  spawnMenuRoleName: SPP Support Synthetic
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - Scandinavian
+      - English
+      - Japanese
+      - Chinese
+      - German
+      - French
+      - Spanish
+      - Hindi
+      understoodLanguages:
+      - Russian
+      - Scandinavian
+      - English
+      - Japanese
+      - Chinese
+      - German
+      - French
+      - Spanish
+      - Hindi
+      currentLanguage: Russian
+      defaultLanguage: Russian
+    - type: LanguageLearning
+      learnableLanguages:
+      - Xeno
+      firstContactLanguages:
+      - Xeno
+      comprehensionThreshold: 0.8
+      learningRange: 8.0
+      baseWordLearningRate: 0.05
+    - type: CMVendorUser
+      id: RMCJobSynthetic
+      points: 45
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-synth
+    - type: Synth
+  hidden: true
+
+- type: startingGear
+  id: RMCGearSPPSynthetic
+  equipment:
+    head: CMHeadCapSPPBeret
+    ears: RMCHeadsetSPPCommand
+    eyes: RMCGlassesMedicalHUDGlasses
+    mask: CMScrewdriver
+    back: RMCSatchelSPPSynth
+    belt: RMCBeltMedicBagSPPSynthFilled
+    gloves: RMCHandsVeteranSPP
+    suitstorage: RMCMotionDetector # TODO RMC14 SPP-aligned MD
+    jumpsuit: RMCJumpsuitSPPMedicSurgicalWebbing
+    outerClothing: RMCArmorSPPSupportSynthFilled
+    shoes: RMCBootsSPPBlackFilled
+    id: RMCIDSPP
+    pocket1: RMCPouchToolsSocFilledSPPSynthetic
+    pocket2: RMCPouchMedicalSPPSynth
+
+- type: playTimeTracker
+  id: RMCJobSPPSynthetic
+  isHumanoid: true

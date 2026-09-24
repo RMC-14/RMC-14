@@ -9,7 +9,7 @@
   startingGear: RMCGearParaCommander
   icon: RMCJobIconParaCommander
   playTimeTracker: RMCJobSurvivorCO
-  spawnMenuRoleName: Royal Paramarine Commander (Survivor)
+  spawnMenuRoleName: Royal Paramarine Commander (Hybrisa Special Survivor)
   special:
     - !type:AddComponentSpecial
       components:
@@ -78,5 +78,5 @@
   parent: CMJobIconBase
   id: RMCJobIconParaCommander
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/TSE/RCM/paramarine.rsi
     state: para_commander_alt
