@@ -19,6 +19,16 @@
   parent: RMCBaseSquadAccess
   name: squad-delta
 
+- type: accessLevel
+  id: RMCAccessEcho
+  parent: RMCBaseSquadAccess
+  name: squad-echo
+
+- type: accessLevel
+  id: RMCAccessFoxtrot
+  parent: RMCBaseSquadAccess
+  name: squad-foxtrot
+
 # Almayer
 - type: accessLevel
   id: CMAccessMarinePrep
