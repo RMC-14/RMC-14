@@ -2,7 +2,7 @@
   parent: RMCWeaponFlamer
   id: RMCWeaponFlamerSPP
   name: LPO80 incinerator unit
-  description: An aged but effective lightweight combat incinerator officially in service as a anti-fortification tool but, in practice, utilized in close quarters combat for flushing out enemy combatants.
+  description: An aged but effective lightweight combat incinerator officially in service as a anti-fortification tool, but in practice, utilized in close quarters combat for flushing out enemy combatants. Due to a coincidence in the manufacturing process, the tank attachment point is technically forward compatible with M34 incinerator tanks, though it carries a miniscule risk of jamming the firing mechanism entirely.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/lpo80.rsi
@@ -21,6 +21,7 @@
         whitelist:
           tags:
           - RMCTankFlamerSPP
+          - RMCTankFlamer
   - type: AttachableHolder
     slots:
       rmc-aslot-rail:
