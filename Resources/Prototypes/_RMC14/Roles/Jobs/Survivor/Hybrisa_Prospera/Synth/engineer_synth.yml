@@ -1,0 +1,51 @@
+- type: job
+  parent: RMCSyntheticColony
+  id: RMCSyntheticColonyHybrisaEngineer
+  startingGear: RMCGearSyntheticColonistHybrisaEngineer
+  spawnMenuRoleName: Engineer Synth (Hybrisa Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Language
+      preset: RMCLanguagePresetSynthColonist
+    - type: LanguageLearning
+      preset: RMCLanguageLearningPresetSynthColonist
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: synth
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetHybrisaSynthEngineer
+    - type: Synth
+  useLoadoutOfJob: RMCSyntheticColony # for inheritance
+
+- type: startingGear
+  parent: RMCGearSyntheticColonistHybrisaCivilian
+  id: RMCGearSyntheticColonistHybrisaEngineer
+  equipment:
+    back: RMCSatchelLightpack
+    shoes: CMBootsBlackFilled
+  storage:
+    back:
+    - WeaponNailgun
+    - CMSheetMetal20
+    - CMSheetPlasteel10
+
+- type: entity
+  id: RMCSurvivorPresetHybrisaSynthEngineer
+  name: survivor synth hybrisa engineer colonist preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    randomOutfits:
+    - [ RMCHardhatOrange, RMCJumpsuitCivilianEngineerWorker, RMCHazardVest ]
+    - [ RMCOuterEngineeringUtilityOversuit, RMCJumpsuitCivilianEngineerWorker, CMSheetPlasteel10 ]
+    - [ RMCJumpsuitCivilianEngineerWorkerAlt, RMCHardhatBlue, RMCHazardVestGreen ]
+    - [ RMCJumpsuitCivilianEngineerWorkerAlt, RMCHardhatBlue, RMCHazardVestBlue ]
+    - [ RMCJumpsuitCivilianEngineerWorkerAlt, RMCOuterEngineeringUtilityOversuitAlt, CMSheetPlasteel10 ]

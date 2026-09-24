@@ -1,0 +1,56 @@
+- type: job
+  parent: RMCSyntheticColony
+  id: RMCSyntheticColonyHybrisaCivilian
+  startingGear: RMCGearSyntheticColonistHybrisaCivilian
+  spawnMenuRoleName: Civilian Synth (Hybrisa Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Language
+      preset: RMCLanguagePresetSynthColonist
+    - type: LanguageLearning
+      preset: RMCLanguageLearningPresetSynthColonist
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: synth
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetHybrisaSynthCivilian
+    - type: Synth
+  useLoadoutOfJob: RMCSyntheticColony # for inheritance
+
+- type: startingGear
+  parent: RMCGearSyntheticColonistBase
+  id: RMCGearSyntheticColonistHybrisaCivilian
+  inhand:
+    - RMCFireAxe # todo maintenance jack
+
+- type: entity
+  id: RMCSurvivorPresetHybrisaSynthCivilian
+  name: survivor synth hybrisa civilian colonist preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    randomOutfits:
+    # WeYa mart employee
+    - [ RMCHeadCapWeyamart, RMCJumpsuitWeyamart, RMCHazardVestWeyamart, CMSatchel, RMCShoesLaceup ]
+    # Sanitation
+    - [ RMCHazardVestGreen, CMHandsBrown, RMCJumpsuitSanitation, CMSatchelEngineer, CMBootsBrown ]
+    # Pizza Delivery
+    - [ RMCHeadCapPizzaGalaxy, RMCJumpsuitPizzaGalaxy, RMCSatchelNorm, RMCBoxPizzaGalaxyMystery, RMCShoesRed ]
+    # Fire Protection
+    - [ RMCHeadCapCargo, RMCJumpsuitCivilian, RMCHazardVestYellow, RMCHandsCombat, RMCShoesCombat, RMCSatchelLightpack, RMCAttachmentUnderbarrelExtinguisher ]
+    # Daily Grind Barista
+    - [ RMCDailyGrindApron, RMCJumpsuitDailyGrind, RMCShoesLaceup, CMSatchel ]
+    # Landing Pad Attendant Synth
+    - [ RMCJumpsuitCivilianYellow, RMCHeadCapFlippable, RMCSatchelNorm, CMBootsBlackFilled, CMPackFlare, RMCHazardVest, RMCBinoculars, RMCBeltUtilityGeneral, RMCHandsVeteran, RMCScabbardMacheteFilled, RMCEarmuffs ]
+    # Teacher
+    - [ RMCHipsterGlasses, RMCJumpsuitCivilianBrown, RMCSatchelNorm, CMSparePDTLBattleBuddyKit, RMCCoatBomber, CMHealthAnalyzer, RMCSprayBottleSpaceCleaner, RMCCrayonBox, RMCFoodSnackChipsPepper, CMBootsBlackFilled ]
+    # Bartender
+    - [ RMCSatchelBlackBartenderSynthFill, CMHandsBlackMarine, RMCCigarette, CMBootsBlackFilled, RMCCoatWaistcoat, ClothingUniformJumpsuitDetectiveGrey, ClothingHeadHatBowlerHat ]
