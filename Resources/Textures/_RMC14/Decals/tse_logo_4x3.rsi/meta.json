@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Made by SharkSnake98 on GitHub",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "tsefloorlogo_1"
+    },
+    {
+      "name": "tsefloorlogo_2"
+    },
+    {
+      "name": "tsefloorlogo_3"
+    },
+    {
+      "name": "tsefloorlogo_4"
+    },
+    {
+      "name": "tsefloorlogo_5"
+    },
+    {
+      "name": "tsefloorlogo_6"
+    },
+    {
+      "name": "tsefloorlogo_7"
+    },
+    {
+      "name": "tsefloorlogo_8"
+    },
+    {
+      "name": "tsefloorlogo_9"
+    },
+    {
+      "name": "tsefloorlogo_10"
+    },
+    {
+      "name": "tsefloorlogo_11"
+    }
+  ]
+}

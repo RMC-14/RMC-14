@@ -59,12 +59,16 @@
           - RMCAttachmentBarrelCharger
           - RMCAttachmentExtendedBarrel
           - RMCAttachmentRecoilCompensator
+          - RMCAttachmentExtendedCompensator
           - RMCAttachmentSuppressor
+          - RMCAttachmentSuppressorCompact
       rmc-aslot-rail:
         whitelist:
           tags:
           - RMCAttachmentRailFlashlight
           - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
           - RMCAttachmentS6ReflexSight
           - RMCAttachmentS42xTelescopicMiniscope
       rmc-aslot-underbarrel:
@@ -109,6 +113,8 @@
     zeroVisible: false
     zeroOnlyOnEmpty: true
   - type: Appearance
+  - type: Item
+    size: Small
 
 - type: entity
   parent: RMCMagazineSMGUZI
@@ -128,6 +134,8 @@
     tags:
     - CMMagazineSmg
     - RMCMagazineSMGUZIExt
+  - type: Item
+    size: Small
 
 - type: entity
   parent: CMCartridge9mmSMG

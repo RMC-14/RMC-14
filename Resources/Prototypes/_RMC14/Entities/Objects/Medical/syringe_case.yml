@@ -31,6 +31,9 @@
     blacklist:
       components:
       - Xeno
+  - type: PhysicalComposition
+    materialComposition:
+      RMCPlastic: 1000
 
 - type: Tag
   id: RMCSyringeCase

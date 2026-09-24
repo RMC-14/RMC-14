@@ -14,6 +14,7 @@ using Robust.Client.UserInterface.RichText;
 using Content.Client.UserInterface.RichText;
 using Robust.Shared.Input;
 using Robust.Shared.IoC;
+using SixLabors.ImageSharp.Processing;
 
 namespace Content.Client.Paper.UI
 {
@@ -25,7 +26,7 @@ namespace Content.Client.Paper.UI
         [Dependency] private readonly IInputManager _inputManager = default!;
         [Dependency] private readonly IResourceCache _resCache = default!;
 
-        private static Color DefaultTextColor = new(25, 25, 25);
+        public Color DefaultTextColor = new(25, 25, 25);
 
         // Size of resize handles around the paper
         private const int DRAG_MARGIN_SIZE = 16;
@@ -41,7 +42,7 @@ namespace Content.Client.Paper.UI
         // If paper limits the size in one or both axes, it'll affect whether
         // we're able to resize this UI or not. Default to everything enabled:
         private DragMode _allowedResizeModes = ~DragMode.None;
-        
+
         // Store original margin to restore when switching modes
         private Thickness _originalContentMargin;
 
@@ -233,7 +234,7 @@ namespace Content.Client.Paper.UI
             if (WrittenTextLabel.TryGetStyleProperty<Font>("font", out var font))
             {
                 float fontLineHeight = font.GetLineHeight(1.0f);
-                
+
                 // Set the font line height in tag handlers so buttons match text height
                 FormTagHandler.FontLineHeight = fontLineHeight;
                 SignatureTagHandler.FontLineHeight = fontLineHeight;
@@ -281,7 +282,7 @@ namespace Content.Client.Paper.UI
             {
                 // Reset margin to original when editing (no tag buttons visible)
                 PaperContent.Margin = _originalContentMargin;
-                    
+
                 // Initialize the text input field with server content if it's currently empty
                 // This allows editing existing documents while preserving any text the user has already typed
                 var shouldCopy = Input.TextLength == 0 && state.Text.Length > 0;
@@ -310,11 +311,11 @@ namespace Content.Client.Paper.UI
             var fm = new FormattedMessage();
             fm.AddMarkupPermissive(state.Text);
             WrittenTextLabel.SetMessage(fm, _allowedTags, DefaultTextColor);
-            
+
             // Add extra bottom margin based on tag count to prevent cutoff (only in read mode)
             var tagCount = CountTags(state.Text);
             var extraBottomMargin = tagCount * 3.0f; // 3 pixels per tag for extra height
-            PaperContent.Margin = new Thickness(_originalContentMargin.Left, _originalContentMargin.Top, 
+            PaperContent.Margin = new Thickness(_originalContentMargin.Left, _originalContentMargin.Top,
                 _originalContentMargin.Right, _originalContentMargin.Bottom + extraBottomMargin);
 
             // Add stamps that have been applied to this paper
@@ -410,7 +411,7 @@ namespace Content.Client.Paper.UI
             var formButton = FindFormButton(formIndex);
             if (formButton != null)
                 formButton.ModulateSelfOverride = Color.LightBlue;
-                
+
             // Create the popup dialog structure
             var popup = new Popup();
             var vbox = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Vertical, Margin = new Thickness(10) };
@@ -480,7 +481,7 @@ namespace Content.Client.Paper.UI
         {
             return FindButtonRecursive(WrittenTextLabel, "Fill", formIndex);
         }
-        
+
         /// <summary>
         /// Finds a check button by index for visual feedback.
         /// </summary>
@@ -488,7 +489,7 @@ namespace Content.Client.Paper.UI
         {
             return FindCheckButtonRecursive(WrittenTextLabel, checkIndex);
         }
-        
+
         /// <summary>
         /// Finds check buttons (which can have different text: ☐, ✔, ✖).
         /// </summary>
@@ -497,7 +498,7 @@ namespace Content.Client.Paper.UI
             var currentIndex = 0;
             return FindCheckButtonRecursiveHelper(control, targetIndex, ref currentIndex);
         }
-        
+
         private Button? FindCheckButtonRecursiveHelper(Control control, int targetIndex, ref int currentIndex)
         {
             if (control is Button btn && (btn.Text == "☐" || btn.Text == "✔" || btn.Text == "✖"))
@@ -506,17 +507,17 @@ namespace Content.Client.Paper.UI
                     return btn;
                 currentIndex++;
             }
-            
+
             foreach (Control child in control.Children)
             {
                 var result = FindCheckButtonRecursiveHelper(child, targetIndex, ref currentIndex);
                 if (result != null)
                     return result;
             }
-            
+
             return null;
         }
-        
+
         /// <summary>
         /// Recursively searches for a button with specific text and index.
         /// </summary>
@@ -525,7 +526,7 @@ namespace Content.Client.Paper.UI
             var currentIndex = 0;
             return FindButtonRecursiveHelper(control, buttonText, targetIndex, ref currentIndex);
         }
-        
+
         private Button? FindButtonRecursiveHelper(Control control, string buttonText, int targetIndex, ref int currentIndex)
         {
             if (control is Button btn && btn.Text == buttonText)
@@ -534,14 +535,14 @@ namespace Content.Client.Paper.UI
                     return btn;
                 currentIndex++;
             }
-            
+
             foreach (Control child in control.Children)
             {
                 var result = FindButtonRecursiveHelper(child, buttonText, targetIndex, ref currentIndex);
                 if (result != null)
                     return result;
             }
-            
+
             return null;
         }
 
@@ -565,7 +566,7 @@ namespace Content.Client.Paper.UI
 
         private Popup? _activeCheckPopup;
         private Button? _activeCheckButton;
-        
+
         /// <summary>
         /// Opens a modal dialog allowing the user to select a check state.
         /// </summary>
@@ -579,40 +580,40 @@ namespace Content.Client.Paper.UI
                     _activeCheckButton.ModulateSelfOverride = null;
                 _activeCheckPopup.Close();
             }
-            
+
             // Find and highlight the check button
             var checkButton = FindCheckButton(checkIndex);
             if (checkButton != null)
                 checkButton.ModulateSelfOverride = Color.LightBlue;
             _activeCheckButton = checkButton;
-            
+
             var popup = new Popup();
             _activeCheckPopup = popup;
             var vbox = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Vertical, Margin = new Thickness(10) };
             var hbox = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Horizontal };
-            
+
             var blankBtn = new Button { Text = "☐ Blank", MinWidth = 80 };
             var checkBtn = new Button { Text = "✔ Check", MinWidth = 80 };
             var crossBtn = new Button { Text = "✖ Cross", MinWidth = 80 };
-            
+
             blankBtn.OnPressed += _ => {
                 var newText = ReplaceNthCheckTag(_currentRawText, checkIndex, "☐");
                 OnSaved?.Invoke(newText);
                 CloseCheckDialog();
             };
-            
+
             checkBtn.OnPressed += _ => {
                 var newText = ReplaceNthCheckTag(_currentRawText, checkIndex, "✔");
                 OnSaved?.Invoke(newText);
                 CloseCheckDialog();
             };
-            
+
             crossBtn.OnPressed += _ => {
                 var newText = ReplaceNthCheckTag(_currentRawText, checkIndex, "✖");
                 OnSaved?.Invoke(newText);
                 CloseCheckDialog();
             };
-            
+
             hbox.AddChild(blankBtn);
             hbox.AddChild(checkBtn);
             hbox.AddChild(crossBtn);
@@ -621,7 +622,7 @@ namespace Content.Client.Paper.UI
             AddChild(popup);
             popup.Open();
         }
-        
+
         private void CloseCheckDialog()
         {
             if (_activeCheckButton != null)
@@ -631,7 +632,7 @@ namespace Content.Client.Paper.UI
             _activeCheckButton = null;
             _activeCheckPopup = null;
         }
-        
+
         /// <summary>
         /// Replaces the nth occurrence of [check] tag with replacement symbol.
         /// </summary>
@@ -729,7 +730,7 @@ namespace Content.Client.Paper.UI
             // Index not found, return original text unchanged
             return text;
         }
-        
+
         /// <summary>
         /// Counts the total number of interactive tags that create taller buttons.
         /// </summary>
@@ -740,7 +741,7 @@ namespace Content.Client.Paper.UI
             var checkCount = CountOccurrences(text, "[check]");
             return formCount + signatureCount + checkCount;
         }
-        
+
         /// <summary>
         /// Counts occurrences of a substring in text.
         /// </summary>
@@ -754,6 +755,24 @@ namespace Content.Client.Paper.UI
                 pos += substring.Length;
             }
             return count;
+        }
+
+        public Color BackgroundColor
+        {
+            get => ((StyleBoxFlat) PaperContent.PanelOverride!).BackgroundColor;
+            set => ((StyleBoxFlat) PaperContent.PanelOverride!).BackgroundColor = value;
+        }
+
+        public Color BorderColor
+        {
+            get => ((StyleBoxFlat) PaperContent.PanelOverride!).BorderColor;
+            set => ((StyleBoxFlat) PaperContent.PanelOverride!).BorderColor = value;
+        }
+
+        public Thickness BorderThickness
+        {
+            get => ((StyleBoxFlat) PaperContent.PanelOverride!).BorderThickness;
+            set => ((StyleBoxFlat) PaperContent.PanelOverride!).BorderThickness = value;
         }
     }
 }

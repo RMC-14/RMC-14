@@ -1,0 +1,121 @@
+﻿- type: job
+  parent: CMJobBase
+  id: CMAuxiliarySupportOfficer
+  name: cm-job-name-aso
+  description: cm-job-description-aso
+  playTimeTracker: CMJobAuxiliarySupportOfficer
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: CMSquad
+    time: 18000 # 5 hours
+  - !type:DepartmentTimeRequirement
+    department: CMRequisitions
+    time: 18000 # 5 hours
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsEngineering
+    time: 18000 # 5 hours
+  - !type:DepartmentTimeRequirement
+    department: CMAuxiliarySupport
+    time: 18000 # 5 hours
+  - !type:DepartmentTimeRequirement
+    department: CMCommand
+    time: 3600 # 1 hour
+  - !type:RoleTimeRequirement
+    role: CMJobIntelOfficer
+    time: 18000 # 5 hours
+  ranks:
+    RMCRankCaptain:
+    - !type:RoleTimeRequirement
+      role: CMJobAuxiliarySupportOfficer
+      time: 252000 # 70 hours
+    RMCRankFirstLT: []
+  weight: 5
+  startingGear: CMGearASO
+  icon: "CMJobIconASO"
+  requireAdminNotify: true
+  joinNotifyCrew: false
+  marineAuthorityLevel: 12
+  supervisors: rmc-job-supervisors-commander
+  accessGroups:
+  - ASO
+  roleWeight: 0.25
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillEndurance: 1
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillIntel: 2
+        RMCSkillJtac: 3
+        RMCSkillLeadership: 3
+        RMCSkillMedical: 2
+        RMCSkillNavigations: 1
+        RMCSkillOverwatch: 1
+        RMCSkillPilot: 2
+        RMCSkillResearch: 1
+        RMCSkillPolice: 1
+        RMCSkillPowerLoader: 2
+        RMCSkillSurgery: 1
+        RMCSkillVehicles: 1
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-aso
+    - type: ViewIntelObjectives
+    - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: aso
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_command
+    - type: RMCTrackable
+    - type: MutinyEligible
+    - type: RMCAwardRecommendation
+    - type: SeeNewPlayers
+
+- type: startingGear
+  id: CMGearASO
+  equipment:
+    jumpsuit: CMJumpsuitBO
+    outerClothing: CMCoatASO
+    shoes: CMBootsBlack
+    id: CMIDCardASO
+    ears: CMHeadsetSeniorCommand
+    pocket1: RMCPouchGeneralLarge
+    pocket2: RMCPouchGeneralLarge
+  storage:
+    pocket1:
+    - RMCRangefinder
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointASO
+  name: auxiliary support officer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMAuxiliarySupportOfficer
+  - type: Sprite # TODO: Replace with landmark sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: auxiliary_support_officer
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleASO
+  name: Auxiliary Support Officer
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: auxiliary_support_officer
+
+- type: playTimeTracker
+  id: CMJobAuxiliarySupportOfficer
+  isHumanoid: true

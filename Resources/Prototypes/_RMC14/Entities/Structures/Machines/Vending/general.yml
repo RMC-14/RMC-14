@@ -11,12 +11,15 @@
     - state: "off"
     - state: "normal-unshaded"
   - type: CMAutomatedVendor
+    canManualRestock: true
     hackable: true
     sections:
     - name: Cassettes
       entries:
       - id: RMCCassettePlayer
         amount: 50
+      - id: RMCPouchCassette
+        amount: 10
       - id: RMCCassetteTapeWigWoo1
         amount: 10
       - id: RMCCassetteTapeMendax
@@ -35,15 +38,13 @@
         amount: 10
       - id: RMCCassetteTapeCustom
         amount: 20
-    - name: Cards
-      entries: []
-    - name: Other
+    - name: Entertainment
       entries:
-      - id: CMPaper
-        amount: 15
-      - id: CMPen
+      - id: RMCPlayingCardDeck
         amount: 10
-      - id: d20Dice
+      - id: ChessBoard
+        amount: 10
+      - id: CheckerBoard
         amount: 10
     - name: Magazines
       entries:
@@ -90,4 +91,40 @@
       - id: RMCMagazineWeYaOrreryN220
         amount: 10
       - id: RMCMagazineWeYaOrreryN258
+        amount: 10
+    - name: Pins
+      entries:
+      - id: RMCClothingNeckLGBTPin
+        amount: 15
+      - id: RMCClothingNeckAromanticPin
+        amount: 15
+      - id: RMCClothingNeckAsexualPin
+        amount: 15
+      - id: RMCClothingNeckBisexualPin
+        amount: 15
+      - id: RMCClothingNeckGayPin
+        amount: 15
+      - id: RMCClothingNeckIntersexPin
+        amount: 15
+      - id: RMCClothingNeckLesbianPin
+        amount: 15
+      - id: RMCClothingNeckNonBinaryPin
+        amount: 15
+      - id: RMCClothingNeckPansexualPin
+        amount: 15
+      - id: RMCClothingNeckOmnisexualPin
+        amount: 15
+      - id: RMCClothingNeckTransPin
+        amount: 15
+      - id: RMCClothingNeckAutismPin
+        amount: 15
+      - id: RMCClothingNeckGoldAutismPin
+        amount: 15
+    - name: Other
+      entries:
+      - id: CMPaper
+        amount: 15
+      - id: CMPen
+        amount: 10
+      - id: d20Dice
         amount: 10

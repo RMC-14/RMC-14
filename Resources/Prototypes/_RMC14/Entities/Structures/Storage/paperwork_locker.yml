@@ -1,0 +1,23 @@
+- type: entity
+  parent: CMFilingCabinet
+  id: RMCPaperworkLocker
+  name: police paperwork
+  description: A filing cabinet containing various forms and documents for administrative purposes.
+  components:
+  - type: ContainerFill
+    containers:
+      storagebase:
+      - RMCPaperExecutionOrder
+      - RMCPaperP304
+      - RMCPaperP399
+      - RMCPaperP401
+      - RMCPaperP402
+      - RMCPaperP403
+      - RMCPaperP404
+      - RMCPaperP415
+      - RMCPaperP508
+      - RMCPaperP509
+      - RMCPaperP512
+      - RMCPaperP605
+      - RMCPaperP701
+      - RMCPaperP702

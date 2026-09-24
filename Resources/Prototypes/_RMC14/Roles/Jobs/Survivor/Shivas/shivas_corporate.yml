@@ -1,0 +1,31 @@
+- type: job
+  parent: CMSurvivorCorporate
+  id: RMCSurvivorShivasCorporateLiaison
+  name: rmc-job-name-survivor-shivas-liaison
+  playTimeTracker: CMJobSurvivorCorporate
+  startingGear: RMCGearSurvivorShivasCorporateLiaison
+  spawnMenuRoleName: Corporate Liaison (Shivas Survivor)
+  camouflageStartingGear: null
+
+- type: startingGear
+  parent: RMCGearSurvivorCorporate
+  id: RMCGearSurvivorShivasCorporateLiaison
+  equipment:
+    head: RMCHeadUshanka
+    mask: CMMaskCoif
+    outerClothing: RMCCoatSnowSurvivorNavy
+    gloves: CMHandsWhite
+    shoes: RMCShoesSnow
+    jumpsuit: CMJumpsuitLiaisonCorporateFormal
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorShivasCorporateLiaison
+  name: survivor shivas coporate liaison spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorShivasCorporateLiaison
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv

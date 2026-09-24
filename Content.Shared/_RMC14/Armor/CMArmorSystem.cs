@@ -3,6 +3,7 @@ using System.Text;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Medical.Surgery;
 using Content.Shared._RMC14.Medical.Surgery.Steps;
+using Content.Shared._RMC14.Synth;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Slowing;
@@ -23,6 +24,7 @@ using Content.Shared.Rounding;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Whitelist;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Timing;
@@ -276,6 +278,7 @@ public sealed class CMArmorSystem : EntitySystem
     private void OnPiercingGetArmor(Entity<CMArmorPiercingComponent> piercing, ref CMGetArmorPiercingEvent args)
     {
         args.Piercing += piercing.Comp.Amount;
+        args.IgnoreXenoArmor |= piercing.Comp.IgnoreXenoArmor;
     }
 
     private void OnBlockBackpackEquippedAttempt(Entity<ClothingBlockBackpackComponent> ent, ref BeingEquippedAttemptEvent args)
@@ -330,33 +333,43 @@ public sealed class CMArmorSystem : EntitySystem
         RaiseLocalEvent(ent, ref ev);
 
         var armorPiercing = args.ArmorPiercing;
-        if (args.Tool != null)
+        var ignoreXenoArmor = false;
+        if (args.Tool is { } tool && Exists(tool))
         {
             var piercingEv = new CMGetArmorPiercingEvent(ent);
-            RaiseLocalEvent(args.Tool.Value, ref piercingEv);
+            RaiseLocalEvent(tool, ref piercingEv);
             armorPiercing += piercingEv.Piercing;
+            ignoreXenoArmor = piercingEv.IgnoreXenoArmor;
         }
 
+        var immuneToAP = TryComp<CMArmorComponent>(ent, out var armorComp) && armorComp.ImmuneToAP;
         if (HasComp<XenoComponent>(ent))
         {
             ev.XenoArmor = (int)(ev.XenoArmor * ev.ArmorModifier);
-            ev.XenoArmor -= armorPiercing;
+            if (!immuneToAP)
+                ev.XenoArmor -= armorPiercing;
         }
         else
         {
             ev.Melee = (int)(ev.Melee * ev.ArmorModifier);
-            ev.Melee -= armorPiercing;
-
             ev.Bullet = (int)(ev.Bullet * ev.ArmorModifier);
-            ev.Bullet -= armorPiercing;
 
-            ev.Bio -= armorPiercing;
+            if (!immuneToAP)
+            {
+                ev.Melee -= armorPiercing;
+                ev.Bullet -= armorPiercing;
+                ev.Bio -= armorPiercing;
+            }
         }
 
-        if (args.Origin is { } origin)
+        if (args.Origin is { } origin &&
+            Exists(origin) &&
+            origin.IsValid() &&
+            TryComp(origin, out TransformComponent? originXform) &&
+            TryComp(ent, out TransformComponent? entXform))
         {
-            var originCoords = _transform.GetMapCoordinates(origin);
-            var armorCoords = _transform.GetMapCoordinates(ent);
+            var originCoords = _transform.GetMapCoordinates(origin, originXform);
+            var armorCoords = _transform.GetMapCoordinates(ent, entXform);
 
             if (originCoords.MapId == armorCoords.MapId)
             {
@@ -374,6 +387,9 @@ public sealed class CMArmorSystem : EntitySystem
                 }
             }
         }
+
+        if (ignoreXenoArmor && !immuneToAP)
+            ev.XenoArmor = 0;
 
         //Default modifier
         var mod = EnsureComp<RMCArmorModifierComponent>(ent);
@@ -556,6 +572,12 @@ public sealed class CMArmorSystem : EntitySystem
                 ("text", text),
                 ("value", value)
             ));
+        }
+
+        if (armorComponent.ImmuneToAP)
+        {
+            msg.PushNewline();
+            msg.AddMarkupOrThrow(Loc.GetString("rmc-examine-armor-piercing-immune"));
         }
 
         return msg;

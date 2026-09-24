@@ -24,16 +24,20 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Silicons.Borgs;
+using Content.Shared.Vehicle.Components;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 
 namespace Content.Shared._RMC14.Damage;
 
@@ -55,6 +59,7 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
 
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
@@ -124,6 +129,15 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         SubscribeLocalEvent<ActiveDamageOnPulledWhileCritComponent, MoveEvent>(OnActiveDamageOnPulledMove);
         SubscribeLocalEvent<ActiveDamageOnPulledWhileCritComponent, MobStateChangedEvent>(OnActiveDamageOnPulledMobState);
         SubscribeLocalEvent<ActiveDamageOnPulledWhileCritComponent, XenoTargetDevouredAttemptEvent>(OnActiveDamageOnPulledDevoured);
+
+        SubscribeLocalEvent<DamageReceivedModifierWhenUnanchoredComponent, DamageModifyEvent>(
+            OnDamageReceivedModifierWhenUnanchoredModify,
+            after:
+            [
+                typeof(SharedArmorSystem), typeof(BlockingSystem), typeof(InventorySystem), typeof(SharedBorgSystem),
+                typeof(SharedMarineOrdersSystem), typeof(CMArmorSystem), typeof(SharedXenoPheromonesSystem),
+            ]
+        );
 
         _bruteTypes.Clear();
         _burnTypes.Clear();
@@ -311,18 +325,27 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
 
     private void OnActiveDamageOnPulledDevoured(Entity<ActiveDamageOnPulledWhileCritComponent> ent, ref XenoTargetDevouredAttemptEvent args)
     {
-        if (_mobThresholds.TryGetDeadThreshold(ent.Owner, out var mobThreshold) && TryComp<DamageableComponent>(ent, out var damageable))
-        {
-            var lethalAmountOfDamage = mobThreshold.Value - damageable.TotalDamage;
-            var type = _prototypes.Index<DamageTypePrototype>(LethalDamageType);
-            var damage = new DamageSpecifier(type, lethalAmountOfDamage);
-            _damageable.TryChangeDamage(ent.Owner, damage, true);
-        }
-
+        DoLethalDamage(ent.Owner);
         args.Cancelled = true;
     }
 
-    public DamageSpecifier DistributeDamage(Entity<DamageableComponent?> damageable, ProtoId<DamageGroupPrototype> groupId, FixedPoint2 amount, DamageSpecifier? equal = null)
+    private void OnDamageReceivedModifierWhenUnanchoredModify(Entity<DamageReceivedModifierWhenUnanchoredComponent> ent, ref DamageModifyEvent args)
+    {
+        if (!TryComp(ent, out TransformComponent? xform) ||
+            xform.Anchored)
+        {
+            return;
+        }
+
+        var total = args.Damage.GetTotal();
+        if (total <= FixedPoint2.Zero)
+            return;
+
+        args.Damage *= ent.Comp.Multiplier;
+    }
+
+    /// <remarks>Do not use when <see cref="equal"/> already has damage types from <see cref="groupId"/></remarks>
+    public DamageSpecifier DistributeDamageCached(Entity<DamageableComponent?> damageable, ProtoId<DamageGroupPrototype> groupId, FixedPoint2 amount, DamageSpecifier? equal = null)
     {
         equal ??= new DamageSpecifier();
         if (!_damageableQuery.Resolve(damageable, ref damageable.Comp, false))
@@ -371,26 +394,37 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         return equal;
     }
 
-    public DamageSpecifier DistributeHealing(Entity<DamageableComponent?> damageable, ProtoId<DamageGroupPrototype> groupId, FixedPoint2 amount, DamageSpecifier? equal = null)
+    public DamageSpecifier DistributeHealing(Entity<DamageableComponent?> damageable, ProtoId<DamageGroupPrototype> groupId, FixedPoint2 amount)
     {
         if (amount > FixedPoint2.Zero)
             amount = -amount;
 
-        return DistributeDamage(damageable, groupId, amount, equal);
+        return DistributeDamageCached(damageable, groupId, amount);
     }
 
-    public DamageSpecifier DistributeTypes(Entity<DamageableComponent?> damageable, FixedPoint2 amount, DamageSpecifier? equal = null)
+    /// <remarks>Do not use when <see cref="equal"/> already has damage types from <see cref="groupId"/></remarks>
+    public DamageSpecifier DistributeHealingCached(Entity<DamageableComponent?> damageable, ProtoId<DamageGroupPrototype> groupId, FixedPoint2 amount, DamageSpecifier? equal = null)
     {
+        if (amount > FixedPoint2.Zero)
+            amount = -amount;
+
+        return DistributeDamageCached(damageable, groupId, amount, equal);
+    }
+
+    public DamageSpecifier DistributeTypes(Entity<DamageableComponent?> damageable, FixedPoint2 amount)
+    {
+        var equal = new DamageSpecifier();
         foreach (var group in _prototypes.EnumeratePrototypes<DamageGroupPrototype>())
         {
-            equal = DistributeDamage(damageable, group.ID, amount, equal);
+            equal = DistributeDamageCached(damageable, group.ID, amount, equal);
         }
 
-        return equal ?? new DamageSpecifier();
+        return equal;
     }
 
-    public DamageSpecifier DistributeTypesTotal(Entity<DamageableComponent?> damageable, FixedPoint2 amount, DamageSpecifier? equal = null)
+    public DamageSpecifier DistributeTypesTotal(Entity<DamageableComponent?> damageable, FixedPoint2 amount)
     {
+        var equal = new DamageSpecifier();
         foreach (var group in _prototypes.EnumeratePrototypes<DamageGroupPrototype>())
         {
             var total = equal?.GetTotal() ?? FixedPoint2.Zero;
@@ -400,8 +434,7 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
                 break;
             }
 
-            equal = DistributeDamage(damageable, group.ID, left, equal);
-            amount = left;
+            equal = DistributeDamageCached(damageable, group.ID, left, equal);
         }
 
         return equal ?? new DamageSpecifier();
@@ -416,11 +449,11 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         if (damage.Comp.BarricadeDamage != null && _barricadeQuery.HasComp(target))
             return true;
 
-        if (!Resolve(target, ref target.Comp, false))
-            return false;
-
         if (!_entityWhitelist.IsWhitelistPassOrNull(damage.Comp.Whitelist, target))
             return false;
+
+        if (!Resolve(target, ref target.Comp, false))
+            return HasComp<VehicleComponent>(target);
 
         if (!damage.Comp.AffectsDead && _mobState.IsDead(target))
             return false;
@@ -482,6 +515,24 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         }
 
         return false;
+    }
+
+    /// <summary>
+    ///   Does a lethal amount of asphyxiation damage to the given mob. Optionally checks for critical state.
+    /// </summary>
+    public void DoLethalDamage(EntityUid target, bool checkCrit = true, EntityUid? origin = null)
+    {
+        if (!_mobState.IsCritical(target) && checkCrit)
+            return;
+
+        if (_mobThresholds.TryGetDeadThreshold(target, out var mobThreshold)
+            && TryComp<DamageableComponent>(target, out var damageable))
+        {
+            var lethalAmountOfDamage = mobThreshold.Value - damageable.TotalDamage;
+            var type = _prototypes.Index(LethalDamageType);
+            var lethalDamage = new DamageSpecifier(type, lethalAmountOfDamage);
+            _damageable.TryChangeDamage(target, lethalDamage, true, origin: origin);
+        }
     }
 
     public override void Update(float frameTime)
@@ -595,6 +646,31 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
             {
                 if (!_damageOverTimeQuery.TryComp(contact, out var damage))
                     continue;
+
+                if (damage.Cover != null)
+                {
+                    var userCoordinates = Transform(user).Coordinates;
+                    var covered = false;
+
+                    if (_transform.GetGrid(userCoordinates) is { } gridUid &&
+                        TryComp<MapGridComponent>(gridUid, out var grid))
+                    {
+                        var tileIndices = _mapSystem.TileIndicesFor(gridUid, grid, userCoordinates);
+                        var anchoredEntities = _mapSystem.GetAnchoredEntities(gridUid, grid, tileIndices);
+
+                        foreach (var anchored in anchoredEntities)
+                        {
+                            if (_entityWhitelist.IsWhitelistPass(damage.Cover, anchored))
+                            {
+                                covered = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (covered)
+                        continue;
+                }
 
                 if (!damage.AffectsDead && _mobState.IsDead(user))
                     continue;

@@ -14,11 +14,13 @@
       tags:
       - Grenade
       - RMCExplosiveBreachingCharge
+      - RMCExplosiveClaymoreMine
   - type: FixedItemSizeStorage
 
 - type: entity
   parent: RMCPouchExplosive
   id: RMCPouchExplosiveFilledPlasticExplosives
+  suffix: C4
   components:
   - type: StorageFill
     contents:
@@ -28,15 +30,17 @@
 - type: entity
   parent: RMCPouchExplosive
   id: RMCPouchExplosiveFilledHEFA
+  name: HEFA pouch
   components:
   - type: StorageFill
     contents:
     - id: CMGrenadeFrag
-      amount: 4
+      amount: 6
 
 - type: entity
   parent: RMCPouchExplosive
   id: RMCPouchExplosiveFilledHEDP
+  suffix: HEDP
   components:
   - type: StorageFill
     contents:
@@ -46,6 +50,7 @@
 - type: entity
   parent: RMCPouchExplosive
   id: RMCPouchExplosiveFilledSPP
+  suffix: SPP, M15
   components:
   - type: StorageFill
     contents:
@@ -55,8 +60,19 @@
 - type: entity
   parent: RMCPouchExplosive
   id: RMCPouchExplosiveFilledC4SPP
+  suffix: SPP, C4
   components:
   - type: StorageFill
     contents:
     - id: RMCExplosivePlastic
+      amount: 4
+
+- type: entity
+  parent: RMCPouchExplosive
+  id: RMCPouchExplosiveFilledHIRR
+  suffix: HIRR
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBatonSlugHIRR
       amount: 4

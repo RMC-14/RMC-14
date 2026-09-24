@@ -456,7 +456,7 @@ namespace Content.Server.Construction
             }
 
             var coordinates = GetCoordinates(ev.Location);
-            var attempt = new RMCConstructionAttemptEvent(coordinates, constructionPrototype.Name);
+            var attempt = new RMCConstructionAttemptEvent(coordinates, constructionPrototype);
             RaiseLocalEvent(ref attempt);
 
             if (attempt.Cancelled)

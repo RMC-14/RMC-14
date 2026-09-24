@@ -16,6 +16,7 @@ rmc-squad-info-fireteam = [font size=16][bold]Fireteam {$fireteam}[/bold][/font]
 rmc-squad-info-tracking-selection = Tracking Selection
 rmc-squad-info-tracking-choose = Choose a new tracking target.
 rmc-squad-info-change-tracker = Change Tracker
+rmc-squad-info-none = none
 
 rmc-squad-info-CommandingOfficer = Commanding Officer
 rmc-squad-info-ExecutiveOfficer = Executive Officer
@@ -24,13 +25,17 @@ rmc-squad-info-ChiefMilitaryPolice = Chief Military Police
 rmc-squad-info-ChiefEngineer = Chief Engineer
 rmc-squad-info-ChiefMedicalOfficer = Chief Medical Officer
 rmc-squad-info-SeniorEnlistedAdvisor = Senior Enlisted Advisor
-rmc-squad-info-Quartermaster = Quartermaster
+rmc-squad-info-Quartermaster = Logistics Officer
 rmc-squad-info-MilitaryWarden = Military Warden
+rmc-squad-info-SectionSergeant = Section Sergeant
+rmc-squad-info-PVESquadLeader = Squad Leader
 rmc-squad-info-SquadLeader = Squad Leader
 rmc-squad-info-FireteamLeader = Fireteam Leader
 rmc-squad-info-Rifleman = Rifleman
 
 rmc-squad-info-DirectorPmc = Director
+rmc-squad-info-LeaderPmcPVE = Force Leader
+rmc-squad-info-TeamLeaderPmcPVE = Team Leader
 rmc-squad-info-LeaderPmc = Team Leader
 rmc-squad-info-CorporateLiaison = Corporate Liaison
 
@@ -57,3 +62,16 @@ rmc-squad-info-InspectorTSEPA = TSEPA Inspector
 rmc-squad-info-SeniorConstableTSEPA = TSEPA Senior Constable
 
 rmc-squad-info-PrimaryLandingZone = Primary Landing Zone
+
+rmc-squad-info-SPPAirborneSL = Airborne Squad Leader
+
+rmc-squad-info-RCMPVESectionLead = Section Leader
+rmc-squad-info-RCMPVETeamLead = Team Leader
+rmc-squad-info-RCMPVETroopSergeant = Troop Sergeant
+rmc-squad-info-RCMPVETroopCommander = Troop Commander
+
+rmc-squad-info-RCMTeamLead = Team Leader
+rmc-squad-info-RCMLieutenant = Lieutenant
+
+rmc-squad-info-ParaTeamLeader = Team Leader
+rmc-squad-info-ParaCommander = Commander

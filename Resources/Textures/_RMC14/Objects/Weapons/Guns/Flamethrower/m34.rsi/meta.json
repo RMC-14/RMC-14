@@ -47,10 +47,6 @@
       "name": "icon"
     },
     {
-      "name": "sling",
-      "directions": 4
-    },
-    {
       "name": "lit",
       "delays": [
         [

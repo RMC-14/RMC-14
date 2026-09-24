@@ -9,11 +9,11 @@ public sealed class RMCSpraySystem : SharedRMCSpraySystem
 {
     [Dependency] private readonly SpraySystem _spray = default!;
 
-    public override void Spray(EntityUid entity, EntityUid user, MapCoordinates mapcoord)
+    public override void Spray(EntityUid entity, EntityUid user, MapCoordinates mapcoord, bool hitUser = false)
     {
         base.Spray(entity, user, mapcoord);
 
         if (TryComp(entity, out SprayComponent? spray))
-            _spray.Spray((entity, spray), user, mapcoord);
+            _spray.Spray((entity, spray), user, mapcoord, hitUser);
     }
 }

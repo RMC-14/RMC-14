@@ -303,6 +303,52 @@
 
 - type: entity
   parent: CMPacketBase
+  id: RMCPacketGrenadeWhitePhosphorus
+  name: WPDP grenade packet
+  description: It contains three WPDP white phosphorus grenades.
+  components:
+  - type: Sprite
+    layers:
+    - state: wpdp_packet
+      map: [ "closedLayer" ]
+    - state: wpdp_packet_e
+      map: [ "openLayer", "emptyLayer"]
+
+- type: entity
+  parent: RMCPacketGrenadeWhitePhosphorus
+  id: RMCPacketGrenadeWhitePhosphorusFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCGrenadeWhitePhosphorus
+      amount: 3
+
+- type: entity
+  parent: CMPacketBase
+  id: RMCPacketGrenadeWhitePhosphorusCompound
+  name: CCDP grenade packet
+  description: It contains three CCDP chemical compound grenades.
+  components:
+  - type: Sprite
+    layers:
+    - state: ccdp_packet
+      map: [ "closedLayer" ]
+    - state: ccdp_packet_e
+      map: [ "openLayer", "emptyLayer"]
+
+- type: entity
+  parent: RMCPacketGrenadeWhitePhosphorusCompound
+  id: RMCPacketGrenadeWhitePhosphorusCompoundFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCGrenadeWhitePhosphorusCompound
+      amount: 3
+
+- type: entity
+  parent: CMPacketBase
   id: CMPacketGrenadeFragOld
   name: M15 frag grenade packet
   description: It contains three M15 fragmentation grenades. Handle with care.
@@ -357,8 +403,8 @@
 - type: entity
   parent: RMCBoxBase
   id: RMCBoxHEDP
-  name: M40 HEDP grenade box
-  description: A secure box holding 25 M40 High-Explosive Dual-Purpose grenades. High explosive, don't store near the flamer fuel.
+  name: 30mm HEDP grenade box
+  description: A secure box holding 25 30mm High-Explosive Dual-Purpose grenades. High explosive, don't store near the flamer fuel.
   components:
   - type: Sprite
     layers:
@@ -380,8 +426,8 @@
 - type: entity
   parent: RMCBoxBase
   id: RMCBoxHEFA
-  name: M40 HEFA grenade box
-  description: A secure box holding 25 M40 High-Explosive Fragmenting-Antipersonnel grenades. High explosive, don't store near the flamer fuel.
+  name: 30mm HEFA grenade box
+  description: A secure box holding 25 30mm High-Explosive Fragmenting-Antipersonnel grenades. High explosive, don't store near the flamer fuel.
   components:
   - type: Sprite
     layers:
@@ -445,3 +491,120 @@
     contents:
     - id: RMC40MMGrenadeM74AGMI
       amount: 25
+
+- type: entity
+  parent: RMCBoxBase
+  id: RMCBoxWPDP
+  name: 30mm WPDP grenade box
+  description: A secure box holding 25 30mm WPDP White Phosphorus grenades. Highly flammable, don't store near the flamer fuel.
+  components:
+  - type: Sprite
+    layers:
+    - state: d_nade_placeholder
+      map: [ "closedLayer" ]
+    - state: model_m40
+    - state: ccdp
+    - state: d_nade_placeholder_e
+      map: [ "openLayer", "emptyLayer" ]
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCGrenadeM40
+  - type: StorageFill
+    contents:
+    - id: RMCGrenadeWhitePhosphorus
+      amount: 25
+
+- type: entity
+  parent: RMCBoxBase
+  id: RMCBoxCCDP
+  name: 30mm CCDP grenade box
+  description: A secure box holding 25 30mm CCDP Chemical Compound grenades. Highly flammable, don't store near the flamer fuel.
+  components:
+  - type: Sprite
+    layers:
+    - state: d_nade_placeholder
+      map: [ "closedLayer" ]
+    - state: model_m40
+    - state: ccdp
+    - state: d_nade_placeholder_e
+      map: [ "openLayer", "emptyLayer" ]
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCGrenadeM40
+  - type: StorageFill
+    contents:
+    - id: RMCGrenadeWhitePhosphorusCompound
+      amount: 25
+
+- type: entity
+  parent: CMPacketBase
+  id: RMCPacketGrenade20mmHE
+  name: L109A1 HE grenade packet
+  suffix: PVE
+  description: It contains eight L109A1 20mm HE grenades.
+  components:
+  - type: Tag
+    tags:
+    - RMCGrenadePacket20mm
+  - type: Sprite
+    layers:
+    - state: hedp_packet
+      map: [ "closedLayer" ]
+    - state: hedp_packet_e
+      map: [ "openLayer", "emptyLayer" ]
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,15,1 # 8 slots
+    whitelist:
+      tags:
+      - RMCGrenade20mm
+
+- type: entity
+  parent: RMCPacketGrenade20mmHE
+  id: RMCPacketGrenade20mmHEFilled
+  suffix: PVE, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCGrenade20mmHE
+      amount: 8
+
+- type: entity
+  parent: CMPacketBase
+  id: RMCPacketGrenade20mmIncendiary
+  name: L109A2 Incendiary grenade packet
+  suffix: PVE
+  description: It contains eight L109A2 20mm incendiary grenades.
+  components:
+  - type: Tag
+    tags:
+    - RMCGrenadePacket20mm
+  - type: Sprite
+    layers:
+    - state: agmi_packet
+      map: [ "closedLayer" ]
+    - state: agmi_packet_e
+      map: [ "openLayer", "emptyLayer" ]
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,15,1 # 8 slots
+    whitelist:
+      tags:
+      - RMCGrenade20mm
+
+- type: entity
+  parent: RMCPacketGrenade20mmIncendiary
+  id: RMCPacketGrenade20mmIncendiaryFilled
+  suffix: PVE, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCGrenade20mmIncendiary
+      amount: 8
+
+- type: Tag
+  id: RMCGrenadePacket20mm

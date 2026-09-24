@@ -14,4 +14,10 @@ public sealed partial class RMCReturnToInventoryComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool Returned;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? ReceivingItem;
+
+    [DataField, AutoNetworkedField]
+    public string ReceivingContainer;
 }

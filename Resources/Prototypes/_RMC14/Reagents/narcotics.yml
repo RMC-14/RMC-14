@@ -32,8 +32,8 @@
         key: Unconscious
         component: RMCUnconscious
         type: Add
-        time: 20
-        refresh: false
+        time: 40
+        refresh: true
 
 - type: reagent
   parent: RMCSpaceDrugs
@@ -65,5 +65,5 @@
         key: Unconscious
         component: RMCUnconscious
         type: Add
-        time: 20
-        refresh: false
+        time: 40
+        refresh: true

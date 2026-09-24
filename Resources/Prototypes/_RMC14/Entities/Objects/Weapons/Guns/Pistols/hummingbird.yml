@@ -2,7 +2,7 @@
   parent: [RMCBaseSlideMagazineVisuals, CMWeaponPistolBase]
   id: RMCWeaponPistolD18
   name: D18 Hummingbird
-  description: The D18 Hummingbird Pistol was produced in the mid-2110s as a cheap and concealable firearm for CLF Sleeper Cell agents for assassinations and ambushes, and is able to be concealed in shoes and workboots.
+  description: The D18 Hummingbird Pistol was produced in the mid-2090s as a cheap concealed carry firearm, and quickly grew to popularity in civilian populaces. It's common on the frontier as a personal defense pistol.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/m43.rsi
@@ -41,6 +41,7 @@
         whitelist:
           tags:
           - RMCAttachmentSuppressor
+          - RMCAttachmentSuppressorCompact
       rmc-aslot-rail:
         whitelist:
           tags:

@@ -12,7 +12,8 @@
     - idcard
     sprite: _RMC14/Objects/CMIDs/tsepa_silver.rsi
   - type: ItemIFF
-    faction: FactionTSE
+    factions:
+    - FactionTSE
 
 - type: entity
   parent: CMIDCardBase
@@ -28,7 +29,8 @@
     - idcard
     sprite: _RMC14/Objects/CMIDs/tsepa_silver_gold.rsi
   - type: ItemIFF
-    faction: FactionTSE
+    factions:
+    - FactionTSE
 
 - type: entity
   parent: CMIDCardBase
@@ -44,4 +46,18 @@
     - idcard
     sprite: _RMC14/Objects/CMIDs/tsepa_gold.rsi
   - type: ItemIFF
-    faction: FactionTSE
+    factions:
+    - FactionTSE
+
+# Survivors
+- type: entity
+  parent: RMCIDCardTSEPA
+  id: RMCIDCardTSEPASurvivor
+  name: TSEPA silver badge
+  description: The silver badge which represents that the wearer is a TSEPA Constable. It is a sign of justice, authority, and protection. Protecting those who can't. This badge represents a commitment to a sworn oath always kept.
+  suffix: Survivor
+  components:
+  - type: ItemIFF
+    factions:
+    - FactionTSE
+    - FactionSurvivor

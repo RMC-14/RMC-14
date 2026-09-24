@@ -18,7 +18,7 @@
   ### Optimizing Your Transport Runs:
 
   -   [bold]LZ Management:[/bold] Ensure that you always select the [color=#4CAF50][bold]PRIMARY LZ[/bold][/color].
-  -   [bold]Departure Callouts:[/bold] Be sure to announce departure times on [color=#808080]common ship radio[/color] to reduce the chance of leaving any marine behind on ship.
+  -   [bold]Departure Callouts:[/bold] Be sure to announce departure times on [color=#808080]common warship radio[/color] to reduce the chance of leaving any marine behind on warship.
   -   [bold]Have the Pilot Fly:[/bold] Having [color=#FFFF00]Piloting Skill 2[/color] (standard for Dropship/Gunship Pilots and ASOs) [color=#ADD8E6]reduces dropship refuel time by 25%[/color]. [bold]This stacks with the Cooling System.[/bold]
 
   ## II. Dropship Armaments & Engine Attachments
@@ -118,9 +118,6 @@
     -   [color=#FFA500][bold]Choose Your Weapon[/bold][/color]: Select the specific weapon system you intend to fire at the chosen target.
     -   [color=#FF0000][bold]Select "Fire"[/bold][/color]: Confirm your selections by pressing the "Fire" button.
     -   [bold]If the sequence was performed correctly, you should hear the distinct sound of the selected weapon firing.[/bold]
-
-    -   There is also the [bold]Target Offset[/bold], instead of firing directly on the laser or signal flare you can offset away from it.
-    -   This offset works off of the XY Coordinates system, for more information on how it works, scroll down on the mortar guide until the [textlink="Coordinate System (You can click here)" link="RMCGuideRoleMortar"]
 
     <Box>[bold]Weapon Cooldowns & Rapid Fire:</Box>
     -   Individual weapons have a [italic]short internal cooldown[/italic] before they can be fired again.

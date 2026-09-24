@@ -10,4 +10,7 @@ public sealed partial class AttachableSilencerComponent : Component
 {
     [DataField, AutoNetworkedField]
     public SoundSpecifier Sound = new SoundCollectionSpecifier("CMSilencedShoot");
+
+    [DataField, AutoNetworkedField]
+    public bool HideMuzzleFlash = true;
 }

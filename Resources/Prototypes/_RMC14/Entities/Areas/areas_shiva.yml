@@ -45,6 +45,7 @@
   components:
   - type: Area
     minimapColor: '#EBE5E5E3'
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaShivaExteriorLz1Console
@@ -571,3 +572,11 @@
   components:
   - type: Sprite
     state: hangars0
+
+- type: entity
+  parent: RMCAreaShivaInteriorColony
+  id: RMCAreaShivaInteriorColonyCargoShuttle
+  name: Shiva's Snowball - Disabled Cargo Shuttle
+  components:
+  - type: Sprite
+    state: res2

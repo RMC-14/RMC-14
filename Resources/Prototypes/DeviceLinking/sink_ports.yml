@@ -127,3 +127,9 @@
   id: SetParticleSigma
   name: signal-port-name-set-particle-sigma
   description: signal-port-description-set-particle-sigma
+
+#RMC
+- type: sinkPort
+  id: SentryControl
+  name: port-sentry-control
+  description: port-sentry-control

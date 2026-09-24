@@ -77,7 +77,7 @@ public sealed partial class StrapComponent : Component
     /// ID of the alert to show when buckled
     /// </summary>
     [DataField]
-    public ProtoId<AlertPrototype> BuckledAlertType = "Buckled";
+    public ProtoId<AlertPrototype>? BuckledAlertType = "Buckled"; //RMC14 Made it nullable to allow not showing any alert
 
     /// <summary>
     /// How long it takes to buckle someone else into a chair
@@ -90,6 +90,14 @@ public sealed partial class StrapComponent : Component
     /// </summary>
     [DataField]
     public bool BuckleOnInteractHand = true;
+
+    // RMC14
+    /// <summary>
+    /// Whether being buckled to this entity should change the buckled ent's drawdepth.
+    /// </summary>
+    [DataField]
+    public bool ModifyBuckleDrawDepth = true;
+    // RMC14
 }
 
 public enum StrapPosition

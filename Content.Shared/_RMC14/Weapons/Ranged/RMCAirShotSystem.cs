@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Weapons.Common;
+using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared.CombatMode;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
@@ -50,6 +51,9 @@ public sealed class RMCAirShotSystem : EntitySystem
             return;
 
         if (ent.Comp.RequiredSkills != null && !_skills.HasAllSkills(args.UserUid, ent.Comp.RequiredSkills))
+            return;
+
+        if (HasComp<DevouredComponent>(args.UserUid))
             return;
 
         AttemptAirShot(ent, args.UserUid);

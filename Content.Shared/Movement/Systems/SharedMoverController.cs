@@ -151,12 +151,6 @@ public abstract partial class SharedMoverController : VirtualController
                 dirtied = true;
             }
 
-            if (relayTargetMover.CanMove != mover.CanMove)
-            {
-                relayTargetMover.CanMove = mover.CanMove;
-                dirtied = true;
-            }
-
             if (dirtied)
             {
                 Dirty(relay.RelayEntity, relayTargetMover);
@@ -169,7 +163,11 @@ public abstract partial class SharedMoverController : VirtualController
             return;
 
         RelayTargetQuery.TryComp(uid, out var relayTarget);
-        var relaySource = relayTarget?.Source;
+        // RMC14
+        EntityUid? relaySource = null;
+        if (relayTarget != null && EnsureValidRelayTarget(uid, relayTarget))
+            relaySource = relayTarget.Source;
+        // RMC14
 
         // If we're not the target of a relay then handle lerp data.
         if (relaySource == null)
@@ -264,6 +262,15 @@ public abstract partial class SharedMoverController : VirtualController
 
             var walkSpeed = moveSpeedComponent?.CurrentWalkSpeed ?? MovementSpeedModifierComponent.DefaultBaseWalkSpeed;
             var sprintSpeed = moveSpeedComponent?.CurrentSprintSpeed ?? MovementSpeedModifierComponent.DefaultBaseSprintSpeed;
+
+            // RMC14
+            var baseWalkSpeed = moveSpeedComponent?.BaseWalkSpeed ?? MovementSpeedModifierComponent.DefaultBaseWalkSpeed;
+            // Keep the walk speed unchanged if the modified sprint speed is higher than the base walk speed.
+            if (baseWalkSpeed < sprintSpeed)
+                walkSpeed = baseWalkSpeed;
+            // If the sprint speed drops below the walk speed, lower the walk speed to match the sprint speed.
+            else
+                walkSpeed = sprintSpeed;
 
             wishDir = AssertValidWish(mover, walkSpeed, sprintSpeed);
 

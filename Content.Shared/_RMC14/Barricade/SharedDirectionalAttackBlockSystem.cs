@@ -1,16 +1,23 @@
+using System.Linq;
+using System.Numerics;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Random;
 using Content.Shared._RMC14.Weapons.Melee;
+using Content.Shared.Atmos;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Physics;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Map;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Barricade;
 
 public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
 {
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -80,6 +87,19 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
         return true;
     }
 
+    private sbyte GetRelativeDiff(EntityUid blocker, EntityUid target, EntityCoordinates? originCoordinates = null)
+    {
+        var targetCoordinates = originCoordinates ?? _transform.GetMoverCoordinates(target);
+
+        var blockerCoordinates = _transform.GetMoverCoordinateRotation(blocker, Transform(blocker));
+        var diff = targetCoordinates.Position - blockerCoordinates.Coords.Position;
+        var dir = diff.Normalized().GetDir();
+        var blockerDirection = blockerCoordinates.worldRot.GetDir();
+        var relativeDiff = Math.Abs(dir - blockerDirection);
+
+        return relativeDiff;
+    }
+
     /// <summary>
     ///     Check if the blocker is facing towards the target.
     /// </summary>
@@ -89,18 +109,42 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
     /// <returns>True if the blocker is facing the target</returns>
     public bool IsFacingTarget(EntityUid blocker, EntityUid target, EntityCoordinates? originCoordinates = null)
     {
-        var targetCoordinates = _transform.GetMoverCoordinates(target);
-        if (originCoordinates != null)
-            targetCoordinates = originCoordinates.Value;
-
-        var blockerCoordinates = _transform.GetMoverCoordinateRotation(blocker, Transform(blocker));
-        var diff = targetCoordinates.Position - blockerCoordinates.Coords.Position;
-        var dir = diff.Normalized().GetDir();
-        var blockerDirection = blockerCoordinates.worldRot.GetDir();
-        var relativeDiff = Math.Abs(dir - blockerDirection);
+        var relativeDiff = GetRelativeDiff(blocker, target, originCoordinates);
 
         // Only block if the leap originates from a location that is at most one ordinal direction away from the direction the blocker is facing (135 degree cone).
         // For example, if the blocker is facing North, the leap will be blocked if it originates from a position to the North-West, North, or North-East of the blocker.
-        return relativeDiff is 0 or 1 or 7;
+        return relativeDiff is 0 or 1 or 7; // Front
+    }
+
+    /// <summary>
+    ///     Check if the blocker is behind the target.
+    /// </summary>
+    /// <param name="blocker">The entity whose direction is checked.</param>
+    /// <param name="target">The entity that is checked to see if it is behind the blocker</param>
+    /// <param name="originCoordinates">The target coordinates to check, if left empty the targets current coordinates will be used</param>
+    /// <returns>True if the blocker is behind the target</returns>
+    public bool IsBehindTarget(EntityUid blocker, EntityUid target, EntityCoordinates? originCoordinates = null)
+    {
+        var relativeDiff = GetRelativeDiff(blocker, target, originCoordinates);
+
+        // Only block if the leap originates from a location that is at most one ordinal direction away from the direction the blocker is facing (135 degree cone).
+        // For example, if the blocker is facing North, the leap will be blocked if it originates from a position to the South-West, South, or South-East of the blocker.
+        return relativeDiff is 3 or 4 or 5; // Opposite directions
+    }
+
+    public bool IsDirectionBlocked(EntityUid origin, AtmosDirection cardinal, float checkRange = 0.6f, CollisionGroup collisionGroup = CollisionGroup.BarricadeImpassable | CollisionGroup.BulletImpassable)
+    {
+        return IsDirectionBlocked(origin, (Vector2)cardinal.CardinalToIntVec(), checkRange, collisionGroup);
+    }
+
+    public bool IsDirectionBlocked(EntityUid origin, Vector2 direction, float checkRange = 0.6f, CollisionGroup collisionGroup = CollisionGroup.BarricadeImpassable | CollisionGroup.BulletImpassable)
+    {
+        if (direction == Vector2.Zero)
+            return false;
+
+        var originPosition = _transform.GetMoverCoordinates(origin).Position;
+        var ray = new CollisionRay(originPosition, direction, (int)collisionGroup);
+        var intersect = _physics.IntersectRayWithPredicate(Transform(origin).MapID, ray, checkRange, e => !Transform(e).Anchored);
+        return intersect.Any();
     }
 }

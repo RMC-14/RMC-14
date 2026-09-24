@@ -5,21 +5,21 @@
   name: UNMC Founding Day
   beginDay: 9
   beginMonth: June
-  description: An archaic holiday originating from the founding of the United Nations Marine Corps.
+  description: An archaic holiday commemorating the founding of the United Nations Marine Corps.
 
 - type: customHoliday
-  id: RMCFallenMemorialDay # Canon Rounds
-  name: Fallen Memorial Day
+  id: RMCNewHorizonDay # RMC14 Initial development and founding
+  name: New Horizon Day
   beginDay: 28
   beginMonth: October
-  description: A day of rememberance for all those who fell in the many operations of the UNMC.
+  description: A day that commemorates the formation of the United Nations, and the peace and prosperity it has upheld for everyone.
 
 - type: customHoliday
   id: RMCFleetDay # Lore
   name: Fleet Day
   beginDay: 6
   beginMonth: May
-  description: A day of celebration in which the UNMC showcase their fleet in the Sol System.
+  description: A day of celebration in which the UNMC showcase their fleet.
 
 # Major Holidays
 

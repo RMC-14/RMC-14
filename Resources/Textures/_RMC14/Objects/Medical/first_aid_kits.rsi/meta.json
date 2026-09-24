@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/ca94d2e8715b73103fa9f213be53d343359b4107/icons/obj/items/storage.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/inhands/equipment/medical_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/inhands/equipment/medical_lefthand.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/ca94d2e8715b73103fa9f213be53d343359b4107/icons/obj/items/storage.dmi, https://github.com/cmss13-devs/cmss13/blob/09583166e0082a417aef46dbb280675fa93a81e8/icons/mob/humans/onmob/inhands/equipment/medical_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/09583166e0082a417aef46dbb280675fa93a81e8/icons/mob/humans/onmob/inhands/equipment/medical_lefthand.dmi, https://github.com/cmss13-devs/cmss13-pve/blob/d393d64e20ab878b476dd43900e32b0fbb4cb484/icons/obj/items/storage/medical.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -36,6 +36,18 @@
     },
     {
       "name": "kit_empty"
+    },
+    {
+      "name": "softpack_empty"
+    },
+    {
+      "name": "softpack_basic"
+    },
+    {
+      "name": "softpack_brute"
+    },
+    {
+      "name": "softpack_burn"
     },
     {
       "name": "firstaid-inhand-right",

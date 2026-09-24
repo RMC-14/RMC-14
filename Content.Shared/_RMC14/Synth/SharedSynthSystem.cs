@@ -1,10 +1,12 @@
-﻿using Content.Shared._RMC14.IdentityManagement;
-using Content.Shared._RMC14.Marines;
+﻿using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Clothing;
+using Content.Shared._RMC14.IdentityManagement;
 using Content.Shared._RMC14.Medical.HUD.Components;
 using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Repairable;
 using Content.Shared._RMC14.StatusEffect;
 using Content.Shared.Bed.Sleep;
+using Content.Shared.Body.Systems;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
@@ -12,21 +14,31 @@ using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Inventory;
+using Content.Shared.Inventory.Events;
+using Content.Shared.Medical;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
+using Content.Shared.Tools.Components;
 using Content.Shared.Tools.Systems;
 using Content.Shared.Weapons.Ranged.Events;
+using Content.Shared.Tag;
 using Content.Shared.Whitelist;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Synth;
 
 public abstract class SharedSynthSystem : EntitySystem
 {
+    private static readonly TimeSpan UnableUsePopupCooldown = TimeSpan.FromSeconds(1);
+    private static readonly ProtoId<TagPrototype> SynthAllowedArmorTag = "RMCSynthAllowedArmor";
+
     [Dependency] private readonly RMCRepairableSystem _repairable = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
@@ -36,34 +48,42 @@ public abstract class SharedSynthSystem : EntitySystem
     [Dependency] private readonly SharedStackSystem _stack = default!;
     [Dependency] private readonly RMCStatusEffectSystem _rmcStatusEffects = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly TagSystem _tags = default!;
+    [Dependency] private readonly SharedSynthGenerationSystem _synthGeneration = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<SynthComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<SynthComponent, MapInitEvent>(OnMapInit, after: [typeof(SharedBloodstreamSystem)]);
         SubscribeLocalEvent<SynthComponent, AttackAttemptEvent>(OnMeleeAttempted);
         SubscribeLocalEvent<SynthComponent, ShotAttemptedEvent>(OnShotAttempted);
         SubscribeLocalEvent<SynthComponent, TryingToSleepEvent>(OnSleepAttempt);
         SubscribeLocalEvent<SynthComponent, InteractUsingEvent>(OnSynthInteractUsing);
         SubscribeLocalEvent<SynthComponent, RMCSynthRepairEvent>(OnSynthRepairDoAfter);
+        SubscribeLocalEvent<SynthComponent, TargetDefibrillatedEvent>(OnSynthResetKey);
 
         SubscribeLocalEvent<UseOnSynthBlockedComponent, BeforeRangedInteractEvent>(OnSynthBlockedBeforeRangedInteract);
+        SubscribeLocalEvent<CMArmorComponent, BeingEquippedAttemptEvent>(OnArmorBeingEquippedAttempt, before: [typeof(RMCClothingSystem)]);
     }
 
     private void OnMapInit(Entity<SynthComponent> ent, ref MapInitEvent args)
     {
         MakeSynth(ent);
+        _synthGeneration.SynthStartup(ent);
     }
 
     protected virtual void MakeSynth(Entity<SynthComponent> ent)
     {
-        if (ent.Comp.AddComponents != null)
-            EntityManager.AddComponents(ent.Owner, ent.Comp.AddComponents);
+        if (_prototypes.TryIndex(ent.Comp.AddComponents, out var addComponents))
+            EntityManager.AddComponents(ent.Owner, addComponents.Components);
 
-        if (ent.Comp.RemoveComponents != null)
-            EntityManager.RemoveComponents(ent.Owner, ent.Comp.RemoveComponents);
+        if (_prototypes.TryIndex(ent.Comp.RemoveComponents, out var removeComponents))
+            EntityManager.RemoveComponents(ent.Owner, removeComponents.Components);
 
         if (ent.Comp.StunResistance != null)
             _rmcStatusEffects.GiveStunResistance(ent.Owner, ent.Comp.StunResistance.Value);
@@ -133,6 +153,7 @@ public abstract class SharedSynthSystem : EntitySystem
         var repairTime = selfRepair ? synth.Comp.SelfRepairTime : synth.Comp.RepairTime;
         var doAfter = new DoAfterArgs(EntityManager, user, repairTime, ev, synth, used: args.Used)
         {
+            NeedHand = true,
             BreakOnMove = true,
             BreakOnDropItem = true,
             BlockDuplicate = true,
@@ -141,24 +162,34 @@ public abstract class SharedSynthSystem : EntitySystem
 
         if (HasComp<BlowtorchComponent>(used) && _tool.HasQuality(used, synth.Comp.RepairQuality))
         {
-            if (HasDamage(synth, synth.Comp.WelderDamageGroup) && _repairable.UseFuel(args.Used, args.User, 5, true))
-            {
-                args.Handled = true;
+            args.Handled = true;
 
-                if (_doAfter.TryStartDoAfter(doAfter))
-                {
-                    var selfMsg = Loc.GetString("rmc-synth-repair-brute-start-self", ("user", user), ("target", synth), ("tool", used), ("limb", "chest"));
-                    var othersMsg = Loc.GetString("rmc-synth-repair-brute-start-others", ("user", user), ("target", synth), ("tool", used), ("limb", "chest"));
-
-                    if (!selfRepair)
-                        return;
-
-                    _popup.PopupPredicted(selfMsg, othersMsg, user, user);
-                }
-            }
-            else
+            if (!HasDamage(synth, synth.Comp.WelderDamageGroup))
             {
                 _popup.PopupClient(Loc.GetString("rmc-repairable-not-damaged", ("target", synth)), user, user, PopupType.SmallCaution);
+                return;
+            }
+
+            if (!_repairable.UseFuel(args.Used, args.User, 5, true))
+                return;
+
+            if (_doAfter.TryStartDoAfter(doAfter))
+            {
+
+                if (_net.IsServer)
+                {
+                    var toolUseAttempt = new ToolUseAttemptEvent(user, 5f);
+                    RaiseLocalEvent(used, toolUseAttempt);
+                }
+
+                var selfMsg = Loc.GetString(selfRepair ? "rmc-synth-repair-brute-start-self" : "rmc-synth-repair-brute-start-target-self",
+                    ("user", user),
+                    ("target", synth),
+                    ("tool", used),
+                    ("limb", "chest"));
+                var othersMsg = Loc.GetString("rmc-synth-repair-brute-start-others", ("user", user), ("target", synth), ("tool", used), ("limb", "chest"));
+
+                _popup.PopupPredicted(selfMsg, othersMsg, user, user);
             }
         }
         else if (HasComp<RMCCableCoilComponent>(used))
@@ -169,11 +200,12 @@ public abstract class SharedSynthSystem : EntitySystem
             {
                 if (_doAfter.TryStartDoAfter(doAfter))
                 {
-                    var selfMsg = Loc.GetString("rmc-synth-repair-burn-start-self", ("user", user), ("target", synth), ("tool", used), ("limb", "chest"));
+                    var selfMsg = Loc.GetString(selfRepair ? "rmc-synth-repair-burn-start-self" : "rmc-synth-repair-burn-start-target-self",
+                        ("user", user),
+                        ("target", synth),
+                        ("tool", used),
+                        ("limb", "chest"));
                     var othersMsg = Loc.GetString("rmc-synth-repair-burn-start-others", ("user", user), ("target", synth), ("tool", used), ("limb", "chest"));
-
-                    if (!selfRepair)
-                        return;
 
                     _popup.PopupPredicted(selfMsg, othersMsg, user, user);
                 }
@@ -190,32 +222,51 @@ public abstract class SharedSynthSystem : EntitySystem
         if (args.Cancelled || args.Handled)
             return;
 
-        args.Handled = true;
-
         var used = args.Used;
         var user = args.User;
 
         if (used == null)
             return;
 
-        if (HasComp<BlowtorchComponent>(used) && _repairable.UseFuel(used.Value, user, 5))
+        if (HasComp<BlowtorchComponent>(used) && _repairable.UseFuel(used.Value, user, 1))
         {
             if (synth.Comp.WelderDamageToRepair != null)
                 _damageable.TryChangeDamage(synth, synth.Comp.WelderDamageToRepair, true, false, origin: user);
 
-            var selfMsg = Loc.GetString("rmc-synth-repair-brute-finish-self", ("user", user), ("target", synth), ("tool", used), ("limb", "chest"));
-            var othersMsg = Loc.GetString("rmc-synth-repair-brute-finish", ("user", user), ("target", synth), ("tool", used), ("limb", "chest"));
-            _popup.PopupPredicted(selfMsg, othersMsg, user, user);
+            if (HasDamage(synth, synth.Comp.WelderDamageGroup) &&
+                _repairable.UseFuel(used.Value, user, 1, true))
+            {
+                args.Repeat = true;
+                return;
+            }
         }
-        else if (HasComp<RMCCableCoilComponent>(args.Used) && _stack.Use(args.Used.Value, 1))
+        else if (HasComp<RMCCableCoilComponent>(used) && _stack.Use(used.Value, 1))
         {
             if (synth.Comp.CableCoilDamageToRepair != null)
-                _damageable.TryChangeDamage(synth, synth.Comp.CableCoilDamageToRepair, true, false, origin: args.User);
+                _damageable.TryChangeDamage(synth, synth.Comp.CableCoilDamageToRepair, true, false, origin: user);
 
-            var selfMsg = Loc.GetString("rmc-synth-repair-burn-finish-self", ("user", user), ("target", synth), ("tool", used), ("limb", "chest"));
-            var othersMsg = Loc.GetString("rmc-synth-repair-burn-finish", ("user", user), ("target", synth), ("tool", used), ("limb", "chest"));
-            _popup.PopupPredicted(selfMsg, othersMsg, user, user);
+            if (HasDamage(synth, synth.Comp.CableCoilDamageGroup) &&
+                HasComp<RMCCableCoilComponent>(used))
+            {
+                args.Repeat = true;
+                return;
+            }
         }
+
+        args.Handled = true;
+    }
+
+    private void OnSynthResetKey(Entity<SynthComponent> synth, ref TargetDefibrillatedEvent args)
+    {
+        // Only refresh if the reset key actually brought the synth out of the dead state.
+        if (_mobState.IsDead(synth))
+            return;
+
+        if (!TryComp<MobThresholdsComponent>(synth, out var thresholds))
+            return;
+
+        _mobThreshold.SetAllowRevives(synth.Owner, true, thresholds);
+        _mobThreshold.SetAllowRevives(synth.Owner, false, thresholds);
     }
 
     private void OnSynthBlockedBeforeRangedInteract(Entity<UseOnSynthBlockedComponent> ent, ref BeforeRangedInteractEvent args)
@@ -244,6 +295,11 @@ public abstract class SharedSynthSystem : EntitySystem
         }
     }
 
+    // public bool HasAnyDamage(Entity<SynthComponent> synth)
+    // {
+    //     return HasDamage(synth, synth.Comp.CableCoilDamageGroup) || HasDamage(synth, synth.Comp.WelderDamageGroup);
+    // }
+
     public bool HasDamage(EntityUid synth, ProtoId<DamageGroupPrototype> group)
     {
         if (!TryComp<DamageableComponent>(synth, out var damageable))
@@ -261,8 +317,65 @@ public abstract class SharedSynthSystem : EntitySystem
         return true;
     }
 
+    public bool TryGetDeadExamineText(Entity<SynthComponent?> synth, out LocId text)
+    {
+        text = default;
+        if (!Resolve(synth, ref synth.Comp, false))
+            return false;
+
+        text = WillResetKeyRevive((synth, synth.Comp))
+            ? synth.Comp.SynthRebootText
+            : synth.Comp.SynthTooDamagedText;
+        return true;
+    }
+
+    public bool WillResetKeyRevive(Entity<SynthComponent> synth)
+    {
+        if (!TryComp<DamageableComponent>(synth, out var damageable))
+            return false;
+
+        if (!_mobThreshold.TryGetThresholdForState(synth, MobState.Dead, out var deadThreshold))
+            return false;
+
+        var heal = FixedPoint2.Zero;
+        foreach (var group in synth.Comp.ResetKeyHealGroups)
+        {
+            if (damageable.DamagePerGroup.TryGetValue(group, out var groupDamage))
+                heal += FixedPoint2.Min(synth.Comp.ResetKeyHealPerGroup, groupDamage);
+        }
+
+        return damageable.TotalDamage - heal < deadThreshold.Value;
+    }
+
+    private void OnArmorBeingEquippedAttempt(Entity<CMArmorComponent> ent, ref BeingEquippedAttemptEvent args)
+    {
+        if(args.Cancelled)
+            return;
+
+        if ((args.SlotFlags & SlotFlags.OUTERCLOTHING) == 0)
+            return;
+
+        if (!TryComp<SynthComponent>(args.EquipTarget, out var synth) || synth.CanWearArmor)
+            return;
+
+        if (_tags.HasTag(ent.Owner, SynthAllowedArmorTag))
+            return;
+
+        DoSynthUnableToUsePopup(args.EquipTarget, ent.Owner);
+        args.Cancel();
+    }
+
     public void DoSynthUnableToUsePopup(EntityUid synth, EntityUid tool)
     {
+        if (!TryComp<SynthComponent>(synth, out var synthComp))
+            return;
+
+        var time = _timing.CurTime;
+        if (time < synthComp.NextUnableUsePopup)
+            return;
+
+        synthComp.NextUnableUsePopup = time + UnableUsePopupCooldown;
+
         var msg = Loc.GetString("rmc-species-synth-programming-prevents-use", ("user", synth), ("tool", tool));
         _popup.PopupClient(msg, synth, synth, PopupType.SmallCaution);
     }

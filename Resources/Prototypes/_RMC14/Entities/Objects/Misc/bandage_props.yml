@@ -56,3 +56,9 @@
   components:
     - type: Sprite
       state: band_8
+
+- type: entity
+  parent: RMCDirtBandageProp5
+  id: RMCPaperScrapProp
+  name: paper scrap
+  description: ""

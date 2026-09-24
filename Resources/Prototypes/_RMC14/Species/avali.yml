@@ -1,4 +1,4 @@
-# port from Frontier
+# port from Cosmatic Drift
 
 - type: species
   id: Avali
@@ -9,9 +9,10 @@
   markingLimits: MobAvaliMarkingLimits
   dollPrototype: MobAvaliDummy
   skinColoration: Hues
-  maleFirstNames: names_avali_unisex
-  femaleFirstNames: names_avali_unisex
-  naming: First
+  maleFirstNames: RMCNamesAvaliFirst
+  femaleFirstNames: RMCNamesAvaliFirst
+  lastNames: RMCNamesAvaliLast
+  naming: FirstLastCombined
 
 - type: speciesBaseSprites
   id: MobAvaliSprites

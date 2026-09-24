@@ -1,0 +1,21 @@
+# reinforced directional window
+- type: rmcConstruction
+  id: RMCWindowReinforcedDirectionalBuild
+  name: reinforced directional window
+  prototype: CMWindowReinforcedDirectional
+  doAfterTime: 2
+  doAfterTimeMin: 1
+  materialCost: 1
+  skill: RMCSkillConstruction
+  requiredSkillLevel: 2
+
+# windoor
+- type: rmcConstruction
+  id: RMCWindoorBuild
+  name: glass windoor
+  prototype: CMWindoorAssembly
+  doAfterTime: 2
+  doAfterTimeMin: 1
+  materialCost: 5
+  skill: RMCSkillConstruction
+  requiredSkillLevel: 2

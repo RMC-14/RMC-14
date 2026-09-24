@@ -5,6 +5,98 @@
   description: Terminal for programming UNMC employee ID card access.
   components:
   - type: IdModificationConsole
+    jobList:
+    - CMCE
+    - Synth
+    - WeaponSpec
+    - CMP
+    - HospitalCorpsman
+    - Rifleman
+    - CMCMO
+    - IntelOfficer
+    - CMCargoTech
+    - SmartGunOperator
+    - SO
+    - MessTech
+    - CO
+    - OT
+    - Researcher
+    - Nurse
+    - CMMedbay
+    - MarineMain
+    - FTL
+    - SEA
+    - MaintTech
+    - CombatTech
+    - Pilot
+    - DropshipCrewChief
+    - SquadLeader
+    - ASO
+    - QuarterMaster
+    - CMWarden
+    - RMCWeYaExec
+    - MP
+    jobGroups:
+    - RMCBaseEngineeringJob
+    - RMCBaseCommandJob
+    - RMCBaseMedicalJob
+    - RMCBaseMarinesJob
+    - RMCBaseAuxiliaryJob
+    - RMCBaseRequisitionsJob
+    - RMCBaseMPJob
+    - RMCBaseMiscellaneousJob
+    hiddenAccessList:
+    - RMCAccessSynth
+    - CMAccessPress
+    - CMAccessASO
+    - CMAccessCrewman
+    - CMAccessPilot
+    - CMAccessSEA
+    - CMAccessCO
+    - CMAccessCorp
+    accessList:
+    - CMAccessSpecPrep
+    - CMAccessKitchen
+    - RMCAccessDatabase
+    - CMAccessBrig
+    - CMAccessSmartPrep
+    - CMAccessOT
+    - CMAccessCMP
+    - CMAccessCombatTechPrep
+    - CMAccessDropship
+    - CMAccessSquadLeaderPrep
+    - CMAccessQM
+    - CMAccessChemistry
+    - CMAccessCharlie
+    - CMAccessBravo
+    - CMAccessEngineering
+    - RMCAccessSeniorCommand
+    - CMAccessMaint
+    - CMAccessDelta
+    - CMAccessFTLPrep
+    - CMAccessCMO
+    - CMAccessMedical
+    - RMCAccessMorgue
+    - CMAccessAlpha
+    - CMAccessMarineRifleman
+    - CMAccessArmory
+    - RMCAccessCommand
+    - CMAccessMedPrep
+    - CMAccessRequisitions
+    - CMAccessMarinePrep
+    - CMAccessResearch
+    - RMCAccessFieldDoctor
+    - CMAccessCE
+    - RMCAccessVehicleCrew
+    - RMCAccessEcho
+    - RMCAccessFoxtrot
+    accessGroups:
+    - RMCBaseMarineAccess
+    - RMCBaseMPAccess
+    - RMCBaseSquadAccess
+    - RMCBaseMedicalAccess
+    - RMCBaseCommandAccess
+    - RMCBaseEngineeringAccess
   - type: ActivatableUI
     key: enum.IdModificationConsoleUIKey.Key
   - type: UserInterface
@@ -30,7 +122,26 @@
   - type: Sprite
     drawdepth: SmallObjects
     sprite: _RMC14/Structures/Machines/computer.rsi
-    state: engineering_terminal
+    layers:
+    - map: ["base"]
+      state: "id0"
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "id"
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Appearance
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver # Supposed to be 300, but we have this grouped up with squad distibution computer so yeah
+    idleLoad: 600
+    activeLoad: 600
+    channel: Equipment
+  - type: ActivatableUIRequiresPower
   - type: Clickable
   - type: Corrodible
     isCorrodible: false

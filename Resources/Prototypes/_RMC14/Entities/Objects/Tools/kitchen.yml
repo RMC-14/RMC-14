@@ -6,6 +6,8 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Tools/Kitchen/rolling_pin.rsi
+  - type: PhysicalComposition
+    materialComposition: {}
 
 - type: entity
   parent: Fork

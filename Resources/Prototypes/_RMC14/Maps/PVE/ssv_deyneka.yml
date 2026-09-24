@@ -1,0 +1,24 @@
+﻿- type: gameMap
+  id: SSVDeyneka
+  mapName: "SSV Deyneka"
+  mapPath: /Maps/_RMC14/PVE/ssv_deyneka.yml
+  minPlayers: 0
+  maxRandomOffset: 0
+  randomRotation: false
+  stations:
+    SSVDeyneka:
+      stationProto: StandardUNMCWarship
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'SSV Deyneka'
+        - type: StationJobs
+          availableJobs:
+            # Command
+            RMCSPPPlatCoPVE: [1, 1]
+
+            # Marines
+            RMCSPPSectionLeadPVE: [1, 1]
+            RMCSPPSquadLeadPVE: [2, 2]
+            RMCSPPHeavyGunnerPVE: [2, 2]
+            RMCSPPCorpsmanPVE: [4, 4]
+            RMCSPPRiflemanPVE: [ 20, 20 ]

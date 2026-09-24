@@ -1,0 +1,208 @@
+- type: job
+  parent: CMJobSquadBase
+  id: CMSquadLeader
+  name: cm-job-name-squad-leader
+  description: cm-job-description-squad-leader
+  playTimeTracker: CMJobSquadLeader
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobHospitalCorpsman
+    time: 3600 # 1 hour
+  - !type:RoleTimeRequirement
+    role: CMJobCombatTech
+    time: 3600 # 1 hour
+  - !type:RoleTimeRequirement
+    role: CMJobFireteamLeader
+    time: 18000 # 5 hours
+  - !type:DepartmentTimeRequirement
+    department: CMSquad
+    time: 36000 # 10 hours
+  ranks:
+    RMCRankGunnerySergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 252000 # 70 hours
+    RMCRankStaffSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 36000 # 10 hours
+    RMCRankSergeant: []
+  startingGear: CMGearSquadLeader
+  dummyStartingGear: CMGearSquadLeaderEquipped
+  icon: "CMJobIconSquadLeader"
+  joinNotifyCrew: false
+  supervisors: rmc-job-supervisors-commander
+  marineAuthorityLevel: 2
+  accessGroups:
+  - SquadLeader
+  overwatchSortPriority: -6
+  overwatchShowName: true
+  overwatchRoleName: Squad Leader
+  roleWeight: 1
+  displayWeight: 6
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillCqc: 1
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillIntel: 1
+        RMCSkillJtac: 2
+        RMCSkillLeadership: 1
+        RMCSkillMedical: 1
+        RMCSkillVehicles: 1
+        RMCSkillPolice: 1
+    - type: CMVendorUser
+      id: CMSquadLeader
+      points: 45
+    - type: MarineOrders
+    - type: SquadArmorWearer
+      leader: true
+    - type: SquadLeader
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-squad-leader
+    - type: ViewIntelObjectives
+    - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: leader
+    - type: RMCTrackable
+    - type: MutinyEligible
+    - type: RMCAwardRecommendation
+    - type: SeeNewPlayers
+
+- type: startingGear
+  id: CMGearSquadLeader
+  equipment:
+    id: CMDogtagSquadLeader
+
+- type: startingGear
+  id: CMGearSquadLeaderEquipped
+  equipment:
+    jumpsuit: JumpsuitMarine
+    shoes: CMBootsBlackFilled
+    head: CMArmorHelmetM11
+    outerClothing: CMArmorB12
+    gloves: CMHandsBlackMarine
+    id: CMDogtagSquadLeader
+    ears: CMHeadsetAlphaLeader
+
+- type: playTimeTracker
+  id: CMJobSquadLeader
+  isHumanoid: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSquadLeader
+  name: squad leader spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSquadLeader
+  - type: Sprite
+    state: leader_spawn
+
+- type: entity
+  parent: CMSpawnPointSquadLeader
+  id: CMSpawnPointSquadLeaderAlpha
+  suffix: Alpha
+  components:
+  - type: SquadSpawner
+    squad: SquadAlpha
+    role: CMSquadLeader
+  - type: Sprite
+    state: leader_spawn_alpha
+
+- type: entity
+  parent: CMSpawnPointSquadLeader
+  id: CMSpawnPointSquadLeaderBravo
+  suffix: Bravo
+  components:
+  - type: SquadSpawner
+    squad: SquadBravo
+    role: CMSquadLeader
+  - type: Sprite
+    state: leader_spawn_bravo
+
+- type: entity
+  parent: CMSpawnPointSquadLeader
+  id: CMSpawnPointSquadLeaderCharlie
+  suffix: Charlie
+  components:
+  - type: SquadSpawner
+    squad: SquadCharlie
+    role: CMSquadLeader
+  - type: Sprite
+    state: leader_spawn_charlie
+
+- type: entity
+  parent: CMSpawnPointSquadLeader
+  id: CMSpawnPointSquadLeaderDelta
+  suffix: Delta
+  components:
+  - type: SquadSpawner
+    squad: SquadDelta
+    role: CMSquadLeader
+  - type: Sprite
+    state: leader_spawn_delta
+
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCSquadLeader
+  components:
+  - type: GhostRole
+    name: cm-job-name-squad-leader
+    description: cm-job-description-squad-leader
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    raffle:
+      settings: default
+    job: CMSquadLeader
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 1
+
+# Guidebook
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleSL
+  name: The Squad Leader
+  description: The Squad Leader
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: squad_leader
+
+- type: entity
+  id: RMCGuidebookActionMove
+  name: Move order
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Actions/marine_actions.rsi
+    state: move
+
+- type: entity
+  id: RMCGuidebookActionHold
+  name: Hold order
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Actions/marine_actions.rsi
+    state: hold
+
+- type: entity
+  id: RMCGuidebookActionFocus
+  name: Focus order
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Actions/marine_actions.rsi
+    state: focus

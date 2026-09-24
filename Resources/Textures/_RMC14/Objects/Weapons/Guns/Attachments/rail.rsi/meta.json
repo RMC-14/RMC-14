@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/7e38a6a747b200b3854888a3eacd18b47992d066/icons/obj/items/weapons/guns/attachments/rail.dmi, edited iffbarrel & iffbarrel_a & type88_scope by SG6732, magnetic magnetic_a made by Sigma Draconis, XM43E1 scope by github noctyrnal, reddot and reflex by VictorJob",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/44751f0cc11332a5ba4f05ef91b2d72a0b08082b/icons/obj/items/weapons/guns/attachments/rail.dmi, edited iffbarrel & iffbarrel_a & type88_scope by SG6732, magnetic magnetic_a made by Sigma Draconis, XM43E1 scope by github noctyrnal, reddot and reflex by VictorJob",
   "size": {
     "x": 32,
     "y": 32
@@ -15,6 +15,9 @@
     },
     {
       "name": "reddot"
+    },
+    {
+      "name": "reddot_small"
     },
     {
       "name": "reflex"
@@ -55,6 +58,9 @@
     },
     {
       "name": "reddot_a"
+    },
+    {
+      "name": "reddot_small_a"
     },
     {
       "name": "reflex_a"

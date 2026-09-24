@@ -1,6 +1,6 @@
 ﻿<Document>
   # Minor Crimes
-  - These crimes are low severity, and can be punished with an NJP.
+  - These crimes are low severity, and can be instead punished with an NJP, or a warning.
   <Table Columns="3">
     <ColorBox>
       <Box>
@@ -20,12 +20,76 @@
 
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Hooliganism
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        \- Behavior that is generally disruptive to the warship and crew that classifies as low-level shenanigans not deserving of more severe punishment. Things such as excessive window knocking, force-feeding other marines or failing to conduct oneself properly during the briefing, such as climbing the Briefing overview. This can escalate to [bold]Disorderly Conduct[/bold].
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        [bold]NJP.[/bold]
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Disrespecting a Superior
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        \- Using offensive names or being directly disrespectful to someone of a higher rank or position.
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        [bold]NJP.[/bold]
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        False Testimony
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        \- To intentionally provide false information during a criminal investigation with the intent to disrupt said investigation.
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        [bold]5 minutes.[/bold]
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Trespassing
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        \- Unauthorized access of an area which a person does not normally have access to or without command/superior approval.
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        [bold]Escort out of the area and optionally 7.5 minutes.[/bold]
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
         Failure to Follow Procedure
       </Box>
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Failing to follow the regulations found in the Standard Operating Procedure.
+        \- Failing to follow the regulations found in the [bold]Standard Operating Procedure[/bold].
       </Box>
     </ColorBox>
     <ColorBox>
@@ -41,7 +105,7 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Smoking in areas designated for use by medical personnel, such as the entire medbay and surgical rooms.
+        \- Smoking in areas designated for use by medical personnel, such as the entire medbay and surgical rooms.
       </Box>
     </ColorBox>
     <ColorBox>
@@ -52,44 +116,12 @@
 
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Hooliganism
-      </Box>
-    </ColorBox>
-    <ColorBox>
-      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Behavior that is generally disruptive to the ship and crew that classifies as low-level shenanigans not deserving of more severe punishment. Things such as excessive window knocking, force-feeding other marines or failing to conduct oneself properly during the briefing, such as climbing the Briefing overview. This can escalate to [bold]Disorderly Conduct[/bold].
-      </Box>
-    </ColorBox>
-    <ColorBox>
-      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        [bold]NJP.[/bold]
-      </Box>
-    </ColorBox>
-
-    <ColorBox>
-      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Trespassing
-      </Box>
-    </ColorBox>
-    <ColorBox>
-      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Unauthorized access of an area which a person does not normally have access to or without command/superior approval.
-      </Box>
-    </ColorBox>
-    <ColorBox>
-      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        [bold]Escort out of the area and optionally 7.5 minutes.[/bold]
-      </Box>
-    </ColorBox>
-
-    <ColorBox>
-      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
         Intoxication
       </Box>
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        To consume alcohol or other substances such as alcohol or hallucinogenic drugs resulting in impaired job performance.
+        \- During active duty, to consume alcohol or other substances such as hallucinogenic drugs that cause impairment of speech or mind of some form.
       </Box>
     </ColorBox>
     <ColorBox>
@@ -105,44 +137,14 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        To take items (or property) from another person or entity without their express permission, or to retain possession of items that have been taken without permission. This includes the removal of vendors from department areas without permission.
+        \- To take items or property from another person or entity without their express permission.
+        \n\- To retain possession of items that have been taken without permission or were knowingly not legal to be provided. A chance to return the item(s) or property should be given first.
+        \n\- Removal of vendors from department areas without permission.
       </Box>
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
         [bold]10 minutes, and the item(s) returned to the owner.[/bold]
-      </Box>
-    </ColorBox>
-
-    <ColorBox>
-      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Disrespecting a superior Officer
-      </Box>
-    </ColorBox>
-    <ColorBox>
-      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Using offensive names or being directly disrespectful to an [bold]Officer[/bold] of higher rank or position.
-      </Box>
-    </ColorBox>
-    <ColorBox>
-      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        [bold]10 minutes.[/bold]
-      </Box>
-    </ColorBox>
-
-    <ColorBox>
-      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        False Testimony
-      </Box>
-    </ColorBox>
-    <ColorBox>
-      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        To intentionally and willingly lie to an MP, or deputized officer, during a criminal investigation with the intent to disrupt said investigation.
-      </Box>
-    </ColorBox>
-    <ColorBox>
-      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        [bold]5 minutes.[/bold]
       </Box>
     </ColorBox>
 

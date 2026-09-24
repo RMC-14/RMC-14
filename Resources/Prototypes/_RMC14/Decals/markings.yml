@@ -87,3 +87,30 @@
   sprite:
     sprite: _RMC14/Decals/markings.rsi
     state: striped_corner_3
+
+- type: decal
+  id: RMCDecalCargoArrow2
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/markings.rsi
+    state: cargo_arrow2
+
+- type: decal
+  id: RMCDecalDoorWarning
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/markings.rsi
+    state: door_warning
+
+- type: decal
+  id: RMCDecalDoorWarning2
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/markings.rsi
+    state: door_warning2

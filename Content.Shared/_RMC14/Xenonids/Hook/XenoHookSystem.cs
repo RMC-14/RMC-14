@@ -1,24 +1,21 @@
-using Content.Shared._RMC14.Line;
+using Content.Shared._RMC14.Emplacements;
+using Content.Shared._RMC14.Tether;
 using Content.Shared.Throwing;
-using Robust.Shared.Network;
+using Robust.Shared.Physics.Events;
 
 namespace Content.Shared._RMC14.Xenonids.Hook;
 
 public sealed partial class XenoHookSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly LineSystem _line = default!;
-
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<XenoHookComponent, MoveEvent>(OnHookSourceMove);
         SubscribeLocalEvent<XenoHookComponent, EntityTerminatingEvent>(OnHookDelete);
-        SubscribeLocalEvent<XenoHookedComponent, MoveEvent>(OnHookedMove);
         SubscribeLocalEvent<XenoHookedComponent, StopThrowEvent>(OnHookedStop);
         SubscribeLocalEvent<XenoHookedComponent, ComponentShutdown>(OnHookedRemoved);
+        SubscribeLocalEvent<XenoHookedComponent, PreventCollideEvent>(OnHookedPreventCollide);
     }
 
     private void OnHookSourceMove(Entity<XenoHookComponent> xeno, ref MoveEvent args)
@@ -33,10 +30,7 @@ public sealed partial class XenoHookSystem : EntitySystem
             if (!TryComp<XenoHookedComponent>(hooked, out var hookComp))
             {
                 toRemove.Add(hooked);
-                continue;
             }
-
-            UpdateTail((hooked, hookComp));
         }
 
         foreach (var ent in toRemove)
@@ -58,11 +52,6 @@ public sealed partial class XenoHookSystem : EntitySystem
         xeno.Comp.Hooked.Clear();
     }
 
-    private void OnHookedMove(Entity<XenoHookedComponent> ent, ref MoveEvent args)
-    {
-        UpdateTail(ent);
-    }
-
     private void OnHookedStop(Entity<XenoHookedComponent> ent, ref StopThrowEvent args)
     {
         RemCompDeferred<XenoHookedComponent>(ent);
@@ -70,12 +59,13 @@ public sealed partial class XenoHookSystem : EntitySystem
 
     private void OnHookedRemoved(Entity<XenoHookedComponent> ent, ref ComponentShutdown args)
     {
-        if (TryComp<XenoHookComponent>(ent.Comp.Source, out var hookSource))
-            hookSource.Hooked.Remove(ent);
-        ent.Comp.StopUpdating = true;
-        Dirty(ent);
-        _line.DeleteBeam(ent.Comp.Tail);
-        _appearance.SetData(ent, HookedVisuals.Hooked, false);
+        RemCompDeferred<RMCTetherComponent>(ent);
+    }
+
+    private void OnHookedPreventCollide(Entity<XenoHookedComponent> ent, ref PreventCollideEvent args)
+    {
+        if (HasComp<WeaponMountComponent>(args.OtherEntity))
+            args.Cancelled = true;
     }
 
     public bool TryHookTarget(Entity<XenoHookComponent> xeno, EntityUid target)
@@ -84,33 +74,14 @@ public sealed partial class XenoHookSystem : EntitySystem
         if (HasComp<XenoHookedComponent>(target))
             return false;
 
-        var hook = EnsureComp<XenoHookedComponent>(target);
-
-        hook.Source = xeno;
-        hook.TailProto = xeno.Comp.TailProto;
+        EnsureComp<XenoHookedComponent>(target);
         xeno.Comp.Hooked.Add(target);
         Dirty(xeno);
 
-        _appearance.SetData(target, HookedVisuals.Hooked, true);
-        UpdateTail((target, hook));
+        var tether = EnsureComp<RMCTetherComponent>(target);
+        tether.TetherOrigin = xeno;
+        Dirty(target, tether);
 
         return true;
-    }
-
-    public void UpdateTail(Entity<XenoHookedComponent> ent)
-    {
-        if (_net.IsClient)
-            return;
-
-        var hook = ent.Comp;
-
-        if (hook.StopUpdating)
-            return;
-
-        if (hook.Tail.Count != 0)
-            _line.DeleteBeam(hook.Tail);
-
-        if (_line.TryCreateLine(hook.Source, ent, hook.TailProto, out var lines))
-            hook.Tail = lines;
     }
 }

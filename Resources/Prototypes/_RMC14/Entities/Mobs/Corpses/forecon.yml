@@ -5,6 +5,22 @@
   components:
   - type: Loadout
     prototypes: [ RMCGearCorpseFORECONSpotter ]
+  - type: Rank
+    rank: RMCRankSergeant
+  - type: SquadMember
+    background:
+      sprite: _RMC14/Interface/job_icons/UNMC/marine.rsi
+      state: hudsquad
+    backgroundColor: "#32CD32"
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+  - type: Marine
+    icon:
+      sprite: _RMC14/Interface/job_icons/UNMC/marine.rsi
+      state: hudsquad_ass
 
 - type: startingGear
   id: RMCGearCorpseFORECONSpotter

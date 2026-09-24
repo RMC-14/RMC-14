@@ -12,3 +12,18 @@
   id: rmcmango
   flavorType: Complex
   description: rmc-flavor-complex-mango
+
+- type: flavor
+  id: rmckiwi
+  flavorType: Complex
+  description: like kiwi
+
+- type: flavor
+  id: rmccocomilk
+  flavorType: Complex
+  description: like heavily processed coconut milk
+
+- type: flavor
+  id: rmcsoymilk
+  flavorType: Complex
+  description: like soy-milk.

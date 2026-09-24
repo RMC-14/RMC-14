@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  parent: [ BaseMachinePowered, RMCConstructibleMachine ]
   id: RMCSmartFridge
   name: smart chemical storage
   description: A refrigerated storage unit for medicine and chemical storage.
@@ -7,9 +7,17 @@
     mode: SnapgridCenter
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Machines/smart_fridge.rsi
+    sprite: _RMC14/Structures/Machines/smart_fridge.rsi # TODO RMC14 deny, vend states
     layers:
-    - state: smartfridge
+    - state: "smartfridge-off"
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "smartfridge"
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -23,6 +31,12 @@
         - MachineMask
         layer:
         - MachineLayer
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: null
   - type: Destructible
     thresholds:
     - trigger:
@@ -32,16 +46,18 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalGlassBreak
-      - !type:ChangeConstructionNodeBehavior
-        node: machineFrame
       - !type:DoActsBehavior
-        acts: [ "Destruction" ]
+        acts: ["Destruction"]
   - type: ActivatableUI
     key: enum.RMCSmartFridgeUI.Key
   - type: ActivatableUIRequiresPower
   - type: ApcPowerReceiver
     powerLoad: 250
-    needsPower: false # TODO RMC14 power
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 5
+    activeLoad: 100
+    channel: Equipment
   - type: Appearance
   - type: GuideHelp
     guides:

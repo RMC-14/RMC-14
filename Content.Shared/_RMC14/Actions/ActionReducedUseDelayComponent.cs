@@ -5,13 +5,9 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Actions;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(RMCActionsSystem))]
+[Access(typeof(SharedRMCActionsSystem))]
 public sealed partial class ActionReducedUseDelayComponent : Component
 {
-    // Default cooldown without reductions
-    [DataField, AutoNetworkedField]
-    public TimeSpan? UseDelayBase = default!;
-
     // Cooldown reduction percentage
     [DataField, AutoNetworkedField]
     public FixedPoint2 UseDelayReduction = default!;

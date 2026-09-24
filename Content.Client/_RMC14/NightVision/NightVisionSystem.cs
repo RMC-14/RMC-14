@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.NightVision;
+using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Burrow;
 using Content.Shared.Examine;
@@ -84,6 +84,7 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
     {
         _overlay.RemoveOverlay<NightVisionOverlay>();
         _overlay.RemoveOverlay<NightVisionFilterOverlay>();
+        _overlay.RemoveOverlay<HalfNightVisionBrightnessOverlay>();
         _light.DrawLighting = true;
         SetMesons(false);
         SetMesonSprites(false);
@@ -96,6 +97,8 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
 
         if (ent.Comp.Green)
             _overlay.AddOverlay(new NightVisionFilterOverlay());
+
+        _overlay.AddOverlay(new HalfNightVisionBrightnessOverlay());
 
         _light.DrawLighting = true;
         SetMesons(ent.Comp.Mesons);

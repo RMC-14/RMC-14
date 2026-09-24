@@ -2,120 +2,127 @@
 
 - type: tile
   parent: CMPlanetBase
+  id: CMPlanetBeachBase
+  abstract: true
+  blockAnchoring: true
+  blockConstruction: true
+
+- type: tile
+  parent: CMPlanetBeachBase
   id: CMPlanetBeachGrassNorth
   name: beach grass north
   sprite: /Textures/_RMC14/Tiles/planet/beach/grassbeach_0.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetBeachBase
   id: CMPlanetBeachGrassSouth
   name: beach grass south
   sprite: /Textures/_RMC14/Tiles/planet/beach/grassbeach_1.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetBeachBase
   id: CMPlanetBeachGrassWest
   name: beach grass west
   sprite: /Textures/_RMC14/Tiles/planet/beach/grassbeach_2.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetBeachBase
   id: CMPlanetBeachGrassEast
   name: beach grass east
   sprite: /Textures/_RMC14/Tiles/planet/beach/grassbeach_3.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetBeachBase
   id: CMPlanetBeachGrassSE
   name: beach grass corner se
   sprite: /Textures/_RMC14/Tiles/planet/beach/gbcorner_0.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetBeachBase
   id: CMPlanetBeachGrassNW
   name: beach grass corner nw
   sprite: /Textures/_RMC14/Tiles/planet/beach/gbcorner_1.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetBeachBase
   id: CMPlanetBeachGrassNE
   name: beach grass corner ne
   sprite: /Textures/_RMC14/Tiles/planet/beach/gbcorner_2.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetBeachBase
   id: CMPlanetBeachGrassSW
   name: beach grass corner sw
   sprite: /Textures/_RMC14/Tiles/planet/beach/gbcorner_3.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetBeachBase
   id: CMPlanetCoastNorth
   name: coast north
   sprite: /Textures/_RMC14/Tiles/planet/beach/beach_0.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetBeachBase
   id: CMPlanetCoastEast
   name: coast east
   sprite: /Textures/_RMC14/Tiles/planet/beach/beach_24.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetBeachBase
   id: CMPlanetCoastSouth
   name: coast south
   sprite: /Textures/_RMC14/Tiles/planet/beach/beach_8.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetBeachBase
   id: CMPlanetCoastWest
   name: coast west
   sprite: /Textures/_RMC14/Tiles/planet/beach/beach_16.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetBeachBase
   id: CMPlanetCoastCornerNW
   name: coast corner nw
   sprite: /Textures/_RMC14/Tiles/planet/beach/beachcorner_0.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetBeachBase
   id: CMPlanetCoastCornerNE
   name: coast corner ne
   sprite: /Textures/_RMC14/Tiles/planet/beach/beachcorner_8.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetBeachBase
   id: CMPlanetCoastCornerSE
   name: coast corner se
   sprite: /Textures/_RMC14/Tiles/planet/beach/beachcorner_16.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetBeachBase
   id: CMPlanetCoastCornerSW
   name: coast corner sw
   sprite: /Textures/_RMC14/Tiles/planet/beach/beachcorner_24.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetBeachBase
   id: CMPlanetCoastCornerNW2
   name: coast corner nw
   sprite: /Textures/_RMC14/Tiles/planet/beach/beachcorner2_0.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetBeachBase
   id: CMPlanetCoastCornerNE2
   name: coast corner ne
   sprite: /Textures/_RMC14/Tiles/planet/beach/beachcorner2_8.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetBeachBase
   id: CMPlanetCoastCornerSW2
   name: coast corner se
   sprite: /Textures/_RMC14/Tiles/planet/beach/beachcorner2_16.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetBeachBase
   id: CMPlanetCoastCornerSE2
   name: coast corner sw
   sprite: /Textures/_RMC14/Tiles/planet/beach/beachcorner2_24.png

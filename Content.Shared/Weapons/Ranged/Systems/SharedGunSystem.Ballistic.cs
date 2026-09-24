@@ -229,7 +229,7 @@ public abstract partial class SharedGunSystem
         }
 
         List<(EntityUid? Entity, IShootable Shootable)> ammo = new();
-        var evTakeAmmo = new TakeAmmoEvent(1, ammo, Transform(uid).Coordinates, args.User);
+        var evTakeAmmo = new TakeAmmoEvent(Math.Clamp(target.Capacity - target.Count, 0, 20), ammo, Transform(uid).Coordinates, args.User); // RMC14
         RaiseLocalEvent(uid, evTakeAmmo);
 
         foreach (var (ent, _) in ammo)
@@ -266,7 +266,7 @@ public abstract partial class SharedGunSystem
 
         // Delete the source BAP if it has the flag and is empty after trying to load. Maybe useful for shell handfuls.
         if (component.DeleteWhenEmpty && (component.Entities.Count == 0))
-            Del(uid);
+            PredictedDel(uid);
 
     }
 

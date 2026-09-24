@@ -1,6 +1,9 @@
 using System.Numerics;
 using Content.Shared._RMC14.Projectiles.Penetration;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
+using Content.Shared._RMC14.Weapons.Ranged;
+using Content.Shared._RMC14.Xenonids.Damage;
+using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Camera;
 using Content.Shared.Damage;
@@ -11,10 +14,10 @@ using Content.Shared.Effects;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
-using Content.Shared.Mobs.Components;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
@@ -36,6 +39,9 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     [Dependency] private readonly SharedDestructibleSystem _destructible = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    // RMC14
+    [Dependency] private readonly SharedContainerSystem _container = default!;
+    // RMC14
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
@@ -75,7 +81,12 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         if (projectile.Comp1.ProjectileSpent)
         {
             if (_net.IsServer && component.DeleteOnCollide)
-                QueueDel(uid);
+            {
+                if (component.QueueDeletion)
+                    QueueDel(uid);
+                else
+                    Del(uid);
+            }
 
             return;
         }
@@ -105,12 +116,34 @@ public abstract partial class SharedProjectileSystem : EntitySystem
             : new DamageSpecifier(ev.Damage);
         var deleted = Deleted(target);
 
-        var filter = Filter.Pvs(coordinates, entityMan: EntityManager);
-        if (_guns.GunPrediction &&
-            TryComp(projectile, out PredictedProjectileServerComponent? serverProjectile) &&
-            serverProjectile.Shooter is { } shooter)
+        // RMC14 this is already done on the server in TryChangeDamage.
+        if (_net.IsClient)
         {
-            filter = filter.RemovePlayer(shooter);
+            var modifyEvent = new DamageModifyEvent(ev.Damage, component.Shooter, uid);
+            RaiseLocalEvent(target, modifyEvent);
+            modifiedDamage = modifyEvent.Damage;
+        }
+
+        var popupEv = new ProjectileDamageDealtEvent(component.Shooter, modifiedDamage);
+            RaiseLocalEvent(target, ref popupEv);
+        //
+
+        var filter = Filter.Pvs(coordinates, entityMan: EntityManager);
+        if (_guns.GunPrediction)
+        {
+            // TODO RMC14 clean this up once gun prediction is using new lag compensation
+            if (TryComp(projectile, out PredictedProjectileServerComponent? serverProjectile) &&
+                serverProjectile.Shooter is { } shooter)
+            {
+                filter = filter.RemovePlayer(shooter);
+            }
+
+            if (_net.IsServer &&
+                TryComp(projectile, out XenoProjectileShotComponent? shot) &&
+                shot.Shooter is { } xenoShooter)
+            {
+                filter = filter.RemovePlayer(xenoShooter);
+            }
         }
 
         if (modifiedDamage is not null && (EntityManager.EntityExists(component.Shooter) || EntityManager.EntityExists(component.Weapon)))
@@ -169,7 +202,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         //     component.ProjectileSpent = true;
         // }
 
-        if (!deleted)
+        if (!deleted && filter.Count > 0)
         {
             _guns.PlayImpactSound(target, modifiedDamage, component.SoundHit, component.ForceSound, filter, projectile);
 
@@ -188,8 +221,22 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         var additionalHits = new AfterProjectileHitEvent(projectile, target);
         RaiseLocalEvent(uid, ref additionalHits);
 
+        if ((_net.IsServer || IsClientSide(uid)) && component.ImpactEffect != null)
+        {
+            var impactEffectEv = new ImpactEffectEvent(component.ImpactEffect, GetNetCoordinates(coordinates));
+            if (_net.IsServer)
+                RaiseNetworkEvent(impactEffectEv, filter);
+            else
+                RaiseLocalEvent(impactEffectEv);
+        }
+
         if (!predicted && component.DeleteOnCollide && (_net.IsServer || IsClientSide(uid)))
-            QueueDel(uid);
+        {
+            if (component.QueueDeletion)
+                QueueDel(uid);
+            else
+                Del(uid);
+        }
 
         else if (_net.IsServer && component.DeleteOnCollide)
         {
@@ -201,15 +248,6 @@ public abstract partial class SharedProjectileSystem : EntitySystem
                 predictedComp.Distance = distance;
 
             Dirty(uid, predictedComp);
-        }
-
-        if ((_net.IsServer || IsClientSide(uid)) && component.ImpactEffect != null)
-        {
-            var impactEffectEv = new ImpactEffectEvent(component.ImpactEffect, GetNetCoordinates(coordinates));
-            if (_net.IsServer)
-                RaiseNetworkEvent(impactEffectEv, filter);
-            else
-                RaiseLocalEvent(impactEffectEv);
         }
     }
 
@@ -373,7 +411,28 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         if (component.IgnoreShooter && (args.OtherEntity == component.Shooter || args.OtherEntity == component.Weapon))
         {
             args.Cancelled = true;
+            return;
         }
+
+        // RMC14
+        if (component.Weapon == null)
+            return;
+
+        if (!HasComp<GunIgnoreContainerOwnerCollisionComponent>(component.Weapon.Value))
+            return;
+
+        var current = component.Weapon.Value;
+        while (_container.TryGetContainingContainer((current, null), out var container))
+        {
+            if (args.OtherEntity == container.Owner)
+            {
+                args.Cancelled = true;
+                return;
+            }
+
+            current = container.Owner;
+        }
+        // RMC14
     }
 
     public void SetShooter(EntityUid id, ProjectileComponent component, EntityUid? shooterId = null)

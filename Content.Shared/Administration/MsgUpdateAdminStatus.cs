@@ -26,7 +26,7 @@ namespace Content.Shared.Administration
             {
                 var active = buffer.ReadBoolean();
                 buffer.ReadPadBits();
-                var flags = (AdminFlags) buffer.ReadUInt32();
+                var flags = (AdminFlags) buffer.ReadUInt64();
                 var title = buffer.ReadString();
 
                 Admin = new AdminData
@@ -54,7 +54,7 @@ namespace Content.Shared.Administration
 
             buffer.Write(Admin.Active);
             buffer.WritePadBits();
-            buffer.Write((uint) Admin.Flags);
+            buffer.Write((ulong) Admin.Flags);
             buffer.Write(Admin.Title);
         }
 

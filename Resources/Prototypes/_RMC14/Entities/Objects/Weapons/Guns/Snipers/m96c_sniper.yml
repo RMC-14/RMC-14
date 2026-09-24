@@ -1,0 +1,183 @@
+﻿- type: entity # TODO RMC14: 5 second knockdown if you fire this while not wearing pmc armor. for now just sniper whitelist
+  parent: RMCBaseWeaponSniperRifle
+  id: CMM96CSniperRifle
+  name: M96C anti-tank sniper rifle
+  description: "A high-end superheavy magrail sniper rifle from Weston-Yamada chambered in a specialized variant of the heaviest ammo available, 10x99mm Caseless. This weapon requires a specialized armor rig for recoil mitigation in order to be used effectively."
+  components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleSpecSniper
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Snipers/m96s/snow.rsi # # TODO RMC14: just uses snow to represent 'corporate' for now but it should get its' own sprites later
+    layers:
+    - state: bolt-open
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
+      state: sniperbarrel
+      offset: 0.715, 0.025
+  - type: Item
+    size: Large
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Snipers/m96s/snow.rsi
+  - type: Tag
+    tags:
+    - CMM96CSniperRifle
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 17
+  - type: Gun
+    shotsPerBurst: 1
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_sniper_heavy.ogg
+  - type: RMCSelectiveFire
+    recoilWielded: 1
+    scatterWielded: 0
+    baseFireRate: 0.333
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 3
+  - type: WieldDelay
+    baseDelay: 1.2
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: CMMagazineSniperM96C
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mar40_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mar40_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineSniperM96C
+  - type: GunUserWhitelist
+    whitelist:
+      components:
+      - SniperWhitelist
+  - type: GunRequiresWield
+  - type: Corrodible
+    isCorrodible: false
+  - type: GunIFF
+    enabled: true
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        locked: true
+        startingAttachable: RMCM96SIntegratedScope # TODO RMC14: m42c pmc scope
+        whitelist:
+          tags:
+          - RMCM96SIntegratedScope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBipod
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-underbarrel: 0.21875, -0.343
+  - type: ItemCamouflage
+    camouflageVariations: {}
+  - type: RMCGunChamber
+    enabled: false
+
+- type: entity
+  parent: BaseItem
+  id: CMMagazineSniperM96C
+  name: M42C marksman magazine (10x99mm)
+  description: A magazine of specialized supersonic 10x99mm anti-tank rounds.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineSniper
+    - CMMagazineSniperM96C
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgeSniper10x99mm
+    proto: CMCartridgeSniper10x99mm
+    capacity: 6
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m42c.rsi
+    layers:
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: band_e
+      color: "#07cda5" # technically has no band in CM but there's no way to distinguish this from m96s otherwise
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+    zeroOnlyOnEmpty: true
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Appearance
+  - type: Clothing
+    slots:
+    - suitStorage
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: CMCartridgeSniper10x99mm
+  name: cartridge (10x99mm)
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/large_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Tag
+    tags:
+    - Cartridge
+    - CMCartridgeSniper10x99mm
+  - type: CartridgeAmmo
+    proto: CMBulletSniper10x99mm
+
+- type: entity
+  parent: RMCBaseBullet
+  id: CMBulletSniper10x99mm
+  name: supersonic sniper bullet (10x99mm)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
+    layers:
+    - state: bullet
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 300 # TODO RMC14: 150% damage to runners (225), 300% against Big xenos (450), and 200% against all others (300). For now it's just 300, base damage should be 150 when this multiplier is added
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 32
+      falloff: 9999
+      ignoreModifiers: true
+  - type: CMArmorPiercing
+    amount: 75
+  - type: RMCProjectileAccuracy
+    accuracy: 125
+    thresholds:
+    - range: 32
+      falloff: 10
+    - range: 4
+      falloff: 10
+      buildup: true
+  - type: AimedShotEffect
+    extraHits: 2
+
+- type: Tag
+  id: CMM96CSniperRifle
+
+- type: Tag
+  id: CMMagazineSniperM96C
+
+- type: Tag
+  id: CMCartridgeSniper10x99mm

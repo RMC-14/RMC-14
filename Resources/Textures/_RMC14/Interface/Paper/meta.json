@@ -1,9 +1,11 @@
 {
   "files": [
     "paper_heading_requisition_invoice.svg",
-    "paper_heading_requisition_invoice.svg.96dpi.png"
+    "paper_heading_requisition_invoice.svg.96dpi.png",
+    "paper_heading_weya.svg.96dpi.png",
+    "paper_heading_weya.svg"
   ],
   "version": 1,
   "license": "CC-BY-SA-4.0",
-  "copyright": "Invoice heading by Noisrevni."
+  "copyright": "Invoice and WeYa heading by Noisrevni."
 }

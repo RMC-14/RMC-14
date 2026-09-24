@@ -11,3 +11,31 @@
   - type: Tag
     tags:
     - HideContextMenu
+
+- type: entity
+  parent: RMCEffectAlert
+  id: RMCHijackPipeExplosionWarning
+  name: explosive warning
+  components:
+  - type: TimedDespawn
+    lifetime: 5
+  - type: Sprite
+    state: alert_greyscale
+    color: "#ff0000"
+
+- type: entity
+  id: RMCActiveAlertEffect
+  name: exclamation
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      sprite: Structures/Storage/closet.rsi
+      state: cardboard_special
+      drawdepth: Effects
+      offset: 0, 1
+      noRot: true
+    - type: Transform
+      noRot: true
+    - type: Tag
+      tags:
+        - HideContextMenu

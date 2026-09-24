@@ -35,11 +35,13 @@
           - RMCAttachmentRecoilCompensator
           - RMCAttachmentBarrelCharger
           - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
       rmc-aslot-rail:
         whitelist:
           tags:
           - RMCAttachmentRailFlashlight
           - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
           - RMCAttachmentS6ReflexSight
           - RMCAttachmentS84xTelescopicScope
           - RMCAttachmentS42xTelescopicMiniscope
@@ -58,6 +60,17 @@
       rmc-aslot-rail: 0, 0.185
       rmc-aslot-stock: -0.59375, 0.09375
       rmc-aslot-underbarrel: 0.375, -0.155
+
+- type: entity
+  parent: RMCWeaponRevolverM44
+  id: RMCWeaponRevolverM44Custom
+  name: Custom M44 combat revolver
+  description: A bulky revolver, occasionally carried by assault troops and officers in the Marine Corps, as well as civilian law enforcement. Fires .44 Magnum rounds. This one has had it's wooden grips replaced with gaudy ivory ones.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m44custom.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m44custom.rsi
 
 - type: entity
   parent: RMCWeaponRevolverM44

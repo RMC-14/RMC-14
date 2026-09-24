@@ -1,0 +1,12 @@
+﻿- type: entity
+  id: RMCPerspectiveDarkness
+  name: darkness
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/darkness.rsi
+    state: darkness
+    drawdepth: Effects

@@ -1,0 +1,82 @@
+﻿- type: job
+  parent: CMJobBase
+  id: CMPilotGunship
+  name: cm-job-name-gunship-pilot
+  description: cm-job-description-gunship-pilot
+  playTimeTracker: CMJobPilotGunship
+  requirements:
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsDropshipPilot
+    time: 18000 # 5 hours
+  ranks:
+    RMCRankSecondLT:
+    - !type:RoleTimeRequirement
+      role: CMJobPilotGunship
+      time: 252000 # 70 hours
+    RMCRankChiefWarrantOfficer:
+    - !type:RoleTimeRequirement
+      role: CMJobPilotGunship
+      time: 90000 # 25 hours
+    RMCRankWarrantOfficer: []
+  startingGear: CMGearPilotGunship
+  icon: "CMJobIconPilotGunship"
+  joinNotifyCrew: false
+  marineAuthorityLevel: 7
+  supervisors: cm-job-supervisors-aso
+  accessGroups:
+  - Pilot
+  roleWeight: 0.25
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 1
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillIntel: 1
+        RMCSkillJtac: 2
+        RMCSkillLeadership: 1
+        RMCSkillMedical: 2
+        RMCSkillOverwatch: 1
+        RMCSkillPilot: 2
+        RMCSkillPowerLoader: 2
+        RMCSkillSurgery: 1
+    - type: MarineOrders
+    - type: CMVendorUser
+      id: CMPilotGunship
+      points: 45
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-gunship-pilot
+    - type: ViewIntelObjectives
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: gp
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_command
+    - type: MutinyEligible
+
+- type: startingGear
+  id: CMGearPilotGunship
+  equipment:
+    jumpsuit: CMJumpsuitPilot
+    shoes: CMBootsBlackFilled
+    id: CMIDCardPilotGunship
+    ears: CMHeadsetPilot
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointPilotGunship
+  name: gunship pilot spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMPilotGunship
+  - type: Sprite
+    state: po_spawn
+
+- type: playTimeTracker
+  id: CMJobPilotGunship
+  isHumanoid: true

@@ -9,6 +9,10 @@
   "states": [
     {
       "name": "bronze_heart"
+    },
+    {
+      "name": "equipped",
+      "directions": 4
     }
   ]
 }

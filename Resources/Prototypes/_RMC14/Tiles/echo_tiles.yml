@@ -1,0 +1,71 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorSteelechoBase
+  name: tiles-cm-echo
+  itemDrop: CMTileItemSteel # TODO RMC14
+
+- type: tile
+  parent: CMFloorSteelechoBase
+  id: CMFloorSteelecho0
+  sprite: /Textures/_RMC14/Tiles/almayer/echo/echo_0.png
+
+- type: tile
+  parent: CMFloorSteelechoBase
+  id: CMFloorSteelecho1
+  sprite: /Textures/_RMC14/Tiles/almayer/echo/echo_1.png
+
+- type: tile
+  parent: CMFloorSteelechoBase
+  id: CMFloorSteelecho2
+  sprite: /Textures/_RMC14/Tiles/almayer/echo/echo_2.png
+
+- type: tile
+  parent: CMFloorSteelechoBase
+  id: CMFloorSteelecho3
+  sprite: /Textures/_RMC14/Tiles/almayer/echo/echo_3.png
+
+- type: tile
+  parent: CMFloorSteelechoBase
+  id: CMFloorSteelecho4
+  sprite: /Textures/_RMC14/Tiles/almayer/echo/echo_4.png
+
+- type: tile
+  parent: CMFloorSteelechoBase
+  id: CMFloorSteelecho5
+  sprite: /Textures/_RMC14/Tiles/almayer/echo/echo_5.png
+
+- type: tile
+  parent: CMFloorSteelechoBase
+  id: CMFloorSteelecho6
+  sprite: /Textures/_RMC14/Tiles/almayer/echo/echo_6.png
+
+- type: tile
+  parent: CMFloorSteelechoBase
+  id: CMFloorSteelecho7
+  sprite: /Textures/_RMC14/Tiles/almayer/echo/echo_7.png
+
+- type: tile
+  parent: CMFloorSteelechoBase
+  id: CMFloorSteelechoCorner0
+  sprite: /Textures/_RMC14/Tiles/almayer/echo/echocorner_0.png
+
+- type: tile
+  parent: CMFloorSteelechoBase
+  id: CMFloorSteelechoCorner1
+  sprite: /Textures/_RMC14/Tiles/almayer/echo/echocorner_1.png
+
+- type: tile
+  parent: CMFloorSteelechoBase
+  id: CMFloorSteelechoCorner2
+  sprite: /Textures/_RMC14/Tiles/almayer/echo/echocorner_2.png
+
+- type: tile
+  parent: CMFloorSteelechoBase
+  id: CMFloorSteelechoCorner3
+  sprite: /Textures/_RMC14/Tiles/almayer/echo/echocorner_3.png
+
+- type: tile
+  parent: CMFloorSteelechoBase
+  id: CMFloorSteelechoFull
+  sprite: /Textures/_RMC14/Tiles/almayer/echo/echofull.png

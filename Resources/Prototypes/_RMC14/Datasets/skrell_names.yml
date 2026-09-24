@@ -4,10 +4,10 @@
   id: RMCNamesSkrellFirst
   values:
     prefix: rmc-name-skrell-first-
-    count: 109
+    count: 156
 
 - type: localizedDataset
   id: RMCNamesSkrellLast
   values:
     prefix: rmc-name-skrell-last-
-    count: 365
+    count: 414

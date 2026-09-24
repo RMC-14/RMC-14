@@ -5,46 +5,45 @@
   prefix: PvSM.
   paygrade: O9
 
-# Any admin with high law understanding
+# Admin
 - type: rank
   id: RMCRankProvostSeniorMarshal
   name: Senior Marshal
   prefix: PvSnM.
   paygrade: O8
 
-# Any admin with low law understanding, or wanting a lower rank
+# Admin
 - type: rank
   id: RMCRankProvostMarshal
   name: Marshal
   prefix: PvM.
   paygrade: O7
 
-# Any whitelisted CO
+# Admin
 - type: rank
   id: RMCRankProvostDeputyMarshal
   name: Deputy Marshal
   prefix: PvDM.
   paygrade: O6
 
+- type: rank
+  id: RMCRankProvostChiefInspector
+  name: Chief Inspector
+  prefix: PvCI.
+  paygrade: O5
+
+- type: rank
+  id: RMCRankProvostInspector
+  name: Provost Inspector
+  prefix: PvI.
+  paygrade: O4
+
 # Fax responder
 - type: rank
   id: RMCRankProvostCommunicationsOfficer
   name: Communications Officer
   prefix: ComOff.
-
-# Any player with high law understanding
-- type: rank
-  id: RMCRankProvostChiefInspector
-  name: Chief Inspector
-  prefix: PvCI.
-  paygrade: CI
-
-# Any player with medium-low law understanding
-- type: rank
-  id: RMCRankProvostInspector
-  name: Provost Inspector
-  prefix: PvI.
-  paygrade: I
+  paygrade: O2
 
 # Any player with low law understanding, with guidance
 - type: rank

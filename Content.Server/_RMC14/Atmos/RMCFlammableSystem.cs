@@ -1,29 +1,20 @@
 using Content.Server.Atmos.EntitySystems;
 using Content.Shared._RMC14.Atmos;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Atmos.Components;
+using Content.Shared.Damage;
+using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Atmos;
 
 public sealed class RMCFlammableSystem : SharedRMCFlammableSystem
 {
     [Dependency] private readonly FlammableSystem _flammable = default!;
+    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
 
-    public override void Initialize()
+    public override bool Ignite(Entity<FlammableComponent?> flammable, int intensity, int duration, int? maxStacks, bool igniteDamage = true, DamageSpecifier? tileDamage = null)
     {
-        base.Initialize();
-
-        SubscribeLocalEvent<FlammableComponent, ShowFireAlertEvent>(OnShowFireAlert);
-    }
-
-    private void OnShowFireAlert(Entity<FlammableComponent> ent, ref ShowFireAlertEvent args)
-    {
-        if (ent.Comp.OnFire)
-            args.Show = true;
-    }
-
-    public override bool Ignite(Entity<FlammableComponent?> flammable, int intensity, int duration, int? maxStacks, bool igniteDamage = true)
-    {
-        base.Ignite(flammable, intensity, duration, maxStacks);
+        base.Ignite(flammable, intensity, duration, maxStacks, igniteDamage, tileDamage);
 
         if (!Resolve(flammable, ref flammable.Comp, false))
             return false;
@@ -45,6 +36,7 @@ public sealed class RMCFlammableSystem : SharedRMCFlammableSystem
 
         flammable.Comp.Intensity = intensity;
         flammable.Comp.Duration = duration;
+        flammable.Comp.TileDamage = tileDamage;
         return true;
     }
 
@@ -64,5 +56,25 @@ public sealed class RMCFlammableSystem : SharedRMCFlammableSystem
             return;
 
         _flammable.AdjustFireStacks(flammable, stacks, flammable);
+    }
+
+    public override void AdjustStacks(Entity<FlammableComponent?> flammable, int stacks)
+    {
+        if (!Resolve(flammable, ref flammable.Comp, false))
+            return;
+
+        flammable.Comp.Intensity = 30;
+        flammable.Comp.Duration = 20;
+        Dirty(flammable);
+
+        _flammable.AdjustFireStacks(flammable, stacks, flammable);
+    }
+
+    public override void DoStopDropRollAnimation(EntityUid uid)
+    {
+        if (!_actionBlocker.CanMove(uid))
+            return;
+
+        RaiseNetworkEvent(new RMCStopDropRollVisualsNetworkEvent(GetNetEntity(uid)), Filter.Pvs(uid)); // RMC14
     }
 }

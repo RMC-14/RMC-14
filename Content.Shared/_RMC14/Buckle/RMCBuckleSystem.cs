@@ -1,20 +1,27 @@
 ﻿using System.Numerics;
 using Content.Shared._RMC14.CrashLand;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
+using Content.Shared.Interaction;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Popups;
 using Content.Shared.Shuttles.Components;
+using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Physics.Events;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Buckle;
 
 public sealed class RMCBuckleSystem : EntitySystem
 {
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedBuckleSystem _buckle = default!;
     [Dependency] private readonly SharedCrashLandSystem _crashLand = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private readonly HashSet<EntityUid> _intersecting = new();
 
@@ -25,6 +32,8 @@ public sealed class RMCBuckleSystem : EntitySystem
         SubscribeLocalEvent<BuckleWhitelistComponent, BuckleAttemptEvent>(OnBuckleWhitelistAttempt);
         SubscribeLocalEvent<BuckleComponent, AttemptMobTargetCollideEvent>(OnBuckleAttemptMobTargetCollide);
         SubscribeLocalEvent<StrapComponent, EntParentChangedMessage>(OnBuckleParentChanged);
+        SubscribeLocalEvent<StrapComponent, CombatModeShouldHandInteractEvent>(OnStrapCombatModeShouldHandInteract);
+        SubscribeLocalEvent<BuckleComponent, GetVerbsEvent<AlternativeVerb>>(AddAltUnbuckleVerb);
     }
 
     private void OnBuckleClimbableStrapped(Entity<BuckleClimbableComponent> ent, ref StrappedEvent args)
@@ -74,12 +83,52 @@ public sealed class RMCBuckleSystem : EntitySystem
         }
     }
 
+    private void OnStrapCombatModeShouldHandInteract(Entity<StrapComponent> ent, ref CombatModeShouldHandInteractEvent args)
+    {
+        if (HasComp<XenoComponent>(args.User))
+            args.Cancelled = true;
+    }
+
     public Vector2 GetOffset(Entity<RMCBuckleOffsetComponent?> offset)
     {
         if (!Resolve(offset, ref offset.Comp, false))
             return Vector2.Zero;
 
         return offset.Comp.Offset;
+    }
+
+    public bool CanBuckle(EntityUid? user, EntityUid buckle, bool popup = true)
+    {
+        if (!HasComp<XenoComponent>(user))
+            return true;
+
+        if (popup)
+        {
+            _popup.PopupPredicted("You don't have the dexterity to do that, try a nest.",
+                buckle,
+                user.Value,
+                PopupType.SmallCaution);
+        }
+
+        return false;
+    }
+    
+    private void AddAltUnbuckleVerb(EntityUid uid, BuckleComponent component, GetVerbsEvent<AlternativeVerb> args)
+    {
+
+        if (!args.CanAccess || !args.CanInteract || !component.Buckled)
+            return;
+
+        if (!_buckle.CanUnbuckle((uid, component), args.User, false))
+            return;
+
+        AlternativeVerb verb = new()
+        {
+            Act = () => _buckle.TryUnbuckle(uid, args.User, buckleComp: component),
+            Text = Loc.GetString("verb-categories-unbuckle"),
+            Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/unbuckle.svg.192dpi.png"))
+        };
+        args.Verbs.Add(verb);
     }
 
     public override void Update(float frameTime)

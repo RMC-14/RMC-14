@@ -15,41 +15,53 @@
   heatCapacity: 10000
 
 - type: tile
-  parent: CMFloorStripedBase
+  abstract: true
+  id: RMCFloorAsteroidStripedBase
+  name: tiles-cm-striped
+  baseTurf: ""
+  deconstructTools: [ ]
+  footstepSounds:
+    collection: FootstepFloor
+  heatCapacity: 10000
+  isSubfloor: false
+  friction: 1
+
+- type: tile
+  parent: RMCFloorAsteroidStripedBase
   id: CMFloorAsteroidStriped0
   sprite: /Textures/_RMC14/Tiles/planet/asteroid/warning_0.png
 
 - type: tile
-  parent: CMFloorStripedBase
+  parent: RMCFloorAsteroidStripedBase
   id: CMFloorAsteroidStriped1
   sprite: /Textures/_RMC14/Tiles/planet/asteroid/warning_1.png
 
 - type: tile
-  parent: CMFloorStripedBase
+  parent: RMCFloorAsteroidStripedBase
   id: CMFloorAsteroidStriped2
   sprite: /Textures/_RMC14/Tiles/planet/asteroid/warning_2.png
 
 - type: tile
-  parent: CMFloorStripedBase
+  parent: RMCFloorAsteroidStripedBase
   id: CMFloorAsteroidStriped3
   sprite: /Textures/_RMC14/Tiles/planet/asteroid/warning_3.png
 
 - type: tile
-  parent: CMFloorStripedBase
+  parent: RMCFloorAsteroidStripedBase
   id: CMFloorAsteroidStriped4
   sprite: /Textures/_RMC14/Tiles/planet/asteroid/warning_4.png
 
 - type: tile
-  parent: CMFloorStripedBase
+  parent: RMCFloorAsteroidStripedBase
   id: CMFloorAsteroidStriped5
   sprite: /Textures/_RMC14/Tiles/planet/asteroid/warning_5.png
 
 - type: tile
-  parent: CMFloorStripedBase
+  parent: RMCFloorAsteroidStripedBase
   id: CMFloorAsteroidStriped6
   sprite: /Textures/_RMC14/Tiles/planet/asteroid/warning_6.png
 
 - type: tile
-  parent: CMFloorStripedBase
+  parent: RMCFloorAsteroidStripedBase
   id: CMFloorAsteroidStriped7
   sprite: /Textures/_RMC14/Tiles/planet/asteroid/warning_7.png

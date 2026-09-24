@@ -1,5 +1,9 @@
 # RMC Tile Migration
 
+- type: tileAlias
+  id: CMFloorBlakc
+  target: CMFloorBlack
+
 # 2025-06-25
 - type: tileAlias
   id: RCMPlanetIce0
@@ -36,3 +40,7 @@
 - type: tileAlias
   id: RCMPlanetSnow4
   target: RMCPlanetSnow4
+
+- type: tileAlias
+  id: Plating
+  target: CMFloorPlating

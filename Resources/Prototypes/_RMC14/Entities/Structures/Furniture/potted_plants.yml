@@ -3,6 +3,7 @@
   parent: PottedPlantRandom
   id: CMPottedPlantRandom
   name: random potted plant spawner
+  suffix: RMC
   components:
   - type: RandomSpawner
     offset: 0

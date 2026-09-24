@@ -1,0 +1,23 @@
+- type: job
+  parent: CMSurvivorCMBDeputy
+  id: CMSurvivorSolarisCMBDeputy
+  startingGear: RMCGearSurvivorSolarisCMBDeputy
+  spawnMenuRoleName: CMB Deputy (Solaris Survivor)
+
+- type: startingGear
+  parent: RMCGearSurvivorCMBDeputy
+  id: RMCGearSurvivorSolarisCMBDeputy
+  equipment:
+    shoes: RMCBootsPMC
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorSolarisCMBDeputy
+  name: solaris cmb deputy spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivorSolarisCMBDeputy
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv

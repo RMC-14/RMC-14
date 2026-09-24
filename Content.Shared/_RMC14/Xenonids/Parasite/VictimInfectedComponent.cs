@@ -1,8 +1,11 @@
-using Content.Shared.Chat.Prototypes;
+using Content.Shared._RMC14.Medical.Autodoc;
 using Content.Shared._RMC14.Medical.Surgery;
+using Content.Shared._RMC14.Xenonids.JoinXeno;
+using Content.Shared.Chat.Prototypes;
 using Content.Shared.Damage;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Utility;
@@ -11,7 +14,7 @@ using static Robust.Shared.Utility.SpriteSpecifier;
 namespace Content.Shared._RMC14.Xenonids.Parasite;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-[Access(typeof(SharedXenoParasiteSystem))]
+[Access(typeof(SharedXenoParasiteSystem), typeof(LarvaQueueSystem))]
 public sealed partial class VictimInfectedComponent : Component
 {
     /// <summary>
@@ -74,7 +77,7 @@ public sealed partial class VictimInfectedComponent : Component
     /// <summary>
     ///     Used by larva removal surgery.
     /// </summary>
-    [DataField, AutoNetworkedField, Access(typeof(SharedCMSurgerySystem))]
+    [DataField, AutoNetworkedField, Access(typeof(SharedCMSurgerySystem), typeof(SharedAutodocSystem))]
     public bool RootsCut;
 
     /// <summary>
@@ -82,6 +85,12 @@ public sealed partial class VictimInfectedComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid? Hive;
+
+    [DataField]
+    public NetUserId? InfectorUserId;
+
+    [DataField]
+    public NetUserId? VictimUserId;
 
     [DataField]
     public int FinalStage = 6;

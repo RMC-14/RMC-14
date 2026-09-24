@@ -1609,9 +1609,9 @@
       food:
         maxVol: 40
         reagents:
-        - ReagentId: Ultravasculine
-          Quantity: 20
-        - ReagentId: Epinephrine
+#        - ReagentId: Ultravasculine
+#          Quantity: 20
+        - ReagentId: CMEpinephrine
           Quantity: 20
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/lingzhi.rsi
@@ -1673,6 +1673,8 @@
     entries:
       Taco: AmbrosiaVulgaris
       Burger: AmbrosiaVulgarisBurger
+  - type: TimedDespawn # RMC14
+    lifetime: 0.5
 
 - type: entity
   name: ambrosia deus

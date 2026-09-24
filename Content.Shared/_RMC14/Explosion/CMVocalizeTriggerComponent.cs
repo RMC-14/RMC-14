@@ -2,6 +2,7 @@
 using Content.Shared.Popups;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Explosion;
 
@@ -26,4 +27,7 @@ public sealed partial class CMVocalizeTriggerComponent : Component
         [Sex.Male] = new SoundCollectionSpecifier("CMHumanMaleGrenadeThrow"),
         [Sex.Unsexed] = new SoundCollectionSpecifier("CMHumanMaleGrenadeThrow")
     };
+
+    [DataField]
+    public EntProtoId Effect = "RMCActiveAlertEffect";
 }

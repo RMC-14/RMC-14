@@ -13,7 +13,7 @@ public sealed partial class EntityActiveInvisibleComponent : Component
     public FixedPoint2 EvasionModifier = 0;
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 EvasionFriendlyModifier = 1000;
+    public FixedPoint2 EvasionFriendlyModifier = 0;
 
     /// <summary>
     /// If the entity should collide with other mobs while invisible.

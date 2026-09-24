@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: BaseItem
   id: RMCDrinkAlcoholBase
@@ -112,6 +112,22 @@
         reagents:
         - ReagentId: RMCSpecialBlendWhiskey
           Quantity: 50
+
+- type: entity
+  parent: RMCDrinkAlcoholBase
+  id: RMCDrinkAlcoholDavenportMostlyEmpty
+  name: davenport rye whiskey
+  description: An expensive whiskey with a distinct flavor. The bottle proudly proclaims that it's, 'A True Classic.' Only a tiny bit is left sloshing at the bottom of the bottle.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/davenport.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCSpecialBlendWhiskey
+          Quantity: 15
 
 - type: entity
   parent: RMCDrinkAlcoholBase

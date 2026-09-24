@@ -56,6 +56,7 @@
           - RMCAttachmentExtendedBarrel
           - RMCAttachmentSuppressor
           - RMCAttachmentRecoilCompensator
+          - RMCAttachmentExtendedCompensator
           - RMCM5Bayonet
         random:
           - RMCAttachmentExtendedBarrel
@@ -82,9 +83,9 @@
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentU7UnderbarrelShotgun
-          - RMCAttachmentExtinguisher
+          - RMCAttachmentUnderbarrelExtinguisher
           - RMCAttachmentBurstFireAssembly
-          - RMCAttachmentFlamer
+          - RMCAttachmentMiniFlamethrower
           - RMCAttachmentAngledGrip
           - RMCAttachmentVerticalGrip
           - RMCAttachmentLaserSight

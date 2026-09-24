@@ -1,0 +1,32 @@
+﻿- type: entity
+  parent: Cane
+  id: RMCHollowCane
+  name: fancy cane
+  description: An ebony cane with a fancy, seemingly-golden tip. Feels hollow to the touch.
+  suffix: Hollow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/hollow_cane.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Misc/hollow_cane.rsi
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
+      item: !type:ContainerSlot
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: ItemSlots
+    slots:
+      item:
+        name: HollowCane
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        whitelist:
+          tags:
+          - RMCM5Bayonet
+        insertSound: /Audio/Items/sheath.ogg
+        ejectSound: /Audio/Items/unsheath.ogg

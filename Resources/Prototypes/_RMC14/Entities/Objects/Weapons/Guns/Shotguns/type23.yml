@@ -64,7 +64,7 @@
           tags:
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentVerticalGrip
-          - RMCAttachmentExtinguisher
+          - RMCAttachmentUnderbarrelExtinguisher
           - RMCAttachmentBurstFireAssembly #TODO RMC14 Needs to be able to shoot 3 shells at once when this is on /similar to custombuilt etc...
   - type: AttachableHolderVisuals
     offsets:

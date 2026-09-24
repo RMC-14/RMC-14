@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/09a5191fb11aab8ddffe3f9be94292b53e4d96f6/icons/turf/almayer.dmi, Modified by Aurallianz",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "echo_7"
+    },
+    {
+      "name": "echocorner_0"
+    },
+    {
+      "name": "echocorner_1"
+    },
+    {
+      "name": "echocorner_2"
+    },
+    {
+      "name": "echocorner_3"
+    },
+    {
+      "name": "echofull"
+    },
+    {
+      "name": "echo_0"
+    },
+    {
+      "name": "echo_1"
+    },
+    {
+      "name": "echo_2"
+    },
+    {
+      "name": "echo_3"
+    },
+    {
+      "name": "echo_4"
+    },
+    {
+      "name": "echo_5"
+    },
+    {
+      "name": "echo_6"
+    }
+  ]
+}

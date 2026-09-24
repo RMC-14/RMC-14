@@ -6,6 +6,12 @@
     eyes: RMCGlassesAviators
 
 - type: loadout
+  id: AviatorsSilverRMC
+  cost: 2
+  equipment:
+    eyes: RMCGlassesAviatorsSilver
+
+- type: loadout
   id: EyepatchRMC
   cost: 2
   equipment:

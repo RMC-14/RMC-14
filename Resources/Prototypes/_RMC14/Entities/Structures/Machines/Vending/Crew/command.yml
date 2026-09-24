@@ -4,7 +4,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechStaffOfficerEquipment
-  name: ColMarTech Staff Officer Equipment Rack
+  name: ASRS staff officer equipment rack
   description: An automated equipment vendor for Staff Officers
   components:
   - type: AccessReader
@@ -69,7 +69,7 @@
       - id: RMCM1984BeltFilled
         name: M1984 service pistol
         recommended: true
-      - id: CMM77BeltFilled
+      - id: RMCM77BeltFilled
         name: M77 pistol
         recommended: true
       - id: RMCM44BeltFilled
@@ -105,7 +105,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechStaffOfficerWeapon
-  name: ColMarTech Staff Officer Armory Weapon Rack
+  name: ASRS staff officer armory weapon rack
   description: An automated combat equipment vendor for Staff Officers.
   components:
   - type: AccessReader
@@ -120,6 +120,7 @@
     - name: Combat Equipment
       takeAll: CMCombatEquipment
       entries:
+      - id: RMCArmorVestOfficer
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
@@ -173,9 +174,10 @@
       - id: RMCPouchMedical
       - id: RMCPouchMedkit
       - id: RMCPouchPistol
-      #- id: RMCPouchSling # TODO RMC14 Sling Pouch
-                           # This has a comment saying "implement this", going to leave it commented out.
+      - id: RMCPouchSling
       - id: RMCPouchToolsFill
+        name: tools pouch (Full)
+
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
@@ -189,6 +191,7 @@
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbing
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
     - name: Mask
       choices: { CMMask: 1 }
       entries:
@@ -233,7 +236,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechExecutiveOfficerWeapon
-  name: ColMarTech Executive Officer Weapon Rack
+  name: ASRS executive officer weapon rack
   description: An automated weapons rack for the Executive Officer. It features a decent selection of weaponry meant only for the second in command of a ship.
   components:
   - type: AccessReader
@@ -244,6 +247,7 @@
   - type: CMAutomatedVendor
     jobs:
     - CMExecutiveOfficer
+    pointsType: Specialist
     sections:
     - name: Captain's Primary
       takeOne: CMPrimary
@@ -276,13 +280,15 @@
         points: 15
       - id: CMPacketGrenadeFragFilled
         points: 15
-      #- id: CMPacketGrenadeWPFilled # TODO RMC14 White Phosphorus (WP) Grenades
-      #  points: 15
+      - id: RMCPacketGrenadeWhitePhosphorusFilled
+        points: 15
     - name: Rail Attachments
       entries:
       - id: RMCAttachmentMagneticHarness
         points: 12
       - id: RMCAttachmentS5RedDotSight
+        points: 15
+      - id: RMCAttachmentS5MicroRedDotSight
         points: 15
       - id: RMCAttachmentS6ReflexSight
         points: 15
@@ -307,6 +313,8 @@
     - name: Barrel Attachments
       entries:
       - id: RMCAttachmentExtendedBarrel
+        points: 15
+      - id: RMCAttachmentExtendedCompensator
         points: 15
       - id: RMCAttachmentRecoilCompensator
         points: 15
@@ -352,7 +360,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCommandingOfficerClothing
-  name: ColMarTech Commanding Officer Clothing Rack
+  name: ASRS commanding officer clothing rack
   description: An automated closet hooked up to a colossal storage of standard-issue dress uniform variants.
   components:
   - type: AccessReader
@@ -370,11 +378,12 @@
       - id: CMJumpsuitCO
       - id: CMJumpsuitOperations
       - id: CMHeadCapCO
+      - id: CMHeadCapOfficer
       - id: CMHeadBeretCO
       - id: CMBootsBlackFilled
       - id: CMBootsBrown
       - id: CMHandsBlackMarine
-      - id: CMHandsBrown
+      - id: RMCHandsBrownMarine
     - name: Utility Extras
       entries:
       - id: RMCSunglasses
@@ -402,6 +411,10 @@
       - id: CMHeadCapPeakedService
     - name: Service Extras
       entries:
+      - id: RMCCoatCOServiceJacketStandard
+      - id: RMCCoatCOServiceJacketGreen
+      - id: RMCCoatCOServiceJacketPurple
+      - id: RMCCoatCOServiceJacketGrey
       - id: CMCoatCOBomber
     - name: Dress
       entries:
@@ -419,7 +432,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCommandingOfficerEquipment
-  name: ColMarTech Commanding Officer Equipment Rack
+  name: ASRS commanding officer equipment rack
   description: An automated equipment vendor for the Commanding Officer. Contains a prime selection of equipment for only the UNMC's top officers.
   components:
   - type: AccessReader
@@ -444,7 +457,7 @@
       choices: { CMBag: 1 }
       entries:
       - id: CMBackpackCommand
-      #- id: CMSatchelCommandSecure # TODO RMC14 Secure Satchel (ID LOCK)
+      - id: CMSatchelCommandSecure
       - id: RMCBackpackRTO
       - id: CMSatchelMarineIntel
       - id: RMCSatchelMarineIntelChestrig
@@ -452,6 +465,7 @@
     - name: Combat Equipment
       takeAll: CMCombatEquipment
       entries:
+      - id: RMCArmorVestCommandingOfficer
       - id: RMCArmorM3CO
       - id: CMArmorHelmetM11CCO
       - id: RMCHandsDeluxeMarine
@@ -470,6 +484,7 @@
       - id: CMWebbing
       - id: RMCWebbingBlackSmall
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
     - name: Huds
       choices: { CMHud: 1 }
       entries:
@@ -511,6 +526,7 @@
       - id: RMCPouchPistol
       - id: RMCPouchShotgunLarge
       - id: RMCPouchToolsFill
+        name: tools pouch (Full)
     - name: Mask
       choices: { CMMask: 1 }
       entries:
@@ -535,7 +551,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCommandingOfficerWeapon
-  name: ColMarTech Commanding Officer Weapon Rack
+  name: ASRS commanding officer weapon rack
   description: An automated weapons rack for the Commanding Officer. It features a robust selection of weaponry meant only for the UNMC's top officers.
   components:
   - type: AccessReader
@@ -550,16 +566,11 @@
     - name: Commander's Primary
       takeOne: CMProtagGun
       entries:
-      - id: RMCWeaponRifleM59A
+      - id: RMCM59ACaseAP
         name: M59A Prototype Rifle
       - id: CMCOSmartGunOperatorEquipmentCaseBelt
         name: Commander's Smartgun
         recommended: true # TODO RMC14 Make choices: colour the options brown
-    - name: Commander's Secondary
-      choices: { CMSecondary: 1 }
-      entries:
-      - id: RMCD50WinterWyvernBeltFilled
-      - id: RMCMatebaBeltFilled
     - name: Ceremonial Weapon
       choices: { CMCeremonial: 1 }
       entries:
@@ -609,11 +620,14 @@
         points: 15
       - id: CMPacketGrenadeFragFilled
         points: 15
-      #- id: CMPacketGrenadesWPFilled # TODO RMC14 Port White Phosphorus (WP) Grenades
+      - id: RMCPacketGrenadeWhitePhosphorusFilled
+        points: 15
       #- id: CMPacketGrenadesG2Filled (x3) # TODO RMC14 Port Electroshock (G2) Grenades
     - name: Rail Attachments
       entries:
       - id: RMCAttachmentS5RedDotSight
+        points: 15
+      - id: RMCAttachmentS5MicroRedDotSight
         points: 15
       - id: RMCAttachmentS6ReflexSight
         points: 15
@@ -648,9 +662,15 @@
       entries:
       - id: RMCAttachmentExtendedBarrel
         points: 15
+      - id: RMCAttachmentExtendedCompensator
+        points: 15
       - id: RMCAttachmentRecoilCompensator
         points: 15
+      - id: RMCAttachmentRecoilCompensatorM13
+        points: 15
       - id: RMCAttachmentSuppressor
+        points: 15
+      - id: RMCAttachmentSuppressorCompact
         points: 15
 
 
@@ -689,9 +709,9 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleMilitaryPoliceApparelCMP
+  categories: [ HideSpawnMenu ]
   name: Essential Police Set
   description: Contains security HUD-glasses and a filled security belt.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses.rsi
@@ -706,7 +726,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechSeniorOfficerEquipment
-  name: ColMarTech Senior Officer Equipment Rack
+  name: ASRS senior officer equipment rack
   description: An automated equipment vendor for Senior Officers.
   components:
   - type: AccessReader
@@ -752,7 +772,7 @@
         recommended: true
       - id: RMCM1984BeltFilled
         name: M1984 service pistol
-      - id: CMM77BeltFilled
+      - id: RMCM77BeltFilled
         name: M77 pistol
       - id: RMCM44BeltFilled
         name: M44 revolver
@@ -781,6 +801,7 @@
       - CMExecutiveOfficer
       takeAll: CMEquipment
       entries:
+      - id: RMCArmorVestSeniorOfficer
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
@@ -831,8 +852,9 @@
       - id: RMCPouchMedical
       - id: RMCPouchMedkit
       - id: RMCPouchPistol
-      #- id: RMCPouchSling # TODO RMC14 Sling Pouch
+      - id: RMCPouchSling
       - id: RMCPouchToolsFill
+        name: tools pouch (Full)
       - id: RMCPouchConstruction
       - id: RMCPouchElectronicsFill
       - id: RMCPouchFlareFilled
@@ -852,12 +874,13 @@
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbing
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
     - name: Hats
       jobs:
       - CMExecutiveOfficer
       choices: { CMHat: 1 }
       entries:
-      - id: RMCHeadBeret # TODO: Port Officer Beret
+      - id: RMCHeadBeretChiefOfficer
       - id: CMHeadCapPeakedService
       - id: RMCHeadCapFlippable # TODO: Port Patrol Cap
       - id: CMHeadCapOfficer
@@ -973,6 +996,7 @@
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
       - id: CMWebbing
       - id: RMCWebbingBlackSmall
     - name: Books
@@ -980,7 +1004,9 @@
       - CMChiefMP
       entries:
       - id: RMCGuidebookLawMarine
+        amount: 10
       - id: RMCGuidebookSOP
+        amount: 10
     # ////////////////////////////////////
     # Chief Engineer
     # ////////////////////////////////////
@@ -996,7 +1022,7 @@
       entries:
       - id: CMHeadsetCE
       - id: CMBootsBlack
-      - id: ClothingEyesGlassesMeson # TODO change to CM13 engi goggles.
+      - id: RMCWeldingGoggles
       - id: RMCNailgunTactical
       # TODO KN5500/2 PDA
     - name: Uniform
@@ -1022,7 +1048,7 @@
       - id: CMHeadBeretEngineer
       - id: RMCHardhatWhite
       - id: RMCHeadCapFlippable
-      # TODO Welding helmet
+      - id: RMCHelmetWelding
     - name: Suit
       jobs:
       - CMChiefEngineer
@@ -1078,7 +1104,6 @@
         name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
       - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
-        recommended: true
       - id: RMCPouchGeneralLarge
       - id: RMCPouchToolsFill
         name: tools pouch (Full)
@@ -1092,6 +1117,7 @@
         name: flare pouch (Full)
       - id: RMCPouchFuelTank
       - id: RMCPouchEngineerKit
+      - id: RMCPouchSling
     - name: Personal Sidearms
       jobs:
       - CMChiefEngineer
@@ -1100,7 +1126,7 @@
       - id: RMCM1984BeltFilled
         name: M1984 service pistol
         recommended: true
-      - id: CMM77BeltFilled
+      - id: RMCM77BeltFilled
         name: M77 pistol
         recommended: true
       - id: RMCM44BeltFilled
@@ -1112,12 +1138,13 @@
       choices: { CMAccessories: 1 }
       entries:
       - id: CMWebbingBlack
-        recommended: true
       - id: CMWebbingBrown
+        recommended: true
       - id: RMCWebbingLegPouch
       - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
       - id: RMCToolWebbingSmallFilled
@@ -1132,6 +1159,7 @@
       - CMChiefEngineer
       takeAll: CMStandard
       entries:
+      - id: RMCArmorVestOfficer
       - id: RMCArmorM3SO
       - id: CMBootsBlackFilled
       - id: RMCLaserDesignator
@@ -1166,19 +1194,17 @@
       - CMChiefEngineer
       entries:
       - id: CMHeadsetEngineer
-        amount: 15
+        points: 15
       - id: RMCSynthResetKey
-        amount: 15
+        points: 15
     # ////////////////////////////////////
-    # Quartermaster
+    # Logistics Officer
     # ////////////////////////////////////
     - name: Standard Equipment
       jobs:
       - CMQuartermaster
       takeAll: CMStandard
       entries:
-      - id: CMJumpsuitQM
-      - id: CMHeadsetQM
       - id: CMSatchel
       - id: RMCQuartermasterJacket
     - name: Gloves
@@ -1186,15 +1212,12 @@
       - CMQuartermaster
       choices: { CMHands: 1 }
       entries:
-      - id: CMHandsInsulated
       - id: CMHandsBlackInsulated
     - name: Headgear
       jobs:
       - CMQuartermaster
       choices: { CMHelmet: 1 }
       entries:
-      - id: RMCHeadCapQuartermaster
-        recommended: true
       - id: RMCHeadBeretQuartermaster
         recommended: true
       - id: CMHeadCapCargo
@@ -1206,7 +1229,7 @@
       - id: RMCM1984BeltFilled
         name: M1984 service pistol
         recommended: true
-      - id: CMM77BeltFilled
+      - id: RMCM77BeltFilled
         name: M77 pistol
         recommended: true
       - id: RMCM44BeltFilled
@@ -1217,9 +1240,9 @@
       - CMQuartermaster
       takeAll: CMStandard
       entries:
+      - id: RMCArmorVestOfficer
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
-      - id: CMBootsBlackFilled
     - name: Patches
       jobs:
       - CMQuartermaster
@@ -1300,12 +1323,19 @@
       entries:
       - id: CMJumpsuitCMO
         recommended: true
-      - id: CMScrubsGreen
+      - id: RMCScrubsCMO
+        recommended: true
+      - id: RMCJumpsuitDoctor
       - id: CMScrubsBlue
       - id: RMCScrubsLightBlue
+      - id: CMScrubsGreen
+      - id: RMCScrubsPharm
       - id: CMScrubsPurple
       - id: RMCScrubsOlive
       - id: RMCScrubsGrey
+      - id: RMCScrubsBrown
+      - id: RMCScrubsWhite
+      - id: RMCScrubsBlack
     - name: Suit
       jobs:
       - CMCMO
@@ -1314,18 +1344,39 @@
       - id: RMCLabcoatCMO
         recommended: true
       - id: RMCLabcoat
-        recommended: true
+      - id: RMCLabcoatPharm
+      - id: RMCLabcoatShort
+        name: High-Cut Labcoat
+      - id: RMCLabcoatLong
+        name: Low-Cut Labcoat
       - id: RMCMedicalApron
+    - name: Snow gear (Snow use only)
+      jobs:
+      - CMCMO
+      takeAll: CMSnowgear
+      entries:
+      - id: RMCCoatSnow
+      - id: RMCMaskBalaclava
+      - id: RMCMaskTornScarfBlack
+        name: Snow Scarf
     - name: Headwear
       jobs:
       - CMCMO
       choices: { CMHelmet: 1 }
       entries:
       - id: CMHeadCapCMO
-      - id: CMHeadCapSurgOrange
+        recommended: true
+      - id: CMHeadCapSurgCMO
+        recommended: true
       - id: CMHeadCapSurgBlue
-      - id: CMHeadCapSurgPurple
       - id: CMHeadCapSurgGreen
+      - id: CMHeadCapSurgPharm
+      - id: CMHeadCapSurgPurple
+      - id: CMHeadCapSurgOlive
+      - id: CMHeadCapSurgGrey
+      - id: CMHeadCapSurgBrown
+      - id: CMHeadCapSurgWhite
+      - id: CMHeadCapSurgBlack
     - name: Bag
       jobs:
       - CMCMO
@@ -1344,8 +1395,10 @@
       entries:
       - id: CMBeltMedicBagFilled
         name: M276 pattern lifesaver bag (Full)
+        recommended: true
       - id: CMBeltMedicalFilled
         name: M276 medical storage rig (Full)
+        recommended: true
     - name: Personal Sidearm
       jobs:
       - CMCMO
@@ -1353,7 +1406,7 @@
       entries:
       - id: RMCM1984BeltFilled
         name: M1984 service pistol
-      - id: CMM77BeltFilled
+      - id: RMCM77BeltFilled
         name: M77 pistol
       - id: RMCM44BeltFilled
         name: M44 revolver
@@ -1363,6 +1416,7 @@
       - CMCMO
       takeAll: CMStandard
       entries:
+      - id: RMCArmorVestOfficer
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
@@ -1395,7 +1449,9 @@
         name: first-aid pouch (pills)
       - id: RMCPouchFirstResponder
       - id: RMCPouchMedical
+        recommended: true
       - id: RMCPouchMedkit
+        recommended: true
       - id: RMCPouchReagentCanisterBicaridine
         recommended: true
         name: Pressurized Reagent Canister Pouch\n(Bicaridine)
@@ -1436,7 +1492,9 @@
       - id: CMHeadsetMedical
         amount: 15
       - id: CMHeadsetResearcher
-        amount: 15
+        amount: 30
+      - id: RMCCPRDummy
+        amount: 5
     # ////////////////////////////////////
     # Auxiliary Support Officer
     # ////////////////////////////////////
@@ -1489,7 +1547,7 @@
       - id: RMCM1984BeltFilled
         name: M1984 service pistol
         recommended: true
-      - id: CMM77BeltFilled
+      - id: RMCM77BeltFilled
         name: M77 pistol
         recommended: true
       - id: RMCM44BeltFilled
@@ -1513,6 +1571,7 @@
       - CMAuxiliarySupportOfficer
       takeAll: CMStandard
       entries:
+      - id: RMCArmorVestOfficer
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
@@ -1562,3 +1621,4 @@
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack

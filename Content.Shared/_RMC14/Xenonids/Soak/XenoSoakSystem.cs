@@ -21,7 +21,7 @@ public sealed class XenoSoakSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
 
     public override void Initialize()
@@ -52,7 +52,7 @@ public sealed class XenoSoakSystem : EntitySystem
 
     private void OnXenoSoakingDamageChanged(Entity<XenoSoakingDamageComponent> xeno, ref DamageChangedEvent args)
     {
-        if (!args.DamageIncreased || args.DamageDelta == null || args.DamageDelta.GetTotal() < 0)
+        if (!args.DamageIncreased || args.DamageDelta == null || args.DamageDelta.GetTotal() < 0 || !xeno.Comp.Running)
             return;
 
         xeno.Comp.DamageAccumulated += args.DamageDelta.GetTotal().Float();

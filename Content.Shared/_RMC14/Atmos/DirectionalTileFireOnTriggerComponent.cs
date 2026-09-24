@@ -6,7 +6,7 @@ namespace Content.Shared._RMC14.Atmos;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedRMCFlammableSystem))]
-public  partial class DirectionalTileFireOnTriggerComponent : Component
+public sealed partial class DirectionalTileFireOnTriggerComponent : Component
 {
     /// <summary>
     ///     How long the line of fire should be
@@ -51,7 +51,7 @@ public  partial class DirectionalTileFireOnTriggerComponent : Component
     ///     The sound made upon spawning the fire
     /// </summary>
     [DataField, AutoNetworkedField]
-    public SoundSpecifier? Sound = new SoundPathSpecifier("/Audio/_RMC14/Effects/hit_on_shattered_glass.ogg");
+    public SoundSpecifier? Sound;
 
     /// <summary>
     ///     The intensity of the fire
@@ -64,4 +64,10 @@ public  partial class DirectionalTileFireOnTriggerComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public int? Duration;
+
+    /// <summary>
+    ///     Whether the start of the fire should be slightly offset forward.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool OffsetForward;
 }

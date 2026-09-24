@@ -9,7 +9,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Dropship.Weapon;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 [Access(typeof(SharedDropshipWeaponSystem))]
 public sealed partial class AmmoInFlightComponent : Component
 {
@@ -67,6 +67,24 @@ public sealed partial class AmmoInFlightComponent : Component
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier? SoundImpact;
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? SoundWarning;
+
+    [DataField, AutoNetworkedField]
+    public bool WarnedSound;
+
+    [DataField, AutoNetworkedField]
+    public bool MarkerWarning;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? WarningMarker;
+
+    [DataField, AutoNetworkedField, AutoPausedField]
+    public TimeSpan WarningMarkerAt;
+
+    [DataField, AutoNetworkedField]
+    public bool WarnedMarker;
 
     [DataField, AutoNetworkedField]
     public List<EntProtoId> ImpactEffects = new();

@@ -1,4 +1,6 @@
+using System.Linq;
 using Content.Shared._RMC14.Storage;
+using Content.Shared.Clothing.Components;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
@@ -6,6 +8,7 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Content.Shared.Mobs;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
@@ -19,10 +22,13 @@ namespace Content.Shared._RMC14.Hands;
 
 public abstract class RMCHandsSystem : EntitySystem
 {
+    private static readonly SpriteSpecifier.Texture PickupIcon = new(new ResPath("/Textures/Interface/VerbIcons/pickup.svg.192dpi.png"));
+
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCStorageSystem _rmcStorage = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
@@ -36,6 +42,9 @@ public abstract class RMCHandsSystem : EntitySystem
         SubscribeLocalEvent<DropHeldOnIncapacitateComponent, MobStateChangedEvent>(OnDropMobStateChanged);
         SubscribeLocalEvent<RMCStorageEjectHandComponent, GetVerbsEvent<AlternativeVerb>>(OnStorageEjectHandVerbs);
         SubscribeLocalEvent<DropOnUseInHandComponent, UseInHandEvent>(OnDropOnUseInHand);
+        SubscribeLocalEvent<ClothingComponent, GetVerbsEvent<InteractionVerb>>(OnClothingGetInteractionVerbs, after: [typeof(SharedItemSystem)]);
+        SubscribeLocalEvent<ClothingComponent, InteractHandEvent>(OnClothingInteractHand, before: [typeof(SharedItemSystem)]);
+        SubscribeLocalEvent<ClothingComponent, ContainerGettingInsertedAttemptEvent>(OnClothingGettingInsertedAttempt);
     }
 
     private void OnXenoHandsMapInit(Entity<GiveHandsComponent> ent, ref MapInitEvent args)
@@ -61,6 +70,12 @@ public abstract class RMCHandsSystem : EntitySystem
             return;
 
         if (!_whitelist.IsValid(ent.Comp.Whitelist, args.Item))
+        {
+            args.Cancel();
+            return;
+        }
+
+        if (!ent.Comp.AllowDead && _mobState.IsDead(args.Item))
             args.Cancel();
     }
 
@@ -87,8 +102,10 @@ public abstract class RMCHandsSystem : EntitySystem
             return;
 
         var user = args.User;
-
         if (!ent.Comp.CanToggleStorage)
+            return;
+
+        if (_container.GetContainingContainers(ent.Owner).All(c => c.Owner != user))
             return;
 
         AlternativeVerb switchStorageVerb = new()
@@ -147,6 +164,95 @@ public abstract class RMCHandsSystem : EntitySystem
         _hands.TryDrop(args.User, ent);
     }
 
+    private void OnClothingGetInteractionVerbs(Entity<ClothingComponent> ent, ref GetVerbsEvent<InteractionVerb> args)
+    {
+        if (args.Hands == null ||
+            args.Using != null ||
+            !args.CanAccess ||
+            !args.CanInteract ||
+            !CanStartDelayedInventoryPickup(ent, args.User, args.Hands))
+        {
+            return;
+        }
+
+        var user = args.User;
+        InteractionVerb verb = new()
+        {
+            Text = Loc.GetString("pick-up-verb-get-data-text-inventory"),
+            Icon = PickupIcon,
+            Act = () => TryStartDelayedInventoryPickup(ent, user),
+        };
+
+        args.Verbs.Add(verb);
+    }
+
+    private void OnClothingInteractHand(Entity<ClothingComponent> ent, ref InteractHandEvent args)
+    {
+        if (args.Handled ||
+            !CanStartDelayedInventoryPickup(ent, args.User))
+        {
+            return;
+        }
+
+        args.Handled = true;
+        TryStartDelayedInventoryPickup(ent, args.User);
+    }
+
+    private void OnClothingGettingInsertedAttempt(Entity<ClothingComponent> ent, ref ContainerGettingInsertedAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        var user = args.Container.Owner;
+        if (!_hands.TryGetHand(user, args.Container.ID, out _) ||
+            !TryGetDelayedInventoryPickupSlot(ent, user, out _))
+        {
+            return;
+        }
+
+        args.Cancel();
+    }
+
+    private bool CanStartDelayedInventoryPickup(Entity<ClothingComponent> ent, EntityUid user, HandsComponent? hands = null)
+    {
+        return TryGetEmptyActiveHand(user, hands) &&
+               TryGetDelayedInventoryPickupSlot(ent, user, out var slot) &&
+               _inventory.CanUnequip(user, user, slot, out _);
+    }
+
+    private bool TryGetEmptyActiveHand(EntityUid user, HandsComponent? hands = null)
+    {
+        return Resolve(user, ref hands, false) &&
+               hands.ActiveHandId != null &&
+               _hands.HandIsEmpty((user, hands), hands.ActiveHandId);
+    }
+
+    private void TryStartDelayedInventoryPickup(Entity<ClothingComponent> ent, EntityUid user)
+    {
+        if (!TryGetDelayedInventoryPickupSlot(ent, user, out var slot))
+            return;
+
+        if (_inventory.TryUnequip(user, user, slot, checkDoafter: true, triggerHandContact: true))
+            _hands.TryPickupAnyHand(user, ent.Owner);
+    }
+
+    private bool TryGetDelayedInventoryPickupSlot(Entity<ClothingComponent> ent, EntityUid user, out string slot)
+    {
+        slot = string.Empty;
+
+        if (ent.Comp.UnequipDelay <= TimeSpan.Zero ||
+            !_container.TryGetContainingContainer((ent.Owner, null), out var container) ||
+            container.Owner != user ||
+            !_inventory.TryGetSlot(user, container.ID, out var slotDefinition) ||
+            (ent.Comp.Slots & slotDefinition.SlotFlags) == 0)
+        {
+            return false;
+        }
+
+        slot = slotDefinition.Name;
+        return true;
+    }
+
     public bool IsPickupByAllowed(Entity<WhitelistPickupByComponent?> item, Entity<WhitelistPickupComponent?> user)
     {
         Resolve(item, ref item.Comp, false);
@@ -156,6 +262,9 @@ public abstract class RMCHandsSystem : EntitySystem
             return false;
 
         if (user.Comp != null && !_whitelist.IsValid(user.Comp.Whitelist, item.Owner))
+            return false;
+
+        if (user.Comp is { AllowDead: false } && _mobState.IsDead(item))
             return false;
 
         return true;

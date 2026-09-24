@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
+using Content.Shared.Damage;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Robust.Shared.Map;
@@ -13,6 +14,7 @@ public abstract class SharedRMCTeleporterSystem : EntitySystem
 {
     [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
 
     private EntityQuery<ActorComponent> _actorQuery;
     private EntityQuery<AlmayerComponent> _almayerQuery;
@@ -54,6 +56,11 @@ public abstract class SharedRMCTeleporterSystem : EntitySystem
         teleporter = teleporter.Offset(ent.Comp.Adjust);
 
         HandlePulling(other, teleporter);
+
+        if (ent.Comp.TeleportDamage != null)
+        {
+            _damageableSystem.TryChangeDamage(args.OtherEntity, ent.Comp.TeleportDamage, origin: ent);
+        }
     }
 
     private void OnViewerStartCollide(Entity<RMCTeleporterViewerComponent> ent, ref StartCollideEvent args)

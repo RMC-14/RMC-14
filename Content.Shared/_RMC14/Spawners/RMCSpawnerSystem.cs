@@ -18,7 +18,16 @@ public sealed class RMCSpawnerSystem : EntitySystem
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<SpawnAttachedComponent, MapInitEvent>(OnSpawnAttachedMapInit);
         SubscribeLocalEvent<SpawnOnInteractComponent, InteractHandEvent>(OnSpawnOnInteractHand);
+    }
+
+    private void OnSpawnAttachedMapInit(Entity<SpawnAttachedComponent> ent, ref MapInitEvent args)
+    {
+        if (ent.Comp.Spawn is not { } spawn)
+            return;
+
+        Spawn(spawn, ent.Owner.ToCoordinates());
     }
 
     private void OnSpawnOnInteractHand(Entity<SpawnOnInteractComponent> ent, ref InteractHandEvent args)

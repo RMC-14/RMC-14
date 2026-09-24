@@ -40,6 +40,7 @@ public sealed class XenoRoleSystem : EntitySystem
     private TimeSpan _rankThreeTime;
     private TimeSpan _rankFourTime;
     private TimeSpan _rankFiveTime;
+    private TimeSpan _rankSixTime;
 
     private readonly List<Entity<XenoComponent>> _toUpdate = new();
 
@@ -50,8 +51,8 @@ public sealed class XenoRoleSystem : EntitySystem
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
 
-        SubscribeLocalEvent<XenoComponent, PlayerAttachedEvent>(OnPlayerAttached);
-        SubscribeLocalEvent<XenoComponent, PlayerDetachedEvent>(OnPlayerDetached);
+        SubscribeLocalEvent<PlayerAttachedEvent>(OnPlayerAttached);
+        SubscribeLocalEvent<PlayerDetachedEvent>(OnPlayerDetached);
 
         SubscribeLocalEvent<ActorComponent, HiveChangedEvent>(OnHiveChanged);
 
@@ -61,6 +62,7 @@ public sealed class XenoRoleSystem : EntitySystem
         Subs.CVar(_config, RMCCVars.RMCPlaytimeSilverMedalTimeHours, v => _rankThreeTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimeGoldMedalTimeHours, v => _rankFourTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimePlatinumMedalTimeHours, v => _rankFiveTime = TimeSpan.FromHours(v), true);
+        Subs.CVar(_config, RMCCVars.RMCPlaytimeRubyMedalTimeHours, v => _rankSixTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCDisconnectedXenoGhostRoleTimeSeconds, v => _disconnectedXenoGhostRoleTime = TimeSpan.FromSeconds(v), true);
     }
 
@@ -75,21 +77,24 @@ public sealed class XenoRoleSystem : EntitySystem
         _toUpdate.Clear();
     }
 
-    private void OnPlayerAttached(Entity<XenoComponent> xeno, ref PlayerAttachedEvent args)
+    private void OnPlayerAttached(PlayerAttachedEvent args)
     {
-        RemCompDeferred<XenoDisconnectedComponent>(xeno);
-        _toUpdate.Add(xeno);
-    }
-
-    private void OnPlayerDetached(Entity<XenoComponent> xeno, ref PlayerDetachedEvent args)
-    {
-        if(TerminatingOrDeleted(xeno))
+        if (!TryComp<XenoComponent>(args.Entity, out var comp))
             return;
 
-        var disconnected = EnsureComp<XenoDisconnectedComponent>(xeno);
+        RemCompDeferred<XenoDisconnectedComponent>(args.Entity);
+        _toUpdate.Add((args.Entity, comp));
+    }
+
+    private void OnPlayerDetached(PlayerDetachedEvent args)
+    {
+        if(TerminatingOrDeleted(args.Entity) || !HasComp<XenoComponent>(args.Entity))
+            return;
+
+        var disconnected = EnsureComp<XenoDisconnectedComponent>(args.Entity);
         disconnected.At = _timing.CurTime;
 
-        if (_hive.GetHive(xeno.Owner) is {} hive)
+        if (_hive.GetHive(args.Entity) is {} hive)
             _pvsOverride.RemoveForceSend(hive, args.Player);
     }
 
@@ -136,6 +141,8 @@ public sealed class XenoRoleSystem : EntitySystem
         int rank;
         if (!profile.PlaytimePerks)
             rank = 1;
+        else if (time > _rankSixTime)
+            rank = 6;
         else if (time > _rankFiveTime)
             rank = 5;
         else if (time > _rankFourTime)

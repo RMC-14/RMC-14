@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Chat;
+using Content.Shared._RMC14.Movement;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions.Components;
 using Content.Shared.Actions.Events;
@@ -36,9 +37,8 @@ public abstract class SharedActionsSystem : EntitySystem
     [Dependency] private   readonly SharedTransformSystem _transform = default!;
 
     // RMC14
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCLagCompensationSystem _rmcLagCompensation = default!;
 
     private EntityQuery<ActionComponent> _actionQuery;
     private EntityQuery<ActionsComponent> _actionsQuery;
@@ -198,7 +198,18 @@ public abstract class SharedActionsSystem : EntitySystem
         if (GetAction(action) is not {} ent || ent.Comp.UseDelay is not {} delay)
             return;
 
-        SetCooldown((ent, ent), delay);
+        // RMC14 start
+        var ev = new StartUseDelayEvent()
+        {
+            Delay = delay,
+            Start = GameTiming.CurTime,
+            End = GameTiming.CurTime + delay
+        };
+        RaiseLocalEvent(ent, ref ev);
+        SetCooldown((ent, ent), ev.Start, ev.End);
+        // RMC14 end
+
+        //SetCooldown((ent, ent), delay); // RMC14 replaced by above
     }
 
     public void SetUseDelay(Entity<ActionComponent?>? action, TimeSpan? delay)
@@ -269,6 +280,7 @@ public abstract class SharedActionsSystem : EntitySystem
     /// </summary>
     private void OnActionRequest(RequestPerformActionEvent ev, EntitySessionEventArgs args)
     {
+        _rmcLagCompensation.SetLastRealTick(args.SenderSession.UserId, ev.LastRealTick);
         if (args.SenderSession.AttachedEntity is not { } user)
             return;
 
@@ -391,7 +403,10 @@ public abstract class SharedActionsSystem : EntitySystem
             _rotateToFace.TryFaceCoordinates(user, _transform.ToMapCoordinates(target).Position);
 
         if (!ValidateWorldTarget(user, target, ent))
+        {
+            args.Invalid = true;
             return;
+        }
 
         // if the client specified an entity it needs to be valid
         var targetEntity = GetEntity(args.Input.EntityTarget);
@@ -1058,4 +1073,13 @@ public abstract class SharedActionsSystem : EntitySystem
         ent.Comp.Temporary = temporary;
         Dirty(ent);
     }
+}
+
+// RMC14
+[ByRefEvent]
+public struct StartUseDelayEvent
+{
+    public TimeSpan Delay;
+    public TimeSpan Start;
+    public TimeSpan End;
 }

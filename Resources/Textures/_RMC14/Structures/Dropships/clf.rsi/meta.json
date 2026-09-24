@@ -1,0 +1,435 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/41b3798435ee57263bb67fa694ea944d6698c062/icons/turf/CLF_dropship.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "1"
+    },
+    {
+      "name": "2"
+    },
+    {
+      "name": "3"
+    },
+    {
+      "name": "4"
+    },
+    {
+      "name": "5"
+    },
+    {
+      "name": "6"
+    },
+    {
+      "name": "7"
+    },
+    {
+      "name": "8"
+    },
+    {
+      "name": "9"
+    },
+    {
+      "name": "10"
+    },
+    {
+      "name": "11"
+    },
+    {
+      "name": "12"
+    },
+    {
+      "name": "13"
+    },
+    {
+      "name": "14"
+    },
+    {
+      "name": "15"
+    },
+    {
+      "name": "16"
+    },
+    {
+      "name": "17"
+    },
+    {
+      "name": "18"
+    },
+    {
+      "name": "19"
+    },
+    {
+      "name": "20"
+    },
+    {
+      "name": "21"
+    },
+    {
+      "name": "22"
+    },
+    {
+      "name": "23"
+    },
+    {
+      "name": "24"
+    },
+    {
+      "name": "25"
+    },
+    {
+      "name": "26"
+    },
+    {
+      "name": "27"
+    },
+    {
+      "name": "28"
+    },
+    {
+      "name": "29"
+    },
+    {
+      "name": "30"
+    },
+    {
+      "name": "31"
+    },
+    {
+      "name": "32"
+    },
+    {
+      "name": "33"
+    },
+    {
+      "name": "34"
+    },
+    {
+      "name": "35"
+    },
+    {
+      "name": "36"
+    },
+    {
+      "name": "37"
+    },
+    {
+      "name": "38"
+    },
+    {
+      "name": "39"
+    },
+    {
+      "name": "40"
+    },
+    {
+      "name": "41"
+    },
+    {
+      "name": "42"
+    },
+    {
+      "name": "43"
+    },
+    {
+      "name": "44"
+    },
+    {
+      "name": "45"
+    },
+    {
+      "name": "46"
+    },
+    {
+      "name": "47"
+    },
+    {
+      "name": "48"
+    },
+    {
+      "name": "49"
+    },
+    {
+      "name": "50"
+    },
+    {
+      "name": "51"
+    },
+    {
+      "name": "52"
+    },
+    {
+      "name": "53"
+    },
+    {
+      "name": "54"
+    },
+    {
+      "name": "55"
+    },
+    {
+      "name": "56"
+    },
+    {
+      "name": "57"
+    },
+    {
+      "name": "58"
+    },
+    {
+      "name": "59"
+    },
+    {
+      "name": "60"
+    },
+    {
+      "name": "61"
+    },
+    {
+      "name": "62"
+    },
+    {
+      "name": "63"
+    },
+    {
+      "name": "64"
+    },
+    {
+      "name": "65"
+    },
+    {
+      "name": "66"
+    },
+    {
+      "name": "67"
+    },
+    {
+      "name": "68"
+    },
+    {
+      "name": "69"
+    },
+    {
+      "name": "70"
+    },
+    {
+      "name": "71"
+    },
+    {
+      "name": "72"
+    },
+    {
+      "name": "73"
+    },
+    {
+      "name": "74"
+    },
+    {
+      "name": "75"
+    },
+    {
+      "name": "76"
+    },
+    {
+      "name": "77"
+    },
+    {
+      "name": "78"
+    },
+    {
+      "name": "79"
+    },
+    {
+      "name": "80"
+    },
+    {
+      "name": "81"
+    },
+    {
+      "name": "82"
+    },
+    {
+      "name": "83"
+    },
+    {
+      "name": "84"
+    },
+    {
+      "name": "85"
+    },
+    {
+      "name": "86"
+    },
+    {
+      "name": "89"
+    },
+    {
+      "name": "90"
+    },
+    {
+      "name": "91"
+    },
+    {
+      "name": "92"
+    },
+    {
+      "name": "94"
+    },
+    {
+      "name": "95"
+    },
+    {
+      "name": "96"
+    },
+    {
+      "name": "97"
+    },
+    {
+      "name": "98"
+    },
+    {
+      "name": "99"
+    },
+    {
+      "name": "100"
+    },
+    {
+      "name": "101"
+    },
+    {
+      "name": "102"
+    },
+    {
+      "name": "103"
+    },
+    {
+      "name": "104"
+    },
+    {
+      "name": "105"
+    },
+    {
+      "name": "106"
+    },
+    {
+      "name": "107"
+    },
+    {
+      "name": "108"
+    },
+    {
+      "name": "109"
+    },
+    {
+      "name": "110",
+      "directions": 4
+    },
+    {
+      "name": "zwing0"
+    },
+    {
+      "name": "zwing1"
+    },
+    {
+      "name": "zwing2"
+    },
+    {
+      "name": "zwing3"
+    },
+    {
+      "name": "zwing4"
+    },
+    {
+      "name": "zwing5"
+    },
+    {
+      "name": "zwing6"
+    },
+    {
+      "name": "zwing7"
+    },
+    {
+      "name": "zwing8"
+    },
+    {
+      "name": "leftengine_1"
+    },
+    {
+      "name": "leftengine_2"
+    },
+    {
+      "name": "leftengine_3"
+    },
+    {
+      "name": "rightengine_1"
+    },
+    {
+      "name": "rightengine_2"
+    },
+    {
+      "name": "rightengine_3"
+    },
+    {
+      "name": "wy2"
+    },
+    {
+      "name": "wy_leftengine"
+    },
+    {
+      "name": "wy_rightengine"
+    },
+    {
+      "name": "brokendropshipconsole1"
+    },
+    {
+      "name": "brokendropshipconsole2"
+    },
+    {
+      "name": "brokendropshipconsole3"
+    },
+    {
+      "name": "93a"
+    },
+    {
+      "name": "93"
+    },
+    {
+      "name": "93b"
+    },
+    {
+      "name": "36_alt"
+    },
+    {
+      "name": "37_alt"
+    },
+    {
+      "name": "9_alt"
+    },
+    {
+      "name": "15_alt"
+    },
+    {
+      "name": "92_alt"
+    },
+    {
+      "name": "94_alt"
+    },
+    {
+      "name": "10_interior"
+    },
+    {
+      "name": "10_interior_1"
+    },
+    {
+      "name": "83_alt"
+    },
+    {
+      "name": "75_alt"
+    }
+  ]
+}

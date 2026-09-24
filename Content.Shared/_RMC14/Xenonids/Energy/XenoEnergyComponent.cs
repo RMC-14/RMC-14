@@ -34,6 +34,9 @@ public sealed partial class XenoEnergyComponent : Component
     public bool IgnoreLateInfected = false;
 
     [DataField, AutoNetworkedField]
+    public bool GainOnProjectiles = true;
+
+    [DataField, AutoNetworkedField]
     public string PopupGain = "rmc-xeno-energy-increase-user";
 
     [DataField, AutoNetworkedField]

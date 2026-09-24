@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/icons/mob/animal.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "cat1"
+    },
+    {
+      "name": "cat2"
+    },
+    {
+      "name": "cat1-equipped-HELMET",
+      "directions": 4
+    },
+    {
+      "name": "cat2-equipped-HELMET",
+      "directions": 4
+    },
+    {
+      "name": "cat1-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "cat2-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "cat1-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "cat2-inhand-right",
+      "directions": 4
+    }
+  ]
+}

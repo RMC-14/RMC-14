@@ -1,4 +1,6 @@
+using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.UniformAccessories;
+using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Hands.EntitySystems;
@@ -10,6 +12,7 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Clothing;
@@ -24,6 +27,7 @@ public sealed class RMCClothingSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     private EntityQuery<ClothingLimitComponent> _clothingLimitQuery;
 
@@ -35,8 +39,7 @@ public sealed class RMCClothingSystem : EntitySystem
 
         SubscribeLocalEvent<ClothingRequireEquippedComponent, BeingEquippedAttemptEvent>(OnRequireEquippedBeingEquippedAttempt);
 
-        // this is here so clothing with ClothingRequireEquippedComponent can drop when required clothing is unequipped
-        // ex: scout cloak should not stay on when they take off the armor required for it
+        SubscribeLocalEvent<ClothingComponent, ClothingGotUnequippedEvent>(OnClothingGotUnequipped);
         SubscribeLocalEvent<ClothingComponent, DroppedEvent>(OnDropped);
 
         SubscribeLocalEvent<NoClothingSlowdownComponent, ComponentStartup>(OnNoClothingSlowUpdate);
@@ -45,6 +48,9 @@ public sealed class RMCClothingSystem : EntitySystem
         SubscribeLocalEvent<NoClothingSlowdownComponent, RefreshMovementSpeedModifiersEvent>(OnNoClothingSlowRefresh);
 
         SubscribeLocalEvent<RMCClothingFoldableComponent, GetVerbsEvent<AlternativeVerb>>(AddFoldVerb);
+
+        SubscribeLocalEvent<ClothingPrefixOnTimerTriggerComponent, RMCActiveTimerTriggerEvent>(OnClothingPrefixActiveTimerTrigger);
+        SubscribeLocalEvent<ClothingPrefixOnTimerTriggerComponent, RMCTriggerEvent>(OnClothingPrefixTrigger);
     }
 
     private void OnClothingLimitBeingEquippedAttempt(Entity<ClothingLimitComponent> ent, ref BeingEquippedAttemptEvent args)
@@ -84,37 +90,58 @@ public sealed class RMCClothingSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (HasEquippedItemsWithinWhitelist(args.EquipTarget, ent.Comp.Whitelist))
+        if (HasEquippedItemsWithinWhitelist(args.EquipTarget, ent.Comp.Whitelist, ent.Comp.HandsValid))
             return;
 
         args.Cancel();
-        args.Reason = ent.Comp.DenyReason;
+
+        var denyReason = Loc.GetString(ent.Comp.DenyReason);
+        _popup.PopupClient(denyReason, args.EquipTarget, args.EquipTarget, PopupType.SmallCaution);
+    }
+
+    private void OnClothingGotUnequipped(Entity<ClothingComponent> ent, ref ClothingGotUnequippedEvent args)
+    {
+        AutoUnequipDependents(ent.Owner, args.Wearer);
     }
 
     private void OnDropped(Entity<ClothingComponent> ent, ref DroppedEvent args)
     {
-        var slots = _inventory.GetSlotEnumerator(args.User);
+        AutoUnequipDependents(ent.Owner, args.User);
+    }
+
+    private void AutoUnequipDependents(EntityUid item, EntityUid user)
+    {
+        if (_timing.ApplyingState)
+            return;
+
+        var slots = _inventory.GetSlotEnumerator(user);
         while (slots.MoveNext(out var slot))
         {
             if (slot.ContainedEntity is not { } contained)
                 continue;
 
-            if (TryComp<ClothingRequireEquippedComponent>(contained, out var requiresEquipped) && requiresEquipped.AutoUnequip && _whitelist.IsValid(requiresEquipped.Whitelist, ent.Owner))
-            {
-                if (HasEquippedItemsWithinWhitelist(args.User, requiresEquipped.Whitelist))
-                    continue;
+            if (!TryComp<ClothingRequireEquippedComponent>(contained, out var requiresEquipped) || !requiresEquipped.AutoUnequip)
+                continue;
 
-                _inventory.TryUnequip(args.User, slot.ID);
-            }
+            if (!_whitelist.IsWhitelistPassOrNull(requiresEquipped.Whitelist, item))
+                continue;
+
+            if (HasEquippedItemsWithinWhitelist(user, requiresEquipped.Whitelist, requiresEquipped.HandsValid))
+                continue;
+
+            _inventory.TryUnequip(user, slot.ID);
         }
     }
 
-    private bool HasEquippedItemsWithinWhitelist(EntityUid uid, EntityWhitelist whitelist)
+    private bool HasEquippedItemsWithinWhitelist(EntityUid uid, EntityWhitelist? whitelist, bool handsValid = false)
     {
-        foreach (var held in _hands.EnumerateHeld(uid))
+        if (handsValid)
         {
-            if (_whitelist.IsValid(whitelist, held))
-                return true;
+            foreach (var held in _hands.EnumerateHeld(uid))
+            {
+                if (_whitelist.IsWhitelistPassOrNull(whitelist, held))
+                    return true;
+            }
         }
 
         var slots = _inventory.GetSlotEnumerator(uid);
@@ -123,7 +150,7 @@ public sealed class RMCClothingSystem : EntitySystem
             if (slot.ContainedEntity is not { } contained)
                 continue;
 
-            if (_whitelist.IsValid(whitelist, contained))
+            if (_whitelist.IsWhitelistPassOrNull(whitelist, contained))
                 return true;
         }
 
@@ -180,5 +207,21 @@ public sealed class RMCClothingSystem : EntitySystem
 
         _clothing.SetEquippedPrefix(ent.Owner, ent.Comp.ActivatedPrefix);
         _uniformAccessories.SetAccessoriesHidden(ent.Owner, hideAccessories);
+    }
+
+    private void OnClothingPrefixActiveTimerTrigger(Entity<ClothingPrefixOnTimerTriggerComponent> ent, ref RMCActiveTimerTriggerEvent args)
+    {
+        if (TryComp(ent, out ClothingComponent? clothing))
+        {
+            ent.Comp.OriginalPrefix = clothing.EquippedPrefix;
+            Dirty(ent);
+        }
+
+        _clothing.SetEquippedPrefix(ent, ent.Comp.Prefix);
+    }
+
+    private void OnClothingPrefixTrigger(Entity<ClothingPrefixOnTimerTriggerComponent> ent, ref RMCTriggerEvent args)
+    {
+        _clothing.SetEquippedPrefix(ent, ent.Comp.OriginalPrefix);
     }
 }

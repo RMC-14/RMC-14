@@ -2,7 +2,7 @@
   parent: BaseItem
   id: CMHypospray
   name: hypospray
-  description: The DeForest Medical Corporation hypospray is a sterile, air-needle auto-injector for rapid administration of drugs to patients.
+  description: The Avant Biomedical hypospray is a sterile, air-needle auto-injector for rapid administration of drugs to patients.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Medical/hypospray.rsi
@@ -60,6 +60,9 @@
     quickEquip: false
     slots:
     - suitstorage
+  - type: PhysicalComposition
+    materialComposition:
+      RMCPlastic: 1250
 
 - type: Tag
   id: Hypospray
@@ -73,9 +76,13 @@
     containers:
       vial:
       - RMCVial
+  - type: PhysicalComposition
+    materialComposition:
+      CMGlass: 250
+      RMCPlastic: 1250
 
 - type: entity
-  parent: CMHypospray
+  parent: CMHyposprayWithVial
   id: CMHyposprayFilledTricord
   suffix: Filled, Tricordrazine
   components:
@@ -84,4 +91,12 @@
       vial:
       - RMCVialTricordrazine
 
-
+- type: entity
+  parent: CMHypospray
+  id: RMCHyposprayFilledEpi
+  suffix: Filled, Epinephrine
+  components:
+  - type: ContainerFill
+    containers:
+      vial:
+      - RMCVialEpinephrine

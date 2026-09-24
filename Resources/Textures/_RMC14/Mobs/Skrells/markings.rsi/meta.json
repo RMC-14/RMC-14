@@ -1,18 +1,26 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from Baystation12 at https://github.com/Baystation12/Baystation12/blob/5bcd1c9fb33c6360600bedbc42a8e3c914f04fc4/icons/mob/human_races/species/skrell/markings.dmi",
+  "copyright": "Taken from Baystation12 at https://github.com/Baystation12/Baystation12/blob/5bcd1c9fb33c6360600bedbc42a8e3c914f04fc4/icons/mob/human_races/species/skrell/markings.dmi, spots-hair-tiny by Monotheonist, skr-axiori-eyes from Aurorastation at https://github.com/Aurorastation/Aurora.3/blob/7b43de3eaffdd9682d4cb072dea5525df6ce5a04/icons/mob/human_races/markings.dmi, recolored by Monotheonist",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
     {
+      "name": "skr-axiori-eyes",
+      "directions": 4
+    },
+    {
       "name": "spots-right",
       "directions": 4
     },
     {
       "name": "spots-left",
+      "directions": 4
+    },
+    {
+      "name": "spots-hair-tiny",
       "directions": 4
     },
     {

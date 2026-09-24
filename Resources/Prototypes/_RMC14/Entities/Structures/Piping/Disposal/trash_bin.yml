@@ -47,6 +47,9 @@
           collection: MetalBreak
           params:
             volume: -6
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
   - type: Appearance
   - type: InteractionOutline
   - type: Anchorable
@@ -98,6 +101,8 @@
       map: [ "enum.DisposalUnitVisualLayers.Unanchored" ]
     - state: trashblue
       map: [ "enum.DisposalUnitVisualLayers.Base" ]
+    - state: trashblue
+      map: [ "enum.DisposalUnitVisualLayers.BaseCharging" ]
     - state: trashblue
       map: [ "enum.DisposalUnitVisualLayers.OverlayFlush" ]
     - state: trashblue

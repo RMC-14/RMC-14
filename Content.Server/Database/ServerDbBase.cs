@@ -7,8 +7,10 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Server._RMC14.LinkAccount;
+using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
+using Content.Server.IP;
 using Content.Shared._RMC14.NamedItems;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Construction.Prototypes;
@@ -56,6 +58,7 @@ namespace Content.Server.Database
                     .ThenInclude(l => l.Groups)
                     .ThenInclude(group => group.Loadouts)
                 .Include(p => p.Profiles).ThenInclude(p => p.NamedItems)
+                .Include(p => p.Profiles).ThenInclude(h => h.Ranks)
                 .Include(p => p.Profiles).ThenInclude(p => p.SquadPreference)
                 .AsSplitQuery()
                 .SingleOrDefaultAsync(p => p.UserId == userId.UserId, cancel);
@@ -112,6 +115,7 @@ namespace Content.Server.Database
                 .Include(p => p.Loadouts)
                     .ThenInclude(l => l.Groups)
                     .ThenInclude(group => group.Loadouts)
+                .Include(p => p.Ranks)
                 .Include(p => p.NamedItems)
                 .Include(p => p.SquadPreference)
                 .AsSplitQuery()
@@ -217,6 +221,9 @@ namespace Content.Server.Database
             var jobs = profile.Jobs.ToDictionary(j => new ProtoId<JobPrototype>(j.JobName), j => (JobPriority) j.Priority);
             var antags = profile.Antags.Select(a => new ProtoId<AntagPrototype>(a.AntagName));
             var traits = profile.Traits.Select(t => new ProtoId<TraitPrototype>(t.TraitName));
+            var ranks = profile.Ranks.ToDictionary(
+                r => new ProtoId<JobPrototype>(r.JobName),
+                r => (ProtoId<RankPrototype>?) new ProtoId<RankPrototype>(r.RankName));
 
             var sex = Sex.Male;
             if (Enum.TryParse<Sex>(profile.Sex, true, out var sexVal))
@@ -292,9 +299,10 @@ namespace Content.Server.Database
                 ),
                 spawnPriority,
                 armorPreference,
+                ranks,
                 squadPreference,
                 jobs,
-                (PreferenceUnavailableMode) profile.PreferenceUnavailable,
+                (PreferenceUnavailableMode)profile.PreferenceUnavailable,
                 antags.ToHashSet(),
                 traits.ToHashSet(),
                 loadouts,
@@ -359,6 +367,13 @@ namespace Content.Server.Database
             profile.Traits.AddRange(
                 humanoid.TraitPreferences
                         .Select(t => new Trait {TraitName = t})
+            );
+
+            profile.Ranks.Clear();
+            profile.Ranks.AddRange(
+                humanoid.RankPreferences
+                    .Where(r => r.Value != null)
+                    .Select(r => new Rank { JobName = r.Key, RankName = r.Value!.Value.Id })
             );
 
             profile.Loadouts.Clear();
@@ -2095,20 +2110,279 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             await db.DbContext.SaveChangesAsync();
         }
 
-        public async Task<List<RMCCommendation>> GetCommendationsReceived(Guid player)
+        public async Task<List<RMCCommendation>> GetCommendationsReceived(Guid player, CommendationType? filterType = null, bool includePlayers = false)
         {
             await using var db = await GetDb();
-            return  await db.DbContext.RMCCommendations
+            var query = db.DbContext.RMCCommendations
+                .Where(c => !c.Deleted)
+                .AsQueryable();
+
+            if (includePlayers)
+            {
+                query = query
+                    .Include(c => c.Giver)
+                    .Include(c => c.Receiver);
+            }
+
+            if (filterType.HasValue)
+                query = query.Where(c => c.Type == filterType.Value);
+
+            return await query
                 .Where(c => c.ReceiverId == player)
                 .ToListAsync();
         }
 
-        public async Task<List<RMCCommendation>> GetCommendationsGiven(Guid player)
+        public async Task<List<RMCCommendation>> GetCommendationsGiven(Guid player, CommendationType? filterType = null, bool includePlayers = false)
         {
             await using var db = await GetDb();
-            return  await db.DbContext.RMCCommendations
+            var query = db.DbContext.RMCCommendations
+                .Where(c => !c.Deleted)
+                .AsQueryable();
+
+            if (includePlayers)
+            {
+                query = query
+                    .Include(c => c.Giver)
+                    .Include(c => c.Receiver);
+            }
+
+            if (filterType.HasValue)
+                query = query.Where(c => c.Type == filterType.Value);
+
+            return await query
                 .Where(c => c.GiverId == player)
                 .ToListAsync();
+        }
+
+        public async Task<List<RMCCommendation>> GetLastCommendations(int count, CommendationType? filterType = null, bool includePlayers = false)
+        {
+            await using var db = await GetDb();
+            var query = db.DbContext.RMCCommendations
+                .Where(c => !c.Deleted)
+                .AsQueryable();
+
+            if (includePlayers)
+            {
+                query = query
+                    .Include(c => c.Giver)
+                    .Include(c => c.Receiver);
+            }
+
+            if (filterType.HasValue)
+                query = query.Where(c => c.Type == filterType.Value);
+
+            return await query
+                .OrderByDescending(c => c.Id)
+                .Take(count)
+                .ToListAsync();
+        }
+
+        public async Task<RMCCommendation?> GetCommendationById(int commendationId, bool includePlayers = false)
+        {
+            await using var db = await GetDb();
+            var query = db.DbContext.RMCCommendations
+                .Where(c => !c.Deleted)
+                .AsQueryable();
+
+            if (includePlayers)
+            {
+                query = query
+                    .Include(c => c.Giver)
+                    .Include(c => c.Receiver);
+            }
+
+            return await query
+                .FirstOrDefaultAsync(c => c.Id == commendationId);
+        }
+
+        public async Task<List<RMCCommendation>> GetCommendationsByRound(int roundId, CommendationType? filterType = null, bool includePlayers = false)
+        {
+            await using var db = await GetDb();
+            var query = db.DbContext.RMCCommendations
+                .Where(c => !c.Deleted)
+                .AsQueryable();
+
+            if (includePlayers)
+            {
+                query = query
+                    .Include(c => c.Giver)
+                    .Include(c => c.Receiver);
+            }
+
+            if (filterType.HasValue)
+                query = query.Where(c => c.Type == filterType.Value);
+
+            return await query
+                .Where(c => c.RoundId == roundId)
+                .ToListAsync();
+        }
+
+        public async Task<RMCCommendation?> DeleteCommendationById(int commendationId, Guid deletedBy, DateTimeOffset deletedAt, bool includePlayers = false)
+        {
+            await using var db = await GetDb();
+            var query = db.DbContext.RMCCommendations
+                .Where(c => !c.Deleted)
+                .AsQueryable();
+
+            if (includePlayers)
+            {
+                query = query
+                    .Include(c => c.Giver)
+                    .Include(c => c.Receiver);
+            }
+
+            var commendation = await query
+                .FirstOrDefaultAsync(c => c.Id == commendationId);
+
+            if (commendation == null)
+                return null;
+
+            commendation.Deleted = true;
+            commendation.DeletedById = deletedBy;
+            commendation.DeletedAt = deletedAt.UtcDateTime;
+
+            await db.DbContext.SaveChangesAsync();
+            return commendation;
+        }
+
+        public async Task<List<RMCCommendation>> DeleteCommendationsByRound(
+            int roundId,
+            CommendationType type,
+            Guid deletedBy,
+            DateTimeOffset deletedAt,
+            Guid? giverId = null,
+            Guid? receiverId = null,
+            bool includePlayers = false)
+        {
+            await using var db = await GetDb();
+            var query = db.DbContext.RMCCommendations
+                .Where(c => !c.Deleted)
+                .AsQueryable();
+
+            if (includePlayers)
+            {
+                query = query
+                    .Include(c => c.Giver)
+                    .Include(c => c.Receiver);
+            }
+
+            query = query.Where(c => c.RoundId == roundId && c.Type == type);
+
+            if (giverId.HasValue)
+                query = query.Where(c => c.GiverId == giverId.Value);
+
+            if (receiverId.HasValue)
+                query = query.Where(c => c.ReceiverId == receiverId.Value);
+
+            var commendations = await query.ToListAsync();
+
+            if (commendations.Count == 0)
+                return commendations;
+
+            foreach (var commendation in commendations)
+            {
+                commendation.Deleted = true;
+                commendation.DeletedById = deletedBy;
+                commendation.DeletedAt = deletedAt.UtcDateTime;
+            }
+
+            await db.DbContext.SaveChangesAsync();
+            return commendations;
+        }
+
+        public async Task IncreaseInfects(Guid player)
+        {
+            await using var db = await GetDb();
+            var stats = await db.DbContext.RMCPlayerStats
+                .FirstOrDefaultAsync(s => s.PlayerId == player);
+
+            stats ??= db.DbContext.RMCPlayerStats
+                .Add(new RMCPlayerStats { PlayerId = player })
+                .Entity;
+
+            stats.ParasiteInfects++;
+
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task<Dictionary<string, List<string>>?> GetActionOrder(Guid player)
+        {
+            await using var db = await GetDb();
+            return await db.DbContext.RMCPlayerActionOrder
+                .Where(a => a.PlayerId == player)
+                .ToDictionaryAsync(a => a.Id, a => a.Actions);
+        }
+
+        public async Task SetActionOrder(Guid player, string id, List<string> actions)
+        {
+            await using var db = await GetDb();
+            var order = await db.DbContext.RMCPlayerActionOrder
+                .FirstOrDefaultAsync(a => a.PlayerId == player && a.Id == id);
+
+            order ??= db.DbContext.RMCPlayerActionOrder
+                .Add(new RMCPlayerActionOrder
+                {
+                    PlayerId = player,
+                    Id = id,
+                })
+                .Entity;
+
+            order.Actions = new List<string>(actions);
+
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task AddChatBan(int? round, NetUserId target, (IPAddress, int)? addressRange, ImmutableTypedHwid? hwid, TimeSpan? duration, ChatType type, NetUserId admin, string reason)
+        {
+            await using var db = await GetDb();
+
+            var time = DateTimeOffset.UtcNow.UtcDateTime;
+            db.DbContext.RMCPlayerChatBans.Add(new RMCChatBans
+            {
+                RoundId = round,
+                PlayerId = target,
+                Address = addressRange.ToNpgsqlInet(),
+                HWId = hwid,
+                Type = type,
+                BanningAdminId = admin,
+                Reason = reason,
+                BannedAt = time,
+                ExpiresAt = duration == null ? null : time.Add(duration.Value),
+            });
+
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task<List<RMCChatBans>> GetAllChatBans(Guid player)
+        {
+            await using var db = await GetDb();
+            return await db.DbContext.RMCPlayerChatBans
+                .Include(b => b.UnbanningAdmin)
+                .Where(c => c.PlayerId == player)
+                .ToListAsync();
+        }
+
+        public async Task<List<RMCChatBans>> GetActiveChatBans(Guid player)
+        {
+            await using var db = await GetDb();
+            return await db.DbContext.RMCPlayerChatBans
+                .Include(b => b.UnbanningAdmin)
+                .Where(c => c.PlayerId == player)
+                .Where(c => c.UnbannedAt == null && (c.ExpiresAt == null || c.ExpiresAt.Value > DateTime.UtcNow))
+                .ToListAsync();
+        }
+
+        public async Task<Guid?> TryPardonChatBan(int id, Guid? admin)
+        {
+            await using var db = await GetDb();
+            var ban = await db.DbContext.RMCPlayerChatBans.FirstOrDefaultAsync(c => c.Id == id);
+            if (ban == null || ban.UnbanningAdminId != null)
+                return null;
+
+            ban.UnbanningAdminId = admin;
+            ban.UnbannedAt = DateTimeOffset.UtcNow.UtcDateTime;
+            await db.DbContext.SaveChangesAsync();
+            return ban.PlayerId;
         }
 
         #endregion

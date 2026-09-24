@@ -691,10 +691,13 @@
   - type: Clickable
   - type: DropshipWeaponPoint
     dirOffset: Clockwise
+    location: PortWing
   - type: Appearance
   - type: Tag
     tags:
     - RMCDropshipWeaponPoint
+  - type: Corrodible
+    isCorrodible: true
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -746,10 +749,13 @@
   - type: Clickable
   - type: DropshipWeaponPoint
     dirOffset: CounterClockwise
+    location: StarboardWing
   - type: Appearance
   - type: Tag
     tags:
     - RMCDropshipWeaponPoint
+  - type: Corrodible
+    isCorrodible: true
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -963,6 +969,7 @@
   - type: Clickable
   - type: DropshipWeaponPoint
     dirOffset: Flip
+    location: PortFore
   - type: Appearance
   - type: Tag
     tags:
@@ -980,6 +987,8 @@
     - state: "84_flipped"
     - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
       offset: 0.5, 0.5
+  - type: DropshipWeaponPoint
+    location: StarboardFore
 
 - type: entity
   parent: RMCElectronicSystemAttachPoint

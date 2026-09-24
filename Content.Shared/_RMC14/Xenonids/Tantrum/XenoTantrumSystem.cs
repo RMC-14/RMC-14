@@ -28,6 +28,8 @@ public sealed class XenoTantrumSystem : EntitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
     [Dependency] private readonly CMArmorSystem _armor = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoTantrumComponent, XenoTantrumActionEvent>(OnXenoTantrumAction);
@@ -76,6 +78,9 @@ public sealed class XenoTantrumSystem : EntitySystem
     private void OnXenoTantrumAction(Entity<XenoTantrumComponent> xeno, ref XenoTantrumActionEvent args)
     {
         if (args.Handled)
+            return;
+
+        if (!_transform.InRange(xeno.Owner, args.Target, xeno.Comp.Range))
             return;
 
         if (HasComp<TantrumingComponent>(xeno))

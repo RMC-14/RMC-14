@@ -1,0 +1,187 @@
+﻿# Rain
+- type: entity
+  id: RMCHybrisaRainLightProp
+  name: light rain
+  description: It's a small amount of rain, falling from the sky.
+  suffix: prop, Hybrisa, weather
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: hybrisa_rain_light
+    drawdepth: Effects
+
+- type: entity
+  parent: RMCHybrisaRainLightProp
+  id: RMCHybrisaRainVeryLightProp
+  name: very light rain
+  description: It's a very small amount of rain, falling from the sky.
+  suffix: prop, Hybrisa, weather
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: hybrisa_rain_very_light
+    drawdepth: Effects
+
+- type: entity
+  parent: RMCHybrisaRainLightProp
+  id: RMCHybrisaRainProp
+  name: rain
+  description: It's rain, falling from the sky.
+  suffix: prop, Hybrisa, weather
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: hybrisa_rain
+    drawdepth: Effects
+
+- type: entity
+  parent: RMCHybrisaRainLightProp
+  id: RMCTrijentRainLightProp
+  name: light rain
+  description: It's a small amount of rain, falling from the sky.
+  suffix: prop, Trijent, weather
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: trijent_rain_light
+    drawdepth: Effects
+
+- type: entity
+  parent: RMCHybrisaRainLightProp
+  id: RMCStrataStormVeryLightProp
+  name: very light rain
+  description: It's a very small amount of rain, falling from the sky.
+  suffix: prop, Strata, weather
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: strata_storm_very_light
+    drawdepth: Effects
+
+- type: entity
+  parent: RMCHybrisaRainLightProp
+  id: RMCStrataStormLightProp
+  name: light rain
+  description: It's a small amount of rain, falling from the sky.
+  suffix: prop, Strata, weather
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: strata_storm_light
+    drawdepth: Effects
+
+- type: entity
+  parent: RMCHybrisaRainLightProp
+  id: RMCStrataStormProp
+  name: rain
+  description: It's rain, falling from the sky.
+  suffix: prop, Strata, weather
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: strata_storm
+    drawdepth: Effects
+
+# Sandstorm
+
+- type: entity
+  parent: RMCHybrisaRainLightProp
+  id: RMCBigRedDustProp
+  name: duststorm
+  description: It's dust, falling from the sky.
+  suffix: prop, Solaris, weather
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: bigred_dust
+    drawdepth: Effects
+
+- type: entity
+  parent: RMCHybrisaRainLightProp
+  id: RMCBigRedSandProp
+  name: sandstorm
+  description: It's sand, falling from the sky.
+  suffix: prop, Solaris, weather
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: bigred_sand
+    drawdepth: Effects
+
+- type: entity
+  parent: RMCHybrisaRainLightProp
+  id: RMCBigRedRocksProp
+  name: rockstorm
+  description: It's rocks, falling from the sky.
+  suffix: prop, Solaris, weather
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: bigred_rocks
+    drawdepth: Effects
+
+# Blizzard
+
+- type: entity
+  parent: RMCHybrisaRainLightProp
+  id: RMCStrataClearskyProp
+  name: light snow
+  description: It's snow, falling from the sky.
+  suffix: prop, Strata, weather
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: strata_clearsky
+    drawdepth: Effects
+
+- type: entity
+  parent: RMCHybrisaRainLightProp
+  id: RMCStrataSnowingProp
+  name: snowstorm
+  description: It's snow, falling from the sky.
+  suffix: prop, Strata, weather
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: strata_snowing
+    drawdepth: Effects
+
+- type: entity
+  parent: RMCHybrisaRainLightProp
+  id: RMCStrataBlizzardProp
+  name: blizzard
+  description: It's a lot of snow, falling from the sky.
+  suffix: prop, Strata, weather
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: strata_blizzard
+    drawdepth: Effects

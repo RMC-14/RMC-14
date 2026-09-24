@@ -95,5 +95,11 @@ namespace Content.Shared.Atmos.Components
 
         [DataField, AutoNetworkedField]
         public TimeSpan ResistDuration = TimeSpan.FromSeconds(8);
+
+        [DataField, AutoNetworkedField]
+        public DamageSpecifier? TileDamage;
+
+        [DataField, AutoNetworkedField]
+        public bool LastOnFire;
     }
 }

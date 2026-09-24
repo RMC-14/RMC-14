@@ -1,0 +1,29 @@
+﻿- type: entityTable
+  id: RMCClosetSPPGearFill
+  table: !type:AllSelector
+    children:
+    - id: CMBootsBrownFilled
+    - id: CMJumpsuitSPP
+    - id: RMCHeadsetSPP
+
+- type: entityTable
+  id: RMCClosetSPPSLFill
+  table: !type:AllSelector
+    children:
+    - id: CMHeadCapSPPBeret
+    - id: CMJumpsuitSPP
+    - id: RMCLaserDesignator
+    - id: RMCWhistle
+
+- type: entityTable
+  id: RMCClosetSPPSGOFill
+  table: !type:AllSelector
+    children:
+    - id: RMCWeaponLMGQYJ72
+    - id: RMCArmorSPPHeavy
+    - id: ArmorHelmetSPPHeavy
+    - id: RMCMagazineLMGQYJ72
+    - id: RMCMagazineLMGQYJ72
+    - id: RMCMagazineLMGQYJ72
+    - id: RMCMagazineLMGQYJ72
+    - id: RMCMagazineLMGQYJ72

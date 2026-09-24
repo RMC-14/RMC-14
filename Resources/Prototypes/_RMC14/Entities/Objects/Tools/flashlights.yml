@@ -3,11 +3,6 @@
   parent: BaseItem
   id: RMCFlashlightBase
   components:
-  - type: MeleeWeapon
-    wideAnimationRotation: 90
-    damage:
-      types:
-        Blunt: 0
   - type: HandheldLight
     blinkingBehaviourId: blinking
     radiatingBehaviourId: radiating
@@ -56,6 +51,10 @@
     - belt
     - suitstorage
   - type: NoHandsInteractionBlocked
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 50
+      CMGlass: 20
 
 - type: entity
   parent: RMCBoxMagazineSupplyBase
@@ -142,6 +141,10 @@
     - suitstorage
   - type: PointLight
     radius: 1.75
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 10
+      CMGlass: 5
 
 - type: Tag
   id: RMCPenlight

@@ -1,5 +1,6 @@
 using System.IO;
 using System.Linq;
+using Content.Client._RMC14.Movement;
 using Content.Shared._RMC14.Actions;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
@@ -48,6 +49,9 @@ namespace Content.Client.Actions
 
         public static readonly EntProtoId MappingEntityAction = "BaseMappingEntityAction";
 
+        // RMC14
+        [Dependency] private readonly RMCLagCompensationSystem _rmcLagCompensation = default!;
+
         public override void Initialize()
         {
             base.Initialize();
@@ -72,6 +76,12 @@ namespace Content.Client.Actions
         {
             // TODO: Decouple this.
             ent.Comp.IconColor = _sharedCharges.GetCurrentCharges(ent.Owner) == 0 ? ent.Comp.DisabledIconColor : ent.Comp.OriginalIconColor;
+
+            //RMC14
+            if (!ent.Comp.Enabled)
+                ent.Comp.IconColor = ent.Comp.DisabledIconColor;
+            //RMC14
+
             base.UpdateAction(ent);
             if (_playerManager.LocalEntity != ent.Comp.AttachedEntity)
                 return;
@@ -211,7 +221,7 @@ namespace Content.Client.Actions
             }
             else
             {
-                var request = new RequestPerformActionEvent(GetNetEntity(action));
+                var request = new RequestPerformActionEvent(GetNetEntity(action), _rmcLagCompensation.GetLastRealTick(null));
                 RaisePredictiveEvent(request);
             }
         }
@@ -328,7 +338,7 @@ namespace Content.Client.Actions
                 PerformAction((user, user.Comp), (uid, action));
             }
             else
-                RaisePredictiveEvent(new RequestPerformActionEvent(GetNetEntity(uid), GetNetEntity(targetEnt), GetNetCoordinates(coords)));
+                RaisePredictiveEvent(new RequestPerformActionEvent(GetNetEntity(uid), GetNetEntity(targetEnt), GetNetCoordinates(coords), _rmcLagCompensation.GetLastRealTick(null)));
 
             args.FoundTarget = true;
         }
@@ -341,6 +351,7 @@ namespace Content.Client.Actions
             if (args.Input.EntityUid is not { Valid: true } entity)
             {
                 EntityManager.RaisePredictiveEvent(new RMCMissedTargetActionEvent(EntityManager.GetNetEntity(ent))); // RMC14
+                args.Handled = true; // RMC14
                 return;
             }
 
@@ -368,7 +379,7 @@ namespace Content.Client.Actions
             }
             else
             {
-                RaisePredictiveEvent(new RequestPerformActionEvent(GetNetEntity(uid), GetNetEntity(entity)));
+                RaisePredictiveEvent(new RequestPerformActionEvent(GetNetEntity(uid), GetNetEntity(entity), _rmcLagCompensation.GetLastRealTick(null)));
             }
 
             args.FoundTarget = true;

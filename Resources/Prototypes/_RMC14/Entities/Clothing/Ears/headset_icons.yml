@@ -44,6 +44,17 @@
 
 - type: entity
   abstract: true
+  parent: RMCHeadsetIconsTSE
+  id: RMCHeadsetIconsPara
+  components:
+    - type: GrantMarineIcons
+      factions:
+        - RoyalMarines
+        - TSE
+        - UNMC
+
+- type: entity
+  abstract: true
   parent: RMCHeadsetIcons
   id: RMCHeadsetIconsCLF
   components:

@@ -1,13 +1,15 @@
-﻿using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Egg.EggRetriever;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
 using Content.Shared.Buckle.Components;
@@ -70,7 +72,7 @@ public sealed class XenoEggSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly EntityManager _entities = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly RMCHandsSystem _rmcHands = default!;
     [Dependency] private readonly TagSystem _tags = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -101,6 +103,7 @@ public sealed class XenoEggSystem : EntitySystem
         SubscribeLocalEvent<XenoAttachedOvipositorComponent, ComponentRemove>(OnXenoAttachedRemove);
         SubscribeLocalEvent<XenoAttachedOvipositorComponent, MobStateChangedEvent>(OnXenoMobStateChanged);
         SubscribeLocalEvent<XenoAttachedOvipositorComponent, XenoConstructionRangeEvent>(OnXenoConstructionRange);
+        SubscribeLocalEvent<XenoAttachedOvipositorComponent, XenoRestAttemptEvent>(OnXenoRest);
 
         SubscribeLocalEvent<XenoEggComponent, AfterAutoHandleStateEvent>(OnXenoEggAfterState);
         SubscribeLocalEvent<XenoEggComponent, GettingPickedUpAttemptEvent>(OnXenoEggPickedUpAttempt);
@@ -142,6 +145,12 @@ public sealed class XenoEggSystem : EntitySystem
             return;
 
         var hasOvipositor = HasComp<XenoAttachedOvipositorComponent>(xeno);
+        if (!hasOvipositor && HasComp<VehicleInteriorOccupantComponent>(xeno.Owner))
+        {
+            _popup.PopupClient(Loc.GetString("cm-xeno-ovipositor-vehicle"), xeno, xeno, PopupType.SmallCaution);
+            return;
+        }
+
         if (!hasOvipositor &&
             !_plasma.HasPlasmaPopup(xeno.Owner, args.AttachPlasmaCost))
         {
@@ -221,6 +230,11 @@ public sealed class XenoEggSystem : EntitySystem
         args.Range = 0;
     }
 
+    private void OnXenoRest(Entity<XenoAttachedOvipositorComponent> ent, ref XenoRestAttemptEvent args)
+    {
+        args.Cancelled = true;
+    }
+
     private void OnXenoEggAfterState(Entity<XenoEggComponent> egg, ref AfterAutoHandleStateEvent args)
     {
         var ev = new XenoEggStateChangedEvent();
@@ -254,6 +268,13 @@ public sealed class XenoEggSystem : EntitySystem
             if (_timing.IsFirstTimePredicted)
                 _popup.PopupCoordinates(Loc.GetString("cm-xeno-cant-reach-there"), args.ClickLocation, Filter.Local(), true);
 
+            return;
+        }
+
+        if (HasComp<VehicleInteriorOccupantComponent>(args.User))
+        {
+            var failMessage = Loc.GetString("rmc-xeno-egg-blocked-vehicle");
+            _popup.PopupClient(failMessage, args.User, args.User, PopupType.SmallCaution);
             return;
         }
 
@@ -489,6 +510,8 @@ public sealed class XenoEggSystem : EntitySystem
             {
                 if (user != null)
                     _popup.PopupClient(Loc.GetString("cm-xeno-egg-clear"), egg, user.Value);
+
+                _audio.PlayPredicted(egg.Comp.ClearSound, Transform(egg).Coordinates, user);
 
                 if (_net.IsClient)
                     return true;

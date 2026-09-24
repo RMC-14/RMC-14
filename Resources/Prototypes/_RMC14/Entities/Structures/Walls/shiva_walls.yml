@@ -15,6 +15,9 @@
     - Wall
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: shiva_ice
 
 - type: entity
@@ -22,6 +25,7 @@
   id: RCMWallShivaInvincibleFab
   name: reinforced prefabricated structure wall
   description: It cannot be destroyed by any means you have available. Perhaps praying to the gods may help.
+  suffix: Hull
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/shiva_fab_r.rsi
@@ -33,6 +37,9 @@
     - Wall
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: shiva_fab_r
 
 - type: entity
@@ -49,10 +56,13 @@
     state: shiva_fab
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: shiva_fab
 
 - type: entity
-  parent: CMWallReinforced
+  parent: RMCBaseWallReinforced
   id: RCMWallShivaReinforcedFab
   name: reinforced prefabricated structure wall
   description: This structure is made of metal support rods. The poly-kevlon has been replaced with sheet metal, reinforcing it.
@@ -65,13 +75,14 @@
     state: shiva_fab_r
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: shiva_fab_r
 
-- type: entity
-  parent: CMWallReinforced
+- type: entity # TODO RMC14: Clean up the ID's for the colored walls, they are supposed to regular fab walls
+  parent: RCMWallShivaFab
   id: RCMWallShivaReinforcedFabOrange
-  name: reinforced prefabricated structure wall
-  description: This structure is made of metal support rods. The poly-kevlon has been replaced with sheet metal, reinforcing it.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/shiva_fab_oj.rsi
@@ -81,13 +92,14 @@
     state: shiva_fab_oj
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: shiva_fab_oj
 
 - type: entity
-  parent: CMWallReinforced
+  parent: RCMWallShivaFab
   id: RCMWallShivaReinforcedFabBlue
-  name: reinforced prefabricated structure wall
-  description: This structure is made of metal support rods. The poly-kevlon has been replaced with sheet metal, reinforcing it.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/shiva_fab_blu.rsi
@@ -97,13 +109,14 @@
     state: shiva_fab_blu
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: shiva_fab_blu
 
 - type: entity
-  parent: CMWallReinforced
+  parent: RCMWallShivaFab
   id: RCMWallShivaReinforcedFabPink
-  name: reinforced prefabricated structure wall
-  description: This structure is made of metal support rods. The poly-kevlon has been replaced with sheet metal, reinforcing it.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/shiva_fab_pnk.rsi
@@ -113,13 +126,14 @@
     state: shiva_fab_pnk
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: shiva_fab_pnk
 
 - type: entity
-  parent: CMWallReinforced
+  parent: RCMWallShivaFab
   id: RCMWallShivaReinforcedFabWhite
-  name: reinforced prefabricated structure wall
-  description: This structure is made of metal support rods. The poly-kevlon has been replaced with sheet metal, reinforcing it.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/shiva_fab_wht.rsi
@@ -129,13 +143,14 @@
     state: shiva_fab_wht
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: shiva_fab_wht
 
 - type: entity
-  parent: CMWallReinforced
+  parent: RCMWallShivaFab
   id: RCMWallShivaReinforcedFabRed
-  name: reinforced prefabricated structure wall
-  description: This structure is made of metal support rods. The poly-kevlon has been replaced with sheet metal, reinforcing it.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/shiva_fab_red.rsi
@@ -145,4 +160,7 @@
     state: shiva_fab_red
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: shiva_fab_red

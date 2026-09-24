@@ -168,7 +168,7 @@ public sealed class GunIDLockSystem : EntitySystem
         {
             ClearUser(ent);
         }
-        if (HasComp<CMDefibrillatorBlockedComponent>(ent.Comp.User))
+        if (HasComp<RMCDefibrillatorBlockedComponent>(ent.Comp.User))
         {
             ClearUser(ent);
         }

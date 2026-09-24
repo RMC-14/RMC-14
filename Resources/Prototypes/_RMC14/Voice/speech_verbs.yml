@@ -26,6 +26,15 @@
   - chat-speech-verb-feroxi-4
 
 - type: speechVerb
+  id: Skrell
+  name: chat-speech-verb-name-skrell
+  speechVerbStrings:
+  - chat-speech-verb-skrell-1
+  - chat-speech-verb-skrell-2
+  - chat-speech-verb-skrell-3
+  - chat-speech-verb-skrell-4
+
+- type: speechVerb
   id: Megaphone
   name: chat-speech-verb-name-megaphone
   speechVerbStrings:

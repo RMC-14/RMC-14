@@ -19,6 +19,10 @@
     enabled: true
     channels:
     - ColonyHandheld
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 75
+      CMGlass: 25
 
 - type: entity
   parent: RMCRadioHandheldColonyBase

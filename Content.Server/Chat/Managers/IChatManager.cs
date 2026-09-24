@@ -25,8 +25,12 @@ namespace Content.Server.Chat.Managers
         void SendAdminAnnouncement(string message, AdminFlags? flagBlacklist = null, AdminFlags? flagWhitelist = null);
         void SendAdminAnnouncementMessage(ICommonSession player, string message, bool suppressLog = true);
 
+        // RMC14
         void ChatMessageToOne(ChatChannel channel, string message, string wrappedMessage, EntityUid source, bool hideChat,
-            INetChannel client, Color? colorOverride = null, bool recordReplay = false, string? audioPath = null, float audioVolume = 0, NetUserId? author = null, bool hidePopup = false);
+            INetChannel client, Color? colorOverride = null, bool recordReplay = false, string? audioPath = null, float audioVolume = 0, NetUserId? author = null, bool hidePopup = false,
+            bool useEmoteSpeechBubble = false,
+            string? languageIcon = null);
+        // RMC14
 
         void ChatMessageToMany(ChatChannel channel, string message, string wrappedMessage, EntityUid source, bool hideChat, bool recordReplay,
             IEnumerable<INetChannel> clients, Color? colorOverride = null, string? audioPath = null, float audioVolume = 0, NetUserId? author = null);

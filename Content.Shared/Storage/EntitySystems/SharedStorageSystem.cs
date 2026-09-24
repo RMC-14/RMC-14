@@ -304,6 +304,9 @@ public abstract class SharedStorageSystem : EntitySystem
         // close ui
         foreach (var entity in storageComp.Container.ContainedEntities)
         {
+            if (HasComp<RMCItemKeepUIOpenOnStorageClosedComponent>(entity))
+                continue;
+
             UI.CloseUis(entity, actor);
         }
     }
@@ -1011,6 +1014,18 @@ public abstract class SharedStorageSystem : EntitySystem
         if (Resolve(source, ref sourceLock, false) && sourceLock.Locked
             || Resolve(target, ref targetLock, false) && targetLock.Locked)
             return;
+
+        // RMC start. Run the normal storage interaction checks for both source and target before bulk transfer. This lets RMC lockable storage block "move all" style transfer attempts when the user is not authorized to access either storage.
+
+        if (user != null)
+        {
+            if (!CanInteract(user.Value, (source, sourceComp), silent: false) ||
+                !CanInteract(user.Value, (target, targetComp), silent: false))
+            {
+                return;
+            }
+        }
+        // RMC end
 
         foreach (var entity in entities.ToArray())
         {
@@ -1907,7 +1922,7 @@ public abstract class SharedStorageSystem : EntitySystem
 #endif
     }
 
-    private bool CanInteract(EntityUid user, Entity<StorageComponent> storage, bool canInteract = true, bool silent = true)
+    public bool CanInteract(EntityUid user, Entity<StorageComponent> storage, bool canInteract = true, bool silent = true)
     {
         if (HasComp<BypassInteractionChecksComponent>(user))
             return true;

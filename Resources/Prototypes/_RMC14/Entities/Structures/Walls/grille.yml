@@ -148,8 +148,27 @@
       state: grille
     - type: Construction
       graph: RMCGrilleElectrified
-      node: GrilleElectrified
+      node: grilleElectrified
       deconstructionTarget: start
+    - type: IconSmooth
+      key: walls
+      mode: NoSprite
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 150 # Excessive damage
+          behaviors:
+            - !type:DoActsBehavior
+              acts: ["Destruction"]
+        - trigger:
+            !type:DamageTrigger
+            damage: 100
+          behaviors:
+            - !type:ChangeConstructionNodeBehavior
+              node: grilleBrokenElectrified
+            - !type:DoActsBehavior
+              acts: ["Breakage"]
 
 - type: entity
   id: RMCGrilleElectrifiedBroken

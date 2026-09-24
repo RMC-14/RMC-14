@@ -12,7 +12,6 @@ rmc-guide-entry-marine-law-crimes-variable = Variable Crimes
 rmc-guide-entry-marine-law-crimes-minor = Minor Crimes
 rmc-guide-entry-marine-law-crimes-major = Major Crimes
 rmc-guide-entry-marine-law-crimes-capital = Capital Crimes
-rmc-guide-entry-marine-law-crimes-optional = Optional Crimes
 rmc-guide-entry-marine-law-crimes-precautionary = Precautionary Crimes
 rmc-guide-entry-marine-law-prisoner-rights = Prisoner Rights
 rmc-guide-entry-marine-law-appeals = Prisoner Rights, Appeals

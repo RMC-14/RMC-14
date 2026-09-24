@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Energy;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared.Body.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
 using Content.Shared.Interaction;
@@ -13,6 +14,7 @@ using Content.Shared.Maps;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -42,6 +44,7 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] protected readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly SharedXenoAcidSystem _acid = default!;
@@ -188,14 +191,20 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
 
                     foreach (var cade in _lookup.GetEntitiesInRange<BarricadeComponent>(origin, acidRange))
                     {
-                        if (!_interaction.InRangeUnobstructed(xeno, cade.Owner, acidRange, collisionMask: Physics.CollisionGroup.Impassable))
+                        if (!_interaction.InRangeUnobstructed(xeno, cade.Owner, acidRange, collisionMask: CollisionGroup.Impassable))
                             continue;
 
-                        if (HasComp<DamageableCorrodingComponent>(cade))
-                            continue;
+                        // Check if barricade already has acid and if we can replace it
+                        if (_acid.IsMelted(cade))
+                        {
+                            // Only proceed if our acid is stronger, otherwise skip this barricade
+                            if (!_acid.CanReplaceAcid(cade, active.AcidStrength))
+                                continue;
 
-                        _acid.ApplyAcid(active.Acid, cade, active.AcidDps, 0, active.AcidTime);
+                            _acid.RemoveAcid(cade);
+                        }
 
+                        _acid.ApplyAcid(active.Acid, active.AcidStrength, cade, active.AcidDps, 0, active.AcidTime);
                     }
 
 
@@ -205,13 +214,13 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
                             continue;
 
                         //Do the acid check here
-                        if (_interaction.InRangeUnobstructed(xeno, mob.Owner, acidRange, collisionMask: Physics.CollisionGroup.Impassable))
+                        if (_interaction.InRangeUnobstructed(xeno, mob.Owner, acidRange, collisionMask: CollisionGroup.Impassable))
                         {
                             if (active.MobAcid is { } add)
                                 EntityManager.AddComponents(mob, add);
                         }
 
-                        if (!_interaction.InRangeUnobstructed(xeno, mob.Owner, burnRange, collisionMask: Physics.CollisionGroup.Impassable))
+                        if (!_interaction.InRangeUnobstructed(xeno, mob.Owner, burnRange, collisionMask: CollisionGroup.Impassable))
                             continue;
 
                         if (!origin.TryDistance(EntityManager, _transform.GetMoverCoordinates(mob), out var distance))
@@ -228,46 +237,26 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
 
                     foreach (var turf in _map.GetTilesIntersecting(gridId, grid, Box2.CenteredAround(origin.Position, new(acidRange * 2, acidRange * 2)), false))
                     {
-                        if (!_interaction.InRangeUnobstructed(_transform.ToMapCoordinates(origin), _transform.ToMapCoordinates(_turf.GetTileCenter(turf)), acidRange, collisionMask: Physics.CollisionGroup.Impassable))
+                        if (!_interaction.InRangeUnobstructed(_transform.ToMapCoordinates(origin), _transform.ToMapCoordinates(_turf.GetTileCenter(turf)), acidRange, collisionMask: CollisionGroup.Impassable))
                             continue;
 
-                        if (_turf.IsTileBlocked(turf, Physics.CollisionGroup.Impassable))
+                        if (_turf.IsTileBlocked(turf, CollisionGroup.Impassable))
                             continue;
 
                         var smoke = SpawnAtPosition(active.AcidSmoke, _turf.GetTileCenter(turf));
                     }
 
-                    //TODO CM gibs the runner
-                    if (GetHiveCore(xeno, out var core))
-                        ForTheHiveRespawn(xeno, active.CoreSpawnTime);
+                    if (_hive.TryGetHiveCore(xeno, out var core))
+                        ForTheHiveRespawn(xeno, active.CoreSpawnTime, true, _transform.GetMoverCoordinates(core.Value));
                     else
                         ForTheHiveRespawn(xeno, active.CorpseSpawnTime, true, origin);
 
                     _audio.PlayStatic(active.KaboomSound, Filter.PvsExcept(xeno), origin, true);
-                    QueueDel(xeno);
+                    _body.GibBody(xeno);
                     RemCompDeferred<ActiveForTheHiveComponent>(xeno);
                 }
             }
         }
-    }
-
-    protected bool GetHiveCore(EntityUid xeno, out EntityUid? core)
-    {
-        var cores = EntityQueryEnumerator<HiveCoreComponent, HiveMemberComponent>();
-        while (cores.MoveNext(out var uid, out var _, out var _))
-        {
-            if (!_hive.FromSameHive(xeno, uid))
-                continue;
-
-            if (_mob.IsDead(uid))
-                continue;
-
-            core = uid;
-            return true;
-        }
-
-        core = null;
-        return false;
     }
 
     protected virtual void ForTheHiveRespawn(EntityUid xeno, TimeSpan time, bool atCorpse = false, EntityCoordinates? corpse = null)

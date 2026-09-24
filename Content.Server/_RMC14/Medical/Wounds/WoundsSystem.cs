@@ -82,7 +82,7 @@ public sealed class WoundsSystem : SharedWoundsSystem
                     {
                         var amount = -FixedPoint2.Min(-toHeal, wound.Damage - wound.Healed);
                         toHeal -= amount;
-                        _passiveDamage = _rmcDamageable.DistributeDamage(damageableEnt, group.Value, amount, _passiveDamage);
+                        _passiveDamage = _rmcDamageable.DistributeDamageCached(damageableEnt, group.Value, amount, _passiveDamage);
                     }
                 }
 

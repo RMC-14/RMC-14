@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: CMBaseMobSpeciesOrganic
+  parent: RMCBaseMobSpeciesOrganic
   id: CMTestDummy
   name: test dummy
   suffix: RMC14

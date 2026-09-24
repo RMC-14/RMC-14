@@ -1,7 +1,7 @@
 ﻿<Document>
   # Prisoner Rights
   This is a list of rights prisoners have.
-  - They cannot be denied, with the exception of radio access, except in extreme situations with authorization from the [color=#8B0000][bold]Chief MP[/bold][/color] or [color=#008000][bold]Commander[/bold][/color]. Prisoners can fax provost to have their rights be given back.
+  - They cannot be denied, with the exception of radio access, except in extreme situations with authorization from the [color=#8B0000][bold]Chief MP[/bold][/color] or [color=#008000][bold]Commander[/bold][/color]. Prisoners can fax [color=#ffa500][bold]Provost Marshal Office[/bold][/color] to have their rights be given back.
 
   ## Common Space
   All prisoners are permitted to enter the common space by default.
@@ -26,5 +26,9 @@
   - If any [color=#ff000d][bold]MP[/bold][/color] believes that it is being abused, they can revoke this right after a clear warning of the behavior.
   - Prisoners may appeal this.
   - Prisoners may have their radio revoked if a mutiny is active until the mutiny is over.
+
+  ## Clothing
+  - Prisoners must be allowed either the brig orange uniform, or their original uniform if none are available.
+  - Prisoners must be allowed footwear.
 
 </Document>

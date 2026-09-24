@@ -1,0 +1,39 @@
+<cc:HiveTeamPanelControl
+    xmlns="https://spacestation14.io"
+    xmlns:cc="clr-namespace:Content.Client._RMC14.Xenonids.HiveTeam"
+    HorizontalExpand="True" VerticalExpand="True">
+    <PanelContainer Name="OuterPanel" Access="Public" HorizontalExpand="True"
+                    VerticalExpand="True" Margin="4">
+        <BoxContainer Orientation="Vertical" Margin="6" VerticalExpand="True">
+            <Label Name="TeamTitle" Access="Public" HorizontalAlignment="Center"
+                   Margin="0 4 0 2" />
+            <OptionButton Name="RoleBox" Access="Public" HorizontalExpand="True"
+                          StyleClasses="ButtonSquare" Margin="0 0 0 4" />
+            <PanelContainer Name="LeaderPanel" Access="Public" HorizontalExpand="True"
+                            Margin="0 0 0 4">
+                <BoxContainer Orientation="Vertical" Margin="4">
+                    <Label Text="Hive Leader" HorizontalAlignment="Center"
+                           FontColorOverride="#aaaaaa" Margin="0 0 0 4" />
+                    <BoxContainer Name="LeaderSlot" Access="Public"
+                                  Orientation="Vertical" HorizontalExpand="True"
+                                  MinHeight="48" MaxHeight="48" />
+                </BoxContainer>
+            </PanelContainer>
+            <PanelContainer Name="MembersPanel" Access="Public" HorizontalExpand="True"
+                            VerticalExpand="True" Margin="0 0 0 4">
+                <BoxContainer Orientation="Vertical" Margin="4" VerticalExpand="True">
+                    <Label Text="Members" HorizontalAlignment="Center"
+                           FontColorOverride="#aaaaaa" Margin="0 0 0 4" />
+                    <ScrollContainer HScrollEnabled="False" HorizontalExpand="True"
+                                     VerticalExpand="True">
+                        <GridContainer Name="MembersGrid" Access="Public"
+                                       Columns="2" HorizontalExpand="True" />
+                    </ScrollContainer>
+                    <Button Name="AddMemberButton" Access="Public" Text="+ Add Member"
+                            HorizontalExpand="True" Margin="0 4 0 0"
+                            StyleClasses="ButtonSquare" />
+                </BoxContainer>
+            </PanelContainer>
+        </BoxContainer>
+    </PanelContainer>
+</cc:HiveTeamPanelControl>

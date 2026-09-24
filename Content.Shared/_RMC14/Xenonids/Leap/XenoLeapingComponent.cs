@@ -40,7 +40,7 @@ public sealed partial class XenoLeapingComponent : Component
     public bool DestroyObjects;
 
     [DataField, AutoNetworkedField]
-    public DamageSpecifier Damage = new ();
+    public DamageSpecifier Damage = new();
 
     [DataField, AutoNetworkedField]
     public EntProtoId? HitEffect;

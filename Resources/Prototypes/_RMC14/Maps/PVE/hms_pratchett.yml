@@ -1,0 +1,28 @@
+- type: gameMap
+  id: HMSPratchett
+  mapName: "HMS Pratchett"
+  mapPath: /Maps/_RMC14/PVE/hms_pratchett.yml
+  minPlayers: 0
+  maxRandomOffset: 0
+  randomRotation: false
+  stations:
+    HMSPratchett:
+      stationProto: StandardUNMCWarship
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'HMS Pratchett'
+        - type: StationJobs
+          availableJobs:
+            # Command
+            CMRoyalMarinesTroopCommanderPVE: [1, 1]
+
+            # Royal Marines
+            CMRoyalMarinesTroopSargePVE: [1, 1]
+            CMRoyalMarinesSectionLeaderPVE: [1, 1]
+            CMRoyalMarinesTeamLeaderPVE: [1, 1]
+            CMRoyalMarinesAssaultEngineerPVE: [2, 2]
+            CMRoyalMarinesSmartgunnerPVE: [1, 1]
+            CMRoyalMarinesBombSpecPVE: [1, 1]
+            CMRoyalMarinesScoutSniperPVE: [1, 1]
+            CMRoyalMarinesMedicPVE: [2, 2]
+            CMRoyalMarinesRiflemanPVE: [ 10, 10 ]

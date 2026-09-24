@@ -26,3 +26,19 @@
       sprite: _RMC14/Objects/Medical/stethoscope.rsi
       state: utility
   - type: RMCStethoscope
+
+- type: entity
+  parent: RMCUtilityBase
+  id: RMCHorizonFlower
+  name: blue horizon flower
+  description: A beautiful blue flower that symbolizes hope and rememberance.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/horizon_flower.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/horizon_flower.rsi
+      state: flower

@@ -1,0 +1,14 @@
+- files: ["slime_bubble.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Audiolarx on freesound.org"
+  source: "https://freesound.org/people/audiolarx/sounds/263945/"
+
+- files: ["slime_pop.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Vilkas_Sound on freesound.org, minor tweaks by RosySaturniidae (github)"
+  source: "https://freesound.org/people/Vilkas_Sound/sounds/463388/"
+
+- files: ["slime_wobble.wav"]
+  license: "CC-BY-4.0"
+  copyright: "Jagadamba on freesound.org, minor tweaks by RosySaturniidae (github)"
+  source: "https://freesound.org/people/Jagadamba/sounds/254403/"

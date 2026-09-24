@@ -1,24 +1,24 @@
 {
-    "version": 1,
-    "license": "CC-BY-SA-3.0",
-    "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/2f79406346e8f4209edc19c37cbd6f8dca8897d4/icons/obj/items/clothing/backpack/backpacks_by_faction/WY.dmi and https://github.com/cmss13-devs/cmss13/blob/2f79406346e8f4209edc19c37cbd6f8dca8897d4/icons/mob/humans/onmob/clothing/back/backpacks_by_faction/WY.dmi, modified by Ian321",
-    "size": {
-        "x": 32,
-        "y": 32
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Sprites by github noctyrnal",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
     },
-    "states": [
-        {
-            "name": "icon"
-        },
-        {
-            "name": "equipped-BACKPACK",
-            "directions": 4
-        },
-        {
-            "name": "open"
-        },
-        {
-            "name": "closed"
-        }
-    ]
+    {
+      "name": "equipped-BACKPACK",
+      "directions": 4
+    },
+    {
+      "name": "open"
+    },
+    {
+      "name": "closed"
+    }
+  ]
 }

@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Line;
+using Content.Shared._RMC14.Line;
 using Content.Shared.Chemistry.Reagent;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -15,6 +15,9 @@ public sealed partial class RMCFlamerChainComponent : Component
     [DataField, AutoNetworkedField]
     public List<LineTile> Tiles = new();
 
+    [DataField]
+    public EntityUid? Chain;
+
     [DataField, AutoNetworkedField]
     public ProtoId<ReagentPrototype> Reagent = "RMCNapalmUT";
 
@@ -23,4 +26,7 @@ public sealed partial class RMCFlamerChainComponent : Component
 
     [DataField, AutoNetworkedField]
     public int MaxDuration = 24;
+
+    [DataField, AutoNetworkedField]
+    public int FuelPressure = 1;
 }

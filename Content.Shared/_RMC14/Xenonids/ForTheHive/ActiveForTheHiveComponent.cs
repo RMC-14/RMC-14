@@ -1,5 +1,6 @@
 ﻿using Content.Shared.FixedPoint;
 using Content.Shared.Damage;
+using Content.Shared._RMC14.Xenonids.Acid;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 using Robust.Shared.Audio;
@@ -51,6 +52,9 @@ public sealed partial class ActiveForTheHiveComponent : Component
 
     [DataField]
     public EntProtoId Acid = "XenoAcidNormal";
+
+    [DataField]
+    public XenoAcidStrength AcidStrength = XenoAcidStrength.Normal;
 
     [DataField]
     public TimeSpan AcidTime = TimeSpan.FromSeconds(255);

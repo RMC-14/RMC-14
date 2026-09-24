@@ -8,7 +8,7 @@ namespace Content.Shared._RMC14.Xenonids.Charge;
 
 // TODO RMC14: vending machines, electrified fences, disposal unit collision, bed, filing cabinet, fuel tanks, prison windows, mounted machineguns, power loaders,
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(XenoChargeSystem))]
+[Access(typeof(XenoToggleChargingSystem))]
 public sealed partial class XenoToggleChargingDamageComponent : Component
 {
     [DataField, AutoNetworkedField]

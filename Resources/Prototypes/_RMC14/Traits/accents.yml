@@ -51,12 +51,13 @@
   name: trait-accentless-name
   description: trait-accentless-desc
   category: SpeechTraits
-  cost: 2
+  cost: 0
   components:
   - type: Accentless
     removes:
     - type: LizardAccent
     - type: MothAccent
+    - type: VulpkaninAccent
     - type: ReplacementAccent
       accent: dwarf
 

@@ -1,0 +1,127 @@
+- type: entity
+  parent: [RMCBaseSlideMagazineVisuals, CMWeaponPistolBase]
+  id: CMWeaponPistolM1911
+  name: M1911 service pistol
+  description: A timeless classic since the first World War, produced in limited amount by AEGIS after their acquisition of Colt's Manufacturing Company. Once standard issue for the UNMC, now back order only. Chambered in .45 ACP.
+  components:
+  - type: Tag
+    tags:
+    - Sidearm
+    - CMWeaponPistolM1911
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.15
+  - type: RMCSelectiveFire
+    scatterWielded: 10
+    scatterUnwielded: 10
+    baseFireRate: 4
+    burstScatterMult: 5
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m1911.ogg
+      params:
+        pitch: 0.95
+  - type: GunDamageModifier
+    multiplier: 1.25
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m1911.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m1911.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mk80_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazinePistolM1911
+        startingItem: CMMagazinePistolM1911
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentSuppressor
+          - RMCAttachmentSuppressorCompact
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBurstFireAssembly
+          - RMCAttachmentLaserSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.71, 0.095
+      rmc-aslot-rail: -0.065, 0.125
+      rmc-aslot-underbarrel: 0.312, -0.25
+
+- type: Tag
+  id: CMWeaponPistolM1911
+
+#.45 ACP reg
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: CMMagazinePistolM1911
+  name: M1911 magazine (.45 ACP)
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - CMMagazinePistolM1911
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgePistol45ACP
+    proto: CMCartridgePistol45ACP
+    capacity: 8
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m1911.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+
+- type: Tag
+  id: CMMagazinePistolM1911
+
+- type: entity
+  parent: CMBulletBase
+  id: CMBulletPistol45ACP
+  name: bullet (.45 ACP)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 55
+  - type: CMArmorPiercing
+    amount: 15
+
+- type: entity
+  id: CMCartridgePistol45ACP
+  name: cartridge (.45 ACP)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - CMCartridgePistol45ACP
+  - type: CartridgeAmmo
+    proto: CMBulletPistol45ACP
+
+- type: Tag
+  id: CMCartridgePistol45ACP

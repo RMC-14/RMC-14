@@ -13,6 +13,15 @@ namespace Content.IntegrationTests.Tests.Chemistry
     [TestOf(typeof(ReactionPrototype))]
     public sealed class TryAllReactionsTest
     {
+        // RMC14
+        private static readonly string[] NoCheckFinalSolution =
+        {
+            // These recipes create H2O, which almost instantly gets turned into Water.
+            // Stress on the almost, as before that happens it can trigger a higher priority reaction.
+            "RMCNapalm",
+            "RMCCLF3"
+        };
+
         [TestPrototypes]
         private const string Prototypes = @"
 - type: entity
@@ -98,6 +107,10 @@ namespace Content.IntegrationTests.Tests.Chemistry
 
                 await server.WaitAssertion(() =>
                 {
+                    // RMC14:
+                    if (NoCheckFinalSolution.Contains(reactionPrototype.ID))
+                        return;
+
                     //you just got linq'd fool
                     //(i'm sorry)
                     var foundProductsMap = reactionPrototype.Products

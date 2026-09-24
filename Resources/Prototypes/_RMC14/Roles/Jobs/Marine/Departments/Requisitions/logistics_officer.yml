@@ -1,0 +1,99 @@
+- type: job
+  parent: CMJobBase
+  id: CMQuartermaster
+  name: cm-job-name-quartermaster
+  description: cm-job-description-quartermaster
+  playTimeTracker: CMJobQuartermaster
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: CMRequisitions
+    time: 36000 # 10 hours
+  ranks:
+    RMCRankFirstLT:
+    - !type:RoleTimeRequirement
+      role: CMJobQuartermaster
+      time: 252000 # 70 hours
+    RMCRankSecondLT: []
+  weight: 5
+  startingGear: CMGearQuartermaster
+  icon: "CMJobIconQuartermaster"
+  requireAdminNotify: true
+  joinNotifyCrew: false
+  marineAuthorityLevel: 8
+  supervisors: rmc-job-supervisors-commander
+  accessGroups:
+  - QuarterMaster
+  roleWeight: 0.25
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillEndurance: 1
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillIntel: 1
+        RMCSkillJtac: 3
+        RMCSkillLeadership: 2
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 1
+        RMCSkillPowerLoader: 2
+    - type: CMVendorUser
+      id: CMQuartermaster
+      points: 45
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-quartermaster
+    - type: ViewIntelObjectives
+    - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: ro
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_command
+    - type: RMCTrackable
+    - type: MutinyEligible
+    - type: RMCAwardRecommendation
+    - type: SeeNewPlayers
+
+- type: startingGear
+  id: CMGearQuartermaster
+  equipment:
+    jumpsuit: CMJumpsuitQM
+    shoes: CMBootsBlackFilled
+    head: RMCHeadCapQuartermaster
+    gloves: CMHandsInsulated
+    id: CMIDCardQuartermaster
+    ears: CMHeadsetQM
+    pocket1: CMFlash
+    pocket2: RMCPouchGeneralLarge
+  inhand:
+  - CMStampApproved
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointQuartermaster
+  name: Logistics Officer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMQuartermaster
+  - type: Sprite
+    state: ro_spawn
+
+- type: playTimeTracker
+  id: CMJobQuartermaster
+  isHumanoid: true
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleQM
+  name: The LO
+  description: The Logistics Officer.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: quartermaster

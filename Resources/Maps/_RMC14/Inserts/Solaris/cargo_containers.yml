@@ -1,0 +1,2277 @@
+meta:
+  format: 7
+  category: Grid
+  engineVersion: 264.0.2
+  forkId: ""
+  forkVersion: ""
+  time: 01/10/2026 19:57:45
+  entityCount: 288
+maps: []
+grids:
+- 1
+orphans:
+- 1
+nullspace: []
+tilemap:
+  0: Space
+  198: CMFloorPlating
+  2: CMFloorSteelPlanet
+  4: CMFloorSteelPlanetBot
+  1: CMFloorSteelPlanetDelivery
+  5: CMFloorSteelPlanetRedFull
+  6: RMCFloorSteelPlanetLoadingArea0
+  3: RMCFloorSteelPlanetLoadingArea2
+  7: RMCFloorSteelPlanetLoadingArea3
+entities:
+- proto: ""
+  entities:
+  - uid: 1
+    components:
+    - type: MetaData
+      name: grid
+    - type: Transform
+      parent: invalid
+    - type: MapGrid
+      chunks:
+        0,0:
+          ind: 0,0
+          tiles: xgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAAQAAAAAAAAEAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAADGAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAABAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAQAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAxgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAMYAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAAEAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAwAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAADGAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAADGAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAxgAAAAAAAAIAAAAAAAAFAAAAAAAABQAAAAAAAAUAAAAAAAACAAAAAAAAxgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAADAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAEAAAAAAAACAAAAAAAABQAAAAAAAAIAAAAAAAAFAAAAAAAAAgAAAAAAAAEAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAABAAAAAAAAAgAAAAAAAAUAAAAAAAACAAAAAAAABQAAAAAAAAIAAAAAAAABAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAxgAAAAAAAAIAAAAAAAAFAAAAAAAABQAAAAAAAAUAAAAAAAACAAAAAAAAxgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAMYAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAMYAAAAAAAACAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAAEAAAAAAADGAAAAAAAAAgAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAIAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAAABAAAAAAAAxgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAABAAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAxgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAMYAAAAAAAACAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAAAgAAAAAAAAQAAAAAAAACAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAAAgAAAAAAAMYAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAADGAAAAAAAAAgAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAIAAAAAAAAEAAAAAAAAAgAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAIAAAAAAADGAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAxgAAAAAAAMYAAAAAAAAGAAAAAAAAAgAAAAAAAAYAAAAAAAACAAAAAAAABgAAAAAAAAIAAAAAAAAGAAAAAAAAAgAAAAAAAAYAAAAAAAACAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAAQAAAAAAAA==
+          version: 7
+        0,1:
+          ind: 0,1
+          tiles: AwAAAAAAAAEAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAxgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAMAAAAAAAABAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAMYAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAADAAAAAAAAAQAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAADGAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+          version: 7
+        1,0:
+          ind: 1,0
+          tiles: xgAAAAAAAMYAAAAAAADGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAAAAAAACAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABwAAAAAAAAIAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAxgAAAAAAAMYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAIAAAAAAADGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAACAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAgAAAAAAAMYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAMYAAAAAAADGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+          version: 7
+        1,1:
+          ind: 1,1
+          tiles: AgAAAAAAAAIAAAAAAADGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAACAAAAAAAAxgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAgAAAAAAAMYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+          version: 7
+    - type: Broadphase
+    - type: Physics
+      bodyStatus: InAir
+      angularDamping: 0.05
+      linearDamping: 0.05
+      fixedRotation: False
+      bodyType: Dynamic
+    - type: Fixtures
+      fixtures: {}
+    - type: OccluderTree
+    - type: SpreaderGrid
+    - type: Shuttle
+      dampingModifier: 0.25
+    - type: GridPathfinding
+    - type: Gravity
+      gravityShakeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/alert.ogg
+    - type: DecalGrid
+      chunkCollection:
+        version: 2
+        nodes:
+        - node:
+            color: '#FFFFFFFF'
+            id: Dirt
+          decals:
+            20: 5,18
+            21: 6,13
+            22: 7,13
+            23: 7,14
+            24: 7,11
+            25: 8,11
+            26: 4,5
+            27: 4,6
+            28: 5,6
+            29: 4,2
+            30: 4,2
+            31: 9,3
+            32: 12,3
+            33: 13,4
+            34: 11,7
+            35: 12,7
+            37: 12,8
+            38: 14,7
+            39: 12,7
+            40: 13,7
+            41: 13,7
+            42: 15,9
+            43: 16,9
+            44: 14,8
+            45: 14,13
+            46: 15,14
+            47: 16,14
+            48: 16,15
+            49: 16,16
+            50: 14,18
+            51: 14,17
+            52: 15,17
+            71: 7,13
+            72: 2,17
+            73: 3,17
+            74: 3,17
+            106: 15,15
+            107: 16,15
+            108: 5,6
+            109: 7,7
+            110: 9,3
+            111: 10,0
+        - node:
+            cleanable: True
+            color: '#FFFFFFFF'
+            id: Dirt
+          decals:
+            19: 3,16
+            91: 3,12
+            92: 3,12
+            93: 4,12
+            94: 13,8
+            95: 14,8
+            96: 15,7
+            97: 16,13
+            98: 16,14
+            99: 16,16
+            100: 15,16
+            101: 3,2
+            102: 8,7
+            103: 7,7
+            104: 14,14
+            105: 15,14
+            114: 3,13
+            115: 4,13
+            116: 14,3
+            117: 11,7
+            118: 16,9
+        - node:
+            color: '#FFFFFFFF'
+            id: DirtHeavy
+          decals:
+            75: 6,18
+            76: 3,7
+            77: 13,3
+            78: 15,13
+            90: 11,8
+        - node:
+            color: '#FFFFFFFF'
+            id: DirtHeavyMonotile
+          decals:
+            79: 8,14
+            80: 5,5
+            81: 1,3
+            82: 14,4
+            89: 11,8
+        - node:
+            color: '#FFFFFFFF'
+            id: DirtLight
+          decals:
+            83: 11,15
+            84: 16,8
+            86: 15,18
+            87: 14,4
+            88: 3,7
+        - node:
+            color: '#FFFFFFFF'
+            id: DirtMedium
+          decals:
+            85: 16,17
+    - type: GridAtmosphere
+      version: 2
+      data:
+        chunkSize: 4
+    - type: GasTileOverlay
+    - type: RadiationGridResistance
+    - type: ImplicitRoof
+    - type: AreaGrid
+      labels: {}
+      areaEntities: {}
+      colors: {}
+      areas:
+        7,0: RMCAreaBigredv2OutsideCargo
+        7,1: RMCAreaBigredv2OutsideCargo
+        7,2: RMCAreaBigredv2OutsideCargo
+        7,3: RMCAreaBigredv2OutsideCargo
+        7,4: RMCAreaBigredv2OutsideCargo
+        7,5: RMCAreaBigredv2OutsideCargo
+        7,6: RMCAreaBigredv2OutsideCargo
+        7,7: RMCAreaBigredv2OutsideCargo
+        7,9: RMCAreaBigredv2OutsideCargo
+        7,10: RMCAreaBigredv2OutsideCargo
+        7,11: RMCAreaBigredv2OutsideCargo
+        7,12: RMCAreaBigredv2OutsideCargo
+        7,13: RMCAreaBigredv2OutsideCargo
+        7,14: RMCAreaBigredv2OutsideCargo
+        6,17: RMCAreaBigredv2OutsideCargo
+        7,18: RMCAreaBigredv2OutsideCargo
+        8,15: RMCAreaBigredv2OutsideCargo
+        7,8: RMCAreaBigredv2OutsideCargo
+        8,16: RMCAreaBigredv2OutsideCargo
+        6,0: RMCAreaBigredv2OutsideCargo
+        6,1: RMCAreaBigredv2OutsideCargo
+        6,2: RMCAreaBigredv2OutsideCargo
+        6,3: RMCAreaBigredv2OutsideCargo
+        6,4: RMCAreaBigredv2OutsideCargo
+        6,5: RMCAreaBigredv2OutsideCargo
+        6,8: RMCAreaBigredv2OutsideCargo
+        6,7: RMCAreaBigredv2OutsideCargo
+        6,6: RMCAreaBigredv2OutsideCargo
+        6,9: RMCAreaBigredv2OutsideCargo
+        6,10: RMCAreaBigredv2OutsideCargo
+        6,11: RMCAreaBigredv2OutsideCargo
+        6,12: RMCAreaBigredv2OutsideCargo
+        6,13: RMCAreaBigredv2OutsideCargo
+        6,14: RMCAreaBigredv2OutsideCargo
+        6,18: RMCAreaBigredv2OutsideCargo
+        7,15: RMCAreaBigredv2OutsideCargo
+        7,16: RMCAreaBigredv2OutsideCargo
+        7,17: RMCAreaBigredv2OutsideCargo
+        5,0: RMCAreaBigredv2OutsideCargo
+        5,1: RMCAreaBigredv2OutsideCargo
+        5,2: RMCAreaBigredv2OutsideCargo
+        5,3: RMCAreaBigredv2OutsideCargo
+        5,4: RMCAreaBigredv2OutsideCargo
+        5,5: RMCAreaBigredv2OutsideCargo
+        5,6: RMCAreaBigredv2OutsideCargo
+        5,7: RMCAreaBigredv2OutsideCargo
+        5,8: RMCAreaBigredv2OutsideCargo
+        5,9: RMCAreaBigredv2OutsideCargo
+        5,10: RMCAreaBigredv2OutsideCargo
+        5,11: RMCAreaBigredv2OutsideCargo
+        5,12: RMCAreaBigredv2OutsideCargo
+        9,17: RMCAreaBigredv2OutsideCargo
+        9,16: RMCAreaBigredv2OutsideCargo
+        9,15: RMCAreaBigredv2OutsideCargo
+        8,17: RMCAreaBigredv2OutsideCargo
+        8,18: RMCAreaBigredv2OutsideCargo
+        9,18: RMCAreaBigredv2OutsideCargo
+        4,0: RMCAreaBigredv2OutsideCargo
+        4,1: RMCAreaBigredv2OutsideCargo
+        4,2: RMCAreaBigredv2OutsideCargo
+        4,3: RMCAreaBigredv2OutsideCargo
+        4,4: RMCAreaBigredv2OutsideCargo
+        4,5: RMCAreaBigredv2OutsideCargo
+        4,6: RMCAreaBigredv2OutsideCargo
+        4,7: RMCAreaBigredv2OutsideCargo
+        4,8: RMCAreaBigredv2OutsideCargo
+        4,9: RMCAreaBigredv2OutsideCargo
+        4,10: RMCAreaBigredv2OutsideCargo
+        4,11: RMCAreaBigredv2OutsideCargo
+        4,12: RMCAreaBigredv2OutsideCargo
+        17,16: RMCAreaBigredv2OutsideCargo
+        12,17: RMCAreaBigredv2OutsideCargo
+        15,16: RMCAreaBigredv2OutsideCargo
+        16,18: RMCAreaBigredv2OutsideCargo
+        16,17: RMCAreaBigredv2OutsideCargo
+        10,15: RMCAreaBigredv2OutsideCargo
+        3,0: RMCAreaBigredv2OutsideCargo
+        3,1: RMCAreaBigredv2OutsideCargo
+        3,2: RMCAreaBigredv2OutsideCargo
+        3,3: RMCAreaBigredv2OutsideCargo
+        3,4: RMCAreaBigredv2OutsideCargo
+        3,5: RMCAreaBigredv2OutsideCargo
+        3,6: RMCAreaBigredv2OutsideCargo
+        3,7: RMCAreaBigredv2OutsideCargo
+        3,8: RMCAreaBigredv2OutsideCargo
+        3,9: RMCAreaBigredv2OutsideCargo
+        3,10: RMCAreaBigredv2OutsideCargo
+        3,11: RMCAreaBigredv2OutsideCargo
+        3,12: RMCAreaBigredv2OutsideCargo
+        14,15: RMCAreaBigredv2OutsideCargo
+        12,18: RMCAreaBigredv2OutsideCargo
+        12,16: RMCAreaBigredv2OutsideCargo
+        18,15: RMCAreaBigredv2OutsideCargo
+        18,17: RMCAreaBigredv2OutsideCargo
+        11,16: RMCAreaBigredv2OutsideCargo
+        2,0: RMCAreaBigredv2OutsideCargo
+        2,1: RMCAreaBigredv2OutsideCargo
+        2,2: RMCAreaBigredv2OutsideCargo
+        2,3: RMCAreaBigredv2OutsideCargo
+        2,4: RMCAreaBigredv2OutsideCargo
+        2,5: RMCAreaBigredv2OutsideCargo
+        2,6: RMCAreaBigredv2OutsideCargo
+        2,7: RMCAreaBigredv2OutsideCargo
+        2,8: RMCAreaBigredv2OutsideCargo
+        2,9: RMCAreaBigredv2OutsideCargo
+        2,10: RMCAreaBigredv2OutsideCargo
+        2,11: RMCAreaBigredv2OutsideCargo
+        2,12: RMCAreaBigredv2OutsideCargo
+        13,15: RMCAreaBigredv2OutsideCargo
+        17,15: RMCAreaBigredv2OutsideCargo
+        12,15: RMCAreaBigredv2OutsideCargo
+        18,16: RMCAreaBigredv2OutsideCargo
+        18,18: RMCAreaBigredv2OutsideCargo
+        11,17: RMCAreaBigredv2OutsideCargo
+        1,0: RMCAreaBigredv2OutsideCargo
+        1,1: RMCAreaBigredv2OutsideCargo
+        1,2: RMCAreaBigredv2OutsideCargo
+        1,3: RMCAreaBigredv2OutsideCargo
+        1,4: RMCAreaBigredv2OutsideCargo
+        1,5: RMCAreaBigredv2OutsideCargo
+        1,6: RMCAreaBigredv2OutsideCargo
+        1,7: RMCAreaBigredv2OutsideCargo
+        1,8: RMCAreaBigredv2OutsideCargo
+        1,9: RMCAreaBigredv2OutsideCargo
+        1,10: RMCAreaBigredv2OutsideCargo
+        1,11: RMCAreaBigredv2OutsideCargo
+        1,12: RMCAreaBigredv2OutsideCargo
+        17,18: RMCAreaBigredv2OutsideCargo
+        17,17: RMCAreaBigredv2OutsideCargo
+        11,18: RMCAreaBigredv2OutsideCargo
+        15,17: RMCAreaBigredv2OutsideCargo
+        15,18: RMCAreaBigredv2OutsideCargo
+        11,15: RMCAreaBigredv2OutsideCargo
+        0,0: RMCAreaBigredv2OutsideCargo
+        0,1: RMCAreaBigredv2OutsideCargo
+        0,2: RMCAreaBigredv2OutsideCargo
+        0,3: RMCAreaBigredv2OutsideCargo
+        0,4: RMCAreaBigredv2OutsideCargo
+        0,5: RMCAreaBigredv2OutsideCargo
+        0,6: RMCAreaBigredv2OutsideCargo
+        0,7: RMCAreaBigredv2OutsideCargo
+        0,8: RMCAreaBigredv2OutsideCargo
+        0,9: RMCAreaBigredv2OutsideCargo
+        0,10: RMCAreaBigredv2OutsideCargo
+        0,11: RMCAreaBigredv2OutsideCargo
+        0,12: RMCAreaBigredv2OutsideCargo
+        0,13: RMCAreaBigredv2OutsideCargo
+        0,14: RMCAreaBigredv2OutsideCargo
+        10,16: RMCAreaBigredv2OutsideCargo
+        10,17: RMCAreaBigredv2OutsideCargo
+        10,18: RMCAreaBigredv2OutsideCargo
+        16,16: RMCAreaBigredv2OutsideCargo
+        0,17: RMCAreaBigredv2OutsideCargo
+        0,18: RMCAreaBigredv2OutsideCargo
+        6,15: RMCAreaBigredv2OutsideCargo
+        6,16: RMCAreaBigredv2OutsideCargo
+        8,14: RMCAreaBigredv2OutsideCargo
+        8,13: RMCAreaBigredv2OutsideCargo
+        8,12: RMCAreaBigredv2OutsideCargo
+        8,11: RMCAreaBigredv2OutsideCargo
+        8,10: RMCAreaBigredv2OutsideCargo
+        8,9: RMCAreaBigredv2OutsideCargo
+        8,8: RMCAreaBigredv2OutsideCargo
+        8,7: RMCAreaBigredv2OutsideCargo
+        8,6: RMCAreaBigredv2OutsideCargo
+        8,5: RMCAreaBigredv2OutsideCargo
+        8,4: RMCAreaBigredv2OutsideCargo
+        8,3: RMCAreaBigredv2OutsideCargo
+        8,2: RMCAreaBigredv2OutsideCargo
+        8,1: RMCAreaBigredv2OutsideCargo
+        0,16: RMCAreaBigredv2OutsideCargo
+        0,15: RMCAreaBigredv2OutsideCargo
+        5,18: RMCAreaBigredv2OutsideCargo
+        5,17: RMCAreaBigredv2OutsideCargo
+        9,14: RMCAreaBigredv2OutsideCargo
+        9,13: RMCAreaBigredv2OutsideCargo
+        9,12: RMCAreaBigredv2OutsideCargo
+        9,11: RMCAreaBigredv2OutsideCargo
+        9,10: RMCAreaBigredv2OutsideCargo
+        9,9: RMCAreaBigredv2OutsideCargo
+        9,8: RMCAreaBigredv2OutsideCargo
+        9,7: RMCAreaBigredv2OutsideCargo
+        9,6: RMCAreaBigredv2OutsideCargo
+        9,5: RMCAreaBigredv2OutsideCargo
+        9,4: RMCAreaBigredv2OutsideCargo
+        9,3: RMCAreaBigredv2OutsideCargo
+        9,2: RMCAreaBigredv2OutsideCargo
+        9,1: RMCAreaBigredv2OutsideCargo
+        4,16: RMCAreaBigredv2OutsideCargo
+        4,17: RMCAreaBigredv2OutsideCargo
+        5,14: RMCAreaBigredv2OutsideCargo
+        5,15: RMCAreaBigredv2OutsideCargo
+        10,14: RMCAreaBigredv2OutsideCargo
+        10,13: RMCAreaBigredv2OutsideCargo
+        10,12: RMCAreaBigredv2OutsideCargo
+        10,11: RMCAreaBigredv2OutsideCargo
+        10,10: RMCAreaBigredv2OutsideCargo
+        10,9: RMCAreaBigredv2OutsideCargo
+        10,8: RMCAreaBigredv2OutsideCargo
+        10,7: RMCAreaBigredv2OutsideCargo
+        10,6: RMCAreaBigredv2OutsideCargo
+        10,5: RMCAreaBigredv2OutsideCargo
+        10,4: RMCAreaBigredv2OutsideCargo
+        10,3: RMCAreaBigredv2OutsideCargo
+        10,2: RMCAreaBigredv2OutsideCargo
+        10,1: RMCAreaBigredv2OutsideCargo
+        4,15: RMCAreaBigredv2OutsideCargo
+        4,18: RMCAreaBigredv2OutsideCargo
+        5,13: RMCAreaBigredv2OutsideCargo
+        5,16: RMCAreaBigredv2OutsideCargo
+        11,14: RMCAreaBigredv2OutsideCargo
+        11,13: RMCAreaBigredv2OutsideCargo
+        11,12: RMCAreaBigredv2OutsideCargo
+        11,11: RMCAreaBigredv2OutsideCargo
+        11,10: RMCAreaBigredv2OutsideCargo
+        11,9: RMCAreaBigredv2OutsideCargo
+        11,8: RMCAreaBigredv2OutsideCargo
+        11,7: RMCAreaBigredv2OutsideCargo
+        11,6: RMCAreaBigredv2OutsideCargo
+        11,5: RMCAreaBigredv2OutsideCargo
+        11,4: RMCAreaBigredv2OutsideCargo
+        11,3: RMCAreaBigredv2OutsideCargo
+        11,2: RMCAreaBigredv2OutsideCargo
+        11,1: RMCAreaBigredv2OutsideCargo
+        4,14: RMCAreaBigredv2OutsideCargo
+        4,13: RMCAreaBigredv2OutsideCargo
+        3,18: RMCAreaBigredv2OutsideCargo
+        3,17: RMCAreaBigredv2OutsideCargo
+        12,14: RMCAreaBigredv2OutsideCargo
+        12,13: RMCAreaBigredv2OutsideCargo
+        12,12: RMCAreaBigredv2OutsideCargo
+        12,11: RMCAreaBigredv2OutsideCargo
+        12,10: RMCAreaBigredv2OutsideCargo
+        12,9: RMCAreaBigredv2OutsideCargo
+        12,8: RMCAreaBigredv2OutsideCargo
+        12,7: RMCAreaBigredv2OutsideCargo
+        12,6: RMCAreaBigredv2OutsideCargo
+        12,4: RMCAreaBigredv2OutsideCargo
+        12,5: RMCAreaBigredv2OutsideCargo
+        12,3: RMCAreaBigredv2OutsideCargo
+        12,2: RMCAreaBigredv2OutsideCargo
+        12,1: RMCAreaBigredv2OutsideCargo
+        13,18: RMCAreaBigredv2OutsideCargo
+        13,17: RMCAreaBigredv2OutsideCargo
+        13,16: RMCAreaBigredv2OutsideCargo
+        3,16: RMCAreaBigredv2OutsideCargo
+        13,14: RMCAreaBigredv2OutsideCargo
+        13,13: RMCAreaBigredv2OutsideCargo
+        13,12: RMCAreaBigredv2OutsideCargo
+        13,11: RMCAreaBigredv2OutsideCargo
+        13,10: RMCAreaBigredv2OutsideCargo
+        13,9: RMCAreaBigredv2OutsideCargo
+        13,8: RMCAreaBigredv2OutsideCargo
+        13,7: RMCAreaBigredv2OutsideCargo
+        13,6: RMCAreaBigredv2OutsideCargo
+        13,5: RMCAreaBigredv2OutsideCargo
+        13,4: RMCAreaBigredv2OutsideCargo
+        13,3: RMCAreaBigredv2OutsideCargo
+        13,2: RMCAreaBigredv2OutsideCargo
+        13,1: RMCAreaBigredv2OutsideCargo
+        14,18: RMCAreaBigredv2OutsideCargo
+        14,17: RMCAreaBigredv2OutsideCargo
+        14,16: RMCAreaBigredv2OutsideCargo
+        3,13: RMCAreaBigredv2OutsideCargo
+        14,14: RMCAreaBigredv2OutsideCargo
+        14,13: RMCAreaBigredv2OutsideCargo
+        14,12: RMCAreaBigredv2OutsideCargo
+        14,11: RMCAreaBigredv2OutsideCargo
+        14,10: RMCAreaBigredv2OutsideCargo
+        14,9: RMCAreaBigredv2OutsideCargo
+        14,8: RMCAreaBigredv2OutsideCargo
+        14,7: RMCAreaBigredv2OutsideCargo
+        14,6: RMCAreaBigredv2OutsideCargo
+        14,5: RMCAreaBigredv2OutsideCargo
+        14,4: RMCAreaBigredv2OutsideCargo
+        14,3: RMCAreaBigredv2OutsideCargo
+        14,2: RMCAreaBigredv2OutsideCargo
+        14,1: RMCAreaBigredv2OutsideCargo
+        2,18: RMCAreaBigredv2OutsideCargo
+        3,14: RMCAreaBigredv2OutsideCargo
+        3,15: RMCAreaBigredv2OutsideCargo
+        15,15: RMCAreaBigredv2OutsideCargo
+        15,14: RMCAreaBigredv2OutsideCargo
+        15,13: RMCAreaBigredv2OutsideCargo
+        15,12: RMCAreaBigredv2OutsideCargo
+        15,11: RMCAreaBigredv2OutsideCargo
+        15,10: RMCAreaBigredv2OutsideCargo
+        15,9: RMCAreaBigredv2OutsideCargo
+        15,8: RMCAreaBigredv2OutsideCargo
+        15,7: RMCAreaBigredv2OutsideCargo
+        15,6: RMCAreaBigredv2OutsideCargo
+        15,5: RMCAreaBigredv2OutsideCargo
+        15,4: RMCAreaBigredv2OutsideCargo
+        15,3: RMCAreaBigredv2OutsideCargo
+        15,2: RMCAreaBigredv2OutsideCargo
+        15,1: RMCAreaBigredv2OutsideCargo
+        2,17: RMCAreaBigredv2OutsideCargo
+        1,18: RMCAreaBigredv2OutsideCargo
+        1,17: RMCAreaBigredv2OutsideCargo
+        16,15: RMCAreaBigredv2OutsideCargo
+        16,14: RMCAreaBigredv2OutsideCargo
+        16,13: RMCAreaBigredv2OutsideCargo
+        16,12: RMCAreaBigredv2OutsideCargo
+        16,11: RMCAreaBigredv2OutsideCargo
+        16,10: RMCAreaBigredv2OutsideCargo
+        16,9: RMCAreaBigredv2OutsideCargo
+        16,8: RMCAreaBigredv2OutsideCargo
+        16,7: RMCAreaBigredv2OutsideCargo
+        16,6: RMCAreaBigredv2OutsideCargo
+        16,5: RMCAreaBigredv2OutsideCargo
+        16,4: RMCAreaBigredv2OutsideCargo
+        16,3: RMCAreaBigredv2OutsideCargo
+        16,2: RMCAreaBigredv2OutsideCargo
+        16,1: RMCAreaBigredv2OutsideCargo
+        2,16: RMCAreaBigredv2OutsideCargo
+        2,13: RMCAreaBigredv2OutsideCargo
+        1,16: RMCAreaBigredv2OutsideCargo
+        1,13: RMCAreaBigredv2OutsideCargo
+        17,14: RMCAreaBigredv2OutsideCargo
+        17,13: RMCAreaBigredv2OutsideCargo
+        17,12: RMCAreaBigredv2OutsideCargo
+        17,11: RMCAreaBigredv2OutsideCargo
+        17,10: RMCAreaBigredv2OutsideCargo
+        17,9: RMCAreaBigredv2OutsideCargo
+        17,8: RMCAreaBigredv2OutsideCargo
+        17,7: RMCAreaBigredv2OutsideCargo
+        17,6: RMCAreaBigredv2OutsideCargo
+        17,5: RMCAreaBigredv2OutsideCargo
+        17,4: RMCAreaBigredv2OutsideCargo
+        17,3: RMCAreaBigredv2OutsideCargo
+        17,2: RMCAreaBigredv2OutsideCargo
+        17,1: RMCAreaBigredv2OutsideCargo
+        2,15: RMCAreaBigredv2OutsideCargo
+        2,14: RMCAreaBigredv2OutsideCargo
+        1,15: RMCAreaBigredv2OutsideCargo
+        1,14: RMCAreaBigredv2OutsideCargo
+        18,14: RMCAreaBigredv2OutsideCargo
+        18,13: RMCAreaBigredv2OutsideCargo
+        18,12: RMCAreaBigredv2OutsideCargo
+        18,11: RMCAreaBigredv2OutsideCargo
+        18,10: RMCAreaBigredv2OutsideCargo
+        18,9: RMCAreaBigredv2OutsideCargo
+        18,8: RMCAreaBigredv2OutsideCargo
+        18,7: RMCAreaBigredv2OutsideCargo
+        18,6: RMCAreaBigredv2OutsideCargo
+        18,5: RMCAreaBigredv2OutsideCargo
+        18,4: RMCAreaBigredv2OutsideCargo
+        18,3: RMCAreaBigredv2OutsideCargo
+        18,2: RMCAreaBigredv2OutsideCargo
+        18,1: RMCAreaBigredv2OutsideCargo
+        8,0: RMCAreaBigredv2OutsideEngineering
+        9,0: RMCAreaBigredv2OutsideEngineering
+        10,0: RMCAreaBigredv2OutsideEngineering
+        11,0: RMCAreaBigredv2OutsideEngineering
+        12,0: RMCAreaBigredv2OutsideEngineering
+        13,0: RMCAreaBigredv2OutsideEngineering
+        14,0: RMCAreaBigredv2OutsideEngineering
+        15,0: RMCAreaBigredv2OutsideEngineering
+        16,0: RMCAreaBigredv2OutsideEngineering
+        17,0: RMCAreaBigredv2OutsideEngineering
+        18,0: RMCAreaBigredv2OutsideEngineering
+- proto: CMAirlockGlassSecurityLockedColony
+  entities:
+  - uid: 146
+    components:
+    - type: MetaData
+      name: Cargo Bay Security
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 18.5,13.5
+      parent: 1
+- proto: CMAirlockRequisitionsLockedColony
+  entities:
+  - uid: 24
+    components:
+    - type: MetaData
+      name: Cargo Bay
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 5.5,11.5
+      parent: 1
+  - uid: 135
+    components:
+    - type: MetaData
+      name: Cargo Bay Quartermaster
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 7.5,2.5
+      parent: 1
+  - uid: 136
+    components:
+    - type: MetaData
+      name: Cargo Bay Quartermaster
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 0.5,2.5
+      parent: 1
+  - uid: 137
+    components:
+    - type: MetaData
+      name: Cargo Bay Quartermaster
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 3.5,4.5
+      parent: 1
+- proto: CMApcNoPower
+  entities:
+  - uid: 234
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 13.5,10.5
+      parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.5,-1.5
+- proto: CMASRSConsole
+  entities:
+  - uid: 225
+    components:
+    - type: MetaData
+      name: Supply ordering console
+    - type: Transform
+      pos: 4.5,1.5
+      parent: 1
+    missingComponents:
+    - CargoOrderConsole
+    - ActivatableUI
+    - ActivatableUIRequiresAccess
+    - AccessReader
+    - UserInterface
+    - Computer
+    - DeviceNetwork
+    - DeviceLinkSource
+    - CargoSellBlacklist
+    - EmitSoundOnUIOpen
+    - RequisitionsComputer
+- proto: CMAutolathe
+  entities:
+  - uid: 185
+    components:
+    - type: Transform
+      pos: 13.5,16.5
+      parent: 1
+- proto: CMChairOfficeDark
+  entities:
+  - uid: 238
+    components:
+    - type: Transform
+      pos: 2.5,2.5
+      parent: 1
+- proto: CMClosetEmergencyFilled
+  entities:
+  - uid: 182
+    components:
+    - type: Transform
+      pos: 10.5,18.5
+      parent: 1
+  - uid: 183
+    components:
+    - type: Transform
+      pos: 9.5,18.5
+      parent: 1
+- proto: CMClosetFireFilled
+  entities:
+  - uid: 184
+    components:
+    - type: Transform
+      pos: 11.5,18.5
+      parent: 1
+- proto: CMDoubleDoorGenericGlass
+  entities:
+  - uid: 138
+    components:
+    - type: MetaData
+      name: Cargo Bay
+    - type: Transform
+      pos: 0.5,8.5
+      parent: 1
+  - uid: 139
+    components:
+    - type: MetaData
+      name: Cargo Bay
+    - type: Transform
+      pos: 6.5,8.5
+      parent: 1
+  - uid: 140
+    components:
+    - type: MetaData
+      name: Cargo Offices
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 15.5,11.5
+      parent: 1
+  - uid: 141
+    components:
+    - type: MetaData
+      name: Cargo Offices
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 15.5,15.5
+      parent: 1
+  - uid: 142
+    components:
+    - type: MetaData
+      name: Cargo Offices
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 16.5,15.5
+      parent: 1
+  - uid: 143
+    components:
+    - type: MetaData
+      name: Cargo Offices
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 16.5,11.5
+      parent: 1
+  - uid: 144
+    components:
+    - type: MetaData
+      name: Cargo Bay
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 6.5,7.5
+      parent: 1
+  - uid: 145
+    components:
+    - type: MetaData
+      name: Cargo Bay
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 0.5,7.5
+      parent: 1
+  - uid: 149
+    components:
+    - type: MetaData
+      name: Engineering Complex
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 9.5,0.5
+      parent: 1
+  - uid: 150
+    components:
+    - type: MetaData
+      name: Engineering Complex
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 10.5,0.5
+      parent: 1
+- proto: CMFilingCabinet
+  entities:
+  - uid: 205
+    components:
+    - type: Transform
+      pos: 6.5,3.5
+      parent: 1
+  - uid: 206
+    components:
+    - type: Transform
+      pos: 5.5,3.5
+      parent: 1
+  - uid: 207
+    components:
+    - type: Transform
+      pos: 4.5,3.5
+      parent: 1
+- proto: CMSheetGlass
+  entities:
+  - uid: 226
+    components:
+    - type: Transform
+      pos: 2.5,10.5
+      parent: 1
+- proto: CMTable
+  entities:
+  - uid: 186
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.5,10.5
+      parent: 1
+  - uid: 187
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 1.5,10.5
+      parent: 1
+  - uid: 188
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 13.5,18.5
+      parent: 1
+  - uid: 189
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 13.5,17.5
+      parent: 1
+  - uid: 190
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 1.5,5.5
+      parent: 1
+  - uid: 191
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 5.5,6.5
+      parent: 1
+  - uid: 192
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 5.5,5.5
+      parent: 1
+  - uid: 193
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 3.5,1.5
+      parent: 1
+  - uid: 194
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.5,1.5
+      parent: 1
+  - uid: 195
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 1.5,1.5
+      parent: 1
+  - uid: 196
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 11.5,1.5
+      parent: 1
+  - uid: 197
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 12.5,1.5
+      parent: 1
+  - uid: 198
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 13.5,1.5
+      parent: 1
+  - uid: 199
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 14.5,1.5
+      parent: 1
+  - uid: 200
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,1.5
+      parent: 1
+  - uid: 201
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 16.5,1.5
+      parent: 1
+  - uid: 202
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 17.5,1.5
+      parent: 1
+  - uid: 203
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 18.5,7.5
+      parent: 1
+- proto: CMVentPump
+  entities:
+  - uid: 67
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 11.5,16.5
+      parent: 1
+  - uid: 68
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 13.5,17.5
+      parent: 1
+  - uid: 69
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 12.5,8.5
+      parent: 1
+  - uid: 70
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 3.5,1.5
+      parent: 1
+- proto: CMWallSolaris
+  entities:
+  - uid: 71
+    components:
+    - type: Transform
+      pos: 0.5,11.5
+      parent: 1
+  - uid: 72
+    components:
+    - type: Transform
+      pos: 0.5,10.5
+      parent: 1
+  - uid: 73
+    components:
+    - type: Transform
+      pos: 0.5,9.5
+      parent: 1
+  - uid: 74
+    components:
+    - type: Transform
+      pos: 1.5,11.5
+      parent: 1
+  - uid: 75
+    components:
+    - type: Transform
+      pos: 4.5,11.5
+      parent: 1
+  - uid: 76
+    components:
+    - type: Transform
+      pos: 6.5,11.5
+      parent: 1
+  - uid: 77
+    components:
+    - type: Transform
+      pos: 6.5,10.5
+      parent: 1
+  - uid: 78
+    components:
+    - type: Transform
+      pos: 6.5,9.5
+      parent: 1
+  - uid: 79
+    components:
+    - type: Transform
+      pos: 6.5,6.5
+      parent: 1
+  - uid: 80
+    components:
+    - type: Transform
+      pos: 6.5,5.5
+      parent: 1
+  - uid: 81
+    components:
+    - type: Transform
+      pos: 6.5,4.5
+      parent: 1
+  - uid: 82
+    components:
+    - type: Transform
+      pos: 7.5,4.5
+      parent: 1
+  - uid: 83
+    components:
+    - type: Transform
+      pos: 0.5,4.5
+      parent: 1
+  - uid: 84
+    components:
+    - type: Transform
+      pos: 1.5,4.5
+      parent: 1
+  - uid: 85
+    components:
+    - type: Transform
+      pos: 2.5,4.5
+      parent: 1
+  - uid: 86
+    components:
+    - type: Transform
+      pos: 0.5,6.5
+      parent: 1
+  - uid: 87
+    components:
+    - type: Transform
+      pos: 0.5,5.5
+      parent: 1
+  - uid: 88
+    components:
+    - type: Transform
+      pos: 0.5,3.5
+      parent: 1
+  - uid: 89
+    components:
+    - type: Transform
+      pos: 0.5,1.5
+      parent: 1
+  - uid: 90
+    components:
+    - type: Transform
+      pos: 0.5,0.5
+      parent: 1
+  - uid: 91
+    components:
+    - type: Transform
+      pos: 1.5,0.5
+      parent: 1
+  - uid: 92
+    components:
+    - type: Transform
+      pos: 6.5,0.5
+      parent: 1
+  - uid: 93
+    components:
+    - type: Transform
+      pos: 7.5,0.5
+      parent: 1
+  - uid: 94
+    components:
+    - type: Transform
+      pos: 0.5,15.5
+      parent: 1
+  - uid: 95
+    components:
+    - type: Transform
+      pos: 12.5,18.5
+      parent: 1
+  - uid: 96
+    components:
+    - type: Transform
+      pos: 12.5,17.5
+      parent: 1
+  - uid: 97
+    components:
+    - type: Transform
+      pos: 12.5,16.5
+      parent: 1
+  - uid: 98
+    components:
+    - type: Transform
+      pos: 12.5,15.5
+      parent: 1
+  - uid: 99
+    components:
+    - type: Transform
+      pos: 13.5,15.5
+      parent: 1
+  - uid: 100
+    components:
+    - type: Transform
+      pos: 14.5,15.5
+      parent: 1
+  - uid: 101
+    components:
+    - type: Transform
+      pos: 17.5,15.5
+      parent: 1
+  - uid: 102
+    components:
+    - type: Transform
+      pos: 18.5,15.5
+      parent: 1
+  - uid: 103
+    components:
+    - type: Transform
+      pos: 18.5,16.5
+      parent: 1
+  - uid: 104
+    components:
+    - type: Transform
+      pos: 18.5,11.5
+      parent: 1
+  - uid: 105
+    components:
+    - type: Transform
+      pos: 17.5,11.5
+      parent: 1
+  - uid: 106
+    components:
+    - type: Transform
+      pos: 14.5,11.5
+      parent: 1
+  - uid: 107
+    components:
+    - type: Transform
+      pos: 13.5,11.5
+      parent: 1
+  - uid: 108
+    components:
+    - type: Transform
+      pos: 12.5,11.5
+      parent: 1
+  - uid: 277
+    components:
+    - type: Transform
+      pos: 1.5,15.5
+      parent: 1
+- proto: CMWallSolarisReinforced
+  entities:
+  - uid: 109
+    components:
+    - type: Transform
+      pos: 8.5,0.5
+      parent: 1
+  - uid: 110
+    components:
+    - type: Transform
+      pos: 11.5,0.5
+      parent: 1
+  - uid: 111
+    components:
+    - type: Transform
+      pos: 12.5,0.5
+      parent: 1
+  - uid: 112
+    components:
+    - type: Transform
+      pos: 13.5,0.5
+      parent: 1
+  - uid: 113
+    components:
+    - type: Transform
+      pos: 14.5,0.5
+      parent: 1
+  - uid: 114
+    components:
+    - type: Transform
+      pos: 15.5,0.5
+      parent: 1
+  - uid: 115
+    components:
+    - type: Transform
+      pos: 16.5,0.5
+      parent: 1
+  - uid: 116
+    components:
+    - type: Transform
+      pos: 17.5,0.5
+      parent: 1
+  - uid: 117
+    components:
+    - type: Transform
+      pos: 18.5,0.5
+      parent: 1
+- proto: CMWindowSolaris
+  entities:
+  - uid: 2
+    components:
+    - type: Transform
+      pos: 18.5,18.5
+      parent: 1
+  - uid: 118
+    components:
+    - type: Transform
+      pos: 2.5,0.5
+      parent: 1
+  - uid: 119
+    components:
+    - type: Transform
+      pos: 3.5,0.5
+      parent: 1
+  - uid: 120
+    components:
+    - type: Transform
+      pos: 4.5,0.5
+      parent: 1
+  - uid: 121
+    components:
+    - type: Transform
+      pos: 5.5,0.5
+      parent: 1
+  - uid: 122
+    components:
+    - type: Transform
+      pos: 0.5,14.5
+      parent: 1
+  - uid: 123
+    components:
+    - type: Transform
+      pos: 0.5,13.5
+      parent: 1
+  - uid: 124
+    components:
+    - type: Transform
+      pos: 0.5,12.5
+      parent: 1
+  - uid: 125
+    components:
+    - type: Transform
+      pos: 18.5,17.5
+      parent: 1
+  - uid: 126
+    components:
+    - type: Transform
+      pos: 18.5,14.5
+      parent: 1
+  - uid: 127
+    components:
+    - type: Transform
+      pos: 18.5,12.5
+      parent: 1
+  - uid: 128
+    components:
+    - type: Transform
+      pos: 12.5,14.5
+      parent: 1
+  - uid: 129
+    components:
+    - type: Transform
+      pos: 12.5,13.5
+      parent: 1
+  - uid: 130
+    components:
+    - type: Transform
+      pos: 12.5,12.5
+      parent: 1
+  - uid: 131
+    components:
+    - type: Transform
+      pos: 7.5,3.5
+      parent: 1
+  - uid: 132
+    components:
+    - type: Transform
+      pos: 7.5,1.5
+      parent: 1
+  - uid: 133
+    components:
+    - type: Transform
+      pos: 4.5,4.5
+      parent: 1
+  - uid: 134
+    components:
+    - type: Transform
+      pos: 5.5,4.5
+      parent: 1
+  - uid: 147
+    components:
+    - type: Transform
+      pos: 2.5,11.5
+      parent: 1
+  - uid: 148
+    components:
+    - type: Transform
+      pos: 3.5,11.5
+      parent: 1
+- proto: RMCBarrelBlue
+  entities:
+  - uid: 164
+    components:
+    - type: Transform
+      pos: 9.5,10.5
+      parent: 1
+  - uid: 165
+    components:
+    - type: Transform
+      pos: 3.5,10.5
+      parent: 1
+  - uid: 166
+    components:
+    - type: Transform
+      pos: 15.5,6.5
+      parent: 1
+  - uid: 269
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.5,13.5
+      parent: 1
+- proto: RMCBarricadeWood
+  entities:
+  - uid: 168
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 0.5,16.5
+      parent: 1
+  - uid: 169
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 0.5,17.5
+      parent: 1
+  - uid: 170
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 0.5,18.5
+      parent: 1
+  - uid: 171
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 1.5,17.5
+      parent: 1
+  - uid: 172
+    components:
+    - type: Transform
+      pos: 10.5,1.5
+      parent: 1
+  - uid: 173
+    components:
+    - type: Transform
+      pos: 9.5,1.5
+      parent: 1
+- proto: RMCContainerApocraphyLeft
+  entities:
+  - uid: 152
+    components:
+    - type: Transform
+      pos: 8.5,13.5
+      parent: 1
+- proto: RMCContainerBlueMiddle
+  entities:
+  - uid: 155
+    components:
+    - type: Transform
+      pos: 9.5,11.5
+      parent: 1
+- proto: RMCContainerBlueRight
+  entities:
+  - uid: 156
+    components:
+    - type: Transform
+      pos: 10.5,11.5
+      parent: 1
+- proto: RMCContainerFujinLeft
+  entities:
+  - uid: 157
+    components:
+    - type: Transform
+      pos: 8.5,11.5
+      parent: 1
+- proto: RMCContainerGreenMiddle
+  entities:
+  - uid: 276
+    components:
+    - type: Transform
+      pos: 3.5,14.5
+      parent: 1
+- proto: RMCContainerGreenRight
+  entities:
+  - uid: 272
+    components:
+    - type: Transform
+      pos: 4.5,14.5
+      parent: 1
+- proto: RMCContainerPathosLeft
+  entities:
+  - uid: 273
+    components:
+    - type: Transform
+      pos: 2.5,14.5
+      parent: 1
+- proto: RMCContainerRedMiddle
+  entities:
+  - uid: 153
+    components:
+    - type: Transform
+      pos: 9.5,13.5
+      parent: 1
+- proto: RMCContainerRedRight
+  entities:
+  - uid: 154
+    components:
+    - type: Transform
+      pos: 10.5,13.5
+      parent: 1
+- proto: RMCContainerTartarusLeft
+  entities:
+  - uid: 158
+    components:
+    - type: Transform
+      pos: 13.5,6.5
+      parent: 1
+  - uid: 159
+    components:
+    - type: Transform
+      pos: 12.5,4.5
+      parent: 1
+  - uid: 160
+    components:
+    - type: Transform
+      pos: 14.5,4.5
+      parent: 1
+- proto: RMCContainerTartarusRight
+  entities:
+  - uid: 161
+    components:
+    - type: Transform
+      pos: 14.5,6.5
+      parent: 1
+  - uid: 162
+    components:
+    - type: Transform
+      pos: 13.5,4.5
+      parent: 1
+  - uid: 163
+    components:
+    - type: Transform
+      pos: 15.5,4.5
+      parent: 1
+- proto: RMCCrateLarge
+  entities:
+  - uid: 151
+    components:
+    - type: Transform
+      pos: 7.5,5.5
+      parent: 1
+  - uid: 178
+    components:
+    - type: Transform
+      pos: 10.5,10.5
+      parent: 1
+  - uid: 179
+    components:
+    - type: Transform
+      pos: 6.5,14.5
+      parent: 1
+  - uid: 180
+    components:
+    - type: Transform
+      pos: 6.5,18.5
+      parent: 1
+  - uid: 259
+    components:
+    - type: Transform
+      pos: 10.5,15.5
+      parent: 1
+  - uid: 271
+    components:
+    - type: Transform
+      pos: 3.5,13.5
+      parent: 1
+  - uid: 274
+    components:
+    - type: Transform
+      pos: 5.5,15.5
+      parent: 1
+  - uid: 275
+    components:
+    - type: Transform
+      pos: 4.5,18.5
+      parent: 1
+- proto: RMCDecalSpawnerBloodSplatters
+  entities:
+  - uid: 267
+    components:
+    - type: Transform
+      pos: 5.5,17.5
+      parent: 1
+  - uid: 288
+    components:
+    - type: Transform
+      pos: 5.5,7.5
+      parent: 1
+- proto: RMCFlashlight
+  entities:
+  - uid: 209
+    components:
+    - type: Transform
+      pos: 17.5,9.5
+      parent: 1
+- proto: RMCGasPipeBend
+  entities:
+  - uid: 56
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 9.5,14.5
+      parent: 1
+  - uid: 57
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 9.5,16.5
+      parent: 1
+  - uid: 58
+    components:
+    - type: Transform
+      pos: 15.5,17.5
+      parent: 1
+  - uid: 59
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,4.5
+      parent: 1
+  - uid: 66
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 9.5,4.5
+      parent: 1
+  - uid: 287
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 3.5,14.5
+      parent: 1
+- proto: RMCGasPipeStraight
+  entities:
+  - uid: 3
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 6.5,14.5
+      parent: 1
+  - uid: 4
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 7.5,14.5
+      parent: 1
+  - uid: 5
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 8.5,14.5
+      parent: 1
+  - uid: 6
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 9.5,15.5
+      parent: 1
+  - uid: 7
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 10.5,16.5
+      parent: 1
+  - uid: 8
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 14.5,17.5
+      parent: 1
+  - uid: 9
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 15.5,16.5
+      parent: 1
+  - uid: 10
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 15.5,15.5
+      parent: 1
+  - uid: 11
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 15.5,14.5
+      parent: 1
+  - uid: 12
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 16.5,13.5
+      parent: 1
+  - uid: 13
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 17.5,13.5
+      parent: 1
+  - uid: 14
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 18.5,13.5
+      parent: 1
+  - uid: 15
+    components:
+    - type: Transform
+      pos: 15.5,12.5
+      parent: 1
+  - uid: 16
+    components:
+    - type: Transform
+      pos: 15.5,11.5
+      parent: 1
+  - uid: 17
+    components:
+    - type: Transform
+      pos: 15.5,10.5
+      parent: 1
+  - uid: 18
+    components:
+    - type: Transform
+      pos: 15.5,9.5
+      parent: 1
+  - uid: 19
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 16.5,8.5
+      parent: 1
+  - uid: 20
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 17.5,8.5
+      parent: 1
+  - uid: 21
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 18.5,8.5
+      parent: 1
+  - uid: 22
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 15.5,7.5
+      parent: 1
+  - uid: 23
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 15.5,6.5
+      parent: 1
+  - uid: 25
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 15.5,5.5
+      parent: 1
+  - uid: 26
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 14.5,4.5
+      parent: 1
+  - uid: 27
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 13.5,4.5
+      parent: 1
+  - uid: 28
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 12.5,4.5
+      parent: 1
+  - uid: 29
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 11.5,4.5
+      parent: 1
+  - uid: 30
+    components:
+    - type: Transform
+      pos: 10.5,3.5
+      parent: 1
+  - uid: 31
+    components:
+    - type: Transform
+      pos: 10.5,2.5
+      parent: 1
+  - uid: 32
+    components:
+    - type: Transform
+      pos: 10.5,1.5
+      parent: 1
+  - uid: 33
+    components:
+    - type: Transform
+      pos: 10.5,0.5
+      parent: 1
+  - uid: 34
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 9.5,5.5
+      parent: 1
+  - uid: 35
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 9.5,6.5
+      parent: 1
+  - uid: 36
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 9.5,7.5
+      parent: 1
+  - uid: 37
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 10.5,8.5
+      parent: 1
+  - uid: 38
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 11.5,8.5
+      parent: 1
+  - uid: 39
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 8.5,8.5
+      parent: 1
+  - uid: 40
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 7.5,8.5
+      parent: 1
+  - uid: 41
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 6.5,8.5
+      parent: 1
+  - uid: 42
+    components:
+    - type: Transform
+      pos: 5.5,9.5
+      parent: 1
+  - uid: 43
+    components:
+    - type: Transform
+      pos: 5.5,10.5
+      parent: 1
+  - uid: 44
+    components:
+    - type: Transform
+      pos: 5.5,11.5
+      parent: 1
+  - uid: 45
+    components:
+    - type: Transform
+      pos: 5.5,12.5
+      parent: 1
+  - uid: 46
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 4.5,8.5
+      parent: 1
+  - uid: 47
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.5,8.5
+      parent: 1
+  - uid: 48
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 1.5,8.5
+      parent: 1
+  - uid: 49
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 0.5,8.5
+      parent: 1
+  - uid: 50
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 3.5,7.5
+      parent: 1
+  - uid: 51
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 3.5,6.5
+      parent: 1
+  - uid: 52
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 3.5,5.5
+      parent: 1
+  - uid: 53
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 3.5,4.5
+      parent: 1
+  - uid: 54
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 3.5,3.5
+      parent: 1
+  - uid: 55
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 3.5,2.5
+      parent: 1
+  - uid: 280
+    components:
+    - type: Transform
+      pos: 5.5,13.5
+      parent: 1
+  - uid: 281
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 4.5,14.5
+      parent: 1
+  - uid: 282
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 3.5,15.5
+      parent: 1
+  - uid: 283
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 3.5,16.5
+      parent: 1
+  - uid: 284
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 3.5,17.5
+      parent: 1
+  - uid: 285
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 3.5,18.5
+      parent: 1
+- proto: RMCGasPipeTJunction
+  entities:
+  - uid: 60
+    components:
+    - type: Transform
+      pos: 3.5,8.5
+      parent: 1
+  - uid: 61
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 5.5,8.5
+      parent: 1
+  - uid: 62
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 15.5,13.5
+      parent: 1
+  - uid: 63
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 15.5,8.5
+      parent: 1
+  - uid: 64
+    components:
+    - type: Transform
+      pos: 9.5,8.5
+      parent: 1
+  - uid: 65
+    components:
+    - type: Transform
+      pos: 10.5,4.5
+      parent: 1
+  - uid: 286
+    components:
+    - type: Transform
+      pos: 5.5,14.5
+      parent: 1
+- proto: RMCItemPoolBuckshot
+  entities:
+  - uid: 227
+    components:
+    - type: Transform
+      pos: 16.5,1.5
+      parent: 1
+  - uid: 228
+    components:
+    - type: Transform
+      pos: 15.5,1.5
+      parent: 1
+  - uid: 229
+    components:
+    - type: Transform
+      pos: 14.5,1.5
+      parent: 1
+  - uid: 230
+    components:
+    - type: Transform
+      pos: 13.5,18.5
+      parent: 1
+  - uid: 231
+    components:
+    - type: Transform
+      pos: 13.5,17.5
+      parent: 1
+- proto: RMCLighter
+  entities:
+  - uid: 208
+    components:
+    - type: Transform
+      pos: 16.5,17.5
+      parent: 1
+- proto: RMCLightFixtureOffset
+  entities:
+  - uid: 239
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 7.5,6.5
+      parent: 1
+  - uid: 240
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 5.5,9.5
+      parent: 1
+  - uid: 241
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 6.5,3.5
+      parent: 1
+  - uid: 242
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 5.5,5.5
+      parent: 1
+  - uid: 243
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 1.5,9.5
+      parent: 1
+  - uid: 244
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 1.5,3.5
+      parent: 1
+  - uid: 245
+    components:
+    - type: Transform
+      pos: 8.5,1.5
+      parent: 1
+  - uid: 246
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 18.5,7.5
+      parent: 1
+  - uid: 247
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 12.5,10.5
+      parent: 1
+  - uid: 248
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 17.5,14.5
+      parent: 1
+  - uid: 249
+    components:
+    - type: Transform
+      pos: 14.5,16.5
+      parent: 1
+  - uid: 250
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 1.5,5.5
+      parent: 1
+  - uid: 251
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 18.5,1.5
+      parent: 1
+  - uid: 270
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.5,15.5
+      parent: 1
+  - uid: 278
+    components:
+    - type: Transform
+      pos: 6.5,12.5
+      parent: 1
+  - uid: 279
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 11.5,17.5
+      parent: 1
+- proto: RMCMarkerAreaLabel
+  entities:
+  - uid: 268
+    components:
+    - type: MetaData
+      name: Cargo
+    - type: Transform
+      pos: 11.5,12.5
+      parent: 1
+- proto: RMCMegaphone
+  entities:
+  - uid: 167
+    components:
+    - type: Transform
+      pos: 8.5,7.5
+      parent: 1
+- proto: RMCRadioHandheldColonyOff
+  entities:
+  - uid: 237
+    components:
+    - type: Transform
+      pos: 3.5,1.5
+      parent: 1
+- proto: RMCShutterAlmayer
+  entities:
+  - uid: 260
+    components:
+    - type: MetaData
+      name: Cargo Shutters
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 0.5,14.5
+      parent: 1
+    - type: RMCPodDoor
+      id: Cargonia
+  - uid: 261
+    components:
+    - type: MetaData
+      name: Cargo Shutters
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 0.5,13.5
+      parent: 1
+    - type: RMCPodDoor
+      id: Cargonia
+  - uid: 262
+    components:
+    - type: MetaData
+      name: Cargo Shutters
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 0.5,12.5
+      parent: 1
+    - type: RMCPodDoor
+      id: Cargonia
+  - uid: 263
+    components:
+    - type: MetaData
+      name: Cargo Shutters
+    - type: Transform
+      pos: 5.5,0.5
+      parent: 1
+    - type: RMCPodDoor
+      id: Cargonia
+  - uid: 264
+    components:
+    - type: MetaData
+      name: Cargo Shutters
+    - type: Transform
+      pos: 4.5,0.5
+      parent: 1
+    - type: RMCPodDoor
+      id: Cargonia
+  - uid: 265
+    components:
+    - type: MetaData
+      name: Cargo Shutters
+    - type: Transform
+      pos: 3.5,0.5
+      parent: 1
+    - type: RMCPodDoor
+      id: Cargonia
+  - uid: 266
+    components:
+    - type: MetaData
+      name: Cargo Shutters
+    - type: Transform
+      pos: 2.5,0.5
+      parent: 1
+    - type: RMCPodDoor
+      id: Cargonia
+- proto: RMCSpawnerCorpseDeputy
+  entities:
+  - uid: 232
+    components:
+    - type: Transform
+      pos: 5.5,7.5
+      parent: 1
+- proto: RMCSpawnerFigurinePatron
+  entities:
+  - uid: 252
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 2.5,1.5
+      parent: 1
+  - uid: 253
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 17.5,1.5
+      parent: 1
+- proto: RMCSpawnerIntelClose
+  entities:
+  - uid: 236
+    components:
+    - type: Transform
+      pos: 6.5,3.5
+      parent: 1
+- proto: RMCSpawnerIntelScience
+  entities:
+  - uid: 233
+    components:
+    - type: Transform
+      pos: 4.5,3.5
+      parent: 1
+  - uid: 235
+    components:
+    - type: Transform
+      pos: 5.5,3.5
+      parent: 1
+- proto: RMCSpawnerRandomToolbox
+  entities:
+  - uid: 220
+    components:
+    - type: Transform
+      pos: 13.5,17.5
+      parent: 1
+  - uid: 221
+    components:
+    - type: Transform
+      pos: 11.5,1.5
+      parent: 1
+  - uid: 222
+    components:
+    - type: Transform
+      pos: 12.5,1.5
+      parent: 1
+  - uid: 223
+    components:
+    - type: Transform
+      pos: 13.5,1.5
+      parent: 1
+  - uid: 224
+    components:
+    - type: Transform
+      pos: 5.5,5.5
+      parent: 1
+- proto: RMCSpawnerRandomTools
+  entities:
+  - uid: 211
+    components:
+    - type: Transform
+      pos: 18.5,7.5
+      parent: 1
+  - uid: 212
+    components:
+    - type: Transform
+      pos: 1.5,5.5
+      parent: 1
+  - uid: 213
+    components:
+    - type: Transform
+      pos: 1.5,1.5
+      parent: 1
+  - uid: 214
+    components:
+    - type: Transform
+      pos: 12.5,1.5
+      parent: 1
+  - uid: 215
+    components:
+    - type: Transform
+      pos: 11.5,1.5
+      parent: 1
+  - uid: 216
+    components:
+    - type: Transform
+      pos: 5.5,6.5
+      parent: 1
+  - uid: 217
+    components:
+    - type: Transform
+      pos: 1.5,1.5
+      parent: 1
+  - uid: 218
+    components:
+    - type: Transform
+      pos: 18.5,7.5
+      parent: 1
+  - uid: 219
+    components:
+    - type: Transform
+      pos: 13.5,18.5
+      parent: 1
+  - uid: 255
+    components:
+    - type: Transform
+      pos: 16.5,1.5
+      parent: 1
+  - uid: 256
+    components:
+    - type: Transform
+      pos: 15.5,1.5
+      parent: 1
+  - uid: 257
+    components:
+    - type: Transform
+      pos: 15.5,1.5
+      parent: 1
+  - uid: 258
+    components:
+    - type: Transform
+      pos: 14.5,1.5
+      parent: 1
+- proto: RMCSprayBottleSpaceCleaner
+  entities:
+  - uid: 210
+    components:
+    - type: Transform
+      pos: 17.5,9.5
+      parent: 1
+  - uid: 254
+    components:
+    - type: Transform
+      pos: 3.5,6.5
+      parent: 1
+- proto: RMCTankReagentFuel
+  entities:
+  - uid: 174
+    components:
+    - type: Transform
+      pos: 18.5,2.5
+      parent: 1
+  - uid: 175
+    components:
+    - type: Transform
+      pos: 18.5,1.5
+      parent: 1
+  - uid: 176
+    components:
+    - type: Transform
+      pos: 18.5,3.5
+      parent: 1
+  - uid: 204
+    components:
+    - type: Transform
+      pos: 4.5,5.5
+      parent: 1
+- proto: RMCTankReagentWater
+  entities:
+  - uid: 177
+    components:
+    - type: Transform
+      pos: 18.5,4.5
+      parent: 1
+- proto: RMCTrashCart
+  entities:
+  - uid: 181
+    components:
+    - type: Transform
+      pos: 6.5,13.5
+      parent: 1
+...

@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken and modified from cmss13 at https://github.com/cmss13-devs/cmss13/blob/9e46a4af63818ec5c627c77624a0a9904491f90b/icons/obj/structures/props/mech.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "recharge_port"
+    },
+    {
+      "name": "mech_port",
+      "delays":
+        [
+          [
+            0.4,
+            0.4
+          ]
+        ]
+    }
+  ]
+}

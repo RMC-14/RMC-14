@@ -1,4 +1,6 @@
-﻿using Content.Shared.Roles;
+using Content.Shared._RMC14.Marines.Roles.Ranks;
+using Content.Shared.Inventory;
+using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
@@ -30,6 +32,9 @@ public sealed partial class CMVendorSection
 
     [DataField]
     public List<ProtoId<JobPrototype>> Jobs = new();
+
+    [DataField]
+    public List<ProtoId<RankPrototype>> Ranks = new();
 
     [DataField]
     public List<string> Holidays = new();
@@ -110,4 +115,7 @@ public sealed partial record CMVendorEntry
 
     [DataField]
     public SpriteSpecifier.Rsi? GiveMapBlip;
+
+    [DataField]
+    public SlotFlags? ReplaceSlot;
 }

@@ -13,7 +13,7 @@
     whitelist:
       tags:
       - RMCShellShotgunBreaching
-    proto: RMCShellShotgunBreaching
+    proto: RMCShellShotgunBreaching1
     capacity: 12
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/xm51.rsi

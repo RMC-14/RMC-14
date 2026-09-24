@@ -1,0 +1,31 @@
+﻿{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/9e46a4af63818ec5c627c77624a0a9904491f90b/icons/mob/humans/onmob/inhands/items/bottles_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/9e46a4af63818ec5c627c77624a0a9904491f90b/icons/mob/humans/onmob/inhands/items/bottles_lefthand.dmi, https://github.com/cmss13-devs/cmss13/blob/9e46a4af63818ec5c627c77624a0a9904491f90b/icons/obj/items/food/drinks.dmi, fills added by SharkSnake98 on GitHub",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon-0"
+    },
+    {
+      "name": "icon-1"
+    },
+    {
+      "name": "icon-2"
+    },
+    {
+      "name": "icon-3"
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    }
+  ]
+}

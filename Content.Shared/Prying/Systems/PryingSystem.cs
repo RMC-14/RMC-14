@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Prying;
+using Content.Shared._RMC14.Doors;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
@@ -109,6 +110,9 @@ public sealed class PryingSystem : EntitySystem
             return true;
         }
 
+        if (!HasComp<PryingComponent>(user))
+            return true;
+
         // hand-prying is much slower
         var modifier = CompOrNull<PryingComponent>(user)?.SpeedModifier ?? unpoweredComp.PryModifier;
         return StartPry(target, user, null, modifier, out id);
@@ -132,6 +136,7 @@ public sealed class PryingSystem : EntitySystem
 
             canev = new BeforePryEvent(user, false, false, false);
         }
+
 
         RaiseLocalEvent(target, ref canev);
 
@@ -161,6 +166,10 @@ public sealed class PryingSystem : EntitySystem
         {
             _adminLog.Add(LogType.Action, LogImpact.Low, $"{ToPrettyString(user)} is prying {ToPrettyString(target)}");
         }
+
+        var doorpry = new RMCDoorPryEvent(user); // RMC14
+        RaiseLocalEvent(target, ref doorpry); // RMC14
+
         return _doAfterSystem.TryStartDoAfter(doAfterArgs, out id);
     }
 

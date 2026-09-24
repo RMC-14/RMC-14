@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/0525b5ada7da1afcd9b260e76d5fea01500d9c8d/icons/obj/items/clothing/accessory/medals.dmi, https://github.com/cmss13-devs/cmss13/blob/0525b5ada7da1afcd9b260e76d5fea01500d9c8d/icons/obj/items/clothing/accessory/inventory_overlays/medals.dmi Edited by github user @x5tink",
+    "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/0525b5ada7da1afcd9b260e76d5fea01500d9c8d/icons/obj/items/clothing/accessory/medals.dmi, https://github.com/cmss13-devs/cmss13/blob/0525b5ada7da1afcd9b260e76d5fea01500d9c8d/icons/obj/items/clothing/accessory/inventory_overlays/medals.dmi Edited by github user @x5tink, icon and equipped edited by VictorJob (Github), further modified by PursuitinAshes (Github)",
     "size": {
         "x": 32,
         "y": 32
@@ -12,8 +12,6 @@
             "delays": [
                 [
                     12,
-                    0.1,
-                    0.1,
                     0.1,
                     0.1,
                     0.1,
