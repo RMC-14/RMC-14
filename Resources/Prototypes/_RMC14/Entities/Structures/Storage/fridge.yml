@@ -8,8 +8,6 @@
   - type: VehicleSmashable
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/fridge.rsi
-  - type: AccessReader
-    access: [["CMAccessKitchen"]]
   - type: AntiRottingContainer
 
 - type: entity
@@ -95,3 +93,12 @@
       amount: 14
     - id: RMCFoodMeatFish
       amount: 14
+
+- type: entity
+  parent: CMLockerFridge
+  id: CMLockerFridgeColony
+  name: fridge
+  suffix: colony
+  components:
+  - type: AccessReader
+    access: [["CMAccessColonyPublic"]]

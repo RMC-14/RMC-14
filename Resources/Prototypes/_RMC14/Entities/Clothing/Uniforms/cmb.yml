@@ -42,3 +42,27 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/CMB/cmb_marshal_uniform.rsi
   - type: Appearance
+
+- type: entity
+  parent: RMCSwatCMBUniform
+  id: RMCSwatCMBUniformB92FS
+  suffix: B92FS
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingHolsterBlackB92FS
+
+- type: entity
+  parent: RMCSwatCMBUniform
+  id: RMCSwatCMBUniformMK45
+  suffix: MK45
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingHolsterBlackMK45
+
+- type: entity
+  parent: RMCSwatCMBUniform
+  id: RMCSwatCMBUniformM1984
+  suffix: M1984
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingHolsterBlackM1984

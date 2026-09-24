@@ -46,7 +46,7 @@
     - type: MarineOrders
     - type: SquadLeader
       icon:
-        sprite: _RMC14/Interface/cm_job_icons.rsi
+        sprite: _RMC14/Interface/job_icons/We-Ya/pmc.rsi
         state: pmc_ld
     - type: RMCPointing
     - type: JobPrefix
@@ -145,5 +145,5 @@
   parent: CMJobIconBase
   id: RMCJobIconPMCLeader
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/We-Ya/pmc.rsi
     state: pmc_ld
