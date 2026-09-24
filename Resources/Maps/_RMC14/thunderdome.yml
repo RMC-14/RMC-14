@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/28/2026 16:23:43
-  entityCount: 10116
+  time: 06/24/2026 22:02:28
+  entityCount: 10115
 maps:
 - 1
 grids:
@@ -26038,11 +26038,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 6.5,-60.5
       parent: 1
-  - uid: 5342
-    components:
-    - type: Transform
-      pos: -37.5,-82.5
-      parent: 1
   - uid: 5383
     components:
     - type: Transform
@@ -26404,6 +26399,12 @@ entities:
       parent: 1
 - proto: CMChairComfyTeal
   entities:
+  - uid: 2136
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -59.5,-35.5
+      parent: 1
   - uid: 3496
     components:
     - type: Transform
@@ -26551,12 +26552,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -58.5,-44.5
-      parent: 1
-  - uid: 4145
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -59.5,-35.5
       parent: 1
   - uid: 4329
     components:
@@ -50291,28 +50286,6 @@ entities:
     - type: Transform
       pos: -25.5,-64.5
       parent: 1
-- proto: RMCBeakerHighCapacity
-  entities:
-  - uid: 1962
-    components:
-    - type: Transform
-      pos: 9.31135,-20.14467
-      parent: 1
-  - uid: 3769
-    components:
-    - type: Transform
-      pos: -49.41054,-52.15561
-      parent: 1
-  - uid: 6240
-    components:
-    - type: Transform
-      pos: -15.617505,-38.040104
-      parent: 1
-  - uid: 8695
-    components:
-    - type: Transform
-      pos: -41.66856,-108.20955
-      parent: 1
 - proto: RMCBedAlt
   entities:
   - uid: 3519
@@ -50552,13 +50525,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -36.526535,-42.335327
-      parent: 1
-- proto: RMCMedicalL75RCMFilled
-  entities:
-  - uid: 854
-    components:
-    - type: Transform
-      pos: 11.548068,-20.26282
       parent: 1
 - proto: RMCBeltMedicBagSPPFilled
   entities:
@@ -53856,47 +53822,47 @@ entities:
     - type: Transform
       pos: -47.5,-117.5
       parent: 1
-- proto: RMCCouchEnd
+- proto: RMCCouchEndLowerBrown
   entities:
+  - uid: 2605
+    components:
+    - type: Transform
+      pos: -71.5,-89.5
+      parent: 1
   - uid: 6955
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -25.5,-8.5
+      parent: 1
+- proto: RMCCouchEndLowerRed
+  entities:
+  - uid: 4145
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 6.5,-16.5
+      parent: 1
+  - uid: 5342
+    components:
+    - type: Transform
+      pos: 0.5,-87.5
+      parent: 1
+- proto: RMCCouchEndUpperBrown
+  entities:
+  - uid: 7633
     components:
     - type: Transform
       pos: -72.5,-89.5
       parent: 1
-  - uid: 6956
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -71.5,-89.5
-      parent: 1
-- proto: RMCCouchEndLowerRed
-  entities:
-  - uid: 2136
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 6.5,-16.5
-      parent: 1
-  - uid: 2605
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -25.5,-8.5
-      parent: 1
-  - uid: 7633
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 0.5,-87.5
-      parent: 1
-- proto: RMCCouchEndUpperRed
-  entities:
-  - uid: 351
+  - uid: 10112
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -25.5,-7.5
       parent: 1
+- proto: RMCCouchEndUpperRed
+  entities:
   - uid: 2135
     components:
     - type: Transform
@@ -60741,6 +60707,8 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+    missingComponents:
+    - IngestionBlocker
 - proto: RMCHipsterGlasses
   entities:
   - uid: 5631
@@ -63813,6 +63781,13 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -26.55198,-132.92973
+      parent: 1
+- proto: RMCMedicalL75RCMFilled
+  entities:
+  - uid: 854
+    components:
+    - type: Transform
+      pos: 11.548068,-20.26282
       parent: 1
 - proto: RMCMegaphone
   entities:
@@ -68020,6 +67995,28 @@ entities:
     - type: Transform
       pos: 7.5,2.5
       parent: 1
+- proto: RMCReagentJug
+  entities:
+  - uid: 1962
+    components:
+    - type: Transform
+      pos: 9.31135,-20.14467
+      parent: 1
+  - uid: 3769
+    components:
+    - type: Transform
+      pos: -49.41054,-52.15561
+      parent: 1
+  - uid: 6240
+    components:
+    - type: Transform
+      pos: -15.617505,-38.040104
+      parent: 1
+  - uid: 8695
+    components:
+    - type: Transform
+      pos: -41.66856,-108.20955
+      parent: 1
 - proto: RMCRecharger
   entities:
   - uid: 295
@@ -68993,6 +68990,13 @@ entities:
     - type: Transform
       pos: -20.290564,-33.5
       parent: 1
+- proto: RMCSofa
+  entities:
+  - uid: 351
+    components:
+    - type: Transform
+      pos: -37.5,-82.5
+      parent: 1
 - proto: RMCSoroStairs
   entities:
   - uid: 364
@@ -69069,15 +69073,24 @@ entities:
     - type: Transform
       pos: -62.5,-116.5
       parent: 1
-  - uid: 10109
-    components:
-    - type: Transform
-      pos: -47.5,-89.5
-      parent: 1
   - uid: 10110
     components:
     - type: Transform
       pos: -19.5,-87.5
+      parent: 1
+- proto: RMCSpawnerERTShuttleCLF
+  entities:
+  - uid: 10109
+    components:
+    - type: Transform
+      pos: -48.5,-13.5
+      parent: 1
+- proto: RMCSpawnerERTShuttleCMB
+  entities:
+  - uid: 6956
+    components:
+    - type: Transform
+      pos: -47.5,-89.5
       parent: 1
 - proto: RMCSpawnerERTShuttleSPP
   entities:
@@ -69095,10 +69108,10 @@ entities:
       parent: 1
 - proto: RMCSpawnerERTShuttleWeYa
   entities:
-  - uid: 10112
+  - uid: 3371
     components:
     - type: Transform
-      pos: -40.5,-51.5
+      pos: -39.5,-51.5
       parent: 1
 - proto: RMCSpawnerRandomFolder
   entities:
@@ -69202,13 +69215,6 @@ entities:
     components:
     - type: Transform
       pos: -25.5,-90.5
-      parent: 1
-- proto: RMCSpawnerShuttle
-  entities:
-  - uid: 10113
-    components:
-    - type: Transform
-      pos: -48.5,-13.5
       parent: 1
 - proto: RMCSprayBottleSpaceCleaner
   entities:

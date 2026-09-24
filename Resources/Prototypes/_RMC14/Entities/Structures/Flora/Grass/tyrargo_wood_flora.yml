@@ -1,0 +1,50 @@
+- type: entity
+  parent: RMCBaseBush
+  id: RMCTyrargoStick01
+  name: stick
+  suffix: 1
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Flora/Grass/tyrargo_wood_flora.rsi
+    state: stick_01
+
+- type: entity
+  parent: RMCTyrargoStick01
+  id: RMCTyrargoStick02
+  suffix: 2
+  components:
+  - type: Sprite
+    state: stick_02
+
+- type: entity
+  parent: RMCTyrargoStick01
+  id: RMCTyrargoStick03
+  suffix: 3
+  components:
+  - type: Sprite
+    state: stick_03
+
+- type: entity
+  parent: RMCTyrargoStick01
+  id: RMCTyrargoStick04
+  suffix: 4
+  components:
+  - type: Sprite
+    state: stick_04
+
+- type: entity
+  parent: RMCTyrargoStick01
+  id: RMCTyrargoTrunk01
+  name: trunk
+  suffix: 1
+  components:
+  - type: Sprite
+    state: trunk_01
+
+- type: entity
+  parent: RMCTyrargoTrunk01
+  id: RMCTyrargoTrunk02
+  suffix: 2
+  components:
+  - type: Sprite
+    state: trunk_02
