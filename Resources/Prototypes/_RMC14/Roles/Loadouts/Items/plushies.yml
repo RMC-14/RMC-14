@@ -98,13 +98,6 @@
       - PlushieDiona
 
 - type: loadout
-  id: PlushieHampterRMC
-  cost: 4
-  storage:
-    back:
-      - PlushieHampter
-
-- type: loadout
   id: PlushiePenguinRMC
   cost: 4
   storage:
