@@ -1,29 +1,6 @@
 ﻿Entries:
 - author: Dygon
   changes:
-  - message: Fixed left clicking a weapon mount as a xenonid dismounting the user.
-    type: Fix
-  - message: You can now pick up a folded weapon mount with harm mode toggled on.
-    type: Fix
-  id: 3160
-  time: '2026-04-23T23:32:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9719
-- author: kleinerstation13
-  changes:
-  - message: Added intact TSE airbase insert, which has a 28% chance of occuring.
-    type: Add
-  id: 3161
-  time: '2026-04-23T23:31:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9671
-- author: SharkSnake98
-  changes:
-  - message: Changed the sprites of the potted plants, palm trees, and red couch
-    type: Tweak
-  id: 3162
-  time: '2026-04-23T23:33:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9707
-- author: Dygon
-  changes:
   - message: Fixed throwing items into disposal bins.
     type: Fix
   - message: Bullets no longer pass through ColMarTech vendors.
@@ -4437,5 +4414,26 @@
   id: 3659
   time: '2026-09-19T00:35:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10866
+- author: FreeSpy443
+  changes:
+  - message: Enabled Command Tablet Medal printing
+    type: Tweak
+  id: 3660
+  time: '2026-09-21T18:10:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10876
+- author: kleinerstation13
+  changes:
+  - message: Fixed UNMC synthetic not having bigger pointing arrow
+    type: Fix
+  id: 3661
+  time: '2026-09-23T15:31:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10890
+- author: kleinerstation13
+  changes:
+  - message: Fixed a single SPP shuttle wall type incorrectly having occlusion enabled
+    type: Fix
+  id: 3662
+  time: '2026-09-23T15:30:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10891
 Name: RMC14
 Order: -1
