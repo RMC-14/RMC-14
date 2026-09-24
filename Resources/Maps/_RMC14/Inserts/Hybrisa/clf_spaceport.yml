@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/16/2026 22:29:13
-  entityCount: 856
+  time: 06/11/2026 14:12:01
+  entityCount: 858
 maps: []
 grids:
 - 1
@@ -2357,16 +2357,12 @@ entities:
       rot: 3.141592653589793 rad
       pos: 9.5,17.5
       parent: 1
-    missingComponents:
-    - Damageable
   - uid: 603
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 10.5,17.5
       parent: 1
-    missingComponents:
-    - Damageable
 - proto: CMSemioticAirlock
   entities:
   - uid: 362
@@ -2893,7 +2889,7 @@ entities:
   - uid: 849
     components:
     - type: Transform
-      pos: 31.5,12.5
+      pos: 31.5,11.5
       parent: 1
   - uid: 850
     components:
@@ -2929,6 +2925,16 @@ entities:
     components:
     - type: Transform
       pos: 31.5,19.5
+      parent: 1
+  - uid: 857
+    components:
+    - type: Transform
+      pos: 31.5,20.5
+      parent: 1
+  - uid: 858
+    components:
+    - type: Transform
+      pos: 31.5,12.5
       parent: 1
 - proto: RMCBoxShotgunBuckshot
   entities:

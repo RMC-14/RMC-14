@@ -159,7 +159,7 @@
   parent: CMJobIconBase
   id: RMCJobIconPMCCommando
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/We-Ya/pmc.rsi
     state: pmc_commando_gun
 
 - type: entity

@@ -178,6 +178,22 @@
     state: crawler_fuel
 
 - type: entity
+  parent: RMCPropVehicleCrawler
+  id: RMCPropVehicleCrawlerMining
+  name: mining crawler
+  description: It is a tread bound crawler used in harsh conditions.
+  components:
+  - type: Sprite
+    state: mining_crawler
+
+- type: entity
+  parent: RMCPropVehicleCrawlerMining
+  id: RMCPropVehicleCrawlerMiningFuel
+  components:
+  - type: Sprite
+    state: mining_crawler_fuel
+
+- type: entity
   parent: RMCPropVehicle2Base #Use East and West
   id: RMCPropVehicleTruck
   suffix: Use East, West
