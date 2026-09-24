@@ -10,6 +10,7 @@ using Content.Shared.Damage;
 using Content.Shared.Explosion.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Tag;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Synth;
 
@@ -44,7 +45,6 @@ public sealed class SynthSystem : SharedSynthSystem
 
         var repOverrideComp = EnsureComp<RMCHumanoidRepresentationOverrideComponent>(ent);
         repOverrideComp.Species = ent.Comp.SpeciesName;
-        repOverrideComp.Age = ent.Comp.Generation;
         Dirty(ent, repOverrideComp);
 
         if (!HasComp<BodyComponent>(ent.Owner))

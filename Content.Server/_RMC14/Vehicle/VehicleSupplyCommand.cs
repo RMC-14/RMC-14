@@ -40,7 +40,7 @@ public sealed class VehicleSupplyCommand : ToolshedCommand
         EntityUid liftUid,
         string vehicleId)
     {
-        if (system.DebugAddVehicleToStorage(liftUid, vehicleId, true, out var reason))
+        if (system.DebugAddVehicleToStorage(liftUid, vehicleId, out var reason))
         {
             system.DebugEnsureVehicleInConsoles(liftUid, vehicleId);
             ctx.WriteLine($"Added '{vehicleId}' to lift storage.");

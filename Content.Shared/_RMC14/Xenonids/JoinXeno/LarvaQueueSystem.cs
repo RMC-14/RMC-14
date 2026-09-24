@@ -121,7 +121,7 @@ public sealed class LarvaQueueSystem : EntitySystem
 
     private void OnMindRemoved(Entity<CanBeLarvaQueuedComponent> ent, ref MindRemovedMessage _)
     {
-        if (_net.IsClient || !HasComp<XenoComponent>(ent))
+        if (_net.IsClient || TerminatingOrDeleted(ent) || !HasComp<XenoComponent>(ent))
             return;
 
         if (_mobState.IsDead(ent))
@@ -673,6 +673,25 @@ public sealed class LarvaQueueSystem : EntitySystem
         }
 
         return -1;
+    }
+
+    public void AddToLarvaQueueFront(Entity<HiveComponent> hive, NetUserId userId)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (_pendingOffers.ContainsKey(userId))
+            return;
+
+        if (PreQueue.TryGetValue(hive.Owner, out var preQueue))
+            preQueue.Remove(userId);
+
+        if (Queue.TryGetValue(hive.Owner, out var queue))
+            queue.Remove(userId);
+
+        Queue.GetOrNew(hive.Owner).AddFirst(userId);
+
+        NotifyQueuePositions(hive);
     }
 
     public override void Update(float frameTime)

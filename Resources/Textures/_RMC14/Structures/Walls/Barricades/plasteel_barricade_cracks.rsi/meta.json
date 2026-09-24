@@ -18,6 +18,10 @@
     {
       "name": "DamageOverlay_12",
       "directions": 4
+    },
+    {
+      "name": "DamageOverlay_0",
+      "directions": 4
     }
   ]
 }

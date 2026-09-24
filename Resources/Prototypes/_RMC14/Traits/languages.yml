@@ -51,3 +51,12 @@
   cost: 1
   components: []
   language: German
+
+- type: trait
+  id: ScandinavianLanguage
+  name: rmc-trait-scandinavian-language-name
+  description: rmc-trait-scandinavian-language-desc
+  category: SpeechTraits
+  cost: 1
+  components: []
+  language: Scandinavian

@@ -57,7 +57,7 @@ public sealed class VehicleDeploySystem : EntitySystem
         SubscribeLocalEvent<VehicleDeployActionComponent, VehicleDeployActionEvent>(OnDeployAction);
         SubscribeLocalEvent<VehicleDeployActionComponent, ComponentShutdown>(OnDeployActionShutdown);
         SubscribeLocalEvent<VehicleDeployableComponent, VehicleCanRunEvent>(OnVehicleCanRun);
-        SubscribeLocalEvent<HardpointSlotsChangedEvent>(OnHardpointSlotsChanged);
+        SubscribeLocalEvent<VehicleDeployableComponent, HardpointSlotsChangedEvent>(OnHardpointSlotsChanged);
         SubscribeLocalEvent<HardpointItemComponent, AttemptShootEvent>(OnDeployableAttemptShoot);
     }
 
@@ -296,15 +296,12 @@ public sealed class VehicleDeploySystem : EntitySystem
         _actions.ClearCooldown(actionComp.Action.Value);
     }
 
-    private void OnHardpointSlotsChanged(HardpointSlotsChangedEvent args)
+    private void OnHardpointSlotsChanged(Entity<VehicleDeployableComponent> ent, ref HardpointSlotsChangedEvent args)
     {
         if (_net.IsClient)
             return;
 
-        if (!TryComp(args.Vehicle, out VehicleDeployableComponent? deployable))
-            return;
-
-        UpdateDriverActionState(args.Vehicle, deployable);
+        UpdateDriverActionState(ent.Owner, ent.Comp);
     }
 
     private void OnDeployableAttemptShoot(Entity<HardpointItemComponent> ent, ref AttemptShootEvent args)
@@ -405,6 +402,12 @@ public sealed class VehicleDeploySystem : EntitySystem
             }
 
             if (!deployable.Deployed || !deployable.AutoTurretEnabled)
+            {
+                deployable.AutoSpinInitialized = false;
+                continue;
+            }
+
+            if (TryComp(vehicle, out HardpointIntegrityComponent? frameIntegrity) && frameIntegrity.Integrity <= 0f)
             {
                 deployable.AutoSpinInitialized = false;
                 continue;
@@ -516,6 +519,17 @@ public sealed class VehicleDeploySystem : EntitySystem
 
         if (!TryComp(uid, out GunComponent? gun) || !HasComp<VehicleTurretComponent>(uid))
             return false;
+
+        if (TryComp(uid, out HardpointIntegrityComponent? integrity) && integrity.Integrity <= 0f)
+            return false;
+
+        if (HasComp<VehicleTurretAttachmentComponent>(uid) &&
+            _topology.TryGetParentTurret(uid, out var parentTurret) &&
+            TryComp(parentTurret, out HardpointIntegrityComponent? parentIntegrity) &&
+            parentIntegrity.Integrity <= 0f)
+        {
+            return false;
+        }
 
         gunComp = gun;
         return true;

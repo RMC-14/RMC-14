@@ -96,7 +96,7 @@
         amount: 25
       - id: RMCGrenadeIncendiary
         amount: 4
-      - id: RMCPacketGrenadeWhitePhosphorusCompoundFilled
+      - id: RMCGrenadeWhitePhosphorusCompound
         amount: 4
       - id: CMGrenadeSmoke
         amount: 5
@@ -323,6 +323,11 @@
         box: RMCGrenadeIncendiary
         boxAmount: 3
         boxSlots: 3
+      - id: RMCPacketGrenadeWhitePhosphorusCompoundFilled
+        name: 30mm CCDP grenade packet
+        box: RMCGrenadeWhitePhosphorusCompound
+        boxAmount: 3
+        boxSlots: 3
       - id: RMCPacketGrenadeSmokeFilled
         name: 30mm HSDP grenade packet
         box: CMGrenadeSmoke
@@ -366,7 +371,7 @@
 - type: entity
   parent: ColMarTechCargo
   id: ColMarTechCargoAmmo
-  name: ASRS automated munition vendor
+  name: ASRS surplus munitions vendor
   description: An automated supply rack hooked up to a big storage of various ammunition types. Can be accessed by the Logistics Officer and Requisitions Technicians.
   components:
   - type: Sprite
@@ -634,7 +639,7 @@
 - type: entity
   parent: ColMarTechCargo
   id: ColMarTechCargoAttachments
-  name: AEGIS Armaments attachments vendor
+  name: ASRS surplus attachments vendor
   description: An automated supply rack hooked up to a big storage of weapons attachments. Can be accessed by the Logistics Officer and Requisitions Technicians.
   components:
   - type: Sprite
@@ -703,8 +708,8 @@
         amount: 4
       - id: RMCAttachmentMiniFlamethrower
         amount: 5
-      #- id: RMCAttachmentXMVESG1FlamerNozzle
-      #  amount: 5
+      - id: RMCAttachmentXMVESG1FlamerNozzle
+        amount: 5
       - id: RMCAttachmentU7UnderbarrelShotgun
         amount: 5
       - id: RMCAttachmentUnderbarrelExtinguisher
@@ -813,7 +818,7 @@
         amount: 10
     - name: Gloves
       entries:
-      - id: CMHandsBrown
+      - id: RMCHandsBrownMarine
         amount: 40
       - id: RMCHandsGreyMarine
         amount: 40

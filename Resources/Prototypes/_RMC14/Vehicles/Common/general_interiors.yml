@@ -316,12 +316,99 @@
   parent: VehicleInteriorWallMountedBase
   id: VehicleInteriorMedVendor
   name: medical vendor
+  description: Medical pharmaceutical dispenser. Provided by We-Ya Pharmaceuticals Division(TM).
   components:
   - type: Sprite
     state: med
+  - type: UserInterface
+    interfaces:
+      enum.CMAutomatedVendorUI.Key:
+        type: CMAutomatedVendorBui
+  - type: ActivatableUI
+    key: enum.CMAutomatedVendorUI.Key
+  - type: CMAutomatedVendor
+    baseSprite:
+      sprite: _RMC14/Structures/Vehicles/Interiors/general.rsi
+      state: med
+    animationSprite:
+      sprite: _RMC14/Structures/Vehicles/Interiors/general.rsi
+      state: med_vend
+    sections:
+    - name: Field supplies
+      entries:
+      - id: CMBurnKit10
+        amount: 10
+      - id: CMTraumaKit10
+        amount: 10
+      - id: CMOintment10
+        amount: 10
+      - id: CMGauze10
+        amount: 10
+    - name: Autoinjectors
+      entries:
+      - id: CMBicaridineAutoInjector
+        amount: 5
+      - id: CMDexalinPlusAutoInjector
+        amount: 5
+      - id: RMCDyloveneAutoInjector
+        amount: 5
+      - id: CMEpinephrineAutoInjector
+        amount: 5
+      - id: CMInaprovalineAutoInjector
+        amount: 5
+      - id: CMKelotaneAutoInjector
+        amount: 5
+      - id: CMTricordrazineAutoInjector
+        amount: 5
+    - name: Liquid bottles
+      entries:
+      - id: CMBottleBicaridine
+        amount: 3
+      - id: CMBottleDylovene
+        amount: 3
+      - id: CMBottleDexalin
+        amount: 3
+      - id: CMBottleInaprovaline
+        amount: 3
+      - id: CMBottleKelotane
+        amount: 3
+    - name: Pill bottles
+      entries:
+      - id: CMPillCanisterBicaridine
+        amount: 4
+      - id: CMPillCanisterDexalin
+        amount: 4
+      - id: CMPillCanisterDylovene
+        amount: 4
+      - id: CMPillCanisterInaprovaline
+        amount: 4
+      - id: CMPillCanisterKelotane
+        amount: 4
+    - name: Medical utilities
+      entries:
+      - id: CMDefibrillator
+        amount: 3
+      - id: CMSurgicalLine
+        amount: 2
+      - id: CMSynthGraft
+        amount: 2
+      - id: CMHyposprayWithVial
+        amount: 3
+      - id: RMCVialTricordrazine
+        amount: 3
+      - id: CMHealthAnalyzer
+        amount: 5
+      - id: CMBeltMedical
+        amount: 2
+      - id: RMCGlassesMedicalHUDGlasses
+        amount: 3
+      - id: CMStasisBagFolded
+        amount: 3
+      - id: CMSyringe
+        amount: 7
 
 - type: entity
-  parent: VehicleInteriorWallMountedBase
+  parent: VehicleInteriorMedVendor
   id: VehicleInteriorMedVendorVend
   name: medical vendor (vend)
   components:
@@ -364,9 +451,33 @@
   parent: VehicleInteriorWallMountedBase
   id: VehicleInteriorBloodVendor
   name: blood vendor
+  description: The Avant Biomedical Blood Pack Dispensary is the premier, top-of-the-line blood dispenser! Get yours today! Made by Avant Biomedical.
   components:
   - type: Sprite
     state: blood
+  - type: UserInterface
+    interfaces:
+      enum.CMAutomatedVendorUI.Key:
+        type: CMAutomatedVendorBui
+  - type: ActivatableUI
+    key: enum.CMAutomatedVendorUI.Key
+  - type: CMAutomatedVendor
+    baseSprite:
+      sprite: _RMC14/Structures/Vehicles/Interiors/general.rsi
+      state: blood
+    animationSprite:
+      sprite: _RMC14/Structures/Vehicles/Interiors/general.rsi
+      state: blood_vend
+    sections:
+    - name: Blood Packs
+      entries:
+      - id: CMBloodPackFull
+        amount: 30
+    - name: Miscellaneous
+      entries:
+      - id: CMBloodPack
+        amount: 5
+        name: empty blood pack
 
 - type: entity
   parent: VehicleInteriorWallMountedBase

@@ -1064,8 +1064,8 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             }
         }
 
-        if (TryComp(computer.Owner, out TransformComponent? computerXform) && computerXform.GridUid is { } gridId)
-            IncludeRangedXenoBlips(gridId, map, computer.Comp.Blips);
+        if (TryGetTacticalMap(out var tacticalMapEnt))
+            IncludeRangedXenoBlips(tacticalMapEnt.Owner, map, computer.Comp.Blips);
 
         Dirty(computer);
 

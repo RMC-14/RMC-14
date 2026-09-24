@@ -1,4 +1,5 @@
-﻿using Content.Client.UserInterface.Systems.Chat.Widgets;
+﻿using System.Linq;
+using Content.Client.UserInterface.Systems.Chat.Widgets;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Chat;
 using Content.Shared.Chat;
@@ -47,10 +48,13 @@ public sealed class CMChatSystem : SharedCMChatSystem
                 continue;
             }
 
-            var copy = new FormattedMessage(old.FormattedMessage);
             old.Count++;
+            var copy = new FormattedMessage(old.FormattedMessage);
             copy.AddMarkupPermissive($" [color=red]x{old.Count}[/color]");
+            old.IconControl?.Orphan();
             contents.SetMessage(old.Index, copy);
+            if (old.LanguageIcon != null)
+                old.IconControl = contents.Children.OfType<LanguageIconTag.LanguageIconControl>().LastOrDefault();
             repeated = true;
             break;
         }

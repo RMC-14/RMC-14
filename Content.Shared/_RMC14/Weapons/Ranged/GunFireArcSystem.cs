@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Containers;
 
@@ -27,6 +28,9 @@ public sealed class GunFireArcSystem : EntitySystem
             args.ResetCooldown = true;
             return;
         }
+
+        if (TryComp(ent.Owner, out VehicleTurretComponent? turret) && turret.UseBarrelDirectionForShots)
+            return;
 
         var fromMap = _transform.ToMapCoordinates(args.FromCoordinates);
         var toMap = _transform.ToMapCoordinates(args.ToCoordinates.Value);

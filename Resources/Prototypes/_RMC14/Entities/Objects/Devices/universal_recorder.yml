@@ -38,6 +38,9 @@
     materialComposition:
       CMSteel: 60
       CMGlass: 30
+  - type: Tag
+    tags:
+    - Recorder
 
 - type: entity
   parent: RMCUniversalRecorderBase
@@ -111,6 +114,9 @@
     materialComposition:
       CMSteel: 20
       CMGlass: 5
+  - type: Tag
+    tags:
+    - Recorder
 
 - type: entity
   parent: RMCUniversalRecorderTapeBase
@@ -136,3 +142,6 @@
     contents:
     - id: RMCUniversalRecorderTape
       amount: 5
+
+- type: Tag
+  id: Recorder
