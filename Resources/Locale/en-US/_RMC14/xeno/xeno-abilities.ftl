@@ -105,6 +105,7 @@ cm-xeno-fortify-cant-headbutt = We can't headbutt while fortifying!
 cm-xeno-fortify-cant-rest = We can't rest while fortifying!
 cm-xeno-fortify-cant-tail-sweep = We can't tail sweep while fortifying!
 cm-xeno-fortify-cant-toggle-crest = We can't lower our crest while fortifying!
+cm-xeno-fortify-cant-vehicle = The vehicle blocks us from foritifying
 
 # Headbutt
 rmc-xeno-headbutt-too-far = We can't headbutt from this distance with our crest lowered!

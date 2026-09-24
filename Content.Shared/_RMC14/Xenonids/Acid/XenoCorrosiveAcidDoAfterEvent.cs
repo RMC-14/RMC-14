@@ -31,6 +31,9 @@ public sealed partial class XenoCorrosiveAcidDoAfterEvent : DoAfterEvent
     public float ExpendableLightDps = 2.5f;
 
     [DataField]
+    public float? VehicleDamage;
+
+    [DataField]
     public SoundSpecifier AcidSound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/acid_impact1.ogg", AudioParams.Default.WithVolume(-6f));
 
     public XenoCorrosiveAcidDoAfterEvent(XenoCorrosiveAcidEvent ev)
@@ -42,6 +45,7 @@ public sealed partial class XenoCorrosiveAcidDoAfterEvent : DoAfterEvent
         Dps = ev.Dps;
         ExpendableLightDps = ev.ExpendableLightDps;
         EnergyCost = ev.EnergyCost;
+        VehicleDamage = ev.VehicleDamage;
         AcidSound = ev.AcidSound;
     }
 

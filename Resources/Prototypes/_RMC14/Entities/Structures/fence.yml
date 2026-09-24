@@ -15,6 +15,9 @@
   - type: VehicleSmashable
     deleteOnHit: false
     damageOnHit: 50
+    slowdownBelowWeightClass: Medium
+    slowdownMultiplier: 0.5
+    slowdownDuration: 0.4
   - type: IconSmooth
     key: fences
     base: fence
