@@ -232,7 +232,7 @@
       "name": "masterkey_a"
     },
     {
-      "name": "flamer_nozzle_a_0"
+      "name": "flamer_nozzle_a"
     },
     {
       "name": "flamer_nozzle_a_1"
@@ -266,6 +266,18 @@
     },
     {
       "name": "laserlight-on"
+    },
+    {
+      "name": "qyj72_bipod"
+    },
+    {
+      "name": "qyj72_bipod-on"
+    },
+    {
+      "name": "qyj72_bipod_a"
+    },
+    {
+      "name": "qyj72_bipod_a-on"
     }
   ]
 }

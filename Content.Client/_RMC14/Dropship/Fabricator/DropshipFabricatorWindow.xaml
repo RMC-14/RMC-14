@@ -4,7 +4,8 @@
     xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     Title="{Loc 'rmc-dropship-fabricator-title'}"
-    MinSize="950 450">
+    MinSize="950 570"
+    SetSize="950 570">
     <PanelContainer>
         <PanelContainer.PanelOverride>
             <graphics:StyleBoxFlat 
@@ -23,6 +24,14 @@
                 <BoxContainer Orientation="Vertical" Margin="4">
                     <RichTextLabel Text="{Loc 'rmc-dropship-fabricator-title'}" HorizontalAlignment="Center" />
                     <Label Name="PointsLabel" Access="Public" Margin="4 2" HorizontalAlignment="Center" />
+                    <ui:BlueHorizontalSeparator />
+                    <RichTextLabel Name="CurrentLabel" Access="Public" Margin="4 2" />
+                    <RichTextLabel Name="QueueLabel" Access="Public" Margin="4 2 4 0" />
+                    <ScrollContainer HScrollEnabled="False" VScrollEnabled="True"
+                                     HorizontalExpand="True" MinHeight="84" MaxHeight="84" SetHeight="84">
+                        <BoxContainer Name="QueueContainer" Access="Public" Orientation="Vertical"
+                                      HorizontalExpand="True" />
+                    </ScrollContainer>
                 </BoxContainer>
             </PanelContainer>
             <BoxContainer Orientation="Horizontal" HorizontalExpand="True" VerticalExpand="True">

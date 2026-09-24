@@ -18,7 +18,7 @@
     RMCRankCivilian: []
   startingGear: RMCGearSurvivorBaseNoBackpack
   dummyStartingGear: RMCGearSurvivorEquipped
-  icon: "CMJobIconEmpty"
+  icon: "RMCJobIconGenericColonist"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-nobody
   accessGroups:
@@ -112,10 +112,10 @@
   name: no gun colonist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomGear:
     - [ RMCGrenadeMolotov ]
-    - [ CMPackFlare ]
+    - [ CMPackFlareColonist ]
     - [ WeaponNailgun ]
     - [ RMCFireAxe ]
     - [ RMCWelderIndustrial ]
@@ -127,7 +127,7 @@
   name: civilian colonist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomWeapon:
     - [ RMCWeaponPistolB92FS, RMCMagazinePistolB92FS ]
     - [ RMCWeaponRevolverSpearhead, RMCSpeedLoader357Hollowpoint ]
@@ -137,7 +137,7 @@
     primaryWeapons:
     - [ CMBeltMarineHunting, RMCWeaponBoltActionRifle ]
     - [ RMCBeltMarineUZI, RMCWeaponSMGUZI ]
-    - [ CMBeltMarineBuckshot, RMCWeaponShotgunHG3712 ]
+    - [ CMBeltMarineBuckshot, RMCWeaponShotgunM12 ]
     - [ CMBeltMarineAR10, WeaponRifleAR10 ]
     primaryWeaponChance: 0.6
 
@@ -146,7 +146,7 @@
   name: civilian colonist preset with rare item
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     rareItems:
       RMCMotionDetectorCompact:
         1: 4 # 2%
@@ -174,7 +174,7 @@
         255: 324 # 35%
       RMCBinocularsCiv:
         325: 444 # 45%
-    rareItemCoefficent: 444
+    rareItemCoefficient: 444
 
 - type: entity
   parent: [RMCSurvivorPresetCivilianRareItem, RMCSurvivorPresetCivilian]
@@ -182,7 +182,7 @@
   name: civilian colonist preset with random outfits
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomStartingGear:
       back:
       - RMCSatchelNorm

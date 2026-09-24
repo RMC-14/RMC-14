@@ -131,9 +131,14 @@ public sealed class SensorTowerSystem : EntitySystem
             return;
 
         if (state == SensorTowerState.Off)
+        {
             state = SensorTowerState.On;
+            ent.Comp.NextBreakAt = _timing.CurTime + ent.Comp.BreakEvery;
+        }
         else if (state == SensorTowerState.On)
+        {
             state = SensorTowerState.Off;
+        }
 
         Dirty(ent);
         UpdateAppearance(ent);
@@ -295,26 +300,26 @@ public sealed class SensorTowerSystem : EntitySystem
             if (time < tower.NextBreakAt)
                 continue;
 
+            tower.NextBreakAt = time + tower.BreakEvery;
+
             if (!_random.Prob(tower.BreakChance))
             {
-                tower.NextBreakAt = time + tower.BreakEvery;
                 Dirty(uid, tower);
                 continue;
             }
 
             if (_random.Prob(0.75f))
             {
-                _popup.PopupEntity($"The {Name(uid)} beeps wildly and sprays random pieces everywhere! Use a wrench to repair it.", uid, uid, PopupType.LargeCaution);
+                _popup.PopupEntity($"The {Name(uid)} beeps wildly and sprays random pieces everywhere! Use a wrench to repair it.", uid, PopupType.LargeCaution);
                 tower.State = SensorTowerState.Wrench;
-                Dirty(uid, tower);
             }
             else
             {
-                _popup.PopupEntity($"The {Name(uid)} beeps wildly and a fuse blows! Use wirecutters, then a wrench to repair it.", uid, uid, PopupType.LargeCaution);
+                _popup.PopupEntity($"The {Name(uid)} beeps wildly and a fuse blows! Use wirecutters, then a wrench to repair it.", uid, PopupType.LargeCaution);
                 tower.State = SensorTowerState.Wire;
-                Dirty(uid, tower);
             }
 
+            Dirty(uid, tower);
             UpdateAppearance((uid, tower));
         }
     }

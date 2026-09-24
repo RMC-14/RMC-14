@@ -58,6 +58,11 @@
   - type: Item
     size: Normal
     sprite: _RMC14/Objects/Materials/Sheets/glass.rsi
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
   - type: Appearance
   - type: Tag
     tags:
@@ -186,6 +191,11 @@
         map: ["base"]
   - type: Item
     sprite: _RMC14/Objects/Materials/Sheets/reinf_glass.rsi
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
     heldPrefix: rglass
   - type: Stack
     stackType: CMGlassReinforced
@@ -274,6 +284,11 @@
         map: ["base"]
   - type: Item
     sprite: _RMC14/Objects/Materials/Sheets/phoron_glass.rsi
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
     heldPrefix: phoronglass
   - type: Stack
     stackType: CMGlassPhoron
@@ -355,6 +370,11 @@
         map: ["base"]
   - type: Item
     sprite: _RMC14/Objects/Materials/Sheets/phoron_reinf_glass.rsi
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
     heldPrefix: phoronrglass
   - type: Stack
     stackType: CMGlassPhoronReinforced

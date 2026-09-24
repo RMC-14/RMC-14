@@ -1,4 +1,5 @@
-﻿using Robust.Shared.Audio;
+﻿using System.Numerics;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.CrashLand;
@@ -14,11 +15,17 @@ public sealed partial class CrashLandableComponent : Component
     public float FallHeight = 20;
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier CrashSound = new SoundPathSpecifier("/Audio/Weapons/punch1.ogg");
+    public SoundSpecifier? CrashSound = new SoundPathSpecifier("/Audio/Weapons/punch1.ogg");
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? DropSound;
 
     [DataField, AutoNetworkedField]
     public TimeSpan? LastCrash;
 
     [DataField, AutoNetworkedField]
     public float SkyFallDuration = 1.5f;
+
+    [DataField]
+    public Vector2 OriginalSpriteOffset;
 }

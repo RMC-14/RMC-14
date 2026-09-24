@@ -60,6 +60,7 @@ public sealed partial class EncryptionKeyHolderComponent : Component
     ///     This is the channel that will be used when using the default/department prefix (<see cref="SharedChatSystem.DefaultChannelKey"/>).
     /// </summary>
     [ViewVariables]
+    [DataField] // RMC14 datafield attribute
     [AutoNetworkedField]
     public string? DefaultChannel;
 

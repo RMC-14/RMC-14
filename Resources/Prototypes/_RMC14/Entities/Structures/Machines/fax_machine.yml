@@ -5,8 +5,13 @@
   description: Liaison's best and only friend.
   components:
   - type: ApcPowerReceiver
-    needsPower: false # TODO RMC14
-    powerLoad: 0
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 30
+    activeLoad: 200
+    channel: Equipment
+  - type: ActivatableUIRequiresPower
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-fax-machine
   - type: Sprite
@@ -116,6 +121,23 @@
     name: "Corporate Liaison"
   - type: SpecialFax
     faxId: Liaison
+
+- type: entity
+  parent: CMFax
+  suffix: Correspondent
+  id: CMFaxPressTent
+  components:
+  - type: FaxMachine
+    name: "Correspondent Tent"
+
+- type: entity
+  parent: CMFaxPress
+  id: CMFaxPressPortable
+  name: portable press fax machine
+  suffix: Portable Press
+  components:
+  - type: FaxMachine
+    name: "Correspondent Portable"
 
 - type: entity
   parent: CMFax

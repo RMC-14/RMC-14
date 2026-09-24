@@ -154,7 +154,7 @@ rmc-job-greeting-corporate-dome-goon-engi = You are a Corporate Security Technic
 
 # New Varadero Survs
 
-rmc-job-name-survivor-commander-new-varadero = Commander
+rmc-job-name-survivor-commander-new-varadero = UNMC Commander
 
 cm-job-name-surivor-beach-bum = Beach Bum
 
@@ -237,7 +237,7 @@ rmc-job-name-survivor-infrastructure-engineer = Inzhener Infrastruktury
 
 rmc-job-name-survivor-reactor-technician = Tekhnik Reaktora
 
-rmc-job-name-survivor-armed-police-officer = Narodnyy Vooruzhennyy Politsioner
+rmc-job-name-survivor-civil-gendarmes-officer = Narodnyye Grazhdanskiye Zhandarmy
 
 rmc-job-name-survivor-army-reservist = Armiyskiy Rezervist
 rmc-job-prefix-army-reservist = 202/ARMY
@@ -255,7 +255,7 @@ rmc-job-name-survivor-soro-miner = Jùtóu Combine - Shakhtyor
 
 rmc-job-name-survivor-halcyon-dynamics-liaison = Halcyon Dynamics - Corporate Liaison
 
-# Sorokyne SOF insert survs 
+# Sorokyne SOF insert survs
 
 rmc-job-greeting-soro-sof = You are a member of an SPP SOF QRF team! Your primary objective is to survive. You believe a second dropship crashed somewhere to the south west, which was carrying additional weapons. You are part of an SOF QRF team of the Socialist Progressive Peoples, deployed alongside the Ministry of Space Colonization to build garrisons on distant worlds. On the return trip from the frontier, you receive a distress signal from the Peoples' colony of 'Sorokyne Strata' on the planet 'Thermae I' (LV-976). Your team is sent to investigate. Intel suggests CLF separatists or a UN/TSE incursion, but as you touch down in the hangar, something feels wrong. No welcome party. No usual hustle of a working colony. Nothing to suggest an incursion of any kind. Your mission is clear—find out what happened to your supply ship and comrades, retrieve your equipment, and uncover the truth of what really happened to the colony.
 
@@ -284,6 +284,9 @@ rmc-job-prefix-soro-sof-spec = 121/RECON SPEC
 rmc-job-name-soro-sof-soldier = SOF Soldier
 rmc-job-prefix-soro-sof-soldier = 121/RECON SOL
 
+rmc-job-name-soro-sof-synth = SOF Support Synthetic
+rmc-job-prefix-soro-sof-synth = 121/RECON SYN
+
 # Trijent survs
 
 rmc-job-name-survivor-trijent-chaplain = Trijent Dam Chaplain
@@ -303,9 +306,9 @@ cm-job-name-survivor-trijent-dam-tech = Dam Maintenance Technician
 cm-job-name-survivor-trijent-corporate = Trijent Corporation Liaison
 CMSurvivorTrijentCorporate = Trijent Corporation Liaison
 
-# Trijent crashland insert survs 
+# Trijent crashland insert survs
 
-rmc-job-greeting-crashland = You are a member of an SPP recon force! Your primary objective is to survive. You believe a second dropship crashed somewhere to the south east, which was carrying additional weapons. Your orders were simple, Recon the site, ascertain if there is a biological weapons program in the area, and if so to secure the colony and retrieve a sample. However your team failed to account for an active anti-air battery near the area. Both your craft and your sister ship crashed. Barely having a chance to catch your breath, you found yourself being assailed by vile xenonids! You and your team have barely held your ground, at the cost of four of your own, but more are coming and ammo is low. You believe a United Nations rescue force is en route.
+rmc-job-greeting-crashland = You are a member of an SPP recon force! Your primary objective is to survive. You believe a second dropship crashed somewhere to the south east, which was carrying additional weapons. Your orders were simple, recon the site, ascertain if there is a biological weapons program in the area, and if so to secure the colony and retrieve a sample. However your team failed to account for an active anti-air battery near the area. Both your craft and your sister ship crashed. Barely having a chance to catch your breath, you found yourself being assailed by vile xenonids! You and your team have barely held your ground, at the cost of four of your own, but more are coming and ammo is low. You believe a United Nations rescue force is en route.
 
   You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
 
@@ -332,6 +335,8 @@ rmc-job-prefix-crashland-spec = 173/RECON SPEC
 rmc-job-name-crashland-soldier = Airborne Soldier
 rmc-job-prefix-crashland-soldier = 173/RECON SOL
 
+rmc-job-name-crashland-synth = Airborne Support Synthetic
+rmc-job-prefix-crashland-synth = 173/RECON SYN
 
 # Fiorina Science Annex Survs
 
@@ -351,25 +356,28 @@ cm-job-name-survivor-riot-officer = CMB Riot Control Officer
 CMSurvivorFiorinaRiotOfficer = CMB Riot Control Officer
 cm-job-prefix-survivor-riot-officer = CMB RCO
 
+rmc-job-name-survivor-riot-TL = CMB Riot Control Team Leader
+rmc-job-prefix-survivor-riot-TL = CMB RCTL
+
 CMSurvivorFiorinaPrisonGuard = We-Ya Corporate Security
 
-rmc-job-greeting-riot-in-progress-CMB-RCTL = You are a CMB Riot Control Team Leader!
+rmc-job-greeting-riot-in-progress-CMB-TL = You are a CMB Riot Control Team Leader!
 
   You are aware of the xenonid threat.
 
   Your primary objective is to survive the outbreak.
 
-  You are a CMB Riot Control Team Leader, you run a team as part of the Riot Control Unit of the Colony Marshal Bureau. Your dispatcher received a distress signal from the infamous Fiorina Orbital Penitentiary. You figured it was just another typical case of the prison dealing with a riot their understaffed security force couldn't handle, with more and more of its personnel getting dispatched elsewhere in the galaxy. This wasn't the first time CMB officers were called in to assist, but unfortunately for you, this time it also wasn't the 'minor riot' you expected it to be. Loaded up with only beanbags and finding nobody to greet you on the LZ after being dropped off, you and the rest of your team had gone towards the armory to speak to the Quartermaster, but only found corpses of both prisoners and security littered around on the way. Worried about armed prisoners, your team was in the process of switching to lethals in the armory when some sort of huge alien jumped out from the shadows and snatched Jerry away while he was off praying. The thing dragged him off too fast to catch and his screams faded away down the halls, poor bastard. Now, you'll need to decide whether to look for more clues about what the hell happened here, hunt whatever's out there, or hold a position and hope someone else will respond to the distress signal before it's too late...
+  You are a CMB Riot Control Team Leader, running a team as part of the Riot Control Unit of the Colony Marshal Bureau. Your dispatcher received a distress signal from the infamous Fiorina Orbital Penitentiary. You figured it was just another typical case of the prison dealing with a riot their understaffed security force couldn't handle, with more and more of its personnel getting dispatched elsewhere in the galaxy. This wasn't the first time your team was called in to assist, but unfortunately for you, this time it also wasn't the 'minor riot' you expected it to be. Loaded up with only beanbags and finding nobody to greet you on the LZ after being dropped off, you led your team towards the armory to speak to the Quartermaster, but only found corpses of both prisoners and security littered around on the way. Worried about armed prisoners, your team was in the process of switching to lethals in the armory when some sort of huge alien jumped out from the shadows and snatched Jerry away while he was off praying. The thing dragged him off too fast to catch and his screams faded away down the halls, poor bastard. Now, you'll need to decide whether to look for more clues about what the hell happened here, hunt whatever's out there, or hold a position and hope someone else will respond to the distress signal before it's too late...
 
   You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
-rmc-job-greeting-riot-in-progress-CMB-RCO = You are a CMB Riot Control Officer!
+rmc-job-greeting-riot-in-progress-CMB = You are a CMB Riot Control Officer!
 
   You are aware of the xenonid threat.
 
   Your primary objective is to survive the outbreak.
 
-  You are a CMB Riot Control Officer, a team member of the Riot Control Unit of the Colony Marshal Bureau. Your team leader briefed you on a distress signal coming from the infamous Fiorina Orbital Penitentiary, probably another minor riot going sour fast. The prison was an understaffed mess so you weren't too surprised they had sent out a distress signal, calling you in to do their jobs yet again. Unfortunately for you, this time it also wasn't the 'minor riot' you expected it to be. Loaded up with only beanbags and finding nobody to greet you on the LZ after being dropped off, you and the rest of your team had gone towards the armory to speak to the Quartermaster, but only found corpses of both prisoners and security littered around on the way. Worried about armed prisoners, your team was in the process of switching to lethals in the armory when some sort of huge alien jumped out from the shadows and snatched Jerry away while he was off praying. The thing dragged him off too fast to catch and his screams faded away down the halls, poor bastard. Now, you'll need to decide whether to look for more clues about what the hell happened here, hunt whatever's out there, or hold a position and hope someone else will respond to the distress signal before it's too late...
+  You are a CMB Riot Control Officer, a part of the Riot Control Unit of the Colony Marshal Bureau. Your team leader briefed you on a distress signal coming in from the infamous Fiorina Orbital Penitentiary, probably another minor riot going sour fast. The prison was an understaffed mess so you weren't too surprised they had sent out a distress signal, calling you in to do their jobs yet again. Unfortunately for you, this time it also wasn't the 'minor riot' you expected it to be. Loaded up with only beanbags and finding nobody to greet you on the LZ after being dropped off, you and the rest of your team had gone towards the armory to speak to the Quartermaster, but only found corpses of both prisoners and security littered around on the way. Worried about armed prisoners, your team was in the process of switching to lethals in the armory when some sort of huge alien jumped out from the shadows and snatched Jerry away while he was off praying. The thing dragged him off too fast to catch and his screams faded away down the halls, poor bastard. Now, you'll need to decide whether to look for more clues about what the hell happened here, hunt whatever's out there, or hold a position and hope someone else will respond to the distress signal before it's too late...
 
   You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
@@ -410,7 +418,7 @@ rmc-job-prefix-survivor-solaris-corporate-supervisor = Supervisor
 
 rmc-job-greeting-solaris-pmc = You are a survivor of a crash landing!
 
-  You are NOT aware of the xenomorph threat.
+  You are NOT aware of the xenonid threat.
 
   Your primary objective is to survive. You believe a second dropship crashed somewhere to the north, which was carrying additional supplies.
 
@@ -420,7 +428,7 @@ rmc-job-greeting-solaris-pmc = You are a survivor of a crash landing!
 
 rmc-job-greeting-solaris-pmc-medic = You are a survivor of a crash landing!
 
-  You are NOT aware of the xenomorph threat.
+  You are NOT aware of the xenonid threat.
 
   Your primary objective is to survive. You believe a second dropship crashed somewhere to the north, which was carrying additional supplies.
 
@@ -430,7 +438,7 @@ rmc-job-greeting-solaris-pmc-medic = You are a survivor of a crash landing!
 
 rmc-job-greeting-solaris-pmc-engineer = You are a survivor of a crash landing!
 
-  You are NOT aware of the xenomorph threat.
+  You are NOT aware of the xenonid threat.
 
   Your primary objective is to survive. You believe a second dropship crashed somewhere to the north, which was carrying additional supplies.
 
@@ -440,7 +448,7 @@ rmc-job-greeting-solaris-pmc-engineer = You are a survivor of a crash landing!
 
 rmc-job-greeting-solaris-pmc-leader = You are a survivor of a crash landing!
 
-  You are NOT aware of the xenomorph threat.
+  You are NOT aware of the xenonid threat.
 
   Your primary objective is to survive. You believe a second dropship crashed somewhere to the north, which was carrying additional supplies.
 
@@ -450,7 +458,7 @@ rmc-job-greeting-solaris-pmc-leader = You are a survivor of a crash landing!
 
 rmc-job-greeting-solaris-pmc-commander = You are a survivor of a crash landing!
 
-  You are NOT aware of the xenomorph threat.
+  You are NOT aware of the xenonid threat.
 
   Your primary objective is to survive. You believe a second dropship crashed somewhere to the north, which was carrying additional supplies.
 
@@ -460,7 +468,7 @@ rmc-job-greeting-solaris-pmc-commander = You are a survivor of a crash landing!
 
 rmc-job-greeting-solaris-pmc-supervisor = You are a survivor of a crash landing!
 
-  You are NOT aware of the xenomorph threat.
+  You are NOT aware of the xenonid threat.
 
   Your primary objective is to survive. You believe a second dropship crashed somewhere to the north, which was carrying additional supplies.
 
@@ -480,7 +488,7 @@ rmc-job-name-survivor-shivas-assman = Assistant Operations Manager
 
 rmc-job-greeting-shivas-assistant-manager = You are the last alive Senior Administrator on the Colony!
 
-  You are aware of the xenomorph threat.
+  You are aware of the xenonid threat.
 
   Your primary objective is to survive the outbreak.
 
@@ -490,7 +498,7 @@ rmc-job-greeting-shivas-assistant-manager = You are the last alive Senior Admini
 
 rmc-job-greeting-shivas-commando = You are the last living security element on the Colony!
 
-  You are aware of the xenomorph threat.
+  You are aware of the xenonid threat.
 
   Your primary objective is to survive the outbreak.
 
@@ -500,7 +508,7 @@ rmc-job-greeting-shivas-commando = You are the last living security element on t
 
 rmc-job-greeting-shivas-panic-room-researcher = You are a Weston-Yamada Scientist on the Colony!
 
-  You are aware of the xenomorph threat.
+  You are aware of the xenonid threat.
 
   Your primary objective is to survive the outbreak.
 
@@ -510,7 +518,7 @@ rmc-job-greeting-shivas-panic-room-researcher = You are a Weston-Yamada Scientis
 
 rmc-job-greeting-shivas-panic-room-doctor = You are a Medical Doctor on the Colony!
 
-  You are aware of the xenomorph threat.
+  You are aware of the xenonid threat.
 
   Your primary objective is to survive the outbreak.
 
@@ -520,10 +528,30 @@ rmc-job-greeting-shivas-panic-room-doctor = You are a Medical Doctor on the Colo
 
 rmc-job-greeting-shivas-panic-room-engineer = You are an Engineer on the Colony!
 
-  You are aware of the xenomorph threat.
+  You are aware of the xenonid threat.
 
   Your primary objective is to survive the outbreak.
 
   You are an Engineer working on 'Ifrit' for Weston-Yamada. This whole outbreak has been a giant mess, you and all other Company personnel ran to the Operations Panic Room, until you heard shooting outside and closed the shutters. You are running low on food, water and ammunition for the weapons. You remember that the xenonids seem to be able to see in the dark, as you saw one grab a co-worker trying to fix the generators after the power went out. In their attempts at trying to breach in, the so called 'xenonids' have tried attacking the shutters, but to no avail. They will soon try again. You must survive and find a way to contact Weston-Yamada.
 
   You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+# Tyrargo Rift survs
+
+rmc-job-greeting-tyrargo = You are a UNMC Marine. What began as a training exercise on this planet turned into a nightmare, the unexpected arrival of a massive xenonid hive has turned this world into a warzone. You and your battalion have been tasked to defend the city of Tyrargo Rift to give time for the tens of thousands of civilians to be evacuated to a safe zone. It's been two weeks since the siege of the city began. The last few thousand civilians are held up at the museum evacuation site. You and your squad have been holding this trench line by yourselves for the last week, but your ammo is almost gone and the bugs are making the largest push soon. It's time to prepare for the final fight.
+
+  You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
+
+  You are NOT aware of the marines or their intentions.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-name-tyrargo = UNMC Tyrargo Survivor
+rmc-job-description-tyrargo = You are a UNMC Marine. Your training exercises have turned into a massive battle against the xenonids. Do what it takes to survive!
+
+rmc-job-name-tyrargo-cmt = Combat Medical Technician
+rmc-job-prefix-tyrargo-cmt = CMT
+rmc-job-name-tyrargo-cet = Combat Engineering Technician
+rmc-job-prefix-tyrargo-cet = CET
+rmc-job-name-tyrargo-heavy-gunner = Heavy Gunner
+rmc-job-prefix-tyrargo-heavy-gunner = HVG

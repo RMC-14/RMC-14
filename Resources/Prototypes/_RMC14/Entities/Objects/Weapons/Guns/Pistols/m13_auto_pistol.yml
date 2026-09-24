@@ -316,7 +316,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 32
+        Piercing: 24
   - type: RMCProjectileDamageFalloff
     thresholds:
     - range: 22
@@ -340,7 +340,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 24
+        Piercing: 18
   - type: CMArmorPiercing
     amount: 30
 

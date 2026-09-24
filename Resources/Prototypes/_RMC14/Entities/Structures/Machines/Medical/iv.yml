@@ -56,6 +56,9 @@
       components:
       - Xeno
   - type: RMCMesonsNonviewable
+  - type: GuideHelp
+    guides:
+    - RMCMedical
 
 - type: entity
   parent: BaseItem
@@ -112,6 +115,9 @@
   - type: PhysicalComposition
     materialComposition:
       RMCPlastic: 500
+  - type: GuideHelp
+    guides:
+    - RMCMedical
 
 - type: entity
   parent: CMBloodPack

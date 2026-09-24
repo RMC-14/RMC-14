@@ -62,6 +62,12 @@ public sealed class XenoRetrieveSystem : EntitySystem
             return;
         }
 
+        if (_mobState.IsDead(target))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-retrieve-dead", ("target", target)), xeno, xeno, PopupType.SmallCaution);
+            return;
+        }
+
         if (Transform(target).Anchored)
         {
             var msg = Loc.GetString("rmc-xeno-retrieve-anchored");

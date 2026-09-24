@@ -69,7 +69,7 @@
       <GuideEntityEmbed Entity="RMCSpitterMapIcon" Margin="0 32 0 0"/>
     </Box>
     <Box Orientation="Vertical">
-      <GuideEntityEmbed Entity="CMXenoBoiler" Caption=""/>
+      <GuideEntityEmbed Entity="RMCXenoBoiler" Caption=""/>
       <GuideEntityEmbed Entity="RMCBoilerMapIcon"/>
     </Box>
   </Box>

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-4.0",
-  "copyright": "Made by SharkSnake98 on GitHub",
+  "copyright": "Made by SharkSnake98 on GitHub and taken from https://github.com/cmss13-devs/cmss13/blob/5c043a54dd29c82036ee6c6b2eec8f6a5f456d13/icons/mob/humans/onmob/clothing/helmet_garb/glasses.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -16,6 +16,10 @@
     },
     {
       "name": "equipped-MASK",
+      "directions": 4
+    },
+    {
+      "name": "helmet",
       "directions": 4
     }
   ]

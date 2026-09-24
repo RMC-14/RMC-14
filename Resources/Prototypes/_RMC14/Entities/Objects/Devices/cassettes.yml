@@ -6,7 +6,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Devices/cassette_player.rsi
-    state: walkman
+    layers:
+    - state: walkman
+      map: ["base" ]
   - type: Item
     size: Small
   - type: Clothing
@@ -16,7 +18,16 @@
   - type: ClothingLimit
     slot: All
     id: RMCCassettePlayer
-
+  - type: RandomSprite
+    available:
+    - base:
+        walkman: ""
+        walkman_1: ""
+        walkman_2: ""
+        walkman_3: ""
+        walkman_4: ""
+        walkman_5: ""
+    
 - type: entity
   abstract: true
   parent: BaseItem

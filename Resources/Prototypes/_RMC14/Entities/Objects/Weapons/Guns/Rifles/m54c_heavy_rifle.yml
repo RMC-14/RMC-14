@@ -96,7 +96,7 @@
           - RMCAttachmentAngledGrip
           - RMCAttachmentBipod
           - RMCAttachmentBurstFireAssembly
-          - RMCAttachmentExtinguisher
+          - RMCAttachmentUnderbarrelExtinguisher
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentVerticalGrip
   - type: AttachableHolderVisuals

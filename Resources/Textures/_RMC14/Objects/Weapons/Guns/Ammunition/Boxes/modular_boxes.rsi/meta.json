@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Original Sprite by Aleksh, Modified by Ramiris, SharkSnake98 on Github, RavenCaat on GitHub, github noctyrnal; _90, _90d, rifle_box_large, rifle_lid_large, rifle_ammo_large by @TadJohnson00 (GitHub); _24 and _a3 by github monomethylhydrazine",
+  "copyright": "Original Sprite by Aleksh, Modified by Ramiris, SharkSnake98 on Github, RavenCaat on GitHub, github noctyrnal; _90, _90d, rifle_box_large, rifle_lid_large, rifle_ammo_large by @TadJohnson00 (GitHub); _24 and _a3 by github monomethylhydrazine; _47 and _77 by github Ian321",
   "size": {
     "x": 32,
     "y": 32
@@ -38,7 +38,13 @@
       "name": "rifle_box_42"
     },
     {
+      "name": "rifle_box_47"
+    },
+    {
       "name": "rifle_box_71"
+    },
+    {
+      "name": "rifle_box_77"
     },
     {
       "name": "rifle_box_88"

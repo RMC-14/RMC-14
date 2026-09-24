@@ -300,4 +300,8 @@
     bio: 100
     explosionArmor: 20
     # armor_rad = 55
+  - type: ClothingGrantComponents
+    components:
+    - type: RMCImmuneToIgnition
+    - type: RMCImmuneToFireTileDamage
 # TODO: add advanced version of CBRN helmet

@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/03/2026 18:17:14
-  entityCount: 40
+  time: 06/16/2026 10:26:03
+  entityCount: 48
 maps: []
 grids:
 - 1
@@ -413,6 +413,48 @@ entities:
     components:
     - type: Transform
       pos: 0.5,10.5
+      parent: 1
+- proto: RMCBlockerVehicle
+  entities:
+  - uid: 41
+    components:
+    - type: Transform
+      pos: 1.5,4.5
+      parent: 1
+  - uid: 42
+    components:
+    - type: Transform
+      pos: 2.5,4.5
+      parent: 1
+  - uid: 43
+    components:
+    - type: Transform
+      pos: 3.5,4.5
+      parent: 1
+  - uid: 44
+    components:
+    - type: Transform
+      pos: 4.5,4.5
+      parent: 1
+  - uid: 45
+    components:
+    - type: Transform
+      pos: 5.5,4.5
+      parent: 1
+  - uid: 46
+    components:
+    - type: Transform
+      pos: 7.5,2.5
+      parent: 1
+  - uid: 47
+    components:
+    - type: Transform
+      pos: 7.5,0.5
+      parent: 1
+  - uid: 48
+    components:
+    - type: Transform
+      pos: 7.5,1.5
       parent: 1
 - proto: RMCDecalSpawnerBloodSplatters
   entities:

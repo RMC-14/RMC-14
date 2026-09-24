@@ -1,5 +1,6 @@
 using Content.Server._RMC14.NPC;
 using Content.Server._RMC14.NPC.HTN;
+using Content.Shared._RMC14.CrashLand;
 using Content.Shared._RMC14.Dropship.Utility.Systems;
 using Content.Shared._RMC14.SupplyDrop;
 using Content.Shared.ParaDrop;
@@ -14,17 +15,11 @@ public sealed class RMCOrbitalDeployerSystem : SharedRMCOrbitalDeployerSystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<SleepNPCComponent, ParaDropFinishedEvent>(OnParaDropFinished);
         SubscribeLocalEvent<SupplyDropPodComponent, ParaDropFinishedEvent>(OnParaDropFinished);
+        SubscribeLocalEvent<SupplyDropPodComponent, CrashLandedEvent>(OnParaDropFinished);
     }
 
-    private void OnParaDropFinished(Entity<SleepNPCComponent> ent, ref ParaDropFinishedEvent args)
-    {
-        _rmcNpc.WakeNPC(ent);
-        _physics.SetCanCollide(ent, true);
-    }
-
-    private void OnParaDropFinished(Entity<SupplyDropPodComponent> ent, ref ParaDropFinishedEvent args)
+    private void OnParaDropFinished<T>(Entity<SupplyDropPodComponent> ent, ref T args)
     {
         ent.Comp.Landed = true;
         Dirty(ent);

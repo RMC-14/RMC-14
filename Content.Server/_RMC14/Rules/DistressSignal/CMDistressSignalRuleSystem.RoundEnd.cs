@@ -8,6 +8,7 @@ using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Light;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Synth;
 using Content.Shared._RMC14.Thunderdome;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Evolution;
@@ -38,6 +39,9 @@ public sealed partial class CMDistressSignalRuleSystem
             return;
 
         distress.NextCheck ??= Timing.CurTime + distress.CheckEvery;
+
+        if (distress.ScuttleFinalSequenceStarted || distress.ScuttleDetonated)
+            return;
 
         if (distress.ForceEndAt != null && Timing.CurTime >= distress.ForceEndAt)
         {
@@ -123,6 +127,9 @@ public sealed partial class CMDistressSignalRuleSystem
             {
                 continue;
             }
+
+            if (HasComp<SynthComponent>(marineId))
+                continue;
 
             if (_containers.IsEntityInContainer(marineId))
                 continue;
@@ -237,6 +244,7 @@ public sealed partial class CMDistressSignalRuleSystem
             DistressSignalRuleResult.MinorMarineVictory => distress.MinorMarineAudio,
             DistressSignalRuleResult.MajorXenoVictory => distress.MajorXenoAudio,
             DistressSignalRuleResult.MinorXenoVictory => distress.MinorXenoAudio,
+            DistressSignalRuleResult.SelfDestruct => distress.SelfDestructAudio,
             _ => null,
         };
 
@@ -269,6 +277,7 @@ public sealed partial class CMDistressSignalRuleSystem
                 DistressSignalRuleResult.MajorXenoVictory => 1,
                 DistressSignalRuleResult.MinorXenoVictory => 0, // hijack but all xenos die or timeout happens
                 DistressSignalRuleResult.AllDied => 0,
+                DistressSignalRuleResult.SelfDestruct => 0,
                 null => 0,
                 _ => throw new ArgumentOutOfRangeException(),
             };
@@ -318,7 +327,7 @@ public sealed partial class CMDistressSignalRuleSystem
                 _rmcAmbientLight.SetColor((xenoMap, rmcAmbientComp), colorSequence, _sunriseDuration);
             }
 
-            var ares = _ares.EnsureARES();
+            var ares = _aresCore.EnsureMarineARES();
             _marineAnnounce.AnnounceRadio(ares,
                 Loc.GetString("rmc-distress-signal-bioscan-complete"),
                 rule.AllClearChannel);

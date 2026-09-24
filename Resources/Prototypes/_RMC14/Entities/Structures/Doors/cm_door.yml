@@ -109,6 +109,8 @@
   components:
   - type: Weldable
     time: 3
+  - type: RMCWeldEffectSource
+    startingOffset: 0, -0.5
   - type: WiresVisuals
   - type: ExtensionCableReceiver
   - type: Electrified
@@ -154,6 +156,11 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: VehicleSmashable
+    damageOnHit: 1000
+    requiresDoorUnpowered: true
+    smashSound:
+      path: /Audio/_RMC14/Effects/metal_crash.ogg
   - type: RMCWallExplosionDeletable
   - type: DestroyedByExplosionType
   - type: DamageMultiplierFlags

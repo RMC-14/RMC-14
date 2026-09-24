@@ -1,0 +1,35 @@
+- type: decal
+  id: RMCDecalLargeStain1
+  parent: CMDecalBase
+  tags: ["station"]
+  sprite:
+    sprite: _RMC14/Decals/large_stain.rsi
+    state: 1
+    scale: 2, 2
+
+- type: decal
+  id: RMCDecalLargeStain2
+  parent: RMCDecalLargeStain1
+  tags: ["station"]
+  sprite:
+    sprite: _RMC14/Decals/large_stain.rsi
+    state: 2
+    scale: 2, 2
+
+- type: decal
+  id: RMCDecalLargeStain3
+  parent: RMCDecalLargeStain1
+  tags: ["station"]
+  sprite:
+    sprite: _RMC14/Decals/large_stain.rsi
+    state: 3
+    scale: 2, 2
+
+- type: decal
+  id: RMCDecalLargeStain4
+  parent: RMCDecalLargeStain1
+  tags: ["station"]
+  sprite:
+    sprite: _RMC14/Decals/large_stain.rsi
+    state: 4
+    scale: 2, 2

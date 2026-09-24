@@ -16,6 +16,10 @@
   - type: Tag
     tags:
     - Briefcase
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCBriefcase

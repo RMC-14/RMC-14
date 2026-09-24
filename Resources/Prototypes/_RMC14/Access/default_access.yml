@@ -48,3 +48,9 @@
   name: protobaseaccess UNMC Squad
   faction: FactionMarine
   accessGroup: UNMC Squad
+
+- type: accessLevel
+  id: RMCBaseARESAccess
+  name: protobaseaccess UNMC ARES
+  faction: FactionMarine
+  accessGroup: UNMC ARES

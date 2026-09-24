@@ -3,7 +3,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechSCTGear
-  name: ColMarTech squad comtech gear rack
+  name: ASRS squad comtech gear rack
   description: An automated gear rack for combat technicians.
   components:
   - type: AccessReader
@@ -93,10 +93,6 @@
         points: 6
       - id: CMMagazineRifleM4SPRExt
         points: 6
-      - id: RMCMagazinePistolM13AP
-        points: 6
-      - id: RMCMagazinePistolM13ExtAP
-        points: 8
       - id: CMMagazineSMGM63AP
         points: 6
       - id: CMMagazineSMGM63Ext
@@ -204,7 +200,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechSCTEquipment
-  name: ColMarTech squad comtech equipment rack
+  name: ASRS squad comtech equipment rack
   description: An automated rack hooked up to a colossal storage of combat technician standard-issue equipment.
   components:
   - type: Sprite
@@ -330,7 +326,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechSCTTools
-  name: ColMarTech squad comTech tools vendor
+  name: ASRS squad comTech tools vendor
   description: A vending machine that stores various extra tools that are useful on the field.
   components:
   - type: AccessReader
@@ -344,6 +340,7 @@
     - state: "normal-unshaded"
       map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
   - type: CMAutomatedVendor
+    canManualRestock: true
     access:
     - "CMAccessCombatTechPrep"
     hackable: true
