@@ -19,11 +19,11 @@ public sealed class XenoOvipositorHiveNotifySystem : EntitySystem
     {
         if (args.Attached)
         {
-            _xenoAnnounce.AnnounceSameHive(queen.Owner, Loc.GetString("cm-xeno-queen-attach-ovipositor"));
+            _xenoAnnounce.AnnounceSameHive(queen.Owner, Loc.GetString("rmc-xeno-queen-attach-ovipositor"));
         }
         if (!args.Attached)
         {
-            _xenoAnnounce.AnnounceSameHive(queen.Owner, Loc.GetString("cm-xeno-queen-shed-ovipositor"));
+            _xenoAnnounce.AnnounceSameHive(queen.Owner, Loc.GetString("rmc-xeno-queen-shed-ovipositor"));
         }
     }
 }
