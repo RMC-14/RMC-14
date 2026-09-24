@@ -60,7 +60,7 @@
     magState: mag
     steps: 1
     zeroVisible: true
-  - type: AttachableHolder # TODO RMC14 barrel nozzle
+  - type: AttachableHolder
     slots:
       rmc-aslot-rail:
         whitelist:
@@ -71,6 +71,7 @@
         whitelist:
           tags:
           - RMCAttachmentUnderbarrelExtinguisher
+          - RMCAttachmentFlamerNozzle
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-rail: -0.032, 0.092
@@ -124,6 +125,25 @@
         whitelist:
           components:
           - RMCFlamerTank
+
+- type: entity
+  parent: RMCWeaponFlamer
+  id: RMCWeaponFlamerExtinguisher
+  suffix: Extinguisher
+  components:
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentUnderbarrelExtinguisher
+        whitelist:
+          tags:
+          - RMCAttachmentUnderbarrelExtinguisher
+          - RMCAttachmentFlamerNozzle
 
 - type: entity
   parent: BaseItem
@@ -277,21 +297,3 @@
     - id: RMCTankFlamer
       amount: 2
     - id: RMCAttachmentUnderbarrelExtinguisher
-
-- type: entity
-  parent: RMCWeaponFlamer
-  id: RMCWeaponFlamerExt
-  suffix: with extinguisher
-  components:
-  - type: AttachableHolder
-    slots:
-      rmc-aslot-rail:
-        whitelist:
-          tags:
-          - RMCAttachmentRailFlashlight
-          - RMCAttachmentMagneticHarness
-      rmc-aslot-underbarrel:
-        startingAttachable: RMCAttachmentUnderbarrelExtinguisher
-        whitelist:
-          tags:
-          - RMCAttachmentUnderbarrelExtinguisher

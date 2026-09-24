@@ -71,11 +71,12 @@
 - type: entity
   parent: RMCSurvivorPresetSecurity
   id: RMCGearSurvivorPresetLV624CorporateDomeGoonLead
+  categories: [ HideSpawnMenu ]
   name: lv624 colonist preset
 
 - type: jobIcon
   parent: CMJobIconBase
   id: RMCJobIconPMCGoonLead
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/We-Ya/goon.rsi
     state: weya_goon_lead
