@@ -53,7 +53,7 @@
   parent: RMCWeaponFlamerSPP
   id: RMCWeaponFlamerSPPM34Compatible
   suffix: M34 Compatible
-  description: An aged but effective lightweight combat incinerator officially in service as a anti-fortification tool, but in practice, utilized in close quarters combat for flushing out enemy combatants. Due to a quirk in the manufacturing process of this specific weapon, the tank attachment port is technically forward compatible with M34 incinerator tanks, though it carries a risk of jamming the firing mechanism entirely.
+  description: An aged but effective lightweight combat incinerator officially in service as a anti-fortification tool, but in practice, utilized in close quarters combat for flushing out enemy combatants. Due to a quirk in the manufacturing process of this specific weapon, the tank attachment port is technically forward compatible with M34 incinerator tanks.
   components:
   - type: ItemSlots
     slots:
