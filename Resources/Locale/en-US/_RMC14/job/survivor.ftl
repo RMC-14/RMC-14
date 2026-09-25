@@ -1,4 +1,4 @@
-﻿# generic survs
+# generic survs
 cm-job-name-survivor = Civilian Colonist
 cm-job-description-survivor = You are a survivor of the attack on a corporate facility. You worked or lived in the colony/station, and managed to avoid the alien attacks... until now.
 
@@ -555,3 +555,11 @@ rmc-job-name-tyrargo-cet = Combat Engineering Technician
 rmc-job-prefix-tyrargo-cet = CET
 rmc-job-name-tyrargo-heavy-gunner = Heavy Gunner
 rmc-job-prefix-tyrargo-heavy-gunner = HVG
+
+# CLF SURVIVORS
+
+rmc-job-name-clf-survivor-coordinator = CLF Coordinator
+rmc-job-prefix-clf-survivor-coordinator = CRDN
+
+rmc-job-name-clf-survivor-synth = CLF Multipurpose Synthetic
+rmc-job-prefix-clf-survivor-synth = SYN
