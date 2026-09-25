@@ -1,0 +1,85 @@
+<controls:RMCTuringDispenserWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Chemistry.TuringDispenser"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    Title="Turing Dispenser" MinSize="560 600">
+    <PanelContainer>
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BackgroundColor="#181C24" />
+        </PanelContainer.PanelOverride>
+        <ScrollContainer HScrollEnabled="False" VScrollEnabled="True">
+            <BoxContainer Orientation="Horizontal" Margin="4">
+                <!-- Left column: controls -->
+                <BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="0 0 3 0">
+                    <PanelContainer Name="ControlsHeader" Access="Public">
+                        <Label Text="Turing dispenser controls" FontColorOverride="#FFFFFF" Margin="6 2" />
+                    </PanelContainer>
+
+                    <ProgressBar Name="EnergyBar" Access="Public" HorizontalExpand="True" MinHeight="14" Margin="0 3 0 0">
+                        <Label Name="EnergyLabel" Access="Public" HorizontalAlignment="Left" Margin="6 0 0 0" FontColorOverride="#000000" />
+                    </ProgressBar>
+
+                    <PanelContainer Name="StatusPanel" Access="Public" Margin="0 5 0 0">
+                        <Label Name="StatusLabel" Access="Public" Margin="6 1" />
+                    </PanelContainer>
+
+                    <Button Name="ClearMemoryButton" Access="Public" HorizontalExpand="True" Margin="0 6 0 0" />
+                    <Button Name="RunProgramButton" Access="Public" HorizontalExpand="True" Margin="0 1 0 0" />
+
+                    <PanelContainer Name="BoxAlertPanel" Access="Public" Margin="0 6 0 0">
+                        <Label Name="BoxStatusLabel" Access="Public" Margin="6 1" />
+                    </PanelContainer>
+                    <Button Name="SaveToMemoryButton" Access="Public" HorizontalExpand="True" Margin="0 5 0 0" />
+                    <Button Name="EjectBoxButton" Access="Public" HorizontalExpand="True" Margin="0 1 0 0" />
+
+                    <PanelContainer Name="BeakerAlertPanel" Access="Public" Margin="0 6 0 0">
+                        <Label Name="BeakerStatusLabel" Access="Public" Margin="6 1" />
+                    </PanelContainer>
+                    <Button Name="DisposeBeakerButton" Access="Public" HorizontalExpand="True" Margin="0 5 0 0" />
+                    <Button Name="EjectBeakerButton" Access="Public" HorizontalExpand="True" Margin="0 1 0 0" />
+
+                    <PanelContainer Name="SettingsHeader" Access="Public" Margin="0 6 0 0">
+                        <Label Text="Settings" FontColorOverride="#FFFFFF" Margin="6 2" />
+                    </PanelContainer>
+
+                    <BoxContainer Orientation="Horizontal" Margin="0 3 0 0">
+                        <Label Text="Program multiplier:" HorizontalExpand="True" FontColorOverride="#C7CCD6" />
+                        <Control Name="MultiplierContainer" Access="Public" />
+                    </BoxContainer>
+                    <BoxContainer Orientation="Horizontal" Margin="0 3 0 0">
+                        <Label Text="Program cycles:" HorizontalExpand="True" FontColorOverride="#C7CCD6" />
+                        <Control Name="CyclesContainer" Access="Public" />
+                    </BoxContainer>
+
+                    <Button Name="AutoRunButton" Access="Public" HorizontalExpand="True" Margin="0 4 0 0" />
+                    <Button Name="SmartLinkButton" Access="Public" HorizontalExpand="True" Margin="0 1 0 0" />
+                    <Button Name="OutputModeButton" Access="Public" HorizontalExpand="True" Margin="0 1 0 0" />
+                </BoxContainer>
+
+                <!-- Right column: programs -->
+                <BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="3 0 0 0">
+                    <PanelContainer Name="MemoryHeader" Access="Public">
+                        <Label Text="Memory Program" FontColorOverride="#FFFFFF" Margin="6 2" />
+                    </PanelContainer>
+                    <PanelContainer Name="MemoryEmptyPanel" Access="Public" Margin="0 5 0 0">
+                        <Label Name="MemoryEmptyLabel" Access="Public" Text="Nothing saved to memory!" Margin="6 1" />
+                    </PanelContainer>
+                    <BoxContainer Name="MemoryProgramContainer" Access="Public" Orientation="Vertical" Margin="0 5 0 8" />
+
+                    <PanelContainer Name="BoxHeader" Access="Public">
+                        <Label Text="Box Program" FontColorOverride="#FFFFFF" Margin="6 2" />
+                    </PanelContainer>
+                    <PanelContainer Name="BoxEmptyPanel" Access="Public" Margin="0 5 0 0">
+                        <Label Name="BoxEmptyLabel" Access="Public" Text="No box loaded!" Margin="6 1" />
+                    </PanelContainer>
+                    <BoxContainer Name="BoxProgramContainer" Access="Public" Orientation="Vertical" Margin="0 5 0 8" />
+
+                    <PanelContainer Name="BeakerSelectorHeader" Access="Public">
+                        <Label Text="Output Beaker" FontColorOverride="#FFFFFF" Margin="6 2" />
+                    </PanelContainer>
+                    <BoxContainer Name="BeakerSelectorContainer" Access="Public" Orientation="Vertical" Margin="0 5 0 0" />
+                </BoxContainer>
+            </BoxContainer>
+        </ScrollContainer>
+    </PanelContainer>
+</controls:RMCTuringDispenserWindow>
