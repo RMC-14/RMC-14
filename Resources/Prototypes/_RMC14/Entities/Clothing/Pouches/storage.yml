@@ -730,6 +730,7 @@
     blacklist:
       components:
       - Xeno
+  - type: CMHolster
 
 # Cassetes Pouch
 - type: entity
