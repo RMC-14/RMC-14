@@ -2,7 +2,7 @@
 - type: job
   parent: CMJobBase # RMCSurvivorCLFBase
   id: RMCSurvivorCLFCoordinator
-  name: rmc-clf-coordinator # rmc-job-name-clf-survivor-coordinator must be created first
+  name: rmc-job-name-clf-survivor-coordinator
   description: rmc-ghost-role-information-clf-description # Can be removed when parent changed 
   ranks:
     RMCRankCLFRebel: [ ]
@@ -29,7 +29,7 @@
       currentLanguage: Japanese
       defaultLanguage: Japanese
     - type: JobPrefix
-      prefix: rmc-job-prefix-clf-coordinator # rmc-job-prefix-clf-survivor-coordinator must be created first
+      prefix: rmc-job-prefix-clf-survivor-coordinator
     - type: SquadLeader
       icon:
         sprite: _RMC14/Interface/job_icons/CLF.rsi

@@ -2,7 +2,7 @@
 - type: job
   parent: CMJobBase # RMCSurvivorCLFBase
   id: RMCSurvivorCLFSynthetic
-  name: rmc-clf-synthetic # rmc-job-name-clf-survivor-synthetic must be created first
+  name: rmc-job-name-clf-survivor-synth
   description: rmc-ghost-role-information-clf-description # Can be removed when parent changed
   ranks:
     RMCRankSyntheticColonist: [ ]
@@ -18,36 +18,11 @@
       factions:
       - CLF
     - type: Language
-      spokenLanguages:
-      - Japanese
-      - English
-      understoodLanguages:
-      - Japanese
-      - English
-      currentLanguage: Japanese
-      defaultLanguage: Japanese
+      preset: RMCLanguagePresetSynthColonist
     - type: LanguageLearning
-      learnableLanguages:
-      - Xeno
-      firstContactLanguages:
-      - Xeno
-      comprehensionThreshold: 0.8
-      learningRange: 8.0
-      baseWordLearningRate: 0.05
+      preset: RMCLanguageLearningPresetSynthColonist
     - type: JobPrefix
-      prefix: rmc-job-prefix-clf-synth # rmc-job-prefix-clf-survivor-synth must be created first
-    - type: MeleeWeapon
-      soundHit:
-        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
-        params:
-          variation: 0.15
-          volume: -1
-      angle: 30
-      animation: WeaponArcFist
-      attackRate: 1
-      damage:
-        types:
-          Blunt: 35
+      prefix: rmc-job-prefix-clf-survivor-synth
     - type: Synth
     - type: RMCSurvivor
     - type: MotionDetectorTracked

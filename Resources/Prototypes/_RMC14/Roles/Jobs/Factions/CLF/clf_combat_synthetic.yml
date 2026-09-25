@@ -18,11 +18,23 @@
       - CLF
     - type: Language
       spokenLanguages:
-      - Japanese
+      - Russian
+      - Scandinavian
       - English
+      - Japanese
+      - Chinese
+      - German
+      - French
+      - Spanish
       understoodLanguages:
-      - Japanese
+      - Russian
+      - Scandinavian
       - English
+      - Japanese
+      - Chinese
+      - German
+      - French
+      - Spanish
       currentLanguage: Japanese
       defaultLanguage: Japanese
     - type: LanguageLearning
