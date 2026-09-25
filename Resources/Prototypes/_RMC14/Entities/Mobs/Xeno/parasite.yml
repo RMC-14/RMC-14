@@ -11,6 +11,7 @@
   - type: GuideHelp
     guides:
     - RMCGuideRoleParasite
+  - type: RMCAnimalPrey
   - type: GhostRole
     name: cm-job-name-xeno-parasite
     prob: 0

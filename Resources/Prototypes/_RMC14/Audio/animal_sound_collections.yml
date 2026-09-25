@@ -1,0 +1,45 @@
+- type: soundCollection
+  id: RMCGiantLizardGrowl
+  files:
+  - /Audio/_RMC14/Animals/GiantLizard/giant_lizard_growl1.ogg
+  - /Audio/_RMC14/Animals/GiantLizard/giant_lizard_growl2.ogg
+
+- type: soundCollection
+  id: RMCGiantLizardHiss
+  files:
+  - /Audio/_RMC14/Animals/GiantLizard/giant_lizard_hiss1.wav
+  - /Audio/_RMC14/Animals/GiantLizard/giant_lizard_hiss2.wav
+
+- type: soundCollection
+  id: RMCGiantLizardBite
+  files:
+  - /Audio/_RMC14/Xeno/alien_bite1.ogg
+  - /Audio/_RMC14/Xeno/alien_bite2.ogg
+
+- type: soundCollection
+  id: RMCGiantLizardSlash
+  files:
+  - /Audio/_RMC14/Xeno/alien_claw_flesh1.ogg
+  - /Audio/_RMC14/Xeno/alien_claw_flesh2.ogg
+  - /Audio/_RMC14/Xeno/alien_claw_flesh3.ogg
+  - /Audio/_RMC14/Xeno/alien_claw_flesh4.ogg
+  - /Audio/_RMC14/Xeno/alien_claw_flesh5.ogg
+
+- type: emoteSounds
+  id: RMCGiantLizardEmoteSounds
+  sounds:
+    Growl:
+      collection: RMCGiantLizardGrowl
+    Hiss:
+      collection: RMCGiantLizardHiss
+
+- type: emoteSounds
+  id: RMCBatEmoteSounds
+  params:
+    variation: 0.125
+    pitch: 1.25
+  sounds:
+    Squeak:
+      path: /Audio/Animals/mouse_squeak.ogg
+    Scream:
+      path: /Audio/Animals/mouse_squeak.ogg
