@@ -734,6 +734,29 @@
     - RMCAttachmentRail
     - RMCAttachmentL89Scope
 
+- type: entity
+  parent: RMCAttachmentS42xTelescopicMiniscope
+  id: RMCAttachmentM82FSight
+  name: M82-F integrated sight
+  description: Well now its busted. How did you even accomplish this?
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_rail.rsi
+    state: m82f_sight
+  - type: AttachableToggleable
+    breakOnMove: false
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_rail.rsi
+      state: m82f_sight
+    actionName: Look through M82-F sight
+    actionDesc: Lets you shoot flares slightly further for better illumination.
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentRail
+    - RMCAttachmentM82FSight
+
 - type: Tag
   id: RMCAttachmentRail
 
@@ -799,3 +822,6 @@
 
 - type: Tag
   id: RMCAttachmentL89Scope
+
+- type: Tag
+  id: RMCAttachmentM82FSight

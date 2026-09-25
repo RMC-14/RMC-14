@@ -101,6 +101,9 @@
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: taser
       map: [ "taser_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m82f
+      map: [ "m82f_fill" ]
     - state: icon
     - state: closed
       map: [ "holstered" ]
@@ -141,6 +144,7 @@
     - l14_fill
     - cmb_fill
     - mag38_fill
+    - m82f_fill
     mapLayers:
       holstered:
         whitelist:
@@ -227,6 +231,10 @@
         whitelist:
           tags:
           - Taser
+      m82f_fill:
+        whitelist:
+          tags:
+          - RMCFlareGun
   - type: CMHolster
   - type: CMItemSlots
 
