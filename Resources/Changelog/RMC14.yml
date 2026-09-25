@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added impenetrable xeno resin walls and doors, which can't be damaged
-      before 30 minutes into the round, being the equivalent of LZ turrets for marines.
-      Impenetrable resin doors block survivors and marines even while open, and will
-      only let them through if they are stunned or devoured. These will line the inner
-      part of hives on each planet.
-    type: Add
-  id: 3164
-  time: '2026-04-24T03:57:48.075386+00:00'
-  url: null
 - author: IceNoobXD
   changes:
   - message: Lazarus Landing has recived a passover which adds a lot of minor props
@@ -4433,5 +4422,12 @@
   id: 3663
   time: '2026-09-25T20:47:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10864
+- author: MrFish-100
+  changes:
+  - message: Fixed ASRS Wall Vendors not playing vending animation
+    type: Fix
+  id: 3664
+  time: '2026-09-25T20:48:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10883
 Name: RMC14
 Order: -1
