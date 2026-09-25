@@ -48,7 +48,6 @@ rmc-squad-info-SupervisorWeYaSpecialist = Supervisor Specialist
 
 rmc-squad-info-ProvostMarshal = Provost Marshal
 rmc-squad-info-ProvostDeputyMarshal = Provost Deputy Marshal
-rmc-squad-info-ProvostChiefInspector = Provost Chief Inspector
 rmc-squad-info-ProvostInspector = Provost Inspector
 rmc-squad-info-ProvostTeamLeader = Provost Team Leader
 rmc-squad-info-ProvostAdvisor = Provost Advisor
