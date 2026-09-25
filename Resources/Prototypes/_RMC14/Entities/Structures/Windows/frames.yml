@@ -55,6 +55,8 @@
     flags: Breaching
   - type: MinimapColor
     color: "#8d2294ad"
+  - type: XenoWeedable
+    spawn: XenoWeedsWindowFrame
   - type: ReceiverXenoClaws
     maxHealth: 600
     hitsToDestroy: 3
