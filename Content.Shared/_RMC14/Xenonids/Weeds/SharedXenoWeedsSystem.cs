@@ -408,16 +408,20 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     {
         var position = _mapSystem.LocalToTile(grid, grid, coordinates);
         var checkArea = new Box2(position.X - range + 1, position.Y - range + 1, position.X + range, position.Y + range);
-        var enumerable = _mapSystem.GetLocalAnchoredEntities(grid, grid, checkArea);
 
-        return enumerable
-            .Where(anchored =>
-                !TerminatingOrDeleted(anchored) &&
-                WeedsQuery.TryComp(anchored, out var weeds) &&
-                weeds.IsSource == sourceNodes
-            ).Select(weedTile =>
-                new Entity<XenoWeedsComponent>(weedTile, WeedsQuery.Comp(weedTile))
-            );
+        foreach (var anchored in _mapSystem.GetLocalAnchoredEntities(grid, grid, checkArea))
+        {
+            if (TerminatingOrDeleted(anchored))
+                continue;
+
+            if (!WeedsQuery.TryComp(anchored, out var weeds))
+                continue;
+
+            if (weeds.IsSource != sourceNodes)
+                continue;
+
+            yield return new Entity<XenoWeedsComponent>(anchored, weeds);
+        }
     }
 
     public bool HasWeedNodeNearby(Entity<MapGridComponent> grid, EntityCoordinates coordinates, int range = 5)
