@@ -1,4 +1,5 @@
 using Content.Server._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Damage;
 using Content.Server.Ghost;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Mind;
@@ -25,6 +26,7 @@ public sealed partial class XenoRespawnSystem : EntitySystem
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private readonly RMCTemporaryInvincibilitySystem _invincibility = default!;
     public void RespawnXeno(EntityUid xeno, TimeSpan time, bool atLocation = false, EntityCoordinates? location = null)
     {
         if (!TryComp(xeno, out ActorComponent? actor))
@@ -78,6 +80,7 @@ public sealed partial class XenoRespawnSystem : EntitySystem
 
                 var spawn = SpawnAtPosition(respawn.Larva, respawn.Location.Value);
                 _hive.SetHive(spawn, respawn.Hive);
+                _invincibility.GiveInvincibility(spawn, respawn.CorpseInvincibilityTime);
 
                 if (!TryComp(ghost, out actor))
                     continue;
