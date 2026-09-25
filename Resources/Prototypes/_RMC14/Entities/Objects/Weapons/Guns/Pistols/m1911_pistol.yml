@@ -125,3 +125,32 @@
 
 - type: Tag
   id: CMCartridgePistol45ACP
+
+- type: entity
+  parent: CMWeaponPistolM1911
+  id: RMCWeaponPistolM1911SOCOM
+  name: M48A4 service pistol
+  description: A timeless classic since the first World War, the M1911A1 has limited use with the UNCM, and is often used as a sidearm by non-governmental bodies due to its reliability. This is a modernized version with an ammo counter and a polymer grip, designated M48A4. Chambered in .45 ACP.
+  components:
+  - type: Tag
+    tags:
+    - Sidearm
+    - CMWeaponPistolM1911
+    - RMCWeaponPistolM1911SOCOM
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m1911_socom.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m1911_socom.rsi
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.2
+    accuracyMultiplierUnwielded: 1.1
+  - type: RMCSelectiveFire
+    scatterWielded: 10
+    scatterUnwielded: 10
+    baseFireRate: 4.4
+    burstScatterMult: 3
+  - type: GunDamageModifier
+    multiplier: 1.25
+
+- type: Tag
+  id: RMCWeaponPistolM1911SOCOM

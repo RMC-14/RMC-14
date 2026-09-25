@@ -3,3 +3,6 @@ reagent-desc-rmcspacedrugs = An illegal compound that causes hallucinations, vis
 
 reagent-name-rmcpsilocybin = Psilocybin
 reagent-desc-rmcpsilocybin = Psilocybin is a naturally occurring psychedelic prodrug compound produced by more than 200 species of mushrooms, collectively known as psilocybin mushrooms or Magic Mushrooms.
+
+reagent-name-rmchippiesdelight = Hippies' Delight
+reagent-desc-rmchippiesdelight = You just don't get it maaaan.

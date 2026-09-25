@@ -3,6 +3,9 @@
   id: RMCDrinkAlcoholVodkaChess
   name: red star vodka
   description: A promotional chess themed bottle of Red Star Vodka.
+  components:
+  - type: BlackMarketValue
+    value: 15
 
 - type: entity
   parent: RMCDrinkAlcoholVodkaChess

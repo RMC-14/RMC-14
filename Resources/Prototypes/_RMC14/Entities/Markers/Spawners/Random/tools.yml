@@ -88,6 +88,51 @@
 
 - type: entity
   parent: MarkerBase
+  id: RMCSpawnerRandomTechnologyScanner
+  name: random scanner spawner
+  description: This is a random technology scanner.
+  components:
+    - type: Sprite
+      layers:
+        - sprite: _RMC14/Objects/Medical/health_analyzer.rsi
+          state: health
+    - type: RandomSpawner
+      prototypes:
+        - CMTRayScanner # x10
+        - CMTRayScanner
+        - CMTRayScanner
+        - CMTRayScanner
+        - CMTRayScanner
+        - CMTRayScanner
+        - CMTRayScanner
+        - CMTRayScanner
+        - CMTRayScanner
+        - CMTRayScanner
+        - CMRadioHandheld # x8
+        - CMRadioHandheld
+        - CMRadioHandheld
+        - CMRadioHandheld
+        - CMRadioHandheld
+        - CMRadioHandheld
+        - CMRadioHandheld
+        - CMRadioHandheld
+        - CMHealthAnalyzer # x10
+        - CMHealthAnalyzer
+        - CMHealthAnalyzer
+        - CMHealthAnalyzer
+        - CMHealthAnalyzer
+        - CMHealthAnalyzer
+        - CMHealthAnalyzer
+        - CMHealthAnalyzer
+        - CMHealthAnalyzer
+        - CMHealthAnalyzer
+        - RMCBlackMarketHackingDevice # x2
+        - RMCBlackMarketHackingDevice
+      chance: 0.75
+      offset: 0
+
+- type: entity
+  parent: MarkerBase
   id: RMCSpawnerRandomTechSupply
   name: random tech supply spawner
   description: This is a random piece of technology supplies.
@@ -99,8 +144,9 @@
     - type: RandomSpawner
       prototypes:
         # TODO:
-        # technology_scanner x2
         # packageWrap x1
+        - RMCSpawnerRandomTechnologyScanner # x2
+        - RMCSpawnerRandomTechnologyScanner
         - RMCSpawnerBombSupply # x2
         - RMCSpawnerBombSupply
         - RMCSpawnerRandomPowercell # x3

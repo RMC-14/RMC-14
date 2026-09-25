@@ -276,6 +276,15 @@
 
 - type: entity
   parent: RMCCigarettePackLuckySloths
+  id: RMCCigarettePackKoorlanderGold
+  name: Koorlander Gold packet
+  description: Lovingly machine-rolled for YOUR pleasure. For when you want to look cool and the risk of a slow horrible death isn't really a factor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/electro_golds.rsi
+
+- type: entity
+  parent: RMCCigarettePackLuckySloths
   id: RMCCigarettePackEmeraldGreens
   name: emerald greens
   description: They remind you of a gross, tar-filled version of Ireland. These cheap cigarettes are Weston-Yamada's entry into the general market.
