@@ -27,15 +27,20 @@ using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Robust.Shared.Serialization.Manager;
 using IConfigurationManager = Robust.Shared.Configuration.IConfigurationManager;
+using Content.Shared._RMC14.Rules;
+using Content.Server._RMC14.Rules.DistressSignal;
+using System.Linq;
 
 namespace Content.Server._RMC14.Xenonids.Hive;
 
 public sealed class XenoHiveSystem : SharedXenoHiveSystem
 {
     [Dependency] private readonly AudioSystem _audio = default!;
+    [Dependency] private readonly CMDistressSignalRuleSystem _distressSignal = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
+    [Dependency] private readonly XenoHiveSystem _hive = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
@@ -58,6 +63,7 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
     public override void Initialize()
     {
         base.Initialize();
+        SubscribeLocalEvent<RoundstartPlayersSpawnedEvent>(OnRoundstartPlayersSpawned);
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
 
         SubscribeLocalEvent<HijackBurrowedSurgeComponent, ComponentStartup>(OnBurrowedSurgeStartup);
@@ -71,6 +77,31 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
             true);
         Subs.CVar(_config, RMCCVars.RMCLateJoinsPerBurrowedLarvaEarly, v => _lateJoinsPerBurrowedLarvaEarly = v, true);
         Subs.CVar(_config, RMCCVars.RMCLateJoinsPerBurrowedLarva, v => _lateJoinsPerBurrowedLarva = v, true);
+    }
+
+    public void OnRoundstartPlayersSpawned(RoundstartPlayersSpawnedEvent ev)
+    {
+        if (!_distressSignal.TryGetActiveRule(out var rule))
+            return;
+
+        var playerWeights = _distressSignal.GetRoleWeights(ev.ProcessedPlayers);
+        var (xenoCount, remainder) = _distressSignal.GetRoundstartXenoCount(playerWeights);
+
+        // Give xenos burrowed larva for every missing xeno.
+        var xenoAssignment = ev.JobAssignments[rule.XenoSelectableJob][0];
+        var assignedXenos = xenoAssignment.AssignedPlayers.Count;
+
+        _hive.ChangeBurrowedLarva(xenoCount - assignedXenos);
+
+        // Add any remainder marine weight to the late join counter for each hive
+        var hives = EntityQueryEnumerator<HiveComponent>();
+        while (hives.MoveNext(out var uid, out var hive))
+        {
+            if (!hive.LateJoinGainLarva)
+                continue;
+
+            hive.LateJoinMarines = remainder;
+        }
     }
 
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
