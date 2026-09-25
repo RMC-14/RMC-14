@@ -1,0 +1,11 @@
+- type: entity
+  parent: RMCPropBaseUnbreakable
+  id: RMCPropRemoteConsolePod
+  name: Remote Console Pod
+  description: A tech pod which can be used to remotely deploy a dropship navigation computer.
+  components:
+  - type: Sprite
+    drawdepth: FloorTiles
+    sprite: _RMC14/Structures/Machines/drop_pod.rsi
+    state: techpod_open
+    offset: "0,-0.5"
