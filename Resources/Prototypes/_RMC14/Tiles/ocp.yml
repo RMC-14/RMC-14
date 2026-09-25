@@ -1,0 +1,5 @@
+﻿- type: tile
+  parent: CMTileBaseUnpryable
+  id: RMCFloorOCPPit
+  name: pit
+  sprite: /Textures/_RMC14/Tiles/OCP/pit.png
