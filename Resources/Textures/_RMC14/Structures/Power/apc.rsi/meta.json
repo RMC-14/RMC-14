@@ -304,6 +304,9 @@
       "directions": 4
     },
     {
+      "name": "apc_frame"
+    },
+    {
       "name": "base",
       "directions": 4
     },

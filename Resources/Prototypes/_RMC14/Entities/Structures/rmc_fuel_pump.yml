@@ -28,8 +28,9 @@
       path: /Audio/_RMC14/Machines/fuel_pump_active.ogg
   - type: ApcPowerReceiver
   - type: RMCPowerReceiver
-    idleLoad: 5
-    activeLoad: 10
+    idleLoad: 0
+    activeLoad: 0
+    # CM13 fuel pumps inherit the machinery defaults and only react to power state.
     channel: Equipment
   - type: Sprite
     sprite: _RMC14/Structures/Power/fuel_pump.rsi

@@ -29,8 +29,9 @@
     powerLoad: 250
     needsPower: true
   - type: RMCPowerReceiver
-    idleLoad: 300
-    activeLoad: 300
+    # CM13 /obj/structure/machinery/prop/almayer/computer.
+    idleLoad: 20
+    activeLoad: 0
     channel: Equipment
   - type: Clickable
   - type: Corrodible

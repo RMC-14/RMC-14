@@ -1,0 +1,91 @@
+ent-CMAPCFrame = APC frame
+    .desc = Used for repairing or building APCs.
+
+ent-CMApcBase = area power controller
+    .desc = A control terminal for the area electrical systems.
+ent-CMApcFrame = APC frame
+ent-CMApcFrameWired = wired APC frame
+ent-CMApcFrameElectronics = APC frame with electronics
+ent-CMApcConstructed = area power controller
+    .desc = A control terminal for the area electrical systems.
+ent-CMApc = area power controller
+    .desc = A control terminal for the area electrical systems.
+ent-CMApcNoPower = area power controller
+    .desc = A control terminal for the area electrical systems.
+ent-CMApcAlmayer = area power controller
+    .desc = A control terminal for the area electrical systems.
+ent-CMApcLowCapacity = area power controller
+    .desc = A control terminal for the area electrical systems.
+ent-CMApcMediumCapacity = area power controller
+    .desc = A control terminal for the area electrical systems.
+ent-CMApcHighCapacity = area power controller
+    .desc = A control terminal for the area electrical systems.
+
+ent-RMCCableCoil = cable coil
+    .desc = A coil of power cable.
+ent-RMCCableCoil30 = cable coil
+ent-RMCCableCoil20 = cable coil
+ent-RMCCableCoil10 = cable coil
+ent-RMCCableCoil1 = cable coil
+
+ent-RMCCableHeavy = large power cable
+    .desc = This cable is tough. It cannot be cut with simple hand tools.
+ent-RMCCableBlue = power cable
+    .desc = This cable is tough. It cannot be cut with simple hand tools.
+ent-RMCCableRed = power cable
+ent-RMCCableYellow = power cable
+
+ent-RMCRecharger = recharger
+ent-RMCRechargerLocked = recharger
+
+ent-CMSMESBase = SMES
+    .desc = A high-capacity superconducting magnetic energy storage (SMES) unit.
+ent-CMSMESBasic = SMES
+ent-CMSMESEmpty = SMES
+
+ent-RMCGeneratorFusionFake = permanently destroyed S-52 fusion reactor
+ent-RMCGeneratorFusion = S-52 fusion reactor
+ent-RMCGeneratorFusionColony = G-11 geothermal generator
+    .desc = A thermoelectric generator sitting atop a plasma-filled borehole.
+ent-RMCGeneratorFusionColonyNoMapIcon = G-11 geothermal generator
+    .desc = A thermoelectric generator sitting atop a plasma-filled borehole.
+ent-RMCGeneratorFusionCell = WL-6 universal fuel cell
+    .desc = A rechargeable fuel cell.
+ent-RMCPortableGenerator = P.A.C.M.A.N.-type Portable Generator
+    .desc = A portable generator for emergency backup power.
+ent-RMCPortableGenerator2 = S.U.P.E.R.P.A.C.M.A.N.-type Portable Generator
+    .desc = A portable generator for emergency backup power.
+
+ent-RMCPowerCell = power cell
+    .desc = A rechargeable electrochemical power cell.
+ent-RMCPowerCellCrap = We-Ya rechargeable mini-battery
+    .desc = Cheap, throwaway batteries provided by the Weston-Yamada Corporation. The 'rechargeable' feature was added to be more marketable to independent colonists hell-bent on 'using it till it disintegrates', a common sentiment on the frontier.
+ent-RMCPowerCellCrapEmpty = We-Ya rechargeable mini-battery
+ent-RMCPowerCellAPC = heavy-duty power cell
+ent-RMCPowerCellAPCNoPower = heavy-duty power cell
+ent-RMCPowerCellAPCEmpty = heavy-duty power cell
+ent-RMCPowerCellHigh = high-capacity power cell
+ent-RMCPowerCellHighEmpty = high-capacity power cell
+ent-RMCPowerCellSuper = super-capacity power cell
+ent-RMCPowerCellSuperEmpty = super-capacity power cell
+ent-RMCPowerCellHyper = hyper-capacity power cell
+ent-RMCPowerCellHyperEmpty = hyper-capacity power cell
+ent-RMCPowerCellInfinite = infinite-capacity power cell
+ent-RMCPowerCellPotato = potato battery
+    .desc = A rechargeable starch-based power cell.
+ent-RMCPowerCellSmartgun = smart gun ML66A battery
+    .desc = A standard-issue 9-volt lithium dry-cell battery, most commonly used within the UNMC to power smartguns. Per the manual, one battery is good for up to 50000 rounds and plugs directly into the smartgun's power receptacle, which is only compatible with this type of battery. Various auxiliary modes usually bring the round count far lower. While this cell is incompatible with most standard electrical system, it can be charged by common rechargers in a pinch. UNMC smartgunners often guard them jealously.
+
+ent-RMCLightBulb = light bulb
+    .desc = A replacement light bulb.
+ent-RMCLightBulbBlue = light bulb
+ent-RMCLightBulbRed = light bulb
+ent-RMCLightBulbBroken = light bulb
+    .desc = A replacement light bulb.
+ent-RMCLightTube = light tube
+    .desc = A replacement light tube.
+ent-RMCLightTubeBlue = light tube
+ent-RMCLightTubeWarm = light tube
+ent-RMCLightTubeRed = light tube
+ent-RMCLightTubeBroken = light tube
+    .desc = A replacement light tube.

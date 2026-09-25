@@ -36,6 +36,12 @@ namespace Content.Shared.Lathe
         [DataField]
         public SoundSpecifier? ProducingSound;
 
+        /// <summary>
+        /// Energy charged when a print starts, in joules. RMC14 lathes use this to mirror CM13's use_power call.
+        /// </summary>
+        [DataField]
+        public float PrintEnergy;
+
         [DataField]
         public string? ReagentOutputSlotId;
 

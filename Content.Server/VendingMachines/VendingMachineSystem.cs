@@ -4,6 +4,7 @@ using Content.Server.Cargo.Systems;
 using Content.Server.Emp;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
+using Content.Shared._RMC14.Power; // RMC14
 using Content.Shared.Cargo;
 using Content.Shared.Damage;
 using Content.Shared.Destructible;
@@ -30,6 +31,7 @@ namespace Content.Server.VendingMachines
         [Dependency] private readonly PricingSystem _pricing = default!;
         [Dependency] private readonly ThrowingSystem _throwingSystem = default!;
         [Dependency] private readonly IGameTiming _timing = default!;
+        [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!; // RMC14
 
         private const float WallVendEjectDistanceFromWall = 1f;
 
@@ -238,6 +240,8 @@ namespace Content.Server.VendingMachines
             }
 
             var ent = Spawn(vendComponent.NextItemToEject, spawnCoordinates);
+            if (!forceEject)
+                _rmcPower.AddOneOffEnergy(uid, vendComponent.VendEnergy); // RMC14
 
             if (vendComponent.ThrowNextItem)
             {

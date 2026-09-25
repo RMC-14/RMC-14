@@ -65,8 +65,10 @@
   - type: Appearance
   - type: ApcPowerReceiver
   - type: RMCPowerReceiver
-    idleLoad: 1
-    activeLoad: 20
+    idleLoad: 0
+    activeLoad: 0
+    doorMovementEnergy: 360
+    # CM13 airlocks consume 360 J once when each powered movement starts.
     channel: Environment
   - type: UserInterface
     interfaces:
