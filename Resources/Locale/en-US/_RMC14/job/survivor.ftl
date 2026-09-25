@@ -289,6 +289,8 @@ rmc-job-prefix-soro-sof-synth = 121/RECON SYN
 
 # Trijent survs
 
+rmc-job-name-survivor-trijent-roughneck = Roughneck
+
 rmc-job-name-survivor-trijent-chaplain = Trijent Dam Chaplain
 
 rmc-job-name-survivor-trijent-goon = Trijent Dam Security
