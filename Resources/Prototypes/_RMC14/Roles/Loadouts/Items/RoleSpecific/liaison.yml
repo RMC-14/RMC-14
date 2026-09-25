@@ -51,6 +51,7 @@
 
 - type: loadout
   id: RMCMobCorporateCorgi
+  dummyEntity: RMCMobCorporateCorgi
   cost: 1
   effects:
   - !type:JobRequirementLoadoutEffect
@@ -61,9 +62,11 @@
   storage:
     back:
     - RMCMobCorporateCorgi
+    - RMCPetCollarWeYa
 
 - type: loadout
   id: RMCMobCorporateCat
+  dummyEntity: RMCMobCorporateCat
   cost: 1
   effects:
   - !type:JobRequirementLoadoutEffect
@@ -74,9 +77,11 @@
   storage:
     back:
     - RMCMobCorporateCat
+    - RMCPetCollarWeYa
 
 - type: loadout
   id: RMCMobCorporateCatCalico
+  dummyEntity: RMCMobCorporateCatCalico
   cost: 1
   effects:
   - !type:JobRequirementLoadoutEffect
@@ -87,3 +92,4 @@
   storage:
     back:
     - RMCMobCorporateCatCalico
+    - RMCPetCollarWeYa

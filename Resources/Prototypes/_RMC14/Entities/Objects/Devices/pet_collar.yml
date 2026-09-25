@@ -5,10 +5,8 @@
   description: Used to name pets. Front towards owner.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/CMIDs/dogtags.rsi
-    layers:
-    - state: dogtag
-      map: ["enum.DogtagVisuals.Taken"]
+    sprite: _RMC14/Objects/Devices/petcollar.rsi
+    state: petcollar
   - type: PetNamingItem
     maxLength: 32
     consumeOnUse: true
@@ -25,7 +23,5 @@
   description: Used to name pets. The We-Ya logo is displayed on the front
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/CMIDs/dogtags.rsi
-    layers:
-    - state: dogtag
-      map: ["enum.DogtagVisuals.Taken"]
+    sprite: _RMC14/Objects/Devices/weyapetcollar.rsi
+    state: weyacollar

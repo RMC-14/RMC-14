@@ -263,7 +263,8 @@
   id: RMCMobCorporateCorgi
   name: Corgi
   description: It's a corgi puppy. It has a Weston-Yamada collar.
-  - type: PetNamingTarget
+  components:
+    - type: PetNamingTarget
 
 - type: entity
   parent: RMCSimpleMob
@@ -384,14 +385,16 @@
   id: RMCMobCorporateCat
   name: Cat
   description: It's a black cat. It has a Weston-Yamada Collar.
-  - type: PetNamingTarget
+  components:
+    - type: PetNamingTarget
 
 - type: entity
   parent: RMCMobCatCalico
   id: RMCMobCorporateCatCalico
   name: Calico
   description: It's an orange, brown and black cat. It has a Weston-Yamada Collar.
-  - type: PetNamingTarget
+  components:
+    - type: PetNamingTarget
 
 - type: entity
   parent: RMCMobCatCalico
