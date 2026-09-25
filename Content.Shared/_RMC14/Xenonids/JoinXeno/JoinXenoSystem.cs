@@ -87,6 +87,9 @@ public sealed class JoinXenoSystem : EntitySystem
         while (hives.MoveNext(out var hiveId, out var hive))
         {
             var inQueue = actor != null && _larvaQueue.IsAlreadyQueued(actor.PlayerSession.UserId, hiveId);
+
+            if (!inQueue && !_hive.HasAnyMembers(hiveId))
+                continue;
             string optionText;
             if (inQueue && actor != null)
             {
