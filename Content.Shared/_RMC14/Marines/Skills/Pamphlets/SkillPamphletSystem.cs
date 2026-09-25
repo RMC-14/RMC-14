@@ -129,6 +129,8 @@ public sealed class SkillPamphletSystem : EntitySystem
             Dirty(args.User, mapBlip);
 
             _squads.UpdateSquadTitle(args.User);
+            if (ent.Comp.GiveIcon != null || ent.Comp.GiveJobTitle != null)
+                _squads.NotifyMemberUpdated(args.User);
 
             if (ent.Comp.GivePrefix != null)
             {
