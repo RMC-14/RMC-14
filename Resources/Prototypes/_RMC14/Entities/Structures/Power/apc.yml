@@ -134,6 +134,11 @@
           Charging: { state: display-charging }
           FullCharge: { state: display-full }
   - type: RMCMesonsNonviewable
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-wall-apc
+    whitelist:
+      components:
+      - Xeno
 
 # APC under construction
 - type: entity

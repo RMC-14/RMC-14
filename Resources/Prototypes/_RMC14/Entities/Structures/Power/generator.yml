@@ -63,6 +63,11 @@
           Overloaded: { state: "overloaded" }
   - type: BlockXenoConstruction
   - type: RMCMesonsNonviewable
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-generator
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCGeneratorFusion
