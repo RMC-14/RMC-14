@@ -1,0 +1,390 @@
+meta:
+  format: 7
+  category: Grid
+  engineVersion: 264.0.2
+  forkId: ""
+  forkVersion: ""
+  time: 09/18/2026 21:26:03
+  entityCount: 49
+maps: []
+grids:
+- 1
+orphans:
+- 1
+nullspace: []
+tilemap:
+  0: Space
+  198: CMFloorPlating
+  2: RMCFloorKutjevoFloor3
+  6: RMCFloorKutjevoOrange1
+  7: RMCFloorKutjevoTan1
+  8: RMCFloorKutjevoTan3_0
+  1: RMCFloorKutjevoTan3_1
+  9: RMCFloorKutjevoTan3_2
+  4: RMCFloorKutjevoTan3_3
+  3: RMCFloorResearchContainmentFloor2North
+  5: RMCFloorResearchContainmentFloor2West
+entities:
+- proto: ""
+  entities:
+  - uid: 1
+    components:
+    - type: MetaData
+      name: grid
+    - type: Transform
+      parent: invalid
+    - type: MapGrid
+      chunks:
+        0,0:
+          ind: 0,0
+          tiles: AQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAAAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAACAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAAAAAAABgAAAAAAAAYAAAAAAAAHAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABwAAAAAAAAYAAAAAAAAGAAAAAAAABQAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAAAAAAAAcAAAAAAAAHAAAAAAAABwAAAAAAAAcAAAAAAAAHAAAAAAAABwAAAAAAAAcAAAAAAAAHAAAAAAAABwAAAAAAAAUAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUAAAAAAAAGAAAAAAAABgAAAAAAAAcAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAHAAAAAAAABgAAAAAAAAYAAAAAAAAFAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAgAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+          version: 7
+        -1,0:
+          ind: -1,0
+          tiles: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+          version: 7
+    - type: Broadphase
+    - type: Physics
+      bodyStatus: InAir
+      angularDamping: 0.05
+      linearDamping: 0.05
+      fixedRotation: False
+      bodyType: Dynamic
+    - type: Fixtures
+      fixtures: {}
+    - type: OccluderTree
+    - type: SpreaderGrid
+    - type: Shuttle
+      dampingModifier: 0.25
+    - type: GridPathfinding
+    - type: Gravity
+      gravityShakeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/alert.ogg
+    - type: DecalGrid
+      chunkCollection:
+        version: 2
+        nodes: []
+    - type: GridAtmosphere
+      version: 2
+      data:
+        chunkSize: 4
+    - type: GasTileOverlay
+    - type: RadiationGridResistance
+    - type: ImplicitRoof
+- proto: CMChair
+  entities:
+  - uid: 38
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 10.5,2.5
+      parent: 1
+  - uid: 39
+    components:
+    - type: Transform
+      pos: 11.5,3.5
+      parent: 1
+- proto: CMTableAlmayer
+  entities:
+  - uid: 37
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 11.5,2.5
+      parent: 1
+- proto: CMWarningCone
+  entities:
+  - uid: 13
+    components:
+    - type: Transform
+      pos: -0.7798395,4.845318
+      parent: 1
+  - uid: 24
+    components:
+    - type: Transform
+      pos: 10.502424,3.521481
+      parent: 1
+  - uid: 26
+    components:
+    - type: Transform
+      pos: 6.219272,4.8765893
+      parent: 1
+  - uid: 44
+    components:
+    - type: Transform
+      pos: 8.260445,0.5504146
+      parent: 1
+  - uid: 45
+    components:
+    - type: Transform
+      pos: 8.854195,0.8422841
+      parent: 1
+- proto: RMCBarrelBlack
+  entities:
+  - uid: 14
+    components:
+    - type: Transform
+      pos: 2.5,1.5
+      parent: 1
+- proto: RMCBarrelBlue
+  entities:
+  - uid: 30
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 5.5,6.5
+      parent: 1
+- proto: RMCBarrelWhite
+  entities:
+  - uid: 28
+    components:
+    - type: Transform
+      pos: 8.5,4.5
+      parent: 1
+- proto: RMCBarrelYellow
+  entities:
+  - uid: 32
+    components:
+    - type: Transform
+      pos: 3.5,3.5
+      parent: 1
+- proto: RMCBeltHolsterNailgun
+  entities:
+  - uid: 46
+    components:
+    - type: Transform
+      pos: 3.5,1.5
+      parent: 1
+- proto: RMCCassettePlayer
+  entities:
+  - uid: 43
+    components:
+    - type: Transform
+      pos: 11.518482,2.5833292
+      parent: 1
+- proto: RMCCassetteTapeQwertyquerty
+  entities:
+  - uid: 3
+    components:
+    - type: Transform
+      pos: 11.303231,2.3850222
+      parent: 1
+- proto: RMCContainerAvantLeft
+  entities:
+  - uid: 17
+    components:
+    - type: Transform
+      pos: 0.5,3.5
+      parent: 1
+- proto: RMCContainerAvantMiddle
+  entities:
+  - uid: 11
+    components:
+    - type: Transform
+      pos: 1.5,3.5
+      parent: 1
+- proto: RMCContainerAvantRight
+  entities:
+  - uid: 10
+    components:
+    - type: Transform
+      pos: 2.5,3.5
+      parent: 1
+- proto: RMCContainerBlueLeft
+  entities:
+  - uid: 9
+    components:
+    - type: Transform
+      pos: 7.5,2.5
+      parent: 1
+- proto: RMCContainerBlueRight
+  entities:
+  - uid: 7
+    components:
+    - type: Transform
+      pos: 9.5,2.5
+      parent: 1
+- proto: RMCContainerFujinMiddle
+  entities:
+  - uid: 8
+    components:
+    - type: Transform
+      pos: 8.5,2.5
+      parent: 1
+- proto: RMCContainerMedicalLeft
+  entities:
+  - uid: 19
+    components:
+    - type: Transform
+      pos: 8.5,1.5
+      parent: 1
+- proto: RMCContainerMedicalRight
+  entities:
+  - uid: 18
+    components:
+    - type: Transform
+      pos: 9.5,1.5
+      parent: 1
+- proto: RMCContainerTartarusLeft
+  entities:
+  - uid: 15
+    components:
+    - type: Transform
+      pos: 2.5,2.5
+      parent: 1
+- proto: RMCContainerTartarusRight
+  entities:
+  - uid: 16
+    components:
+    - type: Transform
+      pos: 3.5,2.5
+      parent: 1
+- proto: RMCContainerWeYaAltLeft
+  entities:
+  - uid: 5
+    components:
+    - type: Transform
+      pos: 1.5,4.5
+      parent: 1
+- proto: RMCContainerWeYaAltMiddle
+  entities:
+  - uid: 4
+    components:
+    - type: Transform
+      pos: 2.5,4.5
+      parent: 1
+- proto: RMCContainerWeYaAltRight
+  entities:
+  - uid: 2
+    components:
+    - type: Transform
+      pos: 3.5,4.5
+      parent: 1
+- proto: RMCCrateBase
+  entities:
+  - uid: 12
+    components:
+    - type: Transform
+      pos: 7.5,4.5
+      parent: 1
+  - uid: 31
+    components:
+    - type: Transform
+      pos: 0.5,5.5
+      parent: 1
+- proto: RMCCrateConstruction
+  entities:
+  - uid: 42
+    components:
+    - type: Transform
+      pos: 3.5,1.5
+      parent: 1
+- proto: RMCCrateFlares200
+  entities:
+  - uid: 20
+    components:
+    - type: Transform
+      pos: 7.5839024,1.5590965
+      parent: 1
+- proto: RMCCrateMini
+  entities:
+  - uid: 21
+    components:
+    - type: Transform
+      pos: 6.7089024,2.6953022
+      parent: 1
+- proto: RMCDecalSpawnerOilSplatters
+  entities:
+  - uid: 6
+    components:
+    - type: Transform
+      pos: 3.5,3.5
+      parent: 1
+  - uid: 23
+    components:
+    - type: Transform
+      pos: 6.5,3.5
+      parent: 1
+  - uid: 25
+    components:
+    - type: Transform
+      pos: 11.5,1.5
+      parent: 1
+- proto: RMCMagazineSMGNailgun
+  entities:
+  - uid: 47
+    components:
+    - type: Transform
+      pos: 3.5,1.5
+      parent: 1
+  - uid: 48
+    components:
+    - type: Transform
+      pos: 3.5,1.5
+      parent: 1
+  - uid: 49
+    components:
+    - type: Transform
+      pos: 3.5,1.5
+      parent: 1
+- proto: RMCMechPowerLoader
+  entities:
+  - uid: 29
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 9.485785,4.9413733
+      parent: 1
+- proto: RMCSecureCaseDouble
+  entities:
+  - uid: 33
+    components:
+    - type: Transform
+      pos: 1.5,2.5
+      parent: 1
+- proto: RMCSecureCaseMini
+  entities:
+  - uid: 35
+    components:
+    - type: Transform
+      pos: 11.722276,1.6992261
+      parent: 1
+  - uid: 36
+    components:
+    - type: Transform
+      pos: 11.243109,1.4386289
+      parent: 1
+  - uid: 41
+    components:
+    - type: Transform
+      pos: 0.41718197,2.897976
+      parent: 1
+- proto: RMCSecureCaseSmall
+  entities:
+  - uid: 40
+    components:
+    - type: Transform
+      pos: 0.5,2.5
+      parent: 1
+- proto: RMCSpawnerIntelClose
+  entities:
+  - uid: 34
+    components:
+    - type: Transform
+      pos: 0.5,5.5
+      parent: 1
+- proto: RMCSpawnerIntelMedium
+  entities:
+  - uid: 27
+    components:
+    - type: Transform
+      pos: 7.5,4.5
+      parent: 1
+- proto: RMCSpawnerRandomTools
+  entities:
+  - uid: 22
+    components:
+    - type: Transform
+      pos: 6.5,3.5
+      parent: 1
+...
