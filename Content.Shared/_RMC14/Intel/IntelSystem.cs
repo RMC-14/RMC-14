@@ -718,6 +718,9 @@ public sealed class IntelSystem : EntitySystem
 
     private bool ShowClue(EntityUid target, IntelCluesComponent clues, EntityUid user, bool storeGlobal)
     {
+        if (IsClueResolved(target))
+            return false;
+
         var clue = GetClueMessage(target, clues);
 
         if (!storeGlobal)
@@ -738,6 +741,29 @@ public sealed class IntelSystem : EntitySystem
         Dirty(tree);
         UpdateTree(tree);
         return true;
+    }
+
+    private bool IsClueResolved(EntityUid target)
+    {
+        if (TryComp(target, out IntelReadObjectiveComponent? read) &&
+            read.State == IntelObjectiveState.Complete)
+        {
+            return true;
+        }
+
+        if (TryComp(target, out IntelRetrieveItemObjectiveComponent? retrieve) &&
+            retrieve.State == IntelObjectiveState.Complete)
+        {
+            return true;
+        }
+
+        if (TryComp(target, out IntelDataDiskComponent? disk) && disk.Completed)
+            return true;
+
+        if (TryComp(target, out IntelDataTerminalComponent? terminal) && terminal.Completed)
+            return true;
+
+        return TryComp(target, out IntelSafeObjectiveComponent? safe) && safe.Completed;
     }
 
     private Dictionary<NetEntity, string> GetPersonalClues(EntityUid user)
