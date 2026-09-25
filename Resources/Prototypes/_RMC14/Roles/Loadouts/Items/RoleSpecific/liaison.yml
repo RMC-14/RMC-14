@@ -63,7 +63,7 @@
     - RMCMobCorporateCorgi
 
 - type: loadout
-  id: RMCMobCat
+  id: RMCMobCorporateCat
   cost: 1
   effects:
   - !type:JobRequirementLoadoutEffect
@@ -73,10 +73,10 @@
       time: 90000 # 25 hours
   storage:
     back:
-    - RMCMobCat
+    - RMCMobCorporateCat
 
 - type: loadout
-  id: RMCMobCatCalico
+  id: RMCMobCorporateCatCalico
   cost: 1
   effects:
   - !type:JobRequirementLoadoutEffect
@@ -86,4 +86,4 @@
       time: 90000 # 25 hours
   storage:
     back:
-    - RMCMobCatCalico
+    - RMCMobCorporateCatCalico

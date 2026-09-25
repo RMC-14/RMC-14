@@ -261,8 +261,8 @@
 - type: entity
   parent: CMMobWiggles
   id: RMCMobCorporateCorgi
-  name: Divvy
-  description: It's a corgi puppy. It has a Weston-Yamada nametag that says "Divvy"
+  name: Corgi
+  description: It's a corgi puppy. It has a Weston-Yamada collar.
 
 - type: entity
   parent: RMCSimpleMob
@@ -377,6 +377,18 @@
   - type: WarpPoint
     follow: true
     location: Jones
+
+- type: entity
+  parent: RMCMobCat
+  id: RMCMobCorporateCat
+  name: Cat
+  description: It's a black cat. It has a Weston-Yamada Collar.
+
+- type: entity
+  parent: RMCMobCatCalico
+  id: RMCMobCorporateCatCalico
+  name: Calico
+  description: It's an orange, brown and black cat. It has a Weston-Yamada Collar.
 
 - type: entity
   parent: RMCMobCatCalico

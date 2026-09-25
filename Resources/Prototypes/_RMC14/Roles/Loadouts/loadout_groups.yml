@@ -746,8 +746,8 @@
   maxLimit: 1
   loadouts:
   - RMCMobCorporateCorgi
-  - RMCMobCat
-  - RMCMobCatCalico
+  - RMCMobCorporateCat
+  - RMCMobCorporateCatCalico
 
 # Chief MP
 - type: loadoutGroup
