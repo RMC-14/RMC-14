@@ -123,22 +123,22 @@
 - type: entity
   parent: RMCCrateAmmo
   id: RMCCrateMagazineM4SPRCustomImpact
-  name: M4SPR Scout Impact Magazine Crate (x3)
+  name: M4SPR Scout Impact Magazine Crate (x4)
   components:
   - type: StorageFill
     contents:
     - id: RMCMagazineRifleM4SPRA19Impact
-      amount: 3
+      amount: 4
 
 - type: entity
   parent: RMCCrateAmmo
   id: RMCCrateMagazineM4SPRCustomIncendiary
-  name: M4SPR Scout Incendiary Magazine Crate (x3)
+  name: M4SPR Scout Incendiary Magazine Crate (x4)
   components:
   - type: StorageFill
     contents:
     - id: RMCMagazineRifleM4SPRA19Incendiary
-      amount: 3
+      amount: 4
 
 - type: entity
   parent: RMCCrateAmmo
