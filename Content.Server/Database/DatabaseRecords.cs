@@ -8,6 +8,14 @@ namespace Content.Server.Database;
 // We can't return the raw EF Core entities as they are often unsuited.
 // (e.g. datetime handling of Microsoft.Data.Sqlite)
 
+// RMC14 start
+public sealed record RMCDistressSignalStateRecord(
+    float MarinesPerXeno,
+    List<string> RecentPlanetIds,
+    Dictionary<string, int> CarryoverVotes,
+    string? SelectedPlanetId);
+// RMC14 end
+
 public interface IAdminRemarksRecord
 {
     public int Id { get; }

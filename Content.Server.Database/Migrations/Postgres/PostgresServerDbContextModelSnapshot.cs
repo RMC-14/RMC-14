@@ -1190,6 +1190,90 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.ToTable("rmc_discord_accounts", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.RMCDistressSignalCarryoverVote", b =>
+                {
+                    b.Property<int>("ServerId")
+                        .HasColumnType("integer")
+                        .HasColumnName("server_id");
+
+                    b.Property<string>("PlanetId")
+                        .HasColumnType("text")
+                        .HasColumnName("planet_id");
+
+                    b.Property<int>("Votes")
+                        .HasColumnType("integer")
+                        .HasColumnName("votes");
+
+                    b.HasKey("ServerId", "PlanetId")
+                        .HasName("PK_rmc_distress_signal_carryover_votes");
+
+                    b.ToTable("rmc_distress_signal_carryover_votes", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.RMCDistressSignalRound", b =>
+                {
+                    b.Property<int>("RoundId")
+                        .HasColumnType("integer")
+                        .HasColumnName("round_id");
+
+                    b.Property<DateTime?>("FinishedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("finished_at");
+
+                    b.Property<float?>("MarinesPerXenoAfter")
+                        .HasColumnType("real")
+                        .HasColumnName("marines_per_xeno_after");
+
+                    b.Property<float>("MarinesPerXenoBefore")
+                        .HasColumnType("real")
+                        .HasColumnName("marines_per_xeno_before");
+
+                    b.Property<string>("PlanetId")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("planet_id");
+
+                    b.Property<int?>("Result")
+                        .HasColumnType("integer")
+                        .HasColumnName("result");
+
+                    b.Property<DateTime>("StartedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("started_at");
+
+                    b.HasKey("RoundId")
+                        .HasName("PK_rmc_distress_signal_rounds");
+
+                    b.HasIndex("PlanetId")
+                        .HasDatabaseName("IX_rmc_distress_signal_rounds_planet_id");
+
+                    b.ToTable("rmc_distress_signal_rounds", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.RMCDistressSignalServerState", b =>
+                {
+                    b.Property<int>("ServerId")
+                        .HasColumnType("integer")
+                        .HasColumnName("server_id");
+
+                    b.Property<float>("MarinesPerXeno")
+                        .HasColumnType("real")
+                        .HasColumnName("marines_per_xeno");
+
+                    b.Property<string>("SelectedPlanetId")
+                        .HasColumnType("text")
+                        .HasColumnName("selected_planet_id");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.HasKey("ServerId")
+                        .HasName("PK_rmc_distress_signal_state");
+
+                    b.ToTable("rmc_distress_signal_state", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.RMCLinkedAccount", b =>
                 {
                     b.Property<Guid>("PlayerId")
@@ -2441,6 +2525,42 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("Receiver");
 
                     b.Navigation("Round");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.RMCDistressSignalCarryoverVote", b =>
+                {
+                    b.HasOne("Content.Server.Database.Server", "Server")
+                        .WithMany()
+                        .HasForeignKey("ServerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_rmc_distress_signal_carryover_votes_server_server_id");
+
+                    b.Navigation("Server");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.RMCDistressSignalRound", b =>
+                {
+                    b.HasOne("Content.Server.Database.Round", "Round")
+                        .WithOne()
+                        .HasForeignKey("Content.Server.Database.RMCDistressSignalRound", "RoundId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_rmc_distress_signal_rounds_round_round_id");
+
+                    b.Navigation("Round");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.RMCDistressSignalServerState", b =>
+                {
+                    b.HasOne("Content.Server.Database.Server", "Server")
+                        .WithOne()
+                        .HasForeignKey("Content.Server.Database.RMCDistressSignalServerState", "ServerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_rmc_distress_signal_state_server_server_id");
+
+                    b.Navigation("Server");
                 });
 
             modelBuilder.Entity("Content.Server.Database.RMCLinkedAccount", b =>
