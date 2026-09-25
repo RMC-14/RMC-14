@@ -21,7 +21,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._RMC14.Chemistry;
+namespace Content.Shared._RMC14.Medical.Vomit;
 
 public sealed class RMCVomitSystem : EntitySystem
 {
