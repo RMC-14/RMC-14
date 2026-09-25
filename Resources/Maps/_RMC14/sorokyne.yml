@@ -142850,7 +142850,7 @@ entities:
     - type: Transform
       pos: 63.5,58.5
       parent: 1
-- proto: RMCSpawnerCorpse
+- proto: RMCSpawnerCorpseSPPColonist
   entities:
   - uid: 16385
     components:
@@ -142952,25 +142952,6 @@ entities:
     - type: Transform
       pos: 102.5,138.5
       parent: 1
-- proto: RMCSpawnerCorpseChef
-  entities:
-  - uid: 16405
-    components:
-    - type: Transform
-      pos: 28.5,105.5
-      parent: 1
-  - uid: 16406
-    components:
-    - type: Transform
-      pos: 144.5,97.5
-      parent: 1
-  - uid: 16407
-    components:
-    - type: Transform
-      pos: 26.5,132.5
-      parent: 1
-- proto: RMCSpawnerCorpseDoctor
-  entities:
   - uid: 16408
     components:
     - type: Transform
@@ -143006,8 +142987,6 @@ entities:
     - type: Transform
       pos: 24.5,132.5
       parent: 1
-- proto: RMCSpawnerCorpseEngineer
-  entities:
   - uid: 16415
     components:
     - type: Transform
@@ -143018,15 +142997,11 @@ entities:
     - type: Transform
       pos: 98.5,97.5
       parent: 1
-- proto: RMCSpawnerCorpseLiaison
-  entities:
   - uid: 16417
     components:
     - type: Transform
       pos: 141.5,100.5
       parent: 1
-- proto: RMCSpawnerCorpseMiner
-  entities:
   - uid: 16418
     components:
     - type: Transform
@@ -143037,12 +143012,27 @@ entities:
     - type: Transform
       pos: 188.5,143.5
       parent: 1
-- proto: RMCSpawnerCorpseScientist
-  entities:
   - uid: 16420
     components:
     - type: Transform
       pos: 102.5,58.5
+      parent: 1
+- proto: RMCSpawnerCorpseSPPChef
+  entities:
+  - uid: 16405
+    components:
+    - type: Transform
+      pos: 28.5,105.5
+      parent: 1
+  - uid: 16406
+    components:
+    - type: Transform
+      pos: 144.5,97.5
+      parent: 1
+  - uid: 16407
+    components:
+    - type: Transform
+      pos: 26.5,132.5
       parent: 1
 - proto: RMCSpawnerCorpseSPPSoldier
   entities:
