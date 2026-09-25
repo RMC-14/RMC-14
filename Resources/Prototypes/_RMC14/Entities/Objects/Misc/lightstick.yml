@@ -40,3 +40,32 @@
     state: lightstick_blue_variant1
   - type: PointLight
     color: "#2D2DE3"
+
+- type: entity
+  parent: RMCLightStick
+  id: RMCLighttubeBlueWall
+  name: blue lighttube
+  components:
+  - type: Clickable
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/Lighting/light_tube.rsi
+    layers:
+    - state: btube-empty
+    - state: btube1
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: LitOnPowered
+  - type: AmbientOnPowered
+  - type: AmbientSound
+    volume: -15
+    range: 2
+    sound:
+      path: /Audio/Ambience/Objects/light_hum.ogg
+  - type: PointLight
+    color: "#2D2DE3"
+    radius: 3

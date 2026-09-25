@@ -62,6 +62,17 @@
     drawdepth: BelowFloor
 
 - type: entity
+  parent: RMCPropFactoryConveyer
+  id: RMCPropFactoryConveyerOffset
+  suffix: Offset
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_misc_props/64x64.rsi
+    state: factory_conveyer
+    offset: "-0.0, 0.0"
+    drawdepth: BelowFloor
+
+- type: entity
   parent: RMCPropBase
   id: RMCPropFactoryRoboticArm
   name: robotic arm
@@ -197,6 +208,16 @@
   components:
   - type: Sprite
     state: slotmachine_idle
+
+- type: entity
+  parent: RMCPropSlotmachinebroken
+  id: RMCPropSlotmachineOff
+  name: slot machine
+  suffix: off, prop
+  description: Let's... not go gambling, I guess.
+  components:
+  - type: Sprite
+    state: slotmachine_off
 
 - type: entity
   parent: RMCPropBase
