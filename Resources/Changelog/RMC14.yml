@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: IceNoobXD
-  changes:
-  - message: Lazarus Landing has recived a passover which adds a lot of minor props
-      and a gas pipe layout for nexus!
-    type: Tweak
-  - message: Lazarus Landing lake house loot has been removed.
-    type: Remove
-  id: 3165
-  time: '2026-04-24T10:15:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9686
 - author: TadJohnson00
   changes:
   - message: '[PVE] Added the Webley MkX TBR for use by RCM senior officers.'
@@ -4429,5 +4419,21 @@
   id: 3664
   time: '2026-09-25T20:48:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10883
+- author: kleinerstation13
+  changes:
+  - message: Paramarine support synthetic is now a Warrant Officer Class 2
+    type: Tweak
+  - message: Added WeYa Goon, PMC and CMB synthvivor variants for inserts
+    type: Add
+  - message: Added CMB riot control and We-Ya goon synthetic armor variants
+    type: Add
+  - message: Fixed FORECON synth not spawning with a reset key and other items
+    type: Fix
+  - message: Fixed the PMC Operator role on the Crashlanding Solaris insert having
+      the incorrect HUD icon
+    type: Fix
+  id: 3665
+  time: '2026-09-25T22:32:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10855
 Name: RMC14
 Order: -1
