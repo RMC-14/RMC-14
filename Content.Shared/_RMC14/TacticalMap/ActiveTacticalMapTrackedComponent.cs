@@ -14,6 +14,9 @@ public sealed partial class ActiveTacticalMapTrackedComponent : Component
     public SpriteSpecifier.Rsi? Icon;
 
     [DataField]
+    public float Opacity = 1f;
+
+    [DataField]
     public Color Color;
 
     [DataField]

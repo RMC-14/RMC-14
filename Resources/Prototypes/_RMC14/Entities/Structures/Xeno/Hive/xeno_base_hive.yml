@@ -26,6 +26,7 @@
     priority: -1
     transparency: 0.2
   - type: XenoConstruct
+  - type: XenoRemoteStructureRemoval
   - type: MeleeReceivedMultiplier
     otherMultiplier: 8.2
   - type: XenoAnnounceStructureDestruction
@@ -57,5 +58,9 @@
   - type: RMCNightVisionVisible
     priority: -1
     transparency: 0.1
+  - type: XenoStructureMapTracked
+  - type: XenoRemoteStructureRemoval
+    removalDelay: 0
+  - type: TacticalMapTracked
   - type: DeletedByWeedKiller
   - type: XenoChargeDontHit
