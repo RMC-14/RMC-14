@@ -20,7 +20,7 @@ namespace Content.Server.GameTicking.Commands
 
         public string Command => "joingame";
         public string Description => "";
-        public string Help => "";
+        public string Help => "joingame <jobId> <stationNetId> OR joingame <slot> <jobId> <stationNetId>";
 
         public JoinGameCommand()
         {
@@ -28,7 +28,7 @@ namespace Content.Server.GameTicking.Commands
         }
         public void Execute(IConsoleShell shell, string argStr, string[] args)
         {
-            if (args.Length != 2)
+            if (args.Length is not (2 or 3))
             {
                 shell.WriteError(Loc.GetString("shell-wrong-arguments-number"));
                 return;
@@ -58,15 +58,36 @@ namespace Content.Server.GameTicking.Commands
             }
             else if (ticker.RunLevel == GameRunLevel.InRound)
             {
-                string id = args[0];
+                // Optional first argument is character slot from the multi-slot late-join UI.
+                int? selectedCharacterSlot = null;
+                var argOffset = 0;
+                if (args.Length == 3)
+                {
+                    if (!int.TryParse(args[0], out var parsedSlot))
+                    {
+                        shell.WriteError(Loc.GetString("shell-argument-must-be-number"));
+                        return;
+                    }
 
-                if (!int.TryParse(args[1], out var sid))
+                    selectedCharacterSlot = parsedSlot;
+                    argOffset = 1;
+                }
+
+                var id = args[argOffset];
+
+                if (!int.TryParse(args[argOffset + 1], out var sid))
                 {
                     shell.WriteError(Loc.GetString("shell-argument-must-be-number"));
+                    return;
                 }
 
                 var station = _entManager.GetEntity(new NetEntity(sid));
-                var jobPrototype = _prototypeManager.Index<JobPrototype>(id);
+                if (!_prototypeManager.TryIndex<JobPrototype>(id, out var jobPrototype))
+                {
+                    shell.WriteError(Loc.GetString("shell-argument-must-be-prototype"));
+                    return;
+                }
+
                 if(stationJobs.TryGetJobSlot(station, jobPrototype, out var slots) == false || slots == 0)
                 {
                     shell.WriteLine($"{jobPrototype.LocalizedName} has no available slots.");
@@ -78,7 +99,7 @@ namespace Content.Server.GameTicking.Commands
                     _adminManager.DeAdmin(player);
                 }
 
-                ticker.MakeJoinGame(player, station, id);
+                ticker.MakeJoinGame(player, station, id, selectedCharacterSlot: selectedCharacterSlot);
                 return;
             }
 
