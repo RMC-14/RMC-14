@@ -1,8 +1,5 @@
 using System.Linq;
 using Content.Server.Administration;
-using Content.Server.Administration.Logs;
-using Content.Server.Chat.Managers;
-using Content.Server.Database;
 using Content.Server.GameTicking;
 using Content.Shared.Administration;
 using Content.Shared.Database;
@@ -13,7 +10,6 @@ using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Xenonids.Name;
 using Robust.Server.Player;
 using Robust.Shared.Console;
-using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Content.Server._RMC14.Commendations;
 
@@ -22,14 +18,9 @@ namespace Content.Server._RMC14.Admin.Commendations;
 [AdminCommand(AdminFlags.Commendations)]
 public sealed class RMCGiveCommendationCommand : LocalizedCommands
 {
-    [Dependency] private readonly IPlayerLocator _locator = default!;
     [Dependency] private readonly IPlayerManager _players = default!;
     [Dependency] private readonly IEntitySystemManager _systems = default!;
-    [Dependency] private readonly IAdminLogManager _adminLog = default!;
-    [Dependency] private readonly IServerDbManager _db = default!;
-    [Dependency] private readonly CommendationManager _commendation = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly IEntityManager _entities = default!;
 
     private LocalizedDatasetPrototype? _jelliesDataset;
@@ -44,10 +35,9 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
 
     public override async void Execute(IConsoleShell shell, string argStr, string[] args)
     {
-        // Initialize datasets on first use
-        var commendationSystem = _systems.GetEntitySystem<CommendationSystem>();
-        _medalIds ??= commendationSystem.GetAwardableMedalIds();
-        _specialMedalIds ??= commendationSystem.GetSpecialMedalIds();
+        var cs = _systems.GetEntitySystem<CommendationSystem>();
+        _medalIds ??= cs.GetAwardableMedalIds();
+        _specialMedalIds ??= cs.GetSpecialMedalIds();
         _jelliesDataset ??= _prototype.Index<LocalizedDatasetPrototype>(SharedCommendationSystem.JellyDatasetId);
         _jelliesSpecialDataset ??= _prototype.Index<LocalizedDatasetPrototype>(SharedCommendationSystem.JellySpecialDatasetId);
 
@@ -65,35 +55,18 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
         var awardTypeStr = args[4];
         var citation = args[5];
 
-        // Check if last argument is a round number (optional)
-        var gameTicker = _systems.GetEntitySystem<GameTicker>();
-        var currentRound = gameTicker.RoundId;
-        int targetRound = currentRound;
-
+        int? targetRound = null;
         if (args.Length == 7 && int.TryParse(args[6], out var parsedRound))
-        {
             targetRound = parsedRound;
-        }
 
-        // Parse commendation type and get dataset
         CommendationType commendationType;
-        LocalizedDatasetPrototype? regularDataset;
-        LocalizedDatasetPrototype? specialDataset;
-        int maxAwardType;
-
         switch (commendationTypeStr)
         {
             case "medal":
                 commendationType = CommendationType.Medal;
-                regularDataset = null;
-                specialDataset = null;
-                maxAwardType = MedalCount;
                 break;
             case "jelly":
                 commendationType = CommendationType.Jelly;
-                regularDataset = _jelliesDataset;
-                specialDataset = _jelliesSpecialDataset;
-                maxAwardType = JellyCount;
                 break;
             default:
                 shell.WriteError(Loc.GetString("cmd-rmcgivecommendation-invalid-type"));
@@ -101,114 +74,39 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
                 return;
         }
 
-        // Parse award type number (1-indexed, but dataset is 0-indexed)
-        if (!int.TryParse(awardTypeStr, out var awardNum) || awardNum < 1 || awardNum > maxAwardType)
+        if (!int.TryParse(awardTypeStr, out var awardIndex) ||
+            !cs.TryGetAwardInfo(commendationType, awardIndex, out var awardName, out var protoId))
         {
+            var max = commendationType == CommendationType.Medal ? MedalCount : JellyCount;
             shell.WriteError(Loc.GetString("cmd-rmcgivecommendation-invalid-award-type",
-                ("type", commendationTypeStr), ("max", maxAwardType)));
+                ("type", commendationTypeStr), ("max", max)));
             shell.WriteLine(Help);
             return;
         }
 
-        // Get localized name from dataset (regular awards first, then special awards)
-        string awardName;
-        var regularCount = regularDataset?.Values.Count ?? 0;
-
-        if (commendationType == CommendationType.Medal)
-        {
-            awardName = GetMedalAwardName(awardNum);
-        }
-        else
-        {
-            LocId locId;
-            if (awardNum <= regularCount)
-            {
-                locId = regularDataset!.Values[awardNum - 1];
-            }
-            else
-            {
-                var specialAwardNum = awardNum - regularCount;
-                locId = specialDataset!.Values[specialAwardNum - 1];
-            }
-
-            awardName = Loc.GetString(locId);
-        }
-
-        // Validate citation
-        citation = citation.Trim();
-        if (string.IsNullOrWhiteSpace(citation))
-        {
-            shell.WriteError(Loc.GetString("cmd-rmcgivecommendation-empty-citation"));
-            return;
-        }
-
-        // Use IPlayerLocator supports both username and Guid
-        var located = await _locator.LookupIdByNameOrIdAsync(receiverNameOrId);
-
-        if (located == null)
-        {
-            shell.WriteError(Loc.GetString("cmd-rmcgivecommendation-player-not-found", ("player", receiverNameOrId)));
-            return;
-        }
-
-        var receiverId = located.UserId.UserId;
-
-        // Get admin info
         var adminId = shell.Player?.UserId.UserId ?? Guid.Empty;
+        var adminName = shell.Player?.Name ?? "Server";
 
-        try
-        {
-            // Save to database
-            await _db.AddCommendation(adminId, receiverId, giverName, receiverName, awardName, citation, commendationType, targetRound);
+        var error = await cs.AdminGiveCommendation(
+            adminId,
+            adminName,
+            giverName,
+            receiverNameOrId,
+            receiverName,
+            commendationType,
+            awardName,
+            protoId,
+            citation,
+            targetRound);
 
-            var commendation = new Commendation(giverName, receiverName, awardName, citation, commendationType, targetRound);
-            _commendation.CommendationAdded(new NetUserId(adminId), new NetUserId(receiverId), commendation);
-
-            // Add to round commendations only if it's for the current round
-            if (targetRound == currentRound)
-            {
-                var commendationPrototypeId = commendationType == CommendationType.Medal
-                    ? GetMedalPrototypeId(awardNum)
-                    : null;
-
-                var entry = new RoundCommendationEntry(
-                    commendation,
-                    commendationPrototypeId,
-                    null, // We deliberately do not link the award to the player so as not to confuse the admins with the fact that it can be given to someone who deserved the award in one role, but now plays in another to avoid confusion (the marine died and took on the role of a drone, the admin accidentally links the award to the drone).
-                    receiverId.ToString());
-                commendationSystem.AddRoundCommendation(entry);
-            }
-
-            // Log admin action
-            var typeName = commendationType == CommendationType.Medal ? "medal" : "jelly";
-            var actualAdminName = shell.Player?.Name ?? "Server";
-            var receiverLogin = located.Username;
-
-            _adminLog.Add(LogType.RMCMedal,
-                $"admin {actualAdminName} gave a {typeName} '{awardName}' to {receiverLogin} (character: {receiverName}) that reads:\n{citation}");
-
-            // Send admin announcement
-            var announcementMsg = Loc.GetString("cmd-rmcgivecommendation-admin-announcement",
-                ("admin", actualAdminName),
-                ("type", typeName),
-                ("award", awardName),
-                ("receiver", receiverLogin),
-                ("character", receiverName),
-                ("round", targetRound));
-            _chat.SendAdminAnnouncement(announcementMsg, null, null);
-
-            shell.WriteLine(Loc.GetString("cmd-rmcgivecommendation-success",
-                ("award", awardName), ("player", receiverLogin)));
-        }
-        catch (Exception e)
-        {
-            Logger.Error($"Error saving commendation: {e}");
-        }
+        if (error != null)
+            shell.WriteError(error);
+        else
+            shell.WriteLine(Loc.GetString("cmd-rmcgivecommendation-success", ("award", awardName), ("player", receiverNameOrId)));
     }
 
     public override CompletionResult GetCompletion(IConsoleShell shell, string[] args)
     {
-        // Initialize datasets if needed
         var commendationSystem = _systems.GetEntitySystem<CommendationSystem>();
         _medalIds ??= commendationSystem.GetAwardableMedalIds();
         _specialMedalIds ??= commendationSystem.GetSpecialMedalIds();
@@ -217,7 +115,6 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
 
         if (args.Length == 1)
         {
-            // Complete giver name - suggest standard giver names (with quotes since they contain spaces)
             var highCommandName = Loc.GetString("rmc-announcement-author-highcommand");
             var queenMotherName = Loc.GetString("rmc-announcement-author-queen-mother");
 
@@ -231,18 +128,14 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
 
         if (args.Length == 2)
         {
-            // Complete receiver username/UserId
             var options = _players.Sessions.Select(c => c.Name).OrderBy(c => c).ToArray();
             return CompletionResult.FromHintOptions(options, Loc.GetString("cmd-rmcgivecommendation-hint-receiver"));
         }
 
         if (args.Length == 3)
         {
-            // Complete receiver character name from Mind (with quotes since names may contain spaces)
             var receiverNameOrId = args[1];
             var mindSystem = _systems.GetEntitySystem<SharedMindSystem>();
-
-            // Try to find player and get their character name
             var characterNames = new List<CompletionOption>();
 
             foreach (var session in _players.Sessions)
@@ -265,7 +158,6 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
 
         if (args.Length == 4)
         {
-            // Complete type (medal or jelly)
             var options = new[]
             {
                 new CompletionOption("medal", Loc.GetString("cmd-rmcgivecommendation-hint-type-medal")),
@@ -277,7 +169,6 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
 
         if (args.Length == 5)
         {
-            // Complete award type based on commendation type
             var type = args[3].ToLowerInvariant();
 
             if (type == "medal")
@@ -289,7 +180,7 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
 
             if (type == "jelly")
             {
-                var options = GetAwardCompletionOptions(_jelliesDataset, _jelliesSpecialDataset);
+                var options = GetJellyCompletionOptions();
                 return CompletionResult.FromHintOptions(options,
                     Loc.GetString("cmd-rmcgivecommendation-hint-jelly-type", ("count", JellyCount)));
             }
@@ -298,13 +189,10 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
         }
 
         if (args.Length == 6)
-        {
             return CompletionResult.FromHint(Loc.GetString("cmd-rmcgivecommendation-hint-citation"));
-        }
 
         if (args.Length == 7)
         {
-            // Show current round number as an option for optional round parameter
             var gameTicker = _systems.GetEntitySystem<GameTicker>();
             var currentRound = gameTicker.RoundId;
             var options = new[]
@@ -329,55 +217,24 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
         return rankSystem.GetSpeakerFullRankName(entity.Value) ?? characterName;
     }
 
-    private CompletionOption[] GetAwardCompletionOptions(
-        LocalizedDatasetPrototype? regularDataset,
-        LocalizedDatasetPrototype? specialDataset)
+    private CompletionOption[] GetJellyCompletionOptions()
     {
         var options = new List<CompletionOption>();
+        var regularCount = _jelliesDataset?.Values.Count ?? 0;
 
-        // Add regular awards
-        if (regularDataset != null)
+        if (_jelliesDataset != null)
         {
-            var regularCount = regularDataset.Values.Count;
-            for (int i = 1; i <= regularCount; i++)
-            {
-                var locId = regularDataset.Values[i - 1];
-                var name = Loc.GetString(locId);
-                options.Add(new CompletionOption(i.ToString(), name));
-            }
+            for (var i = 1; i <= regularCount; i++)
+                options.Add(new CompletionOption(i.ToString(), Loc.GetString(_jelliesDataset.Values[i - 1])));
         }
 
-        // Add special awards at the end
-        if (specialDataset != null)
+        if (_jelliesSpecialDataset != null)
         {
-            var regularCount = regularDataset?.Values.Count ?? 0;
-            var specialCount = specialDataset.Values.Count;
-            for (int i = 1; i <= specialCount; i++)
-            {
-                var locId = specialDataset.Values[i - 1];
-                var name = Loc.GetString(locId);
-                var awardNum = regularCount + i;
-                options.Add(new CompletionOption(awardNum.ToString(), name));
-            }
+            for (var i = 1; i <= _jelliesSpecialDataset.Values.Count; i++)
+                options.Add(new CompletionOption((regularCount + i).ToString(), Loc.GetString(_jelliesSpecialDataset.Values[i - 1])));
         }
 
         return options.ToArray();
-    }
-
-    private string GetMedalAwardName(int awardNum)
-    {
-        var medalIds = _medalIds ?? Array.Empty<EntProtoId>();
-        var specialMedalIds = _specialMedalIds ?? Array.Empty<EntProtoId>();
-
-        if (awardNum <= medalIds.Count)
-        {
-            var proto = _prototype.Index<EntityPrototype>(medalIds[awardNum - 1]);
-            return proto.Name;
-        }
-
-        var specialAwardNum = awardNum - medalIds.Count;
-        var specialProto = _prototype.Index<EntityPrototype>(specialMedalIds[specialAwardNum - 1]);
-        return specialProto.Name;
     }
 
     private CompletionOption[] GetMedalCompletionOptions()
@@ -400,20 +257,5 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
         }
 
         return options.ToArray();
-    }
-
-    private EntProtoId? GetMedalPrototypeId(int awardNum)
-    {
-        var medalIds = _medalIds ?? Array.Empty<EntProtoId>();
-        var specialMedalIds = _specialMedalIds ?? Array.Empty<EntProtoId>();
-
-        if (awardNum <= medalIds.Count)
-            return medalIds[awardNum - 1];
-
-        var specialAwardNum = awardNum - medalIds.Count;
-        if (specialAwardNum <= 0 || specialAwardNum > specialMedalIds.Count)
-            return null;
-
-        return specialMedalIds[specialAwardNum - 1];
     }
 }
