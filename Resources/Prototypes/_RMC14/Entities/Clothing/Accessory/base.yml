@@ -19,6 +19,7 @@
   - type: UniformAccessoryHolder
     allowedCategories:
     - Patch
+    - RankPin
     - Medal
     - Armband
     - PridePin
@@ -37,6 +38,7 @@
     allowedCategories:
     - Tie
     - Patch
+    - RankPin
     - Medal
     - Armband
     - PridePin
