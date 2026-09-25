@@ -1,7 +1,9 @@
 ﻿using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Serialization.Markdown.Mapping;
+using Robust.Shared.Serialization.Markdown.Sequence; // RMC14
 using Robust.Shared.Serialization.Markdown.Validation;
+using Robust.Shared.Serialization.Markdown.Value;    // RMC14
 using Robust.Shared.Serialization.TypeSerializers.Interfaces;
 
 namespace Content.Shared.Construction.Steps
@@ -16,7 +18,7 @@ namespace Content.Shared.Construction.Steps
                 return typeof(MaterialConstructionGraphStep);
             }
 
-            if (node.Has("tool"))
+            if (node.Has("tools")) // RMC14
             {
                 return typeof(ToolConstructionGraphStep);
             }
@@ -49,6 +51,27 @@ namespace Content.Shared.Construction.Steps
             return null;
         }
 
+        // begin RMC14
+        // helper function to convert old yml "tool" to new format "tools"
+        private void ConvertLegacyTool(MappingDataNode node)
+        {
+        
+            if (node.Has("tool") && node.Has("tools"))
+            {
+                throw new InvalidOperationException(
+                    "ConstructionGraphStep cannot contain both 'tool' and 'tools'.");
+            }
+            
+            if (node.Has("tool") && !node.Has("tools"))
+            {
+                var tool = node.Get<ValueDataNode>("tool");
+        
+                node.Remove("tool");
+                node.Add("tools", new SequenceDataNode(new[] { tool }));
+            }
+        }
+        // end RMC14
+
         public ConstructionGraphStep Read(ISerializationManager serializationManager,
             MappingDataNode node,
             IDependencyCollection dependencies,
@@ -56,6 +79,8 @@ namespace Content.Shared.Construction.Steps
             ISerializationContext? context = null,
             ISerializationManager.InstantiationDelegate<ConstructionGraphStep>? instanceProvider = null)
         {
+            ConvertLegacyTool(node); // RMC14
+
             var type = GetType(node) ??
                        throw new ArgumentException(
                            "Tried to convert invalid YAML node mapping to ConstructionGraphStep!");
@@ -67,6 +92,8 @@ namespace Content.Shared.Construction.Steps
             IDependencyCollection dependencies,
             ISerializationContext? context = null)
         {
+            ConvertLegacyTool(node); // RMC14
+            
             var type = GetType(node);
 
             if (type == null)
