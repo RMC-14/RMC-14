@@ -17,6 +17,10 @@
   - type: ShowMindShieldIcons
   - type: ShowCriminalRecordIcons
   - type: FlashImmunity
+  - type: OverwatchCamera
+  - type: Tag
+    tags:
+    - RipOffOnInfection
   - type: GuideHelp
     guides:
     - RMCGuideRoleMilitaryPolice

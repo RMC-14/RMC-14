@@ -380,6 +380,45 @@
 
 - type: entity
   parent: SquadBase
+  id: SquadMP
+  name: Military Police
+  components:
+  - type: SquadTeam
+    color: "#b1152b"
+    background:
+      sprite: _RMC14/Interface/job_icons/Misc/other.rsi
+      state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+    radio: MarineMilitaryPolice
+    minimapBackground:
+     sprite: /Textures/_RMC14/Interface/map_blips.rsi
+     state: background_mp
+    canSupplyDrop: false
+    group: MP
+    maxRoles:
+      CMRifleman: 0
+      CMCombatTech: 0
+      CMHospitalCorpsman: 0
+      CMSmartGunOperator: 0
+      CMWeaponsSpecialist: 0
+      CMFireteamLeader: 0
+      CMSquadLeader: 0
+    leaderIcon:
+      sprite: _RMC14/Interface/job_icons/UNMC/military_police.rsi
+      state: hudsquad_cmp
+  - type: Tag
+    tags:
+    - RMCSquadMP
+
+- type: Tag
+  id: RMCSquadMP
+
+- type: entity
+  parent: SquadBase
   id: SquadFORECON
   name: Recon
   components:
