@@ -1,0 +1,15 @@
+﻿names-rmc-operation-dataset-1 = Detour
+names-rmc-operation-dataset-2 = Exercise
+names-rmc-operation-dataset-3 = Inspection
+names-rmc-operation-dataset-4 = Investigation
+names-rmc-operation-dataset-5 = Manoeuvre
+names-rmc-operation-dataset-6 = Mission
+names-rmc-operation-dataset-7 = Operation
+names-rmc-operation-dataset-8 = Patrol
+names-rmc-operation-dataset-9 = Peacekeeping Mission
+names-rmc-operation-dataset-10 = Program
+names-rmc-operation-dataset-11 = Project
+names-rmc-operation-dataset-12 = Recon
+names-rmc-operation-dataset-13 = Sortie
+names-rmc-operation-dataset-14 = Strategic Response Program
+names-rmc-operation-dataset-15 = Task Force
