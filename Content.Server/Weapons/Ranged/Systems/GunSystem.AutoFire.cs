@@ -32,6 +32,22 @@ public sealed partial class GunSystem
             else if (gun.BurstActivated)
             {
                 var parent = TransformSystem.GetParentUid(uid);
+
+                //RMC14 Stop burst fire when inside a bag or holster.
+                if (!HasComp<DamageableComponent>(parent) &&
+                    Containers.TryGetOuterContainer(uid, Transform(uid), out var outerParent))
+                {
+                    if (HasComp<DamageableComponent>(outerParent.Owner))
+                    {
+                        gun.BurstActivated = false;
+                        gun.BurstShotsCount = 0;
+                        gun.NextFire += TimeSpan.FromSeconds(gun.BurstCooldown);
+                        Dirty(uid, gun);
+                        continue;
+                    }
+                }
+                //RMC14
+
                 if (HasComp<DamageableComponent>(parent))
                     AttemptShoot(parent, uid, gun, gun.ShootCoordinates ?? new EntityCoordinates(uid, gun.DefaultDirection));
                 else
