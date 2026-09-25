@@ -243298,7 +243298,7 @@ entities:
     - type: Transform
       pos: 75.5,32.5
       parent: 1
-- proto: RMCWeaponLauncherM85A1
+- proto: RMCWeaponLauncherM79
   entities:
   - uid: 36180
     components:
