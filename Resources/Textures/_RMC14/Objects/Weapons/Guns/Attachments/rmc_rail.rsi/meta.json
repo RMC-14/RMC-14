@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC0-1.0",
-  "copyright": "l112_scope and sasos created for RMC-14/RMC-14 by @TadJohnson00 (GitHub). l89_scope by @Drazamuffin (GitHub).",
+  "copyright": "l112_scope and sasos created for RMC-14/RMC-14 by @TadJohnson00 (GitHub). e290_scope by @Drazamuffin (GitHub).",
   "size": {
     "x": 32,
     "y": 32
@@ -26,7 +26,7 @@
       "name": "sasos_a"
     },
     {
-      "name": "l89_scope"
+      "name": "e290_scope"
     }
   ]
 }
