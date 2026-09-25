@@ -1,10 +1,12 @@
 ﻿using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
+using Robust.Shared.Prototypes;
+using Content.Shared._RMC14.Chat;
 
 namespace Content.Shared._RMC14.Marines.Squads;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SquadSystem))]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
+[Access(typeof(SquadSystem), typeof(CommandSpeechSystem))]
 public sealed partial class SquadLeaderComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -12,4 +14,13 @@ public sealed partial class SquadLeaderComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntityUid? Headset;
+
+    // SquadLeader Command Speech
+    [DataField]
+    public EntProtoId CommandSpeechActionId = "ActionCommandSpeechToggle";
+
+    public EntityUid? CommandSpeechAction;
+
+    [DataField, AutoNetworkedField]
+    public bool Active;
 }
