@@ -44,6 +44,7 @@
     - type: CMVendorUser
       id: CMFireteamLeader
       points: 45
+    - type: MarineOrders
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: cm-job-prefix-fireteam-leader
