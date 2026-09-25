@@ -1,0 +1,38 @@
+- type: entity
+  id: RMCWeakLingeringAcid
+  name: weak acid
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: XenoAcidType
+    damage:
+      types:
+        Heat: 1.25
+    armorPiercing: 40
+    appearance: Weak
+    upgrade: RMCNormalLingeringAcid
+
+- type: entity
+  id: RMCNormalLingeringAcid
+  parent: RMCWeakLingeringAcid
+  name: acid
+  components:
+  - type: XenoAcidType
+    tier: 2
+    maxDuration: 40
+    durationAdd: 20
+    appearance: Normal
+    upgrade: RMCStrongLingeringAcid
+
+- type: entity
+  id: RMCStrongLingeringAcid
+  parent: RMCNormalLingeringAcid
+  name: strong acid
+  components:
+  - type: XenoAcidType
+    tier: 3
+    maxDuration: 80
+    durationAdd: 40
+    weakenArmor: 15
+    appearance: Strong
+    upgrade: null
+

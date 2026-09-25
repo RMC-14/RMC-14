@@ -261,11 +261,15 @@
         acided:
           None:
             visible: false
+          Weak:
+            sprite: _RMC14/Effects/xeno_spray_acid.rsi
+            state: human_acid_weak
+            visible: true
           Normal:
             sprite: _RMC14/Effects/xeno_spray_acid.rsi
             state: human_acid
             visible: true
-          Enhanced:
+          Strong:
             sprite: _RMC14/Effects/xeno_spray_acid.rsi
             state: human_acid_enhanced
             visible: true
