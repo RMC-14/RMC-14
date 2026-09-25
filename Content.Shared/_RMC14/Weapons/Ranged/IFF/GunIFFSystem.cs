@@ -82,20 +82,19 @@ public sealed class GunIFFSystem : EntitySystem
 
         foreach (var faction in ent.Comp.Factions)
         {
-            if (HasComp<EntityIFFComponent>(args.OtherEntity) && IsInFaction(args.OtherEntity, faction))
-            {
-                args.Cancelled = true;
-                return;
-            }
-
-            if (!ent.Comp.Enabled)
+            var protectedByIff =
+                HasComp<EntityIFFComponent>(args.OtherEntity) && IsInFaction(args.OtherEntity, faction) ||
+                ent.Comp.Enabled && IsInFaction(args.OtherEntity, faction);
+            if (!protectedByIff)
                 continue;
 
-            if (IsInFaction(args.OtherEntity, faction))
-            {
-                args.Cancelled = true;
-                return;
-            }
+            var check = new ProjectileIFFCheckEvent(args.OtherEntity, faction, ent.Comp.Enabled);
+            RaiseLocalEvent(ent.Owner, ref check);
+            if (check.IgnoreProtection)
+                continue;
+
+            args.Cancelled = true;
+            return;
         }
     }
 
@@ -262,6 +261,9 @@ public sealed class GunIFFSystem : EntitySystem
 
             iff.Enabled = hasAnyFaction;
             Dirty(projectile, iff);
+
+            var added = new ProjectileIFFAddedEvent(owner, projectile);
+            RaiseLocalEvent(ref added);
         }
     }
 
@@ -286,6 +288,18 @@ public sealed class GunIFFSystem : EntitySystem
 
         projectileIFFComponent.Enabled = enabled && projectileIFFComponent.Factions.Count > 0;
         Dirty(uid, projectileIFFComponent);
+    }
+
+    public bool CopyAmmoIFF(EntityUid source, EntityUid projectile)
+    {
+        if (!TryComp(source, out ProjectileIFFComponent? sourceIff))
+            return false;
+
+        GiveAmmoMultiFactionIFF(projectile, sourceIff.Factions, sourceIff.Enabled);
+
+        var added = new ProjectileIFFAddedEvent(source, projectile);
+        RaiseLocalEvent(ref added);
+        return true;
     }
 
     public bool HasFaction(EntityUid uid, EntProtoId<IFFFactionComponent> faction)
