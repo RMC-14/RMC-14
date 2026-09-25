@@ -22,6 +22,22 @@ public sealed class TacticalMapQueenEyeMoveMsg(Vector2i position) : BoundUserInt
 }
 
 [Serializable, NetSerializable]
+public sealed class TacticalMapWatchXenoMsg(NetEntity target) : BoundUserInterfaceMessage
+{
+    public readonly NetEntity Target = target;
+}
+
+/// <summary>
+/// Raised as a network event instead of a BUI message because ghosts fail the
+/// CanInteract check that validates incoming BUI messages server-side.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class TacticalMapGhostTeleportRequestEvent(Vector2i position) : EntityEventArgs
+{
+    public readonly Vector2i Position = position;
+}
+
+[Serializable, NetSerializable]
 public sealed class TacticalMapCreateLabelMsg(Vector2i position, string text) : BoundUserInterfaceMessage
 {
     public readonly Vector2i Position = position;
