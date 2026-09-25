@@ -200,6 +200,63 @@
 
 - type: entity
   parent: CMPill
+  id: RMCPillParacetamol
+  suffix: Paracetamol, 15u
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: RMCParacetamol
+          Quantity: 15
+  - type: Sprite
+    layers:
+    - state: pill5
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: ExamineRequiresSkill
+    skilledExamine: rmc-pill-contents-paracetamol
+
+- type: entity
+  parent: CMPill
+  id: RMCPillTramadol
+  suffix: Tramadol, 15u
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: RMCTramadol
+          Quantity: 15
+  - type: Sprite
+    layers:
+    - state: pill5
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: ExamineRequiresSkill
+    skilledExamine: rmc-pill-contents-tramadol
+
+- type: entity
+  parent: CMPill
+  id: RMCPillOxycodone
+  suffix: Oxycodone, 15u
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: RMCOxycodone
+          Quantity: 15
+  - type: Sprite
+    layers:
+    - state: pill5
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: ExamineRequiresSkill
+    skilledExamine: rmc-pill-contents-oxycodone
+
+- type: entity
+  parent: CMPill
   id: RMCPillMeralyneBicaridine
   suffix: MeraBic
   components:
@@ -258,7 +315,7 @@
   - type: ExamineRequiresSkill
     skilledExamine: rmc-pill-contents-imidazoline
 
-# TODO RMC14 peridaxon, tramadol
+# TODO RMC14 peridaxon
 
 - type: entity
   parent: CMPill
