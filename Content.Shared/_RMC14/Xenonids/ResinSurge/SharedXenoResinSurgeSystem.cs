@@ -12,12 +12,14 @@ using Content.Shared.Coordinates.Helpers;
 using Content.Shared.DoAfter;
 using Content.Shared.Doors.Components;
 using Content.Shared.Examine;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Maps;
 using Content.Shared.Popups;
 using Content.Shared.Spawning;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.ResinSurge;
 
@@ -135,9 +137,19 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
                 }
 
                 // If no, buff structure
-                var popupSelf = Loc.GetString("rmc-xeno-resin-surge-shield-self", ("target", entity));
-                var popupOthers = Loc.GetString("rmc-xeno-resin-surge-shield-others", ("xeno", xeno), ("target", entity));
-                _popup.PopupPredicted(popupSelf, popupOthers, xeno, xeno);
+                var selfMessage = Loc.GetString("rmc-xeno-resin-surge-shield-self", ("target", entity));
+                _popup.PopupClient(selfMessage, xeno, xeno);
+
+                var others = Filter.PvsExcept(xeno).Recipients;
+                foreach (var other in others)
+                {
+                    if (other.AttachedEntity is not { } otherEnt)
+                    continue;
+
+                    var xenoName = ("xeno", Identity.Name(xeno, EntityManager, otherEnt));
+                    var otherMessage = Loc.GetString("rmc-xeno-resin-surge-shield-others", xenoName, ("target", entity));
+                    _popup.PopupEntity(otherMessage, xeno, otherEnt);
+                }
 
                 _xenoReinforce.Reinforce(entity, xeno.Comp.ReinforceAmount, xeno.Comp.ReinforceDuration);
 
@@ -185,9 +197,19 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
 
                 if (weeds != null && _hive.FromSameHive(xeno.Owner, weedEnt))
                 {
-                    var popupSelf = Loc.GetString("rmc-xeno-resin-surge-wall-self");
-                    var popupOthers = Loc.GetString("rmc-xeno-resin-surge-wall-others", ("xeno", xeno));
-                    _popup.PopupPredicted(popupSelf, popupOthers, xeno, xeno);
+                    var selfMessage = Loc.GetString("rmc-xeno-resin-surge-wall-self");
+                    _popup.PopupClient(selfMessage, xeno, xeno);
+
+                    var others = Filter.PvsExcept(xeno).Recipients;
+                    foreach (var other in others)
+                    {
+                        if (other.AttachedEntity is not { } otherEnt)
+                        continue;
+
+                        var xenoName = ("xeno", Identity.Name(xeno, EntityManager, otherEnt));
+                        var otherMessage = Loc.GetString("rmc-xeno-resin-surge-wall-others", xenoName);
+                        _popup.PopupEntity(otherMessage, xeno, otherEnt);
+                    }
 
                     SurgeUnstableWall(xeno, target);
                     return;
@@ -216,9 +238,19 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
             !TryComp(gridId, out MapGridComponent? grid))
             return;
 
-        var popupSelf = Loc.GetString("rmc-xeno-resin-surge-sticky-self");
-        var popupOthers = Loc.GetString("rmc-xeno-resin-surge-sticky-others", ("xeno", xeno));
-        _popup.PopupPredicted(popupSelf, popupOthers, xeno, xeno);
+        var selfMessage = Loc.GetString("rmc-xeno-resin-surge-sticky-self");
+        _popup.PopupClient(selfMessage, xeno, xeno);
+
+        var others = Filter.PvsExcept(xeno).Recipients;
+        foreach (var other in others)
+        {
+            if (other.AttachedEntity is not { } otherEnt)
+            continue;
+
+            var xenoName = ("xeno", Identity.Name(xeno, EntityManager, otherEnt));
+            var otherMessage = Loc.GetString("rmc-xeno-resin-surge-sticky-others", xenoName);
+            _popup.PopupEntity(otherMessage, xeno, otherEnt);
+        }
 
         if (_net.IsServer)
         {

@@ -26,6 +26,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Maps;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -40,6 +41,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
@@ -490,10 +492,19 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             _adminLogs.Add(LogType.RMCXenoFruitPlant, $"Xeno {ToPrettyString(xeno.Owner):xeno} planted {ToPrettyString(entity):entity} at {coordinates}");
         }
 
-        var popupSelf = fruitOverflow ? Loc.GetString("rmc-xeno-fruit-plant-limit-exceeded")
+        var selfMessage = fruitOverflow ? Loc.GetString("rmc-xeno-fruit-plant-limit-exceeded")
             : Loc.GetString("rmc-xeno-fruit-plant-success-self");
-        var popupOthers = Loc.GetString("rmc-xeno-fruit-plant-success-others", ("xeno", xeno));
-        _popup.PopupPredicted(popupSelf, popupOthers, xeno.Owner, xeno.Owner);
+        _popup.PopupClient(selfMessage, xeno.Owner, xeno.Owner);
+
+        var others = Filter.PvsExcept(xeno.Owner).Recipients;
+        foreach (var other in others)
+        {
+            if (other.AttachedEntity is not { } otherEnt)
+            continue;
+
+            var otherMessage = Loc.GetString("rmc-xeno-fruit-plant-success-others", ("xeno", Identity.Name(xeno, EntityManager, otherEnt)));
+            _popup.PopupEntity(otherMessage, xeno.Owner, otherEnt);
+        }
 
         UpdateFruitCount(xeno);
     }
