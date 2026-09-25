@@ -274,7 +274,7 @@
     - MarineSOF
     radioTextIncrease: 3
 
-# Tyrargo survs
+# Tyrargo/Varadero survs
 - type: entity
   parent: RMCHeadsetMarine
   id: RMCHeadsetTyrargo
@@ -321,6 +321,28 @@
     channels:
     - MarineSurvivor
     radioTextIncrease: 3
+
+# without tracker
+- type: entity
+  parent: RMCHeadsetTyrargo
+  id: RMCHeadsetMarineNV
+  name: UNMC headset
+  description: A standard issue UNMC headset.
+  suffix: Survivor, Varadero
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/headsets.rsi
+    state: generic_headset
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyColony
+  - type: RMCHeadset
+    channels:
+    - MarineSurvivor
+  - type: RMCStaticDefaultChannel
+  - type: EncryptionKeyHolder
+    defaultChannel: MarineSurvivor
 
 # Paramarine Hybrisa survivor insert
 - type: entity

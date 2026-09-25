@@ -486,6 +486,51 @@
         tags:
         - CMMagazineRifleM54CExt
 
+# M54C MK1 REG
+- type: entity
+  parent: RMCBoxMagazineRifleBase
+  id: RMCBoxMagazineRifleM54CMK1Empty
+  name: magazine box (M54C MK1 x 8)
+  components: # TODO RMC14: check if you can craft this and add it if its parity
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#7b8246"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#ffc000"
+    - state: rifle_box_generic # TODO RMC14: mk1 state
+      color: "#eac473"
+    - state: rifle_box_marking
+      color: "#ba733f"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#7b8246"
+    - state: rifle_lid_marking
+      map: [ "lid_marking" ]
+      color: "#ba733f"
+  - type: CMItemSlots
+    count: 8
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM54CMK1
+
+- type: entity
+  parent: RMCBoxMagazineRifleM54CMK1Empty
+  id: RMCBoxMagazineRifleM54CMK1
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: CMMagazineRifleM54CMK1
+    count: 8
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM54CMK1
+
 # M4SPR REG
 - type: entity
   parent: RMCBoxMagazineRifleBase
