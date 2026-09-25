@@ -121,3 +121,6 @@ rmc-lore-examinable-t70-bag-phone = A bulky satchel containing a phone, antenna,
 
 rmc-lore-examinable-bag-phone = A basic radio telephone attached to a satchel. The flap has a small cut-out for the transceiver. This design is fairly old, being one of the first civilian bag-telephones originally patented by Novaris Industries.
                                 After the patent expired, its design would be picked by various other corporations and widely sold. Nowadays, despite its bulkier size and weight, this model sees frequent use among the more thrifty consumer for its relatively low cost and for its reliability despite newer models being available.
+
+rmc-lore-examinable-patch-security-division = Weston-Yamada's Security Division is the Company's armed wing, tasked with ensuring the safety of Weston-Yamada assets, personnel, and interests. It's notably comprised of the PMC Dispatch, Colony Safety, & Personal Protection Departments.
+rmc-lore-examinable-patch-communications-division = Weston-Yamada's Communications Division is responsible for managing the Company's relations with various stakeholder groups across the galaxy. It's notably comprised of the Public Relations, Internal Communications, & Corporate Relations Departments.

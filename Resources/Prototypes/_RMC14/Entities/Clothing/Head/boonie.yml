@@ -49,3 +49,14 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/boonie_fisher.rsi
   - type: ItemCamouflage
     camouflageVariations: { }
+
+- type: entity
+  parent: RMCBoonieFisherman
+  id: RMCBoonieWeYa
+  name: Weston-Yamada boonie hat
+  description: A waterproof boonie hat, adorned with the logo of the Weston-Yamada Corporation. This surprisingly high-quality hat will protect you from rain and shine alike.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/boonie_weya.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/boonie_weya.rsi
