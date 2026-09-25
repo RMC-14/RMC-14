@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from https://github.com/cmss13-devs/cmss13/commit/70f98497ccd968d049906e499be8aa1b8f219f8a, echo and forecon edited by CatAndHats (Github), background_medical from https://github.com/cmss13-devs/cmss13/blob/5368c7a5342a52d204eac3d6cc45228f3b976893/icons/ui_icons/map_blips.dmi",
+  "size": {
+    "x": 7,
+    "y": 7
+  },
+  "states": [
+    {
+      "name": "background"
+    },
+    {
+      "name": "background_alpha"
+    },
+    {
+      "name": "background_bravo"
+    },
+    {
+      "name": "background_cbrn"
+    },
+    {
+      "name": "background_charlie"
+    },
+    {
+      "name": "background_civillian"
+    },
+    {
+      "name": "background_command"
+    },
+    {
+      "name": "background_delta"
+    },
+    {
+      "name": "background_echo"
+    },
+    {
+      "name": "background_forecon"
+    },
+    {
+      "name": "background_foxtrot"
+    },
+    {
+      "name": "background_intel"
+    },
+    {
+      "name": "background_medical"
+    },
+    {
+      "name": "background_mp"
+    },
+    {
+      "name": "background_shipside"
+    },
+    {
+      "name": "background_sof"
+    },
+    {
+      "name": "background_ua"
+    }
+  ]
+}

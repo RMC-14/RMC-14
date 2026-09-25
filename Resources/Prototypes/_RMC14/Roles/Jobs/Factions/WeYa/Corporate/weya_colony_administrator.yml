@@ -31,10 +31,10 @@
     - type: MarineOrders
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/We-Ya/other.rsi
         state: weya_admin
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/We-Ya/backgrounds.rsi
         state: background_wy_management
   hasIcon: true
   hidden: true

@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/5368c7a5342a52d204eac3d6cc45228f3b976893/icons/ui_icons/map_blips.dmi, background_unmc from background_ua by kleinerstation13 (Github) with tyrargo_synth being a combination of synth and background_ua by kleinerstation13 (Github)",
+  "size": {
+    "x": 7,
+    "y": 7
+  },
+  "states": [
+    {
+      "name": "background_unmc"
+    },
+    {
+      "name": "tyrargo_synth"
+    }
+  ]
+}

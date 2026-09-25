@@ -135,7 +135,7 @@
   - type: WarpPoint
   - type: TacticalMapIcon
     icon:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/Other/aegis.rsi
       state: aegisob
   - type: TacticalMapTracked
   - type: XenoMapTracked

@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from https://github.com/cmss13-devs/cmss13/commit/70f98497ccd968d049906e499be8aa1b8f219f8a, forecon_synth by SigmaTheDragon (Github)",
+  "size": {
+    "x": 7,
+    "y": 7
+  },
+  "states": [
+    {
+      "name": "correspondent"
+    },
+    {
+      "name": "forecon_synth"
+    },
+    {
+      "name": "joe"
+    },
+    {
+      "name": "mst"
+    },
+    {
+      "name": "recruiter"
+    },
+    {
+      "name": "synth"
+    }
+  ]
+}

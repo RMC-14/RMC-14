@@ -236,10 +236,10 @@
     liveUpdate: true
   - type: TacticalMapIcon
     icon:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
       state: xenoqueen
     background:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/Xeno/other.rsi
       state: xeno_ruler
   - type: AcidTrap
   - type: TacticalMapLiveUpdateOnOvi

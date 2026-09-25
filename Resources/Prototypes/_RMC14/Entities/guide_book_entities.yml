@@ -6,7 +6,7 @@
   suffix: GuideBookEntity
   components:
   - type: Sprite
-    sprite: /Textures/_RMC14/Interface/map_blips.rsi
+    sprite: /Textures/_RMC14/Interface/map_blips/Xeno/other.rsi
 
 # Tier 0
 - type: entity
@@ -18,7 +18,8 @@
   - type: Sprite
     layers:
     - state: background_xeno
-    - state: lesser_drone
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: lesser_drone
 
 - type: entity
   parent: RMCBaseMapIcon
@@ -29,7 +30,8 @@
   - type: Sprite
     layers:
     - state: background_xeno
-    - state: parasite
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: parasite
 
 - type: entity
   parent: RMCBaseMapIcon
@@ -40,7 +42,8 @@
   - type: Sprite
     layers:
     - state: background_xeno
-    - state: larva
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: larva
 
 # Drone Castes
 - type: entity
@@ -52,7 +55,8 @@
   - type: Sprite
     layers:
     - state: background_xeno
-    - state: drone
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: drone
 
 - type: entity
   parent: RMCBaseMapIcon
@@ -63,7 +67,8 @@
   - type: Sprite
     layers:
     - state: background_xeno
-    - state: hivelord
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: hivelord
 
 - type: entity
   parent: RMCBaseMapIcon
@@ -74,7 +79,8 @@
   - type: Sprite
     layers:
     - state: background_xeno
-    - state: burrower
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: burrower
 
 - type: entity
   parent: RMCBaseMapIcon
@@ -85,7 +91,8 @@
   - type: Sprite
     layers:
     - state: background_xeno
-    - state: carrier
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: carrier
 
 # Defender Castes
 - type: entity
@@ -97,7 +104,8 @@
   - type: Sprite
     layers:
     - state: background_xeno
-    - state: defender
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: defender
 
 - type: entity
   parent: RMCBaseMapIcon
@@ -108,7 +116,8 @@
   - type: Sprite
     layers:
     - state: background_xeno
-    - state: warrior
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: warrior
 
 - type: entity
   parent: RMCBaseMapIcon
@@ -119,7 +128,9 @@
   - type: Sprite
     layers:
     - state: background_xeno
-    - state: crusher
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: crusher
+
 # Sentinel Castes
 - type: entity
   parent: RMCBaseMapIcon
@@ -130,7 +141,8 @@
   - type: Sprite
     layers:
     - state: background_xeno
-    - state: sentinel
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: sentinel
 
 - type: entity
   parent: RMCBaseMapIcon
@@ -141,7 +153,8 @@
   - type: Sprite
     layers:
     - state: background_xeno
-    - state: spitter
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: spitter
 
 - type: entity
   parent: RMCBaseMapIcon
@@ -152,7 +165,8 @@
   - type: Sprite
     layers:
     - state: background_xeno
-    - state: boiler
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: boiler
 
 # Runner Castes
 - type: entity
@@ -164,7 +178,8 @@
   - type: Sprite
     layers:
     - state: background_xeno
-    - state: runner
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: runner
 
 - type: entity
   parent: RMCBaseMapIcon
@@ -175,7 +190,8 @@
   - type: Sprite
     layers:
     - state: background_xeno
-    - state: lurker
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: lurker
 
 - type: entity
   parent: RMCBaseMapIcon
@@ -186,7 +202,8 @@
   - type: Sprite
     layers:
     - state: background_xeno
-    - state: ravager
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: ravager
 
 # Special Castes
 
@@ -199,7 +216,8 @@
   - type: Sprite
     layers:
     - state: background_xeno
-    - state: praetorian
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: praetorian
 
 - type: entity
   parent: RMCBaseMapIcon
@@ -210,7 +228,8 @@
   - type: Sprite
     layers:
     - state: xeno_ruler
-    - state: xenoqueen
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: xenoqueen
 
 - type: entity
   parent: RMCBaseMapIcon
@@ -221,8 +240,10 @@
   - type: Sprite
     layers:
     - state: background_xeno
-    - state: xeno
-    - state: xenoleader
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: xeno
+    - sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
+      state: xenoleader
 
 # Structures
 
@@ -233,6 +254,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
+    sprite: /Textures/_RMC14/Interface/map_blips/Xeno/structures.rsi
     state: core
 
 - type: entity
@@ -242,6 +264,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
+    sprite: /Textures/_RMC14/Interface/map_blips/Xeno/structures.rsi
     state: morpher
 
 - type: entity
@@ -251,6 +274,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
+    sprite: /Textures/_RMC14/Interface/map_blips/Xeno/structures.rsi
     state: cluster
 
 - type: entity
@@ -260,6 +284,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
+    sprite: /Textures/_RMC14/Interface/map_blips/Xeno/structures.rsi
     state: xenotunnel
 
 - type: entity
@@ -269,6 +294,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
+    sprite: /Textures/_RMC14/Interface/map_blips/Xeno/structures.rsi
     state: recovery_node
 
 - type: entity
@@ -278,4 +304,5 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
+    sprite: /Textures/_RMC14/Interface/map_blips/Xeno/structures.rsi
     state: pylon

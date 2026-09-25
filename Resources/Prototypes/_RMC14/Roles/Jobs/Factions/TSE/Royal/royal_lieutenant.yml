@@ -37,10 +37,10 @@
         - RMCSquadRoyalMarines
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/TSE/RCM/Standard.rsi
         state: rmc_lieutenant
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/TSE/backgrounds.rsi
         state: background_twe
   hidden: true
 

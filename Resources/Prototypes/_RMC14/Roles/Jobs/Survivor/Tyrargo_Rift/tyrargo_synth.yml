@@ -23,7 +23,7 @@
       preset: RMCLanguageLearningPresetSynthColonist
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/UNMC/tyrargo.rsi
         state: tyrargo_synth
     - type: IntelRescueSurvivorObjective
     - type: AssignSquad

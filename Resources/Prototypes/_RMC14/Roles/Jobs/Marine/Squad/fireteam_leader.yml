@@ -49,7 +49,7 @@
       prefix: cm-job-prefix-fireteam-leader
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/UNMC/marine.rsi
         state: tl
     - type: MutinyEligible
 #   - type: RMCAwardRecommendation  (If FTL recommendations are required in the future, update the logic to preserve recommendation permissions when a leader is demoted, provided they had this permission before squad leader promotion.)

@@ -95,7 +95,7 @@
     prefix: warrior
   - type: TacticalMapIcon
     icon:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips/Xeno/castes.rsi
       state: warrior
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.2

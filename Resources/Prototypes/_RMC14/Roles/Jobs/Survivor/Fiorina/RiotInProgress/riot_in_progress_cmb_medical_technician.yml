@@ -43,10 +43,10 @@
       prefix: rmc-job-prefix-bureau-riot-control-medical-technician
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/UNMC/marine.rsi
         state: medic
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/CMB.rsi
         state: background_cmb
   greeting: rmc-job-greeting-riot-in-progress-CMB
 

@@ -40,10 +40,10 @@
       prefix: cm-job-prefix-ordnance-tech
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/UNMC/engineering.rsi
         state: ot
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/UNMC/backgrounds.rsi
         state: background_shipside
     - type: MutinyEligible
   hidden: true # TODO RMC14

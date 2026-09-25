@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from https://github.com/cmss13-devs/cmss13/commit/70f98497ccd968d049906e499be8aa1b8f219f8a,   honorguard.png taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/e7df18b4f22a55044502ecbf54c646e1ff68c03d/icons/ui_icons/map_blips.dmi and edited by CatAndHats (Github)",
+  "size": {
+    "x": 7,
+    "y": 7
+  },
+  "states": [
+    {
+      "name": "cmp"
+    },
+    {
+      "name": "crmp"
+    },
+    {
+      "name": "hg"
+    },
+    {
+      "name": "hgsl"
+    },
+    {
+      "name": "hgspec"
+    },
+    {
+      "name": "honorguard"
+    },
+    {
+      "name": "mp"
+    },
+    {
+      "name": "rmp"
+    },
+    {
+      "name": "vhg"
+    },
+    {
+      "name": "warden"
+    }
+  ]
+}

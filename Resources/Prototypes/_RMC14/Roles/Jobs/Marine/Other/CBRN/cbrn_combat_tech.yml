@@ -49,7 +49,7 @@
       prefix: cm-job-prefix-combat-tech
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/UNMC/marine.rsi
         state: engi
   hidden: true
 
@@ -101,8 +101,8 @@
   storage:
     back:
     - RMCGeigerCounter
-    # RMC TODO: reagent scanner 
-    # RMC TODO: gas/atmos analyzer 
+    # RMC TODO: reagent scanner
+    # RMC TODO: gas/atmos analyzer
     - RMCSprayBottleSpaceCleaner
     - CMBodyBagFolded
     - CMBodyBagFolded

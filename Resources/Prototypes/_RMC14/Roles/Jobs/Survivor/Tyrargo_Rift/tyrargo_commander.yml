@@ -27,10 +27,10 @@
     - type: InnateCommandSpeech
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/UNMC/command.rsi
         state: co
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips/UNMC/tyrargo.rsi
         state: background_unmc
     - type: IntelRescueSurvivorObjective
     - type: AssignSquad
