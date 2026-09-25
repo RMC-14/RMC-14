@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ RMCMobCorgi, StripableInventoryBase]
+  parent: [RMCMobCorgi, StripableInventoryBase]
   id: RMCMobK9Unit
   name: military dog
   description: A trained dog of war.
@@ -277,9 +277,6 @@
   - type: Tag
     tags:
     - RMCK9
-  # - type: ActionGrant TODO RMC14 requires some code to make this work
-  #  actions:
-  #  - ActionTogglePanting
 
 - type: entity
   parent: RMCMobK9Unit
