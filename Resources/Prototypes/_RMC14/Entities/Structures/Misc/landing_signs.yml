@@ -165,3 +165,31 @@
   components:
   - type: Sprite
     state: nereidspaceport_sign
+
+- type: entity
+  parent: RMCBaseLandingSign
+  id: RMCTyrargoSign1
+  name: Tyrargo Rift - Firebase Charlie Landing Zone One sign
+  description: A medium sized sign, illuminated by red lights, designating this area as Firebase Charlie.
+  components:
+  - type: Sprite
+    state: tyrargo_sign1
+
+- type: entity
+  parent: RMCBaseLandingSign
+  id: RMCTyrargoSign2
+  name: Tyrargo Rift - UNMC Airbase Anderson Landing Zone Two sign
+  description: A large sign that designates this area as being a UNMC airbase.
+  components:
+  - type: Sprite
+    state: tyrargo_sign2
+
+- type: entity
+  parent: RMCBaseLandingSign
+  id: RMCTyrargoSign3
+  name: Tyrargo Rift - City Limit sign
+  description: A large sign designating the city limit of Tyrargo Rift.
+  components:
+  - type: Sprite
+    state: tyrargo_sign3
+
