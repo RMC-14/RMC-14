@@ -10,3 +10,15 @@
   - type: Item
     size: Large
     sprite: _RMC14/Objects/Misc/desk_fan.rsi
+
+- type: entity
+  parent: RMCDeskFanTan
+  id: RMCDeskFanAlt
+  description: A large sturdy metal desk fan, built to last.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/desk_fan_alt.rsi
+    state: deskfan
+  - type: Item
+    size: Large
+    sprite: _RMC14/Objects/Misc/desk_fan_alt.rsi
