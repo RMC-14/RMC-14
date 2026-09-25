@@ -31,9 +31,10 @@
   - type: ActiveEdgeSpreader
   - type: EdgeSpreader
     id: RMCSmokeAcid
+    spreadDelay: 0.6
   - type: EvenSmoke
-    spawn: RMCSmokeAcid
     range: 3
+    rangeMultipliesRegularDamage: true
   - type: DamageOverTime
     affectsDead: false
     affectsInfectedNested: false
@@ -43,7 +44,7 @@
         Asphyxiation: 3
     damage:
       types:
-        Heat: 35
+        Heat: 17.5
     barricadeDamage:
       types:
         Heat: 8.5
@@ -92,8 +93,8 @@
   - type: ActiveEdgeSpreader
   - type: EdgeSpreader
     id: RMCSmokeNeurotoxin
+    spreadDelay: 0.5
   - type: EvenSmoke
-    spawn: RMCSmokeNeurotoxin
     range: 4
   - type: NeurotoxinInjector
     neuroPerSecond: 6
@@ -111,7 +112,7 @@
   - type: DamageOverTime
     affectsDead: false
     affectsInfectedNested: false
-    damage:
+    armorPiercingDamage:
       types:
         Asphyxiation: 5
     whitelist:
@@ -185,7 +186,6 @@
     id: RMCSmokeKingDoom
   - type: ActiveEdgeSpreader
   - type: EvenSmoke
-    spawn: RMCSmokeKingDoom
     range: 7
 
 
@@ -197,7 +197,6 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: EvenSmoke
-    spawn: RMCSmokeAcidShroud
     range: 1
 
 - type: entity
@@ -207,7 +206,6 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: EvenSmoke
-    spawn: RMCSmokeNeurotoxinShroud
     range: 1
 
 - type: entity
@@ -217,7 +215,6 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: EvenSmoke
-    spawn: RMCSmokeAcidDeathcloud
     range: 2
 
 - type: edgeSpreader
