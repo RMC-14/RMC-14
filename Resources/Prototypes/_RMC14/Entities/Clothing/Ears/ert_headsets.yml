@@ -32,8 +32,8 @@
 - type: entity
   parent: CMHeadsetCBRN
   id: CMHeadsetCBRNLeader
-  name: CBRN Leader headset
-  description: A headset given to CBRN Team Leaders.
+  name: CBRN leader headset
+  description: A headset given to CBRN team leaders.
   components:
   - type: RMCHeadset
     radioTextIncrease: 3

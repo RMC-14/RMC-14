@@ -105,6 +105,32 @@
 
 - type: entity
   parent: RMCShutterAlmayer
+  id: RMCShuttleExternalHangarShutter
+  suffix: Shuttle, External Hangar
+  components:
+  - type: FTLBeacon
+  - type: DropshipDestination
+    dockBounds: "-6,-10.5,6,8.5"
+    reserved: true
+    landingClasses: [ external_hangar ]
+    landingTags: [ mainship, ert, external_hangar ]
+  - type: FTLSmashImmune
+  - type: NoFTL
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
+  - type: RMCDockingPortAirlockControl
+    airlockTags: [ RMCShuttleAirlockExternalHangar ]
+    searchRadius: 8
+  - type: Tag
+    tags:
+    - RMCShuttleAirlockExternalHangar
+
+- type: entity
+  parent: RMCShutterAlmayer
   id: RMCShutterAlmayerCL
   name: corporate liaison privacy shutters
 

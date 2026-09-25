@@ -17,6 +17,7 @@ rmc-ui-humanoid = Humanoid
 rmc-ui-tier = Tier {$tier}
 
 rmc-ui-admin = RMC Admin UI
+rmc-ui-ert-requests = ERT Requests
 rmc-ui-rejuvenate-nearby-marines = Rejuvenate all nearby marines
 rmc-ui-chat-bans = Chat Bans
 rmc-ui-delay-round-end = Delay round end
