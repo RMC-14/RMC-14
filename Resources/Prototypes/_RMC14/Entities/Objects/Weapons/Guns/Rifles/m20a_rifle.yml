@@ -1,0 +1,130 @@
+- type: entity
+  parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
+  id: RMCWeaponRifleM20
+  name: M20A 'Haimatsu' assault rifle
+  description: A cheaper alternative to the M54C assault rifle. Uses 10x24mm caseless ammunition.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m20a.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m20a.rsi
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-m20a
+  - type: Gun
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    - Burst
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m20a.ogg # this uses basically the same sound as the M54C in parity but that's lame
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    recoilWielded: 1
+    recoilUnwielded: 4
+    scatterWielded: 2
+    scatterUnwielded: 20
+    baseFireRate: 4
+    burstScatterMult: 2
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.25
+    accuracyMultiplierUnwielded: 0.8
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        startingItem: CMMagazineRifleM20
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_m16_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_m16_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM20
+  - type: GunDamageModifier
+    multiplier: 1
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentM20Stock
+        whitelist:
+          tags:
+          - RMCAttachmentM20Stock
+      rmc-aslot-underbarrel:
+        locked: true
+        startingAttachable: RMCAttachmentU3UnderbarrelShotgun
+        whitelist:
+          tags:
+          - RMCAttachmentU3UnderbarrelShotgun
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.8425, 0.001
+      rmc-aslot-rail: -0.2, 0.128
+      rmc-aslot-stock: -0.56, 0.0325
+      rmc-aslot-underbarrel: 0.349, -0.375
+  - type: ItemCamouflage
+    camouflageVariations: {}
+  - type: Tag
+    tags:
+    - RMCWeaponRifleM20
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: CMMagazineRifleM20
+  name: M20A magazine (10x24mm)
+  description: A 20-round M20 assault rifle magazine.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - CMMagazineRifleM20
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgeRifle10x24mm
+    proto: CMCartridgeRifle10x24mm
+    capacity: 20
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m20a.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Appearance
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifle
+
+- type: Tag
+  id: RMCWeaponRifleM20
+
+- type: Tag
+  id: CMMagazineRifleM20

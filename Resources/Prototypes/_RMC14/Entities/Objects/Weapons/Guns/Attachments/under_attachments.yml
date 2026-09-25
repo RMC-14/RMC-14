@@ -464,6 +464,42 @@
       sprite: _RMC14/Interface/MousePointer/shotgun_mouse.rsi
       state: all
 
+- type: entity # locked to M20 rifle
+  parent: RMCAttachmentU7UnderbarrelShotgun
+  id: RMCAttachmentU3UnderbarrelShotgun
+  name: U3 underbarrel shotgun
+  description: An AEGIS U3 tactical shotgun. Integrated into the M20A Haimatsu rifle. Only capable of loading up to five buckshot shells. This one seems less effective at smashing down doors.
+  components:
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentU3UnderbarrelShotgun
+  - type: AttachableToggleable
+    userOnly: true
+    attachedOnly: true
+    supercedeHolder: true
+    wieldedUseOnly: true
+    activatePopupText: attachable-popup-switch-to-generic
+    deactivatePopupText: attachable-popup-switch-from-generic
+    activateSound:
+      path: /Audio/_RMC14/Attachable/gun_u7_activate.ogg
+      params:
+        volume: -2
+    actionName: Switch to the U3 underbarrel shotgun
+    actionDesc: Switch to using the underbarrel shotgun.
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: masterkey
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: masterkey-on
+  - type: AttachableVisuals
+    suffix: "_a_alt"
+  - type: GunDamageMultipliers
+    multipliers:
+      Turf: 1
+      Breaching: 1
+
 - type: entity
   parent: RMCUnderAttachmentBase
   id: RMCAttachmentUnderbarrelExtinguisher
@@ -1095,6 +1131,9 @@
 
 - type: Tag
   id: RMCAttachmentU7UnderbarrelShotgun
+
+- type: Tag
+  id: RMCAttachmentU3UnderbarrelShotgun
 
 - type: Tag
   id: RMCAttachmentU1GrenadeLauncher

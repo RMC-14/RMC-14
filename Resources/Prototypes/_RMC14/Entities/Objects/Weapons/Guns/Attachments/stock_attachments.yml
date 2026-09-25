@@ -480,6 +480,21 @@
       Urban: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/urban.rsi
 
 - type: entity
+  parent: RMCStockAttachmentBase
+  id: RMCAttachmentM20Stock
+  name: M20A stock
+  description: The M20A's standard polymer stock.
+  components:
+  - type: Sprite
+    state: m20_stock
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentM20Stock
+  - type: AttachableVisuals
+    suffix: "_a"
+
+- type: entity
   parent: RMCAttachmentM54CStockSolid
   id: RMCAttachmentM54CStockSolidMarksman
   name: M54C marksman stock
@@ -1415,3 +1430,6 @@
 
 - type: Tag
   id: RMCAttachmentL49Stock
+
+- type: Tag
+  id: RMCAttachmentM20Stock
