@@ -80,6 +80,7 @@ public sealed partial class CMDistressSignalRuleSystem
             default,
             Loc.GetString("rmc-distress-signal-scuttle-unlocked"),
             announcement: "rmc-announcement-ares-command");
+        _marineAnnounce.AnnounceAlertLevel(_alertLevelSystem.EnsureAlertAnnouncementPreset(RMCAlertLevels.Delta), Loc.GetString("rmc-announcement-delta"));
     }
 
     private void StartScuttleFinalSequence(CMDistressSignalRuleComponent rule)

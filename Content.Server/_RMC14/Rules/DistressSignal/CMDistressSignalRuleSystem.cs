@@ -1,3 +1,4 @@
+using Content.Server._RMC14.Announce;
 using Content.Server._RMC14.Dropship;
 using Content.Server._RMC14.MapInsert;
 using Content.Server._RMC14.Marines;
@@ -42,6 +43,7 @@ using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.HyperSleep;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Power;
+using Content.Shared._RMC14.RMCClock;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Scaling;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
@@ -64,6 +66,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Roles;
+using Content.Shared.Roles.Jobs;
 using Robust.Server.Audio;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
@@ -90,6 +93,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
     private const int QueenDeathXenoThreshold = 4;
 
     [Dependency] private readonly FaxSystem _fax = default!;
+    [Dependency] private readonly AnnouncementRouterSystem _announcementRouter = default!;
     [Dependency] private readonly GunIFFSystem _gunIFF = default!;
     [Dependency] private readonly RMCPowerSystem _rmcPower = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
@@ -148,11 +152,14 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
     [Dependency] private readonly RMCStationJobsSystem _rmcStationJobs = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly StationJobsSystem _stationJobs = default!;
+    [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly DropshipSystem _dropship = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
     [Dependency] private readonly ScalingSystem _scaling = default!;
     [Dependency] private readonly SharedXenoConstructionSystem _xenoConstruction = default!;
     [Dependency] private readonly SharedRoleSystem _roles = default!;
+    [Dependency] private readonly SharedJobSystem _jobs = default!;
+    [Dependency] private readonly RMCClockSystem _rmcClock = default!;
     [Dependency] private readonly LarvaQueueSystem _larvaQueue = default!;
 
     private readonly HashSet<string> _operationNames = new();
@@ -256,6 +263,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
         SubscribeLocalEvent<RoundEndMessageEvent>(OnRoundEndMessage);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
         SubscribeLocalEvent<DropshipLandedOnPlanetEvent>(OnDropshipLandedOnPlanet);
+        SubscribeLocalEvent<DropshipLaunchedFromWarshipEvent>(OnDropshipLaunchedFromWarship);
         SubscribeLocalEvent<DropshipHijackStartEvent>(OnDropshipHijackStart);
         SubscribeLocalEvent<DropshipHijackLandedEvent>(OnDropshipHijackLanded);
         SubscribeLocalEvent<RMCFusionReactorComponent, RMCFusionReactorCanOverloadEvent>(OnFusionReactorCanOverload);
@@ -328,6 +336,8 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
         _scaling.TryStartScaling(component.MarineFaction);
 
         var announcementTime = time - component.StartTime;
+
+        UpdateFirstDeploymentAnnouncement(component, time);
 
         if (_queenBuildingBoostEnabled &&
             time - component.StartTime >= _queenBoostDuration &&
