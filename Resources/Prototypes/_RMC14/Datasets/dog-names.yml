@@ -1,0 +1,5 @@
+- type: localizedDataset
+  id: rmc_dog_names
+  values:
+    prefix: rmc-names-dog-dataset-
+    count: 100
