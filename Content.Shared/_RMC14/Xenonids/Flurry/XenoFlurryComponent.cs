@@ -13,7 +13,7 @@ public sealed partial class XenoFlurryComponent : Component
     public DamageSpecifier Damage = new();
 
     [DataField, AutoNetworkedField]
-    public float Range = 2;
+    public float Range = 3;
 
     [DataField, AutoNetworkedField]
     public int? MaxTargets = 4;
