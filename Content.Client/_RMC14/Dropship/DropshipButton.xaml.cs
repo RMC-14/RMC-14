@@ -38,6 +38,12 @@ public sealed partial class DropshipButton : PanelContainer
         set => Button.LabelText = value;
     }
 
+    public HAlignment TextHorizontalAlignment
+    {
+        get => Button.TextHorizontalAlignment;
+        set => Button.TextHorizontalAlignment = value;
+    }
+
     public DropshipButton()
     {
         RobustXamlLoader.Load(this);
