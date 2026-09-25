@@ -8,6 +8,8 @@ namespace Content.Shared._RMC14.Overwatch;
 [Access(typeof(SharedOverwatchConsoleSystem))]
 public sealed partial class OverwatchConsoleComponent : Component
 {
+    public const int MaxSavedLocationCount = 5;
+
     [DataField, AutoNetworkedField]
     public NetEntity? Squad;
 
@@ -27,10 +29,10 @@ public sealed partial class OverwatchConsoleComponent : Component
     public HashSet<NetEntity> Hidden = new();
 
     [DataField, AutoNetworkedField]
-    public OverwatchSavedLocation?[] SavedLocations = new OverwatchSavedLocation?[3];
+    public OverwatchSavedLocation?[] SavedSupplyDropLocations = new OverwatchSavedLocation?[MaxSavedLocationCount];
 
     [DataField, AutoNetworkedField]
-    public int LastLocation;
+    public OverwatchSavedLocation?[] SavedOrbitalLocations = new OverwatchSavedLocation?[MaxSavedLocationCount];
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan LastMessage;

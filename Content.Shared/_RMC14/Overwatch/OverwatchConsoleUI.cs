@@ -112,7 +112,7 @@ public sealed class OverwatchConsoleSupplyDropSaveBuiMsg(int longitude, int lati
 }
 
 [Serializable, NetSerializable]
-public sealed class OverwatchConsoleLocationCommentBuiMsg(int index, string comment) : BoundUserInterfaceMessage
+public sealed class OverwatchConsoleSupplyDropCommentBuiMsg(int index, string comment) : BoundUserInterfaceMessage
 {
     public readonly int Index = index;
     public readonly string Comment = comment;
