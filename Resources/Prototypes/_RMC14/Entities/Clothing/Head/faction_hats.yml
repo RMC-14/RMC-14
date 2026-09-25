@@ -93,7 +93,7 @@
 - type: entity
   parent: CMHeadBeret
   id: RMCHeadMilitiaHood
-  name: armored militia cowl        # Blue variant
+  name: armored militia cowl
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/hood_rebel.rsi
@@ -103,7 +103,7 @@
 - type: entity
   parent: CMHeadBeret
   id: RMCHeadGreyMilitiaHood
-  name: armored militia hood         # Grey variant 
+  name: armored militia hood
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/hood_rebel_grey.rsi

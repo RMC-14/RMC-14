@@ -233,7 +233,7 @@
   parent: RMCSynthResetKey
   id: RMCSynthResetKeyMakeshift
   name: makeshift synthetic sparker
-  description: A tool resembling a synthetic reset key, but extremely crude and made from spare parts, only capable of rebooting the system of a synthetic, with a small chance of corrupting that system. It can only be used once before being reset.
+  description: A tool resembling a synthetic reset key, but extremely crude and made from spare parts, only capable of rebooting the system of a synthetic, with a small chance of corrupting that system. It can only be used once before being rendered useless.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Devices/makeshift_reset_key.rsi
