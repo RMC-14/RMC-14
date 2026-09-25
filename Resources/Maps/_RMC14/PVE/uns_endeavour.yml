@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 10/20/2025 02:15:12
+  time: 09/03/2026 16:07:00
   entityCount: 4380
 maps:
 - 1
@@ -26609,7 +26609,7 @@ entities:
       pos: 30.5,-4.5
       parent: 2
     - type: Ladder
-      id: GA_1_Command
+      groupId: GA_1_Command
     - type: Fixtures
       fixtures: {}
   - uid: 1143
@@ -26618,7 +26618,7 @@ entities:
       pos: 30.5,-6.5
       parent: 2
     - type: Ladder
-      id: GA_2_Command
+      groupId: GA_2_Command
     - type: Fixtures
       fixtures: {}
   - uid: 1411
@@ -26627,7 +26627,8 @@ entities:
       pos: -19.5,-30.5
       parent: 2
     - type: Ladder
-      id: GA_1_Command
+      level: 1
+      groupId: GA_1_Command
     - type: Fixtures
       fixtures: {}
   - uid: 1412
@@ -26636,7 +26637,8 @@ entities:
       pos: -19.5,-32.5
       parent: 2
     - type: Ladder
-      id: GA_2_Command
+      level: 1
+      groupId: GA_2_Command
     - type: Fixtures
       fixtures: {}
   - uid: 2192
@@ -26645,7 +26647,7 @@ entities:
       pos: 48.5,5.5
       parent: 2
     - type: Ladder
-      id: GA_HangarLadder1
+      groupId: GA_HangarLadder1
     - type: Fixtures
       fixtures: {}
   - uid: 2193
@@ -26654,7 +26656,7 @@ entities:
       pos: 48.5,3.5
       parent: 2
     - type: Ladder
-      id: GA_HangarLadder2
+      groupId: GA_HangarLadder2
     - type: Fixtures
       fixtures: {}
   - uid: 3895
@@ -26663,7 +26665,8 @@ entities:
       pos: 26.5,84.5
       parent: 2
     - type: Ladder
-      id: GA_HangarLadder1
+      level: 1
+      groupId: GA_HangarLadder1
     - type: Fixtures
       fixtures: {}
   - uid: 3896
@@ -26672,7 +26675,8 @@ entities:
       pos: 26.5,82.5
       parent: 2
     - type: Ladder
-      id: GA_HangarLadder2
+      level: 1
+      groupId: GA_HangarLadder2
     - type: Fixtures
       fixtures: {}
 - proto: RMCLamp
