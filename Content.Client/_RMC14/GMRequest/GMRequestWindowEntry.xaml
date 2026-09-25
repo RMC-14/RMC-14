@@ -1,0 +1,44 @@
+<BoxContainer xmlns="https://spacestation14.io"
+              xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+              HorizontalExpand="True"
+              VerticalExpand="True"
+              Orientation="Vertical"
+              SeparationOverride="0">
+    <BoxContainer Orientation="Horizontal" VerticalExpand="True" SeparationOverride="2" MinHeight="30">
+        <Label Name="Time"
+               Text=""
+               SizeFlagsStretchRatio="2"
+               HorizontalExpand="True"
+               VerticalAlignment="Top"
+               ClipText="True"/>
+        <customControls:VSeparator/>
+        <Label Name="Username"
+               Text=""
+               SizeFlagsStretchRatio="3"
+               HorizontalExpand="True"
+               VerticalAlignment="Top"
+               ClipText="True"/>
+        <customControls:VSeparator/>
+        <Label Name="Entity"
+               Text=""
+               SizeFlagsStretchRatio="3"
+               HorizontalExpand="True"
+               VerticalAlignment="Top"
+               ClipText="True"/>
+        <customControls:VSeparator/>
+        <Label Name="Message"
+               Text=""
+               SizeFlagsStretchRatio="10"
+               HorizontalExpand="True"
+               VerticalAlignment="Top"
+               ClipText="True"/>
+        <customControls:VSeparator/>
+        <Label Name="Claimant"
+               Text=""
+               SizeFlagsStretchRatio="3"
+               HorizontalExpand="True"
+               VerticalAlignment="Top"
+               ClipText="True"/>
+    </BoxContainer>
+    <customControls:HSeparator/>
+</BoxContainer>
