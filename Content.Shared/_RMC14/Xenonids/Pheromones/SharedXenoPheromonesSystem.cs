@@ -198,7 +198,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     private void OnFrenzyGetTailStabDamage(Entity<XenoFrenzyPheromonesComponent> frenzy, ref RMCGetTailStabBonusDamageEvent args)
     {
         //1.2 = tailstab attack mult
-        args.Damage += new DamageSpecifier(_protoManager.Index(frenzy.Comp.DamageGroup), frenzy.Comp.AttackDamageAddPerMult * frenzy.Comp.Multiplier * 1.2);
+        args.Damage += new DamageSpecifier(_protoManager.Index(frenzy.Comp.DamageGroup), frenzy.Comp.AttackDamageAddPerMult * frenzy.Comp.Multiplier * args.DamageMult);
     }
 
     private void OnFrenzyMovementSpeedModifiers(Entity<XenoFrenzyPheromonesComponent> frenzy, ref RefreshMovementSpeedModifiersEvent args)

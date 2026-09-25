@@ -279,7 +279,6 @@
     range: 2
   - type: EntityTargetAction
     event: !type:XenoApplySalveActionEvent
-  - type: RMCDazeableAction
   - type: ActionBlockIfResting
 
 - type: entity
@@ -371,6 +370,7 @@
     cost: 75
   - type: XenoActionPlasma
     cost: 300
+  - type: RMCDazeableAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -426,6 +426,7 @@
     useDelay: 60
   - type: InstantAction
     event: !type:XenoBulwarkOfTheHiveActionEvent
+  - type: RMCDazeableAction
 
 - type: entity
   parent: ActionXenoBase
