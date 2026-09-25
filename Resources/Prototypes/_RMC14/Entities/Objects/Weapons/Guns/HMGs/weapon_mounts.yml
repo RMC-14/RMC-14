@@ -15,6 +15,15 @@
     buckledAlertType: null
     buckleOffset: "0,0.48"
   - type: WeaponMount
+    placementRestrictions:
+    - radius: 0
+      blacklist:
+        components:
+        - RMCDeployableEquipment
+    - radius: 5
+      blacklist:
+        components:
+        - WeaponMount
   - type: Fixtures
     fixtures:
       mount:
@@ -273,6 +282,12 @@
     canRotateWithoutTool: true
     mountOnDeploy: true
     mountExclusionAreaSize: 0
+    placementRestrictions:
+    - radius: 0
+      blacklist:
+        components:
+        - RMCDeployableEquipment
+        - WeaponMount
     barricadeExclusionAreaSize: 2
     assembleDelay: 0.5
     undeploySound: null
