@@ -1046,7 +1046,7 @@
   time: 10
   group: Soup
   reagents:
-    Soysauce: 5
+    RMCSoysauce: 5 #Changed for RMC
   solids:
     FoodBowlBig: 1
     FoodMeatXenoCutlet: 2
@@ -1058,7 +1058,7 @@
   time: 10
   group: Soup
   reagents:
-    Soysauce: 5
+    RMCSoysauce: 5 #Changed for RMC
   solids:
     FoodBowlBig: 1
     FoodMeatSpider: 2
