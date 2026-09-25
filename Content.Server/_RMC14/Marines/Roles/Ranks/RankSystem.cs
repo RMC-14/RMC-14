@@ -1,3 +1,4 @@
+using Content.Server._RMC14.Marines;
 using Content.Server.Players.PlayTimeTracking;
 using Content.Server.Preferences.Managers;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
@@ -20,7 +21,7 @@ public sealed class RankSystem : SharedRankSystem
         base.Initialize();
 
         SubscribeLocalEvent<RankComponent, TransformSpeakerNameEvent>(OnSpeakerNameTransform);
-        SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
+        SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete, after: [typeof(MarineSystem)]);
     }
 
     private void OnSpeakerNameTransform(Entity<RankComponent> ent, ref TransformSpeakerNameEvent args)
