@@ -28,7 +28,7 @@
   - SmartGunOperator
   overwatchSortPriority: -3
   overwatchShowName: true
-  overwatchRoleName: Smart Gun Operator
+  overwatchRoleName: rmc-overwatch-role-smart-gun-operator
   roleWeight: 1
   displayWeight: 3
   special:

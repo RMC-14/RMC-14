@@ -767,6 +767,9 @@ public abstract class SharedDropshipSystem : EntitySystem
         EnsureComp<RMCTrackableComponent>(lz);
         RefreshUI();
 
+        var changed = new PrimaryLandingZoneChangedEvent(lz, actor);
+        RaiseLocalEvent(ref changed);
+
         var message = Loc.GetString("rmc-announcement-ares-lz-designated", ("name", Name(lz)));
         _marineAnnounce.AnnounceARESStaging(actor, message);
 
