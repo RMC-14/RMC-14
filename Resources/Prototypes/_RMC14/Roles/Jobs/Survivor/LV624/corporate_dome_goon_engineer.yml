@@ -49,6 +49,7 @@
 - type: entity
   parent: RMCSurvivorPresetSecurity
   id: RMCGearSurvivorPresetLV624CorporateDomeGoonEngineer
+  categories: [ HideSpawnMenu ]
   name: lv624 colonist preset
 
 - type: jobIcon

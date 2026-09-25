@@ -145,6 +145,7 @@
     - Wall
   components:
   - type: Physics
+    canCollide: false
   - type: Damageable
     damageContainer: Inorganic
   - type: Destructible
