@@ -1,0 +1,19 @@
+- type: entity
+  parent: ChessBoard
+  id: RMCChessBoard
+  suffix: RMC
+  components:
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+
+- type: entity
+  parent: CheckerBoard
+  id: RMCCheckerBoard
+  suffix: RMC
+  components:
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
