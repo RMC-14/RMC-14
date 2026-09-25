@@ -1,0 +1,47 @@
+# TODO RMC14: Port fire alarm activation, heat detection, shutters, damage, wires, and construction.
+- type: entity
+  id: RMCFireAlarm
+  name: fire alarm
+  description: '"Pull this in case of emergency". Thus, keep pulling it forever.'
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wallmount
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/monitors.rsi
+    drawdepth: WallMountedItems
+    layers:
+    - state: firep
+      map: [ "unpowered" ]
+      visible: false
+    - state: fire0
+      map: [ "alert" ]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCAlertLevelsVisuals.Alert:
+        alert:
+          Green: { state: fire0 }
+          Blue: { state: fireblue }
+          Red: { state: firered }
+          Delta: { state: firered }
+      enum.PowerDeviceVisuals.Powered:
+        alert:
+          True: { visible: true }
+          False: { visible: false }
+        unpowered:
+          True: { visible: false }
+          False: { visible: true }
+  - type: RMCAlertLevelDisplay
+  - type: ApcPowerReceiver
+  - type: RMCPowerReceiver
+    idleLoad: 2
+    activeLoad: 6
+    channel: Environment
+  - type: WallMount
+    arc: 360
+  - type: Clickable
+  - type: InteractionOutline
