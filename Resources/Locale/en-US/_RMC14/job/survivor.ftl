@@ -308,7 +308,23 @@ CMSurvivorTrijentCorporate = Trijent Corporation Liaison
 
 # Trijent crashland insert survs
 
-rmc-job-greeting-crashland = You are a member of an SPP recon force! Your primary objective is to survive. You believe a second dropship crashed somewhere to the south east, which was carrying additional weapons. Your orders were simple, recon the site, ascertain if there is a biological weapons program in the area, and if so to secure the colony and retrieve a sample. However your team failed to account for an active anti-air battery near the area. Both your craft and your sister ship crashed. Barely having a chance to catch your breath, you found yourself being assailed by vile xenonids! You and your team have barely held your ground, at the cost of four of your own, but more are coming and ammo is low. You believe a United Nations rescue force is en route.
+rmc-job-greeting-crashland = You are a member of an SPP recon force!
+
+  Your primary objective is to survive. You believe a second dropship crashed somewhere to the south east, which was carrying additional weapons.
+
+  Your orders were simple, recon the site, ascertain if there is a biological weapons program in the area, and if so to secure the colony and retrieve a sample. However your team failed to account for an active anti-air battery near the area. Both your craft and your sister ship crashed. Barely having a chance to catch your breath, you found yourself being assailed by vile xenonids! You and your team have barely held your ground, at the cost of four of your own, but more are coming and ammo is low. You believe a United Nations rescue force is en route.
+
+  You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
+
+  You are NOT aware of the marines or their intentions.
+  
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-greeting-crashland-officer = You are the commander in charge of an SPP recon mission!
+
+  Your primary objective is to survive. You believe a second dropship crashed somewhere to the south east, which was carrying additional weapons.
+
+  You had been tasked with leading your unit, the 173rd Airborne Platoon, following reports that something highly irregular was occurring at the site of Trijent Dam. You were ordered to determine whether a biological weapons program existed, and if so to secure the colony and retrieve a sample. Your unit was to secure the site, however, your team failed to account for an active anti-air battery near the area. Both your craft and your sister ship crashed. Barely having a chance to catch your breath, you found yourself being assailed by vile xenonids! You and your team have barely held your ground, at the cost of four of your own, but more are coming and ammo is low. You believe a United Nations rescue force is en route.
 
   You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
 
@@ -337,6 +353,9 @@ rmc-job-prefix-crashland-soldier = 173/RECON SOL
 
 rmc-job-name-crashland-synth = Airborne Support Synthetic
 rmc-job-prefix-crashland-synth = 173/RECON SYN
+
+rmc-job-name-crashland-officer = Airborne Commander
+rmc-job-prefix-crashland-officer = 173/RECON CDR
 
 # Fiorina Science Annex Survs
 

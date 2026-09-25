@@ -60,6 +60,18 @@
     - FactionSPP
 
 - type: entity
+  parent: CMIDCardGold
+  id: CMIDCardGoldSPPOfficer
+  description: A gold plated holo-badge which shows power and might.
+  components:
+  - type: PresetIdCard
+    job: RMCSurvivorSPPCrashlandCommander
+  - type: ItemIFF
+    factions:
+    - FactionSurvivor
+    - FactionSPP
+
+- type: entity
   parent: CMIDCardSilver
   id: RMCIDCardHalcyon
   name: corporate holo-badge
