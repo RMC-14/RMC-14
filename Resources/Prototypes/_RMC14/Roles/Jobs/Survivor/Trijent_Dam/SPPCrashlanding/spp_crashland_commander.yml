@@ -64,16 +64,11 @@
     outerClothing: RMCCoatSPP
     id: CMIDCardGoldSPPOfficer
     head: CMHeadCapSPPPeaked
-    pocket1: RMCPouchFirstAid
-    pocket2: RMCPouchDocumentSmall
+    pocket1: RMCPouchFirstAidERTFill
+    pocket2: RMCPouchDocument
   storage:
     back: # They're supposed to get a cyanide pill, but I don't trust survivors to not accidentally swallow it
     - RMCRadioHandheldColony
-    pocket1:
-    - CMBicaridineAutoInjector
-    - CMKelotaneAutoInjector
-    - CMEmergencyAutoInjector
-    - CMGauze10
     pocket2:
     - CMClipboard
     belt:
@@ -91,7 +86,7 @@
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: CMSpawnPointSPPCrashlandCommander
+  id: RMCSpawnPointSPPCrashlandCommander
   name: special survivor spp crashland commander spawn point
   components:
   - type: SpawnPoint
