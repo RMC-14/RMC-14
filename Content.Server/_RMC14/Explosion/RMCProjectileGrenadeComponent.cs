@@ -50,4 +50,47 @@ public sealed partial class ProjectileGrenadeComponent
 
     [DataField]
     public bool DirectHit;
+
+    /// <summary>
+    ///     Chance for each payload projectile to directly hit a mob at the fragmentation origin.
+    ///     If unset, <see cref="DirectHitProjectiles"/> is used instead.
+    /// </summary>
+    [DataField]
+    public float? DirectHitChance;
+
+    /// <summary>
+    ///     Distance in tiles from the grenade at which its payload is spawned.
+    /// </summary>
+    [DataField]
+    public float SpawnOffset;
+
+    /// <summary>
+    ///     Whether the user from the trigger event should be assigned as the payload's shooter.
+    /// </summary>
+    [DataField]
+    public bool TriggerUserIsShooter;
+
+    /// <summary>
+    ///     Aligns the spawn offset to a tile step instead of using a normalized direction.
+    /// </summary>
+    [DataField]
+    public bool TileAlignedSpawnOffset;
+
+    /// <summary>
+    ///     Random variance applied to the payload projectile speed.
+    /// </summary>
+    [DataField]
+    public float ProjectileSpeedVariance;
+
+    /// <summary>
+    ///     Minimum damage multiplier rolled independently for each payload projectile.
+    /// </summary>
+    [DataField]
+    public float MinProjectileDamageMultiplier = 1f;
+
+    /// <summary>
+    ///     Maximum damage multiplier rolled independently for each payload projectile.
+    /// </summary>
+    [DataField]
+    public float MaxProjectileDamageMultiplier = 1f;
 }

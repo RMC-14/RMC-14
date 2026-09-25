@@ -59,6 +59,10 @@
     hitsToInvulnerability: 3
   - type: DamageMultiplierFlags
     flags: Breaching
+  - type: ExplosionResistance
+    worn: false
+    damageCoefficientOverrides:
+      RMCMortarFrag: 0.85
   - type: DeletedByWeedKiller
   - type: Flammable
     fireSpread: false
@@ -140,6 +144,10 @@
   - type: Damageable
     damageContainer: StructuralMarine
     damageModifierSet: StructuralMarine
+  - type: ExplosionResistance
+    worn: false
+    damageCoefficientOverrides:
+      RMCMortarFrag: 15
   - type: ExaminableDamage
     messages: RMCWallMessages
   - type: RMCIntegrityExamine
@@ -204,6 +212,8 @@
     key: walls
   - type: ExplosionResistance
     damageCoefficient: 3.64
+    damageCoefficientOverrides:
+      RMCMortarFrag: 12.75
   - type: DamageMultiplierFlags
     flags:
     - Turf

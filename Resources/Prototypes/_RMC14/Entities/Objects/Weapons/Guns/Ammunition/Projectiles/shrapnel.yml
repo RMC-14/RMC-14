@@ -19,6 +19,7 @@
         - Impassable
         - BulletImpassable
         - LowImpassable
+        - BarricadeImpassable
       fly-by:
         shape: !type:PhysShapeCircle
           radius: 1.5
@@ -40,3 +41,49 @@
     thresholds:
     - range: 32
       falloff: 10
+
+- type: entity
+  parent: CMProjectileShrapnel
+  id: RMCBreachingChargeShrapnel
+  name: breaching charge shrapnel
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 30
+    deleteOnCollide: true
+  - type: ProjectileMaxRange
+    max: 8
+  - type: RMCProjectileAccuracy
+    accuracy: 125
+
+- type: entity
+  parent: CMProjectileShrapnel
+  id: RMCMortarShellFragShrapnel
+  name: fragmentation mortar shell shrapnel
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ProjectileMaxRange
+    max: 8
+  - type: DamageMultipliers
+    multipliers:
+      Turf: 7
+      Breaching: 15.12
+      Pylon: 7
+
+- type: entity
+  parent: CMProjectileShrapnel
+  id: RMCBreachingChargeRubberPellet
+  name: breaching charge rubber pellet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage: {}
+    deleteOnCollide: true
+  - type: RMCStaminaDamageOnCollide
+    damage: 25
+  - type: CMArmorPiercing
+    amount: 0
+  - type: ProjectileMaxRange
+    max: 8
