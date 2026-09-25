@@ -1,4 +1,5 @@
-﻿- type: job
+﻿# Friendly
+- type: job
   parent: CMJobBase
   id: RMCSPPSpecialist
   name: rmc-job-name-spp-specialist
@@ -19,6 +20,45 @@
     - type: NpcFactionMember
       factions:
       - SPP
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - English
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - English
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
+    - type: Skills
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 1
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillJtac: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillSpecialistWeapons: 1
+    - type: SquadArmorWearer
+    - type: QYJWhitelist
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-specialist
+  hidden: true
+
+# Hostile/Neutral
+- type: job
+  parent: RMCSPPSpecialist
+  id: RMCSPPSpecialistHostile
+  spawnMenuRoleName: SPP Specialist (Hostile)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPPHostile
     - type: Language
       spokenLanguages:
       - Russian
@@ -78,7 +118,7 @@
     description: rmc-ghost-role-information-spp-hostile-description
     rules: rmc-ghost-role-information-spp-rules
     reregister: false
-    job: RMCSPPSpecialist
+    job: RMCSPPSpecialistHostile
     raffle:
       settings: short
     requirements:
