@@ -1,0 +1,94 @@
+﻿- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechGunsFiringRange
+  name: ColMarTech automated firing range weapons rack
+  description: An automated weapon rack hooked up to a big storage of weapons and ammunition intended for training and firing-range usage.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
+  - type: CMAutomatedVendor
+    canManualRestock: true
+    hackable: true
+    sections:
+    - name: Firearms
+      entries:
+      - id: WeaponRifleM4SPR
+        amount: 30
+      - id: WeaponSMGM63
+        amount: 30
+      - id: RMCWeaponRifleM54C
+        amount: 30
+      - id: RMCWeaponRifleM54CMK1Unloaded
+        amount: 30
+      - id: CMWeaponPistolM1984Empty
+        amount: 30
+      - id: RMCWeaponPistolM77Empty
+        amount: 30
+    - name: Ammunition
+      entries:
+      - id: RMCMagazineRifleM4SPRRubber
+        amount: 45
+      - id: RMCMagazineSMGM63Rubber
+        amount: 45
+      - id: RMCMagazineRifleM54CRubber
+        amount: 45
+      - id: RMCMagazineRifleM54CMK1Rubber
+        amount: 45
+      - id: RMCMagazinePistolM1984Rubber
+        amount: 45
+      - id: RMCMagazinePistolM77Rubber
+        amount: 45
+    - name: Barrel Attachments
+      entries:
+      - id: RMCAttachmentExtendedBarrel
+        amount: 10
+      - id: RMCAttachmentExtendedCompensator
+        amount: 10
+      - id: RMCAttachmentRecoilCompensator
+        amount: 10
+      - id: RMCAttachmentSuppressor
+        amount: 10
+      - id: RMCAttachmentSuppressorCompact
+        amount: 10
+    - name: Rail Attachments
+      entries:
+      - id: RMCAttachmentB8SmartScope
+        amount: 10
+      - id: RMCAttachmentMagneticHarness
+        amount: 10
+      - id: RMCAttachmentS42xTelescopicMiniscope
+        amount: 10
+      - id: RMCAttachmentS5RedDotSight
+        amount: 10
+      - id: RMCAttachmentS5MicroRedDotSight
+        amount: 10
+      - id: RMCAttachmentS6ReflexSight
+        amount: 10
+      - id: RMCAttachmentS84xTelescopicScope
+        amount: 10
+    - name: Underbarrel Attachments
+      entries:
+      - id: RMCAttachmentAngledGrip
+        amount: 10
+      - id: RMCAttachmentBipod
+        amount: 10
+      - id: RMCAttachmentBurstFireAssembly
+        amount: 10
+      - id: RMCAttachmentGyroscopicStabilizer
+        amount: 10
+      - id: RMCAttachmentLaserSight
+        amount: 10
+      - id: RMCAttachmentMicroLaserSight
+        amount: 10
+      - id: RMCAttachmentUnderbarrelExtinguisher
+        amount: 10
+      - id: RMCAttachmentVerticalGrip
+        amount: 10
+    - name: Stock Attachments
+      entries:
+      - id: RMCAttachmentM63Stock
+        amount: 10
+      - id: RMCAttachmentM63ArmBrace
+        amount: 10
+      - id: RMCAttachmentM54CStockSolid
+        amount: 10
