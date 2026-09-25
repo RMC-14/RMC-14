@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Fixed throwing items into disposal bins.
-    type: Fix
-  - message: Bullets no longer pass through ColMarTech vendors.
-    type: Fix
-  id: 3163
-  time: '2026-04-23T23:37:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9717
 - author: DrSmugleaf
   changes:
   - message: Added impenetrable xeno resin walls and doors, which can't be damaged
@@ -4435,5 +4426,12 @@
   id: 3662
   time: '2026-09-23T15:30:50.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10891
+- author: ffxivsidehoes
+  changes:
+  - message: Hydroponics trays are now meltable.
+    type: Tweak
+  id: 3663
+  time: '2026-09-25T20:47:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10864
 Name: RMC14
 Order: -1
