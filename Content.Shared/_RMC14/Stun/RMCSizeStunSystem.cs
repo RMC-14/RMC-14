@@ -1,14 +1,15 @@
-using System.Numerics;
 using Content.Shared._RMC14.Deafness;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stamina;
+using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Coordinates;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Flash;
 using Content.Shared.Interaction;
+using Content.Shared.Pointing;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Speech.Muting;
@@ -19,13 +20,13 @@ using Content.Shared.Throwing;
 using Content.Shared.Whitelist;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
-using Content.Shared.Pointing;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using System.Numerics;
 
 namespace Content.Shared._RMC14.Stun;
 
@@ -124,7 +125,7 @@ public sealed class RMCSizeStunSystem : EntitySystem
                 continue;
 
             var distance = (_transform.GetMoverCoordinates(args.Target).Position - bullet.Comp.ShotFrom.Value.Position).Length();
-            if (distance > stun.MaxRange || _stand.IsDown(args.Target))
+            if (distance > stun.MaxRange || _stand.IsDown(args.Target) || HasComp<XenoRestingComponent>(args.Target))
                 return;
 
             if (!TryComp<RMCSizeComponent>(args.Target, out var size))
