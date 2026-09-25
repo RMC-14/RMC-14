@@ -847,10 +847,16 @@ public sealed class XenoEvolutionSystem : EntitySystem
             var gain = evoOverride ?? points + evoBonus;
             if (comp.Points < comp.Max || roundDuration < _evolutionAccumulatePointsBefore)
             {
-                if (needsOvipositor && comp.RequiresGranter && !hasGranter)
-                    continue;
+                var newPoints = comp.Points + gain;
+                if (needsOvipositor && !hasGranter)
+                {
+                    if (comp.RequiresGranter || comp.Points >= comp.Max)
+                        continue;
 
-                SetPoints((uid, comp), comp.Points + gain);
+                    newPoints = FixedPoint2.Min(newPoints, comp.Max);
+                }
+
+                SetPoints((uid, comp), newPoints);
             }
             else if (comp.Points > comp.Max)
             {
