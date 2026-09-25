@@ -952,9 +952,17 @@
   description: An improvised head wrap made out of a standard issue neckerchief. Great for keeping the sweat out of your eyes and protecting your hair.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/durag.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/durag/jungle.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/durag.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/durag/jungle.rsi
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Hats/durag/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Hats/durag/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Hats/durag/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Hats/durag/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Hats/durag/urban.rsi
   - type: HideLayerClothing
     slots:
     - Hair
@@ -962,12 +970,63 @@
 - type: entity
   parent: RMCHeadDurag
   id: RMCHeadDuragBlack
+  name: black durag
   description: An improvised head wrap made out of a black neckerchief. Great for keeping the sweat out of your eyes and protecting your hair.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/durag_black.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/durag_black/jungle.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/durag_black.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/durag_black/jungle.rsi
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Hats/durag_black/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Hats/durag_black/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Hats/durag_black/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Hats/durag_black/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Hats/durag_black/urban.rsi
+
+# Bandana
+- type: entity
+  parent: ClothingHeadBase
+  id: RMCHeadBandana
+  name: bandana
+  suffix: RMC
+  description: Typically worn by heavy-weapon operators, mercenaries and scouts, the bandana serves as a lightweight and comfortable hat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/bandana/jungle.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/bandana/jungle.rsi
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Hats/bandana/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Hats/bandana/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Hats/bandana/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Hats/bandana/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Hats/bandana/urban.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
+
+- type: entity
+  parent: RMCHeadBandana
+  id: RMCHeadBandanaTan
+  name: tan bandana
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/bandana_tan/jungle.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/bandana_tan/jungle.rsi
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Hats/bandana_tan/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Hats/bandana_tan/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Hats/bandana_tan/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Hats/bandana_tan/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Hats/bandana_tan/urban.rsi
 
 # Civilian
 
