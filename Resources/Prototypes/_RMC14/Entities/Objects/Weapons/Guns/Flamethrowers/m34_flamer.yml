@@ -274,7 +274,8 @@
         - ReagentId: RMCNapalmUTTank
           Quantity: 150
   - type: Tag
-    id: VehicleFlamerTankLZRN
+    tags:
+    - VehicleFlamerTankLZRN
 
 - type: Tag
   id: RMCTankFlamer
