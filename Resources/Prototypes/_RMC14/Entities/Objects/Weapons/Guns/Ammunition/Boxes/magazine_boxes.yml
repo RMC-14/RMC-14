@@ -1248,6 +1248,51 @@
         tags:
         - RMCMagazineRifleL83A3Extended
 
+# L83A3 HEAP
+- type: entity
+  parent: RMCBoxMagazineRifleBase
+  id: RMCBoxMagazineRifleL83A3HEAPEmpty
+  name: magazine box (HEAP L83A3 x 12)
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box 
+      color: "#323b3e"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#9C9A19"
+    - state: rifle_box_a3
+      color: "#ffcb26"
+    - state: rifle_box_marking
+      color: "#9C9A19"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#323b3e"
+    - state: rifle_lid_marking
+      map: [ "lid_marking" ]
+      color: "#9C9A19"
+  - type: CMItemSlots
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleL83A3HEAP
+
+- type: entity
+  parent: RMCBoxMagazineRifleL83A3HEAPEmpty
+  id: RMCBoxMagazineRifleL83A3HEAP
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleL83A3HEAP
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleL83A3HEAP
+
 # Type 77
 - type: entity
   parent: RMCBoxMagazineRifleBase
