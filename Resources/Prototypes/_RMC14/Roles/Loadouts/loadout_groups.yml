@@ -750,6 +750,16 @@
   - WEYABagPhoneSatchel
   - RMCJacketWindbreakerWEYA
 
+- type: loadoutGroup
+  id: LiaisonRoleSpecificPetRMC
+  name: rmc-loadout-group-role-specific-pet
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - RMCMobCorporateCorgi
+  - RMCMobCorporateCat
+  - RMCMobCorporateCatCalico
+
 # Chief MP
 - type: loadoutGroup
   id: ChiefMPRoleSpecificRMC

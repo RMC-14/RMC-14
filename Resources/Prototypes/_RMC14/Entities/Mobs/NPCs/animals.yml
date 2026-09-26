@@ -188,7 +188,7 @@
 - type: entity
   parent: RMCSimpleMob
   id: RMCMobCorgi
-  name: corgi
+  name: Corgi
   description: It's a corgi.
   abstract: true
   components:
@@ -258,11 +258,18 @@
     follow: true
     location: Mister Wiggles
 
+- type: entity
+  parent: CMMobWiggles
+  id: RMCMobCorporateCorgi
+  name: Corgi
+  description: It's a corgi puppy. It has a Weston-Yamada collar.
+  components:
+    - type: PetNamingTarget
 
 - type: entity
   parent: RMCSimpleMob
   id: RMCMobCat
-  name: cat
+  name: Cat
   description: It's a black cat
   components:
   - type: Sprite
@@ -328,7 +335,7 @@
 - type: entity
   parent: RMCMobCat
   id: RMCMobCatCalico
-  name: calico
+  name: Calico
   description: It's an orange, brown and black cat
   components:
   - type: Sprite
@@ -372,6 +379,22 @@
   - type: WarpPoint
     follow: true
     location: Jones
+
+- type: entity
+  parent: RMCMobCat
+  id: RMCMobCorporateCat
+  name: Cat
+  description: It's a black cat. It has a Weston-Yamada Collar.
+  components:
+    - type: PetNamingTarget
+
+- type: entity
+  parent: RMCMobCatCalico
+  id: RMCMobCorporateCatCalico
+  name: Calico
+  description: It's an orange, brown and black cat. It has a Weston-Yamada Collar.
+  components:
+    - type: PetNamingTarget
 
 - type: entity
   parent: RMCMobCatCalico

@@ -1,0 +1,27 @@
+- type: entity
+  parent: BaseItem
+  id: RMCPetCollar
+  name: Pet Collar
+  description: Used to name pets. Front towards owner.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/petcollar.rsi
+    state: petcollar
+  - type: PetNamingItem
+    maxLength: 32
+    consumeOnUse: true
+    range: 1.5
+  - type: UserInterface
+    interfaces:
+      enum.PetNamingUiKey.Key:
+        type: PetNamingBui
+
+- type: entity
+  parent: RMCPetCollar
+  id: RMCPetCollarWeYa
+  name: Weston-Yamada Pet Collar
+  description: Used to name pets. The We-Ya logo is displayed on the front
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/weyapetcollar.rsi
+    state: weyacollar

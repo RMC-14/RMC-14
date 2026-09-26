@@ -24,6 +24,7 @@ rmc-loadout-group-civilian = Civilian only (Restricted)
 
 rmc-loadout-group-role-specific-ID = Commanding Officer (ID)
 rmc-loadout-group-role-specific-weapon = Commanding Officer (Sidearm)
+rmc-loadout-group-role-specific-pet = Pet
 rmc-loadout-group-provost-role-specific-outerwear = Provost Inspector (Filled Outerwear)
 rmc-loadout-group-synthetic-uniform = Synthetic Uniforms
 rmc-loadout-group-synthetic-accessories = Synthetic Uniform Accessories

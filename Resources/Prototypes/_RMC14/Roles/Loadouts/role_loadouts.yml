@@ -762,6 +762,7 @@
   groups:
   - LiaisonBackpackRMC
   - LiaisonRoleSpecificRMC
+  - LiaisonRoleSpecificPetRMC
   - HeadwearRMC
   - EyewearRMC
   - MasksRMC
