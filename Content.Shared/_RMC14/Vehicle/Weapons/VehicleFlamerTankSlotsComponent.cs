@@ -15,5 +15,5 @@ public sealed partial class VehicleFlamerTankSlotsComponent : Component
     public EntProtoId? StartingItem;
 
     [DataField]
-    public EntityWhitelist? Whitelist;
+    public EntityWhitelist Whitelist;
 }
