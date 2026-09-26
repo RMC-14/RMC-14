@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Database;
+using Content.Server.Discord;
 using Content.Server.Players.RateLimiting;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Mentor;
@@ -27,6 +28,7 @@ public sealed class MentorManager : IPostInjectInit
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly IServerDbManager _db = default!;
+    [Dependency] private readonly DiscordWebhook _discord = default!;
     [Dependency] private readonly ILogManager _log = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
@@ -44,6 +46,7 @@ public sealed class MentorManager : IPostInjectInit
     private readonly Dictionary<NetUserId, List<NetUserId>> _destinationClaims = new();
     private readonly Dictionary<NetUserId, HashSet<NetUserId>> _mentorClaims = new();
     private bool _rateLimitRegistered;
+    private WebhookIdentifier? _webhookId;
 
     private async Task LoadData(ICommonSession player, CancellationToken cancel)
     {
@@ -429,6 +432,8 @@ public sealed class MentorManager : IPostInjectInit
             _adminLog.Add(LogType.RMCMentorHelp,
                 LogImpact.Low,
                 $"Mentor help {(isMentor ? "reply" : "message")} from {author:Player} in {destinationName} ({destination}) ticket: {message}");
+
+            _ = SendWebhook(authorName ?? author.Name, destinationName, message);
         }
 
         foreach (var recipient in recipients)
@@ -445,6 +450,26 @@ public sealed class MentorManager : IPostInjectInit
 
         if (author != null)
             SendTypingUpdate(author.Channel, destination, false);
+    }
+
+    private async Task SendWebhook(string author, string destination, string message)
+    {
+        if (_webhookId is not { } webhookId)
+            return;
+
+        try
+        {
+            var content = $"MHELP ({destination}): **{author}:** {message}";
+            if (content.Length > 2000)
+                content = content[..2000];
+
+            var payload = new WebhookPayload { Content = content };
+            await _discord.CreateMessage(webhookId, payload);
+        }
+        catch (Exception e)
+        {
+            _log.RootSawmill.Error($"Error sending mentor help webhook:\n{e}");
+        }
     }
 
     private void SendTypingUpdate(INetChannel author, Guid destination, bool typing)
@@ -546,5 +571,14 @@ public sealed class MentorManager : IPostInjectInit
         }
 
         _player.PlayerStatusChanged += OnPlayerStatusChanged;
+
+        _config.OnValueChanged(RMCCVars.RMCMentorHelpWebhook,
+            value =>
+            {
+                _webhookId = null;
+                if (!string.IsNullOrWhiteSpace(value))
+                    _discord.GetWebhook(value, data => _webhookId = data.ToIdentifier());
+            },
+            true);
     }
 }
