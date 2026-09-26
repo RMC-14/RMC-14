@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: [ CMBaseWeaponGun, BaseItem, RMCBaseAttachableHolder ]
   id: RMCWeaponFlamer
   name: M34 incinerator unit
@@ -264,6 +264,8 @@
   name: LZR-N flame tank
   description: A fuel tank for the LZR-N flame unit. Handle with care.
   components:
+  - type: RMCFlushableSolution
+    canFlush: false
   - type: SolutionContainerManager
     solutions:
       rmc_flamer_tank:
@@ -271,9 +273,15 @@
         reagents:
         - ReagentId: RMCNapalmUTTank
           Quantity: 150
+  - type: Tag
+    tags:
+    - VehicleFlamerTankLZRN
 
 - type: Tag
   id: RMCTankFlamer
+
+- type: Tag
+  id: VehicleFlamerTankLZRN
 
 - type: entity
   parent: RMCGunCaseBase
