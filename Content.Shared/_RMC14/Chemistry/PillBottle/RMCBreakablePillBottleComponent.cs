@@ -26,7 +26,7 @@ public sealed partial class RMCBreakablePillBottleComponent : Component
     public int SpillAmount = 3;
 
     [DataField, AutoNetworkedField]
-    public int SpillMaxDistance = 3;
+    public int SpillMaxDistance = 1;
 
     [DataField, AutoNetworkedField]
     public float SpillStepChance = 0.35f;

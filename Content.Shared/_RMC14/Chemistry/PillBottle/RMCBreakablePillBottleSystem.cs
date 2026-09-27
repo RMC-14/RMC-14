@@ -169,7 +169,6 @@ public sealed class RMCBreakablePillBottleSystem : EntitySystem
 
     private void SpillContents(Entity<RMCBreakablePillBottleComponent> ent, StorageComponent storage, EntityUid user)
     {
-        var direction = _transform.GetWorldRotation(user).GetCardinalDir().ToVec();
         var toSpill = storage.Container.ContainedEntities.Take(ent.Comp.SpillAmount).ToList();
         foreach (var item in toSpill)
         {
@@ -185,6 +184,7 @@ public sealed class RMCBreakablePillBottleSystem : EntitySystem
                     distance++;
             }
 
+            var direction = _random.NextAngle().ToVec();
             var scatter = _random.NextVector2Box(ent.Comp.SpillScatter, ent.Comp.SpillScatter);
             _throwing.TryThrow(item, direction * distance + scatter, user: user, pushbackRatio: 0, recoil: false, playSound: false);
         }
