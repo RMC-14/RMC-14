@@ -197,7 +197,7 @@
     solutions:
       stomach:
         maxVol: 80
-        canReact: false
+        canReact: false // RMC14
       food:
         maxVol: 80 # RMC14 Increase to match parent and prevent overwrite.
         reagents:
