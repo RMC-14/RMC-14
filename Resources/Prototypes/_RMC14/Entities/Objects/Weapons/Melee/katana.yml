@@ -42,7 +42,8 @@
     size: Normal
   - type: MeleeWeapon
     attackRate: 10
-    autoAttack: True
+    autoAttack: true
+    resistanceBypass: true
     damage:
       types:
         Slash: 4444
