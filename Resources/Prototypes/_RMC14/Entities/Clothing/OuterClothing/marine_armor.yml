@@ -914,7 +914,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ghillie/forecon.rsi
   - type: ItemCamouflage
     camouflageVariations: { }
-
+  
 # Smart Gun
 - type: entity
   parent: [ RMCAllowSuitStorageClothingSmartgunner, CMArmorM3Medium ]

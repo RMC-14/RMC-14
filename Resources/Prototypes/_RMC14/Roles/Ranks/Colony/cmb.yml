@@ -47,7 +47,7 @@
   id: RMCRankCMBDetective
   name: Detective
   prefix: Det.
-
+  paygrade: CMB
 
 # ICB ranks
 - type: rank

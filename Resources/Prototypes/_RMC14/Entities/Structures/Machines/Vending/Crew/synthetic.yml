@@ -227,15 +227,15 @@
       - id: RMCMedevacStretcherFolded
         points: 6
       # /obj/item/stack/medical/splint - 1 Point
-      - id: CMRollerBed
+      - id: CMRollerBedSpawnFolded
         points: 4
-      - id: CMStasisBag
+      - id: CMStasisBagFolded
         points: 6
       - id: CMMiniTank
         points: 6
       - id: CMBloodPackFull
         points: 5
-      - id: CMPortableSurgicalBed
+      - id: CMPortableSurgicalBedSpawnFolded
         points: 10
       - id: CMPillCanisterBicaridine
         points: 5
