@@ -18,12 +18,12 @@
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
-      - id: CMHandsBlackMarine
-      - id: CMHeadsetMPO
-      - id: CMJumpsuitMP
-      - id: CMBootsBlackFilled
-      - id: CMBeltSecurityMPFilled
-      - id: CMGlassesSecurity
+#      - id: CMHandsBlackMarine (Everything marked as a comment is redundant, since the role already spawns with that item. The lines were not deleted, in case they need to be re-added later.)
+#      - id: CMHeadsetMPO
+#      - id: CMJumpsuitMP
+#      - id: CMBootsBlackFilled
+#      - id: CMBeltSecurityMPFilled
+#      - id: CMGlassesSecurity
       - id: RMCVisorMedical
     - name: Helmet
       choices: { CMHelmet: 1 }
@@ -32,22 +32,22 @@
     - name: Armor
       choices: { CMArmor: 1 }
       entries:
-      - id: CMArmorM2MP
+#      - id: CMArmorM2MP
       - id: RMCArmorVestMP
-    - name: Hat
-      choices: { CMHat: 1 }
-      entries:
-      - id: CMHeadBeretRed
+#    - name: Hat
+#      choices: { CMHat: 1 }
+#      entries:
+#      - id: CMHeadBeretRed
     - name: Handgun Case
       choices: { CMGunCase: 1 }
       entries:
       - id: RMCGunCasePistolM77
       - id: RMCGunCasePistolM44
       - id: RMCGunCasePistolM1984
-    - name: Backpack
-      choices: { CMBackpack: 1 }
-      entries:
-      - id: CMSatchelSecurity
+#    - name: Backpack
+#      choices: { CMBackpack: 1 }
+#      entries:
+#      - id: CMSatchelSecurity
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
@@ -113,17 +113,17 @@
     jobs:
     - CMMilitaryWarden
     sections:
-    - name: Police Set (Mandatory)
-      takeAll: RMCMPSet
-      entries:
-      - id: RMCVendorBundleMilitaryPoliceApparel
+#    - name: Police Set (Mandatory)
+#      takeAll: RMCMPSet
+#      entries:
+#      - id: RMCVendorBundleMilitaryPoliceApparel
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
-      - id: CMHandsBlackMarine
-      - id: RMCHeadsetMW
-      - id: CMJumpsuitWarden
-      - id: CMBootsBlackFilled
+#      - id: CMHandsBlackMarine
+#      - id: RMCHeadsetMW
+#      - id: CMJumpsuitWarden
+#      - id: CMBootsBlackFilled
       - id: RMCVisorMedical
     - name: Helmet
       choices: { CMHelmet: 1 }
@@ -132,22 +132,22 @@
     - name: Armor
       choices: { CMArmor: 1 }
       entries:
-      - id: CMArmorM3Warden
+#      - id: CMArmorM3Warden
       - id: RMCArmorVestMP
-    - name: Hat
-      choices: { CMHat: 1 }
-      entries:
-      - id: CMHeadCapWarden
+#    - name: Hat
+#      choices: { CMHat: 1 }
+#      entries:
+#      - id: CMHeadCapWarden
     - name: Handgun Case
       choices: { CMGunCase: 1 }
       entries:
       - id: RMCGunCasePistolM77
       - id: RMCGunCasePistolM44
       - id: RMCGunCasePistolM1984
-    - name: Backpack
-      choices: { CMBackpack: 1 }
-      entries:
-      - id: CMSatchelSecurity
+#    - name: Backpack
+#      choices: { CMBackpack: 1 }
+#      entries:
+#      - id: CMSatchelSecurity
     - name: Belt
       choices: { CMBelt: 1 }
       entries:

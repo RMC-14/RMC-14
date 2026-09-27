@@ -38,8 +38,6 @@
       - CMCorrespondent
       choices: { CMSatchel: 1 }
       entries:
-      - id: CMSatchel
-        name: Leather Satchel
       - id: RMCBackpackRTOBagPhone
         name: Portable Phone Bag
     - name: Combat Backpack
@@ -50,10 +48,6 @@
       - id: CMBackpackMarine
         replaceSlot: back
         name: Marine Backpack
-      - id: CMSatchelMarine
-        replaceSlot: back
-        name: Marine Satchel
-        recommended: true
     - name: Combat Sidearm
       jobs:
       - CMCombatCorrespondent
