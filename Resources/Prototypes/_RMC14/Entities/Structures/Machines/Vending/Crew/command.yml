@@ -25,6 +25,8 @@
     - name: Standard Equipment
       takeAll: CMUniform
       entries:
+      - id: CMJumpsuitBO
+        name: service uniform
       - id: CMJumpsuitOperations
         name: operations uniform
         recommended: true
