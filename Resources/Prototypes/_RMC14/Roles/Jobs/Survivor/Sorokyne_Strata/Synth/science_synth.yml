@@ -1,0 +1,45 @@
+- type: job
+  parent: RMCSyntheticColony
+  id: RMCSyntheticColonySorokyneScience
+  startingGear: RMCGearSyntheticColonistSorokyneScience
+  spawnMenuRoleName: Cosmos Exploration Corps Researcher Synthetic (Sorokyne Survivor)
+  special:
+  - !type:RemoveComponentSpecial
+    components:
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: synth
+  - !type:AddComponentSpecial
+    components:
+    - type: Language
+      preset: RMCLanguagePresetSynthColonist
+    - type: LanguageLearning
+      preset: RMCLanguageLearningPresetSynthColonist
+    - type: IntelRescueSurvivorObjective
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: Synth
+    - type: NpcFactionMember
+      factions:
+      - SPP
+      - Civilian
+  useLoadoutOfJob: RMCSyntheticColony # for inheritance
+
+- type: startingGear
+  parent: RMCGearSyntheticColonistBase
+  id: RMCGearSyntheticColonistSorokyneScience
+  equipment:
+    ears: RMCHeadsetDistressSPP
+    gloves: RMCHandsVeteranSPP
+    shoes: RMCBootsSPP
+    back: RMCSatchelLightpack
+    outerClothing: RMCLabcoatScience
+    head: CMHeadCapSPP
+    jumpsuit: RMCJumpsuitCivilianBrown
+  inhand:
+    - RMCFireAxe # todo maintenance jack
+  storage:
+    back:
+    - RMCShovel
+    - RMCFlashlightLantern

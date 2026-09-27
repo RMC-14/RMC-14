@@ -1,0 +1,66 @@
+- type: job
+  parent: RMCSyntheticColony
+  id: RMCSyntheticColonySorokyneCorporate
+  name: rmc-job-name-survivor-halcyon-dynamics-synth
+  startingGear: RMCGearSyntheticColonistSorokyneCorporate
+  spawnMenuRoleName: Halcyon Dynamics Synthetic Executive Bodyguard (Sorokyne Survivor)
+  hasIcon: true
+  icon: "RMCJobIconHalcyonSynth"
+  accessGroups:
+  - Colony # Colony All Access
+  - ColonistCorporate
+  - ColonistSynthShipside # Med, Engi, Synth
+  special:
+  - !type:RemoveComponentSpecial
+    components:
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: synth
+  - !type:AddComponentSpecial
+    components:
+    - type: Language
+      preset: RMCLanguagePresetSynthColonist
+    - type: LanguageLearning
+      preset: RMCLanguageLearningPresetSynthColonist
+    - type: IntelRescueSurvivorObjective
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetSorokyneSynthCorporate
+    - type: JobPrefix
+      prefix: rmc-job-prefix-halcyon-dynamics-synth
+    - type: Synth
+    - type: NpcFactionMember
+      factions:
+      - SPP
+      - Civilian
+      - Halcyon
+  useLoadoutOfJob: RMCSyntheticColony # for inheritance
+
+- type: startingGear
+  parent: RMCGearSyntheticColonistBase
+  id: RMCGearSyntheticColonistSorokyneCorporate
+  equipment:
+    id: RMCIDCardHalcyon
+    ears: RMCHeadsetDistressHalcyon
+    gloves: RMCHandsVeteranSPP
+    belt: RMCScabbardMacheteFilled
+    shoes: RMCBootsSPP
+    back: RMCSatchelBlack
+  inhand:
+    - RMCFireAxe # todo maintenance jack
+  storage:
+    back:
+    - RMCFlashlight
+# combat flashlight, telebaton, research grant
+
+- type: entity
+  id: RMCSurvivorPresetSorokyneSynthCorporate
+  name: survivor synth sorokyne corporate preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    randomOutfits:
+    - [ CMJumpsuitLiaisonBrown, RMCFancySuitJacketBrown, RMCGlassesAviators ] 
+    - [ RMCJumpsuitGreySuitPants, RMCFancySuitJacketLightBrown, RMCGlassesAviatorsSilver ]

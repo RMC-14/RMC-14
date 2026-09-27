@@ -1,0 +1,57 @@
+- type: job
+  parent: RMCSyntheticColony
+  id: RMCSyntheticColonySorokyneCivilian
+  startingGear: RMCGearSyntheticColonistSorokyneCivilian
+  spawnMenuRoleName: Civilian Synthetic (Sorokyne Survivor)
+  special:
+  - !type:RemoveComponentSpecial
+    components:
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: synth
+  - !type:AddComponentSpecial
+    components:
+    - type: Language
+      preset: RMCLanguagePresetSynthColonist
+    - type: LanguageLearning
+      preset: RMCLanguageLearningPresetSynthColonist
+    - type: IntelRescueSurvivorObjective
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetSorokyneSynthCivilian
+    - type: Synth
+    - type: NpcFactionMember
+      factions:
+      - SPP
+      - Civilian
+  useLoadoutOfJob: RMCSyntheticColony # for inheritance
+
+- type: startingGear
+  parent: RMCGearSyntheticColonistBase
+  id: RMCGearSyntheticColonistSorokyneCivilian
+  inhand:
+    - RMCFireAxe # todo maintenance jack
+  equipment:
+    ears: RMCHeadsetDistressSPP
+
+- type: entity
+  id: RMCSurvivorPresetSorokyneSynthCivilian
+  name: survivor synth sorokyne civilian colonist preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    randomOutfits:
+    # Miner
+    - [ RMCHardhatWhiteAlt, RMCJumpsuitSPPCiv5, RMCOuterClothingExternalWebbingBrown, CMSatchelEngineer, RMCHandsVeteranSPP, RMCBootsSPP ]
+    # Sanitation
+    - [ RMCHazardVestGreen, RMCHandsVeteranCBRNNonArmored, RMCJumpsuitCivilianGreen, CMSatchelEngineer, RMCBootsCBRNNonArmored, CMMop, CMHeadCapSPP ]  
+    # Fire Protection
+    - [ RMCArmorHelmetSPPFirefighter, RMCJumpsuitCivilianBrown, RMCArmorSPPFirefighterSynth, RMCSatchelLightpack, RMCAttachmentUnderbarrelExtinguisher, CMFireExtinguisherPortable, RMCHandsVeteranSPP, RMCBootsSPP ]
+    # Landing Pad Attendant Synth
+    - [ CMHeadCapSPP, RMCJumpsuitSPPArmy, RMCHazardVest, RMCHandsVeteranSPP, RMCBootsSPPFilled, RMCSatchelNorm, RMCEarmuffs, RMCPackFlareR44, RMCBeltUtilityGeneral, RMCScabbardMacheteFilled, RMCBinoculars ]
+    # Bartender
+    - [ CMHeadCapSPPUshankaCivilian, RMCMaskGasSPP, RMCVestTan, RMCJumpsuitSPPArmy, CMSatchel, RMCDrinkAlcoholVodka, RMCDrinkAlcoholVodka, RMCDrinkAlcoholVodka, RMCHandsVeteranSPP, RMCBaseballBatMetal, RMCBootsSPP ]
+    # Chef Synth
+    - [ CMHeadCapSPPCivilian, RMCChefApron, CMJumpsuitSPPCiv2, CMSatchel, CMHandsLatex, RMCKitchenKnifeButcher, RMCFork, RMCBootsSPP ]

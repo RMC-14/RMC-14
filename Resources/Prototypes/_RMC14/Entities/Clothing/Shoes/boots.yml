@@ -289,6 +289,30 @@
     sprite: _RMC14/Objects/Clothing/Shoes/Boots/cbrn.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Shoes/Boots/cbrn.rsi
+  - type: CMArmor
+    melee: 25
+    bullet: 25
+    bio: 75
+    explosionArmor: 15
+#   rad: 75
+
+- type: entity
+  parent: RMCBootsCBRN
+  id: RMCBootsCBRNNonArmored
+  name: M2 MOPP boots
+  suffix: Non Armored 
+  description: M2 MOPP boots are designed to shield the wearer from contact with hazardous substances and potential infection vectors in contaminated environments. These older boots offer basic resistance to punctures and environmental threats, but lack the advanced durability and radiation shielding of later models. Users should inspect these boots regularly for signs of wear or damage.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/cbrn.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/cbrn.rsi
+  - type: CMArmor
+    melee: 0
+    bullet: 0
+    bio: 0
+    explosionArmor: 0
+#   rad: 0
 
 - type: entity
   parent: ClothingShoesBase
