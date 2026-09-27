@@ -8,7 +8,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._RMC14.Weapons.Melee;
+namespace Content.Shared._RMC14.Weapons.Melee.OmaeWaMouShindeiru;
 
 public sealed class OmaeWaMouShindeiruSystem : EntitySystem
 {
@@ -22,10 +22,10 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<OmaeWaMouShindeiruComponent, MeleeHitEvent>(OnMeleeHit);
+        SubscribeLocalEvent<OmaeWaMouShindeiruComponent, MeleeHitEvent>(OnYouAreAlreadyDeadMeleeHit);
     }
 
-    private void OnMeleeHit(Entity<OmaeWaMouShindeiruComponent> ent, ref MeleeHitEvent args)
+    private void OnYouAreAlreadyDeadMeleeHit(Entity<OmaeWaMouShindeiruComponent> ent, ref MeleeHitEvent args)
     {
         if (!args.IsHit)
             return;
@@ -43,6 +43,7 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
             if (!ent.Comp.PendingTargets.Add(target))
                 continue;
 
+            _audio.PlayLocal(ent.Comp.DeathImminentSound, target, target);
             OmaeWaMouShindeiru(ent, args.User, target, damage);
         }
 

@@ -1,7 +1,7 @@
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._RMC14.Weapons.Melee;
+namespace Content.Shared._RMC14.Weapons.Melee.OmaeWaMouShindeiru;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(OmaeWaMouShindeiruSystem))]
@@ -35,7 +35,7 @@ public sealed partial class OmaeWaMouShindeiruComponent : Component
     public readonly HashSet<EntityUid> PendingTargets = [];
 
     [DataField]
-    public SoundSpecifier HeartBeatSound = new SoundPathSpecifier("/Audio/_RMC14/Weapons/alien_knockdown.ogg")
+    public SoundSpecifier DeathImminentSound = new SoundPathSpecifier("/Audio/_RMC14/Weapons/alien_knockdown.ogg")
     {
         Params = AudioParams.Default.WithLoop(true)
     };
