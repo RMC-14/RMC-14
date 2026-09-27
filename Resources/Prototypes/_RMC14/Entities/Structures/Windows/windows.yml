@@ -132,6 +132,9 @@
   id: RMCWindowReinforcedAlmayerHullHijackBustable
   description: A glass window with a special rod matrix inside a wall frame. This one was made out of exotic materials to prevent hull breaches. It would take a great impact to weaken this window.
   suffix: Hijack Bustable
+  components:
+  - type: RMCReplaceOnHijackLand
+    id: RMCWindowFrameAlmayer # TODO RMC14 : also spawn glass shards
 
 - type: entity
   parent: CMBaseWindow

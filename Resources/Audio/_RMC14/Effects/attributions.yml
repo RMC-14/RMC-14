@@ -92,3 +92,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/5c1988f325c6bfa936cb697fc79bb93c5df53852/sound/effects/pop.ogg"
+  
+- files: ["incoming_rocket.ogg", "incoming_rocket_alt.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13. Length modified by kleinerstation13 (Github)"
+  source: "https://github.com/cmss13-devs/cmss13/blob/8c4eecb1d4ad42c95b3fb0348732b3f8a0efe758/sound/effects/IncomingRocket.ogg"
