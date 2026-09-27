@@ -29,12 +29,9 @@
   useLoadoutOfJob: RMCSyntheticColony # for inheritance
 
 - type: startingGear
-  parent: RMCGearSyntheticColonistBase
   id: RMCGearSyntheticColonistSorokyneSecurity
   equipment:
     id: RMCIDCardSynthColony
-    ears: ""
-    belt: ""
     pocket1: RMCPouchSurvivalSynthFill
     pocket2: RMCPouchToolsFill
   inhand:
