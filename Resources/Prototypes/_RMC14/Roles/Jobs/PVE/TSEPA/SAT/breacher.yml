@@ -5,7 +5,7 @@
   description: rmc-job-description-tsepa-pve-breacher
   playTimeTracker: RMCJobSATBreacherPVE
   ranks:
-    RMCRankTSEPASeniorConstable: []
+    RMCRankSATSeniorOperator: []
   startingGear: RMCGearSATBreacherPVE
   icon: "RMCJobIconSATBreacherPVE"
   joinNotifyCrew: false

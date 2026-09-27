@@ -5,7 +5,7 @@
   description: rmc-job-description-tsepa-pve-operator
   playTimeTracker: RMCJobSATOperatorPVE
   ranks:
-    RMCRankTSEPAConstable: []
+    RMCRankSATOperator: []
   startingGear: RMCGearSATOperatorPVE
   icon: "RMCJobIconSATOperatorPVE"
   joinNotifyCrew: false

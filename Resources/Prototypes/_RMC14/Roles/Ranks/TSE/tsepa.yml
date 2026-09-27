@@ -44,3 +44,15 @@
   id: RMCRankTSEPACommissioner
   name: Commissioner
   prefix: Com.
+
+# SAT Ranks
+
+- type: rank
+  id: RMCRankSATOperator
+  name: Operator
+  prefix: Opr.
+
+- type: rank
+  id: RMCRankSATSeniorOperator
+  name: Senior Operator
+  prefix: Sr. Opr.

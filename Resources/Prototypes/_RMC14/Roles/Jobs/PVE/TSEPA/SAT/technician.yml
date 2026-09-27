@@ -5,7 +5,7 @@
   description: rmc-job-description-tsepa-pve-technician
   playTimeTracker: RMCJobSATTechnicianPVE
   ranks:
-    RMCRankTSEPASeniorConstable: []
+    RMCRankSATSeniorOperator: []
   startingGear: RMCGearSATTechnicianPVE
   icon: "RMCJobIconSATTechnicianPVE"
   joinNotifyCrew: false

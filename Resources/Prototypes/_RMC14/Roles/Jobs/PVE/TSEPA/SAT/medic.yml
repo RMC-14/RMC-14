@@ -5,7 +5,7 @@
   description: rmc-job-description-tsepa-pve-medic
   playTimeTracker: RMCJobSATMedicPVE
   ranks:
-    RMCRankTSEPASeniorConstable: []
+    RMCRankSATSeniorOperator: []
   startingGear: RMCGearSATMedicPVE
   icon: "RMCJobIconSATMedicPVE"
   joinNotifyCrew: false
