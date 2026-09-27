@@ -19,11 +19,11 @@
       takeAll: CMStandard
       entries:
 #      - id: CMHandsBlackMarine (Everything marked as a comment is redundant, since the role already spawns with that item. The lines were not deleted, in case they need to be re-added later.)
-#      - id: CMHeadsetMPO
+      - id: CMHeadsetMPO
 #      - id: CMJumpsuitMP
 #      - id: CMBootsBlackFilled
 #      - id: CMBeltSecurityMPFilled
-#      - id: CMGlassesSecurity
+      - id: CMGlassesSecurity
       - id: RMCVisorMedical
     - name: Helmet
       choices: { CMHelmet: 1 }
@@ -121,7 +121,7 @@
       takeAll: CMStandard
       entries:
 #      - id: CMHandsBlackMarine
-#      - id: RMCHeadsetMW
+      - id: RMCHeadsetMW
 #      - id: CMJumpsuitWarden
 #      - id: CMBootsBlackFilled
       - id: RMCVisorMedical

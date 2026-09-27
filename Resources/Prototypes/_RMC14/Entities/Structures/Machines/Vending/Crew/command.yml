@@ -20,6 +20,7 @@
       takeAll: CMStandard
       entries:
       - id: CMBootsBlackFilled
+      - id: RMCHeadsetMarineCommand
       - id: CMMRE
     - name: Standard Equipment
       takeAll: CMUniform
@@ -777,6 +778,7 @@
       - CMExecutiveOfficer
       takeAll: CMStandard
       entries:
+      - id: CMHeadsetSeniorCommand
       - id: CMMRE 
 # TODO: - id: Trench Whistle
     - name: Uniform # TODO: Port this.
@@ -916,6 +918,7 @@
       - CMChiefMP
       takeAll: CMStandard
       entries:
+      - id: CMHeadsetCMP
       - id: RMCVisorMedical
     - name: Helmet
       jobs:
@@ -1033,6 +1036,7 @@
       - CMChiefEngineer
       takeAll: CMStandard
       entries:
+      - id: CMHeadsetCE
       - id: RMCWeldingGoggles
       - id: RMCNailgunTactical
       # TODO KN5500/2 PDA
@@ -1047,6 +1051,7 @@
       - CMChiefEngineer
       choices: { CMHands: 1 }
       entries:
+      - id: CMHandsInsulated
       - id: CMHandsBlackInsulated
     - name: Helmet
       jobs:
@@ -1223,8 +1228,6 @@
       - CMQuartermaster
       choices: { CMHelmet: 1 }
       entries:
-      - id: RMCHeadCapQuartermaster
-        recommended: true
       - id: RMCHeadBeretQuartermaster
         recommended: true
       - id: CMHeadCapCargo
@@ -1315,6 +1318,7 @@
       takeAll: CMStandard
       entries:
       - id: CMHandsLatex
+      - id: CMHeadsetCMO
     - name: Eyewear
       jobs:
       - CMCMO
@@ -1523,6 +1527,12 @@
       - id: RMCCoatASOWhite
       - id: RMCCoatASOBlackAlt
       - id: RMCCoatASOWhiteAlt
+    - name: Headset
+      jobs:
+      - CMAuxiliarySupportOfficer
+      takeAll: CMStandard
+      entries:
+      - id: CMHeadsetSeniorCommand
     - name: Gloves
       jobs:
       - CMAuxiliarySupportOfficer
