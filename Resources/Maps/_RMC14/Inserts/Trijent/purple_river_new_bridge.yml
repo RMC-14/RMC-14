@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 09/27/2026 19:16:30
-  entityCount: 157
+  time: 09/27/2026 19:39:38
+  entityCount: 156
 maps: []
 grids:
 - 1
@@ -74,7 +74,12 @@ entities:
     - type: DecalGrid
       chunkCollection:
         version: 2
-        nodes: []
+        nodes:
+        - node:
+            color: '#DA822AFF'
+            id: RMCDecalRock5
+          decals:
+            1: 9,12
     - type: GridAtmosphere
       version: 2
       data:
@@ -1120,15 +1125,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 4.5,18.5
       parent: 1
-- proto: RMCRockColourable5
-  entities:
-  - uid: 14
-    components:
-    - type: Transform
-      pos: 9.5,12.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
 - proto: RMCWallRockTrijent
   entities:
   - uid: 2
