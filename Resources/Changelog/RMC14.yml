@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: TadJohnson00
-  changes:
-  - message: '[PVE] Added the Webley MkX TBR for use by RCM senior officers.'
-    type: Add
-  id: 3166
-  time: '2026-04-27T00:29:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8907
 - author: Vixting
   changes:
   - message: Added fun!
@@ -4435,5 +4428,17 @@
   id: 3665
   time: '2026-09-25T22:32:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10855
+- author: IceNoobXD
+  changes:
+  - message: MPs/MWs and CMPs can now find basic medical visors in their vendors!
+    type: Add
+  - message: Both Pilot jumpsuits now have camouflage variations
+    type: Add
+  - message: XO, SO, ASO, LO, CE, CMP, MP, MW, dropship staff, and IO vendors have
+      received a parity update that adds new items or adjusts quantities.
+    type: Tweak
+  id: 3666
+  time: '2026-09-27T15:51:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10155
 Name: RMC14
 Order: -1
