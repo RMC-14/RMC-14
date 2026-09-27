@@ -620,6 +620,9 @@
   name: heavy reinforced hull
   description: A highly reinforced metal wall used to separate rooms and make up the ship. It would take a great impact to weaken this wall.
   suffix: Hijack Bustable
+  components:
+  - type: RMCReplaceOnHijackLand
+    id: CMWallReinforcedAlmayer
 
 - type: entity
   parent: RMCWallAlmayerReinforcedHeavyDeco1
