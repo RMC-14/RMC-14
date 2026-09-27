@@ -572,13 +572,16 @@ public sealed class MentorManager : IPostInjectInit
 
         _player.PlayerStatusChanged += OnPlayerStatusChanged;
 
-        _config.OnValueChanged(RMCCVars.RMCMentorHelpWebhook,
-            value =>
-            {
-                _webhookId = null;
-                if (!string.IsNullOrWhiteSpace(value))
-                    _discord.GetWebhook(value, data => _webhookId = data.ToIdentifier());
-            },
-            true);
+        if (_config.IsCVarRegistered(RMCCVars.RMCMentorHelpWebhook.Name))
+        {
+            _config.OnValueChanged(RMCCVars.RMCMentorHelpWebhook,
+                value =>
+                {
+                    _webhookId = null;
+                    if (!string.IsNullOrWhiteSpace(value))
+                        _discord.GetWebhook(value, data => _webhookId = data.ToIdentifier());
+                },
+                true);
+        }
     }
 }
