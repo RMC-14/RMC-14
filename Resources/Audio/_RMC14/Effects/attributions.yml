@@ -87,3 +87,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/1f56b68258df6c17f460c1e7777f2f0e50c236f0/sound/effects/metal_crash.ogg"
+
+- files: ["pop.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/5c1988f325c6bfa936cb697fc79bb93c5df53852/sound/effects/pop.ogg"
