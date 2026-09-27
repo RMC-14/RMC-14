@@ -43,7 +43,6 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
             if (!ent.Comp.PendingTargets.Add(target))
                 continue;
 
-            _audio.PlayLocal(ent.Comp.DeathImminentSound, target, target);
             OmaeWaMouShindeiru(ent, args.User, target, damage);
         }
 
@@ -53,6 +52,8 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
 
     private void OmaeWaMouShindeiru(Entity<OmaeWaMouShindeiruComponent> ent, EntityUid user, EntityUid target, DamageSpecifier damage)
     {
+        _audio.PlayLocal(ent.Comp.DeathImminentSound, target, target);
+
         Timer.Spawn(ent.Comp.KillDelay,
             () =>
             {
