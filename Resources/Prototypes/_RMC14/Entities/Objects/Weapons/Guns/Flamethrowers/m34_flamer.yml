@@ -273,6 +273,14 @@
         reagents:
         - ReagentId: RMCNapalmUTTank
           Quantity: 150
+  - type: RMCSolutionTransferWhitelist
+    popup: rmc-solution-transfer-whitelist-failed-not-welding-tank
+    targetWhitelist:
+      tags:
+      - VehicleFlamerTankLZRN
+  - type: ReagentTank
+  - type: DrainableSolution
+    solution: rmc_flamer_tank
   - type: Tag
     tags:
     - VehicleFlamerTankLZRN
