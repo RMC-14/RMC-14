@@ -1,17 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Added fun!
-    type: Add
-  - message: Removed fun!
-    type: Remove
-  - message: Changed fun!
-    type: Tweak
-  - message: Fixed fun!
-    type: Fix
-  id: 3167
-  time: '2026-04-27T00:31:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9703
 - author: TadJohnson00
   changes:
   - message: The Warwick MkVII revolver now has the correct tags and should fit in
@@ -4440,5 +4427,14 @@
   id: 3666
   time: '2026-09-27T15:51:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10155
+- author: kleinerstation13
+  changes:
+  - message: Added colored poly-kevlon window variants
+    type: Add
+  - message: Desaturated the colored prefabricated structure wall variants
+    type: Tweak
+  id: 3667
+  time: '2026-09-28T01:17:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10828
 Name: RMC14
 Order: -1
