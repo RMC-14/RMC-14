@@ -590,13 +590,6 @@
       - CMJobSurvivorArmyReservist: 2
       CMSurvivorScientist:
       - CMJobSurvivorMSCResearcher: 2
-      RMCSyntheticColony:
-       - RMCSyntheticColonySorokyneCivilian: 1
-       - RMCSyntheticColonySorokyneCorporate: 1
-       - RMCSyntheticColonySorokyneEngineer: 1
-       - RMCSyntheticColonySorokyneDoctor: 1
-       - RMCSyntheticColonySorokyneScience: 1
-       - RMCSyntheticColonySorokyneSecurity: 1
 #    survivorJobVariantScenarios:
 #      clfcamp:
 #        CMSurvivor:
