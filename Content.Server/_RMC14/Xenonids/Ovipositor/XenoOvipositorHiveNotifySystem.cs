@@ -17,13 +17,10 @@ public sealed class XenoOvipositorHiveNotifySystem : EntitySystem
 
     private void OnQueenChangedOvi(Entity<XenoComponent> queen, ref XenoOvipositorChangedEvent args)
     {
-        if (args.Attached)
-        {
-            _xenoAnnounce.AnnounceSameHive(queen.Owner, Loc.GetString("rmc-xeno-queen-attach-ovipositor"));
-        }
-        if (!args.Attached)
-        {
-            _xenoAnnounce.AnnounceSameHive(queen.Owner, Loc.GetString("rmc-xeno-queen-shed-ovipositor"));
-        }
+        var message = args.Attached
+            ? "rmc-xeno-queen-attach-ovipositor"
+            : "rmc-xeno-queen-shed-ovipositor";
+
+        _xenoAnnounce.AnnounceSameHive(queen.Owner, Loc.GetString(message));
     }
 }
