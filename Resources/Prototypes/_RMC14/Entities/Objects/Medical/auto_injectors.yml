@@ -352,6 +352,26 @@
 
 - type: entity
   parent: RMCMedicAutoInjector15
+  id: RMCMedicAutoInjector1
+  name: reagent canister pouch medic autoinjector (1u)
+  components:
+  - type: Sprite
+    layers:
+    - state: autoinjector
+    - state: autoinjector1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+    - state: autoinjector_tag
+      color: "#FFFFFF"
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 6
+  - type: Hypospray
+    transferAmount: 1
+
+- type: entity
+  parent: RMCMedicAutoInjector15
   id: RMCMedicAutoInjector5
   name: reagent canister pouch medic autoinjector (5u)
   components:

@@ -137,6 +137,7 @@
   - RMCMedicAutoInjectorEZ30
   - RMCMedicAutoInjectorEZ45
   - RMCMedicAutoInjectorEZ60
+  # - RMCMedicAutoInjector1 TODO RMC14 when added in parity
   # - RMCMedicAutoInjector5 TODO RMC14 when added in parity
   # - RMCMedicAutoInjector10 TODO RMC14 when added in parity
   - RMCMedicAutoInjector15

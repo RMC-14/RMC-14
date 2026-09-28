@@ -6,6 +6,7 @@ rmc-autoinjector-ez-30 = Custom EZ one-use autoinjector (30u)
 rmc-autoinjector-ez-45 = Custom EZ one-use autoinjector (45u)
 rmc-autoinjector-ez-60 = Custom EZ one-use autoinjector (60u)
 
+rmc-autoinjector-medic-1 = Reagent canister pouch medic autoinjector (6x1u)
 rmc-autoinjector-medic-5 = Reagent canister pouch medic autoinjector (6x5u)
 rmc-autoinjector-medic-10 = Reagent canister pouch medic autoinjector (6x10u)
 rmc-autoinjector-medic-15 = Reagent canister pouch medic autoinjector (6x15u)

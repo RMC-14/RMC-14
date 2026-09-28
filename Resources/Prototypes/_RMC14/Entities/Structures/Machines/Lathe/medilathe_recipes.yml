@@ -214,6 +214,14 @@
     RMCPlastic: 375 # 300
 
 - type: latheRecipe
+  id: RMCMedicAutoInjector1
+  name: rmc-autoinjector-medic-1
+  result: RMCMedicAutoInjector1
+  completetime: 4
+  materials:
+    RMCPlastic: 375 # 300
+
+- type: latheRecipe
   id: RMCMedicAutoInjector5
   name: rmc-autoinjector-medic-5
   result: RMCMedicAutoInjector5
