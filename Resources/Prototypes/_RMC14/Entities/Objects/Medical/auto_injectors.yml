@@ -68,7 +68,7 @@
 # 20u #171DFF
 # 25u #00FF07 - unused but just in case
 # 30u #E8FF00
-# 45u #00FF07
+# 45u #FF9F00
 # 60u #FF0000
 
 - type: entity
@@ -554,7 +554,7 @@
       visible: false
     - state: autoinjector_tag
       sprite: _RMC14/Objects/Medical/auto_injectors.rsi
-      color: "#00FF07"
+      color: "#FF9F00"
   - type: SolutionContainerManager
     solutions:
       pen:
