@@ -29,6 +29,10 @@
   - type: Tag
     tags:
     - Book
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCBible

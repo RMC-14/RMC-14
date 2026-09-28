@@ -20,6 +20,15 @@
       factions:
       - RoyalMarines
       - TSE
+    - type: Language
+      spokenLanguages:
+      - English
+      - Japanese
+      understoodLanguages:
+      - English
+      - Japanese
+      currentLanguage: English
+      defaultLanguage: English
     - type: Skills
       skills:
         RMCSkillConstruction: 1
@@ -75,5 +84,5 @@
   parent: CMJobIconBase
   id: RMCJobIconRoyalTeamLeaderPVE
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_teamleader_pve
+    sprite: _RMC14/Interface/job_icons/TSE/RCM/pve.rsi
+    state: rcm_teamleader_pve

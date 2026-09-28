@@ -1,4 +1,4 @@
-﻿# Scrubbers
+# Scrubbers
 - type: entity
   id: RMCAirScrubberPortable
   parent: BaseStructureDynamic
@@ -141,6 +141,13 @@
     sprite: _RMC14/Structures/atmos.rsi
     state: radiator
     noRot: true
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
+    channel: Equipment
   - type: InteractionOutline
   - type: Damageable
     damageContainer: StructuralInorganic
@@ -156,6 +163,7 @@
             collection: MetalBreak
         - !type:DoActsBehavior
           acts: ["Destruction"]
+  - type: Corrodible
 
 - type: entity
   id: RMCRadiatorRed
@@ -173,6 +181,7 @@
   name: space heater
   description: It's an electric space heater. It heats the room through radiation with electricity.
   components:
+  - type: VehicleSmashable
   - type: Transform
   - type: Physics
     bodyType: Dynamic

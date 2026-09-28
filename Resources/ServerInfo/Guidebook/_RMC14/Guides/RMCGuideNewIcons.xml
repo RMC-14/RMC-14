@@ -1,0 +1,37 @@
+<Document>
+## New Player Icons
+In some marine roles, like [textlink="Squad Leader" link="RMCGuideSquadLeader"] or Department Heads, you may find [bold]"NEW"[/bold] icons floating above player heads.
+These icons indicate someone's experience both in the game overall and the specific role they are in.
+
+<Box>
+  <GuideEntityEmbed Entity="RMCNewIconGuidebookPurple" Caption="Purple New"/>
+</Box>
+
+[bold][color=#BF40BF]Purple[/color][/bold] is generally someone's first time playing that role ever. They will have less than one hour in that job. \n
+This icon will be replaced with the [bold][color=#ff000d]Red[/color][/bold] or [bold][color=#008000]Green[/color][/bold] new after they no longer qualify for this icon.
+
+<Box>
+  <GuideEntityEmbed Entity="RMCNewIconGuidebookRed" Caption="Red New"/>
+</Box>
+
+[bold][color=#ff000d]Red[/color][/bold] indicates new both the game and the role they are currently in.\n
+They will have less than twenty-five (25) hours of total playtime and less than ten (10) hours of total playtime in that role.
+
+<Box>
+  <GuideEntityEmbed Entity="RMCNewIconGuidebookYellow" Caption="Yellow New"/>
+</Box>
+
+[bold][color=#B8B823]Yellow[/color][/bold] indicates new to the game, but has experience in that specific role.\n
+You will generally see this in roles like Riflemen, Nurse, etc.
+
+<Box>
+  <GuideEntityEmbed Entity="RMCNewIconGuidebookGreen" Caption="Green New"/>
+</Box>
+
+[bold][color=#008000]Green[/color][/bold] indicates new to the job, but not the game. \n
+This icon, along with [bold][color=#BF40BF]Purple[/color][/bold] NEW will by far be the most seen \n
+
+You should be using these all of these icons to assist new members of the community or know who may need additional guideance should they ask for it. Always remember to at minimum show patience and understanding with new players.\n
+
+Currently, there is a bug at times where no new icon will display when someone has no playtime in a role. If you aren't sure, remember that oftentimes you can use a player's rank to loosely gauge experience (IE: PVT Riflemen, or PFC Corpsmen.).
+</Document>

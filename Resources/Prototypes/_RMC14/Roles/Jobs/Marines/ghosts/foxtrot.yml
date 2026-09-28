@@ -14,6 +14,9 @@
 - type: randomHumanoidSettings
   parent: [RMCCombatTech, RMCFoxtrotBase]
   id: RMCFoxtrotCombatTech
+  components:
+  - type: RespawnOnCryo
+    spawner: RMCRandomHumanoidFoxtrotCombatTech
 
 # fireteam leader
 - type: entity
@@ -31,6 +34,9 @@
 - type: randomHumanoidSettings
   parent: [RMCFireteamLeader, RMCFoxtrotBase]
   id: RMCFoxtrotFireteamLeader
+  components:
+  - type: RespawnOnCryo
+    spawner: RMCRandomHumanoidFoxtrotFireteamLeader
 
 # hospital corpsman
 - type: entity
@@ -48,6 +54,9 @@
 - type: randomHumanoidSettings
   parent: [RMCHospitalCorpsman, RMCFoxtrotBase]
   id: RMCFoxtrotHospitalCorpsman
+  components:
+  - type: RespawnOnCryo
+    spawner: RMCRandomHumanoidFoxtrotHospitalCorpsman
 
 # rifleman
 - type: entity
@@ -65,6 +74,9 @@
 - type: randomHumanoidSettings
   parent: [RMCRifleman, RMCFoxtrotBase]
   id: RMCFoxtrotRifleman
+  components:
+  - type: RespawnOnCryo
+    spawner: RMCRandomHumanoidFoxtrotRifleman
 
 # smart gun operator
 - type: entity
@@ -82,6 +94,9 @@
 - type: randomHumanoidSettings
   parent: [RMCSmartGunOperator, RMCFoxtrotBase]
   id: RMCFoxtrotSmartGunOperator
+  components:
+  - type: RespawnOnCryo
+    spawner: RMCRandomHumanoidFoxtrotSmartGunOperator
 
 # squad leader
 - type: entity
@@ -99,6 +114,9 @@
 - type: randomHumanoidSettings
   parent: [RMCSquadLeader, RMCFoxtrotBase]
   id: RMCFoxtrotSquadLeader
+  components:
+  - type: RespawnOnCryo
+    spawner: RMCRandomHumanoidFoxtrotSquadLeader
 
 # weapons specialist
 - type: entity
@@ -118,3 +136,5 @@
   id: RMCFoxtrotWeaponsSpecialist
   components:
   - type: IgnoreSpecLimits
+  - type: RespawnOnCryo
+    spawner: RMCRandomHumanoidFoxtrotWeaponsSpecialist

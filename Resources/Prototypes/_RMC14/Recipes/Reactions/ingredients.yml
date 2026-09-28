@@ -250,3 +250,53 @@
   effects:
   - !type:CreateEntityReactionEffect
     entity: FoodMealFriedegg
+
+- type: reaction
+  id: RMCInstantOrange
+  reactants:
+    Water:
+      amount: 6
+    RMCInstantJuicePowderOrange:
+      amount: 1
+  products:
+    RMCInstantJuiceOrange: 6
+
+- type: reaction
+  id: RMCInstantApple
+  reactants:
+    Water:
+      amount: 6
+    RMCInstantJuicePowderApple:
+      amount: 1
+  products:
+    RMCInstantJuiceApple: 6
+
+- type: reaction
+  id: RMCInstantWatermelon
+  reactants:
+    Water:
+      amount: 6
+    RMCInstantJuicePowderWatermelon:
+      amount: 1
+  products:
+    RMCInstantJuiceWatermelon: 6
+
+- type: reaction
+  id: RMCInstantGrape
+  reactants:
+    Water:
+      amount: 6
+    RMCInstantJuicePowderGrape:
+      amount: 1
+  products:
+    RMCInstantJuiceGrape: 6
+
+- type: reaction
+  id: RMCInstantPineapple
+  reactants:
+    Water:
+      amount: 6
+    RMCInstantJuicePowderPineapple:
+      amount: 1
+  products:
+    RMCInstantJuicePineapple: 6

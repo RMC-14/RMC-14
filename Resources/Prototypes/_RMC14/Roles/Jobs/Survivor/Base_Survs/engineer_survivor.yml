@@ -5,6 +5,7 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorEngineer
   startingGear: RMCGearSurvivorEngineer
+  icon: "RMCJobIconGenericColonistEngi"
   accessGroups:
   - ColonistEngi
   basePlaytimeTracker: true
@@ -12,14 +13,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillEndurance: 2
-        RMCSkillFirearms: 1
-        RMCSkillFireman: 1
-        RMCSkillEngineer: 2
-        RMCSkillConstruction: 2
-        RMCSkillPowerLoader: 2
-        RMCSkillVehicles: 1
+      preset: RMCSkillPresetSurvivorEngineer
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetEngineer
     - type: RMCSurvivor
@@ -69,7 +63,7 @@
   name: engineer colonist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomGearOther:
     -
       - [ CMBeltUtilityFilled ]

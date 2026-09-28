@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/06/2026 19:08:45
-  entityCount: 631
+  time: 06/16/2026 10:28:08
+  entityCount: 654
 maps: []
 grids:
 - 1
@@ -3197,6 +3197,123 @@ entities:
     - type: Transform
       pos: 0.5,18.5
       parent: 1
+- proto: RMCBlockerVehicle
+  entities:
+  - uid: 632
+    components:
+    - type: Transform
+      pos: 0.5,17.5
+      parent: 1
+  - uid: 633
+    components:
+    - type: Transform
+      pos: 1.5,17.5
+      parent: 1
+  - uid: 634
+    components:
+    - type: Transform
+      pos: 2.5,17.5
+      parent: 1
+  - uid: 635
+    components:
+    - type: Transform
+      pos: 3.5,17.5
+      parent: 1
+  - uid: 636
+    components:
+    - type: Transform
+      pos: 3.5,15.5
+      parent: 1
+  - uid: 637
+    components:
+    - type: Transform
+      pos: 3.5,16.5
+      parent: 1
+  - uid: 638
+    components:
+    - type: Transform
+      pos: 3.5,14.5
+      parent: 1
+  - uid: 639
+    components:
+    - type: Transform
+      pos: 3.5,13.5
+      parent: 1
+  - uid: 640
+    components:
+    - type: Transform
+      pos: 3.5,11.5
+      parent: 1
+  - uid: 641
+    components:
+    - type: Transform
+      pos: 3.5,12.5
+      parent: 1
+  - uid: 642
+    components:
+    - type: Transform
+      pos: 3.5,10.5
+      parent: 1
+  - uid: 643
+    components:
+    - type: Transform
+      pos: 3.5,9.5
+      parent: 1
+  - uid: 644
+    components:
+    - type: Transform
+      pos: 3.5,8.5
+      parent: 1
+  - uid: 645
+    components:
+    - type: Transform
+      pos: 3.5,7.5
+      parent: 1
+  - uid: 646
+    components:
+    - type: Transform
+      pos: 3.5,6.5
+      parent: 1
+  - uid: 647
+    components:
+    - type: Transform
+      pos: 3.5,5.5
+      parent: 1
+  - uid: 648
+    components:
+    - type: Transform
+      pos: 3.5,4.5
+      parent: 1
+  - uid: 649
+    components:
+    - type: Transform
+      pos: 12.5,2.5
+      parent: 1
+  - uid: 650
+    components:
+    - type: Transform
+      pos: 13.5,2.5
+      parent: 1
+  - uid: 651
+    components:
+    - type: Transform
+      pos: 14.5,2.5
+      parent: 1
+  - uid: 652
+    components:
+    - type: Transform
+      pos: 16.5,2.5
+      parent: 1
+  - uid: 653
+    components:
+    - type: Transform
+      pos: 15.5,2.5
+      parent: 1
+  - uid: 654
+    components:
+    - type: Transform
+      pos: 17.5,2.5
+      parent: 1
 - proto: RMCComputerFrameUnfinished
   entities:
   - uid: 580
@@ -3987,7 +4104,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-      bodyType: Static
   - uid: 606
     components:
     - type: Transform
@@ -3995,7 +4111,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-      bodyType: Static
   - uid: 607
     components:
     - type: Transform
@@ -4003,7 +4118,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-      bodyType: Static
   - uid: 608
     components:
     - type: Transform
@@ -4011,7 +4125,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-      bodyType: Static
   - uid: 609
     components:
     - type: Transform
@@ -4019,7 +4132,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-      bodyType: Static
   - uid: 610
     components:
     - type: Transform
@@ -4027,7 +4139,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-      bodyType: Static
   - uid: 611
     components:
     - type: Transform
@@ -4035,7 +4146,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-      bodyType: Static
   - uid: 612
     components:
     - type: Transform
@@ -4043,7 +4153,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-      bodyType: Static
   - uid: 613
     components:
     - type: Transform
@@ -4051,7 +4160,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-      bodyType: Static
   - uid: 614
     components:
     - type: Transform
@@ -4059,7 +4167,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-      bodyType: Static
   - uid: 615
     components:
     - type: Transform
@@ -4067,7 +4174,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-      bodyType: Static
   - uid: 616
     components:
     - type: Transform
@@ -4075,7 +4181,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-      bodyType: Static
   - uid: 617
     components:
     - type: Transform
@@ -4083,7 +4188,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-      bodyType: Static
   - uid: 618
     components:
     - type: Transform
@@ -4091,7 +4195,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-      bodyType: Static
   - uid: 619
     components:
     - type: Transform
@@ -4099,7 +4202,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-      bodyType: Static
   - uid: 620
     components:
     - type: Transform
@@ -4107,7 +4209,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-      bodyType: Static
   - uid: 621
     components:
     - type: Transform
@@ -4115,7 +4216,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-      bodyType: Static
   - uid: 622
     components:
     - type: Transform
@@ -4123,7 +4223,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-      bodyType: Static
 - proto: RMCHelmetWelding
   entities:
   - uid: 321
@@ -4131,6 +4230,8 @@ entities:
     - type: Transform
       pos: 26.5,21.5
       parent: 1
+    missingComponents:
+    - IngestionBlocker
 - proto: RMCItemPoolBuckshot
   entities:
   - uid: 552

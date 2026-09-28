@@ -1,0 +1,89 @@
+- type: decal
+  abstract: true
+  parent: CMDecalBase
+  id: RMCDecalRockBase
+  tags: ["station", "markings"]
+
+- type: decal
+  parent: RMCDecalRockBase
+  id: RMCDecalRock1
+  sprite:
+    sprite: _RMC14/Decals/rocks.rsi
+    state: rock_1
+
+- type: decal
+  parent: RMCDecalRockBase
+  id: RMCDecalRock2
+  sprite:
+    sprite: _RMC14/Decals/rocks.rsi
+    state: rock_2
+
+- type: decal
+  parent: RMCDecalRockBase
+  id: RMCDecalRock3
+  sprite:
+    sprite: _RMC14/Decals/rocks.rsi
+    state: rock_3
+
+- type: decal
+  parent: RMCDecalRockBase
+  id: RMCDecalRock4
+  sprite:
+    sprite: _RMC14/Decals/rocks.rsi
+    state: rock_4
+
+- type: decal
+  parent: RMCDecalRockBase
+  id: RMCDecalRock5
+  sprite:
+    sprite: _RMC14/Decals/rocks.rsi
+    state: rock_5
+
+- type: decal
+  parent: RMCDecalRockBase
+  id: RMCDecalRock6
+  sprite:
+    sprite: _RMC14/Decals/rocks.rsi
+    state: rock_6
+
+- type: decal
+  parent: RMCDecalRockBase
+  id: RMCDecalRock7
+  sprite:
+    sprite: _RMC14/Decals/rocks.rsi
+    state: rock_7
+
+- type: decal
+  parent: RMCDecalRockBase
+  id: RMCDecalRock8
+  sprite:
+    sprite: _RMC14/Decals/rocks.rsi
+    state: rock_8
+
+- type: decal
+  parent: RMCDecalRockBase
+  id: RMCDecalRock9
+  sprite:
+    sprite: _RMC14/Decals/rocks.rsi
+    state: rock_9
+
+- type: decal
+  parent: RMCDecalRockBase
+  id: RMCDecalRock10
+  sprite:
+    sprite: _RMC14/Decals/rocks.rsi
+    state: rock_10
+
+- type: decal
+  parent: RMCDecalRockBase
+  id: RMCDecalRock11
+  sprite:
+    sprite: _RMC14/Decals/rocks.rsi
+    state: rock_11
+
+- type: decal
+  parent: RMCDecalRockBase
+  id: RMCDecalRock12
+  sprite:
+    sprite: _RMC14/Decals/rocks.rsi
+    state: rock_12

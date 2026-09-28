@@ -92,6 +92,17 @@
 
 - type: entity
   parent: RMCSecureCaseStrapped
+  id: RMCSecureCaseStrappedWEYAMRE
+  name: WEYA ration pack crate (x60)
+  description: A supply crate containing sixty WEYA ration packs.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: RMCMREWeYa
+      amount: 60
+
+- type: entity
+  parent: RMCSecureCaseStrapped
   id: RMCSecureCaseStrappedSandbag
   name: sandbag supply crate (x100)
   description: A supply crate containing four piles of twenty-five sandbags.

@@ -1,9 +1,23 @@
-﻿- type: entity
+- type: entity
   parent: BaseStructureDynamic
   id: RMCCoffeeMachine
   name: coffee machine
   description: A coffee machine
-  components: #TODO: Make the coffee machine actually function
+  components:
+  - type: RMCCoffeeMachine
+    reagent: RMCCoffee
+    dispenseAmount: 30
+    dispenseSound: /Audio/_RMC14/Machines/coffee1.ogg
+  - type: ItemSlots
+    slots:
+      coffee_machine_slot:
+        name: Coffee Machine
+        whitelist:
+          tags:
+          - DrinkGlass
+  - type: ContainerContainer
+    containers:
+      coffee_machine_slot: !type:ContainerSlot {}
   - type: Transform
     noRot: true
   - type: Physics
@@ -11,8 +25,12 @@
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/coffee_machine.rsi
     drawdepth: SmallObjects
-    state: coffee_empty_on
     noRot: true
+    layers:
+    - state: coffee_empty_on
+    - state: coffee_cup_generic
+      map: ["enum.CoffeeMachineLayers.Cup"]
+      visible: false
   - type: InteractionOutline
   - type: Fixtures
     fixtures:

@@ -152,6 +152,9 @@
     rsi:
       sprite: _RMC14/Interface/MousePointer/smartgun_mouse.rsi
       state: all
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleSGO
 
 - type: entity
   parent: RMCSmartGunNoCamo
@@ -364,6 +367,9 @@
     - suitStorage
   - type: RefillableByBulletBox
     bulletType: RMCBoxBulletsSmartGun
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleSGO
 
 - type: entity
   parent: RMCMagazineSmartGun
@@ -435,6 +441,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
+    drawdepth: OverMobs
     layers:
     - state: bullet
       shader: unshaded

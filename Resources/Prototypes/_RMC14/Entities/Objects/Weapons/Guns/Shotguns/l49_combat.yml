@@ -1,0 +1,88 @@
+﻿- type: entity
+  parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
+  name: L49 assault shotgun
+  suffix: PVE, RCM
+  id: RMCWeaponShotgunL49
+  description: L49 is the official designation for the semi-automatic 12ga shotgun issued to Royal Crown Marine assault engineers and breachers. Designed in tandem with L49B breaching shells, it's a brutally effective, compact, and reliable combined weapon and breaching tool.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/l49.rsi
+    layers:
+    - state: icon
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/l49.rsi
+    slots:
+    - Back
+    - SuitStorage
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    baseFireRate: 0.75
+    recoilWielded: 2
+    recoilUnwielded: 4
+    scatterWielded: 8
+    scatterUnwielded: 16
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCShellShotgunBuckshot
+      - RMCShellShotgunSlugs
+      - RMCShellShotgunFlechette
+      - RMCShellShotgunIncendiaryBuckshot
+      - RMCShellShotgunIncendiary
+      - RMCShellShotgunBeanbag
+      - RMCShellShotgunL49B
+    capacity: 5
+    proto: null
+    soundInsert:
+      collection: CMShotgunLoad
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.5
+    accuracyMultiplierUnwielded: 0.75
+  - type: GunDamageModifier
+    multiplier: 0.66
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        locked: true
+        startingAttachable: RMCAttachmentL49Barrel
+        whitelist:
+          tags:
+          - RMCAttachmentL49Barrel
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-stock:
+        startingAttachable: RMCAttachmentL49Stock
+        whitelist:
+          tags:
+          - RMCAttachmentL49Stock
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentLaserSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-rail: -0.12, 0.12
+      rmc-aslot-stock: -0.59, 0.03
+      rmc-aslot-underbarrel: 0.25, -0.3
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 15
+  - type: Tag
+    tags:
+    - RMCWeaponShotgunL49
+    - RMCWeaponShotgun
+
+- type: Tag
+  id: RMCWeaponShotgunL49

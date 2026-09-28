@@ -41,3 +41,28 @@
     defaultChannel: Colony
   - type: Sprite
     state: cap_key
+
+# ERT
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyERT
+  name: ERT encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCommon
+    - MarineCommand
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+    - MarineEngineer
+    - MarineMedical
+    - MarineRequisition
+    - MarineJTAC
+    - MarineIntel
+    defaultChannel: MarineCommon
+  - type: Sprite
+    state: cmp_key

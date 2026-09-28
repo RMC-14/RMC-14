@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/dbac08893db5e67a6fdc865635d80a34ab61fd44/icons/obj/structures/props/server_equipment.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "laptop_closed"
+    },
+    {
+      "name": "laptop_off"
+    },
+    {
+      "name": "laptop_on"
+    }
+  ]
+}

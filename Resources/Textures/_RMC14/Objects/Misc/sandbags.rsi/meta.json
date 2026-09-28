@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/32cb5892413243cc74bb2d11df8e3085f8ef1164/icons/obj/items/marine-items.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/32cb5892413243cc74bb2d11df8e3085f8ef1164/icons/obj/items/marine-items.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/inhands/items/material_stacks_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/inhands/items/material_stacks_lefthand.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -12,6 +12,24 @@
     },
     {
       "name": "sandbag_pile"
+    },
+    {
+      "name": "stack-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "stack-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "pile-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "pile-inhand-right",
+      "directions": 4
     }
   ]
 }
+
+

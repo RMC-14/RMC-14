@@ -2,8 +2,10 @@
 using Content.Client._RMC14.Xenonids.UI;
 using Content.Client.Message;
 using Content.Shared._RMC14.Xenonids.Evolution;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Strain;
 using Content.Shared.FixedPoint;
+using Content.Shared.Mobs.Systems;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
@@ -18,6 +20,7 @@ public sealed class XenoEvolutionBui : BoundUserInterface
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     private readonly SpriteSystem _sprite;
+    private readonly MobStateSystem _mobState;
 
     [ViewVariables]
     private XenoEvolutionWindow? _window;
@@ -28,6 +31,7 @@ public sealed class XenoEvolutionBui : BoundUserInterface
     public XenoEvolutionBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         _sprite = EntMan.System<SpriteSystem>();
+        _mobState = EntMan.System<MobStateSystem>();
     }
 
     protected override void Open()
@@ -138,13 +142,29 @@ public sealed class XenoEvolutionBui : BoundUserInterface
         foreach (var control in _evolutionControls.Values)
             control.Visible = false;
 
+        var hasQueenAlive = HiveHasLivingQueen();
         foreach (var evolutionId in xeno.EvolvesToWithoutPoints)
+        {
+            if (hasQueenAlive &&
+                _prototype.TryIndex(evolutionId, out var proto) &&
+                proto.TryGetComponent(out XenoEvolutionGranterComponent? _, _compFactory))
+            {
+                continue;
+            }
+
             AddEvolution(evolutionId);
+        }
 
         if (xeno.Points >= xeno.Max)
         {
             foreach (var evolutionId in xeno.EvolvesTo)
                 AddEvolution(evolutionId);
+
+            if (!xeno.MarinesLanded)
+            {
+                foreach (var evolutionId in xeno.EarlyEvolvesTo)
+                    AddEvolution(evolutionId);
+            }
         }
 
         _window.Separator.Visible = _window.EvolutionsContainer.Children.Any(child => child.Visible) &&
@@ -169,5 +189,18 @@ public sealed class XenoEvolutionBui : BoundUserInterface
         {
             _window.OvipositorNeededLabel.Visible = false;
         }
+    }
+
+    private bool HiveHasLivingQueen()
+    {
+        if (!EntMan.TryGetComponent(Owner, out HiveMemberComponent? member) ||
+            member.Hive is not { } hive ||
+            !EntMan.TryGetComponent(hive, out HiveComponent? hiveComp) ||
+            hiveComp.CurrentQueen is not { } queen)
+        {
+            return false;
+        }
+
+        return !_mobState.IsDead(queen);
     }
 }

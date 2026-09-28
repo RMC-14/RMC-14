@@ -15,6 +15,7 @@ rmc-xeno-construction-no-map-resin-hole = The ground isn't solid
 rmc-xeno-construction-must-have-weeds-resin-hole = Resin holes must be built on weeds.
 rmc-xeno-construction-blocked = We can't make this here.
 rmc-xeno-construction-blocked-resin-hole = There's something built here already.
+rmc-xeno-construction-failed-cant-build-resin-hole = We sense this is not a suitable area for creating a resin hole.
 rmc-xeno-construction-blocked-structure = There's something built here already.
 rmc-xeno-construction-similar-too-close-resin-hole = There are other resin holes nearby!
 rmc-xeno-construction-dead-body = The body is in the way!
@@ -118,5 +119,5 @@ rmc-xeno-designer-thicken-success = We thicken the resin.
 
 rmc-xeno-designer-greater-surge-cooldown = We need to wait before using Greater Resin Surge again.
 rmc-xeno-designer-greater-surge-none = There's no design nodes nearby.
-rmc-xeno-designer-greater-surge-success = We convert {$count} design nodes into thick resin walls.
+rmc-xeno-designer-greater-surge-success = We convert {$count} design nodes into reflective resin walls.
 rmc-xeno-designer-infuse-node = You infuse the node with plasma.

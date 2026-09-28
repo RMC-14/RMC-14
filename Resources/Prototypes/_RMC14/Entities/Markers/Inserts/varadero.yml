@@ -59,3 +59,39 @@
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Varadero/engi_hold.yml"
       probability: 0.33
+
+
+# Survivor Scenario Inserts
+- type: entity
+  abstract: true
+  parent: RMCMapInsertVaraderoBase
+  id: RMCMapInsertVaraderoBaseScenario
+  suffix: Insert Varadero
+  components:
+  - type: MapInsert
+    replaceAreas: false
+
+# Regular Surv Spawns
+- type: entity
+  parent: RMCMapInsertVaraderoBaseScenario
+  id: RMCMapInsertVaraderoSurvSpawnTogether
+  name: Together Surv Spawn
+  suffix: Insert Varadero
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Varadero/surv_spawn_dorms.yml"
+      probability: 0.25
+      nightmareScenario: none
+    - spawn: "/Maps/_RMC14/Inserts/Varadero/surv_spawn_admin.yml"
+      probability: 0.25
+      nightmareScenario: none
+      offset: -27,6
+    - spawn: "/Maps/_RMC14/Inserts/Varadero/surv_spawn_engineering.yml"
+      probability: 0.25
+      nightmareScenario: none
+      offset: 16,33
+    - spawn: "/Maps/_RMC14/Inserts/Varadero/surv_spawn_chapel.yml"
+      probability: 0.25
+      nightmareScenario: none
+      offset: -42,38

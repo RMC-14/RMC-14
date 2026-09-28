@@ -24,6 +24,12 @@
     mask: CMMaskGas
 
 - type: loadout
+  id: GasMaskRoyalRMC
+  cost: 2
+  equipment:
+    mask: RMCMaskGasRCM
+
+- type: loadout
   id: MaskScarfSquadRMC
   cost: 2
   storage:

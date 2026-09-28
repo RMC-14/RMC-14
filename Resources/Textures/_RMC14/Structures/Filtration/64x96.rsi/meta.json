@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/structures/props/industrial/64x96.dmi",
+  "size": {
+    "x": 64,
+    "y": 96
+  },
+  "states": [
+    {
+      "name": "filtration_machineA"
+    },
+    {
+      "name": "filtration_machineB"
+    },
+    {
+      "name": "filtration_machineA_broken"
+    },
+    {
+      "name": "filtration_machineB_broken"
+    },
+    {
+      "name": "sedimentation"
+    },
+    {
+      "name": "sedimentation_broken"
+    }
+  ]
+}

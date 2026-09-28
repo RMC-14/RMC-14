@@ -1,0 +1,50 @@
+<widgets:LanguageMenuWindow xmlns="https://spacestation14.io"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                            xmlns:widgets="clr-namespace:Content.Client._RMC14.UserInterface.Systems.Language"
+                            xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                            Title="{Loc 'language-menu-title'}"
+                            MinSize="200 180"
+                            SetSize="300 260">
+
+    <PanelContainer Name="MainContainer" HorizontalExpand="True" VerticalExpand="True">
+        <PanelContainer Name="ContentContainer" HorizontalExpand="True" VerticalExpand="True" Margin="0">
+            <TabContainer Name="TabContainer"
+                          HorizontalExpand="True"
+                          VerticalExpand="True"
+                          Margin="0">
+
+                <ScrollContainer Name="KnownLanguagesTab"
+                                HorizontalExpand="True"
+                                VerticalExpand="True"
+                                HScrollEnabled="False"
+                                VScrollEnabled="True">
+
+                    <PanelContainer Name="KnownLanguagesContainer" Margin="0">
+                        <BoxContainer Name="KnownLanguageList"
+                                     Orientation="Vertical"
+                                     SeparationOverride="6"
+                                     Margin="0"/>
+                    </PanelContainer>
+                </ScrollContainer>
+
+                <ScrollContainer Name="LearningTab"
+                                HorizontalExpand="True"
+                                VerticalExpand="True"
+                                HScrollEnabled="False"
+                                VScrollEnabled="True"
+                                ReturnMeasure="True">
+
+                    <PanelContainer Name="LearningLanguagesContainer"
+                                   Margin="0"
+                                   HorizontalExpand="True">
+                        <BoxContainer Name="LearningLanguageList"
+                                     Orientation="Vertical"
+                                     SeparationOverride="8"
+                                     Margin="0"
+                                     HorizontalExpand="True"/>
+                    </PanelContainer>
+                </ScrollContainer>
+            </TabContainer>
+        </PanelContainer>
+    </PanelContainer>
+</widgets:LanguageMenuWindow>

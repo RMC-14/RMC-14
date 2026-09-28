@@ -32,6 +32,15 @@
     - type: NpcFactionMember
       factions:
       - CLF
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      understoodLanguages:
+      - Japanese
+      - English
+      currentLanguage: Japanese
+      defaultLanguage: Japanese
     - type: JobPrefix
       prefix: rmc-job-prefix-clf-specialist
   hidden: true
@@ -111,5 +120,5 @@
   parent: CMJobIconBase
   id: RMCJobIconCLFSpecialist
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/CLF.rsi
     state: clf_spec

@@ -115,8 +115,8 @@
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentLaserSight
           - RMCAttachmentVerticalGrip
-          - RMCAttachmentExtinguisher
-          - RMCAttachmentFlamer
+          - RMCAttachmentUnderbarrelExtinguisher
+          - RMCAttachmentMiniFlamethrower
           - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentU1GrenadeLauncher
         random:
@@ -185,8 +185,8 @@
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentLaserSight
           - RMCAttachmentVerticalGrip
-          - RMCAttachmentExtinguisher
-          - RMCAttachmentFlamer
+          - RMCAttachmentUnderbarrelExtinguisher
+          - RMCAttachmentMiniFlamethrower
           - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentU1GrenadeLauncher
 

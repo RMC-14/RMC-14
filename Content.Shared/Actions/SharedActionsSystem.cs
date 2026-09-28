@@ -198,7 +198,18 @@ public abstract class SharedActionsSystem : EntitySystem
         if (GetAction(action) is not {} ent || ent.Comp.UseDelay is not {} delay)
             return;
 
-        SetCooldown((ent, ent), delay);
+        // RMC14 start
+        var ev = new StartUseDelayEvent()
+        {
+            Delay = delay,
+            Start = GameTiming.CurTime,
+            End = GameTiming.CurTime + delay
+        };
+        RaiseLocalEvent(ent, ref ev);
+        SetCooldown((ent, ent), ev.Start, ev.End);
+        // RMC14 end
+
+        //SetCooldown((ent, ent), delay); // RMC14 replaced by above
     }
 
     public void SetUseDelay(Entity<ActionComponent?>? action, TimeSpan? delay)
@@ -1062,4 +1073,13 @@ public abstract class SharedActionsSystem : EntitySystem
         ent.Comp.Temporary = temporary;
         Dirty(ent);
     }
+}
+
+// RMC14
+[ByRefEvent]
+public struct StartUseDelayEvent
+{
+    public TimeSpan Delay;
+    public TimeSpan Start;
+    public TimeSpan End;
 }

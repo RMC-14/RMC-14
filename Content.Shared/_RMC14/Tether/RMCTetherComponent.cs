@@ -16,12 +16,15 @@ public sealed partial class RMCTetherComponent : Component
     [DataField, AutoNetworkedField]
     public EntityUid? TetherOrigin;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public ResPath RsiPath = new("/Textures/_RMC14/Effects/beam.rsi");
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public string TetherState = "oppressor_tail";
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float TetherWidth = 0.5f;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan? RemoveAt;
 }

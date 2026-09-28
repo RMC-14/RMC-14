@@ -3,45 +3,51 @@
 
 
   ## Character memory
-  - Your personal character may remember events that occured in previous missions and discuss them, but may not mention their own death or the death of another present character.
-  - Marine specific knowledge can be found in [textlink="marine roleplay standards." link="RMCMarineRoleplayStandards"]
+  - Characters may remember events that occured in previous operations and discuss them, but may not mention their own death or the death of another present character.
+  - Faction specific knowledge varies and can be found on their individual pages.
 
-  ## Act like an actual character in this setting.
-  - Do not use text speak or emoticons in character, and do not refer to out of character things like admins or rounds in-game.
-  - Do not reference memes in character, on any faction, including substituting letters on a meme as a Xenonid.
-  - Do not use emotes or local out of character to bypass speech filters or muteness.
-  - You are not required to write a backstory; however, you are expected to at least make an effort to act like your role.
-  - Some actions have no delay to make gameplay like reloading smoother. Do not abuse this to spam any kind of sounds.
-  - Use [textlink="acceptable character names." link="RMCCharacterNames"]
+  ## Act Like a Character in this Setting.
+  [bold]The local out of character channel is exempt from any roleplay requirements.[/bold] Out of character jokes and similar can be used in this channel with no issues.
+  - Characters are not required to have a backstory; however, you are expected to at least make an effort to act like your role and still be a background character within the setting if choosing not to interact with others.
+  - Some actions have no delay to make gameplay smoother, like reloading. Do not abuse instances of this to spam any kind of sounds.
+  - Use acceptable character names outlined in the rules.
+
+  ### Do not
+  - Use internet or meme-based language, text shortcuts like "pls", or emoticons in character.
+  - Refer to out of character concepts, such as "admins", "cooldowns", etc in character.
+  - Reference memes, internet culture, phrases, etc in character.
+  - Use emotes or the local out of character channel to bypass speech filters or muteness.\nOnly mechanical sign language is permitted, which is not available at this time.
 
   ## Suicides
-  - You must have a valid roleplay reason to commit suicide.
-  - Starting and then cancelling a suicide will be treated the same as an actual suicide, and also requires a valid reason.
-  - Suiciding at round-end without a valid roleplay reason will be considered end-of-round grief and result in the same ban.
+  - You must have a valid roleplay based reason to commit suicide. There are no OOC reasons.\n[bold]If you are not sure if you have a valid reason, AHelp (F1) to ask.[/bold]
+  - Cancelling a suicide will be treated the same, and also requires a valid reason.
 
-  [bold]If you are not sure if you have a valid reason, AHelp (F1) to ask.[/bold]
+  ### Valid suicide reasons:
+  - A last stand scenario, when it is clear that you will be captured by xenonids and there is no hope of fighting back.
+  - To avoid being captured by a hostile force that will probably torture you.
+  - If you fail to evacuate in a post-hijack evacuation of the Almayer, or if your evacuation method crashes.
+  - Late stage parasite infection.
 
-  [bold]Valid suicide examples:[/bold]
-  - Suiciding as a survivor in a last stand scenario, when it is clear that you will be captured by xenonids and there is no hope of fighting back.
-  - Suiciding to avoid being captured by a hostile force.
-  - Suiciding if you fail to evac in a post-hijack evacuation of the Almayer.
-
-  [bold]Not valid suicide examples:[/bold]
-  - Suiciding at round end without a valid roleplay reason. Going out after a victory is not a valid reason.
-  - Suiciding in briefing.
-  - Suiciding to spite someone or because you want to stop playing the round.
-  - Suiciding after receiving bad orders.
-  - Suiciding at round-start because you didn't get the role you wanted.
-  - Suiciding at memorial in remembrance of fallen marines.
-  - Suiciding because you are wounded.
+  ### Invalid suicide Reasons:
+  - The round has ended, or is near ending.\nThis will be considered end of round grief.
+  - To spite someone.
+  - To stop playing the round.
+  - After receiving bad orders.
+  - At round-start when you don't get the role you wanted.
+  - At memorial or after successful warship evacuation due to marine losses.
+  - Because you are wounded but recoverable.
 
   ## Metagaming/Powergaming
 
-  Some parts of the game cannot be covered by mechanics to ensure proper roleplay and balance.
-
-  - Exploitation of any current game bugs. You can ask in ahelp if something is a bug to avoid this.
+  [bold]Some parts of the game cannot be covered by mechanics to ensure proper roleplay and balance:[/bold]
 
   Other cases are listed per faction in their respective pages.
 
+  - Exploitation of any current game bugs, for an advantage or to be "funny". You can ask in ahelp if something is a bug to avoid this.
+
+  ### Objective Defenses
+
+  - All non-xenonid roles may not encase objectives in walls.
+  - Objective defenses must have at least one tile of entrance that can be blocked with barricades.\n\nExamples of objectives include but are not limited to sensors, communications, APCs, nuke.
 
 </Document>

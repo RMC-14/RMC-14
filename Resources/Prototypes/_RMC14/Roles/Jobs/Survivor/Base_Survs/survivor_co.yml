@@ -4,6 +4,7 @@
   name: rmc-job-name-survivor-co
   description: rmc-job-description-survivor-co
   playTimeTracker: RMCJobSurvivorCO
+  icon: "RMCJobIconGenericColonistCO"
   startingGear: CMGearCommandingOfficer
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-nobody

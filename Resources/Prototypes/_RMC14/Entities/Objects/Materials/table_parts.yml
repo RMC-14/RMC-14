@@ -8,6 +8,12 @@
   - type: Sprite
     sprite: _RMC14/Objects/Materials/table_parts.rsi
   - type: Item
+    sprite: _RMC14/Objects/Materials/table_parts.rsi
+    inhandVisuals:
+      left:
+      - state: almayer-inhand-left
+      right:
+      - state: almayer-inhand-right
     size: Normal
   - type: Construction
     graph: RMCTablePart
@@ -28,6 +34,12 @@
   components:
   - type: Sprite
     state: tan
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: tan-inhand-left
+      right:
+      - state: tan-inhand-right
   - type: Tag
     tags:
       - RMCTablePartTan
@@ -44,6 +56,12 @@
   components:
   - type: Sprite
     state: reinforced
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: reinf-inhand-left
+      right:
+      - state: reinf-inhand-right
   - type: Tag
     tags:
       - RMCTablePartReinforced
@@ -66,6 +84,12 @@
   components:
   - type: Sprite
     state: wood
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: wood-inhand-left
+      right:
+      - state: wood-inhand-right
   - type: Tag
     tags:
       - RMCTablePartWood
@@ -84,6 +108,12 @@
   components:
   - type: Sprite
     state: poor_wood
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: pwood-inhand-left
+      right:
+      - state: pwood-inhand-right
   - type: Tag
     tags:
       - RMCTablePartWoodPoor
@@ -100,6 +130,12 @@
   components:
   - type: Sprite
     state: fancy_wood
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: fwood-inhand-left
+      right:
+      - state: fwood-inhand-right
   - type: Tag
     tags:
       - RMCTablePartWoodFancy
@@ -115,6 +151,12 @@
   components:
   - type: Sprite
     state: gamble
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: gamble-inhand-left
+      right:
+      - state: gamble-inhand-right
   - type: Tag
     tags:
       - RMCTablePartGambling
@@ -132,6 +174,12 @@
   components:
   - type: Sprite
     state: almayer
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: almayer-inhand-left
+      right:
+      - state: almayer-inhand-right
   - type: Tag
     tags:
       - RMCTablePartAlmayer

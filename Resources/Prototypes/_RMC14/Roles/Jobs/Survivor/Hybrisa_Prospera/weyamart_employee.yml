@@ -9,11 +9,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
+      preset: RMCSkillPresetSurvivor
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetHybrisaWeyamartEmployee
     - type: RMCSurvivor
@@ -52,8 +48,8 @@
   name: hybrisa weyamart employee preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     rareItems:
       RMCExplosivePlastic:
         45: 50 # 10%
-    rareItemCoefficent: 50
+    rareItemCoefficient: 50

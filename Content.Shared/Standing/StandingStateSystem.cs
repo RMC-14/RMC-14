@@ -53,6 +53,7 @@ public sealed class StandingStateSystem : EntitySystem
         bool dropHeldItems = true,
         bool force = false,
         bool changeCollision = false,
+        EntityUid? downedBy = null, // RMC14
         StandingStateComponent? standingState = null,
         AppearanceComponent? appearance = null,
         HandsComponent? hands = null)
@@ -88,7 +89,7 @@ public sealed class StandingStateSystem : EntitySystem
 
         standingState.Standing = false;
         Dirty(uid, standingState);
-        RaiseLocalEvent(uid, new DownedEvent(), false);
+        RaiseLocalEvent(uid, new DownedEvent(downedBy), false);
 
         // Seemed like the best place to put it
         _appearance.SetData(uid, RotationVisuals.RotationState, RotationState.Horizontal, appearance);
@@ -190,8 +191,9 @@ public sealed class StoodEvent : EntityEventArgs
 /// <summary>
 /// Raised when an entity is not standing
 /// </summary>
-public sealed class DownedEvent : EntityEventArgs
+public sealed class DownedEvent(EntityUid? downedBy = null) : EntityEventArgs // RMC14 Added downedBy param
 {
+    public EntityUid? DownedBy = downedBy;
 }
 
 /// <summary>

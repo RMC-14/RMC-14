@@ -124,3 +124,30 @@
   - type: Sprite
     sprite: _RMC14/Objects/Misc/inflatable_door.rsi
     state: door_popped
+
+- type: entity
+  id: RMCInflatableWallUnbreakable
+  suffix: unbreakable
+  name: inflatable wall
+  description: An inflated membrane. Activate to deflate. Do not puncture.
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/inflatable_wall.rsi
+    state: wall
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 15
+        layer:
+        - WallLayer
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno

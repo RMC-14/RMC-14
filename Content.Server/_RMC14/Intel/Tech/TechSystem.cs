@@ -2,6 +2,7 @@ using Content.Server.GameTicking.Events;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Humanoid.Components;
 using Content.Server.Spawners.Components;
+using Content.Shared._RMC14.Cryostorage;
 using Content.Shared._RMC14.Intel.Tech;
 using Content.Shared.Humanoid.Prototypes;
 using Robust.Server.GameObjects;
@@ -33,6 +34,7 @@ public sealed class ServerTechSystem : EntitySystem
         SubscribeLocalEvent<TechCryoMarinesEvent>(OnTechCryoMarines);
         SubscribeLocalEvent<TechCryoSpecEvent>(OnTechCryoSpec);
         SubscribeLocalEvent<RoundStartingEvent>(OnRoundStart);
+        SubscribeLocalEvent<RespawnOnCryoComponent, EnteredCryostorageEvent>(OnEnteredCryostorageEvent);
     }
 
     private void OnRoundStart(RoundStartingEvent ev)
@@ -82,5 +84,10 @@ public sealed class ServerTechSystem : EntitySystem
             var choice = _random.Pick(valid);
             Spawn(spawnerId, _transform.GetMapCoordinates(choice));
         }
+    }
+
+    private void OnEnteredCryostorageEvent(Entity<RespawnOnCryoComponent> ent, ref EnteredCryostorageEvent args)
+    {
+        SpawnCryo(ent.Comp.Spawner, 1);
     }
 }

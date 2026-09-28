@@ -17,6 +17,7 @@
   - type: RMCConstructionUpgrade
     upgradedPopup: rmc-construction-upgrade-explosive
     upgradedEntity: CMBarricadeExplosive
+    baseEntity: CMBarricadeMetal
   - type: Sprite
     state: explosive
 
@@ -29,6 +30,7 @@
   - type: RMCConstructionUpgrade
     upgradedPopup: rmc-construction-upgrade-burn
     upgradedEntity: CMBarricadeBurn
+    baseEntity: CMBarricadeMetal
   - type: Sprite
     state: burn
 
@@ -41,6 +43,7 @@
   - type: RMCConstructionUpgrade
     upgradedPopup: rmc-construction-upgrade-brute
     upgradedEntity: CMBarricadeBrute
+    baseEntity: CMBarricadeMetal
   - type: Sprite
     state: brute
 
@@ -52,6 +55,7 @@
   components:
   - type: RMCConstructionUpgrade
     upgradedEntity: RMCBarricadeExplosivePlasteel
+    baseEntity: RMCBarricadePlasteel
 
 - type: entity
   parent: RMCBiohazardUpgrade
@@ -60,6 +64,7 @@
   components:
   - type: RMCConstructionUpgrade
     upgradedEntity: RMCBarricadeBurnPlasteel
+    baseEntity: RMCBarricadePlasteel
 
 - type: entity
   parent: RMCBruteUpgrade
@@ -68,3 +73,4 @@
   components:
   - type: RMCConstructionUpgrade
     upgradedEntity: RMCBarricadeBrutePlasteel
+    baseEntity: RMCBarricadePlasteel

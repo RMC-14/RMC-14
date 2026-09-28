@@ -95,3 +95,4 @@
   - type: XenoConstruct
   - type: RequireProjectileTarget
   - type: DeletedByWeedKiller
+  - type: XenoChargeDontHit

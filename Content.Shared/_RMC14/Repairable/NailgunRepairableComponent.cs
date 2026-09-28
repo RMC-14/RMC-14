@@ -1,5 +1,5 @@
-﻿using Content.Shared.Stacks;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Content.Shared.Stacks;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Repairable;
 
@@ -8,11 +8,8 @@ namespace Content.Shared._RMC14.Repairable;
 public sealed partial class NailgunRepairableComponent : Component
 {
     [DataField]
-    public float RepairMetal = 0;
+    public Dictionary<ProtoId<StackPrototype>, float> RepairValues = new();
 
     [DataField]
-    public float RepairPlasteel = 0;
-
-    [DataField]
-    public float RepairWood = 0;
+    public Dictionary<ProtoId<StackPrototype>, float> WallRepairFractions = new();
 }

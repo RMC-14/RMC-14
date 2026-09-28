@@ -19,6 +19,37 @@
     params:
       volume: -3
 
+
+- type: explosion
+  id: RMCLTBCannon
+  damagePerIntensity:
+    types:
+      Blunt: 20
+      Heat: 20
+      Structural: 400
+  tileBreakChance: [0, 0.5, 1]
+  tileBreakIntensity: [0, 8, 20]
+  tileBreakRerollReduction: 20
+  lightColor: Orange
+  texturePath: /Textures/Effects/fire.rsi
+  fireColor: Transparent
+  sound:
+    collection: CMExplosion # TODO RMC14 bigboom
+    params:
+      volume: 0
+  smallSound:
+    collection: CMExplosion
+    params:
+      volume: 0
+  soundFar:
+    collection: RMCCannonDistant
+    params:
+      maxDistance: 60
+  smallSoundFar:
+    collection: RMCCannonDistant
+    params:
+      maxDistance: 60
+
 - type: explosion
   id: RMCMortar
   damagePerIntensity:
@@ -84,5 +115,3 @@
     collection: RMCExplosionBig
     params:
       maxDistance: 50
-
-

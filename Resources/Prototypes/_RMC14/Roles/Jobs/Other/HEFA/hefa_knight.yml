@@ -9,6 +9,9 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: NpcFactionMember
+      factions:
+      - HEFA
     - type: JobPrefix
       prefix: rmc-job-prefix-hefa-shrapnelsworn
 

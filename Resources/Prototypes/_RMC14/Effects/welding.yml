@@ -1,0 +1,20 @@
+- type: entity
+  parent: RMCBaseEffect
+  id: RMCEffectWeldingSparks
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+    anchored: false
+  - type: Sprite
+    drawdepth: Effects
+    sprite: _RMC14/Effects/welding_effect.rsi
+    noRot: true
+    layers:
+    - state: smoke
+    - state: welding_sparks
+      shader: unshaded
+  - type: TimedDespawn
+    lifetime: 1.5
+  - type: Tag
+    tags:
+    - HideContextMenu

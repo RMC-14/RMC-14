@@ -102,13 +102,13 @@
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentBipod
           - RMCAttachmentBurstFireAssembly
-          - RMCAttachmentExtinguisher
-          - RMCAttachmentFlamer
+          - RMCAttachmentUnderbarrelExtinguisher
+          - RMCAttachmentMiniFlamethrower
           - RMCAttachmentU1GrenadeLauncher
           - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentLaserSight
           - RMCAttachmentM203GrenadeLauncher
-          - RMCAttachmentExtinguisher
+          - RMCAttachmentUnderbarrelExtinguisher
         random:
         - RMCAttachmentAngledGrip
         - RMCAttachmentVerticalGrip
@@ -179,13 +179,13 @@
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentBipod
           - RMCAttachmentBurstFireAssembly
-          - RMCAttachmentExtinguisher
-          - RMCAttachmentFlamer
+          - RMCAttachmentUnderbarrelExtinguisher
+          - RMCAttachmentMiniFlamethrower
           - RMCAttachmentU1GrenadeLauncher
           - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentLaserSight
           - RMCAttachmentM203GrenadeLauncher
-          - RMCAttachmentExtinguisher
+          - RMCAttachmentUnderbarrelExtinguisher
 
 - type: entity
   parent: CMMagazineRifleBase
@@ -353,6 +353,7 @@
 - type: entity
   parent: BulletRifle10x24mm
   id: BulletRifle556x45mmHEAP
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -364,6 +365,7 @@
 - type: entity
   parent: BulletRifle10x24mm
   id: BulletRifle556x45mmIncendiary
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -508,13 +510,13 @@
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentBipod
           - RMCAttachmentBurstFireAssembly
-          - RMCAttachmentExtinguisher
-          - RMCAttachmentFlamer
+          - RMCAttachmentUnderbarrelExtinguisher
+          - RMCAttachmentMiniFlamethrower
           - RMCAttachmentU1GrenadeLauncher
           - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentLaserSight
           - RMCAttachmentM203GrenadeLauncher
-          - RMCAttachmentExtinguisher
+          - RMCAttachmentUnderbarrelExtinguisher
         random:
         - RMCAttachmentAngledGrip
         - RMCAttachmentVerticalGrip
@@ -587,8 +589,8 @@
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentBipod
           - RMCAttachmentBurstFireAssembly
-          - RMCAttachmentExtinguisher
-          - RMCAttachmentFlamer
+          - RMCAttachmentUnderbarrelExtinguisher
+          - RMCAttachmentMiniFlamethrower
           - RMCAttachmentU1GrenadeLauncher
           - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentLaserSight
@@ -687,8 +689,8 @@
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentBipod
           - RMCAttachmentBurstFireAssembly
-          - RMCAttachmentExtinguisher
-          - RMCAttachmentFlamer
+          - RMCAttachmentUnderbarrelExtinguisher
+          - RMCAttachmentMiniFlamethrower
           - RMCAttachmentU1GrenadeLauncher
           - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentLaserSight

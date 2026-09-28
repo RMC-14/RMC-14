@@ -17,7 +17,9 @@
   - type: Gun
     shotsPerBurst: 2
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/smg_light.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_mp27.ogg
+      params:
+        volume: -1
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
@@ -91,12 +93,12 @@
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentBipod
           - RMCAttachmentBurstFireAssembly
-          - RMCAttachmentExtinguisher
+          - RMCAttachmentUnderbarrelExtinguisher
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.840, 0.03
-      rmc-aslot-rail: 0.1, 0.1
-      rmc-aslot-underbarrel: 0.59, -0.24
+      rmc-aslot-barrel: 0.840, 0.02
+      rmc-aslot-rail: 0.06, 0.09
+      rmc-aslot-underbarrel: 0.465, -0.31
   - type: GunDamageModifier
     multiplier: 1
 
@@ -130,6 +132,8 @@
     zeroVisible: false
     zeroOnlyOnEmpty: true
   - type: Appearance
+  - type: Item
+    size: Small
 
 - type: entity
   parent: RMCMagazineSMGMP27
@@ -155,6 +159,8 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    size: Small
 
 - type: entity
   parent: CMCartridge10x20mm

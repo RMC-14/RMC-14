@@ -47,6 +47,18 @@
   inhand:
   - RMCPatchOliveBranch
 
+- type: loadout
+  id: PatchNovaris
+  cost: 1
+  inhand:
+  - RMCPatchNovaris
+
+- type: loadout
+  id: PatchHalcyon
+  cost: 1
+  inhand:
+  - RMCPatchHalcyon
+
 # Shoes
 - type: loadout
   id: ShoesBlackRMC

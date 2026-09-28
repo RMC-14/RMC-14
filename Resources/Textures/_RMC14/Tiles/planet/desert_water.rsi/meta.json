@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/f7b9367cb5c083a8c052a40dece9417031e28ffe/icons/turf/floors/desert_water.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/f7b9367cb5c083a8c052a40dece9417031e28ffe/icons/turf/floors/desert_water.dmi, https://github.com/cmss13-devs/cmss13/blob/f7b9367cb5c083a8c052a40dece9417031e28ffe/icons/turf/floors/desert_water_toxic.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -78,6 +78,131 @@
           0.3
         ]
       ]
+    },
+    {
+      "name": "shallow_toxic",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "deep_toxic",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "shallow_edge_toxic",
+      "directions": 4,
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "shallow_corner_edge_toxic",
+      "directions": 4,
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "shallow_c",
+      "directions": 4,
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "channel"
+    },
+    {
+      "name": "channel_edge",
+      "directions": 4
+    },
+    {
+      "name": "channel_three",
+      "directions": 4
+    },
+    {
+      "name": "dock",
+      "directions": 8
+    },
+    {
+      "name": "dock_c",
+      "directions": 4
+    },
+    {
+      "name": "dock_caves",
+      "directions": 8
+    },
+    {
+      "name": "dock_caves_c",
+      "directions": 4
     },
     {
       "name": "shallow_corner",

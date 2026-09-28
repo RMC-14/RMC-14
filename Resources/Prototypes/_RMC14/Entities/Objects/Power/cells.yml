@@ -231,6 +231,9 @@
   - type: SmartGunBattery
   - type: PhysicalComposition
     materialComposition: {}
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleSGO
 
 - type: entity
   id: RMCPowerCellSlot

@@ -31,8 +31,12 @@
         - MachineLayer
   - type: Sleeper
   - type: ApcPowerReceiver
-    powerLoad: 200 # 15 idle, 200 active
-    needsPower: false # TODO RMC14 power
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 15
+    activeLoad: 200
+    channel: Equipment
   - type: DragInsertContainer
     containerId: sleeper
     entryDelay: 2
@@ -105,10 +109,14 @@
         type: SleeperConsoleBui
   - type: ActivatableUI
     key: enum.SleeperUIKey.Key
-  - type: ActivatableUIRequiresPower
   - type: ApcPowerReceiver
-    powerLoad: 40
-    needsPower: false # TODO RMC14 power
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 40
+    activeLoad: 0
+    channel: Equipment
+  - type: ActivatableUIRequiresPower
   - type: Appearance
   - type: GenericVisualizer
     visuals:

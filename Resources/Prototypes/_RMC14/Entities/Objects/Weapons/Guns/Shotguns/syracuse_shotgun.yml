@@ -1,0 +1,24 @@
+- type: entity
+  parent: WeaponShotgunM42A1
+  name: Syracuse pump-action shotgun
+  id: RMCWeaponShotgunSyracuse
+  description: A customized Syracuse hunting shotgun. Its wooden stock has been replaced with a bakelite pistol grip, and its barrel and magazine tube have been cut down to half their lengths for easier handling in close quarters at the cost of magazine size, only fitting four shells and one chambered.
+  components:
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilWielded: 2
+    recoilUnwielded: 4
+    scatterWielded: 10
+    scatterUnwielded: 10
+    baseFireRate: 2
+    burstScatterMult: 5
+  - type: BallisticAmmoProvider
+    capacity: 5
+  - type: Tag
+    tags:
+    - RMCWeaponShotgunSyracuse
+    - RMCWeaponShotgun
+
+- type: Tag
+  id: RMCWeaponShotgunSyracuse

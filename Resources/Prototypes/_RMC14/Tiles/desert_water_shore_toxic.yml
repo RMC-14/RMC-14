@@ -1,0 +1,194 @@
+# Base
+
+- type: tile
+  abstract: true
+  parent: CMPlanetBase
+  id: RMCPlanetDesertWaterShoreToxicBase
+  name: tiles-rmc-desert-water-shore
+  blockAnchoring: true
+  blockConstruction: true
+
+# Shore
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShore1Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore1_0.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShore2Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore1_1.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShore3Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore1_2.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShore4Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore1_3.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShore5Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore1_4.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShore6Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore1_5.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShore7Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore1_6.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShore8Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore1_7.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShore9Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore1_8.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShore10Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore1_9.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShore11Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore1_10.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShore12Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore1_11.png
+
+# Shore Corner
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShoreCorner1Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore_corner2_0.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShoreCorner2Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore_corner2_1.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShoreCorner3Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore_corner2_2.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShoreCorner4Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore_corner2_3.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShoreCorner5Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore_corner2_4.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShoreCorner6Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore_corner2_5.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShoreCorner7Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore_corner2_6.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShoreCorner8Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore_corner2_7.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShoreCorner9Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore_corner2_8.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShoreCorner10Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore_corner2_9.png
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShoreCorner11Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore_corner2_10.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShoreCorner12Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore_corner2_11.png
+
+# Shore Edge
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShoreEdge1Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore_edge1_0.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShoreEdge2Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore_edge1_1.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShoreEdge3Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore_edge1_2.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShoreEdge4Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore_edge1_3.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShoreEdge5Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore_edge1_4.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShoreEdge6Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore_edge1_5.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShoreEdge7Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore_edge1_6.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShoreEdge8Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore_edge1_7.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShoreEdge9Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore_edge1_8.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShoreEdge10Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore_edge1_9.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShoreEdge11Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore_edge1_10.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreToxicBase
+  id: RMCPlanetDesertWaterShoreEdge12Toxic
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_toxic/shore_edge1_11.png

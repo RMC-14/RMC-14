@@ -1,5 +1,6 @@
-﻿rmc-acid-resist = You stop, drop, and roll, getting rid of the acid.
+rmc-acid-resist = You stop, drop, and roll, getting rid of the acid.
 rmc-acid-resist-partial = You stop, drop, and roll, getting rid of some of the acid... but it's still melting you!
+rmc-acid-gun-second-wind-spent = {CAPITALIZE(THE($target))} can't be cleared of acid; its already to damaged.
 
 rmc-glob-start-self = We begin to spit glob of acid gas!
 rmc-glob-start-others = {$user} prepares to spit a massive glob!

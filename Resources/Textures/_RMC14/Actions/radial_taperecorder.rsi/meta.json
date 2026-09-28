@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/cb2431347031d174f929226c61c8fb3a8519f34a/icons/mob/radial_taperecorder.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "eject"
+    },
+    {
+      "name": "play"
+    },
+    {
+      "name": "print"
+    },
+    {
+      "name": "record"
+    },
+    {
+      "name": "stop"
+    }
+  ]
+}

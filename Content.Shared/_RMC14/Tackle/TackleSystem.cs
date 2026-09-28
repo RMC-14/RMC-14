@@ -286,7 +286,7 @@ public sealed class TackleSystem : EntitySystem
             selfPopup,
             targetPopup,
             other => Loc.GetString("rmc-disarm-attempt-others",
-                ("performerName", Identity.Name(other, EntityManager, user)),
+                ("performerName", Identity.Name(user, EntityManager, other)),
                 ("targetName", Identity.Name(target, EntityManager, other)))
         );
     }
@@ -326,8 +326,16 @@ public sealed class TackleSystem : EntitySystem
 
     private void OnDowned(Entity<TackledRecentlyByComponent> ent, ref DownedEvent args)
     {
-        if (!HasComp<VictimInfectedComponent>(ent) && (!TryComp<BuckleComponent>(ent, out var buckle) || !buckle.Buckled))
-            RemCompDeferred<TackledRecentlyByComponent>(ent);
+        if (HasComp<VictimInfectedComponent>(ent))
+            return;
+
+        if (TryComp<BuckleComponent>(ent, out var buckle) && buckle.Buckled)
+            return;
+
+        if (ent == args.DownedBy)
+            return;
+
+        RemCompDeferred<TackledRecentlyByComponent>(ent);
     }
 
     private void OnRemove<T>(Entity<TackledRecentlyComponent> ent, ref T args)

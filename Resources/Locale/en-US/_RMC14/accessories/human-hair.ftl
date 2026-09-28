@@ -325,3 +325,9 @@ marking-RMCHumanHairPulatoLong = PulatoLong (RMC)
 marking-RMCHumanHairPulatoLong2 = PulatoLong 2 (RMC)
 
 marking-RMCHumanHairPonytail9 = Ponytail 9 (RMC)
+
+marking-RMCHumanHairShavedKnot = Shaved Knot (RMC)
+
+marking-RMCHumanHairHolly = Holly (RMC)
+
+marking-RMCHumanHairHollyShaved = Holly Shaved (RMC)

@@ -136,6 +136,17 @@
     - sprite: _RMC14/Mobs/Vulpkanin/ear_markings.rsi
       state: dalmatian
 
+- type: marking
+  id: VulpEarFloppy
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Vulpkanin]
+  sprites:
+    - sprite: _RMC14/Mobs/Vulpkanin/ear_markings.rsi
+      state: floppy
+    - sprite: _RMC14/Mobs/Vulpkanin/ear_markings.rsi
+      state: floppy-inner
+
 # Head Markings (Snout)
 
 - type: marking

@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Maths;
 using Content.Shared.StatusEffect;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -9,10 +10,10 @@ namespace Content.Shared._RMC14.Xenonids.FightOrFlight;
 public sealed partial class XenoFightOrFlightComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public int LowRange = 4;
+    public float LowRange = RMCMathExtensions.CircleAreaFromSquareAbilityRange(4);
 
     [DataField, AutoNetworkedField]
-    public int HighRange = 6;
+    public float HighRange = RMCMathExtensions.CircleAreaFromSquareAbilityRange(6);
 
     [DataField, AutoNetworkedField]
     public int FuryThreshold = 75;
@@ -32,8 +33,12 @@ public sealed partial class XenoFightOrFlightComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan Jitter = TimeSpan.FromSeconds(1);
 
+    //TODO RMC14 move these effects over to the new status effect system
     [DataField, AutoNetworkedField]
-    public ProtoId<StatusEffectPrototype>[] AilmentsRemove = ["KnockedDown", "Stun", "Dazed", "Unconscious"];
+    public ProtoId<StatusEffectPrototype>[] AilmentsRemove = ["KnockedDown", "Stun", "Unconscious"];
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId[] AilmentsRemoveNew = ["Dazed"];
 
     [DataField]
     public ComponentRegistry ComponentsRemove;

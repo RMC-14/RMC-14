@@ -73,7 +73,7 @@
         points: 5
       - id: CMDrinkCanBeerLite
         points: 5
-      - id: DrinkGlass
+      - id: RMCDrinkGlass
         points: 1
       - id: RMCWestonYamadaCup
         points: 1
@@ -115,3 +115,6 @@
         points: 15
       - id: CMEncryptionKeyColony
         points: 20
+  - type: GuideHelp
+    guides:
+    - RMCGuideCorporateLiaison

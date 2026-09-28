@@ -270,7 +270,7 @@ entities:
     - type: Transform
       pos: 5.492432,19.26514
       parent: 1
-- proto: RMCBoxMagazineRifleAK4047Empty
+- proto: RMCBoxMagazineRifleType77Empty
   entities:
   - uid: 99
     components:
@@ -543,7 +543,7 @@ entities:
     - type: Transform
       pos: 4.5,12.5
       parent: 1
-- proto: RMCMagazineRifleAK4047
+- proto: RMCMagazineRifleType77
   entities:
   - uid: 112
     components:
@@ -615,7 +615,7 @@ entities:
     - type: Transform
       pos: 6.5,12.5
       parent: 1
-- proto: RMCMagazineRifleAK4047AP
+- proto: RMCMagazineRifleType77AP
   entities:
   - uid: 124
     components:
@@ -1470,7 +1470,7 @@ entities:
     - type: Transform
       pos: 4.5,12.5
       parent: 1
-- proto: RMCWeaponRifleAK4047
+- proto: RMCWeaponRifleType77
   entities:
   - uid: 102
     components:

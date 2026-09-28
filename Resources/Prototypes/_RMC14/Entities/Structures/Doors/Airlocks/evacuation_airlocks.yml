@@ -81,6 +81,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Lifeboat/lifeboat_doors.rsi
   - type: EvacuationDoor
+  - type: RMCOpenOnEvacuation
   - type: Corrodible
     isCorrodible: true
   - type: ApcPowerReceiver

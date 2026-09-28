@@ -2,6 +2,9 @@
 cm-job-name-correspondent = Correspondent
 cm-job-description-correspondent = You report on anything and everything that you deem fit to put within the pages of the news.
 cm-job-prefix-correspondent = PRESS
+cm-job-name-combat-correspondent = Combat Correspondent
+cm-job-description-combat-correspondent = You are embedded with the UNMC to report from the front and keep the public informed.
+cm-job-prefix-combat-correspondent = CC
 CMJobCorrespondent = Correspondent
 
 cm-job-name-liaison = Corporate Liaison

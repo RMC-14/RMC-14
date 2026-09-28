@@ -87,6 +87,9 @@
   - type: UseDelay
   - type: DisarmMalus
     malus: 0.225
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleMilitaryPolice
 
 # TODO RMC14: Actually implement the telescopic baton
 - type: entity

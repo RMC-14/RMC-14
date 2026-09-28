@@ -1,0 +1,23 @@
+- type: entity
+  parent: RMCBaseWeaponLauncher
+  id: RMCWeaponLauncherL33
+  name: L33 DAAMSL
+  suffix: PVE, RCM, AT
+  description: "The L33 Disposable Anti-Armour Missile Launcher, standard-issue anti-tank system of the Royal Crown Marines; a single-use, shoulder-fired weapon capable of disabling or outright destroying moving vehicles even out to 1,250m.\n\nThe optic appears to be damaged. Guess you'll have to eyeball it."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/l33/icon.rsi
+    layers:
+      - state: icon
+        map: ["enum.GunVisualLayers.Base"]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/l33/inhands.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/l33/inhands.rsi
+  - type: BallisticAmmoProvider
+    proto: RMCRocket84mmAntiArmor
+    cycleable: false
+    whitelist:
+      tags: []
+  - type: Corrodible
+    isCorrodible: false

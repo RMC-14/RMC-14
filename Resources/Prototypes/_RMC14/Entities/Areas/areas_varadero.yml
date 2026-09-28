@@ -263,16 +263,13 @@
     minimapColor: '#0603C4EE'
 
 - type: entity
-  parent: RMCAreaVaraderoExterior
+  parent: RMCAreaVaraderoInteriorOob
   id: RMCAreaVaraderoExteriorFarocean
   name: New Varadero - Far Ocean
   components:
   - type: Sprite
     state: varadero3
   - type: Area
-    avoidBioscan: false
-    noTunnel: true
-    unweedable: false
     minimapColor: '#0603C4EE'
 
 - type: entity

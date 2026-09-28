@@ -61,8 +61,8 @@
   - type: StorageFill
     contents:
     - id: RMCCableCoil30
+      amount: 2
     - id: CMAPCElectronics
       amount: 3
     - id: RMCPowerCellAPC
-    - id: RMCPowerCellAPC
-    - id: RMCExplosivePlastic
+      amount: 2

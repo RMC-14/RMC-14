@@ -8,17 +8,25 @@
   - ColonistAllAccessNoArmory
   startingGear: RMCGearParaCommander
   icon: RMCJobIconParaCommander
-  spawnMenuRoleName: Royal Paramarine Commander (Survivor)
+  playTimeTracker: RMCJobSurvivorCO
+  spawnMenuRoleName: Royal Paramarine Commander (Hybrisa Special Survivor)
   special:
     - !type:AddComponentSpecial
       components:
+        - type: Language
+          spokenLanguages:
+          - English
+          understoodLanguages:
+          - English
+          currentLanguage: English
+          defaultLanguage: English
         - type: NpcFactionMember
           factions:
             - RoyalMarines
             - TSE
         - type: RMCSurvivor
         - type: Skills
-          preset: RMCSkillPresetCommander
+          preset: RMCSkillPresetParaCommander
         - type: RMCAllowSuitStorage
         - type: IntelRescueSurvivorObjective
         - type: MotionDetectorTracked
@@ -38,7 +46,7 @@
           squad: SquadPara
         - type: JobPrefix
           prefix: rmc-job-prefix-para-commander
-  hidden: true
+  useLoadoutOfJob: RMCSurvivorCommandingOfficer
 
 - type: startingGear
   id: RMCGearParaCommander
@@ -70,5 +78,5 @@
   parent: CMJobIconBase
   id: RMCJobIconParaCommander
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/TSE/RCM/paramarine.rsi
     state: para_commander_alt

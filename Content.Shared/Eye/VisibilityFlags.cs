@@ -10,6 +10,7 @@ namespace Content.Shared.Eye
         Normal = 1 << 0,
         Ghost  = 1 << 1,
         Subfloor = 1 << 2,
+        ImaginaryFriend = 1 << 14,
         Xeno = 1 << 15,
     }
 }

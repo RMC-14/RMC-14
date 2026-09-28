@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/items/food/fish.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "fishfingers"
+    },
+    {
+      "name": "legacy_bay"
+    },
+    {
+      "name": "fish_snacks_meat"
+    },
+    {
+      "name": "bluegill_meat"
+    },
+    {
+      "name": "bass_meat"
+    },
+    {
+      "name": "salmon_meat"
+    },
+    {
+      "name": "white_perch_meat"
+    },
+    {
+      "name": "crab_meat"
+    },
+    {
+      "name": "crab_meat_2"
+    },
+    {
+      "name": "squid_meat"
+    },
+    {
+      "name": "squid_meat_2"
+    }
+  ]
+}

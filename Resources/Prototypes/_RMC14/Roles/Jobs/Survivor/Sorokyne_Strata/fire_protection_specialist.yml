@@ -9,12 +9,17 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
+      preset: RMCSkillPresetSurvivorFireProtectionSpecialist
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetFireProtectionSpecialist
     - type: RMCSurvivor
@@ -64,7 +69,7 @@
   name: fire protection specialist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCFireAxe ]
     - [ CMFireExtinguisherPortable ]

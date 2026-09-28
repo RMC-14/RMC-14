@@ -19,6 +19,9 @@
     useDelay: 1
   - type: InstantAction
     event: !type:XenoPlantWeedsActionEvent
+  - type: SwappableAction
+    swappedEventTemplate: !type:XenoExpandWeedsActionEvent
+    originalEventTemplate: !type:XenoPlantWeedsActionEvent
 
 - type: entity
   id: ActionXenoChooseStructure
@@ -282,12 +285,11 @@
     event: !type:Content.Shared._RMC14.Xenonids.Designer.DesignerSelectedDesignToggleActionEvent
   - type: RMCDazeableAction
 
-# TODO: Make this greater surge weak reflective resin wall
 - type: entity
   id: ActionXenoDesignerGreaterResinSurge
   parent: ActionXenoBase
   name: Greater Resin Surge (250)
-  description: Consumes nearby design nodes to create temporary thick resin walls.
+  description: Consumes nearby design nodes to create temporary reflective resin walls.
   components:
   - type: Action
     itemIconStyle: NoItem

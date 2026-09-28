@@ -43,7 +43,8 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: Appearance
-  - type: RMCOrbitalDeployable
+  - type: SupplyDropPod
     landingDamage:
       types:
         Blunt: 5000
+  - type: NoStunOnExit

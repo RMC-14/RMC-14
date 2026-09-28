@@ -1,0 +1,84 @@
+- type: constructionGraph
+  id: RMCGasPipe
+  start: start
+  graph:
+  - node: start
+    edges: []
+
+  - node: half
+    entity: RMCGasPipeHalf
+    edges:
+    - to: half
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      completed:
+      - !type:DeleteEntity
+      steps:
+      - tool: Welding
+        doAfter: 1
+
+  - node: straight
+    entity: RMCGasPipeStraight
+    edges:
+    - to: straight
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      completed:
+      - !type:DeleteEntity
+      steps:
+      - tool: Welding
+        doAfter: 1
+
+  - node: bend
+    entity: RMCGasPipeBend
+    edges:
+    - to: bend
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      completed:
+      - !type:DeleteEntity
+      steps:
+      - tool: Welding
+        doAfter: 1
+
+  - node: tjunction
+    entity: RMCGasPipeTJunction
+    edges:
+    - to: tjunction
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      completed:
+      - !type:DeleteEntity
+      steps:
+      - tool: Welding
+        doAfter: 1
+
+  - node: fourway
+    entity: RMCGasPipeFourway
+    edges:
+    - to: fourway
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      completed:
+      - !type:DeleteEntity
+      steps:
+      - tool: Welding
+        doAfter: 1
+
+  - node: broken
+    entity: GasPipeBroken
+    edges:
+    - to: broken
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      completed:
+      - !type:DeleteEntity
+      steps:
+      - tool: Welding
+        doAfter: 1

@@ -1,0 +1,43 @@
+﻿- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitFreelancer
+  name: freelancer fatigues
+  description: A set of loose-fitting fatigues, perfect for an informal mercenary. Smells like gunpowder, apple pie, and covered in grease and sake stains.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/freelancer.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/freelancer.rsi
+
+- type: entity
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
+  id: RMCJumpsuitFreelancerBluePants
+  name: mercenary's outfit
+  description: A pair of tan camouflage pants coupled with a blue t-shirt. Commonly seen on mercenaries beholden to no nation, only their contracts.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Freelancer/blueshirt_tanpants.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Freelancer/blueshirt_tanpants.rsi
+
+- type: entity
+  parent: RMCJumpsuitFreelancerBluePants
+  id: RMCJumpsuitFreelancerGreenPants
+  name: mercenary's outfit
+  description: A pair of woodland green pants coupled with a white t-shirt. Commonly seen on mercenaries beholden to no nation, only their contracts.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Freelancer/whiteshirt_greenpants.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Freelancer/whiteshirt_greenpants.rsi
+
+- type: entity
+  parent: RMCJumpsuitFreelancerBluePants
+  id: RMCJumpsuitFreelancerBlackPants
+  name: mercenary's outfit
+  description: A pair of black tactical pants coupled with an olive t-shirt. Commonly seen on mercenaries beholden to no nation, only their contracts.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Freelancer/oliveshirt_blackpants.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Freelancer/oliveshirt_blackpants.rsi

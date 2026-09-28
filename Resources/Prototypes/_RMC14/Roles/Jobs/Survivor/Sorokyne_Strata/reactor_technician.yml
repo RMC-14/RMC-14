@@ -11,6 +11,17 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - English
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - English
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
     - type: Skills
       skills:
         RMCSkillEndurance: 2
@@ -61,7 +72,7 @@
   name: reactor technician preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCHeadCapSPPCivilianPlantWorker, RMCLabcoatShort, RMCShoesWhite ]
     - [ RMCLabcoatShort, RMCShoesLaceupBrown ]

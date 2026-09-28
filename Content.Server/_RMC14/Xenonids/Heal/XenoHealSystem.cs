@@ -3,6 +3,7 @@ using Content.Server.Chat.Systems;
 using Content.Server.Ghost;
 using Content.Server.Mind;
 using Content.Shared._RMC14.Xenonids.Heal;
+using Content.Shared._RMC14.Xenonids.JoinXeno;
 using Content.Shared.Mind;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
@@ -39,6 +40,7 @@ public sealed partial class XenoHealSystem : SharedXenoHealSystem
         else
             mind = _mind.CreateMind(session.UserId);
 
+        RemComp<CanBeLarvaQueuedComponent>(xeno);
         _ghost.SpawnGhost((mind.Owner, mind.Comp), xeno);
     }
 }

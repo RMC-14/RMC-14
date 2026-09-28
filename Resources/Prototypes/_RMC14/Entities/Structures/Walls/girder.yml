@@ -1,3 +1,11 @@
+- type: examinableDamage
+  id: RMCGirderMessages
+  messages:
+    - rmc-girder-integrity-1
+    - rmc-girder-integrity-2
+    - rmc-girder-integrity-3
+    - rmc-girder-integrity-4
+
 - type: entity
   parent: BaseStructure
   id: CMGirder
@@ -12,7 +20,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.45,-0.45,0.45,0.45"
+          bounds: "-0.5,-0.5,0.5,0.5"
         density: 60
         mask:
         - MachineMask
@@ -47,7 +55,7 @@
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
-          CMSheetMetal1:
+          RMCGirderDamaged:
             min: 1
             max: 1
       - !type:DoActsBehavior
@@ -102,6 +110,11 @@
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
+          RMCGirderDamaged:
+            min: 1
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        spawn:
           CMSheetMetal1:
             min: 1
             max: 1
@@ -130,8 +143,52 @@
     state: displaced
   - type: Icon
     state: displaced
+
+- type: entity
+  id: RMCGirderDamaged
+  name: damaged girder
+  description: A twisted girder that no longer blocks passage.
+  components:
+  - type: Transform
+    anchored: true
+  - type: Clickable
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/structures.rsi
+    state: girder_damaged
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/structures.rsi
+    state: girder_damaged
+  - type: ExaminableDamage
+    messages: RMCGirderMessages
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMSheetMetal1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Corrodible
+    isCorrodible: true
+    structure: true
+  - type: ReceiverXenoClaws
+    minimumClawStrength: Sharp
+    maxHealth: 100
+  - type: RMCRepairable
+    delay: 3
+  - type: RMCRepairableReplace
+    prototype: CMGirder
+
   - type: RMCGenericExamine
-    message: rmc-structure-displaced-examine-tip
+    message: rmc-structure-damaged-girder-examine-tip
     whitelist:
       components:
       - Marine

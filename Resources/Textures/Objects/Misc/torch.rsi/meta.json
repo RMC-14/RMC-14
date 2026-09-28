@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/commit/0f6496a55ceefa0f1bf1668fcef49b5182471695",
+  "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/commit/0f6496a55ceefa0f1bf1668fcef49b5182471695 ,overlay is a blank sprite created for RMC14",
   "size": {
     "x": 32,
     "y": 32
@@ -31,6 +31,9 @@
     },
     {
       "name": "torch_spent"
+    },
+    {
+      "name": "overlay"
     },
     {
       "name": "lit-inhand-left",

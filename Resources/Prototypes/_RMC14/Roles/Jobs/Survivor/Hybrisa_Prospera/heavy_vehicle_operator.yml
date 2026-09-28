@@ -23,9 +23,11 @@
 
 - type: startingGear
   parent: RMCGearSurvivorBaseNoBackpack
-  id: RMCGearSurvivorHybrisaHeavyVehicleOperator # TODO wheels inhand
+  id: RMCGearSurvivorHybrisaHeavyVehicleOperator
   equipment:
     pocket2: RMCPouchToolsFill
+  inhand:
+  - RMCVanWheel
 
 - type: entity
   parent: RMCSurvivorPresetEngineer
@@ -33,7 +35,7 @@
   name: hybrisa vehicle operator colonist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomStartingGear:
       shoes:
       - RMCShoesJackboots
@@ -48,7 +50,7 @@
     - [ RMCJumpsuitLiaisonGreenWorkwear, RMCHandsVeteranInsulated, RMCVestBrown, RMCHeadCapTruckerRed ]
     - [ RMCJumpsuitCivilian, RMCCoatBomberGrey, RMCHeadCapTruckerBlue, RMCGlassesAviatorsSilver ]
     - [ RMCJumpsuitCivilianFrontier, RMCHandsVeteranInsulated, RMCCoatBomberKhaki, RMCSunglassesBig, RMCCassettePlayer ]
-    - [ RMCJumpsuitNormCivilianBlackWebbing, RMCGlassesAviators, RMCCoatBomberGrey, RMCHeadCapFerret, RMCHandsCombat ]
+    - [ RMCJumpsuitNormCivilianBlackWebbing, RMCGlassesAviators, RMCCoatBomberGrey, RMCHeadCapTruckerRed, RMCHandsCombat ]
     randomGearOther:
     -
       - [ CMSheetMetal20, CMBeltUtilityFilled ]

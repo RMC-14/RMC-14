@@ -260,6 +260,301 @@
     Water: 5
     Rice: 5
 
+- type: microwaveMealRecipe
+  id: RecipeRMCGrilledFishCrab
+  name: grilled crab meat recipe
+  result: RMCFoodMeatFishGrilled
+  time: 10
+  group: Savory
+  solids:
+    RMCFoodMeatFishCrab: 1
+
+- type: microwaveMealRecipe
+  id: RecipeRMCGrilledFishCrabShell
+  name: grilled shelled crab meat recipe
+  result: RMCFoodMeatFishGrilled
+  time: 10
+  group: Savory
+  solids:
+    RMCFoodMeatFishCrabShell: 1
+
+- type: microwaveMealRecipe
+  id: RecipeRMCGrilledFishSquid
+  name: grilled squid meat recipe
+  result: RMCFoodMeatFishGrilled
+  time: 10
+  group: Savory
+  solids:
+    RMCFoodMeatFishSquid: 1
+
+- type: microwaveMealRecipe
+  id: RecipeRMCGrilledFishSockSquid
+  name: grilled sock squid meat recipe
+  result: RMCFoodMeatFishGrilled
+  time: 10
+  group: Savory
+  solids:
+    RMCFoodMeatFishSockSquid: 1
+
+- type: microwaveMealRecipe
+  id: RecipeRMCGrilledFishBass
+  name: grilled bass meat recipe
+  result: RMCFoodMeatFishGrilled
+  time: 10
+  group: Savory
+  solids:
+    RMCFoodMeatFishBass: 1
+
+- type: microwaveMealRecipe
+  id: RecipeRMCGrilledFishBluegill
+  name: grilled bluegill meat recipe
+  result: RMCFoodMeatFishGrilled
+  time: 10
+  group: Savory
+  solids:
+    RMCFoodMeatFishBluegill: 1
+
+- type: microwaveMealRecipe
+  id: RecipeRMCGrilledFishSalmon
+  name: grilled salmon meat recipe
+  result: RMCFoodMeatFishGrilled
+  time: 10
+  group: Savory
+  solids:
+    RMCFoodMeatFishSalmon: 1
+
+- type: microwaveMealRecipe
+  id: RecipeRMCGrilledFishWhitePerch
+  name: grilled white perch meat recipe
+  result: RMCFoodMeatFishGrilled
+  time: 10
+  group: Savory
+  solids:
+    RMCFoodMeatFishWhitePerch: 1
+
+- type: microwaveMealRecipe
+  id: RecipeRMCFishAndChipsCrab
+  name: crab fish & chips recipe
+  result: RMCFoodMeatFishAndChips
+  time: 15
+  group: Savory
+  solids:
+    RMCFoodMeatFishCrab: 1
+    FoodMealFries: 1
+  reagents:
+    RMCBatter: 5
+    Vinegar: 5
+
+- type: microwaveMealRecipe
+  id: RecipeRMCFishAndChipsCrabShell
+  name: shelled crab fish & chips recipe
+  result: RMCFoodMeatFishAndChips
+  time: 15
+  group: Savory
+  solids:
+    RMCFoodMeatFishCrabShell: 1
+    FoodMealFries: 1
+  reagents:
+    RMCBatter: 5
+    Vinegar: 5
+
+- type: microwaveMealRecipe
+  id: RecipeRMCFishAndChipsSquid
+  name: squid fish & chips recipe
+  result: RMCFoodMeatFishAndChips
+  time: 15
+  group: Savory
+  solids:
+    RMCFoodMeatFishSquid: 1
+    FoodMealFries: 1
+  reagents:
+    RMCBatter: 5
+    Vinegar: 5
+
+- type: microwaveMealRecipe
+  id: RecipeRMCFishAndChipsSockSquid
+  name: sock squid fish & chips recipe
+  result: RMCFoodMeatFishAndChips
+  time: 15
+  group: Savory
+  solids:
+    RMCFoodMeatFishSockSquid: 1
+    FoodMealFries: 1
+  reagents:
+    RMCBatter: 5
+    Vinegar: 5
+
+- type: microwaveMealRecipe
+  id: RecipeRMCFishAndChipsBass
+  name: bass fish & chips recipe
+  result: RMCFoodMeatFishAndChips
+  time: 15
+  group: Savory
+  solids:
+    RMCFoodMeatFishBass: 1
+    FoodMealFries: 1
+  reagents:
+    RMCBatter: 5
+    Vinegar: 5
+
+- type: microwaveMealRecipe
+  id: RecipeRMCFishAndChipsBluegill
+  name: bluegill fish & chips recipe
+  result: RMCFoodMeatFishAndChips
+  time: 15
+  group: Savory
+  solids:
+    RMCFoodMeatFishBluegill: 1
+    FoodMealFries: 1
+  reagents:
+    RMCBatter: 5
+    Vinegar: 5
+
+- type: microwaveMealRecipe
+  id: RecipeRMCFishAndChipsSalmon
+  name: salmon fish & chips recipe
+  result: RMCFoodMeatFishAndChips
+  time: 15
+  group: Savory
+  solids:
+    RMCFoodMeatFishSalmon: 1
+    FoodMealFries: 1
+  reagents:
+    RMCBatter: 5
+    Vinegar: 5
+
+- type: microwaveMealRecipe
+  id: RecipeRMCFishAndChipsWhitePerch
+  name: white perch fish & chips recipe
+  result: RMCFoodMeatFishAndChips
+  time: 15
+  group: Savory
+  solids:
+    RMCFoodMeatFishWhitePerch: 1
+    FoodMealFries: 1
+  reagents:
+    RMCBatter: 5
+    Vinegar: 5
+
+- type: microwaveMealRecipe
+  id: RecipeRMCFishSushiCrab
+  name: crab sushi roll recipe
+  result: RMCFoodMeatFishSushi
+  time: 5
+  group: Savory
+  solids:
+    RMCFoodMeatFishCrab: 1
+  reagents:
+    Water: 5
+    Rice: 5
+
+- type: microwaveMealRecipe
+  id: RecipeRMCFishSushiCrabShell
+  name: shelled crab sushi roll recipe
+  result: RMCFoodMeatFishSushi
+  time: 5
+  group: Savory
+  solids:
+    RMCFoodMeatFishCrabShell: 1
+  reagents:
+    Water: 5
+    Rice: 5
+
+- type: microwaveMealRecipe
+  id: RecipeRMCFishSushiSquid
+  name: squid sushi roll recipe
+  result: RMCFoodMeatFishSushi
+  time: 5
+  group: Savory
+  solids:
+    RMCFoodMeatFishSquid: 1
+  reagents:
+    Water: 5
+    Rice: 5
+
+- type: microwaveMealRecipe
+  id: RecipeRMCFishSushiSockSquid
+  name: sock squid sushi roll recipe
+  result: RMCFoodMeatFishSushi
+  time: 5
+  group: Savory
+  solids:
+    RMCFoodMeatFishSockSquid: 1
+  reagents:
+    Water: 5
+    Rice: 5
+
+- type: microwaveMealRecipe
+  id: RecipeRMCFishSushiBass
+  name: bass sushi roll recipe
+  result: RMCFoodMeatFishSushi
+  time: 5
+  group: Savory
+  solids:
+    RMCFoodMeatFishBass: 1
+  reagents:
+    Water: 5
+    Rice: 5
+
+- type: microwaveMealRecipe
+  id: RecipeRMCFishSushiBluegill
+  name: bluegill sushi roll recipe
+  result: RMCFoodMeatFishSushi
+  time: 5
+  group: Savory
+  solids:
+    RMCFoodMeatFishBluegill: 1
+  reagents:
+    Water: 5
+    Rice: 5
+
+- type: microwaveMealRecipe
+  id: RecipeRMCFishSushiSalmon
+  name: salmon sushi roll recipe
+  result: RMCFoodMeatFishSushi
+  time: 5
+  group: Savory
+  solids:
+    RMCFoodMeatFishSalmon: 1
+  reagents:
+    Water: 5
+    Rice: 5
+
+- type: microwaveMealRecipe
+  id: RecipeRMCFishSushiWhitePerch
+  name: white perch sushi roll recipe
+  result: RMCFoodMeatFishSushi
+  time: 5
+  group: Savory
+  solids:
+    RMCFoodMeatFishWhitePerch: 1
+  reagents:
+    Water: 5
+    Rice: 5
+
+- type: microwaveMealRecipe
+  id: RecipeRMCFishFingers
+  name: fish fingers recipe
+  result: RMCFoodFishFingers
+  time: 10
+  group: Savory
+  solids:
+    RMCFoodMeatFish: 1
+  reagents:
+    Flour: 5
+    Egg: 6
+
+- type: microwaveMealRecipe
+  id: RecipeRMCCubanCarp
+  name: Cuban carp recipe
+  result: RMCFoodCubanCarp
+  time: 15
+  group: Savory
+  solids:
+    FoodDough: 1
+    FoodChiliPepper: 1
+    RMCFoodMeatFish: 1
+
 #Cakes
 - type: microwaveMealRecipe
   id: RecipeRMCSuppermatter

@@ -1,0 +1,145 @@
+- type: entity
+  id: RMCVehicleBase
+  abstract: true
+  name: abstract vehicle
+  description: An abstract vehicle. Make sure to replace this!
+  components:
+  - type: RMCNightVisionVisible
+    priority: -2
+  - type: Vehicle
+    movementKind: Grid
+  - type: LagCompensation
+  - type: Clickable
+  - type: WarpPoint
+    follow: true
+  - type: RMCIgnoreGhostInteractionLimits
+  - type: RequireProjectileTarget
+  - type: GridVehicleMover
+    maxSpeed: 6
+    acceleration: 5
+    deceleration: 12
+    turnDelay: 0.25
+    pushCooldown: 2
+    xenoBlockMinimumSize: Immobile
+    xenoPushMinimumSize: Immobile
+  - type: VehicleOvercharge
+    speedMultiplier: 1.6
+    duration: 3
+    cooldown: 15
+    overchargeSound: /Audio/_RMC14/Vehicle/overdrive_activate.ogg
+  - type: VehicleSound
+    runningSound: /Audio/Effects/Vehicle/vehicleengineidle.ogg
+    runningSoundCooldown: 2
+    hornSound: /Audio/Effects/Vehicle/carhorn.ogg
+    hornCooldown: 1
+    #collisionSound: /Audio/_RMC14/Structures/metalhit.ogg
+    mobCollisionSound: /Audio/_RMC14/Xeno/alien_claw_block.ogg
+  - type: VehicleSpotlight
+    radius: 6
+    energy: 2.5
+    softness: 2
+  - type: Physics
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      world:
+        shape:
+          !type:PhysShapeAabb
+          bounds: -0.425,-1.2,0.425,1.2
+        density: 1000
+        mask:
+        - Impassable
+        - HighImpassable
+        - LowImpassable
+        - LargeMobLayer
+        - Vehicle
+        layer:
+        - LargeMobLayer
+        - Vehicle
+      mob:
+        shape:
+          !type:PhysShapeAabb
+          bounds: -0.425,-1.2,0.425,1.2
+        density: 1000
+        mask:
+        - MidImpassable
+        - BarricadeImpassable
+        - LargeMobLayer
+        layer:
+        - LargeMobLayer
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: InteractionOutline
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _RMC14/Structures/Vehicles/van.rsi
+    layers:
+    - map: [ base ]
+      state: van_base
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: SpriteMovement
+    movementLayers:
+      rmc-wheels:
+        state: wheels_0
+    noMovementLayers:
+      rmc-wheels:
+        state: wheels_1
+  - type: PointLight
+    enabled: false
+    radius: 6
+    energy: 2.5
+    softness: 2
+    autoRot: true
+    offset: "0,0.9"
+  - type: Corrodible
+    isCorrodible: false
+  - type: DoAfter
+  - type: UserInterface
+    interfaces:
+      enum.HardpointUiKey.Key:
+        type: HardpointBoundUserInterface
+      enum.VehicleWeaponsUiKey.Key:
+        type: VehicleWeaponsBoundUserInterface
+  - type: VehicleWeapons
+  - type: InputMover
+  - type: ItemSlots
+  - type: HardpointSlots
+    vehicleFamily: HardpointVehicleFamilyVan
+    slots:
+    - id: wheel-1
+      hardpointType: HardpointTypeWheel
+      slotType: HardpointSlotTypeWheel
+      insertDelay: 1.5
+      whitelist:
+        components:
+        - VehicleWheelItem
+  - type: VehicleWheelSlots
+    slotCount: 1
+    slots:
+    - wheel-1
+  - type: HardpointIntegrity
+    maxIntegrity: 1000
+    integrity: 1000
+    bypassEntryOnZero: true
+  - type: Appearance
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/van_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 8
+    maxXenos: 2
+    entryPoints:
+    - offset: 1,-1
+      radius: 0.6
+      interiorCoords: 3.5,-0.34
+    - offset: -1,-1
+      radius: 0.6
+      interiorCoords: 3.25,-1
+    - offset: 0,2
+      radius: 0.75
+      interiorCoords: 0.25,-1

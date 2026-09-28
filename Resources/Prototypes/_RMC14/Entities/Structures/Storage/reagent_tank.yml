@@ -55,10 +55,8 @@
     - RMCTankReagent
     - Structure
   - type: XenoCrusherChargable
-    setDamage:
-      types:
-        Blunt: 0
-    throwRange: 2
+    instantDestroy: true
+    passOnDestroy: true
   - type: RMCMesonsNonviewable
   - type: InteractedBlacklist
     blacklist:
