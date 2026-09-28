@@ -2,7 +2,7 @@
   parent: RMCSyntheticColony
   id: RMCSyntheticColonySorokyneScience
   startingGear: RMCGearSyntheticColonistSorokyneScience
-  spawnMenuRoleName: Cosmos Exploration Corps Researcher Synthetic (Sorokyne Survivor)
+  spawnMenuRoleName: Ministry of Space Colonization Researcher Synthetic (Sorokyne Survivor)
   special:
   - !type:RemoveComponentSpecial
     components:

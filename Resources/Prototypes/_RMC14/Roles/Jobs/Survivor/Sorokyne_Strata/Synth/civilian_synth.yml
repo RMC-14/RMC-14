@@ -38,7 +38,8 @@
 
 - type: entity
   id: RMCSurvivorPresetSorokyneSynthCivilian
-  name: survivor synth sorokyne civilian colonist preset
+  name: sorokyne civilian colonist synthetic preset
+  suffix: survivor
   categories: [ HideSpawnMenu ]
   components:
   - type: EntityPreset

@@ -2,7 +2,7 @@
   parent: RMCSyntheticColony
   id: RMCSyntheticColonySorokyneSecurity
   startingGear: RMCGearSyntheticColonistSorokyneSecurity
-  spawnMenuRoleName: Army or PCG Synthetic (Sorokyne Survivor)
+  spawnMenuRoleName: Army/PCG Synthetic (Sorokyne Survivor)
   special:
   - !type:RemoveComponentSpecial
     components:
@@ -39,12 +39,13 @@
 
 - type: entity
   id: RMCSurvivorPresetSorokyneSynthSecurity
-  name: survivor synth sorokyne security preset
+  name: sorokyne security synthetic preset
+  suffix: survivor
   categories: [ HideSpawnMenu ]
   components:
   - type: EntityPreset
     randomOutfits:
     # Option 1: Army Reservist
     - [ RMCHeadCapSPPBeretArmy, RMCJumpsuitSPPArmy, RMCOuterClothingExternalWebbingBrown, RMCBootsSPPBlackFilled, RMCHandsVeteran, RMCScabbardMacheteFilled, RMCSatchelLightpackBlack, RMCHeadsetDistressSPP, CMBeltUtilityFilled ]
-    # Option 2: PaP
+    # Option 2: PCG
     - [ CMGlassesSecurity, RMCHeadsetSPPPCG, CMHeadCapSPPPeakedPolice, RMCSatchelBlack, RMCCoatPCG, RMCHandsVeteran, RMCBootsSPPBlackFilled, RMCJumpsuitSPPPCG, RMCMaskGasSPP, CMBeltSecuritySPPFilled ]

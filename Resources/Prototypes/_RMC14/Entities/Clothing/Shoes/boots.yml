@@ -297,7 +297,7 @@
 #   rad: 75
 
 - type: entity
-  parent: RMCBootsCBRN
+  parent: CMBootsBlackFilled
   id: RMCBootsCBRNNonArmored
   name: M2 MOPP boots
   suffix: Non Armored 
@@ -307,12 +307,6 @@
     sprite: _RMC14/Objects/Clothing/Shoes/Boots/cbrn.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Shoes/Boots/cbrn.rsi
-  - type: CMArmor
-    melee: 0
-    bullet: 0
-    bio: 0
-    explosionArmor: 0
-#   rad: 0
 
 - type: entity
   parent: ClothingShoesBase

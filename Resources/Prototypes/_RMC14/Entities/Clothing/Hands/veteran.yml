@@ -123,13 +123,13 @@
     explosionArmor: 15
 
 - type: entity
-  parent: RMCHandsVeteranCBRN
+  parent: CMHandsBlackMarine
   id: RMCHandsVeteranCBRNNonArmored
   suffix: Non Armored
   name: M2 MOPP gloves
   description: These older-generation M2 MOPP gloves are constructed from treated venlar and offer basic protection against contamination in CBRN environments. While they provide decent dexterity for operating small tools and weapons, they lack the advanced grip enhancements and durability of the newer models. Typically, these gloves remain effective for up to 12 hours of moderate exposure before they must be replaced.
   components:
-  - type: CMArmor
-    melee: 0
-    bullet: 0
-    explosionArmor: 0
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/cbrn.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/cbrn.rsi

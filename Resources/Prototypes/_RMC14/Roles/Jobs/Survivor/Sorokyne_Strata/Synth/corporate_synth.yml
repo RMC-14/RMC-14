@@ -57,7 +57,8 @@
 
 - type: entity
   id: RMCSurvivorPresetSorokyneSynthCorporate
-  name: survivor synth sorokyne corporate preset
+  name: sorokyne corporate synthetic preset
+  suffix: survivor
   categories: [ HideSpawnMenu ]
   components:
   - type: EntityPreset
