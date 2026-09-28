@@ -533,7 +533,7 @@
       visible: false
     - state: autoinjector_tag
       sprite: _RMC14/Objects/Medical/auto_injectors.rsi
-      color: "#00FF07"
+      color: "#E8FF00"
   - type: SolutionContainerManager
     solutions:
       pen:
