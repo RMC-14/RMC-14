@@ -18,6 +18,12 @@
     contents:
     - id: RMCWeaponPistolSU6
     - id: RMCBeltSmartPistolFilled
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-cant-fit
+      whitelist:
+        tags:
+        - RMCSmartPistolHolster
 
 # MK80
 - type: entity
@@ -380,6 +386,12 @@
     items:
       tags:
       - RMCBeltHolsterM13
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-cant-fit
+      whitelist:
+        tags:
+        - RMCBeltHolsterM13
 
 # L14 Custom
 - type: entity
@@ -585,6 +597,12 @@
       - RMCWeaponShotgunXM51
       - RMCMagazineShotgunXM51
       - RMCXM51Holster
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-cant-fit
+      whitelist:
+        tags:
+        - RMCXM51Holster
 
 # MOU53
 - type: entity
@@ -789,6 +807,12 @@
     - id: CMScrewdriver
     - id: RMCPamphletHeavyMachineGunner
     - id: RMCBeltMachineGunner
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-cant-fit
+      whitelist:
+        tags:
+        - RMCMachineGunnerRig
 
 - type: entity
   parent: RMCGunCaseBase
@@ -815,3 +839,9 @@
     - id: RMCMagazineM2C
     - id: RMCMagazineM2C
     - id: RMCBeltMachineGunner
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-cant-fit
+      whitelist:
+        tags:
+        - RMCMachineGunnerRig

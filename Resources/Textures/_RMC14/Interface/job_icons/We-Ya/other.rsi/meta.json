@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "wo_op taken from https://github.com/cmss13-devs/cmss13/blob/e453200c58c7fe247d5fa039da42c3b71c2a4b6e/icons/mob/hud/factions/wy.dmi",
+  "copyright": "wo_op taken from https://github.com/cmss13-devs/cmss13/blob/e453200c58c7fe247d5fa039da42c3b71c2a4b6e/icons/mob/hud/factions/wy.dmi, WEYA admin by SharkSnake98 on GitHub",
   "size": {
     "x": 16,
     "y": 16
@@ -9,6 +9,9 @@
     "states": [
         {
             "name": "wo_op"
+        },
+        {
+            "name": "weya_admin"
         }
     ]
 }

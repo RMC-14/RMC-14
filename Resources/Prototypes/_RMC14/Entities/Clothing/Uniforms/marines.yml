@@ -488,6 +488,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot/urban.rsi
   - type: Foldable
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold
@@ -499,7 +506,14 @@
   description: A flightsuit worn by pilot officers of the UNMC, with plenty of leather straps, pouches, and other essential gear you will never use. Looks badass.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot_alt.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot_alt/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot_alt/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot_alt/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot_alt/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot_alt/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot_alt/urban.rsi
 
 # Dropship Crew Chief
 - type: entity
@@ -576,6 +590,29 @@
     startingAccessories:
     - RMCPatchUNMC
     - RMCPatchFORECON
+
+# Tyrargo
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitMarineTyrargo
+  name: UNMC uniform
+  description: Standard-issue Marine uniform. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/tyrargo_uniform.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchUNMC
+
+- type: entity
+  parent: RMCJumpsuitMarineTyrargo
+  id: RMCJumpsuitMarineTyrargoWebbing
+  suffix: Webbing
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingPouchForecon
 
 # High Command
 

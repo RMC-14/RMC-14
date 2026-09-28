@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/16/2026 11:11:48
+  time: 06/20/2026 00:05:29
   entityCount: 26682
 maps:
 - 1
@@ -44075,25 +44075,6 @@ entities:
     - type: Transform
       pos: 127.5,-42.5
       parent: 1
-- proto: CMLockerHydroResearch
-  entities:
-  - uid: 584
-    components:
-    - type: Transform
-      pos: 99.5,-49.5
-      parent: 1
-  - uid: 585
-    components:
-    - type: Transform
-      pos: 102.5,-49.5
-      parent: 1
-- proto: CMLockerMedicalWhite
-  entities:
-  - uid: 586
-    components:
-    - type: Transform
-      pos: 96.5,-40.5
-      parent: 1
 - proto: CMMachineFrameUnfinished
   entities:
   - uid: 587
@@ -44161,13 +44142,6 @@ entities:
     components:
     - type: Transform
       pos: 94.5,-37.5
-      parent: 1
-- proto: CMPacketPillsKelotane
-  entities:
-  - uid: 597
-    components:
-    - type: Transform
-      pos: 99.5,-49.5
       parent: 1
 - proto: CMPackFlare
   entities:
@@ -56244,6 +56218,25 @@ entities:
     - type: Transform
       pos: 104.5,-116.5
       parent: 1
+- proto: RMCClosetMedicalAnesthetic
+  entities:
+  - uid: 586
+    components:
+    - type: Transform
+      pos: 96.5,-40.5
+      parent: 1
+- proto: RMCClosetMedicalDoctors
+  entities:
+  - uid: 585
+    components:
+    - type: Transform
+      pos: 99.5,-49.5
+      parent: 1
+  - uid: 597
+    components:
+    - type: Transform
+      pos: 102.5,-49.5
+      parent: 1
 - proto: RMCCoagulationArm
   entities:
   - uid: 2753
@@ -67888,6 +67881,13 @@ entities:
     components:
     - type: Transform
       pos: 103.5,-63.5
+      parent: 1
+- proto: RMCPillCanisterKelotaneNoSkill
+  entities:
+  - uid: 584
+    components:
+    - type: Transform
+      pos: 99.5,-49.5
       parent: 1
 - proto: RMCPlankWood1
   entities:

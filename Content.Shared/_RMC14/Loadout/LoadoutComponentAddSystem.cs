@@ -1,3 +1,5 @@
+using Content.Shared._RMC14.Admin;
+using Content.Shared._RMC14.Synth;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Loadout;
@@ -17,6 +19,11 @@ public sealed class LoadoutComponentAddSystem : EntitySystem
         if (!ev.Loadout.ComponentsAdd)
             return;
 
+        var e = ev.Entity;
+
+        if (HasComp<RMCAdminSpawnedComponent>(e))
+            return;
+
         foreach (var entProtoId in ev.Loadout.Equipment.Values)
         {
             if (!_prototype.TryIndex(entProtoId, out var proto))
@@ -25,7 +32,7 @@ public sealed class LoadoutComponentAddSystem : EntitySystem
                 return;
             }
 
-            EntityManager.AddComponents(ev.Entity,  proto);
+            EntityManager.AddComponents(e,  proto);
         }
     }
 }
