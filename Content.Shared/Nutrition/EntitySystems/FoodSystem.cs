@@ -304,7 +304,7 @@ public sealed class FoodSystem : EntitySystem
 
         //RMC14
         if (TryComp<ActorComponent>(args.User, out var actor))
-            args.Repeat = _netConfig.GetClientCVar(actor.PlayerSession.Channel,RMCCVars.RMCRepeatingFoodDoAfter);
+            args.Repeat = !forceFeed && _netConfig.GetClientCVar(actor.PlayerSession.Channel,RMCCVars.RMCRepeatingFoodDoAfter);
         //RMC14
 
         if (TryComp<StackComponent>(entity, out var stack))
