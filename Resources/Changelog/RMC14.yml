@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: TadJohnson00
-  changes:
-  - message: Resprited the M890 to look a little more slick.
-    type: Tweak
-  id: 3170
-  time: '2026-04-29T19:59:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8880
 - author: IceNoobXD
   changes:
   - message: The water in the coagulation pits and at the river ends on Trijent Dam
@@ -4435,5 +4428,13 @@
   id: 3669
   time: '2026-09-28T16:50:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10755
+- author: CatAndHats
+  changes:
+  - message: Changed Vehicle Crewman rankups! VCs progression is now E3, E4, E5 (instead
+      of just E4)
+    type: Tweak
+  id: 3670
+  time: '2026-09-28T21:09:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10642
 Name: RMC14
 Order: -1
