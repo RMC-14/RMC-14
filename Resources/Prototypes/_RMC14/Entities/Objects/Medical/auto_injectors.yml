@@ -131,7 +131,7 @@
 - type: entity
   parent: CMTricordrazineAutoInjector
   id: CMTricordrazineAutoInjectorNoSkill
-  name: EZ first-aid autoinjector
+  name: EZ one-use first-aid autoinjector
   description: An autoinjector loaded with a small dose of medicine for marines to treat themselves with.
   components:
   - type: Sprite
