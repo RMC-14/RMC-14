@@ -76,6 +76,6 @@
     # Security Synth
     # ////////////////////////////////////
     # Army
-    - [ RMCHeadCapSPPBeretArmy, RMCJumpsuitSPPArmy, RMCOuterClothingExternalWebbingBrown, RMCBootsSPPBlackFilled, RMCHandsVeteran, RMCScabbardMacheteFilled, RMCSatchelLightpackBlack, RMCHeadsetDistressSPP, CMBeltUtilityFilled ]
+    - [ RMCHeadCapSPPBeretArmy, RMCJumpsuitSPPArmy, RMCOuterClothingExternalWebbingBrown, RMCBootsSPPBlackFilled, RMCHandsVeteran, RMCScabbardMacheteFilled, RMCSatchelLightpackBlack5Slot, RMCHeadsetDistressSPP, CMBeltUtilityFilled ]
     # PCG
     - [ CMGlassesSecurity, RMCHeadsetSPPPCG, CMHeadCapSPPPeakedPolice, RMCSatchelBlack, RMCCoatPCG, RMCHandsVeteran, RMCBootsSPPBlackFilled, RMCJumpsuitSPPPCG, RMCMaskGasSPP, CMBeltSecuritySPPFilled ]
