@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: TadJohnson00
   changes:
-  - message: Added new ear markings for vulpkanin, felinids, and humans - as well
-      as three new hairstyles.
-    type: Add
-  id: 3169
-  time: '2026-04-29T19:59:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8974
-- author: TadJohnson00
-  changes:
   - message: Resprited the M890 to look a little more slick.
     type: Tweak
   id: 3170
@@ -4436,5 +4428,12 @@
   id: 3668
   time: '2026-09-28T16:37:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10872
+- author: CatAndHats
+  changes:
+  - message: Fixed some water on Kutjevo being toxic when it shouldn't have been
+    type: Fix
+  id: 3669
+  time: '2026-09-28T16:50:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10755
 Name: RMC14
 Order: -1
