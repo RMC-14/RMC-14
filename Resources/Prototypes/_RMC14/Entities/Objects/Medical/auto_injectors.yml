@@ -59,7 +59,7 @@
 # Autoinjector naming:
 # EZ = anyone can use
 # medic = requires med 2, can't use with no skill
-# one-use = for one-use specifically
+# single-dose = single inject
 # tag colors - based on inject amount and nothing else
 # 1u #FFFFFF
 # 5u #DD95FF
@@ -74,7 +74,7 @@
 - type: entity
   parent: CMAutoInjector
   id: CMEmergencyAutoInjector
-  name: EZ one-use emergency autoinjector (HIGH DOSE - CAUTION)
+  name: EZ single-dose emergency autoinjector (HIGH DOSE - CAUTION)
   description: An autoinjector loaded with a special cocktail of chemicals, to be used in life-threatening situations. Doesn't require any training to use.
   components:
   - type: Sprite
@@ -131,7 +131,7 @@
 - type: entity
   parent: CMTricordrazineAutoInjector
   id: CMTricordrazineAutoInjectorNoSkill
-  name: EZ one-use first-aid autoinjector
+  name: EZ single-dose first-aid autoinjector
   description: An autoinjector loaded with a small dose of medicine for marines to treat themselves with.
   components:
   - type: Sprite
@@ -455,7 +455,7 @@
 - type: entity
   parent: RMCMedicAutoInjectorBase
   id: RMCMedicAutoInjectorEZ1
-  name: Custom EZ one-use (1u)
+  name: Custom EZ single-dose autoinjector (1u)
   description: A custom-made EZ autoinjector, likely from research. Injects its entire payload immediately and doesn't require any training.
   components:
   - type: Sprite
@@ -480,7 +480,7 @@
 - type: entity
   parent: RMCMedicAutoInjectorEZ1
   id: RMCMedicAutoInjectorEZ5
-  name: Custom EZ one-use (5u)
+  name: Custom EZ single-dose autoinjector (5u)
   components:
   - type: Sprite
     layers:
@@ -501,7 +501,7 @@
 - type: entity
   parent: RMCMedicAutoInjectorEZ1
   id: RMCMedicAutoInjectorEZ10
-  name: Custom EZ one-use (10u)
+  name: Custom EZ single-dose autoinjector (10u)
   components:
   - type: Sprite
     layers:
@@ -522,7 +522,7 @@
 - type: entity
   parent: RMCMedicAutoInjectorEZ1
   id: RMCMedicAutoInjectorEZ15
-  name: Custom EZ one-use (15u)
+  name: Custom EZ single-dose autoinjector (15u)
   components:
   - type: Sprite
     layers:
@@ -543,7 +543,7 @@
 - type: entity
   parent: RMCMedicAutoInjectorEZ1
   id: RMCMedicAutoInjectorEZ30
-  name: Custom EZ one-use (30u)
+  name: Custom EZ single-dose autoinjector (30u)
   components:
   - type: Sprite
     layers:
@@ -564,7 +564,7 @@
 - type: entity
   parent: RMCMedicAutoInjectorEZ1
   id: RMCMedicAutoInjectorEZ45
-  name: Custom EZ one-use autoinjector (45u)
+  name: Custom EZ single-dose autoinjector (45u)
   components:
   - type: Sprite
     layers:
@@ -585,7 +585,7 @@
 - type: entity
   parent: RMCMedicAutoInjectorEZ1
   id: RMCMedicAutoInjectorEZ60
-  name: Custom EZ one-use autoinjector (60u)
+  name: Custom EZ single-dose autoinjector (60u)
   components:
   - type: Sprite
     layers:
