@@ -56,10 +56,25 @@
     solution: pen
     reagents: {}
 
+# Autoinjector naming:
+# EZ = anyone can use
+# medic = requires med 2, can't use with no skill
+# one-use = for one-use specifically
+# tag colors - based on inject amount and nothing else
+# 1u #FFFFFF
+# 5u #DD95FF
+# 10u #1EF6FF
+# 15u #21A0FF
+# 20u #171DFF
+# 25u #00FF07 - unused but just in case
+# 30u #E8FF00
+# 45u #00FF07
+# 60u #FF0000
+
 - type: entity
   parent: CMAutoInjector
   id: CMEmergencyAutoInjector
-  name: emergency autoinjector (CAUTION)
+  name: EZ one-use emergency autoinjector (HIGH DOSE - CAUTION)
   description: An autoinjector loaded with a special cocktail of chemicals, to be used in life-threatening situations. Doesn't require any training to use.
   components:
   - type: Sprite
@@ -116,7 +131,7 @@
 - type: entity
   parent: CMTricordrazineAutoInjector
   id: CMTricordrazineAutoInjectorNoSkill
-  name: first-aid autoinjector
+  name: EZ first-aid autoinjector
   description: An autoinjector loaded with a small dose of medicine for marines to treat themselves with.
   components:
   - type: Sprite
@@ -306,11 +321,13 @@
   - type: IconLabel
     labelTextLocId: rmc-dermaline-container-label-text
 
+# Canister Pouch autoinjectors
+
 - type: entity
   parent: RMCMedicAutoInjectorBase
   id: RMCMedicAutoInjector15
-  name: medic autoinjector (M-XL)
-  description: A custom-made professional injector, likely from research. Has a similar lock to pill bottles, and fits up to 6 injections.
+  name: reagent canister pouch medic autoinjector (15u)
+  description: An autoinjector designed to fit inside and refill from reagent canister pouches. Has a similar lock to pill bottles, and fits up to 6 injections.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Medical/medic_auto_injector.rsi
@@ -320,7 +337,7 @@
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
     - state: autoinjector_tag
-      color: "#FF9F00"
+      color: "#21A0FF"
   - type: SolutionContainerManager
     solutions:
       pen:
@@ -335,8 +352,8 @@
 
 - type: entity
   parent: RMCMedicAutoInjector15
-  id: RMCMedicAutoInjector30
-  name: medic autoinjector (M-XXL)
+  id: RMCMedicAutoInjector5
+  name: reagent canister pouch medic autoinjector (5u)
   components:
   - type: Sprite
     layers:
@@ -345,7 +362,67 @@
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
     - state: autoinjector_tag
-      color: "#FF0000"
+      color: "#DD95FF"
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 30
+  - type: Hypospray
+    transferAmount: 5
+
+- type: entity
+  parent: RMCMedicAutoInjector15
+  id: RMCMedicAutoInjector10
+  name: reagent canister pouch medic autoinjector (10u)
+  components:
+  - type: Sprite
+    layers:
+    - state: autoinjector
+    - state: autoinjector1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+    - state: autoinjector_tag
+      color: "#1EF6FF"
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 60
+  - type: Hypospray
+    transferAmount: 10
+
+- type: entity
+  parent: RMCMedicAutoInjector15
+  id: RMCMedicAutoInjector20
+  name: reagent canister pouch medic autoinjector (20u)
+  components:
+  - type: Sprite
+    layers:
+    - state: autoinjector
+    - state: autoinjector1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+    - state: autoinjector_tag
+      color: "#171DFF"
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 120
+  - type: Hypospray
+    transferAmount: 20
+
+- type: entity
+  parent: RMCMedicAutoInjector15
+  id: RMCMedicAutoInjector30
+  name: reagent canister pouch medic autoinjector (30u)
+  components:
+  - type: Sprite
+    layers:
+    - state: autoinjector
+    - state: autoinjector1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+    - state: autoinjector_tag
+      color: "#E8FF00"
   - type: SolutionContainerManager
     solutions:
       pen:
@@ -353,10 +430,12 @@
   - type: Hypospray
     transferAmount: 30
 
+# Research EZ
+
 - type: entity
   parent: RMCMedicAutoInjectorBase
   id: RMCMedicAutoInjectorEZ1
-  name: autoinjector (E-U)
+  name: Custom EZ one-use (1u)
   description: A custom-made EZ autoinjector, likely from research. Injects its entire payload immediately and doesn't require any training.
   components:
   - type: Sprite
@@ -381,7 +460,7 @@
 - type: entity
   parent: RMCMedicAutoInjectorEZ1
   id: RMCMedicAutoInjectorEZ5
-  name: autoinjector (E-T)
+  name: Custom EZ one-use (5u)
   components:
   - type: Sprite
     layers:
@@ -402,7 +481,7 @@
 - type: entity
   parent: RMCMedicAutoInjectorEZ1
   id: RMCMedicAutoInjectorEZ10
-  name: autoinjector (E-XXS)
+  name: Custom EZ one-use (10u)
   components:
   - type: Sprite
     layers:
@@ -423,7 +502,7 @@
 - type: entity
   parent: RMCMedicAutoInjectorEZ1
   id: RMCMedicAutoInjectorEZ15
-  name: autoinjector (E-XS)
+  name: Custom EZ one-use (15u)
   components:
   - type: Sprite
     layers:
@@ -444,7 +523,7 @@
 - type: entity
   parent: RMCMedicAutoInjectorEZ1
   id: RMCMedicAutoInjectorEZ30
-  name: autoinjector (E-S)
+  name: Custom EZ one-use (30u)
   components:
   - type: Sprite
     layers:
@@ -454,7 +533,7 @@
       visible: false
     - state: autoinjector_tag
       sprite: _RMC14/Objects/Medical/auto_injectors.rsi
-      color: "#171DFF"
+      color: "#00FF07"
   - type: SolutionContainerManager
     solutions:
       pen:
@@ -465,7 +544,7 @@
 - type: entity
   parent: RMCMedicAutoInjectorEZ1
   id: RMCMedicAutoInjectorEZ45
-  name: autoinjector (E-M)
+  name: Custom EZ one-use autoinjector (45u)
   components:
   - type: Sprite
     layers:
@@ -486,7 +565,7 @@
 - type: entity
   parent: RMCMedicAutoInjectorEZ1
   id: RMCMedicAutoInjectorEZ60
-  name: autoinjector (E-L)
+  name: Custom EZ one-use autoinjector (60u)
   components:
   - type: Sprite
     layers:
@@ -496,13 +575,15 @@
       visible: false
     - state: autoinjector_tag
       sprite: _RMC14/Objects/Medical/auto_injectors.rsi
-      color: "#E8FF00"
+      color: "#FF0000"
   - type: SolutionContainerManager
     solutions:
       pen:
         maxVol: 60
   - type: Hypospray
     transferAmount: 60
+
+# Pouch injectors
 
 - type: entity
   parent: RMCMedicAutoInjector15
@@ -603,11 +684,34 @@
   - type: SolutionStorageFillable
     solution: pen
 
+# Normal customs
+
 - type: entity
   parent: RMCMedicAutoInjectorBase
   id: RMCMedicAutoInjectorCS5
-  name: autoinjector (C-XS)
+  name: custom autoinjector (5u)
   description: A custom-made autoinjector, likely from research.
+  components:
+  - type: Sprite
+    layers:
+    - state: empty_research
+    - state: autoinjector1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+    - state: autoinjector_tag
+      color: "#DD95FF"
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 15
+  - type: Hypospray
+    transferAmount: 5
+  - type: MedicallyUnskilledDoAfter
+
+- type: entity
+  parent: RMCMedicAutoInjectorCS5
+  id: RMCMedicAutoInjectorCS15
+  name: custom autoinjector (15u)
   components:
   - type: Sprite
     layers:
@@ -620,27 +724,6 @@
   - type: SolutionContainerManager
     solutions:
       pen:
-        maxVol: 15
-  - type: Hypospray
-    transferAmount: 5
-  - type: MedicallyUnskilledDoAfter
-
-- type: entity
-  parent: RMCMedicAutoInjectorCS5
-  id: RMCMedicAutoInjectorCS15
-  name: autoinjector (C-M)
-  components:
-  - type: Sprite
-    layers:
-    - state: empty_research
-    - state: autoinjector1
-      map: ["enum.SolutionContainerLayers.Fill"]
-      visible: false
-    - state: autoinjector_tag
-      color: "#00FF07"
-  - type: SolutionContainerManager
-    solutions:
-      pen:
         maxVol: 45
   - type: Hypospray
     transferAmount: 15
@@ -648,7 +731,7 @@
 - type: entity
   parent: RMCMedicAutoInjectorCS5
   id: RMCMedicAutoInjectorCS30
-  name: autoinjector (C-XL)
+  name: custom autoinjector (30u)
   components:
   - type: Sprite
     layers:
@@ -657,7 +740,7 @@
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
     - state: autoinjector_tag
-      color: "#FF9F00"
+      color: "#E8FF00"
   - type: SolutionContainerManager
     solutions:
       pen:
@@ -668,7 +751,7 @@
 - type: entity
   parent: RMCMedicAutoInjectorCS5
   id: RMCMedicAutoInjectorCS60
-  name: autoinjector (C-XXL)
+  name: custom autoinjector (60u)
   components:
   - type: Sprite
     layers:

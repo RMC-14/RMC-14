@@ -137,7 +137,10 @@
   - RMCMedicAutoInjectorEZ30
   - RMCMedicAutoInjectorEZ45
   - RMCMedicAutoInjectorEZ60
+  # - RMCMedicAutoInjector5 TODO RMC14 when added in parity
+  # - RMCMedicAutoInjector10 TODO RMC14 when added in parity
   - RMCMedicAutoInjector15
+  # - RMCMedicAutoInjector20 TODO RMC14 when added in parity
   - RMCMedicAutoInjector30
   - CMHypospray
   - CMBloodPack
