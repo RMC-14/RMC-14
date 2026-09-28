@@ -50,7 +50,7 @@ namespace Content.Shared.Nutrition.Components
 
         // RMC14
         /// <summary>
-        /// Only reagents in the whitelist will be injected into the bloodstream, otherwise they get deleted upon being smoked
+        /// Only reagents in the whitelist will be injected into the bloodstream, otherwise they get deleted upon being smoked. Null injects everything, empty list - nothing.
         /// </summary>
         [DataField]
         public List<ProtoId<ReagentPrototype>>? ReagentInjectWhitelist = new List<ProtoId<ReagentPrototype>>() { "Nicotine" };
