@@ -75,7 +75,9 @@ public sealed partial class XenoSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThresholds = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private readonly INetConfigurationManager _netConfig = default!;
     [Dependency] private readonly SharedNightVisionSystem _nightVision = default!;
+    [Dependency] private readonly XenoRestSystem _rest = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
@@ -143,6 +145,7 @@ public sealed partial class XenoSystem : EntitySystem
             after: [typeof(TackleSystem)]);
         SubscribeLocalEvent<XenoComponent, DisarmedEvent>(OnDisarmed, before: new[] { typeof(SharedHandsSystem) });
         SubscribeLocalEvent<XenoComponent, BeingGibbedEvent>(OnBeingGibbed);
+        SubscribeLocalEvent<XenoComponent, PlayerDetachedEvent>(OnXenoPlayerDetached);
 
         SubscribeLocalEvent<XenoRegenComponent, MapInitEvent>(OnXenoRegenMapInit, before: [typeof(SharedXenoPheromonesSystem)]);
         SubscribeLocalEvent<XenoRegenComponent, DamageStateCritBeforeDamageEvent>(OnXenoRegenBeforeCritDamage, before: [typeof(SharedXenoPheromonesSystem)]);
@@ -379,6 +382,14 @@ public sealed partial class XenoSystem : EntitySystem
         args.Handled = true;
     }
 
+    private void OnXenoPlayerDetached(Entity<XenoComponent> ent, ref PlayerDetachedEvent args)
+    {
+        if (TerminatingOrDeleted(ent) || _rest.IsResting(ent.Owner))
+            return;
+
+        _rest.TryRestAction(ent.AsNullable(), true, true);
+    }
+
     private void OnXenoRegenMapInit(Entity<XenoRegenComponent> ent, ref MapInitEvent args)
     {
         ent.Comp.NextRegenTime = _timing.CurTime + ent.Comp.RegenCooldown;
@@ -543,6 +554,13 @@ public sealed partial class XenoSystem : EntitySystem
     public bool CanTackleOtherXeno(EntityUid sourceXeno, EntityUid targetXeno, out TimeSpan time)
     {
         time = TimeSpan.Zero;
+
+        if (CompOrNull<ActorComponent>(sourceXeno)?.PlayerSession is not { } session ||
+            !_netConfig.GetClientCVar(session.Channel, RMCCVars.RMCHiveLeaderTackleXenos))
+        {
+            return false;
+        }
+
         if (!_hive.FromSameHive(targetXeno, sourceXeno))
             return false;
 

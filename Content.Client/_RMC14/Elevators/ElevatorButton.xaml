@@ -1,0 +1,10 @@
+<cc:ElevatorButton
+    xmlns="https://spacestation14.io"
+    xmlns:cc="clr-namespace:Content.Client._RMC14.Elevators"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    Margin="5"
+    HorizontalExpand="True"
+    Align="Center">
+    <Button Name="DestinationButton" Access="Public" StyleClasses="ButtonColorGreen" Margin="2" MinSize="40 40"/>
+    <RichTextLabel Name="DestinationLabel" Access="Public" Text="[font size=14][bold]Placeholder[/bold][/font]"/>
+</cc:ElevatorButton>

@@ -1,0 +1,99 @@
+- type: job
+  parent: CMSurvivorFiorinaRiotOfficer
+  id: RMCSurvivorFiorinaRiotInProgressCMBOfficer
+  name: cm-job-name-survivor-riot-officer
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorSecurity
+  startingGear: RMCGearSurvivorFiorinaRiotInProgressCMBOfficer
+  accessGroups:
+  - ColonistSec
+  ranks:
+    RMCRankCMBCorporal:
+      - !type:RoleTimeRequirement
+        role: CMJobSurvivorSecurity
+        time: 630000 # 175 hours
+    RMCRankCMBSeniorDeputy:
+      - !type:RoleTimeRequirement
+        role: CMJobSurvivorSecurity
+        time: 90000 # 25 hours
+    RMCRankCMBDeputy: []
+  icon: "RMCJobIconBureauRCO"
+  spawnMenuRoleName: CMB Riot Control Officer (Fiorina Special Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      understoodLanguages:
+      - Japanese
+      - English
+      currentLanguage: English
+      defaultLanguage: English
+    - type: Skills
+      preset: RMCSkillPresetSurvivorMarshal
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Bureau
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetRiotInProgressCMB
+    - type: JobPrefix
+      prefix: cm-job-prefix-survivor-riot-officer
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: mp
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_cmb
+  greeting: rmc-job-greeting-riot-in-progress-CMB
+
+- type: startingGear
+  id: RMCGearSurvivorFiorinaRiotInProgressCMBOfficer
+  equipment:
+    id: RMCIDCardCMBDeputySurvivor
+    back: CMSatchelSecuritySurvivorFill
+    outerClothing: RMCArmorPMCRiotCMB
+    ears: RMCHeadsetDistressBureauDamaged
+    eyes: RMCGlassesSecurityBlue
+    gloves: RMCHandsVeteran
+    shoes: RMCBootsPMCFilled
+    pocket1: RMCPouchSurvivalBlackFilled
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBOfficer
+  name: cmb officer spawn point
+  suffix: special survivor, fiorina riot
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorFiorinaRiotInProgressCMBOfficer
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: entity
+  id: RMCSurvivorPresetRiotInProgressCMB
+  name: riot in progress standard preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    primaryWeapons:
+    - [ RMCSwatCMBUniformB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, RMCArmorHelmetM10CMBVisorSWAT ]
+    - [ RMCSwatCMBUniformB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, RMCArmorHelmetM10CMBVisorSWAT ]
+    - [ RMCSwatCMBUniformB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, RMCArmorHelmetM10CMBVisorSWAT ]
+    - [ RMCSwatCMBUniformB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, RMCArmorHelmetM10CMBVisorSWAT ]
+    - [ RMCSwatCMBUniformB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, RMCArmorHelmetM10CMBVisorSWAT ]
+    - [ RMCSwatCMBUniformB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, RMCArmorHelmetM10CMBVisorSWAT ]
+    - [ RMCSwatCMBUniformMK45, RMCPouchShotgunFilledBeanbag, RMCWeaponShotgunM890Riot, RMCHeadCapBureau ]
+    - [ RMCSwatCMBUniformM1984, RMCPouchExplosiveFilledHIRR, RMCWeaponLauncherM85A1, CMHeadBeretCMB ]
+    - [ RMCSwatCMBUniformMK45, RMCPouchMagazineFilledMP5, WeaponSMGMP5, RMCMotionDetectorCompact, RMCExplosiveBreachingCharge, RMCArmorHelmetM10CMBVisorSWAT ]
+    - [ RMCSwatCMBUniformMK45, RMCPouchMagazineFilledMP5, WeaponSMGMP5, RMCMotionDetectorCompact, RMCExplosiveBreachingCharge, RMCArmorHelmetM10CMBVisorSWAT ]
+    primaryWeaponChance: 1

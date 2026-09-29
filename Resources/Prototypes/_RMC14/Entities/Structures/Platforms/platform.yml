@@ -27,6 +27,7 @@
     anchored: true
   - type: Sprite
     sprite: _RMC14/Structures/platforms.rsi
+    drawdepth: HighFloorObjects
   - type: InteractionOutline
   - type: Clickable
 
@@ -144,6 +145,7 @@
     - Wall
   components:
   - type: Physics
+    canCollide: false
   - type: Damageable
     damageContainer: Inorganic
   - type: Destructible

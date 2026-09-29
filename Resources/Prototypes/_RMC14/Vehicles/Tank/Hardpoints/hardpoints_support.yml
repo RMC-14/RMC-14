@@ -19,6 +19,7 @@
     fireRateMultiplier: 1.15
   - type: HardpointVisual
     vehicleState: warray_0
+    damagedVehicleState: warray_1
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -40,6 +41,7 @@
     speedMultiplier: 1.2
   - type: HardpointVisual
     vehicleState: odrive_enhancer_0
+    damagedVehicleState: odrive_enhancer_1
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -65,7 +67,6 @@
     pixelOffsetWest: "10,0"
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
-  - type: GunIgnorePrediction
   - type: Gun
     fireRate: 0.6
     projectileSpeed: 18
@@ -87,7 +88,7 @@
   - type: GunFireArc
     arc: 360
   - type: RefillableByBulletBox
-    bulletType: VehicleAmmoBoxGrenadeLauncher
+    bulletType: VehicleAmmoBoxSmokeLauncher
   - type: GunMuzzleOffset
     offset: "0,0"
     useDirectionalOffsets: true
@@ -122,7 +123,6 @@
     pixelOffsetWest: "10,0"
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
-  - type: GunIgnorePrediction
   - type: Gun
     fireRate: 0.5
     projectileSpeed: 20
@@ -180,4 +180,5 @@
     cursorPvsIncrease: 0.5
   - type: HardpointVisual
     vehicleState: artillerymod_0
+    damagedVehicleState: artillerymod_1
 

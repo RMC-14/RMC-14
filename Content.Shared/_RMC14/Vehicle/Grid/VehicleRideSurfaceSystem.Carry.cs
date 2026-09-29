@@ -217,7 +217,8 @@ public sealed partial class VehicleRideSurfaceSystem
         VehicleRideSurfaceComponent surface,
         EntityUid rider,
         MapId mapId,
-        out TransformComponent riderXform)
+        out TransformComponent riderXform,
+        bool requireSameMap = true)
     {
         riderXform = default!;
 
@@ -235,7 +236,8 @@ public sealed partial class VehicleRideSurfaceSystem
 
         riderXform = _transformQuery.Comp(rider);
 
-        if (riderXform.MapID != mapId || riderXform.Anchored)
+        if (requireSameMap && riderXform.MapID != mapId ||
+            riderXform.Anchored)
             return false;
 
         if (!surface.CarryBuckled &&

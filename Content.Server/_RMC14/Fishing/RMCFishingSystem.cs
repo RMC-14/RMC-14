@@ -12,6 +12,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Kitchen.Components;
 using Content.Shared.Popups;
+using Content.Shared.Sprite;
 using Content.Shared.Storage;
 using Content.Shared.Throwing;
 using Content.Shared.Verbs;

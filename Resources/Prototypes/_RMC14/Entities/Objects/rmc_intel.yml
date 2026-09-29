@@ -198,6 +198,9 @@
     blacklist:
       components:
       - Xeno
+  - type: AccessReader
+    access: [ [ "RMCAccessCommand" ] ]
+  - type: ActivatableUIRequiresAccess
 
 - type: entity
   parent: RMCCommunicationsConsoleBase
@@ -249,8 +252,11 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
-    state: medlaptop
-    layers: []
+    layers:
+    - map: ["base"]
+      state: "medlaptop0"
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "medlaptop"
   - type: InteractionOutline
   - type: ApcPowerReceiver
     powerLoad: 250
@@ -445,7 +451,6 @@
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: nuke
-  - type: VehicleSupplyTech
 - type: Tag
   id: RMCIntelItem
 

@@ -91,6 +91,17 @@
 
 - type: entity
   parent: CMBed
+  id: RMCBedBunkBase
+  abstract: true
+  components:
+  - type: Transform
+    anchored: true
+    noRot: false
+  - type: Physics
+    bodyType: Static
+
+- type: entity
+  parent: RMCBedBunkBase
   id: RMCBedBunk
   name: black bunk-bed
   components:
@@ -100,7 +111,7 @@
   - type: Construction
 
 - type: entity
-  parent: CMBed
+  parent: RMCBedBunkBase
   id: RMCBedBunkBlue
   name: blue bunk-bed
   components:
@@ -110,7 +121,7 @@
   - type: Construction
 
 - type: entity
-  parent: CMBed
+  parent: RMCBedBunkBase
   id: RMCBedBunkGreen
   name: green bunk-bed
   components:
@@ -128,7 +139,7 @@
     anchored: false
 
 - type: entity
-  parent: CMBed
+  parent: RMCBedBunkBase
   id: RMCBedBunkRed
   name: red bunk-bed
   components:
@@ -137,6 +148,26 @@
     state: bunk_red
   - type: Construction
 
+- type: entity
+  parent: RMCBedBunkBase
+  id: RMCBedBunkNoSheets
+  name: bunk-bed
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/bed.rsi
+    state: prisonbed
+  - type: Construction
+
+- type: entity
+  parent: RMCBedBunkBase
+  id: RMCBedBunkBrown
+  name: brown bunk-bed
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/bed.rsi
+    state: bunk_brown
+  - type: Construction
+  
 # Bedroll
 
 - type: entity

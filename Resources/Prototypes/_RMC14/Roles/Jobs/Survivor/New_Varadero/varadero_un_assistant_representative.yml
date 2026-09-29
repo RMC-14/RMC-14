@@ -1,0 +1,82 @@
+- type: job
+  parent: CMSurvivorCorporate
+  id: RMCSurvivorNewVaraderoUNRepresentative
+  name: rmc-job-name-survivor-varadero-un-asst-rep
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivor
+  startingGear: RMCGearSurvivorUNRepresentative
+  spawnMenuRoleName: UN Assistant Representative (NV Survivor)
+  greeting: rmc-job-greeting-varadero
+  ranks:
+    RMCRankCivilianRepresentative: []
+  hasIcon: false
+  accessGroups:
+  - Colony
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetSurvivor
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetUNRepresentative
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: recruiter
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_unmc
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: JobPrefix
+      prefix: rmc-job-prefix-survivor-varadero-un-asst-rep
+    - type: Language
+      spokenLanguages:
+      - Spanish
+      - English
+      understoodLanguages:
+      - Spanish
+      - English
+      currentLanguage: English
+      defaultLanguage: English
+  useLoadoutOfJob: CMSurvivorCorporate # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorBase
+  id: RMCGearSurvivorUNRepresentative
+  equipment:
+    jumpsuit: CMJumpsuitLiaisonBlack
+    back: CMSatchelLiaisonSecure
+    id: RMCIDCardColonistScientist
+    outerClothing: RMCJacketCorporateBlue
+    shoes: CMBootsBlack
+    gloves: RMCHandsVeteran
+    ears: RMCHeadsetDistressBureauDamaged
+  storage:
+    back:
+    - CMSheetMetal20
+    - CMClipboard
+    - CMPenClicky
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorUNRepresentative
+  name: survivor un assistant representative spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: entity
+  parent: RMCGearSurvivorPresetUNMC
+  id: RMCGearSurvivorPresetUNRepresentative
+  name: un assistant representative colonist preset # TODO RMC14: research notes
+  categories: [ HideSpawnMenu ]

@@ -9,18 +9,15 @@ rmc-hardpoint-remove-verb = Remove {$slot}
 rmc-hardpoint-repaired = Hardpoint repaired.
 rmc-hardpoint-intact = Hardpoint is already intact.
 rmc-hardpoint-integrity-examine = Integrity: [color={$color}]{$current}/{$max} ({$percent}%)[/color]
+rmc-hardpoint-ammo-type-examine = Ammo type: {$type}
 rmc-hardpoint-armor-modifiers-examine = Damage modifiers: acid {$acid}, slash {$slash}, bullet {$bullet}, explosive {$explosive}, blunt {$blunt}
-rmc-hardpoint-condition-pristine = It is in pristine condition.
-rmc-hardpoint-condition-good = It is in good condition.
-rmc-hardpoint-condition-worn = It is showing wear.
-rmc-hardpoint-condition-bad = It is in bad condition.
-rmc-hardpoint-condition-critical = It is barely holding together.
 rmc-hardpoint-ui-title = Hardpoints
 rmc-hardpoint-ui-empty-slot = Empty
 rmc-hardpoint-ui-integrity = {$current}/{$max} ({$percent}%)
 rmc-hardpoint-ui-no-integrity = No integrity data
 rmc-hardpoint-ui-remove = Remove
 rmc-hardpoint-ui-removing = Removing...
+rmc-hardpoint-disintegrates = {CAPITALIZE(THE($item))} disintegrates into a useless pile of scrap under the damage it suffered.
 rmc-vehicle-ammo-loader-no-vehicle = The loader isn't connected to a vehicle.
 rmc-vehicle-ammo-loader-no-hardpoint = No compatible hardpoint is installed.
 rmc-vehicle-ammo-loader-wrong-ammo = That ammo doesn't fit this loader.
@@ -92,6 +89,7 @@ rmc-vehicle-deploy-action-desc-undeploying = Retraction in progress.
 rmc-vehicle-enter-locked = The vehicle is locked.
 rmc-vehicle-enter-use-doorway = You need to use a doorway to enter.
 rmc-vehicle-enter-busy = Someone is already entering there.
+rmc-vehicle-enter-no-power-loader = The power loader doesn't fit through the vehicle door.
 rmc-vehicle-enter-xeno-full = There's no room for more xenos inside.
 rmc-vehicle-enter-passenger-full = There's no room for more passengers inside.
 rmc-vehicle-enter-pulled-full = There's no room for who you're dragging inside.
@@ -102,6 +100,7 @@ rmc-vehicle-look-inside = Look inside
 rmc-vehicle-lock-not-driver = You need to be in the driver seat to lock or unlock the vehicle.
 rmc-vehicle-lock-broken = The vehicle lock is broken.
 rmc-vehicle-lock-broken-attempt = The vehicle cannot be locked until the broken lock is repaired.
+rmc-vehicle-lock-frame-destroyed = The vehicle cannot be locked while its frame is destroyed.
 rmc-vehicle-lock-set-locked = Vehicle doors locked.
 rmc-vehicle-lock-set-unlocked = Vehicle doors unlocked.
 rmc-vehicle-lock-broken-success = You break the vehicle lock.
@@ -120,3 +119,9 @@ rmc-vehicle-key-examine-blank = [color=lightblue]This blank key can be imprinted
 rmc-vehicle-key-examine-duplicator = [color=lightblue]This blank key can copy an existing vehicle key by using it on that key.[/color]
 rmc-vehicle-key-examine-bound = [color=lightblue]This key is bound to a vehicle lock.[/color]
 rmc-hardpoint-remove-blocked = That hardpoint is fixed in place.
+rmc-vehicle-demolition-frame-intact = The vehicle frame is too intact to rig with charges. Destroy it first.
+rmc-vehicle-demolition-busy = Someone is already rigging this wreck.
+rmc-vehicle-demolition-start = You start rigging the wreck with explosives...
+rmc-vehicle-demolition-no-skill = You do not know how to rig demolition charges.
+rmc-vehicle-too-small-to-damage = We're too small to do any significant damage to this vehicle!
+rmc-vehicle-demolition-armed = The charge is planted and is counting down!

@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.PlayingCards;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.PlayingCards;
 
@@ -43,6 +44,43 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
         Audio.PlayPvs(deck.Comp.DrawSound, deck);
     }
 
+    protected override void DrawMultiple(Entity<PlayingCardDeckComponent> deck, EntityUid user, int count)
+    {
+        if (deck.Comp.CardOrder.Count == 0)
+        {
+            Popup.PopupEntity(Loc.GetString("rmc-playing-card-deck-empty"), deck, user);
+            return;
+        }
+
+        var actualCount = Math.Min(count, deck.Comp.CardOrder.Count);
+        if (actualCount <= 0)
+            return;
+
+        var hand = Spawn(CardHandProto, _transform.GetMapCoordinates(deck));
+        if (!TryComp<PlayingCardHandComponent>(hand, out var handComp))
+        {
+            QueueDel(hand);
+            return;
+        }
+
+        for (var i = 0; i < actualCount; i++)
+        {
+            var cardIndex = deck.Comp.CardOrder.Count - 1;
+            handComp.Cards.Add(deck.Comp.CardOrder[cardIndex]);
+            deck.Comp.CardOrder.RemoveAt(cardIndex);
+        }
+
+        handComp.FaceUp = false;
+        Dirty(deck);
+        Dirty(hand, handComp);
+
+        Hands.TryPickupAnyHand(user, hand);
+        UpdateHandName((hand, handComp));
+
+        Popup.PopupEntity(Loc.GetString("rmc-playing-card-draw-multiple", ("count", actualCount)), deck, user);
+        Audio.PlayPvs(deck.Comp.DrawSound, deck);
+    }
+
     protected override void CombineCards(Entity<PlayingCardComponent> card1, Entity<PlayingCardComponent> card2, EntityUid user)
     {
         Hands.IsHolding(user, card2, out var handId);
@@ -69,7 +107,9 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
     }
 
     protected override void DrawFromHand(Entity<PlayingCardHandComponent> hand, EntityUid user)
-        => DrawSpecificCard(hand, user, hand.Comp.Cards.Count - 1);
+    {
+        DrawSpecificCard(hand, user, hand.Comp.Cards.Count - 1);
+    }
 
     protected override void DrawSpecificCard(Entity<PlayingCardHandComponent> hand, EntityUid user, int index)
     {
@@ -90,7 +130,11 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
         Hands.TryPickupAnyHand(user, card);
 
         if (hand.Comp.FaceUp)
-            Popup.PopupEntity(Loc.GetString("rmc-playing-card-draw", ("rank", GetRankDisplayName(rank)), ("suit", GetSuitDisplayName(suit))), hand, user);
+        {
+            var rankName = FormattedMessage.RemoveMarkupPermissive(GetRankDisplayName(rank));
+            var suitName = FormattedMessage.RemoveMarkupPermissive(GetSuitDisplayName(suit));
+            Popup.PopupEntity(Loc.GetString("rmc-playing-card-draw", ("rank", rankName), ("suit", suitName)), hand, user);
+        }
         else
             Popup.PopupEntity(Loc.GetString("rmc-playing-card-draw-hidden"), hand, user);
 

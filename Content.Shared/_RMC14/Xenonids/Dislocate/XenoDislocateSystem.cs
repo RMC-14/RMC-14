@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
@@ -29,6 +30,7 @@ public sealed class XenoDislocateSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
+    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
@@ -82,6 +84,7 @@ public sealed class XenoDislocateSystem : EntitySystem
                 _rmcMelee.DoLunge(xeno, targetId);
                 _obstacleSlamming.MakeImmune(targetId);
                 _sizeStun.KnockBack(targetId, origin, xeno.Comp.FlingRange, xeno.Comp.FlingRange, 10);
+                _rmcDamageable.DoLethalDamage(targetId, origin: xeno);
 
                 SpawnAttachedTo(xeno.Comp.Effect, targetId.ToCoordinates());
             }

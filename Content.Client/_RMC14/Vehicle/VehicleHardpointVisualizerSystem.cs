@@ -13,7 +13,7 @@ public sealed class VehicleHardpointVisualizerSystem : VisualizerSystem<VehicleH
         if (sprite == null)
             return;
 
-        if (!AppearanceSystem.TryGetData(uid, VehicleHardpointVisualsVisuals.Layers, out List<VehicleHardpointLayerState>? layers, args.Component) ||
+        if (!AppearanceSystem.TryGetData(uid, VehicleHardpointVisualsVisuals.Layers, out List<VehicleHardpointLayerState>? layers) ||
             layers == null)
         {
             return;

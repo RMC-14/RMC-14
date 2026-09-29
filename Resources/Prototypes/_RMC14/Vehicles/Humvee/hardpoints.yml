@@ -50,6 +50,7 @@
     useDirectionalOffsets: true
     overlayRsi: _RMC14/Structures/Vehicles/humvee.rsi
     overlayState: humveeturret_0
+    overlayDamagedState: humveeturret_1
     pixelOffsetNorth: "0,4"
     pixelOffsetEast: "-6,16"
     pixelOffsetSouth: "0,15"
@@ -141,7 +142,8 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/humvee.rsi
     overlayState: humveecannon_0
-    fireWhileRotatingGraceDegrees: 20
+    overlayDamagedState: humveecannon_1
+    fireWhileRotatingGraceDegrees: 180
     useBarrelDirectionForShots: true
     maxShotCurvatureDegrees: 10
   - type: GunUseGunOrigin
@@ -180,6 +182,7 @@
     useContainerOwner: false
   - type: HardpointVisual
     vehicleState: humveecannon_0
+    damagedVehicleState: humveecannon_1
 
 - type: entity
   parent: VehicleHumveeCannon
@@ -213,14 +216,17 @@
     maxIntegrity: 100
   - type: VehicleTurretAttachment
   - type: VehicleTurret
+    fireWhileRotatingGraceDegrees: 180
+    useBarrelDirectionForShots: true
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/humvee.rsi
     overlayState: humveelauncher_0
+    overlayDamagedState: humveelauncher_1
   - type: HardpointVisual
     vehicleState: humveelauncher_0
+    damagedVehicleState: humveelauncher_1
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
-  - type: GunIgnorePrediction
   - type: Gun
     fireRate: 0.7
     projectileSpeed: 18
@@ -245,7 +251,7 @@
   - type: GunFireArc
     arc: 120
   - type: RefillableByBulletBox
-    bulletType: VehicleAmmoBoxGrenadeLauncher
+    bulletType: VehicleAmmoBoxSmokeLauncher
 
 - type: entity
   parent: VehicleHumveeHardpointBase
@@ -265,6 +271,7 @@
     maxIntegrity: 100
   - type: HardpointVisual
     vehicleState: snowplow_0
+    damagedVehicleState: snowplow_1
 
 - type: entity
   parent: VehicleHumveeHardpointBase
@@ -286,6 +293,7 @@
     radiusMultiplier: 2.0
   - type: HardpointVisual
     vehicleState: overlight_0
+    damagedVehicleState: overlight_1
 
 - type: entity
   parent: VehicleHumveeHardpointBase

@@ -103,6 +103,7 @@
       time: 20 # seconds
       dps: 18
       expendableLightDps: 35
+      vehicleDamage: 50
 
 - type: entity
   id: ActionXenoRegurgitate
@@ -487,6 +488,7 @@
     useDelay: 8
   - type: TargetAction
     range: 15
+    checkCanAccess: false
   - type: WorldTargetAction
     event: !type:XenoSprayAcidActionEvent
   - type: ActionBlockIfResting
@@ -613,6 +615,7 @@
     useDelay: 12
   - type: TargetAction
     range: 15
+    checkCanAccess: false
   - type: EntityTargetAction
   - type: WorldTargetAction
     event: !type:XenoBoneChipsActionEvent
