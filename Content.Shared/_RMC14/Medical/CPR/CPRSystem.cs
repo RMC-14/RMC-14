@@ -64,7 +64,6 @@ public sealed class CPRSystem : EntitySystem
         SubscribeLocalEvent<ReceivingCPRComponent, ReceiveCPRAttemptEvent>(OnReceivingCPRAttempt);
         SubscribeLocalEvent<CPRReceivedComponent, ReceiveCPRAttemptEvent>(OnReceivedCPRAttempt);
         SubscribeLocalEvent<MobStateComponent, ReceiveCPRAttemptEvent>(OnMobStateCPRAttempt);
-        SubscribeLocalEvent<DamageableComponent, ReceiveCPRAttemptEvent>(OnDamagableCPRAttempt);
 
         SubscribeLocalEvent<CPRDummyComponent, UseInHandEvent>(OnDummyUseInHand);
         SubscribeLocalEvent<CPRDummyComponent, InteractHandEvent>(OnDummyInteractHand,
@@ -181,21 +180,11 @@ public sealed class CPRSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (((_mobState.IsAlive(ent)) && !(HasComp<RMCUnconsciousComponent>(ent) &&)) ||
+        if (!((HasComp<RMCUnconsciousComponent>(ent) || _mobState.IsCritical(ent)) &&
+            TryComp<DamageableComponent>(ent, out var damage) &&
+            damage.DamagePerGroup.TryGetValue(Airloss, out var oxyDamage) &&
+            oxyDamage > 0) ||
             (_mobState.IsDead(ent) && _unrevivable.IsUnrevivable(ent)))
-        {
-            args.Cancelled = true;
-        }
-    }
-
-    private void OnDamagableCPRAttempt(Entity<DamageableComponent> ent, ref ReceiveCPRAttemptEvent args)
-    {
-        if (args.Cancelled)
-            return;
-
-        if (HasComp<RMCUnconsciousComponent>(ent) &&
-            ent.Comp.DamagePerGroup.TryGetValue(Airloss, out var oxyDamage) &&
-            oxyDamage > 0)
         {
             args.Cancelled = true;
         }
