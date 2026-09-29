@@ -45,7 +45,9 @@ public sealed class CPRSystem : EntitySystem
     // TODO RMC14 move these to a component
     [ValidatePrototypeId<DamageTypePrototype>]
     private const string HealType = "Asphyxiation";
+
     private static readonly ProtoId<DamageGroupPrototype> Airloss = "Airloss";
+
     private static readonly TimeSpan CPRCooldownSeconds = TimeSpan.FromSeconds(7);
     private static readonly FixedPoint2 HealAmount = FixedPoint2.New(10);
     private static readonly EntProtoId<SkillDefinitionComponent> SkillType = "RMCSkillMedical";
@@ -62,6 +64,7 @@ public sealed class CPRSystem : EntitySystem
         SubscribeLocalEvent<ReceivingCPRComponent, ReceiveCPRAttemptEvent>(OnReceivingCPRAttempt);
         SubscribeLocalEvent<CPRReceivedComponent, ReceiveCPRAttemptEvent>(OnReceivedCPRAttempt);
         SubscribeLocalEvent<MobStateComponent, ReceiveCPRAttemptEvent>(OnMobStateCPRAttempt);
+        SubscribeLocalEvent<DamageableComponent, ReceiveCPRAttemptEvent>(OnDamagableCPRAttempt);
 
         SubscribeLocalEvent<CPRDummyComponent, UseInHandEvent>(OnDummyUseInHand);
         SubscribeLocalEvent<CPRDummyComponent, InteractHandEvent>(OnDummyInteractHand,
@@ -178,12 +181,21 @@ public sealed class CPRSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        // Cancel CPR if mob is alive (not crit) and not unconscious with more than 0 airloss damage
-        // or is dead but unrevivable
-        if (((_mobState.IsAlive(ent)) &&
-            !(HasComp<RMCUnconsciousComponent>(ent) && TryComp<DamageableComponent>(ent, out var damage) &&
-            damage.DamagePerGroup.TryGetValue(Airloss, out var oxyDamage) && oxyDamage > 0)) ||
+        if (((_mobState.IsAlive(ent)) && !(HasComp<RMCUnconsciousComponent>(ent) &&)) ||
             (_mobState.IsDead(ent) && _unrevivable.IsUnrevivable(ent)))
+        {
+            args.Cancelled = true;
+        }
+    }
+
+    private void OnDamagableCPRAttempt(Entity<DamageableComponent> ent, ref ReceiveCPRAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (HasComp<RMCUnconsciousComponent>(ent) &&
+            ent.Comp.DamagePerGroup.TryGetValue(Airloss, out var oxyDamage) &&
+            oxyDamage > 0)
         {
             args.Cancelled = true;
         }
