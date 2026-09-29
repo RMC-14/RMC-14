@@ -1,0 +1,22 @@
+# Business Cards - small paper that locks after first edit
+- type: entity
+  parent: CMBasePaper
+  id: RMCBusinessCard
+  name: business card
+  description: A small card for sharing contact information.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/billboards.rsi
+    scale: 0.25, 0.25
+    layers:
+    - state: billboard_bigger_8
+  - type: Paper
+    contentSize: 5000
+  - type: BusinessCard
+  - type: ActivatableUI
+    key: enum.PaperUiKey.Key
+    requiresComplex: false
+  - type: UserInterface
+    interfaces:
+      enum.PaperUiKey.Key:
+        type: BusinessCardBoundUserInterface
