@@ -1,0 +1,69 @@
+- type: entity
+  id: RMCElevatorPanel
+  name: elevator control panel
+  description: Control panel for the elevator.
+  components:
+  - type: Transform
+    anchored: true
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    layers:
+    - state: elevator_screen0
+    - state: elevator_screen_animated
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+    state: elevator_screen_animated
+  - type: Appearance
+  - type: WallMount
+    arc: 360
+  - type: UserInterface
+    interfaces:
+      enum.ElevatorPanelUiKey.Key:
+        type: ElevatorPanelBui
+  - type: ActivatableUI
+    key: enum.ElevatorPanelUiKey.Key
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: RMCMesonsNonviewable
+  - type: RMCElevatorPanel
+
+- type: entity
+  parent: RMCElevatorPanel
+  id: RMCElevatorPanelPower
+  suffix: Needs Power
+  components:
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 5
+    activeLoad: 10
+    channel: Equipment
+
+- type: entity
+  parent: RMCElevatorPanel
+  id: RMCElevatorPanelCallOnly
+  name: elevator call panel
+  description: Allows you to call the elevator to you.
+  components:
+  - type: RMCElevatorPanel
+    callOnly: true
+
+- type: entity
+  parent: RMCElevatorPanelCallOnly
+  id: RMCElevatorPanelCallOnlyPower
+  suffix: Needs Power
+  components:
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 5
+    activeLoad: 10
+    channel: Equipment
+
+# TODO button to just call an elevator without any fancy stuff

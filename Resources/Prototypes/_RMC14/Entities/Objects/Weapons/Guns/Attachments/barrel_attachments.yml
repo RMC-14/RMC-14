@@ -449,6 +449,39 @@
     - RMCAttachmentMatebaSnubNoseGolden
 
 - type: entity
+  parent: RMCAttachmentMatebaStandard
+  id: RMCAttachmentMatebaStandardSilver
+  components:
+  - type: Sprite
+    state: mateba_medium_s
+  - type: Tag
+    tags:
+    - RMCAttachmentBarrel
+    - RMCAttachmentMatebaStandardSilver
+
+- type: entity
+  parent: RMCAttachmentMatebaMarksman
+  id: RMCAttachmentMatebaMarksmanSilver
+  components:
+  - type: Sprite
+    state: mateba_long_s
+  - type: Tag
+    tags:
+    - RMCAttachmentBarrel
+    - RMCAttachmentMatebaMarksmanSilver
+
+- type: entity
+  parent: RMCAttachmentMatebaSnubNose
+  id: RMCAttachmentMatebaSnubNoseSilver
+  components:
+  - type: Sprite
+    state: mateba_short_s
+  - type: Tag
+    tags:
+    - RMCAttachmentBarrel
+    - RMCAttachmentMatebaSnubNoseSilver
+
+- type: entity
   parent: RMCBarrelAttachmentBase
   id: RMCAttachmentL49Barrel
   name: L49 standoff device
@@ -531,6 +564,15 @@
 
 - type: Tag
   id: RMCAttachmentMatebaSnubNoseGolden
+
+- type: Tag
+  id: RMCAttachmentMatebaStandardSilver
+
+- type: Tag
+  id: RMCAttachmentMatebaMarksmanSilver
+
+- type: Tag
+  id: RMCAttachmentMatebaSnubNoseSilver
 
 - type: Tag
   id: RMCAttachmentL49Barrel

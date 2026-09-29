@@ -1,4 +1,4 @@
-﻿using Content.Shared.Physics;
+using Content.Shared.Physics;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Physics.Collision.Shapes;
@@ -119,6 +119,8 @@ public sealed partial class XenoEggComponent : Component
     public SoundSpecifier PlantSound = new SoundPathSpecifier("/Audio/Effects/Fluids/splat.ogg");
 
     public SoundSpecifier OpenSound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/alien_egg_move.ogg");
+
+    public SoundSpecifier ClearSound = new SoundCollectionSpecifier("XenoResinBreak", AudioParams.Default.WithVolume(-6f));
 
     [DataField, AutoNetworkedField]
     public string GrowingLayerFixture = "fix1";
