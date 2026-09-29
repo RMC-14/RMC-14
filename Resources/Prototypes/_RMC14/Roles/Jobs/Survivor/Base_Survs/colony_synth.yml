@@ -10,7 +10,7 @@
   icon: "RMCJobIconSynth"
   joinNotifyCrew: true
   whitelisted: true
-  whitelistParent: RMCJobSynthetic
+  whitelistParent: RMCJobSynthetic # Do not touch this.
   supervisors: cm-job-supervisors-colonists
   accessGroups:
   - Colony # Colony All Access
@@ -35,7 +35,7 @@
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: Synth
-  hidden: true
+  hidden: false
   useLoadoutOfJob: RMCSyntheticColony # for inheritance
 
 - type: startingGear
