@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: kleinerstation13
-  changes:
-  - message: Added 1.1 damage and 1.2 accuracy modifier to Warwick revolver
-    type: Add
-  - message: Added descriptions to L54 and L54-S magazines
-    type: Add
-  - message: Fixed L54 custom having broken mag insert and eject sounds
-    type: Fix
-  - message: Fixed Mateba HIAP having 45 damage instead of 50
-    type: Fix
-  - message: Fixed RCM-P beret not having armor
-    type: Fix
-  id: 3172
-  time: '2026-04-30T21:33:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9753
 - author: SharkSnake98
   changes:
   - message: Changed the PK-7 sprites to be more unique and interesting
@@ -4502,5 +4487,12 @@
   id: 3671
   time: '2026-09-29T21:27:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10559
+- author: Dygon
+  changes:
+  - message: You can now exit a destroyed vehicle even if it's exit is blocked.
+    type: Fix
+  id: 3672
+  time: '2026-09-29T21:33:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10680
 Name: RMC14
 Order: -1
