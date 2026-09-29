@@ -47,7 +47,7 @@ public sealed partial class HiveLeaderSquadWindow : DefaultWindow
     }
 
     public void UpdateState(
-        HiveTeamEntry entry,
+        HiveTeamEntryState entry,
         int teamIndex,
         string roleName,
         List<(NetEntity Entity, string Name, EntProtoId? ProtoId)> allXenos,

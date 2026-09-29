@@ -1,0 +1,23 @@
+<DefaultWindow xmlns="https://spacestation14.io"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               Title="My Fireteam"
+               MinWidth="300"
+               MinHeight="200">
+    <BoxContainer Orientation="Vertical" Margin="8">
+        <Label Name="TeamLabel" StyleClasses="LabelHeading" HorizontalAlignment="Center" Margin="0 0 0 8"/>
+
+        <PanelContainer Name="LeaderPanel" Margin="0 0 0 8">
+            <BoxContainer Orientation="Vertical" Margin="8">
+                <Label Text="Leader" StyleClasses="LabelSubText" HorizontalAlignment="Center"/>
+                <BoxContainer Name="LeaderSlot" Orientation="Vertical"/>
+            </BoxContainer>
+        </PanelContainer>
+
+        <PanelContainer Name="MembersPanel">
+            <BoxContainer Orientation="Vertical" Margin="8">
+                <Label Text="Members" StyleClasses="LabelSubText" HorizontalAlignment="Center"/>
+                <BoxContainer Name="MembersSlot" Orientation="Vertical"/>
+            </BoxContainer>
+        </PanelContainer>
+    </BoxContainer>
+</DefaultWindow>
