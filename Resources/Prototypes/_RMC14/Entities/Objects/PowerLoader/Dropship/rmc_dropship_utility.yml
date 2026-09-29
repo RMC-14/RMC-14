@@ -174,7 +174,7 @@
   - type: DropshipUtility
     skills:
       all:
-        RMCSkillPilot: 2
+        RMCSkillPilot: 2 #todo rmc14 fix skill check not working properly
   - type: DropshipAttachedSprite
     sprite:
       sprite: _RMC14/Objects/dropship_utility_attachments.rsi
