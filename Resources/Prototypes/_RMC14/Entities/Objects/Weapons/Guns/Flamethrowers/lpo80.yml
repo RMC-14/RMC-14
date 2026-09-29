@@ -21,7 +21,7 @@
         whitelist:
           tags:
           - RMCTankFlamerSPP
-  - type: AttachableHolder # TODO RMC14 barrel nozzle
+  - type: AttachableHolder
     slots:
       rmc-aslot-rail:
         whitelist:
@@ -38,6 +38,7 @@
         whitelist:
           tags:
           - RMCAttachmentUnderbarrelExtinguisher
+          - RMCAttachmentFlamerNozzle
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-rail: -0.032, 0.092

@@ -226,6 +226,7 @@
 - type: entity
   parent: MasterARESLogType
   id: ARESTabRequisitionsLogs
+  categories: [ HideSpawnMenu ]
   name: Requisitions Logs
   components:
   - type: ARESLogType
@@ -235,6 +236,7 @@
 - type: entity
   parent: MasterARESLogType
   id: ARESTabAnnouncementLogs
+  categories: [ HideSpawnMenu ]
   name: Announcement Logs
   components:
   - type: ARESLogType
@@ -244,6 +246,7 @@
 - type: entity
   parent: MasterARESLogType
   id: ARESTabOrbitalCannonLogs
+  categories: [ HideSpawnMenu ]
   name: Orbital Cannon Logs
   components:
   - type: ARESLogType
@@ -253,6 +256,7 @@
 - type: entity
   parent: MasterARESLogType
   id: ARESTabMedicalLogs
+  categories: [ HideSpawnMenu ]
   name: Medical Logs
   components:
   - type: ARESLogType
@@ -262,6 +266,7 @@
 - type: entity
   parent: MasterARESLogType
   id: ARESTabARESLogs
+  categories: [ HideSpawnMenu ]
   name: ARES Logs
   components:
   - type: ARESLogType
@@ -271,6 +276,7 @@
 - type: entity
   parent: MasterARESLogType
   id: ARESTabIdentificationLogs
+  categories: [ HideSpawnMenu ]
   name: Identification Logs
   components:
   - type: ARESLogType
@@ -280,6 +286,7 @@
 - type: entity
   parent: MasterARESLogType
   id: ARESTabManufacturingLogs
+  categories: [ HideSpawnMenu ]
   name: Manufacturing Logs
   components:
   - type: ARESLogType
@@ -289,6 +296,7 @@
 - type: entity
   parent: MasterARESLogType
   id: ARESTabIntelLogs
+  categories: [ HideSpawnMenu ]
   name: Intel Logs
   components:
   - type: ARESLogType
@@ -298,6 +306,7 @@
 - type: entity
   parent: MasterARESLogType
   id: ARESTabDropshipLogs
+  categories: [ HideSpawnMenu ]
   name: Dropship Logs
   components:
   - type: ARESLogType

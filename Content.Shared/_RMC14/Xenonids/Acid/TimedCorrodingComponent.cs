@@ -1,4 +1,5 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.Audio;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -25,4 +26,7 @@ public sealed partial class TimedCorrodingComponent : Component
 
     [DataField, AutoNetworkedField]
     public float LightDps;
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? AcidSound;
 }
