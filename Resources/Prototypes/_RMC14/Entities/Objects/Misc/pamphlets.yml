@@ -3,6 +3,7 @@
   id: CMPamphlet
   name: instructional pamphlet
   description: A pamphlet used to quickly impart vital knowledge.
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/pamphlets.rsi
@@ -10,6 +11,7 @@
   - type: Item
     size: Tiny
   - type: SkillPamphlet
+    bypassLimit: true
     whitelists:
     - popup: rmc-pamphlets-cant-use
       restrictions:
@@ -34,92 +36,26 @@
     tags:
     - RMCSkillPamphlet
 
-# SKILLS
+# Job/Role pamphlets
 
-
-# gives medical skill
-- type: entity
-  parent: CMPamphlet
-  id: CMPamphletMedical
-  name: medical instructional pamphlet
-  description: A pamphlet used to quickly impart vital knowledge. This one has a medical insignia.
-  components:
-  - type: Sprite
-    state: pamphlet_medical
-  - type: SkillPamphlet
-    addSkills:
-      RMCSkillMedical: 1
-    skillCap:
-      RMCSkillMedical: 1
-    bypassLimit: true
-
-# gives science skill
-- type: entity
-  parent: CMPamphlet
-  id: RMCPamphletScience
-  name: scientific instructional pamphlet
-  description: A pamphlet used to quickly impart vital knowledge of science, and how to operate its various egg-headed machineries and other research-qualitative practices.
-  components:
-  - type: Sprite
-    state: pamphlet_science
-  - type: SkillPamphlet
-    addSkills:
-      RMCSkillResearch: 1
-    skillCap:
-      RMCSkillResearch: 1
-    bypassLimit: true
-
-# gives miniengie skill
-- type: entity
-  parent: CMPamphlet
-  id: CMPamphletEngineer
-  name: engineer instructional pamphlet
-  description: A pamphlet used to quickly impart vital knowledge. This one has an engineering insignia.
-  components:
-  - type: Sprite
-    state: pamphlet_construction
-  - type: SkillPamphlet
-    addSkills:
-      RMCSkillEngineer: 1
-      RMCSkillConstruction: 1
-    skillCap:
-      RMCSkillEngineer: 2 # RMC14: In case they read another one first.
-      RMCSkillConstruction: 1
-    bypassLimit: true
-
-# gives jtac skill
-- type: entity
-  parent: CMPamphlet
-  id: CMPamphletJTAC
-  name: JTAC instructional pamphlet
-  description: A pamphlet used to quickly impart vital knowledge. This one has the image of a radio on it.
-  components:
-  - type: Sprite
-    state: pamphlet_jtac
-  - type: SkillPamphlet
-    addSkills:
-      RMCSkillJtac: 1
-    skillCap:
-      RMCSkillJtac: 2
-    bypassLimit: true
-
-# gives spotter skill / bypasses limit
+# Spotter
 - type: entity
   parent: CMPamphlet
   id: CMPamphletSpotter
   name: spotter instructional pamphlet
-  description: A pamphlet used to quickly impart vital knowledge. This one has the image of a pair of binoculars on it.
+  description: "Used to quickly impart vital knowledge.\nThis one has an image of binoculars on it."
   components:
   - type: Sprite
     state: pamphlet_spotter
   - type: SkillPamphlet
     bypassSkill: true
+    bypassLimit: false
     addComps:
     - type: SpotterWhitelist
     addSkills:
       RMCSkillJtac: 1
     skillCap:
-      RMCSkillJtac: 2 # RMC14: In case they read another one first.
+      RMCSkillJtac: 2 # QOL incase rfn used jtac pamphlet first; as Spotter into Jtac pamphlet = 2, but Jtac into spotter pamphlet = 1.
     giveJobTitle: rmc-job-name-spotter
     givePrefix: rmc-job-prefix-spotter
     isAppendPrefix: false
@@ -135,86 +71,20 @@
     - popup: rmc-pamphlets-rifleman-warning
       jobProto: CMPVERifleman
 
-# gives powerloader skill / bypasses limit
-- type: entity
-  parent: CMPamphlet
-  id: CMPamphletPowerloader
-  name: powerloader instructional pamphlet
-  description: A pamphlet used to quickly impart vital knowledge. This one has a powerloader insignia. The title reads 'Moving freight and squishing heads - a practical guide to a Work Loader'.
-  components:
-    - type: Sprite
-      state: pamphlet_powerloader
-    - type: SkillPamphlet
-      addSkills:
-        RMCSkillPowerLoader: 1
-      skillCap:
-        RMCSkillPowerLoader: 2
-      bypassLimit: true
-
-# gives police skill / bypasses limit
-- type: entity
-  parent: CMPamphlet
-  id: CMPamphletPolice
-  name: policing instructional pamphlet
-  description: A pamphlet used to quickly impart vital knowledge. This one has the image of a radio on it.
-  components:
-  - type: Sprite
-    state: pamphlet_jtac
-  - type: SkillPamphlet
-    addSkills:
-      RMCSkillPolice: 1
-    skillCap:
-      RMCSkillPolice: 1
-    bypassLimit: true
-
-# gives surgery skill / bypasses limit
-- type: entity
-  parent: CMPamphlet
-  id: CMPamphletSurgery
-  name: surgery instructional pamphlet
-  description: A pamphlet used to quickly impart vital knowledge. This one has a medical insignia.
-  components:
-  - type: Sprite
-    state: pamphlet_medical
-  - type: SkillPamphlet
-    addSkills:
-      RMCSkillSurgery: 1
-    skillCap:
-      RMCSkillSurgery: 2
-    bypassLimit: true
-
-# gives intel skill / bypasses limit
-- type: entity
-  parent: CMPamphlet
-  id: CMPamphletIntel
-  name: field intelligence instructional pamphlet
-  description: A pamphlet used to quickly impart vital knowledge. This one has an intelligence insignia.
-  components:
-  - type: Sprite
-    state: pamphlet_reading
-  - type: SkillPamphlet
-    addSkills:
-      RMCSkillIntel: 1
-    skillCap:
-      RMCSkillIntel: 2
-    addComps:
-      - type: ViewIntelObjectives
-    bypassLimit: true
-
+# Loader
 - type: entity
   parent: CMPamphlet
   id: RMCPamphletLoader
   name: loader instructional pamphlet
-  description: A pamphlet used to quickly impart vital knowledge. This one has the image of a rocket on it.
+  description: "Used to quickly impart vital knowledge.\nThis one has an image of a rocket on it."
   components:
   - type: Sprite
     state: pamphlet_loader
   - type: SkillPamphlet
     bypassSkill: true
+    bypassLimit: false
     addSkills:
       RMCSkillEngineer: 1
-    skillCap:
-      RMCSkillEngineer: 2 # RMC14: In case they read another one first.
     giveJobTitle: rmc-job-name-loader
     givePrefix: rmc-job-prefix-loader
     isAppendPrefix: false
@@ -230,21 +100,20 @@
     - popup: rmc-pamphlets-rifleman-warning
       jobProto: CMPVERifleman
 
+# Mortar Operator
 - type: entity
   parent: CMPamphlet
   id: RMCPamphletMortarOperator
   name: mortar operator instructional pamphlet
-  description: A pamphlet used to quickly impart vital knowledge. This one has the image of a mortar on it.
+  description: "Used to quickly impart vital knowledge.\nThis one has an image of a mortar on it."
   components:
   - type: Sprite
     state: pamphlet_mortar
   - type: SkillPamphlet
     bypassSkill: true
+    bypassLimit: false
     addSkills:
       RMCSkillEngineer: 1
-      RMCSkillJtac: 2
-    skillCap:
-      RMCSkillEngineer: 2 # RMC14: In case they read another one first.
       RMCSkillJtac: 2
     giveJobTitle: rmc-job-name-mortar-operator
     givePrefix: rmc-job-prefix-mortar-operator
@@ -264,118 +133,18 @@
     guides:
     - RMCGuideRoleMortar
 
-- type: entity
-  parent: CMPamphlet
-  id: RMCPamphletHeavyMachineGunner
-  name: heavy machinegunner instructional pamphlet
-  description: A pamphlet used to quickly impart vital knowledge. This one has an engineering and a machinegun insignia.
-  components:
-  - type: Sprite
-    state: pamphlet_machinegunner
-  - type: SkillPamphlet
-    addSkills:
-      RMCSkillEngineer: 1
-    skillCap:
-      RMCSkillEngineer: 2
-    bypassLimit: true
-
-- type: entity
-  parent: CMPamphlet
-  id: RMCPamphletVehicles
-  name: vehicle training manual
-  description: A manual used to quickly impart vital knowledge on driving vehicles.
-  components:
-  - type: Sprite
-    state: pamphlet_vehicle
-  - type: SkillPamphlet
-    addSkills:
-      RMCSkillVehicles: 1
-    skillCap:
-      RMCSkillVehicles: 1
-    bypassLimit: true
-
-- type: entity
-  parent: CMPamphlet
-  id: RMCPamphletOverwatch
-  name: overwatch console manual
-  description: A manual used to quickly impart vital knowledge on operating overwatch consoles.
-  components:
-  - type: SkillPamphlet
-    addSkills:
-      RMCSkillOverwatch: 1
-    skillCap:
-      RMCSkillOverwatch: 1
-    bypassLimit: true
-
-- type: entity
-  parent: CMPamphlet
-  id: RMCPamphletCanine
-  name: K9 handler instructional pamphlet
-  description: A pamphlet used to quickly impart vital knowledge of taking care of K9 units, even if they aren't exactly real dogs.
-  components:
-  - type: Sprite
-    state: pamphlet_k9_handler
-  - type: SkillPamphlet
-    bypassSkill: true
-    addSkills:
-      RMCSkillJtac: 1
-      RMCSkillEngineer: 1
-    skillCap:
-      RMCSkillJtac: 2     # RMC14: In case they read another one first.
-      RMCSkillEngineer: 2 # RMC14: In case they read another one first.
-    # TODO: custom icon and title dependent on if they are a medic or MP
-    jobWhitelists:
-    - popup: rmc-pamphlets-k9-warning
-      jobProto: CMHospitalCorpsman
-    - popup: rmc-pamphlets-k9-warning
-      jobProto: CMMilitaryPolice
-
-- type: entity
-  parent: CMPamphlet
-  id: RMCPamphletVehicleCrewman
-  name: Vehicle Crewman instructional pamphlet
-  description: A manual used to quickly impart vital knowledge of driving heavy-duty vehicles and its maintenance. It also imparts some deep knowledge on related engineering applications.
-  components:
-  - type: Sprite
-    state: pamphlet_vehicle
-  - type: SkillPamphlet
-    # TODO: should probably give and icon and title
-    addSkills:
-      RMCSkillVehicles: 3
-      RMCSkillEngineer: 2
-    skillCap:
-      RMCSkillVehicles: 3
-      RMCSkillEngineer: 2
-    bypassLimit: true
-
-- type: entity
-  parent: CMPamphlet
-  id: RMCPamphletVulture
-  name: vulture instructional pamphlet
-  description: A pamphlet used to quickly impart vital knowledge of how to shoot big guns and spot for them.
-  components:
-  - type: Sprite
-    state: pamphlet_vulture
-  - type: SkillPamphlet
-    # TODO: should probably give and icon and title
-    addSkills:
-      RMCSkillVulture: 1
-    skillCap:
-      RMCSkillVulture: 1
-
-# OTHER
-
 # Honor Guard
 - type: entity
   parent: CMPamphlet
   id: RMCPamphletHonorGuard
   name: honor guard instructional pamphlet
-  description: A pamphlet used to quickly impart vital knowledge. This one details the responsibilities of an Honor Guard.
+  description: "Used to quickly impart vital knowledge.\nIt details the responsibilities of an Honor Guard."
   components:
   - type: Sprite
     state: pamphlet_honorguard
   - type: SkillPamphlet
     bypassSkill: true
+    bypassLimit: false
     giveJobTitle: rmc-job-name-honor-guard
     givePrefix: rmc-job-prefix-honor-guard
     isAppendPrefix: false
@@ -389,6 +158,215 @@
     - popup: rmc-pamphlets-mp-warning
       jobProto: CMMilitaryPolice
 
+# K9 Handler - not implemented yet
+- type: entity
+  parent: CMPamphlet
+  id: RMCPamphletCanine
+  name: K9 handler instructional pamphlet
+  description: "Used to quickly impart vital knowledge.\nThis one has an image of a K9 on it."
+  components:
+  - type: Sprite
+    state: pamphlet_k9_handler
+  - type: SkillPamphlet
+    bypassSkill: true
+    bypassLimit: false
+    addSkills:
+      RMCSkillJtac: 1
+      RMCSkillEngineer: 1
+    # TODO: custom icon and title dependent on if they are a medic or MP
+    jobWhitelists:
+    - popup: rmc-pamphlets-k9-warning
+      jobProto: CMHospitalCorpsman
+    - popup: rmc-pamphlets-k9-warning
+      jobProto: CMMilitaryPolice
+
+#Skill Pamphlets
+
+# gives medical skill
+- type: entity
+  parent: CMPamphlet
+  id: CMPamphletMedical
+  name: medical instructional pamphlet
+  description: "Used to quickly impart vital knowledge.\nThis one has a medical insignia."
+  components:
+  - type: Sprite
+    state: pamphlet_medical
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillMedical: 1
+    skillCap:
+      RMCSkillMedical: 1
+
+# gives science skill
+- type: entity
+  parent: CMPamphlet
+  id: RMCPamphletScience
+  name: scientific instructional pamphlet
+  description: "Used to quickly impart vital knowledge.\nThis one has an image of scientific equipment on it."
+  components:
+  - type: Sprite
+    state: pamphlet_science
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillResearch: 1
+
+# gives engi/construction skills
+- type: entity
+  parent: CMPamphlet
+  id: CMPamphletEngineer
+  name: engineer instructional pamphlet
+  description: "Used to quickly impart vital knowledge.\nThis one has an engineering insignia."
+  components:
+  - type: Sprite
+    state: pamphlet_construction
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillEngineer: 1
+      RMCSkillConstruction: 1
+
+# gives jtac skill - if user's skill = 1 will upgrade to 2.
+- type: entity
+  parent: CMPamphlet
+  id: CMPamphletJTAC
+  name: JTAC instructional pamphlet
+  description: "Used to quickly impart vital knowledge.\nThis one has the image of a radio on it."
+  components:
+  - type: Sprite
+    state: pamphlet_jtac
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillJtac: 1
+    skillCap:
+      RMCSkillJtac: 2
+
+# gives powerloader skill - if user's skill = 1 will upgrade to 2.
+- type: entity
+  parent: CMPamphlet
+  id: CMPamphletPowerloader
+  name: powerloader instructional pamphlet
+  description: "Used to quickly impart vital knowledge.\nThis one has a powerloader insignia.\nThe title reads 'Moving freight and squishing heads - a practical guide to a Work Loader'."
+  components:
+  - type: Sprite
+    state: pamphlet_powerloader
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillPowerLoader: 1
+    skillCap:
+      RMCSkillPowerLoader: 2
+
+# gives police skill
+- type: entity
+  parent: CMPamphlet
+  id: CMPamphletPolice
+  name: policing instructional pamphlet
+  description: "Used to quickly impart vital knowledge.\nThis one has the image of a radio on it."
+  components:
+  - type: Sprite
+    state: pamphlet_jtac
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillPolice: 1
+
+# gives intel skill - if user's skill = 1 will upgrade to 2.
+- type: entity
+  parent: CMPamphlet
+  id: CMPamphletIntel
+  name: field intelligence instructional pamphlet
+  description: "Used to quickly impart vital knowledge.\nThis one has an intelligence insignia."
+  components:
+  - type: Sprite
+    state: pamphlet_reading
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillIntel: 1
+    skillCap:
+      RMCSkillIntel: 2
+    addComps:
+    - type: ViewIntelObjectives
+
+# M2C Kit
+- type: entity
+  parent: CMPamphlet
+  id: RMCPamphletHeavyMachineGunner
+  name: heavy machinegunner instructional pamphlet
+  description: "Used to quickly impart vital knowledge.\nThis one has an engineering and a machinegun insignia."
+  components:
+  - type: Sprite
+    state: pamphlet_machinegunner
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillEngineer: 1
+
+# gives surgery skill - if user's skill = 1 will upgrade to 2.
+- type: entity
+  parent: CMPamphlet
+  id: CMPamphletSurgery
+  name: surgery instructional pamphlet
+  description: "Used to quickly impart vital knowledge.\nIt covers surgical techniques."
+  components:
+  - type: Sprite
+    state: pamphlet_medical
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillSurgery: 1
+    skillCap:
+      RMCSkillSurgery: 2
+
+# give vehicle skill
+- type: entity
+  parent: CMPamphlet
+  id: RMCPamphletVehicles
+  name: vehicle training manual
+  description: A manual used to quickly impart vital knowledge on operating vehicles.
+  components:
+  - type: Sprite
+    state: pamphlet_vehicle
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillVehicles: 1
+
+# gives overwatch skill
+- type: entity
+  parent: CMPamphlet
+  id: RMCPamphletOverwatch
+  name: overwatch console manual
+  description: A manual used to quickly impart vital knowledge on operating overwatch consoles.
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillOverwatch: 1
+
+# TODO: See if this is still needed. Not used in CM.
+- type: entity
+  parent: CMPamphlet
+  id: RMCPamphletVehicleCrewman
+  name: Vehicle Crewman instructional pamphlet
+  description: A manual used to quickly impart vital knowledge of driving heavy-duty vehicles and its maintenance. It also imparts some deep knowledge on related engineering applications.
+  components:
+  - type: Sprite
+    state: pamphlet_vehicle
+  - type: SkillPamphlet
+    # TODO: should probably give and icon and title
+    addSkills:
+      RMCSkillVehicles: 3
+      RMCSkillEngineer: 2
+
+# not implemented yet
+- type: entity
+  parent: CMPamphlet
+  id: RMCPamphletVulture
+  name: vulture instructional pamphlet
+  description: "Used to quickly impart vital knowledge of how to shoot big guns and spot for them."
+  components:
+  - type: Sprite
+    state: pamphlet_vulture
+  - type: SkillPamphlet
+    # TODO: should probably give and icon and title
+    addSkills:
+      RMCSkillVulture: 1
+    skillCap:
+      RMCSkillVulture: 1
+
 # LANGUAGE / bypasses limit
 
 #
@@ -400,12 +378,12 @@
   abstract: true
   components:
   - type: SkillPamphlet
-    bypassLimit: true
 
 # gives japanese language
 - type: entity
   parent: CMPamphletLanguage
   id: CMPamphletLanguageJapanese
+  suffix: JPN
   name: Pages of Turedobando Yohei Adobencha Zohuken
   description: A dog-eared volume of a popular isekai manga. Even if you don’t care about the plot, the annotated sound effects and dialogue provide a surprisingly solid foundation in the language.
   components:
@@ -416,6 +394,7 @@
 - type: entity
   parent: CMPamphletLanguage
   id: CMPamphletLanguageChinese
+  suffix: CHI
   name: Pages from the Little Red Book
   description: A dense, laminated technical manual for SPP industrial hardware. Navigating the maintenance protocols is a trial by fire, but you’ll learn the script eventually.
   components:
@@ -427,6 +406,7 @@
 - type: entity
   parent: CMPamphletLanguage
   id: CMPamphletLanguageGerman
+  suffix: GER
   name: Translated Lyrics to 99 Luftballons
   description: A beer-stained lyric sheet used for karaoke. It’s mostly 20th-century pop hits, but it’s enough to help you navigate a German-speaking mining colony without getting punched.
   components:
@@ -437,6 +417,7 @@
 - type: entity
   parent: CMPamphletLanguage
   id: CMPamphletLanguageSpanish
+  suffix: SPA
   name: America Latina - A Quick Translation Guide
   description: A "Inter-Colony Relations" pamphlet issued by the United Nations. It was intended for peace-keeping efforts, but mostly serves as a guide for Marines looking for the nearest bar.
   components:
@@ -447,6 +428,7 @@
 - type: entity
   parent: CMPamphletLanguage
   id: CMPamphletLanguageFrench
+  suffix: FRE
   name: Dog-eared Pages of Le Petit Prince
   description: A few tattered pages from a fashion journal from the early 2100s. It teaches you just enough high-society vocabulary to sound sophisticated, or at least like an arrogant tourist.
   components:
@@ -457,6 +439,7 @@
 - type: entity
   parent: CMPamphletLanguage
   id: CMPamphletLanguageRussian
+  suffix: RUS
   name: Crumpled Transliteration Notes
   description: Gritty field notes scribbled on the pages of an old journal. Between the phonetic spellings of how to follow orders, win a bar fight, and toast the fallen, there is enough grammar hidden in the margins to learn the basics.
   components:
@@ -467,6 +450,7 @@
 - type: entity
   parent: CMPamphletLanguage
   id: CMPamphletLanguageSign
+  suffix: SIGN
   name: Illustrated Hand Signals Guide
   description: A UNMC laminated guide to 'Tactical Hand Signs.' It covers the essential hand signals used for coordination when any noise is a death sentence, plus a few unofficial gestures for insulting your squadmates without the CO hearing you.
   components:
@@ -485,11 +469,11 @@
 
 # RESTRICTED LANGUAGES
 
-
 # gives xenonid language
 - type: entity
   parent: CMPamphletLanguage
   id: CMPamphletLanguageXenonid
+  suffix: XENO
   name: Xenobiologist's file
   description: A heavily redacted Weston-Yamada research summary. It details the clicks, hisses, and pheromonal triggers of the 'Xenonid' in high detail. Attempting these sounds makes your throat ache and your skin crawl.
   components:
@@ -500,6 +484,7 @@
 - type: entity
   parent: CMPamphletLanguage
   id: CMPamphletLanguagePrimitive
+  suffix: PRIM
   name: scribbled drawings
   description: A collection of crude drawings involving bananas and apes. It is either a masterpiece of primal communication or the work of a Marine who found an unattended box of crayons.
   components:
