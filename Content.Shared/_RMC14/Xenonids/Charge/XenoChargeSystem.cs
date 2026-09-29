@@ -5,12 +5,11 @@ using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Xenonids.Animation;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
-using Content.Shared.Actions;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Prototypes;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.Effects;
@@ -28,7 +27,6 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Charge;
@@ -38,31 +36,32 @@ public sealed class XenoChargeSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly SharedDestructibleSystem _destruct = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly GridVehicleMoverSystem _gridVehicleMover = default!;
+    [Dependency] private readonly HardpointSystem _hardpoints = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
+    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private readonly VehicleSystem _rmcVehicles = default!;
+    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
     [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ThrownItemSystem _thrownItem = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly XenoAnimationsSystem _xenoAnimations = default!;
+    [Dependency] private readonly VehicleWheelSystem _vehicleWheels = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly XenoAnimationsSystem _xenoAnimations = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
-    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedDestructibleSystem _destruct = default!;
-    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly CMArmorSystem _armor = default!;
-    [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
-
-    private readonly ProtoId<DamageTypePrototype> _blunt = "Blunt";
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<ThrownItemComponent> _thrownItemQuery;
@@ -195,6 +194,9 @@ public sealed class XenoChargeSystem : EntitySystem
                 return;
         }
 
+        var chargeDirection = xeno.Comp.Charge;
+        var isVehicle = HasComp<VehicleWheelSlotsComponent>(targetId);
+
         StopCrusherCharge(xeno);
 
         if (_net.IsServer)
@@ -208,11 +210,32 @@ public sealed class XenoChargeSystem : EntitySystem
                 structDamage = crush.SetDamage;
         }
 
-        if (xeno.Comp.Emote is { } emote)
-            _emote.TryEmoteWithChat(xeno, emote);
+        DamageSpecifier? damage;
+        if (isVehicle)
+        {
+            damage = _hardpoints.DamageHardpoint(targetId, targetId, xeno.Comp.VehicleDamage.GetTotal().Float())
+                ? xeno.Comp.VehicleDamage
+                : null;
+        }
+        else
+        {
+            //var finalDamage = _xeno.TryApplyXenoSlashDamageMultiplier(targetId, structDamage);
+            damage = _damageable.TryChangeDamage(
+                targetId,
+                structDamage,
+                origin: xeno,
+                tool: xeno,
+                shouldIgnoreClawLogic: true);
+        }
 
-        //var finalDamage = _xeno.TryApplyXenoSlashDamageMultiplier(targetId, structDamage);
-        var damage = _damageable.TryChangeDamage(targetId, structDamage, origin: xeno, tool: xeno, shouldIgnoreClawLogic: true);
+        if (_net.IsServer && isVehicle)
+        {
+            if (chargeDirection is { } chargeDir && !_vehicleWheels.HasAnyFunctionalWheel(targetId))
+                _gridVehicleMover.TryShoveVehicle(targetId, xeno, chargeDir);
+
+            if (TryComp(targetId, out GridVehicleMoverComponent? targetMover))
+                _rmcVehicles.DoInteriorCrashEffect(targetId, targetMover.MaxSpeed, targetMover.MaxSpeed);
+        }
 
         if (damage?.GetTotal() > FixedPoint2.Zero && !TerminatingOrDeleted(targetId))
         {

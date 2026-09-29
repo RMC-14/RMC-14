@@ -30,7 +30,7 @@
     canInitiateEvac: true
   - type: TacticalMapComputer
   - type: MarineControlComputer
-    canPrintCommendations: false
+    canPrintCommendations: true
   - type: Tag
     tags:
     - CommandTablet

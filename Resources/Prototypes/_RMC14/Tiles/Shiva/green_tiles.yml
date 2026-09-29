@@ -1,4 +1,4 @@
-﻿- type: tile
+- type: tile
   abstract: true
   parent: CMTileBase
   id: CMFloorSteelShivaGreenBase
@@ -63,6 +63,21 @@
   parent: CMFloorSteelShivaGreenBase
   id: CMFloorSteelShivaGreenCorners3
   sprite: /Textures/_RMC14/Tiles/shiva/greencorners_3.png
+
+- type: tile
+  parent: CMFloorSteelShivaGreenBase
+  id: CMFloorSteelShivaGreenFull0
+  sprite: /Textures/_RMC14/Tiles/shiva/greenfull_0.png
+
+- type: tile
+  parent: CMFloorSteelShivaGreenBase
+  id: CMFloorSteelShivaGreenFull1
+  sprite: /Textures/_RMC14/Tiles/shiva/greenfull_1.png
+
+- type: tile
+  parent: CMFloorSteelShivaGreenBase
+  id: CMFloorSteelShivaGreenFull2
+  sprite: /Textures/_RMC14/Tiles/shiva/greenfull_2.png
 
 - type: tile
   parent: CMFloorSteelShivaGreenBase
