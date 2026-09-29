@@ -47,6 +47,7 @@
       - CMSurvivorEngineer: 1
       - CMSurvivorDoctor: 1
       - CMSurvivorSecurity: 1
+      - RMCSyntheticColony: 1
       - CMSurvivor: -1
     survivorJobVariantScenarios:
       asset_protection: # Corporate Dome Goons
@@ -60,6 +61,8 @@
         - CMSurvivorLV624CorporateDomeGoonEngineer: 1
         CMSurvivorSecurity:
         - CMSurvivorLV624CorporateDomeGoonLead: 1
+        RMCSyntheticColony:
+        - CMSurvivorLV624CorporateDomeGoonSynth: 1
         CMSurvivorScientist:
         - CMSurvivor: 0
     survivorJobOverrideScenarios:
@@ -424,9 +427,12 @@
     - CMSurvivorEngineer: 4
     - CMSurvivorSecurity: 2
     - CMSurvivorScientist: 2
+    - RMCSyntheticColony: 1
     survivorJobVariants:
       RMCSurvivorCommandingOfficer:
       - RMCSurvivorCommanderNewVaradero: 1
+      RMCSyntheticColony:
+      - RMCSurvivorNewVaraderoSynth: 1
       CMSurvivor:
       - CMSurvivorBeachBum: -1
       - RMCSurvivorHybrisaTMCCMiner: -1
