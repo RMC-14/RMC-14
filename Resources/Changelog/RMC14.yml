@@ -1,29 +1,4 @@
 ﻿Entries:
-- author: IceNoobXD
-  changes:
-  - message: The water in the coagulation pits and at the river ends on Trijent Dam
-      has been made toxic! THE WATER BURNS!!
-    type: Add
-  - message: Trijent Dam has been reworked, featuring 3 new random weapon loot spawners
-      themed around CMB, Civilian, and Corporate guns, found across the map and its
-      inserts. The Eastern Laboratory's armory loot has also been relocated further
-      away from the nearby hive spawn point.
-    type: Tweak
-  - message: Trijent Dam's workshops have been renamed to western/eastern workshop
-      accordingly, to remove confusion for newer players!
-    type: Tweak
-  - message: The area around Trijent Dam marshal has been changed from T-Comms valley
-      to sec valley, this means south LZ weedkiller will no longer affect that area!
-    type: Fix
-  - message: 'Plenty of new inserts have been ported for Trijent Dam: admin fight
-      (30%), dead CMB engi (30%), destroyed engi central (30%), Hold west dam (30%),
-      hydro breakroom hold (30%), dead loader-dude (25%), dead guy east of dam (30%),
-      sensorhold (50%), civhold (10%), corphold (10%), guns/gear workshop (both 10%),
-      pristine (10%) and battle armory (20%)!'
-    type: Add
-  id: 3171
-  time: '2026-04-29T20:44:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9642
 - author: kleinerstation13
   changes:
   - message: Added 1.1 damage and 1.2 accuracy modifier to Warwick revolver
@@ -4436,5 +4411,96 @@
   id: 3670
   time: '2026-09-28T21:09:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10642
+- author: Vixting
+  changes:
+  - message: Crusher charge now applies damage to vehicles & knocks back vehicles
+      that don't have functioning wheels / treads
+    type: Add
+  - message: Acid traps now trigger on vehicles & damage them
+    type: Add
+  - message: Acid spray now damages vehicle wheels / treads
+    type: Add
+  - message: Vans now get slowed down by driving on weeds
+    type: Add
+  - message: Can now apply acid to vehicles (does instant damage depending on acid
+      tier)
+    type: Add
+  - message: Unbuckled vehicle occupants will now get thrown around on vehicle crashing
+      into a wall / crusher charge hitting vehicle
+    type: Add
+  - message: Fortified defenders will now get shoved out of the way depending on vehicle
+      weight class
+    type: Add
+  - message: You can now use the tacmap inside of vehicle interiors
+    type: Add
+  - message: Fixed a bunch of misc vehicle interior issues
+    type: Fix
+  - message: You can now examine stuff whilst driving / gunning / looking through
+      a vehicle viewport
+    type: Add
+  - message: Possibly fix issue with melee attacking vehicles
+    type: Fix
+  - message: Fixed misprediction issue for tank driver
+    type: Fix
+  - message: Fixed incorrect interior coordinates for CLF van
+    type: Fix
+  - message: Vehicle occupants can now hear sound from outside of vehicle
+    type: Add
+  - message: Xenos now make a pry sound when forcing entry into a vehicle interior
+    type: Add
+  - message: Fixed being unable to operate vehicle if you buckle yourself into the
+      seat after already being buckled
+    type: Fix
+  - message: Xenonids smaller than big size can squeeze under stationery vans (ignore
+      collision & hide underneath them)
+    type: Add
+  - message: Fixed orbiting / looking through viewport being laggy
+    type: Fix
+  - message: Fixed vehicles dragging bodies
+    type: Fix
+  - message: Fixed vehicles breaking window frames (only intended to break the glass),
+      tank can still break them
+    type: Fix
+  - message: Increased the size of the vans to not be able to go through 1 tile gaps
+    type: Tweak
+  - message: Fixed van not having vehicles 1 requirement
+    type: Fix
+  - message: What vehicles can destroy & what they can destroy without slowdown is
+      now based on their weight class.
+    type: Add
+  - message: Light & medium weight class (tank & apc) can now break barricades, be
+      careful with your driving
+    type: Add
+  - message: Toxic water now applies damage to wheels of vehicles of weak weight class
+      (vans)
+    type: Add
+  - message: C4 can be planted on a vehicle with a destroyed frame to remove it, the
+      occupants of the vehicle will be removed
+    type: Add
+  - message: Vehicle enter doafter no longer gets cancelled on taking damage
+    type: Tweak
+  - message: Fixed issue where pushing vehicle would be extremely slow if part of
+      it was against a wall
+    type: Fix
+  - message: Vehicles are now slowed down in water
+    type: Add
+  - message: Fixed vehicles being able to be locked whilst frame is broken
+    type: Fix
+  - message: Xenos below xeno size (runner, lesser) can no longer hit vehicles
+    type: Fix
+  - message: Fixed defener being able to fortify inside of a vehicles bounds
+    type: Fix
+  - message: Fixed reselecting hardpoints requiring you to reslect the new one
+    type: Fix
+  - message: ': Fixed vehicle interiors giving coms regardless of if the map its on
+      has functioning coms'
+    type: Fix
+  - message: Fixed rare bug that breaks vehicles
+    type: Fix
+  - message: Fixed ghost hedp being present for tank gunner
+    type: Fix
+  id: 3671
+  time: '2026-09-29T21:27:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10559
 Name: RMC14
 Order: -1
