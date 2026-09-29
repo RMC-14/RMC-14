@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: SharkSnake98
-  changes:
-  - message: Changed the PK-7 sprites to be more unique and interesting
-    type: Tweak
-  - message: Fixed the PK7 having stereo audio
-    type: Fix
-  id: 3173
-  time: '2026-05-01T00:19:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9705
 - author: Dygon
   changes:
   - message: The King's Bulwark Of The Hive ability creates lightning again.
@@ -4494,5 +4485,17 @@
   id: 3672
   time: '2026-09-29T21:33:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10680
+- author: Vixting
+  changes:
+  - message: Xeno evolution now uses a raffle system to allocate roles. Before T3
+      unlocks, you can select a T3 to evolve into through the raffle tab. You can
+      evolve directly into this T3 from any caste provided you meet the requirements.
+      After this, you enter a raffle for castes & will be allocated it on a slot being
+      free & you winning the raffle. There is a 30s grace period in case you are blocked
+      from evolving (e.g. not being full health).
+    type: Add
+  id: 3673
+  time: '2026-09-29T21:45:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10700
 Name: RMC14
 Order: -1
