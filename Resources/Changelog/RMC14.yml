@@ -1,103 +1,4 @@
 ﻿Entries:
-- author: TadJohnson00
-  changes:
-  - message: '[PVE] Added the Webley MkX TBR for use by RCM senior officers.'
-    type: Add
-  id: 3166
-  time: '2026-04-27T00:29:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8907
-- author: Vixting
-  changes:
-  - message: Added fun!
-    type: Add
-  - message: Removed fun!
-    type: Remove
-  - message: Changed fun!
-    type: Tweak
-  - message: Fixed fun!
-    type: Fix
-  id: 3167
-  time: '2026-04-27T00:31:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9703
-- author: TadJohnson00
-  changes:
-  - message: The Warwick MkVII revolver now has the correct tags and should fit in
-      appropriate webbings, belts, etc.
-    type: Fix
-  id: 3168
-  time: '2026-04-28T01:39:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9739
-- author: TadJohnson00
-  changes:
-  - message: Added new ear markings for vulpkanin, felinids, and humans - as well
-      as three new hairstyles.
-    type: Add
-  id: 3169
-  time: '2026-04-29T19:59:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8974
-- author: TadJohnson00
-  changes:
-  - message: Resprited the M890 to look a little more slick.
-    type: Tweak
-  id: 3170
-  time: '2026-04-29T19:59:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8880
-- author: IceNoobXD
-  changes:
-  - message: The water in the coagulation pits and at the river ends on Trijent Dam
-      has been made toxic! THE WATER BURNS!!
-    type: Add
-  - message: Trijent Dam has been reworked, featuring 3 new random weapon loot spawners
-      themed around CMB, Civilian, and Corporate guns, found across the map and its
-      inserts. The Eastern Laboratory's armory loot has also been relocated further
-      away from the nearby hive spawn point.
-    type: Tweak
-  - message: Trijent Dam's workshops have been renamed to western/eastern workshop
-      accordingly, to remove confusion for newer players!
-    type: Tweak
-  - message: The area around Trijent Dam marshal has been changed from T-Comms valley
-      to sec valley, this means south LZ weedkiller will no longer affect that area!
-    type: Fix
-  - message: 'Plenty of new inserts have been ported for Trijent Dam: admin fight
-      (30%), dead CMB engi (30%), destroyed engi central (30%), Hold west dam (30%),
-      hydro breakroom hold (30%), dead loader-dude (25%), dead guy east of dam (30%),
-      sensorhold (50%), civhold (10%), corphold (10%), guns/gear workshop (both 10%),
-      pristine (10%) and battle armory (20%)!'
-    type: Add
-  id: 3171
-  time: '2026-04-29T20:44:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9642
-- author: kleinerstation13
-  changes:
-  - message: Added 1.1 damage and 1.2 accuracy modifier to Warwick revolver
-    type: Add
-  - message: Added descriptions to L54 and L54-S magazines
-    type: Add
-  - message: Fixed L54 custom having broken mag insert and eject sounds
-    type: Fix
-  - message: Fixed Mateba HIAP having 45 damage instead of 50
-    type: Fix
-  - message: Fixed RCM-P beret not having armor
-    type: Fix
-  id: 3172
-  time: '2026-04-30T21:33:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9753
-- author: SharkSnake98
-  changes:
-  - message: Changed the PK-7 sprites to be more unique and interesting
-    type: Tweak
-  - message: Fixed the PK7 having stereo audio
-    type: Fix
-  id: 3173
-  time: '2026-05-01T00:19:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9705
-- author: Dygon
-  changes:
-  - message: The King's Bulwark Of The Hive ability creates lightning again.
-    type: Fix
-  id: 3174
-  time: '2026-05-01T00:18:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9715
 - author: Dutch-VanDerLinde
   changes:
   - message: Powerloaders now overlay over the operator and have new buckle sounds.
@@ -4435,5 +4336,172 @@
   id: 3665
   time: '2026-09-25T22:32:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10855
+- author: IceNoobXD
+  changes:
+  - message: MPs/MWs and CMPs can now find basic medical visors in their vendors!
+    type: Add
+  - message: Both Pilot jumpsuits now have camouflage variations
+    type: Add
+  - message: XO, SO, ASO, LO, CE, CMP, MP, MW, dropship staff, and IO vendors have
+      received a parity update that adds new items or adjusts quantities.
+    type: Tweak
+  id: 3666
+  time: '2026-09-27T15:51:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10155
+- author: kleinerstation13
+  changes:
+  - message: Added colored poly-kevlon window variants
+    type: Add
+  - message: Desaturated the colored prefabricated structure wall variants
+    type: Tweak
+  id: 3667
+  time: '2026-09-28T01:17:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10828
+- author: CatAndHats
+  changes:
+  - message: Fixed Sorokyne Strata LZ2 (south LZ) weedkiller not covering Geothermal
+      Springs, Geothermal Water, and Parts Storage Exterior
+    type: Fix
+  id: 3668
+  time: '2026-09-28T16:37:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10872
+- author: CatAndHats
+  changes:
+  - message: Fixed some water on Kutjevo being toxic when it shouldn't have been
+    type: Fix
+  id: 3669
+  time: '2026-09-28T16:50:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10755
+- author: CatAndHats
+  changes:
+  - message: Changed Vehicle Crewman rankups! VCs progression is now E3, E4, E5 (instead
+      of just E4)
+    type: Tweak
+  id: 3670
+  time: '2026-09-28T21:09:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10642
+- author: Vixting
+  changes:
+  - message: Crusher charge now applies damage to vehicles & knocks back vehicles
+      that don't have functioning wheels / treads
+    type: Add
+  - message: Acid traps now trigger on vehicles & damage them
+    type: Add
+  - message: Acid spray now damages vehicle wheels / treads
+    type: Add
+  - message: Vans now get slowed down by driving on weeds
+    type: Add
+  - message: Can now apply acid to vehicles (does instant damage depending on acid
+      tier)
+    type: Add
+  - message: Unbuckled vehicle occupants will now get thrown around on vehicle crashing
+      into a wall / crusher charge hitting vehicle
+    type: Add
+  - message: Fortified defenders will now get shoved out of the way depending on vehicle
+      weight class
+    type: Add
+  - message: You can now use the tacmap inside of vehicle interiors
+    type: Add
+  - message: Fixed a bunch of misc vehicle interior issues
+    type: Fix
+  - message: You can now examine stuff whilst driving / gunning / looking through
+      a vehicle viewport
+    type: Add
+  - message: Possibly fix issue with melee attacking vehicles
+    type: Fix
+  - message: Fixed misprediction issue for tank driver
+    type: Fix
+  - message: Fixed incorrect interior coordinates for CLF van
+    type: Fix
+  - message: Vehicle occupants can now hear sound from outside of vehicle
+    type: Add
+  - message: Xenos now make a pry sound when forcing entry into a vehicle interior
+    type: Add
+  - message: Fixed being unable to operate vehicle if you buckle yourself into the
+      seat after already being buckled
+    type: Fix
+  - message: Xenonids smaller than big size can squeeze under stationery vans (ignore
+      collision & hide underneath them)
+    type: Add
+  - message: Fixed orbiting / looking through viewport being laggy
+    type: Fix
+  - message: Fixed vehicles dragging bodies
+    type: Fix
+  - message: Fixed vehicles breaking window frames (only intended to break the glass),
+      tank can still break them
+    type: Fix
+  - message: Increased the size of the vans to not be able to go through 1 tile gaps
+    type: Tweak
+  - message: Fixed van not having vehicles 1 requirement
+    type: Fix
+  - message: What vehicles can destroy & what they can destroy without slowdown is
+      now based on their weight class.
+    type: Add
+  - message: Light & medium weight class (tank & apc) can now break barricades, be
+      careful with your driving
+    type: Add
+  - message: Toxic water now applies damage to wheels of vehicles of weak weight class
+      (vans)
+    type: Add
+  - message: C4 can be planted on a vehicle with a destroyed frame to remove it, the
+      occupants of the vehicle will be removed
+    type: Add
+  - message: Vehicle enter doafter no longer gets cancelled on taking damage
+    type: Tweak
+  - message: Fixed issue where pushing vehicle would be extremely slow if part of
+      it was against a wall
+    type: Fix
+  - message: Vehicles are now slowed down in water
+    type: Add
+  - message: Fixed vehicles being able to be locked whilst frame is broken
+    type: Fix
+  - message: Xenos below xeno size (runner, lesser) can no longer hit vehicles
+    type: Fix
+  - message: Fixed defener being able to fortify inside of a vehicles bounds
+    type: Fix
+  - message: Fixed reselecting hardpoints requiring you to reslect the new one
+    type: Fix
+  - message: ': Fixed vehicle interiors giving coms regardless of if the map its on
+      has functioning coms'
+    type: Fix
+  - message: Fixed rare bug that breaks vehicles
+    type: Fix
+  - message: Fixed ghost hedp being present for tank gunner
+    type: Fix
+  id: 3671
+  time: '2026-09-29T21:27:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10559
+- author: Dygon
+  changes:
+  - message: You can now exit a destroyed vehicle even if it's exit is blocked.
+    type: Fix
+  id: 3672
+  time: '2026-09-29T21:33:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10680
+- author: Vixting
+  changes:
+  - message: Xeno evolution now uses a raffle system to allocate roles. Before T3
+      unlocks, you can select a T3 to evolve into through the raffle tab. You can
+      evolve directly into this T3 from any caste provided you meet the requirements.
+      After this, you enter a raffle for castes & will be allocated it on a slot being
+      free & you winning the raffle. There is a 30s grace period in case you are blocked
+      from evolving (e.g. not being full health).
+    type: Add
+  id: 3673
+  time: '2026-09-29T21:45:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10700
+- author: Dygon
+  changes:
+  - message: Ghosts now have an action that lets them completely mute dead chat.
+    type: Tweak
+  - message: "Ghosts can\u2019t see or send gameplay chat for 10 seconds after dying.\
+      \ This can be disabled in the Accessibility settings"
+    type: Tweak
+  - message: "A mind\u2019s time of death now resets when entering a living body instead\
+      \ of carrying over from a previous death."
+    type: Fix
+  id: 3674
+  time: '2026-09-29T21:49:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10707
 Name: RMC14
 Order: -1

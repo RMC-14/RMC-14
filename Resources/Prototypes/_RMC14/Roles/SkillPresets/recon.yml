@@ -60,3 +60,83 @@
       RMCSkillConstruction: 2
       RMCSkillMedical: 2
       RMCSkillSurgery: 1
+
+# Varadero survs (LACN on CM)
+# They're in the same file as FORECON survivors on CM, so I'm applying the same logic here
+
+- type: entity
+  parent: RMCSkillPresetSurvivor
+  id: RMCSkillPresetSurvivorUNMCRifleman
+  name: Survivor UNMC Standard
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillEngineer: 1
+      RMCSkillPowerLoader: 1
+      RMCSkillMedical: 1
+      RMCSkillDomestics: 1
+
+- type: entity
+  parent: RMCSkillPresetSurvivor
+  id: RMCSkillPresetSurvivorUNMCVeteranRifleman
+  name: Survivor UNMC Veteran Rifleman
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillCqc: 2
+      RMCSkillPolice: 0 # RMC14: Survs don't get police skill
+      RMCSkillFirearms: 2
+
+- type: entity
+  parent: RMCSkillPresetSurvivor
+  id: RMCSkillPresetSurvivorUNMCGroundCrew
+  name: Survivor UNMC Ground Crew
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillPilot: 1
+      RMCSkillEngineer: 4
+      RMCSkillConstruction: 3
+      RMCSkillMedical: 1
+      RMCSkillDomestics: 2
+      RMCSkillVehicles: 1
+      RMCSkillJtac: 1
+      RMCSkillPowerLoader: 2
+
+- type: entity
+  parent: RMCSkillPresetSurvivor
+  id: RMCSkillPresetSurvivorUNMCVehicleCrewman
+  name: Survivor UNMC Vehicle Crewman
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillFirearms: 2
+      RMCSkillEngineer: 3
+      RMCSkillConstruction: 2
+      RMCSkillMedical: 1
+      RMCSkillDomestics: 2
+      RMCSkillVehicles: 2
+      RMCSkillPowerLoader: 1
+
+- type: entity
+  parent: RMCSkillPresetSurvivor
+  id: RMCSkillPresetSurvivorUNMCFighterPilot
+  name: Survivor UNMC Fighter Pilot
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillPilot: 2
+      RMCSkillCqc: 1
+      RMCSkillEngineer: 2
+      RMCSkillConstruction: 2
+      RMCSkillMedical: 1
+      RMCSkillVehicles: 1
+      RMCSkillJtac: 3
+      RMCSkillDomestics: 1
+      RMCSkillFireman: 2
+      RMCSkillMeleeWeapons: 1

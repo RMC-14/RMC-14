@@ -17,11 +17,12 @@
     turnDelay: 1
     turnInPlace: true
     turnInPlaceMaxSpeed: 0.5
-    pushCooldown: 2
+    pushCooldown: 1
     canPushVehicles: true
     blockingMobBypassNudgeLimit: 2
     xenoBlockMinimumSize: Immobile
     canXenosPush: false
+    weightClass: Medium
   - type: VehicleRideSurface
     bounds:
     - -1.3,-1.9,1.3,1.9
