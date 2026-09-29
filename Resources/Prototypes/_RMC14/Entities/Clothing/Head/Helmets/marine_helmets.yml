@@ -329,6 +329,15 @@
     - RMCVisorSquadIntegrated
     - RMCVisorPilotBlack
 
+- type: entity
+  parent: CMArmorHelmetM30
+  id: RMCArmorHelmetM30NoVisor
+  components:
+  - type: IntegratedVisors
+    visorsToAdd:
+    - RMCVisorMedicalAdvancedIntegrated
+    - RMCVisorSquadIntegrated
+
 # Press
 - type: entity
   parent: ArmorHelmetM10

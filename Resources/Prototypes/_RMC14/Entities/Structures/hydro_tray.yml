@@ -5,6 +5,7 @@
   description: Used for growing plants.
   components:
   - type: VehicleSmashable
+  - type: Corrodible
   - type: Fixtures
     fixtures:
       fix1:

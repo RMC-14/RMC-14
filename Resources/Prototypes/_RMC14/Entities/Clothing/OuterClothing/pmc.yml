@@ -90,6 +90,18 @@
     sprintModifier: 0.725
 
 - type: entity
+  parent: CMArmorM3VLSynth
+  id: CMArmorM4PMCCorporateSynth
+  name: M1 pattern corporate synthetic armor
+  description: A basic synthetic personnel vest with a Weston-Yamada badge on the right breast. This is a rare sight, as low-level security units often aren't afforded the luxury of an accompanying synthetic. It has all of the armor inserts removed.
+  suffix: ""
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/corporate.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+- type: entity
   parent: CMArmorM4PMCCorporate
   id: CMArmorM4PMCCorporateLead
   description: A basic vest with a We-Ya badge on the right breast. This variant is worn by low-level guards that have elevated in rank due to 'good conduct in the field', also known as corporate bootlicking.
