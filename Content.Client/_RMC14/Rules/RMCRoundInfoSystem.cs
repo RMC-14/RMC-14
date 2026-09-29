@@ -4,27 +4,13 @@ namespace Content.Client._RMC14.Rules;
 
 public sealed class RMCRoundInfoSystem : EntitySystem
 {
-    public string GetOperationName()
+    private RMCRoundInfoComponent? GetRoundInfo()
     {
         var query = EntityQueryEnumerator<RMCRoundInfoComponent>();
-        while (query.MoveNext(out _, out var info))
-            return info.OperationName;
-        return string.Empty;
+        return query.MoveNext(out _, out var info) ? info : null;
     }
 
-    public string GetPlanetName()
-    {
-        var query = EntityQueryEnumerator<RMCRoundInfoComponent>();
-        while (query.MoveNext(out _, out var info))
-            return info.PlanetName;
-        return string.Empty;
-    }
-
-    public string GetShipName()
-    {
-        var query = EntityQueryEnumerator<RMCRoundInfoComponent>();
-        while (query.MoveNext(out _, out var info))
-            return info.ShipName;
-        return string.Empty;
-    }
+    public string GetOperationName() => GetRoundInfo()?.OperationName ?? string.Empty;
+    public string GetPlanetName() => GetRoundInfo()?.PlanetName ?? string.Empty;
+    public string GetShipName() => GetRoundInfo()?.ShipName ?? string.Empty;
 }
