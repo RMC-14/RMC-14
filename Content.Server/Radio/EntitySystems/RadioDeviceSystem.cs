@@ -172,6 +172,7 @@ public sealed class RadioDeviceSystem : EntitySystem
             comp.Enabled = false;
             RemCompDeferred<BlockListeningComponent>(uid);
         }
+        // RMC14
 
         _appearance.SetData(uid, RadioDeviceVisuals.Broadcasting, component.Enabled);
         if (component.Enabled)
@@ -223,6 +224,7 @@ public sealed class RadioDeviceSystem : EntitySystem
             args.PushMarkup(Loc.GetString("handheld-radio-component-chennel-examine",
                 ("channel", proto.LocalizedName)));
 
+            // RMC14
             if (component.ToggleOnInteract)
             {
                 var state = Loc.GetString(component.Enabled ? "handheld-radio-component-on-state" : "handheld-radio-component-off-state");
@@ -232,6 +234,7 @@ public sealed class RadioDeviceSystem : EntitySystem
 
                 args.PushMarkup(Loc.GetString("handheld-radio-component-state-examine", ("radioState", state)));
             }
+            // RMC14
         }
     }
 
