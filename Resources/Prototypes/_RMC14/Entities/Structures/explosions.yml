@@ -1,3 +1,23 @@
+## Vehicle wreck demolition
+
+- type: entity
+  parent: MarkerBase
+  id: RMCVehicleWreckExplosion
+  name: vehicle wreck explosion
+  suffix: Explodes when triggered
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Explosive
+    explosionType: RMC
+    totalIntensity: 1500
+    intensitySlope: 6
+    maxIntensity: 45
+    canCreateVacuum: false
+  - type: CMExplosionEffect
+  - type: TileFireOnTrigger
+    range: 3
+
 ## Mortar Shells
 
 - type: entity
