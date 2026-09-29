@@ -43,9 +43,6 @@ public sealed partial class VehicleDeployableComponent : Component
     public TimeSpan NextAutoTargetTime;
 
     [DataField]
-    public EntityUid? TargetingDeployer;
-
-    [DataField]
     public EntityUid? AutoTarget;
 
     [DataField]

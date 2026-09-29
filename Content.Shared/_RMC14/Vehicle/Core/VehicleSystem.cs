@@ -53,7 +53,7 @@ public sealed partial class VehicleSystem : EntitySystem
 {
     private static readonly EntProtoId VehicleKey = "RMCVehicleKey";
 
-    private const float CrashMinSpeedFraction = 0.15f;
+    private const float CrashMinSpeedFraction = 0.9f;
     private const float CrashThrowSpeed = 10f;
 
     private static readonly SoundSpecifier XenoFrameBreachSound = new SoundCollectionSpecifier("XenoPry");
