@@ -307,8 +307,11 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
             user,
             args.Message,
             Loc.GetString("rmc-announcement-author-shipside"),
-            sound: SharedMarineAnnounceSystem.AresAnnouncementSound,
-            filter: Filter.BroadcastMap(map).RemoveWhereAttachedEntity(e => !HasComp<MarineComponent>(e) && !HasComp<GhostComponent>(e))
+            options: new SignedAnnouncementOptions
+            {
+                Sound = SharedMarineAnnounceSystem.AresAnnouncementSound,
+                Filter = Filter.BroadcastMap(map).RemoveWhereAttachedEntity(e => !HasComp<MarineComponent>(e) && !HasComp<GhostComponent>(e)),
+            }
         );
 
         _core.CreateARESLog(ent, LogCat, (string)$"{Name(user)} sent a Warship Announcement: {args.Message}");

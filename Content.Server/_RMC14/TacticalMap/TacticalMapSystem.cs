@@ -5,11 +5,15 @@ using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Rules.DistressSignal;
 using Content.Server.Administration.Logs;
 using Content.Server.GameTicking.Events;
+using Content.Shared._RMC14.Announce;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship.Weapon;
+using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Medical.Unrevivable;
+using Content.Shared._RMC14.Survivor;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
@@ -18,7 +22,9 @@ using Content.Shared._RMC14.Xenonids.HiveLeader;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
 using Content.Shared.Atmos.Rotting;
+using Content.Shared.Chat;
 using Content.Shared.Database;
+using Content.Shared.Ghost;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -32,6 +38,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -41,6 +48,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
+    [Dependency] private readonly AnnouncementRouterSystem _announcementRouter = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly CMDistressSignalRuleSystem _distressSignal = default!;
     [Dependency] private readonly XenoEvolutionSystem _evolution = default!;
@@ -1003,7 +1011,34 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
                 IncludeRangedXenoBlips(mapId, map, map.LastUpdateMarineBlips);
 
-                _marineAnnounce.AnnounceARESStaging(user, "The UNMC tactical map has been updated.", sound);
+                var message = "The UNMC tactical map has been updated.";
+                var filter = Filter.Empty()
+                    .AddWhereAttachedEntity(e => HasComp<MarineComponent>(e) || HasComp<GhostComponent>(e));
+                filter.RemoveWhereAttachedEntity(HasComp<RMCSurvivorComponent>);
+
+                var wrapped = _marineAnnounce.FormatARESStaging(null, message);
+                _announcementRouter.Announce(new AnnouncementRequest
+                {
+                    Message = message,
+                    Preset = "MarineCommandNoPortrait",
+                    Route = new AnnouncementRoute
+                    {
+                        Target = AnnouncementTarget.Marines,
+                        Source = user,
+                        Channels = AnnouncementChannels.Chat | AnnouncementChannels.Overlay | AnnouncementChannels.Sound,
+                    },
+                    Chat = new AnnouncementChatOptions
+                    {
+                        Message = wrapped,
+                        WrappedMessage = wrapped,
+                        Channel = ChatChannel.Radio,
+                    },
+                    Sound = new AnnouncementSoundOptions
+                    {
+                        Sound = sound ?? SharedMarineAnnounceSystem.AresAnnouncementSound,
+                        Volume = -2f,
+                    }
+                }, filter);
                 _adminLog.Add(LogType.RMCTacticalMapUpdated, $"{ToPrettyString(user)} updated the marine tactical map for {ToPrettyString(mapId)}");
             }
 
