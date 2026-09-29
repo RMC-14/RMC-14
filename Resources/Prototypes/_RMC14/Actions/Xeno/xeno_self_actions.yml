@@ -210,8 +210,8 @@
 - type: entity
   id: ActionXenoPsychic
   parent: ActionXenoBase
-  name: Psychic
-  description: Harness your psychic power to communicate to either a host, everyone around you or a xenonid.
+  name: Psychic Communication
+  description: Harness your psychic power to communicate to either a host, everyone around you or a xenonid via targeting either target or the floor for radiance.
   components:
   - type: Action
     itemIconStyle: NoItem
