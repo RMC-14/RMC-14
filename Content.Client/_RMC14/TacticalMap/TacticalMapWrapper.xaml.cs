@@ -138,6 +138,11 @@ public sealed partial class TacticalMapWrapper : Control
         LoadSettings();
     }
 
+    public void SetPlanetName(string? name)
+    {
+        PlanetNameLabel.Text = name ?? string.Empty;
+    }
+
     public void LoadMapSpecificSettings(TacticalMapSettings settings, string? mapName)
     {
         SetMapEntity(mapName);
