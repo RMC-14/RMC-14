@@ -64,21 +64,22 @@ public sealed class DialogSystem : EntitySystem
         RemComp<DialogComponent>(ent);
     }
 
-    public void OpenOptions(EntityUid target, EntityUid actor, string title, List<DialogOption> options, string message = "")
+    public void OpenOptions(EntityUid target, EntityUid actor, string title, List<DialogOption> options, string message = "", bool enableSearch = true)
     {
         var dialog = EnsureComp<DialogComponent>(target);
         dialog.Title = title;
         dialog.Message = new DialogOption(message);
         dialog.DialogType = DialogType.Options;
         dialog.Options = options;
+        dialog.EnableSearch = enableSearch;
         Dirty(target, dialog);
 
         _ui.TryOpenUi(target, DialogUiKey.Key, actor);
     }
 
-    public void OpenOptions(EntityUid actor, string title, List<DialogOption> options, string message = "")
+    public void OpenOptions(EntityUid actor, string title, List<DialogOption> options, string message = "", bool enableSearch = true)
     {
-        OpenOptions(actor, actor, title, options, message);
+        OpenOptions(actor, actor, title, options, message, enableSearch);
     }
 
     public void OpenInput(EntityUid target, EntityUid actor, string message, DialogInputEvent? ev, bool largeInput = false, int characterLimit = 200, int minCharacterLimit = 0, bool smartCheck = false, bool autoFocus = true)

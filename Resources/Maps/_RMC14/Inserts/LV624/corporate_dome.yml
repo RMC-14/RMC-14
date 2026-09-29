@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 07/04/2026 11:01:19
-  entityCount: 357
+  time: 08/19/2026 04:58:41
+  entityCount: 359
 maps: []
 grids:
 - 1
@@ -1393,6 +1393,13 @@ entities:
     - type: Transform
       pos: 16.5,15.5
       parent: 1
+- proto: RMCCrateBottledWaterX50
+  entities:
+  - uid: 359
+    components:
+    - type: Transform
+      pos: 11.5,6.5
+      parent: 1
 - proto: RMCCrateSecureWeYa
   entities:
   - uid: 62
@@ -1644,6 +1651,13 @@ entities:
     components:
     - type: Transform
       pos: 16.302855,16.926456
+      parent: 1
+- proto: RMCLaptopOn
+  entities:
+  - uid: 358
+    components:
+    - type: Transform
+      pos: 15.5,16.5
       parent: 1
 - proto: RMCLightFixture
   entities:
@@ -1946,13 +1960,6 @@ entities:
     - type: Transform
       pos: 15.5,10.5
       parent: 1
-- proto: RMCSecureCaseStrapped
-  entities:
-  - uid: 298
-    components:
-    - type: Transform
-      pos: 11.5,6.5
-      parent: 1
 - proto: RMCSpaceCash1000
   entities:
   - uid: 299
@@ -1969,6 +1976,13 @@ entities:
     components:
     - type: Transform
       pos: 13.5,13.5
+      parent: 1
+- proto: RMCSpawnerCorpseCLF
+  entities:
+  - uid: 306
+    components:
+    - type: Transform
+      pos: 6.5,12.5
       parent: 1
 - proto: RMCSpawnerCorpseColonist
   entities:
@@ -1998,9 +2012,9 @@ entities:
     - type: Transform
       pos: 6.5,16.5
       parent: 1
-- proto: RMCSpawnerCorpseWeYaPMC
+- proto: RMCSpawnerCorpseWeYaGoon
   entities:
-  - uid: 306
+  - uid: 298
     components:
     - type: Transform
       pos: 19.5,13.5
