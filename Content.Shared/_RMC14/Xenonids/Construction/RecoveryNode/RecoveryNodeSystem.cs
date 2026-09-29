@@ -34,7 +34,7 @@ public sealed partial class RecoveryNodeSystem : EntitySystem
     private EntityQuery<XenoComponent> _xenoQuery;
 
     private readonly HashSet<EntityUid> _nearbyEntities = [];
-    private readonly HashSet<EntityUid> _possibleTargets = [];
+    private readonly List<EntityUid> _possibleTargets = [];
 
     public override void Initialize()
     {
@@ -100,12 +100,10 @@ public sealed partial class RecoveryNodeSystem : EntitySystem
         }
 
         recoveryNode.Comp.NextRecoveryAt = _time.CurTime + recoveryNode.Comp.Cooldown;
+        Dirty(recoveryNode);
 
         if (_possibleTargets.Count == 0)
-        {
-            Dirty(recoveryNode);
             return;
-        }
 
         var selectedTarget = _random.Pick(_possibleTargets);
         var recover = new DoAfterArgs(EntityManager,
