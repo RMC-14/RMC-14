@@ -29,7 +29,7 @@ public sealed partial class TacticalMapControl : TextureRect
 
     private const float MapScale = 3f;
     private const float BaseBlipSize = 14f;
-    private const float ClickTolerance = 8f;
+    private const float ClickTolerance = 4f;
     private const float BlipEdgeRatio = 0.7f;
     private const float CloseBlipThreshold = 2.2f;
     private const float CloseBlipSafety = 0.8f;
@@ -102,6 +102,7 @@ public sealed partial class TacticalMapControl : TextureRect
     public bool QueenEyeMode { get; set; }
 
     public Action<Vector2i>? OnBlipClicked;
+    public Func<int, TacticalMapBlip, bool>? OnEntityBlipClicked;
     public Action<Vector2i, string>? OnBlipRightClicked;
     public Action? OnUserInteraction;
     public Action<Vector2i>? OnQueenEyeMove;
@@ -373,30 +374,64 @@ public sealed partial class TacticalMapControl : TextureRect
         return new Vector2i(pos.X - _min.X, _delta.Y - (pos.Y - _min.Y));
     }
 
-    private TacticalMapBlip? GetBlipAtPosition(Vector2 controlPosition)
+    private bool TryGetBlipAtPosition(Vector2 controlPosition, out TacticalMapBlip blip, out int? entityId)
     {
+        blip = default;
+        entityId = null;
+
         if (_blips == null || Texture == null)
-            return null;
+            return false;
 
-        Vector2 pixelPosition = LogicalToPixel(controlPosition);
-        (Vector2 actualSize, Vector2 actualTopLeft, float overlayScale) = GetDrawParameters();
-        float clickTolerance = ClickTolerance * overlayScale;
+        var pixelPosition = LogicalToPixel(controlPosition);
+        var (_, actualTopLeft, overlayScale) = GetDrawParameters();
+        var clickTolerance = ClickTolerance * GetUIScale();
+        var scaledBlipSize = GetScaledBlipSize(overlayScale);
+        var blipSize = new Vector2(scaledBlipSize, scaledBlipSize);
+        var exactIndex = -1;
+        var exactDistance = float.MaxValue;
+        var fallbackIndex = -1;
+        var fallbackDistance = float.MaxValue;
 
-        foreach (TacticalMapBlip blip in _blips)
+        for (var i = _blips.Length - 1; i >= 0; i--)
         {
-            Vector2 blipPosition = IndicesToPosition(blip.Indices) * overlayScale + actualTopLeft;
-            float scaledBlipSize = GetScaledBlipSize(overlayScale);
-
-            UIBox2 blipRect = UIBox2.FromDimensions(
-                blipPosition - new Vector2(clickTolerance, clickTolerance),
-                new Vector2(scaledBlipSize + clickTolerance * 2, scaledBlipSize + clickTolerance * 2)
-            );
+            var candidate = _blips[i];
+            var blipPosition = IndicesToPosition(candidate.Indices) * overlayScale + actualTopLeft;
+            var blipRect = UIBox2.FromDimensions(blipPosition, blipSize);
+            var blipCenter = blipPosition + blipSize / 2;
+            var distance = Vector2.DistanceSquared(pixelPosition, blipCenter);
 
             if (blipRect.Contains(pixelPosition))
-                return blip;
+            {
+                if (distance < exactDistance)
+                {
+                    exactIndex = i;
+                    exactDistance = distance;
+                }
+
+                continue;
+            }
+
+            var toleranceRect = UIBox2.FromDimensions(
+                blipPosition - new Vector2(clickTolerance, clickTolerance),
+                blipSize + new Vector2(clickTolerance * 2, clickTolerance * 2)
+            );
+
+            if (!toleranceRect.Contains(pixelPosition) || distance >= fallbackDistance)
+                continue;
+
+            fallbackIndex = i;
+            fallbackDistance = distance;
         }
 
-        return null;
+        var selectedIndex = exactIndex >= 0 ? exactIndex : fallbackIndex;
+        if (selectedIndex < 0)
+            return false;
+
+        blip = _blips[selectedIndex];
+        entityId = _blipEntityIds != null && selectedIndex < _blipEntityIds.Length
+            ? _blipEntityIds[selectedIndex]
+            : null;
+        return true;
     }
 
     private Vector2i? GetLabelAtPosition(Vector2 controlPosition)
@@ -578,8 +613,10 @@ public sealed partial class TacticalMapControl : TextureRect
             float scaledBlipSize = GetScaledBlipSize(overlayScale);
             UIBox2 rect = UIBox2.FromDimensions(position, new Vector2(scaledBlipSize, scaledBlipSize));
 
-            handle.DrawTextureRect(blip.Background != null ? system.GetFrame(blip.Background, curTime) : background, rect, blip.Color);
-            handle.DrawTextureRect(system.GetFrame(blip.Image, curTime), rect);
+            var backgroundColor = blip.Color.WithAlpha(blip.Color.A * blip.Opacity);
+            var iconColor = Color.White.WithAlpha(blip.Opacity);
+            handle.DrawTextureRect(blip.Background != null ? system.GetFrame(blip.Background, curTime) : background, rect, backgroundColor);
+            handle.DrawTextureRect(system.GetFrame(blip.Image, curTime), rect, iconColor);
 
             if (_localPlayerEntityId.HasValue && _blipEntityIds != null && i < _blipEntityIds.Length)
             {
@@ -590,7 +627,7 @@ public sealed partial class TacticalMapControl : TextureRect
             }
 
             if (blip.HiveLeader)
-                handle.DrawTextureRect(system.GetFrame(hiveLeaderRsi, curTime), rect);
+                handle.DrawTextureRect(system.GetFrame(hiveLeaderRsi, curTime), rect, iconColor);
 
             var defibTexture = blip.Status switch
             {
@@ -602,7 +639,7 @@ public sealed partial class TacticalMapControl : TextureRect
                 _ => null,
             };
             if (defibTexture != null)
-                handle.DrawTextureRect(system.GetFrame(defibTexture, curTime), rect);
+                handle.DrawTextureRect(system.GetFrame(defibTexture, curTime), rect, iconColor);
         }
     }
 
@@ -742,13 +779,13 @@ public sealed partial class TacticalMapControl : TextureRect
 
         if (args.Function == EngineKeyFunctions.UIClick)
         {
+            if (HandleBlipClick(args))
+                return;
+
             if (HandleQueenEyeClick(args))
                 return;
 
             if (HandleLabelClick(args))
-                return;
-
-            if (HandleBlipClick(args))
                 return;
 
             HandleDrawingClick(args);
@@ -803,13 +840,22 @@ public sealed partial class TacticalMapControl : TextureRect
 
     private bool HandleBlipClick(GUIBoundKeyEventArgs args)
     {
-        TacticalMapBlip? clickedBlip = GetBlipAtPosition(args.RelativePosition);
-        if (clickedBlip != null && !Drawing && !QueenEyeMode)
+        if (Drawing || !TryGetBlipAtPosition(args.RelativePosition, out var blip, out var entityId))
+            return false;
+
+        if (entityId != null && OnEntityBlipClicked?.Invoke(entityId.Value, blip) == true)
         {
-            OnBlipClicked?.Invoke(clickedBlip.Value.Indices);
             args.Handle();
             return true;
         }
+
+        if (!QueenEyeMode && OnBlipClicked != null)
+        {
+            OnBlipClicked.Invoke(blip.Indices);
+            args.Handle();
+            return true;
+        }
+
         return false;
     }
 
@@ -845,10 +891,10 @@ public sealed partial class TacticalMapControl : TextureRect
 
     private bool HandleBlipRightClick(GUIBoundKeyEventArgs args)
     {
-        TacticalMapBlip? clickedBlip = GetBlipAtPosition(args.RelativePosition);
-        if (clickedBlip != null && OnBlipRightClicked != null)
+        if (OnBlipRightClicked != null &&
+            TryGetBlipAtPosition(args.RelativePosition, out var blip, out _))
         {
-            OnBlipRightClicked.Invoke(clickedBlip.Value.Indices, "");
+            OnBlipRightClicked.Invoke(blip.Indices, "");
             args.Handle();
             return true;
         }
