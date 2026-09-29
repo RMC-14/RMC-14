@@ -365,13 +365,13 @@
       entries:
       - id: RMCWeaponRifleL83A3Stripped
         amount: 10
-      - id: RMCWeaponShotgunM3717Stripped
-        amount: 3
+      - id: RMCWeaponRifleL90A2
+        amount: 10
     - name: Secondary Weapons
       entries:
       - id: RMCWeaponPistolL54
         amount: 10
-      - id: RMCMK80
+      - id: RMCMK80RCM
         amount: 2
     - name: Ammunition
       entries:
@@ -491,7 +491,7 @@
       - id: CMMaskCoif
       - id: RMCHeadsetTSEPAConstable
       - id: RMCTantoA  
-      - id: CMHandsLatex
+      - id: RMCHandsLatexMarine 
     - name: Backpacks
       choices: { CMBackpack: 1 }
       entries:
@@ -537,7 +537,7 @@
         recommended: true
       - id: RMCPouchMedkit
         recommended: true
-      - id: RMCPouchAutoinjector
+      - id: RMCPouchAutoinjectorFill
 
 # SAT Sniper
 - type: entity

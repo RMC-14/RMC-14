@@ -307,25 +307,6 @@
     labelTextLocId: rmc-dermaline-container-label-text
 
 - type: entity
-  parent: CMAutoInjector
-  id: RMCMeralyneAutoInjector
-  name: meralyne autoinjector
-  description: An autoinjector loaded with 3 uses of Meralyne, an advanced brute treatment chemical.
-  components:
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 45
-        reagents:
-        - ReagentId: CMMeralyne
-          Quantity: 45
-  - type: CMRefillableSolution
-    reagents:
-      CMMeralyne: 45
-  - type: IconLabel
-    labelTextLocId: rmc-meralyne-container-label-text
-
-- type: entity
   parent: RMCMedicAutoInjectorBase
   id: RMCMedicAutoInjector15
   name: medic autoinjector (M-XL)
