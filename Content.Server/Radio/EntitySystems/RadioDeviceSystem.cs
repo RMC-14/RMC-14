@@ -100,6 +100,11 @@ public sealed class RadioDeviceSystem : EntitySystem
         if (!component.ToggleOnInteract)
             return;
 
+        // RMC14
+        if (HasComp<RMCRadioListenOnlyModeComponent>(uid) && HasComp<RadioMicrophoneComponent>(uid))
+            return;
+        // RMC14
+
         ToggleRadioSpeaker(uid, args.User, args.Handled, component);
         args.Handled = true;
     }
@@ -112,6 +117,7 @@ public sealed class RadioDeviceSystem : EntitySystem
         // RMC14
         if (TryComp(uid, out RMCRadioListenOnlyModeComponent? comp))
         {
+            // On to Listen, Mic stops transmitting but speaker still recieves.
             if (!comp.Enabled && component.Enabled)
             {
                 comp.Enabled = true;
@@ -121,11 +127,17 @@ public sealed class RadioDeviceSystem : EntitySystem
                 var message = Loc.GetString("handheld-radio-component-on-use", ("radioState", state));
                 _popup.PopupEntity(message, user, user);
 
-                _appearance.SetData(uid, RadioDeviceVisuals.Broadcasting, !comp.Enabled);
-
+                _appearance.SetData(uid, RadioDeviceVisuals.Broadcasting, false);
                 return;
             }
+
+            // will need a guard for Speaker if a PowerRequired=True radio is ever added.
+            var enabled = !component.Enabled;
+            SetMicrophoneEnabled(uid, user, enabled, quiet, component);
+            SetSpeakerEnabled(uid, user, enabled, true);
+            return;
         }
+        // RMC14
 
         SetMicrophoneEnabled(uid, user, !component.Enabled, quiet, component);
     }
@@ -171,10 +183,6 @@ public sealed class RadioDeviceSystem : EntitySystem
     public void ToggleRadioSpeaker(EntityUid uid, EntityUid user, bool quiet = false, RadioSpeakerComponent? component = null)
     {
         if (!Resolve(uid, ref component))
-            return;
-
-        // RMC14
-        if (TryComp(uid, out RMCRadioListenOnlyModeComponent? comp) && comp.Enabled && component.Enabled)
             return;
 
         SetSpeakerEnabled(uid, user, !component.Enabled, quiet, component);
