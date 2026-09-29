@@ -125,7 +125,7 @@ rmc-new-to-job-fireteam-leader = As a Fireteam Leader, your role is possibly the
 
                                              Your primary duty is communication and small unit leadership aided by a wide range of tools, most importantly your radiotelephone backpack. (For further information on communication methods please refer to the "Marine Communications" guidebook entry.) Relay and execute your squad leader’s directives and pass on supply requests to Requisitions. You are the squad's second-in-command, this means that upon losing your Squad Leader you are first in line to be assigned as Acting Squad Leader (ASL). No one is expecting miracles from you, just listen to your commander and get your jarheads home alive.
 
-											 You are issued advanced support tools as standard, while you also have access to breaching explosives (Breaching charges and plastic explosives) and very affordable signal flare packs as optional equipment.
+                                             You are issued advanced support tools as standard, while you also have access to breaching explosives (Breaching charges and plastic explosives) and very affordable signal flare packs as optional equipment.
 
                                              You are extensively trained as a Joint Terminal Attack Controller (JTAC), speeding up your laser designator use massively. Use this to mark targets for Close Air Support (CAS) or to obtain coordinates for supply drops (to be transmitted to squad overwatch, preferably by phone), mortar support, or even an orbital strike. (You can switch the designator between laser designation [Target] and rangefinding [Coordinate] modes by alt+left clicking on it.)
 
