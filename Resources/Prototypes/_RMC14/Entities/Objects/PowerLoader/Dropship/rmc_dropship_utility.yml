@@ -13,7 +13,7 @@
   - type: DropshipUtility
     skills:
       all:
-        RMCSkillPilot: 2
+        RMCSkillPilot: 1
   - type: PowerLoaderAttachable
     attachDelay: 7
     attachableTypes:
