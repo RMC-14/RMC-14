@@ -1,108 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed squad headsets not having the correct default channel, they should
-      now default to your squad.
-    type: Fix
-  id: 3159
-  time: '2026-04-22T04:17:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9175
-- author: Dygon
-  changes:
-  - message: Fixed left clicking a weapon mount as a xenonid dismounting the user.
-    type: Fix
-  - message: You can now pick up a folded weapon mount with harm mode toggled on.
-    type: Fix
-  id: 3160
-  time: '2026-04-23T23:32:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9719
-- author: kleinerstation13
-  changes:
-  - message: Added intact TSE airbase insert, which has a 28% chance of occuring.
-    type: Add
-  id: 3161
-  time: '2026-04-23T23:31:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9671
-- author: SharkSnake98
-  changes:
-  - message: Changed the sprites of the potted plants, palm trees, and red couch
-    type: Tweak
-  id: 3162
-  time: '2026-04-23T23:33:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9707
-- author: Dygon
-  changes:
-  - message: Fixed throwing items into disposal bins.
-    type: Fix
-  - message: Bullets no longer pass through ColMarTech vendors.
-    type: Fix
-  id: 3163
-  time: '2026-04-23T23:37:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9717
-- author: DrSmugleaf
-  changes:
-  - message: Added impenetrable xeno resin walls and doors, which can't be damaged
-      before 30 minutes into the round, being the equivalent of LZ turrets for marines.
-      Impenetrable resin doors block survivors and marines even while open, and will
-      only let them through if they are stunned or devoured. These will line the inner
-      part of hives on each planet.
-    type: Add
-  id: 3164
-  time: '2026-04-24T03:57:48.075386+00:00'
-  url: null
-- author: IceNoobXD
-  changes:
-  - message: Lazarus Landing has recived a passover which adds a lot of minor props
-      and a gas pipe layout for nexus!
-    type: Tweak
-  - message: Lazarus Landing lake house loot has been removed.
-    type: Remove
-  id: 3165
-  time: '2026-04-24T10:15:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9686
-- author: TadJohnson00
-  changes:
-  - message: '[PVE] Added the Webley MkX TBR for use by RCM senior officers.'
-    type: Add
-  id: 3166
-  time: '2026-04-27T00:29:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8907
-- author: Vixting
-  changes:
-  - message: Added fun!
-    type: Add
-  - message: Removed fun!
-    type: Remove
-  - message: Changed fun!
-    type: Tweak
-  - message: Fixed fun!
-    type: Fix
-  id: 3167
-  time: '2026-04-27T00:31:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9703
-- author: TadJohnson00
-  changes:
-  - message: The Warwick MkVII revolver now has the correct tags and should fit in
-      appropriate webbings, belts, etc.
-    type: Fix
-  id: 3168
-  time: '2026-04-28T01:39:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9739
-- author: TadJohnson00
-  changes:
-  - message: Added new ear markings for vulpkanin, felinids, and humans - as well
-      as three new hairstyles.
-    type: Add
-  id: 3169
-  time: '2026-04-29T19:59:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8974
-- author: TadJohnson00
-  changes:
-  - message: Resprited the M890 to look a little more slick.
-    type: Tweak
-  id: 3170
-  time: '2026-04-29T19:59:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8880
 - author: IceNoobXD
   changes:
   - message: The water in the coagulation pits and at the river ends on Trijent Dam
@@ -4438,5 +4334,107 @@
   id: 3658
   time: '2026-09-18T15:47:50.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10420
+- author: kleinerstation13
+  changes:
+  - message: Fixed lifeboat doors being meltable
+    type: Fix
+  id: 3659
+  time: '2026-09-19T00:35:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10866
+- author: FreeSpy443
+  changes:
+  - message: Enabled Command Tablet Medal printing
+    type: Tweak
+  id: 3660
+  time: '2026-09-21T18:10:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10876
+- author: kleinerstation13
+  changes:
+  - message: Fixed UNMC synthetic not having bigger pointing arrow
+    type: Fix
+  id: 3661
+  time: '2026-09-23T15:31:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10890
+- author: kleinerstation13
+  changes:
+  - message: Fixed a single SPP shuttle wall type incorrectly having occlusion enabled
+    type: Fix
+  id: 3662
+  time: '2026-09-23T15:30:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10891
+- author: ffxivsidehoes
+  changes:
+  - message: Hydroponics trays are now meltable.
+    type: Tweak
+  id: 3663
+  time: '2026-09-25T20:47:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10864
+- author: MrFish-100
+  changes:
+  - message: Fixed ASRS Wall Vendors not playing vending animation
+    type: Fix
+  id: 3664
+  time: '2026-09-25T20:48:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10883
+- author: kleinerstation13
+  changes:
+  - message: Paramarine support synthetic is now a Warrant Officer Class 2
+    type: Tweak
+  - message: Added WeYa Goon, PMC and CMB synthvivor variants for inserts
+    type: Add
+  - message: Added CMB riot control and We-Ya goon synthetic armor variants
+    type: Add
+  - message: Fixed FORECON synth not spawning with a reset key and other items
+    type: Fix
+  - message: Fixed the PMC Operator role on the Crashlanding Solaris insert having
+      the incorrect HUD icon
+    type: Fix
+  id: 3665
+  time: '2026-09-25T22:32:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10855
+- author: IceNoobXD
+  changes:
+  - message: MPs/MWs and CMPs can now find basic medical visors in their vendors!
+    type: Add
+  - message: Both Pilot jumpsuits now have camouflage variations
+    type: Add
+  - message: XO, SO, ASO, LO, CE, CMP, MP, MW, dropship staff, and IO vendors have
+      received a parity update that adds new items or adjusts quantities.
+    type: Tweak
+  id: 3666
+  time: '2026-09-27T15:51:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10155
+- author: kleinerstation13
+  changes:
+  - message: Added colored poly-kevlon window variants
+    type: Add
+  - message: Desaturated the colored prefabricated structure wall variants
+    type: Tweak
+  id: 3667
+  time: '2026-09-28T01:17:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10828
+- author: CatAndHats
+  changes:
+  - message: Fixed Sorokyne Strata LZ2 (south LZ) weedkiller not covering Geothermal
+      Springs, Geothermal Water, and Parts Storage Exterior
+    type: Fix
+  id: 3668
+  time: '2026-09-28T16:37:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10872
+- author: CatAndHats
+  changes:
+  - message: Fixed some water on Kutjevo being toxic when it shouldn't have been
+    type: Fix
+  id: 3669
+  time: '2026-09-28T16:50:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10755
+- author: CatAndHats
+  changes:
+  - message: Changed Vehicle Crewman rankups! VCs progression is now E3, E4, E5 (instead
+      of just E4)
+    type: Tweak
+  id: 3670
+  time: '2026-09-28T21:09:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10642
 Name: RMC14
 Order: -1
