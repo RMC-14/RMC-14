@@ -3,7 +3,6 @@
   id: RMCSurvivorNewVaraderoUNRepresentative
   name: rmc-job-name-survivor-varadero-un-asst-rep
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivor
   startingGear: RMCGearSurvivorUNRepresentative
   spawnMenuRoleName: UN Assistant Representative (NV Survivor)
   greeting: rmc-job-greeting-varadero
