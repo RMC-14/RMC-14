@@ -99,3 +99,12 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Drinks/weya_thermos.rsi
+
+- type: entity
+  parent: CMCanteenBase
+  id: RMCWeYaCanteen
+  name: weston-yamada canteen
+  description: A stylish, resilient canteen bearing the logo of the Weston-Yamada Corporation. A perfect fit for employees who work in tough conditions.
+  components:
+  - type: Sprite
+    state: weya_canteen

@@ -787,6 +787,7 @@
   points: 7
   groups:
   - ExecutiveSecurityGuardBackpack
+  - BodyguardRoleSpecificRMC
   - HeadwearRMC
   - EyewearRMC
   - MasksRMC

@@ -148,6 +148,10 @@
           points: 4
         - id: RMCBoxZiptie
           points: 4
+        - id: CMFireExtinguisherPortable
+          points: 2
+        - id: CMHealthAnalyzer
+          points: 2
     # ////////////////////////////////////
     # PPO
     # ////////////////////////////////////
@@ -157,6 +161,7 @@
         choices: { CMHelmet: 1 }
         entries:
         - id: RMCHeadCapExecutiveBodyguard
+        - id: RMCArmorHelmetPMCBlack
       - name: Mask
         ranks:
         - RMCRankWeYaBodyguardPPO
@@ -242,6 +247,10 @@
           points: 4
         - id: RMCBoxZiptie
           points: 4
+        - id: CMFireExtinguisherPortable
+          points: 2
+        - id: CMHealthAnalyzer
+          points: 2
     # ////////////////////////////////////
     # PPS / PPC
     # ////////////////////////////////////
@@ -252,6 +261,7 @@
         choices: { CMHelmet: 1 }
         entries:
         - id: RMCHeadCapExecutiveBodyguard
+        - id: RMCArmorHelmetPMCBlack
         - id: RMCArmorHelmetExecutiveBodyguard
       - name: Mask
         ranks:
@@ -382,3 +392,7 @@
           points: 4
         - id: RMCBoxZiptie
           points: 4
+        - id: CMFireExtinguisherPortable
+          points: 2
+        - id: CMHealthAnalyzer
+          points: 2
