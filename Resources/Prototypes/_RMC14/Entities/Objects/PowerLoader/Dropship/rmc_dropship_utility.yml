@@ -172,9 +172,9 @@
   - type: DropshipFabricatorPrintable
     cost: 200
   - type: DropshipUtility
-    skills:
-      all:
-        RMCSkillPilot: 2 #todo rmc14 fix skill check not working properly
+  #  skills:
+  #    all:
+  #      RMCSkillPilot: 2 #todo rmc14 fix skill check not working
   - type: DropshipAttachedSprite
     sprite:
       sprite: _RMC14/Objects/dropship_utility_attachments.rsi
