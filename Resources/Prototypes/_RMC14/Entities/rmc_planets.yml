@@ -331,6 +331,7 @@
       - CMSurvivorEngineer: 1
       - CMSurvivorSecurity: 2
       - CMSurvivor: -1
+      - RMCSyntheticColony: 1
     survivorJobVariantScenarios:
       spp_bar:
         RMCSyntheticColony:
