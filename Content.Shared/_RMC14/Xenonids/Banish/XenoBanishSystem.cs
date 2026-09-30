@@ -6,6 +6,7 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Popups;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -20,6 +21,7 @@ public sealed class XenoBanishSystem : EntitySystem
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly ISharedPlaytimeManager _playtime = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
@@ -44,6 +46,24 @@ public sealed class XenoBanishSystem : EntitySystem
 
         if (_hive.GetHive(ent.Owner) is not { } hive)
             return;
+
+        if (!TryComp(ent, out ActorComponent? actor))
+            return;
+
+        try
+        {
+            var playTimes = _playtime.GetPlayTimes(actor.PlayerSession);
+            if (!playTimes.TryGetValue(ent.Comp.PlayTime, out var time) ||
+                time < ent.Comp.BanishRequiredTime)
+            {
+                _popup.PopupCursor(Loc.GetString("rmc-banish-error-not-enough-playtime", ("requiredHours", (int) ent.Comp.BanishRequiredTime.TotalHours)), ent, PopupType.LargeCaution);
+                return;
+            }
+        }
+        catch
+        {
+            // ignored
+        }
 
         if (!_xenoPlasma.HasPlasmaPopup(ent.Owner, ent.Comp.BanishPlasmaCost, false))
             return;

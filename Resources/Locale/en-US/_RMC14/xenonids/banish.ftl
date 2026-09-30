@@ -13,6 +13,7 @@ rmc-banish-success = {$name} has been banished from the hive.
 rmc-banish-no-valid-targets = No valid xenomorphs to banish.
 
 # Banish Errors
+rmc-banish-error-not-enough-playtime = You need at least {$requiredHours} hours of Queen playtime to banish xenomorphs.
 rmc-banish-cant-banish-self = You cannot banish yourself.
 rmc-banish-cant-banish-parasite = You cannot banish parasites.
 rmc-banish-already-banished = This xenomorph is already banished!
@@ -39,6 +40,9 @@ rmc-readmit-cooldown = You must wait before readmitting this xenomorph.
 # Role Taking Prevention
 rmc-banish-cant-take-role = You are currently unable to take xeno roles.
 rmc-banish-cant-take-role-time = You are currently unable to take xeno roles. Time remaining: {$seconds} seconds.
+
+# Evolution Prevention
+rmc-xeno-evolution-failed-banished = You cannot evolve while banished from the hive.
 
 # Announcements
 rmc-banish-announcement = {$name} has been banished from the hive. Reason: {$reason}
