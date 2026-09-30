@@ -74,6 +74,11 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
         Subs.CVar(_config, RMCCVars.RMCLateJoinsPerBurrowedLarva, v => _lateJoinsPerBurrowedLarva = v, true);
     }
 
+    private void OnJoinBurrowedLarvaAttempt(ref JoinBurrowedLarvaAttemptEvent ev)
+    {
+        // Placeholder for banish checks - handled by XenoBanishRequirementSystem
+    }
+
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
     {
         if (!ev.LateJoin || !HasComp<MarineComponent>(ev.Mob))

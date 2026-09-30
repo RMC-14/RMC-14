@@ -6,6 +6,9 @@ namespace Content.Shared._RMC14.Xenonids.Banish;
 public sealed partial class XenoBanishComponent : Component
 {
     [DataField, AutoNetworkedField]
+    public bool Banished = true;
+
+    [DataField, AutoNetworkedField]
     public bool CanDamageHive = false;
 
     [DataField, AutoNetworkedField]

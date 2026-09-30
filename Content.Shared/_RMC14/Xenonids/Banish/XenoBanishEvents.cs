@@ -1,4 +1,3 @@
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Content.Shared._RMC14.Dialog;
 
@@ -8,7 +7,7 @@ namespace Content.Shared._RMC14.Xenonids.Banish;
 public sealed class ManageHiveBanishEvent : EntityEventArgs;
 
 [Serializable, NetSerializable]
-public sealed class ManageHiveBanishXenoEvent(NetEntity xeno) : EntityEventArgs
+public sealed class ManageHiveBanishChooseXenoEvent(NetEntity xeno) : EntityEventArgs
 {
     public NetEntity Xeno = xeno;
 }

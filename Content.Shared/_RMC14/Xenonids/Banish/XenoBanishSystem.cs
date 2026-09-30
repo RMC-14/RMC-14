@@ -2,15 +2,13 @@ using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.ManageHive;
 using Content.Shared._RMC14.Xenonids.Plasma;
-using Content.Shared._RMC14.Xenonids.Watch;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
-using Content.Shared.FixedPoint;
 using Content.Shared.Interaction.Events;
-using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Banish;
@@ -24,13 +22,12 @@ public sealed class XenoBanishSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedXenoWatchSystem _xenoWatch = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<ManageHiveComponent, ManageHiveBanishEvent>(OnManageHiveBanish);
-        SubscribeLocalEvent<ManageHiveComponent, ManageHiveBanishXenoEvent>(OnManageHiveBanishXeno);
+        SubscribeLocalEvent<ManageHiveComponent, ManageHiveBanishChooseXenoEvent>(OnManageHiveBanishChooseXeno);
         SubscribeLocalEvent<ManageHiveComponent, ManageHiveBanishReasonEvent>(OnManageHiveBanishReason);
         SubscribeLocalEvent<ManageHiveComponent, ManageHiveReadmitEvent>(OnManageHiveReadmit);
         SubscribeLocalEvent<ManageHiveComponent, ManageHiveReadmitXenoEvent>(OnManageHiveReadmitXeno);
@@ -45,19 +42,51 @@ public sealed class XenoBanishSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (!CanBanishPopup(ent, out var watched) || watched == null)
+        if (_hive.GetHive(ent.Owner) is not { } hive)
             return;
 
+        if (!_xenoPlasma.HasPlasmaPopup(ent.Owner, ent.Comp.BanishPlasmaCost, false))
+            return;
+
+        // Build list of banishable xenos
+        var options = new List<DialogOption>();
+        var query = EntityQueryEnumerator<XenoComponent, HiveMemberComponent, ActorComponent>();
+        while (query.MoveNext(out var uid, out _, out var member, out _))
+        {
+            if (uid == ent.Owner)
+                continue;
+
+            if (member.Hive != hive.Owner)
+                continue;
+
+            if (HasComp<XenoBanishComponent>(uid))
+                continue;
+
+            if (_mobState.IsCritical(uid) || _mobState.IsDead(uid))
+                continue;
+
+            options.Add(new DialogOption(Name(uid), new ManageHiveBanishChooseXenoEvent(GetNetEntity(uid))));
+        }
+
+        if (options.Count == 0)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-banish-no-valid-targets"), ent, ent, PopupType.MediumCaution);
+            return;
+        }
+
         var rules = Loc.GetString("rmc-banish-rules");
-        _dialog.OpenConfirmation(ent, Loc.GetString("rmc-banish-title"), rules, new ManageHiveBanishXenoEvent(GetNetEntity(watched.Value)));
+        _dialog.OpenOptions(ent, Loc.GetString("rmc-banish-title"), options, rules);
     }
 
-    private void OnManageHiveBanishXeno(Entity<ManageHiveComponent> ent, ref ManageHiveBanishXenoEvent args)
+    private void OnManageHiveBanishChooseXeno(Entity<ManageHiveComponent> ent, ref ManageHiveBanishChooseXenoEvent args)
     {
         if (_net.IsClient)
             return;
 
-        if (!TryGetEntity(args.Xeno, out var xeno) || !CanBanishPopup(ent, out var watched) || watched == null || xeno.Value != watched.Value)
+        if (!TryGetEntity(args.Xeno, out var xeno))
+            return;
+
+        if (!CanBanishTarget(ent, xeno.Value))
             return;
 
         var msg = Loc.GetString("rmc-banish-confirm", ("name", Name(xeno.Value)));
@@ -69,7 +98,10 @@ public sealed class XenoBanishSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (!TryGetEntity(args.Xeno, out var xeno) || !CanBanishPopup(ent, out var watched) || watched == null || xeno.Value != watched.Value)
+        if (!TryGetEntity(args.Xeno, out var xeno))
+            return;
+
+        if (!CanBanishTarget(ent, xeno.Value))
             return;
 
         if (string.IsNullOrWhiteSpace(args.Message))
@@ -182,43 +214,38 @@ public sealed class XenoBanishSystem : EntitySystem
         Readmit(ent.Owner, xeno.Value);
     }
 
-    private bool CanBanishPopup(Entity<ManageHiveComponent> manage, out EntityUid? watched)
+    private bool CanBanishTarget(Entity<ManageHiveComponent> manage, EntityUid target)
     {
-        watched = null;
-        if (!_xenoWatch.TryGetWatched(manage.Owner, out var watchedId) || watchedId == manage.Owner)
+        if (target == manage.Owner)
+            return false;
+
+        if (!HasComp<XenoComponent>(target))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-hivemanagement-must-overwatch"), manage, manage, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-banish-not-xeno"), target, manage, PopupType.MediumCaution);
             return false;
         }
 
-        if (!HasComp<XenoComponent>(watchedId))
+        if (_mobState.IsCritical(target) || _mobState.IsDead(target))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-banish-not-xeno"), watchedId, manage, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-banish-crit"), target, manage, PopupType.MediumCaution);
             return false;
         }
 
-        if (_mobState.IsCritical(watchedId))
+        if (!_hive.FromSameHive(manage.Owner, target))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-banish-crit"), watchedId, manage, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-hivemanagement-cant-deevolve-other-hive"), target, manage, PopupType.MediumCaution);
             return false;
         }
 
-        if (!_hive.FromSameHive(manage.Owner, watchedId))
+        if (HasComp<XenoBanishComponent>(target))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-hivemanagement-cant-deevolve-other-hive"), watchedId, manage, PopupType.MediumCaution);
-            return false;
-        }
-
-        if (HasComp<XenoBanishComponent>(watchedId))
-        {
-            _popup.PopupEntity(Loc.GetString("rmc-banish-already-banished"), watchedId, manage, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-banish-already-banished"), target, manage, PopupType.MediumCaution);
             return false;
         }
 
         if (!_xenoPlasma.HasPlasmaPopup(manage.Owner, manage.Comp.BanishPlasmaCost, false))
             return false;
 
-        watched = watchedId;
         return true;
     }
 
