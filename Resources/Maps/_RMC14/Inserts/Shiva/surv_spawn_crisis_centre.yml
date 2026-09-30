@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 04/17/2026 00:09:25
-  entityCount: 53
+  time: 06/16/2026 10:15:42
+  entityCount: 55
 maps: []
 grids:
 - 1
@@ -118,6 +118,13 @@ entities:
     components:
     - type: Transform
       pos: 0.5,2.5
+      parent: 1
+- proto: CMFoldingBarricade
+  entities:
+  - uid: 54
+    components:
+    - type: Transform
+      pos: 2.5,4.5
       parent: 1
 - proto: CMLockerBase
   entities:
@@ -327,17 +334,25 @@ entities:
     - type: Transform
       pos: 5.383516,5.52571
       parent: 1
-- proto: RMCLamp
+- proto: RMCIntelDataTerminal
   entities:
   - uid: 27
     components:
     - type: Transform
+      rot: -1.5707963267948966 rad
       pos: 2.5,3.5
       parent: 1
+- proto: RMCLamp
+  entities:
   - uid: 29
     components:
     - type: Transform
       pos: 4.5,2.5
+      parent: 1
+  - uid: 55
+    components:
+    - type: Transform
+      pos: 1.5,4.5
       parent: 1
 - proto: RMCLightStickRedSmall
   entities:

@@ -38,16 +38,16 @@
   description: Standard-issue Military Warden uniform. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/MP/warden/jungle.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/Warden/jungle.rsi
   - type: FoldableClothing
     foldedEquippedPrefix: sleeves
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: _RMC14/Objects/Clothing/Uniforms/MP/warden/jungle.rsi
-      Desert: _RMC14/Objects/Clothing/Uniforms/MP/warden/desert.rsi
-      Snow: _RMC14/Objects/Clothing/Uniforms/MP/warden/snow.rsi
-      Classic: _RMC14/Objects/Clothing/Uniforms/MP/warden/classic.rsi
-      Urban: _RMC14/Objects/Clothing/Uniforms/MP/warden/urban.rsi
+      Jungle: _RMC14/Objects/Clothing/Uniforms/MP/Warden/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/MP/Warden/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/MP/Warden/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/MP/Warden/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/MP/Warden/urban.rsi
   - type: Tag
     tags:
     - RMCUniformMarine

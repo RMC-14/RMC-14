@@ -302,10 +302,10 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public bool AresGreetingDone;
 
     [DataField]
-    public TimeSpan AresMapDelay = TimeSpan.FromSeconds(20);
+    public bool AresPreflightDone;
 
     [DataField]
-    public bool AresMapDone;
+    public int AresAnnouncementIndex;
 
     [DataField]
     public TimeSpan? StartTime;

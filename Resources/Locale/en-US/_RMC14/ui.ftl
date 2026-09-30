@@ -3,6 +3,18 @@
 rmc-ui-options-cassettes-volume = Cassette volume:
 rmc-ui-options-hijack-song-volume = Hijack song volume:
 rmc-ui-options-xeno-ability-previews = Show xeno ability previews
+rmc-ui-options-marine-equipment-previews = Show marine equipment previews
+rmc-ui-options-post-death-chat-mute = Mute chat briefly after death
+rmc-ui-options-post-death-chat-mute-confirmation-title = Disable post-death chat mute?
+rmc-ui-options-post-death-chat-mute-confirmation-text = Disabling this mute means you may immediately see the reaction of other characters after your character dies.
+  Remember to separate character interactions from player interactions, comments about your character are not necessarily directed at you.
+
+  If something upsets you, step away before responding, and use admin help for rule-breaking behavior.
+  Read the "Roleplay Setting Disclaimer" in the "Don't Antagonize/Harass Others" section of the rules.
+
+  By continuing, you acknowledge that you may see potentially upsetting post-death reactions and agree not to get upset at other players over in-character interactions.
+rmc-ui-options-post-death-chat-mute-confirmation-accept = I understand, disable
+rmc-ui-options-post-death-chat-mute-confirmation-deny = Keep chat mute enabled
 
 rmc-ui-voicelines = Voicelines
 rmc-ui-options-tab-voicelines = Voicelines
@@ -93,6 +105,7 @@ rmc-other-credits-tab = Other
 rmc-ui-auto-punctuate = Automatically punctuate in-character messages
 rmc-ui-auto-eject-magazines = Automatically eject magazines from guns
 rmc-ui-damage-yourself = Enable being able to hurt yourself with melee and guns
+rmc-ui-hive-leader-tackle-xenos = Tackle other xenos as hive leader.
 rmc-ui-show-new-player-icons = Show new player icons as mentor or department head roles
 rmc-ui-xeno-night-vision-default = Xeno night vision default
 rmc-ui-xeno-night-vision-default-off = Off

@@ -51,6 +51,13 @@
     - Alive
     - Critical
     - Dead
+  - type: Language
+    spokenLanguages:
+    - Xeno
+    understoodLanguages:
+    - Xeno
+    currentLanguage: Xeno
+    defaultLanguage: Xeno
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -174,6 +181,8 @@
   - type: Body
     prototype: Xenonid
   - type: Xeno
+  - type: VehicleDamageMultiplier
+    multiplier: 1.5
   - type: XenoRegen
   - type: XenoStateVisuals
   - type: UserInterface

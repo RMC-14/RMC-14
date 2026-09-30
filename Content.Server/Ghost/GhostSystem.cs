@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Numerics;
+using Content.Server._RMC14.Mobs;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
@@ -9,6 +10,7 @@ using Content.Server.Roles.Jobs;
 using Content.Server.Warps;
 using Content.Shared._RMC14.Ghost;
 using Content.Shared._RMC14.Mentor.ImaginaryFriend;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
 using Content.Shared.CCVar;
 using Content.Shared.Damage;
@@ -72,11 +74,16 @@ namespace Content.Server.Ghost
         [Dependency] private readonly TagSystem _tag = default!;
         [Dependency] private readonly NameModifierSystem _nameMod = default!;
 
+        // RMC14
+        [Dependency] private readonly CMGhostSystem _cmGhost = default!;
+        // RMC14
+
         private EntityQuery<GhostComponent> _ghostQuery;
         private EntityQuery<PhysicsComponent> _physicsQuery;
 
         private static readonly ProtoId<TagPrototype> AllowGhostShownByEventTag = "AllowGhostShownByEvent";
         private static readonly ProtoId<DamageTypePrototype> AsphyxiationDamageType = "Asphyxiation";
+        private static readonly ProtoId<DamageTypePrototype> BluntDamageType = "Blunt";
 
         public override void Initialize()
         {
@@ -509,6 +516,10 @@ namespace Content.Server.Ghost
 
             SetCanReturnToBody((ghost, ghostComponent), canReturn);
 
+            // RMC14
+            _cmGhost.SetPostDeathChatMute(ghost, (mind.Owner, mind.Comp), mind.Comp.OwnedEntity);
+            // RMC14
+
             if (canReturn)
                 _minds.Visit(mind.Owner, ghost, mind.Comp);
             else
@@ -600,6 +611,11 @@ namespace Content.Server.Ghost
                     }
 
                     DamageSpecifier damage = new(_prototypeManager.Index(AsphyxiationDamageType), dealtDamage);
+
+                    if (HasComp<XenoComponent>(playerEntity))
+                    {
+                        damage = new(_prototypeManager.Index(BluntDamageType), dealtDamage);
+                    }
 
                     _damageable.TryChangeDamage(playerEntity, damage, true);
                 }

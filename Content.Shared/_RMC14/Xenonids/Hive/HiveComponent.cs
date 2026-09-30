@@ -103,4 +103,7 @@ public sealed partial class HiveComponent : Component
 
     [DataField, AutoNetworkedField]
     public HashSet<EntityUid> BanishedXenos = new();
+
+    [DataField, AutoNetworkedField]
+    public HashSet<GibbedXenoInfo> GibbedXenos = new();
 }

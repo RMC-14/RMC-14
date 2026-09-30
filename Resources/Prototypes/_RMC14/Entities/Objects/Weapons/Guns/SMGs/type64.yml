@@ -54,6 +54,7 @@
         whitelist:
           tags:
           - RMCMagazineSMGType64
+          - RMCMagazineSMGType64Rubber
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -126,6 +127,31 @@
     size: Small
 
 - type: entity
+  parent: RMCMagazineSMGType64
+  id: RMCMagazineSMGType64Rubber
+  name: "Type 64 rubber magazine (10x20mm)"
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineSmg
+    - RMCMagazineSMGType64Rubber
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeType64Rubber
+    proto: RMCCartridgeType64Rubber
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/type64.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#0A00C8"
+
+- type: entity
   parent: CMCartridgeSMGBase
   id: RMCCartridgeType64
   name: cartridge (10x20mm)
@@ -136,6 +162,18 @@
     - RMCCartridgeType64
   - type: CartridgeAmmo
     proto: RMCBulletType64
+
+- type: entity
+  parent: CMCartridgeSMGBase
+  id: RMCCartridgeType64Rubber
+  name: cartridge (10x20mm)
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeType64Rubber
+  - type: CartridgeAmmo
+    proto: RMCBulletType64Rubber
 
 - type: entity
   parent: RMCBaseBullet
@@ -161,6 +199,11 @@
     - range: 4
       falloff: 10
 
+- type: entity
+  parent: Bullet10x20mmRubber
+  id: RMCBulletType64Rubber
+  categories: [ HideSpawnMenu ]
+
 - type: Tag
   id: RMCWeaponSMGType64
 
@@ -168,4 +211,10 @@
   id: RMCMagazineSMGType64
 
 - type: Tag
+  id: RMCMagazineSMGType64Rubber
+
+- type: Tag
   id: RMCCartridgeType64
+
+- type: Tag
+  id: RMCCartridgeType64Rubber

@@ -30,6 +30,7 @@
 
           #Auxiliary
           CMAuxiliarySupportOfficer: [1, 1]
+          CMVehicleCrewman: [0, 0]
           CMIntelOfficer: [4, 4]
           CMPilotDropship: [1, 1]
           CMPilotGunship: [1, 1]

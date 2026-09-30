@@ -1,0 +1,44 @@
+- type: entity
+  parent: RMCBaseRockNonCollide
+  id: RMCBaseRockStalagmite
+  name: stalagmite
+  description: A cave stalagmite.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Flora/stalagmite.rsi
+    state: stalagmite
+
+- type: entity
+  parent: RMCBaseRockStalagmite
+  id: RMCBaseRockStalagmite1
+  components:
+  - type: Sprite
+    state: stalagmite1
+
+- type: entity
+  parent: RMCBaseRockStalagmite
+  id: RMCBaseRockStalagmite2
+  components:
+  - type: Sprite
+    state: stalagmite2
+
+- type: entity
+  parent: RMCBaseRockStalagmite
+  id: RMCBaseRockStalagmite3
+  components:
+  - type: Sprite
+    state: stalagmite3
+
+- type: entity
+  parent: RMCBaseRockStalagmite
+  id: RMCBaseRockStalagmite4
+  components:
+  - type: Sprite
+    state: stalagmite4
+
+- type: entity
+  parent: RMCBaseRockStalagmite
+  id: RMCBaseRockStalagmite5
+  components:
+  - type: Sprite
+    state: stalagmite5

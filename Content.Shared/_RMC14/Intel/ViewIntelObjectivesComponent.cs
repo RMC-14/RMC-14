@@ -10,8 +10,14 @@ public sealed partial class ViewIntelObjectivesComponent : Component
     public string ActionId = "RMCActionViewIntelObjectives";
 
     [DataField, AutoNetworkedField]
+    public bool AddAction = true;
+
+    [DataField, AutoNetworkedField]
     public EntityUid? Action;
 
     [DataField, AutoNetworkedField]
     public IntelTechTree Tree = new();
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<NetEntity, string> PersonalClues = new();
 }

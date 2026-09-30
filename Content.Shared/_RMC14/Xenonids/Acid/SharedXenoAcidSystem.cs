@@ -31,29 +31,34 @@ using Robust.Shared.GameObjects;
 using Robust.Shared.Physics;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared._RMC14.Chemistry;
+using Content.Shared._RMC14.Vehicle;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Audio;
 
 namespace Content.Shared._RMC14.Xenonids.Acid;
 
 public abstract class SharedXenoAcidSystem : EntitySystem
 {
+    [Dependency] private readonly XenoAcidHoleSystem _acidHole = default!;
+    [Dependency] private readonly CollisionWakeSystem _collisionWake = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedDropshipSystem _dropship = default!;
     [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
+    [Dependency] private readonly FixtureSystem _fixtures = default!;
+    [Dependency] private readonly HardpointSystem _hardpoints = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly XenoAcidHoleSystem _acidHole = default!;
     [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly XenoEnergySystem _xenoEnergy = default!;
-    [Dependency] private readonly FixtureSystem _fixtures = default!;
-    [Dependency] private readonly CollisionWakeSystem _collisionWake = default!;
+    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     protected int CorrosiveAcidTickDelaySeconds;
     protected ProtoId<DamageTypePrototype> CorrosiveAcidDamageTypeStr = "Heat";
@@ -182,6 +187,24 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         if (!xeno.Comp.CanMeltStructures && corrodible.Structure)
             return;
 
+        if (HasComp<HardpointSlotsComponent>(target))
+        {
+            if (args.PlasmaCost != 0 && !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
+                return;
+
+            if (args.EnergyCost != 0 && !_xenoEnergy.TryRemoveEnergyPopup(xeno.Owner, args.EnergyCost))
+                return;
+
+            if (_net.IsClient)
+                return;
+
+            args.Handled = true;
+
+            var vehicleDamage = args.VehicleDamage ?? GetDefaultVehicleAcidDamage(args.Strength);
+            _hardpoints.DamageHardpoint(target, target, vehicleDamage);
+            return;
+        }
+
         // Re-check if acid can be replaced at DoAfter end to prevent race conditions
         // (e.g., weak acid downgrading strong acid if both DoAfters were started before any completed)
         if (IsMelted(target) && !CanReplaceAcid(target, args.Strength))
@@ -213,7 +236,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         if (CorrosiveAcidInstant)
             acidTime = TimeSpan.Zero;
 
-        ApplyAcid(args.AcidId, args.Strength, target, args.Dps, args.ExpendableLightDps, acidTime);
+        ApplyAcid(args.AcidId, args.Strength, target, args.Dps, args.ExpendableLightDps, acidTime, args.AcidSound);
     }
 
     /// <summary>
@@ -221,12 +244,12 @@ public abstract class SharedXenoAcidSystem : EntitySystem
     /// </summary>
     private void OnAmmoShot(Entity<InheritAcidComponent> ent, ref AmmoShotEvent args)
     {
-        if(!TryComp(ent, out TimedCorrodingComponent? corroding))
+        if (!TryComp(ent, out TimedCorrodingComponent? corroding))
             return;
 
         foreach (var projectile in args.FiredProjectiles)
         {
-            ApplyAcid(corroding.AcidPrototype, corroding.Strength, projectile, corroding.LightDps, corroding.Dps, corroding.CorrodesAt, true);
+            ApplyAcid(corroding.AcidPrototype, corroding.Strength, projectile, corroding.LightDps, corroding.Dps, corroding.CorrodesAt, null, true);
         }
     }
 
@@ -237,7 +260,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
     {
         if (TryComp(args.Source, out TimedCorrodingComponent? corroding))
         {
-            ApplyAcid(corroding.AcidPrototype, corroding.Strength, ent, corroding.Dps, corroding.LightDps, corroding.CorrodesAt, true);
+            ApplyAcid(corroding.AcidPrototype, corroding.Strength, ent, corroding.Dps, corroding.LightDps, corroding.CorrodesAt, null, true);
         }
     }
 
@@ -264,13 +287,15 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             if (!solution.Comp.Solution.ContainsReagent(AcidRemovedBy, null))
                 continue;
 
-            if (HasComp<GunComponent>(ent.Owner) &&
-                (!TryComp(ent.Owner, out GunSecondWindComponent? secondWind) || !secondWind.HasSecondWind))
+            if (!TryComp(ent.Owner, out GunSecondWindComponent? secondWind) || !secondWind.HasSecondWind)
             {
-                _popup.PopupEntity(
-                    Loc.GetString("rmc-acid-gun-second-wind-spent", ("target", ent.Owner)),
-                    ent.Owner,
-                    PopupType.SmallCaution);
+                if (secondWind != null)
+                {
+                    _popup.PopupEntity(
+                        Loc.GetString("rmc-acid-gun-second-wind-spent", ("target", ent.Owner)),
+                        ent.Owner,
+                        PopupType.SmallCaution);
+                }
                 return;
             }
 
@@ -340,7 +365,8 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         return true;
     }
 
-    public void ApplyAcid(EntProtoId acidId, XenoAcidStrength strength, EntityUid target, float dps, float lightDps, TimeSpan time, bool inherit = false)
+    public void ApplyAcid(EntProtoId acidId, XenoAcidStrength strength, EntityUid target, float dps, float lightDps,
+        TimeSpan time, SoundSpecifier? acidSound = null, bool inherit = false)
     {
         if (_net.IsClient)
             return;
@@ -372,7 +398,11 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             CorrodesAt = time,
             Dps = dps,
             LightDps = lightDps,
+            AcidSound = acidSound,
         });
+
+        if (acidSound is { } sound)
+            _audio.PlayPvs(sound, target);
 
         EnsureAcidVaporFixture(target);
         EnsureAcidCollisionWake(target);
@@ -421,6 +451,8 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             var ev = new BeforeMeltedEvent();
             RaiseLocalEvent(uid, ref ev);
 
+            _audio.PlayPvs(timedCorrodingComponent.AcidSound, Transform(uid).Coordinates);
+
             if (_acidHole.TryCreateHoleFromMelt(uid))
             {
                 QueueDel(timedCorrodingComponent.Acid);
@@ -459,6 +491,16 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         Dirty(uid, secondWind);
         RemoveAcid(uid);
         return true;
+    }
+
+    private static float GetDefaultVehicleAcidDamage(XenoAcidStrength strength)
+    {
+        return strength switch
+        {
+            XenoAcidStrength.Weak => 16f,
+            XenoAcidStrength.Strong => 100f,
+            _ => 40f,
+        };
     }
 
     public bool IsMelted(EntityUid uid)

@@ -113,6 +113,9 @@ namespace Content.Client.Lobby.UI
         private bool _isDirty;
 
         private static readonly ProtoId<GuideEntryPrototype> DefaultSpeciesGuidebook = "Species";
+        // RMC14
+        private static readonly ProtoId<TraitCategoryPrototype> SpeechTraitsCategory = "SpeechTraits";
+        // RMC14
 
         public event Action<List<ProtoId<GuideEntryPrototype>>>? OnOpenGuidebook;
 
@@ -651,7 +654,9 @@ namespace Content.Client.Lobby.UI
                     });
                 }
 
-                List<TraitPreferenceSelector?> selectors = new();
+                // RMC14
+                var selectors = new List<(TraitPreferenceSelector Selector, bool IsLanguageTrait)>();
+                // RMC14
                 var selectionCount = 0;
 
                 foreach (var traitProto in categoryTraits)
@@ -677,7 +682,9 @@ namespace Content.Client.Lobby.UI
                         SetDirty();
                         RefreshTraits(); // If too many traits are selected, they will be reset to the real value.
                     };
-                    selectors.Add(selector);
+                    // RMC14
+                    selectors.Add((selector, trait.Language != null));
+                    // RMC14
                 }
 
                 // Selection counter
@@ -690,13 +697,52 @@ namespace Content.Client.Lobby.UI
                     });
                 }
 
-                foreach (var selector in selectors)
+                // RMC14
+                if (categoryId == SpeechTraitsCategory)
                 {
-                    if (selector == null)
-                        continue;
+                    var languageSelectors = selectors
+                        .Where(selector => selector.IsLanguageTrait)
+                        .Select(selector => selector.Selector)
+                        .ToList();
+                    var otherSelectors = selectors
+                        .Where(selector => !selector.IsLanguageTrait)
+                        .Select(selector => selector.Selector)
+                        .ToList();
 
-                    if (category is { MaxTraitPoints: >= 0 } &&
-                        selector.Cost + selectionCount > category.MaxTraitPoints)
+                    AddTraitSelectors(languageSelectors, selectionCount, category, "rmc-trait-group-languages");
+                    AddTraitSelectors(otherSelectors, selectionCount, category, "rmc-trait-group-other-speech");
+                }
+                else
+                {
+                    AddTraitSelectors(selectors.Select(selector => selector.Selector).ToList(), selectionCount, category);
+                }
+                // RMC14
+            }
+
+            // RMC14
+            void AddTraitSelectors(
+                List<TraitPreferenceSelector> selectorsToAdd,
+                int currentSelectionCount,
+                TraitCategoryPrototype? currentCategory,
+                string? groupLabel = null)
+            {
+                if (selectorsToAdd.Count == 0)
+                    return;
+
+                if (groupLabel != null)
+                {
+                    TraitsList.AddChild(new Label
+                    {
+                        Text = Loc.GetString(groupLabel),
+                        Margin = new Thickness(8, 6, 0, 0),
+                        FontColorOverride = Color.LightGray
+                    });
+                }
+
+                foreach (var selector in selectorsToAdd)
+                {
+                    if (currentCategory is { MaxTraitPoints: >= 0 } &&
+                        selector.Cost + currentSelectionCount > currentCategory.MaxTraitPoints)
                     {
                         selector.Checkbox.Label.FontColorOverride = Color.Red;
                     }
@@ -704,6 +750,7 @@ namespace Content.Client.Lobby.UI
                     TraitsList.AddChild(selector);
                 }
             }
+            // RMC14
         }
 
         /// <summary>
@@ -1138,7 +1185,7 @@ namespace Content.Client.Lobby.UI
 
                         foreach (var rank in job.Ranks)
                         {
-                            if (_prototypeManager.TryIndex(rank.Key, out RankPrototype? rankPrototype) && rankPrototype != null)
+                            if (_prototypeManager.TryIndex(rank.Key, out var rankPrototype))
                             {
                                 rankOptions.AddItem(rankPrototype.Name);
                                 rankProtoIds.Add(rank.Key);
@@ -1148,6 +1195,7 @@ namespace Content.Client.Lobby.UI
                             }
                         }
 
+                        rankOptions.SetItemDisabled(rankOptions.ItemCount - 1, true);
                         // If the job only has 1 rank there is nothing to choose.
                         if (rankProtoIds.Count <= 2)
                             rankOptions.Disabled = true;
@@ -1650,6 +1698,7 @@ namespace Content.Client.Lobby.UI
 
         private void UpdatePlaytimeRankPreferenceControls()
         {
+            var preferenceAdjusted = false;
             foreach (var (jobID, optionsButton, rankIds) in _rankPriorities)
             {
                 if (!_prototypeManager.TryIndex(jobID, out JobPrototype? job) || job == null)
@@ -1664,8 +1713,17 @@ namespace Content.Client.Lobby.UI
                 if (selectedIndex < 0)
                     selectedIndex = 0;
 
+                if (preferredRank is { } rank && rank == rankIds.Last())
+                {
+                    Profile = Profile?.WithRankPreference(jobID, null);
+                    preferenceAdjusted = true;
+                }
+
                 optionsButton.Select(selectedIndex);
             }
+
+            if (preferenceAdjusted)
+                Save?.Invoke();
         }
 
         private void UpdateSquadPreferenceControls()

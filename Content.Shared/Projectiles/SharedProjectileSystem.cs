@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Shared._RMC14.Projectiles.Penetration;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
+using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Xenonids.Damage;
 using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared.Administration.Logs;
@@ -16,6 +17,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
@@ -37,6 +39,9 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     [Dependency] private readonly SharedDestructibleSystem _destructible = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    // RMC14
+    [Dependency] private readonly SharedContainerSystem _container = default!;
+    // RMC14
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
@@ -406,7 +411,28 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         if (component.IgnoreShooter && (args.OtherEntity == component.Shooter || args.OtherEntity == component.Weapon))
         {
             args.Cancelled = true;
+            return;
         }
+
+        // RMC14
+        if (component.Weapon == null)
+            return;
+
+        if (!HasComp<GunIgnoreContainerOwnerCollisionComponent>(component.Weapon.Value))
+            return;
+
+        var current = component.Weapon.Value;
+        while (_container.TryGetContainingContainer((current, null), out var container))
+        {
+            if (args.OtherEntity == container.Owner)
+            {
+                args.Cancelled = true;
+                return;
+            }
+
+            current = container.Owner;
+        }
+        // RMC14
     }
 
     public void SetShooter(EntityUid id, ProjectileComponent component, EntityUid? shooterId = null)

@@ -4,7 +4,7 @@
   id: RMCPlayingCardBase
   categories: [ HideSpawnMenu ]
   name: Playing card
-  description: A standard playing card.
+  description: ""
   components:
   - type: PlayingCard
   - type: Sprite
@@ -24,7 +24,7 @@
   parent: BaseItem
   id: RMCPlayingCardHand
   name: Hand of cards
-  description: A hand of playing cards.
+  description: ""
   categories: [ HideSpawnMenu ]
   components:
   - type: PlayingCardHand
@@ -32,8 +32,7 @@
     sprite: _RMC14/Objects/Fun/playing_cards.rsi
     state: back_deck
   - type: Item
-  - type: UseDelay
-    delay: 0.1
+    size: Tiny
   - type: UserInterface
     interfaces:
       enum.PlayingCardHandUi.Key:
@@ -53,5 +52,4 @@
     sprite: _RMC14/Objects/Fun/playing_cards.rsi
     state: deck
   - type: Item
-  - type: UseDelay
-    delay: 0.1
+    size: Tiny

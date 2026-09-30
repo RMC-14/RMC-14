@@ -75,8 +75,18 @@ rmc-xeno-evolution-failed-early-weeds = The hive hasn't developed enough yet for
 rmc-xeno-evolution-failed-bad-location = We can't evolve here.
 rmc-xeno-evolution-failed-marines-dropped = The sky talls have already landed, we can no longer evolve into this form.
 rmc-xeno-evolution-failed-queen-exists = The hive already has a Queen!
+rmc-xeno-evolution-failed-not-enough-points = We need more evolution material.
 rmc-xeno-evolution-start-self = We begin to twist and contort.
 rmc-xeno-evolution-start-others = {$xeno} begins to twist and contort.
+rmc-xeno-evolution-raffle-entered = We put ourselves forward to become a {$caste}. The hive will decide when a slot opens.
+rmc-xeno-evolution-raffle-won = The hive has chosen us!
+rmc-xeno-evolution-raffle-grace-health = A slot has opened for us, but we must be at full health! We have {$seconds} seconds.
+rmc-xeno-evolution-raffle-grace-location = A slot has opened for us, but we cannot evolve here! We have {$seconds} seconds.
+rmc-xeno-evolution-raffle-grace-weeds = A slot has opened for us, but we must be on weeds! We have {$seconds} seconds.
+rmc-xeno-evolution-raffle-missed = We were not ready in time and lost our place in the raffle.
+rmc-xeno-evolution-raffle-blocked-lower = A slot has opened for us, but the hive already has too many Tier {$tier} and higher sisters — one must fall or a Tier {$tier} slot open before we can ascend directly.
+rmc-xeno-evolution-tab-evolve = Evolve
+rmc-xeno-evolution-tab-raffle = Raffle
 
 # Insight
 rmc-xeno-insight-empower = We have gained sufficient insight in our prey to empower our next Deploy Traps!
@@ -104,6 +114,7 @@ cm-xeno-fortify-cant-headbutt = We can't headbutt while fortifying!
 cm-xeno-fortify-cant-rest = We can't rest while fortifying!
 cm-xeno-fortify-cant-tail-sweep = We can't tail sweep while fortifying!
 cm-xeno-fortify-cant-toggle-crest = We can't lower our crest while fortifying!
+cm-xeno-fortify-cant-vehicle = The vehicle blocks us from foritifying
 
 # Headbutt
 rmc-xeno-headbutt-too-far = We can't headbutt from this distance with our crest lowered!
@@ -204,6 +215,7 @@ rmc-xeno-invisibility-expire-bump = We bumped into someone and lost our invisibi
 # Ovipositor
 cm-xeno-ovipositor-attach = We start attaching to the ovipositor.
 cm-xeno-ovipositor-detach = We start detaching from the ovipositor.
+cm-xeno-ovipositor-vehicle = We cannot enter the ovipositor inside a vehicle!
 
 # Retrieve Egg
 cm-xeno-retrieve-egg-no-eggs = We don't have any eggs stored!
@@ -336,8 +348,9 @@ rmc-xeno-sacrifice-heal-target-enviorment = {$healer_xeno} explodes in a deluge 
 rmc-xeno-sacrifice-heal-announce = ;OUR SISTER WILL NOT DIE!!!
 
 # Dodge
-rmc-xeno-dodge-self = We can now weave through our enemies!
-rmc-xeno-dodge-end = We can no longer weave through our enemies!
+rmc-xeno-dodge-self = We can now weave through our enemies and allies!
+rmc-xeno-dodge-end = We can no longer weave through our enemies and allies!
+rmc-xeno-dodge-end-manual = We end our dance early!
 
 # Vanguard Shield
 rmc-xeno-shield-vanguard-hit = Our shield took the hit!
@@ -458,7 +471,17 @@ rmc-doomed-fail = It's not working...
 rmc-destroy-cant-reach = We don't have a clear path to that location!
 rmc-destroy-cant-area = We can't leap to that area!
 
+# Queen Eye
 rmc-xeno-weeds-no-nearby-node = We require weeds to be closer!
 rmc-xeno-queen-eye-no-weeds = We can't move our eye there, there are no weeds!
 rmc-xeno-queen-eye-expand-weeds-name = Expand Weeds (50)
 rmc-xeno-queen-eye-expand-weeds-desc = Expand existing weeds or turn a weed tile into a node.
+
+# Swift Steps
+rmc-xeno-swift-steps-self = We narrowly dodge {THE($bullet)}!
+rmc-xeno-swift-steps-others = {CAPITALIZE(THE($user))} darts aside, evading {THE($bullet)}!
+
+# Finesse
+rmc-xeno-marked-critical-apply = You feel fear washing down your spine... you could be next!
+rmc-xeno-marked-critical-disappear = You calm down and get back to your senses.
+rmc-xeno-marked-critical-consumed = You've been knocked back to your senses!

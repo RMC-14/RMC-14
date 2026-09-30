@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Inventory;
 using Content.Shared.NPC.Components;
 using Content.Shared.Weapons.Ranged.Components;
+using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -17,6 +18,7 @@ public abstract class SharedSentryTargetingSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly GunIFFSystem _iff = default!;
     [Dependency] private readonly SharedTransformSystem _xform = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
 
     private const string SentryExcludedFaction = "RMCDumb";
 
@@ -244,6 +246,9 @@ public abstract class SharedSentryTargetingSystem : EntitySystem
         foreach (var target in _candidateLookupBuffer)
         {
             if (target == ent.Owner)
+                continue;
+
+            if (_container.IsEntityInContainer(target))
                 continue;
 
             if (!IsFriendlyByIff(target))

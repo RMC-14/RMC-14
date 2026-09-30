@@ -101,9 +101,9 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         if (!TryComp(fillable, out CMRefillableSolutionComponent? refillable))
             return;
 
-        args.Handled = true;
         if (!_whitelist.IsValid(ent.Comp.Whitelist, fillable))
         {
+            args.Handled = true;
             _popup.PopupClient(Loc.GetString("cm-refillable-solution-cannot-refill", ("user", ent.Owner), ("target", fillable)), args.User, args.User, PopupType.SmallCaution);
             return;
         }
@@ -117,6 +117,9 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
             _popup.PopupClient(Loc.GetString("cm-refillable-solution-full", ("target", fillable)), args.User, args.User);
             return;
         }
+
+        // handle the event to prevent restocking empty bottles/autoinjectors
+        args.Handled = true;
 
         var anyRefilled = false;
         foreach (var (reagent, amount) in refillable.Reagents)

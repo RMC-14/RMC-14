@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.ARES.Logs;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
@@ -54,7 +55,7 @@ public sealed class ARESCoreSystem : EntitySystem
     /// <param name="faction">Faction ID</param>
     /// <param name="ares">The returned entity</param>
     /// <returns></returns>
-    public bool TryGetARES(EntProtoId<IFFFactionComponent> faction, out Entity<ARESCoreComponent>? ares)
+    public bool TryGetARES(EntProtoId<IFFFactionComponent> faction, [NotNullWhen(true)] out Entity<ARESCoreComponent>? ares)
     {
         foreach (var core in _cores)
         {
@@ -84,7 +85,7 @@ public sealed class ARESCoreSystem : EntitySystem
     /// <param name="mapId">The map ID the core is on</param>
     /// <param name="ares">The returned entity</param>
     /// <returns></returns>
-    public bool TryGetARES(MapId mapId, out Entity<ARESCoreComponent>? ares)
+    public bool TryGetARES(MapId mapId, [NotNullWhen(true)] out Entity<ARESCoreComponent>? ares)
     {
         foreach (var core in _cores)
         {
@@ -113,7 +114,7 @@ public sealed class ARESCoreSystem : EntitySystem
     /// <param name="map">The map the core is on</param>
     /// <param name="ares">The returned entity</param>
     /// <returns></returns>
-    public bool TryGetARES(Entity<MapComponent> map, out Entity<ARESCoreComponent>? ares)
+    public bool TryGetARES(Entity<MapComponent> map, [NotNullWhen(true)] out Entity<ARESCoreComponent>? ares)
     {
         foreach (var core in _cores)
         {
@@ -142,7 +143,7 @@ public sealed class ARESCoreSystem : EntitySystem
     /// <param name="entity">The entity on the map shared with the ares core.</param>
     /// <param name="ares">The returned entity</param>
     /// <returns></returns>
-    public bool TryGetARES(EntityUid entity, out Entity<ARESCoreComponent>? ares)
+    public bool TryGetARES(EntityUid entity, [NotNullWhen(true)] out Entity<ARESCoreComponent>? ares)
     {
         foreach (var core in _cores)
         {

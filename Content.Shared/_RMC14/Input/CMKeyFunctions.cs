@@ -20,6 +20,7 @@ public sealed class CMKeyFunctions
     public static readonly BoundKeyFunction RMCFocusMentorChat = "RMCFocusMentorChat";
     public static readonly BoundKeyFunction RMCInteractWithOtherHand = "RMCInteractWithOtherHand";
     public static readonly BoundKeyFunction RMCRest = "RMCRest";
+    public static readonly BoundKeyFunction RMCResist = "RMCResist";
 
     // Xeno
     public static readonly BoundKeyFunction CMXenoWideSwing = "CMXenoWideSwing";

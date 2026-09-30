@@ -19,7 +19,7 @@ public sealed class RMCNukeSystem : EntitySystem
     [Dependency] private readonly SensorTowerSystem _sensorTower = default!;
     [Dependency] private readonly RMCPowerSystem _power = default!;
 
-    private readonly DamageSpecifier _damage = new() { DamageDict = { { "Blunt", 1e10 }, { "Heat", 1e10 } } };
+    private readonly DamageSpecifier _damage = new() { DamageDict = { ["Blunt"] = 1e5, ["Heat"] = 1e5 } };
     private EntityQuery<RMCRepairableComponent> _repairable;
 
     public override void Initialize()

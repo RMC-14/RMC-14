@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/08/2026 21:53:22
-  entityCount: 684
+  time: 06/16/2026 11:05:09
+  entityCount: 689
 maps: []
 grids:
 - 1
@@ -950,7 +950,7 @@ entities:
       pos: 16.5,20.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -5269.2847
+      secondsUntilStateChange: -5403.778
       state: Opening
   - uid: 474
     components:
@@ -959,7 +959,7 @@ entities:
       pos: 20.5,17.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -5234.485
+      secondsUntilStateChange: -5368.978
       state: Opening
 - proto: CMBarricadeSandbag
   entities:
@@ -1472,6 +1472,8 @@ entities:
       rot: 3.141592653589793 rad
       pos: 8.5,20.5
       parent: 1
+    missingComponents:
+    - Damageable
 - proto: CMSemioticCoffee
   entities:
   - uid: 343
@@ -2614,6 +2616,33 @@ entities:
     components:
     - type: Transform
       pos: 17.512293,12.464621
+      parent: 1
+- proto: RMCBlockerVehicle
+  entities:
+  - uid: 685
+    components:
+    - type: Transform
+      pos: 4.5,1.5
+      parent: 1
+  - uid: 686
+    components:
+    - type: Transform
+      pos: 3.5,1.5
+      parent: 1
+  - uid: 687
+    components:
+    - type: Transform
+      pos: 2.5,1.5
+      parent: 1
+  - uid: 688
+    components:
+    - type: Transform
+      pos: 1.5,1.5
+      parent: 1
+  - uid: 689
+    components:
+    - type: Transform
+      pos: 0.5,1.5
       parent: 1
 - proto: RMCBoxShotgunBuckshot
   entities:

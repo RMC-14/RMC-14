@@ -139,5 +139,7 @@ public sealed class XenoPheromonesOverlay : Overlay
 
         var position = new Vector2(xOffset, yOffset);
         handle.DrawTexture(texture, position);
+
+        handle.SetTransform(Matrix3x2.Identity);
     }
 }

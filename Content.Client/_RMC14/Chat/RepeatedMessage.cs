@@ -8,7 +8,8 @@ public sealed class RepeatedMessage(
     FormattedMessage formattedMessage,
     NetEntity senderEntity,
     string message,
-    ChatChannel channel
+    ChatChannel channel,
+    string? languageIcon
 )
 {
     public readonly int Index = index;
@@ -16,5 +17,7 @@ public sealed class RepeatedMessage(
     public readonly NetEntity SenderEntity = senderEntity;
     public readonly string Message = message;
     public readonly ChatChannel Channel = channel;
+    public readonly string? LanguageIcon = languageIcon;
     public int Count = 1;
+    internal LanguageIconTag.LanguageIconControl? IconControl;
 }

@@ -270,3 +270,25 @@
   components:
   - type: Sprite
     state: boulder3
+
+- type: entity
+  parent: RMCBoulder1
+  id: RMCBoulderDark1
+  suffix: dark
+  components:
+  - type: Sprite
+    state: dark1
+
+- type: entity
+  parent: RMCBoulderDark1
+  id: RMCBoulderDark2
+  components:
+  - type: Sprite
+    state: dark2
+
+- type: entity
+  parent: RMCBoulderDark1
+  id: RMCBoulderDark3
+  components:
+  - type: Sprite
+    state: dark3
