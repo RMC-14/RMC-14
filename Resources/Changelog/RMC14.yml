@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Powerloaders now overlay over the operator and have new buckle sounds.
-    type: Tweak
-  id: 3175
-  time: '2026-05-03T17:21:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9257
 - author: SharkSnake98
   changes:
   - message: Added 2 new patches for Halcyon & Novaris. They can be accessed in the
@@ -4503,5 +4496,13 @@
   id: 3674
   time: '2026-09-29T21:49:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10707
+- author: Ozehk
+  changes:
+  - message: Tweaked FORECON uniforms to use the correct camouflage, have more folding
+      options, and some grammatical errors.
+    type: Tweak
+  id: 3675
+  time: '2026-09-30T01:19:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10922
 Name: RMC14
 Order: -1
