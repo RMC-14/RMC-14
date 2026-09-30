@@ -36,7 +36,7 @@
         RMCSkillSurgery: 1
         RMCSkillVehicles: 2
   hasIcon: false
-  hidden: true
+  whitelistParent: CMFaxResponder
 
 - type: startingGear
   id: RMCGearWeYaResponder

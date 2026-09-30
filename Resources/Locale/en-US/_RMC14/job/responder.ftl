@@ -12,6 +12,8 @@ rmc-ghost-role-information-responder-rules = You are a [color=red][bold]Fax Resp
                                              Do NOT use the Overwatch console to interfere with squads or send messages. It is solely for observation.
                                              Do NOT abuse the authority of this role. Misuse of your powers or failure to meet expectations will result in removal, or worse.
 
+#Base fax responder whitelist job
+rmc-job-name-fax-responder = Fax Responder
 
 #UNMC fax responder
 rmc-job-name-unmc-responder = UNMC Communications Officer

@@ -1,0 +1,27 @@
+- type: entity
+  id: RMCSpawnPointFaxResponderWeYa
+  name: We-Ya fax responder spawn point
+  parent: MarkerBase
+  components:
+  - type: FaxResponderSpawnPoint
+    job: CMWeYaresponder
+  - type: Sprite
+    layers:
+    - sprite: Markers/cross.rsi
+      state: green
+    - sprite: _RMC14/Objects/CMIDs/gold_id.rsi
+      state: icon
+
+- type: entity
+  id: RMCSpawnPointFaxResponderFreePress
+  name: Free Press fax responder spawn point
+  parent: MarkerBase
+  components:
+  - type: FaxResponderSpawnPoint
+    job: CMFreePressResponder
+  - type: Sprite
+    layers:
+    - sprite: Markers/cross.rsi
+      state: green
+    - sprite: _RMC14/Objects/CMIDs/silver_id.rsi
+      state: icon

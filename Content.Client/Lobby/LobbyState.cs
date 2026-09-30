@@ -85,6 +85,10 @@ namespace Content.Client.Lobby
             Lobby.JoinXenoButton.OnPressed += _ =>
                 _userInterfaceManager.GetUIController<RMCLobbyUIController>().OpenJoinXenoWindow();
             Lobby.JoinXenoButton.AddStyleClass("OpenRight");
+
+            Lobby.JoinFaxResponderButton.OnPressed += _ =>
+                _userInterfaceManager.GetUIController<RMCLobbyUIController>().OpenJoinFaxResponderWindow();
+            Lobby.JoinFaxResponderButton.AddStyleClass("OpenRight");
         }
 
         protected override void Shutdown()
@@ -206,6 +210,7 @@ namespace Content.Client.Lobby
                 // RMC14
                 Lobby.ReadyButton.AddStyleClass("OpenLeft");
                 Lobby.JoinXenoButton.Visible = true;
+                Lobby.JoinFaxResponderButton.Visible = true;
             }
             else
             {
@@ -219,6 +224,7 @@ namespace Content.Client.Lobby
                 // RMC14
                 Lobby.ReadyButton.RemoveStyleClass("OpenLeft");
                 Lobby.JoinXenoButton.Visible = false;
+                Lobby.JoinFaxResponderButton.Visible = false;
             }
 
             if (_gameTicker.ServerInfoBlob != null)
