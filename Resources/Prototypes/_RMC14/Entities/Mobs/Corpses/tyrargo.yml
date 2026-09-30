@@ -1,0 +1,58 @@
+# Tyrargo trooper
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseTyrargoTrooper
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseTyrargoTrooper ]
+  - type: Rank
+    rank: RMCRankPrivateFirstClass
+
+- type: startingGear
+  id: RMCGearCorpseTyrargoTrooper
+  equipment:
+    jumpsuit: RMCJumpsuitMarineTyrargoWebbing
+    back: RMCSatchelTyrargoSurvivorFill
+    shoes: CMBootsBlackFilled
+    id: RMCIDCardTyrargoTrooper
+    head: RMCArmorHelmetTyrargo
+    eyes: RMCGogglesBallisticPolarizedBlue
+    outerClothing: CMArmorM4Tyrargo
+    suitstorage: RMCWeaponRifleM54CSurvivor
+    ears: RMCHeadsetTyrargo
+    pocket1: RMCPouchFirstAidInjectors
+    pocket2: RMCPouchFirstAidSplintsGauzeOintment
+  storage:
+    back:
+    - CMMagazineRifleM54C
+    - CMMagazineRifleM54C
+    - RMCMagazineRifleM54CHEAPEmpty
+
+# Tyrargo medic
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseTyrargoMedic
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseTyrargoMedic ]
+  - type: Rank
+    rank: RMCRankLanceCorporal
+
+- type: startingGear
+  id: RMCGearCorpseTyrargoMedic
+  equipment:
+    jumpsuit: RMCJumpsuitMarineTyrargoWebbing
+    back: RMCSatchelTyrargoSurvivorFill
+    shoes: CMBootsBlackFilled
+    id: RMCIDCardTyrargoMedic
+    head: RMCArmorHelmetTyrargo
+    belt: CMBeltMedicalFilled
+    eyes: RMCGogglesBallisticPolarizedBlue
+    outerClothing: CMArmorM4Tyrargo
+    suitstorage: RMCWeaponRifleM54CSurvivor
+    ears: RMCHeadsetTyrargo
+  storage:
+    back:
+    - CMMagazineRifleM54C
+    - CMMagazineRifleM54C
+    - RMCMagazineRifleM54CHEAPEmpty
