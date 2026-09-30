@@ -96,9 +96,3 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/CMB/cmb_mobility_armor.rsi
   - type: ItemCamouflage
     camouflageVariations: { }
-  - type: ClothingRequireEquipped
-    autoUnequip: true
-    denyReason: rmc-armor-not-cmb-jumpsuit
-    whitelist:
-      tags:
-      - RMCUniformCMB
