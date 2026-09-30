@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Pyromaniac365
-  changes:
-  - message: Removed Valkyrie's ability to retrieve dead xenonids.
-    type: Fix
-  id: 3179
-  time: '2026-05-05T15:00:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9778
 - author: stranthbackup
   changes:
   - message: Rebalanced some current OT chems to produce the correct amount. CLF3
@@ -4497,5 +4490,13 @@
   id: 3678
   time: '2026-09-30T14:43:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10885
+- author: ThataKat
+  changes:
+  - message: '[PVE] Added the GM Request system, for handling minor requests. When
+      enabled, look for a new verb on your player entity to send requests.'
+    type: Add
+  id: 3679
+  time: '2026-09-30T23:50:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10304
 Name: RMC14
 Order: -1
