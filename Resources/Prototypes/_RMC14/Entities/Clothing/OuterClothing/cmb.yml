@@ -1,13 +1,6 @@
 - type: entity
   id: RMCBaseCMBArmor
   abstract: true
-  components:
-  - type: ClothingRequireEquipped
-    autoUnequip: true
-    denyReason: rmc-armor-not-cmb-jumpsuit
-    whitelist:
-      tags:
-      - RMCUniformCMB
 
 - type: entity
   parent: [RMCBaseCMBArmor, RMCBaseMarineArmorLight]
@@ -91,12 +84,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/CMB/cmb_mobility_armor.rsi
-  - type: ClothingRequireEquipped
-    autoUnequip: true
-    denyReason: rmc-armor-not-cmb-jumpsuit
-    whitelist:
-      tags:
-      - RMCUniformCMB
 
 - type: entity
   parent: CMArmorM3VLSynth
