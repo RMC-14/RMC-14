@@ -843,6 +843,9 @@
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_SUPER_LIGHT
     walkModifier: 0.949
     sprintModifier: 0.949
+  - type: Tag
+    tags:
+    - RMCSynthAllowedArmor
 
 # m35
 - type: entity
@@ -932,7 +935,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ghillie/forecon.rsi
   - type: ItemCamouflage
     camouflageVariations: { }
-  
+
 # Smart Gun
 - type: entity
   parent: [ RMCAllowSuitStorageClothingSmartgunner, CMArmorM3Medium ]
