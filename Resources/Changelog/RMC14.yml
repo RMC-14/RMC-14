@@ -1,25 +1,4 @@
 ﻿Entries:
-- author: kleinerstation13
-  changes:
-  - message: Fixed attachments being invisible on the M37-17 shotgun
-    type: Fix
-  id: 3177
-  time: '2026-05-04T06:39:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9746
-- author: t0wnshark
-  changes:
-  - message: Added ponchos, which are found in the Uniform Accessories loadout category
-      and can be attached to either a uniform or armor.
-    type: Add
-  - message: Added the cheap digital watch, Seikaku Pulsemeter wristwatch, Seikaku
-      13B6-2000 wristwatch, Seikaku 13B6-3000 wristwatch, Seikaku H487-9098 wristwatch,
-      and Veniti E-338 wristwatch, as well as their respective cases. Most can be
-      found in the new Watches loadout category, and some are locked behind playtime
-      requirements or certain jobs.
-    type: Add
-  id: 3178
-  time: '2026-05-04T16:42:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7083
 - author: Pyromaniac365
   changes:
   - message: Removed Valkyrie's ability to retrieve dead xenonids.
@@ -4503,5 +4482,20 @@
   id: 3676
   time: '2026-09-30T04:01:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10938
+- author: CatAndHats
+  changes:
+  - message: Fixed Trijent's green and purple bridge inserts not using the correct
+      tiles
+    type: Fix
+  id: 3677
+  time: '2026-09-30T14:43:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10915
+- author: stuff3541
+  changes:
+  - message: Add missing mortar FTL line
+    type: Fix
+  id: 3678
+  time: '2026-09-30T14:43:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10885
 Name: RMC14
 Order: -1
