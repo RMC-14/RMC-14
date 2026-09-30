@@ -28,6 +28,14 @@
   id: RMCJumpsuitMarinePatch
   suffix: Patch
 
+- type: entity
+  parent: JumpsuitMarine
+  id: RMCJumpsuitSurvivorMarineFirefighter
+  suffix: Varadero Firefighter
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingHolsterM77Survivor
+
 # Formal
 - type: entity
   parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
@@ -471,6 +479,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot/urban.rsi
 
 - type: entity
   parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
@@ -479,7 +494,23 @@
   description: A flightsuit worn by pilot officers of the UNMC, with plenty of leather straps, pouches, and other essential gear you will never use. Looks badass.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot_alt.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot_alt/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot_alt/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot_alt/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot_alt/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot_alt/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot_alt/urban.rsi
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitPilotFighter
+  name: ASU-25F/P g-suit
+  description: The ASU-25F/P Antipressure Suit is an anti-G garment commonly seen in use by Aerofighter pilots across the Marine Corps, meant to sustain a pilot's consciousness during high-speed turns. While considered bulky and uncomfortable to wear, it has been attributed as the source of the unusually high survival rate among Aerofighter pilots during Operation Justice.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot_fighter.rsi
 
 # Dropship Crew Chief
 - type: entity
@@ -533,17 +564,14 @@
 
 # Marine
 - type: entity
-  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
   id: CMJumpsuitSurvivorMarine
   name: UNMC uniform
-  description: Torn, Burned and blood stained. This uniform has seen much more than you could possibly imagine.
+  description: Torn, burned, and blood stained. This uniform has seen much more than you could possibly imagine.
   suffix: FORECON, Survivor
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/recon_marine.rsi
-  - type: Foldable
-    unfoldVerbText: rmc-sleeves-verb-unfold
-    foldVerbText: rmc-sleeves-verb-fold
 
 - type: entity
   parent: CMJumpsuitSurvivorMarine
