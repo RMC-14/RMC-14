@@ -490,6 +490,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<bool> HidePlayerIdentities =
         CVarDef.Create("rmc.hide_player_identities", true, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<bool> RMCHiveLeaderTackleXenos =
+        CVarDef.Create("rmc.hive_leader_tackle_xenos", true, CVar.CLIENT | CVar.ARCHIVE | CVar.REPLICATED);
+
     public static readonly CVarDef<bool> RMCQueenBuildingBoost =
     CVarDef.Create("rmc.queen_building_boost", true, CVar.REPLICATED | CVar.SERVER);
 
@@ -547,6 +550,12 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("game.new_to_job_popup_time", 15f, CVar.SERVER | CVar.REPLICATED);
     public static readonly CVarDef<bool> RMCGhostCanBoo =
         CVarDef.Create("rmc.ghosts_can_boo", false, CVar.SERVER | CVar.SERVERONLY);
+
+    public static readonly CVarDef<bool> RMCPostDeathChatMute =
+        CVarDef.Create("rmc.post_death_chat_mute", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<int> RMCPostDeathChatMuteTimeSeconds =
+        CVarDef.Create("rmc.post_death_chat_mute_time_seconds", 10, CVar.SERVER | CVar.SERVERONLY);
 
     public static readonly CVarDef<int> RMCRoyalResinEveryMinutes =
         CVarDef.Create("rmc.royal_resin_every_minutes", 5, CVar.REPLICATED | CVar.SERVER);

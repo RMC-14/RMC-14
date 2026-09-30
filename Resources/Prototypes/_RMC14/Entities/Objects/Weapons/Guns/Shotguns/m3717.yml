@@ -15,7 +15,7 @@
   - type: Gun
     shotsPerBurst: 1
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_small.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_small_alt.ogg
   - type: ShootUseDelay
   - type: RMCSelectiveFire
     baseFireModes:
@@ -41,6 +41,10 @@
     accuracyMultiplier: 1.15
     accuracyMultiplierUnwielded: 0.5
   - type: PumpAction
+    sound:
+      path: /Audio/_RMC14/Weapons/Guns/Cock/gun_cocked2.ogg
+      params:
+        volume: 10
   - type: GunDamageModifier
     multiplier: 1.15
   - type: AttachableHolder

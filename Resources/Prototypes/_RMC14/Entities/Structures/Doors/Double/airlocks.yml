@@ -222,6 +222,22 @@
 
 - type: entity
   parent: CMDoubleDoorBase
+  id: RMCDoubleDoorPreparationsEcho
+  suffix: Preparations, Echo
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/Double/preparations_echo.rsi
+
+- type: entity
+  parent: CMDoubleDoorBase
+  id: RMCDoubleDoorPreparationsFoxtrot
+  suffix: Preparations, Foxtrot
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/Double/preparations_foxtrot.rsi
+
+- type: entity
+  parent: CMDoubleDoorBase
   id: CMDoubleDoorSecurityGlass
   suffix: Security, Glass
   components:

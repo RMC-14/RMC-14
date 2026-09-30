@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Dialog;
+﻿using Content.Client.UserInterface.ControlExtensions;
+using Content.Shared._RMC14.Dialog;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
@@ -39,32 +40,7 @@ public sealed class DialogBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
                     if (child is not ContainerButton button)
                         continue;
 
-                    // Find label inside button
-                    Label? label = null;
-                    foreach (var subChild in button.Children)
-                    {
-                        if (subChild is BoxContainer boxContainer)
-                        {
-                            foreach (var boxChild in boxContainer.Children)
-                            {
-                                if (boxChild is Label lbl)
-                                {
-                                    label = lbl;
-                                    break;
-                                }
-                            }
-                        }
-                        else if (subChild is Label lbl)
-                        {
-                            label = lbl;
-                            break;
-                        }
-                    }
-
-                    if (label == null || label.Text == null)
-                        continue;
-
-                    button.Visible = label.Text.Contains(args.Text, StringComparison.OrdinalIgnoreCase);
+                    button.Visible = button.ChildrenContainText(args.Text);
                 }
             };
 
@@ -73,6 +49,7 @@ public sealed class DialogBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
         }
 
         _window.Title = s.Title;
+        container.Search.Visible = s.EnableSearch;
         container.Message.Text = s.Message.Text;
         container.Message.Visible = container.Message.Text?.Length > 0;
 
@@ -118,6 +95,28 @@ public sealed class DialogBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
             };
             label.AddStyleClass("CMAlignLeft");
             contentContainer.AddChild(label);
+
+            if (!string.IsNullOrEmpty(option.Description))
+            {
+                var textBox = new BoxContainer
+                {
+                    Orientation = BoxContainer.LayoutOrientation.Vertical,
+                    HorizontalExpand = true
+                };
+                contentContainer.RemoveChild(label);
+                textBox.AddChild(label);
+
+                var descLabel = new Label
+                {
+                    Text = option.Description,
+                    HorizontalExpand = true,
+                    FontColorOverride = Color.FromHex("#aaaaaa"),
+                    ClipText = false
+                };
+                descLabel.AddStyleClass("CMAlignLeft");
+                textBox.AddChild(descLabel);
+                contentContainer.AddChild(textBox);
+            }
 
             button.AddChild(contentContainer);
 

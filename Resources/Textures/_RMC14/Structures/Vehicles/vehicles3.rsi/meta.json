@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/789a362bc55d2d6331bc89699bb4f9f792695853/icons/obj/structures/props/vehicles, Box_van_mining/long-haul truck mining and small_truck_medical modified by @IceNoobXD on Github",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/789a362bc55d2d6331bc89699bb4f9f792695853/icons/obj/structures/props/vehicles, armored_truck_wy, longtruck_wy_blue, and box_van_red modified by github noctyrnal, Box_van_mining/long-haul truck mining and small_truck_medical modified by @IceNoobXD on Github, armored_truck_wy sprites modified by Drazamuffin",
   "size": {
     "x": 128,
     "y": 64

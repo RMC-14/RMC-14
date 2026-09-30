@@ -8,6 +8,7 @@
     noRot: true
   - type: Physics
     bodyType: Static
+    canCollide: false
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/coatrack.rsi
     state: coatrack0

@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 264.0.2
+  engineVersion: 264.0.2-fix-physics
   forkId: ""
   forkVersion: ""
-  time: 07/28/2026 18:28:11
-  entityCount: 30305
+  time: 08/25/2026 19:40:21
+  entityCount: 30308
 maps:
 - 1
 grids:
@@ -53454,7 +53454,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -53970.336
+      secondsUntilStateChange: -54086.984
       state: Opening
   - uid: 133
     components:
@@ -53950,7 +53950,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -56049.77
+      secondsUntilStateChange: -56166.418
       state: Opening
   - uid: 200
     components:
@@ -53962,7 +53962,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -56050.8
+      secondsUntilStateChange: -56167.45
       state: Opening
   - uid: 201
     components:
@@ -53995,7 +53995,7 @@ entities:
       pos: 127.5,-79.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -58493.438
+      secondsUntilStateChange: -58610.086
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -54067,7 +54067,7 @@ entities:
       pos: 77.5,-75.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -55054.8
+      secondsUntilStateChange: -55171.45
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -54088,7 +54088,7 @@ entities:
       pos: 80.5,-75.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -55054.504
+      secondsUntilStateChange: -55171.152
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -54193,7 +54193,7 @@ entities:
       pos: 63.5,-64.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -55350.47
+      secondsUntilStateChange: -55467.117
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -54590,7 +54590,7 @@ entities:
       pos: 68.5,-33.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -56532.934
+      secondsUntilStateChange: -56649.582
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -59987,7 +59987,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 865.2991347
     - type: Door
-      secondsUntilStateChange: -56583.035
+      secondsUntilStateChange: -56699.684
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -60002,7 +60002,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 865.2991347
     - type: Door
-      secondsUntilStateChange: -56583.035
+      secondsUntilStateChange: -56699.684
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -60533,7 +60533,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 2393.0309403
     - type: Door
-      secondsUntilStateChange: -55055.3
+      secondsUntilStateChange: -55171.95
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -60549,7 +60549,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 2393.0309403
     - type: Door
-      secondsUntilStateChange: -55055.3
+      secondsUntilStateChange: -55171.95
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -60565,7 +60565,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 2078.4979215
     - type: Door
-      secondsUntilStateChange: -55369.836
+      secondsUntilStateChange: -55486.484
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -60581,7 +60581,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 2078.4979215
     - type: Door
-      secondsUntilStateChange: -55369.836
+      secondsUntilStateChange: -55486.484
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -209828,6 +209828,24 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 23.5,-127.5
+      parent: 1
+  - uid: 30306
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 25.5,-119.5
+      parent: 1
+  - uid: 30307
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 39.5,-119.5
+      parent: 1
+  - uid: 30308
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 32.5,-134.5
       parent: 1
 - proto: RMCUraniumOre1
   entities:
