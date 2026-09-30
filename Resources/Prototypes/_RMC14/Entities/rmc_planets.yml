@@ -269,8 +269,8 @@
     survivorJobVariantScenarios:
       riot_in_progress: # Riot In Progress Riot Control team
         RMCSyntheticColony:
-          RMCSurvivorFiorinaRiotInProgressCMBRiotControlSynth: 1
-          RMCSurvivorFiorinaRiotInProgressCMBSupportSynth: 1
+        - RMCSurvivorFiorinaRiotInProgressCMBRiotControlSynth: 1
+        - RMCSurvivorFiorinaRiotInProgressCMBSupportSynth: 1
         CMSurvivorEngineer:
         - RMCSurvivorFiorinaRiotInProgressCMBRiotControlBreachingTechnician: 1
         CMSurvivorDoctor:
