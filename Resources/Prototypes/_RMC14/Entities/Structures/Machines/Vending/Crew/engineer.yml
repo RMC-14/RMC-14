@@ -48,8 +48,6 @@
       entries:
       - id: CMBackpackMarineTech
         replaceSlot: back
-      - id: CMSatchelMarineTech
-        replaceSlot: back
       - id: CMBackpackWelder
         replaceSlot: back
       - id: RMCSatchelWelder
