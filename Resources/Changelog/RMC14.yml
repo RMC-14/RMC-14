@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Tuna224
-  changes:
-  - message: Added a tent for Correspondents to take their news on the go!
-    type: Add
-  id: 3182
-  time: '2026-05-10T22:43:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9278
 - author: TadJohnson00
   changes:
   - message: '[PVE] Added the ML66OT, an incredibly effective heavy support gun issued
@@ -4500,5 +4493,12 @@
   id: 3681
   time: '2026-10-01T05:21:24.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10351
+- author: Thereisabear
+  changes:
+  - message: Fixed some console errors from attachments.
+    type: Fix
+  id: 3682
+  time: '2026-10-01T05:26:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10467
 Name: RMC14
 Order: -1
