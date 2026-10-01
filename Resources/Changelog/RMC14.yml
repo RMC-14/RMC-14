@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: yagwog
-  changes:
-  - message: Impenetrable Walls timed added to solaris
-    type: Add
-  id: 3190
-  time: '2026-05-14T10:26:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9787
 - author: '- Simon'
   changes:
   - message: Timed Impen Walls to trijent
@@ -4500,5 +4493,12 @@
   id: 3689
   time: '2026-10-01T05:29:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10474
+- author: Dalothis
+  changes:
+  - message: Added FTL, SL, SGO, and WS new-to-job popups
+    type: Add
+  id: 3690
+  time: '2026-10-01T21:27:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9455
 Name: RMC14
 Order: -1
