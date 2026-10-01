@@ -20,7 +20,6 @@
       takeAll: CMStandard
       entries:
       - id: CMBootsBlackFilled
-      - id: RMCHeadsetMarineCommand
       - id: CMMRE
     - name: Standard Equipment
       takeAll: CMUniform
@@ -39,9 +38,11 @@
     - name: Hat
       choices: { CMHat: 1 }
       entries:
-      - id: RMCHeadBeret
+      - id: RMCHeadBeretGreen
         recommended: true
-      - id: RMCHeadCapFlippable
+      - id: CMHeadBeretTan
+        recommended: true
+      - id: RMCHeadCapPatrol
         recommended: true
       - id: CMHeadCapOfficer
         recommended: true
@@ -407,7 +408,7 @@
       - id: CMHeadBeretCO
       - id: CMHeadBeretCOWhite
       - id: CMHeadBeretCOBlack
-      - id: RMCHeadCapFlippable # TODO: Check this is the service variant. If so, parent and rename.
+      - id: RMCHeadCapPatrol
       - id: CMHeadCapPeakedService
     - name: Service Extras
       entries:
@@ -447,7 +448,6 @@
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
-      - id: CMHeadsetSeniorCommand
       - id: CMMRE
     - name: Commanding Officer Essentials Kit
       takeAll: CMBundle
@@ -721,6 +721,40 @@
     - CMGlassesSecurity
     - CMBeltSecurityMPFilled
 
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleChiefEngineerEquipment
+  categories: [ HideSpawnMenu ]
+  name: Standard Chief Engineer Equipment
+  description: Contains welding goggles, a compact nailgun and a magazine of plasteel nails.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/binoculars.rsi
+    state: rangefinder
+  - type: CMVendorBundle
+    bundle:
+    - RMCWeldingGoggles
+    - RMCNailgunTactical
+    - RMCMagazineSMGNailgun
+    # TODO KN5500/2 PDA
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleChiefEngineerDeployKit
+  categories: [ HideSpawnMenu ]
+  name: Chief Engineer Deployment Kit
+  description: Contains M3 Pattern Officer Combat Armor, a laser designator, and black insulated gloves. Intended for use only in the case of deployment.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/binoculars.rsi
+    state: rangefinder
+  - type: CMVendorBundle
+    bundle:
+    - RMCArmorM3SO
+    - RMCLaserDesignator
+    - CMHandsBlackInsulated
+
+
 # Senior Officer Vendors
 
 - type: entity
@@ -751,9 +785,10 @@
       - CMExecutiveOfficer
       takeAll: CMStandard
       entries:
-      - id: CMHeadsetSeniorCommand
       - id: CMSatchel
       - id: CMMRE
+      # TODO: Trench whistle
+      - id: RMCOuterClothingExternalWebbing
     - name: Uniform # TODO: Port this.
       jobs:
       - CMExecutiveOfficer
@@ -882,7 +917,7 @@
       entries:
       - id: RMCHeadBeretChiefOfficer
       - id: CMHeadCapPeakedService
-      - id: RMCHeadCapFlippable # TODO: Port Patrol Cap
+      - id: RMCHeadCapPatrol
       - id: CMHeadCapOfficer
     # ////////////////////////////////////
     # Chief MP
@@ -900,7 +935,6 @@
       entries:
       - id: CMHandsBlackMarine
       - id: CMJumpsuitWO
-      - id: CMHeadsetCMP
       - id: CMBootsBlackFilled
     - name: Helmet
       jobs:
@@ -1007,6 +1041,14 @@
         amount: 10
       - id: RMCGuidebookSOP
         amount: 10
+    - name: Spare Equipment
+      jobs:
+      - CMChiefMP
+      entries:
+      - id: RMCHeadsetMarineCommand
+        points: 15
+      - id: RMCHeadsetMW
+        points: 30
     # ////////////////////////////////////
     # Chief Engineer
     # ////////////////////////////////////
@@ -1020,11 +1062,8 @@
       - CMChiefEngineer
       takeAll: CMStandard
       entries:
-      - id: CMHeadsetCE
-      - id: CMBootsBlack
-      - id: RMCWeldingGoggles
-      - id: RMCNailgunTactical
-      # TODO KN5500/2 PDA
+      - id: RMCVendorBundleChiefEngineerEquipment
+      - id: CMHandsInsulated #included due to parity deleting hand items if you spawn with a loadout pair of gloves.
     - name: Uniform
       jobs:
       - CMChiefEngineer
@@ -1033,13 +1072,6 @@
       - id: CMJumpsuitChiefEngineer
         recommended: true
       - id: CMJumpsuitBO
-    - name: Gloves
-      jobs:
-      - CMChiefEngineer
-      choices: { CMHands: 1 }
-      entries:
-      - id: CMHandsInsulated
-      - id: CMHandsBlackInsulated
     - name: Helmet
       jobs:
       - CMChiefEngineer
@@ -1047,7 +1079,7 @@
       entries:
       - id: CMHeadBeretEngineer
       - id: RMCHardhatWhite
-      - id: RMCHeadCapFlippable
+      - id: RMCHeadCapPatrol
       - id: RMCHelmetWelding
     - name: Suit
       jobs:
@@ -1065,10 +1097,12 @@
       choices: { CMBackpack: 1 }
       entries:
       - id: CMSatchel
+      - id: RMCBackpackRTO
       - id: CMSatchelMarineTech
       - id: RMCSatchelWelder
       - id: RMCSatchelWelderChestrig
       - id: CMBackpackWelder
+      - id: RMCWeldingKit
     - name: Belt
       jobs:
       - CMChiefEngineer
@@ -1159,10 +1193,8 @@
       - CMChiefEngineer
       takeAll: CMStandard
       entries:
-      - id: RMCArmorVestOfficer
-      - id: RMCArmorM3SO
-      - id: CMBootsBlackFilled
-      - id: RMCLaserDesignator
+      - id: RMCVendorBundleChiefEngineerDeployKit
+      - id: RMCArmorVestOfficer #this should probably be moved to an outerwear section
     - name: Combat Helmet
       jobs:
       - CMChiefEngineer
@@ -1205,14 +1237,9 @@
       - CMQuartermaster
       takeAll: CMStandard
       entries:
-      - id: CMSatchel
+      - id: CMSatchelMarineTech
       - id: RMCQuartermasterJacket
-    - name: Gloves
-      jobs:
-      - CMQuartermaster
-      choices: { CMHands: 1 }
-      entries:
-      - id: CMHandsBlackInsulated
+      - id: CMHandsInsulated
     - name: Headgear
       jobs:
       - CMQuartermaster
@@ -1306,7 +1333,6 @@
       takeAll: CMStandard
       entries:
       - id: CMHandsLatex
-      - id: CMHeadsetCMO
     - name: Eyewear
       jobs:
       - CMCMO
@@ -1519,12 +1545,7 @@
       - id: RMCCoatASOWhite
       - id: RMCCoatASOBlackAlt
       - id: RMCCoatASOWhiteAlt
-    - name: Headset
-      jobs:
-      - CMAuxiliarySupportOfficer
-      takeAll: CMStandard
-      entries:
-      - id: CMHeadsetSeniorCommand
+      - id: RMCOuterClothingExternalWebbing
     - name: Gloves
       jobs:
       - CMAuxiliarySupportOfficer
@@ -1558,20 +1579,19 @@
       - CMAuxiliarySupportOfficer
       choices: { CMHelmet: 1 }
       entries:
-      - id: RMCHeadCapASO
-      - id: RMCHeadCapPeakedASO
       - id: RMCHeadBeretASO
-      - id: RMCHeadBeret
-      # TODO patrol and officer cap
-      - id: RMCHeadCapFlippable
-      - id: CMHeadCapPeakedService
+      - id: RMCHeadBeretGreen
       - id: CMHeadBeretTan
+      - id: RMCHeadCapASO
+      - id: RMCHeadCapPatrol
+      - id: RMCHeadCapPeakedASO
+      - id: CMHeadCapPeakedService
     - name: Combat Equipment
       jobs:
       - CMAuxiliarySupportOfficer
       takeAll: CMStandard
       entries:
-      - id: RMCArmorVestOfficer
+      - id: RMCArmorVestOfficer # I dont think this is needed given they get extwebbing but whatever
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled

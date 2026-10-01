@@ -67,6 +67,7 @@
   equipment:
     jumpsuit: RMCUniformIntel
     shoes: CMBootsBlackFilled
+    ears: CMHeadsetIntel
     id: CMIDCardIntelOfficer
 
 - type: startingGear

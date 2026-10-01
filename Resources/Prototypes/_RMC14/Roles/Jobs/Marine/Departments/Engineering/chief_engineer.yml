@@ -67,7 +67,7 @@
   id: CMGearChiefEngineer
   equipment:
     jumpsuit: CMJumpsuitChiefEngineer
-    shoes: CMBootsBlack
+    shoes: CMBootsBlackFilled
     gloves: CMHandsInsulated
     id: CMIDCardChiefEngineer
     ears: CMHeadsetCE

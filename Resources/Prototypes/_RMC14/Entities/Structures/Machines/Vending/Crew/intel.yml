@@ -129,7 +129,6 @@
     - name: Standard Equipment
       takeAll: RMCIntelEquipment
       entries:
-      - id: CMHeadsetIntel
       - id: CMMRE
     - name: Gloves
       choices: { CMHands: 1 }

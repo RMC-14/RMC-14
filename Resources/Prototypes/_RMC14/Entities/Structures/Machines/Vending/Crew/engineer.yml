@@ -20,7 +20,6 @@
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
-      - id: CMHeadsetEngineer
       - id: CMMRE
         name: MRE
       # map
