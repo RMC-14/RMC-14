@@ -2,13 +2,13 @@
   parent: RMCJobRibbonBase
   id: CMFreePressResponder
   name: rmc-job-name-free-press-responder
-  spawnMenuRoleName: Free Press (Fax Responder)
   description: rmc-job-description-free-press-responder
   playTimeTracker: CMJobFreePressResponder
+  setPreference: false
   ranks:
     RMCRankCivilian: []
   startingGear: RMCGearFreePressResponder
-  icon: "CMJobIconEmpty"
+  icon: "CMJobIconReporter"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-staff
   accessGroups:
@@ -35,7 +35,6 @@
         RMCSkillPowerLoader: 1
         RMCSkillSurgery: 1
         RMCSkillVehicles: 2
-  hasIcon: false
   whitelistParent: CMFaxResponder
 
 - type: startingGear

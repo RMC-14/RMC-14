@@ -30,6 +30,10 @@ cm-department-AuxiliarySupport-description = The Auxiliary support personnel are
 department-CMOther = Other
 cm-department-Other-description = ""
 
+# fax responders
+department-CMFaxResponders = Fax Responders
+cm-department-FaxResponders-description = Respond to faxes on behalf of various factions.
+
 # survivor
 department-CMSurvivor = Survivor
 cm-department-Survivor-description = Survive whenever possible by yourself or with other survivors.

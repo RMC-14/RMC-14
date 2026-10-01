@@ -27,10 +27,6 @@ public sealed class RMCLobbyUIController : UIController
         RefreshXenoWindow(system.ClientBurrowedLarva);
     }
 
-    public void OpenJoinFaxResponderWindow()
-    {
-        new JoinFaxResponderWindow().OpenCentered();
-    }
 
     private void RefreshXenoWindow(int larva)
     {
