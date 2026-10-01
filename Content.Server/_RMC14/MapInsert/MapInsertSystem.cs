@@ -2,7 +2,9 @@
 using Content.Server._RMC14.Rules.DistressSignal;
 using Content.Server.Decals;
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Storage.Containers;
 using Content.Shared.Decals;
 using Robust.Server.Physics;
 using Robust.Shared.EntitySerialization.Systems;
@@ -191,6 +193,9 @@ public sealed class MapInsertSystem : EntitySystem
                     if (HasComp<AreaComponent>(ent))
                         continue;
 
+                    //Clear containers
+                    RemComp<SpawnOnTerminateComponent>(ent);
+                    RemComp<RMCContainerEmptyOnDestructionComponent>(ent);
                     QueueDel(ent);
                 }
             }
