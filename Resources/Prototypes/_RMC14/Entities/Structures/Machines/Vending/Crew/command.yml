@@ -76,6 +76,20 @@
       - id: RMCM44BeltFilled
         name: M44 revolver
         recommended: true
+    - name: Accessories
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBrown
+        recommended: true
+      - id: CMWebbingBlack
+        recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
+      - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
+      - id: CMWebbing
+      - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
@@ -138,26 +152,28 @@
       choices: { CMBelt: 1 }
       entries:
       - id: RMCBeltUtilityGeneral
-        recommended: true
       - id: CMBeltMarine
+        recommended: true
+      - id: RMCM276ShotgunShellLoadingRig
         recommended: true
       - id: CMBeltUtilityFilled
         name: M276 pattern toolbelt rig (Full)
+        recommended: true
       - id: CMBeltMedicBagFilled
         name: M276 pattern lifesaver bag (Full)
+        recommended: true
       - id: CMBeltMedicalFilled
         name: M276 medical storage rig (Full)
       - id: RMCBeltHolsterSMGPouch
+      - id: CMBeltUtilityCombatFilled
+        name: M276 holster toolrig (Full)
       - id: RMCM82FHolsterFilled
-      - id: RMCM276ShotgunShellLoadingRig
       - id: RMCBeltGrenade
     - name: Pouches
       choices: { CMPouches: 2 }
       entries:
       - id: RMCPouchAutoinjector
-      - id: RMCPouchConstruction
-      - id: RMCPouchDocument
-      - id: RMCPouchElectronicsFill
+        recommended: true
       - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
       - id: RMCPouchFirstAidSplintsGauzeOintment
@@ -165,12 +181,12 @@
       - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
       - id: RMCPouchFirstResponder
-      - id: RMCPouchFlareFilled
-      - id: RMCPouchFuelTank
       - id: RMCPouchGeneralLarge
         recommended: true
       - id: RMCPouchMagazineLarge
+        recommended: true
       - id: RMCPouchShotgunLarge
+        recommended: true
       - id: RMCPouchMagazinePistolLarge
       - id: RMCPouchMedical
       - id: RMCPouchMedkit
@@ -178,21 +194,13 @@
       - id: RMCPouchSling
       - id: RMCPouchToolsFill
         name: tools pouch (Full)
-
-    - name: Accessories
-      choices: { CMAccessories: 1 }
-      entries:
-      - id: CMWebbingBrown
-        recommended: true
-      - id: CMWebbingBlack
-        recommended: true
-      - id: RMCWebbingLegPouch
-      - id: RMCWebbingLegPouchBlack
-      - id: RMCWebbingDropPouch
-      - id: RMCWebbingDropPouchBlack
-      - id: CMWebbing
-      - id: CMWebbingHolster
-      - id: RMCWebbingHolsterBlack
+      - id: RMCPouchConstruction
+      - id: RMCPouchElectronicsFill
+        name: electronics pouch (Full)
+      - id: RMCPouchFlareFilled
+        name: flare pouch (Full)
+      - id: RMCPouchFuelTank
+      - id: RMCPouchDocument
     - name: Mask
       choices: { CMMask: 1 }
       entries:
@@ -203,10 +211,18 @@
       entries:
       - id: RMCVisorWelding
         points: 5
+      - id: CMHandsInsulated
+        points: 3
+      - id: CMEntrenchingTool
+        points: 1
       - id: RMCAttachmentMagneticHarness
         points: 12
       - id: RMCBackpackRTO
         points: 15
+      - id: RMCMotionDetector
+        points: 5
+      - id: RMCScabbardMacheteFilled
+        points: 5
       - id: RMCBinoculars
         points: 5
       - id: RMCRangefinder
@@ -214,20 +230,16 @@
       - id: RMCLaserDesignator
         points: 12
         recommended: true
-      - id: RMCIntelDetector
-        points: 5
       - id: RMCFulton20
+        points: 5
+      - id: RMCIntelDetector
         points: 5
       - id: RMCFlashlight
         points: 1
-      - id: RMCMotionDetector
-        points: 5
         recommended: true
       - id: SprayBottleSpaceCleaner
         points: 2
       - id: RMCWhistle
-        points: 5
-      - id: RMCScabbardMacheteFilled
         points: 5
 
 
@@ -319,22 +331,28 @@
         points: 15
       - id: RMCAttachmentRecoilCompensator
         points: 15
+      - id: RMCAttachmentRecoilCompensatorM13
+        points: 15
       - id: RMCAttachmentSuppressor
+        points: 15
+      - id: RMCAttachmentSuppressorCompact
         points: 15
     - name: Other Supplies
       entries:
+      - id: RMCVisorWelding
+        points: 5
       - id: CMHandsInsulated
         points: 3
       - id: CMHandsBlackInsulated
         points: 3
-      - id: RMCPouchMacheteFilled
-        points: 5
+      - id: CMEntrenchingTool
+        points: 1
       - id: RMCBackpackRTO
         points: 15
       - id: RMCMotionDetector
         points: 5
-      - id: CMEntrenchingTool
-        points: 1
+      - id: RMCPouchMacheteFilled
+        points: 5
       - id: RMCBinoculars
         points: 5
       - id: RMCRangefinder
@@ -351,8 +369,6 @@
         points: 1
       - id: RMCSynthResetKey
         points: 10
-      - id: RMCVisorWelding
-        points: 5
 
 # Commanding Officer #
 
@@ -780,6 +796,16 @@
     # ////////////////////////////////////
     # Executive Officer
     # ////////////////////////////////////
+    - name: Combat Equipment
+      jobs:
+      - CMExecutiveOfficer
+      takeAll: CMEquipment
+      entries:
+      - id: RMCArmorVestSeniorOfficer
+      - id: RMCArmorM3SO
+      - id: RMCArmorHelmetM10SO
+      - id: CMBootsBlackFilled
+      - id: CMHandsBlackMarine
     - name: Standard Equipment
       jobs:
       - CMExecutiveOfficer
@@ -794,7 +820,6 @@
       - CMExecutiveOfficer
       choices: { CMUniform: 1 }
       entries:
-      - id: CMJumpsuitBO
       - id: CMJumpsuitOperations
       - id: RMCVendorBundleXOFormal
     - name: Personal Weapon
@@ -811,37 +836,6 @@
         name: M77 pistol
       - id: RMCM44BeltFilled
         name: M44 revolver
-    - name: Belt
-      jobs:
-      - CMExecutiveOfficer
-      choices: { CMBelt: 1 }
-      entries:
-      - id: RMCBeltUtilityGeneral
-        recommended: true
-      - id: CMBeltSecurityMPFilled
-        name: M276 pattern security rig (Full)
-        recommended: true
-      - id: CMBeltMedicalFilled
-        name: M276 pattern medical storage rig (Full)
-        recommended: true
-      - id: CMBeltMedicBagFilled
-        name: M276 pattern lifesaver bag (Full)
-        recommended: true
-      - id: CMBeltMarine
-        recommended: true
-      - id: CMBeltUtilityCombat
-        recommended: true
-    - name: Combat Equipment
-      jobs:
-      - CMExecutiveOfficer
-      takeAll: CMEquipment
-      entries:
-      - id: RMCArmorVestSeniorOfficer
-      - id: RMCArmorM3SO
-      - id: RMCArmorHelmetM10SO
-      - id: CMBootsBlackFilled
-      - id: CMHandsBlackMarine
-      - id: RMCM82FHolsterFilled
     - name: Eyewear
       jobs:
       - CMExecutiveOfficer
@@ -853,6 +847,15 @@
       - id: RMCSunglassesBig
         recommended: true
       - id: RMCGlassesAviators
+    - name: Hats
+      jobs:
+      - CMExecutiveOfficer
+      choices: { CMHat: 1 }
+      entries:
+      - id: RMCHeadBeretChiefOfficer
+      - id: CMHeadCapPeakedService
+      - id: RMCHeadCapPatrol
+      - id: CMHeadCapOfficer
     - name: Patches
       jobs:
       - CMExecutiveOfficer
@@ -868,6 +871,33 @@
         name: United Nations flag shoulder patch
       - id: RMCPatchUnitedNations
         name: United Nations shoulder patch
+    - name: Belt
+      jobs:
+      - CMExecutiveOfficer
+      choices: { CMBelt: 1 }
+      entries:
+      - id: RMCBeltUtilityGeneral
+        recommended: true
+      - id: CMBeltMarine
+        recommended: true
+      - id: RMCM276ShotgunShellLoadingRig
+        recommended: true
+      - id: CMBeltUtilityFilled
+        name: M276 toolbelt rig (Full)
+        recommended: true
+      - id: CMBeltUtilityCombat
+      - id: CMBeltMedicBagFilled
+        name: M276 lifesaver bag (Full)
+        recommended: true
+      - id: CMBeltMedicalFilled
+        name: M276 pattern medical storage rig (Full)
+        recommended: true
+      - id: RMCBeltHolsterSMGPouch
+      - id: RMCM82FHolsterFilled
+      - id: RMCBeltGrenade
+      - id: CMBeltSecurityMPFilled
+        name: M276 pattern security rig (Full)
+        recommended: true
     - name: Pouches
       jobs:
       - CMExecutiveOfficer
@@ -875,14 +905,17 @@
       entries:
       - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
+        recommended: true
       - id: RMCPouchFirstAidSplintsGauzeOintment
         name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
       - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
-        recommended: true
       - id: RMCPouchGeneralLarge
+        recommended: true
       - id: RMCPouchMagazineLarge
+        recommended: true
       - id: RMCPouchShotgunLarge
+        recommended: true
       - id: RMCPouchMagazinePistolLarge
       - id: RMCPouchMedical
       - id: RMCPouchMedkit
@@ -892,7 +925,9 @@
         name: tools pouch (Full)
       - id: RMCPouchConstruction
       - id: RMCPouchElectronicsFill
+        name: electronics pouch (Full)
       - id: RMCPouchFlareFilled
+        name: flare pouch (Full)
       - id: RMCPouchFuelTank
     - name: Accessories
       jobs:
@@ -919,23 +954,16 @@
       - id: CMHeadCapPeakedService
       - id: RMCHeadCapPatrol
       - id: CMHeadCapOfficer
+      
     # ////////////////////////////////////
     # Chief MP
     # ////////////////////////////////////
-    - name: Police Set (Mandatory)
-      jobs:
-      - CMChiefMP
-      takeAll: CMStandard
-      entries:
-      - id: RMCVendorBundleMilitaryPoliceApparelCMP
     - name: Standard Equipment
       jobs:
       - CMChiefMP
       takeAll: CMStandard
       entries:
-      - id: CMHandsBlackMarine
-      - id: CMJumpsuitWO
-      - id: CMBootsBlackFilled
+      - id: RMCVisorMedical
     - name: Helmet
       jobs:
       - CMChiefMP
@@ -949,12 +977,6 @@
       entries:
       - id: CMArmorM3WO
       - id: RMCArmorVestMP
-    - name: Hat
-      jobs:
-      - CMChiefMP
-      choices: { CMHat: 1 }
-      entries:
-      - id: CMHeadBeretCMP
     - name: Handgun Case
       jobs:
       - CMChiefMP
@@ -964,12 +986,6 @@
       - id: RMCGunCasePistolM77
       - id: RMCGunCasePistolM44
       - id: RMCGunCasePistolM1984
-    - name: Backpack
-      jobs:
-      - CMChiefMP
-      choices: { CMBackpack: 1 }
-      entries:
-      - id: CMSatchelSecurity
     - name: Belt
       jobs:
       - CMChiefMP
@@ -1001,8 +1017,10 @@
       - id: RMCPouchGeneralMedium
       - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
+        recommended: true
       - id: RMCPouchFirstAidSplintsGauzeOintment
         name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+        recommended: true
       - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
         recommended: true
@@ -1023,6 +1041,7 @@
       choices: { CMAccessories: 1 }
       entries:
       - id: CMWebbingBrown
+        recommended: true
       - id: CMWebbingBlack
         recommended: true
       - id: RMCWebbingLegPouch
@@ -1045,7 +1064,7 @@
       jobs:
       - CMChiefMP
       entries:
-      - id: RMCHeadsetMarineCommand
+      - id: CMHeadsetMPO
         points: 15
       - id: RMCHeadsetMW
         points: 30
@@ -1063,7 +1082,7 @@
       takeAll: CMStandard
       entries:
       - id: RMCVendorBundleChiefEngineerEquipment
-      - id: CMHandsInsulated #included due to parity deleting hand items if you spawn with a loadout pair of gloves.
+      - id: CMHandsInsulated #included due to parity loadout items being able to delete role gear.
     - name: Uniform
       jobs:
       - CMChiefEngineer
@@ -1110,8 +1129,6 @@
       entries:
       - id: RMCBeltConstruction
       - id: RMCBeltUtilityGeneral
-      - id: CMBeltUtilityFilled
-        name: M276 pattern toolbelt rig (Full)
     - name: Patches
       jobs:
       - CMChiefEngineer
@@ -1172,6 +1189,7 @@
       choices: { CMAccessories: 1 }
       entries:
       - id: CMWebbingBlack
+        recommended: true
       - id: CMWebbingBrown
         recommended: true
       - id: RMCWebbingLegPouch
@@ -1237,7 +1255,7 @@
       - CMQuartermaster
       takeAll: CMStandard
       entries:
-      - id: CMSatchelMarineTech
+      - id: CMSatchelMarineTech #included due to parity loadout items being able to delete role gear.
       - id: RMCQuartermasterJacket
       - id: CMHandsInsulated
     - name: Headgear
@@ -1270,6 +1288,7 @@
       - id: RMCArmorVestOfficer
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
+      - id: CMBootsBlackFilled
     - name: Patches
       jobs:
       - CMQuartermaster
@@ -1307,6 +1326,7 @@
       choices: { CMAccessories: 1 }
       entries:
       - id: CMWebbingBlack
+        recommended: true
       - id: CMWebbingBrown
         recommended: true
       - id: RMCWebbingLegPouch
@@ -1347,8 +1367,6 @@
       - CMCMO
       choices: { CMUniform: 1 }
       entries:
-      - id: CMJumpsuitCMO
-        recommended: true
       - id: RMCScrubsCMO
         recommended: true
       - id: RMCJumpsuitDoctor
@@ -1516,9 +1534,9 @@
       - CMCMO
       entries:
       - id: CMHeadsetMedical
-        amount: 15
+        points: 15
       - id: CMHeadsetResearcher
-        amount: 30
+        points: 30
       - id: RMCCPRDummy
         amount: 5
     # ////////////////////////////////////
@@ -1529,7 +1547,6 @@
       - CMAuxiliarySupportOfficer
       choices: { CMUniform: 1 }
       entries:
-      - id: CMJumpsuitBO
       - id: RMCJumpsuitASOBlack
       - id: RMCJumpsuitASOFormal
       - id: RMCJumpsuitASOFormalAlt
@@ -1540,7 +1557,6 @@
       - CMAuxiliarySupportOfficer
       choices: { CMSuit: 1 }
       entries:
-      - id: CMCoatASO
       - id: RMCCoatASOBlack
       - id: RMCCoatASOWhite
       - id: RMCCoatASOBlackAlt
@@ -1559,7 +1575,7 @@
       choices: { CMBag: 1 }
       entries:
       - id: CMSatchelMarineTech
-      - id: CMSatchel
+      - id: CMSatchel 
     - name: Personal Sidearm
       jobs:
       - CMAuxiliarySupportOfficer
