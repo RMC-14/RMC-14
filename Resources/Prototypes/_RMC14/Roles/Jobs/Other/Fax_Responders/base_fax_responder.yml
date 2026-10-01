@@ -1,5 +1,3 @@
-# Base whitelist job for fax responders
-# Players need to be whitelisted for this job to access any fax responder role
 - type: job
   id: CMFaxResponder
   name: rmc-job-name-fax-responder
