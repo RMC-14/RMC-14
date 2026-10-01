@@ -8,7 +8,7 @@
   ranks:
     RMCRankWeYaExecutiveSpecialist: []
   startingGear: RMCGearWeYaResponder
-  icon: "CMJobIconWeYa"
+  icon: "CMJobIconLiaison"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-staff
   accessGroups:

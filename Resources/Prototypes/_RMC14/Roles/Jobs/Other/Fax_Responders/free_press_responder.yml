@@ -8,7 +8,7 @@
   ranks:
     RMCRankCivilian: []
   startingGear: RMCGearFreePressResponder
-  icon: "CMJobIconReporter"
+  icon: "RMCJobIconCorrespondent"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-staff
   accessGroups:
