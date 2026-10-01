@@ -145,7 +145,7 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
 
         var location = _transform.GetMoverCoordinates(xeno).SnapToGrid(EntityManager);
 
-        if (!_xenoPlasma.HasPlasmaPopup(xeno.Owner, args.PlasmaCost, false))
+        if (!_xenoPlasma.HasPlasmaPopup(xeno.Owner, args.PlasmaCost, false) || !CanPlaceResinHole(xeno, location))
         {
             return;
         }
@@ -326,7 +326,7 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
         var destroyed = false;
         if (_destructible.TryGetDestroyedAt(resinHole.Owner, out var totalHealth))
         {
-            destroyed = args.Damageable.TotalDamage + args.DamageDelta.GetTotal() > totalHealth;
+            destroyed = args.Damageable.TotalDamage + args.DamageDelta.GetTotal() >= totalHealth;
         }
         ActivateTrap(resinHole, destroyed);
     }
@@ -515,13 +515,14 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
 
         var ev = new XenoResinHoleActivationEvent(msg);
 
+        SetTrapType(resinHole, null);
+
         // If the resin hole is destroyed, it's the XenoAnnounceStructureDestructionComponent job to announce
         // the entity's destruction
         if (!destroyed)
         {
             RaiseLocalEvent(ent, ev);
 
-            SetTrapType(resinHole, null);
             _appearanceSystem.SetData(resinHole.Owner, XenoResinHoleVisuals.Contained, ContainedTrap.Empty);
         }
 
