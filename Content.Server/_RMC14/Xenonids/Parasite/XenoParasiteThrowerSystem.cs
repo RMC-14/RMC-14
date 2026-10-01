@@ -62,9 +62,8 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
         // parasite OR try to throw a held parasite
         if (_interact.InRangeUnobstructed(xeno, target))
         {
-            var clickedEntities = _lookup.GetEntitiesIntersecting(target);
+            var clickedEntities = _lookup.GetEntitiesInRange(target, 0.5f, LookupFlags.Approximate | LookupFlags.Uncontained);
             var tileHasParasites = false;
-            var tileHasMorpher = false;
 
             foreach (var possibleParasiteOrMorpher in clickedEntities)
             {
@@ -80,9 +79,7 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
                     }
 
                     _morpher.EggMorpherEmpty((possibleParasiteOrMorpher, morpher), xeno);
-
-                    tileHasMorpher = true;
-                    continue;
+                    return;
                 }
 
                 if (_mobState.IsDead(possibleParasiteOrMorpher))
@@ -111,9 +108,6 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
                 _popup.PopupEntity(stashMsg, xeno, xeno);
                 return;
             }
-
-            if (tileHasMorpher)
-                return;
         }
 
         if (_hands.GetActiveItem((xeno, null)) is { } heldEntity &&

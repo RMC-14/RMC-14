@@ -59,9 +59,8 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
         // If none of the entities on the selected, in-range tile are eggs, try to pull an egg out of inventory
         if (_interact.InRangeUnobstructed(eggRetriever, target))
         {
-            var clickedEntities = _lookup.GetEntitiesIntersecting(target);
+            var clickedEntities = _lookup.GetEntitiesInRange(target, 0.5f, LookupFlags.Approximate | LookupFlags.Uncontained);
             var tileHasEggs = false;
-            var tileHasMorpher = false;
 
             foreach (var possibleEggOrMorpher in clickedEntities)
             {
@@ -78,8 +77,7 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
 
                     _popup.PopupEntity(Loc.GetString("rmc-xeno-retrieve-egg-fill", ("morpher", possibleEggOrMorpher)), eggRetriever, PopupType.Medium);
                     _doafter.TryStartDoAfter(doAfter);
-                    tileHasMorpher = true;
-                    continue;
+                    return;
                 }
 
                 if (!TryComp<XenoEggComponent>(possibleEggOrMorpher, out var egg) ||
@@ -103,9 +101,6 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
                 _popup.PopupEntity(stashMsg, eggRetriever, eggRetriever);
                 return;
             }
-
-            if (tileHasMorpher)
-                return;
         }
 
         if (eggRetriever.Comp.CurEggs == 0)
