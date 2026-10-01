@@ -4,6 +4,10 @@
   name: rmc-job-name-weya-responder
   description: rmc-job-description-weya-responder
   playTimeTracker: CMJobWeYaResponder
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobLiaison
+    time: 270000 # 75 hours
   setPreference: false
   ranks:
     RMCRankWeYaExecutiveSpecialist: []
@@ -35,8 +39,6 @@
         RMCSkillPowerLoader: 1
         RMCSkillSurgery: 1
         RMCSkillVehicles: 2
-  whitelisted: true
-  whitelistParent: CMFaxResponder
 
 - type: startingGear
   id: RMCGearWeYaResponder
