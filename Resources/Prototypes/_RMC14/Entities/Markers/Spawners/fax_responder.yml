@@ -6,11 +6,8 @@
   - type: FaxResponderSpawnPoint
     job: CMWeYaresponder
   - type: Sprite
-    layers:
-    - sprite: Markers/cross.rsi
-      state: green
-    - sprite: _RMC14/Objects/CMIDs/gold_id.rsi
-      state: icon
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: cl_spawn
 
 - type: entity
   id: RMCSpawnPointFaxResponderFreePress
@@ -20,8 +17,5 @@
   - type: FaxResponderSpawnPoint
     job: CMFreePressResponder
   - type: Sprite
-    layers:
-    - sprite: Markers/cross.rsi
-      state: green
-    - sprite: _RMC14/Objects/CMIDs/silver_id.rsi
-      state: icon
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: marine_spawn
