@@ -398,7 +398,10 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         var delay = ent.Comp.HackDelay * _skills.GetSkillDelayMultiplier(user, ent.Comp.HackSkill);
         var ev = new RMCAutomatedVendorHackDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, ent, ent, multitool);
+        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, ent, ent, multitool)
+        {
+            RootEntity = true,
+        };
         if (_doAfter.TryStartDoAfter(doAfter))
         {
             _popup.PopupClient(Loc.GetString("rmc-vending-machine-hack-start", ("vendor", ent)), ent, user);

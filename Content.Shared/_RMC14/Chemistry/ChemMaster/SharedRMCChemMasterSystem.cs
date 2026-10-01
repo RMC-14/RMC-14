@@ -112,6 +112,7 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
             {
                 BreakOnMove = true,
                 NeedHand = true,
+                RootEntity = true,
             };
 
             if (_doAfter.TryStartDoAfter(doAfterArgs))

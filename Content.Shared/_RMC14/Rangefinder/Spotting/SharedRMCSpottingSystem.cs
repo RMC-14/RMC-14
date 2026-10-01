@@ -100,7 +100,7 @@ public abstract partial class SharedRMCSpottingSystem : EntitySystem
             _appearance.SetData(spottingTool, RangefinderLayers.Layer, RangefinderMode.Spotter);
 
         // Start targeting the targeted entity.
-        _targeting.Target(spottingTool, user, target, spotting.SpottingDuration, TargetedEffects.Spotted);
+        _targeting.Target(spottingTool, user, target, spotting.SpottingDuration, TargetedEffects.Spotted, rootUser: true);
     }
 
     /// <summary>

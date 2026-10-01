@@ -348,7 +348,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         {
             BreakOnMove = true,
             DuplicateCondition = DuplicateConditions.SameTarget,
-
+            RootEntity = true,
         });
     }
 
