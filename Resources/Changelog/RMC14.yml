@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: TadJohnson00
-  changes:
-  - message: '[PVE] Added the ML66OT, an incredibly effective heavy support gun issued
-      only at the discretion of Company Command.'
-    type: Add
-  - message: '[PVE] Increased the range, fire rate, and impact of heavy support guns,
-      making them significantly more effective.'
-    type: Tweak
-  id: 3183
-  time: '2026-05-11T04:00:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9724
 - author: IceNoobXD
   changes:
   - message: Added landing lights to Kutjevo's alternative LZ1 insert!
@@ -4500,5 +4489,13 @@
   id: 3682
   time: '2026-10-01T05:26:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10467
+- author: SabreML
+  changes:
+  - message: Xenonids and Synthetics can now see each other's speech and emotes, to
+      help with Synthetics being able to slowly learn the Xenonid language.
+    type: Tweak
+  id: 3683
+  time: '2026-10-01T05:28:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10764
 Name: RMC14
 Order: -1
