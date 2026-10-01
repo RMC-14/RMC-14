@@ -17,7 +17,6 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
     [Dependency] protected readonly IGameTiming Timing = default!;
 
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly RMCImmobileActionSystem _immobileAction = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedRMCPvsSystem _rmcPvs = default!;
@@ -47,8 +46,7 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
             return;
         }
 
-        if (_immobileAction.BlocksPush(ent, args.Pusher))
-            args.Cancelled = true;
+        args.Cancelled = true;
     }
 
     private void ReleaseRootedUser(Entity<TargetingComponent> targeting)

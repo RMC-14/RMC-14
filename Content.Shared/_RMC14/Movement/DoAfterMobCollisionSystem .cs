@@ -5,8 +5,6 @@ namespace Content.Shared.Movement.Systems;
 
 public sealed class DoAfterMobCollisionSystem : EntitySystem
 {
-    [Dependency] private readonly RMCImmobileActionSystem _immobileAction = default!;
-
     public override void Initialize()
     {
         base.Initialize();
@@ -25,9 +23,7 @@ public sealed class DoAfterMobCollisionSystem : EntitySystem
 
             if (doAfter.Args.RootEntity)
             {
-                if (_immobileAction.BlocksPush(uid, args.Pusher))
-                    args.Cancelled = true;
-
+                args.Cancelled = true;
                 return;
             }
         }
