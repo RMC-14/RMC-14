@@ -219,7 +219,7 @@ public sealed class RadioDeviceSystem : EntitySystem
         RaiseLocalEvent(args.MessageSource, nameEv);
 
         // log to chat so people can identity the speaker/source, but avoid clogging ghost chat if there are many radios
-        _chat.SendRadioSpeakerWhisperWithLanguage(ent.Owner, args.Message, args.Language, nameEv.VoiceName, ignoreXenos: true, originalSpeaker: args.MessageSource);
+        _chat.SendRadioSpeakerWhisperWithLanguage(ent.Owner, args.Message, args.Language, nameEv.VoiceName, originalSpeaker: args.MessageSource);
     }
     // RMC14
 
