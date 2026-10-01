@@ -35,7 +35,7 @@
         RMCSkillPowerLoader: 1
         RMCSkillSurgery: 1
         RMCSkillVehicles: 2
-  whitelistParent: CMFaxResponder
+  # whitelistParent: CMFaxResponder # TODO: re-enable for production
 
 - type: startingGear
   id: RMCGearWeYaResponder

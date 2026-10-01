@@ -21,9 +21,20 @@
   id: UNMCHighCommand
   parent:
   - BaseStation
+  - BaseStationJobsSpawning
   - BaseStationCentcomm
   - BaseStationAlertLevels
   - BaseStationNanotrasen
   categories: [ HideSpawnMenu ]
   components:
   - type: Transform
+  - type: StationJobs
+    availableJobs:
+      CMWeYaresponder: [ 0, -1 ]
+      CMProvostResponder: [ 0, -1 ]
+      CMCMBResponder: [ 0, -1 ]
+      CMCLFResponder: [ 0, -1 ]
+      CMFreePressResponder: [ 0, -1 ]
+      CMSPPResponder: [ 0, -1 ]
+      CMTSEResponder: [ 0, -1 ]
+      RMCUNMCResponder: [ 0, -1 ]
