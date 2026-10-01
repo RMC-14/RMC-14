@@ -1,90 +1,4 @@
 ﻿Entries:
-- author: Pyromaniac365
-  changes:
-  - message: Removed Valkyrie's ability to retrieve dead xenonids.
-    type: Fix
-  id: 3179
-  time: '2026-05-05T15:00:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9778
-- author: stranthbackup
-  changes:
-  - message: Rebalanced some current OT chems to produce the correct amount. CLF3
-      now produces 3u. High combustion & sticky napalm now produce 2u.
-    type: Tweak
-  id: 3180
-  time: '2026-05-07T02:18:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8637
-- author: IceNoobXD
-  changes:
-  - message: Added five new cassette player variants.
-    type: Add
-  id: 3181
-  time: '2026-05-08T21:03:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9496
-- author: Tuna224
-  changes:
-  - message: Added a tent for Correspondents to take their news on the go!
-    type: Add
-  id: 3182
-  time: '2026-05-10T22:43:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9278
-- author: TadJohnson00
-  changes:
-  - message: '[PVE] Added the ML66OT, an incredibly effective heavy support gun issued
-      only at the discretion of Company Command.'
-    type: Add
-  - message: '[PVE] Increased the range, fire rate, and impact of heavy support guns,
-      making them significantly more effective.'
-    type: Tweak
-  id: 3183
-  time: '2026-05-11T04:00:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9724
-- author: IceNoobXD
-  changes:
-  - message: Added landing lights to Kutjevo's alternative LZ1 insert!
-    type: Add
-  id: 3184
-  time: '2026-05-11T16:08:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9833
-- author: Tuna224
-  changes:
-  - message: Added a Correspondent new-to-role popup.
-    type: Add
-  id: 3185
-  time: '2026-05-12T23:19:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9617
-- author: kleinerstation13
-  changes:
-  - message: SPP SOF and SPP Airborne now start with SPP flare pouches instead of
-      UNMC flare pouches.
-    type: Tweak
-  id: 3186
-  time: '2026-05-12T23:27:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9693
-- author: TadJohnson00
-  changes:
-  - message: '[PVE] Added a Whiskey Troop patch for the Royal Crown Marine contingent
-      aboard the HMS Pratchett.'
-    type: Add
-  id: 3187
-  time: '2026-05-14T02:50:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9720
-- author: Drazamuffin
-  changes:
-  - message: WEYA research personal have uncovered xenoforms hidden with in permafrost
-      of the sector.
-    type: Add
-  id: 3188
-  time: '2026-05-14T10:20:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9659
-- author: MarshesAndMeadows
-  changes:
-  - message: Fixed water tiles not correctly updating the slowdown modifier when stepping
-      onto a catwalk.
-    type: Fix
-  id: 3189
-  time: '2026-05-14T10:22:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9610
 - author: yagwog
   changes:
   - message: Impenetrable Walls timed added to solaris
@@ -4497,5 +4411,94 @@
   id: 3678
   time: '2026-09-30T14:43:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10885
+- author: ThataKat
+  changes:
+  - message: '[PVE] Added the GM Request system, for handling minor requests. When
+      enabled, look for a new verb on your player entity to send requests.'
+    type: Add
+  id: 3679
+  time: '2026-09-30T23:50:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10304
+- author: Thereisabear
+  changes:
+  - message: Throttled the explosions on Hijack; behaviour should be a staggered but
+      rolling explosion one at a time now.
+    type: Tweak
+  id: 3680
+  time: '2026-10-01T05:20:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10334
+- author: Arykh
+  changes:
+  - message: Tries to fix item restocking not working on live servers. (again)
+    type: Fix
+  - message: Fixed bulk restocking not behaving correctly.
+    type: Fix
+  id: 3681
+  time: '2026-10-01T05:21:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10351
+- author: Thereisabear
+  changes:
+  - message: Fixed some console errors from attachments.
+    type: Fix
+  id: 3682
+  time: '2026-10-01T05:26:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10467
+- author: SabreML
+  changes:
+  - message: Xenonids and Synthetics can now see each other's speech and emotes, to
+      help with Synthetics being able to slowly learn the Xenonid language.
+    type: Tweak
+  id: 3683
+  time: '2026-10-01T05:28:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10764
+- author: Thereisabear
+  changes:
+  - message: Fixed sentry laptops causing server issues. No in-game behavioural change
+      otherwise.
+    type: Fix
+  id: 3684
+  time: '2026-10-01T05:29:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10858
+- author: Thereisabear
+  changes:
+  - message: Added Job Icon UI for Admins and GMs
+    type: Add
+  id: 3685
+  time: '2026-10-01T05:32:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10619
+- author: Thereisabear
+  changes:
+  - message: Standardised the amount of hits required to break ledges for most Marines
+      and Xenonids. (3 hits)
+    type: Tweak
+  - message: Fixed being unable to weed on the "front" of ledges.
+    type: Fix
+  id: 3686
+  time: '2026-10-01T05:31:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10516
+- author: Thereisabear
+  changes:
+  - message: Fixed magazines sometimes getting negative values.
+    type: Fix
+  id: 3687
+  time: '2026-10-01T05:30:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10740
+- author: RerBreab
+  changes:
+  - message: Handheld radios can be now switched to listen-only mode.
+    type: Add
+  id: 3688
+  time: '2026-10-01T05:32:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10659
+- author: Thereisabear
+  changes:
+  - message: Fixed being unable to interact to turn off Hardhats as a Xenonid.
+    type: Fix
+  - message: Fixed the Toggle Light action and verb appearing on action bar and armor
+      while unequipped.
+    type: Fix
+  id: 3689
+  time: '2026-10-01T05:29:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10474
 Name: RMC14
 Order: -1
