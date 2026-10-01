@@ -1,9 +1,0 @@
-- type: job
-  id: CMFaxResponder
-  name: rmc-job-name-fax-responder
-  playTimeTracker: CMJobFaxResponder
-  setPreference: false
-  whitelisted: true
-
-- type: playTimeTracker
-  id: CMJobFaxResponder
