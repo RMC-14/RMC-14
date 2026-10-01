@@ -1582,8 +1582,9 @@
       - id: RMCHeadBeretASO
       - id: RMCHeadBeretGreen
       - id: CMHeadBeretTan
-      - id: RMCHeadCapASO
       - id: RMCHeadCapPatrol
+      - id: RMCHeadCapASO
+      - id: CMHeadCapOfficer
       - id: RMCHeadCapPeakedASO
       - id: CMHeadCapPeakedService
     - name: Combat Equipment
