@@ -552,6 +552,7 @@
 - type: entity
   parent: BulletRifleM5SPRHVP
   id: BulletRifleM5SPRHVHIP
+  categories: [ HideSpawnMenu ]
   components:
   - type: RMCStunOnHit
     stuns:

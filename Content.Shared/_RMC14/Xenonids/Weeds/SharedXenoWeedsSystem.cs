@@ -15,6 +15,7 @@ using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Climbing.Components;
 using Content.Shared.Coordinates;
+using Content.Shared.Tag;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
 using Content.Shared.GameTicking;
@@ -67,6 +68,9 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
     [Dependency] private readonly WeedboundWallSystem _weedboundWall = default!;
     [Dependency] private readonly DesignerNodeBindingSystem _designerBinding = default!;
+    [Dependency] private readonly TagSystem _tags = default!;
+
+    private static readonly ProtoId<TagPrototype> PlatformTag = "Platform";
 
     private readonly HashSet<EntityUid> _toUpdate = new();
     private readonly HashSet<EntityUid> _intersecting = new();
@@ -631,7 +635,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             foreach (var entity in entities)
             {
                 if (!HasComp<ClimbableComponent>(entity) && !HasComp<RMCReactorPoweredLightComponent>(entity) ||
-                    HasComp<BarricadeComponent>(entity))
+                    HasComp<BarricadeComponent>(entity) ||
+                    _tags.HasTag(entity, PlatformTag))
                     continue;
 
                 _popup.PopupClient(Loc.GetString("rmc-xeno-weeds-blocked"), popupAt ?? xeno.ToCoordinates(), xeno, PopupType.SmallCaution);

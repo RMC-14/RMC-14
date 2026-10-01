@@ -1,20 +1,23 @@
 using Content.Server.Ghost;
+using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Mobs;
 using Content.Shared._RMC14.PropCalling;
-using Content.Shared.Actions;
 using Content.Shared.Ghost;
+using Content.Shared.Mind;
+using Content.Shared.Mind.Components;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Overlays;
 using Robust.Shared.Configuration;
 
 namespace Content.Server._RMC14.Mobs
 {
-    public sealed class CMGhostSystem : EntitySystem
+    public sealed class CMGhostSystem : SharedCMGhostSystem
     {
-        [Dependency] private readonly SharedActionsSystem _actions = default!;
-        [Dependency] private readonly IConfigurationManager _configuration = default!;
         [Dependency] private readonly SharedMarineSystem _marine = default!;
+        [Dependency] private readonly SharedMindSystem _mind = default!;
 
         private bool _ghostsCanBoo;
 
@@ -30,7 +33,10 @@ namespace Content.Server._RMC14.Mobs
             SubscribeLocalEvent<CMGhostComponent, ToggleMarineHudActionEvent>(OnMarineHudAction);
             SubscribeLocalEvent<CMGhostComponent, ToggleXenoHudActionEvent>(OnXenoHudAction);
 
-            Subs.CVar(_configuration, RMCCVars.RMCGhostCanBoo, OnGhostBooChange, true);
+            SubscribeLocalEvent<MindContainerComponent, MindAddedMessage>(OnMindAdded);
+            SubscribeLocalEvent<MindContainerComponent, MobStateChangedEvent>(OnMobStateChanged);
+
+            Subs.CVar(Config, RMCCVars.RMCGhostCanBoo, OnGhostBooChange, true);
         }
 
         private void OnGhostStartup(EntityUid uid, GhostHearingComponent comp, ComponentStartup args)
@@ -40,9 +46,10 @@ namespace Content.Server._RMC14.Mobs
 
         private void OnCMGhostStartup(EntityUid uid, CMGhostComponent comp, ComponentStartup args)
         {
-            _actions.AddAction(uid, ref comp.ToggleMarineHudEntity, comp.ToggleMarineHud);
-            _actions.AddAction(uid, ref comp.ToggleXenoHudEntity, comp.ToggleXenoHud);
-            _actions.AddAction(uid, ref comp.FindParasiteEntity, comp.FindParasite);
+            Actions.AddAction(uid, ref comp.ToggleMarineHudEntity, comp.ToggleMarineHud);
+            Actions.AddAction(uid, ref comp.ToggleXenoHudEntity, comp.ToggleXenoHud);
+            Actions.AddAction(uid, ref comp.ToggleDeadChatEntity, comp.ToggleDeadChat);
+            Actions.AddAction(uid, ref comp.FindParasiteEntity, comp.FindParasite);
 
             EnsureComp<ShowMarineIconsComponent>(uid);
             var bars = EnsureComp<ShowHealthBarsComponent>(uid);
@@ -61,7 +68,7 @@ namespace Content.Server._RMC14.Mobs
                 RemComp<ShowMarineIconsComponent>(uid);
                 RemCompDeferred<ShowHealthIconsComponent>(uid);
                 RemCompDeferred<ShowHealthBarsComponent>(uid);
-                _actions.SetToggled(comp.ToggleMarineHudEntity, true);
+                Actions.SetToggled(comp.ToggleMarineHudEntity, true);
             }
             else
             {
@@ -72,7 +79,7 @@ namespace Content.Server._RMC14.Mobs
                 var bars = EnsureComp<ShowHealthBarsComponent>(uid);
                 bars.DamageContainers.Add("Biological");
 
-                _actions.SetToggled(comp.ToggleMarineHudEntity, false);
+                Actions.SetToggled(comp.ToggleMarineHudEntity, false);
             }
         }
         private void OnXenoHudAction(EntityUid uid, CMGhostComponent comp, ToggleXenoHudActionEvent args)
@@ -82,12 +89,37 @@ namespace Content.Server._RMC14.Mobs
             if (HasComp<CMGhostXenoHudComponent>(uid))
             {
                 RemComp<CMGhostXenoHudComponent>(uid);
-                _actions.SetToggled(comp.ToggleXenoHudEntity, true);
+                Actions.SetToggled(comp.ToggleXenoHudEntity, true);
             }
             else
             {
                 AddComp<CMGhostXenoHudComponent>(uid);
-                _actions.SetToggled(comp.ToggleXenoHudEntity, false);
+                Actions.SetToggled(comp.ToggleXenoHudEntity, false);
+            }
+        }
+
+        private void OnMindAdded(Entity<MindContainerComponent> ent, ref MindAddedMessage args)
+        {
+            if (!HasComp<GhostComponent>(ent) &&
+                TryComp(ent, out MobStateComponent? mobState) &&
+                mobState.CurrentState != MobState.Dead)
+            {
+                args.Mind.Comp.TimeOfDeath = null;
+            }
+        }
+
+        private void OnMobStateChanged(Entity<MindContainerComponent> ent, ref MobStateChangedEvent args)
+        {
+            if (!_mind.TryGetMind(ent, out _, out var mind))
+                return;
+
+            if (args.NewMobState == MobState.Dead && args.OldMobState != MobState.Dead)
+            {
+                mind.TimeOfDeath = GameTiming.RealTime;
+            }
+            else if (args.OldMobState == MobState.Dead && args.NewMobState != MobState.Dead)
+            {
+                mind.TimeOfDeath = null;
             }
         }
 
@@ -107,15 +139,35 @@ namespace Content.Server._RMC14.Mobs
             }
         }
 
+        public void SetPostDeathChatMute(EntityUid ghostUid, Entity<MindComponent> mind, EntityUid? sourceBody)
+        {
+            if (sourceBody is { } body && HasComp<RMCAdminSpawnedComponent>(body))
+                return;
+
+            if (mind.Comp.TimeOfDeath is not { } timeOfDeath)
+                return;
+
+            if (!TryComp(ghostUid, out CMGhostComponent? ghost))
+                return;
+
+            var duration = TimeSpan.FromSeconds(Math.Max(0, Config.GetCVar(RMCCVars.RMCPostDeathChatMuteTimeSeconds)));
+            var elapsed = GameTiming.RealTime - timeOfDeath;
+            var remaining = duration - (elapsed > TimeSpan.Zero ? elapsed : TimeSpan.Zero);
+            if (remaining <= TimeSpan.Zero)
+                return;
+
+            SetPostDeathChatMutedUntil((ghostUid, ghost), GameTiming.CurTime + remaining);
+        }
+
         private void ChangeGhostBoo(Entity<GhostComponent> ghost)
         {
             if (_ghostsCanBoo)
             {
-                _actions.AddAction(ghost.Owner, ref ghost.Comp.BooActionEntity, ghost.Comp.BooAction);
+                Actions.AddAction(ghost.Owner, ref ghost.Comp.BooActionEntity, ghost.Comp.BooAction);
             }
             else
             {
-                _actions.RemoveAction(ghost.Owner, ghost.Comp.BooActionEntity);
+                Actions.RemoveAction(ghost.Owner, ghost.Comp.BooActionEntity);
             }
         }
     }
