@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: stranthbackup
-  changes:
-  - message: Rebalanced some current OT chems to produce the correct amount. CLF3
-      now produces 3u. High combustion & sticky napalm now produce 2u.
-    type: Tweak
-  id: 3180
-  time: '2026-05-07T02:18:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8637
-- author: IceNoobXD
-  changes:
-  - message: Added five new cassette player variants.
-    type: Add
-  id: 3181
-  time: '2026-05-08T21:03:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9496
 - author: Tuna224
   changes:
   - message: Added a tent for Correspondents to take their news on the go!
@@ -4498,5 +4483,22 @@
   id: 3679
   time: '2026-09-30T23:50:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10304
+- author: Thereisabear
+  changes:
+  - message: Throttled the explosions on Hijack; behaviour should be a staggered but
+      rolling explosion one at a time now.
+    type: Tweak
+  id: 3680
+  time: '2026-10-01T05:20:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10334
+- author: Arykh
+  changes:
+  - message: Tries to fix item restocking not working on live servers. (again)
+    type: Fix
+  - message: Fixed bulk restocking not behaving correctly.
+    type: Fix
+  id: 3681
+  time: '2026-10-01T05:21:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10351
 Name: RMC14
 Order: -1
