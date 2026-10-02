@@ -100,14 +100,25 @@ public sealed partial class RMCERTSystem
         return accepted;
     }
 
-    private void CleanupRequestContent(RMCERTRequest request)
+    private void CleanupRequestContent(RMCERTRequest request, EntityUid? membersOnShuttle = null)
     {
         // Failed and cancelled requests need to unwind both the staged roster and any destination reservation held by the shuttle.
         var ghostCoordinates = _gameTicker.GetObserverSpawnPoint();
-        foreach (var member in request.SpawnedGhostRoles)
+        for (var i = request.SpawnedGhostRoles.Count - 1; i >= 0; i--)
         {
+            var member = request.SpawnedGhostRoles[i];
             if (!Exists(member))
+            {
+                request.SpawnedGhostRoles.RemoveAt(i);
                 continue;
+            }
+
+            // Returning a fallback shuttle retires only its passengers; cancellation and failure still clean the entire roster.
+            if (membersOnShuttle != null &&
+                (!TryComp(member, out TransformComponent? xform) || xform.GridUid != membersOnShuttle))
+            {
+                continue;
+            }
 
             // Cleanup can move a player to a ghost and delete their old body in the same tick.
             // Close their UIs first so clients don't keep stale BUIs for entities queued for deletion.
@@ -117,9 +128,9 @@ public sealed partial class RMCERTSystem
                 _ghost.SpawnGhost((mindId, mind), ghostCoordinates, canReturn: false);
 
             QueueDel(member);
+            request.SpawnedGhostRoles.RemoveAt(i);
         }
 
-        request.SpawnedGhostRoles.Clear();
         request.PlannedRoster.Clear();
 
         if (request.Shuttle is { Valid: true } shuttle && Exists(shuttle))

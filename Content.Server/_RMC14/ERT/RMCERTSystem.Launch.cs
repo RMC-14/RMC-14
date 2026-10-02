@@ -75,7 +75,7 @@ public sealed partial class RMCERTSystem
             {
                 if (request.ShuttleHomeIsFallback)
                 {
-                    CleanupRequestContent(request);
+                    CleanupRequestContent(request, ev.Dropship.Owner);
                     DirtyState(request);
                     return;
                 }
