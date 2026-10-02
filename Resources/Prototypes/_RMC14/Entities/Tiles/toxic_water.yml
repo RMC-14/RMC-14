@@ -11,6 +11,7 @@
   abstract: true
   components:
   - type: ToxicWater
+  - type: VehicleCorrosiveTile
   - type: DamageOverTime
     affectsDead: false
     damageEvery: 1

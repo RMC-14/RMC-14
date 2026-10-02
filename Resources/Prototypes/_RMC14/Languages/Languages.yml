@@ -28,6 +28,7 @@
   name: "Xenonid"
   description: "The alien language of the Xenonids."
   isVisibleLanguage: true
+  category: Xenonid
   typefaceId: null
   textSize: null
   languageIcon:

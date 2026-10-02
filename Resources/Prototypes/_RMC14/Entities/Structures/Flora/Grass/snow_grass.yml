@@ -1,0 +1,64 @@
+- type: entity
+  parent: RMCBaseGrass
+  id: RMCGrassSnow
+  name: snowy grass
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Flora/Grass/snowgrass.rsi
+    state: snowgrassall_1
+
+- type: entity
+  parent: RMCGrassSnow
+  id: RMCGrassSnow2
+  components:
+  - type: Sprite
+    state: snowgrassall_2
+
+- type: entity
+  parent: RMCGrassSnow
+  id: RMCGrassSnow3
+  components:
+  - type: Sprite
+    state: snowgrassall_3
+
+- type: entity
+  parent: RMCGrassSnow
+  id: RMCGrassSnow4
+  components:
+  - type: Sprite
+    state: snowgrassbb_1
+
+- type: entity
+  parent: RMCGrassSnow
+  id: RMCGrassSnow5
+  components:
+  - type: Sprite
+    state: snowgrassbb_2
+
+- type: entity
+  parent: RMCGrassSnow
+  id: RMCGrassSnow6
+  components:
+  - type: Sprite
+    state: snowgrassbb_3
+
+- type: entity
+  parent: RMCGrassSnow
+  id: RMCGrassSnow7
+  components:
+  - type: Sprite
+    state: snowgrassgb_1
+
+- type: entity
+  parent: RMCGrassSnow
+  id: RMCGrassSnow8
+  components:
+  - type: Sprite
+    state: snowgrassgb_2
+
+- type: entity
+  parent: RMCGrassSnow
+  id: RMCGrassSnow9
+  components:
+  - type: Sprite
+    state: snowgrassgb_3

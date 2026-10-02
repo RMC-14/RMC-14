@@ -90,6 +90,7 @@
     overlayDamagedState: glauncher_1
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
+  - type: GunIgnorePrediction
   - type: Gun
     fireRate: 0.3333
     projectileSpeed: 18

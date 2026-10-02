@@ -80,7 +80,10 @@ public sealed class RMCWaterSystem : EntitySystem
         UpdateAppearance(ent);
 
         if (_net.IsServer && ent.Comp.State == PurifiableWaterState.Purified)
+        {
             RemCompDeferred<DamageOverTimeComponent>(ent);
+            RemCompDeferred<VehicleCorrosiveTileComponent>(ent);
+        }
     }
 
     private void OnPurifiableWaterRefreshNameModifiers(Entity<PurifiableWaterComponent> ent, ref RefreshNameModifiersEvent args)
@@ -388,6 +391,7 @@ public sealed class RMCWaterSystem : EntitySystem
             EnsureComp<SyncSpriteComponent>(water);
 
         RemCompDeferred<DamageOverTimeComponent>(water);
+        RemCompDeferred<VehicleCorrosiveTileComponent>(water);
         RemCompDeferred<ActiveWaterComponent>(water);
     }
 
@@ -467,7 +471,11 @@ public sealed class RMCWaterSystem : EntitySystem
             var playedSound = false;
             foreach (var vehicle in _physics.GetEntitiesIntersectingBody(uid, (int) CollisionGroup.Vehicle))
             {
-                if (!HasComp<VehicleWeakComponent>(vehicle) || !IsActiveWater(uid, vehicle))
+                // Grid vehicles already receive corrosive damage through GridVehicleMoverSystem,
+                // including the acid resistance of their wheels.
+                if (HasComp<GridVehicleMoverComponent>(vehicle) ||
+                    !HasComp<VehicleWeakComponent>(vehicle) ||
+                    !IsActiveWater(uid, vehicle))
                     continue;
 
                 _vehicleWheels.DamageWheels(vehicle, toxic.VehicleDamage);
