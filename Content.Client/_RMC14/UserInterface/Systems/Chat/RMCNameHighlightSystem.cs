@@ -31,16 +31,15 @@ public sealed partial class RMCNameHighlightSystem : EntitySystem
 
     private void XenoNameHighlights(Entity<XenoNameComponent> ent, ref BeforeCharacterChatHighlightsUpdatedEvent args)
     {
-        // Add the xeno's combined prefix + postfix.
-        var prefix = _xenoName.GetXenoPrefix(ent.Owner);
-        var newHighlights = $"@\"{prefix}{ent.Comp.Postfix}\"\n";
-
-        // And their number too, if applicable.
+        // Add their number if applicable. (excludes the queen)
         if (!HasComp<XenoOmitNumberComponent>(ent))
-            newHighlights += $"@\"{ent.Comp.Number}\"\n";
+            // Inserted to the start of the highlights string since name stuff usually goes first.
+            args.Highlights = args.Highlights.Insert(0, $"@\"{ent.Comp.Number}\"\n");
 
-        // Inserted to the start of the highlights string since name stuff usually goes first.
-        args.Highlights = args.Highlights.Insert(0, newHighlights);
+        // Add their combined prefix + postfix above that.
+        var prefix = _xenoName.GetXenoPrefix(ent.Owner); // Either their custom prefix or 'XX'.
+        var postfix = ent.Comp.Postfix; // Either their custom postfix or `null`.
+        args.Highlights = args.Highlights.Insert(0, $"@\"{prefix}{postfix}\"\n");
 
         // Remove the full xeno name since people won't tend to say "Young Drone (XX-123)" when talking to you.
         args.Highlights = args.Highlights.Replace($"@{args.Data.EntityName}\n", "");
