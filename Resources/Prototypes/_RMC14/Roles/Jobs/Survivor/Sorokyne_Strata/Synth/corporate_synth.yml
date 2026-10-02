@@ -21,6 +21,8 @@
     components:
     - type: Language
       preset: RMCLanguagePresetSynthColonist
+      currentLanguage: Russian
+      defaultLanguage: Russian
     - type: LanguageLearning
       preset: RMCLanguageLearningPresetSynthColonist
     - type: IntelRescueSurvivorObjective
