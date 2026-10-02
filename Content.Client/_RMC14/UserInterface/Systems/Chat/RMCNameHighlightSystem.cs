@@ -1,7 +1,7 @@
-using System.Linq;
-using System.Text.RegularExpressions;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Name;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Content.Client._RMC14.UserInterface.Systems.Chat;
 
