@@ -78,6 +78,8 @@ public sealed class FaxResponderSystem : EntitySystem
 
         if (_taken.Add(ev.JobId))
             RaiseNetworkEvent(GetStatus());
+
+        RaiseNetworkEvent(new FaxResponderRulesEvent(), ev.Player);
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)

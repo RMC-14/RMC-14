@@ -1,4 +1,12 @@
 <Document>
+  <ColorBox Color="#3d1f1f" OutlineColor="#a83232">
+    <Box Orientation="Vertical" Margin="8">
+      [head=1][color=#ff6b6b]USE A DEDICATED CHARACTER[/color][/head]
+
+      [head=3]Make a character that [italic]only[/italic] responds to faxes. It must not be used for any other role.[/head]
+    </Box>
+  </ColorBox>
+
   # Fax Responder
   You answer faxes sent to your fax machine on behalf of the [bold]RMC14 admin team[/bold], so you are held to the highest standards.
 
