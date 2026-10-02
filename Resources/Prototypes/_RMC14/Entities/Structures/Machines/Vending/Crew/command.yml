@@ -945,16 +945,6 @@
       - id: CMWebbing
       - id: CMWebbingHolster
       - id: RMCWebbingHolsterBlack
-    - name: Hats
-      jobs:
-      - CMExecutiveOfficer
-      choices: { CMHat: 1 }
-      entries:
-      - id: RMCHeadBeretChiefOfficer
-      - id: CMHeadCapPeakedService
-      - id: RMCHeadCapPatrol
-      - id: CMHeadCapOfficer
-      
     # ////////////////////////////////////
     # Chief MP
     # ////////////////////////////////////
