@@ -129,10 +129,10 @@ public abstract class SharedXenoResinHoleSystem : EntitySystem
         _announce.AnnounceSameHive(ent.Owner, msg, color: ent.Comp.MessageColor, useHiveAsSource: true);
     }
 
-    protected void SetTrapType(Entity<XenoResinHoleComponent> resinHole, string? newTrapPrototype)
+    protected void SetTrapType(Entity<XenoResinHoleComponent> resinHole, string? newTrapPrototype, bool changeDestructionName = true)
     {
         resinHole.Comp.TrapPrototype = newTrapPrototype;
-        if (TryComp(resinHole.Owner, out XenoAnnounceStructureDestructionComponent? structureDestructionComp))
+        if (changeDestructionName && TryComp(resinHole.Owner, out XenoAnnounceStructureDestructionComponent? structureDestructionComp))
         {
             structureDestructionComp.StructureName = GetTrapTypeName(resinHole);
         }

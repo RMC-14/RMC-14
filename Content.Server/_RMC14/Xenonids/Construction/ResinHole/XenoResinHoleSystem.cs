@@ -515,7 +515,7 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
 
         var ev = new XenoResinHoleActivationEvent(msg);
 
-        SetTrapType(resinHole, null);
+        SetTrapType(resinHole, null, !destroyed);
 
         // If the resin hole is destroyed, it's the XenoAnnounceStructureDestructionComponent job to announce
         // the entity's destruction
