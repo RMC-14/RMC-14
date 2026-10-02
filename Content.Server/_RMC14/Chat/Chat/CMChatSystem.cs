@@ -5,6 +5,8 @@ using Content.Server.Radio.Components;
 using Content.Server.Speech.EntitySystems;
 using Content.Server.Speech.Prototypes;
 using Content.Shared._RMC14.Chat;
+using Content.Shared._RMC14.Language.Components;
+using Content.Server._RMC14.Language.Systems;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Mentor.ImaginaryFriend;
 using Content.Shared._RMC14.Xenonids;
@@ -25,10 +27,16 @@ public sealed class CMChatSystem : SharedCMChatSystem
 {
     [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly LanguageSystem _language = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ReplacementAccentSystem _wordreplacement = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+
+    private EntityQuery<ImaginaryFriendComponent> _friendComponent;
+    private EntityQuery<GhostComponent> _ghostQuery;
+    private EntityQuery<MarineComponent> _marineQuery;
+    private EntityQuery<XenoComponent> _xenoQuery;
 
     private static readonly ProtoId<ReplacementAccentPrototype> ChatSanitize = "CMChatSanitize";
     private static readonly ProtoId<ReplacementAccentPrototype> MarineChatSanitize = "CMChatSanitizeMarine";
@@ -40,21 +48,48 @@ public sealed class CMChatSystem : SharedCMChatSystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<MarineComponent, ChatMessageAfterGetRecipients>(OnMarineAfterGetRecipients);
-        SubscribeLocalEvent<XenoComponent, ChatMessageAfterGetRecipients>(OnXenoAfterGetRecipients);
-        SubscribeLocalEvent<ImaginaryFriendComponent, ChatMessageAfterGetRecipients>(OnImaginaryFriendGetRecipients);
+
+        _friendComponent = GetEntityQuery<ImaginaryFriendComponent>();
+        _ghostQuery = GetEntityQuery<GhostComponent>();
+        _marineQuery = GetEntityQuery<MarineComponent>();
+        _xenoQuery = GetEntityQuery<XenoComponent>();
+
+        SubscribeLocalEvent<LanguageComponent, ChatMessageAfterGetRecipientsEvent>(OnLanguageGetRecipients);
+        SubscribeLocalEvent<ImaginaryFriendComponent, ChatMessageAfterGetRecipientsEvent>(OnImaginaryFriendGetRecipients);
+        SubscribeLocalEvent<RadioSpeakerComponent, ChatMessageAfterGetRecipientsEvent>(OnRadioSpeakerGetRecipients);
     }
 
-    private void OnMarineAfterGetRecipients(Entity<MarineComponent> ent, ref ChatMessageAfterGetRecipients args)
+    private void OnLanguageGetRecipients(Entity<LanguageComponent> ent, ref ChatMessageAfterGetRecipientsEvent args)
     {
         _toRemove.Clear();
 
-        foreach (var (session, data) in args.Recipients)
+        if (_friendComponent.HasComp(ent))
+            return; // handled separately
+
+        var speakerIsMarine = _marineQuery.HasComp(ent);
+        var speakerIsXeno = _xenoQuery.HasComp(ent);
+        foreach (var (session, _) in args.Recipients)
         {
-            if (data.Observer)
+            if (session.AttachedEntity is not { } sessionEntity)
                 continue;
 
-            if (HasComp<XenoComponent>(session.AttachedEntity))
+            if (sessionEntity == ent.Owner)
+                continue;
+
+            // Observers are allowed to see everything.
+            if (_ghostQuery.HasComp(sessionEntity))
+                continue;
+
+            // If it's an IC message (speech, whispering, emotes, etc.), check if `ent` and `sessionEntity`'s language components allow them to communicate.
+            if ((args.Channel & ChatChannel.IC) != 0)
+            {
+                if (!_language.CanSeeICMessage(sessionEntity, ent.AsNullable()))
+                    _toRemove.Add(session);
+                continue;
+            }
+
+            // If it's LOOC or something similar (not IC), only show it to members of the same faction.
+            if (speakerIsMarine != _marineQuery.HasComp(sessionEntity) || speakerIsXeno != _xenoQuery.HasComp(sessionEntity))
                 _toRemove.Add(session);
         }
 
@@ -64,37 +99,32 @@ public sealed class CMChatSystem : SharedCMChatSystem
         }
     }
 
-    private void OnXenoAfterGetRecipients(Entity<XenoComponent> ent, ref ChatMessageAfterGetRecipients args)
+    private void OnImaginaryFriendGetRecipients(Entity<ImaginaryFriendComponent> ent, ref ChatMessageAfterGetRecipientsEvent args)
     {
         _toRemove.Clear();
 
-        foreach (var (session, data) in args.Recipients)
+        foreach (var (session, _) in args.Recipients)
         {
-            if (data.Observer)
-                continue;
-
-            // `data.Observer` only indicates whether the recipient has `GhostHearingComponent`.
-            // Disabling ghost hearing removes this component, so the `GhostComponent` check is needed to keep ghosts included.
-            if (!HasComp<XenoComponent>(session.AttachedEntity) && !HasComp<GhostComponent>(session.AttachedEntity))
-                _toRemove.Add(session);
-        }
-
-        foreach (var session in _toRemove)
-        {
-            args.Recipients.Remove(session);
-        }
-    }
-
-    private void OnImaginaryFriendGetRecipients(Entity<ImaginaryFriendComponent> ent, ref ChatMessageAfterGetRecipients args)
-    {
-        _toRemove.Clear();
-
-        foreach (var (session, data) in args.Recipients)
-        {
-            if (data.Observer)
+            if (_ghostQuery.HasComp(session.AttachedEntity))
                 continue;
 
             if (ent.Comp.Imaginer != session.AttachedEntity)
+                _toRemove.Add(session);
+        }
+
+        foreach (var session in _toRemove)
+        {
+            args.Recipients.Remove(session);
+        }
+    }
+
+    private void OnRadioSpeakerGetRecipients(Entity<RadioSpeakerComponent> ent, ref ChatMessageAfterGetRecipientsEvent args)
+    {
+        _toRemove.Clear();
+
+        foreach (var (session, _) in args.Recipients)
+        {
+            if (_xenoQuery.HasComp(session.AttachedEntity))
                 _toRemove.Add(session);
         }
 

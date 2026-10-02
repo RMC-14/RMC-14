@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 04/14/2026 21:20:15
+  time: 07/17/2026 03:54:57
   entityCount: 1215
 maps: []
 grids:
@@ -294,6 +294,61 @@ entities:
             54: 20,13
             55: 20,10
             56: 20,9
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalTSE1
+          decals:
+            83: 2,23
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalTSE10
+          decals:
+            92: 3,21
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalTSE11
+          decals:
+            93: 4,21
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalTSE2
+          decals:
+            84: 3,23
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalTSE3
+          decals:
+            85: 4,23
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalTSE4
+          decals:
+            86: 5,23
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalTSE5
+          decals:
+            87: 2,22
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalTSE6
+          decals:
+            88: 3,22
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalTSE7
+          decals:
+            89: 4,22
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalTSE8
+          decals:
+            90: 5,22
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalTSE9
+          decals:
+            91: 2,21
     - type: GridAtmosphere
       version: 2
       data:
@@ -2365,6 +2420,8 @@ entities:
       rot: 3.141592653589793 rad
       pos: 24.5,17.5
       parent: 1
+    missingComponents:
+    - Damageable
 - proto: CMSemioticAirtraffictower
   entities:
   - uid: 786
@@ -3024,13 +3081,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 3.5,16.5
       parent: 1
-- proto: FoodBoxDonkpocket
-  entities:
-  - uid: 620
-    components:
-    - type: Transform
-      pos: 4.5067472,5.7707996
-      parent: 1
 - proto: RMCAirlockRustedWhite
   entities:
   - uid: 574
@@ -3448,6 +3498,13 @@ entities:
     components:
     - type: Transform
       pos: 8.445262,14.599939
+      parent: 1
+- proto: RMCBoxDonkpockets
+  entities:
+  - uid: 620
+    components:
+    - type: Transform
+      pos: 4.5067472,5.7707996
       parent: 1
 - proto: RMCBriefcase
   entities:

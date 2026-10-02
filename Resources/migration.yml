@@ -1482,7 +1482,6 @@ ClothingUniformJumpsuitPrisoner: RMCJumpsuitOrange
 RMCJumpsuitUNSecurity: RMCJumpsuitRiotControl
 RMCSpawnPointSurvivorShivasUNPeacekeeper: RMCSpawnPointSurvivorShivasILRCPeacekeeper
 RMCSpawnPointSurvivorSolarisUNPeacekeeper: RMCSpawnPointSurvivorSolarisILRCPeacekeeper
-RMCSpawnPointSurvivorUNPeacekeeper: RMCSpawnPointSurvivorILRCPeacekeeper
 
 # 2026-2-1
 CMPosterZSPA1: RMCPosterTSEPA1
@@ -1532,3 +1531,16 @@ RMCJumpsuitSPPPaP: RMCJumpsuitSPPPCG
 RMCIDCardPaP: RMCIDCardPCG
 RMCHeadsetSPPPaP: RMCHeadsetSPPPCG
 RMCCoatPaP: RMCCoatPCG
+
+#2026-07-11
+BoxMousetrap: RMCBoxMousetraps
+
+# 2026-07-31
+FoodBoxPizzaFilled: RMCBoxPizzaRandom
+
+# 2026-08-23
+RMCSpawnPointSurvivorFiorinaRiotInProgressUNRiotOfficer: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBOfficer
+RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlOfficer: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader
+
+# 2026-08-26
+CMAttachmentXMVESG1FlamerNozzle: RMCAttachmentXMVESG1FlamerNozzle

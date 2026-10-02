@@ -53,6 +53,8 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
     private const float PipeExplosionMax = 20f;
     private const int PipeFireRange = 2;
 
+    private const int MaxPipeBurstsPerTick = 1;
+
     private TimeSpan _hijackCrashStunTime;
 
     private readonly List<(EntityUid Uid, RMCHijackRandomDamageTargetComponent Comp)> _wallTargets = new();
@@ -133,6 +135,9 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
 
     private void OnPipeRemove<T>(Entity<RMCHijackActivePipeComponent> ent, ref T args)
     {
+        QueueDel(ent.Comp.Warning);
+        ent.Comp.Warning = null;
+
         if (TerminatingOrDeleted(ent.Comp.Map))
             return;
 
@@ -225,7 +230,9 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
         var count = GetRandomCount(map.Comp.Pipes.Count, minPercent, maxPercent);
         if (count == 0)
         {
-            RemCompDeferred<RMCHijackActiveMapComponent>(map);
+            if (map.Comp.Explode.Count == 0 && map.Comp.ExplodeAt == null)
+                RemCompDeferred<RMCHijackActiveMapComponent>(map);
+
             return;
         }
 
@@ -252,8 +259,11 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
             return;
         }
 
-        Spawn(PipeExplosionWarning, _transform.GetMoverCoordinates(pipe, xform));
+        var warning = Spawn(PipeExplosionWarning, _transform.GetMoverCoordinates(pipe, xform));
         _audio.PlayPvs(map.Comp.PipeHiss, pipe);
+
+        if (TryComp(pipe, out RMCHijackActivePipeComponent? active))
+            active.Warning = warning;
 
         map.Comp.Explode.Add(pipe);
         map.Comp.ExplodeAt = _timing.CurTime + map.Comp.ExplodeDelay;
@@ -264,6 +274,12 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
     /// </summary>
     private void BurstPipe(EntityUid pipe)
     {
+        if (TryComp(pipe, out RMCHijackActivePipeComponent? active))
+        {
+            QueueDel(active.Warning);
+            active.Warning = null;
+        }
+
         if (Deleted(pipe) ||
             !TryComp(pipe, out TransformComponent? xform) ||
             xform.MapUid == null ||
@@ -301,7 +317,7 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
             return 0;
 
         var percent = _random.NextFloat(minPercent, maxPercent);
-        return Math.Clamp((int) MathF.Round(poolCount * percent), 1, poolCount);
+        return Math.Clamp((int)MathF.Round(poolCount * percent), 1, poolCount);
     }
 
     public override void Update(float frameTime)
@@ -310,22 +326,7 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
         var query = EntityQueryEnumerator<RMCHijackActiveMapComponent>();
         while (query.MoveNext(out var uid, out var active))
         {
-            if (active.ExplodeAt != null && time >= active.ExplodeAt.Value)
-            {
-                active.ExplodeAt = null;
-
-                try
-                {
-                    foreach (var explode in active.Explode)
-                    {
-                        BurstPipe(explode);
-                    }
-                }
-                finally
-                {
-                    active.Explode.Clear();
-                }
-            }
+            TryBurstQueuedPipes(uid, active, time);
 
             if (time < active.Next)
                 continue;
@@ -339,5 +340,36 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
 
             DoPipeBarrage((uid, active));
         }
+    }
+
+    private void TryBurstQueuedPipes(EntityUid uid, RMCHijackActiveMapComponent active, TimeSpan time)
+    {
+        if (active.ExplodeAt is not { } explodeAt || time < explodeAt)
+            return;
+
+        try
+        {
+            BurstQueuedPipes(active);
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Error while bursting hijack pipes on {ToPrettyString(uid)}:\n{e}");
+        }
+    }
+
+    private void BurstQueuedPipes(RMCHijackActiveMapComponent active)
+    {
+        var burst = 0;
+        while (burst < MaxPipeBurstsPerTick && active.Explode.Count > 0)
+        {
+            var last = active.Explode.Count - 1;
+            var pipe = active.Explode[last];
+            active.Explode.RemoveAt(last);
+            BurstPipe(pipe);
+            burst++;
+        }
+
+        if (active.Explode.Count == 0)
+            active.ExplodeAt = null;
     }
 }
