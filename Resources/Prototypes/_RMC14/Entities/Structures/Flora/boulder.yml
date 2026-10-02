@@ -6,6 +6,8 @@
   placement:
     mode: SnapgridBorder
   components:
+  - type: VehicleSmashable
+    minDestroyWeightClass: Medium
   - type: Sprite
     sprite: _RMC14/Structures/Flora/large_boulder.rsi
     state: boulder_large1

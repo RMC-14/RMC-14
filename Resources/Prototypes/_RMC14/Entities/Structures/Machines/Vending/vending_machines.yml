@@ -279,8 +279,8 @@
 - type: entity
   parent: CMVendorSnack
   id: RMCVendorSnackSPP
-  name: Surplus Ration Vendor
-  description: A vending machine full of surplus rations, viewed as the luxury of ready-avaliable SPP rations.
+  name: surplus ration vendor
+  description: A vending machine full of surplus rations, viewed as the luxury of ready-available SPP rations.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/spp_snack.rsi
@@ -517,7 +517,7 @@
 - type: entity
   parent: CMVendorCigs
   id: RMCVendorCigsSPP
-  name: Komandir Cigarettes Vendor
+  name: Komandir cigarettes vendor
   description: A state-owned cigarette vendor. Its drab colour was chosen to discourage purchases, but its existence is an admittance to the necessity for such machines to exist in the first place.
   components:
   - type: Sprite
@@ -561,8 +561,8 @@
     CMHeadBeretRed: 6
     CMGlassesSecurity: 3
     CMHeadset: 6
-    #RegulationTape: 5
-    #TapeRecorder: 3
+    RMCUniversalRecorder: 3
+    RMCBoxRegulationTapes: 5
     #ClueScanner: 3
     #Camera: 8
     #CameraFilm: 8
