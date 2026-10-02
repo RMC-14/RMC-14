@@ -87,6 +87,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
     private const float RestrictedDockingShuttleClusterRadius = 3f;
 
     private readonly HashSet<EntityUid> _restrictedDockingObstacles = new();
+    private readonly Dictionary<EntityUid, DockingConfig> _restrictedDockingTargets = new();
 
     private TimeSpan _lzPrimaryAutoDelay;
     private TimeSpan _flyByTime;
@@ -116,6 +117,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         SubscribeLocalEvent<DropshipComponent, FTLCompletedEvent>(OnFTLCompleted);
         SubscribeLocalEvent<DropshipComponent, FTLUpdatedEvent>(OnFTLUpdated);
         SubscribeLocalEvent<DropshipComponent, BeforeFTLStartedEvent>(OnBeforeFTLStarted);
+        SubscribeLocalEvent<DropshipComponent, ComponentShutdown>(OnDropshipShutdown);
 
         SubscribeLocalEvent<DropshipDestinationComponent, MapInitEvent>(OnRestrictedDestinationMapInit);
         SubscribeLocalEvent<RMCShuttleMobileDockComponent, MapInitEvent>(OnRestrictedDockMapInit);
@@ -213,6 +215,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
     private void OnFTLCompleted(Entity<DropshipComponent> ent, ref FTLCompletedEvent args)
     {
+        CompleteRestrictedDocking(ent.Owner);
+
         if (ent.Comp.RechargeTime is { } rechargeTime && TryComp(ent, out FTLComponent? ftl))
             ftl.StateTime = StartEndTime.FromCurTime(_timing, rechargeTime);
 
@@ -268,6 +272,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
     private void OnFtlRequested<T>(Entity<DropshipComponent> ent, ref T args)
     {
+        _restrictedDockingTargets.Remove(ent.Owner);
         OnRefreshUI(ent, ref args);
 
         var departureLocations = _entityLookup.GetEntitiesInRange<DropshipDestinationComponent>(ent.Owner.ToCoordinates(), DepartureLocationSearchRange);
@@ -1175,6 +1180,38 @@ public sealed class DropshipSystem : SharedDropshipSystem
             stagedAngle,
             startupTime: startupTime,
             hyperspaceTime: hyperspaceTime);
+
+        // Map-coordinate arrivals preserve the staging offset, but do not connect ports in ShuttleSystem.
+        // Finish those connections ourselves before relaying the arrival to doors and ERT.
+        _restrictedDockingTargets[dropshipId] = target.Config;
+    }
+
+    private void CompleteRestrictedDocking(EntityUid shuttle)
+    {
+        if (!_restrictedDockingTargets.Remove(shuttle, out var config))
+            return;
+
+        foreach (var (shuttleDock, targetDock, _, _) in config.Docks)
+        {
+            // Ports can be deleted, moved or occupied during transit. Only join pairs still valid at arrival.
+            if (!_dockingQuery.TryComp(shuttleDock, out var shuttleDockComp) ||
+                !_dockingQuery.TryComp(targetDock, out var targetDockComp) ||
+                !_xformQuery.TryComp(shuttleDock, out var shuttleDockXform) ||
+                !_xformQuery.TryComp(targetDock, out var targetDockXform) ||
+                shuttleDockXform.GridUid != shuttle ||
+                targetDockXform.GridUid != config.Coordinates.EntityId ||
+                !_docking.CanDock((shuttleDock, shuttleDockComp), (targetDock, targetDockComp)))
+            {
+                continue;
+            }
+
+            _docking.Dock((shuttleDock, shuttleDockComp), (targetDock, targetDockComp));
+        }
+    }
+
+    private void OnDropshipShutdown(Entity<DropshipComponent> ent, ref ComponentShutdown args)
+    {
+        _restrictedDockingTargets.Remove(ent.Owner);
     }
 
     private readonly record struct RMCRestrictedDockingCandidate(
