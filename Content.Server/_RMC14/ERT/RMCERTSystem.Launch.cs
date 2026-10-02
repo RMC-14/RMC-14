@@ -354,7 +354,8 @@ public sealed partial class RMCERTSystem
             if (!_prototypes.TryIndex(id, out var call, false))
                 continue;
 
-            if (!call.Enabled || call.RandomWeight <= 0)
+            if (!call.Enabled || call.RandomWeight <= 0 ||
+                !CheckRequirements(request, call, out _))
                 continue;
 
             total += call.RandomWeight;
