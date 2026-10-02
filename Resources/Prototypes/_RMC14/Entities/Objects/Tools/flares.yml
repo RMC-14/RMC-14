@@ -55,6 +55,7 @@
   - type: Item
     size: Small
     heldPrefix: unlit
+    sprite: _RMC14/Objects/Misc/flares.rsi
   - type: Appearance
   - type: PointLight
     enabled: false
@@ -131,6 +132,10 @@
   - type: Icon
     sprite: _RMC14/Objects/Misc/cas_flares.rsi
     state: flare
+  - type: Item
+    size: Small
+    heldPrefix: unlit
+    sprite: _RMC14/Objects/Misc/cas_flares.rsi
   - type: PointLight
     color: "#AACCAA"
   - type: FlareSignal
