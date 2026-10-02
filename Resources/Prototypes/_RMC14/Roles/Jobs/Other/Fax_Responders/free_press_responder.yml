@@ -50,7 +50,7 @@
     id: RMCIDCardFreePressResponder
     ears: RMCHeadsetFreePressResponder
     eyes: RMCGlassesMedicalHUDGlasses
-    back: CMSatchelFilledFaxResponder
+    back: RMCSatchelFilledFaxResponderFreePress
     belt: CMClipboard
     pocket1: RMCPouchGeneralLarge
     pocket2: RMCPouchDocument

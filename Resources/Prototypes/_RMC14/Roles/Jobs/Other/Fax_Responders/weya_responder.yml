@@ -45,7 +45,7 @@
   equipment:
     ears: RMCHeadsetWeYaResponder
     eyes: RMCGlassesMedicalHUDGlasses
-    back: CMSatchelFilledFaxResponder
+    back: RMCSatchelFilledFaxResponderWeYa
     belt: CMClipboard
     head: RMCHeadCapWestonYamadaDark
     jumpsuit: CMJumpsuitLiaisonBlack
