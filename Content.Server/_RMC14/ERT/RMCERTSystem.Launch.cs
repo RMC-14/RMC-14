@@ -321,12 +321,19 @@ public sealed partial class RMCERTSystem
         error = string.Empty;
         var candidates = new List<EntityUid>();
         var sourceMap = GetRequestSourceMap(request);
+        var returnDestinations = new HashSet<EntityUid>();
+        foreach (var otherRequest in _requests.Values)
+        {
+            if (otherRequest.ShuttleHomeDestination is { } home)
+                returnDestinations.Add(home);
+        }
 
         // Keep arrivals on the same map as the originating request, then let the shared dropship rules filter by destination compatibility.
         var query = EntityQueryEnumerator<DropshipDestinationComponent>();
         while (query.MoveNext(out var uid, out var dropshipDestination))
         {
-            if (dropshipDestination.Ship != null)
+            // A free return marker is still a home route, not an arrival zone for another deployment.
+            if (dropshipDestination.Ship != null || returnDestinations.Contains(uid))
                 continue;
 
             if (sourceMap != null &&
