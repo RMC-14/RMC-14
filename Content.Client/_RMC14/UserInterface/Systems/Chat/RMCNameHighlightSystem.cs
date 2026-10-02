@@ -26,15 +26,16 @@ public sealed partial class RMCNameHighlightSystem : EntitySystem
     private void MarineNameHighlights(Entity<MarineComponent> ent, ref BeforeCharacterChatHighlightsUpdatedEvent args)
     {
         // If their name matches the {FirstName 'NickName' LastName} pattern, split each into its own highlight line.
-        args.Highlights = MarineNicknameRegex.Replace(args.Highlights, "@${FirstName}\n@${NickName}\n@${LastName}\n");
+        args.Highlights = MarineNicknameRegex.Replace(args.Highlights, "@\"${FirstName}\"\n@\"${NickName}\"\n@\"${LastName}\"\n");
     }
 
     private void XenoNameHighlights(Entity<XenoNameComponent> ent, ref BeforeCharacterChatHighlightsUpdatedEvent args)
     {
-        // Add the xeno's custom name and their number, if applicable.
+        // Add the xeno's combined prefix + postfix.
         var prefix = _xenoName.GetXenoPrefix(ent.Owner);
         var newHighlights = $"@\"{prefix}{ent.Comp.Postfix}\"\n";
 
+        // And their number too, if applicable.
         if (!HasComp<XenoOmitNumberComponent>(ent))
             newHighlights += $"@\"{ent.Comp.Number}\"\n";
 
