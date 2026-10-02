@@ -1,13 +1,9 @@
-using Content.Client._RMC14.Xenonids.Hive;
 using Content.Client.Gameplay;
 using Content.Client.Weapons.Melee;
-using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Input;
-using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Weapons.Melee;
-using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Damage;
-using Content.Shared.Doors.Components;
+using Content.Shared.Weapons.Melee;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
@@ -23,7 +19,6 @@ public sealed class RMCMeleeWeaponSystem : SharedRMCMeleeWeaponSystem
 {
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly IEyeManager _eye = default!;
-    [Dependency] private readonly XenoHiveSystem _hive = default!;
     [Dependency] private readonly IInputManager _input = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly MapSystem _map = default!;
@@ -32,23 +27,13 @@ public sealed class RMCMeleeWeaponSystem : SharedRMCMeleeWeaponSystem
     [Dependency] private readonly IStateManager _stateManager = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
 
-    private EntityQuery<XenoComponent> _xenoQuery;
-    private EntityQuery<MarineComponent> _marineQuery;
-    private EntityQuery<DoorComponent> _doorQuery;
     private EntityQuery<DamageableComponent> _damageableQuery;
-
-    private bool _damageYourself;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        _xenoQuery = GetEntityQuery<XenoComponent>();
-        _marineQuery = GetEntityQuery<MarineComponent>();
-        _doorQuery = GetEntityQuery<DoorComponent>();
         _damageableQuery = GetEntityQuery<DamageableComponent>();
-
-        Subs.CVar(_config, RMCCVars.RMCDamageYourself, c => _damageYourself = c, true);
 
         CommandBinds.Builder
             .Bind(CMKeyFunctions.CMXenoWideSwing,
@@ -85,14 +70,10 @@ public sealed class RMCMeleeWeaponSystem : SharedRMCMeleeWeaponSystem
     }
 
 
-    public EntityUid? GetAttackTarget(EntityUid attacker, MapCoordinates mousePos)
+    public EntityUid? GetAttackTarget(EntityUid attacker, MapCoordinates mousePos, bool disarm, MeleeWeaponComponent? weapon = null)
     {
         if (_stateManager.CurrentState is not GameplayStateBase screen)
             return null;
-
-        var deferMarines = _marineQuery.HasComp(attacker);
-        var deferXenos = _xenoQuery.HasComp(attacker);
-        var allowSelf = deferMarines && _damageYourself; // only marines can damage themselves
 
         var clickables = screen.GetClickableEntities(mousePos);
 
@@ -101,29 +82,25 @@ public sealed class RMCMeleeWeaponSystem : SharedRMCMeleeWeaponSystem
 
         foreach (var clickable in clickables)
         {
-            // ignore self unless you can harm yourself
-            if (clickable == attacker && !allowSelf)
-                continue;
-
             // ignore non-damageable entities
             if (!_damageableQuery.HasComp(clickable))
                 continue;
 
+            var ev = new ReceivingMeleeAttackAttemptEvent(attacker, weapon, disarm);
+            RaiseLocalEvent(clickable, ref ev);
+
+            // ignore entities that can't receive an attack
+            if (ev.Cancelled)
+                continue;
+
             firstTarget ??= clickable;
 
-            // The target becomes a priority target UNLESS:
-            // a) we defer marines and it is a marine
-            // b) we defer xenos and it is from our hive or allied
-            // c) it is a door that is opening, open, or closing
-            if (deferMarines && _marineQuery.HasComp(clickable)
-                || deferXenos && _hive.FromSameHiveOrAlly(attacker, clickable)
-                || _doorQuery.TryGetComponent(clickable, out var door) && door.State is DoorState.Opening or DoorState.Open or DoorState.Closing)
+            // prioritize non-deferred entity
+            if (!ev.Deferred)
             {
-                continue;
+                firstPriorityTarget ??= clickable;
+                break;
             }
-
-            firstPriorityTarget ??= clickable;
-            break;
         }
 
         return firstPriorityTarget ?? firstTarget;

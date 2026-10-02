@@ -218,7 +218,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
         // RMC14 start
         //if (_stateManager.CurrentState is GameplayStateBase screen)
         //    target = screen.GetClickedEntity(mousePos);
-        target = _rmcMeleeWeapon.GetAttackTarget(attacker, mousePos);
+        target = _rmcMeleeWeapon.GetAttackTarget(attacker, mousePos, true, meleeComponent);
         // RMC14 end
 
         var attackerPos = TransformSystem.GetMapCoordinates(attacker);
@@ -241,7 +241,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
         // RMC14 start
         //if (_stateManager.CurrentState is GameplayStateBase screen)
         //    target = screen.GetClickedEntity(mousePos);
-        target = _rmcMeleeWeapon.GetAttackTarget(attacker, mousePos);
+        target = _rmcMeleeWeapon.GetAttackTarget(attacker, mousePos, false, meleeComponent);
         // RMC14 end
 
         // RMC14

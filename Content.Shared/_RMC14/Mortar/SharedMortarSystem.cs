@@ -8,6 +8,7 @@ using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Rangefinder;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chat;
@@ -79,6 +80,7 @@ public abstract class SharedMortarSystem : EntitySystem
         SubscribeLocalEvent<MortarComponent, CombatModeShouldHandInteractEvent>(OnMortarShouldInteract);
         SubscribeLocalEvent<MortarComponent, DestructionEventArgs>(OnMortarDestruction);
         SubscribeLocalEvent<MortarComponent, BeforeDamageChangedEvent>(OnMortarBeforeDamageChanged);
+        SubscribeLocalEvent<MortarComponent, ReceivingMeleeAttackAttemptEvent>(OnMortarReceivingMeleeAttackAttempt);
         SubscribeLocalEvent<MortarComponent, LinkMortarLaserDesignatorDoAfterEvent>(OnMortarLinkLaserDesignatorDoAfter);
         SubscribeLocalEvent<MortarComponent, GetVerbsEvent<AlternativeVerb>>(OnGetMortarVerbs);
         SubscribeLocalEvent<MortarComponent, MortarLaserTargetUpdateDoAfterEvent>(OnMortarLaserTargetUpdateDoAfter);
@@ -103,6 +105,21 @@ public abstract class SharedMortarSystem : EntitySystem
     {
         if (!ent.Comp.Deployed) // cannot destroy in item form
             args.Cancelled = true;
+    }
+
+    private void OnMortarReceivingMeleeAttackAttempt(Entity<MortarComponent> ent, ref ReceivingMeleeAttackAttemptEvent args)
+    {
+        // mortars can't be tackled/disarmed
+        if (args.Disarm)
+        {
+            args.Cancelled = true;
+            return;
+        }
+
+        // undeployed mortars can't be damaged, but we can't cancel the attack because
+        // we allow mortars to be picked up in combat mode
+        if (ent.Comp.Deployed)
+            args.Deferred = true;
     }
 
     private void OnMortarDestruction(Entity<MortarComponent> mortar, ref DestructionEventArgs args)

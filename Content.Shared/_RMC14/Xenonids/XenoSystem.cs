@@ -127,6 +127,7 @@ public sealed partial class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, XenoDevolvedEvent>(OnXenoDevolved);
         SubscribeLocalEvent<XenoComponent, HealthScannerAttemptTargetEvent>(OnXenoHealthScannerAttemptTarget);
         SubscribeLocalEvent<XenoComponent, GetDefaultRadioChannelEvent>(OnXenoGetDefaultRadioChannel);
+        SubscribeLocalEvent<XenoComponent, ReceivingMeleeAttackAttemptEvent>(OnXenoReceivingMeleeAttackAttempt);
         SubscribeLocalEvent<XenoComponent, AttackAttemptEvent>(OnXenoAttackAttempt);
         SubscribeLocalEvent<XenoComponent, MeleeAttackAttemptEvent>(OnXenoMeleeAttackAttempt);
         SubscribeLocalEvent<XenoComponent, XenoHealAttemptEvent>(OnHealAttempt);
@@ -217,6 +218,26 @@ public sealed partial class XenoSystem : EntitySystem
     private void OnXenoGetDefaultRadioChannel(Entity<XenoComponent> ent, ref GetDefaultRadioChannelEvent args)
     {
         args.Channel = SharedChatSystem.HivemindChannel;
+    }
+
+    private void OnXenoReceivingMeleeAttackAttempt(Entity<XenoComponent> xeno, ref ReceivingMeleeAttackAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        // xenos can never attack themselves
+        if (xeno.Owner == args.Attacker)
+        {
+            args.Cancelled = true;
+            return;
+        }
+
+        if (args.Deferred)
+            return;
+
+        // xenos try to attack/tackle things they aren't allied to first
+        if (_hive.FromSameHiveOrAlly(xeno.Owner, args.Attacker))
+            args.Deferred = true;
     }
 
     private void OnXenoAttackAttempt(Entity<XenoComponent> xeno, ref AttackAttemptEvent args)
