@@ -344,6 +344,7 @@ public sealed partial class RMCERTSystem
             beaconComp.ResetOnDeny)
         {
             beaconComp.Spent = false;
+            beaconComp.LastUsed = null;
         }
 
         UpdateSourceVisual(request, false);
