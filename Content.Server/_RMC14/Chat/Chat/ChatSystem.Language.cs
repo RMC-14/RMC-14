@@ -4,6 +4,7 @@ using Content.Shared._RMC14.IdentityManagement;
 using Content.Shared._RMC14.Language;
 using Content.Shared._RMC14.Language.Prototypes;
 using Content.Shared._RMC14.Language.Systems;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.IdentityManagement;
@@ -144,8 +145,7 @@ public sealed partial class ChatSystem
         string? nameOverride,
         bool hideLog,
         bool ignoreActionBlocker,
-        ProtoId<LanguagePrototype> language,
-        bool ignoreXenos = false)
+        ProtoId<LanguagePrototype> language)
     {
         LanguagePrototype? languagePrototype = null;
         if (!_prototypeManager.TryIndex(language, out languagePrototype))
@@ -186,7 +186,7 @@ public sealed partial class ChatSystem
         var languageIcon = showLanguageName ? languagePrototype?.DisplayedLanguageIcon : null;
         var visibleLanguage = !(languagePrototype?.NeedsSpeech ?? true);
 
-        foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange, ignoreXenos))
+        foreach (var (session, data) in GetRecipients(source, ChatChannel.Whisper, WhisperMuffledRange))
         {
             if (session.AttachedEntity is not { Valid: true } listener)
                 continue;
@@ -308,7 +308,6 @@ public sealed partial class ChatSystem
         string message,
         ProtoId<LanguagePrototype> language,
         string? nameOverride = null,
-        bool ignoreXenos = false,
         EntityUid? originalSpeaker = null)
     {
         LanguagePrototype? languagePrototype = null;
@@ -324,7 +323,7 @@ public sealed partial class ChatSystem
         var visibleLanguage = !(languagePrototype?.NeedsSpeech ?? true);
         var transformedName = nameOverride ?? Identity.Name(source, EntityManager).Name;
 
-        foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange, ignoreXenos))
+        foreach (var (session, data) in GetRecipients(source, ChatChannel.Whisper, WhisperMuffledRange))
         {
             if (session.AttachedEntity is not { Valid: true } listener)
                 continue;
@@ -457,7 +456,7 @@ public sealed partial class ChatSystem
         bool needsLos = false,
         bool ignoreXenos = false)
     {
-        foreach (var (session, data) in GetRecipients(source, VoiceRange, ignoreXenos))
+        foreach (var (session, data) in GetRecipients(source, channel, VoiceRange))
         {
             var entRange = MessageRangeCheck(session, data, range);
             if (entRange == MessageRangeCheckResult.Disallowed)
@@ -466,6 +465,9 @@ public sealed partial class ChatSystem
             var entHideChat = entRange == MessageRangeCheckResult.HideChat;
 
             if (session.AttachedEntity is not { Valid: true } listener)
+                continue;
+
+            if (ignoreXenos && HasComp<XenoComponent>(listener))
                 continue;
 
             if (needsLos && !data.Observer && listener != source && !data.HasLOS)

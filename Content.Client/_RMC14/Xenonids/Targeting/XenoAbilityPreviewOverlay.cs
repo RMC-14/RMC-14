@@ -364,7 +364,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
             mousePos = originMap.Offset(direction.Normalized() * (int)pierce.Range);
 
         var color = PierceOutlineColor.WithAlpha(OutlineAlpha);
-        DrawLinePreview(args, player, xform.Coordinates, mousePos, (int)pierce.Range, color);
+        DrawLinePreview(args, player, xform.Coordinates, mousePos, (int)pierce.Range, color, ignoreCades: true);
     }
 
     private void DrawBombard(
@@ -528,10 +528,11 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         EntityCoordinates fromCoordinates,
         MapCoordinates target,
         float range,
-        Color color)
+        Color color,
+        bool ignoreCades = false)
     {
         var toCoordinates = _transform.ToCoordinates(player, target);
-        var tiles = _line.DrawLine(fromCoordinates, toCoordinates, TimeSpan.Zero, range, out var blocker, hitBlocker: true);
+        var tiles = _line.DrawLine(fromCoordinates, toCoordinates, TimeSpan.Zero, range, out var blocker, hitBlocker: true, ignoreBarricades: ignoreCades);
         if (tiles.Count == 0)
             return;
 

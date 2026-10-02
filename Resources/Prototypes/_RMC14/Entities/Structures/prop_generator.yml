@@ -1,0 +1,29 @@
+- type: entity # from what i can tell this is supposed to be indestructible
+  id: RMCPropGenerator
+  name: expended UE-11 Generator Unit
+  description: A special power module designed to be a backup generator in the event of a transformer malfunction. This generator has already been expended.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    noRot: true
+  - type: Physics
+    bodyType: Static
+    fixedRotation: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.45"
+        density: 190
+        layer:
+        - MobMask
+  - type: Sprite
+    sprite: _RMC14/Structures/prop_generator.rsi
+    state: tyrargo_gen
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Corrodible
+    isCorrodible: false
+  - type: RequireProjectileTarget
