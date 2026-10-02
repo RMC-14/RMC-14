@@ -459,7 +459,7 @@ public sealed partial class RMCERTSystem
         var dispatched = _requests.Values.Count(r =>
             r.Id != request.Id &&
             r.SelectedCall?.Id == call.ID &&
-            r.State is RMCERTRequestState.Recruiting or RMCERTRequestState.Spawning or RMCERTRequestState.Launching or RMCERTRequestState.Arrived or RMCERTRequestState.Completed);
+            r.State is RMCERTRequestState.PendingDispatch or RMCERTRequestState.Recruiting or RMCERTRequestState.Spawning or RMCERTRequestState.Launching or RMCERTRequestState.Arrived or RMCERTRequestState.Completed);
 
         if (call.Requirements.MaxCallsPerRound > 0 && dispatched >= call.Requirements.MaxCallsPerRound)
         {
