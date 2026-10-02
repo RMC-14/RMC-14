@@ -225,6 +225,26 @@ public sealed partial class RMCERTSystem
             return false;
         }
 
+        foreach (var role in call.Roles)
+        {
+            if (!role.Required)
+                continue;
+
+            var requiredForRole = GetRoleMinimumCount(role);
+            var acceptedForRole = request.SpawnedGhostRoles.Count(member =>
+                TryComp(member, out RMCERTMemberComponent? ertMember) && ertMember.Role == role.Id);
+            if (acceptedForRole >= requiredForRole)
+                continue;
+
+            FailRequest(request,
+                Loc.GetString("rmc-ert-error-not-enough-role-volunteers",
+                    ("role", role.Name),
+                    ("accepted", acceptedForRole),
+                    ("required", requiredForRole)),
+                announceNoResponse: true);
+            return false;
+        }
+
         if (request.Shuttle is not { Valid: true } shuttle)
         {
             request.State = RMCERTRequestState.Launching;

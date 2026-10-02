@@ -107,6 +107,7 @@ rmc-ert-error-beacon-no-teams = The beacon cannot find any configured response t
 rmc-ert-error-raffles-in-progress = Ghost role raffles are still in progress for this response team.
 rmc-ert-error-no-volunteers = No volunteers accepted the emergency response deployment.
 rmc-ert-error-not-enough-volunteers = Only {$accepted} emergency responders accepted deployment, but {$required} are required.
+rmc-ert-error-not-enough-role-volunteers = Only {$accepted} responders accepted the required role {$role}, but {$required} are required.
 rmc-ert-arrived-detail-no-shuttle = {$launcher} without a shuttle
 rmc-ert-error-no-navigation-computer = The ERT shuttle has no navigation computer.
 rmc-ert-error-no-landing-zone = No valid ERT landing zone is available.
