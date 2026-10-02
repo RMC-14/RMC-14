@@ -1,7 +1,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCrewMaintTech
-  name: ColMarTech Maintenance Technician Equipment Rack
+  name: ASRS maintenance technician equipment rack
   description: An automated rack hooked up to a colossal storage of Maintenance Technician standard-issue equipment.
   components:
   - type: AccessReader
@@ -48,8 +48,6 @@
       choices: { CMBackpack: 1 }
       entries:
       - id: CMBackpackMarineTech
-        replaceSlot: back
-      - id: CMSatchelMarineTech
         replaceSlot: back
       - id: CMBackpackWelder
         replaceSlot: back
@@ -110,6 +108,7 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleCrewMaintenanceEssentials
+  categories: [ HideSpawnMenu ]
   name: essential maintenance set
   description: Contains a flashlight and a light replacer.
   components:
