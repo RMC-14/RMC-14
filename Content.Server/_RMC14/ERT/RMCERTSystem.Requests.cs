@@ -324,19 +324,16 @@ public sealed partial class RMCERTSystem
     }
 
     /// <summary>
-    /// Moves a non-terminal ERT request to denied, primarily for pending admin-review rejection.
-    /// Denial runs source cleanup such as handheld beacon reset behavior, but does not clean up already-spawned ERT content;
-    /// use <see cref="CancelRequest"/> for active requests that need content cleanup.
+    /// Rejects an ERT request that is still pending admin review.
+    /// Denial runs source cleanup such as handheld beacon reset behavior;
+    /// use <see cref="CancelRequest"/> for approved requests that need content cleanup.
     /// </summary>
     /// <param name="args">Request id and optional actor metadata for logs/announcements.</param>
-    /// <returns>Success when the request is moved to denied, or failure when the request is unknown or already terminal.</returns>
+    /// <returns>Success when the request is moved to denied, or failure when the request is not pending admin review.</returns>
     public RMCERTRequestResult DenyRequest(RMCERTRequestActionArgs args)
     {
-        if (!_requests.TryGetValue(args.Request, out var request))
+        if (!TryGetPending(args.Request, out var request))
             return RequestUnavailable(args.Request);
-
-        if (IsTerminal(request.State))
-            return RequestTerminal(request);
 
         request.State = RMCERTRequestState.Denied;
         request.LastError = string.Empty;
