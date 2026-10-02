@@ -10,6 +10,10 @@ namespace Content.Client.Options.UI.Tabs;
 [GenerateTypedNameReferences]
 public sealed partial class AccessibilityTab : Control
 {
+    // RMC14
+    private ConfirmationWindow? _postDeathChatMuteConfirmation;
+    // RMC14
+
     public AccessibilityTab()
     {
         RobustXamlLoader.Load(this);
@@ -40,6 +44,11 @@ public sealed partial class AccessibilityTab : Control
 
         Control.AddOptionCheckBox(CCVars.AccessibilityClientCensorNudity, CensorNudityCheckBox);
 
+        // RMC14
+        var postDeathChatMute = Control.AddOptionCheckBox(RMCCVars.RMCPostDeathChatMute, RMCPostDeathChatMuteCheckBox);
+        postDeathChatMute.ImmediateValueChanged += OnPostDeathChatMuteChanged;
+        // RMC14
+
         Control.Initialize();
     }
 
@@ -52,6 +61,36 @@ public sealed partial class AccessibilityTab : Control
     internal static bool ShouldDisableCrtEffects(bool themeEnabled)
     {
         return !themeEnabled;
+    }
+
+    private void OnPostDeathChatMuteChanged(bool enabled)
+    {
+        if (enabled)
+            return;
+
+        RMCPostDeathChatMuteCheckBox.Pressed = true;
+        Control.ValueChanged();
+
+        if (_postDeathChatMuteConfirmation is { IsOpen: true })
+            return;
+
+        var window = new ConfirmationWindow();
+        _postDeathChatMuteConfirmation = window;
+        window.Setup(
+            Loc.GetString("rmc-ui-options-post-death-chat-mute-confirmation-title"),
+            Loc.GetString("rmc-ui-options-post-death-chat-mute-confirmation-text"),
+            Loc.GetString("rmc-ui-options-post-death-chat-mute-confirmation-accept"),
+            Loc.GetString("rmc-ui-options-post-death-chat-mute-confirmation-deny"));
+
+        window.AcceptButton.OnPressed += _ =>
+        {
+            RMCPostDeathChatMuteCheckBox.Pressed = false;
+            Control.ValueChanged();
+            window.Close();
+        };
+        window.DenyButton.OnPressed += _ => window.Close();
+        window.OnClose += () => _postDeathChatMuteConfirmation = null;
+        window.OpenCentered();
     }
     // RMC14
 }
