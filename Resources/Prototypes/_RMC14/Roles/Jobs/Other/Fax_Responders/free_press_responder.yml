@@ -48,7 +48,7 @@
     shoes: RMCShoesLaceup
     head: ClothingHeadHatFedoraBrown
     id: RMCIDCardFreePressResponder
-    ears: CMHeadsetReporter
+    ears: RMCHeadsetFreePressResponder
     eyes: RMCGlassesMedicalHUDGlasses
     back: CMSatchelFilledFaxResponder
     belt: CMClipboard

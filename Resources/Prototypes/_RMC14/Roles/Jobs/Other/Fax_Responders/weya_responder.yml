@@ -43,7 +43,7 @@
 - type: startingGear
   id: RMCGearWeYaResponder
   equipment:
-    ears: RMCHeadsetDistressPMCDirector
+    ears: RMCHeadsetWeYaResponder
     eyes: RMCGlassesMedicalHUDGlasses
     back: CMSatchelFilledFaxResponder
     belt: CMClipboard
