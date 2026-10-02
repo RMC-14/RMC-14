@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Shared._RMC14.Overwatch;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Weather;
 using Content.Shared._RMC14.Xenonids.Eye;
 using Content.Shared._RMC14.Xenonids.Watch;
@@ -74,7 +75,16 @@ namespace Content.Shared.Examine
             if (MobStateSystem.IsIncapacitated(examiner))
                 return false;
 
-            if (!InRangeUnOccluded(examiner, entity, ExamineDetailsRange))
+            // RMC
+            var detailsOrigin = examiner;
+            if (TryComp<VehicleWatchingComponent>(examiner, out var detailsWatcher) &&
+                detailsWatcher.Watching is { } detailsWatched &&
+                Comp<TransformComponent>(examiner).MapID != Transform(entity).MapID)
+            {
+                detailsOrigin = detailsWatched;
+            }
+
+            if (!InRangeUnOccluded(detailsOrigin, entity, ExamineDetailsRange))
                 return false;
 
             // Is the target hidden in a opaque locker or something? Currently this check allows players to examine
@@ -122,10 +132,14 @@ namespace Content.Shared.Examine
             if (!examinerComp.CheckInRangeUnOccluded)
                 return true;
 
-            if (Comp<TransformComponent>(examiner).MapID != target.MapId) 
+            if (Comp<TransformComponent>(examiner).MapID != target.MapId)
             {
-                if (!HasComp<OverwatchWatchingComponent>(examiner) && !HasComp<XenoWatchingComponent>(examiner))
+                if (!HasComp<OverwatchWatchingComponent>(examiner) &&
+                    !HasComp<XenoWatchingComponent>(examiner) &&
+                    !HasComp<VehicleWatchingComponent>(examiner)) //RMC
+                {
                     return false;
+                }
             }
 
             // Do target InRangeUnoccluded which has different checks.
@@ -146,13 +160,25 @@ namespace Content.Shared.Examine
                         GetExaminerRange(overwatched),
                         predicate: predicate,
                         ignoreInsideBlocker: true);
-                } 
+                }
                 else if (TryComp<XenoWatchingComponent>(examiner, out var watcher) && watcher.Watching is { } watched)
                 {
                     return InRangeUnOccluded(
                         watched,
                         examined.Value,
                         GetExaminerRange(watched),
+                        predicate: predicate,
+                        ignoreInsideBlocker: true);
+                }
+                // RMC
+                else if (Comp<TransformComponent>(examiner).MapID != target.MapId &&
+                         TryComp<VehicleWatchingComponent>(examiner, out var vehicleWatcher) &&
+                         vehicleWatcher.Watching is { } vehicleWatched)
+                {
+                    return InRangeUnOccluded(
+                        vehicleWatched,
+                        examined.Value,
+                        GetExaminerRange(vehicleWatched),
                         predicate: predicate,
                         ignoreInsideBlocker: true);
                 }
@@ -166,6 +192,19 @@ namespace Content.Shared.Examine
             }
             else
             {
+                // RMC
+                if (Comp<TransformComponent>(examiner).MapID != target.MapId &&
+                    TryComp<VehicleWatchingComponent>(examiner, out var vehicleWatcher) &&
+                    vehicleWatcher.Watching is { } vehicleWatched)
+                {
+                    return InRangeUnOccluded(
+                        vehicleWatched,
+                        target,
+                        GetExaminerRange(vehicleWatched),
+                        predicate: predicate,
+                        ignoreInsideBlocker: true);
+                }
+
                 return InRangeUnOccluded(
                     examiner,
                     target,
