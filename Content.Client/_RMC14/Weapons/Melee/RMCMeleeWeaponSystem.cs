@@ -1,3 +1,4 @@
+using Content.Client._RMC14.Xenonids.Hive;
 using Content.Client.Gameplay;
 using Content.Client.Weapons.Melee;
 using Content.Shared._RMC14.CCVar;
@@ -22,6 +23,7 @@ public sealed class RMCMeleeWeaponSystem : SharedRMCMeleeWeaponSystem
 {
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly IEyeManager _eye = default!;
+    [Dependency] private readonly XenoHiveSystem _hive = default!;
     [Dependency] private readonly IInputManager _input = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly MapSystem _map = default!;
@@ -111,10 +113,10 @@ public sealed class RMCMeleeWeaponSystem : SharedRMCMeleeWeaponSystem
 
             // The target becomes a priority target UNLESS:
             // a) we defer marines and it is a marine
-            // b) we defer xenos and it is a xeno
+            // b) we defer xenos and it is from our hive or allied
             // c) it is a door that is opening, open, or closing
             if (deferMarines && _marineQuery.HasComp(clickable)
-                || deferXenos && _xenoQuery.HasComp(clickable)
+                || deferXenos && _hive.FromSameHiveOrAlly(attacker, clickable)
                 || _doorQuery.TryGetComponent(clickable, out var door) && door.State is DoorState.Opening or DoorState.Open or DoorState.Closing)
             {
                 continue;
