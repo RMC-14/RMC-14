@@ -64,7 +64,7 @@ public sealed partial class RMCERTSystem
     /// <summary>
     /// Creates a new pending ERT request for admin review.
     /// The caller supplies the already-prepared allowed call set and approval modes; this method materializes the internal request,
-    /// checks for duplicate non-terminal requests from the same source entity when one exists, records source cooldown timing,
+    /// checks for duplicate non-terminal requests from the same source entity when one exists,
     /// announces the pending request, and returns its id.
     /// </summary>
     /// <remarks>
@@ -112,9 +112,6 @@ public sealed partial class RMCERTSystem
         };
 
         _requests[request.Id] = request;
-
-        if (request.SourceEntity is { Valid: true } cooldownSource)
-            _sourceCooldowns[cooldownSource] = _timing.CurTime;
 
         AddERTRequestLog(LogImpact.Medium,
             "created",
@@ -305,6 +302,10 @@ public sealed partial class RMCERTSystem
         request.LastError = string.Empty;
         request.LastWarning = string.Empty;
 
+        // Start the source cooldown only after approval succeeds, preserving the previous approval while checking a new request.
+        if (request.SourceEntity is { Valid: true } cooldownSource)
+            _sourceCooldowns[cooldownSource] = _timing.CurTime;
+
         var adminText = GetAdminActorText(admin, adminName);
         Log.Info($"ERT request {request.Id} approved as {call.ID} by {adminText}");
         AddERTRequestLog(forced ? LogImpact.High : LogImpact.Medium,
@@ -469,8 +470,7 @@ public sealed partial class RMCERTSystem
 
         if (request.SourceEntity is { Valid: true } source &&
             _sourceCooldowns.TryGetValue(source, out var last) &&
-            _timing.CurTime < last + call.Requirements.Cooldown &&
-            request.CreatedAt != last)
+            _timing.CurTime < last + call.Requirements.Cooldown)
         {
             error = Loc.GetString("rmc-ert-error-source-cooldown", ("call", call.Name));
             return false;

@@ -385,7 +385,7 @@ public sealed partial class RMCERTStageAnnouncement
 public sealed partial class RMCERTRequirementSet
 {
     /// <summary>
-    /// Per-call cooldown applied between successful requests of this call.
+    /// Cooldown applied after a successful approval from the same source entity.
     /// </summary>
     [DataField]
     public TimeSpan Cooldown = TimeSpan.FromMinutes(10);
