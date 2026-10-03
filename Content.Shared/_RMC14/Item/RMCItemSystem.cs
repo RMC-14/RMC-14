@@ -14,7 +14,7 @@ public sealed class RMCItemSystem : EntitySystem
     private void OnReceivingMeleeAttackAttempt(Entity<ItemComponent> item, ref ReceivingMeleeAttackAttemptEvent args)
     {
         // Prevent random items on the ground from getting in the way of disarms/tackles, such as potted plants.
-        // TODO RMC14 this is a sort of ham-fisted way of preventing "garbage" from getting in the way of things.
+        // TODO RMC14 this is a sort of ham-fisted way of preventing garbage/props from getting in the way of things.
         if (args.Disarm)
             args.Deferred = true;
     }

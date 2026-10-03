@@ -77,11 +77,13 @@ public abstract class SharedMarineSystem : EntitySystem
         if (marine.Owner == args.Attacker)
         {
             // If you're trying to attack yourself, allow if if you have damage yourself enabled, otherwise don't allow it at all.
-            if (TryComp<ActorComponent>(marine, out var actor)
-                && _netConfig.GetClientCVar(actor.PlayerSession.Channel, RMCCVars.RMCDamageYourself))
-                return;
+            if (!TryComp<ActorComponent>(marine, out var actor)
+                || !_netConfig.GetClientCVar(actor.PlayerSession.Channel, RMCCVars.RMCDamageYourself))
+            {
+                args.Cancelled = true;
+            }
 
-            args.Cancelled = true;
+            return;
         }
 
         if (args.Deferred)
