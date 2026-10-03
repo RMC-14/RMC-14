@@ -298,6 +298,14 @@ public sealed partial class VehicleSystem : EntitySystem
         if (pulled is not { } pulledUid)
             return true;
 
+        if (_whitelist.IsWhitelistPass(ent.Comp.PulledBlacklist, pulledUid))
+        {
+            if (popup)
+                _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-pulled-forbidden", ("pulled", pulledUid)), user, user, PopupType.SmallCaution);
+
+            return false;
+        }
+
         var passengers = interior.Passengers;
         var xenos = interior.Xenos;
 
