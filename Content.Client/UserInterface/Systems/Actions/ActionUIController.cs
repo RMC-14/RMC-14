@@ -189,6 +189,8 @@ public sealed partial class ActionUIController : UIController, IOnStateChanged<G
         }
 
         // RMC14 start
+        // Instead of using the entity the engine says we clicked on, we use our own logic to get the target.
+        // Since the args are read-only we have to make a new one that's identical, except with the new target.
         var newTarget = _rmcActions.GetActionTarget(user, action.AsNullable(), args);
         var argsToUse = new PointerInputCmdArgs(
             args.Session,

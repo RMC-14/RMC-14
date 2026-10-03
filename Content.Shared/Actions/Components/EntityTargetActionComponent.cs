@@ -57,17 +57,5 @@ public sealed partial class EntityTargetActionComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool ToggleOutline = true;
-
-    /// <summary>
-    /// If true, entities that share IFF factions with the action user are deferred during targeting.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public bool DeferSharedIFFFaction;
-
-    /// <summary>
-    /// If true, entities that are of the same hive or allied with the hive are deferred during targeting.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public bool DeferHiveAllies;
     // RMC14
 }

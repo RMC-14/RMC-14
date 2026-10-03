@@ -1,7 +1,12 @@
+using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Actions.Events;
 using Content.Shared.Interaction;
+using Content.Shared.Whitelist;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Actions;
@@ -9,9 +14,16 @@ namespace Content.Shared._RMC14.Actions;
 public abstract class SharedRMCActionsSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly GunIFFSystem _gunIFF = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     private EntityQuery<ActionSharedCooldownComponent> _actionSharedCooldownQuery;
+
+    private readonly HashSet<EntProtoId<IFFFactionComponent>> _targetFactions = [];
+    private readonly HashSet<EntProtoId<IFFFactionComponent>> _userFactions = [];
 
     public override void Initialize()
     {
@@ -28,6 +40,11 @@ public abstract class SharedRMCActionsSystem : EntitySystem
         SubscribeLocalEvent<ActionReducedUseDelayComponent, ActionReducedUseDelayEvent>(OnReducedUseDelayEvent);
 
         SubscribeLocalEvent<ActionReducedUseDelayComponent, StartUseDelayEvent>(OnReducedStartUseDelay);
+
+        SubscribeLocalEvent<EntityTargetActionComponent, CheckActionTargetEvent>(OnCheckActionTarget);
+        SubscribeLocalEvent<ActionTargetHiveAllyComponent, CheckActionTargetEvent>(OnHiveAllyCheckActionTarget);
+        SubscribeLocalEvent<ActionTargetNonHiveAllyComponent, CheckActionTargetEvent>(OnNonHiveAllyCheckActionTarget);
+        SubscribeLocalEvent<ActionTargetIFFComponent, CheckActionTargetEvent>(OnIFFCheckActionTarget);
     }
 
     private void OnMissedTargetAction(RMCMissedTargetActionEvent args)
@@ -142,6 +159,58 @@ public abstract class SharedRMCActionsSystem : EntitySystem
         args.End -= reductionAmount;
     }
 
+    private void OnCheckActionTarget(Entity<EntityTargetActionComponent> ent, ref CheckActionTargetEvent args)
+    {
+        if (args.Skip)
+            return;
+
+        if (_whitelist.IsWhitelistFail(ent.Comp.Whitelist, args.Target)
+            || _whitelist.IsBlacklistPass(ent.Comp.Blacklist, args.Target)
+            || !ent.Comp.CanTargetSelf && args.Target == args.User
+            || args.Action.Comp.CheckCanInteract && !_actionBlocker.CanInteract(args.User, args.Target) && ent.Comp.TargetCheckCanInteract)
+        {
+            args.Skip = true;
+        }
+    }
+
+    private void OnHiveAllyCheckActionTarget(Entity<ActionTargetHiveAllyComponent> ent, ref CheckActionTargetEvent args)
+    {
+        if (args.Skip || ent.Comp.Defer && args.Defer)
+            return;
+
+        if (_hive.FromSameHiveOrAlly(args.User, args.Target))
+        {
+            args.Skip = ent.Comp.Skip;
+            args.Defer = ent.Comp.Defer;
+        }
+    }
+
+    private void OnNonHiveAllyCheckActionTarget(Entity<ActionTargetNonHiveAllyComponent> ent, ref CheckActionTargetEvent args)
+    {
+        if (args.Skip || ent.Comp.Defer && args.Defer)
+            return;
+
+        if (!_hive.FromSameHiveOrAlly(args.User, args.Target))
+        {
+            args.Skip = ent.Comp.Skip;
+            args.Defer = ent.Comp.Defer;
+        }
+    }
+
+    private void OnIFFCheckActionTarget(Entity<ActionTargetIFFComponent> ent, ref CheckActionTargetEvent args)
+    {
+        if (args.Skip || ent.Comp.Defer && args.Defer)
+            return;
+
+        if (_gunIFF.TryGetFactions(args.User, _userFactions)
+            && _gunIFF.TryGetFactions(args.Target, _targetFactions)
+            && _userFactions.Overlaps(_targetFactions))
+        {
+            args.Skip = ent.Comp.Skip;
+            args.Defer = ent.Comp.Defer;
+        }
+    }
+
     public bool CanUseActionPopup(EntityUid user, EntityUid action, EntityUid? target = null)
     {
         var ev = new RMCActionUseAttemptEvent(user, target);
@@ -220,3 +289,15 @@ public sealed class RMCMissedTargetActionEvent : EntityEventArgs
         Action = actionId;
     }
 }
+
+/// <summary>
+/// Event raised on EntityTargetActionComponent that allows the action to decide if a target should be skipped or deferred to prefer other entities.
+/// Handling this event should cause NO SIDE EFFECTS.
+/// </summary>
+/// <param name="Target">Target to check.</param>
+/// <param name="User">User of the action.</param>
+/// <param name="Action">The ActionComponent of the action.</param>
+/// <param name="Skip">Set to true if the target should be skipped.</param>
+/// <param name="Defer">Set to true if the target should be deferred.</param>
+[ByRefEvent]
+public record struct CheckActionTargetEvent(in EntityUid Target, in EntityUid User, in Entity<ActionComponent> Action, bool Skip = false, bool Defer = false);
