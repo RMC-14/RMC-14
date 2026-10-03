@@ -43,7 +43,7 @@ public sealed partial class EntityTargetActionComponent : Component
     /// Whether this action considers the user as a valid target entity when using this action.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public bool CanTargetSelf = true;
+    public bool CanTargetSelf = false; // RMC14 changed default from true to false (self targeting abilities are extremely rare)
 
     /// <summary>
     /// Whether to make the user face towards the direction where they targeted this action.
@@ -57,5 +57,17 @@ public sealed partial class EntityTargetActionComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool ToggleOutline = true;
+
+    /// <summary>
+    /// If true, entities that share IFF factions with the action user are deferred during targeting.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool DeferSharedIFFFaction;
+
+    /// <summary>
+    /// If true, entities that are of the same hive or allied with the hive are deferred during targeting.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool DeferHiveAllies;
     // RMC14
 }

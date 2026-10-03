@@ -56,6 +56,9 @@ public sealed partial class ActionUIController : UIController, IOnStateChanged<G
     [UISystemDependency] private readonly TargetOutlineSystem? _targetOutline = default;
     [UISystemDependency] private readonly SpriteSystem _spriteSystem = default!;
 
+    // RMC14
+    [UISystemDependency] private readonly RMCActionsSystem _rmcActions = default!;
+
     private ActionButtonContainer? _container;
     private readonly List<EntityUid?> _actions = new();
     private readonly DragDropHelper<ActionButton> _menuDragHelper;
@@ -185,7 +188,18 @@ public sealed partial class ActionUIController : UIController, IOnStateChanged<G
             return !target.InteractOnMiss;
         }
 
-        var ev = new ActionTargetAttemptEvent(args, (user, comp), action);
+        // RMC14 start
+        var newTarget = _rmcActions.GetActionTarget(user, action.AsNullable(), args);
+        var argsToUse = new PointerInputCmdArgs(
+            args.Session,
+            args.Coordinates,
+            args.ScreenCoordinates,
+            newTarget ?? EntityUid.Invalid,
+            args.State,
+            args.OriginalMessage);
+        // RMC14 end
+
+        var ev = new ActionTargetAttemptEvent(argsToUse, (user, comp), action);
         EntityManager.EventBus.RaiseLocalEvent(action, ref ev);
         if (!ev.Handled)
         {
