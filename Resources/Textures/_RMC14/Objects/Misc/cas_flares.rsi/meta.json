@@ -49,15 +49,15 @@
       "name": "flare_unlit"
     },
     {
-      "name": "unlit-inhand-left",
+      "name": "inhand-left",
       "directions": 4
     },
     {
-      "name": "unlit-inhand-right",
+      "name": "inhand-right",
       "directions": 4
     },
         {
-      "name": "lit-inhand-left",
+      "name": "inhand-left-flame",
       "directions": 4,
       "delays": [
         [
@@ -103,7 +103,7 @@
       ]
     },
     {
-      "name": "lit-inhand-right",
+      "name": "inhand-right-flame",
       "directions": 4,
       "delays": [
         [

@@ -48,8 +48,8 @@ public sealed partial class ExpendableLightComponent
     public string PhaseFiveBehaviourID = "phase_5";
 
     [DataField]
-    public string HeldPrefixLit = "lit";
+    public string? HeldPrefixLit = "lit";
 
     [DataField]
-    public string HeldPrefixUnlit = "unlit";
+    public string? HeldPrefixUnlit = "unlit";
 }

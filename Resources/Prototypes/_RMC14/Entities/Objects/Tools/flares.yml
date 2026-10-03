@@ -54,8 +54,23 @@
     state: icon
   - type: Item
     size: Small
-    heldPrefix: unlit
+    heldPrefixLit: null
+    heldPrefixUnlit: null
     sprite: _RMC14/Objects/Misc/flares.rsi
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
+  - type: ToggleableVisuals
+    spriteLayer: flame
+    inhandVisuals:
+      left:
+      - state: inhand-left-flame
+        color: "#FFA7A7"
+      right:
+      - state: inhand-right-flame
+        color: "#FFA7A7"
   - type: Appearance
   - type: PointLight
     enabled: false
@@ -132,6 +147,15 @@
   - type: Icon
     sprite: _RMC14/Objects/Misc/cas_flares.rsi
     state: flare
+  - type: ToggleableVisuals
+    spriteLayer: flame
+    inhandVisuals:
+      left:
+      - state: inhand-left-flame
+        color: "#A7FFA7"
+      right:
+      - state: inhand-right-flame
+        color: "#A7FFA7"
   - type: Item
     size: Small
     heldPrefix: unlit
@@ -449,6 +473,15 @@
       visible: false
     - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
       state: overlay
+  - type: ToggleableVisuals
+    spriteLayer: flame
+    inhandVisuals:
+      left:
+      - state: inhand-left-flame
+        color: "#ec4b4b"
+      right:
+      - state: inhand-right-flame
+        color: "#ec4b4b"
   - type: PointLight
     color: "#FFCCCC"
   - type: ExpendableLight
@@ -677,6 +710,15 @@
         visible: false
       - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
         state: overlay
+  - type: ToggleableVisuals
+    spriteLayer: flame
+    inhandVisuals:
+      left:
+      - state: inhand-left-flame
+        color: "#C156C2"
+      right:
+      - state: inhand-right-flame
+        color: "#C156C2"
   - type: PointLight
     enabled: false
     color: "#C8BFE7"
@@ -770,6 +812,15 @@
         visible: false
       - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
         state: overlay
+  - type: ToggleableVisuals
+    spriteLayer: flame
+    inhandVisuals:
+      left:
+      - state: inhand-left-flame
+        color: "#F7AD35"
+      right:
+      - state: inhand-right-flame
+        color: "#F7AD35"
   - type: PointLight
     enabled: false
     color: "#F5D5A2"
@@ -877,6 +928,15 @@
         visible: false
       - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
         state: overlay
+  - type: ToggleableVisuals
+    spriteLayer: flame
+    inhandVisuals:
+      left:
+      - state: inhand-left-flame
+        color: "#155FFF"
+      right:
+      - state: inhand-right-flame
+        color: "#155FFF"
   - type: PointLight
     enabled: false
     color: "#8EACED"
