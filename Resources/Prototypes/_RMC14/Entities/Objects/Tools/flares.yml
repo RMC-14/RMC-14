@@ -33,6 +33,8 @@
     iconStateSpent: flare_spent
     turnOnBehaviourID: turn_on
     fadeOutBehaviourID: fade_out
+    heldPrefixLit: null
+    heldPrefixUnlit: null
     litSound:
       path: /Audio/_RMC14/Machines/flare_activate_2.ogg
       params:
@@ -54,8 +56,6 @@
     state: icon
   - type: Item
     size: Small
-    heldPrefixLit: null
-    heldPrefixUnlit: null
     sprite: _RMC14/Objects/Misc/flares.rsi
     inhandVisuals:
       left:
