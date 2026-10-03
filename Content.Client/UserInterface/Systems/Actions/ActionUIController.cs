@@ -3,6 +3,7 @@ using System.Numerics;
 using Content.Client._RMC14.Actions;
 using Content.Client.Actions;
 using Content.Client.Construction;
+using Content.Client.ContextMenu.UI;
 using Content.Client.Gameplay;
 using Content.Client.Hands;
 using Content.Client.Interaction;
@@ -50,6 +51,9 @@ public sealed partial class ActionUIController : UIController, IOnStateChanged<G
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IInputManager _input = default!;
+
+    // RMC14
+    [Dependency] private readonly EntityMenuUIController _entityMenu = default!;
 
     [UISystemDependency] private readonly ActionsSystem? _actionsSystem = default;
     [UISystemDependency] private readonly InteractionOutlineSystem? _interactionOutline = default;
@@ -191,14 +195,20 @@ public sealed partial class ActionUIController : UIController, IOnStateChanged<G
         // RMC14 start
         // Instead of using the entity the engine says we clicked on, we use our own logic to get the target.
         // Since the args are read-only we have to make a new one that's identical, except with the new target.
-        var newTarget = _rmcActions.GetActionTarget(user, action.AsNullable(), args);
-        var argsToUse = new PointerInputCmdArgs(
-            args.Session,
-            args.Coordinates,
-            args.ScreenCoordinates,
-            newTarget ?? EntityUid.Invalid,
-            args.State,
-            args.OriginalMessage);
+        // HOWEVER, to prevent overriding a context menu selection, we use the original target if the input came
+        // from a context menu click.
+        var argsToUse = args;
+        if (!_entityMenu.HandlingContextMenuInput)
+        {
+            var newTarget = _rmcActions.GetActionTarget(user, action.AsNullable(), args);
+            argsToUse = new PointerInputCmdArgs(
+                args.Session,
+                args.Coordinates,
+                args.ScreenCoordinates,
+                newTarget ?? EntityUid.Invalid,
+                args.State,
+                args.OriginalMessage);
+        }
         // RMC14 end
 
         var ev = new ActionTargetAttemptEvent(argsToUse, (user, comp), action);
