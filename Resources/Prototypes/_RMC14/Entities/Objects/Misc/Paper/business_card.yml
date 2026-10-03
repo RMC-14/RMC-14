@@ -1,4 +1,4 @@
-# Business Cards - small paper that locks after first edit
+# Business Cards - small paper for sharing contact information
 - type: entity
   parent: CMBasePaper
   id: RMCBusinessCard
@@ -12,7 +12,6 @@
     - state: billboard_bigger_8
   - type: Paper
     contentSize: 5000
-  - type: BusinessCard
   - type: ActivatableUI
     key: enum.PaperUiKey.Key
     requiresComplex: false
