@@ -313,6 +313,9 @@
     autoTargetRange: 7
     autoTargetCooldown: 0.2
     autoTurretEnabled: true
+  - type: SentryTargeting
+    friendlyFactions:
+    - UNMC
   - type: VehicleSensor
     range: 40
     requiresDeployed: true
