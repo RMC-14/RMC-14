@@ -169,6 +169,19 @@ public sealed partial class RMCERTSystem
             !TryComp(beaconUid.Value, out RMCERTDistressBeaconComponent? beacon))
             return;
 
+        if (!_hands.IsHolding(ent.Owner, beaconUid.Value))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-ert-popup-beacon-not-held"), ent, ent, PopupType.MediumCaution);
+            return;
+        }
+
+        if (TryComp(beaconUid.Value, out AccessReaderComponent? access) &&
+            !_access.IsAllowed(ent.Owner, beaconUid.Value, access))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-access-denied"), beaconUid.Value, ent, PopupType.MediumCaution);
+            return;
+        }
+
         CreateHandheldDistressRequest((beaconUid.Value, beacon), ent.Owner, args.Message);
     }
 
