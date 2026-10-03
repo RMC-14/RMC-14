@@ -16,7 +16,6 @@ using Content.Shared.Tag;
 using Content.Shared.Toggleable;
 using Content.Shared.Verbs;
 using JetBrains.Annotations;
-using JetBrains.FormatRipper.Elf;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics;
