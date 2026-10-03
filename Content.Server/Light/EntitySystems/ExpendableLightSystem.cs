@@ -9,19 +9,21 @@ using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
 using Content.Shared.Light.Components;
+using Content.Shared.Light.EntitySystems;
 using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Stacks;
-using Content.Shared.Light.EntitySystems;
 using Content.Shared.Tag;
+using Content.Shared.Toggleable;
 using Content.Shared.Verbs;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Physics;
-using Robust.Shared.Physics.Systems;
-using Robust.Shared.Utility;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Systems;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
+using static Content.Shared._RMC14.Sprite.SpriteSetRenderOrderComponent;
 
 namespace Content.Server.Light.EntitySystems
 {
@@ -142,7 +144,9 @@ namespace Content.Server.Light.EntitySystems
 
                         if (TryComp<ItemComponent>(ent, out var item))
                         {
-                            _item.SetHeldPrefix(ent, "unlit", component: item);
+                            // RMC14
+                            _item.SetHeldPrefix(ent, component.HeldPrefixUnlit, component: item);
+                            _appearance.SetData(ent, ToggleableVisuals.Enabled, false);
                         }
 
                         // RMC14
@@ -171,7 +175,9 @@ namespace Content.Server.Light.EntitySystems
             {
                 if (TryComp<ItemComponent>(ent, out var item))
                 {
-                    _item.SetHeldPrefix(ent, "lit", component: item);
+                    // RMC14
+                    _item.SetHeldPrefix(ent, component.HeldPrefixLit, component: item);
+                    _appearance.SetData(ent, ToggleableVisuals.Enabled, true);
                 }
 
                 var ignite = new IgnitionEvent(true);
@@ -298,7 +304,9 @@ namespace Content.Server.Light.EntitySystems
         {
             if (TryComp<ItemComponent>(uid, out var item))
             {
-                _item.SetHeldPrefix(uid, "unlit", component: item);
+                // RMC14
+                _item.SetHeldPrefix(uid, component.HeldPrefixUnlit, component: item);
+                _appearance.SetData(uid, ToggleableVisuals.Enabled, false);
             }
 
             component.CurrentState = ExpendableLightState.BrandNew;
