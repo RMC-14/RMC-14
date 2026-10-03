@@ -192,13 +192,20 @@ public sealed partial class RMCERTSystem
     {
         error = string.Empty;
 
-        foreach (var slot in request.PlannedRoster)
+        var genericAssignments = new List<(EntityUid Member, RMCERTRosterSlot Slot)>();
+        foreach (var slot in request.PlannedRoster.OrderByDescending(s => s.Leader).ThenByDescending(s => s.Priority))
         {
             var coords = GetSpawnCoordinates(request, shuttle, slot);
             var spawned = SpawnResponseMember(request, call, slot, coords);
-            TryAssignSeat(spawned, shuttle, slot);
+            if (!TryAssignSeat(spawned, shuttle, slot, reservedOnly: true))
+                genericAssignments.Add((spawned, slot));
             request.SpawnedGhostRoles.Add(spawned);
         }
+
+        // Reserve matching specialist seats before generic responders can claim them.
+        // Unused reserved seats remain available when the roster has no matching specialist.
+        foreach (var (member, slot) in genericAssignments)
+            TryAssignSeat(member, shuttle, slot, reservedOnly: false);
 
         return request.SpawnedGhostRoles.Count > 0;
     }
@@ -384,7 +391,7 @@ public sealed partial class RMCERTSystem
         return spawned;
     }
 
-    private bool TryAssignSeat(EntityUid member, EntityUid? shuttle, RMCERTRosterSlot slot)
+    private bool TryAssignSeat(EntityUid member, EntityUid? shuttle, RMCERTRosterSlot slot, bool reservedOnly)
     {
         if (shuttle is not { Valid: true } shuttleUid)
             return false;
@@ -403,7 +410,7 @@ public sealed partial class RMCERTSystem
 
             var roleMatch = MatchesAny(seat.ReservedRoleTags, slot.RoleTags);
             var seatMatch = MatchesAny(seat.SeatTags, slot.SeatTags);
-            if (!roleMatch && !seatMatch)
+            if (!roleMatch && (reservedOnly || !seatMatch))
                 continue;
 
             if (seat.Priority <= bestPriority)
