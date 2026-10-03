@@ -361,10 +361,18 @@ public sealed partial class RMCERTSystem
             spawned = Spawn(slot.GhostRoleEntity, coordinates);
         }
 
-        if (TryComp(spawned, out GhostRoleComponent? ghostRole))
+        if (!TryComp(spawned, out GhostRoleComponent? ghostRole))
         {
-            ghostRole.MindRoles.Clear();
+            // Direct mob prototypes, such as xenos, need a takeover role just like humanoid spawners.
+            var briefing = BuildMemberBriefing(request, call);
+            ghostRole = _ghostRoles.CreateTakeoverRole(spawned,
+                slot.RoleName,
+                string.IsNullOrWhiteSpace(briefing) ? Loc.GetString(call.Name) : briefing,
+                makeSentient: false,
+                reregisterOnGhost: false);
         }
+
+        ghostRole.MindRoles.Clear();
 
         var member = EnsureComp<RMCERTMemberComponent>(spawned);
         member.RequestId = request.Id;

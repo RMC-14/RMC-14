@@ -86,7 +86,7 @@ public sealed partial class RMCERTSystem
                 continue;
             }
 
-            if (TryComp(member, out GhostRoleComponent? ghostRole) &&
+            if (!TryComp(member, out GhostRoleComponent? ghostRole) ||
                 !ghostRole.Taken)
             {
                 QueueDel(member);
