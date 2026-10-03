@@ -21,6 +21,7 @@
 #      - id: CMHandsBlackMarine (Everything marked as a comment is redundant, since the role already spawns with that item. The lines were not deleted, in case they need to be re-added later.)
       - id: CMHeadsetMPO
 #      - id: CMJumpsuitMP
+      - id: RMCJumpsuitMPService
 #      - id: CMBootsBlackFilled
 #      - id: CMBeltSecurityMPFilled
       - id: CMGlassesSecurity
@@ -122,6 +123,7 @@
       entries:
 #      - id: CMHandsBlackMarine
       - id: RMCHeadsetMW
+      - id: RMCJumpsuitMPService
 #      - id: CMJumpsuitWarden
 #      - id: CMBootsBlackFilled
       - id: RMCVisorMedical
