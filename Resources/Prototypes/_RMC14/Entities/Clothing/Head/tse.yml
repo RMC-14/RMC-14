@@ -1,5 +1,5 @@
 - type: entity
-  parent: CMHeadCapMP
+  parent: RMCHeadCap
   id: RMCHeadCapTSEPA
   name: tsepa cap
   description: A cap for TSEPA constables. Wots all this then?
