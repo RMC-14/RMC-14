@@ -311,6 +311,7 @@ public sealed class GhostRoleSystem : EntitySystem
         }
     }
 
+    // RMC14
     /// <summary>
     /// Makes an existing mob available for takeover without replacing its body.
     /// </summary>
@@ -329,6 +330,7 @@ public sealed class GhostRoleSystem : EntitySystem
         role.ReregisterOnGhost = reregisterOnGhost;
         return role;
     }
+    // RMC14
 
     public void RegisterGhostRole(Entity<GhostRoleComponent> role)
     {
