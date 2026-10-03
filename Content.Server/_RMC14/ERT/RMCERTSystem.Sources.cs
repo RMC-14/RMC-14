@@ -70,22 +70,28 @@ public sealed partial class RMCERTSystem
             return;
         }
 
-        var ev = new RMCERTConsoleDistressReasonEvent(GetNetEntity(args.Actor));
-        _dialog.OpenInput(ent, args.Actor, Loc.GetString("rmc-ert-prompt-console-reason"), ev, true, ent.Comp.DistressReasonLimit);
+        var ev = new RMCERTConsoleDistressReasonEvent(GetNetEntity(ent.Owner));
+        _dialog.OpenInput(args.Actor, Loc.GetString("rmc-ert-prompt-console-reason"), ev, true, ent.Comp.DistressReasonLimit);
     }
 
-    private void OnConsoleReason(Entity<MarineCommunicationsComputerComponent> ent, ref RMCERTConsoleDistressReasonEvent args)
+    private void OnConsoleReason(Entity<ActorComponent> ent, ref RMCERTConsoleDistressReasonEvent args)
     {
-        if (!TryGetEntity(args.User, out var user))
-            return;
-
-        if (!CanUseConsoleDistress(ent, out var reason))
+        if (!TryGetEntity(args.Console, out var consoleUid) ||
+            !TryComp(consoleUid.Value, out MarineCommunicationsComputerComponent? consoleComp) ||
+            !_ui.IsUiOpen(consoleUid.Value, MarineCommunicationsComputerUI.Key, ent.Owner) ||
+            !_interaction.InRangeUnobstructed(ent.Owner, consoleUid.Value))
         {
-            _popup.PopupEntity(reason, ent, user.Value, PopupType.MediumCaution);
             return;
         }
 
-        CreateConsoleDistressRequest(ent, user.Value, args.Message);
+        var console = new Entity<MarineCommunicationsComputerComponent>(consoleUid.Value, consoleComp);
+        if (!CanUseConsoleDistress(console, out var reason))
+        {
+            _popup.PopupEntity(reason, console, ent.Owner, PopupType.MediumCaution);
+            return;
+        }
+
+        CreateConsoleDistressRequest(console, ent.Owner, args.Message);
     }
 
     private bool CanUseConsoleDistress(Entity<MarineCommunicationsComputerComponent> console, out string reason)
