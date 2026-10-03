@@ -90,14 +90,14 @@ public sealed partial class RMCERTSystem
         request.PlannedRoster.Clear();
         request.SpawnedGhostRoles.Clear();
 
+        if (call.ShuttleCargo.Count > 0 && !SpawnShuttleCargo(request, call, shuttle, out error))
+        {
+            FailRequest(request, error);
+            return;
+        }
+
         if (IsCargoOnlyShuttle(call))
         {
-            if (!SpawnShuttleCargo(request, call, shuttle, out error))
-            {
-                FailRequest(request, error);
-                return;
-            }
-
             request.State = RMCERTRequestState.Recruiting;
             request.RecruitmentEndsAt = _timing.CurTime;
             request.NextAutoLaunchAttempt = _timing.CurTime;
