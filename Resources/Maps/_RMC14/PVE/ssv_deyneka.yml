@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 02/16/2026 15:13:53
+  time: 09/03/2026 15:57:29
   entityCount: 9078
 maps:
 - 1
@@ -31195,7 +31195,8 @@ entities:
       pos: 7.5,37.5
       parent: 1
     - type: Ladder
-      id: DN_AILadder
+      level: 1
+      groupId: DN_AILadder
     - type: Fixtures
       fixtures: {}
 - proto: RMCLadderUp
@@ -31206,7 +31207,7 @@ entities:
       pos: -7.5,-40.5
       parent: 1
     - type: Ladder
-      id: DN_AILadder
+      groupId: DN_AILadder
     - type: Fixtures
       fixtures: {}
 - proto: RMCLamp
