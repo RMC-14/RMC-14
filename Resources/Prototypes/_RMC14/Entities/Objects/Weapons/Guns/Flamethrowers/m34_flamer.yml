@@ -209,6 +209,17 @@
 
 - type: entity
   parent: RMCTankFlamer
+  id: RMCTankFlamerEmpty
+  suffix: Empty
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 100
+        reagents: [ ]
+
+- type: entity
+  parent: RMCTankFlamer
   id: RMCTankFlamerCustom
   name: M34 custom incinerator tank
   description: A fuel tank for use in the M34 incinerator unit.

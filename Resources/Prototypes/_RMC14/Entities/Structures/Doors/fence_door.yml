@@ -74,6 +74,9 @@
     percentageDamage: 0.25
   - type: XenoCrusherChargable
     instantDestroy: true
+  - type: VehicleSmashable
+    deleteOnHit: false
+    damageOnHit: 50
 
 - type: entity
   parent: CMBaseStructureCorrodible
@@ -118,6 +121,9 @@
     layers:
     - state: closed
       map: ["enum.DoorVisualLayers.Base"]
+  - type: Construction
+    graph: CMFence
+    node: gateSPP
   - type: Destructible
     thresholds:
     - trigger:
@@ -151,3 +157,56 @@
     layers:
     - state: broken
       map: ["enum.DoorVisualLayers.Base"]
+  - type: Construction
+    graph: CMFence
+    node: gateBrokenSPP
+
+- type: entity
+  parent: RMCFenceDoor
+  id: RMCFenceDoorDark
+  suffix: Dark
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/fence_doors/dark_fence_door.rsi
+    layers:
+    - state: closed
+      map: ["enum.DoorVisualLayers.Base"]
+  - type: Construction
+    graph: CMFence
+    node: gateDark
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 600
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Items/wirecutter.ogg
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          RMCFenceDoorBrokenDark:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: RMCFenceDoorBroken
+  id: RMCFenceDoorBrokenDark
+  suffix: Dark
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/fence_doors/dark_fence_door.rsi
+    layers:
+    - state: broken
+      map: ["enum.DoorVisualLayers.Base"]
+  - type: Construction
+    graph: CMFence
+    node: gateBrokenDark
