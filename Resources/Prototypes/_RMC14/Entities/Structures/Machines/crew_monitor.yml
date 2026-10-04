@@ -1,0 +1,98 @@
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCComputerCrewMonitoring
+  name: crew monitoring console
+  description: A console that reports the status and last known location of personnel wearing active suit sensors.
+  components:
+  - type: Physics
+    bodyType: Static
+    canCollide: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Sprite
+    layers:
+    - map: ["enum.RMCCrewMonitorVisualLayers.Unpowered"]
+      state: crew0
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: crew
+    - map: ["enum.RMCCrewMonitorVisualLayers.Broken"]
+      state: crewb
+      visible: false
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+      enum.RMCCrewMonitorVisuals.Broken:
+        enum.RMCCrewMonitorVisualLayers.Unpowered:
+          True: { visible: false }
+          False: { visible: true }
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: false }
+        enum.RMCCrewMonitorVisualLayers.Broken:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Repairable
+    doAfterDelay: 8
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Breakage"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: ActivatableUI
+    key: enum.RMCCrewMonitorUIKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.RMCCrewMonitorUIKey.Key:
+        type: RMCCrewMonitorBui
+  - type: RMCCrewMonitor
+    npcFactions:
+    - UNMC
+    iffFactions:
+    - FactionMarine
+  - type: EmitSoundOnUIOpen
+    sound:
+      collection: RMCKeyboardTyping
+      params:
+        volume: -1
+
+- type: entity
+  parent: RMCComputerCrewMonitoring
+  id: RMCComputerCrewMonitoringCompact
+  suffix: Compact
+  description: A compact console that reports the status and last known location of personnel wearing active suit sensors.
+  components:
+  - type: Physics
+    canCollide: false
+  - type: Sprite
+    layers:
+    - map: ["enum.RMCCrewMonitorVisualLayers.Unpowered"]
+      state: cmonitor0
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: cmonitor
+    - map: ["enum.RMCCrewMonitorVisualLayers.Broken"]
+      state: cmonitorb
+      visible: false

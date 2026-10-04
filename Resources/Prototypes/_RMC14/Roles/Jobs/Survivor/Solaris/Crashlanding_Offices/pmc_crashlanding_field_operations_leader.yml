@@ -76,7 +76,7 @@
     - RMCAttachmentFlashlightGrip
     - RMCAttachmentS6ReflexSight
     - CMDefibrillator
-    # TODO RMC14: Crew monitor
+    - RMCPortableCrewMonitor
     outerClothing:
     - RMCMREWeYa
     - RMCRangefinder

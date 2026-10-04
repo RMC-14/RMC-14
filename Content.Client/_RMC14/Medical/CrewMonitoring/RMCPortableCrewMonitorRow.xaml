@@ -1,0 +1,18 @@
+<controls:RMCPortableCrewMonitorRow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Medical.CrewMonitoring"
+    StyleClasses="OpenBoth"
+    ToggleMode="True"
+    HorizontalExpand="True"
+    MinHeight="52">
+    <BoxContainer Orientation="Horizontal" Margin="5 3" SeparationOverride="6">
+        <TextureRect Name="JobIcon" Access="Public" MinSize="38 38" MaxSize="38 38"
+                     TextureScale="2 2" Stretch="KeepCentered" VerticalAlignment="Center" />
+        <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalAlignment="Center">
+            <Label Name="NameLabel" Access="Public" HorizontalExpand="True" />
+            <Label Name="JobLabel" Access="Public" HorizontalExpand="True"
+                   FontColorOverride="#8FA3B2" />
+        </BoxContainer>
+        <Label Name="StatusLabel" Access="Public" MinWidth="64" Align="Center" VerticalAlignment="Center" />
+    </BoxContainer>
+</controls:RMCPortableCrewMonitorRow>

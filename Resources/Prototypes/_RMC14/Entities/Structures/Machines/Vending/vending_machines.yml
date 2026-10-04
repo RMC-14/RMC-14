@@ -633,7 +633,7 @@
     CMBurnAidKitFilled: 2
     RMCRadiationAidKitFilled: 1
     RMCCPRDummy: 5
-    # Crew Monitor
+    RMCPortableCrewMonitor: 1
 
 
 # Nutriments
