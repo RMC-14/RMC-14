@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Inventory;
+﻿using Content.Shared._RMC14.Armor.Magnetic;
+using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Weapons.Ranged.Battery;
 using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -152,6 +153,9 @@ public sealed class MotionDetectorSystem : EntitySystem
     private void OnMotionDetectorDropped<T>(Entity<MotionDetectorComponent> ent, ref T args)
     {
         if (!ent.Comp.DeactivateOnDrop)
+            return;
+
+        if (HasComp<RMCSlingPouchItemComponent>(ent))
             return;
 
         ent.Comp.Enabled = false;
