@@ -106,6 +106,36 @@
 
 - type: entity
   parent: RMCTileFire
+  id: RMCTileFireBrute
+  components:
+  - type: Sprite
+    layers:
+    - map: [ "base" ]
+      state: green_4
+  - type: PointLight
+    color: "#069420"
+  - type: RMCIgniteOnCollide
+    maxStacks: 1
+    intensity: 10
+    duration: 1
+    tileDamage:
+      types:
+        Heat: 0.5
+    burnColor: "#00FF00"
+  - type: TileFire
+    id: RMCTileFireBrute
+    duration: 1
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: green_1 }
+          Two: { state: green_2 }
+          Three: { state: green_3 }
+          Four: { state: green_4 }
+
+- type: entity
+  parent: RMCTileFire
   id: RMCTileFireBlue
   components:
   - type: Sprite
