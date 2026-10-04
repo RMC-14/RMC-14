@@ -57,5 +57,21 @@ public sealed partial class EntityTargetActionComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool ToggleOutline = true;
+
+    /// <summary>
+    /// Determines which entities should NOT be deferred. Entities that don't match will be deferred.
+    /// The normal whitelist and blacklist take precedence.
+    /// </summary>
+    /// <remarks>No whitelist check when null.</remarks>
+    [DataField, AutoNetworkedField]
+    public EntityWhitelist? PriorityWhitelist;
+
+    /// <summary>
+    /// Determines which entities WILL be deferred, even if matching the priority whitelist.
+    /// The normal whitelist and blacklist take precedence.
+    /// </summary>
+    /// <remarks>No blacklist check when null.</remarks>
+    [DataField, AutoNetworkedField]
+    public EntityWhitelist? DeferBlacklist;
     // RMC14
 }

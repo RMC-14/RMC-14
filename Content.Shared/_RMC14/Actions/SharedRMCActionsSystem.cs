@@ -170,6 +170,17 @@ public abstract class SharedRMCActionsSystem : EntitySystem
             || args.Action.Comp.CheckCanInteract && !_actionBlocker.CanInteract(args.User, args.Target) && ent.Comp.TargetCheckCanInteract)
         {
             args.Skip = true;
+            return;
+        }
+
+        if (args.Defer)
+            return;
+
+        if (_whitelist.IsWhitelistFail(ent.Comp.PriorityWhitelist, args.Target)
+            || _whitelist.IsBlacklistPass(ent.Comp.DeferBlacklist, args.Target))
+        {
+            args.Defer = true;
+            return;
         }
     }
 
