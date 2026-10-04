@@ -1,4 +1,5 @@
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Xenonids.HiveTeam;
@@ -14,4 +15,10 @@ public sealed partial class HiveTeamMemberComponent : Component
 
     [DataField, AutoNetworkedField]
     public Color IconColor = Color.FromHex("#7B2FBE");
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId ViewActionId = "ActionXenoHiveTeamMemberView";
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? ViewAction;
 }
