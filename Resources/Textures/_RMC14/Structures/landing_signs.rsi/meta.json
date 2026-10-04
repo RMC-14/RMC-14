@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/2f4c415e5681333e6de474f1f027087101452d31/icons/obj/structures/props/landing_signs.dmi, chances_claim and nereid by sharksnake. tyrargo_sign modified by kleinerstation13 and SharkSnake98 (Github)",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/2f4c415e5681333e6de474f1f027087101452d31/icons/obj/structures/props/landing_signs.dmi, chances_claim and nereid by sharksnake. tyrargo_sign modified by kleinerstation13 and SharkSnake98 (Github), prison_sign_fixed modified by Drazamuffin, fiorina_fixed by Drazamuffin",
   "size": {
     "x": 64,
     "y": 64
@@ -86,20 +86,26 @@
     {
       "name": "nereidspaceport_sign"
     },
-      {
-        "name": "tyrargo_sign1",
-        "delays": [
-          [
+    {
+      "name": "prison_sign_fixed"
+    },
+    {
+      "name": "fiorina_sign"
+    },
+    {
+    "name": "tyrargo_sign1",
+    "delays": [
+        [
             1,
             1
-          ]
-      ]
-      },
-      {
-          "name": "tyrargo_sign2"
-      },
-      {
-          "name": "tyrargo_sign3"
-      }
+        ]
+    ]
+    },
+    {
+        "name": "tyrargo_sign2"
+    },
+    {
+        "name": "tyrargo_sign3"
+    }
   ]
 }
