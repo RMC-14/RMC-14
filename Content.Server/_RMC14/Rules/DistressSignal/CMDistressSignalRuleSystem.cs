@@ -241,6 +241,14 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
 
     private void InvalidateActiveRule() => _activeRule = null;
 
+    /// <summary>
+    /// Exposes the hijack phase to subsystems such as ERT request gating without leaking the whole rule component.
+    /// </summary>
+    public bool IsHijackActive()
+    {
+        return TryGetActiveRule()?.Hijack == true;
+    }
+
     public override void Initialize()
     {
         base.Initialize();

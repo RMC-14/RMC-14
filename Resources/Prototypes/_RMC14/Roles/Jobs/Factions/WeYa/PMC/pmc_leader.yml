@@ -10,10 +10,11 @@
   startingGear: RMCJobPMCLeader
   icon: RMCJobIconPMCLeader
   joinNotifyCrew: false
+  access: [ CMAccessERT ]
   accessGroups:
   - Colony
   - RMCWeYa
-  spawnMenuRoleName: WEYA PMC Leader
+  spawnMenuRoleName: We-Ya PMC Leader
   special:
   - !type:AddComponentSpecial
     components:
@@ -63,7 +64,7 @@
 
 - type: entity
   id: RMCRandomHumanoidPMCLeader
-  name: weya pmc ghost role leader
+  name: we-ya pmc ghost role leader
   suffix: Spawner, Player
   components:
   - type: Sprite
@@ -75,7 +76,7 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointPMCLeader
-  name: weya pmc squad leader spawn point
+  name: we-ya pmc squad leader spawn point
   components:
   - type: SpawnPoint
     job_id: RMCPMCLeader
@@ -122,8 +123,9 @@
   storage:
     back:
     - CMStunbaton
-    - CMCrowbar # TODO RMC14: tactical prybar
+    - RMCTacticalPrybar
     - RMCRangefinder
+    - RMCHandheldDistressBeaconWeYa
     - RMCMREWeYaPMC
     - RMCGrenadeBlastM12
     - RMCExplosivePlastic

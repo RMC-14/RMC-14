@@ -12,6 +12,7 @@
   - SPP
   - Halcyon
   - WeYa
+  - VAI
   - Civilian
   - CLF
   - TSE
@@ -25,6 +26,7 @@
   - SPP
   - Halcyon
   - WeYa
+  - VAI
   - Civilian
   - CLF
   - TSE
@@ -48,6 +50,11 @@
 
 - type: npcFaction
   id: WeYa
+  hostile:
+  - RMCXeno
+
+- type: npcFaction
+  id: VAI
   hostile:
   - RMCXeno
 

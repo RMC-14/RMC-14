@@ -83,6 +83,15 @@
   id: RMCDropshipUtilityPoint
 
 - type: Tag
+  id: RMCShuttleAirlockInternal
+
+- type: Tag
+  id: RMCShuttleAirlockExternalSide
+
+- type: Tag
+  id: RMCShuttleAirlockExternalHangar
+
+- type: Tag
   id: WeaponSMGM63
 
 - type: Tag

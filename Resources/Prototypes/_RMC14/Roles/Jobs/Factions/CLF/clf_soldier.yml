@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMJobBase
   id: RMCCLFSoldier
   name: rmc-clf-soldier
@@ -10,6 +10,7 @@
   icon: RMCJobIconCLFSoldier
   joinNotifyCrew: false
   spawnMenuRoleName: CLF Soldier
+  access: [ CMAccessERT ]
   special:
   - !type:AddComponentSpecial
     components:
