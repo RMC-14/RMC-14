@@ -54,10 +54,12 @@
                         <!-- appearanceList -->
                         <BoxContainer Orientation="Vertical">
                             <BoxContainer Margin="10" Orientation="Vertical" HorizontalExpand="True">
-                                <BoxContainer HorizontalExpand="True">
+                                <BoxContainer HorizontalExpand="True" Orientation="Vertical">
                                     <Label Text="{Loc 'humanoid-profile-editor-preferred-squad-label'}" />
-                                    <Control HorizontalExpand="True" />
-                                    <OptionButton Name="SquadPreferenceButton" HorizontalAlignment="Right" />
+                                    <BoxContainer Name="SquadPreferenceContainer" Orientation="Horizontal" HorizontalAlignment="Right" SeparationOverride="8" />
+                                    <CheckBox Name="OnlyUsePreferredSquadsCheckbox"
+                                              HorizontalAlignment="Right"
+                                              Text="{Loc 'humanoid-profile-editor-only-preferred-squads'}" />
                                 </BoxContainer>
                                 <!-- Armor Preference -->
                                 <BoxContainer HorizontalExpand="True">
