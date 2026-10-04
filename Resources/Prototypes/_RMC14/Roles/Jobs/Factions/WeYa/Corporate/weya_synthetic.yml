@@ -27,6 +27,7 @@
       - German
       - Chinese
       - Spanish
+      - Hindi
       understoodLanguages:
       - English
       - French
@@ -36,6 +37,7 @@
       - German
       - Chinese
       - Spanish
+      - Hindi
       currentLanguage: English
       defaultLanguage: English
     - type: LanguageLearning
