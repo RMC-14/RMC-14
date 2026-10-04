@@ -21,7 +21,6 @@ rmc-xeno-psychic-radiance-message = Radiate a psychic message.
 rmc-xeno-psychic-radiance-no-targets = There are no nearby minds to radiate to.
 rmc-xeno-psychic-radiance-sent = We radiate our thoughts to {$count} nearby minds.
 rmc-xeno-psychic-give-order-message = Give an order to {$target}.
-rmc-xeno-psychic-give-order-must-watch = We must be watching a sister to give an order.
 rmc-xeno-psychic-give-order-sent = We give an order to {$target}.
 rmc-xeno-psychic-target-invalid = That mind is no longer within our reach.
 rmc-xeno-psychic-message-xeno = [color=#921992][font size=14][bold]The voice of {$queen} resonates in your head:[/bold] "{$message}"[/font][/color]
