@@ -38,6 +38,8 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-synth
     - type: Synth
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetForeconSynthetic
   hidden: true
 
 - type: startingGear
@@ -45,8 +47,6 @@
   equipment:
     id: RMCIDCardSynth
     back: CMSatchelFillColonySynthetic # TODO RMC14 check loadouts for synth survivors to see if there's a backpack category
-    jumpsuit: CMJumpsuitMaintTech
-    shoes: RMCShoesRedKnife
     ears: RMCHeadsetForecon
     pocket1: RMCPouchToolsFill
     pocket2: RMCPouchSurvivalSynthFill
@@ -56,6 +56,18 @@
   storage:
     back:
     - RMCSynthResetKey
+
+- type: entity
+  id: RMCSurvivorPresetForeconSynthetic
+  name: force recon synthetic preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    randomOutfits:
+    # UNMC Fatigues
+    - [ CMBootsBlackFilled, RMCJumpsuitSurvivorMarineDropPouch ]
+    # MT Fatigues
+    - [ RMCShoesRedKnife, CMJumpsuitMaintTech ]
 
 - type: entity
   parent: CMSpawnPointJobBase

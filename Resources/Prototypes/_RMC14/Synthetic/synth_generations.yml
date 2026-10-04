@@ -39,6 +39,7 @@
     baseWalkSpeed: 1.9575
   - type: ShowHealthIcons
   - type: ShowHealthBars
+  - type: SeeNewPlayers
   - type: RemoveComponents
     components:
     - type: HiddenAppearance
@@ -84,6 +85,7 @@
     baseWalkSpeed: 1.9575
   - type: ShowHealthIcons
   - type: ShowHealthBars
+  - type: SeeNewPlayers
   - type: RemoveComponents
     components:
     - type: HiddenAppearance
@@ -123,6 +125,7 @@
       300: Dead
   - type: ShowHealthIcons
   - type: ShowHealthBars
+  - type: SeeNewPlayers
   - type: RemoveComponents
     components:
     - type: HiddenAppearance
