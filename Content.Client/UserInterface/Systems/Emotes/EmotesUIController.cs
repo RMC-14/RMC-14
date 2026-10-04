@@ -1,4 +1,5 @@
 using Content.Client.Gameplay;
+using Content.Client._RMC14.Pushup; // RMC14
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Chat;
 using Content.Shared.Chat.Prototypes;
@@ -158,6 +159,14 @@ public sealed class EmotesUIController : UIController, IOnStateChanged<GameplayS
                 list = new List<RadialMenuOption>();
                 emotesByCategory.Add(emote.Category, list);
             }
+
+            // RMC14 start
+            if (RMCPushupRadialMenu.TryCreate(emote, _entityManager, out var rmcOption))
+            {
+                list.Add(rmcOption!);
+                continue;
+            }
+            // RMC14 end
 
             var actionOption = new RadialMenuActionOption<EmotePrototype>(HandleRadialButtonClick, emote)
             {
