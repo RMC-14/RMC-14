@@ -11,3 +11,6 @@ cm-xeno-nest-failed-target-resisting = {$target} is resisting, ground them!
 cm-xeno-nest-failed-cant-there = We can't create a nest there!
 cm-xeno-nest-failed-cant-already-there = There is already someone nested there!
 rmc-xeno-nest-failed-dead = This host is dead.
+
+rmc-xeno-nest-unnest-verb = Release host
+rmc-xeno-nest-unnest-start = We begin working {$target} free from the nest...
