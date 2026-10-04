@@ -103,6 +103,7 @@
       time: 20 # seconds
       dps: 18
       expendableLightDps: 35
+      vehicleDamage: 50
 
 - type: entity
   id: ActionXenoRegurgitate
