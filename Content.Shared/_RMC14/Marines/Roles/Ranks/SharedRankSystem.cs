@@ -1,5 +1,7 @@
 ﻿using System.Linq;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared.Access.Systems;
 using Content.Shared.Dataset;
 using Content.Shared.Examine;
 using Content.Shared.Humanoid;
@@ -12,6 +14,8 @@ public abstract class SharedRankSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private readonly SharedIdCardSystem _idCard = default!;
+    [Dependency] private readonly SharedMarineSystem _marine = default!;
 
     public override void Initialize()
     {
@@ -43,7 +47,11 @@ public abstract class SharedRankSystem : EntitySystem
     /// </summary>
     public void SetRank(EntityUid uid, RankPrototype from)
     {
-        SetRank(uid, from.ID);
+        var comp = EnsureComp<RankComponent>(uid);
+        comp.Rank = from.ID;
+        Dirty(uid, comp);
+
+        ApplyRankJobIcon(uid, from);
     }
 
     /// <summary>
@@ -51,9 +59,29 @@ public abstract class SharedRankSystem : EntitySystem
     /// </summary>
     public void SetRank(EntityUid uid, ProtoId<RankPrototype> from)
     {
+        if (_prototypes.TryIndex(from, out var rankPrototype))
+        {
+            SetRank(uid, rankPrototype);
+            return;
+        }
+
         var comp = EnsureComp<RankComponent>(uid);
         comp.Rank = from;
         Dirty(uid, comp);
+    }
+
+    private void ApplyRankJobIcon(EntityUid uid, RankPrototype rank)
+    {
+        if (rank.JobIcon is not { } iconId)
+            return;
+
+        if (!_prototypes.TryIndex(iconId, out var iconPrototype))
+            return;
+
+        _marine.SetMarineIcon(uid, iconPrototype.Icon);
+
+        if (_idCard.TryFindIdCard(uid, out var idCard))
+            _idCard.TryChangeJobIcon(idCard, iconPrototype, idCard.Comp);
     }
 
     /// <summary>
