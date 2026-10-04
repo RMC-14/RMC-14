@@ -1,17 +1,21 @@
-﻿using Content.Shared._RMC14.PlayTimeTracking;
-using Robust.Client.Player;
+using Content.Shared._RMC14.PlayTimeTracking;
 using Robust.Shared.Network;
-using Robust.Shared.Player;
 
 namespace Content.Client._RMC14.PlayTimeTracking;
 
-public sealed class RMCPlayTimeManager : IPostInjectInit
+public sealed class RMCPlayTimeManager : SharedRMCPlayTimeManager
 {
     [Dependency] private readonly INetManager _net = default!;
 
     private readonly HashSet<string> _excluded = [];
 
     public event Action? Updated;
+
+    protected override void PostInject()
+    {
+        base.PostInject();
+        _net.RegisterNetMessage<RMCExcludedTimersMsg>(OnExcludedTimers);
+    }
 
     private void OnExcludedTimers(RMCExcludedTimersMsg message)
     {
@@ -23,10 +27,5 @@ public sealed class RMCPlayTimeManager : IPostInjectInit
     public bool IsExcluded(string tracker)
     {
         return _excluded.Contains(tracker);
-    }
-
-    void IPostInjectInit.PostInject()
-    {
-        _net.RegisterNetMessage<RMCExcludedTimersMsg>(OnExcludedTimers);
     }
 }
