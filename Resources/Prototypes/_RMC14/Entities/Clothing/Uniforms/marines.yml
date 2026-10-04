@@ -38,7 +38,7 @@
 
 # Formal
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
   id: CMJumpsuitMarineFormal
   name: formal marine uniform
   components:
@@ -226,9 +226,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Supply/cargo_tech.rsi
-  - type: Foldable
-    unfoldVerbText: rmc-pants-verb-unfold
-    foldVerbText: rmc-pants-verb-fold
 
 # MessTech / Chef
 - type: entity
@@ -244,7 +241,7 @@
 
 # Chief Engineer / EC
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
   id: CMJumpsuitChiefEngineer
   name: chief engineer uniform
   description: A uniform for a military engineer. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
@@ -282,7 +279,7 @@
 
 # Commanding Officer / CO
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
   id: CMJumpsuitCO
   name: commanding officer uniform
   description: Standard-issue Commanding Officer uniform.
@@ -321,19 +318,20 @@
     camouflageVariations: { }
 
 - type: entity
-  parent: CMJumpsuitCO
+  parent: RMCMarineUniformBase
   id: CMJumpsuitCOService
   name: commanding officer's dress shirt
   description: The shirt and tie of a two-piece Navy service dress uniform for high-ranking officers. Wear with style and substance.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Command/CO/service.rsi
+  - type: Appearance
   - type: ItemCamouflage
     camouflageVariations: { }
 
 - type: entity
   parent: CMJumpsuitCOService
-  id: RMCJumsuitWhiteService
+  id: RMCJumpsuitWhiteService
   name: white service uniform
   description: A white dress shirt and tie with sleek pants. Standard clothing for anyone on professional business.
 
@@ -362,30 +360,24 @@
 # Executive officer
 
 - type: entity
-  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
   id: CMJumpsuitXOFormal
   name: marine formal service uniform
   description: A formal service uniform typically worn by marines of the UNMC. Still practicable while still being more formal than the standard service uniform.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Command/formal_service.rsi
-  - type: Foldable
-    unfoldVerbText: rmc-sleeves-verb-unfold
-    foldVerbText: rmc-sleeves-verb-fold
 
 # ASO
 
 - type: entity
-  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
   id: RMCJumpsuitASOBlack
   name: auxiliary support officer black uniform
   description: A service uniform typycally used by Auxiliary Support Officers. This one is colored black.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Command/ASO/aso_black.rsi
-  - type: Foldable
-    unfoldVerbText: rmc-sleeves-verb-unfold
-    foldVerbText: rmc-sleeves-verb-fold
 
 - type: entity
   parent: RMCJumpsuitASOBlack
@@ -395,7 +387,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Command/ASO/aso_formal.rsi
-  - type: Foldable
 
 - type: entity
   parent: RMCJumpsuitASOBlack
@@ -428,16 +419,13 @@
 
 # Officer
 - type: entity
-  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
   id: CMJumpsuitBO
   name: marine service uniform
   description: A service uniform worn by members of the UNMC. Do the corps proud. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Command/bo.rsi
-  - type: Foldable
-    unfoldVerbText: rmc-sleeves-verb-unfold
-    foldVerbText: rmc-sleeves-verb-fold
 
 - type: entity
   parent: CMJumpsuitBO
@@ -447,8 +435,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/boiler/jungle.rsi
-  - type: FoldableClothing
-    foldedEquippedPrefix: sleeves
   - type: Appearance
   - type: ItemCamouflage
     camouflageVariations:
@@ -461,7 +447,7 @@
 # Auxiliary
 # IO
 - type: entity
-  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
   id: RMCUniformIntel
   name: marine intelligence officer uniform
   description: Tighter than a vice. Slicker than beard oil. Covered from head to toe in pouches, pockets, bags, straps, and belts. Clearly, you are not only the most intelligent of intelligence officers, but the most fashionable as well. This suit took an entire R&D team five days to develop. It is more expensive than the entire Almayer... probably.
@@ -469,9 +455,6 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/intel/jungle.rsi
   - type: Appearance
-  - type: Foldable
-    unfoldVerbText: rmc-sleeves-verb-unfold
-    foldVerbText: rmc-sleeves-verb-fold
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Uniforms/intel/jungle.rsi
@@ -489,7 +472,7 @@
 
 # Pilot
 - type: entity
-  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
   id: CMJumpsuitPilot
   name: pilot bodysuit
   description: A bodysuit worn by pilots of the marines, and is meant for survival in inhospitable conditions. Fly the marines onwards to glory. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
@@ -503,12 +486,9 @@
       Snow: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot/snow.rsi
       Classic: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot/classic.rsi
       Urban: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot/urban.rsi
-  - type: Foldable
-    unfoldVerbText: rmc-sleeves-verb-unfold
-    foldVerbText: rmc-sleeves-verb-fold
 
 - type: entity
-  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
   id: RMCJumpsuitPilotAlt
   name: tactical pilot officer flightsuit
   description: A flightsuit worn by pilot officers of the UNMC, with plenty of leather straps, pouches, and other essential gear you will never use. Looks badass.
