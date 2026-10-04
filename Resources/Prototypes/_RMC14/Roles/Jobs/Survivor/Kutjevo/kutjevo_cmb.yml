@@ -8,6 +8,14 @@
   icon: RMCJobIconBureauDeputy
   spawnMenuRoleName: CMB Deputy (Kutjevo Survivor)
   ranks:
+    RMCRankCMBCorporal:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorSecurity
+      time: 630000 # 175 hours
+    RMCRankCMBSeniorDeputy:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorSecurity
+      time: 252000 # 70 hours
     RMCRankCMBDeputy: []
   special:
   - !type:AddComponentSpecial
