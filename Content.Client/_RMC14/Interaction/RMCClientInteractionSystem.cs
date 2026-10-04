@@ -58,17 +58,14 @@ public sealed partial class RMCClientInteractionSystem : EntitySystem
 
         var entityMenuController = _ui.GetUIController<EntityMenuUIController>();
 
-        // Only look for better targets if the target didn't come specifically from the context menu.
-        if (!entityMenuController.HandlingContextMenuInput)
+        // Only look for better targets if
+        // a) we didn't get the target from the context menu, and
+        // b) we have a valid screen to get new targets from
+        if (!entityMenuController.HandlingContextMenuInput
+            && _eyeManager.PixelToMap(_inputManager.MouseScreenPosition) is { } mousePos
+            && mousePos.MapId != MapId.Nullspace
+            && _stateManager.CurrentState is GameplayStateBase screen)
         {
-            var mousePos = _eyeManager.PixelToMap(_inputManager.MouseScreenPosition);
-
-            if (mousePos.MapId == MapId.Nullspace)
-                return false;
-
-            if (_stateManager.CurrentState is not GameplayStateBase screen)
-                return false;
-
             var clickables = screen.GetClickableEntities(mousePos);
 
             foreach (var clickable in clickables)
