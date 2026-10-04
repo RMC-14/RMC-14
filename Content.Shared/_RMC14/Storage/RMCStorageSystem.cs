@@ -1,12 +1,15 @@
 using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.CrashLand;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.HyperSleep;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Medical.CPR;
 using Content.Shared._RMC14.Prototypes;
 using Content.Shared._RMC14.Roles;
+using Content.Shared._RMC14.ShakeStun;
 using Content.Shared._RMC14.Storage.Containers;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Bed.Cryostorage;
@@ -116,10 +119,12 @@ public sealed class RMCStorageSystem : EntitySystem
 
         SubscribeLocalEvent<RMCStorageShakableComponent, GetVerbsEvent<AlternativeVerb>>(OnShakableStorageVerbs);
 
-        SubscribeLocalEvent<InventoryComponent, InteractHandEvent>(_inventory.RelayEvent); // See interact hand for modifying checked for slots
-
-        SubscribeLocalEvent<RMCEquippedStorageOpenOnInteractComponent, InteractHandEvent>(OnEquippedStorageOpenInteractHand);
-        SubscribeLocalEvent<RMCEquippedStorageOpenOnInteractComponent, InventoryRelayedEvent<InteractHandEvent>>(OnEquippedStorageOpenInteractHandRelay);
+        SubscribeLocalEvent<InventoryComponent, InteractHandEvent>(_inventory.RelayEvent, before: [typeof(InteractionPopupSystem)],
+            after: [typeof(StunShakeableSystem), typeof(CPRSystem), typeof(SharedRMCFlammableSystem)]); // See interact hand for modifying checked for slots
+        SubscribeLocalEvent<RMCEquippedStorageOpenOnInteractComponent, InteractHandEvent>(OnEquippedStorageOpenInteractHand, before: [typeof(InteractionPopupSystem)],
+            after: [typeof(StunShakeableSystem), typeof(CPRSystem), typeof(SharedRMCFlammableSystem)]);
+        SubscribeLocalEvent<RMCEquippedStorageOpenOnInteractComponent, InventoryRelayedEvent<InteractHandEvent>>(OnEquippedStorageOpenInteractHandRelay, before: [typeof(InteractionPopupSystem)],
+            after: [typeof(StunShakeableSystem), typeof(CPRSystem), typeof(SharedRMCFlammableSystem)]);
 
         Subs.BuiEvents<StorageCloseOnMoveComponent>(StorageUiKey.Key, subs =>
         {
