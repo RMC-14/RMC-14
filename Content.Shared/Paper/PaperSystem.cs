@@ -17,6 +17,9 @@ using Content.Shared.IdentityManagement.Components;
 using Content.Shared.Mind.Components;
 using Content.Shared.Roles;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
+using Content.Shared.Clock;
+using Content.Shared.GameTicking;
+using Robust.Shared.Timing;
 
 namespace Content.Shared.Paper;
 
@@ -33,6 +36,8 @@ public sealed class PaperSystem : EntitySystem
     [Dependency] private readonly MetaDataSystem _metaSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedIdentitySystem _identitySystem = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedGameTicker _ticker = default!;
 
     private static readonly ProtoId<TagPrototype> WriteIgnoreStampsTag = "WriteIgnoreStamps";
     private static readonly ProtoId<TagPrototype> WriteTag = "Write";
@@ -45,10 +50,12 @@ public sealed class PaperSystem : EntitySystem
 
         SubscribeLocalEvent<PaperComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<PaperComponent, ComponentInit>(OnInit);
+        SubscribeLocalEvent<PaperComponent, ActivatableUIOpenAttemptEvent>(OnUIOpenAttempt);
         SubscribeLocalEvent<PaperComponent, BeforeActivatableUIOpenEvent>(BeforeUIOpen);
         SubscribeLocalEvent<PaperComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<PaperComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<PaperComponent, PaperInputTextMessage>(OnInputTextMessage);
+        SubscribeLocalEvent<PaperComponent, BoundUIClosedEvent>(OnUIClose);
 
         SubscribeLocalEvent<RandomPaperContentComponent, MapInitEvent>(OnRandomPaperContentMapInit);
 
@@ -81,10 +88,29 @@ public sealed class PaperSystem : EntitySystem
         }
     }
 
+    private void OnUIOpenAttempt(Entity<PaperComponent> entity, ref ActivatableUIOpenAttemptEvent args)
+    {
+        if (entity.Comp.EditingPlayer != null && entity.Comp.EditingPlayer != args.User)
+        {
+            _popupSystem.PopupClient(Loc.GetString("paper-component-someone-editing"), entity, args.User);
+            args.Cancel();
+        }
+    }
+
     private void BeforeUIOpen(Entity<PaperComponent> entity, ref BeforeActivatableUIOpenEvent args)
     {
         entity.Comp.Mode = PaperAction.Read;
         UpdateUserInterface(entity);
+    }
+
+    private void OnUIClose(Entity<PaperComponent> entity, ref BoundUIClosedEvent args)
+    {
+        if (entity.Comp.EditingPlayer == args.Actor)
+        {
+            entity.Comp.EditingPlayer = null;
+            entity.Comp.Mode = PaperAction.Read;
+            Dirty(entity);
+        }
     }
 
     private void OnExamined(Entity<PaperComponent> entity, ref ExaminedEvent args)
@@ -149,10 +175,20 @@ public sealed class PaperSystem : EntitySystem
                     return;
                 }
 
+                // Block if someone else is already editing
+                if (entity.Comp.EditingPlayer != null && entity.Comp.EditingPlayer != args.User)
+                {
+                    _popupSystem.PopupClient(Loc.GetString("paper-component-someone-editing"), entity, args.User);
+                    args.Handled = true;
+                    return;
+                }
+
                 var writeEvent = new PaperWriteEvent(args.User, entity);
                 RaiseLocalEvent(args.Used, ref writeEvent);
 
                 entity.Comp.Mode = PaperAction.Write;
+                entity.Comp.EditingPlayer = args.User;
+                Dirty(entity);
                 _uiSystem.OpenUi(entity.Owner, PaperUiKey.Key, args.User);
                 UpdateUserInterface(entity);
             }
@@ -199,7 +235,8 @@ public sealed class PaperSystem : EntitySystem
 
         if (args.Text.Length <= entity.Comp.ContentSize)
         {
-            SetContent(entity, args.Text);
+            var text = SnapshotTimeTags(args.Text);
+            SetContent(entity, text);
 
             var paperStatus = string.IsNullOrWhiteSpace(args.Text) ? PaperStatus.Blank : PaperStatus.Written;
 
@@ -217,6 +254,8 @@ public sealed class PaperSystem : EntitySystem
         }
 
         entity.Comp.Mode = PaperAction.Read;
+        entity.Comp.EditingPlayer = null;
+        Dirty(entity);
         UpdateUserInterface(entity);
     }
 
@@ -432,6 +471,20 @@ public sealed class PaperSystem : EntitySystem
         return text.Replace("[form]", string.Empty)
                   .Replace("[signature]", string.Empty)
                   .Replace("[check]", "☐");
+    }
+
+    /// <summary>
+    /// Replaces time-related tags with in-game time values when saving.
+    /// </summary>
+    private string SnapshotTimeTags(string text)
+    {
+        var timeOffset = EntityQuery<GlobalTimeManagerComponent>().FirstOrDefault()?.TimeOffset ?? TimeSpan.Zero;
+        var dateOffset = EntityQuery<GlobalTimeManagerComponent>().FirstOrDefault()?.DateOffset ?? DateTime.Today.AddYears(100);
+        var worldTime = timeOffset + _ticker.RoundDuration();
+        var worldDate = dateOffset + worldTime;
+
+        return text.Replace("[time]", worldDate.ToString("HH:mm"))
+                  .Replace("[date]", worldDate.ToString("dd/MM/yyyy"));
     }
 }
 

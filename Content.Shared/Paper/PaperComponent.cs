@@ -16,6 +16,12 @@ public sealed partial class PaperComponent : Component
     public int Thickness = 20;
 
     public PaperAction Mode;
+
+    /// <summary>
+    /// The player currently editing this paper, if any.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityUid? EditingPlayer;
     [DataField("content"), AutoNetworkedField]
     public string Content { get; set; } = "";
 

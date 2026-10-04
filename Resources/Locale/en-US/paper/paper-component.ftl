@@ -26,3 +26,4 @@ paper-form-dialog-cancel = Cancel
 paper-signature-unknown = Unknown
 
 paper-tamper-proof-modified-message = This page was written using tamper-proof ink.
+paper-component-someone-editing = Someone else is currently writing on this.
