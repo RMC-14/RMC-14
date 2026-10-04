@@ -678,7 +678,7 @@ entities:
     - type: Transform
       pos: 4.4658246,1.6138201
       parent: 1
-- proto: RMCRC6RiotShield
+- proto: RMCVisorSWAT
   entities:
   - uid: 37
     components:
