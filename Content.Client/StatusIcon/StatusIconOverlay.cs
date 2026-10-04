@@ -7,7 +7,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using System.Numerics;
 using Content.Shared._RMC14.CrashLand;
-using Content.Shared.ParaDrop;
+using Content.Shared._RMC14.ParaDrop;
 
 namespace Content.Client.StatusIcon;
 
