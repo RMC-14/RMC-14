@@ -622,8 +622,6 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/cf5/cf5_utility_red.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/cf5/cf5_utility_red.rsi
-  - type: ItemCamouflage
-    camouflageVariations: {}
 
 - type: entity
   parent: RMCArmorHelmetCF5Utility
@@ -634,5 +632,3 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/cf5/cf5_utility_white.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/cf5/cf5_utility_white.rsi
-  - type: ItemCamouflage
-    camouflageVariations: {}
