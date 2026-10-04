@@ -23,10 +23,10 @@
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
-    recoilWielded: 2
-    recoilUnwielded: 4
-    scatterWielded: 10
-    scatterUnwielded: 20
+    recoilWielded: 0
+    recoilUnwielded: 6
+    scatterWielded: 2
+    scatterUnwielded: 1 #yeah uh i got no fucking clue
     baseFireRate: 1.25
     burstScatterMult: 5
   - type: RMCWeaponAccuracy
@@ -95,6 +95,7 @@
   parent: CMMagazineRifleBase
   id: RMCMagazineRifleHunting
   name: "Basira-Armstrong magazine (6.5mm)"
+  description: A magazine for the Basira-Armstrong hunting rifle. Compliant with the 10-cartridge limit on civilian hunting rifles.
   components:
   - type: Item
     size: Small
@@ -121,8 +122,8 @@
 - type: entity
   parent: CMBaseCartridgeRifle
   id: RMCCartridgeBoltActionRifle
-  name: Cartridge (5.56x45)
-  description: A Cartridge for the Basira-Armstrong hunting rifle. Compliant with the 15-cartridge limit on civilian hunting rifles.
+  name: Cartridge (6.5mm)
+  description: A cartridge for the Basira-Armstrong hunting rifle.
   components:
   - type: Tag
     tags:
@@ -132,7 +133,7 @@
     proto: RMCBulletRifleHunting
 
 - type: entity
-  parent: BulletRifle10x24mm
+  parent: CMBulletSniper10x28mm
   id: RMCBulletRifleHunting
   categories: [ HideSpawnMenu ]
   components:
