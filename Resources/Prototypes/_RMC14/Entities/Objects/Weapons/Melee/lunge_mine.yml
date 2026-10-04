@@ -1,0 +1,46 @@
+- type: entity
+  parent: [ RMCBaseMeleeWeapon, BaseItem ]
+  id: RMCLungeMine
+  name: lunge mine
+  description: A crude but intimidatingly bulky shaped explosive charge, fixed to the end of a pole. To use it, one must grasp it firmly in both hands, and thrust the prongs of the shaped charge into the target. That the resulting explosion occurs directly in front of the user's face was not an apparent concern of the designer. A true hero's weapon.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Melee/lunge_mine.rsi
+    state: icon
+  - type: Item
+    size: Large
+    sprite: _RMC14/Objects/Weapons/Melee/lunge_mine.rsi
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Piercing: 3
+    soundHit:
+      collection: GenericHit
+  - type: Wieldable
+  - type: MeleeRequiresWield
+  - type: LungeMine
+  - type: Explosive
+    explosionType: RMC
+    maxIntensity: 40
+    intensitySlope: 30
+    totalIntensity: 350
+    deleteAfterExplosion: true
+  - type: ExplodeOnTrigger
+  - type: CMExplosionEffect
+    maxShrapnel: 0
+
+- type: entity
+  parent: RMCLungeMine
+  id: RMCLungeMineDamaged
+  name: damaged lunge mine
+  description: A crude but intimidatingly bulky shaped explosive charge, fixed to the end of a pole. To use it, one must grasp it firmly in both hands, and thrust the prongs of the shaped charge into the target. That the resulting explosion occurs directly in front of the user's face was not an apparent concern of the designer. A true hero's weapon. This one seems pretty badly damaged, you probably shouldn't even pick it up from the ground.
+  components:
+  - type: LungeMine
+    gibsWielder: false
+  - type: Explosive
+    explosionType: RMC
+    maxIntensity: 25
+    intensitySlope: 6
+    totalIntensity: 200
+    deleteAfterExplosion: true
