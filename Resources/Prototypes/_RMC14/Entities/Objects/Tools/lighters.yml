@@ -172,3 +172,44 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/cheap_lighter.rsi
       state: helmet
+
+#SPP Lighter
+
+- type: entity
+  name: spp lighter
+  description: A dirty steel industrial lighter in an industrial style, akin to a zippo lighter.
+  parent: RMCLighterBase
+  id: RMCLighterSPP
+  components:
+  - type: Sprite
+    sprite:  _RMC14/Objects/Tools/Lighters/spplighter.rsi
+    layers:
+    - state: closed
+      map: ["base"]
+    - state: open
+      map: ["top"]
+      visible: false
+    - state: open
+      map: ["open"]
+      visible: false
+    - state: lighter_flame
+      map: ["flame"]
+      visible: false
+      shader: unshaded
+  - type: Item
+    size: Tiny
+    sprite: _RMC14/Objects/Tools/Lighters/spplighter.rsi
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
+  - type: RMCLighter
+  - type: ToggleableVisuals
+    spriteLayer: lighter_flame
+    inhandVisuals:
+      left:
+      - state: inhand-left-flame
+        shader: unshaded
+      right:
+      - state: inhand-right-flame
+        shader: unshaded
