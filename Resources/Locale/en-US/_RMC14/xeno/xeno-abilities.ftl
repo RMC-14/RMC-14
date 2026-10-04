@@ -88,6 +88,7 @@ rmc-xeno-evolution-raffle-out-of-line = That caste is no longer within our evolu
 rmc-xeno-evolution-raffle-left-changed = Our new form cannot become that caste. We lose our place in the raffle.
 rmc-xeno-evolution-raffle-left-closed = The hive has made its choice without us. We must evolve the usual way.
 rmc-xeno-evolution-raffle-left-crit = We are too wounded to be chosen. We lose our place in the raffle.
+rmc-xeno-evolution-raffle-progress = {$name} - {$progress}/{$cost}
 rmc-xeno-evolution-tab-evolve = Evolve
 rmc-xeno-evolution-tab-raffle = Raffle
 
