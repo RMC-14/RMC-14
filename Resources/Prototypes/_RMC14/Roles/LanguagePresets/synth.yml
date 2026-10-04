@@ -1,8 +1,8 @@
 # Synth survivor languages
 
 - type: entity
-  id: RMCLanguagePresetSynthColonist
-  name: Survivor Synth Colonist Languages
+  id: RMCLanguagePresetSynth
+  name: Synth Languages
   categories: [ HideSpawnMenu ]
   components:
   - type: LanguagePreset
@@ -28,8 +28,8 @@
     defaultLanguage: English
 
 - type: entity
-  id: RMCLanguageLearningPresetSynthColonist
-  name: Survivor Synth Colonist Language Learning
+  id: RMCLanguageLearningPresetSynth
+  name: Synth Language Learning
   categories: [ HideSpawnMenu ]
   components:
   - type: LanguageLearningPreset
@@ -37,10 +37,18 @@
     - Xeno
     firstContactLanguages:
     - Xeno
+    comprehensionThreshold: 0.8
+    learningRange: 8.0
+    baseWordLearningRate: 0.05
+
+- type: entity
+  parent: RMCLanguageLearningPresetSynth
+  id: RMCLanguageLearningPresetSynthColonist
+  name: Survivor Synth Colonist Language Learning
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: LanguageLearningPreset
     languages:
       Xeno:
         initialBoostedWordCount: 18
         initialBoostedWordComprehension: 0.4
-    comprehensionThreshold: 0.8
-    learningRange: 8.0
-    baseWordLearningRate: 0.05
