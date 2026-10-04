@@ -180,13 +180,13 @@
       collection: XenoFootstepLarge
       params:
         volume: 0
-#  - type: RandomSound
-#    sound:
-#      collection: XenoQueenBreath # TODO RMC14
-#      params:
-#        volume: -10
-#    min: 45
-#    max: 60
+  - type: RandomSound
+    sound:
+      collection: XenoQueenBreath
+      params:
+        volume: 0
+    min: 45
+    max: 60
   - type: SoundOnDeath
     sound:
       path: /Audio/_RMC14/Xeno/alien_queen_died.ogg
