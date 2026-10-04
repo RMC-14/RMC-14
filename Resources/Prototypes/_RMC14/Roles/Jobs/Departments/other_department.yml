@@ -13,5 +13,7 @@
   - CMCorrespondent
   - CMCombatCorrespondent
   - CMMessTech
+  - CMWeYaresponder
+  - CMFreePressResponder
   departmentRadio: null
   headOfDepartment: null

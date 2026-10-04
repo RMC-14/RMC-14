@@ -2,13 +2,17 @@
   parent: RMCJobRibbonBase
   id: CMWeYaresponder
   name: rmc-job-name-weya-responder
-  spawnMenuRoleName: We-Ya Communications Executive (Fax Responder)
   description: rmc-job-description-weya-responder
   playTimeTracker: CMJobWeYaResponder
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobLiaison
+    time: 270000 # 75 hours
+  setPreference: false
   ranks:
     RMCRankWeYaExecutiveSpecialist: []
   startingGear: RMCGearWeYaResponder
-  icon: "CMJobIconEmpty"
+  icon: "CMJobIconLiaison"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-staff
   accessGroups:
@@ -35,15 +39,13 @@
         RMCSkillPowerLoader: 1
         RMCSkillSurgery: 1
         RMCSkillVehicles: 2
-  hasIcon: false
-  hidden: true
 
 - type: startingGear
   id: RMCGearWeYaResponder
   equipment:
-    ears: RMCHeadsetDistressPMCDirector
+    ears: RMCHeadsetWeYaResponder
     eyes: RMCGlassesMedicalHUDGlasses
-    back: CMSatchelFilledFaxResponder
+    back: RMCSatchelFilledFaxResponderWeYa
     belt: CMClipboard
     head: RMCHeadCapWestonYamadaDark
     jumpsuit: CMJumpsuitLiaisonBlack

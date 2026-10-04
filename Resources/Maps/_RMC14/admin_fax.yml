@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 10/20/2025 01:49:28
-  entityCount: 2376
+  time: 09/30/2026 18:51:16
+  entityCount: 2378
 maps:
 - 1
 grids:
@@ -53,7 +53,6 @@ tilemap:
   66: CMPlanetMattedGrass3
   68: CMPlanetMattedGrass4
   85: CMPlanetWood
-  0: Plating
   82: RMCFloorEmpty
   78: RMCFloorHybrisaBlackCarpet
   80: RMCFloorHybrisaBlueCarpet
@@ -9756,7 +9755,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -16151.049
+      secondsUntilStateChange: -16186.598
       state: Opening
   - uid: 1278
     components:
@@ -10028,6 +10027,8 @@ entities:
     - type: Transform
       pos: 43.5,-8.5
       parent: 2
+    - type: Campfire
+      fuel: 5
 - proto: RMCCandle
   entities:
   - uid: 1681
@@ -10584,6 +10585,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 6.5,-26.5
       parent: 2
+    - type: Fixtures
+      fixtures: {}
 - proto: RMCGrassTallSidesIce
   entities:
   - uid: 218
@@ -10592,6 +10595,8 @@ entities:
       rot: 3.141592653589793 rad
       pos: 5.5,-26.5
       parent: 2
+    - type: Fixtures
+      fixtures: {}
 - proto: RMCHandcuffs
   entities:
   - uid: 1172
@@ -12673,6 +12678,20 @@ entities:
     components:
     - type: Transform
       pos: 2.5,-30.5
+      parent: 2
+- proto: RMCSpawnPointFaxResponderFreePress
+  entities:
+  - uid: 2377
+    components:
+    - type: Transform
+      pos: 52.5,-34.5
+      parent: 2
+- proto: RMCSpawnPointFaxResponderWeYa
+  entities:
+  - uid: 2378
+    components:
+    - type: Transform
+      pos: 29.5,-27.5
       parent: 2
 - proto: RMCSprayBottleSpaceCleaner
   entities:

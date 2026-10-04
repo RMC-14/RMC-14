@@ -1,0 +1,30 @@
+# Fax responder headsets: same as the headsets they're based on, but every channel is listen-only
+# and the keys are locked in so they can't be swapped for transmitting ones.
+
+- type: entity
+  parent: RMCHeadsetDistressPMCDirector
+  id: RMCHeadsetWeYaResponder
+  name: We-Ya responder headset
+  description: A special headset used by corporate personnel. This one can only listen.
+  suffix: Fax Responder
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeyWeYaResponder
+  - type: EncryptionKeyHolder
+    keysUnlocked: false
+
+- type: entity
+  parent: CMHeadsetReporter
+  id: RMCHeadsetFreePressResponder
+  name: Free Press responder headset
+  description: Used by the Free Press to keep an ear on the scoop. This one can only listen.
+  suffix: Fax Responder
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeyFreePressResponder
+  - type: EncryptionKeyHolder
+    keysUnlocked: false
