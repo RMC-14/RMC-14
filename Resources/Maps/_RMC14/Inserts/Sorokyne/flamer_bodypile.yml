@@ -895,7 +895,7 @@ entities:
     - type: Transform
       pos: 6.5,8.5
       parent: 1
-- proto: RMCWeaponFlamerSPP
+- proto: RMCWeaponFlamerSPPM34Compatible
   entities:
   - uid: 92
     components:
