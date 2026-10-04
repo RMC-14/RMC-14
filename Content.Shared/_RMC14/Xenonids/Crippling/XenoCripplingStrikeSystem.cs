@@ -32,6 +32,7 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
 
         SubscribeLocalEvent<XenoActiveCripplingStrikeComponent, MeleeHitEvent>(OnXenoCripplingStrikeHit);
         SubscribeLocalEvent<XenoActiveCripplingStrikeComponent, MeleeAttackAttemptEvent>(OnActiveCripplingStrikeMeleeAttempt);
+        SubscribeLocalEvent<XenoActiveCripplingStrikeComponent, BlockDisarmResetEvent>(OnBlockDisarmResetEvent);
         SubscribeLocalEvent<XenoActiveCripplingStrikeComponent, RefreshMovementSpeedModifiersEvent>(OnActiveCripplingRefreshSpeed);
         SubscribeLocalEvent<XenoActiveCripplingStrikeComponent, ComponentRemove>(OnActiveCripplingRemove);
 
@@ -144,6 +145,12 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
                 args.Attack = new LightAttackEvent(disarm.Target, netAttacker, disarm.Coordinates);
                 break;
         }
+    }
+
+    private void OnBlockDisarmResetEvent(Entity<XenoActiveCripplingStrikeComponent> xeno, ref BlockDisarmResetEvent ev)
+    {
+        if (xeno.Comp.Running)
+            ev.Cancelled = true;
     }
 
     public override void Update(float frameTime)
