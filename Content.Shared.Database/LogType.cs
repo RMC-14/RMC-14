@@ -527,4 +527,6 @@ public enum LogType
     RMCAutodocSurgeryAbort = RMCMarineAnnounce + 45,
     RMCXenoPsychic = RMCMarineAnnounce + 46,
     RMCElevatorLaunched = RMCMarineAnnounce + 47,
+    RMCXenoBanish = RMCMarineAnnounce + 48,
+    RMCXenoReadmit = RMCMarineAnnounce + 49,
 }
