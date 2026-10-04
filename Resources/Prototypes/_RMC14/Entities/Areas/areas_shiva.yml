@@ -247,6 +247,8 @@
   components:
   - type: Sprite
     state: junkyard1
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaShivaExterior
@@ -263,6 +265,8 @@
   components:
   - type: Sprite
     state: junkyard2
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaShivaExterior
@@ -287,6 +291,8 @@
   components:
   - type: Sprite
     state: bar0
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaShivaExterior
@@ -295,6 +301,8 @@
   components:
   - type: Sprite
     state: junkyard1
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaShivaExterior
@@ -341,6 +349,8 @@
   components:
   - type: Sprite
     state: caves1
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaShivaInteriorCaves
@@ -379,6 +389,7 @@
   - type: Sprite
     state: caves2
   - type: Area
+    xenoHiveSetupRestriction: null
     minimapColor: '#2D1342EE'
 
 - type: entity
@@ -388,6 +399,8 @@
   components:
   - type: Sprite
     state: caves3
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaShivaInterior
@@ -450,6 +463,8 @@
   components:
   - type: Sprite
     state: res2
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaShivaInteriorColony
@@ -458,6 +473,8 @@
   components:
   - type: Sprite
     state: res0
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaShivaInteriorColony
@@ -529,6 +546,8 @@
   components:
   - type: Sprite
     state: hangars1
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaShivaInteriorValleyHuts
@@ -537,6 +556,8 @@
   components:
   - type: Sprite
     state: hangars2
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaShivaInteriorValleyHuts
@@ -545,6 +566,8 @@
   components:
   - type: Sprite
     state: hangars3
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaShivaInterior
@@ -553,6 +576,8 @@
   components:
   - type: Sprite
     state: hangars2
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaShivaInterior
