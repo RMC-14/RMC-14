@@ -1,2 +1,9 @@
 rmc-mine-deploy-fail-occupied = There already is a mine at this position!
 rmc-explosive-deploy-container = It's too cramped in here to deploy the {$explosive}
+rmc-explosive-cannot-stick-same-faction = ARE YOU OUT OF YOUR MIND?!
+rmc-c4-acid-start = You start dissolving {$explosive} with acid.
+rmc-c4-acid-finish = You dissolve {$explosive} with acid.
+rmc-c4-acid-too-weak = Your acid is too weak to dissolve {$explosive}.
+rmc-c4-disarm-start = You start disarming {$explosive}.
+rmc-c4-disarm-stop = You stop disarming {$explosive}.
+rmc-c4-disarm-finish = You finish disarming {$explosive}.
