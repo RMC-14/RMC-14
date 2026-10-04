@@ -93,7 +93,20 @@
   - type: GhostRolePreventCryoSleep
   - type: GhostRoleApplySpecial
 
-# squads
+- type: entity
+  parent: MarkerBase
+  id: RMCNewGhostBase
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RMCGhostRole
+    addComponents:
+    - type: RandomizeName
+    remaining: 1
+
+# alpha
 - type: randomHumanoidSettings
   parent: RMCRandomHumanoidBase
   id: RMCAlphaBase
@@ -101,6 +114,17 @@
   - type: GhostRoleApplySpecial
     squad: SquadAlpha
 
+- type: entity
+  parent: RMCNewGhostBase
+  id: RMCNewAlphaBase
+  abstract: true
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: AssignSquad
+      squad: SquadAlpha
+
+# bravo
 - type: randomHumanoidSettings
   parent: RMCRandomHumanoidBase
   id: RMCBravoBase
@@ -108,6 +132,17 @@
   - type: GhostRoleApplySpecial
     squad: SquadBravo
 
+- type: entity
+  parent: RMCNewGhostBase
+  id: RMCNewBravoBase
+  abstract: true
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: AssignSquad
+      squad: SquadBravo
+
+# charlie
 - type: randomHumanoidSettings
   parent: RMCRandomHumanoidBase
   id: RMCCharlieBase
@@ -115,6 +150,17 @@
   - type: GhostRoleApplySpecial
     squad: SquadCharlie
 
+- type: entity
+  parent: RMCNewGhostBase
+  id: RMCNewCharlieBase
+  abstract: true
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: AssignSquad
+      squad: SquadCharlie
+
+# delta
 - type: randomHumanoidSettings
   parent: RMCRandomHumanoidBase
   id: RMCDeltaBase
@@ -122,6 +168,17 @@
   - type: GhostRoleApplySpecial
     squad: SquadDelta
 
+- type: entity
+  parent: RMCNewGhostBase
+  id: RMCNewDeltaBase
+  abstract: true
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: AssignSquad
+      squad: SquadDelta
+
+# echo
 - type: randomHumanoidSettings
   parent: RMCRandomHumanoidBase
   id: RMCEchoBase
@@ -129,6 +186,17 @@
   - type: GhostRoleApplySpecial
     squad: SquadEcho
 
+- type: entity
+  parent: RMCNewGhostBase
+  id: RMCNewEchoBase
+  abstract: true
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: AssignSquad
+      squad: SquadEcho
+
+# foxtrot
 - type: randomHumanoidSettings
   parent: RMCRandomHumanoidBase
   id: RMCFoxtrotBase
@@ -136,6 +204,17 @@
   - type: GhostRoleApplySpecial
     squad: SquadFoxtrot
 
+- type: entity
+  parent: RMCNewGhostBase
+  id: RMCNewFoxtrotBase
+  abstract: true
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: AssignSquad
+      squad: SquadFoxtrot
+
+# intel
 - type: randomHumanoidSettings
   parent: RMCRandomHumanoidBase
   id: RMCIntelBase
@@ -143,9 +222,30 @@
   - type: GhostRoleApplySpecial
     squad: SquadIntel
 
+- type: entity
+  parent: RMCNewGhostBase
+  id: RMCNewIntelBase
+  abstract: true
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: AssignSquad
+      squad: SquadIntel
+
+# unassigned
 - type: randomHumanoidSettings
   parent: RMCRandomHumanoidBase
   id: RMCUnassignedBase
   components:
   - type: GhostRoleApplySpecial
     squad: SquadUnassigned
+
+- type: entity
+  parent: RMCNewGhostBase
+  id: RMCNewUnassignedBase
+  abstract: true
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: AssignSquad
+      squad: SquadUnassigned
