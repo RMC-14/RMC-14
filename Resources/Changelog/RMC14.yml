@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: '- Simon'
-  changes:
-  - message: Timed Impen Walls to trijent
-    type: Add
-  id: 3191
-  time: '2026-05-14T10:26:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9791
 - author: yagwog
   changes:
   - message: Added impenetrable walls to Chances Claim
@@ -4500,5 +4493,12 @@
   id: 3690
   time: '2026-10-01T21:27:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9455
+- author: CyberTropic
+  changes:
+  - message: Fixed containers leaving their contents behind on map inserts.
+    type: Fix
+  id: 3691
+  time: '2026-10-04T01:33:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10948
 Name: RMC14
 Order: -1
