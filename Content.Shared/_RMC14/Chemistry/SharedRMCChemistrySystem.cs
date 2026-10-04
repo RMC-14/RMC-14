@@ -1,4 +1,5 @@
-﻿using System.Linq;
+using Content.Shared._RMC14.ARES;
+using Content.Shared._RMC14.ARES.Logs;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Scaling;
 using Content.Shared.Chemistry.Components;
@@ -14,11 +15,13 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using System.Linq;
 
 namespace Content.Shared._RMC14.Chemistry;
 
 public abstract class SharedRMCChemistrySystem : EntitySystem
 {
+    [Dependency] private readonly ARESCoreSystem _core = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
@@ -31,6 +34,7 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private readonly List<Entity<RMCChemicalDispenserComponent>> _dispensers = new();
+    private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabMedicalLogs";
 
     public override void Initialize()
     {
@@ -288,6 +292,8 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
 
         ChangeStorageEnergy(storage, storage.Comp.Energy - cost);
         _solution.TryAddReagent(solutionEnt.Value, args.Reagent, ent.Comp.DispenseSetting);
+
+        _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} dispensed {dispense}u of {args.Reagent}.");
     }
 
     public bool TryGetStorage(EntProtoId network, out Entity<RMCChemicalStorageComponent> storage)
