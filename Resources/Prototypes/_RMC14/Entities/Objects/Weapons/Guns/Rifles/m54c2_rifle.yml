@@ -26,6 +26,8 @@
     - FullAuto
     soundGunshot:
       collection: CMM54CShoot
+      params:
+        volume: -1
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
