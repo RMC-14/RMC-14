@@ -115,10 +115,6 @@
   job: CMProvostDeputyMarshal
 
 - type: trackerMode
-  id: ProvostChiefInspector
-  job: CMProvostChiefInspector
-
-- type: trackerMode
   id: ProvostInspector
   job: CMProvostInspector
 
@@ -150,7 +146,7 @@
   id: FORECONCommandingOfficer
   job: RMCSurvivorForeconCommander
   alert: SquadTrackerCommandingOfficer
-  
+
 - type: trackerMode
   id: ParaTeamLeader
   job: RMCSurvivorParaTeamLeader
