@@ -83,6 +83,29 @@ public sealed partial class PaperComponent : Component
         }
     }
 
+    /// <summary>
+    /// Sent when a player clicks a [date] or [time] button, asking the server to fill it with the in-game date or time.
+    /// </summary>
+    [Serializable, NetSerializable]
+    public sealed class PaperTimeStampRequestMessage : BoundUserInterfaceMessage
+    {
+        public readonly PaperTimeStampType Type;
+        public readonly int Index;
+
+        public PaperTimeStampRequestMessage(PaperTimeStampType type, int index)
+        {
+            Type = type;
+            Index = index;
+        }
+    }
+
+    [Serializable, NetSerializable]
+    public enum PaperTimeStampType : byte
+    {
+        Date,
+        Time,
+    }
+
     [Serializable, NetSerializable]
     public enum PaperUiKey
     {

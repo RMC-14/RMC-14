@@ -19,7 +19,6 @@ using Content.Shared.Roles;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared.Clock;
 using Content.Shared.GameTicking;
-using Robust.Shared.Timing;
 
 namespace Content.Shared.Paper;
 
@@ -36,7 +35,6 @@ public sealed class PaperSystem : EntitySystem
     [Dependency] private readonly MetaDataSystem _metaSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedIdentitySystem _identitySystem = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedGameTicker _ticker = default!;
 
     private static readonly ProtoId<TagPrototype> WriteIgnoreStampsTag = "WriteIgnoreStamps";
@@ -61,6 +59,7 @@ public sealed class PaperSystem : EntitySystem
 
         SubscribeLocalEvent<ActivateOnPaperOpenedComponent, PaperWriteEvent>(OnPaperWrite);
         SubscribeLocalEvent<PaperComponent, PaperSignatureRequestMessage>(OnSignatureRequest);
+        SubscribeLocalEvent<PaperComponent, PaperTimeStampRequestMessage>(OnTimeStampRequest);
 
         _paperQuery = GetEntityQuery<PaperComponent>();
     }
@@ -235,8 +234,7 @@ public sealed class PaperSystem : EntitySystem
 
         if (args.Text.Length <= entity.Comp.ContentSize)
         {
-            var text = SnapshotTimeTags(args.Text);
-            SetContent(entity, text);
+            SetContent(entity, args.Text);
 
             var paperStatus = string.IsNullOrWhiteSpace(args.Text) ? PaperStatus.Blank : PaperStatus.Written;
 
@@ -366,11 +364,45 @@ public sealed class PaperSystem : EntitySystem
     private void OnSignatureRequest(Entity<PaperComponent> entity, ref PaperSignatureRequestMessage args)
     {
         var signature = GetPlayerSignature(args.Actor);
-        var newText = ReplaceNthSignatureTag(entity.Comp.Content, args.SignatureIndex, signature);
+        var newText = ReplaceNthTag(entity.Comp.Content, "[signature]", args.SignatureIndex, signature);
         SetContent(entity, newText);
 
         _adminLogger.Add(LogType.Chat, LogImpact.Low,
             $"{ToPrettyString(args.Actor):player} signed {ToPrettyString(entity):entity} with signature: {signature}");
+    }
+
+    private void OnTimeStampRequest(Entity<PaperComponent> entity, ref PaperTimeStampRequestMessage args)
+    {
+        var worldDate = GetWorldDateTime();
+        var (tag, value) = args.Type switch
+        {
+            PaperTimeStampType.Date => ("[date]", worldDate.ToString("dd/MM/yyyy")),
+            PaperTimeStampType.Time => ("[time]", worldDate.ToString("HH:mm")),
+            _ => (string.Empty, string.Empty),
+        };
+
+        if (tag == string.Empty)
+            return;
+
+        var newText = ReplaceNthTag(entity.Comp.Content, tag, args.Index, value);
+        if (newText == entity.Comp.Content)
+            return;
+
+        SetContent(entity, newText);
+
+        _adminLogger.Add(LogType.Chat, LogImpact.Low,
+            $"{ToPrettyString(args.Actor):player} filled {tag} on {ToPrettyString(entity):entity} with: {value}");
+    }
+
+    /// <summary>
+    /// Gets the current in-game date and time, using the same offsets as clocks and calendars.
+    /// </summary>
+    private DateTime GetWorldDateTime()
+    {
+        var manager = EntityQuery<GlobalTimeManagerComponent>().FirstOrDefault();
+        var worldTime = (manager?.TimeOffset ?? TimeSpan.Zero) + _ticker.RoundDuration();
+        var dateOffset = manager?.DateOffset ?? DateTime.Today.AddYears(100);
+        return dateOffset + worldTime;
     }
 
     /// <summary>
@@ -435,33 +467,32 @@ public sealed class PaperSystem : EntitySystem
     }
 
     /// <summary>
-    /// Replaces the nth occurrence of [signature] tag with replacement text.
+    /// Replaces the nth occurrence of a tag (e.g. [signature], [date]) with replacement text.
     /// </summary>
-    private static string ReplaceNthSignatureTag(string text, int index, string replacement)
+    private static string ReplaceNthTag(string text, string tag, int index, string replacement)
     {
-        const string signatureTag = "[signature]";
         var currentIndex = 0;
         var pos = 0;
 
         while (pos < text.Length)
         {
-            var foundPos = text.IndexOf(signatureTag, pos);
+            var foundPos = text.IndexOf(tag, pos, StringComparison.Ordinal);
             if (foundPos == -1) break;
 
             if (currentIndex == index)
             {
-                return text.Substring(0, foundPos) + replacement + text.Substring(foundPos + signatureTag.Length);
+                return text.Substring(0, foundPos) + replacement + text.Substring(foundPos + tag.Length);
             }
 
             currentIndex++;
-            pos = foundPos + signatureTag.Length;
+            pos = foundPos + tag.Length;
         }
 
         return text;
     }
 
     /// <summary>
-    /// Removes any unfilled [form] and [signature] tags, and converts [check] tags to ☐.
+    /// Removes any unfilled [form], [signature], [date] and [time] tags, and converts [check] tags to ☐.
     /// Called when the paper is stamped to finalize the document.
     /// </summary>
     /// <param name="text">The paper text to clean</param>
@@ -470,21 +501,9 @@ public sealed class PaperSystem : EntitySystem
     {
         return text.Replace("[form]", string.Empty)
                   .Replace("[signature]", string.Empty)
+                  .Replace("[date]", string.Empty)
+                  .Replace("[time]", string.Empty)
                   .Replace("[check]", "☐");
-    }
-
-    /// <summary>
-    /// Replaces time-related tags with in-game time values when saving.
-    /// </summary>
-    private string SnapshotTimeTags(string text)
-    {
-        var timeOffset = EntityQuery<GlobalTimeManagerComponent>().FirstOrDefault()?.TimeOffset ?? TimeSpan.Zero;
-        var dateOffset = EntityQuery<GlobalTimeManagerComponent>().FirstOrDefault()?.DateOffset ?? DateTime.Today.AddYears(100);
-        var worldTime = timeOffset + _ticker.RoundDuration();
-        var worldDate = dateOffset + worldTime;
-
-        return text.Replace("[time]", worldDate.ToString("HH:mm"))
-                  .Replace("[date]", worldDate.ToString("dd/MM/yyyy"));
     }
 }
 

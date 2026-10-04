@@ -21,6 +21,8 @@ paper-ui-save-button = Save ({$keybind})
 # Form and signature buttons
 paper-form-fill-button = Fill
 paper-signature-sign-button = Sign
+paper-date-button = Date
+paper-time-button = Time
 paper-form-dialog-ok = OK
 paper-form-dialog-cancel = Cancel
 paper-signature-unknown = Unknown
