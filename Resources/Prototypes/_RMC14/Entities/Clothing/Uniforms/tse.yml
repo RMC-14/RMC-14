@@ -143,11 +143,11 @@
 
 - type: entity
   parent: RMCJumpsuitMarinePara
-  id: RMCJumpsuitMarineParaL88
-  suffix: Survivor, Paramarine, Webbing, L88
+  id: RMCJumpsuitMarineParaE290
+  suffix: Survivor, Paramarine, Webbing, E290
   components:
     - type: WebbingClothing
-      startingWebbing: RMCParaWebbingL88
+      startingWebbing: RMCParaWebbingE290
 
 - type: entity
   parent: RMCJumpsuitMarinePara
