@@ -104,6 +104,69 @@
   - sprite: _RMC14/Mobs/Feroxi/snout_markings.rsi
     state: feroxi-snout-nurse
 
+- type: marking
+  id: FeroxiSnoutBullRound
+  bodyPart: Snout
+  markingCategory: Snout
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/snout_markings.rsi
+    state: feroxi-bull-round
+
+- type: marking
+  id: FeroxiSnoutBullSharp
+  bodyPart: Snout
+  markingCategory: Snout
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/snout_markings.rsi
+    state: feroxi-bull-sharp
+
+- type: marking
+  id: FeroxiSnoutGoblin
+  bodyPart: Snout
+  markingCategory: Snout
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/snout_markings.rsi
+    state: feroxi-goblin
+
+- type: marking
+  id: FeroxiSnoutGreatWhiteRound
+  bodyPart: Snout
+  markingCategory: Snout
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/snout_markings.rsi
+    state: feroxi-great-white-round
+
+- type: marking
+  id: FeroxiSnoutGreatWhiteSharp
+  bodyPart: Snout
+  markingCategory: Snout
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/snout_markings.rsi
+    state: feroxi-great-white-sharp
+
+- type: marking
+  id: FeroxiSnoutLeopard
+  bodyPart: Snout
+  markingCategory: Snout
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/snout_markings.rsi
+    state: feroxi-leopard
+
+- type: marking
+  id: FeroxiSnoutMako
+  bodyPart: Snout
+  markingCategory: Snout
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/snout_markings.rsi
+    state: feroxi-mako
+
 # Tail Markings
 - type: marking
   id: FeroxiTail
