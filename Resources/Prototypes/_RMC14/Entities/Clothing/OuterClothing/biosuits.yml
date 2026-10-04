@@ -128,6 +128,32 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/firefighter.rsi
 
 - type: entity
+  parent: RMCArmorSPPFirefighter
+  id: RMCArmorSPPFirefighterSynth
+  name: T-20 synthetic fire response coat
+  components:
+  - type: CMArmor
+    melee: 0
+    bullet: 0
+    bio: 0
+    explosionArmor: 0
+  - type: RMCArmorSpeedTier
+    speedTier: super light
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_SUPER_LIGHT
+    walkModifier: 0.949
+    sprintModifier: 0.949
+  - type: Clothing
+    equipDelay: 1
+    unequipDelay: 0.5
+  - type: Storage
+    grid:
+    - 0,0,7,1 # 4 slots
+    maxItemSize: Small
+  - type: Tag
+    tags:
+    - RMCSynthAllowedArmor
+
+- type: entity
   parent: RMCBaseBioSuit
   id: RMCSuitBioWeYa
   name: WeYa-TSS MK I - bio suit

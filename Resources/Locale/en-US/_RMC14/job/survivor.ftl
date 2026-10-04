@@ -289,6 +289,9 @@ rmc-job-name-survivor-soro-miner = Jùtóu Combine - Shakhtyor
 
 rmc-job-name-survivor-halcyon-dynamics-liaison = Halcyon Dynamics - Corporate Liaison
 
+rmc-job-name-survivor-halcyon-dynamics-synth = Halcyon Dynamics - Security Guard Synthetic
+rmc-job-prefix-halcyon-dynamics-synth = HC Sec Syn
+
 # Sorokyne SOF insert survs
 
 rmc-job-greeting-soro-sof = You are a member of an SPP SOF QRF team! Your primary objective is to survive. You believe a second dropship crashed somewhere to the south west, which was carrying additional weapons. You are part of an SOF QRF team of the Socialist Progressive Peoples, deployed alongside the Ministry of Space Colonization to build garrisons on distant worlds. On the return trip from the frontier, you receive a distress signal from the Peoples' colony of 'Sorokyne Strata' on the planet 'Thermae I' (LV-976). Your team is sent to investigate. Intel suggests CLF separatists or a UN/TSE incursion, but as you touch down in the hangar, something feels wrong. No welcome party. No usual hustle of a working colony. Nothing to suggest an incursion of any kind. Your mission is clear—find out what happened to your supply ship and comrades, retrieve your equipment, and uncover the truth of what really happened to the colony.
