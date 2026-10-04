@@ -5,6 +5,7 @@
   description: Increases gun accuracy for nearby marines.
   components:
   - type: Action
+    checkCanInteract: false
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/marine_actions.rsi
@@ -19,6 +20,7 @@
   description: Increases damage resistance for nearby marines.
   components:
   - type: Action
+    checkCanInteract: false
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/marine_actions.rsi
@@ -33,6 +35,7 @@
   description: Increases speed for nearby marines. [color=red]This won't affect anyone without armor![/color]
   components:
   - type: Action
+    checkCanInteract: false
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/marine_actions.rsi
