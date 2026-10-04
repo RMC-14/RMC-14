@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Stun;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Maths;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Vehicle;
 
@@ -83,6 +84,9 @@ public sealed partial class GridVehicleMoverComponent : Component
     [DataField, AutoNetworkedField]
     public float ReverseAcceleration = 4f;
 
+    [DataField, AutoNetworkedField]
+    public float WeedsSpeedFactor = 1f;
+
     /// <summary>
     /// forward offset used when placing the vehicle on tiles
     /// </summary>
@@ -141,7 +145,7 @@ public sealed partial class GridVehicleMoverComponent : Component
     /// delay before the vehicle can be pushed again
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float PushCooldown = 2f;
+    public float PushCooldown = 1f;
 
     /// <summary>
     /// minimum speed applied when a xeno shove starts
@@ -227,6 +231,9 @@ public sealed partial class GridVehicleMoverComponent : Component
     [DataField, AutoNetworkedField]
     public RMCSizes? XenoBlockMinimumSize;
 
+    [DataField, AutoNetworkedField]
+    public VehicleWeightClass WeightClass = VehicleWeightClass.Weak;
+
     /// <summary>
     /// whether xenos are allowed to push this vehicle
     /// </summary>
@@ -274,4 +281,13 @@ public sealed partial class GridVehicleMoverComponent : Component
     /// </summary>
     [AutoNetworkedField]
     public TimeSpan SmashSlowdownUntil;
+}
+
+[Serializable, NetSerializable]
+public enum VehicleWeightClass : byte
+{
+    Weak,
+    Light,
+    Medium,
+    Heavy,
 }
