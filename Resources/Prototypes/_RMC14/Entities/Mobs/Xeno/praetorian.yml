@@ -390,6 +390,8 @@
     damage:
       groups:
         Brute: 15
+  - type: XenoFishing
+    failChance: 0.3 # Fish fear her
   - type: XenoHidden
   - type: RMCActionOrder
     id: RMCXenoPraetorianOppressor

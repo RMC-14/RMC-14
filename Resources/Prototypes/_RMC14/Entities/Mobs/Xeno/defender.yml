@@ -109,6 +109,8 @@
     name: cm-job-name-xeno-defender
   - type: RMCSurgeryXenoHeart
     item: RMCOrganXenoHeartT1
+  - type: XenoFishing
+    failChance: 0.9 # They are not stabbing fish
 
 - type: entity
   parent: CMXenoDefenderBase

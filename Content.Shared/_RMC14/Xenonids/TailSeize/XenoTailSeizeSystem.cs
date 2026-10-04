@@ -1,10 +1,14 @@
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
+using Content.Shared._RMC14.Fishing;
+using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Hook;
 using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Coordinates;
+using Content.Shared.Fishing;
 using Content.Shared.Projectiles;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee;
@@ -30,6 +34,7 @@ public sealed class XenoTailSeizeSystem : EntitySystem
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
     [Dependency] private readonly RMCObstacleSlammingSystem _obstacleSlamming = default!;
+    [Dependency] private readonly SharedRMCFishingSystem _fishing = default!;
 
     public override void Initialize()
     {
@@ -40,7 +45,9 @@ public sealed class XenoTailSeizeSystem : EntitySystem
         SubscribeLocalEvent<VictimTailSeizedComponent, StopThrowEvent>(OnSeizeEnd);
 
         SubscribeLocalEvent<XenoHookComponent, AmmoShotEvent>(OnHookMade);
+
         SubscribeLocalEvent<XenoHookOnHitComponent, ProjectileHitEvent>(OnHookHit);
+        SubscribeLocalEvent<XenoHookOnHitComponent, BeforeProjectileMaxRangeDeleteEvent>(OnHookMiss);
     }
 
     private void OnHookMade(Entity<XenoHookComponent> hook, ref AmmoShotEvent args)
@@ -59,26 +66,47 @@ public sealed class XenoTailSeizeSystem : EntitySystem
         if (!_xeno.CanAbilityAttackTarget(args.Shooter.Value, args.Target))
             return;
 
-        if (!TryComp<XenoHookComponent>(args.Shooter, out var hookComp))
+        args.Handled = true;
+
+        HookTarget(hook, args.Shooter, args.Target);
+    }
+
+    private void HookTarget(Entity<XenoHookOnHitComponent> hook, EntityUid? xeno, EntityUid hit)
+    {
+        if (!TryComp<XenoHookComponent>(xeno, out var hookComp))
             return;
 
-        if (!_hook.TryHookTarget((args.Shooter.Value, hookComp), args.Target))
+        if (!_hook.TryHookTarget((xeno.Value, hookComp), hit))
             return;
 
-        _pulling.TryStopAllPullsFromAndOn(args.Target);
+        _pulling.TryStopAllPullsFromAndOn(hit);
 
-        var origin = _transform.GetMoverCoordinates(args.Shooter.Value);
-        var mapCoords = _transform.GetMapCoordinates(args.Shooter.Value);
-        var target = _transform.GetMoverCoordinates(args.Target);
+        var origin = _transform.GetMoverCoordinates(xeno.Value);
+        var mapCoords = _transform.GetMapCoordinates(xeno.Value);
+        var target = _transform.GetMoverCoordinates(hit);
         if (!origin.TryDistance(EntityManager, target, out var dis))
             return;
 
         var knockBackDistance = dis < hook.Comp.TargetStopDistance
             ? -hook.Comp.MinimumHookDistance
             : -(dis - hook.Comp.TargetStopDistance);
-        _obstacleSlamming.MakeImmune(args.Target);
-        _size.KnockBack(args.Target, mapCoords, knockBackDistance, knockBackDistance, 10);
-        EnsureComp<VictimTailSeizedComponent>(args.Target);
+        _obstacleSlamming.MakeImmune(hit);
+        _size.KnockBack(hit, mapCoords, knockBackDistance, knockBackDistance, 10, true);
+        EnsureComp<VictimTailSeizedComponent>(hit);
+    }
+
+    private void OnHookMiss(Entity<XenoHookOnHitComponent> hook, ref BeforeProjectileMaxRangeDeleteEvent args)
+    {
+        if (!TryComp<ProjectileComponent>(hook, out var projectile) || projectile.ProjectileSpent)
+            return;
+
+        if (projectile.Shooter != null && TryComp<XenoFishingComponent>(projectile.Shooter, out var fishing))
+        {
+            _fishing.DoXenoFish((projectile.Shooter.Value, fishing), Transform(hook.Owner).Coordinates, out var caught, false, false);
+
+            if (caught != null)
+                HookTarget(hook, projectile.Shooter, caught.Value);
+        }
     }
 
     private void OnSeizeEnd(Entity<VictimTailSeizedComponent> victim, ref StopThrowEvent args)
