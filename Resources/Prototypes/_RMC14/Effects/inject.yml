@@ -1,0 +1,10 @@
+- type: entity
+  parent: [WeaponArcFist, RMCBaseEffect]
+  id: RMCWeaponArcSyringe
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.4
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/syringe.rsi
+    state: syringe
