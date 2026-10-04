@@ -54,3 +54,8 @@
       Snow: "#ddcbc9"
       Classic: "#c7e7d9"
       Urban: "#acb8c7"
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-m83
+    whitelist:
+      components:
+      - Xeno
