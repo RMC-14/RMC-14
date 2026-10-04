@@ -66,14 +66,14 @@
 - type: startingGear
   id: RMCGearSurvivorUNMCVehicleCrewman
   equipment:
-    jumpsuit: JumpsuitMarine
+    jumpsuit: RMCJumpsuitMarineNV
     ears: RMCHeadsetMarineNV
     gloves: RMCHandsVeteran
     id: CMIDCardStandardDogtag
     pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchToolsFill
-    back: CMSatchelMarineTech
-    shoes: CMBootsBlackFilled
+    back: RMCSatchelNV
+    shoes: CMBootsUrbanFilled
   storage:
     back:
       - CMSheetMetal20
@@ -88,9 +88,9 @@
   components:
     - type: EntityPreset
       randomOutfits:
-        - [ CMArmorHelmetM50, RMCCoatService ]
-        - [ RMCWeldingGoggles, RMCJacketWindbreaker, CMSheetPlasteel10 ]
-        - [ RMCWeldingGoggles, RMCHazardVestBlack ]
+        - [ RMCArmorHelmetCF5Utiltiy, RMCOuterClothingExternalWebbingNV ]
+        - [ RMCWeldingGoggles, RMCArmorPDU ]
+        - [ RMCWeldingGoggles, RMCOuterClothingExternalWebbingNV ]
 
 - type: jobIcon
   parent: CMJobIconBase

@@ -76,15 +76,15 @@
   components:
   - type: EntityPreset
     randomOutfits:
-    - [ CMSatchel, RMCLabcoatScience, RMCJumpsuitCivilianScientist, CMBootsBlackFilled ]
-    - [ CMSatchel, RMCLabcoatScience, RMCJumpsuitCivilianScientist, CMBootsBlackFilled ]
-    - [ CMSatchel, RMCLabcoatScience, RMCJumpsuitCivilianScientist, CMBootsBlackFilled ]
-    - [ RMCHoodBioWeYaAlt, CMHandsBrown, RMCSuitBioWeYa, RMCJumpsuitCivilianScientist, RMCSatchelLightpack5Slot, CMBootsBlackFilled ]
-    - [ RMCHoodBioWeYaAlt, CMHandsBrown, RMCSuitBioWeYa, RMCJumpsuitCivilianScientist, RMCSatchelLightpack5Slot, CMBootsBlackFilled ]
-    - [ RMCHoodBioWeYaAlt, CMHandsBrown, RMCSuitBioWeYa, RMCJumpsuitCivilianScientist, RMCSatchelLightpack5Slot, CMBootsBlackFilled ]
-    - [ RMCHoodBioWeYaAlt, CMHandsBrown, RMCSuitBioWeYa, CMJumpsuitResearch, RMCSatchelLightpack5Slot, CMBootsBlackFilled ]
-    - [ RMCHoodBioWeYaAlt, CMHandsBrown, RMCSuitBioWeYa, CMJumpsuitResearch, RMCSatchelLightpack5Slot, CMBootsBlackFilled ]
-    - [ RMCHoodBioWeYaAlt, CMHandsBrown, RMCSuitBioWeYa, CMJumpsuitResearch, RMCSatchelLightpack5Slot, CMBootsBlackFilled ]
+    - [ CMSatchel, RMCLabcoatScience, RMCJumpsuitCivilianScientist, CMBootsUrbanFilled ]
+    - [ CMSatchel, RMCLabcoatScience, RMCJumpsuitCivilianScientist, CMBootsUrbanFilled ]
+    - [ CMSatchel, RMCLabcoatScience, RMCJumpsuitCivilianScientist, CMBootsUrbanFilled ]
+    - [ RMCHoodBioWeYaAlt, CMHandsBrown, RMCSuitBioWeYa, RMCJumpsuitCivilianScientist, RMCSatchelLightpack5Slot, CMBootsUrbanFilled ]
+    - [ RMCHoodBioWeYaAlt, CMHandsBrown, RMCSuitBioWeYa, RMCJumpsuitCivilianScientist, RMCSatchelLightpack5Slot, CMBootsUrbanFilled ]
+    - [ RMCHoodBioWeYaAlt, CMHandsBrown, RMCSuitBioWeYa, RMCJumpsuitCivilianScientist, RMCSatchelLightpack5Slot, CMBootsUrbanFilled ]
+    - [ RMCHoodBioWeYaAlt, CMHandsBrown, RMCSuitBioWeYa, CMJumpsuitResearch, RMCSatchelLightpack5Slot, CMBootsUrbanFilled ]
+    - [ RMCHoodBioWeYaAlt, CMHandsBrown, RMCSuitBioWeYa, CMJumpsuitResearch, RMCSatchelLightpack5Slot, CMBootsUrbanFilled ]
+    - [ RMCHoodBioWeYaAlt, CMHandsBrown, RMCSuitBioWeYa, CMJumpsuitResearch, RMCSatchelLightpack5Slot, CMBootsUrbanFilled ]
     - [ RMCSuitBioWeYa, RMCSatchelLightpack5Slot, RMCHandsVeteranCBRN, RMCBootsCBRN, RMCJumpsuitCivilianScientist, CMMaskGas, CMHeadBandTan, RMCWeaponFlamerColony ]
     randomGearOther:
     -
