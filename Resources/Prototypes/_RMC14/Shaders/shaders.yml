@@ -34,6 +34,11 @@
   path: "/Textures/_RMC14/Shaders/blurryx.swsl"
 
 - type: shader
+  id: RMCCrtUiEffects
+  kind: source
+  path: "/Textures/_RMC14/Shaders/crt_ui.swsl"
+
+- type: shader
   id: RMCAuraOutline
   kind: source
   path: "/Textures/Shaders/outline.swsl"

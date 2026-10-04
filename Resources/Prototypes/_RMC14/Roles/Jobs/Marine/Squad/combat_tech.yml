@@ -28,7 +28,7 @@
   accessGroups:
   - CombatTech
   overwatchSortPriority: -1
-  overwatchRoleName: Combat Technicians
+  overwatchRoleName: rmc-overwatch-role-combat-technicians
   roleWeight: 1
   displayWeight: 1
   special:
