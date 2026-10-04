@@ -81,3 +81,24 @@
     targetWhitelist:
       tags:
       - RMCTankFuel
+
+- type: entity
+  parent: Clothing
+  id: RMCM54CE2SmartHarness
+  name: M54CE2 smartgun harness
+  description: A harness that is required for the operation of the M54CE2 smartgun conversion.
+  components:
+  - type: Item
+    size: Huge
+  - type: Clothing
+    slots:
+    - back
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Vests/tankharness.rsi # TODO RMC14: Custom sprite with -equipped-BACKPACK.
+    state: icon
+  - type: Tag
+    tags:
+    - RMCM54CE2SmartHarness
+
+- type: Tag
+  id: RMCM54CE2SmartHarness
