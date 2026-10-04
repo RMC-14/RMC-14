@@ -186,7 +186,8 @@ public sealed class RMCConstructionSystem : EntitySystem
             BreakOnDamage = false,
             MovementThreshold = 0.5f,
             DuplicateCondition = DuplicateConditions.SameEvent,
-            CancelDuplicate = true
+            CancelDuplicate = true,
+            RootEntity = true,
         };
 
         _doAfter.TryStartDoAfter(doAfter);
