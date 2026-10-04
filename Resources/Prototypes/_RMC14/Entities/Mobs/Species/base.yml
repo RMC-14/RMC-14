@@ -357,6 +357,7 @@
       8: 8
   - type: XenoToggleChargingKnockback
   - type: XenoToggleChargingParalyze
+  - type: ParatoxinVisuals
   - type: RMCMobStateDrawDepth
     drawDepths:
       Dead: BelowMobs

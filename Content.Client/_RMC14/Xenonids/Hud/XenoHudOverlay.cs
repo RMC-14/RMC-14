@@ -30,8 +30,8 @@ using Content.Shared._RMC14.Xenonids.Finesse;
 using static Robust.Shared.Utility.SpriteSpecifier;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Synth;
-using Content.Shared._RMC14.Xenonids.Hedgehog;
 using Content.Shared.FixedPoint;
+using Content.Shared._RMC14.Xenonids.Paratoxin;
 
 namespace Content.Client._RMC14.Xenonids.Hud;
 
@@ -73,6 +73,7 @@ public sealed class XenoHudOverlay : Overlay
     private readonly ResPath _rsiPath = new("/Textures/_RMC14/Interface/xeno_hud.rsi");
     private readonly ResPath _rsiPathSlow = new("/Textures/_RMC14/Effects/xeno_stomp.rsi");
     private readonly ResPath _rsiPathFreeze = new("/Textures/_RMC14/Effects/xeno_freeze.rsi");
+    private readonly ResPath _rsiPathParatoxin = new("/Textures/_RMC14/Interface/paratoxin_hud.rsi");
 
     public XenoHudOverlay()
     {
@@ -136,6 +137,7 @@ public sealed class XenoHudOverlay : Overlay
 
             DrawAcidStacks(in args, scaleMatrix, rotationMatrix);
             DrawMarkedIcons(in args, scaleMatrix, rotationMatrix);
+            DrawParatoxinStacks(in args, scaleMatrix, rotationMatrix);
             DrawRank(in args, scaleMatrix, rotationMatrix);
             DrawHiveTeamNumbers(in args, scaleMatrix, rotationMatrix);
 
@@ -382,6 +384,61 @@ public sealed class XenoHudOverlay : Overlay
 
             var position = new Vector2(xOffset, yOffset);
             handle.DrawTexture(texture, position);
+        }
+    }
+
+    private void DrawParatoxinStacks(in OverlayDrawArgs args, Matrix3x2 scaleMatrix, Matrix3x2 rotationMatrix)
+    {
+        var handle = args.WorldHandle;
+        var stacks = _entity
+            .AllEntityQueryEnumerator<ParatoxinAffectedComponent, SpriteComponent, TransformComponent>();
+
+        while (stacks.MoveNext(out var uid, out var comp, out var sprite, out var xform))
+        {
+            if (xform.MapID != args.MapId)
+                continue;
+
+            if (_container.IsEntityOrParentInContainer(uid, xform: xform))
+                continue;
+
+            if (_invisQuery.HasComp(uid))
+                continue;
+
+            var bounds = sprite.Bounds;
+            var worldPos = _transform.GetWorldPosition(xform, _xformQuery);
+
+            if (!bounds.Translated(worldPos).Intersects(args.WorldAABB))
+                continue;
+
+            var worldMatrix = Matrix3x2.CreateTranslation(worldPos);
+            var scaledWorld = Matrix3x2.Multiply(scaleMatrix, worldMatrix);
+            var matrix = Matrix3x2.Multiply(rotationMatrix, scaledWorld);
+            handle.SetTransform(matrix);
+
+            var paraStacks = comp.Stacks;
+
+            if (paraStacks < 0)
+                paraStacks = 0;
+            else if (paraStacks > comp.MaxStacks)
+                paraStacks = comp.MaxStacks;
+
+            var icon1 = new Rsi(_rsiPathParatoxin, $"bubble{Math.Min(2, paraStacks / 10) + 1}");
+            var texture1 = _sprite.GetFrame(icon1, _timing.CurTime);
+
+            var icon2 = new Rsi(_rsiPathParatoxin, $"{paraStacks}");
+            var texture2 = _sprite.GetFrame(icon2, _timing.CurTime);
+
+            var yOffset1 = (bounds.Height + sprite.Offset.Y) / 2f - (float)texture1.Height / EyeManager.PixelsPerMeter * bounds.Height;
+            var xOffset1 = (bounds.Width + sprite.Offset.X) / 2f - (float)texture1.Width / EyeManager.PixelsPerMeter * bounds.Width;
+
+            var yOffset2 = (bounds.Height + sprite.Offset.Y) / 2f - (float)texture2.Height / EyeManager.PixelsPerMeter * bounds.Height;
+            var xOffset2 = (bounds.Width + sprite.Offset.X) / 2f - (float)texture2.Width / EyeManager.PixelsPerMeter * bounds.Width;
+
+            var position1 = new Vector2(xOffset1, yOffset1);
+            handle.DrawTexture(texture1, position1);
+
+            var position2 = new Vector2(xOffset2, yOffset2);
+            handle.DrawTexture(texture2, position2);
         }
     }
 

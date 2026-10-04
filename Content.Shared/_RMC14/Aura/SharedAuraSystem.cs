@@ -34,9 +34,6 @@ public abstract class SharedAuraSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        if (_net.IsClient)
-            return;
-
         var time = _timing.CurTime;
 
         var auraQuery = EntityQueryEnumerator<AuraComponent>();

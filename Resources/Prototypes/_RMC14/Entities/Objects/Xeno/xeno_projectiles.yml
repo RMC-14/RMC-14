@@ -111,6 +111,21 @@
     max: 5
 
 - type: entity
+  id: XenoParatoxinSpitProjectile
+  parent: XenoSlowingSpitProjectile
+  name: paratoxin spit
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: xeno_paratoxin
+      shader: unshaded
+  - type: XenoProjectile
+    deleteOnFriendlyXeno: false
+  - type: ParatoxinOnHit
+
+- type: entity
   id: XenoQueenNeuroSpitProjectile
   parent: [ XenoSpitImpactSounds, XenoBaseProjectile ]
   name: neurotoxic spit
@@ -126,7 +141,7 @@
     slow: 0
     paralyze: 4
   - type: XenoProjectile
-    deleteOnFriendlyXeno: true
+    deleteOnFriendlyXeno: false
   - type: ProjectileMaxRange
     max: 4
   - type: RMCProjectileAccuracy
