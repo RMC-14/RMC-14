@@ -55,6 +55,7 @@
 - type: startingGear
   id: CMGearMaintTech
   equipment:
+    ears: CMHeadsetEngineer
     jumpsuit: CMJumpsuitMaintTech
     shoes: CMBootsBlack
     id: CMIDCardMaintTech

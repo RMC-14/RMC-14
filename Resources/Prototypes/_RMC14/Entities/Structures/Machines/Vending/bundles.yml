@@ -215,7 +215,7 @@
   id: RMCVendorBundleCrewCombatCorrespondent
   categories: [ HideSpawnMenu ]
   name: Essential Reporter's Set
-  description: Contains a flashlight, binoculars, a clipboard, and a pen. #TODO a tape recorder, a notepad, and a pen
+  description: Contains a flashlight, binoculars, a clipboard, a tape recorder and a pen. #TODO a notepad
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Tools/Light/flashlight.rsi
