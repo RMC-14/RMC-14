@@ -8,13 +8,17 @@
   components:
   - type: Item
     size: Small
-  - type: CMSurgeryTool
+  - type: RMCSurgeryTool
+    openSurgeryMenu: true
   - type: Clothing
     quickEquip: false
     slots:
     - suitstorage
   - type: StaticPrice
     price: 24
+  - type: Tag
+    tags:
+    - RMCSurgeryTool
 
 # Retractor
 - type: entity
@@ -23,17 +27,15 @@
   name: retractor
   description: Retracts stuff.
   components:
-  - type: CMSurgeryTool
-    startSound:
-      path: /Audio/_RMC14/Medical/Surgery/retractor1.ogg
-    endSound:
-      path: /Audio/_RMC14/Medical/Surgery/retractor2.ogg
+  - type: RMCSurgeryTool
+    toolTypes:
+    - kind: Retractor
+      quality: Ideal
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/retractor.rsi
     state: retractor
   - type: Item
     sprite: _RMC14/Objects/Medical/Surgery/retractor.rsi
-  - type: CMRetractor
   - type: PhysicalComposition
     materialComposition:
       CMSteel: 10000
@@ -57,15 +59,15 @@
   name: hemostat
   description: You think you have seen this before.
   components:
-  - type: CMSurgeryTool
-    endSound:
-      path: /Audio/_RMC14/Medical/Surgery/hemostat1.ogg
+  - type: RMCSurgeryTool
+    toolTypes:
+    - kind: Hemostat
+      quality: Ideal
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/hemostat.rsi
     state: hemostat
   - type: Item
     sprite: _RMC14/Objects/Medical/Surgery/hemostat.rsi
-  - type: CMHemostat
   - type: PhysicalComposition
     materialComposition:
       CMSteel: 5000
@@ -89,11 +91,10 @@
   name: cautery
   description: This stops bleeding.
   components:
-  - type: CMSurgeryTool
-    startSound:
-      path: /Audio/_RMC14/Medical/Surgery/cautery1.ogg
-    endSound:
-      path: /Audio/_RMC14/Medical/Surgery/cautery2.ogg
+  - type: RMCSurgeryTool
+    toolTypes:
+    - kind: Cautery
+      quality: Ideal
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/cautery.rsi
     state: cautery
@@ -106,7 +107,6 @@
         Heat: 5
     soundHit:
       path: /Audio/Effects/lightburn.ogg
-  - type: CMCautery
   - type: PhysicalComposition
     materialComposition:
       CMSteel: 5000
@@ -130,9 +130,10 @@
   name: surgical drill
   description: You can drill using this item. You dig?
   components:
-  - type: CMSurgeryTool
-    startSound:
-      path: /Audio/_RMC14/Medical/Surgery/saw.ogg
+  - type: RMCSurgeryTool
+    toolTypes:
+    - kind: Drill
+      quality: Ideal
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/drill.rsi
     state: drill
@@ -144,7 +145,6 @@
         Piercing: 10
     soundHit:
       path: /Audio/Items/drill_hit.ogg
-  - type: CMSurgicalDrill
   - type: PhysicalComposition
     materialComposition:
       CMSteel: 15000
@@ -170,11 +170,10 @@
   name: scalpel
   description: Cut, cut, and once more cut.
   components:
-  - type: CMSurgeryTool
-    startSound:
-      path: /Audio/_RMC14/Medical/Surgery/scalpel1.ogg
-    endSound:
-      path: /Audio/_RMC14/Medical/Surgery/scalpel2.ogg
+  - type: RMCSurgeryTool
+    toolTypes:
+    - kind: Scalpel
+      quality: Ideal
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/scalpel.rsi
     state: scalpel
@@ -195,10 +194,11 @@
         Slash: 8
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
-  - type: CMScalpel
   - type: Tag
     tags:
     - RMCScalpel
+    - RMCSurgeryTool
+
   - type: PhysicalComposition
     materialComposition:
       CMSteel: 10000
@@ -220,6 +220,17 @@
   name: prototype laser scalpel
   description: A scalpel augmented with a directed laser, for controlling bleeding as the incision is made. Also functions as a cautery. This one looks like an unreliable early model.
   components:
+  - type: RMCSurgeryTool
+    toolTypes:
+    - kind: Scalpel
+      quality: Ideal
+    - kind: LaserScalpel
+      quality: Ideal
+      stepOverrides:
+      - step: RMCSurgeryStepOpenIncisionWithLaserScalpel
+        clampBleedersChance: 0.6
+    - kind: Cautery
+      quality: Awful
   - type: Sprite
     layers:
     - state: scalpel_laser
@@ -251,6 +262,17 @@
   name: laser scalpel
   description: A scalpel augmented with a directed laser, for controlling bleeding as the incision is made. Also functions as a cautery. This one looks trustworthy, though it could be better.
   components:
+  - type: RMCSurgeryTool
+    toolTypes:
+    - kind: Scalpel
+      quality: Ideal
+    - kind: LaserScalpel
+      quality: Ideal
+      stepOverrides:
+      - step: RMCSurgeryStepOpenIncisionWithLaserScalpel
+        clampBleedersChance: 0.8
+    - kind: Cautery
+      quality: Awful
   - type: Sprite
     layers:
     - state: scalpel_laser_2
@@ -269,6 +291,17 @@
   name: advanced laser scalpel
   description: A scalpel augmented with a directed laser, for controlling bleeding as the incision is made. Also functions as a cautery. This one looks to be the pinnacle of precision energy cutlery!
   components:
+  - type: RMCSurgeryTool
+    toolTypes:
+    - kind: Scalpel
+      quality: Ideal
+    - kind: LaserScalpel
+      quality: Ideal
+      stepOverrides:
+      - step: RMCSurgeryStepOpenIncisionWithLaserScalpel
+        clampBleedersChance: 1.0
+    - kind: Cautery
+      quality: Awful
   - type: Sprite
     layers:
     - state: scalpel_laser_3
@@ -287,20 +320,31 @@
   name: PICT system
   description: The Precision Incision and Cauterization Tool uses a high-frequency vibrating blade, laser cautery, and suction liquid control system to precisely sever target tissues while preventing all fluid leakage. Despite its troubled development program and horrifying price tag, outside of complex experimental surgeries it isn't any better than an ordinary twenty-dollar scalpel and can't create a full-length incision bloodlessly.
   components:
+  - type: RMCSurgeryTool
+    toolTypes:
+    - kind: PictSystem
+      quality: Ideal
+    - kind: Scalpel
+      quality: Suboptimal
+    - kind: Cautery
+      quality: Awful
   - type: Sprite
     state: pict_system
+
 
 # - Manager
 - type: entity
   parent: CMScalpel
   id: CMScalpelManager
   name: incision management system
-  description: A true extension of the surgeon's body, this marvel instantly and completely prepares an incision allowing for the immediate commencement of therapeutic steps.
+  description: A true extension of the surgeon's body, this marvel completely prepares an incision allowing for the efficient commencement of therapeutic steps.
   components:
+  - type: RMCSurgeryTool
+    toolTypes:
+    - kind: ScalpelManager
+      quality: Ideal
   - type: Sprite
     state: scalpel_manager
-
-
 
 # Circular saw
 - type: entity
@@ -309,9 +353,10 @@
   name: circular saw
   description: For heavy-duty cutting.
   components:
-  - type: CMSurgeryTool
-    startSound:
-      path: /Audio/_RMC14/Medical/Surgery/saw.ogg
+  - type: RMCSurgeryTool
+    toolTypes:
+    - kind: BoneSaw
+      quality: Ideal
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/saw.rsi
     state: saw
@@ -327,7 +372,6 @@
     qualities:
     - Sawing
     speedModifier: 1.5
-  - type: CMBoneSaw
   - type: PhysicalComposition
     materialComposition:
       CMSteel: 20000
@@ -414,10 +458,13 @@
   name: bottle of bone gel
   description: A container for bone gel that often needs to be refilled from a specialized machine.
   components:
+  - type: RMCSurgeryTool
+    toolTypes:
+    - kind: BoneGel
+      quality: Ideal
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/bone_gel.rsi
     state: bone-gel
-  - type: CMBoneGel
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-bottle-of-bone-gel
   - type: PhysicalComposition
