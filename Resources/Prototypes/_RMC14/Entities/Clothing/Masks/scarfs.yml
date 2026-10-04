@@ -243,6 +243,9 @@
     slots:
     - mask
     - neck
+  - type: Tag
+    tags:
+    - RMCK9Wearable
 
 - type: entity
   parent: RMCMaskTornScarfBase
@@ -346,6 +349,9 @@
     sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/alpha.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/alpha.rsi
+  - type: Tag
+    tags:
+    - RMCK9Wearable
 
 - type: entity
   parent: [RMCBaseScarfDown, RMCMaskNeckerchiefAlpha]
