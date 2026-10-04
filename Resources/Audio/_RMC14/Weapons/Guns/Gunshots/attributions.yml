@@ -11,7 +11,12 @@
 - files: ["gun_es4.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
-  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/weapons/gun_es4.ogg"
+  source: "https://github.com/cmss13-devs/cmss13/blob/7b9619a3813b26907dd5dbbd5732e92fccd995ba/sound/weapons/gun_es4.ogg"
+
+- files: ["gun_es7.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/7b9619a3813b26907dd5dbbd5732e92fccd995ba/sound/weapons/gun_es7.ogg"
 
 - files: ["gun_m1984_1.ogg"]
   license: "CC-BY-SA-3.0"
