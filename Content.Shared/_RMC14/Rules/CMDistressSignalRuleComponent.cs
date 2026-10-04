@@ -238,6 +238,9 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     [DataField]
     public TimeSpan AbandonedDelay = TimeSpan.FromMinutes(5);
 
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan? NextForsakenCheck;
+
     [DataField]
     public SoundSpecifier HijackSong = new SoundCollectionSpecifier("RMCHijack", AudioParams.Default.WithVolume(-8));
 

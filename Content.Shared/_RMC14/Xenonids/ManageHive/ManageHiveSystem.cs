@@ -63,6 +63,7 @@ public sealed class ManageHiveSystem : EntitySystem
         SubscribeLocalEvent<ManageHiveComponent, ManageHiveDevolveConfirmEvent>(OnManageHiveDevolveConfirm);
         SubscribeLocalEvent<ManageHiveComponent, ManageHiveDevolveMessageEvent>(OnManageHiveDevolveMessage);
         SubscribeLocalEvent<ManageHiveComponent, ManageHiveTeamsEvent>(OnManageHiveTeams);
+        SubscribeLocalEvent<ManageHiveComponent, ManageHiveAllianceEvent>(OnManageHiveAlliance);
 
         Subs.CVar(_config, RMCCVars.RMCJelliesPerQueen, v => _jelliesPerQueen = v, true);
         Subs.CVar(_config, RMCCVars.RMCBurrowedLarvaSacrificeTimeMinutes, v => _burrowedLarvaSacrificeTime = TimeSpan.FromMinutes(v), true);
@@ -88,6 +89,7 @@ public sealed class ManageHiveSystem : EntitySystem
         options.Add(new DialogOption(Loc.GetString("rmc-hivemanagement-exchange-larva"), new ManageHiveSacrificeBurrowedEvent()));
         options.Add(new DialogOption(Loc.GetString("rmc-boon-activate"), new ManageHiveActivateBoonsEvent()));
         options.Add(new DialogOption(Loc.GetString("rmc-hivemanagement-manage-teams"), new ManageHiveTeamsEvent()));
+        options.Add(new DialogOption(Loc.GetString("rmc-hivemanagement-manage-alliances"), new ManageHiveAllianceEvent()));
 
         _dialog.OpenOptions(manage, Loc.GetString("rmc-hivemanagement-hive-management"), options, Loc.GetString("rmc-hivemanagement-manage-the-hive"));
     }
@@ -480,6 +482,15 @@ public sealed class ManageHiveSystem : EntitySystem
         // Handled by HiveTeamSystem on the server via UI open
         // Have to raise a local event so the server HiveTeamSystem can open the UI
         var ev = new OpenHiveTeamsUIEvent();
+        RaiseLocalEvent(manage.Owner, ref ev);
+    }
+
+    private void OnManageHiveAlliance(Entity<ManageHiveComponent> manage, ref ManageHiveAllianceEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        var ev = new OpenHiveAllianceUIEvent();
         RaiseLocalEvent(manage.Owner, ref ev);
     }
 

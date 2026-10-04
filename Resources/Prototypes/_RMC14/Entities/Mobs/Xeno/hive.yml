@@ -5,3 +5,202 @@
   components:
   - type: Hive
     lateJoinGainLarva: true
+
+- type: entity
+  parent: CMXenoHive
+  id: CMXenoHiveNormal
+  name: xenonid hive
+  components:
+  - type: Hive
+    bannedHiveSlots: [ 1, 3, 4, 5, 6, 7, 8 ]
+  - type: HiveSlot
+    position: 1
+
+- type: entity
+  parent: CMXenoHive
+  id: CMXenoHiveCorrupted
+  name: corrupted hive
+  components:
+  - type: Hive
+    color: "#80FF80"
+    bannedFactionAllies: []
+    bannedHiveSlots: []
+  - type: HiveSlot
+    position: 2
+
+- type: entity
+  parent: CMXenoHive
+  id: CMXenoHiveAlpha
+  name: alpha hive
+  components:
+  - type: Hive
+    color: "#FF4040"
+  - type: HiveSlot
+    position: 3
+
+- type: entity
+  parent: CMXenoHive
+  id: CMXenoHiveBravo
+  name: bravo hive
+  components:
+  - type: Hive
+    color: "#FFFF80"
+  - type: HiveSlot
+    position: 4
+
+- type: entity
+  parent: CMXenoHive
+  id: CMXenoHiveCharlie
+  name: charlie hive
+  components:
+  - type: Hive
+    color: "#BB40FF"
+  - type: HiveSlot
+    position: 5
+
+- type: entity
+  parent: CMXenoHive
+  id: CMXenoHiveDelta
+  name: delta hive
+  components:
+  - type: Hive
+    color: "#8080FF"
+  - type: HiveSlot
+    position: 6
+
+- type: entity
+  parent: CMXenoHive
+  id: CMXenoHiveRenegade
+  name: renegade hive
+  components:
+  - type: Hive
+    color: "#FFAE00"
+    hiveStructureSlots:
+      HiveCoreXeno: 1
+      HiveClusterXeno: 8
+      HivePylonXeno: 2
+      HiveEggMorpherXeno: 0
+      HiveRecoveryNodeXeno: 6
+      HivePlasmaTreeXeno: 3
+    alliedFactions: [ UNMC, WeYa, CLF, TSE, HEFA, SPP, Halcyon, RoyalMarines, Bureau, Civilian ]
+    bannedFactionAllies: []
+  - type: HiveSlot
+    position: 7
+
+- type: entity
+  parent: CMXenoHive
+  id: CMXenoHiveForsaken
+  name: forsaken hive
+  components:
+  - type: Hive
+    color: "#cc8ec4"
+    lateJoinGainLarva: false
+    tacticalMapAlwaysLive: true
+    larvaQueueWaitSecondsOverride: 0
+  - type: HiveSlot
+    position: 8
+
+- type: entity
+  parent: CMXenoWarrior
+  id: RMCXenoWarriorForsaken
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Xeno
+    contributesToVictory: false
+  - type: TacticalMapUser
+    marines: true
+  - type: XenoEvolutionLocked
+  - type: CMArmor
+    xenoArmor: 35
+    explosionArmor: 70
+  - type: HiveStatModifier
+    damageIncrease:
+      groups:
+        Brute: 10
+    healthMultiplier: 1.25
+    plasmaGainMultiplier: 1.15
+    speedMultiplier: 1.25
+
+- type: entity
+  parent: CMXenoLurker
+  id: RMCXenoLurkerForsaken
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Xeno
+    contributesToVictory: false
+  - type: TacticalMapUser
+    marines: true
+  - type: XenoEvolutionLocked
+  - type: CMArmor
+    xenoArmor: 15
+    explosionArmor: 50
+  - type: HiveStatModifier
+    damageIncrease:
+      groups:
+        Brute: 10
+    healthMultiplier: 1.25
+    plasmaGainMultiplier: 1.15
+    speedMultiplier: 1.25
+
+- type: entity
+  parent: CMXenoSpitter
+  id: RMCXenoSpitterForsaken
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Xeno
+    contributesToVictory: false
+  - type: TacticalMapUser
+    marines: true
+  - type: XenoEvolutionLocked
+  - type: CMArmor
+    xenoArmor: 30
+    explosionArmor: 50
+  - type: HiveStatModifier
+    damageIncrease:
+      groups:
+        Brute: 10
+    healthMultiplier: 1.25
+    plasmaGainMultiplier: 1.15
+    speedMultiplier: 1.25
+
+- type: entity
+  parent: CMXenoDrone
+  id: RMCXenoDroneForsaken
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Xeno
+    contributesToVictory: false
+  - type: TacticalMapUser
+    marines: true
+  - type: XenoEvolutionLocked
+  - type: CMArmor
+    xenoArmor: 15
+    explosionArmor: 30
+  - type: HiveStatModifier
+    damageIncrease:
+      groups:
+        Brute: 10
+    healthMultiplier: 1.25
+    plasmaGainMultiplier: 1.15
+    speedMultiplier: 1.25
+
+- type: entity
+  parent: CMXenoRunner
+  id: RMCXenoRunnerForsaken
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Xeno
+    contributesToVictory: false
+  - type: TacticalMapUser
+    marines: true
+  - type: XenoEvolutionLocked
+  - type: CMArmor
+    xenoArmor: 15
+    explosionArmor: 40
+  - type: HiveStatModifier
+    damageIncrease:
+      groups:
+        Brute: 10
+    healthMultiplier: 1.25
+    plasmaGainMultiplier: 1.15
+    speedMultiplier: 1.25

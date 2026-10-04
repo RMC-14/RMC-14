@@ -1,5 +1,6 @@
 cm-xeno-construction-failed-weeds = Bad place for a garden!
 cm-xeno-construction-failed-need-weeds = We can only shape on weeds. Find some resin before you start building!
+cm-xeno-construction-failed-hostile-weeds = These weeds do not belong to our hive!
 cm-xeno-construction-failed-cant-build = We can't build there!
 cm-xeno-construction-failed-select-structure = We need to select a structure to build first! Use the "Choose Resin Structure" action.
 cm-xeno-construction-failed-requires-support = {CAPITALIZE(MAKEPLURAL($choice))} need a wall or resin door next to them to stand up.
