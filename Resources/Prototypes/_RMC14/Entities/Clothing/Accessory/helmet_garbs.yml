@@ -251,6 +251,23 @@
       sprite: _RMC14/Objects/Clothing/HelmetGarb/cartridge.rsi
       state: helmet
 
+- type: entity
+  parent: RMCHelmetGarbBase
+  id: RMCHelmetGarbXM43E1
+  name: 10x99mm XM43E1 casing pipe
+  description: The XM43E1 was an experimental weapons platform briefly fielded by the UNMC and We-Ya PMC teams. It was manufactured by AEGIS Armaments at a weapons facility. Unfortunately the project had its funding pulled alongside the M5 integrated gasmask program. This spent casing has been converted into a pipe, but there is too much tar in the mouthpiece for it to be useable.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/bullet_pipe.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/bullet_pipe.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/bullet_pipe.rsi
+      state: helmet
+
+
 # Visors
 
 - type: entity
@@ -577,4 +594,36 @@
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/movie_ticket.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbBase
+  id: RMCHelmetGarbRabbitsFoot
+  name: Rabbit's Foot
+  description: Lucky for you, but not the rabbit, didn't really do it much good.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/rabbitsfoot.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/rabbitsfoot.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/rabbitsfoot.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbBase
+  id: RMCHelmetGarbPestSpray
+  name: insect repellent
+  description: A store-brand insect repellent, to keep any variety of pest or mosquito away from you.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/pestspray.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/pestspray.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/pestspray.rsi
       state: helmet

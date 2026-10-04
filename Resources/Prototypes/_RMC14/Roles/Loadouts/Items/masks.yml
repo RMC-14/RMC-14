@@ -24,6 +24,12 @@
     mask: CMMaskGas
 
 - type: loadout
+  id: MaskSterileRMC
+  cost: 2
+  equipment:
+    mask: CMMaskSterile
+
+- type: loadout
   id: GasMaskRoyalRMC
   cost: 2
   equipment:
