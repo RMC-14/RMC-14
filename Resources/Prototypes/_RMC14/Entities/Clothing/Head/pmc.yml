@@ -275,7 +275,7 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/engineer.rsi
   - type: EyeProtection
   - type: PointLight
-    color: "#c51ce4"
+    color: "#73e6f5" #Parity implies #FA644B, Current light colour is matched from RMCBaseMarineArmorLight which PMC armours parent light colour from
 
 - type: entity
   parent: CMHeadCap
