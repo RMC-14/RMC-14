@@ -9,7 +9,6 @@
   startingGear: RMCGearSurvivorSolarisCMBMarshal
   accessGroups:
   - ColonistCMBSurvivor
-  roleWeight: 0.25
   icon: "RMCJobIconBureauMarshal"
   hasIcon: true
   spawnMenuRoleName: CMB Marshal (Solaris Survivor)
