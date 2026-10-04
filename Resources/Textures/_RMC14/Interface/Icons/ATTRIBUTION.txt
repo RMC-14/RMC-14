@@ -1,0 +1,6 @@
+Icons in this folder are from Font Awesome Free, licensed under CC BY 4.0.
+https://fontawesome.com/license/free
+https://github.com/FortAwesome/Font-Awesome
+
+icons have been modifed & recolored for use
+

@@ -1,0 +1,100 @@
+- type: entity
+  id: RMCCentrifuge
+  name: Chemical Centrifuge
+  description: A machine that uses centrifugal forces to separate fluids of different densities. Needs a reagent container for input and a vial box for output. Has a series of toggles to modify its behaviour.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: null
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/Science/centrifuge.rsi
+    layers:
+    - state: empty_open
+      map: ["status"]
+    snapCardinals: true
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.CentrifugeVisuals.State:
+        status:
+          EmptyOpen: { state: empty_open }
+          EmptyClosed: { state: empty_closed }
+          OnOpen: { state: on_open }
+          OnClosed: { state: on_closed }
+          Spinning: { state: spinning }
+          Finish: { state: finish }
+  - type: ApcPowerReceiver
+    powerLoad: 500
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 20
+    activeLoad: 500
+    channel: Equipment
+  - type: ActivatableUIRequiresPower
+  - type: RMCCentrifuge
+  - type: ItemSlots
+    slots:
+      centrifuge_input_slot:
+        name: Input Container
+        whitelist:
+          tags:
+          - GlassBeaker
+          - ChemDispensable
+      centrifuge_output_box_slot:
+        name: Vial Box
+        whitelist:
+          tags:
+          - VialBox
+  - type: ContainerContainer
+    containers:
+      centrifuge_input_slot: !type:ContainerSlot
+      centrifuge_output_box_slot: !type:ContainerSlot
+  - type: UserInterface
+    interfaces:
+      enum.RMCCentrifugeUi.Key:
+        type: RMCCentrifugeBui
+  - type: ActivatableUI
+    key: enum.RMCCentrifugeUi.Key
+  - type: RequiresSkill
+    skills:
+      RMCSkillResearch: 1
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
