@@ -13,6 +13,9 @@
   alert: Stun
 
 - type: statusEffect
+  id: PainKnockOut
+
+- type: statusEffect
   id: SlowedDown
 
 - type: statusEffect
@@ -66,3 +69,6 @@
 - type: statusEffect
   id: Adrenaline
   alert: Adrenaline
+
+- type: statusEffect
+  id: PainAsphyxationDisabled
