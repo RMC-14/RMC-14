@@ -41,18 +41,6 @@
     id: CMIDCardColonist
 
 - type: entity
-  parent: CMSpawnPointJobBase
-  id: RMCSpawnPointSurvivorBeachBum
-  name: survivor beach bum spawn point
-  components:
-  - type: SpawnPoint
-    job_id: CMSurvivor
-  - type: Sprite
-    layers:
-    - sprite: _RMC14/Markers/landmarks.rsi
-      state: surv
-
-- type: entity
   parent: [RMCSurvivorPresetCivilianRareItem, RMCGearSurvivorPresetUNMC]
   id: RMCGearSurvivorPresetVaraderoContractor
   name: varadero contractor preset
