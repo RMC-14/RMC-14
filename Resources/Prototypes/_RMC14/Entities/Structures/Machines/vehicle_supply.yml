@@ -26,6 +26,7 @@
         - MachineLayer
   - type: ActivatableUI
     key: enum.VehicleSupplyUIKey.Key
+  - type: ActivatableUIRequiresPower
   - type: ActivatableUIRequiresAccess
   - type: AccessReader
     access: [ [ "RMCAccessVehicleCrew" ] ]
@@ -155,8 +156,12 @@
     energy: 1.6
     color: "#b89f25"
   - type: ApcPowerReceiver
-    powerLoad: 0
-    needsPower: false
+    powerLoad: 300
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 300
+    activeLoad: 300
+    channel: Equipment
   - type: Appearance
   - type: LitOnPowered
   - type: EmitSoundOnUIOpen

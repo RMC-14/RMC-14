@@ -10,8 +10,45 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
     {
         base.Initialize();
         SubscribeLocalEvent<RMCApcComponent, AfterAutoHandleStateEvent>(OnApcState);
+        SubscribeLocalEvent<RMCSmesComponent, AfterAutoHandleStateEvent>(OnSmesState);
+        SubscribeLocalEvent<RMCPowerStorageComponent, AfterAutoHandleStateEvent>(OnStorageState);
+        SubscribeLocalEvent<RMCPowerMonitorComponent, AfterAutoHandleStateEvent>(OnMonitorState);
 
         SubscribeLocalEvent<RMCReactorPoweredLightComponent, AppearanceChangeEvent>(OnReactorPoweredLightAppearanceChange);
+    }
+
+    private void OnMonitorState(Entity<RMCPowerMonitorComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        if (!TryComp(ent, out UserInterfaceComponent? ui))
+            return;
+
+        foreach (var bui in ui.ClientOpenInterfaces.Values)
+        {
+            if (bui is RMCPowerMonitorBui monitorUi)
+                monitorUi.Refresh();
+        }
+    }
+
+    private void OnSmesState(Entity<RMCSmesComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        RefreshSmes(ent);
+    }
+
+    private void OnStorageState(Entity<RMCPowerStorageComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        RefreshSmes(ent);
+    }
+
+    private void RefreshSmes(EntityUid uid)
+    {
+        if (!TryComp(uid, out UserInterfaceComponent? ui))
+            return;
+
+        foreach (var bui in ui.ClientOpenInterfaces.Values)
+        {
+            if (bui is RMCSmesBui smesUi)
+                smesUi.Refresh();
+        }
     }
 
     public override bool IsPowered(EntityUid ent)

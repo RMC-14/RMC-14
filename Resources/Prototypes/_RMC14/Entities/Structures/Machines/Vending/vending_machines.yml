@@ -68,7 +68,7 @@
   - type: RMCPowerReceiver
     idleLoad: 10
     activeLoad: 0
-    channel: Equipment # TODO RMC14 vend_power_usage: 150
+    channel: Equipment
   - type: Appearance
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/generic.rsi
@@ -155,6 +155,7 @@
         density: 200
   - type: ActivatableUI
     key: enum.CMAutomatedVendorUI.Key
+  - type: ActivatableUIRequiresPower
   - type: ActivatableUIRequiresAccess
   - type: AccessReader
     access: [ [ "RMCAccessVehicleCrew" ] ]
@@ -177,6 +178,14 @@
       state: vehicle_gear_vend
     sections: []
   - type: VehicleHardpointVendor
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
+    # CM13's vehicle crew vendor inherits the zero-load cm_vending base.
+    channel: Equipment
   - type: InteractionOutline
   - type: RequireProjectileTarget
 
@@ -193,7 +202,12 @@
     sprite: _RMC14/Structures/Machines/VendingMachines/coffee.rsi
   - type: VendingMachine
     pack: CMVendorCoffee
+    vendEnergy: 85000
     ejectState: eject-unshaded
+  - type: RMCPowerReceiver
+    idleLoad: 211
+    activeLoad: 0
+    channel: Equipment
 
 - type: entity
   parent: CMVendorCoffee
@@ -297,6 +311,10 @@
     sprite: _RMC14/Structures/Machines/VendingMachines/cola.rsi
   - type: VendingMachine
     pack: CMVendorCola
+  - type: RMCPowerReceiver
+    idleLoad: 211
+    activeLoad: 0
+    channel: Equipment
 
 - type: vendingMachineInventory
   id: CMVendorCola
@@ -385,6 +403,10 @@
     sprite: _RMC14/Structures/Machines/VendingMachines/sodavend.rsi
   - type: VendingMachine
     pack: RMCVendorSoda
+  - type: RMCPowerReceiver
+    idleLoad: 211
+    activeLoad: 0
+    channel: Equipment
 
 - type: vendingMachineInventory
   id: RMCVendorSoda
@@ -649,6 +671,10 @@
     pack: CMVendorNutri
     denyState: deny-unshaded
     ejectState: eject-unshaded
+  - type: RMCPowerReceiver
+    idleLoad: 211
+    activeLoad: 0
+    channel: Equipment
 
 - type: vendingMachineInventory
   id: CMVendorNutri
@@ -749,7 +775,7 @@
     - state: "panel"
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: ApcPowerReceiver
-    needsPower: true # TODO RMC14
+    needsPower: true
     powerLoad: 250
   - type: RMCPowerReceiver
     idleLoad: 10
@@ -767,6 +793,7 @@
     timeToApply: 4
     structure: true
   - type: CMAutomatedVendor
+    vendEnergy: 150
     scaling: false
     sections:
     - name: Products
@@ -865,6 +892,10 @@
     sprite: _RMC14/Structures/Machines/VendingMachines/sovietsoda.rsi
   - type: VendingMachine
     pack: CMVendorSodaSoviet
+  - type: RMCPowerReceiver
+    idleLoad: 211
+    activeLoad: 0
+    channel: Equipment
 
 - type: vendingMachineInventory
   id: CMVendorSodaSoviet

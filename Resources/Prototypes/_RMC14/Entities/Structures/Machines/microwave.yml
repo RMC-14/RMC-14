@@ -4,6 +4,7 @@
   components:
   - type: Microwave
     maxItemSize: Huge
+    rmcCookEnergyPerSecond: 500
   - type: Transform
     anchored: false
   - type: Physics

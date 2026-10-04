@@ -7,8 +7,13 @@
   components:
   - type: WallMount
   - type: ApcPowerReceiver
-    powerLoad: 100 # TODO RMC14 power
+    powerLoad: 0
     needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
+    # CM13 intercoms check Equipment power but do not add an area load.
+    channel: Equipment
   - type: Electrified
     enabled: false
     usesApcPower: true

@@ -14,8 +14,9 @@
     powerLoad: 250
     needsPower: true
   - type: RMCPowerReceiver
-    idleLoad: 5
-    activeLoad: 10
+    # CM13 /obj/structure/machinery/ares uses 600 W continuously.
+    idleLoad: 600
+    activeLoad: 0
     channel: Equipment
   - type: Sprite
     sprite: _RMC14/Structures/Machines/AIStuff/aicore.rsi
@@ -58,8 +59,9 @@
     powerLoad: 250
     needsPower: true
   - type: RMCPowerReceiver
-    idleLoad: 5
-    activeLoad: 10
+    # CM13 /obj/structure/machinery/ares uses 600 W continuously.
+    idleLoad: 600
+    activeLoad: 0
     channel: Equipment
   - type: Sprite
     sprite: _RMC14/Structures/Machines/AIStuff/aicoremachinery.rsi

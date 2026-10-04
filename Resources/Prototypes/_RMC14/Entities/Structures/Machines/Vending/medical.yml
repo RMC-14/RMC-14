@@ -558,8 +558,8 @@
       visible: false
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: ApcPowerReceiver
-    needsPower: false # TODO RMC14
-    powerLoad: 0
+    needsPower: true
+    powerLoad: 250
   - type: AccessReader
     access:
     - [ "CMAccessMedical" ]
