@@ -187,6 +187,9 @@
   id: RMCUniformTSE
 
 - type: Tag
+  id: RMCUniformFreelancer
+
+- type: Tag
   id: RMCXenoParasitePreparingLeap
 
 - type: Tag
