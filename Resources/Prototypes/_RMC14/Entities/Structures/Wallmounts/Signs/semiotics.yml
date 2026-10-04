@@ -125,6 +125,15 @@
 
 - type: entity
   parent: CMSemioticBase
+  id: CMSemioticChem_haz
+  name: chemical hazard semiotic
+  description: Semiotic Standard denoting the nearby presence of a chemical hazard."
+  components:
+  - type: Sprite
+    state: chemhaz
+
+- type: entity
+  parent: CMSemioticBase
   id: CMSemioticCoffee
   name: coffee semiotic
   description: "Semiotic Standard denoting the nearby presence of coffee: the lifeblood of any starship crew."
@@ -386,6 +395,15 @@
 
 - type: entity
   parent: CMSemioticBase
+  id: CMSemioticMemorial
+  name: memorial semiotic
+  description: "Semiotic Standard denoting the nearby presence of a memorial."
+  components:
+  - type: Sprite
+    state: memorial
+
+- type: entity
+  parent: CMSemioticBase
   id: CMSemioticNonpress
   name: non-pressurized area beyond semiotic
   description: "Semiotic Standard denoting that the area beyond isn't pressurized."
@@ -428,6 +446,15 @@
   components:
   - type: Sprite
     state: opensup
+
+- type: entity
+  parent: CMSemioticBase
+  id: CMSemioticOrbital_cannon
+  name: orbital cannon semiotic
+  description: "Semiotic Standard denoting the nearby presence of an orbital cannon system. Better not miss with it."
+  components:
+  - type: Sprite
+    state: orbitalcannon
 
 - type: entity
   parent: CMSemioticBase
