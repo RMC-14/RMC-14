@@ -83,5 +83,30 @@
       rmc-aslot-stock: -0.52, -0.029
       rmc-aslot-underbarrel: 0.30, -0.330
 
+- type: entity
+  parent: RMCWeaponShotgunM3717
+  id: RMCWeaponShotgunM3717Stripped
+  suffix: Stripped
+  components:
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentRecoilCompensator
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+
 - type: Tag
   id: RMCWeaponShotgunM3717
