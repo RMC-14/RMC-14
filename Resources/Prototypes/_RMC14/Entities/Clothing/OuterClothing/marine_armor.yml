@@ -1032,3 +1032,6 @@
     sprintModifier: 0.897
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: Clothing
+    equipDelay: 1
+    unequipDelay: 0.5
