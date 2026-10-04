@@ -9,6 +9,7 @@
   startingGear: RMCJobCLFStandardPVE
   icon: CMJobIconEmpty
   joinNotifyCrew: false
+  supervisors: cm-job-supervisors-clf-cmdr-lead
   accessGroups:
   - Colony
   - Rifleman
@@ -21,6 +22,17 @@
       - CLF
     - type: Skills
       preset: RMCSkillPresetPVERifleman
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      understoodLanguages:
+      - Japanese
+      - English
+      currentLanguage: Japanese
+      defaultLanguage: Japanese
+    - type: AssignSquad
+      squad: SquadCLF
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-clf-pve-standard
@@ -47,9 +59,6 @@
   id: RMCJobCLFStandardPVE
   equipment:
     id: RMCIDCardCLFStandardPVE
-    jumpsuit: RMCJumpsuitCLFSoldier
-    shoes: RMCShoesJackbootsFilled
-    ears: RMCHeadsetDistressCLF
 
 - type: playTimeTracker
   id: CMJobCLFStandardPVE
