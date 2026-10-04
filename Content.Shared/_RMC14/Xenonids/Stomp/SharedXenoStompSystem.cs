@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Actions;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
@@ -114,7 +115,7 @@ public sealed class XenoStompSystem : EntitySystem
 
             if (xform.Coordinates.TryDistance(EntityManager, receiver.Owner.ToCoordinates(), out var distance) && distance <= xeno.Comp.ShortRange)
             {
-                if (!_standing.IsDown(receiver))
+                if (!_standing.IsDown(receiver) && !HasComp<XenoRestingComponent>(receiver))
                     continue;
 
                 var damage = _damageable.TryChangeDamage(receiver, _xeno.TryApplyXenoSlashDamageMultiplier(receiver, xeno.Comp.Damage), origin: xeno, tool: xeno);
