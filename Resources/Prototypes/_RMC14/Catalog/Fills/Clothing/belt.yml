@@ -1248,3 +1248,14 @@
     - id: RMCSpeedLoaderMatebaHighImpact
       amount: 3
     - id: RMCWeaponRevolverMkX
+
+- type: entity
+  parent: RMCHyposprayRig
+  id: RMCHyposprayRigFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCVialLarge
+      amount: 18
+    - id: CMHyposprayFilledLarge
