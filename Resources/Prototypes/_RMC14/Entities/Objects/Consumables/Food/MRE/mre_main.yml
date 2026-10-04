@@ -194,6 +194,8 @@
           Quantity: 26
         - ReagentId: TableSalt
           Quantity: 4
+  - type: BlackMarketValue
+    value: 5
 
 - type: entity
   parent: RMCMREFoodCLF

@@ -392,6 +392,91 @@
 
 - type: entity
   parent: RMCPillCanisterNoSkill
+  id: RMCPillCanisterHappy
+  name: happy pills
+  description: Highly illegal drug. When you want to see the rainbow.
+  suffix: Happy, 7, No Skill
+  components:
+  - type: Item
+    heldPrefix: 8
+  - type: Sprite
+    layers:
+    - state: pill_canister8
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: RMCPillHappy
+      amount: 7
+  - type: IconLabel
+    labelTextLocId: rmc-happy-container-label-text
+
+- type: entity
+  parent: RMCPillCanisterNoSkill
+  id: RMCPillCanisterMystery
+  name: Weird-looking pill bottle
+  description: You can't seem to identify this.
+  suffix: Mystery, 16, No Skill
+  components:
+  - type: Item
+    heldPrefix: 10
+  - type: Sprite
+    layers:
+    - state: pill_canister10
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: RandomSprite
+    available:
+    - bottleSurfaceLayer:
+        pill_canister1: ""
+        pill_canister2: ""
+        pill_canister3: ""
+        pill_canister4: ""
+        pill_canister5: ""
+        pill_canister6: ""
+        pill_canister7: ""
+        pill_canister8: ""
+        pill_canister9: ""
+        pill_canister10: ""
+        pill_canister11: ""
+        pill_canister12: ""
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:NestedSelector
+        tableId: RMCPillBottleMysteryTable
+        rolls: !type:ConstantNumberSelector
+          value: 16
+  - type: IconLabel
+    labelTextLocId: rmc-mystery-container-label-text
+
+- type: entityTable
+  id: RMCPillBottleMysteryTable
+  table: !type:GroupSelector
+    children:
+    - id: RMCPillMysteryBicaridine
+    - id: RMCPillMysteryDexalin
+    - id: RMCPillMysteryDylovene
+    - id: RMCPillMysteryInaprovaline
+    - id: RMCPillMysteryKelotane
+    - id: RMCPillMysteryTricordrazine
+    - id: RMCPillMysteryRussianRed
+    - id: RMCPillMysteryMeralyneBicaridine
+    - id: RMCPillMysteryKelotaneDermaline
+    - id: RMCPillMysteryImidazoline
+    - id: RMCPillMysteryAntiZed
+    - id: RMCPillMysteryCyanide
+    - id: RMCPillMysteryDexalinPlus
+    - id: RMCPillMysteryIron
+    - id: RMCPillMysteryHappy
+
+- type: entity
+  parent: RMCPillCanisterNoSkill
   id: RMCPillCanisterImidazolineNoSkill
   name: imidazoline pill bottle
   description: It's an airtight container for storing medication. It's labeled "Imidazoline (1u, 30 pill OD) Used to restore vision from non-congenital eye damage."

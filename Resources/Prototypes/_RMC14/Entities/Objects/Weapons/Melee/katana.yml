@@ -30,6 +30,8 @@
     damage:
       types:
         Slash: 10
+  - type: BlackMarketValue
+    value: 5
 
 - type: entity
   parent: RMCKatana

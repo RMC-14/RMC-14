@@ -23,11 +23,16 @@
   - type: EmitSoundOnCollide
     sound:
       collection: ToyFall
+  - type: BlackMarketValue
+    value: 10
 
 - type: entity
   parent: CMPlushieBase
   id: RMCPlushieBaseAdmin
   suffix: RMC, DO NOT MAP.
+  components:
+  - type: BlackMarketValue
+    value: 0
 
 - type: entity
   parent: PlushieMoth
@@ -122,6 +127,8 @@
   components:
   - type: Sprite
     state: farwa
+  - type: BlackMarketValue
+    value: 25
 
 - type: entity
   parent: CMPlushieBase

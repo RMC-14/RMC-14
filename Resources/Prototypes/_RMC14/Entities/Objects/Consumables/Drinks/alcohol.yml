@@ -32,6 +32,8 @@
   - type: Tag
     tags:
     - RMCAlcohol
+  - type: BlackMarketValue
+    value: 25
 
 - type: entity
   parent: RMCDrinkAlcoholBase
@@ -320,6 +322,117 @@
         reagents:
         - ReagentId: Whiskey
           Quantity: 100
+
+- type: entity
+  parent: RMCDrinkAlcoholBase
+  id: RMCDrinkAlcoholNothing
+  name: Bottle of Nothing
+  description: A bottle filled with nothing.
+  components:
+  - type: Sprite
+    sprite: Objects/Consumable/Drinks/bottleofnothing.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 100
+        reagents:
+        - ReagentId: Nothing
+          Quantity: 100
+
+- type: entity
+  parent: RMCDrinkAlcoholBase
+  id: RMCDrinkAlcoholWine
+  name: doublebeard bearded special wine
+  description: A faint aura of unease and asspainery surrounds the bottle.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/wine.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 100
+        reagents:
+        - ReagentId: RMCPoisonWine
+          Quantity: 100
+
+- type: entity
+  parent: RMCDrinkAlcoholBase
+  id: RMCDrinkAlcoholCraftBeer
+  name: Pendleton's Triple Star Lager
+  description: A premium lager brewed since 2026 in Pendleton, Oregon. Its label proudly insists that three stars means quality.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/beer.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Beer
+          Quantity: 30
+
+- type: entity
+  parent: RMCDrinkAlcoholCraftBeer
+  id: RMCDrinkAlcoholTuxedo
+  name: Tuxedo Premium
+  description: A craft ale originally brewed in England, with a crisp taste and a label that looks more expensive than the beer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/ale.rsi
+
+- type: entity
+  parent: RMCDrinkAlcoholCraftBeer
+  id: RMCDrinkAlcoholGanucci
+  name: Ganucci's Genuine Light Beer
+  description: A craft light beer with a crisp bite and a label covered in suspiciously emphatic authenticity marks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/beer.rsi
+
+- type: entity
+  parent: RMCDrinkAlcoholCraftBeer
+  id: RMCDrinkAlcoholBlueMalt
+  name: Blue Malt
+  description: A blue-tinted craft beer that tastes like malt, hops, and an alarming amount of confidence.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/fruit_beer.rsi
+
+- type: entity
+  parent: RMCDrinkAlcoholCraftBeer
+  id: RMCDrinkAlcoholPartyPopper
+  name: Party Popper Ale
+  description: A festive craft ale made for celebrations that should probably have stayed small.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/ale.rsi
+
+- type: entity
+  parent: RMCDrinkAlcoholCraftBeer
+  id: RMCDrinkAlcoholTazhushka
+  name: Tazhushka's Turquoise Beer
+  description: A turquoise craft beer with a bright bottle and an even brighter warning label.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/fruit_beer.rsi
+
+- type: entity
+  parent: RMCDrinkAlcoholCraftBeer
+  id: RMCDrinkAlcoholReaper
+  name: Reaper Red
+  description: A red craft beer brewed with enough bite to make the label's skull feel a little less theatrical.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/ale.rsi
+
+- type: entity
+  parent: RMCDrinkAlcoholCraftBeer
+  id: RMCDrinkAlcoholMono
+  name: Mono Lager
+  description: A plain craft lager with a plain label and the quiet menace of a hangover in waiting.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/beer.rsi
 
 - type: Tag
   id: RMCAlcohol

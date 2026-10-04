@@ -26,6 +26,8 @@
     solution: food
   - type: DrawableSolution
     solution: food
+  - type: BlackMarketValue
+    value: 5
 
 - type: entity
   parent: RMCFoodSnackBase
