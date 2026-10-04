@@ -99,8 +99,12 @@ namespace Content.Shared.Ghost
             if (entity.Comp.CanGhostInteract == value)
                 return;
 
+            var oldValue = entity.Comp.CanGhostInteract;
             entity.Comp.CanGhostInteract = value;
             Dirty(entity);
+
+            var ev = new GhostCanInteractChangedEvent(oldValue, value);
+            RaiseLocalEvent(entity, ev);
         }
     }
 

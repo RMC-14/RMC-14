@@ -467,6 +467,21 @@ public sealed class SquadSystem : EntitySystem
         return null;
     }
 
+    /// <summary>
+    /// Notifies systems that cache squad member presentation data after a role title or icon override changes.
+    /// </summary>
+    public void NotifyMemberUpdated(Entity<SquadMemberComponent?> member)
+    {
+        if (!Resolve(member, ref member.Comp, false) ||
+            member.Comp.Squad is not { } squad)
+        {
+            return;
+        }
+
+        var ev = new SquadMemberUpdatedEvent(squad);
+        RaiseLocalEvent(member.Owner, ref ev);
+    }
+
     public bool HasSquad(EntProtoId id)
     {
         return TryGetSquad(id, out _);
@@ -725,6 +740,7 @@ public sealed class SquadSystem : EntitySystem
                 }
 
                 RemComp<SquadLeaderComponent>(uid);
+                NotifyMemberUpdated(uid);
 
                 if (TryComp<RMCTrackableComponent>(uid, out var otherTrackable) &&
                     !otherTrackable.Intrinsic)
@@ -742,6 +758,7 @@ public sealed class SquadSystem : EntitySystem
 
         var newLeader = EnsureComp<SquadLeaderComponent>(toPromote);
         newLeader.Icon = icon;
+        Dirty(toPromote, newLeader);
 
         EnsureComp<RMCAwardRecommendationComponent>(toPromote);
         _awardRecommendation.SetCanRecommend(toPromote, true);
@@ -780,6 +797,8 @@ public sealed class SquadSystem : EntitySystem
                 break;
             }
         }
+
+        NotifyMemberUpdated(toPromote);
 
         var squad = toPromote.Comp?.Squad;
         if (TryComp(toPromote, out ActorComponent? actor))

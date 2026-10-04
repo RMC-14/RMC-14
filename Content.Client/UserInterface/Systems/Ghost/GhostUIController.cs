@@ -1,5 +1,6 @@
 ﻿using Content.Client.Gameplay;
 using Content.Client.Ghost;
+using Content.Client._RMC14.UserInterface.Systems.Ghost;
 using Content.Client.UserInterface.Systems.Gameplay;
 using Content.Client.UserInterface.Systems.Ghost.Widgets;
 using Content.Shared.Ghost;
@@ -151,9 +152,7 @@ public sealed class GhostUIController : UIController, IOnSystemChanged<GhostSyst
 
     private void RequestWarps()
     {
-        _system?.RequestWarps();
-        Gui?.TargetWindow.Populate();
-        Gui?.TargetWindow.OpenCentered();
+        UIManager.GetUIController<RMCGhostTargetUIController>().OpenWindow(); // RMC14
     }
 
     private void GhostRolesPressed()
