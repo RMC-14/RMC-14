@@ -28,7 +28,7 @@ public sealed class HypospraySystem : EntitySystem
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
     // RMC14
-    [Dependency] private readonly RMCSharedHypospraySystem _rmcHypospray = default!;
+    [Dependency] private readonly RMCHypospraySystem _rmcHypospray = default!;
 
     public override void Initialize()
     {
@@ -247,7 +247,7 @@ public sealed class HypospraySystem : EntitySystem
     // </summary>
     private void AddToggleModeVerb(Entity<HyposprayComponent> entity, ref GetVerbsEvent<AlternativeVerb> args)
     {
-        if (!args.CanAccess || !args.CanInteract || args.Hands == null || entity.Comp.InjectOnly)
+        if (!args.CanAccess || !args.CanInteract || args.Hands == null || entity.Comp.InjectOnly || !entity.Comp.CanContainerDraw) // RMC14
             return;
 
         var user = args.User;
