@@ -1,7 +1,12 @@
-﻿using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Weapons.Melee;
+using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.NPC.Prototypes;
+using Robust.Shared.Configuration;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Timing;
@@ -11,15 +16,25 @@ namespace Content.Shared._RMC14.Marines;
 
 public abstract class SharedMarineSystem : EntitySystem
 {
+    [Dependency] private readonly GunIFFSystem _gunIFF = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly INetConfigurationManager _netConfig = default!;
     [Dependency] private readonly ISerializationManager _serialization = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+
+    private EntityQuery<MarineComponent> _marineQuery;
+
+    private readonly HashSet<EntProtoId<IFFFactionComponent>> _attackedFactions = [];
+    private readonly HashSet<EntProtoId<IFFFactionComponent>> _attackerFactions = [];
 
     public override void Initialize()
     {
         base.Initialize();
 
+        _marineQuery = GetEntityQuery<MarineComponent>();
+
         SubscribeLocalEvent<MarineComponent, GetMarineIconEvent>(OnMarineGetIcon);
+        SubscribeLocalEvent<MarineComponent, ReceivingMeleeAttackAttemptEvent>(OnMarineReceivingMeleeAttackAttempt);
 
         SubscribeLocalEvent<GrantMarineIconsComponent, GotEquippedEvent>(OnGotEquipped);
         SubscribeLocalEvent<GrantMarineIconsComponent, GotUnequippedEvent>(OnGotUnequipped);
@@ -52,6 +67,35 @@ public abstract class SharedMarineSystem : EntitySystem
     {
         if (marine.Comp.Icon is { } icon)
             args.Icon = icon;
+    }
+
+    private void OnMarineReceivingMeleeAttackAttempt(Entity<MarineComponent> marine, ref ReceivingMeleeAttackAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (marine.Owner == args.Attacker)
+        {
+            // If you're trying to attack yourself, allow if if you have damage yourself enabled, otherwise don't allow it at all.
+            if (!TryComp<ActorComponent>(marine, out var actor)
+                || !_netConfig.GetClientCVar(actor.PlayerSession.Channel, RMCCVars.RMCDamageYourself))
+            {
+                args.Cancelled = true;
+            }
+
+            return;
+        }
+
+        if (args.Deferred)
+            return;
+
+        // Defer attacks against entities that share an IFF faction with you
+        if (_gunIFF.TryGetFactions(args.Attacker, _attackerFactions)
+            && _gunIFF.TryGetFactions(marine.Owner, _attackedFactions)
+            && _attackerFactions.Overlaps(_attackedFactions))
+        {
+            args.Deferred = true;
+        }
     }
 
     public GetMarineIconEvent GetMarineIcon(EntityUid uid)

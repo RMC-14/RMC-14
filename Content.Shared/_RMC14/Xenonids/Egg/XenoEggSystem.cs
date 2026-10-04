@@ -2,10 +2,12 @@ using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Mortar;
+using Content.Shared._RMC14.Vehicle;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Egg.EggRetriever;
-using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -116,6 +118,7 @@ public sealed class XenoEggSystem : EntitySystem
         SubscribeLocalEvent<XenoEggComponent, StepTriggerAttemptEvent>(OnXenoEggStepTriggerAttempt);
         SubscribeLocalEvent<XenoEggComponent, StepTriggeredOffEvent>(OnXenoEggStepTriggered);
         SubscribeLocalEvent<XenoEggComponent, BeforeDamageChangedEvent>(OnXenoEggBeforeDamageChanged);
+        SubscribeLocalEvent<XenoEggComponent, ReceivingMeleeAttackAttemptEvent>(OnXenoEggReceivingMeleeAttackAttempt);
         SubscribeLocalEvent<XenoEggComponent, GetVerbsEvent<ActivationVerb>>(OnGetVerbs);
         SubscribeLocalEvent<XenoEggComponent, DestructionEventArgs>(OnDestruction);
 
@@ -789,6 +792,25 @@ public sealed class XenoEggSystem : EntitySystem
     {
         if (ent.Comp.State == XenoEggState.Item) // cannot destroy in item form
             args.Cancelled = true;
+    }
+
+    private void OnXenoEggReceivingMeleeAttackAttempt(Entity<XenoEggComponent> ent, ref ReceivingMeleeAttackAttemptEvent args)
+    {
+        // Eggs can't be tackled/disarmed
+        if (args.Disarm)
+        {
+            args.Cancelled = true;
+            return;
+        }
+
+        // Unplanted eggs can't be damaged, but we can't cancel the attack because
+        // we allow eggs to be picked up in combat mode.
+        // Additionally, defer attacking eggs of the same hive.
+        if (ent.Comp.State is XenoEggState.Item
+            || _hive.FromSameHiveOrAlly(ent.Owner, args.Attacker))
+        {
+            args.Deferred = true;
+        }
     }
 
     private void RemoveOvipositorActions(Entity<XenoOvipositorCapableComponent?> capable)

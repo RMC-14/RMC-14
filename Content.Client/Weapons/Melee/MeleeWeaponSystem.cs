@@ -215,8 +215,11 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
     {
         EntityUid? target = null;
 
-        if (_stateManager.CurrentState is GameplayStateBase screen)
-            target = screen.GetClickedEntity(mousePos);
+        // RMC14 start
+        //if (_stateManager.CurrentState is GameplayStateBase screen)
+        //    target = screen.GetClickedEntity(mousePos);
+        target = _rmcMeleeWeapon.GetAttackTarget(attacker, mousePos, true, meleeComponent);
+        // RMC14 end
 
         var attackerPos = TransformSystem.GetMapCoordinates(attacker);
         if (mousePos.MapId != attackerPos.MapId || (attackerPos.Position - mousePos.Position).Length() > meleeComponent.Range)
@@ -235,8 +238,11 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
 
         EntityUid? target = null;
 
-        if (_stateManager.CurrentState is GameplayStateBase screen)
-            target = screen.GetClickedEntity(mousePos);
+        // RMC14 start
+        //if (_stateManager.CurrentState is GameplayStateBase screen)
+        //    target = screen.GetClickedEntity(mousePos);
+        target = _rmcMeleeWeapon.GetAttackTarget(attacker, mousePos, false, meleeComponent);
+        // RMC14 end
 
         // RMC14
         if ((attackerPos.Position - mousePos.Position).Length() > _rmcMeleeWeapon.GetUserLightAttackRange(attacker, target, meleeComponent))

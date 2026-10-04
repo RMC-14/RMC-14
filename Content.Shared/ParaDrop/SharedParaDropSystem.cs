@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Neurotoxin;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
@@ -59,6 +60,7 @@ public abstract partial class SharedParaDropSystem : EntitySystem
         SubscribeLocalEvent<ParaDroppingComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<ParaDroppingComponent, ComponentShutdown>(OnComponentShutdown);
         SubscribeLocalEvent<ParaDroppingComponent, RMCIgniteAttemptEvent>(OnIgniteAttempt);
+        SubscribeLocalEvent<ParaDroppingComponent, ReceivingMeleeAttackAttemptEvent>(OnParaDroppingReceivingMeleeAttackAttempt);
         SubscribeLocalEvent<ParaDroppingComponent, GettingAttackedAttemptEvent>(OnGettingAttacked);
         SubscribeLocalEvent<ParaDroppingComponent, AttemptMobCollideEvent>(OnAttemptMobCollide);
         SubscribeLocalEvent<ParaDroppingComponent, AttemptMobTargetCollideEvent>(OnAttemptMobTargetCollide);
@@ -195,6 +197,11 @@ public abstract partial class SharedParaDropSystem : EntitySystem
     }
 
     private void OnAttemptMobTargetCollide(Entity<ParaDroppingComponent> ent, ref AttemptMobTargetCollideEvent args)
+    {
+        args.Cancelled = true;
+    }
+
+    private void OnParaDroppingReceivingMeleeAttackAttempt(Entity<ParaDroppingComponent> ent, ref ReceivingMeleeAttackAttemptEvent args)
     {
         args.Cancelled = true;
     }

@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Neurotoxin;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Damage;
@@ -71,6 +72,7 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
 
         SubscribeLocalEvent<CrashLandingComponent, UpdateCanMoveEvent>(OnUpdateCanMove);
         SubscribeLocalEvent<CrashLandingComponent, RMCIgniteAttemptEvent>(OnIgniteAttempt);
+        SubscribeLocalEvent<CrashLandingComponent, ReceivingMeleeAttackAttemptEvent>(OnReceivingMeleeAttackAttempt);
         SubscribeLocalEvent<CrashLandingComponent, GettingAttackedAttemptEvent>(OnGettingAttacked);
         SubscribeLocalEvent<CrashLandingComponent, AttemptMobCollideEvent>(OnAttemptMobCollide);
         SubscribeLocalEvent<CrashLandingComponent, AttemptMobTargetCollideEvent>(OnAttemptMobTargetCollide);
@@ -145,6 +147,11 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
     }
 
     private void OnAttemptMobTargetCollide(Entity<CrashLandingComponent> ent, ref AttemptMobTargetCollideEvent args)
+    {
+        args.Cancelled = true;
+    }
+
+    private void OnReceivingMeleeAttackAttempt(Entity<CrashLandingComponent> ent, ref ReceivingMeleeAttackAttemptEvent args)
     {
         args.Cancelled = true;
     }
