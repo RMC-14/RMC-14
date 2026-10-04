@@ -302,13 +302,13 @@ public sealed class RMCMissedTargetActionEvent : EntityEventArgs
 }
 
 /// <summary>
-/// Event raised on EntityTargetActionComponent that allows the action to decide if a target should be skipped or deferred to prefer other entities.
+/// Event raised on actions that allows the action to decide if a target should be skipped or deferred to prefer other entities.
 /// Handling this event should cause NO SIDE EFFECTS.
 /// </summary>
 /// <param name="Target">Target to check.</param>
 /// <param name="User">User of the action.</param>
 /// <param name="Action">The ActionComponent of the action.</param>
-/// <param name="Skip">Set to true if the target should be skipped.</param>
-/// <param name="Defer">Set to true if the target should be deferred.</param>
+/// <param name="Skip">Set to true if the target should be skipped, disallowing it from being a target.</param>
+/// <param name="Defer">Set to true if the target should be deferred, allowing it to be a target only if there are no non-deferred targets.</param>
 [ByRefEvent]
 public record struct CheckActionTargetEvent(in EntityUid Target, in EntityUid User, in Entity<ActionComponent> Action, bool Skip = false, bool Defer = false);
