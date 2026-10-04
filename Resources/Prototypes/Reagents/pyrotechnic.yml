@@ -165,12 +165,14 @@
   intensityMod: 0.1
   durationMod: 0.7
   radiusMod: -0.08
+  overdose: 30
+  criticalOverdose: 50
   metabolisms:
     Poison:
       metabolismRate: 0.1
       effects:
       - !type:Toxic
-        potency: 1 # </RMC14>
+        level: 1 # </RMC14>
 
 - type: reagent
   id: Fluorosurfactant
