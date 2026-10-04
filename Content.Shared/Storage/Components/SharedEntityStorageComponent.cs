@@ -22,7 +22,10 @@ public abstract partial class SharedEntityStorageComponent : Component
     public readonly int MasksToRemove = (int) (
         CollisionGroup.MidImpassable |
         CollisionGroup.HighImpassable |
-        CollisionGroup.LowImpassable);
+        CollisionGroup.LowImpassable |
+        // RMC14
+        CollisionGroup.BulletImpassable);
+        // RMC14
 
     /// <summary>
     ///     Collision masks that were removed from ANY layer when the storage was opened;
