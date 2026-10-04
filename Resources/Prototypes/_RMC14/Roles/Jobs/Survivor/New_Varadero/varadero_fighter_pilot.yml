@@ -69,7 +69,7 @@
     id: CMIDCardStandardDogtag
     pocket1: RMCPouchSurvivalFill
     belt: CMBeltUtilityFilled
-    outerClothing: RMCCoatPilotFighter
+    outerClothing: RMCArmorPDU
     back: RMCSatchelLightpack5Slot
     shoes: CMBootsBlackFilled
   storage:

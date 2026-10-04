@@ -415,6 +415,20 @@
       Urban: _RMC14/Objects/Clothing/Head/Hats/cap_officer/urban.rsi
 
 - type: entity
+  parent: CMHeadCap
+  id: CMHeadCapOfficerNV
+  name: UNMC peaked officer cap
+  description: A peaked service cap worn by officers of the United Nations Marine Corps, featuring an in-built headset. It features a gold UNMC emblem and a glossy black visor. Best avoid scuffing that visor unless you have some polish on you.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_officer_nv.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_officer_nv.rsi
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
   parent: RMCHeadCapFlippable
   id: RMCHeadCapASO
   name: UNMC ASO cap
@@ -1030,6 +1044,20 @@
       Snow: _RMC14/Objects/Clothing/Head/Hats/cap/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Hats/cap/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Hats/cap/urban.rsi
+
+- type: entity
+  parent: CMHeadCap
+  id: RMCHeadCapPatrolNV
+  name: patrol cap
+  suffix: Varadero
+  description: A casual cap issued as part of the non-combat uniform. It comes with a protective neck flap to protect from sunburn.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_nv.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_nv.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
 
 - type: entity
   parent: RMCHeadCapGrey

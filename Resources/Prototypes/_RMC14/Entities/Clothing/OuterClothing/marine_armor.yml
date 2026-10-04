@@ -318,24 +318,6 @@
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/tanker/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/tanker/urban.rsi
 
-# am2
-- type: entity
-  parent: CMArmorM3VLBallistics
-  id: RMCArmorAM2
-  name: AM2 pattern armor
-  description: A non-standard variant of the Marine M2 Pattern Chestplate. Protects the chest from ballistic rounds, bladed objects and accidents. It has a small leather pouch strapped to it for limited storage. Notably, this model of the M2 lacks the rigging and such of the later generation M2's still in use by the UNMC, making it easier to handle.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/tyrargo.rsi # TODO RMC14: sprites
-  - type: CMArmor # TODO RMC14: BODY_FLAG_CHEST|BODY_FLAG_GROIN|BODY_FLAG_LEGS
-    bullet: 20
-    bio: 15
-  - type: Storage
-    grid:
-    - 0,0,5,1 # 3 slots
-  - type: ItemCamouflage
-    camouflageVariations: { }
-
 #Officer armors
 - type: entity
   parent: CMArmorM2MP
@@ -966,6 +948,34 @@
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/urban.rsi
 
 - type: entity
+  parent: CMArmorM3VLBallistics
+  id: RMCArmorAM2
+  name: AM2 pattern armor
+  description: A non-standard variant of the Marine M2 Pattern Chestplate. Protects the chest from ballistic rounds, bladed objects and accidents. It has a small leather pouch strapped to it for limited storage. Notably, this model of the M2 lacks the rigging and such of the later generation M2's still in use by the UNMC, making it easier to handle.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/am2.rsi
+  - type: CMArmor # TODO RMC14: BODY_FLAG_CHEST|BODY_FLAG_GROIN|BODY_FLAG_LEGS
+    bullet: 20
+    bio: 15
+  - type: Storage
+    grid:
+    - 0,0,5,1 # 3 slots
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+- type: entity
+  parent: RMCArmorAM2
+  id: RMCArmorIPM2
+  name: IPM2 pattern armor # IP - Improved Protection
+  description: An improved variant of the standard Marine M2 Pattern Chestplate, featuring additional UHMWPE padding which enhances protection against larger calibers. Protects the chest from ballistic rounds, bladed objects and accidents. It has a small leather pouch strapped to it for limited storage.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/ipm2.rsi
+  - type: CMArmor # TODO RMC14: BODY_FLAG_CHEST|BODY_FLAG_GROIN|BODY_FLAG_LEGS
+    bullet: 25
+
+- type: entity
   parent: CMArmorM4
   id: RMCArmorXM4
   name: XM4 pattern intel armor
@@ -999,3 +1009,26 @@
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/io/urban.rsi
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-armor-xm4-pattern-intel-armor
+
+# PDU
+# parents off service jacket on CM but I really didn't want to write more yaml
+- type: entity
+  parent: CMArmorM3Medium
+  id: RMCArmorPDU
+  name: PDU-80 modular vest
+  description: The PDU-80 is an older-generation vest currently in use by Marine ground crews and aerofighter pilots. It is a combination of both a flak vest and a modular body armor system. The chestpiece can be worn alone to provide protection against fragmentation and smaller calibers while allowing the attachment of life preservers and additional armor inserts to suit the individual needs of the user.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/pilot_fighter.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/pilot_fighter.rsi
+  - type: CMArmor
+    melee: 5
+    bullet: 15
+    bio: 5
+    explosionArmor: 20
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
+    walkModifier: 0.897
+    sprintModifier: 0.897
+  - type: ItemCamouflage
+    camouflageVariations: { }
