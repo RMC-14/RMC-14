@@ -6,6 +6,28 @@
   name: Urist C.M. McHands
   suffix: RMC14
   components:
+  - type: Input
+    context: "rmc-human"
+  - type: RMCKeybindActions
+    actions:
+      MarineOrderMove:
+      - ActionMarineMove
+      MarineOrderHold:
+      - ActionMarineHold
+      MarineOrderFocus:
+      - ActionMarineFocus
+      MarineSpecialistOne:
+      - RMCActionGhilliePreparePosition
+      - RMCActionToggleCloak
+      - RMCActionBroiler
+      MarineSpecialistTwo:
+      - RMCActionFireShield
+      - RMCActionAimedShot
+      - RMCActionSpotTarget
+      MarineCycleHelmetHud:
+      - RMCActionCycleVisor
+      MarineToggleIff:
+      - RMCActionToggleIFF
   - type: Fixtures
     fixtures:
       fix1:
