@@ -124,6 +124,7 @@
   - type: ParalyzeOnPullAttemptImmune
   - type: BypassSkillChecks
   - type: SeeNewPlayers
+  - type: ShowCriminalRecordIcons
   - type: TacticalMapUser
     marines: true
     xenos: true
