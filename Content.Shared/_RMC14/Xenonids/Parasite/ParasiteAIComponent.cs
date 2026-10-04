@@ -20,25 +20,25 @@ public sealed partial class ParasiteAIComponent : Component
     public TimeSpan LifeTime = TimeSpan.FromSeconds(30);
 
     [DataField]
-    public int InitialJumps = 2;
+    public int InitialJumps = 5;
 
     [DataField]
-    public int JumpsLeft = 2;
+    public int JumpsLeft = 5;
 
     [DataField]
     public int MaxSurroundingParas = 2;
 
     [DataField]
-    public int MaxInfectRange = 3;
+    public float MaxInfectRange = 1.5f;
 
     [DataField]
     public float IdleChance = 0.15f;
 
     [DataField]
-    public int MinIdleTime = 5;
+    public float MinIdleTime = 4;
 
     [DataField]
-    public int MaxIdleTime = 15;
+    public float MaxIdleTime = 4;
 
     [DataField]
     public string RestAction = "ActionXenoRest";
@@ -50,7 +50,7 @@ public sealed partial class ParasiteAIComponent : Component
     public float CannibalizeCheck = 0.5f;
 
     [DataField]
-    public TimeSpan JumpTime = TimeSpan.FromSeconds(5);
+    public TimeSpan JumpTime = TimeSpan.FromSeconds(2.5);
 
     [DataField]
     public TimeSpan? NextJump;
