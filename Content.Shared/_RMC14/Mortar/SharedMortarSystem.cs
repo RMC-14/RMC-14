@@ -282,6 +282,7 @@ public abstract class SharedMortarSystem : EntitySystem
 
         var active = new ActiveMortarShellComponent
         {
+            User = user,
             Coordinates = _transform.ToCoordinates(coordinates),
             WarnAt = time + travelTime,
             ImpactWarnAt = time + travelTime + shell.ImpactWarningDelay,
@@ -606,10 +607,13 @@ public abstract class SharedMortarSystem : EntitySystem
             {
                 _transform.SetCoordinates(uid, active.Coordinates);
 
-                var ev = new MortarShellLandEvent(active.Coordinates);
+                EntityUid? user = active.User is { } activeUser && Exists(activeUser)
+                    ? activeUser
+                    : null;
+                var ev = new MortarShellLandEvent(active.Coordinates, user);
                 RaiseLocalEvent(uid, ref ev);
 
-                _rmcExplosion.TriggerExplosive(uid);
+                _rmcExplosion.TriggerExplosive(uid, user: user);
 
                 if (!EntityManager.IsQueuedForDeletion(uid))
                     QueueDel(uid);

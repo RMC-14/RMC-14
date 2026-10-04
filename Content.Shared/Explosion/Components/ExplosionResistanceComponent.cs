@@ -23,6 +23,15 @@ public sealed partial class ExplosionResistanceComponent : Component
     [DataField("damageCoefficient")]
     public float DamageCoefficient = 1;
 
+    // RMC14
+    /// <summary>
+    ///     Replacements for <see cref="DamageCoefficient"/> specific to an explosion type.
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField("damageCoefficientOverrides", customTypeSerializer: typeof(PrototypeIdDictionarySerializer<float, ExplosionPrototype>))]
+    public Dictionary<string, float> DamageCoefficientOverrides = new();
+    // RMC14
+
     /// <summary>
     /// When true, resistances will be applied to the entity wearing this item.
     /// When false, only this entity will get th resistance.

@@ -135,13 +135,26 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
 
     private void OnGetResistance(EntityUid uid, ExplosionResistanceComponent component, ref GetExplosionResistanceEvent args)
     {
-        args.DamageCoefficient *= component.DamageCoefficient;
+        // RMC14
+        var damageCoefficient = component.DamageCoefficient;
+        if (component.DamageCoefficientOverrides.TryGetValue(args.ExplosionPrototype, out var damageCoefficientOverride))
+            damageCoefficient = damageCoefficientOverride;
+
+        args.DamageCoefficient *= damageCoefficient;
+        // RMC14
         if (component.Modifiers.TryGetValue(args.ExplosionPrototype, out var modifier))
             args.DamageCoefficient *= modifier;
     }
 
     /// <inheritdoc/>
-    public override void TriggerExplosive(EntityUid uid, ExplosiveComponent? explosive = null, bool delete = true, float? totalIntensity = null, float? radius = null, EntityUid? user = null)
+    public override void TriggerExplosive(
+        EntityUid uid,
+        ExplosiveComponent? explosive = null,
+        bool delete = true,
+        float? totalIntensity = null,
+        float? radius = null,
+        EntityUid? user = null,
+        Vector2? throwDirection = null)
     {
         // log missing: false, because some entities (e.g. liquid tanks) attempt to trigger explosions when damaged,
         // but may not actually be explosive.
@@ -167,7 +180,8 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
             explosive.TileBreakScale,
             explosive.MaxTileBreak,
             explosive.CanCreateVacuum,
-            user);
+            user,
+            throwDirection: throwDirection); // RMC14
 
         var ev = new CMExplosiveTriggeredEvent();
         RaiseLocalEvent(uid, ref ev);
@@ -240,7 +254,8 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
         int maxTileBreak = int.MaxValue,
         bool canCreateVacuum = true,
         EntityUid? user = null,
-        bool addLog = true)
+        bool addLog = true,
+        Vector2? throwDirection = null)
     {
         var pos = Transform(uid);
 
@@ -248,7 +263,19 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
 
         var posFound = _transformSystem.TryGetMapOrGridCoordinates(uid, out var gridPos, pos);
 
-        QueueExplosion(mapPos, typeId, totalIntensity, slope, maxTileIntensity, uid, tileBreakScale, maxTileBreak, canCreateVacuum, addLog: false);
+        QueueExplosion(
+            mapPos,
+            typeId,
+            totalIntensity,
+            slope,
+            maxTileIntensity,
+            uid,
+            tileBreakScale,
+            maxTileBreak,
+            canCreateVacuum,
+            addLog: false,
+            throwDirection: throwDirection,
+            user: user); // RMC14
 
         if (!addLog)
             return;
@@ -281,7 +308,9 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
         float tileBreakScale = 1f,
         int maxTileBreak = int.MaxValue,
         bool canCreateVacuum = true,
-        bool addLog = true)
+        bool addLog = true,
+        Vector2? throwDirection = null,
+        EntityUid? user = null)
     {
         if (totalIntensity <= 0 || slope <= 0)
             return;
@@ -295,21 +324,38 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
         if (addLog) // dont log if already created a separate, more detailed, log.
             _adminLogger.Add(LogType.Explosion, LogImpact.High, $"Explosion ({typeId}) spawned at {epicenter:coordinates} with intensity {totalIntensity} slope {slope}");
 
-        // try to combine explosions on the same tile if they are the same type
-        foreach (var queued in _queuedExplosions)
+        Vector2? normalizedThrowDirection = null;
+        if (throwDirection is { } directionToNormalize && !directionToNormalize.IsLengthZero())
+            normalizedThrowDirection = directionToNormalize.Normalized();
+
+        // Directional explosions need to retain their individual direction and cause. RMC14
+        if (normalizedThrowDirection == null)
         {
-            // ignore different types or those on different maps
-            if (queued.Proto.ID != type.ID || queued.Epicenter.MapId != epicenter.MapId)
-                continue;
+            // try to combine explosions on the same tile if they are the same type
+            foreach (var queued in _queuedExplosions)
+            {
+                // Preserve attribution without changing how anonymous explosions are combined. RMC14
+                var attributionDiffers = (queued.User != null || user != null) &&
+                    (queued.Cause != cause || queued.User != user);
 
-            var dst2 = queued.Proto.MaxCombineDistance * queued.Proto.MaxCombineDistance;
-            var direction = queued.Epicenter.Position - epicenter.Position;
-            if (direction.LengthSquared() > dst2)
-                continue;
+                // ignore different types, directional explosions, or those on different maps
+                if (queued.ThrowDirection != null ||
+                    attributionDiffers ||
+                    queued.Proto.ID != type.ID ||
+                    queued.Epicenter.MapId != epicenter.MapId)
+                {
+                    continue;
+                }
 
-            // they are close enough to combine so just add total intensity and prevent queuing another one
-            queued.TotalIntensity += totalIntensity;
-            return;
+                var dst2 = queued.Proto.MaxCombineDistance * queued.Proto.MaxCombineDistance;
+                var direction = queued.Epicenter.Position - epicenter.Position;
+                if (direction.LengthSquared() > dst2)
+                    continue;
+
+                // they are close enough to combine so just add total intensity and prevent queuing another one
+                queued.TotalIntensity += totalIntensity;
+                return;
+            }
         }
 
         var boom = new QueuedExplosion(type)
@@ -321,7 +367,9 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
             TileBreakScale = tileBreakScale,
             MaxTileBreak = maxTileBreak,
             CanCreateVacuum = canCreateVacuum,
-            Cause = cause
+            Cause = cause,
+            ThrowDirection = normalizedThrowDirection,
+            User = user
         };
         _explosionQueue.Enqueue(boom);
         _queuedExplosions.Add(boom);
@@ -397,6 +445,8 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
             _mapManager,
             visualEnt,
             queued.Cause,
+            queued.ThrowDirection,
+            queued.User,
             _map);
     }
 
