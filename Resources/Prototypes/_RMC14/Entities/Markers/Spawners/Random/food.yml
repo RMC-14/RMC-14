@@ -87,4 +87,7 @@
         - RMCFoodSnackBurrito
         - RMCFoodSnackHotdogPackaged
         - RMCFoodSnackEATBar
+        - FoodMealBourguignon
+        - FoodMealBouillabaisse
+        - FoodMealCassoulet
       offset: 0
