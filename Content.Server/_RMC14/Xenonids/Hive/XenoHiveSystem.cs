@@ -59,7 +59,6 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
     {
         base.Initialize();
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
-        SubscribeLocalEvent<JoinBurrowedLarvaAttemptEvent>(OnJoinBurrowedLarvaAttempt);
 
         SubscribeLocalEvent<HijackBurrowedSurgeComponent, ComponentStartup>(OnBurrowedSurgeStartup);
         SubscribeLocalEvent<HijackBurrowedSurgeComponent, ComponentShutdown>(OnBurrowedSurgeShutdown);
@@ -72,11 +71,6 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
             true);
         Subs.CVar(_config, RMCCVars.RMCLateJoinsPerBurrowedLarvaEarly, v => _lateJoinsPerBurrowedLarvaEarly = v, true);
         Subs.CVar(_config, RMCCVars.RMCLateJoinsPerBurrowedLarva, v => _lateJoinsPerBurrowedLarva = v, true);
-    }
-
-    private void OnJoinBurrowedLarvaAttempt(ref JoinBurrowedLarvaAttemptEvent ev)
-    {
-        // Placeholder for banish checks - handled by XenoBanishRequirementSystem
     }
 
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)

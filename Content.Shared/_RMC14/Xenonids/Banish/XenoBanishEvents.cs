@@ -13,10 +13,7 @@ public sealed class ManageHiveBanishChooseXenoEvent(NetEntity xeno) : EntityEven
 }
 
 [Serializable, NetSerializable]
-public sealed record ManageHiveBanishReasonEvent(NetEntity Xeno, string Reason) : DialogInputEvent(Reason)
-{
-    public string GetReason() => Message;
-}
+public sealed record ManageHiveBanishReasonEvent(NetEntity Xeno, string Message = "") : DialogInputEvent(Message);
 
 [Serializable, NetSerializable]
 public sealed class ManageHiveReadmitEvent : EntityEventArgs;
@@ -32,9 +29,3 @@ public sealed class ManageHiveReadmitConfirmEvent(NetEntity xeno) : EntityEventA
 {
     public NetEntity Xeno = xeno;
 }
-
-[ByRefEvent]
-public record struct XenoBanishedEvent(EntityUid Banisher, EntityUid Banished, string Reason);
-
-[ByRefEvent]
-public record struct XenoReadmittedEvent(EntityUid Readmitter, EntityUid Readmitted);

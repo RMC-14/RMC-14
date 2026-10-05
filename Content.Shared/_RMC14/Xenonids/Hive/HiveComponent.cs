@@ -1,7 +1,5 @@
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
-using Content.Shared._RMC14.Xenonids.Banish;
-using Content.Shared._RMC14.Xenonids.JoinXeno;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -11,7 +9,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Shared._RMC14.Xenonids.Hive;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-[Access(typeof(SharedXenoHiveSystem), typeof(SharedXenoPylonSystem), typeof(XenoTunnelSystem), typeof(XenoBanishSystem), typeof(LarvaQueueSystem), Other = AccessPermissions.ReadWriteExecute)]
+[Access(typeof(SharedXenoHiveSystem), typeof(SharedXenoPylonSystem), typeof(XenoTunnelSystem))]
 public sealed partial class HiveComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -101,15 +99,6 @@ public sealed partial class HiveComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntProtoId BurrowedLarvaId = "CMXenoLarva";
-
-    [DataField, AutoNetworkedField]
-    public HashSet<EntityUid> BanishedXenos = new();
-
-    /// <summary>
-    /// Maps player user IDs to their unbanish time. Used to prevent banned players from taking xeno roles.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public Dictionary<Guid, TimeSpan> BanishedPlayers = new();
 
     [DataField, AutoNetworkedField]
     public HashSet<GibbedXenoInfo> GibbedXenos = new();

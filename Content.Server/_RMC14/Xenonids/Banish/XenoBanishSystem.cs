@@ -1,155 +1,86 @@
 using Content.Server._RMC14.Announce;
+using Content.Server.Administration.Managers;
 using Content.Shared._RMC14.Xenonids.Banish;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared.Administration;
+using Content.Shared.Database;
 using Content.Shared.Mobs;
 using Content.Shared.Popups;
+using Content.Shared.Verbs;
 using Robust.Shared.Player;
-using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Xenonids.Banish;
 
-public sealed class XenoBanishServerSystem : EntitySystem
+public sealed class XenoBanishSystem : SharedXenoBanishSystem
 {
+    [Dependency] private readonly IAdminManager _admin = default!;
     [Dependency] private readonly XenoAnnounceSystem _announce = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<XenoBanishedEvent>(OnXenoBanishedEvent);
-        SubscribeLocalEvent<XenoReadmittedEvent>(OnXenoReadmittedEvent);
+        base.Initialize();
+
         SubscribeLocalEvent<XenoBanishComponent, MobStateChangedEvent>(OnBanishedMobStateChanged);
+        SubscribeLocalEvent<XenoBanishComponent, GetVerbsEvent<Verb>>(OnBanishedGetVerbs);
     }
 
-    private void OnXenoBanishedEvent(ref XenoBanishedEvent args)
+    private void OnBanishedGetVerbs(Entity<XenoBanishComponent> ent, ref GetVerbsEvent<Verb> args)
     {
-        var banished = args.Banished;
-
-        if (!TryComp<XenoBanishComponent>(banished, out var banishComp))
+        if (!TryComp(args.User, out ActorComponent? actor) ||
+            !_admin.HasAdminFlag(actor.PlayerSession, AdminFlags.Admin))
+        {
             return;
-
-        // Add to BanishedPlayers by user ID
-        if (TryComp(banished, out ActorComponent? actor) && banishComp.OriginalHive is { } originalHive)
-            AddBanishedPlayer(originalHive, actor.PlayerSession.UserId);
-
-        // Announce to hive
-        if (banishComp.OriginalHive is { } hive)
-        {
-            var msg = Loc.GetString("rmc-banish-announcement", ("name", Name(banished)), ("reason", args.Reason));
-            _announce.AnnounceSameHiveDefaultSound(args.Banisher, msg);
         }
 
-        // Notify the banished player
-        if (TryComp<ActorComponent>(banished, out var banishedActor))
+        var user = args.User;
+        args.Verbs.Add(new Verb
         {
-            var banishedMsg = Loc.GetString("rmc-banish-notification", ("reason", args.Reason));
-            _popup.PopupEntity(banishedMsg, banished, banishedActor.PlayerSession, PopupType.LargeCaution);
+            Text = Loc.GetString("rmc-readmit-admin-verb"),
+            Category = VerbCategory.Admin,
+            Act = () => Readmit(user, ent),
+            Impact = LogImpact.Medium,
+        });
+    }
+
+    protected override void OnBanished(EntityUid banisher, Entity<XenoBanishComponent> banished)
+    {
+        var msg = Loc.GetString("rmc-banish-announcement", ("name", Name(banished)), ("reason", banished.Comp.Reason));
+        _announce.AnnounceSameHiveDefaultSound(banisher, msg);
+
+        if (TryComp(banished, out ActorComponent? actor))
+        {
+            var banishedMsg = Loc.GetString("rmc-banish-notification", ("reason", banished.Comp.Reason));
+            _popup.PopupEntity(banishedMsg, banished, actor.PlayerSession, PopupType.LargeCaution);
         }
     }
 
-    private void OnXenoReadmittedEvent(ref XenoReadmittedEvent args)
+    protected override void OnReadmitted(EntityUid readmitter, Entity<XenoBanishComponent> readmitted)
     {
-        var readmitted = args.Readmitted;
+        // Announced from the readmitted xenonid, since admins can readmit from outside the hive
+        var msg = Loc.GetString("rmc-readmit-announcement", ("name", Name(readmitted)));
+        _announce.AnnounceSameHiveDefaultSound(readmitted.Owner, msg);
 
-        // Remove from BanishedPlayers by user ID
         if (TryComp(readmitted, out ActorComponent? actor))
         {
-            // Get the hive they're being readmitted to
-            if (TryComp<HiveMemberComponent>(readmitted, out var hiveMember) && hiveMember.Hive is { } hive)
-                RemoveBanishedPlayer(hive, actor.PlayerSession.UserId);
-        }
-
-        // Announce to hive
-        if (TryComp<HiveMemberComponent>(readmitted, out var member) && member.Hive is { } readmitHive)
-        {
-            var msg = Loc.GetString("rmc-readmit-announcement", ("name", Name(readmitted)));
-            _announce.AnnounceSameHiveDefaultSound(args.Readmitter, msg);
-        }
-
-        // Notify the readmitted player
-        if (TryComp<ActorComponent>(readmitted, out var readmittedActor))
-        {
             var readmittedMsg = Loc.GetString("rmc-readmit-notification");
-            _popup.PopupEntity(readmittedMsg, readmitted, readmittedActor.PlayerSession, PopupType.Large);
+            _popup.PopupEntity(readmittedMsg, readmitted, actor.PlayerSession, PopupType.Large);
         }
     }
 
     private void OnBanishedMobStateChanged(Entity<XenoBanishComponent> ent, ref MobStateChangedEvent args)
     {
-        if (!ent.Comp.Banished || args.NewMobState != MobState.Dead)
+        if (args.NewMobState != MobState.Dead)
             return;
 
-        // When a banished xeno dies, add a burrowed larva to their original hive
-        if (ent.Comp.OriginalHive is { } originalHive && TryComp<HiveComponent>(originalHive, out var hiveComp))
+        if (ent.Comp.OriginalHive is not { } originalHive ||
+            !TryComp(originalHive, out HiveComponent? hive))
         {
-            hiveComp.BurrowedLarva++;
-            Dirty(originalHive, hiveComp);
-        }
-    }
-
-    private void AddBanishedPlayer(EntityUid hiveId, Guid userId)
-    {
-        if (!TryComp<HiveComponent>(hiveId, out var hiveComp))
             return;
-
-        hiveComp.BanishedPlayers[userId] = _timing.CurTime + TimeSpan.FromMinutes(30);
-        Dirty(hiveId, hiveComp);
-    }
-
-    private void RemoveBanishedPlayer(EntityUid hiveId, Guid userId)
-    {
-        if (!TryComp<HiveComponent>(hiveId, out var hiveComp))
-            return;
-
-        hiveComp.BanishedPlayers.Remove(userId);
-        Dirty(hiveId, hiveComp);
-    }
-
-    public bool CanTakeXenoRole(Guid userId, EntityUid hive)
-    {
-        if (!TryComp<HiveComponent>(hive, out var hiveComp))
-            return true;
-
-        if (!hiveComp.BanishedPlayers.TryGetValue(userId, out var unbanishTime))
-            return true;
-
-        return _timing.CurTime >= unbanishTime;
-    }
-
-    public TimeSpan? GetBanishTimeRemaining(Guid userId, EntityUid hive)
-    {
-        if (!TryComp<HiveComponent>(hive, out var hiveComp))
-            return null;
-
-        if (!hiveComp.BanishedPlayers.TryGetValue(userId, out var unbanishTime))
-            return null;
-
-        var remaining = unbanishTime - _timing.CurTime;
-        return remaining > TimeSpan.Zero ? remaining : null;
-    }
-
-    public override void Update(float frameTime)
-    {
-        var currentTime = _timing.CurTime;
-        var toRemove = new List<(EntityUid, Guid)>();
-
-        var hives = EntityQueryEnumerator<HiveComponent>();
-        while (hives.MoveNext(out var hiveId, out var hive))
-        {
-            foreach (var (userId, unbanishTime) in hive.BanishedPlayers)
-            {
-                if (currentTime >= unbanishTime)
-                    toRemove.Add((hiveId, userId));
-            }
         }
 
-        foreach (var (hiveId, userId) in toRemove)
-        {
-            if (TryComp<HiveComponent>(hiveId, out var hive))
-            {
-                hive.BanishedPlayers.Remove(userId);
-                Dirty(hiveId, hive);
-            }
-        }
+        // When a banished xenonid dies, the original hive gets a burrowed larva to replace it
+        _hive.ChangeBurrowedLarva((originalHive, hive), 1);
     }
 }

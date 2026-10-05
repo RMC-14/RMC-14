@@ -14,7 +14,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Banish;
 
-public sealed class XenoBanishSystem : EntitySystem
+public abstract class SharedXenoBanishSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
@@ -36,7 +36,6 @@ public sealed class XenoBanishSystem : EntitySystem
         SubscribeLocalEvent<ManageHiveComponent, ManageHiveReadmitConfirmEvent>(OnManageHiveReadmitConfirm);
 
         SubscribeLocalEvent<XenoBanishComponent, AttackAttemptEvent>(OnBanishedAttackAttempt, before: [typeof(XenoSystem)]);
-        SubscribeLocalEvent<XenoBanishComponent, GettingAttackedAttemptEvent>(OnBanishedGettingAttacked, before: [typeof(XenoSystem)]);
     }
 
     private void OnManageHiveBanish(Entity<ManageHiveComponent> ent, ref ManageHiveBanishEvent args)
@@ -62,13 +61,13 @@ public sealed class XenoBanishSystem : EntitySystem
         }
         catch
         {
-            // ignored
+            _popup.PopupCursor(Loc.GetString("rmc-banish-error-not-enough-playtime", ("requiredHours", (int) ent.Comp.BanishRequiredTime.TotalHours)), ent, PopupType.LargeCaution);
+            return;
         }
 
         if (!_xenoPlasma.HasPlasmaPopup(ent.Owner, ent.Comp.BanishPlasmaCost, false))
             return;
 
-        // Build list of banishable xenos
         var options = new List<DialogOption>();
         var query = EntityQueryEnumerator<XenoComponent, HiveMemberComponent, ActorComponent>();
         while (query.MoveNext(out var uid, out _, out var member, out _))
@@ -100,17 +99,14 @@ public sealed class XenoBanishSystem : EntitySystem
 
     private void OnManageHiveBanishChooseXeno(Entity<ManageHiveComponent> ent, ref ManageHiveBanishChooseXenoEvent args)
     {
-        if (_net.IsClient)
-            return;
-
         if (!TryGetEntity(args.Xeno, out var xeno))
             return;
 
-        if (!CanBanishTarget(ent, xeno.Value))
+        if (!CanBanishTargetPopup(ent, xeno.Value))
             return;
 
         var msg = Loc.GetString("rmc-banish-confirm", ("name", Name(xeno.Value)));
-        _dialog.OpenInput(ent, ent, msg, new ManageHiveBanishReasonEvent(args.Xeno, ""), true, 200);
+        _dialog.OpenInput(ent, ent, msg, new ManageHiveBanishReasonEvent(args.Xeno), true, 200);
     }
 
     private void OnManageHiveBanishReason(Entity<ManageHiveComponent> ent, ref ManageHiveBanishReasonEvent args)
@@ -121,16 +117,16 @@ public sealed class XenoBanishSystem : EntitySystem
         if (!TryGetEntity(args.Xeno, out var xeno))
             return;
 
-        if (!CanBanishTarget(ent, xeno.Value))
+        if (!CanBanishTargetPopup(ent, xeno.Value))
             return;
 
         if (string.IsNullOrWhiteSpace(args.Message))
         {
-            _popup.PopupCursor(Loc.GetString("rmc-banish-no-reason"), ent, PopupType.MediumCaution);
+            ErrorPopup(ent, Loc.GetString("rmc-banish-no-reason"));
             return;
         }
 
-        if (!_xenoPlasma.TryRemovePlasmaPopup(ent.Owner, ent.Comp.BanishPlasmaCost))
+        if (!_xenoPlasma.TryRemovePlasmaPopup(ent.Owner, ent.Comp.BanishPlasmaCost, false))
             return;
 
         Banish(ent.Owner, xeno.Value, args.Message);
@@ -144,51 +140,28 @@ public sealed class XenoBanishSystem : EntitySystem
         if (_hive.GetHive(ent.Owner) is not { } hive)
             return;
 
-        if (hive.Comp.BanishedXenos.Count == 0)
+        var options = new List<DialogOption>();
+        var query = EntityQueryEnumerator<XenoBanishComponent>();
+        while (query.MoveNext(out var uid, out var banish))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-readmit-not-banished"), ent, ent, PopupType.MediumCaution);
-            return;
-        }
-
-        var banishedList = new List<(EntityUid uid, string name, string reason, bool canReadmit, string? error)>();
-        foreach (var banished in hive.Comp.BanishedXenos)
-        {
-            if (!TryComp<XenoBanishComponent>(banished, out var banishComp))
+            if (banish.OriginalHive != hive.Owner)
                 continue;
 
-            var elapsed = _timing.CurTime - banishComp.BanishedAt;
-            var canReadmit = true;
-            string? error = null;
+            if (_mobState.IsDead(uid))
+                continue;
 
-            if (elapsed < ent.Comp.ReadmitMinTime)
-            {
-                var remaining = (int)(ent.Comp.ReadmitMinTime - elapsed).TotalMinutes + 1;
-                error = $"(Wait {remaining} min)";
-                canReadmit = false;
-            }
-            else if (_mobState.IsDead(banished))
-            {
-                error = "(Dead)";
-                canReadmit = false;
-            }
+            var text = Name(uid);
+            if (GetReadmitTimeLeft(ent, banish) is { } timeLeft)
+                text = Loc.GetString("rmc-readmit-option-wait", ("name", text), ("minutes", (int) Math.Ceiling(timeLeft.TotalMinutes)));
 
-            var displayName = error != null ? $"{Name(banished)} - {banishComp.Reason} {error}" : $"{Name(banished)} - {banishComp.Reason}";
-            banishedList.Add((banished, displayName, banishComp.Reason, canReadmit, error));
+            // Still clickable while waiting so the queen gets told why it can't be done yet
+            options.Add(new DialogOption(text, new ManageHiveReadmitXenoEvent(GetNetEntity(uid)), description: banish.Reason));
         }
 
-        if (banishedList.Count == 0)
+        if (options.Count == 0)
         {
-            _popup.PopupEntity(Loc.GetString("rmc-readmit-not-banished"), ent, ent, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-readmit-no-valid-targets"), ent, ent, PopupType.MediumCaution);
             return;
-        }
-
-        var options = new List<DialogOption>();
-        foreach (var (uid, displayName, reason, canReadmit, error) in banishedList)
-        {
-            if (canReadmit)
-                options.Add(new DialogOption(displayName, new ManageHiveReadmitXenoEvent(GetNetEntity(uid))));
-            else
-                options.Add(new DialogOption(displayName, null));
         }
 
         _dialog.OpenOptions(ent, Loc.GetString("rmc-readmit-title"), options);
@@ -196,20 +169,13 @@ public sealed class XenoBanishSystem : EntitySystem
 
     private void OnManageHiveReadmitXeno(Entity<ManageHiveComponent> ent, ref ManageHiveReadmitXenoEvent args)
     {
-        if (_net.IsClient)
-            return;
-
         if (!TryGetEntity(args.Xeno, out var xeno))
             return;
 
-        if (!TryComp<XenoBanishComponent>(xeno, out var banish))
+        if (!CanReadmitTargetPopup(ent, xeno.Value))
             return;
 
-        var elapsed = _timing.CurTime - banish.BanishedAt;
-        if (elapsed < ent.Comp.ReadmitMinTime || _mobState.IsDead(xeno.Value))
-            return;
-
-        if (!_xenoPlasma.TryRemovePlasmaPopup(ent.Owner, ent.Comp.ReadmitPlasmaCost))
+        if (!_xenoPlasma.HasPlasmaPopup(ent.Owner, ent.Comp.ReadmitPlasmaCost, false, _net.IsServer))
             return;
 
         var msg = Loc.GetString("rmc-readmit-confirm", ("name", Name(xeno.Value)));
@@ -224,49 +190,93 @@ public sealed class XenoBanishSystem : EntitySystem
         if (!TryGetEntity(args.Xeno, out var xeno))
             return;
 
-        if (!TryComp<XenoBanishComponent>(xeno, out var banish))
+        if (!CanReadmitTargetPopup(ent, xeno.Value))
             return;
 
-        var elapsed = _timing.CurTime - banish.BanishedAt;
-        if (elapsed < ent.Comp.ReadmitMinTime || _mobState.IsDead(xeno.Value))
+        if (!_xenoPlasma.TryRemovePlasmaPopup(ent.Owner, ent.Comp.ReadmitPlasmaCost, false))
             return;
 
         Readmit(ent.Owner, xeno.Value);
     }
 
-    private bool CanBanishTarget(Entity<ManageHiveComponent> manage, EntityUid target)
+    /// <summary>
+    /// Shows an error above the queen. Only done by the server so it still shows when
+    /// the client couldn't predict the target, and never shows twice.
+    /// </summary>
+    private void ErrorPopup(EntityUid manage, string msg)
+    {
+        if (_net.IsServer)
+            _popup.PopupEntity(msg, manage, manage, PopupType.MediumCaution);
+    }
+
+    private bool CanBanishTargetPopup(Entity<ManageHiveComponent> manage, EntityUid target)
     {
         if (target == manage.Owner)
             return false;
 
         if (!HasComp<XenoComponent>(target))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-banish-not-xeno"), target, manage, PopupType.MediumCaution);
+            ErrorPopup(manage, Loc.GetString("rmc-banish-not-xeno"));
             return false;
         }
 
         if (_mobState.IsCritical(target) || _mobState.IsDead(target))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-banish-crit"), target, manage, PopupType.MediumCaution);
+            ErrorPopup(manage, Loc.GetString("rmc-banish-crit"));
             return false;
         }
 
         if (!_hive.FromSameHive(manage.Owner, target))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-hivemanagement-cant-deevolve-other-hive"), target, manage, PopupType.MediumCaution);
+            ErrorPopup(manage, Loc.GetString("rmc-banish-different-hive"));
             return false;
         }
 
         if (HasComp<XenoBanishComponent>(target))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-banish-already-banished"), target, manage, PopupType.MediumCaution);
+            ErrorPopup(manage, Loc.GetString("rmc-banish-already-banished"));
             return false;
         }
 
-        if (!_xenoPlasma.HasPlasmaPopup(manage.Owner, manage.Comp.BanishPlasmaCost, false))
+        if (!_xenoPlasma.HasPlasmaPopup(manage.Owner, manage.Comp.BanishPlasmaCost, false, _net.IsServer))
             return false;
 
         return true;
+    }
+
+    private bool CanReadmitTargetPopup(Entity<ManageHiveComponent> manage, EntityUid target)
+    {
+        if (!TryComp(target, out XenoBanishComponent? banish))
+        {
+            ErrorPopup(manage, Loc.GetString("rmc-readmit-not-banished"));
+            return false;
+        }
+
+        if (_mobState.IsDead(target))
+        {
+            ErrorPopup(manage, Loc.GetString("rmc-readmit-dead"));
+            return false;
+        }
+
+        if (_hive.GetHive(manage.Owner) is not { } hive || banish.OriginalHive != hive.Owner)
+        {
+            ErrorPopup(manage, Loc.GetString("rmc-readmit-different-hive"));
+            return false;
+        }
+
+        if (GetReadmitTimeLeft(manage, banish) is { } timeLeft)
+        {
+            ErrorPopup(manage, Loc.GetString("rmc-readmit-wait", ("minutes", (int) Math.Ceiling(timeLeft.TotalMinutes))));
+            return false;
+        }
+
+        return true;
+    }
+
+    private TimeSpan? GetReadmitTimeLeft(Entity<ManageHiveComponent> manage, XenoBanishComponent banish)
+    {
+        var timeLeft = banish.BanishedAt + manage.Comp.ReadmitMinTime - _timing.CurTime;
+        return timeLeft > TimeSpan.Zero ? timeLeft : null;
     }
 
     private void Banish(EntityUid banisher, EntityUid banished, string reason)
@@ -274,66 +284,45 @@ public sealed class XenoBanishSystem : EntitySystem
         var comp = EnsureComp<XenoBanishComponent>(banished);
         comp.BanishedAt = _timing.CurTime;
         comp.Reason = reason;
-
-        if (_hive.GetHive(banished) is { } originalHive)
-        {
-            comp.OriginalHive = originalHive.Owner;
-            var hiveComp = originalHive.Comp;
-            hiveComp.BanishedXenos.Add(banished);
-            Dirty(originalHive);
-        }
-
+        comp.OriginalHive = _hive.GetHive(banished)?.Owner;
         Dirty(banished, comp);
 
         _hive.SetHive(banished, null);
 
-        _hive.ChangeBurrowedLarva(1);
-
-        var ev = new XenoBanishedEvent(banisher, banished, reason);
-        RaiseLocalEvent(ref ev);
+        OnBanished(banisher, (banished, comp));
 
         _adminLog.Add(LogType.RMCXenoBanish, $"{ToPrettyString(banisher)} banished {ToPrettyString(banished)} for: {reason}");
     }
 
-    private void Readmit(EntityUid readmitter, EntityUid readmitted)
+    protected void Readmit(EntityUid readmitter, EntityUid readmitted)
     {
-        if (!TryComp<XenoBanishComponent>(readmitted, out var banishComp))
+        if (!TryComp(readmitted, out XenoBanishComponent? banish))
             return;
 
-        if (_hive.GetHive(readmitted) is { } hive)
-        {
-            var hiveComp = hive.Comp;
-            hiveComp.BanishedXenos.Remove(readmitted);
-            Dirty(hive);
-        }
+        if (banish.OriginalHive is { } originalHive)
+            _hive.SetHive(readmitted, originalHive);
 
-        if (banishComp.OriginalHive is { } originalHiveId)
-            _hive.SetHive(readmitted, originalHiveId);
+        OnReadmitted(readmitter, (readmitted, banish));
 
         RemCompDeferred<XenoBanishComponent>(readmitted);
-
-        var ev = new XenoReadmittedEvent(readmitter, readmitted);
-        RaiseLocalEvent(ref ev);
 
         _adminLog.Add(LogType.RMCXenoReadmit, $"{ToPrettyString(readmitter)} readmitted {ToPrettyString(readmitted)}");
     }
 
-    public bool IsBanished(EntityUid uid)
+    protected virtual void OnBanished(EntityUid banisher, Entity<XenoBanishComponent> banished)
     {
-        return HasComp<XenoBanishComponent>(uid);
+    }
+
+    protected virtual void OnReadmitted(EntityUid readmitter, Entity<XenoBanishComponent> readmitted)
+    {
     }
 
     private void OnBanishedAttackAttempt(Entity<XenoBanishComponent> banished, ref AttackAttemptEvent args)
     {
-        if (banished.Comp.CanDamageHive || args.Target == null || banished.Comp.OriginalHive == null)
+        if (args.Target == null || banished.Comp.OriginalHive == null)
             return;
 
         if (_hive.IsMember(args.Target.Value, banished.Comp.OriginalHive.Value))
             args.Cancel();
-    }
-
-    private void OnBanishedGettingAttacked(Entity<XenoBanishComponent> banished, ref GettingAttackedAttemptEvent args)
-    {
-        // Banished xenos have no hive, so they can be attacked by anyone
     }
 }
