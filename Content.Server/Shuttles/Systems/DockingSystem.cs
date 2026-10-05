@@ -48,7 +48,7 @@ namespace Content.Server.Shuttles.Systems
             SubscribeLocalEvent<DockingComponent, ComponentStartup>(OnStartup);
             SubscribeLocalEvent<DockingComponent, ComponentShutdown>(OnShutdown);
             SubscribeLocalEvent<DockingComponent, AnchorStateChangedEvent>(OnAnchorChange);
-            SubscribeLocalEvent<DockingComponent, ReAnchorEvent>(OnDockingReAnchor);
+            SubscribeLocalEvent<DockingComponent, MoveEvent>(OnDockingMove);
 
             SubscribeLocalEvent<DockingComponent, BeforeDoorAutoCloseEvent>(OnAutoClose);
 
@@ -188,12 +188,12 @@ namespace Content.Server.Shuttles.Systems
             }
         }
 
-        private void OnDockingReAnchor(Entity<DockingComponent> entity, ref ReAnchorEvent args)
+        private void OnDockingMove(Entity<DockingComponent> entity, ref MoveEvent args)
         {
             var uid = entity.Owner;
             var component = entity.Comp;
 
-            if (!component.Docked)
+            if (!component.Docked || args.OnlyRotation)
                 return;
 
             var otherDock = component.DockedWith;
