@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Scaling;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
@@ -35,6 +36,7 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
 
     private readonly List<Entity<RMCChemicalDispenserComponent>> _dispensers = new();
     private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabMedicalLogs";
+    private readonly List<string> _reagentWatchlist = new List<string> { "RMCEthanol" };
 
     public override void Initialize()
     {
@@ -293,7 +295,16 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
         ChangeStorageEnergy(storage, storage.Comp.Energy - cost);
         _solution.TryAddReagent(solutionEnt.Value, args.Reagent, ent.Comp.DispenseSetting);
 
-        _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} dispensed {dispense}u of {args.Reagent}.");
+        foreach (string watchedReagent in _reagentWatchlist)
+        {
+            if (string.Equals(args.Reagent, watchedReagent))
+            {
+                var name = args.Reagent;
+                if (_rmcReagent.TryIndex(args.Reagent, out var rmcReagentProto))
+                    name = rmcReagentProto.LocalizedName;
+                _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} dispensed {dispense}u of {name}.");
+            }
+        }
     }
 
     public bool TryGetStorage(EntProtoId network, out Entity<RMCChemicalStorageComponent> storage)
