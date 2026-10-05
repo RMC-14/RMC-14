@@ -23,3 +23,9 @@ rmc-job-name-field-doctor = Field Doctor
 rmc-job-description-field-doctor = Keep planetside marines healthy in the field, oftentimes by surgery.
 rmc-job-prefix-field-doctor = Fld Doc
 RMCJobFieldDoctor  = Field Doctor
+
+rmc-job-name-surgeon = Surgeon
+rmc-job-prefix-surgeon = Surg
+
+rmc-job-name-pharmacist = Pharmaceutical Physician
+rmc-job-prefix-pharmacist = Phm. Phys

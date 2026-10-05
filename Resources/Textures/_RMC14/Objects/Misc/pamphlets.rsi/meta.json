@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/f0608f2f329e00fb29096d0bb3a7a4c25c5d08a6/icons/obj/items/pamphlets.dmi, pamphlet_honorguard.png made by CatAndHats (github) based on pamphlet.png",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/f0608f2f329e00fb29096d0bb3a7a4c25c5d08a6/icons/obj/items/pamphlets.dmi, pamphlet_honorguard.png made by CatAndHats (github) based on pamphlet.png, surgeon and pharma from https://github.com/cmss13-devs/cmss13/blob/27c82aa3ee6bff72ac72dc663e017ea18e38e100/icons/obj/items/books.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -57,6 +57,12 @@
     },
     {
       "name": "pamphlet_science"
+    },
+    {
+      "name": "pamphlet_surgeon"
+    },
+    {
+      "name": "pamphlet_pharma"
     }
   ]
 }
