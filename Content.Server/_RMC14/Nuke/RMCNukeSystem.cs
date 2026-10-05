@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Vents;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Timing;
 
@@ -15,6 +16,7 @@ public sealed class RMCNukeSystem : EntitySystem
 {
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IEntityManager _entity = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SensorTowerSystem _sensorTower = default!;
     [Dependency] private readonly RMCPowerSystem _power = default!;
 
@@ -90,6 +92,9 @@ public sealed class RMCNukeSystem : EntitySystem
 
     private void AddNukeTarget(EntityUid uid, HashSet<EntityUid> toDamage, HashSet<EntityUid> toDelete)
     {
+        if (_mobState.IsDead(uid))
+            return;
+
         if (HasComp<MobStateComponent>(uid) || _repairable.HasComp(uid) || _apc.HasComp(uid))
             toDamage.Add(uid);
         else
@@ -98,12 +103,12 @@ public sealed class RMCNukeSystem : EntitySystem
 
     public void NukeMap(MapId mapId)
     {
-        KillEverythingOnMap(mapId);
-
-        // Wait a seconds for warding and other things to turn off.
-        Timer.Spawn(System.TimeSpan.FromSeconds(1), () =>
+        // Do it a second time in case the first run crashes.
+        Timer.Spawn(System.TimeSpan.FromSeconds(5), () =>
         {
             KillEverythingOnMap(mapId);
         });
+
+        KillEverythingOnMap(mapId);
     }
 }
