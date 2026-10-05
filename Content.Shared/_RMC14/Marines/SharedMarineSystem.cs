@@ -2,6 +2,7 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Content.Shared.Damage;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.NPC.Prototypes;
@@ -22,7 +23,7 @@ public abstract class SharedMarineSystem : EntitySystem
     [Dependency] private readonly ISerializationManager _serialization = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
-    private EntityQuery<MarineComponent> _marineQuery;
+    private EntityQuery<DamageableComponent> _damageableQuery;
 
     private readonly HashSet<EntProtoId<IFFFactionComponent>> _attackedFactions = [];
     private readonly HashSet<EntProtoId<IFFFactionComponent>> _attackerFactions = [];
@@ -31,10 +32,11 @@ public abstract class SharedMarineSystem : EntitySystem
     {
         base.Initialize();
 
-        _marineQuery = GetEntityQuery<MarineComponent>();
+        _damageableQuery = GetEntityQuery<DamageableComponent>();
 
         SubscribeLocalEvent<MarineComponent, GetMarineIconEvent>(OnMarineGetIcon);
-        SubscribeLocalEvent<MarineComponent, ReceivingMeleeAttackAttemptEvent>(OnMarineReceivingMeleeAttackAttempt);
+        SubscribeLocalEvent<MarineComponent, CheckMeleeTargetEvent>(OnMarineCheckMeleeTarget);
+        SubscribeLocalEvent<MarineComponent, CheckMeleeAttackerEvent>(OnMarineCheckMeleeAttacker);
 
         SubscribeLocalEvent<GrantMarineIconsComponent, GotEquippedEvent>(OnGotEquipped);
         SubscribeLocalEvent<GrantMarineIconsComponent, GotUnequippedEvent>(OnGotUnequipped);
@@ -69,9 +71,21 @@ public abstract class SharedMarineSystem : EntitySystem
             args.Icon = icon;
     }
 
-    private void OnMarineReceivingMeleeAttackAttempt(Entity<MarineComponent> marine, ref ReceivingMeleeAttackAttemptEvent args)
+    private void OnMarineCheckMeleeTarget(Entity<MarineComponent> marine, ref CheckMeleeTargetEvent args)
     {
-        if (args.Cancelled)
+        if (args.Skip)
+            return;
+
+        // Marines can only attack and disarm damageable things
+        if (!_damageableQuery.HasComp(args.Target))
+        {
+            args.Skip = true;
+        }
+    }
+
+    private void OnMarineCheckMeleeAttacker(Entity<MarineComponent> marine, ref CheckMeleeAttackerEvent args)
+    {
+        if (args.Skip)
             return;
 
         if (marine.Owner == args.Attacker)
@@ -80,13 +94,13 @@ public abstract class SharedMarineSystem : EntitySystem
             if (!TryComp<ActorComponent>(marine, out var actor)
                 || !_netConfig.GetClientCVar(actor.PlayerSession.Channel, RMCCVars.RMCDamageYourself))
             {
-                args.Cancelled = true;
+                args.Skip = true;
             }
 
             return;
         }
 
-        if (args.Deferred)
+        if (args.Defer)
             return;
 
         // Defer attacks against entities that share an IFF faction with you
@@ -94,7 +108,7 @@ public abstract class SharedMarineSystem : EntitySystem
             && _gunIFF.TryGetFactions(marine.Owner, _attackedFactions)
             && _attackerFactions.Overlaps(_attackedFactions))
         {
-            args.Deferred = true;
+            args.Defer = true;
         }
     }
 

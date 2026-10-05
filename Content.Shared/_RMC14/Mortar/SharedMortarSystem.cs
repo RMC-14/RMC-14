@@ -80,7 +80,7 @@ public abstract class SharedMortarSystem : EntitySystem
         SubscribeLocalEvent<MortarComponent, CombatModeShouldHandInteractEvent>(OnMortarShouldInteract);
         SubscribeLocalEvent<MortarComponent, DestructionEventArgs>(OnMortarDestruction);
         SubscribeLocalEvent<MortarComponent, BeforeDamageChangedEvent>(OnMortarBeforeDamageChanged);
-        SubscribeLocalEvent<MortarComponent, ReceivingMeleeAttackAttemptEvent>(OnMortarReceivingMeleeAttackAttempt);
+        SubscribeLocalEvent<MortarComponent, CheckMeleeAttackerEvent>(OnMortarReceivingMeleeAttackAttempt);
         SubscribeLocalEvent<MortarComponent, LinkMortarLaserDesignatorDoAfterEvent>(OnMortarLinkLaserDesignatorDoAfter);
         SubscribeLocalEvent<MortarComponent, GetVerbsEvent<AlternativeVerb>>(OnGetMortarVerbs);
         SubscribeLocalEvent<MortarComponent, MortarLaserTargetUpdateDoAfterEvent>(OnMortarLaserTargetUpdateDoAfter);
@@ -107,19 +107,19 @@ public abstract class SharedMortarSystem : EntitySystem
             args.Cancelled = true;
     }
 
-    private void OnMortarReceivingMeleeAttackAttempt(Entity<MortarComponent> ent, ref ReceivingMeleeAttackAttemptEvent args)
+    private void OnMortarReceivingMeleeAttackAttempt(Entity<MortarComponent> ent, ref CheckMeleeAttackerEvent args)
     {
         // mortars can't be tackled/disarmed
         if (args.Disarm)
         {
-            args.Cancelled = true;
+            args.Skip = true;
             return;
         }
 
         // undeployed mortars can't be damaged, but we can't cancel the attack because
         // we allow mortars to be picked up in combat mode
         if (ent.Comp.Deployed)
-            args.Deferred = true;
+            args.Defer = true;
     }
 
     private void OnMortarDestruction(Entity<MortarComponent> mortar, ref DestructionEventArgs args)

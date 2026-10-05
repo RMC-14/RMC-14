@@ -118,7 +118,7 @@ public sealed class XenoEggSystem : EntitySystem
         SubscribeLocalEvent<XenoEggComponent, StepTriggerAttemptEvent>(OnXenoEggStepTriggerAttempt);
         SubscribeLocalEvent<XenoEggComponent, StepTriggeredOffEvent>(OnXenoEggStepTriggered);
         SubscribeLocalEvent<XenoEggComponent, BeforeDamageChangedEvent>(OnXenoEggBeforeDamageChanged);
-        SubscribeLocalEvent<XenoEggComponent, ReceivingMeleeAttackAttemptEvent>(OnXenoEggReceivingMeleeAttackAttempt);
+        SubscribeLocalEvent<XenoEggComponent, CheckMeleeAttackerEvent>(OnXenoEggReceivingMeleeAttackAttempt);
         SubscribeLocalEvent<XenoEggComponent, GetVerbsEvent<ActivationVerb>>(OnGetVerbs);
         SubscribeLocalEvent<XenoEggComponent, DestructionEventArgs>(OnDestruction);
 
@@ -794,12 +794,12 @@ public sealed class XenoEggSystem : EntitySystem
             args.Cancelled = true;
     }
 
-    private void OnXenoEggReceivingMeleeAttackAttempt(Entity<XenoEggComponent> ent, ref ReceivingMeleeAttackAttemptEvent args)
+    private void OnXenoEggReceivingMeleeAttackAttempt(Entity<XenoEggComponent> ent, ref CheckMeleeAttackerEvent args)
     {
         // Eggs can't be tackled/disarmed
         if (args.Disarm)
         {
-            args.Cancelled = true;
+            args.Skip = true;
             return;
         }
 
@@ -809,7 +809,7 @@ public sealed class XenoEggSystem : EntitySystem
         if (ent.Comp.State is XenoEggState.Item
             || _hive.FromSameHiveOrAlly(ent.Owner, args.Attacker))
         {
-            args.Deferred = true;
+            args.Defer = true;
         }
     }
 

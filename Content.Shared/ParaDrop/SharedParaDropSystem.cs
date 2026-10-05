@@ -60,7 +60,7 @@ public abstract partial class SharedParaDropSystem : EntitySystem
         SubscribeLocalEvent<ParaDroppingComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<ParaDroppingComponent, ComponentShutdown>(OnComponentShutdown);
         SubscribeLocalEvent<ParaDroppingComponent, RMCIgniteAttemptEvent>(OnIgniteAttempt);
-        SubscribeLocalEvent<ParaDroppingComponent, ReceivingMeleeAttackAttemptEvent>(OnParaDroppingReceivingMeleeAttackAttempt);
+        SubscribeLocalEvent<ParaDroppingComponent, CheckMeleeAttackerEvent>(OnParaDroppingReceivingMeleeAttackAttempt);
         SubscribeLocalEvent<ParaDroppingComponent, GettingAttackedAttemptEvent>(OnGettingAttacked);
         SubscribeLocalEvent<ParaDroppingComponent, AttemptMobCollideEvent>(OnAttemptMobCollide);
         SubscribeLocalEvent<ParaDroppingComponent, AttemptMobTargetCollideEvent>(OnAttemptMobTargetCollide);
@@ -201,9 +201,9 @@ public abstract partial class SharedParaDropSystem : EntitySystem
         args.Cancelled = true;
     }
 
-    private void OnParaDroppingReceivingMeleeAttackAttempt(Entity<ParaDroppingComponent> ent, ref ReceivingMeleeAttackAttemptEvent args)
+    private void OnParaDroppingReceivingMeleeAttackAttempt(Entity<ParaDroppingComponent> ent, ref CheckMeleeAttackerEvent args)
     {
-        args.Cancelled = true;
+        args.Skip = true;
     }
 
     private void OnGettingAttacked(Entity<ParaDroppingComponent> ent, ref GettingAttackedAttemptEvent args)

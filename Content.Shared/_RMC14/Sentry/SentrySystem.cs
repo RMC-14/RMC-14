@@ -75,7 +75,7 @@ public sealed class SentrySystem : EntitySystem
         SubscribeLocalEvent<SentryComponent, ExaminedEvent>(OnSentryExamined);
         SubscribeLocalEvent<SentryComponent, CombatModeShouldHandInteractEvent>(OnSentryShouldInteract);
         SubscribeLocalEvent<SentryComponent, BeforeDamageChangedEvent>(OnBeforeDamageChanged);
-        SubscribeLocalEvent<SentryComponent, ReceivingMeleeAttackAttemptEvent>(OnSentryReceivingMeleeAttackAttempt);
+        SubscribeLocalEvent<SentryComponent, CheckMeleeAttackerEvent>(OnSentryReceivingMeleeAttackAttempt);
         SubscribeLocalEvent<SentrySpikesComponent, AttackedEvent>(OnSentrySpikesAttacked);
 
         Subs.BuiEvents<SentryComponent>(SentryUiKey.Key,
@@ -344,19 +344,19 @@ public sealed class SentrySystem : EntitySystem
             args.Cancelled = true;
     }
 
-    private void OnSentryReceivingMeleeAttackAttempt(Entity<SentryComponent> ent, ref ReceivingMeleeAttackAttemptEvent args)
+    private void OnSentryReceivingMeleeAttackAttempt(Entity<SentryComponent> ent, ref CheckMeleeAttackerEvent args)
     {
         // sentries can't be tackled/disarmed
         if (args.Disarm)
         {
-            args.Cancelled = true;
+            args.Skip = true;
             return;
         }
 
         // item mode sentries can't be damaged, but we can't cancel the attack because
         // we allow sentries to be picked up in combat mode
         if (ent.Comp.Mode is SentryMode.Item)
-            args.Deferred = true;
+            args.Defer = true;
     }
 
     private void UpdateState(Entity<SentryComponent> sentry)

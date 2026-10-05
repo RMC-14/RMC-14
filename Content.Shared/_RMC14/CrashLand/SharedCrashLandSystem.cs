@@ -72,7 +72,7 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
 
         SubscribeLocalEvent<CrashLandingComponent, UpdateCanMoveEvent>(OnUpdateCanMove);
         SubscribeLocalEvent<CrashLandingComponent, RMCIgniteAttemptEvent>(OnIgniteAttempt);
-        SubscribeLocalEvent<CrashLandingComponent, ReceivingMeleeAttackAttemptEvent>(OnReceivingMeleeAttackAttempt);
+        SubscribeLocalEvent<CrashLandingComponent, CheckMeleeAttackerEvent>(OnReceivingMeleeAttackAttempt);
         SubscribeLocalEvent<CrashLandingComponent, GettingAttackedAttemptEvent>(OnGettingAttacked);
         SubscribeLocalEvent<CrashLandingComponent, AttemptMobCollideEvent>(OnAttemptMobCollide);
         SubscribeLocalEvent<CrashLandingComponent, AttemptMobTargetCollideEvent>(OnAttemptMobTargetCollide);
@@ -151,9 +151,9 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
         args.Cancelled = true;
     }
 
-    private void OnReceivingMeleeAttackAttempt(Entity<CrashLandingComponent> ent, ref ReceivingMeleeAttackAttemptEvent args)
+    private void OnReceivingMeleeAttackAttempt(Entity<CrashLandingComponent> ent, ref CheckMeleeAttackerEvent args)
     {
-        args.Cancelled = true;
+        args.Skip = true;
     }
 
     private void OnGettingAttacked(Entity<CrashLandingComponent> ent, ref GettingAttackedAttemptEvent args)

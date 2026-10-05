@@ -106,10 +106,14 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
         if (!HasComp<XenoComponent>(args.Attacker))
             return;
 
-        StopSound(ent);
+        if (TryComp<AmbientSoundComponent>(ent, out var ambientSound)
+            && ambientSound.Enabled)
+        {
+            StopSound(ent);
 
-        _audio.PlayPredicted(RemoteHangupSound, ent, args.Attacker);
-        _popup.PopupClient(Loc.GetString("rmc-dropship-launch-alarm-xeno-shutdown", ("console", ent)), args.Attacker, args.Attacker);
+            _audio.PlayPredicted(RemoteHangupSound, ent, args.Attacker);
+            _popup.PopupClient(Loc.GetString("rmc-dropship-launch-alarm-xeno-shutdown", ("console", ent)), args.Attacker, args.Attacker);
+        }
     }
 
     private void OnRotaryPhoneDialingInteractUsing(Entity<RotaryPhoneDialingComponent> ent, ref InteractUsingEvent args)

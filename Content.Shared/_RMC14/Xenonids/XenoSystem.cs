@@ -9,6 +9,7 @@ using Content.Shared._RMC14.Mentor.ImaginaryFriend;
 using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Tackle;
+using Content.Shared._RMC14.Telephone;
 using Content.Shared._RMC14.Vendors;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
@@ -101,6 +102,7 @@ public sealed partial class XenoSystem : EntitySystem
     private EntityQuery<XenoPlasmaComponent> _xenoPlasmaQuery;
     private EntityQuery<XenoRecoveryPheromonesComponent> _xenoRecoveryQuery;
     private EntityQuery<VictimInfectedComponent> _victimInfectedQuery;
+    private EntityQuery<RotaryPhoneComponent> _rotaryPhoneQuery;
 
     private float _xenoDamageDealtMultiplier;
     private float _xenoDamageReceivedMultiplier;
@@ -120,6 +122,7 @@ public sealed partial class XenoSystem : EntitySystem
         _xenoPlasmaQuery = GetEntityQuery<XenoPlasmaComponent>();
         _xenoRecoveryQuery = GetEntityQuery<XenoRecoveryPheromonesComponent>();
         _victimInfectedQuery = GetEntityQuery<VictimInfectedComponent>();
+        _rotaryPhoneQuery = GetEntityQuery<RotaryPhoneComponent>();
 
         SubscribeLocalEvent<XenoComponent, MapInitEvent>(OnXenoMapInit, before: [typeof(SharedXenoPheromonesSystem)]);
         SubscribeLocalEvent<XenoComponent, GetAccessTagsEvent>(OnXenoGetAdditionalAccess);
@@ -127,7 +130,8 @@ public sealed partial class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, XenoDevolvedEvent>(OnXenoDevolved);
         SubscribeLocalEvent<XenoComponent, HealthScannerAttemptTargetEvent>(OnXenoHealthScannerAttemptTarget);
         SubscribeLocalEvent<XenoComponent, GetDefaultRadioChannelEvent>(OnXenoGetDefaultRadioChannel);
-        SubscribeLocalEvent<XenoComponent, ReceivingMeleeAttackAttemptEvent>(OnXenoReceivingMeleeAttackAttempt);
+        SubscribeLocalEvent<XenoComponent, CheckMeleeTargetEvent>(OnXenoCheckMeleeTarget);
+        SubscribeLocalEvent<XenoComponent, CheckMeleeAttackerEvent>(OnXenoCheckMeleeAttacker);
         SubscribeLocalEvent<XenoComponent, AttackAttemptEvent>(OnXenoAttackAttempt);
         SubscribeLocalEvent<XenoComponent, MeleeAttackAttemptEvent>(OnXenoMeleeAttackAttempt);
         SubscribeLocalEvent<XenoComponent, XenoHealAttemptEvent>(OnHealAttempt);
@@ -220,24 +224,38 @@ public sealed partial class XenoSystem : EntitySystem
         args.Channel = SharedChatSystem.HivemindChannel;
     }
 
-    private void OnXenoReceivingMeleeAttackAttempt(Entity<XenoComponent> xeno, ref ReceivingMeleeAttackAttemptEvent args)
+    private void OnXenoCheckMeleeTarget(Entity<XenoComponent> xeno, ref CheckMeleeTargetEvent args)
     {
-        if (args.Cancelled)
+        if (args.Skip)
+            return;
+
+        // Xenos can only attack and tackle damageable things,
+        // unless they're rotary phones they want to silence.
+        if (!_damageableQuery.HasComp(args.Target)
+            && !_rotaryPhoneQuery.HasComp(args.Target))
+        {
+            args.Skip = true;
+        }
+    }
+
+    private void OnXenoCheckMeleeAttacker(Entity<XenoComponent> xeno, ref CheckMeleeAttackerEvent args)
+    {
+        if (args.Skip)
             return;
 
         // xenos can never attack themselves
         if (xeno.Owner == args.Attacker)
         {
-            args.Cancelled = true;
+            args.Skip = true;
             return;
         }
 
-        if (args.Deferred)
+        if (args.Defer)
             return;
 
         // xenos try to attack/tackle things they aren't allied to first
         if (_hive.FromSameHiveOrAlly(xeno.Owner, args.Attacker))
-            args.Deferred = true;
+            args.Defer = true;
     }
 
     private void OnXenoAttackAttempt(Entity<XenoComponent> xeno, ref AttackAttemptEvent args)

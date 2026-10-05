@@ -58,7 +58,7 @@ public sealed class CMDoorSystem : EntitySystem
 
         SubscribeLocalEvent<DoorComponent, RMCDoorPryEvent>(OnDoorPry);
         SubscribeLocalEvent<DoorComponent, RMCBeforePryEvent>(OnBeforePry);
-        SubscribeLocalEvent<DoorComponent, ReceivingMeleeAttackAttemptEvent>(OnDoorReceivingMeleeAttackAttempt);
+        SubscribeLocalEvent<DoorComponent, CheckMeleeAttackerEvent>(OnDoorReceivingMeleeAttackAttempt);
 
         SubscribeLocalEvent<RMCPodDoorComponent, GetPryTimeModifierEvent>(OnPodDoorGetPryTimeModifier);
 
@@ -238,14 +238,14 @@ public sealed class CMDoorSystem : EntitySystem
             args.Cancelled = true;
     }
 
-    private void OnDoorReceivingMeleeAttackAttempt(Entity<DoorComponent> ent, ref ReceivingMeleeAttackAttemptEvent args)
+    private void OnDoorReceivingMeleeAttackAttempt(Entity<DoorComponent> ent, ref CheckMeleeAttackerEvent args)
     {
-        if (args.Cancelled || args.Deferred)
+        if (args.Skip || args.Defer)
             return;
 
         // Prevent open doors from interfering with attacking or disarming entities under them.
         if (ent.Comp.State is DoorState.Opening or DoorState.Open or DoorState.Closing)
-            args.Deferred = true;
+            args.Defer = true;
     }
 
     private void OnDoorPry(Entity<DoorComponent> ent, ref RMCDoorPryEvent args)

@@ -2,7 +2,6 @@ using Content.Client.Gameplay;
 using Content.Client.Weapons.Melee;
 using Content.Shared._RMC14.Input;
 using Content.Shared._RMC14.Weapons.Melee;
-using Content.Shared.Damage;
 using Content.Shared.Weapons.Melee;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -27,13 +26,9 @@ public sealed class RMCMeleeWeaponSystem : SharedRMCMeleeWeaponSystem
     [Dependency] private readonly IStateManager _stateManager = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
 
-    private EntityQuery<DamageableComponent> _damageableQuery;
-
     public override void Initialize()
     {
         base.Initialize();
-
-        _damageableQuery = GetEntityQuery<DamageableComponent>();
 
         CommandBinds.Builder
             .Bind(CMKeyFunctions.CMXenoWideSwing,
@@ -82,25 +77,28 @@ public sealed class RMCMeleeWeaponSystem : SharedRMCMeleeWeaponSystem
 
         foreach (var clickable in clickables)
         {
-            // ignore non-damageable entities
-            if (!_damageableQuery.HasComp(clickable))
+            var attackerEv = new CheckMeleeTargetEvent(clickable, weapon, disarm);
+            RaiseLocalEvent(attacker, ref attackerEv);
+
+            // Attacker decided target should be skipped
+            if (attackerEv.Skip)
                 continue;
 
-            var ev = new ReceivingMeleeAttackAttemptEvent(attacker, weapon, disarm);
-            RaiseLocalEvent(clickable, ref ev);
+            var targetEv = new CheckMeleeAttackerEvent(attacker, weapon, disarm);
+            RaiseLocalEvent(clickable, ref targetEv);
 
-            // ignore entities that can't receive an attack
-            if (ev.Cancelled)
+            // Target decided it should be skipped
+            if (targetEv.Skip)
                 continue;
 
             firstTarget ??= clickable;
 
-            // prioritize non-deferred entity
-            if (!ev.Deferred)
-            {
-                firstPriorityTarget ??= clickable;
-                break;
-            }
+            // Either attacker or target decided it should be deferred
+            if (attackerEv.Defer || targetEv.Defer)
+                continue;
+
+            firstPriorityTarget ??= clickable;
+            break;
         }
 
         return firstPriorityTarget ?? firstTarget;
