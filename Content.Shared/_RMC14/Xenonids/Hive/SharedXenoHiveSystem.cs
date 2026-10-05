@@ -447,11 +447,6 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         if (_net.IsClient)
             return false;
 
-        var attemptEv = new JoinBurrowedLarvaAttemptEvent(session);
-        RaiseLocalEvent(ref attemptEv);
-        if (attemptEv.Cancelled)
-            return false;
-
         if (hive.Comp.BurrowedLarva <= 0)
             return false;
 
@@ -555,6 +550,3 @@ public abstract class SharedXenoHiveSystem : EntitySystem
 /// </summary>
 [ByRefEvent]
 public record struct HiveChangedEvent(Entity<HiveComponent>? Hive, EntityUid? OldHive);
-
-[ByRefEvent]
-public record struct JoinBurrowedLarvaAttemptEvent(ICommonSession Session, bool Cancelled = false);
