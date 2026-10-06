@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: '- Simon'
   changes:
-  - message: Timed Impenetrable walls to solaris
-    type: Add
-  id: 3193
-  time: '2026-05-14T10:26:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9786
-- author: '- Simon'
-  changes:
   - message: Added timed impenetrable resin to sorokyne
     type: Add
   id: 3194
@@ -4500,5 +4493,13 @@
   id: 3692
   time: '2026-10-04T01:49:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10957
+- author: SharkSnake98
+  changes:
+  - message: Changed the description of the colony crawler to mention Miyahira instead
+      of Orbital Blue
+    type: Tweak
+  id: 3693
+  time: '2026-10-06T19:53:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10507
 Name: RMC14
 Order: -1
