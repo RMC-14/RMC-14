@@ -4,6 +4,7 @@ using Robust.Shared.GameObjects;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using System.Collections.Generic;
+using Robust.Shared.Audio;
 
 namespace Content.Shared._RMC14.Xenonids.Designer;
 
@@ -55,4 +56,7 @@ public sealed partial class DesignerStrainComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntProtoId GreaterResinSurgeWallPrototype = "WallXenoResinReflectiveUnstable";
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier RemoteThickenSound = new SoundCollectionSpecifier("RMCResinBuild", AudioParams.Default.WithVolume(-10f));
 }

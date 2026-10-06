@@ -274,6 +274,76 @@
     - MarineSOF
     radioTextIncrease: 3
 
+# Tyrargo/Varadero survs
+- type: entity
+  parent: RMCHeadsetMarine
+  id: RMCHeadsetTyrargo
+  name: UNMC headset
+  description: Issued to UNMC Marines.
+  suffix: Survivor
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/headsets.rsi
+    state: soc_headset
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyColony
+  - type: RMCHeadset
+    channels:
+    - MarineSurvivor
+  - type: RMCStaticDefaultChannel
+  - type: EncryptionKeyHolder
+    defaultChannel: MarineSurvivor
+  - type: GrantSquadLeaderTracker
+    defaultMode: SquadLeader
+    trackerModes:
+    - SquadLeader
+
+- type: entity
+  parent: RMCHeadsetTyrargo
+  id: RMCHeadsetTyrargoLeader
+  name: UNMC leader headset
+  suffix: Survivor
+  components:
+  - type: RMCHeadset
+    channels:
+    - MarineSurvivor
+    radioTextIncrease: 2
+
+- type: entity
+  parent: RMCHeadsetTyrargo
+  id: RMCHeadsetTyrargoCommander
+  name: UNMC commander headset
+  suffix: Survivor
+  components:
+  - type: RMCHeadset
+    channels:
+    - MarineSurvivor
+    radioTextIncrease: 3
+
+# without tracker
+- type: entity
+  parent: RMCHeadsetTyrargo
+  id: RMCHeadsetMarineNV
+  name: UNMC headset
+  description: A standard issue UNMC headset.
+  suffix: Survivor, Varadero
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/headsets.rsi
+    state: generic_headset
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyColony
+  - type: RMCHeadset
+    channels:
+    - MarineSurvivor
+  - type: RMCStaticDefaultChannel
+  - type: EncryptionKeyHolder
+    defaultChannel: MarineSurvivor
+
 # Paramarine Hybrisa survivor insert
 - type: entity
   parent: RMCHeadsetIconsPara

@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Numerics;
 using Content.Server._RMC14.GameStates;
 using Content.Server._RMC14.Marines;

@@ -1,0 +1,94 @@
+- type: job
+  parent: CMSurvivorScientist
+  id: RMCSurvivorNewVaraderoXenoarchaeologist
+  name: rmc-job-name-survivor-new-varadero-xenoarchaeologist
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorScientist
+  startingGear: RMCGearSurvivorNewVaraderoXenoarchaeologist
+  greeting: rmc-job-greeting-varadero
+  spawnMenuRoleName: New Varadero Xenoarchaeologist (NV Survivor)
+  accessGroups:
+  - ColonistMedical
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: Skills
+      preset: RMCSkillPresetSurvivorResearcher
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+      - Civilian
+      - WeYa
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: goon_sci
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_pmc
+    - type: JobPrefix
+      prefix: rmc-job-prefix-survivor-new-varadero-xenoarchaeologist
+    - type: Language
+      spokenLanguages:
+      - Spanish
+      - English
+      understoodLanguages:
+      - Spanish
+      - English
+      currentLanguage: English
+      defaultLanguage: English
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetNVXenoarchaeologist
+  useLoadoutOfJob: CMSurvivorScientist # for inheritance
+
+- type: startingGear
+  id: RMCGearSurvivorNewVaraderoXenoarchaeologist
+  equipment:
+    ears: RMCHeadsetDistressWeYa
+    id: RMCIDCardColonistScientist
+    pocket1: RMCPouchSurvivalFill
+    eyes: RMCGlassesReagentHUDGlasses
+  storage:
+    back:
+    - CMSheetMetal20
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorNewVaraderoXenoarchaeologist
+  name: survivor new varadero xenoarchaeologist spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorNewVaraderoXenoarchaeologist
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: entity
+  parent: RMCGearSurvivorPresetUNMC
+  id: RMCSurvivorPresetNVXenoarchaeologist
+  name: varadero xenoarchaeologist preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    randomOutfits:
+    - [ CMSatchel, RMCLabcoatScience, RMCJumpsuitCivilianScientist, CMBootsBlackFilled ]
+    - [ CMSatchel, RMCLabcoatScience, RMCJumpsuitCivilianScientist, CMBootsBlackFilled ]
+    - [ CMSatchel, RMCLabcoatScience, RMCJumpsuitCivilianScientist, CMBootsBlackFilled ]
+    - [ RMCHoodBioWeYaAlt, CMHandsBrown, RMCSuitBioWeYa, RMCJumpsuitCivilianScientist, RMCSatchelLightpack5Slot, CMBootsBlackFilled ]
+    - [ RMCHoodBioWeYaAlt, CMHandsBrown, RMCSuitBioWeYa, RMCJumpsuitCivilianScientist, RMCSatchelLightpack5Slot, CMBootsBlackFilled ]
+    - [ RMCHoodBioWeYaAlt, CMHandsBrown, RMCSuitBioWeYa, RMCJumpsuitCivilianScientist, RMCSatchelLightpack5Slot, CMBootsBlackFilled ]
+    - [ RMCHoodBioWeYaAlt, CMHandsBrown, RMCSuitBioWeYa, CMJumpsuitResearch, RMCSatchelLightpack5Slot, CMBootsBlackFilled ]
+    - [ RMCHoodBioWeYaAlt, CMHandsBrown, RMCSuitBioWeYa, CMJumpsuitResearch, RMCSatchelLightpack5Slot, CMBootsBlackFilled ]
+    - [ RMCHoodBioWeYaAlt, CMHandsBrown, RMCSuitBioWeYa, CMJumpsuitResearch, RMCSatchelLightpack5Slot, CMBootsBlackFilled ]
+    - [ RMCSuitBioWeYa, RMCSatchelLightpack5Slot, RMCHandsVeteranCBRN, RMCBootsCBRN, RMCJumpsuitCivilianScientist, CMMaskGas, CMHeadBandTan, RMCWeaponFlamerColony ]
+    randomGearOther:
+    -
+      - [ RMCMotionDetector ]
+      - [ RMCGrenadeCustomMetalFoam ]
+      - [ RMCGrenadeCustomWeedkiller ]
+      - [ RMCThermalTarpV2Folded ]

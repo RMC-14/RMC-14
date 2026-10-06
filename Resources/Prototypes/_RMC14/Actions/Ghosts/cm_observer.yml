@@ -31,6 +31,22 @@
     event: !type:ToggleXenoHudActionEvent
 
 - type: entity
+  parent: BaseMentalAction
+  id: RMCActionToggleDeadChat
+  name: Mute Dead Chat
+  description: Suppress dead chat messages and speech bubbles.
+  components:
+  - type: Action
+    checkCanInteract: false
+    clientExclusive: true
+    icon:
+      sprite: Clothing/Ears/Headsets/base.rsi
+      state: icon
+    iconOn: Interface/Actions/ghostHearingToggled.png
+  - type: InstantAction
+    event: !type:ToggleDeadChatActionEvent
+
+- type: entity
   id: ActionFindParasite
   name: Find Parasite
   description: Find Ghostrolable Parasites
