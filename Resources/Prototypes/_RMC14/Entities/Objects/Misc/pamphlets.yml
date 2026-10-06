@@ -208,7 +208,6 @@
     - popup: rmc-pamphlets-doctor-warning
       jobProto: CMDoctor
 
-
 # K9 Handler - not implemented yet
 - type: entity
   parent: CMPamphlet
