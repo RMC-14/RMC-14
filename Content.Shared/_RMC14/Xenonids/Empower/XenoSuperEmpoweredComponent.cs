@@ -13,7 +13,7 @@ public sealed partial class XenoSuperEmpoweredComponent : Component
     public TimeSpan ExpireTime = TimeSpan.FromSeconds(1.5);
 
     [DataField]
-    public Color FadingEmpowerColor = Color.FromHex("#FF000023");
+    public Color FadingEmpowerColor = Color.FromHex("#FF000040");
 
     [DataField, AutoNetworkedField]
     public TimeSpan? ExpiresAt;
