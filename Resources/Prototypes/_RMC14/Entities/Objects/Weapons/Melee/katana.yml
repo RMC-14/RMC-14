@@ -20,6 +20,9 @@
         Slash: 45
   - type: UsableWhileDevoured
 
+- type: Tag
+  id: RMCKatana
+
 - type: entity
   parent: RMCKatana
   id: RMCKatanaDull
@@ -51,4 +54,4 @@
     damage:
       types:
         Slash: 45
-  - type: OmaeWaMouShindeiru
+  - type: OmaeWaMouShindeiru #TODO Make both katana wielders attack each other somehow?

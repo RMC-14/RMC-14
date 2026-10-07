@@ -1,10 +1,14 @@
 using Content.Shared.Damage;
+using Content.Shared.EntityEffects.EffectConditions;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Stunnable;
+using Content.Shared.Tag;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Weapons.Melee.OmaeWaMouShindeiru;
@@ -13,8 +17,11 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
+
+    private static readonly ProtoId<TagPrototype> RMCKatanaTag = "RMCKatana";
 
     public override void Initialize()
     {
@@ -32,6 +39,13 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
         foreach (var target in args.HitEntities)
         {
             // TODO RMC14 Make both katana wielders attack each other somehow?
+            if (_hands.IsHolding(args.User, ent.Owner) ||
+                _hands.IsHolding(target, ent.Owner) &&
+                args.User != target)
+            {
+                _stun.TryStun(args.User, ent.Comp.KillDelay, true);
+            }
+
             if (ent.Comp.CanStunOnHit)
                 _stun.TryStun(target, ent.Comp.KillDelay, true);
 
