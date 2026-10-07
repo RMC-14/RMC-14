@@ -20,6 +20,7 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
 
     private static readonly ProtoId<TagPrototype> RMCKatanaTag = "RMCKatana";
 
@@ -39,11 +40,13 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
         foreach (var target in args.HitEntities)
         {
             // TODO RMC14 Make both katana wielders attack each other somehow?
-            if (_hands.IsHolding(args.User, ent.Owner) ||
-                _hands.IsHolding(target, ent.Owner) &&
-                args.User != target)
+            foreach (var held in _hands.EnumerateHeld(target))
             {
-                _stun.TryStun(args.User, ent.Comp.KillDelay, true);
+                if (_tag.HasTag(held, RMCKatanaTag) && ent.Comp.CanStunOnHit)
+                {
+                    _stun.TryStun(args.User, ent.Comp.KillDelay, true);
+                    _stun.TryStun(target, ent.Comp.KillDelay, true);
+                }
             }
 
             if (ent.Comp.CanStunOnHit)
