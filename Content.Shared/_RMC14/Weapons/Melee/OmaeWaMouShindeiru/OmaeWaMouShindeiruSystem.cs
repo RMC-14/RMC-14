@@ -5,7 +5,6 @@ using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Weapons.Melee.OmaeWaMouShindeiru;
@@ -15,7 +14,6 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
-    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
 
     public override void Initialize()
@@ -28,9 +26,6 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
     private void OnYouAreAlreadyDeadMeleeHit(Entity<OmaeWaMouShindeiruComponent> ent, ref MeleeHitEvent args)
     {
         if (!args.IsHit)
-            return;
-
-        if (_net.IsClient)
             return;
 
         var damage = _melee.GetDamage(ent.Owner, args.User);
@@ -52,12 +47,13 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
 
     private void OmaeWaMouShindeiru(Entity<OmaeWaMouShindeiruComponent> ent, EntityUid user, EntityUid target, DamageSpecifier damage)
     {
-        _audio.PlayLocal(ent.Comp.DeathImminentSound, target, target);
+        ent.Comp.Stream = _audio.PlayLocal(ent.Comp.DeathImminentSound, target, target)?.Entity;
 
         Timer.Spawn(ent.Comp.KillDelay,
             () =>
             {
                 ent.Comp.PendingTargets.Remove(target);
+                _audio.Stop(ent.Comp.Stream);
 
                 if (Deleted(ent.Owner) || Deleted(target))
                     return;
