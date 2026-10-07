@@ -12,6 +12,7 @@ using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
@@ -21,7 +22,9 @@ namespace Content.Shared._RMC14.Barricade;
 
 public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
 {
+    [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly RMCProjectileSystem _rmcProjectile = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -90,26 +93,25 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
         if (!TryComp(args.OtherEntity, out RMCProjectileAccuracyComponent? accuracy) || accuracy.ShotFrom is not { } shotFrom)
             return;
 
-        var facing = IsFacingTarget(ent.Owner, args.OtherEntity, shotFrom);
-        var behind = !facing && IsBehindTarget(ent.Owner, args.OtherEntity, shotFrom);
-        if (!facing && !behind)
+        var facingVec = _transform.GetWorldRotation(ent.Owner).GetDir().ToVec();
+        var velocity = _transform.GetWorldRotation(Transform(args.OtherEntity).ParentUid).RotateVec(args.OtherBody.LinearVelocity);
+        var alongFacing = Vector2.Dot(velocity, facingVec);
+        if (MathF.Abs(alongFacing) <= 0.001f * velocity.Length())
         {
             args.Cancelled = true;
             MarkPassed(args.OtherEntity, barricadeNet);
             return;
         }
 
-        var currentCoords = _transform.GetMoverCoordinates(args.OtherEntity);
-        var distance = (currentCoords.Position - shotFrom.Position).Length();
+        var facing = alongFacing < 0;
 
-        if (facing)
-        {
-            if (interaction is { StoppedByCover: true })
-                return;
+        if (facing && interaction is { StoppedByCover: true })
+            return;
 
-            distance -= 1;
-        }
-        else if (distance > 3)
+        var tiles = GetTileDistance(ent.Owner, shotFrom);
+        var distance = facing ? tiles - 1 : tiles;
+
+        if (!facing && distance > 3)
         {
             args.Cancelled = true;
             MarkPassed(args.OtherEntity, barricadeNet);
@@ -123,8 +125,7 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
             return;
         }
 
-        // accuracy can go over 100 (idk)
-        var accuracyValue = Math.Clamp((float) accuracy.Accuracy, 0f, 100f);
+        var accuracyValue = (float) _rmcProjectile.GetEffectiveAccuracy((args.OtherEntity, accuracy), tiles);
         var coverage = (float) ent.Comp.Coverage;
         var hitChance = Math.Min(coverage, coverage * distance / 6f + 50f * (1f - accuracyValue / 100f));
 
@@ -137,6 +138,24 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
             args.Cancelled = true;
             MarkPassed(args.OtherEntity, barricadeNet);
         }
+    }
+
+    private int GetTileDistance(EntityUid barricade, EntityCoordinates shotFrom)
+    {
+        var xform = Transform(barricade);
+        if (xform.GridUid is { } gridUid &&
+            TryComp(gridUid, out MapGridComponent? grid) &&
+            _transform.GetMapId(shotFrom) == xform.MapID)
+        {
+            var barricadeTile = _map.TileIndicesFor(gridUid, grid, xform.Coordinates);
+            var shotFromTile = _map.TileIndicesFor(gridUid, grid, shotFrom);
+            var diff = barricadeTile - shotFromTile;
+            return Math.Max(Math.Abs(diff.X), Math.Abs(diff.Y));
+        }
+
+        var barricadePos = _transform.GetMapCoordinates(barricade).Position;
+        var shotFromPos = _transform.ToMapCoordinates(shotFrom).Position;
+        return (int) MathF.Round((barricadePos - shotFromPos).Length());
     }
 
     private void MarkPassed(EntityUid projectile, NetEntity barricadeNet)

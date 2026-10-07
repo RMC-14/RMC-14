@@ -148,28 +148,9 @@ public sealed class RMCProjectileSystem : EntitySystem
             if (!TryComp(args.OtherEntity, out EvasionComponent? evasionComponent))
                 return;
 
-            var accuracy = projectile.Comp.Accuracy;
             var targetCoords = _transform.GetMoverCoordinates(args.OtherEntity);
             var distance = (targetCoords.Position - projectile.Comp.ShotFrom.Value.Position).Length();
-
-            foreach (var threshold in projectile.Comp.Thresholds)
-            {
-                var pastRange = distance - threshold.Range;
-
-                if (threshold.Buildup)
-                {
-                    if (pastRange >= 0)
-                        continue;
-
-                    accuracy += threshold.Falloff * pastRange;
-                    continue;
-                }
-
-                if (pastRange <= 0)
-                    continue;
-
-                accuracy -= threshold.Falloff * pastRange;
-            }
+            var accuracy = ApplyAccuracyFalloff(projectile.Comp, distance);
 
             if (!_examine.InRangeUnOccluded(_transform.ToMapCoordinates(projectile.Comp.ShotFrom.Value), _transform.ToMapCoordinates(targetCoords), distance, null))
                 accuracy += (int)AccuracyModifiers.TargetOccluded;
@@ -191,6 +172,37 @@ public sealed class RMCProjectileSystem : EntitySystem
 
         projectile.Comp.Dodged.Add(netOther);
         Dirty(projectile);
+    }
+
+    private FixedPoint2 ApplyAccuracyFalloff(RMCProjectileAccuracyComponent comp, float distance)
+    {
+        var accuracy = comp.Accuracy;
+        foreach (var threshold in comp.Thresholds)
+        {
+            var pastRange = distance - threshold.Range;
+
+            if (threshold.Buildup)
+            {
+                if (pastRange >= 0)
+                    continue;
+
+                accuracy += threshold.Falloff * pastRange;
+                continue;
+            }
+
+            if (pastRange <= 0)
+                continue;
+
+            accuracy -= threshold.Falloff * pastRange;
+        }
+
+        return accuracy;
+    }
+
+    public FixedPoint2 GetEffectiveAccuracy(Entity<RMCProjectileAccuracyComponent> projectile, float distance)
+    {
+        var accuracy = ApplyAccuracyFalloff(projectile.Comp, distance);
+        return accuracy > projectile.Comp.MinAccuracy ? accuracy : projectile.Comp.MinAccuracy;
     }
 
     private bool IsProjectileTargetFriendly(EntityUid projectile, EntityUid target)
