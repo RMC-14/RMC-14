@@ -1,5 +1,4 @@
 using Content.Shared.Damage;
-using Content.Shared.EntityEffects.EffectConditions;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
