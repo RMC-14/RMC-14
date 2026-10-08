@@ -620,8 +620,13 @@ public sealed class PowerLoaderSystem : EntitySystem
             return;
         }
 
+        var delayMultiplier = 1f;
+        if (TryComp(args.User, out MovementRelayTargetComponent? relay))
+            delayMultiplier = _skills.GetSkillDelayMultiplier(relay.Source, ent.Comp.RecycleSkill);
+
+        var delay = attachableComponent.AttachDelay * delayMultiplier;
         var ev = new DropshipAttachDoAfterEvent(GetNetEntity(target), GetNetEntity(used), slot.ID);
-        var doAfter = new DoAfterArgs(EntityManager, user, attachableComponent.AttachDelay, ev, target, target, used)
+        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, target, target, used)
         {
             BreakOnMove = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
@@ -1248,14 +1253,19 @@ public sealed class PowerLoaderSystem : EntitySystem
         SyncHands((user, user.Comp));
     }
 
-    private void StartPointDetach<T>(Entity<T> ent, ContainerSlot container, Entity<PowerLoaderComponent> user, EntityUid target) where T : IComponent?
+    private void StartPointDetach<T>(Entity<T> ent, ContainerSlot container, Entity<PowerLoaderComponent> user, EntityUid target, Entity<PowerLoaderDetachableComponent> detach) where T : IComponent?
     {
         if (!TryComp(container.ContainedEntity, out PowerLoaderDetachableComponent? detachableComponent))
             return;
 
+        var delayMultiplier = 1f;
+        if (TryComp(user.Owner, out MovementRelayTargetComponent? relay))
+            delayMultiplier = _skills.GetSkillDelayMultiplier(relay.Source, detach.Comp.DetachSkill);
+
+        var delay = detachableComponent.DetachDelay * delayMultiplier;
         var contained = container.ContainedEntity.Value;
         var ev = new DropshipDetachDoAfterEvent(GetNetEntity(ent), GetNetEntity(contained), container.ID);
-        var doAfter = new DoAfterArgs(EntityManager, user, detachableComponent.DetachDelay, ev, target, target)
+        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, target, target)
         {
             BreakOnMove = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
