@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Tools;
 using Content.Shared._RMC14.Xenonids.Acid;
+using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Energy;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.DoAfter;
@@ -45,6 +46,7 @@ public sealed class RMCC4DisarmableSystem : EntitySystem
         SubscribeLocalEvent<MobStateComponent, InRangeOverrideEvent>(OnMobInRangeOverride);
         SubscribeLocalEvent<MobStateComponent, InteractUsingEvent>(OnMobInteractUsing);
         SubscribeLocalEvent<RMCWallExplosionDeletableComponent, InteractUsingEvent>(OnWallInteractUsing);
+        SubscribeLocalEvent<XenoTunnelComponent, InteractUsingEvent>(OnTunnelInteractUsing);
     }
 
     private void OnXenoAcid(Entity<XenoAcidComponent> xeno, ref BeforeXenoCorrosiveAcidEvent args)
@@ -169,6 +171,11 @@ public sealed class RMCC4DisarmableSystem : EntitySystem
         TryStartContainedMultitoolDisarm(target.Owner, ref args);
     }
 
+    private void OnTunnelInteractUsing(Entity<XenoTunnelComponent> target, ref InteractUsingEvent args)
+    {
+        TryStartContainedMultitoolDisarm(target.Owner, ref args);
+    }
+
     private void TryStartContainedMultitoolDisarm(EntityUid target, ref InteractUsingEvent args)
     {
         if (TryGetContainedC4(target, out var c4))
@@ -182,7 +189,7 @@ public sealed class RMCC4DisarmableSystem : EntitySystem
         EntityUid target,
         ref InteractUsingEvent args)
     {
-        if (args.Handled || !HasComp<MultitoolComponent>(used))
+        if (_net.IsClient || args.Handled || !HasComp<MultitoolComponent>(used))
             return;
 
         if (!HasComp<ActiveTimerTriggerComponent>(c4.Owner))
@@ -209,7 +216,7 @@ public sealed class RMCC4DisarmableSystem : EntitySystem
 
         if (_doAfter.TryStartDoAfter(doAfter))
         {
-            _popup.PopupClient(
+            _popup.PopupEntity(
                 Loc.GetString(c4.Comp.MultitoolStartPopup, ("explosive", c4.Owner)),
                 target,
                 user);
@@ -218,14 +225,14 @@ public sealed class RMCC4DisarmableSystem : EntitySystem
 
     private void OnMultitoolDoAfter(Entity<RMCC4DisarmableComponent> c4, ref RMCC4MultitoolDisarmDoAfterEvent args)
     {
-        if (args.Handled)
+        if (_net.IsClient || args.Handled)
             return;
 
         args.Handled = true;
 
         if (args.Cancelled)
         {
-            _popup.PopupClient(
+            _popup.PopupEntity(
                 Loc.GetString(c4.Comp.MultitoolStopPopup, ("explosive", c4.Owner)),
                 args.Target ?? c4.Owner,
                 args.User);
@@ -243,7 +250,7 @@ public sealed class RMCC4DisarmableSystem : EntitySystem
         if (TryComp(c4.Owner, out StickyComponent? sticky))
             _sticky.UnstickFromEntity((c4.Owner, sticky), args.User);
 
-        _popup.PopupClient(
+        _popup.PopupEntity(
             Loc.GetString(c4.Comp.MultitoolFinishPopup, ("explosive", c4.Owner)),
             args.Target ?? c4.Owner,
             args.User);
