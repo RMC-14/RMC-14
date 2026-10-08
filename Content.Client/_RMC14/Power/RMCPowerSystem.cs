@@ -19,13 +19,20 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
 
     private void OnMonitorState(Entity<RMCPowerMonitorComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        if (!TryComp(ent, out UserInterfaceComponent? ui))
-            return;
-
-        foreach (var bui in ui.ClientOpenInterfaces.Values)
+        try
         {
-            if (bui is RMCPowerMonitorBui monitorUi)
-                monitorUi.Refresh();
+            if (!TryComp(ent, out UserInterfaceComponent? ui))
+                return;
+
+            foreach (var bui in ui.ClientOpenInterfaces.Values)
+            {
+                if (bui is RMCPowerMonitorBui monitorUi)
+                    monitorUi.Refresh();
+            }
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Error refreshing {nameof(RMCPowerMonitorBui)}\n{e}");
         }
     }
 
@@ -41,13 +48,20 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
 
     private void RefreshSmes(EntityUid uid)
     {
-        if (!TryComp(uid, out UserInterfaceComponent? ui))
-            return;
-
-        foreach (var bui in ui.ClientOpenInterfaces.Values)
+        try
         {
-            if (bui is RMCSmesBui smesUi)
-                smesUi.Refresh();
+            if (!TryComp(uid, out UserInterfaceComponent? ui))
+                return;
+
+            foreach (var bui in ui.ClientOpenInterfaces.Values)
+            {
+                if (bui is RMCSmesBui smesUi)
+                    smesUi.Refresh();
+            }
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Error refreshing {nameof(RMCSmesBui)}\n{e}");
         }
     }
 

@@ -23,6 +23,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -44,6 +45,8 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
     private const float EquipmentRestore = 0.30f;
     private const float LightingCutoff = 0.15f;
     private const float LightingRestore = 0.20f;
+
+    private static readonly EntProtoId PowerNetworkPrototype = "RMCPowerNetwork";
 
     private static readonly SoundSpecifier BlackoutAnnouncementSound =
         new SoundPathSpecifier("/Audio/_RMC14/Announcements/ARES/attention_jingle.ogg");
@@ -1416,8 +1419,8 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
     {
         if (!_networkEntities.TryGetValue(network.Key, out var uid) || TerminatingOrDeleted(uid))
         {
-            uid = Spawn(null, new EntityCoordinates(network.Key.Map, default));
-            var component = EnsureComp<RMCPowerNetComponent>(uid);
+            uid = Spawn(PowerNetworkPrototype, new EntityCoordinates(network.Key.Map, default));
+            var component = Comp<RMCPowerNetComponent>(uid);
             component.PowerNet = network.Key.PowerNet;
             _networkEntities[network.Key] = uid;
         }

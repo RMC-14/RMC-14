@@ -102,7 +102,7 @@ public sealed class RMCApcBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
             row.Off.Disabled = apc.Locked;
         }
 
-        var multiplier = _config.GetCVar(RMCCVars.RMCPowerLoadMultiplier);
+        var multiplier = Math.Max(0.001f, _config.GetCVar(RMCCVars.RMCPowerLoadMultiplier));
         var totalWatts = apc.Channels.Sum(c => c.Watts);
         _window.TotalLoadWatts.SetMarkupPermissive(Loc.GetString("rmc-apc-ui-total-load-watts", ("watts", totalWatts / multiplier)));
 
@@ -136,7 +136,7 @@ public sealed class RMCApcBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
 
     private void SetButtons(RMCApcChannelRow row, RMCApcChannel channel)
     {
-        var multiplier = _config.GetCVar(RMCCVars.RMCPowerLoadMultiplier);
+        var multiplier = Math.Max(0.001f, _config.GetCVar(RMCCVars.RMCPowerLoadMultiplier));
         row.Auto.Pressed = channel.Button == RMCApcButtonState.Auto;
         row.On.Pressed = channel.Button == RMCApcButtonState.On;
         row.Off.Pressed = channel.Button == RMCApcButtonState.Off;
