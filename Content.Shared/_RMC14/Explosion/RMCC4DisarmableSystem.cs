@@ -1,6 +1,5 @@
 using Content.Shared._RMC14.Tools;
 using Content.Shared._RMC14.Xenonids.Acid;
-using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Energy;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.DoAfter;
@@ -46,7 +45,6 @@ public sealed class RMCC4DisarmableSystem : EntitySystem
         SubscribeLocalEvent<MobStateComponent, InRangeOverrideEvent>(OnMobInRangeOverride);
         SubscribeLocalEvent<MobStateComponent, InteractUsingEvent>(OnMobInteractUsing);
         SubscribeLocalEvent<RMCWallExplosionDeletableComponent, InteractUsingEvent>(OnWallInteractUsing);
-        SubscribeLocalEvent<XenoTunnelComponent, InteractUsingEvent>(OnTunnelInteractUsing);
     }
 
     private void OnXenoAcid(Entity<XenoAcidComponent> xeno, ref BeforeXenoCorrosiveAcidEvent args)
@@ -171,12 +169,7 @@ public sealed class RMCC4DisarmableSystem : EntitySystem
         TryStartContainedMultitoolDisarm(target.Owner, ref args);
     }
 
-    private void OnTunnelInteractUsing(Entity<XenoTunnelComponent> target, ref InteractUsingEvent args)
-    {
-        TryStartContainedMultitoolDisarm(target.Owner, ref args);
-    }
-
-    private void TryStartContainedMultitoolDisarm(EntityUid target, ref InteractUsingEvent args)
+    public void TryStartContainedMultitoolDisarm(EntityUid target, ref InteractUsingEvent args)
     {
         if (TryGetContainedC4(target, out var c4))
             TryStartMultitoolDisarm(c4, args.User, args.Used, target, ref args);
