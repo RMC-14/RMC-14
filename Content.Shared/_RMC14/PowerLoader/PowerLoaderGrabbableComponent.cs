@@ -18,5 +18,5 @@ public sealed partial class PowerLoaderGrabbableComponent : Component
     public EntProtoId VirtualLeft;
 
     [DataField, AutoNetworkedField]
-    public EntProtoId<SkillDefinitionComponent> RecycleSkill = "RMCSkillEngineer";
+    public EntProtoId<SkillDefinitionComponent> GrabSkill = "RMCSkillEngineer";
 }
