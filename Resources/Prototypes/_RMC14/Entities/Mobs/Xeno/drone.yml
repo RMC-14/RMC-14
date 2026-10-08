@@ -201,6 +201,8 @@
     name: rmc-xeno-gardener-name
     description: rmc-xeno-gardener-description
     popup: rmc-xeno-gardener-popup
+  - type: XenoDestrain
+    destrainTo: CMXenoDrone
   - type: XenoFruitPlanter
     canPlant:
     - XenoFruitGreater
@@ -276,6 +278,8 @@
     name: rmc-xeno-healer-name
     description: rmc-xeno-healer-description
     popup: rmc-xeno-healer-popup
+  - type: XenoDestrain
+    destrainTo: CMXenoDrone
   - type: XenoFruitPlanter
     fruitChoice: XenoFruitLesser
     canPlant:

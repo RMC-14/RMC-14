@@ -181,6 +181,8 @@
     name: rmc-xeno-charger-name
     description: rmc-xeno-charger-description
     popup: rmc-xeno-charger-popup
+  - type: XenoDestrain
+    destrainTo: RMCXenoCrusher
   - type: CombatMode
     toggleMouseRotator: false
   - type: XenoTumble
