@@ -622,7 +622,7 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         var delayMultiplier = 1f;
         if (TryComp(args.User, out MovementRelayTargetComponent? relay))
-            delayMultiplier = _skills.GetSkillDelayMultiplier(relay.Source, ent.Comp.GrabSkill);
+            delayMultiplier = _skills.GetSkillDelayMultiplier(relay.Source, ent.Comp.AttachSkill);
 
         var delay = attachableComponent.AttachDelay * delayMultiplier;
         var ev = new DropshipAttachDoAfterEvent(GetNetEntity(target), GetNetEntity(used), slot.ID);
