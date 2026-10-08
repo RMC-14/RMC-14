@@ -323,7 +323,7 @@ public sealed class GhostRoleSystem : EntitySystem
         bool reregisterOnGhost = true)
     {
         EnsureComp<GhostTakeoverAvailableComponent>(uid);
-        var role = AddComp<GhostRoleComponent>(uid);
+        var role = EnsureComp<GhostRoleComponent>(uid);
         role.RoleName = name;
         role.RoleDescription = description;
         role.MakeSentient = makeSentient;

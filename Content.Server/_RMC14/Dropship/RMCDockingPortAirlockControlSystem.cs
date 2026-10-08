@@ -168,15 +168,12 @@ public sealed class RMCDockingPortAirlockControlSystem : EntitySystem
         var grid = xform.GridUid;
         var tagged = new List<Entity<DoorComponent>>();
         var fallback = new List<Entity<DoorComponent>>();
-        var scannedDoors = new List<string>();
+        var scannedDoors = _lookup.GetEntitiesInRange<DoorComponent>(xform.Coordinates, ent.Comp.SearchRadius);
 
-        foreach (var door in _lookup.GetEntitiesInRange<DoorComponent>(xform.Coordinates, ent.Comp.SearchRadius))
+        foreach (var door in scannedDoors)
         {
             var doorXform = Transform(door.Owner);
-            var hasTags = TryComp(door.Owner, out TagComponent? tags);
-            var tagText = hasTags ? string.Join(",", tags!.Tags) : "none";
-            scannedDoors.Add($"{ToPrettyString(door.Owner)} grid:{ToPrettyString(doorXform.GridUid)} " +
-                             $"pos:{doorXform.LocalPosition} tags:[{tagText}] state:{door.Comp.State}");
+            TryComp(door.Owner, out TagComponent? tags);
 
             if (doorXform.GridUid != grid)
             {
@@ -204,9 +201,20 @@ public sealed class RMCDockingPortAirlockControlSystem : EntitySystem
         if (doors.Count == 0)
         {
             if (ent.Comp.WarnIfMissing)
+            {
+                var descriptions = new List<string>();
+                foreach (var door in scannedDoors)
+                {
+                    var doorXform = Transform(door.Owner);
+                    var tagText = TryComp(door.Owner, out TagComponent? tags) ? string.Join(",", tags.Tags) : "none";
+                    descriptions.Add($"{ToPrettyString(door.Owner)} grid:{ToPrettyString(doorXform.GridUid)} " +
+                                     $"pos:{doorXform.LocalPosition} tags:[{tagText}] state:{door.Comp.State}");
+                }
+
                 Log.Warning($"RMC docking port {ToPrettyString(ent.Owner)} found no airlocks to {(open ? "open" : "close")} " +
                             $"within {ent.Comp.SearchRadius} tiles. grid={ToPrettyString(grid)}, pos={xform.LocalPosition}, " +
-                            $"requiredTags=[{string.Join(",", ent.Comp.AirlockTags)}], scanned=[{string.Join(" | ", scannedDoors)}]");
+                            $"requiredTags=[{string.Join(",", ent.Comp.AirlockTags)}], scanned=[{string.Join(" | ", descriptions)}]");
+            }
 
             return;
         }

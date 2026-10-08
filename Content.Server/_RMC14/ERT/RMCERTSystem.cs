@@ -107,6 +107,9 @@ public sealed partial class RMCERTSystem : EntitySystem
 
     private MapId? _ertMap;
     private int _loadedShuttles;
+    private TimeSpan _nextRequestUpdate;
+
+    private static readonly TimeSpan RequestUpdateInterval = TimeSpan.FromSeconds(1);
 
     private static readonly SoundPathSpecifier DistressBeaconSound = new("/Audio/_RMC14/AI/distressbeacon.ogg");
     private static readonly SoundPathSpecifier DistressReceivedSound = new("/Audio/_RMC14/AI/distressreceived.ogg");
@@ -154,6 +157,11 @@ public sealed partial class RMCERTSystem : EntitySystem
     {
         base.Update(frameTime);
 
+        if (_timing.CurTime < _nextRequestUpdate)
+            return;
+
+        _nextRequestUpdate = _timing.CurTime + RequestUpdateInterval;
+
         foreach (var request in _requests.Values.ToArray())
         {
             TryAutoResolvePendingRequest(request);
@@ -181,6 +189,7 @@ public sealed partial class RMCERTSystem : EntitySystem
         _queuedPendingAdminNotifications.Clear();
         _ertMap = null;
         _loadedShuttles = 0;
+        _nextRequestUpdate = TimeSpan.Zero;
     }
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs ev)
