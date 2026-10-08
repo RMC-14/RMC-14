@@ -6,6 +6,7 @@ using Content.Shared.Medical.SuitSensor;
 using Content.Shared.Mobs.Components;
 using Content.Shared.UserInterface;
 using Robust.Server.GameObjects;
+using Robust.Shared.Map;
 using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Medical.CrewMonitoring;
@@ -189,7 +190,9 @@ public sealed class RMCPortableCrewMonitorSystem : SharedRMCPortableCrewMonitorS
     {
         Vector2? offset = null;
         var directionOnly = false;
-        if (ent.Comp.SelectedTarget is { } target &&
+        var holderCoordinates = _transform.GetMapCoordinates(ent.Owner);
+        if (holderCoordinates.MapId != MapId.Nullspace &&
+            ent.Comp.SelectedTarget is { } target &&
             ent.Comp.SelectedSensor is { } sensor &&
             TryComp(sensor, out SuitSensorComponent? suitSensor) &&
             suitSensor.Mode >= SuitSensorMode.SensorCords &&
@@ -199,9 +202,8 @@ public sealed class RMCPortableCrewMonitorSystem : SharedRMCPortableCrewMonitorS
                 target,
                 ent.Comp.NpcFactions,
                 ent.Comp.IffFactions,
-                _transform.GetMapCoordinates(ent.Owner).MapId))
+                holderCoordinates.MapId))
         {
-            var holderCoordinates = _transform.GetMapCoordinates(ent.Owner);
             var targetCoordinates = _transform.GetMapCoordinates(target);
             if (holderCoordinates.MapId == targetCoordinates.MapId)
             {

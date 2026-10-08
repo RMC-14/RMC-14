@@ -74,6 +74,8 @@ public sealed class RMCPortableCrewMonitorBui : RMCPopOutBui<RMCPortableCrewMoni
             };
             row.NameLabel.Text = entry.Name;
             row.JobLabel.Text = entry.JobTitle;
+            row.NameLabel.ToolTip = entry.Name;
+            row.JobLabel.ToolTip = entry.JobTitle;
             row.StatusLabel.Text = RMCCrewMonitorUIHelpers.GetStatusName(entry.State);
             row.StatusLabel.FontColorOverride = RMCCrewMonitorUIHelpers.GetStatusColor(entry.State);
             if (_prototypes.TryIndex(entry.JobIcon, out JobIconPrototype? jobIcon))

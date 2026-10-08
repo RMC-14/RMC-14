@@ -9,8 +9,8 @@
         <TextureRect Name="JobIcon" Access="Public" MinSize="38 38" MaxSize="38 38"
                      TextureScale="2 2" Stretch="KeepCentered" VerticalAlignment="Center" />
         <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalAlignment="Center">
-            <Label Name="NameLabel" Access="Public" HorizontalExpand="True" />
-            <Label Name="JobLabel" Access="Public" HorizontalExpand="True"
+            <Label Name="NameLabel" Access="Public" HorizontalExpand="True" ClipText="True" />
+            <Label Name="JobLabel" Access="Public" HorizontalExpand="True" ClipText="True"
                    FontColorOverride="#8FA3B2" />
         </BoxContainer>
         <Label Name="StatusLabel" Access="Public" MinWidth="64" Align="Center" VerticalAlignment="Center" />
