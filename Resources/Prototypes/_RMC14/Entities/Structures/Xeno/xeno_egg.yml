@@ -83,6 +83,7 @@
     - Electrocution
   - type: DeletedByWeedKiller
   - type: XenoChargeDontHit
+  - type: BlockXenoConstruction
 
 - type: entity
   parent: BaseItem
