@@ -1,0 +1,7 @@
+- type: examinableDamage
+  id: XenoStructureMessages
+  messages:
+    - rmc-xeno-structure-damaged-1
+    - rmc-xeno-structure-damaged-2
+    - rmc-xeno-structure-damaged-3
+    - rmc-xeno-structure-damaged-4

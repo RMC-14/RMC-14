@@ -39,6 +39,8 @@
         Heat: 3.8
   - type: QueenEyeVision
   - type: XenoChargeDontHit
+  - type: ExaminableDamage
+    messages: XenoStructureMessages
 
 - type: entity
   abstract: true
