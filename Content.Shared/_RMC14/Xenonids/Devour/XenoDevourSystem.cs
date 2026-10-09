@@ -394,7 +394,7 @@ public sealed class XenoDevourSystem : EntitySystem
         if (attemptEv.Cancelled)
             return;
 
-        var targetName = Identity.Entity(target, EntityManager, xeno);
+        var targetName = Identity.Name(target, EntityManager, xeno);
         var container = _container.EnsureContainer<ContainerSlot>(xeno, xeno.Comp.DevourContainerId);
         if (!_container.Insert(target, container))
         {
@@ -407,16 +407,27 @@ public sealed class XenoDevourSystem : EntitySystem
         devoured.RegurgitateAt = _timing.CurTime + xeno.Comp.RegurgitateAfter;
         devoured.NextDevouredAttackTimeAllowed = TimeSpan.Zero;
 
-        _popup.PopupClient(Loc.GetString("cm-xeno-devour-self", ("target", targetName)), xeno, xeno, PopupType.Medium);
-        _popup.PopupEntity(Loc.GetString("cm-xeno-devour-target", ("user", xeno.Owner)), xeno, target, PopupType.MediumCaution);
+        var selfMessage = Loc.GetString("cm-xeno-devour-self", ("target", targetName));
+        _popup.PopupClient(selfMessage, xeno, xeno, PopupType.Medium);
 
-        var others = Filter.PvsExcept(xeno).RemovePlayerByAttachedEntity(target);
-        foreach (var session in others.Recipients)
+        var others = Filter.PvsExcept(xeno).Recipients;
+        foreach (var other in others)
         {
-            if (session.AttachedEntity is not { } recipient)
+            if (other.AttachedEntity is not { } otherEnt)
                 continue;
 
-            _popup.PopupEntity(Loc.GetString("cm-xeno-devour-observer", ("user", Identity.Entity(xeno, EntityManager)), ("target", targetName)), xeno, recipient, PopupType.MediumCaution);
+            if (otherEnt == target)
+            {
+                var targetMessage = Loc.GetString("cm-xeno-devour-target", ("user", Identity.Name(xeno, EntityManager, target)));
+                _popup.PopupEntity(targetMessage, xeno, otherEnt);
+            }
+            else
+            {
+                var otherXeno = ("user", Identity.Name(xeno, EntityManager, otherEnt));
+                var otherTarget = ("target", Identity.Name(target, EntityManager, otherEnt));
+                var otherMessage = Loc.GetString("cm-xeno-devour-observer", otherXeno, otherTarget);
+                _popup.PopupEntity(otherMessage, xeno, otherEnt, PopupType.MediumCaution);
+            }
         }
 
         var ev = new XenoDevouredEvent(target, xeno.Owner);
@@ -598,18 +609,27 @@ public sealed class XenoDevourSystem : EntitySystem
             ForceVisible = true,
         };
 
-        var targetName = Identity.Name(target, EntityManager, xeno);
-        _popup.PopupClient(Loc.GetString("cm-xeno-devour-start-self", ("target", targetName)), target, xeno);
+        var selfMessage = Loc.GetString("cm-xeno-devour-start-self", ("target", Identity.Name(target, EntityManager, xeno)));
+        _popup.PopupClient(selfMessage, target, xeno);
 
-        _popup.PopupEntity(Loc.GetString("cm-xeno-devour-start-target", ("user", xeno)), xeno, target, PopupType.MediumCaution);
-
-        var others = Filter.PvsExcept(xeno).RemovePlayerByAttachedEntity(target);
-        foreach (var session in others.Recipients)
+        var others = Filter.PvsExcept(xeno).Recipients;
+        foreach (var other in others)
         {
-            if (session.AttachedEntity is not { } recipient)
+            if (other.AttachedEntity is not { } otherEnt)
                 continue;
 
-            _popup.PopupEntity(Loc.GetString("cm-xeno-devour-start-observer", ("user", xeno), ("target", targetName)), target, recipient, PopupType.SmallCaution);
+            if (otherEnt == target)
+            {
+                var targetMessage = Loc.GetString("cm-xeno-devour-start-target", ("user", Identity.Name(xeno, EntityManager, target)));
+                _popup.PopupEntity(targetMessage, xeno, otherEnt, PopupType.MediumCaution);
+            }
+            else
+            {
+                var otherXeno = ("user", Identity.Name(xeno, EntityManager, otherEnt));
+                var otherTarget = ("target", Identity.Name(target, EntityManager, otherEnt));
+                var otherMessage = Loc.GetString("cm-xeno-devour-start-observer", otherXeno, otherTarget);
+                _popup.PopupEntity(otherMessage, target, otherEnt, PopupType.SmallCaution);
+            }
         }
 
         _doAfter.TryStartDoAfter(doAfter);
@@ -699,7 +719,7 @@ public sealed class XenoDevourSystem : EntitySystem
             if (!comp.Warned && time >= comp.WarnAt)
             {
                 comp.Warned = true;
-                _popup.PopupEntity(Loc.GetString("cm-xeno-devour-regurgitate", ("target", uid)), xeno, xeno, PopupType.MediumCaution);
+                _popup.PopupEntity(Loc.GetString("cm-xeno-devour-regurgitate", ("target", Identity.Name(uid, EntityManager, xeno))), xeno, xeno, PopupType.MediumCaution);
             }
 
             if (time >= comp.RegurgitateAt)
