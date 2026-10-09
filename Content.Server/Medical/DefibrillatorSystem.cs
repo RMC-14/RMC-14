@@ -266,6 +266,9 @@ public sealed class DefibrillatorSystem : EntitySystem
             {
                 _mobState.ChangeMobState(target, MobState.Critical, mob, uid);
                 dead = false;
+
+                // RMC14
+                _rmcDefibrillator.ApplyReviveEffects(target);
             }
 
             if (_mind.TryGetMind(target, out _, out var mind) &&

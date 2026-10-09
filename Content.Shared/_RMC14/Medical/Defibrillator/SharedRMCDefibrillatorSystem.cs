@@ -1,14 +1,21 @@
+using Content.Shared._RMC14.BlurredVision;
 using Content.Shared._RMC14.Body;
 using Content.Shared._RMC14.Chemistry.Effects;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Emote;
+using Content.Shared._RMC14.Stun;
+using Content.Shared.Chat.Prototypes;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Medical;
+using Content.Shared.StatusEffect;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Medical.Defibrillator;
 
@@ -18,8 +25,17 @@ public abstract class SharedRMCDefibrillatorSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedRMCBloodstreamSystem _rmcBloodstream = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
+    [Dependency] private readonly SharedRMCEmoteSystem _rmcEmote = default!;
     [Dependency] private readonly RMCReagentSystem _rmcReagent = default!;
+    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+
+    private static readonly ProtoId<EmotePrototype> GaspEmote = "Gasp";
+    private static readonly ProtoId<StatusEffectPrototype> BlurredKey = "Blinded";
+    private static readonly TimeSpan ReviveKnockOut = TimeSpan.FromSeconds(20);
+    private static readonly TimeSpan ReviveBlur = TimeSpan.FromSeconds(20);
 
     public override void Initialize()
     {
@@ -68,6 +84,18 @@ public abstract class SharedRMCDefibrillatorSystem : EntitySystem
 
         args.Heal += highest.Value.Electrogenetic.CalculateHeal(_damageable, args.Target, EntityManager);
         _solutionContainer.RemoveReagent(solutionEnt, highest.Value.Reagent.ID, 1);
+    }
+
+    public void ApplyReviveEffects(EntityUid target)
+    {
+        _rmcEmote.TryEmoteWithChat(target, GaspEmote, hideLog: true, ignoreActionBlocker: true, forceEmote: true);
+        _sizeStun.TryKnockOut(target, ReviveKnockOut);
+
+        if (!_statusEffects.TryGetTime(target, BlurredKey, out var blur) ||
+            blur.Value.Item2 - _timing.CurTime < ReviveBlur)
+        {
+            _statusEffects.TryAddStatusEffect<RMCBlindedComponent>(target, BlurredKey, ReviveBlur, true);
+        }
     }
 
     private void OnNoDefibExamine(Entity<RMCDefibrillatorBlockedComponent> ent, ref ExaminedEvent args)
