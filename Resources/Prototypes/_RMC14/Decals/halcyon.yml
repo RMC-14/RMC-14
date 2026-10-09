@@ -1,0 +1,35 @@
+﻿- type: decal
+  id: RMCDecalHalcyonTile1
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/halcyon_2x2.rsi
+    state: halcyon-1
+
+- type: decal
+  id: RMCDecalHalcyonTile2
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/halcyon_2x2.rsi
+    state: halcyon-2
+
+- type: decal
+  id: RMCDecalHalcyonTile3
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/halcyon_2x2.rsi
+    state: halcyon-3
+
+- type: decal
+  id: RMCDecalHalcyonTile4
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/halcyon_2x2.rsi
+    state: halcyon-4
