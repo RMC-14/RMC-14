@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   save: false
   parent: BaseMobSpecies
   id: RMCBaseMobSpeciesOrganic
@@ -119,6 +119,7 @@
     damage:
       types:
         Heat: 1
+  - type: ForeignObjectEmbeddable
   - type: RMCRevivable
   - type: RMCMedicalExamine
   - type: FireVisuals

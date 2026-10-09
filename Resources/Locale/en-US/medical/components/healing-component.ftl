@@ -3,3 +3,4 @@ medical-item-cant-use = There is no damage you can heal with the {$item}.
 medical-item-stop-bleeding = {CAPITALIZE($target)} has stopped bleeding.
 medical-item-stop-bleeding-self = You have stopped bleeding.
 medical-item-popup-target = {CAPITALIZE(THE($user))} is trying to heal you with the {$item}!
+rmc-embedded-movement-pain = The shards embeded in you hurt as you move

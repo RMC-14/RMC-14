@@ -1,4 +1,6 @@
-﻿using Content.Shared._RMC14.Medical.Surgery.Conditions;
+﻿using Content.Shared._RMC14.Embeds;
+using Content.Shared._RMC14.Medical.Surgery.Conditions;
+using Content.Shared._RMC14.Medical.Surgery.Effects.Step;
 using Content.Shared._RMC14.Medical.Surgery.Steps;
 using Content.Shared._RMC14.Medical.Surgery.Tools;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -8,6 +10,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Robust.Shared.Prototypes;
+using System.Linq;
 
 namespace Content.Shared._RMC14.Medical.Surgery;
 
@@ -18,6 +21,8 @@ public abstract partial class SharedCMSurgerySystem
         SubscribeLocalEvent<CMSurgeryStepComponent, CMSurgeryStepEvent>(OnToolStep);
         SubscribeLocalEvent<CMSurgeryStepComponent, CMSurgeryStepCompleteCheckEvent>(OnToolCheck);
         SubscribeLocalEvent<CMSurgeryStepComponent, CMSurgeryCanPerformStepEvent>(OnToolCanPerform);
+
+        SubscribeLocalEvent<RMCSurgeryStepForeignObjectEffectComponent, CMSurgeryStepCompleteCheckEvent>(OnForeignObjectStepCheck);
 
         SubSurgery<CMSurgeryCutLarvaRootsStepComponent>(OnCutLarvaRootsStep, OnCutLarvaRootsCheck);
 
@@ -36,19 +41,29 @@ public abstract partial class SharedCMSurgerySystem
 
     private void OnToolStep(Entity<CMSurgeryStepComponent> ent, ref CMSurgeryStepEvent args)
     {
+        EntityUid? firstValidTool = null;
         if (ent.Comp.Tool != null)
         {
-            foreach (var reg in ent.Comp.Tool.Values)
+            foreach (var requiredKind in ent.Comp.Tool)
             {
-                if (!AnyHaveComp(args.Tools, reg.Component, out var tool))
+                if (!TryFindToolForKind(args.Tools, requiredKind, out var tool))
                     return;
 
-                if (_net.IsServer &&
-                    TryComp(tool, out CMSurgeryToolComponent? toolComp) &&
-                    toolComp.EndSound != null)
-                {
-                    _audio.PlayPvs(toolComp.EndSound, tool);
-                }
+                firstValidTool ??= tool;
+            }
+        }
+
+        if (_net.IsServer)
+        {
+            if (ent.Comp.EndSound != null)
+            {
+                _audio.PlayPvs(ent.Comp.EndSound, args.Body);
+            }
+            else if (firstValidTool is { } validTool &&
+                     TryComp(validTool, out RMCSurgeryToolComponent? toolComp) &&
+                     toolComp.EndSound != null)
+            {
+                _audio.PlayPvs(toolComp.EndSound, validTool);
             }
         }
 
@@ -145,21 +160,20 @@ public abstract partial class SharedCMSurgerySystem
 
         if (ent.Comp.Tool != null)
         {
-            args.ValidTools ??= new HashSet<EntityUid>();
+            args.ValidTools ??= new List<EntityUid>();
 
-            foreach (var reg in ent.Comp.Tool.Values)
+            foreach (var requiredKind in ent.Comp.Tool)
             {
-                if (!AnyHaveComp(args.Tools, reg.Component, out var withComp))
+                if (!TryFindToolForKind(args.Tools, requiredKind, out var withComp))
                 {
                     args.Invalid = StepInvalidReason.MissingTool;
-
-                    if (reg.Component is ICMSurgeryToolComponent tool)
-                        args.Popup = $"You need {tool.ToolName} to perform this step!";
+                    args.Popup = $"You need {GetToolPopupName(requiredKind)} to perform this step!";
 
                     return;
                 }
 
-                args.ValidTools.Add(withComp);
+                if (!args.ValidTools.Contains(withComp))
+                    args.ValidTools.Add(withComp);
             }
         }
     }
@@ -182,6 +196,22 @@ public abstract partial class SharedCMSurgerySystem
             args.Cancelled = true;
     }
 
+    private void OnForeignObjectStepCheck(Entity<RMCSurgeryStepForeignObjectEffectComponent> ent, ref CMSurgeryStepCompleteCheckEvent args)
+    {
+        if (!TryComp(args.Body, out ForeignObjectEmbeddedComponent? embedded) ||
+            !TryComp(args.Part, out BodyPartComponent? part))
+        {
+            args.Cancelled = true;
+            return;
+        }
+
+        if (embedded.StackCount > 0 &&
+            embedded.Entries.Any(entry => entry.BodyPart == part.PartType && entry.Symmetry == part.Symmetry))
+        {
+            args.Cancelled = true;
+        }
+    }
+
     private void OnSurgeryTargetStepChosen(Entity<CMSurgeryTargetComponent> ent, ref CMSurgeryStepChosenBuiMsg args)
     {
         var user = args.Actor;
@@ -192,7 +222,9 @@ public abstract partial class SharedCMSurgerySystem
             return;
         }
 
-        if (!PreviousStepsComplete(body, part, surgery, args.Step) ||
+        var canonicalStep = NormalizeSurgeryStepForValidation(args.Surgery, args.Step);
+
+        if (!PreviousStepsComplete(body, part, surgery, canonicalStep) ||
             IsStepComplete(body, part, args.Step))
         {
             return;
@@ -201,14 +233,29 @@ public abstract partial class SharedCMSurgerySystem
         if (!CanPerformStep(user, body, part.Comp.PartType, step, true, out _, out _, out var validTools))
             return;
 
-        if (_net.IsServer && validTools?.Count > 0)
+        var requiredKinds = TryComp(step, out CMSurgeryStepComponent? currentStepComp) ?
+            (IReadOnlyCollection<RMCSurgeryToolKind>) (currentStepComp.Tool ?? new List<RMCSurgeryToolKind>()) :
+            Array.Empty<RMCSurgeryToolKind>();
+
+        var successChance = GetStepSuccessChance(body, user, validTools, requiredKinds, args.Step);
+        var durationMultiplier = GetStepDurationMultiplier(body, user, validTools, requiredKinds, args.Step);
+
+        if (_net.IsServer)
         {
-            foreach (var tool in validTools)
+            if (TryComp(step, out CMSurgeryStepComponent? stepComp) &&
+                stepComp.StartSound != null)
             {
-                if (TryComp(tool, out CMSurgeryToolComponent? toolComp) &&
-                    toolComp.StartSound != null)
+                _audio.PlayPvs(stepComp.StartSound, body);
+            }
+            else if (validTools?.Count > 0)
+            {
+                foreach (var tool in validTools)
                 {
-                    _audio.PlayPvs(toolComp.StartSound, tool);
+                    if (TryComp(tool, out RMCSurgeryToolComponent? toolComp) &&
+                        toolComp.StartSound != null)
+                    {
+                        _audio.PlayPvs(toolComp.StartSound, tool);
+                    }
                 }
             }
         }
@@ -216,8 +263,8 @@ public abstract partial class SharedCMSurgerySystem
         if (TryComp(body, out TransformComponent? xform))
             _rotateToFace.TryFaceCoordinates(user, _transform.GetMapCoordinates(body, xform).Position);
 
-        var ev = new CMSurgeryDoAfterEvent(args.Surgery, args.Step);
-        var doAfter = new DoAfterArgs(EntityManager, user, 2, ev, body, part)
+        var ev = new CMSurgeryDoAfterEvent(args.Surgery, args.Step, successChance);
+        var doAfter = new DoAfterArgs(EntityManager, user, 2f * durationMultiplier, ev, body, part)
         {
             BreakOnMove = true,
             TargetEffect = "RMCEffectHealBusy",
@@ -283,7 +330,7 @@ public abstract partial class SharedCMSurgerySystem
         return true;
     }
 
-    public bool CanPerformStep(EntityUid user, EntityUid body, BodyPartType part, EntityUid step, bool doPopup, out string? popup, out StepInvalidReason reason, out HashSet<EntityUid>? validTools)
+    public bool CanPerformStep(EntityUid user, EntityUid body, BodyPartType part, EntityUid step, bool doPopup, out string? popup, out StepInvalidReason reason, out List<EntityUid>? validTools)
     {
         var slot = part switch
         {
@@ -332,11 +379,13 @@ public abstract partial class SharedCMSurgerySystem
         return !ev.Cancelled;
     }
 
-    private bool AnyHaveComp(List<EntityUid> tools, IComponent component, out EntityUid withComp)
+    private bool TryFindToolForKind(List<EntityUid> tools, RMCSurgeryToolKind kind, out EntityUid withComp)
     {
         foreach (var tool in tools)
         {
-            if (HasComp(tool, component.GetType()))
+            if (TryComp(tool, out RMCSurgeryToolComponent? toolComp) &&
+                toolComp.ToolTypes.Any(toolType => toolType.Kind == kind) &&
+                (!toolComp.RequiresHotCautery || kind != RMCSurgeryToolKind.Cautery || IsHot(tool)))
             {
                 withComp = tool;
                 return true;
@@ -345,5 +394,23 @@ public abstract partial class SharedCMSurgerySystem
 
         withComp = default;
         return false;
+    }
+
+    private static string GetToolPopupName(RMCSurgeryToolKind kind)
+    {
+        return kind switch
+        {
+            RMCSurgeryToolKind.Retractor => "a retractor",
+            RMCSurgeryToolKind.Hemostat => "a hemostat",
+            RMCSurgeryToolKind.Cautery => "a cautery",
+            RMCSurgeryToolKind.Drill => "a surgical drill",
+            RMCSurgeryToolKind.Scalpel => "a scalpel",
+            RMCSurgeryToolKind.BoneSaw => "a bone saw",
+            RMCSurgeryToolKind.BoneGel => "bone gel",
+            RMCSurgeryToolKind.ScalpelManager => "an incision management system",
+            RMCSurgeryToolKind.LaserScalpel => "a laser scalpel",
+            RMCSurgeryToolKind.PictSystem => "a PICT system",
+            _ => "an appropriate tool",
+        };
     }
 }
