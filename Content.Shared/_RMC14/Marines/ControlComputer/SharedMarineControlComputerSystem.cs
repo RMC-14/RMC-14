@@ -553,7 +553,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
 
     private void TryToggleEvacuation(Entity<MarineControlComputerComponent> ent)
     {
-        if (!ent.Comp.CanEvacuate)
+        if (!ent.Comp.CanEvacuate || (_net.IsServer && !CanToggleEvacuation()))
             return;
 
         var time = _timing.CurTime;
@@ -599,12 +599,28 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         OnOpenMedalsPanel(new Entity<MarineControlComputerComponent>(ent.Owner, controlComp), ref args);
     }
 
+    private bool CanToggleEvacuation()
+    {
+        if (_evacuation.IsEvacuationEnabled())
+            return true;
+
+        var dropships = EntityQueryEnumerator<DropshipComponent>();
+        while (dropships.MoveNext(out var dropship))
+        {
+            // Crashed is set when the hijacked flight starts, before the dropship reaches the warship.
+            if (dropship.Crashed)
+                return true;
+        }
+
+        return false;
+    }
+
     private void RefreshComputers()
     {
         if (_net.IsClient)
             return;
 
-        var canEvacuate = _alertLevel.IsRedOrDeltaAlert() || _evacuation.IsEvacuationEnabled();
+        var canEvacuate = CanToggleEvacuation();
         var evacuationEnabled = _evacuation.IsEvacuationEnabled();
         var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
         while (computers.MoveNext(out var uid, out var computer))
