@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: RMCRotaryPhone
   name: rotary phone
   description: The finger plate is a little stiff.
@@ -24,6 +24,10 @@
     interfaces:
       enum.RMCTelephoneUiKey.Key:
         type: RMCTelephoneBui
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
   - type: ActivatableUIBlacklist
     blacklist:
       components:
