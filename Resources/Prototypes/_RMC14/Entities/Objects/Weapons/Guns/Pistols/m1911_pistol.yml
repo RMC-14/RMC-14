@@ -36,6 +36,8 @@
         whitelist:
           tags:
           - CMMagazinePistolM1911
+          - RMCMagazinePistolM1911HI
+          - RMCMagazinePistolM1911HIAP
         startingItem: CMMagazinePistolM1911
   - type: AttachableHolder
     slots:

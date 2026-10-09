@@ -425,6 +425,18 @@
 
 - type: entity
   parent: RMCBeltHolsterPistol
+  id: RMCM1911CBeltFilledAmmo
+  suffix: M1911C, CO, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolM1911HI
+      amount: 4
+    - id: RMCMagazinePistolM1911HIAP
+      amount: 2
+
+- type: entity
+  parent: RMCBeltHolsterPistol
   id: RMCM77BeltFilled
   suffix: Filled, M77
   components:
@@ -655,6 +667,58 @@
     - id: RMCSpeedLoaderMatebaHighImpact
       amount: 3
     - id: RMCWeaponRevolverMateba
+
+- type: entity # TODO RMC14: 2006m holster rig
+  parent: RMCMatebaBelt
+  id: RMCMatebaBeltFilled2006M
+  suffix: Filled, Mateba 2006M
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMatebaHIAP
+      amount: 2
+    - id: RMCSpeedLoaderMatebaHighImpact
+      amount: 3
+    - id: RMCWeaponRevolverMateba2006M
+
+- type: entity
+  parent: RMCMatebaBelt
+  id: RMCMatebaBeltFilled2006MGold
+  suffix: Filled, Mateba 2006M Gold
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMatebaHIAP
+      amount: 2
+    - id: RMCSpeedLoaderMatebaHighImpact
+      amount: 3
+    - id: RMCWeaponRevolverMateba2006MGold
+
+- type: entity
+  parent: RMCMatebaBelt
+  id: RMCMatebaBeltFilled2006MBlackGold
+  suffix: Filled, Mateba 2006M Black Gold
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMatebaHIAP
+      amount: 2
+    - id: RMCSpeedLoaderMatebaHighImpact
+      amount: 3
+    - id: RMCWeaponRevolverMateba2006MBlackGold
+
+- type: entity
+  parent: RMCMatebaBelt
+  id: RMCMatebaBeltFilled2006MSilver
+  suffix: Filled, Mateba 2006M Silver
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMatebaHIAP
+      amount: 2
+    - id: RMCSpeedLoaderMatebaHighImpact
+      amount: 3
+    - id: RMCWeaponRevolverMateba2006MSilver
 
 - type: entity
   parent: RMCMatebaBelt

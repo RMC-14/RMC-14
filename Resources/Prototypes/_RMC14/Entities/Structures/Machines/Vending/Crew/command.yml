@@ -618,6 +618,10 @@
         points: 15
       - id: RMCMagazinePistolHandcannonHIAP
         points: 20
+      - id: RMCMagazinePistolM1911HI
+        points: 15
+      - id: RMCMagazinePistolM1911HIAP
+        points: 20
     - name: Shotgun Ammunition
       entries:
       - id: RMCBoxShotgunBuckshot

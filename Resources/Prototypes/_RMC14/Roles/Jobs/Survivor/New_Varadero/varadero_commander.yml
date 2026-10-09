@@ -55,7 +55,7 @@
     outerClothing: RMCCoatServiceFolded
     shoes: CMBootsBlackFilled
     back: CMSatchelLiaisonSecure
-    belt: RMCMatebaBeltForeconFilled # TODO RMC14: M1911 CO Variant (PR #9863). Mateba for now since both guns are about equal in power
+    belt: RMCBeltHolsterPistol
     id: CMIDCardGold
     pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchGeneralLarge
@@ -65,6 +65,11 @@
     - CMPenFountain
     back:
     - CMSheetMetal20
+    belt:
+    - CMMagazinePistolM1911
+    - CMMagazinePistolM1911
+    - CMMagazinePistolM1911
+    - RMCWeaponPistolM1911C
 
 - type: entity
   parent: CMSpawnPointJobBase
