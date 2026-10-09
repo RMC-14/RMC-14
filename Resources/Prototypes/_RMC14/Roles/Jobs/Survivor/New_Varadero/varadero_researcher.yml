@@ -75,9 +75,9 @@
   components:
   - type: EntityPreset
     randomOutfits:
-    - [ CMHandsLatex, RMCSatchelChemistry, CMUtilityVest, RMCJumpsuitCivilianScientist, RMCGlassesReagentHUDGlasses, RMCMaskSWAT, CMBootsBlackFilled ]
-    - [ CMHandsBrown, RMCLabcoatScience, CMJumpsuitResearch, CMMaskSterile, RMCGlassesReagentHUDGlasses, CMSatchel, CMBootsBlackFilled ]
-    - [ RMCWeldingGoggles, RMCSatchelLightpack5Slot, RMCLabcoatLong, RMCJumpsuitCivilianScientist, RMCBootsCBRN, RMCMaskSWAT ]
+    - [ CMHandsLatex, RMCSatchelChemistry, CMUtilityVest, RMCJumpsuitCivilianScientist, RMCGlassesReagentHUDGlasses, RMCMaskSWAT, CMBootsUrbanFilled ]
+    - [ CMHandsBrown, RMCLabcoatScience, CMJumpsuitResearch, CMMaskSterile, RMCGlassesReagentHUDGlasses, CMSatchel, CMBootsUrbanFilled ]
+    - [ RMCWeldingGoggles, RMCSatchelNV, RMCLabcoatLong, RMCJumpsuitCivilianScientist, RMCBootsCBRN, RMCMaskSWAT ]
     randomGearOther:
     -
       - [ RMCMotionDetector ]

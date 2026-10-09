@@ -151,6 +151,19 @@
           - RMCCartridge458SOCOM
 
 - type: entity
+  parent: RMCM276ShotgunShellLoadingRig
+  id: RMCM276ShotgunShellLoadingRigNV
+  name: M276-SCTA2 pattern shotgun shell bandolier
+  description: The M276-SCTA2 is the bandolier configuration of the M276 shell load rig of the UNMC. Good for carrying around extra shells in the heat of the jungle. The A2 variant is specifically designed to fit the UNMC's needs for load-bearing equipment that was not reliant on inbuilt load bearings such as the leather straps of the M3 Pattern Chestplate.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/shotgun_nv.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/shotgun_nv.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
   parent: CMBeltMarine
   id: RMCBeltPMC
   name: M305 pattern ammo load rig
@@ -1504,6 +1517,19 @@
     sprite: _RMC14/Objects/Clothing/Belt/spp_brown.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Belt/spp_brown.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
+  parent: RMCBeltSPPBrown
+  id: RMCBeltNV
+  name: M276-BDA2 pattern ammo bandolier
+  description: The M276-BDA2 is the bandolier configuration of the M276 ammo load rig of the UNMC. Good for carrying around extra ammo in the heat of the jungle. The A2 variant is specifically designed to fit the UNMC's needs for load-bearing equipment that was not reliant on inbuilt load bearings such as the leather straps of the M3 Pattern Chestplate.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/ammobelt_nv.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/ammobelt_nv.rsi
   - type: ItemCamouflage
     camouflageVariations: {}
 

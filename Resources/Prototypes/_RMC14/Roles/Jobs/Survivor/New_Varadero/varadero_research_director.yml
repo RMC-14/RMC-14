@@ -60,7 +60,7 @@
     mask: CMMaskSterile
     gloves: CMHandsLatex
     eyes: RMCGlassesReagentHUDGlasses
-    shoes: CMBootsBlackFilled
+    shoes: CMBootsUrbanFilled
   storage:
     back:
     - CMSheetMetal20

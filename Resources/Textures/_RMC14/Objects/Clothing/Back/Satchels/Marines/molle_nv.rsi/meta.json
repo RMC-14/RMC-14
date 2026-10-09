@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/Drazamuffin/cmss13/blob/8b3c569c01751bba5501f854a45afe701a6c2905/icons/mob/humans/onmob/clothing/back/backpacks_by_faction/UA.dmi, https://github.com/Drazamuffin/cmss13/blob/8b3c569c01751bba5501f854a45afe701a6c2905/icons/obj/items/clothing/backpack/backpacks_by_faction/UA.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "closed"
+    },
+    {
+      "name": "icon"
+    },
+    {
+      "name": "open"
+    },
+    {
+      "name": "equipped-BACKPACK",
+      "directions": 4
+    }
+  ]
+}

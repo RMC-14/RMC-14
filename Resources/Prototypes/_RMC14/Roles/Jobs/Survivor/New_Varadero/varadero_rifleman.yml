@@ -31,7 +31,7 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetUNMCRifleman
     - type: JobPrefix
-      prefix: cm-job-prefix-rifleman
+      prefix: rmc-job-prefix-survivor-varadero-rifleman
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
@@ -62,14 +62,14 @@
 - type: startingGear
   id: RMCGearSurvivorUNMCRifleman
   equipment:
-    jumpsuit: JumpsuitMarine
-    outerClothing: RMCCoatService
+    jumpsuit: RMCJumpsuitMarineNV
+    outerClothing: RMCOuterClothingExternalWebbingNV
     ears: RMCHeadsetMarineNV
     gloves: RMCHandsVeteran
     id: CMIDCardStandardDogtag
     pocket1: RMCPouchSurvivalFill
-    back: CMSatchelMarineTech
-    shoes: CMBootsBlackFilled
+    back: RMCSatchelNV
+    shoes: CMBootsUrbanFilled
   storage:
     back:
       - CMSheetMetal20
@@ -82,10 +82,10 @@
   components:
     - type: EntityPreset
       randomOutfits:
-        - [ RMCBoonie ]
-        - [ RMCHeadCapFlippable ]
-        - [ ArmorHelmetM10 ]
-        - [ RMCHeadBeanie ]
+        - [ RMCBoonieNV ]
+        - [ RMCHeadCapPatrolNV ]
+        - [ RMCArmorHelmetCF5 ]
+        - [ RMCHeadBeanieGray ]
 
 - type: entity
   id: RMCGearSurvivorPresetUNMC
@@ -93,7 +93,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: EntityPreset
-    primaryWeapons: # 1/6 m1911 1/6 shotgun 2/6 MK1 2/6 L42A
+    primaryWeapons: # 1/6 m1911 1/6 shotgun 2/6 MK1 2/6 L42A, TODO RMC14: Replace MK1 with M20
     - [ WeaponShotgunM42A1, CMShellShotgunBuckshot, CMShellShotgunBuckshot, CMShellShotgunBuckshot ]
     - [ RMCWeaponRifleM54CMK1, RMCMagazineRifleM54CMK1HEAPEmpty, RMCMagazineRifleM54CMK1HEAPEmpty ]
     - [ RMCWeaponRifleM54CMK1, RMCMagazineRifleM54CMK1HEAPEmpty, RMCMagazineRifleM54CMK1HEAPEmpty ]

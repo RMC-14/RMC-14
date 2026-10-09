@@ -181,7 +181,6 @@
   parent: CMSatchel
   id: RMCBackpackTyrargo
   name: T16 MOLLE Backpack
-  suffix: UNMC
   description: A tactical backpack manufactured by one of the Weston-Yamada subsidiaries. Very lightweight backpack that utilizes UN standard MOLLE fastening systems, which allows easy access and optimal weight distribution. Can be often found in hands of colonial security and various private military groups.
   components:
   - type: Sprite
@@ -192,6 +191,16 @@
     maxItemSize: Normal
     grid:
     - 0,0,20,1
+
+- type: entity
+  parent: RMCBackpackTyrargo
+  id: RMCBackpackNV
+  name: TA6 MOLLE Rucksack
+  suffix: UNMC
+  description: A large tactical rucksack sometimes issued to members of the UNMC. Somewhat unwieldy rucksack variant that utilizes the UN standard MOLLE fastening systems. Designed to lug gear into the battlefield on longer expeditions.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/molle_nv.rsi
 
 - type: entity
   parent: CMBackpack
