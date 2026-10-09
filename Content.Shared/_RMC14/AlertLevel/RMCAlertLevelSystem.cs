@@ -37,8 +37,14 @@ public sealed class RMCAlertLevelSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<DropshipHijackLandedEvent>(OnDropshipHijackLanded);
+        SubscribeLocalEvent<RMCAlertLevelDisplayComponent, MapInitEvent>(OnAlertLevelDisplayMapInit);
 
         _ghostQuery = GetEntityQuery<GhostComponent>();
+    }
+
+    private void OnAlertLevelDisplayMapInit(Entity<RMCAlertLevelDisplayComponent> ent, ref MapInitEvent args)
+    {
+        _appearance.SetData(ent.Owner, RMCAlertLevelsVisuals.Alert, Get() ?? RMCAlertLevels.Green);
     }
 
     private void OnDropshipHijackLanded(ref DropshipHijackLandedEvent ev)
