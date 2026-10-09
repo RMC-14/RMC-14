@@ -99,6 +99,9 @@ public sealed partial class AreaComponent : Component
     [DataField, AutoNetworkedField]
     public int ResinConstructCount;
 
+    [DataField, AutoNetworkedField]
+    public TimeSpan? XenoHiveSetupRestriction = TimeSpan.FromMinutes(25);
+
     [DataField]
     public ProtoId<RMCFishingLootPrototype>? FishingLoot;
 }
