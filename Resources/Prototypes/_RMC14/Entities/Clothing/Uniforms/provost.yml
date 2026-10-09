@@ -58,7 +58,16 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Provost/agent.rsi
   - type: Tag
     tags:
+    - RMCScoutArmor
     - RMCUniformMarine
     - RMCUniformMP
     - RMCUniformWarden
     - RMCUniformCMP
+
+- type: entity
+  parent: CMJumpsuitProvostAgent
+  id: CMJumpsuitProvostAgentWebbing
+  suffix: Webbing
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingPID
