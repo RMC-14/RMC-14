@@ -1,5 +1,17 @@
 # Patches
 - type: loadout
+  id: PatchFreelancerRMC
+  cost: 1
+  inhand:
+    - RMCPatchFreelancer
+
+- type: loadout
+  id: PatchFreelancerAltRMC
+  cost: 1
+  inhand:
+    - RMCPatchFreelancerAlt
+
+- type: loadout
   id: PatchWeYaRMC
   cost: 1
   inhand:
