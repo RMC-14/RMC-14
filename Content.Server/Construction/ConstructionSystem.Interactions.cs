@@ -294,6 +294,7 @@ namespace Content.Server.Construction
                             BreakOnDamage = false,
                             BreakOnMove = true,
                             NeedHand = true,
+                            RootEntity = true, // RMC14
                         };
 
                         var started  = _doAfterSystem.TryStartDoAfter(doAfterEventArgs);

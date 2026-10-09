@@ -280,6 +280,13 @@ public abstract class SharedMobCollisionSystem : EntitySystem
             if (targetEv.Cancelled)
                 continue;
 
+            // RMC14
+            var pushedEv = new RMCAttemptMobPushedEvent(other);
+            RaiseLocalEvent(entity.Owner, ref pushedEv);
+
+            if (pushedEv.Cancelled)
+                continue;
+
             // TODO: More robust overlap detection.
             var otherTransform = Physics.GetPhysicsTransform(other);
             var diff = ourTransform.Position - otherTransform.Position;
