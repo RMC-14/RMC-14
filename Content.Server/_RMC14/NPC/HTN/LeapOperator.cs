@@ -4,6 +4,9 @@ using Content.Server._RMC14.NPC.Components;
 using Content.Server.NPC;
 using Content.Server.NPC.HTN;
 using Content.Server.NPC.HTN.PrimitiveTasks;
+using Content.Shared.Actions.Components;
+using Content.Shared.Physics;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.NPC.HTN;
 
@@ -16,6 +19,18 @@ public sealed partial class LeapOperator : HTNOperator, IHtnConditionalShutdown
 
     [DataField("targetKey", required: true)]
     public string TargetKey = default!;
+
+    [DataField]
+    public EntProtoId<WorldTargetActionComponent> ActionId = "ActionXenoLeap";
+
+    [DataField]
+    public float LeapDistance = 3.5f;
+
+    [DataField]
+    public float MaxAngleDegrees = 5;
+
+    [DataField]
+    public CollisionGroup Mask = CollisionGroup.SmallMobMask;
 
     public override async Task<(bool Valid, Dictionary<string, object>? Effects)> Plan(NPCBlackboard blackboard,
     CancellationToken cancelToken)
@@ -31,6 +46,10 @@ public sealed partial class LeapOperator : HTNOperator, IHtnConditionalShutdown
         base.Startup(blackboard);
         var leap = _entManager.EnsureComponent<NPCLeapComponent>(blackboard.GetValue<EntityUid>(NPCBlackboard.Owner));
         leap.Target = blackboard.GetValue<EntityUid>(TargetKey);
+        leap.ActionId = ActionId;
+        leap.LeapDistance = LeapDistance;
+        leap.MaxAngleDegrees = MaxAngleDegrees;
+        leap.Mask = Mask;
     }
 
     public void ConditionalShutdown(NPCBlackboard blackboard)
