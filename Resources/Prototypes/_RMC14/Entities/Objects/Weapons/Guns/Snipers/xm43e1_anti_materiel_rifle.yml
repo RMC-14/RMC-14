@@ -88,6 +88,11 @@
   - type: RMCFocusedShooting
   - type: RMCGunChamber
     enabled: false
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-xm43e1
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMMagazineSniperM96S

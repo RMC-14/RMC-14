@@ -112,6 +112,11 @@
       types:
         Blunt: 40
   - type: RequireProjectileTarget
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-tesla-sentry
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCBaseTesla
