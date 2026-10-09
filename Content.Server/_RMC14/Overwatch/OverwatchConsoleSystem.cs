@@ -1,4 +1,4 @@
-﻿using Content.Server.Chat.Systems;
+using Content.Server.Chat.Systems;
 using Content.Shared._RMC14.Communications;
 using Content.Shared._RMC14.Overwatch;
 using Content.Shared._RMC14.Rules;
@@ -22,6 +22,7 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
 
         SubscribeLocalEvent<OverwatchCameraComponent, ComponentRemove>(OnWatchedRemove);
         SubscribeLocalEvent<OverwatchCameraComponent, EntityTerminatingEvent>(OnWatchedRemove);
+        SubscribeLocalEvent<OverwatchCameraComponent, RMCOverwatchTripodSquadChangedEvent>(OnWatchedSquadChanged);
         SubscribeLocalEvent<OverwatchWatchingComponent, ComponentRemove>(OnWatchingRemove);
         SubscribeLocalEvent<OverwatchWatchingComponent, EntityTerminatingEvent>(OnWatchingRemove);
     }
@@ -65,12 +66,41 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
 
     private void OnWatchedRemove<T>(Entity<OverwatchCameraComponent> ent, ref T args)
     {
-        foreach (var watching in ent.Comp.Watching)
+        RemoveWatchers(ent);
+    }
+
+    private void OnWatchedSquadChanged(
+        Entity<OverwatchCameraComponent> ent,
+        ref RMCOverwatchTripodSquadChangedEvent args)
+    {
+        RemoveWatchers(ent);
+        ent.Comp.Watching.Clear();
+        Dirty(ent);
+    }
+
+    private void RemoveWatchers(Entity<OverwatchCameraComponent> ent)
+    {
+        foreach (var watching in new List<EntityUid>(ent.Comp.Watching))
         {
             if (TerminatingOrDeleted(watching))
                 continue;
 
-            RemCompDeferred<OverwatchWatchingComponent>(watching);
+            if (TryComp(watching, out ActorComponent? actor) && actor != null)
+            {
+                if (TryComp(watching, out EyeComponent? eye))
+                {
+                    Unwatch((watching, eye), actor.PlayerSession);
+                }
+                else
+                {
+                    _viewSubscriber.RemoveViewSubscriber(ent, actor.PlayerSession);
+                    RemCompDeferred<OverwatchWatchingComponent>(watching);
+                }
+            }
+            else
+            {
+                RemCompDeferred<OverwatchWatchingComponent>(watching);
+            }
         }
     }
 
@@ -98,9 +128,29 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
         _eye.SetTarget(watcher, toWatch, watcher);
         _viewSubscriber.AddViewSubscriber(toWatch, watcher.Comp1.PlayerSession);
 
-        RemoveWatcher(watcher);
-        EnsureComp<OverwatchWatchingComponent>(watcher).Watching = toWatch;
+        OverwatchWatchingComponent watching;
+        if (TryComp(watcher.Owner, out OverwatchWatchingComponent? previous))
+        {
+            watching = previous;
+            if (previous.Watching is { } previousTarget && previousTarget != toWatch.Owner)
+            {
+                _viewSubscriber.RemoveViewSubscriber(previousTarget, watcher.Comp1.PlayerSession);
+                if (TryComp(previousTarget, out OverwatchCameraComponent? previousCamera))
+                {
+                    previousCamera.Watching.Remove(watcher);
+                    Dirty(previousTarget, previousCamera);
+                }
+            }
+        }
+        else
+        {
+            watching = EnsureComp<OverwatchWatchingComponent>(watcher);
+        }
+
+        watching.Watching = toWatch;
+        Dirty(watcher.Owner, watching);
         toWatch.Comp.Watching.Add(watcher);
+        Dirty(toWatch.Owner, toWatch.Comp);
     }
 
     protected override void Unwatch(Entity<EyeComponent?> watcher, ICommonSession player)
@@ -123,8 +173,12 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
         if (!TryComp(toRemove, out OverwatchWatchingComponent? watching))
             return;
 
-        if (TryComp(watching.Watching, out OverwatchCameraComponent? watched))
+        if (watching.Watching is { } watchedEntity &&
+            TryComp(watchedEntity, out OverwatchCameraComponent? watched))
+        {
             watched.Watching.Remove(toRemove);
+            Dirty(watchedEntity, watched);
+        }
 
         watching.Watching = null;
         RemCompDeferred<OverwatchWatchingComponent>(toRemove);
