@@ -179,12 +179,18 @@ public sealed class HealthScannerUiData
                     continue;
                 }
 
-                var text = $"{reagent.Quantity.Float():F1} {prototype.LocalizedName}";
-                if (prototype.Overdose != null && reagent.Quantity > prototype.Overdose)
-                    text = $"[bold][color=red]{FormattedMessage.EscapeText(text)} OD[/color][/bold]";
+                var locId = "rmc-health-analyzer-reagent-listing";
+                // Check critical OD first, since critical OD should always also be over OD amount as well
+                if (prototype.CriticalOverdose != null && reagent.Quantity > prototype.CriticalOverdose)
+                    locId = "rmc-health-analyzer-reagent-listing.critical-overdose";
+                else if (prototype.Overdose != null && reagent.Quantity > prototype.Overdose)
+                    locId = "rmc-health-analyzer-reagent-listing.overdose";
 
                 var label = new RichTextLabel();
-                label.SetMarkupPermissive(text);
+                label.SetMarkupPermissive(Loc.GetString(locId, 
+                    ("amount", reagent.Quantity.Float().ToString("F1")),
+                    ("reagentColor", prototype.SubstanceColor),
+                    ("reagentName", prototype.LocalizedName)));
                 window.ChemicalsContainer.AddChild(label);
                 anyChemicals = true;
             }
