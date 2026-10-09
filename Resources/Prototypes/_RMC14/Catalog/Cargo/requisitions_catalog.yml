@@ -289,6 +289,8 @@
         crate: RMCCrateMortarShellIncendiary
       - cost: 1000
         crate: RMCCrateMortarShellFlare
+      - cost: 1000
+        crate: RMCCrateMortarShellFrag
 #    - name: Operations
 #      entries: []
     - name: Reagent tanks

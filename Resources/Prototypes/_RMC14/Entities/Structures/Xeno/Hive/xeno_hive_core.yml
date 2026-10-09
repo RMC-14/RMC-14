@@ -151,6 +151,8 @@
     xenoDamage:
       types:
         Slash: 25
+  - type: DamageMultiplierFlags
+    flags: Pylon
   - type: HiveLesserSpawner
   - type: HivePylon
   - type: XenoWeedsSpreading
