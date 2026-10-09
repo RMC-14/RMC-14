@@ -179,7 +179,7 @@
     - !type:TileBarricadeClear
   rmcPrototype: RMCPlasteelBarricadeFoldableBuild
 
-#lighting
+# Lighting
 - type: construction
   parent: RMC
   name: tube light fixture
@@ -211,3 +211,23 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+
+# Floors
+- type: construction
+  parent: RMC
+  name: Catwalk
+  id: CMCatwalk
+  graph: RMCCatwalkGraph
+  startNode: start
+  targetNode: catwalkFinished
+  category: construction-category-cm-structures
+  description: A catwalk for easier EVA maneuvering and cable placement.
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: true
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+    - !type:TileType
+      targets:
+      - CMFloorPlating
