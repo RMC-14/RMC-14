@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.OrbitalCannon;
 using Content.Shared._RMC14.Power;
 using Content.Shared.Access.Systems;
+using Content.Shared.Ghost;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
@@ -46,7 +47,8 @@ public abstract class SharedGroundsideOperationsConsoleSystem : EntitySystem
         if (!_net.IsServer || args.Cancelled)
             return;
 
-        if (!_mobState.IsAlive(args.Actor))
+        var canGhostInteract = TryComp<GhostComponent>(args.Actor, out var ghost) && ghost.CanGhostInteract;
+        if (!canGhostInteract && !_mobState.IsAlive(args.Actor))
         {
             args.Cancel();
             _popup.PopupClient(Loc.GetString("rmc-goc-invalid-user"), args.Actor, PopupType.MediumCaution);
