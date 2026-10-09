@@ -78,9 +78,9 @@
   equipment:
     eyes: RMCSunglasses
     head: RMCHardhatWhite
-    ears: RMCHeadsetDistressICBLiaison # TODO RMC14 tape recorder
+    ears: RMCHeadsetDistressICBLiaison
     back: RMCSatchelICBLiaisonFill
-    jumpsuit: CMJumpsuitLiaisonBlack
+    jumpsuit: RMCJumpsuitICBLiaisonBlack
     outerClothing: RMCHazardVestYellow
     gloves: CMHandsInsulated
     shoes: RMCBootsPMCFilled
@@ -90,6 +90,25 @@
     suitStorage: RMCFlashlight
   inhand:
   - CMClipboard
+
+- type: entity
+  parent: CMJumpsuitLiaisonBlack
+  id: RMCJumpsuitICBLiaisonBlack
+  suffix: ICB, Webbing
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingICBLiasion
+
+- type: entity
+  parent: CMWebbingHolster
+  id: RMCWebbingICBLiasion
+  suffix:   ICB, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolM77
+    - id: CMMagazinePistolM77AP
+    - id: CMMagazinePistolM77AP
 
 - type: playTimeTracker
   id: RMCJobICBLiaison
