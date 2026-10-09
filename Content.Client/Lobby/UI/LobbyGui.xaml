@@ -20,7 +20,7 @@
                 <Control Name="DefaultState" VerticalExpand="True">
                     <BoxContainer Name="TopLeft" Orientation="Vertical">
                         <!-- Left Top Panel -->
-                        <PanelContainer StyleClasses="AngleRect" HorizontalAlignment="Left" Name="LeftSideTop"
+                        <PanelContainer StyleClasses="BackgroundPanel" HorizontalAlignment="Left" Name="LeftSideTop"
                                         VerticalAlignment="Top">
                             <BoxContainer Orientation="Vertical" HorizontalAlignment="Center" MaxWidth="800">
                                 <info:LinkBanner Name="LinkBanner" VerticalExpand="false" HorizontalAlignment="Center"
@@ -36,7 +36,6 @@
                                                Align="Left"
                                                FontColorOverride="{x:Static maths:Color.DarkGray}"
                                                StyleClasses="LabelBig" HorizontalExpand="True" />
-                                        <!-- RMC14 -->
                                         <Button Name="JoinXenoButton" Access="Public"
                                                 Text="{Loc 'rmc-lobby-join-xeno'}"
                                                 StyleClasses="ButtonBig" MinWidth="137" Visible="False" />
@@ -54,15 +53,18 @@
                     </BoxContainer>
                     <!-- Vertical Padding-->
                     <Control VerticalExpand="True" />
-                    <!-- Left Bot Panel -->
                     <PanelContainer VerticalAlignment="Bottom" HorizontalAlignment="Left"
-                                    Margin="0 75" StyleClasses="AngleRect">
+                                    Margin="0 75" StyleClasses="BackgroundPanel">
                         <RichTextLabel Name="LobbyMessageLabel" Access="Public" Margin="5" />
                     </PanelContainer>
-                    <BoxContainer Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                    <!-- Left Bot Panel -->
+                    <BoxContainer Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Bottom">
                         <info:DevInfoBanner Name="DevInfoBanner" VerticalExpand="false" Margin="3 3 3 3" />
-                        <PanelContainer StyleClasses="AngleRect">
-                            <RichTextLabel Name="LobbySong" Access="Public" HorizontalAlignment="Center" />
+                        <PanelContainer StyleClasses="BackgroundPanel" Margin="3 3 3 3">
+                            <BoxContainer Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="3 3 3 3">
+                                <RichTextLabel Name="LobbySong" Access="Public" HorizontalAlignment="Left" />
+                                <RichTextLabel Name="LobbyBackground" Access="Public" HorizontalAlignment="Left" />
+                            </BoxContainer>
                         </PanelContainer>
                     </BoxContainer>
                 </Control>
@@ -71,7 +73,7 @@
                 <Control Access="Public" Visible="False" Name="CharacterSetupState" VerticalExpand="True" />
             </BoxContainer>
             <!-- Right Panel -->
-            <PanelContainer Name="RightSide" Access="Public" StyleClasses="AngleRect" HorizontalAlignment="Right" VerticalExpand="True"
+            <PanelContainer Name="RightSide" Access="Public" StyleClasses="BackgroundPanel" HorizontalAlignment="Right" VerticalExpand="True"
                             VerticalAlignment="Stretch">
                 <BoxContainer Orientation="Vertical" HorizontalExpand="True">
                     <!-- Top row -->
@@ -81,7 +83,7 @@
                                HorizontalExpand="True" HorizontalAlignment="Center" />
                     </BoxContainer>
                     <!-- Gold line -->
-                    <controls:HLine Color="{x:Static style:StyleNano.NanoGold}" Thickness="2" />
+                    <controls:HLine StyleClasses="highlight" Thickness="2" />
                     <controls:HSpacer Spacing="10" />
                     <!-- Voting & misc button bar -->
                     <BoxContainer Orientation="Horizontal" MinSize="0 40" HorizontalAlignment="Right">
@@ -96,7 +98,7 @@
                     <controls:HSpacer Spacing="10" />
                     <!-- Server info -->
                     <controls:NanoHeading Text="{Loc 'ui-lobby-server-info-block'}" />
-                    <info:ServerInfo Name="ServerInfo" Access="Public" MinSize="0 30" VerticalExpand="false"
+                    <info:ServerInfo Name="ServerInfo" Access="Public" VerticalExpand="false"
                                      Margin="3 3 3 3" MaxWidth="400" HorizontalAlignment="Left" />
                     <Label Name="StationTime" Access="Public" FontColorOverride="{x:Static maths:Color.LightGray}"
                            Margin="3 3 3 3" HorizontalAlignment="Left" />
@@ -105,7 +107,7 @@
                     <controls:HSpacer Spacing="5" />
                     <BoxContainer MinHeight="10" />
                     <!-- Gold line -->
-                    <controls:HLine Color="{x:Static style:StyleNano.NanoGold}" Thickness="2" Access="Public" />
+                    <controls:HLine StyleClasses="highlight" Thickness="2" Access="Public" />
                     <controls:HSpacer Spacing="10" />
                     <widgets:ChatBox Name="Chat" Access="Public" VerticalExpand="True" Margin="3 3 3 3" MinHeight="50" />
                 </BoxContainer>
@@ -119,7 +121,7 @@
             </PanelContainer>
         </SplitContainer>
         <PanelContainer Name="ExpandPanel"
-                        StyleClasses="AngleRect" 
+                        StyleClasses="BackgroundPanel"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Top"
                         Margin="0 2 2 0"
