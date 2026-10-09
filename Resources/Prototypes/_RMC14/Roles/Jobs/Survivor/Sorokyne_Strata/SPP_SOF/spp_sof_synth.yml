@@ -53,7 +53,7 @@
     - CMUpgradedBurnKit10
     - CMUpgradedBurnKit10
     # - RMCSplint
-    # - RMCHyposprayOxycodone
+    - RMCOxycodoneAutoInjector
     - CMPillCanisterBicaridine
     - CMPillCanisterKelotane
     - CMPillCanisterInaprovaline
