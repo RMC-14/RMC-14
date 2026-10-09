@@ -171,7 +171,7 @@ public abstract class SharedSleeperSystem : EntitySystem
 
         _container.Remove(occupant, container);
 
-        if (sleeper.Comp.ExitStun > TimeSpan.Zero && !HasComp<NoStunOnExitComponent>(sleeper))
+        if (sleeper.Comp.ExitStun > TimeSpan.Zero && HasComp<NoStunOnExitComponent>(sleeper))
             _stun.TryStun(occupant, sleeper.Comp.ExitStun, true);
 
         if (_net.IsClient)
