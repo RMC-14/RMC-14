@@ -110,10 +110,10 @@
                     <ui:BlueHorizontalSeparator />
                     <BoxContainer Orientation="Horizontal" Margin="0 2 0 4" SeparationOverride="4">
                         <LineEdit Name="CluesSearchBar" Access="Public"
-                                  PlaceHolder="Search clues..."
+                                  PlaceHolder="{Loc rmc-ui-intel-search-placeholder}"
                                   HorizontalExpand="True" />
                         <Button Name="HideAreasButton" Access="Public"
-                                Text="Hide Areas"
+                                Text="{Loc rmc-ui-intel-hide-areas}"
                                 MinWidth="90" />
                     </BoxContainer>
                     <TabContainer Name="CluesContainer" Access="Public" VerticalExpand="True" />
