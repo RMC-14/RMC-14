@@ -9,12 +9,12 @@
       Liaison: RMCPaperWeYaLiaisonBriefingLV624
     announcements:
     - text: rmc-announcement-planet-lv
-    #smallHostVariants:
-      #- RMCMobSmallHostFarwa
-      #- CMMobSmallHostMonkey
-      #- CMMobSmallHostKobold
-      #- RMCMobSmallHostNeaera
-      #- RMCMobSmallHostStok
+    smallHostVariants:
+      - RMCMobSmallHostFarwa
+      - CMMobSmallHostMonkey
+      - CMMobSmallHostKobold
+      - RMCMobSmallHostNeaera
+      - RMCMobSmallHostStok
     nightmareScenarios:
 #   - scenarioName: clf_ship
 #     scenarioProbability: 0.1
@@ -77,8 +77,8 @@
     - text: rmc-announcement-planet-solaris
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingSolaris
-    #smallHostVariants:
-      #RMCMobSmallHostNeaera
+    smallHostVariants:
+      - RMCMobSmallHostNeaera
     nightmareScenarios:
     - scenarioName: crashlanding_offices
       scenarioProbability: 0.2
@@ -169,10 +169,10 @@
     camouflage: Snow
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingShivas
-    announcements:
+        announcements:
     - text: rmc-announcement-planet-shiva
-    #smallHostVariants:
-      #RMCMobSmallHostYiren
+    smallHostVariants:
+      - RMCMobSmallHostYiren
     nightmareScenarios:
     - scenarioName: panic_room_hold
       scenarioProbability: 0.15
@@ -223,10 +223,10 @@
     minPlayers: 130
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingFiorina
-    announcements:
+     announcements:
     - text: rmc-announcement-planet-fiorina
-    #smallHostVariants:
-      #RMCMobSmallHostFarwa
+    smallHostVariants:
+      - RMCMobSmallHostFarwa
     nightmareScenarios:
     - scenarioName: riot_in_progress
       scenarioProbability: 0.15
@@ -277,10 +277,10 @@
     map: /Maps/_RMC14/trijent.yml
     camouflage: Desert
     minPlayers: 130
-    announcements:
+        announcements:
     - text: rmc-announcement-planet-trijent
-    #smallHostVariants:
-      #RMCMobSmallHostStok
+    smallHostVariants:
+      - RMCMobSmallHostStok
     nightmareScenarios:
     - scenarioName: none # Reduce this to 0.5 once CLF survivors are in
       scenarioProbability: 0.6
@@ -395,8 +395,8 @@
     - text: rmc-announcement-planet-varadero-6
       announcement: "rmc-announcement-ares-varadero"
       delay: 9000 # 150 minutes
-    #smallHostVariants:
-      #CMMobSmallHostKobold
+    smallHostVariants:
+      - CMMobSmallHostKobold
     nightmareScenarios: # 100% chance of regular survivors, reduce to 0.9 once CLF survs are in
     - scenarioName: none
       scenarioProbability: 1
@@ -442,9 +442,9 @@
     camouflage: Desert
     announcements:
     - text: rmc-announcement-planet-kutjevo
-    #smallHostVariants:
-      #RMCMobSmallHostNeaera
-      #RMCMobSmallHostStok
+    smallHostVariants:
+      - RMCMobSmallHostNeaera
+      - RMCMobSmallHostStok
     nightmareScenarios:
     - scenarioName: none # Reduce this to 0.9 once CLF survivors are in at 0.1
       scenarioProbability: 1
@@ -478,9 +478,9 @@
       Liaison: RMCPaperWeYaLiaisonBriefingChances
     announcements:
     - text: rmc-announcement-planet-chances
-    #smallHostVariants:
-      #RMCSmallHostMobNaera
-      #RMCSmallHostMobStok
+    smallHostVariants:
+      - RMCMobSmallHostNeaera
+      - RMCMobSmallHostStok
     selectRandomSurvivorVariant: false
     survivorJobs:
     - RMCSurvivorCommandingOfficer: 1
@@ -514,8 +514,8 @@
       Liaison: RMCPaperWeYaLiaisonBriefingHybrisa
     announcements:
     - text: rmc-announcement-planet-hybrisa
-    #smallHostVariants:
-      #CMMobSmallHostMonkey
+    smallHostVariants:
+      - CMMobSmallHostMonkey
     nightmareScenarios:
     - scenarioName: tse_airbase
       scenarioProbability: 0.3
@@ -589,9 +589,9 @@
       Liaison: RMCPaperWeYaLiaisonBriefingSorokyne
     announcements:
     - text: rmc-announcement-planet-sorokyne
-    #smallHostVariants:
-      #RMCMobSmallHostStok
-      #CMMobSmallHostKobold
+    smallHostVariants:
+      - RMCMobSmallHostStok
+      - CMMobSmallHostKobold
     nightmareScenarios:
     - scenarioName: spp_sof
       scenarioProbability: 0.4
