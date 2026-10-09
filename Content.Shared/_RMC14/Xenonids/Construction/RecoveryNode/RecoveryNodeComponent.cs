@@ -1,24 +1,39 @@
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Xenonids.Construction.RecoveryNode;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 public sealed partial class RecoveryNodeComponent : Component
 {
-    [DataField, AutoNetworkedField]
-    public FixedPoint2 HealAmount = 25;
+    [DataField(required: true), AutoNetworkedField]
+    public RecoveryType RecoveryType;
 
     [DataField, AutoNetworkedField]
-    public float HealRange = 1.5F;
+    public EntProtoId RecoveryEffect = "RMCEffectHealBusy";
 
     [DataField, AutoNetworkedField]
-    public TimeSpan HealCooldown = TimeSpan.FromSeconds(3);
+    public FixedPoint2 RecoveryAmount = 25;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan NextHealAt;
+    public float Range = 1.5f;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan Cooldown = TimeSpan.FromSeconds(3);
+
+    [DataField, AutoNetworkedField, AutoPausedField]
+    public TimeSpan NextRecoveryAt;
 
     [DataField]
-    public DoAfterId? HealDoAfter;
+    public DoAfterId? DoAfter;
+}
+
+[Serializable, NetSerializable]
+public enum RecoveryType
+{
+    Health,
+    Plasma,
 }
