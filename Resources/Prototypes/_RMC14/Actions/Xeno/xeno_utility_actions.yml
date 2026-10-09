@@ -200,6 +200,21 @@
 
 - type: entity
   parent: ActionXenoBase
+  id: ActionXenoHiveTeamMemberView
+  name: View My Fireteam
+  description: Opens a panel showing your fireteam leader and members.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: xeno_lead
+    useDelay: 1
+  - type: InstantAction
+    event: !type:HiveTeamMemberViewActionEvent
+
+- type: entity
+  parent: ActionXenoBase
   id: ActionXenoLeader
   name: Choose/Follow Xenonid Leaders
   description: Promotes and demotes xenonid leaders, or watches them. Promoting a xeno to leader will make them emit your pheromones around themselves.
