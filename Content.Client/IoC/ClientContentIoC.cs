@@ -3,6 +3,7 @@ using Content.Client._RMC14.GMRequest;
 using Content.Client._RMC14.LinkAccount;
 using Content.Client._RMC14.PlayTimeTracking;
 using Content.Client._RMC14.TacticalMap;
+using Content.Client._RMC14.UserInterface.Crt;
 using Content.Client.Administration.Managers;
 using Content.Client.Changelog;
 using Content.Client.Chat.Managers;
@@ -73,7 +74,9 @@ namespace Content.Client.IoC
             collection.Register<RMCPlayTimeManager>();
             collection.Register<CommendationsManager>();
             collection.Register<TacticalMapSettingsManager>();
+            collection.Register<IRMCCrtAppearanceManager, RMCCrtAppearanceManager>();
             collection.Register<GMRequestClientManager>();
+            // RMC14
         }
     }
 }
