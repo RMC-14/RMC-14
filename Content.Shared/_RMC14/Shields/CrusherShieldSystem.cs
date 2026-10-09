@@ -43,7 +43,7 @@ public sealed partial class CrusherShieldSystem : EntitySystem
         args.Handled = true;
 
         EnsureComp<XenoShieldComponent>(xeno);
-        _shield.ApplyShield(xeno, XenoShieldSystem.ShieldType.Crusher, xeno.Comp.Amount);
+        _shield.ApplyShield(xeno, XenoShieldSystem.ShieldType.Crusher, xeno.Comp.Amount, visualState: xeno.Comp.ShieldEffect);
         ApplyEffects(xeno);
 
         if (_net.IsClient)
@@ -64,10 +64,12 @@ public sealed partial class CrusherShieldSystem : EntitySystem
         if (!TryComp<CMArmorComponent>(ent, out var armor))
             return;
 
-        ent.Comp.ExplosionOffAt = _timing.CurTime + ent.Comp.ExplosionResistanceDuration;
+        if (ent.Comp.ExplosionResistanceDuration > TimeSpan.Zero)
+        {
+            ent.Comp.ExplosionOffAt = _timing.CurTime + ent.Comp.ExplosionResistanceDuration;
+            ent.Comp.ExplosionResistApplying = true;
+        }
         ent.Comp.ShieldOffAt = _timing.CurTime + ent.Comp.ShieldDuration;
-        ent.Comp.ExplosionResistApplying = true;
-
     }
 
     public void OnShieldRemove(Entity<CrusherShieldComponent> ent, ref RemovedShieldEvent args)
