@@ -87,17 +87,17 @@
         amount: 5
     - name: Armor
       entries:
-      - id: RMCArmorFreelancerVestBlackLamp
-        name: Black Plate Carrier (Lamp)
+      - id: RMCArmorFreelancerPlateCarrierBlackLamp
+        name: Black Plate Carrier Vest (Lamp)
         amount: 15
-      - id: RMCArmorFreelancerVestBlack
-        name: Black Plate Carrier
+      - id: RMCArmorFreelancerPlateCarrierBlack
+        name: Black Plate Carrier Vest
         amount: 15
-      - id: RMCArmorFreelancerVestBeigeLamp
-        name: Beige Plate Carrier (Lamp)
+      - id: RMCArmorFreelancerPlateCarrierBeige
+        name: Beige Plate Carrier Vest (Lamp)
         amount: 15
-      - id: RMCArmorFreelancerVestBeige
-        name: Beige Plate Carrier
+      - id: RMCArmorFreelancerPlateCarrierBeigeLamp
+        name: Beige Plate Carrier Vest
         amount: 15
     - name: Backpack
       entries:
