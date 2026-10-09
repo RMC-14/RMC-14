@@ -223,7 +223,6 @@
     range: 7
   - type: EntityTargetAction
     event: !type:XenoPsychicWhisperActionEvent
-    canTargetSelf: false
     toggleOutline: false
     whitelist:
       components:
