@@ -102,6 +102,7 @@
     pillBottleWhitelist:
       tags:
       - PillCanister
+      - PillPacket
 
 - type: entity
   parent: CMChemMaster
