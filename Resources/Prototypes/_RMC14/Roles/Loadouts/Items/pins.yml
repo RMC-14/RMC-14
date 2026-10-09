@@ -89,3 +89,10 @@
   storage:
     back:
     - RMCClothingNeckGoldAutismPin
+
+- type: loadout
+  id: RMCPinAlly
+  cost: 1
+  storage:
+    back:
+    - RMCClothingNeckAllyPin
