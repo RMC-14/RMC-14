@@ -55,7 +55,6 @@ public sealed class DropshipNavigationBui : BoundUserInterface
         _window.OnClose += OnClose;
         SetFlightHeader("Flight Controls");
         SetDoorHeader("Door Controls");
-        SetRemoteControlHeader("Remote Control:");
         SetLaunchAlarmHeader("Launch Announcement Alarm");
 
         if (_entities.TryGetComponent(Owner, out TransformComponent? transform) &&
@@ -87,8 +86,8 @@ public sealed class DropshipNavigationBui : BoundUserInterface
         _window.LockdownButtonAft.Button.OnPressed += _ => SendPredictedMessage(new DropshipLockdownMsg(DoorLocation.Aft));
         _window.LockdownButtonPort.Button.OnPressed += _ => SendPredictedMessage(new DropshipLockdownMsg(DoorLocation.Port));
         _window.LockdownButtonStarboard.Button.OnPressed += _ => SendPredictedMessage(new DropshipLockdownMsg(DoorLocation.Starboard));
-        _window.RemoteControlButton.Button.OnPressed += _ => SendPredictedMessage(new DropshipRemoteControlToggleMsg());
         _window.LaunchAlarmButton.Button.OnPressed += _ => SendPredictedMessage(new DropshipLaunchAlarmToggleMsg());
+        _window.AutopilotDisableButton.Button.OnPressed += _ => SendPredictedMessage(new DropshipNavigationAutopilotDisableMsg());
         _entities.System<DropshipSystem>().Uis.Add(this);
     }
 
@@ -155,8 +154,8 @@ public sealed class DropshipNavigationBui : BoundUserInterface
         }
 
         RefreshDoorLockStatus(destinations.DoorLockStatus);
-        SetRemoteControl(destinations.RemoteControlStatus);
         RefreshLaunchAlarmStatus(destinations.LaunchAlarmStatus);
+        RefreshAutopilotStatus(destinations.Autopilot);
     }
 
     private void Set(DropshipNavigationTravellingBuiState travelling)
@@ -211,8 +210,8 @@ public sealed class DropshipNavigationBui : BoundUserInterface
         }
 
         RefreshDoorLockStatus(travelling.DoorLockStatus);
-        SetRemoteControl(travelling.RemoteControlStatus);
         RefreshLaunchAlarmStatus(travelling.LaunchAlarmStatus);
+        RefreshAutopilotStatus(travelling.Autopilot);
 
         var startEndTime = travelling.Time;
         _window.ProgressBar.MinValue = 0;
@@ -228,11 +227,6 @@ public sealed class DropshipNavigationBui : BoundUserInterface
     private void SetDoorHeader(string label)
     {
         _window?.DoorHeader.SetMarkup($"[color=#0BDC49][font size=16][bold]{label}[/bold][/font][/color]");
-    }
-
-    private void SetRemoteControlHeader(string label)
-    {
-        _window?.RemoteControlHeader.SetMarkup($"[color=#0BDC49][font size=16][bold]{label}[/bold][/font][/color]");
     }
 
     private void SetLaunchAlarmHeader(string label)
@@ -265,14 +259,6 @@ public sealed class DropshipNavigationBui : BoundUserInterface
         _window.LockdownButtonAft.Button.Disabled = disabled;
         _window.LockdownButtonPort.Button.Disabled = disabled;
         _window.LockdownButtonStarboard.Button.Disabled = disabled;
-    }
-
-    private void SetRemoteControl(bool status)
-    {
-        if (_window == null)
-            return;
-
-        _window.RemoteControlButton.Text = status ? "Enabled" : "Disabled";
     }
 
     private void ResetDestinationButtons()
@@ -324,6 +310,59 @@ public sealed class DropshipNavigationBui : BoundUserInterface
         _window.LaunchAlarmButton.Text = launchAlarmStatus ? "Stop Alarm" : "Start Alarm";
     }
 
+    private void RefreshAutopilotStatus(DropshipNavigationAutopilotStatus? autopilot)
+    {
+        if (_window == null)
+            return;
+
+        if (autopilot is not { } status)
+        {
+            _window.AutopilotContainer.Visible = false;
+            return;
+        }
+
+        _window.AutopilotContainer.Visible = true;
+        _window.AutopilotHeader.SetMarkup($"[color=#0BDC49][font size=16][bold]Autopilot: {ModeName(status.Mode)}[/bold][/font][/color]");
+
+        var statusName = StatusName(status.Status);
+        var details = string.IsNullOrWhiteSpace(status.StatusDetails)
+            ? string.Empty
+            : status.StatusDetails.Trim();
+
+        if (status.DepartInSeconds is { } departIn)
+            details = string.IsNullOrWhiteSpace(details)
+                ? $"T-{departIn}s"
+                : $"{details} T-{departIn}s";
+
+        if (string.IsNullOrWhiteSpace(details) || details == statusName)
+            _window.AutopilotStatus.SetMarkup($"[color=#02E74E]{statusName}[/color]");
+        else
+            _window.AutopilotStatus.SetMarkup($"[color=#02E74E]{statusName}[/color] - {details}");
+    }
+
+    private static string ModeName(DropshipAutopilotMode mode)
+    {
+        return mode switch
+        {
+            DropshipAutopilotMode.Cycle => "Cycle",
+            DropshipAutopilotMode.RecallOnly => "Recall only",
+            _ => "Disabled",
+        };
+    }
+
+    private static string StatusName(DropshipAutopilotStatus status)
+    {
+        return status switch
+        {
+            DropshipAutopilotStatus.Ready => "Ready",
+            DropshipAutopilotStatus.Waiting => "Waiting",
+            DropshipAutopilotStatus.InFlight => "In flight",
+            DropshipAutopilotStatus.Blocked => "Blocked",
+            DropshipAutopilotStatus.Error => "Error",
+            _ => "Offline",
+        };
+    }
+
     public void Update()
     {
         if (_window == null || _window.Disposed)
@@ -331,5 +370,7 @@ public sealed class DropshipNavigationBui : BoundUserInterface
 
         if (State is DropshipNavigationTravellingBuiState s)
             Set(s);
+        else if (State is DropshipNavigationDestinationsBuiState d)
+            RefreshAutopilotStatus(d.Autopilot);
     }
 }

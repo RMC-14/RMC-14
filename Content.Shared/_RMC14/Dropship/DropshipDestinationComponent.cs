@@ -14,11 +14,18 @@ public sealed partial class DropshipDestinationComponent : Component
     public EntityUid? Ship;
 
     [DataField, AutoNetworkedField]
-    public bool AutoRecall;
+    public DropshipDestinationKind Kind;
 
     [DataField, AutoNetworkedField]
     public int LightSearchRadius = 14;
 
     [DataField, AutoNetworkedField]
     public EntityUid? ArrivalSoundEntity;
+}
+
+public enum DropshipDestinationKind
+{
+    Auto,
+    Hangar,
+    LandingZone,
 }
