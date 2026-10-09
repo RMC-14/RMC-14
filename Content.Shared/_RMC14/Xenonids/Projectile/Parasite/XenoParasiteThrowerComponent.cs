@@ -1,6 +1,7 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 using Robust.Shared.Prototypes;
+using Content.Shared._RMC14.Maths;
 
 namespace Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 
@@ -16,7 +17,7 @@ public sealed partial class XenoParasiteThrowerComponent : Component
     public int ReservedParasites = 0;
 
     [DataField]
-    public float ParasiteThrowDistance = 4.0f;
+    public float ParasiteThrowDistance = RMCMathExtensions.CircleAreaFromSquareAbilityRange(6);
 
     [DataField, AutoNetworkedField]
     public int MaxParasites = 16;
@@ -25,10 +26,22 @@ public sealed partial class XenoParasiteThrowerComponent : Component
     public int CurParasites = 0;
 
     [DataField]
-    public TimeSpan ThrownParasiteStunDuration = TimeSpan.FromSeconds(7.5); //5 seconds in practice to account for less xeno stun time
+    public TimeSpan ThrownParasiteStunDuration = TimeSpan.FromSeconds(4);
 
     [DataField]
-    public TimeSpan ThrownParasiteCooldown = TimeSpan.FromSeconds(2);
+    public TimeSpan DropParasiteStunDuration = TimeSpan.FromSeconds(0.5);
+
+    [DataField]
+    public TimeSpan ThrownParasiteCooldown = TimeSpan.FromSeconds(0.5);
+
+    [DataField]
+    public TimeSpan NextThrow;
+
+    [DataField]
+    public TimeSpan RetrieveParasiteCooldown = TimeSpan.FromSeconds(0.5);
+
+    [DataField]
+    public TimeSpan NextRetrieve;
 
     //Should equal visible position length
     [DataField]
