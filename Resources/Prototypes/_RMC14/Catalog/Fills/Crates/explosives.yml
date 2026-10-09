@@ -196,6 +196,16 @@
 
 - type: entity
   parent: RMCCrateExplosives
+  id: RMCCrateM6HBruteRockets
+  name: M6H-BRUTE breaching rocket crate (x6)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRocketM5510Brute
+      amount: 6
+
+- type: entity
+  parent: RMCCrateExplosives
   id: RMCCrateExplosiveWhitePhosphorus
   name: 30mm WPDP White Phosphorus grenade crate (x25)
   components:
