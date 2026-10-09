@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Abduct;
+using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared._RMC14.Xenonids.Tail_Lash;
 using Content.Shared.Actions;
 using Content.Shared.Coordinates;
@@ -63,7 +64,8 @@ public sealed class XenoDislocateSystem : EntitySystem
                          HasComp<RMCSuperSlowdownComponent>(targetId) ||
                          HasComp<RMCRootedComponent>(targetId) ||
                          HasComp<StunnedComponent>(targetId) ||
-                         _standing.IsDown(targetId);
+                         _standing.IsDown(targetId) ||
+                         HasComp<XenoRestingComponent>(targetId);
 
         var damage = _damageable.TryChangeDamage(targetId, xeno.Comp.Damage, ignoreResistances: isDebuffed, origin: xeno, tool: xeno);
         if (damage?.GetTotal() > FixedPoint2.Zero)
