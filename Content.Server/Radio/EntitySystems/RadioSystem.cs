@@ -1,6 +1,7 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
+using Content.Server.Ghost;
 using Content.Server.Power.Components;
 using Content.Server.Radio.Components;
 using Content.Server._RMC14.Language.Systems;
@@ -10,7 +11,9 @@ using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Radio;
 using Content.Shared._RMC14.Tracker.SquadLeader;
+using Content.Server._RMC14.Xenonids.Watch;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Radio;
@@ -43,6 +46,8 @@ public sealed class RadioSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly LanguageSystem _language = default!;
+    [Dependency] private readonly GhostSystem _ghost = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     // RMC14
 
     // set used to prevent radio feedback loops.
@@ -83,8 +88,42 @@ public sealed class RadioSystem : EntitySystem
     // RMC14
     private void OnIntrinsicReceive(Entity<IntrinsicRadioReceiverComponent> ent, ref RadioReceiveEvent args)
     {
-        if (TryComp(ent.Owner, out ActorComponent? actor))
-            _netMan.ServerSendMessage(args.ChatMsg, actor.PlayerSession.Channel);
+        if (!TryComp(ent.Owner, out ActorComponent? actor))
+            return;
+
+        var msg = args.ChatMsg;
+        var wrappedMessage = args.ChatMsg.Message.WrappedMessage;
+        var modified = false;
+
+        if (_ghost.CanGhostWarp(actor.PlayerSession, out _))
+        {
+            wrappedMessage = _chatManager.PrependFollowButtonIfAppropriate(
+                wrappedMessage,
+                args.MessageSource,
+                actor.PlayerSession.Channel);
+            modified = true;
+        }
+        else if (args.Channel.ID == SharedChatSystem.HivemindChannel.Id
+                 && ent.Owner != args.MessageSource
+                 && _hive.FromSameHive(ent.Owner, args.MessageSource))
+        {
+            var btnText = Loc.GetString("chat-manager-watch-button");
+            wrappedMessage = $"[cmdlink=\"{btnText}\" command=\"{XenoWatchEntityCommand.CommandName} {GetNetEntity(args.MessageSource)}\" /] " + wrappedMessage;
+            modified = true;
+        }
+
+        if (modified)
+        {
+            msg = new MsgChatMessage
+            {
+                Message = new ChatMessage(args.ChatMsg.Message)
+                {
+                    WrappedMessage = wrappedMessage,
+                },
+            };
+        }
+
+        _netMan.ServerSendMessage(msg, actor.PlayerSession.Channel);
     }
     // RMC14
 
