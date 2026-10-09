@@ -441,7 +441,7 @@
     actionDesc: This civilian-grade scope is a common sight on hunting rifles due to its cheap price and great optics. Fixed at a modest 2x zoom.
 
 - type: entity
-  parent: RMCAttachmentS42xTelescopicMiniscope
+  parent: RMCRailAttachmentBase
   id: RMCAttachmentB8SmartScope
   name: B8 smart-scope
   description: An experimental B8 Smart-Scope. Based on the technologies used in the Smart Gun by AEGIS, this sight has integrated IFF systems. It can only attach to the M4SPR Battle Rifle and the M44 Combat Revolver.
@@ -452,21 +452,12 @@
     tags:
     - RMCAttachmentRail
     - RMCAttachmentB8SmartScope
-  - type: AttachableToggleable
-    doAfter: 0.8
-    icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
-      state: huntingscope
-    actionName: Look through B8 Smart-Scope
-    actionDesc: Lets you see further and shoot through your fellow marines without harming them.
+  - type: AttachableVisuals
   - type: AttachableIFF
   - type: AttachableWeaponRangedMods
     modifiers:
-    - damageAddMult: -0.2
-    - conditions:
-        wieldedOnly: true
-        inactiveOnly: true
-      accuracyAddMult: -0.05
+    - damageAddMult: -0.1
+      damageFalloffAddMult: 0.2
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-b8-smart-scope
 
