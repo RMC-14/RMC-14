@@ -149,6 +149,7 @@
       entries:
       - id: CMVendorBundleCombatTechnicianEssentials
       - id: CMVendorBundleSquadMedicalEssentials
+      - id: CMVendorBundleStaffOfficerEssentialLeaderSet
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
