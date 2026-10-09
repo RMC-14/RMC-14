@@ -68,6 +68,31 @@
                         <Button Name="OrbitalBombardmentButton" Access="Public" Text="{Loc rmc-overwatch-console-orbital-bombardment}"
                                 StyleClasses="ActionButton" VerticalAlignment="Top"
                                 Margin="0 10 0 0" MinWidth="250" />
+                        <BoxContainer Orientation="Vertical" VerticalExpand="True" VerticalAlignment="Center">
+                            <PanelContainer Margin="0 10 0 0" MouseFilter="Pass" HorizontalAlignment="Center" MinWidth="50" MaxWidth="250">
+                                <PanelContainer.PanelOverride>
+                                    <graphics:StyleBoxFlat BackgroundColor="#4a5669" BorderColor="#464966" BorderThickness="3" />
+                                </PanelContainer.PanelOverride>
+                                <Label Align="Center" Text="{Loc 'rmc-overwatch-console-offset-calibration'}" ModulateSelfOverride="#efefef" Margin="8 0 8 0" />
+                            </PanelContainer>
+                            <BoxContainer Orientation="Horizontal" Margin="0 8 0 .8">
+                                <Control HorizontalExpand="True" />
+                                <Button Name="OffsetUpButton" Access="Public" StyleClasses="OpenBoth"
+                                    SetSize="28 28" />
+                                <Control HorizontalExpand="True" />
+                            </BoxContainer>
+                            <BoxContainer Orientation="Horizontal" HorizontalExpand="True" HorizontalAlignment="Center">
+                                <Button Name="OffsetLeftButton" Access="Public" StyleClasses="OpenBoth" SetSize="28 28" />
+                                <Button Name="ResetOffsetButton" Access="Public" StyleClasses="OpenBoth" SetSize="30 30" />
+                                <Button Name="OffsetRightButton" Access="Public" StyleClasses="OpenBoth" SetSize="28 28" />
+                            </BoxContainer>
+                            <BoxContainer Orientation="Horizontal">
+                                <Control HorizontalExpand="True" />
+                                <Button Name="OffsetDownButton" Access="Public" StyleClasses="OpenBoth"
+                                    SetSize="28 28" Margin="0 .8 0 8"/>
+                                <Control HorizontalExpand="True" />
+                            </BoxContainer>
+                        </BoxContainer>
                     </BoxContainer>
                     <BoxContainer Name="TabContentContainer" Access="Public" Orientation="Vertical" HorizontalExpand="True">
                         <BoxContainer Name="SquadMonitor" Access="Public" Orientation="Vertical"
