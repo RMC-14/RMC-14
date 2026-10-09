@@ -1,14 +1,13 @@
-﻿using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.IdentityManagement;
+using Content.Shared._RMC14.PlayTimeTracking;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.NameModifier.EntitySystems;
-using Content.Shared.Players.PlayTimeTracking;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Name;
 
@@ -18,8 +17,7 @@ public abstract class SharedXenoNameSystem : EntitySystem
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly NameModifierSystem _nameModifier = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly ISharedPlaytimeManager _playtime = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly SharedRMCPlayTimeManager _rmcPlaytime = default!;
 
     private const string DefaultPrefix = "XX";
 
@@ -119,15 +117,7 @@ public abstract class SharedXenoNameSystem : EntitySystem
         var xenoPlaytime = TimeSpan.Zero;
         try
         {
-            var times = _playtime.GetPlayTimes(player);
-            foreach (var (id, time) in times)
-            {
-                if (_prototype.TryIndex(id, out PlayTimeTrackerPrototype? tracker) &&
-                    tracker.IsXeno)
-                {
-                    xenoPlaytime += time;
-                }
-            }
+            xenoPlaytime = _rmcPlaytime.GetTotalXenoPlaytime(player);
         }
         catch (Exception e)
         {
