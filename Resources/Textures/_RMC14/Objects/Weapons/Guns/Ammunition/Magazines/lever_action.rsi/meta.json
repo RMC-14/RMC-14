@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/7e3da429d0abfe55f0d948bb689bd7b49f3f304f/icons/obj/items/weapons/guns/ammo_by_faction/colony/marksman_rifles.dmi and https://github.com/cmss13-devs/cmss13/blob/7e3da429d0abfe55f0d948bb689bd7b49f3f304f/icons/obj/items/weapons/guns/handful.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "box-4570"
+    },
+    {
+      "name": "box-4570-empty"
+    },
+    {
+      "name": "box-4570-training"
+    },
+    {
+      "name": "box-4570-training-empty"
+    },
+    {
+      "name": "rounds-1"
+    },
+    {
+      "name": "rounds-2"
+    },
+    {
+      "name": "rounds-3"
+    },
+    {
+      "name": "rounds-4"
+    },
+    {
+      "name": "rounds-5"
+    },
+    {
+      "name": "rounds-6"
+    },
+    {
+      "name": "rounds-7"
+    },
+    {
+      "name": "rounds-8"
+    },
+    {
+      "name": "rounds-9"
+    },
+    {
+      "name": "training-rounds-1"
+    },
+    {
+      "name": "training-rounds-2"
+    },
+    {
+      "name": "training-rounds-3"
+    },
+    {
+      "name": "training-rounds-4"
+    },
+    {
+      "name": "training-rounds-5"
+    },
+    {
+      "name": "training-rounds-6"
+    },
+    {
+      "name": "training-rounds-7"
+    },
+    {
+      "name": "training-rounds-8"
+    },
+    {
+      "name": "training-rounds-9"
+    }
+  ]
+}

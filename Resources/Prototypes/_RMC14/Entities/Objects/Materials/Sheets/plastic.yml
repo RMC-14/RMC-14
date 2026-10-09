@@ -60,6 +60,8 @@
     tags:
     - Sheet
     - Plastic
+  - type: BlackMarketValue
+    value: 0
   - type: UserInterface
     interfaces:
       enum.RMCConstructionUiKey.Key:

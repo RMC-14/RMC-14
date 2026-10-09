@@ -118,6 +118,8 @@
     tags:
     - RMCUniformMarine
     - RMCUniformCMP
+  - type: BlackMarketValue
+    value: 25
 
 # Prisoner
 - type: entity

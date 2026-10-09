@@ -34,6 +34,9 @@ reagent-desc-ice-cafe = A coffee slushy with a wonderful aroma.
 reagent-name-swiss-lemonade = swiss lemonade
 reagent-desc-swiss-lemonade = Funny enough, it's not actually swiss, or have any lemons!
 
+reagent-name-rmc-macho-sauce = macho sauce
+reagent-desc-rmc-macho-sauce = Something closer to ignition than digestion.
+
 reagent-name-instant-orange-powder = orange drink powder
 reagent-desc-instant-orange-powder = Powderized orange juice ready to be mixed with water. Smells of, surprise surprise, oranges.
 

@@ -13,3 +13,17 @@
         potency: 2
         nutFactor: 2
         nutMetabolism: 0.1
+
+- type: reagent
+  parent: CMReagent
+  id: RMCCondensedCapsaicin
+  name: reagent-name-rmc-condensed-capsaicin
+  desc: reagent-desc-rmc-condensed-capsaicin
+  physicalDesc: reagent-physical-desc-pungent
+  flavor: spicy
+  color: "#B31008"
+  reactiveEffects:
+    Acidic:
+      methods: [ Touch ]
+      effects:
+      - !type:RMCPepperSpray

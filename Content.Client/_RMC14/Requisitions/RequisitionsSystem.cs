@@ -1,7 +1,9 @@
 ﻿using Content.Shared._RMC14.Requisitions;
 using Content.Shared._RMC14.Requisitions.Components;
+using Content.Shared._RMC14.UserInterface;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
+using Robust.Client.Timing;
 using static Robust.Client.GameObjects.SpriteComponent;
 
 namespace Content.Client._RMC14.Requisitions;
@@ -9,6 +11,8 @@ namespace Content.Client._RMC14.Requisitions;
 public sealed class RequisitionsSystem : SharedRequisitionsSystem
 {
     [Dependency] private readonly AnimationPlayerSystem _animation = default!;
+    [Dependency] private readonly IClientGameTiming _timing = default!;
+    [Dependency] private readonly RMCUserInterfaceSystem _rmcUI = default!;
 
     private const string AnimationKey = "cm_requisitions_animation";
 
@@ -19,6 +23,15 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
         SubscribeLocalEvent<RequisitionsElevatorComponent, AfterAutoHandleStateEvent>(OnElevatorHandleState);
         SubscribeLocalEvent<RequisitionsGearComponent, AfterAutoHandleStateEvent>(OnGearHandleState);
         SubscribeLocalEvent<RequisitionsRailingComponent, AfterAutoHandleStateEvent>(OnRailingHandleState);
+        SubscribeLocalEvent<RequisitionsComputerComponent, AfterAutoHandleStateEvent>(OnComputerHandleState);
+    }
+
+    private void OnComputerHandleState(Entity<RequisitionsComputerComponent> computer, ref AfterAutoHandleStateEvent args)
+    {
+        if (_timing.CurTick != _timing.LastRealTick)
+            return;
+
+        _rmcUI.RefreshUIs<RequisitionsBui>(computer.Owner);
     }
 
     private void OnElevatorHandleState(Entity<RequisitionsElevatorComponent> elevator, ref AfterAutoHandleStateEvent args)

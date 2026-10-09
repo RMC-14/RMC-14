@@ -1,0 +1,35 @@
+<controls:RequisitionsBlackMarketSeizureNotice
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Requisitions"
+    HorizontalExpand="True">
+    <BoxContainer Orientation="Vertical"
+                  HorizontalExpand="True"
+                  Margin="8">
+        <Label Name="TitleLabel"
+               Access="Public"
+               Text="{Loc rmc-requisitions-black-market-seizure-title}"
+               HorizontalAlignment="Center"
+               Margin="0 2" />
+        <TextureRect TexturePath="/Textures/_RMC14/Objects/Misc/paper.rsi/stamp-cmb.png"
+                     SetWidth="175"
+                     SetHeight="175"
+                     Stretch="KeepAspectCentered"
+                     HorizontalAlignment="Center"
+                     Margin="0 0 0 8" />
+        <Label Name="UnauthorizedLabel"
+               Access="Public"
+               Text="{Loc rmc-requisitions-black-market-seizure-unauthorized}"
+               HorizontalAlignment="Center"
+               Margin="0 2" />
+        <Label Name="InvestigationLabel"
+               Access="Public"
+               Text="{Loc rmc-requisitions-black-market-seizure-investigation}"
+               HorizontalAlignment="Center"
+               Margin="0 2" />
+        <Label Name="ThanksLabel"
+               Access="Public"
+               Text="{Loc rmc-requisitions-black-market-seizure-thanks}"
+               HorizontalAlignment="Center"
+               Margin="0 2" />
+    </BoxContainer>
+</controls:RequisitionsBlackMarketSeizureNotice>

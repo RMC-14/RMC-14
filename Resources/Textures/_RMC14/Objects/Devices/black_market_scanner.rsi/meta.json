@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/b26246cf7710ac6f2c2e4eddf94a49eb47f40800/icons/obj/items/devices.dmi.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "mendoza_scanner"
+    },
+    {
+      "name": "mendoza_scanner_flash",
+      "delays": [
+        [
+          5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "mendoza_scanner_value_red",
+      "delays": [
+        [
+          0.4,
+          0.4
+        ]
+      ]
+    },
+    {
+      "name": "mendoza_scanner_value_orange",
+      "delays": [
+        [
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "mendoza_scanner_value_yellow",
+      "delays": [
+        [
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "mendoza_scanner_value_green",
+      "delays": [
+        [
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "mendoza_scanner_value_cyan",
+      "delays": [
+        [
+          0.15,
+          0.15
+        ]
+      ]
+    },
+    {
+      "name": "mendoza_scanner_value_white",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "mendoza_scanner_clamp_off"
+    },
+    {
+      "name": "mendoza_scanner_clamp_on",
+      "delays": [
+        [
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    }
+  ]
+}

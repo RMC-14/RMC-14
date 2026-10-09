@@ -3,6 +3,11 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/41a9b4198368b478eb611f74e810142d2761aa10/sound/weapons/handling/gun_boomslang_lever.ogg"
 
+- files: ["gun_lever_action_lever.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/weapons/handling/gun_lever_action_lever.ogg"
+
 - files: ["shotgunpump1.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
