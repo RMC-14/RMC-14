@@ -55,7 +55,7 @@
   ranks:
     RMCRankCorporal: []
   startingGear: CMGearCombatCorrespondent
-  icon: "RMCJobIconCorrespondent"
+  icon: "RMCJobIconCombatCorrespondent"
   joinNotifyCrew: false
   supervisors: rmc-job-supervisors-commander
   accessGroups:
