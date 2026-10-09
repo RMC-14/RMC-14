@@ -171,6 +171,7 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(CMKeyFunctions.RMCActivateAttachableUnderbarrel);
             AddButton(CMKeyFunctions.RMCFieldStripHeldItem);
             AddButton(CMKeyFunctions.RMCCycleFireMode);
+            AddButton(CMKeyFunctions.RMCToggleShotgunTube);
             AddButton(CMKeyFunctions.CMUniqueAction);
             AddButton(CMKeyFunctions.CMHolsterPrimary);
             AddButton(CMKeyFunctions.CMHolsterSecondary);
