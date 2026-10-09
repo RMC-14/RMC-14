@@ -292,6 +292,9 @@ entities:
     - type: Transform
     - type: RMCWeatherCycle
       minTimeBetweenEvents: 20
+      minTimeBetweenChecks: 0
+      minCheckVariance: 0
+      startChance: 1
       weatherEvents:
       - lightningSound: !type:SoundCollectionSpecifier
           collection: RMCThunder
@@ -299,9 +302,12 @@ entities:
         - RMCColorSequenceLightningSharpPeak
         - RMCColorSequenceLightningFlicker
         lightningChance: 0.02
+        fireSmotheringStrength: 4
         weatherType: RMCStrataStorm
+        screenOverlay: Medium
         duration: 1000
         name: Heavy Rain
+        displayName: rmc-weather-name-heavy-rain
     - type: RMCAmbientLightEffects
     - type: MapGrid
       chunks:

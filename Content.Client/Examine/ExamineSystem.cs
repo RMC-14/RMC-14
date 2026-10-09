@@ -1,7 +1,9 @@
 using System.Linq;
 using System.Numerics;
 using System.Threading;
+using Content.Client._RMC14.Weather;
 using Content.Client.Verbs;
+using Content.Shared._RMC14.Weather;
 using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Input;
@@ -31,6 +33,11 @@ namespace Content.Client.Examine
         [Dependency] private readonly IEyeManager _eyeManager = default!;
         [Dependency] private readonly VerbSystem _verbSystem = default!;
         [Dependency] private readonly SpriteSystem _sprite = default!;
+        [Dependency] private readonly SharedTransformSystem _transform = default!;
+
+        // RMC14 start - weather examine click-through.
+        [Dependency] private readonly RMCWeatherSystem _rmcWeather = default!;
+        // RMC14 end
 
         private List<Verb> _verbList = new();
 
@@ -97,14 +104,43 @@ namespace Content.Client.Examine
 
             if (examinerComp.CheckInRangeUnOccluded)
             {
+                // RMC14 start - weather examine click-through.
                 // TODO fix this. This should be using the examiner's eye component, not eye manager.
                 var b = _eyeManager.GetWorldViewbounds();
                 if (!b.Contains(target.Position))
                     return false;
+
+                if (!CanExamineThroughWeatherOverlay(examiner, target, b))
+                    return false;
+                // RMC14 end
             }
 
             return base.CanExamine(examiner, target, predicate, examined, examinerComp);
         }
+
+        // RMC14 start - weather examine click-through.
+        private bool CanExamineThroughWeatherOverlay(EntityUid examiner, MapCoordinates target, Box2Rotated viewBounds)
+        {
+            if (!TryComp(examiner, out TransformComponent? xform) ||
+                target.MapId != xform.MapID ||
+                !_rmcWeather.TryGetCurrentScreenOverlay(xform.MapID, out var overlay) ||
+                !_rmcWeather.IsWeatherExposed(examiner))
+            {
+                return true;
+            }
+
+            var box = viewBounds.Box;
+            var (clearHalfSize, _) = RMCWeatherOverlayHelpers.GetOverlayHalfSizes(overlay, box.Width, box.Height);
+            var center = new Vector2(
+                (box.Left + box.Right) * 0.5f,
+                (box.Bottom + box.Top) * 0.5f);
+            var localTarget = viewBounds.Origin + (-viewBounds.Rotation).RotateVec(target.Position - viewBounds.Origin);
+            var delta = localTarget - center;
+
+            return Math.Abs(delta.X) <= clearHalfSize.X &&
+                   Math.Abs(delta.Y) <= clearHalfSize.Y;
+        }
+        // RMC14 end
 
         private bool HandleExamine(in PointerInputCmdHandler.PointerInputCmdArgs args)
         {
@@ -115,11 +151,19 @@ namespace Content.Client.Examine
                 return false;
             }
 
-            if (_playerManager.LocalEntity is not { } player ||
-                !CanExamine(player, entity))
+            if (_playerManager.LocalEntity is not { } player)
             {
                 return false;
             }
+
+            // RMC14 start - weather examine click-through.
+            // Use clicked map coordinates so large sprites cannot leak info from a visible origin.
+            var target = _transform.ToMapCoordinates(args.Coordinates);
+            if (!CanExamine(player, target, e => e == player || e == entity, entity))
+            {
+                return false;
+            }
+            // RMC14 end
 
             DoExamine(entity);
             return true;
