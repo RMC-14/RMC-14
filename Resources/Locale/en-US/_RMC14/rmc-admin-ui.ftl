@@ -20,3 +20,4 @@ rmc-ui-admin = RMC Admin UI
 rmc-ui-rejuvenate-nearby-marines = Rejuvenate all nearby marines
 rmc-ui-chat-bans = Chat Bans
 rmc-ui-delay-round-end = Delay round end
+rmc-ui-give-commendation = Give Commendation
