@@ -760,8 +760,9 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             if (infected.BurstAt <= time && infected.SpawnedLarva == null)
             {
                 SpawnLarva((uid, infected), out var spawnedLarva);
+                var burstVictimUserId = HasComp<XenoNestedComponent>(uid) ? infected.VictimUserId : null;
                 var priorityEv = new XenoBurstPriorityEvent(
-                    infected.VictimUserId,
+                    burstVictimUserId,
                     infected.InfectorUserId,
                     GetNetEntity(infected.Hive),
                     GetNetEntity(spawnedLarva));
