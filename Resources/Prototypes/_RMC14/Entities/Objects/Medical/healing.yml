@@ -478,3 +478,94 @@
   icon: { sprite: "/Textures/_RMC14/Objects/Medical/medical.rsi", state: traumakit_upgraded }
   spawn: CMUpgradedTraumaKit1
   maxCount: 10
+
+- type: entity
+  id: RMCBulkGauze
+  parent: CMGauze
+  name: bulk medical gauze
+  abstract: true
+  suffix: PvE
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/pve_med_stacks.rsi
+    state: triplegauze
+  - type: Item
+    sprite: _RMC14/Objects/Medical/pve_med_stacks.rsi
+  - type: Stack
+    stackType: RMCBulkGauze
+
+- type: stack
+  id: RMCBulkGauze
+  name: bulk medical gauze
+  icon: { sprite: "/Textures/_RMC14/Objects/Medical/pve_med_stacks.rsi", state: triplegauze }
+  spawn: RMCBulkGauze1
+  maxCount: 30
+
+- type: entity
+  id: RMCBulkGauze1
+  parent: RMCBulkGauze
+  suffix: One, PvE
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
+  id: RMCBulkGauze10
+  parent: RMCBulkGauze
+  suffix: Ten, PvE
+  components:
+  - type: Stack
+    count: 10
+
+- type: entity
+  id: RMCBulkGauze30
+  parent: RMCBulkGauze
+  suffix: Thirty, PvE
+  components:
+  - type: Stack
+    count: 30
+
+- type: entity
+  id: RMCBulkOintment
+  parent: CMOintment
+  name: large ointment
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/pve_med_stacks.rsi
+    state: tripleointment
+  - type: Item
+    sprite: _RMC14/Objects/Medical/pve_med_stacks.rsi
+  - type: Stack
+    stackType: RMCBulkOintment
+
+- type: stack
+  id: RMCBulkOintment
+  name: large ointment
+  icon: { sprite: "/Textures/_RMC14/Objects/Medical/pve_med_stacks.rsi", state: tripleointment }
+  spawn: RMCBulkOintment1
+  maxCount: 30
+
+- type: entity
+  id: RMCBulkOintment1
+  parent: RMCBulkOintment
+  suffix: One, PvE
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
+  id: RMCBulkOintment10
+  parent: RMCBulkOintment
+  suffix: Ten, PvE
+  components:
+  - type: Stack
+    count: 10
+
+- type: entity
+  id: RMCBulkOintment30
+  parent: RMCBulkOintment
+  suffix: Thirty, PvE
+  components:
+  - type: Stack
+    count: 30
