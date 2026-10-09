@@ -556,6 +556,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (_net.IsServer && _prototype.HasIndex(effectId))
         {
             effect = Spawn(effectId, entityCoords);
+
+            EnsureComp<HiveColoredComponent>(effect.Value);
+            _hive.SetSameHive(xeno.Owner, effect.Value);
+
             RaiseNetworkEvent(new XenoConstructionAnimationStartEvent(GetNetEntity(effect.Value), GetNetEntity(xeno), finalBuildTime), Filter.PvsExcept(effect.Value));
         }
 
@@ -1203,6 +1207,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private void OnXenoConstructMapInit(Entity<XenoConstructComponent> ent, ref MapInitEvent args)
     {
+        if (_net.IsServer && _hive.GetHive(ent.Owner) == null && _hive.TryGetHiveBySlot(HiveSlots.Normal, out var normalHive))
+            _hive.SetHive(ent.Owner, normalHive);
+
         if (!_area.TryGetArea(ent, out var area, out _))
             return;
 
@@ -1400,6 +1407,14 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         {
             if (popup)
                 _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-need-weeds"), target, xeno);
+
+            return false;
+        }
+
+        if (checkWeeds && !_xenoWeeds.IsOnFriendlyWeeds((gridId, grid), target, xeno.Owner))
+        {
+            if (popup)
+                _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-hostile-weeds"), target, xeno);
 
             return false;
         }

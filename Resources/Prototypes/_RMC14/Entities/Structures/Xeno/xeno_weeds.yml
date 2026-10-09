@@ -28,6 +28,7 @@
   - type: RMCMesonsNonviewable
   - type: Clickable
   - type: XenoWeedsSpreading
+  - type: HiveColored
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
     drawdepth: FloorTiles
