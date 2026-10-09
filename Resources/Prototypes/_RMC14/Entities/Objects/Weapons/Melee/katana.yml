@@ -19,6 +19,7 @@
       types:
         Slash: 45
   - type: UsableWhileDevoured
+    canUnequip: true
 
 - type: entity
   parent: RMCKatana
