@@ -294,6 +294,13 @@
   parent: RMCXenoQueenBase
   id: CMXenoQueen
   components:
+  - type: RMCKeybindActions
+    actions:
+      XenoPrimaryOne: [ ActionXenoHeal ]
+      XenoPrimaryTwo: [ ActionXenoTransferPlasmaQueen ]
+      XenoPrimaryThree: [ ActionXenoPlantWeeds ]
+      XenoPrimaryFour: [ ActionXenoChooseStructure ]
+      XenoPrimaryFive: [ ActionXenoSecreteStructure ]
   - type: RMCActionOrder
     id: CMXenoQueen
     #  - type: XenoEvolution #can be enabled for events like april fools.

@@ -698,6 +698,26 @@ binds:
 - function: RMCResist
   type: State
   key: B
+- function: RMCUnloadWeapon
+  type: State
+  key: Z
+  mod1: Shift
+- function: RMCXenoPrimaryActionOne
+  type: State
+  key: C
+- function: RMCXenoPrimaryActionTwo
+  type: State
+  key: V
+- function: RMCXenoPrimaryActionThree
+  type: State
+  key: G
+- function: RMCXenoPrimaryActionFive
+  type: State
+  key: N
+- function: RMCXenoCorrosiveAcid
+  type: State
+  key: C
+  mod1: Shift
 - function: SmartEquipUniform
   type: State
   key: N
