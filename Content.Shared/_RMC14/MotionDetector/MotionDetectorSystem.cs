@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Inventory;
+using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Weapons.Ranged.Battery;
 using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -43,15 +43,20 @@ public sealed class MotionDetectorSystem : EntitySystem
 
     private EntityQuery<MotionDetectorComponent> _detectorQuery = default!;
     private EntityQuery<StorageComponent> _storageQuery = default!;
+    private EntityQuery<VictimInfectedComponent> _infectedQuery = default!;
+    private EntityQuery<InfectableComponent> _infectableQuery = default!;
 
     private readonly HashSet<Entity<MotionDetectorTrackedComponent>> _toUpdate = new();
     private readonly HashSet<Entity<MotionDetectorTrackedComponent>> _tracked = new();
+    private readonly HashSet<EntityUid> _addedTracked = new();
     private readonly HashSet<EntProtoId<IFFFactionComponent>> _userFactions = new();
 
     public override void Initialize()
     {
         _detectorQuery = GetEntityQuery<MotionDetectorComponent>();
         _storageQuery = GetEntityQuery<StorageComponent>();
+        _infectedQuery = GetEntityQuery<VictimInfectedComponent>();
+        _infectableQuery = GetEntityQuery<InfectableComponent>();
 
         SubscribeLocalEvent<XenoParasiteInfectEvent>(OnXenoInfect);
         SubscribeLocalEvent<MobStateChangedEvent>(OnMobStateChanged);
@@ -76,6 +81,22 @@ public sealed class MotionDetectorSystem : EntitySystem
     private void OnXenoInfect(XenoParasiteInfectEvent ev)
     {
         DisableDetectorsOnMob(ev.Target);
+
+        // Add a MotionDetectorTrackedComponent to the infected entity if it doesn't already have one.
+        if (!HasComp<MotionDetectorTrackedComponent>(ev.Target))
+        {
+            AddComp<MotionDetectorTrackedComponent>(ev.Target);
+            _addedTracked.Add(ev.Target);
+        }
+    }
+
+    public void RemoveTempTrackedComponent(EntityUid ent)
+    {
+        // Remove the MotionDetectorTrackedComponent from the entity upon removal of VictimInfectedComponent if it didn't have it before addition.
+        if (!_addedTracked.Remove(ent))
+            return;
+
+        RemComp<MotionDetectorTrackedComponent>(ent);
     }
 
     private void OnMobStateChanged(MobStateChangedEvent ev)
@@ -264,7 +285,7 @@ public sealed class MotionDetectorSystem : EntitySystem
             UpdateAppearance((ent, detector));
             MotionDetectorUpdated((ent, detector));
         }
-
+        
         if (_storageQuery.TryComp(ent, out var storage))
         {
             foreach (var stored in storage.StoredItems.Keys)
@@ -379,14 +400,23 @@ public sealed class MotionDetectorSystem : EntitySystem
             detector.Blips.Clear();
             foreach (var tracked in _tracked)
             {
-                if (tracked.Owner == lastUser)
-                    continue;
-
                 if (tracked.Comp.LastMove < time - detector.MoveTime)
                     continue;
 
-                if (hasFaction && _userFactions.Any(f => _gunIFF.IsInFaction(tracked.Owner, f)))
-                    continue;
+                // Motion detectors always detect infected marines, including if the user is infected regardless of faction. 
+                var infected =
+                    _infectedQuery.HasComp(tracked.Owner) ||
+                    (_infectableQuery.TryComp(tracked.Owner, out var infectable) &&
+                        infectable.BeingInfected);
+
+                if (!infected)
+                {
+                    if (tracked.Owner == lastUser)
+                        continue;
+
+                    if (hasFaction && _userFactions.Any(f => _gunIFF.IsInFaction(tracked.Owner, f)))
+                        continue;
+                }
 
                 detector.Blips.Add(new Blip(_transform.GetMapCoordinates(tracked), tracked.Comp.IsQueenEye));
             }
