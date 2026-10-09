@@ -1,2 +1,3 @@
 Note:
-Only png and jpgs files are supported, and you need a prototype in /Prototypes/Lobby/lobbyscreens.yml
+Only png, jpgs or webp files are supported, and you need a prototype in /Prototypes/Lobby/lobbyscreens.yml
+Please try to use webp format and convert your artworks to it
