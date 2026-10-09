@@ -23,12 +23,6 @@
     worn: false
   - type: Corrodible
     isCorrodible: false
-  - type: ClothingRequireEquipped
-    autoUnequip: true
-    denyReason: rmc-armor-not-tse-jumpsuit
-    whitelist:
-      tags:
-      - RMCUniformTSE
   - type: WebbingClothing
     whitelist:
       tags:
