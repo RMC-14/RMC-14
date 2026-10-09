@@ -121,25 +121,25 @@
   id: Mateba2006MRMC
   dummyEntity: RMCWeaponRevolverMateba2006M
   equipment:
-    belt: RMCMatebaBeltFilled
+    belt: RMCMatebaBeltFilled2006M
 
 - type: loadout
   id: Mateba2006MRMCGold
   dummyEntity: RMCWeaponRevolverMateba2006MGold
   equipment:
-    belt: RMCMatebaBeltFilled
+    belt: RMCMatebaBeltFilled2006MGold
 
 - type: loadout
   id: Mateba2006MRMCBlackGold
   dummyEntity: RMCWeaponRevolverMateba2006MBlackGold
   equipment:
-    belt: RMCMatebaBeltFilled
+    belt: RMCMatebaBeltFilled2006MBlackGold
 
 - type: loadout
   id: Mateba2006MRMCSilver
   dummyEntity: RMCWeaponRevolverMateba2006MSilver
   equipment:
-    belt: RMCMatebaBeltFilled
+    belt: RMCMatebaBeltFilled2006MSilver
 
 - type: loadout
   id: M1911CRMC
