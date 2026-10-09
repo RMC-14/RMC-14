@@ -1069,6 +1069,34 @@
     - RMCAttachmentUnderbarrel
     - RMCAttachmentL88Grip
 
+- type: entity
+  parent: RMCAttachableBase
+  id: RMCAttachmentM54CE2Smart
+  name: M54CE2 smartgun conversion
+  description: A conversion kit that integrates IFF and recoil supression into a M54CE2.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
+    state: ce2smart # TODO RMC14: I am no artist.
+  - type: AttachableVisuals
+    offset: 0, 0.01
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentM54CE2Smart
+  - type: AttachableIFF
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - damageAddMult: -0.25
+      recoilFlat: -2
+      scatterFlat: -300
+  - type: AttachableAddRemoveComponents
+    components:
+    - type: GunRequireEquipped
+      whitelist:
+        tags:
+        - RMCM54CE2SmartHarness
+
 - type: Tag
   id: RMCAttachmentUnderbarrel
 
@@ -1140,3 +1168,6 @@
 
 - type: Tag
   id: RMCAttachmentBipodQYJ
+
+- type: Tag
+  id: RMCAttachmentM54CE2Smart
