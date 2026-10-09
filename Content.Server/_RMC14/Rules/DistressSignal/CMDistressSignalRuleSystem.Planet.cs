@@ -10,6 +10,7 @@ using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.WeedKiller;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared.Chat;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Server._RMC14.Rules.DistressSignal;
@@ -25,11 +26,7 @@ public sealed partial class CMDistressSignalRuleSystem
     private bool SpawnXenoMap(Entity<CMDistressSignalRuleComponent> rule)
     {
         var planet = SelectRandomPlanet();
-        _lastPlanetMaps.Enqueue(planet.Proto.ID);
-        while (_lastPlanetMaps.Count > 0 && _lastPlanetMaps.Count > _mapVoteExcludeLast)
-        {
-            _lastPlanetMaps.Dequeue();
-        }
+        TrackPlayedPlanet(planet.Proto.ID);
 
         if (!_mapLoader.TryLoadMap(planet.Comp.Map, out var mapNullable, out var grids))
             return false;
@@ -108,9 +105,9 @@ public sealed partial class CMDistressSignalRuleSystem
     /// Forces the selected planet for the current round, overriding random selection or voting.
     /// </summary>
     /// <param name="planet">The planet to use for this round.</param>
-    public void SetPlanet(RMCPlanet planet)
+    public bool SetPlanet(RMCPlanet planet)
     {
-        SelectedPlanetMap = planet;
+        return TryPersistVotingState(planet, _carryoverVotes, keepPendingOnFailure: false);
     }
 
     /// <summary>
@@ -118,7 +115,7 @@ public sealed partial class CMDistressSignalRuleSystem
     /// </summary>
     private void StartPlanetVote()
     {
-        if (!_config.GetCVar(RMCCVars.RMCPlanetMapVote))
+        if (!_config.GetCVar(RMCCVars.RMCPlanetMapVote) || !TryPreparePersistence())
             return;
 
         var planets = _rmcPlanet.GetCandidatesInRotation();
@@ -199,16 +196,15 @@ public sealed partial class CMDistressSignalRuleSystem
             }
             sb.AppendLine(Loc.GetString("rmc-distress-signal-next-map-win", ("winner", picked.Proto.Name)));
 
-            _chatManager.ChatMessageToAll(ChatChannel.Server, sb.ToString(), sb.ToString(), EntityUid.Invalid, hideChat: false, recordReplay: true);
-
+            var carryoverVotes = new Dictionary<EntProtoId<RMCPlanetMapPrototypeComponent>, int>(_carryoverVotes);
             foreach (var (planet, votes) in planets.Zip(args.Votes))
             {
                 var id = planet.Proto.ID;
-                _carryoverVotes[id] = _useCarryoverVoting ? _carryoverVotes.GetValueOrDefault(id) + votes : 0;
+                carryoverVotes[id] = _useCarryoverVoting ? carryoverVotes.GetValueOrDefault(id) + votes : 0;
             }
 
-            _carryoverVotes[picked.Proto.ID] = 0;
-            SelectedPlanetMap = picked;
+            carryoverVotes[picked.Proto.ID] = 0;
+            TryPersistVotingState(picked, carryoverVotes, keepPendingOnFailure: true, sb.ToString());
         };
         _currentVote.OnCancelled += _ => _currentVote = null;
     }

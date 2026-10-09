@@ -18,6 +18,7 @@ cm-distress-signal-marine = {$player}
 rmc-distress-signal-next-map-title = Next Planet Map
 rmc-distress-signal-next-map-tie = Tie for map vote! Picking... {$picked}
 rmc-distress-signal-next-map-win = [font size=14][bold][color=green]{$winner}[/color][/bold] won the map vote![/font]
+rmc-distress-signal-persistence-unavailable = Distress Signal persistent state is unavailable. Round start has been blocked and will be retried.
 rmc-distress-signal-next-map-header = [font size=14][bold]Map Vote Results[/bold][/font]
 rmc-distress-signal-next-map-votes = [bold]{$map}:[/bold] [color=white]{$votes}[/color] votes
 rmc-distress-signal-next-map-votes-new = [bold]{$map}:[/bold] [color=white]{$votes}[/color] votes ({$newVotes} new)

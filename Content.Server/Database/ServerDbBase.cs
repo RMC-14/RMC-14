@@ -2385,6 +2385,190 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             return ban.PlayerId;
         }
 
+        // RMC14 start
+        public async Task<RMCDistressSignalStateRecord> GetOrCreateRMCDistressSignalState(
+            int serverId,
+            int recentPlanetCount,
+            float initialMarinesPerXeno)
+        {
+            await using var db = await GetDb();
+            await using var transaction = await db.DbContext.Database.BeginTransactionAsync();
+
+            var state = await db.DbContext.RMCDistressSignalStates
+                .FirstOrDefaultAsync(s => s.ServerId == serverId);
+            if (state == null)
+            {
+                var server = await db.DbContext.Server.SingleAsync(s => s.Id == serverId);
+                state = db.DbContext.RMCDistressSignalStates.Add(new RMCDistressSignalServerState
+                {
+                    Server = server,
+                    MarinesPerXeno = initialMarinesPerXeno,
+                    UpdatedAt = DateTime.UtcNow,
+                }).Entity;
+                await db.DbContext.SaveChangesAsync();
+            }
+
+            var recentPlanets = await GetRecentRMCDistressSignalPlanets(db.DbContext, serverId, recentPlanetCount);
+            var carryoverVotes = await db.DbContext.RMCDistressSignalCarryoverVotes
+                .Where(v => v.ServerId == serverId)
+                .ToDictionaryAsync(v => v.PlanetId, v => v.Votes);
+
+            var record = new RMCDistressSignalStateRecord(
+                state.MarinesPerXeno,
+                recentPlanets,
+                carryoverVotes,
+                state.SelectedPlanetId);
+            await transaction.CommitAsync();
+            return record;
+        }
+
+        public async Task<List<string>> GetRecentRMCDistressSignalPlanets(int serverId, int count)
+        {
+            await using var db = await GetDb();
+            return await GetRecentRMCDistressSignalPlanets(db.DbContext, serverId, count);
+        }
+
+        private static async Task<List<string>> GetRecentRMCDistressSignalPlanets(
+            ServerDbContext db,
+            int serverId,
+            int count)
+        {
+            if (count <= 0)
+                return [];
+
+            var planets = await db.RMCDistressSignalRounds
+                .Where(r => r.Round.ServerId == serverId)
+                .OrderByDescending(r => r.RoundId)
+                .Take(count)
+                .Select(r => r.PlanetId)
+                .ToListAsync();
+            planets.Reverse();
+            return planets;
+        }
+
+        public async Task AddRMCDistressSignalRound(
+            int serverId,
+            int roundId,
+            string planetId,
+            float marinesPerXeno)
+        {
+            await using var db = await GetDb();
+            await using var transaction = await db.DbContext.Database.BeginTransactionAsync();
+
+            var round = await db.DbContext.Round.SingleAsync(r => r.Id == roundId);
+            if (round.ServerId != serverId)
+                throw new InvalidOperationException($"Round {roundId} does not belong to server {serverId}.");
+
+            var existing = await db.DbContext.RMCDistressSignalRounds
+                .FirstOrDefaultAsync(r => r.RoundId == roundId);
+            if (existing == null)
+            {
+                db.DbContext.RMCDistressSignalRounds.Add(new RMCDistressSignalRound
+                {
+                    Round = round,
+                    PlanetId = planetId,
+                    MarinesPerXenoBefore = marinesPerXeno,
+                    StartedAt = DateTime.UtcNow,
+                });
+            }
+            else if (existing.PlanetId != planetId)
+            {
+                throw new InvalidOperationException(
+                    $"Round {roundId} is already associated with planet {existing.PlanetId}.");
+            }
+
+            var state = await db.DbContext.RMCDistressSignalStates.SingleAsync(s => s.ServerId == serverId);
+            state.SelectedPlanetId = null;
+            state.UpdatedAt = DateTime.UtcNow;
+
+            await db.DbContext.SaveChangesAsync();
+            await transaction.CommitAsync();
+        }
+
+        public async Task<float> FinishRMCDistressSignalRound(
+            int serverId,
+            int roundId,
+            int result,
+            float marinesPerXeno)
+        {
+            await using var db = await GetDb();
+            await using var transaction = await db.DbContext.Database.BeginTransactionAsync();
+
+            var state = await db.DbContext.RMCDistressSignalStates.SingleAsync(s => s.ServerId == serverId);
+            var round = await db.DbContext.RMCDistressSignalRounds
+                .Include(r => r.Round)
+                .SingleAsync(r => r.RoundId == roundId);
+            if (round.Round.ServerId != serverId)
+                throw new InvalidOperationException($"Round {roundId} does not belong to server {serverId}.");
+
+            if (round.FinishedAt != null)
+                return state.MarinesPerXeno;
+
+            round.Result = result;
+            round.MarinesPerXenoAfter = marinesPerXeno;
+            round.FinishedAt = DateTime.UtcNow;
+            state.MarinesPerXeno = marinesPerXeno;
+            state.UpdatedAt = DateTime.UtcNow;
+
+            await db.DbContext.SaveChangesAsync();
+            await transaction.CommitAsync();
+            return state.MarinesPerXeno;
+        }
+
+        public async Task SetRMCDistressSignalVotingState(
+            int serverId,
+            string? selectedPlanetId,
+            IReadOnlyDictionary<string, int> carryoverVotes)
+        {
+            await using var db = await GetDb();
+            await using var transaction = await db.DbContext.Database.BeginTransactionAsync();
+
+            var state = await db.DbContext.RMCDistressSignalStates.SingleAsync(s => s.ServerId == serverId);
+            state.SelectedPlanetId = selectedPlanetId;
+            state.UpdatedAt = DateTime.UtcNow;
+
+            var existing = await db.DbContext.RMCDistressSignalCarryoverVotes
+                .Where(v => v.ServerId == serverId)
+                .ToListAsync();
+            foreach (var vote in existing)
+            {
+                if (!carryoverVotes.TryGetValue(vote.PlanetId, out var votes) || votes <= 0)
+                {
+                    db.DbContext.RMCDistressSignalCarryoverVotes.Remove(vote);
+                    continue;
+                }
+
+                vote.Votes = votes;
+            }
+
+            var existingPlanets = existing.Select(v => v.PlanetId).ToHashSet();
+            foreach (var (planetId, votes) in carryoverVotes)
+            {
+                if (votes <= 0 || existingPlanets.Contains(planetId))
+                    continue;
+
+                db.DbContext.RMCDistressSignalCarryoverVotes.Add(new RMCDistressSignalCarryoverVote
+                {
+                    ServerId = serverId,
+                    PlanetId = planetId,
+                    Votes = votes,
+                });
+            }
+
+            await db.DbContext.SaveChangesAsync();
+            await transaction.CommitAsync();
+        }
+
+        public async Task SetRMCDistressSignalBalance(int serverId, float marinesPerXeno)
+        {
+            await using var db = await GetDb();
+            var state = await db.DbContext.RMCDistressSignalStates.SingleAsync(s => s.ServerId == serverId);
+            state.MarinesPerXeno = marinesPerXeno;
+            state.UpdatedAt = DateTime.UtcNow;
+            await db.DbContext.SaveChangesAsync();
+        }
+        // RMC14 end
+
         #endregion
 
         public abstract Task SendNotification(DatabaseNotification notification);
