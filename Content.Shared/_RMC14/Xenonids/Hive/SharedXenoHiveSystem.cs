@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.NightVision;
@@ -43,6 +44,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
     [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly RMCTemporaryInvincibilitySystem _invincibility = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
 
@@ -472,12 +474,17 @@ public abstract class SharedXenoHiveSystem : EntitySystem
             return false;
         }
 
-        if (!TrySpawnAt<HiveCoreComponent>() &&
-            !TrySpawnAt<XenoEvolutionGranterComponent>() &&
-            !TrySpawnAt<XenoComponent>())
-        {
+        // Spawning grants temporary invincibility, the same mechanic a freshly burst larva gets.
+        // The duration depends on where the larva spawns, in priority order: hive core, then the queen, then a fallback hive member.
+        TimeSpan invincibilityTime;
+        if (TrySpawnAt<HiveCoreComponent>())
+            invincibilityTime = hive.Comp.BurrowedLarvaHiveCoreInvincibilityTime;
+        else if (TrySpawnAt<XenoEvolutionGranterComponent>())
+            invincibilityTime = hive.Comp.BurrowedLarvaQueenInvincibilityTime;
+        else if (TrySpawnAt<XenoComponent>())
+            invincibilityTime = hive.Comp.BurrowedLarvaFallbackInvincibilityTime;
+        else
             return false;
-        }
 
         if (larva == null)
             return false;
@@ -486,6 +493,8 @@ public abstract class SharedXenoHiveSystem : EntitySystem
 
         _xeno.MakeXeno(larva.Value);
         SetHive(larva.Value, hive);
+
+        _invincibility.GiveInvincibility(larva.Value, invincibilityTime);
 
         var newMind = _mind.CreateMind(session.UserId,
             EntityManager.GetComponent<MetaDataComponent>(larva.Value).EntityName);

@@ -102,4 +102,27 @@ public sealed partial class HiveComponent : Component
 
     [DataField, AutoNetworkedField]
     public HashSet<GibbedXenoInfo> GibbedXenos = new();
+
+    /// <summary>
+    ///     How long a burrowed larva is invincible for after spawning on the hive core.
+    ///     Mirrors the invincibility a larva gets after bursting out of a host.
+    ///     Set to zero or less to disable.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public TimeSpan BurrowedLarvaHiveCoreInvincibilityTime = TimeSpan.FromSeconds(1);
+
+    /// <summary>
+    ///     How long a burrowed larva is invincible for after spawning on the queen.
+    ///     Set to zero or less to disable.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public TimeSpan BurrowedLarvaQueenInvincibilityTime = TimeSpan.FromSeconds(5);
+
+    /// <summary>
+    ///     How long a burrowed larva is invincible for after spawning on a fallback hive member
+    ///     (when no hive core or queen is available).
+    ///     Set to zero or less to disable.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public TimeSpan BurrowedLarvaFallbackInvincibilityTime = TimeSpan.FromSeconds(5);
 }
