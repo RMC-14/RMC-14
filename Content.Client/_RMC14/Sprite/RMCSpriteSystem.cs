@@ -2,11 +2,12 @@
 using Content.Shared._RMC14.Buckle;
 using Content.Shared._RMC14.CrashLand;
 using Content.Shared._RMC14.Mobs;
+using Content.Shared._RMC14.ParaDrop;
 using Content.Shared._RMC14.Sprite;
 using Content.Shared._RMC14.Xenonids.Hide;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Ghost;
-using Content.Shared.ParaDrop;
+using Robust.Client.ComponentTrees;
 using Robust.Client.GameObjects;
 using Robust.Client.Player;
 using Robust.Shared.Map;
@@ -17,7 +18,7 @@ public sealed class RMCSpriteSystem : SharedRMCSpriteSystem
 {
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private readonly SpriteTreeSystem _spriteTree = default!;
 
     public override void Initialize()
     {
@@ -47,21 +48,19 @@ public sealed class RMCSpriteSystem : SharedRMCSpriteSystem
     ///     This is so the animating entity's current location gets updated during the animation, there is probably a better way to do this.
     /// </summary>
     /// <param name="uid">The entity to update the location of.</param>
-    public void UpdatePosition(EntityUid uid)
+    public void UpdateSpriteTree(EntityUid uid)
     {
-        var oldPos = _transform.GetWorldPosition(uid);
+        if (!TryComp(uid, out SpriteComponent? sprite))
+            return;
 
         // Reset the sprite offset when the entity is in NullSpace
         if (Transform(uid).MapID == MapId.Nullspace)
         {
-            if (TryComp(uid, out SpriteComponent? sprite))
-                _sprite.SetOffset((uid, sprite), new Vector2());
-
+            _sprite.SetOffset((uid, sprite), new Vector2());
             return;
         }
 
-        var newPos = oldPos with { Y = oldPos.Y + 0.0001f };
-        _transform.SetWorldPosition(uid, newPos);
+        _spriteTree.QueueTreeUpdate((uid, sprite));
     }
 
     public override void Update(float frameTime)
@@ -94,7 +93,7 @@ public sealed class RMCSpriteSystem : SharedRMCSpriteSystem
             var location = EntityQueryEnumerator<RMCUpdateClientLocationComponent>();
             while (location.MoveNext(out var uid, out _))
             {
-                UpdatePosition(uid);
+                UpdateSpriteTree(uid);
             }
         }
         catch (Exception e)
