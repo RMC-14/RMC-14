@@ -9,6 +9,7 @@
                 <Label Text="{Loc 'cm-ui-rmc14'}"
                        FontColorOverride="{x:Static s:StyleNano.NanoGold}"
                        StyleClasses="LabelKeyText"/>
+                <CheckBox Name="RMCChatPreview" Text="{Loc 'rmc-ui-chat-preview'}" Margin="0 0 0 5" />
                 <CheckBox Name="RMCAutoPunctuate" Text="{Loc 'rmc-ui-auto-punctuate'}" Margin="0 0 0 5" />
                 <CheckBox Name="RMCAutoEjectMagazines" Text="{Loc 'rmc-ui-auto-eject-magazines'}" Margin="0 0 0 5" />
                 <CheckBox Name="RMCDamageYourself" Text="{Loc 'rmc-ui-damage-yourself'}" Margin="0 0 0 5" />
