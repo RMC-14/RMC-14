@@ -12,6 +12,7 @@ using Content.Shared.Interaction.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.MouseRotator;
 using Content.Shared.Movement.Components;
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Movement.Pulling.Systems;
@@ -419,6 +420,24 @@ public sealed class RMCPullingSystem : EntitySystem
         _pulling.TryStopPull(puller.Pulling.Value, pullable, user);
     }
 
+    /// <summary>
+    /// Stops only the pull initiated by <paramref name="puller"/>, without stopping pulls on them.
+    /// </summary>
+    public bool TryStopPullFrom(EntityUid puller, [NotNullWhen(true)] out EntityUid? pulled)
+    {
+        pulled = null;
+        if (!TryComp(puller, out PullerComponent? pullerComp) ||
+            pullerComp.Pulling is not { } target ||
+            !TryComp(target, out PullableComponent? pullable))
+        {
+            return false;
+        }
+
+        pulled = target;
+        _pulling.TryStopPull(target, pullable, puller);
+        return true;
+    }
+
     public void TryStopPullsOn(EntityUid puller)
     {
         if (!TryComp<PullableComponent>(puller, out var pullable) ||
@@ -433,14 +452,7 @@ public sealed class RMCPullingSystem : EntitySystem
     public void TryStopAllPullsFromAndOn(EntityUid pullie)
     {
         TryStopPullsOn(pullie);
-
-       if (TryComp(pullie, out PullerComponent? puller) &&
-            puller.Pulling != null &&
-            TryComp(puller.Pulling, out PullableComponent? pullable2))
-        {
-            _pulling.TryStopPull(puller.Pulling.Value, pullable2, pullie);
-            return;
-        }
+        TryStopPullFrom(pullie, out _);
     }
 
     private void OnPullAnimation(Entity<PullableComponent> ent, ref PullStartedMessage args)
