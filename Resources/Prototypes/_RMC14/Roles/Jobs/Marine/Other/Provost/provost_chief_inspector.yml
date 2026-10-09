@@ -21,6 +21,9 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: NpcFactionMember
+      factions:
+      - Provost
     - type: Skills
       skills:
         RMCSkillCqc: 3
@@ -47,6 +50,7 @@
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_mp
+  hidden: true
 
 - type: entity
   id: RMCRandomHumanoidProvostChiefInspector
