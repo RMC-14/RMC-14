@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from https://github.com/cmss13-devs/cmss13/blob/a46fad702be27fedec2b0bca69ed3b316e482095/icons/mob/hud/factions/marine.dmi with CMO, Doctor, and Researcher being changed from red to blue by UnicornOnLSD (Github).",
+  "copyright": "Taken from https://github.com/cmss13-devs/cmss13/blob/a46fad702be27fedec2b0bca69ed3b316e482095/icons/mob/hud/factions/marine.dmi with CMO, Doctor, and Researcher being changed from red to blue by UnicornOnLSD (Github), Surgeon and Pharmacist being changed from red to blue by @IceNoobXD (Github)",
   "size": {
     "x": 16,
     "y": 16
@@ -21,6 +21,12 @@
         },
         {
             "name": "hudsquad_researcher"
+        },
+        {
+            "name": "hudsquad_surgeon"
+        },
+        {
+            "name": "hudsquad_pharmacist"
         }
     ]
 }
