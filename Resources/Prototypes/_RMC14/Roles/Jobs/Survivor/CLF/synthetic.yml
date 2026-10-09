@@ -1,0 +1,56 @@
+# RMC14 TODO: Must be changed when CLF Surviors System gets added PR #7950
+- type: job
+  parent: CMJobBase # RMCSurvivorCLFBase
+  id: RMCSurvivorCLFSynthetic
+  name: rmc-job-name-clf-survivor-synth
+  description: rmc-ghost-role-information-clf-description # Can be removed when parent changed
+  ranks:
+    RMCRankSyntheticColonist: [ ]
+  startingGear: RMCGearSurvivorSyntheticCLF
+  icon: "RMCJobIconCLFSynthetic"
+  spawnMenuRoleName: CLF Multipurpose Synthetic (Survivor)
+  playTimeTracker: RMCJobSyntheticCLF # Can be removed when parent changed
+  # antagRole: RMCHostileSurvivor
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - CLF
+    - type: Language
+      preset: RMCLanguagePresetSynthColonist
+    - type: LanguageLearning
+      preset: RMCLanguageLearningPresetSynthColonist
+    - type: JobPrefix
+      prefix: rmc-job-prefix-clf-survivor-synth
+    - type: Synth
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+  hidden: true
+
+- type: startingGear
+  id: RMCGearSurvivorSyntheticCLF
+  equipment:
+    head: RMCHeadBeretPurple
+    mask: RMCCombatUtilityKnifeA
+    ears: RMCHeadsetDistressCLF
+    eyes: RMCGlassesMedicalHUDGlasses
+    jumpsuit: RMCJumpsuitCLFSoldier
+    outerClothing: RMCCoatMilitia
+    gloves: CMHandsBlackMarine
+    shoes: RMCShoesCombat
+    id: RMCIDCardCLFSynthetic
+    belt: RMCBeltMedicalDefibAnalyzerFilled
+    back: RMCSatchelLightpackWelder
+    pocket1: RMCPouchToolsFill
+    pocket2: RMCPouchConstructionFillLowGrade
+  storage:
+    back:
+    - CMFireExtinguisherPortable
+    - CMRollerBedSpawnFolded
+    - RMCExplosivePlastic
+    - RMCExplosivePlastic
+    - CMCrowbar
+    - RMCSynthResetKeyMakeshift
+    - CMSurgicalLine
+    - CMSynthGraft
