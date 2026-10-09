@@ -74,6 +74,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization.Manager;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Server._RMC14.Rules.DistressSignal;
 
@@ -239,6 +240,12 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
 
     private CMDistressSignalRuleComponent? TryGetActiveRule() => TryGetActiveRuleEntity()?.Comp;
 
+    public bool TryGetActiveRule([NotNullWhen(true)] out CMDistressSignalRuleComponent? rule)
+    {
+        rule = TryGetActiveRule();
+        return rule != null;
+    }
+
     private void InvalidateActiveRule() => _activeRule = null;
 
     public override void Initialize()
@@ -250,7 +257,10 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
 
         SubscribeLocalEvent<LoadingMapsEvent>(OnMapLoading);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
-        SubscribeLocalEvent<RulePlayerSpawningEvent>(OnRulePlayerSpawning);
+        SubscribeLocalEvent<RMCPlayerSpawningEvent>(OnRMCPlayerSpawning);
+        SubscribeLocalEvent<InitializingAssignmentsEvent>(OnInitializingAssignments);
+        SubscribeLocalEvent<CollectingAssignmentsEvent>(OnCollectingAssignments, before: [typeof(StationJobsSystem)]);
+        SubscribeLocalEvent<ReplaceJobEvent>(OnReplaceJob);
         SubscribeLocalEvent<PlayerSpawningEvent>(OnPlayerSpawning,
              before: [typeof(ArrivalsSystem), typeof(SpawnPointSystem)]);
         SubscribeLocalEvent<RoundEndMessageEvent>(OnRoundEndMessage);
