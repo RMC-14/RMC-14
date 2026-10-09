@@ -306,3 +306,50 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/ArmorWebbing/Royal/shell.rsi
     state: webbing
+
+
+# Tactical Armor Webbing
+
+- type: entity
+  parent: RMCArmorWebbingMag
+  id: RMCArmorWebbingMagTactical
+  name: tactical magazine armor webbing
+  suffix: PVE, Tactical
+  description: A set of low-profile MOLS webbing designed to clip snugly onto the M4M armor system. Features a set of four magazine pouches.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/ArmorWebbing/Tactical/mag.rsi
+    state: webbing
+
+- type: entity
+  parent: RMCArmorWebbingGrenade
+  id: RMCArmorWebbingGrenadeTactical
+  name: tactical grenade armor webbing
+  suffix: PVE, Tactical
+  description: A set of low-profile MOLS webbing designed to clip snugly onto the M4M armor system. Features an array of small pouches, capable of holding up to 6 grenades.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/ArmorWebbing/Tactical/nade.rsi
+    state: webbing
+
+- type: entity
+  parent: RMCArmorWebbingPouch
+  id: RMCArmorWebbingPouchTactical
+  name: tactical general armor webbing
+  suffix: PVE, Tactical
+  description: A set of low-profile MOLS webbing designed to clip snugly onto the M4M armor system. Features several small pouches, capable of carrying assorted small items.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/ArmorWebbing/Tactical/pouch.rsi
+    state: webbing
+
+- type: entity
+  parent: RMCArmorWebbingShell
+  id: RMCArmorWebbingShellTactical
+  name: tactical shell armor webbing
+  suffix: PVE, Tactical
+  description: A set of low-profile MOLS webbing designed to clip snugly onto the M4M armor system. Features a number of loops designed to hold loose shotgun shells.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/ArmorWebbing/Tactical/shell.rsi
+    state: webbing

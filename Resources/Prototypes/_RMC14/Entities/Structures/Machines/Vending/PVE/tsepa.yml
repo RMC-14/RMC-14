@@ -1,0 +1,775 @@
+# TSEPA Surplus
+- type: entity
+  parent: ColMarTechBase
+  id: RMCColMarTechSurplusTSEPAPVE
+  name: TSEPA surplus clothing rack
+  description: An automated rack hooked up to a large storage of standard TSEPA clothing.
+  suffix: PVE, TSEPA
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - RMCTSEPAConstablePVE
+    - RMCTSEPASeniorConstablePVE
+    - RMCTSEPASergeantPVE
+    - RMCTSEPAInspectorPVE
+    hackable: true
+    sections:
+    - name: Surplus Equipment
+      entries:
+      - id: RMCJumpsuitTSEPA
+        name: standard uniform
+        amount: 15
+      - id: CMBootsBlack
+        name: boots
+        amount: 15
+      - id: RMCHandsBlack
+        name: gloves
+        amount: 15
+      - id: RMCHeadCapTSEPA
+        amount: 15
+      - id: RMCHeadsetTSEPAConstable
+        name: radio headset
+        amount: 15
+      - id: RMCM5CameraGear
+        amount: 15
+    - name: Armor
+      entries:
+      - id: RMCArmourM4TSEPA
+        recommended: true
+        name: light armor
+        amount: 15
+      - id: RMCArmorVestTSEPA
+        name: armored vest
+        amount: 15
+    - name: Jackets
+      entries:
+      - id: RMCCoatTSEPA
+        recommended: true
+        name: field jacket
+        amount: 15
+      - id: RMCCoatTSEPAHighVis
+        name: high-visibility jacket
+        amount: 15
+      - id: RMCCoatTSEPAHighVisVest
+        name: high-visibility vest
+        amount: 15
+    - name: Backpacks
+      entries:
+      - id: RMCSatchelTSEPA
+        recommended: true
+        amount: 15
+    - name: Pouches
+      entries:
+      - id: RMCPouchDocumentSmall
+        recommended: true
+        amount: 10
+      - id: RMCPouchSecurityTools
+        recommended: true
+        amount: 10
+      - id: RMCPouchGeneralLarge
+        amount: 10
+      - id: RMCPouchFirstResponder
+        amount: 10
+    - name: Miscellaneous
+      entries:
+      - id: RMCSunglasses
+        name: sunglasses
+        amount: 10
+      - id: RMCTieBlack
+        amount: 10
+      - id: RMCWatchCheap
+        name: wristwatch
+        amount: 10
+
+# TSEPA Equipment
+- type: entity
+  parent: ColMarTechBase
+  id: RMCColMarTechSurplusSATPVE
+  name: TSEPA surplus equipment rack
+  description: An automated rack hooked up to a large storage of standard TSEPA equipment.
+  suffix: PVE, TSEPA
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - RMCTSEPAConstablePVE
+    - RMCTSEPASeniorConstablePVE
+    - RMCTSEPASergeantPVE
+    - RMCTSEPAInspectorPVE
+    hackable: true
+    sections:
+    - name: Service Weapons
+      entries:
+      - id: RMCWeaponPistolL54
+        amount: 15
+      - id: RMCMagazinePistolL54
+        amount: 25
+    - name: Restraints
+      entries:
+      - id: RMCHandcuffs
+        amount: 15
+      - id: RMCZipties
+        amount: 15
+    - name: First Aid Equipment
+      entries:
+      - id: CMGauze10
+        amount: 10
+      - id: CMOintment10
+        amount: 10
+      #- id: RMCSplints10 # TODO RMC14 implement newmed
+      #  amount: 15
+      - id: RMCMeralyneAutoInjector
+        amount: 10
+      - id: RMCDermalineAutoInjector
+        amount: 10
+      - id: CMTricordrazineAutoInjector
+        amount: 10
+      - id: CMEmergencyAutoInjector
+        amount: 10
+      #- id: RMCTramadolAutoInjector # TODO RMC14 implement newmed
+      #  amount: 15
+    - name: Utility Equipment
+      entries:
+      - id: RMCFlashlight
+        amount: 15
+      - id: CMClipboard
+        amount: 15
+      - id: CMPen
+        amount: 15
+      - id: ClothingHandsGlovesLatex
+        amount: 15
+
+# SAT Surplus
+- type: entity
+  parent: ColMarTechBase
+  id: RMCColMarTechClothingSATPVE
+  name: SAT surplus clothing rack
+  description: An automated rack hooked up to a large storage of standard SAT clothing.
+  suffix: PVE, SAT
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - RMCTSEPASATOperatorPVE
+    - RMCTSEPASATMedicPVE
+    - RMCTSEPASATTechnicianPVE
+    - RMCTSEPASATBreacherPVE
+    - RMCTSEPASATSniperPVE
+    - RMCTSEPASATTeamLeaderPVE
+    hackable: true
+    sections:
+    - name: Surplus Equipment
+      entries:
+      - id: RMCJumpsuitTSEPASAT
+        name: standard uniform
+        amount: 15
+      - id: CMBootsBlack
+        name: boots
+        amount: 15
+      - id: RMCHandsBlack
+        name: gloves
+        amount: 15
+      - id: RMCHeadCapTSEPA
+        amount: 15
+      - id: RMCHeadsetTSEPAConstable
+        name: radio headset
+        amount: 15
+      - id: RMCM5CameraGear
+        amount: 15
+      - id: RMCHeadCapTSEPA
+        amount: 15
+      - id: CMMaskCoif
+        amount: 15
+    - name: Uniform Webbing
+      entries:
+      - id: RMCWebbingBlackSmall
+        name: webbing
+        recommended: true
+        amount: 15
+      - id: CMWebbingBlack
+        name: webbing vest
+        amount: 15
+      - id: RMCWebbingLegPouchBlack
+        name: leg pouch
+        amount: 15
+      - id: RMCWebbingHolsterBlack
+        name: shoulder holster
+        amount: 15
+      - id: RMCWebbingDropPouchBlack
+        name: drop pouch
+        amount: 15
+    - name: Modular Armor Kits
+      entries:
+      - id: RMCPVEArmorCaseTSEPALight
+        name: M4L light armor
+        amount: 15
+      - id: RMCPVEArmorCaseTSEPA
+        name: M4M standard armor
+        recommended: true
+        amount: 15
+      - id: RMCPVEArmorCaseTSEPAHeavy
+        name: M4T technician armor
+        amount: 15
+    - name: Armor Webbing
+      entries:
+      - id: RMCArmorWebbingMagTactical
+        name: magazine armor webbing
+        recommended: true
+        amount: 15
+      - id: RMCArmorWebbingGrenadeTactical
+        name: grenade armor webbing
+        amount: 15
+      - id: RMCArmorWebbingPouchTactical
+        name: general armor webbing
+        amount: 15
+      - id: RMCArmorWebbingShellTactical
+        name: shell armor webbing
+        amount: 15
+    - name: Backpacks
+      entries:
+      - id: RMCSatchelTSEPA
+        recommended: true
+        amount: 15
+    - name: Pouches
+      entries:
+      - id: RMCPouchSecurityTools
+        recommended: true
+        amount: 10
+      - id: RMCPouchToolsSocFilledTactical
+        recommended: true
+        amount: 15
+      - id: RMCPouchExplosive
+        amount: 15
+      - id: RMCPouchDocumentSmall
+        amount: 15
+      - id: RMCPouchMagazineLarge
+        amount: 15
+      - id: RMCPouchGeneralLarge
+        amount: 15
+      - id: RMCPouchFlare
+        amount: 15
+      - id: RMCPouchSling
+        amount: 15
+      - id: RMCPouchFirstResponder
+        amount: 15
+    - name: Miscellaneous
+      entries:
+      - id: RMCGogglesBallisticBlack
+        name: black ballistic goggles
+        amount: 10
+      - id: RMCGogglesBallisticOrange 
+        name: orange ballistic goggles
+        amount: 10
+      - id: RMCHelmetGarbRainCoverUrban 
+        name: rain cover
+        amount: 10
+      - id: RMCHelmetGarbGasmaskUrban 
+        name: respirator
+        amount: 10
+
+# SAT Equipment
+- type: entity
+  parent: ColMarTechBase
+  id: RMCColMarTechEquipmentSATPVE
+  name: SAT surplus equipment rack
+  description: An automated rack hooked up to a large storage of standard SAT equipment.
+  suffix: PVE, SAT
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - RMCTSEPASATOperatorPVE
+    - RMCTSEPASATMedicPVE
+    - RMCTSEPASATTechnicianPVE
+    - RMCTSEPASATBreacherPVE
+    - RMCTSEPASATSniperPVE
+    - RMCTSEPASATTeamLeaderPVE
+    hackable: true
+    sections:
+    - name: First Aid Equipment
+      entries:
+      - id: CMGauze10
+        amount: 10
+      - id: CMOintment10
+        amount: 10
+      #- id: RMCSplints10 # TODO RMC14 implement newmed
+      #  amount: 15
+      - id: RMCMeralyneAutoInjector
+        amount: 10
+      - id: RMCDermalineAutoInjector
+        amount: 10
+      - id: CMTricordrazineAutoInjector
+        amount: 10
+      - id: CMEmergencyAutoInjector
+        amount: 10
+      #- id: RMCTramadolAutoInjector # TODO RMC14 implement newmed
+      #  amount: 15
+    - name: Engineering Equipment
+      entries:
+      - id: RMCTacticalPrybar
+        amount: 10
+      - id: CMScrewdriver
+        amount: 10
+      - id: CMWirecutter
+        amount: 10
+      - id: CMWrench
+        amount: 10
+      - id: CMMultitool
+        amount: 10
+      - id: RMCWelderPVE
+        amount: 10
+      - id: CMFireExtinguisherPortable
+        name: portable fire extinguisher
+        amount: 10
+      - id: CMEntrenchingTool
+        amount: 10
+    - name: Utility Equipment
+      entries:
+      - id: RMCZipties
+        amount: 15
+      - id: RMCM5CameraGear
+        amount: 15
+      - id: RMCTantoA
+        amount: 15
+      - id: CMRollerBedSpawnFolded
+        amount: 5
+      - id: RMCBinocularsPVE
+        amount: 5
+
+# SAT Weapons
+- type: entity
+  parent: ColMarTechBase
+  id: RMCColMarTechWeaponsSATPVE
+  name: SAT surplus armory rack
+  description: An automated rack hooked up to a large storage of standard SAT weapons.
+  suffix: PVE, SAT
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - RMCTSEPASATOperatorPVE
+    - RMCTSEPASATMedicPVE
+    - RMCTSEPASATTechnicianPVE
+    - RMCTSEPASATBreacherPVE
+    - RMCTSEPASATSniperPVE
+    - RMCTSEPASATTeamLeaderPVE
+    hackable: true
+    sections:
+    - name: Primary Weapons
+      entries:
+      - id: RMCWeaponRifleL83A3Stripped
+        amount: 10
+      - id: RMCWeaponRifleL90A2
+        amount: 10
+    - name: Secondary Weapons
+      entries:
+      - id: RMCWeaponPistolL54
+        amount: 10
+      - id: RMCMK80RCM
+        amount: 2
+    - name: Ammunition
+      entries:
+      - id: RMCMagazineRifleL83A3
+        amount: 30
+      - id: RMCBoxShotgunBuckshot
+        amount: 5
+      - id: RMCBoxShotgunSlugs
+        amount: 5
+      - id: RMCBoxShotgunFlechette
+        amount: 2
+      - id: RMCMagazinePistolL54
+        amount: 20
+      - id: CMMagazinePistolMK80
+        amount: 20
+    - name: Attachments
+      entries:
+      - id: RMCAttachmentTwoPointSling
+        amount: 10
+      - id: RMCAttachmentRailFlashlight
+        amount: 5
+      - id: RMCAttachmentS6ReflexSight
+        amount: 5
+      - id: RMCAttachmentS5RedDotSight
+        amount: 5
+      - id: RMCAttachmentAngledGrip
+        amount: 5
+      - id: RMCAttachmentVerticalGrip
+        amount: 5
+      - id: RMCAttachmentLaserSight
+        amount: 5
+      - id: RMCAttachmentExtendedBarrel
+        amount: 3
+      - id: RMCAttachmentSuppressor
+        amount: 3
+      - id: RMCAttachmentRecoilCompensator
+        amount: 3
+      - id: RMCAttachmentS42xTelescopicMiniscope
+        amount: 1
+      - id: RMCAttachmentBurstFireAssembly
+        amount: 1
+
+# SAT Operator
+- type: entity
+  parent: ColMarTechBase
+  id: RMCColMarTechSATOperatorPVE
+  name: SAT operator equipment rack
+  description: An automated rack capable of individually dispensing SAT operator equipment.
+  suffix: PVE, TSEPA
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - RMCTSEPASATOperatorPVE
+    sections:
+    - name: Standard Equipment (Mandatory)
+      takeAll: RMCAccessories
+      entries:
+      - id: RMCPVEArmorCaseTSEPA
+        name: modular armor kit
+      - id: CMMaskCoif
+      - id: RMCHeadsetTSEPAConstable
+      - id: RMCTantoA  
+    - name: Backpacks
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: RMCSatchelTSEPA
+        recommended: true
+    - name: Armor Webbing
+      choices: { RMCArmorWebbing: 1 }
+      entries:
+      - id: RMCArmorWebbingMagTactical
+        name: magazine armor webbing
+        recommended: true
+      - id: RMCArmorWebbingGrenadeTactical
+        name: grenade armor webbing
+      - id: RMCArmorWebbingPouchTactical
+        name: general armor webbing
+      - id: RMCArmorWebbingShellTactical
+        name: shell armor webbing
+    - name: Uniform Webbing
+      choices: { RMCWebbing: 1 }
+      entries:
+      - id: RMCWebbingBlackSmall
+        name: webbing
+        recommended: true
+      - id: CMWebbingBlack
+        name: webbing vest
+      - id: RMCWebbingLegPouchBlack
+        name: leg pouch
+      - id: RMCWebbingHolsterBlack
+        name: shoulder holster
+      - id: RMCWebbingDropPouchBlack
+        name: drop pouch
+
+# SAT Medic
+- type: entity
+  parent: ColMarTechBase
+  id: RMCColMarTechSATMedicPVE
+  name: SAT medic equipment rack
+  description: An automated rack capable of individually dispensing SAT medic equipment.
+  suffix: PVE, TSEPA
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - RMCTSEPASATMedicPVE
+    sections:
+    - name: Standard Equipment (Mandatory)
+      takeAll: RMCAccessories
+      entries:
+      - id: RMCVendorBundleRCMPVEMedic # TODO Vendor bundle
+      - id: RMCPVEArmorCaseTSEPALight
+        name: light modular armor kit
+      - id: CMMaskCoif
+      - id: RMCHeadsetTSEPAConstable
+      - id: RMCTantoA  
+      - id: RMCHandsLatexMarine 
+    - name: Backpacks
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: RMCSatchelTSEPA
+        recommended: true
+    - name: Armor Webbing
+      choices: { RMCArmorWebbing: 1 }
+      entries:
+      - id: RMCArmorWebbingMagTactical
+        name: magazine armor webbing
+        recommended: true
+      - id: RMCArmorWebbingGrenadeTactical
+        name: grenade armor webbing
+      - id: RMCArmorWebbingPouchTactical
+        name: general armor webbing
+      - id: RMCArmorWebbingShellTactical
+        name: shell armor webbing
+    - name: Uniform Webbing
+      choices: { RMCWebbing: 1 }
+      entries:
+      - id: RMCWebbingBlackSmall
+        name: webbing
+        recommended: true
+      - id: CMWebbingBlack
+        name: webbing vest
+      - id: RMCWebbingLegPouchBlack
+        name: leg pouch
+      - id: RMCWebbingHolsterBlack
+        name: shoulder holster
+      - id: RMCWebbingDropPouchBlack
+        name: drop pouch
+    - name: Pouches
+      choices: { RMCPouch: 2 }
+      entries:
+      - id: RMCPouchReagentCanisterMeraBic
+        name: Pressurized Reagent Canister Pouch\n(Meralyne-Bicaridine)
+        recommended: true
+      - id: RMCPouchReagentCanisterKeloDerm
+        name: Pressurized Reagent Canister Pouch\n(Kelotane-Dermaline)
+        recommended: true
+      - id: RMCPouchReagentCanisterTricordrazine
+        name: Pressurized Reagent Canister Pouch\n(Tricordrazine)
+        recommended: true
+      - id: RMCPouchMedkit
+        recommended: true
+      - id: RMCPouchAutoinjectorFill
+
+# SAT Sniper
+- type: entity
+  parent: ColMarTechBase
+  id: RMCColMarTechSATSniperPVE
+  name: SAT sniper equipment rack
+  description: An automated rack capable of individually dispensing SAT sniper equipment.
+  suffix: PVE, TSEPA
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - RMCTSEPASATSniperPVE
+    sections:
+    - name: Precision Weapon Set (Mandatory)
+      takeOne: CMPrimary
+      entries:
+      - id: RMCScoutSniperSniperEquipmentCase
+        name: sniper kit
+      - id: RMCScoutSniperMarksmanEquipmentCase
+        name: designated marksman kit
+    - name: Standard Equipment (Mandatory)
+      takeAll: RMCAccessories
+      entries:
+      - id: RMCPVEArmorCaseTSEPALight
+        name: light modular armor kit
+      - id: CMMaskCoif
+      - id: RMCHeadsetTSEPAConstable
+      - id: RMCTantoA  
+    - name: Backpacks
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: RMCSatchelTSEPA
+        recommended: true
+    - name: Armor Webbing
+      choices: { RMCArmorWebbing: 1 }
+      entries:
+      - id: RMCArmorWebbingMagTactical
+        name: magazine armor webbing
+        recommended: true
+      - id: RMCArmorWebbingGrenadeTactical
+        name: grenade armor webbing
+      - id: RMCArmorWebbingPouchTactical
+        name: general armor webbing
+      - id: RMCArmorWebbingShellTactical
+        name: shell armor webbing
+      - id: CMHandsLatex
+    - name: Uniform Webbing
+      choices: { RMCWebbing: 1 }
+      entries:
+      - id: RMCWebbingBlackSmall
+        name: webbing
+        recommended: true
+      - id: CMWebbingBlack
+        name: webbing vest
+      - id: RMCWebbingLegPouchBlack
+        name: leg pouch
+      - id: RMCWebbingHolsterBlack
+        name: shoulder holster
+      - id: RMCWebbingDropPouchBlack
+        name: drop pouch
+
+# SAT Breacher
+- type: entity
+  parent: ColMarTechBase
+  id: RMCColMarTechSATBreacherPVE
+  name: SAT breacher equipment rack
+  description: An automated rack capable of individually dispensing SAT breacher equipment.
+  suffix: PVE, TSEPA
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - RMCTSEPASATBreacherPVE
+    sections:
+    - name: Breaching Set (Mandatory)
+      takeOne: CMPrimary
+      entries:
+      # TODO: Breaching Hammer
+      - id: RMCXM51Case # TODO: Make weaker TSEPA variant (!!!)
+        name: breaching shotgun case
+    - name: Standard Equipment (Mandatory)
+      takeAll: RMCAccessories
+      entries:
+      - id: RMCVendorBundleRCMPVEAssaultEngi # TODO Vendor bundle
+      - id: RMCPVEArmorCaseTSEPAHeavy
+        name: heavy modular armor kit
+      - id: CMMaskCoif
+      - id: RMCHeadsetTSEPAConstable
+      - id: RMCTantoA  
+    - name: Backpacks
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: RMCSatchelTSEPA
+        recommended: true
+    - name: Armor Webbing
+      choices: { RMCArmorWebbing: 1 }
+      entries:
+      - id: RMCArmorWebbingMagTactical
+        name: magazine armor webbing
+        recommended: true
+      - id: RMCArmorWebbingGrenadeTactical
+        name: grenade armor webbing
+      - id: RMCArmorWebbingPouchTactical
+        name: general armor webbing
+      - id: RMCArmorWebbingShellTactical
+        name: shell armor webbing
+      - id: CMHandsLatex
+    - name: Uniform Webbing
+      choices: { RMCWebbing: 1 }
+      entries:
+      - id: RMCWebbingBlackSmall
+        name: webbing
+        recommended: true
+      - id: CMWebbingBlack
+        name: webbing vest
+      - id: RMCWebbingLegPouchBlack
+        name: leg pouch
+      - id: RMCWebbingHolsterBlack
+        name: shoulder holster
+      - id: RMCWebbingDropPouchBlack
+        name: drop pouch
+
+# SAT Technician
+- type: entity
+  parent: ColMarTechBase
+  id: RMCColMarTechSATTechnicianPVE
+  name: SAT technician equipment rack
+  description: An automated rack capable of individually dispensing SAT technician equipment.
+  suffix: PVE, TSEPA
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - RMCTSEPASATTechnicianPVE
+    sections:
+    - name: Standard Equipment (Mandatory)
+      takeAll: RMCAccessories
+      entries:
+      - id: RMCVendorBundleRCMPVEAssaultEngi # TODO Vendor bundle
+      - id: RMCPVEArmorCaseTSEPAHeavy
+        name: heavy modular armor kit
+      - id: CMMaskCoif
+      - id: RMCHeadsetTSEPAConstable
+      - id: RMCTantoA  
+    - name: Backpacks
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: RMCSatchelTSEPA
+        recommended: true
+    - name: Armor Webbing
+      choices: { RMCArmorWebbing: 1 }
+      entries:
+      - id: RMCArmorWebbingMagTactical
+        name: magazine armor webbing
+        recommended: true
+      - id: RMCArmorWebbingGrenadeTactical
+        name: grenade armor webbing
+      - id: RMCArmorWebbingPouchTactical
+        name: general armor webbing
+      - id: RMCArmorWebbingShellTactical
+        name: shell armor webbing
+      - id: CMHandsLatex
+    - name: Uniform Webbing
+      choices: { RMCWebbing: 1 }
+      entries:
+      - id: RMCWebbingBlackSmall
+        name: webbing
+        recommended: true
+      - id: CMWebbingBlack
+        name: webbing vest
+      - id: RMCWebbingLegPouchBlack
+        name: leg pouch
+      - id: RMCWebbingHolsterBlack
+        name: shoulder holster
+      - id: RMCWebbingDropPouchBlack
+        name: drop pouch
+
+# SAT Team Leader
+- type: entity
+  parent: ColMarTechBase
+  id: RMCColMarTechSATTeamLeaderPVE
+  name: SAT team leader equipment rack
+  description: An automated rack capable of individually dispensing SAT team leader equipment.
+  suffix: PVE, TSEPA
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - RMCTSEPASATTeamLeaderPVE
+    sections:
+    - name: Standard Equipment (Mandatory)
+      takeAll: RMCAccessories
+      entries:
+      - id: RMCPVEArmorCaseTSEPA
+        name: modular armor kit
+      - id: CMMaskCoif
+      - id: RMCHeadsetTSEPAConstable
+      - id: RMCTantoA  
+    - name: Backpacks
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: RMCSatchelTSEPA
+        recommended: true
+    # - TODO TSEPA RADIOPACK
+    - name: Armor Webbing
+      choices: { RMCArmorWebbing: 1 }
+      entries:
+      - id: RMCArmorWebbingMagTactical
+        name: magazine armor webbing
+        recommended: true
+      - id: RMCArmorWebbingGrenadeTactical
+        name: grenade armor webbing
+      - id: RMCArmorWebbingPouchTactical
+        name: general armor webbing
+      - id: RMCArmorWebbingShellTactical
+        name: shell armor webbing
+    - name: Uniform Webbing
+      choices: { RMCWebbing: 1 }
+      entries:
+      - id: RMCWebbingBlackSmall
+        name: webbing
+        recommended: true
+      - id: CMWebbingBlack
+        name: webbing vest
+      - id: RMCWebbingLegPouchBlack
+        name: leg pouch
+      - id: RMCWebbingHolsterBlack
+        name: shoulder holster
+      - id: RMCWebbingDropPouchBlack
+        name: drop pouch

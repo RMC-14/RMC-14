@@ -3,7 +3,7 @@
   parent: CMJobBase
   id: RMCJobTSEPASynthetic
   name: rmc-job-name-tsepa-synth
-  description: rmc-job-description-tsepa-synth
+  description: rmc-job-description-tsepa
   playTimeTracker: RMCJobTSEPASynthetic
   ranks:
     RMCRankTSEPAConstable: [ ]
@@ -66,5 +66,5 @@
   parent: CMJobIconBase
   id: RMCJobIconTSEPASynth
   icon:
-    sprite: _RMC14/Interface/job_icons/TSE/TSEPA.rsi
-    state: tse_pasynth
+    sprite: _RMC14/Interface/job_icons/TSE/TSEPA/base.rsi
+    state: tsepa_synth
