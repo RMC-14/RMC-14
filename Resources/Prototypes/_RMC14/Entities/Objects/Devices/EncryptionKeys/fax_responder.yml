@@ -1,0 +1,67 @@
+# Fax responders can listen to their channels but never transmit on them.
+
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyWeYaResponder
+  name: We-Ya responder radio encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCommon
+    - MarineCommand
+    - MarineEngineer
+    - MarineMedical
+    - MarineRequisition
+    - MarineJTAC
+    - MarineIntel
+    - WEYA
+    readOnlyChannels:
+    - MarineCommon
+    - MarineCommand
+    - MarineEngineer
+    - MarineMedical
+    - MarineRequisition
+    - MarineJTAC
+    - MarineIntel
+    - WEYA
+    defaultChannel: WEYA
+  - type: Sprite
+    state: cap_key
+
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyFreePressResponder
+  name: Free Press responder radio encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCommand
+    - MarineCommon
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+    - MarineEngineer
+    - MarineMedical
+    - MarineRequisition
+    - MarineJTAC
+    - MarineIntel
+    readOnlyChannels:
+    - MarineCommand
+    - MarineCommon
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+    - MarineEngineer
+    - MarineMedical
+    - MarineRequisition
+    - MarineJTAC
+    - MarineIntel
+    defaultChannel: MarineCommon
+  - type: Sprite
+    state: cap_key

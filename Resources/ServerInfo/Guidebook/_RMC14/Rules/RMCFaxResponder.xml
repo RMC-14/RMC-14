@@ -1,0 +1,153 @@
+<Document>
+  <ColorBox Color="#3d1f1f" OutlineColor="#a83232">
+    <Box Orientation="Vertical" Margin="8">
+      [head=1][color=#ff6b6b]USE A DEDICATED CHARACTER[/color][/head]
+
+      [head=3]Make a character that [italic]only[/italic] responds to faxes. It must not be used for any other role.[/head]
+    </Box>
+  </ColorBox>
+
+  # Fax Responder
+  You answer faxes sent to your fax machine on behalf of the [bold]RMC14 admin team[/bold], so you are held to the highest standards.
+
+  <ColorBox Color="#3d1f1f" OutlineColor="#a83232">
+    <Box Orientation="Vertical" HorizontalAlignment="Left" Margin="6">
+      [bold][color=#ff6b6b]Key rules[/color][/bold]
+      - Breaking these guidelines can lose you the role, or in extreme cases, earn a server ban.
+      - You [bold]cannot[/bold] authorize ERTs or PMC deployments. Always AHELP.
+      - [bold]Never[/bold] transmit on your radio. It is listen-only.
+      - You are [bold]epiphenomenal[/bold]: you never influence the outcome or decisions of the round.
+    </Box>
+  </ColorBox>
+
+  ## Your Role
+  You are a fax [bold]responder[/bold]. Probing a little to let players know you're there is fine, but work mostly on a [bold]"Yes, therefore"[/bold] basis.
+
+  [color=#ffcc66]This is not a very active role.[/color] Don't expect to regularly fax multiple departments; that isn't your purpose.
+
+  Your goal is to [bold]enhance the roleplay of players in the round[/bold], not to force your own story onto it. Many CLs and Correspondents join with a plan for how they want to roleplay, and being told to do something else can be jarring.
+
+  - Setting tasks or missions is fine, but [bold]check first[/bold] that the player is willing, [bold]and[/bold] keep them comparable to the [bold]Available Faxes[/bold] examples below.
+  - Players can misread what you say (and sometimes self antag). Choose your words carefully.
+  - If you don't know the person you're faxing, be precise and spell things out.
+
+  <Table Columns="2">
+    <ColorBox Color="#1f3d26" OutlineColor="#3fa35a">
+      <Box>
+        [bold][color=#7ee29a]Do[/color][/bold]
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#3d1f1f" OutlineColor="#a83232">
+      <Box>
+        [bold][color=#ff6b6b]Don't[/color][/bold]
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#1f3d26" OutlineColor="#3fa35a">
+      <Box Orientation="Vertical" HorizontalAlignment="Left" Margin="4">
+        - Alert staff to anything that may need oversight, like a CO arrest or RP standard breaches.
+        - Keep faxes professional and true to who you represent.
+        - Use the supplied document formats, so every responder feels consistent.
+        - Embody your faction. Quirks are fine, but you are of the faction first.
+        - Contact admins about anything ambiguous or tangential.
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#3d1f1f" OutlineColor="#a83232">
+      <Box Orientation="Vertical" HorizontalAlignment="Left" Margin="4">
+        - Transmit on your radio, ever.
+        - Call anyone without an [bold]exceptional[/bold] reason.
+        - Answer calls you weren't expecting.
+        - Disrupt the round or push players to antag.
+        - Authorize any ERT without an admin. (You need their help anyway.)
+      </Box>
+    </ColorBox>
+  </Table>
+
+  ## Access to the Role
+  Requires [bold]75+ hours as Corporate Liaison[/bold]. You should consistently show high-quality roleplay and strong spelling, grammar and formatting.
+
+  [color=#ff6b6b][bold]Abusing the role or ignoring these rules will result in an immediate roleban. If in doubt, contact an admin.[/bold][/color]
+
+  ## What Can I Do?
+  You hold real authority, so make measured decisions. Be creative and avoid repeating the same requests, so it stays fun for everyone involved.
+
+  Play to players' RP strengths and follow the [bold]golden map[/bold]:
+  - [bold]1.[/bold] Make contact with the related parties, or receive a fax to respond to.
+  - [bold]2.[/bold] Establish the scenario at play.
+  - [bold]3. Therefore[/bold], you or the player decide on an action.
+  - [bold]4. But[/bold], that action comes with a caveat.
+  - [bold]5. Therefore[/bold], pivot, or escalate the severity.
+  - [bold]6.[/bold] ...and so on.
+
+  ### General Guidelines
+  - Respond to relevant faxes addressed to your faction.
+  - Coordinate with other responders if a message is misdirected.
+  - Roleplay with other responders by phone or fax.
+  - Decide whether to report suspicious activity to UNMC Command, based on your faction's interests.
+  - Assume anyone trying to betray the UNMC is [bold]not[/bold] staff-approved, and discourage it unless told otherwise.
+  - Request and respond to status reports from your faction's personnel.
+
+  ## Available Faxes
+
+  ### Weston-Yamada
+  - Give the Corporate Liaison non-antagonistic objectives.
+  - Have them collect materials or data from the colony. (They need permission from research staff, so it isn't antagonistic to the UNMC.)
+  - Order interviews with survivors or station personnel.
+  - Request NDAs from involved parties.
+  - Help newer players with worldbuilding.
+  - Provide remote legal support.
+  - [color=#ff6b6b]You may [bold]not[/bold] authorize a WeYa PMC deployment. Always AHELP such requests.[/color]
+
+  ### Free Press
+  - Have the Correspondent investigate rumors of colonial instability or corporate negligence.
+  - Have them document survivors' living conditions or morale.
+  - Request a feature story about anything that's happened in the round.
+  - Have them run "Man on the Street" interviews with low-ranking marines about the battle.
+  - [color=#ff6b6b]You may [bold]not[/bold] give objectives that break Marine Law, such as stealing items or classified documents.[/color]
+
+  ## Fax Responder Types
+  <Table Columns="2">
+    <ColorBox Color="#1f3d26" OutlineColor="#3fa35a">
+      <Box>
+        [bold][color=#7ee29a]Available[/color][/bold]
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#3a3320" OutlineColor="#b08d3c">
+      <Box>
+        [bold][color=#ffcc66]Admin only[/color][/bold]
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#1f3d26" OutlineColor="#3fa35a">
+      <Box Orientation="Vertical" HorizontalAlignment="Left" Margin="4">
+        - Weston-Yamada
+        - Free Press
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#3a3320" OutlineColor="#b08d3c">
+      <Box Orientation="Vertical" HorizontalAlignment="Left" Margin="4">
+        - UNMC High Command
+        - UNMC Provost Office
+        - Colonial Marshal Bureau
+        - SPP High Command
+        - TSE Imperial Command
+        - CLF Command
+      </Box>
+    </ColorBox>
+  </Table>
+
+  ## Admin-Only Faxes
+  These are only played by the admin team.
+
+  ### UNMC High Command
+  - You are [bold]not[/bold] a Provost representative. Avoid appeals and Marine Law unless directed, and [bold]defer[/bold] to an active Provost responder or Inspector on legal matters.
+
+  ### UNMC Provost Office
+  - Respond to properly written and formatted appeal requests.
+  - CLF members permanently confined for allegiance [bold]cannot[/bold] be released without [bold]explicit[/bold] staff approval, and the staff member should send that fax themselves. They are usually held "until the end of the operation".
+  - Approve or deny CO arrest orders [bold]only if no staff are online[/bold]. Always AHELP first.
+  - Authorize transfers of marines to Colonial Marshal custody for black market investigations.
+
+  ### SPP / TSE / CLF
+  - Outside staff-led events, these factions rarely (if ever) receive faxes.
+  - Report any fax about betraying the UNMC or overt antagonism to staff via [bold]AHELP[/bold] immediately. You may keep it from other responders or CIC in character, but [bold]never[/bold] from staff.
+  - Usually leave these faxes unanswered unless a staff-run event involving your faction is active. Check with an admin first.
+</Document>
