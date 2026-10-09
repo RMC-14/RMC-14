@@ -5,4 +5,10 @@
   components:
   - type: GameRule
     minPlayers: 1
+  - type: RandomMetadata
+    nameSegments:
+    - RMCOperationPrefixes
+    - RMCOperationNames
+    - RMCOperationSuffixes
+    nameFormat: name-format-rmc-operation
   - type: CMDistressSignalRule
