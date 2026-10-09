@@ -1,3 +1,6 @@
+using Content.Shared._RMC14.Language.Prototypes;
+using Robust.Shared.Prototypes;
+
 namespace Content.Shared._RMC14.UniversalRecorder;
 
 public readonly record struct RecorderEntry(
@@ -7,5 +10,6 @@ public readonly record struct RecorderEntry(
     string Text,
     string FontId,
     int FontSize,
-    bool Bold
+    bool Bold,
+    ProtoId<LanguagePrototype>? Language = null
 );
