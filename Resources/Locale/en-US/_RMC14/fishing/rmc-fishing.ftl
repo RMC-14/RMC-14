@@ -24,3 +24,8 @@ rmc-fishing-spear-start = You prepare to catch something in the water...
 rmc-fishing-spear-fail = You fail to catch anything!
 rmc-fishing-spear-success-hand = You quickly pull out {THE($item)} with your free hand!
 rmc-fishing-spear-success-water = You quickly stab the water and {THE($item)} drifts to the surface!
+
+rmc-fishing-spear-fail-xeno = We fail to catch anything!
+rmc-fishing-spear-success-hand-xeno = We quickly pull out {THE($item)} with our tail!
+rmc-fishing-spear-success-water-xeno = We quickly strike the water and {THE($item)} drifts to the surface!
+
