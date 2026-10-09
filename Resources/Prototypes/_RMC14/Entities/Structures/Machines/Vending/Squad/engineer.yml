@@ -22,10 +22,10 @@
     - name: Handheld Defense
       choices:  { CMHandheldDefense : 1 }
       entries:
-    #    CMJIMAPlantedFlag
       - id: RMCSentry
         recommended: true
       - id: RMCTesla
+      - id: RMCPlantedFlag
       - id: RMCSentryFire
     - name: Handheld Defense Upgrade
       choices: { CMHandheldDefenseUpgrade: 1 }

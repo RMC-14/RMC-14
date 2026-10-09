@@ -17,12 +17,6 @@ public sealed partial class SentryComponent : Component
     public SentryMode Mode;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan DeployDelay = TimeSpan.FromSeconds(3);
-
-    [DataField, AutoNetworkedField]
-    public TimeSpan UndeployDelay = TimeSpan.FromSeconds(2);
-
-    [DataField, AutoNetworkedField]
     public TimeSpan MagazineDelay = TimeSpan.FromSeconds(7);
 
     [DataField, AutoNetworkedField]
@@ -33,9 +27,6 @@ public sealed partial class SentryComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntProtoId<SkillDefinitionComponent> Skill = "RMCSkillEngineer";
-
-    [DataField, AutoNetworkedField]
-    public int SkillLevel = 2;
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier? MagazineSwapSound = new SoundPathSpecifier("/Audio/_RMC14/Weapons/unload.ogg");
@@ -57,9 +48,6 @@ public sealed partial class SentryComponent : Component
 
     [DataField, AutoNetworkedField]
     public ProtoId<TagPrototype>? MagazineTag = "RMCMagazineSentry";
-
-    [DataField, AutoNetworkedField]
-    public EntProtoId<SkillDefinitionComponent> DelaySkill = "RMCSkillConstruction";
 
     [DataField, AutoNetworkedField]
     public EntityUid? Camera;
