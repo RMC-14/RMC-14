@@ -215,6 +215,8 @@
     name: rmc-xeno-trapper-name
     description: rmc-xeno-trapper-description
     popup: rmc-xeno-trapper-popup
+  - type: XenoDestrain
+    destrainTo: RMCXenoBoiler
   - type: XenoHidden
   - type: CMArmor
     xenoArmor: 0
