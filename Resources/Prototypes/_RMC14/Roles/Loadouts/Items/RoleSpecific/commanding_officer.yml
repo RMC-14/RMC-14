@@ -50,66 +50,99 @@
 
 - type: loadout
   id: GoldMatebaRMC
+  dummyEntity: RMCWeaponRevolverMatebaGold
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
       !type:RoleTimeRequirement
       role: CMJobCommandingOfficer
       time: 900000 # 250 hrs
+  equipment:
+    belt: RMCMatebaBeltLuxuriousFilled
   storage:
     back:
-    - RMCMatebaCustomizationCaseLuxuryWeapon
+    - RMCMatebaCustomizationCaseLuxury
+
+- type: loadout
+  id: SilverMatebaRMC
+  dummyEntity: RMCWeaponRevolverMatebaSilver
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobCommandingOfficer
+      time: 900000 # 250 hrs
+  equipment:
+    belt: RMCMatebaBeltLuxuriousFilledSilver
+  storage:
+    back:
+    - RMCMatebaCustomizationCaseSilver
 
 - type: loadout
   id: GoldHandcannonRMC
+  dummyEntity: RMCWeaponPistolHandcannonGold
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
       !type:RoleTimeRequirement
       role: CMJobCommandingOfficer
       time: 900000 # 250 hrs
-  storage:
-    back:
-    - RMCWeaponPistolHandcannonGold
+  equipment:
+    belt: RMCGoldHandcannonBeltFilled
 
 - type: loadout
   id: MatebaRMC
+  dummyEntity: RMCWeaponRevolverMateba
+  equipment:
+    belt: RMCMatebaBeltFilled
   storage:
     back:
-    - RMCMatebaCustomizationCaseWeapon
+    - RMCMatebaCustomizationCase
+
+- type: loadout
+  id: MatebaSpecialRMC
+  dummyEntity: RMCWeaponRevolverMatebaSpecial
+  equipment:
+    belt: RMCMatebaBeltSpecialFilled
 
 - type: loadout
   id: HandcannonRMC
-  storage:
-    back:
-    - RMCWeaponPistolHandcannonWinterWyvern
+  dummyEntity: RMCWeaponPistolHandcannonCustom
+  equipment:
+    belt: RMCPeregrineHandcannonBeltFilled
+
+- type: loadout
+  id: HandcannonPolishedRMC
+  dummyEntity: RMCWeaponPistolHandcannonPolished
+  equipment:
+    belt: RMCPolishedHandcannonBeltFilled
 
 - type: loadout
   id: Mateba2006MRMC
-  storage:
-    back:
-    - RMCWeaponRevolverMateba2006M
+  dummyEntity: RMCWeaponRevolverMateba2006M
+  equipment:
+    belt: RMCMatebaBeltFilled
 
 - type: loadout
   id: Mateba2006MRMCGold
-  storage:
-    back:
-    - RMCWeaponRevolverMateba2006MGold
+  dummyEntity: RMCWeaponRevolverMateba2006MGold
+  equipment:
+    belt: RMCMatebaBeltFilled
 
 - type: loadout
   id: Mateba2006MRMCBlackGold
-  storage:
-    back:
-    - RMCWeaponRevolverMateba2006MBlackGold
+  dummyEntity: RMCWeaponRevolverMateba2006MBlackGold
+  equipment:
+    belt: RMCMatebaBeltFilled
 
 - type: loadout
   id: Mateba2006MRMCSilver
-  storage:
-    back:
-    - RMCWeaponRevolverMateba2006MSilver
+  dummyEntity: RMCWeaponRevolverMateba2006MSilver
+  equipment:
+    belt: RMCMatebaBeltFilled
 
 - type: loadout
   id: M1911CRMC
-  storage:
-    back:
-    - RMCWeaponPistolM1911C
+  dummyEntity: RMCWeaponPistolM1911C
+  equipment:
+    belt: RMCM1911CBeltFilledAmmo

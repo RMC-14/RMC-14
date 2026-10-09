@@ -69,6 +69,7 @@
     useAimDirection: true
   - type: HardpointVisual
     vehicleState: frontalcannon_0
+    damagedVehicleState: frontalcannon_1
 
 - type: entity
   parent: RMCAPCHardpointBase
@@ -118,6 +119,7 @@
 
   - type: HardpointVisual
     vehicleState: dualcannon_0
+    damagedVehicleState: dualcannon_1
 
 - type: entity
   parent: RMCAPCHardpointBase
@@ -137,6 +139,7 @@
     maxIntegrity: 100
   - type: HardpointVisual
     vehicleState: comms_relay_0
+    damagedVehicleState: comms_relay_1
   - type: VehicleSensor
     range: 40
 
@@ -159,7 +162,6 @@
   - type: VehicleTurret
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
-  - type: GunIgnorePrediction
   - type: Gun
     fireRate: 0.5
     projectileSpeed: 20
@@ -191,6 +193,7 @@
     useAimDirection: true
   - type: HardpointVisual
     vehicleState: flare_launcher_0
+    damagedVehicleState: flare_launcher_1
 
 - type: entity
   parent: RMCAPCHardpointBase
@@ -210,6 +213,7 @@
     maxIntegrity: 100
   - type: HardpointVisual
     vehicleState: freight_0
+    damagedVehicleState: freight_1
 
 - type: entity
   parent: BaseItem

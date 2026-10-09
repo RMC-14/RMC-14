@@ -286,7 +286,7 @@ public sealed class TackleSystem : EntitySystem
             selfPopup,
             targetPopup,
             other => Loc.GetString("rmc-disarm-attempt-others",
-                ("performerName", Identity.Name(other, EntityManager, user)),
+                ("performerName", Identity.Name(user, EntityManager, other)),
                 ("targetName", Identity.Name(target, EntityManager, other)))
         );
     }

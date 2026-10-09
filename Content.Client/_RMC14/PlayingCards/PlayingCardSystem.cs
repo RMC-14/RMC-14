@@ -2,7 +2,6 @@ using System.Numerics;
 using Content.Shared._RMC14.PlayingCards;
 using Content.Shared.Hands;
 using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
@@ -229,13 +228,13 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
         }
     }
 
-    public override void FlipCard(Entity<PlayingCardComponent> card, EntityUid user)
+    protected override void FlipCard(Entity<PlayingCardComponent> card, EntityUid user)
     {
         base.FlipCard(card, user);
         UpdateCardSprite(card);
     }
 
-    public override void FlipHand(Entity<PlayingCardHandComponent> hand, EntityUid user)
+    protected override void FlipHand(Entity<PlayingCardHandComponent> hand, EntityUid user)
     {
         base.FlipHand(hand, user);
         UpdateHandSprite(hand);

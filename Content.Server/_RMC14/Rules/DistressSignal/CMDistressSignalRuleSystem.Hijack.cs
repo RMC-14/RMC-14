@@ -81,6 +81,8 @@ public sealed partial class CMDistressSignalRuleSystem
                 if (comp.CountedInSlots)
                     larva++;
 
+                RemComp<CanBeLarvaQueuedComponent>(xeno);
+
                 //Ghost player and send message
                 if (TryComp(xeno, out ActorComponent? actor))
                 {
@@ -98,6 +100,9 @@ public sealed partial class CMDistressSignalRuleSystem
 
                     var origin = _transform.GetMoverCoordinates(xeno);
                     _popup.PopupCoordinates(Loc.GetString("rmc-xeno-hibernation"), origin, Filter.SinglePlayer(session), true, PopupType.MediumXeno);
+
+                    if (comp.CountedInSlots && _hive.GetHive(xeno) is { } hive)
+                        _larvaQueue.AddToLarvaQueueFront(hive, session.UserId);
                 }
 
                 QueueDel(xeno);

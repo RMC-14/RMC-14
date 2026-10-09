@@ -6,7 +6,7 @@
   ranks:
     RMCRankSPPMladshiySerzhant: []
   icon: "RMCJobIconSPPEngineer"
-  spawnMenuRoleName: SPP Airborne Sapper (Survivor)
+  spawnMenuRoleName: SPP Airborne Sapper (Trijent Special Survivor)
   special:
   - !type:AddComponentSpecial
     components:
@@ -24,6 +24,17 @@
         RMCSkillMedical: 1
         RMCSkillJtac: 1
         RMCSkillEndurance: 2
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - German
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - German
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
     - type: IntelRescueSurvivorObjective
     - type: AssignSquad
       squad: SquadSPP

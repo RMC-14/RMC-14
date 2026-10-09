@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from CMSS13 https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/vehicles/tank.dmi with some sprites from Noctrn",
+  "copyright": "Taken from CMSS13 https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/vehicles/tank.dmi, tank_base, tank_turret_0 and wheels_0/1 by github noctyrnal",
   "size": {
     "x": 128,
     "y": 128
@@ -230,10 +230,6 @@
     },
     {
       "name": "damaged_turret",
-      "directions": 4
-    },
-    {
-      "name": "loaded_mg",
       "directions": 4
     },
     {

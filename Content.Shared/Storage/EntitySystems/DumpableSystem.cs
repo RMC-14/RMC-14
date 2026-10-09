@@ -1,4 +1,6 @@
 using System.Linq;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Database;
 using Content.Shared.Disposal;
 using Content.Shared.Disposal.Components;
 using Content.Shared.Disposal.Unit;
@@ -24,6 +26,7 @@ public sealed class DumpableSystem : EntitySystem
     [Dependency] private readonly SharedDisposalUnitSystem _disposalUnitSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!; //RMC14
 
     private EntityQuery<ItemComponent> _itemQuery;
 
@@ -143,6 +146,8 @@ public sealed class DumpableSystem : EntitySystem
     {
         if (args.Handled || args.Cancelled || !TryComp<StorageComponent>(uid, out var storage) || storage.Container.ContainedEntities.Count == 0)
             return;
+
+        _adminLog.Add(LogType.Drop, $"{ToPrettyString(args.User):actor} dumped {ToPrettyString(args.Target):entity}"); //RMC14
 
         var dumpQueue = new Queue<EntityUid>(storage.Container.ContainedEntities);
 

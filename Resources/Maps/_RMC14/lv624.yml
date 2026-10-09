@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/16/2026 11:24:29
-  entityCount: 24081
+  time: 06/27/2026 14:35:00
+  entityCount: 24084
 maps:
 - 1
 grids:
@@ -42780,6 +42780,14 @@ entities:
       parent: 1
     - type: SpriteSetRenderOrder
       offset: -0.5,-1.5
+  - uid: 24082
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -58.5,-82.5
+      parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.7,-0.4
 - proto: CMApcNoPower
   entities:
   - uid: 143
@@ -42948,6 +42956,14 @@ entities:
       parent: 1
     - type: SpriteSetRenderOrder
       offset: -0.5,-1.5
+  - uid: 24083
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 49.5,-87.5
+      parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.7,-0.4
 - proto: CMAutolathe
   entities:
   - uid: 164
@@ -44833,7 +44849,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 3891.1294422
     - type: Door
-      secondsUntilStateChange: -34540.55
+      secondsUntilStateChange: -34832.777
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -44851,7 +44867,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 3891.1294422
     - type: Door
-      secondsUntilStateChange: -34540.55
+      secondsUntilStateChange: -34832.777
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -162724,6 +162740,13 @@ entities:
       pos: -23.5,-76.5
       parent: 1
     - type: InsideEntityStorage
+- proto: VehicleVan
+  entities:
+  - uid: 24084
+    components:
+    - type: Transform
+      pos: -39,-82
+      parent: 1
 - proto: VoiceTrigger
   entities:
   - uid: 22836
