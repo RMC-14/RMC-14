@@ -59,6 +59,9 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
     public readonly Dictionary<RMCPlaytimeMedalType, EntProtoId>? Medals;
 
     [DataField]
+    public readonly Dictionary<ProtoId<RankPrototype>, EntProtoId>? Pins;
+
+    [DataField]
     public float RoleWeight;
 
     [DataField]
