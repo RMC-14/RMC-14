@@ -1022,6 +1022,8 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/pilot_fighter.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/pilot_fighter.rsi
+    equipDelay: 1
+    unequipDelay: 0.5
   - type: CMArmor
     melee: 5
     bullet: 15
@@ -1032,6 +1034,3 @@
     sprintModifier: 0.897
   - type: ItemCamouflage
     camouflageVariations: { }
-  - type: Clothing
-    equipDelay: 1
-    unequipDelay: 0.5

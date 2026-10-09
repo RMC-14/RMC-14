@@ -32,11 +32,11 @@
 
 - type: entity
   parent: RMCSpawnerCorpse
-  id: RMCSpawnerCorpseUNMCMilitaryPoliceRandom
-  name: Corpse Spawner - UNMC Base Police
+  id: RMCSpawnerCorpseUNMCVeteranRiflemanRandom
+  name: Corpse Spawner - UNMC Veteran Rifleman
   components:
   - type: CorpseSpawner
-    spawn: RMCCorpseUNMCMilitaryPoliceRandom
+    spawn: RMCCorpseUNMCVeteranRiflemanRandom
 
 - type: entity
   parent: RMCSpawnerCorpse

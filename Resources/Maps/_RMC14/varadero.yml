@@ -216986,7 +216986,7 @@ entities:
     - type: Transform
       pos: 18.5,127.5
       parent: 1
-- proto: RMCSpawnerCorpseUNMCMilitaryPoliceRandom
+- proto: RMCSpawnerCorpseUNMCVeteranRiflemanRandom
   entities:
   - uid: 30079
     components:
