@@ -309,10 +309,10 @@ public sealed class XenoHudOverlay : Overlay
     private void DrawRank(in OverlayDrawArgs args, Matrix3x2 scaleMatrix, Matrix3x2 rotationMatrix)
     {
         var handle = args.WorldHandle;
-        var ranks = _entity.EntityQueryEnumerator<XenoRankComponent, SpriteComponent, TransformComponent>();
-        while (ranks.MoveNext(out var uid, out var comp, out var sprite, out var xform))
+        var ranks = _entity.EntityQueryEnumerator<XenoRankComponent, XenoComponent, SpriteComponent, TransformComponent>();
+        while (ranks.MoveNext(out var uid, out var comp, out var xeno, out var sprite, out var xform))
         {
-            if (comp.Rank < 2 || comp.Rank > 6 || _xenoMaturingQuery.HasComp(uid))
+            if (comp.Rank < 2 || comp.Rank > 9 || _xenoMaturingQuery.HasComp(uid))
                 continue;
 
             if (xform.MapID != args.MapId)
@@ -338,11 +338,16 @@ public sealed class XenoHudOverlay : Overlay
             var icon = new Rsi(_rsiPath, $"hudxenoupgrade{comp.Rank}");
             var texture = _sprite.GetFrame(icon, _timing.CurTime);
 
-            var yOffset = (bounds.Height + sprite.Offset.Y) / 2f - (float) texture.Height / EyeManager.PixelsPerMeter * bounds.Height;
-            var xOffset = (bounds.Width + sprite.Offset.X) / 2f - (float) texture.Width / EyeManager.PixelsPerMeter * bounds.Width;
+            var texW = (float)texture.Width / EyeManager.PixelsPerMeter;
+            var texH = (float)texture.Height / EyeManager.PixelsPerMeter;
+            var scale = xeno.HudRankIconScale;
+            var scaledW = texW * scale;
+            var scaledH = texH * scale;
 
-            var position = new Vector2(xOffset, yOffset);
-            handle.DrawTexture(texture, position);
+            var xLeft = (bounds.Width + sprite.Offset.X) / 2f - texW * bounds.Width + xeno.HudOffset.X + xeno.HudRankIconOffset.X;
+            var yTop = (bounds.Height + sprite.Offset.Y) / 2f - texH * bounds.Height + xeno.HudOffset.Y + texH + xeno.HudRankIconOffset.Y;
+
+            handle.DrawTextureRect(texture, new Box2(xLeft, yTop - scaledH, xLeft + scaledW, yTop));
         }
     }
 
