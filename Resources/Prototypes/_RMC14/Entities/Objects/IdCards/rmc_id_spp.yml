@@ -69,6 +69,8 @@
   - type: ItemIFF
     factions:
     - FactionHalcyon
+    - FactionSurvivor
+    - FactionSPP
   - type: Access
     groups:
     - Colony
