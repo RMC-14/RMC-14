@@ -1,0 +1,4 @@
+- type: shader
+  id: RMCAnnouncementCRT
+  kind: source
+  path: "/Textures/_RMC14/Shaders/announcement_crt.swsl"

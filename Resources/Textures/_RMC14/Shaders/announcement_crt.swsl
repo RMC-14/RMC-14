@@ -1,0 +1,140 @@
+light_mode unshaded;
+
+uniform highp vec2 size;
+uniform highp float elapsed;
+uniform highp vec4 effects;
+uniform highp vec4 scanline;
+uniform highp vec4 scanlineAnimation;
+uniform highp vec4 scanlineColor;
+uniform highp vec4 glitchColor;
+uniform highp float glitchChance;
+uniform highp vec4 noise;
+uniform highp float noiseSeed;
+uniform highp vec4 staticSize;
+uniform highp vec2 staticEffect;
+uniform highp vec4 vignette;
+uniform highp vec2 vignetteEdges;
+uniform highp vec4 vignetteColor;
+uniform highp vec4 chromatic;
+uniform highp int chromaticCount;
+uniform highp vec2 chromaticAnimation;
+uniform highp vec4 flicker;
+uniform highp vec4 flickerColor;
+uniform highp vec4 glowColor;
+
+highp float randomValue(highp vec2 point)
+{
+    return fract(sin(dot(point, vec2(12.9898, 78.233))) * 43758.5453);
+}
+
+highp vec4 compositeOver(highp vec4 base, highp vec4 overlay)
+{
+    overlay.a = clamp(overlay.a, 0.0, 1.0);
+    highp float alpha = overlay.a + base.a * (1.0 - overlay.a);
+    if (alpha <= 0.0)
+        return vec4(0.0);
+
+    highp vec3 color = (overlay.rgb * overlay.a + base.rgb * base.a * (1.0 - overlay.a)) / alpha;
+    return vec4(color, alpha);
+}
+
+bool inRectangle(highp vec2 pixel, highp vec2 origin, highp vec2 dimensions)
+{
+    return pixel.x >= origin.x && pixel.y >= origin.y &&
+        pixel.x < origin.x + dimensions.x && pixel.y < origin.y + dimensions.y;
+}
+
+void fragment()
+{
+    highp vec2 pixel = UV * size;
+    highp vec4 effect = vec4(0.0);
+    highp float frame = floor(elapsed * 60.0);
+
+    if (effects.x > 0.0)
+    {
+        highp float extent = min(size.x, size.y) * vignette.x;
+        highp float corner = extent * vignetteEdges.x;
+        highp float edge = extent * 0.3;
+        highp vec2 nearestEdge = min(pixel, size - pixel);
+        highp float alpha = vignette.y + sin(elapsed * vignette.z) * vignette.w;
+        if (nearestEdge.x < corner && nearestEdge.y < corner)
+            effect = compositeOver(effect, vec4(vignetteColor.rgb, alpha));
+        else if ((nearestEdge.x < edge && nearestEdge.y >= corner) ||
+                 (nearestEdge.y < edge && nearestEdge.x >= corner))
+            effect = compositeOver(effect, vec4(vignetteColor.rgb, alpha * vignetteEdges.y));
+    }
+
+    if (effects.y > 0.0)
+    {
+        highp float cellSize = max(0.1, noise.w);
+        highp vec2 cell = floor(pixel / cellSize);
+        highp vec2 seed = cell + vec2(noiseSeed * 17.0, noiseSeed * 31.0);
+        if (randomValue(seed) < noise.x * 0.001 * cellSize * cellSize)
+        {
+            highp float particleSize = mix(noise.z, noise.w, randomValue(seed + vec2(1.0, 2.0)));
+            highp vec2 origin = cell * cellSize + vec2(
+                randomValue(seed + vec2(3.0, 4.0)), randomValue(seed + vec2(5.0, 6.0))) * max(0.0, cellSize - particleSize);
+            if (inRectangle(pixel, origin, vec2(particleSize)))
+            {
+                highp float brightness = randomValue(seed + vec2(7.0, 8.0)) > 0.7 ? 1.0 : 0.5;
+                highp float alpha = randomValue(seed + vec2(9.0, 10.0)) * noise.y;
+                effect = compositeOver(effect, vec4(vec3(brightness), alpha));
+            }
+        }
+
+        if (randomValue(vec2(noiseSeed, 11.0)) < staticEffect.x)
+        {
+            highp vec2 origin = vec2(randomValue(vec2(noiseSeed, 12.0)), randomValue(vec2(noiseSeed, 13.0))) * size;
+            highp vec2 dimensions = vec2(
+                mix(staticSize.x, staticSize.y, randomValue(vec2(noiseSeed, 14.0))),
+                mix(staticSize.z, staticSize.w, randomValue(vec2(noiseSeed, 15.0))));
+            if (inRectangle(pixel, origin, dimensions))
+                effect = compositeOver(effect, vec4(1.0, 1.0, 1.0, staticEffect.y));
+        }
+    }
+
+    if (effects.z > 0.0)
+    {
+        highp float lineY = floor((pixel.y + scanline.z) / scanline.x) * scanline.x - scanline.z;
+        highp float wave = sin(lineY / size.y * 3.14159265 * scanlineAnimation.x + elapsed * 0.5) * scanlineAnimation.y;
+        if (lineY >= 0.0 && pixel.y - lineY < scanline.y &&
+            pixel.x >= max(0.0, wave) && pixel.x < min(size.x, size.x + wave))
+        {
+            highp float intensity = 1.0 - scanlineAnimation.z +
+                sin(lineY * 0.05 + elapsed * scanlineAnimation.w) * scanlineAnimation.z;
+            effect = compositeOver(effect, vec4(scanlineColor.rgb, scanline.w * intensity));
+        }
+
+        if (randomValue(vec2(frame, 21.0)) < glitchChance)
+        {
+            highp float glitchY = randomValue(vec2(frame, 22.0)) * size.y;
+            if (pixel.y >= glitchY && pixel.y < glitchY + scanline.y)
+                effect = compositeOver(effect, glitchColor);
+        }
+    }
+
+    if (effects.w > 0.0)
+    {
+        highp float offset = chromatic.x * (sin(elapsed * chromaticAnimation.y) * 0.5 + 0.5);
+        for (int i = 0; i < chromaticCount; i++)
+        {
+            highp vec2 seed = vec2(frame, float(i) + 30.0);
+            if (randomValue(seed) < chromaticAnimation.x)
+            {
+                highp vec2 origin = vec2(randomValue(seed + vec2(1.0, 0.0)), randomValue(seed + vec2(2.0, 0.0))) * size;
+                highp float particleSize = mix(chromatic.y, chromatic.z, randomValue(seed + vec2(3.0, 0.0)));
+                if (inRectangle(pixel, origin + vec2(offset, 0.0), vec2(particleSize)))
+                    effect = compositeOver(effect, vec4(1.0, 0.0, 0.0, chromatic.w));
+                if (inRectangle(pixel, origin - vec2(offset, 0.0), vec2(particleSize)))
+                    effect = compositeOver(effect, vec4(0.0, 0.0, 1.0, chromatic.w));
+            }
+        }
+    }
+
+    if (sin(elapsed * 5.0) * 0.5 + 0.5 > flicker.x && randomValue(vec2(frame, 41.0)) < flicker.y)
+        effect = compositeOver(effect, vec4(flickerColor.rgb, flicker.z));
+    if (randomValue(vec2(frame, 42.0)) < flicker.w)
+        effect = compositeOver(effect, vec4(glowColor.rgb, randomValue(vec2(frame, 43.0)) * glowColor.a));
+
+    COLOR = zTexture(UV) * effect;
+}
