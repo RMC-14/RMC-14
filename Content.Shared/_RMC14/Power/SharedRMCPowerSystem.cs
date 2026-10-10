@@ -130,6 +130,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         SubscribeLocalEvent<RMCPowerReceiverComponent, ItemToggledEvent>(OnReceiverItemToggled);
 
         SubscribeLocalEvent<RMCFusionReactorComponent, MapInitEvent>(OnFusionReactorMapInit);
+        SubscribeLocalEvent<RMCFusionReactorComponent, EntityUnpausedEvent>(OnFusionReactorUnpaused);
         SubscribeLocalEvent<RMCFusionReactorComponent, EntParentChangedMessage>(OnFusionReactorMoved);
         SubscribeLocalEvent<RMCFusionReactorComponent, ComponentRemove>(OnFusionReactorRemoved);
         SubscribeLocalEvent<RMCFusionReactorComponent, EntityTerminatingEvent>(OnFusionReactorRemoved);
@@ -1342,6 +1343,19 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             var ev = new PowerChangedEvent(false, 0);
             UpdateReceiverPower(ent, ref ev);
         }
+    }
+
+    private void OnFusionReactorUnpaused(Entity<RMCFusionReactorComponent> ent, ref EntityUnpausedEvent args)
+    {
+        // Zero marks an unscheduled timer and must stay zero on the first map initialization.
+        if (ent.Comp.NextRampAt != TimeSpan.Zero)
+            ent.Comp.NextRampAt += args.PausedTime;
+        if (ent.Comp.NextFuelUseAt != TimeSpan.Zero)
+            ent.Comp.NextFuelUseAt += args.PausedTime;
+        if (ent.Comp.NextFailureCheckAt != TimeSpan.Zero)
+            ent.Comp.NextFailureCheckAt += args.PausedTime;
+        if (ent.Comp.OverloadNextFeedbackAt != TimeSpan.Zero)
+            ent.Comp.OverloadNextFeedbackAt += args.PausedTime;
     }
 
     private void OnFusionReactorMapInit(Entity<RMCFusionReactorComponent> ent, ref MapInitEvent args)

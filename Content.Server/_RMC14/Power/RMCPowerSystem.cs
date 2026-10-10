@@ -663,6 +663,13 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
         _trackedStorages.RemoveWhere(uid => TerminatingOrDeleted(uid) || !_storageQuery.HasComp(uid));
     }
 
+    private bool CanSimulatePower(EntityUid uid)
+    {
+        return TryComp<MetaDataComponent>(uid, out var metadata) &&
+               metadata.EntityLifeStage == EntityLifeStage.MapInitialized &&
+               !metadata.EntityPaused;
+    }
+
     private void UpdateMonitors(Dictionary<RMCPowerNetworkKey, Network> networks)
     {
         foreach (var uid in _trackedMonitors.Order())
@@ -722,7 +729,8 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
     {
         foreach (var uid in _trackedSources.Order())
         {
-            if (!_sourceQuery.TryComp(uid, out var source) || !_fusionReactorQuery.TryComp(uid, out var reactor))
+            if (!CanSimulatePower(uid) ||
+                !_sourceQuery.TryComp(uid, out var source) || !_fusionReactorQuery.TryComp(uid, out var reactor))
                 continue;
 
             var previousOutput = reactor.CurrentOutput;
@@ -863,7 +871,7 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
 
         foreach (var uid in _trackedSources.Order())
         {
-            if (!_sourceQuery.TryComp(uid, out var source))
+            if (!CanSimulatePower(uid) || !_sourceQuery.TryComp(uid, out var source))
                 continue;
 
             source.CurrentPower = 0;
@@ -890,7 +898,8 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
 
         foreach (var uid in _trackedStorages.Order())
         {
-            if (!_storageQuery.TryComp(uid, out var storage) ||
+            if (!CanSimulatePower(uid) ||
+                !_storageQuery.TryComp(uid, out var storage) ||
                 !_batteryQuery.TryComp(uid, out var battery))
             {
                 continue;
@@ -915,7 +924,8 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
 
         foreach (var uid in _trackedApcs.Order())
         {
-            if (!_apcQuery.TryComp(uid, out var apc) ||
+            if (!CanSimulatePower(uid) ||
+                !_apcQuery.TryComp(uid, out var apc) ||
                 !_areaPowerQuery.TryComp(apc.Area, out var area) ||
                 !TryGetPowerNetwork(uid, out var key))
             {
@@ -1438,7 +1448,7 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
     {
         foreach (var uid in _trackedSources.Order())
         {
-            if (TerminatingOrDeleted(uid) ||
+            if (!CanSimulatePower(uid) ||
                 !_fusionReactorQuery.TryComp(uid, out var reactor) ||
                 !TryComp(uid, out TransformComponent? xform))
             {
