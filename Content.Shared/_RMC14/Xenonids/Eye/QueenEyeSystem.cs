@@ -1,10 +1,12 @@
-using System.Numerics;
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Shields;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Watch;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Coordinates;
+using Content.Shared.Damage;
 using Content.Shared.Mind;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
@@ -14,6 +16,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Threading;
 using Robust.Shared.Timing;
+using System.Numerics;
 
 namespace Content.Shared._RMC14.Xenonids.Eye;
 
@@ -68,6 +71,7 @@ public sealed class QueenEyeSystem : EntitySystem
         SubscribeLocalEvent<QueenEyeActionComponent, XenoWatchEvent>(OnQueenEyeActionWatch);
         SubscribeLocalEvent<QueenEyeActionComponent, XenoUnwatchEvent>(OnQueenEyeActionUnwatch);
         SubscribeLocalEvent<QueenEyeActionComponent, XenoOvipositorChangedEvent>(OnQueenEyeOvipositorChanged);
+        SubscribeLocalEvent<QueenEyeActionComponent, DamageChangedEvent>(OnQueenDamage);
 
         SubscribeLocalEvent<QueenEyeComponent, XenoUnwatchEvent>(OnQueenEyeUnwatch);
         SubscribeLocalEvent<QueenEyeComponent, MoveEvent>(OnQueenEyeMove);
@@ -140,6 +144,14 @@ public sealed class QueenEyeSystem : EntitySystem
             return;
 
         RemCompDeferred<XenoWatchingComponent>(eye);
+    }
+
+    private void OnQueenDamage(Entity<QueenEyeActionComponent> ent, ref DamageChangedEvent args)
+    {
+        if (!args.DamageIncreased)
+            return;
+
+        RemoveQueenEye(ent);
     }
 
     private void OnQueenEyeOvipositorChanged(Entity<QueenEyeActionComponent> ent, ref XenoOvipositorChangedEvent args)
