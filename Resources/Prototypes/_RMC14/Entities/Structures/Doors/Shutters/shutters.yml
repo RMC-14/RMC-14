@@ -69,8 +69,9 @@
     arc: 360
   - type: ApcPowerReceiver
   - type: RMCPowerReceiver
-    idleLoad: 1
-    activeLoad: 20
+    idleLoad: 0
+    activeLoad: 0
+    # CM13 pod doors require powered environment access but have no modeled energy draw.
     channel: Environment
   - type: RMCOpenOnAlertLevel
   - type: RMCMesonsNonviewable

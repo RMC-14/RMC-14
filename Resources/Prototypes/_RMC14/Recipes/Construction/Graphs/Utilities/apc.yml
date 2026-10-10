@@ -10,23 +10,15 @@
       - material: CMSteel
         amount: 2
         doAfter: 0
-      - material: RMCCable
-        amount: 10
-        doAfter: 2
 
   - node: apcFrame
     entity: CMApcFrame
     edges:
-    - to: apc
+    - to: apcFrameWired
       steps:
-      - component: ApcElectronics
-        name: "power control module"
-        icon:
-          sprite: "_RMC14/Objects/Misc/module.rsi"
-          state: "power_mod"
-        doAfter: 1.5
-      - tool: Screwing
-        doAfter: 0
+      - material: RMCCable
+        amount: 10
+        doAfter: 2
 
     - to: start
       completed:
@@ -38,17 +30,45 @@
       - tool: Welding
         doAfter: 5
 
-  - node: apc
-    entity: CMApcConstructed
+  - node: apcFrameWired
+    entity: CMApcFrameWired
     edges:
+    - to: apcFrameElectronics
+      steps:
+      - component: ApcElectronics
+        name: "power control module"
+        icon:
+          sprite: "_RMC14/Objects/Misc/module.rsi"
+          state: "power_mod"
+        doAfter: 1.5
+
     - to: apcFrame
+      completed:
+      - !type:GivePrototype
+        prototype: RMCCableCoil10
+        amount: 1
+      steps:
+      - tool: Cutting
+        doAfter: 5
+
+  - node: apcFrameElectronics
+    entity: CMApcFrameElectronics
+    edges:
+    - to: apc
+      conditions:
+      - !type:RMCApcAreaAvailable
+      steps:
+      - tool: Screwing
+        doAfter: 2
+
+    - to: apcFrameWired
       completed:
       - !type:GivePrototype
         prototype: CMAPCElectronics
         amount: 1
-      conditions:
-      - !type:WirePanel
-        open: true
       steps:
       - tool: Prying
         doAfter: 5
+
+  - node: apc
+    entity: CMApcConstructed

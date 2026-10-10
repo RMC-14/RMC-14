@@ -96,7 +96,7 @@
     - state: relay
       map: ["enum.PowerDeviceVisualLayers.Powered"]
   - type: RMCPowerReceiver
-    idleLoad: 25
+    idleLoad: 600
     activeLoad: 0
 
 - type: entity
@@ -120,7 +120,7 @@
     - state: processor
       map: ["enum.PowerDeviceVisualLayers.Powered"]
   - type: RMCPowerReceiver
-    idleLoad: 25
+    idleLoad: 600
     activeLoad: 0
 
 - type: entity
@@ -164,6 +164,7 @@
   - type: RMCPowerReceiver
     idleLoad: 0
     activeLoad: 0
+    # CM13's OS server box is a non-consuming prop; RMC only gates its powered visual.
     channel: Equipment
 
 - type: entity
@@ -232,6 +233,7 @@
   - type: RMCPowerReceiver
     idleLoad: 0
     activeLoad: 0
+    # Decorative computer with upstream power explicitly disabled.
 
 - type: entity
   id: RMCTelecomSensorComputer2
@@ -264,6 +266,7 @@
   - type: RMCPowerReceiver
     idleLoad: 0
     activeLoad: 0
+    # Decorative computer with upstream power explicitly disabled.
 
 - type: entity
   id: RMCTelecomSensorComputer3
@@ -296,6 +299,7 @@
   - type: RMCPowerReceiver
     idleLoad: 0
     activeLoad: 0
+    # Decorative computer with upstream power explicitly disabled.
 
 - type: entity
   id: RMCTelecomMappingComputer
@@ -326,6 +330,7 @@
   - type: RMCPowerReceiver
     idleLoad: 0
     activeLoad: 0
+    # Decorative computer with upstream power explicitly disabled.
 
 - type: entity
   id: RMCTelecomMissionPlanningSystem
@@ -358,6 +363,7 @@
   - type: RMCPowerReceiver
     idleLoad: 0
     activeLoad: 0
+    # Decorative computer with upstream power explicitly disabled.
 
 - type: entity
   id: RMCTelecomServerRack

@@ -99,7 +99,11 @@
     containers:
       board: [ BrigTimerElectronics ]
   - type: ApcPowerReceiver
-    needsPower: false # TODO RMC14 power
+    needsPower: true # RMC14
+  - type: RMCPowerReceiver # RMC14
+    idleLoad: 100
+    activeLoad: 0
+    channel: Equipment
 
 # Construction Frame
 

@@ -24,6 +24,7 @@ using Content.Server.Construction.Completions;
 using Content.Server.Jittering;
 using Content.Shared.Jittering;
 using Content.Shared.Power;
+using Content.Shared._RMC14.Power; // RMC14
 
 namespace Content.Server.Kitchen.EntitySystems
 {
@@ -42,6 +43,7 @@ namespace Content.Server.Kitchen.EntitySystems
         [Dependency] private readonly SharedDestructibleSystem _destructible = default!;
         [Dependency] private readonly RandomHelperSystem _randomHelper = default!;
         [Dependency] private readonly JitteringSystem _jitter = default!;
+        [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!; // RMC14
 
         public override void Initialize()
         {
@@ -50,7 +52,7 @@ namespace Content.Server.Kitchen.EntitySystems
             SubscribeLocalEvent<ActiveReagentGrinderComponent, ComponentStartup>(OnActiveGrinderStart);
             SubscribeLocalEvent<ActiveReagentGrinderComponent, ComponentRemove>(OnActiveGrinderRemove);
             SubscribeLocalEvent<ReagentGrinderComponent, ComponentStartup>((uid, _, _) => UpdateUiState(uid));
-            SubscribeLocalEvent((EntityUid uid, ReagentGrinderComponent _, ref PowerChangedEvent _) => UpdateUiState(uid));
+            SubscribeLocalEvent<ReagentGrinderComponent, PowerChangedEvent>(OnPowerChanged);
             SubscribeLocalEvent<ReagentGrinderComponent, InteractUsingEvent>(OnInteractUsing);
 
             SubscribeLocalEvent<ReagentGrinderComponent, EntInsertedIntoContainerMessage>(OnContainerModified);
@@ -77,6 +79,12 @@ namespace Content.Server.Kitchen.EntitySystems
             var query = EntityQueryEnumerator<ActiveReagentGrinderComponent, ReagentGrinderComponent>();
             while (query.MoveNext(out var uid, out var active, out var reagentGrinder))
             {
+                if (!_rmcPower.IsPowered(uid))
+                {
+                    active.EndTime += TimeSpan.FromSeconds(frameTime);
+                    continue;
+                }
+
                 if (active.EndTime > _timing.CurTime)
                     continue;
 
@@ -140,12 +148,39 @@ namespace Content.Server.Kitchen.EntitySystems
 
         private void OnActiveGrinderStart(Entity<ActiveReagentGrinderComponent> ent, ref ComponentStartup args)
         {
+            _rmcPower.SetPowerMode(ent.Owner, RMCPowerMode.Active); // RMC14
             _jitter.AddJitter(ent, -10, 100);
         }
 
         private void OnActiveGrinderRemove(Entity<ActiveReagentGrinderComponent> ent, ref ComponentRemove args)
         {
+            _rmcPower.SetPowerMode(ent.Owner, RMCPowerMode.Idle); // RMC14
             RemComp<JitteringComponent>(ent);
+        }
+
+        private void OnPowerChanged(Entity<ReagentGrinderComponent> ent, ref PowerChangedEvent args)
+        {
+            UpdateUiState(ent);
+            if (!TryComp(ent, out ActiveReagentGrinderComponent? active))
+                return;
+
+            if (!args.Powered)
+            {
+                ent.Comp.AudioStream = _audioSystem.Stop(ent.Comp.AudioStream);
+                RemComp<JitteringComponent>(ent);
+                return;
+            }
+
+            if (ent.Comp.AudioStream == null)
+            {
+                var sound = active.Program == GrinderProgram.Grind
+                    ? ent.Comp.GrindSound
+                    : ent.Comp.JuiceSound;
+                ent.Comp.AudioStream = _audioSystem.PlayPvs(sound, ent,
+                    AudioParams.Default.WithPitchScale(1 / ent.Comp.WorkTimeMultiplier))?.Entity;
+            }
+
+            _jitter.AddJitter(ent, -10, 100);
         }
 
         private void OnEntRemoveAttempt(Entity<ReagentGrinderComponent> entity, ref ContainerIsRemovingAttemptEvent args)
