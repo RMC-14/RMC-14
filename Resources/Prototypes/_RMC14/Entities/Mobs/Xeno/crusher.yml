@@ -69,7 +69,7 @@
       groups:
         Brute: 48
   - type: XenoMeleeSlow
-    slowTime: 2
+    slowTime: 3.5
   - type: Tackle
     chance: 0.25
   - type: MovementSpeedModifier

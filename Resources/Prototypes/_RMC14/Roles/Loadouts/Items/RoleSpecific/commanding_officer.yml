@@ -50,36 +50,69 @@
 
 - type: loadout
   id: GoldMatebaRMC
+  dummyEntity: RMCWeaponRevolverMatebaGold
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
       !type:RoleTimeRequirement
       role: CMJobCommandingOfficer
       time: 900000 # 250 hrs
+  equipment:
+    belt: RMCMatebaBeltLuxuriousFilled
   storage:
     back:
-    - RMCMatebaCustomizationCaseLuxuryWeapon
+    - RMCMatebaCustomizationCaseLuxury
+
+- type: loadout
+  id: SilverMatebaRMC
+  dummyEntity: RMCWeaponRevolverMatebaSilver
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobCommandingOfficer
+      time: 900000 # 250 hrs
+  equipment:
+    belt: RMCMatebaBeltLuxuriousFilledSilver
+  storage:
+    back:
+    - RMCMatebaCustomizationCaseSilver
 
 - type: loadout
   id: GoldHandcannonRMC
+  dummyEntity: RMCWeaponPistolHandcannonGold
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
       !type:RoleTimeRequirement
       role: CMJobCommandingOfficer
       time: 900000 # 250 hrs
-  storage:
-    back:
-    - RMCWeaponPistolHandcannonGold
+  equipment:
+    belt: RMCGoldHandcannonBeltFilled
 
 - type: loadout
   id: MatebaRMC
+  dummyEntity: RMCWeaponRevolverMateba
+  equipment:
+    belt: RMCMatebaBeltFilled
   storage:
     back:
-    - RMCMatebaCustomizationCaseWeapon
+    - RMCMatebaCustomizationCase
+
+- type: loadout
+  id: MatebaSpecialRMC
+  dummyEntity: RMCWeaponRevolverMatebaSpecial
+  equipment:
+    belt: RMCMatebaBeltSpecialFilled
 
 - type: loadout
   id: HandcannonRMC
-  storage:
-    back:
-    - RMCWeaponPistolHandcannonWinterWyvern
+  dummyEntity: RMCWeaponPistolHandcannonCustom
+  equipment:
+    belt: RMCPeregrineHandcannonBeltFilled
+
+- type: loadout
+  id: HandcannonPolishedRMC
+  dummyEntity: RMCWeaponPistolHandcannonPolished
+  equipment:
+    belt: RMCPolishedHandcannonBeltFilled

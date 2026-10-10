@@ -2,7 +2,9 @@
 using Content.Server._RMC14.Rules.DistressSignal;
 using Content.Server.Decals;
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Storage.Containers;
 using Content.Shared.Decals;
 using Robust.Server.Physics;
 using Robust.Shared.EntitySerialization.Systems;
@@ -95,8 +97,7 @@ public sealed class MapInsertSystem : EntitySystem
         }
 
         var xform = Transform(ent);
-        var mainGrid = xform.GridUid;
-        if (mainGrid == null)
+        if (xform.GridUid is not { } mainGrid)
             return;
         var coordinates = _transform.GetMapCoordinates(ent, xform).Offset(new Vector2(-0.5f, -0.5f));
         coordinates = coordinates.Offset(spawnOffset);
@@ -110,8 +111,8 @@ public sealed class MapInsertSystem : EntitySystem
         //Replace areas
         if (ent.Comp.ReplaceAreas)
         {
-            if (EntityManager.TryGetComponent(mainGrid, out AreaGridComponent? mainAreaGrid)
-                && EntityManager.TryGetComponent(insertGrid, out AreaGridComponent? insertAreaGrid))
+            if (TryComp(mainGrid, out AreaGridComponent? mainAreaGrid)
+                && TryComp(insertGrid, out AreaGridComponent? insertAreaGrid))
             {
                 foreach (var (position, protoId) in insertAreaGrid.Areas)
                 {
@@ -127,7 +128,7 @@ public sealed class MapInsertSystem : EntitySystem
         }
 
         // Clear all entities on map in insert area
-        MapInsertSmimsh(insertGrid, (EntityUid)mainGrid, ent.Comp.ClearEntities, ent.Comp.ClearDecals);
+        MapInsertSmimsh(insertGrid, mainGrid, ent.Comp.ClearEntities, ent.Comp.ClearDecals);
 
         //Decals not handled in Merge(), so do it here
         if (!TryComp(insertGrid, out DecalGridComponent? insertDecalGrid))
@@ -137,7 +138,7 @@ public sealed class MapInsertSystem : EntitySystem
         {
             foreach (var (decalUid, decal) in chunk.Decals)
             {
-                _decals.SetDecalPosition(insertGrid, decalUid, new EntityCoordinates(mainGrid.Value, decal.Coordinates + coordinatesi));
+                _decals.SetDecalPosition(insertGrid, decalUid, new EntityCoordinates(mainGrid, decal.Coordinates + coordinatesi));
             }
         }
 
@@ -145,7 +146,8 @@ public sealed class MapInsertSystem : EntitySystem
         Timer.Spawn(TimeSpan.FromMilliseconds(50),
             () =>
             {
-                _fixture.Merge((EntityUid)mainGrid, insertGrid, coordinatesi, Angle.Zero);
+                _fixture.Merge(mainGrid, insertGrid, coordinatesi, Angle.Zero);
+                _areas.RefreshMinimap(mainGrid);
             });
 
         QueueDel(ent);
@@ -191,6 +193,9 @@ public sealed class MapInsertSystem : EntitySystem
                     if (HasComp<AreaComponent>(ent))
                         continue;
 
+                    //Clear containers
+                    RemComp<SpawnOnTerminateComponent>(ent);
+                    RemComp<RMCContainerEmptyOnDestructionComponent>(ent);
                     QueueDel(ent);
                 }
             }

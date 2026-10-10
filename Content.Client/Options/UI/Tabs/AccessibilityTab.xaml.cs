@@ -35,6 +35,11 @@ public sealed partial class AccessibilityTab : Control
 
         Control.AddOptionCheckBox(CCVars.AccessibilityClientCensorNudity, CensorNudityCheckBox);
 
+        // RMC14
+        var postDeathChatMute = Control.AddOptionCheckBox(RMCCVars.RMCPostDeathChatMute, RMCPostDeathChatMuteCheckBox);
+        postDeathChatMute.ImmediateValueChanged += OnPostDeathChatMuteChanged;
+        // RMC14
+
         Control.Initialize();
     }
 }
