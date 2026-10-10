@@ -1,0 +1,145 @@
+- type: rmcERTCall
+  id: RMCERTCallXenos
+  name: rmc-ert-call-xenos-name
+  organization: rmc-ert-organization-xenos
+  npcFactions: [ Xeno ]
+  category: rmc-ert-category-hostile
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-xenos
+  randomWeight: 5
+  allowedSources: [ Console, Admin ]
+  # TODO RMC14 replace with a dedicated xeno hostile shuttle/marker flow once ported.
+  shuttleMap: /Maps/_RMC14/Shuttles/ERT/ert_response_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttle
+  shuttleSpawnMarker: RMCERTShuttleStartPadHostile
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  shuttleCargoCount: 1
+  shuttleCargo:
+  - XenoHiveWeedsSource
+  roles:
+  - id: ravager
+    name: rmc-ert-role-xeno-ravager
+    ghostRoleEntityPool:
+    - entity: CMXenoRavager
+      weight: 100
+    min: 1
+    max: 1
+    leader: true
+    roleTags: [ leader, xeno ]
+    seatTags: [ troop ]
+    priority: 100
+  - id: filler
+    name: rmc-ert-role-xeno-filler
+    ghostRoleEntityPool:
+    - entity: CMXenoDrone
+      weight: 1
+    - entity: CMXenoSpitter
+      weight: 1
+    - entity: CMXenoLurker
+      weight: 1
+    min: 2
+    max: 6
+    roleTags: [ xeno ]
+    seatTags: [ troop ]
+  announcements:
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-xenos-arrival
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 3
+    maxSlots: 7
+
+- type: rmcERTCall
+  id: RMCERTCallFeralXenos
+  name: rmc-ert-call-feral-xenos-name
+  organization: rmc-ert-organization-xenos
+  npcFactions: [ Xeno ]
+  category: rmc-ert-category-hostile
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-feral-xenos
+  randomWeight: 5
+  allowedSources: [ Console, Admin ]
+  # TODO RMC14 replace with a dedicated feral xeno marker/hive flow once ported.
+  shuttleMap: /Maps/_RMC14/Shuttles/ERT/ert_response_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttle
+  shuttleSpawnMarker: RMCERTShuttleStartPadHostile
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  shuttleCargoCount: 1
+  shuttleCargo:
+  - XenoHardyWeedsSource
+  roles:
+  - id: leader
+    name: rmc-ert-role-xeno-leader
+    ghostRoleEntityPool:
+    - entity: CMXenoRavager
+      weight: 1
+    - entity: CMXenoPraetorian
+      weight: 1
+    - entity: RMCXenoCrusher
+      weight: 1
+    # TODO RMC14 add CMXenoDespoiler when the Despoiler caste is ported.
+    min: 1
+    max: 1
+    leader: true
+    roleTags: [ leader, xeno ]
+    seatTags: [ troop ]
+    priority: 100
+  - id: support
+    name: rmc-ert-role-xeno-support
+    ghostRoleEntityPool:
+    - entity: CMXenoDrone
+      weight: 1
+    - entity: CMXenoHivelord
+      weight: 1
+    min: 0
+    max: 2
+    required: false
+    roleTags: [ support, xeno ]
+    seatTags: [ troop ]
+  - id: combat
+    name: rmc-ert-role-xeno-combat
+    ghostRoleEntityPool:
+    - entity: CMXenoWarrior
+      weight: 1
+    - entity: CMXenoLurker
+      weight: 1
+    - entity: CMXenoSpitter
+      weight: 1
+    min: 0
+    max: 3
+    required: false
+    roleTags: [ rifleman, xeno ]
+    seatTags: [ troop ]
+  - id: filler
+    name: rmc-ert-role-xeno-filler
+    ghostRoleEntityPool:
+    - entity: CMXenoDrone
+      weight: 1
+    - entity: CMXenoRunner
+      weight: 1
+    - entity: CMXenoDefender
+      weight: 1
+    min: 0
+    max: 7
+    required: false
+    roleTags: [ xeno ]
+    seatTags: [ troop ]
+  announcements:
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-feral-xenos-arrival
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 1
+    maxSlots: 8

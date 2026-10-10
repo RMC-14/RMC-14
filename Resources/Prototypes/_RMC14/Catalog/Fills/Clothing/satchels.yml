@@ -11,7 +11,7 @@
     - id: RMCBoxPizzaMushroom
     - id: RMCBoxPizzaMeat
     - id: CMDrinkCanDrGibb
-    # ThirteenLoko
+    - id: CMDrinkCanThirteenLoko
 
 - type: entity
   parent: CMSatchel

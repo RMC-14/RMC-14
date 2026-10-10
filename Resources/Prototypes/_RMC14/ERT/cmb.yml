@@ -1,0 +1,238 @@
+- type: rmcERTCall
+  id: RMCERTCallCMB
+  name: rmc-ert-call-cmb-name
+  organization: rmc-ert-organization-cmb
+  npcFactions: [ Bureau ]
+  category: rmc-ert-category-law
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-cmb
+  randomWeight: 10
+  allowedSources: [ Console, Handheld, Admin ]
+  # TODO RMC14 replace with an exact /Maps/_RMC14/Shuttles/ERT/ert_cmb_shuttle.yml once ported.
+  shuttleMap: /Maps/_RMC14/Shuttles/ERT/ert_cmb_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttleCMB
+  shuttleSpawnMarker: RMCERTShuttleStartPadLaw
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  roles:
+  - id: marshal
+    name: rmc-ert-role-cmb-marshal
+    job: CMBureauMarshal
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidBureauMarshal
+      weight: 100
+    min: 1
+    max: 1
+    leader: true
+    roleTags: [ leader, police ]
+    seatTags: [ command ]
+    priority: 100
+  - id: deputy
+    name: rmc-ert-role-cmb-deputy
+    job: CMBureauDeputy
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidBureauDeputy
+      weight: 100
+    min: 2
+    max: 4
+    roleTags: [ police ]
+    seatTags: [ troop ]
+  - id: liaison
+    name: rmc-ert-role-cmb-liaison
+    job: CMICBLiaison
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidICBLiaison
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ support ]
+    seatTags: [ troop ]
+  - id: observer
+    name: rmc-ert-role-cmb-observer
+    job: CMBureauObserver
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidBureauObserver
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ support, medic ]
+    seatTags: [ troop, medic ]
+  announcements:
+    request:
+      title: rmc-ert-announcement-title-priority-alert
+      message: rmc-ert-announcement-cmb-inspection-request
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-cmb-inspection-arrival
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 3
+    maxSlots: 5
+
+- type: rmcERTCall
+  id: RMCERTCallCMBBlackMarket
+  name: rmc-ert-call-cmb-black-market-name
+  organization: rmc-ert-organization-cmb
+  npcFactions: [ Bureau ]
+  category: rmc-ert-category-law
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-cmb-black-market
+  randomWeight: 0
+  allowedSources: [ Admin, Ares ]
+  shuttleMap: /Maps/_RMC14/Shuttles/ERT/ert_cmb_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttleCMB
+  shuttleSpawnMarker: RMCERTShuttleStartPadLaw
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  roles:
+  - id: marshal
+    name: rmc-ert-role-cmb-marshal
+    job: CMBureauMarshal
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidBureauMarshal
+      weight: 100
+    min: 1
+    max: 1
+    leader: true
+    roleTags: [ leader, police ]
+    seatTags: [ command ]
+    priority: 100
+  - id: deputy
+    name: rmc-ert-role-cmb-deputy
+    job: CMBureauDeputy
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidBureauDeputy
+      weight: 100
+    min: 1
+    max: 1
+    roleTags: [ police ]
+    seatTags: [ troop ]
+  - id: liaison
+    name: rmc-ert-role-cmb-liaison
+    job: CMICBLiaison
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidICBLiaison
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ support ]
+    seatTags: [ troop ]
+  announcements:
+    request:
+      title: rmc-ert-announcement-title-priority-alert
+      message: rmc-ert-announcement-cmb-black-market-request
+    dispatch:
+      title: rmc-ert-announcement-title-distress-beacon
+      message: rmc-ert-announcement-cmb-black-market-dispatch
+      sound:
+        path: /Audio/_RMC14/AI/distressreceived.ogg
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-cmb-black-market-arrival
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 2
+    maxSlots: 3
+
+- type: rmcERTCall
+  id: RMCERTCallCMBRiot
+  name: rmc-ert-call-cmb-riot-name
+  organization: rmc-ert-organization-cmb
+  npcFactions: [ Bureau ]
+  category: rmc-ert-category-law
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-cmb-riot
+  randomWeight: 20
+  allowedSources: [ Console, Handheld, Admin ]
+  # TODO RMC14 replace with a dedicated CMB riot shuttle once ported.
+  shuttleMap: /Maps/_RMC14/Shuttles/ERT/ert_cmb_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttleCMB
+  shuttleSpawnMarker: RMCERTShuttleStartPadLaw
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  roles:
+  - id: leader
+    name: rmc-ert-role-cmb-riot-leader
+    job: CMBureauRiotLeader
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidBureauRiotLeader
+      weight: 100
+    min: 1
+    max: 1
+    leader: true
+    roleTags: [ leader, police ]
+    seatTags: [ command ]
+    priority: 100
+  - id: officer
+    name: rmc-ert-role-cmb-riot-officer
+    job: CMBureauRiotOfficer
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidBureauRiotOfficerShotgun
+      weight: 40
+    - entity: RMCRandomHumanoidBureauRiotOfficerLauncher
+      weight: 30
+    - entity: RMCRandomHumanoidBureauRiotOfficerSMG
+      weight: 30
+    min: 2
+    max: 3
+    roleTags: [ police, rifleman ]
+    seatTags: [ troop ]
+  - id: medic
+    name: rmc-ert-role-cmb-riot-medic
+    job: CMBureauRiotMedic
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidBureauRiotMedic
+      weight: 100
+    min: 0
+    max: 2
+    required: false
+    roleTags: [ medic ]
+    seatTags: [ medic, troop ]
+    priority: 50
+  - id: engineer
+    name: rmc-ert-role-cmb-riot-engineer
+    job: CMBureauRiotEngineer
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidBureauRiotEngineer
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ engineer ]
+    seatTags: [ engineer, troop ]
+    priority: 40
+  - id: specialist
+    name: rmc-ert-role-cmb-riot-specialist
+    job: CMBureauRiotSpecialist
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidBureauRiotSpecialist
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ specialist, rifleman ]
+    seatTags: [ troop ]
+    priority: 30
+  announcements:
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-cmb-riot-arrival
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 3
+    maxSlots: 8

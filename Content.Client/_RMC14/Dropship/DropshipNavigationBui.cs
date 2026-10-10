@@ -53,6 +53,17 @@ public sealed class DropshipNavigationBui : BoundUserInterface
 
         _window = this.CreateWindow<DropshipNavigationWindow>();
         _window.OnClose += OnClose;
+        var computer = GetNavigationComputer();
+        _window.Title = computer?.NavigationWindowTitle ?? "Flight Computer";
+        var showIndividualDoorControls = computer?.ShowIndividualDoorControls ?? true;
+        var showLaunchAlarmControls = computer?.ShowLaunchAlarmControls ?? true;
+        var showRemoteControlControls = computer?.ShowRemoteControlControls ?? true;
+        _window.IndividualDoorSeparator.Visible = showIndividualDoorControls;
+        _window.IndividualDoorControlsContainer.Visible = showIndividualDoorControls;
+        _window.LaunchAlarmSeparator.Visible = showLaunchAlarmControls;
+        _window.LaunchAlarmContainer.Visible = showLaunchAlarmControls;
+        _window.RemoteControlSeparator.Visible = showRemoteControlControls;
+        _window.RemoteControlContainer.Visible = showRemoteControlControls;
         SetFlightHeader("Flight Controls");
         SetDoorHeader("Door Controls");
         SetRemoteControlHeader("Remote Control:");
@@ -134,7 +145,8 @@ public sealed class DropshipNavigationBui : BoundUserInterface
         }
 
         _destinations.Clear();
-        if (destinations.FlyBy is { } flyBy)
+        if (destinations.FlyBy is { } flyBy &&
+            GetNavigationComputer()?.ShowFlyByDestination != false)
         {
             var flyByName = "Flyby";
             var flyByButton = DestinationButton(flyByName, false, () => _selected = flyBy);
@@ -145,7 +157,8 @@ public sealed class DropshipNavigationBui : BoundUserInterface
         foreach (var destination in destinations.Destinations)
         {
             var name = destination.Name;
-            if (destination.Primary)
+            if (destination.Primary &&
+                GetNavigationComputer()?.ShowPrimaryDestinationLabel != false)
                 name += " (Primary)";
 
             var button = DestinationButton(name, destination.Occupied, () => _selected = destination.Id);
@@ -322,6 +335,13 @@ public sealed class DropshipNavigationBui : BoundUserInterface
             return;
 
         _window.LaunchAlarmButton.Text = launchAlarmStatus ? "Stop Alarm" : "Start Alarm";
+    }
+
+    private DropshipNavigationComputerComponent? GetNavigationComputer()
+    {
+        return _entities.TryGetComponent(Owner, out DropshipNavigationComputerComponent? computer)
+            ? computer
+            : null;
     }
 
     public void Update()
