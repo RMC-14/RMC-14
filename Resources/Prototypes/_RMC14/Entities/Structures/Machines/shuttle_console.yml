@@ -396,6 +396,9 @@
   id: RMCERTShuttleReturnDestination
   name: Base
   suffix: ERT, Return, Internal
+  components:
+  - type: DropshipDestination
+    dockBounds: "-4,-8.5,4,8.5"
 
 - type: entity
   parent: RMCRestrictedShuttleDestinationExternalSide
