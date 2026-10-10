@@ -11,13 +11,13 @@
             BorderThickness="0 0 0 1" />
     </PanelContainer.PanelOverride>
     <GridContainer Columns="7" Margin="6 5">
-        <Label Name="Area" Access="Public" MinWidth="250" />
-        <Label Name="Equipment" Access="Public" MinWidth="75" Align="Center" />
-        <Label Name="Lighting" Access="Public" MinWidth="75" Align="Center" />
-        <Label Name="Environment" Access="Public" MinWidth="95" Align="Center" />
-        <Label Name="Requested" Access="Public" MinWidth="90" Align="Center" />
-        <Label Name="Delivered" Access="Public" MinWidth="90" Align="Center" />
-        <ProgressBar Name="CellBar" Access="Public" MinWidth="120" MinValue="0" MaxValue="1">
+        <Label Name="Area" Access="Public" SetWidth="300" ClipText="True" />
+        <Label Name="Equipment" Access="Public" SetWidth="120" Align="Center" />
+        <Label Name="Lighting" Access="Public" SetWidth="100" Align="Center" />
+        <Label Name="Environment" Access="Public" SetWidth="160" Align="Center" />
+        <Label Name="Requested" Access="Public" SetWidth="110" Align="Center" />
+        <Label Name="Delivered" Access="Public" SetWidth="90" Align="Center" />
+        <ProgressBar Name="CellBar" Access="Public" SetWidth="120" MinValue="0" MaxValue="1">
             <Label Name="CellLabel" Access="Public" HorizontalAlignment="Center" Margin="0 3" />
         </ProgressBar>
     </GridContainer>

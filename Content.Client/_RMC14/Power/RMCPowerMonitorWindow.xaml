@@ -4,7 +4,7 @@
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
     Title=""
-    MinSize="920 620">
+    MinSize="1100 620">
     <PanelContainer>
         <PanelContainer.PanelOverride>
             <graphics:StyleBoxFlat
@@ -107,13 +107,13 @@
                                 BorderThickness="0 0 0 1" />
                         </PanelContainer.PanelOverride>
                         <GridContainer Columns="7" Margin="6 4">
-                            <Label Text="{Loc rmc-power-monitor-area}" MinWidth="250" FontColorOverride="#7FAAD1" />
-                            <Label Text="{Loc rmc-power-monitor-equipment}" MinWidth="75" Align="Center" FontColorOverride="#7FAAD1" />
-                            <Label Text="{Loc rmc-power-monitor-lighting}" MinWidth="75" Align="Center" FontColorOverride="#7FAAD1" />
-                            <Label Text="{Loc rmc-power-monitor-environment}" MinWidth="95" Align="Center" FontColorOverride="#7FAAD1" />
-                            <Label Text="{Loc rmc-power-monitor-requested}" MinWidth="90" Align="Center" FontColorOverride="#7FAAD1" />
-                            <Label Text="{Loc rmc-power-monitor-delivered}" MinWidth="90" Align="Center" FontColorOverride="#7FAAD1" />
-                            <Label Text="{Loc rmc-power-monitor-cell}" MinWidth="120" Align="Center" FontColorOverride="#7FAAD1" />
+                            <Label Text="{Loc rmc-power-monitor-area}" SetWidth="300" FontColorOverride="#7FAAD1" />
+                            <Label Text="{Loc rmc-power-monitor-equipment}" SetWidth="120" Align="Center" FontColorOverride="#7FAAD1" />
+                            <Label Text="{Loc rmc-power-monitor-lighting}" SetWidth="100" Align="Center" FontColorOverride="#7FAAD1" />
+                            <Label Text="{Loc rmc-power-monitor-environment}" SetWidth="160" Align="Center" FontColorOverride="#7FAAD1" />
+                            <Label Text="{Loc rmc-power-monitor-requested}" SetWidth="110" Align="Center" FontColorOverride="#7FAAD1" />
+                            <Label Text="{Loc rmc-power-monitor-delivered}" SetWidth="90" Align="Center" FontColorOverride="#7FAAD1" />
+                            <Label Text="{Loc rmc-power-monitor-cell}" SetWidth="120" Align="Center" FontColorOverride="#7FAAD1" />
                         </GridContainer>
                     </PanelContainer>
                     <Label Name="ApcEmpty" Access="Public" Text="{Loc rmc-power-monitor-no-apcs}"

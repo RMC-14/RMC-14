@@ -88,6 +88,7 @@ public sealed class RMCPowerMonitorBui(EntityUid owner, Enum uiKey) : BoundUserI
             var apc = apcs[i];
             var row = (RMCPowerMonitorApcRow) _window.ApcRows.GetChild(i);
             row.Area.Text = apc.Area;
+            row.Area.ToolTip = apc.Area;
             SetChannelState(row.Equipment, apc.Equipment);
             SetChannelState(row.Lighting, apc.Lighting);
             SetChannelState(row.Environment, apc.Environment);
