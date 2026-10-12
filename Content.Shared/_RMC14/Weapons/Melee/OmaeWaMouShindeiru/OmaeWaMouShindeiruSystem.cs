@@ -20,6 +20,7 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private static readonly ProtoId<TagPrototype> RMCKatanaTag = "RMCKatana";
 
@@ -38,21 +39,24 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
         var damage = _melee.GetDamage(ent.Owner, args.User);
         foreach (var target in args.HitEntities)
         {
-            // TODO RMC14 Make both katana wielders attack each other somehow?
-            foreach (var held in _hands.EnumerateHeld(target))
+            if (!ent.Comp.PendingTargets.Add(target))
+                continue;
+
+            if (HasKatana(target) && args.User != target)
             {
-                if (_tag.HasTag(held, RMCKatanaTag) && ent.Comp.CanStunOnHit)
+                _stun.TryStun(args.User, ent.Comp.KillDelay, true);
+                _stun.TryStun(target, ent.Comp.KillDelay, true);
+
+                if (_melee.TryGetWeapon(target, out var targetWeapon, out _))
                 {
-                    _stun.TryStun(args.User, ent.Comp.KillDelay, true);
-                    _stun.TryStun(target, ent.Comp.KillDelay, true);
+                    var coords = _transform.GetMoverCoordinates(target);
+                    var counterAttack = new LightAttackEvent(GetNetEntity(args.User), GetNetEntity(targetWeapon), GetNetCoordinates(coords));
+                    RaiseLocalEvent(target, counterAttack);
                 }
             }
 
             if (ent.Comp.CanStunOnHit)
                 _stun.TryStun(target, ent.Comp.KillDelay, true);
-
-            if (!ent.Comp.PendingTargets.Add(target))
-                continue;
 
             OmaeWaMouShindeiru(ent, args.User, target, damage);
         }
@@ -71,10 +75,7 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
                 ent.Comp.PendingTargets.Remove(target);
                 _audio.Stop(ent.Comp.Stream);
 
-                if (Deleted(ent.Owner) || Deleted(target))
-                    return;
-
-                if (!Exists(target))
+                if (Deleted(ent.Owner) || Deleted(target) || !Exists(target))
                     return;
 
                 if (TryComp<MobStateComponent>(target, out var mobState) &&
@@ -91,5 +92,16 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
                     _damageable.TryChangeDamage(target, damage, ignoreResistances: ent.Comp.BypassResistances, origin: user, tool: ent.Owner);
                 }
             });
+    }
+
+    private bool HasKatana(EntityUid target)
+    {
+        foreach (var held in _hands.EnumerateHeld(target))
+        {
+            if (_tag.HasTag(held, RMCKatanaTag))
+                return true;
+        }
+
+        return false;
     }
 }
