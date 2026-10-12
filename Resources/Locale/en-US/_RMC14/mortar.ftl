@@ -24,6 +24,7 @@ rmc-mortar-dial-finish-others = {$user} finishes dialing {THE($mortar)}'s firing
 rmc-mortar-shell-load-start-self = You start loading {THE($shell)} into {THE($mortar)}.
 rmc-mortar-shell-load-start-others = {$user} starts loading {THE($shell)} into {THE($mortar)}.
 rmc-mortar-shell-load-finish-self = You load {THE($shell)} into {THE($mortar)}.
+rmc-mortar-shell-load-finish-others = {$user} loads {THE($shell)} into {THE($mortar)}
 rmc-mortar-shell-fire = {CAPITALIZE(THE($mortar))} fires!
 rmc-mortar-shell-warning = A SHELL IS COMING DOWN TO YOUR {$direction}
 rmc-mortar-shell-warning-above = A SHELL IS COMING DOWN RIGHT ABOVE YOU
