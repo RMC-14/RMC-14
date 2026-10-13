@@ -1,11 +1,46 @@
+using Robust.Client.Graphics;
+using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
+using Robust.Client.UserInterface.Controls;
+using Robust.Client.UserInterface.RichText;
+using Robust.Shared.IoC;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using static Robust.Client.UserInterface.StylesheetHelpers;
 
 namespace Content.Client._RMC14.UserInterface.Crt;
 
 internal interface IRMCCrtThemedControl
 {
     void ApplyCrtTheme(RMCCrtThemeContext context);
+}
+
+/// <summary>
+/// Keeps rich text measurement and its first baseline on the font actually used to draw the text.
+/// Font tags alone leave those metrics on the control's default font.
+/// </summary>
+internal sealed class RMCCrtTextStyle
+{
+    private (bool Theme, int Size, bool Heading)? _key;
+
+    public void Apply(RichTextLabel label, RMCCrtThemeContext context, int size, bool heading = false)
+    {
+        var key = (context.ThemeEnabled, size, heading);
+        if (_key == key)
+            return;
+
+        var message = RMCCrtThemeHelpers.CreateTextMessage(null, context, size, heading);
+        var node = message.Nodes[0];
+        var fonts = new Stack<Font>();
+        fonts.Push(IoCManager.Resolve<IUserInterfaceManager>().ThemeDefaults.DefaultFont);
+        var font = FontTag.CreateFont(fonts, node, IoCManager.Resolve<IResourceCache>(),
+            IoCManager.Resolve<IPrototypeManager>(), node.Value.StringValue!);
+        label.Stylesheet = new Stylesheet(new StyleRule[]
+        {
+            Element<RichTextLabel>().Prop(Label.StylePropertyFont, font),
+        });
+        _key = key;
+    }
 }
 
 internal static class RMCCrtThemeHelpers

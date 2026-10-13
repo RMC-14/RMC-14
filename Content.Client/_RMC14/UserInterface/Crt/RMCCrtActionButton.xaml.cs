@@ -19,12 +19,14 @@ public sealed partial class RMCCrtActionButton : ContainerButton, IRMCCrtThemedC
     private static readonly ISawmill Log = Logger.GetSawmill("rmc-crt");
 
     private readonly IResourceCache _resourceCache;
+    private readonly RMCCrtTextStyle _textStyle = new();
     private readonly StyleBoxFlat _transparentStyle = new() { BackgroundColor = Color.Transparent };
     private RMCCrtContentAlignment _contentAlignment = RMCCrtContentAlignment.Center;
     private Thickness _contentMargin = new(9, 5);
     private int _contentSeparation = 7;
     private float _iconSize = 18;
     private string? _iconState;
+    private string? _iconTexturePath;
     private ResPath _iconRsiPath = DefaultIconRsiPath;
     private string? _text;
     private RMCCrtThemeContext _context = new(
@@ -54,6 +56,21 @@ public sealed partial class RMCCrtActionButton : ContainerButton, IRMCCrtThemedC
         set
         {
             _iconState = value;
+            _iconTexturePath = null;
+            UpdateIcon();
+        }
+    }
+
+    /// <summary>
+    /// Uses an existing texture instead of an RSI state. It keeps the button's size and palette tint.
+    /// </summary>
+    public string? IconTexturePath
+    {
+        get => _iconTexturePath;
+        set
+        {
+            _iconTexturePath = value;
+            _iconState = null;
             UpdateIcon();
         }
     }
@@ -71,7 +88,11 @@ public sealed partial class RMCCrtActionButton : ContainerButton, IRMCCrtThemedC
     public Texture? IconTexture
     {
         get => IconControl.Texture;
-        set => IconControl.Texture = value;
+        set
+        {
+            IconControl.Texture = value;
+            IconControl.Visible = value != null;
+        }
     }
 
     public RMCCrtButtonVariant Variant
@@ -197,28 +218,34 @@ public sealed partial class RMCCrtActionButton : ContainerButton, IRMCCrtThemedC
         if (NameScope == null)
             return;
 
-        if (string.IsNullOrWhiteSpace(IconState))
+        if (string.IsNullOrWhiteSpace(IconState) && string.IsNullOrWhiteSpace(IconTexturePath))
         {
-            IconControl.Texture = null;
+            IconTexture = null;
             return;
         }
 
         try
         {
-            var rsi = _resourceCache.GetResource<RSIResource>(IconRsiPath).RSI;
-            if (rsi.TryGetState(new RSI.StateId(IconState), out var state))
+            if (!string.IsNullOrWhiteSpace(IconTexturePath))
             {
-                IconControl.Texture = state.Frame0;
+                IconTexture = _resourceCache.GetResource<TextureResource>(IconTexturePath).Texture;
                 return;
             }
 
-            IconControl.Texture = null;
+            var rsi = _resourceCache.GetResource<RSIResource>(IconRsiPath).RSI;
+            if (rsi.TryGetState(new RSI.StateId(IconState), out var state))
+            {
+                IconTexture = state.Frame0;
+                return;
+            }
+
+            IconTexture = null;
             Log.Warning($"CRT icon state '{IconState}' does not exist in '{IconRsiPath}'.");
         }
         catch (Exception exception)
         {
-            IconControl.Texture = null;
-            Log.Error($"Failed to load CRT icon state '{IconState}' from '{IconRsiPath}': {exception}");
+            IconTexture = null;
+            Log.Error($"Failed to load CRT icon '{IconTexturePath ?? IconState}' from '{IconRsiPath}': {exception}");
         }
     }
 
@@ -257,6 +284,7 @@ public sealed partial class RMCCrtActionButton : ContainerButton, IRMCCrtThemedC
 
         if (!_context.ThemeEnabled)
         {
+            Background.BorderThickness = 1;
             UpdateNanoAppearance();
             return;
         }
@@ -266,7 +294,9 @@ public sealed partial class RMCCrtActionButton : ContainerButton, IRMCCrtThemedC
         ModulateSelfOverride = null;
         StyleBoxOverride = _transparentStyle;
         var palette = _context.Palette;
+        Background.BorderThickness = Variant == RMCCrtButtonVariant.Flat ? 0 : 1;
         var isDanger = Tone == RMCCrtTone.Danger || Variant == RMCCrtButtonVariant.Danger;
+        Background.Effects = isDanger ? RMCCrtEffects.None : RMCCrtEffects.HorizontalScanlines;
         Color background;
         Color border;
         Color foreground;
@@ -281,7 +311,7 @@ public sealed partial class RMCCrtActionButton : ContainerButton, IRMCCrtThemedC
         {
             background = DrawMode switch
             {
-                DrawModeEnum.Pressed => Color.InterpolateBetween(palette.Background, palette.Danger, 0.65f),
+                DrawModeEnum.Pressed => Color.InterpolateBetween(palette.Danger, palette.Background, 0.1f),
                 DrawModeEnum.Hover => Color.InterpolateBetween(palette.Danger, Color.White, 0.18f),
                 _ => palette.Danger,
             };
@@ -305,7 +335,7 @@ public sealed partial class RMCCrtActionButton : ContainerButton, IRMCCrtThemedC
             {
                 DrawModeEnum.Pressed => palette.PressedBackground.WithAlpha(0.75f),
                 DrawModeEnum.Hover => palette.HoverBackground,
-                _ => palette.Background.WithAlpha(0.72f),
+                _ => Variant == RMCCrtButtonVariant.Flat ? Color.Transparent : palette.ButtonBackground,
             };
             border = palette.Border;
             foreground = Tone switch
@@ -316,6 +346,9 @@ public sealed partial class RMCCrtActionButton : ContainerButton, IRMCCrtThemedC
                 _ => palette.Foreground,
             };
         }
+
+        if (DrawMode == DrawModeEnum.Hover && !isDanger)
+            border = palette.Foreground;
 
         Background.SetColorOverrides(background, border);
         IconControl.ModulateSelfOverride = foreground;
@@ -357,6 +390,8 @@ public sealed partial class RMCCrtActionButton : ContainerButton, IRMCCrtThemedC
         if (NameScope == null)
             return;
 
+        _textStyle.Apply(TextLabel, _context, TextFontSize);
+        TextLabel.Visible = !string.IsNullOrWhiteSpace(_text);
         TextLabel.SetMessage(RMCCrtThemeHelpers.CreateTextMessage(
             _text,
             _context,

@@ -197,6 +197,18 @@ public sealed class RMCCrtThemeScope : PanelContainer
             Element<RichTextLabel>().Class(RMCCrtStyleClasses.CompactText)
                 .Prop(Label.StylePropertyFont,
                     _resourceCache.GetFont("/EngineFonts/NotoSans/NotoSansMono-Regular.ttf", 10)),
+            Element<LineEdit>().Class(RMCCrtStyleClasses.Input)
+                .Prop("font", _resourceCache.GetFont("/EngineFonts/NotoSans/NotoSansMono-Regular.ttf", 12))
+                .Prop("font-color", ResolvedPalette.Foreground)
+                .Prop(LineEdit.StylePropertyCursorColor, ResolvedPalette.Foreground)
+                .Prop(LineEdit.StylePropertySelectionColor, ResolvedPalette.Fill.WithAlpha(0.35f)),
+            Element<LineEdit>().Class(RMCCrtStyleClasses.Input).Pseudo(LineEdit.StylePseudoClassPlaceholder)
+                .Prop("font-color", ResolvedPalette.Muted),
+            Element<TextEdit>().Class(RMCCrtStyleClasses.Input)
+                .Prop("font", _resourceCache.GetFont("/EngineFonts/NotoSans/NotoSansMono-Regular.ttf", 12))
+                .Prop("font-color", ResolvedPalette.Foreground)
+                .Prop(TextEdit.StylePropertyCursorColor, ResolvedPalette.Foreground)
+                .Prop(TextEdit.StylePropertySelectionColor, ResolvedPalette.Fill.WithAlpha(0.35f)),
         }).ToArray();
 
         return new Stylesheet(rules);
@@ -208,6 +220,10 @@ public sealed class RMCCrtThemeScope : PanelContainer
         {
             Element<RichTextLabel>().Class(RMCCrtStyleClasses.CompactText)
                 .Prop(Label.StylePropertyFont, _resourceCache.NotoStack(size: 10)),
+            Element<LineEdit>().Class(RMCCrtStyleClasses.Input)
+                .Prop("font", _resourceCache.NotoStack(size: 12)),
+            Element<TextEdit>().Class(RMCCrtStyleClasses.Input)
+                .Prop("font", _resourceCache.NotoStack(size: 12)),
         }).ToArray();
 
         return new Stylesheet(rules);

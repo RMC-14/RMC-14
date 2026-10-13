@@ -7,6 +7,7 @@
                       HorizontalAlignment="Stretch" HorizontalExpand="True"
                       SeparationOverride="7" Margin="9 5" MouseFilter="Ignore">
             <TextureRect Name="IconControl" Access="Public"
+                         Visible="False"
                          SetWidth="18" SetHeight="18" Stretch="Scale"
                          HorizontalExpand="False"
                          HorizontalAlignment="Center" VerticalAlignment="Center"

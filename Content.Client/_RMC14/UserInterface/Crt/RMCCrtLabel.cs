@@ -5,6 +5,7 @@ namespace Content.Client._RMC14.UserInterface.Crt;
 
 public sealed class RMCCrtLabel : RichTextLabel, IRMCCrtThemedControl
 {
+    private readonly RMCCrtTextStyle _textStyle = new();
     private RMCCrtThemeContext _context = new(
         RMCCrtPalettes.Get(RMCCrtPalettePreset.Blue),
         new RMCCrtAppearanceSettings(true, true));
@@ -83,6 +84,7 @@ public sealed class RMCCrtLabel : RichTextLabel, IRMCCrtThemedControl
 
     private void UpdateAppearance()
     {
+        _textStyle.Apply(this, _context, TextFontSize, Heading);
         SetMessage(RMCCrtThemeHelpers.CreateTextMessage(
             _text,
             _context,
