@@ -287,9 +287,10 @@ public abstract class SharedXenoBanishSystem : EntitySystem
         comp.OriginalHive = _hive.GetHive(banished)?.Owner;
         Dirty(banished, comp);
 
-        _hive.SetHive(banished, null);
-
+        // Before removing them from the hive so the banished xenonid also gets the announcement
         OnBanished(banisher, (banished, comp));
+
+        _hive.SetHive(banished, null);
 
         _adminLog.Add(LogType.RMCXenoBanish, $"{ToPrettyString(banisher)} banished {ToPrettyString(banished)} for: {reason}");
     }

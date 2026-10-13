@@ -239,6 +239,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
             return;
         }
 
+        if (!BanishedCheckPopup(xeno, false))
+            return;
+
         if (!ContainedCheckPopup(xeno))
             return;
 
@@ -404,14 +407,26 @@ public sealed class XenoEvolutionSystem : EntitySystem
         return false;
     }
 
+    private bool BanishedCheckPopup(EntityUid xeno, bool predicted = true, bool doPopup = true)
+    {
+        if (!HasComp<XenoBanishComponent>(xeno))
+            return true;
+
+        if (!doPopup)
+            return false;
+
+        if (predicted)
+            _popup.PopupClient(Loc.GetString("rmc-xeno-evolution-failed-banished"), xeno, xeno, PopupType.MediumCaution);
+        else
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-failed-banished"), xeno, xeno, PopupType.MediumCaution);
+
+        return false;
+    }
+
     private bool CanEvolvePopup(Entity<XenoEvolutionComponent> xeno, EntProtoId newXeno, bool doPopup = true, bool ignoreEvolvesTo = false, int reservedTierSlots = 0, bool ignoreFixable = false)
     {
-        if (HasComp<XenoBanishComponent>(xeno))
-        {
-            if (doPopup)
-                _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-failed-banished"), xeno, xeno, PopupType.MediumCaution);
+        if (!BanishedCheckPopup(xeno, false, doPopup))
             return false;
-        }
 
         var isEarlyEvo = xeno.Comp.EarlyEvolvesTo.Contains(newXeno);
         if (!ignoreEvolvesTo &&
@@ -1160,6 +1175,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
     private void TryDevolve(Entity<XenoDevolveComponent> xeno, EntProtoId to, bool damagedCheck = true)
     {
+        if (!BanishedCheckPopup(xeno))
+            return;
+
         if (damagedCheck && !DamagedCheckPopup(xeno))
             return;
 

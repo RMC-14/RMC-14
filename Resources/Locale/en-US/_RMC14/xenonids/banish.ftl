@@ -30,7 +30,7 @@ rmc-readmit-different-hive = This xenonid wasn't banished from your hive!
 rmc-readmit-admin-verb = Readmit to hive
 
 # Evolution Prevention
-rmc-xeno-evolution-failed-banished = You cannot evolve while banished from the hive.
+rmc-xeno-evolution-failed-banished = We are banished and cannot reach the hivemind.
 
 # Announcements
 rmc-banish-announcement = {$name} has been banished from the hive. Reason: {$reason}
