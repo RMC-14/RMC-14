@@ -3,6 +3,7 @@
   id: CMSurvivorUNMCRecruiter
   name: rmc-job-name-survivor-unmc-recruiter
   description: cm-job-description-survivor
+  playTimeTracker: RMCJobSurvivorMilitary
   spawnMenuRoleName: UNMC Recruiter (Solaris Survivor)
   ranks:
     RMCRankSergeant: []
