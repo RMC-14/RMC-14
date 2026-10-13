@@ -13,6 +13,9 @@ public sealed partial class GunDrainBatteryOnShootComponent : Component
     public float Drain = 0.25f;
 
     [DataField, AutoNetworkedField]
+    public float MinDrainMultiplier = 1;
+
+    [DataField, AutoNetworkedField]
     public string BatteryContainer = "cell_slot";
 
     [DataField, AutoNetworkedField]

@@ -29,6 +29,9 @@ public sealed class RMCGunBatterySystem : EntitySystem
 
     public void SetPowered(Entity<GunDrainBatteryOnShootComponent> gun, bool powered)
     {
+        if (gun.Comp.Powered == powered)
+            return;
+
         gun.Comp.Powered = powered;
         Dirty(gun);
 
@@ -52,5 +55,8 @@ public sealed class RMCGunBatterySystem : EntitySystem
 
         gun.Comp.Drain = ev.Drain;
         Dirty(gun);
+
+        var changed = new GunBatteryDrainChangedEvent();
+        RaiseLocalEvent(gun, ref changed);
     }
 }
