@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: '- Simon'
   changes:
-  - message: Added timed impenetrable resin to sorokyne
-    type: Add
-  id: 3194
-  time: '2026-05-14T10:26:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9788
-- author: '- Simon'
-  changes:
   - message: Added Impenetrable timed resin to fiorina
     type: Add
   id: 3195
@@ -4501,5 +4494,24 @@
   id: 3693
   time: '2026-10-06T19:53:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10507
+- author: KompaniLinge
+  changes:
+  - message: Lingxiao Golds, the pinnacle of smoking. Comes with unique sprite.
+    type: Add
+  - message: Taras Classics, the most SPP cigarette to ever exist. Comes with new
+      sprite, shared with Bohe Blues.
+    type: Add
+  - message: Bohe Blues, more menthol then nicotine.
+    type: Add
+  - message: Montecomune Cigars. Said to have been smoked by a famous revolutionary,
+      has unique sprite
+    type: Add
+  - message: Brand new zippo-like SPP Lighter.
+    type: Add
+  - message: Komandir now dispenses SPP smokables.
+    type: Tweak
+  id: 3694
+  time: '2026-10-13T13:09:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8205
 Name: RMC14
 Order: -1
