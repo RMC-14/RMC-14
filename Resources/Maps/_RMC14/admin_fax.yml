@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 09/30/2026 18:51:16
-  entityCount: 2378
+  time: 10/14/2026 17:40:50
+  entityCount: 2382
 maps:
 - 1
 grids:
@@ -3672,11 +3672,6 @@ entities:
     - type: Transform
       pos: 51.735718,-27.869558
       parent: 2
-  - uid: 2039
-    components:
-    - type: Transform
-      pos: 49.224365,-27.836943
-      parent: 2
 - proto: CMFilingCabinetChest
   entities:
   - uid: 1197
@@ -3741,7 +3736,7 @@ entities:
   - uid: 2044
     components:
     - type: Transform
-      pos: 51.565193,-29.376947
+      pos: 49.195175,-29.294096
       parent: 2
 - proto: CMFolderRed
   entities:
@@ -3768,7 +3763,7 @@ entities:
   - uid: 2045
     components:
     - type: Transform
-      pos: 51.451042,-29.491102
+      pos: 49.216003,-29.617239
       parent: 2
 - proto: CMFolderYellow
   entities:
@@ -4116,7 +4111,7 @@ entities:
   - uid: 2043
     components:
     - type: Transform
-      pos: 51.10858,-29.319872
+      pos: 51.414543,-29.647543
       parent: 2
 - proto: CMPlatform
   entities:
@@ -4499,7 +4494,7 @@ entities:
   - uid: 2050
     components:
     - type: Transform
-      pos: 49.677963,-27.145884
+      pos: 51.070793,-29.543303
       parent: 2
   - uid: 2367
     components:
@@ -4548,7 +4543,7 @@ entities:
   - uid: 2051
     components:
     - type: Transform
-      pos: 49.92012,-27.260035
+      pos: 51.070793,-29.376524
       parent: 2
   - uid: 2366
     components:
@@ -4908,6 +4903,12 @@ entities:
       rot: 3.141592653589793 rad
       pos: 5.5,-37.5
       parent: 2
+  - uid: 1898
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 49.5,-28.5
+      parent: 2
   - uid: 2018
     components:
     - type: Transform
@@ -4922,6 +4923,24 @@ entities:
     components:
     - type: Transform
       pos: 51.5,-29.5
+      parent: 2
+  - uid: 2380
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 49.5,-27.5
+      parent: 2
+  - uid: 2381
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 50.5,-27.5
+      parent: 2
+  - uid: 2382
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 51.5,-27.5
       parent: 2
 - proto: CMTableWoodenPoor
   entities:
@@ -9755,7 +9774,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -16186.598
+      secondsUntilStateChange: -16382.341
       state: Opening
   - uid: 1278
     components:
@@ -9846,7 +9865,7 @@ entities:
   - uid: 2046
     components:
     - type: Transform
-      pos: 51.0599,-29.621561
+      pos: 51.757675,-29.450457
       parent: 2
 - proto: RMCBarricadeHandrailKutjevo
   entities:
@@ -10326,7 +10345,7 @@ entities:
   - uid: 2048
     components:
     - type: Transform
-      pos: 50.915154,-29.20339
+      pos: 51.49788,-29.407793
       parent: 2
   - uid: 2168
     components:
@@ -11649,13 +11668,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 8.478481,-36.843872
       parent: 2
-- proto: RMCOverwatchConsoleWeYaRotating
-  entities:
-  - uid: 1898
-    components:
-    - type: Transform
-      pos: 35.50091,-25.319704
-      parent: 2
 - proto: RMCPersonalDesktop
   entities:
   - uid: 2030
@@ -12728,7 +12740,7 @@ entities:
   - uid: 2049
     components:
     - type: Transform
-      pos: 49.39041,-27.23834
+      pos: 51.081207,-29.251436
       parent: 2
 - proto: RMCStampSPP
   entities:
@@ -12869,6 +12881,21 @@ entities:
     components:
     - type: Transform
       pos: 20.64505,-28.178759
+      parent: 2
+- proto: RMCTelevision
+  entities:
+  - uid: 2379
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 49.5,-28.5
+      parent: 2
+- proto: RMCTelevisionWallMount
+  entities:
+  - uid: 2039
+    components:
+    - type: Transform
+      pos: 35.5,-25.5
       parent: 2
 - proto: RMCTrashBinGreen
   entities:

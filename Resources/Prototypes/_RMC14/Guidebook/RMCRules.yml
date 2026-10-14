@@ -66,6 +66,23 @@
   name: rmc-guide-entry-rules-fax-responder
   priority: 4
   text: "/ServerInfo/Guidebook/_RMC14/Rules/RMCFaxResponder.xml"
+  children:
+  - RMCRulesFaxResponderWeYa
+  - RMCRulesFaxResponderFreePress
+
+- type: guideEntry
+  parent: RMC
+  id: RMCRulesFaxResponderWeYa
+  name: rmc-guide-entry-rules-fax-responder-weya
+  priority: 1
+  text: "/ServerInfo/Guidebook/_RMC14/Rules/FaxResponder/RMCFaxResponderWeYa.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: RMCRulesFaxResponderFreePress
+  name: rmc-guide-entry-rules-fax-responder-free-press
+  priority: 2
+  text: "/ServerInfo/Guidebook/_RMC14/Rules/FaxResponder/RMCFaxResponderFreePress.xml"
 
 # command
 - type: guideEntry

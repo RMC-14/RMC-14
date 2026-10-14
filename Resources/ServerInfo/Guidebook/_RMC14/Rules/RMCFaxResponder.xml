@@ -1,9 +1,17 @@
 <Document>
-  <ColorBox Color="#3d1f1f" OutlineColor="#a83232">
-    <Box Orientation="Vertical" Margin="8">
-      [head=1][color=#ff6b6b]USE A DEDICATED CHARACTER[/color][/head]
+  <ColorBox Color="#1f2a3d" OutlineColor="#4a7fc1">
+    <Box Orientation="Vertical" HorizontalAlignment="Left" Margin="8">
+      [bold][color=#8cb8ff]Author's note[/color][/bold]
 
-      [head=3]Make a character that [italic]only[/italic] responds to faxes. It must not be used for any other role.[/head]
+      [bold]Please read the guidebook in its entirety before playing.[/bold]
+
+      Hey, this is Simon here. In [bold]good faith[/bold], this is being made available to everyone with enough playtime in the required role. Please do remember to abide by the guidebook, and also remember that [bold]good RP is co-operative[/bold].
+
+      Please try to follow the [bold]spirit[/bold] of what I have set out in this guidebook to a tee. Going against it in an egregious manner will just [color=#ff6b6b]get this feature closed and ruin the fun for everyone[/color].
+
+      Everything can be temporary. If you don't like something, [bold]we can work together[/bold] to adjust and tune the guidebook for everyone's benefit.
+
+      [bold][color=#ffcc66]You have been given a lot of faith to respond on behalf of admins. Don't ruin it.[/color][/bold]
     </Box>
   </ColorBox>
 
@@ -14,9 +22,12 @@
     <Box Orientation="Vertical" HorizontalAlignment="Left" Margin="6">
       [bold][color=#ff6b6b]Key rules[/color][/bold]
       - Breaking these guidelines can lose you the role, or in extreme cases, earn a server ban.
+      - Use a [bold]dedicated character[/bold] that [italic]only[/italic] responds to faxes. It must not be used for any other role.
+      - Use the [bold]supplied templates[/bold] in your bag. If you do not like them, open a pull request to add or change them.
       - You [bold]cannot[/bold] authorize ERTs or PMC deployments. Always AHELP.
-      - [bold]Never[/bold] transmit on your radio. It is listen-only.
+      - [bold]Never[/bold] go out of your way to contact any role other than the one you're designed to interact with, unless the moment [bold]requires[/bold] it.
       - You are [bold]epiphenomenal[/bold]: you never influence the outcome or decisions of the round.
+      - The people you are faxing are in an evolving round and their time is limited. When communicating directly, keep it short. Players aren't required to fax back.
     </Box>
   </ColorBox>
 
@@ -25,9 +36,9 @@
 
   [color=#ffcc66]This is not a very active role.[/color] Don't expect to regularly fax multiple departments; that isn't your purpose.
 
-  Your goal is to [bold]enhance the roleplay of players in the round[/bold], not to force your own story onto it. Many CLs and Correspondents join with a plan for how they want to roleplay, and being told to do something else can be jarring.
+  Your goal is to [bold]enhance the roleplay of players in the round[/bold], not to force your own story onto it. Many CLs and Correspondents join with a plan for how they want to roleplay, and being commanded and bossed around will ruin people's rounds if they aren't keen or privy.
 
-  - Setting tasks or missions is fine, but [bold]check first[/bold] that the player is willing, [bold]and[/bold] keep them comparable to the [bold]Available Faxes[/bold] examples below.
+  - Setting tasks or missions is fine, but [bold]check first[/bold] that the player is willing, [bold]and[/bold] keep them comparable to the [bold]Fax Ideas[/bold] on your faction's page.
   - Players can misread what you say (and sometimes self antag). Choose your words carefully.
   - If you don't know the person you're faxing, be precise and spell things out.
 
@@ -53,11 +64,11 @@
     </ColorBox>
     <ColorBox Color="#3d1f1f" OutlineColor="#a83232">
       <Box Orientation="Vertical" HorizontalAlignment="Left" Margin="4">
-        - Transmit on your radio, ever.
-        - Call anyone without an [bold]exceptional[/bold] reason.
+        - Call anyone unrelated without an [bold]exceptional[/bold] reason. (More on this on the [textlink="Weston-Yamada" link="RMCRulesFaxResponderWeYa"] and [textlink="Free Press" link="RMCRulesFaxResponderFreePress"] pages.)
         - Answer calls you weren't expecting.
         - Disrupt the round or push players to antag.
         - Authorize any ERT without an admin. (You need their help anyway.)
+        - Write egregious amounts of word salad to the people you respond to. They are in a round and their time is limited.
       </Box>
     </ColorBox>
   </Table>
@@ -75,36 +86,20 @@
   - [bold]2.[/bold] Establish the scenario at play.
   - [bold]3. Therefore[/bold], you or the player decide on an action.
   - [bold]4. But[/bold], that action comes with a caveat.
-  - [bold]5. Therefore[/bold], pivot, or escalate the severity.
+  - [bold]5. Therefore[/bold], pivot, or escalate the severity of the story / the story's blockade.
   - [bold]6.[/bold] ...and so on.
 
-  ### General Guidelines
+  ### In-Character Guidelines Checklist
   - Respond to relevant faxes addressed to your faction.
   - Coordinate with other responders if a message is misdirected.
   - Roleplay with other responders by phone or fax.
-  - Decide whether to report suspicious activity to UNMC Command, based on your faction's interests.
+  - Decide whether to report suspicious (no admin needed) activity to UNMC Command, based on your faction's interests.
   - Assume anyone trying to betray the UNMC is [bold]not[/bold] staff-approved, and discourage it unless told otherwise.
   - Request and respond to status reports from your faction's personnel.
 
-  ## Available Faxes
-
-  ### Weston-Yamada
-  - Give the Corporate Liaison non-antagonistic objectives.
-  - Have them collect materials or data from the colony. (They need permission from research staff, so it isn't antagonistic to the UNMC.)
-  - Order interviews with survivors or station personnel.
-  - Request NDAs from involved parties.
-  - Help newer players with worldbuilding.
-  - Provide remote legal support.
-  - [color=#ff6b6b]You may [bold]not[/bold] authorize a WeYa PMC deployment. Always AHELP such requests.[/color]
-
-  ### Free Press
-  - Have the Correspondent investigate rumors of colonial instability or corporate negligence.
-  - Have them document survivors' living conditions or morale.
-  - Request a feature story about anything that's happened in the round.
-  - Have them run "Man on the Street" interviews with low-ranking marines about the battle.
-  - [color=#ff6b6b]You may [bold]not[/bold] give objectives that break Marine Law, such as stealing items or classified documents.[/color]
-
   ## Fax Responder Types
+  Each available role has its own page with the faxes you can send and any extra rules for that faction. [bold]Read the page for the role you are playing.[/bold]
+
   <Table Columns="2">
     <ColorBox Color="#1f3d26" OutlineColor="#3fa35a">
       <Box>
@@ -118,8 +113,8 @@
     </ColorBox>
     <ColorBox Color="#1f3d26" OutlineColor="#3fa35a">
       <Box Orientation="Vertical" HorizontalAlignment="Left" Margin="4">
-        - Weston-Yamada
-        - Free Press
+        - [textlink="Weston-Yamada" link="RMCRulesFaxResponderWeYa"]
+        - [textlink="Free Press" link="RMCRulesFaxResponderFreePress"]
       </Box>
     </ColorBox>
     <ColorBox Color="#3a3320" OutlineColor="#b08d3c">

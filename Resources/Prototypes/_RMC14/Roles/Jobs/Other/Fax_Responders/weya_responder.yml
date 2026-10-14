@@ -43,7 +43,7 @@
 - type: startingGear
   id: RMCGearWeYaResponder
   equipment:
-    ears: RMCHeadsetWeYaResponder
+    # ears: RMCHeadsetWeYaResponder # removed for now, may come back as listen-only
     eyes: RMCGlassesMedicalHUDGlasses
     back: RMCSatchelFilledFaxResponderWeYa
     belt: CMClipboard
