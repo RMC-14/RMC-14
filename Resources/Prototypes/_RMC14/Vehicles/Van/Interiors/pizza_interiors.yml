@@ -6,6 +6,9 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: Tag
+    tags:
+    - HideContextMenu
   - type: Transform
     anchored: true
   - type: Physics
@@ -101,6 +104,9 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: Tag
+    tags:
+    - HideContextMenu
   - type: Transform
     anchored: true
   - type: Sprite
@@ -335,7 +341,9 @@
   id: VehiclePizzaVanBackground1
   components:
   - type: Sprite
-    state: background_2
+    layers:
+    - state: background_2
+      map: [ "roof" ]
   - type: RMCSpriteFade
     targetAlpha: 0.35
     changeRate: 4.0
@@ -357,7 +365,9 @@
   id: VehiclePizzaVanBackground3
   components:
   - type: Sprite
-    state: background_3
+    layers:
+    - state: background_3
+      map: [ "roof" ]
   - type: RMCSpriteFade
     targetAlpha: 0.35
     changeRate: 4.0
