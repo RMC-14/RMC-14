@@ -14,30 +14,30 @@
                 <graphics:StyleBoxFlat BackgroundColor="#12141A" />
             </PanelContainer.PanelOverride>
             <BoxContainer Orientation="Vertical" MinWidth="200" MaxWidth="200" Margin="8" SeparationOverride="4">
-                <SpriteView Name="TargetSpriteView"
+                <SpriteView Name="TargetSpriteView" Access="Public"
                             SetSize="64 64"
                             OverrideDirection="South"
                             Scale="2 2"
                             Stretch="Fit"
                             HorizontalAlignment="Center"
                             Margin="0 0 0 4" />
-                <Label Name="TargetNameLabel" HorizontalAlignment="Center" FontColorOverride="#FFFFFF" />
-                <PanelContainer Name="TargetStatusPanel" Access="Public" Margin="0 4 0 6" MinHeight="24">
-                    <Label Name="TargetStatusLabel" Access="Public" Margin="6 1" HorizontalAlignment="Center" />
+                <Label Name="TargetNameLabel" Access="Public" HorizontalAlignment="Center" FontColorOverride="#FFFFFF" />
+                <PanelContainer Name="TargetStatusPanel" Margin="0 4 0 6" MinHeight="24">
+                    <Label Name="TargetStatusLabel" Margin="6 1" HorizontalAlignment="Center" />
                 </PanelContainer>
 
                 <PanelContainer Name="TraitsSection" Access="Public">
                     <BoxContainer Orientation="Vertical">
-                        <PanelContainer Name="TraitsHeader" Access="Public">
+                        <PanelContainer Name="TraitsHeader">
                             <Label Text="TRAITS" FontColorOverride="#FFFFFF" Margin="6 2" />
                         </PanelContainer>
-                        <GridContainer Name="TraitsGrid" Access="Public" Columns="2" Margin="0 3 0 0" HSeparationOverride="6" VSeparationOverride="2" />
+                        <GridContainer Name="TraitsGrid" Columns="2" Margin="0 3 0 0" HSeparationOverride="6" VSeparationOverride="2" />
                     </BoxContainer>
                 </PanelContainer>
 
                 <PanelContainer Name="NotesSection" Access="Public" Margin="0 6 0 0" VerticalExpand="True">
                     <BoxContainer Orientation="Vertical">
-                        <PanelContainer Name="NotesHeader" Access="Public">
+                        <PanelContainer Name="NotesHeader">
                             <Label Text="NOTES" FontColorOverride="#FFFFFF" Margin="6 2" />
                         </PanelContainer>
                         <ScrollContainer HScrollEnabled="False" VerticalExpand="True" Margin="0 3 0 0">
@@ -50,42 +50,42 @@
 
         <!-- Middle: metric cards -->
         <ScrollContainer Name="MetricsColumn" Access="Public" HScrollEnabled="False" VerticalExpand="True" HorizontalExpand="True" SizeFlagsStretchRatio="4">
-        <BoxContainer Name="RightColumn" Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" SeparationOverride="6">
+            <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" SeparationOverride="6">
 
-            <BoxContainer Name="VitalsSection" Orientation="Vertical">
-                <PanelContainer Name="VitalsHeader" Access="Public">
-                    <Label Text="PLANT" FontColorOverride="#FFFFFF" Margin="6 2" />
-                </PanelContainer>
-                <GridContainer Columns="2" Margin="0 3 0 0" HSeparationOverride="4" VSeparationOverride="4">
-                    <botany:RMCBotanyMetricControl Name="HealthMetric" />
-                    <botany:RMCBotanyMetricControl Name="GrowthMetric" />
-                </GridContainer>
+                <BoxContainer Name="VitalsSection" Access="Public" Orientation="Vertical">
+                    <PanelContainer Name="VitalsHeader">
+                        <Label Text="PLANT" FontColorOverride="#FFFFFF" Margin="6 2" />
+                    </PanelContainer>
+                    <GridContainer Columns="2" Margin="0 3 0 0" HSeparationOverride="4" VSeparationOverride="4">
+                        <botany:RMCBotanyMetricControl Name="HealthMetric" Access="Public" />
+                        <botany:RMCBotanyMetricControl Name="GrowthMetric" Access="Public" />
+                    </GridContainer>
+                </BoxContainer>
+
+                <BoxContainer Name="ConditionsSection" Access="Public" Orientation="Vertical">
+                    <PanelContainer Name="ConditionsHeader">
+                        <Label Text="GROWTH CONDITIONS" FontColorOverride="#FFFFFF" Margin="6 2" />
+                    </PanelContainer>
+                    <GridContainer Columns="2" Margin="0 3 0 0" HSeparationOverride="4" VSeparationOverride="4">
+                        <botany:RMCBotanyMetricControl Name="TemperatureMetric" Access="Public" />
+                        <botany:RMCBotanyMetricControl Name="PressureMetric" Access="Public" />
+                    </GridContainer>
+                </BoxContainer>
+
+                <BoxContainer Name="TraySection" Access="Public" Orientation="Vertical">
+                    <PanelContainer Name="TrayHeader">
+                        <Label Text="TRAY STATUS" FontColorOverride="#FFFFFF" Margin="6 2" />
+                    </PanelContainer>
+                    <GridContainer Columns="2" Margin="0 3 0 0" HSeparationOverride="4" VSeparationOverride="4">
+                        <botany:RMCBotanyMetricControl Name="WaterMetric" Access="Public" />
+                        <botany:RMCBotanyMetricControl Name="NutritionMetric" Access="Public" />
+                        <botany:RMCBotanyMetricControl Name="PestMetric" Access="Public" />
+                        <botany:RMCBotanyMetricControl Name="WeedMetric" Access="Public" />
+                        <botany:RMCBotanyMetricControl Name="ToxinMetric" Access="Public" />
+                    </GridContainer>
+                </BoxContainer>
+
             </BoxContainer>
-
-            <BoxContainer Name="ConditionsSection" Orientation="Vertical">
-                <PanelContainer Name="ConditionsHeader" Access="Public">
-                    <Label Text="GROWTH CONDITIONS" FontColorOverride="#FFFFFF" Margin="6 2" />
-                </PanelContainer>
-                <GridContainer Columns="2" Margin="0 3 0 0" HSeparationOverride="4" VSeparationOverride="4">
-                    <botany:RMCBotanyMetricControl Name="TemperatureMetric" />
-                    <botany:RMCBotanyMetricControl Name="PressureMetric" />
-                </GridContainer>
-            </BoxContainer>
-
-            <BoxContainer Name="TraySection" Orientation="Vertical">
-                <PanelContainer Name="TrayHeader" Access="Public">
-                    <Label Text="TRAY STATUS" FontColorOverride="#FFFFFF" Margin="6 2" />
-                </PanelContainer>
-                <GridContainer Columns="2" Margin="0 3 0 0" HSeparationOverride="4" VSeparationOverride="4">
-                    <botany:RMCBotanyMetricControl Name="WaterMetric" />
-                    <botany:RMCBotanyMetricControl Name="NutritionMetric" />
-                    <botany:RMCBotanyMetricControl Name="PestMetric" />
-                    <botany:RMCBotanyMetricControl Name="WeedMetric" />
-                    <botany:RMCBotanyMetricControl Name="ToxinMetric" />
-                </GridContainer>
-            </BoxContainer>
-
-        </BoxContainer>
         </ScrollContainer>
 
         <!-- Right: chemical content, its own column -->
@@ -93,8 +93,8 @@
             <PanelContainer.PanelOverride>
                 <graphics:StyleBoxFlat BackgroundColor="#12141A" />
             </PanelContainer.PanelOverride>
-            <BoxContainer Name="ChemicalsSection" Orientation="Vertical" MinWidth="240" Margin="8" VerticalExpand="True">
-                <PanelContainer Name="ChemicalsHeader" Access="Public">
+            <BoxContainer Name="ChemicalsSection" Access="Public" Orientation="Vertical" MinWidth="240" Margin="8" VerticalExpand="True">
+                <PanelContainer Name="ChemicalsHeader">
                     <Label Text="CHEMICAL CONTENT" FontColorOverride="#FFFFFF" Margin="6 2" />
                 </PanelContainer>
                 <ScrollContainer HScrollEnabled="False" VerticalExpand="True" Margin="0 3 0 0">

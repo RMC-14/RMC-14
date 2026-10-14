@@ -1,0 +1,7 @@
+<PanelContainer xmlns="https://spacestation14.io">
+    <BoxContainer Orientation="Horizontal" VerticalAlignment="Center" Margin="4 2">
+        <PanelContainer Name="Marker" VerticalExpand="True" MinWidth="4" Margin="0 1 6 1" />
+        <Label Name="NameLabel" HorizontalExpand="True" />
+        <Label Name="AmountLabel" FontColorOverride="#9AA0AC" />
+    </BoxContainer>
+</PanelContainer>
