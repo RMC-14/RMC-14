@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: '- Simon'
-  changes:
-  - message: Added Impenetrable timed resin to fiorina
-    type: Add
-  id: 3195
-  time: '2026-05-14T10:26:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9789
 - author: Arykh
   changes:
   - message: Alerts on the Seperated HUD layout now expand vertically instead of only
@@ -4513,5 +4506,12 @@
   id: 3694
   time: '2026-10-13T13:09:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8205
+- author: Ozehk
+  changes:
+  - message: Ziptie boxes can no longer accept anything other than zipties.
+    type: Tweak
+  id: 3695
+  time: '2026-10-14T19:14:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10981
 Name: RMC14
 Order: -1
