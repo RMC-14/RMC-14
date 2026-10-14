@@ -1,10 +1,12 @@
 using System.Numerics;
+using Content.Client._RMC14.UserInterface;
 using Content.Client.Resources;
 using Content.Shared._RMC14.Botany;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
+using Robust.Shared.Maths;
 
 namespace Content.Client._RMC14.Botany;
 
@@ -14,6 +16,7 @@ internal static class BotanyUiStyle
     public static readonly Color GreenColor = Color.FromHex("#4CAF50");
     public static readonly Color TanColor = Color.FromHex("#ffb950");
     public static readonly Color RedColor = Color.FromHex("#8B2020");
+    public static readonly Color ActionColor = Color.FromHex("#d6d6d6");
 
     public static readonly Color MetricHealthColor = Color.FromHex("#E06C75");
     public static readonly Color MetricGrowthColor = Color.FromHex("#98C379");
@@ -25,6 +28,9 @@ internal static class BotanyUiStyle
     public static readonly Color MetricPestsColor = Color.FromHex("#D19A66");
     public static readonly Color MetricToxinsColor = Color.FromHex("#C678DD");
 
+    public static readonly Color RowColorA = Color.FromHex("#1B1B1E");
+    public static readonly Color RowColorB = Color.FromHex("#202025");
+
     public static StyleBoxFlat Flat(Color color)
     {
         return new StyleBoxFlat
@@ -35,6 +41,11 @@ internal static class BotanyUiStyle
             ContentMarginTopOverride = 1,
             ContentMarginBottomOverride = 1,
         };
+    }
+
+    public static Color GetRowColor(int rowIndex)
+    {
+        return rowIndex % 2 == 0 ? RowColorA : RowColorB;
     }
 
     public static void Header(PanelContainer panel)
@@ -56,6 +67,15 @@ internal static class BotanyUiStyle
         grid.AddChild(new Label { Text = value });
     }
 
+    public static void SetStatRows(GridContainer grid, IEnumerable<(string Name, string Value)> rows)
+    {
+        grid.DisposeAllChildren();
+        foreach (var (name, value) in rows)
+        {
+            AddStatRow(grid, name, value);
+        }
+    }
+
     public static string GetHarvestLabel(HarvestType type)
     {
         return type switch
@@ -73,16 +93,40 @@ internal static class BotanyUiStyle
         panel.PanelOverride = Flat(color);
     }
 
-    public static IconHandle IconButton(IResourceCache resourceCache, Button button, string texturePath, string whiteTexturePath, string text)
+    public static void ClearStatusRow(PanelContainer panel, Label label)
+    {
+        label.Text = string.Empty;
+        panel.PanelOverride = Flat(HeaderColor);
+    }
+
+    public static IconHandle IconButton(
+        IResourceCache resourceCache,
+        Button button,
+        string texturePath,
+        string text,
+        Color? color = null,
+        bool bordered = false,
+        Control.HAlignment alignment = Control.HAlignment.Center)
     {
         button.Text = null;
-        button.StyleBoxOverride = Flat(TanColor);
+        button.StyleBoxOverride = bordered
+            ? new StyleBoxFlat
+            {
+                BackgroundColor = color ?? TanColor,
+                BorderColor = Color.Black,
+                BorderThickness = new Thickness(1),
+                ContentMarginLeftOverride = 10,
+                ContentMarginRightOverride = 10,
+                ContentMarginTopOverride = 1,
+                ContentMarginBottomOverride = 1,
+            }
+            : Flat(color ?? TanColor);
         button.ModulateSelfOverride = Color.White;
 
         var row = new BoxContainer
         {
             Orientation = BoxContainer.LayoutOrientation.Horizontal,
-            HorizontalAlignment = Control.HAlignment.Center,
+            HorizontalAlignment = alignment,
             VerticalAlignment = Control.VAlignment.Center,
             SeparationOverride = 6,
         };
@@ -92,6 +136,7 @@ internal static class BotanyUiStyle
             Stretch = TextureRect.StretchMode.KeepAspectCentered,
             SetSize = new Vector2(14, 14),
             VerticalAlignment = Control.VAlignment.Center,
+            ModulateSelfOverride = RMCIcons.Idle,
         };
         row.AddChild(texture);
 
@@ -106,7 +151,7 @@ internal static class BotanyUiStyle
         button.AddChild(row);
 
         var handle = new IconHandle(resourceCache, texture, label);
-        handle.SetPath(texturePath, whiteTexturePath);
+        handle.SetPath(texturePath);
 
         button.OnMouseEntered += _ => handle.SetHovered(true);
         button.OnMouseExited += _ => handle.SetHovered(false);
@@ -120,10 +165,6 @@ internal static class BotanyUiStyle
         private readonly TextureRect _texture;
         public readonly Label Label;
 
-        private string _path = "";
-        private string _whitePath = "";
-        private bool _hovered;
-
         public IconHandle(IResourceCache resourceCache, TextureRect texture, Label label)
         {
             _resourceCache = resourceCache;
@@ -131,22 +172,14 @@ internal static class BotanyUiStyle
             Label = label;
         }
 
-        public void SetPath(string path, string whitePath)
+        public void SetPath(string path)
         {
-            _path = path;
-            _whitePath = whitePath;
-            Apply();
+            _texture.Texture = _resourceCache.GetTexture(path);
         }
 
         public void SetHovered(bool hovered)
         {
-            _hovered = hovered;
-            Apply();
-        }
-
-        private void Apply()
-        {
-            _texture.Texture = _resourceCache.GetTexture(_hovered ? _whitePath : _path);
+            _texture.ModulateSelfOverride = hovered ? RMCIcons.Hover : RMCIcons.Idle;
         }
     }
 }

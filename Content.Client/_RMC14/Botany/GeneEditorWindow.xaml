@@ -6,57 +6,70 @@
     MinWidth="460"
     MinHeight="420"
     SetSize="460 460">
-    <BoxContainer Orientation="Horizontal" Margin="6" SeparationOverride="6">
+    <PanelContainer>
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BackgroundColor="#181C24" />
+        </PanelContainer.PanelOverride>
+        <BoxContainer Orientation="Horizontal" Margin="6" SeparationOverride="6">
 
-        <!-- Left: seed portrait -->
-        <PanelContainer>
-            <PanelContainer.PanelOverride>
-                <graphics:StyleBoxFlat BackgroundColor="#12141A" />
-            </PanelContainer.PanelOverride>
-            <BoxContainer Orientation="Vertical" MinWidth="150" MaxWidth="150" Margin="8" SeparationOverride="4">
-                <SpriteView Name="SeedSpriteView"
-                            SetSize="64 64"
-                            OverrideDirection="South"
-                            Scale="2 2"
-                            Stretch="Fit"
-                            HorizontalAlignment="Center"
-                            Margin="0 0 0 4" />
-                <PanelContainer Name="SeedStatusPanel" Access="Public" HorizontalExpand="True" MinHeight="26">
-                    <Label Name="SeedStatusLabel" Access="Public" Margin="6 1" HorizontalAlignment="Center" ClipText="True" />
+            <!-- Left: seed portrait -->
+            <PanelContainer>
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat BackgroundColor="#12141A" />
+                </PanelContainer.PanelOverride>
+                <BoxContainer Orientation="Vertical" MinWidth="150" MaxWidth="150" Margin="8" SeparationOverride="4">
+                    <SpriteView Name="SeedSpriteView" Access="Public"
+                                SetSize="64 64"
+                                OverrideDirection="South"
+                                Scale="2 2"
+                                Stretch="Fit"
+                                HorizontalAlignment="Center"
+                                Margin="0 0 0 4" />
+                    <PanelContainer Name="SeedStatusPanel" HorizontalExpand="True" MinHeight="26">
+                        <Label Name="SeedStatusLabel" Margin="6 1" HorizontalAlignment="Center" ClipText="True" />
+                    </PanelContainer>
+                    <ScrollContainer HScrollEnabled="False" VerticalExpand="True" Margin="0 6 0 0">
+                        <GridContainer Name="SeedTraitsGrid" Columns="2" HSeparationOverride="6" VSeparationOverride="2" />
+                    </ScrollContainer>
+                </BoxContainer>
+            </PanelContainer>
+
+            <!-- Right: disc, genes, edit count, actions -->
+            <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" SeparationOverride="4">
+
+                <PanelContainer Name="DiscHeader">
+                    <Label Text="FLORA DATA DISC" FontColorOverride="#FFFFFF" Margin="6 2" />
                 </PanelContainer>
-                <ScrollContainer HScrollEnabled="False" VerticalExpand="True" Margin="0 6 0 0">
-                    <GridContainer Name="SeedTraitsGrid" Access="Public" Columns="2" HSeparationOverride="6" VSeparationOverride="2" />
+                <PanelContainer Name="DiscStatusPanel" Margin="0 3 0 0" MinHeight="26">
+                    <Label Name="DiscStatusLabel" Margin="6 1" VerticalAlignment="Center" />
+                </PanelContainer>
+                <Label Name="DiscSourceLabel"
+                       Access="Public"
+                       StyleClasses="LabelSubText"
+                       Margin="0 3 0 0" />
+                <ScrollContainer HScrollEnabled="False"
+                                 VerticalExpand="True"
+                                 MinHeight="80"
+                                 Margin="0 2 0 6">
+                    <BoxContainer Orientation="Vertical">
+                        <Label Name="NoDiscGenesLabel"
+                               Access="Public"
+                               Text="No genes stored on disc."
+                               StyleClasses="LabelSubText"
+                               Visible="False" />
+                        <BoxContainer Name="DiscGenesContainer" Orientation="Vertical" />
+                    </BoxContainer>
                 </ScrollContainer>
-            </BoxContainer>
-        </PanelContainer>
 
-        <!-- Right: disc, genes, edit count, actions -->
-        <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" SeparationOverride="4">
+                <botany:RMCBotanyMetricControl Name="EditCountMetric" Access="Public" Margin="0 0 0 6" />
 
-            <PanelContainer Name="DiscHeader" Access="Public">
-                <Label Text="FLORA DATA DISC" FontColorOverride="#FFFFFF" Margin="6 2" />
-            </PanelContainer>
-            <PanelContainer Name="DiscStatusPanel" Access="Public" Margin="0 3 0 0" MinHeight="26">
-                <Label Name="DiscStatusLabel" Access="Public" Margin="6 1" VerticalAlignment="Center" />
-            </PanelContainer>
-            <Label Name="DiscSourceLabel"
-                   StyleClasses="LabelSubText"
-                   Margin="0 3 0 0" />
-            <ScrollContainer HScrollEnabled="False"
-                             VerticalExpand="True"
-                             MinHeight="80"
-                             Margin="0 2 0 6">
-                <BoxContainer Name="DiscGenesContainer" Orientation="Vertical" />
-            </ScrollContainer>
+                <BoxContainer Orientation="Horizontal">
+                    <Button Name="ApplyButton" Access="Public" HorizontalExpand="True" Margin="0 0 2 0" />
+                    <Button Name="EjectButton" Access="Public" HorizontalExpand="True" Margin="2 0 0 0" />
+                </BoxContainer>
 
-            <botany:RMCBotanyMetricControl Name="EditCountMetric" Margin="0 0 0 6" />
-
-            <BoxContainer Orientation="Horizontal">
-                <Button Name="ApplyButton" HorizontalExpand="True" Margin="0 0 2 0" />
-                <Button Name="EjectButton" HorizontalExpand="True" Margin="2 0 0 0" />
             </BoxContainer>
 
         </BoxContainer>
-
-    </BoxContainer>
+    </PanelContainer>
 </controls:FancyWindow>
