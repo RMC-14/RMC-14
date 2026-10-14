@@ -104,6 +104,9 @@
     requiredSkills:
       RMCSkillLeadership: 3
   - type: RMCBattleExecute
+  - type: GunRequiresSkills
+    skills:
+      RMCSkillExecution: 1
 
 - type: entity
   parent: RMCWeaponRevolverMateba
