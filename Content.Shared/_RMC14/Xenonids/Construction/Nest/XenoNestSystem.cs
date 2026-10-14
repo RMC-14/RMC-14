@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Ghost;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -21,6 +22,7 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Maps;
+using Content.Shared.Mind;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Components;
@@ -46,6 +48,7 @@ public sealed class XenoNestSystem : EntitySystem
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedGhostSystem _ghost = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly OccluderSystem _occluder = default!;
@@ -60,6 +63,7 @@ public sealed class XenoNestSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private readonly RMCUnrevivableSystem _unrevivable = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
 
     private EntityQuery<OccluderComponent> _occluderQuery;
@@ -177,9 +181,12 @@ public sealed class XenoNestSystem : EntitySystem
             _standing.Down(ent, changeCollision: true);
 
         if (ent.Comp.GhostedId is { } id &&
+            !_unrevivable.IsUnrevivable(ent) &&
             _player.TryGetSessionById(id, out var player) &&
             player.AttachedEntity is { } ghost &&
-            HasComp<GhostComponent>(ghost))
+            HasComp<GhostComponent>(ghost) &&
+            _mind.TryGetMind(player, out _, out var mind) &&
+            mind.OwnedEntity == ghost)
         {
             _rmcChat.ChatMessageToOne("\n[font size=24][color=red]You have been freed from your nest and may go back to your body![/color][/font]\n", ghost);
 
