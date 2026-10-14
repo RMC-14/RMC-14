@@ -16,11 +16,12 @@ public sealed class TileFireColorVisualizerSystem : VisualizerSystem<TileFireCom
         SubscribeLocalEvent<RMCFireColorComponent, AfterAutoHandleStateEvent>(OnFireColorState);
     }
 
-    private void OnFireColorState(EntityUid uid, RMCFireColorComponent component, ref AfterAutoHandleStateEvent args)
+    private void OnFireColorState(Entity<RMCFireColorComponent> ent, ref AfterAutoHandleStateEvent args)
     {
+        var uid = ent.Owner;
         if (HasComp<TileFireComponent>(uid))
         {
-            ApplyColor(uid, component.Color);
+            ApplyColor(uid, ent.Comp.Color);
             return;
         }
 
