@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Shields;
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -35,6 +36,7 @@ public sealed class XenoBlitzSystem : EntitySystem
     [Dependency] private readonly VanguardShieldSystem _vanguard = default!;
     [Dependency] private readonly SharedInteractionSystem _interact = default!;
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCLagCompensationSystem _rmcLagCompensation = default!;
 
     public override void Initialize()
     {
@@ -97,14 +99,20 @@ public sealed class XenoBlitzSystem : EntitySystem
         if (ev.Cancelled)
             return;
 
-        //Note doesn't seem to work here
         EnsureComp<XenoSweepingComponent>(xeno);
 
         var hits = 0;
 
-        foreach (var hit in _lookup.GetEntitiesInRange<MobStateComponent>(_transform.GetMapCoordinates(xeno), xeno.Comp.Range))
+        var session = CompOrNull<ActorComponent>(xeno)?.PlayerSession;
+
+        foreach (var hit in _lookup.GetEntitiesInRange<MobStateComponent>(_transform.GetMapCoordinates(xeno), xeno.Comp.Range + xeno.Comp.LagCompensationLookupMargin, LookupFlags.Dynamic | LookupFlags.Static | LookupFlags.Approximate))
         {
             if (!_xeno.CanAbilityAttackTarget(xeno, hit))
+                continue;
+
+            // Range check against the target's lag-compensated position, without margin
+            var hitCoords = _rmcLagCompensation.GetCoordinates(hit, session);
+            if (!_transform.InRange(xeno.Owner.ToCoordinates(), hitCoords, xeno.Comp.Range))
                 continue;
 
             if (!_interact.InRangeUnobstructed(xeno.Owner, hit.Owner, xeno.Comp.Range))
