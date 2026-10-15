@@ -788,14 +788,16 @@
 
 # Identical to upstream ones, sans the name and description
 - type: entity
-  parent: ClothingEyesEyepatch
+  parent: RMCBaseScarfMask
   id: RMCEyepatch
-  suffix: RMC
+  suffix: RMC, Black
   name: eyepatch
   description: Once worn by swashbucklers of old, now more commonly associated with a figure of legend. They say he was big AND a boss. Impressive no? Don't let the MPs see you wearing this non-regulation attire.
   components:
   - type: Item
     storedRotation: 0
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/eyepatch.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/eyepatch.rsi
     slots:
@@ -804,6 +806,40 @@
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/eyepatch.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCEyepatch
+  id: RMCGreenEyepatch
+  suffix: RMC, Green
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Misc/green_eyepatch.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Misc/green_eyepatch.rsi
+    slots:
+    - MASK
+    - EYES
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Misc/green_eyepatch.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCEyepatch
+  id: RMCWhiteEyepatch
+  suffix: RMC, White
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Misc/white_eyepatch.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Misc/white_eyepatch.rsi
+    slots:
+    - MASK
+    - EYES
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Misc/white_eyepatch.rsi
       state: helmet
 
 - type: entity
@@ -890,6 +926,56 @@
     - EYES
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-trimex-personal-shades
+
+- type: entity
+  parent: RMCSunglassesBigFake
+  id: RMCSunglassesBigFakeRed
+  suffix: No FlashImmunity, Red
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/bigsunglasses_red.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/bigsunglasses_red.rsi
+
+- type: entity
+  parent: RMCSunglassesBigFake
+  id: RMCSunglassesBigFakeOrange
+  suffix: No FlashImmunity, Orange
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/bigsunglasses_orange.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/bigsunglasses_orange.rsi
+
+- type: entity
+  parent: RMCSunglassesBigFake
+  id: RMCSunglassesBigFakeYellow
+  suffix: No FlashImmunity, Yellow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/bigsunglasses_yellow.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/bigsunglasses_yellow.rsi
+
+- type: entity
+  parent: RMCSunglassesBigFake
+  id: RMCSunglassesBigFakeGreen
+  suffix: No FlashImmunity, Green
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/bigsunglasses_green.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/bigsunglasses_green.rsi
+
+- type: entity
+  parent: RMCSunglassesBigFake
+  id: RMCSunglassesBigFakeBlue
+  suffix: No FlashImmunity, Blue
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/bigsunglasses_blue.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/bigsunglasses_blue.rsi
 
 - type: entity
   parent: RMCSunglassesBigFake
