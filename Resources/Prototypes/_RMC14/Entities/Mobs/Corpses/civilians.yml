@@ -81,8 +81,8 @@
   storage:
     back:
     - RMCRadioHandheldColonyOff
-    # - CMFirstAidKitFilledRobust Uncomment when surgery kit is added
-    # TODO Surgery kit
+    - CMFirstAidKitFilledRobust
+    - CMFirstAidKitSurgeryFilled
 
 # Engineer
 - type: randomHumanoidSettings
