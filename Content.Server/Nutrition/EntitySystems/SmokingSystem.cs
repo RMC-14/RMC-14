@@ -17,6 +17,7 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Content.Shared.Atmos;
+using System.Linq;
 
 namespace Content.Server.Nutrition.EntitySystems
 {
@@ -155,6 +156,14 @@ namespace Content.Server.Nutrition.EntitySystems
                 {
                     continue;
                 }
+
+                // RMC14
+                if (smokable.ReagentInjectWhitelist != null)
+                {
+                    var whitelist = smokable.ReagentInjectWhitelist.ConvertAll<string>(x => x.ToString()).ToArray();
+                    inhaledSolution = inhaledSolution.SplitSolutionWithOnly(inhaledSolution.Volume, whitelist);
+                }
+                // RMC14
 
                 _reactiveSystem.DoEntityReaction(containerManager.Owner, inhaledSolution, ReactionMethod.Ingestion);
                 _bloodstreamSystem.TryAddToChemicals((containerManager.Owner, bloodstream), inhaledSolution);
