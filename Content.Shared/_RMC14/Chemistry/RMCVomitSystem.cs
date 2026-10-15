@@ -148,6 +148,9 @@ public sealed class RMCVomitSystem : EntitySystem
         _popup.PopupEntity(othersPopup, uid, Filter.PvsExcept(uid), true, PopupType.MediumCaution);
         _popup.PopupEntity(Loc.GetString("rmc-vomit-self"), uid, uid, PopupType.MediumCaution);
         _audio.PlayPvs(vomitComp.VomitSound, uid);
+
+        var vomitEvent = new RMCVomitEvent();
+        RaiseLocalEvent(uid, ref vomitEvent);
     }
 
     public override void Update(float frameTime)
@@ -194,3 +197,6 @@ public sealed class RMCVomitSystem : EntitySystem
         }
     }
 }
+
+[ByRefEvent]
+public record struct RMCVomitEvent();
