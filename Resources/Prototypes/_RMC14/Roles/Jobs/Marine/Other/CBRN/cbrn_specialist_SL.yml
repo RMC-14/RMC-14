@@ -16,7 +16,7 @@
   spawnMenuRoleName: CBRN Specialist Squad Leader
   overwatchSortPriority: -6
   overwatchShowName: true
-  overwatchRoleName: Squad Leader
+  overwatchRoleName: rmc-overwatch-role-squad-leader
   roleWeight: 1
   displayWeight: 6
   special:

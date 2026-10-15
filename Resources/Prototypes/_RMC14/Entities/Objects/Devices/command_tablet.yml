@@ -17,7 +17,7 @@
   - type: UserInterface
     interfaces:
       enum.MarineCommunicationsComputerUI.Key:
-        type: MarineCommunicationsComputerBui
+        type: CommandTabletBui
       enum.MarineControlComputerUi.MedalsPanel:
         type: MedalsPanelBui
       enum.TacticalMapComputerUi.Key:
