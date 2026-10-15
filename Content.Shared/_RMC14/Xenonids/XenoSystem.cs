@@ -11,6 +11,7 @@ using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Tackle;
 using Content.Shared._RMC14.Vendors;
 using Content.Shared._RMC14.Weapons.Melee;
+using Content.Shared._RMC14.Xenonids.Banish;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Egg;
@@ -507,6 +508,14 @@ public sealed partial class XenoSystem : EntitySystem
         // hiveless xenos can attack eachother
         if (_hive.FromSameHive(xeno, target))
             return false;
+
+        // banished xenos can't harm the hive they were banished from, the hive can still harm them
+        if (TryComp(xeno, out XenoBanishComponent? banish) &&
+            banish.OriginalHive is { } originalHive &&
+            _hive.IsMember(target, originalHive))
+        {
+            return false;
+        }
 
         if (_mobState.IsDead(target))
             return false;
