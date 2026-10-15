@@ -616,3 +616,30 @@
       CMGlass: 30000
   - type: StaticPrice
     price: 60
+
+- type: entity
+  parent: RMCVial
+  id: RMCVialLarge
+  name: large vial
+  description: A glass vial. Can hold up to 60 units.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Chemistry/large_vials.rsi
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 60
+  - type: SolutionTransfer
+    transferAmount: 5
+    maxTransferAmount: 60
+    canChangeTransferAmount: true
+    transferAmounts:
+    - 5
+    - 10
+    - 15
+    - 25
+    - 30
+    - 40
+    - 60
+  - type: StaticPrice
+    price: 20
