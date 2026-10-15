@@ -8,6 +8,9 @@ rmc-flamer-too-close = You are too close to your target!
 rmc-flamer-empty = You are out of fuel!
 rmc-broiler-switch-tank = Now using the tank in slot {$n}.
 rmc-broiler-action-examine = [bold]Press your [color=cyan]unique action[/color] keybind (Spacebar by default) to switch to a different broiler tank.[/bold]
+rmc-flamer-intense-activate = You switch the flamethrower to intense mode.
+rmc-flamer-intense-deactivate = You switch the flamethrower to standard mode.
+rmc-flamer-intense-action-examine = [bold]Press your [color=cyan]unique action[/color] keybind (Spacebar by default) to switch between firing modes.[/bold]
 
 rmc-flamer-tank-examine = Examine incinerator tank properties
 rmc-flamer-tank-examine-short = Tank properties
