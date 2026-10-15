@@ -12,12 +12,13 @@
       whitelist:
         tags: []
   - type: RemoveOnlyStorage
+  - type: RMCPillColorVisuals
   - type: Sprite
     sprite: _RMC14/Objects/Medical/pill_packets.rsi
     layers:
     - state: pill_packet
     - state: pill_packet_4
-      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      map: [ "enum.CMItemSlotsLayers.Fill", "enum.RMCPillColorVisuals.Layer" ]
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -58,7 +59,7 @@
     layers:
     - state: pill_packet
     - state: pill_packet_4
-      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      map: [ "enum.CMItemSlotsLayers.Fill", "enum.RMCPillColorVisuals.Layer" ]
       color: "#d87f2b"
   - type: CMItemSlots
     startingItem: CMPillTricordrazine
@@ -75,7 +76,7 @@
     layers:
     - state: pill_packet
     - state: pill_packet_4
-      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      map: [ "enum.CMItemSlotsLayers.Fill", "enum.RMCPillColorVisuals.Layer" ]
       color: "#ed4847"
   - type: CMItemSlots
     startingItem: CMPillBicaridine
@@ -92,7 +93,7 @@
     layers:
     - state: pill_packet
     - state: pill_packet_4
-      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      map: [ "enum.CMItemSlotsLayers.Fill", "enum.RMCPillColorVisuals.Layer" ]
       color: "#f5e123"
   - type: CMItemSlots
     startingItem: CMPillKelotane
