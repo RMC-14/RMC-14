@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.ARES;
 using Content.Shared._RMC14.ARES.Logs;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Scaling;
 using Content.Shared.Chemistry.Components;
@@ -11,6 +12,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
+using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Network;
@@ -33,6 +35,7 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
     [Dependency] private readonly ScalingSystem _scaling = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IConfigurationManager _configuration = default!;
 
     private readonly List<Entity<RMCChemicalDispenserComponent>> _dispensers = new();
     private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabMedicalLogs";
@@ -65,6 +68,8 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
                 subs.Event<RMCChemicalDispenserEjectBeakerBuiMsg>(OnChemicalDispenserEjectBeakerMsg);
                 subs.Event<RMCChemicalDispenserDispenseBuiMsg>(OnChemicalDispenserDispenseMsg);
             });
+
+        Subs.CVar(_configuration, RMCCVars.RMCReagentWatchList, OnReagentWatchListChange, false);
     }
 
     private void OnSolutionGetState(Entity<SolutionComponent> ent, ref ComponentGetState args)
@@ -404,5 +409,10 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
                 Dirty(dispenser);
             }
         }
+    }
+
+    private void OnReagentWatchListChange(string value, in CVarChangeInfo info)
+    {
+
     }
 }

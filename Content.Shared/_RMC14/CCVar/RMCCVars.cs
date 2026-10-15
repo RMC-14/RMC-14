@@ -628,4 +628,7 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<bool> RMCGMRequestSoundMuted =
         CVarDef.Create("rmc.gm_request_sound_muted", false,  CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
+
+    public static readonly CVarDef<string> RMCReagentWatchList =
+        CVarDef.Create("rmc.reagent_watch_list", "", CVar.SERVER | CVar.SERVERONLY);
 }
