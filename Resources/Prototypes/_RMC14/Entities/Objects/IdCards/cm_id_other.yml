@@ -232,6 +232,19 @@
     - RMCWeYa
 
 - type: entity
+  parent: CMIDCardGold
+  id: CMIDCardPilot
+  components:
+  - type: ItemIFF
+    factions:
+    - FactionWeYa
+    - FactionSurvivor
+  - type: Access
+    groups:
+    - Colony
+    - RMCWeYa
+
+- type: entity
   parent: RMCIDCardPMC
   id: RMCIDCardExecutiveBodyguard
   components:
