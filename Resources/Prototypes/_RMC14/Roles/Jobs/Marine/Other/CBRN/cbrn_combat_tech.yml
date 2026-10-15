@@ -11,6 +11,7 @@
   supervisors: cm-job-supervisors-sl
   ranks:
     RMCRankCorporal: []
+  access: [ CMAccessERT ]
   accessGroups:
   - ShipMasterAccess
   overwatchRoleName: Combat Technicians

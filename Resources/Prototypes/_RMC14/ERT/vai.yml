@@ -1,0 +1,191 @@
+- type: rmcERTCall
+  id: RMCERTCallContractors
+  name: rmc-ert-call-contractors-name
+  organization: rmc-ert-organization-vai
+  npcFactions: [ VAI ]
+  iffFaction: FactionVAI
+  category: rmc-ert-category-corporate
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-contractors
+  randomWeight: 10
+  allowedSources: [ Console, Admin ]
+  # TODO RMC14 replace with a dedicated Vanguard's Arrow contractor shuttle once ported.
+  shuttleMap: /Maps/_RMC14/Shuttles/ERT/ert_response_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttle
+  shuttleSpawnMarker: RMCERTShuttleStartPadFreelancers
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  roles:
+  - id: leader
+    name: rmc-ert-role-contractor-leader
+    job: RMCContractorLeader
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidContractorLeader
+      weight: 100
+    min: 1
+    max: 1
+    leader: true
+    roleTags: [ leader, command ]
+    seatTags: [ command ]
+    priority: 100
+  - id: standard
+    name: rmc-ert-role-contractor-standard
+    job: RMCContractorStandard
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidContractorStandardMAR40
+      weight: 30
+    - entity: RMCRandomHumanoidContractorStandardL42A
+      weight: 20
+    - entity: RMCRandomHumanoidContractorStandardM54C
+      weight: 20
+    - entity: RMCRandomHumanoidContractorStandardShotgun
+      weight: 10
+    - entity: RMCRandomHumanoidContractorStandardM54CMK1
+      weight: 10
+    min: 2
+    max: 3
+    roleTags: [ rifleman ]
+    seatTags: [ troop ]
+  - id: medic
+    name: rmc-ert-role-contractor-medic
+    job: RMCContractorMedic
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidContractorMedic
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ medic ]
+    seatTags: [ medic, troop ]
+  - id: engineer
+    name: rmc-ert-role-contractor-engineer
+    job: RMCContractorEngineer
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidContractorEngineer
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ engineer ]
+    seatTags: [ engineer, troop ]
+  - id: heavy
+    name: rmc-ert-role-contractor-heavy
+    job: RMCContractorHeavy
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidContractorHeavyMAR40LMG
+      weight: 66
+    - entity: RMCRandomHumanoidContractorHeavyM60
+      weight: 33
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ smartgunner, rifleman ]
+    seatTags: [ troop ]
+  announcements:
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-contractors-arrival
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 3
+    maxSlots: 7
+
+- type: rmcERTCall
+  id: RMCERTCallContractorsCovert
+  name: rmc-ert-call-contractors-covert-name
+  organization: rmc-ert-organization-vai
+  npcFactions: [ VAI ]
+  iffFaction: FactionVAI
+  category: rmc-ert-category-corporate
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-contractors-covert
+  randomWeight: 10
+  allowedSources: [ Console, Admin ]
+  # TODO RMC14 replace with a dedicated Vanguard's Arrow covert contractor shuttle once ported.
+  shuttleMap: /Maps/_RMC14/Shuttles/ERT/ert_response_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttle
+  shuttleSpawnMarker: RMCERTShuttleStartPadFreelancers
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  roles:
+  - id: leader
+    name: rmc-ert-role-contractor-covert-leader
+    job: RMCContractorCovertLeader
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidContractorCovertLeader
+      weight: 100
+    min: 1
+    max: 1
+    leader: true
+    roleTags: [ leader, command ]
+    seatTags: [ command ]
+    priority: 100
+  - id: standard
+    name: rmc-ert-role-contractor-covert-standard
+    job: RMCContractorCovertStandard
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidContractorCovertStandardMAR40
+      weight: 30
+    - entity: RMCRandomHumanoidContractorCovertStandardL42A
+      weight: 20
+    - entity: RMCRandomHumanoidContractorCovertStandardM54C
+      weight: 20
+    - entity: RMCRandomHumanoidContractorCovertStandardShotgun
+      weight: 10
+    - entity: RMCRandomHumanoidContractorCovertStandardM54CMK1
+      weight: 10
+    min: 2
+    max: 3
+    roleTags: [ rifleman ]
+    seatTags: [ troop ]
+  - id: medic
+    name: rmc-ert-role-contractor-covert-medic
+    job: RMCContractorCovertMedic
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidContractorCovertMedic
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ medic ]
+    seatTags: [ medic, troop ]
+  - id: engineer
+    name: rmc-ert-role-contractor-covert-engineer
+    job: RMCContractorCovertEngineer
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidContractorCovertEngineer
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ engineer ]
+    seatTags: [ engineer, troop ]
+  - id: heavy
+    name: rmc-ert-role-contractor-covert-heavy
+    job: RMCContractorCovertHeavy
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidContractorCovertHeavyMAR40LMG
+      weight: 66
+    - entity: RMCRandomHumanoidContractorCovertHeavyM60
+      weight: 33
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ smartgunner, rifleman ]
+    seatTags: [ troop ]
+  announcements:
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-contractors-covert-arrival
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 3
+    maxSlots: 7

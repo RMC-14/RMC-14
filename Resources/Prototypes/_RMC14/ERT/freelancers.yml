@@ -1,0 +1,125 @@
+- type: rmcERTCall
+  id: RMCERTCallFreelancersFriendly
+  name: rmc-ert-call-freelancers-friendly-name
+  organization: rmc-ert-organization-freelancers
+  npcFactions: [ WeYa ]
+  category: rmc-ert-category-corporate
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-freelancers-friendly
+  randomWeight: 15
+  allowedSources: [ Console, Admin ]
+  # TODO RMC14 replace with /Maps/_RMC14/Shuttles/ert_freelancer_shuttle.yml once ported.
+  shuttleMap: /Maps/_RMC14/Shuttles/ERT/ert_response_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttle
+  shuttleSpawnMarker: RMCERTShuttleStartPadFreelancers
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  roles:
+  - id: leader
+    name: rmc-ert-role-freelancer-leader
+    job: CMFreelancerLeader
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidFreelancerLeaderFriendly
+      weight: 100
+    min: 1
+    max: 1
+    leader: true
+    roleTags: [ leader, command ]
+    seatTags: [ command ]
+    priority: 100
+  - id: standard
+    name: rmc-ert-role-freelancer-standard
+    job: CMFreelancerRifleman
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidFreelancerStandardFriendly
+      weight: 100
+    min: 2
+    max: 6
+    roleTags: [ rifleman ]
+    seatTags: [ troop ]
+  - id: medic
+    name: rmc-ert-role-freelancer-medic
+    job: CMFreelancerMedic
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidFreelancerMedicFriendly
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ medic ]
+    seatTags: [ medic, troop ]
+  announcements:
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-freelancers-friendly-arrival
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 3
+    maxSlots: 8
+
+- type: rmcERTCall
+  id: RMCERTCallFreelancersHostile
+  name: rmc-ert-call-freelancers-hostile-name
+  organization: rmc-ert-organization-freelancers
+  npcFactions: [ WeYa ]
+  category: rmc-ert-category-hostile
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-freelancers-hostile
+  randomWeight: 5
+  allowedSources: [ Console, Admin ]
+  # TODO RMC14 replace with /Maps/_RMC14/Shuttles/ert_freelancer_shuttle.yml once ported.
+  shuttleMap: /Maps/_RMC14/Shuttles/ERT/ert_response_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttle
+  shuttleSpawnMarker: RMCERTShuttleStartPadFreelancers
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  roles:
+  - id: leader
+    name: rmc-ert-role-freelancer-leader
+    job: CMFreelancerLeader
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidFreelancerLeaderHostile
+      weight: 100
+    min: 1
+    max: 1
+    leader: true
+    roleTags: [ leader, command ]
+    seatTags: [ command ]
+    priority: 100
+  - id: standard
+    name: rmc-ert-role-freelancer-standard
+    job: CMFreelancerRifleman
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidFreelancerStandardHostile
+      weight: 100
+    min: 2
+    max: 6
+    roleTags: [ rifleman ]
+    seatTags: [ troop ]
+  - id: medic
+    name: rmc-ert-role-freelancer-medic
+    job: CMFreelancerMedic
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidFreelancerMedicHostile
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ medic ]
+    seatTags: [ medic, troop ]
+  announcements:
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-freelancers-hostile-arrival
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 3
+    maxSlots: 8

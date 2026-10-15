@@ -15,6 +15,13 @@
     sprite: _RMC14/Structures/Dropships/Airlocks/normandy_cargo.rsi
 
 - type: entity
+  parent: CMNormandyDoorAft
+  id: RMCNormandyDoorAftMobileDock
+  suffix: Mobile Dock
+  components:
+  - type: RMCShuttleMobileDock
+
+- type: entity
   parent: RMCDropshipDoorPortBase
   id: CMNormandyDoorPort
   name: normandy crew hatch
