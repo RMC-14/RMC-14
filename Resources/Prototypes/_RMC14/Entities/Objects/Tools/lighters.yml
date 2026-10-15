@@ -12,6 +12,11 @@
     - suitstorage
   - type: RMCLighter
   - type: ItemTogglePointLight
+  - type: RMCSurgeryTool
+    requiresHotCautery: true
+    toolTypes:
+    - kind: Cautery
+      quality: Substitute
 
 - type: entity
   abstract: true

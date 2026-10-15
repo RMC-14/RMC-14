@@ -1081,8 +1081,7 @@
         - CMTraumaKit
         - CMSurgicalLine
         - CMSynthGraft
-        components:
-        - CMSurgeryTool
+        - RMCSurgeryTool
     - type: FixedItemSizeStorage
   - type: Storage
     maxItemSize: Small
@@ -1093,8 +1092,7 @@
       - CMTraumaKit
       - CMSurgicalLine
       - CMSynthGraft
-      components:
-      - CMSurgeryTool
+      - RMCSurgeryTool
   - type: FixedItemSizeStorage
   - type: StorageFill
     contents:
@@ -1145,8 +1143,7 @@
         - CMTraumaKit
         - CMSurgicalLine
         - CMSynthGraft
-        components:
-        - CMSurgeryTool
+        - RMCSurgeryTool
     - type: FixedItemSizeStorage
   - type: Storage
     maxItemSize: Small
@@ -1157,8 +1154,7 @@
       - CMTraumaKit
       - CMSurgicalLine
       - CMSynthGraft
-      components:
-      - CMSurgeryTool
+      - RMCSurgeryTool
   - type: FixedItemSizeStorage
 
 - type: entity
