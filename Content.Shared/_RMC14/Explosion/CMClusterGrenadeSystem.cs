@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 using Content.Shared.Projectiles;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Timing;
@@ -28,7 +28,7 @@ public sealed class CMClusterGrenadeSystem : EntitySystem
             var projectile = EnsureComp<ProjectileLimitHitsComponent>(spawned);
 
             if (ent.Comp.IgnoreFirstHit)
-                projectile.IgnoredEntities = args.HitEntities;
+                projectile.IgnoredEntities = new(args.HitEntities);
 
             projectile.Limit = ent.Comp.Limit;
             projectile.OriginEntityId = args.OriginEntity.Id;

@@ -27,6 +27,13 @@
     - HE shells best use is to stun hostiles and clear out enemy positions
     - Primary use: [italic]Direct damage to hostiles and structures.[/italic]
 
+    <Box HorizontalAlignment="Left"> <GuideEntityEmbed Entity="RMCMortarShellFrag"/> </Box>
+
+    - Detonates on impact, combining an explosion with a dense, 360-degree burst of [color=#FFD700]high-velocity shrapnel[/color].
+    - The shrapnel travels up to [bold]8 tiles[/bold] and is especially effective against personnel and fortifications, including walls, doors, barricades, and Xenonid structures.
+    - [color=#FFD700]No IFF protection[/color]: friendlies within the shrapnel radius can be hit.
+    - Primary use: [italic]Damaging dispersed enemies and destroying fortifications.[/italic]
+
     <Box HorizontalAlignment="Left"> <GuideEntityEmbed Entity="RMCMortarShellIncendiary"/> </Box>
 
     - On impact creates a [color=#00FF00]large area of intense green fire[/color].
