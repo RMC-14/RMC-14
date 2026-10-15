@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared.DoAfter;
 using Content.Shared.Tools;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -13,6 +14,51 @@ public sealed partial class RMCFusionReactorComponent : Component
 {
     [DataField, AutoNetworkedField]
     public int Watts = 50_000;
+
+    [DataField, AutoNetworkedField]
+    public bool Enabled = true;
+
+    [DataField, AutoNetworkedField]
+    public float OutputPercent;
+
+    [DataField, AutoNetworkedField]
+    public float CurrentOutput;
+
+    [DataField, AutoNetworkedField]
+    public float BaseFailureChance;
+
+    [DataField, AutoNetworkedField]
+    public float FailureChance;
+
+    [DataField, AutoNetworkedField]
+    public bool TerminalFailure;
+
+    [DataField]
+    public TimeSpan RampInterval = TimeSpan.FromSeconds(2);
+
+    [DataField]
+    public TimeSpan FuelUseInterval = TimeSpan.FromSeconds(2);
+
+    [DataField]
+    public TimeSpan FailureCheckInterval = TimeSpan.FromSeconds(200);
+
+    [DataField]
+    public TimeSpan EmergencyFailureCheckInterval = TimeSpan.FromSeconds(34);
+
+    [DataField]
+    public TimeSpan ToggleDelay = TimeSpan.FromSeconds(2);
+
+    [DataField]
+    public TimeSpan EmergencyStartDelay = TimeSpan.FromSeconds(3);
+
+    [ViewVariables]
+    public TimeSpan NextRampAt;
+
+    [ViewVariables]
+    public TimeSpan NextFuelUseAt;
+
+    [ViewVariables]
+    public TimeSpan NextFailureCheckAt;
 
     [DataField, AutoNetworkedField]
     public RMCFusionReactorState State = RMCFusionReactorState.Working;
@@ -129,3 +175,9 @@ public enum RMCFusionReactorVisuals
     Overloaded,
     Empty,
 }
+
+[Serializable, NetSerializable]
+public sealed partial class RMCFusionReactorToggleDoAfterEvent : SimpleDoAfterEvent;
+
+[Serializable, NetSerializable]
+public sealed partial class RMCFusionReactorShutdownDoAfterEvent : SimpleDoAfterEvent;

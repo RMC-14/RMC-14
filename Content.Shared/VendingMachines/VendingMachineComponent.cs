@@ -32,6 +32,12 @@ namespace Content.Shared.VendingMachines
         [DataField]
         public TimeSpan EjectDelay = TimeSpan.FromSeconds(1.2);
 
+        /// <summary>
+        ///     Energy used for a successful vend, in joules.
+        /// </summary>
+        [DataField]
+        public float VendEnergy = 150; // RMC14
+
         [DataField]
         public Dictionary<string, VendingMachineInventoryEntry> Inventory = new();
 
