@@ -3,7 +3,6 @@
   id: CMSurvivorHost
   name: cm-job-name-survivor
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorHost
   startingGear: RMCGearHostSurvivorBase
   spawnMenuRoleName: Civilian Survivor (Xenonid Host)
 
@@ -12,8 +11,4 @@
   id: RMCGearHostSurvivorBase
   equipment:
     pocket1: RMCPouchSurvivalFillRadioOff
-
-- type: playTimeTracker
-  id: CMJobSurvivorHost
-  isHumanoid: true
 
