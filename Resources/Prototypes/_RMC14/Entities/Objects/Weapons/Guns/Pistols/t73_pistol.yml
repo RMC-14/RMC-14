@@ -31,7 +31,7 @@
     - Burst
     scatterWielded: 5
     scatterUnwielded: 5
-    baseFireRate: 2.5
+    baseFireRate: 4
     burstScatterMult: 5
     modifiers:
       Burst:
@@ -80,7 +80,7 @@
   parent: CMWeaponPistolBase
   id: RMCWeaponPistolT74
   name: Type 74 pistol
-  description: The Type 74 is the designation for a specially modified Type 73 with an integrated laser sight system, multiple lightning cuts to reduce weight in order to allow a higher pressure round to be used with the same recoil sping, and a more comfortable grip. Due to the adoption of the NP92, the Type 74 was produced in limited numbers, because of this it is typically only issued on request to high-ranking officers
+  description: The Type 74 is the designation for a specially modified Type 73 with an integrated laser sight system, multiple lightning cuts to reduce weight in order to allow a higher pressure round to be used with the same recoil sping, and a more comfortable grip. Due to the adoption of the NP92, the Type 74 was produced in limited numbers, because of this it is typically only issued on request to high-ranking officers.
   components:
   - type: Tag
     tags:
@@ -106,7 +106,7 @@
     - SemiAuto
     scatterWielded: 4
     scatterUnwielded: 4
-    baseFireRate: 2.5
+    baseFireRate: 4
     burstScatterMult: 5
   - type: ItemSlots
     slots:
