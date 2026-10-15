@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Evasion;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
+using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Mobs.Systems;
@@ -160,7 +161,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
             return false;
         }
 
-        var level = Math.Max(1, _skills.GetSkill(orders.Owner, orders.Comp.Skill));
+        var level = Math.Max(0.5, _skills.GetSkill(orders.Owner, orders.Comp.Skill));
         var duration = orders.Comp.Duration * (level + 1);
 
         _actions.SetCooldown(orders.Comp.FocusActionEntity, orders.Comp.Cooldown);
@@ -184,7 +185,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
     /// <summary>
     /// Adds an order component to an entity. If the order already exists then the multiplier and duration is overriden.
     /// </summary>
-    private void AddOrder<T>(Entity<MarineComponent> receiver, int multiplier, TimeSpan duration) where T : IOrderComponent, new()
+    private void AddOrder<T>(Entity<MarineComponent> receiver, FixedPoint2 multiplier, TimeSpan duration) where T : IOrderComponent, new()
     {
         var time = _timing.CurTime;
         var comp = EnsureComp<T>(receiver);
