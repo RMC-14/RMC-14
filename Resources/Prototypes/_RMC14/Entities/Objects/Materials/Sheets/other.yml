@@ -147,7 +147,7 @@
     - RMCCampfireBuild
     # wooden chair
     - RMCWoodenBarricadeBuild
-    - RMCWoodenCrateBuild
+    - RMCWoodenCrateList
     - RMCFishingPoleBuild
     # wooden door
     # coffin
