@@ -165,6 +165,17 @@
     sprite: _RMC14/Objects/Clothing/Belt/medicbag_pmc.rsi
 
 - type: entity
+  parent: RMCBeltMedicBagSPP
+  id: RMCBeltMedicBagNV
+  name: M276-LST pattern lifesaver bag
+  description: The M276-LST is a non-standard variant of the M276 pattern rig. This configuration mounts a duffel bag filled with a range of injectors and light medical supplies, and is common among medics.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/medicbag_nv.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/medicbag_nv.rsi
+
+- type: entity
   parent: RMCBeltMedicBagPMC
   id: RMCBeltMedicBagPMCFilled
   suffix: Filled
