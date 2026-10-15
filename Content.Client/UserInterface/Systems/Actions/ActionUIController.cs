@@ -243,15 +243,10 @@ public sealed partial class ActionUIController : UIController, IOnStateChanged<G
         if (index < 0 || index >= activeActions.Count)
             return;
 
-        if (activeActions[index] is not { } actionId ||
-            _actionsSystem?.GetAction(actionId) is not { } action)
+        if (activeActions[index] is not { } actionId)
             return;
 
-        // TODO: probably should have a clientside event raised for flexibility
-        if (EntityManager.TryGetComponent<TargetActionComponent>(actionId, out var target))
-            ToggleTargeting((actionId, action.Comp, target));
-        else
-            _actionsSystem?.TriggerAction(action);
+        TryTriggerRMCAction(actionId);
         // RMC14
     }
 
@@ -618,9 +613,6 @@ public sealed partial class ActionUIController : UIController, IOnStateChanged<G
 
     private void HandleActionUnpressed(GUIBoundKeyEventArgs args, ActionButton button)
     {
-        if (_actionsSystem == null)
-            return;
-
         args.Handle();
 
         if (_menuDragHelper.IsDragging)
@@ -634,19 +626,9 @@ public sealed partial class ActionUIController : UIController, IOnStateChanged<G
         if (button.Action is not {} action)
             return;
 
-        // TODO: make this an event
-        if (!EntityManager.TryGetComponent<TargetActionComponent>(action, out var target))
-        {
-            _actionsSystem?.TriggerAction(action);
-            return;
-        }
-
-        // for target actions, we go into "select target" mode, we don't
-        // message the server until we actually pick our target.
-
-        // if we're clicking the same thing we're already targeting for, then we simply cancel
-        // targeting
-        ToggleTargeting((action, action.Comp, target));
+        // RMC14
+        TryTriggerRMCAction(action);
+        // RMC14
     }
 
     private bool OnMenuBeginDrag()
