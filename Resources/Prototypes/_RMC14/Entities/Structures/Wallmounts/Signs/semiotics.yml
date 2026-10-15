@@ -5,6 +5,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Wallmounts/semiotics.rsi
+    snapCardinals: false
 
 - type: entity
   parent: CMSemioticBase
