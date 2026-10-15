@@ -94,7 +94,8 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
                 BreakOnMove = true,
                 BreakOnDamage = true,
                 CancelDuplicate = true,
-                DuplicateCondition = DuplicateConditions.SameTool
+                DuplicateCondition = DuplicateConditions.SameTool,
+                RootEntity = true,
             };
 
             if (_doAfter.TryStartDoAfter(doAfterEventArgs))
