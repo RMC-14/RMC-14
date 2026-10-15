@@ -94,6 +94,10 @@ rmc-ui-intel-recover-corpses = [color=#5B88B0]Recover corpses:[/color]
 rmc-ui-intel-colony-comms = [color=#5B88B0]Colony communications:[/color]
 rmc-ui-intel-colony-power = [color=#5B88B0]Colony power:[/color]
 rmc-ui-intel-clues = [bold]Clues[/bold]
+rmc-ui-intel-search-placeholder = Search clues...
+rmc-ui-intel-hide-areas = Hide Areas
+rmc-ui-intel-show-areas = Show Areas
+rmc-ui-intel-clue-area-preposition = in
 rmc-ui-intel-points-value = { $value }
 rmc-ui-intel-tier-value = { $value }
 rmc-ui-intel-total-credits = Total earned credits: { $value }
