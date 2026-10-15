@@ -1,7 +1,9 @@
 using Content.Server.Chat.Systems;
 using Content.Server.Speech.Components;
+using Content.Shared._RMC14.Language.Prototypes; // RMC14
 using Content.Shared._RMC14.Mentor.ImaginaryFriend;
 using Content.Shared._RMC14.Xenonids;
+using Robust.Shared.Prototypes; // RMC14
 
 namespace Content.Server.Speech.EntitySystems;
 
@@ -20,10 +22,14 @@ public sealed class ListeningSystem : EntitySystem
 
     private void OnSpeak(EntitySpokeEvent ev)
     {
-        PingListeners(ev.Source, ev.Message, ev.ObfuscatedMessage);
+        PingListeners(ev.Source, ev.Message, ev.ObfuscatedMessage, ev.Language); // RMC14
     }
 
-    public void PingListeners(EntityUid source, string message, string? obfuscatedMessage)
+    public void PingListeners(
+        EntityUid source,
+        string message,
+        string? obfuscatedMessage,
+        ProtoId<LanguagePrototype>? language = null) // RMC14
     {
         // RMC14
         if (HasComp<XenoComponent>(source) || HasComp<ImaginaryFriendComponent>(source))
@@ -38,11 +44,11 @@ public sealed class ListeningSystem : EntitySystem
         var sourcePos = _xforms.GetWorldPosition(sourceXform, xformQuery);
 
         var attemptEv = new ListenAttemptEvent(source);
-        var ev = new ListenEvent(message, source);
-        var obfuscatedEv = obfuscatedMessage == null ? null : new ListenEvent(obfuscatedMessage, source);
+        var ev = new ListenEvent(message, source, language); // RMC14
+        var obfuscatedEv = obfuscatedMessage == null ? null : new ListenEvent(obfuscatedMessage, source, language); // RMC14
         var query = EntityQueryEnumerator<ActiveListenerComponent, TransformComponent>();
 
-        while(query.MoveNext(out var listenerUid, out var listener, out var xform))
+        while (query.MoveNext(out var listenerUid, out var listener, out var xform))
         {
             if (xform.MapID != sourceXform.MapID)
                 continue;

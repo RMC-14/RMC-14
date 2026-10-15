@@ -41,6 +41,7 @@ rmc-universal-recorder-playback-silence = Skipping {$seconds} seconds of silence
 
 rmc-universal-recorder-transcript-header = Transcript:
 rmc-universal-recorder-transcript-name = {$tape} transcript
+rmc-universal-recorder-transcript-language = ({$language})
 
 rmc-universal-recorder-tape-side = It is currently on the [color=lightblue]{$side}[/color].
 rmc-universal-recorder-tape-side-front = front side
