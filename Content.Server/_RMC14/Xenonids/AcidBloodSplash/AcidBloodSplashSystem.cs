@@ -8,6 +8,7 @@ using Robust.Shared.Random;
 using Content.Shared.Coordinates;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared._RMC14.Emote;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
 using Robust.Shared.Player;
 using Content.Shared._RMC14.Xenonids;
@@ -94,8 +95,18 @@ public sealed class AcidBloodSplashSystem : EntitySystem
 
             _audio.PlayPvs(ent.Comp.AcidSplashSound, target);
 
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-acid-blood-target-others", ("target", target)), target, Filter.PvsExcept(target), true, PopupType.SmallCaution);
             _popup.PopupEntity(Loc.GetString("rmc-xeno-acid-blood-target-self"), target, target, PopupType.MediumCaution);
+
+            var others = Filter.PvsExcept(target).Recipients;
+            foreach (var other in others)
+            {
+                if (other.AttachedEntity is not { } otherEnt)
+                    continue;
+
+                var otherTarget = ("target", Identity.Name(target, EntityManager, otherEnt));
+                var otherMessage = Loc.GetString("rmc-xeno-acid-blood-target-others", otherTarget);
+                _popup.PopupEntity(otherMessage, target, otherEnt, PopupType.SmallCaution);
+            }
 
             // TODO: don't activate when target don't feel pain
             if (_random.NextFloat() < ent.Comp.TargetScreamProbability && !HasComp<RMCUnconsciousComponent>(target))
