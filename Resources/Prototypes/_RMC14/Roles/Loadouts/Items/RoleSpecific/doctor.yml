@@ -1,0 +1,24 @@
+﻿# Doctor
+- type: loadout
+  id: RMCSurgeonRoleChange
+  cost: 0
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobDoctor
+      time: 36000 # 10 hours
+  equipment:
+    pocket1: RMCPamphletSurgeon
+
+- type: loadout
+  id: RMCPharmaRoleChange
+  cost: 0
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobDoctor
+      time: 36000 # 10 hours
+  equipment:
+    pocket1: RMCPamphletPharma
