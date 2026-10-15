@@ -14,6 +14,7 @@ using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Jittering;
 using Content.Shared.Mobs;
@@ -25,6 +26,7 @@ using Content.Shared.StatusEffectNew;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -305,7 +307,18 @@ public abstract class SharedXenoHealSystem : EntitySystem
 
         SacrificialHealShout(ent);
         _xenoAnnounce.AnnounceSameHive(ent.Owner, Loc.GetString("rmc-xeno-sacrifice-heal-target-announcement", ("healer_xeno", ent), ("target_xeno", target)), popup:PopupType.Large);
-        _popup.PopupPredicted(Loc.GetString("rmc-xeno-sacrifice-heal-target-enviorment", ("healer_xeno", ent), ("target_xeno", target)), target, ent, PopupType.Medium);
+
+        var others = Filter.Pvs(ent).Recipients;
+        foreach (var other in others)
+        {
+            if (other.AttachedEntity is not { } otherEnt)
+            continue;
+
+            var healerXeno = ("healer_xeno", Identity.Name(ent, EntityManager, otherEnt));
+            var targetXeno = ("target_xeno", Identity.Name(target, EntityManager, otherEnt));
+            var healMessage = Loc.GetString("rmc-xeno-sacrifice-heal-target-enviorment", healerXeno, targetXeno);
+            _popup.PopupEntity(healMessage, target, otherEnt, PopupType.Medium);
+        }
 
         // Heal from crit
         var targetTotalDamage = targetDamageComp.TotalDamage;
