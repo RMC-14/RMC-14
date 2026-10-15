@@ -29,3 +29,7 @@ rmc-disarm-success-target = {$performerName} disarms you!
 rmc-disarm-discharge-others = {$performerName} accidentally discharges {$targetName}'s {$gun} during the struggle!
 rmc-disarm-discharge-self = You accidentally discharge {$targetName}'s {$gun} during the struggle!
 rmc-disarm-discharge-target = {$performerName} accidentally discharges your {$gun} during the struggle!
+
+rmc-tackle-fail-slash-others = {CAPITALIZE(THE($performerName))} fumbles stupidly for a moment, then slashes {$targetName}!
+rmc-tackle-fail-slash-self = Your oversized claws and small mind get in the way of restraining, slashing {$targetName}!
+rmc-tackle-fail-slash-target = {CAPITALIZE(THE($performerName))} fumbles stupidly for a moment, then slashes you!
