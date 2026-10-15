@@ -55065,7 +55065,7 @@ entities:
         - 0
         - 0
         - 0
-- proto: ArmorHelmetPMCRiot
+- proto: RMCArmorHelmetM10CMBVisorSWAT
   entities:
   - uid: 3
     components:
@@ -57732,7 +57732,7 @@ entities:
       parent: 1
     - type: SpriteSetRenderOrder
       offset: -0.5,-1.5
-- proto: CMArmorM3VLSynth
+- proto: RMCArmorPMCRiotCMBSynth
   entities:
   - uid: 461
     components:
@@ -82489,7 +82489,7 @@ entities:
     - type: Transform
       pos: 16.5,-50.5
       parent: 1
-- proto: RMCArmorPMCRiot
+- proto: RMCArmorPMCRiotCMB
   entities:
   - uid: 4
     components:
@@ -94549,7 +94549,7 @@ entities:
     - type: Transform
       pos: 45.5,-33.5
       parent: 1
-- proto: RMCJumpsuitRiotControl
+- proto: RMCSwatCMBUniform
   entities:
   - uid: 5
     components:
@@ -110120,7 +110120,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: -56.5,68.5
       parent: 1
-- proto: RMCRC6RiotShield
+- proto: RMCVisorSWAT
   entities:
   - uid: 9403
     components:
