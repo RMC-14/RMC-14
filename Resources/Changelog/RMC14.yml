@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Thereisabear
-  changes:
-  - message: Squad tracker no longer constantly resets itself to a FTL.
-    type: Fix
-  id: 3197
-  time: '2026-05-14T10:24:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9780
 - author: yagwog
   changes:
   - message: timed Impenetrable walls on shivas
@@ -4512,5 +4505,13 @@
   id: 3696
   time: '2026-10-15T14:32:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10491
+- author: carccborg
+  changes:
+  - message: Fixed names being revealed to the opposite faction during object/wall
+      slamming
+    type: Fix
+  id: 3697
+  time: '2026-10-15T20:21:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10718
 Name: RMC14
 Order: -1
