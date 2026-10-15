@@ -121,19 +121,33 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
+    layers:
+    - sprite: /Textures/_RMC14/Effects/xeno_secrete.rsi
+      state: secrete_base
+    - map: ["enum.XenoConstructionVisualLayers.Animation"]
+      state: sticky
+
+- type: entity
+  parent: RMCBaseEffectXenoStructure
+  id: RMCEffectXenoFastResin
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    layers:
+    - sprite: /Textures/_RMC14/Effects/xeno_secrete.rsi
+      state: secrete_base
+    - map: ["enum.XenoConstructionVisualLayers.Animation"]
+      state: fast
+
+- type: entity
+  parent: RMCBaseEffectXenoStructure
+  id: RMCEffectXenoResinSpikes
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
     sprite: /Textures/_RMC14/Effects/xeno_secrete.rsi
     layers:
     - state: secrete_base
-
-- type: entity
-  parent: RMCEffectXenoStickyResin
-  id: RMCEffectXenoFastResin
-  categories: [ HideSpawnMenu ]
-
-- type: entity
-  parent: RMCEffectXenoStickyResin
-  id: RMCEffectXenoResinSpikes
-  categories: [ HideSpawnMenu ]
 
 - type: entity
   parent: RMCBaseEffectXenoStructure
