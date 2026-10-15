@@ -1,5 +1,6 @@
 using Content.Server.DoAfter;
 using Content.Server.Nutrition.Components;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.DoAfter;
@@ -27,6 +28,7 @@ public sealed class SliceableFoodSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -50,9 +52,12 @@ public sealed class SliceableFoodSystem : EntitySystem
         if (!TryComp<UtensilComponent>(args.Used, out var utensil) || (utensil.Types & UtensilType.Knife) == 0)
             return;
 
+        var delay = entity.Comp.SliceTime * _skills.GetSkillDelayMultiplier(args.User, entity.Comp.SliceSkill);
+
+
         var doAfterArgs = new DoAfterArgs(EntityManager,
             args.User,
-            entity.Comp.SliceTime,
+            delay,
             new SliceFoodDoAfterEvent(),
             entity,
             entity,
