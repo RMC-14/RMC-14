@@ -1,0 +1,14 @@
+- type: emote
+  id: PainGrimace
+  name: rmc-chat-emote-name-pain-grimace
+  chatMessages: ["rmc-chat-emote-msg-pain-grimace"]
+
+- type: emote
+  id: TroubleEyeOpen
+  name: rmc-chat-emote-name-trouble-eye-open
+  chatMessages: ["rmc-chat-emote-msg-trouble-eye-open"]
+
+- type: emote
+  id: TroubleStanding
+  name: rmc-chat-emote-name-pain-trouble-standing
+  chatMessages: ["rmc-chat-emote-msg-pain-trouble-standing"]
