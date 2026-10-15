@@ -16,6 +16,11 @@
   prefix: Sgt.
 
 - type: rank
+  id: RMCRankTSEPAInspectorAssistant
+  name: Assistant Inspector
+  prefix: Ass. Insp.
+
+- type: rank
   id: RMCRankTSEPAInspector
   name: Inspector
   prefix: Insp.
@@ -40,3 +45,14 @@
   name: Commissioner
   prefix: Com.
 
+# SAT Ranks
+
+- type: rank
+  id: RMCRankSATOperator
+  name: Operator
+  prefix: Opr.
+
+- type: rank
+  id: RMCRankSATSeniorOperator
+  name: Senior Operator
+  prefix: Sr. Opr.

@@ -75,3 +75,7 @@ rmc-squad-info-RCMLieutenant = Lieutenant
 
 rmc-squad-info-ParaTeamLeader = Team Leader
 rmc-squad-info-ParaCommander = Commander
+
+rmc-squad-info-InspectorTSEPAPVE = Inspector
+rmc-squad-info-SergeantTSEPAPVE = Sergeant
+rmc-squad-info-SeniorConstableTSEPAPVE = Senior Constable
