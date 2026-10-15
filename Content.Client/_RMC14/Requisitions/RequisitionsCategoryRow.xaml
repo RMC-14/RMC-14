@@ -1,0 +1,10 @@
+<controls:RequisitionsCategoryRow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Requisitions"
+    Orientation="Horizontal"
+    HorizontalExpand="True"
+    Margin="0 2">
+    <controls:RequisitionsCategoryButton Name="FirstButton" Access="Public" Margin="2 0" />
+    <controls:RequisitionsCategoryButton Name="SecondButton" Access="Public" Margin="2 0" />
+    <Control Name="Spacer" Access="Public" HorizontalExpand="True" Visible="False" />
+</controls:RequisitionsCategoryRow>

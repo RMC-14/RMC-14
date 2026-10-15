@@ -7,10 +7,6 @@ namespace Content.Client._RMC14.Requisitions;
 [GenerateTypedNameReferences]
 public sealed partial class RequisitionsCartRow : BoxContainer
 {
-    public int CategoryIndex { get; set; }
-    public int EntryIndex { get; set; }
-    public int UnitCost { get; set; }
-
     public RequisitionsCartRow()
     {
         RobustXamlLoader.Load(this);

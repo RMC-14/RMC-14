@@ -12,7 +12,6 @@ using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using static Content.Shared._RMC14.Requisitions.Components.RequisitionsElevatorMode;
-using static Robust.Client.UserInterface.Control;
 
 namespace Content.Client._RMC14.Requisitions;
 
@@ -281,25 +280,21 @@ public sealed class RequisitionsBui : BoundUserInterface, IRefreshableBui
 
     private static Button CreateCategoryButton(string text, bool disabled)
     {
-        return new Button
+        return new RequisitionsCategoryButton
         {
             Text = text,
             Disabled = disabled,
-            ClipText = false,
-            HorizontalExpand = true,
-            StyleClasses = { "ButtonSquare" },
         };
     }
 
     private static Button CreateBlackMarketButton(bool disabled)
     {
-        var button = CreateCategoryButton(Loc.GetString("rmc-requisitions-black-market-button"), disabled);
-        button.StyleBoxOverride = new StyleBoxFlat
+        var button = new RequisitionsCategoryButton
         {
-            BackgroundColor = Color.FromHex("#311218"),
-            BorderColor = Color.FromHex("#ce3349"),
-            BorderThickness = new Thickness(2),
+            Text = Loc.GetString("rmc-requisitions-black-market-button"),
+            Disabled = disabled,
         };
+        button.ApplyBlackMarketStyle();
         return button;
     }
 
@@ -356,9 +351,6 @@ public sealed class RequisitionsBui : BoundUserInterface, IRefreshableBui
                 var key = new CartKey(categoryIndex, entryIndex);
                 var card = new RequisitionsProductCard
                 {
-                    CategoryIndex = categoryIndex,
-                    EntryIndex = entryIndex,
-                    UnitCost = entry.BlackMarket ? entry.BlackMarketCost : entry.Cost,
                     Cost = { Text = GetCostText(entry) },
                     Icon =
                     {
@@ -381,10 +373,7 @@ public sealed class RequisitionsBui : BoundUserInterface, IRefreshableBui
 
         if (added == 0)
         {
-            _window.ProductsContainer.AddChild(new Label
-            {
-                Text = Loc.GetString("rmc-requisitions-products-empty"),
-            });
+            AddProductsLabel(Loc.GetString("rmc-requisitions-products-empty"));
         }
     }
 
@@ -415,22 +404,18 @@ public sealed class RequisitionsBui : BoundUserInterface, IRefreshableBui
             "rmc-requisitions-black-market-balance",
             ("wy", _state.BlackMarketBalance))));
 
-        var showBriefingButton = !_mendozaIntroSeen || _mendozaBriefingExpanded;
         home.DialoguePanel.Visible = PopulateBlackMarketDialogue(home.DialogueContents);
 
-        if (showBriefingButton)
+        home.BriefingButton.Visible = true;
+        home.BriefingButton.Text = Loc.GetString(_mendozaBriefingExpanded
+            ? "rmc-requisitions-black-market-briefing-hide"
+            : "rmc-requisitions-black-market-briefing-show");
+        home.BriefingButton.OnPressed += _ =>
         {
-            home.BriefingButton.Visible = true;
-            home.BriefingButton.Text = Loc.GetString(_mendozaBriefingExpanded
-                ? "rmc-requisitions-black-market-briefing-hide"
-                : "rmc-requisitions-black-market-briefing-show");
-            home.BriefingButton.OnPressed += _ =>
-            {
-                _mendozaBriefingExpanded = !_mendozaBriefingExpanded;
-                _mendozaDialogueRolled = false;
-                RefreshShop();
-            };
-        }
+            _mendozaBriefingExpanded = !_mendozaBriefingExpanded;
+            _mendozaDialogueRolled = false;
+            RefreshShop();
+        };
 
         PopulateBlackMarketCategoryButtons(home.CategoryButtons, computer.BlackMarketCategories);
 
@@ -484,89 +469,52 @@ public sealed class RequisitionsBui : BoundUserInterface, IRefreshableBui
         if (_window == null)
             return;
 
-        var header = new BoxContainer
-        {
-            Orientation = BoxContainer.LayoutOrientation.Horizontal,
-            HorizontalExpand = true,
-            Margin = new Thickness(0, 0, 0, 6),
-        };
-
-        var backButton = CreateBlackMarketButton(false);
-        backButton.Text = Loc.GetString("rmc-requisitions-black-market-home");
-        backButton.MinWidth = 120;
-        backButton.HorizontalExpand = false;
-        backButton.OnPressed += _ =>
+        var header = new RequisitionsBlackMarketCategoryHeader();
+        header.BackButton.OnPressed += _ =>
         {
             _selectedBlackMarketCategory = null;
             _mendozaDialogueRolled = false;
             ClearSearch();
             RefreshShop();
         };
-        header.AddChild(backButton);
-
-        var title = new RichTextLabel
-        {
-            HorizontalExpand = true,
-            Margin = new Thickness(8, 4, 0, 0),
-        };
-        title.SetMessage(FormattedMessage.FromMarkupOrThrow(Loc.GetString(
+        header.Title.SetMessage(FormattedMessage.FromMarkupOrThrow(Loc.GetString(
             "rmc-requisitions-products-header",
             ("category", Loc.GetString(category.Name)))));
-        header.AddChild(title);
-
-        header.AddChild(CreateBlackMarketBalanceLabel());
-
-        _window.ProductsContainer.AddChild(header);
-    }
-
-    private RichTextLabel CreateBlackMarketBalanceLabel()
-    {
-        var balance = new RichTextLabel
-        {
-            HorizontalAlignment = HAlignment.Right,
-        };
-        balance.SetMessage(FormattedMessage.FromMarkupOrThrow(Loc.GetString(
+        header.Balance.SetMessage(FormattedMessage.FromMarkupOrThrow(Loc.GetString(
             "rmc-requisitions-black-market-balance",
             ("wy", _state?.BlackMarketBalance ?? 0))));
 
-        return balance;
+        _window.ProductsContainer.AddChild(header);
     }
 
     private void PopulateBlackMarketCategoryButtons(BoxContainer contents, List<RequisitionsCategory> categories)
     {
         if (categories.Count == 0)
         {
-            contents.AddChild(new Label
-            {
-                Text = Loc.GetString("rmc-requisitions-black-market-no-categories"),
-            });
+            AddProductsLabel(contents, Loc.GetString("rmc-requisitions-black-market-no-categories"));
             return;
         }
 
         for (var i = 0; i < categories.Count; i += 2)
         {
-            var row = new BoxContainer
-            {
-                Orientation = BoxContainer.LayoutOrientation.Horizontal,
-                HorizontalExpand = true,
-                Margin = new Thickness(0, 2),
-            };
+            var row = new RequisitionsCategoryRow();
 
-            AddBlackMarketCategoryButton(row, categories, i);
+            BindBlackMarketCategoryButton(row.FirstButton, categories, i);
             if (i + 1 < categories.Count)
-                AddBlackMarketCategoryButton(row, categories, i + 1);
+                BindBlackMarketCategoryButton(row.SecondButton, categories, i + 1);
             else
-                row.AddChild(new Control { HorizontalExpand = true });
+            {
+                row.SecondButton.Visible = false;
+                row.Spacer.Visible = true;
+            }
 
             contents.AddChild(row);
         }
     }
 
-    private void AddBlackMarketCategoryButton(BoxContainer row, List<RequisitionsCategory> categories, int categoryIndex)
+    private void BindBlackMarketCategoryButton(Button button, List<RequisitionsCategory> categories, int categoryIndex)
     {
-        var button = CreateCategoryButton(Loc.GetString(categories[categoryIndex].Name), false);
-        button.HorizontalExpand = true;
-        button.Margin = new Thickness(2, 0);
+        button.Text = Loc.GetString(categories[categoryIndex].Name);
         button.OnPressed += _ =>
         {
             _selectedBlackMarketCategory = categoryIndex;
@@ -574,7 +522,6 @@ public sealed class RequisitionsBui : BoundUserInterface, IRefreshableBui
             ClearSearch();
             RefreshShop();
         };
-        row.AddChild(button);
     }
 
     private void PopulateBlackMarketSeizureNotice()
@@ -600,7 +547,7 @@ public sealed class RequisitionsBui : BoundUserInterface, IRefreshableBui
 
     private static RichTextLabel CreateProductsLabel(string text, Color? color = null)
     {
-        var label = new RichTextLabel();
+        var label = new RequisitionsMessage();
         label.SetMessage(FormattedMessage.FromUnformatted(text), defaultColor: color ?? Color.LightGray);
         return label;
     }
@@ -761,9 +708,6 @@ public sealed class RequisitionsBui : BoundUserInterface, IRefreshableBui
             visibleItems++;
             var row = new RequisitionsCartRow
             {
-                CategoryIndex = key.Category,
-                EntryIndex = key.Entry,
-                UnitCost = entry.BlackMarket ? entry.BlackMarketCost : entry.Cost,
                 Quantity = { Text = amount.ToString() },
                 Cost = { Text = GetLineCostText(entry, amount) },
                 Icon =

@@ -5,8 +5,9 @@ using Content.Shared._RMC14.Requisitions;
 using Content.Shared._RMC14.Requisitions.Components;
 using Content.Shared.Cargo.Components;
 using Content.Shared.Coordinates;
-using Content.Shared.DoAfter;
 using Content.Shared.Database;
+using Content.Shared.DoAfter;
+using Content.Shared.GameTicking;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -28,6 +29,7 @@ namespace Content.Server._RMC14.Requisitions;
 public sealed partial class RequisitionsSystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly RMCBlackMarketProvenanceSystem _blackMarketProvenance = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -36,6 +38,8 @@ public sealed partial class RequisitionsSystem
 
     private static readonly ProtoId<NpcFactionPrototype> SimpleHostileFaction = "SimpleHostile";
     private readonly HashSet<EntityUid> _pendingMendozaDeathAftermath = new();
+    private readonly HashSet<EntityUid> _activeBlackMarketScanners = new();
+    private readonly List<EntityUid> _finishedBlackMarketScanners = new();
 
     private static readonly (TimeSpan Delay, SoundSpecifier Sound)[] MendozaDeathSounds =
     [
@@ -89,6 +93,30 @@ public sealed partial class RequisitionsSystem
         SubscribeLocalEvent<RequisitionsComputerComponent, RMCBlackMarketConsoleHackTuneDoAfterEvent>(OnBlackMarketHackTune);
         SubscribeLocalEvent<RequisitionsComputerComponent, RMCBlackMarketTradebandDoAfterEvent>(OnBlackMarketTradebandDoAfter);
         SubscribeLocalEvent<RMCBlackMarketScannerComponent, AfterInteractEvent>(OnBlackMarketScannerAfterInteract);
+        SubscribeLocalEvent<RMCBlackMarketScannerComponent, ComponentShutdown>(OnBlackMarketScannerShutdown);
+        SubscribeLocalEvent<RequisitionsElevatorComponent, ComponentShutdown>(OnBlackMarketElevatorShutdown);
+    }
+
+    protected override void OnRoundRestartCleanup(RoundRestartCleanupEvent args)
+    {
+        base.OnRoundRestartCleanup(args);
+        _pendingMendozaDeathAftermath.Clear();
+        _activeBlackMarketScanners.Clear();
+        _finishedBlackMarketScanners.Clear();
+    }
+
+    private void OnBlackMarketElevatorShutdown(
+        Entity<RequisitionsElevatorComponent> elevator,
+        ref ComponentShutdown args)
+    {
+        _pendingMendozaDeathAftermath.Remove(elevator.Owner);
+    }
+
+    private void OnBlackMarketScannerShutdown(
+        Entity<RMCBlackMarketScannerComponent> scanner,
+        ref ComponentShutdown args)
+    {
+        _activeBlackMarketScanners.Remove(scanner.Owner);
     }
 
     private void OnBuyBlackMarketCart(Entity<RequisitionsComputerComponent> computer, ref RequisitionsBuyBlackMarketCartMsg args)
@@ -220,7 +248,7 @@ public sealed partial class RequisitionsSystem
         Dirty(account);
 
         var ev = new RMCBlackMarketInvestigationEvent(actor, heat);
-        RaiseLocalEvent(account.Owner, ev);
+        RaiseLocalEvent(account.Owner, ref ev);
         _adminLogs.Add(LogType.RMCRequisitionsBuy, $"{ToPrettyString(actor):actor} pushed black market heat to {heat}/100. Investigation hook fired and further heat changes were disabled.");
     }
 
@@ -486,13 +514,24 @@ public sealed partial class RequisitionsSystem
 
     private void UpdateBlackMarketScanners(TimeSpan time)
     {
-        var query = EntityQueryEnumerator<RMCBlackMarketScannerComponent>();
-        while (query.MoveNext(out var uid, out var scanner))
+        _finishedBlackMarketScanners.Clear();
+        foreach (var uid in _activeBlackMarketScanners)
         {
-            if (!scanner.Scanning || time < scanner.ScanEndsAt)
+            if (!TerminatingOrDeleted(uid) &&
+                TryComp(uid, out RMCBlackMarketScannerComponent? scanner) &&
+                time < scanner.ScanEndsAt)
+            {
                 continue;
+            }
 
-            SetBlackMarketScannerVisual((uid, scanner), false);
+            _finishedBlackMarketScanners.Add(uid);
+        }
+
+        foreach (var uid in _finishedBlackMarketScanners)
+        {
+            _activeBlackMarketScanners.Remove(uid);
+            if (!TerminatingOrDeleted(uid) && TryComp(uid, out RMCBlackMarketScannerComponent? scanner))
+                SetBlackMarketScannerVisual((uid, scanner), false);
         }
     }
 
@@ -501,6 +540,11 @@ public sealed partial class RequisitionsSystem
         bool scanning,
         RMCBlackMarketScannerValueVisual value = RMCBlackMarketScannerValueVisual.Red)
     {
+        if (scanning)
+            _activeBlackMarketScanners.Add(scanner.Owner);
+        else
+            _activeBlackMarketScanners.Remove(scanner.Owner);
+
         scanner.Comp.Scanning = scanning;
         scanner.Comp.ScanEndsAt = scanning
             ? _timing.CurTime + scanner.Comp.ScanDuration
@@ -582,18 +626,7 @@ public sealed partial class RequisitionsSystem
 
     private void MarkBlackMarketUnsellableRecursive(EntityUid uid)
     {
-        EnsureComp<BlackMarketUnsellableComponent>(uid);
-
-        if (!TryComp(uid, out ContainerManagerComponent? container))
-            return;
-
-        foreach (var contained in container.Containers.Values)
-        {
-            foreach (var entity in contained.ContainedEntities)
-            {
-                MarkBlackMarketUnsellableRecursive(entity);
-            }
-        }
+        _blackMarketProvenance.MarkUnsellable(uid);
     }
 
     private BlackMarketSaleResult GetBlackMarketSaleValue(EntityUid uid, RequisitionsAccountComponent account, bool recordSale)

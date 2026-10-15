@@ -139,5 +139,24 @@
   suffix: Counterfeit
   components:
   - type: RMCBlackMarketCounterfeitCash
+  - type: Stack
+    stackType: STCounterfeitDollar
   - type: BlackMarketValue
     value: 0
+
+- type: entity
+  parent: RMCSpaceCash1
+  id: STSpaceCash1Counterfeit
+  suffix: Counterfeit
+  components:
+  - type: RMCBlackMarketCounterfeitCash
+  - type: Stack
+    stackType: STCounterfeitDollar
+  - type: BlackMarketValue
+    value: 0
+
+- type: stack
+  id: STCounterfeitDollar
+  name: 1 dollar bill
+  icon: { sprite: /Textures/_RMC14/Objects/Misc/spacecash.rsi, state: spacecash }
+  spawn: STSpaceCash1Counterfeit

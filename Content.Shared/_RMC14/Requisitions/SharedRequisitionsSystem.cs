@@ -293,7 +293,7 @@ public abstract class SharedRequisitionsSystem : EntitySystem
         Dirty(account);
     }
 
-    private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
+    protected virtual void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
         _purchasesMap = null;
     }

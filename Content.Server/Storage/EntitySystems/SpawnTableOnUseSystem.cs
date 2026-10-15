@@ -4,6 +4,7 @@ using Content.Shared.Database;
 using Content.Shared.EntityTable;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Storage;
 
 namespace Content.Server.Storage.EntitySystems;
 
@@ -37,6 +38,8 @@ public sealed class SpawnTableOnUseSystem : EntitySystem
         foreach (var id in spawns)
         {
             var spawned = Spawn(id, coords);
+            var ev = new SpawnedFromEntityEvent(spawned);
+            RaiseLocalEvent(ent, ref ev);
             _adminLogger.Add(LogType.EntitySpawn, LogImpact.Low, $"{ToPrettyString(args.User):user} used {ToPrettyString(ent):spawner} which spawned {ToPrettyString(spawned)}");
             _hands.PickupOrDrop(args.User, spawned);
         }
