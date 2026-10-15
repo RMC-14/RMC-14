@@ -1,7 +1,10 @@
 using Content.Shared._RMC14.Stamina;
 using Content.Shared._RMC14.Standing;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Tackle;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.Database;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Systems;
@@ -24,10 +27,11 @@ public sealed class StunShakeableSystem : EntitySystem
     [Dependency] private readonly RMCStandingSystem _rmcStanding = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     private static readonly ProtoId<StatusEffectPrototype> Stun = "Stun";
     private static readonly ProtoId<StatusEffectPrototype> KnockedDown = "KnockedDown";
     private static readonly ProtoId<StatusEffectPrototype> Unconscious = "Unconscious";
+    private static readonly ProtoId<DamageGroupPrototype> Airloss = "Airloss";
 
     public override void Initialize()
     {
@@ -54,6 +58,14 @@ public sealed class StunShakeableSystem : EntitySystem
             !_statusEffects.HasStatusEffect(target, Unconscious) &&
             !HasComp<TackledRecentlyByComponent>(target) &&
             (rest == null || !rest.Resting))
+        {
+            return;
+        }
+
+        if ((_mobState.IsCritical(target) || HasComp<RMCUnconsciousComponent>(target)) &&
+            TryComp<DamageableComponent>(target, out var damage) &&
+            damage.DamagePerGroup.TryGetValue(Airloss, out var oxyDamage) &&
+            oxyDamage > 0)
         {
             return;
         }
