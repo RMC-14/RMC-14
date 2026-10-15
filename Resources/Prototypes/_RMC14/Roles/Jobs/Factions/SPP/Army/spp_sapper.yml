@@ -1,4 +1,5 @@
-﻿- type: job
+﻿# Friendly
+- type: job
   parent: CMJobBase
   id: RMCSPPEngineer
   name: rmc-job-name-spp-engineer
@@ -19,6 +20,42 @@
     - type: NpcFactionMember
       factions:
       - SPP
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - English
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - English
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillEndurance: 1
+        RMCSkillEngineer: 3
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillJtac: 1
+        RMCSkillVehicles: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-engineer
+  hidden: true
+
+# Hostile/Neutral
+- type: job
+  parent: RMCSPPEngineer
+  id: RMCSPPEngineerHostile
+  spawnMenuRoleName: SPP Sapper (Hostile)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPPHostile
     - type: Language
       spokenLanguages:
       - Russian
@@ -75,7 +112,7 @@
     description: rmc-ghost-role-information-spp-hostile-description
     rules: rmc-ghost-role-information-spp-rules
     reregister: false
-    job: RMCSPPEngineer
+    job: RMCSPPEngineerHostile
     raffle:
       settings: short
     requirements:
