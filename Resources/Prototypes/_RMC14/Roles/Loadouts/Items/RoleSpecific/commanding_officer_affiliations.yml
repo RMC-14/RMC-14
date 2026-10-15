@@ -1,0 +1,84 @@
+# Commanding Officer affiliation data, previews, and loadouts
+- type: entity
+  id: RMCCOAffiliationUnalignedData
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CommandingOfficerAffiliation
+    affiliation: Unaligned
+
+- type: entity
+  id: RMCCOAffiliationHawksData
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CommandingOfficerAffiliation
+    affiliation: Hawks
+
+- type: entity
+  id: RMCCOAffiliationDovesData
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CommandingOfficerAffiliation
+    affiliation: Doves
+
+- type: entity
+  id: RMCCOAffiliationMagpiesData
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CommandingOfficerAffiliation
+    affiliation: Magpies
+
+# Affiliation loadout preview entities
+
+- type: entity
+  parent: CMPaper
+  id: RMCCOAffiliationUnalignedPreview
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: CMPaper
+  id: RMCCOAffiliationHawksPreview
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: CMPaper
+  id: RMCCOAffiliationDovesPreview
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: CMPaper
+  id: RMCCOAffiliationMagpiesPreview
+  categories: [ HideSpawnMenu ]
+
+# Affiliation loadouts
+
+- type: loadout
+  id: RMCCOAffiliationUnaligned
+  cost: 0
+  componentsAdd: true
+  dummyEntity: RMCCOAffiliationUnalignedPreview
+  equipment:
+    none: RMCCOAffiliationUnalignedData
+
+- type: loadout
+  id: RMCCOAffiliationHawks
+  cost: 0
+  componentsAdd: true
+  dummyEntity: RMCCOAffiliationHawksPreview
+  equipment:
+    none: RMCCOAffiliationHawksData
+
+- type: loadout
+  id: RMCCOAffiliationDoves
+  cost: 0
+  componentsAdd: true
+  dummyEntity: RMCCOAffiliationDovesPreview
+  equipment:
+    none: RMCCOAffiliationDovesData
+
+- type: loadout
+  id: RMCCOAffiliationMagpies
+  cost: 0
+  componentsAdd: true
+  dummyEntity: RMCCOAffiliationMagpiesPreview
+  equipment:
+    none: RMCCOAffiliationMagpiesData
