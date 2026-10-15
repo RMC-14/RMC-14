@@ -27,6 +27,7 @@ using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.ERT;
 using Content.Shared._RMC14.Evacuation;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Rules;
 using Content.Shared.Buckle;
@@ -99,6 +100,7 @@ public sealed partial class RMCERTSystem : EntitySystem
     [Dependency] private readonly SharedBuckleSystem _buckle = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly WarshipSystem _warship = default!;
 
     private readonly Dictionary<Guid, RMCERTRequest> _requests = new();
     private readonly Dictionary<EntityUid, TimeSpan> _sourceCooldowns = new();
