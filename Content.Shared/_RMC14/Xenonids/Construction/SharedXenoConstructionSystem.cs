@@ -1506,6 +1506,14 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     public bool CanOrderConstructionPopup(Entity<XenoConstructionComponent> xeno, EntityCoordinates target, EntProtoId? choice, bool popup = true)
     {
+        if (!_hive.CanXenoConstruct(xeno.Owner))
+        {
+            if (popup)
+                _popup.PopupClient(Loc.GetString("rmc-xeno-construction-permission-denied"), target, xeno, PopupType.MediumCaution);
+
+            return false;
+        }
+
         if (_queenEye.IsInQueenEye(xeno.Owner) &&
             !_queenEye.CanSeeTarget(xeno.Owner, target))
         {
