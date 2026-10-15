@@ -12,13 +12,13 @@
       metabolismRate: 0.1
       effects:
       - !type:Neogenetic
-        potency: 1
+        level: 1
       - !type:Nutritious
-        potency: 2
+        level: 2
         nutFactor: 15
         nutMetabolism: 0.1
       - !type:Hemogenic
-        potency: 1
+        level: 1
       - !type:NutrimentOverdose
   pricePerUnit: 2
 
