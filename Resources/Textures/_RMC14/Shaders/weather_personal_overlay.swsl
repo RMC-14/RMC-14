@@ -1,0 +1,18 @@
+light_mode unshaded;
+
+uniform highp vec2 clearHalfSize;
+uniform highp vec2 fullHalfSize;
+uniform highp float overlayAlpha;
+
+void fragment() {
+    highp vec2 pixelSize = vec2(1.0 / SCREEN_PIXEL_SIZE.x, 1.0 / SCREEN_PIXEL_SIZE.y);
+    highp vec2 pixelCenter = pixelSize * 0.5;
+    highp vec2 boxDelta = abs(FRAGCOORD.xy - pixelCenter);
+    highp vec2 fadeSize = max(fullHalfSize - clearHalfSize, vec2(1.0, 1.0));
+    highp vec2 axisT = clamp((boxDelta - clearHalfSize) / fadeSize, vec2(0.0, 0.0), vec2(1.0, 1.0));
+    highp float t = max(axisT.x, axisT.y);
+    highp float vignette = t * t * (3.0 - 2.0 * t);
+    highp float alpha = clamp(vignette * overlayAlpha, 0.0, 1.0);
+
+    COLOR = vec4(0.0, 0.0, 0.0, alpha);
+}
