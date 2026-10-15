@@ -70,6 +70,15 @@ public abstract class SharedPumpActionSystem : EntitySystem
         ent.Comp.Pumped = false;
     }
 
+    public void SetPumped(Entity<PumpActionComponent> ent, bool pumped)
+    {
+        if (ent.Comp.Pumped == pumped)
+            return;
+
+        ent.Comp.Pumped = pumped;
+        Dirty(ent);
+    }
+
     public bool Pump(Entity<PumpActionComponent> ent, EntityUid user)
     {
         if (TryComp<GunComponent>(ent.Owner, out var gun) && gun.BurstActivated)
