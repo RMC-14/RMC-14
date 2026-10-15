@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Standing;
 using Content.Shared.Weapons.Melee.Events;
@@ -27,7 +28,7 @@ public sealed class XenoMeleeSlowSystem : EntitySystem
             if (!_xeno.CanAbilityAttackTarget(xeno, entity))
                 return;
 
-            if (xeno.Comp.RequiresKnockDown && !_standing.IsDown(entity))
+            if (xeno.Comp.RequiresKnockDown && !(_standing.IsDown(entity) || HasComp<XenoRestingComponent>(entity)))
                 return;
 
             var slow = xeno.Comp.HigherOnXenos ? _xeno.TryApplyXenoDebuffMultiplier(entity, xeno.Comp.SlowTime) : xeno.Comp.SlowTime;
