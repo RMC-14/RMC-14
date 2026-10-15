@@ -500,6 +500,30 @@
     - id: CMStampDenied
 
 - type: entity
+  parent: CMSatchelFilledFaxResponder
+  id: RMCSatchelFilledFaxResponderWeYa
+  suffix: Fax Responder, WeYa
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPenFountain
+    - id: CMStampApproved
+    - id: CMStampDenied
+    - id: RMCPaperFaxTemplateWeYa
+
+- type: entity
+  parent: CMSatchelFilledFaxResponder
+  id: RMCSatchelFilledFaxResponderFreePress
+  suffix: Fax Responder, Free Press
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPenFountain
+    - id: CMStampApproved
+    - id: CMStampDenied
+    - id: RMCPaperFaxTemplateFreePress
+
+- type: entity
   parent: CMSatchel
   id: RMCSatchelFilledFaxResponderHighComm
   suffix: Fax Responder, HComm

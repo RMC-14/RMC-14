@@ -1,0 +1,21 @@
+- type: entity
+  id: RMCSpawnPointFaxResponderWeYa
+  name: We-Ya fax responder spawn point
+  parent: MarkerBase
+  components:
+  - type: FaxResponderSpawnPoint
+    job: CMWeYaresponder
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: cl_spawn
+
+- type: entity
+  id: RMCSpawnPointFaxResponderFreePress
+  name: Free Press fax responder spawn point
+  parent: MarkerBase
+  components:
+  - type: FaxResponderSpawnPoint
+    job: CMFreePressResponder
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: marine_spawn
