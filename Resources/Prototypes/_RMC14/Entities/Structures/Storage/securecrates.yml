@@ -9,6 +9,12 @@
     sprite: _RMC14/Markers/landmarks.rsi
     layers:
     - state: random_toolbox
+  - type: EntityTableSpawner
+    deleteSpawnerAfterSpawn: false
+    offset: 0
+    table: !type:EntSelector
+      id: RMCBlackMarketHackingDevice
+      prob: 0.0001
   - type: RandomSpawner
     offset: 0
     chance: 1.0
