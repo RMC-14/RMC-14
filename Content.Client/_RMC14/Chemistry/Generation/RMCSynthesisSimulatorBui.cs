@@ -1,67 +1,29 @@
 using System.Linq;
-using System.Numerics;
 using Content.Client._RMC14.UserInterface;
-using Content.Client.Resources;
 using Content.Shared._RMC14.Chemistry.Generation;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.UserInterface;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
-using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Containers;
 using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
+using static Content.Client._RMC14.Chemistry.Generation.RMCSynthesisSimulatorWindow;
 
 namespace Content.Client._RMC14.Chemistry.Generation;
 
 [UsedImplicitly]
 public sealed class RMCSynthesisSimulatorBui : BoundUserInterface, IRefreshableBui
 {
-    private const string RadiationIcon = "/Textures/_RMC14/Interface/Icons/dark/radiation.svg.192dpi.png";
-    private const string RadiationIconWhite = "/Textures/_RMC14/Interface/Icons/white/radiation.svg.192dpi.png";
-    private const string StopIcon = "/Textures/_RMC14/Interface/Icons/dark/stop.svg.192dpi.png";
-    private const string StopIconWhite = "/Textures/_RMC14/Interface/Icons/white/stop.svg.192dpi.png";
-    private const string EjectIcon = "/Textures/_RMC14/Interface/Icons/dark/eject.svg.192dpi.png";
-    private const string EjectIconWhite = "/Textures/_RMC14/Interface/Icons/white/eject.svg.192dpi.png";
-    private const string SquarePlusIcon = "/Textures/_RMC14/Interface/Icons/dark/square-plus.svg.192dpi.png";
-    private const string SquarePlusIconWhite = "/Textures/_RMC14/Interface/Icons/white/square-plus.svg.192dpi.png";
-    private const string SquareMinusIcon = "/Textures/_RMC14/Interface/Icons/dark/square-minus.svg.192dpi.png";
-    private const string SquareMinusIconWhite = "/Textures/_RMC14/Interface/Icons/white/square-minus.svg.192dpi.png";
-    private const string ArrowRightIcon = "/Textures/_RMC14/Interface/Icons/dark/arrow-right-long.svg.192dpi.png";
-    private const string ArrowRightIconWhite = "/Textures/_RMC14/Interface/Icons/white/arrow-right-long.svg.192dpi.png";
-    private const string RepeatIcon = "/Textures/_RMC14/Interface/Icons/dark/arrows-rotate.svg.192dpi.png";
-    private const string RepeatIconWhite = "/Textures/_RMC14/Interface/Icons/white/arrows-rotate.svg.192dpi.png";
-    private const string ServerIcon = "/Textures/_RMC14/Interface/Icons/dark/server.svg.192dpi.png";
-    private const string ServerIconWhite = "/Textures/_RMC14/Interface/Icons/white/server.svg.192dpi.png";
-
-    private static readonly Color ModeColor = Color.FromHex("#d3bd9a");
-    private static readonly Color ActionColor = Color.FromHex("#d6d6d6");
-    private static readonly Color OverrideActiveColor = Color.FromHex("#b08080");
-    private static readonly Color CreditsGood = Color.FromHex("#9dc79f");
-    private static readonly Color CreditsAverage = Color.FromHex("#d3bd9a");
-    private static readonly Color CreditsBad = Color.FromHex("#b08080");
-
-    private static readonly Color HeaderColor = Color.FromHex("#12141A");
-    private static readonly Color GreenColor = Color.FromHex("#4CAF50");
-    private static readonly Color TanColor = Color.FromHex("#ffb950");
-    private static readonly Color OrangeColor = Color.FromHex("#C99A29");
-    private static readonly Color RedColor = Color.FromHex("#8B2020");
-    private static readonly Color DarkRowColor = Color.FromHex("#22262F");
-
-    private static readonly Color PropertyPositiveColor = Color.FromHex("#9dc79f");
-    private static readonly Color PropertyNegativeColor = Color.FromHex("#d19a9a");
-
     [Dependency] private readonly IEntityManager _entity = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     private readonly SharedContainerSystem _container;
     private readonly SharedRMCSynthesisSimulatorSystem _simulator;
     private readonly RMCReagentSystem _rmcReagent;
-    private readonly IResourceCache _resourceCache;
-    private readonly Font _boldFont;
 
     private RMCSynthesisSimulatorWindow? _window;
     private bool _overrideSafety;
@@ -73,48 +35,12 @@ public sealed class RMCSynthesisSimulatorBui : BoundUserInterface, IRefreshableB
         _container = _entity.System<SharedContainerSystem>();
         _simulator = _entity.System<SharedRMCSynthesisSimulatorSystem>();
         _rmcReagent = _entity.System<RMCReagentSystem>();
-        _resourceCache = IoCManager.Resolve<IResourceCache>();
-        _boldFont = _resourceCache.GetFont("/Fonts/NotoSans/NotoSans-Bold.ttf", 12);
     }
 
     protected override void Open()
     {
         base.Open();
         _window = this.CreateWindow<RMCSynthesisSimulatorWindow>();
-        _window.CreditsLabel.FontOverride = _boldFont;
-
-        foreach (var header in new[]
-                 {
-                     _window.StatusHeader, _window.ModeHeader, _window.ActionsHeader,
-                     _window.TargetHeader, _window.ReferenceHeader, _window.RecipePickerHeader,
-                 })
-        {
-            header.PanelOverride = new StyleBoxFlat { BackgroundColor = HeaderColor };
-        }
-
-        foreach (var modeButton in new[] { _window.AmplifyButton, _window.SuppressButton, _window.RelateButton, _window.AddButton })
-        {
-            modeButton.ToggleMode = true;
-            Colored(modeButton, ModeColor);
-        }
-
-        foreach (var actionButton in new[] { _window.SimulateButton, _window.CancelButton, _window.EjectTargetButton, _window.EjectReferenceButton, _window.FinalizeButton })
-        {
-            Colored(actionButton, ActionColor);
-        }
-
-        _window.OverrideButton.ToggleMode = true;
-        Colored(_window.OverrideButton, ActionColor);
-
-        Icon(_window.SimulateButton, RadiationIcon, RadiationIconWhite, "SIMULATE");
-        Icon(_window.CancelButton, StopIcon, StopIconWhite, "CANCEL");
-        Icon(_window.EjectTargetButton, EjectIcon, EjectIconWhite, "EJECT TARGET");
-        Icon(_window.EjectReferenceButton, EjectIcon, EjectIconWhite, "EJECT REFERENCE");
-        Icon(_window.AmplifyButton, SquarePlusIcon, SquarePlusIconWhite, "AMPLIFY");
-        Icon(_window.SuppressButton, SquareMinusIcon, SquareMinusIconWhite, "SUPPRESS");
-        Icon(_window.AddButton, ArrowRightIcon, ArrowRightIconWhite, "ADD");
-        Icon(_window.RelateButton, RepeatIcon, RepeatIconWhite, "RELATE");
-        Icon(_window.OverrideButton, ServerIcon, ServerIconWhite, "OVERRIDE");
 
         _window.AmplifyButton.OnPressed += _ => SendPredictedMessage(new RMCSynthesisSimulatorSetModeBuiMsg(SynthesisMode.Amplify));
         _window.SuppressButton.OnPressed += _ => SendPredictedMessage(new RMCSynthesisSimulatorSetModeBuiMsg(SynthesisMode.Suppress));
@@ -138,69 +64,6 @@ public sealed class RMCSynthesisSimulatorBui : BoundUserInterface, IRefreshableB
         };
 
         Refresh();
-    }
-
-    private static void Row(PanelContainer panel, Label label, Color color)
-    {
-        panel.PanelOverride = new StyleBoxFlat { BackgroundColor = color };
-        label.FontColorOverride = color == RedColor ? Color.White : Color.Black;
-    }
-
-    private static void Row(PanelContainer panel, Label label, string text, Color color)
-    {
-        label.Text = text;
-        Row(panel, label, color);
-    }
-
-    private static void Colored(Button button, Color color)
-    {
-        button.StyleBoxOverride = new StyleBoxFlat
-        {
-            BackgroundColor = color,
-            BorderColor = Color.Black,
-            BorderThickness = new Thickness(1),
-        };
-        button.ModulateSelfOverride = Color.White;
-    }
-
-    private TextureRect Icon(Button button, string texturePath, string whiteTexturePath, string text)
-    {
-        button.Text = null;
-
-        var row = new BoxContainer
-        {
-            Orientation = BoxContainer.LayoutOrientation.Horizontal,
-            HorizontalAlignment = Control.HAlignment.Stretch,
-            VerticalAlignment = Control.VAlignment.Center,
-            Margin = new Thickness(10, 0, 6, 0),
-            SeparationOverride = 8,
-        };
-
-        var texture = new TextureRect
-        {
-            Texture = _resourceCache.GetTexture(texturePath),
-            Stretch = TextureRect.StretchMode.KeepAspectCentered,
-            SetSize = new Vector2(20, 20),
-            VerticalAlignment = Control.VAlignment.Center,
-        };
-        row.AddChild(texture);
-
-        var label = new Label
-        {
-            Text = text,
-            FontColorOverride = Color.Black,
-            VerticalAlignment = Control.VAlignment.Center,
-            HorizontalExpand = true,
-            ClipText = true,
-        };
-        row.AddChild(label);
-
-        button.AddChild(row);
-
-        button.OnMouseEntered += _ => texture.Texture = _resourceCache.GetTexture(whiteTexturePath);
-        button.OnMouseExited += _ => texture.Texture = _resourceCache.GetTexture(texturePath);
-
-        return texture;
     }
 
     public void Refresh()
@@ -309,24 +172,15 @@ public sealed class RMCSynthesisSimulatorBui : BoundUserInterface, IRefreshableB
         SetModeButton(_window.AddButton, mode == SynthesisMode.Add);
     }
 
-    private static void SetModeButton(Button button, bool selected)
-    {
-        button.Pressed = selected;
-        button.StyleBoxOverride = new StyleBoxFlat
-        {
-            BackgroundColor = selected ? GreenColor : ModeColor,
-            BorderColor = selected ? Color.White : Color.Black,
-            BorderThickness = new Thickness(selected ? 2 : 1),
-        };
-        button.ModulateSelfOverride = Color.White;
-    }
-
     private string GetReportReagentName(RMCChemResearchReportComponent report)
     {
         if (!report.Completed)
             return "ANALYSIS INCOMPLETE";
 
-        return _rmcReagent.TryIndex(report.ReagentId, out var reagent) ? reagent.LocalizedName : report.ReagentId.Id;
+        if (report.ReagentId is not { } reagentId)
+            return "ANALYSIS INCOMPLETE";
+
+        return _rmcReagent.TryIndex(reagentId, out var reagent) ? reagent.LocalizedName : reagentId.Id;
     }
 
     private EntityUid? GetSlotItem(string slotId)
@@ -415,17 +269,6 @@ public sealed class RMCSynthesisSimulatorBui : BoundUserInterface, IRefreshableB
         box.RemoveChildrenAfter(index);
     }
 
-    private sealed class PropertyButton : Button
-    {
-        public string PropertyId = string.Empty;
-        public Action<string?>? OnSelect;
-
-        public PropertyButton()
-        {
-            OnPressed += _ => OnSelect?.Invoke(Pressed ? PropertyId : null);
-        }
-    }
-
     private void PopulateRecipeCandidates(List<List<RecipeCandidateIngredient>> candidates)
     {
         var box = _window!.RecipeCandidatesBox;
@@ -470,17 +313,6 @@ public sealed class RMCSynthesisSimulatorBui : BoundUserInterface, IRefreshableB
         }
 
         box.RemoveChildrenAfter(candidates.Count);
-    }
-
-    private sealed class RecipeButton : Button
-    {
-        public int Index;
-        public Action<int?>? OnSelect;
-
-        public RecipeButton()
-        {
-            OnPressed += _ => OnSelect?.Invoke(Pressed ? Index : null);
-        }
     }
 
     private bool TryGetResearch(out RMCChemistryResearchComponent research)
