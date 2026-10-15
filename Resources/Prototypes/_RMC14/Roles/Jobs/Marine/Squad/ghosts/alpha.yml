@@ -3,7 +3,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidAlphaCombatTech
   name: alpha ghost role combat technician
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
@@ -20,7 +20,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidAlphaFireteamLeader
   name: alpha ghost role fireteam leader
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
@@ -37,7 +37,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidAlphaHospitalCorpsman
   name: alpha ghost role hospital corpsman
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
@@ -54,7 +54,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidAlphaRifleman
   name: alpha ghost role rifleman
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
@@ -71,7 +71,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidAlphaSmartGunOperator
   name: alpha ghost role smart gun operator
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
@@ -88,7 +88,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidAlphaSquadLeader
   name: alpha ghost role squad leader
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
@@ -105,7 +105,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidAlphaWeaponsSpecialist
   name: alpha ghost role weapons specialist
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
