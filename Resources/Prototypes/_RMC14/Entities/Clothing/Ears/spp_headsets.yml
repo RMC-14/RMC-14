@@ -25,7 +25,8 @@
 - type: radioChannel
   id: SPPMed
   name: chat-radio-spp-med
-  keycode: "i"
+  keycode: "m"
+  radioPrefix: "#"
   frequency: 1254
   color: "#9b0612"
   longRange: true
