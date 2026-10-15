@@ -7,6 +7,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Nutrition;
 using Content.Shared.Nutrition.Components;
+using Content.Shared.Storage;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -124,6 +125,8 @@ public sealed class SliceableFoodSystem : EntitySystem
             return EntityUid.Invalid;
 
         var sliceUid = Spawn(comp.Slice, _transform.GetMapCoordinates(uid));
+        var spawned = new SpawnedFromEntityEvent(sliceUid);
+        RaiseLocalEvent(uid, ref spawned);
 
         // try putting the slice into the container if the food being sliced is in a container!
         // this lets you do things like slice a pizza up inside of a hot food cart without making a food-everywhere mess
@@ -157,6 +160,8 @@ public sealed class SliceableFoodSystem : EntitySystem
         foreach (var trash in foodComp.Trash)
         {
             var trashUid = Spawn(trash, _transform.GetMapCoordinates(uid));
+            var spawned = new SpawnedFromEntityEvent(trashUid);
+            RaiseLocalEvent(uid, ref spawned);
 
             // try putting the trash in the food's container too, to be consistent with slice spawning?
             _transform.DropNextTo(trashUid, uid);

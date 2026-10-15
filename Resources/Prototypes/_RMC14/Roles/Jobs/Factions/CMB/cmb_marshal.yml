@@ -83,6 +83,9 @@
     - !type:RoleTimeRequirement
       role: CMJobMilitaryPolice
       time: 18000 # 5 Hours
+    - !type:DepartmentTimeRequirement
+      department: CMCommand
+      time: 18000
   - type: GhostRoleApplySpecial
 
 - type: startingGear
@@ -105,6 +108,7 @@
     suitstorage: RMCWeaponShotgunM3717
   storage:
     back:
+    - RMCBlackMarketTradebandDevice
     - RMCUniversalRecorder
 
 - type: playTimeTracker

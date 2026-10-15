@@ -40,3 +40,15 @@
     thresholds:
     - range: 32
       falloff: 10
+
+- type: entity
+  parent: CMProjectileShrapnel
+  id: RMCProjectileShrapnelRubber
+  name: rubber shrapnel
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage: {}
+    deleteOnCollide: true
+  - type: RMCStaminaDamageOnCollide
+    damage: 25

@@ -49,3 +49,5 @@
   - type: PhysicalComposition
     materialComposition:
       CMSteel: 50
+  - type: BlackMarketValue
+    value: 15

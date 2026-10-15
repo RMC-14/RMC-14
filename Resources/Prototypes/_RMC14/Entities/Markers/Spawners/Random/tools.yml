@@ -8,6 +8,12 @@
       layers:
         - sprite: _RMC14/Markers/landmarks.rsi
           state: random_tool
+    - type: EntityTableSpawner
+      deleteSpawnerAfterSpawn: false
+      offset: 0
+      table: !type:EntSelector
+        id: RMCBlackMarketHackingDevice
+        prob: 0.0005
     - type: RandomSpawner
       prototypes:
         - CMScrewdriver
@@ -28,6 +34,12 @@
       layers:
         - sprite: _RMC14/Markers/landmarks.rsi
           state: random_toolbox
+    - type: EntityTableSpawner
+      deleteSpawnerAfterSpawn: false
+      offset: 0
+      table: !type:EntSelector
+        id: RMCBlackMarketHackingDevice
+        prob: 0.0125
     - type: RandomSpawner
       prototypes:
         - RMCToolboxMechanicalFilled # x3
@@ -50,6 +62,12 @@
       layers:
         - sprite: _RMC14/Markers/landmarks.rsi
           state: random_cell_battery
+    - type: EntityTableSpawner
+      deleteSpawnerAfterSpawn: false
+      offset: 0
+      table: !type:EntSelector
+        id: RMCBlackMarketHackingDevice
+        prob: 0.0035
     - type: RandomSpawner
       prototypes:
         - RMCPowerCellCrap
@@ -88,6 +106,51 @@
 
 - type: entity
   parent: MarkerBase
+  id: RMCSpawnerRandomTechnologyScanner
+  name: random scanner spawner
+  description: This is a random technology scanner.
+  components:
+    - type: Sprite
+      layers:
+        - sprite: _RMC14/Objects/Medical/health_analyzer.rsi
+          state: health
+    - type: RandomSpawner
+      prototypes:
+        - CMTRayScanner # x10
+        - CMTRayScanner
+        - CMTRayScanner
+        - CMTRayScanner
+        - CMTRayScanner
+        - CMTRayScanner
+        - CMTRayScanner
+        - CMTRayScanner
+        - CMTRayScanner
+        - CMTRayScanner
+        - CMRadioHandheld # x8
+        - CMRadioHandheld
+        - CMRadioHandheld
+        - CMRadioHandheld
+        - CMRadioHandheld
+        - CMRadioHandheld
+        - CMRadioHandheld
+        - CMRadioHandheld
+        - CMHealthAnalyzer # x10
+        - CMHealthAnalyzer
+        - CMHealthAnalyzer
+        - CMHealthAnalyzer
+        - CMHealthAnalyzer
+        - CMHealthAnalyzer
+        - CMHealthAnalyzer
+        - CMHealthAnalyzer
+        - CMHealthAnalyzer
+        - CMHealthAnalyzer
+        - RMCBlackMarketHackingDevice # x2
+        - RMCBlackMarketHackingDevice
+      chance: 0.75
+      offset: 0
+
+- type: entity
+  parent: MarkerBase
   id: RMCSpawnerRandomTechSupply
   name: random tech supply spawner
   description: This is a random piece of technology supplies.
@@ -96,11 +159,18 @@
       layers:
         - sprite: _RMC14/Objects/Power/cells.rsi
           state: cell
+    - type: EntityTableSpawner
+      deleteSpawnerAfterSpawn: false
+      offset: 0
+      table: !type:EntSelector
+        id: RMCBlackMarketHackingDevice
+        prob: 0.035
     - type: RandomSpawner
       prototypes:
         # TODO:
-        # technology_scanner x2
         # packageWrap x1
+        - RMCSpawnerRandomTechnologyScanner # x2
+        - RMCSpawnerRandomTechnologyScanner
         - RMCSpawnerBombSupply # x2
         - RMCSpawnerBombSupply
         - RMCSpawnerRandomPowercell # x3

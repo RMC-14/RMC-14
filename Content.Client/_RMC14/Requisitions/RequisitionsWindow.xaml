@@ -1,10 +1,109 @@
-﻿<controls:RequisitionsWindow
+<controls:RequisitionsWindow
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Requisitions"
-    Title="Automated Storage and Retrieval System"
-    MinSize="500 600">
-    <controls:RequisitionsMainView Name="MainView" Access="Public" />
-    <controls:RequisitionsOrderCategoriesView Name="OrderCategoriesView" Access="Public" Visible="False" />
-    <controls:RequisitionsCategoryView Name="CategoryView" Access="Public" Visible="False" />
-    <controls:RequisitionsOrderSearchView Name="OrderSearchView" Access="Public" Visible="False" />
+    xmlns:uiControls="clr-namespace:Content.Client.UserInterface.Controls"
+    Title="{Loc rmc-requisitions-window-title}"
+    SetSize="900 650"
+    MinSize="780 560">
+    <BoxContainer Orientation="Horizontal" Margin="10" HorizontalExpand="True" VerticalExpand="True">
+        <PanelContainer Name="CategoryPanel"
+                        Access="Public"
+                        MinWidth="180"
+                        VerticalExpand="True">
+            <BoxContainer Orientation="Vertical"
+                          HorizontalExpand="True"
+                          VerticalExpand="True">
+                <Button Name="PlatformButton"
+                        Access="Public"
+                        Text="{Loc rmc-requisitions-platform-raise}"
+                        StyleClasses="ButtonSquare"
+                        HorizontalExpand="True" />
+                <Control MinHeight="8" />
+                <RichTextLabel Name="BudgetLabel" Access="Public" />
+                <RichTextLabel Name="CapacityLabel" Access="Public" />
+                <Control MinHeight="8" />
+                <Label Text="{Loc rmc-requisitions-categories-title}" StyleClasses="LabelKeyText" />
+                <Control MinHeight="4" />
+                <ScrollContainer HorizontalExpand="True" VerticalExpand="True" HScrollEnabled="False">
+                    <BoxContainer Name="CategoriesContainer"
+                                  Access="Public"
+                                  Orientation="Vertical"
+                                  HorizontalExpand="True" />
+                </ScrollContainer>
+            </BoxContainer>
+        </PanelContainer>
+        <Control MinWidth="14" />
+        <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+            <LineEdit Name="SearchBar"
+                      Access="Public"
+                      PlaceHolder="{Loc rmc-requisitions-search-placeholder}"
+                      HorizontalExpand="True" />
+            <Control MinHeight="8" />
+            <TabContainer Name="ShopTabs"
+                          Access="Public"
+                          HorizontalExpand="True"
+                          VerticalExpand="True">
+                <BoxContainer Name="ProductsTab"
+                              Orientation="Vertical"
+                              Margin="8 8 8 8"
+                              HorizontalExpand="True"
+                              VerticalExpand="True">
+                    <ScrollContainer HorizontalExpand="True"
+                                     VerticalExpand="True"
+                                     HScrollEnabled="False">
+                        <BoxContainer Name="ProductsContainer"
+                                      Access="Public"
+                                      Orientation="Vertical"
+                                      HorizontalExpand="True" />
+                    </ScrollContainer>
+                </BoxContainer>
+                <BoxContainer Name="CartTab"
+                              Orientation="Vertical"
+                              Margin="8 8 8 8"
+                              HorizontalExpand="True"
+                              VerticalExpand="True">
+                    <ScrollContainer HorizontalExpand="True"
+                                     VerticalExpand="True"
+                                     HScrollEnabled="False"
+                                     MinHeight="220">
+                        <BoxContainer Name="CartContainer"
+                                      Access="Public"
+                                      Orientation="Vertical"
+                                      HorizontalExpand="True" />
+                    </ScrollContainer>
+                    <RichTextLabel Name="CartStatusLabel" Access="Public" />
+                    <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                        <RichTextLabel Name="CartTotalLabel" Access="Public" HorizontalExpand="True" />
+                        <Button Name="ClearCartButton"
+                                Access="Public"
+                                Text="{Loc rmc-requisitions-cart-clear}"
+                                StyleClasses="ButtonSquare"
+                                MinWidth="120" />
+                        <Control MinWidth="5" />
+                        <uiControls:ConfirmButton Name="BuyButton"
+                                                  Access="Public"
+                                                  Text="{Loc rmc-requisitions-buy}"
+                                                  ConfirmationText="{Loc rmc-requisitions-buy-confirm}"
+                                                  StyleClasses="ButtonSquare"
+                                                  MinWidth="120" />
+                    </BoxContainer>
+                </BoxContainer>
+                <BoxContainer Name="PendingTab"
+                              Orientation="Vertical"
+                              Margin="8 8 8 8"
+                              HorizontalExpand="True"
+                              VerticalExpand="True">
+                    <ScrollContainer HorizontalExpand="True"
+                                     VerticalExpand="True"
+                                     HScrollEnabled="False">
+                        <BoxContainer Name="PendingContainer"
+                                      Access="Public"
+                                      Orientation="Vertical"
+                                      HorizontalExpand="True" />
+                    </ScrollContainer>
+                    <RichTextLabel Name="PendingStatusLabel" Access="Public" />
+                </BoxContainer>
+            </TabContainer>
+        </BoxContainer>
+    </BoxContainer>
 </controls:RequisitionsWindow>

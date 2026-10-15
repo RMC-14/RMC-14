@@ -10,6 +10,8 @@
     state: datadisk1
   - type: Item
     size: Tiny
+  - type: BlackMarketValue
+    value: 50
 
 # Autodoc Upgrades
 - type: entity
