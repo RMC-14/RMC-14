@@ -76,6 +76,11 @@
   - type: Tag
     tags:
     - RMCMetalBarricade
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-barricades
+    whitelist:
+      components:
+      - Xeno
 
 - type: Tag
   id: RMCMetalBarricade
@@ -551,3 +556,8 @@
   - type: RMCOpenOnlyWhenUnanchored
   - type: RMCFoldingBarricadeLinking
     linkable: false
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-folding-barricade
+    whitelist:
+      components:
+      - Xeno

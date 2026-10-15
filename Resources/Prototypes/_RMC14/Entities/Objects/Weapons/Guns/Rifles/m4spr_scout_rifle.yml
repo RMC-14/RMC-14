@@ -121,6 +121,11 @@
         Snow: s_m4spr_custom_barrel
         Classic: c_m4spr_custom_barrel
         Urban: u_m4spr_custom_barrel
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-scout-m4spr
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMMagazineRifleBase
