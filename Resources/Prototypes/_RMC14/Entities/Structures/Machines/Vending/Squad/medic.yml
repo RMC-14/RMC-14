@@ -417,15 +417,18 @@
       - id: RMCHandsLatexMarine
         name: combat sterile gloves
       - id: CMMaskSterile
+    - name: Backpack
+      choices: { CMBackpack: 1 }
+      entries:
       - id: RMCSatchelPMCMedic
+        name: PMC medic combat pack
         recommended: true
-      - id: ArmorHelmetPMC
-        recommended: true
+      - id: RMCSatchelPMC
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
       - id: RMCBeltMedicBagPMCFilled
-        name: M276 medical storage rig (Full)
+        name: WY-TM625 pattern medical bag (Full)
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
@@ -441,7 +444,7 @@
 #     - id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
 #       name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
 #       recommended: true
-      - id: RMCPouchMedkit
+      - id: RMCPouchMedkitPMC
         recommended: true
       - id: RMCPouchAutoinjector
       - id: RMCPouchFirstResponder
