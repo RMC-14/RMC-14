@@ -33,6 +33,12 @@ public sealed partial class XenoComponent : Component
     public Vector2 HudOffset;
 
     [DataField, AutoNetworkedField]
+    public float HudRankIconScale = 1f;
+
+    [DataField, AutoNetworkedField]
+    public Vector2 HudRankIconOffset;
+
+    [DataField, AutoNetworkedField]
     public bool ContributesToVictory = true;
 
     [DataField, AutoNetworkedField]
