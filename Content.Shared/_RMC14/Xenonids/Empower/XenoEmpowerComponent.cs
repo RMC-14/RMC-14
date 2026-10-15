@@ -58,7 +58,7 @@ public sealed partial class XenoEmpowerComponent : Component
     public TimeSpan SuperEmpowerPartialDuration = TimeSpan.FromSeconds(5);
 
     [DataField]
-    public Color SuperEmpowerColor = Color.FromHex("#FF000046");
+    public Color SuperEmpowerColor = Color.FromHex("#FF0000FF");
 
     [DataField]
     public EntProtoId TargetEffect = "RMCEffectXenoTelegraphRedEmpower";
