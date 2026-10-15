@@ -45,9 +45,6 @@ public sealed partial class XenoEmpowerComponent : Component
     [DataField, AutoNetworkedField]
     public DamageSpecifier DamageIncreasePer = new();
 
-    [DataField, AutoNetworkedField]
-    public DamageSpecifier DamageTailIncreasePer = new();
-
     [DataField]
     public TimeSpan ShieldDecayTime = TimeSpan.FromSeconds(15);
 
