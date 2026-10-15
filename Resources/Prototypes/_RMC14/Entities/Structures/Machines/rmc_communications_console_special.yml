@@ -78,3 +78,29 @@
   - type: Sprite
     overrideDir: South
     enableOverrideDir: false
+
+# MP
+- type: entity
+  parent: RMCOverwatchConsole
+  id: RMCOverwatchConsoleMP
+  name: military police overwatch console
+  description: State of the art machinery for giving orders to a squad. This one has been simplified for general usage and overwatch of the Military Police.
+  suffix: MP
+  components:
+  - type: OverwatchConsole
+    canOrbitalBombardment: false
+    group: MP
+  - type: AccessReader
+    access: [ [ "CMAccessBrig" ] ]
+  - type: RequiresSkill
+    skills:
+      RMCSkillPolice: 2
+
+- type: entity
+  parent: RMCOverwatchConsoleMP
+  id: RMCOverwatchConsoleMPRotating
+  suffix: MP, Rotating
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: false
