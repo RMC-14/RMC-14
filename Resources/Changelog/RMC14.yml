@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Arykh
-  changes:
-  - message: Alerts on the Seperated HUD layout now expand vertically instead of only
-      downwards to infinity and beyond.
-    type: Tweak
-  id: 3196
-  time: '2026-05-14T10:23:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9751
 - author: Thereisabear
   changes:
   - message: Squad tracker no longer constantly resets itself to a FTL.
@@ -4513,5 +4505,12 @@
   id: 3695
   time: '2026-10-14T19:14:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10981
+- author: Ian321
+  changes:
+  - message: ghosts now keep following xenos after they evolve
+    type: Fix
+  id: 3696
+  time: '2026-10-15T14:32:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10491
 Name: RMC14
 Order: -1
