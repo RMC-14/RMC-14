@@ -16,6 +16,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Content.Shared._RMC14.Tackle;
 
 namespace Content.Shared._RMC14.Weapons.Melee;
 
@@ -289,6 +290,13 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
     public float GetUserLightAttackRange(EntityUid user, EntityUid? target, MeleeWeaponComponent melee)
     {
         var ev = new RMCMeleeUserGetRangeEvent(target, melee.Range);
+        RaiseLocalEvent(user, ref ev);
+        return ev.Range;
+    }
+    
+    public float GetUserDisarmRange(EntityUid user, EntityUid? target, MeleeWeaponComponent melee)
+    {
+        var ev = new RMCDisarmUserGetRangeEvent(target, melee.Range);
         RaiseLocalEvent(user, ref ev);
         return ev.Range;
     }
