@@ -428,7 +428,8 @@ namespace Content.Server.GameTicking
             // MapInitialize *before* spawning players, our codebase is too shit to do it afterwards...
             _map.InitializeMap(DefaultMap);
 
-            SpawnPlayers(readyPlayers, readyPlayerProfiles, force);
+            RMCSpawnPlayers(readyPlayers, readyPlayerProfiles, force);
+            //SpawnPlayers(readyPlayers, readyPlayerProfiles, force);
 
             _roundStartDateTime = DateTime.UtcNow;
             RunLevel = GameRunLevel.InRound;
