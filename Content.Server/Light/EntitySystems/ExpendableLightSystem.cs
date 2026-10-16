@@ -1,4 +1,3 @@
-using Content.Server.Light.Components;
 using Content.Server.Stack;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Xenonids;
@@ -23,7 +22,6 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using static Content.Shared._RMC14.Sprite.SpriteSetRenderOrderComponent;
 
 namespace Content.Server.Light.EntitySystems
 {
