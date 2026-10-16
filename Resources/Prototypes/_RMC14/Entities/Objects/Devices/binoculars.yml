@@ -213,6 +213,7 @@
   - type: PointLight
     enabled: true
     radius: 3
+    color: "#22ff00"
   - type: RMCNightVisionVisibleInView
 
 - type: entity
@@ -231,6 +232,8 @@
   - type: Eye
     zoom: 0.5, 0.5
     drawFov: false
+  - type: PointLight
+    color: "#ff0000"
 
 - type: entity
   parent: RMCRangefinderTarget
