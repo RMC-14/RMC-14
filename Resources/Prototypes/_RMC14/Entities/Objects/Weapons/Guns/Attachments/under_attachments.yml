@@ -645,6 +645,28 @@
 
 - type: entity
   parent: RMCAttachmentU1GrenadeLauncher
+  id: RMCAttachmentM890GrenadeLauncher
+  name: M890 grenade launcher
+  components:
+  - type: BallisticAmmoProvider
+    cycleable: false
+    whitelist:
+      tags:
+      - RMCGrenadeM40
+      - RMCAirburstGrenade
+      - RMCGrenadeRiot
+    capacity: 3
+    soundInsert:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/grenade_insert.ogg
+      params:
+        volume: -2
+  - type: Tag
+  tags:
+  - RMCAttachmentUnderbarrel
+  - RMCAttachmentM890GrenadeLauncher
+
+- type: entity
+  parent: RMCAttachmentU1GrenadeLauncher
   id: RMCAttachmentMK1GrenadeLauncher
   name: MK1 underslung grenade launcher
   description: An older version of the classic underslung grenade launcher. Can store five grenades, but fires them slower.
@@ -1098,6 +1120,9 @@
 
 - type: Tag
   id: RMCAttachmentU1GrenadeLauncher
+
+- type: Tag
+  id: RMCAttachmentM890GrenadeLauncher
 
 - type: Tag
   id: RMCAttachmentMK1GrenadeLauncher
