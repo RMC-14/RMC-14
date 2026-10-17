@@ -28,6 +28,7 @@
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m1911c.ogg
       params:
         pitch: 0.95
+        volume: -1
   - type: ItemSlots
     slots:
       gun_magazine:

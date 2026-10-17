@@ -425,7 +425,7 @@
 
 - type: entity
   parent: RMCBeltHolsterPistol
-  id: RMCM1911CBeltFilledAmmo
+  id: RMCM1911CBeltFilled
   suffix: M1911C, CO, Filled
   components:
   - type: StorageFill
@@ -434,6 +434,7 @@
       amount: 4
     - id: RMCMagazinePistolM1911HIAP
       amount: 2
+    - id: RMCWeaponPistolM1911C
 
 - type: entity
   parent: RMCBeltHolsterPistol

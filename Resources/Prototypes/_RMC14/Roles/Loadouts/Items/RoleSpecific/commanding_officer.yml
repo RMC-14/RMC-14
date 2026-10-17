@@ -163,4 +163,4 @@
   id: M1911CRMC
   dummyEntity: RMCWeaponPistolM1911C
   equipment:
-    belt: RMCM1911CBeltFilledAmmo
+    belt: RMCM1911CBeltFilled
