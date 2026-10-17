@@ -62,6 +62,7 @@
     - CMSheetMetal20
     - CMClipboard
     - CMPenClicky
+    - RMCBusinessCardHolderFilled
 
 - type: entity
   parent: CMSpawnPointJobBase
