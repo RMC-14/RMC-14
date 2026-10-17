@@ -80,7 +80,7 @@
 
 # Whitelisted Roles Only
 - type: entity
-  id: RMCGrouphitelistedRoles
+  id: RMCGroupWhitelistedRoles
   categories: [ HideSpawnMenu ]
   components:
   - type: JobGroup
