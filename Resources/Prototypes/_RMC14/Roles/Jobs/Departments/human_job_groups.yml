@@ -78,8 +78,21 @@
     - CMSurvivorCorporate
     - CMSurvivorICB
 
-# Survivor roles.
+# Whitelisted Roles Only
+- type: entity
+  id: RMCGrouphitelistedRoles
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: JobGroup
+    name: role-time-whitelist-roles
+    color: White
+    jobs:
+    - CMCommandingOfficer
+    - CMSeniorEnlistedAdvisor
+    - RMCJobSynthetic
+    - CMProvostInspector
 
+# Survivor Roles
 - type: entity
   id: RMCJobsSurvivor
   categories: [ HideSpawnMenu ]
