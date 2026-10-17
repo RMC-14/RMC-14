@@ -950,9 +950,10 @@ namespace Content.Client.Stylesheets
 
                 Element<TextEdit>().Pseudo(TextEdit.StylePseudoClassPlaceholder)
                     .Prop("font-color", Color.Gray),
-
+                // rmc
                 Element<TextEdit>().Class("BusinessCardEdit")
                     .Prop("font-color", new Color(25, 25, 25)),
+                 /// rmc end
 
                 // chat subpanels (chat lineedit backing, popup backings)
                 new StyleRule(new SelectorElement(typeof(PanelContainer), new[] {StyleClassChatPanel}, null, null),
