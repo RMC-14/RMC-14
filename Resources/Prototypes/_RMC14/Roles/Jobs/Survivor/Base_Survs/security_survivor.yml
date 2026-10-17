@@ -88,6 +88,15 @@
   - type: RandomHumanoidSpawner
     settings: RMCSurvivorSecurity
 
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleSurvivorSecurity
+  name: Security Survivor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: survivor_security
+
 - type: randomHumanoidSettings
   parent: RMCSettingsGhostRole
   id: RMCSurvivorSecurity

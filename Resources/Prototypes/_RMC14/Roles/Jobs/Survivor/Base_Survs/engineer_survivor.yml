@@ -79,6 +79,15 @@
   - type: RandomHumanoidSpawner
     settings: RMCSurvivorEngineer
 
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleSurvivorEngineer
+  name: Engineer Survivor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: survivor_engineer
+
 - type: randomHumanoidSettings
   parent: RMCSettingsGhostRole
   id: RMCSurvivorEngineer

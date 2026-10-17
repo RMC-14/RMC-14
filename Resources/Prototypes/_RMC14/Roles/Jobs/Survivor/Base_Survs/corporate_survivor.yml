@@ -4,7 +4,7 @@
   name: cm-job-name-survivor-corporate
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorCorporate
-  icon: "CMJobIconLiaison"
+  icon: "RMCJobIconGenericColonistCorporate"
   hasIcon: true
   ranks:
     RMCRankWeYaExecutiveSpecialist:
@@ -93,6 +93,15 @@
     - state: red
   - type: RandomHumanoidSpawner
     settings: RMCSurvivorCorporate
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleSurvivorCorporate
+  name: Civilian Survivor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: survivor_corporate
 
 - type: randomHumanoidSettings
   parent: RMCSettingsGhostRole

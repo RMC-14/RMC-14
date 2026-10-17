@@ -84,6 +84,15 @@
   name: rmc-playtime-tracker-job-name-survivor-scientist
   isHumanoid: true
 
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleSurvivorScientist
+  name: Scientist Survivor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: survivor_scientist
+
 - type: randomHumanoidSettings
   parent: RMCSettingsGhostRole
   id: RMCSurvivorScientist

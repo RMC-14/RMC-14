@@ -88,6 +88,15 @@
   - type: RandomHumanoidSpawner
     settings: RMCSurvivorDoctor
 
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleSurvivorDoctor
+  name: Doctor Survivor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: survivor_doctor
+
 - type: randomHumanoidSettings
   parent: RMCSettingsGhostRole
   id: RMCSurvivorDoctor

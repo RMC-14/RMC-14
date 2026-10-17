@@ -7,7 +7,7 @@
   ranks:
     RMCRankSyntheticColonist: []
   startingGear: RMCGearSyntheticColonist
-  icon: "RMCJobIconSynth"
+  icon: "RMCJobIconGenericColonistSynthetic"
   joinNotifyCrew: true
   whitelisted: true
   whitelistParent: RMCJobSynthetic
@@ -64,6 +64,15 @@
     job_id: RMCSyntheticColony
   - type: Sprite
     state: syn_spawn
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleSurvivorSynthetic
+  name: Synthetic Survivor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: survivor_synthetic
 
 - type: playTimeTracker
   id: RMCJobSyntheticColony
