@@ -18,12 +18,3 @@
   id: RMCJobSurvivorCO
   name: rmc-playtime-tracker-job-name-survivor-co
   isHumanoid: true
-
-- type: entity
-  parent: CMGuidebookRole
-  id: RMCGuidebookRoleSurvivorCommander
-  name: Commander Survivor
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    state: survivor_commander

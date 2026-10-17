@@ -264,15 +264,6 @@
   - type: RandomHumanoidSpawner
     settings: RMCSurvivorCivilian
 
-- type: entity
-  parent: CMGuidebookRole
-  id: RMCGuidebookRoleSurvivorCivilian
-  name: Civilian Survivor
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    state: survivor_civilian
-
 - type: randomHumanoidSettings
   parent: RMCSettingsGhostRole
   id: RMCSurvivorCivilian

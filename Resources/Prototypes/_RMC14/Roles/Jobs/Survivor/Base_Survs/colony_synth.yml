@@ -65,15 +65,6 @@
   - type: Sprite
     state: syn_spawn
 
-- type: entity
-  parent: CMGuidebookRole
-  id: RMCGuidebookRoleSurvivorSynthetic
-  name: Synthetic Survivor
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    state: survivor_synthetic
-
 - type: playTimeTracker
   id: RMCJobSyntheticColony
   name: rmc-playtime-tracker-job-name-survivor-synth

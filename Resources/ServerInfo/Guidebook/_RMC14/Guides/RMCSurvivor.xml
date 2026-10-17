@@ -161,6 +161,28 @@
   - Your [bold]handheld[/bold] radio is your only way to communicate with other survivors, as groundside communications will be down. Make sure to turn it off if you are all in close proximity to one another.
   - Your [bold]knife[/bold] allows you to cut fences and destroy objects such as windows and lockers fairly quickly. Note that, like other melee weapons, your knife can be used offensively against armored xenonids.
 
+  Synthetic survivors have a unique survival pouch.
+
+  <Box>
+    [color=#a88b5e][bold]Synthetic Survival Pouch[/bold][/color]
+  </Box>
+  <Box>
+    <GuideEntityEmbed Entity="RMCPouchSurvivalSynth" Caption="Synthetic Survival Pouch"/>
+  </Box>
+  <Box> Synth survival pouches always contain the following emergency equipment, </Box>
+  <Box>
+    <GuideEntityEmbed Entity="CMSheetMetal50" Caption="Metal"/>
+    <GuideEntityEmbed Entity="CMCrowbarRed" Caption="Crowbar"/>
+    <GuideEntityEmbed Entity="CMWelder" Caption="Blowtorch"/>
+    <GuideEntityEmbed Entity="RMCCableCoil" Caption="Cable"/>
+    <GuideEntityEmbed Entity="RMCRadioHandheldColonyOff" Caption="Radio"/>
+    <GuideEntityEmbed Entity="RMCM5Bayonet" Caption="Knife"/>
+  </Box>
+
+    - Their [bold]metal sheets[/bold] allows them to assist in constructing barricades.
+    - Their [bold]blowtorch[/bold] allows them to perform welding and repair brute damage.
+    - Their [bold]cable[/bold] allows them to repair burn damage by themselves.
+
   <Box>
     [color=#a88b5e][bold]Inserts[/bold][/color]
   </Box>
@@ -240,7 +262,7 @@
   - [bold]Supplying other survivors.[/bold] Those [bold]contesting[/bold] may have barricades between them and critical supplies. Throw them what they need, when they ask for it.
   - [bold]Healing other survivors.[/bold] Use topical treatments on other survivors to stop their bleeding and treat their wounds, especially with medical kits. Be very careful when administering chemical treatments, as survivors may have scavenged their own.
   - [bold]Shaking other survivors.[/bold] Xenonids are capable of stunning survivors for seconds at a time, which can create vulnerabilities or cause casualties. Shake your fellow survivors to keep them in the fight.
-  - [bold]Repair and construct barricades.[/bold] Put loose materials to use and construct more barricade lines. If there is a loose welder, take it and use it to repair barricades, even if it incurs eye damage.
+  - [bold]Repair and construct barricades.[/bold] Put loose materials to use and construct more barricade lines. If there is a loose blowtorch, take it and use it to repair barricades, even if it incurs eye damage.
 
   ## Rescue
   If you can manage to stave off the xenonid menace for long enough, you may yet live to see the marines rescue you. Remember that, as a survivor, you are upheld to unique roleplay standards, which you can view [textlink="here" link="RMCSurvivorRoleplay"].
