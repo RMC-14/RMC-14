@@ -115,7 +115,7 @@ public sealed partial class XenoShieldSystem : EntitySystem
     /// <param name="visualState"> If this shield has a special visual overlay</param>
     /// <returns></returns>
     public bool ApplyShield(EntityUid uid, ShieldType type, FixedPoint2 amount, TimeSpan? duration = null,
-        double decay = 0, bool addShield = false, double maxShield = 200, string? visualState = null, int visualPriority = 0)
+        double decay = 0, bool addShield = false, double maxShield = 200, string? visualState = null)
     {
         if (HasComp<UnshieldableComponent>(uid))
             return false;
@@ -136,7 +136,7 @@ public sealed partial class XenoShieldSystem : EntitySystem
                 return true;
             }
         }
-        var shield = new XenoShield(type, amount, decay, visualState, visualPriority, maxShield);
+        var shield = new XenoShield(type, amount, decay, visualState, maxShield);
 
         if (duration != null)
             shield.ShieldDecayAt = _timing.CurTime + duration.Value;

@@ -171,7 +171,7 @@ public sealed class XenoShardSystem : EntitySystem
 
         Dirty(ent);
 
-        _shield.ApplyShield(ent, XenoShieldSystem.ShieldType.Hedgehog, ent.Comp.ShieldAmount, visualState: ent.Comp.VisualState, visualPriority: 100);
+        _shield.ApplyShield(ent, XenoShieldSystem.ShieldType.Hedgehog, ent.Comp.ShieldAmount, visualState: ent.Comp.VisualState);
 
         // Show CM13-style messages
         var selfMsg = Loc.GetString("rmc-spike-shield-self");

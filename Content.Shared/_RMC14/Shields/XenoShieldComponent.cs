@@ -50,7 +50,7 @@ public sealed partial class XenoShield
     [DataField]
     public string? Visual;
 
-    public XenoShield (XenoShieldSystem.ShieldType shield, FixedPoint2 shieldAmount, double decay, string? visual, int priority, double maxShield)
+    public XenoShield (XenoShieldSystem.ShieldType shield, FixedPoint2 shieldAmount, double decay, string? visual, double maxShield)
     {
         Shield = shield;
         ShieldAmount = shieldAmount;
