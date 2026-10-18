@@ -30,8 +30,11 @@
   components:
   - type: Action
     icon:
-      sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/scout_cloak.rsi
-      state: icon
+      sprite: _RMC14/Actions/marine_specialists_actions.rsi
+      state: invisibility
+    iconOn:
+      sprite: _RMC14/Actions/marine_specialists_actions.rsi
+      state: invisibility_off
     useDelay: 0.5
     itemIconStyle: NoItem
   - type: InstantAction

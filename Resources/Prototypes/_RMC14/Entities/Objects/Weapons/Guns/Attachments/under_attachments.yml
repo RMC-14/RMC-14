@@ -70,11 +70,11 @@
       params:
         volume: -3
     icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      sprite: _RMC14/Actions/marine_gun_attachments.rsi
       state: bipod
     iconActive:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
-      state: bipod-on
+      sprite: _RMC14/Actions/marine_gun_attachments.rsi
+      state: bipod_off
     actionName: Deploy Bipod
     actionDesc: Deploy the bipod and get into a firing position.
   - type: AttachableVisuals
@@ -151,13 +151,6 @@
     tags:
     - RMCAttachmentUnderbarrel
     - RMCAttachmentBipodQYJ
-  - type: AttachableToggleable
-    icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
-      state: qyj72_bipod
-    iconActive:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
-      state: qyj72_bipod-on
 
 - type: entity
   parent: RMCUnderAttachmentBase
@@ -324,11 +317,11 @@
     actionName: Switch to the mini flamethrower.
     actionDesc: Switch to using the mini flamethrower.
     icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
-      state: flamethrower
+      sprite: _RMC14/Actions/marine_gun_attachments.rsi
+      state: underflamer
     iconActive:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
-      state: flamethrower-on
+      sprite: _RMC14/Actions/marine_gun_attachments.rsi
+      state: underflamer_off
   - type: AttachableVisuals
     offset: -0.125, 0.245
   - type: WieldedCrosshair
@@ -355,7 +348,7 @@
   - type: Tag
     tags:
     - RMCAttachmentUnderbarrel
-    - RMCAttachmentFlamerNozzle
+    - RMCAttachmentXMVESG1FlamerNozzle
   - type: AttachableVisuals
     offset: -0.125, 0.245
   - type: AttachableToggleable
@@ -372,11 +365,11 @@
     actionName: Switch to the VESG nozzle.
     actionDesc: Switch to using the VESG nozzle.
     icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
-      state: flamer_nozzle
+      sprite: _RMC14/Actions/marine_gun_attachments.rsi
+      state: nozzle_spray
     iconActive:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
-      state: flamer_nozzle-on
+      sprite: _RMC14/Actions/marine_gun_attachments.rsi
+      state: nozzle_ball
   - type: WieldedCrosshair
     rsi:
       sprite: _RMC14/Interface/MousePointer/flamer_mouse.rsi
@@ -453,11 +446,11 @@
     actionName: Switch to the U7 underbarrel shotgun
     actionDesc: Switch to using the underbarrel shotgun.
     icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
-      state: masterkey
+      sprite: _RMC14/Actions/marine_gun_attachments.rsi
+      state: undershot
     iconActive:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
-      state: masterkey-on
+      sprite: _RMC14/Actions/marine_gun_attachments.rsi
+      state: undershot_off
   - type: AttachableVisuals
   - type: WieldedCrosshair
     rsi:
@@ -507,11 +500,11 @@
     actionName: Switch to the underbarrel extinguisher.
     actionDesc: Switch to using the underbarrel extinguisher.
     icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
-      state: extinguisher
+      sprite: _RMC14/Actions/marine_gun_attachments.rsi
+      state: underext
     iconActive:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
-      state: extinguisher-on
+      sprite: _RMC14/Actions/marine_gun_attachments.rsi
+      state: underext_off
   - type: AttachableVisuals
     offset: 0.061, 0.028
   - type: RMCSprayAmmoProvider
@@ -627,11 +620,17 @@
     actionName: Switch to the U1 Grenade Launcher
     actionDesc: Switch to using the underbarrel grenade launcher.
     icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
-      state: grenade
+      sprite: _RMC14/Actions/marine_gun_attachments.rsi
+      state: undergl
     iconActive:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
-      state: grenade-on
+      sprite: _RMC14/Actions/marine_gun_attachments.rsi
+      state: undergl_off
+    secondaryIcon:
+      sprite: _RMC14/Actions/marine_gun_attachments.rsi
+      state: undergl
+    secondaryIconActive:
+      sprite: _RMC14/Actions/marine_gun_attachments.rsi
+      state: undergl_breech
   - type: AttachableVisuals
     redrawOnAppearanceChange: true
   - type: Tag
@@ -669,12 +668,6 @@
           False: { state: grenade-mk1 }
   - type: AttachableToggleable
     actionName: Switch to the MK1 Underslung Grenade Launcher
-    icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
-      state: grenade-mk1
-    iconActive:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
-      state: grenade-mk1-on
   - type: AttachableVisuals
     offset: -0.1, 0.218
   - type: Tag
@@ -712,12 +705,6 @@
           False: { state: grenade-m203 }
   - type: AttachableToggleable
     actionName: Switch to the MK1 Underslung Grenade Launcher
-    icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
-      state: grenade-m203
-    iconActive:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
-      state: grenade-m203-on
   - type: AttachableVisuals
     offset: -0.1, 0.218
   - type: Tag
@@ -821,11 +808,11 @@
     attachedOnly: true
     useDelay: 1.0
     icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
-      state: flashgrip
+      sprite: _RMC14/Actions/marine_gun_attachments.rsi
+      state: flash_grip
     iconActive:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
-      state: flashgrip-on
+      sprite: _RMC14/Actions/marine_gun_attachments.rsi
+      state: flash_grip_off
     actionName: Activate Underbarrel Flashlight Grip
     actionDesc: Can be toggled on and off. A better light source than standard M3 pattern armor lights.
   - type: AttachableVisuals
@@ -865,11 +852,11 @@
     - Flashlight
   - type: AttachableToggleable
     icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
-      state: laserlight
+      sprite: _RMC14/Actions/marine_gun_attachments.rsi
+      state: combo_flash
     iconActive:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
-      state: laserlight-on
+      sprite: _RMC14/Actions/marine_gun_attachments.rsi
+      state: combo_flash_off
     actionName: Activate Laser-Light Module
     actionDesc: Can be toggled on and off. A better light source than standard M3 pattern armor lights.
   - type: AttachableWeaponRangedMods
@@ -898,12 +885,6 @@
     - RMCAttachmentUnderbarrel
     - RMCAttachmentL91Bipod
   - type: AttachableToggleable
-    icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
-      state: bipod-l91
-    iconActive:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
-      state: bipod-l91-on
     actionName: Deploy Bipod
     actionDesc: Deploy the bipod and get into a firing position.
   - type: AttachableWeaponMeleeMods
@@ -942,13 +923,6 @@
           False: { state: grenade-l90 }
   - type: AttachableToggleable
     actionName: Switch to the L90U3 Grenade Launcher
-    actionDesc: Switch to using the underbarrel grenade launcher.
-    icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
-      state: grenade-l90
-    iconActive:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
-      state: grenade-l90-on
   - type: Tag
     tags:
     - RMCAttachmentUnderbarrel
@@ -1013,11 +987,11 @@
     actionName: Switch to the L90U1 underbarrel shotgun
     actionDesc: Switch to using the underbarrel shotgun.
     icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
-      state: ubs-l90
+      sprite: _RMC14/Actions/marine_gun_attachments.rsi
+      state: undershot
     iconActive:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
-      state: ubs-l90-on
+      sprite: _RMC14/Actions/marine_gun_attachments.rsi
+      state: undershot_off
   - type: AttachableVisuals
   - type: WieldedCrosshair
     rsi:
@@ -1040,12 +1014,6 @@
   - type: AttachableToggleable
     actionName: Switch to the L90U2 underbarrel flamethrower.
     actionDesc: Switch to using the L90U2 underbarrel flamethrower.
-    icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
-      state: flamer-l90
-    iconActive:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
-      state: flamer-l90-on
   - type: AttachableVisuals
     offset: 0, 0
   - type: Tag
@@ -1136,7 +1104,7 @@
   id: RMCAttachmentL88Grip
 
 - type: Tag
-  id: RMCAttachmentFlamerNozzle
+  id: RMCAttachmentXMVESG1FlamerNozzle
 
 - type: Tag
   id: RMCAttachmentBipodQYJ

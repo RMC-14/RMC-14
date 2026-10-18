@@ -46,4 +46,4 @@
         startingAttachable: RMCAttachmentScopeMGLIntegrated
         whitelist:
           tags:
-          - RMCAttachmentMGLIntegratedScope
+          - RMCAttachmentScopeMGLIntegrated

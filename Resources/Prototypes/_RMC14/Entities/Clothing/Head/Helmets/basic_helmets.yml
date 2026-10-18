@@ -178,6 +178,7 @@
     rotation: 90
   - type: HandheldLight
     addPrefix: true
+    toggleAction: RMCActionToggleHelmetLight
     blinkingBehaviourId: blinking
     radiatingBehaviourId: radiating
     turnOffSound:

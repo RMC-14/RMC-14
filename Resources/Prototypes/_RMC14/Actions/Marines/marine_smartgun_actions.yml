@@ -4,9 +4,6 @@
   id: ActionMarineToggleable
   components:
   - type: Action
-    backgroundOn:
-      sprite: _RMC14/Actions/xeno_actions.rsi
-      state: template_on_big
     itemIconStyle: NoItem
 
 - type: entity
@@ -41,6 +38,9 @@
     icon:
       sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
       state: recoil_compensation
+    iconOn:
+      sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
+      state: recoil_compensation_off
     useDelay: 0.25
     itemIconStyle: NoItem
   - type: InstantAction
@@ -56,6 +56,9 @@
     icon:
       sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
       state: autofire
+    iconOn:
+      sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
+      state: autofire_off
     useDelay: 0.25
     itemIconStyle: NoItem
   - type: InstantAction
@@ -68,6 +71,9 @@
   description: Lets you see slightly farther away.
   components:
   - type: Action
+    backgroundOn:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: template_on_big
     icon:
       sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
       state: far_sight
@@ -86,6 +92,9 @@
     icon:
       sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
       state: motion_detector
+    iconOn:
+      sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
+      state: motion_detector_off
     useDelay: 0.25
     itemIconStyle: NoItem
   - type: InstantAction

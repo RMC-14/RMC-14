@@ -313,7 +313,7 @@
       params:
         variation: 0.250
   - type: ToggleClothing
-    action: RMCActionToggleMedhud
+    action: RMCActionToggleReagentScanner
   - type: ComponentToggler
     components:
     - type: SolutionScanner

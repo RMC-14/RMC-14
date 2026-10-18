@@ -71,7 +71,7 @@
         whitelist:
           tags:
           - RMCAttachmentUnderbarrelExtinguisher
-          - RMCAttachmentFlamerNozzle
+          - RMCAttachmentXMVESG1FlamerNozzle
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-rail: -0.032, 0.092
@@ -143,7 +143,7 @@
         whitelist:
           tags:
           - RMCAttachmentUnderbarrelExtinguisher
-          - RMCAttachmentFlamerNozzle
+          - RMCAttachmentXMVESG1FlamerNozzle
 
 - type: entity
   parent: BaseItem

@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/04808029410c391d63be5ad063fb2a6b11984c56/icons/mob/hud/actions.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "bipod"
+    },
+    {
+      "name": "bipod_off"
+    },
+    {
+      "name": "combo_flash"
+    },
+    {
+      "name": "combo_flash_off"
+    },
+    {
+      "name": "extend_stock"
+    },
+    {
+      "name": "extend_stock_off"
+    },
+    {
+      "name": "flarelauncher"
+    },
+    {
+      "name": "flarelauncher_off"
+    },
+    {
+      "name": "nozzle_ball"
+    },
+    {
+      "name": "nozzle_spray"
+    },
+    {
+      "name": "underext"
+    },
+    {
+      "name": "underext_off"
+    },
+    {
+      "name": "underflamer",
+      "delays": [
+        [
+          0.135,
+          0.135
+        ]
+      ]
+    },
+    {
+      "name": "underflamer_off",
+      "delays": [
+        [
+          0.135,
+          0.135
+        ]
+      ]
+    },
+    {
+      "name": "underflamer_turbo",
+      "delays": [
+        [
+          0.135,
+          0.135
+        ]
+      ]
+    },
+    {
+      "name": "underflamer_turbo_off",
+      "delays": [
+        [
+          0.135,
+          0.135
+        ]
+      ]
+    },
+    {
+      "name": "undergl"
+    },
+    {
+      "name": "undergl_breech"
+    },
+    {
+      "name": "undergl_off"
+    },
+    {
+      "name": "undershot"
+    },
+    {
+      "name": "undershot_off"
+    },
+    {
+      "name": "flash_grip"
+    },
+    {
+      "name": "flash_grip_off"
+    },
+    {
+      "name": "zoom_scope"
+    },
+    {
+      "name": "unzoom_scope"
+    },
+    {
+      "name": "flashlight"
+    },
+    {
+      "name": "flashlight_off"
+    }
+  ]
+}

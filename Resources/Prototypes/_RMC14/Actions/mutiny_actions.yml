@@ -7,8 +7,8 @@
   - type: Action
     itemIconStyle: NoItem
     icon:
-      sprite: _RMC14/Interface/job_icons/Misc/mutiny.rsi
-      state: hudmutineer
+      sprite: _RMC14/Actions/marine_actions_items.rsi
+      state: mutineer_convert
     useDelay: 2
   - type: TargetAction
     range: 1.5

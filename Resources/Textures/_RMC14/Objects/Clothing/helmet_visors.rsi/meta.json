@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/a0922d708fa6ef0e4d09d08e742c188ae9bb5d4e/icons/obj/items/clothing/helmet_visors.dmi, modified by Vermidia",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/a0922d708fa6ef0e4d09d08e742c188ae9bb5d4e/icons/obj/items/clothing/helmet_visors.dmi, modified by Vermidia, https://github.com/cmss13-devs/cmss13/blob/cfa259bbd2d627ed94a359fa8c0dec63006f49fa/icons/mob/hud/actions.dmi",
   "size": {
     "x": 32,
     "y": 32

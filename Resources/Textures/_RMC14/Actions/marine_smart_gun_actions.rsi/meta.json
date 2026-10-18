@@ -11,25 +11,37 @@
       "name": "accuracy_improvement"
     },
     {
+      "name": "accuracy_improvement_off"
+    },
+    {
       "name": "ammo_swap_normal"
     },
     {
       "name": "autofire"
     },
     {
-      "name": "iff_toggle_on"
+      "name": "autofire_off"
     },
     {
       "name": "motion_detector"
     },
     {
+      "name": "motion_detector_off"
+    },
+    {
       "name": "recoil_compensation"
+    },
+    {
+      "name": "recoil_compensation_off"
     },
     {
       "name": "far_sight"
     },
     {
       "name": "ammo_swap_ap"
+    },
+    {
+      "name": "iff_toggle_on"
     }
   ]
 }

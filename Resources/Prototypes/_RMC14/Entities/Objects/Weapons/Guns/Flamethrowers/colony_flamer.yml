@@ -67,7 +67,7 @@
       rmc-aslot-underbarrel:
         whitelist:
           tags:
-          - RMCAttachmentFlamerNozzle
+          - RMCAttachmentXMVESG1FlamerNozzle
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-rail: 0.05, 0.092

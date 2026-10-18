@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/cfa259bbd2d627ed94a359fa8c0dec63006f49fa/icons/mob/hud/actions.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+      {
+          "name": "whistle"
+      },
+      {
+          "name": "phone"
+      },
+      {
+          "name": "microphone"
+      },
+      {
+          "name": "degoggles"
+      },
+      {
+          "name": "healthhud"
+      },
+      {
+          "name": "purple"
+      },
+      {
+          "name": "purple_off"
+      },
+      {
+          "name": "securityhud"
+      },
+      {
+          "name": "refurb_meson"
+      },
+      {
+          "name": "meson"
+      },
+      {
+          "name": "minimap"
+      },
+      {
+          "name": "mutineer_convert"
+      },
+      {
+          "name": "armor_light"
+      },
+      {
+          "name": "armor_light_off"
+      },
+      {
+          "name": "lantern_on"
+      },
+      {
+          "name": "lantern_off"
+      }
+  ]
+}

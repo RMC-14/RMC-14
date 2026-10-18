@@ -152,6 +152,17 @@ public sealed partial class AttachableToggleableComponent : Component
     [DataField, AutoNetworkedField]
     public SpriteSpecifier? IconActive;
 
+    // If set to true, the attachment will use a secondary icon when active, 
+    // example being Underbarrel grenade launchers breech needing unique action to open and close, and thus needing a unique icon to show that the breech is open.
+    [DataField, AutoNetworkedField]
+    public SpriteSpecifier? SecondaryIcon;
+
+    [DataField, AutoNetworkedField]
+    public SpriteSpecifier? SecondaryIconActive;
+
+    [DataField, AutoNetworkedField]
+    public bool UsingSecondaryIcon;
+
     [DataField, AutoNetworkedField]
     public bool Attached = false;
 

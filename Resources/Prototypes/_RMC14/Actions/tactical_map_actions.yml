@@ -14,8 +14,8 @@
   components:
   - type: Action
     icon:
-      sprite: _RMC14/Structures/Machines/map_table.rsi
-      state: maptable
+      sprite: _RMC14/Actions/marine_actions_items.rsi
+      state: minimap
 
 - type: entity
   parent: RMCActionOpenTacticalMap
@@ -32,7 +32,7 @@
   components:
   - type: Action
     icon:
-      sprite: _RMC14/Structures/Machines/map_table.rsi
-      state: maptable
+      sprite: _RMC14/Actions/marine_actions_items.rsi
+      state: minimap
     checkCanInteract: false
     checkConsciousness: false

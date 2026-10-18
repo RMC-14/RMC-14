@@ -70,11 +70,11 @@
     attachedOnly: true
     useDelay: 1.0
     icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
+      sprite: _RMC14/Actions/marine_gun_attachments.rsi
       state: flashlight
     iconActive:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
-      state: flashlight-on
+      sprite: _RMC14/Actions/marine_gun_attachments.rsi
+      state: flashlight_off
     actionName: Toggle Rail Flashlight
     actionDesc: Can be toggled on and off. A better light source than standard M3 pattern armor lights.
   - type: AttachableVisuals
@@ -224,8 +224,11 @@
     useDelay: 0.5
     showTogglePopup: false
     icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
-      state: sniperscope
+      sprite: _RMC14/Actions/marine_gun_attachments.rsi
+      state: zoom_scope
+    iconActive:
+      sprite: _RMC14/Actions/marine_gun_attachments.rsi
+      state: unzoom_scope
     actionName: Look through Scope
     actionDesc: Scope in. If you're seeing this, someone forgot to set the description properly.
   - type: AttachableToggleableSimpleActivate
@@ -301,9 +304,6 @@
     - RMCAttachmentRail
     - RMCAttachmentSlavicScope
   - type: AttachableToggleable
-    icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
-      state: slavicscope
     actionName: Look through the 4x Telescopic Scope
     actionDesc: A slavic scope. Fixed at 4x zoom.
 
@@ -322,9 +322,6 @@
   - type: AttachableVisuals
   - type: AttachableToggleable
     breakOnMove: false
-    icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
-      state: miniscope
     actionName: Look through the S4 2x Telescopic Mini-Scope
     actionDesc: An AEGIS S4 telescoping eye piece. Fixed at a modest 2x zoom.
   - type: AttachableToggleableSimpleActivate
@@ -372,9 +369,6 @@
   - type: AttachableVisuals
   - type: AttachableToggleable
     breakOnMove: false
-    icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
-      state: miniscope_fp9000
     actionName: Look through the FP9000 2x telescopic mini-scope
     actionDesc: Fixed at a modest 2x zoom.
   - type: AttachableToggleableSimpleActivate
@@ -405,9 +399,6 @@
     - RMCAttachmentRail
     - RMCAttachmentS42xAdvancedTelescopicMiniscope
   - type: AttachableToggleable
-    icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
-      state: miniscope-nsg23
     actionName: Look through WeYa S4 2x Advanced Telescopic Mini-Scope
     actionDesc: An AEGIS S4 telescoping eye piece, custom-tuned by WeYa scientists to be as ergonomic as possible.
   - type: Scope
@@ -434,9 +425,6 @@
     - RMCAttachmentRail
     - RMCAttachmentMiniscopeHunting
   - type: AttachableToggleable
-    icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
-      state: huntingscope
     actionName: Look through 2x Hunting Mini-Scope
     actionDesc: This civilian-grade scope is a common sight on hunting rifles due to its cheap price and great optics. Fixed at a modest 2x zoom.
 
@@ -454,9 +442,6 @@
     - RMCAttachmentB8SmartScope
   - type: AttachableToggleable
     doAfter: 0.8
-    icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
-      state: huntingscope
     actionName: Look through B8 Smart-Scope
     actionDesc: Lets you see further and shoot through your fellow marines without harming them.
   - type: AttachableIFF
@@ -487,9 +472,6 @@
     actionsToRelayWhitelist:
       tags:
       - RMCActionCycleZoomLevel
-    icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
-      state: m96s-scope
     actionName: Look through M96S Integrated Scope
     actionDesc: Lets you see further.
   - type: AttachableSpeedMods
@@ -536,9 +518,6 @@
     - RMCAttachmentRail
     - RMCXM43E1IntegratedScope
   - type: AttachableToggleable
-    icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
-      state: xm43e1_scope
     actionName: Look through the XM43E1's Integrated Scope
     actionDesc: Lets you see further.
 
@@ -555,9 +534,6 @@
     - RMCAttachmentRail
     - RMCType88IntegratedScope
   - type: AttachableToggleable
-    icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
-      state: type88_scope
     actionName: Look through the Type 88's Integrated Scope
     actionDesc: Lets you see further.
 
@@ -576,9 +552,6 @@
     - RMCL112IntegratedScope
   - type: AttachableVisuals
   - type: AttachableToggleable
-    icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_rail.rsi
-      state: l112_scope
     actionName: Look through the L112 Integrated Scope
     actionDesc: Lets you see further.
 
@@ -598,9 +571,6 @@
   - type: Appearance
   - type: AttachableToggleable
     breakOnMove: false
-    icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
-      state: d_boomslang-scope
     actionName: Look through the XS-9 Scope
     actionDesc: A mostly disabled XS-9, it still functions as a scope though.
   - type: AttachableToggleableSimpleActivate
@@ -652,9 +622,6 @@
   - type: AttachableVisuals
   - type: AttachableToggleable
     breakOnMove: false
-    icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_rail.rsi
-      state: sasos
     actionName: Look through SASOS
     actionDesc: Lets you see further and shoot through your fellow marines without harming them.
   - type: AttachableToggleableSimpleActivate
@@ -696,9 +663,6 @@
     state: collisight
   - type: AttachableToggleable
     breakOnMove: false
-    icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
-      state: collisight
     actionName: Look through collimator sight
     actionDesc: Lets you see further and rain down explosives on the enemy without hitting your fellow Marines.
   - type: Scope
@@ -716,7 +680,7 @@
   - type: Tag
     tags:
     - RMCAttachmentRail
-    - RMCAttachmentMGLIntegratedScope
+    - RMCAttachmentScopeMGLIntegrated
 
 - type: entity
   parent: RMCAttachmentS42xTelescopicMiniscope
@@ -795,7 +759,7 @@
   id: RMCAttachmentSASOS
 
 - type: Tag
-  id: RMCAttachmentMGLIntegratedScope
+  id: RMCAttachmentScopeMGLIntegrated
 
 - type: Tag
   id: RMCAttachmentL89Scope

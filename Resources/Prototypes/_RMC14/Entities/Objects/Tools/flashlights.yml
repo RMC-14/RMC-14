@@ -4,6 +4,7 @@
   id: RMCFlashlightBase
   components:
   - type: HandheldLight
+    toggleAction: RMCActionToggleFlashlight
     blinkingBehaviourId: blinking
     radiatingBehaviourId: radiating
   - type: LightBehaviour
@@ -251,3 +252,5 @@
         map: [ "light" ]
   - type: PointLight
     radius: 6
+  - type: HandheldLight
+    toggleAction: RMCActionToggleLantern

@@ -6,8 +6,11 @@
   components:
   - type: Action
     icon:
-      sprite: _RMC14/Actions/scope_actions.rsi
-      state: sniperscope
+      sprite: _RMC14/Actions/marine_gun_attachments.rsi
+      state: zoom_scope
+    iconOn:
+      sprite: _RMC14/Actions/marine_gun_attachments.rsi
+      state: unzoom_scope
     useDelay: 0.25
   - type: InstantAction
     event: !type:ToggleActionEvent
@@ -19,9 +22,10 @@
   description: Change the level of magnification of your optics.
   components:
   - type: Action
+    itemIconStyle: NoItem
     icon:
-      sprite: _RMC14/Actions/scope_actions.rsi
-      state: sniperscope
+      sprite: _RMC14/Actions/marine_sniper_actions.rsi
+      state: zoom_in
     useDelay: 0.25
   - type: InstantAction
     event: !type:ScopeCycleZoomLevelEvent
@@ -79,6 +83,7 @@
   description: Toggle an attachable. If you're seeing this, someone forgot to set the description properly.
   components:
   - type: Action
+    itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/scope_actions.rsi
       state: sniperscope
@@ -94,7 +99,7 @@
   - type: Action
     itemIconStyle: NoItem
     icon:
-      sprite: _RMC14/Objects/Devices/whistle.rsi
+      sprite: _RMC14/Actions/marine_actions_items.rsi
       state: whistle
     useDelay: 10
   - type: InstantAction
@@ -109,8 +114,8 @@
   - type: Action
     itemIconStyle: NoItem
     icon:
-      sprite: _RMC14/Objects/phone.rsi
-      state: rpb_phone
+      sprite: _RMC14/Actions/marine_actions_items.rsi
+      state: phone
     useDelay: 0.5
   - type: InstantAction
     event: !type:RMCTelephoneActionEvent
@@ -123,8 +128,8 @@
   - type: Action
     itemIconStyle: NoItem
     icon:
-      sprite: _RMC14/Objects/phone.rsi
-      state: scout_microphone
+      sprite: _RMC14/Actions/marine_actions_items.rsi
+      state: microphone
     useDelay: 0.5
 
 - type: Tag
@@ -137,18 +142,45 @@
   description: Toggle the optical matrix of the medical HUD.
   components:
   - type: Action
-    itemIconStyle: BigItem
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/marine_actions_items.rsi
+      state: degoggles
+    iconOn:
+      sprite: _RMC14/Actions/marine_actions_items.rsi
+      state: healthhud
   - type: InstantAction
     event: !type:ToggleActionEvent
 
 - type: entity
-  parent: ActionMarineBase
+  parent: RMCActionToggleMedhud
+  id: RMCActionToggleReagentScanner
+  name: Toggle reagent scanner HUD
+  description: Toggle the optical matrix of the reagent scanner HUD.
+  components:
+  - type: Action
+    icon:
+      sprite: _RMC14/Actions/marine_actions_items.rsi
+      state: purple_off
+    iconOn:
+      sprite: _RMC14/Actions/marine_actions_items.rsi
+      state: purple
+  - type: InstantAction
+    event: !type:ToggleActionEvent
+
+- type: entity
+  parent: RMCActionToggleMedhud
   id: RMCActionToggleSechud
   name: Toggle Security HUD
   description: Toggle the optical matrix of the security HUD.
   components:
   - type: Action
-    itemIconStyle: BigItem
+    icon:
+      sprite: _RMC14/Actions/marine_actions_items.rsi
+      state: degoggles
+    iconOn:
+      sprite: _RMC14/Actions/marine_actions_items.rsi
+      state: securityhud
   - type: InstantAction
     event: !type:ToggleActionEvent
 
@@ -185,10 +217,12 @@
   name: Spot Target
   components:
   - type: Action
-    itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/marine_sniper_actions.rsi
       state: spotter_target
+    backgroundOn:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: template_on_big
   - type: InstantAction
     event: !type:SpotTargetActionEvent
 
@@ -214,10 +248,12 @@
   description: While in combat mode and hovering your mouse over a target, press the unique action key to begin aiming.
   components:
   - type: Action
-    itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/marine_sniper_actions.rsi
       state: sniper_aim
+    backgroundOn:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: template_on_big
   - type: InstantAction
     event: !type:AimedShotActionEvent
 
@@ -244,6 +280,57 @@
       state: cancel_view
   - type: InstantAction
     event: !type:DismountActionEvent
+
+- type: entity
+  parent: ActionToggleLight
+  id: RMCActionToggleArmorLight
+  name: Toggle Light
+  description: Turn the armor light on and off.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/marine_actions_items.rsi
+      state: armor_light
+    iconOn:
+      sprite: _RMC14/Actions/marine_actions_items.rsi
+      state: armor_light_off
+
+- type: entity
+  parent: RMCActionToggleArmorLight
+  id: RMCActionToggleHelmetLight
+  name: Toggle Headlight
+  description: Turn the helmet light on and off.
+
+- type: entity
+  parent: ActionToggleLight
+  id: RMCActionToggleFlashlight
+  name: Toggle Light
+  description: Turn the flashlight on and off.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/marine_gun_attachments.rsi
+      state: flashlight
+    iconOn:
+      sprite: _RMC14/Actions/marine_gun_attachments.rsi
+      state: flashlight_off
+
+- type: entity
+  parent: RMCActionToggleFlashlight
+  id: RMCActionToggleLantern
+  name: Toggle Light
+  description: Turn the lantern on and off.
+  components:
+  - type: Action
+    icon:
+      sprite: _RMC14/Actions/marine_actions_items.rsi
+      state: lantern_on
+    iconOn:
+      sprite: _RMC14/Actions/marine_actions_items.rsi
+      state: lantern_off
+
 
 # CBRN
 - type: entity

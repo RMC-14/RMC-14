@@ -3,7 +3,12 @@ using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Attachable.Events;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Vehicle;
+using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared._RMC14.Weapons.Ranged;
+using Content.Shared._RMC14.Weapons.Ranged.Ammo;
+using Content.Shared._RMC14.Weapons.Ranged.Chamber;
+using Content.Shared._RMC14.Weapons.Ranged.Flamer;
+using Content.Shared._RMC14.Weapons.Ranged.Foldable;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
@@ -71,6 +76,15 @@ public sealed class AttachableToggleableSystem : EntitySystem
         SubscribeLocalEvent<AttachableToggleableComponent, ToggleActionEvent>(OnToggleAction,
             before: new[] { typeof(SharedHandheldLightSystem) });
         //SubscribeLocalEvent<AttachableToggleableComponent, UniqueActionEvent>(OnUniqueAction);
+        // Runs after the systems that perform unique actions on attachables, so args.Handled tells us one of them did something.
+        // Only systems that share an entity with AttachableToggleableComponent need to be listed here.
+        // If an attachable gains another unique action component, add its system to this list.
+        SubscribeLocalEvent<AttachableToggleableComponent, UniqueActionEvent>(OnUniqueActionIcon,
+            after: new[]
+            {
+                typeof(BreechLoadedSystem),   // Underbarrel grenade launchers
+                typeof(SharedRMCFlamerSystem), // VESG flamer nozzle
+            });
         SubscribeLocalEvent<AttachableToggleableComponent, GrantAttachableActionsEvent>(OnGrantAttachableActions);
         SubscribeLocalEvent<AttachableToggleableComponent, RemoveAttachableActionsEvent>(OnRemoveAttachableActions);
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableRelayedEvent<HandDeselectedEvent>>(OnHandDeselected);
@@ -799,13 +813,49 @@ public sealed class AttachableToggleableSystem : EntitySystem
         if (_actionsSystem.GetAction(actionId) is { } action)
         {
             var actionEnt = action.AsNullable();
-            _actionsSystem.SetIcon(actionEnt, ent.Comp.Icon);
-            _actionsSystem.SetIconOn(actionEnt, ent.Comp.IconActive);
+            RefreshActionIcons(ent);
             _actionsSystem.SetEnabled(actionEnt, ent.Comp.Attached);
             _actionsSystem.SetUseDelay(actionEnt, ent.Comp.UseDelay);
         }
 
         Dirty(ent);
+    }
+
+    // Flips the toggle action between its normal and secondary icons each time the unique action is used on this attachable.
+    // Only attachables that define a secondary icon in YAML are affected.
+    private void OnUniqueActionIcon(Entity<AttachableToggleableComponent> attachable, ref UniqueActionEvent args)
+    {
+        if (!args.Handled ||
+            attachable.Comp.SecondaryIcon == null && attachable.Comp.SecondaryIconActive == null)
+        {
+            return;
+        }
+
+        attachable.Comp.UsingSecondaryIcon = !attachable.Comp.UsingSecondaryIcon;
+        Dirty(attachable);
+        RefreshActionIcons(attachable);
+    }
+
+    private void RefreshActionIcons(Entity<AttachableToggleableComponent> attachable)
+    {
+        if (attachable.Comp.Action is not { } actionId ||
+            _actionsSystem.GetAction(actionId) is not { } action)
+        {
+            return;
+        }
+
+        var secondary = attachable.Comp.UsingSecondaryIcon;
+        var icon = secondary && attachable.Comp.SecondaryIcon != null
+            ? attachable.Comp.SecondaryIcon
+            : attachable.Comp.Icon;
+
+        var iconActive = secondary
+            ? attachable.Comp.SecondaryIconActive ?? attachable.Comp.SecondaryIcon ?? attachable.Comp.IconActive
+            : attachable.Comp.IconActive;
+
+        var actionEnt = action.AsNullable();
+        _actionsSystem.SetIcon(actionEnt, icon);
+        _actionsSystem.SetIconOn(actionEnt, iconActive);
     }
 
     private void RelayAttachableActions(Entity<AttachableToggleableComponent> attachable, EntityUid user)

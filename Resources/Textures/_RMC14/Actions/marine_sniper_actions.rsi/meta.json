@@ -21,6 +21,12 @@
     },
     {
       "name": "sniper_aim"
+    },
+    {
+      "name": "zoom_in"
+    },
+    {
+      "name": "zoom_out"
     }
   ]
 }
