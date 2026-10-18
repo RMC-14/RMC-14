@@ -83,7 +83,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
             after: new[]
             {
                 typeof(BreechLoadedSystem),   // Underbarrel grenade launchers
-                typeof(SharedRMCFlamerSystem), // VESG flamer nozzle
+                typeof(SharedRMCFlamerSystem), // Turbo mini flamer
             });
         SubscribeLocalEvent<AttachableToggleableComponent, GrantAttachableActionsEvent>(OnGrantAttachableActions);
         SubscribeLocalEvent<AttachableToggleableComponent, RemoveAttachableActionsEvent>(OnRemoveAttachableActions);
