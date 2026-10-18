@@ -1,12 +1,9 @@
-using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Damage;
-using Content.Shared.Damage;
 using Content.Shared.Explosion;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
-using System.Security.Cryptography;
 
 namespace Content.Shared._RMC14.Shields;
 
@@ -108,7 +105,7 @@ public sealed class VanguardShieldSystem : EntitySystem
     //Returns whether something applies for the shield buff (for cleave)
     public bool ShieldBuff(EntityUid ent)
     {
-        if (_shield.TryGetShield(ent, XenoShieldSystem.ShieldType.Vanguard, out var xenoShield))
+        if (_shield.TryGetShield(ent, XenoShieldSystem.ShieldType.Vanguard, out _))
             return true;
 
         if (TryComp<VanguardShieldComponent>(ent, out var vanguard) && vanguard.NextDecay + vanguard.BuffExtraTime > _timing.CurTime)

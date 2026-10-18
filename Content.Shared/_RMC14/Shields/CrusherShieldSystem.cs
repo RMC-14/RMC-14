@@ -9,7 +9,6 @@ using Content.Shared.Popups;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
-using System.Security.Cryptography;
 
 namespace Content.Shared._RMC14.Shields;
 

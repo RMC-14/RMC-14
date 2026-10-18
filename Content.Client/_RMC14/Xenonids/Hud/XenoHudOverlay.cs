@@ -50,7 +50,6 @@ public sealed class XenoHudOverlay : Overlay
     private readonly MobThresholdSystem _mobThresholds;
     private readonly SpriteSystem _sprite;
     private readonly TransformSystem _transform;
-
     private readonly XenoShieldSystem _shield;
 
     private readonly EntityQuery<DamageableComponent> _damageableQuery;
