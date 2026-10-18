@@ -38,7 +38,7 @@
     head: RMCHeadWeYaPilotCap
     ears: RMCHeadsetDistressWeYa
     back: RMCSatchelBlack
-    id: CMIDCardPilot
+    id: RMCIDCardPilot
     shoes: RMCShoesLaceup
     jumpsuit: RMCJumpsuitLiaisonPilot
     outerClothing: RMCCoatWeYaPilot

@@ -233,7 +233,7 @@
 
 - type: entity
   parent: CMIDCardGold
-  id: CMIDCardPilot
+  id: RMCIDCardPilot
   components:
   - type: ItemIFF
     factions:
