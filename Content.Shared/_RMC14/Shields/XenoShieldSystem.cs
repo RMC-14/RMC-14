@@ -17,8 +17,6 @@ public sealed partial class XenoShieldSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
 
-    private static readonly ProtoId<DamageTypePrototype> ShieldSoundDamageType = "Piercing";
-
     public enum ShieldType
     {
         Generic,
@@ -80,7 +78,7 @@ public sealed partial class XenoShieldSystem : EntitySystem
             }
             else
             {
-                if (HasComp<ProjectileComponent>(args.Tool) && args.Damage.DamageDict.ContainsKey(ShieldSoundDamageType))
+                if (HasComp<ProjectileComponent>(args.Tool))
                 {
                     _audio.PlayPredicted(ent.Comp.ShieldImpact, ent, null);
                 }
