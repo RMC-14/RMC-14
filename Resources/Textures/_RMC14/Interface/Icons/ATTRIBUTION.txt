@@ -1,9 +1,3 @@
 Icons in this folder are from Font Awesome Free, licensed under CC BY 4.0.
 https://fontawesome.com/license/free
 https://github.com/FortAwesome/Font-Awesome
-
-eject.svg, flask.svg, floppy-disk.svg, link.svg, arrows-rotate.svg, stop.svg, trash.svg,
-play.svg, arrow-right-long.svg, book.svg, gear.svg, print.svg, radiation.svg, server.svg,
-square-minus.svg, square-plus.svg are the "solid" style glyphs, rasterized to PNG and
-recolored to black to match this project's button icon convention. The "-white" suffixed
-variants are the same glyphs recolored to white, used for button hover states.
