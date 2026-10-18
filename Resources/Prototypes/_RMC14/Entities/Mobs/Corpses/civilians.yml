@@ -510,7 +510,7 @@
   id: RMCCorpseCLF
   components:
   - type: Loadout
-    prototypes: [ RMCGearCorpseCLF1, RMCGearCorpseCLF2, RMCGearCorpseCLF3, RMCGearCorpseCLF4 ]
+    prototypes: [ RMCGearCorpseCLFMAR, RMCGearCorpseCLFM12, RMCGearCorpseCLFM16, RMCGearCorpseCLFMP5 ]
 
 - type: startingGear
   id: RMCGearCorpseCLFBase
@@ -530,7 +530,7 @@
 
 - type: startingGear
   parent: RMCGearCorpseCLFBase
-  id: RMCGearCorpseCLF1
+  id: RMCGearCorpseCLFMAR
   equipment:
     head: CMHeadBandRebel
     belt: RMCBeltMarineMAR
@@ -539,7 +539,7 @@
 
 - type: startingGear
   parent: RMCGearCorpseCLFBase
-  id: RMCGearCorpseCLF2
+  id: RMCGearCorpseCLFM12
   equipment:
     head: RMCHeadMilitiaHood
     belt: CMBeltMarineBuckshot
@@ -548,7 +548,7 @@
 
 - type: startingGear
   parent: RMCGearCorpseCLFBase
-  id: RMCGearCorpseCLF3
+  id: RMCGearCorpseCLFM16
   equipment:
     head: RMCHeadMilitiaBucket
     belt: CMBeltMarineM16
@@ -557,7 +557,7 @@
 
 - type: startingGear
   parent: RMCGearCorpseCLFBase
-  id: RMCGearCorpseCLF4
+  id: RMCGearCorpseCLFMP5
   equipment:
     head: RMCHelmetWelding
     belt: CMBeltMarineMP5
