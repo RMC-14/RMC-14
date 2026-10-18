@@ -38,7 +38,91 @@
 
 # Job/Role pamphlets
 
+
+# gives medical skill
+- type: entity
+  parent: CMPamphlet
+  id: CMPamphletMedical
+  name: medical instructional pamphlet
+  description: A pamphlet used to quickly impart vital knowledge. This one has a medical insignia.
+  components:
+  - type: Sprite
+    state: pamphlet_medical
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillMedical: 1
+    skillCap:
+      RMCSkillMedical: 1
+    bypassLimit: true
+
+# gives science skill
+- type: entity
+  parent: CMPamphlet
+  id: RMCPamphletScience
+  name: scientific instructional pamphlet
+  description: A pamphlet used to quickly impart vital knowledge of science, and how to operate its various egg-headed machineries and other research-qualitative practices.
+  components:
+  - type: Sprite
+    state: pamphlet_science
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillResearch: 1
+    skillCap:
+      RMCSkillResearch: 1
+    bypassLimit: true
+
+# gives miniengie skill
+- type: entity
+  parent: CMPamphlet
+  id: CMPamphletEngineer
+  name: engineer instructional pamphlet
+  description: A pamphlet used to quickly impart vital knowledge. This one has an engineering insignia.
+  components:
+  - type: Sprite
+    state: pamphlet_construction
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillEngineer: 1
+      RMCSkillConstruction: 1
+    skillCap:
+      RMCSkillEngineer: 2 # RMC14: In case they read another one first.
+      RMCSkillConstruction: 1
+    bypassLimit: true
+
+# gives fireman skill
+- type: entity
+  parent: CMPamphlet
+  id: CMPamphletFireman
+  name: fireman carry instructional pamphlet
+  description: A pamphlet used to quickly impart vital knowledge. This one has the image of a figure carrying another person on their shoulders on it.
+  components:
+  - type: Sprite
+    state: pamphlet_medical # todo: fireman pamphlet sprite
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillFireman: 1
+    skillCap:
+      RMCSkillFireman: 2
+    bypassLimit: true
+
+# gives jtac skill
+- type: entity
+  parent: CMPamphlet
+  id: CMPamphletJTAC
+  name: JTAC instructional pamphlet
+  description: A pamphlet used to quickly impart vital knowledge. This one has the image of a radio on it.
+  components:
+  - type: Sprite
+    state: pamphlet_jtac
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillJtac: 1
+    skillCap:
+      RMCSkillJtac: 2
+    bypassLimit: true
+
 # Spotter
+# gives spotter skill / bypasses limit
 - type: entity
   parent: CMPamphlet
   id: CMPamphletSpotter
