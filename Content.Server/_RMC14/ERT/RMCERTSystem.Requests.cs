@@ -24,7 +24,6 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.ERT;
-using Content.Shared._RMC14.Evacuation;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Rules;
 using Content.Shared.Buckle;
@@ -439,13 +438,6 @@ public sealed partial class RMCERTSystem
     private bool CheckRequirements(RMCERTRequest request, RMCERTCallPrototype call, out string error)
     {
         error = string.Empty;
-
-        if (call.Requirements.DisallowDuringEvacuation &&
-            _evacuation.IsEvacuationInProgress())
-        {
-            error = Loc.GetString("rmc-ert-error-unavailable-evacuation", ("call", call.Name));
-            return false;
-        }
 
         if (call.Requirements.MinRoundTime is { } minRound && _timing.CurTime < minRound)
         {

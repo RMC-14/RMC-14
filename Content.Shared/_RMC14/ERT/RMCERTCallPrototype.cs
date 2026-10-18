@@ -403,12 +403,6 @@ public sealed partial class RMCERTRequirementSet
     public TimeSpan RecruitmentDuration = TimeSpan.FromSeconds(30);
 
     /// <summary>
-    /// Whether this call is blocked while evacuation is active.
-    /// </summary>
-    [DataField]
-    public bool DisallowDuringEvacuation = true;
-
-    /// <summary>
     /// Maximum number of non-terminal requests for this call allowed in one round.
     /// </summary>
     [DataField]

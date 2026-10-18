@@ -26,7 +26,6 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.ERT;
-using Content.Shared._RMC14.Evacuation;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Rules;
@@ -79,7 +78,6 @@ public sealed partial class RMCERTSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly DropshipSystem _dropship = default!;
-    [Dependency] private readonly SharedEvacuationSystem _evacuation = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly GhostSystem _ghost = default!;
