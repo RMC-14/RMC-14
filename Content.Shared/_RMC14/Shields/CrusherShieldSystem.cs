@@ -1,6 +1,5 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Armor;
-using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
 using Content.Shared.Coordinates;
@@ -26,7 +25,7 @@ public sealed partial class CrusherShieldSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<CrusherShieldComponent, DamageModifyAfterResistEvent>(OnDamage, before: [typeof(XenoShieldSystem)]);
+        SubscribeLocalEvent<CrusherShieldComponent, XenoShieldHitEvent>(OnDamage);
         SubscribeLocalEvent<CrusherShieldComponent, GetExplosionResistanceEvent>(OnGetExplosionResistance);
         SubscribeLocalEvent<CrusherShieldComponent, RemovedShieldEvent>(OnShieldRemove);
         SubscribeLocalEvent<CrusherShieldComponent, XenoDefensiveShieldActionEvent>(OnXenoDefensiveShieldAction);
@@ -103,20 +102,20 @@ public sealed partial class CrusherShieldSystem : EntitySystem
         }
     }
 
-    public void OnDamage(Entity<CrusherShieldComponent> ent, ref DamageModifyAfterResistEvent args)
+    public void OnDamage(Entity<CrusherShieldComponent> ent, ref XenoShieldHitEvent args)
     {
-        if (!_shield.TryGetShield(ent.Owner, XenoShieldSystem.ShieldType.Crusher, out _))
+        if (args.Shield.Shield != XenoShieldSystem.ShieldType.Crusher)
             return;
 
-        foreach (var type in args.Damage.DamageDict)
+        foreach (var type in args.Event.Damage.DamageDict)
         {
-            if (args.Damage.DamageDict[type.Key] <= 0)
+            if (args.Event.Damage.DamageDict[type.Key] <= 0)
                 continue;
 
-            args.Damage.DamageDict[type.Key] -= ent.Comp.DamageReduction;
+            args.Event.Damage.DamageDict[type.Key] -= ent.Comp.DamageReduction;
 
-            if (args.Damage.DamageDict[type.Key] < 0)
-                args.Damage.DamageDict[type.Key] = 0;
+            if (args.Event.Damage.DamageDict[type.Key] < 0)
+                args.Event.Damage.DamageDict[type.Key] = 0;
         }
     }
 

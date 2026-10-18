@@ -53,6 +53,8 @@ public sealed partial class XenoShieldSystem : EntitySystem
 
         foreach (var shield in ent.Comp.Shields)
         {
+            var ev = new XenoShieldHitEvent(shield, args);
+            RaiseLocalEvent(ent, ev);
 
             shield.ShieldAmount -= args.Damage.GetTotal();
 
@@ -88,6 +90,9 @@ public sealed partial class XenoShieldSystem : EntitySystem
             }
 
             Dirty(ent, ent.Comp);
+
+            if (args.Damage.GetTotal() <= 0)
+                break;
         }
 
         foreach (var shield in toRemove)
@@ -249,14 +254,6 @@ public sealed partial class XenoShieldSystem : EntitySystem
         }
 
         XenoShield visualShield = visualShields[0];
-
-        foreach (var xenoShield in visualShields)
-        {
-            if (visualShield.VisualPriority >= xenoShield.VisualPriority)
-                continue;
-
-            visualShield = xenoShield;
-        }
 
         if (visualShield.Visual == null)
             return;

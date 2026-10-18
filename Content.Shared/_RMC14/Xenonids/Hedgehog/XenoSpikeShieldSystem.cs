@@ -1,6 +1,4 @@
-using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Shields;
-using Content.Shared._RMC14.Xenonids.Energy;
 using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
@@ -24,7 +22,7 @@ public sealed class XenoSpikeShieldSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<XenoSpikeShieldComponent, DamageModifyAfterResistEvent>(OnHedgehogShieldDamage, before: [typeof(XenoShieldSystem)]);
+        SubscribeLocalEvent<XenoSpikeShieldComponent, XenoShieldHitEvent>(OnHedgehogShieldDamage);
     }
 
     public override void Update(float frameTime)
@@ -43,13 +41,13 @@ public sealed class XenoSpikeShieldSystem : EntitySystem
         }
     }
 
-    private void OnHedgehogShieldDamage(Entity<XenoSpikeShieldComponent> ent, ref DamageModifyAfterResistEvent args)
+    private void OnHedgehogShieldDamage(Entity<XenoSpikeShieldComponent> ent, ref XenoShieldHitEvent args)
     {
-        if (!_shield.TryGetShield(ent.Owner, XenoShieldSystem.ShieldType.Hedgehog, out _))
+        if (args.Shield.Shield != XenoShieldSystem.ShieldType.Hedgehog)
             return;
 
         // Fire hedgehog spikes when shield is hit by projectiles
-        if (HasComp<ProjectileComponent>(args.Tool))
+        if (HasComp<ProjectileComponent>(args.Event.Tool))
         {
             _xenoProjectile.TryShoot(
                     ent.Owner,

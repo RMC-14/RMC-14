@@ -1,4 +1,3 @@
-using Content.Shared._RMC14.Damage;
 using Content.Shared.Explosion;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
@@ -18,7 +17,7 @@ public sealed class VanguardShieldSystem : EntitySystem
     {
         SubscribeLocalEvent<VanguardShieldComponent, MapInitEvent>(OnVanguardShieldInit);
         SubscribeLocalEvent<VanguardShieldComponent, MeleeHitEvent>(OnVanguardShieldMelee);
-        SubscribeLocalEvent<VanguardShieldComponent, DamageModifyAfterResistEvent>(OnVanguardShieldHit, before: [typeof(XenoShieldSystem)]);
+        SubscribeLocalEvent<VanguardShieldComponent, XenoShieldHitEvent>(OnVanguardShieldHit);
         SubscribeLocalEvent<VanguardShieldComponent, GetExplosionResistanceEvent>(OnVanguardShieldGetResistance);
         SubscribeLocalEvent<VanguardShieldComponent, RemovedShieldEvent>(OnVanguardShieldRemoved);
     }
@@ -35,20 +34,20 @@ public sealed class VanguardShieldSystem : EntitySystem
         xeno.Comp.LastTimeHit = _timing.CurTime;
     }
 
-    private void OnVanguardShieldHit(Entity<VanguardShieldComponent> xeno, ref DamageModifyAfterResistEvent args)
+    private void OnVanguardShieldHit(Entity<VanguardShieldComponent> xeno, ref XenoShieldHitEvent args)
     {
         if (_net.IsServer)
             xeno.Comp.LastTimeHit = _timing.CurTime;
 
-        if (args.Damage.GetTotal() <= 0 || !_shield.TryGetShield(xeno.Owner, XenoShieldSystem.ShieldType.Vanguard, out var _))
+        if (args.Event.Damage.GetTotal() <= 0 || args.Shield.Shield != XenoShieldSystem.ShieldType.Vanguard)
             return;
 
-        if (!xeno.Comp.WasHit && args.Damage.GetTotal() > xeno.Comp.DecayThreshold)
+        if (!xeno.Comp.WasHit && args.Event.Damage.GetTotal() > xeno.Comp.DecayThreshold)
         {
             xeno.Comp.WasHit = true;
             _popup.PopupEntity(Loc.GetString("rmc-xeno-shield-vanguard-hit"), xeno, xeno, PopupType.MediumCaution);
 
-            args.Damage.ClampMax(0);
+            args.Event.Damage.ClampMax(0);
         }
     }
 
