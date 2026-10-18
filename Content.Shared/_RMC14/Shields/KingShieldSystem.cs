@@ -37,7 +37,7 @@ public sealed class KingShieldSystem : EntitySystem
         _audio.PlayPredicted(xeno.Comp.Sound, xeno, xeno);
         EnsureComp<KingShieldComponent>(xeno);
         _shield.ApplyShield(xeno, XenoShieldSystem.ShieldType.King, xeno.Comp.ShieldAmount, duration: xeno.Comp.DecayTime,
-            decay: xeno.Comp.DecayAmount, visualState: xeno.Comp.VisualState);
+            decay: xeno.Comp.DecayAmount, visualState: xeno.Comp.VisualState, visualPriority: 10);
 
         foreach (var ent in _entityLookup.GetEntitiesInRange<XenoComponent>(_transform.GetMapCoordinates(xeno), xeno.Comp.Range))
         {
@@ -67,7 +67,7 @@ public sealed class KingShieldSystem : EntitySystem
         if (!TryComp<XenoShieldComponent>(xeno, out var shield))
             return;
 
-        if (!shield.Active || shield.Shield != XenoShieldSystem.ShieldType.King)
+        if (!_shield.TryGetShield(xeno.Owner, XenoShieldSystem.ShieldType.King, out var _))
             return;
 
         if (!_threshold.TryGetIncapThreshold(xeno, out var threshold))

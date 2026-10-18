@@ -9,6 +9,7 @@ using Content.Shared.Popups;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
+using System.Security.Cryptography;
 
 namespace Content.Shared._RMC14.Shields;
 
@@ -98,17 +99,14 @@ public sealed partial class CrusherShieldSystem : EntitySystem
                 _popup.PopupEntity(Loc.GetString("rmc-xeno-defensive-shield-resist-end"), uid, uid, PopupType.SmallCaution);
             }
 
-            if (shield.Active && shield.Shield == XenoShieldSystem.ShieldType.Crusher && crushShield.ShieldOffAt <= time)
+            if (_shield.TryGetShield((uid, shield), XenoShieldSystem.ShieldType.Crusher, out _) && crushShield.ShieldOffAt <= time)
                 _shield.RemoveShield(uid, XenoShieldSystem.ShieldType.Crusher);
         }
     }
 
     public void OnDamage(Entity<CrusherShieldComponent> ent, ref DamageModifyAfterResistEvent args)
     {
-        if (!TryComp<XenoShieldComponent>(ent, out var shield))
-            return;
-
-        if (!shield.Active || shield.Shield != XenoShieldSystem.ShieldType.Crusher)
+        if (!_shield.TryGetShield(ent.Owner, XenoShieldSystem.ShieldType.Crusher, out _))
             return;
 
         foreach (var type in args.Damage.DamageDict)

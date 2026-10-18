@@ -45,7 +45,7 @@ public sealed class XenoSpikeShieldSystem : EntitySystem
 
     private void OnHedgehogShieldDamage(Entity<XenoSpikeShieldComponent> ent, ref DamageModifyAfterResistEvent args)
     {
-        if (!TryComp<XenoShieldComponent>(ent, out var shield) || !shield.Active || shield.Shield != XenoShieldSystem.ShieldType.Hedgehog)
+        if (!_shield.TryGetShield(ent.Owner, XenoShieldSystem.ShieldType.Hedgehog, out _))
             return;
 
         // Fire hedgehog spikes when shield is hit by projectiles
