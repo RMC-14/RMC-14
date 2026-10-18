@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Access;
 using Content.Shared.Actions;
+using Content.Shared.NPC.Prototypes;
 using Robust.Shared.GameObjects;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -24,7 +24,7 @@ public sealed partial class VehicleLockComponent : Component
     public List<ProtoId<AccessLevelPrototype>> Access = new() { "CMAccessCrewman", "RMCAccessCommand", "CMAccessBrig" };
 
     [DataField, AutoNetworkedField]
-    public EntProtoId<IFFFactionComponent>? Faction;
+    public HashSet<ProtoId<NpcFactionPrototype>> Factions = new();
 }
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]

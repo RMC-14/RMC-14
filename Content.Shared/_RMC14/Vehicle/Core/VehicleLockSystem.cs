@@ -1,10 +1,10 @@
 using System;
-using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Access.Systems;
 using Content.Shared.Actions;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
+using Content.Shared.NPC.Components;
 using Content.Shared.Popups;
 using Content.Shared.Vehicle.Components;
 using Robust.Shared.GameObjects;
@@ -17,7 +17,6 @@ public sealed class VehicleLockSystem : EntitySystem
 {
     [Dependency] private readonly AccessReaderSystem _accessReader = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly GunIFFSystem _gunIFF = default!;
     [Dependency] private readonly MetaDataSystem _meta = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -59,15 +58,16 @@ public sealed class VehicleLockSystem : EntitySystem
                 return false;
         }
 
-        return vehicle.Comp.Faction is { } faction && _gunIFF.IsInFaction(user, faction);
+        return TryComp(user, out NpcFactionMemberComponent? member) &&
+               vehicle.Comp.Factions.Overlaps(member.Factions);
     }
 
     public void SetFactionFromOccupant(EntityUid vehicle, EntityUid user)
     {
         var lockComp = EnsureComp<VehicleLockComponent>(vehicle);
-        lockComp.Faction = null;
-        if (_gunIFF.TryGetFaction(user, out var faction))
-            lockComp.Faction = faction;
+        lockComp.Factions.Clear();
+        if (TryComp(user, out NpcFactionMemberComponent? member))
+            lockComp.Factions.UnionWith(member.Factions);
 
         Dirty(vehicle, lockComp);
     }
