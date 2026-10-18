@@ -67,7 +67,6 @@
 # - cooldown: per-call cooldown between successful requests.
 # - minRoundTime: optional minimum round time before approval is allowed.
 # - recruitmentDuration: how long ghost roles remain open.
-# - disallowDuringEvacuation: blocks the call during evacuation.
 # - maxCallsPerRound: maximum requests of this call per round.
 # - minRequiredSlots: minimum recruited required slots before launch.
 # - maxSlots: maximum planned roster slots for this call.
