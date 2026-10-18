@@ -2,6 +2,7 @@ using System.Globalization;
 using Content.Client._RMC14.Medical.HUD;
 using Content.Client.Atmos.Rotting;
 using Content.Client.Message;
+using Content.Shared._RMC14.Chemistry.Effects.Special;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Defibrillator;
@@ -18,6 +19,7 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Temperature;
 using Robust.Client.Graphics;
+using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -180,8 +182,12 @@ public sealed class HealthScannerUiData
                 }
 
                 var text = $"{reagent.Quantity.Float():F1} {prototype.LocalizedName}";
-                if (prototype.Overdose != null && reagent.Quantity > prototype.Overdose)
+                if (prototype.Overdose != null &&
+                    reagent.Quantity > prototype.Overdose &&
+                    !_rmcReagent.HasProperty<Regulating>(prototype.ID))
+                {
                     text = $"[bold][color=red]{FormattedMessage.EscapeText(text)} OD[/color][/bold]";
+                }
 
                 var label = new RichTextLabel();
                 label.SetMarkupPermissive(text);
@@ -229,6 +235,8 @@ public sealed class HealthScannerUiData
         pulseMsg.AddText(uiState.Pulse);
         window.PulseLabel.SetMessage(pulseMsg);
 
+        Diseases(uiState, window);
+
         window.AdviceContainer.DisposeAllChildren();
         // Medication Advice
         if (!isPermaDead)
@@ -246,6 +254,51 @@ public sealed class HealthScannerUiData
         {
             window.MedicalAdviceLabel.Visible = false;
             window.MedicalAdviceSeparator.Visible = false;
+        }
+    }
+
+    private static void Diseases(HealthScanState uiState, HealthScannerWindow window)
+    {
+        window.DiseasesContainer.DisposeAllChildren();
+
+        var any = uiState.Diseases is { Count: > 0 };
+        window.DiseasesLabel.Visible = any;
+        window.DiseasesSeparator.Visible = any;
+        window.DiseasesContainer.Visible = any;
+        if (uiState.Diseases == null)
+            return;
+
+        foreach (var disease in uiState.Diseases)
+        {
+            var name = Loc.GetString(disease.Name);
+            if (name.Length > 0)
+                name = name.Substring(0, 1).ToUpperInvariant() + name.Substring(1);
+
+            var details = new RichTextLabel { HorizontalExpand = true, MaxWidth = 480 };
+            details.SetMarkupPermissive(Loc.GetString("rmc-health-analyzer-disease-details",
+                ("type", FormattedMessage.EscapeText(Loc.GetString(disease.Type))),
+                ("cure", FormattedMessage.EscapeText(Loc.GetString(disease.Cure)))));
+
+            var stage = new ProgressBar
+            {
+                MinValue = 0,
+                MaxValue = disease.MaxStage,
+                Value = disease.Stage,
+                MinWidth = 200,
+                HorizontalAlignment = Control.HAlignment.Left,
+                Margin = new Thickness(0, 2, 0, 5),
+            };
+            stage.AddChild(new Label
+            {
+                Text = Loc.GetString("rmc-health-analyzer-disease-stage", ("stage", disease.Stage), ("max", disease.MaxStage)),
+                Align = Label.AlignMode.Center,
+            });
+
+            var entry = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Vertical };
+            entry.AddChild(new Label { Text = name, Modulate = Color.FromHex("#5B88B0") });
+            entry.AddChild(details);
+            entry.AddChild(stage);
+            window.DiseasesContainer.AddChild(entry);
         }
     }
 

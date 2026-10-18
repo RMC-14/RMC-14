@@ -8,10 +8,19 @@ namespace Content.Client._RMC14.Dropship.Weapon;
 [GenerateTypedNameReferences]
 public sealed partial class DropshipWeaponsScreen : Control
 {
+    private static readonly Vector2i CameraViewportSize = new(500, 500);
+
     public DropshipWeaponsScreen()
     {
         RobustXamlLoader.Load(this);
-        Viewport.ViewportSize = new Vector2i(500, 500);
+        Viewport.ViewportSize = CameraViewportSize;
         Viewport.Eye = new FixedEye();
+    }
+
+    public void SetCameraScale(float scale)
+    {
+        var size = new Vector2i((int) (CameraViewportSize.X * scale), (int) (CameraViewportSize.Y * scale));
+        if (Viewport.ViewportSize != size)
+            Viewport.ViewportSize = size;
     }
 }

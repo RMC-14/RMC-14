@@ -7,6 +7,7 @@ using Content.Client.UserInterface.ControlExtensions;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.ElectronicSystem;
+using Content.Shared._RMC14.Dropship.Matrix;
 using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Dropship.Utility.Systems;
 using Content.Shared._RMC14.Dropship.Weapon;
@@ -409,6 +410,7 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
             case Cams:
                 screen.LeftRow.SetData(nightVisionOn, nightVisionOff);
                 screen.ScreenLabel.Visible = false;
+                screen.SetCameraScale(terminal.Matrix == DropshipMatrixUpgrade.Wide ? terminal.WideMatrixCameraScale : 1f);
 
                 if (_oldEye != null && _oldEye != terminal.Target)
                     _eyeLerping.RemoveEye(_oldEye.Value);

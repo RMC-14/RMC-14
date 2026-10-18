@@ -85,6 +85,9 @@
             </PanelContainer>
             <BoxContainer Name="ChemicalsContainer" Access="Public" Orientation="Vertical" />
         </BoxContainer>
+        <Label Name="DiseasesLabel" Access="Public" Text="{Loc rmc-health-analyzer-diseases}" Margin="0 20 0 0" Visible="False" />
+        <cc:HSeparator Name="DiseasesSeparator" Access="Public" Color="#4972A1" Margin="0 0 0 5" Visible="False" />
+        <BoxContainer Name="DiseasesContainer" Access="Public" Orientation="Vertical" Visible="False" />
         <Label Name="MedicalAdviceLabel" Access="Public" Text="Medical Advice" Margin="0 20 0 0" />
         <cc:HSeparator Name="MedicalAdviceSeparator" Access="Public" Color="#4972A1" Margin="0 0 0 5" />
         <BoxContainer Orientation="Vertical">
