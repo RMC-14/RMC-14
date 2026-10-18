@@ -1,5 +1,7 @@
+using Content.Shared._RMC14.Xenonids.Damage;
 using Content.Shared.Explosion;
 using Content.Shared.Popups;
+using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
@@ -17,6 +19,7 @@ public sealed class VanguardShieldSystem : EntitySystem
     {
         SubscribeLocalEvent<VanguardShieldComponent, MapInitEvent>(OnVanguardShieldInit);
         SubscribeLocalEvent<VanguardShieldComponent, MeleeHitEvent>(OnVanguardShieldMelee);
+        SubscribeLocalEvent<VanguardShieldComponent, ProjectileDamageDealtEvent>(OnVanguardShieldProjectile);
         SubscribeLocalEvent<VanguardShieldComponent, XenoShieldHitEvent>(OnVanguardShieldHit);
         SubscribeLocalEvent<VanguardShieldComponent, GetExplosionResistanceEvent>(OnVanguardShieldGetResistance);
         SubscribeLocalEvent<VanguardShieldComponent, RemovedShieldEvent>(OnVanguardShieldRemoved);
@@ -26,9 +29,17 @@ public sealed class VanguardShieldSystem : EntitySystem
     {
         RegenShield(xeno);
     }
+
+    private void OnVanguardShieldProjectile(Entity<VanguardShieldComponent> xeno, ref ProjectileDamageDealtEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        xeno.Comp.LastTimeHit = _timing.CurTime;
+    }
     private void OnVanguardShieldMelee(Entity<VanguardShieldComponent> xeno, ref MeleeHitEvent args)
     {
-        if (args.HitEntities.Count <= 0 || !_net.IsServer)
+        if (args.HitEntities.Count <= 0 || _net.IsClient)
             return;
 
         xeno.Comp.LastTimeHit = _timing.CurTime;
