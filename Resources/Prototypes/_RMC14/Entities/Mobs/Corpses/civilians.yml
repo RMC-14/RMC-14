@@ -29,7 +29,7 @@
 - type: startingGear
   id: RMCGearCorpseChef
   equipment:
-    jumpsuit: ClothingUniformJumpsuitChef
+    jumpsuit: RMCJumpsuitChef
     back: CMSatchel
     shoes: RMCShoesBlack
     head: ClothingHeadHatChef
@@ -54,7 +54,7 @@
 - type: startingGear
   id: RMCGearCorpseDoctor
   equipment:
-    jumpsuit: ClothingUniformJumpsuitMedicalDoctor
+    jumpsuit: CMScrubsBlue
     back: CMSatchelMedical
     shoes: CMBootsBlackFilled
     eyes: RMCGlassesMedicalHUDGlasses
@@ -96,13 +96,13 @@
 - type: startingGear
   id: RMCGearCorpseEngineer
   equipment:
-    jumpsuit: ClothingUniformJumpsuitEngineering
+    jumpsuit: RMCJumpsuitKhakiWorkwear # Upstream engi suit on CM
     back: CMSatchelEngineer
     shoes: CMBootsBlackFilled
     head: RMCHardHat
     eyes: RMCWeldingGoggles
     gloves: CMHandsInsulated
-    outerClothing: RMCHazardVest
+    outerClothing: RMCHazardVestYellow
     id: CMIDCardColonistEngineer
     ears: CMHeadsetColony
     belt: CMBeltUtilityFilled
@@ -504,24 +504,65 @@
     - RMCRadioHandheldColonyOff
 
 # CLF
+# TODO RMC14: Better randomization when we make entity presets work with corpses (Should use most of the same randomization as CLF survs). For now just one random preset per primary weapon, also lacks secondary weapon spawning
 - type: randomHumanoidSettings
   parent: RMCCorpse
   id: RMCCorpseCLF
   components:
   - type: Loadout
-    prototypes: [ RMCGearCorpseCLF ]
+    prototypes: [ RMCGearCorpseCLF1, RMCGearCorpseCLF2, RMCGearCorpseCLF3, RMCGearCorpseCLF4 ]
 
 - type: startingGear
-  id: RMCGearCorpseCLF
+  id: RMCGearCorpseCLFBase
+  equipment:
+    ears: RMCHeadsetDistressCLF
+    back: RMCSatchelLightpack5Slot
+    jumpsuit: RMCJumpsuitCLFSoldier
+    gloves: RMCHandsCombat # TODO RMC14: spawn_rebel_gloves
+    shoes: RMCShoesBrown # TODO RMC14: spawn_rebel_shoes
+    id: RMCIDCardCLFSoldier
+    pocket1: RMCPouchToolsFill
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
+    - CMCrowbar
+    - RMCFlashlight
+
+- type: startingGear
+  parent: RMCGearCorpseCLFBase
+  id: RMCGearCorpseCLF1
+  equipment:
+    head: CMHeadBandRebel
+    belt: RMCBeltMarineMAR
+    suitstorage: RMCWeaponRifleMAR30
+    outerClothing: RMCCoatMilitiaHauberk
+
+- type: startingGear
+  parent: RMCGearCorpseCLFBase
+  id: RMCGearCorpseCLF2
   equipment:
     head: RMCHeadMilitiaHood
-    ears: CMHeadsetColony
-    jumpsuit: RMCJumpsuitCLFSoldier
-    outerClothing: RMCCoatMilitiaVest
-    gloves: CMHandsBlackMarine
-    shoes: RMCShoesBrown
-    id: RMCIDCardCLFSoldier
-    pocket1: RMCFlashlight
+    belt: CMBeltMarineBuckshot
+    suitstorage: RMCWeaponShotgunM12
+    outerClothing: RMCCoatMilitia
+
+- type: startingGear
+  parent: RMCGearCorpseCLFBase
+  id: RMCGearCorpseCLF3
+  equipment:
+    head: RMCHeadMilitiaBucket
+    belt: CMBeltMarineM16
+    suitstorage: WeaponRifleM16
+    outerClothing: RMCCoatMilitiaBrace
+
+- type: startingGear
+  parent: RMCGearCorpseCLFBase
+  id: RMCGearCorpseCLF4
+  equipment:
+    head: RMCHelmetWelding
+    belt: CMBeltMarineMP5
+    suitstorage: WeaponSMGMP5
+    outerClothing: RMCCoatMilitiaBrace
 
 # Russian
 
