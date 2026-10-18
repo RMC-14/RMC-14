@@ -77,6 +77,20 @@
     - CMLiaison
     - CMSurvivorCorporate
     - CMSurvivorICB
+    - RMCWeYaExecutiveBodyguard
+    - CMSurvivorAdministrativeClerk
+    - CMSurvivorOperationsSupervisor
+    - CMWeYaresponder
+    - CMCorporateExecutiveSupervisorLegal
+    - CMCorporateExecutiveSpecialistLegal
+    - CMCorporateExecutiveSupervisor
+    - CMCorporateAssistantManager
+    - CMCorporateDivisionManager
+    - CMCorporateChiefExecutive
+    - CMCorporateDeputyDirector
+    - RMCCorporateColonyAdministrator
+    - RMCWeYaLawyer
+    - RMCWeYaLawyerSupervisor
 
 # Survivor roles.
 
