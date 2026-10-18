@@ -22,14 +22,52 @@
     </Box>
   </ColorBox>
 
+  ## Getting Started
+  As a survivor, you will begin in a random location within the colony alongside the other survivors. [bold]If you are immediately lost or confused, follow someone else. Help them scavenge supplies and follow them to where you will be holding out.[/bold] 
+
+  All survivors begin with randomized equipment depending on their role. Most survivors are likely to spawn with a weapon and ammunition, but roles such as engineer survivor may instead spawn with a tool belt. All survivors begin with 20 metal sheets, a random sidearm, and a spare magazine in their backpack.
+
+  All survivors begin with a survival pouch.
+
+  <Box>
+    [color=#a88b5e][bold]Your Survival Pouch[/bold][/color]
+  </Box>
+  <Box>
+    <GuideEntityEmbed Entity="RMCPouchSurvival" Caption="Survival Pouch"/>
+  </Box>
+  <Box> Your survival pouch always contains the following emergency equipment, </Box>
+  <Box>
+    <GuideEntityEmbed Entity="RMCFlashlightLantern" Caption="Lantern"/>
+    <GuideEntityEmbed Entity="CMCrowbarRed" Caption="Crowbar"/>
+    <GuideEntityEmbed Entity="CMPacketPillsTricordrazine" Caption="Pills"/>
+    <GuideEntityEmbed Entity="CMGauze10" Caption="Gauze"/>
+    <GuideEntityEmbed Entity="RMCRadioHandheldColonyOff" Caption="Radio"/>
+    <GuideEntityEmbed Entity="RMCM5Bayonet" Caption="Knife"/>
+  </Box>
+  - Your [bold]lantern[/bold] illuminates a small radius around you sufficient enough to navigate with. If you cannot see your immediate surroundings when you begin, make sure to take out your lantern and turn it on.
+  - Your [bold]crowbar[/bold] allows you to pry open unpowered doors and shutters. Given the colony is usually unpowered when you begin, this is ideal for getting around.
+  - Your [bold]pills[/bold] hold four 15u doses of tricordrazine, which slowly heals most damage types. You can safely take two pills at once without overdosing.
+  - Your [bold]gauze[/bold] stops bleeding. Note that bloodloss is particularly difficult to treat and manage as a survivor; stop bleeding as soon as possible.
+  - Your [bold]handheld radio[/bold] is your only way to communicate with other survivors, as groundside communications will be down. Make sure to turn it off or set it to listen-only if you are all in close proximity to one another.
+  - Your [bold]knife[/bold] allows you to cut fences and destroy objects such as windows and lockers fairly quickly. Note that, like other melee weapons, your knife can be used offensively against armored xenonids.
+
+  <Box>
+    [color=#a88b5e][bold]Inserts[/bold][/color]
+  </Box>
+  <Box> [bold]Inserts[/bold] are shorthand for [bold]nightmare inserts[/bold] and [bold]scenarios[/bold], both of which are map-altering events that are randomized every round. </Box>
+  - [bold]Nightmare inserts[/bold] change survivor roles, equipment, spawn location, and parts of the map. Survivors could be part of a different faction, often military.
+  - [bold]Scenarios[/bold] change the map, replacing one area with another, modifying an area, or modifying the loot in an area.
+
   ## Preparing for Survivor
-  Given that survivor is difficult to learn in the doing, there are ways to prepare yourself for the expectations of the role.
+  Given that survivor is difficult to learn in the moment, its good to know the there are ways to prepare yourself for the expectations of the role.
   - [bold]Familiarize yourself with map layouts.[/bold] As a survivor, you do not have a tactical map, nor any means of externally pinpointing your location. As a marine, learn how to navigate maps based on landmarks and structures.
   - [bold]Learn how to improvise.[/bold] As a survivor, you will need to work with what you have, even if it is not best suited for the situation. As a marine, try improvising with what you have or putting what you find groundside to use.
   - [bold]Know how to fight.[/bold] As a survivor, your strength is not in numbers. Your strength is in how proficient and equipped you are, next to how well you can improvise. As a marine, participate in small-scale engagements and learn how to hold your own.
   - [bold]Be proficient in medical and engineering.[/bold] As a survivor, you may need to perform one or the other, even if you are unqualified or otherwise lack certain capabilities. You may need to treat someone despite having no medical skill, or construct barricades despite not being an engineer. As a marine, be comfortable with medical and engineering systems such that you can improvise despite a lack of skills.
 
-  The rest of this guide is designed to acquaint newer players with the basics of playing survivor, enough so to get them through their first rounds. If you believe you have the sufficient knowledge to play survivor but are unsure of how to play the role itself, continue reading.
+  When beginning as a survivor, it is recommended to play on maps you are familiar with first until you are comfortable with the gameplay loop and expectations of survivor.
+
+  The rest of this guide is designed to acquaint newer players with the basics of playing survivor, enough so to get them through their first rounds. If you believe you have the sufficient knowledge to play survivor but are unsure of how to play the role itself, continue reading!
 
   ## Survivor Roles
   There are seven unique survivor roles to choose from. All survivors have higher endurance, the ability to construct basic barricades, and to fireman carry.
@@ -55,34 +93,20 @@
   - In inserts, corporate survivors usually appear as the standard, or otherwise 'rifleman,' of featured factions. In corporate inserts, corporate survivors may appear as a high-ranking administrator.
 
   <Box>
-    [color=#a88b5e][bold]Doctor Survivor[/bold][/color]
+    [color=#a88b5e][bold]Doctor and Scientist Survivor[/bold][/color]
   </Box>
   <Box>
     <GuideEntityEmbed Entity="RMCGuidebookRoleSurvivorDoctor" Caption=""/>
+    <GuideEntityEmbed Entity="RMCGuidebookRoleSurvivorScientist" Caption=""/>
   </Box>
-  [bold]Doctor survivors[/bold] are colonial doctors and medical practitioners. In addition to standard survivor skills, they are capable of medicine and surgery. Doctor survivors should prioritize finding medical supplies and providing treatment.
+  [bold]Doctor survivors[/bold] and [bold]scientist survivors[/bold] are colonial doctors and researchers. In addition to standard survivor skills, they are capable of medicine and surgery. Scientist survivors are additionally capable of research, although this is not implemented yet. These survivors should prioritize finding medical supplies and providing treatment.
   - Doctor survivors appear as doctors, hospital workers, and paramedics.
-  - In inserts, doctor survivors usually appear as the medic, or otherwise 'hospital corpsman,' of featured factions.
+  - Scientist survivors appear as archeologists, xenobiologists, and other scientific professions.
+  - In inserts, doctor survivors and scientist survivors usually appear as the medic, or otherwise 'hospital corpsman,' of featured factions.
   <ColorBox Color="#3a3320" OutlineColor="#b08d3c">
     <Box Orientation="Vertical" HorizontalAlignment="Center" Margin="6">
       <Box> [head=3][bold][color=#ddb24d]WARNING![/color][/bold][/head] </Box>
       In inserts, there is usually only one medic. You may be upheld to more responsibilities than you are knowledgeable of or ready for. Keep this in mind if you would like to play doctor survivor.
-    </Box>
-  </ColorBox>
-
-  <Box>
-    [color=#a88b5e][bold]Scientist Survivor[/bold][/color]
-  </Box>
-  <Box>
-    <GuideEntityEmbed Entity="RMCGuidebookRoleSurvivorScientist" Caption=""/>
-  </Box>
-  [bold]Scientist survivors[/bold] are colonial scientists and researchers. Similarly to doctor survivors, they are capable of medicine and surgery, as well as research. Scientist survivors should prioritize finding medical supplies and providing treatment.
-  - Scientist survivors appear as archeologists, xenobiologists, and other scientific professions.
-  - In inserts, scientist survivors usually appear as the medic, or otherwise 'hospital corpsman,' of featured factions.
-  <ColorBox Color="#3a3320" OutlineColor="#b08d3c">
-    <Box Orientation="Vertical" HorizontalAlignment="Center" Margin="6">
-      <Box> [head=3][bold][color=#ddb24d]WARNING![/color][/bold][/head] </Box>
-      In inserts, there is usually only one medic. You may be upheld to more responsibilities than you are knowledgeable of or ready for. Keep this in mind if you would like to play scientist survivor.
     </Box>
   </ColorBox>
 
@@ -110,97 +134,32 @@
   <Box>
     <GuideEntityEmbed Entity="RMCGuidebookRoleSurvivorSecurity" Caption=""/>
   </Box>
-  [bold]Security survivors[/bold] are colonial security and police. They present with improved firearms and melee weapon handling. Security survivors should prioritize securing weapons and ammunition, protecting the other survivors, and facing xenonid confrontation. It is recommended to begin playing survivor with security survivor.
+  [bold]Security survivors[/bold] are colonial security and police. They present with improved firearms and melee weapon handling and engineering skills, and are capable of instantly using autoinjectors. Security survivors should prioritize securing weapons and ammunition, protecting the other survivors, and facing xenonid confrontation. It is recommended to begin playing survivor with security survivor.
   - Security survivors appear as civilian police, corporate security, and other similar roles.
-  - In inserts, security survivors usually appear as the leader or specialist, or otherwise 'squad leader' or 'weapons specialist,' of featured factions. Do not roll security survivor with the expectation of appearing as either.
+  - In inserts, security survivors usually appear as the leader or specialist, or otherwise 'squad leader' or 'weapons specialist,' of featured factions. Do not play security survivor with the expectation of appearing as either.
 
   <Box>
-    [color=#a88b5e][bold]Synthetic Survivor[/bold][/color]
+    [color=#a88b5e][bold]Synthetic and Commander Survivor[/bold][/color]
   </Box>
   <Box>
     <GuideEntityEmbed Entity="RMCGuidebookRoleSurvivorSynthetic" Caption=""/>
-  </Box>
-  [bold]Synthetic survivors[/bold] are colony synthetics, uniquely available to players who are part of the Synthetic whitelist. They are vastly capable, often being able to fill in for other survivor roles. Synthetic survivors should prioritize remaining flexible and assisting the survivors. 
-  
-  - Synthetic survivors appear as colony synthetics, which vary in occupation and appearance.
-  - In inserts, synthetic survivors usually appear as the support synthetic of featured factions.
-
-  <Box>
-    [color=#a88b5e][bold]Commander Survivor[/bold][/color]
-  </Box>
-  <Box>
     <GuideEntityEmbed Entity="RMCGuidebookRoleSurvivorCommander" Caption=""/>
   </Box>
-  [bold]Commander survivors[/bold] are colonial or military figures of authority, uniquely available to players who are part of the Commanding Officer whitelist. They are vastly capable, often being able to fill in for other survivor roles. Commander survivors should prioritize remaining flexible and coordinating the survivors. 
+  [bold]Synthetic survivors[/bold] and [bold]commander survivors[/bold] are both whitelist-exclusive survivor roles. They are both vastly capable, often being able to fill in for other survivor roles where necessary.
   
-  Note that commander survivor implementation is incomplete; some maps may not offer a commander survivor role at all, and others only in inserts.
+  - Synthetic survivors appear as colony synthetics, which vary in occupation and appearance.
   - Commander survivors appear as colonial protection coordinators or military commanders.
-  - In inserts, commander survivors usually appear as the commander, or 'Commanding Officer,' of featured factions.
-
-  ## Getting Started
-  As a survivor, you will begin in a random location within the colony. All colonists begin with a survival pouch.
-  <Box>
-    [color=#a88b5e][bold]Your Survival Pouch[/bold][/color]
-  </Box>
-  <Box>
-    <GuideEntityEmbed Entity="RMCPouchSurvival" Caption="Survival Pouch"/>
-  </Box>
-  <Box> Your survival pouch always contains the following emergency equipment, </Box>
-  <Box>
-    <GuideEntityEmbed Entity="RMCFlashlightLantern" Caption="Lantern"/>
-    <GuideEntityEmbed Entity="CMCrowbarRed" Caption="Crowbar"/>
-    <GuideEntityEmbed Entity="CMPacketPillsTricordrazine" Caption="Pills"/>
-    <GuideEntityEmbed Entity="CMGauze10" Caption="Gauze"/>
-    <GuideEntityEmbed Entity="RMCRadioHandheldColonyOff" Caption="Radio"/>
-    <GuideEntityEmbed Entity="RMCM5Bayonet" Caption="Knife"/>
-  </Box>
-  - Your [bold]lantern[/bold] illuminates a small radius around you sufficient enough to navigate with. If you cannot see your immediate surroundings when you begin, make sure to take out your lantern and turn it on.
-  - Your [bold]crowbar[/bold] allows you to pry open unpowered doors and shutters. Given the colony is usually unpowered when you begin, this is ideal for getting around.
-  - Your [bold]pills[/bold] hold four 15u doses of tricordrazine, which slowly heals most damage types. You can safely take two pills at once without overdosing.
-  - Your [bold]gauze[/bold] stops bleeding. Note that bloodloss is particularly difficult to treat and manage as a survivor; stop bleeding as soon as possible.
-  - Your [bold]handheld[/bold] radio is your only way to communicate with other survivors, as groundside communications will be down. Make sure to turn it off if you are all in close proximity to one another.
-  - Your [bold]knife[/bold] allows you to cut fences and destroy objects such as windows and lockers fairly quickly. Note that, like other melee weapons, your knife can be used offensively against armored xenonids.
-
-  Synthetic survivors have a unique survival pouch.
-
-  <Box>
-    [color=#a88b5e][bold]Synthetic Survival Pouch[/bold][/color]
-  </Box>
-  <Box>
-    <GuideEntityEmbed Entity="RMCPouchSurvivalSynth" Caption="Synthetic Survival Pouch"/>
-  </Box>
-  <Box> Synth survival pouches always contain the following emergency equipment, </Box>
-  <Box>
-    <GuideEntityEmbed Entity="CMSheetMetal50" Caption="Metal"/>
-    <GuideEntityEmbed Entity="CMCrowbarRed" Caption="Crowbar"/>
-    <GuideEntityEmbed Entity="CMWelder" Caption="Blowtorch"/>
-    <GuideEntityEmbed Entity="RMCCableCoil" Caption="Cable"/>
-    <GuideEntityEmbed Entity="RMCRadioHandheldColonyOff" Caption="Radio"/>
-    <GuideEntityEmbed Entity="RMCM5Bayonet" Caption="Knife"/>
-  </Box>
-
-    - Their [bold]metal sheets[/bold] allows them to assist in constructing barricades.
-    - Their [bold]blowtorch[/bold] allows them to perform welding and repair brute damage.
-    - Their [bold]cable[/bold] allows them to repair burn damage by themselves.
-
-  <Box>
-    [color=#a88b5e][bold]Inserts[/bold][/color]
-  </Box>
-  <Box> [bold]Inserts[/bold] are shorthand for [bold]nightmare inserts[/bold] and [bold]scenarios[/bold], both of which are chance-based events. </Box>
-  - [bold]Nightmare inserts[/bold] change survivor roles, equipment, spawn location, and parts of the map. Survivors will be part of a faction, often military. 
-  - [bold]Scenarios[/bold] change the map, replacing one area with another, modifying an area, or modifying the loot in an area.
+  - In inserts, synthetic survivors usually appear as the support synthetic of featured factions. Commander survivors usually appear as the commander, or 'Commanding Officer,' of featured factions.
 
   ## Your Round
   Your round as a survivor can be definitively separated into a [bold]looting phase[/bold] and [bold]holdout phase[/bold].
-
-  At the beginning of the round, you will spawn in a random, preset location with the other survivors. [bold]If you are lost or confused, follow someone else. Help them scavenge supplies and follow them to where you will be holding out.[/bold]
 
   ### Looting Phase
   The [bold]looting phase[/bold] concerns collecting what you need from various points in the colony, such as materials and medicine.
 
   [bold]Communication is esssential to ensuring the hold is well-supplied.[/bold] Too many survivors scavenging the same supplies can easily doom the holdout. Call out what you intend to scavenge and listen for what others are as well.
 
-  Note that looting locations are intuitive. You can expect to find weapons in armories, materials in engineering, medicine in hospitals, et cetera.
+  Note that looting locations are intuitive. You can expect to find weapons in armories, materials in engineering, medicine in hospitals, etc.
 
   During the looting phase, you have roughly a minute before xenonids are capable of evolution. Use this time to scavenge what you can and ideally group up with your fellow survivors at the location you intend to hold out at.
 
@@ -217,14 +176,14 @@
     <GuideEntityEmbed Entity="CMSheetMetal" Caption="Materials"/>
   </Box>
 
-  - [bold]Weapons[/bold] are your primary method of defending yourself. Keeping a stock of weapons and compatible ammunition is key to survival.
-  - [bold]Shotguns[/bold] are particularly useful both due to the close-quarters nature of the holdout and due to point-blank stuns, which can both significantly wound and stun a xenonid long enough to kill it.
-  - [bold]Ammo[/bold] such as magazines and shells are crucial. Ensure any ammunition you have is shared between everyone.
-  - [bold]AP[/bold], or armor-piercing, for when armored xenonids may appear. Some survivor weapons have intrinsic armor-piercing. Melee weapons also have intrinsic armor-piercing, and can be ideally used to force armored xenonids off of barricades.
-  - [bold]Armor[/bold] is essential to keeping yourself and others alive, as most survivors begin with little protection. Seek armor options with little to no slowdown, and hand-carry those that do to the holdout.
-  - [bold]Fire[/bold], which can appear as improvised firebombs or a flamethrower. Flames have good burst damage, damage over time, provide area denial, and prevent all xenonid healing. Note that you can hand-craft improvised firebombs with a bottle of alcohol and paper.
-  - [bold]Pills[/bold], which can provide significant resilience and healing factors to you and your fellow survivors. Note that only those with medical training can open them.
-  - [bold]Materials[/bold], which are critical to constructing barricades. The more materials you have, the more you can reinforce and repair during the holdout.
+  - [bold]Weapons[/bold] are the means by which you will be fighting the xenonids. Survivor weapons are unique in comparison to marine weapons, often featuring a special mechanic or trait, such as being bolt-action or firing a unique caliber. 
+  - [bold]Shotguns[/bold] are practical due to the close-quarters nature of the holdout and the potential for point-blank stuns dealt when using buckshot, which can both significantly wound and stun a xenonid long enough to kill it.
+  - [bold]Ammo[/bold] such as magazines and shells are crucial to sustain the holdout during extended engagements.
+  - [bold]AP[/bold], or armor-piercing, for when armored xenonids may appear. Some survivor weapons have intrinsic armor-piercing. Melee weapons and lit blowtorches also have intrinsic armor-piercing, and can be used to force armored xenonids off of barricades as a last resort.
+  - [bold]Armor[/bold], as most survivors begin with little protection. Seek armor options with little to no slowdown, such as armored jackets, and hand-carry those with a considerable slowdown to the holdout.
+  - [bold]Fire[/bold], which can appear as improvised firebombs or a flamethrower. Flames present burst damage and damage over time, provide area denial, and prevent all xenonid healing. Note that you can hand-craft improvised firebombs with a bottle of alcohol and paper.
+  - [bold]Pills[/bold], which allow for much faster recovery from injuries, especially in tandem with the tricordrazine survivors start with. Only those with medical training can open pill bottles.
+  - [bold]Materials[/bold], which are necessary to construct barricades. The more materials you have, the more barricade lines, critical repairs, and barricade reinforcements you can afford.
 
   ### Holdout Phase
   The [bold]holdout phase[/bold] concerns surviving long enough to be rescued by the marines.
@@ -232,8 +191,6 @@
   During the [bold]holdout phase[/bold], proper communication and execution is paramount. Poor trigger discipline, mistiming a grenade, or accidentally flaming barricades can quickly cascade into a total wipeout. 
   
   Inversely, the worst thing you can be doing during the [bold]holdout phase[/bold] is nothing at all. Given it is few survivors against many xenonids, there is no room for idle hands.
-
-  Your options during the [bold]holdout phase[/bold] can be simplified into [bold]contesting[/bold] and [bold]supporting[/bold]. In an ideal holdout, those [bold]contesting[/bold] and [bold]supporting[/bold] synergize well enough to repel the xenonids long enough to be rescued.
 
   <Box>
     [color=#a88b5e][bold]Contesting[/bold][/color]
@@ -250,17 +207,11 @@
   - [bold]Maintaining spacing.[/bold] Xenonids have an array of area-of-effect stuns that can easily cripple efforts to [bold]contest[/bold] if the survivors are too bunched together. Stay spaced enough for you to shake one another and for these stuns to be a non-issue.
   - [bold]Knowing when to give ground.[/bold] Good [bold]contesting[/bold] will typically afford the holdout several lines of barricades. Do not hesitate to retreat if you believe the barricades you are currently holding are soon to collapse.
 
-  <Box>
-    [color=#a88b5e][bold]Supporting[/bold][/color]
-  </Box>
-  [bold]Supporting[/bold] refers to organizing and constructing the holdout, as well as supporting those who are [bold]contesting[/bold]. If you are not comfortable with or do not trust yourself to [bold]contest[/bold], it is strongly recommended that you [bold]support[/bold] instead. 
+  If you are uncomfortable with contesting, there are other ways to contribute to the holdout, such as,
 
-  With [bold]supporting[/bold], you are working to sustain the holdout and efforts to [bold]contest[/bold].
-
-  In order to properly [bold]support[/bold], consider,
   - [bold]Organizing loot.[/bold] Keeping the survivor hold organized can help your teammates find what they need as fast as possible.
   - [bold]Supplying other survivors.[/bold] Those [bold]contesting[/bold] may have barricades between them and critical supplies. Throw them what they need, when they ask for it.
-  - [bold]Healing other survivors.[/bold] Use topical treatments on other survivors to stop their bleeding and treat their wounds, especially with medical kits. Be very careful when administering chemical treatments, as survivors may have scavenged their own.
+  - [bold]Healing other survivors.[/bold] Use topical treatments on other survivors to stop their bleeding and treat their wounds, especially with medical kits. Be very careful when administering chemical treatments, as survivors may have used their own.
   - [bold]Shaking other survivors.[/bold] Xenonids are capable of stunning survivors for seconds at a time, which can create vulnerabilities or cause casualties. Shake your fellow survivors to keep them in the fight.
   - [bold]Repair and construct barricades.[/bold] Put loose materials to use and construct more barricade lines. If there is a loose blowtorch, take it and use it to repair barricades, even if it incurs eye damage.
 
@@ -276,7 +227,7 @@
   <Box>
     <GuideEntityEmbed Entity="RMCGuidebookRoleSurvivorCivilian" Caption=""/>
   </Box>
-  In summary, survivor is a very difficult role that requires quick thinking, improvisation, and reliable communication to perform well in.
+  Survivor is a very difficult role that requires quick thinking, improvisation, and reliable communication to perform well in.
 
   Most of your survivor learning process will be through trial and error. It takes great coordination and effort to succeed; enter expecting failure, but remember that you have not already lost. Fight for your life.
 </Document>
