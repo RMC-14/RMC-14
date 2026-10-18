@@ -305,6 +305,8 @@
   description: An armored personnel carrier configured for SPP forces.
   suffix: Drivable, APC, Base, SPP
   components:
+  - type: VehicleLock
+    access: []
   - type: GridVehicleMover
     maxSpeed: 5
     acceleration: 2.0
