@@ -108,7 +108,7 @@ public sealed partial class XenoShieldSystem : EntitySystem
     /// <param name="amount"> How much shield</param>
     /// <param name="duration"> How long the shield lasts before decay starts</param>
     /// <param name="decay"> Shield lost per decay tick</param>
-    /// <param name="addShield"> Does this add ontop existing shield of the same type?</param>
+    /// <param name="addShield"> Does this add ontop existing shield of the same type or replace the same type?</param>
     /// <param name="maxShield"> Max amount of shield that can be added</param>
     /// <param name="visualState"> If this shield has a special visual overlay</param>
     /// <returns></returns>
