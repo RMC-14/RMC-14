@@ -184,7 +184,7 @@ public sealed partial class VehicleSystem : EntitySystem
             return;
         }
 
-        var doAfter = new DoAfterArgs(EntityManager, args.User, ent.Comp.EnterDoAfter, new VehicleEnterDoAfterEvent { EntryIndex = entryIndex }, ent.Owner)
+        var doAfter = new DoAfterArgs(EntityManager, args.User, GetEnterDoAfter(ent, args.User), new VehicleEnterDoAfterEvent { EntryIndex = entryIndex }, ent.Owner)
         {
             BreakOnMove = true,
             BreakOnDamage = false,
@@ -201,6 +201,21 @@ public sealed partial class VehicleSystem : EntitySystem
             _audio.PlayPvs(XenoFrameBreachSound, ent.Owner);
 
         args.Handled = true;
+    }
+
+    private float GetEnterDoAfter(Entity<VehicleEnterComponent> ent, EntityUid user)
+    {
+        if (HasComp<XenoComponent>(user))
+            return ent.Comp.XenoEnterDoAfter;
+
+        if (TryComp(user, out PullerComponent? puller) &&
+            puller.Pulling is { } pulling &&
+            pulling != ent.Owner)
+        {
+            return ent.Comp.DragEnterDoAfter;
+        }
+
+        return ent.Comp.EnterDoAfter;
     }
 
     private bool TryEnter(Entity<VehicleEnterComponent> ent, EntityUid user, int entryIndex = -1)
