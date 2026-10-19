@@ -1,6 +1,6 @@
 # Manage Hive Options
-rmc-hivemanagement-banish = Banish Xenonid
-rmc-hivemanagement-readmit = Readmit Xenonid
+rmc-hivemanagement-banish = Banish Xenonid (500)
+rmc-hivemanagement-readmit = Readmit Xenonid (100)
 
 # Banish System
 rmc-banish-title = Banishment
