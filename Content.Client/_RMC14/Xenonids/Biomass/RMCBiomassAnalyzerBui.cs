@@ -111,7 +111,7 @@ public sealed class RMCBiomassAnalyzerBui : BoundUserInterface, IRefreshableBui
 
     private void PopulateQueue(RMCBiomassAnalyzerMachineComponent machine)
     {
-        _window!.ToggleQueueIcon.SetPath(machine.QueueProcessing ? RMCIcons.Stop : RMCIcons.Play);
+        _window!.ToggleQueueIcon.SetIcon(machine.QueueProcessing ? RMCIcons.Stop : RMCIcons.Play);
         _window.ToggleQueueIcon.Label.Text = machine.QueueProcessing ? "STOP" : "START";
 
         _window.QueueEmptyLabel.Visible = machine.PrintQueue.Count == 0;

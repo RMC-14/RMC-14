@@ -1,3 +1,5 @@
+using Robust.Client.UserInterface;
+using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Maths;
 
 namespace Content.Client._RMC14.UserInterface;
@@ -26,4 +28,33 @@ public static class RMCIcons
     public static readonly Color Idle = Color.Black;
     public static readonly Color Hover = Color.White;
     public static readonly Color Yellow = Color.FromHex("#FFD21A");
+
+    public static RMCIconLabelRow AddIconLabel(
+        this Button button,
+        string path,
+        string text,
+        float size = 14,
+        Control.HAlignment alignment = Control.HAlignment.Left,
+        Color? fontColor = null)
+    {
+        button.Text = null;
+
+        var row = new RMCIconLabelRow { HorizontalAlignment = alignment };
+        row.Icon.IconSize = size;
+        row.SetIcon(path);
+        row.Label.Text = text;
+
+        if (fontColor != null)
+            row.Label.FontColorOverride = fontColor;
+
+        if (alignment == Control.HAlignment.Stretch)
+        {
+            row.Label.HorizontalExpand = true;
+            row.Label.ClipText = true;
+        }
+
+        row.BindHover(button);
+        button.AddChild(row);
+        return row;
+    }
 }

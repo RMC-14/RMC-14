@@ -1,5 +1,4 @@
 using System.Linq;
-using System.Numerics;
 using Content.Client._RMC14.UserInterface;
 using Content.Client.Chemistry.Containers.EntitySystems;
 using Content.Client.Resources;
@@ -113,25 +112,25 @@ public sealed class RMCTuringDispenserBui : BoundUserInterface, IRefreshableBui
         _window.EnergyBar.ForegroundStyleBoxOverride = Flat(GreenColor);
 
         GreyButton(_window.ClearMemoryButton);
-        Icon(_window.ClearMemoryButton, RMCIcons.Trash, "Clear memory");
+        _window.ClearMemoryButton.AddIconLabel(RMCIcons.Trash, "Clear memory");
         GreyButton(_window.RunProgramButton);
-        Icon(_window.RunProgramButton, RMCIcons.Play, "Run program");
+        _window.RunProgramButton.AddIconLabel(RMCIcons.Play, "Run program");
         GreyButton(_window.SaveToMemoryButton);
-        Icon(_window.SaveToMemoryButton, RMCIcons.FloppyDisk, "Save box to memory");
+        _window.SaveToMemoryButton.AddIconLabel(RMCIcons.FloppyDisk, "Save box to memory");
         GreyButton(_window.EjectBoxButton);
-        Icon(_window.EjectBoxButton, RMCIcons.Eject, "Eject box");
+        _window.EjectBoxButton.AddIconLabel(RMCIcons.Eject, "Eject box");
         GreyButton(_window.DisposeBeakerButton);
-        Icon(_window.DisposeBeakerButton, RMCIcons.Flask, "Flush beaker");
+        _window.DisposeBeakerButton.AddIconLabel(RMCIcons.Flask, "Flush beaker");
         GreyButton(_window.EjectBeakerButton);
-        Icon(_window.EjectBeakerButton, RMCIcons.Eject, "Eject beaker");
+        _window.EjectBeakerButton.AddIconLabel(RMCIcons.Eject, "Eject beaker");
 
         Toggle(_window.AutoRunButton);
-        _autoRunIcon = IconHandled(_window.AutoRunButton, RMCIcons.Stop, "Autorun: disabled");
+        _autoRunIcon = _window.AutoRunButton.AddIconLabel(RMCIcons.Stop, "Autorun: disabled");
         _autoRunLabel = _autoRunIcon.Label;
         Toggle(_window.SmartLinkButton);
-        _smartLinkLabel = Icon(_window.SmartLinkButton, RMCIcons.Link, "Smartlink: enabled");
+        _smartLinkLabel = _window.SmartLinkButton.AddIconLabel(RMCIcons.Link, "Smartlink: enabled").Label;
         Toggle(_window.OutputModeButton);
-        _outputModeLabel = Icon(_window.OutputModeButton, RMCIcons.Flask, "Outputting to: CONTAINER");
+        _outputModeLabel = _window.OutputModeButton.AddIconLabel(RMCIcons.Flask, "Outputting to: CONTAINER").Label;
 
         _window.SaveToMemoryButton.OnPressed += _ => SendPredictedMessage(new RMCTuringDispenserSaveToMemoryBuiMsg());
         _window.EjectBoxButton.OnPressed += _ => SendPredictedMessage(new RMCTuringDispenserEjectBoxBuiMsg());
@@ -332,31 +331,6 @@ public sealed class RMCTuringDispenserBui : BoundUserInterface, IRefreshableBui
 
         if (panelControl is PanelContainer panel)
             panel.PanelOverride = Flat(color);
-    }
-
-    private static Label Icon(Button button, string texturePath, string text)
-    {
-        return IconHandled(button, texturePath, text).Label;
-    }
-
-    private static RMCIconLabelRow IconHandled(Button button, string texturePath, string text)
-    {
-        button.Text = null;
-
-        var row = new RMCIconLabelRow
-        {
-            HorizontalAlignment = Control.HAlignment.Left,
-        };
-        row.Icon.SetSize = new Vector2(14, 14);
-        row.SetIcon(texturePath);
-        row.Label.Text = text;
-
-        button.AddChild(row);
-
-        button.OnMouseEntered += _ => row.SetHovered(true);
-        button.OnMouseExited += _ => row.SetHovered(false);
-
-        return row;
     }
 
     private static StyleBoxFlat Flat(Color color)

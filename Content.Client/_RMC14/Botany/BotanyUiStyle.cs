@@ -1,9 +1,6 @@
-using System.Numerics;
 using Content.Client._RMC14.UserInterface;
-using Content.Client.Resources;
 using Content.Shared._RMC14.Botany;
 using Robust.Client.Graphics;
-using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Maths;
@@ -99,8 +96,7 @@ internal static class BotanyUiStyle
         panel.PanelOverride = Flat(HeaderColor);
     }
 
-    public static IconHandle IconButton(
-        IResourceCache resourceCache,
+    public static RMCIconLabelRow IconButton(
         Button button,
         string texturePath,
         string text,
@@ -108,7 +104,6 @@ internal static class BotanyUiStyle
         bool bordered = false,
         Control.HAlignment alignment = Control.HAlignment.Center)
     {
-        button.Text = null;
         button.StyleBoxOverride = bordered
             ? new StyleBoxFlat
             {
@@ -123,63 +118,6 @@ internal static class BotanyUiStyle
             : Flat(color ?? TanColor);
         button.ModulateSelfOverride = Color.White;
 
-        var row = new BoxContainer
-        {
-            Orientation = BoxContainer.LayoutOrientation.Horizontal,
-            HorizontalAlignment = alignment,
-            VerticalAlignment = Control.VAlignment.Center,
-            SeparationOverride = 6,
-        };
-
-        var texture = new TextureRect
-        {
-            Stretch = TextureRect.StretchMode.KeepAspectCentered,
-            SetSize = new Vector2(14, 14),
-            VerticalAlignment = Control.VAlignment.Center,
-            ModulateSelfOverride = RMCIcons.Idle,
-        };
-        row.AddChild(texture);
-
-        var label = new Label
-        {
-            Text = text,
-            FontColorOverride = Color.Black,
-            VerticalAlignment = Control.VAlignment.Center,
-        };
-        row.AddChild(label);
-
-        button.AddChild(row);
-
-        var handle = new IconHandle(resourceCache, texture, label);
-        handle.SetPath(texturePath);
-
-        button.OnMouseEntered += _ => handle.SetHovered(true);
-        button.OnMouseExited += _ => handle.SetHovered(false);
-
-        return handle;
-    }
-
-    public sealed class IconHandle
-    {
-        private readonly IResourceCache _resourceCache;
-        private readonly TextureRect _texture;
-        public readonly Label Label;
-
-        public IconHandle(IResourceCache resourceCache, TextureRect texture, Label label)
-        {
-            _resourceCache = resourceCache;
-            _texture = texture;
-            Label = label;
-        }
-
-        public void SetPath(string path)
-        {
-            _texture.Texture = _resourceCache.GetTexture(path);
-        }
-
-        public void SetHovered(bool hovered)
-        {
-            _texture.ModulateSelfOverride = hovered ? RMCIcons.Hover : RMCIcons.Idle;
-        }
+        return button.AddIconLabel(texturePath, text, alignment: alignment);
     }
 }

@@ -1,4 +1,3 @@
-using System.Numerics;
 using Content.Client._RMC14.UserInterface;
 using Content.Client.Resources;
 using Content.Shared._RMC14.Chemistry.Centrifuge;
@@ -46,18 +45,18 @@ public sealed class RMCCentrifugeBui : BoundUserInterface, IRefreshableBui
         Header(_window.SettingsHeader);
 
         Toggle(_window.ModeButton, TanColor);
-        _modeLabel = Icon(_window.ModeButton, RMCIcons.ArrowsRotate, "Mode: split");
+        _modeLabel = _window.ModeButton.AddIconLabel(RMCIcons.ArrowsRotate, "Mode: split", 16).Label;
 
         Toggle(_window.SourceButton, BlueColor);
-        _sourceLabel = Icon(_window.SourceButton, RMCIcons.Flask, "Input: Container");
+        _sourceLabel = _window.SourceButton.AddIconLabel(RMCIcons.Flask, "Input: Container", 16).Label;
 
         Toggle(_window.ConnectButton, BlueColor);
-        Icon(_window.ConnectButton, RMCIcons.Link, "Connect a Turing Dispenser");
+        _window.ConnectButton.AddIconLabel(RMCIcons.Link, "Connect a Turing Dispenser", 16);
 
         GreyButton(_window.EjectInputButton);
-        Icon(_window.EjectInputButton, RMCIcons.Eject, "Eject");
+        _window.EjectInputButton.AddIconLabel(RMCIcons.Eject, "Eject", 16);
         GreyButton(_window.EjectOutputButton);
-        Icon(_window.EjectOutputButton, RMCIcons.Eject, "Eject");
+        _window.EjectOutputButton.AddIconLabel(RMCIcons.Eject, "Eject", 16);
 
         _window.ModeButton.OnPressed += _ => SendPredictedMessage(new RMCCentrifugeToggleModeBuiMsg());
         _window.SourceButton.OnPressed += _ => SendPredictedMessage(new RMCCentrifugeToggleSourceBuiMsg());
@@ -139,25 +138,5 @@ public sealed class RMCCentrifugeBui : BoundUserInterface, IRefreshableBui
             ContentMarginTopOverride = 1,
             ContentMarginBottomOverride = 1,
         };
-    }
-
-    private static Label Icon(Button button, string texturePath, string text)
-    {
-        button.Text = null;
-
-        var row = new RMCIconLabelRow
-        {
-            HorizontalAlignment = Control.HAlignment.Left,
-        };
-        row.Icon.SetSize = new Vector2(16, 16);
-        row.SetIcon(texturePath);
-        row.Label.Text = text;
-
-        button.AddChild(row);
-
-        button.OnMouseEntered += _ => row.SetHovered(true);
-        button.OnMouseExited += _ => row.SetHovered(false);
-
-        return row.Label;
     }
 }

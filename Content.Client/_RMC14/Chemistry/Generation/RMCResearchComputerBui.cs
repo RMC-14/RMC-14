@@ -218,10 +218,7 @@ public sealed class RMCResearchComputerBui : BoundUserInterface, IRefreshableBui
             }
             else
             {
-                card = new ContractCard(
-                    _resourceCache.GetTexture(RMCIcons.Print),
-                    _boldFont,
-                    _smallFont);
+                card = new ContractCard(_boldFont, _smallFont);
                 box.AddChild(card);
             }
 
@@ -289,10 +286,7 @@ public sealed class RMCResearchComputerBui : BoundUserInterface, IRefreshableBui
             }
             else
             {
-                row = new DocumentRow(
-                    _resourceCache.GetTexture(RMCIcons.Book),
-                    _resourceCache.GetTexture(RMCIcons.Print),
-                    _resourceCache.GetTexture(RMCIcons.Radiation));
+                row = new DocumentRow();
                 box.AddChild(row);
             }
 

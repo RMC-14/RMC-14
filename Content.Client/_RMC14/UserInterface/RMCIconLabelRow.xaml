@@ -4,6 +4,6 @@
     Orientation="Horizontal"
     VerticalAlignment="Center"
     SeparationOverride="6">
-    <TextureRect Name="Icon" Access="Public" Stretch="KeepAspectCentered" VerticalAlignment="Center" />
+    <controls:RMCIconRect Name="Icon" Access="Public" />
     <Label Name="Label" Access="Public" VerticalAlignment="Center" FontColorOverride="#000000" />
 </controls:RMCIconLabelRow>

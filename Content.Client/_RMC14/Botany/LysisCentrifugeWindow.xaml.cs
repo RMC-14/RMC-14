@@ -24,10 +24,10 @@ public sealed partial class LysisCentrifugeWindow : FancyWindow
         BotanyUiStyle.Header(DiscHeader);
         BotanyUiStyle.Header(GenesHeader);
 
-        BotanyUiStyle.IconButton(resourceCache, EjectSeedButton, RMCIcons.Eject, "Eject Seed", BotanyUiStyle.GreenColor, bordered: true, alignment: Control.HAlignment.Left);
-        BotanyUiStyle.IconButton(resourceCache, ProcessSeedButton, RMCIcons.ArrowsRotate, "Process", BotanyUiStyle.GreenColor, bordered: true, alignment: Control.HAlignment.Left);
-        BotanyUiStyle.IconButton(resourceCache, ClearBufferButton, RMCIcons.Trash, "Clear Buffer", BotanyUiStyle.GreenColor, bordered: true);
-        BotanyUiStyle.IconButton(resourceCache, EjectDiscButton, RMCIcons.Eject, "Eject Disc", BotanyUiStyle.GreenColor, bordered: true, alignment: Control.HAlignment.Left);
+        BotanyUiStyle.IconButton(EjectSeedButton, RMCIcons.Eject, "Eject Seed", BotanyUiStyle.GreenColor, bordered: true, alignment: Control.HAlignment.Left);
+        BotanyUiStyle.IconButton(ProcessSeedButton, RMCIcons.ArrowsRotate, "Process", BotanyUiStyle.GreenColor, bordered: true, alignment: Control.HAlignment.Left);
+        BotanyUiStyle.IconButton(ClearBufferButton, RMCIcons.Trash, "Clear Buffer", BotanyUiStyle.GreenColor, bordered: true);
+        BotanyUiStyle.IconButton(EjectDiscButton, RMCIcons.Eject, "Eject Disc", BotanyUiStyle.GreenColor, bordered: true, alignment: Control.HAlignment.Left);
     }
 
     public void SetSeedStatus(string text, string? tooltip)
