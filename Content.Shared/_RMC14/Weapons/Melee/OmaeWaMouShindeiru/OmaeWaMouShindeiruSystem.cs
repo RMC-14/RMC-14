@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared.Damage;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Mobs;
@@ -30,6 +31,7 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<OmaeWaMouShindeiruComponent, MeleeHitEvent>(OnYouAreAlreadyDeadMeleeHit);
+        SubscribeLocalEvent<OmaeWaMouShindeiruComponent, ComponentShutdown>(OnKatanaShutdown);
     }
 
     private void OnYouAreAlreadyDeadMeleeHit(Entity<OmaeWaMouShindeiruComponent> ent, ref MeleeHitEvent args)
@@ -41,6 +43,9 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
         foreach (var target in args.HitEntities)
         {
             if (!ent.Comp.PendingTargets.Add(target))
+                continue;
+
+            if (_net.IsClient)
                 continue;
 
             if (HasKatana(target) && args.User != target)
@@ -72,13 +77,19 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
 
     private void OmaeWaMouShindeiru(Entity<OmaeWaMouShindeiruComponent> ent, EntityUid user, EntityUid target, DamageSpecifier damage)
     {
+        if (_net.IsClient)
+            return;
+
         var streamEntity = _audio.PlayLocal(ent.Comp.DeathImminentSound, target, target)?.Entity;
-        if (streamEntity != null)
+        if (streamEntity != null && !ent.Comp.Streams.ContainsKey(target))
             ent.Comp.Streams[target] = streamEntity.Value;
 
         Timer.Spawn(ent.Comp.KillDelay,
             () =>
             {
+                if (!HasComp<OmaeWaMouShindeiruComponent>(ent))
+                    return;
+
                 ent.Comp.PendingTargets.Remove(target);
 
                 if (ent.Comp.Streams.TryGetValue(target, out var stream))
@@ -115,5 +126,16 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
         }
 
         return false;
+    }
+
+    private void OnKatanaShutdown(EntityUid uid, OmaeWaMouShindeiruComponent comp, ComponentShutdown args)
+    {
+        foreach (var stream in comp.Streams.Values.ToList())
+        {
+            _audio.Stop(stream);
+        }
+
+        comp.Streams.Clear();
+        comp.PendingTargets.Clear();
     }
 }
