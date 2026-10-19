@@ -6,7 +6,7 @@ using Content.Shared._RMC14.Requisitions;
 
 namespace Content.Server.Administration.Commands;
 
-[AdminCommand(AdminFlags.Moderator)]
+[AdminCommand(AdminFlags.Admin)]
 public sealed class AegisEventCommand : IConsoleCommand
 {
     public string Command => "aegis:normal";
