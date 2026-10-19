@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: CMBaseWeaponSMG
   name: FN PDW90 submachine gun
   id: RMCWeaponSMGPDW90
@@ -239,7 +239,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 26
+        Piercing: 22
   - type: RMCProjectileDamageFalloff
     thresholds:
     - range: 22
