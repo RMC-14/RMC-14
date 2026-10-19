@@ -511,8 +511,7 @@ public sealed partial class XenoSystem : EntitySystem
 
         // banished xenos can't harm the hive they were banished from, the hive can still harm them
         if (TryComp(xeno, out XenoBanishComponent? banish) &&
-            banish.OriginalHive is { } originalHive &&
-            _hive.IsMember(target, originalHive))
+            _hive.IsMember(target, banish.OriginalHive))
         {
             return false;
         }
