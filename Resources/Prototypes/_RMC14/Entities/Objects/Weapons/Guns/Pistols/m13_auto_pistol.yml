@@ -43,8 +43,6 @@
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/m13.rsi
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1
-  - type: GunDamageModifier
-    multiplier: .75
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -326,8 +324,8 @@
   - type: RMCProjectileAccuracy
     accuracy: 115
     thresholds:
-    - range: 2
-      falloff: 10
+    - range: 3    # effective_range_max = 3
+      falloff: 7  # DAMAGE_FALLOFF_TIER_4
 
 - type: entity
   parent: RMCBulletAutoPistol
