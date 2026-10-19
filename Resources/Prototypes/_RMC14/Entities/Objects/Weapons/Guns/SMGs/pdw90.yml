@@ -15,7 +15,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/SMGs/pdw90.rsi
   - type: Gun
-    shotsPerBurst: 3
+    shotsPerBurst: 3    # BURST_AMOUNT_TIER_3 (3)
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/pdw90_shot.ogg
   - type: RMCSelectiveFire
@@ -23,27 +23,27 @@
     - SemiAuto
     - Burst
     - FullAuto
-    recoilWielded: 0.1
-    recoilUnwielded: 1
-    scatterWielded: 14
-    scatterUnwielded: 16
-    baseFireRate: 10
-    burstScatterMult: 3
+    recoilWielded: 0.1  # RMC default?
+    recoilUnwielded: 1  # RECOIL_AMOUNT_TIER_5 (1)
+    scatterWielded: 14  # SCATTER_AMOUNT_TIER_4 (7) * 2
+    scatterUnwielded: 16  # SCATTER_AMOUNT_TIER_3 (8) * 2
+    baseFireRate: 10    # FIRE_DELAY_TIER_12 1 / (1 / 10)
+    burstScatterMult: 4 # SCATTER_AMOUNT_TIER_7 (4)
     modifiers:
       Burst:
-        fireDelay: 0.0980
-        maxScatterModifier: 10
-        useBurstScatterMult: true
+        fireDelay: 0.0666   # FIRE_DELAY_TIER_12 ((1) / 10 ) * 0.666
+        maxScatterModifier: 10 # per documentation in RMCSelectiveFireComponent.cs
+        useBurstScatterMult: true # is burstfire
         unwieldedScatterMultiplier: 2
-        shotsToMaxScatter: 6
+        shotsToMaxScatter: 6  # SelectiveFireModifierSet default value
       FullAuto:
-        maxScatterModifier: 3
-        useBurstScatterMult: true
+        maxScatterModifier: 3 # `SCATTER_AMOUNT_TIER_10 + 0.5` [sic]; 1.5 * 2
+        useBurstScatterMult: false # not burstfire
         unwieldedScatterMultiplier: 2
-        shotsToMaxScatter: 4
+        shotsToMaxScatter: 4 # fa_scatter_peak default value (4), also SelectiveFireModifierSet default value
   - type: RMCWeaponAccuracy
-    accuracyMultiplier: 1
-    accuracyMultiplierUnwielded: 0.9
+    accuracyMultiplier: 1   # BASE_ACCURACY_MULT (1)
+    accuracyMultiplierUnwielded: 0.9  # BASE_ACCURACY_MULT (1) - HIT_ACCURACY_MULT_TIER_2 (0.10)
   - type: MagazineAmmoProvider
     autoEject: false
     soundAutoEject: null
