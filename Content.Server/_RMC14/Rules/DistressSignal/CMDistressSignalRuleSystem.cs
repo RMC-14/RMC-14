@@ -258,6 +258,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
         SubscribeLocalEvent<DropshipLandedOnPlanetEvent>(OnDropshipLandedOnPlanet);
         SubscribeLocalEvent<DropshipHijackStartEvent>(OnDropshipHijackStart);
         SubscribeLocalEvent<DropshipHijackLandedEvent>(OnDropshipHijackLanded);
+        SubscribeLocalEvent<EvacuationProgressEvent>(OnEvacuationProgress);
         SubscribeLocalEvent<RMCFusionReactorComponent, RMCFusionReactorCanOverloadEvent>(OnFusionReactorCanOverload);
         SubscribeLocalEvent<RMCFusionReactorComponent, RMCFusionReactorOverloadStatusEvent>(OnFusionReactorOverloadStatus);
         SubscribeLocalEvent<RMCFusionReactorComponent, RMCFusionReactorOverloadChangedEvent>(OnFusionReactorOverloadChanged);
