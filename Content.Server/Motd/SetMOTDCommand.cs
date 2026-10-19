@@ -12,7 +12,7 @@ namespace Content.Server.Motd;
 /// <summary>
 /// A console command usable by any user which prints or sets the Message of the Day.
 /// </summary>
-[AdminCommand(AdminFlags.Moderator)]
+[AdminCommand(AdminFlags.Admin)]
 public sealed class SetMotdCommand : LocalizedCommands
 {
     [Dependency] private readonly IAdminLogManager _adminLogManager = default!;
