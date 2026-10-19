@@ -15,12 +15,16 @@
     soundGunshot:
       collection: RMCM13Shoot
   - type: RMCSelectiveFire
+    recoilWielded: 1      # RECOIL_AMOUNT_TIER_5 (1)
+    recoilUnwielded: 6    # RECOIL_AMOUNT_TIER_0 (6)
     scatterWielded: 12    # SCATTER_AMOUNT_TIER_5 (6) * 2
     scatterUnwielded: 14  # SCATTER_AMOUNT_TIER_4 (7) * 2
     baseFireRate: 10      # FIRE_DELAY_TIER_12    1 / ((1) / 10)
     modifiers:
       FullAuto:
         maxScatterModifier: 12 # SCATTER_AMOUNT_TIER_5 (6) * 2
+        useBurstModifier: false
+        unWieldedScatterMultiplier: 7 # SCATTER_AMOUNT_TIER_4 (7)
         shotsToMaxScatter: 20  # FULL_AUTO_SCATTER_PEAK_TIER_2 (20)
     baseFireModes:
     - FullAuto
@@ -43,6 +47,7 @@
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/m13.rsi
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1
+    AccuracyMultiplierUnwielded: 0.8
   - type: ItemSlots
     slots:
       gun_magazine:
