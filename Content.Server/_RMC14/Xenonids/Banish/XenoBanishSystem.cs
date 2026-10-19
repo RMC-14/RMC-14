@@ -81,6 +81,7 @@ public sealed class XenoBanishSystem : SharedXenoBanishSystem
         }
 
         // When a banished xenonid dies, the original hive gets a burrowed larva to replace it
-        _hive.ChangeBurrowedLarva((originalHive, hive), 1);
+        if (TryComp(ent, out XenoComponent? xeno) && xeno.ContributesToVictory)
+            _hive.ChangeBurrowedLarva((originalHive, hive), 1);
     }
 }
