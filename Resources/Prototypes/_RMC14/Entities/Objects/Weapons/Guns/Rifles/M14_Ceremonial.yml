@@ -1,0 +1,175 @@
+- type: entity
+  parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
+  name: M14 Ceremonial Rifle
+  id: WeaponRifleM14Ceremonial
+  description: The M14 Ceremonial Rifle is a modernized adaptation of a century old weapon, modified predominantly for the use during ceremonial traditions pre-dating most of those alive today. Not advised for use in combat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/desert.rsi
+    layers:
+    - state: bolt-open
+      map: [ "enum.GunVisualLayers.Base" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
+      state: d_m4spr_barrel
+      offset: 0.65, 0
+      map: [ "barrel" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/desert.rsi
+  - type: Gun
+    shotsPerBurst: 0
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m4spr.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilUnwielded: 2
+    scatterWielded: 6
+    baseFireRate: 2.86
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.25
+    accuracyMultiplierUnwielded: 0.6
+  - type: RMCWeaponDamageFalloff
+    falloffMultiplier: 0
+  - type: WieldDelay
+    baseDelay: 0.2
+  - type: WieldableSpeedModifiers
+    base: 0.725
+    light: 1
+    medium: 1
+    heavy: 1
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/l42_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/l42_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM14Ceremonial
+  - type: GunDamageModifier
+    multiplier: 1.2
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentB8SmartScope
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS42xTelescopicMiniscope
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentBipod
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentLaserSight
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentUnderbarrelExtinguisher
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 1.12, 0.0
+      rmc-aslot-rail: 0.225, 0.125
+      rmc-aslot-underbarrel: 0.62, -0.31
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/urban.rsi
+    layers:
+      barrel:
+        Jungle: m4spr_barrel
+        Desert: d_m4spr_barrel
+        Snow: s_m4spr_barrel
+        Classic: c_m4spr_barrel
+        Urban: u_m4spr_barrel
+  - type: RMCAirShot
+    preparationTime: 1.5
+    requiresCombat: true
+    doAfterBreakOnMove: false
+    ignoreRoof: true
+    shakeAmount: 1
+  - type: Tag
+    tags:
+    - RMCWeaponRifleM4SPR
+
+- type: entity
+  parent: RMCBaseBullet
+  id: BulletRifleBlank10x24mm
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 5
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 2
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 1
+      falloff: 4
+  - type: RMCProjectileAccuracy
+    accuracy: 105
+    thresholds:
+    - range: 3
+      falloff: 10
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: CMCartridgeRifleBlank10x24mm
+  name: blank cartridge (10x24mm)
+  description: A Blank 10x24mm cartridge. Fits in Blank 10x24mm magazines.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - CMCartridgeRifleBlank10x24mm
+  - type: CartridgeAmmo
+    proto: BulletRifleBlank10x24mm
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: CMMagazineRifleM14Ceremonial
+  name: "M14 Blank magazine (10x24mm)"
+  description: "A magazine of blank 10x24mm rounds for use in the M14 Ceremonial rifle."
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - CMMagazineRifleM14Ceremonial
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgeRifleBlank10x24mm
+    proto: CMCartridgeRifleBlank10x24mm
+    capacity: 25
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m4spr.rsi
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifle
+
+- type: Tag
+  id: CMCartridgeRifleBlank10x24mm
+
+- type: Tag
+  id: CMMagazineRifleM14Ceremonial
