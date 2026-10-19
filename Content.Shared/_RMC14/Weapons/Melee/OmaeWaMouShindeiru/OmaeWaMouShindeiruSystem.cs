@@ -1,4 +1,3 @@
-using System.Linq;
 using Content.Shared.Damage;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Mobs;
@@ -32,6 +31,7 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
 
         SubscribeLocalEvent<OmaeWaMouShindeiruComponent, MeleeHitEvent>(OnYouAreAlreadyDeadMeleeHit);
         SubscribeLocalEvent<OmaeWaMouShindeiruComponent, ComponentShutdown>(OnKatanaShutdown);
+        SubscribeLocalEvent<OmaeTargetComponent, ComponentShutdown>(OnKatanaTargetShutdown);
     }
 
     private void OnYouAreAlreadyDeadMeleeHit(Entity<OmaeWaMouShindeiruComponent> ent, ref MeleeHitEvent args)
@@ -80,23 +80,29 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        var streamEntity = _audio.PlayLocal(ent.Comp.DeathImminentSound, target, target)?.Entity;
-        if (streamEntity != null && !ent.Comp.Streams.ContainsKey(target))
-            ent.Comp.Streams[target] = streamEntity.Value;
+        var targetComp = EnsureComp<OmaeTargetComponent>(target);
+        targetComp.Attacker = user;
+        targetComp.Damage = damage;
+        targetComp.NumberOfCuts = ent.Comp.NumberOfCuts;
+        targetComp.BypassResistances = ent.Comp.BypassResistances;
+
+        var playResult = _audio.PlayLocal(ent.Comp.DeathImminentSound, target, target)?.Entity;
+        if (playResult != null)
+            targetComp.AudioStream = playResult.Value;
 
         Timer.Spawn(ent.Comp.KillDelay,
             () =>
             {
-                if (!HasComp<OmaeWaMouShindeiruComponent>(ent))
+                if (!HasComp<OmaeTargetComponent>(target))
                     return;
 
-                ent.Comp.PendingTargets.Remove(target);
-
-                if (ent.Comp.Streams.TryGetValue(target, out var stream))
+                if (targetComp.AudioStream != null)
                 {
-                    _audio.Stop(stream);
-                    ent.Comp.Streams.Remove(target);
+                    _audio.Stop(targetComp.AudioStream.Value);
+                    targetComp.AudioStream = null;
                 }
+
+                RemCompDeferred<OmaeTargetComponent>(target);
 
                 if (Deleted(ent.Owner) || Deleted(target) || !Exists(target))
                     return;
@@ -108,11 +114,11 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
                 }
 
                 _audio.PlayPvs(ent.Comp.BoneBreakSound, target);
-                for (var i = 0; i < ent.Comp.NumberOfCuts; i++)
+                for (var i = 0; i < targetComp.NumberOfCuts; i++)
                 {
                     // TODO RMC14 hit outer limbs so this can decap/delimb
                     // var/def_zone = pick("head","l_leg","l_foot","r_leg","r_foot","l_arm","l_hand","r_arm","r_hand")
-                    _damageable.TryChangeDamage(target, damage, ignoreResistances: ent.Comp.BypassResistances, origin: user, tool: ent.Owner);
+                    _damageable.TryChangeDamage(target, targetComp.Damage, ignoreResistances: targetComp.BypassResistances, origin: user, tool: ent.Owner);
                 }
             });
     }
@@ -130,12 +136,12 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
 
     private void OnKatanaShutdown(EntityUid uid, OmaeWaMouShindeiruComponent comp, ComponentShutdown args)
     {
-        foreach (var stream in comp.Streams.Values.ToList())
-        {
-            _audio.Stop(stream);
-        }
-
-        comp.Streams.Clear();
         comp.PendingTargets.Clear();
+    }
+
+    private void OnKatanaTargetShutdown(EntityUid uid, OmaeTargetComponent comp, ComponentShutdown args)
+    {
+        if (comp.AudioStream != null)
+            _audio.Stop(comp.AudioStream.Value);
     }
 }
