@@ -1,5 +1,6 @@
 using Content.Server._RMC14.Announce;
 using Content.Server.Administration.Managers;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Banish;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Administration;
