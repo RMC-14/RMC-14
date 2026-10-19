@@ -7,6 +7,7 @@ using Content.Shared.Tag;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -18,9 +19,9 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private static readonly ProtoId<TagPrototype> RMCKatanaTag = "RMCKatana";
 
@@ -47,12 +48,7 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
                 _stun.TryStun(args.User, ent.Comp.KillDelay, true);
                 _stun.TryStun(target, ent.Comp.KillDelay, true);
 
-                if (_melee.TryGetWeapon(target, out var targetWeapon, out _))
-                {
-                    var coords = _transform.GetMoverCoordinates(target);
-                    var counterAttack = new LightAttackEvent(GetNetEntity(args.User), GetNetEntity(targetWeapon), GetNetCoordinates(coords));
-                    RaiseLocalEvent(target, counterAttack);
-                }
+                // TODO RMC14 make the target swing at the user to imitate sword clashing.
             }
 
             if (ent.Comp.CanStunOnHit)
@@ -62,18 +58,34 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
         }
 
         if (!ent.Comp.DamageOnHit)
+        {
+            if (TryComp(ent.Owner, out MeleeWeaponComponent? meleeWeapon))
+                _audio.PlayPvs(meleeWeapon.HitSound ?? meleeWeapon.SwingSound, args.User);
+
+            // Raise a MeleeAttackEvent so animation/effects listeners still run.
+            var attackEv = new MeleeAttackEvent(ent.Owner);
+            RaiseLocalEvent(args.User, ref attackEv);
+
             args.Handled = true;
+        }
     }
 
     private void OmaeWaMouShindeiru(Entity<OmaeWaMouShindeiruComponent> ent, EntityUid user, EntityUid target, DamageSpecifier damage)
     {
-        ent.Comp.Stream = _audio.PlayLocal(ent.Comp.DeathImminentSound, target, target)?.Entity;
+        var streamEntity = _audio.PlayLocal(ent.Comp.DeathImminentSound, target, target)?.Entity;
+        if (streamEntity != null)
+            ent.Comp.Streams[target] = streamEntity.Value;
 
         Timer.Spawn(ent.Comp.KillDelay,
             () =>
             {
                 ent.Comp.PendingTargets.Remove(target);
-                _audio.Stop(ent.Comp.Stream);
+
+                if (ent.Comp.Streams.TryGetValue(target, out var stream))
+                {
+                    _audio.Stop(stream);
+                    ent.Comp.Streams.Remove(target);
+                }
 
                 if (Deleted(ent.Owner) || Deleted(target) || !Exists(target))
                     return;
