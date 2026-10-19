@@ -39,7 +39,6 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
         if (!args.IsHit)
             return;
 
-        var damage = _melee.GetDamage(ent.Owner, args.User);
         foreach (var target in args.HitEntities)
         {
             if (!ent.Comp.PendingTargets.Add(target))
@@ -48,6 +47,7 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
             if (_net.IsClient)
                 continue;
 
+            var damage = _melee.GetDamage(ent.Owner, args.User);
             if (HasKatana(target) && args.User != target)
             {
                 _stun.TryStun(args.User, ent.Comp.KillDelay, true);
