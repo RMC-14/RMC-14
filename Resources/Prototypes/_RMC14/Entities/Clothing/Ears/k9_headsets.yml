@@ -15,7 +15,7 @@
   id: RMCHeadsetK9NoRadio
   name: military dog squad headset
   description: A military headset made to fit on a dog. Too small to fix on anything else!
-  suffix: PVE, no radio
+  suffix: PVE, No Radio
   components:
   - type: RemoveComponents
     components:

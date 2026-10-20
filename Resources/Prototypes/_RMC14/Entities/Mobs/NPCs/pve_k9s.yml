@@ -292,7 +292,7 @@
 - type: entity
   parent: RMCMobK9Unit
   id: RMCMobK9UnitHands
-  suffix: PVE, hand
+  suffix: PVE, One Hand
   components:
   - type: Puller
     needsHands: true

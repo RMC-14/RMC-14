@@ -38,7 +38,7 @@
   parent: RMCK9HarnessBase
   id: RMCK9MPHarness
   name: M553 portable K9 police backpack
-  description: Form fitted for dog or dog-shaped military police units. For carrying MP Equipment.
+  description: Form fitted for dog or dog-shaped military police units. For carrying MP equipment.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/K9Synth/police_harness.rsi
