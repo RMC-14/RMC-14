@@ -1893,6 +1893,59 @@
     - RMCXM51Holster
     - RMCL49Holster
 
+- type: entity
+  parent: CMBeltBaseStorage
+  id: RMCHyposprayRig
+  name: M276 pattern hypospray rig
+  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This experimental configuration is made to hold many vials and a singular hypospray.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/hypo_holster.rsi
+    layers:
+    - state: hypo
+      map: [ "enum.CMHolsterLayers.Fill" ]
+      visible: false
+    - state: icon
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: Clothing
+    slots:
+    - suitStorage
+    - belt
+    sprite: _RMC14/Objects/Clothing/Belt/hypo_holster.rsi
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,13,5 # 21 slots - only 19 usable
+    whitelist:
+      components:
+      - Vial
+      tags:
+      - Hypospray
+  - type: FixedItemSizeStorage
+  - type: CMHolster
+    whitelist:
+      tags:
+      - Hypospray
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-hypospray
+      whitelist:
+        components:
+        - Hypospray
+    - popup: rmc-storage-limit-max-vials
+      count: 18
+      whitelist:
+        components:
+        - Vial
+  - type: Tag
+    tags:
+    - RMCHyposprayHolster
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
 - type: Tag
   id: RMCL49Holster
 
@@ -1943,3 +1996,6 @@
 
 - type: Tag
   id: RMCMkXBelt
+
+- type: Tag
+  id: RMCHyposprayHolster

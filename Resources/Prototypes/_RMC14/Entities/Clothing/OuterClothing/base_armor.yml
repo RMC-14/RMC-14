@@ -73,6 +73,7 @@
       - RMCDetector
       - RMCMatebaHolster
       - RMCFoldingBarricade
+      - RMCHyposprayHolster
 
 - type: entity
   abstract: true
@@ -93,6 +94,7 @@
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
       - RMCFoldingBarricade
+      - RMCHyposprayHolster
 
 - type: entity
   abstract: true
@@ -179,6 +181,7 @@
       - RMCCeremonialSword
       - RMCDetector
       - RMCFoldingBarricade
+      - RMCHyposprayHolster
 
 - type: entity
   abstract: true
