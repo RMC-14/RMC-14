@@ -1,4 +1,4 @@
-﻿using Content.Client.Clothing;
+using Content.Client.Clothing;
 using Content.Client.Items.Systems;
 using Content.Shared._RMC14.Webbing;
 using Content.Shared.Clothing;
@@ -65,7 +65,7 @@ public sealed class WebbingSystem : SharedWebbingSystem
                 clothingSprite.LayerSetState(clothingLayer, sprite.RsiState);
             }
 
-        args.Layers.Add(($"enum.{nameof(WebbingVisualLayers)}.{layer}", new PrototypeLayerData
+        args.Layers.Add(($"webbing_{nameof(WebbingVisualLayers)}.{layer}", new PrototypeLayerData
         {
             RsiPath = sprite.RsiPath.CanonPath,
             State = sprite.RsiState,
