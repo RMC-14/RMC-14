@@ -1,0 +1,52 @@
+- type: job
+  parent: CMSurvivor
+  id: RMCSurvivorVaraderoContractor
+  name: rmc-job-name-survivor-new-varadero-contractor
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivor
+  startingGear: RMCGearSurvivorUNMCContractor
+  greeting: rmc-job-greeting-varadero
+  spawnMenuRoleName: UN Contractor (NV Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetSurvivor
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetVaraderoContractor
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: Language
+      spokenLanguages:
+      - Spanish
+      - English
+      understoodLanguages:
+      - Spanish
+      - English
+      currentLanguage: English
+      defaultLanguage: English
+  useLoadoutOfJob: CMSurvivor # for inheritance
+
+- type: startingGear
+  id: RMCGearSurvivorUNMCContractor
+  equipment:
+    ears: RMCHeadsetMarineNV
+    pocket1: RMCPouchSurvivalFill
+    id: CMIDCardColonist
+
+- type: entity
+  parent: [RMCSurvivorPresetCivilianRareItem, RMCGearSurvivorPresetUNMC]
+  id: RMCGearSurvivorPresetVaraderoContractor
+  name: varadero contractor preset
+  suffix: survivor
+  categories: [ HideSpawnMenu ]
+  components: # TODO RMC14: Variants
+  - type: EntityPreset
+    randomOutfits:
+    - [ CMSheetMetal20, RMCSatchelNV, CMMaskSterile, RMCShoesJackboots, RMCHazardVestYellow, RMCJumpsuitCivilian, RMCEarmuffs  ]
