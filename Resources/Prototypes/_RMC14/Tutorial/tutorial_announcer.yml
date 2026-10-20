@@ -1,0 +1,35 @@
+﻿- type: entity
+  id: RMCBaseTutorialAnnouncer
+  name: RMC Tutorial Announcer Zone
+  description: A trigger zone that plays an announcement to the player that enters it. (One time use)
+  suffix: RMC14
+  components:
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      tutorialTrigger:
+        shape:
+          !type:PhysShapeCircle
+          radius: 2
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+        hard: false
+  - type: RMCTutorialDummy
+    factions:
+    - UNMC
+  - type: RMCTutorialAnnouncement
+    text: "This is a test announcement"
+
+- type: entity
+  parent: RMCBaseTutorialAnnouncer
+  id: RMCBaseTutorialAnnouncer2
+  suffix: RMC14 2
+  components:
+  - type: RMCTutorialDummy
+    factions:
+    - RMCXeno
+  - type: RMCTutorialAnnouncement
+    text: "Xibidi"
