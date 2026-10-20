@@ -62,8 +62,8 @@
   - type: RMCSelectiveFire
     baseFireModes:
     - FullAuto
-    recoilWielded: 3
-    scatterWielded: 10
+    recoilWielded: 0
+    scatterWielded: 2
     baseFireRate: 5
     burstScatterMult: 4
     modifiers:
@@ -73,7 +73,7 @@
         unwieldedScatterMultiplier: 2
         shotsToMaxScatter: 80
   - type: RMCWeaponAccuracy
-    accuracyMultiplier: 1.05
+    accuracyMultiplier: 1.15
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -126,13 +126,15 @@
     skills:
       RMCSkillFirearms: 100
   - type: GunDrainBatteryOnShoot
+    baseDrain: 3.12
+    minDrainMultiplier: 0.5
   - type: GunRequireEquipped
     whitelist:
       components:
       - SmartGunArmor
-  - type: GunToggleableRecoil
-  - type: GunToggleableAutoFire
+  - type: GunAimAssist
   - type: ToggleableMotionDetector
+    batteryDrain: 0.6
   - type: IFFToggle
   - type: MotionDetector
     handToggleable: false
@@ -196,6 +198,10 @@
   description: The actual firearm in the 4-piece ML79A Smartgun System. If you have this, you're about to bring some serious pain to anyone in your way. You may toggle firing restrictions by using a special action.
   suffix: PMC
   components:
+  - type: GunAimAssist
+    active: true
+    batteryDrain: 3.32
+    accuracyPenalty: 0
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml79a.rsi
     layers:
@@ -251,8 +257,8 @@
   suffix: Whiteout
   components:
   - type: RMCSelectiveFire
-    recoilWielded: 3
-    scatterWielded: 10
+    recoilWielded: 0
+    scatterWielded: 2
     baseFireRate: 10
     burstScatterMult: 1
     modifiers:

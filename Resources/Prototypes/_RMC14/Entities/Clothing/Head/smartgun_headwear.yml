@@ -1,0 +1,51 @@
+- type: entity
+  parent: ClothingHeadBase
+  id: RMCHeadBandanaTan
+  name: UNMC bandana, tan
+  description: A lightweight, comfortable bandana worn by heavy-weapon operators, mercenaries and scouts.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/bandana/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/bandana/jungle.rsi
+  - type: HideLayerClothing
+    layers:
+      Hair: HEAD
+  - type: ItemCamouflage
+    camouflageVariations:
+      classic: _RMC14/Objects/Clothing/Head/Hats/bandana/classic.rsi
+      desert: _RMC14/Objects/Clothing/Head/Hats/bandana/desert.rsi
+      jungle: _RMC14/Objects/Clothing/Head/Hats/bandana/jungle.rsi
+      snow: _RMC14/Objects/Clothing/Head/Hats/bandana/snow.rsi
+      urban: _RMC14/Objects/Clothing/Head/Hats/bandana/urban.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: RMCHeadSpecRag
+  name: weapons specialist head-rag
+  description: A hat worn by heavy-weapons operators to block sweat.
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/specrag/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/specrag/jungle.rsi
+  - type: CMArmor
+    melee: 20
+    bullet: 20
+    bio: 15
+    explosionArmor: 15
+  - type: CMHardArmor
+  - type: HideLayerClothing
+    layers:
+      HeadTop: HEAD
+  - type: ItemCamouflage
+    camouflageVariations:
+      classic: _RMC14/Objects/Clothing/Head/Hats/specrag/classic.rsi
+      desert: _RMC14/Objects/Clothing/Head/Hats/specrag/desert.rsi
+      jungle: _RMC14/Objects/Clothing/Head/Hats/specrag/jungle.rsi
+      snow: _RMC14/Objects/Clothing/Head/Hats/specrag/snow.rsi
+      urban: _RMC14/Objects/Clothing/Head/Hats/specrag/urban.rsi
