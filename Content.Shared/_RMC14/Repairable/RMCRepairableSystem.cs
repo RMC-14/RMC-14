@@ -149,7 +149,8 @@ public sealed class RMCRepairableSystem : EntitySystem
             NeedHand = true,
             BreakOnMove = true,
             BlockDuplicate = true,
-            DuplicateCondition = DuplicateConditions.SameEvent
+            DuplicateCondition = DuplicateConditions.SameEvent,
+            RootEntity = true,
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))
@@ -285,7 +286,8 @@ public sealed class RMCRepairableSystem : EntitySystem
                 NeedHand = true,
                 BreakOnMove = true,
                 BlockDuplicate = true,
-                DuplicateCondition = DuplicateConditions.SameEvent
+                DuplicateCondition = DuplicateConditions.SameEvent,
+                RootEntity = true,
             };
 
             _doAfter.TryStartDoAfter(doAfter);
