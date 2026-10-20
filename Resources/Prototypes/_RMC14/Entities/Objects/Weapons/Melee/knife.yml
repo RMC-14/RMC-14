@@ -239,6 +239,10 @@
     - Knife
     - ThrowingKnife
   - type: DeleteOnExplosion
+  - type: RMCSurgeryTool
+    toolTypes:
+    - kind: Scalpel
+      quality: Awful
 
 - type: entity
   name: Fairbairn-Sykes fighting knife
@@ -314,6 +318,10 @@
     useSound:
       path: /Audio/Items/crowbar.ogg
   - type: DeleteOnExplosion
+  - type: RMCSurgeryTool
+    toolTypes:
+    - kind: BoneSaw
+      quality: Substitute
 
 - type: entity
   parent: CMM2132Machete
