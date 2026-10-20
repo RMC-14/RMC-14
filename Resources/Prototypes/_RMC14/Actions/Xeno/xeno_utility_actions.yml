@@ -197,6 +197,7 @@
     useDelay: 1
   - type: InstantAction
     event: !type:HiveLeaderSquadActionEvent
+  - type: RMCInContainerAction
 
 - type: entity
   parent: ActionXenoBase
@@ -213,6 +214,7 @@
     useDelay: 3
   - type: InstantAction
     event: !type:HiveLeaderActionEvent
+  - type: RMCInContainerAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -411,6 +413,7 @@
     event: !type:ActionXenoSpikeShieldEvent
   - type: ActionBlockIfResting
   - type: RMCDazeableAction
+  - type: RMCInContainerAction
 
 - type: entity
   parent: ActionXenoBase
