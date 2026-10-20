@@ -498,7 +498,6 @@
     trackerModes:
     - ProvostMarshal
     - ProvostDeputyMarshal
-    - ProvostChiefInspector
     - ProvostInspector
 
 - type: entity
