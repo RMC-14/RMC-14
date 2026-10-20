@@ -1,0 +1,33 @@
+# New Varadero
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingVaraderoUnaligned
+  suffix: New Varadero, Unaligned
+  components:
+  - type: Paper
+    content: rmc-co-briefing-varadero-unaligned
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingVaraderoHawks
+  suffix: New Varadero, Hawks
+  components:
+  - type: Paper
+    content: rmc-co-briefing-varadero-hawks
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingVaraderoDoves
+  suffix: New Varadero, Doves
+  components:
+  - type: Paper
+    content: rmc-co-briefing-varadero-doves
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingVaraderoMagpies
+  suffix: New Varadero, Magpies
+  components:
+  - type: Paper
+    content: rmc-co-briefing-varadero-magpies

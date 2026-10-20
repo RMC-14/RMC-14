@@ -1,0 +1,33 @@
+# Trijent Dam
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingTrijentUnaligned
+  suffix: Trijent Dam, Unaligned
+  components:
+  - type: Paper
+    content: rmc-co-briefing-trijent-unaligned
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingTrijentHawks
+  suffix: Trijent Dam, Hawks
+  components:
+  - type: Paper
+    content: rmc-co-briefing-trijent-hawks
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingTrijentDoves
+  suffix: Trijent Dam, Doves
+  components:
+  - type: Paper
+    content: rmc-co-briefing-trijent-doves
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingTrijentMagpies
+  suffix: Trijent Dam, Magpies
+  components:
+  - type: Paper
+    content: rmc-co-briefing-trijent-magpies
