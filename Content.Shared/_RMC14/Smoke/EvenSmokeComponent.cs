@@ -1,4 +1,4 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Smoke;
@@ -7,9 +7,6 @@ namespace Content.Shared._RMC14.Smoke;
 [Access(typeof(SharedRMCSmokeSystem))]
 public sealed partial class EvenSmokeComponent : Component
 {
-    [DataField(required: true)]
-    public EntProtoId Spawn;
-
     [DataField]
     public int Range = 2;
 
@@ -22,4 +19,13 @@ public sealed partial class EvenSmokeComponent : Component
     /// </example>
     [DataField]
     public int InitialSpread;
+
+    /// <summary>
+    /// If true, any damage over time effects of this smoke get multiplied by its Range.
+    /// In effect, the closer one is to the center of the smoke, the more damage they take,
+    /// while they take less damage at the edges.
+    /// Specifically, only the regular, non-armor piercing damage gets multiplied.
+    /// </summary>
+    [DataField]
+    public bool RangeMultipliesRegularDamage = false;
 }
