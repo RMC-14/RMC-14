@@ -6,6 +6,7 @@ using Content.Server.Ghost;
 using Content.Server.Light.Components;
 using Content.Server.Power.Components;
 using Content.Shared._RMC14.Light;
+using Content.Shared._RMC14.Power; // RMC14
 using Content.Shared.Audio;
 using Content.Shared.Damage;
 using Content.Shared.DeviceLinking.Events;
@@ -44,6 +45,7 @@ namespace Content.Server.Light.EntitySystems
         [Dependency] private readonly PointLightSystem _pointLight = default!;
         [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
         [Dependency] private readonly DamageOnInteractSystem _damageOnInteractSystem = default!;
+        [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!; // RMC14
 
         private static readonly TimeSpan ThunkDelay = TimeSpan.FromSeconds(2);
         public const string LightBulbContainer = "light_bulb";
@@ -257,6 +259,7 @@ namespace Content.Server.Light.EntitySystems
             var bulbUid = GetBulb(uid, light);
             if (bulbUid == null || !TryComp(bulbUid.Value, out LightBulbComponent? lightBulb))
             {
+                _rmcPower.SetPowerMode(uid, RMCPowerMode.Off); // RMC14
                 SetLight(uid, false, light: light);
                 powerReceiver.Load = 0;
                 _appearance.SetData(uid, PoweredLightVisuals.BulbState, PoweredLightState.Empty, appearance);
@@ -294,6 +297,10 @@ namespace Content.Server.Light.EntitySystems
             }
 
             powerReceiver.Load = (light.On && lightBulb.State == LightBulbState.Normal) ? lightBulb.PowerUse : 0;
+            _rmcPower.SetPowerMode(uid,
+                light.On && lightBulb.State == LightBulbState.Normal
+                    ? RMCPowerMode.Active
+                    : RMCPowerMode.Off); // RMC14
         }
 
         /// <summary>
@@ -335,7 +342,6 @@ namespace Content.Server.Light.EntitySystems
 
         private void OnPowerChanged(EntityUid uid, PoweredLightComponent component, ref PowerChangedEvent args)
         {
-            // TODO: Power moment
             var metadata = MetaData(uid);
 
             if (metadata.EntityPaused || TerminatingOrDeleted(uid, metadata))
