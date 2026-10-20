@@ -1,12 +1,12 @@
 - type: job
   parent: RMCSurvivorSPPSOFBase
-  id: RMCSurvivorSPPSOFSL
+  id: RMCSurvivorSPPSpetsnazSL
   name: rmc-job-name-soro-sof-sl
   startingGear: RMCGearSPPSOFSL
   ranks:
     RMCRankSPPStarshiySerzhant: []
   icon: "RMCJobIconSPPLeader"
-  spawnMenuRoleName: SPP SOF Squad Leader (Sorokyne Special Survivor)
+  spawnMenuRoleName: SPP Spetsnaz Squad Leader (Sorokyne Special Survivor)
   special:
   - !type:AddComponentSpecial
     components:
