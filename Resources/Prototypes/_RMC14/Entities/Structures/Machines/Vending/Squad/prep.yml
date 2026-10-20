@@ -427,8 +427,8 @@
       entries:
       - id: RMCMagazineSmartGun
         amount: 1
-      #- id: CMSpeedLoaderM44Heavy
-      #  amount: 2
+      - id: RMCSpeedLoader44Heavy
+        amount: 2
       - id: RMCSpeedLoader44Marksman
         amount: 2
       - id: RMCMagazinePistolM1984AP
