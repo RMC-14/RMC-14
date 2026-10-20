@@ -16,6 +16,9 @@ rmc-guide-entry-rules-hostile-faction-roleplay = Hostile Factions
 rmc-guide-entry-rules-command-chain = Commander Succession
 rmc-guide-entry-rules-core = Core Rules
 rmc-guide-entry-rules-command = Marine Command/MP Rules
+rmc-guide-entry-rules-fax-responder = Fax Responders
+rmc-guide-entry-rules-fax-responder-weya = Weston-Yamada
+rmc-guide-entry-rules-fax-responder-free-press = Free Press
 rmc-guide-entry-rules-roleplay-standards = Roleplay Standards
 rmc-guide-entry-rules-community = Community Rules
 
