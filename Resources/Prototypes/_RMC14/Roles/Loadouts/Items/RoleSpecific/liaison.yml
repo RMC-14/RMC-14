@@ -48,3 +48,48 @@
       time: 630000 # 175 hours
   equipment:
     outerClothing: RMCJacketWindbreakerWEYA
+
+- type: loadout
+  id: RMCMobCorporateCorgi
+  dummyEntity: RMCMobCorporateCorgi
+  cost: 1
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobLiaison
+      time: 90000 # 25 hours
+  storage:
+    back:
+    - RMCMobCorporateCorgi
+    - RMCPetCollarWeYa
+
+- type: loadout
+  id: RMCMobCorporateCat
+  dummyEntity: RMCMobCorporateCat
+  cost: 1
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobLiaison
+      time: 90000 # 25 hours
+  storage:
+    back:
+    - RMCMobCorporateCat
+    - RMCPetCollarWeYa
+
+- type: loadout
+  id: RMCMobCorporateCatCalico
+  dummyEntity: RMCMobCorporateCatCalico
+  cost: 1
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobLiaison
+      time: 90000 # 25 hours
+  storage:
+    back:
+    - RMCMobCorporateCatCalico
+    - RMCPetCollarWeYa
