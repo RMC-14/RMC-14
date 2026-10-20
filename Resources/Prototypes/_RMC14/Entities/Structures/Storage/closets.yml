@@ -55,11 +55,24 @@
           params:
             volume: -6
   - type: EntityStorageCloseOnMapInit
+  - type: RMCEntityStorageLineBlockable
   - type: XenoToggleChargingDamage
     stageLoss: 2
     damage:
       types:
         Blunt: 40
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.48,0.25,0.48"
+        density: 75
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        - BulletImpassable
 
 - type: entity
   parent: CMClosetBaseUnanchored
