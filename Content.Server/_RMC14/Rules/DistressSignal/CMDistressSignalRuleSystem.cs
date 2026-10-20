@@ -64,6 +64,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Roles;
+using Robust.Server.GameStates;
 using Robust.Server.Audio;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
@@ -154,6 +155,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
     [Dependency] private readonly SharedXenoConstructionSystem _xenoConstruction = default!;
     [Dependency] private readonly SharedRoleSystem _roles = default!;
     [Dependency] private readonly LarvaQueueSystem _larvaQueue = default!;
+    [Dependency] private readonly PvsOverrideSystem _pvs = default!;
 
     private readonly HashSet<string> _operationNames = new();
     private readonly HashSet<string> _operationPrefixes = new();

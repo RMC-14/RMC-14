@@ -55,6 +55,14 @@ public sealed partial class CMDistressSignalRuleSystem
         if (!InitializeXenoMap(rule.Value, comp))
             return;
 
+        var roundInfoEnt = Spawn(null, MapCoordinates.Nullspace);
+        var roundInfo = EnsureComp<RMCRoundInfoComponent>(roundInfoEnt);
+        roundInfo.OperationName = OperationName ?? string.Empty;
+        roundInfo.PlanetName = SelectedPlanetMapName ?? string.Empty;
+        Dirty(roundInfoEnt, roundInfo);
+        _pvs.AddGlobalOverride(roundInfoEnt);
+        Log.Info($"RoundInfo set: op='{roundInfo.OperationName}' planet='{roundInfo.PlanetName}'");
+
         SetupSurvivorJobs(comp);
         ApplyJobSlotScaling(comp, ev);
 
@@ -462,6 +470,17 @@ public sealed partial class CMDistressSignalRuleSystem
                 xform.GridUid != null)
             {
                 EnsureComp<AlmayerComponent>(xform.GridUid.Value);
+
+                var rule = TryGetActiveRuleEntity();
+                if (rule.HasValue)
+                {
+                    var roundInfoQuery = EntityQueryEnumerator<RMCRoundInfoComponent>();
+                    if (roundInfoQuery.MoveNext(out var roundInfoEnt, out var roundInfo) && roundInfo.ShipName == string.Empty)
+                    {
+                        roundInfo.ShipName = MetaData(xform.GridUid.Value).EntityName;
+                        Dirty(roundInfoEnt, roundInfo);
+                    }
+                }
             }
 
             if (comp.SetHunger && TryComp(ev.SpawnResult, out HungerComponent? hunger))
