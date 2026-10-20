@@ -339,3 +339,114 @@
       map: [ "enum.DamageStateVisualLayers.Base" ]
   - type: ExamineRequiresSkill
     skilledExamine: rmc-pill-contents-iron
+
+- type: entity
+  parent: CMPill
+  id: RMCPillHappy
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: RMCSpaceDrugs
+          Quantity: 15
+        - ReagentId: Sugar
+          Quantity: 15
+  - type: Sprite
+    layers:
+    - state: pill16
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: ExamineRequiresSkill
+    skilledExamine: rmc-pill-contents-happy
+
+- type: entity
+  abstract: true
+  id: RMCPillMysteryBase
+  components:
+  - type: RemoveComponents
+    components:
+    - type: ReagentExaminationRequiresSkill
+      skilledExamineContains: cm-pill-contains
+      skilledExamineNone: cm-pill-contains-none
+      skills:
+        RMCSkillMedical: 1
+    - type: ExamineRequiresSkill
+      skilledExamine: cm-pill-contents-none
+      skills:
+        RMCSkillMedical: 1
+
+- type: entity
+  parent: [ CMPillBicaridine, RMCPillMysteryBase ]
+  id: RMCPillMysteryBicaridine
+  suffix: Mystery
+
+- type: entity
+  parent: [ CMPillDexalin, RMCPillMysteryBase ]
+  id: RMCPillMysteryDexalin
+  suffix: Mystery
+
+- type: entity
+  parent: [ CMPillDylovene, RMCPillMysteryBase ]
+  id: RMCPillMysteryDylovene
+  suffix: Mystery
+
+- type: entity
+  parent: [ CMPillInaprovaline, RMCPillMysteryBase ]
+  id: RMCPillMysteryInaprovaline
+  suffix: Mystery
+
+- type: entity
+  parent: [ CMPillKelotane, RMCPillMysteryBase ]
+  id: RMCPillMysteryKelotane
+  suffix: Mystery
+
+- type: entity
+  parent: [ CMPillTricordrazine, RMCPillMysteryBase ]
+  id: RMCPillMysteryTricordrazine
+  suffix: Mystery
+
+- type: entity
+  parent: [ RMCPillRussianRed, RMCPillMysteryBase ]
+  id: RMCPillMysteryRussianRed
+  suffix: Mystery
+
+- type: entity
+  parent: [ RMCPillMeralyneBicaridine, RMCPillMysteryBase ]
+  id: RMCPillMysteryMeralyneBicaridine
+  suffix: Mystery
+
+- type: entity
+  parent: [ RMCPillKelotaneDermaline, RMCPillMysteryBase ]
+  id: RMCPillMysteryKelotaneDermaline
+  suffix: Mystery
+
+- type: entity
+  parent: [ RMCPillImidazoline, RMCPillMysteryBase ]
+  id: RMCPillMysteryImidazoline
+  suffix: Mystery
+
+- type: entity
+  parent: [ RMCPillAntiZed, RMCPillMysteryBase ]
+  id: RMCPillMysteryAntiZed
+  suffix: Mystery
+
+- type: entity
+  parent: [ RMCPillCyanide, RMCPillMysteryBase ]
+  id: RMCPillMysteryCyanide
+  suffix: Mystery
+
+- type: entity
+  parent: [ RMCPillDexalinPlus, RMCPillMysteryBase ]
+  id: RMCPillMysteryDexalinPlus
+  suffix: Mystery
+
+- type: entity
+  parent: [ RMCPillIron, RMCPillMysteryBase ]
+  id: RMCPillMysteryIron
+  suffix: Mystery
+
+- type: entity
+  parent: [ RMCPillHappy, RMCPillMysteryBase ]
+  id: RMCPillMysteryHappy
+  suffix: Mystery

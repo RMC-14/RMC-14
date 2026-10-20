@@ -497,6 +497,8 @@
         - ReagentId: CMSodaBobdaBlue
           Quantity: 50
         maxVol: 50
+  - type: BlackMarketValue
+    value: 10
 
 - type: entity
   parent: CMDrinkCanBobda
