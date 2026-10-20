@@ -24,7 +24,7 @@
     - Burst
     - FullAuto
     soundGunshot:
-      collection: CMM54CShoot
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m54c_2.ogg
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
