@@ -2,7 +2,7 @@
   parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
   name: Model 12 pump shotgun
   id: RMCWeaponShotgunM12
-  description: An eight-round pump action shotgun with four-round capacity dual internal tube magazines allowing for quick reloading and highly accurate fire. Used exclusively by Colony Marshals. # TODO RMC14 : You can switch the active internal magazine by toggling the shotgun tube.
+  description: An eight-round pump action shotgun with four-round capacity dual internal tube magazines allowing for quick reloading and highly accurate fire. Used exclusively by Colony Marshals. You can switch the active internal magazine by toggling the shotgun tube.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Shotguns/model_12.rsi
@@ -35,7 +35,8 @@
       - RMCShellShotgunIncendiaryBuckshot
       - RMCShellShotgunIncendiary
       - RMCShellShotgunBeanbag
-    capacity: 8
+    capacity: 4
+  - type: RMCDualTube
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1.15
     accuracyMultiplierUnwielded: 0.5

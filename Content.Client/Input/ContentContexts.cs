@@ -148,6 +148,7 @@ namespace Content.Client.Input
             human.AddFunction(CMKeyFunctions.RMCActivateAttachableUnderbarrel);
             human.AddFunction(CMKeyFunctions.RMCFieldStripHeldItem);
             human.AddFunction(CMKeyFunctions.RMCCycleFireMode);
+            human.AddFunction(CMKeyFunctions.RMCToggleShotgunTube);
             human.AddFunction(CMKeyFunctions.CMUniqueAction);
             human.AddFunction(CMKeyFunctions.CMHolsterPrimary);
             human.AddFunction(CMKeyFunctions.CMHolsterSecondary);
