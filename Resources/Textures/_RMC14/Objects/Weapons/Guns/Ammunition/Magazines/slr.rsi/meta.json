@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "license": "CC0-1.0",
+  "copyright": "Created for RMC-14/RMC-14 by @TadJohnson00 (GitHub).",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "base"
+    },
+    {
+      "name": "mag-1"
+    },
+    {
+      "name": "ammo_band"
+    }
+  ]
+}
