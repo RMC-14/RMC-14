@@ -1,0 +1,5 @@
+<BoxContainer xmlns="https://spacestation14.io"
+              Orientation="Horizontal">
+    <Label Name="NameLabel" MinWidth="130" FontColorOverride="#8E9AA6" />
+    <Label Name="ValueLabel" HorizontalExpand="True" />
+</BoxContainer>

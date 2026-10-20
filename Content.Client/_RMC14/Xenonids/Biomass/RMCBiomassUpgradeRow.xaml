@@ -1,0 +1,39 @@
+<controls:RMCBiomassUpgradeRow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Xenonids.Biomass"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    HorizontalExpand="True">
+    <controls:RMCBiomassUpgradeRow.PanelOverride>
+        <graphics:StyleBoxFlat BackgroundColor="#150E00" BorderColor="#8A6800" BorderThickness="0 0 0 2" />
+    </controls:RMCBiomassUpgradeRow.PanelOverride>
+    <BoxContainer Orientation="Horizontal" Margin="4" SeparationOverride="4">
+        <Label Name="NameLabel" Access="Public" MinWidth="330" MaxWidth="330" ClipText="True" FontColorOverride="#FFD21A" />
+        <PanelContainer MinWidth="2" VerticalExpand="True">
+            <PanelContainer.PanelOverride>
+                <graphics:StyleBoxFlat BackgroundColor="#8A6800" />
+            </PanelContainer.PanelOverride>
+        </PanelContainer>
+        <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+            <PanelContainer HorizontalAlignment="Left">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat BackgroundColor="#00000000" BorderColor="#FFD21A" BorderThickness="0 0 0 2" />
+                </PanelContainer.PanelOverride>
+                <Label Name="ClearanceLabel" Access="Public" FontColorOverride="#FFD21A" />
+            </PanelContainer>
+            <Label Name="TrendLabel" Access="Public" FontColorOverride="#8A6800" />
+        </BoxContainer>
+        <PanelContainer MinWidth="2" VerticalExpand="True">
+            <PanelContainer.PanelOverride>
+                <graphics:StyleBoxFlat BackgroundColor="#8A6800" />
+            </PanelContainer.PanelOverride>
+        </PanelContainer>
+        <BoxContainer Orientation="Vertical" MinWidth="140">
+            <Button Name="PrintButton" Access="Public" HorizontalExpand="True" />
+            <BoxContainer Orientation="Horizontal" Margin="0 2 0 0" SeparationOverride="2">
+                <Button Name="Print2Button" Access="Public" Text="x2" HorizontalExpand="True" />
+                <Button Name="Print5Button" Access="Public" Text="x5" HorizontalExpand="True" />
+                <Button Name="Print10Button" Access="Public" Text="x10" HorizontalExpand="True" />
+            </BoxContainer>
+        </BoxContainer>
+    </BoxContainer>
+</controls:RMCBiomassUpgradeRow>

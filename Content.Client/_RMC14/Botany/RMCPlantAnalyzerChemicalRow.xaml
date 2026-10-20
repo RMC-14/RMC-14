@@ -1,7 +1,8 @@
-<PanelContainer xmlns="https://spacestation14.io">
-    <BoxContainer Orientation="Horizontal" VerticalAlignment="Center" Margin="4 2">
-        <PanelContainer Name="Marker" VerticalExpand="True" MinWidth="4" Margin="0 1 6 1" />
-        <Label Name="NameLabel" HorizontalExpand="True" />
-        <Label Name="AmountLabel" FontColorOverride="#9AA0AC" />
-    </BoxContainer>
-</PanelContainer>
+<BoxContainer xmlns="https://spacestation14.io"
+              Orientation="Horizontal"
+              HorizontalExpand="True">
+    <TextureRect Name="FlaskIcon" Stretch="KeepAspectCentered" SetSize="11 11" Margin="0 0 5 0"
+                 VerticalAlignment="Center" />
+    <Label Name="AmountLabel" Margin="0 0 4 0" />
+    <Label Name="NameLabel" HorizontalExpand="True" />
+</BoxContainer>

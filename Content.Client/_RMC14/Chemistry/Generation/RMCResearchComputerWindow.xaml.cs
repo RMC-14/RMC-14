@@ -17,9 +17,6 @@ namespace Content.Client._RMC14.Chemistry.Generation;
 [GenerateTypedNameReferences]
 public sealed partial class RMCResearchComputerWindow : DefaultWindow
 {
-    private const int ScanTimeColumnWidth = 100;
-    private const int TypeColumnWidth = 140;
-
     public static readonly Color AmberBright = Color.FromHex("#FAC000");
     public static readonly Color AmberDim = Color.FromHex("#C69214");
     public static readonly Color AmberBlack = Color.FromHex("#221801");
@@ -33,7 +30,7 @@ public sealed partial class RMCResearchComputerWindow : DefaultWindow
 
     public readonly Label BrokerClearanceLabel;
 
-    private readonly List<TabButtonControl> _tabButtons = new();
+    private readonly List<RMCResearchTabButton> _tabButtons = new();
 
     public RMCResearchComputerWindow()
     {
@@ -99,7 +96,8 @@ public sealed partial class RMCResearchComputerWindow : DefaultWindow
     private void AddTabButton(string iconPath, string line1, string line2)
     {
         var index = _tabButtons.Count;
-        var tab = new TabButtonControl(iconPath, line1, line2);
+        var tab = new RMCResearchTabButton();
+        tab.Setup(iconPath, line1, line2);
         tab.OnPressed += _ => Tabs.CurrentTab = index;
         TabBar.AddChild(tab);
         _tabButtons.Add(tab);
@@ -127,218 +125,5 @@ public sealed partial class RMCResearchComputerWindow : DefaultWindow
         row.Margin = new Thickness(10, 0, 6, 0);
         row.SeparationOverride = 8;
         return row.Label;
-    }
-
-    private sealed class TabButtonControl : Button
-    {
-        private readonly RMCIconRect _icon;
-        private readonly Label _line1;
-        private readonly Label _line2;
-
-        public TabButtonControl(string iconPath, string line1, string line2)
-        {
-            HorizontalExpand = true;
-            Modulate = Color.White;
-            ModulateSelfOverride = Color.White;
-            StyleBoxOverride = new StyleBoxFlat
-            {
-                BackgroundColor = Color.Transparent,
-                BorderColor = AmberBorder,
-                BorderThickness = new Thickness(4),
-            };
-
-            var row = new BoxContainer
-            {
-                Orientation = BoxContainer.LayoutOrientation.Horizontal,
-                HorizontalAlignment = HAlignment.Center,
-                VerticalAlignment = VAlignment.Center,
-                SeparationOverride = 8,
-                Margin = new Thickness(6, 6),
-            };
-
-            _icon = new RMCIconRect(iconPath, 24);
-            _icon.BindHover(this);
-
-            var textCol = new BoxContainer
-            {
-                Orientation = BoxContainer.LayoutOrientation.Vertical,
-                VerticalAlignment = VAlignment.Center,
-            };
-
-            _line1 = new Label { Text = line1, HorizontalAlignment = HAlignment.Center };
-            _line2 = new Label { Text = line2, HorizontalAlignment = HAlignment.Center };
-            textCol.AddChild(_line1);
-            textCol.AddChild(_line2);
-
-            row.AddChild(_icon);
-            row.AddChild(textCol);
-            AddChild(row);
-
-            SetActive(false);
-        }
-
-        public void SetActive(bool active)
-        {
-            _icon.IdleColor = active ? RMCIcons.Idle : RMCIcons.Yellow;
-
-            var box = (StyleBoxFlat) StyleBoxOverride!;
-            box.BackgroundColor = active ? AmberBright : Color.Transparent;
-
-            var fontColor = active ? AmberBlack : AmberBright;
-            _line1.FontColorOverride = fontColor;
-            _line2.FontColorOverride = fontColor;
-        }
-    }
-
-    public sealed class ContractCard : BoxContainer
-    {
-        public readonly Label NameLabel;
-        public readonly Label DifficultyLabel;
-        public readonly Label RecipeHintLabel;
-        public readonly Label PropertyHintLabel;
-        public readonly Button TakeButton;
-        public readonly Label TakeButtonLabel;
-
-        private readonly RMCIconRect _takeIcon;
-
-        public int SlotIndex;
-        public Action<int>? OnTake;
-
-        public ContractCard(Font boldFont, Font smallFont)
-        {
-            Orientation = LayoutOrientation.Vertical;
-            HorizontalExpand = true;
-
-            var panel = new PanelContainer
-            {
-                PanelOverride = new StyleBoxFlat { BackgroundColor = AmberBlack, BorderColor = AmberBright, BorderThickness = new Thickness(1) },
-            };
-
-            var inner = new BoxContainer { Orientation = LayoutOrientation.Vertical, Margin = new Thickness(6) };
-
-            NameLabel = new Label { FontColorOverride = AmberBright };
-
-            var divider = new PanelContainer
-            {
-                MinHeight = 1,
-                Margin = new Thickness(0, 2, 0, 4),
-                PanelOverride = new StyleBoxFlat { BackgroundColor = AmberBright },
-            };
-
-            DifficultyLabel = new Label { FontColorOverride = AmberDim };
-            RecipeHintLabel = new Label { FontColorOverride = AmberDim, FontOverride = smallFont };
-            PropertyHintLabel = new Label { FontColorOverride = AmberDim, FontOverride = smallFont };
-            TakeButton = new Button
-            {
-                HorizontalExpand = true,
-                Margin = new Thickness(0, 4, 0, 0),
-                Modulate = Color.White,
-                ModulateSelfOverride = Color.White,
-                StyleBoxOverride = new StyleBoxFlat
-                {
-                    BackgroundColor = AmberBright,
-                    BorderColor = AmberBorder,
-                    BorderThickness = new Thickness(2),
-                },
-            };
-
-            var takeRow = TakeButton.AddIconLabel(RMCIcons.Print, string.Empty, 28, fontColor: AmberBlack);
-            takeRow.SeparationOverride = 8;
-            takeRow.Margin = new Thickness(10, 4);
-            takeRow.Label.FontOverride = boldFont;
-            _takeIcon = takeRow.Icon;
-            TakeButtonLabel = takeRow.Label;
-
-            inner.AddChild(NameLabel);
-            inner.AddChild(divider);
-            inner.AddChild(DifficultyLabel);
-            inner.AddChild(RecipeHintLabel);
-            inner.AddChild(PropertyHintLabel);
-            inner.AddChild(TakeButton);
-
-            panel.AddChild(inner);
-            AddChild(panel);
-
-            TakeButton.OnPressed += _ => OnTake?.Invoke(SlotIndex);
-        }
-
-        public void SetEnabledVisual(bool enabled)
-        {
-            _takeIcon.IdleColor = enabled ? RMCIcons.Idle : RMCIcons.Yellow;
-            TakeButtonLabel.FontColorOverride = enabled ? AmberBlack : AmberBright;
-        }
-    }
-
-    public sealed class DocumentRow : BoxContainer
-    {
-        public readonly Label ScanTimeLabel;
-        public readonly Label TypeLabel;
-        public readonly Label CompoundLabel;
-        public readonly Button ReadButton;
-        public readonly Button PrintButton;
-        public readonly Button AnnounceButton;
-        public readonly Button PublishButton;
-
-        public string Category = string.Empty;
-        public string Title = string.Empty;
-        public bool Published;
-        public Action<string, string, bool>? OnRead;
-        public Action<string, string, bool>? OnPrint;
-        public Action<string, string, bool>? OnPublishToggle;
-        public Action<string, string>? OnAnnounce;
-
-        public DocumentRow()
-        {
-            Orientation = LayoutOrientation.Horizontal;
-            HorizontalExpand = true;
-            SeparationOverride = 4;
-            Margin = new Thickness(0, 0, 0, 2);
-
-            ScanTimeLabel = new Label { MinWidth = ScanTimeColumnWidth, FontColorOverride = AmberDim };
-            TypeLabel = new Label { MinWidth = TypeColumnWidth, FontColorOverride = AmberDim };
-            CompoundLabel = new Label { HorizontalExpand = true, FontColorOverride = AmberDim };
-            ReadButton = new Button { MinWidth = 90 };
-            PrintButton = new Button { MinWidth = 90 };
-            AnnounceButton = new Button { MinWidth = 90 };
-            PublishButton = new Button { Text = "Publish", MinWidth = 80 };
-
-            foreach (var button in new[] { ReadButton, PrintButton, AnnounceButton, PublishButton })
-            {
-                button.Modulate = Color.White;
-                button.ModulateSelfOverride = Color.White;
-                button.StyleBoxOverride = new StyleBoxFlat
-                {
-                    BackgroundColor = AmberBright,
-                    BorderColor = AmberBorder,
-                    BorderThickness = new Thickness(2),
-                };
-                button.Label.FontColorOverride = AmberBlack;
-            }
-
-            IconButton(ReadButton, RMCIcons.Book, "Read");
-            IconButton(PrintButton, RMCIcons.Print, "Print");
-            IconButton(AnnounceButton, RMCIcons.Radiation, "Announce");
-
-            AddChild(ScanTimeLabel);
-            AddChild(TypeLabel);
-            AddChild(CompoundLabel);
-            AddChild(ReadButton);
-            AddChild(PrintButton);
-            AddChild(AnnounceButton);
-            AddChild(PublishButton);
-
-            ReadButton.OnPressed += _ => OnRead?.Invoke(Category, Title, Published);
-            PrintButton.OnPressed += _ => OnPrint?.Invoke(Category, Title, Published);
-            AnnounceButton.OnPressed += _ => OnAnnounce?.Invoke(Category, Title);
-            PublishButton.OnPressed += _ => OnPublishToggle?.Invoke(Category, Title, Published);
-        }
-
-        private static void IconButton(Button button, string texturePath, string text)
-        {
-            var row = button.AddIconLabel(texturePath, text, 16, HAlignment.Center, AmberBlack);
-            row.SeparationOverride = 4;
-            row.Margin = new Thickness(4, 2);
-        }
-
     }
 }

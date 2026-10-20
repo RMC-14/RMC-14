@@ -1,77 +1,123 @@
-<controls:FancyWindow
+<botany:LysisCentrifugeWindow
     xmlns="https://spacestation14.io"
-    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
     xmlns:botany="clr-namespace:Content.Client._RMC14.Botany"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
-    MinWidth="520"
-    MinHeight="480"
-    SetSize="520 560">
+    MinSize="380 120"
+    MaxWidth="720">
     <PanelContainer>
         <PanelContainer.PanelOverride>
-            <graphics:StyleBoxFlat BackgroundColor="#181C24" />
+            <graphics:StyleBoxFlat BackgroundColor="#16181B" />
         </PanelContainer.PanelOverride>
-        <BoxContainer Orientation="Horizontal" Margin="6" SeparationOverride="6">
 
-            <!-- Left: seed portrait + seed actions -->
-            <PanelContainer>
-                <PanelContainer.PanelOverride>
-                    <graphics:StyleBoxFlat BackgroundColor="#12141A" />
-                </PanelContainer.PanelOverride>
-                <BoxContainer Orientation="Vertical" MinWidth="150" MaxWidth="150" Margin="8" SeparationOverride="4">
-                    <SpriteView Name="SeedSpriteView" Access="Public"
-                                SetSize="64 64"
-                                OverrideDirection="South"
-                                Scale="2 2"
-                                Stretch="Fit"
-                                HorizontalAlignment="Center"
-                                Margin="0 0 0 4" />
-                    <PanelContainer Name="SeedStatusPanel" HorizontalExpand="True" Margin="0 0 0 6" MinHeight="26">
-                        <Label Name="SeedStatusLabel" Margin="6 1" HorizontalAlignment="Center" ClipText="True" />
-                    </PanelContainer>
-                    <ScrollContainer HScrollEnabled="False" VerticalExpand="True" Margin="0 0 0 6">
-                        <GridContainer Name="SeedTraitsGrid" Columns="2" HSeparationOverride="6" VSeparationOverride="2" />
-                    </ScrollContainer>
-                    <Button Name="EjectSeedButton" Access="Public" HorizontalExpand="True" Margin="0 0 0 2" />
-                    <Button Name="ProcessSeedButton" Access="Public" HorizontalExpand="True" />
-                </BoxContainer>
-            </PanelContainer>
+        <ScrollContainer Margin="4" HorizontalExpand="True" VerticalExpand="True" HScrollEnabled="False"
+                         ReturnMeasure="True">
+            <BoxContainer Orientation="Vertical">
+                <!-- seed -->
+                <PanelContainer Margin="0 0 0 4">
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BackgroundColor="#1F2327" />
+                    </PanelContainer.PanelOverride>
+                    <BoxContainer Orientation="Vertical" Margin="6 5" SeparationOverride="4">
+                        <PanelContainer Name="SeedBanner">
+                            <BoxContainer Orientation="Horizontal" Margin="5 1">
+                                <Label Name="SeedBannerLabel" FontColorOverride="White" Margin="0 0 6 0" />
+                                <Label Name="SeedBannerDetail" FontColorOverride="#F3F6F5" HorizontalExpand="True" />
+                            </BoxContainer>
+                        </PanelContainer>
 
-            <!-- Right: genome buffer, disc, gene sequences -->
-            <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" SeparationOverride="4">
-
-                <PanelContainer Name="GenomeHeader">
-                    <Label Text="GENOME BUFFER" FontColorOverride="#FFFFFF" Margin="6 2" />
+                        <BoxContainer Orientation="Horizontal" SeparationOverride="6">
+                            <SpriteView Name="SeedSpriteView" Access="Public"
+                                        SetSize="48 48"
+                                        OverrideDirection="South"
+                                        Scale="1.5 1.5"
+                                        Stretch="Fit"
+                                        VerticalAlignment="Center" />
+                            <BoxContainer Orientation="Vertical" HorizontalExpand="True" SeparationOverride="4"
+                                          VerticalAlignment="Center">
+                                <BoxContainer Name="SeedChips" Orientation="Horizontal" />
+                                <BoxContainer Orientation="Horizontal" SeparationOverride="4">
+                                    <Button Name="ProcessSeedButton" Access="Public" Text="Process Seed"
+                                            StyleClasses="OpenRight" />
+                                    <Button Name="EjectSeedButton" Access="Public" Text="Eject Seed"
+                                            StyleClasses="OpenLeft" />
+                                </BoxContainer>
+                            </BoxContainer>
+                        </BoxContainer>
+                    </BoxContainer>
                 </PanelContainer>
-                <PanelContainer Name="GenomeStatusPanel" Margin="0 3 0 0" MinHeight="26">
-                    <Label Name="GenomeNameLabel" Margin="6 1" VerticalAlignment="Center" />
+
+                <!-- seed traits -->
+                <PanelContainer Name="SeedTraitsCard" Access="Public" Margin="0 0 0 4">
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BackgroundColor="#1F2327" />
+                    </PanelContainer.PanelOverride>
+                    <BoxContainer Orientation="Vertical" Margin="0 4 0 5">
+                        <Label Text="Seed Traits" StyleClasses="LabelKeyText" Margin="6 0" />
+                        <PanelContainer MinHeight="2" Margin="0 3 0 4">
+                            <PanelContainer.PanelOverride>
+                                <graphics:StyleBoxFlat BackgroundColor="#4972A1" />
+                            </PanelContainer.PanelOverride>
+                        </PanelContainer>
+                        <BoxContainer Name="SeedTraitRows" Orientation="Vertical" Margin="8 0" SeparationOverride="2" />
+                    </BoxContainer>
                 </PanelContainer>
-                <botany:RMCBotanyMetricControl Name="DegradationMetric" Access="Public" Margin="0 3 0 0" />
-                <Button Name="ClearBufferButton" Access="Public" HorizontalExpand="True" Margin="0 3 0 6" />
 
-                <PanelContainer Name="DiscHeader">
-                    <Label Text="DATA DISC" FontColorOverride="#FFFFFF" Margin="6 2" />
+                <!-- genome buffer + disc -->
+                <PanelContainer Margin="0 0 0 4">
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BackgroundColor="#1F2327" />
+                    </PanelContainer.PanelOverride>
+                    <BoxContainer Orientation="Vertical" Margin="0 4 0 5">
+                        <Label Text="Genome Buffer" StyleClasses="LabelKeyText" Margin="6 0" />
+                        <PanelContainer MinHeight="2" Margin="0 3 0 4">
+                            <PanelContainer.PanelOverride>
+                                <graphics:StyleBoxFlat BackgroundColor="#4972A1" />
+                            </PanelContainer.PanelOverride>
+                        </PanelContainer>
+                        <BoxContainer Orientation="Vertical" Margin="8 0" SeparationOverride="4">
+                            <BoxContainer Orientation="Horizontal">
+                                <Label Text="Genome:" MinWidth="100" FontColorOverride="#8E9AA6"
+                                       VerticalAlignment="Center" />
+                                <Label Name="GenomeLabel" HorizontalExpand="True" VerticalAlignment="Center" />
+                                <Button Name="ClearBufferButton" Access="Public" Text="Clear Buffer"
+                                        StyleClasses="OpenBoth" VerticalAlignment="Center" />
+                            </BoxContainer>
+                            <BoxContainer Orientation="Horizontal">
+                                <Label Text="Degradation:" MinWidth="100" FontColorOverride="#8E9AA6"
+                                       VerticalAlignment="Center" />
+                                <ProgressBar Name="DegradationBar" HorizontalExpand="True" SetHeight="22"
+                                             VerticalAlignment="Center" MinValue="0" MaxValue="1">
+                                    <Label Name="DegradationBarText" Align="Right" Margin="0 0 4 0"
+                                           VerticalAlignment="Center" />
+                                </ProgressBar>
+                            </BoxContainer>
+                            <BoxContainer Orientation="Horizontal">
+                                <Label Text="Data Disc:" MinWidth="100" FontColorOverride="#8E9AA6"
+                                       VerticalAlignment="Center" />
+                                <Label Name="DiscLabel" HorizontalExpand="True" VerticalAlignment="Center" />
+                                <Button Name="EjectDiscButton" Access="Public" Text="Eject Disc"
+                                        StyleClasses="OpenBoth" VerticalAlignment="Center" />
+                            </BoxContainer>
+                        </BoxContainer>
+                    </BoxContainer>
                 </PanelContainer>
-                <BoxContainer Orientation="Horizontal" Margin="0 3 0 6">
-                    <PanelContainer Name="DiscStatusPanel" HorizontalExpand="True" MinHeight="26">
-                        <Label Name="DiscStatusLabel" Margin="6 1" VerticalAlignment="Center" />
-                    </PanelContainer>
-                    <Button Name="EjectDiscButton" Access="Public" Margin="4 0 0 0" />
-                </BoxContainer>
 
-                <BoxContainer Name="GenesSection" Access="Public" Orientation="Vertical" VerticalExpand="True">
-                    <PanelContainer Name="GenesHeader">
-                        <Label Text="GENE SEQUENCES" FontColorOverride="#FFFFFF" Margin="6 2" />
-                    </PanelContainer>
-                    <ScrollContainer HScrollEnabled="False" VerticalExpand="True" Margin="0 3 0 0">
-                        <BoxContainer Name="GeneRowsContainer"
-                                      Access="Public"
-                                      Orientation="Vertical"
-                                      HorizontalExpand="True" />
-                    </ScrollContainer>
-                </BoxContainer>
-
+                <!-- gene sequences -->
+                <PanelContainer Name="GenesCard" Access="Public">
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BackgroundColor="#1F2327" />
+                    </PanelContainer.PanelOverride>
+                    <BoxContainer Orientation="Vertical" Margin="0 4 0 5">
+                        <Label Text="Gene Sequences" StyleClasses="LabelKeyText" Margin="6 0" />
+                        <PanelContainer MinHeight="2" Margin="0 3 0 4">
+                            <PanelContainer.PanelOverride>
+                                <graphics:StyleBoxFlat BackgroundColor="#4972A1" />
+                            </PanelContainer.PanelOverride>
+                        </PanelContainer>
+                        <BoxContainer Name="GeneRowsContainer" Access="Public" Orientation="Vertical" Margin="6 0" />
+                    </BoxContainer>
+                </PanelContainer>
             </BoxContainer>
-
-        </BoxContainer>
+        </ScrollContainer>
     </PanelContainer>
-</controls:FancyWindow>
+</botany:LysisCentrifugeWindow>

@@ -1,0 +1,12 @@
+<PanelContainer xmlns="https://spacestation14.io"
+                xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                Margin="0 0 4 0"
+                VerticalAlignment="Center">
+    <PanelContainer.PanelOverride>
+        <graphics:StyleBoxFlat BackgroundColor="#16181B" BorderColor="#4972A1" BorderThickness="1" />
+    </PanelContainer.PanelOverride>
+    <BoxContainer Orientation="Horizontal" Margin="4 0">
+        <Label Name="NameLabel" />
+        <Label Name="ValueLabel" />
+    </BoxContainer>
+</PanelContainer>

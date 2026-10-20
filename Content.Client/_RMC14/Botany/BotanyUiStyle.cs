@@ -1,54 +1,19 @@
-using Content.Client._RMC14.UserInterface;
 using Content.Shared._RMC14.Botany;
-using Robust.Client.Graphics;
-using Robust.Client.UserInterface;
-using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Maths;
 
 namespace Content.Client._RMC14.Botany;
 
 internal static class BotanyUiStyle
 {
-    public static readonly Color HeaderColor = Color.FromHex("#12141A");
-    public static readonly Color GreenColor = Color.FromHex("#4CAF50");
-    public static readonly Color TanColor = Color.FromHex("#ffb950");
-    public static readonly Color RedColor = Color.FromHex("#8B2020");
-    public static readonly Color ActionColor = Color.FromHex("#d6d6d6");
+    public static readonly Color StatusStableColor = Color.FromHex("#2C6E55");
+    public static readonly Color StatusSeriousColor = Color.FromHex("#8B6334");
+    public static readonly Color StatusCriticalColor = Color.FromHex("#8B2F35");
+    public static readonly Color StatusInfoColor = Color.FromHex("#2F5D8A");
+    public static readonly Color StatusEmptyColor = Color.FromHex("#4A5058");
 
-    public static readonly Color MetricHealthColor = Color.FromHex("#E06C75");
-    public static readonly Color MetricGrowthColor = Color.FromHex("#98C379");
-    public static readonly Color MetricTemperatureColor = Color.FromHex("#E06C75");
-    public static readonly Color MetricPressureColor = Color.FromHex("#61AFEF");
-    public static readonly Color MetricWaterColor = Color.FromHex("#56B6C2");
-    public static readonly Color MetricNutrientsColor = Color.FromHex("#E5C07B");
-    public static readonly Color MetricWeedsColor = Color.FromHex("#7AAB55");
-    public static readonly Color MetricPestsColor = Color.FromHex("#D19A66");
-    public static readonly Color MetricToxinsColor = Color.FromHex("#C678DD");
-
-    public static readonly Color RowColorA = Color.FromHex("#1B1B1E");
-    public static readonly Color RowColorB = Color.FromHex("#202025");
-
-    public static StyleBoxFlat Flat(Color color)
-    {
-        return new StyleBoxFlat
-        {
-            BackgroundColor = color,
-            ContentMarginLeftOverride = 6,
-            ContentMarginRightOverride = 6,
-            ContentMarginTopOverride = 1,
-            ContentMarginBottomOverride = 1,
-        };
-    }
-
-    public static Color GetRowColor(int rowIndex)
-    {
-        return rowIndex % 2 == 0 ? RowColorA : RowColorB;
-    }
-
-    public static void Header(PanelContainer panel)
-    {
-        panel.PanelOverride = Flat(HeaderColor);
-    }
+    public static readonly Color ValueGoodColor = Color.FromHex("#25B732");
+    public static readonly Color ValueWarnColor = Color.FromHex("#FFAA00");
+    public static readonly Color ValueBadColor = Color.FromHex("#FF6060");
 
     public static string ShortSeedName(string name)
     {
@@ -56,21 +21,6 @@ internal static class BotanyUiStyle
         return name.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)
             ? name[prefix.Length..]
             : name;
-    }
-
-    public static void AddStatRow(GridContainer grid, string name, string value)
-    {
-        grid.AddChild(new Label { Text = name, StyleClasses = { "LabelSubText" } });
-        grid.AddChild(new Label { Text = value });
-    }
-
-    public static void SetStatRows(GridContainer grid, IEnumerable<(string Name, string Value)> rows)
-    {
-        grid.DisposeAllChildren();
-        foreach (var (name, value) in rows)
-        {
-            AddStatRow(grid, name, value);
-        }
     }
 
     public static string GetHarvestLabel(HarvestType type)
@@ -81,43 +31,5 @@ internal static class BotanyUiStyle
             HarvestType.SelfHarvest => "Self-harvesting",
             _ => "No repeat",
         };
-    }
-
-    public static void StatusRow(PanelContainer panel, Label label, string text, Color color)
-    {
-        label.Text = text;
-        label.FontColorOverride = color == RedColor ? Color.White : Color.Black;
-        panel.PanelOverride = Flat(color);
-    }
-
-    public static void ClearStatusRow(PanelContainer panel, Label label)
-    {
-        label.Text = string.Empty;
-        panel.PanelOverride = Flat(HeaderColor);
-    }
-
-    public static RMCIconLabelRow IconButton(
-        Button button,
-        string texturePath,
-        string text,
-        Color? color = null,
-        bool bordered = false,
-        Control.HAlignment alignment = Control.HAlignment.Center)
-    {
-        button.StyleBoxOverride = bordered
-            ? new StyleBoxFlat
-            {
-                BackgroundColor = color ?? TanColor,
-                BorderColor = Color.Black,
-                BorderThickness = new Thickness(1),
-                ContentMarginLeftOverride = 10,
-                ContentMarginRightOverride = 10,
-                ContentMarginTopOverride = 1,
-                ContentMarginBottomOverride = 1,
-            }
-            : Flat(color ?? TanColor);
-        button.ModulateSelfOverride = Color.White;
-
-        return button.AddIconLabel(texturePath, text, alignment: alignment);
     }
 }

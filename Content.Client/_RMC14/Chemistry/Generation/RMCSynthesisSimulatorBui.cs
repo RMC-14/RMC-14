@@ -8,7 +8,7 @@ using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
-using Robust.Shared.Containers;
+using Content.Shared.Containers.ItemSlots;
 using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
 using static Content.Client._RMC14.Chemistry.Generation.RMCSynthesisSimulatorWindow;
@@ -18,10 +18,10 @@ namespace Content.Client._RMC14.Chemistry.Generation;
 [UsedImplicitly]
 public sealed class RMCSynthesisSimulatorBui : BoundUserInterface, IRefreshableBui
 {
-    [Dependency] private readonly IEntityManager _entity = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
-    private readonly SharedContainerSystem _container;
+    private readonly ItemSlotsSystem _itemSlots;
+    private readonly SharedRMCChemistryResearchSystem _research;
     private readonly SharedRMCSynthesisSimulatorSystem _simulator;
     private readonly RMCReagentSystem _rmcReagent;
 
@@ -32,9 +32,10 @@ public sealed class RMCSynthesisSimulatorBui : BoundUserInterface, IRefreshableB
     public RMCSynthesisSimulatorBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         IoCManager.InjectDependencies(this);
-        _container = _entity.System<SharedContainerSystem>();
-        _simulator = _entity.System<SharedRMCSynthesisSimulatorSystem>();
-        _rmcReagent = _entity.System<RMCReagentSystem>();
+        _itemSlots = EntMan.System<ItemSlotsSystem>();
+        _research = EntMan.System<SharedRMCChemistryResearchSystem>();
+        _simulator = EntMan.System<SharedRMCSynthesisSimulatorSystem>();
+        _rmcReagent = EntMan.System<RMCReagentSystem>();
     }
 
     protected override void Open()
@@ -68,22 +69,14 @@ public sealed class RMCSynthesisSimulatorBui : BoundUserInterface, IRefreshableB
 
     public void Refresh()
     {
-        if (_window is not { IsOpen: true } || !_entity.TryGetComponent(Owner, out RMCSynthesisSimulatorComponent? comp))
+        if (_window is not { IsOpen: true } || !EntMan.TryGetComponent(Owner, out RMCSynthesisSimulatorComponent? comp))
             return;
 
-        var hasResearch = TryGetResearch(out var research);
-        var credits = hasResearch ? research.Credits : 0;
-        var clearance = hasResearch ? research.ClearanceLevel : 1;
+        var hasResearch = _research.TryGetResearch(out var research);
+        var credits = hasResearch ? research!.Value.Comp.Credits : 0;
+        var clearance = hasResearch ? research!.Value.Comp.ClearanceLevel : 1;
 
-        _window.CreditsLabel.Text = $"RESEARCH CREDITS: {credits}";
-        _window.ClearanceLabel.Text = $"CLEARANCE: {clearance}";
-
-        _window.CreditsBar.MaxValue = 100;
-        _window.CreditsBar.Value = Math.Clamp(credits, 0, 100);
-        _window.CreditsBar.ForegroundStyleBoxOverride = new StyleBoxFlat
-        {
-            BackgroundColor = credits >= 60 ? CreditsGood : credits >= 15 ? CreditsAverage : CreditsBad,
-        };
+        _window.SetCredits(credits, clearance);
 
         var locked = comp.Simulating || comp.Picking;
         var canCancel = locked;
@@ -106,11 +99,11 @@ public sealed class RMCSynthesisSimulatorBui : BoundUserInterface, IRefreshableB
 
         HighlightMode(comp.Mode);
 
-        var targetName = targetItem is { } t && _entity.TryGetComponent(t, out RMCChemResearchReportComponent? targetReport)
+        var targetName = targetItem is { } t && EntMan.TryGetComponent(t, out RMCChemResearchReportComponent? targetReport)
             ? GetReportReagentName(targetReport)
             : null;
 
-        var referenceName = referenceItem is { } r && _entity.TryGetComponent(r, out RMCChemResearchReportComponent? referenceReport)
+        var referenceName = referenceItem is { } r && EntMan.TryGetComponent(r, out RMCChemResearchReportComponent? referenceReport)
             ? GetReportReagentName(referenceReport)
             : null;
 
@@ -185,10 +178,7 @@ public sealed class RMCSynthesisSimulatorBui : BoundUserInterface, IRefreshableB
 
     private EntityUid? GetSlotItem(string slotId)
     {
-        if (!_container.TryGetContainer(Owner, slotId, out var container))
-            return null;
-
-        return container.ContainedEntities.Count > 0 ? container.ContainedEntities[0] : null;
+        return _itemSlots.GetItemOrNull(Owner, slotId);
     }
 
     private void PopulateProperties(
@@ -198,9 +188,9 @@ public sealed class RMCSynthesisSimulatorBui : BoundUserInterface, IRefreshableB
         string? opposingSelectedId,
         bool selectable,
         string conflictTooltip,
-        Action<string?> onSelect)
+        Action<ProtoId<ChemGeneratorPropertyPrototype>?> onSelect)
     {
-        if (item is not { } itemUid || !_entity.TryGetComponent(itemUid, out RMCChemResearchReportComponent? report))
+        if (item is not { } itemUid || !EntMan.TryGetComponent(itemUid, out RMCChemResearchReportComponent? report))
         {
             box.RemoveAllChildren();
             return;
@@ -255,13 +245,7 @@ public sealed class RMCSynthesisSimulatorBui : BoundUserInterface, IRefreshableB
 
             var background = button.Disabled ? RedColor : button.Pressed ? GreenColor : DarkRowColor;
             button.Label.FontColorOverride = button.Disabled || button.Pressed ? Color.White : categoryColor;
-            button.StyleBoxOverride = new StyleBoxFlat
-            {
-                BackgroundColor = background,
-                BorderColor = button.Pressed ? Color.White : Color.Black,
-                BorderThickness = new Thickness(button.Pressed ? 2 : 1),
-            };
-            button.ModulateSelfOverride = Color.White;
+            SetSelectableStyle(button, background);
 
             index++;
         }
@@ -303,28 +287,9 @@ public sealed class RMCSynthesisSimulatorBui : BoundUserInterface, IRefreshableB
             };
 
             button.Label.FontColorOverride = Color.White;
-            button.StyleBoxOverride = new StyleBoxFlat
-            {
-                BackgroundColor = button.Pressed ? GreenColor : DarkRowColor,
-                BorderColor = button.Pressed ? Color.White : Color.Black,
-                BorderThickness = new Thickness(button.Pressed ? 2 : 1),
-            };
-            button.ModulateSelfOverride = Color.White;
+            SetSelectableStyle(button, button.Pressed ? GreenColor : DarkRowColor);
         }
 
         box.RemoveChildrenAfter(candidates.Count);
-    }
-
-    private bool TryGetResearch(out RMCChemistryResearchComponent research)
-    {
-        var query = _entity.EntityQueryEnumerator<RMCChemistryResearchComponent>();
-        if (query.MoveNext(out _, out var comp))
-        {
-            research = comp;
-            return true;
-        }
-
-        research = default!;
-        return false;
     }
 }

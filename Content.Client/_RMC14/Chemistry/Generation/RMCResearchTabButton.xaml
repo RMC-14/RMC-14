@@ -1,0 +1,17 @@
+<controls:RMCResearchTabButton
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Chemistry.Generation"
+    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
+    HorizontalExpand="True">
+    <BoxContainer Orientation="Horizontal"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  SeparationOverride="8"
+                  Margin="6 6">
+        <ui:RMCIconRect Name="TabIcon" IconSize="24" />
+        <BoxContainer Orientation="Vertical" VerticalAlignment="Center">
+            <Label Name="Line1Label" HorizontalAlignment="Center" />
+            <Label Name="Line2Label" HorizontalAlignment="Center" />
+        </BoxContainer>
+    </BoxContainer>
+</controls:RMCResearchTabButton>

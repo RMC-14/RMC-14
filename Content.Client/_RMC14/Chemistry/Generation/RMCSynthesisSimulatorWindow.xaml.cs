@@ -1,3 +1,5 @@
+using Content.Shared._RMC14.Chemistry.Generation;
+using Robust.Shared.Prototypes;
 using System;
 using Content.Client._RMC14.UserInterface;
 using Content.Client.Resources;
@@ -23,12 +25,15 @@ public sealed partial class RMCSynthesisSimulatorWindow : DefaultWindow
     public static readonly Color CreditsAverage = Color.FromHex("#d3bd9a");
     public static readonly Color CreditsBad = Color.FromHex("#b08080");
 
-    private static readonly Color HeaderColor = Color.FromHex("#12141A");
-    public static readonly Color GreenColor = Color.FromHex("#4CAF50");
-    public static readonly Color TanColor = Color.FromHex("#ffb950");
-    public static readonly Color OrangeColor = Color.FromHex("#C99A29");
-    public static readonly Color RedColor = Color.FromHex("#8B2020");
-    public static readonly Color DarkRowColor = Color.FromHex("#22262F");
+    public static readonly Color GreenColor = RMCMachineUiStyle.GreenColor;
+    public static readonly Color TanColor = RMCMachineUiStyle.TanColor;
+    public static readonly Color OrangeColor = RMCMachineUiStyle.OrangeColor;
+    public static readonly Color RedColor = RMCMachineUiStyle.RedColor;
+    public static readonly Color DarkRowColor = RMCMachineUiStyle.DarkRowColor;
+
+    private const int CreditsBarMax = 100;
+    private const int CreditsGoodThreshold = 60;
+    private const int CreditsAverageThreshold = 15;
 
     public static readonly Color PropertyPositiveColor = Color.FromHex("#9dc79f");
     public static readonly Color PropertyNegativeColor = Color.FromHex("#d19a9a");
@@ -46,7 +51,7 @@ public sealed partial class RMCSynthesisSimulatorWindow : DefaultWindow
                      TargetHeader, ReferenceHeader, RecipePickerHeader,
                  })
         {
-            header.PanelOverride = new StyleBoxFlat { BackgroundColor = HeaderColor };
+            header.PanelOverride = new StyleBoxFlat { BackgroundColor = RMCMachineUiStyle.HeaderColor };
         }
 
         foreach (var modeButton in new[] { AmplifyButton, SuppressButton, RelateButton, AddButton })
@@ -72,6 +77,32 @@ public sealed partial class RMCSynthesisSimulatorWindow : DefaultWindow
         Icon(AddButton, RMCIcons.ArrowRightLong, "ADD");
         Icon(RelateButton, RMCIcons.ArrowsRotate, "RELATE");
         Icon(OverrideButton, RMCIcons.Server, "OVERRIDE");
+    }
+
+    public void SetCredits(int credits, int clearance)
+    {
+        CreditsLabel.Text = $"RESEARCH CREDITS: {credits}";
+        ClearanceLabel.Text = $"CLEARANCE: {clearance}";
+
+        CreditsBar.MaxValue = CreditsBarMax;
+        CreditsBar.Value = Math.Clamp(credits, 0, CreditsBarMax);
+        CreditsBar.ForegroundStyleBoxOverride = new StyleBoxFlat
+        {
+            BackgroundColor = credits >= CreditsGoodThreshold ? CreditsGood
+                : credits >= CreditsAverageThreshold ? CreditsAverage
+                : CreditsBad,
+        };
+    }
+
+    public static void SetSelectableStyle(Button button, Color background)
+    {
+        button.StyleBoxOverride = new StyleBoxFlat
+        {
+            BackgroundColor = background,
+            BorderColor = button.Pressed ? Color.White : Color.Black,
+            BorderThickness = new Thickness(button.Pressed ? 2 : 1),
+        };
+        button.ModulateSelfOverride = Color.White;
     }
 
     public static void Row(PanelContainer panel, Label label, Color color)
@@ -118,12 +149,12 @@ public sealed partial class RMCSynthesisSimulatorWindow : DefaultWindow
 
     public sealed class PropertyButton : Button
     {
-        public string PropertyId = string.Empty;
-        public Action<string?>? OnSelect;
+        public ProtoId<ChemGeneratorPropertyPrototype> PropertyId;
+        public Action<ProtoId<ChemGeneratorPropertyPrototype>?>? OnSelect;
 
         public PropertyButton()
         {
-            OnPressed += _ => OnSelect?.Invoke(Pressed ? PropertyId : null);
+            OnPressed += _ => OnSelect?.Invoke(Pressed ? PropertyId : (ProtoId<ChemGeneratorPropertyPrototype>?) null);
         }
     }
 

@@ -17,15 +17,13 @@ namespace Content.Client._RMC14.Chemistry.Generation;
 [UsedImplicitly]
 public sealed class RMCResearchComputerBui : BoundUserInterface, IRefreshableBui
 {
-    [Dependency] private readonly IEntityManager _entity = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
+
+    private readonly RMCReagentSystem _rmcReagent;
+    private readonly SharedRMCChemistryResearchSystem _research;
 
     private RMCResearchComputerWindow? _window;
-    private Font _boldFont = default!;
-    private Font _smallFont = default!;
-    private RMCReagentSystem _rmcReagent = default!;
-    private SharedRMCChemistryResearchSystem _research = default!;
+    private ConfirmationWindow? _confirm;
 
     private enum SortColumn
     {
@@ -41,10 +39,8 @@ public sealed class RMCResearchComputerBui : BoundUserInterface, IRefreshableBui
     public RMCResearchComputerBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         IoCManager.InjectDependencies(this);
-        _boldFont = _resourceCache.GetFont("/Fonts/NotoSans/NotoSans-Bold.ttf", 12);
-        _smallFont = _resourceCache.GetFont("/Fonts/NotoSans/NotoSans-Regular.ttf", 8);
-        _rmcReagent = _entity.System<RMCReagentSystem>();
-        _research = _entity.System<SharedRMCChemistryResearchSystem>();
+        _rmcReagent = EntMan.System<RMCReagentSystem>();
+        _research = EntMan.System<SharedRMCChemistryResearchSystem>();
     }
 
     protected override void Open()
@@ -54,12 +50,13 @@ public sealed class RMCResearchComputerBui : BoundUserInterface, IRefreshableBui
 
         _window.BrokerClearanceButton.OnPressed += _ =>
         {
-            if (TryGetResearch(out var research) && research.ClearanceLevel >= research.MaxClearanceLevel)
+            if (_research.TryGetResearch(out var research) &&
+                research.Value.Comp.ClearanceLevel >= research.Value.Comp.MaxClearanceLevel)
                 OnRequestXAccessPressed();
             else
                 OnBrokerClearancePressed();
         };
-        _window.ReprintContractButton.OnPressed += _ => SendPredictedMessage(new RMCResearchComputerReprintContractBuiMsg());
+        _window.ReprintContractButton.OnPressed += _ => SendMessage(new RMCResearchComputerReprintContractBuiMsg());
         _window.HideOldReportsButton.OnPressed += _ => Refresh();
 
         _window.DocumentsSortTimeButton.OnPressed += _ => SetSort(SortColumn.Time, ref _documentsSort, ref _documentsSortAscending);
@@ -107,9 +104,10 @@ public sealed class RMCResearchComputerBui : BoundUserInterface, IRefreshableBui
         if (_window is not { IsOpen: true })
             return;
 
-        if (!TryGetResearch(out var research))
+        if (!_research.TryGetResearch(out var researchEnt))
             return;
 
+        var research = researchEnt.Value.Comp;
         var credits = research.Credits;
         var clearance = research.ClearanceLevel;
 
@@ -149,58 +147,54 @@ public sealed class RMCResearchComputerBui : BoundUserInterface, IRefreshableBui
 
     private void OnBrokerClearancePressed()
     {
-        if (!TryGetResearch(out var research))
+        if (!_research.TryGetResearch(out var research))
             return;
 
-        var cost = _research.GetClearanceUpgradeCost(research);
-
-        var confirm = new ConfirmationWindow();
-        confirm.Setup(
+        var cost = _research.GetClearanceUpgradeCost(research.Value.Comp);
+        OpenConfirmation(
             "Improve Clearance",
             $"Are you sure you want to spend {cost} research credits to increase the clearance immediately?",
-            "Confirm",
-            "Cancel"
-        );
-        confirm.AcceptButton.OnPressed += _ =>
-        {
-            SendPredictedMessage(new RMCResearchComputerBrokerClearanceBuiMsg());
-            confirm.Close();
-        };
-        confirm.DenyButton.OnPressed += _ => confirm.Close();
-        confirm.OpenCentered();
+            new RMCResearchComputerBrokerClearanceBuiMsg());
     }
 
     private void OnRequestXAccessPressed()
     {
-        var xAccessCost = TryGetResearch(out var research) ? research.XAccessCost : 0;
-
-        var confirm = new ConfirmationWindow();
-        confirm.Setup(
+        var xAccessCost = _research.TryGetResearch(out var research) ? research.Value.Comp.XAccessCost : 0;
+        OpenConfirmation(
             "Request 5X Access",
             $"Are you sure you want to spend {xAccessCost} research credits to request 5X clearance access?",
-            "Confirm",
-            "Cancel"
-        );
+            new RMCResearchComputerRequestXAccessBuiMsg());
+    }
+
+    private void OpenConfirmation(string title, string text, BoundUserInterfaceMessage message)
+    {
+        _confirm?.Close();
+
+        var confirm = new ConfirmationWindow();
+        _confirm = confirm;
+        confirm.Setup(title, text, "Confirm", "Cancel");
         confirm.AcceptButton.OnPressed += _ =>
         {
-            SendPredictedMessage(new RMCResearchComputerRequestXAccessBuiMsg());
+            SendMessage(message);
             confirm.Close();
         };
         confirm.DenyButton.OnPressed += _ => confirm.Close();
+        confirm.OnClose += () =>
+        {
+            if (_confirm == confirm)
+                _confirm = null;
+        };
         confirm.OpenCentered();
     }
 
-    private bool TryGetResearch(out RMCChemistryResearchComponent research)
+    protected override void Dispose(bool disposing)
     {
-        var query = _entity.EntityQueryEnumerator<RMCChemistryResearchComponent>();
-        if (query.MoveNext(out _, out var comp))
-        {
-            research = comp;
-            return true;
-        }
+        base.Dispose(disposing);
+        if (!disposing)
+            return;
 
-        research = default!;
-        return false;
+        _confirm?.Close();
+        _confirm = null;
     }
 
     private void PopulateContracts(RMCChemistryResearchComponent research)
@@ -211,14 +205,14 @@ public sealed class RMCResearchComputerBui : BoundUserInterface, IRefreshableBui
         {
             var slot = research.Contracts[i];
 
-            ContractCard card;
-            if (i < box.ChildCount && box.GetChild(i) is ContractCard existing)
+            RMCResearchContractCard card;
+            if (i < box.ChildCount && box.GetChild(i) is RMCResearchContractCard existing)
             {
                 card = existing;
             }
             else
             {
-                card = new ContractCard(_boldFont, _smallFont);
+                card = new RMCResearchContractCard();
                 box.AddChild(card);
             }
 
@@ -238,12 +232,9 @@ public sealed class RMCResearchComputerBui : BoundUserInterface, IRefreshableBui
             };
             card.RecipeHintLabel.Text = $"Early assessment shows one part of the recipe is {ingredientName}";
             card.PropertyHintLabel.Text = $"Early testing shows property of {propertyName}";
-            card.TakeButton.Disabled = slot.Taken || research.PickedThisCycle;
-            SetPurchasableStyle(card.TakeButton, !card.TakeButton.Disabled);
-            card.SetEnabledVisual(!card.TakeButton.Disabled);
-            card.TakeButtonLabel.Text = slot.Taken ? "Contract Taken" : "Take Contract";
+            card.SetTakeState(!slot.Taken && !research.PickedThisCycle, slot.Taken ? "Contract Taken" : "Take Contract");
             card.SlotIndex = i;
-            card.OnTake = index => SendPredictedMessage(new RMCResearchComputerTakeContractBuiMsg(index));
+            card.OnTake = index => SendMessage(new RMCResearchComputerTakeContractBuiMsg(index));
         }
 
         box.RemoveChildrenAfter(research.Contracts.Count);
@@ -279,14 +270,14 @@ public sealed class RMCResearchComputerBui : BoundUserInterface, IRefreshableBui
         var index = 0;
         foreach (var (category, entry) in flattened)
         {
-            DocumentRow row;
-            if (index < box.ChildCount && box.GetChild(index) is DocumentRow existing)
+            RMCResearchDocumentRow row;
+            if (index < box.ChildCount && box.GetChild(index) is RMCResearchDocumentRow existing)
             {
                 row = existing;
             }
             else
             {
-                row = new DocumentRow();
+                row = new RMCResearchDocumentRow();
                 box.AddChild(row);
             }
 
@@ -295,16 +286,15 @@ public sealed class RMCResearchComputerBui : BoundUserInterface, IRefreshableBui
             row.ScanTimeLabel.Text = entry.Time.ToString(@"hh\:mm\:ss");
             row.TypeLabel.Text = category;
             row.CompoundLabel.Text = GetCompoundName(entry.Title);
-            row.Category = category;
-            row.Title = entry.Title;
+            row.Id = entry.Id;
             row.Published = rowPublished;
             row.PublishButton.Text = rowPublished ? "Unpublish" : "Publish";
-            row.OnRead = (category2, title2, published2) => SendPredictedMessage(new RMCResearchComputerReadDocumentBuiMsg(category2, title2, published2));
-            row.OnPrint = (category2, title2, published2) => SendPredictedMessage(new RMCResearchComputerPrintDocumentBuiMsg(category2, title2, published2));
-            row.OnPublishToggle = (category2, title2, published2) => SendPredictedMessage(published2
-                ? new RMCResearchComputerUnpublishDocumentBuiMsg(category2, title2)
-                : new RMCResearchComputerPublishDocumentBuiMsg(category2, title2));
-            row.OnAnnounce = (category2, title2) => SendPredictedMessage(new RMCResearchComputerAnnounceDocumentBuiMsg(category2, title2));
+            row.OnRead = id => SendMessage(new RMCResearchComputerReadDocumentBuiMsg(id));
+            row.OnPrint = id => SendMessage(new RMCResearchComputerPrintDocumentBuiMsg(id));
+            row.OnPublishToggle = (id, published) => SendMessage(published
+                ? new RMCResearchComputerUnpublishDocumentBuiMsg(id)
+                : new RMCResearchComputerPublishDocumentBuiMsg(id));
+            row.OnAnnounce = id => SendMessage(new RMCResearchComputerAnnounceDocumentBuiMsg(id));
 
             index++;
         }

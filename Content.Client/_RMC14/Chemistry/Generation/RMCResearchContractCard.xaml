@@ -1,0 +1,24 @@
+<controls:RMCResearchContractCard
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Chemistry.Generation"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    Orientation="Vertical"
+    HorizontalExpand="True">
+    <PanelContainer>
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BackgroundColor="#221801" BorderColor="#FAC000" BorderThickness="1" />
+        </PanelContainer.PanelOverride>
+        <BoxContainer Orientation="Vertical" Margin="6">
+            <Label Name="NameLabel" Access="Public" FontColorOverride="#FAC000" />
+            <PanelContainer MinHeight="1" Margin="0 2 0 4">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat BackgroundColor="#FAC000" />
+                </PanelContainer.PanelOverride>
+            </PanelContainer>
+            <Label Name="DifficultyLabel" Access="Public" FontColorOverride="#C69214" />
+            <Label Name="RecipeHintLabel" Access="Public" FontColorOverride="#C69214" />
+            <Label Name="PropertyHintLabel" Access="Public" FontColorOverride="#C69214" />
+            <Button Name="TakeButton" Access="Public" HorizontalExpand="True" Margin="0 4 0 0" />
+        </BoxContainer>
+    </PanelContainer>
+</controls:RMCResearchContractCard>

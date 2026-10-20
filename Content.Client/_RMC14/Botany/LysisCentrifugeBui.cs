@@ -1,7 +1,9 @@
 using Content.Shared._RMC14.Botany;
 using Content.Shared._RMC14.UserInterface;
+using Content.Shared.Containers.ItemSlots;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
+using Robust.Shared.Maths;
 
 namespace Content.Client._RMC14.Botany;
 
@@ -16,12 +18,12 @@ public sealed class LysisCentrifugeBui(EntityUid owner, Enum uiKey) : BoundUserI
         base.Open();
 
         _window = this.CreateWindow<LysisCentrifugeWindow>();
-        _window.Title = "Lysis Isolation Centrifuge";
+        _window.Title = EntMan.GetComponentOrNull<MetaDataComponent>(Owner)?.EntityName ?? string.Empty;
 
-        _window.ProcessSeedButton.OnPressed += _ => SendMessage(new LysisCentrifugeProcessSeedBuiMsg());
-        _window.EjectSeedButton.OnPressed += _ => SendMessage(new LysisCentrifugeEjectSeedBuiMsg());
-        _window.ClearBufferButton.OnPressed += _ => SendMessage(new LysisCentrifugeClearBufferBuiMsg());
-        _window.EjectDiscButton.OnPressed += _ => SendMessage(new LysisCentrifugeEjectDiscBuiMsg());
+        _window.ProcessSeedButton.OnPressed += _ => SendPredictedMessage(new LysisCentrifugeProcessSeedBuiMsg());
+        _window.EjectSeedButton.OnPressed += _ => SendPredictedMessage(new LysisCentrifugeEjectSeedBuiMsg());
+        _window.ClearBufferButton.OnPressed += _ => SendPredictedMessage(new LysisCentrifugeClearBufferBuiMsg());
+        _window.EjectDiscButton.OnPressed += _ => SendPredictedMessage(new LysisCentrifugeEjectDiscBuiMsg());
 
         Refresh();
     }
@@ -34,85 +36,82 @@ public sealed class LysisCentrifugeBui(EntityUid owner, Enum uiKey) : BoundUserI
             return;
         }
 
-        window.SeedSpriteView.Visible = comp.HasSeed && comp.SeedEntityNet.HasValue;
-        if (comp.SeedEntityNet is { } seedNet)
-            window.SeedSpriteView.SetEntity(seedNet);
+        var itemSlots = EntMan.System<ItemSlotsSystem>();
+        var seed = itemSlots.GetItemOrNull(Owner, comp.SeedSlotId);
+        var disc = itemSlots.GetItemOrNull(Owner, comp.DiscSlotId);
+        var hasGenome = comp.GenomeName != null;
+
+        window.SeedSpriteView.Visible = seed != null;
+        window.SeedSpriteView.SetEntity(seed);
+
+        var seedName = seed != null ? EntMan.GetComponentOrNull<MetaDataComponent>(seed.Value)?.EntityName : null;
+        var shortName = seedName != null ? BotanyUiStyle.ShortSeedName(seedName) : "Unknown seed";
+
+        if (seed == null)
+            window.SetSeedBanner("EMPTY", "No seed packet loaded.", BotanyUiStyle.StatusEmptyColor);
+        else if (comp.SeedStats is { Viable: false })
+            window.SetSeedBanner("NON-VIABLE", shortName, BotanyUiStyle.StatusCriticalColor);
         else
-            window.SeedSpriteView.SetEntity((EntityUid?) null);
+            window.SetSeedBanner("LOADED", shortName, BotanyUiStyle.StatusStableColor);
 
-        if (comp.HasSeed)
+        if (seed != null && comp.SeedStats is { } stats)
         {
-            var seedText = comp.SeedPacketName is { } packetName
-                ? BotanyUiStyle.ShortSeedName(packetName)
-                : "[Seed inserted]";
-            window.SetSeedStatus(seedText, comp.SeedPacketName);
-
-            window.SetSeedTraitRows(new (string, string)[]
+            window.SetSeedChips(new (string, string, Color)[]
             {
-                ("Endurance", $"{comp.SeedEndurance:0.#}"),
-                ("Yield", $"{comp.SeedYield}"),
-                ("Potency", $"{comp.SeedPotency:0.#}"),
-                ("Lifespan", $"{comp.SeedLifespan:0.#}"),
-                ("Maturation", $"{comp.SeedMaturation:0.#}"),
-                ("Production", $"{comp.SeedProduction:0.#}"),
-                ("Harvest", BotanyUiStyle.GetHarvestLabel(comp.SeedHarvestRepeat)),
-                ("Seedless", comp.SeedSeedless ? "Yes" : "No"),
-                ("Viable", comp.SeedViable ? "Yes" : "No"),
+                ("Yield", $"{stats.Yield}", BotanyUiStyle.ValueGoodColor),
+                ("Potency", $"{stats.Potency:0.#}", BotanyUiStyle.ValueWarnColor),
+                ("Endurance", $"{stats.Endurance:0.#}", BotanyUiStyle.ValueBadColor),
+            });
+
+            window.SetSeedTraitRows(new (string, string, Color)[]
+            {
+                ("Lifespan", $"{stats.Lifespan:0.#}", Color.White),
+                ("Maturation", $"{stats.Maturation:0.#}", Color.White),
+                ("Production", $"{stats.Production:0.#}", Color.White),
+                ("Harvest", BotanyUiStyle.GetHarvestLabel(stats.HarvestRepeat), Color.White),
+                ("Seedless", stats.Seedless ? "Yes" : "No", Color.White),
+                ("Viable", stats.Viable ? "Yes" : "No", stats.Viable ? BotanyUiStyle.ValueGoodColor : BotanyUiStyle.ValueBadColor),
             });
         }
         else
         {
-            window.ClearSeedStatus();
+            window.SetSeedChips([]);
             window.SetSeedTraitRows([]);
         }
 
-        if (comp.GenomeName is { } genomeName)
-        {
-            var ratio = comp.MaxDegradation > 0
-                ? comp.Degradation / (float) comp.MaxDegradation
-                : 0f;
-            var color = ratio >= 0.75f ? BotanyUiStyle.RedColor : ratio >= 0.4f ? BotanyUiStyle.TanColor : BotanyUiStyle.GreenColor;
+        window.ProcessSeedButton.Disabled = seed == null || hasGenome;
+        window.EjectSeedButton.Disabled = seed == null;
 
-            window.SetGenomeStatus(genomeName, color);
-            window.DegradationMetric.SetAccentColor(color);
-            window.DegradationMetric.Update("Degradation", $"{comp.Degradation}/{comp.MaxDegradation}", progress: ratio);
-        }
-        else
-        {
-            window.ClearGenomeStatus();
-            window.DegradationMetric.SetAccentColor(BotanyUiStyle.GreenColor);
-            window.DegradationMetric.Update("Degradation", "—", progress: 0f);
-        }
+        var ratio = comp.MaxDegradation > 0 ? comp.Degradation / (float) comp.MaxDegradation : 0f;
+        var degradationColor = ratio >= 0.75f
+            ? BotanyUiStyle.ValueBadColor
+            : ratio >= 0.4f ? BotanyUiStyle.ValueWarnColor : BotanyUiStyle.ValueGoodColor;
 
-        if (comp.HasDisc)
-            window.SetDiscStatus("[Disc inserted]");
-        else
-            window.ClearDiscStatus();
+        window.SetGenome(comp.GenomeName != null ? BotanyUiStyle.ShortSeedName(comp.GenomeName) : null, degradationColor);
+        window.SetDegradation(ratio, hasGenome ? $"{comp.Degradation} / {comp.MaxDegradation}" : "—", degradationColor);
+        window.ClearBufferButton.Disabled = !hasGenome;
 
-        window.GenesSection.Visible = comp.GenomeName != null;
+        window.SetDisc(disc != null);
+        window.EjectDiscButton.Disabled = disc == null;
+
+        window.GenesCard.Visible = hasGenome;
         window.GeneRowsContainer.DisposeAllChildren();
 
-        if (comp.GenomeName == null)
+        if (!hasGenome)
             return;
 
-        foreach (var slot in comp.GeneSlots)
+        var index = 0;
+        foreach (var geneType in Enum.GetValues<PlantGeneType>())
         {
-            var typeName = slot.GeneType.GetLabel();
-            var text = slot.AlreadyOnDisc
-                ? $"{slot.ObfuscatedCode} - {typeName}: ✓"
-                : $"{slot.ObfuscatedCode} - {typeName}:";
-
-            string? extractTooltip = null;
-            if (slot.AlreadyOnDisc)
-                extractTooltip = "This gene sequence is already on the disc.";
-            else if (comp.DiscFull)
-                extractTooltip = "Disc already contains a gene sequence.";
-
             var row = new LysisCentrifugeGeneRow();
-            row.SetGene(text, slot.GeneType.GetDescription(), extractTooltip);
-
-            var geneType = slot.GeneType;
-            row.ExtractButton.OnPressed += _ => SendMessage(new LysisCentrifugeExtractGeneBuiMsg(geneType));
+            row.SetGene(
+                index++,
+                comp.ObfuscationCodes.GetValueOrDefault(geneType, "??"),
+                geneType.GetLabel(),
+                geneType.GetDescription(),
+                disc == null ? "Insert a flora data disc first." : null);
+            row.ExtractButton.Disabled = disc == null;
+            row.ExtractButton.OnPressed += _ => SendPredictedMessage(new LysisCentrifugeExtractGeneBuiMsg(geneType));
 
             window.GeneRowsContainer.AddChild(row);
         }

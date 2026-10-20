@@ -1,6 +1,9 @@
-<BoxContainer xmlns="https://spacestation14.io"
-              Orientation="Horizontal"
-              Margin="0 1">
-    <Label Name="GeneLabel" HorizontalExpand="True" VerticalAlignment="Center" />
-    <Button Name="ExtractButton" Access="Public" />
-</BoxContainer>
+<PanelContainer xmlns="https://spacestation14.io"
+                HorizontalExpand="True">
+    <BoxContainer Orientation="Horizontal" Margin="3 1" HorizontalExpand="True">
+        <Label Name="CodeLabel" MinWidth="60" FontColorOverride="#8E9AA6" VerticalAlignment="Center" />
+        <Label Name="GeneLabel" HorizontalExpand="True" VerticalAlignment="Center" />
+        <Button Name="ExtractButton" Access="Public" Text="Extract" StyleClasses="OpenBoth"
+                VerticalAlignment="Center" />
+    </BoxContainer>
+</PanelContainer>

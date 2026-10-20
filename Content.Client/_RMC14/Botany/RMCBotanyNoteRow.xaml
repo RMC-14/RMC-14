@@ -1,0 +1,6 @@
+<BoxContainer xmlns="https://spacestation14.io"
+              Orientation="Horizontal"
+              HorizontalExpand="True">
+    <Label Text="▸" FontColorOverride="#D08A3A" Margin="0 0 5 0" VerticalAlignment="Top" />
+    <RichTextLabel Name="NoteLabel" HorizontalExpand="True" />
+</BoxContainer>
