@@ -72,9 +72,16 @@
     widePrimary: true
     altDisarm: true
     angle: 0
+    soundHit:
+      path: /Audio/Effects/bite.ogg
     damage:
       types:
         Piercing: 20
+  - type: RMCObstacleSlamCauserImmune
+  - type: MobCollision
+  - type: RMCMobCollision
+  - type: CMArmorPiercing
+    amount: 15
   - type: GenericVisualizer
     visuals:
       enum.MobStateVisuals.State:
@@ -156,6 +163,9 @@
     canDisarm: true
   - type: RMCDisarm
   - type: RMCDisarmable
+  - type: Skills
+    skills:
+      RMCSkillCqc: 1
   - type: StunOnExplosionReceived
   - type: DeafenWhileCrit
   - type: AffectableByWeeds
@@ -231,6 +241,7 @@
         Bloodloss: -1
     damageBleedModifiers: CMBloodlossHuman
   - type: Speech
+    speechSounds: RMCMilitaryDog
     allowedEmotes: [ 'Bark', 'Snarl', 'Whine', 'Growl' ]
   - type: Vocal
     screamAction: null
