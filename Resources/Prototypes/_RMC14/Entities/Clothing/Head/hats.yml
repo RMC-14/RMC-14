@@ -180,6 +180,17 @@
 
 - type: entity
   parent: CMHeadBeret
+  id: RMCHeadBeretCLF
+  name: Colony Liberation Front beret
+  description: A repurposed captured police beret, with a CLF insignia mounted on a place where police cockade would usally sit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_CLF.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_CLF.rsi
+
+- type: entity
+  parent: CMHeadBeret
   id: RMCHeadBeretChiefOfficer
   name: chief officer beret
   description: A beret with the lieutenant-commander insignia emblazoned on it. It emits a dark aura and may corrupt the soul.
