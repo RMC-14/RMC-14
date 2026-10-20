@@ -74,6 +74,7 @@
           RMCSkillMedical: 2
   - type: RMCStorageEjectHand
   - type: StoreAfterFailedInteract
+  - type: RMCStorageShakable  
 
 - type: entity
   parent: CMPersonalStorageBase
