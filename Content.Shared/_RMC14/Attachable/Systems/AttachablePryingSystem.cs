@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Attachable.Components;
+using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Attachable.Events;
 using Content.Shared.Prying.Components;
 using Content.Shared.Tools.Components;
@@ -30,7 +30,7 @@ public sealed class AttachablePryingSystem : EntitySystem
                 var tool = EnsureComp<ToolComponent>(args.Holder);
 #pragma warning disable RA0002
                 prying.SpeedModifier = 0.5f;
-                tool.Qualities.Add("Prying", _prototype);
+                tool.Qualities.Add("DoorPrying", _prototype);
                 tool.UseSound = new SoundPathSpecifier("/Audio/Items/crowbar.ogg");
 #pragma warning restore RA0002
 
