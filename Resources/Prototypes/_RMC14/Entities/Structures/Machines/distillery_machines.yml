@@ -1,0 +1,86 @@
+- type: entity
+  abstract: true
+  parent: BaseMachinePowered
+  id: RMCMachineDistilleryBase
+  components:
+  - type: ApcPowerReceiver
+  - type: RMCPowerReceiver
+    idleLoad: 5
+    activeLoad: 10
+    channel: Equipment
+  - type: Sprite # TODO RMC14: New Sprites for Mill, Fermenter, Still, Squeezer.
+    sprite: _RMC14/Structures/Machines/autolathe.rsi
+    layers:
+    - state: autolathe
+      map: ["enum.LatheVisualLayers.IsRunning"]
+    - state: autolathe_u
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: null
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: VehicleSmashable
+  - type: XenoCrusherChargable
+    instantDestroy: true
+    passOnDestroy: true
+  - type: XenoToggleChargingDamage
+    sound:
+      collection: MetalBreak
+    destroy: true
+  - type: Transform
+    anchored: true
+  - type: Anchorable
+    flags: None
+
+- type: entity
+  parent: RMCMachineDistilleryBase
+  id: RMCMachineDistilleryMill
+  name: mill
+  description: It is a machine that grinds produce.
+
+- type: entity
+  parent: RMCMachineDistilleryBase
+  id: RMCMachineDistilleryFermenter
+  name: fermenter
+  description: It is a machine that ferments produce into alcoholic drinks.
+
+- type: entity
+  parent: RMCMachineDistilleryBase
+  id: RMCMachineDistilleryStill
+  name: still
+  description: It is a machine that produces hard liquor from alcoholic drinks.
+
+- type: entity
+  parent: RMCMachineDistilleryBase
+  id: RMCMachineDistillerySqueezer
+  name: squeezer
+  description: It is a machine that squeezes extracts from produce.
