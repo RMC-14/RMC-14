@@ -378,7 +378,6 @@ public sealed class VehicleDeploySystem : EntitySystem
                     if (!deployable.Deployed)
                     {
                         deployable.Deployer = null;
-                        deployable.TargetingDeployer = null;
                         deployable.AutoTarget = null;
                         deployable.AutoSpinInitialized = false;
                     }
@@ -552,12 +551,6 @@ public sealed class VehicleDeploySystem : EntitySystem
 
         var targeting = EnsureComp<SentryTargetingComponent>(vehicle);
 
-        if (deployable.Deployer != null && deployable.Deployer != deployable.TargetingDeployer)
-        {
-            _targeting.ApplyDeployerFactions(vehicle, deployable.Deployer.Value);
-            deployable.TargetingDeployer = deployable.Deployer;
-        }
-
         var vehicleCoords = _transform.GetMapCoordinates(vehicle);
         var bestDistance = float.MaxValue;
         EntityUid? bestTarget = null;
@@ -611,12 +604,6 @@ public sealed class VehicleDeploySystem : EntitySystem
         float range,
         SentryTargetingComponent targeting)
     {
-        if (deployable.Deployer != null && deployable.Deployer != deployable.TargetingDeployer)
-        {
-            _targeting.ApplyDeployerFactions(vehicle, deployable.Deployer.Value);
-            deployable.TargetingDeployer = deployable.Deployer;
-        }
-
         if (!Exists(target))
             return false;
 
