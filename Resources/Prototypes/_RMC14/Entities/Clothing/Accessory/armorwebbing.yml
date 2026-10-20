@@ -64,7 +64,7 @@
       - Bible
       tags:
       - CMFirstAidKit
-      - RMCBoxStorage
+      - RMCEngineerKit
   - type: FixedItemSizeStorage
   - type: Webbing
     components:
@@ -77,7 +77,7 @@
         - Bible
         tags:
         - CMFirstAidKit
-        - RMCBoxStorage
+        - RMCEngineerKit
     - type: FixedItemSizeStorage
     - type: RMCStorageEjectHand
       state: Open
