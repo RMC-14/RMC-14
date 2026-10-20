@@ -5,18 +5,18 @@
   description: The M14 Ceremonial Rifle is a modernized adaptation of a century old weapon, modified predominantly for the use during ceremonial traditions pre-dating most of those alive today. Not advised for use in combat.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/desert.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m14ceremonial.rsi
     layers:
     - state: bolt-open
       map: [ "enum.GunVisualLayers.Base" ]
     - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
-      state: d_m4spr_barrel
-      offset: 0.65, 0
+      state: m14ceremonial_barrel
+      offset: 1, 0
       map: [ "barrel" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/desert.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m14ceremonial.rsi
   - type: Gun
     shotsPerBurst: 0
     selectedMode: SemiAuto
@@ -51,7 +51,7 @@
         priority: 2
         whitelist:
           tags:
-          - CMMagazineRifleM14Ceremonial
+          - RMCMagazineRifleM14Ceremonial
   - type: GunDamageModifier
     multiplier: 1.2
   - type: AttachableHolder
@@ -59,48 +59,10 @@
       rmc-aslot-barrel:
         whitelist:
           tags:
-          - RMCAttachmentExtendedBarrel
-          - RMCAttachmentExtendedCompensator
-          - RMCAttachmentSuppressor
           - RMCM5Bayonet
-      rmc-aslot-rail:
-        whitelist:
-          tags:
-          - RMCAttachmentB8SmartScope
-          - RMCAttachmentMagneticHarness
-          - RMCAttachmentRailFlashlight
-          - RMCAttachmentS42xTelescopicMiniscope
-          - RMCAttachmentS5RedDotSight
-          - RMCAttachmentS6ReflexSight
-          - RMCAttachmentS84xTelescopicScope
-      rmc-aslot-underbarrel:
-        whitelist:
-          tags:
-          - RMCAttachmentAngledGrip
-          - RMCAttachmentBipod
-          - RMCAttachmentFlashlightGrip
-          - RMCAttachmentLaserSight
-          - RMCAttachmentVerticalGrip
-          - RMCAttachmentUnderbarrelExtinguisher
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 1.12, 0.0
-      rmc-aslot-rail: 0.225, 0.125
-      rmc-aslot-underbarrel: 0.62, -0.31
-  - type: ItemCamouflage
-    camouflageVariations:
-      Jungle: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/jungle.rsi
-      Desert: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/desert.rsi
-      Snow: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/snow.rsi
-      Classic: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/classic.rsi
-      Urban: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/urban.rsi
-    layers:
-      barrel:
-        Jungle: m4spr_barrel
-        Desert: d_m4spr_barrel
-        Snow: s_m4spr_barrel
-        Classic: c_m4spr_barrel
-        Urban: u_m4spr_barrel
   - type: RMCAirShot
     preparationTime: 1.5
     requiresCombat: true
@@ -109,7 +71,7 @@
     shakeAmount: 1
   - type: Tag
     tags:
-    - RMCWeaponRifleM4SPR
+    - RMCWeaponRifleM14Ceremonial
 
 - type: entity
   parent: RMCBaseBullet
@@ -135,33 +97,33 @@
 
 - type: entity
   parent: CMBaseCartridgeRifle
-  id: CMCartridgeRifleBlank10x24mm
+  id: RMCCartridgeRifleBlank10x24mm
   name: blank cartridge (10x24mm)
   description: A Blank 10x24mm cartridge. Fits in Blank 10x24mm magazines.
   components:
   - type: Tag
     tags:
     - Cartridge
-    - CMCartridgeRifleBlank10x24mm
+    - RMCCartridgeRifleBlank10x24mm
   - type: CartridgeAmmo
     proto: BulletRifleBlank10x24mm
 
 - type: entity
   parent: CMMagazineRifleBase
-  id: CMMagazineRifleM14Ceremonial
+  id: RMCMagazineRifleM14Ceremonial
   name: "M14 Blank magazine (10x24mm)"
   description: "A magazine of blank 10x24mm rounds for use in the M14 Ceremonial rifle."
   components:
   - type: Tag
     tags:
     - CMMagazineRifle
-    - CMMagazineRifleM14Ceremonial
+    - RMCMagazineRifleM14Ceremonial
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
       tags:
-      - CMCartridgeRifleBlank10x24mm
-    proto: CMCartridgeRifleBlank10x24mm
+      - RMCCartridgeRifleBlank10x24mm
+    proto: RMCCartridgeRifleBlank10x24mm
     capacity: 25
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m4spr.rsi
@@ -169,7 +131,10 @@
     bulletType: RMCBoxBulletsRifle
 
 - type: Tag
-  id: CMCartridgeRifleBlank10x24mm
+  id: RMCCartridgeRifleBlank10x24mm
 
 - type: Tag
-  id: CMMagazineRifleM14Ceremonial
+  id: RMCMagazineRifleM14Ceremonial
+
+- type: Tag
+  id: RMCWeaponRifleM14Ceremonial
