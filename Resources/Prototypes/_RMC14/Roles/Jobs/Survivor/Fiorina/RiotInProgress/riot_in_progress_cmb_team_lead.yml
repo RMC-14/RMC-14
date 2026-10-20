@@ -72,6 +72,7 @@
     jumpsuit: RMCSwatCMBUniformSpearhead
     outerClothing: RMCArmorM4RMedium
     mask: RMCMaskSWAT
+    belt: CMBeltSecurityMPFilled
     head: RMCArmorHelmetM10CMBVisorSWAT
     back: RMCSatchelSecuritySurvivorFillRiotControlOfficer
     eyes: RMCGlassesSecuritySwat
