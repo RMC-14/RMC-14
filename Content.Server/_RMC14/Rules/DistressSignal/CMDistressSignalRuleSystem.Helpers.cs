@@ -11,6 +11,7 @@ using Content.Shared._RMC14.Xenonids.Construction.FloorResin;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared.Coordinates;
 using Content.Shared.Fax.Components;
+using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -291,6 +292,89 @@ public sealed partial class CMDistressSignalRuleSystem
         return (chosen.SquadId, chosen.Squad);
     }
 
+    private bool TryGetPreferredSquad(
+        ProtoId<JobPrototype> job,
+        CMDistressSignalRuleComponent rule,
+        IReadOnlySet<EntProtoId<SquadTeamComponent>> preferredSquads,
+        out (EntProtoId Id, EntityUid Ent) chosen)
+    {
+        var squads = new List<(EntProtoId SquadId, EntityUid Squad, int Players)>();
+        foreach (var (squadId, squad) in rule.Squads)
+        {
+            if (!preferredSquads.Contains(new EntProtoId<SquadTeamComponent>(squadId.Id)))
+                continue;
+
+            var players = 0;
+            if (TryComp(squad, out SquadTeamComponent? team))
+            {
+                var roles = team.Roles;
+                var maxRoles = team.MaxRoles;
+                if (roles.TryGetValue(job, out var currentPlayers))
+                    players = currentPlayers;
+
+                if (maxRoles.TryGetValue(job, out var max) && players >= max)
+                    continue;
+            }
+
+            squads.Add((squadId, squad, players));
+        }
+
+        if (squads.Count == 0)
+        {
+            chosen = default;
+            return false;
+        }
+
+        _random.Shuffle(squads);
+        squads.Sort((a, b) => a.Players.CompareTo(b.Players));
+
+        var selected = squads[0];
+        chosen = (selected.SquadId, selected.Squad);
+        return true;
+    }
+
+    private bool TryGetPreferredSquad(
+        ProtoId<JobPrototype> job,
+        CMDistressSignalRuleComponent rule,
+        HumanoidCharacterProfile? profile,
+        out (EntProtoId Id, EntityUid Ent) chosen)
+    {
+        if (profile is { HasExplicitSquadPreferences: true } &&
+            TryGetPreferredSquad(job, rule, profile.SquadPreferences, out chosen))
+        {
+            return true;
+        }
+
+        if (profile?.OnlyUsePreferredSquads == true && profile.HasExplicitSquadPreferences)
+        {
+            chosen = default;
+            return false;
+        }
+
+        chosen = NextSquad(job, rule, null);
+        return true;
+    }
+
+    public bool CanSpawnForJob(ProtoId<JobPrototype> jobId, HumanoidCharacterProfile profile)
+    {
+        if (!_prototypes.TryIndex(jobId, out var job))
+            return true;
+
+        return CanSpawnForJob(job, profile);
+    }
+
+    public bool CanSpawnForJob(JobPrototype job, HumanoidCharacterProfile profile)
+    {
+        if (!job.IsCM || !job.HasSquad)
+            return true;
+
+        var comp = TryGetActiveRule();
+        if (comp == null)
+            return true;
+
+        return TryGetPreferredSquad(job.ID, comp, profile, out _);
+    }
+
     /// <summary>
     /// Finds the best spawn point for a player based on their job, squad preference, and availability.
     /// Falls back to generic spawn points if preferred ones are unavailable.
@@ -298,14 +382,17 @@ public sealed partial class CMDistressSignalRuleSystem
     private (EntityUid Spawner, EntityUid? Squad)? GetSpawner(
         CMDistressSignalRuleComponent rule,
         JobPrototype job,
-        EntProtoId<SquadTeamComponent>? preferred)
+        HumanoidCharacterProfile? profile)
     {
         var allSpawners = GetSpawners();
         EntityUid? squad = null;
 
         if (job.HasSquad)
         {
-            var (squadId, squadEnt) = NextSquad(job, rule, preferred);
+            if (!TryGetPreferredSquad(job.ID, rule, profile, out var squadInfo))
+                return null;
+
+            var (squadId, squadEnt) = squadInfo;
             squad = squadEnt;
 
             if (allSpawners.Squad.TryGetValue(squadId, out var jobSpawners) &&
