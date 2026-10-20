@@ -37,14 +37,14 @@
     - id: CMBeltMortar
       amount: 2
     - id: CMBackpackMortar
-    - id: RMCMortarShellIncendiary # TODO RMC14 replace 1 incend and 1 HE with 2 Frag shells
-      amount: 3
+    - id: RMCMortarShellIncendiary
+      amount: 2
     - id: RMCMortarShellFlare
       amount: 2
-    #    - id: RMCMortarShellFrag
-    #      amount: 2
+    - id: RMCMortarShellFrag
+      amount: 2
     - id: RMCMortarShellHE
-      amount: 3
+      amount: 2
     - id: CMWrench
     - id: RMCRangefinder
     - id: RMCLaserDesignator
