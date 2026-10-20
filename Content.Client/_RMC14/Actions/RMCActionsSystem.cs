@@ -1,17 +1,23 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Client.Actions;
+using Content.Client.Gameplay;
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions.Components;
+using Robust.Client.Graphics;
 using Robust.Client.Player;
+using Robust.Client.State;
 using Robust.Shared.Prototypes;
+using static Robust.Shared.Input.Binding.PointerInputCmdHandler;
 
 namespace Content.Client._RMC14.Actions;
 
 public sealed class RMCActionsSystem : SharedRMCActionsSystem
 {
     [Dependency] private readonly ActionsSystem _actions = default!;
+    [Dependency] private readonly IEyeManager _eyeManager = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private readonly IStateManager _stateManager = default!;
 
     private EntityUid? _sortEnt;
 
@@ -40,6 +46,41 @@ public sealed class RMCActionsSystem : SharedRMCActionsSystem
 
         var ev = new RMCActionOrderChangeEvent(actionPrototypes);
         RaiseNetworkEvent(ev);
+    }
+
+    public EntityUid? GetActionTarget(EntityUid user, Entity<ActionComponent?> action, in PointerInputCmdArgs args)
+    {
+        if (!Resolve(action, ref action.Comp))
+            return null;
+
+        if (_stateManager.CurrentState is not GameplayStateBase screen)
+            return null;
+
+        var coords = _eyeManager.ScreenToMap(args.ScreenCoordinates);
+
+        var clickables = screen.GetClickableEntities(coords);
+
+        EntityUid? firstTarget = null;
+        EntityUid? firstPriorityTarget = null;
+
+        foreach (var clickable in clickables)
+        {
+            var ev = new CheckActionTargetEvent(clickable, user, (action, action.Comp));
+            RaiseLocalEvent(action, ref ev);
+
+            if (ev.Skip)
+                continue;
+
+            firstTarget ??= clickable;
+
+            if (ev.Defer)
+                continue;
+
+            firstPriorityTarget ??= clickable;
+            break;
+        }
+
+        return firstPriorityTarget ?? firstTarget;
     }
 
     private void SortDefault(EntityUid player)

@@ -43,7 +43,7 @@ public sealed partial class EntityTargetActionComponent : Component
     /// Whether this action considers the user as a valid target entity when using this action.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public bool CanTargetSelf = true;
+    public bool CanTargetSelf = false; // RMC14 changed default from true to false (self targeting abilities are extremely rare)
 
     /// <summary>
     /// Whether to make the user face towards the direction where they targeted this action.
@@ -57,5 +57,21 @@ public sealed partial class EntityTargetActionComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool ToggleOutline = true;
+
+    /// <summary>
+    /// Determines which entities should NOT be deferred. Entities that don't match will be deferred.
+    /// The normal whitelist and blacklist take precedence.
+    /// </summary>
+    /// <remarks>No whitelist check when null.</remarks>
+    [DataField, AutoNetworkedField]
+    public EntityWhitelist? PriorityWhitelist;
+
+    /// <summary>
+    /// Determines which entities WILL be deferred, even if matching the priority whitelist.
+    /// The normal whitelist and blacklist take precedence.
+    /// </summary>
+    /// <remarks>No blacklist check when null.</remarks>
+    [DataField, AutoNetworkedField]
+    public EntityWhitelist? DeferBlacklist;
     // RMC14
 }

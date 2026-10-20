@@ -13,6 +13,11 @@
     range: 2
   - type: EntityTargetAction
     event: !type:XenoTransferPlasmaActionEvent
+    priorityWhitelist:
+      components:
+      - Xeno
+  - type: ActionTargetNonHiveAlly
+    defer: true
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -38,6 +43,11 @@
   - type: EntityTargetAction
     event: !type:XenoTransferPlasmaActionEvent
       amount: 100
+    priorityWhitelist:
+      components:
+      - Xeno
+  - type: ActionTargetNonHiveAlly
+    defer: true
 
 - type: entity
   id: ActionXenoTransferPlasmaHivelord
@@ -55,6 +65,11 @@
   - type: EntityTargetAction
     event: !type:XenoTransferPlasmaActionEvent
       amount: 200
+    priorityWhitelist:
+      components:
+      - Xeno
+  - type: ActionTargetNonHiveAlly
+    defer: true
 
 - type: entity
   id: ActionXenoResinSurge
@@ -80,6 +95,8 @@
   - type: WorldTargetAction
     event: !type:XenoResinSurgeActionEvent
   - type: XenoResinSurgeAction
+  - type: ActionTargetNonHiveAlly
+    skip: true
 
 - type: entity
   parent: ActionXenoBase
@@ -96,6 +113,9 @@
     range: 7
   - type: EntityTargetAction
     event: !type:XenoRetrieveActionEvent
+    priorityWhitelist:
+      components:
+      - Xeno
   - type: XenoActionPlasma
     cost: 180
   - type: XenoActionEnergy
@@ -103,6 +123,8 @@
   - type: ActionCooldown
     cooldown: 10
   - type: ActionBlockIfResting
+  - type: ActionTargetNonHiveAlly
+    defer: true
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -128,6 +150,9 @@
     range: 1.5
   - type: EntityTargetAction
     event: !type:XenoAidActionEvent
+    priorityWhitelist:
+      components:
+      - Xeno
   - type: XenoActionPlasma
     cost: 100
   - type: ActionBlockIfResting
@@ -137,6 +162,8 @@
     - ActionXenoAidRejuvenate
     cooldown: 10
   - type: RMCDazeableAction
+  - type: ActionTargetNonHiveAlly
+    defer: true
 
 - type: entity
   parent: ActionXenoBase
@@ -155,6 +182,9 @@
   - type: EntityTargetAction
     event: !type:XenoAidActionEvent
       aidType: Ailments
+    priorityWhitelist:
+      components:
+      - Xeno
   - type: XenoActionPlasma
     cost: 100
   - type: ActionBlockIfResting
@@ -163,6 +193,8 @@
     ids:
     - ActionXenoAidHeal
     cooldown: 10
+  - type: ActionTargetNonHiveAlly
+    defer: true
 
 #- type: entity
 #  parent: ActionXenoBase
@@ -262,6 +294,11 @@
       amount: 0
       targetPercentage: 0.75
       range: null
+    priorityWhitelist:
+      components:
+      - Xeno
+  - type: ActionTargetNonHiveAlly
+    defer: true
 
 - type: entity
   parent: ActionXenoBase
@@ -279,8 +316,13 @@
     range: 2
   - type: EntityTargetAction
     event: !type:XenoApplySalveActionEvent
+    priorityWhitelist:
+      components:
+      - Xeno
   - type: RMCDazeableAction
   - type: ActionBlockIfResting
+  - type: ActionTargetNonHiveAlly
+    defer: true
 
 - type: entity
   parent: ActionXenoBase
@@ -301,6 +343,11 @@
       - type: RMCSlowdown
       - type: RMCSuperSlowdown
       - type: RMCRooted
+    priorityWhitelist:
+      components:
+      - XenoComponent
+  - type: ActionTargetNonHiveAlly
+    defer: true
 
 - type: entity
   parent: ActionXenoBase
@@ -318,6 +365,9 @@
     range: 2
   - type: EntityTargetAction
     event: !type:XenoTailFountainActionEvent
+    priorityWhitelist:
+      components:
+      - MobState
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -344,6 +394,11 @@
     range: 8
   - type: EntityTargetAction
     event: !type:XenoTantrumActionEvent
+    priorityWhitelist:
+      components:
+      - Xeno
+  - type: ActionTargetNonHiveAlly
+    defer: true
 
 - type: entity
   parent: CMGuidebookActionXenoBase
