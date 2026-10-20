@@ -1,0 +1,17 @@
+<crt:RMCCrtCollapsibleSection xmlns="https://spacestation14.io"
+                              xmlns:crt="clr-namespace:Content.Client._RMC14.UserInterface.Crt"
+                              Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True">
+    <crt:RMCCrtActionButton Name="Header" ContentAlignment="Left" TextFontSize="10" HorizontalExpand="True" />
+    <BoxContainer Name="HeaderContent" Orientation="Horizontal" SeparationOverride="7"
+                  HorizontalExpand="True" MouseFilter="Ignore">
+        <crt:RMCCrtLabel Name="Indicator" TextFontSize="10" SetWidth="14"
+                         VerticalAlignment="Top" MouseFilter="Ignore" />
+        <BoxContainer Name="TextColumn" Orientation="Vertical" SeparationOverride="4"
+                      HorizontalExpand="True" MouseFilter="Ignore">
+            <crt:RMCCrtLabel Name="Summary" Access="Public" TextFontSize="10"
+                             HorizontalExpand="True" MouseFilter="Ignore" Visible="False" />
+        </BoxContainer>
+    </BoxContainer>
+    <BoxContainer Name="Body" Access="Public" Orientation="Vertical" SeparationOverride="6"
+                  HorizontalExpand="True" Margin="30 0 9 8" Visible="False" />
+</crt:RMCCrtCollapsibleSection>

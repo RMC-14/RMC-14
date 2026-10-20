@@ -8,6 +8,11 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/f0fb0e64d6e577e2592da29aa4acfe0a89713ce1/sound/effects/mhelp.ogg"
 
+- files: ["sos-morse-code.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/effects/sos-morse-code.ogg"
+
 - files: [ "gmrequest.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Made by bensnedden (Freesound community) on Pixabay, modified by ThataKat on Github"
