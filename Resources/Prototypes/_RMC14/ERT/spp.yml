@@ -1,0 +1,183 @@
+- type: rmcERTCall
+  id: RMCERTCallSPPFriendly
+  name: rmc-ert-call-spp-friendly-name
+  organization: rmc-ert-organization-spp
+  npcFactions: [ SPP ]
+  iffFaction: FactionSPP
+  category: rmc-ert-category-foreign-military
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-spp-friendly
+  randomWeight: 10
+  allowedSources: [ Console, Handheld, Admin ]
+  # TODO RMC14 replace with an exact SPP/UPP squad shuttle once ported.
+  shuttleMap: /Maps/_RMC14/Shuttles/ERT/ert_spp_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttleSPP
+  shuttleSpawnMarker: RMCERTShuttleStartPadSPP
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  roles:
+  - id: leader
+    name: rmc-ert-role-spp-leader
+    job: RMCSPPLeader
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidSPPLeaderFriendly
+      weight: 100
+    min: 1
+    max: 1
+    leader: true
+    roleTags: [ leader, command ]
+    seatTags: [ command ]
+    priority: 100
+  - id: rifleman
+    name: rmc-ert-role-spp-rifleman
+    job: RMCSPPRifleman
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidSPPRiflemanFriendly
+      weight: 66
+    - entity: RMCRandomHumanoidSPPRiflemanBreacherFriendly
+      weight: 19
+    - entity: RMCRandomHumanoidSPPRiflemanDoubleFriendly
+      weight: 15
+    min: 2
+    max: 4
+    roleTags: [ rifleman ]
+    seatTags: [ troop ]
+  - id: medic
+    name: rmc-ert-role-spp-medic
+    job: RMCSPPMedic
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidSPPMedicFriendly
+      weight: 100
+    min: 0
+    max: 2
+    required: false
+    roleTags: [ medic ]
+    seatTags: [ medic, troop ]
+  - id: sapper
+    name: rmc-ert-role-spp-sapper
+    job: RMCSPPEngineer
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidSPPEngineerFriendly
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ engineer ]
+    seatTags: [ engineer, troop ]
+  - id: specialist
+    name: rmc-ert-role-spp-specialist
+    job: RMCSPPSpecialist
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidSPPSpecialistFriendly
+      weight: 50
+    - entity: RMCRandomHumanoidSPPSpecialistShotgunFriendly
+      weight: 50
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ specialist, rifleman ]
+    seatTags: [ troop ]
+  announcements:
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-spp-arrival
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 3
+    maxSlots: 9
+
+- type: rmcERTCall
+  id: RMCERTCallSPPHostile
+  name: rmc-ert-call-spp-hostile-name
+  organization: rmc-ert-organization-spp
+  npcFactions: [ SPP ]
+  iffFaction: FactionSPP
+  category: rmc-ert-category-foreign-military
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-spp-hostile
+  randomWeight: 10
+  allowedSources: [ Console, Admin ]
+  # TODO RMC14 replace with an exact SPP/UPP squad shuttle once ported.
+  shuttleMap: /Maps/_RMC14/Shuttles/ERT/ert_spp_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttleSPP
+  shuttleSpawnMarker: RMCERTShuttleStartPadSPP
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  roles:
+  - id: leader
+    name: rmc-ert-role-spp-leader
+    job: RMCSPPLeader
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidSPPLeaderHostile
+      weight: 100
+    min: 1
+    max: 1
+    leader: true
+    roleTags: [ leader, command ]
+    seatTags: [ command ]
+    priority: 100
+  - id: rifleman
+    name: rmc-ert-role-spp-rifleman
+    job: RMCSPPRifleman
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidSPPRiflemanHostile
+      weight: 66
+    - entity: RMCRandomHumanoidSPPRiflemanBreacherHostile
+      weight: 19
+    - entity: RMCRandomHumanoidSPPRiflemanDoubleHostile
+      weight: 15
+    min: 2
+    max: 4
+    roleTags: [ rifleman ]
+    seatTags: [ troop ]
+  - id: medic
+    name: rmc-ert-role-spp-medic
+    job: RMCSPPMedic
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidSPPMedicHostile
+      weight: 100
+    min: 0
+    max: 2
+    required: false
+    roleTags: [ medic ]
+    seatTags: [ medic, troop ]
+  - id: sapper
+    name: rmc-ert-role-spp-sapper
+    job: RMCSPPEngineer
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidSPPEngineerHostile
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ engineer ]
+    seatTags: [ engineer, troop ]
+  - id: specialist
+    name: rmc-ert-role-spp-specialist
+    job: RMCSPPSpecialist
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidSPPSpecialistHostile
+      weight: 50
+    - entity: RMCRandomHumanoidSPPSpecialistShotgunHostile
+      weight: 50
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ specialist, rifleman ]
+    seatTags: [ troop ]
+  announcements:
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-spp-hostile-arrival
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 3
+    maxSlots: 9

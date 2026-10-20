@@ -1,0 +1,26 @@
+<controls:RMCERTAdminWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.ERT"
+    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+    MinSize="820 560">
+    <BoxContainer Orientation="Vertical" Margin="6">
+        <BoxContainer Orientation="Horizontal">
+            <Label Name="HeaderLabel" Access="Public" HorizontalExpand="True" />
+        </BoxContainer>
+        <cc:HSeparator Color="#4972A1" Margin="0 5" />
+        <TabContainer Name="Tabs" Access="Public" VerticalExpand="True" HorizontalExpand="True">
+            <ScrollContainer Name="RequestsTab" Access="Public" VerticalExpand="True" HorizontalExpand="True" Margin="4 6 4 4">
+                <BoxContainer Name="Requests" Access="Public" Orientation="Vertical" HorizontalExpand="True" />
+            </ScrollContainer>
+            <BoxContainer Name="ForceTab" Access="Public" Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True" Margin="4 6 4 4">
+                <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="0 0 0 6">
+                    <Label Text="{Loc 'rmc-ert-admin-force-reason'}" VerticalAlignment="Center" Margin="0 0 6 0" />
+                    <LineEdit Name="ForceReason" Access="Public" HorizontalExpand="True" />
+                </BoxContainer>
+                <ScrollContainer VerticalExpand="True" HorizontalExpand="True">
+                    <BoxContainer Name="ForceCalls" Access="Public" Orientation="Vertical" HorizontalExpand="True" />
+                </ScrollContainer>
+            </BoxContainer>
+        </TabContainer>
+    </BoxContainer>
+</controls:RMCERTAdminWindow>

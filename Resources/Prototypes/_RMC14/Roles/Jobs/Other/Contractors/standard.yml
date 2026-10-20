@@ -1,0 +1,230 @@
+- type: job
+  parent: CMJobBase
+  id: RMCContractorStandard
+  name: rmc-job-name-contractor-standard
+  description: rmc-ghost-role-information-contractor-description
+  playTimeTracker: RMCJobContractorStandard
+  ranks:
+    RMCRankFLFreelancer: []
+  startingGear: RMCGearContractorStandard
+  icon: RMCJobIconFreelancerStandard
+  joinNotifyCrew: false
+  access: [ CMAccessERT ]
+  accessGroups:
+  - Colony
+  - RMCWeYa
+  spawnMenuRoleName: VAI Contractor
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - VAI
+    - type: Skills
+      skills:
+        RMCSkillFireman: 1
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-contractor-standard
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidContractorStandard
+  name: contractor ghost role standard
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/headsets.rsi
+    state: vai_headset
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorStandard
+
+- type: entity
+  parent: RMCRandomHumanoidContractorStandard
+  id: RMCRandomHumanoidContractorStandardMAR40
+  suffix: Spawner, Player, Friendly, MAR40
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorStandard
+
+- type: entity
+  parent: RMCRandomHumanoidContractorStandard
+  id: RMCRandomHumanoidContractorStandardL42A
+  suffix: Spawner, Player, Friendly, L42A
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorStandardL42A
+
+- type: entity
+  parent: RMCRandomHumanoidContractorStandard
+  id: RMCRandomHumanoidContractorStandardM54C
+  suffix: Spawner, Player, Friendly, M54C
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorStandardM54C
+
+- type: entity
+  parent: RMCRandomHumanoidContractorStandard
+  id: RMCRandomHumanoidContractorStandardShotgun
+  suffix: Spawner, Player, Friendly, Shotgun
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorStandardShotgun
+
+- type: entity
+  parent: RMCRandomHumanoidContractorStandard
+  id: RMCRandomHumanoidContractorStandardM54CMK1
+  suffix: Spawner, Player, Friendly, M54C MK1
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorStandardM54CMK1
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCContractorStandard
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-standard
+    description: rmc-ghost-role-information-contractor-description
+    rules: rmc-ghost-role-information-contractor-rules
+    reregister: false
+    job: RMCContractorStandard
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000
+  - type: GhostRoleApplySpecial
+    squad: SquadFreelancer
+
+- type: randomHumanoidSettings
+  parent: RMCContractorStandard
+  id: RMCContractorStandardL42A
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-standard
+    job: RMCContractorStandardL42A
+
+- type: randomHumanoidSettings
+  parent: RMCContractorStandard
+  id: RMCContractorStandardM54C
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-standard
+    job: RMCContractorStandardM54C
+
+- type: randomHumanoidSettings
+  parent: RMCContractorStandard
+  id: RMCContractorStandardShotgun
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-standard
+    job: RMCContractorStandardShotgun
+
+- type: randomHumanoidSettings
+  parent: RMCContractorStandard
+  id: RMCContractorStandardM54CMK1
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-standard
+    job: RMCContractorStandardM54CMK1
+
+- type: job
+  parent: RMCContractorStandard
+  id: RMCContractorStandardL42A
+  playTimeTracker: RMCJobContractorStandard
+  startingGear: RMCGearContractorStandardL42A
+  spawnMenuRoleName: VAI Contractor (L42A)
+
+- type: job
+  parent: RMCContractorStandard
+  id: RMCContractorStandardM54C
+  playTimeTracker: RMCJobContractorStandard
+  startingGear: RMCGearContractorStandardM54C
+  spawnMenuRoleName: VAI Contractor (M54C)
+
+- type: job
+  parent: RMCContractorStandard
+  id: RMCContractorStandardShotgun
+  playTimeTracker: RMCJobContractorStandard
+  startingGear: RMCGearContractorStandardShotgun
+  spawnMenuRoleName: VAI Contractor (Shotgun)
+
+- type: job
+  parent: RMCContractorStandard
+  id: RMCContractorStandardM54CMK1
+  playTimeTracker: RMCJobContractorStandard
+  startingGear: RMCGearContractorStandardM54CMK1
+  spawnMenuRoleName: VAI Contractor (M54C MK1)
+
+- type: startingGear
+  parent: RMCGearContractorDutyBase
+  id: RMCGearContractorStandard
+  equipment:
+    suitstorage: WeaponRifleMAR40
+    belt: RMCMAR40BeltFilled
+  storage:
+    pocket2:
+    - RMCMagazineRifleMAR40Ext
+    - RMCMagazineRifleMAR40Ext
+    - RMCMagazineRifleMAR40
+    - RMCMagazineRifleMAR40
+
+- type: startingGear
+  parent: RMCGearContractorDutyBase
+  id: RMCGearContractorStandardL42A
+  equipment:
+    suitstorage: RMCWeaponRifleL42A
+  storage:
+    pocket2:
+    - RMCMagazineRifleL42AExtended
+    - RMCMagazineRifleL42AExtended
+    - RMCMagazineRifleL42AAP
+    - RMCMagazineRifleL42AAP
+
+- type: startingGear
+  parent: RMCGearContractorDutyBase
+  id: RMCGearContractorStandardM54C
+  equipment:
+    suitstorage: RMCWeaponRifleM54C
+  storage:
+    pocket2:
+    - CMMagazineRifleM54CExt
+    - CMMagazineRifleM54CExt
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+
+- type: startingGear
+  parent: RMCGearContractorDutyBase
+  id: RMCGearContractorStandardShotgun
+  equipment:
+    outerClothing: RMCArmorM3LightPadless
+    suitstorage: RMCWeaponShotgunM42A2Filled
+    pocket2: RMCPouchShotgunLargeBuckshot
+  storage:
+    back:
+    - RMCGrenadeBlastM12
+    - RMCGrenadeBlastM12
+    - RMCExplosiveBreachingCharge
+    - CMCrowbar
+
+- type: startingGear
+  parent: RMCGearContractorDutyBase
+  id: RMCGearContractorStandardM54CMK1
+  equipment:
+    outerClothing: RMCArmorM3LightCarrier
+    suitstorage: RMCWeaponRifleM54CMK1
+  storage:
+    pocket2:
+    - CMMagazineRifleM54CMK1
+    - CMMagazineRifleM54CMK1
+    - CMMagazineRifleM54CMK1AP
+    - CMMagazineRifleM54CMK1AP
+
+- type: playTimeTracker
+  id: RMCJobContractorStandard
