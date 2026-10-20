@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Content.Shared.Access;
 using Content.Shared.Actions;
-using Content.Shared.DoAfter;
-using Content.Shared.Tools;
+using Content.Shared.NPC.Prototypes;
 using Robust.Shared.GameObjects;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -18,30 +18,13 @@ public sealed partial class VehicleLockComponent : Component
     public bool Locked;
 
     [DataField, AutoNetworkedField]
-    public bool Broken;
-
-    [DataField, AutoNetworkedField]
     public string? KeyId;
 
     [DataField]
-    public ProtoId<ToolQualityPrototype> BreakToolQuality = "Cutting";
+    public List<ProtoId<AccessLevelPrototype>> Access = new() { "CMAccessCrewman", "RMCAccessCommand", "CMAccessBrig" };
 
-    [DataField]
-    public TimeSpan BreakDelay = TimeSpan.FromSeconds(60);
-
-    [DataField]
-    public TimeSpan BreakAlarmInterval = TimeSpan.FromSeconds(2.5);
-
-    [DataField]
-    public TimeSpan BreakAlarmFlashDuration = TimeSpan.FromSeconds(0.6);
-
-    [DataField]
-    public ProtoId<ToolQualityPrototype> RepairToolQuality = "Screwing";
-
-    [DataField]
-    public TimeSpan RepairDelay = TimeSpan.FromSeconds(10);
-
-    public int AlarmToken;
+    [DataField, AutoNetworkedField]
+    public HashSet<ProtoId<NpcFactionPrototype>> Factions = new();
 }
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
@@ -62,12 +45,6 @@ public sealed partial class VehicleLockActionComponent : Component
 }
 
 public sealed partial class VehicleLockActionEvent : InstantActionEvent;
-
-[Serializable, NetSerializable]
-public sealed partial class VehicleLockBreakDoAfterEvent : SimpleDoAfterEvent;
-
-[Serializable, NetSerializable]
-public sealed partial class VehicleLockRepairDoAfterEvent : SimpleDoAfterEvent;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(VehicleLockSystem))]

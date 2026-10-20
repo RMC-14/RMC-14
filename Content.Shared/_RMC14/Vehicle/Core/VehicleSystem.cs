@@ -184,7 +184,7 @@ public sealed partial class VehicleSystem : EntitySystem
             return;
         }
 
-        var doAfter = new DoAfterArgs(EntityManager, args.User, ent.Comp.EnterDoAfter, new VehicleEnterDoAfterEvent { EntryIndex = entryIndex }, ent.Owner)
+        var doAfter = new DoAfterArgs(EntityManager, args.User, GetEnterDoAfter(ent, args.User), new VehicleEnterDoAfterEvent { EntryIndex = entryIndex }, ent.Owner)
         {
             BreakOnMove = true,
             BreakOnDamage = false,
@@ -201,6 +201,21 @@ public sealed partial class VehicleSystem : EntitySystem
             _audio.PlayPvs(XenoFrameBreachSound, ent.Owner);
 
         args.Handled = true;
+    }
+
+    private float GetEnterDoAfter(Entity<VehicleEnterComponent> ent, EntityUid user)
+    {
+        if (HasComp<XenoComponent>(user))
+            return ent.Comp.XenoEnterDoAfter;
+
+        if (TryComp(user, out PullerComponent? puller) &&
+            puller.Pulling is { } pulling &&
+            pulling != ent.Owner)
+        {
+            return ent.Comp.DragEnterDoAfter;
+        }
+
+        return ent.Comp.EnterDoAfter;
     }
 
     private bool TryEnter(Entity<VehicleEnterComponent> ent, EntityUid user, int entryIndex = -1)
@@ -504,13 +519,6 @@ public sealed partial class VehicleSystem : EntitySystem
         if (!TryComp(vehicleUid, out VehicleEnterComponent? enter))
             return;
 
-        if (IsEntryBlockedByLock(vehicleUid, args.User))
-        {
-            _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-locked"), args.User, args.User, PopupType.SmallCaution);
-            args.Handled = true;
-            return;
-        }
-
         if (HasComp<GhostComponent>(args.User))
         {
             args.Handled = TryExit(ent, args.User);
@@ -609,12 +617,6 @@ public sealed partial class VehicleSystem : EntitySystem
 
         if (!TryComp(vehicleUid, out VehicleEnterComponent? enter))
             return false;
-
-        if (IsEntryBlockedByLock(vehicleUid, user))
-        {
-            _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-locked"), user, user, PopupType.SmallCaution);
-            return false;
-        }
 
         if (!TryGetExitCoordinates(ent, enter, vehicleUid, out var exitCoords, out var exitMapCoords))
             return false;
@@ -1064,6 +1066,7 @@ public sealed partial class VehicleSystem : EntitySystem
         _vehicles.TrySetOperator((vehicle.Value, vehicleComp), args.Buckle.Owner);
 
         EnsureComp<VehicleOperatorComponent>(args.Buckle.Owner);
+        _vehicleLock.SetFactionFromOccupant(vehicle.Value, args.Buckle.Owner);
         _vehicleLock.EnableLockAction(args.Buckle.Owner, vehicle.Value);
     }
 
@@ -1172,10 +1175,7 @@ public sealed partial class VehicleSystem : EntitySystem
         if (HasComp<GhostComponent>(user))
             return false;
 
-        if (!TryComp(vehicle, out VehicleLockComponent? vehicleLock) || !vehicleLock.Locked)
-            return false;
-
-        return !CanBypassLockWithDestroyedFrame(vehicle, user);
+        return !_vehicleLock.CanPassLock(vehicle, user);
     }
 
     private bool CanBypassLockWithDestroyedFrame(EntityUid vehicle, EntityUid user)
