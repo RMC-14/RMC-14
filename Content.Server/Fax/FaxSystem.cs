@@ -300,8 +300,10 @@ public sealed class FaxSystem : EntitySystem
                     args.Data.TryGetValue(FaxConstants.FaxPaperStampedByData, out List<StampDisplayInfo>? stampedBy);
                     args.Data.TryGetValue(FaxConstants.FaxPaperPrototypeData, out string? prototypeId);
                     args.Data.TryGetValue(FaxConstants.FaxPaperLockedData, out bool? locked);
+                    args.Data.TryGetValue(FaxConstants.FaxPaperPaperColor, out Color? paperColor);
+                    args.Data.TryGetValue(FaxConstants.FaxPaperTextColor, out Color? textColor);
 
-                    var printout = new FaxPrintout(content, name, label, prototypeId, stampState, stampedBy, locked ?? false);
+                    var printout = new FaxPrintout(content, name, label, prototypeId, stampState, stampedBy, locked ?? false, paperColor ?? null, textColor ?? null);
                     Receive(uid, printout, args.SenderAddress);
 
                     break;
@@ -474,7 +476,9 @@ public sealed class FaxSystem : EntitySystem
                                        metadata.EntityPrototype?.ID ?? component.PrintPaperId,
                                        paper.StampState,
                                        paper.StampedBy,
-                                       paper.EditingDisabled);
+                                       paper.EditingDisabled,
+                                       paper.Color,
+                                       paper.TextColor);
 
         component.PrintingQueue.Enqueue(printout);
         component.SendTimeoutRemaining += component.SendTimeout;
@@ -528,6 +532,8 @@ public sealed class FaxSystem : EntitySystem
             { FaxConstants.FaxPaperLabelData, labelComponent?.CurrentLabel },
             { FaxConstants.FaxPaperContentData, paper.Content },
             { FaxConstants.FaxPaperLockedData, paper.EditingDisabled },
+            { FaxConstants.FaxPaperPaperColor, paper.Color },
+            { FaxConstants.FaxPaperTextColor, paper.TextColor },
         };
 
         if (metadata.EntityPrototype != null)
@@ -596,6 +602,10 @@ public sealed class FaxSystem : EntitySystem
         if (TryComp<PaperComponent>(printed, out var paper))
         {
             _paperSystem.SetContent((printed, paper), printout.Content);
+            //RMC14
+            paper.Color = printout.PaperColor ?? Color.White;
+            paper.TextColor = printout.TextColor ?? Color.Black;
+            //RMC14
 
             // Apply stamps
             if (printout.StampState != null)
