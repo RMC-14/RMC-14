@@ -27,8 +27,6 @@
     whitelist:
       tags:
       - RMCShellShotgun
-    proto: CMShellShotgunSlugs
-    capacity: 8
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -51,10 +49,10 @@
           - RMCAttachmentM890Stock
       rmc-aslot-underbarrel:
         locked: true
-        startingAttachable: RMCAttachmentU1GrenadeLauncher
+        startingAttachable: RMCAttachmentM890GrenadeLauncher
         whitelist:
           tags:
-          - RMCAttachmentU1GrenadeLauncher
+          - RMCAttachmentM890GrenadeLauncher
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.825, 0.06
@@ -120,7 +118,7 @@
           - RMCAttachmentM890Stock
       rmc-aslot-underbarrel:
         locked: true
-        startingAttachable: RMCAttachmentU1GrenadeLauncher
+        startingAttachable: RMCAttachmentM890GrenadeLauncher
         whitelist:
           tags:
-          - RMCAttachmentU1GrenadeLauncher
+          - RMCAttachmentM890GrenadeLauncher
