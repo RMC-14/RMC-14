@@ -16,9 +16,6 @@ public sealed partial class RMCRefillSolutionFromContainerOnStoreComponent : Com
 
     [DataField, AutoNetworkedField]
     public TimeSpan FlushTime = TimeSpan.FromSeconds(3);
-
-    [DataField, AutoNetworkedField]
-    public float LayerOpacity = 0.75f;
 }
 
 
