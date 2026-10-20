@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.NPC;
 using Content.Shared._RMC14.Tools;
 using Content.Shared._RMC14.Vehicle;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Weapons.Ranged.Homing;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
@@ -74,6 +75,7 @@ public sealed class SentrySystem : EntitySystem
         SubscribeLocalEvent<SentryComponent, ExaminedEvent>(OnSentryExamined);
         SubscribeLocalEvent<SentryComponent, CombatModeShouldHandInteractEvent>(OnSentryShouldInteract);
         SubscribeLocalEvent<SentryComponent, BeforeDamageChangedEvent>(OnBeforeDamageChanged);
+        SubscribeLocalEvent<SentryComponent, CheckMeleeAttackerEvent>(OnSentryReceivingMeleeAttackAttempt);
         SubscribeLocalEvent<SentrySpikesComponent, AttackedEvent>(OnSentrySpikesAttacked);
 
         Subs.BuiEvents<SentryComponent>(SentryUiKey.Key,
@@ -340,6 +342,21 @@ public sealed class SentrySystem : EntitySystem
 
         if (ent.Comp.Mode == SentryMode.Item)
             args.Cancelled = true;
+    }
+
+    private void OnSentryReceivingMeleeAttackAttempt(Entity<SentryComponent> ent, ref CheckMeleeAttackerEvent args)
+    {
+        // sentries can't be tackled/disarmed
+        if (args.Disarm)
+        {
+            args.Skip = true;
+            return;
+        }
+
+        // item mode sentries can't be damaged, but we can't cancel the attack because
+        // we allow sentries to be picked up in combat mode
+        if (ent.Comp.Mode is SentryMode.Item)
+            args.Defer = true;
     }
 
     private void UpdateState(Entity<SentryComponent> sentry)
