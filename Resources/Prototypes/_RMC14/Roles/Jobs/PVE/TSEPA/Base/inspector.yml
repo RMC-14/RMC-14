@@ -1,0 +1,98 @@
+- type: job
+  parent: CMJobBase
+  id: RMCTSEPAInspectorPVE
+  name: rmc-job-name-tsepa-pve-inspector
+  description: rmc-job-description-tsepa-pve-inspector
+  playTimeTracker: RMCJobTSEPAInspectorPVE
+  ranks:
+    RMCRankTSEPAInspector: []
+  startingGear: RMCGearTSEPAInspectorPVE
+  icon: "RMCJobIconTSEPAInspectorPVE"
+  joinNotifyCrew: false
+  supervisors: rmc-job-supervisors-tsepa-prefectural-command
+  accessGroups:
+  - ShipMasterAccess
+  - ColonistTSEPAInspector
+  spawnMenuRoleName: TSEPA Inspector (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Language
+      spokenLanguages:
+      - English
+      - Japanese
+      understoodLanguages:
+      - English
+      - Japanese
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillCqc: 3
+        RMCSkillEndurance: 3
+        RMCSkillEngineer: 1
+        RMCSkillFirearms: 2
+        RMCSkillFireman: 3
+        RMCSkillJtac: 2
+        RMCSkillLeadership: 2
+        RMCSkillMedical: 2
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillSurgery: 1
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: CommandAccent
+    - type: InnateCommandSpeech
+    - type: RMCTrackable
+    - type: NpcFactionMember
+      factions:
+      - TSE
+    - type: JobPrefix
+      prefix: rmc-job-prefix-tsepa-pve-inspector
+    - type: AssignSquad
+      squad: SquadTSEPA
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: rmc_commander
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_nspa
+  hidden: true
+
+- type: startingGear
+  id: RMCGearTSEPAInspectorPVE
+  equipment:
+    head: RMCHeadCapTSEPAPeakedGold
+    ears: RMCHeadsetTSEPAInspector
+    jumpsuit: RMCJumpsuitTSEPA
+    belt: RMCBeltHolsterPistolTSEFilledL54
+    outerClothing: RMCCoatTSEPAFormal
+    gloves: RMCHandsBlack 
+    shoes: CMBootsBlack
+    id: RMCIDCardTSEPAGold
+    back: RMCSatchelTSEPA
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointTSEPAInspectorPVE
+  name: tsepa inspector spawn point
+  suffix: PVE
+  components:
+  - type: SpawnPoint
+    job_id: RMCTSEPAInspectorPVE
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/jacket.rsi
+      state: icon
+
+- type: playTimeTracker
+  id: RMCJobTSEPAInspectorPVE
+  isHumanoid: true
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconTSEPAInspectorPVE
+  icon:
+    sprite: _RMC14/Interface/job_icons/TSE/TSEPA/base.rsi
+    state: tsepa_inspector

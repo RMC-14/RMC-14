@@ -12,6 +12,25 @@
     tags:
     - RMCUniformTSE
 
+- type: entity
+  parent: [RMCArmoredUniformBase, RMCFoldableUniformBase]
+  id: RMCJumpsuitTSEPASAT
+  name: special assault team uniform
+  description: A ripstop and lightly-armored tactical uniform issued to operators of the Special Assault Team.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/TSE/TSEPA/sat.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
+  - type: FoldableClothing
+    foldedEquippedPrefix: sleeves
+  - type: Tag
+    tags:
+    - RMCUniformTSE
+
 # Royal
 - type: entity
   parent: [RMCJumpsuitTSEPA, RMCAlternateFoldableUniformBase]

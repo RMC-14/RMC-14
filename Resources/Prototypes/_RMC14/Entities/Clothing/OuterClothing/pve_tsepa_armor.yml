@@ -1,0 +1,164 @@
+# standard
+- type: entity
+  parent: [RMCBaseArmorPVE, RMCBaseUniformAccessoryItemArmorPVE]
+  id: RMCArmorTSEPAPVE
+  suffix: PVE, TSEPA
+  name: M4M pattern modular TSEPA armor
+  description: An ergonomic and modularized variant of the M4R armor system, practical for close quarters and surgical engagements. Standard issue for the Three Suns Empire Policing Authority.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/PVE/TSEPA/tsepamedium.rsi
+  - type: CMArmor
+    melee: 20
+    bullet: 20
+    bio: 20
+    explosionArmor: 20
+  - type: RMCArmorSpeedTier
+    speedTier: light
+  - type: ClothingSpeedModifier
+    walkModifier: .725
+    sprintModifier: .725
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
+  - type: Corrodible
+    isCorrodible: false
+  - type: ClothingRequireEquipped
+    autoUnequip: true
+    denyReason: rmc-armor-not-tse-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformTSE
+  - type: WebbingClothing
+    whitelist:
+      tags:
+      - ArmorWebbing
+
+- type: entity
+  parent: RMCArmorTSEPAPVE
+  id: RMCArmorTSEPALightPVE
+  suffix: PVE, TSEPA
+  name: M4L pattern modular TSEPA armor
+  description: A lighter variant of the M4M system, issued to support personnel where maneuverability matters the most. Standard issue for the Three Suns Empire Policing Authority.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/PVE/TSEPA/tsepalight.rsi
+
+- type: entity
+  parent: RMCArmorTSEPAPVE
+  id: RMCArmorTSEPATechnicianPVE
+  suffix: PVE, TSEPA
+  name: M4T pattern modular TSEPA armor
+  description: A heavier variant of the M4M system, issued to technical personnel where shrapnel is no stranger. Standard issue for the Three Suns Empire Policing Authority.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/PVE/TSEPA/tsepaheavy.rsi
+  - type: CMArmor
+    bullet: 25
+    explosionArmor: 25
+  - type: RMCArmorSpeedTier
+    speedTier: medium
+  - type: ClothingSpeedModifier
+    walkModifier: 0.666
+    sprintModifier: 0.666
+
+# Armour Cases
+
+- type: entity
+  parent: RMCPVEArmorCaseBase
+  id: RMCPVEArmorCaseTSEPA
+  name: M4M modular armor kit
+  description: A case containing the M4M modular armor system, as well as the accompanying helmet and accessories.
+  components:
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/PVE_Cases/Armor/royal.rsi
+    state: icon
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/Armor/royal.rsi
+    layers:
+    - state: base
+    - state: armor
+      map: [ armor ]
+      visible: false
+    - state: lid_closed_a
+      map: [ lid ]
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        lid:
+          True: { state: lid_open }
+          False: { state: lid_closed_a }
+  - type: StorageFill
+    contents:
+    - id: RMCHeadHelmetTSEPA
+    - id: RMCArmorTSEPAPVE
+    - id: RMCPVEArmorPadsTSEPA
+    - id: RMCPVEArmorGroinPlateTSEPA
+    - id: RMCPVEArmorShinGuardTSEPA
+    - id: RMCPVEArmorKneeGuardTSEPA
+
+- type: entity
+  parent: RMCPVEArmorCaseBase
+  id: RMCPVEArmorCaseTSEPALight
+  name: M4L modular armor kit
+  description: A case containing the light variant of the M4M modular armor system, as well as the accompanying helmet and accessories.
+  components:
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/PVE_Cases/Armor/royal.rsi
+    state: icon
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/Armor/royal.rsi
+    layers:
+    - state: base
+    - state: armor
+      map: [ armor ]
+      visible: false
+    - state: lid_closed_a
+      map: [ lid ]
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        lid:
+          True: { state: lid_open }
+          False: { state: lid_closed_a }
+  - type: StorageFill
+    contents:
+    - id: RMCHeadHelmetTSEPA
+    - id: RMCArmorTSEPALightPVE
+    - id: RMCPVEArmorPadsTSEPA
+    - id: RMCPVEArmorGroinPlateTSEPA
+    - id: RMCPVEArmorShinGuardTSEPA
+    - id: RMCPVEArmorKneeGuardTSEPA
+
+- type: entity
+  parent: RMCPVEArmorCaseBase
+  id: RMCPVEArmorCaseTSEPAHeavy
+  name: M4T modular armor kit
+  description: A case containing the technician variant of the M4M modular armor system, as well as the accompanying helmet and accessories.
+  components:
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/PVE_Cases/Armor/royal.rsi
+    state: icon
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/Armor/royal.rsi
+    layers:
+    - state: base
+    - state: armor
+      map: [ armor ]
+      visible: false
+    - state: lid_closed_a
+      map: [ lid ]
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        lid:
+          True: { state: lid_open }
+          False: { state: lid_closed_a }
+  - type: StorageFill
+    contents:
+    - id: RMCHeadHelmetTSEPA
+    - id: RMCArmorTSEPATechnicianPVE
+    - id: RMCPVEArmorPadsTSEPA
+    - id: RMCPVEArmorGroinPlateTSEPA
+    - id: RMCPVEArmorShinGuardTSEPA
+    - id: RMCPVEArmorKneeGuardTSEPA
