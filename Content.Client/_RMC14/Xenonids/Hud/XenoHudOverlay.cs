@@ -50,6 +50,7 @@ public sealed class XenoHudOverlay : Overlay
     private readonly MobThresholdSystem _mobThresholds;
     private readonly SpriteSystem _sprite;
     private readonly TransformSystem _transform;
+    private readonly XenoShieldSystem _shield;
 
     private readonly EntityQuery<DamageableComponent> _damageableQuery;
     private readonly EntityQuery<XenoParasiteComponent> _xenoParasiteQuery;
@@ -84,6 +85,7 @@ public sealed class XenoHudOverlay : Overlay
         _mobThresholds = _entity.System<MobThresholdSystem>();
         _sprite = _entity.System<SpriteSystem>();
         _transform = _entity.System<TransformSystem>();
+        _shield = _entity.System<XenoShieldSystem>();
 
         _damageableQuery = _entity.GetEntityQuery<DamageableComponent>();
         _xenoParasiteQuery = _entity.GetEntityQuery<XenoParasiteComponent>();
@@ -648,7 +650,7 @@ public sealed class XenoHudOverlay : Overlay
         if (critThresholdNullable == null)
             return;
 
-        var shield = xenoShield.ShieldAmount;
+        var shield = _shield.GetTotalShieldValue((uid, xenoShield));
         var max = critThresholdNullable.Value.Double();
         var level = ContentHelpers.RoundToLevels(shield.Double(), max, 11);
         var name = level > 0 ? $"{level * 10}" : "0";

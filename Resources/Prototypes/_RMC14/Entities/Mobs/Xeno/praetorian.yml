@@ -139,7 +139,6 @@
     range: 6
     moveDelayTime: 0
   - type: XenoShield
-    shield: Praetorian
   - type: XenoAcidBall
   - type: XenoEvolution
     strains:
