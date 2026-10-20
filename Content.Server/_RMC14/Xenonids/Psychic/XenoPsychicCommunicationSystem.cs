@@ -6,7 +6,6 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Psychic;
-using Content.Shared._RMC14.Xenonids.Watch;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Chat;
@@ -15,6 +14,7 @@ using Content.Shared.Ghost;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -34,7 +34,6 @@ public sealed class XenoPsychicCommunicationSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
-    [Dependency] private readonly SharedXenoWatchSystem _watch = default!;
 
     private static readonly Color PsychicColor = Color.FromHex("#921992");
     private static readonly Regex NewLineRegex = new("\n{3,}", RegexOptions.Compiled);
@@ -43,35 +42,82 @@ public sealed class XenoPsychicCommunicationSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<XenoPsychicCommunicationComponent, XenoPsychicWhisperActionEvent>(OnWhisperAction);
+        SubscribeLocalEvent<XenoPsychicCommunicationComponent, XenoPsychicActionEvent>(OnPsychicAction);
         SubscribeLocalEvent<XenoPsychicCommunicationComponent, XenoPsychicWhisperInputEvent>(OnWhisperInput);
-        SubscribeLocalEvent<XenoPsychicCommunicationComponent, XenoPsychicRadianceActionEvent>(OnRadianceAction);
         SubscribeLocalEvent<XenoPsychicCommunicationComponent, XenoPsychicRadianceInputEvent>(OnRadianceInput);
-        SubscribeLocalEvent<XenoPsychicCommunicationComponent, XenoGiveOrderActionEvent>(OnGiveOrderAction);
         SubscribeLocalEvent<XenoPsychicCommunicationComponent, XenoGiveOrderInputEvent>(OnGiveOrderInput);
     }
 
-    private void OnWhisperAction(Entity<XenoPsychicCommunicationComponent> queen, ref XenoPsychicWhisperActionEvent args)
+    private void OnPsychicAction(Entity<XenoPsychicCommunicationComponent> queen, ref XenoPsychicActionEvent args)
     {
         if (args.Handled || !CanUseQueen(queen))
             return;
 
-        if (!CanUseQueen(queen) ||
-            !TryGetAction(queen, GetNetEntity(args.Action), out _) ||
-            !CanWhisperTo(queen, args.Target))
+        var target = GetTargetEntity(args.Target);
+
+        // Click on same-hive xeno -> Give Order
+        if (target != null && HasComp<XenoComponent>(target) && _hive.FromSameHive(queen.Owner, target.Value))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-psychic-target-invalid"), queen, queen, PopupType.MediumCaution);
+            if (!_plasma.HasPlasmaPopup(queen.Owner, queen.Comp.GiveOrderPlasmaCost))
+                return;
+
+            _dialog.OpenInput(
+                queen,
+                Loc.GetString("rmc-xeno-psychic-give-order-message", ("target", target.Value)),
+                new XenoGiveOrderInputEvent(GetNetEntity(args.Action), GetNetEntity(target.Value)),
+                largeInput: true,
+                characterLimit: queen.Comp.CharacterLimit,
+                minCharacterLimit: 1,
+                smartCheck: true);
             return;
         }
 
+        // Click on non-xeno with MobState -> Psychic Whisper
+        if (target != null && HasComp<MobStateComponent>(target) && !HasComp<XenoComponent>(target))
+        {
+            if (!CanWhisperTo(queen, target.Value))
+            {
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-psychic-target-invalid"), queen, queen, PopupType.MediumCaution);
+                return;
+            }
+
+            _dialog.OpenInput(
+                queen,
+                Loc.GetString("rmc-xeno-psychic-whisper-message", ("target", QueenTargetName(queen, target.Value))),
+                new XenoPsychicWhisperInputEvent(GetNetEntity(args.Action), GetNetEntity(target.Value)),
+                largeInput: true,
+                characterLimit: queen.Comp.CharacterLimit,
+                minCharacterLimit: 1,
+                smartCheck: true);
+            return;
+        }
+
+        // Click on empty space -> Psychic Radiance
+        if (!_plasma.HasPlasmaPopup(queen.Owner, queen.Comp.RadiancePlasmaCost))
+            return;
+
         _dialog.OpenInput(
             queen,
-            Loc.GetString("rmc-xeno-psychic-whisper-message", ("target", QueenTargetName(queen, args.Target))),
-            new XenoPsychicWhisperInputEvent(GetNetEntity(args.Action), GetNetEntity(args.Target)),
+            Loc.GetString("rmc-xeno-psychic-radiance-message"),
+            new XenoPsychicRadianceInputEvent(GetNetEntity(args.Action)),
             largeInput: true,
             characterLimit: queen.Comp.CharacterLimit,
             minCharacterLimit: 1,
             smartCheck: true);
+    }
+
+    private EntityUid? GetTargetEntity(EntityCoordinates coordinates)
+    {
+        _nearbyMobs.Clear();
+        _lookup.GetEntitiesInRange(coordinates, 0.5f, _nearbyMobs);
+
+        foreach (var mob in _nearbyMobs)
+        {
+            if (HasComp<ActorComponent>(mob) && !_mobState.IsDead(mob))
+                return mob;
+        }
+
+        return null;
     }
 
     private void OnWhisperInput(Entity<XenoPsychicCommunicationComponent> queen, ref XenoPsychicWhisperInputEvent args)
@@ -97,24 +143,6 @@ public sealed class XenoPsychicCommunicationSystem : EntitySystem
         SendGhostCopy(queen, text, Loc.GetString("rmc-xeno-psychic-ghost-whisper", ("queen", queen.Owner), ("target", target.Value), ("message", escaped)));
         _adminLog.Add(LogType.RMCXenoPsychic, LogImpact.Low, $"Psychic whisper from {ToPrettyString(queen):user} to {ToPrettyString(target.Value):target}: {text}");
         _actions.StartUseDelay(action);
-    }
-
-    private void OnRadianceAction(Entity<XenoPsychicCommunicationComponent> queen, ref XenoPsychicRadianceActionEvent args)
-    {
-        if (args.Handled || !CanUseQueen(queen))
-            return;
-
-        if (!_plasma.HasPlasmaPopup(queen.Owner, queen.Comp.RadiancePlasmaCost))
-            return;
-
-        _dialog.OpenInput(
-            queen,
-            Loc.GetString("rmc-xeno-psychic-radiance-message"),
-            new XenoPsychicRadianceInputEvent(GetNetEntity(args.Action)),
-            largeInput: true,
-            characterLimit: queen.Comp.CharacterLimit,
-            minCharacterLimit: 1,
-            smartCheck: true);
     }
 
     private void OnRadianceInput(Entity<XenoPsychicCommunicationComponent> queen, ref XenoPsychicRadianceInputEvent args)
@@ -151,27 +179,6 @@ public sealed class XenoPsychicCommunicationSystem : EntitySystem
         _actions.StartUseDelay(action);
     }
 
-    private void OnGiveOrderAction(Entity<XenoPsychicCommunicationComponent> queen, ref XenoGiveOrderActionEvent args)
-    {
-        if (args.Handled || !CanUseQueen(queen))
-            return;
-
-        if (!_plasma.HasPlasmaPopup(queen.Owner, queen.Comp.GiveOrderPlasmaCost))
-            return;
-
-        if (!TryGetWatchedXeno(queen, out var watched))
-            return;
-
-        _dialog.OpenInput(
-            queen,
-            Loc.GetString("rmc-xeno-psychic-give-order-message", ("target", watched)),
-            new XenoGiveOrderInputEvent(GetNetEntity(args.Action), GetNetEntity(watched)),
-            largeInput: true,
-            characterLimit: queen.Comp.CharacterLimit,
-            minCharacterLimit: 1,
-            smartCheck: true);
-    }
-
     private void OnGiveOrderInput(Entity<XenoPsychicCommunicationComponent> queen, ref XenoGiveOrderInputEvent args)
     {
         if (!CanUseQueen(queen))
@@ -183,8 +190,8 @@ public sealed class XenoPsychicCommunicationSystem : EntitySystem
 
         if (!TryGetEntity(args.Target, out var target) ||
             !TryGetAction(queen, args.Action, out var action) ||
-            !TryGetWatchedXeno(queen, out var watched) ||
-            watched != target.Value)
+            !HasComp<XenoComponent>(target) ||
+            !_hive.FromSameHive(queen.Owner, target.Value))
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-psychic-target-invalid"), queen, queen, PopupType.MediumCaution);
             return;
@@ -248,28 +255,6 @@ public sealed class XenoPsychicCommunicationSystem : EntitySystem
         }
 
         return _transform.InRange(queen.Owner, target, range);
-    }
-
-    private bool TryGetWatchedXeno(Entity<XenoPsychicCommunicationComponent> queen, out EntityUid watched)
-    {
-        watched = default;
-        if (!_watch.TryGetWatched(queen.Owner, out watched) ||
-            watched == queen.Owner)
-        {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-psychic-give-order-must-watch"), queen, queen, PopupType.MediumCaution);
-            return false;
-        }
-
-        if (!HasComp<XenoComponent>(watched) ||
-            !HasComp<ActorComponent>(watched) ||
-            _mobState.IsDead(watched) ||
-            !_hive.FromSameHive(queen.Owner, watched))
-        {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-psychic-target-invalid"), queen, queen, PopupType.MediumCaution);
-            return false;
-        }
-
-        return true;
     }
 
     private bool TryGetAction(Entity<XenoPsychicCommunicationComponent> queen, NetEntity netAction, out EntityUid action)
