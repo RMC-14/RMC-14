@@ -7,9 +7,20 @@ public sealed class XenoEvolutionUISystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoEvolutionComponent, AfterAutoHandleStateEvent>(OnXenoEvolutionAfterState);
+        SubscribeLocalEvent<XenoRaffleCandidateComponent, AfterAutoHandleStateEvent>(OnRaffleCandidateAfterState);
     }
 
     private void OnXenoEvolutionAfterState(Entity<XenoEvolutionComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        RefreshEvolutionUi(ent);
+    }
+
+    private void OnRaffleCandidateAfterState(Entity<XenoRaffleCandidateComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        RefreshEvolutionUi(ent);
+    }
+
+    private void RefreshEvolutionUi(EntityUid ent)
     {
         if (!TryComp(ent, out UserInterfaceComponent? ui))
             return;
