@@ -2,7 +2,7 @@
 
 namespace Content.Shared._RMC14.GhostColor;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(raiseAfterAutoHandleState: true)]
 public sealed partial class GhostColorComponent : Component
 {
     [DataField, AutoNetworkedField]
