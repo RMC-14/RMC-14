@@ -87,6 +87,11 @@
       Urban: _RMC14/Objects/Weapons/Guns/Snipers/m96s/urban.rsi
   - type: RMCGunChamber
     enabled: false
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-m96s
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: BaseItem
