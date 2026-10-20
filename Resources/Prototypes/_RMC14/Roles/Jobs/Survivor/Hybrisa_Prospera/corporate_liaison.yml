@@ -73,7 +73,7 @@
     - [ RMCJumpsuitLiaisonExpensiveSuitJacketOnly, RMCSunglasses ]
     randomGearOther:
     -
-      - [ CMSheetMetal20, RMCSpaceCash1000, CMPenClicky, CMClipboard ]
+      - [ CMSheetMetal20, RMCSpaceCash1000, CMPenClicky, CMClipboard, RMCBusinessCardHolderFilled ]
     randomStartingGear:
       back:
       - CMSatchelSecureStandard
