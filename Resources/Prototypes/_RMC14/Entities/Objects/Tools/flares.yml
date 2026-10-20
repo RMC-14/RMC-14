@@ -376,6 +376,7 @@
   - type: Tag
     tags:
     - CMFlarePack
+    - RMCBoxStorage
   - type: CMItemSlots
     count: 8
     slot:
@@ -467,6 +468,7 @@
   - type: Tag
     tags:
     - RMCPackFlareCAS
+    - RMCBoxStorage
   - type: Sprite
     layers:
     - state: m89_e
