@@ -1,3 +1,4 @@
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 using System;
@@ -54,6 +55,9 @@ public sealed partial class EggMorpherComponent : Component
 
     [DataField, AutoNetworkedField]
     public int OverlayCount = 4;
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier EggFillSound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/alien_egg_move.ogg");
 }
 
 [Serializable, NetSerializable]
