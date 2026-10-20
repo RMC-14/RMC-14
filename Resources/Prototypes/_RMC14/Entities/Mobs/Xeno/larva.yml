@@ -9,6 +9,7 @@
   - type: GuideHelp
     guides:
     - RMCGuideRoleDrone
+  - type: RMCAnimalPrey
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Larva/larva.rsi
   - type: FiremanCarriable
