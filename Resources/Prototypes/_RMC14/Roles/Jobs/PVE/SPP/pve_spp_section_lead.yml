@@ -45,6 +45,7 @@
     - type: SniperWhitelist
     - type: PyroWhitelist
     - type: QYJWhitelist
+    - type: SquadLeader
   hidden: true
 
 - type: entity
