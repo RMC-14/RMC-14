@@ -392,6 +392,96 @@
 
 - type: entity
   parent: RMCPillCanisterNoSkill
+  id: RMCPillCanisterParacetamolNoSkill
+  name: paracetamol pill bottle
+  description: This is probably someone's prescription pain pill bottle.
+  suffix: Paracetamol, 16, No Skill
+  components:
+  - type: Item
+    heldPrefix: 7
+  - type: Sprite
+    layers:
+    - state: pill_canister7
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: RMCPillParacetamol
+      amount: 16
+  - type: IconLabel
+    labelTextLocId: rmc-paracetamol-container-label-text
+
+- type: entity
+  parent: RMCPillCanisterNoSkill
+  id: RMCPillCanisterTramadolNoSkill
+  name: tramadol pill bottle
+  description: A pill bottle filled with Tramadol. Treats pain.
+  suffix: Tramadol, 16, No Skill
+  components:
+  - type: Item
+    heldPrefix: 5
+  - type: Sprite
+    layers:
+    - state: pill_canister5
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: RMCPillTramadol
+      amount: 16
+  - type: IconLabel
+    labelTextLocId: rmc-tramadol-container-label-text
+
+- type: entity
+  parent: RMCPillCanisterTramadolNoSkill
+  id: RMCPillCanisterTramadol
+  suffix: Tramadol, 16
+  components:
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2
+
+- type: entity
+  parent: RMCPillCanisterNoSkill
+  id: RMCPillCanisterOxycodoneNoSkill
+  name: oxycodone pill bottle
+  description: This contains pills that treat severe pain, even during live surgery. Do not take more than two pills in a short period.
+  suffix: Oxycodone, 16, No Skill
+  components:
+  - type: Item
+    heldPrefix: 9
+  - type: Sprite
+    layers:
+    - state: pill_canister9
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: RMCPillOxycodone
+      amount: 16
+  - type: IconLabel
+    labelTextLocId: rmc-oxycodone-container-label-text
+
+- type: entity
+  parent: RMCPillCanisterOxycodoneNoSkill
+  id: RMCPillCanisterOxycodone
+  suffix: Oxycodone, 16
+  components:
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2
+
+- type: entity
+  parent: RMCPillCanisterNoSkill
   id: RMCPillCanisterImidazolineNoSkill
   name: imidazoline pill bottle
   description: It's an airtight container for storing medication. It's labeled "Imidazoline (1u, 30 pill OD) Used to restore vision from non-congenital eye damage."
@@ -423,7 +513,7 @@
     skills:
       RMCSkillMedical: 2
 
-# TODO RMC14 peridaxon, tramadol
+# TODO RMC14 peridaxon
 
 - type: entity
   parent: RMCPillCanisterNoSkill
