@@ -21,6 +21,8 @@ public sealed partial class MatchstickSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<MatchstickComponent, InteractUsingEvent>(OnInteractUsing);
+
+        InitializeRMC14(); // RMC14
     }
 
     // This is for something *else* lighting the matchstick, not the matchstick lighting something else.
