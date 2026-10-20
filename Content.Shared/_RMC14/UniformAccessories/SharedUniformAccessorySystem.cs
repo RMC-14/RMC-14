@@ -9,6 +9,7 @@ using Content.Shared.Item;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.Verbs;
+using Content.Shared.Localizations;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Utility;
@@ -34,7 +35,7 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
         SubscribeLocalEvent<UniformAccessoryHolderComponent, GotEquippedEvent>(OnHolderGotEquipped);
         SubscribeLocalEvent<UniformAccessoryHolderComponent, GetVerbsEvent<EquipmentVerb>>(OnHolderGetEquipmentVerbs);
 
-        SubscribeLocalEvent<UniformAccessoryHolderComponent, ExaminedEvent>(HolderRelayEvent);
+        SubscribeLocalEvent<UniformAccessoryHolderComponent, ExaminedEvent>(OnHolderExamined);
 
         SubscribeLocalEvent<UniformAccessoryComponent, ExaminedEvent>(OnAccessoryExamined);
 
@@ -168,17 +169,42 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
         args.PushMarkup(Loc.GetString("rmc-uniform-accessory-owner", ("owner", ownerName)));
     }
 
-    private void HolderRelayEvent<T>(Entity<UniformAccessoryHolderComponent> holder, ref T args) where T : notnull
+
+    private void OnHolderExamined(Entity<UniformAccessoryHolderComponent> ent, ref ExaminedEvent args)
     {
-        if (!_container.TryGetContainer(holder, holder.Comp.ContainerId, out var container))
+        if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container))
             return;
 
-        var ev = new AccessoryRelayedEvent<T>(args, holder.Owner);
-
+        var relayEv = new AccessoryRelayedEvent<ExaminedEvent>(args, ent.Owner);
         foreach (var accessory in container.ContainedEntities)
         {
-            RaiseLocalEvent(accessory, ev);
+            RaiseLocalEvent(accessory, relayEv);
         }
+
+        if (HasComp<XenoComponent>(args.Examiner))
+            return;
+
+        if (ent.Comp.HideAccessories)
+            return;
+
+        if (container.ContainedEntities.Count == 0)
+            return;
+
+        var names = new List<string>();
+        foreach (var accessory in container.ContainedEntities)
+        {
+            names.Add(Name(accessory));
+        }
+
+        if (container.ContainedEntities.Count > 1)
+        {
+            args.PushMarkup(Loc.GetString("rmc-uniform-accessory-list-plural", ("accessories", ContentLocalizationManager.FormatList(names))));
+        }
+        else
+        {
+            args.PushMarkup(Loc.GetString("rmc-uniform-accessory-list-singular", ("accessories", ContentLocalizationManager.FormatList(names))));
+        }
+
     }
 
     public void TryInsertInhandAccessories(EntityUid target)
