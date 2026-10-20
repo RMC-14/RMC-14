@@ -55,6 +55,7 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: MutinyLoyalistOrNeutral
     - type: Skills
       skills:
         RMCSkillConstruction: 2
