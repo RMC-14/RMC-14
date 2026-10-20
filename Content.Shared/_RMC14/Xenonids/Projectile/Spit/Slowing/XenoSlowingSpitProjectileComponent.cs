@@ -1,4 +1,6 @@
+using Content.Shared._RMC14.Marines.Skills;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Projectile.Spit.Slowing;
 
@@ -17,4 +19,10 @@ public sealed partial class XenoSlowingSpitProjectileComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool ArmorResistsKnockdown = true;
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId<SkillDefinitionComponent> ResistSkill = "RMCSkillEndurance";
+
+    [DataField, AutoNetworkedField]
+    public int ResistLevel = 5;
 }
