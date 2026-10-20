@@ -36,8 +36,20 @@ public sealed partial class MarineCommunicationsComputerComponent : Component
     [DataField, AutoNetworkedField]
     public bool CanInitiateEvac;
 
+    [DataField]
+    public bool SendAnnouncementOverlay = true;
+
     [DataField, AutoNetworkedField]
     public string? AnnounceName;
+
+    [DataField, AutoNetworkedField]
+    public string Planet = string.Empty;
+
+    [DataField, AutoNetworkedField]
+    public string Operation = string.Empty;
+
+    [DataField, AutoNetworkedField]
+    public List<LandingZone> LandingZones = new();
 
     /*
     [DataField, AutoNetworkedField]
