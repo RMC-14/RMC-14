@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-4.0",
-  "copyright": "Sprited by sharksnake (Github)",
+  "copyright": "Sprited by SharkSnake98 (Github), https://github.com/cmss13-devs/cmss13/blob/a49e386aa82222508cacc8a40c351a96d9122bd3/icons/mob/hud/factions/hyperdyne.dmi",
   "size": {
     "x": 16,
     "y": 16
@@ -21,6 +21,9 @@
         },
         {
             "name": "hc_trainee"
+        },
+        {
+            "name": "hc_synth"
         }
     ]
 }
