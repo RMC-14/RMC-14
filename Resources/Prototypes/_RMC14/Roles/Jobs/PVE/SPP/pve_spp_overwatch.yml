@@ -11,7 +11,7 @@
   ranks:
     RMCRankSPPMladshiyLeytenant: []
   startingGear: RMCSPPPlatCoPVEGear
-  icon: "CMJobIconEmpty"
+  icon: "CMJobIconSPPPlatoonCommanderPVE"
   joinNotifyCrew: false
   accessGroups:
   - ShipMasterAccess
@@ -47,6 +47,13 @@
     - type: SniperWhitelist
     - type: PyroWhitelist
     - type: QYJWhitelist
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: spp_slt
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_spp
   hidden: true
 
 - type: entity
@@ -73,3 +80,10 @@
 
 - type: playTimeTracker
   id: RMCJobSPPPlatCoPVE
+  
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPPlatoonCommanderPVE
+  icon:
+    sprite: _RMC14/Interface/job_icons/SPP/RCM/standard.rsi
+    state: spp_lt
