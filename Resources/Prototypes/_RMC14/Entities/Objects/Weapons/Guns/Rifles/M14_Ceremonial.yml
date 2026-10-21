@@ -134,7 +134,7 @@
   parent: RMCKitBase
   id: RMCKitRifleM14Ceremonial
   name: M14 Ceremonial Rifle Kit
-  description: Contains a M14 Ceremonial Rifle and 5 magazines
+  description: Contains a M14 Ceremonial Rifle and 5 blank ammunition magazines
   components:
   - type: Storage
     maxItemSize: Huge
