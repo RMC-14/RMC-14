@@ -1,175 +1,4 @@
 ﻿Entries:
-- author: kleinerstation13
-  changes:
-  - message: Fixed attachments being invisible on the M37-17 shotgun
-    type: Fix
-  id: 3177
-  time: '2026-05-04T06:39:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9746
-- author: t0wnshark
-  changes:
-  - message: Added ponchos, which are found in the Uniform Accessories loadout category
-      and can be attached to either a uniform or armor.
-    type: Add
-  - message: Added the cheap digital watch, Seikaku Pulsemeter wristwatch, Seikaku
-      13B6-2000 wristwatch, Seikaku 13B6-3000 wristwatch, Seikaku H487-9098 wristwatch,
-      and Veniti E-338 wristwatch, as well as their respective cases. Most can be
-      found in the new Watches loadout category, and some are locked behind playtime
-      requirements or certain jobs.
-    type: Add
-  id: 3178
-  time: '2026-05-04T16:42:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7083
-- author: Pyromaniac365
-  changes:
-  - message: Removed Valkyrie's ability to retrieve dead xenonids.
-    type: Fix
-  id: 3179
-  time: '2026-05-05T15:00:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9778
-- author: stranthbackup
-  changes:
-  - message: Rebalanced some current OT chems to produce the correct amount. CLF3
-      now produces 3u. High combustion & sticky napalm now produce 2u.
-    type: Tweak
-  id: 3180
-  time: '2026-05-07T02:18:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8637
-- author: IceNoobXD
-  changes:
-  - message: Added five new cassette player variants.
-    type: Add
-  id: 3181
-  time: '2026-05-08T21:03:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9496
-- author: Tuna224
-  changes:
-  - message: Added a tent for Correspondents to take their news on the go!
-    type: Add
-  id: 3182
-  time: '2026-05-10T22:43:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9278
-- author: TadJohnson00
-  changes:
-  - message: '[PVE] Added the ML66OT, an incredibly effective heavy support gun issued
-      only at the discretion of Company Command.'
-    type: Add
-  - message: '[PVE] Increased the range, fire rate, and impact of heavy support guns,
-      making them significantly more effective.'
-    type: Tweak
-  id: 3183
-  time: '2026-05-11T04:00:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9724
-- author: IceNoobXD
-  changes:
-  - message: Added landing lights to Kutjevo's alternative LZ1 insert!
-    type: Add
-  id: 3184
-  time: '2026-05-11T16:08:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9833
-- author: Tuna224
-  changes:
-  - message: Added a Correspondent new-to-role popup.
-    type: Add
-  id: 3185
-  time: '2026-05-12T23:19:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9617
-- author: kleinerstation13
-  changes:
-  - message: SPP SOF and SPP Airborne now start with SPP flare pouches instead of
-      UNMC flare pouches.
-    type: Tweak
-  id: 3186
-  time: '2026-05-12T23:27:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9693
-- author: TadJohnson00
-  changes:
-  - message: '[PVE] Added a Whiskey Troop patch for the Royal Crown Marine contingent
-      aboard the HMS Pratchett.'
-    type: Add
-  id: 3187
-  time: '2026-05-14T02:50:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9720
-- author: Drazamuffin
-  changes:
-  - message: WEYA research personal have uncovered xenoforms hidden with in permafrost
-      of the sector.
-    type: Add
-  id: 3188
-  time: '2026-05-14T10:20:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9659
-- author: MarshesAndMeadows
-  changes:
-  - message: Fixed water tiles not correctly updating the slowdown modifier when stepping
-      onto a catwalk.
-    type: Fix
-  id: 3189
-  time: '2026-05-14T10:22:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9610
-- author: yagwog
-  changes:
-  - message: Impenetrable Walls timed added to solaris
-    type: Add
-  id: 3190
-  time: '2026-05-14T10:26:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9787
-- author: '- Simon'
-  changes:
-  - message: Timed Impen Walls to trijent
-    type: Add
-  id: 3191
-  time: '2026-05-14T10:26:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9791
-- author: yagwog
-  changes:
-  - message: Added impenetrable walls to Chances Claim
-    type: Add
-  id: 3192
-  time: '2026-05-14T10:25:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9762
-- author: '- Simon'
-  changes:
-  - message: Timed Impenetrable walls to solaris
-    type: Add
-  id: 3193
-  time: '2026-05-14T10:26:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9786
-- author: '- Simon'
-  changes:
-  - message: Added timed impenetrable resin to sorokyne
-    type: Add
-  id: 3194
-  time: '2026-05-14T10:26:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9788
-- author: '- Simon'
-  changes:
-  - message: Added Impenetrable timed resin to fiorina
-    type: Add
-  id: 3195
-  time: '2026-05-14T10:26:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9789
-- author: Arykh
-  changes:
-  - message: Alerts on the Seperated HUD layout now expand vertically instead of only
-      downwards to infinity and beyond.
-    type: Tweak
-  id: 3196
-  time: '2026-05-14T10:23:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9751
-- author: Thereisabear
-  changes:
-  - message: Squad tracker no longer constantly resets itself to a FTL.
-    type: Fix
-  id: 3197
-  time: '2026-05-14T10:24:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9780
-- author: yagwog
-  changes:
-  - message: timed Impenetrable walls on shivas
-    type: Add
-  id: 3198
-  time: '2026-05-14T10:27:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9798
 - author: SharkSnake98
   changes:
   - message: Added the Vehicle Crewman job
@@ -4503,5 +4332,187 @@
   id: 3676
   time: '2026-09-30T04:01:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10938
+- author: CatAndHats
+  changes:
+  - message: Fixed Trijent's green and purple bridge inserts not using the correct
+      tiles
+    type: Fix
+  id: 3677
+  time: '2026-09-30T14:43:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10915
+- author: stuff3541
+  changes:
+  - message: Add missing mortar FTL line
+    type: Fix
+  id: 3678
+  time: '2026-09-30T14:43:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10885
+- author: ThataKat
+  changes:
+  - message: '[PVE] Added the GM Request system, for handling minor requests. When
+      enabled, look for a new verb on your player entity to send requests.'
+    type: Add
+  id: 3679
+  time: '2026-09-30T23:50:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10304
+- author: Thereisabear
+  changes:
+  - message: Throttled the explosions on Hijack; behaviour should be a staggered but
+      rolling explosion one at a time now.
+    type: Tweak
+  id: 3680
+  time: '2026-10-01T05:20:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10334
+- author: Arykh
+  changes:
+  - message: Tries to fix item restocking not working on live servers. (again)
+    type: Fix
+  - message: Fixed bulk restocking not behaving correctly.
+    type: Fix
+  id: 3681
+  time: '2026-10-01T05:21:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10351
+- author: Thereisabear
+  changes:
+  - message: Fixed some console errors from attachments.
+    type: Fix
+  id: 3682
+  time: '2026-10-01T05:26:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10467
+- author: SabreML
+  changes:
+  - message: Xenonids and Synthetics can now see each other's speech and emotes, to
+      help with Synthetics being able to slowly learn the Xenonid language.
+    type: Tweak
+  id: 3683
+  time: '2026-10-01T05:28:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10764
+- author: Thereisabear
+  changes:
+  - message: Fixed sentry laptops causing server issues. No in-game behavioural change
+      otherwise.
+    type: Fix
+  id: 3684
+  time: '2026-10-01T05:29:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10858
+- author: Thereisabear
+  changes:
+  - message: Added Job Icon UI for Admins and GMs
+    type: Add
+  id: 3685
+  time: '2026-10-01T05:32:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10619
+- author: Thereisabear
+  changes:
+  - message: Standardised the amount of hits required to break ledges for most Marines
+      and Xenonids. (3 hits)
+    type: Tweak
+  - message: Fixed being unable to weed on the "front" of ledges.
+    type: Fix
+  id: 3686
+  time: '2026-10-01T05:31:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10516
+- author: Thereisabear
+  changes:
+  - message: Fixed magazines sometimes getting negative values.
+    type: Fix
+  id: 3687
+  time: '2026-10-01T05:30:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10740
+- author: RerBreab
+  changes:
+  - message: Handheld radios can be now switched to listen-only mode.
+    type: Add
+  id: 3688
+  time: '2026-10-01T05:32:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10659
+- author: Thereisabear
+  changes:
+  - message: Fixed being unable to interact to turn off Hardhats as a Xenonid.
+    type: Fix
+  - message: Fixed the Toggle Light action and verb appearing on action bar and armor
+      while unequipped.
+    type: Fix
+  id: 3689
+  time: '2026-10-01T05:29:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10474
+- author: Dalothis
+  changes:
+  - message: Added FTL, SL, SGO, and WS new-to-job popups
+    type: Add
+  id: 3690
+  time: '2026-10-01T21:27:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9455
+- author: CyberTropic
+  changes:
+  - message: Fixed containers leaving their contents behind on map inserts.
+    type: Fix
+  id: 3691
+  time: '2026-10-04T01:33:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10948
+- author: IceNoobXD
+  changes:
+  - message: Fixed being able to buckle yourself into a powerloader wreckage!
+    type: Fix
+  id: 3692
+  time: '2026-10-04T01:49:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10957
+- author: SharkSnake98
+  changes:
+  - message: Changed the description of the colony crawler to mention Miyahira instead
+      of Orbital Blue
+    type: Tweak
+  id: 3693
+  time: '2026-10-06T19:53:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10507
+- author: KompaniLinge
+  changes:
+  - message: Lingxiao Golds, the pinnacle of smoking. Comes with unique sprite.
+    type: Add
+  - message: Taras Classics, the most SPP cigarette to ever exist. Comes with new
+      sprite, shared with Bohe Blues.
+    type: Add
+  - message: Bohe Blues, more menthol then nicotine.
+    type: Add
+  - message: Montecomune Cigars. Said to have been smoked by a famous revolutionary,
+      has unique sprite
+    type: Add
+  - message: Brand new zippo-like SPP Lighter.
+    type: Add
+  - message: Komandir now dispenses SPP smokables.
+    type: Tweak
+  id: 3694
+  time: '2026-10-13T13:09:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8205
+- author: Ozehk
+  changes:
+  - message: Ziptie boxes can no longer accept anything other than zipties.
+    type: Tweak
+  id: 3695
+  time: '2026-10-14T19:14:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10981
+- author: Ian321
+  changes:
+  - message: ghosts now keep following xenos after they evolve
+    type: Fix
+  id: 3696
+  time: '2026-10-15T14:32:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10491
+- author: carccborg
+  changes:
+  - message: Fixed names being revealed to the opposite faction during object/wall
+      slamming
+    type: Fix
+  id: 3697
+  time: '2026-10-15T20:21:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10718
+- author: IceNoobXD
+  changes:
+  - message: Removed some role specifc surv playtime trackers infavour of the more
+      generalized once!
+    type: Remove
+  id: 3698
+  time: '2026-10-15T20:41:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10980
 Name: RMC14
 Order: -1
