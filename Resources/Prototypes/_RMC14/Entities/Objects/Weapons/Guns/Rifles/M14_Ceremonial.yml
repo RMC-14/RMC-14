@@ -130,6 +130,23 @@
   - type: RefillableByBulletBox
     bulletType: RMCBoxBulletsRifle
 
+- type: entity
+  parent: RMCKitBase
+  id: RMCKitRifleM14Ceremonial
+  name: M14 Ceremonial Rifle Kit
+  description: Contains a M14 Ceremonial Rifle and 5 magazines
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,9,1
+  - type: StorageFill
+    contents:
+    - id: WeaponRifleM14Ceremonial
+    - id: RMCMagazineRifleM14Ceremonial
+      amount: 5
+
+
 - type: Tag
   id: RMCCartridgeRifleBlank10x24mm
 
