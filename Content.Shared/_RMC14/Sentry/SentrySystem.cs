@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Formats.Asn1;
 using System.Linq;
 using Content.Shared._RMC14.Interaction;
 using Content.Shared._RMC14.Map;
@@ -31,6 +32,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
+using Content.Shared._RMC14.Areas;
 
 namespace Content.Shared._RMC14.Sentry;
 
@@ -57,6 +59,7 @@ public sealed class SentrySystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
     [Dependency] private readonly SharedSentryTargetingSystem _targeting = default!;
     [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
+    [Dependency] private readonly AreaSystem _area = default!;
 
     private readonly HashSet<EntityUid> _toUpdate = new();
 
@@ -402,6 +405,12 @@ public sealed class SentrySystem : EntitySystem
         {
             var msg = Loc.GetString("rmc-sentry-need-open-area", ("sentry", sentry));
             _popup.PopupClient(msg, user, user, PopupType.SmallCaution);
+            return false;
+        }
+
+        if (_area.TryGetArea(coordinates, out var area, out _) && !area.Value.Comp.Construction)
+        {
+            _popup.PopupClient(Loc.GetString("emplacement-no-construction-area"), user, user, PopupType.SmallCaution);
             return false;
         }
 

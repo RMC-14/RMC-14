@@ -24,6 +24,7 @@
     supplyDrop: false
     weatherEnabled: false
     alwaysPowered: true
+    construction: false
 
 - type: entity
   parent: RMCAreaShuttleDrop1
