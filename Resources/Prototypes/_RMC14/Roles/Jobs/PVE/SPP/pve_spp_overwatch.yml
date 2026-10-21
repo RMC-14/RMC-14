@@ -11,7 +11,7 @@
   ranks:
     RMCRankSPPMladshiyLeytenant: []
   startingGear: RMCSPPPlatCoPVEGear
-  icon: "CMJobIconSPPPlatoonCommanderPVE"
+  icon: "RMCJobIconSPPPlatoonCommanderPVE"
   joinNotifyCrew: false
   accessGroups:
   - ShipMasterAccess
@@ -85,5 +85,5 @@
   parent: CMJobIconBase
   id: RMCJobIconSPPPlatoonCommanderPVE
   icon:
-    sprite: _RMC14/Interface/job_icons/SPP/RCM/standard.rsi
+    sprite: _RMC14/Interface/job_icons/SPP/standard.rsi
     state: spp_lt
