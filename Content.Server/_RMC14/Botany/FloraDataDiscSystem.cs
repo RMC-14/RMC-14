@@ -1,6 +1,8 @@
+using Content.Shared._RMC14.Botany;
 using Content.Shared.Examine;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 
 namespace Content.Server._RMC14.Botany;
@@ -9,6 +11,8 @@ public sealed class FloraDataDiscSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+
+    private static readonly SoundSpecifier WipeSound = new SoundPathSpecifier("/Audio/Machines/twobeep.ogg");
 
     public override void Initialize()
     {
@@ -61,6 +65,6 @@ public sealed class FloraDataDiscSystem : EntitySystem
         comp.Genes.Clear();
         comp.GeneSource = null;
         _popup.PopupEntity("You wipe the disc clean.", uid, user);
-        _audio.PlayPvs("/Audio/Machines/twobeep.ogg", uid);
+        _audio.PlayPvs(WipeSound, uid);
     }
 }

@@ -36,9 +36,9 @@ public sealed class RMCPlantAtmosphericToleranceSystem : EntitySystem
         {
             // no atmos
             // _plantTray.AdjustHealth((plant.Owner, plant.Comp, growth), -healthMod);
-            _plantTray.SetImproperPressure((tray.Owner, tray.Comp), true);
-            if (tray.Comp.DrawWarnings)
-                tray.Comp.UpdateSpriteAfterUpdate = true;
+            // _plantTray.SetImproperPressure((tray.Owner, tray.Comp), true);
+            // if (tray.Comp.DrawWarnings)
+            //     tray.Comp.UpdateSpriteAfterUpdate = true;
         }
         else
         {
@@ -50,9 +50,9 @@ public sealed class RMCPlantAtmosphericToleranceSystem : EntitySystem
         {
             // no atmos
             // _plantTray.AdjustHealth((plant.Owner, plant.Comp, growth), -healthMod);
-            _plantTray.SetImproperHeat((tray.Owner, tray.Comp), true);
-            if (tray.Comp.DrawWarnings)
-                tray.Comp.UpdateSpriteAfterUpdate = true;
+            // _plantTray.SetImproperHeat((tray.Owner, tray.Comp), true);
+            // if (tray.Comp.DrawWarnings)
+            //     tray.Comp.UpdateSpriteAfterUpdate = true;
         }
         else
         {

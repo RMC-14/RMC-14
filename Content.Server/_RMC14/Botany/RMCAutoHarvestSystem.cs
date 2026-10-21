@@ -3,13 +3,11 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
-using Robust.Shared.Audio.Systems;
 
 namespace Content.Server._RMC14.Botany;
 
 public sealed class RMCAutoHarvestSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly RMCPlantHarvestSystem _plantHarvest = default!;
     [Dependency] private readonly RMCPlantTraySystem _plantTray = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -62,14 +60,14 @@ public sealed class RMCAutoHarvestSystem : EntitySystem
             return;
         }
 
-        comp.WaterLevel = 0;
-        comp.NutritionLevel = 0;
-        comp.Toxins = 0;
+        _plantTray.SetWaterLevel(ent.AsNullable(), 0);
+        _plantTray.SetNutritionLevel(ent.AsNullable(), 0);
+        _plantTray.SetToxins(ent.AsNullable(), 0);
 
         if (_solution.ResolveSolution(ent.Owner, comp.SoilSolutionName, ref comp.SoilSolution, out _))
             _solution.RemoveAllSolution(comp.SoilSolution.Value);
 
-        _plantTray.CheckLevelSanity(ent.Owner, comp);
+        _plantTray.UpdateSprite(ent.Owner, comp);
         _popup.PopupCursor("You flush the tray, draining the soil solution.", user);
     }
 

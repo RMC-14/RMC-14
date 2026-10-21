@@ -4,7 +4,8 @@ using Content.Shared.Atmos;
 namespace Content.Server._RMC14.Botany;
 
 /// <summary>
-/// Gas consumption from, and production into, the tray's containing atmosphere.
+/// Gas consumption from, & production into, the trays containing atmos
+/// Not used currently
 /// </summary>
 public sealed class RMCConsumeExudeGasSystem : EntitySystem
 {

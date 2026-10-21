@@ -79,8 +79,7 @@ public sealed class FireVisualizerSystem : VisualizerSystem<FireVisualsComponent
             UpdateAppearance(uid, component, args.Sprite, args.Component);
     }
 
-    // RMC public
-    public void UpdateAppearance(EntityUid uid, FireVisualsComponent component, SpriteComponent sprite, AppearanceComponent appearance)
+    public void UpdateAppearance(EntityUid uid, FireVisualsComponent component, SpriteComponent sprite, AppearanceComponent appearance) // RMC14 public
     {
         if (!SpriteSystem.LayerMapTryGet((uid, sprite), FireVisualLayers.Fire, out var index, false))
             return;
@@ -107,10 +106,14 @@ public sealed class FireVisualizerSystem : VisualizerSystem<FireVisualsComponent
 
         // RMC14 start
         var fireColor = component.LightColor;
+        var layerColor = Color.White;
         if (_fireColorQuery.TryComp(uid, out var fireColorComp))
+        {
             fireColor = fireColorComp.Color;
+            layerColor = fireColorComp.Color;
+        }
 
-        SpriteSystem.LayerSetColor((uid, sprite), index, fireColor);
+        SpriteSystem.LayerSetColor((uid, sprite), index, layerColor);
         // RMC14 end
 
         // RMC14 start
