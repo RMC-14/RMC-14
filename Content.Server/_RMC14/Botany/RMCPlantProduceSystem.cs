@@ -21,14 +21,14 @@ namespace Content.Server._RMC14.Botany;
 /// </summary>
 public sealed class RMCPlantProduceSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _robustRandom = default!;
-    [Dependency] private readonly RandomHelperSystem _randomHelper = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly AppearanceSystem _appearance = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly RMCPlantSeedSystem _plantSeed = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly RandomHelperSystem _randomHelper = default!;
+    [Dependency] private readonly IRobustRandom _robustRandom = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
 
     public override void Initialize()
     {
@@ -36,12 +36,11 @@ public sealed class RMCPlantProduceSystem : EntitySystem
         SubscribeLocalEvent<RMCProduceComponent, ExaminedEvent>(OnProduceExamined);
     }
 
-    public IEnumerable<EntityUid> Harvest(EntityUid plant, EntityUid user, float yieldMod = 1f)
+    public IEnumerable<EntityUid> Harvest(EntityUid plant, EntityUid user, float yieldMod)
     {
         var harvest = Comp<RMCPlantHarvestComponent>(plant);
         if (harvest.ProductPrototypes.Count == 0 || harvest.Yield <= 0)
         {
-            var plantComp = Comp<RMCPlantComponent>(plant);
             _popup.PopupCursor(Loc.GetString("botany-harvest-fail-message"), user, PopupType.Medium);
             return Enumerable.Empty<EntityUid>();
         }
@@ -55,7 +54,7 @@ public sealed class RMCPlantProduceSystem : EntitySystem
         return GenerateProduct(plant, Transform(user).Coordinates, yieldMod);
     }
 
-    public IEnumerable<EntityUid> AutoHarvest(EntityUid plant, EntityCoordinates position, float yieldMod = 1f)
+    public IEnumerable<EntityUid> AutoHarvest(EntityUid plant, EntityCoordinates position, float yieldMod)
     {
         var harvest = Comp<RMCPlantHarvestComponent>(plant);
         if (!position.IsValid(EntityManager) || harvest.ProductPrototypes.Count == 0)
@@ -70,7 +69,7 @@ public sealed class RMCPlantProduceSystem : EntitySystem
         return GenerateProduct(plant, position, yieldMod);
     }
 
-    public IEnumerable<EntityUid> GenerateProduct(EntityUid plant, EntityCoordinates position, float yieldMod = 1f)
+    public IEnumerable<EntityUid> GenerateProduct(EntityUid plant, EntityCoordinates position, float yieldMod)
     {
         var harvest = Comp<RMCPlantHarvestComponent>(plant);
 
@@ -144,7 +143,7 @@ public sealed class RMCPlantProduceSystem : EntitySystem
             }
         }
 
-        if (!_solutionContainerSystem.EnsureSolution(uid, produce.SolutionName, out var solutionContainer, FixedPoint2.Zero))
+        if (!_solutionContainer.EnsureSolution(uid, produce.SolutionName, out var solutionContainer, FixedPoint2.Zero))
             return;
 
         if (!TryComp<RMCPlantChemicalsComponent>(uid, out var chemicals))

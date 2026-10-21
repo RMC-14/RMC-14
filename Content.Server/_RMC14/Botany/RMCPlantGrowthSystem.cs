@@ -15,8 +15,8 @@ public sealed class RMCPlantGrowthSystem : EntitySystem
 
     public int GetCurrentGrowthStage(Entity<RMCPlantComponent, RMCPlantGrowthComponent> plant)
     {
-        var result = Math.Max(1, (int)(plant.Comp1.Age * plant.Comp2.GrowthStages / plant.Comp2.Maturation));
-        return result;
+        var (_, comp, growth) = plant;
+        return Math.Clamp((int)(comp.Age * growth.GrowthStages / growth.Maturation) + 1, 1, growth.GrowthStages);
     }
 
     /// <summary>
@@ -37,7 +37,7 @@ public sealed class RMCPlantGrowthSystem : EntitySystem
     }
 
     /// <summary>
-    /// Applies lifespan death and toggles the harvest-ready flag. Runs late in the tick, after the
+    /// Applies lifespan death & toggles the harvest-ready flag. Runs late in the tick, after the
     /// nutrient/water/tolerance/toxin/pest/weed formulas
     /// </summary>
     public bool TickLifespanAndProduction(Entity<RMCPlantComponent, RMCPlantGrowthComponent> plant)

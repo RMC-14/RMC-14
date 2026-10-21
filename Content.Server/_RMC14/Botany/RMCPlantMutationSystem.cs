@@ -13,7 +13,7 @@ namespace Content.Server._RMC14.Botany;
 /// </summary>
 public sealed class RMCPlantMutationSystem : EntitySystem
 {
-    private static readonly ProtoId<WeightedRandomFillSolutionPrototype> RandomPickBotanyReagent = "RandomPickBotanyReagent";
+    private static readonly ProtoId<WeightedRandomFillSolutionPrototype> RandomPickBotanyReagent = "RMCRandomPickBotanyReagent";
 
     [Dependency] private readonly IRobustRandom _robustRandom = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
@@ -368,35 +368,33 @@ public sealed class RMCPlantMutationSystem : EntitySystem
         return total >= 60f;
     }
 
-    /// <summary>
-    /// Swaps most of a plant's identity/cosmetic/product fields for the target species' while keeping
-    /// this plant's own accumulated stat mutations (endurance, tolerances, potency, chemicals, etc).
-    /// Entities can't literally re-prototype themselves, so this spawns a disposable instance of the
-    /// target species to read its default component values from, then discards it.
-    /// </summary>
     private void ChangeSpecies(EntityUid plant, string targetProto)
     {
-        if (!_prototype.HasIndex<EntityPrototype>(targetProto))
+        if (!_prototype.TryIndex<EntityPrototype>(targetProto, out var proto))
             return;
 
-        var temp = Spawn(targetProto, Transform(plant).Coordinates);
-
-        if (TryComp(temp, out RMCPlantComponent? tempPlant) && TryComp(plant, out RMCPlantComponent? plantComp))
+        if (proto.TryGetComponent<RMCPlantComponent>(out var tempPlant, EntityManager.ComponentFactory) &&
+            TryComp(plant, out RMCPlantComponent? plantComp))
             _plantTray.SetIdentity((plant, plantComp), tempPlant.Name, tempPlant.Noun, tempPlant.DisplayName, tempPlant.Mysterious);
 
-        if (TryComp(temp, out RMCPlantHarvestComponent? tempHarvest) && TryComp(plant, out RMCPlantHarvestComponent? harvest))
+        if (proto.TryGetComponent<RMCPlantHarvestComponent>(out var tempHarvest, EntityManager.ComponentFactory) &&
+            TryComp(plant, out RMCPlantHarvestComponent? harvest))
             _plantTray.SetHarvestProducts((plant, harvest), tempHarvest.PacketPrototype, new List<string>(tempHarvest.ProductPrototypes));
 
-        if (TryComp(temp, out RMCPlantGrowthComponent? tempGrowth) && TryComp(plant, out RMCPlantGrowthComponent? growth))
+        if (proto.TryGetComponent<RMCPlantGrowthComponent>(out var tempGrowth, EntityManager.ComponentFactory) &&
+            TryComp(plant, out RMCPlantGrowthComponent? growth))
             _plantTray.SetGrowthStages((plant, growth), tempGrowth.GrowthStages);
 
-        if (TryComp(temp, out RMCPlantTraitsComponent? tempTraits) && TryComp(plant, out RMCPlantTraitsComponent? traits))
+        if (proto.TryGetComponent<RMCPlantTraitsComponent>(out var tempTraits, EntityManager.ComponentFactory) &&
+            TryComp(plant, out RMCPlantTraitsComponent? traits))
             _plantTray.SetTraitCosmetics((plant, traits), tempTraits.PlantRsi, tempTraits.PlantIconState, tempTraits.SplatPrototype);
 
-        if (TryComp(temp, out RMCPlantMutationComponent? tempMutation) && TryComp(plant, out RMCPlantMutationComponent? mutation))
+        if (proto.TryGetComponent<RMCPlantMutationComponent>(out var tempMutation, EntityManager.ComponentFactory) &&
+            TryComp(plant, out RMCPlantMutationComponent? mutation))
             _plantTray.SetMutationPrototypes((plant, mutation), new List<string>(tempMutation.MutationPrototypes));
 
-        if (TryComp(temp, out RMCPlantChemicalsComponent? tempChemicals) && TryComp(plant, out RMCPlantChemicalsComponent? chemicals))
+        if (proto.TryGetComponent<RMCPlantChemicalsComponent>(out var tempChemicals, EntityManager.ComponentFactory) &&
+            TryComp(plant, out RMCPlantChemicalsComponent? chemicals))
         {
             chemicals.SpecialChemicals = new List<string>(tempChemicals.SpecialChemicals);
 
@@ -413,8 +411,6 @@ public sealed class RMCPlantMutationSystem : EntitySystem
 
             Dirty(plant, chemicals);
         }
-
-        QueueDel(temp);
     }
 
     /// <summary>

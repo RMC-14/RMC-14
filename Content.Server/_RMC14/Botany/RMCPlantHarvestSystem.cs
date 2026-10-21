@@ -14,7 +14,6 @@ public sealed class RMCPlantHarvestSystem : EntitySystem
     [Dependency] private readonly RMCPlantSeedSystem _plantSeed = default!;
     [Dependency] private readonly RMCPlantProduceSystem _plantProduce = default!;
     [Dependency] private readonly RMCPlantScreamSystem _plantScream = default!;
-    [Dependency] private readonly RMCPlantGrowthSystem _plantGrowth = default!;
     [Dependency] private readonly RMCPlantTraySystem _plantTray = default!;
 
     public bool DoHarvest(EntityUid trayUid, EntityUid user, RMCPlantTrayComponent tray)
@@ -48,7 +47,7 @@ public sealed class RMCPlantHarvestSystem : EntitySystem
             return false;
 
         _plantTray.RemovePlant(trayUid, tray);
-        AfterHarvest(trayUid, tray, plant);
+        _plantTray.CheckLevelSanity(trayUid, tray);
         return true;
     }
 
@@ -61,7 +60,7 @@ public sealed class RMCPlantHarvestSystem : EntitySystem
         if (!comp.Harvest)
             return;
 
-        _plantProduce.AutoHarvest(plant, Transform(trayUid).Coordinates);
+        _plantProduce.AutoHarvest(plant, Transform(trayUid).Coordinates, comp.YieldMod);
         AfterHarvest(trayUid, tray, plant);
     }
 

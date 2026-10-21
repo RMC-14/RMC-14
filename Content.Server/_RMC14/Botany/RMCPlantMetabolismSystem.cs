@@ -1,9 +1,7 @@
 using Content.Shared._RMC14.Botany;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Server._RMC14.Botany;
@@ -13,9 +11,9 @@ namespace Content.Server._RMC14.Botany;
 /// </summary>
 public sealed class RMCPlantMetabolismSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
+    [Dependency] private readonly RMCReagentSystem _rmcReagent = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
 
     public const float HydroponicsSpeedMultiplier = 1f;
     public const float HydroponicsConsumptionMultiplier = 1.5f;
@@ -58,17 +56,17 @@ public sealed class RMCPlantMetabolismSystem : EntitySystem
 
     public void UpdateReagents(EntityUid trayUid, RMCPlantTrayComponent tray, EntityUid? plant)
     {
-        if (!_solutionContainerSystem.ResolveSolution(trayUid, tray.SoilSolutionName, ref tray.SoilSolution, out var solution))
+        if (!_solutionContainer.ResolveSolution(trayUid, tray.SoilSolutionName, ref tray.SoilSolution, out var solution))
             return;
 
-        if (plant == null || solution.Volume <= 0 || (TryComp(plant, out RMCPlantComponent? plantComp) && plantComp.MutationLevel >= 25))
+        if (plant == null || solution.Volume <= 0)
             return;
 
         var amt = FixedPoint2.New(1);
-        foreach (var entry in _solutionContainerSystem.RemoveEachReagent(tray.SoilSolution.Value, amt))
+        foreach (var entry in _solutionContainer.RemoveEachReagent(tray.SoilSolution.Value, amt))
         {
-            var reagentProto = _prototype.IndexReagent<ReagentPrototype>(entry.Reagent.Prototype);
-            reagentProto.ReactionPlant(plant.Value, entry, solution);
+            if (_rmcReagent.TryIndex(entry.Reagent.Prototype, out var reagentProto))
+                reagentProto.ReactionPlant(plant.Value, entry, solution);
         }
     }
 }

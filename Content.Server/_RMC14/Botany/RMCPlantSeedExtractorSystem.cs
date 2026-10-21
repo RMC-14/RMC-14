@@ -9,9 +9,9 @@ namespace Content.Server._RMC14.Botany;
 
 public sealed class RMCPlantSeedExtractorSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
     [Dependency] private readonly RMCPlantSeedSystem _plantSeed = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
 
     public override void Initialize()
     {
@@ -20,8 +20,9 @@ public sealed class RMCPlantSeedExtractorSystem : EntitySystem
         SubscribeLocalEvent<RMCSeedExtractorComponent, InteractUsingEvent>(OnInteractUsing);
     }
 
-    private void OnInteractUsing(EntityUid uid, RMCSeedExtractorComponent seedExtractor, InteractUsingEvent args)
+    private void OnInteractUsing(Entity<RMCSeedExtractorComponent> ent, ref InteractUsingEvent args)
     {
+        var (uid, seedExtractor) = ent;
         if (!this.IsPowered(uid, EntityManager))
             return;
 
@@ -32,12 +33,12 @@ public sealed class RMCPlantSeedExtractorSystem : EntitySystem
 
         if (!TryComp(args.Used, out RMCPlantHarvestComponent? harvest) || harvest.Seedless)
         {
-            _popupSystem.PopupCursor(Loc.GetString("seed-extractor-component-no-seeds", ("name", args.Used)),
+            _popup.PopupCursor(Loc.GetString("seed-extractor-component-no-seeds", ("name", args.Used)),
                 args.User, PopupType.MediumCaution);
             return;
         }
 
-        _popupSystem.PopupCursor(Loc.GetString("seed-extractor-component-interact-message", ("name", args.Used)),
+        _popup.PopupCursor(Loc.GetString("seed-extractor-component-interact-message", ("name", args.Used)),
             args.User, PopupType.Medium);
 
         args.Handled = true;

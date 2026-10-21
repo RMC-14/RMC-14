@@ -5,10 +5,6 @@ using Robust.Shared.Random;
 
 namespace Content.Server._RMC14.Botany;
 
-/// <summary>
-/// Plant clipping/sampling — tuned to match cm: flat damage, full health replant, chance
-/// to lock the plant from sampling, no growth stage min
-/// </summary>
 public sealed class RMCPlantSampleSystem : EntitySystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;

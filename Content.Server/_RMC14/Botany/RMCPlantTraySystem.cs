@@ -22,7 +22,7 @@ public sealed class RMCPlantTraySystem : SharedRMCPlantTraySystem
 {
     [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -106,12 +106,12 @@ public sealed class RMCPlantTraySystem : SharedRMCPlantTraySystem
                 ("usingItem", args.Used),
                 ("owner", uid)), uid, Filter.PvsExcept(args.User), true);
 
-            if (_solutionContainerSystem.TryGetSolution(args.Used, produce.SolutionName, out var soln2, out var solution2))
+            if (_solutionContainer.TryGetSolution(args.Used, produce.SolutionName, out var soln2, out var solution2))
             {
-                if (_solutionContainerSystem.ResolveSolution(uid, tray.SoilSolutionName, ref tray.SoilSolution, out var solution1))
+                if (_solutionContainer.ResolveSolution(uid, tray.SoilSolutionName, ref tray.SoilSolution, out var solution1))
                 {
                     var fillAmount = FixedPoint2.Min(solution2.Volume, solution1.AvailableVolume);
-                    _solutionContainerSystem.TryAddSolution(tray.SoilSolution.Value, _solutionContainerSystem.SplitSolution(soln2.Value, fillAmount));
+                    _solutionContainer.TryAddSolution(tray.SoilSolution.Value, _solutionContainer.SplitSolution(soln2.Value, fillAmount));
 
                     ForceUpdateByExternalCause(uid, tray);
                 }
@@ -203,42 +203,8 @@ public sealed class RMCPlantTraySystem : SharedRMCPlantTraySystem
 
         var plantComp = plantUid != null ? Comp<RMCPlantComponent>(plantUid.Value) : null;
 
-        // Process mutations
         if (plantComp != null)
-        {
             SetMutationLevel((plantUid!.Value, plantComp), plantComp.MutationLevel - _random.Next(2, 5));
-
-            if (TryComp(plantUid.Value, out RMCPlantMutationComponent? mutationComp))
-            {
-                switch (mutationComp.MutationTier)
-                {
-                    case RMCPlantMutationTier.HighlyMutable:
-                    {
-                        var mutProb = _random.Next(1, 101);
-                        if (mutProb <= 10)
-                        {
-                            var degree = mutProb == 1 ? 2 : 1;
-                            _plantMutation.MutatePlant(plantUid.Value, degree);
-                            plantComp.UpdateSpriteAfterUpdate = true;
-                        }
-
-                        break;
-                    }
-                    case RMCPlantMutationTier.Normal:
-                    {
-                        if (_random.Prob(Math.Clamp(plantComp.MutationLevel, 0f, 100f) / 100f))
-                        {
-                            var degree = _random.Next(1, 101) <= 15 ? 2 : 1;
-                            _plantMutation.MutatePlant(plantUid.Value, degree);
-                            plantComp.UpdateSpriteAfterUpdate = true;
-                            SetMutationLevel((plantUid.Value, plantComp), 0f);
-                        }
-
-                        break;
-                    }
-                }
-            }
-        }
 
         var trayGrowEvent = new RMCPlantTrayGrowEvent(uid, plantUid);
         RaiseLocalEvent(uid, ref trayGrowEvent);
@@ -257,6 +223,9 @@ public sealed class RMCPlantTraySystem : SharedRMCPlantTraySystem
         // Advance age
         _plantGrowth.TickAging((plant, plantComp), tray);
 
+        // Process mutations
+        TickMutation((plant, plantComp));
+
         _plantMetabolism.Tick(plant, (uid, tray));
 
         var healthMod = _random.Next(1, 4) * HydroponicsSpeedMultiplier;
@@ -271,7 +240,7 @@ public sealed class RMCPlantTraySystem : SharedRMCPlantTraySystem
         // Prevents the plant from aging when lacking resources
         if (plantComp.SkipAging < 10)
         {
-            if (tray.NutritionLevel >= 2)
+            if (tray.NutritionLevel > 5)
             {
                 if (_random.Prob(0.35f))
                     AdjustHealth((plant, plantComp, growth), healthMod);
@@ -331,6 +300,38 @@ public sealed class RMCPlantTraySystem : SharedRMCPlantTraySystem
     }
 
     #endregion
+
+    private void TickMutation(Entity<RMCPlantComponent> plant)
+    {
+        if (!TryComp(plant, out RMCPlantMutationComponent? mutation))
+            return;
+
+        switch (mutation.MutationTier)
+        {
+            case RMCPlantMutationTier.HighlyMutable:
+            {
+                var mutProb = _random.Next(1, 101);
+                if (mutProb <= 10)
+                {
+                    _plantMutation.MutatePlant(plant, mutProb == 1 ? 2 : 1);
+                    plant.Comp.UpdateSpriteAfterUpdate = true;
+                }
+
+                break;
+            }
+            case RMCPlantMutationTier.Normal:
+            {
+                if (_random.Prob(Math.Clamp(plant.Comp.MutationLevel, 0f, 100f) / 100f))
+                {
+                    _plantMutation.MutatePlant(plant, _random.Next(1, 101) <= 15 ? 2 : 1);
+                    plant.Comp.UpdateSpriteAfterUpdate = true;
+                    SetMutationLevel((plant, plant.Comp), 0f);
+                }
+
+                break;
+            }
+        }
+    }
 
     #region Sanity/lifecycle helpers
 

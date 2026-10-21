@@ -20,14 +20,14 @@ public sealed class RMCPlantWeedSystem : EntitySystem
     /// <summary>
     /// Wild weed type plants a tray can be overtaken by once weeds get out of hand
     /// </summary>
-    private static readonly ProtoId<EntityPrototype>[] WeedInvasionPrototypes =
+    private static readonly EntProtoId[] WeedInvasionPrototypes =
     [
         "RMCPlantRmcgrass",
         "RMCPlantWeeds",
         "RMCPlantHarebell",
         "RMCPlantRmcpoppy",
         "RMCPlantRmcplump",
-        "RMCPlantMold",
+        "RMCPlantRmcchanterelle",
     ];
 
     public override void Initialize()
@@ -56,7 +56,7 @@ public sealed class RMCPlantWeedSystem : EntitySystem
     /// </summary>
     public void TickSpawn(EntityUid trayUid, RMCPlantTrayComponent tray, EntityUid? plant, RMCPlantTraitsComponent? traits)
     {
-        if (tray.WaterLevel > 10 && tray.NutritionLevel > 2)
+        if (tray.WaterLevel > 10 && tray.NutritionLevel > 5)
         {
             var chance = plant == null ? 0.05f : 0.01f;
 
@@ -71,7 +71,7 @@ public sealed class RMCPlantWeedSystem : EntitySystem
         // Plants that are themselves weeds (high WeedTolerance) are unaffected
         if (tray.WeedLevel >= 10 && _random.Prob(0.1f))
         {
-            if (plant == null || tray.WeedLevel >= traits!.WeedTolerance)
+            if (plant == null || traits == null || tray.WeedLevel >= traits.WeedTolerance)
                 WeedInvasion(trayUid, tray, plant);
         }
     }
@@ -113,9 +113,11 @@ public sealed class RMCPlantWeedSystem : EntitySystem
         var growth = Comp<RMCPlantGrowthComponent>(newPlant);
         comp.Tray = trayUid;
         comp.Dead = false;
-        comp.Age = 1;
+        comp.Age = 0;
         comp.Health = growth.Endurance;
 
+        _plantTray.SetWeedLevel((trayUid, tray), 0);
+        _plantTray.SetPestLevel((trayUid, tray), 0);
         tray.UpdateSpriteAfterUpdate = true;
     }
 }

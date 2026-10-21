@@ -9,10 +9,10 @@ namespace Content.Server._RMC14.Botany;
 
 public sealed class RMCPlantSwabSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly RMCPlantMutationSystem _plantMutation = default!;
     [Dependency] private readonly RMCPlantSeedSystem _plantSeed = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -35,7 +35,7 @@ public sealed class RMCPlantSwabSystem : EntitySystem
         if (args.Target == null || !args.CanReach || !HasComp<RMCPlantTrayComponent>(args.Target))
             return;
 
-        _doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager, args.User, swab.Comp.SwabDelay, new BotanySwabDoAfterEvent(), swab.Owner, target: args.Target, used: swab.Owner)
+        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, args.User, swab.Comp.SwabDelay, new BotanySwabDoAfterEvent(), swab.Owner, target: args.Target, used: swab.Owner)
         {
             Broadcast = true,
             BreakOnMove = true,
