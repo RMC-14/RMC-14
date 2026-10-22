@@ -189922,13 +189922,6 @@ entities:
     - type: Transform
       pos: 85.5,112.5
       parent: 1
-- proto: RMCMagazineRifleM54CMK1HEAP
-  entities:
-  - uid: 25895
-    components:
-    - type: Transform
-      pos: 5.5,123.5
-      parent: 1
 - proto: RMCMagazineRifleM54CMK1HEAPEmpty
   entities:
   - uid: 25896
