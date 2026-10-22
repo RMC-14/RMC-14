@@ -146,3 +146,16 @@
     defaultChannel: MarineAlpha
   - type: Sprite
     state: delta_key
+    
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyFORECONPVE
+  name: forecon encryption key
+  suffix: PVE
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineSOF
+    defaultChannel: MarineSOF
+  - type: Sprite
+    state: delta_key

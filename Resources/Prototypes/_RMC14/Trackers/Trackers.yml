@@ -42,6 +42,11 @@
 - type: trackerMode
   id: SquadLeader
   job: CMSquadLeader
+  
+  - type: trackerMode
+  id: PlatoonCommander
+  job: CMPVEPlatoonCommander
+  alert: SquadTrackerSunRiders
 
 - type: trackerMode
   id: SectionSergeant
@@ -70,6 +75,10 @@
   id: LeaderPmc
   job: RMCPMCLeader
   alert: SquadTrackerTeamLeader
+
+- type: trackerMode
+  id: CommandPmcPVE
+  job: CMPMCForceCommandPVE
 
 - type: trackerMode
   id: LeaderPmcPVE
@@ -135,6 +144,18 @@
   job: RMCSPPLeader
 
 - type: trackerMode
+  id: PlatoonCommanderSPP
+  job: RMCSPPPlatCoPVE
+
+- type: trackerMode
+  id: SectionSergeantSPP
+  job: RMCSPPSectionLeadPVE
+
+- type: trackerMode
+  id: SquadLeaderSPP
+  job: RMCSPPSquadLeadPVE
+
+- type: trackerMode
   id: FreelancerLeader
   job: CMFreelancerLeader
 
@@ -150,6 +171,14 @@
   id: FORECONCommandingOfficer
   job: RMCSurvivorForeconCommander
   alert: SquadTrackerCommandingOfficer
+  
+- type: trackerMode
+  id: FORECONSquadLeaderPVE
+  job: RMCFORECONPVESquadLead
+  
+- type: trackerMode
+  id: FORECONAssistantSquadLeader
+  job: RMCFORECONPVEAssistantSL
   
 - type: trackerMode
   id: ParaTeamLeader

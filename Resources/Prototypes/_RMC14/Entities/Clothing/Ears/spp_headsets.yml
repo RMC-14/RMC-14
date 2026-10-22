@@ -207,3 +207,35 @@
       key_slots:
       - CMEncryptionKeyColony
       - RMCEncryptionKeyHalcyon
+
+# PVE
+
+-type: entity
+  parent: RMCHeadsetIconsSPP
+  id: RMCHeadsetSPPPVE
+  name: SPP headset
+  suffix: PVE
+  description: This headset is used by the members of the SPP's Naval Infantry
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeySPP
+  - type: GrantSquadLeaderTracker
+    defaultMode: SectionSergeantSPP
+    trackerModes:
+    - PlatoonCommanderSPP
+    - SectionSergeantSPP
+    - SquadLeaderSPP
+    - PrimaryLandingZone
+  - type: GrantTacMapAlert
+  - type: GrantAreaInfo
+  
+- type: entity
+  parent: RMCHeadsetSPPPVE
+  id: RMCHeadsetSPPLeaderPVE
+  name: SPP leader radio headset
+  description: This headset is used by the leaders of the SPP's Naval Infantry
+  components:
+  - type: RMCHeadset
+    radioTextIncrease: 3

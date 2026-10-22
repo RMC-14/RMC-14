@@ -62,10 +62,9 @@
     - RCMPVETroopSergeant
     - RCMPVETeamLead
     - RCMPVETroopCommander
-  - type: RMCHeadset
-    channels:
-    - RoyalMarine
+    - PrimaryLandingZone
   - type: GrantTacMapAlert
+  - type: GrantAreaInfo
 
 - type: entity
   parent: RMCHeadsetRoyalMarinePVE

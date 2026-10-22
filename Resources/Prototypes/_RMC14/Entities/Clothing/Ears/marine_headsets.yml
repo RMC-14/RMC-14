@@ -495,8 +495,47 @@
   - type: GrantSquadLeaderTracker
     defaultMode: SectionSergeant
     trackerModes:
+    - PlatoonCommander
     - SectionSergeant
     - PVESquadLeader
     - PrimaryLandingZone
   - type: GrantTacMapAlert
-  - type: HeadsetAutoSquad
+  
+  - type: entity
+  parent: RMCHeadsetGoldenArrow
+  id: RMCHeadsetGoldenArrowLeader
+  name: sun riders leader radio headset
+  description: This is used by the leaders of the UNMC Sun Riders Platoon.
+  components:
+  - type: RMCHeadset
+    radioTextIncrease: 3
+    
+- type: entity
+  parent: RMCHeadsetShip
+  id: RMCForeconPVE
+  name: force recon headset
+  suffix: PVE
+  description: This headset is used by UNMC Force Recon
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeyFORECONPVE
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Ears/headset_onmob.rsi
+  - type: GrantSquadLeaderTracker
+    defaultMode: FORECONSquadLeaderPVE
+    trackerModes:
+    - FORECONSquadLeaderPVE
+    - FORECONAssistantSquadLeader
+    - PrimaryLandingZone
+  - type: GrantTacMapAlert
+  
+  - type: entity
+  parent: RMCForeconPVE
+  id: RMCHeadsetForeconLeader
+  name: forecon leader radio headset
+  description: This headset is used by the leaders of UNMC Force Recon
+  components:
+  - type: RMCHeadset
+    radioTextIncrease: 3
