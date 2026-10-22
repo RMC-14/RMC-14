@@ -34,6 +34,13 @@
       prefix: rmc-job-prefix-spp-squadlead
     - type: AssignSquad
       squad: SquadSPP
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: spp_spec
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_spp
     - type: MarineOrders
     - type: RMCPointing
     - type: RMCTrackable

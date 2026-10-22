@@ -11,7 +11,7 @@
   ranks:
     RMCRankSPPMladshiyLeytenant: []
   startingGear: RMCSPPPlatCoPVEGear
-  icon: "CMJobIconEmpty"
+  icon: "RMCJobIconSPPPlatCo"
   joinNotifyCrew: false
   accessGroups:
   - ShipMasterAccess
@@ -38,6 +38,13 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-overwatch
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: spp_lt
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_spp
     - type: MarineOrders
     - type: RMCPointing
     - type: RMCTrackable
@@ -70,6 +77,13 @@
     outerClothing: RMCCoatSPP
     head: CMHeadCapSPPBeret
     shoes: CMBootsBlackFilled
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPPlatCo
+  icon:
+    sprite: _RMC14/Interface/job_icons/SPP/standard.rsi
+    state: spp_lt
 
 - type: playTimeTracker
   id: RMCJobSPPPlatCoPVE
