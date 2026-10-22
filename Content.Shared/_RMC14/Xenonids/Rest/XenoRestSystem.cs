@@ -19,6 +19,9 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Projectiles;
+using Content.Shared.Weapons.Ranged.Components;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Rest;
@@ -56,6 +59,7 @@ public sealed class XenoRestSystem : EntitySystem
         SubscribeLocalEvent<XenoRestingComponent, EvasionRefreshModifiersEvent>(OnXenoRestingEvasionRefresh);
         SubscribeLocalEvent<XenoRestingComponent, AttemptMobCollideEvent>(OnXenoRestingMobCollide);
         SubscribeLocalEvent<XenoRestingComponent, AttemptMobTargetCollideEvent>(OnXenoRestingMobTargetCollide);
+        SubscribeLocalEvent<XenoRestingComponent, PreventCollideEvent>(OnXenoRestingPreventCollide);
 
         SubscribeLocalEvent<ActionBlockIfRestingComponent, RMCActionUseAttemptEvent>(OnXenoRestingActionUseAttempt);
     }
@@ -209,6 +213,22 @@ public sealed class XenoRestSystem : EntitySystem
     private void OnXenoRestingMobTargetCollide(Entity<XenoRestingComponent> ent, ref AttemptMobTargetCollideEvent args)
     {
         args.Cancelled = true;
+    }
+
+    private void OnXenoRestingPreventCollide(Entity<XenoRestingComponent> ent, ref PreventCollideEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (!ent.Comp.Running)
+            return;
+
+        var other = args.OtherEntity;
+        if (HasComp<ProjectileComponent>(other) &&
+            CompOrNull<TargetedProjectileComponent>(other)?.Target != ent)
+        {
+            args.Cancelled = true;
+        }
     }
 
     public bool IsResting(Entity<XenoRestingComponent?> ent)
