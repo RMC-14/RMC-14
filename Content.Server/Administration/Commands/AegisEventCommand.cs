@@ -6,7 +6,7 @@ using Content.Shared._RMC14.Requisitions;
 
 namespace Content.Server.Administration.Commands;
 
-[AdminCommand(AdminFlags.Admin)]
+[AdminCommand(AdminFlags.Fun)]
 public sealed class AegisEventCommand : IConsoleCommand
 {
     public string Command => "aegis:normal";
@@ -36,7 +36,7 @@ public sealed class AegisEventCommand : IConsoleCommand
     }
 }
 
-[AdminCommand(AdminFlags.Moderator)]
+[AdminCommand(AdminFlags.Fun)]
 public sealed class AegisSpawnCommand : IConsoleCommand
 {
     public string Command => "aegis:lobby";
@@ -70,7 +70,7 @@ public sealed class AegisSpawnCommand : IConsoleCommand
     }
 }
 
-[AdminCommand(AdminFlags.Moderator)]
+[AdminCommand(AdminFlags.Fun)]
 public sealed class AegisStatusCommand : IConsoleCommand
 {
     public string Command => "aegis:status";
@@ -127,7 +127,7 @@ public sealed class AegisStatusCommand : IConsoleCommand
     }
 }
 
-[AdminCommand(AdminFlags.Moderator)]
+[AdminCommand(AdminFlags.Fun)]
 public sealed class AegisResetCommand : IConsoleCommand
 {
     public string Command => "aegis:reset";
