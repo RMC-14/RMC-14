@@ -60,7 +60,7 @@ public sealed class AddBlacklistCommand : LocalizedCommands
     }
 }
 
-[AdminCommand(AdminFlags.Ban)]
+[AdminCommand(AdminFlags.Unban)] // RMC Ban -> Unban
 public sealed class RemoveBlacklistCommand : LocalizedCommands
 {
     [Dependency] private readonly IPlayerLocator _playerLocator = default!;

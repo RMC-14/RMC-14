@@ -4,7 +4,7 @@ using Robust.Shared.Console;
 
 namespace Content.Server.Administration.Commands;
 
-[AdminCommand(AdminFlags.Ban)]
+[AdminCommand(AdminFlags.Unban)] // RMC14 Ban -> UnBan
 public sealed class RoleUnbanCommand : LocalizedCommands
 {
     [Dependency] private readonly IBanManager _banManager = default!;
