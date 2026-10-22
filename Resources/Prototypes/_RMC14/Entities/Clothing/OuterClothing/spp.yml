@@ -35,7 +35,7 @@
   parent: RMCArmorSPP
   id: RMCArmorSPPSpetsnazAlt
   name: Izdeliye-M T5 tactical vest
-  description: An early production model of the CCC5-L Tactical Vest designed for Spetsnaz forces. While more protective than its' newer cousin, the lack of extra pouches and use of heavier composites adds a lot of extra bulk which hinders movement. Despite being a somewhat outdated design, it's still issued to some Spetsnaz units.
+  description: An early production model of the CCC5-L Tactical Vest designed for Spetsnaz forces. While more protective than its' newer cousin, the use of heavier composites adds a lot of extra bulk which hinders movement. Despite being a somewhat outdated design, it's still issued to some Spetsnaz units.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/spetsnaz_vest.rsi
@@ -63,7 +63,7 @@
   parent: RMCArmorSPPSupport
   id: RMCArmorSPPSpetsnazSupport
   name: Izdeliye-S T5 tactical support vest
-  description: The final iteration of the CCC5-L Tactical Plated Vest before it recieved its' official designation, designed for Spetsnaz forces. Offering a middle ground between the 'H' and 'M' T5 models, the 'S' vest features enhanced mobility with an improved armor package, though critically lacks limb coveraeg. Despite being a somewhat outdated design, it's still in use by some Spetsnaz units who prefer the wider range of movement the lower armor coverage affords them.
+  description: The final iteration of the CCC5-L Tactical Plated Vest before it recieved its' official designation, designed for Spetsnaz forces. Offering a middle ground between the 'H' and 'M' T5 models, the 'S' vest features enhanced mobility with an improved armor package, though critically lacks limb coverage. Despite being a somewhat outdated design, it's still in use by some Spetsnaz units who prefer the wider range of movement the lower armor coverage affords them.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/spetsnaz_plated.rsi
