@@ -221,6 +221,8 @@
     containers:
       key_slots:
       - RMCEncryptionKeySPP
+- type: Clothing
+    sprite: _RMC14/Objects/Clothing/Ears/headset_onmob.rsi
   - type: GrantSquadLeaderTracker
     defaultMode: SectionSergeantSPP
     trackerModes:

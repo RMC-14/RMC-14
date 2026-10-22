@@ -55,6 +55,8 @@
   suffix: PVE
   description: A sleek headset used by the Royal Crown Marines. Low profile enough to fit under their unique helmets. 
   components:
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Ears/headset_onmob.rsi
   - type: GrantSquadLeaderTracker
     defaultMode: RCMPVETroopCommander
     trackerModes:
