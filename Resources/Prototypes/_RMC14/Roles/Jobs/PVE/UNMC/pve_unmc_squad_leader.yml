@@ -47,6 +47,7 @@
   id: RMCGearPVESquadLeader
   equipment:
     id: RMCDogtagPVESquadLeader
+    ears: RMCHeadsetGoldenArrowLeader
 
 - type: entity
   parent: CMSpawnPointJobBase

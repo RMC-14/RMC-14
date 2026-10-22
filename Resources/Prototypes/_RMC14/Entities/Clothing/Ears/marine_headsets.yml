@@ -512,7 +512,7 @@
     
 - type: entity
   parent: RMCHeadsetShip
-  id: RMCForeconPVE
+  id: RMCHeadsetForeconPVE
   name: force recon headset
   suffix: PVE
   description: This headset is used by UNMC Force Recon
@@ -532,7 +532,7 @@
   - type: GrantTacMapAlert
   
   - type: entity
-  parent: RMCForeconPVE
+  parent: RMCHeadsetForeconPVE
   id: RMCHeadsetForeconLeader
   name: forecon leader radio headset
   description: This headset is used by the leaders of UNMC Force Recon

@@ -55,7 +55,7 @@
   id: RMCJobFORECONPVESquadLead
   equipment:
     id: CMDogtagRifleman
-    ears: RMCHeadsetMarine
+    ears: RMCHeadsetForeconLeader
     jumpsuit: JumpsuitMarine
     shoes: CMBootsBlackFilled
 
