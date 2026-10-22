@@ -21,7 +21,7 @@ public sealed class RMCGenerateReagentPropsCommand : IConsoleCommand
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     public string Command => "rmcgeneratereagentprops";
-    public string Description => "Generates a new reagent with an exact, caller-specified set of properties, prints details, and spawns a filled container sized for the given volume.";
+    public string Description => "Generates a new reagent.";
     public string Help => "rmcgeneratereagentprops <tier 1-3> <volume 1-1000> <Property:Level> [Property:Level ...]";
 
     private static readonly (int MaxVolume, EntProtoId Container, string Solution)[] Containers =

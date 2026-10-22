@@ -18,7 +18,7 @@ public sealed class RMCPropertyBreakthroughSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
 
     private static readonly string[] LegendaryPropertyIds = ["Hypergenetic", "Boosting", "Regulating", "Optimized"];
-    private const string CipheringId = "Ciphering";
+    private static readonly ProtoId<ChemGeneratorPropertyPrototype> CipheringId = "Ciphering";
 
     private const float LegendaryWeight = 5f;
     private const float CipheringWeight = 3f;
@@ -32,7 +32,7 @@ public sealed class RMCPropertyBreakthroughSystem : EntitySystem
     {
         var propertyId = _random.Prob(LegendaryWeight / (LegendaryWeight + CipheringWeight))
             ? _random.Pick(LegendaryPropertyIds)
-            : CipheringId;
+            : CipheringId.Id;
 
         if (!_generator.TryGetLegendaryRecipe(propertyId, out var pieces) ||
             !_prototype.TryIndex<ChemGeneratorPropertyPrototype>(propertyId, out var property))

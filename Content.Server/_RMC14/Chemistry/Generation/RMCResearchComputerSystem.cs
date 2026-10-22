@@ -7,7 +7,6 @@ using Content.Shared.Popups;
 using Content.Shared.UserInterface;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.GameObjects;
 
 namespace Content.Server._RMC14.Chemistry.Generation;
 
@@ -16,21 +15,30 @@ public sealed class RMCResearchComputerSystem : SharedRMCResearchComputerSystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCChemistryResearchSystem _research = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {
-        base.Initialize();
         SubscribeLocalEvent<RMCResearchComputerComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<RMCResearchComputerComponent, BeforeActivatableUIOpenEvent>(OnBeforeUIOpen);
+
+        Subs.BuiEvents<RMCResearchComputerComponent>(RMCResearchComputerUi.Key,
+            subs =>
+            {
+                subs.Event<RMCResearchComputerBrokerClearanceBuiMsg>(OnBrokerClearance);
+                subs.Event<RMCResearchComputerRequestXAccessBuiMsg>(OnRequestXAccess);
+                subs.Event<RMCResearchComputerTakeContractBuiMsg>(OnTakeContract);
+                subs.Event<RMCResearchComputerReprintContractBuiMsg>(OnReprintContract);
+                subs.Event<RMCResearchComputerReadDocumentBuiMsg>(OnReadDocument);
+                subs.Event<RMCResearchComputerPrintDocumentBuiMsg>(OnPrintDocument);
+                subs.Event<RMCResearchComputerPublishDocumentBuiMsg>(OnPublishDocument);
+                subs.Event<RMCResearchComputerUnpublishDocumentBuiMsg>(OnUnpublishDocument);
+                subs.Event<RMCResearchComputerAnnounceDocumentBuiMsg>(OnAnnounceDocument);
+            });
     }
 
     private void OnBeforeUIOpen(Entity<RMCResearchComputerComponent> ent, ref BeforeActivatableUIOpenEvent args)
     {
-        Log.Debug($"OnBeforeUIOpen: {ToPrettyString(ent)} opening research computer UI");
-        var research = _research.EnsureResearch();
-        Log.Debug($"OnBeforeUIOpen: research singleton {ToPrettyString(research.Owner)}, Contracts.Count={research.Comp.Contracts.Count}");
+        _research.EnsureResearch();
     }
 
     private void OnInteractUsing(Entity<RMCResearchComputerComponent> ent, ref InteractUsingEvent args)
@@ -45,15 +53,18 @@ public sealed class RMCResearchComputerSystem : SharedRMCResearchComputerSystem
         if (!this.IsPowered(ent, EntityManager))
         {
             _popup.PopupCursor("This terminal has no power!", args.User);
+            args.Handled = true;
             return;
         }
+
+        var notifySound = _research.EnsureResearch().Comp.NotifySound;
 
         if (isRerollDisk)
         {
             _research.ForceRerollContracts();
             QueueDel(args.Used);
             _popup.PopupCursor("The terminal accepts the disk, and rerolls the contract chemicals.", args.User);
-            _audio.PlayPvs("/Audio/Machines/twobeep.ogg", ent);
+            _audio.PlayPvs(notifySound, ent);
             args.Handled = true;
             return;
         }
@@ -63,67 +74,63 @@ public sealed class RMCResearchComputerSystem : SharedRMCResearchComputerSystem
             _research.AddCredits(grant.Grant);
             QueueDel(args.Used);
             _popup.PopupCursor($"Research grant redeemed for {grant.Grant} credits.", args.User);
-            _audio.PlayPvs("/Audio/Machines/twobeep.ogg", ent);
+            _audio.PlayPvs(notifySound, ent);
             args.Handled = true;
             return;
         }
 
-        if (!_research.TrySaveManualScan(args.Used, Transform(ent).Coordinates))
+        if (!_research.TrySaveManualScan(args.Used))
             return;
 
         _popup.PopupCursor("The terminal scans the document and files it under Manual Scans.", args.User);
         args.Handled = true;
     }
 
-    protected override bool TryBrokerClearance(Entity<RMCResearchComputerComponent> ent, EntityUid actor)
+    private void OnBrokerClearance(Entity<RMCResearchComputerComponent> ent, ref RMCResearchComputerBrokerClearanceBuiMsg args)
     {
-        return _research.TryRaiseClearance(Transform(ent).Coordinates);
+        _research.TryRaiseClearance(Transform(ent).Coordinates);
     }
 
-    protected override bool TryBrokerXAccess(Entity<RMCResearchComputerComponent> ent, EntityUid actor)
+    private void OnRequestXAccess(Entity<RMCResearchComputerComponent> ent, ref RMCResearchComputerRequestXAccessBuiMsg args)
     {
-        return _research.TryRequestXAccess();
+        _research.TryRequestXAccess();
     }
 
-    protected override bool TryTakeContract(Entity<RMCResearchComputerComponent> ent, int slotIndex)
+    private void OnTakeContract(Entity<RMCResearchComputerComponent> ent, ref RMCResearchComputerTakeContractBuiMsg args)
     {
-        return _research.TryTakeContract(slotIndex, Transform(ent).Coordinates);
+        _research.TryTakeContract(args.Index, Transform(ent).Coordinates);
     }
 
-    protected override void ReprintContract(Entity<RMCResearchComputerComponent> ent)
+    private void OnReprintContract(Entity<RMCResearchComputerComponent> ent, ref RMCResearchComputerReprintContractBuiMsg args)
     {
-        _research.TryReprintContract(Transform(ent).Coordinates);
+        if (TryStartPrint(ent))
+            _research.TryReprintContract(Transform(ent).Coordinates);
     }
 
-    protected override void ReadDocument(Entity<RMCResearchComputerComponent> ent, string category, string title, bool published, EntityUid actor)
+    private void OnReadDocument(Entity<RMCResearchComputerComponent> ent, ref RMCResearchComputerReadDocumentBuiMsg args)
     {
-        if (!_research.TryGetDocument(category, title, published, out var netEntity))
-            return;
-
-        if (GetEntity(netEntity) is not { Valid: true } report)
-            return;
-
-        _transform.SetCoordinates(report, Transform(ent).Coordinates);
-        _ui.OpenUi(report, PaperComponent.PaperUiKey.Key, actor);
+        if (TryStartPrint(ent))
+            _research.TryOpenReadingCopy(args.Id, Transform(ent).Coordinates, args.Actor);
     }
 
-    protected override void PrintDocument(Entity<RMCResearchComputerComponent> ent, string category, string title, bool published)
+    private void OnPrintDocument(Entity<RMCResearchComputerComponent> ent, ref RMCResearchComputerPrintDocumentBuiMsg args)
     {
-        _research.TryPrintDocument(category, title, published, Transform(ent).Coordinates);
+        if (TryStartPrint(ent))
+            _research.TryPrintDocument(args.Id, Transform(ent).Coordinates);
     }
 
-    protected override bool TryPublishDocument(string category, string title)
+    private void OnPublishDocument(Entity<RMCResearchComputerComponent> ent, ref RMCResearchComputerPublishDocumentBuiMsg args)
     {
-        return _research.PublishDocument(category, title);
+        _research.PublishDocument(args.Id);
     }
 
-    protected override bool TryUnpublishDocument(string category, string title)
+    private void OnUnpublishDocument(Entity<RMCResearchComputerComponent> ent, ref RMCResearchComputerUnpublishDocumentBuiMsg args)
     {
-        return _research.UnpublishDocument(category, title);
+        _research.UnpublishDocument(args.Id);
     }
 
-    protected override void AnnounceDocument(Entity<RMCResearchComputerComponent> ent, string category, string title, EntityUid actor)
+    private void OnAnnounceDocument(Entity<RMCResearchComputerComponent> ent, ref RMCResearchComputerAnnounceDocumentBuiMsg args)
     {
-        _research.AnnounceDocument(ent.Owner, category, title, actor);
+        _research.AnnounceDocument(ent.Owner, args.Id, args.Actor);
     }
 }

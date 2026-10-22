@@ -42,7 +42,7 @@ public sealed class RMCReactionIndicatorEffectSystem : EntitySystem
     private static readonly EntProtoId FireProto = "RMCChemFire";
     private static readonly EntProtoId SmokeProto = "RMCChemSmoke";
 
-    private const string WaterReagent = "Water";
+    private static readonly ProtoId<ReagentPrototype> WaterReagent = "Water";
 
     private static readonly SoundSpecifier BubblingSound = new SoundPathSpecifier("/Audio/Effects/Chemistry/bubbles.ogg");
     private static readonly SoundSpecifier SplashSound = new SoundCollectionSpecifier("XenoAcidSizzle");
@@ -103,7 +103,7 @@ public sealed class RMCReactionIndicatorEffectSystem : EntitySystem
 
     private void HandleFire(EntityUid uid, EntityCoordinates coords, EntityEffectReagentArgs args)
     {
-        // if holder already has at least as much water as the volume of chemical that
+        // if holder already has at least as much water as the volume of reagent that
         // was just created, the mix boils & settles instead of igniting
         if (args.Source is { } source && source.GetTotalPrototypeQuantity(WaterReagent) >= args.Quantity)
         {
@@ -160,13 +160,7 @@ public sealed class RMCReactionIndicatorEffectSystem : EntitySystem
     {
         foreach (var quantity in solution.Contents)
         {
-            if (!_rmcReagent.TryIndex(quantity.Reagent.Prototype, out var proto))
-                continue;
-
-            if (proto.Metabolisms is not { } metabolisms || !metabolisms.TryGetValue("Poison", out var entry))
-                continue;
-
-            if (entry.Effects.Any(e => e is Corrosive))
+            if (_rmcReagent.HasProperty<Corrosive>(quantity.Reagent.Prototype))
                 return true;
         }
 

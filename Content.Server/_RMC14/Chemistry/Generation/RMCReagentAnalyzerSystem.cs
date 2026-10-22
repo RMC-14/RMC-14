@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared._RMC14.Chemistry.Generation;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.Chemistry.EntitySystems;
@@ -5,11 +6,14 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Chemistry.Generation;
 
 public sealed class RMCReagentAnalyzerSystem : SharedRMCReagentAnalyzerSystem
 {
+    private static readonly ProtoId<ChemGeneratorPropertyPrototype> DnaDisintegratingProperty = "DNADisintegrating";
+
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly RMCChemicalGeneratorSystem _generator = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
@@ -75,22 +79,16 @@ public sealed class RMCReagentAnalyzerSystem : SharedRMCReagentAnalyzerSystem
         _generator.PrintReport(Transform(ent).Coordinates, reagentId, reagent, comp.SampleNumber++, "XRF Scans");
         _audio.PlayPvs(comp.FinishSound, ent);
 
-        if (reagent.ChemClass >= ChemClass.Special)
+        if (reagent.ChemClass >= ChemClass.Special && !_research.IsIdentified(reagentId))
         {
-            if (_generator.TryGetGeneratedTier(reagentId, out var tier))
+            if (_generator.GetProperties(reagent).Any(p => p.Property.ID == DnaDisintegratingProperty.Id) &&
+                !_research.TryDiscoverDnaDisintegrating(reagent.LocalizedName))
             {
-                var credits = tier switch
-                {
-                    1 => 3,
-                    2 => 5,
-                    _ => 7,
-                };
-                _research.TryAwardIdentificationCredits(reagentId, credits, FixedPoint2.Zero);
+                return;
             }
-            else
-            {
-                _research.TryAwardIdentificationCredits(reagentId, reagent.CreditReward, reagent.ObjectiveValue);
-            }
+
+            var points = _generator.IsGenerated(reagentId) ? FixedPoint2.Zero : reagent.ObjectiveValue;
+            _research.TryAwardIdentificationCredits(reagentId, reagent.CreditReward, points);
         }
     }
 

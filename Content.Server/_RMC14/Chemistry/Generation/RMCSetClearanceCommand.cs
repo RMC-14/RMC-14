@@ -10,8 +10,8 @@ public sealed class RMCSetClearanceCommand : IConsoleCommand
     [Dependency] private readonly IEntitySystemManager _entitySystems = default!;
 
     public string Command => "rmcsetclearance";
-    public string Description => "Sets the chemistry research clearance level.";
-    public string Help => $"{Command} <level 1-{RMCChemistryResearchSystem.MaxClearanceLevel}>";
+    public string Description => "Sets the research clearance level.";
+    public string Help => $"{Command} <level>";
 
     public void Execute(IConsoleShell shell, string argStr, string[] args)
     {
