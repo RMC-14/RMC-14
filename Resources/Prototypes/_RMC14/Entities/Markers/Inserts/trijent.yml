@@ -218,26 +218,26 @@
 - type: entity
   parent: RMCMapInsertTrijentBaseScenario
   id: RMCMapInsertTrijentCrashlandingSPPBar
-  name: Crashlanding SPP Bar
+  name: Crashlanding SPP Spetsnaz Bar
   components:
   - type: MapInsert
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Trijent/crashlanding-spp-bar.yml"
       probability: 1
       offset: 0,-2.0
-      nightmareScenario: spp_bar
+      nightmareScenario: spp_spetsnaz_trijent
 
 - type: entity
   parent: RMCMapInsertTrijentBaseScenario
   id: RMCMapInsertTrijentCrashlandingSPPAlt
-  name: Crashlanding SPP Alt
+  name: Crashlanding SPP Spetsnaz Alt
   components:
   - type: MapInsert
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Trijent/crashlanding-spp-alt.yml"
       probability: 1
       offset: 0,-2
-      nightmareScenario: spp_bar
+      nightmareScenario: spp_spetsnaz_trijent
 
 # CLF Pods
 - type: entity

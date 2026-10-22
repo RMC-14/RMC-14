@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 03/03/2026 01:57:18
+  time: 10/22/2026 22:17:08
   entityCount: 201
 maps: []
 grids:
@@ -215,6 +215,8 @@ entities:
       rot: 3.141592653589793 rad
       pos: 5.5340986,18.560469
       parent: 1
+    missingComponents:
+    - Damageable
 - proto: CMSheetMetal1
   entities:
   - uid: 75
@@ -232,14 +234,14 @@ entities:
     - type: Transform
       pos: 6.492432,20.453466
       parent: 1
-- proto: RMCArmorHelmetSPPSOF
+- proto: RMCArmorHelmetSPPSpetsnaz
   entities:
   - uid: 193
     components:
     - type: Transform
       pos: 5,16
       parent: 1
-- proto: RMCArmorSPPSOF
+- proto: RMCArmorSPPSpetsnaz
   entities:
   - uid: 192
     components:
