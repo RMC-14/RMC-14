@@ -43,7 +43,7 @@
   id: SquadLeader
   job: CMSquadLeader
   
-  - type: trackerMode
+- type: trackerMode
   id: PlatoonCommander
   job: CMPVEPlatoonCommander
   alert: SquadTrackerSunRiders

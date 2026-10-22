@@ -210,7 +210,7 @@
 
 # PVE
 
--type: entity
+- type: entity
   parent: RMCHeadsetIconsSPP
   id: RMCHeadsetSPPPVE
   name: SPP headset
