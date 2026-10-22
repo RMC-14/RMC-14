@@ -14,8 +14,7 @@
       factions:
       - SPP
     - type: Skills
-      skills:
-        preset: RMCSkillPresetSurvivorSPPLeader
+      preset: RMCSkillPresetSurvivorSPPLeader
     - type: Language
       spokenLanguages:
       - Russian
