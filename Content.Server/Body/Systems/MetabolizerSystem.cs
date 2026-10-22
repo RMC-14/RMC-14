@@ -145,6 +145,12 @@ namespace Content.Server.Body.Systems
             _random.Shuffle(list);
 
             int reagents = 0;
+
+            // RMC14 dead mobs dont metabolize
+            // TODO RMC14 cm13 also processes every reagent inactive cryo cell with 1u cryoxadone or clonexadone
+            var deadEntity = ent.Comp2?.Body ?? solutionEntityUid.Value;
+            var isDead = TryComp<MobStateComponent>(deadEntity, out var deadState) && _mobStateSystem.IsDead(deadEntity, deadState);
+
             foreach (var (reagent, quantity) in list)
             {
                 if (!_prototypeManager.TryIndexReagent<ReagentPrototype>(reagent.Prototype, out var proto))
@@ -153,7 +159,7 @@ namespace Content.Server.Body.Systems
                 var mostToRemove = FixedPoint2.Zero;
                 if (proto.Metabolisms is null)
                 {
-                    if (ent.Comp1.RemoveEmpty)
+                    if (ent.Comp1.RemoveEmpty && !isDead) // RMC14
                     {
                         solution.RemoveReagent(reagent, FixedPoint2.New(1));
                     }
@@ -193,14 +199,22 @@ namespace Content.Server.Body.Systems
                     // if it's possible for them to be dead, and they are,
                     // then we shouldn't process any effects, but should probably
                     // still remove reagents
-                    if (TryComp<MobStateComponent>(solutionEntityUid.Value, out var state))
+                    // RMC14
+                    if (isDead && !proto.WorksOnTheDead)
                     {
-                        if (!proto.WorksOnTheDead && _mobStateSystem.IsDead(solutionEntityUid.Value, state))
-                            continue;
+                        mostToRemove = FixedPoint2.Zero;
+                        continue;
                     }
 
                     var actualEntity = ent.Comp2?.Body ?? solutionEntityUid.Value;
                     var args = new EntityEffectReagentArgs(actualEntity, EntityManager, ent, solution, mostToRemove, proto, null, scale);
+
+                    // RMC14 leave cancelled chemicals (cryometabolizing, thanatometabolizing) in blood
+                    if (RMCChemicalEffect.IsMetabolismCancelled(args))
+                    {
+                        mostToRemove = FixedPoint2.Zero;
+                        continue;
+                    }
 
                     // do all effects, if conditions apply
                     foreach (var effect in entry.Effects)
@@ -221,6 +235,15 @@ namespace Content.Server.Body.Systems
                         }
 
                         effect.Effect(args);
+                    }
+
+                    // RMC14 cm13 only uses up a dead mobs generated chemical when its dead processing ran or it was forced
+                    if (isDead &&
+                        !args.RMCProcessedDead &&
+                        !RMCChemicalEffect.IsForcedWhenDead(args) &&
+                        Array.Exists(entry.Effects, e => e is RMCChemicalEffect))
+                    {
+                        mostToRemove = FixedPoint2.Zero;
                     }
                 }
 

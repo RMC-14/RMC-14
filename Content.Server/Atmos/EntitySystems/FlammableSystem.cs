@@ -578,7 +578,7 @@ namespace Content.Server.Atmos.EntitySystems
                         HasComp<RMCImmuneToFireTileDamageComponent>(uid))
                     {
                         // If entity has fire immunity, only deal damage if they have the bypass component
-                        if (HasComp<RMCFireBypassActiveComponent>(uid) && damage != null)
+                        if (HasComp<RMCFireBypassActiveComponent>(uid) && !tileEv.IgnorePenetration && damage != null) // RMC14
                             _damageableSystem.TryChangeDamage(uid, damage, true, false, origin: uid);
                     }
                     else
