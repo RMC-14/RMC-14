@@ -1,0 +1,73 @@
+- type: job
+  parent: RMCSurvivorSPPSpetsnazBase
+  id: RMCSurvivorSPPSpetsnazSpec
+  name: rmc-job-name-spetsnaz-spec
+  startingGear: RMCGearSPPSpetsnazSpec
+  ranks:
+    RMCRankSPPStarshiySerzhant: []
+  icon: "RMCJobIconSPPSpetsnazSpec"
+  spawnMenuRoleName: SPP Spetsnaz B/SRU Specialist (Sorokyne Special Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - English
+      - German
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - English
+      - German
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
+    - type: RMCAllowSuitStorage
+    - type: RMCSurvivor
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      preset: RMCSkillPresetSurvivorSPPSpecialist
+    - type: MarineOrders
+    - type: IntelRescueSurvivorObjective
+    - type: JobPrefix
+      prefix: rmc-job-prefix-soro-spetsnaz-spec
+    - type: DemoSpecWhitelist
+    - type: QYJWhitelist
+    - type: AssignSquad
+      squad: SquadSPP
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearSPPSpetsnazBase
+  id: RMCGearSPPSpetsnazSpec
+  equipment:
+    outerClothing: RMCArmorSPPSpetsnazHeavyAltSurvivorFill
+  storage:
+    back:
+    - CMSheetMetal20
+    outerClothing:
+    - RMCTacticalPrybar
+    - RMCMagazineRifleType77
+    - RMCMagazineRifleType77
+    - RMCRadioHandheldColony
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSPPSpetsnazSpec
+  name: special survivor spp spetsnaz specialist spawn point
+  suffix: Sorokyne
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSPPSpetsnazSpec
+  - type: Sprite
+    state: surv_spp
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPSpetsnazSpec
+  icon:
+    sprite: _RMC14/Interface/job_icons/SPP/spetsnaz.rsi
+    state: spp_sptz_spec

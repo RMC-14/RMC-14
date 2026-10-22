@@ -430,30 +430,52 @@
 
 - type: entity
   parent: RMCHeadsetColonyIcons
-  id: RMCHeadsetSPPCrashland
-  name: SPP 173/Airborne headset
-  description: A headset used by members of the 173rd Airborne Reconnaissance unit.
+  id: RMCHeadsetSPPSpetsnazCrashlandTrijent
+  name: SPP Spetsnaz D/SRU headset
+  description: A special headset used by the SPP Spetsnaz Group 'D' Special Recon Unit.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/headsets.rsi
+    state: sptz_headset
   - type: ContainerFill
     containers:
       key_slots:
       - RMCEncryptionKeySPP
       - CMEncryptionKeyColony
   - type: GrantSquadLeaderTracker
-    defaultMode: SPPAirborneSL
+    defaultMode: SPPSpetsnazSL
     trackerModes:
-    - SPPAirborneSL
+    - SPPSpetsnazSL
 
-# For Sorokyne SPP SOF
+- type: entity
+  parent: RMCHeadsetSPPSpetsnazCrashlandTrijent
+  id: RMCHeadsetSPPSpetsnazCrashlandTrijentSL
+  name: SPP Spetsnaz D/SRU squad leader headset
+  components:
+  - type: RMCHeadset
+    radioTextIncrease: 2
+
+# For Sorokyne SPP Spetsnaz
 
 - type: entity
   parent: RMCHeadsetColonyIcons
-  id: RMCHeadsetSPPSOFCrashland
-  name: SPP 121/RECON headset
-  description: A special headset used by recon elements of the SPP military.
+  id: RMCHeadsetSPPSpetsnazCrashland
+  name: SPP Spetsnaz B/SRU headset
+  description: A special headset used by the SPP Spetsnaz Group 'B' Special Recon Unit.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/headsets.rsi
+    state: vai_headset
   - type: ContainerFill
     containers:
       key_slots:
       - RMCEncryptionKeySPP
       - CMEncryptionKeyColony
+
+- type: entity
+  parent: RMCHeadsetSPPSpetsnazCrashland
+  id: RMCHeadsetSPPSpetsnazCrashlandSL
+  name: SPP Spetsnaz B/SRU squad leader headset
+  components:
+  - type: RMCHeadset
+    radioTextIncrease: 2
