@@ -27,6 +27,7 @@ using Content.Shared.Whitelist;
 using Content.Shared.Wieldable.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
+using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
@@ -47,6 +48,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly UseDelaySystem _useDelaySystem = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     private const string AttachableToggleUseDelayId = "RMCAttachableToggle";
 
@@ -767,6 +769,18 @@ public sealed class AttachableToggleableSystem : EntitySystem
         }
 
         var exists = ent.Comp.Action != null;
+        if (exists &&
+            ent.Comp.Action is { } pending &&
+            Exists(pending) &&
+            actionsContainerComponent.Container?.Contains(pending) != true)
+        {
+            if (_net.IsServer)
+            {
+                ent.Comp.Action = null;
+                Dirty(ent);
+            }
+            return;
+        }
         _actionContainerSystem.EnsureAction(ent, ref ent.Comp.Action, ent.Comp.ActionId, actionsContainerComponent);
 
         if (ent.Comp.Action is not { } actionId)
