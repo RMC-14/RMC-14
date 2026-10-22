@@ -11,7 +11,7 @@ namespace Content.Server.Administration.Commands;
 /// <summary>
 ///     Lists someones active Ban Ids or opens a window to see them.
 /// </summary>
-[AdminCommand(AdminFlags.Ban)]
+[AdminCommand(AdminFlags.ViewNotes)] // RMC14 Ban -> ViewNotes
 public sealed class BanListCommand : LocalizedCommands
 {
     [Dependency] private readonly IPlayerLocator _locator = default!;

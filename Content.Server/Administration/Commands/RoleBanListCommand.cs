@@ -9,7 +9,7 @@ using Robust.Shared.Console;
 
 namespace Content.Server.Administration.Commands;
 
-[AdminCommand(AdminFlags.Ban)]
+[AdminCommand(AdminFlags.ViewNotes)] // RMC14 Ban -> ViewNotes
 public sealed class RoleBanListCommand : IConsoleCommand
 {
     [Dependency] private readonly IServerDbManager _dbManager = default!;
