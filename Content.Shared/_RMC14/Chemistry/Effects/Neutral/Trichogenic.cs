@@ -45,7 +45,7 @@ public sealed partial class Trichogenic : RMCChemicalEffect
             changed = true;
         }
 
-        if (humanoid.Sex != Sex.Female)
+        if (humanoid.Sex)
         {
             var facialHairStyles = markingManager.MarkingsByCategoryAndSpecies(MarkingCategories.FacialHair, humanoid.Species).Keys.ToList();
             if (facialHairStyles.Count > 0)
@@ -67,7 +67,7 @@ public sealed partial class Trichogenic : RMCChemicalEffect
     {
         var scaled = (float) ActualPotency * 2f * (float) args.Quantity;
         var plantTray = args.EntityManager.System<SharedRMCPlantTraySystem>();
-        plantTray.SetYieldMod((plant.Owner, plant.Comp), plant.Comp.YieldMod + (int) MathF.Round(0.2f * scaled));
+        AddYieldMod(args.EntityManager, plant, 0.2f * scaled);
 
         if (plant.Comp.Tray is { } trayUid && GetTray(args.EntityManager, plant) is { } tray)
         {
@@ -82,10 +82,18 @@ public sealed partial class Trichogenic : RMCChemicalEffect
         if (!random.Prob(0.025f * (float) ActualPotency))
             return;
 
+        args.EntityManager.System<SharedPopupSystem>().PopupEntity(Loc.GetString("chem-trichogenic-itchy"), args.TargetEntity, args.TargetEntity, PopupType.SmallCaution);
+
         var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
-        var damage = rmcDamageable.DistributeFreshDamage(BruteGroup, potency);
+        var damage = rmcDamageable.DistributeFreshDamage(BruteGroup, ActualPotency);
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
     }
 
-    // TODO RMC14: brain damage on critical overdose, "hair growing into brain"
+    protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
+    {
+        if (IoCManager.Resolve<IRobustRandom>().Prob(0.5f))
+            args.EntityManager.System<SharedPopupSystem>().PopupEntity(Loc.GetString("chem-trichogenic-skull"), args.TargetEntity, args.TargetEntity, PopupType.MediumCaution);
+
+        // TODO RMC14: brain damage on critical overdose, "hair growing into brain"
+    }
 }

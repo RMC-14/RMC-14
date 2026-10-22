@@ -1,4 +1,4 @@
-using Content.Shared._RMC14.Chemistry.Buildup;
+using Content.Shared._RMC14.Chemistry.MoveDelay;
 using Content.Shared._RMC14.Emote;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
@@ -34,7 +34,7 @@ public sealed partial class Hemolytic : RMCChemicalEffect
         if (args.EntityManager.TryGetComponent<BloodstreamComponent>(args.TargetEntity, out var bloodstream))
         {
             var bloodstreamSystem = args.EntityManager.System<SharedBloodstreamSystem>();
-            bloodstreamSystem.TryModifyBloodLevel((args.TargetEntity, bloodstream), -potency * 5f);
+            bloodstreamSystem.TryModifyBloodLevelQuiet((args.TargetEntity, bloodstream), -potency * 5f);
         }
     }
 
@@ -43,7 +43,7 @@ public sealed partial class Hemolytic : RMCChemicalEffect
         if (args.EntityManager.TryGetComponent<BloodstreamComponent>(args.TargetEntity, out var bloodstream))
         {
             var bloodstreamSystem = args.EntityManager.System<SharedBloodstreamSystem>();
-            bloodstreamSystem.TryModifyBloodLevel((args.TargetEntity, bloodstream), -potency * 8f);
+            bloodstreamSystem.TryModifyBloodLevelQuiet((args.TargetEntity, bloodstream), -potency * 8f);
         }
 
         var status = args.EntityManager.System<SharedStatusEffectsSystem>();
@@ -63,8 +63,8 @@ public sealed partial class Hemolytic : RMCChemicalEffect
         if (toAdd > TimeSpan.Zero)
             status.TryAddStatusEffectDuration(args.TargetEntity, "StatusEffectDrowsiness", toAdd);
 
-        var buildup = args.EntityManager.System<RMCSpeedBuildupSystem>();
-        buildup.AddBuildup(args.TargetEntity, actualPotency, dissipationRate: 0f, maxBuildup: 30f, increaseSpeed: false);
+        var moveDelay = args.EntityManager.System<RMCReagentMoveDelaySystem>();
+        moveDelay.SetMoveDelay(args.TargetEntity, $"{args.Reagent?.ID}:{nameof(Hemolytic)}", ActualPotency);
 
         var random = IoCManager.Resolve<IRobustRandom>();
         if (random.Prob(0.05f))

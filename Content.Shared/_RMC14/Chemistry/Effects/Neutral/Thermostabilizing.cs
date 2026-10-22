@@ -5,7 +5,6 @@ using Content.Shared.Damage;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.StatusEffectNew;
-using Content.Shared.Stunnable;
 using Content.Shared.Temperature;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -17,7 +16,7 @@ public sealed partial class Thermostabilizing : RMCChemicalEffect
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
         return $"Stabilizes the temperature of the body to [color=green]{TemperatureHelpers.CelsiusToKelvin(Atmospherics.NormalBodyTemperature)}[/color] kelvins, by [color=green]{60f * PotencyPerSecond}[/color] K at a time.\n" +
-               $"Overdoses cause a [color=red]2[/color] second knockdown.\n" +
+               $"Overdoses cause a [color=red]40[/color] second knockdown.\n" +
                $"Critical overdoses cause drowsiness.";
     }
 
@@ -40,8 +39,8 @@ public sealed partial class Thermostabilizing : RMCChemicalEffect
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var stun = args.EntityManager.System<SharedStunSystem>();
-        stun.TryParalyze(args.TargetEntity, TimeSpan.FromSeconds(2), true);
+        var knockOut = args.EntityManager.System<RMCSizeStunSystem>();
+        knockOut.TryKnockOut(args.TargetEntity, TimeSpan.FromSeconds(40));
     }
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

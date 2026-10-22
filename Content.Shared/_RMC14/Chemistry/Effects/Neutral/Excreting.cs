@@ -59,7 +59,7 @@ public sealed partial class Excreting : RMCChemicalEffect
             return;
 
         var random = IoCManager.Resolve<IRobustRandom>();
-        var level = Math.Max((int) Potency, 1);
+        var level = Math.Max((int) (ActualPotency * 2f), 1);
 
         if (random.Next(0, level + 1) <= 0)
             return;
@@ -69,7 +69,7 @@ public sealed partial class Excreting : RMCChemicalEffect
         if (args.EntityManager.TryGetComponent<RMCPlantMetabolismComponent>(plant.Owner, out var metabolism))
         {
             plantTray.SetMetabolismRates((plant.Owner, metabolism),
-                metabolism.NutrientConsumption + NutrientConsumptionIncrease * Potency, metabolism.WaterConsumption);
+                metabolism.NutrientConsumption + NutrientConsumptionIncrease * (float) (ActualPotency * 2f), metabolism.WaterConsumption);
         }
 
         plantTray.SetPotencyCounter((plant.Owner, chemicals), 0f);

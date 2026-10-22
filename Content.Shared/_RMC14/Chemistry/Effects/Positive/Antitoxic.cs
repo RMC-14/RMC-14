@@ -14,7 +14,6 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Positive;
 public sealed partial class Antitoxic : RMCChemicalEffect
 {
     private static readonly ProtoId<DamageGroupPrototype> ToxinGroup = "Toxin";
-    private static readonly ProtoId<DamageGroupPrototype> GeneticGroup = "Genetic";
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
@@ -37,9 +36,6 @@ public sealed partial class Antitoxic : RMCChemicalEffect
     {
         var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
         var healing = rmcDamageable.DistributeHealingCached(args.TargetEntity, ToxinGroup, potency * 2f);
-
-        // TODO RMC14 remove genetic heal once other meds are in for genetic damage
-        healing = rmcDamageable.DistributeHealingCached(args.TargetEntity, GeneticGroup, potency * 2f, healing);
         damageable.TryChangeDamage(args.TargetEntity, healing, true, interruptsDoAfters: false);
 
         var bloodstream = args.EntityManager.System<SharedRMCBloodstreamSystem>();
@@ -48,14 +44,19 @@ public sealed partial class Antitoxic : RMCChemicalEffect
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        // TODO RMC14: damge eye organ instead
+        // TODO RMC14: damge eye organ instead.
+        // this is to make up for the fact that damage is different for the eye system
+        var whole = RoundStochastic((float) potency);
+        if (whole <= 0)
+            return;
+
         var blinding = args.EntityManager.System<BlindableSystem>();
-        blinding.AdjustEyeDamage(args.TargetEntity, (int) MathF.Round((float) potency));
+        blinding.AdjustEyeDamage(args.TargetEntity, whole);
     }
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
         var status = args.EntityManager.System<SharedStatusEffectsSystem>();
-        status.TryAddStatusEffectDuration(args.TargetEntity, "StatusEffectDrowsiness", TimeSpan.FromSeconds(30));
+        status.TryUpdateStatusEffectDuration(args.TargetEntity, "StatusEffectDrowsiness", TimeSpan.FromSeconds(30));
     }
 }

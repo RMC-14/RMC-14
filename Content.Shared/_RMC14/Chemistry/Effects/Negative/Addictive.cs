@@ -20,7 +20,7 @@ public sealed partial class Addictive : RMCChemicalEffect
             return;
 
         var addiction = args.EntityManager.System<RMCAddictionSystem>();
-        addiction.TryExposeToAddictive(args.TargetEntity, args.Reagent.ID, (float) potency);
+        addiction.TryExposeToAddictive(args.TargetEntity, args.Reagent.ID, ActualPotency);
     }
 
     // TODO RMC14: brain damage on overdose

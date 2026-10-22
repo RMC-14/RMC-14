@@ -1,13 +1,15 @@
+using Content.Shared._RMC14.Chemistry.ChemEffectFlags;
+using Content.Shared._RMC14.Chemistry.SpeedModifier;
 using Content.Shared._RMC14.Language.Systems;
-using Content.Shared._RMC14.Movement;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Synth;
 using Content.Shared.Damage;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Humanoid;
+using Content.Shared.Popups;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.StatusEffectNew.Components;
-using Content.Shared.Stunnable;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -16,6 +18,7 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Neutral;
 public sealed partial class Hyperthrottling : RMCChemicalEffect
 {
     private static readonly EntProtoId<StatusEffectComponent> SeeingRainbows = "RMCStatusEffectSeeingRainbow";
+    private static readonly EntProtoId HyperThrottleStatus = "RMCStatusEffectHyperThrottle";
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
@@ -30,36 +33,37 @@ public sealed partial class Hyperthrottling : RMCChemicalEffect
             return;
         }
 
-        var penalty = 1f - (float) PotencyPerSecond * 0.05f;
-        var speed = args.EntityManager.System<TemporarySpeedModifiersSystem>();
-        var modifiers = new List<TemporarySpeedModifierSet> { new(TimeSpan.FromSeconds(2), penalty, penalty) };
-        speed.ModifySpeed(args.TargetEntity, modifiers);
-
-        var understanding = args.EntityManager.System<RMCUniversalUnderstandingSystem>();
-        understanding.GrantFor(args.TargetEntity, TimeSpan.FromSeconds(2));
+        var speedModifier = args.EntityManager.System<RMCReagentSpeedModifierSystem>();
+        speedModifier.SetSpeedModifier(args.TargetEntity, $"{args.Reagent?.ID}:{nameof(Hyperthrottling)}", 3f * ActualPotency);
 
         var status = args.EntityManager.System<SharedStatusEffectsSystem>();
-        var cap = TimeSpan.FromSeconds(10d);
+        var timing = IoCManager.Resolve<IGameTiming>();
+
+        var cap = TimeSpan.FromSeconds(20d);
         var remaining = TimeSpan.Zero;
         if (status.TryGetTime(args.TargetEntity, SeeingRainbows, out var time) && time.EndEffectTime is { } end)
-        {
-            var timing = IoCManager.Resolve<IGameTiming>();
             remaining = end - timing.CurTime;
-        }
 
-        var toAdd = TimeSpan.FromSeconds((double) ActualPotency * 0.5d);
+        var toAdd = TimeSpan.FromSeconds((double) ActualPotency);
         if (remaining + toAdd > cap)
             toAdd = cap - remaining;
 
         if (toAdd > TimeSpan.Zero)
             status.TryAddStatusEffectDuration(args.TargetEntity, SeeingRainbows, toAdd);
+
+        var newlySet = args.EntityManager.System<RMCChemEffectFlagsSystem>().TrySetFlag(args.TargetEntity, HyperThrottleStatus);
+        if (status.TryGetTime(args.TargetEntity, HyperThrottleStatus, out var flag) && flag.EndEffectTime is { } flagEnd)
+            args.EntityManager.System<RMCUniversalUnderstandingSystem>().GrantFor(args.TargetEntity, flagEnd - timing.CurTime);
+
+        if (newlySet)
+            args.EntityManager.System<SharedPopupSystem>().PopupEntity(Loc.GetString("chem-hyperthrottling-dream"), args.TargetEntity, args.TargetEntity);
     }
 
     // TODO RMC14: brain damage on overdose
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var stun = args.EntityManager.System<SharedStunSystem>();
-        stun.TryParalyze(args.TargetEntity, TimeSpan.FromSeconds((float) potency * 2f), true);
+        var knockOut = args.EntityManager.System<RMCSizeStunSystem>();
+        knockOut.TryKnockOut(args.TargetEntity, TimeSpan.FromSeconds(ActualPotency * 4f));
     }
 }

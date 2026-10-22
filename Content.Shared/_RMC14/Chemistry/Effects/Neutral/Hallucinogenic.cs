@@ -1,12 +1,20 @@
+using System.Numerics;
 using Content.Shared._RMC14.Emote;
+using Content.Shared._RMC14.Jittering;
+using Content.Shared._RMC14.Pulling;
+using Content.Shared._RMC14.Stun;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Chat.Prototypes;
+using Content.Shared.Cuffs;
+using Content.Shared.Cuffs.Components;
 using Content.Shared.Damage;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
-using Content.Shared.Jittering;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.StatusEffectNew.Components;
-using Content.Shared.Stunnable;
+using Content.Shared.Throwing;
+using Robust.Shared.Containers;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -17,13 +25,20 @@ public sealed partial class Hallucinogenic : RMCChemicalEffect
 {
     private static readonly EntProtoId<StatusEffectComponent> SeeingRainbows = "RMCStatusEffectSeeingRainbow";
 
-    private static readonly EntProtoId ConfusedStatus = "RMCStatusEffectConfused";
-
     private static readonly ProtoId<EmotePrototype>[] Emotes =
     [
         "RMCTwitch",
         "RMCDrool",
+        "RMCMoan",
         "RMCGiggle",
+    ];
+
+    private static readonly Vector2[] Cardinals =
+    [
+        new(0, 1),
+        new(0, -1),
+        new(1, 0),
+        new(-1, 0),
     ];
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
@@ -36,13 +51,15 @@ public sealed partial class Hallucinogenic : RMCChemicalEffect
         var status = args.EntityManager.System<SharedStatusEffectsSystem>();
         var timing = IoCManager.Resolve<IGameTiming>();
 
-        ApplyCapped(status, timing, args.TargetEntity, SeeingRainbows, (float) potency, ActualPotency * 10f);
-
-        if ((float) potency > 1f)
+        if (ActualPotency > 2)
         {
-            var jitter = args.EntityManager.System<SharedJitteringSystem>();
-            jitter.DoJitter(args.TargetEntity, TimeSpan.FromSeconds(2), false);
+            ApplyCapped(status, timing, args.TargetEntity, SeeingRainbows, (float) potency, ActualPotency * 10f);
+
+            // cm13: make_jittery(5) per 2s tick, into the jitteriness pool
+            args.EntityManager.System<RMCJitterinessSystem>().MakeJittery(args.TargetEntity, 2.5f);
         }
+
+        ApplyCapped(status, timing, args.TargetEntity, SeeingRainbows, (float) potency * 2f, ActualPotency * 20f);
 
         var random = IoCManager.Resolve<IRobustRandom>();
         if (random.Prob(0.05f))
@@ -54,21 +71,45 @@ public sealed partial class Hallucinogenic : RMCChemicalEffect
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
+        var random = IoCManager.Resolve<IRobustRandom>();
+        if (random.Prob(0.5f))
+            TryStumble(args.EntityManager, args.TargetEntity, random);
+
         var status = args.EntityManager.System<SharedStatusEffectsSystem>();
-        status.TryAddStatusEffectDuration(args.TargetEntity, SeeingRainbows, TimeSpan.FromSeconds(10));
+        status.TryAddStatusEffectDuration(args.TargetEntity, SeeingRainbows, TimeSpan.FromSeconds(5));
 
-        var jitter = args.EntityManager.System<SharedJitteringSystem>();
-        jitter.DoJitter(args.TargetEntity, TimeSpan.FromSeconds(2), false);
-
-        status.TrySetStatusEffectDuration(args.TargetEntity, ConfusedStatus, TimeSpan.FromSeconds(3));
+        // cm13: make_jittery(5) per 2s tick, into the jitteriness pool
+        args.EntityManager.System<RMCJitterinessSystem>().MakeJittery(args.TargetEntity, 2.5f);
     }
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
         // TODO RMC14: brain damage
 
-        var stun = args.EntityManager.System<SharedStunSystem>();
-        stun.TryParalyze(args.TargetEntity, TimeSpan.FromSeconds(2), true);
+        var knockOut = args.EntityManager.System<RMCSizeStunSystem>();
+        knockOut.TryKnockOut(args.TargetEntity, TimeSpan.FromSeconds(40));
+    }
+
+    private static void TryStumble(IEntityManager entities, EntityUid target, IRobustRandom random)
+    {
+        if (entities.GetComponent<TransformComponent>(target).GridUid == null ||
+            entities.System<SharedContainerSystem>().IsEntityInContainer(target) ||
+            !entities.System<ActionBlockerSystem>().CanMove(target))
+        {
+            return;
+        }
+
+        if (entities.TryGetComponent(target, out CuffableComponent? cuffable) &&
+            entities.System<SharedCuffableSystem>().IsCuffed((target, cuffable)))
+        {
+            return;
+        }
+
+        entities.System<RMCPullingSystem>().TryStopPullsOn(target);
+        var physics = entities.System<SharedPhysicsSystem>();
+        physics.SetLinearVelocity(target, Vector2.Zero);
+        physics.SetAngularVelocity(target, 0f);
+        entities.System<ThrowingSystem>().TryThrow(target, random.Pick(Cardinals), animated: false, playSound: false, doSpin: false, compensateFriction: true, recoil: false);
     }
 
     private static void ApplyCapped(
@@ -89,6 +130,9 @@ public sealed partial class Hallucinogenic : RMCChemicalEffect
             if (remaining > 0f)
                 current = remaining;
         }
+
+        if (current >= cap)
+            return;
 
         var next = Math.Min(current + increment, cap);
         if (next <= 0f)

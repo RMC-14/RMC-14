@@ -28,18 +28,14 @@ public sealed partial class Thanatometabolizing : RMCChemicalEffect
         return GetOxyLoss(args) < 50f && GetBloodVolume(args) > BloodVolumeOkay;
     }
 
-    protected override void ReagentBoost(EntityEffectReagentArgs args, ref float boost)
+    protected override void ReagentEffectiveness(EntityEffectReagentArgs args, ref float effectiveness)
     {
-        var effectiveness = 1f;
+        // cm13 adds this onto the base effectiveness of 1 while alive, but ORs it into 1 in the dead path
+        if (IsDead(args))
+            return;
 
-        if (!IsDead(args))
-        {
-            var severity = MathF.Max(GetOxyLoss(args) / 10f, (BloodVolumeNormal - GetBloodVolume(args)) / BloodVolumeNormal);
-            effectiveness = Math.Clamp(severity * 0.1f * Potency, 0.1f, 1f);
-        }
-
-        // this is an aproximation
-        boost += Potency * effectiveness;
+        var severity = MathF.Max(GetOxyLoss(args) / 10f, (BloodVolumeNormal - GetBloodVolume(args)) / BloodVolumeNormal);
+        effectiveness += Math.Clamp(severity * 0.1f * Potency, 0.1f, 1f);
     }
 
     private static bool IsDead(EntityEffectReagentArgs args)

@@ -1,8 +1,9 @@
-using Content.Shared._RMC14.Chemistry.Disabilities;
 using Content.Shared.Damage;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
+using Content.Shared.Popups;
 using Content.Shared.StatusEffectNew;
+using Content.Shared.StatusEffectNew.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -11,7 +12,9 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Neutral;
 public sealed partial class Psychostimulating : RMCChemicalEffect
 {
     private static readonly EntProtoId ConfusedStatus = "RMCStatusEffectConfused";
+    private static readonly EntProtoId<StatusEffectComponent> SeeingRainbows = "RMCStatusEffectSeeingRainbow";
     private static readonly TimeSpan ReductionDelay = TimeSpan.FromMinutes(5);
+    private static readonly TimeSpan HallucinationCap = TimeSpan.FromSeconds(200);
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
@@ -20,33 +23,66 @@ public sealed partial class Psychostimulating : RMCChemicalEffect
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var entities = args.EntityManager;
-        var timing = IoCManager.Resolve<IGameTiming>();
-        var throttle = entities.EnsureComponent<PsychostimulatingThrottleComponent>(args.TargetEntity);
-        if (timing.CurTime < throttle.NextReduction)
+        if (args.Reagent is not { } reagent || args.Source is not { } source)
             return;
 
-        throttle.NextReduction = timing.CurTime + ReductionDelay;
+        var entities = args.EntityManager;
+        var target = args.TargetEntity;
+        var timing = IoCManager.Resolve<IGameTiming>();
+        var popup = entities.System<SharedPopupSystem>();
+        var throttle = entities.EnsureComponent<PsychostimulatingThrottleComponent>(target);
 
-        var status = entities.System<SharedStatusEffectsSystem>();
-        var actualPotency = (float) ActualPotency;
-        if (actualPotency >= 4f)
+        // cm13 compares potency with ==, so only exactly 1, 2 & 3 get partial tiers
+        var tier = ActualPotency switch
         {
-            status.TryRemoveStatusEffect(args.TargetEntity, ConfusedStatus);
+            1f => "1",
+            2f => "2",
+            3f => "3",
+            _ => "max",
+        };
+
+        if (source.GetTotalPrototypeQuantity(reagent.ID) <= FixedPoint2.New(0.1))
+        {
+            if (throttle.NextReduction.Remove(reagent.ID))
+                popup.PopupEntity(Loc.GetString($"chem-psychostimulating-unstable-{tier}"), target, target, PopupType.SmallCaution);
+
             return;
         }
 
-        var step = actualPotency >= 3f ? 3f : actualPotency >= 2f ? 2f : 1f;
-        status.TryAddTime(args.TargetEntity, ConfusedStatus, TimeSpan.FromSeconds(-step));
+        if (throttle.NextReduction.TryGetValue(reagent.ID, out var next) && timing.CurTime <= next)
+            return;
+
+        throttle.NextReduction[reagent.ID] = timing.CurTime + ReductionDelay;
+        popup.PopupEntity(Loc.GetString($"chem-psychostimulating-stable-{tier}"), target, target);
+
+        // cm13 confused decays 1 per 2s tick, so 1 unit = 2s
+        var status = entities.System<SharedStatusEffectsSystem>();
+        if (tier == "max")
+            status.TryRemoveStatusEffect(target, ConfusedStatus);
+        else
+            status.TryAddTime(target, ConfusedStatus, TimeSpan.FromSeconds(-2f * ActualPotency));
     }
 
     // TODO RMC14: brain damage on overdose
-    // TODO RMC14: brain damage on critical overdose
+
+    protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
+    {
+        var status = args.EntityManager.System<SharedStatusEffectsSystem>();
+        var timing = IoCManager.Resolve<IGameTiming>();
+        if (status.TryGetTime(args.TargetEntity, SeeingRainbows, out var time) &&
+            time.EndEffectTime is { } end &&
+            end - timing.CurTime > HallucinationCap)
+        {
+            status.TrySetStatusEffectDuration(args.TargetEntity, SeeingRainbows, HallucinationCap);
+        }
+
+        // TODO RMC14: brain damage on critical overdose
+    }
 }
 
 [RegisterComponent]
 public sealed partial class PsychostimulatingThrottleComponent : Component
 {
     [DataField]
-    public TimeSpan NextReduction;
+    public Dictionary<string, TimeSpan> NextReduction = new();
 }

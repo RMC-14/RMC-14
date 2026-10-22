@@ -36,7 +36,7 @@ public sealed partial class Hemositic : RMCChemicalEffect
         bloodstreamSystem.TryModifyBloodLevelQuiet((args.TargetEntity, bloodstream), wellFed ? -potency * 3f : -potency * 0.5f);
 
         if (wellFed && args.Source != null && args.Reagent != null)
-            args.Source.AddReagent(args.Reagent.ID, FixedPoint2.New(1));
+            args.Source.AddReagent(args.Reagent.ID, FixedPoint2.New(0.5));
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

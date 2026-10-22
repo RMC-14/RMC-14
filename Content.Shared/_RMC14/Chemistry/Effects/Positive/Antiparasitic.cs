@@ -4,7 +4,9 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
+using Content.Shared.Popups;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 
 namespace Content.Shared._RMC14.Chemistry.Effects.Positive;
 
@@ -37,6 +39,13 @@ public sealed partial class Antiparasitic : RMCChemicalEffect
         var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
         var damage = rmcDamageable.DistributeFreshDamage(BurnGroup, potency * HostDamageMultiplier);
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
+
+        var random = IoCManager.Resolve<IRobustRandom>();
+        if (random.Prob(MathF.Min(0.05f * (float) potency, 1f)))
+        {
+            var popup = args.EntityManager.System<SharedPopupSystem>();
+            popup.PopupEntity(Loc.GetString("chem-antiparasitic-squirming"), args.TargetEntity, args.TargetEntity);
+        }
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

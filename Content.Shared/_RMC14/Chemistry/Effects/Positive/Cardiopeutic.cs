@@ -23,7 +23,8 @@ public sealed partial class Cardiopeutic : RMCChemicalEffect
         EnableMutationSlot(args.EntityManager, plant, "New Chems3", 1f);
     }
 
-    // TODO RMC14: mob effect - heal heart organ damage, pain on critical overdos
+    // TODO RMC14: heals 0.5 * potency human heart dmg per tick, applies 3 pain on critical overdose
+    // & recalculates pain when it leaves the bod
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {

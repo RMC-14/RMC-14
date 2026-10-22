@@ -1,9 +1,10 @@
 using Content.Shared._RMC14.Botany;
 using Content.Shared._RMC14.Chemistry.Buildup;
 using Content.Shared._RMC14.Damage;
-using Content.Shared._RMC14.Synth;
+using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Acid;
+using Content.Shared.Chat.Prototypes;
 using Content.Shared.Chemistry;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -14,6 +15,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
+using Content.Shared.Traits.Assorted;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
@@ -25,6 +27,8 @@ public sealed partial class Corrosive : RMCChemicalEffect
 
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
+    private static readonly ProtoId<EmotePrototype> ScreamEmote = "Scream";
+    private static readonly EntProtoId MoltenItem = "RMCGooeyGreyMass";
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
@@ -35,9 +39,9 @@ public sealed partial class Corrosive : RMCChemicalEffect
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        if (args.Method == ReactionMethod.Touch)
+        if (IsReaction(args))
         {
-            HandleTouch(damageable, args);
+            HandleReaction(damageable, args);
             return;
         }
 
@@ -51,7 +55,7 @@ public sealed partial class Corrosive : RMCChemicalEffect
         return entities.TryGetComponent(uid, out CorrodibleComponent? corrodible) && !corrodible.IsCorrodible;
     }
 
-    private void HandleTouch(DamageableSystem damageable, EntityEffectReagentArgs args)
+    private void HandleReaction(DamageableSystem damageable, EntityEffectReagentArgs args)
     {
         var entities = args.EntityManager;
         var target = args.TargetEntity;
@@ -62,13 +66,14 @@ public sealed partial class Corrosive : RMCChemicalEffect
             return;
         }
 
+        var touch = args.Method == ReactionMethod.Touch;
         var meltChance = (float) ActualPotency * 0.03f;
-        var isHuman = entities.HasComponent<HumanoidAppearanceComponent>(target) && !entities.HasComponent<SynthComponent>(target);
-        if (isHuman)
+        var random = IoCManager.Resolve<IRobustRandom>();
+        var isHuman = entities.HasComponent<HumanoidAppearanceComponent>(target);
+        if (touch && isHuman)
         {
             var inventory = entities.System<InventorySystem>();
             var popup = entities.System<SharedPopupSystem>();
-            var random = IoCManager.Resolve<IRobustRandom>();
 
             if (inventory.TryGetSlotEntity(target, "head", out var head))
             {
@@ -117,20 +122,34 @@ public sealed partial class Corrosive : RMCChemicalEffect
 
         var volume = (float) args.Quantity;
 
-        // TODO RMC14: volume>=10 special case that deals flat damage (4 brute + 2 burn)
-        // to humans head limb specifically, with a chance to scream, once no headgear/mask/eyewear
-        // is left to melt
+        // xenos are unacidable, skip the dmg & only get the toxic buildup
+        if (entities.HasComponent<XenoComponent>(target))
+        {
+            if (ActualPotency > 2f)
+            {
+                var toxicBuildup = entities.System<RMCToxicBuildupSystem>();
+                var magnitude = ActualPotency * volume * 0.25f;
+                toxicBuildup.AddBuildup(target, magnitude, 1f / 3f, 75f);
+            }
+
+            return;
+        }
 
         var rmcDamageable = entities.System<SharedRMCDamageableSystem>();
-        var damage = rmcDamageable.DistributeDamageCached(target, BruteGroup, MathF.Min(6f, volume));
-        damageable.TryChangeDamage(target, damage, true, interruptsDoAfters: false);
-
-        if (entities.HasComponent<XenoComponent>(target) && ActualPotency > 2f)
+        DamageSpecifier damage;
+        if (touch && isHuman && volume >= 10f)
         {
-            var toxicBuildup = entities.System<RMCToxicBuildupSystem>();
-            var magnitude = ActualPotency * volume * 0.25f;
-            toxicBuildup.AddBuildup(target, magnitude, 1f / 3f, 75f);
+            // TODO RMC14: head limb take_damage(4, 2)
+
+            if (random.Prob(meltChance) && !entities.HasComponent<PainNumbnessComponent>(target))
+                entities.System<SharedRMCEmoteSystem>().TryEmoteWithChat(target, ScreamEmote, hideLog: true, ignoreActionBlocker: true, forceEmote: true);
         }
+        else
+        {
+            damage = rmcDamageable.DistributeFreshDamage(BruteGroup, MathF.Min(6f, volume));
+        }
+
+        damageable.TryChangeDamage(target, damage, true, interruptsDoAfters: false);
     }
 
     private void HandleTouchItem(EntityEffectReagentArgs args)
@@ -138,12 +157,20 @@ public sealed partial class Corrosive : RMCChemicalEffect
         var entities = args.EntityManager;
         var target = args.TargetEntity;
 
-        if (!entities.HasComponent<ItemComponent>(target))
+        if (!entities.HasComponent<ItemComponent>(target) || IsUnacidable(entities, target))
             return;
 
         var random = IoCManager.Resolve<IRobustRandom>();
-        if (random.Prob((float) ActualPotency * 0.1f))
-            entities.QueueDeleteEntity(target);
+        if (!random.Prob((float) ActualPotency * 0.1f))
+            return;
+
+        var coordinates = entities.System<SharedTransformSystem>().GetMoverCoordinates(target);
+        var molten = entities.SpawnAtPosition(MoltenItem, coordinates);
+        entities.System<MetaDataSystem>().SetEntityDescription(molten, Loc.GetString("chem-corrosive-molten-item-desc", ("item", target)));
+
+        var popup = entities.System<SharedPopupSystem>();
+        popup.PopupCoordinates(Loc.GetString("chem-corrosive-item-melts", ("item", target)), coordinates, PopupType.SmallCaution);
+        entities.QueueDeleteEntity(target);
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

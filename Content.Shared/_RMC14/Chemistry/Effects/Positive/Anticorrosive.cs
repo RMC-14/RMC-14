@@ -31,6 +31,7 @@ public sealed partial class Anticorrosive : RMCChemicalEffect
             args.EntityManager.System<SharedRMCPlantTraySystem>().AdjustHealth((plant.Owner, plant.Comp, null), 0.75f * Potency);
     }
 
+    // TODO RMC14: cm13 burn healing stops at 5 burn on limbs with 3rd burns or eschar, & above
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
         var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();

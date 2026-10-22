@@ -31,7 +31,7 @@ public sealed partial class Hypoxemic : RMCChemicalEffect
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
 
         var random = IoCManager.Resolve<IRobustRandom>();
-        if (!random.Prob(0.1f))
+        if (!random.Prob(0.05f))
             return;
 
         var emoteSystem = args.EntityManager.System<SharedRMCEmoteSystem>();
