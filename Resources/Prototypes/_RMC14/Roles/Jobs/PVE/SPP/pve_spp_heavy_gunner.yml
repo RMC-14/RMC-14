@@ -43,7 +43,7 @@
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: spp_spec
+        state: spp_sapper
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_spp
