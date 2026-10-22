@@ -305,7 +305,7 @@ rmc-job-greeting-soro-spetsnaz = You are a member of an SPP Spetsnaz Special Rec
 
 rmc-job-name-spetsnaz = SPP Spetsnaz SRU Survivor
 
-rmc-job-description-soro-spetsnaz = You are a SPP Spetsnaz SRU member. Your team was sent to investigate a distress signal. Find out what happened to the colony.
+rmc-job-description-soro-spetsnaz = You are a stranded SPP Spetsnaz SRU marine. Your team was sent to investigate a distress signal. Find out what happened to the colony.
 
 rmc-job-name-spetsnaz-sapper = Spetsnaz SRU Sapper
 rmc-job-prefix-soro-spetsnaz-sapper = B/SRU SAP
@@ -358,7 +358,7 @@ rmc-job-greeting-trijent-spetsnaz = You are a member of an SPP Spetsnaz Special 
 
   You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
-rmc-job-description-trijent-spetsnaz = You are a stranded SPP Spetsnaz Group 'D' SRU marine. Your Mi-220 assault gunship crashed and you are stranded on the planet. Do what it takes to survive!
+rmc-job-description-trijent-spetsnaz = You are a stranded SPP Spetsnaz Group SRU marine. Your Mi-220 assault gunship crashed and you are stranded on the planet. Do what it takes to survive!
 
 rmc-job-prefix-trijent-spetsnaz-sapper = D/SRU SAP
 
