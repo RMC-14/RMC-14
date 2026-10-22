@@ -426,7 +426,7 @@
     trackerModes:
     - MARSOCLeader
 
-# For Trijent SPP Airborne
+# For Trijent SPP Spetsnaz
 
 - type: entity
   parent: RMCHeadsetColonyIcons
