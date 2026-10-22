@@ -31,9 +31,11 @@ namespace Content.Server.Fluids.EntitySystems;
 /// </summary>
 public sealed class SmokeSystem : EntitySystem
 {
-    // RMC14 - cm13 smoke puffs render at alpha 100/255 and fade to 0 over the final 20% of their lifetime.
+    // RMC14 - smoke render at alpha 100/255 and fade to 0 over the final 20% of their lifetime.
     private const float SmokeAlpha = 100f / 255f;
     private const float FadeFraction = 0.2f;
+    private static readonly TimeSpan FadeUpdateInterval = TimeSpan.FromSeconds(0.25);
+    private TimeSpan _nextFadeUpdate;
 
     // If I could do it all again this could probably use a lot more of puddles.
     [Dependency] private readonly IAdminLogManager _logger = default!;
@@ -83,7 +85,11 @@ public sealed class SmokeSystem : EntitySystem
             SmokeReact(uid, smoke.SmokeEntity);
         }
 
-        // RMC14 - keep the fade-out smooth while a puff is in its final 20% of lifetime.
+        // RMC14 - fade puffs out over the final 20% of their lifetime.
+        if (curTime < _nextFadeUpdate)
+            return;
+
+        _nextFadeUpdate = curTime + FadeUpdateInterval;
         var fadeQuery = EntityQueryEnumerator<SmokeComponent, TimedDespawnComponent>();
         while (fadeQuery.MoveNext(out var uid, out var smokeComp, out var timer))
         {
@@ -157,7 +163,7 @@ public sealed class SmokeSystem : EntitySystem
         // wtf is the logic behind any of this.
         var smokePerSpread = entity.Comp.SpreadAmount / Math.Max(1, args.NeighborFreeTiles.Count);
 
-        // RMC - dilute the reagent across the tiles it spreads into
+        // RMC14 - dilute the reagent across the tiles it spreads into
         var splitAmount = solution.Volume / (args.NeighborFreeTiles.Count + 1);
 
         foreach (var neighbor in args.NeighborFreeTiles)
@@ -167,7 +173,7 @@ public sealed class SmokeSystem : EntitySystem
             var spreadAmount = Math.Max(0, smokePerSpread);
             entity.Comp.SpreadAmount -= args.NeighborFreeTiles.Count;
 
-            // RMC - dilute the reagent across the tiles it spreads into
+            // RMC14 - dilute the reagent across the tiles it spreads into
             var split = _solutionContainerSystem.SplitSolution(entity.Comp.Solution.Value, splitAmount);
             StartSmoke(ent, split, timer?.Lifetime ?? entity.Comp.Duration, spreadAmount, spillBudget: entity.Comp.SpillBudget);
 
@@ -231,7 +237,7 @@ public sealed class SmokeSystem : EntitySystem
     /// <summary>
     /// Sets up a smoke component for spreading.
     /// </summary>
-    public void StartSmoke(EntityUid uid, Solution solution, float duration, int spreadAmount, SmokeComponent? component = null, SmokeSpillBudget? spillBudget = null)
+    public void StartSmoke(EntityUid uid, Solution solution, float duration, int spreadAmount, SmokeComponent? component = null, SmokeSpillBudget? spillBudget = null) // RMC14
     {
         if (!Resolve(uid, ref component))
             return;
@@ -240,7 +246,7 @@ public sealed class SmokeSystem : EntitySystem
         component.Duration = duration;
         component.TransferRate = solution.Volume / duration;
 
-        // RMC
+        // RMC14
         component.SpillBudget = spillBudget ?? new SmokeSpillBudget { Remaining = solution.Volume };
 
         TryAddSolution(uid, solution);
@@ -402,6 +408,7 @@ public sealed class SmokeSystem : EntitySystem
 
         var color = solution.GetColor(_prototype);
 
+        // RMC14
         var alpha = SmokeAlpha;
         if (TryComp<TimedDespawnComponent>(smoke.Owner, out var timer) && smoke.Comp1.Duration > 0)
         {
@@ -411,5 +418,6 @@ public sealed class SmokeSystem : EntitySystem
         }
 
         _appearance.SetData(smoke.Owner, SmokeVisuals.Color, color.WithAlpha(alpha), smoke.Comp2);
+        // RMC14
     }
 }

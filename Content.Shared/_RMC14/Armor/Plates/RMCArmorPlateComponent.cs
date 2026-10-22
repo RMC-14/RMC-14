@@ -1,22 +1,11 @@
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Armor.Plates;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class RMCArmorPlateComponent : Component
 {
-    [DataField(required: true), AutoNetworkedField]
-    public RMCArmorPlateKind Kind;
-
-    [DataField, AutoNetworkedField]
-    public int Magnitude = 1;
-}
-
-public enum RMCArmorPlateKind
-{
-    Coagulator,
-    EmergencyInjector,
-    Ceramic,
-    AntiDecay,
-    Translator,
+    [DataField(required: true)]
+    public ComponentRegistry WearerComponents = new();
 }

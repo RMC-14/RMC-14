@@ -74,7 +74,7 @@ public sealed class NPCUtilitySystem : EntitySystem
     [Dependency] private readonly TurretTargetSettingsSystem _turretTargetSettings = default!;
     [Dependency] private readonly RMCInteractionSystem _rmcInteraction = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _xenoHive = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _xenoHive = default!; // RMC14
 
     private EntityQuery<PuddleComponent> _puddleQuery;
     private EntityQuery<TransformComponent> _xformQuery;
@@ -436,8 +436,10 @@ public sealed class NPCUtilitySystem : EntitySystem
             }
             case TargetInfectableCon:
             {
+                // RMC14 prevent AI paraisites attempting to hug allies
                 if (_xenoHive.FromSameHiveOrAlly(owner, targetUid))
                     return 0f;
+                // RMC14
 
                 return TryComp<InfectableComponent>(targetUid, out var infectable)
                         && !infectable.BeingInfected

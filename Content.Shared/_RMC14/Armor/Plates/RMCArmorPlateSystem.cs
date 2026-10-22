@@ -37,10 +37,14 @@ public sealed class RMCArmorPlateSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<RMCArmorPlateSlotComponent, EntInsertedIntoContainerMessage>(OnPlateChanged);
-        SubscribeLocalEvent<RMCArmorPlateSlotComponent, EntRemovedFromContainerMessage>(OnPlateChanged);
+        SubscribeLocalEvent<RMCArmorPlateSlotComponent, EntInsertedIntoContainerMessage>(OnPlateInserted);
+        SubscribeLocalEvent<RMCArmorPlateSlotComponent, EntRemovedFromContainerMessage>(OnPlateRemoved);
         SubscribeLocalEvent<RMCArmorPlateSlotComponent, GotEquippedEvent>(OnSlotEquipped);
         SubscribeLocalEvent<RMCArmorPlateSlotComponent, GotUnequippedEvent>(OnSlotUnequipped);
+
+        SubscribeLocalEvent<RMCEmergencyInjectorPlateActiveComponent, RMCArmorPlateAppliedEvent>(OnEmergencyInjectorApplied);
+        SubscribeLocalEvent<RMCEmergencyInjectorPlateActiveComponent, RMCArmorPlateRemovedEvent>(OnEmergencyInjectorRemoved);
+        SubscribeLocalEvent<RMCCeramicPlateActiveComponent, RMCArmorPlateAppliedEvent>(OnCeramicApplied);
 
         SubscribeLocalEvent<RMCCoagulatorPlateActiveComponent, CMBleedAttemptEvent>(OnCoagulatorBleedAttempt);
         SubscribeLocalEvent<RMCAntiDecayPlateActiveComponent, MobStateChangedEvent>(OnAntiDecayMobStateChanged, after: [typeof(RMCUnrevivableSystem)]);
@@ -50,96 +54,61 @@ public sealed class RMCArmorPlateSystem : EntitySystem
         SubscribeLocalEvent<RMCTranslatorPlateActiveComponent, CanUnderstandLanguageEvent>(OnTranslatorCanUnderstand);
     }
 
-    private void OnPlateChanged(Entity<RMCArmorPlateSlotComponent> ent, ref EntInsertedIntoContainerMessage args)
+    private void OnPlateInserted(Entity<RMCArmorPlateSlotComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
-        if (args.Container.ID == PlateSlotId)
-            RefreshWearerEffect(ent);
+        if (args.Container.ID != PlateSlotId || ent.Comp.Wearer is not { } wearer)
+            return;
+
+        if (TryComp(args.Entity, out RMCArmorPlateComponent? plate))
+            ApplyPlate(wearer, (args.Entity, plate));
     }
 
-    private void OnPlateChanged(Entity<RMCArmorPlateSlotComponent> ent, ref EntRemovedFromContainerMessage args)
+    private void OnPlateRemoved(Entity<RMCArmorPlateSlotComponent> ent, ref EntRemovedFromContainerMessage args)
     {
-        if (args.Container.ID == PlateSlotId)
-            RefreshWearerEffect(ent);
+        if (args.Container.ID != PlateSlotId || ent.Comp.Wearer is not { } wearer)
+            return;
+
+        if (TryComp(args.Entity, out RMCArmorPlateComponent? plate))
+            RemovePlate(wearer, (args.Entity, plate));
     }
 
     private void OnSlotEquipped(Entity<RMCArmorPlateSlotComponent> ent, ref GotEquippedEvent args)
     {
         ent.Comp.Wearer = args.Equipee;
         Dirty(ent);
-        RefreshWearerEffect(ent);
+
+        if (TryGetPlate(ent, out var plate))
+            ApplyPlate(args.Equipee, plate);
     }
 
     private void OnSlotUnequipped(Entity<RMCArmorPlateSlotComponent> ent, ref GotUnequippedEvent args)
     {
-        RemoveAllWearerMarkers(args.Equipee);
+        if (TryGetPlate(ent, out var plate))
+            RemovePlate(args.Equipee, plate);
+
         ent.Comp.Wearer = null;
         Dirty(ent);
     }
 
-    private void RefreshWearerEffect(Entity<RMCArmorPlateSlotComponent> ent)
+    private void ApplyPlate(EntityUid wearer, Entity<RMCArmorPlateComponent> plate)
     {
-        if (ent.Comp.Wearer is not { } wearer)
-            return;
+        EntityManager.AddComponents(wearer, plate.Comp.WearerComponents);
 
-        RemoveAllWearerMarkers(wearer);
-
-        if (!TryGetPlate(ent, out var kind, out var magnitude))
-            return;
-
-        switch (kind)
-        {
-            case RMCArmorPlateKind.Coagulator:
-                var coagulator = EnsureComp<RMCCoagulatorPlateActiveComponent>(wearer);
-                coagulator.CancelChance = magnitude;
-                Dirty(wearer, coagulator);
-                break;
-            case RMCArmorPlateKind.AntiDecay:
-                var antiDecay = EnsureComp<RMCAntiDecayPlateActiveComponent>(wearer);
-                antiDecay.BonusTime = TimeSpan.FromMinutes(magnitude);
-                Dirty(wearer, antiDecay);
-                break;
-            case RMCArmorPlateKind.EmergencyInjector:
-                var injector = EnsureComp<RMCEmergencyInjectorPlateActiveComponent>(wearer);
-                injector.Plate = GetPlateEntity(ent);
-                _actions.AddAction(wearer, ref injector.InjectActionEntity, injector.InjectAction);
-                _actions.AddAction(wearer, ref injector.ToggleActionEntity, injector.ToggleAction);
-                Dirty(wearer, injector);
-                break;
-            case RMCArmorPlateKind.Ceramic:
-                var ceramic = EnsureComp<RMCCeramicPlateActiveComponent>(wearer);
-                ceramic.Plate = GetPlateEntity(ent);
-                Dirty(wearer, ceramic);
-                break;
-            case RMCArmorPlateKind.Translator:
-                EnsureComp<RMCTranslatorPlateActiveComponent>(wearer);
-                break;
-        }
+        var ev = new RMCArmorPlateAppliedEvent(plate);
+        RaiseLocalEvent(wearer, ref ev);
     }
 
-    private void RemoveAllWearerMarkers(EntityUid wearer)
+    private void RemovePlate(EntityUid wearer, Entity<RMCArmorPlateComponent> plate)
     {
-        if (TryComp(wearer, out RMCEmergencyInjectorPlateActiveComponent? injector))
-        {
-            _actions.RemoveAction(wearer, injector.InjectActionEntity);
-            _actions.RemoveAction(wearer, injector.ToggleActionEntity);
-        }
+        var ev = new RMCArmorPlateRemovedEvent(plate);
+        RaiseLocalEvent(wearer, ref ev);
 
-        RemComp<RMCCoagulatorPlateActiveComponent>(wearer);
-        RemComp<RMCAntiDecayPlateActiveComponent>(wearer);
-        RemComp<RMCEmergencyInjectorPlateActiveComponent>(wearer);
-        RemComp<RMCCeramicPlateActiveComponent>(wearer);
-        RemComp<RMCTranslatorPlateActiveComponent>(wearer);
+        EntityManager.RemoveComponents(wearer, plate.Comp.WearerComponents);
     }
 
-    private void OnTranslatorCanUnderstand(Entity<RMCTranslatorPlateActiveComponent> ent, ref CanUnderstandLanguageEvent args)
+    private bool TryGetPlate(Entity<RMCArmorPlateSlotComponent> ent, out Entity<RMCArmorPlateComponent> plate)
     {
-        args.CanUnderstand = true;
-    }
-
-    private bool TryGetPlate(Entity<RMCArmorPlateSlotComponent> ent, out RMCArmorPlateKind kind, out int magnitude)
-    {
-        kind = default;
-        magnitude = 0;
+        plate = default;
 
         if (!_container.TryGetContainer(ent.Owner, PlateSlotId, out var container) ||
             container.ContainedEntities.Count == 0)
@@ -147,23 +116,37 @@ public sealed class RMCArmorPlateSystem : EntitySystem
             return false;
         }
 
-        if (!TryComp(container.ContainedEntities[0], out RMCArmorPlateComponent? plate))
+        var uid = container.ContainedEntities[0];
+        if (!TryComp(uid, out RMCArmorPlateComponent? comp))
             return false;
 
-        kind = plate.Kind;
-        magnitude = plate.Magnitude;
+        plate = (uid, comp);
         return true;
     }
 
-    private EntityUid? GetPlateEntity(Entity<RMCArmorPlateSlotComponent> ent)
+    private void OnEmergencyInjectorApplied(Entity<RMCEmergencyInjectorPlateActiveComponent> ent, ref RMCArmorPlateAppliedEvent args)
     {
-        if (_container.TryGetContainer(ent.Owner, PlateSlotId, out var container) &&
-            container.ContainedEntities.Count > 0)
-        {
-            return container.ContainedEntities[0];
-        }
+        ent.Comp.Plate = args.Plate;
+        _actions.AddAction(ent, ref ent.Comp.InjectActionEntity, ent.Comp.InjectAction);
+        _actions.AddAction(ent, ref ent.Comp.ToggleActionEntity, ent.Comp.ToggleAction);
+        Dirty(ent);
+    }
 
-        return null;
+    private void OnEmergencyInjectorRemoved(Entity<RMCEmergencyInjectorPlateActiveComponent> ent, ref RMCArmorPlateRemovedEvent args)
+    {
+        _actions.RemoveAction(ent.Owner, ent.Comp.InjectActionEntity);
+        _actions.RemoveAction(ent.Owner, ent.Comp.ToggleActionEntity);
+    }
+
+    private void OnCeramicApplied(Entity<RMCCeramicPlateActiveComponent> ent, ref RMCArmorPlateAppliedEvent args)
+    {
+        ent.Comp.Plate = args.Plate;
+        Dirty(ent);
+    }
+
+    private void OnTranslatorCanUnderstand(Entity<RMCTranslatorPlateActiveComponent> ent, ref CanUnderstandLanguageEvent args)
+    {
+        args.CanUnderstand = true;
     }
 
     private void OnCoagulatorBleedAttempt(Entity<RMCCoagulatorPlateActiveComponent> ent, ref CMBleedAttemptEvent args)
