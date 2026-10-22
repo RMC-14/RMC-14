@@ -1,32 +1,39 @@
 using Content.Server.Power.EntitySystems;
 using Content.Shared._RMC14.Armor.Plates;
 using Content.Shared._RMC14.Xenonids.Biomass;
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
-using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Xenonids.Biomass;
 
-public sealed class RMCBiomassAnalyzerMachineSystem : SharedRMCBiomassAnalyzerSystem
+public sealed class RMCBiomassAnalyzerMachineSystem : SharedRMCBiomassAnalyzerMachineSystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly RMCBiomassAnalyzerSystem _biomass = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly RMCBiomassAnalyzerDataSystem _biomass = default!;
+    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-
-    private const string OrganSlotId = "RMCBiomassOrganSlot";
-    private const int MaxQueueLength = 10;
 
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<RMCBiomassAnalyzerMachineComponent, InteractUsingEvent>(OnInteractUsing);
+        SubscribeLocalEvent<RMCBiomassAnalyzerMachineComponent, InteractUsingEvent>(OnInteractUsing, before: [typeof(ItemSlotsSystem)]);
         SubscribeLocalEvent<RMCBiomassAnalyzerMachineComponent, BeforeActivatableUIOpenEvent>(OnBeforeUIOpen);
+        SubscribeLocalEvent<RMCBiomassAnalyzerMachineComponent, EntInsertedIntoContainerMessage>(OnOrganInserted);
+        SubscribeLocalEvent<RMCBiomassAnalyzerMachineComponent, EntRemovedFromContainerMessage>(OnOrganRemoved);
+
+        Subs.BuiEvents<RMCBiomassAnalyzerMachineComponent>(RMCBiomassAnalyzerUi.Key,
+            subs =>
+            {
+                subs.Event<RMCBiomassAnalyzerEjectOrganBuiMsg>(OnEjectOrganMsg);
+                subs.Event<RMCBiomassAnalyzerToggleAutoProcessBuiMsg>(OnToggleAutoProcessMsg);
+                subs.Event<RMCBiomassAnalyzerEnqueuePrintBuiMsg>(OnEnqueuePrintMsg);
+                subs.Event<RMCBiomassAnalyzerToggleQueueBuiMsg>(OnToggleQueueMsg);
+                subs.Event<RMCBiomassAnalyzerRemoveFromQueueBuiMsg>(OnRemoveFromQueueMsg);
+            });
     }
 
     private void OnBeforeUIOpen(Entity<RMCBiomassAnalyzerMachineComponent> ent, ref BeforeActivatableUIOpenEvent args)
@@ -39,118 +46,163 @@ public sealed class RMCBiomassAnalyzerMachineSystem : SharedRMCBiomassAnalyzerSy
         if (args.Handled)
             return;
 
-        if (TryComp<RMCEmergencyInjectorPlateComponent>(args.Used, out var recyclable) && recyclable.RecyclableValue > 0)
-        {
-            if (!this.IsPowered(ent, EntityManager))
-            {
-                _popup.PopupCursor("This machine has no power!", args.User);
-                return;
-            }
-
-            args.Handled = true;
-            _biomass.AddPoints(recyclable.RecyclableValue);
-            _popup.PopupCursor($"You recycle the plate for {recyclable.RecyclableValue} biomass points.", args.User);
-            _audio.PlayPvs("/Audio/Machines/twobeep.ogg", ent);
-            QueueDel(args.Used);
-            return;
-        }
-
-        if (!TryComp<RMCBiomassOrganComponent>(args.Used, out var organ))
+        var isPlate = TryComp<RMCEmergencyInjectorPlateComponent>(args.Used, out var recyclable) && recyclable.RecyclableValue > 0;
+        var isOrgan = HasComp<RMCBiomassOrganComponent>(args.Used);
+        if (!isPlate && !isOrgan)
             return;
 
         if (!this.IsPowered(ent, EntityManager))
         {
             _popup.PopupCursor("This machine has no power!", args.User);
+            args.Handled = true;
             return;
         }
 
-        args.Handled = true;
+        if (isPlate)
+        {
+            args.Handled = true;
+            _biomass.AddPoints(recyclable!.RecyclableValue);
+            _popup.PopupCursor($"You recycle the plate for {recyclable.RecyclableValue} biomass points.", args.User);
+            _audio.PlayPvs(ent.Comp.NotifySound, ent);
+            QueueDel(args.Used);
+            return;
+        }
 
-        if (ent.Comp.HeldOrgan != null)
+        if (_itemSlots.GetItemOrNull(ent, ent.Comp.OrganSlotId) != null)
         {
             _popup.PopupCursor("The analyzer's receptacle is already occupied!", args.User);
-            return;
+            args.Handled = true;
         }
-
-        var container = _container.EnsureContainer<ContainerSlot>(ent.Owner, OrganSlotId);
-        if (!_container.Insert(args.Used, container))
-            return;
-
-        ent.Comp.HeldOrgan = args.Used;
-        ent.Comp.HeldOrganValue = organ.Value;
-        Dirty(ent);
-
-        _popup.PopupCursor("You insert the specimen into the analyzer's receptacle.", args.User);
-        _audio.PlayPvs("/Audio/Machines/twobeep.ogg", ent);
-
-        if (ent.Comp.AutoProcessOrgan)
-            TryStartProcessing(ent, args.User);
     }
 
-    protected override bool TryEjectOrgan(Entity<RMCBiomassAnalyzerMachineComponent> ent, EntityUid actor)
+    private void OnOrganInserted(Entity<RMCBiomassAnalyzerMachineComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
-        if (ent.Comp.HeldOrgan is not { } organ)
-            return false;
+        if (args.Container.ID != ent.Comp.OrganSlotId)
+            return;
+
+        Dirty(ent);
+        if (ent.Comp.AutoProcessOrgan)
+            TryStartProcessing(ent, null);
+    }
+
+    private void OnOrganRemoved(Entity<RMCBiomassAnalyzerMachineComponent> ent, ref EntRemovedFromContainerMessage args)
+    {
+        if (args.Container.ID == ent.Comp.OrganSlotId)
+            Dirty(ent);
+    }
+
+    private void OnEjectOrganMsg(Entity<RMCBiomassAnalyzerMachineComponent> ent, ref RMCBiomassAnalyzerEjectOrganBuiMsg args)
+    {
+        if (!_itemSlots.TryGetSlot(ent, ent.Comp.OrganSlotId, out var slot) || slot.Item == null)
+            return;
 
         if (ent.Comp.PrintingUntil != null)
         {
-            _popup.PopupEntity("The analyzer is busy!", ent, actor);
-            return false;
+            _popup.PopupEntity("The analyzer is busy!", ent, args.Actor);
+            return;
         }
 
-        var container = _container.EnsureContainer<ContainerSlot>(ent.Owner, OrganSlotId);
-        _container.Remove(organ, container);
-
-        ent.Comp.HeldOrgan = null;
-        ent.Comp.HeldOrganValue = 0;
-        Dirty(ent);
-
-        _popup.PopupEntity("You eject the specimen from the analyzer.", ent, actor);
-        return true;
+        if (_itemSlots.TryEjectToHands(ent, slot, args.Actor))
+            _popup.PopupEntity("You eject the specimen from the analyzer.", ent, args.Actor);
     }
 
-    protected override bool ToggleAutoProcess(Entity<RMCBiomassAnalyzerMachineComponent> ent, EntityUid actor)
+    private void OnToggleAutoProcessMsg(Entity<RMCBiomassAnalyzerMachineComponent> ent, ref RMCBiomassAnalyzerToggleAutoProcessBuiMsg args)
     {
         ent.Comp.AutoProcessOrgan = !ent.Comp.AutoProcessOrgan;
         Dirty(ent);
 
         if (ent.Comp.AutoProcessOrgan)
-            TryStartProcessing(ent, actor);
+            TryStartProcessing(ent, args.Actor);
+    }
 
-        return true;
+    private void OnEnqueuePrintMsg(Entity<RMCBiomassAnalyzerMachineComponent> ent, ref RMCBiomassAnalyzerEnqueuePrintBuiMsg args)
+    {
+        if (args.Amount <= 0)
+            return;
+
+        if (!_biomass.TryGetUpgrade(args.UpgradeId, out var upgrade))
+            return;
+
+        if (!_biomass.HasSufficientClearance(upgrade))
+        {
+            _popup.PopupEntity("You don't have clearance for this upgrade!", ent, args.Actor);
+            return;
+        }
+
+        var added = 0;
+        for (var i = 0; i < args.Amount; i++)
+        {
+            if (ent.Comp.PrintQueue.Count >= ent.Comp.MaxQueueLength)
+            {
+                _popup.PopupEntity("The analyzer's print queue is full!", ent, args.Actor);
+                break;
+            }
+
+            ent.Comp.PrintQueue.Add(args.UpgradeId);
+            added++;
+        }
+
+        if (added == 0)
+            return;
+
+        if (!ent.Comp.QueueProcessing)
+        {
+            ent.Comp.QueueProcessing = true;
+            ent.Comp.NextQueueItemAt = Timing.CurTime + ent.Comp.QueuePrintDelay;
+        }
+
+        Dirty(ent);
+    }
+
+    private void OnToggleQueueMsg(Entity<RMCBiomassAnalyzerMachineComponent> ent, ref RMCBiomassAnalyzerToggleQueueBuiMsg args)
+    {
+        ent.Comp.QueueProcessing = !ent.Comp.QueueProcessing;
+        if (ent.Comp.QueueProcessing)
+            ent.Comp.NextQueueItemAt = null;
+
+        Dirty(ent);
+    }
+
+    private void OnRemoveFromQueueMsg(Entity<RMCBiomassAnalyzerMachineComponent> ent, ref RMCBiomassAnalyzerRemoveFromQueueBuiMsg args)
+    {
+        if (args.Index < 0 || args.Index >= ent.Comp.PrintQueue.Count)
+            return;
+
+        ent.Comp.PrintQueue.RemoveAt(args.Index);
+        Dirty(ent);
     }
 
     private bool TryStartProcessing(Entity<RMCBiomassAnalyzerMachineComponent> ent, EntityUid? actor)
     {
-        if (ent.Comp.HeldOrgan is not { } organ)
-            return false;
-
         if (ent.Comp.PrintingUntil != null)
             return false;
 
-        var container = _container.EnsureContainer<ContainerSlot>(ent.Owner, OrganSlotId);
-        _container.Remove(organ, container);
-        QueueDel(organ);
+        if (_itemSlots.GetItemOrNull(ent, ent.Comp.OrganSlotId) is not { } organ ||
+            !TryComp(organ, out RMCBiomassOrganComponent? organComp))
+        {
+            return false;
+        }
 
-        ent.Comp.HeldOrgan = null;
+        ent.Comp.ProcessingValue = organComp.Value;
+        QueueDel(organ);
         StartPrintingAnimation(ent);
 
-        var message = $"The analyzer processes the specimen, extracting {ent.Comp.HeldOrganValue} biomass points.";
+        var message = $"The analyzer processes the specimen, extracting {organComp.Value} biomass points.";
         if (actor is { } user)
             _popup.PopupEntity(message, ent, user);
         else
             _popup.PopupEntity(message, ent);
 
-        _audio.PlayPvs("/Audio/Machines/twobeep.ogg", ent);
+        _audio.PlayPvs(ent.Comp.NotifySound, ent);
         return true;
     }
 
-    protected override void FinishProcessingOrgan(Entity<RMCBiomassAnalyzerMachineComponent> ent)
+    private void FinishProcessingOrgan(Entity<RMCBiomassAnalyzerMachineComponent> ent)
     {
-        if (ent.Comp.HeldOrganValue > 0)
+        if (ent.Comp.ProcessingValue > 0)
         {
-            _biomass.AddPoints(ent.Comp.HeldOrganValue);
-            ent.Comp.HeldOrganValue = 0;
+            _biomass.AddPoints(ent.Comp.ProcessingValue);
+            ent.Comp.ProcessingValue = 0;
             Dirty(ent);
         }
 
@@ -158,68 +210,7 @@ public sealed class RMCBiomassAnalyzerMachineSystem : SharedRMCBiomassAnalyzerSy
             TryStartProcessing(ent, null);
     }
 
-    protected override bool TryEnqueuePrint(Entity<RMCBiomassAnalyzerMachineComponent> ent, string upgradeId, int amount, EntityUid actor)
-    {
-        if (amount <= 0)
-            return false;
-
-        if (!_prototype.TryIndex<RMCBiomassUpgradePrototype>(upgradeId, out var upgrade))
-            return false;
-
-        if (!_biomass.HasSufficientClearance(upgrade))
-        {
-            _popup.PopupEntity("You don't have clearance for this upgrade!", ent, actor);
-            return false;
-        }
-
-        var added = 0;
-        for (var i = 0; i < amount; i++)
-        {
-            if (ent.Comp.PrintQueue.Count >= MaxQueueLength)
-            {
-                _popup.PopupEntity("The analyzer's print queue is full!", ent, actor);
-                break;
-            }
-
-            ent.Comp.PrintQueue.Add(upgradeId);
-            added++;
-        }
-
-        if (added == 0)
-            return false;
-
-        if (!ent.Comp.QueueProcessing)
-        {
-            ent.Comp.QueueProcessing = true;
-            // Delay the first item like the rest so queued entries are actually visible before printing.
-            ent.Comp.NextQueueItemAt = Timing.CurTime + QueuePrintDelay;
-        }
-
-        Dirty(ent);
-        return true;
-    }
-
-    protected override bool ToggleQueue(Entity<RMCBiomassAnalyzerMachineComponent> ent)
-    {
-        ent.Comp.QueueProcessing = !ent.Comp.QueueProcessing;
-        if (ent.Comp.QueueProcessing)
-            ent.Comp.NextQueueItemAt = null;
-
-        Dirty(ent);
-        return true;
-    }
-
-    protected override bool RemoveFromQueue(Entity<RMCBiomassAnalyzerMachineComponent> ent, int index)
-    {
-        if (index < 0 || index >= ent.Comp.PrintQueue.Count)
-            return false;
-
-        ent.Comp.PrintQueue.RemoveAt(index);
-        Dirty(ent);
-        return true;
-    }
-
-    protected override void ProcessNextQueueItem(Entity<RMCBiomassAnalyzerMachineComponent> ent)
+    private void ProcessNextQueueItem(Entity<RMCBiomassAnalyzerMachineComponent> ent)
     {
         if (ent.Comp.PrintQueue.Count == 0)
         {
@@ -239,12 +230,35 @@ public sealed class RMCBiomassAnalyzerMachineSystem : SharedRMCBiomassAnalyzerSy
         }
 
         ent.Comp.PrintQueue.RemoveAt(0);
-        ent.Comp.NextQueueItemAt = Timing.CurTime + QueuePrintDelay;
+        ent.Comp.NextQueueItemAt = Timing.CurTime + ent.Comp.QueuePrintDelay;
 
         if (ent.Comp.PrintQueue.Count == 0)
             ent.Comp.QueueProcessing = false;
 
         Dirty(ent);
-        _audio.PlayPvs("/Audio/Machines/twobeep.ogg", ent);
+        _audio.PlayPvs(ent.Comp.NotifySound, ent);
+    }
+
+    public override void Update(float frameTime)
+    {
+        var query = EntityQueryEnumerator<RMCBiomassAnalyzerMachineComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            var ent = (Entity<RMCBiomassAnalyzerMachineComponent>) (uid, comp);
+
+            if (comp.PrintingUntil is { } printingUntil && Timing.CurTime >= printingUntil)
+            {
+                comp.PrintingUntil = null;
+                Dirty(uid, comp);
+                UpdateAppearance(ent);
+                FinishProcessingOrgan(ent);
+            }
+
+            if (comp.QueueProcessing && comp.PrintQueue.Count > 0 &&
+                (comp.NextQueueItemAt is not { } nextAt || Timing.CurTime >= nextAt))
+            {
+                ProcessNextQueueItem(ent);
+            }
+        }
     }
 }

@@ -1,4 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
 using Content.Server._RMC14.Chemistry.Generation;
 using Content.Shared._RMC14.Xenonids.Biomass;
 using Content.Server.GameTicking.Events;
@@ -8,10 +7,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Xenonids.Biomass;
 
-public sealed class RMCBiomassAnalyzerSystem : EntitySystem
+public sealed class RMCBiomassAnalyzerDataSystem : SharedRMCBiomassAnalyzerDataSystem
 {
     [Dependency] private readonly RMCChemistryResearchSystem _chemResearch = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
 
     private static readonly EntProtoId<RMCBiomassAnalyzerComponent> AnalyzerProto = "RMCBiomassAnalyzerData";
@@ -37,19 +35,6 @@ public sealed class RMCBiomassAnalyzerSystem : EntitySystem
         _pvsOverride.AddGlobalOverride(id);
 
         return (id, comp);
-    }
-
-    public bool TryGetAnalyzer([NotNullWhen(true)] out Entity<RMCBiomassAnalyzerComponent>? analyzer)
-    {
-        var query = EntityQueryEnumerator<RMCBiomassAnalyzerComponent>();
-        while (query.MoveNext(out var uid, out var comp))
-        {
-            analyzer = (uid, comp);
-            return true;
-        }
-
-        analyzer = default;
-        return false;
     }
 
     public void AddPoints(int amount)
@@ -78,25 +63,21 @@ public sealed class RMCBiomassAnalyzerSystem : EntitySystem
         return analyzer.Comp.Points;
     }
 
-    public bool HasSufficientClearance(RMCBiomassUpgradePrototype upgrade)
+    public bool HasSufficientClearance(RMCBiomassUpgrade upgrade)
     {
-        return _chemResearch.HasSufficientClearance(upgrade.RequiredClearance);
+        return _chemResearch.HasSufficientClearance(upgrade.Comp.RequiredClearance);
     }
 
-    public int GetCurrentCost(RMCBiomassUpgradePrototype upgrade)
+    public int GetCurrentCost(RMCBiomassUpgrade upgrade)
     {
-        var count = TryGetAnalyzer(out var analyzer)
-            ? analyzer.Value.Comp.PurchaseCounts.GetValueOrDefault(upgrade.ID)
-            : 0;
-
-        return Math.Clamp(upgrade.Cost + upgrade.PriceChange * count, upgrade.MinimumPrice, upgrade.MaximumPrice);
+        return GetCurrentCost(upgrade, TryGetAnalyzer(out var analyzer) ? analyzer.Value.Comp : null);
     }
 
-    public bool TryPurchaseUpgrade(string id, EntityCoordinates spawnAt, out string? failReason)
+    public bool TryPurchaseUpgrade(EntProtoId<RMCBiomassUpgradeComponent> id, EntityCoordinates spawnAt, out string? failReason)
     {
         failReason = null;
 
-        if (!_prototype.TryIndex<RMCBiomassUpgradePrototype>(id, out var upgrade))
+        if (!TryGetUpgrade(id, out var upgrade))
         {
             failReason = "Unknown upgrade.";
             return false;
@@ -104,7 +85,7 @@ public sealed class RMCBiomassAnalyzerSystem : EntitySystem
 
         var analyzer = EnsureAnalyzer();
 
-        if (!_chemResearch.HasSufficientClearance(upgrade.RequiredClearance))
+        if (!HasSufficientClearance(upgrade))
         {
             failReason = "Insufficient clearance.";
             return false;
@@ -120,8 +101,8 @@ public sealed class RMCBiomassAnalyzerSystem : EntitySystem
         analyzer.Comp.PurchaseCounts[id] = analyzer.Comp.PurchaseCounts.GetValueOrDefault(id) + 1;
         Dirty(analyzer);
 
-        if (upgrade.PrintedItem != null)
-            Spawn(upgrade.PrintedItem, spawnAt);
+        if (upgrade.Comp.PrintedItem is { } printed)
+            Spawn(printed, spawnAt);
 
         return true;
     }

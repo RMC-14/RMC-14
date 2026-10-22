@@ -8,6 +8,7 @@ using Content.Shared._RMC14.Mobs;
 using Content.Shared._RMC14.RMCMedicalRecords;
 using Content.Shared._RMC14.Temperature;
 using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Clock;
 using Content.Shared.Damage;
@@ -25,6 +26,7 @@ namespace Content.Server._RMC14.RMCMedicalRecords;
 public sealed class RMCMedicalRecordsSystem : SharedRMCMedicalRecordsSystem
 {
     [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly HealthScannerSystem _healthScanner = default!;
     [Dependency] private readonly SharedRMCBloodstreamSystem _rmcBloodstream = default!;
     [Dependency] private readonly RMCPulseSystem _rmcPulse = default!;
     [Dependency] private readonly RMCReagentSystem _rmcReagent = default!;
@@ -68,7 +70,7 @@ public sealed class RMCMedicalRecordsSystem : SharedRMCMedicalRecordsSystem
         if (_rmcBloodstream.TryGetBloodSolution(target, out var bloodstream))
         {
             blood = bloodstream.Volume;
-            maxBlood = bloodstream.MaxVolume;
+            maxBlood = TryComp(target, out BloodstreamComponent? bloodstreamComp) ? bloodstreamComp.BloodMaxVolume : bloodstream.MaxVolume;
         }
 
         _rmcBloodstream.TryGetChemicalSolution(target, out _, out var chemicals);
@@ -85,7 +87,8 @@ public sealed class RMCMedicalRecordsSystem : SharedRMCMedicalRecordsSystem
             pulse,
             chemicals,
             bleeding,
-            detailLevel);
+            detailLevel,
+            _healthScanner.GetDiseases(target));
     }
 
     private List<RMCAutodocScanData> GenerateAutodocData(EntityUid target)
@@ -115,7 +118,9 @@ public sealed class RMCMedicalRecordsSystem : SharedRMCMedicalRecordsSystem
 
         // TODO RMC14 Remove Shrapnel
 
-        if (_rmcBloodstream.TryGetBloodSolution(target, out var bloodstream) && bloodstream.Volume < bloodstream.MaxVolume)
+        if (_rmcBloodstream.TryGetBloodSolution(target, out var bloodstream) &&
+            TryComp(target, out BloodstreamComponent? bloodstreamComp) &&
+            bloodstream.Volume < bloodstreamComp.BloodMaxVolume)
             autodocData.Add(new RMCAutodocScanData(RMCAutodocProcedures.Blood, Loc.GetString("rmc-records-autodoc-blood")));
 
         if (_rmcBloodstream.TryGetChemicalSolution(target, out _, out var chemSol))

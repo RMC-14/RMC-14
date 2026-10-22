@@ -208,7 +208,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
                 _solution.TryGetSolution(occupant.Value, blood.BloodSolutionName, out _, out var bloodSol))
             {
                 bloodLevel = bloodSol.Volume;
-                var bloodMax = bloodSol.MaxVolume;
+                var bloodMax = blood.BloodMaxVolume;
                 bloodPercent = bloodMax > 0 ? (bloodLevel / bloodMax).Float() * 100f : 0f;
 
                 pulse = _rmcPulse.TryGetPulseReading(occupant.Value, true, out _);

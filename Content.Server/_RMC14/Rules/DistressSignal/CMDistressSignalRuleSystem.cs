@@ -154,6 +154,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
     [Dependency] private readonly SharedXenoConstructionSystem _xenoConstruction = default!;
     [Dependency] private readonly SharedRoleSystem _roles = default!;
     [Dependency] private readonly LarvaQueueSystem _larvaQueue = default!;
+    [Dependency] private readonly ForsakenXenoSystem _forsakenXeno = default!;
 
     private readonly HashSet<string> _operationNames = new();
     private readonly HashSet<string> _operationPrefixes = new();

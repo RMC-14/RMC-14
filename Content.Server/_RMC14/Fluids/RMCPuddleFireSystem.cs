@@ -1,5 +1,7 @@
 using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Chemistry.Effects.Positive;
 using Content.Shared._RMC14.Chemistry.Reagent;
+using Content.Shared._RMC14.Fluids;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.OnCollide;
 using Content.Shared._RMC14.Weapons.Ranged.Flamer;
@@ -11,6 +13,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Fluids.Components;
 using Content.Shared.IgnitionSource;
 using Content.Shared.Interaction;
+using Content.Shared.Inventory;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Temperature;
 using Content.Shared.Temperature.Components;
@@ -34,6 +37,7 @@ public sealed class RMCPuddleFireSystem : EntitySystem
     private const int MaxDuration = 24;
 
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCReagentSystem _rmcReagent = default!;
     [Dependency] private readonly SharedOnCollideSystem _onCollide = default!;
@@ -150,8 +154,7 @@ public sealed class RMCPuddleFireSystem : EntitySystem
 
     private void CheckAreaEffectsNextToExistingFire()
     {
-        if (Count<TileFireComponent>() == 0)
-            return;
+        var anyFire = Count<TileFireComponent>() > 0;
 
         var puddles = EntityQueryEnumerator<RMCFlammableAreaEffectComponent, PuddleComponent>();
         while (puddles.MoveNext(out var uid, out _, out var puddle))
@@ -160,7 +163,7 @@ public sealed class RMCPuddleFireSystem : EntitySystem
                 continue;
 
             var coords = Transform(uid).Coordinates;
-            if (IsNextToFire(coords) || IsHotSourcePresent(coords))
+            if (anyFire && IsNextToFire(coords) || IsHotSourcePresent(coords))
                 IgniteSolution(coords, solution, isSmoke: false);
         }
 
@@ -171,7 +174,7 @@ public sealed class RMCPuddleFireSystem : EntitySystem
                 continue;
 
             var coords = Transform(uid).Coordinates;
-            if (IsNextToFire(coords) || IsHotSourcePresent(coords))
+            if (anyFire && IsNextToFire(coords) || IsHotSourcePresent(coords))
                 IgniteSolution(coords, solution, isSmoke: true);
         }
     }
@@ -183,13 +186,24 @@ public sealed class RMCPuddleFireSystem : EntitySystem
 
         foreach (var uid in _lookup.GetLocalEntitiesIntersecting(grid.Owner, tile.GridIndices))
         {
-            var isHotEvent = new IsHotEvent();
-            RaiseLocalEvent(uid, isHotEvent);
-            if (isHotEvent.IsHot)
+            if (IsHot(uid))
                 return true;
+
+            foreach (var item in _inventory.GetHandOrInventoryEntities(uid, SlotFlags.WITHOUT_POCKET))
+            {
+                if (IsHot(item))
+                    return true;
+            }
         }
 
         return false;
+    }
+
+    private bool IsHot(EntityUid uid)
+    {
+        var isHotEvent = new IsHotEvent();
+        RaiseLocalEvent(uid, isHotEvent);
+        return isHotEvent.IsHot;
     }
 
     private bool IsNextToFire(EntityCoordinates coords)
@@ -268,7 +282,8 @@ public sealed class RMCPuddleFireSystem : EntitySystem
             return false;
 
         if (!_rmcReagent.TryIndex(reagent.Reagent.Prototype, out var indexed) ||
-            indexed.ReactiveEffects?.ContainsKey(FlammableGroup) != true)
+            (indexed.ReactiveEffects?.ContainsKey(FlammableGroup) != true &&
+             !_rmcReagent.HasProperty<Fueling>(reagent.Reagent.Prototype)))
         {
             return false;
         }

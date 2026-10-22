@@ -26,6 +26,19 @@ public sealed class RMCSmokeSystem : SharedRMCSmokeSystem
     private EntityQuery<EvenSmokeComponent> _evenSmokeQuery;
     private EntityQuery<TimedDespawnComponent> _timedDespawnQuery;
 
+    public EntityUid SpawnEvenSmoke(EntProtoId prototype, EntityCoordinates coordinates, int range)
+    {
+        var smoke = EntityManager.CreateEntityUninitialized(prototype, coordinates);
+        if (TryComp(smoke, out EvenSmokeComponent? even))
+        {
+            even.Range = range;
+            even.InitialSpread = range;
+        }
+
+        EntityManager.InitializeAndStartEntity(smoke);
+        return smoke;
+    }
+
     public override void Initialize()
     {
         base.Initialize();

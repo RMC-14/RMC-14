@@ -472,7 +472,7 @@ public sealed class AutodocSystem : SharedAutodocSystem
                 _solution.TryGetSolution(occupant.Value, blood.BloodSolutionName, out _, out var bloodSol))
             {
                 bloodLevel = bloodSol.Volume;
-                var bloodMax = bloodSol.MaxVolume;
+                var bloodMax = blood.BloodMaxVolume;
                 bloodPercent = bloodMax > 0 ? (bloodLevel / bloodMax).Float() * 100f : 0f;
 
                 pulse = _rmcPulse.TryGetPulseReading(occupant.Value, true, out _);
@@ -622,7 +622,7 @@ public sealed class AutodocSystem : SharedAutodocSystem
             {
                 if (TryComp<BloodstreamComponent>(occupant, out var blood) &&
                     _solution.TryGetSolution(occupant, blood.BloodSolutionName, out var bloodSolEnt, out var bloodSol) &&
-                    bloodSol.Volume < bloodSol.MaxVolume)
+                    bloodSol.Volume < blood.BloodMaxVolume)
                 {
                     _solution.TryAddReagent(bloodSolEnt.Value, blood.BloodReagent, autodoc.BloodTransfusionAmount);
                     anyTreatmentRemaining = true;
