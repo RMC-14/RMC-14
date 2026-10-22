@@ -649,8 +649,8 @@
         - RMCSurvivorSPPSpetsnazSapper: 1
         CMSurvivor:
         - RMCSurvivorSPPSpetsnazOperator: -1
-    survivorJobOverrideScenarios: # Scientist rolls for SOF medic
-      spp_sof :
+    survivorJobOverrideScenarios: # Scientist rolls for Spetsnaz medic
+      spp_spetsnaz :
         CMSurvivorScientist: CMSurvivorDoctor
         CMSurvivorCorporate: CMSurvivor
 
