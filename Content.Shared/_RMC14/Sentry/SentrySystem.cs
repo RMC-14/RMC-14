@@ -1,5 +1,4 @@
 using System.Diagnostics.CodeAnalysis;
-using System.Formats.Asn1;
 using System.Linq;
 using Content.Shared._RMC14.Interaction;
 using Content.Shared._RMC14.Map;
@@ -38,6 +37,7 @@ namespace Content.Shared._RMC14.Sentry;
 
 public sealed class SentrySystem : EntitySystem
 {
+    [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
@@ -59,7 +59,6 @@ public sealed class SentrySystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
     [Dependency] private readonly SharedSentryTargetingSystem _targeting = default!;
     [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
-    [Dependency] private readonly AreaSystem _area = default!;
 
     private readonly HashSet<EntityUid> _toUpdate = new();
 
