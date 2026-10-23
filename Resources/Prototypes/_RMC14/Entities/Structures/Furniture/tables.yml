@@ -230,11 +230,15 @@
 - type: entity
   parent: CMTableWoodenFancy
   id: RMCTableWoodenFancyBlack
+  description: A nicely crafted dark stained mahogany wood surface resting on four legs. Useful to put stuff on. It's too heavy to flip over.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/Tables/fancy_black_wood.rsi
   - type: Icon
     sprite: _RMC14/Structures/Furniture/Tables/fancy_black_wood.rsi
+  - type: Construction
+    graph: RMCTable
+    node: FancyBlackWood
 
 # Wooden Gambling
 - type: entity
