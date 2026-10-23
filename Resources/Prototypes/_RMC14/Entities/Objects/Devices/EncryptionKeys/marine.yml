@@ -158,4 +158,4 @@
     - MarineSOF
     defaultChannel: MarineSOF
   - type: Sprite
-    state: delta_key
+    state: sl_key

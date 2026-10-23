@@ -109,13 +109,13 @@
     sprite: _RMC14/Objects/Clothing/Ears/headset_onmob.rsi
   - type: GrantTacMapAlert
   - type: GrantSquadLeaderTracker
-  - type: GrantAreaInfo
     defaultMode: LeaderPmcPVE
     trackerModes:
     - CommandPmcPVE
     - LeaderPmcPVE
     - TeamLeaderPmcPVE
     - PrimaryLandingZone
+  - type: GrantAreaInfo
 
 - type: entity
   parent: RMCHeadsetDistressPMC
@@ -129,7 +129,7 @@
 - type: entity
   parent: RMCHeadsetDistressPMCPVE
   id: RMCHeadsetPMCLeaderPVE
-  suffix: PVE,Leader
+  suffix: PVE, Leader
   description:
   components:
   - type: RMCHeadset
