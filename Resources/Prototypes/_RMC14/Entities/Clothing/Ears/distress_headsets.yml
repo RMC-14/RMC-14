@@ -121,7 +121,6 @@
   parent: RMCHeadsetDistressPMC
   id: RMCHeadsetDistressPMCLeader
   suffix: Leader
-  description:
   components:
   - type: RMCHeadset
     radioTextIncrease: 2

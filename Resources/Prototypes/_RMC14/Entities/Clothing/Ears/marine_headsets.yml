@@ -534,7 +534,7 @@
 
 - type: entity
   parent: RMCHeadsetForeconPVE
-  id: RMCHeadsetForeconLeader
+  id: RMCHeadsetForeconLeaderPVE
   suffix: PVE, Leader
   components:
   - type: RMCHeadset
