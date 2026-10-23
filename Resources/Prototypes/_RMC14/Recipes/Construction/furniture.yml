@@ -167,6 +167,21 @@
   conditions:
     - !type:TileNotBlocked
 
+- type: construction
+  parent: RMC
+  id: RMCTableFancyBlackWooden
+  name: fancy wooden table
+  description: A nicely crafted dark stained mahogany wood surface resting on four legs. Useful to put stuff on. It's too heavy to flip over.
+  graph: RMCTable
+  startNode: start
+  targetNode: FancyBlackWood
+  category: construction-category-cm-furniture
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
 #misc
 
 - type: construction

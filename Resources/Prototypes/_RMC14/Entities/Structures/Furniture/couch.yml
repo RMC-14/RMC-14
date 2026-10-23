@@ -199,3 +199,48 @@
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/Couches/couch_bar.rsi
     state: couch_right
+
+# Teal Couch
+- type: entity
+  parent: RMCCouchMid
+  id: RMCCouchMidTeal
+  name: black couch
+  suffix: Mid
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Couches/teal_couch.rsi
+    state: couch_mid
+
+- type: entity
+  parent: RMCCouchMidTeal
+  id: RMCCouchEndLowerTeal
+  suffix: End, Lower
+  components:
+  - type: Sprite
+    state: couch_end_lower
+
+- type: entity
+  parent: RMCCouchMidTeal
+  id: RMCCouchEndUpperTeal
+  suffix: End, Upper
+  components:
+  - type: Sprite
+    state: couch_end_upper
+
+# Alt Couch
+- type: entity
+  parent: RMCCouchMid
+  id: RMCCouchMidAltTeal
+  suffix: Mid, Double, Al
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Couches/teal_couch_alt.rsi
+    state: couch_mid
+
+- type: entity
+  parent: RMCCouchMidAltTeal
+  id: RMCCouchEndAltTeal
+  suffix: End, Double, Alt
+  components:
+  - type: Sprite
+    state: couch_end
