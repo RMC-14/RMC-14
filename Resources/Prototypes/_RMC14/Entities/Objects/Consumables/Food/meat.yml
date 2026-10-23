@@ -1,5 +1,28 @@
 - type: entity
   parent: CMFoodBase
+  id: RMCFoodMeatFishBase
+  components:
+  - type: Food
+    transferAmount: 3
+  - type: Item
+    size: Small
+  - type: FlavorProfile
+    flavors:
+    - nutriment
+  - type: Temperature
+    currentTemperature: 290
+  - type: InternalTemperature
+    thickness: 0.02
+    area: 0.02
+  - type: Extractable
+    grindableSolutionName: food
+  - type: InjectableSolution
+    solution: food
+  - type: DrawableSolution
+    solution: food
+
+- type: entity
+  parent: CMFoodBase
   id: RMCFoodMeatFish
   name: fish meat
   description: Meat from a fish.
@@ -13,6 +36,11 @@
     - Meat
   - type: Food
     transferAmount: 3 # 3 bites
+  - type: Temperature
+    currentTemperature: 290
+  - type: InternalTemperature
+    thickness: 0.02
+    area: 0.02
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/misc.rsi
     state: rawfish
@@ -28,6 +56,10 @@
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Consumable/Food/misc.rsi
+  - type: Construction
+    graph: GrilledFISH
+    node: start
+    defaultTarget: grilled fish
   - type: Extractable
     grindableSolutionName: food
   - type: InjectableSolution
@@ -36,7 +68,7 @@
     solution: food
 
 - type: entity
-  parent: RMCFoodMeatFish
+  parent: RMCFoodMeatFishBase
   id: RMCFoodMeatFishCrab
   name: crab meat
   description: Delicious crab meat.
@@ -46,7 +78,7 @@
     state: crab_meat
 
 - type: entity
-  parent: RMCFoodMeatFish
+  parent: RMCFoodMeatFishBase
   id: RMCFoodMeatFishCrabShell
   name: crab meat
   description: Delicious crab meat still attached to bits of shell.
@@ -56,7 +88,7 @@
     state: crab_meat_2
 
 - type: entity
-  parent: RMCFoodMeatFish
+  parent: RMCFoodMeatFishBase
   id: RMCFoodMeatFishSquid
   name: squid meat
   description: Mmm, calamari.
@@ -66,7 +98,7 @@
     state: squid_meat
 
 - type: entity
-  parent: RMCFoodMeatFish
+  parent: RMCFoodMeatFishBase
   id: RMCFoodMeatFishSockSquid
   name: sock squid meat
   description: Pink squishy meat from a squid-like creature.
@@ -76,7 +108,7 @@
     state: squid_meat_2
 
 - type: entity
-  parent: RMCFoodMeatFish
+  parent: RMCFoodMeatFishBase
   id: RMCFoodMeatFishBass
   name: bass meat
   description: Sizeable hunks of cooking fish.
@@ -84,9 +116,13 @@
   - type: Sprite
     sprite: _RMC14/Objects/Fishing/Food/fish.rsi
     state: bass_meat
+  - type: Construction
+    graph: GrilledFISH
+    node: start
+    defaultTarget: grilled fish
 
 - type: entity
-  parent: RMCFoodMeatFish
+  parent: RMCFoodMeatFishBase
   id: RMCFoodMeatFishBluegill
   name: bluegill meat
   description: Small strips of pan frying meat.
@@ -94,9 +130,13 @@
   - type: Sprite
     sprite: _RMC14/Objects/Fishing/Food/fish.rsi
     state: bluegill_meat
+  - type: Construction
+    graph: GrilledFISH
+    node: start
+    defaultTarget: grilled fish
 
 - type: entity
-  parent: RMCFoodMeatFish
+  parent: RMCFoodMeatFishBase
   id: RMCFoodMeatFishSalmon
   name: salmon meat
   description: Considered a fancy cut of fish.
@@ -104,9 +144,13 @@
   - type: Sprite
     sprite: _RMC14/Objects/Fishing/Food/fish.rsi
     state: salmon_meat
+  - type: Construction
+    graph: GrilledFISH
+    node: start
+    defaultTarget: grilled fish
 
 - type: entity
-  parent: RMCFoodMeatFish
+  parent: RMCFoodMeatFishBase
   id: RMCFoodMeatFishWhitePerch
   name: white perch meat
   description: Meat of an invasive fish, a little oily.
@@ -114,6 +158,10 @@
   - type: Sprite
     sprite: _RMC14/Objects/Fishing/Food/fish.rsi
     state: white_perch_meat
+  - type: Construction
+    graph: GrilledFISH
+    node: start
+    defaultTarget: grilled fish
 
 - type: entity
   parent: CMFoodBase
@@ -129,6 +177,10 @@
     tags:
     - Cooked
     - Meat
+    - Fish
+  - type: Construction
+    graph: GrilledFISH
+    node: grilled fish
   - type: Food
     transferAmount: 3 # 3 bites
   - type: Sprite
@@ -152,6 +204,9 @@
     solution: food
   - type: DrawableSolution
     solution: food
+  - type: FoodSequenceElement
+    entries:
+      Burger: RMCFoodMeatFishGrilled
 
 - type: entity
   parent: CMFoodBase
