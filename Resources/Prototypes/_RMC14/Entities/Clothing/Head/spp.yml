@@ -22,6 +22,17 @@
 
 - type: entity
   parent: ArmorHelmetSPP
+  id: RMCArmorHelmetSPPSpetsnazAlt
+  name: Izdeliye 5Bsh composite helmet
+  description: An early iteration of the CCC5-L helmet, manufactured for Spetsnaz forces. Made from a reinforced polymer composite, it offers ballistic protection while incorporating an integrated HUD, encrypted comms, and a rebreather system. Its limited visor visibility is a tradeoff for enhanced durability.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/SPP/composite_helmet.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/SPP/composite_helmet.rsi
+
+- type: entity
+  parent: ArmorHelmetSPP
   id: ArmorHelmetSPPEngineer
   name: SPP UM4-V helmet
   description: This version of the UM4 helmet has a ballistic-glass visor, allowing for the SPP Engineers to safely weld, but by some reports hindering sight in the process.
@@ -63,6 +74,17 @@
     # armor_internaldamage = 35
 
 - type: entity
+  parent: ArmorHelmetSPPHeavy
+  id: ArmorHelmetSPPSpetsnazHeavy
+  name: CCC5-L heavy composite helmet
+  description: A SPP-manufactured heavy combat helmet with a distinctive spherical design. Made from a reinforced polymer composite, it offers ballistic protection while incorporating an integrated HUD, encrypted comms, and a rebreather system. Its limited visor visibility is a tradeoff for enhanced durability.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/SPP/composite_helmet.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/SPP/composite_helmet.rsi
+
+- type: entity
   parent: ArmorHelmetSPP
   id: RMCArmorHelmetSPPArmy
   name: 6B82 combat helmet
@@ -90,7 +112,7 @@
 
 - type: entity
   parent: ArmorHelmetSPP
-  id: RMCArmorHelmetSPPSOF
+  id: RMCArmorHelmetSPPSpetsnaz
   name: CCC5-L composite helmet
   description: A SPP-manufactured combat helmet with a distinctive spherical design. Made from a reinforced polymer composite, it offers ballistic protection while incorporating an integrated HUD, encrypted comms, and a rebreather system. Its limited visor visibility is a tradeoff for enhanced durability.
   components:
@@ -255,9 +277,9 @@
 
 - type: entity
   parent: CMHeadCapSPP
-  id: RMCHeadCapSPPSOF
-  name: SOF beret
-  description: A finely crafted beret worn by members of the SPP Space Operations Forces. It signifies service in the void, from deep-space missions to planetary operations, and is a mark of discipline and camaraderie among its wearers.
+  id: RMCHeadCapSPPSpetsnaz
+  name: Spetsnaz SRU beret
+  description: A finely crafted beret worn by members of the SPP Spetsnaz SRU. It signifies service in the void, from deep-space missions to planetary operations, and is a mark of discipline and camaraderie among its wearers.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/SPP/beret_sof.rsi

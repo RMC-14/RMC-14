@@ -1,0 +1,71 @@
+- type: job
+  parent: RMCSurvivorSPPSpetsnazTrijentBase
+  id: RMCSurvivorSPPSpetsnazTrijentSynth
+  name: rmc-job-name-spetsnaz-synth
+  startingGear: RMCGearSPPSpetsnazTrijentSynth
+  ranks:
+    RMCRankSPPWarrantOfficer: []
+  icon: "RMCJobIconSPPSpetsnazSynth"
+  spawnMenuRoleName: SPP Spetsnaz D/SRU Synthetic (Trijent Special Survivor)
+  playTimeTracker: RMCJobSyntheticColony
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Language
+      preset: RMCLanguagePresetSynth
+      currentLanguage: Russian
+      defaultLanguage: Russian
+    - type: LanguageLearning
+      preset: RMCLanguageLearningPresetSynthColonist
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      squad: SquadSPP
+    - type: JobPrefix
+      prefix: rmc-job-prefix-trijent-spetsnaz-synth
+    - type: RMCSurvivor
+    - type: Synth
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearSPPSpetsnazTrijentBase
+  id: RMCGearSPPSpetsnazTrijentSynth
+  equipment:
+    belt: RMCBeltMedicBagSPP
+    outerClothing: RMCOuterClothingExternalWebbingSPPSurvivor
+    head: CMHeadCapSPPBeret
+    back: RMCSatchelSPP
+    suitstorage: RMCFlashlight
+    pocket1: RMCPouchToolsSocFilledSPPSynthetic
+    pocket2: RMCPouchSurvivalSynthFill
+  storage:
+    back:
+    - CMSheetMetal20
+    - CMRollerBedSpawnFolded
+    - CMMultitool
+    - RMCCableCoil
+    - CMHealthAnalyzer
+    - RMCSynthResetKeyNovaris
+    belt:
+    - CMUpgradedTraumaKit10
+    - CMUpgradedTraumaKit10
+    - CMUpgradedBurnKit10
+    - CMUpgradedBurnKit10
+    # - RMCSplint
+    # - RMCHyposprayOxycodone
+    - CMPillCanisterBicaridine
+    - CMPillCanisterKelotane
+    - CMPillCanisterInaprovaline
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSPPSpetsnazTrijentSynth
+  name: special survivor spp spetsnaz synthetic spawn point
+  suffix: Trijent
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSPPSpetsnazTrijentSynth
+  - type: Sprite
+    state: surv_spp

@@ -1,0 +1,82 @@
+- type: job
+  parent: RMCSurvivorSPPSpetsnazBase
+  id: RMCSurvivorSPPSpetsnazSL
+  name: rmc-job-name-spetsnaz-sl
+  startingGear: RMCGearSPPSpetsnazSL
+  ranks:
+    RMCRankSPPMladshiyLeytenant: []
+  icon: "RMCJobIconSPPSpetsnazSL"
+  spawnMenuRoleName: SPP Spetsnaz B/SRU Squad Leader (Sorokyne Special Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - English
+      - German
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - English
+      - German
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
+    - type: RMCAllowSuitStorage
+    - type: RMCSurvivor
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      preset: RMCSkillPresetSurvivorSPPLeader
+    - type: MarineOrders
+    - type: IntelRescueSurvivorObjective
+    - type: JobPrefix
+      prefix: rmc-job-prefix-soro-spetsnaz-sl
+    - type: SquadLeader
+      icon:
+        sprite: _RMC14/Interface/job_icons/SPP/spetsnaz.rsi
+        state: spp_sptz_sl
+    - type: RMCTrackable
+    - type: QYJWhitelist
+    - type: AssignSquad
+      squad: SquadSPP
+    #- type: SPPSpecWhitelist TODO RMC14: SPP special weapons whitelist
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearSPPSpetsnazBase
+  id: RMCGearSPPSpetsnazSL
+  equipment:
+    belt: RMCBeltHolsterRevolverZHNK72Fill
+    outerClothing: RMCArmorSPPSpetsnazPlated
+    head: RMCHeadCapSPPSpetsnaz
+    ears: RMCHeadsetSPPSpetsnazCrashlandSL
+  storage:
+    back:
+    - RMCArmorHelmetSPPSpetsnaz
+    - CMSheetMetal20
+    outerClothing:
+    - RMCTacticalPrybar
+    - RMCMagazineRifleType77
+    - RMCMagazineRifleType77
+    - RMCRadioHandheldColony
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSPPSpetsnazSL
+  name: special survivor spp spetsnaz squad leader spawn point
+  suffix: Sorokyne
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSPPSpetsnazSL
+  - type: Sprite
+    state: surv_spp
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPSpetsnazSL
+  icon:
+    sprite: _RMC14/Interface/job_icons/SPP/spetsnaz.rsi
+    state: spp_sptz_sl
