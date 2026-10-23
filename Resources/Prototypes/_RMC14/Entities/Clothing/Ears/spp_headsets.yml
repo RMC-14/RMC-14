@@ -211,16 +211,12 @@
 # PVE
 
 - type: entity
-  parent: RMCHeadsetIconsSPP
+  parent: RMCHeadsetSPP
   id: RMCHeadsetSPPPVE
   name: SPP headset
   suffix: PVE
   description: This headset is used by the members of the SPP's Naval Infantry
   components:
-  - type: ContainerFill
-    containers:
-      key_slots:
-      - RMCEncryptionKeySPP
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Ears/headset_onmob.rsi
   - type: GrantSquadLeaderTracker
@@ -230,14 +226,12 @@
     - SectionSergeantSPP
     - SquadLeaderSPP
     - PrimaryLandingZone
-  - type: GrantTacMapAlert
   - type: GrantAreaInfo
   
 - type: entity
   parent: RMCHeadsetSPPPVE
   id: RMCHeadsetSPPLeaderPVE
-  name: SPP leader radio headset
-  description: This headset is used by the leaders of the SPP's Naval Infantry
+  suffix: PVE, Leader
   components:
   - type: RMCHeadset
     radioTextIncrease: 3

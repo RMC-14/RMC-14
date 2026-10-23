@@ -500,12 +500,11 @@
     - PVESquadLeader
     - PrimaryLandingZone
   - type: GrantTacMapAlert
-  
-  - type: entity
+
+- type: entity
   parent: RMCHeadsetGoldenArrow
   id: RMCHeadsetGoldenArrowLeader
-  name: sun riders leader radio headset
-  description: This is used by the leaders of the UNMC Sun Riders Platoon.
+  suffix: Leader
   components:
   - type: RMCHeadset
     radioTextIncrease: 3
@@ -514,9 +513,11 @@
   parent: RMCHeadsetShip
   id: RMCHeadsetForeconPVE
   name: force recon headset
+  description: This headset is used by UNMC Force Recon.
   suffix: PVE
-  description: This headset is used by UNMC Force Recon
   components:
+  - type: Sprite
+    state: soc_headset
   - type: ContainerFill
     containers:
       key_slots:
@@ -530,12 +531,11 @@
     - FORECONAssistantSquadLeader
     - PrimaryLandingZone
   - type: GrantTacMapAlert
-  
-  - type: entity
+
+- type: entity
   parent: RMCHeadsetForeconPVE
   id: RMCHeadsetForeconLeader
-  name: forecon leader radio headset
-  description: This headset is used by the leaders of UNMC Force Recon
+  suffix: PVE, Leader
   components:
   - type: RMCHeadset
     radioTextIncrease: 3
