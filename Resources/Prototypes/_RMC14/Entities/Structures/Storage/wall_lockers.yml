@@ -113,3 +113,22 @@
       children:
       - id: RMCWebbingSurgicalGreen
       - id: RMCWebbingSurgicalBlue
+
+- type: entity
+  parent: CMClosetBase
+  id: RMCWallClosetFireSafety
+  name: fire-safety closet
+  suffix: Empty
+  description: It's a storage unit for fire-fighting supplies.
+  components:
+  - type: WallMount
+    arc: 175
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: _RMC14/Structures/Wallmounts/fire_safety_closet.rsi
+  - type: RMCMesonsNonviewable
+  - type: EntityStorage
+    capacity: 5
+    isCollidableWhenOpen: true
+    enteringOffset: 0, -0.6
+    enteringRange: 0.03

@@ -32,6 +32,7 @@
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Hybrisa/fire_station.yml"
       probability: 0.50
+      offset: 8,0
 
 # Standalone
 

@@ -37,6 +37,23 @@
   - type: Sprite
     state: ambulance_f
 
+# Fire Ambulance
+
+- type: entity
+  parent: RMCPropVehicleAmbulance
+  id: RMCPropVehicleAmbulanceRed
+  components:
+  - type: Sprite
+    state: ambulance_red
+
+- type: entity
+  parent: RMCPropVehicleAmbulanceF
+  id: RMCPropVehicleAmbulanceFRed
+  suffix: Flipped
+  components:
+  - type: Sprite
+    state: ambulance_red_f
+
 # Firetruck
 
 - type: entity

@@ -227,6 +227,15 @@
     graph: RMCTable
     node: FancyWood
 
+- type: entity
+  parent: CMTableWoodenFancy
+  id: RMCTableWoodenFancyBlack
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Tables/fancy_black_wood.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Furniture/Tables/fancy_black_wood.rsi
+
 # Wooden Gambling
 - type: entity
   parent: CMTableWooden
