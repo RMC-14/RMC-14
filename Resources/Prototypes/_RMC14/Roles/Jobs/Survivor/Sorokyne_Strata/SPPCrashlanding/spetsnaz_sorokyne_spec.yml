@@ -44,7 +44,7 @@
   parent: RMCGearSPPSpetsnazBase
   id: RMCGearSPPSpetsnazSpec
   equipment:
-    outerClothing: RMCArmorSPPSpetsnazHeavyAltSurvivorFill
+    outerClothing: RMCArmorSPPSpetsnazHeavy
   storage:
     back:
     - CMSheetMetal20
