@@ -15,7 +15,6 @@ using Robust.Client.UserInterface;
 using Robust.Shared.Graphics;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
-using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
