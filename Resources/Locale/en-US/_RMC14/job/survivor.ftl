@@ -291,7 +291,7 @@ rmc-job-name-survivor-halcyon-dynamics-liaison = Halcyon Dynamics - Corporate Li
 
 # Sorokyne SPP special forces insert survs
 
-rmc-job-greeting-soro-spetsnaz = You are a member of an SPP Spetsnaz Special Reconnaissance Unit!
+rmc-job-greeting-soro-spetsnaz = You are a member of the SPP Spetsnaz Special Reconnaissance Unit!
 
   Your primary objective is to survive. You believe a second dropship crashed somewhere to the south west, which was carrying additional weapons.
 
@@ -346,7 +346,7 @@ CMSurvivorTrijentCorporate = Trijent Corporation Liaison
 
 # Trijent SPP special forces insert survs
 
-rmc-job-greeting-trijent-spetsnaz = You are a member of an SPP Spetsnaz Special Reconnaissance Unit!
+rmc-job-greeting-trijent-spetsnaz = You are a member of the SPP Spetsnaz Special Reconnaissance Unit!
 
   Your primary objective is to survive. You believe a second dropship crashed somewhere to the south east, which was carrying additional weapons.
 
