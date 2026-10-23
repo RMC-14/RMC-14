@@ -1,0 +1,44 @@
+- type: job
+  parent: CMJobBase
+  id: RMCCorporateSynthetic
+  name: rmc-job-name-corp-synthetic
+  description: rmc-job-description-corp-synthetic
+  playTimeTracker: RMCJobCorporateSynthetic
+  ranks:
+    RMCRankWeYaAdministrativeSynth: [ ]
+  startingGear: RMCGearCorporateSynthetic
+  icon: "RMCJobIconSynth"
+  joinNotifyCrew: false
+  accessGroups:
+  - RMCWeYaExec
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Language
+      preset: RMCLanguagePresetSynth
+    - type: LanguageLearning
+      preset: RMCLanguageLearningPresetSynth
+    - type: JobPrefix
+      prefix: rmc-job-prefix-synth
+    - type: RMCTrackable
+    - type: Synth
+  hasIcon: false
+  hidden: true
+
+- type: startingGear
+  id: RMCGearCorporateSynthetic
+  equipment:
+    ears: RMCHeadsetDistressWeYa
+    back: RMCSatchelCorporateSynthetic
+    jumpsuit: CMJumpsuitLiaisonBlack
+    outerClothing: RMCJacketCorporateFormal
+    shoes: RMCShoesLaceup
+    id: RMCIDCardExecutiveCorporateSupervisor
+    pocket1: RMCPouchFirstAidPMCFill
+    pocket2: RMCPouchToolsFill
+
+- type: playTimeTracker
+  id: RMCJobCorporateSynthetic

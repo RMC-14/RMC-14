@@ -10,7 +10,11 @@ namespace Content.Shared._RMC14.Vehicle;
 
 [RegisterComponent, NetworkedComponent]
 [Access(typeof(VehicleWheelSystem))]
-public sealed partial class VehicleWheelItemComponent : Component;
+public sealed partial class VehicleWheelItemComponent : Component
+{
+    [DataField]
+    public bool AcidResistant;
+}
 
 [RegisterComponent, NetworkedComponent]
 [Access(typeof(VehicleWheelSystem))]

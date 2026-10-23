@@ -35,6 +35,18 @@
     fiberColor: fibers-brown
 
 - type: entity
+  parent: CMHandsInsulated
+  id: CMHandsInsulatedPilot
+  suffix: Pilot
+  name: flight gloves
+  description: These gloves are made from a fire-resistant and insulated material.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/insulated_pilot.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/insulated_pilot.rsi
+
+- type: entity
   parent: ClothingHandsBase
   id: CMHandsBrown
   name: brown gloves
