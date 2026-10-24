@@ -48,6 +48,7 @@
       RMCSkillFireman: 2
       RMCSkillPolice: 0 # RMC14: Survivors don't get police skill
       RMCSkillLeadership: 1
+      RMCSkillConstruction: 1
 
 - type: entity
   parent: RMCSkillPresetReconRifleman
