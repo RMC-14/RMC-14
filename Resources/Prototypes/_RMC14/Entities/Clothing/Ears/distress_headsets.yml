@@ -96,7 +96,7 @@
 
 - type: entity
   parent: RMCHeadsetDistressWeYa
-  id: RMCHeadsetDistressPMCPVE
+  id: RMCHeadsetPMCPVE
   name: PMC headset
   description: A special headset used by corporate personnel.
   suffix: PVE
@@ -121,15 +121,15 @@
   parent: RMCHeadsetDistressPMC
   id: RMCHeadsetDistressPMCLeader
   suffix: Leader
+  description:
   components:
   - type: RMCHeadset
     radioTextIncrease: 2
     
 - type: entity
-  parent: RMCHeadsetDistressPMCPVE
+  parent: RMCHeadsetPMCPVE
   id: RMCHeadsetPMCLeaderPVE
   suffix: PVE, Leader
-  description:
   components:
   - type: RMCHeadset
     radioTextIncrease: 3
