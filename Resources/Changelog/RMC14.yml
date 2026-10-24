@@ -1,18 +1,6 @@
 ﻿Entries:
 - author: SharkSnake98
   changes:
-  - message: Added the Vehicle Crewman job
-    type: Add
-  - message: Added the M3 Pattern Tanker armor, M50 Tanker helmet, Tanker's jacket,
-      Vehicle Crewman uniform, vehicle crewman headset, and Welding Kit
-    type: Add
-  - message: Added the Vehicle Crewman weapon and equipment racks
-    type: Add
-  id: 3199
-  time: '2026-05-15T05:50:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7555
-- author: SharkSnake98
-  changes:
   - message: Changed the Chances Claim Landing Zone Sign to be more Soul
     type: Tweak
   id: 3200
@@ -4514,5 +4502,12 @@
   id: 3698
   time: '2026-10-15T20:41:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10980
+- author: CatAndHats
+  changes:
+  - message: Fixed Orders (move, hold, focus) not working while handcuffed
+    type: Fix
+  id: 3699
+  time: '2026-10-24T19:52:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10884
 Name: RMC14
 Order: -1
