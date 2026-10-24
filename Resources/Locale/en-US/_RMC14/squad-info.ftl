@@ -27,6 +27,7 @@ rmc-squad-info-ChiefMedicalOfficer = Chief Medical Officer
 rmc-squad-info-SeniorEnlistedAdvisor = Senior Enlisted Advisor
 rmc-squad-info-Quartermaster = Logistics Officer
 rmc-squad-info-MilitaryWarden = Military Warden
+rmc-squad-info-PlatoonCommander = Platoon Commander
 rmc-squad-info-SectionSergeant = Section Sergeant
 rmc-squad-info-PVESquadLeader = Squad Leader
 rmc-squad-info-SquadLeader = Squad Leader
@@ -34,6 +35,7 @@ rmc-squad-info-FireteamLeader = Fireteam Leader
 rmc-squad-info-Rifleman = Rifleman
 
 rmc-squad-info-DirectorPmc = Director
+rmc-squad-info-CommandPmcPVE = Force Command
 rmc-squad-info-LeaderPmcPVE = Force Leader
 rmc-squad-info-TeamLeaderPmcPVE = Team Leader
 rmc-squad-info-LeaderPmc = Team Leader
@@ -54,9 +56,15 @@ rmc-squad-info-ProvostTeamLeader = Provost Team Leader
 rmc-squad-info-ProvostAdvisor = Provost Advisor
 
 rmc-squad-info-LeaderSpp = Leader
+rmc-squad-info-PlatoonCommanderSPP = Platoon Commander
+rmc-squad-info-SectionSergeantSPP = Section Sergeant
+rmc-squad-info-SquadLeaderSPP = Squad Leader
+
 rmc-squad-info-LeaderFreelancer = Leader
 
 rmc-squad-info-FORECONCommandingOfficer = Commanding Officer
+rmc-squad-info-FORECONSquadLeaderPVE = Squad Leader
+rmc-squad-info-FORECONAssistantSquadLeader = Assistant Squad Leader
 
 rmc-squad-info-InspectorTSEPA = TSEPA Inspector
 rmc-squad-info-SeniorConstableTSEPA = TSEPA Senior Constable

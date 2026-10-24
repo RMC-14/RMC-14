@@ -44,6 +44,11 @@
   job: CMSquadLeader
 
 - type: trackerMode
+  id: PlatoonCommander
+  job: CMPVEPlatoonCommander
+  alert: SquadTrackerSunRiders
+
+- type: trackerMode
   id: SectionSergeant
   job: CMPVESectionSergeant
   alert: SquadTrackerSunRiders
@@ -70,6 +75,11 @@
   id: LeaderPmc
   job: RMCPMCLeader
   alert: SquadTrackerTeamLeader
+
+- type: trackerMode
+  id: CommandPmcPVE
+  job: CMPMCForceCommandPVE
+  alert: SquadTrackerPMCForceLeader # TODO make dedicated alert
 
 - type: trackerMode
   id: LeaderPmcPVE
@@ -135,6 +145,18 @@
   job: RMCSPPLeader
 
 - type: trackerMode
+  id: PlatoonCommanderSPP # TODO unique tracker alerts
+  job: RMCSPPPlatCoPVE
+
+- type: trackerMode
+  id: SectionSergeantSPP
+  job: RMCSPPSectionLeadPVE
+
+- type: trackerMode
+  id: SquadLeaderSPP
+  job: RMCSPPSquadLeadPVE
+
+- type: trackerMode
   id: FreelancerLeader
   job: CMFreelancerLeader
 
@@ -151,6 +173,16 @@
   job: RMCSurvivorForeconCommander
   alert: SquadTrackerCommandingOfficer
   
+- type: trackerMode
+  id: FORECONSquadLeaderPVE
+  job: RMCFORECONPVESquadLead
+  alert: SquadTrackerRecon
+
+- type: trackerMode
+  id: FORECONAssistantSquadLeader
+  job: RMCFORECONPVEAssistantSL
+  alert: SquadTrackerRecon
+
 - type: trackerMode
   id: ParaTeamLeader
   job: RMCSurvivorParaTeamLeader

@@ -69,6 +69,7 @@
   id: RMCGearRoyalTroopSargePVE
   equipment:
     id: RMCIDRoyalMarinesTroopSargePVE
+    ears: RMCHeadsetRoyalMarineLeaderPVE
 
 - type: entity
   parent: CMSpawnPointJobBase
