@@ -1,7 +1,7 @@
 - type: entity
   parent: CMBaseStructureCorrodible
-  id: CMIV
-  name: iv
+  id: CMIVStand
+  name: iv stand
   description: Allows you to inject blood into a patient or extract blood from them to do a blood transfusion.
   suffix: IV, empty
   components:

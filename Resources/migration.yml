@@ -1544,3 +1544,6 @@ RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlOfficer: RMCSpawnPointSu
 
 # 2026-08-26
 CMAttachmentXMVESG1FlamerNozzle: RMCAttachmentXMVESG1FlamerNozzle
+
+# 2026-10-25
+CMIV: CMIVStand
