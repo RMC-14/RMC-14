@@ -105,9 +105,8 @@ public sealed class XenoFlingSystem : EntitySystem
         _stun.TryParalyze(targetId, _xeno.TryApplyXenoDebuffMultiplier(targetId, xeno.Comp.ParalyzeTime), true);
 
         if (daze)
-            _daze.TryDaze(targetId, xeno.Comp.DazeTime);
+            _daze.TryDaze(targetId, xeno.Comp.DazeTime, false);
 
-        _daze.TryDaze(targetId, xeno.Comp.DazeTime, true);
         _size.KnockBack(targetId, origin, throwRange, throwRange, xeno.Comp.ThrowSpeed);
         SpawnAttachedTo(xeno.Comp.Effect, targetId.ToCoordinates());
     }
