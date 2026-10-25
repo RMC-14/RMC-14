@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 10/23/2026 00:23:57
+  time: 10/25/2026 17:54:20
   entityCount: 59594
 maps:
 - 1
@@ -101351,7 +101351,7 @@ entities:
       containers:
       - drink
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.68275154
+      sprayFizzinessThresholdRoll: 0.036569614
     - type: MeleeWeapon
       nextAttack: -8152.2251811
     - type: EmitSoundOnCollide
@@ -105613,7 +105613,7 @@ entities:
       pos: -202.5,-33.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -43462.504
+      secondsUntilStateChange: -43518.477
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -144704,7 +144704,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -168047.2
+      secondsUntilStateChange: -168103.17
       state: Opening
   - uid: 12644
     components:
@@ -181418,7 +181418,7 @@ entities:
       pos: -215.5,-133.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -110820.375
+      secondsUntilStateChange: -110876.35
       state: Opening
 - proto: RMCCurtainRed
   entities:
@@ -181611,7 +181611,7 @@ entities:
       pos: -37.5,-24.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -84422.12
+      secondsUntilStateChange: -84478.09
       state: Opening
   - uid: 18991
     components:
@@ -280596,6 +280596,11 @@ entities:
       parent: 1
 - proto: RMCPropVehicleLongTruckWeYaBlue
   entities:
+  - uid: 28039
+    components:
+    - type: Transform
+      pos: -38.437496,-114.5
+      parent: 1
   - uid: 36071
     components:
     - type: Transform
@@ -280605,11 +280610,6 @@ entities:
     components:
     - type: Transform
       pos: -186.5,-61.5
-      parent: 1
-  - uid: 36073
-    components:
-    - type: Transform
-      pos: -38.679497,-114.45501
       parent: 1
 - proto: RMCPropVehicleMonoSupronBlack
   entities:
