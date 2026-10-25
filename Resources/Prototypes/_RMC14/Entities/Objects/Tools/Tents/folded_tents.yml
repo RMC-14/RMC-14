@@ -144,7 +144,7 @@
         - prototype: ColMarTechMarineMedicalPowered
           mode: Reactive
           offset: -0.5, 0.5
-        - prototype: CMIVStand
+        - prototype: RMCIVStand
           mode: Reactive
           offset: 0.5, 0.5
         - prototype: CMRollerBed
