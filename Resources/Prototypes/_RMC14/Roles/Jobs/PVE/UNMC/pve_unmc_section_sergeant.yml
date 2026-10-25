@@ -48,7 +48,7 @@
   id: RMCGearPVESectionSergeant
   equipment:
     id: RMCDogtagPVESectionSergeant
-    ears: RMCHeadsetGoldenArrowLeader
+    ears: RMCHeadsetSunRidersLeader
 
 - type: entity
   parent: CMSpawnPointJobBase

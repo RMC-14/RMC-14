@@ -480,7 +480,7 @@
 
 - type: entity
   parent: RMCHeadsetShip
-  id: RMCHeadsetGoldenArrow
+  id: RMCHeadsetSunRiders
   name: sun riders radio headset
   description: This is used by the UNMC Sun Riders Platoon.
   components:
@@ -502,8 +502,8 @@
   - type: GrantTacMapAlert
 
 - type: entity
-  parent: RMCHeadsetGoldenArrow
-  id: RMCHeadsetGoldenArrowLeader
+  parent: RMCHeadsetSunRiders
+  id: RMCHeadsetSunRidersLeader
   suffix: Leader
   components:
   - type: RMCHeadset
