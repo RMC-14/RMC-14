@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Chemistry.TuringDispenser;
@@ -310,7 +311,7 @@ public sealed class SharedRMCCentrifugeSystem : EntitySystem
             var filtered = false;
             foreach (var vial in vials)
             {
-                if (!_solution.TryGetSolution(vial, "beaker", out _, out var vialSolution))
+                if (!TryGetVialSolution(vial, out _, out var vialSolution))
                     continue;
 
                 if (!vialSolution.ContainsReagent(reagent))
@@ -328,7 +329,7 @@ public sealed class SharedRMCCentrifugeSystem : EntitySystem
 
             foreach (var vial in vials)
             {
-                if (!_solution.TryGetSolution(vial, "beaker", out var vialSolnEnt, out var vialSolution))
+                if (!TryGetVialSolution(vial, out var vialSolnEnt, out var vialSolution))
                     continue;
 
                 if (vialSolution.Contents.Count > 1)
@@ -346,7 +347,7 @@ public sealed class SharedRMCCentrifugeSystem : EntitySystem
                     continue;
 
                 _solution.RemoveReagent(source, reagent, amount);
-                _solution.TryAddReagent(vialSolnEnt!.Value, reagent.Prototype, amount, data: reagent.Data);
+                _solution.TryAddReagent(vialSolnEnt.Value, reagent.Prototype, amount, data: reagent.Data);
             }
         }
     }
@@ -358,7 +359,7 @@ public sealed class SharedRMCCentrifugeSystem : EntitySystem
             if (sourceSolution.Volume <= FixedPoint2.Zero)
                 break;
 
-            if (!_solution.TryGetSolution(vial, "beaker", out var vialSolnEnt, out var vialSolution))
+            if (!TryGetVialSolution(vial, out var vialSolnEnt, out var vialSolution))
                 continue;
 
             var available = vialSolution.AvailableVolume;
@@ -366,7 +367,7 @@ public sealed class SharedRMCCentrifugeSystem : EntitySystem
                 continue;
 
             var amount = FixedPoint2.Min(available, sourceSolution.Volume);
-            _solution.TryTransferSolution(vialSolnEnt!.Value, sourceSolution, amount);
+            _solution.TryTransferSolution(vialSolnEnt.Value, sourceSolution, amount);
         }
     }
 
@@ -374,19 +375,35 @@ public sealed class SharedRMCCentrifugeSystem : EntitySystem
     {
         foreach (var vial in vials)
         {
-            if (!_solution.TryGetSolution(vial, "beaker", out _, out var solution))
+            if (!TryGetVialSolution(vial, out _, out var solution))
                 continue;
+
+            var isAutoInjector = HasComp<HyposprayComponent>(vial);
+            var prefix = isAutoInjector ? "autoinjector" : "vial";
 
             string name;
             if (ent.Comp.Label is { } label)
-                name = $"vial ({label})";
-            else if (solution.Contents.Count == 1 && _rmcReagent.TryIndex(solution.Contents[0].Reagent.Prototype, out var reagent))
-                name = $"vial ({reagent.LocalizedName})";
+                name = $"{prefix} ({label})";
+            else if ((isAutoInjector ? solution.Contents.Count > 0 : solution.Contents.Count == 1) &&
+                     _rmcReagent.TryIndex(solution.Contents[0].Reagent.Prototype, out var reagent))
+                name = $"{prefix} ({reagent.LocalizedName})";
             else
-                name = "vial";
+                name = prefix;
 
             _metaData.SetEntityName(vial, name);
         }
+    }
+
+    private bool TryGetVialSolution(
+        EntityUid vial,
+        [NotNullWhen(true)] out Entity<SolutionComponent>? solutionEnt,
+        [NotNullWhen(true)] out Solution? solution)
+    {
+        var solutionName = TryComp(vial, out HyposprayComponent? hypospray)
+            ? hypospray.SolutionName
+            : "beaker";
+
+        return _solution.TryGetSolution(vial, solutionName, out solutionEnt, out solution);
     }
 
     public override void Update(float frameTime)
