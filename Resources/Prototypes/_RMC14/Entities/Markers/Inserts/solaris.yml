@@ -74,7 +74,7 @@
   - type: MapInsert
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Solaris/viro_open.yml"
-      probability: 0.4
+      probability: 1
 
 - type: entity
   parent: RMCMapInsertSolarisBase
