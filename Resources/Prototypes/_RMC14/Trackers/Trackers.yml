@@ -79,7 +79,7 @@
 - type: trackerMode
   id: CommandPmcPVE
   job: CMPMCForceCommandPVE
-  alert: SquadTrackerPMCForceLeader # TODO make dedicated alert
+  alert: SquadTrackerPMCForceLeader # RMC14 TODO make dedicated alert
 
 - type: trackerMode
   id: LeaderPmcPVE
@@ -145,7 +145,7 @@
   job: RMCSPPLeader
 
 - type: trackerMode
-  id: PlatoonCommanderSPP # TODO unique tracker alerts
+  id: PlatoonCommanderSPP # RMC14 TODO unique tracker alerts
   job: RMCSPPPlatCoPVE
 
 - type: trackerMode
