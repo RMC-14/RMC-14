@@ -2,7 +2,7 @@ rmc-announcement-planet-lv = An automated distress signal has been received from
 
 rmc-announcement-planet-solaris = Weston-Yamada has lost contact with one of its Biological Storage Facilities, Solaris Ridge, on the planet of LV-1413. The UNS Almayer has been requested to look into the blackout by Weston-Yamada.
 
-rmc-announcement-planet-shiva = An automated distress signal has been received from multinational research facility "Shiva's Snowball", on the isolated ice world "Ifrit". A response team from the UNS Almayer will be dispatched shortly to investigate."
+rmc-announcement-planet-shiva = An automated distress signal has been received from multinational research facility "Shiva's Snowball", on the isolated ice world "Ifrit". A response team from the UNS Almayer will be dispatched shortly to investigate.
 
 rmc-announcement-planet-fiorina = An automated distress signal has been received from maximum-security prison "Fiorina Orbital Penitentiary". A response team from the UNS Almayer will be dispatched shortly to investigate.
 
