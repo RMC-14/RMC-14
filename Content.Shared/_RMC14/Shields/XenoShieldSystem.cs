@@ -129,12 +129,14 @@ public sealed partial class XenoShieldSystem : EntitySystem
                 else
                     xenoShield.ShieldAmount = Math.Max(xenoShield.ShieldAmount.Double(), amount.Double());
 
+                //Change visuals to use new amount as a base
+                xenoShield.ShieldInitialAmount = xenoShield.ShieldAmount;
                 Dirty(uid, shieldComp);
                 UpdateVisuals((uid, shieldComp));
                 return true;
             }
         }
-        var shield = new XenoShield(type, amount, decay, visualState, maxShield);
+        var shield = new XenoShield(type, amount, decay, visualState);
 
         if (duration != null)
             shield.ShieldDecayAt = _timing.CurTime + duration.Value;
@@ -259,6 +261,6 @@ public sealed partial class XenoShieldSystem : EntitySystem
         _appearance.SetData(xeno, RMCShieldVisuals.Prefix, visualShield.Visual);
         _appearance.SetData(xeno, RMCShieldVisuals.Active, true);
         _appearance.SetData(xeno, RMCShieldVisuals.Current, visualShield.ShieldAmount);
-        _appearance.SetData(xeno, RMCShieldVisuals.Max, visualShield.MaxShield);
+        _appearance.SetData(xeno, RMCShieldVisuals.Max, visualShield.ShieldInitialAmount);
     }
 }

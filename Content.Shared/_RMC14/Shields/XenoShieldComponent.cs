@@ -39,7 +39,7 @@ public sealed partial class XenoShield
     public FixedPoint2 ShieldAmount;
 
     [DataField]
-    public double MaxShield;
+    public FixedPoint2 ShieldInitialAmount;
 
     [DataField]
     public TimeSpan? ShieldDecayAt;
@@ -50,12 +50,12 @@ public sealed partial class XenoShield
     [DataField]
     public string? Visual;
 
-    public XenoShield (XenoShieldSystem.ShieldType shield, FixedPoint2 shieldAmount, double decay, string? visual, double maxShield)
+    public XenoShield (XenoShieldSystem.ShieldType shield, FixedPoint2 shieldAmount, double decay, string? visual)
     {
         Shield = shield;
         ShieldAmount = shieldAmount;
         DecayPerSecond = decay;
         Visual = visual;
-        MaxShield = maxShield;
+        ShieldInitialAmount = shieldAmount;
     }
 }
