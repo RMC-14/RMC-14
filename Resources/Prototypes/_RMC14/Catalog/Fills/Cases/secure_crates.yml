@@ -144,7 +144,7 @@
   components:
   - type: CrateOpenable
     spawn:
-    - id: CMIV
+    - id: CMIVStand
       amount: 3
 
 - type: entity

@@ -45,7 +45,7 @@
 
   <Box>
     <GuideEntityEmbed Entity="CMBloodPackFull"/>
-    <GuideEntityEmbed Entity="CMIV"/>
+    <GuideEntityEmbed Entity="CMIVStand"/>
   </Box>\n
 
   ##Defibs
