@@ -671,8 +671,6 @@
 - type: entity
   parent: RMCLockerPersonal
   id: RMCLockerPersonalUnanchored
-  name: personal locker
-  description: A white locker, featuring both English and Japanese text on the front.
   suffix: Unanchored #To avoid snapping to grid
   components:
   - type: Transform
