@@ -169,8 +169,8 @@
     camouflage: Snow
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingShivas
-      announcements:
-      - text: rmc-announcement-planet-shiva
+    announcements:
+    - text: rmc-announcement-planet-shiva
     smallHostVariants:
       - RMCMobSmallHostYiren
     nightmareScenarios:
