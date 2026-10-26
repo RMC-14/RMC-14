@@ -2,6 +2,7 @@ using Content.Shared.Damage;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Content.Shared.Weapons.Melee;
@@ -20,6 +21,7 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly TagSystem _tag = default!;
 
@@ -50,10 +52,12 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
             var damage = _melee.GetDamage(ent.Owner, args.User);
             if (HasKatana(target) && args.User != target)
             {
+                // TODO RMC14 make the target swing at the user to imitate sword clashing.
                 _stun.TryStun(args.User, ent.Comp.KillDelay, true);
                 _stun.TryStun(target, ent.Comp.KillDelay, true);
 
-                // TODO RMC14 make the target swing at the user to imitate sword clashing.
+                _popup.PopupEntity(Loc.GetString("rmc-katana-cross-blades-user"), args.User, args.User);
+                _popup.PopupEntity(Loc.GetString("rmc-katana-cross-blades-target"), target, target);
             }
 
             if (ent.Comp.CanStunOnHit)
@@ -80,21 +84,23 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        if (!ent.Comp.PendingTargets.Add(target))
+            return;
+
         var targetComp = EnsureComp<OmaeTargetComponent>(target);
         targetComp.Attacker = user;
         targetComp.Damage = damage;
         targetComp.NumberOfCuts = ent.Comp.NumberOfCuts;
         targetComp.BypassResistances = ent.Comp.BypassResistances;
 
-        var playResult = _audio.PlayLocal(ent.Comp.DeathImminentSound, target, target)?.Entity;
-        if (playResult != null)
-            targetComp.AudioStream = playResult.Value;
+        var playStream = _audio.PlayLocal(ent.Comp.DeathImminentSound, target, target);
+        if (playStream != null)
+            targetComp.AudioStream = playStream.Value.Entity;
 
         Timer.Spawn(ent.Comp.KillDelay,
             () =>
             {
-                if (!HasComp<OmaeTargetComponent>(target))
-                    return;
+                ent.Comp.PendingTargets.Remove(target);
 
                 if (targetComp.AudioStream != null)
                 {
@@ -104,7 +110,7 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
 
                 RemCompDeferred<OmaeTargetComponent>(target);
 
-                if (Deleted(ent.Owner) || Deleted(target) || !Exists(target))
+                if (Deleted(target) || !Exists(target))
                     return;
 
                 if (TryComp<MobStateComponent>(target, out var mobState) &&
