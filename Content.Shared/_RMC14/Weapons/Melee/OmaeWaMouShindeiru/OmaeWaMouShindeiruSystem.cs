@@ -56,8 +56,8 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
                 _stun.TryStun(args.User, ent.Comp.KillDelay, true);
                 _stun.TryStun(target, ent.Comp.KillDelay, true);
 
-                _popup.PopupEntity(Loc.GetString("rmc-katana-cross-blades-user", ("target", (target))), args.User, PopupType.Medium);
-                _popup.PopupEntity(Loc.GetString("rmc-katana-cross-blades-target", ("user", (args.User))), target, PopupType.Medium);
+                _popup.PopupEntity(Loc.GetString("rmc-katana-cross-blades-user", ("target", MetaData(target).EntityName)), args.User, PopupType.Medium);
+                _popup.PopupEntity(Loc.GetString("rmc-katana-cross-blades-target", ("user", MetaData(args.User).EntityName)), target, PopupType.Medium);
             }
 
             if (ent.Comp.CanStunOnHit)
