@@ -1,59 +1,4 @@
 ﻿Entries:
-- author: '- Simon'
-  changes:
-  - message: Timed Impenetrable walls to solaris
-    type: Add
-  id: 3193
-  time: '2026-05-14T10:26:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9786
-- author: '- Simon'
-  changes:
-  - message: Added timed impenetrable resin to sorokyne
-    type: Add
-  id: 3194
-  time: '2026-05-14T10:26:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9788
-- author: '- Simon'
-  changes:
-  - message: Added Impenetrable timed resin to fiorina
-    type: Add
-  id: 3195
-  time: '2026-05-14T10:26:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9789
-- author: Arykh
-  changes:
-  - message: Alerts on the Seperated HUD layout now expand vertically instead of only
-      downwards to infinity and beyond.
-    type: Tweak
-  id: 3196
-  time: '2026-05-14T10:23:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9751
-- author: Thereisabear
-  changes:
-  - message: Squad tracker no longer constantly resets itself to a FTL.
-    type: Fix
-  id: 3197
-  time: '2026-05-14T10:24:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9780
-- author: yagwog
-  changes:
-  - message: timed Impenetrable walls on shivas
-    type: Add
-  id: 3198
-  time: '2026-05-14T10:27:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9798
-- author: SharkSnake98
-  changes:
-  - message: Added the Vehicle Crewman job
-    type: Add
-  - message: Added the M3 Pattern Tanker armor, M50 Tanker helmet, Tanker's jacket,
-      Vehicle Crewman uniform, vehicle crewman headset, and Welding Kit
-    type: Add
-  - message: Added the Vehicle Crewman weapon and equipment racks
-    type: Add
-  id: 3199
-  time: '2026-05-15T05:50:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7555
 - author: SharkSnake98
   changes:
   - message: Changed the Chances Claim Landing Zone Sign to be more Soul
@@ -4500,5 +4445,69 @@
   id: 3692
   time: '2026-10-04T01:49:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10957
+- author: SharkSnake98
+  changes:
+  - message: Changed the description of the colony crawler to mention Miyahira instead
+      of Orbital Blue
+    type: Tweak
+  id: 3693
+  time: '2026-10-06T19:53:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10507
+- author: KompaniLinge
+  changes:
+  - message: Lingxiao Golds, the pinnacle of smoking. Comes with unique sprite.
+    type: Add
+  - message: Taras Classics, the most SPP cigarette to ever exist. Comes with new
+      sprite, shared with Bohe Blues.
+    type: Add
+  - message: Bohe Blues, more menthol then nicotine.
+    type: Add
+  - message: Montecomune Cigars. Said to have been smoked by a famous revolutionary,
+      has unique sprite
+    type: Add
+  - message: Brand new zippo-like SPP Lighter.
+    type: Add
+  - message: Komandir now dispenses SPP smokables.
+    type: Tweak
+  id: 3694
+  time: '2026-10-13T13:09:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8205
+- author: Ozehk
+  changes:
+  - message: Ziptie boxes can no longer accept anything other than zipties.
+    type: Tweak
+  id: 3695
+  time: '2026-10-14T19:14:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10981
+- author: Ian321
+  changes:
+  - message: ghosts now keep following xenos after they evolve
+    type: Fix
+  id: 3696
+  time: '2026-10-15T14:32:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10491
+- author: carccborg
+  changes:
+  - message: Fixed names being revealed to the opposite faction during object/wall
+      slamming
+    type: Fix
+  id: 3697
+  time: '2026-10-15T20:21:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10718
+- author: IceNoobXD
+  changes:
+  - message: Removed some role specifc surv playtime trackers infavour of the more
+      generalized once!
+    type: Remove
+  id: 3698
+  time: '2026-10-15T20:41:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10980
+- author: CatAndHats
+  changes:
+  - message: Fixed Orders (move, hold, focus) not working while handcuffed
+    type: Fix
+  id: 3699
+  time: '2026-10-24T19:52:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10884
 Name: RMC14
 Order: -1
