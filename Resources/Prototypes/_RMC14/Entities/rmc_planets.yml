@@ -169,8 +169,8 @@
     camouflage: Snow
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingShivas
-        announcements:
-    - text: rmc-announcement-planet-shiva
+      announcements:
+      - text: rmc-announcement-planet-shiva
     smallHostVariants:
       - RMCMobSmallHostYiren
     nightmareScenarios:
@@ -223,7 +223,7 @@
     minPlayers: 130
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingFiorina
-     announcements:
+    announcements:
     - text: rmc-announcement-planet-fiorina
     smallHostVariants:
       - RMCMobSmallHostFarwa
@@ -277,7 +277,7 @@
     map: /Maps/_RMC14/trijent.yml
     camouflage: Desert
     minPlayers: 130
-        announcements:
+    announcements:
     - text: rmc-announcement-planet-trijent
     smallHostVariants:
       - RMCMobSmallHostStok
