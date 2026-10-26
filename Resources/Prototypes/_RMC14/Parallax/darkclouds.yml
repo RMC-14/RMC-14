@@ -1,0 +1,19 @@
+- type: parallax
+  id: RMCParallaxDarkClouds
+  layers:
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/_RMC14/Parallaxes/darkland.png"
+      slowness: 0.9
+      scale: 0.9,0.9
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/_RMC14/Parallaxes/darkernoise.png"
+      slowness: 0.82
+      scale: 1.4, 1.4
+
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/_RMC14/Parallaxes/darknoise.png"
+      slowness: 0.62
+      scale: 2.2, 2.2
