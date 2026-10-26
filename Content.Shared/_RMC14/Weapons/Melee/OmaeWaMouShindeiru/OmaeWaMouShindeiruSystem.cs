@@ -56,8 +56,8 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
                 _stun.TryStun(args.User, ent.Comp.KillDelay, true);
                 _stun.TryStun(target, ent.Comp.KillDelay, true);
 
-                _popup.PopupEntity(Loc.GetString("rmc-katana-cross-blades-user"), args.User, args.User);
-                _popup.PopupEntity(Loc.GetString("rmc-katana-cross-blades-target"), target, target);
+                _popup.PopupEntity(Loc.GetString("rmc-katana-cross-blades-user", ("target", (target))), args.User, PopupType.Medium);
+                _popup.PopupEntity(Loc.GetString("rmc-katana-cross-blades-target", ("user", (args.User))), target, PopupType.Medium);
             }
 
             if (ent.Comp.CanStunOnHit)
@@ -82,9 +82,6 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
     private void OmaeWaMouShindeiru(Entity<OmaeWaMouShindeiruComponent> ent, EntityUid user, EntityUid target, DamageSpecifier damage)
     {
         if (_net.IsClient)
-            return;
-
-        if (!ent.Comp.PendingTargets.Add(target))
             return;
 
         var targetComp = EnsureComp<OmaeTargetComponent>(target);
