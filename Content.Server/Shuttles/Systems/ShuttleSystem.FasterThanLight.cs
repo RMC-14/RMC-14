@@ -452,7 +452,7 @@ public sealed partial class ShuttleSystem
         if (TryComp<RMCOverrideShuttleSoundsComponent>(entity, out var replacement))
             sound = replacement.TravelSound;
 
-        var wowdio = _audio.PlayPvs(sound, entity.Owner);
+        var wowdio = _audio.PlayPvs(sound, uid);
         // RMC14
         comp.TravelStream = wowdio?.Entity;
         _audio.SetGridAudio(wowdio);
