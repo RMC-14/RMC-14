@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Chemistry.Centrifuge;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Chemistry.SmartFridge;
@@ -113,7 +114,6 @@ public abstract class SharedRMCTuringDispenserSystem : EntitySystem
         RefreshUIs(ent);
 
         if (ent.Comp is { AutoRun: true, OutputMode: TuringDispenserOutputMode.Container } &&
-            ent.Comp.Status is TuringDispenserStatus.Idle or TuringDispenserStatus.Finished &&
             _itemSlots.TryGetSlot(ent, ent.Comp.InputBoxSlotId, out var boxSlot) && boxSlot.ContainerSlot?.ContainedEntity != null &&
             _itemSlots.TryGetSlot(ent, ent.Comp.OutputBeakerSlotId, out var beakerSlot) && beakerSlot.ContainerSlot?.ContainedEntity != null)
         {
@@ -150,7 +150,10 @@ public abstract class SharedRMCTuringDispenserSystem : EntitySystem
         if (!TryComp(box, out StorageComponent? storage))
             return;
 
-        var entries = new List<TuringProgramEntry>();
+        var entries = program == TuringDispenserProgram.Memory ? ent.Comp.MemoryProgram : ent.Comp.BoxProgram;
+        if (program == TuringDispenserProgram.Box)
+            entries.Clear();
+
         foreach (var vial in storage.Container.ContainedEntities)
         {
             if (!_solution.TryGetSolution(vial, "beaker", out _, out var solution) ||
@@ -169,11 +172,6 @@ public abstract class SharedRMCTuringDispenserSystem : EntitySystem
                 entries.Add(new TuringProgramEntry(reagent, content.Quantity));
         }
 
-        if (program == TuringDispenserProgram.Memory)
-            ent.Comp.MemoryProgram = entries;
-        else
-            ent.Comp.BoxProgram = entries;
-
         Dirty(ent);
     }
 
@@ -188,12 +186,21 @@ public abstract class SharedRMCTuringDispenserSystem : EntitySystem
     public void StartProgram(Entity<RMCTuringDispenserComponent> ent)
     {
         var comp = ent.Comp;
+        if (comp.Status == TuringDispenserStatus.Running)
+            return;
+
+        if (comp.Status == TuringDispenserStatus.Stuck)
+        {
+            SetStatus(ent, TuringDispenserStatus.Running);
+            return;
+        }
+
         comp.ActiveProgram = comp.MemoryProgram.Count > 0 ? TuringDispenserProgram.Memory : TuringDispenserProgram.Box;
         var program = comp.ActiveProgram == TuringDispenserProgram.Memory ? comp.MemoryProgram : comp.BoxProgram;
 
         if (program.Count == 0)
         {
-            SetStatus(ent, TuringDispenserStatus.Idle);
+            StopProgram(ent);
             return;
         }
 
@@ -201,12 +208,9 @@ public abstract class SharedRMCTuringDispenserSystem : EntitySystem
             (!_itemSlots.TryGetSlot(ent, comp.OutputBeakerSlotId, out var slot) ||
              slot.ContainerSlot?.ContainedEntity is null))
         {
-            SetStatus(ent, TuringDispenserStatus.Idle);
+            StopProgram(ent);
             return;
         }
-
-        if (comp.Status == TuringDispenserStatus.Running)
-            return;
 
         comp.Stage = 0;
         comp.Cycle = 0;
@@ -235,7 +239,7 @@ public abstract class SharedRMCTuringDispenserSystem : EntitySystem
         StopProgram(ent);
     }
 
-    private void StopProgram(Entity<RMCTuringDispenserComponent> ent)
+    private void StopProgram(Entity<RMCTuringDispenserComponent> ent, TuringDispenserStatus status = TuringDispenserStatus.Idle)
     {
         var comp = ent.Comp;
         comp.Stage = 0;
@@ -246,7 +250,7 @@ public abstract class SharedRMCTuringDispenserSystem : EntitySystem
         if (comp.OutputMode == TuringDispenserOutputMode.SmartFridge)
             FlushBuffer(ent);
 
-        SetStatus(ent, TuringDispenserStatus.Idle);
+        SetStatus(ent, status);
     }
 
     private void OnEjectBoxMsg(Entity<RMCTuringDispenserComponent> ent, ref RMCTuringDispenserEjectBoxBuiMsg args)
@@ -496,7 +500,10 @@ public abstract class SharedRMCTuringDispenserSystem : EntitySystem
             _metaData.SetEntityName(container, $"{baseName} (mixed)");
     }
 
-    private bool TryGetTargetSolution(Entity<RMCTuringDispenserComponent> ent, out Entity<SolutionComponent>? solnEnt, out Solution? solution)
+    private bool TryGetTargetSolution(
+        Entity<RMCTuringDispenserComponent> ent,
+        [NotNullWhen(true)] out Entity<SolutionComponent>? solnEnt,
+        [NotNullWhen(true)] out Solution? solution)
     {
         if (ent.Comp.OutputMode == TuringDispenserOutputMode.Container)
         {
@@ -515,12 +522,18 @@ public abstract class SharedRMCTuringDispenserSystem : EntitySystem
         return _solution.TryGetSolution(ent.Owner, ent.Comp.BufferSolution, out solnEnt, out solution);
     }
 
-    private void AdvanceProgram(Entity<RMCTuringDispenserComponent> ent)
+    private void NextStage(Entity<RMCTuringDispenserComponent> ent)
     {
         var comp = ent.Comp;
-        comp.Stage = 0;
+        comp.Stage++;
         comp.StageMissing = FixedPoint2.Zero;
+        Dirty(ent);
 
+        var program = comp.ActiveProgram == TuringDispenserProgram.Memory ? comp.MemoryProgram : comp.BoxProgram;
+        if (comp.Stage < program.Count)
+            return;
+
+        comp.Stage = 0;
         if (comp.MemoryProgram.Count > 0 && comp.BoxProgram.Count > 0)
         {
             if (comp.ActiveProgram == TuringDispenserProgram.Box)
@@ -540,8 +553,6 @@ public abstract class SharedRMCTuringDispenserSystem : EntitySystem
 
         if (comp.OutputMode == TuringDispenserOutputMode.SmartFridge)
             FlushBuffer(ent);
-
-        Dirty(ent);
     }
 
     private void SetStatus(Entity<RMCTuringDispenserComponent> ent, TuringDispenserStatus status)
@@ -551,7 +562,10 @@ public abstract class SharedRMCTuringDispenserSystem : EntitySystem
         _appearance.SetData(ent, TuringDispenserVisuals.Status, status);
     }
 
-    public bool TryGetBufferSolution(Entity<RMCTuringDispenserComponent> ent, out Entity<SolutionComponent>? solnEnt, out Solution? solution)
+    public bool TryGetBufferSolution(
+        Entity<RMCTuringDispenserComponent> ent,
+        [NotNullWhen(true)] out Entity<SolutionComponent>? solnEnt,
+        [NotNullWhen(true)] out Solution? solution)
     {
         return _solution.TryGetSolution(ent.Owner, ent.Comp.BufferSolution, out solnEnt, out solution);
     }
@@ -587,7 +601,11 @@ public abstract class SharedRMCTuringDispenserSystem : EntitySystem
         if (!_rmcPower.IsPowered(ent))
             return;
 
-        if (time >= comp.NextRecharge)
+        if (comp.Energy >= comp.MaxEnergy)
+        {
+            comp.NextRecharge = time + comp.RechargeEvery;
+        }
+        else if (time >= comp.NextRecharge)
         {
             comp.NextRecharge = time + comp.RechargeEvery;
             comp.Energy = FixedPoint2.Min(comp.MaxEnergy, comp.Energy + comp.RechargeAmount);
@@ -597,51 +615,34 @@ public abstract class SharedRMCTuringDispenserSystem : EntitySystem
         if (comp.Status is TuringDispenserStatus.Idle or TuringDispenserStatus.Finished)
             return;
 
-        if (comp.Status == TuringDispenserStatus.Stuck)
-        {
-            if (time < comp.NextStuckRetry)
-                return;
-
-            SetStatus(ent, TuringDispenserStatus.Running);
-        }
-
         if (time < comp.NextProcess)
             return;
 
         comp.NextProcess = time + comp.ProcessEvery;
 
-        if (!TryGetTargetSolution(ent, out var targetSolnEnt, out var targetSolution))
+        if (!TryGetTargetSolution(ent, out var targetSolnEnt, out var targetSolution) ||
+            targetSolution.AvailableVolume <= FixedPoint2.Zero ||
+            comp.Cycle >= comp.CycleLimit)
         {
-            SetStatus(ent, TuringDispenserStatus.Finished);
+            StopProgram(ent, TuringDispenserStatus.Finished);
             return;
         }
 
-        var guard = 0;
-        var maxSteps = Math.Max(1, comp.MemoryProgram.Count + comp.BoxProgram.Count);
-        while (guard++ < maxSteps)
+        var total = comp.MemoryProgram.Count + comp.BoxProgram.Count;
+        for (var i = comp.Stage; i < total; i++)
         {
-            if (comp.Cycle >= comp.CycleLimit)
+            if (comp.Status == TuringDispenserStatus.Stuck)
             {
-                SetStatus(ent, TuringDispenserStatus.Finished);
-                return;
-            }
+                if (time < comp.NextStuckRetry)
+                    break;
 
-            if (targetSolution!.AvailableVolume <= FixedPoint2.Zero)
-            {
-                SetStatus(ent, TuringDispenserStatus.Finished);
-                return;
+                SetStatus(ent, TuringDispenserStatus.Running);
             }
 
             var program = comp.ActiveProgram == TuringDispenserProgram.Memory ? comp.MemoryProgram : comp.BoxProgram;
-            if (program.Count == 0)
-            {
-                SetStatus(ent, TuringDispenserStatus.Finished);
-                return;
-            }
-
             if (comp.Stage >= program.Count)
             {
-                AdvanceProgram(ent);
+                NextStage(ent);
                 continue;
             }
 
@@ -651,8 +652,7 @@ public abstract class SharedRMCTuringDispenserSystem : EntitySystem
 
             if (amount <= FixedPoint2.Zero)
             {
-                comp.Stage++;
-                comp.StageMissing = FixedPoint2.Zero;
+                NextStage(ent);
                 continue;
             }
 
@@ -665,7 +665,7 @@ public abstract class SharedRMCTuringDispenserSystem : EntitySystem
                     _smartFridge.TryDrainStock(fridge, entry.Reagent, amount, out var drained, comp.FlushedContainers) &&
                     drained > FixedPoint2.Zero)
                 {
-                    _solution.TryAddReagent(targetSolnEnt!.Value, entry.Reagent, drained);
+                    _solution.TryAddReagent(targetSolnEnt.Value, entry.Reagent, drained);
                     fulfilled += drained;
                 }
 
@@ -673,41 +673,43 @@ public abstract class SharedRMCTuringDispenserSystem : EntitySystem
                     _cmRefillable.TryDrainRefiller(coords, comp.SmartFridgeRange, entry.Reagent, amount - fulfilled, out var refilled) &&
                     refilled > FixedPoint2.Zero)
                 {
-                    _solution.TryAddReagent(targetSolnEnt!.Value, entry.Reagent, refilled);
+                    _solution.TryAddReagent(targetSolnEnt.Value, entry.Reagent, refilled);
                     fulfilled += refilled;
                 }
             }
 
-            if (fulfilled < amount)
+            if (fulfilled >= amount)
             {
-                var remaining = amount - fulfilled;
-                if (comp.SynthesizableReagents.Contains(entry.Reagent))
-                {
-                    var cost = remaining * comp.CostPerUnit;
-                    if (comp.Energy < cost)
-                    {
-                        comp.StageMissing = fulfilled > FixedPoint2.Zero ? remaining : FixedPoint2.Zero;
-                        Dirty(ent);
-                        return;
-                    }
-
-                    comp.Energy -= cost;
-                    _solution.TryAddReagent(targetSolnEnt!.Value, entry.Reagent, remaining);
-                    fulfilled += remaining;
-                }
-                else if (fulfilled <= FixedPoint2.Zero)
-                {
-                    comp.Status = TuringDispenserStatus.Stuck;
-                    comp.Error = $"{entry.Reagent.Id} NOT FOUND";
-                    comp.NextStuckRetry = time + comp.StuckRetryDelay;
-                    Dirty(ent);
-                    return;
-                }
+                NextStage(ent);
+                continue;
             }
 
-            comp.Stage++;
-            comp.StageMissing = FixedPoint2.Zero;
-            Dirty(ent);
+            var remaining = amount - fulfilled;
+            if (fulfilled > FixedPoint2.Zero)
+            {
+                comp.StageMissing = remaining;
+                Dirty(ent);
+            }
+
+            if (!comp.SynthesizableReagents.Contains(entry.Reagent))
+            {
+                var name = _rmcReagent.TryIndex(entry.Reagent, out var reagentProto)
+                    ? reagentProto.LocalizedName
+                    : entry.Reagent.Id;
+
+                comp.Error = $"{name} NOT FOUND";
+                comp.NextStuckRetry = time + comp.StuckRetryDelay;
+                SetStatus(ent, TuringDispenserStatus.Stuck);
+                break;
+            }
+
+            var cost = remaining * comp.CostPerUnit;
+            if (comp.Energy < cost)
+                break;
+
+            comp.Energy -= cost;
+            _solution.TryAddReagent(targetSolnEnt.Value, entry.Reagent, remaining);
+            NextStage(ent);
         }
     }
 }

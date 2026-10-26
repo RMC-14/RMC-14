@@ -30,7 +30,16 @@ public sealed partial class RMCCentrifugeComponent : Component
     public float TetherRange = 20;
 
     [DataField, AutoNetworkedField]
+    public bool Processing;
+
+    [DataField, AutoNetworkedField]
     public bool Spinning;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan ProcessEvery = TimeSpan.FromSeconds(3.5);
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    public TimeSpan NextProcess;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan FinishAt;

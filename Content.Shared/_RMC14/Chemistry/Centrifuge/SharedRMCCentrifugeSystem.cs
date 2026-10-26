@@ -41,6 +41,7 @@ public sealed class SharedRMCCentrifugeSystem : EntitySystem
         SubscribeLocalEvent<RMCCentrifugeComponent, EntInsertedIntoContainerMessage>(OnEntInserted);
         SubscribeLocalEvent<RMCCentrifugeComponent, EntRemovedFromContainerMessage>(OnEntRemoved);
         SubscribeLocalEvent<RMCCentrifugeComponent, ItemSlotInsertAttemptEvent>(OnInsertAttempt);
+        SubscribeLocalEvent<RMCCentrifugeComponent, ItemSlotEjectAttemptEvent>(OnEjectAttempt);
 
         Subs.BuiEvents<RMCCentrifugeComponent>(RMCCentrifugeUi.Key,
             subs =>
@@ -73,7 +74,10 @@ public sealed class SharedRMCCentrifugeSystem : EntitySystem
         {
             ent.Comp.TuringDispenser = turing.Owner;
             Dirty(ent);
-            _popup.PopupClient("The centrifuge beeps: Turing Dispenser connected.", ent, PopupType.Medium);
+
+            if (_net.IsServer)
+                _popup.PopupEntity("The centrifuge beeps: Turing Dispenser connected.", ent, PopupType.Medium);
+
             return;
         }
     }
@@ -85,8 +89,9 @@ public sealed class SharedRMCCentrifugeSystem : EntitySystem
         return _centrifuges.Count > 0;
     }
 
-    private bool TuringReady(Entity<RMCCentrifugeComponent> ent)
+    private bool TuringReady(Entity<RMCCentrifugeComponent> ent, out Entity<RMCTuringDispenserComponent> turing)
     {
+        turing = default;
         var comp = ent.Comp;
         if (comp.TuringDispenser is not { } turingUid ||
             !TryComp(turingUid, out RMCTuringDispenserComponent? turingComp))
@@ -100,11 +105,15 @@ public sealed class SharedRMCCentrifugeSystem : EntitySystem
         {
             comp.TuringDispenser = null;
             Dirty(ent);
-            _popup.PopupClient("The centrifuge beeps: Turing not found within range.", ent, PopupType.Medium);
+
+            if (_net.IsServer)
+                _popup.PopupEntity("The centrifuge beeps: Turing not found within range.", ent, PopupType.Medium);
+
             return false;
         }
 
-        return _turing.IsReadyForCentrifuge((turingUid, turingComp));
+        turing = (turingUid, turingComp);
+        return comp.InputSource == CentrifugeInputSource.Turing && _turing.IsReadyForCentrifuge(turing);
     }
 
     private void OnInsertAttempt(Entity<RMCCentrifugeComponent> ent, ref ItemSlotInsertAttemptEvent args)
@@ -115,7 +124,7 @@ public sealed class SharedRMCCentrifugeSystem : EntitySystem
         var comp = ent.Comp;
         var slotId = args.Slot.ContainerSlot?.ID;
 
-        if (comp.Spinning)
+        if (comp.Processing)
         {
             args.Cancelled = true;
             return;
@@ -125,21 +134,31 @@ public sealed class SharedRMCCentrifugeSystem : EntitySystem
             args.Cancelled = true;
     }
 
+    private void OnEjectAttempt(Entity<RMCCentrifugeComponent> ent, ref ItemSlotEjectAttemptEvent args)
+    {
+        if (ent.Comp.Spinning)
+            args.Cancelled = true;
+    }
+
     private void OnEntInserted(Entity<RMCCentrifugeComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
         if (args.Container.ID != ent.Comp.InputSlotId && args.Container.ID != ent.Comp.OutputBoxSlotId)
             return;
 
+        TryStartProcessing(ent);
         UpdateAppearance(ent);
-
-        if (!ent.Comp.Spinning && ent.Comp.InputSource == CentrifugeInputSource.Container)
-            TryStartSpin(ent);
     }
 
     private void OnEntRemoved(Entity<RMCCentrifugeComponent> ent, ref EntRemovedFromContainerMessage args)
     {
         if (args.Container.ID != ent.Comp.InputSlotId && args.Container.ID != ent.Comp.OutputBoxSlotId)
             return;
+
+        if (ent.Comp is { Processing: true, Spinning: false })
+        {
+            ent.Comp.Processing = false;
+            Dirty(ent);
+        }
 
         UpdateAppearance(ent);
     }
@@ -153,7 +172,7 @@ public sealed class SharedRMCCentrifugeSystem : EntitySystem
     private void OnToggleSourceMsg(Entity<RMCCentrifugeComponent> ent, ref RMCCentrifugeToggleSourceBuiMsg args)
     {
         var comp = ent.Comp;
-        if (comp.Spinning)
+        if (comp.Processing)
             return;
 
         comp.InputSource = comp.InputSource == CentrifugeInputSource.Container
@@ -190,9 +209,11 @@ public sealed class SharedRMCCentrifugeSystem : EntitySystem
         _itemSlots.TryEjectToHands(ent, slot, args.Actor, true);
     }
 
-    private void TryStartSpin(Entity<RMCCentrifugeComponent> ent)
+    private void TryStartProcessing(Entity<RMCCentrifugeComponent> ent)
     {
         var comp = ent.Comp;
+        if (comp.Processing)
+            return;
 
         if (!_itemSlots.TryGetSlot(ent, comp.OutputBoxSlotId, out var outputSlot) ||
             outputSlot.ContainerSlot?.ContainedEntity is null)
@@ -200,15 +221,25 @@ public sealed class SharedRMCCentrifugeSystem : EntitySystem
             return;
         }
 
-        if (comp.InputSource == CentrifugeInputSource.Container)
+        var hasInput = _itemSlots.TryGetSlot(ent, comp.InputSlotId, out var inputSlot) &&
+                       inputSlot.ContainerSlot?.ContainedEntity != null;
+        if (!(hasInput && comp.InputSource == CentrifugeInputSource.Container) &&
+            !TuringReady(ent, out _))
         {
-            if (!_itemSlots.TryGetSlot(ent, comp.InputSlotId, out var inputSlot) ||
-                inputSlot.ContainerSlot?.ContainedEntity is null)
-            {
-                return;
-            }
+            return;
         }
 
+        comp.Processing = true;
+        comp.NextProcess = _timing.CurTime;
+        Dirty(ent);
+
+        if (comp.InputSource == CentrifugeInputSource.Container)
+            StartSpin(ent);
+    }
+
+    private void StartSpin(Entity<RMCCentrifugeComponent> ent)
+    {
+        var comp = ent.Comp;
         comp.Spinning = true;
         comp.FinishAt = _timing.CurTime + comp.SpinDuration;
         Dirty(ent);
@@ -216,10 +247,18 @@ public sealed class SharedRMCCentrifugeSystem : EntitySystem
         _audio.PlayPvs(comp.SpinSound, ent);
     }
 
+    private void StopProcessing(Entity<RMCCentrifugeComponent> ent)
+    {
+        ent.Comp.Processing = false;
+        ent.Comp.Spinning = false;
+        Dirty(ent);
+        _appearance.SetData(ent, CentrifugeVisuals.State, CentrifugeVisualState.Finish);
+    }
+
     private void UpdateAppearance(Entity<RMCCentrifugeComponent> ent)
     {
         var comp = ent.Comp;
-        if (comp.Spinning)
+        if (comp.Processing)
         {
             _appearance.SetData(ent, CentrifugeVisuals.State, CentrifugeVisualState.Spinning);
             return;
@@ -260,7 +299,8 @@ public sealed class SharedRMCCentrifugeSystem : EntitySystem
         else if (_itemSlots.TryGetSlot(ent, comp.InputSlotId, out var inputSlot) &&
                  inputSlot.ContainerSlot?.ContainedEntity is { } beaker)
         {
-            _solution.TryGetMixableSolution(beaker, out sourceSolnEnt, out sourceSolution);
+            if (!_solution.TryGetMixableSolution(beaker, out sourceSolnEnt, out sourceSolution))
+                _solution.TryGetDrawableSolution(beaker, out sourceSolnEnt, out sourceSolution);
         }
         else
         {
@@ -268,18 +308,11 @@ public sealed class SharedRMCCentrifugeSystem : EntitySystem
             sourceSolution = null;
         }
 
-        if (sourceSolnEnt is null || sourceSolution is null || sourceSolution.Volume <= FixedPoint2.Zero)
-        {
-            comp.Spinning = false;
-            Dirty(ent);
-            _appearance.SetData(ent, CentrifugeVisuals.State, CentrifugeVisualState.Finish);
-            return;
-        }
-
         if (!_itemSlots.TryGetSlot(ent, comp.OutputBoxSlotId, out var outputSlot) ||
             outputSlot.ContainerSlot?.ContainedEntity is not { } box ||
             !TryComp(box, out StorageComponent? storage))
         {
+            comp.Processing = false;
             comp.Spinning = false;
             Dirty(ent);
             UpdateAppearance(ent);
@@ -287,19 +320,22 @@ public sealed class SharedRMCCentrifugeSystem : EntitySystem
         }
 
         var vials = storage.Container.ContainedEntities.ToList();
-        if (vials.Count > 0)
+        if (vials.Count == 0)
+        {
+            StopProcessing(ent);
+            return;
+        }
+
+        if (sourceSolnEnt != null && sourceSolution != null && sourceSolution.Volume > FixedPoint2.Zero)
         {
             if (comp.Mode == CentrifugeMode.Split && sourceSolution.Contents.Count > 1)
                 Split(sourceSolnEnt.Value, sourceSolution, vials);
             else
-                Distribute(sourceSolution, vials);
-
-            LabelVials(ent, vials);
+                Distribute(sourceSolnEnt.Value, vials);
         }
 
-        comp.Spinning = false;
-        Dirty(ent);
-        _appearance.SetData(ent, CentrifugeVisuals.State, CentrifugeVisualState.Finish);
+        LabelVials(ent, vials);
+        StopProcessing(ent);
     }
 
     private void Split(Entity<SolutionComponent> source, Solution sourceSolution, List<EntityUid> vials)
@@ -352,8 +388,9 @@ public sealed class SharedRMCCentrifugeSystem : EntitySystem
         }
     }
 
-    private void Distribute(Solution sourceSolution, List<EntityUid> vials)
+    private void Distribute(Entity<SolutionComponent> source, List<EntityUid> vials)
     {
+        var sourceSolution = source.Comp.Solution;
         foreach (var vial in vials)
         {
             if (sourceSolution.Volume <= FixedPoint2.Zero)
@@ -367,7 +404,8 @@ public sealed class SharedRMCCentrifugeSystem : EntitySystem
                 continue;
 
             var amount = FixedPoint2.Min(available, sourceSolution.Volume);
-            _solution.TryTransferSolution(vialSolnEnt.Value, sourceSolution, amount);
+            var split = _solution.SplitSolution(source, amount);
+            _solution.TryAddSolution(vialSolnEnt.Value, split);
         }
     }
 
@@ -417,33 +455,29 @@ public sealed class SharedRMCCentrifugeSystem : EntitySystem
         {
             Entity<RMCCentrifugeComponent> ent = (uid, comp);
 
-            if (comp.InputSource == CentrifugeInputSource.Turing && !comp.Spinning)
+            if (comp.Spinning)
             {
-                if (!TuringReady(ent) ||
-                    comp.TuringDispenser is not { } turingUid ||
-                    !TryComp(turingUid, out RMCTuringDispenserComponent? turingComp))
-                {
-                    continue;
-                }
-
-                if (_turing.TryGetBufferSolution((turingUid, turingComp), out _, out var buffer) &&
-                    buffer != null && buffer.Volume > FixedPoint2.Zero)
-                {
-                    TryStartSpin(ent);
-                }
-                else
-                {
-                    if (turingComp.Status != TuringDispenserStatus.Running)
-                        _audio.PlayPvs(comp.RequestRunSound, ent);
-
-                    _turing.RequestRun((turingUid, turingComp));
-                }
+                if (time >= comp.FinishAt)
+                    DoCentrifuge(ent);
 
                 continue;
             }
 
-            if (comp.Spinning && time >= comp.FinishAt)
-                DoCentrifuge(ent);
+            if (!comp.Processing || time < comp.NextProcess)
+                continue;
+
+            comp.NextProcess = time + comp.ProcessEvery;
+            Dirty(ent);
+
+            if (TuringReady(ent, out var turing) &&
+                (!_turing.TryGetBufferSolution(turing, out _, out var buffer) || buffer.Volume <= FixedPoint2.Zero))
+            {
+                _audio.PlayPvs(comp.RequestRunSound, ent);
+                _turing.RequestRun(turing);
+                continue;
+            }
+
+            StartSpin(ent);
         }
     }
 }

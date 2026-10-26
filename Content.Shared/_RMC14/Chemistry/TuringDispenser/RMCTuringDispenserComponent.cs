@@ -11,7 +11,7 @@ namespace Content.Shared._RMC14.Chemistry.TuringDispenser;
 public sealed partial class RMCTuringDispenserComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public FixedPoint2 Energy;
+    public FixedPoint2 Energy = 100;
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 MaxEnergy = 100;
@@ -20,13 +20,13 @@ public sealed partial class RMCTuringDispenserComponent : Component
     public FixedPoint2 RechargeAmount = 10;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan RechargeEvery = TimeSpan.FromSeconds(20);
+    public TimeSpan RechargeEvery = TimeSpan.FromSeconds(38.5);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NextRecharge;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan ProcessEvery = TimeSpan.FromSeconds(1.5);
+    public TimeSpan ProcessEvery = TimeSpan.FromSeconds(3.5);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NextProcess;
@@ -77,7 +77,7 @@ public sealed partial class RMCTuringDispenserComponent : Component
     public string? Error;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan StuckRetryDelay = TimeSpan.FromSeconds(10);
+    public TimeSpan StuckRetryDelay = TimeSpan.FromSeconds(14);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NextStuckRetry;
@@ -98,6 +98,10 @@ public sealed partial class RMCTuringDispenserComponent : Component
         "RMCHydrogen", "RMCIron", "RMCLithium", "RMCMercury", "RMCNitrogen", "RMCOxygen",
         "RMCPhosphorus", "RMCPotassium", "RMCRadium", "RMCSilicon", "RMCSodium", "RMCSugar",
         "RMCSulfur", "RMCSulphuricAcid", "Water",
+        "CMBicaridine", "CMDexalin", "CMDylovene", "CMEpinephrine", "CMInaprovaline", "CMKelotane",
+        "RMCMethane", "TableSalt",
+        // TODO RMC14 add once these reagents are ported
+        // "CMTramadol", "CMOxycodone", "CMPeridaxon", "RMCSoporific", "RMCAmmonia",
     ];
 
     [DataField, AutoNetworkedField]
