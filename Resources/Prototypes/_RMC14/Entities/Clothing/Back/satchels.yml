@@ -894,6 +894,16 @@
 
 - type: entity
   parent: RMCBackpackRTO
+  id: RMCBackpackRTOSmall
+  name: UNMC small radio telephone pack
+  components:
+  - type: Storage
+    grid:
+    - 0,0,9,1 # 10
+
+
+- type: entity
+  parent: RMCBackpackRTO
   id: RMCBackpackRTOPMC
   name: We-Ya radio telephone pack
   description: A heavy-duty extended-pack, used for telecommunications between central command. Commonly carried by RTOs. This one bears the logo of Weston-Yamada.
@@ -907,6 +917,15 @@
     category: Weston-Yamada
   - type: ItemCamouflage
     camouflageVariations: {}
+
+- type: entity
+  parent: RMCBackpackRTOPMC
+  id: RMCBackpackRTOPMCSmall
+  name: We-Ya small radio telephone pack
+  components:
+  - type: Storage
+    grid:
+    - 0,0,9,1 # 10
 
 - type: entity
   parent: RMCBackpackRTO
@@ -925,6 +944,15 @@
     camouflageVariations: {}
 
 - type: entity
+  parent: RMCBackpackRTOSPP
+  id: RMCBackpackRTOSPPSmall
+  name: SPP small radio telephone pack
+  components:
+  - type: Storage
+    grid:
+    - 0,0,9,1 # 10
+
+- type: entity
   parent: RMCBackpackRTO
   id: RMCBackpackRTOTSE
   name: TSE radio telephone pack
@@ -936,6 +964,15 @@
     category: Three Suns Empire
   - type: ItemCamouflage
     camouflageVariations: {}
+
+- type: entity
+  parent: RMCBackpackRTOTSE
+  id: RMCBackpackRTOTSESmall
+  name: TSE small radio telephone pack
+  components:
+  - type: Storage
+    grid:
+    - 0,0,9,1 # 10
 
 - type: entity
   parent: RMCBackpackRTO
