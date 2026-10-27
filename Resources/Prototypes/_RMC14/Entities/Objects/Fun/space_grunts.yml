@@ -1,0 +1,19 @@
+- type: entity
+  parent: CMPaper
+  id: RMCSpaceGrunts
+  name: Space Grunts
+  description: A tabletop game based around the UNMC, easy to get into, simple to play, and most importantly fun for the whole squad.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/paper.rsi
+    layers:
+    - state: paper_stack
+    - state: paper_stack_words
+      map: ["enum.PaperVisualLayers.Writing"]
+      visible: false
+    - state: paper_stamped
+      map: ["enum.PaperVisualLayers.Stamp"]
+      visible: false
+  - type: Paper
+    contentSize: 20000
+    content: rmc-book-text-space-grunts
