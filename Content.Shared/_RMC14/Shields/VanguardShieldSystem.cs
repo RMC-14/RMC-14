@@ -21,6 +21,7 @@ public sealed class VanguardShieldSystem : EntitySystem
         SubscribeLocalEvent<VanguardShieldComponent, DamageModifyAfterResistEvent>(OnVanguardShieldHit, before: [typeof(XenoShieldSystem)]);
         SubscribeLocalEvent<VanguardShieldComponent, GetExplosionResistanceEvent>(OnVanguardShieldGetResistance);
         SubscribeLocalEvent<VanguardShieldComponent, RemovedShieldEvent>(OnVanguardShieldRemoved);
+        SubscribeLocalEvent<VanguardShieldComponent, CMGetArmorEvent>(OnVanguardShieldGetArmor);
     }
 
     private void OnVanguardShieldInit(Entity<VanguardShieldComponent> xeno, ref MapInitEvent args)
@@ -95,6 +96,17 @@ public sealed class VanguardShieldSystem : EntitySystem
 
             Dirty(uid, shield);
         }
+    }
+
+    private void OnVanguardShieldGetArmor(Entity<VanguardShieldComponent> xeno, ref CMGetArmorEvent args)
+    {
+        if (!TryComp<XenoShieldComponent>(xeno, out var shield) || shield.Shield != XenoShieldSystem.ShieldType.Vanguard)
+            return;
+
+        if (shield.ShieldAmount <= 0)
+            return;
+
+        args.ExplosionArmor += xeno.Comp.ExplosionResistance;
     }
 
     //Returns whether something applies for the shield buff (for cleave)
