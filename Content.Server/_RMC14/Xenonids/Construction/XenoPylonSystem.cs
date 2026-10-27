@@ -4,6 +4,7 @@ using Content.Server.Ghost.Roles;
 using Content.Server.Ghost.Roles.Events;
 using Content.Server.Mind;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Banish;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
@@ -160,7 +161,9 @@ public sealed class XenoPylonSystem : SharedXenoPylonSystem
 
     private bool CanTrigger(EntityUid user)
     {
-        return _tagSystem.HasTag(user, Larva) && (_mobState.IsDead(user) || _mind.GetMind(user) == null);
+        return _tagSystem.HasTag(user, Larva)
+            && !HasComp<XenoBanishComponent>(user)
+            && (_mobState.IsDead(user) || _mind.GetMind(user) == null);
     }
 
     private void OnHiveCoreStepTriggered(Entity<HiveCoreComponent> core, ref StepTriggeredOffEvent args)
