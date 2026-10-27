@@ -103,8 +103,11 @@ public sealed class XenoFlurrySystem : EntitySystem
             SpawnAttachedTo(xeno.Comp.AttackEffect, victim.ToCoordinates());
             _audio.PlayEntity(xeno.Comp.SlashSound, xeno, victim);
 
-            SpawnAttachedTo(xeno.Comp.HealEffect, xeno.Owner.ToCoordinates());
-            _xenoHeal.CreateHealStacks(xeno, xeno.Comp.HealAmount, xeno.Comp.HealDelay, xeno.Comp.HealCharges, xeno.Comp.HealDelay);
+            if (_xeno.CanHeal(xeno))
+            {
+                SpawnAttachedTo(xeno.Comp.HealEffect, xeno.Owner.ToCoordinates());
+                _xenoHeal.CreateHealStacks(xeno, xeno.Comp.HealAmount, xeno.Comp.HealDelay, xeno.Comp.HealCharges, xeno.Comp.HealDelay);
+            }
 
             if (xeno.Comp.MaxTargets != null && hits >= xeno.Comp.MaxTargets)
                 break;
