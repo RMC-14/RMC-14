@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   save: false
   parent: BaseMobSpecies
   id: RMCBaseMobSpeciesOrganic
@@ -379,6 +379,13 @@
     whitelist:
       tags:
       - SurvivalPouch
+  - type: RMCApplyOnDamageThreshold
+    thresholds:
+      - damageType: Airloss
+        threshold: 50
+        statusName: Unconscious
+        statusComponent: RMCUnconscious
+        duration: 6
   - type: HumanoidAppearance
     species: Human
     hideLayersOnEquip:
