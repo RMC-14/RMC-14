@@ -8,6 +8,7 @@ rmc-pull-infect-self = You try to pull {$pulled}, but get jumped on and infected
 rmc-pull-infect-others = {$puller} tries to pull {$pulled}, but gets jumped on and infected in the process!
 
 rmc-prevent-pull-alive = You can't pull {THE($target)} while {SUBJECT($target)} {CONJUGATE-BE($target)} alive!
+rmc-xeno-pull-cant-override = You cannot take this prey from another sister unless you are a Hive Leader or the Queen.
 
 rmc-pull-aggressive-self = You have grabbed {$pulled} aggressively!
 rmc-pull-aggressive-others = {$puller} has grabbed {$pulled} aggressively!
