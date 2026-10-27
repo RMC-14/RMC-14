@@ -1,12 +1,24 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/274dffcf8574897b6b8fbcad07d81aa0f28292bb/icons/obj/items/clothing/pouches.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/c28294fb1a393e995a0229ea158c4f49909e0382/icons/obj/items/clothing/pouches.dmi, https://github.com/cmss13-devs/cmss13/blob/05b6556a50d082937f0f45cc1f941c7d4c87ca28/icons/obj/items/reagentfillings.dmi.",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
+    {
+      "name": "pressurized_reagent_canister1"
+    },
+    {
+      "name": "pressurized_reagent_canister2"
+    },
+    {
+      "name": "pressurized_reagent_canister3"
+    },
+    {
+      "name": "pressurized_reagent_canister4"
+    },
     {
       "name": "icon"
     },
@@ -17,7 +29,7 @@
       "name": "closed"
     },
     {
-      "name": "reagent"
+      "name": "glass"
     }
   ]
 }
