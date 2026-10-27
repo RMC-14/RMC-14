@@ -51,7 +51,7 @@
           tags:
           - CMMagazineRifleM20
   - type: GunDamageModifier
-    multiplier: 1
+    multiplier: 1.1
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
