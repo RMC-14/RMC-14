@@ -9,15 +9,10 @@ using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Weapons.Melee;
-using Content.Shared._RMC14.Xenonids.Construction;
-using Content.Shared._RMC14.Xenonids.Egg;
-using Content.Shared._RMC14.Xenonids.Fruit.Components;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Invisibility;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
-using Content.Shared._RMC14.Xenonids.Spray;
-using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
@@ -84,6 +79,8 @@ public sealed class XenoLeapSystem : EntitySystem
     private EntityQuery<FixturesComponent> _fixturesQuery;
 
     private bool _logPrediction = false;
+
+    private HashSet<EntityUid> _colliding = new();
 
     public override void Initialize()
     {
@@ -206,6 +203,8 @@ public sealed class XenoLeapSystem : EntitySystem
         var target = _transform.ToMapCoordinates(args.Coordinates);
         var direction = target.Position - origin.Position;
 
+        leaping.Direction = direction;
+
         if (direction == Vector2.Zero)
             return;
 
@@ -238,8 +237,36 @@ public sealed class XenoLeapSystem : EntitySystem
             _physics.SetCollisionMask(xeno, fixture.Key, fixture.Value, fixture.Value.CollisionMask ^ collisionGroup);
         }
 
+        var contacts = _physics.GetContacts((xeno, fixtures));
+        _colliding.Clear();
+
+        var velocity = physics.LinearVelocity;
+
         //Handle close-range or same-tile leaps
-        foreach (var ent in _physics.GetContactingEntities(xeno.Owner, physics))
+        while (contacts.MoveNext(out var contact))
+        {
+            // Approximate contacts don't count.
+            if (!contact.IsTouching)
+                continue;
+
+            // Ignore fixtures that can contact but should be ignored.
+            if (leaping.IgnoreFixtureIds.Contains(contact.FixtureAId)
+                || leaping.IgnoreFixtureIds.Contains(contact.FixtureBId))
+                continue;
+
+            // If the leaper is trying to move AWAY from the contact, ignore it.
+            contact.GetWorldManifold(
+                _physics.GetPhysicsTransform(contact.EntityA),
+                _physics.GetPhysicsTransform(contact.EntityB),
+                out var normal);
+            normal = contact.EntityA == xeno.Owner ? -normal : normal;
+            if (normal.LengthSquared() > 0 && Vector2.Dot(direction, normal) > 0)
+                continue;
+
+            _colliding.Add(contact.OtherEnt(xeno));
+        }
+
+        foreach (var ent in _colliding)
         {
             if (_hive.FromSameHive(xeno.Owner, ent))
                 continue;
@@ -289,6 +316,19 @@ public sealed class XenoLeapSystem : EntitySystem
 
     private void OnXenoLeapingDoHit(Entity<XenoLeapingComponent> xeno, ref StartCollideEvent args)
     {
+        // Ignore collision if colliding with ignored fixture
+        if (xeno.Comp.IgnoreFixtureIds.Contains(args.OurFixtureId)
+            || xeno.Comp.IgnoreFixtureIds.Contains(args.OtherFixtureId))
+            return;
+
+        // Ignore collision if moving away from the collision point.
+        if (args.PointCount > 0)
+        {
+            var toContact = args.WorldPoints[0] - _transform.GetWorldPosition(xeno);
+            if (Vector2.Dot(xeno.Comp.Direction, toContact) < 0)
+                return;
+        }
+
         ApplyLeapingHitEffects(xeno, args.OtherEntity);
     }
 
