@@ -88,6 +88,7 @@ namespace Content.IntegrationTests.Tests
             "Savannah",
             "Almayer",
             "RMCAdminFax",
+            "RMCGhostBar",
             "Haurchefant",
             "Breakwater_Strand",
             "UNSEndeavour",
