@@ -234,7 +234,7 @@
                                     <BoxContainer Orientation="Horizontal" Margin="5"
                                                   VerticalExpand="True">
                                         <BoxContainer Orientation="Vertical" HorizontalExpand="True">
-                                            <BoxContainer Orientation="Horizontal">
+                                            <BoxContainer Orientation="Horizontal" SeparationOverride="5">
                                                 <BoxContainer Name="LongitudeContainer" Access="Public" Orientation="Vertical">
                                                     <Label Text="{Loc rmc-overwatch-console-longitude}" />
                                                 </BoxContainer>
@@ -256,13 +256,13 @@
                                                     ModulateSelfOverride="#D3B400" TextAlign="Center" />
                                         </BoxContainer>
                                         <ui:BlueHorizontalSeparator SetWidth="2" Margin="5 0" />
-                                        <BoxContainer Orientation="Vertical" HorizontalExpand="True" Visible="False">
+                                        <BoxContainer Orientation="Vertical" HorizontalExpand="True">
                                             <Label Text="{Loc rmc-overwatch-console-max-coordinates}" />
                                             <BoxContainer Orientation="Horizontal">
                                                 <BoxContainer Name="Longitudes" Access="Public" Orientation="Vertical" />
                                                 <BoxContainer Name="Latitudes" Access="Public" Orientation="Vertical" />
                                                 <BoxContainer Name="Comments" Access="Public" Orientation="Vertical" HorizontalExpand="True" />
-                                                <BoxContainer Name="Saves" Access="Public" Orientation="Vertical" />
+                                                <BoxContainer Name="Loads" Access="Public" Orientation="Vertical" />
                                             </BoxContainer>
                                         </BoxContainer>
                                     </BoxContainer>
@@ -291,7 +291,7 @@
                                     <BoxContainer Orientation="Horizontal" Margin="5"
                                                   VerticalExpand="True">
                                         <BoxContainer Orientation="Vertical" HorizontalExpand="True">
-                                            <BoxContainer Orientation="Horizontal">
+                                            <BoxContainer Orientation="Horizontal" SeparationOverride="5">
                                                 <BoxContainer Name="OrbitalLongitudeContainer" Access="Public" Orientation="Vertical">
                                                     <Label Text="{Loc rmc-overwatch-console-longitude}" />
                                                 </BoxContainer>
@@ -319,7 +319,7 @@
                                                 <BoxContainer Name="OrbitalLongitudes" Access="Public" Orientation="Vertical" />
                                                 <BoxContainer Name="OrbitalLatitudes" Access="Public" Orientation="Vertical" />
                                                 <BoxContainer Name="OrbitalComments" Access="Public" Orientation="Vertical" HorizontalExpand="True" />
-                                                <BoxContainer Name="OrbitalSaves" Access="Public" Orientation="Vertical" />
+                                                <BoxContainer Name="OrbitalLoads" Access="Public" Orientation="Vertical" />
                                             </BoxContainer>
                                         </BoxContainer>
                                     </BoxContainer>
