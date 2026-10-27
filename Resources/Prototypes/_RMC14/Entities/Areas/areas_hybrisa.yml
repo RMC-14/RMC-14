@@ -476,6 +476,7 @@
   - type: Sprite
     state: derelictship
   - type: Area
+    xenoHiveSetupRestriction: null
     CAS: false
     fulton: false
     lasing: false
@@ -498,6 +499,7 @@
   - type: Sprite
     state: caves_plateau
   - type: Area
+    xenoHiveSetupRestriction: null
     CAS: false
     fulton: false
     lasing: false
@@ -517,6 +519,7 @@
   - type: Sprite
     state: wylab
   - type: Area
+    xenoHiveSetupRestriction: null
     CAS: false
     fulton: false
     lasing: false
@@ -536,6 +539,7 @@
   - type: Sprite
     state: caves_west
   - type: Area
+    xenoHiveSetupRestriction: 25m
     CAS: false
     fulton: false
     lasing: false
@@ -632,6 +636,8 @@
   components:
   - type: Sprite
     state: caves_east
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaLv759IndoorsCaves
@@ -659,6 +665,8 @@
   components:
   - type: Sprite
     state: caves_south
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaLv759IndoorsCaves
@@ -725,6 +733,7 @@
   - type: Sprite
     state: caves_northwest
   - type: Area
+    xenoHiveSetupRestriction: 25m
     CAS: false
     fulton: false
     lasing: false
@@ -749,6 +758,7 @@
   - type: Sprite
     state: caves_northwest
   - type: Area
+    xenoHiveSetupRestriction: 25m
     CAS: true
     fulton: true
     mortarPlacement: true
@@ -821,6 +831,7 @@
   - type: Sprite
     state: caves_central
   - type: Area
+    xenoHiveSetupRestriction: null
     CAS: false
     fulton: false
     lasing: false
@@ -890,6 +901,7 @@
   - type: Sprite
     state: caves_plateau
   - type: Area
+    xenoHiveSetupRestriction: null
     CAS: true
     fulton: true
     mortarPlacement: true
@@ -1044,6 +1056,7 @@
   id: RMCAreaLv759IndoorsSpaceport
   components:
   - type: Area
+    xenoHiveSetupRestriction: null
     minimapColor: '#A54B01EE'
 
 - type: entity
@@ -2417,6 +2430,7 @@
   - type: Sprite
     state: wylab
   - type: Area
+    xenoHiveSetupRestriction: null
     minimapColor: '#856600EE'
     CAS: false
     fulton: false

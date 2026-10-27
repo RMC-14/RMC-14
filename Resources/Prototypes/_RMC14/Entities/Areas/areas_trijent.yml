@@ -35,6 +35,7 @@
   - type: Sprite
     state: purple
   - type: Area
+    xenoHiveSetupRestriction: null
     minimapColor: '#812DA2EE'
 
 - type: entity
@@ -100,6 +101,8 @@
   components:
   - type: Sprite
     state: maintcentral
+  - type: Area
+    xenoHiveSetupRestriction: 25m
 
 - type: entity
   parent: RMCAreaDesertDamInteriorLabNortheast
@@ -473,6 +476,8 @@
   components:
   - type: Sprite
     state: yellow
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   abstract: true
@@ -556,6 +561,8 @@
   components:
   - type: Sprite
     state: northeastern_ss
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaDesertDamBuildingSubstation
@@ -580,6 +587,8 @@
   components:
   - type: Sprite
     state: central_ss
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaDesertDamBuildingSubstation
@@ -713,6 +722,8 @@
   components:
   - type: Sprite
     state: purple
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaDesertDamBuildingCafeteria
@@ -762,6 +773,8 @@
   components:
   - type: Sprite
     state: purple
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaDesertDamBuildingDorms
@@ -971,6 +984,7 @@
   - type: Sprite
     state: medbay2
   - type: Area
+    xenoHiveSetupRestriction: null
     minimapColor: '#3DBF75EE'
 
 - type: entity
@@ -1152,6 +1166,7 @@
   - type: Sprite
     state: yellow
   - type: Area
+    xenoHiveSetupRestriction: null
     minimapColor: '#C19504E7'
 
 - type: entity
@@ -1424,6 +1439,8 @@
   components:
   - type: Sprite
     state: purple
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaDesertDamBuildingMining
@@ -1740,6 +1757,8 @@
   components:
   - type: Sprite
     state: valley_east
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaDesertDamExteriorValley
@@ -1748,6 +1767,8 @@
   components:
   - type: Sprite
     state: valley_south_excv
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaDesertDamExteriorValley
@@ -1756,6 +1777,8 @@
   components:
   - type: Sprite
     state: valley
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaDesertDamExteriorValley
