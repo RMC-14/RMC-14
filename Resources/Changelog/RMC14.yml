@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Map vote results readability improved.
-    type: Tweak
-  id: 3205
-  time: '2026-05-15T23:36:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9818
 - author: MajManatee
   changes:
   - message: SOs can now see the new player labels above their heads.
@@ -4512,5 +4505,12 @@
   id: 3704
   time: '2026-10-27T19:51:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10880
+- author: Sifb26
+  changes:
+  - message: general QOL to the provost headsets
+    type: Tweak
+  id: 3705
+  time: '2026-10-27T20:02:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9386
 Name: RMC14
 Order: -1
