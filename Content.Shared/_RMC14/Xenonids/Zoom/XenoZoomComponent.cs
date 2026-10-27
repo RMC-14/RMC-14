@@ -27,4 +27,7 @@ public sealed partial class XenoZoomComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool BlockLeaps;
+
+    [DataField, AutoNetworkedField]
+    public bool WasZoomedBeforeRest;
 }
