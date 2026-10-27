@@ -45,6 +45,28 @@
     - id: RMCMK80
     - id: CMMagazinePistolMK80
       amount: 2
+
+# M1911
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCGunCasePistolM1911
+  name: M1911 service pistol case
+  description: A gun case containing the M1911 service pistol. It might be three centuries old but it's still a damn good pistol. Back-issue only, though.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,15,1
+    whitelist:
+      tags:
+      - CMWeaponPistolM1911
+      - CMMagazinePistolM1911
+  - type: StorageFill
+    contents:
+    - id: CMWeaponPistolM1911
+    - id: CMMagazinePistolM1911
+      amount: 6
+
 # D18
 - type: entity
   parent: BaseStorageItem

@@ -48,6 +48,9 @@
         RMCSkillMeleeWeapons: 1
         RMCSkillOverwatch: 1
         RMCSkillPolice: 2
+    - type: CMVendorUser
+      id: CMChiefMP
+      points: 45
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix

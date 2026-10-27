@@ -9,7 +9,7 @@
     clearDecals: true
     replaceAreas: true
 
-- type: entity
+- type: entity # TODO RMC14: Update this for LACN rework
   parent: RMCMapInsertVaraderoBase
   id: RMCMapInsertVaraderoCLFRaid
   name: CLF Raid
@@ -23,13 +23,13 @@
 
 - type: entity
   parent: RMCMapInsertVaraderoBase
-  id: RMCMapInsertVaraderoResturant
-  name: Resturant
+  id: RMCMapInsertVaraderoArmoryToGallery
+  name: Armory to Gallery
   suffix: Insert Varadero
   components:
   - type: MapInsert
     variations:
-    - spawn: "/Maps/_RMC14/Inserts/Varadero/varadero_resturant.yml"
+    - spawn: "/Maps/_RMC14/Inserts/Varadero/armory_to_gallery.yml"
       probability: 0.33
 
 - type: entity
@@ -80,18 +80,14 @@
   components:
   - type: MapInsert
     variations:
-    - spawn: "/Maps/_RMC14/Inserts/Varadero/surv_spawn_dorms.yml"
-      probability: 0.25
+    - spawn: "/Maps/_RMC14/Inserts/Varadero/surv_spawn_barracks.yml"
+      probability: 0.34
       nightmareScenario: none
-    - spawn: "/Maps/_RMC14/Inserts/Varadero/surv_spawn_admin.yml"
-      probability: 0.25
+    - spawn: "/Maps/_RMC14/Inserts/Varadero/surv_spawn_administration.yml"
+      probability: 0.33
+      offset: -15,11
       nightmareScenario: none
-      offset: -27,6
-    - spawn: "/Maps/_RMC14/Inserts/Varadero/surv_spawn_engineering.yml"
-      probability: 0.25
+    - spawn: "/Maps/_RMC14/Inserts/Varadero/surv_spawn_annex.yml"
+      probability: 0.33
+      offset: 17,34
       nightmareScenario: none
-      offset: 16,33
-    - spawn: "/Maps/_RMC14/Inserts/Varadero/surv_spawn_chapel.yml"
-      probability: 0.25
-      nightmareScenario: none
-      offset: -42,38

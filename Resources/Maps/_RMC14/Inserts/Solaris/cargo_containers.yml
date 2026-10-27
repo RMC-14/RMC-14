@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/10/2026 19:57:45
-  entityCount: 288
+  time: 09/27/2026 20:01:09
+  entityCount: 287
 maps: []
 grids:
 - 1
@@ -591,16 +591,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 3.5,4.5
       parent: 1
-- proto: CMApcNoPower
-  entities:
-  - uid: 234
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 13.5,10.5
-      parent: 1
-    - type: SpriteSetRenderOrder
-      offset: -0.5,-1.5
 - proto: CMASRSConsole
   entities:
   - uid: 225

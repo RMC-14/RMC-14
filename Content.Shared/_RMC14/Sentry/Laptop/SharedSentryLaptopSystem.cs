@@ -683,16 +683,24 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
 
     private NetEntity? GetSentryTarget(EntityUid sentry)
     {
-        if (TryComp<GunComponent>(sentry, out var gun) && gun.Target != null)
-            return GetNetEntity(gun.Target.Value);
+        if (TryComp<GunComponent>(sentry, out var gun) &&
+            gun.Target is { } target &&
+            !TerminatingOrDeleted(target))
+        {
+            return GetNetEntity(target);
+        }
 
         return null;
     }
 
     private string? GetSentryTargetName(EntityUid sentry)
     {
-        if (TryComp<GunComponent>(sentry, out var gun) && gun.Target is { } target)
+        if (TryComp<GunComponent>(sentry, out var gun) &&
+            gun.Target is { } target &&
+            !TerminatingOrDeleted(target))
+        {
             return GetTargetDisplayName(target);
+        }
 
         return null;
     }
@@ -713,7 +721,7 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
             return Loc.GetString("cm-xeno-name");
         }
 
-        return Name(target);
+        return TryName(target, out var targetName) ? targetName : "Unknown";
     }
 
     private HashSet<string> GetSentryFriendlyFactions(EntityUid sentry)

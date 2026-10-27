@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC-BY-3.0",
+  "copyright": "taken from cmss13 at https://github.com/Drazamuffin/cmss13/blob/068d2bf2ff6a10a579db4bfef47b9edf4562ca41/icons/obj/structures/props/icon_cannon.dmi",
+  "size": {
+    "x": 160,
+    "y": 160
+  },
+  "states": [
+    {
+      "name": "cannon"
+    },
+    {
+      "name": "cannon1"
+    }
+  ]
+}
