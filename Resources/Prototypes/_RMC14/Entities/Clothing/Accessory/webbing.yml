@@ -192,7 +192,7 @@
   parent: CMWebbingBase
   id: CMWebbingBlack
   name: black pouch vest
-  description: Robust black synthcotton vest with lots of pockets to unload your hands. Able to hold 5 small items.
+  description: Robust black synthcotton vest with lots of pockets to unload your hands. Able to hold five small items.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_black.rsi
@@ -242,7 +242,7 @@
   parent: CMWebbingBlack
   id: CMWebbingBrown
   name: brown pouch vest
-  description: Worn brownish synthcotton vest with lots of pockets to unload your hands. Able to hold 5 small items.
+  description: Worn brownish synthcotton vest with lots of pockets to unload your hands. Able to hold five small items.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_brown.rsi
