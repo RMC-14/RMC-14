@@ -268,7 +268,7 @@
       - cost: 3500
         crate: RMCCrateFieldDoctor
         entities:
-        - CMIV # TODO RMC14 Make IV fit in crate.
+        - RMCIVStand # TODO RMC14 Make IV fit in crate.
       - cost: 700
         crate: RMCCrateMedicalBodyBag
       - cost: 1500
