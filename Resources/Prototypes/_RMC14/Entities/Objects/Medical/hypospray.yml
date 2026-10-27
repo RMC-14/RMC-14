@@ -63,6 +63,7 @@
   - type: PhysicalComposition
     materialComposition:
       RMCPlastic: 1250
+  - type: RMCAllowHolstering
 
 - type: Tag
   id: Hypospray
@@ -100,3 +101,13 @@
     containers:
       vial:
       - RMCVialEpinephrine
+
+- type: entity
+  parent: CMHyposprayWithVial
+  id: CMHyposprayFilledLarge
+  suffix: Filled, Large Vial
+  components:
+  - type: ContainerFill
+    containers:
+      vial:
+      - RMCVialLarge
