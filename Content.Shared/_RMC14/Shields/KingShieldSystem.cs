@@ -1,4 +1,3 @@
-using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Tether;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -21,7 +20,7 @@ public sealed class KingShieldSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<KingShieldComponent, DamageModifyAfterResistEvent>(OnShieldDamage, before: [typeof(XenoShieldSystem)]);
+        SubscribeLocalEvent<KingShieldComponent, XenoShieldHitEvent>(OnShieldDamage);
         SubscribeLocalEvent<KingShieldComponent, RemovedShieldEvent>(OnShieldRemove);
 
         SubscribeLocalEvent<XenoBulwarkOfTheHiveComponent, XenoBulwarkOfTheHiveActionEvent>(OnXenoBulwarkOfTheHiveAction);
@@ -62,12 +61,9 @@ public sealed class KingShieldSystem : EntitySystem
         }
     }
 
-    private void OnShieldDamage(Entity<KingShieldComponent> xeno, ref DamageModifyAfterResistEvent args)
+    private void OnShieldDamage(Entity<KingShieldComponent> xeno, ref XenoShieldHitEvent args)
     {
-        if (!TryComp<XenoShieldComponent>(xeno, out var shield))
-            return;
-
-        if (!shield.Active || shield.Shield != XenoShieldSystem.ShieldType.King)
+        if (args.Shield.Shield != XenoShieldSystem.ShieldType.King)
             return;
 
         if (!_threshold.TryGetIncapThreshold(xeno, out var threshold))
@@ -76,7 +72,7 @@ public sealed class KingShieldSystem : EntitySystem
         var maxDamage = threshold * xeno.Comp.MaxDamagePercent;
 
         if (maxDamage != null)
-            args.Damage.ClampMax(maxDamage.Value);
+            args.Event.Damage.ClampMax(maxDamage.Value);
     }
 
     private void OnShieldRemove(Entity<KingShieldComponent> xeno, ref RemovedShieldEvent args)

@@ -22,7 +22,7 @@ namespace Content.Client._RMC14.Shields
 
             if (!AppearanceSystem.TryGetData<string>(uid, RMCShieldVisuals.Prefix, out var prefix) ||
                 !AppearanceSystem.TryGetData<FixedPoint2>(uid, RMCShieldVisuals.Current, out var curr) ||
-                !AppearanceSystem.TryGetData<double>(uid, RMCShieldVisuals.Max, out var max))
+                !AppearanceSystem.TryGetData<FixedPoint2>(uid, RMCShieldVisuals.Max, out var max))
                 return;
 
             var percent = curr / max;
