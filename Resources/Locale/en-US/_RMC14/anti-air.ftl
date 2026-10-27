@@ -1,0 +1,16 @@
+rmc-anti-air-window-title = IX-50 MGAD System Console
+rmc-anti-air-zone-none = Zone Not Selected
+rmc-anti-air-clear = Clear Targeting
+rmc-anti-air-zone-selected = {$zone} (Selected)
+rmc-anti-air-status-operational = Fully Operational
+rmc-anti-air-status-disabled = Disabled
+rmc-anti-air-status-engaged = Engaged
+rmc-anti-air-status-disengaged = Disengaged
+rmc-anti-air-status = [bold]IX-50 MGAD Cannon Subsystem[/bold] | Status: {$status} | Targeting: {$zone}
+rmc-anti-air-console-disabled = The IX-50 MGAD system is disabled.
+rmc-anti-air-ares-target-set = MGAD targeting set to {$zone}.
+rmc-anti-air-ares-target-cleared = MGAD targeting cleared.
+rmc-anti-air-hijack-deterred = A hostile aircraft on course for the {$zone} has been successfully deterred.
+rmc-anti-air-dropship-jostles = The ship jostles violently as explosions rock the ship!
+rmc-anti-air-dropship-turns = You feel the ship turning sharply as it adjusts its course!
+rmc-overwatch-anti-air-status = IX-50 MGAD Cannon Subsystem: {$status} | Targeting: {$zone} | {$engagement}
