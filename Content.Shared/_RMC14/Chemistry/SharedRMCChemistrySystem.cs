@@ -1,24 +1,30 @@
-﻿using System.Linq;
+using Content.Shared._RMC14.ARES;
+using Content.Shared._RMC14.ARES.Logs;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Scaling;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
+using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using System.Linq;
 
 namespace Content.Shared._RMC14.Chemistry;
 
 public abstract class SharedRMCChemistrySystem : EntitySystem
 {
+    [Dependency] private readonly ARESCoreSystem _core = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
@@ -29,8 +35,11 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
     [Dependency] private readonly ScalingSystem _scaling = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IConfigurationManager _configuration = default!;
 
     private readonly List<Entity<RMCChemicalDispenserComponent>> _dispensers = new();
+    private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabMedicalLogs";
+    private List<string> _reagentWatchlist = new List<string> { "RMCEthanol" };
 
     public override void Initialize()
     {
@@ -59,6 +68,8 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
                 subs.Event<RMCChemicalDispenserEjectBeakerBuiMsg>(OnChemicalDispenserEjectBeakerMsg);
                 subs.Event<RMCChemicalDispenserDispenseBuiMsg>(OnChemicalDispenserDispenseMsg);
             });
+
+        Subs.CVar(_configuration, RMCCVars.RMCReagentWatchList, OnReagentWatchListChange, false);
     }
 
     private void OnSolutionGetState(Entity<SolutionComponent> ent, ref ComponentGetState args)
@@ -288,6 +299,17 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
 
         ChangeStorageEnergy(storage, storage.Comp.Energy - cost);
         _solution.TryAddReagent(solutionEnt.Value, args.Reagent, ent.Comp.DispenseSetting);
+
+        foreach (string watchedReagent in _reagentWatchlist)
+        {
+            if (string.Equals(args.Reagent, watchedReagent))
+            {
+                var name = args.Reagent;
+                if (_rmcReagent.TryIndex(args.Reagent, out var rmcReagentProto))
+                    name = rmcReagentProto.LocalizedName;
+                _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} dispensed {dispense}u of {name}.");
+            }
+        }
     }
 
     public bool TryGetStorage(EntProtoId network, out Entity<RMCChemicalStorageComponent> storage)
@@ -387,5 +409,12 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
                 Dirty(dispenser);
             }
         }
+    }
+
+    private void OnReagentWatchListChange(string value, in CVarChangeInfo info)
+    {
+        List<string> newWatchList = value.Split(",").ToList();
+
+        _reagentWatchlist = newWatchList;
     }
 }

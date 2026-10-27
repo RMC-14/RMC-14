@@ -148,6 +148,11 @@
                         <BoxContainer Orientation="Vertical" VerticalExpand="True">
                             <RichTextLabel Name="LogsName" Access="Public" Text="[font size= 16]Logs: ERROR" Margin="0 10 0 0"/>
                             <RichTextLabel Name="LogsDescription" Access="Public" Text="[font size= 12]Description: ERROR" Margin="0 0 0 10"/>
+                            <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                                <RichTextLabel Name="LogSearch" Access="Public" Text="[font size= 12]Search " Margin="0 0 0 10"/>
+                                <LineEdit Name="LogSearchTextBox" Access="Public" HorizontalExpand="True" Margin="0 0 0 5" />
+                                <Button Name="LogSearchButton" Access="Public" Text="Search"/>
+                            </BoxContainer>
                             <userInterface:BlueHorizontalSeparator Margin="0 0 0 7.5"/>
                             <BoxContainer HorizontalAlignment="Center">
                             <Button Name="LogLeft" Access="Public" Text="🠈" MaxHeight="30" MinWidth="40" Margin="2.5 0 2.5 2.5" StyleClasses="OpenBoth" HorizontalAlignment="Center"/>
