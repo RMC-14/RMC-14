@@ -30,6 +30,9 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: NpcFactionMember
+      factions:
+      - Provost
     - type: Skills
       skills:
         RMCSkillCqc: 3
