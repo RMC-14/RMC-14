@@ -7,6 +7,11 @@
     camouflage: Jungle
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingLV624
+    commandingOfficerBriefings:
+      Unaligned: RMCPaperCOBriefingLV624Unaligned
+      Hawks: RMCPaperCOBriefingLV624Hawks
+      Doves: RMCPaperCOBriefingLV624Doves
+      Magpies: RMCPaperCOBriefingLV624Magpies
     announcements:
     - text: rmc-announcement-planet-lv
     #smallHostVariants:
@@ -77,6 +82,11 @@
     - text: rmc-announcement-planet-solaris
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingSolaris
+    commandingOfficerBriefings:
+      Unaligned: RMCPaperCOBriefingSolarisUnaligned
+      Hawks: RMCPaperCOBriefingSolarisHawks
+      Doves: RMCPaperCOBriefingSolarisDoves
+      Magpies: RMCPaperCOBriefingSolarisMagpies
     #smallHostVariants:
       #RMCMobSmallHostNeaera
     nightmareScenarios:
@@ -169,6 +179,11 @@
     camouflage: Snow
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingShivas
+    commandingOfficerBriefings:
+      Unaligned: RMCPaperCOBriefingShivasUnaligned
+      Hawks: RMCPaperCOBriefingShivasHawks
+      Doves: RMCPaperCOBriefingShivasDoves
+      Magpies: RMCPaperCOBriefingShivasMagpies
     announcements:
     - text: rmc-announcement-planet-shiva
     #smallHostVariants:
@@ -223,6 +238,11 @@
     minPlayers: 130
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingFiorina
+    commandingOfficerBriefings:
+      Unaligned: RMCPaperCOBriefingFiorinaUnaligned
+      Hawks: RMCPaperCOBriefingFiorinaHawks
+      Doves: RMCPaperCOBriefingFiorinaDoves
+      Magpies: RMCPaperCOBriefingFiorinaMagpies
     announcements:
     - text: rmc-announcement-planet-fiorina
     #smallHostVariants:
@@ -277,6 +297,11 @@
     map: /Maps/_RMC14/trijent.yml
     camouflage: Desert
     minPlayers: 130
+    commandingOfficerBriefings:
+      Unaligned: RMCPaperCOBriefingTrijentUnaligned
+      Hawks: RMCPaperCOBriefingTrijentHawks
+      Doves: RMCPaperCOBriefingTrijentDoves
+      Magpies: RMCPaperCOBriefingTrijentMagpies
     announcements:
     - text: rmc-announcement-planet-trijent
     #smallHostVariants:
@@ -375,6 +400,11 @@
     camouflage: Jungle
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingVaradero
+    commandingOfficerBriefings:
+      Unaligned: RMCPaperCOBriefingVaraderoUnaligned
+      Hawks: RMCPaperCOBriefingVaraderoHawks
+      Doves: RMCPaperCOBriefingVaraderoDoves
+      Magpies: RMCPaperCOBriefingVaraderoMagpies
     announcements:
     - text: rmc-announcement-planet-varadero
     - text: rmc-announcement-planet-varadero-1
@@ -440,6 +470,11 @@
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/kutjevo.yml
     camouflage: Desert
+    commandingOfficerBriefings:
+      Unaligned: RMCPaperCOBriefingKutjevoUnaligned
+      Hawks: RMCPaperCOBriefingKutjevoHawks
+      Doves: RMCPaperCOBriefingKutjevoDoves
+      Magpies: RMCPaperCOBriefingKutjevoMagpies
     announcements:
     - text: rmc-announcement-planet-kutjevo
     #smallHostVariants:
@@ -476,6 +511,11 @@
     camouflage: Classic
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingChances
+    commandingOfficerBriefings:
+      Unaligned: RMCPaperCOBriefingChancesUnaligned
+      Hawks: RMCPaperCOBriefingChancesHawks
+      Doves: RMCPaperCOBriefingChancesDoves
+      Magpies: RMCPaperCOBriefingChancesMagpies
     announcements:
     - text: rmc-announcement-planet-chances
     #smallHostVariants:
@@ -512,6 +552,11 @@
     camouflage: Urban
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingHybrisa
+    commandingOfficerBriefings:
+      Unaligned: RMCPaperCOBriefingHybrisaUnaligned
+      Hawks: RMCPaperCOBriefingHybrisaHawks
+      Doves: RMCPaperCOBriefingHybrisaDoves
+      Magpies: RMCPaperCOBriefingHybrisaMagpies
     announcements:
     - text: rmc-announcement-planet-hybrisa
     #smallHostVariants:
@@ -587,6 +632,11 @@
     minPlayers: 130
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingSorokyne
+    commandingOfficerBriefings:
+      Unaligned: RMCPaperCOBriefingSorokyneUnaligned
+      Hawks: RMCPaperCOBriefingSorokyneHawks
+      Doves: RMCPaperCOBriefingSorokyneDoves
+      Magpies: RMCPaperCOBriefingSorokyneMagpies
     announcements:
     - text: rmc-announcement-planet-sorokyne
     #smallHostVariants:

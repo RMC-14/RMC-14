@@ -1,0 +1,56 @@
+# Commanding Officer career loadouts
+- type: loadout
+  id: RMCCOCareerInfantry
+  cost: 0
+  componentsAdd: true
+  dummyEntity: RMCCOCareerInfantryPreview
+  equipment:
+    none: RMCCOCareerInfantryData
+
+- type: loadout
+  id: RMCCOCareerEngineering
+  cost: 0
+  componentsAdd: true
+  dummyEntity: RMCCOCareerEngineeringPreview
+  equipment:
+    none: RMCCOCareerEngineeringData
+
+- type: loadout
+  id: RMCCOCareerMedical
+  cost: 0
+  componentsAdd: true
+  dummyEntity: RMCCOCareerMedicalPreview
+  equipment:
+    none: RMCCOCareerMedicalData
+
+- type: loadout
+  id: RMCCOCareerIntel
+  cost: 0
+  componentsAdd: true
+  dummyEntity: RMCCOCareerIntelPreview
+  equipment:
+    none: RMCCOCareerIntelData
+
+- type: loadout
+  id: RMCCOCareerLogistics
+  cost: 0
+  componentsAdd: true
+  dummyEntity: RMCCOCareerLogisticsPreview
+  equipment:
+    none: RMCCOCareerLogisticsData
+
+- type: loadout
+  id: RMCCOCareerAviation
+  cost: 0
+  componentsAdd: true
+  dummyEntity: RMCCOCareerAviationPreview
+  equipment:
+    none: RMCCOCareerAviationData
+
+- type: loadout
+  id: RMCCOCareerTanker
+  cost: 0
+  componentsAdd: true
+  dummyEntity: RMCCOCareerTankerPreview
+  equipment:
+    none: RMCCOCareerTankerData
