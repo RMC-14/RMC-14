@@ -5,7 +5,7 @@ using Robust.Shared.Toolshed;
 
 namespace Content.Server._RMC14.Bioscan;
 
-[ToolshedCommand, AdminCommand(AdminFlags.Moderator)]
+[ToolshedCommand, AdminCommand(AdminFlags.Fun)]
 public sealed class BioscanCommand : ToolshedCommand
 {
     private BioscanSystem? _bioscan;
