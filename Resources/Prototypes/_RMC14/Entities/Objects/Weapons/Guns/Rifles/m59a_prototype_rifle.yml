@@ -70,10 +70,12 @@
           tags:
           - CMMagazineRifleM54C
           - CMMagazineRifleM54CAP
+          - RMCMagazineRifleM54CHEAP
+          - RMCMagazineRifleM54CIncendiary
           - CMMagazineRifleM54CExt
           - CMMagazineRifleM54CMK1
           - CMMagazineRifleM54CMK1AP
-          - RMCMagazineRifleM54CIncendiary
+          - RMCMagazineRifleM54CMK1HEAP
           - RMCMagazineRifleM54CMK1Incendiary
         startingItem: CMMagazineRifleM54CMK1AP
   - type: GunDamageModifier
