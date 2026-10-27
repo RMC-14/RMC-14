@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 09/05/2026 19:48:16
-  entityCount: 30966
+  time: 10/27/2026 21:55:44
+  entityCount: 30961
 maps:
 - 1
 grids:
@@ -46542,7 +46542,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -123906.164
+      secondsUntilStateChange: -124214.734
       state: Opening
 - proto: CMAirlockMedicalLocked
   entities:
@@ -47748,24 +47748,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -22.5,17.5
-      parent: 1
-  - uid: 30878
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 23.5,54.5
-      parent: 1
-  - uid: 30879
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 23.5,55.5
-      parent: 1
-  - uid: 30880
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 24.5,56.5
       parent: 1
 - proto: CMBarricadeMetal
   entities:
@@ -57272,7 +57254,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 10666.0893339
     - type: Door
-      secondsUntilStateChange: -111484.82
+      secondsUntilStateChange: -111793.39
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -57288,7 +57270,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 10666.0893339
     - type: Door
-      secondsUntilStateChange: -111484.82
+      secondsUntilStateChange: -111793.39
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -65852,7 +65834,7 @@ entities:
     - type: Transform
       pos: 59.5,-14.5
       parent: 1
-- proto: CMRodMetal
+- proto: CMRodMetal1
   entities:
   - uid: 3692
     components:
@@ -65937,28 +65919,6 @@ entities:
     - type: Transform
       pos: -32.5,16.5
       parent: 1
-  - uid: 29647
-    components:
-    - type: Transform
-      pos: 41.5,-0.5
-      parent: 1
-  - uid: 29648
-    components:
-    - type: Transform
-      pos: 39.5,-0.5
-      parent: 1
-  - uid: 29649
-    components:
-    - type: Transform
-      pos: 38.5,0.5
-      parent: 1
-  - uid: 29665
-    components:
-    - type: Transform
-      pos: 43.5,16.5
-      parent: 1
-- proto: CMRodMetal1
-  entities:
   - uid: 3709
     components:
     - type: Transform
@@ -65999,6 +65959,21 @@ entities:
     - type: Transform
       pos: 47.5,39.5
       parent: 1
+  - uid: 29647
+    components:
+    - type: Transform
+      pos: 41.5,-0.5
+      parent: 1
+  - uid: 29648
+    components:
+    - type: Transform
+      pos: 39.5,-0.5
+      parent: 1
+  - uid: 29649
+    components:
+    - type: Transform
+      pos: 38.5,0.5
+      parent: 1
   - uid: 29652
     components:
     - type: Transform
@@ -66008,6 +65983,11 @@ entities:
     components:
     - type: Transform
       pos: 58.5,15.5
+      parent: 1
+  - uid: 29665
+    components:
+    - type: Transform
+      pos: 43.5,16.5
       parent: 1
   - uid: 30003
     components:
@@ -114534,11 +114514,6 @@ entities:
       parent: 1
 - proto: RMCInformationDogtag
   entities:
-  - uid: 250
-    components:
-    - type: Transform
-      pos: 43.5,49.5
-      parent: 1
   - uid: 9160
     components:
     - type: MetaData
@@ -114600,7 +114575,7 @@ entities:
     - type: MetaData
       desc: A fallen marine's information dog tag. It reads, Sergeant Douglas 'Bedwetter' Smith
     - type: Transform
-      pos: 24.5,55.5
+      pos: 43.51829,49.512985
       parent: 1
 - proto: RMCIntelDataTerminal
   entities:
@@ -117128,12 +117103,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 20.5,27.5
-      parent: 1
-  - uid: 9570
-    components:
-    - type: Transform
-      rot: 4.71238898038469 rad
-      pos: 21.5,86.5
       parent: 1
   - uid: 9571
     components:
