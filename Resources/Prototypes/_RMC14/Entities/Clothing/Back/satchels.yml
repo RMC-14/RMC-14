@@ -1205,8 +1205,8 @@
     contents:
     - id: RMCMRESPP
     - id: CMFireExtinguisherPortable
-    - id: CMPackFlare
-    - id: CMPackFlare
+    - id: RMCPackFlareR44
+    - id: RMCPackFlareR44
 
 - type: entity
   parent: RMCSatchelSPP
