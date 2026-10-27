@@ -18,7 +18,7 @@ public sealed partial class FTLMapComponent : Component
     /// What parallax to use for the background, immediately gets deffered to ParallaxComponent.
     /// </summary>
     [DataField]
-    public string Parallax = "FastSpace";
+    public string Parallax = "RMCParallaxDarkClouds"; // RMC edit: "FastSpace" -> "RMCParallaxDarkClouds"
 
     /// <summary>
     /// Can FTL on this map only be done to beacons.
