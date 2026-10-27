@@ -6,11 +6,13 @@ using Content.Server.Explosion.Components;
 using Content.Server.Explosion.EntitySystems;
 using Content.Server.Popups;
 using Content.Shared._RMC14.Explosion;
+using Content.Shared._RMC14.Ladder;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Voicelines;
 using Content.Shared.Coordinates;
 using Content.Shared.Decals;
 using Content.Shared.Examine;
+using Content.Shared.Explosion.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.Popups;
 using Content.Shared.Sticky;
@@ -51,6 +53,8 @@ public sealed class RMCExplosionSystem : SharedRMCExplosionSystem
         SubscribeLocalEvent<RMCScorchEffectComponent, CMExplosiveTriggeredEvent>(OnExplosionEffectTriggered);
 
         SubscribeLocalEvent<RandomTimerTriggerComponent, ExaminedEvent>(OnRandomTimerTriggerExamined);
+
+        SubscribeLocalEvent<OnUseTimerTriggerComponent, MovedThroughPassageEvent>(OnMovedThroughPassage);
 
         CacheDecals("RMCScorch");
         CacheDecals("RMCScorchSmall");
@@ -169,6 +173,11 @@ public sealed class RMCExplosionSystem : SharedRMCExplosionSystem
         {
             args.PushMarkup($"[color=cyan]This will have a random timer between {ent.Comp.Min} and {ent.Comp.Max} seconds on use![/color]");
         }
+    }
+
+    private void OnMovedThroughPassage(Entity<OnUseTimerTriggerComponent> ent, ref MovedThroughPassageEvent args)
+    {
+        _trigger.StartTimer(ent.Owner, args.User);
     }
 
     public override void QueueExplosion(
