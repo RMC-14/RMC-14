@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Shared.Damage;
 using Content.Shared.Physics;
 using Robust.Shared.Audio;
@@ -56,4 +57,10 @@ public sealed partial class XenoLeapingComponent : Component
 
     [DataField, AutoNetworkedField]
     public CollisionGroup IgnoredCollisionGroupSmall;
+
+    [DataField, AutoNetworkedField]
+    public Vector2 Direction;
+
+    [DataField, AutoNetworkedField]
+    public HashSet<string> IgnoreFixtureIds = ["flammable"];
 }
