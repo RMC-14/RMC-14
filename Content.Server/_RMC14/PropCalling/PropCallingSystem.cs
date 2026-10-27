@@ -3,7 +3,6 @@ using Content.Shared._RMC14.PropCalling;
 using Content.Shared._RMC14.PropCalling.Events;
 using Content.Shared.Actions;
 using Content.Shared.Toggleable;
-using JetBrains.FormatRipper.Elf;
 using Robust.Shared.Configuration;
 
 namespace Content.Server._RMC14.PropCalling;
