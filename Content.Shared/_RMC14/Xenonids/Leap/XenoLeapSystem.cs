@@ -81,6 +81,9 @@ public sealed class XenoLeapSystem : EntitySystem
     private bool _logPrediction = false;
 
     private HashSet<EntityUid> _colliding = new();
+    // TODO RMC14 not sure how many points are actually needed here to be safe, but this is a very small
+    // data structure to overallocating should not cause problems.
+    private Vector2[] _points = new Vector2[16];
 
     public override void Initialize()
     {
@@ -240,8 +243,6 @@ public sealed class XenoLeapSystem : EntitySystem
         var contacts = _physics.GetContacts((xeno, fixtures));
         _colliding.Clear();
 
-        var velocity = physics.LinearVelocity;
-
         //Handle close-range or same-tile leaps
         while (contacts.MoveNext(out var contact))
         {
@@ -255,13 +256,17 @@ public sealed class XenoLeapSystem : EntitySystem
                 continue;
 
             // If the leaper is trying to move AWAY from the contact, ignore it.
-            contact.GetWorldManifold(
-                _physics.GetPhysicsTransform(contact.EntityA),
-                _physics.GetPhysicsTransform(contact.EntityB),
-                out var normal);
-            normal = contact.EntityA == xeno.Owner ? -normal : normal;
-            if (normal.LengthSquared() > 0 && Vector2.Dot(direction, normal) > 0)
-                continue;
+            if (contact.Manifold.PointCount > 0 && contact.Manifold.PointCount <= _points.Length)
+            {
+                contact.GetWorldManifold(
+                    _physics.GetPhysicsTransform(contact.EntityA),
+                    _physics.GetPhysicsTransform(contact.EntityB),
+                    out _,
+                    _points);
+                var toContact = _points[0] - origin.Position;
+                if (Vector2.Dot(direction, toContact) < 0)
+                    continue;
+            }
 
             _colliding.Add(contact.OtherEnt(xeno));
         }
