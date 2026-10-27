@@ -37,6 +37,44 @@
   - type: Sprite
     state: ambulance_f
 
+# Fire Ambulance
+
+- type: entity
+  parent: RMCPropVehicleAmbulance
+  id: RMCPropVehicleAmbulanceRed
+  components:
+  - type: Sprite
+    state: ambulance_red
+
+- type: entity
+  parent: RMCPropVehicleAmbulanceF
+  id: RMCPropVehicleAmbulanceFRed
+  suffix: Flipped
+  components:
+  - type: Sprite
+    state: ambulance_red_f
+
+# Firetruck
+
+- type: entity
+  parent: RMCPropVehicleLargeBase
+  id: RMCPropVehicleFiretruck
+  name: fire-truck
+  description: It's locked and seems to be broken down, forget driving this.
+  components:
+  - type: Sprite
+    state: fire_truck
+
+- type: entity
+  parent: RMCPropVehicleLargeBase
+  id: RMCPropVehicleFireTruckF
+  name: fire-truck
+  description: It's locked and seems to be broken down, forget driving this.
+  suffix: Flipped
+  components:
+  - type: Sprite
+    state: fire_truck_f
+
 # Heavy-Loader Truck
 
 - type: entity

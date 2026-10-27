@@ -28,3 +28,8 @@
   parent: RMCFloorHybrisaWoodBase
   id: RMCFloorHybrisaWoodBlack
   sprite: /Textures/_RMC14/Tiles/hybrisa/blackwood.png
+
+- type: tile
+  parent: RMCFloorHybrisaWoodBase
+  id: RMCFloorHybrisaWoodWhite
+  sprite: /Textures/_RMC14/Tiles/hybrisa/whitewood.png

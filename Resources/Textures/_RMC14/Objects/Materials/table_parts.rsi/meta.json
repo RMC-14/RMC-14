@@ -83,6 +83,9 @@
     {
       "name": "wood-inhand-right",
       "directions": 4
+    },
+    {
+      "name": "fbwood"
     }
   ]
 }

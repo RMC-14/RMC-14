@@ -545,3 +545,32 @@
     mask: RMCMaskRebreather
     outerClothing: RMCCoatSnowSoviet
     id: CMIDCardColonist
+
+# Hybrisa unfortunate firestation civ
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseUnfortunateCivilian
+  components:
+  - type: VictimBurst
+  - type: Loadout
+    prototypes: [ RMCGearCorpseUnfortunateCivilian ]
+
+- type: startingGear
+  id: RMCGearCorpseUnfortunateCivilian
+  equipment:
+    jumpsuit: RMCJumpsuitCivilian
+    back: RMCSatchelLightpack
+    belt: CMBeltMarine
+    head: RMCArmorHelmetFirefighter
+    shoes: RMCShoesCombat
+    gloves: RMCHandsCombat
+    ears: CMHeadsetColony
+    mask: CMMaskGas
+    outerClothing: RMCArmorFirefighter
+    id: RMCIDCardFireProtectionSpecialistCorpse
+  storage:
+    back:
+    - CMUpgradedBurnKit10
+    - RMCWeaponPistolM82F
+    - RMCAttachmentUnderbarrelExtinguisher
+    - CMFireExtinguisherPortable

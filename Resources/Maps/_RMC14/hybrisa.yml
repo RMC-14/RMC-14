@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 08/08/2026 01:50:37
-  entityCount: 59592
+  time: 10/25/2026 17:54:20
+  entityCount: 59594
 maps:
 - 1
 grids:
@@ -75777,25 +75777,6 @@ entities:
     - type: Transform
       pos: -151.5,-78.5
       parent: 1
-- proto: BoxMousetrap
-  entities:
-  - uid: 104
-    components:
-    - type: Transform
-      parent: 103
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 105
-    components:
-    - type: Transform
-      pos: -69.540375,-130.54498
-      parent: 1
-  - uid: 106
-    components:
-    - type: Transform
-      pos: -69.40584,-130.47159
-      parent: 1
 - proto: BoxZiptie
   entities:
   - uid: 107
@@ -82831,13 +82812,6 @@ entities:
     - ContainerContainer
     - Speech
     - RequisitionsComputer
-- proto: RMCAttachmentXMVESG1FlamerNozzle
-  entities:
-  - uid: 1341
-    components:
-    - type: Transform
-      pos: -27.091988,-83.57792
-      parent: 1
 - proto: CMAutolathe
   entities:
   - uid: 1342
@@ -101377,7 +101351,7 @@ entities:
       containers:
       - drink
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.78854895
+      sprayFizzinessThresholdRoll: 0.036569614
     - type: MeleeWeapon
       nextAttack: -8152.2251811
     - type: EmitSoundOnCollide
@@ -105639,7 +105613,7 @@ entities:
       pos: -202.5,-33.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -43430.266
+      secondsUntilStateChange: -43518.477
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -144730,7 +144704,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -168014.97
+      secondsUntilStateChange: -168103.17
       state: Opening
   - uid: 12644
     components:
@@ -145724,6 +145698,13 @@ entities:
     components:
     - type: Transform
       pos: -79.5,-115.5
+      parent: 1
+- proto: RMCAttachmentXMVESG1FlamerNozzle
+  entities:
+  - uid: 1341
+    components:
+    - type: Transform
+      pos: -27.091988,-83.57792
       parent: 1
 - proto: RMCBackpackRTO
   entities:
@@ -164457,6 +164438,25 @@ entities:
     - type: Transform
       pos: -157.45714,-101.23829
       parent: 1
+- proto: RMCBoxMousetraps
+  entities:
+  - uid: 104
+    components:
+    - type: Transform
+      parent: 103
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+  - uid: 105
+    components:
+    - type: Transform
+      pos: -69.540375,-130.54498
+      parent: 1
+  - uid: 106
+    components:
+    - type: Transform
+      pos: -69.40584,-130.47159
+      parent: 1
 - proto: RMCBoxMRE
   entities:
   - uid: 16130
@@ -181418,7 +181418,7 @@ entities:
       pos: -215.5,-133.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -110788.13
+      secondsUntilStateChange: -110876.35
       state: Opening
 - proto: RMCCurtainRed
   entities:
@@ -181611,7 +181611,7 @@ entities:
       pos: -37.5,-24.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -84389.875
+      secondsUntilStateChange: -84478.09
       state: Opening
   - uid: 18991
     components:
@@ -241544,6 +241544,20 @@ entities:
     - type: Transform
       pos: -194.5,-22.5
       parent: 1
+- proto: RMCMapInsertHybrisaFireStation
+  entities:
+  - uid: 28037
+    components:
+    - type: Transform
+      pos: -38.5,-89.5
+      parent: 1
+- proto: RMCMapInsertHybrisaRecordsBureauComplex
+  entities:
+  - uid: 28038
+    components:
+    - type: Transform
+      pos: -174.5,-25.5
+      parent: 1
 - proto: RMCMapInsertHybrisaSurvivorSpawns
   entities:
   - uid: 29533
@@ -280582,6 +280596,11 @@ entities:
       parent: 1
 - proto: RMCPropVehicleLongTruckWeYaBlue
   entities:
+  - uid: 28039
+    components:
+    - type: Transform
+      pos: -38.437496,-114.5
+      parent: 1
   - uid: 36071
     components:
     - type: Transform
@@ -280591,11 +280610,6 @@ entities:
     components:
     - type: Transform
       pos: -186.5,-61.5
-      parent: 1
-  - uid: 36073
-    components:
-    - type: Transform
-      pos: -38.679497,-114.45501
       parent: 1
 - proto: RMCPropVehicleMonoSupronBlack
   entities:

@@ -97,3 +97,12 @@
   components:
   - type: IdCard
     jobTitle: rmc-job-name-survivor-varadero-base-police
+
+- type: entity
+  parent: CMIDCardLanyard
+  id: RMCIDCardFireProtectionSpecialistCorpse
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: IdCard
+    jobTitle: rmc-job-name-survivor-fire-protection-specialist-hybrisa
+
