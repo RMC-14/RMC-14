@@ -1,0 +1,18 @@
+<BoxContainer
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Medical.CrewMonitoring"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    Orientation="Vertical"
+    HorizontalExpand="True">
+    <PanelContainer>
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BackgroundColor="#1A1E22" BorderColor="#303840" BorderThickness="1" />
+        </PanelContainer.PanelOverride>
+        <Collapsible Name="Collapsible" Access="Public">
+            <CollapsibleHeading Name="Heading" Access="Public" MinHeight="30" />
+            <CollapsibleBody>
+                <BoxContainer Name="Rows" Access="Public" Orientation="Vertical" HorizontalExpand="True" />
+            </CollapsibleBody>
+        </Collapsible>
+    </PanelContainer>
+</BoxContainer>

@@ -1,0 +1,36 @@
+<controls:RMCPortableCrewMonitorWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Medical.CrewMonitoring"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    Title="{Loc rmc-portable-crew-monitor-title}"
+    MinSize="760 500"
+    SetSize="880 560">
+    <PanelContainer Name="MainContainer" Access="Public" StyleClasses="WindowBackground">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BackgroundColor="#121212" />
+        </PanelContainer.PanelOverride>
+        <BoxContainer Orientation="Horizontal" Margin="8" SeparationOverride="8">
+            <PanelContainer Name="SignalsPanel" Access="Public"
+                            MinWidth="300" HorizontalExpand="True" VerticalExpand="True"
+                            SizeFlagsStretchRatio="1">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat BackgroundColor="#181D21" BorderColor="#3A454F" BorderThickness="1" />
+                </PanelContainer.PanelOverride>
+                <BoxContainer Orientation="Vertical" Margin="6" SeparationOverride="6">
+                    <LineEdit Name="Search" Access="Public" PlaceHolder="{Loc rmc-portable-crew-monitor-search}" />
+                    <Button Name="ScanButton" Access="Public" Text="{Loc rmc-portable-crew-monitor-scan}" />
+                    <ScrollContainer Name="SignalsScroll" Access="Public" HScrollEnabled="False" VScrollEnabled="True"
+                                     HorizontalExpand="True" VerticalExpand="True" Visible="False">
+                        <BoxContainer Name="Signals" Access="Public" Orientation="Vertical"
+                                      HorizontalExpand="True" SeparationOverride="3" />
+                    </ScrollContainer>
+                    <Label Name="StateLabel" Access="Public" Text="{Loc rmc-portable-crew-monitor-scan-prompt}"
+                           Align="Center" HorizontalExpand="True" VerticalExpand="True"
+                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </BoxContainer>
+            </PanelContainer>
+            <controls:RMCPortableCrewMonitorRadar Name="Radar" Access="Public"
+                                                  SizeFlagsStretchRatio="1" />
+        </BoxContainer>
+    </PanelContainer>
+</controls:RMCPortableCrewMonitorWindow>
