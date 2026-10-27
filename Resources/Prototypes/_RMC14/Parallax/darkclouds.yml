@@ -11,9 +11,11 @@
         path: "/Textures/_RMC14/Parallaxes/darkernoise.png"
       slowness: 0.82
       scale: 1.4, 1.4
-
+      scrolling: 0, -0.2
+      worldHomePosition: -624, 333
     - texture:
         !type:ImageParallaxTextureSource
         path: "/Textures/_RMC14/Parallaxes/darknoise.png"
       slowness: 0.62
       scale: 2.2, 2.2
+      scrolling: 0, -0.2

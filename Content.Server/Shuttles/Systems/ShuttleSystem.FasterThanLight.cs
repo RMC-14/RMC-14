@@ -44,7 +44,7 @@ public sealed partial class ShuttleSystem
 
     private readonly SoundSpecifier _travelSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/Shuttle/dropship_travel.ogg")
     {
-        Params = AudioParams.Default.WithVolume(6f),
+        Params = AudioParams.Default.WithVolume(6f).WithLoop(true),
     };
 
     private readonly SoundSpecifier _arrivalSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/Shuttle/engine_landing.ogg")
