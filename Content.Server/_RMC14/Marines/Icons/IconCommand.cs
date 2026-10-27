@@ -1,11 +1,11 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text.Json;
 using Content.Server.Administration;
 using Content.Shared._RMC14.Marines;
 using Content.Shared.Administration;
+using Content.Shared.StatusIcon;
 using Robust.Shared.Console;
-using Robust.Shared.ContentPack;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Toolshed;
 using Robust.Shared.Toolshed.Errors;
 using Robust.Shared.Toolshed.Syntax;
@@ -17,9 +17,7 @@ namespace Content.Server._RMC14.Marines.Icons;
 [ToolshedCommand, AdminCommand(AdminFlags.VarEdit)]
 public sealed class IconCommand : ToolshedCommand
 {
-    private static readonly ResPath JobIconsRoot = new("/Textures/_RMC14/Interface/job_icons");
-
-    [Dependency] private readonly IResourceManager _resource = default!;
+    [Dependency] private readonly IPrototypeManager _protoManager = default!;
 
     private SharedMarineSystem? _marineSystem;
 
@@ -59,7 +57,7 @@ public sealed class IconCommand : ToolshedCommand
         var icon = TryFindIcon(rsiState);
         if (icon == null)
         {
-            ctx.WriteLine($"No .rsi under {JobIconsRoot} contains a state named '{rsiState}'.");
+            ctx.WriteLine($"No job icon prototype has a state named '{rsiState}'.");
             return marine;
         }
 
@@ -96,7 +94,7 @@ public sealed class IconCommand : ToolshedCommand
 
     private SpriteSpecifier.Rsi? TryFindIcon(string rsiState)
     {
-        foreach (var (rsi, state) in EnumerateStates(_resource))
+        foreach (var (rsi, state) in EnumerateStates(_protoManager))
         {
             if (state == rsiState)
                 return new SpriteSpecifier.Rsi(rsi, state);
@@ -105,36 +103,20 @@ public sealed class IconCommand : ToolshedCommand
         return null;
     }
 
-    // reads from all Meta.jsons under the JobIconsRoot
-    private static IEnumerable<(ResPath Rsi, string State)> EnumerateStates(IResourceManager resource)
+    // enumerates RSI states from all non-abstract JobIconPrototypes
+    private static IEnumerable<(ResPath Rsi, string State)> EnumerateStates(IPrototypeManager protoManager)
     {
-        foreach (var meta in resource.ContentFindFiles(JobIconsRoot))
+        foreach (var proto in protoManager.EnumeratePrototypes<JobIconPrototype>())
         {
-            if (meta.Filename != "meta.json")
-                continue;
-
-            if (!resource.TryContentFileRead(meta, out var stream))
-                continue;
-
-            using (stream)
-            {
-                using var doc = JsonDocument.Parse(stream);
-                if (!doc.RootElement.TryGetProperty("states", out var states))
-                    continue;
-
-                foreach (var element in states.EnumerateArray())
-                {
-                    if (element.TryGetProperty("name", out var name) && name.GetString() is { } n)
-                        yield return (meta.Directory, n);
-                }
-            }
+            if (!proto.Abstract && proto.Icon is SpriteSpecifier.Rsi rsi)
+                yield return (rsi.RsiPath, rsi.RsiState);
         }
     }
 
     // TAB completion of job icon names for icon:set NO " " NEEDED!!
     public sealed class MarineIconStateParser : CustomTypeParser<string>
     {
-        [Dependency] private readonly IResourceManager _resource = default!;
+        [Dependency] private readonly IPrototypeManager _protoManager = default!;
 
         public override bool TryParse(ParserContext ctx, [NotNullWhen(true)] out string? result)
         {
@@ -150,7 +132,7 @@ public sealed class IconCommand : ToolshedCommand
 
         public override CompletionResult TryAutocomplete(ParserContext parserContext, CommandArgument? arg)
         {
-            var states = EnumerateStates(_resource)
+            var states = EnumerateStates(_protoManager)
                 .Select(x => x.State)
                 .Distinct()
                 .OrderBy(x => x);

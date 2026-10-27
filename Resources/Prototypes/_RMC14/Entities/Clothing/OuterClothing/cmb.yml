@@ -1,13 +1,6 @@
 - type: entity
   id: RMCBaseCMBArmor
   abstract: true
-  components:
-  - type: ClothingRequireEquipped
-    autoUnequip: true
-    denyReason: rmc-armor-not-cmb-jumpsuit
-    whitelist:
-      tags:
-      - RMCUniformCMB
 
 - type: entity
   parent: [RMCBaseCMBArmor, RMCBaseMarineArmorLight]
@@ -81,7 +74,7 @@
   - type: ItemCamouflage
     camouflageVariations: { }
 
-# CMB versions of the UN-M1 riot armor - Identical to riot armor except for sprites and uniform whitelist
+# CMB versions of the UN-M1 riot armor - Identical to riot armor except for sprites
 - type: entity
   parent: RMCArmorPMCRiot
   id: RMCArmorPMCRiotCMB
@@ -91,12 +84,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/CMB/cmb_mobility_armor.rsi
-  - type: ClothingRequireEquipped
-    autoUnequip: true
-    denyReason: rmc-armor-not-cmb-jumpsuit
-    whitelist:
-      tags:
-      - RMCUniformCMB
 
 - type: entity
   parent: CMArmorM3VLSynth
@@ -109,9 +96,3 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/CMB/cmb_mobility_armor.rsi
   - type: ItemCamouflage
     camouflageVariations: { }
-  - type: ClothingRequireEquipped
-    autoUnequip: true
-    denyReason: rmc-armor-not-cmb-jumpsuit
-    whitelist:
-      tags:
-      - RMCUniformCMB

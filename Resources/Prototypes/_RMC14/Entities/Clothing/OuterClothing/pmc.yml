@@ -26,12 +26,6 @@
     - 0,0,3,1 # 2 slots
   - type: ItemCamouflage
     camouflageVariations: { }
-  - type: ClothingRequireEquipped
-    autoUnequip: true
-    denyReason: rmc-armor-not-pmc-jumpsuit
-    whitelist:
-      tags:
-      - RMCUniformPMC
 
 - type: entity
   parent: [RMCArmorM4PMCNoLight, RMCBasePMCArmorLight]
@@ -303,14 +297,6 @@
     bullet: 25 # CLOTHING_ARMOR_MEDIUMHIGH
     bio: 10 # CLOTHING_ARMOR_LOW
     explosionArmor: 25 # CLOTHING_ARMOR_MEDIUMHIGH
-  - type: RemoveComponents
-    components:
-    - type: ClothingRequireEquipped
-      autoUnequip: true
-      denyReason: rmc-armor-not-pmc-jumpsuit
-      whitelist:
-        tags:
-        - RMCUniformPMC
 
 - type: entity
   parent: CMArmorM4PMCLight
@@ -326,11 +312,3 @@
   - type: Storage
     grid:
     - 0,0,1,1 # 1 slot
-  - type: RemoveComponents
-    components:
-    - type: ClothingRequireEquipped
-      autoUnequip: true
-      denyReason: rmc-armor-not-pmc-jumpsuit
-      whitelist:
-        tags:
-        - RMCUniformPMC
