@@ -46,7 +46,7 @@
   parent: CMWebbingBase
   id: CMWebbing
   name: brown magazine webbing
-  description: A sturdy mess of brown synthcotton belts and buckles, ready to share your burden. Able to hold 3 rifle magazines or small items.
+  description: A sturdy mess of brown synthcotton belts and buckles, ready to share your burden. Able to hold three rifle magazines or small items.
   components:
   - type: Sprite
     state: webbing
@@ -99,7 +99,7 @@
   parent: CMWebbingBrown
   id: RMCWebbingLegPouch
   name: camo leg pouch
-  description: A camo conforming leg pouch usually worn by hunters, military and people who dream of being military. Able to hold 5 small items.
+  description: A camo conforming leg pouch usually worn by hunters, military and people who dream of being military. Able to hold five small items.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/leg_pouch/classic.rsi
@@ -117,7 +117,7 @@
   parent: CMWebbingBrown
   id: RMCWebbingLegPouchBlack
   name: black leg pouch
-  description: A black leg pouch usually worn by hunters, military and people who dream of being military. Able to hold 5 small items.
+  description: A black leg pouch usually worn by hunters, military and people who dream of being military. Able to hold five small items.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/leg_pouch/black.rsi
@@ -178,7 +178,7 @@
   parent: CMWebbing
   id: RMCWebbingBlackSmall
   name: black magazine webbing
-  description: A sturdy mess of black synthcotton belts and buckles, ready to share your burden. Able to hold 3 rifle magazines or small items.
+  description: A sturdy mess of black synthcotton belts and buckles, ready to share your burden. Able to hold three rifle magazines or small items.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_black_small.rsi
