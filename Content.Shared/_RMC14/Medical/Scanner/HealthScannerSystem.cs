@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Body;
+using Content.Shared._RMC14.Embeds;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Mobs;
@@ -183,7 +184,12 @@ public sealed class HealthScannerSystem : EntitySystem
 
         var pulse = _rmcPulse.TryGetPulseReading(target, true, out _);
         var bleeding = _rmcBloodstream.IsBleeding(target);
-        var state = new HealthScanState(GetNetEntity(target), blood, maxBlood, temperature, pulse, chemicals, bleeding, scanner.Comp.DetailLevel);
+
+        var embeddedObjectInBodyParts = new List<ForeignObjectEmbeddedEntry>();
+        if (TryComp<ForeignObjectEmbeddedComponent>(target, out var embeddedComponent))
+            embeddedObjectInBodyParts = ForeignObjectEmbeddedUtility.GetEmbeddedObjectInBodyParts(embeddedComponent);
+
+        var state = new HealthScanState(GetNetEntity(target), blood, maxBlood, temperature, pulse, chemicals, bleeding, scanner.Comp.DetailLevel, embeddedObjectInBodyParts);
 
         _ui.SetUiState(scanner.Owner, HealthScannerUIKey.Key, new HealthScannerBuiState(state));
     }

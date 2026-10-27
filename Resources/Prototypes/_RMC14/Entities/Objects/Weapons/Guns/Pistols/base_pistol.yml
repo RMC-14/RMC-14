@@ -137,6 +137,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
+  - type: ShrapnelChanceProjectile
+    sourceId: pistol_bullet
+    embedChance: 0.2
   - type: RMCProjectileDamageFalloff
   - type: RMCProjectileAccuracy
     accuracy: 60
