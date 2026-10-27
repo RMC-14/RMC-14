@@ -2,6 +2,7 @@
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using static Content.Shared._RMC14.Maths.RMCMathExtensions;
 
 namespace Content.Shared._RMC14.Xenonids.Screech;
 
@@ -26,13 +27,13 @@ public sealed partial class XenoScreechComponent : Component
 
     // TODO RMC14 stun less within 4 tiles
     [DataField, AutoNetworkedField]
-    public float StunRange = 7;
+    public float StunRange = CircleAreaFromSquareAbilityRange(6f);
 
     [DataField, AutoNetworkedField]
-    public float ParalyzeRange = 4;
+    public float ParalyzeRange = CircleAreaFromSquareAbilityRange(4f);
 
     [DataField, AutoNetworkedField]
-    public float ParasiteStunRange = 11.2838f;
+    public float ParasiteStunRange = CircleAreaFromSquareAbilityRange(10f);
 
     [DataField, AutoNetworkedField]
     public TimeSpan ParasiteStunTime = TimeSpan.FromSeconds(8);
