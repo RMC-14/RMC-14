@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 using Content.Server.Body.Systems;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Medical.Wounds;
@@ -71,12 +71,16 @@ public sealed class WoundsSystem : SharedWoundsSystem
                     toHeal < FixedPoint2.Zero &&
                     wound.Treated)
                 {
-                    var group = wound.Type switch
+                    ProtoId<DamageGroupPrototype>? group = null;
+
+                    foreach (var woundGroup in comp.WoundGroups)
                     {
-                        WoundType.Brute => comp.BruteWoundGroup,
-                        WoundType.Burn => comp.BurnWoundGroup,
-                        _ => default(ProtoId<DamageGroupPrototype>?)
-                    };
+                        if (woundGroup.Value == wound.Type)
+                        {
+                            group = woundGroup.Key;
+                            break;
+                        }
+                    }
 
                     if (group != null)
                     {

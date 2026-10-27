@@ -1,4 +1,4 @@
-﻿using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -10,10 +10,11 @@ namespace Content.Shared._RMC14.Medical.Wounds;
 public sealed partial class WoundableComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public ProtoId<DamageGroupPrototype> BruteWoundGroup = "Brute";
-
-    [DataField, AutoNetworkedField]
-    public ProtoId<DamageGroupPrototype> BurnWoundGroup = "Burn";
+    public Dictionary<ProtoId<DamageGroupPrototype>, WoundType> WoundGroups = new()
+    {
+        { "Brute", WoundType.Brute },
+        { "Burn", WoundType.Burn },
+    };
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 BleedMinDamage = 10;
