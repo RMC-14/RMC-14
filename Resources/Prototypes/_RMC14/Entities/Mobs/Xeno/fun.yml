@@ -43,6 +43,11 @@
   name: Lesser Carrier
   description: A strange-looking alien creature. It carries a number of scuttling jointed crablike creatures. Looks... smaller.
   components:
+  - type: RMCKeybindActions
+    actions:
+      XenoPrimaryOne: [ ActionLesserDronePlantWeeds ]
+      XenoPrimaryThree: [ ActionXenoThrowParasite ]
+      XenoPrimaryFour: [ ActionXenoRetrieveEgg ]
   - type: GhostRole
     name: roles-lesser-carrier-name
     description: roles-lesser-carrier-description
