@@ -82,7 +82,7 @@ public sealed class XenoLeapSystem : EntitySystem
 
     private HashSet<EntityUid> _colliding = new();
     // TODO RMC14 not sure how many points are actually needed here to be safe, but this is a very small
-    // data structure to overallocating should not cause problems.
+    // data structure so overallocating should not cause problems.
     private Vector2[] _points = new Vector2[16];
 
     public override void Initialize()
@@ -250,6 +250,10 @@ public sealed class XenoLeapSystem : EntitySystem
             if (!contact.IsTouching)
                 continue;
 
+            var otherEnt = contact.OtherEnt(xeno);
+            if (_colliding.Contains(otherEnt))
+                continue;
+
             // Ignore fixtures that can contact but should be ignored.
             if (leaping.IgnoreFixtureIds.Contains(contact.FixtureAId)
                 || leaping.IgnoreFixtureIds.Contains(contact.FixtureBId))
@@ -268,7 +272,7 @@ public sealed class XenoLeapSystem : EntitySystem
                     continue;
             }
 
-            _colliding.Add(contact.OtherEnt(xeno));
+            _colliding.Add(otherEnt);
         }
 
         foreach (var ent in _colliding)
