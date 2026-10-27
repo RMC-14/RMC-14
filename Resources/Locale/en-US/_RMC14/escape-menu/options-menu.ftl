@@ -13,8 +13,11 @@ ui-options-function-cm-holster-tertiary = Unholster tertiary
 ui-options-function-cm-holster-quaternary = Unholster quaternary
 ui-options-function-rmc-pick-up-dropped-items = Pick up dropped items
 ui-options-function-rmc-interact-with-other-hand = Interact with other hand
+ui-options-function-rmc-pushup = Do a pushup
+ui-options-function-rmc-pushup-routine = Start a pushup routine
 ui-options-function-rmc-rest = Rest
 ui-options-function-rmc-resist = Resist
+ui-options-function-rmc-weak-pushup = Do a knee pushup
 
 ui-options-header-rmc-xeno = Xenonid
 
