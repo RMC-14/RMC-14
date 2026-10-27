@@ -1,0 +1,83 @@
+- type: job
+  parent: RMCSyntheticColony
+  id: RMCSyntheticColonySorokyne
+  startingGear: RMCGearSyntheticColonistSorokyne
+  spawnMenuRoleName: Sorokyne Synthetic (Sorokyne Survivor)
+  special:
+  - !type:RemoveComponentSpecial
+    components:
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: synth
+  - !type:AddComponentSpecial
+    components:
+    - type: Language
+      preset: RMCLanguagePresetSynthColonist
+      currentLanguage: Russian
+      defaultLanguage: Russian
+    - type: LanguageLearning
+      preset: RMCLanguageLearningPresetSynthColonist
+    - type: IntelRescueSurvivorObjective
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetSorokyneSynth
+    - type: Synth
+    - type: NpcFactionMember
+      factions:
+      - SPP
+      - Civilian
+  useLoadoutOfJob: RMCSyntheticColony # for inheritance
+
+- type: startingGear
+  id: RMCGearSyntheticColonistSorokyne
+  equipment:
+    id: RMCIDCardSynthColony
+    pocket1: RMCPouchSurvivalSynthFill
+    pocket2: RMCPouchToolsFill
+  inhand:
+    - RMCFireAxe # todo maintenance jack
+
+- type: entity
+  id: RMCSurvivorPresetSorokyneSynth
+  name: sorokyne civilian colonist synthetic preset
+  suffix: survivor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    randomOutfits:
+    # ////////////////////////////////////
+    # Civilian Synth
+    # ////////////////////////////////////
+    # Miner
+    - [ RMCHardhatWhiteAlt, RMCJumpsuitSPPCiv5, RMCOuterClothingExternalWebbingBrown, CMSatchelEngineer, RMCHandsVeteranSPP, RMCBootsSPP, CMBeltUtilityFilled, RMCHeadsetDistressSPP ]
+    # Sanitation
+    - [ RMCHazardVestGreen, RMCHandsVeteranCBRNNonArmored, RMCJumpsuitCivilianGreen, CMSatchelEngineer, RMCBootsCBRNNonArmored, CMMop, CMHeadCapSPP, CMBeltUtilityFilled ]  
+    # Fire Protection
+    - [ RMCArmorHelmetSPPFirefighter, RMCJumpsuitCivilianBrown, RMCArmorSPPFirefighterSynth, RMCSatchelLightpack, RMCAttachmentUnderbarrelExtinguisher, CMFireExtinguisherPortable, RMCHandsVeteranSPP, RMCBootsSPP, CMBeltUtilityFilled, RMCHeadsetDistressSPP ]
+    # Landing Pad Attendant Synth
+    - [ CMHeadCapSPP, RMCJumpsuitSPPArmy, RMCHazardVest, RMCHandsVeteranSPP, RMCBootsSPPFilled, RMCSatchelNorm, RMCEarmuffs, RMCPackFlareR44, RMCBeltUtilityGeneral, RMCScabbardMacheteFilled, RMCBinoculars, RMCHeadsetDistressSPP ]
+    # Bartender
+    - [ CMHeadCapSPPUshankaCivilian, RMCMaskGasSPP, RMCVestTan, RMCJumpsuitSPPArmy, CMSatchel, RMCDrinkAlcoholVodka, RMCDrinkAlcoholVodka, RMCDrinkAlcoholVodka, RMCHandsVeteranSPP, RMCBaseballBatMetal, RMCBootsSPP, CMBeltUtilityFilled, RMCHeadsetDistressSPP ]
+    # Chef Synth
+    - [ CMHeadCapSPPCivilian, RMCChefApron, CMJumpsuitSPPCiv2, CMSatchel, CMHandsLatex, RMCKitchenKnifeButcher, RMCFork, RMCBootsSPP, CMBeltUtilityFilled, RMCHeadsetDistressSPP ]
+    # ////////////////////////////////////
+    # Engi Synth
+    # ////////////////////////////////////
+    - [ RMCSatchelLightpack, RMCShoesWhite, RMCHeadCapSPPCivilianPlantWorker, RMCLabcoatShort, RMCJumpsuitNormCivilianWhiteAlt, WeaponNailgun, CMSheetMetal20, RMCMaskGasSPP, CMBeltUtilityFilled, RMCHeadsetDistressSPP ]
+    # ////////////////////////////////////
+    # Medical Synth
+    # ////////////////////////////////////
+    - [ RMCHeadCapSPPCivilianPlantWorker, RMCLabcoatLong, CMJumpsuitLiaisonBrown, RMCShoesLaceup, CMSatchel, RMCMaskGasSPP, CMBeltUtilityFilled, RMCHeadsetDistressSPP ]
+    # ////////////////////////////////////
+    # Science Synth
+    # ////////////////////////////////////
+    - [ RMCHandsVeteranSPP, RMCBootsSPP, RMCSatchelLightpack, RMCLabcoatScience, CMHeadCapSPP, RMCJumpsuitCivilianBrown, RMCShovel, RMCFlashlightLantern, CMBeltUtilityFilled, RMCHeadsetDistressSPP ]
+    # ////////////////////////////////////
+    # Security Synth
+    # ////////////////////////////////////
+    # Army
+    - [ RMCHeadCapSPPBeretArmy, RMCJumpsuitSPPArmy, RMCOuterClothingExternalWebbingBrown, RMCBootsSPPBlackFilled, RMCHandsVeteran, RMCScabbardMacheteFilled, RMCSatchelLightpackBlack5Slot, RMCHeadsetDistressSPP, CMBeltUtilityFilled ]
+    # PCG
+    - [ CMGlassesSecurity, RMCHeadsetSPPPCG, CMHeadCapSPPPeakedPolice, RMCSatchelBlack, RMCCoatPCG, RMCHandsVeteran, RMCBootsSPPBlackFilled, RMCJumpsuitSPPPCG, RMCMaskGasSPP, CMBeltSecuritySPPFilled ]
