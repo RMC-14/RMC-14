@@ -202,7 +202,10 @@ public sealed class MapInsertSystem : EntitySystem
 
             if (clearDecals)
             {
-                var mainGridDecals = _decals.GetDecalsIntersecting(mainGridUid, aabb);
+                //Decals spawn based on bottom left corner
+                //To test for centers of decals we have shift the aabb down and to the left half a tile
+                var decalAabb = aabb.Translated(new Vector2(-0.5f));
+                var mainGridDecals = _decals.GetDecalsIntersecting(mainGridUid, decalAabb);
                 foreach (var decal in mainGridDecals)
                 {
                     _decals.RemoveDecal(mainGridUid, decal.Index);
