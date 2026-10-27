@@ -14,7 +14,7 @@
   accessGroups:
   - ShipMasterAccess
   spawnMenuRoleName: CBRN Fireteam Leader
-  overwatchRoleName: Fire Team Leaders
+  overwatchRoleName: rmc-overwatch-role-fireteam-leaders
   roleWeight: 1
   displayWeight: 5
   special:
