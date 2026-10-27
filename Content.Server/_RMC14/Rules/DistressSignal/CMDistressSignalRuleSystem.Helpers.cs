@@ -407,25 +407,6 @@ public sealed partial class CMDistressSignalRuleSystem
         return readyupCount - GetRoundstartXenoLimit(readyupCount) - GetRoundstartSurvLimit(readyupCount);
     }
 
-    private void ReloadPrototypes()
-    {
-        _operationNames.Clear();
-        _operationPrefixes.Clear();
-        _operationSuffixes.Clear();
-
-        foreach (var prototype in _prototypes.EnumeratePrototypes<EntityPrototype>())
-        {
-            if (prototype.TryGetComponent(out RMCDistressSignalNamesComponent? names, _compFactory))
-                _operationNames.UnionWith(names.Names);
-
-            if (prototype.TryGetComponent(out RMCDistressSignalPrefixesComponent? prefixes, _compFactory))
-                _operationPrefixes.UnionWith(prefixes.Prefixes);
-
-            if (prototype.TryGetComponent(out RMCDistressSignalSuffixesComponent? suffixes, _compFactory))
-                _operationSuffixes.UnionWith(suffixes.Suffixes);
-        }
-    }
-
     /// <summary>
     /// Container class for organizing spawn points by category (squad vs. non-squad, full vs. available).
     /// Used to efficiently manage and query spawn point availability during player spawning.
