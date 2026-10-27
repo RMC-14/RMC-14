@@ -88,30 +88,38 @@
   minLimit: 0
   maxLimit: 12
   loadouts:
-  - AviatorsRMC
-  - EyepatchRMC
-  - GlassesRPGRMC
-  - GlassesRPGRMCOld
-  - GlassesPrescriptionRMC
-  - HippieGlassesRMC
   - GogglesRMC
   - GogglesPrescriptionRMC
   - GogglesBlackRMC
   - GogglesOrangeRMC # TODO add prescription variants of all the goggles
-  - GogglesAdvancedRMC
-  - GogglesM1A1RMC
-  - PersonalShadesRMC
-  - SunglassesRMC # TODO prescription sunglasses
-  - GlassesTriMaxYellowRMC
-  - GlassesTriMaxBronzeRMC
-  - GlassesTriMaxBlackRMC
   - GogglesRedRMC
   - GogglesBlueRMC
   - GogglesPurpleRMC
   - GogglesYellowRMC
+  - GogglesAdvancedRMC
   - GogglesPolarizedBlueRMC
   - GogglesPolarizedOrangeRMC
+  - GogglesM1A1RMC
   - GogglesM1A1BlueRMC
+  - EyepatchRMC
+  - WhiteEyepatchRMC
+  - GreenEyepatchRMC
+  - GlassesRPGRMC
+  - GlassesRPGRMCOld
+  - GlassesPrescriptionRMC
+  - HippieGlassesRMC
+  - AviatorsRMC
+  - AviatorsSilverRMC
+  - PersonalShadesRMC
+  - PersonalShadesRedRMC
+  - PersonalShadesOrangeRMC
+  - PersonalShadesYellowRMC
+  - PersonalShadesGreenRMC
+  - PersonalShadesBlueRMC
+  - SunglassesRMC # TODO prescription sunglasses
+  - GlassesTriMaxYellowRMC
+  - GlassesTriMaxBronzeRMC
+  - GlassesTriMaxBlackRMC
   - HippieGlassesBloodredRMC
   - HippieGlassesGreenRMC
   - HippieGlassesMidnightRMC
@@ -178,6 +186,7 @@
   - MaskScarfGreenRMC
   - MaskScarfTanRMC
   - GasMaskRMC
+  - MaskSterileRMC
   - TornScarfBlackRMC
   - TornScarfDesertRMC
   - TornScarfGreenRMC
@@ -268,6 +277,14 @@
   minLimit: 0
   maxLimit: 10
   loadouts:
+  - HeadDuragRMC
+  - HeadDuragBlackRMC
+  - HeadBandanaRMC
+  - HeadBandanaTanRMC
+  - HeadBeanieRMC
+  - HeadBeanieTanRMC
+  - HeadBeanieGreenRMC
+  - HeadBeanieGrayRMC
   - SquadBeretRMC
   - GreenBeretRMC
   - TanBeretRMC
@@ -281,10 +298,6 @@
   - RedHeadbandRMC
   - TanHeadbandRMC
   - SquadHeadbandRMC
-  - HeadBeanieRMC
-  - HeadBeanieTanRMC
-  - HeadBeanieGreenRMC
-  - HeadBeanieGrayRMC
   - UNMCHeadsetRMC
 
 - type: loadoutGroup
@@ -346,9 +359,11 @@
   - FeatherPurpleRMC
   - FeatherYellowRMC
   - GunOilRMC
+  - HelmetGarbRabbitsFootRMC
   - RosaryRMC
   - PrescriptionRMC
   - TrimmedWireRMC
+  - HelmetGarbXM43E1RMC
   - ChaplainPatchRMC
   - PeaceFlairRMC
   - IoFlairRMC
@@ -423,6 +438,7 @@
   - PonchoUrbanRMC
   - PonchoSnowRMC
   - PatchPeaceRMC
+  - FieldMedicPatchRMC
   - PDTLKitRMC
 
 - type: loadoutGroup
@@ -644,6 +660,7 @@
   - BootsGreyFilledRMC
   - HandsBrownMarineRMC
   - HandsGreyMarineRMC
+  - PestSprayRMC
 
 
 # Food (sweets)
@@ -1000,6 +1017,9 @@
   minLimit: 0
   maxLimit: 7
   loadouts:
+  - PatchFreelancerRMC
+  - PatchFreelancerAltRMC
+  - FieldMedicPatchRMC
   - PatchWeYaRMC
   - PatchWeYaRMCSquare
   - PatchWeYaRMCBlack
