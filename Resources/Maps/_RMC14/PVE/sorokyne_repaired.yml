@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 10/20/2025 02:12:52
-  entityCount: 31166
+  entityCount: 32452
 maps:
 - 1
 grids:
@@ -2297,34 +2297,49 @@ entities:
     - type: MapLight
     - type: RMCWeatherCycle
       minTimeBetweenEvents: 1800
+      minTimeBetweenChecks: 900
+      minCheckVariance: 600
+      startChance: 1
       weatherEvents:
       - lightningSound: !type:SoundCollectionSpecifier
           collection: RMCThunder
         lightningEffects:
         - RMCColorSequenceLightningSharpPeak
         - RMCColorSequenceLightningFlicker
-        lightningChance: 0.04
-        weatherType: RMCStrataStormVeryLight
-        duration: 180
-        name: Light Rain
-      - lightningSound: !type:SoundCollectionSpecifier
-          collection: RMCThunder
-        lightningEffects:
-        - RMCColorSequenceLightningSharpPeak
-        - RMCColorSequenceLightningFlicker
         lightningChance: 0.01
-        weatherType: RMCStrataStormVeryLight
+        fireSmotheringStrength: 1
+        weatherType: RMCStrataStormTropical
+        screenOverlay: Low
         duration: 180
         name: Tropical Storm
+        displayName: rmc-weather-name-tropical-storm
       - lightningSound: !type:SoundCollectionSpecifier
           collection: RMCThunder
         lightningEffects:
         - RMCColorSequenceLightningSharpPeak
         - RMCColorSequenceLightningFlicker
         lightningChance: 0.06
-        weatherType: RMCStrataStormLight
+        fireSmotheringStrength: 4
+        warningMode: SirenOnly
+        warningSirenKind: Weather
+        warningSound: !type:SoundPathSpecifier
+          path: /Audio/_RMC14/Effects/weather_warning.wav
+        weatherType: RMCStrataStormVaradero
+        screenOverlay: High
         duration: 240
         name: Monsoon
+        displayName: rmc-weather-name-monsoon-warning
+      - lightningSound: !type:SoundCollectionSpecifier
+          collection: RMCThunder
+        lightningEffects:
+        - RMCColorSequenceLightningSharpPeak
+        - RMCColorSequenceLightningFlicker
+        lightningChance: 0.04
+        fireSmotheringStrength: 1
+        weatherType: RMCStrataStormVeryLightRainAndThunder
+        duration: 180
+        name: Soro Light Rain
+        displayName: rmc-weather-name-light-rain
     - type: RMCAmbientLightEffects
     - type: BecomesStation
       id: SorokyneRepaired
