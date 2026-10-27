@@ -25,6 +25,7 @@ using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
 using Content.Shared.Mobs;
@@ -40,6 +41,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
@@ -492,8 +494,18 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
         var popupSelf = fruitOverflow ? Loc.GetString("rmc-xeno-fruit-plant-limit-exceeded")
             : Loc.GetString("rmc-xeno-fruit-plant-success-self");
-        var popupOthers = Loc.GetString("rmc-xeno-fruit-plant-success-others", ("xeno", xeno));
-        _popup.PopupPredicted(popupSelf, popupOthers, xeno.Owner, xeno.Owner);
+        _popup.PopupClient(popupSelf, xeno.Owner, xeno.Owner);
+
+        var others = Filter.PvsExcept(xeno.Owner).Recipients;
+        foreach (var other in others)
+        {
+            if (other.AttachedEntity is not { } otherEnt)
+                continue;
+
+            var otherXeno = ("xeno", Identity.Name(xeno, EntityManager, otherEnt));
+            var otherMessage = Loc.GetString("rmc-xeno-fruit-plant-success-others", otherXeno);
+            _popup.PopupEntity(otherMessage, xeno, otherEnt);
+        }
 
         UpdateFruitCount(xeno);
     }
@@ -658,17 +670,37 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         };
 
         var popupSelf = Loc.GetString("rmc-xeno-fruit-eat-fail-self", ("fruit", fruit));
-        var popupOthers = Loc.GetString("rmc-xeno-fruit-eat-fail-others", ("fruit", fruit), ("xeno", user));
 
         if (!_doAfter.TryStartDoAfter(doAfter))
         {
-            _popup.PopupPredicted(popupSelf, popupOthers, user, user);
+            _popup.PopupClient(popupSelf, user, user);
+
+            var viewers = Filter.PvsExcept(user).Recipients;
+            foreach (var other in viewers)
+            {
+                if (other.AttachedEntity is not { } otherEnt)
+                    continue;
+
+                var otherXeno = ("xeno", Identity.Name(user, EntityManager, otherEnt));
+                var otherMessage = Loc.GetString("rmc-xeno-fruit-eat-fail-others", ("fruit", fruit), otherXeno);
+                _popup.PopupEntity(otherMessage, user, otherEnt);
+            }
             return false;
         }
 
         popupSelf = Loc.GetString("rmc-xeno-fruit-eat-start-self", ("fruit", fruit));
-        popupOthers = Loc.GetString("rmc-xeno-fruit-eat-start-others", ("fruit", fruit), ("xeno", user));
-        _popup.PopupPredicted(popupSelf, popupOthers, user, user);
+        _popup.PopupClient(popupSelf, user, user);
+
+        var others = Filter.PvsExcept(user).Recipients;
+        foreach (var other in others)
+        {
+            if (other.AttachedEntity is not { } otherEnt)
+                continue;
+
+            var otherXeno = ("xeno", Identity.Name(user, EntityManager, otherEnt));
+            var otherMessage = Loc.GetString("rmc-xeno-fruit-eat-start-others", ("fruit", fruit), otherXeno);
+            _popup.PopupEntity(otherMessage, user, otherEnt);
+        }
         return true;
     }
 
@@ -678,17 +710,19 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         if (!HasComp<XenoComponent>(user) || fruit.Comp.State == XenoFruitState.Eaten)
             return false;
 
+        var targetName = ("target", Identity.Name(target, EntityManager, user));
+
         // Can't feed non-xenos
         if (!HasComp<XenoComponent>(target))
         {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-feed-refuse", ("target",target), ("fruit", fruit)), user, user, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-feed-refuse", targetName, ("fruit", fruit)), user, user, PopupType.SmallCaution);
             return false;
         }
 
         // Check if target is alive
         if (_mobState.IsDead(target))
         {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-feed-dead", ("target", target), ("fruit", fruit)), user, user);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-feed-dead", targetName, ("fruit", fruit)), user, user);
             return false;
         }
 
@@ -700,7 +734,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         }
         else if (!_hive.FromSameHive(user, target))
         {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-feed-wrong-hive", ("target", target)), user, user, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-feed-wrong-hive", targetName), user, user, PopupType.SmallCaution);
             return false;
         }
 
@@ -733,22 +767,60 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             TargetEffect = "RMCEffectHealBusy"
         };
 
-        var popupSelf = Loc.GetString("rmc-xeno-fruit-feed-fail-self", ("target", target), ("fruit", fruit));
-        var popupTarget = Loc.GetString("rmc-xeno-fruit-feed-fail-target", ("user", user), ("fruit", fruit));
-        var popupOthers = Loc.GetString("rmc-xeno-fruit-feed-fail-others", ("user", user), ("target", target), ("fruit", fruit));
-
         if (!_doAfter.TryStartDoAfter(doAfter))
         {
-            _popup.PopupClient(popupTarget, target, target, PopupType.MediumCaution);
-            _popup.PopupPredicted(popupSelf, popupOthers, user, user);
+            var selfTgt = ("target", Identity.Name(target, EntityManager, user));
+            var selfMsg = Loc.GetString("rmc-xeno-fruit-feed-fail-self", selfTgt, ("fruit", fruit));
+            _popup.PopupClient(selfMsg, user, user);
+
+            var viewers = Filter.PvsExcept(user).Recipients;
+            foreach (var other in viewers)
+            {
+                if (other.AttachedEntity is not { } otherEnt)
+                    continue;
+
+                if (otherEnt == target)
+                {
+                    var targetUser = ("user", Identity.Name(user, EntityManager, target));
+                    var targetMessage = Loc.GetString("rmc-xeno-fruit-feed-fail-target", ("user", user), ("fruit", fruit));
+                    _popup.PopupEntity(targetMessage, target, otherEnt, PopupType.MediumCaution);
+                }
+                else
+                {
+                    var otherUser = ("user", Identity.Name(user, EntityManager, otherEnt));
+                    var otherTarget = ("target", Identity.Name(target, EntityManager, otherEnt));
+                    var otherMessage = Loc.GetString("rmc-xeno-fruit-feed-fail-others", otherUser, otherTarget, ("fruit", fruit));
+                    _popup.PopupEntity(otherMessage, user, otherEnt);
+                }
+            }
             return false;
         }
 
-        popupSelf = Loc.GetString("rmc-xeno-fruit-feed-start-self", ("target", target), ("fruit", fruit));
-        popupTarget = Loc.GetString("rmc-xeno-fruit-feed-start-target", ("user", user), ("fruit", fruit));
-        popupOthers = Loc.GetString("rmc-xeno-fruit-feed-start-others", ("user", user), ("target", target), ("fruit", fruit));
-        _popup.PopupClient(popupTarget, target, target, PopupType.MediumCaution);
-        _popup.PopupPredicted(popupSelf, popupOthers, user, user);
+
+        var selfTarget = ("target", Identity.Name(target, EntityManager, user));
+        var selfMessage = Loc.GetString("rmc-xeno-fruit-feed-start-self", selfTarget, ("fruit", fruit));
+        _popup.PopupClient(selfMessage, user, user);
+
+        var others = Filter.PvsExcept(user).Recipients;
+        foreach (var other in others)
+        {
+            if (other.AttachedEntity is not { } otherEnt)
+                continue;
+
+            if (otherEnt == target)
+            {
+                var targetUser = ("user", Identity.Name(user, EntityManager, target));
+                var targetMessage = Loc.GetString("rmc-xeno-fruit-feed-start-target", ("user", user), ("fruit", fruit));
+                _popup.PopupEntity(targetMessage, target, otherEnt, PopupType.MediumCaution);
+            }
+            else
+            {
+                var otherUser = ("user", Identity.Name(user, EntityManager, otherEnt));
+                var otherTarget = ("target", Identity.Name(target, EntityManager, otherEnt));
+                var otherMessage = Loc.GetString("rmc-xeno-fruit-feed-start-others", otherUser, otherTarget, ("fruit", fruit));
+                _popup.PopupEntity(otherMessage, user, otherEnt);
+            }
+        }
         return true;
     }
 
