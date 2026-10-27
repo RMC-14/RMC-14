@@ -418,6 +418,14 @@
     - RMCGearCorpseUnitedNationsRiotOfficerAltFive
   - type: Rank
     rank: RMCRankCMBDeputy
+  - type: Marine
+    icon:
+      sprite: _RMC14/Interface/job_icons/CMB.rsi
+      state: cmb_rco
+  - type: NpcFactionMember
+    factions:
+    - Bureau
+    - Civilian
 
 - type: randomHumanoidSettings
   parent: RMCCorpseUnitedNationsRiotOfficer
@@ -428,9 +436,9 @@
 - type: startingGear
   id: RMCGearCorpseUnitedNationsRiotOfficer
   equipment:
-    head: ArmorHelmetPMCRiotShield
-    jumpsuit: RMCJumpsuitRiotControl
-    outerClothing: RMCArmorPMCRiot
+    head: RMCArmorHelmetM10CMBVisorSWAT
+    jumpsuit: RMCSwatCMBUniform
+    outerClothing: RMCArmorPMCRiotCMB
     belt: CMStunbaton
     gloves: CMHandsBlackMarine
     ears: CMHeadsetColony
