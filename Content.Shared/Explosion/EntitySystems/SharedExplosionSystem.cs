@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Shared.Armor;
 using Content.Shared.Explosion.Components;
 
@@ -34,7 +35,14 @@ public abstract class SharedExplosionSystem : EntitySystem
     ///     specified in the yaml / by the component, but determined dynamically (e.g., by the quantity of a
     ///     solution in a reaction).
     /// </remarks>
-    public virtual void TriggerExplosive(EntityUid uid, ExplosiveComponent? explosive = null, bool delete = true, float? totalIntensity = null, float? radius = null, EntityUid? user = null)
+    public virtual void TriggerExplosive(
+        EntityUid uid,
+        ExplosiveComponent? explosive = null,
+        bool delete = true,
+        float? totalIntensity = null,
+        float? radius = null,
+        EntityUid? user = null,
+        Vector2? throwDirection = null)
     {
     }
 
