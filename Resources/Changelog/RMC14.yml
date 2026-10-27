@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: Added surplus ammo crate of 10 random UNMC magazines.
-    type: Add
-  id: 3201
-  time: '2026-05-15T22:07:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8847
 - author: Ian321
   changes:
   - message: Rescued survivors can now hear announcements.
@@ -4512,5 +4505,14 @@
   id: 3700
   time: '2026-10-27T19:06:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10894
+- author: SubspaceEmber
+  changes:
+  - message: Flares have new lit sprites for inhands.
+    type: Tweak
+  - message: Fixed inhand sprites for flares not displaying.
+    type: Fix
+  id: 3701
+  time: '2026-10-27T19:18:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10958
 Name: RMC14
 Order: -1
