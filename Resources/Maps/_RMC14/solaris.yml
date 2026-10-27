@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 264.0.2-fix-physics
+  engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 08/25/2026 19:40:21
-  entityCount: 30308
+  time: 09/28/2026 16:29:10
+  entityCount: 30321
 maps:
 - 1
 grids:
@@ -54193,7 +54193,7 @@ entities:
       pos: 63.5,-64.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -55467.117
+      secondsUntilStateChange: -55632.777
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -54590,7 +54590,7 @@ entities:
       pos: 68.5,-33.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -56649.582
+      secondsUntilStateChange: -56815.242
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -59987,7 +59987,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 865.2991347
     - type: Door
-      secondsUntilStateChange: -56699.684
+      secondsUntilStateChange: -56865.344
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -60002,7 +60002,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 865.2991347
     - type: Door
-      secondsUntilStateChange: -56699.684
+      secondsUntilStateChange: -56865.344
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -60533,7 +60533,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 2393.0309403
     - type: Door
-      secondsUntilStateChange: -55171.95
+      secondsUntilStateChange: -55337.61
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -60549,7 +60549,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 2393.0309403
     - type: Door
-      secondsUntilStateChange: -55171.95
+      secondsUntilStateChange: -55337.61
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -60565,7 +60565,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 2078.4979215
     - type: Door
-      secondsUntilStateChange: -55486.484
+      secondsUntilStateChange: -55652.145
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -60581,7 +60581,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 2078.4979215
     - type: Door
-      secondsUntilStateChange: -55486.484
+      secondsUntilStateChange: -55652.145
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -184414,12 +184414,69 @@ entities:
     - type: Transform
       pos: 59.5,-122.5
       parent: 1
+- proto: RMCDecalSpawnerBloodSplatters
+  entities:
+  - uid: 30310
+    components:
+    - type: Transform
+      pos: 105.5,-119.5
+      parent: 1
+  - uid: 30312
+    components:
+    - type: Transform
+      pos: 104.5,-118.5
+      parent: 1
+  - uid: 30313
+    components:
+    - type: Transform
+      pos: 106.5,-116.5
+      parent: 1
+  - uid: 30314
+    components:
+    - type: Transform
+      pos: 105.5,-117.5
+      parent: 1
+  - uid: 30315
+    components:
+    - type: Transform
+      pos: 105.5,-118.5
+      parent: 1
+  - uid: 30321
+    components:
+    - type: Transform
+      pos: 106.5,-118.5
+      parent: 1
 - proto: RMCDecalSpawnerOilSplatters
   entities:
   - uid: 2260
     components:
     - type: Transform
       pos: 37.5,-164.5
+      parent: 1
+  - uid: 30316
+    components:
+    - type: Transform
+      pos: 106.5,-119.5
+      parent: 1
+  - uid: 30317
+    components:
+    - type: Transform
+      pos: 107.5,-118.5
+      parent: 1
+  - uid: 30318
+    components:
+    - type: Transform
+      pos: 107.5,-117.5
+      parent: 1
+  - uid: 30319
+    components:
+    - type: Transform
+      pos: 107.5,-116.5
+      parent: 1
+  - uid: 30320
+    components:
+    - type: Transform
+      pos: 107.5,-119.5
       parent: 1
 - proto: RMCDiamondOre1
   entities:
@@ -207257,6 +207314,11 @@ entities:
     - type: Transform
       pos: 109.5,-110.5
       parent: 1
+  - uid: 30309
+    components:
+    - type: Transform
+      pos: 105.5,-118.5
+      parent: 1
 - proto: RMCSpawnerCorpseMiner
   entities:
   - uid: 28599
@@ -210285,6 +210347,13 @@ entities:
     components:
     - type: Transform
       pos: 31.5,-185.5
+      parent: 1
+- proto: RMCWeaponFlamerColony
+  entities:
+  - uid: 30311
+    components:
+    - type: Transform
+      pos: 106.5,-118.5
       parent: 1
 - proto: RMCWeaponLauncherM85A1
   entities:
