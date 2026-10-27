@@ -370,7 +370,7 @@
     sections:
     - name: Chess
       entries:
-      - id: ChessBoard
+      - id: RMCChessBoard
         amount: 5
     - name: White Pieces
       entries:
