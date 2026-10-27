@@ -3,6 +3,7 @@ using System.Numerics;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.DoAfter;
 using Content.Shared.Roles;
+using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -61,6 +62,21 @@ public sealed partial class VehicleEnterComponent : Component
 
     [DataField]
     public Vector2 ExitOffset = Vector2.Zero;
+
+    [DataField]
+    public EntityWhitelist PulledBlacklist = new()
+    {
+        Components =
+        [
+            "Barricade",
+            "Sentry",
+            "WeaponMount",
+            "CMAutomatedVendor",
+            "VendingMachine",
+            // TODO RMC14: block the flag thing as well
+        ],
+        Tags = new() { "Window" },
+    };
 }
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]

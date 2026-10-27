@@ -11,6 +11,7 @@ using Content.Shared._RMC14.PowerLoader;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Teleporter;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Damage;
@@ -52,7 +53,7 @@ public sealed partial class VehicleSystem : EntitySystem
 {
     private static readonly EntProtoId VehicleKey = "RMCVehicleKey";
 
-    private const float CrashMinSpeedFraction = 0.15f;
+    private const float CrashMinSpeedFraction = 0.9f;
     private const float CrashThrowSpeed = 10f;
 
     private static readonly SoundSpecifier XenoFrameBreachSound = new SoundCollectionSpecifier("XenoPry");
@@ -112,6 +113,8 @@ public sealed partial class VehicleSystem : EntitySystem
         SubscribeLocalEvent<VehicleInteriorOccupantComponent, ComponentRemove>(OnOccupantRemove);
         SubscribeLocalEvent<VehicleInteriorOccupantComponent, MapUidChangedEvent>(OnOccupantMapChanged);
         SubscribeLocalEvent<VehicleInteriorOccupantComponent, MetaFlagRemoveAttemptEvent>(OnOccupantMetaFlagRemoveAttempt);
+        SubscribeLocalEvent<NewXenoEvolvedEvent>(OnNewXenoEvolved);
+        SubscribeLocalEvent<XenoDevolvedEvent>(OnXenoDevolved);
         SubscribeLocalEvent<HardpointIntegrityComponent, VehicleCanRunEvent>(OnFrameVehicleCanRun);
         SubscribeLocalEvent<VehicleInteriorComponent, VehicleFrameIntegrityChangedEvent>(OnVehicleFrameIntegrityChanged);
         SubscribeLocalEvent<RMCConstructionAttemptEvent>(OnConstructionAttempt);
@@ -294,6 +297,14 @@ public sealed partial class VehicleSystem : EntitySystem
 
         if (pulled is not { } pulledUid)
             return true;
+
+        if (_whitelist.IsWhitelistPass(ent.Comp.PulledBlacklist, pulledUid))
+        {
+            if (popup)
+                _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-pulled-forbidden", ("pulled", pulledUid)), user, user, PopupType.SmallCaution);
+
+            return false;
+        }
 
         var passengers = interior.Passengers;
         var xenos = interior.Xenos;
@@ -854,6 +865,29 @@ public sealed partial class VehicleSystem : EntitySystem
         {
             args.ToRemove &= ~MetaDataFlags.ExtraTransformEvents;
         }
+    }
+
+    private void OnNewXenoEvolved(ref NewXenoEvolvedEvent args)
+    {
+        TransferOccupant(args.OldXeno, args.NewXeno);
+    }
+
+    private void OnXenoDevolved(ref XenoDevolvedEvent args)
+    {
+        TransferOccupant(args.OldXeno, args.NewXeno);
+    }
+
+    private void TransferOccupant(EntityUid oldUser, EntityUid newUser)
+    {
+        if (!TryComp(oldUser, out VehicleInteriorOccupantComponent? occupant) ||
+            !occupant.Vehicle.IsValid() ||
+            !TryComp(occupant.Vehicle, out VehicleInteriorComponent? interior) ||
+            _transform.GetMapId(newUser) != interior.MapId)
+        {
+            return;
+        }
+
+        TrackOccupant(newUser, occupant.Vehicle, HasComp<XenoComponent>(newUser));
     }
 
     private void TrackOccupant(EntityUid user, EntityUid vehicle, bool isXeno)
