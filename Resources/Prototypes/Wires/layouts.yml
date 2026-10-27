@@ -232,3 +232,10 @@
   wires:
   - !type:AccessWireAction
   - !type:AiInteractWireAction
+
+- type: wireLayout
+  id: RMCAPC
+  dummyWires: 3
+  wires:
+  - !type:RMCApcMainPowerWireAction
+  - !type:RMCApcIdScannerWireAction

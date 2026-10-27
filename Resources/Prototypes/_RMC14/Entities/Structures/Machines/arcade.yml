@@ -66,8 +66,8 @@
   components:
   - type: ApcPowerReceiver
   - type: RMCPowerReceiver
-    idleLoad: 5
-    activeLoad: 10
+    idleLoad: 300
+    activeLoad: 300
   - type: PointLight
     radius: 1.8
     energy: 1.6

@@ -10,8 +10,59 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
     {
         base.Initialize();
         SubscribeLocalEvent<RMCApcComponent, AfterAutoHandleStateEvent>(OnApcState);
+        SubscribeLocalEvent<RMCSmesComponent, AfterAutoHandleStateEvent>(OnSmesState);
+        SubscribeLocalEvent<RMCPowerStorageComponent, AfterAutoHandleStateEvent>(OnStorageState);
+        SubscribeLocalEvent<RMCPowerMonitorComponent, AfterAutoHandleStateEvent>(OnMonitorState);
 
         SubscribeLocalEvent<RMCReactorPoweredLightComponent, AppearanceChangeEvent>(OnReactorPoweredLightAppearanceChange);
+    }
+
+    private void OnMonitorState(Entity<RMCPowerMonitorComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        try
+        {
+            if (!TryComp(ent, out UserInterfaceComponent? ui))
+                return;
+
+            foreach (var bui in ui.ClientOpenInterfaces.Values)
+            {
+                if (bui is RMCPowerMonitorBui monitorUi)
+                    monitorUi.Refresh();
+            }
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Error refreshing {nameof(RMCPowerMonitorBui)}\n{e}");
+        }
+    }
+
+    private void OnSmesState(Entity<RMCSmesComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        RefreshSmes(ent);
+    }
+
+    private void OnStorageState(Entity<RMCPowerStorageComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        RefreshSmes(ent);
+    }
+
+    private void RefreshSmes(EntityUid uid)
+    {
+        try
+        {
+            if (!TryComp(uid, out UserInterfaceComponent? ui))
+                return;
+
+            foreach (var bui in ui.ClientOpenInterfaces.Values)
+            {
+                if (bui is RMCSmesBui smesUi)
+                    smesUi.Refresh();
+            }
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Error refreshing {nameof(RMCSmesBui)}\n{e}");
+        }
     }
 
     public override bool IsPowered(EntityUid ent)
