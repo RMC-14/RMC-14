@@ -23,6 +23,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.Radiation.Events;
 using Content.Shared.Silicons.Borgs;
 using Content.Shared.Vehicle.Components;
 using Content.Shared.Weapons.Melee.Events;
@@ -691,7 +692,7 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
                 if (_hive.FromSameHive(contact, user))
                     continue;
 
-                userDamage.NextDamageAt = time + userDamage.DamageEvery;
+                userDamage.NextDamageAt = time + damage.DamageEvery;
 
                 if (damage.Damage != null)
                     DoDamage((contact, damage), user, damage.Damage);
@@ -699,14 +700,28 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
                 if (damage.ArmorPiercingDamage != null)
                     DoDamage((contact, damage), user, damage.ArmorPiercingDamage, true, acidic: damage.Acidic);
 
+                if (damage.RadiationPerSecond is { } radiationPerSecond &&
+                    _entityWhitelist.IsWhitelistPassOrNull(damage.RadiationWhitelist, user))
+                {
+                    var irradiated = new OnIrradiatedEvent(
+                        (float) damage.DamageEvery.TotalSeconds,
+                        radiationPerSecond,
+                        contact);
+                    RaiseLocalEvent(user, irradiated);
+                }
+
                 if (damage.Emotes is { Count: > 0 } emotes)
                 {
                     var emote = _random.Pick(emotes);
                     DoEmote(user, emote);
                 }
 
-                if (damage.Popup is { } popup && _random.Prob(0.5f))
+                if (damage.Popup is { } popup &&
+                    !_entityWhitelist.IsWhitelistPass(damage.PopupBlacklist, user) &&
+                    _random.Prob(0.5f))
+                {
                     _popup.PopupEntity(popup, user, user, PopupType.SmallCaution);
+                }
 
                 _audio.PlayPvs(damage.Sound, user);
 
