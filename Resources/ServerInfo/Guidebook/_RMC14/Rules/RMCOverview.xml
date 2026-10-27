@@ -19,39 +19,18 @@
   [bold]Newer Changes (2026 June)[/bold]
 
   ### Law
-  -(Definitions) Added Recorder and Listening device definitions.
+  - (Synthetic) Clarified how Third-Party Synthetics should be handled/processed.
+  - (Synthetic) Third-Party Synthetics may now be declared rogue by the Commander [italic]or[/italic] Chief MP. This should be saved as a last resort if possible.
+
+  [bold]Older Changes (2026 June)[/bold]
+
+  ### Law
+  - (Definitions) Added Recorder and Listening device definitions.
   - (Deployment) Staff Officers may deploy anywhere if they remain in the ARC. This still requires permission.
 
   ### SOP
-  -(Non-mod Dept. SOP, MP) Chief MP approves the use of listening devices instead of Commander. Commander can approve their use in absence of CMP.
-  -(Non-mod Dept. SOP, MP) Recorder may be used freely as long as they remain in MP's possession.
-
-
-  [bold]Older Changes (2026 May)[/bold]
-
-  ### Rules
-  - (General) Many pages have been condensed, and moved. It's recommended to go over the rules again, as many pages have received clarifications.
-  - (General Roleplay) Added restrictions for objective defenses.
-  - (Combat Escalation) In some extreme circumstances, escalation does not apply.
-  - (Zero Tolerance) Added a clarification for voice chat and ooc channel usage while playing.
-  - (Command/MP) Added a disclaimer, that the MP role is not guaranteed to be laid-back at all times. Do not select this role if expecting this.
-  - (Roleplay, Xenonid/Survivor) Early round interaction rules have been replaced with mechanical prevention. This means there are no longer rules preventing survivors from attacking xenonids, but xenonids have been granted safe areas that cannot be breached. Please report any experienced issues with the implementation such as gaps in defenses or exploits.
-  - (Mutinies) Mutiny rules and process has been redone. Make sure to read the changes. Do not goad other players into a mutiny before receiving permission to start one.
-
-  ### Law
-  - (CO BE Provisions) Commanding Officers may battlefield execute for any capital crime committed in their presence, except desertion.
-  - (Intoxication and Alcohol) Clarified intoxication only applies to UNMC personnel and only during operations. Also clarified where alcohol must be stored at all times, regardless of usage.
-  - (Sedition / Mutinies) The commander may deny treatment/revival to mutineers that have not surrendered, with sedition as the reason.
-  - (General Change) [color=#90EE90][bold]Duty Officer[/bold][/color] definitions have been changed and clarified. Almost all law restrictions regarding Duty Officers have been removed, and replaced with a clause in definitions that grants the [color=#90EE90][bold]Duty Officer[/bold][/color] a [color=#008000][bold]Commander[/bold][/color]'s Authority.
-  - (Crimes and Threats) Assault with a deadly weapon has been removed, threats to murder are now only considered assault. Many other changes.
-
-  ### SOP
-  - (Command SOP, LZ) The primary LZ is considered secure while LZ turrets are still active.
-  - (Ship Mods) Defensive shipside modifications (like welding doors shut) do not require approval during code red and delta while a threat is active.
-  - (Equipment) [bold]High Ranking Officers[/bold] can be granted a Command headset if requested. Many other changes. Read page for full information.
-  - (Command) It is the Commander's responsibility to inform personnel the operation ended. (Mostly relates to use of alcohol.)
-  - (Third party enlistment) This section of handling survivors and related has been redone, making the process simpler and straightforward- all third party personnel are offered to join, and all non-UN factions are offered to defect, then join.
-  - (Medical Dept. SOP) Surgery tools are allowed to be left outside their container, as long as they're still visible. (These tools will be needed in the future, keep them around.)
+  - (Non-mod Dept. SOP, MP) Chief MP approves the use of listening devices instead of Commander. Commander can approve their use in absence of CMP.
+  - (Non-mod Dept. SOP, MP) Recorder may be used freely as long as they remain in MP's possession.
 
   ## Admin Decisions Are Final.
   - Rules are enforced as intended.
