@@ -1,3 +1,4 @@
+using Content.Shared.Inventory;
 using JetBrains.Annotations;
 using Robust.Shared.Map;
 
@@ -19,7 +20,7 @@ namespace Content.Shared.Interaction
     ///     Raised directed on a target entity when it is interacted with by a user with an empty hand.
     /// </summary>
     [PublicAPI]
-    public sealed class InteractHandEvent : HandledEntityEventArgs, ITargetedInteractEventArgs
+    public sealed class InteractHandEvent : HandledEntityEventArgs, ITargetedInteractEventArgs, IInventoryRelayEvent // RMC14
     {
         /// <summary>
         ///     Entity that triggered the interaction.
@@ -30,6 +31,8 @@ namespace Content.Shared.Interaction
         ///     Entity that was interacted on.
         /// </summary>
         public EntityUid Target { get; }
+
+        public SlotFlags TargetSlots { get; } = SlotFlags.BACK | SlotFlags.BELT | SlotFlags.SUITSTORAGE; // RMC14
 
         public InteractHandEvent(EntityUid user, EntityUid target)
         {
